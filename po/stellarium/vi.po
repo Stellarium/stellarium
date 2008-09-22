@@ -7,1520 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-09 09:35+0200\n"
-"PO-Revision-Date: 2008-06-02 15:24+0000\n"
-"Last-Translator: András Mohari <andras.mohari@gmail.com>\n"
+"POT-Creation-Date: 2008-09-21 09:10+0200\n"
+"PO-Revision-Date: 2008-09-17 10:35+0000\n"
+"Last-Translator: toantoan1988 <Unknown>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-07-09 07:21+0000\n"
+"X-Launchpad-Export-Date: 2008-09-22 12:16+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
-
-#: src/gui/NewGui.cpp:238
-#, no-c-format, qt-format
-msgid "%1m"
-msgstr ""
-
-#: src/modules/LandscapeMgr.cpp:441
-#, qt-format
-msgid ", %1 m"
-msgstr ""
-
-#: src/ui_viewDialog.h:860
-msgid "0"
-msgstr ""
-
-#: src/ui_viewDialog.h:861
-msgid "10"
-msgstr ""
-
-#: src/ui_viewDialog.h:863
-#, fuzzy
-msgid "10000"
-msgstr "J2000"
-
-#: src/ui_viewDialog.h:864
-msgid "144000"
-msgstr ""
-
-#: src/ui_viewDialog.h:862
-msgid "80"
-msgstr ""
-
-#: src/ui_viewDialog.h:865
-msgid "<small><i>Normal rate</i></small>"
-msgstr ""
-
-#: src/ui_viewDialog.h:848
-msgid "Absolute scale:"
-msgstr ""
-
-#: src/modules/TextUI.cpp:86
-msgid "Actual Time"
-msgstr "Thời gian thực"
-
-#: src/gui/NewGui.cpp:487
-msgid "Add 1 sidereal day"
-msgstr ""
-
-#: src/gui/NewGui.cpp:489
-msgid "Add 1 sidereal week"
-msgstr ""
-
-#: src/gui/NewGui.cpp:483
-msgid "Add 1 solar day"
-msgstr ""
-
-#: src/gui/NewGui.cpp:481
-msgid "Add 1 solar hour"
-msgstr ""
-
-#: src/gui/NewGui.cpp:485
-msgid "Add 1 solar week"
-msgstr ""
-
-#: src/modules/TextUI.cpp:70
-msgid "Administration "
-msgstr "Quản trị "
-
-#: src/ui_configurationDialog.h:561
-msgid "Align labels with the horizon"
-msgstr ""
-
-#: src/ui_configurationDialog.h:512
-msgid "All availalable information"
-msgstr ""
-
-#: src/ui_configurationDialog.h:523
-msgid "Allow keyboard to pan and zoom"
-msgstr ""
-
-#: src/ui_configurationDialog.h:529
-msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr ""
-
-#: src/modules/TextUI.cpp:75
-msgid "Altitude (m): "
-msgstr "Độ cao (mét): "
-
-#: src/ui_locationDialogGui.h:341
-#, fuzzy
-msgid "Altitude:"
-msgstr "Độ cao :"
-
-#: src/modules/Planet.cpp:158
-#, qt-format
-msgid "Apparent diameter: %1"
-msgstr ""
-
-#: src/modules/TextUI.cpp:136
-msgid "Arrow down to load list."
-msgstr "Nhấn phím mủi tên xuống để tải danh sách."
-
-#: src/gui/HelpDialog.cpp:54
-msgid "Arrow keys & left mouse drag"
-msgstr ""
-
-#: src/ui_viewDialog.h:883
-msgid "Art brightness: "
-msgstr ""
-
-#: src/gui/NewGui.cpp:455
-msgid "Atmosphere"
-msgstr ""
-
-#: src/modules/LandscapeMgr.cpp:433
-msgid "Author: "
-msgstr "Tác giả: "
-
-#: src/ui_configurationDialog.h:576
-msgid "Auto zoom out key sets initial direction of view"
-msgstr ""
-
-#: src/modules/Nebula.cpp:114 src/modules/Planet.cpp:148
-#: src/modules/StarWrapper.cpp:65 src/modules/StarWrapper.cpp:156
-#, qt-format
-msgid "Az/Alt: %1/%2"
-msgstr ""
-
-#: src/gui/NewGui.cpp:446 src/ui_viewDialog.h:871
-#, fuzzy
-msgid "Azimutal grid"
-msgstr "Lưới phương vị"
-
-#: src/modules/TextUI.cpp:113
-msgid "Azimuthal Grid"
-msgstr "Lưới phương vị"
-
-#: src/modules/TextUI.cpp:134
-msgid "CD/DVD Script: "
-msgstr "Kịch bản cho CD/DVD: "
-
-#: src/gui/HelpDialog.cpp:59
-msgid "CTRL + Left click"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:56
-msgid "CTRL + Up/Down"
-msgstr ""
-
-#: src/modules/TextUI.cpp:82
-msgid "Calendar"
-msgstr ""
-
-#: src/translations.h:45
-msgid "Callisto"
-msgstr "Callisto"
-
-#: src/modules/TextUI.cpp:108
-msgid "Cardinal Points"
-msgstr "Điểm phương hướng"
-
-#: src/gui/NewGui.cpp:452 src/ui_viewDialog.h:876
-#, fuzzy
-msgid "Cardinal points"
-msgstr "Điểm phương hướng"
-
-#: src/ui_viewDialog.h:869
-msgid "Celestial Sphere"
-msgstr ""
-
-#: src/gui/NewGui.cpp:493
-#, fuzzy
-msgid "Center on selected object"
-msgstr "Di chuyển đến vật thể đã chọn [SPACE]"
-
-#: src/ui_configurationDialog.h:548
-msgid ""
-"Changes the way Stellarium renders the sky to look more like astronomical "
-"charts (i.e. sky is white, objects are dark)."
-msgstr ""
-
-#: src/translations.h:59
-msgid "Charon"
-msgstr "Charon"
-
-#: src/translations.h:69
-msgid "Chinese"
-msgstr "Tiếng Trung Quốc"
-
-#: src/gui/HelpDialog.cpp:67 src/gui/HelpDialog.cpp:69
-msgid "Clear selection"
-msgstr ""
-
-#: src/modules/Nebula.cpp:279
-msgid "Cluster associated with nebulosity"
-msgstr ""
-
-#: src/modules/TextUI.cpp:67
-msgid "Colors "
-msgstr "Màu sắc "
-
-#: src/ui_configurationDialog.h:457
-msgid "Configuration"
-msgstr "Cấu hình"
-
-#: src/gui/NewGui.cpp:470
-msgid "Configuration window"
-msgstr ""
-
-#: src/modules/TextUI.cpp:106
-msgid "Constellation Art Intensity"
-msgstr "Độ đậm hình vẽ chòm sao"
-
-#: src/modules/TextUI.cpp:107
-msgid "Constellation Boundaries"
-msgstr "Ranh giới các chòm sao"
-
-#: src/modules/TextUI.cpp:104
-msgid "Constellation Lines"
-msgstr "Đường nối chòm sao"
-
-#: src/modules/TextUI.cpp:105
-msgid "Constellation Names"
-msgstr "Tên các chòm sao"
-
-#: src/gui/NewGui.cpp:442
-msgid "Constellation art"
-msgstr ""
-
-#: src/gui/NewGui.cpp:444
-msgid "Constellation boundaries"
-msgstr ""
-
-#: src/gui/NewGui.cpp:443
-msgid "Constellation labels"
-msgstr ""
-
-#: src/gui/NewGui.cpp:441
-msgid "Constellation lines"
-msgstr ""
-
-#: src/ui_viewDialog.h:878
-#, fuzzy
-msgid "Constellations"
-msgstr "Đường nối chòm sao"
-
-#: src/modules/TextUI.cpp:130
-msgid "Correct for light travel time: "
-msgstr ""
-
-#: src/modules/TextUI.cpp:129
-msgid "Cursor Timeout: "
-msgstr "Thời gian dấu con chuột: "
-
-#: src/ui_locationDialogGui.h:325
-#, fuzzy
-msgid "Cursor:"
-msgstr "Địa điểm đang chỉ :"
-
-#: src/core/MappingClasses.cpp:223
-msgid "Cylinder"
-msgstr ""
-
-#: src/gui/NewGui.cpp:459
-msgid "DSS"
-msgstr ""
-
-#: src/modules/TextUI.cpp:89
-msgid "Date Display Format: "
-msgstr "Dạng ngày hiển thị: "
-
-#: src/gui/NewGui.cpp:476 src/ui_dateTimeDialogGui.h:180
-#, fuzzy
-msgid "Date and Time"
-msgstr "Ngày & thời gian"
-
-#: src/gui/NewGui.cpp:473
-msgid "Date/time window"
-msgstr ""
-
-#: src/modules/TextUI.cpp:81
-msgid "Day keys: "
-msgstr ""
-
-#: src/gui/NewGui.cpp:477
-#, fuzzy
-msgid "Decrease time speed"
-msgstr "Giảm tốc độ trôi thời gian [J]"
-
-#: src/translations.h:39
-msgid "Deimos"
-msgstr "Deimos"
-
-#: src/ui_viewDialog.h:853
-msgid "Dim faint stars when a very bright object is visible"
-msgstr ""
-
-#: src/translations.h:50
-msgid "Dione"
-msgstr "Dione"
-
-#: src/ui_configurationDialog.h:570
-msgid "Disc viewport"
-msgstr ""
-
-#: src/gui/NewGui.cpp:440
-msgid "Display Options"
-msgstr ""
-
-#: src/ui_configurationDialog.h:509
-msgid "Display all of the information which is available"
-msgstr ""
-
-#: src/ui_configurationDialog.h:515
-msgid "Display only abbreviated information"
-msgstr ""
-
-#: src/modules/StarWrapper.cpp:165
-#, qt-format
-msgid "Distance: %1 Light Years"
-msgstr ""
-
-#: src/modules/Planet.cpp:154
-#, no-c-format, qt-format
-msgid "Distance: %1AU"
-msgstr ""
-
-#: src/ui_viewDialog.h:856
-msgid "Dynamic eye adaptation"
-msgstr ""
-
-#: src/translations.h:65
-msgid "E"
-msgstr "Đ"
-
-#: src/translations.h:36
-msgid "Earth"
-msgstr "Trái đất"
-
-#: src/modules/TextUI.cpp:116
-msgid "Ecliptic Line"
-msgstr "Đường hoàng đạo"
-
-#: src/gui/NewGui.cpp:449 src/ui_viewDialog.h:870
-#, fuzzy
-msgid "Ecliptic line"
-msgstr "Đường hoàng đạo"
-
-#: src/modules/TextUI.cpp:68
-msgid "Effects "
-msgstr "Hiệu ứng "
-
-#: src/translations.h:70
-msgid "Egyptian"
-msgstr "Người Ai Cập"
-
-#: src/ui_configurationDialog.h:526
-msgid "Enable keyboard navigation"
-msgstr ""
-
-#: src/ui_configurationDialog.h:532
-msgid "Enable mouse navigation"
-msgstr ""
-
-#: src/ui_configurationDialog.h:542
-msgid ""
-"Enables/disables night vision mode.  Night vision mode changes the "
-"appearance of Stellarium's user interface to use red light only - this helps "
-"to preserve the dark adaptation of the eye."
-msgstr ""
-
-#: src/ui_configurationDialog.h:536
-msgid ""
-"Enables/disables toolbar buttons for flipping the displayed image in the "
-"vertical and horizontal axes.   Useful for users of telescopes which flip "
-"the image of the object being observed."
-msgstr ""
-
-#: src/translations.h:48
-msgid "Enceladus"
-msgstr "Enceladus"
-
-#: src/ui_locationDialogGui.h:344
-msgid "Enter the altitude in meter"
-msgstr ""
-
-#: src/core/MappingClasses.cpp:77
-msgid "Equal Area"
-msgstr ""
-
-#: src/modules/TextUI.cpp:115
-msgid "Equator Line"
-msgstr "Đường quỹ đạo"
-
-#: src/gui/NewGui.cpp:450 src/ui_viewDialog.h:874
-#, fuzzy
-msgid "Equator line"
-msgstr "Đường quỹ đạo"
-
-#: src/modules/TextUI.cpp:114
-msgid "Equatorial Grid"
-msgstr "Lưới quỹ đạo"
-
-#: src/gui/NewGui.cpp:448 src/ui_viewDialog.h:875
-#, fuzzy
-msgid "Equatorial J2000 grid"
-msgstr "Lưới quỹ đạo"
-
-#: src/gui/NewGui.cpp:447 src/ui_viewDialog.h:873
-#, fuzzy
-msgid "Equatorial grid"
-msgstr "Lưới quỹ đạo"
-
-#: src/translations.h:43
-msgid "Europa"
-msgstr "Europa"
-
-#: src/gui/ViewDialog.cpp:365
-#, fuzzy
-msgid "Exceptional Leonid rate"
-msgstr ": Mật độ mưa sao băng Leonid khác thường"
-
-#: src/ui_searchDialogGui.h:185 src/ui_searchDialogGui.h:186
-msgid "Find Object"
-msgstr ""
-
-#: src/core/MappingClasses.cpp:178
-msgid "Fish-eye"
-msgstr ""
-
-#: src/gui/NewGui.cpp:465
-#, fuzzy
-msgid "Flip scene horizontally"
-msgstr "Lật theo chiều ngang"
-
-#: src/gui/NewGui.cpp:466
-#, fuzzy
-msgid "Flip scene vertically"
-msgstr "Lật theo chiều dọc"
-
-#: src/gui/NewGui.cpp:456
-msgid "Fog"
-msgstr "Sương mù"
-
-#: src/ui_dateTimeDialogGui.h:179 src/ui_helpDialogGui.h:163
-#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:837
-#: src/ui_configurationDialog.h:456
-#, fuzzy
-msgid "Form"
-msgstr "Chỗ cạn"
-
-#: src/gui/NewGui.cpp:464
-msgid "Full-screen mode"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:134
-msgid "Further Reading"
-msgstr ""
-
-#: src/modules/Nebula.cpp:264
-msgid "Galaxy"
-msgstr ""
-
-#: src/translations.h:44
-msgid "Ganymede"
-msgstr "Ganymede"
-
-#: src/modules/TextUI.cpp:65
-msgid "General "
-msgstr "Tổng quát "
-
-#: src/modules/Nebula.cpp:270
-msgid "Globular cluster"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:189
-msgid "Go"
-msgstr ""
-
-#: src/ui_configurationDialog.h:564
-msgid "Gravity labels"
-msgstr ""
-
-#: src/gui/NewGui.cpp:454
-msgid "Ground"
-msgstr "Mặt đất"
-
-#: src/ui_helpDialogGui.h:164
-msgid "Help"
-msgstr "Trợ giúp"
-
-#: src/gui/NewGui.cpp:469
-msgid "Help window"
-msgstr ""
-
-#: src/ui_configurationDialog.h:502
-msgid "Hides the mouse cursor when inactive"
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:368
-#, fuzzy
-msgid "Highest rate ever (1966 Leonids)"
-msgstr ": Mật độ cao nhất đã từng có (mưa sao băng Leonids 1966)"
-
-#: src/modules/StarWrapper.cpp:57 src/modules/StarWrapper.cpp:147
-#, qt-format
-msgid "Hour angle/DE: %1/%2"
-msgstr ""
-
-#: src/ui_viewDialog.h:858
-msgid ""
-"Hourly\n"
-"zenith rate:"
-msgstr ""
-
-#: src/translations.h:53
-msgid "Hyperion"
-msgstr "Hyperion"
-
-#: src/translations.h:54
-msgid "Iapetus"
-msgstr "Iapetus"
-
-#: src/core/MappingClasses.cpp:183
-msgid ""
-"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
-"lines become curves when they appear a large angular distance from the "
-"centre of the field of view (like the distortions seen with very wide angle "
-"camera lenses)."
-msgstr ""
-
-#: src/gui/NewGui.cpp:478
-#, fuzzy
-msgid "Increase time speed"
-msgstr "Tăng tốc độ trôi thời gian [L]"
-
-#: src/ui_configurationDialog.h:491
-msgid "Initial direction of view:"
-msgstr ""
-
-#: src/ui_configurationDialog.h:485
-msgid "Initial field of view:"
-msgstr ""
-
-#: src/ui_configurationDialog.h:533
-msgid "Interface"
-msgstr ""
-
-#: src/ui_configurationDialog.h:499
-msgid "Interface style:"
-msgstr ""
-
-#: src/translations.h:71
-msgid "Inuit"
-msgstr ""
-
-#: src/ui_configurationDialog.h:551
-msgid "Inverted color mode"
-msgstr ""
-
-#: src/translations.h:42
-msgid "Io"
-msgstr "Io"
-
-#: src/translations.h:41
-msgid "Jupiter"
-msgstr "Mộc tinh"
-
-#: src/gui/HelpDialog.cpp:126
-#, fuzzy
-msgid "Keys"
-msgstr "Tethys"
-
-#: src/translations.h:72
-msgid "Korean"
-msgstr ""
-
-#: src/ui_viewDialog.h:885
-msgid "Labels and Markers"
-msgstr ""
-
-#: src/translations.h:73
-msgid "Lakota"
-msgstr ""
-
-#: src/ui_viewDialog.h:897
-#, fuzzy
-msgid "Landscape"
-msgstr "Phong cảnh"
-
-#: src/modules/TextUI.cpp:122
-msgid "Landscape: "
-msgstr "Phong cảnh: "
-
-#: src/ui_locationDialogGui.h:335
-#, fuzzy
-msgid "Latitude:"
-msgstr "Vĩ độ:"
-
-#: src/modules/TextUI.cpp:73
-msgid "Latitude: "
-msgstr "Vĩ độ: "
-
-#: src/gui/HelpDialog.cpp:57
-#, fuzzy
-msgid "Left click"
-msgstr "Cờ trái"
-
-#: src/modules/TextUI.cpp:121
-msgid "Light Pollution Luminance: "
-msgstr ""
-
-#: src/ui_viewDialog.h:895
-msgid "Light pollution:"
-msgstr ""
-
-#: src/modules/TextUI.cpp:101
-#, fuzzy
-msgid "Limiting Magnitude: "
-msgstr "Cấp sao biểu kiến: "
-
-#: src/modules/TextUI.cpp:140
-msgid "Load Default Configuration: "
-msgstr "Nạp cấu hình mặc định: "
-
-#: src/modules/ConstellationMgr.cpp:371
-#, qt-format
-msgid "Loading Constellation Art: %1/%2"
-msgstr ""
-
-#: src/modules/NebulaMgr.cpp:367
-#, qt-format
-msgid "Loading NGC catalog: %1/%2"
-msgstr ""
-
-#: src/modules/StarMgr.cpp:253
-#, qt-format
-msgid "Loading catalog %1"
-msgstr ""
-
-#: src/modules/TextUI.cpp:133
-msgid "Local Script: "
-msgstr "Kịch bản cục bộ: "
-
-#: src/ui_locationDialogGui.h:322
-msgid "Location"
-msgstr "Địa điểm"
-
-#: src/gui/NewGui.cpp:474
-msgid "Location window"
-msgstr ""
-
-#: src/modules/LandscapeMgr.cpp:436
-msgid "Location: "
-msgstr ""
-
-#: src/ui_locationDialogGui.h:329
-#, fuzzy
-msgid "Longitude:"
-msgstr "Kinh độ:"
-
-#: src/modules/TextUI.cpp:74
-msgid "Longitude: "
-msgstr "Kinh độ: "
-
-#: src/modules/TextUI.cpp:125
-msgid "Magnitude Scaling Multiplier: "
-msgstr ""
-
-#: src/modules/TextUI.cpp:98
-msgid "Magnitude Sizing Multiplier: "
-msgstr "Tăng cường độ: "
-
-#: src/modules/Nebula.cpp:101 src/modules/Planet.cpp:133
-#, qt-format
-msgid "Magnitude: <b>%1</b>"
-msgstr ""
-
-#: src/modules/StarWrapper.cpp:51 src/modules/StarWrapper.cpp:135
-#, qt-format
-msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr ""
-
-#: src/ui_configurationDialog.h:498
-#, fuzzy
-msgid "Main"
-msgstr "Sống Tàu Argo"
-
-#: src/modules/TextUI.cpp:123
-msgid "Manual zoom: "
-msgstr "Zoom thủ công: "
-
-#: src/ui_viewDialog.h:889
-#, fuzzy
-msgid "Markings"
-msgstr "Hỏa tinh"
-
-#: src/translations.h:38
-msgid "Mars"
-msgstr "Hỏa tinh"
-
-#: src/ui_configurationDialog.h:567
-msgid "Mask out everything outside a central circle in the main view"
-msgstr ""
-
-#: src/core/Mapping.cpp:28
-msgid "Maximum FOV: "
-msgstr ""
-
-#: src/modules/TextUI.cpp:99
-msgid "Maximum Magnitude to Label: "
-msgstr "Hiện tên vật thể sáng tối đa: "
-
-#: src/modules/TextUI.cpp:127
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Hiện tên đám tinh vân có độ sáng đến: "
-
-#: src/core/MappingClasses.cpp:278
-#, fuzzy
-msgid "Mercator"
-msgstr "Thuỷ tinh"
-
-#: src/translations.h:34
-msgid "Mercury"
-msgstr "Thuỷ tinh"
-
-#: src/modules/TextUI.cpp:112
-msgid "Meridian Line"
-msgstr "Đường kinh tuyến"
-
-#: src/gui/NewGui.cpp:451 src/ui_viewDialog.h:872
-#, fuzzy
-msgid "Meridian line"
-msgstr "Đường kinh tuyến"
-
-#: src/modules/TextUI.cpp:126
-msgid "Milky Way intensity: "
-msgstr "Mật độ dãi Ngân Hà "
-
-#: src/translations.h:47
-msgid "Mimas"
-msgstr "Mimas"
-
-#: src/gui/HelpDialog.cpp:201 src/gui/HelpDialog.cpp:257
-#: src/gui/HelpDialog.cpp:259 src/gui/NewGui.cpp:499
-msgid "Miscellaneous"
-msgstr ""
-
-#: src/translations.h:37
-msgid "Moon"
-msgstr "Mặt trăng"
-
-#: src/ui_configurationDialog.h:505
-msgid "Mouse cursor timeout (seconds):"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:62 src/gui/NewGui.cpp:492
-msgid "Movement and Selection"
-msgstr ""
-
-#: src/translations.h:63
-msgid "N"
-msgstr "B"
-
-#: src/translations.h:74
-msgid "Navajo"
-msgstr ""
-
-#: src/ui_configurationDialog.h:520
-msgid "Navigation"
-msgstr ""
-
-#: src/modules/Nebula.cpp:273
-#, fuzzy
-msgid "Nebula"
-msgstr "Tinh vân [N]"
-
-#: src/modules/TextUI.cpp:118
-msgid "Nebula Circles"
-msgstr "Vòng bao tinh vân"
-
-#: src/modules/TextUI.cpp:117
-msgid "Nebula Names"
-msgstr "Tên các chòm sao"
-
-#: src/gui/NewGui.cpp:458 src/ui_viewDialog.h:886
-#, fuzzy
-msgid "Nebulas"
-msgstr "Tinh vân [N]"
-
-#: src/translations.h:56
-msgid "Neptune"
-msgstr "Hải vương tinh"
-
-#: src/gui/NewGui.cpp:463
-msgid "Night mode"
-msgstr ""
-
-#: src/ui_configurationDialog.h:545
-msgid "Night vision mode"
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:298
-msgid "No description"
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:356
-msgid "No shooting stars"
-msgstr ""
-
-#: src/ui_configurationDialog.h:519
-msgid "None"
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:359
-#, fuzzy
-msgid "Normal rate"
-msgstr ": Tốc độ bình thường"
-
-#: src/translations.h:75
-msgid "Norse"
-msgstr ""
-
-#: src/modules/TextUI.cpp:124
-msgid "Object Sizing Rule: "
-msgstr "Quy luật thay đổi cỡ vật thể: "
-
-#: src/modules/Nebula.cpp:267
-msgid "Open cluster"
-msgstr ""
-
-#: src/ui_viewDialog.h:891
-#, fuzzy
-msgid "Options"
-msgstr "Tráng Sĩ"
-
-#: src/core/MappingClasses.cpp:336
-msgid "Orthographic"
-msgstr ""
-
-#: src/core/MappingClasses.cpp:341
-msgid ""
-"Orthographic projection is related to perspective projection, but the point "
-"of perspective is set to an infinite distance."
-msgstr ""
-
-#: src/ui_configurationDialog.h:483
-msgid "Other:"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:55
-msgid "Page Up/Down"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:63
-msgid "Pan view around the sky"
-msgstr ""
-
-#: src/modules/StarWrapper.cpp:168
-#, qt-format
-msgid "Parallax: %1"
-msgstr ""
-
-#: src/core/MappingClasses.cpp:11
-#, fuzzy
-msgid "Perspective"
-msgstr "Chỉnh thời gian"
-
-#: src/core/MappingClasses.cpp:16
-msgid ""
-"Perspective projection keeps the horizon a straight line. The mathematical "
-"name for this projection method is <i>gnomonic projection</i>."
-msgstr ""
-
-#: src/translations.h:40
-msgid "Phobos"
-msgstr "Phobos"
-
-#: src/translations.h:55
-msgid "Phoebe"
-msgstr "Phoebe"
-
-#: src/modules/TextUI.cpp:109
-msgid "Planet Names"
-msgstr "Tên các hành tinh"
-
-#: src/modules/TextUI.cpp:110
-msgid "Planet Orbits"
-msgstr "Quỹ đạo các hành tinh"
-
-#: src/modules/TextUI.cpp:111
-msgid "Planet Trails"
-msgstr "Vết các hành tinh"
-
-#: src/modules/LandscapeMgr.cpp:444
-msgid "Planet: "
-msgstr ""
-
-#: src/ui_configurationDialog.h:577
-msgid "Planetarium"
-msgstr ""
-
-#: src/modules/Nebula.cpp:276
-msgid "Planetary nebula"
-msgstr ""
-
-#: src/ui_viewDialog.h:888
-msgid "Planets"
-msgstr "Hành tinh"
-
-#: src/ui_viewDialog.h:842
-#, fuzzy
-msgid "Planets and Satellites"
-msgstr "Ghi chú các hình tinh"
-
-#: src/gui/NewGui.cpp:461
-msgid "Planets hints"
-msgstr ""
-
-#: src/ui_configurationDialog.h:578
-msgid "Plugins"
-msgstr ""
-
-#: src/translations.h:58
-msgid "Pluto"
-msgstr "Diêm vương tinh"
-
-#: src/ui_viewDialog.h:847
-msgid "Point sources rendering"
-msgstr ""
-
-#: src/translations.h:76
-msgid "Polynesian"
-msgstr "Người Pô-li-nê-di"
-
-#: src/modules/TextUI.cpp:84
-msgid "Preset Sky Time: "
-msgstr "Chỉnh thời gian bầu trời: "
-
-#: src/modules/TextUI.cpp:87
-msgid "Preset Time"
-msgstr "Chỉnh thời gian"
-
-#: src/ui_configurationDialog.h:464
-msgid "Program language"
-msgstr ""
-
-#: src/ui_viewDialog.h:866
-#, fuzzy
-msgid "Projection"
-msgstr "Hình chiếu :"
-
-#: src/gui/NewGui.cpp:501
-msgid "Quit"
-msgstr ""
-
-#: src/modules/Nebula.cpp:106 src/modules/Planet.cpp:138
-#: src/modules/StarWrapper.cpp:53 src/modules/StarWrapper.cpp:138
-#: src/modules/Telescope.cpp:252
-#, qt-format
-msgid "RA/DE (J2000): %1/%2"
-msgstr ""
-
-#: src/modules/StarWrapper.cpp:55 src/modules/StarWrapper.cpp:141
-#: src/modules/Telescope.cpp:255
-#, qt-format
-msgid "RA/DE (of date): %1/%2"
-msgstr ""
-
-#: src/ui_viewDialog.h:850
-msgid "Relative scale:"
-msgstr ""
-
-#: src/translations.h:51
-msgid "Rhea"
-msgstr "Rhea"
-
-#: src/gui/HelpDialog.cpp:58
-#, fuzzy
-msgid "Right click"
-msgstr "Cờ phải"
-
-#: src/translations.h:64
-msgid "S"
-msgstr "N"
-
-#: src/translations.h:46
-msgid "Saturn"
-msgstr "Thổ tinh"
-
-#: src/modules/TextUI.cpp:141
-msgid "Save Current Configuration as Default: "
-msgstr "Lưu cấu hình hiện tại thành mặc định: "
-
-#: src/gui/NewGui.cpp:502
-msgid "Save screenshot"
-msgstr ""
-
-#: src/ui_viewDialog.h:844
-#, fuzzy
-msgid "Scale Moon"
-msgstr "Lưu địa điểm"
-
-#: src/modules/TextUI.cpp:69
-msgid "Scripts "
-msgstr "Kịch bản "
-
-#: src/gui/NewGui.cpp:471
-msgid "Search window"
-msgstr ""
-
-#: src/modules/TextUI.cpp:137
-msgid "Select and exit to run."
-msgstr "Chọn và thoát để chạy."
-
-#: src/gui/HelpDialog.cpp:66
-#, fuzzy
-msgid "Select object"
-msgstr "Tìm kiếm vật thể"
-
-#: src/ui_configurationDialog.h:506
-msgid "Selected Object Information"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:327
-#, fuzzy
-msgid "Selected:"
-msgstr "Được chọn :"
-
-#: src/ui_configurationDialog.h:497
-msgid "Set"
-msgstr ""
-
-#: src/modules/TextUI.cpp:63
-msgid "Set Location "
-msgstr "Thiết lập địa điểm "
-
-#: src/modules/TextUI.cpp:64
-msgid "Set Time "
-msgstr "Thiết lập thời gian "
-
-#: src/modules/TextUI.cpp:80
-msgid "Set Time Zone: "
-msgstr "Thiết lập múi thời gian: "
-
-#: src/modules/TextUI.cpp:144
-msgid "Set UI Locale: "
-msgstr "Thiết lập nơi xảy ra UI "
-
-#: src/gui/NewGui.cpp:497
-msgid "Set home planet to selected planet"
-msgstr ""
-
-#: src/gui/NewGui.cpp:479
-#, fuzzy
-msgid "Set normal time rate"
-msgstr ": Tốc độ bình thường"
-
-#: src/ui_configurationDialog.h:488
-msgid "Set the initial field of view in degrees"
-msgstr ""
-
-#: src/gui/NewGui.cpp:480
-#, fuzzy
-msgid "Set time to now"
-msgstr "Thiết lập thời gian"
-
-#: src/ui_configurationDialog.h:474
-msgid ""
-"Sets the simulation time to the next instance of this time of day when "
-"Stellarium starts"
-msgstr ""
-
-#: src/ui_viewDialog.h:857
-msgid "Shooting Stars"
-msgstr ""
-
-#: src/ui_configurationDialog.h:518
-msgid "Short information"
-msgstr ""
-
-#: src/ui_viewDialog.h:841
-#, fuzzy
-msgid "Show"
-msgstr "Xem:"
-
-#: src/ui_viewDialog.h:882
-#, fuzzy
-msgid "Show art"
-msgstr "Xem:"
-
-#: src/ui_viewDialog.h:894
-#, fuzzy
-msgid "Show atmosphere"
-msgstr "Khí quyển"
-
-#: src/ui_viewDialog.h:881
-msgid "Show boundaries"
-msgstr ""
-
-#: src/ui_configurationDialog.h:539
-msgid "Show flip buttons"
-msgstr ""
-
-#: src/ui_viewDialog.h:893
-#, fuzzy
-msgid "Show fog"
-msgstr "Xem:"
-
-#: src/ui_viewDialog.h:892
-msgid "Show ground"
-msgstr ""
-
-#: src/ui_viewDialog.h:879
-msgid "Show labels"
-msgstr ""
-
-#: src/ui_viewDialog.h:880
-#, fuzzy
-msgid "Show lines"
-msgstr "Xem:"
-
-#: src/ui_viewDialog.h:846
-msgid "Show markers"
-msgstr ""
-
-#: src/ui_viewDialog.h:843
-msgid "Show orbits"
-msgstr ""
-
-#: src/modules/TextUI.cpp:96
-msgid "Show: "
-msgstr "Xem: "
-
-#: src/modules/TextUI.cpp:142
-msgid "Shut Down: "
-msgstr "Tắt: "
-
-#: src/modules/TextUI.cpp:83
-msgid "Sidereal"
-msgstr ""
-
-#: src/ui_viewDialog.h:845
-msgid "Simulate light speed"
-msgstr ""
-
-#: src/modules/Nebula.cpp:118
-#, qt-format
-msgid "Size: %1"
-msgstr ""
-
-#: src/ui_viewDialog.h:867
-#, fuzzy
-msgid "Sky"
-msgstr "Sek"
-
-#: src/modules/TextUI.cpp:92
-msgid "Sky Culture: "
-msgstr "Chòm sao theo : "
-
-#: src/modules/TextUI.cpp:93
-msgid "Sky Language: "
-msgstr "Ngôn ngữ cho bầu trời: "
-
-#: src/modules/TextUI.cpp:85
-msgid "Sky Time At Start-up: "
-msgstr "Thời gian bầu trời lúc bắt đầu: "
-
-#: src/modules/TextUI.cpp:79
-msgid "Sky Time: "
-msgstr "Thời gian bầu trời: "
-
-#: src/gui/NewGui.cpp:472
-msgid "Sky and viewing options window"
-msgstr ""
-
-#: src/modules/TextUI.cpp:76
-msgid "Solar System Body: "
-msgstr "Những vật thể thuộc hệ mặt trời: "
-
-#: src/translations.h:60
-msgid "Solar System Observer"
-msgstr "Người quan sát hệ mặt trời"
-
-#: src/gui/HelpDialog.cpp:53 src/gui/NewGui.cpp:118
-#, fuzzy
-msgid "Space"
-msgstr "Cây thương"
-
-#: src/modules/StarWrapper.cpp:161
-#, qt-format
-msgid "Spectral Type: %1"
-msgstr ""
-
-#: src/ui_configurationDialog.h:558
-msgid "Spheric mirror distortion"
-msgstr ""
-
-#: src/ui_configurationDialog.h:555
-msgid ""
-"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
-"mirror for low-cost planetarium systems."
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:362
-#, fuzzy
-msgid "Standard Perseids rate"
-msgstr ": Tốc độ mưa sao băng Perseids"
-
-#: src/modules/TextUI.cpp:97
-msgid "Star Value Multiplier: "
-msgstr ""
-
-#: src/ui_viewDialog.h:899
-#, fuzzy
-msgid "Starlore"
-msgstr "Ngôi sao"
-
-#: src/gui/NewGui.cpp:460 src/ui_viewDialog.h:887
-msgid "Stars"
-msgstr "Các vì sao"
-
-#: src/modules/TextUI.cpp:66
-msgid "Stars "
-msgstr "Các vì sao "
-
-#: src/ui_configurationDialog.h:468
-msgid "Starts Stellarium at system clock date and time"
-msgstr ""
-
-#: src/ui_configurationDialog.h:465
-msgid "Startup Date and Time"
-msgstr ""
-
-#: src/ui_configurationDialog.h:484
-msgid "Startup FOV and Direction"
-msgstr ""
-
-#: src/gui/NewGui.cpp:999
-msgid "Stellarium"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:125
-msgid "Stellarium Help"
-msgstr ""
-
-#: src/core/MappingClasses.cpp:133
-msgid "Stereographic"
-msgstr ""
-
-#: src/core/MappingClasses.cpp:138
-msgid ""
-"Stereographic projection is known since the antiquity and was originally "
-"known as the planisphere projection. It preserves the angles at which curves "
-"cross each other but it does not preserve area."
-msgstr ""
-
-#: src/gui/NewGui.cpp:488
-msgid "Subtract 1 sidereal day"
-msgstr ""
-
-#: src/gui/NewGui.cpp:490
-msgid "Subtract 1 sidereal week"
-msgstr ""
-
-#: src/gui/NewGui.cpp:484
-msgid "Subtract 1 solar day"
-msgstr ""
-
-#: src/gui/NewGui.cpp:482
-msgid "Subtract 1 solar hour"
-msgstr ""
-
-#: src/gui/NewGui.cpp:486
-msgid "Subtract 1 solar week"
-msgstr ""
-
-#: src/translations.h:33
-msgid "Sun"
-msgstr "Mặt trời"
-
-#: src/gui/NewGui.cpp:500
-msgid "Switch between equatorial and azimuthal mount"
-msgstr ""
-
-#: src/ui_configurationDialog.h:471
-msgid "System date and time"
-msgstr ""
-
-#: src/ui_configurationDialog.h:477
-msgid "System date at:"
-msgstr ""
-
-#: src/translations.h:49
-msgid "Tethys"
-msgstr "Tethys"
-
-#: src/gui/HelpDialog.cpp:136
-msgid "The Stellarium User Guide:"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:135
-msgid ""
-"The following links are external web links, and will launch your web "
-"browser:\n"
-msgstr ""
-
-#: src/core/MappingClasses.cpp:82
-msgid ""
-"The full name of this projection method is, <i>Lambert azimuthal equal-area "
-"projection</i>. It preserves the area but not the angle."
-msgstr ""
-
-#: src/core/MappingClasses.cpp:228
-msgid ""
-"The full name of this projection mode is <i>cylindrical equidistant "
-"projection</i>. With this projection all parallels are equally spaced."
-msgstr ""
-
-#: src/core/MappingClasses.cpp:283
-msgid ""
-"The mercator projection is one of the most used world map projection. It "
-"preserves direction and shapes but distorts size, in an increasing degree "
-"away from the equator."
-msgstr ""
-
-#: src/main.cpp:52
-msgid "This system does not support OpenGL."
-msgstr ""
-
-#: src/modules/TextUI.cpp:88
-msgid "Time Display Format: "
-msgstr "Dạng thời gian hiển thị: "
-
-#: src/translations.h:52
-msgid "Titan"
-msgstr "Titan"
-
-#: src/ui_configurationDialog.h:552
-msgid "Tools"
-msgstr ""
-
-#: src/gui/NewGui.cpp:494
-msgid "Track object"
-msgstr ""
-
-#: src/translations.h:78
-msgid "Tupi-Guarani"
-msgstr ""
-
-#: src/ui_viewDialog.h:849
-#, fuzzy
-msgid "Twinkle:"
-msgstr "Nhấp nháy:"
-
-#: src/modules/TextUI.cpp:100
-msgid "Twinkling: "
-msgstr "Nhấp nháy: "
-
-#: src/modules/Nebula.cpp:98
-#, qt-format
-msgid "Type: <b>%1</b>"
-msgstr ""
-
-#: src/modules/TextUI.cpp:135
-msgid "USB Script: "
-msgstr ""
-
-#: src/modules/Nebula.cpp:285
-msgid "Undocumented type"
-msgstr ""
-
-#: src/modules/Nebula.cpp:282
-msgid "Unknown"
-msgstr ""
-
-#: src/modules/TextUI.cpp:143
-msgid "Update me via Internet: "
-msgstr "Cập nhật qua Internet: "
-
-#: src/translations.h:57
-msgid "Uranus"
-msgstr "Thiên vương tinh"
-
-#: src/ui_configurationDialog.h:480
-msgid "Use a specific date and time when Stellarium starts up"
-msgstr ""
-
-#: src/ui_viewDialog.h:898
-msgid "Use associated language for sky labeling"
-msgstr ""
-
-#: src/ui_viewDialog.h:896
-msgid "Use associated planet and position"
-msgstr ""
-
-#: src/ui_configurationDialog.h:494
-msgid ""
-"Use the current viewing direction (altitude and azimuth) when Stellarim "
-"starts."
-msgstr ""
-
-#: src/ui_locationDialogGui.h:324
-msgid "Use the mouse wheel to zoom, drag to move the screen."
-msgstr ""
-
-#: src/translations.h:35
-msgid "Venus"
-msgstr "Kim tinh"
-
-#: src/ui_viewDialog.h:838
-#, fuzzy
-msgid "View"
-msgstr "Video"
-
-#: src/translations.h:66
-msgid "W"
-msgstr "T"
-
-#: src/translations.h:77
-msgid "Western"
-msgstr "Phương Tây"
-
-#: src/ui_configurationDialog.h:573
-msgid ""
-"When enabled, select the \"auto zoom out\" key will also set the initial "
-"viewing direction"
-msgstr ""
-
-#: src/gui/NewGui.cpp:468
-msgid "Windows"
-msgstr ""
-
-#: src/ui_dateTimeDialogGui.h:181 src/ui_helpDialogGui.h:165
-#: src/ui_locationDialogGui.h:323 src/ui_searchDialogGui.h:187
-#: src/ui_viewDialog.h:839 src/ui_configurationDialog.h:458
-msgid "X"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:332 src/ui_locationDialogGui.h:338
-msgid ""
-"You can enter values in decimal degrees, or using dms format, for example: "
-"+1d 12m 8s"
-msgstr ""
-
-#: src/modules/TextUI.cpp:128
-msgid "Zoom Duration: "
-msgstr "Khoảng thời gian phóng to/thu nhỏ: "
-
-#: src/gui/NewGui.cpp:495
-#, fuzzy
-msgid "Zoom in on selected object"
-msgstr "Di chuyển đến vật thể đã chọn [SPACE]"
-
-#: src/gui/HelpDialog.cpp:64 src/gui/HelpDialog.cpp:65
-msgid "Zoom in/out"
-msgstr ""
-
-#: src/gui/NewGui.cpp:496
-#, fuzzy
-msgid "Zoom out"
-msgstr "Khoảng thời gian phóng to/thu nhỏ:"
-
-#: src/ui_locationDialogGui.h:347
-msgid "m"
-msgstr ""
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:155
-msgid ""
-"{Bug reporting system} - if something doesn't work properly and is not "
-"listed in the FAQ list, you can open bug reports here."
-msgstr ""
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:160
-msgid ""
-"{Feature request system} - if you have an idea for a new feature, send it to "
-"us. We can't promise to implement every idea, but we appreciate the feedback "
-"and review the list when we are planning future features."
-msgstr ""
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:165
-msgid "{Forums} - discuss Stellarium with other users."
-msgstr ""
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:140
-msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr ""
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:150
-msgid ""
-"{Support ticket system} - if you need help using Stellarium, post a support "
-"request here and we'll try to help."
-msgstr ""
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:145
-msgid ""
-"{The Stellarium Wiki} - General information.  You can also find user-"
-"contributed landscapes and scripts here."
-msgstr ""
 
 #~ msgid ""
 #~ "   Please check for newer versions and send bug reports\n"
@@ -1564,9 +59,6 @@ msgstr ""
 #~ msgid "Aries"
 #~ msgstr "Bạch Dương"
 
-#~ msgid "Arsenal"
-#~ msgstr "Kho chứa vũ khí"
-
 #~ msgid "Atmosphere [A]"
 #~ msgstr "Bầu khí quyển [A]"
 
@@ -1576,29 +68,17 @@ msgstr ""
 #~ msgid "Azimuthal Grid [Z]"
 #~ msgstr "Lưới phương vị [Z]"
 
-#~ msgid "Bailer"
-#~ msgstr "Gàu tát nước"
-
-#~ msgid "Banner of Three Stars"
-#~ msgstr "Ngọn cờ ba sao"
-
 #~ msgid "Bird"
 #~ msgstr "Chim"
 
 #~ msgid "Boat"
 #~ msgstr "Thuyền"
 
-#~ msgid "Bond"
-#~ msgstr "Liên kết"
-
 #~ msgid "Bootes"
 #~ msgstr "Mục Phu"
 
 #~ msgid "Bow and Arrow"
 #~ msgstr "Cung và tên"
-
-#~ msgid "Bull's Foreleg"
-#~ msgstr "Chân Trước Con Bò"
 
 #~ msgid "CMD + Q : Quit\n"
 #~ msgstr "CMD + Q : Thoát\n"
@@ -1633,14 +113,8 @@ msgstr ""
 #~ msgid "Cardinal Points [Q]"
 #~ msgstr "Điểm phương hướng [Q]"
 
-#~ msgid "Cared for by Moon"
-#~ msgstr "Cared for by Moon"
-
 #~ msgid "Cassiopeia"
 #~ msgstr "Thiên Hậu"
-
-#~ msgid "Cat's Cradle"
-#~ msgstr "Cái nôi mèo"
 
 #~ msgid "Centaurus"
 #~ msgstr "Nhân Mã"
@@ -1654,26 +128,11 @@ msgstr ""
 #~ msgid "Chamaeleon"
 #~ msgstr "Tắc Kè"
 
-#~ msgid "Chariot"
-#~ msgstr "Xe ngựa"
-
-#~ msgid "Chariot Yard"
-#~ msgstr "Bãi rào xe ngựa"
-
-#~ msgid "Chematy"
-#~ msgstr "Chematy"
-
 #~ msgid "Choose landscapes:"
 #~ msgstr "Chọn phong cảnh :"
 
 #~ msgid "Circinus"
 #~ msgstr "Compa"
-
-#~ msgid "Circular Granary"
-#~ msgstr "Vựa lúa tròn"
-
-#~ msgid "Coiled Thong"
-#~ msgstr "Cuộn da"
 
 #~ msgid "Columba"
 #~ msgstr "Bồ Câu"
@@ -1720,9 +179,6 @@ msgstr ""
 #~ msgid "Current Time Speed is x"
 #~ msgstr "Tốc độ trôi thời gian hiện tại là x"
 
-#~ msgid "Curved Array"
-#~ msgstr "Mảng cong"
-
 #~ msgid "Cygnus"
 #~ msgstr "Thiên Nga"
 
@@ -1731,10 +187,6 @@ msgstr ""
 
 #~ msgid "Delphinus"
 #~ msgstr "Cá Heo"
-
-#, fuzzy
-#~ msgid "Dialogs"
-#~ msgstr "Deimos"
 
 #~ msgid ""
 #~ "Dialogs & other controls:\n"
@@ -1753,38 +205,8 @@ msgstr ""
 #~ "CTRL + F : Bật tắt chức năng tìm kiếm vật thể\n"
 #~ "\n"
 
-#~ msgid "Dipper"
-#~ msgstr "Cái gàu"
-
 #~ msgid "Disk Viewport"
 #~ msgstr "Tầm nhìn dạng đĩa"
-
-#, fuzzy
-#~ msgid ""
-#~ "Display options:\n"
-#~ "ENTER : Equatorial/altazimuthal mount\n"
-#~ "F1  : Toggle fullscreen / window.\n"
-#~ "C   : Constellation lines       V   : Constellation labels\n"
-#~ "R   : Constellation art         E   : Equatorial grid\n"
-#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
-#~ "P   : Planet labels             G   : Ground\n"
-#~ "A   : Atmosphere                F   : Fog\n"
-#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
-#~ "T   : Object tracking           S   : Stars\n"
-#~ "4 , : Ecliptic line             5 . : Equator line\n"
-#~ "\n"
-#~ msgstr ""
-#~ "ENTER: quay theo Equatorial/altazimuthal\n"
-#~ "F1 : Xem toàn màn hình / cửa sổ.\n"
-#~ "C : Đường nối chòm sao V : Tên chòm sao\n"
-#~ "R : Hình chòm sao E : lưới xích đạo\n"
-#~ "Z : Lưới phương vị N : Tên tinh vân\n"
-#~ "P : Tên hành 2inh G : Mặt đất\n"
-#~ "A : Bầu khí quyển F : Sương mù\n"
-#~ "Q : Điểm phương hướng O : Chuyển tỉ lệ mặt trăng\n"
-#~ "T : Bám theo thiên thể S : Các ngôi sao\n"
-#~ "4 , : Đường hoàng đạo 5 , : Đường xích đạo\n"
-#~ "\n"
 
 #~ msgid ""
 #~ "Display options:\n"
@@ -1845,18 +267,6 @@ msgstr ""
 #~ "6 : dừng kịch bản K : trở lại kịch bản\n"
 #~ "\n"
 
-#~ msgid "Earth God's Temple"
-#~ msgstr "Đền của vị thần trái đất"
-
-#~ msgid "Eastern Door"
-#~ msgstr "Cửa Đông"
-
-#~ msgid "Emptiness"
-#~ msgstr "Trống rỗng"
-
-#~ msgid "Encampment"
-#~ msgstr "Trại giam"
-
 #~ msgid "Enter observatory name"
 #~ msgstr "Nhập vào tên nơi quan sát"
 
@@ -1875,32 +285,8 @@ msgstr ""
 #~ msgid "Error: Unable to open script file to record commands."
 #~ msgstr "Lỗi: không thể mở file kịch bản để ghi lệnh."
 
-#~ msgid "Establishment"
-#~ msgstr "Sự thiết lập"
-
-#~ msgid "Extended Net"
-#~ msgstr "Mạng mở rộng"
-
-#~ msgid "Farmland"
-#~ msgstr "Đất trồng trọt"
-
 #~ msgid "Ferry Boat"
 #~ msgstr "Phà"
-
-#~ msgid "Five Chariots"
-#~ msgstr "5 cỗ xe ngựa"
-
-#~ msgid "Five Feudal Kings"
-#~ msgstr "Ngủ vị hoàng đế"
-
-#~ msgid "Flail"
-#~ msgstr "Cái đập lúa"
-
-#~ msgid "Flock"
-#~ msgstr "Bầy"
-
-#~ msgid "Flying Corridor"
-#~ msgstr "Hành lang bay"
 
 #~ msgid "For unlisted screen resolution, edit the file :"
 #~ msgstr ""
@@ -1912,29 +298,14 @@ msgstr ""
 #~ msgid "Four Channels"
 #~ msgstr "Tứ kênh"
 
-#~ msgid "Frigate Bird"
-#~ msgstr "Chim chiến"
-
 #~ msgid "GO"
 #~ msgstr "Bắt đầu"
 
 #~ msgid "Gemini"
 #~ msgstr "Song Tử"
 
-#~ msgid "Ghosts"
-#~ msgstr "Những con ma"
-
-#~ msgid "Giant"
-#~ msgstr "Khổng lồ"
-
 #~ msgid "Girl"
 #~ msgstr "Cô gái"
-
-#~ msgid "Good Gourd"
-#~ msgstr "Quả bầu tốt"
-
-#~ msgid "Great General"
-#~ msgstr "Vị tướng vĩ đại"
 
 #~ msgid "Ground [G]"
 #~ msgstr "Mặt đất [G]"
@@ -1951,9 +322,6 @@ msgstr ""
 #~ msgid "Hercules"
 #~ msgstr "Dũng Sĩ Hercules"
 
-#~ msgid "Hippopotamus"
-#~ msgstr "Hà mã"
-
 #~ msgid "Hit CTRL-R again to stop.\n"
 #~ msgstr "Nhấn CTRL-R lần nữa để dừng.\n"
 
@@ -1966,9 +334,6 @@ msgstr ""
 #~ msgid "Horologium"
 #~ msgstr "Đồ Hồ Quả Lắc"
 
-#~ msgid "Horus"
-#~ msgstr "Horus (một vì thần Ai Cập cổ đại, con trai của Isis and Osiris)"
-
 #~ msgid "Hour"
 #~ msgstr "Giờ"
 
@@ -1977,12 +342,6 @@ msgstr ""
 
 #~ msgid "Hydrus"
 #~ msgstr "Rắn Nước"
-
-#~ msgid "Imperial Guards"
-#~ msgstr "Lính hoàng cung"
-
-#~ msgid "Imperial Passageway"
-#~ msgstr "Hành lang hoàng cung"
 
 #~ msgid "Indus"
 #~ msgstr "Người Da Đỏ"
@@ -1996,23 +355,8 @@ msgstr ""
 #~ msgid "Invalid Script command"
 #~ msgstr "Mã lệnh sai"
 
-#~ msgid "Jade Well"
-#~ msgstr "Giếng ngọc bích"
-
 #~ msgid "Jaw"
 #~ msgstr "Quai hàm"
-
-#~ msgid "Kenemet"
-#~ msgstr "Kenemet"
-
-#~ msgid "Khanuwy Fish"
-#~ msgstr "Cá Khanuwy"
-
-#~ msgid "Kitchen"
-#~ msgstr "Nhà bếp"
-
-#~ msgid "Kite of Kawelo"
-#~ msgstr "Diều của Kawelo"
 
 #~ msgid "Lacerta"
 #~ msgstr "Thằn Lằn"
@@ -2065,24 +409,11 @@ msgstr ""
 #~ msgid "Market"
 #~ msgstr "Chợ"
 
-#~ msgid "Market Officer"
-#~ msgstr "Nhân viên thị trường"
-
-#~ msgid "Maui's Fishhook"
-#~ msgstr "Móc câu cá của Maui"
-
-#~ msgid "Mausoleum"
-#~ msgstr "Lăng mộ"
-
 #~ msgid "Meadows"
 #~ msgstr "Bãi cỏ"
 
 #~ msgid "Mensa"
 #~ msgstr "Núi Table"
-
-#, fuzzy
-#~ msgid "Mercator projection"
-#~ msgstr "Tìm kiếm vật thể"
 
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Mật độ sao băng mỗi phút"
@@ -2092,10 +423,6 @@ msgstr ""
 
 #~ msgid "Minutes"
 #~ msgstr "Phút"
-
-#, fuzzy
-#~ msgid "Misc"
-#~ msgstr "Mimas"
 
 #~ msgid ""
 #~ "Misc:\n"
@@ -2115,12 +442,6 @@ msgstr ""
 
 #~ msgid "Month"
 #~ msgstr "Tháng"
-
-#~ msgid "Mooring Post"
-#~ msgstr "Trụ neo"
-
-#~ msgid "Mortar"
-#~ msgstr "Vữa"
 
 #~ msgid ""
 #~ "Movement & selection:\n"
@@ -2153,14 +474,8 @@ msgstr ""
 #~ msgid "Names of the Constellations [V]"
 #~ msgstr "Tên các chòm sao [V]"
 
-#~ msgid "Navigator's Triangle"
-#~ msgstr "Tam giác hàng hải"
-
 #~ msgid "Nebulas Names. Up to mag :"
 #~ msgstr "Hiện tên tinh vân sáng đến :"
-
-#~ msgid "Neck"
-#~ msgstr "Cổ"
 
 #~ msgid "Net"
 #~ msgstr "Mạng"
@@ -2170,15 +485,6 @@ msgstr ""
 
 #~ msgid "No"
 #~ msgstr "Không"
-
-#~ msgid "Norma"
-#~ msgstr "Thước Đo Độ Bằng"
-
-#~ msgid "North River"
-#~ msgstr "Sông Bắc"
-
-#~ msgid "Northern Dipper"
-#~ msgstr "Cái gầu phương Bắc"
 
 #~ msgid "OK"
 #~ msgstr "Đồng ý"
@@ -2192,20 +498,11 @@ msgstr ""
 #~ msgid "Ophiuchus"
 #~ msgstr "Người Cầm Rắn"
 
-#~ msgid "Orchard"
-#~ msgstr "Vườn cây ăn quả"
-
-#~ msgid "Outer Fence"
-#~ msgstr "Hàng rào bên ngoài"
-
 #~ msgid "Ox"
 #~ msgstr "Con bò"
 
 #~ msgid "Pair of Stars"
 #~ msgstr "Hai ngôi sao"
-
-#~ msgid "Palace Gate"
-#~ msgstr "Cổng cung điện"
 
 #~ msgid "Pavo"
 #~ msgstr "Con Công"
@@ -2215,9 +512,6 @@ msgstr ""
 
 #~ msgid "Perseus"
 #~ msgstr "Anh Tiên"
-
-#~ msgid "Pestle"
-#~ msgstr "Cái chày"
 
 #~ msgid "Phoenix"
 #~ msgstr "Phượng Hoàng"
@@ -2234,18 +528,8 @@ msgstr ""
 #~ msgid "Point"
 #~ msgstr "Điểm"
 
-#, fuzzy
-#~ msgid "Program language:"
-#~ msgstr "Ngôn ngữ chương trình:"
-
-#~ msgid "Prow"
-#~ msgstr "Mũi thuyền"
-
 #~ msgid "Puppis"
 #~ msgstr "Đuôi Tàu Argo"
-
-#~ msgid "Purple Palace"
-#~ msgstr "Cung điện tím"
 
 #~ msgid "Pyxis"
 #~ msgstr "La Bàn"
@@ -2255,9 +539,6 @@ msgstr ""
 
 #~ msgid "Quit [CTRL + Q]"
 #~ msgstr "Thoát [CTRL + Q]"
-
-#~ msgid "Ramparts"
-#~ msgstr "Thành lũy"
 
 #~ msgid "Real Time Speed [K]"
 #~ msgstr "Tốc độ thời gian thực [K]"
@@ -2277,23 +558,8 @@ msgstr ""
 #~ msgid "Return to Current Time"
 #~ msgstr "Trở về thời điểm hiện tại"
 
-#~ msgid "River Turtle"
-#~ msgstr "Rùa sông"
-
-#~ msgid "Rolled Tongue"
-#~ msgstr "Lưỡi cuốn"
-
-#~ msgid "Rooftop"
-#~ msgstr "Vòm trần"
-
-#~ msgid "Room"
-#~ msgstr "Phòng"
-
 #~ msgid "Root"
 #~ msgstr "Gốc"
-
-#~ msgid "Rotten Gourd"
-#~ msgstr "Quả bầu hư"
 
 #~ msgid "Sagitta"
 #~ msgstr "Mũi Tên"
@@ -2301,21 +567,11 @@ msgstr ""
 #~ msgid "Sagittarius"
 #~ msgstr "Nhân Mã Cung Thủ"
 
-#~ msgid "Sah"
-#~ msgstr "Sah"
-
 #~ msgid "Save as default"
 #~ msgstr "Lưu vào mặc định"
 
-#, fuzzy
-#~ msgid "Scale:"
-#~ msgstr "Tỉ lệ thật mặt trăng"
-
 #~ msgid "Scorpius"
 #~ msgstr "Bò Cạp"
-
-#~ msgid "Screen"
-#~ msgstr "Màn hình"
 
 #~ msgid "Screen Resolution :"
 #~ msgstr "Độ phân giải màn hình :"
@@ -2338,41 +594,14 @@ msgstr ""
 #~ msgid "Selected Constellation Only"
 #~ msgstr "Chỉ hiện thị chòm sao được chọn"
 
-#~ msgid "Selkis"
-#~ msgstr "Selkis (1 vị nữ thần Ai Cập)"
-
 #~ msgid "Serpens"
 #~ msgstr "Con Rắn"
-
-#~ msgid "Seven Excellencies"
-#~ msgstr "Thất nương"
-
-#~ msgid "Seven Little Girls"
-#~ msgstr "Bảy cô gái"
 
 #~ msgid "Sextans"
 #~ msgstr "Kính Lục Phân"
 
 #~ msgid "Sheep"
 #~ msgstr "Con cừu"
-
-#~ msgid "Sheepfold"
-#~ msgstr "Bãi rào cừu"
-
-#~ msgid "Soldiers Market"
-#~ msgstr "Chợ quân nhân"
-
-#~ msgid "South River"
-#~ msgstr "Sông Nam"
-
-#~ msgid "Spear"
-#~ msgstr "Cây giáo"
-
-#~ msgid "Spring"
-#~ msgstr "Mùa xuân"
-
-#~ msgid "Square Granary"
-#~ msgstr "Kho thóc vuông"
 
 #~ msgid "Star Magnitude Multiplier: "
 #~ msgstr "Tăng độ sáng biểu kiến sao: "
@@ -2383,15 +612,6 @@ msgstr ""
 #~ msgid "Star Twinkle. Amount :"
 #~ msgstr "Số lượng sao nhấp nháy :"
 
-#~ msgid "Stars of Water"
-#~ msgstr "Những ngôi sao của nước"
-
-#~ msgid "Stomach"
-#~ msgstr "Dạ dày"
-
-#~ msgid "Supreme Palace"
-#~ msgstr "Cung điện tối cao"
-
 #~ msgid "Tail"
 #~ msgstr "Đuôi"
 
@@ -2401,17 +621,11 @@ msgstr ""
 #~ msgid "Telescopium"
 #~ msgstr "Kính Viễn Vọng"
 
-#~ msgid "The Seven"
-#~ msgstr "Số Bảy"
-
 #~ msgid "Three Steps"
 #~ msgstr "Ba bước"
 
 #~ msgid "Thunder and Lightning"
 #~ msgstr "Sấm sét"
-
-#~ msgid "Thunderbolt"
-#~ msgstr "Tiếng sét"
 
 #~ msgid ""
 #~ "Time & Date:\n"
@@ -2436,73 +650,6 @@ msgstr ""
 #~ msgid "Time speed : "
 #~ msgstr "Tốc độ thời gian trôi : "
 
-#, fuzzy
-#~ msgid "Toggle atmosphere"
-#~ msgstr "Khí quyển"
-
-#, fuzzy
-#~ msgid "Toggle azimutal grid"
-#~ msgstr "Lưới phương vị"
-
-#, fuzzy
-#~ msgid "Toggle cardinal points"
-#~ msgstr "Điểm phương hướng"
-
-#, fuzzy
-#~ msgid "Toggle configuration window"
-#~ msgstr "Thiết lập thông số"
-
-#, fuzzy
-#~ msgid "Toggle constellation art"
-#~ msgstr "Đang tải hình vẽ các chòm sao:"
-
-#, fuzzy
-#~ msgid "Toggle constellation boundaries"
-#~ msgstr "Ranh giới các chòm sao"
-
-#, fuzzy
-#~ msgid "Toggle constellation labels"
-#~ msgstr "Tên các chòm sao"
-
-#, fuzzy
-#~ msgid "Toggle constellation lines"
-#~ msgstr "Đường nối chòm sao"
-
-#, fuzzy
-#~ msgid "Toggle ecliptic line"
-#~ msgstr "Đường hoàng đạo"
-
-#, fuzzy
-#~ msgid "Toggle equator line"
-#~ msgstr "Đường quỹ đạo"
-
-#, fuzzy
-#~ msgid "Toggle equatorial J2000 grid"
-#~ msgstr "Lưới quỹ đạo"
-
-#, fuzzy
-#~ msgid "Toggle equatorial grid"
-#~ msgstr "Lưới quỹ đạo"
-
-#, fuzzy
-#~ msgid "Toggle location window"
-#~ msgstr "Thiết lập thông số"
-
-#, fuzzy
-#~ msgid "Toggle meridian line"
-#~ msgstr "Đường kinh tuyến"
-
-#, fuzzy
-#~ msgid "Toggle planets hints"
-#~ msgstr "Ghi chú các hình tinh"
-
-#, fuzzy
-#~ msgid "Toggle stars"
-#~ msgstr "3 ngôi sao"
-
-#~ msgid "Toilet"
-#~ msgstr "Nhà vệ sinh"
-
 #~ msgid "Triangle"
 #~ msgstr "Tam giác"
 
@@ -2511,9 +658,6 @@ msgstr ""
 
 #~ msgid "Triangulum Australe"
 #~ msgstr "Tam Giác Phương Nam"
-
-#~ msgid "Tripod"
-#~ msgstr "Kiềng ba chân"
 
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Gõ `%s --help' để biết thêm thông tin.\n"
@@ -2563,9 +707,6 @@ msgstr ""
 #~ msgid "Virgo"
 #~ msgstr "Trinh Nữ"
 
-#~ msgid "Voice of Joy"
-#~ msgstr "Âm thanh vui mừng"
-
 #~ msgid "Volans"
 #~ msgstr "Cá Chuồn"
 
@@ -2574,6 +715,258 @@ msgstr ""
 
 #~ msgid "Wall"
 #~ msgstr "Bức tường"
+
+#~ msgid "Year"
+#~ msgstr "Năm"
+
+#~ msgid "Yes"
+#~ msgstr "Đúng"
+
+#~ msgid "change to apply."
+#~ msgstr "thay đổi để ghi nhận."
+
+#~ msgid "Arsenal"
+#~ msgstr "Kho chứa vũ khí"
+
+#~ msgid "Bailer"
+#~ msgstr "Gàu tát nước"
+
+#~ msgid "Banner of Three Stars"
+#~ msgstr "Ngọn cờ ba sao"
+
+#~ msgid "Bond"
+#~ msgstr "Liên kết"
+
+#~ msgid "Bull's Foreleg"
+#~ msgstr "Chân Trước Con Bò"
+
+#~ msgid "Cared for by Moon"
+#~ msgstr "Cared for by Moon"
+
+#~ msgid "Cat's Cradle"
+#~ msgstr "Cái nôi mèo"
+
+#~ msgid "Chariot"
+#~ msgstr "Xe ngựa"
+
+#~ msgid "Chariot Yard"
+#~ msgstr "Bãi rào xe ngựa"
+
+#~ msgid "Chematy"
+#~ msgstr "Chematy"
+
+#~ msgid "Circular Granary"
+#~ msgstr "Vựa lúa tròn"
+
+#~ msgid "Coiled Thong"
+#~ msgstr "Cuộn da"
+
+#~ msgid "Curved Array"
+#~ msgstr "Mảng cong"
+
+#~ msgid "Dipper"
+#~ msgstr "Cái gàu"
+
+#~ msgid "Earth God's Temple"
+#~ msgstr "Đền của vị thần trái đất"
+
+#~ msgid "Eastern Door"
+#~ msgstr "Cửa Đông"
+
+#~ msgid "Emptiness"
+#~ msgstr "Trống rỗng"
+
+#~ msgid "Encampment"
+#~ msgstr "Trại giam"
+
+#~ msgid "Establishment"
+#~ msgstr "Sự thiết lập"
+
+#~ msgid "Extended Net"
+#~ msgstr "Mạng mở rộng"
+
+#~ msgid "Farmland"
+#~ msgstr "Đất trồng trọt"
+
+#~ msgid "Five Chariots"
+#~ msgstr "5 cỗ xe ngựa"
+
+#~ msgid "Five Feudal Kings"
+#~ msgstr "Ngủ vị hoàng đế"
+
+#~ msgid "Flail"
+#~ msgstr "Cái đập lúa"
+
+#~ msgid "Flock"
+#~ msgstr "Bầy"
+
+#~ msgid "Flying Corridor"
+#~ msgstr "Hành lang bay"
+
+#~ msgid "Frigate Bird"
+#~ msgstr "Chim chiến"
+
+#~ msgid "Ghosts"
+#~ msgstr "Những con ma"
+
+#~ msgid "Giant"
+#~ msgstr "Khổng lồ"
+
+#~ msgid "Good Gourd"
+#~ msgstr "Quả bầu tốt"
+
+#~ msgid "Great General"
+#~ msgstr "Vị tướng vĩ đại"
+
+#~ msgid "Hippopotamus"
+#~ msgstr "Hà mã"
+
+#~ msgid "Horus"
+#~ msgstr "Horus (một vì thần Ai Cập cổ đại, con trai của Isis and Osiris)"
+
+#~ msgid "Imperial Guards"
+#~ msgstr "Lính hoàng cung"
+
+#~ msgid "Imperial Passageway"
+#~ msgstr "Hành lang hoàng cung"
+
+#~ msgid "Jade Well"
+#~ msgstr "Giếng ngọc bích"
+
+#~ msgid "Kenemet"
+#~ msgstr "Kenemet"
+
+#~ msgid "Khanuwy Fish"
+#~ msgstr "Cá Khanuwy"
+
+#~ msgid "Kitchen"
+#~ msgstr "Nhà bếp"
+
+#~ msgid "Kite of Kawelo"
+#~ msgstr "Diều của Kawelo"
+
+#~ msgid "Market Officer"
+#~ msgstr "Nhân viên thị trường"
+
+#~ msgid "Maui's Fishhook"
+#~ msgstr "Móc câu cá của Maui"
+
+#~ msgid "Mausoleum"
+#~ msgstr "Lăng mộ"
+
+#~ msgid "Mooring Post"
+#~ msgstr "Trụ neo"
+
+#~ msgid "Mortar"
+#~ msgstr "Vữa"
+
+#~ msgid "Navigator's Triangle"
+#~ msgstr "Tam giác hàng hải"
+
+#~ msgid "Neck"
+#~ msgstr "Cổ"
+
+#~ msgid "Norma"
+#~ msgstr "Thước Đo Độ Bằng"
+
+#~ msgid "North River"
+#~ msgstr "Sông Bắc"
+
+#~ msgid "Northern Dipper"
+#~ msgstr "Cái gầu phương Bắc"
+
+#~ msgid "Orchard"
+#~ msgstr "Vườn cây ăn quả"
+
+#~ msgid "Outer Fence"
+#~ msgstr "Hàng rào bên ngoài"
+
+#~ msgid "Palace Gate"
+#~ msgstr "Cổng cung điện"
+
+#~ msgid "Pestle"
+#~ msgstr "Cái chày"
+
+#~ msgid "Prow"
+#~ msgstr "Mũi thuyền"
+
+#~ msgid "Purple Palace"
+#~ msgstr "Cung điện tím"
+
+#~ msgid "Ramparts"
+#~ msgstr "Thành lũy"
+
+#~ msgid "River Turtle"
+#~ msgstr "Rùa sông"
+
+#~ msgid "Rolled Tongue"
+#~ msgstr "Lưỡi cuốn"
+
+#~ msgid "Rooftop"
+#~ msgstr "Vòm trần"
+
+#~ msgid "Room"
+#~ msgstr "Phòng"
+
+#~ msgid "Rotten Gourd"
+#~ msgstr "Quả bầu hư"
+
+#~ msgid "Sah"
+#~ msgstr "Sah"
+
+#~ msgid "Screen"
+#~ msgstr "Màn hình"
+
+#~ msgid "Selkis"
+#~ msgstr "Selkis (1 vị nữ thần Ai Cập)"
+
+#~ msgid "Seven Excellencies"
+#~ msgstr "Thất nương"
+
+#~ msgid "Seven Little Girls"
+#~ msgstr "Bảy cô gái"
+
+#~ msgid "Sheepfold"
+#~ msgstr "Bãi rào cừu"
+
+#~ msgid "Soldiers Market"
+#~ msgstr "Chợ quân nhân"
+
+#~ msgid "South River"
+#~ msgstr "Sông Nam"
+
+#~ msgid "Spear"
+#~ msgstr "Cây giáo"
+
+#~ msgid "Spring"
+#~ msgstr "Mùa xuân"
+
+#~ msgid "Square Granary"
+#~ msgstr "Kho thóc vuông"
+
+#~ msgid "Stars of Water"
+#~ msgstr "Những ngôi sao của nước"
+
+#~ msgid "Stomach"
+#~ msgstr "Dạ dày"
+
+#~ msgid "Supreme Palace"
+#~ msgstr "Cung điện tối cao"
+
+#~ msgid "The Seven"
+#~ msgstr "Số Bảy"
+
+#~ msgid "Thunderbolt"
+#~ msgstr "Tiếng sét"
+
+#~ msgid "Toilet"
+#~ msgstr "Nhà vệ sinh"
+
+#~ msgid "Tripod"
+#~ msgstr "Kiềng ba chân"
+
+#~ msgid "Voice of Joy"
+#~ msgstr "Âm thanh vui mừng"
 
 #~ msgid "Waty Bekety"
 #~ msgstr "Waty Bekety"
@@ -2602,14 +995,1496 @@ msgstr ""
 #~ msgid "Xuanyuan"
 #~ msgstr "Xuanyuan"
 
-#~ msgid "Year"
-#~ msgstr "Năm"
-
-#~ msgid "Yes"
-#~ msgstr "Đúng"
-
 #~ msgid "Zaofu"
 #~ msgstr "Zaofu"
 
-#~ msgid "change to apply."
-#~ msgstr "thay đổi để ghi nhận."
+#: src/modules/ConstellationMgr.cpp:376
+#, qt-format
+msgid "Loading Constellation Art: %1/%2"
+msgstr ""
+
+#: src/modules/StarMgr.cpp:257
+#, qt-format
+msgid "Loading catalog %1"
+msgstr ""
+
+#: src/modules/LandscapeMgr.cpp:433
+msgid "Author: "
+msgstr "Tác giả: "
+
+#: src/modules/LandscapeMgr.cpp:436
+msgid "Location: "
+msgstr ""
+
+#: src/modules/LandscapeMgr.cpp:441
+#, qt-format
+msgid ", %1 m"
+msgstr ""
+
+#: src/modules/LandscapeMgr.cpp:444
+msgid "Planet: "
+msgstr ""
+
+#: src/modules/Nebula.cpp:93
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr ""
+
+#: src/modules/Nebula.cpp:96 src/modules/Planet.cpp:130
+#, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr ""
+
+#: src/modules/Nebula.cpp:101
+#, qt-format
+msgid "Size: %1"
+msgstr ""
+
+#: src/modules/Nebula.cpp:237
+msgid "Galaxy"
+msgstr ""
+
+#: src/modules/Nebula.cpp:240
+msgid "Open cluster"
+msgstr ""
+
+#: src/modules/Nebula.cpp:243
+msgid "Globular cluster"
+msgstr ""
+
+#: src/modules/Nebula.cpp:246
+msgid "Nebula"
+msgstr ""
+
+#: src/modules/Nebula.cpp:249
+msgid "Planetary nebula"
+msgstr ""
+
+#: src/modules/Nebula.cpp:252
+msgid "Cluster associated with nebulosity"
+msgstr ""
+
+#: src/modules/Nebula.cpp:255
+msgid "Unknown"
+msgstr ""
+
+#: src/modules/Nebula.cpp:258
+msgid "Undocumented type"
+msgstr ""
+
+#: src/modules/NebulaMgr.cpp:372
+#, qt-format
+msgid "Loading NGC catalog: %1/%2"
+msgstr ""
+
+#: src/modules/Planet.cpp:133 src/modules/StarWrapper.cpp:102
+#, qt-format
+msgid "Absolute Magnitude: %1"
+msgstr ""
+
+#: src/modules/Planet.cpp:140
+#, no-c-format, qt-format
+msgid "Distance: %1AU"
+msgstr ""
+
+#: src/modules/Planet.cpp:144
+#, qt-format
+msgid "Apparent diameter: %1"
+msgstr ""
+
+#: src/modules/StarWrapper.cpp:41 src/modules/StarWrapper.cpp:98
+#, qt-format
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr ""
+
+#: src/modules/StarWrapper.cpp:108
+#, qt-format
+msgid "Spectral Type: %1"
+msgstr ""
+
+#: src/modules/StarWrapper.cpp:112
+#, qt-format
+msgid "Distance: %1 Light Years"
+msgstr ""
+
+#: src/modules/StarWrapper.cpp:115
+#, qt-format
+msgid "Parallax: %1\""
+msgstr ""
+
+#: src/modules/TextUI.cpp:63
+msgid "Set Location "
+msgstr "Thiết lập địa điểm "
+
+#: src/modules/TextUI.cpp:64
+msgid "Set Time "
+msgstr "Thiết lập thời gian "
+
+#: src/modules/TextUI.cpp:65
+msgid "General "
+msgstr "Tổng quát "
+
+#: src/modules/TextUI.cpp:66
+msgid "Stars "
+msgstr "Các vì sao "
+
+#: src/modules/TextUI.cpp:67
+msgid "Colors "
+msgstr "Màu sắc "
+
+#: src/modules/TextUI.cpp:68
+msgid "Effects "
+msgstr "Hiệu ứng "
+
+#: src/modules/TextUI.cpp:69
+msgid "Scripts "
+msgstr "Kịch bản "
+
+#: src/modules/TextUI.cpp:70
+msgid "Administration "
+msgstr "Quản trị "
+
+#: src/modules/TextUI.cpp:73
+msgid "Latitude: "
+msgstr "Vĩ độ: "
+
+#: src/modules/TextUI.cpp:74
+msgid "Longitude: "
+msgstr "Kinh độ: "
+
+#: src/modules/TextUI.cpp:75
+msgid "Altitude (m): "
+msgstr "Độ cao (mét): "
+
+#: src/modules/TextUI.cpp:76
+msgid "Solar System Body: "
+msgstr "Những vật thể thuộc hệ mặt trời: "
+
+#: src/modules/TextUI.cpp:79
+msgid "Sky Time: "
+msgstr "Thời gian bầu trời: "
+
+#: src/modules/TextUI.cpp:80
+msgid "Set Time Zone: "
+msgstr "Thiết lập múi thời gian: "
+
+#: src/modules/TextUI.cpp:81
+msgid "Day keys: "
+msgstr ""
+
+#: src/modules/TextUI.cpp:82
+msgid "Calendar"
+msgstr ""
+
+#: src/modules/TextUI.cpp:83
+msgid "Sidereal"
+msgstr ""
+
+#: src/modules/TextUI.cpp:84
+msgid "Preset Sky Time: "
+msgstr "Chỉnh thời gian bầu trời: "
+
+#: src/modules/TextUI.cpp:85
+msgid "Sky Time At Start-up: "
+msgstr "Thời gian bầu trời lúc bắt đầu: "
+
+#: src/modules/TextUI.cpp:86
+msgid "Actual Time"
+msgstr "Thời gian thực"
+
+#: src/modules/TextUI.cpp:87
+msgid "Preset Time"
+msgstr "Chỉnh thời gian"
+
+#: src/modules/TextUI.cpp:88
+msgid "Time Display Format: "
+msgstr "Dạng thời gian hiển thị: "
+
+#: src/modules/TextUI.cpp:89
+msgid "Date Display Format: "
+msgstr "Dạng ngày hiển thị: "
+
+#: src/modules/TextUI.cpp:92
+msgid "Sky Culture: "
+msgstr "Chòm sao theo : "
+
+#: src/modules/TextUI.cpp:93
+msgid "Sky Language: "
+msgstr "Ngôn ngữ cho bầu trời: "
+
+#: src/modules/TextUI.cpp:96
+msgid "Show: "
+msgstr "Xem: "
+
+#: src/modules/TextUI.cpp:97
+msgid "Star Value Multiplier: "
+msgstr ""
+
+#: src/modules/TextUI.cpp:98
+msgid "Magnitude Sizing Multiplier: "
+msgstr "Tăng cường độ: "
+
+#: src/modules/TextUI.cpp:99
+msgid "Maximum Magnitude to Label: "
+msgstr "Hiện tên vật thể sáng tối đa: "
+
+#: src/modules/TextUI.cpp:100
+msgid "Twinkling: "
+msgstr "Nhấp nháy: "
+
+#: src/modules/TextUI.cpp:101
+msgid "Limiting Magnitude: "
+msgstr ""
+
+#: src/modules/TextUI.cpp:104
+msgid "Constellation Lines"
+msgstr "Đường nối chòm sao"
+
+#: src/modules/TextUI.cpp:105
+msgid "Constellation Names"
+msgstr "Tên các chòm sao"
+
+#: src/modules/TextUI.cpp:106
+msgid "Constellation Art Intensity"
+msgstr "Độ đậm hình vẽ chòm sao"
+
+#: src/modules/TextUI.cpp:107
+msgid "Constellation Boundaries"
+msgstr "Ranh giới các chòm sao"
+
+#: src/modules/TextUI.cpp:108
+msgid "Cardinal Points"
+msgstr "Điểm phương hướng"
+
+#: src/modules/TextUI.cpp:109
+msgid "Planet Names"
+msgstr "Tên các hành tinh"
+
+#: src/modules/TextUI.cpp:110
+msgid "Planet Orbits"
+msgstr "Quỹ đạo các hành tinh"
+
+#: src/modules/TextUI.cpp:111
+msgid "Planet Trails"
+msgstr "Vết các hành tinh"
+
+#: src/modules/TextUI.cpp:112
+msgid "Meridian Line"
+msgstr "Đường kinh tuyến"
+
+#: src/modules/TextUI.cpp:113
+msgid "Azimuthal Grid"
+msgstr "Lưới phương vị"
+
+#: src/modules/TextUI.cpp:114
+msgid "Equatorial Grid"
+msgstr "Lưới quỹ đạo"
+
+#: src/modules/TextUI.cpp:115
+msgid "Equator Line"
+msgstr "Đường quỹ đạo"
+
+#: src/modules/TextUI.cpp:116
+msgid "Ecliptic Line"
+msgstr "Đường hoàng đạo"
+
+#: src/modules/TextUI.cpp:117
+msgid "Nebula Names"
+msgstr "Tên các chòm sao"
+
+#: src/modules/TextUI.cpp:118
+msgid "Nebula Circles"
+msgstr "Vòng bao tinh vân"
+
+#: src/modules/TextUI.cpp:121
+msgid "Light Pollution Luminance: "
+msgstr ""
+
+#: src/modules/TextUI.cpp:122
+msgid "Landscape: "
+msgstr "Phong cảnh: "
+
+#: src/modules/TextUI.cpp:123
+msgid "Manual zoom: "
+msgstr "Zoom thủ công: "
+
+#: src/modules/TextUI.cpp:124
+msgid "Object Sizing Rule: "
+msgstr "Quy luật thay đổi cỡ vật thể: "
+
+#: src/modules/TextUI.cpp:125
+msgid "Magnitude Scaling Multiplier: "
+msgstr ""
+
+#: src/modules/TextUI.cpp:126
+msgid "Milky Way intensity: "
+msgstr "Mật độ dãi Ngân Hà "
+
+#: src/modules/TextUI.cpp:127
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "Hiện tên đám tinh vân có độ sáng đến: "
+
+#: src/modules/TextUI.cpp:128
+msgid "Zoom Duration: "
+msgstr "Khoảng thời gian phóng to/thu nhỏ: "
+
+#: src/modules/TextUI.cpp:129
+msgid "Cursor Timeout: "
+msgstr "Thời gian dấu con chuột: "
+
+#: src/modules/TextUI.cpp:130
+msgid "Correct for light travel time: "
+msgstr ""
+
+#: src/modules/TextUI.cpp:133
+msgid "Local Script: "
+msgstr "Kịch bản cục bộ: "
+
+#: src/modules/TextUI.cpp:134
+msgid "CD/DVD Script: "
+msgstr "Kịch bản cho CD/DVD: "
+
+#: src/modules/TextUI.cpp:135
+msgid "USB Script: "
+msgstr ""
+
+#: src/modules/TextUI.cpp:136
+msgid "Arrow down to load list."
+msgstr "Nhấn phím mủi tên xuống để tải danh sách."
+
+#: src/modules/TextUI.cpp:137
+msgid "Select and exit to run."
+msgstr "Chọn và thoát để chạy."
+
+#: src/modules/TextUI.cpp:140
+msgid "Load Default Configuration: "
+msgstr "Nạp cấu hình mặc định: "
+
+#: src/modules/TextUI.cpp:141
+msgid "Save Current Configuration as Default: "
+msgstr "Lưu cấu hình hiện tại thành mặc định: "
+
+#: src/modules/TextUI.cpp:142
+msgid "Shut Down: "
+msgstr "Tắt: "
+
+#: src/modules/TextUI.cpp:143
+msgid "Update me via Internet: "
+msgstr "Cập nhật qua Internet: "
+
+#: src/modules/TextUI.cpp:144
+msgid "Set UI Locale: "
+msgstr "Thiết lập nơi xảy ra UI "
+
+#: src/core/MappingClasses.cpp:11
+msgid "Perspective"
+msgstr ""
+
+#: src/core/MappingClasses.cpp:16
+msgid ""
+"Perspective projection keeps the horizon a straight line. The mathematical "
+"name for this projection method is <i>gnomonic projection</i>."
+msgstr ""
+
+#: src/core/MappingClasses.cpp:77
+msgid "Equal Area"
+msgstr ""
+
+#: src/core/MappingClasses.cpp:82
+msgid ""
+"The full name of this projection method is, <i>Lambert azimuthal equal-area "
+"projection</i>. It preserves the area but not the angle."
+msgstr ""
+
+#: src/core/MappingClasses.cpp:133
+msgid "Stereographic"
+msgstr ""
+
+#: src/core/MappingClasses.cpp:138
+msgid ""
+"Stereographic projection is known since the antiquity and was originally "
+"known as the planisphere projection. It preserves the angles at which curves "
+"cross each other but it does not preserve area."
+msgstr ""
+
+#: src/core/MappingClasses.cpp:178
+msgid "Fish-eye"
+msgstr ""
+
+#: src/core/MappingClasses.cpp:183
+msgid ""
+"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
+"lines become curves when they appear a large angular distance from the "
+"centre of the field of view (like the distortions seen with very wide angle "
+"camera lenses)."
+msgstr ""
+
+#: src/core/MappingClasses.cpp:223
+msgid "Cylinder"
+msgstr ""
+
+#: src/core/MappingClasses.cpp:228
+msgid ""
+"The full name of this projection mode is <i>cylindrical equidistant "
+"projection</i>. With this projection all parallels are equally spaced."
+msgstr ""
+
+#: src/core/MappingClasses.cpp:278
+msgid "Mercator"
+msgstr ""
+
+#: src/core/MappingClasses.cpp:283
+msgid ""
+"The mercator projection is one of the most used world map projection. It "
+"preserves direction and shapes but distorts size, in an increasing degree "
+"away from the equator."
+msgstr ""
+
+#: src/core/MappingClasses.cpp:336
+msgid "Orthographic"
+msgstr ""
+
+#: src/core/MappingClasses.cpp:341
+msgid ""
+"Orthographic projection is related to perspective projection, but the point "
+"of perspective is set to an infinite distance."
+msgstr ""
+
+#: src/core/Mapping.cpp:28
+msgid "Maximum FOV: "
+msgstr ""
+
+#: src/core/StelObject.cpp:74
+#, qt-format
+msgid "RA/DE (J2000): %1/%2"
+msgstr ""
+
+#: src/core/StelObject.cpp:81
+#, qt-format
+msgid "RA/DE (of date): %1/%2"
+msgstr ""
+
+#: src/core/StelObject.cpp:89
+#, qt-format
+msgid "Hour angle/DE: %1/%2"
+msgstr ""
+
+#: src/core/StelObject.cpp:100
+#, qt-format
+msgid "Az/Alt: %1/%2"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:375
+#, qt-format
+msgid "Startup FOV: %1%2"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:383
+#, qt-format
+msgid "Startup direction of view Az/Alt: %1/%2"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:208
+#: src/gui/StelGuiItems.cpp:531
+msgid "Space"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:52
+msgid "Arrow keys & left mouse drag"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:53
+msgid "Page Up/Down"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:54
+msgid "CTRL + Up/Down"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:55
+msgid "Left click"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:56
+msgid "Right click"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:57
+msgid "CTRL + Left click"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:196
+msgid "Movement and Selection"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:61
+msgid "Pan view around the sky"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
+msgid "Zoom in/out"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:64
+msgid "Select object"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
+msgid "Clear selection"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Stellarium Help"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:139
+msgid "Keys"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:147
+msgid "Further Reading"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:148
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:149
+msgid "The Stellarium User Guide"
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:153
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:158
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:163
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:168
+msgid ""
+"{Bug reporting system} - if something doesn't work properly and is not "
+"listed in the FAQ list, you can open bug reports here."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:173
+msgid ""
+"{Feature request system} - if you have an idea for a new feature, send it to "
+"us. We can't promise to implement every idea, but we appreciate the feedback "
+"and review the list when we are planning future features."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:178
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:214 src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:305 src/gui/StelGui.cpp:203
+msgid "Miscellaneous"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:272
+msgid "Developers"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:273
+#, qt-format
+msgid "Project coordinator & lead developer: %1"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:274
+msgid "Developer: Rob Spearman"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:275
+msgid "Graphic/other designer: Johan Meuris"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:276
+msgid "Developer: Johannes Gajdosik"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:277
+msgid "Doc author/developer: Matthew Gates"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:278
+msgid "OSX Developer: Nigel Kerr"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:279
+msgid "Developer: Andras Mohari"
+msgstr ""
+
+#: src/gui/StelGui.cpp:144
+msgid "Display Options"
+msgstr ""
+
+#: src/gui/StelGui.cpp:145
+msgid "Constellation lines"
+msgstr ""
+
+#: src/gui/StelGui.cpp:146
+msgid "Constellation art"
+msgstr ""
+
+#: src/gui/StelGui.cpp:147
+msgid "Constellation labels"
+msgstr ""
+
+#: src/gui/StelGui.cpp:148
+msgid "Constellation boundaries"
+msgstr ""
+
+#: src/gui/StelGui.cpp:150 src/ui_viewDialog.h:1002
+msgid "Azimutal grid"
+msgstr ""
+
+#: src/gui/StelGui.cpp:151 src/ui_viewDialog.h:1000
+msgid "Equatorial grid"
+msgstr ""
+
+#: src/gui/StelGui.cpp:152 src/ui_viewDialog.h:1001
+msgid "Equatorial J2000 grid"
+msgstr ""
+
+#: src/gui/StelGui.cpp:153 src/ui_viewDialog.h:1005
+msgid "Ecliptic line"
+msgstr ""
+
+#: src/gui/StelGui.cpp:154 src/ui_viewDialog.h:1003
+msgid "Equator line"
+msgstr ""
+
+#: src/gui/StelGui.cpp:155 src/ui_viewDialog.h:1004
+msgid "Meridian line"
+msgstr ""
+
+#: src/gui/StelGui.cpp:156 src/ui_viewDialog.h:1006
+msgid "Cardinal points"
+msgstr ""
+
+#: src/gui/StelGui.cpp:158
+msgid "Ground"
+msgstr "Mặt đất"
+
+#: src/gui/StelGui.cpp:159 src/ui_viewDialog.h:983
+msgid "Atmosphere"
+msgstr ""
+
+#: src/gui/StelGui.cpp:160
+msgid "Fog"
+msgstr "Sương mù"
+
+#: src/gui/StelGui.cpp:162 src/ui_viewDialog.h:988
+msgid "Nebulas"
+msgstr ""
+
+#: src/gui/StelGui.cpp:164 src/ui_viewDialog.h:973 src/ui_viewDialog.h:987
+msgid "Stars"
+msgstr "Các vì sao"
+
+#: src/gui/StelGui.cpp:165
+msgid "Planets hints"
+msgstr ""
+
+#: src/gui/StelGui.cpp:167
+msgid "Night mode"
+msgstr ""
+
+#: src/gui/StelGui.cpp:168
+msgid "Full-screen mode"
+msgstr ""
+
+#: src/gui/StelGui.cpp:169
+msgid "Flip scene horizontally"
+msgstr ""
+
+#: src/gui/StelGui.cpp:170
+msgid "Flip scene vertically"
+msgstr ""
+
+#: src/gui/StelGui.cpp:172
+msgid "Windows"
+msgstr ""
+
+#: src/gui/StelGui.cpp:173
+msgid "Help window"
+msgstr ""
+
+#: src/gui/StelGui.cpp:174
+msgid "Configuration window"
+msgstr ""
+
+#: src/gui/StelGui.cpp:175
+msgid "Search window"
+msgstr ""
+
+#: src/gui/StelGui.cpp:176
+msgid "Sky and viewing options window"
+msgstr ""
+
+#: src/gui/StelGui.cpp:177
+msgid "Date/time window"
+msgstr ""
+
+#: src/gui/StelGui.cpp:178
+msgid "Location window"
+msgstr ""
+
+#: src/gui/StelGui.cpp:180 src/ui_dateTimeDialogGui.h:288
+msgid "Date and Time"
+msgstr ""
+
+#: src/gui/StelGui.cpp:181
+msgid "Decrease time speed"
+msgstr ""
+
+#: src/gui/StelGui.cpp:182
+msgid "Increase time speed"
+msgstr ""
+
+#: src/gui/StelGui.cpp:183
+msgid "Set normal time rate"
+msgstr ""
+
+#: src/gui/StelGui.cpp:184
+msgid "Set time to now"
+msgstr ""
+
+#: src/gui/StelGui.cpp:185
+msgid "Add 1 solar hour"
+msgstr ""
+
+#: src/gui/StelGui.cpp:186
+msgid "Subtract 1 solar hour"
+msgstr ""
+
+#: src/gui/StelGui.cpp:187
+msgid "Add 1 solar day"
+msgstr ""
+
+#: src/gui/StelGui.cpp:188
+msgid "Subtract 1 solar day"
+msgstr ""
+
+#: src/gui/StelGui.cpp:189
+msgid "Add 1 solar week"
+msgstr ""
+
+#: src/gui/StelGui.cpp:190
+msgid "Subtract 1 solar week"
+msgstr ""
+
+#: src/gui/StelGui.cpp:191
+msgid "Add 1 sidereal day"
+msgstr ""
+
+#: src/gui/StelGui.cpp:192
+msgid "Subtract 1 sidereal day"
+msgstr ""
+
+#: src/gui/StelGui.cpp:193
+msgid "Add 1 sidereal week"
+msgstr ""
+
+#: src/gui/StelGui.cpp:194
+msgid "Subtract 1 sidereal week"
+msgstr ""
+
+#: src/gui/StelGui.cpp:197
+msgid "Center on selected object"
+msgstr ""
+
+#: src/gui/StelGui.cpp:198
+msgid "Track object"
+msgstr ""
+
+#: src/gui/StelGui.cpp:199
+msgid "Zoom in on selected object"
+msgstr ""
+
+#: src/gui/StelGui.cpp:200
+msgid "Zoom out"
+msgstr ""
+
+#: src/gui/StelGui.cpp:201
+msgid "Set home planet to selected planet"
+msgstr ""
+
+#: src/gui/StelGui.cpp:204
+msgid "Switch between equatorial and azimuthal mount"
+msgstr ""
+
+#: src/gui/StelGui.cpp:205
+msgid "Quit"
+msgstr ""
+
+#: src/gui/StelGui.cpp:206
+msgid "Save screenshot"
+msgstr ""
+
+#: src/gui/StelGui.cpp:209
+msgid "Auto hide horizontal button bar"
+msgstr ""
+
+#: src/gui/StelGui.cpp:210
+msgid "Auto hide vertical button bar"
+msgstr ""
+
+#: src/gui/StelGui.cpp:786
+msgid "Stellarium"
+msgstr ""
+
+#: src/gui/StelGuiItems.cpp:432
+#, no-c-format, qt-format
+msgid "%1m"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:345
+msgid "No description"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:409
+msgid "No shooting stars"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:412
+msgid "Normal rate"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:415
+msgid "Standard Perseids rate"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:418
+msgid "Exceptional Leonid rate"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:421
+msgid "Highest rate ever (1966 Leonids)"
+msgstr ""
+
+#: src/main.cpp:55
+msgid "This system does not support OpenGL."
+msgstr ""
+
+#: src/translations.h:33
+msgid "Sun"
+msgstr "Mặt trời"
+
+#: src/translations.h:34
+msgid "Mercury"
+msgstr "Thuỷ tinh"
+
+#: src/translations.h:35
+msgid "Venus"
+msgstr "Kim tinh"
+
+#: src/translations.h:36
+msgid "Earth"
+msgstr "Trái đất"
+
+#: src/translations.h:37
+msgid "Moon"
+msgstr "Mặt trăng"
+
+#: src/translations.h:38
+msgid "Mars"
+msgstr "Hỏa tinh"
+
+#: src/translations.h:39
+msgid "Deimos"
+msgstr "Deimos"
+
+#: src/translations.h:40
+msgid "Phobos"
+msgstr "Phobos"
+
+#: src/translations.h:41
+msgid "Jupiter"
+msgstr "Mộc tinh"
+
+#: src/translations.h:42
+msgid "Io"
+msgstr "Io"
+
+#: src/translations.h:43
+msgid "Europa"
+msgstr "Europa"
+
+#: src/translations.h:44
+msgid "Ganymede"
+msgstr "Ganymede"
+
+#: src/translations.h:45
+msgid "Callisto"
+msgstr "Callisto"
+
+#: src/translations.h:46
+msgid "Saturn"
+msgstr "Thổ tinh"
+
+#: src/translations.h:47
+msgid "Mimas"
+msgstr "Mimas"
+
+#: src/translations.h:48
+msgid "Enceladus"
+msgstr "Enceladus"
+
+#: src/translations.h:49
+msgid "Tethys"
+msgstr "Tethys"
+
+#: src/translations.h:50
+msgid "Dione"
+msgstr "Dione"
+
+#: src/translations.h:51
+msgid "Rhea"
+msgstr "Rhea"
+
+#: src/translations.h:52
+msgid "Titan"
+msgstr "Titan"
+
+#: src/translations.h:53
+msgid "Hyperion"
+msgstr "Hyperion"
+
+#: src/translations.h:54
+msgid "Iapetus"
+msgstr "Iapetus"
+
+#: src/translations.h:55
+msgid "Phoebe"
+msgstr "Phoebe"
+
+#: src/translations.h:56
+msgid "Neptune"
+msgstr "Hải vương tinh"
+
+#: src/translations.h:57
+msgid "Uranus"
+msgstr "Thiên vương tinh"
+
+#: src/translations.h:58
+msgid "Pluto"
+msgstr "Diêm vương tinh"
+
+#: src/translations.h:59
+msgid "Charon"
+msgstr "Charon"
+
+#: src/translations.h:60
+msgid "Solar System Observer"
+msgstr "Người quan sát hệ mặt trời"
+
+#: src/translations.h:63
+msgid "N"
+msgstr "B"
+
+#: src/translations.h:64
+msgid "S"
+msgstr "N"
+
+#: src/translations.h:65
+msgid "E"
+msgstr "Đ"
+
+#: src/translations.h:66
+msgid "W"
+msgstr "T"
+
+#: src/translations.h:69
+msgid "Chinese"
+msgstr "Tiếng Trung Quốc"
+
+#: src/translations.h:70
+msgid "Egyptian"
+msgstr "Người Ai Cập"
+
+#: src/translations.h:71
+msgid "Inuit"
+msgstr ""
+
+#: src/translations.h:72
+msgid "Korean"
+msgstr ""
+
+#: src/translations.h:73
+msgid "Lakota"
+msgstr ""
+
+#: src/translations.h:74
+msgid "Navajo"
+msgstr ""
+
+#: src/translations.h:75
+msgid "Norse"
+msgstr ""
+
+#: src/translations.h:76
+msgid "Polynesian"
+msgstr "Người Pô-li-nê-di"
+
+#: src/translations.h:77
+msgid "Western"
+msgstr "Phương Tây"
+
+#: src/translations.h:78
+msgid "Tupi-Guarani"
+msgstr ""
+
+#: src/ui_dateTimeDialogGui.h:287 src/ui_helpDialogGui.h:186
+#: src/ui_locationDialogGui.h:288 src/ui_viewDialog.h:964
+#: src/ui_configurationDialog.h:457
+msgid "Form"
+msgstr ""
+
+#: src/ui_dateTimeDialogGui.h:290 src/ui_dateTimeDialogGui.h:291
+msgid "/"
+msgstr ""
+
+#: src/ui_dateTimeDialogGui.h:292 src/ui_dateTimeDialogGui.h:293
+msgid ":"
+msgstr ""
+
+#: src/ui_helpDialogGui.h:187 src/ui_helpDialogGui.h:189
+msgid "Help"
+msgstr "Trợ giúp"
+
+#: src/ui_helpDialogGui.h:190
+msgid "About"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:289
+msgid "Location"
+msgstr "Địa điểm"
+
+#: src/ui_locationDialogGui.h:292
+msgid "Search:"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:294
+msgid "Current location information"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:295
+msgid "Name/City:"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:296
+msgid "Longitude:"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:299 src/ui_locationDialogGui.h:306
+msgid ""
+"You can enter values in decimal degrees, or using dms format, for example: "
+"+1d 12m 8s"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:302
+msgid "Country:"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:303
+msgid "Latitude:"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:309
+msgid "Planet:"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:310
+msgid "Altitude:"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:313
+msgid "Enter the altitude in meter"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:316
+msgid " m"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:317
+msgid "Add to list"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:318
+msgid "Delete"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:319
+msgid "Use as default"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:199 src/ui_searchDialogGui.h:200
+msgid "Find Object"
+msgstr ""
+
+#: src/ui_viewDialog.h:965
+msgid "View"
+msgstr ""
+
+#: src/ui_viewDialog.h:967
+msgid "Planets and satellites"
+msgstr ""
+
+#: src/ui_viewDialog.h:968
+msgid "Show planets"
+msgstr ""
+
+#: src/ui_viewDialog.h:969
+msgid "Show planet markers"
+msgstr ""
+
+#: src/ui_viewDialog.h:970
+msgid "Show planet orbits"
+msgstr ""
+
+#: src/ui_viewDialog.h:971
+msgid "Simulate light speed"
+msgstr ""
+
+#: src/ui_viewDialog.h:972
+msgid "Scale Moon"
+msgstr ""
+
+#: src/ui_viewDialog.h:974
+msgid "Absolute scale:"
+msgstr ""
+
+#: src/ui_viewDialog.h:975
+msgid "Relative scale:"
+msgstr ""
+
+#: src/ui_viewDialog.h:976
+msgid "Twinkle:"
+msgstr ""
+
+#: src/ui_viewDialog.h:979
+msgid "Dim faint stars when a very bright object is visible"
+msgstr ""
+
+#: src/ui_viewDialog.h:982
+msgid "Dynamic eye adaptation"
+msgstr ""
+
+#: src/ui_viewDialog.h:984
+msgid "Show atmosphere"
+msgstr ""
+
+#: src/ui_viewDialog.h:985
+msgid "Light pollution: "
+msgstr ""
+
+#: src/ui_viewDialog.h:986
+msgid "Labels and Markers"
+msgstr ""
+
+#: src/ui_viewDialog.h:989
+msgid "Planets"
+msgstr "Hành tinh"
+
+#: src/ui_viewDialog.h:990
+msgid "Shooting Stars"
+msgstr ""
+
+#: src/ui_viewDialog.h:991
+msgid "Hourly zenith rate:"
+msgstr ""
+
+#: src/ui_viewDialog.h:992
+msgid "0"
+msgstr ""
+
+#: src/ui_viewDialog.h:993
+msgid "10"
+msgstr ""
+
+#: src/ui_viewDialog.h:994
+msgid "80"
+msgstr ""
+
+#: src/ui_viewDialog.h:995
+msgid "10000"
+msgstr ""
+
+#: src/ui_viewDialog.h:996
+msgid "144000"
+msgstr ""
+
+#: src/ui_viewDialog.h:998
+msgid "Sky"
+msgstr ""
+
+#: src/ui_viewDialog.h:999
+msgid "Celestial Sphere"
+msgstr ""
+
+#: src/ui_viewDialog.h:1007
+msgid "Constellations"
+msgstr ""
+
+#: src/ui_viewDialog.h:1008
+msgid "Show lines"
+msgstr ""
+
+#: src/ui_viewDialog.h:1009
+msgid "Show labels"
+msgstr ""
+
+#: src/ui_viewDialog.h:1010
+msgid "Show boundaries"
+msgstr ""
+
+#: src/ui_viewDialog.h:1011
+msgid "Show art"
+msgstr ""
+
+#: src/ui_viewDialog.h:1012
+msgid "Art brightness: "
+msgstr ""
+
+#: src/ui_viewDialog.h:1013
+msgid "Projection"
+msgstr ""
+
+#: src/ui_viewDialog.h:1014
+msgid "Markings"
+msgstr ""
+
+#: src/ui_viewDialog.h:1015 src/ui_viewDialog.h:1021
+msgid "Options"
+msgstr ""
+
+#: src/ui_viewDialog.h:1016
+msgid "Show ground"
+msgstr ""
+
+#: src/ui_viewDialog.h:1017
+msgid "Show fog"
+msgstr ""
+
+#: src/ui_viewDialog.h:1018
+msgid "Use associated planet and position"
+msgstr ""
+
+#: src/ui_viewDialog.h:1019
+msgid "Use this landscape as default"
+msgstr ""
+
+#: src/ui_viewDialog.h:1020
+msgid "Landscape"
+msgstr ""
+
+#: src/ui_viewDialog.h:1022
+msgid "Use associated language for sky labeling"
+msgstr ""
+
+#: src/ui_viewDialog.h:1023
+msgid "Use this sky culture as default"
+msgstr ""
+
+#: src/ui_viewDialog.h:1024
+msgid "Starlore"
+msgstr ""
+
+#: src/ui_configurationDialog.h:458
+msgid "Configuration"
+msgstr "Cấu hình"
+
+#: src/ui_configurationDialog.h:470
+msgid "Program language"
+msgstr ""
+
+#: src/ui_configurationDialog.h:471
+msgid "Selected object information"
+msgstr ""
+
+#: src/ui_configurationDialog.h:474
+msgid "Display all of the information which is available"
+msgstr ""
+
+#: src/ui_configurationDialog.h:477
+msgid "All availalable"
+msgstr ""
+
+#: src/ui_configurationDialog.h:480
+msgid "Display only abbreviated information"
+msgstr ""
+
+#: src/ui_configurationDialog.h:483
+msgid "Short"
+msgstr ""
+
+#: src/ui_configurationDialog.h:484
+msgid "None"
+msgstr ""
+
+#: src/ui_configurationDialog.h:485
+msgid "Default options"
+msgstr ""
+
+#: src/ui_configurationDialog.h:486
+msgid "Save current options as default"
+msgstr ""
+
+#: src/ui_configurationDialog.h:487
+msgid ""
+"Save all the current options including the current FOV and direction of view "
+"for use at next startup."
+msgstr ""
+
+#: src/ui_configurationDialog.h:488
+msgid "Startup FOV: XX"
+msgstr ""
+
+#: src/ui_configurationDialog.h:489
+msgid "Startup direction of view: xxxx"
+msgstr ""
+
+#: src/ui_configurationDialog.h:490
+msgid "Main"
+msgstr ""
+
+#: src/ui_configurationDialog.h:491
+msgid "Control"
+msgstr ""
+
+#: src/ui_configurationDialog.h:494
+msgid "Allow keyboard to pan and zoom"
+msgstr ""
+
+#: src/ui_configurationDialog.h:497
+msgid "Enable keyboard navigation"
+msgstr ""
+
+#: src/ui_configurationDialog.h:500
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:503
+msgid "Enable mouse navigation"
+msgstr ""
+
+#: src/ui_configurationDialog.h:504
+msgid "Startup date and time"
+msgstr ""
+
+#: src/ui_configurationDialog.h:507
+msgid "Starts Stellarium at system clock date and time"
+msgstr ""
+
+#: src/ui_configurationDialog.h:510
+msgid "System date and time"
+msgstr ""
+
+#: src/ui_configurationDialog.h:513
+msgid ""
+"Sets the simulation time to the next instance of this time of day when "
+"Stellarium starts"
+msgstr ""
+
+#: src/ui_configurationDialog.h:516
+msgid "System date at:"
+msgstr ""
+
+#: src/ui_configurationDialog.h:519
+msgid "Use a specific date and time when Stellarium starts up"
+msgstr ""
+
+#: src/ui_configurationDialog.h:522
+msgid "Other:"
+msgstr ""
+
+#: src/ui_configurationDialog.h:523
+msgid "Navigation"
+msgstr ""
+
+#: src/ui_configurationDialog.h:524
+msgid "Amateur astronomer options"
+msgstr ""
+
+#: src/ui_configurationDialog.h:527
+msgid "Toggle vertical and horizontal image flip buttons."
+msgstr ""
+
+#: src/ui_configurationDialog.h:530
+msgid "Show flip buttons"
+msgstr ""
+
+#: src/ui_configurationDialog.h:531
+msgid "Planetarium options"
+msgstr ""
+
+#: src/ui_configurationDialog.h:534
+msgid ""
+"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
+"mirror for low-cost planetarium systems."
+msgstr ""
+
+#: src/ui_configurationDialog.h:537
+msgid "Spheric mirror distortion"
+msgstr ""
+
+#: src/ui_configurationDialog.h:540
+msgid "Align labels with the horizon"
+msgstr ""
+
+#: src/ui_configurationDialog.h:543
+msgid "Gravity labels"
+msgstr ""
+
+#: src/ui_configurationDialog.h:546
+msgid ""
+"When enabled, the \"auto zoom out\" key will also set the initial viewing "
+"direction"
+msgstr ""
+
+#: src/ui_configurationDialog.h:549
+msgid "Auto zoom out returns to initial direction of view"
+msgstr ""
+
+#: src/ui_configurationDialog.h:552
+msgid "Mask out everything outside a central circle in the main view"
+msgstr ""
+
+#: src/ui_configurationDialog.h:555
+msgid "Disc viewport"
+msgstr ""
+
+#: src/ui_configurationDialog.h:556
+msgid "Other"
+msgstr ""
+
+#: src/ui_configurationDialog.h:559
+msgid "Hides the mouse cursor when inactive"
+msgstr ""
+
+#: src/ui_configurationDialog.h:562
+msgid "Mouse cursor timeout (seconds):"
+msgstr ""
+
+#: src/ui_configurationDialog.h:563
+msgid "Tools"
+msgstr ""
