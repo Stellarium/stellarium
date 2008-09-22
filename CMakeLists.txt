@@ -45,12 +45,9 @@ CHECK_INCLUDE_FILES( byteswap.h HAVE_BYTESWAP_H)
 ########### Check functions ###########
 INCLUDE(CheckFunctionExists)
 #toupper strcasecmp strdup putenv setlocale tzset strchr pow10 timegm
-CHECK_FUNCTION_EXISTS(timegm HAVE_TIMEGM)
-CHECK_FUNCTION_EXISTS(mktime HAVE_MKTIME)
 CHECK_FUNCTION_EXISTS(tzset HAVE_TZSET)
 CHECK_FUNCTION_EXISTS(pow10 HAVE_POW10)
 CHECK_FUNCTION_EXISTS(setlocale HAVE_SETLOCALE)
-CHECK_FUNCTION_EXISTS(mktime HAVE_MKTIME)
 CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
 
 ########### Others ###########
