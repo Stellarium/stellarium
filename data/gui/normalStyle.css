@@ -673,6 +673,13 @@ QTreeView {
 	font-size: 12px;
 }
 
+QListView {
+	background-color: rgb(76, 77, 80);
+	alternate-background-color: rgb(76, 80, 87);
+	color: rgb(143, 143, 143);
+	font-size: 12px;
+}
+
 QDateEdit {
 	padding-right: 20px; /* make room for the arrows */
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69), stop: 1 rgb(40, 40, 40));
