@@ -133,6 +133,21 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	}
 	qDebug() << "Config file is: " << configFile;
 	
+	// implement "restore default settings" feature.
+	bool restoreDefaults = false;
+	if (stelFileMgr->exists(configFile))
+	{
+		QSettings* tmpSettings = new QSettings(configFile, StelIniFormat);
+		restoreDefaults = tmpSettings->value("main/restore_defaults", false).toBool();
+		delete tmpSettings;
+	}
+
+	if (restoreDefaults)
+	{
+		QFile(configFile).remove();
+		qDebug() << "DELETING old config.ini";
+	}
+
 	if (!stelFileMgr->exists(configFile))
 	{
 		qDebug() << "config file " << configFile << " does not exist - copying the default file.";
@@ -436,17 +451,6 @@ void StelApp::parseCLIArgsPreConfig(void)
 		qWarning() << "WARNING: while looking for --config-file option: " << e.what() << ". Using \"config.ini\"";
 		setConfigFile("config.ini", restoreDefaultConfigFile);		
 	}
-
-	try
-	{
-		QString newShotDir = argsGetOptionWithArg<QString>(argList, "", "--screenshot-dir", "");
-		if (!newShotDir.isEmpty() && newShotDir!="")
-			stelFileMgr->setScreenshotDir(newShotDir);
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "WARNING: problem while setting screenshot directory for --screenshot-dir option: " << e.what();
-	}
 }
 
 void StelApp::parseCLIArgsPostConfig()
@@ -455,7 +459,7 @@ void StelApp::parseCLIArgsPostConfig()
 	// We should catch exceptions from argsGetOptionWithArg...
 	int fullScreen, altitude;
 	float fov;
-	QString landscapeId, homePlanet, longitude, latitude, skyDate, skyTime, projectionType;
+	QString landscapeId, homePlanet, longitude, latitude, skyDate, skyTime, projectionType, screenshotDir;
 	
 	try
 	{
@@ -469,7 +473,7 @@ void StelApp::parseCLIArgsPostConfig()
 		skyTime = argsGetOptionWithArg<QString>(argList, "", "--sky-time", "");
 		fov = argsGetOptionWithArg<float>(argList, "", "--fov", -1.0);
 		projectionType = argsGetOptionWithArg<QString>(argList, "", "--projection-type", "");
-
+		screenshotDir = argsGetOptionWithArg<QString>(argList, "", "--screenshot-dir", "");
 	}
 	catch (std::exception& e)
 	{
@@ -544,6 +548,26 @@ void StelApp::parseCLIArgsPostConfig()
 	if (fov > 0.0) confSettings->setValue("navigation/init_fov", fov);
 	
 	if (projectionType != "") confSettings->setValue("projection/type", projectionType);
+
+	if (screenshotDir!="")
+	{
+		try
+		{
+			QString newShotDir = argsGetOptionWithArg<QString>(argList, "", "--screenshot-dir", "");
+			if (!newShotDir.isEmpty() && newShotDir!="")
+				stelFileMgr->setScreenshotDir(newShotDir);
+		}
+		catch (std::runtime_error& e)
+		{
+			qWarning() << "WARNING: problem while setting screenshot directory for --screenshot-dir option: " << e.what();
+		}
+	}
+	else
+	{
+		QString confScreenshotDir = confSettings->value("main/screenshot_dir", "").toString();
+		if (confScreenshotDir!="")
+			stelFileMgr->setScreenshotDir(confScreenshotDir);
+	}
 }
 
 void StelApp::update(double deltaTime)
