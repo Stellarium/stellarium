@@ -175,7 +175,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->mouseTimeoutSpinBox, SIGNAL(valueChanged(double)), this, SLOT(cursorTimeOutChanged(double)));
 	
 	connect(ui->setViewingOptionAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewOptions()));
-	//connect(ui->resetAlloptionsPushButton, SIGNAL(clicked()), this, SLOT(resetAllOptions()));
+	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(setDefaultViewOptions()));
 	
 	updateConfigLabels();
 }
@@ -366,8 +366,19 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		conf->setValue("video/screen_w", StelMainWindow::getInstance().size().width());
 		conf->setValue("video/screen_h", StelMainWindow::getInstance().size().height());
 	}
+
+	// clear the restore defaults flag if it is set.
+	conf->setValue("main/restore_defaults", false);
 	
 	updateConfigLabels();
+}
+
+void ConfigurationDialog::setDefaultViewOptions()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	conf->setValue("main/restore_defaults", true);
 }
 
 void ConfigurationDialog::updateConfigLabels()
