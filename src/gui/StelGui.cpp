@@ -116,6 +116,7 @@ StelGui::StelGui()
 
 	flipHoriz = NULL;
 	flipVert = NULL;
+	btShowNebulaeBackground = NULL;
 }
 
 StelGui::~StelGui()
@@ -160,7 +161,7 @@ void StelGui::init()
 	addGuiActions("actionShow_Fog", N_("Fog"), "F", group, true, false, "landscape/flag_fog");
 	
 	addGuiActions("actionShow_Nebulas", N_("Nebulas"), "N", group, true, false, "astro/flag_nebula_name");
-//	addGuiActions("actionShow_DSS", N_("DSS"), "", group, true, false);
+	addGuiActions("actionShow_DSS", N_("Nebulas background images"), "", group, true, false);
 	addGuiActions("actionShow_Stars", N_("Stars"), "S", group, true, false, "astro/flag_stars");
 	addGuiActions("actionShow_Planets_Hints", N_("Planets hints"), "P", group, true, false, "astro/flag_planets_hints");
 	
@@ -256,10 +257,10 @@ void StelGui::init()
 	QObject::connect(getGuiActions("actionShow_Nebulas"), SIGNAL(toggled(bool)), module, SLOT(setFlagHints(bool)));
 	getGuiActions("actionShow_Nebulas")->setChecked(nmgr->getFlagHints());
 	
-// 	module = GETSTELMODULE("SkyBackground");
-// 	SkyBackground* bmgr = (SkyBackground*)module;
-// 	QObject::connect(getGuiActions("actionShow_DSS"), SIGNAL(toggled(bool)), module, SLOT(setFlagShow(bool)));
-// 	getGuiActions("actionShow_DSS")->setChecked(bmgr->getFlagShow());
+	module = GETSTELMODULE("SkyBackground");
+	SkyBackground* bmgr = (SkyBackground*)module;
+	QObject::connect(getGuiActions("actionShow_DSS"), SIGNAL(toggled(bool)), module, SLOT(setFlagShow(bool)));
+	getGuiActions("actionShow_DSS")->setChecked(bmgr->getFlagShow());
 	
 	module = (QObject*)StelApp::getInstance().getCore()->getNavigation();
 	QObject::connect(getGuiActions("actionIncrease_Time_Speed"), SIGNAL(triggered()), module, SLOT(increaseTimeSpeed()));
@@ -437,11 +438,6 @@ void StelGui::init()
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Planets_Hints"));
 	buttonBar->addButton(b, "040-nebulaeGroup");
 	
-// 	pxmapOn = QPixmap(":/graphicGui/gui/btDSS-on.png");
-// 	pxmapOff = QPixmap(":/graphicGui/gui/btDSS-off.png");
-// 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_DSS"));
-// 	buttonBar->addButton(b, "040-nebulaeGroup");
-	
 	pxmapOn = QPixmap(":/graphicGui/gui/btEquatorialMount-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btEquatorialMount-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionSwitch_Equatorial_Mount"));
@@ -529,8 +525,9 @@ void StelGui::init()
 
 	// add the flip buttons if requested in the config
 	QSettings* conf = StelApp::getInstance().getSettings();
-        Q_ASSERT(conf);
+	Q_ASSERT(conf);
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
+	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());
 }
 
 //! Reload the current Qt Style Sheet (Debug only)
@@ -847,3 +844,23 @@ void StelGui::setFlagShowFlipButtons(bool b)
 	flagShowFlipButtons = b;
 }
 
+
+// Define whether the button toggling nebulae backround images should be visible
+void StelGui::setFlagShowNebulaBackgroundButton(bool b)
+{
+	if (b==true)
+	{
+		if (btShowNebulaeBackground==NULL)
+		{
+			// Create the nebulae background button
+			QPixmap pxmapGlow32x32(":/graphicGui/gui/glow32x32.png");
+			btShowNebulaeBackground = new StelButton(NULL, QPixmap(":/graphicGui/gui/btDSS-on.png"), QPixmap(":/graphicGui/gui/btDSS-off.png"), pxmapGlow32x32, getGuiActions("actionShow_DSS"));
+		}
+		getButtonBar()->addButton(btShowNebulaeBackground, "040-nebulaeGroup");
+	}
+	else
+	{
+		Q_ASSERT(getButtonBar()->hideButton("actionShow_DSS")==btShowNebulaeBackground);
+	}
+	flagShowNebulaBackgroundButton = b;
+}
