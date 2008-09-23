@@ -102,6 +102,12 @@ SET(stellarium_lib_SRCS
 	stelutils/vecmath.h
 	stelutils/QtJsonParser.hpp
 	stelutils/QtJsonParser.cpp
+	stelutils/kfilter/kfilterdev.h
+	stelutils/kfilter/kfilterdev.cpp
+	stelutils/kfilter/kfilterbase.h
+	stelutils/kfilter/kfilterbase.cpp
+	stelutils/kfilter/kgzipfilter.h
+	stelutils/kfilter/kgzipfilter.cpp
 	
 	planetsephems/calc_interpolated_elements.c
 	planetsephems/calc_interpolated_elements.h
