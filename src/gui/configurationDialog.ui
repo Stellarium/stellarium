@@ -159,14 +159,6 @@
          <enum>Qt::ElideNone</enum>
         </property>
         <widget class="QWidget" name="tabMain" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>419</width>
-           <height>443</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Main</string>
          </attribute>
@@ -295,17 +287,28 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QPushButton" name="setViewingOptionAsDefaultPushButton" >
-               <property name="minimumSize" >
-                <size>
-                 <width>0</width>
-                 <height>24</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>Save current options as default</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_3" >
+               <item>
+                <widget class="QPushButton" name="setViewingOptionAsDefaultPushButton" >
+                 <property name="minimumSize" >
+                  <size>
+                   <width>0</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text" >
+                  <string>Save settings</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="restoreDefaultsButton" >
+                 <property name="text" >
+                  <string>Restore defaults</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item>
               <widget class="QLabel" name="saveDefaultOptionsLabel" >
@@ -316,7 +319,7 @@
                 </size>
                </property>
                <property name="text" >
-                <string>Save all the current options including the current FOV and direction of view for use at next startup.</string>
+                <string>Restoring default settings requires a restart of Stellarium. Saving all the current options includes the current FOV and direction of view for use at next startup.</string>
                </property>
                <property name="scaledContents" >
                 <bool>false</bool>
@@ -387,14 +390,6 @@
          </layout>
         </widget>
         <widget class="QWidget" name="tabInterface" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>427</width>
-           <height>434</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Navigation</string>
          </attribute>
@@ -597,14 +592,6 @@
          </layout>
         </widget>
         <widget class="QWidget" name="tabTools" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>427</width>
-           <height>434</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Tools</string>
          </attribute>
