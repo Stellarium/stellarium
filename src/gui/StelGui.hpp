@@ -110,10 +110,18 @@ public:
 	//! Transform the pixmap so that it look red for night vision mode
 	static QPixmap makeRed(const QPixmap& p);
 
-	bool getFlagShowFlipButtons(void) {return flagShowFlipButtons;}
+	//! Get whether the buttons toggling image flip are visible
+	bool getFlagShowFlipButtons() {return flagShowFlipButtons;}
+	
+	//! Get whether the button toggling nebulae background is visible
+	bool getFlagShowNebulaBackgroundButton() {return flagShowNebulaBackgroundButton;}
 
 public slots:
+	//! Define whether the buttons toggling image flip should be visible
 	void setFlagShowFlipButtons(bool b);
+	
+	//! Define whether the button toggling nebulae background should be visible
+	void setFlagShowNebulaBackgroundButton(bool b);
 	
 private slots:
 	//! Update the position of the button bars in the main window
@@ -171,7 +179,9 @@ private:
 	bool flagShowFlipButtons;
 	class StelButton* flipVert;
 	class StelButton* flipHoriz;
-
+	
+	bool flagShowNebulaBackgroundButton;
+	class StelButton* btShowNebulaeBackground;
 };
 
 #endif // _STELGUI_HPP_

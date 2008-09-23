@@ -253,7 +253,7 @@ void LandscapeMgr::draw(StelCore* core)
 void LandscapeMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
+	Q_ASSERT(conf);
 
 	atmosphere = new Atmosphere();
 	landscape = new LandscapeOldStyle();

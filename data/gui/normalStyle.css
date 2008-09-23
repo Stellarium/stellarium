@@ -642,42 +642,28 @@ QProgressBar::chunk {
 /************************************** The following are used for VirGO ***************************************/
 
 QMainWindow {
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(86, 87, 90), stop: 1 rgb(48, 49, 52));
+	background: rgb(31, 33, 36);
 }
 
 QMainWindow::separator {
-	border: 1px solid rgb(140, 140, 140);
-	background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 rgb(129, 129, 129), stop: 0.5 rgb(112, 112, 112), stop: 0.6 rgb(99, 99, 99), stop:1 rgb(133, 133, 133));
-}
-
-QMainWindow::separator:horizontal {
-	border-left: 0px;
+	border: 0px;
 }
 
 QMainWindow::separator:hover {
 	background: rgb(106, 107, 110);
 }
 
-QMainWindow::separator:horizontal:hover {
-	border-left: 0px;
-	background: rgb(106, 107, 110);
-}
-
 QDockWidget {
-	color: rgb(222, 222, 222);
-	font-size: 12px;
-	border: 1px solid rgb(8, 31, 37);
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(86, 87, 90), stop: 1 rgb(48, 49, 52));
-/*	titlebar-close-icon: url(close.png);
-	titlebar-normal-icon: url(undock.png);*/
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(41, 47, 50), stop:1 rgb(31, 33, 36));
+	color: rgb(194, 194, 195);	/* Dock widget title text color */
+	font: bold;
+	border: 0px;
 }
 
 QDockWidget::title {
-	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(129, 129, 129), stop: 0.5 rgb(112, 112, 112), stop: 0.6 rgb(99, 99, 99), stop:1 rgb(133, 133, 133));
-	color: rgb(255, 255, 255);
-	font-size: 12px;
-	padding-left: 4px;
-	border: 1px solid rgb(140, 140, 140);
+	margin-left: 24px;
+	font-size: 14px;
+	background: transparent;
 }
 	
 QTreeView {
