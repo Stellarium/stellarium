@@ -43,7 +43,10 @@ void LocationMgr::loadCities(const QString& fileName, bool isUserLocation)
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "ERROR: Failed to locate location data file: " << fileName << e.what();
+		// Note it is quite normal to nor have a user locations file (e.g. first run)
+		if (!isUserLocation)
+			qWarning() << "WARNING: Failed to locate location data file: " << fileName << e.what();
+
 		return;
 	}
 
@@ -128,7 +131,7 @@ bool LocationMgr::saveUserLocation(const Location& loc)
 	QString cityDataPath;
 	try
 	{
-		cityDataPath = StelApp::getInstance().getFileMgr().findFile("data/user_locations.txt", StelFileMgr::Writable);
+		cityDataPath = StelApp::getInstance().getFileMgr().findFile("data/user_locations.txt", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
 	}
 	catch (std::runtime_error& e)
 	{

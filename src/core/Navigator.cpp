@@ -26,6 +26,8 @@
 #include "StelObjectMgr.hpp"
 #include "StelCore.hpp"
 #include "LocationMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "MovementMgr.hpp"
 
 #include <QSettings>
 #include <QStringList>
@@ -182,6 +184,9 @@ void Navigator::moveObserverToSelected(void)
 			moveObserverTo(loc);
 		}
 	}
+	MovementMgr* mmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
+	Q_ASSERT(mmgr);
+	mmgr->setFlagTracking(false);
 }
 
 // Get the informations on the current location
