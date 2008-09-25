@@ -828,6 +828,24 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 			break;
 	}
 
+	// Add exact Hp catalogue numbers
+	QRegExp hpRx("^HP\\s*(\\d+)\\s*$");
+	hpRx.setCaseSensitivity(Qt::CaseInsensitive);
+	if (hpRx.exactMatch(objw))
+	{
+		bool ok;
+		int hpNum = hpRx.capturedTexts().at(1).toInt(&ok);
+		if (ok)
+		{
+			StelObjectP s = searchHP(hpNum);
+			if (s && maxNbItem>0)
+			{
+				result << QString("HP%1").arg(hpNum);
+				maxNbItem--;
+			}
+		}
+	}
+
 	result.sort();
 	return result;
 }
