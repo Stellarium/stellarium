@@ -243,8 +243,10 @@ void TelescopeMgr::init()
 		char name[2] = {'0'+i,'\0'};
 		const QString telescope_name(name);
 		const QString url = conf->value("telescopes/"+telescope_name,"").toString();
+		qWarning() << telescope_name;
 		if (!url.isEmpty()) 
 		{
+			qWarning() << url;
 			Telescope *t = Telescope::create(url);
 			if (t) 
 			{

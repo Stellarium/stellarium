@@ -55,7 +55,6 @@
 #include "StelStyle.hpp"
 
 #include "ZoneArray.hpp"
-#include "StringArray.hpp"
 
 #include <list>
 
@@ -64,29 +63,45 @@
 
 using namespace BigStarCatalogExtension;
 
-static StringArray spectral_array;
-static StringArray component_array;
+static QStringList spectral_array;
+static QStringList component_array;
 
-QString StarMgr::convertToSpectralType(int index) {
-  if (index < 0 || index >= spectral_array.getSize()) {
-    qDebug() << "convertToSpectralType: bad index: " << index
-             << ", max: " << spectral_array.getSize();
-    return "";
-  }
-  return spectral_array[index];
+QStringList initStringListFromFile(const QString& file_name)
+{
+	QStringList list;
+	QFile f(file_name);
+	if (f.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		while (!f.atEnd())
+		{
+			QString s = QString::fromUtf8(f.readLine());
+			s.chop(1);
+			list << s;
+		}
+		f.close();
+	}
+	return list;
 }
 
-QString StarMgr::convertToComponentIds(int index) {
-  if (index < 0 || index >= component_array.getSize()) {
-    qDebug() << "convertToComponentIds: bad index: " << index
-             << ", max: " << component_array.getSize();
-    return "";
-  }
-  return component_array[index];
+QString StarMgr::convertToSpectralType(int index)
+{
+	if (index < 0 || index >= spectral_array.size())
+	{
+		qDebug() << "convertToSpectralType: bad index: " << index << ", max: " << spectral_array.size();
+    	return "";
+	}
+	return spectral_array.at(index);
 }
 
-
-
+QString StarMgr::convertToComponentIds(int index)
+{
+	if (index < 0 || index >= component_array.size())
+	{
+		qDebug() << "convertToComponentIds: bad index: " << index << ", max: " << component_array.size();
+		return "";
+	}
+	return component_array.at(index);
+}
 
 
 void StarMgr::initTriangle(int lev,int index,
@@ -297,7 +312,7 @@ void StarMgr::loadData()
 	{
 		try
 		{
-			spectral_array.initFromFile(StelApp::getInstance().getFileMgr().findFile("stars/default/" + cat_hip_sp_file_name));
+			spectral_array = initStringListFromFile(StelApp::getInstance().getFileMgr().findFile("stars/default/" + cat_hip_sp_file_name));
 		}
 		catch (std::runtime_error& e)
 		{
@@ -316,7 +331,7 @@ void StarMgr::loadData()
 	{
 		try
 		{
-			component_array.initFromFile(StelApp::getInstance().getFileMgr()
+			component_array = initStringListFromFile(StelApp::getInstance().getFileMgr()
 			        .findFile("stars/default/" + cat_hip_cids_file_name));
 		}
 		catch (std::runtime_error& e)
