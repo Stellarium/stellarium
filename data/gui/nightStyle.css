@@ -33,6 +33,10 @@ QFrame#viewContent {
 	background: rgb(0, 0, 0);
 }
 
+QFrame#bottomResizeFrame {
+background: rgb(35, 0, 0);
+}
+
 /*QWidget QFrame {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(61, 0, 0), stop: 1 rgb(35, 0, 0));
 	border: none;
@@ -41,26 +45,11 @@ QFrame#viewContent {
 
 /*BarFrame:active {
 	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(55, 0, 0), stop:1 rgb(39, 0, 0));
-	border: rgb(153, 0, 0);
+	border: rgb(255, 240, 0);
 }*/
 
-QFrame#LocationBar, QFrame#DateTimeBar, QFrame#SearchBar {
+QFrame#LocationBar, QFrame#DateTimeBar, QFrame#SearchBar, QFrame#TimeBar, QFrame#HelpBar {
 	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(32, 0, 0), stop:1 rgb(23, 0, 0));
-}
-
-/***********************************************************************************************************/
-
-.QDateTimeEdit::drop-down {
-	width: 20px;
-	border-top: solid 1px rgb(0, 0, 0);	
-}
-
-.QDateTimeEdit::down-arrow {
-	width: 20px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
-	height: 19px;
-	border: solid 1px rgb(0, 0, 0);
-	image: url(:/graphicGui/gui/nv_spindown.png);
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(48, 0, 0), stop: 1 rgb(28, 0, 0));
 }
 
 /*********************************************dateTimedialog*********************************************************/
@@ -144,6 +133,10 @@ QTextBrowser {
 	color: rgb(3, 0, 0); /* (133, 0, 0) */
 }
 
+QTextBrowser#helpBrowser, QTextBrowser#aboutBrowser {
+	margin-left: 11px;
+}
+
 QLineEdit {
 	border: 1px solid rgb(0, 0, 0);
 	border-radius: 0px;
@@ -219,12 +212,13 @@ QPushButton:hover#closeStelWindow {
 /**********************************************LocationDialog*******************************************************/
 
 QLineEdit#citySearchLineEdit {
-	margin: 0px 0px 2px 0px;
+	margin: 0px 0px 4px 0px;
 	padding: 4px;
-	padding-left: 40px;
+	padding-left: 32px;
 	background-image: url(:/graphicGui/gui/searchBoxBackground.png);
 	background-repeat: none;
 	background-position: center left;
+	border: none;
 }
 
 /********************************************** QScrollBar:vertical ************************************************/
@@ -470,7 +464,7 @@ QListView::item:selected {
 }
 
 QListView::item:selected:active {
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(126, 0, 0), stop: 1 rgb(98, 0, 0));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(81, 0, 0), stop: 1 rgb(103, 0, 0));
 }
 
 QListView::item:hover {
@@ -503,6 +497,11 @@ QCheckBox::indicator:checked {
 QCheckBox::indicator:unchecked {
 	image: url(:/graphicGui/gui/nv_checkbox-unchecked.png);
 }
+
+/*QCheckBox:disabled { 
+	color: rgb(210, 0, 0);
+	font-weight: 500;
+}*/
 
 QRadioButton {
 	background: none;
@@ -556,14 +555,15 @@ AngleSpinBox::down-button {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(48, 0, 0), stop: 1 rgb(28, 0, 0));
 }*/
 
-QSpinBox,QTimeEdit,QDateTimeEdit,QDoubleSpinBox,QComboBox,AngleSpinBox {
+QSpinBox, QTimeEdit, QDateTimeEdit, QDoubleSpinBox, QComboBox, AngleSpinBox {
 	padding-right: 0px;
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(155, 0, 0), stop: 1 rgba(95, 0, 0, 99%));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(126, 0, 0), stop: 1 rgb(66, 0, 0));
 	border: 1px solid rgb(0, 0, 0);
 	color: rgb(22, 0, 0);
+	min-height: 22px;
 }
 
-QSpinBox::up-button,QTimeEdit::up-button,QDoubleSpinBox::up-button,AngleSpinBox::up-button {
+QSpinBox::up-button, QTimeEdit::up-button, QDoubleSpinBox::up-button, AngleSpinBox::up-button {
 	subcontrol-origin: border;
 	subcontrol-position: top right;
 	width: 20px; 
@@ -574,7 +574,7 @@ QSpinBox::up-button,QTimeEdit::up-button,QDoubleSpinBox::up-button,AngleSpinBox:
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 0, 0), stop: 1 rgb(52, 0, 0));
 }
 
-QSpinBox::down-button,QTimeEdit::down-button,QDoubleSpinBox::down-button,AngleSpinBox::down-button {
+QSpinBox::down-button, QTimeEdit::down-button, QDoubleSpinBox::down-button, AngleSpinBox::down-button {
 	subcontrol-origin: border;
 	subcontrol-position: bottom right;
 	width: 20px; 
@@ -585,28 +585,42 @@ QSpinBox::down-button,QTimeEdit::down-button,QDoubleSpinBox::down-button,AngleSp
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(48, 0, 0), stop: 1 rgb(28, 0, 0));
 }
 
-QComboBox::drop-down {
-	width: 20px;
-	border-top: 0px;
-	border: 1px solid rgb(0, 0, 0);
+QSpinBox::down-button:pressed, QTimeEdit::down-button:pressed, QDoubleSpinBox::down-button:pressed, AngleSpinBox::down-button:pressed {
+	image: url(:/graphicGui/gui/spindown-pressed.png);
 }
 
-QComboBox::down-arrow {
+QSpinBox::up-button:pressed, QTimeEdit::up-button:pressed, QDoubleSpinBox::up-button:pressed, AngleSpinBox::up-button:pressed {
+	image: url(:/graphicGui/gui/spinup-pressed.png);
+}
+
+QComboBox::drop-down, .QDateTimeEdit::drop-down {
+	subcontrol-origin: padding;
+	subcontrol-position: center right;
+	width: 20px;
+	border: none;
+}
+
+QComboBox::down-arrow, .QDateTimeEdit::down-arrow {
 	width: 20px; 
-	height: 20px;
-	border: 1px solid rgb(0, 0, 0);	
-	border-left: 2px solid rgba(0, 0, 0, 0%);
+	height: 22px;
 	image: url(:/graphicGui/gui/nv_spindown.png);
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(48, 0, 0), stop: 1 rgb(28, 0, 0));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 0, 0), stop: 1 rgb(28, 0, 0));
+}
+
+QComboBox::down-arrow:on, .QDateTimeEdit::down-arrow:pressed {
+	image: url(:/graphicGui/gui/spindown-pressed.png);
+}
+
+QComboBox QAbstractItemView {
+	color: rgb(22, 0, 0);
+	border: 1px solid rgb(0, 0, 0);
+	border-bottom: 1px solid rgb(0, 0, 0);
+	border-top: none;
+	background: rgb(66, 0, 0);
 }
 
 QComboBox {
 	padding-left: 3px;
-}
-
-QComboBox QAbstractItemView {
-	border: 2px solid rgb(51, 0, 0);
-	background: rgb(95, 0, 0);
 }
 
 QProgressBar {
@@ -627,48 +641,41 @@ QProgressBar::chunk {
 /************************************** The following are used for VirGO ***************************************/
 
 QMainWindow {
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(61, 0, 0), stop: 1 rgb(35, 0, 0));
+	background: rgb(23, 0, 0);
 }
 
 QMainWindow::separator {
-	border: 1px solid rgb(98, 0, 0);
-	background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 rgb(91, 0, 0), stop: 0.5 rgb(79, 0, 0), stop: 0.6 rgb(70, 0, 0), stop:1 rgb(94, 0, 0));
-}
-
-QMainWindow::separator:horizontal {
-	border-left: 0px;
+	border: 0px;
 }
 
 QMainWindow::separator:hover {
 	background: rgb(75, 0, 0);
 }
 
-QMainWindow::separator:horizontal:hover {
-	border-left: 0px;
-	background: rgb(75, 0, 0);
-}
-
 QDockWidget {
-	color: rgb(156, 0, 0);
-	font-size: 12px;
-	border: 1px solid rgb(17, 0, 0);
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(61, 0, 0), stop: 1 rgb(35, 0, 0));
-/*	titlebar-close-icon: url(close.png);
-	titlebar-normal-icon: url(undock.png);*/
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(32, 0, 0), stop:1 rgb(23, 0, 0));
+	color: rgb(136, 0, 0);	/* Dock widget title text color */
+	font: bold;
+	border: 0px;
 }
 
 QDockWidget::title {
-	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(91, 0, 0), stop: 0.5 rgb(79, 0, 0), stop: 0.6 rgb(70, 0, 0), stop:1 rgb(94, 0, 0));
-	color: rgb(179, 0, 0);
-	font-size: 12px;
-	padding-left: 4px;
-	border: 1px solid rgb(98, 0, 0);
+	margin-left: 24px;
+	font-size: 14px;
+	background: transparent;
 }
 	
 QTreeView {
 	background-color: rgb(54, 0, 0);
 	alternate-background-color: rgb(56, 0, 0);
-	color: rgb(101, 0, 0);
+	color: rgb(143, 143, 143);
+	font-size: 12px;
+}
+
+QListView#listViewVoResources {
+	background-color: rgb(54, 0, 0);
+	alternate-background-color: rgb(56, 0, 0);
+	color: rgb(143, 143, 143);
 	font-size: 12px;
 }
 
@@ -724,8 +731,8 @@ QMainWindow > QDialog {
 }
 
 QHeaderView::section {
-	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(68, 0, 0), stop: 0.5 rgb(56, 0, 0), stop: 0.6 rgb(47, 0, 0), stop:1 rgb(71, 0, 0));
-	color: rgb(179, 0, 0);
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(68, 0, 0), stop: 0.5 rgb(56, 0, 0),stop: 0.6 rgb(47, 0, 0), stop:1 rgb(71, 0, 0));
+	color: rgb(178, 0, 0);
 	font-size: 12px;
 	padding-left: 4px;
 	border: 1px solid rgb(76, 0, 0);
