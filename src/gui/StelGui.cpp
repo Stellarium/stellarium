@@ -838,8 +838,10 @@ void StelGui::setFlagShowFlipButtons(bool b)
 	}
 	else
 	{
-		Q_ASSERT(getButtonBar()->hideButton("actionVertical_Flip")==flipVert);
-		Q_ASSERT(getButtonBar()->hideButton("actionHorizontal_Flip")==flipHoriz);
+		bool b = getButtonBar()->hideButton("actionVertical_Flip")==flipVert;
+		Q_ASSERT(b);
+		b = getButtonBar()->hideButton("actionHorizontal_Flip")==flipHoriz;
+		Q_ASSERT(b);
 	}
 	flagShowFlipButtons = b;
 }
@@ -860,7 +862,9 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 	}
 	else
 	{
-		Q_ASSERT(getButtonBar()->hideButton("actionShow_DSS")==btShowNebulaeBackground);
+		bool b;
+		b = getButtonBar()->hideButton("actionShow_DSS")==btShowNebulaeBackground;
+		Q_ASSERT(b);
 	}
 	flagShowNebulaBackgroundButton = b;
 }

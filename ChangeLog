@@ -1,3 +1,8 @@
+0.10.1 [2008-??-??]
+Added reset all config options button.
+Added code for uncompressing gzip files (borrowed from from libkde)
+Fixed flip buttons bug.
+
 0.10.0 beta [2008-09-22]
 Global switch to Qt. Don't support SDL main application anymore.
 The whole StelApp class is managed by a QGraphicsScene, inside a QGraphicsView.
