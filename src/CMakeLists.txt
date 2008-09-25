@@ -175,8 +175,6 @@ SET(stellarium_lib_SRCS
 	modules/StarMgr.hpp
 	modules/StarWrapper.cpp
 	modules/StarWrapper.hpp
-	modules/StringArray.cpp
-	modules/StringArray.hpp
 	modules/Telescope.cpp
 	modules/Telescope.hpp
 	modules/TelescopeMgr.cpp
