@@ -20,7 +20,7 @@
 #ifndef _TELESCOPE_HPP_
 #define _TELESCOPE_HPP_
 
-#include <list>
+#include <QList>
 #include <QString>
 
 #if defined (_MSC_VER)
@@ -62,7 +62,7 @@ public:
 	virtual bool isConnected(void) const = 0;
 	virtual bool hasKnownPosition(void) const = 0;
 	void addOcular(double fov) {if (fov>=0.0) oculars.push_back(fov);}
-	const std::list<double> &getOculars(void) const {return oculars;}
+	const QList<double> &getOculars(void) const {return oculars;}
 	
 	// all TCP (and all possible other style) communication shall be done in these functions:
 	virtual void prepareSelectFds(fd_set &read_fds,fd_set &write_fds, int &fdmax) = 0;
@@ -76,7 +76,7 @@ private:
 	bool isInitialized(void) const {return true;}
 	float getSelectPriority(const Navigator *nav) const {return -10.f;}
 private:
-	std::list<double> oculars; // fov of the oculars
+	QList<double> oculars; // fov of the oculars
 };
 
 #endif // _TELESCOPE_HPP_
