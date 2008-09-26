@@ -48,14 +48,14 @@
 bool wsaOk;
 #endif
 
-void TelescopeMgr::TelescopeMap::clear(void)
+void TelescopeMgr::deleteAllTelescopes()
 {
-	for (const_iterator it(begin());it!=end();++it)
-		delete it->second;
-	std::map<int,Telescope*>::clear();
+	foreach (Telescope* t, telescope_map)
+		delete t;
+	telescope_map.clear();
 }
 
-TelescopeMgr::TelescopeMgr(void) : telescope_font(NULL)
+TelescopeMgr::TelescopeMgr() : telescope_font(NULL)
 {
 	setObjectName("TelescopeMgr");
 #ifdef WIN32
@@ -105,21 +105,21 @@ void TelescopeMgr::draw(StelCore* core)
 	telescopeTexture->bind();
 	glBlendFunc(GL_ONE,GL_ONE);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-	for (TelescopeMap::const_iterator it(telescope_map.begin()); it!=telescope_map.end();++it)
+	foreach (Telescope* tel, telescope_map)
 	{
-		if (it->second->isConnected() && it->second->hasKnownPosition())
+		if (tel->isConnected() && tel->hasKnownPosition())
 		{
 			Vec3d XY;
-			if (prj->projectCheck(it->second->getObsJ2000Pos(0),XY))
+			if (prj->projectCheck(tel->getObsJ2000Pos(0),XY))
 			{
 				if (telescopeFader.getInterstate() >= 0)
 				{
 					glColor4f(circleColor[0],circleColor[1],circleColor[2], telescopeFader.getInterstate());
 					glDisable(GL_TEXTURE_2D);
-					for (std::list<double>::const_iterator it2(it->second->getOculars().begin()); it2!=it->second->getOculars().end();++it2)
+					foreach (double occul, tel->getOculars())
 					{
 						prj->drawCircle(XY[0],XY[1],
-						0.5*prj->getPixelPerRadAtCenter()*(M_PI/180)*(*it2));
+						0.5*prj->getPixelPerRadAtCenter()*(M_PI/180)*(occul));
 					}
 					glEnable(GL_TEXTURE_2D);
 					double radius = 15;
@@ -133,7 +133,7 @@ void TelescopeMgr::draw(StelCore* core)
 				if (nameFader.getInterstate() >= 0)
 				{
 					glColor4f(labelColor[0],labelColor[1],labelColor[2], nameFader.getInterstate());
-					prj->drawText(telescope_font, XY[0],XY[1],it->second->getNameI18n(), 0, 6, -4, false);
+					prj->drawText(telescope_font, XY[0],XY[1],tel->getNameI18n(), 0, 6, -4, false);
 					telescopeTexture->bind();
 				}
 			}
@@ -158,7 +158,7 @@ void TelescopeMgr::setStelStyle(const StelStyle& style)
 	
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setLabelColor(StelUtils::strToVec3f(conf->value(section+"/telescope_label_color", defaultColor).toString()));
-	set_circleColor(StelUtils::strToVec3f(conf->value(section+"/telescope_circleColor", defaultColor).toString()));
+	setCircleColor(StelUtils::strToVec3f(conf->value(section+"/telescope_circleColor", defaultColor).toString()));
 }
 
 QList<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, const StelCore* core) const
@@ -169,11 +169,11 @@ QList<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, 
 	Vec3d v(vv);
 	v.normalize();
 	double cosLimFov = cos(limitFov * M_PI/180.);
-	for (TelescopeMap::const_iterator it(telescope_map.begin()); it!=telescope_map.end();++it)
+	foreach (Telescope* tel, telescope_map)
 	{
-		if (it->second->getObsJ2000Pos(0).dot(v) >= cosLimFov)
+		if (tel->getObsJ2000Pos(0).dot(v) >= cosLimFov)
 		{
-			result.push_back(it->second);
+			result.push_back(tel);
 		}
 	}
 	return result;
@@ -181,20 +181,20 @@ QList<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, 
 
 StelObjectP TelescopeMgr::searchByNameI18n(const QString &nameI18n) const
 {
-	for (TelescopeMap::const_iterator it(telescope_map.begin()); it!=telescope_map.end();++it)
+	foreach (Telescope* tel, telescope_map)
 	{
-		if (it->second->getNameI18n() == nameI18n)
-			return it->second;
+		if (tel->getNameI18n() == nameI18n)
+			return tel;
 	}
 	return 0;
 }
 
 StelObjectP TelescopeMgr::searchByName(const QString &name) const
 {
-	for (TelescopeMap::const_iterator it(telescope_map.begin()); it!=telescope_map.end();++it)
+	foreach (Telescope* tel, telescope_map)
 	{
-		if (it->second->getEnglishName() == name)
-		return it->second;
+		if (tel->getEnglishName() == name)
+		return tel;
 	}
 	return 0;
 }
@@ -205,12 +205,12 @@ QStringList TelescopeMgr::listMatchingObjectsI18n(const QString& objPrefix, int 
 	if (maxNbItem==0) return result;
 
 	QString objw = objPrefix.toUpper();
-	for (TelescopeMap::const_iterator it(telescope_map.begin());it!=telescope_map.end();++it)
+	foreach (const Telescope* tel, telescope_map)
 	{
-		QString constw = it->second->getNameI18n().mid(0, objw.size()).toUpper();
+		QString constw = tel->getNameI18n().mid(0, objw.size()).toUpper();
 		if (constw==objw)
 		{
-			result << it->second->getNameI18n();
+			result << tel->getNameI18n();
 		}
 	}
 	result.sort();
@@ -294,10 +294,10 @@ void TelescopeMgr::drawPointer(const Projector* prj, const Navigator * nav)
 
 void TelescopeMgr::telescopeGoto(int telescope_nr,const Vec3d &j2000Pos)
 {
-	TelescopeMap::const_iterator it(telescope_map.find(telescope_nr));
+	QMap<int, Telescope*>::ConstIterator it(telescope_map.find(telescope_nr));
 	if (it != telescope_map.end())
 	{
-		it->second->telescopeGoto(j2000Pos);
+		it.value()->telescopeGoto(j2000Pos);
 	}
 }
 
@@ -310,9 +310,9 @@ void TelescopeMgr::communicate(void)
 		FD_ZERO(&read_fds);
 		FD_ZERO(&write_fds);
 		int fd_max = -1;
-		for (TelescopeMap::const_iterator it(telescope_map.begin()); it!=telescope_map.end();++it)
+		foreach (Telescope* tel, telescope_map)
 		{
-			it->second->prepareSelectFds(read_fds,write_fds,fd_max);
+			tel->prepareSelectFds(read_fds,write_fds,fd_max);
 		}
 		if (fd_max >= 0)
 		{
@@ -322,9 +322,9 @@ void TelescopeMgr::communicate(void)
 			const int select_rc = select(fd_max+1,&read_fds,&write_fds,0,&tv);
 			if (select_rc > 0)
 			{
-				for (TelescopeMap::const_iterator it(telescope_map.begin());it!=telescope_map.end();++it)
+				foreach (Telescope* tel, telescope_map)
 				{
-					it->second->handleSelectFds(read_fds,write_fds);
+					tel->handleSelectFds(read_fds,write_fds);
 				}
 			}
 		}
