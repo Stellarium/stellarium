@@ -122,6 +122,8 @@ QVariant readOther(QIODevice& input)
 		return QVariant(true);
 	if (s=="false")
 		return QVariant(false);
+	if (s=="null")
+		return QVariant();
 	QVariant v(s);
 	bool ok=false;
 	int i = v.toInt(&ok);
