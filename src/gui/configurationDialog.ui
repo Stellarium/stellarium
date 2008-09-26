@@ -147,7 +147,7 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>2</number>
         </property>
         <property name="iconSize" >
          <size>
@@ -599,13 +599,7 @@
           <iconset resource="../../data/mainRes.qrc" >
            <normaloff>:/graphicGui/gui/tabicon-tools.png</normaloff>:/graphicGui/gui/tabicon-tools.png</iconset>
          </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_3" >
-          <property name="spacing" >
-           <number>0</number>
-          </property>
-          <property name="margin" >
-           <number>0</number>
-          </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4" >
           <item>
            <widget class="QGroupBox" name="groupBox_8" >
             <property name="title" >
@@ -681,6 +675,49 @@
            </widget>
           </item>
           <item>
+           <widget class="QGroupBox" name="groupBox_3" >
+            <property name="title" >
+             <string>GroupBox</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_3" >
+             <property name="margin" >
+              <number>0</number>
+             </property>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_4" >
+               <item>
+                <widget class="QLabel" name="label" >
+                 <property name="text" >
+                  <string>Screenshot Directory</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="screenshotDirEdit" />
+               </item>
+               <item>
+                <widget class="QPushButton" name="screenshotBrowseButton" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text" >
+                  <string/>
+                 </property>
+                 <property name="icon" >
+                  <iconset resource="../../data/mainRes.qrc" >
+                   <normaloff>:/graphicGui/gui/folder.png</normaloff>:/graphicGui/gui/folder.png</iconset>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
            <widget class="QGroupBox" name="groupBox_9" >
             <property name="title" >
              <string>Other</string>
@@ -742,14 +779,14 @@
            </widget>
           </item>
           <item>
-           <spacer>
+           <spacer name="verticalSpacer_4" >
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeHint" stdset="0" >
              <size>
               <width>20</width>
-              <height>261</height>
+              <height>114</height>
              </size>
             </property>
            </spacer>
