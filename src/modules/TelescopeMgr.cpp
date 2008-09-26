@@ -237,7 +237,7 @@ void TelescopeMgr::init()
 #ifdef WIN32
 	if (!wsaOk) return;
 #endif
-	telescope_map.clear();
+	deleteAllTelescopes();
 	for (int i=0;i<9;i++) 
 	{
 		char name[2] = {'0'+i,'\0'};
