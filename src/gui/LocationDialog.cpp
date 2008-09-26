@@ -108,6 +108,8 @@ void LocationDialog::createDialogContent()
 	QTimer* refreshTimer = new QTimer(this);
 	connect(refreshTimer, SIGNAL(timeout()), this, SLOT(updateFromProgram()));
 	refreshTimer->start(200);
+
+	ui->citySearchLineEdit->setFocus();
 }
 
 // Update the widget to make sure it is synchrone if the location is changed programmatically
