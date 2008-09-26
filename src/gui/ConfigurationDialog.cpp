@@ -49,6 +49,7 @@
 #include <QDebug>
 #include <QFrame>
 #include <QFile>
+#include <QFileDialog>
 
 #include "StelAppGraphicsScene.hpp"
 
@@ -176,6 +177,10 @@ void ConfigurationDialog::createDialogContent()
 	
 	connect(ui->setViewingOptionAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewOptions()));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(setDefaultViewOptions()));
+
+	ui->screenshotDirEdit->setText(StelApp::getInstance().getFileMgr().getScreenshotDir());
+	connect(ui->screenshotDirEdit, SIGNAL(textChanged(QString)), this, SLOT(selectScreenshotDir(QString)));
+	connect(ui->screenshotBrowseButton, SIGNAL(clicked()), this, SLOT(browseForScreenshotDir()));
 	
 	updateConfigLabels();
 }
@@ -245,6 +250,33 @@ void ConfigurationDialog::cursorTimeOutChanged()
 {
 	StelAppGraphicsScene::getInstance().setFlagCursorTimeout(ui->mouseTimeoutCheckbox->isChecked());
 	StelAppGraphicsScene::getInstance().setCursorTimeout(ui->mouseTimeoutSpinBox->value());
+}
+
+void ConfigurationDialog::browseForScreenshotDir()
+{
+	QString oldScreenshorDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
+	QString newScreenshotDir = QFileDialog::getExistingDirectory(NULL, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::ShowDirsOnly);
+
+	if (!newScreenshotDir.isEmpty()) {
+		// remove trailing slash 
+		if (newScreenshotDir.right(1) == "/")
+			newScreenshotDir = newScreenshotDir.left(newScreenshotDir.length()-1);
+
+		ui->screenshotDirEdit->setText(newScreenshotDir);
+	}
+}
+
+void ConfigurationDialog::selectScreenshotDir(const QString& dir)
+{
+	try
+	{
+		StelApp::getInstance().getFileMgr().setScreenshotDir(dir);
+	}
+	catch (std::runtime_error& e)
+	{
+		// nop
+		// this will happen when people are only half way through typing dirs
+	}
 }
 
 // Save the current viewing option including landscape, location and sky culture
@@ -358,6 +390,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	
 	StelApp::getInstance().getCore()->getProjection()->setInitFov(StelApp::getInstance().getCore()->getProjection()->getFov());
 	StelApp::getInstance().getCore()->getNavigation()->setInitViewDirectionToCurrent();
+	conf->setValue("main/screenshot_dir", StelApp::getInstance().getFileMgr().getScreenshotDir());
 
 	// full screen and window size
 	conf->setValue("video/fullscreen", StelMainWindow::getInstance().getFullScreen());
@@ -373,14 +406,6 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	updateConfigLabels();
 }
 
-void ConfigurationDialog::setDefaultViewOptions()
-{
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
-
-	conf->setValue("main/restore_defaults", true);
-}
-
 void ConfigurationDialog::updateConfigLabels()
 {
 	ui->startupFOVLabel->setText(q_("Startup FOV: %1%2").arg(StelApp::getInstance().getCore()->getProjection()->getFov()).arg(QChar(0x00B0)));
@@ -394,8 +419,11 @@ void ConfigurationDialog::updateConfigLabels()
 	ui->startupDirectionOfViewlabel->setText(q_("Startup direction of view Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)));
 }
 
-// Reset all stellarium options.
-// This basically replaces the config.ini by the default one
-void ConfigurationDialog::resetAllOptions()
+void ConfigurationDialog::setDefaultViewOptions()
 {
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	conf->setValue("main/restore_defaults", true);
 }
+

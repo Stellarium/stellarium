@@ -52,16 +52,22 @@ private slots:
 	
 	//! Update the labels displaying the current default state
 	void updateConfigLabels();
-	
+
+	//! open a file dialog to browse for a directory to save screenshots to
+	//! if a directory is selected (i.e. dialog not cancelled), current
+	//! value will be changed, but not saved to config file.
+	void browseForScreenshotDir();
+	void selectScreenshotDir(const QString& dir);
+
 	//! Save the current viewing option including landscape, location and sky culture
-	//! This doesn't include the current viewing direction, time and FOV since those have specific controls
+	//! This doesn't include the current viewing direction, time and FOV since those 
+	//! have specific controls
 	void saveCurrentViewOptions();
-	void setDefaultViewOptions();
 	
 	//! Reset all stellarium options.
 	//! This basically replaces the config.ini by the default one
-	void resetAllOptions();
-	
+	void setDefaultViewOptions();
+
 };
 
 #endif // _CONFIGURATIONDIALOG_HPP_
