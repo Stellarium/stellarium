@@ -305,7 +305,6 @@ void TelescopeMgr::communicate(void)
 {
 	if (!telescope_map.empty())
 	{
-//		long long int t = GetNow();
 		fd_set read_fds,write_fds;
 		FD_ZERO(&read_fds);
 		FD_ZERO(&write_fds);
@@ -319,6 +318,7 @@ void TelescopeMgr::communicate(void)
 			struct timeval tv;
 			tv.tv_sec = 0;
 			tv.tv_usec = 0;
+			// Check that data is ready to be read/write in file descriptors sets
 			const int select_rc = select(fd_max+1,&read_fds,&write_fds,0,&tv);
 			if (select_rc > 0)
 			{
