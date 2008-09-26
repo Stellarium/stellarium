@@ -62,7 +62,7 @@ Location Location::createFromLine(const QString& rawline)
 	if (lngstring.contains("W"))
 		loc.longitude=-loc.longitude;
 	
-	loc.altitude = (splitline[7]).toInt();
+	loc.altitude = (int)(splitline[7]).toFloat();
 	
 	if (splitline.size()>8)
 	{
