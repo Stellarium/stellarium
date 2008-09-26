@@ -56,6 +56,7 @@ public:
 	virtual StelObjectP searchByName(const QString& name) const;
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
 	
+	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to TelescopeMgr
 	//! Get the telescope labels color
 	const Vec3f& getLabelColor() const {return labelColor;}
