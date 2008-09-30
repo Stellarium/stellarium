@@ -167,13 +167,13 @@ void StelAppGraphicsScene::drawBackground(QPainter *painter, const QRectF &)
 	
 	// Determines when the next display will need to be triggered
 	// The current policy is that after an event, the FPS is maximum for 2.5 seconds
-	// after that, it switches back to the minfps value to save power
-	double duration = 1./StelApp::getInstance().minfps;
+	// after that, it switches back to the default minfps value to save power
 	if (now-lastEventTimeSec<2.5)
-		duration = 1./StelApp::getInstance().maxfps;
-	int dur = (int)(duration*1000);
-	QTimer::singleShot(dur<5 ? 5 : dur, this, SLOT(update()));
-	
+	{
+		double duration = 1./StelApp::getInstance().maxfps;
+		int dur = (int)(duration*1000);
+		QTimer::singleShot(dur<5 ? 5 : dur, this, SLOT(update()));
+	}
 	// Manage cursor timeout
 	if (cursorTimeout>0.f && (now-lastEventTimeSec>cursorTimeout) && flagCursorTimeout)
 	{
@@ -345,7 +345,8 @@ void StelAppGraphicsScene::keyReleaseEvent(QKeyEvent* event)
 
 void StelAppGraphicsScene::startMainLoop()
 {
+	// Set a timer refreshing for every minfps frames
 	QTimer* timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-	timer->start((int)(1./StelApp::getInstance().minfps*1000));
+	timer->start((int)(1./StelApp::getInstance().minfps*1000.));
 }
