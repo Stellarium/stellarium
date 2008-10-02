@@ -88,6 +88,8 @@ void SkyImageTile::initCtor()
 	texFader = NULL;
 	loadingState = false;
 	lastPercent = 0;
+	// Avoid tiles to be deleted just after constructed
+	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 }
 
 // Constructor
@@ -139,7 +141,6 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(p
 			return;
 		}
 		f.close();
-		lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 	}
 	else
 	{
@@ -173,7 +174,6 @@ SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : QObje
 		alphaBlend = parent->alphaBlend;
 	}
 	loadFromQVariantMap(map);
-	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 }
 	
 // Destructor
@@ -319,7 +319,9 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 				// and they are not yet loaded
 				foreach (QString url, subTilesUrls)
 				{
-					subTiles.append(new SkyImageTile(url, this));
+					SkyImageTile* nt = new SkyImageTile(url, this);
+					nt->lastTimeDraw = lastTimeDraw;
+					subTiles.append(nt);
 				}
 			}
 		}
@@ -582,7 +584,7 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 void SkyImageTile::downloadFinished()
 {
 	//qDebug() << "Download finished for " << httpReply->request().url().path() << ((httpReply->error()!=QNetworkReply::NoError) ? httpReply->errorString() : QString(""));
-	
+	Q_ASSERT(downloading);
 	if (httpReply->error()!=QNetworkReply::NoError)
 	{
 		if (httpReply->error()!=QNetworkReply::OperationCanceledError)
@@ -597,6 +599,7 @@ void SkyImageTile::downloadFinished()
 	QByteArray content = httpReply->readAll();
 	if (content.isEmpty())
 	{
+		qWarning() << "WARNING : empty JSON Image Tile description for " << httpReply->request().url().path();
 		errorOccured = true;
 		httpReply->deleteLater();
 		httpReply=NULL;
