@@ -212,7 +212,7 @@ void SkyImageTile::draw(StelCore* core)
 	int numToBeLoaded=0;
 	glEnable(GL_TEXTURE_2D);
 	glBlendFunc(GL_ONE, GL_ONE);
-	//glDisable(GL_CULL_FACE);
+	
 	QMap<double, SkyImageTile*>::Iterator i = result.end();
 	while (i!=result.begin())
 	{
@@ -339,9 +339,7 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 // Draw the image on the screen.
 // Assume GL_TEXTURE_2D is enabled
 bool SkyImageTile::drawTile(StelCore* core)
-{
-	const float ad_lum = (luminance>0) ? core->getToneReproducer()->adaptLuminanceScaled(luminance) : 1.f;
-	
+{	
 	if (!tex->bind())
 	{
 		return false;
@@ -354,12 +352,11 @@ bool SkyImageTile::drawTile(StelCore* core)
 	}
 	
 	const Projector* prj = core->getProjection();
-	
 	const float factorX = tex->getCoordinates()[2][0];
 	const float factorY = tex->getCoordinates()[2][1];
 
 	// Draw the real texture for this image
-	
+	const float ad_lum = (luminance>0) ? core->getToneReproducer()->adaptLuminanceScaled(luminance) : 1.f;
 	if (alphaBlend==true || texFader->state()==QTimeLine::Running)
 	{
 		if (!alphaBlend)
