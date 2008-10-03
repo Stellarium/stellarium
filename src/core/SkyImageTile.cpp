@@ -27,6 +27,9 @@
 #include "StelCore.hpp"
 #include "StelTextureMgr.hpp"
 #include "SkyDrawer.hpp"
+#include "kfilterdev.h"
+
+
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
@@ -52,13 +55,14 @@
 class JsonLoadThread : public QThread
 {
 	public:
-		JsonLoadThread(SkyImageTile* atile, QByteArray content, bool acompressed=false) : QThread((QObject*)atile),
-			tile(atile), data(content), compressed(acompressed) {;}
+		JsonLoadThread(SkyImageTile* atile, QByteArray content, bool aqZcompressed=false, bool agzCompressed=false) : QThread((QObject*)atile),
+			tile(atile), data(content), qZcompressed(aqZcompressed), gzCompressed(agzCompressed){;}
 		virtual void run();
 	private:
 		SkyImageTile* tile;
 		QByteArray data;
-		const bool compressed;
+		const bool qZcompressed;
+		const bool gzCompressed;
 };
 
 void JsonLoadThread::run()
@@ -67,7 +71,7 @@ void JsonLoadThread::run()
 	{
 		QBuffer buf(&data);
 		buf.open(QIODevice::ReadOnly);
-		tile->temporaryResultMap = SkyImageTile::loadFromJSON(buf, compressed);
+		tile->temporaryResultMap = SkyImageTile::loadFromJSON(buf, qZcompressed, gzCompressed);
 	}
 	catch (std::runtime_error e)
 	{
@@ -129,9 +133,10 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(p
 		QFile f(fileName);
 		f.open(QIODevice::ReadOnly);
 		const bool compressed = fileName.endsWith(".qZ");
+		const bool gzCompressed = fileName.endsWith(".gz");
 		try
 		{
-			loadFromQVariantMap(loadFromJSON(f, compressed));
+			loadFromQVariantMap(loadFromJSON(f, compressed, gzCompressed));
 		}
 		catch (std::runtime_error e)
 		{
@@ -426,11 +431,11 @@ bool SkyImageTile::isReadyToDisplay() const
 }
 	
 // Load the tile information from a JSON file
-QVariantMap SkyImageTile::loadFromJSON(QIODevice& input, bool compressed)
+QVariantMap SkyImageTile::loadFromJSON(QIODevice& input, bool qZcompressed, bool gzCompressed)
 {
 	QtJsonParser parser;
 	QVariantMap map;
-	if (compressed && input.size()>0)
+	if (qZcompressed && input.size()>0)
 	{
 		QByteArray ar = qUncompress(input.readAll());
 		input.close();
@@ -439,8 +444,16 @@ QVariantMap SkyImageTile::loadFromJSON(QIODevice& input, bool compressed)
 		map = parser.parse(buf).toMap();
 		buf.close();
 	}
-	else
+	else if (gzCompressed)
 	{
+		QIODevice* d = KFilterDev::device(&input, "application/x-gzip", false);
+		d->open(QIODevice::ReadOnly);
+		map = parser.parse(*d).toMap();
+		d->close();
+		delete d;
+	}
+	else
+	{	
 		map = parser.parse(input).toMap();
 	}
 	
@@ -604,12 +617,13 @@ void SkyImageTile::downloadFinished()
 		return;
 	}
 	
-	const bool compressed = httpReply->request().url().path().endsWith(".qZ");
+	const bool qZcompressed = httpReply->request().url().path().endsWith(".qZ");
+	const bool gzCompressed = httpReply->request().url().path().endsWith(".gz");
 	httpReply->deleteLater();
 	httpReply=NULL;
 	
 	assert(loadThread==NULL);
-	loadThread = new JsonLoadThread(this, content, compressed);
+	loadThread = new JsonLoadThread(this, content, qZcompressed, gzCompressed);
 	connect(loadThread, SIGNAL(finished()), this, SLOT(JsonLoadFinished()));
 	loadThread->start(QThread::LowestPriority);
 }

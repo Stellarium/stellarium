@@ -66,6 +66,11 @@ public slots:
 	//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
 	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& saveDir="") const;
 	
+	//! Get whether colors are inverted when saving screenshot
+	bool getFlagInvertScreenShotColors() const {return flagInvertScreenShotColors;}
+	//! Set whether colors should be inverted when saving screenshot
+	void setFlagInvertScreenShotColors(bool b) {flagInvertScreenShotColors=b;}
+			
 protected:
 	virtual void resizeEvent(QResizeEvent* event);
 	
@@ -79,6 +84,8 @@ private:
 	class StelApp* stelApp;
 	
 	bool wasDeinit;
+	
+	bool flagInvertScreenShotColors;
 };
 
 

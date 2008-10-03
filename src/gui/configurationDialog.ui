@@ -677,14 +677,14 @@
           <item>
            <widget class="QGroupBox" name="groupBox_3" >
             <property name="title" >
-             <string>Sceenshots</string>
+             <string>Screenshots</string>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_3" >
              <property name="margin" >
               <number>0</number>
              </property>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_4" >
+              <layout class="QHBoxLayout" name="horizontalLayout_5" >
                <item>
                 <widget class="QLabel" name="label" >
                  <property name="text" >
@@ -713,6 +713,13 @@
                 </widget>
                </item>
               </layout>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="invertScreenShotColorsCheckBox" >
+               <property name="text" >
+                <string>Invert colors</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
