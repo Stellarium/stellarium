@@ -173,7 +173,7 @@
 				OutputFile="$(OutDir)\SDL_image.dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="..\..\lib\release"
+				AdditionalLibraryDirectories="..\..\Build\SDL_Release;..\..\lib\release"
 				ProgramDatabaseFile="$(OutDir)\SDL_image.pdb"
 				SubSystem="2"
 				ImportLibrary="$(OutDir)\SDL_image.lib"

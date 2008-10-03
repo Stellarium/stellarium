@@ -32,9 +32,13 @@ Source: "..\Build\Release\cv100.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Build\Release\cxcore100.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Build\Release\highgui100.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Build\Release\libguide40.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\stellarium_user_guide-0.8.2.pdf"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\stellarium_user_guide_russian-0.8.2.pdf"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\Docs\User\Stellarium руководство пользователя.pdf"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Build\Release\glew32.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\stellarium_user_guide-0.8.x.pdf"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\ru_stellarium_user_guide-0.8.2-1.pdf"; DestDir: "{app}"; Flags: ignoreversion
+; Взять у Кирилла этот документ
+; Source: "..\..\Docs\User\Stellarium руководство пользователя.pdf"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\stellarium\stellarium\Bump.frag"; DestDir: "{app}\"; Flags: ignoreversion
+Source: "..\stellarium\stellarium\Bump.vert"; DestDir: "{app}\"; Flags: ignoreversion
 Source: "..\stellarium\stellarium\config\*"; DestDir: "{app}\config\"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\stellarium\stellarium\data\*"; DestDir: "{app}\data\"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\stellarium\stellarium\textures\*"; DestDir: "{app}\textures\"; Flags: ignoreversion recursesubdirs createallsubdirs
