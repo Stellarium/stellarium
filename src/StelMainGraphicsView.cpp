@@ -40,7 +40,7 @@
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
-StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** argv)  : QGraphicsView(parent), wasDeinit(false)
+StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** argv)  : QGraphicsView(parent), wasDeinit(false), flagInvertScreenShotColors(false)
 {
 	setScene(new QGraphicsScene(this));
 	// Can't create 2 StelMainWindow instances
@@ -83,7 +83,9 @@ void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
 
 void StelMainGraphicsView::init()
 {
-	//setAutoFillBackground(false);
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
 	
 	// This apparently useless line fixes the scrolling bug
 	// I suspect a Qt 4.4 bug -> Fixed with Qt 4.4.1
@@ -133,6 +135,8 @@ void StelMainGraphicsView::saveScreenShot(const QString& filePrefix, const QStri
 {
 	QString shotDir;
 	QImage im = glWidget->grabFrameBuffer();
+	if (flagInvertScreenShotColors)
+		im.invertPixels();
 
 	if (saveDir == "")
 	{
