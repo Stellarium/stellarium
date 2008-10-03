@@ -699,7 +699,7 @@ void StelUI::tui_cb_scripts_local() {
   }
 }
 
-// callback for changing scripts for acreating avi file
+// callback for changing scripts for a creating avi file
 void StelUI::tui_cb_scripts_create_avi() {
   
   if(tui_scripts_create_avi->getCurrent()!=_(TUI_SCRIPT_MSG)){

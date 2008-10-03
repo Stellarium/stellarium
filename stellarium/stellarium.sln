@@ -29,6 +29,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcharset", "..\libcharset
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libiconv", "..\libiconv\libiconv.vcproj", "{BCD05BF6-EF99-46A3-A62C-1FE86A8A3D32}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib3ds", "..\lib3ds-1.3.0\msvc8\lib3ds.vcproj", "{9CF2B398-9087-4D33-90EB-0320F42C78F4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL_image", "..\SDL_image-1.2.6\VisualC\SDL_image.vcproj", "{571C8E24-AB93-4E18-B8E6-DF3410A6DC4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7FAF0E58-7F96-4A98-A4E9-9E0A9D7F9AA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -67,6 +73,14 @@ Global
 		{BCD05BF6-EF99-46A3-A62C-1FE86A8A3D32}.Debug|Win32.Build.0 = Debug|Win32
 		{BCD05BF6-EF99-46A3-A62C-1FE86A8A3D32}.Release|Win32.ActiveCfg = Release|Win32
 		{BCD05BF6-EF99-46A3-A62C-1FE86A8A3D32}.Release|Win32.Build.0 = Release|Win32
+		{9CF2B398-9087-4D33-90EB-0320F42C78F4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9CF2B398-9087-4D33-90EB-0320F42C78F4}.Debug|Win32.Build.0 = Debug|Win32
+		{9CF2B398-9087-4D33-90EB-0320F42C78F4}.Release|Win32.ActiveCfg = Release|Win32
+		{9CF2B398-9087-4D33-90EB-0320F42C78F4}.Release|Win32.Build.0 = Release|Win32
+		{571C8E24-AB93-4E18-B8E6-DF3410A6DC4E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{571C8E24-AB93-4E18-B8E6-DF3410A6DC4E}.Debug|Win32.Build.0 = Debug|Win32
+		{571C8E24-AB93-4E18-B8E6-DF3410A6DC4E}.Release|Win32.ActiveCfg = Release|Win32
+		{571C8E24-AB93-4E18-B8E6-DF3410A6DC4E}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

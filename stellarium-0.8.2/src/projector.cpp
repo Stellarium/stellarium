@@ -25,19 +25,20 @@
 #include "stereographic_projector.h"
 #include "spheric_mirror_projector.h"
 
-bool CustomProjector::showSphereBlack = false;
+bool Projector::showSphereBlack = false;
+float Projector::planetsFadingCoefficient = 1.04;
 
 float Projector::GetIntensity() const
 {
   static float intensity = 1.0;
   if (showSphereBlack)
   {
-    intensity /= 1.05;
+    intensity /= planetsFadingCoefficient;
     if (intensity < 0.001) intensity = 0.001;
   }
   else
   {
-    intensity *= 1.05;
+    intensity *= planetsFadingCoefficient;
     if (intensity > 1.0) intensity = 1.0;
   }
   return intensity;
@@ -715,10 +716,13 @@ void Projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint 
   }
 }
 
-void Projector::s3dsObject(object3d_ptr object, const Mat4d& mat, int orient_inside) const
+void Projector::s3dsObject(Object3DS* object3ds, const Mat4d& mat, int orient_inside)
 {
 }
 
+void Projector::ms3dsObject(Object3DS* object3ds, const Mat4d& mat, int orient_inside)
+{
+}
 
 void Projector::print_gravity180(s_font* font, float x, float y, const wstring& ws,
                                  bool speed_optimize, float xshift, float yshift) const

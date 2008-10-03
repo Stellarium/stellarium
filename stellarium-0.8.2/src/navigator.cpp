@@ -49,15 +49,15 @@ time_speed(JD_SECOND), JDay(0.), position(obs), projector(proj)
 
   speed = 1.0;
   coef = 0.0;
-  aimAngle = 0.0;
-  startAngle = 0.0;
-  currentAngle = 0.0;
+  aimAngleX = 0.0;
+  startAngleX = 0.0;
+  currentAngleX = 0.0;
   centerFovRatio = 0.0;
 
   aimAngleZ = 0.0;
   startAngleZ = 0.0;
   currentAngleZ = 0.0;
-  centerRotationZ = -80.214;
+  centerRotationZ = 0.0;//-80.214; // this is depends on how argus calibration has been performed
 }
 
 Navigator::~Navigator()
@@ -66,47 +66,51 @@ Navigator::~Navigator()
 ////////////////////////////////////////////////////////////////////////////////
 void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
 {
-  if ((!selected || !flag_tracking) && fabs(aimAngle) >= 0.00001)
+  // if no selection or tracking (deselect for example), 
+  // reset all control variables
+  if ((!selected || !flag_tracking) && fabs(aimAngleX) >= 0.00001)
   {
-    aimAngle = 0.0;
-    startAngle = currentAngle;
+    aimAngleX = 0.0;
+    startAngleX = currentAngleX;
     coef = 0.0;
 
     aimAngleZ = 0.0;
     startAngleZ = currentAngleZ;
   }
-  else if (selected && flag_tracking && fabs(aimAngle - centerFovRatio) >= 0.00001)
+  // kornyakov: if selected, start to move object to the right position
+  // but this moving is additional to the stellarium work
+  else if (selected && flag_tracking && fabs(aimAngleX - centerFovRatio) >= 0.00001)
   {
-    aimAngle = centerFovRatio;
-    startAngle = currentAngle;
+    aimAngleX = centerFovRatio;
+    startAngleX = currentAngleX;
     coef = 0.0;
 
     aimAngleZ = centerRotationZ;
     startAngleZ = currentAngleZ;
   }
 
-  if (fabs(aimAngle - currentAngle) >= 0.00001)
+  if (fabs(aimAngleX - currentAngleX) >= 0.00001)
   {
     coef += speed * delta_time;
-    if (coef > 1.0)
+    if (coef >= 0.99)
     {
       coef = 1.0;
     }
-    currentAngle =  coef * (aimAngle - startAngle) + startAngle;
+    currentAngleX = coef * (aimAngleX - startAngleX) + startAngleX;
     currentAngleZ = coef * (aimAngleZ - startAngleZ) + startAngleZ;
     this->update_model_view_mat();
   }
   else
   {
-    currentAngle = aimAngle;
+    currentAngleX = aimAngleX;
     currentAngleZ = aimAngleZ;
   }
 
-	if (flag_auto_move)
+ 	if (flag_auto_move)
 	{
 		double ra_aim, de_aim, ra_start, de_start, ra_now, de_now;
 
-		if( zooming_mode == 1 && selected)
+    if (zooming_mode == 1 && selected)
 		{
 			// if zooming in, object may be moving so be sure to zoom to latest position
 			move.aim = selected.get_earth_equ_pos(this);
@@ -122,7 +126,7 @@ void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
 		{
 			if( move.coef > .9 )
 			{
-				c = 1;
+				c = 1.0;
 			}
 			else
 			{
@@ -136,24 +140,21 @@ void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
 				// keep in view at first as zoom out
 				c = 0;
 
-				/* could track as moves too, but would need to know if start was actually
-				   a zoomed in view on the object or an extraneous zoom out command
-				   if(move.local_pos) {
-				   move.start=earth_equ_to_local(selected.get_earth_equ_pos(this));
-				   } else {
-				   move.start=selected.get_earth_equ_pos(this);
-				   }
-				   move.start.normalize();
-				*/
-
+				//// could track as moves too, but would need to know if start was actually
+				////   a zoomed in view on the object or an extraneous zoom out command
+				//   if(move.local_pos) {
+				//   move.start=earth_equ_to_local(selected.get_earth_equ_pos(this));
+				//   } else {
+				//   move.start=selected.get_earth_equ_pos(this);
+				//   }
+				//   move.start.normalize();
 			}
 			else
 			{
 				c =  pow(1.11*(move.coef-.1),3);
 			}
 		}
-		else c = atanf(smooth * 2.*move.coef-smooth)/atanf(smooth)/2+0.5;
-
+		else c = atanf(smooth * 2. * move.coef - smooth)/atanf(smooth)/2+0.5;
 
 		if (move.local_pos)
 		{
@@ -163,7 +164,7 @@ void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
 		else
 		{
 			rect_to_sphe(&ra_aim, &de_aim, earth_equ_to_local(move.aim));
-			rect_to_sphe(&ra_start, &de_start, earth_equ_to_local(move.start));
+      rect_to_sphe(&ra_start, &de_start, earth_equ_to_local(move.start));
 		}
 		
 		// Trick to choose the good moving direction and never travel on a distance > PI
@@ -175,17 +176,17 @@ void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
 		{
 			ra_aim += 2.*M_PI;
 		}
-		
+
 		de_now = de_aim*c + de_start*(1. - c);
 		ra_now = ra_aim*c + ra_start*(1. - c);
 		
 		sphe_to_rect(ra_now, de_now, local_vision);
 		equ_vision = local_to_earth_equ(local_vision);
 
-		move.coef+=move.speed*delta_time;
-		if (move.coef>=1.)
+		move.coef += move.speed*delta_time;
+		if (move.coef >= 0.999)
 		{
-			flag_auto_move=0;
+			flag_auto_move = 0;
 			if (move.local_pos)
 			{
 				local_vision=move.aim;
@@ -409,10 +410,13 @@ void Navigator::update_model_view_mat(void)
 	                     s[2],u[2],-f[2],0.,
 	                     0.,0.,0.,1.);
 
-  // rotate screen and fly
-  Mat4d mat_rotation = /*Mat4d::zrotation(currentAngleZ / 180.0 * M_PI) **/
-                       Mat4d::xrotation(/*currentAngle kornyakov:fixme*/centerFovRatio * projector->get_fov() / 2.0 / 180.0 * M_PI) *
+  // rotate screen (rotating screen due calibration camera shift and moving selected objects to the front)
+  Mat4d mat_rotation = //kornyakov: this is because of calibration rotation
+                       Mat4d::zrotation(currentAngleZ / 180.0 * M_PI) * 
+                       //kornyakov: this is for moving objects from zenith to the front
+                       Mat4d::xrotation(currentAngleX * projector->get_fov() / 2.0 / 180.0 * M_PI) * 
                        Mat4d::identity();
+  // and fly to the selected object
   Vec3d translation(.0, .0, GetTranslationValue());
   Mat4d mat_translation = Mat4d::translation(translation);
 
@@ -463,10 +467,10 @@ void Navigator::move_to(const Vec3d& _aim, float move_duration, bool _local_pos,
 	
   speed = move.speed;
   coef = 0.0;
-  aimAngle = centerFovRatio;
-  startAngle = currentAngle;
+  aimAngleX = centerFovRatio;
+  startAngleX = currentAngleX;
   
-  if (fabs(aimAngle - startAngle) >= 0.00001)
+  if (fabs(aimAngleX - startAngleX) >= 0.00001)
   {
       aimAngleZ = centerRotationZ;
       startAngleZ = currentAngleZ;

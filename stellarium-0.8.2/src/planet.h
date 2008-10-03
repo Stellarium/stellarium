@@ -30,6 +30,14 @@
 #include "fader.h"
 #include "translator.h"
 #include "3dsloader.h"
+#include <lib3ds/file.h>
+#include <lib3ds/camera.h>
+#include <lib3ds/mesh.h>
+#include <lib3ds/node.h>
+#include <lib3ds/material.h>
+#include <lib3ds/matrix.h>
+#include <lib3ds/vector.h>
+#include <lib3ds/light.h>
 
 #include <list>
 #include <string>
@@ -43,6 +51,7 @@ typedef void (OsulatingFunctType)(double jd0,double jd,double xyz[3]);
 #define J2000 2451545.0
 #define ORBIT_SEGMENTS 72
 
+
 using namespace std;
 
 struct TrailPoint {
@@ -50,6 +59,12 @@ struct TrailPoint {
   double date;
 };
 
+struct Object3DS {
+	Lib3dsFile* file;
+	char path[1024];
+	char texpath[1024];
+	double scale, angle;
+};
 
 
 // Class used to store orbital elements
@@ -222,9 +237,16 @@ public:
 	static void setflagShow(bool b) {Planet::flagShow = b;}
 	static bool getflagShow(void) {return Planet::flagShow;}
 
-  //kornyakov: for 3d-objects
+//------------------------------------------------------------------------------------------
+  
+	//kornyakov: for 3d-objects
   object3d objectInfo; // info about 3d-object if it is not planet
+  Object3DS object; //serkin
+  //std::list<Object3DS> objects;
+
   static bool isBlack;
+
+//------------------------------------------------------------------------------------------
 
 protected:
 	// Return the radius of a circle containing the object on screen

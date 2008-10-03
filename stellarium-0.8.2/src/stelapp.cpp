@@ -507,6 +507,7 @@ int StelApp::handleKeys(SDLKey key, SDLMod mod,
                                            + " path " + SelectedScriptDirectory);
 			}
 
+			// argus-cv: here we create stellarium process, which will write video
 			if(SelectedScriptForAvi!="")
 			{
 #ifdef WIN32
@@ -534,7 +535,7 @@ int StelApp::handleKeys(SDLKey key, SDLMod mod,
 				STARTUPINFO si = { sizeof(si)};
 				PROCESS_INFORMATION pi;
 
-				// 2. Run the exe with the argument "--avi"
+				// 2. Run the stellarium.exe with the argument "--avi"
 				CreateProcess( NULL, CommandLine, NULL, NULL, FALSE, 0, NULL, CurrentDirectory, &si, &pi);
 
 				WaitForSingleObject(pi.hProcess, INFINITE);

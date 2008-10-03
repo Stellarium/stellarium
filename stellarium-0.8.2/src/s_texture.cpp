@@ -148,30 +148,32 @@ int s_texture::load(string fullName) {
 int s_texture::load(string fullName, bool mipmap)
 {
 
-    FILE * tempFile = fopen(fullName.c_str(),"r");
-    if (!tempFile)
-	{
-		cerr << "WARNING : Can't find texture file " << fullName << "!" << endl;
-		return 0;
-	}
-	fclose(tempFile);
+  FILE * tempFile = fopen(fullName.c_str(),"r");
+  if (!tempFile)
+  {
+    cerr << "WARNING : Can't find texture file " << fullName << "!" << endl;
+    return 0;
+  }
+  fclose(tempFile);
 
-    pngInfo info;
-    pngSetStandardOrientation(1);
+  pngInfo info;
+  pngSetStandardOrientation(1);
 
-	// frans van hoesel patch - mipmaps keep nebulas from scintilating as move
-	if (mipmap) {
-		texID = pngBind(fullName.c_str(), PNG_BUILDMIPMAPS,
-						loadType, &info, loadType2,
-						GL_LINEAR_MIPMAP_NEAREST, GL_LINEAR);
-	} else {
-		texID = pngBind(fullName.c_str(), PNG_NOMIPMAPS,
-						loadType, &info, loadType2,
-						GL_NEAREST, GL_LINEAR);
-	}
-		
+  // frans van hoesel patch - mipmaps keep nebulas from scintilating as move
+  if (mipmap) 
+  {
+    texID = pngBind(fullName.c_str(), PNG_BUILDMIPMAPS,
+                    loadType, &info, loadType2,
+                    GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
+  } 
+  else 
+  {
+    texID = pngBind(fullName.c_str(), PNG_NOMIPMAPS,
+                    loadType, &info, loadType2,
+                    GL_NEAREST, GL_LINEAR);
+  }
 
-	return (texID!=0);
+  return (texID!=0);
 }
 
 void s_texture::unload()

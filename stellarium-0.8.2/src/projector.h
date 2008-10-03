@@ -24,6 +24,7 @@
 #include "vecmath.h"
 #include "s_font.h"
 #include "3dsloader.h"
+#include "planet.h"
 
 
 
@@ -238,7 +239,8 @@ public:
 	virtual void sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks,
 		const Mat4d& mat, int orient_inside = 0) const;
 
-  virtual void s3dsObject(object3d_ptr object, const Mat4d& mat, int orient_inside = 0) const;
+  virtual void s3dsObject(Object3DS* object3ds, const Mat4d& mat, int orient_inside = 0);
+  virtual void ms3dsObject(Object3DS* object3ds, const Mat4d& mat, int orient_inside = 0);
 
 	virtual void sVertex3(double x, double y, double z, const Mat4d& mat) const
 	{glVertex3d(x,y,z);}
@@ -312,6 +314,7 @@ protected:
   public:
     float GetIntensity() const;
     static bool showSphereBlack;
+    static float planetsFadingCoefficient;
 };
 
 #endif // _PROJECTOR_H_

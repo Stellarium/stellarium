@@ -342,7 +342,7 @@ bool ScriptMgr::play_startup_script(string script_name, bool fullPath) {
 		{
 			lastSlashIndex = script_name.find_last_of('/');
 		}
-		scriptPath = script_name.substr(0, lastSlashIndex);
+		scriptPath = script_name.substr(0, lastSlashIndex+1); //kornyakov: we keep the slash
 	    play_script(script_name, scriptPath);
 		return 1;
 	}

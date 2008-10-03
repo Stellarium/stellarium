@@ -34,6 +34,7 @@
 #include <GL\glut.h>
 #include "texture.h"
 #include "3dsloader.h"
+#include <lib3ds/file.h>
 
 //Moved Namespace
 using namespace std;
@@ -81,21 +82,84 @@ SolarSystem::~SolarSystem()
 }
 
 //kornyakov: the following functions are for 3d-objects rendering
-void init3dobject(object3d_ptr shuttle)
+//void init3dobject(object3d_ptr shuttle)
+//{
+//  glShadeModel(GL_SMOOTH); // Type of shading for the polygons
+//  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // Polygon rasterization mode (polygon filled)
+//
+//  Load3DS(shuttle, shuttle->modelPath);
+//  shuttle->id_texture = LoadBitmap(shuttle->texturePath); // The Function LoadBitmap() return the current texture ID
+//
+//  // If the last function returns -1 it means the file was not found so we exit from the program
+//  /*if (shuttle->id_texture==-1)
+//  {
+//    MessageBox(NULL,"File with texture for 3d-object not found!", "Stellarium Error", MB_OK | MB_ICONERROR);
+//    exit (0);
+//  }*/
+//}
+
+//serkin
+
+void MeshScaling(Lib3dsNode* node, Lib3dsFile* file, double scale)
+{
+	Lib3dsNode *p;
+	for (p=node->childs; p!=0; p=p->next) 
+	{
+		MeshScaling(p, file, scale);
+	}
+	if (node->type==LIB3DS_OBJECT_NODE) 
+	{
+		Lib3dsMesh *mesh;
+		if (strcmp(node->name,"$$$DUMMY")==0)
+			return;
+		mesh = lib3ds_file_mesh_by_name(file, node->data.object.morph);
+		if( mesh == NULL )
+			mesh = lib3ds_file_mesh_by_name(file, node->name);
+		if (mesh)
+		{
+			int p;
+			for (p=0; p<mesh->faces; ++p)
+			{	
+				Lib3dsFace *f=&mesh->faceL[p];
+				for (int i=0; i<3; ++i)
+				{
+					mesh->pointL[f->points[i]].pos[0]=mesh->pointL[f->points[i]].pos[0];
+					mesh->pointL[f->points[i]].pos[1]=mesh->pointL[f->points[i]].pos[1];
+					mesh->pointL[f->points[i]].pos[2]=mesh->pointL[f->points[i]].pos[2];
+				}
+			}
+		}
+	}
+}
+
+
+void loadModel(Object3DS* obj)
+{
+	obj->file=lib3ds_file_load(obj->path);
+
+	  /* No nodes?  Fabricate nodes to display all the meshes. */
+	if( !obj->file->nodes )
+	{
+		Lib3dsMesh *mesh;
+		Lib3dsNode *node;
+
+		for(mesh = obj->file->meshes; mesh != NULL; mesh = mesh->next)
+		{
+		  node = lib3ds_node_new_object();
+		  strcpy(node->name, mesh->name);
+		  node->parent_id = LIB3DS_NO_PARENT;
+		  lib3ds_file_insert_node(obj->file, node);
+		}
+	}
+}
+
+void init3dsObject(Object3DS* obj)
 {
   glShadeModel(GL_SMOOTH); // Type of shading for the polygons
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // Polygon rasterization mode (polygon filled)
-
-  Load3DS(shuttle, shuttle->modelPath);
-  shuttle->id_texture = LoadBitmap(shuttle->texturePath); // The Function LoadBitmap() return the current texture ID
-
-  // If the last function returns -1 it means the file was not found so we exit from the program
-  if (shuttle->id_texture==-1)
-  {
-    MessageBox(NULL,"File with texture for 3d-object not found!", "Stellarium Error", MB_OK | MB_ICONERROR);
-    exit (0);
-  }
+  loadModel(obj);
 }
+
 
 // Init and load the solar system data
 void SolarSystem::load(const string& planetfile)
@@ -304,12 +368,32 @@ void SolarSystem::load(const string& planetfile)
       posfunc,osculating_func,
       pd.get_boolean(secname, "hidden", 0));
 
-    //kornyakov: for 3d objects
-    strcpy(p->objectInfo.modelPath, pd.get_str(secname, "3dmodel").c_str());
-    strcpy(p->objectInfo.texturePath, pd.get_str(secname, "tex_map").c_str());
-    p->objectInfo.resizeMult = pd.get_double(secname, "resize_multiplier");
-    if (strlen(p->objectInfo.modelPath)) // if this is 3dobject
-      init3dobject(&p->objectInfo);
+    //kornyakov&serkin: for 3d objects
+   // strcpy(p->object.path, pd.get_str(secname, "3dmodel").c_str());
+	strcpy(p->object.path, pd.get_str(secname, "3dmodel").c_str());
+	strcpy(p->object.texpath, pd.get_str(secname, "texpath").c_str());
+	p->object.scale = pd.get_double(secname, "scale");
+	p->object.angle = pd.get_double(secname, "angle");
+	
+	if (!p->object.scale)
+		p->object.scale = 1;
+
+//    strcpy(p->object.texturePath, pd.get_str(secname, "tex_map").c_str());
+	//MessageBox(NULL,p->object.path, "Stellarium Error", MB_OK | MB_ICONERROR);
+
+	//strcpy(p->objectInfo.modelPath, pd.get_str(secname, "3dmodel").c_str());
+    //strcpy(p->objectInfo.texturePath, pd.get_str(secname, "tex_map").c_str());
+
+   // p->objectInfo.resizeMult = pd.get_double(secname, "resize_multiplier");
+    //if (strlen(p->objectInfo.modelPath)) // if this is 3dobject
+     // init3dobject(&p->objectInfo);
+ // serkin
+
+	if (strlen(p->object.path))
+	{
+		init3dsObject(&p->object);
+		//p->objects.push_back(p->object);
+	}
 
     if (secname=="earth") earth = p;
     if (secname=="sun") sun = p;

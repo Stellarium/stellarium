@@ -21,6 +21,34 @@
 #define _CUSTOM_PROJECTOR_H_
 
 #include "projector.h"
+#include "planet.h"
+//serkin:
+#include <lib3ds/file.h>
+#include <lib3ds/camera.h>
+#include <lib3ds/mesh.h>
+#include <lib3ds/node.h>
+#include <lib3ds/material.h>
+#include <lib3ds/matrix.h>
+#include <lib3ds/vector.h>
+#include <lib3ds/light.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+#include <SDL_image.h>
+#include <stdio.h>
+
+#define	TEX_XSIZE	1024
+#define	TEX_YSIZE	1024
+
+struct _player_texture
+{
+  int valid; // was the loading attempt successful ? 
+  SDL_Surface *bitmap;
+  GLuint tex_id;	//OpenGL texture ID. It is likes DWORD (double machine word)
+  float scale_x, scale_y; // scale the texcoords, as OpenGL thinks in TEX_XSIZE and TEX_YSIZE
+};
+
+typedef struct _player_texture Player_texture;  
 
 // Class which handle projection modes and projection matrix
 // Overide some function usually handled by glu
@@ -39,8 +67,12 @@ private:
 		const Mat4d& mat, int orient_inside = 0) const;
 
   // Reimplementation of gluCylinder : glu is overrided for non standard projection
-  void display(object3d_ptr shuttle, const Mat4d& mat) const;
-  void s3dsObject(object3d_ptr object, const Mat4d& mat, int orient_inside = 0) const;
+ // void display(object3d_ptr shuttle, const Mat4d& mat) const;
+ // void s3dsObject(object3d_ptr object, const Mat4d& mat, int orient_inside = 0) const;
+ // serkin: new methods
+	void drawObject(Object3DS* obj, const Mat4d& mat);
+	void ms3dsObject(Object3DS* obj, const Mat4d& mat, int orient_inside = 0);
+	void render_node(Lib3dsNode *node, Lib3dsFile* file, const Mat4d& mat, double scale, char* tm);
 
 	// Override glVertex3f and glVertex3d
 	void sVertex3(double x, double y, double z, const Mat4d& mat) const;

@@ -157,27 +157,30 @@ public:
   static double initialAngleOfViewSelected;
 
   double GetTranslationValue(void);
-
 private:
 
-	// Struct used to store data for auto mov
-	typedef struct
-	{
-		Vec3d start;
-	    Vec3d aim;
-	    float speed;
-	    float coef;
-		bool local_pos;				// Define if the position are in equatorial or altazimutal
-	}auto_move;
+  // Struct used to store data for auto mov
+  typedef struct
+  {
+    Vec3d start;
+    Vec3d aim;
+    float speed;
+    float coef;
+    bool  local_pos;				// Define if the position are in equatorial or altazimutal
+  }auto_move;
 
-  // argus-cv: Variables for smooth x-rotating the eye matrixview
+  
   float speed;
   float coef;
-  float aimAngle;
-  float startAngle;
-  float currentAngle;
+
+  // Variables for smooth x-rotating the eye matrixview
+  float aimAngleX;      // target angle while we go alog x-axis, usually during tuning centerFovRatio
+  float startAngleX;
+  float currentAngleX;
   float centerFovRatio;
 
+  //kornyakov: the following variables are needed for screen rotation
+  //if during calibration front were not at the bottom of camera
   float aimAngleZ;
   float startAngleZ;
   float currentAngleZ;

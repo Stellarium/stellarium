@@ -3,7 +3,7 @@
 
 [Setup]
 AppName=Stellarium
-AppVerName=Stellarium 0.8.2.20070907
+AppVerName=StellariumArgus 0.8.2.20080513
 AppPublisher=Argus
 AppPublisherURL=http://www.argus-cv.com
 AppSupportURL=http://www.argus-cv.com
@@ -12,8 +12,7 @@ DefaultDirName={pf}\ArgusCV\StellariumArgus
 DefaultGroupName=ArgusCV\Stellarium
 AllowNoIcons=yes
 LicenseFile=..\freetype-2.1.10\docs\GPL.txt
-InfoAfterFile=..\Stellarium UG Rus.rtf
-OutputBaseFilename=setup_stellarium_ArgusCV
+OutputBaseFilename=setupStellariumArgusCV
 Compression=lzma
 SolidCompression=yes
 
@@ -27,12 +26,15 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 [Files]
 Source: "..\Build\Release\stellarium.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Build\Release\SDL.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Build\Release\SDL_image.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Build\Release\lib3ds-1_3.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Build\Release\cv100.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Build\Release\cxcore100.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Build\Release\highgui100.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Build\Release\libguide40.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Stellarium UG Rus.rtf"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\stellarium_user_guide-0.8.x.pdf"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\stellarium_user_guide-0.8.2.pdf"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\stellarium_user_guide_russian-0.8.2.pdf"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\Docs\User\Stellarium руководство пользователя.pdf"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\stellarium\stellarium\config\*"; DestDir: "{app}\config\"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\stellarium\stellarium\data\*"; DestDir: "{app}\data\"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\stellarium\stellarium\textures\*"; DestDir: "{app}\textures\"; Flags: ignoreversion recursesubdirs createallsubdirs
@@ -40,8 +42,9 @@ Source: "..\stellarium\stellarium\textures\*"; DestDir: "{app}\textures\"; Flags
 
 [Icons]
 Name: "{group}\Stellarium"; Filename: "{app}\stellarium.exe"; IconFilename: "{app}\data\stellarium.ico"; WorkingDir: "{app}"
-Name: "{group}\Stellarium Quick Start RU"; Filename: "{app}\Stellarium UG Rus.rtf"
-Name: "{group}\Stellarium user guide ENG"; Filename: "{app}\stellarium_user_guide-0.8.x.pdf"
+Name: "{group}\Stellarium руководство пользователя"; Filename: "{app}\Stellarium руководство пользователя.pdf"
+Name: "{group}\Stellarium user guide RU"; Filename: "{app}\stellarium_user_guide_russian-0.8.2.pdf"
+Name: "{group}\Stellarium user guide ENG"; Filename: "{app}\stellarium_user_guide-0.8.2.pdf"
 Name: "{group}\{cm:UninstallProgram,Stellarium}"; Filename: "{uninstallexe}"
 Name: "{userdesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; Tasks: desktopicon; IconFilename: "{app}\data\stellarium.ico"; WorkingDir: "{app}"
 Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\Stellarium"; Filename: "{app}\stellarium.exe"; Tasks: quicklaunchicon; IconFilename: "{app}\data\stellarium.ico"; WorkingDir: "{app}"

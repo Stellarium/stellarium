@@ -24,7 +24,7 @@ FisheyeProjector::FisheyeProjector(const Vec4i& viewport, double _fov)
                  :CustomProjector(viewport, _fov)
 {
 	min_fov = 0.0001;
-	max_fov = 270.00001;
+	max_fov = 270.00001;//kornyakov hack
 	set_fov(_fov);
 }
 /*

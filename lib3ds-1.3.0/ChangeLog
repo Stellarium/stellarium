@@ -1,0 +1,304 @@
+2007-06-20  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* Fixed loading of files without NODE_ID
+	* Updated Xcode projects
+	* Updated project files to improve doxygen output
+	
+2007-06-15  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* Removed float.c/float.h to avoid conflicts with ISO header
+	* Removed LIB3DS_EXPORT define from files
+
+2007-06-14  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* Added support for object flags in meshes, cameras and lights
+	* Fixed bug #1240026: 3dsplay can't display files without keyframer section
+	* Fixed node eval if no scale track is present
+	* Fixed bug# 1231343: basketball assert
+	* Added lib3ds_file_bounding_box_of_objects/of_nodes to fix bug #1160806
+	* Replaced lib3ds_matrix_mul by lib3ds_matrix_mult
+	* Updated Copyright information in files
+	* Created new Visual Studio 8 project files
+	* Renamed player.c to 3dsplay.c
+	* Removed out-dated examples (3ds2rib, 3ds2m)
+	* Revised configure.in and Makefile.am files Added support for shared and 
+	  static libs via libtool. Removed support to build 3dsplay to simplify 
+	  configuration
+	* Fixed bug #1691746: io.c has one more strict aliasing violation  
+	* Fixed bug #1077795: incorrect orientation matrices
+	* Fixed bug #1581774: Lib3dsTextureMapFlags
+	* Fixed bug #1726844: memory leak in lib3ds_file_load
+	* Applied patch 1550343: Possible memory leak in lib3ds_file_free()
+	* Fixed bug #998502: automake parameters missed in autogen.sh
+	* Fixed bug #1433032: lib3ds on 64 bit platforms
+	* Use size_t for lib3ds_io_read/write
+	* Fixed type conversion warnings (Visual Studio 8)
+	* Removed Lib3dsFile::num_meshes
+	* Removed DMALLOC support
+	
+2005-05-07 Reed Hedges <reed@interreality.org>
+
+	* Prerelease 1.3.0-pre1. This release adds 'player' in the installation 
+	  as '3dsplayer'
+
+2004-11-20  Edward Falk  <efalk@sourceforge.net>
+
+	* Fixed bugs in matrix.c and vector.c relating to degenerate cases.
+	* Added lots of doxygen comments to several files.
+	* Incorporated SELF_ILPCT patch by Lee Butler (Patch #787678)
+	* Incorporated texture matching patch by Gernot Ziegler
+	* Fixed mesh interpolation bug (first approximation)
+	* Major enhancements throughout player.c
+	* Added more dump functions.
+	* Added lib3ds_object_bounding_box()
+	* Added "rpm" target to Makefie.am
+	* Bumped to version 1.3.0
+
+2004-06-04  Reed Hedges  <reed@interreality.org>
+
+	* Some fixes contributed by Stephane Denis were previously applied
+	* Added IDE project files for MSVC7 and XCode contributed by Stephane Denis.
+
+2002-09-19  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* matrix.c: lib3ds_matrix_dump, fixed lib3ds_matrix_camera.
+	* camera.c: lib3ds_camera_dump 
+
+2002-01-14  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* Added configure and aclocal.m4 to CVS.
+	  WARNING: Files may not be up to date !!!
+	* Removed libtool. Building shared libs using the GNU 
+	  build tools is no longer supported.
+	* material.c: Added default initializations for material
+	  (including the texture maps)
+	* m4/glut.m4: Checking now for win32 GL/GLU/GLUT libraries
+	  when compiling with cygwin.
+	  Added -lobjc to LIBS for MacOS X.
+	
+2001-11-14  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* glstub.h: Created as default glstub.h.in for MSVC.
+
+2001-10-14  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* viewport.c: Calling lib3ds_viewport_set_views with parameter
+	  views == 0 will now be handled proper for the case that no
+	  views are allocated.
+
+2001-09-16  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* mesh.c: Fixed bug in lib3ds_mesh_dump(). The face list loops on 
+	  mesh->points length - which should be mesh->faces.(Reported by
+	  lib3ds@lee-morgan.net)
+
+2001-07-24  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* autogen.sh: Added a check in the search for `aclocal` support paths
+	  such that the path is only included if aclocal is not installed in
+	  that path (if aclocal is installed in /usr/bin/ then /usr/share is
+	  skipped). Removed the break in the search so that again all search
+	  paths are used.
+	* configure.in, Doxyfile: Changed version to 1.2.0.
+
+2001-07-23  Eric Sunshine  <sunshine@sunshineco.com>
+
+	* autogen.sh: Augmented the search for `aclocal' support files so that
+	  only the first found-path is used (that is, only one `-I' directive
+	  is added to the command line).  Also altered the search path priority
+	  so that /usr/local/share is preferred over /usr/share.  Hopefully
+	  this will fix the problem of `aclocal' complaining about duplicate
+	  macro definitions on some installations where, presumably,
+	  /usr/share/aclocal and /usr/local/share/aclocal both point at the
+	  same physical directory or are at least copies of one another.
+
+2001-07-20  Eric Sunshine  <sunshine@sunshineco.com>
+
+	* autogen.sh: Augmented to work correctly despite absence of GNU
+	  libtool and libtoolize on MacOS/X.  The libtool program on
+	  MacOS/X was developed independently and is a completely distinct
+	  beast from the GNU libtool.  If libtoolize is missing,
+	  autogen.sh now manually grabs the needed support files
+	  (config.sub, config.guess, ltconfig, and ltmain.sh).
+
+2001-07-19  Eric Sunshine  <sunshine@sunshineco.com>
+
+	* m4/glut.m4: Augmented CONFIGURE_GLUT() macro so that it now
+	  checks for gl.h, glu.h, and glut.h in <OpenGL/*> and <GLUT/*> in
+	  addition to <GL/*>.  Also now checks if `-framework GLUT' and
+	  `-framework OpenGL' are required when linking an application.
+	  These changes allow the example applications to build on
+	  MacOS/X.
+	* configure.in: Now generates `examples/glstub.h' from the new
+	  `examples/glstub.h.in'.  This file imports the OpenGL and GLUT
+	  headers using the paths determined by the CONFIGURE_GLUT() macro
+	  (i.e. <OpenGL/gl.h> on MacOS/X; rather than <GL/gl.h> for other
+	  platforms).
+	* examples/player.c: Now includes "glstub.h" rather than
+	  <GL/glut.h>.
+	* m4/glut.m4: Fixed a bug in CONFIGURE_GLUT() where it ignored
+	  user-supplied CFLAGS from --with-glut-cflags when checking for
+	  the presence of gl.h, glu.h, and glut.h.
+
+2001-07-18  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* m4/glut.m4: Added GL/GLU/glut check.
+	* Retructured files. Create tools directory for tools that get
+	  installed. Moved 3dsdump and 3ds2m to tools. Renamed 3dsplay
+	  the examples directory into player (names which do not start
+	  with a digit are much easier to handle with automake).
+	* tools/3ds2m: we do NOT need to multiply with the mesh matrix
+	  (changed 2001-01-09 but 3ds2m has not been updated).
+	
+2001-07-07  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* shaders: Added shaders directory. Contains Renderman shaders
+	  to emulate the 3ds renderer (materials and lights). Only poor
+	  results at the moment.
+	* examples/3ds2rib: Modified to use new shaders.
+	
+2001-06-16  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* fixed spotlight reader/writer
+	* added lib3ds_light_dump, lib3ds_camera_dump
+	* updated lib3ds_material_dump
+	* added lib3ds_file_bounding_box
+	* Release 1.1.0
+
+2001-06-07  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* write only necessary chunks to .3ds file
+	* file.h/file.c: renamed lib3ds_open to lib3ds_file_load
+	  removed lib3ds_close (use lib3ds_file_free instead !!)
+          created lib3ds_file_save.
+	* Added msvc project file to create a dll.
+	* LIB3DS_KFHDR remains unchanged when saving a previously loaded
+	  file.
+
+2001-06-05  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* node.h/node.c, file.h/file.c: renamed "id" to node_id
+	* recreated MSVC project files. Only static library creation
+	  supported at the moment.
+
+2001-05-08  Michael Fink  <michael.fink@redspark.com>
+
+	* in lib3ds_atmosphere_write() the two chunk id's were
+	  accidentally swapped
+	* in lib3ds_mesh_write(), the chunks were reordered to enable a
+	  successful import into AutoCAD 2000i and 3d Studio MAX 3.1
+	* in the struct _Lib3dsMapData the "maptype" data member was
+	  added, increasing the size of the chunk LIB3DS_MESH_TEXTURE_INFO
+	  to 92 bytes (as seen in 3ds files from 3d Studio)
+	* the chunk LIB3DS_SHADOW_RANGE contains, according to the 3ds
+	  file development kit (3ds-fdk) a dword chunk; reading and
+	  writing the chunk should be fixed.
+
+2001-03-20  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* examples/3dsplay.c: new simples 3dsplayer example
+	  using glut. msvc support only at the moment.
+	* lib3ds/mesh.c: started working on vertex normal support
+	  (smoothing not supported at the moment, can't test them)
+	* Doxygen documentation files changed from *.doc to *.txt
+	  to avoid collisions with MS-Word on windows platforms  
+
+2001-01-15  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* lib3ds/material.c (lib3ds_material_dump): 
+	  Added dumping of ambient, diffuse, specular, shininess, 
+	  shin_strength, shading and texture1/texture2 properties
+	* examples/3dsdump.c (main): 
+	  Added suport for dumping the 3ds chunk structure
+	* lib3ds.spec: Updated
+
+2001-01-14  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* Removed Warnings (gcc & msvc++6.0)
+	* Cleaning up
+	* lib3ds.spec: Recreated
+
+2001-01-10  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* Wrote writing code for keyframer, background, atmosphere and 
+	  shadow settings.
+
+2001-01-09  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* lib3ds/mesh.c (lib3ds_mesh_write): 
+	  the point list is no loner retransformed to avoid numerical
+	  problems.  to use meshes with the keyframer all points must be
+	  transformed by the inverse mesh-matrix manually.
+	* lib3ds/camera.c (lib3ds_camera_write):
+	  bugfix LIB3DS_N_CAMERA (fov)
+	* lib3ds/light.c (lib3ds_light_write):
+	  bugfix LIB3DS_DL_SPOTLIGHT
+	* lib3ds/material.c (texture_map_write):
+	  write only chunks for maps with name != ""
+	  (int_percentage_read), (int_percentage_write):
+	  bugfix rounding error
+
+2001-01-04  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* lib3ds/readwrite.c: cpu independent endiness handling 
+	  as suggested by Daniel Richard G. <straker@mit.edu>
+
+2001-01-03  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* lib3ds/mesh.c: Added missing texture mapping handling
+	  LIB3DS_TEX_VERTS 
+	  LIB3DS_MESH_TEXTURE_INFO
+	* lib3ds/matrix.c 
+	  (lib3ds_matrix_camera): Bug #124414 fixed
+	* lib3ds/material.c 
+	  (color_read): Bug #124399 fixed
+	  (texture_map_read): texture percentage fixed 
+
+2000-10-30  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* Renamed tools (examples) from lib3ds* -> 3ds*
+	* configure.in: Removed all non GCC compiler options,
+	    leaving cflags untouched 
+
+2000-10-27  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* doc/mainpage.doc: Added view3ds OpenGL realtime previewer example.
+	  Avaiable as separate distributon.
+	  No Changes to the library.
+
+2000-10-25  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* Release 0.9.1
+	* Examples get installed now
+	* Man pages get installed now
+
+2000-10-24  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* lib3ds.spec: Created
+
+2000-10-19  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* CVSROOT/cvswrappers: created entries for msvc project files 
+	* Created MSVC project files
+	* Setting up cvs commit logging 
+
+2000-10-17  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* Release: 0.9.0
+
+2000-10-09  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* Using now doxygen for documentation and webpage
+
+2000-10-05  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* Turned all double linked lists into single linked lists 
+	* Added dmalloc support for memory leak tracking 
+	* Added support to deallocate allocated memory
+
+2000-10-04  Jan Eric Kyprianidis <www.kyprianidis.com>
+
+	* ANSI C fixes. Using now -ansi & -pedantic-errors for debug mode 
+	* Improved little/endian checks & debug mode handling
+	* lib3ds/file.h: Added material lookup functions
+	* Starting ChangeLog

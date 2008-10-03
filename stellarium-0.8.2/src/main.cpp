@@ -171,6 +171,7 @@ void setDirectories(const char* executableName)
         // Failure....
         cerr << "ERROR : I can't find the datas directories in :\n"  << CONFIG_DATA_DIR << 
           "/ nor in ./ nor in ../\nYou may fully install the software (type \"make install\" on POSIX systems)\nor launch the application from the stellarium package directory." << endl;
+        MessageBox(NULL,"Can't find \"data//hipparcos.fab\" file.\nCheck your working directory.", "Stellarium Error", MB_OK | MB_ICONERROR);
         exit(-1);
       }
     }

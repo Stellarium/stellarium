@@ -630,6 +630,8 @@ public:
 	//! Get atmosphere fade duration in s
 	float getAtmosphereFadeDuration(void) const {return atmosphere->getFadeDuration();}
 
+  void setPlanetsFadingCoefficient(float f) {projection->planetsFadingCoefficient = f;}
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Milky Way
 	//! Set flag for displaying Milky Way
@@ -752,7 +754,7 @@ private:
 
 	// Main elements of the program
 	Navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
-	Observator * observatory;			// Manage observer position
+  Observator * observatory;			// Manage observer position
 	Projector * projection;				// Manage the projection mode and matrix
 	StelObject selected_object;			// The selected object in stellarium
 	class HipStarMgr * hip_stars;		// Manage the hipparcos stars

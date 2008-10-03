@@ -26,6 +26,12 @@
 #include "texture.h"
 #include "3dsloader.h"
 
+
+#define texturepath "F:\\MyStudy\\3dsmodels\\textures\\"
+
+char datapath[1024];
+
+
 CustomProjector::CustomProjector(const Vec4i& viewport, double _fov)
                 :Projector(viewport, _fov)
 {
@@ -41,7 +47,7 @@ void CustomProjector::init_project_matrix(void)
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixd(mat_projection);
-  glMatrixMode(GL_MODELVIEW);
+	glMatrixMode(GL_MODELVIEW);
 }
 
 // Override glVertex3f
@@ -173,6 +179,10 @@ void CustomProjector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
                           intensity*(c*diffuseLight[1] + ambientLight[1]),
                           intensity*(c*diffuseLight[2] + ambientLight[2]));                
             }
+            else if (radius < 1.0) //kornyakov hack for Sun fading
+            {
+              glColor3f(intensity, intensity, intensity);  
+            }
             sVertex3(x * radius, y * radius, z * one_minus_oblateness * radius, mat);
             x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
             y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
@@ -190,6 +200,10 @@ void CustomProjector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
                 glColor3f(intensity*(c*diffuseLight[0] + ambientLight[0]),
                   intensity*(c*diffuseLight[1] + ambientLight[1]),
                   intensity*(c*diffuseLight[2] + ambientLight[2])); 
+            }
+            else if (radius < 1.0) //kornyakov hack for Sun fading
+            {
+              glColor3f(intensity, intensity, intensity);  
             }
             sVertex3(x * radius, y * radius, z * one_minus_oblateness * radius, mat);
             s += ds;
@@ -267,64 +281,296 @@ const Mat4d& mat, int orient_inside) const
 	if (orient_inside) glCullFace(GL_BACK);
 }
 
-void CustomProjector::display(object3d_ptr shuttle, const Mat4d& mat) const
+
+void *convert_to_RGB_Surface(SDL_Surface *bitmap)
 {
-  float previousAmbient[4] = {0,0,0,0};
-  float zero[4] = {0,0,0,0};
-  float unity[4] = {1, 1, 1, 1};
-  glGetMaterialfv(GL_FRONT, GL_AMBIENT, previousAmbient);
-  glMaterialfv(GL_FRONT, GL_AMBIENT, unity);
-  glMaterialfv(GL_FRONT,GL_EMISSION, unity);
+  unsigned char *pixel = (unsigned char *)malloc(sizeof(char) * 4 * bitmap->h * bitmap->w); 
+  int soff = 0;   
+  int doff = 0;   
+  int x, y;
+  unsigned char *spixels = (unsigned char *)bitmap->pixels;
+  SDL_Palette *pal = bitmap->format->palette; 
 
-  glBindTexture(GL_TEXTURE_2D, shuttle->id_texture); // We set the active texture 
+  for (y = 0; y < bitmap->h; y++)
+    for (x = 0; x < bitmap->w; x++)
+    {
+      SDL_Color* col = &pal->colors[spixels[soff]];
 
-  bool flag = glIsEnabled(GL_DEPTH_TEST);
-  glClear(GL_DEPTH_BUFFER_BIT);
-  glEnable(GL_DEPTH_TEST); // We enable the depth test (also called z buffer)  
-  glBegin(GL_TRIANGLES); // glBegin and glEnd delimit the vertices that define a primitive (in our case triangles)
-  for (int l_index=0;l_index<shuttle->polygons_qty;l_index++)
-  {
-    //----------------- FIRST VERTEX -----------------
-    // Texture coordinates of the first vertex
-    glTexCoord2f( shuttle->mapcoord[ shuttle->polygon[l_index].a ].u,
-      shuttle->mapcoord[ shuttle->polygon[l_index].a ].v);
-    // Coordinates of the first vertex
-    sVertex3( shuttle->vertex[ shuttle->polygon[l_index].a ].x,
-      shuttle->vertex[ shuttle->polygon[l_index].a ].y,
-      shuttle->vertex[ shuttle->polygon[l_index].a ].z, mat);
+      pixel[doff] = col->r; 
+      pixel[doff+1] = col->g; 
+      pixel[doff+2] = col->b; 
+      pixel[doff+3] = 255; 
+      doff += 4; 
+      soff++;
+    }
 
-    //----------------- SECOND VERTEX -----------------
-    // Texture coordinates of the second vertex
-    glTexCoord2f( shuttle->mapcoord[ shuttle->polygon[l_index].b ].u,
-      shuttle->mapcoord[ shuttle->polygon[l_index].b ].v);
-    // Coordinates of the second vertex
-    sVertex3( shuttle->vertex[ shuttle->polygon[l_index].b ].x,
-      shuttle->vertex[ shuttle->polygon[l_index].b ].y,
-      shuttle->vertex[ shuttle->polygon[l_index].b ].z, mat);
-
-    //----------------- THIRD VERTEX -----------------
-    // Texture coordinates of the third vertex
-    glTexCoord2f( shuttle->mapcoord[ shuttle->polygon[l_index].c ].u,
-      shuttle->mapcoord[ shuttle->polygon[l_index].c ].v);
-    // Coordinates of the Third vertex
-    sVertex3( shuttle->vertex[ shuttle->polygon[l_index].c ].x,
-      shuttle->vertex[ shuttle->polygon[l_index].c ].y,
-      shuttle->vertex[ shuttle->polygon[l_index].c ].z, mat);
-  }
-  glEnd();
-  if (!flag) glDisable(GL_DEPTH_TEST); // We enable the depth test (also called z buffer)
-
-  glMaterialfv(GL_FRONT, GL_AMBIENT, previousAmbient);
-  glMaterialfv(GL_FRONT, GL_EMISSION, zero);
+    return (void *)pixel; 
 }
 
-// Reimplementation of gluCylinder : glu is overrided for non standard projection
-void CustomProjector::s3dsObject(object3d_ptr shuttle, const Mat4d& mat, int orient_inside) const
+void CustomProjector::render_node(Lib3dsNode *node, Lib3dsFile* file, const Mat4d& matrix, double scale, char* tp)
 {
-  glPushMatrix();
-  glLoadMatrixd(mat);
+	Lib3dsNode *p;
+	Player_texture *pt;
+    for (p=node->childs; p!=0; p=p->next) {
+      render_node(p, file, matrix, scale, tp);
+    }
+	if (node->type==LIB3DS_OBJECT_NODE) {
+		Lib3dsMesh *mesh;
+    if (strcmp(node->name,"$$$DUMMY")==0) { //Serkin: what is it?
+      return;
+    }
 
-  CustomProjector::display(shuttle, mat);
+    mesh = lib3ds_file_mesh_by_name(file, node->data.object.morph);
+    if( mesh == NULL )
+      mesh = lib3ds_file_mesh_by_name(file, node->name);
 
-  glPopMatrix();
+    if (!mesh->user.d) 
+	{
+      ASSERT(mesh);
+      if (!mesh) 
+	  {
+        return;
+      }
+        unsigned p;
+        Lib3dsVector *normalL=(Lib3dsVector *)malloc(3*sizeof(Lib3dsVector)*mesh->faces);
+        Lib3dsMaterial *oldmat = (Lib3dsMaterial *)-1;
+        {
+          Lib3dsMatrix M;
+          lib3ds_matrix_copy(M, mesh->matrix);
+          lib3ds_matrix_inv(M);
+          glMultMatrixf(&M[0][0]);
+        }
+        lib3ds_mesh_calculate_normals(mesh, normalL);
+
+        for (p=0; p<mesh->faces; ++p) {
+          Lib3dsFace *f=&mesh->faceL[p];
+          Lib3dsMaterial *mat=0;
+
+          Player_texture *pt = NULL;
+          int tex_mode = 0;
+
+
+          if (f->material[0]) {
+            mat=lib3ds_file_material_by_name(file, f->material);
+          }
+
+          if( mat != oldmat ) {
+            if (mat) {
+				if( mat->two_sided )
+                glDisable(GL_CULL_FACE);
+              else
+                glEnable(GL_CULL_FACE);
+
+              //glDisable(GL_CULL_FACE);
+
+              /* Texturing added by Gernot < gz@lysator.liu.se > */
+			  
+              if (mat->texture1_map.name[0]) 
+			  {		/* texture map? */
+                Lib3dsTextureMap *tex = &mat->texture1_map;
+                if (!tex->user.p) 
+				{		/* no player texture yet? */
+                  char texname[1024];
+                  pt = (Player_texture *)malloc(sizeof(*pt));
+                  tex->user.p = pt;
+                  strcpy(texname, datapath);
+                  strcat(texname, tp);
+				  strcat(texname, "\\");
+                  strcat(texname, tex->name);
+                  pt->bitmap = IMG_Load(texname);
+                  if (pt->bitmap) 
+				  {	/* could image be loaded ? */
+                    /* this OpenGL texupload code is incomplete format-wise!
+                    * to make it complete, examine SDL_surface->format and
+                    * tell us @lib3ds.sf.net about your improvements :-)
+                    */
+                    int upload_format = GL_RED; /* safe choice, shows errors */
+
+                    int bytespp = pt->bitmap->format->BytesPerPixel;
+                    void *pixel = NULL;
+                    glGenTextures(1, &pt->tex_id);
+                    if (pt->bitmap->format->palette) 
+					{
+                      pixel = convert_to_RGB_Surface(pt->bitmap);
+                      upload_format = GL_RGBA;
+                    }
+                    else 
+					{
+                      pixel = pt->bitmap->pixels;
+                      /* e.g. this could also be a color palette */
+                      if (bytespp == 1) 
+						  upload_format = GL_LUMINANCE;
+                      else if (bytespp == 3) 
+						  upload_format = GL_RGB;
+                      else if (bytespp == 4) 
+						  upload_format = GL_RGBA;
+                    }
+                    glBindTexture(GL_TEXTURE_2D, pt->tex_id);
+                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TEX_XSIZE, TEX_YSIZE, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+                    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, pt->bitmap->w, pt->bitmap->h, upload_format, GL_UNSIGNED_BYTE, pixel);
+                    pt->scale_x = (float)pt->bitmap->w/(float)TEX_XSIZE;
+                    pt->scale_y = (float)pt->bitmap->h/(float)TEX_YSIZE;
+                    pt->valid = 1;
+                  }
+                  else 
+				  {
+                    fprintf(stderr, "Load of texture %s did not succeed (format not supported !)\n", texname);
+                    pt->valid = 0;
+                  }
+                }
+                else 
+				{
+                  pt = (Player_texture *)tex->user.p;
+                }
+                tex_mode = pt->valid;
+              }
+              else {
+                tex_mode = 0;
+              }
+			  if (tex_mode)
+			  {
+				static const Lib3dsRgba a={1.0, 1.0, 1.0, 1.0};
+				static const Lib3dsRgba d={1.0, 1.0, 1.0, 0.0};
+				static const Lib3dsRgba s={0.0, 0.0, 0.0, 1.0};
+				glMaterialfv(GL_FRONT, GL_DIFFUSE, d);
+				glMaterialfv(GL_FRONT, GL_SPECULAR, s);
+				glMaterialfv(GL_FRONT, GL_AMBIENT,a);
+				glMaterialf(GL_FRONT, GL_SHININESS, 128);
+			  }
+			  else
+			  {
+				glMaterialfv(GL_FRONT, GL_AMBIENT, mat->ambient);
+				glMaterialfv(GL_FRONT, GL_DIFFUSE, mat->diffuse);
+				glMaterialfv(GL_FRONT, GL_SPECULAR, mat->specular);
+				glMaterialf(GL_FRONT, GL_SHININESS, 64);
+			  }
+            }
+            else {
+              static const Lib3dsRgba a={0.5, 0.5, 0.5, 1.0};
+              static const Lib3dsRgba d={0.7, 0.7, 0.7, 1.0};
+              static const Lib3dsRgba s={1.0, 1.0, 1.0, 1.0};
+              glMaterialfv(GL_FRONT, GL_AMBIENT, a);
+              glMaterialfv(GL_FRONT, GL_DIFFUSE, d);
+              glMaterialfv(GL_FRONT, GL_SPECULAR, s);
+              glMaterialf(GL_FRONT, GL_SHININESS, 128);
+            }
+            oldmat = mat;
+          }
+
+          else if (mat != NULL && mat->texture1_map.name[0]) {
+            Lib3dsTextureMap *tex = &mat->texture1_map;
+            if (tex != NULL && tex->user.p != NULL) 
+			{
+              pt = (Player_texture *)tex->user.p;
+              tex_mode = pt->valid;
+            }
+          }
+          {
+			int i;
+			
+			if (tex_mode)
+			{
+				glEnable(GL_TEXTURE_2D);
+				glBindTexture(GL_TEXTURE_2D, pt->tex_id);
+				glNormal3fv(f->normal);
+				glBegin(GL_TRIANGLES);
+				for (i=0; i<3; ++i)
+				{
+					glNormal3fv(normalL[3*p+i]);
+					if (mesh->texelL)
+						glTexCoord2f(mesh->texelL[f->points[i]][1]*pt->scale_x, pt->scale_y - mesh->texelL[f->points[i]][0]*pt->scale_y);
+					sVertex3((double)mesh->pointL[f->points[i]].pos[0]*scale, (double)mesh->pointL[f->points[i]].pos[1]*scale, (double)mesh->pointL[f->points[i]].pos[2]*scale, matrix);
+				} 
+				glEnd();
+			}
+			else
+			{
+				glNormal3fv(f->normal);
+				glBegin(GL_TRIANGLES);
+				for (i=0; i<3; ++i)
+				{
+					glNormal3fv(normalL[3*p+i]);
+					float x = mesh->pointL[f->points[i]].pos[0]*scale;
+					float y = mesh->pointL[f->points[i]].pos[1]*scale;
+					float z = mesh->pointL[f->points[i]].pos[2]*scale;
+					sVertex3(x, y, z, matrix);
+				}
+				glEnd();
+			}
+
+            if (tex_mode)
+              glDisable(GL_TEXTURE_2D);
+          }
+		}
+        free(normalL);
+      }
+  }
+}
+
+void CustomProjector::drawObject(Object3DS* obj, const Mat4d& mat)
+{
+	bool flag = glIsEnabled(GL_DEPTH_TEST);
+	glClear(GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
+	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
+	glHint(GL_POLYGON_SMOOTH_HINT, GL_FASTEST);
+	Lib3dsNode *p;
+	double scale = obj->scale;
+	for (p=obj->file->nodes; p!=0; p=p->next) {
+		render_node(p, obj->file, mat, scale, obj->texpath);
+    }
+	if (!flag) glDisable(GL_DEPTH_TEST); // We enable the depth test (also called z buffer)
+
+/*#define f 0.000001f
+	glBegin(GL_QUADS);			// Start Drawing Quads
+		// Front Face
+		glNormal3f( 0.0f, 0.0f, 1.0f);		// Normal Facing Forward
+		glTexCoord2f(0.0f, 0.0f); sVertex3(-f, f,  f, mat);	// Bottom Left Of The Texture and Quad
+		glTexCoord2f(1.0f, 0.0f); sVertex3( f, -f,  f, mat);	// Bottom Right Of The Texture and Quad
+		glTexCoord2f(1.0f, 1.0f); sVertex3( f,  f,  f, mat);	// Top Right Of The Texture and Quad
+		glTexCoord2f(0.0f, 1.0f); sVertex3(-f,  f,  f, mat);	// Top Left Of The Texture and Quad
+		// Back Face
+		glNormal3f( 0.0f, 0.0f,-1.0f);		// Normal Facing Away
+		glTexCoord2f(1.0f, 0.0f); sVertex3(-f, -f, -f, mat);	// Bottom Right Of The Texture and Quad
+		glTexCoord2f(1.0f, 1.0f); sVertex3(-f,  f, -f, mat);	// Top Right Of The Texture and Quad
+		glTexCoord2f(0.0f, 1.0f); sVertex3( f,  f, -f, mat);	// Top Left Of The Texture and Quad
+		glTexCoord2f(0.0f, 0.0f); sVertex3( f, -f, -f, mat);	// Bottom Left Of The Texture and Quad
+		// Top Face
+		glNormal3f( 0.0f, 1.0f, 0.0f);		// Normal Facing Up
+		glTexCoord2f(0.0f, 1.0f); sVertex3(-f,  f, -f, mat);	// Top Left Of The Texture and Quad
+		glTexCoord2f(0.0f, 0.0f); sVertex3(-f,  f,  f, mat);	// Bottom Left Of The Texture and Quad
+		glTexCoord2f(1.0f, 0.0f); sVertex3( f,  f,  f, mat);	// Bottom Right Of The Texture and Quad
+		glTexCoord2f(1.0f, 1.0f); sVertex3( f,  f, -f, mat);	// Top Right Of The Texture and Quad
+		// Bottom Face
+		glNormal3f( 0.0f,-1.0f, 0.0f);		// Normal Facing Down
+		glTexCoord2f(1.0f, 1.0f); sVertex3(-f, -f, -f, mat);	// Top Right Of The Texture and Quad
+		glTexCoord2f(0.0f, 1.0f); sVertex3( f, -f, -f, mat);	// Top Left Of The Texture and Quad
+		glTexCoord2f(0.0f, 0.0f); sVertex3( f, -f,  f, mat);	// Bottom Left Of The Texture and Quad
+		glTexCoord2f(1.0f, 0.0f); sVertex3(-f, -f,  f, mat);	// Bottom Right Of The Texture and Quad
+		// Right face
+		glNormal3f( 1.0f, 0.0f, 0.0f);		// Normal Facing Right
+		glTexCoord2f(1.0f, 0.0f); sVertex3( f, -f, -f, mat);	// Bottom Right Of The Texture and Quad
+		glTexCoord2f(1.0f, 1.0f); sVertex3( f,  f, -f, mat);	// Top Right Of The Texture and Quad
+		glTexCoord2f(0.0f, 1.0f); sVertex3( f,  f,  f, mat);	// Top Left Of The Texture and Quad
+		glTexCoord2f(0.0f, 0.0f); sVertex3( f, -f,  f, mat);	// Bottom Left Of The Texture and Quad
+		// Left Face
+		glNormal3f(-1.0f, 0.0f, 0.0f);		// Normal Facing Left
+		glTexCoord2f(0.0f, 0.0f); sVertex3(-f, -f, -f, mat);	// Bottom Left Of The Texture and Quad
+		glTexCoord2f(1.0f, 0.0f); sVertex3(-f, -f,  f, mat);	// Bottom Right Of The Texture and Quad
+		glTexCoord2f(1.0f, 1.0f); sVertex3(-f,  f,  f, mat);	// Top Right Of The Texture and Quad
+		glTexCoord2f(0.0f, 1.0f); sVertex3(-f,  f, -f, mat);	// Top Left Of The Texture and Quad
+	glEnd();	*/
+}
+
+void CustomProjector::ms3dsObject(Object3DS* obj, const Mat4d& mat, int orient_inside)
+{
+	glPushMatrix();
+	glLoadMatrixd(mat);
+	CustomProjector::drawObject(obj, mat);
+	glPopMatrix();
 }

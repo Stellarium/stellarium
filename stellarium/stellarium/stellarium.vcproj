@@ -39,7 +39,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;..\..\stellarium-0.8.2&quot;;..\..\include;..\..\libiconv\src;&quot;..\..\stellarium-0.8.2\src&quot;;&quot;..\..\stellarium-0.8.2\src\stellastro&quot;;&quot;..\..\stellarium-0.8.2\src\glpng&quot;;&quot;..\..\stellarium-0.8.2\src\iniparser&quot;;&quot;..\..\stellarium-0.8.2\src\stellplanet&quot;;..\..\lpng1212;..\..\ZLib;&quot;..\..\freetype-2.1.10\include&quot;;&quot;..\..\SDL-1.2.11\include&quot;;..\..\gettext\src"
+				AdditionalIncludeDirectories="&quot;..\..\SDL_image-1.2.6&quot;;&quot;..\..\lib3ds-1.3.0&quot;;&quot;..\..\stellarium-0.8.2&quot;;..\..\include\glew;..\..\include;..\..\libiconv\src;&quot;..\..\stellarium-0.8.2\src&quot;;&quot;..\..\stellarium-0.8.2\src\stellastro&quot;;&quot;..\..\stellarium-0.8.2\src\glpng&quot;;&quot;..\..\stellarium-0.8.2\src\iniparser&quot;;&quot;..\..\stellarium-0.8.2\src\stellplanet&quot;;..\..\lpng1212;..\..\ZLib;&quot;..\..\freetype-2.1.10\include&quot;;&quot;..\..\SDL-1.2.11\include&quot;;..\..\gettext\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;__MSVC__;_WIN32_WINNT=0x0400;_USE_MATH_DEFINES"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -57,8 +57,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="glut32.lib libpngd.lib freetype2110MT_D.lib Opengl32.lib Ws2_32.lib Glu32.lib highgui.lib cxcore.lib cv.lib gettext.lib libcharset.lib libiconv.lib shell32.lib user32.lib"
-				AdditionalLibraryDirectories="..\..\lib\debug;..\..\Build\freetype_debug;..\..\Build\lpng_Debug;..\..\Build\zlib_debug;..\..\Build\SDL_Debug;&quot;..\..\Build\$(ConfigurationName)\gettext.&quot;;..\..\Build\Debug\libcharset;..\..\Build\Debug\libiconv"
+				AdditionalDependencies="SDL_image_d.lib glaux.lib lib3ds-1_3d.lib glew32.lib glut32.lib libpngd.lib freetype2110MT_D.lib Opengl32.lib Ws2_32.lib Glu32.lib highgui.lib cxcore.lib cv.lib gettext.lib libcharset.lib libiconv.lib shell32.lib user32.lib"
+				AdditionalLibraryDirectories="..\..\Build\SDL_image_debug;..\..\Build\lib3ds_debug;..\..\lib\debug;..\..\Build\freetype_debug;..\..\Build\lpng_Debug;..\..\Build\zlib_debug;..\..\Build\SDL_Debug;&quot;..\..\Build\$(ConfigurationName)\gettext.&quot;;..\..\Build\Debug\libcharset;..\..\Build\Debug\libiconv"
 				IgnoreAllDefaultLibraries="false"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -86,7 +86,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /Y &quot;C:\Program Files\OpenCV\bin\highgui100.dll&quot; &quot;..\..\Build\Debug\highgui100.dll&quot;&#x0D;&#x0A;copy /Y &quot;C:\Program Files\OpenCV\bin\cxcore100.dll&quot; &quot;..\..\Build\Debug\cxcore100.dll&quot;&#x0D;&#x0A;copy /Y &quot;C:\Program Files\OpenCV\bin\cv100.dll&quot; &quot;..\..\Build\Debug\cv100.dll&quot;&#x0D;&#x0A;copy /Y &quot;C:\Program Files\OpenCV\bin\libguide40.dll&quot; &quot;..\..\Build\Debug\libguide40.dll&quot;&#x0D;&#x0A;copy /Y &quot;..\..\Build\SDL_Debug\SDL.dll&quot; &quot;..\..\Build\Debug\SDL.dll&quot;&#x0D;&#x0A;"
+				CommandLine="copy /Y &quot;C:\Program Files\OpenCV\bin\highgui100.dll&quot; &quot;..\..\Build\Debug\highgui100.dll&quot;&#x0D;&#x0A;copy /Y &quot;C:\Program Files\OpenCV\bin\cxcore100.dll&quot; &quot;..\..\Build\Debug\cxcore100.dll&quot;&#x0D;&#x0A;copy /Y &quot;C:\Program Files\OpenCV\bin\cv100.dll&quot; &quot;..\..\Build\Debug\cv100.dll&quot;&#x0D;&#x0A;copy /Y &quot;C:\Program Files\OpenCV\bin\libguide40.dll&quot; &quot;..\..\Build\Debug\libguide40.dll&quot;&#x0D;&#x0A;copy /Y &quot;..\..\Build\SDL_Debug\SDL.dll&quot; &quot;..\..\Build\Debug\SDL.dll&quot;&#x0D;&#x0A;copy /Y &quot;..\..\Build\SDL_image_debug\SDL_image_d.dll &quot; &quot;..\..\Build\Debug\SDL_image_d.dll &quot;&#x0D;&#x0A;copy /Y &quot;..\..\Build\lib3ds_debug\lib3ds-1_3d.dll&quot; &quot;..\..\Build\Debug\lib3ds-1_3d.dll&quot;"
 			/>
 		</Configuration>
 		<Configuration

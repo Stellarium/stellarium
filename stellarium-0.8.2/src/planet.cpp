@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-
+#include "Shader.cpp" //todo: make header
 #include <iostream>
 #include <iomanip>
 
@@ -27,6 +27,10 @@
 #include "s_gui.h"
 #include "stellastro.h" // just for get_apparent_sidereal_time
 #include "3dsloader.h"
+
+TShader MoonShader;
+TShader MarsShader;
+TShader MercuryShader;
 
 s_font* Planet::planet_name_font = NULL;
 float Planet::object_scale = 1.f;
@@ -701,16 +705,46 @@ void Planet::draw_sphere(/*const*/ Projector* prj, const Mat4d& mat, float scree
   //             mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
   //kornyakov: black planet
   prj->showSphereBlack = isBlack;
-  if (strcmp(this->getEnglishName().c_str(), "shuttle"))
+  if (this->getEnglishName().substr(0,4).compare("3ds_")) // todo: remake it
   {
+    if (this->englishName == "Moon")
+    {
+      MoonShader.LoadFragmentShaderSourse("Bump.frag"); //todo: parametrize this code
+      MoonShader.LoadVertexShaderSourse("Bump.vert");
+      MoonShader.AddTexture("textures\\BumpMaps\\lune_NRM.bmp","NormalMap");
+      MoonShader.AddTexture("textures\\lune.bmp","TextureMap");
+      MoonShader.Enable();
+    }
+    else if (this->englishName == "Mars")
+    {
+      MarsShader.LoadFragmentShaderSourse("Bump.frag");
+      MarsShader.LoadVertexShaderSourse("Bump.vert");
+      MarsShader.AddTexture("textures\\BumpMaps\\mars_NRM.bmp","NormalMap");
+      MarsShader.AddTexture("textures\\mars.bmp","TextureMap");
+      MarsShader.Enable();
+    }
+    else if (this->englishName == "Mercury")
+    {
+      MercuryShader.LoadFragmentShaderSourse("Bump.frag");
+      MercuryShader.LoadVertexShaderSourse("Bump.vert");
+      MercuryShader.AddTexture("textures\\BumpMaps\\mercury_NRM.bmp","NormalMap");
+      MercuryShader.AddTexture("textures\\mercury.bmp","TextureMap");
+      MercuryShader.Enable();
+    }
     prj->sSphere(radius*sphere_scale, one_minus_oblateness, nb_facet, nb_facet,
                  mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
+    if (this->englishName == "Moon")
+      MoonShader.Disable();
+    else if (this->englishName == "Mars")
+      MarsShader.Disable();
+    else if (this->englishName == "Mercury")
+      MercuryShader.Disable();
   }
   else
   {
     // kornyakov: 1st and 3rd lines are for z-fighting avoiding
-    prj->set_clipping_planes(this->get_distance()*0.9, this->get_distance()*1.1);
-    prj->s3dsObject(&this->objectInfo, mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
+    prj->set_clipping_planes(this->get_distance()*0.8, this->get_distance()*1.2);
+  	prj->ms3dsObject(&this->object, mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
     prj->set_clipping_planes(0.000001, 50); //todo: avoid magic numbers
   }
 

@@ -285,7 +285,7 @@ void StelCore::init(const InitParser& conf)
     setFlagConstellationIsolateSelected(conf.get_boolean("viewing", "flag_constellation_isolate_selected",conf.get_boolean("viewing", "flag_constellation_pick", 0)));
     setConstellationArtIntensity(conf.get_double("viewing","constellation_art_intensity", 0.5));
     setConstellationArtFadeDuration(conf.get_double("viewing","constellation_art_fade_duration",2.));
-	setFlagStopDayMotion(conf.get_boolean("viewing", "flag_stop_day_motion", false));
+	  setFlagStopDayMotion(conf.get_boolean("viewing", "flag_stop_day_motion", false));
 
     setFlagAzimutalGrid(conf.get_boolean("viewing:flag_azimutal_grid"));
     setFlagEquatorGrid(conf.get_boolean("viewing:flag_equatorial_grid"));
@@ -305,6 +305,7 @@ void StelCore::init(const InitParser& conf)
     setFlagPlanets(conf.get_boolean("astro:flag_planets"));
     //kornyakov: black planets
     setFlagBlackPlanets(conf.get_boolean("astro:flag_black_planets"));
+    setPlanetsFadingCoefficient(conf.get_double("astro", "planets_fading_coefficient", 1.04f));
     setFlagPlanetsHints(conf.get_boolean("astro:flag_planets_hints"));
     setFlagPlanetsOrbits(conf.get_boolean("astro:flag_planets_orbits"));
     setFlagLightTravelTime(conf.get_boolean("astro:flag_light_travel_time"));
@@ -660,9 +661,11 @@ bool StelCore::selectObject(const string &type, const string &id)
     }
 
 
+    // if any selected, we have to release track_object flag
     if (selected_object)
     {
-        if (navigation->get_flag_tracking()) navigation->set_flag_lock_equ_pos(1);
+        if (navigation->get_flag_tracking()) 
+          navigation->set_flag_lock_equ_pos(1);
         navigation->set_flag_tracking(0);
 
         return 1;

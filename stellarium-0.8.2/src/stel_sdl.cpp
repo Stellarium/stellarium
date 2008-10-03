@@ -17,6 +17,7 @@
 */
 
 #ifdef WIN32
+#include "glew.h"
 #include "shlobj.h"
 #endif
 
