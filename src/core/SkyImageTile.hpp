@@ -164,7 +164,7 @@ protected:
 
 protected:
 	//! Load the tile information from a JSON file
-	static QVariantMap loadFromJSON(QIODevice& input, bool compressed=false);
+	static QVariantMap loadFromJSON(QIODevice& input, bool qZcompressed=false, bool gzCompressed=false);
 	
 	//! Load the tile from a valid QVariantMap
 	void loadFromQVariantMap(const QVariantMap& map);
