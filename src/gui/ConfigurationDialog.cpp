@@ -373,6 +373,9 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	else
 		conf->setValue("gui/selected_object_info", "all");
 
+	StelApp::getInstance().getCore()->getProjection()->setInitFov(StelApp::getInstance().getCore()->getProjection()->getFov());
+	StelApp::getInstance().getCore()->getNavigation()->setInitViewDirectionToCurrent();
+	
 	// configuration dialog / navigation tab
 	conf->setValue("navigation/flag_enable_zoom_keys", mvmgr->getFlagEnableZoomKeys());
 	conf->setValue("navigation/flag_enable_mouse_navigation", mvmgr->getFlagEnableMouseNavigation());
@@ -391,8 +394,6 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/flag_mouse_cursor_timeout", StelAppGraphicsScene::getInstance().getFlagCursorTimeout());
 	conf->setValue("gui/mouse_cursor_timeout", StelAppGraphicsScene::getInstance().getCursorTimeout());
 	
-	StelApp::getInstance().getCore()->getProjection()->setInitFov(StelApp::getInstance().getCore()->getProjection()->getFov());
-	StelApp::getInstance().getCore()->getNavigation()->setInitViewDirectionToCurrent();
 	conf->setValue("main/screenshot_dir", StelApp::getInstance().getFileMgr().getScreenshotDir());
 
 	// full screen and window size
