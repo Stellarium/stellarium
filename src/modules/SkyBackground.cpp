@@ -58,6 +58,7 @@ void SkyBackground::init()
 	try
 	{
 		insertSkyImage(StelApp::getInstance().getFileMgr().findFile("nebulae/default/textures.json"));
+		insertSkyImage(StelApp::getInstance().getFileMgr().findFile("/home/fab1/Desktop/LMC/x01_00_00.json.qZ"));
 	}
 	catch (std::runtime_error& e)
 	{

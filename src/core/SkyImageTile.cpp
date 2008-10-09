@@ -646,6 +646,9 @@ void SkyImageTile::JsonLoadFinished()
 // Delete all the subtiles which were not displayed since more than lastDrawTrigger seconds
 void SkyImageTile::deleteUnusedTiles(double lastDrawTrigger)
 {
+	// There is a (or more) bugs. This hide it, but is a very bad fix.
+	return;
+	
 	if (subTiles.isEmpty())
 		return;
 	
