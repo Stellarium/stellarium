@@ -166,17 +166,17 @@ void StelGui::init()
 	addGuiActions("actionShow_Planets_Hints", N_("Planets hints"), "P", group, true, false, "astro/flag_planets_hints");
 	
 	addGuiActions("actionShow_Night_Mode", N_("Night mode"), "", group, true, false, "viewing/flag_night");
-	addGuiActions("actionSet_Full_Screen", N_("Full-screen mode"), "F11", group, true, false); // TODO: move persistence here? (currently elsewhere)
+	addGuiActions("actionSet_Full_Screen_Global", N_("Full-screen mode"), "F11", group, true, false); // TODO: move persistence here? (currently elsewhere)
 	addGuiActions("actionHorizontal_Flip", N_("Flip scene horizontally"), "Ctrl+Shift+H", group, true, false);
 	addGuiActions("actionVertical_Flip", N_("Flip scene vertically"), "Ctrl+Shift+V", group, true, false);
 	
 	group = N_("Windows");
-	addGuiActions("actionShow_Help_Window", N_("Help window"), "F1", group, true, false);
-	addGuiActions("actionShow_Configuration_Window", N_("Configuration window"), "F2", group, true, false);
-	addGuiActions("actionShow_Search_Window", N_("Search window"), "F3, Ctrl+F", group, true, false);
-	addGuiActions("actionShow_SkyView_Window", N_("Sky and viewing options window"), "F4", group, true, false);
-	addGuiActions("actionShow_DateTime_Window", N_("Date/time window"), "F5", group, true, false);
-	addGuiActions("actionShow_Location_Window", N_("Location window"), "F6", group, true, false);
+	addGuiActions("actionShow_Help_Window_Global", N_("Help window"), "F1", group, true, false);
+	addGuiActions("actionShow_Configuration_Window_Global", N_("Configuration window"), "F2", group, true, false);
+	addGuiActions("actionShow_Search_Window_Global", N_("Search window"), "F3, Ctrl+F", group, true, false);
+	addGuiActions("actionShow_SkyView_Window_Global", N_("Sky and viewing options window"), "F4", group, true, false);
+	addGuiActions("actionShow_DateTime_Window_Global", N_("Date/time window"), "F5", group, true, false);
+	addGuiActions("actionShow_Location_Window_Global", N_("Location window"), "F6", group, true, false);
 	
 	group = N_("Date and Time");
 	addGuiActions("actionDecrease_Time_Speed", N_("Decrease time speed"), "J", group, false, false);
@@ -203,8 +203,8 @@ void StelGui::init()
 	
 	group = N_("Miscellaneous");
 	addGuiActions("actionSwitch_Equatorial_Mount", N_("Switch between equatorial and azimuthal mount"), "Ctrl+M", group, true, false);
-	addGuiActions("actionQuit", N_("Quit"), "Ctrl+Q", group, false, false);
-	addGuiActions("actionSave_Screenshot", N_("Save screenshot"), "Ctrl+S", group, false, false);
+	addGuiActions("actionQuit_Global", N_("Quit"), "Ctrl+Q", group, false, false);
+	addGuiActions("actionSave_Screenshot_Global", N_("Save screenshot"), "Ctrl+S", group, false, false);
 	addGuiActions("action_Reload_Style", "Reload style", "Ctrl+R", "Debug", false, false);
 	
 	addGuiActions("actionAutoHideHorizontalButtonBar", N_("Auto hide horizontal button bar"), "", group, true, false);
@@ -214,7 +214,7 @@ void StelGui::init()
 	
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
-	QObject::connect(getGuiActions("actionQuit"), SIGNAL(triggered()), this, SLOT(quitStellarium()));
+	QObject::connect(getGuiActions("actionQuit_Global"), SIGNAL(triggered()), this, SLOT(quitStellarium()));
 	
 	// Debug
 	QObject::connect(getGuiActions("action_Reload_Style"), SIGNAL(triggered()), this, SLOT(reloadStyle()));
@@ -292,28 +292,28 @@ void StelGui::init()
 	MovementMgr* mmgr = (MovementMgr*)module;
 	getGuiActions("actionSet_Tracking")->setChecked(mmgr->getFlagTracking());
 	
-	QObject::connect(getGuiActions("actionSet_Full_Screen"), SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
-	getGuiActions("actionSet_Full_Screen")->setChecked(StelMainWindow::getInstance().isFullScreen());
+	QObject::connect(getGuiActions("actionSet_Full_Screen_Global"), SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
+	getGuiActions("actionSet_Full_Screen_Global")->setChecked(StelMainWindow::getInstance().isFullScreen());
 	
-	QObject::connect(getGuiActions("actionShow_Location_Window"), SIGNAL(toggled(bool)), &locationDialog, SLOT(setVisible(bool)));
-	QObject::connect(&locationDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Location_Window"), SLOT(setChecked(bool)));
+	QObject::connect(getGuiActions("actionShow_Location_Window_Global"), SIGNAL(toggled(bool)), &locationDialog, SLOT(setVisible(bool)));
+	QObject::connect(&locationDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Location_Window_Global"), SLOT(setChecked(bool)));
 
-	QObject::connect(getGuiActions("actionShow_Configuration_Window"), SIGNAL(toggled(bool)), &configurationDialog, SLOT(setVisible(bool)));
-	QObject::connect(&configurationDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Configuration_Window"), SLOT(setChecked(bool)));
+	QObject::connect(getGuiActions("actionShow_Configuration_Window_Global"), SIGNAL(toggled(bool)), &configurationDialog, SLOT(setVisible(bool)));
+	QObject::connect(&configurationDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Configuration_Window_Global"), SLOT(setChecked(bool)));
 	
-	QObject::connect(getGuiActions("actionShow_SkyView_Window"), SIGNAL(toggled(bool)), &viewDialog, SLOT(setVisible(bool)));
-	QObject::connect(&viewDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_SkyView_Window"), SLOT(setChecked(bool)));
+	QObject::connect(getGuiActions("actionShow_SkyView_Window_Global"), SIGNAL(toggled(bool)), &viewDialog, SLOT(setVisible(bool)));
+	QObject::connect(&viewDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_SkyView_Window_Global"), SLOT(setChecked(bool)));
 	
-	QObject::connect(getGuiActions("actionShow_Help_Window"), SIGNAL(toggled(bool)), &helpDialog, SLOT(setVisible(bool)));
-	QObject::connect(&helpDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Help_Window"), SLOT(setChecked(bool)));
+	QObject::connect(getGuiActions("actionShow_Help_Window_Global"), SIGNAL(toggled(bool)), &helpDialog, SLOT(setVisible(bool)));
+	QObject::connect(&helpDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Help_Window_Global"), SLOT(setChecked(bool)));
 	
-	QObject::connect(getGuiActions("actionShow_DateTime_Window"), SIGNAL(toggled(bool)), &dateTimeDialog, SLOT(setVisible(bool)));
-	QObject::connect(&dateTimeDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_DateTime_Window"), SLOT(setChecked(bool)));
+	QObject::connect(getGuiActions("actionShow_DateTime_Window_Global"), SIGNAL(toggled(bool)), &dateTimeDialog, SLOT(setVisible(bool)));
+	QObject::connect(&dateTimeDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_DateTime_Window_Global"), SLOT(setChecked(bool)));
 	
-	QObject::connect(getGuiActions("actionShow_Search_Window"), SIGNAL(toggled(bool)), &searchDialog, SLOT(setVisible(bool)));
-	QObject::connect(&searchDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Search_Window"), SLOT(setChecked(bool)));
+	QObject::connect(getGuiActions("actionShow_Search_Window_Global"), SIGNAL(toggled(bool)), &searchDialog, SLOT(setVisible(bool)));
+	QObject::connect(&searchDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Search_Window_Global"), SLOT(setChecked(bool)));
 	
-	QObject::connect(getGuiActions("actionSave_Screenshot"), SIGNAL(triggered()), &StelMainGraphicsView::getInstance(), SLOT(saveScreenShot()));
+	QObject::connect(getGuiActions("actionSave_Screenshot_Global"), SIGNAL(triggered()), &StelMainGraphicsView::getInstance(), SLOT(saveScreenShot()));
 
 	const Projector* proj = StelApp::getInstance().getCore()->getProjection();
 	QObject::connect(getGuiActions("actionHorizontal_Flip"), SIGNAL(toggled(bool)), proj, SLOT(setFlipHorz(bool)));
@@ -350,33 +350,33 @@ void StelGui::init()
 	QPixmap pxmapGlow(":/graphicGui/gui/glow.png");
 	QPixmap pxmapOn(":/graphicGui/gui/2-on-location.png");
 	QPixmap pxmapOff(":/graphicGui/gui/2-off-location.png");
-	StelButton*  b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Location_Window"));	
+	StelButton*  b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Location_Window_Global"));	
 	winBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/1-on-time.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/1-off-time.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_DateTime_Window"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_DateTime_Window_Global"));
 	winBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/5-on-labels.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/5-off-labels.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_SkyView_Window"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_SkyView_Window_Global"));
 	winBar->addButton(b);	
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/6-on-search.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/6-off-search.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Search_Window"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Search_Window_Global"));
 	winBar->addButton(b);	
 	
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/8-on-settings.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/8-off-settings.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Configuration_Window"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Configuration_Window_Global"));
 	winBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/9-on-help.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/9-off-help.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Help_Window"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Help_Window_Global"));
 	winBar->addButton(b);
 	
 	
@@ -455,11 +455,11 @@ void StelGui::init()
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btFullScreen-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btFullScreen-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionSet_Full_Screen"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionSet_Full_Screen_Global"));
 	buttonBar->addButton(b, "060-othersGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btQuit.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOn, pxmapGlow32x32, getGuiActions("actionQuit"));
+	b = new StelButton(NULL, pxmapOn, pxmapOn, pxmapGlow32x32, getGuiActions("actionQuit_Global"));
 	buttonBar->addButton(b, "060-othersGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeRewind-on.png");
@@ -833,7 +833,7 @@ void StelGui::setFlagShowFlipButtons(bool b)
 			                           pxmapGlow32x32, 
 			                           getGuiActions("actionHorizontal_Flip"));
 		}
-		getButtonBar()->addButton(flipVert, "060-othersGroup", "actionQuit");
+		getButtonBar()->addButton(flipVert, "060-othersGroup", "actionQuit_Global");
 		getButtonBar()->addButton(flipHoriz, "060-othersGroup", "actionVertical_Flip");
 	}
 	else

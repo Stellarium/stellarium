@@ -34,6 +34,7 @@
 #include <QDebug>
 #include <QThread>
 #include <QAction>
+#include <QRegExp>
 
 #include "gui/StelGui.hpp"
 
@@ -182,14 +183,13 @@ class QProgressBar* StelMainGraphicsView::addProgessBar()
 //! Activate all the QActions associated to the widget
 void StelMainGraphicsView::activateKeyActions(bool b)
 {
-	QList<QAction*> aList = findChildren<QAction*>("actionQuit");
-	QAction* actionQuit = aList.size() > 0 ? aList.at(0) : NULL;
+	QList<QAction*> globalActions = findChildren<QAction*>(QRegExp("action.*_Global"));
 	if (b==false)
 	{
 		foreach (QAction* a, actions())
 		{
-			// Special case for the Quit action shortcut which is always valid
-			if (a!=actionQuit)
+			// Special case for key actions which are named Global
+			if (!globalActions.contains(a))
 				removeAction(a);
 		}
 	}
@@ -197,9 +197,10 @@ void StelMainGraphicsView::activateKeyActions(bool b)
 	{
 		foreach (QAction* a, findChildren<QAction*>())
 		{
-			// Special case for the Quit action shortcut which is always valid
-			if (a!=actionQuit)
+			// Special case for key actions which are named Global
+			if (!globalActions.contains(a))
 				addAction(a);
 		}
 	}
 }
+
