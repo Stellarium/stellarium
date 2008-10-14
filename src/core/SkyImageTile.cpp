@@ -93,7 +93,7 @@ void SkyImageTile::initCtor()
 	loadingState = false;
 	lastPercent = 0;
 	// Avoid tiles to be deleted just after constructed
-	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
+	timeWhenDeletionScheduled = -1.;
 }
 
 // Constructor
@@ -239,14 +239,15 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 	
 	// The JSON file is currently being downloaded
 	if (downloading)
-	{
-		// Avoid the tile to be deleted by telling that it was drawn
-		lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 		return;
-	}
 	
 	if (luminance>0 && luminance<limitLuminance)
+	{
+		// Schedule a delete and save the time when this was asked for delayed delete
+		if (timeWhenDeletionScheduled<0.)
+			timeWhenDeletionScheduled = StelApp::getInstance().getTotalRunTime();
 		return;
+	}
 	
 	// Check that we are in the screen
 	bool fullInScreen = true;
@@ -278,9 +279,12 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 	}
 	// The tile is outside screen
 	if (fullInScreen==false && intersectScreen==false)
+	{
+		// Schedule a deletion and save the time when this was asked for delayed delete
+		if (timeWhenDeletionScheduled<0.)
+			timeWhenDeletionScheduled = StelApp::getInstance().getTotalRunTime();
 		return;
-	
-	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
+	}
 	
 	if (noTexture==false)
 	{
@@ -305,6 +309,7 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 		
 		// Every test passed :) The tile will be displayed
 		result.insert(minResolution, this);
+		timeWhenDeletionScheduled = -1; // Cancel scheduled delete if any
 		
 		// Check that the texture is now fully loaded before trying to load sub tiles
 		if (tex->canBind()==false)
@@ -314,7 +319,7 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 	// Check if we reach the resolution limit
 	Projector* prj = core->getProjection();
 	const double degPerPixel = 1./prj->getPixelPerRadAtCenter()*180./M_PI;
-	if (degPerPixel < minResolution*0.8)
+	if (degPerPixel < minResolution)
 	{
 		if (subTiles.isEmpty())
 		{
@@ -325,7 +330,6 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 				foreach (QString url, subTilesUrls)
 				{
 					SkyImageTile* nt = new SkyImageTile(url, this);
-					nt->lastTimeDraw = lastTimeDraw;
 					subTiles.append(nt);
 				}
 			}
@@ -638,7 +642,6 @@ void SkyImageTile::JsonLoadFinished()
 	if (errorOccured)
 		return;
 	loadFromQVariantMap(temporaryResultMap);
-	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 }
 
 
@@ -646,63 +649,64 @@ void SkyImageTile::JsonLoadFinished()
 // Delete all the subtiles which were not displayed since more than lastDrawTrigger seconds
 void SkyImageTile::deleteUnusedTiles(double lastDrawTrigger)
 {
-	// There is a (or more) bugs. This hide it, but is a very bad fix.
-	return;
-	
-	if (subTiles.isEmpty())
-		return;
-	
-	double now = StelApp::getInstance().getTotalRunTime();
-	bool deleteAll = true;
-	foreach (SkyImageTile* tile, subTiles)
+	const double now = StelApp::getInstance().getTotalRunTime();
+	if (getTimeWhenDeletionScheduled()<0 || now-getTimeWhenDeletionScheduled()<lastDrawTrigger)
 	{
-		// At least one of the subtiles is displayed
-		if (now-tile->getLastTimeDraw()<lastDrawTrigger || tile->downloading) // || (tile->tex && tile->tex->isLoading())
+		// Nothing to delete at this level. Propagate to check sub levels
+		foreach (SkyImageTile* tile, subTiles)
 		{
-			deleteAll = false;
-			break;
+			tile->deleteUnusedTiles(lastDrawTrigger);
 		}
 	}
-	
-	if (deleteAll==true)
+	else
 	{
-		// If there is no subTilesUrls stored it means that the tile description was
-		// embeded into the same JSON file as the parent. Therefore it cannot be deleted
-		// without deleting also the parent because it couldn't be reloaded alone.
-		const bool removeOnlyTextures = subTilesUrls.isEmpty();
-		
-		if (removeOnlyTextures)
+		// This tile has to be deleted, remove all subtiles
+		deleteAllSubTiles();
+		if (tex!=0)
 		{
-			foreach (SkyImageTile* tile, subTiles)
-			{
-				tile->deleteTexture();
-				if (tile->texFader)
-				{
-					tile->texFader->deleteLater();
-					tile->texFader = NULL;
-				}
-				tile->deleteUnusedTiles(lastDrawTrigger);
-			}
+			deleteTexture();
 		}
-		else
-		{
-			// None of the subtiles are displayed: delete all
-			foreach (SkyImageTile* tile, subTiles)
-			{
-				tile->deleteLater();
-			}
-			subTiles.clear();
-		}
-		return;
-	}
-	
-	// Propagate
-	foreach (SkyImageTile* tile, subTiles)
-	{
-		tile->deleteUnusedTiles(lastDrawTrigger);
 	}
 }
 
+// Delete all the subtiles recursively
+void SkyImageTile::deleteAllSubTiles()
+{
+	// If there is no subTilesUrls stored it means that the tile description was
+	// embeded into the same JSON file as the parent. Therefore it cannot be deleted
+	// without deleting also the parent because it couldn't be reloaded alone.
+	const bool removeOnlyTextures = subTilesUrls.isEmpty();
+	timeWhenDeletionScheduled = -1;
+	
+	if (removeOnlyTextures)
+	{
+		foreach (SkyImageTile* tile, subTiles)
+		{
+			if (tile->tex!=0)
+			{
+				tile->deleteTexture();
+			}
+			if (tile->texFader)
+			{
+				tile->texFader->deleteLater();
+				tile->texFader = NULL;
+			}
+			// Propagate
+			tile->deleteAllSubTiles();
+		}
+	}
+	else
+	{
+		//qDebug() << "Delete all for " << getAbsoluteImageURI();
+		// None of the subtiles are displayed: delete all
+		foreach (SkyImageTile* tile, subTiles)
+		{
+			tile->deleteLater();
+		}
+		subTiles.clear();
+	}
+}
+	
 void SkyImageTile::updatePercent(int tot, int toBeLoaded)
 {
 	if (tot+toBeLoaded==0)
