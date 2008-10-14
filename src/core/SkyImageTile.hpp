@@ -184,8 +184,11 @@ private:
 	//! Delete all the subtiles which were not displayed since more than lastDrawTrigger seconds
 	void deleteUnusedTiles(double lastDrawTrigger=2.);
 	
-	//! Return the last time the tile content was actually drawn
-	double getLastTimeDraw() const {return lastTimeDraw;}
+	//! Delete all the subtiles recursively. If the subtiles description was embeded into the parent's one only the texture is deleted
+	void deleteAllSubTiles();
+			
+	//! Return the time at which deletion was first scheduled
+	double getTimeWhenDeletionScheduled() const {return timeWhenDeletionScheduled;}
 	
 	//! Return the base URL prefixed to relative URL
 	QString getBaseUrl() const {return baseUrl;}
@@ -204,8 +207,8 @@ private:
 	
 	class JsonLoadThread* loadThread;
 			
-	// Store the time of the last draw
-	double lastTimeDraw;
+	// Time at which deletion was first scheduled
+	double timeWhenDeletionScheduled;
 
 	// Used for smooth fade in
 	QTimeLine* texFader;
