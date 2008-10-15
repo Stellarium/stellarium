@@ -135,6 +135,9 @@ protected:
 	//! Base URL to prefix to relative URL
 	QString baseUrl;
 	
+	//! The relative URL passed to the constructor
+	QString contructorUrl;
+	
 	//! Minimum resolution of the data of the texture in degree/pixel
 	float minResolution;
 	
@@ -153,8 +156,8 @@ protected:
 	//! Positions of the vertex of each convex polygons in texture space
 	QList< QList<Vec2f> > textureCoords;
 	
-	//! The list of all the subTiles URL for this tile
-	QStringList subTilesUrls;
+	//! The list of all the subTiles URL or already loaded JSON map for this tile
+	QVariantList subTilesUrls;
 	
 	//! The list of all the created subtiles for this tile
 	QList<SkyImageTile*> subTiles;
@@ -181,14 +184,17 @@ private:
 	//! @return true if the tile was actually displayed
 	bool drawTile(StelCore* core);
 	
+	//! Schedule a deletion. It will practically occur after the delay passed as argument to deleteUnusedTiles() has expired
+	void scheduleDeletion();
+	
+	//! If a deletion was scheduled, cancel it.
+	void cancelDeletion() {timeWhenDeletionScheduled=-1;}
+	
 	//! Delete all the subtiles which were not displayed since more than lastDrawTrigger seconds
-	void deleteUnusedTiles(double lastDrawTrigger=2.);
+	void deleteUnusedSubTiles();
 	
 	//! Delete all the subtiles recursively. If the subtiles description was embeded into the parent's one only the texture is deleted
 	void deleteAllSubTiles();
-			
-	//! Return the time at which deletion was first scheduled
-	double getTimeWhenDeletionScheduled() const {return timeWhenDeletionScheduled;}
 	
 	//! Return the base URL prefixed to relative URL
 	QString getBaseUrl() const {return baseUrl;}
@@ -204,6 +210,9 @@ private:
 	
 	// true if the JSON descriptor file is currently downloading
 	bool downloading;
+	
+	// The delay after which a scheduled deletion will occur
+	float deletionDelay;
 	
 	class JsonLoadThread* loadThread;
 			
