@@ -22,6 +22,7 @@
 #include "GLee.h"
 #include "Atmosphere.hpp"
 #include "StelUtils.hpp"
+#include "StelApp.hpp"
 #include "Projector.hpp"
 #include "ToneReproducer.hpp"
 #include "StelCore.hpp"
@@ -262,6 +263,9 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 // Draw the atmosphere using the precalc values stored in tab_sky
 void Atmosphere::draw(StelCore* core)
 {
+	if (StelApp::getInstance().getVisionModeNight())
+		return;
+
 	ToneReproducer* eye = core->getToneReproducer();
 	
 	if (fader.getInterstate())

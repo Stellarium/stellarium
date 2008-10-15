@@ -273,7 +273,10 @@ void LandscapeOldStyle::drawFog(ToneReproducer * eye, const Projector* prj, cons
 {
 	if(!fogFader.getInterstate()) return;
 	glBlendFunc(GL_ONE, GL_ONE);
-	glColor3f(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness), fogFader.getInterstate()*(0.1f+0.1f*skyBrightness), fogFader.getInterstate()*(0.1f+0.1f*skyBrightness));
+	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
+	glColor3f(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness), 
+	          fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter, 
+	          fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
@@ -296,9 +299,9 @@ void LandscapeOldStyle::drawDecor(ToneReproducer * eye, const Projector* prj, co
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
+	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
+	glColor4f(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 
-	glColor4f(skyBrightness, skyBrightness, skyBrightness,
-	          landFader.getInterstate());
 	prj->setCurrentFrame(Projector::FrameLocal);
 
 	const int stacks = 8;
@@ -354,8 +357,9 @@ void LandscapeOldStyle::drawGround(ToneReproducer * eye, const Projector* prj, c
 	
 	const double vshift = tanMode ? radius*std::tan(groundAngleShift*M_PI/180.) : radius*std::sin(groundAngleShift*M_PI/180.);
 	Mat4d mat = nav->getLocalToEyeMat() * Mat4d::zrotation(groundAngleRotatez*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift));
+	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
+	glColor4f(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 
-	glColor4f(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
@@ -427,8 +431,8 @@ void LandscapeFisheye::draw(ToneReproducer * eye, const Projector* prj, const Na
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	glColor4f(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
+	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
+	glColor4f(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
@@ -482,7 +486,7 @@ void LandscapeSpherical::create(const QString _name, bool _fullpath, const QStri
 }
 
 
-void LandscapeSpherical::draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav)
+void LandscapeSpherical::draw(ToneReproducer* eye, const Projector* prj, const Navigator* nav)
 {
 	if(!validLandscape) return;
 	if(!landFader.getInterstate()) return;
@@ -498,8 +502,8 @@ void LandscapeSpherical::draw(ToneReproducer * eye, const Projector* prj, const 
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	glColor4f(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
+	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
+	glColor4f(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
