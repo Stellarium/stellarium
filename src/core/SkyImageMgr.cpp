@@ -26,6 +26,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelMainGraphicsView.hpp"
 
+#include <QNetworkAccessManager>
 #include <stdexcept>
 #include <QDebug>
 #include <QString>
@@ -40,6 +41,8 @@ SkyImageMgr::~SkyImageMgr()
 {
 	foreach (SkyImageMgrElem* s, allSkyImages)
 		delete s;
+	delete SkyImageTile::networkAccessManager;
+	SkyImageTile::networkAccessManager = NULL;
 }
 
 /*************************************************************************
@@ -55,7 +58,6 @@ double SkyImageMgr::getCallOrder(StelModuleActionName actionName) const
 // read from stream
 void SkyImageMgr::init()
 {
-	networkAccessManager = new QNetworkAccessManager();
 	try
 	{
 		insertSkyImage(StelApp::getInstance().getFileMgr().findFile("nebulae/default/textures.json"));

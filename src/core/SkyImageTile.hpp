@@ -66,6 +66,7 @@ class SkyImageTile : public QObject
 	Q_OBJECT;
 	
 	friend class JsonLoadThread;
+	friend class SkyImageMgr;
 	
 public:
 	//! Default constructor
@@ -232,6 +233,9 @@ private:
 #ifdef DEBUG_SKYIMAGE_TILE
 	static class SFont* debugFont;
 #endif
+	
+	//! The network manager to use for downloading JSON files
+	static class QNetworkAccessManager* networkAccessManager;
 };
 
 #endif // _SKYIMAGETILE_HPP_
