@@ -104,6 +104,9 @@ public:
 	//! Delete the texture from memory. It will be reloaded automatically if needed
 	void deleteTexture() {tex.reset();}
 	
+	//! Get the depth level in the tree
+	int getLevel() const {return parent()==NULL ? 0 : (qobject_cast<SkyImageTile*>(parent()))->getLevel()+1;}
+	
 signals:
 	//! Emitted when loading of data started or stopped
 	//! @param b true if data loading started, false if finished

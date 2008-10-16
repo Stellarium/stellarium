@@ -226,17 +226,20 @@ void SkyImageTile::draw(StelCore* core)
 	getTilesToDraw(result, core, prj->getViewportConvexPolygon(0, 0), limitLuminance, true);
 	
 	int numToBeLoaded=0;
+	foreach (SkyImageTile* t, result)
+		if (t->isReadyToDisplay()==false)
+			++numToBeLoaded;
+	updatePercent(result.size(), numToBeLoaded);
+	
+	// Draw in the good order
 	glEnable(GL_TEXTURE_2D);
 	glBlendFunc(GL_ONE, GL_ONE);
-	
 	QMap<double, SkyImageTile*>::Iterator i = result.end();
 	while (i!=result.begin())
 	{
 		--i;
-		if (i.value()->drawTile(core)==false)
-			++numToBeLoaded;
+		i.value()->drawTile(core);
 	}
-	updatePercent(result.size(), numToBeLoaded);
 	
 	deleteUnusedSubTiles();
 }
