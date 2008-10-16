@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>610</width>
-    <height>496</height>
+    <height>497</height>
    </rect>
   </property>
   <property name="font" >
@@ -250,7 +250,7 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>1</number>
+         <number>4</number>
         </property>
         <property name="iconSize" >
          <size>
@@ -1497,6 +1497,68 @@
                    </item>
                   </layout>
                  </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tabImages" >
+         <attribute name="title" >
+          <string>Images</string>
+         </attribute>
+         <attribute name="icon" >
+          <iconset resource="../../data/mainRes.qrc" >
+           <normaloff>:/graphicGui/gui/btDSS-off.png</normaloff>:/graphicGui/gui/btDSS-off.png</iconset>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout" >
+          <property name="margin" >
+           <number>0</number>
+          </property>
+          <item row="0" column="0" >
+           <widget class="QFrame" name="frame_13" >
+            <property name="frameShape" >
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow" >
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout" >
+             <item>
+              <widget class="QTreeWidget" name="treeWidget" >
+               <property name="maximumSize" >
+                <size>
+                 <width>200</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="headerHidden" >
+                <bool>true</bool>
+               </property>
+               <column>
+                <property name="text" >
+                 <string>1</string>
+                </property>
+               </column>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="frame_14" >
+               <property name="frameShape" >
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow" >
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_7" >
+                <property name="margin" >
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QTextBrowser" name="textBrowser" />
                 </item>
                </layout>
               </widget>
