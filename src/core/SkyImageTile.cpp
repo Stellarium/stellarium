@@ -48,7 +48,7 @@
 #include "StelLocaleMgr.hpp"
  SFont* SkyImageTile::debugFont = NULL;
 #endif
-
+	
 /*************************************************************************
   Class used to load a JSON file in a thread
  *************************************************************************/
@@ -166,7 +166,7 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(p
 			qurl.setUrl(parent->getBaseUrl()+url);
 		}
 		assert(httpReply==NULL);
-		httpReply = StelApp::getInstance().getNetworkAccessManager()->get(QNetworkRequest(qurl));
+		httpReply = netMgr->get(QNetworkRequest(qurl));
 		connect(httpReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 		downloading = true;
 		QString turl = qurl.toString();
