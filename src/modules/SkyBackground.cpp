@@ -58,7 +58,7 @@ void SkyBackground::init()
 	try
 	{
 		insertSkyImage(StelApp::getInstance().getFileMgr().findFile("nebulae/default/textures.json"));
-		insertSkyImage("http://safweb1.hq.eso.org/dss/color/allDSS.json");
+		//insertSkyImage("http://safweb1.hq.eso.org/dss/color/allDSS.json");
 	}
 	catch (std::runtime_error& e)
 	{
