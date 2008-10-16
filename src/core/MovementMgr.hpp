@@ -185,7 +185,7 @@ private:
 		Vec3d aim;
 		float speed;
 		float coef;
-		bool localPos;  // Define if the position are in equatorial or altazimutal
+		bool localPos;  // Define if the position are in equatorial or altazimuthal
 	} autoMove;
 	
 	autoMove move;          // Current auto movement
