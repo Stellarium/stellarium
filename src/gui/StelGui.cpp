@@ -39,7 +39,7 @@
 #include "StelObject.hpp"
 #include "Projector.hpp"
 #include "SolarSystem.hpp"
-#include "SkyBackground.hpp"
+#include "SkyImageMgr.hpp"
 #include "StelStyle.hpp"
 #include "SkyDrawer.hpp"
 #include "MeteorMgr.hpp"
@@ -257,8 +257,8 @@ void StelGui::init()
 	QObject::connect(getGuiActions("actionShow_Nebulas"), SIGNAL(toggled(bool)), module, SLOT(setFlagHints(bool)));
 	getGuiActions("actionShow_Nebulas")->setChecked(nmgr->getFlagHints());
 	
-	module = GETSTELMODULE("SkyBackground");
-	SkyBackground* bmgr = (SkyBackground*)module;
+	module = GETSTELMODULE("SkyImageMgr");
+	SkyImageMgr* bmgr = (SkyImageMgr*)module;
 	QObject::connect(getGuiActions("actionShow_DSS"), SIGNAL(toggled(bool)), module, SLOT(setFlagShow(bool)));
 	getGuiActions("actionShow_DSS")->setChecked(bmgr->getFlagShow());
 	

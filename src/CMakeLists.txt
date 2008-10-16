@@ -160,8 +160,8 @@ SET(stellarium_lib_SRCS
 	modules/Orbit.hpp
 	modules/Planet.cpp
 	modules/Planet.hpp
-	modules/SkyBackground.cpp
-	modules/SkyBackground.hpp
+	modules/SkyImageMgr.cpp
+	modules/SkyImageMgr.hpp
 	modules/Skybright.cpp
 	modules/Skybright.hpp
 	modules/Skylight.cpp
@@ -266,7 +266,7 @@ SET(stellarium_MOC_HDRS
 	modules/GridLinesMgr.hpp
 	modules/MilkyWay.hpp
 	modules/NebulaMgr.hpp
-	modules/SkyBackground.hpp
+	modules/SkyImageMgr.hpp
 	modules/SolarSystem.hpp
 	modules/MeteorMgr.hpp
 	modules/StarMgr.hpp

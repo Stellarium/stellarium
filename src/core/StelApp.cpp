@@ -46,7 +46,7 @@
 #include "StelFileMgr.hpp"
 //#include "QtScriptMgr.hpp"
 #include "QtJsonParser.hpp"
-#include "SkyBackground.hpp"
+#include "SkyImageMgr.hpp"
 
 #include "StelStyle.hpp"
 
@@ -292,10 +292,10 @@ void StelApp::init()
 	milky_way->init();
 	getModuleMgr().registerModule(milky_way);
 	
-	// Init sky background
-	SkyBackground* skyBackground = new SkyBackground();
-	skyBackground->init();
-	getModuleMgr().registerModule(skyBackground);
+	// Init sky image manager
+	skyImageMgr = new SkyImageMgr();
+	skyImageMgr->init();
+	getModuleMgr().registerModule(skyImageMgr);
 	
 	// Telescope manager
 	TelescopeMgr* telescope_mgr = new TelescopeMgr();
