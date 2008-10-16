@@ -220,10 +220,10 @@ void ViewDialog::createDialogContent()
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorialGridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEquatorialGridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 	
-	ui->showAzimutalGridCheckBox->setChecked(glmgr->getFlagAzimutalGrid());
-	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Azimutal_Grid");
-	connect(a, SIGNAL(toggled(bool)), ui->showAzimutalGridCheckBox, SLOT(setChecked(bool)));
-	connect(ui->showAzimutalGridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+	ui->showAzimuthalGridCheckBox->setChecked(glmgr->getFlagAzimuthalGrid());
+	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Azimuthal_Grid");
+	connect(a, SIGNAL(toggled(bool)), ui->showAzimuthalGridCheckBox, SLOT(setChecked(bool)));
+	connect(ui->showAzimuthalGridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 	
 	ui->showEquatorialJ2000GridCheckBox->setChecked(glmgr->getFlagEquatorJ2000Grid());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Equatorial_J2000_Grid");

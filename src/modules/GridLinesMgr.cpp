@@ -648,7 +648,7 @@ void GridLinesMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	assert(conf);
 
-	setFlagAzimutalGrid(conf->value("viewing/flag_azimutal_grid").toBool());
+	setFlagAzimuthalGrid(conf->value("viewing/flag_azimuthal_grid").toBool());
 	setFlagEquatorGrid(conf->value("viewing/flag_equatorial_grid").toBool());
 	setFlagEquatorJ2000Grid(conf->value("viewing/flag_equatorial_J2000_grid").toBool());
 	setFlagEquatorLine(conf->value("viewing/flag_equator_line").toBool());
@@ -678,7 +678,7 @@ void GridLinesMgr::draw(StelCore* core)
 	equGrid->draw(prj);
 	// Draw the equatorial grid
 	equJ2000Grid->draw(prj);
-	// Draw the altazimutal grid
+	// Draw the altazimuthal grid
 	aziGrid->draw(prj);
 	// Draw the celestial equator line
 	equatorLine->draw(prj,nav);
@@ -699,17 +699,17 @@ void GridLinesMgr::setStelStyle(const StelStyle& style)
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setColorEquatorGrid(StelUtils::strToVec3f(conf->value(section+"/equatorial_color", defaultColor).toString()));
 	setColorEquatorJ2000Grid(StelUtils::strToVec3f(conf->value(section+"/equatorial_J2000_color", defaultColor).toString()));
-	setColorAzimutalGrid(StelUtils::strToVec3f(conf->value(section+"/azimuthal_color", defaultColor).toString()));
+	setColorAzimuthalGrid(StelUtils::strToVec3f(conf->value(section+"/azimuthal_color", defaultColor).toString()));
 	setColorEquatorLine(StelUtils::strToVec3f(conf->value(section+"/equator_color", defaultColor).toString()));
 	setColorEclipticLine(StelUtils::strToVec3f(conf->value(section+"/ecliptic_color", defaultColor).toString()));
 	setColorMeridianLine(StelUtils::strToVec3f(conf->value(section+"/meridian_color", defaultColor).toString()));
 }
 
-//! Set flag for displaying Azimutal Grid
-void GridLinesMgr::setFlagAzimutalGrid(bool b) {aziGrid->setFlagshow(b);}
-//! Get flag for displaying Azimutal Grid
-bool GridLinesMgr::getFlagAzimutalGrid(void) const {return aziGrid->getFlagshow();}
-Vec3f GridLinesMgr::getColorAzimutalGrid(void) const {return aziGrid->getColor();}
+//! Set flag for displaying Azimuthal Grid
+void GridLinesMgr::setFlagAzimuthalGrid(bool b) {aziGrid->setFlagshow(b);}
+//! Get flag for displaying Azimuthal Grid
+bool GridLinesMgr::getFlagAzimuthalGrid(void) const {return aziGrid->getFlagshow();}
+Vec3f GridLinesMgr::getColorAzimuthalGrid(void) const {return aziGrid->getColor();}
 
 //! Set flag for displaying Equatorial Grid
 void GridLinesMgr::setFlagEquatorGrid(bool b) {equGrid->setFlagshow(b);}
@@ -742,7 +742,7 @@ void GridLinesMgr::setFlagMeridianLine(bool b) {meridianLine->setFlagshow(b);}
 bool GridLinesMgr::getFlagMeridianLine(void) const {return meridianLine->getFlagshow();}
 Vec3f GridLinesMgr::getColorMeridianLine(void) const {return meridianLine->getColor();}
 
-void GridLinesMgr::setColorAzimutalGrid(const Vec3f& v) { aziGrid->setColor(v);}
+void GridLinesMgr::setColorAzimuthalGrid(const Vec3f& v) { aziGrid->setColor(v);}
 void GridLinesMgr::setColorEquatorGrid(const Vec3f& v) { equGrid->setColor(v);}
 void GridLinesMgr::setColorEquatorJ2000Grid(const Vec3f& v) { equJ2000Grid->setColor(v);}
 void GridLinesMgr::setColorEquatorLine(const Vec3f& v) { equatorLine->setColor(v);}

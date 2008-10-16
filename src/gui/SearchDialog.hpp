@@ -69,6 +69,9 @@ public slots:
 	void onTextChanged(const QString& text);
 	void gotoObject();
 
+private slots:
+	void gotoPosition();
+
 protected:
 	Ui_searchDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
