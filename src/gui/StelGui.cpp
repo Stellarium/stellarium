@@ -148,7 +148,7 @@ void StelGui::init()
 	addGuiActions("actionShow_Constellation_Labels", N_("Constellation labels"), "V", group, true, false, "viewing/flag_constellation_name");
 	addGuiActions("actionShow_Constellation_Boundaries", N_("Constellation boundaries"), "B", group, true, false, "viewing/flag_constellation_boundaries");
 	
-	addGuiActions("actionShow_Azimutal_Grid", N_("Azimutal grid"), "Z", group, true, false, "viewing/flag_azimutal_grid");
+	addGuiActions("actionShow_Azimuthal_Grid", N_("Azimuthal grid"), "Z", group, true, false, "viewing/flag_azimuthal_grid");
 	addGuiActions("actionShow_Equatorial_Grid", N_("Equatorial grid"), "E", group, true, false, "viewing/flag_equatorial_grid");
 	addGuiActions("actionShow_Equatorial_J2000_Grid", N_("Equatorial J2000 grid"), "", group, true, false, "viewing/flag_equatorial_J2000_grid");
 	addGuiActions("actionShow_Ecliptic_Line", N_("Ecliptic line"), ",", group, true, false, "viewing/flag_ecliptic_line");
@@ -234,8 +234,8 @@ void StelGui::init()
 	GridLinesMgr* gmgr = (GridLinesMgr*)module;
 	QObject::connect(getGuiActions("actionShow_Equatorial_Grid"), SIGNAL(toggled(bool)), module, SLOT(setFlagEquatorGrid(bool)));
 	getGuiActions("actionShow_Equatorial_Grid")->setChecked(gmgr->getFlagEquatorGrid());
-	QObject::connect(getGuiActions("actionShow_Azimutal_Grid"), SIGNAL(toggled(bool)), module, SLOT(setFlagAzimutalGrid(bool)));
-	getGuiActions("actionShow_Azimutal_Grid")->setChecked(gmgr->getFlagAzimutalGrid());
+	QObject::connect(getGuiActions("actionShow_Azimuthal_Grid"), SIGNAL(toggled(bool)), module, SLOT(setFlagAzimuthalGrid(bool)));
+	getGuiActions("actionShow_Azimuthal_Grid")->setChecked(gmgr->getFlagAzimuthalGrid());
 	QObject::connect(getGuiActions("actionShow_Ecliptic_Line"), SIGNAL(toggled(bool)), module, SLOT(setFlagEclipticLine(bool)));
 	getGuiActions("actionShow_Ecliptic_Line")->setChecked(gmgr->getFlagEclipticLine());
 	QObject::connect(getGuiActions("actionShow_Equator_Line"), SIGNAL(toggled(bool)), module, SLOT(setFlagEquatorLine(bool)));
@@ -408,9 +408,9 @@ void StelGui::init()
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Equatorial_Grid"));
 	buttonBar->addButton(b, "020-gridsGroup");
 	
-	pxmapOn = QPixmap(":/graphicGui/gui/btAzimutalGrid-on.png");
-	pxmapOff = QPixmap(":/graphicGui/gui/btAzimutalGrid-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Azimutal_Grid"));
+	pxmapOn = QPixmap(":/graphicGui/gui/btAzimuthalGrid-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btAzimuthalGrid-off.png");
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Azimuthal_Grid"));
 	buttonBar->addButton(b, "020-gridsGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btGround-on.png");

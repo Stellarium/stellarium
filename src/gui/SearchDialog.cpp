@@ -25,6 +25,8 @@
 #include "StelObjectMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "MovementMgr.hpp"
+#include "Navigator.hpp"
+#include "StelUtils.hpp"
 
 #include <QTextEdit>
 #include <QLabel>
@@ -133,11 +135,17 @@ void SearchDialog::styleChanged()
 void SearchDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+	ui->positionFrame->hide();
+	ui->raSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
+	ui->decSpinBox->setDisplayFormat(AngleSpinBox::HMSSymbols);
+
+	connect(ui->showPositionButton, SIGNAL(toggled(bool)), SLOT(ui->positionFrame->setVisiable(bool)));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onTextChanged(const QString&)));
 	connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
 	onTextChanged(ui->lineEditSearchSkyObject->text());
 	connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
+	connect(ui->goButton, SIGNAL(pressed()), this, SLOT(gotoPosition()));
 	ui->lineEditSearchSkyObject->installEventFilter(this);
 }
 
@@ -163,6 +171,20 @@ void SearchDialog::onTextChanged(const QString& text)
 		ui->completionLabel->setText(matches.join(", "));
 		ui->completionLabel->selectFirst();
 	}
+}
+
+void SearchDialog::gotoPosition(void)
+{
+        double ra = ui->raSpinBox->valueRadians();
+        double de = ui->decSpinBox->valueRadians();
+        MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("MovementMgr");
+	Q_ASSERT(mvmgr);
+        Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	Q_ASSERT(nav);
+        Vec3d v;
+        StelUtils::spheToRect(ra, de, v);
+        mvmgr->setFlagTracking(false);
+        mvmgr->moveTo(nav->j2000ToEarthEqu(v));
 }
 
 void SearchDialog::gotoObject()

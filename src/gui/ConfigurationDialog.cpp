@@ -328,7 +328,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/meteor_rate", mmgr->getZHR());
 
 	// view dialog / markings tab settings
-	conf->setValue("viewing/flag_azimutal_grid", glmgr->getFlagAzimutalGrid());
+	conf->setValue("viewing/flag_azimuthal_grid", glmgr->getFlagAzimuthalGrid());
 	conf->setValue("viewing/flag_equatorial_grid", glmgr->getFlagEquatorGrid());
 	conf->setValue("viewing/flag_equator_line", glmgr->getFlagEquatorLine());
 	conf->setValue("viewing/flag_ecliptic_line", glmgr->getFlagEclipticLine());

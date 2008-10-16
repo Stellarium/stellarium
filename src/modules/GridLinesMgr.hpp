@@ -72,13 +72,13 @@ public:
 	// Setter and getters
 public slots:
 	//! Set flag for displaying Azimuthal Grid.
-	void setFlagAzimutalGrid(bool b);
+	void setFlagAzimuthalGrid(bool b);
 	//! Get flag for displaying Azimuthal Grid.
-	bool getFlagAzimutalGrid(void) const;
+	bool getFlagAzimuthalGrid(void) const;
 	//! Get the current color of the Azimuthal Grid.
-	Vec3f getColorAzimutalGrid(void) const;
+	Vec3f getColorAzimuthalGrid(void) const;
 	//! Set the color of the Azimuthal Grid.
-	void setColorAzimutalGrid(const Vec3f& v);
+	void setColorAzimuthalGrid(const Vec3f& v);
 	
 	//! Set flag for displaying Equatorial Grid.
 	void setFlagEquatorGrid(bool b);
@@ -128,7 +128,7 @@ public slots:
 private:
 	SkyGrid * equGrid;      // Equatorial grid
 	SkyGrid * equJ2000Grid; // Equatorial J2000 grid
-	SkyGrid * aziGrid;      // Azimutal grid
+	SkyGrid * aziGrid;      // Azimuthal grid
 	SkyLine * equatorLine;  // Celestial Equator line
 	SkyLine * eclipticLine; // Ecliptic line
 	SkyLine * meridianLine; // Meridian line

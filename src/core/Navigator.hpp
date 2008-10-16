@@ -135,7 +135,7 @@ public:
 	void setViewingMode(ViewingModeType viewMode);
 	ViewingModeType getViewingMode(void) const {return viewingMode;}
 
-	//! Return the inital viewing direction in altazimutal coordinates
+	//! Return the inital viewing direction in altazimuthal coordinates
 	const Vec3d& getInitViewingDirection() {return initViewPos;}
 	
 	//! Return the preset sky time in JD
@@ -151,9 +151,9 @@ public:
 	void updateModelViewMat(void);
 	
 public slots:
-	//! Toggle current mount mode between equatorial and altazimutal
+	//! Toggle current mount mode between equatorial and altazimuthal
 	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquatorial); else setMountMode(MountAltAzimuthal);}
-	//! Define whether we should use equatorial mount or altazimutal
+	//! Define whether we should use equatorial mount or altazimuthal
 	void setEquatorialMount(bool b) {setMountMode(b ? MountEquatorial : MountAltAzimuthal);}
 	
 	//! Set the current date in Julian Day
