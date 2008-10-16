@@ -28,13 +28,13 @@ class SkyImageTile;
 class QProgressBar;
 
 //! Manage the sky background images, including DSS and deep sky objects images
-class SkyBackground : public StelModule
+class SkyImageMgr : public StelModule
 {
 	Q_OBJECT
 			
 public:
-	SkyBackground();
-	~SkyBackground();
+	SkyImageMgr();
+	~SkyImageMgr();
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -93,26 +93,28 @@ private slots:
 	void percentLoadedChanged(int percentage);
 	
 private:
-	class SkyBackgroundElem
+	class SkyImageMgrElem
 	{
 		public:
-			SkyBackgroundElem(SkyImageTile* t, bool show=true, bool externallyOwned=true);
-			~SkyBackgroundElem();
+			SkyImageMgrElem(SkyImageTile* t, bool show=true, bool externallyOwned=true);
+			~SkyImageMgrElem();
 			SkyImageTile* tile;
 			QProgressBar* progressBar;
 			bool show;
 			bool externallyOwned;
 	};
 	
-	SkyBackgroundElem* skyBackgroundElemForTile(const SkyImageTile*);
+	SkyImageMgrElem* skyBackgroundElemForTile(const SkyImageTile*);
 	
 	QString keyForTile(const SkyImageTile*);
 	
 	//! Map image key/image
-	QMap<QString, SkyBackgroundElem*> allSkyImages;
+	QMap<QString, SkyImageMgrElem*> allSkyImages;
 	
 	// Whether to draw at all
 	bool flagShow;
+	
+	class QNetworkAccessManager* networkAccessManager;
 };
 
 #endif // _SKYBACKGROUND_HPP_

@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "SkyBackground.hpp"
+#include "SkyImageMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
@@ -31,21 +31,21 @@
 #include <QString>
 #include <QProgressBar>
 
-SkyBackground::SkyBackground(void) : flagShow(true)
+SkyImageMgr::SkyImageMgr(void) : flagShow(true)
 {
-	setObjectName("SkyBackground");
+	setObjectName("SkyImageMgr");
 }
 
-SkyBackground::~SkyBackground()
+SkyImageMgr::~SkyImageMgr()
 {
-	foreach (SkyBackgroundElem* s, allSkyImages)
+	foreach (SkyImageMgrElem* s, allSkyImages)
 		delete s;
 }
 
 /*************************************************************************
  Reimplementation of the getCallOrder method
 *************************************************************************/
-double SkyBackground::getCallOrder(StelModuleActionName actionName) const
+double SkyImageMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
 		return GETSTELMODULE("MilkyWay")->getCallOrder(actionName)+5;
@@ -53,8 +53,9 @@ double SkyBackground::getCallOrder(StelModuleActionName actionName) const
 }
 
 // read from stream
-void SkyBackground::init()
+void SkyImageMgr::init()
 {
+	networkAccessManager = new QNetworkAccessManager();
 	try
 	{
 		insertSkyImage(StelApp::getInstance().getFileMgr().findFile("nebulae/default/textures.json"));
@@ -66,9 +67,9 @@ void SkyBackground::init()
 	}
 }
 
-QString SkyBackground::insertSkyImage(SkyImageTile* tile, bool ashow, bool aexternallyOwned)
+QString SkyImageMgr::insertSkyImage(SkyImageTile* tile, bool ashow, bool aexternallyOwned)
 {
-	SkyBackgroundElem* bEl = new SkyBackgroundElem(tile, ashow, aexternallyOwned);
+	SkyImageMgrElem* bEl = new SkyImageMgrElem(tile, ashow, aexternallyOwned);
 	QString key = tile->getShortName();
 	if (key.isEmpty())
 		key = tile->getAbsoluteImageURI();
@@ -89,31 +90,31 @@ QString SkyBackground::insertSkyImage(SkyImageTile* tile, bool ashow, bool aexte
 }
 
 // Add a new image from its URI (URL or local file name)
-QString SkyBackground::insertSkyImage(const QString& uri, bool ashow)
+QString SkyImageMgr::insertSkyImage(const QString& uri, bool ashow)
 {
 	return insertSkyImage(new SkyImageTile(uri), ashow, true);
 }
 
 // Remove a sky image tile from the list of background images
-void SkyBackground::removeSkyImage(const QString& key)
+void SkyImageMgr::removeSkyImage(const QString& key)
 {
 	if (allSkyImages.contains(key))
 	{
-		SkyBackgroundElem* bEl = allSkyImages[key];
+		SkyImageMgrElem* bEl = allSkyImages[key];
 		delete bEl;
 		allSkyImages.remove(key);
 	}
 }
 
 // Remove a sky image tile from the list of background images
-void SkyBackground::removeSkyImage(SkyImageTile* img)
+void SkyImageMgr::removeSkyImage(SkyImageTile* img)
 {
 	const QString k = keyForTile(img);
 	removeSkyImage(k);
 }
 
 // Draw all the multi-res images collection
-void SkyBackground::draw(StelCore* core)
+void SkyImageMgr::draw(StelCore* core)
 {
 	if (!flagShow)
 		return;
@@ -123,7 +124,7 @@ void SkyBackground::draw(StelCore* core)
 	prj->setCurrentFrame(Projector::FrameJ2000);
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_BLEND);
-	foreach (SkyBackgroundElem* s, allSkyImages)
+	foreach (SkyImageMgrElem* s, allSkyImages)
 	{
 		if (s->show)
 			s->tile->draw(core);
@@ -131,11 +132,11 @@ void SkyBackground::draw(StelCore* core)
 }
 
 // Called when loading of data started or stopped for one collection
-void SkyBackground::loadingStateChanged(bool b)
+void SkyImageMgr::loadingStateChanged(bool b)
 {
 	SkyImageTile* tile = qobject_cast<SkyImageTile*>(QObject::sender());
 	Q_ASSERT(tile!=0);
-	SkyBackgroundElem* elem = skyBackgroundElemForTile(tile);
+	SkyImageMgrElem* elem = skyBackgroundElemForTile(tile);
 	Q_ASSERT(elem!=NULL);
 	if (b)
 	{
@@ -156,19 +157,19 @@ void SkyBackground::loadingStateChanged(bool b)
 }
 	
 // Called when the percentage of loading tiles/tiles to be displayed changed for one collection
-void SkyBackground::percentLoadedChanged(int percentage)
+void SkyImageMgr::percentLoadedChanged(int percentage)
 {
 	SkyImageTile* tile = qobject_cast<SkyImageTile*>(QObject::sender());
 	Q_ASSERT(tile!=0);
-	SkyBackgroundElem* elem = skyBackgroundElemForTile(tile);
+	SkyImageMgrElem* elem = skyBackgroundElemForTile(tile);
 	Q_ASSERT(elem!=NULL);
 	Q_ASSERT(elem->progressBar!=NULL);
 	elem->progressBar->setValue(percentage);
 }
 	
-SkyBackground::SkyBackgroundElem* SkyBackground::skyBackgroundElemForTile(const SkyImageTile* t)
+SkyImageMgr::SkyImageMgrElem* SkyImageMgr::skyBackgroundElemForTile(const SkyImageTile* t)
 {
-	foreach (SkyBackgroundElem* e, allSkyImages)
+	foreach (SkyImageMgrElem* e, allSkyImages)
 	{
 		if (e->tile==t)
 		{
@@ -178,16 +179,16 @@ SkyBackground::SkyBackgroundElem* SkyBackground::skyBackgroundElemForTile(const 
 	return NULL;
 }
 
-QString SkyBackground::keyForTile(const SkyImageTile* t)
+QString SkyImageMgr::keyForTile(const SkyImageTile* t)
 {
 	return allSkyImages.key(skyBackgroundElemForTile(t));
 }
 
-SkyBackground::SkyBackgroundElem::SkyBackgroundElem(SkyImageTile* t, bool ashow, bool aexternallyOwned) : 
+SkyImageMgr::SkyImageMgrElem::SkyImageMgrElem(SkyImageTile* t, bool ashow, bool aexternallyOwned) : 
 		tile(t), progressBar(NULL), show(ashow), externallyOwned(aexternallyOwned)
 {;}
 				 
-SkyBackground::SkyBackgroundElem::~SkyBackgroundElem()
+SkyImageMgr::SkyImageMgrElem::~SkyImageMgrElem()
 {
 	if (progressBar)
 		progressBar->deleteLater();

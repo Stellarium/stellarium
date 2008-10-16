@@ -41,6 +41,7 @@ class QNetworkAccessManager;
 class StelStyle;
 class QTime;
 class LocationMgr;
+class SkyImageMgr;
 
 //! @class StelApp 
 //! Singleton main Stellarium application class.
@@ -112,6 +113,10 @@ public:
 	//! Get the StelFileMgr for performing file operations.
 	//! @return the StelFileMgr manager to use for performing file operations
 	StelFileMgr& getFileMgr() {return *stelFileMgr;}
+	
+	//! Get the SkyImageMgr managing background images
+	//! @return the SkyImageMgr managing background images
+	SkyImageMgr& getSkyImageMgr() {return *skyImageMgr;}
 	
 	//! Get the core of the program.
 	//! It is the one which provide the projection, navigation and tone converter.
@@ -312,6 +317,9 @@ private:
 	
 	// Main network manager used for the program
 	QNetworkAccessManager* networkAccessManager;
+	
+	// The manager for the sky images such as nebulas or background DSS
+	SkyImageMgr* skyImageMgr;
 	
 	// The main loading bar
 	LoadingBar* loadingBar;
