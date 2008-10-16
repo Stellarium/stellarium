@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _SKYBACKGROUND_HPP_
-#define _SKYBACKGROUND_HPP_
+#ifndef _SKYIMAGEMGR_HPP_
+#define _SKYIMAGEMGR_HPP_
 
 #include "StelModule.hpp"
 #include <QString>
@@ -113,8 +113,6 @@ private:
 	
 	// Whether to draw at all
 	bool flagShow;
-	
-	class QNetworkAccessManager* networkAccessManager;
 };
 
-#endif // _SKYBACKGROUND_HPP_
+#endif // _SKYIMAGEMGR_HPP_

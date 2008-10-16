@@ -71,6 +71,8 @@ SET(stellarium_lib_SRCS
 	core/ViewportDistorter.cpp
 	core/ViewportDistorter.hpp
 	core/StelStyle.hpp
+	core/SkyImageMgr.cpp
+	core/SkyImageMgr.hpp
 	
 	stelutils/bytes.h
 	stelutils/callback_helpers.hpp
@@ -160,8 +162,6 @@ SET(stellarium_lib_SRCS
 	modules/Orbit.hpp
 	modules/Planet.cpp
 	modules/Planet.hpp
-	modules/SkyImageMgr.cpp
-	modules/SkyImageMgr.hpp
 	modules/Skybright.cpp
 	modules/Skybright.hpp
 	modules/Skylight.cpp
@@ -261,12 +261,12 @@ SET(stellarium_MOC_HDRS
 	core/MovementMgr.hpp
 	core/SkyImageTile.hpp
 	core/SkyDrawer.hpp
+	core/SkyImageMgr.hpp
 	modules/ConstellationMgr.hpp
 	modules/LandscapeMgr.hpp
 	modules/GridLinesMgr.hpp
 	modules/MilkyWay.hpp
 	modules/NebulaMgr.hpp
-	modules/SkyImageMgr.hpp
 	modules/SolarSystem.hpp
 	modules/MeteorMgr.hpp
 	modules/StarMgr.hpp
