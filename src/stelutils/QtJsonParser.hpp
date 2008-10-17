@@ -21,6 +21,7 @@
 
 #include <QIODevice>
 #include <QVariant>
+#include <QByteArray>
 
 //! Qt-based simple JSON reader inspired by the one from Zoolib http://zoolib.sourceforge.net/
 //! JSON is JavaScript Object Notation. See http://www.json.org/
@@ -28,8 +29,8 @@
 //! JSON            Qt
 //! ----          -------
 //! null          QVariant::Invalid
-//! object        QVariantMap
-//! array         QVariantList
+//! object        QVariantMap (QVariant::Map)
+//! array         QVariantList (QVariant::List)
 //! boolean       QVariant::Bool
 //! string        QVariant::String
 //! number        QVariant::Int or QVariant::Double
@@ -37,7 +38,10 @@ class QtJsonParser
 {
 public:
 	//! Parse the given input stream
-	QVariant parse(QIODevice& input);
+	QVariant parse(QIODevice& input) const;
+	
+	//! Serialize the passed QVariant as JSON into the output QIODevice
+	void write(const QVariant& jsonObject, QIODevice& output, int indentLevel=0) const;
 };
 
 #endif // _QTJSONPARSER_HPP_
