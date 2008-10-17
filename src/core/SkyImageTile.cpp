@@ -84,6 +84,7 @@ void JsonLoadThread::run()
 
 void SkyImageTile::initCtor()
 {
+	minResolution = -1;
 	luminance = -1;
 	alphaBlend = false;
 	noTexture = false;
@@ -608,7 +609,94 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 // 		qWarning() << "Large tiles number for " << shortName << ": " << subTilesUrls.size();
 // 	}
 }
+
+// Convert the image informations to a map following the JSON structure.
+QVariantMap SkyImageTile::toQVariantMap() const
+{
+	QVariantMap res;
 	
+	// Image credits
+	QVariantMap imCredits;
+	if (!dataSetCredits.shortCredits.isEmpty())
+		imCredits["short"]=dataSetCredits.shortCredits;
+	if (!dataSetCredits.fullCredits.isEmpty())
+		imCredits["full"]=dataSetCredits.fullCredits;
+	if (!dataSetCredits.infoURL.isEmpty())
+		imCredits["infoUrl"]=dataSetCredits.infoURL;
+	if (!imCredits.empty())
+		res["imageCredits"]=imCredits;
+	
+	// Server credits
+	QVariantMap serCredits;
+	if (!serverCredits.shortCredits.isEmpty())
+		imCredits["short"]=serverCredits.shortCredits;
+	if (!serverCredits.fullCredits.isEmpty())
+		imCredits["full"]=serverCredits.fullCredits;
+	if (!serverCredits.infoURL.isEmpty())
+		imCredits["infoUrl"]=serverCredits.infoURL;
+	if (!serCredits.empty())
+		res["serverCredits"]=serCredits;
+	
+	// Misc
+	if (!shortName.isEmpty())
+		res["shortName"] = shortName;	
+	if (minResolution>0)
+		 res["minResolution"]=minResolution;
+	if (luminance>0)
+		res["maxBrightness"]=StelApp::getInstance().getCore()->getSkyDrawer()->luminanceToSurfacebrightness(luminance);
+	if (alphaBlend)
+		res["alphaBlend"]=true;
+	if (noTexture==false)
+		res["imageUrl"]=absoluteImageURI;
+	
+	// Polygons
+	if (!skyConvexPolygons.isEmpty())
+	{
+		QVariantList polygsL;
+		foreach (const StelGeom::ConvexPolygon& poly, skyConvexPolygons)
+		{
+			QVariantList polyL;
+			for (size_t i=0;i<poly.asPolygon().size();++i)
+			{
+				double ra, dec;
+				StelUtils::rectToSphe(&ra, &dec, poly[i]);
+				QVariantList vL;
+				vL.append(ra);
+				vL.append(dec);
+				polyL.append(vL);
+			}
+			polygsL.append(polyL);
+		}
+		res["worldCoords"]=polygsL;
+	}
+	
+	// textures positions
+	if (!textureCoords.empty())
+	{
+		QVariantList polygsL;
+		foreach (const QList<Vec2f>& poly, textureCoords)
+		{
+			QVariantList polyL;
+			foreach (Vec2f v, poly)
+			{
+				QVariantList vL;
+				vL.append(v[0]);
+				vL.append(v[1]);
+				polyL.append(vL);
+			}
+			polygsL.append(polyL);
+		}
+		res["textureCoords"]=polygsL;
+	}
+	
+	if (!subTilesUrls.empty())
+	{
+		res["subTiles"] = subTilesUrls;
+	}
+	
+	return res;
+}
+
 // Called when the download for the JSON file terminated
 void SkyImageTile::downloadFinished()
 {
