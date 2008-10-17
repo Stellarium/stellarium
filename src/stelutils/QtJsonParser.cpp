@@ -135,7 +135,7 @@ QVariant readOther(QIODevice& input)
 }
 
 // Parse the given input stream
-QVariant QtJsonParser::parse(QIODevice& input)
+QVariant QtJsonParser::parse(QIODevice& input) const
 {
 	skipJson(input);
 	
@@ -198,4 +198,80 @@ QVariant QtJsonParser::parse(QIODevice& input)
 		return readString(input);
 	}
 	return readOther(input);
+}
+
+// Serialize the passed QVariant as JSON into the output QIODevice
+void QtJsonParser::write(const QVariant& v, QIODevice& output, int indentLevel) const
+{
+	switch (v.type())
+	{
+		case QVariant::Bool:
+			output.write(v.toBool()==true ? "true" : "false");
+			break;
+		case QVariant::Invalid:
+			output.write("null");
+			break;
+		case QVariant::String:
+		{
+			QString s(v.toString());
+			s.replace('\"', "\\\"");
+			//s.replace('\\', "\\\\");
+			//s.replace('/', "\\/");
+			s.replace('\b', "\\b");
+			s.replace('\n', "\\n");
+			s.replace('\f', "\\f");
+			s.replace('\r', "\\r");
+			s.replace('\t', "\\t");
+			output.write(QString("\"%1\"").arg(s).toUtf8());
+			break;
+		}
+		case QVariant::Int:
+		case QVariant::Double:
+			output.write(v.toString().toUtf8());
+			break;
+		case QVariant::List:
+		{
+			output.putChar('[');
+			const QVariantList& l = v.toList();
+			for (int i=0;i<l.size();++i)
+			{
+				// Break line if we start an JSON Object for nice looking
+				if (l.at(i).type()==QVariant::Map)
+					output.putChar('\n');
+				write(l.at(i), output, indentLevel);
+				if (i!=l.size()-1)
+					output.write(", ");
+			}
+			output.putChar(']');
+			break;
+		}
+		case QVariant::Map:
+		{
+			const QByteArray prepend(indentLevel, '\t');
+			output.write(prepend);
+			output.write("{\n");
+			++indentLevel;
+			const QVariantMap& m = v.toMap();
+			int j =0;
+			for (QVariantMap::ConstIterator i=m.begin();i!=m.end();++i)
+			{
+				output.write(prepend);
+				output.write("\t\"");
+				output.write(i.key().toUtf8());
+				output.write("\": ");
+				write(i.value(), output, indentLevel);
+				if (++j!=m.size())
+					output.putChar(',');
+				output.putChar('\n');
+			}
+			output.write(prepend);
+			output.write("}");
+			--indentLevel;
+			break;
+		}
+		default:
+			qWarning() << "Cannot serialize QVariant of type " << v.typeName() << " in JSON";
+			break;
+	}
+		
 }
