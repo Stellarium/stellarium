@@ -104,9 +104,13 @@ public:
 	void preDraw();
 	
 	//! Compute the luminance for an extended source with the given surface brightness
-	//! @param sb Surface brightness in V magnitude/arcmin^2
+	//! @param sb surface brightness in V magnitude/arcmin^2
 	//! @return the luminance in cd/m^2
 	static float surfacebrightnessToLuminance(float sb);
+	//! Compute the surface brightness from the luminance of an extended source
+	//! @param lum luminance in cd/m^2
+	//! @return surface brightness in V magnitude/arcmin^2
+	static float luminanceToSurfacebrightness(float lum);
 	
 	//! Convert quantized B-V index to float B-V
 	static inline float indexToBV(unsigned char bV)

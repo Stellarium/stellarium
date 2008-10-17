@@ -107,6 +107,10 @@ public:
 	//! Get the depth level in the tree
 	int getLevel() const {return parent()==NULL ? 0 : (qobject_cast<SkyImageTile*>(parent()))->getLevel()+1;}
 	
+	//! Convert the image informations to a map following the JSON structure.
+	//! It can be saved as JSON using the QtJsonParser methods.
+	QVariantMap toQVariantMap() const;
+	
 signals:
 	//! Emitted when loading of data started or stopped
 	//! @param b true if data loading started, false if finished
