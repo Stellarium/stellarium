@@ -246,6 +246,12 @@ float SkyDrawer::surfacebrightnessToLuminance(float sb)
 	return 2.*2025000.f*std::exp(-0.92103f*(sb + 12.12331f))/(1./60.*1./60.);
 }
 
+// Compute the surface brightness from the luminance of an extended source
+float SkyDrawer::luminanceToSurfacebrightness(float lum)
+{
+	return std::log(lum*(1./60.*1./60.)/(2.*2025000.f))/-0.92103f - 12.12331f;
+}
+	
 // Compute RMag and CMag from magnitude for a point source.
 bool SkyDrawer::computeRCMag(float mag, float rcMag[2]) const
 {
