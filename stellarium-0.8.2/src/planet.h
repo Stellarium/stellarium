@@ -109,9 +109,11 @@ public:
            float albedo,
            const string& tex_map_name,
            const string& tex_halo_name,
+		   const string& tex_bump_name,
            pos_func_type _coord_func,
            OsulatingFunctType *osculating_func,
-		   bool hidden);
+		   bool hidden,
+		   bool flag_bump);
 
     ~Planet();
 
@@ -285,9 +287,14 @@ protected:
 	Mat4d rot_local_to_parent;
 	Mat4d mat_local_to_parent;		// Transfo matrix from local ecliptique to parent ecliptic
 	float axis_rotation;			// Rotation angle of the Planet on it's axis
-  s_texture * tex_map;			// Planet map texture
+    
+	s_texture * tex_map;			// Planet map texture
 	s_texture * tex_halo;			// Little halo texture
 	s_texture * tex_big_halo;		// Big halo texture
+	
+	// Vinogradov : for bump
+	s_texture * tex_bump;
+	bool flag_bump;
 
 	float big_halo_size;			// Halo size on screen
 

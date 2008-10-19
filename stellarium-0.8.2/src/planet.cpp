@@ -16,10 +16,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-#include "Shader.cpp" //todo: make header
+
 #include <iostream>
 #include <iomanip>
 
+#include "BumpShader.h"
 #include "planet.h"
 #include "navigator.h"
 #include "projector.h"
@@ -27,10 +28,6 @@
 #include "s_gui.h"
 #include "stellastro.h" // just for get_apparent_sidereal_time
 #include "3dsloader.h"
-
-TShader MoonShader;
-TShader MarsShader;
-TShader MercuryShader;
 
 s_font* Planet::planet_name_font = NULL;
 float Planet::object_scale = 1.f;
@@ -54,19 +51,21 @@ Planet::Planet(Planet *parent,
                float albedo,
                const string& tex_map_name,
                const string& tex_halo_name,
+			   const string& tex_bump_name,
                pos_func_type coord_func,
                OsulatingFunctType *osculating_func,
-			   bool hidden) :
+			   bool hidden,
+			   bool flag_bump) :
 		englishName(englishName), flagHalo(flagHalo),
         flag_lighting(flag_lighting),
         radius(radius), one_minus_oblateness(1.0-oblateness),
         color(color), albedo(albedo), axis_rotation(0.),
-        tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL),
+        tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL), tex_bump(NULL),
         sphere_scale(1.f),
         lastJD(J2000), last_orbitJD(0), deltaJD(JD_SECOND), orbit_cached(0),
         coord_func(coord_func), osculating_func(osculating_func),
         parent(parent), hidden(hidden),	stopDayMotion(false), restoreDayTimeDuration(3000.0), 
-		startDayMotionTime(-1.0)
+		startDayMotionTime(-1.0), flag_bump(flag_bump)
 {
 	if (parent) parent->satellites.push_back(this);
 	ecliptic_pos=Vec3d(0.,0.,0.);
@@ -74,6 +73,7 @@ Planet::Planet(Planet *parent,
 	mat_local_to_parent = Mat4d::identity();
 	tex_map = new s_texture(tex_map_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
 	if (flagHalo) tex_halo = new s_texture(tex_halo_name);
+	if (flag_bump) tex_bump = new s_texture(tex_bump_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
 
 	// 60 day trails
 	DeltaTrail = 1;
@@ -97,6 +97,8 @@ Planet::~Planet()
 	rings = NULL;
 	if (tex_big_halo) delete tex_big_halo;
 	tex_big_halo = NULL;
+	if (tex_bump) delete tex_bump;
+	tex_bump = NULL;
 }
 
 // Return the information string "ready to print" :)
@@ -696,61 +698,42 @@ void Planet::draw_sphere(/*const*/ Projector* prj, const Mat4d& mat, float scree
 	}
 	glBindTexture(GL_TEXTURE_2D, tex_map->getID());
 
+	// Rotate and add an extra quarter rotation so that the planet texture map
+	// fits to the observers position. No idea why this is necessary,
+	// perhaps some openGl strangeness, or confusing sin/cos.
+	// kornyakov 3d:
+	//prj->sSphere(radius*sphere_scale, one_minus_oblateness, nb_facet, nb_facet,
+	//             mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
+	//kornyakov: black planet
+	prj->showSphereBlack = isBlack;
 
-  // Rotate and add an extra quarter rotation so that the planet texture map
-  // fits to the observers position. No idea why this is necessary,
-  // perhaps some openGl strangeness, or confusing sin/cos.
-  // kornyakov 3d:
-  //prj->sSphere(radius*sphere_scale, one_minus_oblateness, nb_facet, nb_facet,
-  //             mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
-  //kornyakov: black planet
-  prj->showSphereBlack = isBlack;
-  if (this->getEnglishName().substr(0,4).compare("3ds_")) // todo: remake it
-  {
-    if (this->englishName == "Moon")
-    {
-      MoonShader.LoadFragmentShaderSourse("Bump.frag"); //todo: parametrize this code
-      MoonShader.LoadVertexShaderSourse("Bump.vert");
-      MoonShader.AddTexture("textures\\BumpMaps\\lune_NRM.bmp","NormalMap");
-      MoonShader.AddTexture("textures\\lune.bmp","TextureMap");
-      MoonShader.Enable();
-    }
-    else if (this->englishName == "Mars")
-    {
-      MarsShader.LoadFragmentShaderSourse("Bump.frag");
-      MarsShader.LoadVertexShaderSourse("Bump.vert");
-      MarsShader.AddTexture("textures\\BumpMaps\\mars_NRM.bmp","NormalMap");
-      MarsShader.AddTexture("textures\\mars.bmp","TextureMap");
-      MarsShader.Enable();
-    }
-    else if (this->englishName == "Mercury")
-    {
-      MercuryShader.LoadFragmentShaderSourse("Bump.frag");
-      MercuryShader.LoadVertexShaderSourse("Bump.vert");
-      MercuryShader.AddTexture("textures\\BumpMaps\\mercury_NRM.bmp","NormalMap");
-      MercuryShader.AddTexture("textures\\mercury.bmp","TextureMap");
-      MercuryShader.Enable();
-    }
-    prj->sSphere(radius*sphere_scale, one_minus_oblateness, nb_facet, nb_facet,
-                 mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
-    if (this->englishName == "Moon")
-      MoonShader.Disable();
-    else if (this->englishName == "Mars")
-      MarsShader.Disable();
-    else if (this->englishName == "Mercury")
-      MercuryShader.Disable();
-  }
-  else
-  {
-    // kornyakov: 1st and 3rd lines are for z-fighting avoiding
-    prj->set_clipping_planes(this->get_distance()*0.8, this->get_distance()*1.2);
-  	prj->ms3dsObject(&this->object, mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
-    prj->set_clipping_planes(0.000001, 50); //todo: avoid magic numbers
-  }
+	// Vinogradov: enable bump if it's used
+	if (flag_bump)
+	{
+		BumpShaderPtr()->setTexMap(tex_map->getID());
+		BumpShaderPtr()->setBumpMap(tex_bump->getID());
+		BumpShaderPtr()->enable();
+	}
+
+	if (this->getEnglishName().substr(0,4).compare("3ds_")) // todo: remake it
+	{
+		prj->sSphere(radius*sphere_scale, one_minus_oblateness, nb_facet, nb_facet,
+			mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
+	}
+	else
+	{
+		// kornyakov: 1st and 3rd lines are for z-fighting avoiding
+		prj->set_clipping_planes(this->get_distance()*0.8, this->get_distance()*1.2);
+  		prj->ms3dsObject(&this->object, mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
+		prj->set_clipping_planes(0.000001, 50); //todo: avoid magic numbers
+	}
+
+	// Vinogradov: disable bump if it's used
+	if (flag_bump)
+		BumpShaderPtr()->disable();
 
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_LIGHTING);
-
 }
 
 void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneReproductor* eye)
