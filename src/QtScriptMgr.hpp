@@ -36,7 +36,7 @@ public:
 	StelMainScriptAPI(QObject *parent = 0);
 	~StelMainScriptAPI();
 	
-// Theses functions will be available in scripts
+// These functions will be available in scripts
 public slots:
 	//! Set the current date in Julian Day
 	//! @param JD the Julian Date
@@ -61,11 +61,16 @@ Q_OBJECT
 public:
     QtScriptMgr(QObject *parent = 0);
     ~QtScriptMgr();
-	
-	void test();
+
+	//! Run the script located at the given location
+	//! @param fileName the location of the file containing the script.
+	void runScript(const QString& fileName);
 	
 private:
 	QScriptEngine engine;
+	
+	// Test some features
+	void test();
 };
 
 #endif // _QTSCRIPTMGR_HPP_

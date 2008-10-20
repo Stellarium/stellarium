@@ -42,6 +42,7 @@ class StelStyle;
 class QTime;
 class LocationMgr;
 class SkyImageMgr;
+class QtScriptMgr;
 
 //! @class StelApp 
 //! Singleton main Stellarium application class.
@@ -117,6 +118,9 @@ public:
 	//! Get the SkyImageMgr managing background images
 	//! @return the SkyImageMgr managing background images
 	SkyImageMgr& getSkyImageMgr() {return *skyImageMgr;}
+	
+	//! Get the script manager
+	QtScriptMgr& getScriptMgr() {return *scriptMgr;}
 	
 	//! Get the core of the program.
 	//! It is the one which provide the projection, navigation and tone converter.
@@ -320,6 +324,9 @@ private:
 	
 	// The manager for the sky images such as nebulas or background DSS
 	SkyImageMgr* skyImageMgr;
+	
+	// The script manager based on Qt script engine
+	QtScriptMgr* scriptMgr;
 	
 	// The main loading bar
 	LoadingBar* loadingBar;
