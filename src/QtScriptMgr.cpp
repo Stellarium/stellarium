@@ -197,7 +197,7 @@ class MySleep : public QThread
 		}
 };
 
-void StelMainScriptAPI::sleep(double t)
+void StelMainScriptAPI::wait(double t)
 {
 	MySleep::msleep(t*1000);
 }
