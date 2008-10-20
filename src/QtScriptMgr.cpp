@@ -30,6 +30,23 @@
 
 Q_DECLARE_METATYPE(Vec3f);
 
+class StelScriptThread : public QThread
+{
+	public:
+		StelScriptThread(const QString& ascriptCode, QScriptEngine* aengine) : scriptCode(ascriptCode), engine(aengine) {;}
+		
+	protected:
+		void run()
+		{
+			engine->evaluate(scriptCode);
+		}
+    
+	private:
+		QString scriptCode;
+		QScriptEngine* engine;
+};
+
+
 QScriptValue vec3fToScriptValue(QScriptEngine *engine, const Vec3f& c)
 {
 	QScriptValue obj = engine->newObject();
@@ -55,7 +72,7 @@ QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 	return vec3fToScriptValue(engine, c);
 }
 
-QtScriptMgr::QtScriptMgr(QObject *parent) : QObject(parent)
+QtScriptMgr::QtScriptMgr(QObject *parent) : QObject(parent), thread(NULL)
 {
 	// Allow Vec3f managment in scripts
 	qScriptRegisterMetaType(&engine, vec3fToScriptValue, vec3fFromScriptValue);
@@ -77,7 +94,6 @@ QtScriptMgr::QtScriptMgr(QObject *parent) : QObject(parent)
 	}
 	
 	runScript("scripts/test.sts");
-	// test();
 }
 
 
@@ -88,6 +104,11 @@ QtScriptMgr::~QtScriptMgr()
 // Run the script located at the given location
 void QtScriptMgr::runScript(const QString& fileName)
 {
+	if (thread!=NULL)
+	{
+		qWarning() << "ERROR: there is already a script running, please wait that it's over.";
+		return;
+	}
 	QString absPath;
 	try
 	{
@@ -100,24 +121,34 @@ void QtScriptMgr::runScript(const QString& fileName)
 	}
 	QFile fic(absPath);
 	fic.open(QIODevice::ReadOnly);
-	engine.evaluate(fic.readAll());
+	thread = new StelScriptThread(QTextStream(&fic).readAll(), &engine);
+	fic.close();
+	
+	connect(thread, SIGNAL(finished()), this, SLOT(scriptEnded()));
+	thread->start();
+}
+	
+void QtScriptMgr::scriptEnded()
+{
+	delete thread;
+	thread=NULL;
 	if (engine.hasUncaughtException())
 	{
 		qWarning() << "Error while running script: " << engine.uncaughtException().toString() << endl;
 	}
 }
 	
-void QtScriptMgr::test()
-{
-	engine.evaluate("core.JDay = 152200.; ConstellationMgr.setFlagArt(true)");
-	engine.evaluate("ConstellationMgr.flagArt = true");
-	engine.evaluate("ConstellationMgr.flagLines = true");
-	engine.evaluate("ConstellationMgr.linesColor = Vec3f(1.,0.,0.)");
-	if (engine.hasUncaughtException())
-	{
-		qWarning() << engine.uncaughtException().toString() << endl;
-	}
-}
+// void QtScriptMgr::test()
+// {
+// 	engine.evaluate("core.JDay = 152200.; ConstellationMgr.setFlagArt(true)");
+// 	engine.evaluate("ConstellationMgr.flagArt = true");
+// 	engine.evaluate("ConstellationMgr.flagLines = true");
+// 	engine.evaluate("ConstellationMgr.linesColor = Vec3f(1.,0.,0.)");
+// 	if (engine.hasUncaughtException())
+// 	{
+// 		qWarning() << engine.uncaughtException().toString() << endl;
+// 	}
+// }
 
 StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 {
@@ -154,4 +185,19 @@ void StelMainScriptAPI::setTimeSpeed(double ts)
 double StelMainScriptAPI::getTimeSpeed(void) const
 {
 	return StelApp::getInstance().getCore()->getNavigation()->getTimeSpeed();
+}
+
+// This class let's us sleep in milleseconds
+class MySleep : public QThread
+{
+	public:
+		static void msleep(unsigned long msecs) 
+		{
+			QThread::msleep(msecs);
+		}
+};
+
+void StelMainScriptAPI::sleep(double t)
+{
+	MySleep::msleep(t*1000);
 }

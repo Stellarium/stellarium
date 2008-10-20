@@ -51,6 +51,9 @@ public slots:
 	//! Get time speed in JDay/sec
 	//! @return time speed in JDay/sec
 	double getTimeSpeed(void) const;
+	
+	//! Pauses the script for t seconds
+	void sleep(double t);
 };
 		
 //! Manage scripting in Stellarium
@@ -66,11 +69,15 @@ public:
 	//! @param fileName the location of the file containing the script.
 	void runScript(const QString& fileName);
 	
+private slots:
+	//! Called at the end of the running thread
+	void scriptEnded();
+
 private:
 	QScriptEngine engine;
 	
-	// Test some features
-	void test();
+	//! The thread in which scripts are run
+	class StelScriptThread* thread;
 };
 
 #endif // _QTSCRIPTMGR_HPP_
