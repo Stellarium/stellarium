@@ -21,7 +21,7 @@ def getIntersectPoly(baseFileName, curLevel, i,j):
 		box = removeBoxN
 		x=float(box[0]-i*scale)/scale*300.
 		y=float(box[1]-j*scale)/scale*300.
-		
+		# x,y is the position of the box top left corner in pixel wrt lower left corner of current tile
 		if x>300. or y<=0.:
 			# Tile fully valid
 			return [[[0,0], [300, 0], [300, 300], [0, 300]]]
@@ -63,7 +63,7 @@ def getIntersectPoly(baseFileName, curLevel, i,j):
 		return [[[-x,0], [300, 0], [300, 300], [-x, 300]],[[0,y], [-x, y], [-x, 300], [0, 300]]]
 	
 	
-def createTile(currentLevel, maxLevel, i, j, outDirectory, plateName):
+def createTile(currentLevel, maxLevel, i, j, outDirectory, plateName, special=False):
 	# Create the associated tile description
 	t = skyTile.SkyImageTile()
 	t.level = currentLevel
@@ -76,7 +76,10 @@ def createTile(currentLevel, maxLevel, i, j, outDirectory, plateName):
 		# t.maxBrightness = 10
 
 	# Create the matching sky polygons, return if there is no relevant polygons
-	pl = getIntersectPoly(plateName, currentLevel, i,j)
+	if special==True:
+		pl = [[[0,0], [300, 0], [300, 300], [0, 300]]]
+	else:
+		pl = getIntersectPoly(plateName, currentLevel, i,j)
 	if pl==None or len(pl)==0:
 		return None
 	
@@ -162,12 +165,20 @@ def plateRange():
 		masterTile = createTile(0, 6, 0, 0, outDir, plateName)
 		masterTile.outputJSON(qCompress=True, maxLevelPerFile=2, outDir=outDir+'/')
 	
-		command = "scp -r " +outDir+ " vosw@voint1.hq.eso.org:/work/fabienDSS2/" + plateName;
+		command = "cd /tmp && mv tmpPlate "+plateName+" && tar -cf " +plateName+ ".tar "+plateName+" && rm -rf "+plateName
+		print command
+		os.system(command)
+		command = "cd /tmp && scp " +plateName+".tar vosw@voint1.hq.eso.org:/work/fabienDSS2/"+plateName+".tar"
+		print command
+		os.system(command)
+		command = "rm /tmp/" +plateName+ ".tar"
 		print command
 		os.system(command)
 
+
 def mainHeader():
 	# Generate the top level file containing pointers on all
+	outDir = "/tmp/tmpPlate"
 	f = open('/tmp/allDSS.json', 'w')
 	f.write('{\n')
 	f.write('"minResolution" : 0.1,\n')
@@ -181,7 +192,8 @@ def mainHeader():
 			nRange = range(1, 894)
 		for i in nRange:
 			plateName = prefix+"%.3i" % i
-			ti = createTile(0, 0, 0, 0, outDir, plateName)
+			ti = createTile(0, 0, 0, 0, outDir, plateName, True)
+			assert ti != None
 			f.write('\t{\n')
 			f.write('\t\t"minResolution" : %.8f,\n' % ti.minResolution)
 			f.write('\t\t"worldCoords" : ')
