@@ -63,10 +63,12 @@ QtScriptMgr::QtScriptMgr(QObject *parent) : QObject(parent)
 	QScriptValue ctor = engine.newFunction(createVec3f);
 	engine.globalObject().setProperty("Vec3f", ctor);
 	
+	// Add the core object to access methods related to core
 	StelMainScriptAPI *mainAPI = new StelMainScriptAPI(this);
 	QScriptValue objectValue = engine.newQObject(mainAPI);
 	engine.globalObject().setProperty("core", objectValue);
 	
+	// Add all the StelModules into the script engine
 	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
 	foreach (StelModule* m, mmgr->getAllModules())
 	{
