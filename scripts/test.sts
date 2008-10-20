@@ -2,6 +2,6 @@ core.JDay = 0.;
 for (i=0;i<90;i=i+1)
 {
 	core.JDay = i;
-	core.sleep(0.1);
+	core.wait(0.1);
 }	
 ConstellationMgr.setFlagArt(true);

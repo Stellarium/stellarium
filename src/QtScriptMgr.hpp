@@ -53,7 +53,7 @@ public slots:
 	double getTimeSpeed(void) const;
 	
 	//! Pauses the script for t seconds
-	void sleep(double t);
+	void wait(double t);
 };
 		
 //! Manage scripting in Stellarium
