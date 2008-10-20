@@ -7,8 +7,8 @@ import os
 import subprocess
 
 def all():
-	for i in range(2,898):
-		str = "/home/fab1/prog/stellarium/util/dssheaderToJSON.py" + " N %i %i" % (i,i+1)
+	for i in range(1,895):
+		str = "/home/fab1/prog/stellarium/util/dssheaderToJSON.py" + " S %i %i" % (i,i+1)
 		print str
 		try:
 			retcode = subprocess.call(str, shell=True)
