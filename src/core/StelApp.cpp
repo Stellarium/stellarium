@@ -335,7 +335,7 @@ void StelApp::init()
 	
 	updateI18n();
 	
-	QtScriptMgr* scriptMgr = new QtScriptMgr();
+	scriptMgr = new QtScriptMgr();
 	initialized = true;
 }
 
