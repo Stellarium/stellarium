@@ -74,7 +74,7 @@ QtScriptMgr::QtScriptMgr(QObject *parent) : QObject(parent)
 		engine.globalObject().setProperty(m->objectName(), objectValue);
 	}
 	
-	test();
+	// test();
 }
 
 
