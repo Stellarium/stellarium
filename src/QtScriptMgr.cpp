@@ -24,6 +24,9 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "Navigator.hpp"
+#include "StelFileMgr.hpp"
+
+#include <QFile>
 
 Q_DECLARE_METATYPE(Vec3f);
 
@@ -64,22 +67,44 @@ QtScriptMgr::QtScriptMgr(QObject *parent) : QObject(parent)
 	QScriptValue objectValue = engine.newQObject(mainAPI);
 	engine.globalObject().setProperty("core", objectValue);
 	
-	objectValue = engine.newQObject(&StelApp::getInstance().getModuleMgr());
-	engine.globalObject().setProperty("modules", objectValue);
+	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
+	foreach (StelModule* m, mmgr->getAllModules())
+	{
+		objectValue = engine.newQObject(m);
+		engine.globalObject().setProperty(m->objectName(), objectValue);
+	}
+	
+	test();
 }
 
 
 QtScriptMgr::~QtScriptMgr()
 {
 }
-		
+
+// Run the script located at the given location
+void QtScriptMgr::runScript(const QString& fileName)
+{
+	QString absPath;
+	try
+	{
+		absPath = StelApp::getInstance().getFileMgr().findFile(fileName);
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "WARNING: could not find script file " << fileName << ": " << e.what();	
+	}
+	QFile fic(absPath);
+	fic.open(QIODevice::ReadOnly);
+	engine.evaluate(fic.readAll());
+}
+	
 void QtScriptMgr::test()
 {
-	engine.evaluate("core.JDay = 152200.");
-	//engine.evaluate("modules.ConstellationMgr.setFlagArt(true)");
-	engine.evaluate("modules.ConstellationMgr.flagArt = true");
-	engine.evaluate("modules.ConstellationMgr.flagLines = true");
-	engine.evaluate("modules.ConstellationMgr.linesColor = Vec3f(1.,0.,0.)");
+	engine.evaluate("core.JDay = 152200.; ConstellationMgr.setFlagArt(true)");
+	engine.evaluate("ConstellationMgr.flagArt = true");
+	engine.evaluate("ConstellationMgr.flagLines = true");
+	engine.evaluate("ConstellationMgr.linesColor = Vec3f(1.,0.,0.)");
 	if (engine.hasUncaughtException())
 	{
 		qWarning() << engine.uncaughtException().toString() << endl;
