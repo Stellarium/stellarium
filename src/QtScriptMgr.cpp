@@ -93,7 +93,7 @@ QtScriptMgr::QtScriptMgr(QObject *parent) : QObject(parent), thread(NULL)
 		engine.globalObject().setProperty(m->objectName(), objectValue);
 	}
 	
-	runScript("scripts/test.sts");
+	runScript("scripts/test.ssc");
 }
 
 
