@@ -76,6 +76,7 @@ QtScriptMgr::QtScriptMgr(QObject *parent) : QObject(parent)
 		engine.globalObject().setProperty(m->objectName(), objectValue);
 	}
 	
+	runScript("scripts/test.sts");
 	// test();
 }
 
@@ -94,11 +95,16 @@ void QtScriptMgr::runScript(const QString& fileName)
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: could not find script file " << fileName << ": " << e.what();	
+		qWarning() << "WARNING: could not find script file " << fileName << ": " << e.what();
+		return;
 	}
 	QFile fic(absPath);
 	fic.open(QIODevice::ReadOnly);
 	engine.evaluate(fic.readAll());
+	if (engine.hasUncaughtException())
+	{
+		qWarning() << "Error while running script: " << engine.uncaughtException().toString() << endl;
+	}
 }
 	
 void QtScriptMgr::test()
