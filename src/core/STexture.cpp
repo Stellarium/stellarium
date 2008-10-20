@@ -252,16 +252,6 @@ bool STexture::getDimensions(int &awidth, int &aheight)
 	return true;
 }
 
-// This class let's us sleep in milleseconds
-class MySleep : public QThread
-{
-public:
-	static void msleep(unsigned long msecs) 
-	{
-		QThread::msleep(msecs);
-	}
-};
-
 /*************************************************************************
  Load the image data
  *************************************************************************/
