@@ -259,6 +259,9 @@ void QtJsonParser::write(const QVariant& v, QIODevice& output, int indentLevel) 
 				output.write("\t\"");
 				output.write(i.key().toUtf8());
 				output.write("\": ");
+				// Break line if we start an JSON Object for nice looking
+				if (i.value().type()==QVariant::Map)
+					output.putChar('\n');
 				write(i.value(), output, indentLevel);
 				if (++j!=m.size())
 					output.putChar(',');
