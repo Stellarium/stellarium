@@ -41,8 +41,6 @@ SkyImageMgr::~SkyImageMgr()
 {
 	foreach (SkyImageMgrElem* s, allSkyImages)
 		delete s;
-	delete SkyImageTile::networkAccessManager;
-	SkyImageTile::networkAccessManager = NULL;
 }
 
 /*************************************************************************
