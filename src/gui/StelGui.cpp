@@ -103,6 +103,7 @@ StelGui::StelGui()
 	buttonBarPath = NULL;
 	lastButtonbarWidth = 0;
 	autoHidebts = NULL;
+
 	autoHideHorizontalButtonBar = true;
 	autoHideVerticalButtonBar = true;
 			
@@ -335,6 +336,10 @@ void StelGui::init()
 	QObject::connect(getGuiActions("actionShow_Equatorial_J2000_Grid"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagEquatorJ2000Grid(bool)));
 	getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(gmgr->getFlagEquatorJ2000Grid());
 	
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	setAutoHideHorizontalButtonBar(conf->value("gui/auto_hide_horizontal_toolbar", true).toBool());
+	setAutoHideVerticalButtonBar(conf->value("gui/auto_hide_vertical_toolbar", true).toBool());
 	QObject::connect(getGuiActions("actionAutoHideHorizontalButtonBar"), SIGNAL(toggled(bool)), this, SLOT(setAutoHideHorizontalButtonBar(bool)));
 	getGuiActions("actionAutoHideHorizontalButtonBar")->setChecked(getAutoHideHorizontalButtonBar());
 	QObject::connect(getGuiActions("actionAutoHideVerticalButtonBar"), SIGNAL(toggled(bool)), this, SLOT(setAutoHideVerticalButtonBar(bool)));
@@ -517,17 +522,28 @@ void StelGui::init()
 	btVertAutoHide->setZValue(1000);
 	scene->addItem(autoHidebts);
 
+	// Re-adjust position
 	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
-	
-	// Readjust position
 	updateBarsPos();
 	infoPanel->setPos(8,8);
 
+	// If auto hide is off, show the relevant toolbars
+	if (!getAutoHideHorizontalButtonBar())
+	{
+		animBottomBarTimeLine->setDirection(QTimeLine::Forward);
+		animBottomBarTimeLine->start();
+	}
+
+	if (!getAutoHideVerticalButtonBar())
+	{
+		animLeftBarTimeLine->setDirection(QTimeLine::Forward);
+		animLeftBarTimeLine->start();
+	}
+
 	// add the flip buttons if requested in the config
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
 	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());
+
 }
 
 //! Reload the current Qt Style Sheet (Debug only)

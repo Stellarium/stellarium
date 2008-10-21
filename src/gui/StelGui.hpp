@@ -122,19 +122,31 @@ public slots:
 	
 	//! Define whether the button toggling nebulae background should be visible
 	void setFlagShowNebulaBackgroundButton(bool b);
+
+	//! Set the auto-hide status of the horizontal toolbar.
+	//! When set to true, the horizontal toolbar will auto-hide itself, only
+	//! making an appearance when the mouse is nearby.  When false, it will 
+	//! remain on screen.
+	//! @param b to hide or not to hide
+	bool getAutoHideHorizontalButtonBar() const {return autoHideHorizontalButtonBar;}
+	//! Get the auto-hide status of the horizontal toolbar.
+	void setAutoHideHorizontalButtonBar(bool b) {autoHideHorizontalButtonBar=b;}
 	
+	//! Set the auto-hide status of the vertical toolbar.
+	//! When set to true, the vertical toolbar will auto-hide itself, only
+	//! making an appearance when the mouse is nearby.  When false, it will 
+	//! remain on screen.
+	//! @param b to hide or not to hide
+	bool getAutoHideVerticalButtonBar() const {return autoHideVerticalButtonBar;}
+	//! Get the auto-hide status of the vertical toolbar.
+	void setAutoHideVerticalButtonBar(bool b) {autoHideVerticalButtonBar=b;}
+
 private slots:
 	//! Update the position of the button bars in the main window
 	void updateBarsPos();
 	void reloadStyle();
 	void quitStellarium();
 	
-	bool getAutoHideHorizontalButtonBar() const {return autoHideHorizontalButtonBar;}
-	void setAutoHideHorizontalButtonBar(bool b) {autoHideHorizontalButtonBar=b;}
-	
-	bool getAutoHideVerticalButtonBar() const {return autoHideVerticalButtonBar;}
-	void setAutoHideVerticalButtonBar(bool b) {autoHideVerticalButtonBar=b;}
-
 	//! Called each time a GUI action is triggered
 	void guiActionTriggered(bool b=false);
 	
