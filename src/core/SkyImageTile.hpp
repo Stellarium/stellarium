@@ -21,11 +21,9 @@
 
 #include "STextureTypes.hpp"
 #include "SphereGeometry.hpp"
+#include "MultiLevelJsonBase.hpp"
+
 #include <QTimeLine>
-#include <QList>
-#include <QString>
-#include <QStringList>
-#include <QVariantMap>
 
 //#define DEBUG_SKYIMAGE_TILE
 
@@ -61,11 +59,10 @@ public:
 };
 
 //! Base class for any astro image with a fixed position
-class SkyImageTile : public QObject
+class SkyImageTile : public MultiLevelJsonBase
 {
 	Q_OBJECT;
 	
-	friend class JsonLoadThread;
 	friend class SkyImageMgr;
 	
 public:
@@ -89,65 +86,31 @@ public:
 	//! Return the server credits to use in the progress bar
 	ServerCredits getServerCredits() const {return serverCredits;}
 	
-	//! Return the short name for this image to be used in the loading bar
-	QString getShortName() const {return shortName;}
-	
-	//! Return the absolute path/URL to the image file
-	QString getAbsoluteImageURI() const {return absoluteImageURI;}
-	
 	//! Return true if the tile is fully loaded and can be displayed
 	bool isReadyToDisplay() const;
-	
-	//! Return true if an error occured while loading the data
-	bool hasErrorOccured() const {return errorOccured;}
-	
-	//! Delete the texture from memory. It will be reloaded automatically if needed
-	void deleteTexture() {tex.reset();}
-	
-	//! Get the depth level in the tree
-	int getLevel() const {return parent()==NULL ? 0 : (qobject_cast<SkyImageTile*>(parent()))->getLevel()+1;}
-	
+
 	//! Convert the image informations to a map following the JSON structure.
 	//! It can be saved as JSON using the QtJsonParser methods.
 	QVariantMap toQVariantMap() const;
 	
-signals:
-	//! Emitted when loading of data started or stopped
-	//! @param b true if data loading started, false if finished
-	void loadingStateChanged(bool b);
-	
-	//! Emitted when the percentage of loading tiles/tiles to be displayed changed
-	//! @param percentage the percentage of loaded data
-	void percentLoadedChanged(int percentage);
-		
-private slots:
-	//! Called when the download for the JSON file terminated
-	void downloadFinished();
-	
-	//! Called when the JSON file is loaded
-	void JsonLoadFinished();
+	//! Return the absolute path/URL to the image file
+	QString getAbsoluteImageURI() const {return absoluteImageURI;}
 
+	//! Delete the texture from memory. It will be reloaded automatically if needed
+	void deleteTexture() {tex.reset();}
+	
 protected:
+	//! Minimum resolution of the data of the texture in degree/pixel
+	float minResolution;
+	
 	//! The credits of the server where this data come from
 	ServerCredits serverCredits;
 	
 	//! The credits for the data set
 	DataSetCredits dataSetCredits;
 	
-	//! The very short name for this image set to be used in loading bar
-	QString shortName;
-	
 	//! URL where the image is located
 	QString absoluteImageURI;
-	
-	//! Base URL to prefix to relative URL
-	QString baseUrl;
-	
-	//! The relative URL passed to the constructor
-	QString contructorUrl;
-	
-	//! Minimum resolution of the data of the texture in degree/pixel
-	float minResolution;
 	
 	//! The image luminance in cd/m^2
 	float luminance;
@@ -163,22 +126,11 @@ protected:
 	
 	//! Positions of the vertex of each convex polygons in texture space
 	QList< QList<Vec2f> > textureCoords;
-	
-	//! The list of all the subTiles URL or already loaded JSON map for this tile
-	QVariantList subTilesUrls;
-	
-	//! The list of all the created subtiles for this tile
-	QList<SkyImageTile*> subTiles;
-	
-	//! Set to true if an error occured with this tile and it should not be displayed
-	bool errorOccured;
 
 protected:
-	//! Load the tile information from a JSON file
-	static QVariantMap loadFromJSON(QIODevice& input, bool qZcompressed=false, bool gzCompressed=false);
-	
+
 	//! Load the tile from a valid QVariantMap
-	void loadFromQVariantMap(const QVariantMap& map);
+	virtual void loadFromQVariantMap(const QVariantMap& map);
 	
 private:
 	//! init the SkyImageTile
@@ -192,57 +144,18 @@ private:
 	//! @return true if the tile was actually displayed
 	bool drawTile(StelCore* core);
 	
-	//! Schedule a deletion. It will practically occur after the delay passed as argument to deleteUnusedTiles() has expired
-	void scheduleDeletion();
-	
-	//! If a deletion was scheduled, cancel it.
-	void cancelDeletion() {timeWhenDeletionScheduled=-1;}
-	
-	//! Delete all the subtiles which were not displayed since more than lastDrawTrigger seconds
-	void deleteUnusedSubTiles();
-	
-	//! Delete all the subtiles recursively. If the subtiles description was embeded into the parent's one only the texture is deleted
-	void deleteAllSubTiles();
-	
-	//! Return the base URL prefixed to relative URL
-	QString getBaseUrl() const {return baseUrl;}
-	
 	//! Return the minimum resolution
 	double getMinResolution() const {return minResolution;}
 	
 	// The texture of the tile
 	STextureSP tex;
-	
-	// Used to download remote JSON files if needed
-	class QNetworkReply* httpReply;
-	
-	// true if the JSON descriptor file is currently downloading
-	bool downloading;
-	
-	// The delay after which a scheduled deletion will occur
-	float deletionDelay;
-	
-	class JsonLoadThread* loadThread;
-			
-	// Time at which deletion was first scheduled
-	double timeWhenDeletionScheduled;
 
 	// Used for smooth fade in
 	QTimeLine* texFader;
 	
-	// The temporary map filled in a thread
-	QVariantMap temporaryResultMap;
-	
-	void updatePercent(int tot, int numToBeLoaded);
-	bool loadingState;
-	int lastPercent;
-	
 #ifdef DEBUG_SKYIMAGE_TILE
 	static class SFont* debugFont;
 #endif
-	
-	//! The network manager to use for downloading JSON files
-	static class QNetworkAccessManager* networkAccessManager;
 };
 
 #endif // _SKYIMAGETILE_HPP_
