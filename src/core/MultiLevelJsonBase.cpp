@@ -95,8 +95,9 @@ MultiLevelJsonBase::MultiLevelJsonBase(MultiLevelJsonBase* parent) : QObject(par
 	}
 }
 
-void MultiLevelJsonBase::initFromUrl(const QString& url, MultiLevelJsonBase* parent)
+void MultiLevelJsonBase::initFromUrl(const QString& url)
 {
+	const MultiLevelJsonBase* parent = qobject_cast<MultiLevelJsonBase*>(QObject::parent());
 	contructorUrl = url;
 	if (!url.startsWith("http://") && (parent==NULL || !parent->getBaseUrl().startsWith("http://")))
 	{
@@ -165,8 +166,9 @@ void MultiLevelJsonBase::initFromUrl(const QString& url, MultiLevelJsonBase* par
 }
 
 // Constructor from a map used for JSON files with more than 1 level
-void MultiLevelJsonBase::initFromQVariantMap(const QVariantMap& map, MultiLevelJsonBase* parent)
+void MultiLevelJsonBase::initFromQVariantMap(const QVariantMap& map)
 {
+	const MultiLevelJsonBase* parent = qobject_cast<MultiLevelJsonBase*>(QObject::parent());
 	if (parent!=NULL)
 	{
 		baseUrl = parent->getBaseUrl();

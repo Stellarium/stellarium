@@ -54,7 +54,7 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : MultiLeve
 		luminance = parent->luminance;
 		alphaBlend = parent->alphaBlend;
 	}
-	initFromUrl(url, parent);
+	initFromUrl(url);
 }
 
 // Constructor from a map used for JSON files with more than 1 level
@@ -66,7 +66,7 @@ SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : Multi
 		luminance = parent->luminance;
 		alphaBlend = parent->alphaBlend;
 	}
-	initFromQVariantMap(map, parent);
+	initFromQVariantMap(map);
 }
 	
 // Destructor
