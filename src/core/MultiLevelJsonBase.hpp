@@ -37,19 +37,19 @@ public:
 	//! Default constructor
 	MultiLevelJsonBase(MultiLevelJsonBase* parent=NULL);
 	
-	//! Constructor
-	void initFromUrl(const QString& url, MultiLevelJsonBase* parent=NULL);
-	//! Constructor
-	void initFromQVariantMap(const QVariantMap& map, MultiLevelJsonBase* parent);
+	//! Init the element from a URL
+	//! This method should be called by the constructors of the subclass
+	void initFromUrl(const QString& url);
+	
+	//! Init the element from a QVariantMap
+	//! This method should be called by the constructors of the subclass
+	void initFromQVariantMap(const QVariantMap& map);
 	
 	//! Destructor
 	~MultiLevelJsonBase();
 	
 	//! Return the short name for this image to be used in the loading bar
 	QString getShortName() const {return shortName;}
-	
-	//! Return true if the tile is fully loaded and can be displayed
-	bool isReadyToDisplay() const;
 	
 	//! Return true if an error occured while loading the data
 	bool hasErrorOccured() const {return errorOccured;}
