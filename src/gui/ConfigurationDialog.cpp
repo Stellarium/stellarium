@@ -373,6 +373,10 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	else
 		conf->setValue("gui/selected_object_info", "all");
 
+	// toolbar auto-hide status
+	conf->setValue("gui/auto_hide_horizontal_toolbar", gui->getAutoHideHorizontalButtonBar());
+	conf->setValue("gui/auto_hide_vertical_toolbar", gui->getAutoHideVerticalButtonBar());
+
 	StelApp::getInstance().getCore()->getProjection()->setInitFov(StelApp::getInstance().getCore()->getProjection()->getFov());
 	StelApp::getInstance().getCore()->getNavigation()->setInitViewDirectionToCurrent();
 	
