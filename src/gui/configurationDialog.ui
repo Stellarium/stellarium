@@ -147,7 +147,7 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>2</number>
+         <number>3</number>
         </property>
         <property name="iconSize" >
          <size>
@@ -800,12 +800,72 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="tabScripts" >
+         <attribute name="title" >
+          <string>Scripts</string>
+         </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_6" >
+          <item>
+           <widget class="QListWidget" name="scriptListWidget" />
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_8" >
+            <item>
+             <widget class="QTextBrowser" name="scriptInfoBrowser" />
+            </item>
+            <item>
+             <widget class="QLabel" name="scriptStatusLabel" >
+              <property name="text" >
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_4" >
+              <item>
+               <widget class="QPushButton" name="runScriptButton" >
+                <property name="enabled" >
+                 <bool>true</bool>
+                </property>
+                <property name="text" >
+                 <string/>
+                </property>
+                <property name="icon" >
+                 <iconset resource="../../data/mainRes.qrc" >
+                  <normaloff>:/graphicGui/gui/btScriptRun-on.png</normaloff>
+                  <disabledoff>:/graphicGui/gui/btScriptRun-off.png</disabledoff>:/graphicGui/gui/btScriptRun-on.png</iconset>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="stopScriptButton" >
+                <property name="enabled" >
+                 <bool>true</bool>
+                </property>
+                <property name="text" >
+                 <string/>
+                </property>
+                <property name="icon" >
+                 <iconset resource="../../data/mainRes.qrc" >
+                  <normaloff>:/graphicGui/gui/btScriptStop-on.png</normaloff>
+                  <disabledoff>:/graphicGui/gui/btScriptStop-off.png</disabledoff>:/graphicGui/gui/btScriptStop-on.png</iconset>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
      </layout>
     </widget>
    </item>
   </layout>
+  <zorder>viewContent</zorder>
+  <zorder>LocationBar</zorder>
  </widget>
  <customwidgets>
   <customwidget>

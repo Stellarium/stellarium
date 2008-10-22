@@ -25,15 +25,21 @@
 #include "StelCore.hpp"
 #include "Navigator.hpp"
 #include "StelFileMgr.hpp"
+#include "StelUtils.hpp"
+#include "StelObjectMgr.hpp"
 
 #include <QFile>
+#include <QSet>
+#include <QDebug>
+#include <QStringList>
 
 Q_DECLARE_METATYPE(Vec3f);
 
 class StelScriptThread : public QThread
 {
 	public:
-		StelScriptThread(const QString& ascriptCode, QScriptEngine* aengine) : scriptCode(ascriptCode), engine(aengine) {;}
+		StelScriptThread(const QString& ascriptCode, QScriptEngine* aengine, QString fileName) : scriptCode(ascriptCode), engine(aengine), fname(fileName) {;}
+		QString getFileName() {return fname;}
 		
 	protected:
 		void run()
@@ -44,6 +50,7 @@ class StelScriptThread : public QThread
 	private:
 		QString scriptCode;
 		QScriptEngine* engine;
+		QString fname;
 };
 
 
@@ -72,84 +79,6 @@ QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 	return vec3fToScriptValue(engine, c);
 }
 
-QtScriptMgr::QtScriptMgr(QObject *parent) : QObject(parent), thread(NULL)
-{
-	// Allow Vec3f managment in scripts
-	qScriptRegisterMetaType(&engine, vec3fToScriptValue, vec3fFromScriptValue);
-	// Constructor
-	QScriptValue ctor = engine.newFunction(createVec3f);
-	engine.globalObject().setProperty("Vec3f", ctor);
-	
-	// Add the core object to access methods related to core
-	StelMainScriptAPI *mainAPI = new StelMainScriptAPI(this);
-	QScriptValue objectValue = engine.newQObject(mainAPI);
-	engine.globalObject().setProperty("core", objectValue);
-	
-	// Add all the StelModules into the script engine
-	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
-	foreach (StelModule* m, mmgr->getAllModules())
-	{
-		objectValue = engine.newQObject(m);
-		engine.globalObject().setProperty(m->objectName(), objectValue);
-	}
-	
-	// runScript("scripts/test.ssc");
-}
-
-
-QtScriptMgr::~QtScriptMgr()
-{
-}
-
-// Run the script located at the given location
-void QtScriptMgr::runScript(const QString& fileName)
-{
-	if (thread!=NULL)
-	{
-		qWarning() << "ERROR: there is already a script running, please wait that it's over.";
-		return;
-	}
-	QString absPath;
-	try
-	{
-		absPath = StelApp::getInstance().getFileMgr().findFile(fileName);
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "WARNING: could not find script file " << fileName << ": " << e.what();
-		return;
-	}
-	QFile fic(absPath);
-	fic.open(QIODevice::ReadOnly);
-	thread = new StelScriptThread(QTextStream(&fic).readAll(), &engine);
-	fic.close();
-	
-	connect(thread, SIGNAL(finished()), this, SLOT(scriptEnded()));
-	thread->start();
-}
-	
-void QtScriptMgr::scriptEnded()
-{
-	delete thread;
-	thread=NULL;
-	if (engine.hasUncaughtException())
-	{
-		qWarning() << "Error while running script: " << engine.uncaughtException().toString() << endl;
-	}
-}
-	
-// void QtScriptMgr::test()
-// {
-// 	engine.evaluate("core.JDay = 152200.; ConstellationMgr.setFlagArt(true)");
-// 	engine.evaluate("ConstellationMgr.flagArt = true");
-// 	engine.evaluate("ConstellationMgr.flagLines = true");
-// 	engine.evaluate("ConstellationMgr.linesColor = Vec3f(1.,0.,0.)");
-// 	if (engine.hasUncaughtException())
-// 	{
-// 		qWarning() << engine.uncaughtException().toString() << endl;
-// 	}
-// }
-
 StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 {
 }
@@ -171,6 +100,12 @@ void StelMainScriptAPI::setJDay(double JD)
 double StelMainScriptAPI::getJDay(void) const
 {
 	return StelApp::getInstance().getCore()->getNavigation()->getJDay();
+}
+
+void StelMainScriptAPI::setDate(QString dt)
+{
+	double JD = StelUtils::qDateTimeToJd(QDateTime::fromString(dt, Qt::ISODate));
+	StelApp::getInstance().getCore()->getNavigation()->setJDay(JD);
 }
 
 //! Set time speed in JDay/sec
@@ -201,3 +136,207 @@ void StelMainScriptAPI::wait(double t)
 {
 	MySleep::msleep(t*1000);
 }
+
+void StelMainScriptAPI::debug(const QString& s)
+{
+	qDebug() << "script: " << s;
+}
+
+void StelMainScriptAPI::selectObjectByName(QString name, bool pointer)
+{
+	StelApp::getInstance().getStelObjectMgr().findAndSelect(name);
+	StelApp::getInstance().getStelObjectMgr().setFlagSelectedObjectPointer(pointer);
+}
+
+QtScriptMgr::QtScriptMgr(QObject *parent) : QObject(parent), thread(NULL)
+{
+	// Allow Vec3f managment in scripts
+	qScriptRegisterMetaType(&engine, vec3fToScriptValue, vec3fFromScriptValue);
+	// Constructor
+	QScriptValue ctor = engine.newFunction(createVec3f);
+	engine.globalObject().setProperty("Vec3f", ctor);
+	
+	// Add the core object to access methods related to core
+	StelMainScriptAPI *mainAPI = new StelMainScriptAPI(this);
+	QScriptValue objectValue = engine.newQObject(mainAPI);
+	engine.globalObject().setProperty("core", objectValue);
+	
+	// Add all the StelModules into the script engine
+	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
+	foreach (StelModule* m, mmgr->getAllModules())
+	{
+		objectValue = engine.newQObject(m);
+		engine.globalObject().setProperty(m->objectName(), objectValue);
+	}
+	
+	runScript("startup.ssc");
+}
+
+
+QtScriptMgr::~QtScriptMgr()
+{
+}
+
+QStringList QtScriptMgr::getScriptList(void)
+{
+	QStringList scriptFiles;
+	try
+	{
+		StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
+		QSet<QString> files = fileMan.listContents("scripts",StelFileMgr::File);
+		foreach(QString f, files)
+		{
+			if (QRegExp("^.*\\.ssc$").exactMatch(f))
+				scriptFiles << f;
+		}
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "WARNING: could not list scripts:" << e.what();
+	}
+	return scriptFiles;
+}
+
+bool QtScriptMgr::scriptIsRunning(void)
+{
+	return (thread != NULL);
+}
+
+QString QtScriptMgr::runningScriptId(void)
+{
+	if (thread)
+		return thread->getFileName();
+	else
+		return QString();
+}
+
+const QString QtScriptMgr::getName(const QString& s)
+{
+	try
+	{
+		QFile file(StelApp::getInstance().getFileMgr().findFile("scripts/" + s, StelFileMgr::File));
+		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			qWarning() << "script file " << s << " could not be opened for reading";
+			return QString();
+		}
+
+		QRegExp nameExp("^\\s*//\\s*Name:\\s*(.+)$");
+		while (!file.atEnd()) {
+			QString line(file.readLine());
+			if (nameExp.exactMatch(line))
+			{
+				file.close();	
+				return nameExp.capturedTexts().at(1);
+			}
+		}
+		file.close();
+		return s;
+	}
+	catch(std::runtime_error& e)
+	{
+		qWarning() << "script file " << s << " could not be found:" << e.what();
+		return QString();
+	}
+}
+
+const QString QtScriptMgr::getDescription(const QString& s)
+{
+	try
+	{
+		QFile file(StelApp::getInstance().getFileMgr().findFile("scripts/" + s, StelFileMgr::File));
+		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			qWarning() << "script file " << s << " could not be opened for reading";
+			return QString();
+		}
+
+		QString desc = "";
+		bool inDesc = false;
+		QRegExp descExp("^\\s*//\\s*Description:\\s*(.+)$");
+		QRegExp descContExp("^\\s*//\\s*(.*)$");
+		while (!file.atEnd()) {
+			QString line(file.readLine());
+			
+			if (!inDesc && descExp.exactMatch(line))
+			{
+				inDesc = true;
+				desc = descExp.capturedTexts().at(1) + "\n";
+			}
+			else if (inDesc)
+			{
+				if (descContExp.exactMatch(line))
+					desc += descContExp.capturedTexts().at(1) + "\n";
+				else
+				{
+					file.close();	
+					return desc;
+				}
+			}
+			
+		}
+		file.close();
+		return desc;
+	}
+	catch(std::runtime_error& e)
+	{
+		qWarning() << "script file " << s << " could not be found:" << e.what();
+		return QString();
+	}
+}
+
+// Run the script located at the given location
+bool QtScriptMgr::runScript(const QString& fileName)
+{
+	if (thread!=NULL)
+	{
+		qWarning() << "ERROR: there is already a script running, please wait that it's over.";
+		return false;
+	}
+	QString absPath;
+	try
+	{
+		absPath = StelApp::getInstance().getFileMgr().findFile("scripts/" + fileName);
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "WARNING: could not find script file " << fileName << ": " << e.what();
+		return false;
+	}
+	QFile fic(absPath);
+	fic.open(QIODevice::ReadOnly);
+	thread = new StelScriptThread(QTextStream(&fic).readAll(), &engine, fileName);
+	fic.close();
+	
+	connect(thread, SIGNAL(finished()), this, SLOT(scriptEnded()));
+	thread->start();
+	emit(scriptRunning());
+	return true;
+}
+
+bool QtScriptMgr::stopScript(void)
+{
+	if (thread)
+	{
+		qDebug() << "asking running script to exit";
+		thread->terminate();
+		return true;
+	}
+	else
+	{
+		qWarning() << "QtScriptMgr::stopScript - no script is running";
+		return false;
+	}
+}
+
+void QtScriptMgr::scriptEnded()
+{
+	delete thread;
+	thread=NULL;
+	if (engine.hasUncaughtException())
+	{
+		qWarning() << "Error while running script: " << engine.uncaughtException().toString() << endl;
+	}
+	emit(scriptStopped());
+}
+

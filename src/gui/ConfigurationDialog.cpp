@@ -44,6 +44,7 @@
 #include "StarMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "GridLinesMgr.hpp"
+#include "QtScriptMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -185,6 +186,21 @@ void ConfigurationDialog::createDialogContent()
 	ui->invertScreenShotColorsCheckBox->setChecked(StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors());
 	connect(ui->invertScreenShotColorsCheckBox, SIGNAL(toggled(bool)), &StelMainGraphicsView::getInstance(), SLOT(setFlagInvertScreenShotColors(bool)));
 	
+	// script tab controls
+	QtScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
+	connect(ui->scriptListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(scriptSelectionChanged(const QString&)));
+	connect(ui->runScriptButton, SIGNAL(clicked()), this, SLOT(runScriptClicked()));
+	connect(ui->stopScriptButton, SIGNAL(clicked()), this, SLOT(stopScriptClicked()));
+	if (scriptMgr.scriptIsRunning())
+		aScriptIsRunning();
+	else
+		aScriptHasStopped();
+	connect(&scriptMgr, SIGNAL(scriptRunning()), this, SLOT(aScriptIsRunning()));
+	connect(&scriptMgr, SIGNAL(scriptStopped()), this, SLOT(aScriptHasStopped()));
+	populateScriptsList();
+
+	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateScriptsList()));
+
 	updateConfigLabels();
 }
 
@@ -433,5 +449,55 @@ void ConfigurationDialog::setDefaultViewOptions()
 	Q_ASSERT(conf);
 
 	conf->setValue("main/restore_defaults", true);
+}
+
+void ConfigurationDialog::populateScriptsList(void)
+{
+	QtScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
+	ui->scriptListWidget->clear();
+	ui->scriptListWidget->addItems(scriptMgr.getScriptList());
+}
+
+void ConfigurationDialog::scriptSelectionChanged(const QString& s)
+{
+	QtScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
+	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
+	QString html = "<html><head></head><body>";
+	html += "<h2>" + scriptMgr.getName(s) + "</h2>";
+	QString d = scriptMgr.getDescription(s);
+	d.replace("\n", "<br />");
+	html += d;
+	html += "</body></html>";
+	ui->scriptInfoBrowser->setHtml(html);
+}
+
+void ConfigurationDialog::runScriptClicked(void)
+{
+	QtScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
+	if (ui->scriptListWidget->currentItem())
+	{
+		ui->runScriptButton->setEnabled(false);
+		ui->stopScriptButton->setEnabled(true);
+		scriptMgr.runScript(ui->scriptListWidget->currentItem()->text());
+	}
+}
+
+void ConfigurationDialog::stopScriptClicked(void)
+{
+	StelApp::getInstance().getScriptMgr().stopScript();
+}
+
+void ConfigurationDialog::aScriptIsRunning(void)
+{
+	ui->scriptStatusLabel->setText(q_("Running script: ") + StelApp::getInstance().getScriptMgr().runningScriptId());
+	ui->runScriptButton->setEnabled(false);
+	ui->stopScriptButton->setEnabled(true);
+}
+
+void ConfigurationDialog::aScriptHasStopped(void)
+{
+	ui->scriptStatusLabel->setText(q_("Running script: [none]"));
+	ui->runScriptButton->setEnabled(true);
+	ui->stopScriptButton->setEnabled(false);
 }
 

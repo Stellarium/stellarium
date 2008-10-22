@@ -1,4 +1,4 @@
 ########### install files ###############
 
-INSTALL(FILES startup.sts lunar_eclipse_partial.sts lunar_eclipse_total.sts DESTINATION  share/${PACKAGE}/scripts)
+INSTALL(FILES startup.ssc lunar_partial.ssc DESTINATION share/${PACKAGE}/scripts)
 
