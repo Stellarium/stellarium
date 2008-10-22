@@ -1,0 +1,76 @@
+// Name: Partial Lunar Eclispe script
+// Description: Attempt to re-implement simple script from the old
+//              scripting engine.  Each old style command is shown
+//              first as a command with OLD: at the start of the line
+//              to help users of the old scripting engine learn how
+//              to use the new one.
+
+core.debug("Starting Partial Lunar Eclispe script");
+core.wait(1);
+core.debug("OK, let's go...");
+
+// OLD: clear
+// This will be simplified in future, perhaps with 
+// an include system which will be used to include 
+// a script which will define some commonly used 
+// functions 
+// For now, we will set a bunch of flags just to 
+// show how to do it.
+LandscapeMgr.setFlagLandscape(false);
+LandscapeMgr.setFlagAtmosphere(false);
+LandscapeMgr.setFlagFog(false);
+LandscapeMgr.setFlagCardinalsPoints(false);
+ConstellationMgr.setFlagArt(false);
+ConstellationMgr.setFlagLines(false);
+ConstellationMgr.setFlagBoundaries(false);
+ConstellationMgr.setFlagLabels(false);
+ConstellationMgr.setFlagIsolateSelected(false);
+GridLinesMgr.setFlagAzimuthalGrid(false);
+GridLinesMgr.setFlagEquatorGrid(false);
+GridLinesMgr.setFlagEquatorJ2000Grid(false);
+GridLinesMgr.setFlagEquatorLine(false);
+GridLinesMgr.setFlagEclipticLine(false);
+GridLinesMgr.setFlagMeridianLine(false);
+MeteorMgr.setFlagShow(true);
+NebulaMgr.setFlagHints(false);
+NebulaMgr.setFlagShow(true);
+SolarSystem.setFlagPlanets(true);
+SolarSystem.setFlagTrails(false);
+SolarSystem.setFlagHints(false);
+SolarSystem.setFlagLabels(false);
+SolarSystem.setFlagOrbits(false);
+SolarSystem.setFlagLightTravelTime(false);
+SolarSystem.setFlagMoonScale(false);
+StarMgr.setFlagStars(true);
+StarMgr.setFlagLabels(false);
+StarMgr.setFlagSciNames(false);
+
+core.wait(1);
+
+// OLD: date utc 2006:03:14T21:21:32
+// Note that core.setDate() uses ISO date format. 
+// See QDateTime::fromString for details.
+core.setDate("2006:03:14T21:21:32");
+
+// OLD: select planet Moon pointer off
+core.selectObjectByName("Moon", false);
+// Goto the selected object and track it...
+MovementMgr.setFlagTracking(true);
+
+// OLD: wait duration 2
+core.wait(2);
+
+// OLD: zoom auto in
+MovementMgr.autoZoomIn(2);
+
+// OLD: wait duration 2
+core.wait(2);
+
+// OLD: timerate rate 500
+// .00001157407407407407 julian days = 1 second.  
+// we want 500 seconds per second.
+// good candidate for aforementioned include system
+// function although it's not so bad now we can do
+// arithmetic in scripts  :-)
+core.setTimeSpeed(.00001157407407407407 * 500);
+
