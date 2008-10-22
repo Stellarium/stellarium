@@ -22,6 +22,7 @@
 
 #include <QObject>
 #include <QtScript>
+#include <QStringList>
 #include "vecmath.h"
 
 	
@@ -44,6 +45,9 @@ public slots:
 	//! Get the current date in Julian Day
 	//! @return the Julian Date
 	double getJDay(void) const;
+
+	//! set the date in ISO format, e.g. "2008-03-24T13:21:01"
+	void setDate(QString dt);
 		
 	//! Set time speed in JDay/sec
 	//! @param ts time speed in JDay/sec
@@ -54,6 +58,15 @@ public slots:
 	
 	//! Pauses the script for t seconds
 	void wait(double t);
+	
+	//! Select an object by name
+	//! @param name the name of the object to select (english)
+	//! @param pointer whether or not to have the selection pointer enabled
+	void selectObjectByName(QString name, bool pointer);
+
+	//! print a debugging message to the console
+	void debug(const QString &s);
+
 };
 		
 //! Manage scripting in Stellarium
@@ -62,16 +75,55 @@ class QtScriptMgr : public QObject
 Q_OBJECT
 		
 public:
-    QtScriptMgr(QObject *parent = 0);
-    ~QtScriptMgr();
+	QtScriptMgr(QObject *parent = 0);
+	~QtScriptMgr();
+
+	QStringList getScriptList(void);
+
+	//! Find out if a script is running
+	//! @return true if a script is running, else false
+	bool scriptIsRunning(void);
+	//! Get the ID (filename) of the currently running script
+	//! @return Empty string if no script is running, else the 
+	//! ID of the script which is running.
+	QString runningScriptId(void);
+	
+public slots:
+	//! Gets a single line name of the script. 
+	//! @param s the file name of the script whose name is to be returned.
+	//! @return text following a comment with Name: at the start.  If no 
+	//! such comment is found, the file name will be returned.  If the file
+	//! is not found or cannot be opened for some reason, an Empty string
+	//! will be returned.
+	const QString getName(const QString& s);
+
+	//! Gets a description of the script.
+	//! @param s the file name of the script whose name is to be returned.
+	//! @return text following a comment with Description: at the start.
+	//! The description is considered to be over when a line with no comment 
+	//! is found.  If no such comment is found, QString("") is returned.
+	//! If the file is not found or cannot be opened for some reason, an 
+	//! Empty string will be returned.
+	const QString getDescription(const QString& s);
 
 	//! Run the script located at the given location
 	//! @param fileName the location of the file containing the script.
-	void runScript(const QString& fileName);
-	
+	//! @return false if the named script could not be run, true otherwise
+	bool runScript(const QString& fileName);
+
+	//! Stops any running script.
+	//! @return false if no script was running, true otherwise.
+	bool stopScript(void);
+
 private slots:
 	//! Called at the end of the running thread
 	void scriptEnded();
+
+signals:
+	//! Notification when a script starts running
+	void scriptRunning();
+	//! Notification when a script has stopped running 
+	void scriptStopped();
 
 private:
 	QScriptEngine engine;
