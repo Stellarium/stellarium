@@ -83,6 +83,8 @@ void ViewDialog::createDialogContent()
 	// Set the Sky tab activated by default
 	ui->viewTabWidget->setCurrentIndex(0);
 	
+	ui->viewTabWidget->widget(4)->deleteLater();
+	
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	
 	populateLists();
@@ -94,11 +96,6 @@ void ViewDialog::createDialogContent()
 	
 	// Stars section
 	QAction* a;
-	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
-// 	ui->showStarsCheckBox->setChecked(smgr->getFlagStars());
-// 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Stars");
-// 	connect(a, SIGNAL(toggled(bool)), ui->showStarsCheckBox, SLOT(setChecked(bool)));
-// 	connect(ui->showStarsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 	
 	ui->starTwinkleCheckBox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagTwinkle());
 	connect(ui->starTwinkleCheckBox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagTwinkle(bool)));
@@ -153,6 +150,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
 	
 	// Labels section
+	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
 	ui->starLabelCheckBox->setChecked(smgr->getFlagLabels());
 	connect(ui->starLabelCheckBox, SIGNAL(toggled(bool)), smgr, SLOT(setFlagLabels(bool)));
 
