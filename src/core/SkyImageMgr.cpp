@@ -79,6 +79,7 @@ QString SkyImageMgr::insertSkyImage(SkyImageTile* tile, bool ashow, bool aextern
 		while (allSkyImages.contains(key+suffix))
 		{
 			suffix=QString("_%1").arg(i);
+			++i;
 		}
 		key+=suffix;
 	}
