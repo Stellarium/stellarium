@@ -91,7 +91,7 @@ QString SkyImageMgr::insertSkyImage(SkyImageTile* tile, bool ashow, bool aextern
 // Add a new image from its URI (URL or local file name)
 QString SkyImageMgr::insertSkyImage(const QString& uri, bool ashow)
 {
-	return insertSkyImage(new SkyImageTile(uri), ashow, true);
+	return insertSkyImage(new SkyImageTile(uri), ashow, false);
 }
 
 // Remove a sky image tile from the list of background images
@@ -100,6 +100,8 @@ void SkyImageMgr::removeSkyImage(const QString& key)
 	if (allSkyImages.contains(key))
 	{
 		SkyImageMgrElem* bEl = allSkyImages[key];
+		disconnect(bEl->tile, SIGNAL(loadingStateChanged(bool)), this, SLOT(loadingStateChanged(bool)));
+		disconnect(bEl->tile, SIGNAL(percentLoadedChanged(int)), this, SLOT(percentLoadedChanged(int)));
 		delete bEl;
 		allSkyImages.remove(key);
 	}
@@ -109,7 +111,8 @@ void SkyImageMgr::removeSkyImage(const QString& key)
 void SkyImageMgr::removeSkyImage(SkyImageTile* img)
 {
 	const QString k = keyForTile(img);
-	removeSkyImage(k);
+	if (!k.isEmpty())
+		removeSkyImage(k);
 }
 
 // Draw all the multi-res images collection
