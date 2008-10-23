@@ -547,11 +547,11 @@ void StarMgr::draw(StelCore* core)
     // draw all the stars of all the selected zones
     float rcmag_table[2*256];
 	
-    for (ZoneArrayMap::const_iterator it(zoneArrays.begin()); it!=zoneArrays.end();it++)
+    for (ZoneArrayMap::const_iterator it(zoneArrays.begin()); it!=zoneArrays.end();++it)
 	{
 		const float mag_min = 0.001f*it->second->mag_min;
 		const float k = (0.001f*it->second->mag_range)/it->second->mag_steps;
-		for (int i=it->second->mag_steps-1;i>=0;i--)
+		for (int i=it->second->mag_steps-1;i>=0;--i)
 		{
 			const float mag = mag_min+k*i;
 			if (skyDrawer->computeRCMag(mag,rcmag_table + 2*i)==false)
