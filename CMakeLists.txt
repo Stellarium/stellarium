@@ -1,3 +1,4 @@
+
 CMAKE_MINIMUM_REQUIRED(VERSION 2.4.7)
 
 ########### Project name ###########
@@ -37,7 +38,6 @@ IF(MACOSX)
  SET(CMAKE_EXE_LINKER_FLAGS "-dylib_file /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib")
 ENDIF(MACOSX)
 
-
 ########### Check headers ###########
 INCLUDE(CheckIncludeFiles)
 CHECK_INCLUDE_FILES( byteswap.h HAVE_BYTESWAP_H)
@@ -52,11 +52,13 @@ CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
 
 ########### Others ###########
 # Activate translation with gettext
-SET(ENABLE_NLS 1)
+SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be supported, option are: 1 or 0.")
 # Generate python wrappers
 SET(GENERATE_PYTHON_WRAPPERS 0 CACHE BOOL "Define whether python wrapper should be build using SIP, options are: 1 or 0.")
 # Create a dynamic library libstelMain
 SET(GENERATE_STELMAINLIB 0)
+# Activate sound support
+SET(ENABLE_SOUND 0 CACHE BOOL "Define whether sound support should be activated, options are: 1 or 0.")
 
 # On WIN32 we need to split the main binary into a small binary and a dll
 # This is for allowing to link plug-ins afterward
@@ -83,8 +85,8 @@ INCLUDE(${QT_USE_FILE})
 
 
 SET(SDL_LIBRARY "")
+IF(ENABLE_SOUND)
 FIND_PACKAGE(SDL_mixer)
-
 IF(SDLMIXER_LIBRARY)
   MESSAGE(STATUS "Found SDL_mixer. Activate sound support.")
   SET(HAVE_SDL_SDL_MIXER_H 1)
@@ -93,6 +95,7 @@ ELSE(SDLMIXER_LIBRARY)
   SET(SDLMIXER_INCLUDE_DIR "")
   SET(SDLMIXER_LIBRARY "")
 ENDIF(SDLMIXER_LIBRARY)
+ENDIF(ENABLE_SOUND)
 
 IF(ENABLE_NLS)
   FIND_PACKAGE(Iconv REQUIRED)
