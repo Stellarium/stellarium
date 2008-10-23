@@ -393,7 +393,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 	const Star *const end = z->getStars() + z->size;
 	const double d2000 = 2451545.0;
 	const double movementFactor = (M_PI/180)*(0.0001/3600) * ((StarMgr::getCurrentJDay()-d2000)/365.25) / star_position_scale;            
-	for (const Star *s=z->getStars();s<end;s++)
+	for (const Star *s=z->getStars();s<end;++s)
 	{
 		if (is_inside ? prj->project(s->getJ2000Pos(z,movementFactor),xy) : prj->projectCheck(s->getJ2000Pos(z,movementFactor),xy))
 		{
@@ -403,7 +403,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 			}
 			if (s->mag < maxMagStarName)
 			{
-				const QString starname = s->getNameI18n();
+				const QString& starname = s->getNameI18n();
 				if (!starname.isEmpty())
 				{
 					const float offset = (rcmag_table + 2*(s->mag))[0]*0.7;
