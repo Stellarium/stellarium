@@ -32,7 +32,6 @@
 #include "StelUtils.hpp"
 #include "Translator.hpp"
 
-
 // Init static members
 Translator* Translator::lastUsed = NULL;
 QMap<QString, QString> Translator::iso639codes;
@@ -135,7 +134,7 @@ void Translator::reload()
 #endif
 
 	putenv(envstr);
-#if !defined (_MSC_VER)
+#if !defined (WIN32)
 	setlocale(LC_MESSAGES, "");
 #else
 	setlocale(LC_CTYPE,"");
