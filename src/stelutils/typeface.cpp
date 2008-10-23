@@ -411,8 +411,8 @@ int TypeFace::hitCharacterIndex(const QString& aString, float anOffset)
 		}
 	}
 
-	if(!found) 
-		characterIndex = -1;
+	if (!found) 
+		return -1;
 
 	return characterIndex;
 }
