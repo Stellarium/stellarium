@@ -76,7 +76,7 @@
 				OutputFile="$(OutDir)\SDL_image_d.dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="..\..\Build\SDL_Debug;..\..\lib\debug"
+				AdditionalLibraryDirectories="..\..\lib;..\..\Build\SDL_Debug;..\..\lib\debug"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)\SDL_image.pdb"
 				SubSystem="2"

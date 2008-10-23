@@ -46,7 +46,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;..\..\SDL-1.2.11\include&quot;;..\..\libiconv\src"
+				AdditionalIncludeDirectories="..\..\include\dx_sdk;&quot;..\..\SDL-1.2.11\include&quot;;..\..\libiconv\src"
 				PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_DEBUG;_WINDOWS;_WIN32_WINNT=0x0400"
 				RuntimeLibrary="1"
 				BufferSecurityCheck="false"
@@ -79,7 +79,7 @@
 				OutputFile="$(OutDir)/SDL.dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories=""
+				AdditionalLibraryDirectories="..\..\lib"
 				IgnoreAllDefaultLibraries="false"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/SDL.pdb"
