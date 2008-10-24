@@ -804,6 +804,10 @@
          <attribute name="title" >
           <string>Scripts</string>
          </attribute>
+         <attribute name="icon" >
+          <iconset resource="../../data/mainRes.qrc" >
+           <normaloff>:/graphicGui/gui/tabicon-scripts.png</normaloff>:/graphicGui/gui/tabicon-scripts.png</iconset>
+         </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_6" >
           <item>
            <widget class="QListWidget" name="scriptListWidget" />
@@ -821,11 +825,24 @@
              </widget>
             </item>
             <item>
+             <widget class="QCheckBox" name="closeWindowAtScriptRunCheckbox" >
+              <property name="text" >
+               <string>Close window when script runs</string>
+              </property>
+              <property name="checked" >
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
              <layout class="QHBoxLayout" name="horizontalLayout_4" >
               <item>
                <widget class="QPushButton" name="runScriptButton" >
                 <property name="enabled" >
                  <bool>true</bool>
+                </property>
+                <property name="toolTip" >
+                 <string>Run the selected script</string>
                 </property>
                 <property name="text" >
                  <string/>
@@ -841,6 +858,9 @@
                <widget class="QPushButton" name="stopScriptButton" >
                 <property name="enabled" >
                  <bool>true</bool>
+                </property>
+                <property name="toolTip" >
+                 <string>Stop a running script</string>
                 </property>
                 <property name="text" >
                  <string/>
