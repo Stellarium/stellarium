@@ -243,6 +243,11 @@ public:
 	LinearFader orbitFader;
 	
 protected:
+	static STextureSP texEarthShadow;     // for lunar eclipses
+	
+	// draw earth shadow on moon for lunar eclipses
+	void drawEarthShadow(const Navigator * nav, Projector * prj); 
+	
 	// Return the information string "ready to print" :)
 	QString getSkyLabel(const Navigator * nav) const;
 	
