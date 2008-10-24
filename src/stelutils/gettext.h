@@ -22,7 +22,7 @@
 #include <config.h>
 
 /* NLS can be disabled through the configure --disable-nls option.  */
-#if ENABLE_NLS
+#ifdef ENABLE_NLS
 
 /* Get declarations of GNU message catalog functions.  */
 # include <libintl.h>
