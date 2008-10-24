@@ -253,27 +253,35 @@ const QString QtScriptMgr::getDescription(const QString& s)
 
 		QString desc = "";
 		bool inDesc = false;
-		QRegExp descExp("^\\s*//\\s*Description:\\s*(.+)$");
-		QRegExp descContExp("^\\s*//\\s*(.*)$");
+		QRegExp descExp("^\\s*//\\s*Description:\\s*([^\\s].+)\\s*$");
+		QRegExp descNewlineExp("^\\s*//\\s*$");
+		QRegExp descContExp("^\\s*//\\s*([^\\s].*)\\s*$");
 		while (!file.atEnd()) {
 			QString line(file.readLine());
 			
 			if (!inDesc && descExp.exactMatch(line))
 			{
 				inDesc = true;
-				desc = descExp.capturedTexts().at(1) + "\n";
+				desc = descExp.capturedTexts().at(1) + " ";
+				desc.replace("\n","");
 			}
 			else if (inDesc)
 			{
-				if (descContExp.exactMatch(line))
-					desc += descContExp.capturedTexts().at(1) + "\n";
+				QString d("");
+				if (descNewlineExp.exactMatch(line))
+					d = "\n";
+				else if (descContExp.exactMatch(line))
+				{
+					d = descContExp.capturedTexts().at(1) + " ";
+					d.replace("\n","");
+				}
 				else
 				{
 					file.close();	
 					return desc;
 				}
+				desc += d;
 			}
-			
 		}
 		file.close();
 		return desc;

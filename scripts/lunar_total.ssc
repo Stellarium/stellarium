@@ -1,0 +1,62 @@
+// Name: Total Lunar Eclispe script
+// Description: Attempt to re-implement simple script from the old
+//              scripting engine.  Each old style command is shown
+//              first as a command with OLD: at the start of the line
+//              to help users of the old scripting engine learn how
+//              to use the new one.
+//
+
+core.debug("Starting Partial Lunar Eclispe script");
+core.wait(1);
+core.debug("OK, let's go...");
+
+// OLD: clear
+LandscapeMgr.setFlagLandscape(false);
+LandscapeMgr.setFlagAtmosphere(false);
+LandscapeMgr.setFlagFog(false);
+LandscapeMgr.setFlagCardinalsPoints(false);
+ConstellationMgr.setFlagArt(false);
+ConstellationMgr.setFlagLines(false);
+ConstellationMgr.setFlagBoundaries(false);
+ConstellationMgr.setFlagLabels(false);
+ConstellationMgr.setFlagIsolateSelected(false);
+GridLinesMgr.setFlagAzimuthalGrid(false);
+GridLinesMgr.setFlagEquatorGrid(false);
+GridLinesMgr.setFlagEquatorJ2000Grid(false);
+GridLinesMgr.setFlagEquatorLine(false);
+GridLinesMgr.setFlagEclipticLine(false);
+GridLinesMgr.setFlagMeridianLine(false);
+MeteorMgr.setFlagShow(true);
+NebulaMgr.setFlagHints(false);
+NebulaMgr.setFlagShow(true);
+SolarSystem.setFlagPlanets(true);
+SolarSystem.setFlagTrails(false);
+SolarSystem.setFlagHints(false);
+SolarSystem.setFlagLabels(false);
+SolarSystem.setFlagOrbits(false);
+SolarSystem.setFlagLightTravelTime(false);
+SolarSystem.setFlagMoonScale(false);
+StarMgr.setFlagStars(true);
+StarMgr.setFlagLabels(false);
+StarMgr.setFlagSciNames(false);
+
+// OLD: date utc 2004:05:04T17:51:00
+core.setDate("2004:05:04T17:51:00");
+
+// OLD: select planet Moon pointer off
+core.selectObjectByName("Moon", false);
+MovementMgr.setFlagTracking(true);
+
+// OLD: wait duration 2
+core.wait(2);
+
+// OLD: zoom auto in
+MovementMgr.autoZoomIn(2);
+
+// OLD: wait duration 2
+core.wait(2);
+
+// OLD: timerate rate 250
+core.setTimeSpeed(.00001157407407407407 * 250);
+
+
