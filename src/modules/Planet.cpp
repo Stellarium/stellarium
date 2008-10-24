@@ -42,6 +42,7 @@ Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
 Vec3f Planet::trailColor = Vec3f(1,0.7,0.7);
 STextureSP Planet::hintCircleTex;
+STextureSP Planet::texEarthShadow;
 
 Planet::Planet(Planet *parent,
                const QString& englishName,
@@ -628,17 +629,23 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 		else
 		{
 			SolarSystem* ssm = (SolarSystem*)GETSTELMODULE("SolarSystem");
-			if (this==ssm->getMoon() && ssm->nearLunarEclipse())
+			if (this==ssm->getMoon() && nav->getHomePlanet()==ssm->getEarth() && ssm->nearLunarEclipse())
 			{
+				// Draw earth shadow over moon using stencil buffer if appropriate
+				// This effect curently only looks right from earth viewpoint
 				// TODO: moon magnitude label during eclipse isn't accurate...
-				// special case to update stencil buffer for drawing lunar eclipses
-				glClear(GL_STENCIL_BUFFER_BIT);
 				glClearStencil(0x0);
+				glClear(GL_STENCIL_BUFFER_BIT);
 				glStencilFunc(GL_ALWAYS, 0x1, 0x1);
 				glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
 				glEnable(GL_STENCIL_TEST);
 				drawSphere(core, mat, screenSz);
 				glDisable(GL_STENCIL_TEST);
+				
+				glDisable(GL_LIGHTING);
+				drawEarthShadow(nav, prj);
+				glClear(GL_STENCIL_BUFFER_BIT);	// Clean again to let a clean buffer for later Qt display
+				glEnable(GL_LIGHTING);
 			}
 			else
 			{
@@ -943,4 +950,92 @@ void Planet::update(int deltaTime)
 	labelsFader.update(deltaTime);
 	orbitFader.update(deltaTime);
 	trailFader.update(deltaTime);
+}
+
+
+// draws earth shadow overlapping the moon using stencil buffer
+// umbra and penumbra are sized separately for accuracy
+void Planet::drawEarthShadow(const Navigator * nav, Projector * prj)
+{
+	SolarSystem* ssm = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	Vec3d e = ssm->getEarth()->getEclipticPos();
+	Vec3d m = ssm->getMoon()->getEclipticPos();  // relative to earth
+	Vec3d mh = ssm->getMoon()->getHeliocentricEclipticPos();  // relative to sun
+	float mscale = ssm->getMoon()->getSphereScale();
+
+	// shadow location at earth + moon distance along earth vector from sun
+	Vec3d en = e;
+	en.normalize();
+	Vec3d shadow = en * (e.length() + m.length());
+
+	// find shadow radii in AU
+	double r_penumbra = shadow.length()*702378.1/AU/e.length() - 696000/AU;
+	double r_umbra = 6378.1/AU - m.length()*(689621.9/AU/e.length());
+
+	// find vector orthogonal to sun-earth vector using cross product with
+	// a non-parallel vector
+	Vec3d rpt = shadow^Vec3d(0,0,1);
+	rpt.normalize();
+	Vec3d upt = rpt*r_umbra*mscale*1.02;  // point on umbra edge
+	rpt *= r_penumbra*mscale;  // point on penumbra edge
+
+	// modify shadow location for scaled moon
+	Vec3d mdist = shadow - mh;
+	if(mdist.length() > r_penumbra + 2000/AU)
+		return;   // not visible so don't bother drawing
+
+	shadow = mh + mdist*mscale;
+	r_penumbra *= mscale;
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glColor3f(1,1,1);
+	
+	glEnable(GL_STENCIL_TEST);
+	glStencilFunc(GL_EQUAL, 0x1, 0x1);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+
+	prj->setCurrentFrame(Projector::FrameHelio);
+	// shadow radial texture
+	texEarthShadow->bind();
+
+	Vec3d r, s;
+
+	// umbra first
+	glBegin(GL_TRIANGLE_FAN);
+      // johannes: work-around for nasty ATI rendering bug:
+      // use y-texture coordinate of 0.5 instead of 0.0
+	glTexCoord2f(0.f,0.5f);
+	prj->drawVertex3v(shadow);
+
+	for (int i=0; i<=100; i++)
+	{
+		r = Mat4d::rotation(shadow, 2*M_PI*i/100.) * upt;
+		s = shadow + r;
+
+		glTexCoord2f(0.6f,0.5f);  // position in texture of umbra edge
+		prj->drawVertex3v(s);
+	}
+	glEnd();
+
+
+	// now penumbra
+	Vec3d u, sp;
+	glBegin(GL_TRIANGLE_STRIP);
+	for (int i=0; i<=100; i++)
+	{
+		r = Mat4d::rotation(shadow, 2*M_PI*i/100.) * rpt;
+		u = Mat4d::rotation(shadow, 2*M_PI*i/100.) * upt;
+		s = shadow + r;
+		sp = shadow + u;
+
+		glTexCoord2f(0.6f,0.5f);
+		prj->drawVertex3v(sp);
+
+		glTexCoord2f(1.f,0.5f);  // position in texture of umbra edge
+		prj->drawVertex3v(s);
+	}
+	glEnd();
+
+	glDisable(GL_STENCIL_TEST);
 }

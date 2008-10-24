@@ -84,6 +84,7 @@ SolarSystem::~SolarSystem()
 	moon = NULL;
 	earth = NULL;
 	Planet::hintCircleTex.reset();
+	Planet::texEarthShadow.reset();
 }
 
 /*************************************************************************
@@ -716,7 +717,7 @@ void SolarSystem::loadPlanets()
 
 	// special case: load earth shadow texture
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	texEarthShadow = StelApp::getInstance().getTextureManager().createTexture("earth-shadow.png");
+	Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture("earth-shadow.png");
 	
 	qDebug() << "Loaded" << readOk << "/" << totalPlanets << "planet orbits";
 }
@@ -776,8 +777,6 @@ void SolarSystem::draw(StelCore* core)
 		return;
 	
 	Navigator* nav = core->getNavigation();
-	Projector* prj = core->getProjection();
-	
 	Planet::setFont(&planetNameFont);
 	
 	// Set the light parameters taking sun as the light source
@@ -822,13 +821,6 @@ void SolarSystem::draw(StelCore* core)
 	}
 
 	glDisable(GL_LIGHT0);
-
-
-	// special case: draw earth shadow over moon if appropriate
-	// stencil buffer is set up in moon drawing above
-	// This effect curently only looks right from earth viewpoint
-	if (nav->getHomePlanet()->getEnglishName() == "Earth") 
-		drawEarthShadow(nav, prj);
 
 	drawPointer(core);
 }
@@ -1069,94 +1061,6 @@ void SolarSystem::setSelected(StelObject* obj)
 	setFlagHints(getFlagHints());
 	setFlagOrbits(getFlagOrbits());
 	setFlagTrails(getFlagTrails());
-}
-
-// draws earth shadow overlapping the moon using stencil buffer
-// umbra and penumbra are sized separately for accuracy
-void SolarSystem::drawEarthShadow(const Navigator * nav, Projector * prj)
-{
-
-	Vec3d e = getEarth()->getEclipticPos();
-	Vec3d m = getMoon()->getEclipticPos();  // relative to earth
-	Vec3d mh = getMoon()->getHeliocentricEclipticPos();  // relative to sun
-	float mscale = getMoon()->getSphereScale();
-
-	// shadow location at earth + moon distance along earth vector from sun
-	Vec3d en = e;
-	en.normalize();
-	Vec3d shadow = en * (e.length() + m.length());
-
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glColor3f(1,1,1);
-
-	// find shadow radii in AU
-	double r_penumbra = shadow.length()*702378.1/AU/e.length() - 696000/AU;
-	double r_umbra = 6378.1/AU - m.length()*(689621.9/AU/e.length());
-
-	// find vector orthogonal to sun-earth vector using cross product with
-	// a non-parallel vector
-	Vec3d rpt = shadow^Vec3d(0,0,1);
-	rpt.normalize();
-	Vec3d upt = rpt*r_umbra*mscale*1.02;  // point on umbra edge
-	rpt *= r_penumbra*mscale;  // point on penumbra edge
-
-	// modify shadow location for scaled moon
-	Vec3d mdist = shadow - mh;
-	if(mdist.length() > r_penumbra + 2000/AU) return;   // not visible so don't bother drawing
-
-	shadow = mh + mdist*mscale;
-	r_penumbra *= mscale;
-
-	//nav->switchToHeliocentric();
-	glEnable(GL_STENCIL_TEST);
-	glStencilFunc(GL_EQUAL, 0x1, 0x1);
-	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-
-	prj->setCurrentFrame(Projector::FrameHelio);
-	// shadow radial texture
-	texEarthShadow->bind();
-
-	Vec3d r, s;
-
-	// umbra first
-	glBegin(GL_TRIANGLE_FAN);
-      // johannes: work-around for nasty ATI rendering bug:
-      // use y-texture coordinate of 0.5 instead of 0.0
-	glTexCoord2f(0.f,0.5f);
-	prj->drawVertex3v(shadow);
-
-	for (int i=0; i<=100; i++)
-	{
-		r = Mat4d::rotation(shadow, 2*M_PI*i/100.) * upt;
-		s = shadow + r;
-
-		glTexCoord2f(0.6f,0.5f);  // position in texture of umbra edge
-		prj->drawVertex3v(s);
-	}
-	glEnd();
-
-
-	// now penumbra
-	Vec3d u, sp;
-	glBegin(GL_TRIANGLE_STRIP);
-	for (int i=0; i<=100; i++)
-	{
-		r = Mat4d::rotation(shadow, 2*M_PI*i/100.) * rpt;
-		u = Mat4d::rotation(shadow, 2*M_PI*i/100.) * upt;
-		s = shadow + r;
-		sp = shadow + u;
-
-		glTexCoord2f(0.6f,0.5f);
-		prj->drawVertex3v(sp);
-
-		glTexCoord2f(1.f,0.5f);  // position in texture of umbra edge
-		prj->drawVertex3v(s);
-	}
-	glEnd();
-
-	glDisable(GL_STENCIL_TEST);
-
 }
 
 
