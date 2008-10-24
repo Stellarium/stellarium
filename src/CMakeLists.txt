@@ -35,6 +35,8 @@ SET(stellarium_lib_SRCS
 	core/MultiLevelJsonBase.cpp
 	core/SkyImageTile.hpp
 	core/SkyImageTile.cpp
+	core/SkyPolygon.hpp
+	core/SkyPolygon.cpp
 	core/SphericMirrorCalculator.cpp
 	core/SphericMirrorCalculator.hpp
 	core/StelApp.cpp
@@ -263,6 +265,7 @@ SET(stellarium_MOC_HDRS
 	core/MovementMgr.hpp
 	core/MultiLevelJsonBase.hpp
 	core/SkyImageTile.hpp
+	core/SkyPolygon.hpp
 	core/SkyDrawer.hpp
 	core/SkyImageMgr.hpp
 	modules/ConstellationMgr.hpp
