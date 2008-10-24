@@ -269,18 +269,13 @@ private:
 	//! The amount of planets labels (between 0 and 10)
 	float labelsAmount;
 	
-	std::vector<Planet*> systemPlanets;  // Vector containing all the bodies of the system
-	
-	// draw earth shadow on moon for lunar eclipses
-	void drawEarthShadow(const Navigator * nav, Projector * prj);  
+	std::vector<Planet*> systemPlanets;  // Vector containing all the bodies of the system 
 
 	// And sort them from the furthest to the closest to the observer
 	struct biggerDistance : public std::binary_function<Planet*, Planet*, bool>
 	{
 		bool operator()(Planet* p1, Planet* p2);
 	};
-
-	STextureSP texEarthShadow;     // for lunar eclipses
 
 	// Master settings
 	bool flagOrbits;
