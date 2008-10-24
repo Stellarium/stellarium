@@ -197,6 +197,7 @@ void ConfigurationDialog::createDialogContent()
 		aScriptHasStopped();
 	connect(&scriptMgr, SIGNAL(scriptRunning()), this, SLOT(aScriptIsRunning()));
 	connect(&scriptMgr, SIGNAL(scriptStopped()), this, SLOT(aScriptHasStopped()));
+	ui->scriptListWidget->setSortingEnabled(true);
 	populateScriptsList();
 
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateScriptsList()));
@@ -453,32 +454,43 @@ void ConfigurationDialog::setDefaultViewOptions()
 
 void ConfigurationDialog::populateScriptsList(void)
 {
+	int prevSel = ui->scriptListWidget->currentRow();
 	QtScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	ui->scriptListWidget->clear();
-	ui->scriptListWidget->addItems(scriptMgr.getScriptList());
+	ui->scriptListWidget->addItems(scriptMgr.getScriptList().replaceInStrings(QRegExp("\\.ssc$"), ""));
+	// If we had a valid previous selection (i.e. not first time we populate), restore it
+	if (prevSel >= 0 && prevSel < ui->scriptListWidget->count())
+		ui->scriptListWidget->setCurrentRow(prevSel);
+	else
+		ui->scriptListWidget->setCurrentRow(0);
 }
 
 void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 {
+	if (s.isEmpty() || s=="")
+		return;
 	QtScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + scriptMgr.getName(s) + "</h2>";
-	QString d = scriptMgr.getDescription(s);
+	html += "<h2>" + scriptMgr.getName(s+".ssc") + "</h2>";
+	QString d = scriptMgr.getDescription(s+".ssc");
 	d.replace("\n", "<br />");
-	html += d;
+	html += "<p>" + d + "</p>";
 	html += "</body></html>";
 	ui->scriptInfoBrowser->setHtml(html);
 }
 
 void ConfigurationDialog::runScriptClicked(void)
 {
+	if (ui->closeWindowAtScriptRunCheckbox->isChecked())
+		this->close();
+		
 	QtScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	if (ui->scriptListWidget->currentItem())
 	{
 		ui->runScriptButton->setEnabled(false);
 		ui->stopScriptButton->setEnabled(true);
-		scriptMgr.runScript(ui->scriptListWidget->currentItem()->text());
+		scriptMgr.runScript(ui->scriptListWidget->currentItem()->text()+".ssc");
 	}
 }
 
