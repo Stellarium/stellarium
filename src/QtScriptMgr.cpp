@@ -17,16 +17,27 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "QtScriptMgr.hpp"
-
 #include "fixx11h.h"
-#include "StelApp.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelCore.hpp"
+
+#include "QtScriptMgr.hpp"
+#include "ConstellationMgr.hpp"
+#include "GridLinesMgr.hpp"
+#include "LandscapeMgr.hpp"
+#include "MeteorMgr.hpp"
+#include "MovementMgr.hpp"
 #include "Navigator.hpp"
+#include "NebulaMgr.hpp"
+#include "SolarSystem.hpp"
+#include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "StelFileMgr.hpp"
-#include "StelUtils.hpp"
+#include "StelGui.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelUtils.hpp"
+#include "SkyDrawer.hpp"
+#include "StarMgr.hpp"
+#include "Projector.hpp"
 
 #include <QFile>
 #include <QSet>
@@ -102,9 +113,17 @@ double StelMainScriptAPI::getJDay(void) const
 	return StelApp::getInstance().getCore()->getNavigation()->getJDay();
 }
 
-void StelMainScriptAPI::setDate(QString dt)
+void StelMainScriptAPI::setDate(const QString& dt, const QString& spec)
 {
-	double JD = StelUtils::qDateTimeToJd(QDateTime::fromString(dt, Qt::ISODate));
+	QDateTime qdt;
+	double JD;
+	qdt = QDateTime::fromString(dt, Qt::ISODate);
+
+	if (spec=="local")
+		JD = StelUtils::qDateTimeToJd(qdt.toUTC());
+	else
+		JD = StelUtils::qDateTimeToJd(qdt);
+		
 	StelApp::getInstance().getCore()->getNavigation()->setJDay(JD);
 }
 
@@ -142,13 +161,106 @@ void StelMainScriptAPI::debug(const QString& s)
 	qDebug() << "script: " << s;
 }
 
-void StelMainScriptAPI::selectObjectByName(QString name, bool pointer)
+void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
 {
 	StelApp::getInstance().getStelObjectMgr().findAndSelect(name);
 	StelApp::getInstance().getStelObjectMgr().setFlagSelectedObjectPointer(pointer);
 }
 
-QtScriptMgr::QtScriptMgr(QObject *parent) : QObject(parent), thread(NULL)
+void StelMainScriptAPI::clear(const QString& state)
+{
+	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
+	Q_ASSERT(lmgr);
+	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	Q_ASSERT(ssmgr);
+	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
+	Q_ASSERT(mmgr);
+	SkyDrawer* skyd = StelApp::getInstance().getCore()->getSkyDrawer();
+	Q_ASSERT(skyd);
+	ConstellationMgr* cmgr = (ConstellationMgr*)GETSTELMODULE("ConstellationMgr");
+	Q_ASSERT(cmgr);
+	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
+	Q_ASSERT(smgr);
+	NebulaMgr* nmgr = (NebulaMgr*)GETSTELMODULE("NebulaMgr");
+	Q_ASSERT(nmgr);
+	GridLinesMgr* glmgr = (GridLinesMgr*)GETSTELMODULE("GridLinesMgr");
+	Q_ASSERT(glmgr);
+	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
+	Q_ASSERT(gui);
+	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
+	Q_ASSERT(mvmgr);
+	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	Q_ASSERT(nav);
+	Projector* proj = StelApp::getInstance().getCore()->getProjection();
+	Q_ASSERT(proj);
+
+	if (state == "natural")
+	{
+		nav->setEquatorialMount(false);
+		skyd->setFlagTwinkle(true);
+		skyd->setFlagLuminanceAdaptation(true);
+		ssmgr->setFlagPlanets(true);
+		ssmgr->setFlagHints(false);
+		ssmgr->setFlagOrbits(false);
+		ssmgr->setFlagMoonScale(false);
+		ssmgr->setFlagTrails(false);
+		mmgr->setZHR(10);
+		glmgr->setFlagAzimuthalGrid(false);
+		glmgr->setFlagEquatorGrid(false);
+		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEclipticLine(false);
+		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagEquatorJ2000Grid(false);
+		lmgr->setFlagCardinalsPoints(false);
+		cmgr->setFlagLines(false);
+		cmgr->setFlagLabels(false);
+		cmgr->setFlagBoundaries(false);
+		cmgr->setFlagArt(false);
+		smgr->setFlagLabels(false);
+		ssmgr->setFlagLabels(false);
+		nmgr->setFlagHints(false);
+		lmgr->setFlagLandscape(true);
+		lmgr->setFlagAtmosphere(true);
+		lmgr->setFlagFog(true);
+	}
+	else if (state == "starchart")
+	{
+		nav->setEquatorialMount(true);
+		skyd->setFlagTwinkle(false);
+		skyd->setFlagLuminanceAdaptation(false);
+		ssmgr->setFlagPlanets(true);
+		ssmgr->setFlagHints(false);
+		ssmgr->setFlagOrbits(false);
+		ssmgr->setFlagMoonScale(false);
+		ssmgr->setFlagTrails(false);
+		mmgr->setZHR(0);
+		glmgr->setFlagAzimuthalGrid(false);
+		glmgr->setFlagEquatorGrid(true);
+		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEclipticLine(false);
+		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagEquatorJ2000Grid(false);
+		lmgr->setFlagCardinalsPoints(false);
+		cmgr->setFlagLines(true);
+		cmgr->setFlagLabels(true);
+		cmgr->setFlagBoundaries(true);
+		cmgr->setFlagArt(false);
+		smgr->setFlagLabels(true);
+		ssmgr->setFlagLabels(true);
+		nmgr->setFlagHints(true);
+		lmgr->setFlagLandscape(false);
+		lmgr->setFlagAtmosphere(false);
+		lmgr->setFlagFog(false);
+	}
+	else
+	{
+		qWarning() << "WARNING clear(" << state << ") - state not known";
+	}
+}
+
+QtScriptMgr::QtScriptMgr(const QString& startupScript, QObject *parent) 
+	: QObject(parent), 
+	  thread(NULL)
 {
 	// Allow Vec3f managment in scripts
 	qScriptRegisterMetaType(&engine, vec3fToScriptValue, vec3fFromScriptValue);
@@ -169,7 +281,7 @@ QtScriptMgr::QtScriptMgr(QObject *parent) : QObject(parent), thread(NULL)
 		engine.globalObject().setProperty(m->objectName(), objectValue);
 	}
 	
-	runScript("startup.ssc");
+	runScript(startupScript);
 }
 
 

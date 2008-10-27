@@ -10,51 +10,18 @@ core.wait(1);
 core.debug("OK, let's go...");
 
 // OLD: clear
-// This will be simplified in future, perhaps with 
-// an include system which will be used to include 
-// a script which will define some commonly used 
-// functions 
-// For now, we will set a bunch of flags just to 
-// show how to do it.
+core.clear("natural");
 LandscapeMgr.setFlagLandscape(false);
 LandscapeMgr.setFlagAtmosphere(false);
 LandscapeMgr.setFlagFog(false);
-LandscapeMgr.setFlagCardinalsPoints(false);
-ConstellationMgr.setFlagArt(false);
-ConstellationMgr.setFlagLines(false);
-ConstellationMgr.setFlagBoundaries(false);
-ConstellationMgr.setFlagLabels(false);
-ConstellationMgr.setFlagIsolateSelected(false);
-GridLinesMgr.setFlagAzimuthalGrid(false);
-GridLinesMgr.setFlagEquatorGrid(false);
-GridLinesMgr.setFlagEquatorJ2000Grid(false);
-GridLinesMgr.setFlagEquatorLine(false);
-GridLinesMgr.setFlagEclipticLine(false);
-GridLinesMgr.setFlagMeridianLine(false);
-MeteorMgr.setFlagShow(true);
-NebulaMgr.setFlagHints(false);
-NebulaMgr.setFlagShow(true);
-SolarSystem.setFlagPlanets(true);
-SolarSystem.setFlagTrails(false);
-SolarSystem.setFlagHints(false);
-SolarSystem.setFlagLabels(false);
-SolarSystem.setFlagOrbits(false);
-SolarSystem.setFlagLightTravelTime(false);
-SolarSystem.setFlagMoonScale(false);
-StarMgr.setFlagStars(true);
-StarMgr.setFlagLabels(false);
-StarMgr.setFlagSciNames(false);
 
 core.wait(1);
 
 // OLD: date utc 2006:03:14T21:21:32
-// Note that core.setDate() uses ISO date format. 
-// See QDateTime::fromString for details.
 core.setDate("2006:03:14T21:21:32");
 
 // OLD: select planet Moon pointer off
 core.selectObjectByName("Moon", false);
-// Goto the selected object and track it...
 MovementMgr.setFlagTracking(true);
 
 // OLD: wait duration 2
