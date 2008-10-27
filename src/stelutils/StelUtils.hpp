@@ -95,6 +95,10 @@ namespace StelUtils
 	//! @param v The vector
 	//! @return The string in HTML color notation "#rrggbb".
 	QString vec3fToHtmlColor(const Vec3f& v);
+
+	//! Converts a color in HTML notation to a Vec3f.
+	//! @param c The HTML spec color string
+	Vec3f htmlColorToVec3f(const QString& c);
 		
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng longitude in radian
