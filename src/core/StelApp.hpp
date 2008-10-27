@@ -349,6 +349,7 @@ private:
 	bool flagNightVision;
 	
 	QString configFile;
+	QString startupScript;
 	QSettings* confSettings;
 	
 	// Define whether the StelApp instance has completed initialization
