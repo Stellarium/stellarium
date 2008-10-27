@@ -68,10 +68,12 @@ QTime* StelApp::qtime = NULL;
 /*************************************************************************
  Create and initialize the main Stellarium application.
 *************************************************************************/
-StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
-	core(NULL), fps(0), maxfps(10000.f), frame(0), timefr(0.), 
-	timeBase(0.), flagNightVision(false), configFile("config.ini"), confSettings(NULL),
-	initialized(false), saveProjW(-1), saveProjH(-1)
+StelApp::StelApp(int argc, char** argv, QObject* parent)
+	: QObject(parent), core(NULL), fps(0), maxfps(10000.f), frame(0), 
+	  timefr(0.), timeBase(0.), flagNightVision(false), 
+	  configFile("config.ini"), startupScript("startup.ssc"), 
+	  confSettings(NULL), initialized(false), saveProjW(-1), 
+	  saveProjH(-1)
 {
 	// Used for getting system date formatting
 	setlocale(LC_TIME, "");
@@ -335,7 +337,7 @@ void StelApp::init()
 	
 	updateI18n();
 	
-	scriptMgr = new QtScriptMgr();
+	scriptMgr = new QtScriptMgr(startupScript);
 	initialized = true;
 }
 
@@ -382,6 +384,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 		     << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides" << std::endl
 		     << "                          the full screen setting in the config file" << std::endl
 		     << "--screenshot-dir        : Specify directory to save screenshots" << std::endl
+		     << "--startup-script        : Specify name of startup script" << std::endl
 		     << "--home-planet           : Specify observer planet (English name)" << std::endl
 		     << "--altitude              : Specify observer altitude in meters" << std::endl
 		     << "--longitude             : Specify longitude, e.g. +53d58\\'16.65\\\"" << std::endl
@@ -450,6 +453,8 @@ void StelApp::parseCLIArgsPreConfig(void)
 		qWarning() << "WARNING: while looking for --config-file option: " << e.what() << ". Using \"config.ini\"";
 		setConfigFile("config.ini", restoreDefaultConfigFile);		
 	}
+
+	startupScript = argsGetOptionWithArg<QString>(argList, "", "--startup-script", "startup.ssc");
 }
 
 void StelApp::parseCLIArgsPostConfig()

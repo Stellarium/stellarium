@@ -47,7 +47,9 @@ public slots:
 	double getJDay(void) const;
 
 	//! set the date in ISO format, e.g. "2008-03-24T13:21:01"
-	void setDate(QString dt);
+	//! @param dt the date string to use
+	//! @param spec "local" or "utc"
+	void setDate(const QString& dt, const QString& spec="utc");
 		
 	//! Set time speed in JDay/sec
 	//! @param ts time speed in JDay/sec
@@ -62,10 +64,19 @@ public slots:
 	//! Select an object by name
 	//! @param name the name of the object to select (english)
 	//! @param pointer whether or not to have the selection pointer enabled
-	void selectObjectByName(QString name, bool pointer);
+	void selectObjectByName(const QString& name, bool pointer);
+
+	//! Clear the display options, setting a "standard" view.
+	//! Preset states:
+	//! - natural : azimuthal mount, atmosphere, landscape, 
+	//!   no lines, labels or markers
+	//! - starchart : equatorial mount, constellation lines,
+	//!   no landscape, atmoshere etc.  labels & markers on.
+	//! @param state the name of a preset state.
+	void clear(const QString& state="natural");
 
 	//! print a debugging message to the console
-	void debug(const QString &s);
+	void debug(const QString& s);
 
 };
 		
@@ -75,7 +86,7 @@ class QtScriptMgr : public QObject
 Q_OBJECT
 		
 public:
-	QtScriptMgr(QObject *parent = 0);
+	QtScriptMgr(const QString& startupScript, QObject *parent=0);
 	~QtScriptMgr();
 
 	QStringList getScriptList(void);
