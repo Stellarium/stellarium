@@ -85,6 +85,9 @@ public slots:
 	bool getFlagLockEquPos(void) const {return flagLockEquPos;}
 	
 	//! Move view in alt/az (or equatorial if in that mode) coordinates.
+	//! Changes to viewing direction are instantaneous.
+	//! @param deltaAz change in azimuth angle in radians
+	//! @param deltaAlt change in altitude angle in radians
 	void panView(double deltaAz, double deltaAlt);
 
 	//! Set automove duration in seconds
