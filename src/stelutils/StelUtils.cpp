@@ -259,6 +259,29 @@ QString vec3fToHtmlColor(const Vec3f& v)
 		.arg(qMin(255, int(v[2] * 255)), 2, 16, QChar('0'));
 }
 
+Vec3f htmlColorToVec3f(const QString& c)
+{
+	Vec3f v;
+	QRegExp re("^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$");
+	if (re.exactMatch(c))
+	{
+		bool ok;
+		int i = re.capturedTexts().at(1).toInt(&ok, 16);
+		v[0] = (float)i / 255.;
+		i = re.capturedTexts().at(2).toInt(&ok, 16);
+		v[1] = (float)i / 255.;
+		i = re.capturedTexts().at(3).toInt(&ok, 16);
+		v[2] = (float)i / 255.;
+	}
+	else
+	{
+		v[0] = 0.;
+		v[1] = 0.;
+		v[2] = 0.;
+	}
+	return v;
+}
+
 void spheToRect(double lng, double lat, Vec3d& v)
 {
 	const double cosLat = cos(lat);
