@@ -4,7 +4,7 @@
 import sys
 import os
 import math
-import qt
+import gzip
 
 def writePolys(pl, f):
 	f.write('[')
@@ -38,11 +38,9 @@ class SkyImageTile:
 		f.close()
 		
 		if (qCompress):
-			ff = qt.QFile(fName)
-			ff.open(qt.IO_ReadOnly)
-			data = qt.qCompress(ff.readAll())
-			fout = open(fName+".qZ", 'w')
-			fout.write(data.data())
+			ff = open(fName)
+			fout = gzip.GzipFile(fName+".gz", 'w')
+			fout.write(ff.read())
 			fout.close()
 			os.remove(fName)
 
@@ -85,7 +83,7 @@ class SkyImageTile:
 				st.outputJSON(prefix, qCompress, maxLevelPerFile, outDir)
 				f.write(levTab+'\t\t"'+prefix+"x%.2d_%.2d_%.2d.json" % (2**st.level, st.i, st.j))
 				if qCompress:
-					f.write(".qZ")
+					f.write(".gz")
 				f.write('",\n')
 		f.seek(-2, os.SEEK_CUR)
 		f.write('\n'+levTab+'\t]\n')
