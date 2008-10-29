@@ -482,11 +482,11 @@ void MovementMgr::moveTo(const Vec3d& _aim, float moveDuration, bool _localPos, 
 	move.aim*=2.;
 	if (_localPos)
 	{
-		move.start=nav->getLocalVision();
+		move.start=nav->getAltAzVisionDirection();
 	}
 	else
 	{
-		move.start=nav->getEquVision();
+		move.start=nav->getEarthEquVisionDirection();
 	}
 	move.start.normalize();
 	move.speed=1.f/(moveDuration*1000);
@@ -579,7 +579,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 		
 		Vec3d tmp;
 		StelUtils::spheToRect(ra_now, de_now, tmp);
-		nav->setEquVision(nav->altAzToEarthEqu(tmp));
+		nav->setEarthEquVisionDirection(nav->altAzToEarthEqu(tmp));
 
 		move.coef+=move.speed*deltaTime*1000;
 		if (move.coef>=1.)
@@ -587,11 +587,11 @@ void MovementMgr::updateVisionVector(double deltaTime)
 			flagAutoMove=0;
 			if (move.localPos)
 			{
-				nav->setLocalVision(move.aim);
+				nav->setAltAzVisionDirection(move.aim);
 			}
 			else
 			{
-				nav->setEquVision(move.aim);
+				nav->setEarthEquVisionDirection(move.aim);
 			}
 		}
 	}
@@ -599,19 +599,19 @@ void MovementMgr::updateVisionVector(double deltaTime)
 	{
 		if (flagTracking && StelApp::getInstance().getStelObjectMgr().getWasSelected()) // Equatorial vision vector locked on selected object
 		{
-			nav->setEquVision(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getObsEquatorialPos(core->getNavigation()));
+			nav->setEarthEquVisionDirection(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getObsEquatorialPos(core->getNavigation()));
 		}
 		else
 		{
 			if (flagLockEquPos) // Equatorial vision vector locked
 			{
 				// Recalc local vision vector
-				nav->setLocalVision(nav->earthEquToAltAz(nav->getEquVision()));
+				nav->setAltAzVisionDirection(nav->earthEquToAltAz(nav->getEarthEquVisionDirection()));
 			}
 			else // Local vision vector locked
 			{
 				// Recalc equatorial vision vector
-				nav->setEquVision(nav->altAzToEarthEqu(nav->getLocalVision()));
+				nav->setEarthEquVisionDirection(nav->altAzToEarthEqu(nav->getAltAzVisionDirection()));
 			}
 		}
 	}
@@ -624,8 +624,8 @@ void MovementMgr::panView(double deltaAz, double deltaAlt)
 	Navigator* nav = core->getNavigation();
 	double azVision, altVision;
 
-	if( nav->getViewingMode() == Navigator::ViewEquator) StelUtils::rectToSphe(&azVision,&altVision,nav->getEquVision());
-	else StelUtils::rectToSphe(&azVision,&altVision,nav->getLocalVision());
+	if( nav->getViewingMode() == Navigator::ViewEquator) StelUtils::rectToSphe(&azVision,&altVision,nav->getEarthEquVisionDirection());
+	else StelUtils::rectToSphe(&azVision,&altVision,nav->getAltAzVisionDirection());
 
 	// if we are moving in the Azimuthal angle (left/right)
 	if (deltaAz) azVision-=deltaAz;
@@ -644,14 +644,14 @@ void MovementMgr::panView(double deltaAz, double deltaAlt)
 		{
 			Vec3d tmp;
 			StelUtils::spheToRect(azVision, altVision, tmp);
-			nav->setLocalVision(nav->earthEquToAltAz(tmp));
+			nav->setAltAzVisionDirection(nav->earthEquToAltAz(tmp));
 		}
 		else
 		{
 			Vec3d tmp;
 			StelUtils::spheToRect(azVision, altVision, tmp);
 			// Calc the equatorial coordinate of the direction of vision wich was in Altazimuthal coordinate
-			nav->setEquVision(nav->altAzToEarthEqu(tmp));
+			nav->setEarthEquVisionDirection(nav->altAzToEarthEqu(tmp));
 		}
 	}
 
