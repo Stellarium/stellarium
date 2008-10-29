@@ -47,7 +47,7 @@ private:
 };
 
 ArtificialPlanet::ArtificialPlanet(const Planet &orig) : 
-		Planet(0, "", 0, 0, 0, 0, Vec3f(0,0,0), 0, "", "",
+		Planet(0, "", 0, 0, 0, Vec3f(0,0,0), 0, "", "",
 		posFuncType(), 0, false, true, false), dest(0),
 		orig_name(orig.getEnglishName()), orig_name_i18n(orig.getNameI18n())
 {
@@ -190,7 +190,7 @@ double Observer::getDistanceFromCenter(void) const
 	return getHomePlanet()->getRadius() + (currentLocation.altitude/(1000*AU));
 }
 
-Mat4d Observer::getRotLocalToEquatorial(double jd) const
+Mat4d Observer::getRotAltAzToEquatorial(double jd) const
 {
 	double lat = currentLocation.latitude;
 	// TODO: Figure out how to keep continuity in sky as reach poles

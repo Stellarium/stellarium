@@ -58,7 +58,7 @@ Vec3d StelObject::getObsSideralPos(const StelCore* core) const
 // Get observer local alt/az coordinate
 Vec3d StelObject::getAltAzPos(const Navigator* nav) const
 {
-	return nav->j2000ToLocal(getObsJ2000Pos(nav));
+	return nav->j2000ToAltAz(getObsJ2000Pos(nav));
 }
 
 // Format the positional info string contain J2000/of date/altaz/hour angle positions for the object

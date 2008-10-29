@@ -45,7 +45,7 @@ public:
 	
 	Vec3d getCenterVsop87Pos(void) const;
 	double getDistanceFromCenter(void) const;
-	Mat4d getRotLocalToEquatorial(double jd) const;
+	Mat4d getRotAltAzToEquatorial(double jd) const;
 	Mat4d getRotEquatorialToVsop87(void) const;
 	
 	virtual const Planet* getHomePlanet(void) const {return planet;}

@@ -251,7 +251,7 @@ void Navigator::decreaseTimeSpeed()
 void Navigator::setLocalVision(const Vec3d& _pos)
 {
 	localVision = _pos;
-	equVision=localToEarthEqu(localVision);
+	equVision=altAzToEarthEqu(localVision);
 	J2000EquVision = matEarthEquToJ2000*equVision;
 }
 
@@ -260,7 +260,7 @@ void Navigator::setEquVision(const Vec3d& _pos)
 {
 	equVision = _pos;
 	J2000EquVision = matEarthEquToJ2000*equVision;
-	localVision = earthEquToLocal(equVision);
+	localVision = earthEquToAltAz(equVision);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -268,7 +268,7 @@ void Navigator::setJ2000EquVision(const Vec3d& _pos)
 {
 	J2000EquVision = _pos;
 	equVision = matJ2000ToEarthEqu*J2000EquVision;
-	localVision = earthEquToLocal(equVision);
+	localVision = earthEquToAltAz(equVision);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -305,22 +305,22 @@ const Mat4d matVsop87ToJ2000(matJ2000ToVsop87.transpose());
 
 void Navigator::updateTransformMatrices(void)
 {
-	matLocalToEarthEqu = position->getRotLocalToEquatorial(JDay);
-	matEarthEquToLocal = matLocalToEarthEqu.transpose();
+	matAltAzToEarthEqu = position->getRotAltAzToEquatorial(JDay);
+	matEarthEquToAltAz = matAltAzToEarthEqu.transpose();
 
 	matEarthEquToJ2000 = matVsop87ToJ2000 * position->getRotEquatorialToVsop87();
 	matJ2000ToEarthEqu = matEarthEquToJ2000.transpose();
-	matJ2000ToLocal = matEarthEquToLocal*matJ2000ToEarthEqu;
+	matJ2000ToAltAz = matEarthEquToAltAz*matJ2000ToEarthEqu;
 	
-	matHelioToEarthEqu = matJ2000ToEarthEqu * matVsop87ToJ2000 * Mat4d::translation(-position->getCenterVsop87Pos());
+	matHeliocentricEclipticToEarthEqu = matJ2000ToEarthEqu * matVsop87ToJ2000 * Mat4d::translation(-position->getCenterVsop87Pos());
 
 	// These two next have to take into account the position of the observer on the earth
-	Mat4d tmp = matJ2000ToVsop87 * matEarthEquToJ2000 * matLocalToEarthEqu;
+	Mat4d tmp = matJ2000ToVsop87 * matEarthEquToJ2000 * matAltAzToEarthEqu;
 
-	matLocalToHelio =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
+	matAltAzToHeliocentricEcliptic =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
 	                      Mat4d::translation(Vec3d(0.,0., position->getDistanceFromCenter()));
 
-	matHelioToLocal =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
+	matHeliocentricEclipticToAltAz =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
 	                      Mat4d::translation(-position->getCenterVsop87Pos());
 }
 
@@ -354,20 +354,20 @@ void Navigator::updateModelViewMat(void)
 		// convert everything back to local coord
 		f = localVision;
 		f.normalize();
-		s = earthEquToLocal( s );
+		s = earthEquToAltAz( s );
 	}
 
 	Vec3d u(s^f);
 	s.normalize();
 	u.normalize();
 
-	matLocalToEye.set(s[0],u[0],-f[0],0.,
+	matAltAzToEye.set(s[0],u[0],-f[0],0.,
 	                     s[1],u[1],-f[1],0.,
 	                     s[2],u[2],-f[2],0.,
 	                     0.,0.,0.,1.);
 
-	matEarthEquToEye = matLocalToEye*matEarthEquToLocal;
-	matHelioToEye = matLocalToEye*matHelioToLocal;
+	matEarthEquToEye = matAltAzToEye*matEarthEquToAltAz;
+	matHeliocentricEclipticToEye = matAltAzToEye*matHeliocentricEclipticToAltAz;
 	matJ2000ToEye = matEarthEquToEye*matJ2000ToEarthEqu;
 }
 
@@ -377,7 +377,7 @@ void Navigator::updateModelViewMat(void)
 Vec3d Navigator::getObserverHelioPos(void) const
 {
 	static const Vec3d v(0.,0.,0.);
-	return matLocalToHelio*v;
+	return matAltAzToHeliocentricEcliptic*v;
 }
 
 void Navigator::setPresetSkyTime(QDateTime dt)

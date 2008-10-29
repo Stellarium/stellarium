@@ -76,12 +76,12 @@ public:
 	//! Set the standard modelview matrices used for projection.
 	// TODO: more complete description of what they are used for.
 	//! @param _matEarthEquToEye ???
-	//! @param _matHelioToEye
-	//! @param _matLocalToEye
+	//! @param _matHeliocentricEclipticToEye
+	//! @param _matAltAzToEye
 	//! @param _matJ2000ToEye
 	void setModelviewMatrices(const Mat4d& _matEarthEquToEye,
-				    const Mat4d& _matHelioToEye,
-				    const Mat4d& _matLocalToEye,
+				    const Mat4d& _matHeliocentricEclipticToEye,
+				    const Mat4d& _matAltAzToEye,
 				    const Mat4d& _matJ2000ToEye);
 	
 	//! Get the current state of the flag which decides whether to 
@@ -467,8 +467,8 @@ private:
 
 	Mat4d matEarthEquToEye;        // Modelview Matrix for earth equatorial projection
 	Mat4d matJ2000ToEye;           // for precessed equ coords
-	Mat4d matHelioToEye;           // Modelview Matrix for earth equatorial projection
-	Mat4d matLocalToEye;           // Modelview Matrix for earth equatorial projection
+	Mat4d matHeliocentricEclipticToEye;           // Modelview Matrix for earth equatorial projection
+	Mat4d matAltAzToEye;           // Modelview Matrix for earth equatorial projection
 	
 	bool gravityLabels;            // should label text align with the horizon?
 	

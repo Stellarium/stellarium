@@ -143,8 +143,8 @@ void StelCore::update(double deltaTime)
 	// and panView in order to have the new observers position
 	// and not interfere with vision vector movement.
 	projection->setModelviewMatrices(	navigation->getEarthEquToEyeMat(),
-	                                    navigation->getHelioToEyeMat(),
-	                                    navigation->getLocalToEyeMat(),
+	                                    navigation->getHeliocentricEclipticToEyeMat(),
+	                                    navigation->getAltAzToEyeMat(),
 	                                    navigation->getJ2000ToEyeMat());
 	
 	skyDrawer->update(deltaTime);
