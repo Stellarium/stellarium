@@ -37,9 +37,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 Navigator::Navigator() : timeSpeed(JD_SECOND), JDay(0.), position(NULL)
 {
-	localVision=Vec3d(1.,0.,0.);
-	equVision=Vec3d(1.,0.,0.);
-	J2000EquVision=Vec3d(1.,0.,0.);  // not correct yet...
+	altAzVisionDirection=Vec3d(1.,0.,0.);
+	earthEquVisionDirection=Vec3d(1.,0.,0.);
+	J2000EquVisionDirection=Vec3d(1.,0.,0.);  // not correct yet...
 	viewingMode = ViewHorizon;  // default
 }
 
@@ -63,7 +63,7 @@ void Navigator::init()
 	position = new Observer(StelApp::getInstance().getLocationMgr().locationForSmallString(defaultLocationID));
 	
 	setTimeNow();
-	setLocalVision(Vec3f(1,1e-05,0.2));
+	setAltAzVisionDirection(Vec3f(1,1e-05,0.2));
 	// Compute transform matrices between coordinates systems
 	updateTransformMatrices();
 	updateModelViewMat();
@@ -82,7 +82,7 @@ void Navigator::init()
 	}
 	
 	initViewPos = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
-	setLocalVision(initViewPos);
+	setAltAzVisionDirection(initViewPos);
 	
 	// we want to be able to handle the old style preset time, recorded as a double
 	// jday, or as a more human readable string...
@@ -220,8 +220,8 @@ double Navigator::getLocalSideralTime() const
 
 void Navigator::setInitViewDirectionToCurrent(void)
 {
-	initViewPos = localVision;
-	QString dirStr = QString("%1,%2,%3").arg(localVision[0]).arg(localVision[1]).arg(localVision[2]);
+	initViewPos = altAzVisionDirection;
+	QString dirStr = QString("%1,%2,%3").arg(altAzVisionDirection[0]).arg(altAzVisionDirection[1]).arg(altAzVisionDirection[2]);
 	StelApp::getInstance().getSettings()->setValue("navigation/init_view_pos", dirStr);
 }
 
@@ -248,27 +248,27 @@ void Navigator::decreaseTimeSpeed()
 }
 	
 ////////////////////////////////////////////////////////////////////////////////
-void Navigator::setLocalVision(const Vec3d& _pos)
+void Navigator::setAltAzVisionDirection(const Vec3d& _pos)
 {
-	localVision = _pos;
-	equVision=altAzToEarthEqu(localVision);
-	J2000EquVision = matEarthEquToJ2000*equVision;
+	altAzVisionDirection = _pos;
+	earthEquVisionDirection=altAzToEarthEqu(altAzVisionDirection);
+	J2000EquVisionDirection = matEarthEquToJ2000*earthEquVisionDirection;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Navigator::setEquVision(const Vec3d& _pos)
+void Navigator::setEarthEquVisionDirection(const Vec3d& _pos)
 {
-	equVision = _pos;
-	J2000EquVision = matEarthEquToJ2000*equVision;
-	localVision = earthEquToAltAz(equVision);
+	earthEquVisionDirection = _pos;
+	J2000EquVisionDirection = matEarthEquToJ2000*earthEquVisionDirection;
+	altAzVisionDirection = earthEquToAltAz(earthEquVisionDirection);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Navigator::setJ2000EquVision(const Vec3d& _pos)
+void Navigator::setJ2000EquVisionDirection(const Vec3d& _pos)
 {
-	J2000EquVision = _pos;
-	equVision = matJ2000ToEarthEqu*J2000EquVision;
-	localVision = earthEquToAltAz(equVision);
+	J2000EquVisionDirection = _pos;
+	earthEquVisionDirection = matJ2000ToEarthEqu*J2000EquVisionDirection;
+	altAzVisionDirection = earthEquToAltAz(earthEquVisionDirection);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -338,12 +338,12 @@ void Navigator::updateModelViewMat(void)
 	if( viewingMode == ViewEquator)
 	{
 		// view will use equatorial coordinates, so that north is always up
-		f = equVision;
+		f = earthEquVisionDirection;
 	}
 	else
 	{
 		// view will correct for horizon (always down)
-		f = localVision;
+		f = altAzVisionDirection;
 	}
 
 	f.normalize();
@@ -352,7 +352,7 @@ void Navigator::updateModelViewMat(void)
 	if( viewingMode == ViewEquator)
 	{
 		// convert everything back to local coord
-		f = localVision;
+		f = altAzVisionDirection;
 		f.normalize();
 		s = earthEquToAltAz( s );
 	}

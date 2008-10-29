@@ -78,14 +78,13 @@ public:
 	//! Get current mount type
 	MountMode getMountMode(void) {return ((getViewingMode()==Navigator::ViewHorizon) ? MountAltAzimuthal : MountEquatorial);}
 
-
 	//! Get vision direction
-	const Vec3d& getEquVision(void) const {return equVision;}
-	const Vec3d& getJ2000EquVision(void) const {return J2000EquVision;}
-	const Vec3d& getLocalVision(void) const {return localVision;}
-	void setLocalVision(const Vec3d& _pos);
-	void setEquVision(const Vec3d& _pos);
-	void setJ2000EquVision(const Vec3d& _pos);
+	const Vec3d& getEarthEquVisionDirection(void) const {return earthEquVisionDirection;}
+	const Vec3d& getJ2000EquVisionDirection(void) const {return J2000EquVisionDirection;}
+	const Vec3d& getAltAzVisionDirection(void) const {return altAzVisionDirection;}
+	void setAltAzVisionDirection(const Vec3d& _pos);
+	void setEarthEquVisionDirection(const Vec3d& _pos);
+	void setJ2000EquVisionDirection(const Vec3d& _pos);
 	
 	//! Get the informations on the current location
 	const Location& getCurrentLocation() const;
@@ -254,8 +253,8 @@ private:
 	Mat4d matHeliocentricEclipticToEye;      // Modelview matrix for heliocentric equatorial drawing
 
 	// Vision variables
-	// Viewing direction in local and equatorial coordinates
-	Vec3d localVision, equVision, J2000EquVision;
+	// Viewing direction in altazimuthal and equatorial coordinates
+	Vec3d altAzVisionDirection, earthEquVisionDirection, J2000EquVisionDirection;
 
 	// Time variable
 	double timeSpeed;        // Positive : forward, Negative : Backward, 1 = 1sec/sec
