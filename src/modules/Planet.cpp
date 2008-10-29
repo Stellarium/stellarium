@@ -46,7 +46,6 @@ STextureSP Planet::texEarthShadow;
 
 Planet::Planet(Planet *parent,
                const QString& englishName,
-               int flagHalo,
                int flagLighting,
                double radius,
                double oblateness,
@@ -60,7 +59,6 @@ Planet::Planet(Planet *parent,
                bool hidden,
 	       bool hasAtmosphere) 
 	: englishName(englishName),
-	  flagHalo(flagHalo),
 	  flagLighting(flagLighting),
 	  radius(radius), oneMinusOblateness(1.0-oblateness),
 	  color(color), albedo(albedo), axisRotation(0.), rings(NULL),
@@ -548,9 +546,9 @@ void Planet::draw(StelCore* core, float maxMagLabels)
 	}
 
 	// This removed totally the Planet shaking bug!!!
-	mat = nav->getHelioToEyeMat() * mat;
+	mat = nav->getHeliocentricEclipticToEyeMat() * mat;
 
-	const Vec3d sunPos = nav->getHelioToEyeMat()*Vec3d(0,0,0);
+	const Vec3d sunPos = nav->getHeliocentricEclipticToEyeMat()*Vec3d(0,0,0);
 	glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
 
 	if (this == nav->getHomePlanet())

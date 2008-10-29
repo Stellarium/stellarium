@@ -647,7 +647,6 @@ void SolarSystem::loadPlanets()
 		// Create the Planet and add it to the list
 		Planet* p = new Planet(parent,
 					englishName,
-					pd.value(secname+"/halo").toBool(),
 					pd.value(secname+"/lighting").toBool(),
 					pd.value(secname+"/radius").toDouble()/AU,
 					pd.value(secname+"/oblateness", 0.0).toDouble(),

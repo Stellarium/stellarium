@@ -101,35 +101,33 @@ public:
 	
 	const Planet *getHomePlanet(void) const;
 
-	//! Return the observer heliocentric position
+	//! Return the observer heliocentric ecliptic position
 	Vec3d getObserverHelioPos(void) const;
 
 	//! Transform vector from local coordinate to equatorial
-	Vec3d localToEarthEqu(const Vec3d& v) const { return matLocalToEarthEqu*v; }
+	Vec3d altAzToEarthEqu(const Vec3d& v) const { return matAltAzToEarthEqu*v; }
 
 	//! Transform vector from equatorial coordinate to local
-	Vec3d earthEquToLocal(const Vec3d& v) const { return matEarthEquToLocal*v; }
-
+	Vec3d earthEquToAltAz(const Vec3d& v) const { return matEarthEquToAltAz*v; }
 	Vec3d earthEquToJ2000(const Vec3d& v) const { return matEarthEquToJ2000*v; }
 	Vec3d j2000ToEarthEqu(const Vec3d& v) const { return matJ2000ToEarthEqu*v; }
-	Vec3d j2000ToLocal(const Vec3d& v) const { return matJ2000ToLocal*v; }
+	Vec3d j2000ToAltAz(const Vec3d& v) const { return matJ2000ToAltAz*v; }
 	
-	//! Transform vector from heliocentric coordinate to local
-	Vec3d helioToLocal(const Vec3d& v) const { return matHelioToLocal*v; }
+	//! Transform vector from heliocentric ecliptic coordinate to local
+	Vec3d heliocentricEclipticToAltAz(const Vec3d& v) const { return matHeliocentricEclipticToAltAz*v; }
 
 	//! Transform vector from heliocentric coordinate to earth equatorial,
 	//! only needed in meteor.cpp
-	Vec3d helioToEarthEqu(const Vec3d& v) const { return matHelioToEarthEqu*v; }
+	Vec3d heliocentricEclipticToEarthEqu(const Vec3d& v) const { return matHeliocentricEclipticToEarthEqu*v; }
 
 	//! Transform vector from heliocentric coordinate to false equatorial : equatorial
 	//! coordinate but centered on the observer position (usefull for objects close to earth)
-	Vec3d helioToEarthPosEqu(const Vec3d& v) const { return matLocalToEarthEqu*matHelioToLocal*v; }
-
+	Vec3d heliocentricEclipticToEarthPosEqu(const Vec3d& v) const { return matAltAzToEarthEqu*matHeliocentricEclipticToAltAz*v; }
 
 	//! Return the modelview matrix for some coordinate systems
-	const Mat4d& getHelioToEyeMat(void) const {return matHelioToEye;}
+	const Mat4d& getHeliocentricEclipticToEyeMat(void) const {return matHeliocentricEclipticToEye;}
 	const Mat4d& getEarthEquToEyeMat(void) const {return matEarthEquToEye;}
-	const Mat4d& getLocalToEyeMat(void) const {return matLocalToEye;}
+	const Mat4d& getAltAzToEyeMat(void) const {return matAltAzToEye;}
 	const Mat4d& getJ2000ToEyeMat(void) const {return matJ2000ToEye;}
 
 	void setViewingMode(ViewingModeType viewMode);
@@ -241,19 +239,19 @@ public slots:
 	
 private:
 	// Matrices used for every coordinate transfo
-	Mat4d matHelioToLocal;    // Transform from Heliocentric to Observer local coordinate
-	Mat4d matLocalToHelio;    // Transform from Observer local coordinate to Heliocentric
-	Mat4d matLocalToEarthEqu; // Transform from Observer local coordinate to Earth Equatorial
-	Mat4d matEarthEquToLocal; // Transform from Observer local coordinate to Earth Equatorial
-	Mat4d matHelioToEarthEqu; // Transform from Heliocentric to earth equatorial coordinate
+	Mat4d matHeliocentricEclipticToAltAz;    // Transform from Heliocentric to Observer local coordinate
+	Mat4d matAltAzToHeliocentricEcliptic;    // Transform from Observer local coordinate to Heliocentric
+	Mat4d matAltAzToEarthEqu; // Transform from Observer local coordinate to Earth Equatorial
+	Mat4d matEarthEquToAltAz; // Transform from Observer local coordinate to Earth Equatorial
+	Mat4d matHeliocentricEclipticToEarthEqu; // Transform from Heliocentric to earth equatorial coordinate
 	Mat4d matEarthEquToJ2000;
 	Mat4d matJ2000ToEarthEqu;
-	Mat4d matJ2000ToLocal;
+	Mat4d matJ2000ToAltAz;
 	
-	Mat4d matLocalToEye;      // Modelview matrix for observer local drawing
+	Mat4d matAltAzToEye;      // Modelview matrix for observer local drawing
 	Mat4d matEarthEquToEye;   // Modelview matrix for geocentric equatorial drawing
 	Mat4d matJ2000ToEye;      // precessed version
-	Mat4d matHelioToEye;      // Modelview matrix for heliocentric equatorial drawing
+	Mat4d matHeliocentricEclipticToEye;      // Modelview matrix for heliocentric equatorial drawing
 
 	// Vision variables
 	// Viewing direction in local and equatorial coordinates

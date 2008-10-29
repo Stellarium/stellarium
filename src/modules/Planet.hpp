@@ -84,7 +84,6 @@ public:
 	friend class SolarSystem;
 	Planet(Planet *parent,
 	       const QString& englishName,
-	       int flagHalo,
 	       int flagLighting,
 	       double radius,
 	       double oblateness,
@@ -263,7 +262,6 @@ protected:
 	QString englishName;            // english planet name
 	QString nameI18;                // International translated name
 	QString texMapName;				// Texture file path
-	int flagHalo;                   // Set wether a little "star like" halo will be drawn
 	int flagLighting;               // Set wether light computation has to be proceed
 	RotationElements re;            // Rotation param
 	double radius;                  // Planet radius in UA

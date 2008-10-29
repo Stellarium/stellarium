@@ -336,14 +336,14 @@ void Projector::setClippingPlanes(double znear, double zfar)
 
 // Set the standard modelview matrices used for projection
 void Projector::setModelviewMatrices(	const Mat4d& _matEarthEquToEye,
-                                        const Mat4d& _matHelioToEye,
-                                        const Mat4d& _matLocalToEye,
+                                        const Mat4d& _matHeliocentricEclipticToEye,
+                                        const Mat4d& _matAltAzToEye,
                                         const Mat4d& _matJ2000ToEye)
 {
 	matEarthEquToEye = _matEarthEquToEye;
 	matJ2000ToEye = _matJ2000ToEye;
-	matHelioToEye = _matHelioToEye;
-	matLocalToEye = _matLocalToEye;
+	matHeliocentricEclipticToEye = _matHeliocentricEclipticToEye;
+	matAltAzToEye = _matAltAzToEye;
 }
 
 
@@ -355,10 +355,10 @@ void Projector::setCurrentFrame(FrameType frameType) const
 	switch (frameType)
 	{
 	case FrameLocal:
-		setCustomFrame(matLocalToEye);
+		setCustomFrame(matAltAzToEye);
 		break;
 	case FrameHelio:
-		setCustomFrame(matHelioToEye);
+		setCustomFrame(matHeliocentricEclipticToEye);
 		break;
 	case FrameEarthEqu:
 		setCustomFrame(matEarthEquToEye);

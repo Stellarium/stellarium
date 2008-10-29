@@ -537,7 +537,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 				/* could track as moves too, but would need to know if start was actually
 				   a zoomed in view on the object or an extraneous zoom out command
 				   if(move.localPos) {
-				   move.start=earthEquToLocal(selected.getObsEquatorialPos(this));
+				   move.start=earthEquToAltAz(selected.getObsEquatorialPos(this));
 				   } else {
 				   move.start=selected.getObsEquatorialPos(this);
 				   }
@@ -560,8 +560,8 @@ void MovementMgr::updateVisionVector(double deltaTime)
 		}
 		else
 		{
-			StelUtils::rectToSphe(&ra_aim, &de_aim, nav->earthEquToLocal(move.aim));
-			StelUtils::rectToSphe(&ra_start, &de_start, nav->earthEquToLocal(move.start));
+			StelUtils::rectToSphe(&ra_aim, &de_aim, nav->earthEquToAltAz(move.aim));
+			StelUtils::rectToSphe(&ra_start, &de_start, nav->earthEquToAltAz(move.start));
 		}
 		
 		// Trick to choose the good moving direction and never travel on a distance > PI
@@ -579,7 +579,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 		
 		Vec3d tmp;
 		StelUtils::spheToRect(ra_now, de_now, tmp);
-		nav->setEquVision(nav->localToEarthEqu(tmp));
+		nav->setEquVision(nav->altAzToEarthEqu(tmp));
 
 		move.coef+=move.speed*deltaTime*1000;
 		if (move.coef>=1.)
@@ -606,12 +606,12 @@ void MovementMgr::updateVisionVector(double deltaTime)
 			if (flagLockEquPos) // Equatorial vision vector locked
 			{
 				// Recalc local vision vector
-				nav->setLocalVision(nav->earthEquToLocal(nav->getEquVision()));
+				nav->setLocalVision(nav->earthEquToAltAz(nav->getEquVision()));
 			}
 			else // Local vision vector locked
 			{
 				// Recalc equatorial vision vector
-				nav->setEquVision(nav->localToEarthEqu(nav->getLocalVision()));
+				nav->setEquVision(nav->altAzToEarthEqu(nav->getLocalVision()));
 			}
 		}
 	}
@@ -644,14 +644,14 @@ void MovementMgr::panView(double deltaAz, double deltaAlt)
 		{
 			Vec3d tmp;
 			StelUtils::spheToRect(azVision, altVision, tmp);
-			nav->setLocalVision(nav->earthEquToLocal(tmp));
+			nav->setLocalVision(nav->earthEquToAltAz(tmp));
 		}
 		else
 		{
 			Vec3d tmp;
 			StelUtils::spheToRect(azVision, altVision, tmp);
 			// Calc the equatorial coordinate of the direction of vision wich was in Altazimuthal coordinate
-			nav->setEquVision(nav->localToEarthEqu(tmp));
+			nav->setEquVision(nav->altAzToEarthEqu(tmp));
 		}
 	}
 
