@@ -283,7 +283,7 @@ void LandscapeOldStyle::drawFog(ToneReproducer * eye, const Projector* prj, cons
 	fogTex->bind();
 	
 	const double vpos = tanMode ? radius*std::tan(fogAngleShift*M_PI/180.) : radius*std::sin(fogAngleShift*M_PI/180.);
-	prj->setCustomFrame(nav->getLocalToEyeMat() * Mat4d::translation(Vec3d(0.,0.,vpos)));
+	prj->setCustomFrame(nav->getAltAzToEyeMat() * Mat4d::translation(Vec3d(0.,0.,vpos)));
 	
 	const double height = tanMode ? radius*std::tan(fogAltAngle*M_PI/180.) : radius*std::sin(fogAltAngle*M_PI/180.);
 	prj->sCylinder(radius, height, 128, 1, 1);
@@ -356,7 +356,7 @@ void LandscapeOldStyle::drawGround(ToneReproducer * eye, const Projector* prj, c
 	if (!landFader.getInterstate()) return;
 	
 	const double vshift = tanMode ? radius*std::tan(groundAngleShift*M_PI/180.) : radius*std::sin(groundAngleShift*M_PI/180.);
-	Mat4d mat = nav->getLocalToEyeMat() * Mat4d::zrotation(groundAngleRotatez*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift));
+	Mat4d mat = nav->getAltAzToEyeMat() * Mat4d::zrotation(groundAngleRotatez*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift));
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
 	glColor4f(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 
@@ -438,7 +438,7 @@ void LandscapeFisheye::draw(ToneReproducer * eye, const Projector* prj, const Na
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	mapTex->bind();
-	prj->setCustomFrame(nav->getLocalToEyeMat() * Mat4d::zrotation(-angleRotatez));
+	prj->setCustomFrame(nav->getAltAzToEyeMat() * Mat4d::zrotation(-angleRotatez));
 	prj->sSphereMap(radius,40,20,texFov,1);
 
 	glDisable(GL_CULL_FACE);
@@ -512,7 +512,7 @@ void LandscapeSpherical::draw(ToneReproducer* eye, const Projector* prj, const N
 
 	// TODO: verify that this works correctly for custom projections
 	// seam is at East
-	prj->setCustomFrame(nav->getLocalToEyeMat() * Mat4d::zrotation(-angleRotatez));
+	prj->setCustomFrame(nav->getAltAzToEyeMat() * Mat4d::zrotation(-angleRotatez));
 	prj->sSphere(radius,1.0,40,20,1);
 
 	glDisable(GL_CULL_FACE);
