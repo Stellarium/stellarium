@@ -324,16 +324,18 @@ void rectToSphe(double *lng, double *lat, const Vec3f& v)
 
 double getDecAngle(const QString& str)
 {
-	QRegExp re1("^\\s*([\\+\\-])?\\s*(\\d+)\\s*[Dd\xBA]\\s*(\\d+)\\s*['Mm]\\s*(\\d+(\\.\\d+)?)\\s*[\"Ss]\\s*([NSEWnsew])?\\s*$");
-	QRegExp re2("^\\s*([\\+\\-])?\\s*(\\d+(\\.\\d+)?).?([NSEWnsew])\\s*$");
+	QRegExp re1("^\\s*([\\+\\-])?\\s*(\\d+)\\s*([hHDd\xBA])\\s*(\\d+)\\s*['Mm]\\s*(\\d+(\\.\\d+)?)\\s*[\"Ss]\\s*([NSEWnsew])?\\s*$"); // DMS/HMS
+	QRegExp re2("^\\s*([\\+\\-])?\\s*(\\d+(\\.\\d+)?).?([NSEWnsew])?\\s*$"); // Decimal
 
 	if (re1.exactMatch(str))
 	{
 		bool neg = (re1.capturedTexts().at(1) == "-");
 		double d = re1.capturedTexts().at(2).toDouble();
-		double m = re1.capturedTexts().at(3).toDouble();
-		double s = re1.capturedTexts().at(4).toDouble();
-		QString cardinal = re1.capturedTexts().at(6);
+		if (re1.capturedTexts().at(3).toUpper() == "H")
+			d *= 15;
+		double m = re1.capturedTexts().at(4).toDouble();
+		double s = re1.capturedTexts().at(5).toDouble();
+		QString cardinal = re1.capturedTexts().at(7);
 		double deg = d + (m/60) + (s/3600);
 		if (cardinal.toLower() == "s" || cardinal.toLower() == "w" || neg)
 			deg *= -1.;
@@ -351,7 +353,6 @@ double getDecAngle(const QString& str)
 
 	qDebug() << "getDecAngle failed to parse angle string:" << str;
 	return -0.0;
-
 }
 
 // Check if a number is a power of 2

@@ -38,6 +38,8 @@
 #include "SkyDrawer.hpp"
 #include "StarMgr.hpp"
 #include "Projector.hpp"
+#include "Location.hpp"
+#include "LocationMgr.hpp"
 
 #include <QFile>
 #include <QSet>
@@ -156,6 +158,41 @@ void StelMainScriptAPI::wait(double t)
 	MySleep::msleep(t*1000);
 }
 
+void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, double altitude, double duration, const QString& name, const QString& planet)
+{
+	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	Q_ASSERT(nav);
+	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	Q_ASSERT(ssmgr);
+
+	Location loc = nav->getCurrentLocation();
+	if (longitude < 180 || longitude > 180)
+		loc.longitude = longitude;
+	if (latitude < 180 || latitude > 180)
+		loc.latitude = latitude;
+	if (altitude < -1000)
+		loc.altitude = altitude;
+	if (ssmgr->searchByName(planet))
+		loc.planetName = planet;
+	loc.name = name;
+
+	nav->moveObserverTo(loc, duration);
+}
+
+void StelMainScriptAPI::setObserverLocation(const QString id, double duration)
+{
+	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	Q_ASSERT(nav);
+	Location loc = StelApp::getInstance().getLocationMgr().locationForSmallString(id);
+	// How best to test to see if the lookup of the name was a success?
+	// On failure, it returns Paris, but maybe we _want_ Paris.
+	// Ugly. -MNG
+	if (id!="Paris, France" && (loc.name=="Paris" && loc.country=="France"))
+		return;	// location find fail
+
+	nav->moveObserverTo(loc, duration);
+}
+
 void StelMainScriptAPI::debug(const QString& s)
 {
 	qDebug() << "script: " << s;
@@ -256,6 +293,36 @@ void StelMainScriptAPI::clear(const QString& state)
 	{
 		qWarning() << "WARNING clear(" << state << ") - state not known";
 	}
+}
+
+void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, float duration)
+{
+	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
+	Q_ASSERT(mvmgr);
+
+	StelApp::getInstance().getStelObjectMgr().unSelect();
+
+	Vec3d aim;
+	double dAlt = StelUtils::getDecAngle(alt); 
+	double dAzi = M_PI - StelUtils::getDecAngle(azi);
+
+	StelUtils::spheToRect(dAzi,dAlt,aim);
+	mvmgr->moveTo(aim, duration, true);
+}
+
+void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float duration)
+{
+	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
+	Q_ASSERT(mvmgr);
+
+	StelApp::getInstance().getStelObjectMgr().unSelect();
+
+	Vec3d aim;
+	double dRa = StelUtils::getDecAngle(ra); 
+	double dDec = StelUtils::getDecAngle(dec);
+
+	StelUtils::spheToRect(dRa,dDec,aim);
+	mvmgr->moveTo(aim, duration, false);
 }
 
 QtScriptMgr::QtScriptMgr(const QString& startupScript, QObject *parent) 
