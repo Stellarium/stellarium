@@ -75,6 +75,46 @@ public slots:
 	//! @param state the name of a preset state.
 	void clear(const QString& state="natural");
 
+	//! move the current viewing direction to some specified altitude and azimuth
+	//! angles may be specified in a format recognised by StelUtils::getDecAngle()
+	//! @param alt the altitude angle
+	//! @param azi the azimuth angle
+	//! @param duration the duration of the movement in seconds
+	void moveToAltAzi(const QString& alt, const QString& azi, float duration=1.);
+
+	//! move the current viewing direction to some specified right ascension and declination
+	//! angles may be specified in a format recognised by StelUtils::getDecAngle()
+	//! @param ra the right ascension angle
+	//! @param dec the declination angle
+	//! @param duration the duration of the movement in seconds
+	void moveToRaDec(const QString& ra, const QString& dec, float duration=1.);
+
+	//! Set the observer location
+	//! @param longitude the longitude in degrees. E is +ve.  
+	//!        values out of the range -180 .. 180 mean that
+	//!        the longitude will not be set
+	//! @param latitude the longitude in degrees. N is +ve.  
+	//!        values out of the range -180 .. 180 mean that
+	//!        the latitude will not be set
+	//! @param altitude the new altitude in meters.
+	//!        values less than -1000 mean the altitude will not
+	//!        be set.
+	//! @param duration the time for the transition from the 
+	//!        old to the new location.
+	//! @param name A name for the location (which will appear
+	//!        in the status bar.
+	//! @param planet the English name of the new planet.
+	//!        If the planet name is not known (e.g. ""), the
+	//!        planet will not be set.
+	void setObserverLocation(double longitude, double latitude, double altitude, double duration=1., const QString& name="", const QString& planet="");
+
+	//! Set the location by the name of the location.
+	//! @param id the location ID as it would be found in the database
+	//! of locations - do a search in the Location window to see what
+	//! where is.  e.g. "York, UnitedKingdom".
+	//! @param duration the number of seconds to take to move location.
+	void setObserverLocation(const QString id, double duration=1.);
+
 	//! print a debugging message to the console
 	void debug(const QString& s);
 

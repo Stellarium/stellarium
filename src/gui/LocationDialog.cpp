@@ -127,8 +127,12 @@ void LocationDialog::updateFromProgram()
 		ui->useAsDefaultLocationCheckBox->setEnabled(!b);
 	}
 	
-	if (isEditingNew==true)
-		return;
+	// removing this check and return... we might have the location changed
+	// by a script or plugin, and as such we should update the map whenever the
+	// location window is visible.
+	//if (isEditingNew==true)
+	//	return;
+
 	const QString& key1 = StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().getID();
 	const QString& key2 = locationFromFields().getID();
 	if (key1!=key2)

@@ -100,7 +100,7 @@ const Location LocationMgr::locationForSmallString(const QString& s) const
 	QMap<QString, Location>::const_iterator iter = locations.find(s);
 	if (iter==locations.end())
 	{
-		qWarning() << "Warning: location " << s << "is unknown, use Paris as default location.";
+		qWarning() << "Warning: location" << s << "is unknown";
 		return locations["Paris, France"];
 	}
 	else
