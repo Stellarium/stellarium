@@ -12,6 +12,19 @@ from skyTile import *
 
 TILE_SIZE=256
 
+def sphe2rect3d(lng, lat):
+	cosLat = math.cos(lat)
+	return [math.cos(lng) * cosLat, math.sin(lng) * cosLat, math.sin(lat)]
+
+def dot(v1, v2):
+	return v1[0]*v2[0]+v1[1]*v2[1]+v1[2]*v2[2]
+
+def lengthSquared(v):
+    return v[0]*v[0]+v[1]*v[1]+v[2]*v[2]
+
+def angularDist(v1, v2):
+	return math.acos(dot(v1,v2)/math.sqrt(lengthSquared(v1)*lengthSquared(v2)));
+
 def createTile(currentLevel, maxLevel, i, j, wcs, im, doImage):
 	if (currentLevel>=maxLevel):
 		return None
@@ -39,7 +52,7 @@ def createTile(currentLevel, maxLevel, i, j, wcs, im, doImage):
 	v11 = wcs.pix2wcs(box[2]+0.5,im.size[1]-box[1]+0.5)
 	t.skyConvexPolygons = [[ [v00[0],v00[1]], [v10[0],v10[1]], [v11[0],v11[1]], [v01[0],v01[1]] ]]
 	t.textureCoords = [[ [0,0], [1,0], [1,1], [0,1] ]]
-	t.minResolution = max(abs(v10[0]-v00[0])*math.cos(v00[1]*math.pi/180.), abs(v01[1]-v00[1]))/TILE_SIZE
+	t.minResolution = max( angularDist(sphe2rect3d(v10[0]*math.pi/180., v10[1]*math.pi/180.), sphe2rect3d(v00[0]*math.pi/180., v00[1]*math.pi/180.)), angularDist(sphe2rect3d(v01[0]*math.pi/180., v01[1]*math.pi/180.), sphe2rect3d(v00[0]*math.pi/180.,v00[1]*math.pi/180.)) )*180./math.pi/TILE_SIZE
 	
 	# Recursively creates the 4 sub-tiles
 	sub = createTile(currentLevel+1, maxLevel, i*2, j*2, wcs, im, doImage)
@@ -85,11 +98,9 @@ def main():
 	print "Will tesselate image (",im.size[0],"x",im.size[1],") in", nbTileX,'x',nbTileY,'tiles on', nbLevels, 'levels'
 	
 	# Create the master level 0 tile, which recursively creates the subtiles
-	masterTile = createTile(0, nbLevels, 0, 0, wcs, im, False)
+	# Set the last boolean to False if you just want to regenerate the json files
+	masterTile = createTile(0, nbLevels, 0, 0, wcs, im, True)
 	masterTile.maxBrightness = 13.
-	masterTile.credits = "ESO"
-	masterTile.infoUrl = ""
-	
 	masterTile.outputJSON(qCompress=True, maxLevelPerFile=3)
 	
 if __name__ == "__main__":
