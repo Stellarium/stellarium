@@ -126,7 +126,7 @@ Vec3f Nebula::getInfoColor(void) const
 
 double Nebula::getCloseViewFov(const Navigator*) const
 {
-	return angularSize * 4;
+	return angularSize>0 ? angularSize * 4 : 1;
 }
 						   
 void Nebula::drawHints(const StelCore* core, float maxMagHints)
