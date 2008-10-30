@@ -218,7 +218,7 @@ void Planet::setRotationElements(float _period, float _offset, double _epoch, fl
 
 Vec3d Planet::getObsJ2000Pos(const Navigator *nav) const 
 {
-	return matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos() - nav->getObserverHelioPos());
+	return Navigator::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos() - nav->getObserverHelioPos());
 }
 
 // Compute the position in the parent Planet coordinate system
@@ -363,9 +363,7 @@ void Planet::computeTransMatrix(double jd)
 	// not solar equator...
 	if (parent) 
 	{
-		rotLocalToParent = Mat4d::zrotation(re.ascendingNode
-		                      - re.precessionRate*(jd-re.epoch))
-		                      * Mat4d::xrotation(re.obliquity);
+		rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(jd-re.epoch)) * Mat4d::xrotation(re.obliquity);
 	}
 }
 
@@ -414,8 +412,7 @@ Vec3d Planet::getEclipticPos() const
 	return eclipticPos;
 }
 
-// Return the heliocentric ecliptical position
-// used only for earth shadow, lunar eclipse
+// Return the heliocentric ecliptical position (Vsop87)
 Vec3d Planet::getHeliocentricEclipticPos() const
 {
 	Vec3d pos = eclipticPos;

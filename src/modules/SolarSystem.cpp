@@ -406,7 +406,7 @@ void SolarSystem::loadPlanets()
 				const Vec3d OrbitAxis0( c_nod,       s_nod,        0.0);
 				const Vec3d OrbitAxis1(-s_nod*c_obl, c_nod*c_obl,s_obl);
 				const Vec3d OrbitPole(  s_nod*s_obl,-c_nod*s_obl,c_obl);
-				const Vec3d J2000Pole(matJ2000ToVsop87.multiplyWithoutTranslation(Vec3d(0,0,1)));
+				const Vec3d J2000Pole(Navigator::matJ2000ToVsop87.multiplyWithoutTranslation(Vec3d(0,0,1)));
 				Vec3d J2000NodeOrigin(J2000Pole^OrbitPole);
 				J2000NodeOrigin.normalize();
 				parent_rot_j2000_longitude = atan2(J2000NodeOrigin*OrbitAxis1,J2000NodeOrigin*OrbitAxis0);
@@ -511,7 +511,7 @@ void SolarSystem::loadPlanets()
                            const Vec3d OrbitAxis0( c_nod,       s_nod,        0.0);
                            const Vec3d OrbitAxis1(-s_nod*c_obl, c_nod*c_obl,s_obl);
                            const Vec3d OrbitPole(  s_nod*s_obl,-c_nod*s_obl,c_obl);
-                           const Vec3d J2000Pole(matJ2000ToVsop87.multiplyWithoutTranslation(Vec3d(0,0,1)));
+						   const Vec3d J2000Pole(Navigator::matJ2000ToVsop87.multiplyWithoutTranslation(Vec3d(0,0,1)));
                            Vec3d J2000NodeOrigin(J2000Pole^OrbitPole);
                            J2000NodeOrigin.normalize();
                            parent_rot_j2000_longitude = atan2(J2000NodeOrigin*OrbitAxis1,J2000NodeOrigin*OrbitAxis0);
@@ -664,7 +664,6 @@ void SolarSystem::loadPlanets()
 		if (secname=="sun") sun = p;
 		if (secname=="moon") moon = p;
 
-
 		double rotObliquity = pd.value(secname+"/rot_obliquity",0.).toDouble()*(M_PI/180.0);
 		double rotAscNode = pd.value(secname+"/rot_equator_ascending_node",0.).toDouble()*(M_PI/180.0);
 
@@ -674,13 +673,12 @@ void SolarSystem::loadPlanets()
 		double J2000NPoleRA = pd.value(secname+"/rot_pole_ra", 0.).toDouble()*M_PI/180.;
 		double J2000NPoleDE = pd.value(secname+"/rot_pole_de", 0.).toDouble()*M_PI/180.;
 
-		if(J2000NPoleRA || J2000NPoleDE) {
-			// qDebug() << "Using north pole data for " << englishName << endl;
-
+		if(J2000NPoleRA || J2000NPoleDE)
+		{
 			Vec3d J2000NPole;
 			StelUtils::spheToRect(J2000NPoleRA,J2000NPoleDE,J2000NPole);
 		  
-			Vec3d vsop87Pole(matJ2000ToVsop87.multiplyWithoutTranslation(J2000NPole));
+			Vec3d vsop87Pole(Navigator::matJ2000ToVsop87.multiplyWithoutTranslation(J2000NPole));
 		  
 			double ra, de;
 			StelUtils::rectToSphe(&ra, &de, vsop87Pole);
@@ -690,7 +688,6 @@ void SolarSystem::loadPlanets()
 		  
 			// qDebug() << "\tCalculated rotational obliquity: " << rotObliquity*180./M_PI << endl;
 			// qDebug() << "\tCalculated rotational ascending node: " << rotAscNode*180./M_PI << endl;
-
 		}
 
 		p->setRotationElements(

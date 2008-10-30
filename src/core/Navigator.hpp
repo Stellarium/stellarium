@@ -34,9 +34,6 @@
 #define JD_HOUR   0.041666666666666666666
 #define JD_DAY    1.
 
-extern const Mat4d matJ2000ToVsop87;
-extern const Mat4d matVsop87ToJ2000;
-
 class Observer;
 class StelObject;
 class LoadingBar;
@@ -147,6 +144,11 @@ public:
 	//! Update the modelview matrices
 	void updateModelViewMat(void);
 	
+	//! Rotation matrix from equatorial J2000 to ecliptic (Vsop87)
+	static const Mat4d matJ2000ToVsop87;
+	//! Rotation matrix from ecliptic (Vsop87) to equatorial J2000
+	static const Mat4d matVsop87ToJ2000;
+	
 public slots:
 	//! Toggle current mount mode between equatorial and altazimuthal
 	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquatorial); else setMountMode(MountAltAzimuthal);}
@@ -238,19 +240,19 @@ public slots:
 	
 private:
 	// Matrices used for every coordinate transfo
-	Mat4d matHeliocentricEclipticToAltAz;    // Transform from Heliocentric to Observer local coordinate
-	Mat4d matAltAzToHeliocentricEcliptic;    // Transform from Observer local coordinate to Heliocentric
-	Mat4d matAltAzToEarthEqu; // Transform from Observer local coordinate to Earth Equatorial
-	Mat4d matEarthEquToAltAz; // Transform from Observer local coordinate to Earth Equatorial
-	Mat4d matHeliocentricEclipticToEarthEqu; // Transform from Heliocentric to earth equatorial coordinate
+	Mat4d matHeliocentricEclipticToAltAz;	// Transform from heliocentric ecliptic (Vsop87) to observer-centric altazimuthal coordinate
+	Mat4d matAltAzToHeliocentricEcliptic;	// Transform from observer-centric altazimuthal coordinate to heliocentric ecliptic (Vsop87)
+	Mat4d matAltAzToEarthEqu;				// Transform from observer-centric altazimuthal coordinate to Earth Equatorial
+	Mat4d matEarthEquToAltAz;				// Transform from observer-centric altazimuthal coordinate to Earth Equatorial
+	Mat4d matHeliocentricEclipticToEarthEqu;// Transform from heliocentric ecliptic (Vsop87) to earth equatorial coordinate
 	Mat4d matEarthEquToJ2000;
 	Mat4d matJ2000ToEarthEqu;
 	Mat4d matJ2000ToAltAz;
 	
-	Mat4d matAltAzToEye;      // Modelview matrix for observer local drawing
-	Mat4d matEarthEquToEye;   // Modelview matrix for geocentric equatorial drawing
-	Mat4d matJ2000ToEye;      // precessed version
-	Mat4d matHeliocentricEclipticToEye;      // Modelview matrix for heliocentric equatorial drawing
+	Mat4d matAltAzToEye;					// Modelview matrix for observer-centric altazimuthal drawing
+	Mat4d matEarthEquToEye;					// Modelview matrix for observer-centric equatorial drawing
+	Mat4d matJ2000ToEye;					// Modelview matrix for observer-centric J2000 equatorial drawing
+	Mat4d matHeliocentricEclipticToEye;		// Modelview matrix for heliocentric ecliptic (Vsop87) drawing
 
 	// Vision variables
 	// Viewing direction in altazimuthal and equatorial coordinates
