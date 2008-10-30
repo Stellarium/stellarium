@@ -20,7 +20,6 @@
 #ifndef _PLANET_HPP_
 #define _PLANET_HPP_
 
-#include <list>
 #include <QString>
 
 #include "StelObject.hpp"
@@ -44,8 +43,8 @@ class SFont;
 
 struct TrailPoint
 {
-  Vec3d point;
-  double date;
+	Vec3d point;
+	double date;
 };
 
 
@@ -185,7 +184,7 @@ public:
 	void setSphereScale(float s) {sphereScale = s;}
 	float getSphereScale(void) const {return sphereScale;}
 
-	const Planet *getParent(void) const {return parent;}
+	const Planet* getParent(void) const {return parent;}
 
 	static void setFont(SFont* f) {planetNameFont = f;}
 	
@@ -225,9 +224,8 @@ public:
 	///// Orbit related code
 	// Should move to an OrbitPath class which works on a SolarSystemObject, not a Planet
 	void setFlagOrbits(bool b){orbitFader = b;}
-	bool getFlagOrbits(void) const {return orbitFader;}	
-	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
-	static const Vec3f& getOrbitColor() {return orbitColor;}
+	bool getFlagOrbits(void) const {return orbitFader;}
+	LinearFader orbitFader;
 	// draw orbital path of Planet
 	void drawOrbit(const Navigator * nav, const Projector* prj);
 	Vec3d orbit[ORBIT_SEGMENTS];   // store heliocentric coordinates for drawing the orbit
@@ -238,8 +236,10 @@ public:
 	bool closeOrbit;               // whether to connect the beginning of the orbit line to
 	                               // the end: good for elliptical orbits, bad for parabolic
 	                               // and hyperbolic orbits
+	
 	static Vec3f orbitColor;
-	LinearFader orbitFader;
+	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
+	static const Vec3f& getOrbitColor() {return orbitColor;}
 	
 protected:
 	static STextureSP texEarthShadow;     // for lunar eclipses
@@ -284,16 +284,16 @@ protected:
 	posFuncType coordFunc;
 	OsulatingFunctType *const osculatingFunc;
 	const Planet *parent;           // Planet parent i.e. sun for earth
-	std::list<Planet *> satellites;      // satellites of the Planet
-	static SFont* planetNameFont; // Font for names
-	static Vec3f labelColor;
-	static STextureSP hintCircleTex;
+	QList<Planet*> satellites;      // satellites of the Planet
 	LinearFader hintFader;
 	LinearFader labelsFader;        // Store the current state of the label for this planet
 	bool flagLabels;                // Define whether labels should be displayed
-	bool hidden;                    // useful for fake planets used as observation 
-	                                // positions - not drawn or labeled
+	bool hidden;                    // useful for fake planets used as observation positions - not drawn or labeled
 	bool atmosphere;                // Does the planet have an atmosphere?
+	
+	static SFont* planetNameFont; // Font for names
+	static Vec3f labelColor;
+	static STextureSP hintCircleTex;
 };
 
 #endif // _PLANET_HPP_
