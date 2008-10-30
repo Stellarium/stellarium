@@ -9,6 +9,7 @@ core.clear("natural");
 core.setObserverLocation("York, UnitedKingdom");
 core.setTimeSpeed(.00001157407407407407); // 1 x time rate
 core.setDate("2008:10:30T21:00:00");
+core.moveToAltAzi(30, 90);
 MovementMgr.zoomTo(70, 2);
 core.wait(2.5);
 
@@ -42,7 +43,7 @@ LabelMgr.setLabelShow(id, true);
 core.wait(1);
 
 commentary("The label above is connected to " + myOb);
-core.setTimeSpeed(.00001157407407407407 * 100);
+core.setTimeSpeed(.00001157407407407407 * 150);
 commentary("Watch as the time advances");
 commentary("The label is stuck to the object");
 core.setTimeSpeed(.00001157407407407407);
