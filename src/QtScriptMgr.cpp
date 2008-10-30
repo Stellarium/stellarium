@@ -57,6 +57,17 @@ class StelScriptThread : public QThread
 	protected:
 		void run()
 		{
+			// For startup scripts, the gui object might not 
+			// have completed init when we run. Wait for that.
+			StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
+			while(!gui)
+			{
+				msleep(200);
+				gui = (StelGui*)GETSTELMODULE("StelGui");
+			}
+			while(!gui->initComplete())
+				msleep(200);
+
 			engine->evaluate(scriptCode);
 		}
     
