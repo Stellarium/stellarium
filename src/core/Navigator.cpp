@@ -34,6 +34,11 @@
 #include <QDateTime>
 #include <QDebug>
 
+// Init statics transfo matrices
+// See vsop87.doc:
+const Mat4d Navigator::matJ2000ToVsop87(Mat4d::xrotation(-23.4392803055555555556*(M_PI/180)) * Mat4d::zrotation(0.0000275*(M_PI/180)));
+const Mat4d Navigator::matVsop87ToJ2000(matJ2000ToVsop87.transpose());
+
 ////////////////////////////////////////////////////////////////////////////////
 Navigator::Navigator() : timeSpeed(JD_SECOND), JDay(0.), position(NULL)
 {
@@ -298,11 +303,6 @@ void Navigator::updateTime(double deltaTime)
 
 ////////////////////////////////////////////////////////////////////////////////
 // The non optimized (more clear version is available on the CVS : before date 25/07/2003)
-// see vsop87.doc:
-
-const Mat4d matJ2000ToVsop87(Mat4d::xrotation(-23.4392803055555555556*(M_PI/180)) * Mat4d::zrotation(0.0000275*(M_PI/180)));
-const Mat4d matVsop87ToJ2000(matJ2000ToVsop87.transpose());
-
 void Navigator::updateTransformMatrices(void)
 {
 	matAltAzToEarthEqu = position->getRotAltAzToEquatorial(JDay);
