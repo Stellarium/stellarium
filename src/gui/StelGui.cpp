@@ -93,6 +93,7 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 }
 
 StelGui::StelGui()
+	: initDone(false)
 {
 	// QPixmapCache::setCacheLimit(30000); ?
 	
@@ -544,6 +545,7 @@ void StelGui::init()
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
 	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());
 
+	initDone = true;
 }
 
 //! Reload the current Qt Style Sheet (Debug only)

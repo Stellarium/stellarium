@@ -109,6 +109,12 @@ public:
 	//! Set whether a pointer is to be drawn over selected object.
 	void setFlagSelectedObjectPointer(bool b) { objectPointerVisibility = b; }
 	
+	//! Find any kind of object by its translated name.
+	StelObjectP searchByNameI18n(const QString &name) const;
+
+	//! Find any kind of object by its standard program name.
+	StelObjectP searchByName(const QString &name) const;
+
 private:
 	// The list of StelObjectModule that are referenced in Stellarium
 	QList<StelObjectModule*> objectsModule;	
@@ -116,12 +122,6 @@ private:
 	QList<StelObjectP> lastSelectedObjects;
 	// Should selected object pointer be drawn
 	bool objectPointerVisibility;	
-
-	//! Find any kind of object by its translated name.
-	StelObjectP searchByNameI18n(const QString &name) const;
-
-	//! Find any kind of object by its standard program name.
-	StelObjectP searchByName(const QString &name) const;
 
 	//! Find in a "clever" way an object from its equatorial position.
 	StelObjectP cleverFind(const StelCore* core, const Vec3d& pos) const;
