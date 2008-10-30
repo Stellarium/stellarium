@@ -32,6 +32,7 @@
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
 #include "MeteorMgr.hpp"
+#include "LabelMgr.hpp"
 #include "StarMgr.hpp"
 #include "SolarSystem.hpp"
 #include "StelIniParser.hpp"
@@ -322,6 +323,11 @@ void StelApp::init()
 	MeteorMgr* meteors = new MeteorMgr(10, 60);
 	meteors->init();
 	getModuleMgr().registerModule(meteors);
+
+	// User labels
+	LabelMgr* skyLabels = new LabelMgr();
+	skyLabels->init();
+	getModuleMgr().registerModule(skyLabels);
 
 // ugly fix by Johannes: call skyCultureMgr->init twice so that
 // star names are loaded again

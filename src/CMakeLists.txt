@@ -170,6 +170,8 @@ SET(stellarium_lib_SRCS
 	modules/Skybright.hpp
 	modules/Skylight.cpp
 	modules/Skylight.hpp
+	modules/LabelMgr.hpp
+	modules/LabelMgr.cpp
 	modules/SolarSystem.cpp
 	modules/SolarSystem.hpp
 	modules/Solve.hpp
@@ -276,6 +278,7 @@ SET(stellarium_MOC_HDRS
 	modules/SolarSystem.hpp
 	modules/MeteorMgr.hpp
 	modules/StarMgr.hpp
+	modules/LabelMgr.hpp
 	gui/StelGui.hpp
 	gui/StelGuiItems.hpp
 	gui/HelpDialog.hpp

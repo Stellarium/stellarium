@@ -1,0 +1,110 @@
+//
+// Name: Labels Demo
+// Description: Example script to show how to use LabelMgr
+//
+
+// set default view, location and date.
+LabelMgr.deleteAllLabels();
+core.clear("natural");
+core.setObserverLocation("York, UnitedKingdom");
+core.setTimeSpeed(.00001157407407407407); // 1 x time rate
+core.setDate("2008:10:30T21:00:00");
+MovementMgr.zoomTo(70, 2);
+core.wait(2.5);
+
+// When you create a label, the return value is an ID of a label which 
+// is subsequently used to refer to that label when calling functions
+// in the label manager (e.g. turning the label on and off)
+
+// This function prints a line of text at a fixed place on the screen
+// pauses for a few seconds and then hides the text.  I will use this
+// for providing information to the user.
+//
+// The label is created in an "off" state, and then faded in and out.
+// The label is deleted after it has been displayed.
+function commentary(text)
+{
+	var id = LabelMgr.labelScreen(text, 100, 100, false, 20, "#aaaaaa");
+	LabelMgr.setLabelShow(id, true);
+	core.wait(2);
+	LabelMgr.setLabelShow(id, false);
+	core.wait(1);
+	LabelMgr.deleteLabel(id);
+}
+
+commentary("This script is a test of LabelMgr");
+commentary("Labels can be fixed to screen x,y values (like this label)...");
+commentary("Or they can be attached to a named object...");
+
+var myOb = "HP 21421"; // Aldebaran
+var id = LabelMgr.labelObject("A bright star!" , myOb, false, 16, "#aaaaaa", "S", 10);
+LabelMgr.setLabelShow(id, true);
+core.wait(1);
+
+commentary("The label above is connected to " + myOb);
+core.setTimeSpeed(.00001157407407407407 * 100);
+commentary("Watch as the time advances");
+commentary("The label is stuck to the object");
+core.setTimeSpeed(.00001157407407407407);
+LabelMgr.deleteLabel(id);
+
+commentary("You can display object labels in different positions...")
+commentary("Use cardinal point names to choose");
+
+var sides  = new Array("N", "NE", "E", "SE", "S", "SW", "W", "NW");
+var position_ids = new Array();
+
+// create labels and turn them on with a short staggering.
+for (i=0; i<sides.length; i++)
+{
+	position_ids[i] = LabelMgr.labelObject(sides[i], myOb, false, 16, "#aaaaaa", sides[i], 20);
+	core.wait(0.4);
+	LabelMgr.setLabelShow(position_ids[i], true);
+}
+
+core.wait(3);
+
+// turn off the labels in a staggered manner.
+for (i=0; i<position_ids.length; i++)
+{
+	LabelMgr.setLabelShow(position_ids[i], false);
+	core.wait(0.4);
+}
+
+commentary("You can also use different styles and distances from the object");
+
+id1 = LabelMgr.labelObject("Without a line to the object", myOb, false, 16, "#aaaaaa", "NW", 30, "TextOnly");
+id2 = LabelMgr.labelObject("With a line to the object", myOb, false, 16, "#aaaaaa", "SE", 150, "Line");
+LabelMgr.setLabelShow(id1, true);
+LabelMgr.setLabelShow(id2, true);
+core.wait(4);
+LabelMgr.setLabelShow(id1, false);
+LabelMgr.setLabelShow(id2, false);
+
+commentary("Finally, you can use different colors");
+
+var colors = new Array("#ff0000", "#ff3300", "#ff6600", "#ff9900", "#ffcc00", "#ffff00", "#ffff33", "#ffff99");
+var color_ids = new Array();
+
+for(i=0; i<colors.length; i++)
+{
+	color_ids[i] = LabelMgr.labelScreen("This label uses color " + colors[i],
+	                                    100, 200 + (50 * i), false, 20, colors[i]);
+	LabelMgr.setLabelShow(color_ids[i], true);
+	core.wait(0.4);
+}
+
+core.wait(2);
+
+// turn off the labels in a staggered manner.
+for (i=0; i<color_ids.length; i++)
+{
+	LabelMgr.setLabelShow(color_ids[i], false);
+	core.wait(0.4);
+}
+
+commentary("OK, hope you enjoyed this script.  Bye!");
+
+// delete any labels we didn't already cleaned up.
+LabelMgr.deleteAllLabels();
+

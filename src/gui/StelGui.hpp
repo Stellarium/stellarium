@@ -116,6 +116,9 @@ public:
 	//! Get whether the button toggling nebulae background is visible
 	bool getFlagShowNebulaBackgroundButton() {return flagShowNebulaBackgroundButton;}
 
+	//! returns true if the gui has complted init process.
+	bool initComplete(void) {return initDone;}
+
 public slots:
 	//! Define whether the buttons toggling image flip should be visible
 	void setFlagShowFlipButtons(bool b);
@@ -194,6 +197,8 @@ private:
 	
 	bool flagShowNebulaBackgroundButton;
 	class StelButton* btShowNebulaeBackground;
+
+	bool initDone;
 };
 
 #endif // _STELGUI_HPP_
