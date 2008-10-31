@@ -39,6 +39,7 @@
 #include "StarMgr.hpp"
 #include "Projector.hpp"
 #include "Location.hpp"
+#include "Planet.hpp"
 #include "LocationMgr.hpp"
 
 #include <QFile>
@@ -128,16 +129,7 @@ double StelMainScriptAPI::getJDay(void) const
 
 void StelMainScriptAPI::setDate(const QString& dt, const QString& spec)
 {
-	QDateTime qdt;
-	double JD;
-	qdt = QDateTime::fromString(dt, Qt::ISODate);
-
-	if (spec=="local")
-		JD = StelUtils::qDateTimeToJd(qdt.toUTC());
-	else
-		JD = StelUtils::qDateTimeToJd(qdt);
-		
-	StelApp::getInstance().getCore()->getNavigation()->setJDay(JD);
+	StelApp::getInstance().getCore()->getNavigation()->setJDay(jdFromDateString(dt, spec));
 }
 
 //! Set time speed in JDay/sec
@@ -167,6 +159,32 @@ class MySleep : public QThread
 void StelMainScriptAPI::wait(double t)
 {
 	MySleep::msleep(t*1000);
+}
+
+void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
+{
+	double JD = jdFromDateString(dt, spec);
+	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	Q_ASSERT(nav);
+	double timeSpeed = nav->getTimeSpeed();
+
+	qDebug() << "StelMainScriptAPI::waitFor starting to wait for" << StelUtils::jdToIsoString(JD) << "(time is" << StelUtils::jdToIsoString(nav->getJDay()) << ")";
+	if (timeSpeed == 0.)
+	{
+		qWarning() << "waitFor called with no time passing - would be infinite. not waiting!";
+		return;
+	}
+	else if (timeSpeed > 0)
+	{
+		while(nav->getJDay() < JD)
+			MySleep::msleep(50);
+	}
+	else
+	{
+		while(nav->getJDay() > JD)
+			MySleep::msleep(50);
+	}
+	qDebug() << "StelMainScriptAPI::waitFor done waiting for" << StelUtils::jdToIsoString(JD) << "(time is" << StelUtils::jdToIsoString(nav->getJDay()) << ")";
 }
 
 void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, double altitude, double duration, const QString& name, const QString& planet)
@@ -207,6 +225,75 @@ void StelMainScriptAPI::setObserverLocation(const QString id, double duration)
 void StelMainScriptAPI::debug(const QString& s)
 {
 	qDebug() << "script: " << s;
+}
+
+double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)
+{
+	QDateTime qdt;
+	double JD;
+
+	// 2008-03-24T13:21:01
+	QRegExp isoRe("^\\d{4}[:\\-]\\d\\d[:\\-]\\d\\dT\\d\\d:\\d\\d:\\d\\d$");
+	QRegExp nowRe("^(now)?(\\s*([+\\-])\\s*(\\d+(\\.\\d+)?)\\s*(second|seconds|minute|minutes|hour|hours|day|days|week|weeks))(\\s+(sidereal)?)?");
+
+	if (dt == "now")
+		return StelUtils::getJDFromSystem();
+	else if (isoRe.exactMatch(dt))
+	{
+		qdt = QDateTime::fromString(dt, Qt::ISODate);
+
+		if (spec=="local")
+			JD = StelUtils::qDateTimeToJd(qdt.toUTC());
+		else
+			JD = StelUtils::qDateTimeToJd(qdt);
+			
+		return JD;
+	}
+	else if (nowRe.exactMatch(dt))
+	{
+		double delta;
+		double unit;
+		double dayLength = 1.0;
+
+		if (nowRe.capturedTexts().at(1)=="now")
+			JD = StelUtils::getJDFromSystem();
+		else
+			JD = StelApp::getInstance().getCore()->getNavigation()->getJDay();
+
+		if (nowRe.capturedTexts().at(8) == "sidereal")
+			dayLength = StelApp::getInstance().getCore()->getNavigation()->getHomePlanet()->getSiderealDay();
+
+		QString unitString = nowRe.capturedTexts().at(6);
+		if (unitString == "seconds" || unitString == "second")
+			unit = dayLength / (24*3600.);
+		else if (unitString == "minutes" || unitString == "minute")
+			unit = dayLength / (24*60.);
+		else if (unitString == "hours" || unitString == "hour")
+			unit = dayLength / (24.);
+		else if (unitString == "days" || unitString == "day")
+			unit = dayLength;
+		else if (unitString == "weeks" || unitString == "week")
+			unit = dayLength * 7.;
+		else
+		{
+			qWarning() << "StelMainScriptAPI::setDate - unknown time unit:" << nowRe.capturedTexts().at(4);
+			unit = 0;
+		}
+
+		delta = nowRe.capturedTexts().at(4).toDouble();
+
+		if (nowRe.capturedTexts().at(3) == "+")
+			JD += (unit * delta);
+		else if (nowRe.capturedTexts().at(3) == "-")
+			JD -= (unit * delta);
+
+		return JD;
+	}
+	else
+	{
+		qWarning() << "StelMainScriptAPI::jdFromDateString error - date string not recognised, returning \"now\"" << dt;
+		return StelUtils::getJDFromSystem();
+	}
 }
 
 void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
@@ -533,7 +620,7 @@ void QtScriptMgr::scriptEnded()
 	thread=NULL;
 	if (engine.hasUncaughtException())
 	{
-		qWarning() << "Error while running script: " << engine.uncaughtException().toString() << endl;
+		qWarning() << "Script error: " << engine.uncaughtException().toString() << "@ line" << engine.uncaughtExceptionLineNumber();
 	}
 	emit(scriptStopped());
 }
