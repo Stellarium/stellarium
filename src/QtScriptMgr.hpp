@@ -47,8 +47,22 @@ public slots:
 	double getJDay(void) const;
 
 	//! set the date in ISO format, e.g. "2008-03-24T13:21:01"
-	//! @param dt the date string to use
-	//! @param spec "local" or "utc"
+	//! @param dt the date string to use.  Formats:
+	//! - ISO, e.g. "2008-03-24T13:21:01"
+	//! - "now" (set sim time to real time)
+	//! - relative, e.g. "+ 4 days", "-2 weeks".  can use these
+	//!   units: seconds, minutes, hours, days, weeks, months, years.
+	//!   You may also append " sidereal" to use sidereal days and so on.
+	//!   You can also use "now" at the start.  For example:
+	//!   "now + 3 hours sidereal"
+	//!   Note: you must use the plural all the time, even when the number 
+	//!   of the unit is 1.  i.e. use "+ 1 days" not "+1 day".
+	//! Note: when sidereal time is used, the length of time for
+	//! each unit is dependent on the current planet.  By contrast
+	//! when sidereal timeis not specified (i.e. solar time is used)
+	//! the value is conventional - i.e. 1 day means 1 Earth Solar day.
+	//! @param spec "local" or "utc" - only has an effect when 
+	//! the ISO date type is used.
 	void setDate(const QString& dt, const QString& spec="utc");
 		
 	//! Set time speed in JDay/sec
@@ -60,6 +74,16 @@ public slots:
 	
 	//! Pauses the script for t seconds
 	void wait(double t);
+
+	//! Waits until a specified simulation date/time.  This function
+	//! will take into account the rate (and direction) in which simulation
+	//! time is passing. e.g. if a future date is specified and the 
+	//! time is moving backwards, the function will return immediately.
+	//! If the time rate is 0, the function will not wait.  This is to 
+	//! prevent infinite wait time.
+	//! @param dt the date string to use
+	//! @param spec "local" or "utc"
+	void waitFor(const QString& dt, const QString& spec="utc");
 	
 	//! Select an object by name
 	//! @param name the name of the object to select (english)
@@ -117,6 +141,12 @@ public slots:
 
 	//! print a debugging message to the console
 	void debug(const QString& s);
+
+private:
+	//! For use in setDate and waitFor
+	//! For parameter descriptions see setDate().
+	//! @returns Julian day.
+	double jdFromDateString(const QString& dt, const QString& spec);
 
 };
 		
