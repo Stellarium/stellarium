@@ -26,8 +26,6 @@
 #include "GridObject.hpp"
 
 class Navigator;
-class Projector;
-class STexture;
 class StelCore;
 
 // Declare the 2 functions needed by boost intrusive pointers
@@ -73,14 +71,6 @@ public:
 	//! Default implementation of the GridObject method
 	//! Calling this method on some object will cause an error if they need a valid Navigator instance to compute their position
 	virtual Vec3d getPositionForGrid() const {return getObsJ2000Pos(NULL);}
-	
-	//! Increment the reference counts if needed.
-	//! The default behaviour is to do nothing, thus making StelObjectP behave like normal pointers.
-	virtual void retain(void) {;}
-	
-	//! Decrement the reference counts if needed.
-	//! The default behaviour is to do nothing, thus making StelObjectP behave like normal pointers.
-	virtual void release(void) {;}
 	
 	//! Write I18n information about the object in QString.
 	//! @param core the StelCore object to use
@@ -142,11 +132,22 @@ public:
 	float getOnScreenSize(const StelCore* core) const;
 
 protected:
+	friend void intrusive_ptr_add_ref(StelObject* p);
+	friend void intrusive_ptr_release(StelObject* p);
+	
 	//! Format the positional info string contain J2000/of date/altaz/hour angle positions for the object
 	QString getPositionInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	
 	//! Apply post processing on the info string
 	void postProcessInfoString(QString& str, const InfoStringGroup& flags) const;
+	
+	//! Increment the reference counts if needed.
+	//! The default behaviour is to do nothing, thus making StelObjectP behave like normal pointers.
+	virtual void retain(void) {;}
+	
+	//! Decrement the reference counts if needed.
+	//! The default behaviour is to do nothing, thus making StelObjectP behave like normal pointers.
+	virtual void release(void) {;}
 };
 
 #endif // _STELOBJECT_HPP_
