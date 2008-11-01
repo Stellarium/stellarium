@@ -316,6 +316,11 @@ public:
 	//! @param poly The polygon to draw
 	void drawPolygon(const StelGeom::Polygon& poly) const;
 	
+	//! Draw a small circle arc starting from point start, rotating around north pole rotAxis and of the given length in radian
+	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
+	//! screen 2d position, direction of the currently drawn arc, whether it enters or leave the viewport
+	void drawSmallCircleArc(const Vec3d& start, const Vec3d& rotAxis, double length, void (*viewportEdgeIntersectCallback)(double angleVal, const Vec3d& screenPos, const Vec3d& direction, bool enters)=NULL);
+	
 	//! Draw a parallel arc in the current frame.  The arc start from point start
 	//! going in the positive longitude direction and with the given length in radian.
 	//! @param start the starting position of the parallel in the current frame.
@@ -399,18 +404,6 @@ public:
 	//! Draw a fisheye texture in a sphere.
 	void sSphereMap(GLdouble radius, GLint slices, GLint stacks,
 	                 double textureFov = 2.*M_PI, int orientInside = 0) const;
-	
-	///////////////////////////////////////////////////////////////////////////
-	// Methods for linear mode
-	///////////////////////////////////////////////////////////////////////////
-	
-	//! Reimplementation of gluCylinder for use in linear mode.
-	void sCylinderLinear(GLdouble radius, GLdouble height, GLint slices, GLint stacks, 
-			     int orientInside = 0) const;
-	
-	//! Reimplementation of gluSphere for use in linear mode.
-	void sSphereLinear(GLdouble radius, GLdouble oneMinusOblateness, GLint slices, 
-			   GLint stacks, int orientInside = 0) const;
 
 public slots:
 	//! Set the flag with decides whether to arrage labels so that

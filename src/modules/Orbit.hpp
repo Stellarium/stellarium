@@ -14,8 +14,6 @@
 
 #include "vecmath.h"
 
-#include "callbacks.hpp"
-
 class OrbitSampleProc;
 
 class Orbit
