@@ -173,15 +173,15 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	fogTexCoord.texCoords[2] = c;
 	fogTexCoord.texCoords[3] = d;
 
-	fogAltAngle          = landscapeIni.value("landscape/fog_alt_angle", 0.).toDouble();
+	fogAltAngle        = landscapeIni.value("landscape/fog_alt_angle", 0.).toDouble();
 	fogAngleShift      = landscapeIni.value("landscape/fog_angle_shift", 0.).toDouble();
 	decorAltAngle      = landscapeIni.value("landscape/decor_alt_angle", 0.).toDouble();
 	decorAngleShift    = landscapeIni.value("landscape/decor_angle_shift", 0.).toDouble();
-	decorAngleRotatez  = landscapeIni.value("landscape/decor_angle_rotatez", 0.).toDouble();
+	angleRotateZ       = landscapeIni.value("landscape/decor_angle_rotatez", 0.).toDouble();
 	groundAngleShift   = landscapeIni.value("landscape/ground_angle_shift", 0.).toDouble();
-	groundAngleRotatez = landscapeIni.value("landscape/ground_angle_rotatez", 0.).toDouble();
-	drawGroundFirst      = landscapeIni.value("landscape/draw_ground_first", 0).toInt();
-	tanMode              = landscapeIni.value("landscape/tan_mode", false).toBool();
+	groundAngleRotateZ = landscapeIni.value("landscape/ground_angle_rotatez", 0.).toDouble();
+	drawGroundFirst    = landscapeIni.value("landscape/draw_ground_first", 0).toInt();
+	tanMode            = landscapeIni.value("landscape/tan_mode", false).toBool();
 }
 
 
@@ -248,14 +248,14 @@ void LandscapeOldStyle::create(bool _fullpath, QMap<QString, QString> param)
 	fogTexCoord.texCoords[2] = c;
 	fogTexCoord.texCoords[3] = d;
 
-	fogAltAngle = param["fog_alt_angle"].toDouble();
-	fogAngleShift = param["fog_angle_shift"].toDouble();
-	decorAltAngle = param["decor_alt_angle"].toDouble();
-	decorAngleShift = param["decor_angle_shift"].toDouble();
-	decorAngleRotatez = param["decor_angle_rotatez"].toDouble();
-	groundAngleShift = param["ground_angle_shift"].toDouble();
-	groundAngleRotatez = param["ground_angle_rotatez"].toDouble();
-	drawGroundFirst = param["draw_ground_first"].toInt();
+	fogAltAngle        = param["fog_alt_angle"].toDouble();
+	fogAngleShift      = param["fog_angle_shift"].toDouble();
+	decorAltAngle      = param["decor_alt_angle"].toDouble();
+	decorAngleShift    = param["decor_angle_shift"].toDouble();
+	angleRotateZ       = param["decor_angle_rotatez"].toDouble();
+	groundAngleShift   = param["ground_angle_shift"].toDouble();
+	groundAngleRotateZ = param["ground_angle_rotatez"].toDouble();
+	drawGroundFirst    = param["draw_ground_first"].toInt();
 }
 
 void LandscapeOldStyle::draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav)
@@ -316,8 +316,8 @@ void LandscapeOldStyle::drawDecor(ToneReproducer * eye, const Projector* prj, co
 	const double alpha = 2.0*M_PI/(nbDecorRepeat*nbSide*slices_per_side);
 	const double ca = cos(alpha);
 	const double sa = sin(alpha);
-	double y0 = radius*cos(decorAngleRotatez*M_PI/180.0);
-	double x0 = radius*sin(decorAngleRotatez*M_PI/180.0);
+	double y0 = radius*cos(angleRotateZ+angleRotateZOffset*M_PI/180.0);
+	double x0 = radius*sin(angleRotateZ+angleRotateZOffset*M_PI/180.0);
 	for (int n=0;n<nbDecorRepeat;n++) for (int i=0;i<nbSide;i++) {
 		sides[i].tex->bind();
 		double tx0 = sides[i].texCoords[0];
@@ -356,7 +356,7 @@ void LandscapeOldStyle::drawGround(ToneReproducer * eye, const Projector* prj, c
 	if (!landFader.getInterstate()) return;
 	
 	const double vshift = tanMode ? radius*std::tan(groundAngleShift*M_PI/180.) : radius*std::sin(groundAngleShift*M_PI/180.);
-	Mat4d mat = nav->getAltAzToEyeMat() * Mat4d::zrotation(groundAngleRotatez*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift));
+	Mat4d mat = nav->getAltAzToEyeMat() * Mat4d::zrotation(groundAngleRotateZ-angleRotateZOffset*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift));
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
 	glColor4f(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 
@@ -412,7 +412,7 @@ void LandscapeFisheye::load(const QSettings& landscapeIni, const QString& landsc
 
 // create a fisheye landscape from basic parameters (no ini file needed)
 void LandscapeFisheye::create(const QString _name, bool _fullpath, const QString& _maptex,
-	                          double _texturefov, double _angleRotatez)
+	                          double _texturefov, double _angleRotateZ)
 {
 	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	validLandscape = 1;  // assume ok...
@@ -420,7 +420,7 @@ void LandscapeFisheye::create(const QString _name, bool _fullpath, const QString
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex);
 	texFov = _texturefov*M_PI/180.;
-	angleRotatez = _angleRotatez*M_PI/180.;
+	angleRotateZ = _angleRotateZ*M_PI/180.;
 }
 
 
@@ -438,7 +438,7 @@ void LandscapeFisheye::draw(ToneReproducer * eye, const Projector* prj, const Na
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	mapTex->bind();
-	prj->setCustomFrame(nav->getAltAzToEyeMat() * Mat4d::zrotation(-angleRotatez));
+	prj->setCustomFrame(nav->getAltAzToEyeMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
 	prj->sSphereMap(radius,40,20,texFov,1);
 
 	glDisable(GL_CULL_FACE);
@@ -475,14 +475,14 @@ void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& land
 
 // create a spherical landscape from basic parameters (no ini file needed)
 void LandscapeSpherical::create(const QString _name, bool _fullpath, const QString& _maptex,
-	                            double _angleRotatez)
+	                            double _angleRotateZ)
 {
 	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	validLandscape = 1;  // assume ok...
 	name = _name;
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex);
-	angleRotatez = _angleRotatez*M_PI/180.;
+	angleRotateZ = _angleRotateZ*M_PI/180.;
 }
 
 
@@ -512,7 +512,7 @@ void LandscapeSpherical::draw(ToneReproducer* eye, const Projector* prj, const N
 
 	// TODO: verify that this works correctly for custom projections
 	// seam is at East
-	prj->setCustomFrame(nav->getAltAzToEyeMat() * Mat4d::zrotation(-angleRotatez));
+	prj->setCustomFrame(nav->getAltAzToEyeMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
 	prj->sSphere(radius,1.0,40,20,1);
 
 	glDisable(GL_CULL_FACE);

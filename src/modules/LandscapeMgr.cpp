@@ -517,6 +517,12 @@ void LandscapeMgr::setAtmosphereBortleLightPollution(int bIndex)
 	setAtmosphereLightPollutionLuminance(qMax(0.,0.0020*std::pow(bIndex-1, 2.1)));
 }
 
+void LandscapeMgr::setZRotation(double d)
+{
+	if (landscape)
+		landscape->setZRotation(d);
+}
+
 float LandscapeMgr::getLuminance(void) 
 {
 	return atmosphere->getRealDisplayIntensityFactor();
@@ -566,7 +572,7 @@ Landscape* LandscapeMgr::createFromHash(QMap<QString, QString>& param)
 	else if (param["type"]=="spherical")
 	{
 		LandscapeSpherical* ldscp = new LandscapeSpherical();
-		ldscp->create(param["name"], 1, param["path"] + param["maptex"],param["angleRotatez"].toDouble());
+		ldscp->create(param["name"], 1, param["path"] + param["maptex"],param["angleRotateZ"].toDouble());
 		return ldscp;
 	}
 	else
@@ -574,7 +580,7 @@ Landscape* LandscapeMgr::createFromHash(QMap<QString, QString>& param)
 		LandscapeFisheye* ldscp = new LandscapeFisheye();
 		ldscp->create(param["name"], 1, param["path"] + param["maptex"],
 		              param["texturefov"].toDouble(),
-                      param["angleRotatez"].toDouble());
+                      param["angleRotateZ"].toDouble());
 		return ldscp;
 	}
 }
