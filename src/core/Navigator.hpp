@@ -98,7 +98,7 @@ public:
 	const Planet *getHomePlanet(void) const;
 
 	//! Return the observer heliocentric ecliptic position
-	Vec3d getObserverHelioPos(void) const;
+	Vec3d getObserverHeliocentricEclipticPos(void) const;
 
 	//! Transform vector from altazimuthal coordinate to equatorial
 	Vec3d altAzToEquinoxEqu(const Vec3d& v) const { return matAltAzToEquinoxEqu*v; }
