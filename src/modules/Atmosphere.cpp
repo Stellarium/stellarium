@@ -56,9 +56,9 @@ Atmosphere::~Atmosphere(void)
 }
 
 void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase,
-                               ToneReproducer * eye, Projector* prj,
-                               float latitude, float altitude, float temperature, float relativeHumidity)
+                               StelCore* core, float latitude, float altitude, float temperature, float relativeHumidity)
 {
+	const Projector* prj = core->getProjection();
 	if (viewport != prj->getViewport())
 	{
 		// The viewport changed: update the number of point of the grid
@@ -200,7 +200,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	skylightStruct2 b2;
 	float lumi;
 	
-	prj->setCurrentFrame(Projector::FrameLocal);
+	core->setCurrentFrame(StelCore::FrameLocal);
 	
 	// Compute the sky color for every point above the ground
 	for (int i=0; i<(1+skyResolutionX)*(1+skyResolutionY); ++i)

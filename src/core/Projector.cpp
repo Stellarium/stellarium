@@ -128,8 +128,6 @@ void Projector::init()
 	setInitFov(conf->value("navigation/init_fov",60.).toDouble());
 	setFov(initFov);
 
-	//glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW);
-
 	flagGlPointSprite = conf->value("projection/flag_use_gl_point_sprite",false).toBool();
 	flagGlPointSprite = flagGlPointSprite && GLEE_ARB_point_sprite;
 	if (flagGlPointSprite)
@@ -334,48 +332,11 @@ void Projector::setClippingPlanes(double znear, double zfar)
 	zFar = zfar;
 }
 
-// Set the standard modelview matrices used for projection
-void Projector::setModelviewMatrices(	const Mat4d& _matEarthEquToEye,
-                                        const Mat4d& _matHeliocentricEclipticToEye,
-                                        const Mat4d& _matAltAzToEye,
-                                        const Mat4d& _matJ2000ToEye)
-{
-	matEarthEquToEye = _matEarthEquToEye;
-	matJ2000ToEye = _matJ2000ToEye;
-	matHeliocentricEclipticToEye = _matHeliocentricEclipticToEye;
-	matAltAzToEye = _matAltAzToEye;
-}
-
-
-/*************************************************************************
- Set the frame in which we want to draw from now on
-*************************************************************************/
-void Projector::setCurrentFrame(FrameType frameType) const
-{
-	switch (frameType)
-	{
-	case FrameLocal:
-		setCustomFrame(matAltAzToEye);
-		break;
-	case FrameHelio:
-		setCustomFrame(matHeliocentricEclipticToEye);
-		break;
-	case FrameEarthEqu:
-		setCustomFrame(matEarthEquToEye);
-		break;
-	case FrameJ2000:
-		setCustomFrame(matJ2000ToEye);
-		break;
-	default:
-		qDebug() << "Unknown reference frame type: " << (int)frameType << ".";
-	}
-}
-
 /*************************************************************************
  Set a custom model view matrix, it is valid until the next call to 
  setCurrentFrame or setCustomFrame
 *************************************************************************/
-void Projector::setCustomFrame(const Mat4d& m) const
+void Projector::setModelViewMatrix(const Mat4d& m) const
 {
 	modelViewMatrix = m;
 }

@@ -539,7 +539,7 @@ void StarMgr::draw(StelCore* core)
     // Set temporary static variable for optimization
     const float names_brightness = labelsFader.getInterstate() * starsFader.getInterstate();
     
-    prj->setCurrentFrame(Projector::FrameJ2000);
+    core->setCurrentFrame(StelCore::FrameJ2000);
 
 	// Prepare openGL for drawing many stars
 	skyDrawer->preDrawPointSource();

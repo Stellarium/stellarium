@@ -41,6 +41,16 @@ class GeodesicGrid;
 class StelCore
 {
 public:
+	
+	//! Supported reference frame types
+	enum FrameType
+	{
+		FrameLocal,
+		FrameHelio,
+		FrameEarthEqu,
+		FrameJ2000
+	};
+	
 	StelCore();
 	virtual ~StelCore();
 
@@ -57,6 +67,9 @@ public:
 	//! Update core state after drawing modules.
 	void postDraw();
 
+	//! Set the frame in which we want to draw from now on.
+	void setCurrentFrame(FrameType frameType) const;
+			
 	//! Get the current projector used in the core.
 	Projector* getProjection() {return projection;}
 	//! Get the current projector used in the core.

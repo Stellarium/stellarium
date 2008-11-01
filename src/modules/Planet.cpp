@@ -560,7 +560,7 @@ void Planet::draw(StelCore* core, float maxMagLabels)
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
 	
-	prj->setCustomFrame(mat);
+	prj->setModelViewMatrix(mat);
 	if (prj->project(Vec3f(0,0,0), screenPos) &&
 	        screenPos[1]>viewport_bottom - screenSz && screenPos[1]<viewport_bottom + prj->getViewportHeight()+screenSz &&
 	        screenPos[0]>viewport_left - screenSz && screenPos[0]<viewport_left + prj->getViewportWidth() + screenSz)
@@ -572,8 +572,8 @@ void Planet::draw(StelCore* core, float maxMagLabels)
 			ang_dist = 1.f; // if ang_dist == 0, the Planet is sun..
 
 		// by putting here, only draw orbit if Planet is visible for clarity
-		drawOrbit(nav, prj);  // TODO - fade in here also...
-		drawTrail(nav, prj);
+		drawOrbit(core);  // TODO - fade in here also...
+		drawTrail(core);
 
 		if (flagLabels && ang_dist>0.25 && maxMagLabels>getVMagnitude(nav))
 		{
@@ -638,7 +638,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 				glDisable(GL_STENCIL_TEST);
 				
 				glDisable(GL_LIGHTING);
-				drawEarthShadow(nav, prj);
+				drawEarthShadow(core);
 				glClear(GL_STENCIL_BUFFER_BIT);	// Clean again to let a clean buffer for later Qt display
 				glEnable(GL_LIGHTING);
 			}
@@ -692,7 +692,7 @@ void Planet::drawSphere(StelCore* core, const Mat4d& mat, float screenSz)
 	// Rotate and add an extra quarter rotation so that the planet texture map
 	// fits to the observers position. No idea why this is necessary,
 	// perhaps some openGl strangeness, or confusing sin/cos.
-	core->getProjection()->setCustomFrame(mat * Mat4d::zrotation(M_PI/180*(axisRotation + 90.)));
+	core->getProjection()->setModelViewMatrix(mat * Mat4d::zrotation(M_PI/180*(axisRotation + 90.)));
 	
 	// Draw the spheroid itself
 	// Adapt the number of facets according with the size of the sphere for optimization
@@ -740,19 +740,21 @@ void Ring::draw(const Projector* prj,const Mat4d& mat,double screenSz)
 	const double h = mat.r[ 8]*mat.r[12]
 	               + mat.r[ 9]*mat.r[13]
 	               + mat.r[10]*mat.r[14];
-	prj->setCustomFrame(mat);
+	prj->setModelViewMatrix(mat);
 	prj->sRing(radiusMin,radiusMax,(h<0.0)?slices:-slices,stacks, 0);
 	glDisable(GL_CULL_FACE);
 }
 
 
 // draw orbital path of Planet
-void Planet::drawOrbit(const Navigator * nav, const Projector* prj)
+void Planet::drawOrbit(const StelCore* core)
 {
 	if(!orbitFader.getInterstate()) return;
 	if(!re.siderealPeriod) return;
 
-	prj->setCurrentFrame(Projector::FrameHelio);    // 2D coordinate
+	const Projector* prj = core->getProjection();
+	
+	core->setCurrentFrame(StelCore::FrameHelio);    // 2D coordinate
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -820,14 +822,17 @@ void Planet::drawOrbit(const Navigator * nav, const Projector* prj)
 
 
 // draw trail of Planet as seen from earth
-void Planet::drawTrail(const Navigator * nav, const Projector* prj)
+void Planet::drawTrail(const StelCore* core)
 {
 	if(!trailFader.getInterstate()) return;
 
+	const Navigator* nav = core->getNavigation();
+	const Projector* prj = core->getProjection();
+	
 	Vec3d onscreen1;
 	Vec3d onscreen2;
 
-	prj->setCurrentFrame(Projector::FrameJ2000);
+	core->setCurrentFrame(StelCore::FrameJ2000);
 
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
@@ -950,8 +955,10 @@ void Planet::update(int deltaTime)
 
 // draws earth shadow overlapping the moon using stencil buffer
 // umbra and penumbra are sized separately for accuracy
-void Planet::drawEarthShadow(const Navigator * nav, Projector * prj)
+void Planet::drawEarthShadow(StelCore* core)
 {
+	Projector* prj = core->getProjection();
+	
 	SolarSystem* ssm = (SolarSystem*)GETSTELMODULE("SolarSystem");
 	Vec3d e = ssm->getEarth()->getEclipticPos();
 	Vec3d m = ssm->getMoon()->getEclipticPos();  // relative to earth
@@ -990,7 +997,7 @@ void Planet::drawEarthShadow(const Navigator * nav, Projector * prj)
 	glStencilFunc(GL_EQUAL, 0x1, 0x1);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 
-	prj->setCurrentFrame(Projector::FrameHelio);
+	core->setCurrentFrame(StelCore::FrameHelio);
 	// shadow radial texture
 	texEarthShadow->bind();
 
