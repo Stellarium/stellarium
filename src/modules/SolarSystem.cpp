@@ -136,7 +136,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
-		Vec3d pos=obj->getObsJ2000Pos(nav);
+		Vec3d pos=obj->getJ2000EquatorialPos(nav);
 		Vec3d screenpos;
 		core->setCurrentFrame(StelCore::FrameJ2000);
 		// Compute 2D pos and return if outside screen
@@ -879,7 +879,7 @@ StelObject* SolarSystem::search(Vec3d pos, const StelCore* core) const
 	vector<Planet*>::const_iterator iter = systemPlanets.begin();
 	while (iter != systemPlanets.end())
 	{
-		equPos = (*iter)->getObsEquatorialPos(core->getNavigation());
+		equPos = (*iter)->getEquinoxEquatorialPos(core->getNavigation());
 		equPos.normalize();
 		double cos_ang_dist = equPos[0]*pos[0] + equPos[1]*pos[1] + equPos[2]*pos[2];
 		if (cos_ang_dist>cos_angle_closest)
@@ -912,7 +912,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 	vector<Planet*>::const_iterator iter = systemPlanets.begin();
 	while (iter != systemPlanets.end())
 	{
-		equPos = (*iter)->getObsEquatorialPos(core->getNavigation());
+		equPos = (*iter)->getEquinoxEquatorialPos(core->getNavigation());
 		equPos.normalize();
 		if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
 		{

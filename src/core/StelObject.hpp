@@ -70,7 +70,7 @@ public:
 
 	//! Default implementation of the GridObject method
 	//! Calling this method on some object will cause an error if they need a valid Navigator instance to compute their position
-	virtual Vec3d getPositionForGrid() const {return getObsJ2000Pos(NULL);}
+	virtual Vec3d getPositionForGrid() const {return getJ2000EquatorialPos(NULL);}
 	
 	//! Write I18n information about the object in QString.
 	//! @param core the StelCore object to use
@@ -89,21 +89,21 @@ public:
 	//! Return translated object's name
 	virtual QString getNameI18n(void) const = 0;
 	
+	//! Get observer centered equatorial coordinates at equinox J2000
+	virtual Vec3d getJ2000EquatorialPos(const Navigator *nav) const = 0;
+	
 	//! Get observer centered equatorial coordinate at the current equinox
 	//! The frame has it's Z axis at the observer current rotation axis
 	//! At time 2000-01-01 this frame is almost the same as J2000, but ONLY if the observer is on earth
-	Vec3d getObsEquatorialPos(const Navigator* nav) const;
+	Vec3d getEquinoxEquatorialPos(const Navigator* nav) const;
 	
 	//! Get observer centered hour angle + declination (at current equinox)
 	//! The frame has its Z axis at the observer current rotation axis
-	Vec3d getObsSideralPos(const StelCore* core) const;
+	Vec3d getSideralPos(const StelCore* core) const;
 	
 	//! Get observer local alt/az coordinate
 	//! The frame has it's Z axis at the zenith
 	Vec3d getAltAzPos(const Navigator* nav) const;
-	
-	//! Get observer centered equatorial coordinates at equinox J2000
-	virtual Vec3d getObsJ2000Pos(const Navigator *nav) const = 0;
 	
 	//! Return object's apparent V magnitude as seen from observer
 	virtual float getVMagnitude(const Navigator *nav) const {return 99;}
@@ -123,7 +123,7 @@ public:
 	virtual double getParentSatellitesFov(const Navigator *nav) const {return -1.;}
 	
 	//! Return the angular radius of a circle containing the object as seen from the observer
-	//! with the circle center assumed to be at getObsJ2000Pos().
+	//! with the circle center assumed to be at getJ2000EquatorialPos().
 	//! @return radius in degree. This value is the apparent angular size of the object, and is independent of the current FOV.
 	virtual double getAngularSize(const StelCore* core) const = 0;
 	

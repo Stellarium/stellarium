@@ -207,7 +207,7 @@ void StarMgr::drawPointer(const Projector* prj, const Navigator * nav)
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
-		Vec3d pos=obj->getObsJ2000Pos(nav);
+		Vec3d pos=obj->getJ2000EquatorialPos(nav);
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos)) return;
@@ -606,7 +606,7 @@ assert(0);
   StelObjectP nearest;
   double cos_angle_nearest = -10.0;
   for (QList<StelObjectP >::const_iterator it(v.begin());it!=v.end();it++) {
-    const double c = (*it)->getObsJ2000Pos(0)*pos;
+    const double c = (*it)->getJ2000EquatorialPos(0)*pos;
     if (c > cos_angle_nearest) {
       cos_angle_nearest = c;
       nearest = *it;
