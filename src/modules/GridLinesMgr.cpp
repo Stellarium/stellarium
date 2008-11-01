@@ -47,9 +47,9 @@ class SkyGrid
 {
 public:
 	// Create and precompute positions of a SkyGrid
-	SkyGrid(Projector::FrameType frame);
+	SkyGrid(StelCore::FrameType frame);
     virtual ~SkyGrid();
-	void draw(const Projector* prj) const;
+	void draw(const StelCore* prj) const;
 	void setFontSize(double newFontSize);
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() {return color;}
@@ -61,7 +61,7 @@ public:
 private:
 	bool transparent_top;
 	Vec3f color;
-	Projector::FrameType frameType;
+	StelCore::FrameType frameType;
 	double fontSize;
 	SFont& font;
 	LinearFader fader;
@@ -83,7 +83,7 @@ public:
 	// Create and precompute positions of a SkyGrid
 	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR);
     virtual ~SkyLine();
-	void draw(Projector *prj,const Navigator *nav) const;
+	void draw(StelCore* core) const;
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() {return color;}
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
@@ -94,14 +94,14 @@ public:
 private:
 	SKY_LINE_TYPE line_type;
 	Vec3f color;
-	Projector::FrameType frameType;
+	StelCore::FrameType frameType;
 	LinearFader fader;
 	double fontSize;
 	SFont& font;
 };
 
 // rms added color as parameter
-SkyGrid::SkyGrid(Projector::FrameType frame) : color(0.2,0.2,0.2), frameType(frame), fontSize(12),
+SkyGrid::SkyGrid(StelCore::FrameType frame) : color(0.2,0.2,0.2), frameType(frame), fontSize(12),
 	font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize))
 {
 	transparent_top = true;
@@ -342,8 +342,9 @@ static double getClosestResolutionHMS(double pixelPerRad)
 //! Draw the sky grid in the current frame
 //! This method look for each point of the viewport's contour intersecting with a meridian/parallel
 //! The the intersecting points are matched 2 by 2 to find out where to draw the arc of meridian/parallel  
-void SkyGrid::draw(const Projector* prj) const
+void SkyGrid::draw(const StelCore* core) const
 {
+	const Projector* prj = core->getProjection();
 	if (!fader.getInterstate()) return;
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
@@ -368,7 +369,7 @@ void SkyGrid::draw(const Projector* prj) const
 	textColor*=2;
 	textColor[3]=fader.getInterstate();
 
-	prj->setCurrentFrame(frameType);	// set 2D coordinate
+	core->setCurrentFrame(frameType);	// set 2D coordinate
 
 	// Check whether the pole are in the viewport
 	bool northPoleInViewport = false;
@@ -391,7 +392,7 @@ void SkyGrid::draw(const Projector* prj) const
 	
 	const double gridStepParallelRad = M_PI/180.*getClosestResolutionDMS(1./std::sqrt((lat1-lat0)*(lat1-lat0)+(lat2-lat0)*(lat2-lat0)));
 	
-	const double closetResLon = (frameType==Projector::FrameLocal) ? getClosestResolutionDMS(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0))) : getClosestResolutionHMS(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0)));
+	const double closetResLon = (frameType==StelCore::FrameLocal) ? getClosestResolutionDMS(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0))) : getClosestResolutionHMS(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0)));
 	const double gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : closetResLon);
 	
 	std::map<int, std::set<double> > resultsParallels;
@@ -515,7 +516,7 @@ void SkyGrid::draw(const Projector* prj) const
 				else
 					size = *k - lat180;
 				if (size<0.) size+=2.*M_PI;
-				prj->drawMeridian(vv, size, true, &font, &textColor, -1, frameType==Projector::FrameLocal);
+				prj->drawMeridian(vv, size, true, &font, &textColor, -1, frameType==StelCore::FrameLocal);
 				++k;
 			}
 		}
@@ -546,7 +547,7 @@ void SkyGrid::draw(const Projector* prj) const
 	
 	// Draw meridian zero which can't be found by the normal algo..
 	const Vec3d vv(1,0,0);
-	prj->drawMeridian(vv, 2.*M_PI, false, &font, NULL, -1, frameType==Projector::FrameLocal);
+	prj->drawMeridian(vv, 2.*M_PI, false, &font, NULL, -1, frameType==StelCore::FrameLocal);
 	
 	// Draw the meridians which are totally included in the viewport (and thus don't intersect with the edge of the screen)
 	if (northPoleInViewport && southPoleInViewport)
@@ -560,7 +561,7 @@ void SkyGrid::draw(const Projector* prj) const
 			{
 				Vec3d vvv;
 				spheToRectLat1802((double)latMas/RADIAN_MAS, 0, vvv);
-				prj->drawMeridian(vvv, 2.*M_PI, false, &font, &textColor, -1, frameType==Projector::FrameLocal);
+				prj->drawMeridian(vvv, 2.*M_PI, false, &font, &textColor, -1, frameType==StelCore::FrameLocal);
 			}
 		}
 	}
@@ -574,11 +575,11 @@ font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstanc
 
 	switch (line_type)
 	{
-		case LOCAL : frameType = Projector::FrameLocal; break;
-		case MERIDIAN : frameType = Projector::FrameLocal; break;
-		case ECLIPTIC : frameType = Projector::FrameHelio; break;
-		case EQUATOR : frameType = Projector::FrameEarthEqu; break;
-		default : frameType = Projector::FrameEarthEqu;
+		case LOCAL : frameType = StelCore::FrameLocal; break;
+		case MERIDIAN : frameType = StelCore::FrameLocal; break;
+		case ECLIPTIC : frameType = StelCore::FrameHelio; break;
+		case EQUATOR : frameType = StelCore::FrameEarthEqu; break;
+		default : frameType = StelCore::FrameEarthEqu;
 	}
 }
 
@@ -592,7 +593,7 @@ void SkyLine::setFontSize(double newFontSize)
 	font = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize);
 }
 
-void SkyLine::draw(Projector *prj,const Navigator *nav) const
+void SkyLine::draw(StelCore *core) const
 {
 	if (!fader.getInterstate()) return;
 
@@ -601,23 +602,23 @@ void SkyLine::draw(Projector *prj,const Navigator *nav) const
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
-	prj->setCurrentFrame(frameType);
+	core->setCurrentFrame(frameType);
 	
 	// Johannes: use a big radius as a dirty workaround for the bug that the
 	// ecliptic line is not drawn around the observer, but around the sun:
 	const Vec3d vv(1000000,0,0);
 	if (line_type==MERIDIAN)
-		prj->drawMeridian(vv, 2.*M_PI, false, &font);
+		core->getProjection()->drawMeridian(vv, 2.*M_PI, false, &font);
 	else
-		prj->drawParallel(vv, 2.*M_PI, false, &font);
+		core->getProjection()->drawParallel(vv, 2.*M_PI, false, &font);
 }
 
 GridLinesMgr::GridLinesMgr()
 {
 	setObjectName("GridLinesMgr");
-	equGrid = new SkyGrid(Projector::FrameEarthEqu);
-	equJ2000Grid = new SkyGrid(Projector::FrameJ2000);
-	aziGrid = new SkyGrid(Projector::FrameLocal);
+	equGrid = new SkyGrid(StelCore::FrameEarthEqu);
+	equJ2000Grid = new SkyGrid(StelCore::FrameJ2000);
+	aziGrid = new SkyGrid(StelCore::FrameLocal);
 	equatorLine = new SkyLine(SkyLine::EQUATOR);
 	eclipticLine = new SkyLine(SkyLine::ECLIPTIC);
 	meridianLine = new SkyLine(SkyLine::MERIDIAN);
@@ -669,23 +670,20 @@ void GridLinesMgr::update(double deltaTime)
 
 void GridLinesMgr::draw(StelCore* core)
 {
-	Navigator* nav = core->getNavigation();
-	Projector* prj = core->getProjection();
-
 	glEnable(GL_LINE_SMOOTH);
 	
 	// Draw the equatorial grid
-	equGrid->draw(prj);
+	equGrid->draw(core);
 	// Draw the equatorial grid
-	equJ2000Grid->draw(prj);
+	equJ2000Grid->draw(core);
 	// Draw the altazimuthal grid
-	aziGrid->draw(prj);
+	aziGrid->draw(core);
 	// Draw the celestial equator line
-	equatorLine->draw(prj,nav);
+	equatorLine->draw(core);
 	// Draw the ecliptic line
-	eclipticLine->draw(prj,nav);
+	eclipticLine->draw(core);
 	// Draw the meridian line
-	meridianLine->draw(prj,nav);
+	meridianLine->draw(core);
 	
 	glDisable(GL_LINE_SMOOTH);
 }

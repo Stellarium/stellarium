@@ -31,6 +31,7 @@
 #include "Planet.hpp"
 
 #include <QSettings>
+#include <QDebug>
 
 /*************************************************************************
  Constructor
@@ -115,6 +116,29 @@ void StelCore::init()
 // 	glUseProgram(sp);
 }
 
+/*************************************************************************
+ Set the frame in which we want to draw from now on
+*************************************************************************/
+void StelCore::setCurrentFrame(FrameType frameType) const
+{
+	switch (frameType)
+	{
+		case FrameLocal:
+			projection->setModelViewMatrix(navigation->getAltAzToEyeMat());
+			break;
+		case FrameHelio:
+			projection->setModelViewMatrix(navigation->getHeliocentricEclipticToEyeMat());
+			break;
+		case FrameEarthEqu:
+			projection->setModelViewMatrix(navigation->getEarthEquToEyeMat());
+			break;
+		case FrameJ2000:
+			projection->setModelViewMatrix(navigation->getJ2000ToEyeMat());
+			break;
+		default:
+			qDebug() << "Unknown reference frame type: " << (int)frameType << ".";
+	}
+}
 
 /*************************************************************************
  Update all the objects in function of the time
@@ -134,18 +158,7 @@ void StelCore::update(double deltaTime)
 	// Update direction of vision/Zoom level
 	movementMgr->updateMotion(deltaTime);	
 	
-	// Give the updated standard projection matrices to the projector.
-	// atmosphere->computeColor needs the projection matrices, so we must
-	// set them before calling atmosphere->computeColor, otherwise
-	// the first image will be rendered with invalid (nan)
-	// inverse projection matrices.
-	// On the other hand it must be called after ssystem->update
-	// and panView in order to have the new observers position
-	// and not interfere with vision vector movement.
-	projection->setModelviewMatrices(	navigation->getEarthEquToEyeMat(),
-	                                    navigation->getHeliocentricEclipticToEyeMat(),
-	                                    navigation->getAltAzToEyeMat(),
-	                                    navigation->getJ2000ToEyeMat());
+	setCurrentFrame(FrameJ2000);
 	
 	skyDrawer->update(deltaTime);
 }
@@ -162,7 +175,7 @@ void StelCore::preDraw()
 	// Init GL viewport to current projector values
 	glViewport(projection->getViewportPosX(), projection->getViewportPosY(), projection->getViewportWidth(), projection->getViewportHeight());
 
-	projection->setCurrentFrame(Projector::FrameJ2000);
+	setCurrentFrame(StelCore::FrameJ2000);
 	
 	// Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
 	glClear(GL_COLOR_BUFFER_BIT);

@@ -32,6 +32,7 @@
 
 class QSettings;
 class Location;
+class StelCore;
 
 //! Store and manages the displaying of the Landscape
 class Landscape
@@ -40,7 +41,7 @@ public:
 	Landscape(float _radius = 2.);
 	virtual ~Landscape();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) = 0;
-	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav) = 0;
+	virtual void draw(StelCore* core) = 0;
 	void update(double deltaTime)
 	{
 		landFader.update((int)(deltaTime*1000));
@@ -109,12 +110,12 @@ public:
 	LandscapeOldStyle(float _radius = 2.);
 	virtual ~LandscapeOldStyle();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
-	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
+	virtual void draw(StelCore* core);
 	void create(bool _fullpath, QMap<QString, QString> param);
 private:
-	void drawFog(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;
-	void drawDecor(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;
-	void drawGround(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;
+	void drawFog(StelCore* core) const;
+	void drawDecor(StelCore* core) const;
+	void drawGround(StelCore* core) const;
 	STextureSP* sideTexs;
 	int nbSideTexs;
 	int nbSide;
@@ -140,7 +141,7 @@ public:
 	LandscapeFisheye(float _radius = 1.);
 	virtual ~LandscapeFisheye();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
-	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
+	virtual void draw(StelCore* core);
 	void create(const QString _name, bool _fullpath, const QString& _maptex,
 	            double _texturefov, double angleRotateZ);
 private:
@@ -156,7 +157,7 @@ public:
 	LandscapeSpherical(float _radius = 1.);
 	virtual ~LandscapeSpherical();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
-	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
+	virtual void draw(StelCore* core);
 	void create(const QString _name, bool _fullpath,
 	            const QString& _maptex, double angleRotateZ);
 private:

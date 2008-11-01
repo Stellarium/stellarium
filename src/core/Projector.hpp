@@ -46,15 +46,6 @@ class Projector : public QObject
 	Q_OBJECT;
 
 public:
-
-	//! Supported reference frame types
-	enum FrameType
-	{
-		FrameLocal,
-		FrameHelio,
-		FrameEarthEqu,
-		FrameJ2000
-	};
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Main constructor
@@ -72,17 +63,6 @@ public:
 	//! - Sets whether to use GL points or a spite, according to the ini parser
 	//!   object and the detected hardware capabilities.
 	void init();
-	
-	//! Set the standard modelview matrices used for projection.
-	// TODO: more complete description of what they are used for.
-	//! @param _matEarthEquToEye ???
-	//! @param _matHeliocentricEclipticToEye
-	//! @param _matAltAzToEye
-	//! @param _matJ2000ToEye
-	void setModelviewMatrices(const Mat4d& _matEarthEquToEye,
-				    const Mat4d& _matHeliocentricEclipticToEye,
-				    const Mat4d& _matAltAzToEye,
-				    const Mat4d& _matJ2000ToEye);
 	
 	//! Get the current state of the flag which decides whether to 
 	//! arrage labels so that they are aligned with the bottom of a 2d 
@@ -186,9 +166,6 @@ public:
 	// TODO Doxygen docs: What is this for?
 	bool needGlFrontFaceCW(void) const {return (flipHorz*flipVert < 0.0);}
 
-	//! Get whether the GL_POINT_SPRITE extension is available now.
-	bool getflagGlPointSprite() const {return flagGlPointSprite;}
-
 	//! Set the Field of View in degrees.
 	void setFov(double f);
 	//! Get the Field of View in degrees.
@@ -258,15 +235,10 @@ public:
 	bool projectLineCheck(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
 		{return project(v1, win1) && project(v2, win2) && (checkInViewport(win1) || checkInViewport(win2));}
 
-	//! Set the frame in which we want to draw from now on.
-	//! The frame will be the current one until this method or setCustomFrame is called again.
-	//! @param frameType the type.
-	void setCurrentFrame(FrameType frameType) const;
-
 	//! Set a custom model view matrix.
 	//! The new setting remains active until the next call to setCurrentFrame or setCustomFrame.
 	//! @param m the openGL MODELVIEW matrix to use.
-	void setCustomFrame(const Mat4d& m) const;
+	void setModelViewMatrix(const Mat4d& m) const;
 
 	//! Set the current projection mapping to use.
 	//! The mapping must have been registered before being used.
@@ -284,6 +256,9 @@ public:
 	// Standard methods for drawing primitives in general (non-linear) mode
 	///////////////////////////////////////////////////////////////////////////
 
+	//! Get whether the GL_POINT_SPRITE extension is available now.
+	bool getflagGlPointSprite() const {return flagGlPointSprite;}
+	
 	//! Fill with black around the viewport.
 	void drawViewportShape(void);
 	
@@ -453,15 +428,8 @@ private:
 	Vec2d viewportCenter;          // Viewport center in screen pixel
 	double viewportFovDiameter;    // diameter of a circle with 180 degrees diameter in screen pixel
 
-	Mat4d projectionMatrix;        // Projection matrix
-
 	double pixelPerRad;            // pixel per rad at the center of the viewport disk
 	double flipHorz,flipVert;      // Whether to flip in horizontal or vertical directions
-
-	Mat4d matEarthEquToEye;        // Modelview Matrix for earth equatorial projection
-	Mat4d matJ2000ToEye;           // for precessed equ coords
-	Mat4d matHeliocentricEclipticToEye;           // Modelview Matrix for earth equatorial projection
-	Mat4d matAltAzToEye;           // Modelview Matrix for earth equatorial projection
 	
 	bool gravityLabels;            // should label text align with the horizon?
 	
@@ -473,7 +441,6 @@ private:
 	QMap<QString,const Mapping*> projectionMapping;
 	
 	QString currentProjectionType; // Type of the projection currently used
-	
 };
 
 #endif // _PROJECTOR_HPP_

@@ -43,7 +43,7 @@ class Cardinals
 public:
 	Cardinals(float _radius = 1.);
     virtual ~Cardinals();
-	void draw(const Projector* prj, double latitude, bool gravityON = false) const;
+	void draw(const StelCore* core, double latitude, bool gravityON = false) const;
 	void setColor(const Vec3f& c) {color = c;}
 	Vec3f get_color() {return color;}
 	void updateI18n();
@@ -78,8 +78,10 @@ Cardinals::~Cardinals()
 
 // Draw the cardinals points : N S E W
 // handles special cases at poles
-void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) const
+void Cardinals::draw(const StelCore* core, double latitude, bool gravityON) const
 {
+	const Projector* prj = core->getProjection();
+	
 	if (!fader.getInterstate()) return;
 
 	// direction text
@@ -103,7 +105,7 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 	Vec3f pos;
 	Vec3d xy;
 
-	prj->setCurrentFrame(Projector::FrameLocal);
+	core->setCurrentFrame(StelCore::FrameLocal);
 
 	float shift = font.getStrLen(sNorth)/2;
 
@@ -172,16 +174,14 @@ void LandscapeMgr::update(double deltaTime)
 	// Compute the sun position in local coordinate
 	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
-	Projector* prj = StelApp::getInstance().getCore()->getProjection();
-	ToneReproducer* eye = StelApp::getInstance().getCore()->getToneReproducer();
 	
 	Vec3d sunPos = ssystem->getSun()->getAltAzPos(nav);
 	// Compute the moon position in local coordinate
 	Vec3d moonPos = ssystem->getMoon()->getAltAzPos(nav);
 	atmosphere->computeColor(nav->getJDay(), sunPos, moonPos,
-	                          ssystem->getMoon()->getPhase(ssystem->getEarth()->getHeliocentricEclipticPos()),
-	                          eye, prj, nav->getCurrentLocation().latitude, nav->getCurrentLocation().altitude,
-	                          15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
+		ssystem->getMoon()->getPhase(ssystem->getEarth()->getHeliocentricEclipticPos()),
+		StelApp::getInstance().getCore(), nav->getCurrentLocation().latitude, nav->getCurrentLocation().altitude,
+		15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 	
 	StelApp::getInstance().getCore()->getSkyDrawer()->reportLuminanceInFov(3.75+atmosphere->getAverageLuminance()*3.5, true);
 	
@@ -236,18 +236,14 @@ void LandscapeMgr::update(double deltaTime)
 
 void LandscapeMgr::draw(StelCore* core)
 {
-	Navigator* nav = core->getNavigation();
-	Projector* prj = core->getProjection();
-	ToneReproducer* eye = core->getToneReproducer();
-	
 	// Draw the atmosphere
 	atmosphere->draw(core);
 
 	// Draw the landscape
-	landscape->draw(eye, prj, nav);
+	landscape->draw(core);
 
 	// Draw the cardinal points
-	cardinalsPoints->draw(prj, StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().latitude);
+	cardinalsPoints->draw(core, StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().latitude);
 }
 
 void LandscapeMgr::init()

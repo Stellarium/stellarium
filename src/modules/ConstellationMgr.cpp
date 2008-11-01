@@ -452,7 +452,7 @@ void ConstellationMgr::draw(StelCore* core)
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
 	
-	prj->setCurrentFrame(Projector::FrameJ2000);
+	core->setCurrentFrame(StelCore::FrameJ2000);
 	drawLines(prj);
 	drawNames(prj);
 	drawArt(prj, nav);

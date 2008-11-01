@@ -239,7 +239,7 @@ void LabelMgr::init()
 
 void LabelMgr::draw(StelCore* core)
 {
-	proj->setCurrentFrame(Projector::FrameJ2000);
+	core->setCurrentFrame(StelCore::FrameJ2000);
 	for(std::vector<StelLabel*>::iterator i=allLabels.begin(); i!=allLabels.end(); i++)
 	{
 		if (*i != NULL)

@@ -101,7 +101,7 @@ void TelescopeMgr::draw(StelCore* core)
 	
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
-	prj->setCurrentFrame(Projector::FrameJ2000);
+	core->setCurrentFrame(StelCore::FrameJ2000);
 	telescopeTexture->bind();
 	glBlendFunc(GL_ONE,GL_ONE);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode

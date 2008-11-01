@@ -138,7 +138,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getObsJ2000Pos(nav);
 		Vec3d screenpos;
-		prj->setCurrentFrame(Projector::FrameJ2000);
+		core->setCurrentFrame(StelCore::FrameJ2000);
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos)) return;
 	

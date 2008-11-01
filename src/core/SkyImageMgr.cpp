@@ -122,9 +122,7 @@ void SkyImageMgr::draw(StelCore* core)
 	if (!flagShow)
 		return;
 	
-	Projector* prj = core->getProjection();
-	
-	prj->setCurrentFrame(Projector::FrameJ2000);
+	core->setCurrentFrame(StelCore::FrameJ2000);
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_BLEND);
 	foreach (SkyImageMgrElem* s, allSkyImages)
