@@ -218,7 +218,7 @@ void Planet::setRotationElements(float _period, float _offset, double _epoch, fl
 
 Vec3d Planet::getJ2000EquatorialPos(const Navigator *nav) const 
 {
-	return Navigator::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos() - nav->getObserverHelioPos());
+	return Navigator::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos() - nav->getObserverHeliocentricEclipticPos());
 }
 
 // Compute the position in the parent Planet coordinate system
@@ -459,7 +459,7 @@ double Planet::getPhase(Vec3d obsPos) const
 
 float Planet::getVMagnitude(const Navigator * nav) const 
 {
-	Vec3d obsPos = nav->getObserverHelioPos();
+	Vec3d obsPos = nav->getObserverHeliocentricEclipticPos();
 	const double sq = obsPos.lengthSquared();
 	if (parent == 0) {
 		// sun
