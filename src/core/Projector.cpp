@@ -529,90 +529,6 @@ void ComputeCosSinRho(double phi,int segments) {
 }
 
 
-// Reimplementation of gluSphere : glu is overrided for non standard projection
-void Projector::sSphereLinear(GLdouble radius, GLdouble oneMinusOblateness,
-                              GLint slices, GLint stacks, int orientInside) const
-{
-	glPushMatrix();
-	glLoadMatrixd(modelViewMatrix);
-
-	if (oneMinusOblateness == 1.0)
-	{ // gluSphere seems to have hardware acceleration
-		GLUquadricObj * p = gluNewQuadric();
-		gluQuadricTexture(p,GL_TRUE);
-		if (orientInside)
-			gluQuadricOrientation(p, GLU_INSIDE);
-		gluSphere(p, radius, slices, stacks);
-		gluDeleteQuadric(p);
-	}
-	else
-	{
-		GLfloat x, y, z;
-		GLfloat s, t, ds, dt;
-		GLint i, j;
-		GLfloat nsign;
-
-		if (orientInside)
-			nsign = -1.0;
-		else
-			nsign = 1.0;
-
-		const double drho = M_PI / stacks;
-		Q_ASSERT(stacks<=MAX_STACKS);
-		ComputeCosSinRho(drho,stacks);
-		double *cos_sin_rho_p;
-
-		const double dtheta = 2.0 * M_PI / slices;
-		Q_ASSERT(slices<=MAX_SLICES);
-		ComputeCosSinTheta(dtheta,slices);
-		double *cos_sin_theta_p;
-
-		// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
-		// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
-		// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
-		ds = 1.0 / slices;
-		dt = 1.0 / stacks;
-		t = 1.0;            // because loop now runs from 0
-
-		// draw intermediate stacks as quad strips
-		for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks;
-		        i++,cos_sin_rho_p+=2)
-		{
-			glBegin(GL_QUAD_STRIP);
-			s = 0.0;
-			for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;
-			     j++,cos_sin_theta_p+=2)
-			{
-				x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
-				y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
-				z = nsign * cos_sin_rho_p[0];
-				glNormal3f(x * oneMinusOblateness * nsign,
-				           y * oneMinusOblateness * nsign,
-				           z * nsign);
-				glTexCoord2f(s, t);
-				glVertex3d(x * radius,
-				           y * radius,
-				           oneMinusOblateness * z * radius);
-				x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
-				y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
-				z = nsign * cos_sin_rho_p[2];
-				glNormal3f(x * oneMinusOblateness * nsign,
-				           y * oneMinusOblateness * nsign,
-				           z * nsign);
-				glTexCoord2f(s, t - dt);
-				s += ds;
-				glVertex3d(x * radius,
-				           y * radius,
-				           oneMinusOblateness * z * radius);
-			}
-			glEnd();
-			t -= dt;
-		}
-	}
-
-	glPopMatrix();
-}
-
 void Projector::sFanDisk(double radius,int innerFanSlices,int level) const {
   Q_ASSERT(level<64);
   double rad[64];
@@ -850,28 +766,6 @@ void Projector::sSphereMap(GLdouble radius, GLint slices, GLint stacks,
 	}
 }
 
-
-// Reimplementation of gluCylinder : glu is overrided for non standard projection
-void Projector::sCylinderLinear(GLdouble radius, GLdouble height, GLint slices, GLint stacks, int orientInside) const
-{
-	glPushMatrix();
-	glLoadMatrixd(modelViewMatrix);
-	GLUquadricObj * p = gluNewQuadric();
-	gluQuadricTexture(p,GL_TRUE);
-	if (orientInside)
-	{
-		glCullFace(GL_FRONT);
-	}
-	gluCylinder(p, radius, radius, height, slices, stacks);
-	gluDeleteQuadric(p);
-	glPopMatrix();
-	if (orientInside)
-	{
-		glCullFace(GL_BACK);
-	}
-}
-
-
 void Projector::drawTextGravity180(const SFont* font, float x, float y, const QString& ws,
                                    bool speedOptimize, float xshift, float yshift) const
 {
@@ -965,6 +859,36 @@ void Projector::drawText(const SFont* font, float x, float y, const QString& str
 	glTranslatef(0,font->getLineHeight(),0);
 	font->print(xshift, yshift, str);
 	glPopMatrix();
+}
+
+/*************************************************************************
+ Draw a small circle arc in the current frame
+*************************************************************************/
+void Projector::drawSmallCircleArc(const Vec3d& start, const Vec3d& rotAxis, double length, void (*viewportEdgeIntersectCallback)(double angleVal, const Vec3d& screenPos, const Vec3d& direction, bool enters))
+{
+	Q_ASSERT(viewportEdgeIntersectCallback==NULL); // TODO
+	const double nbSeg = 4 + (int)(length*44./(2.*M_PI));
+	const Mat4d& dRot = Mat4d::rotation(rotAxis, length/nbSeg);
+	Vec3d v(start);
+	Vec3d pt1;
+	bool res1;
+	bool res2=true;
+	glBegin(GL_LINE_STRIP);
+	for (int i=0;i<=nbSeg;++i)
+	{
+		res1 = project(v, pt1);
+		const bool toDraw = !(res2==false && res1==false);
+		res2=res1;
+		if (toDraw)
+			glVertex2f(pt1[0],pt1[1]);
+		else
+		{
+			glEnd();
+			glBegin(GL_LINE_STRIP);
+		}
+		dRot.transfo(v);
+	}
+	glEnd();
 }
 
 /*************************************************************************
