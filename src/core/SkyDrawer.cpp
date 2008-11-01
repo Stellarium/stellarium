@@ -399,7 +399,7 @@ bool SkyDrawer::drawPointSource(double x, double y, const float rcMag[2], const 
 void SkyDrawer::preDrawSky3dModel(double illuminatedArea, float mag, bool lighting)
 {
 	// Set the main source of light to be the sun
-	const Vec3d sunPos = core->getNavigation()->getHeliocentricEclipticToEyeMat()*Vec3d(0,0,0);
+	const Vec3d sunPos = core->getNavigation()->getHeliocentricEclipticModelViewMat()*Vec3d(0,0,0);
 	glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
 	
 	if (lighting)

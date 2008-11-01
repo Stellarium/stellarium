@@ -256,24 +256,27 @@ void Navigator::decreaseTimeSpeed()
 void Navigator::setAltAzVisionDirection(const Vec3d& _pos)
 {
 	altAzVisionDirection = _pos;
-	earthEquVisionDirection=altAzToEarthEqu(altAzVisionDirection);
-	J2000EquVisionDirection = matEarthEquToJ2000*earthEquVisionDirection;
+	earthEquVisionDirection=altAzToEquinoxEqu(altAzVisionDirection);
+	J2000EquVisionDirection = matEquinoxEquToJ2000*earthEquVisionDirection;
+	updateModelViewMat();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Navigator::setEarthEquVisionDirection(const Vec3d& _pos)
+void Navigator::setEquinoxEquVisionDirection(const Vec3d& _pos)
 {
 	earthEquVisionDirection = _pos;
-	J2000EquVisionDirection = matEarthEquToJ2000*earthEquVisionDirection;
-	altAzVisionDirection = earthEquToAltAz(earthEquVisionDirection);
+	J2000EquVisionDirection = matEquinoxEquToJ2000*earthEquVisionDirection;
+	altAzVisionDirection = equinoxEquToAltAz(earthEquVisionDirection);
+	updateModelViewMat();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Navigator::setJ2000EquVisionDirection(const Vec3d& _pos)
 {
 	J2000EquVisionDirection = _pos;
-	earthEquVisionDirection = matJ2000ToEarthEqu*J2000EquVisionDirection;
-	altAzVisionDirection = earthEquToAltAz(earthEquVisionDirection);
+	earthEquVisionDirection = matJ2000ToEquinoxEqu*J2000EquVisionDirection;
+	altAzVisionDirection = equinoxEquToAltAz(earthEquVisionDirection);
+	updateModelViewMat();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -305,17 +308,17 @@ void Navigator::updateTime(double deltaTime)
 // The non optimized (more clear version is available on the CVS : before date 25/07/2003)
 void Navigator::updateTransformMatrices(void)
 {
-	matAltAzToEarthEqu = position->getRotAltAzToEquatorial(JDay);
-	matEarthEquToAltAz = matAltAzToEarthEqu.transpose();
+	matAltAzToEquinoxEqu = position->getRotAltAzToEquatorial(JDay);
+	matEquinoxEquToAltAz = matAltAzToEquinoxEqu.transpose();
 
-	matEarthEquToJ2000 = matVsop87ToJ2000 * position->getRotEquatorialToVsop87();
-	matJ2000ToEarthEqu = matEarthEquToJ2000.transpose();
-	matJ2000ToAltAz = matEarthEquToAltAz*matJ2000ToEarthEqu;
+	matEquinoxEquToJ2000 = matVsop87ToJ2000 * position->getRotEquatorialToVsop87();
+	matJ2000ToEquinoxEqu = matEquinoxEquToJ2000.transpose();
+	matJ2000ToAltAz = matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;
 	
-	matHeliocentricEclipticToEarthEqu = matJ2000ToEarthEqu * matVsop87ToJ2000 * Mat4d::translation(-position->getCenterVsop87Pos());
+	matHeliocentricEclipticToEquinoxEqu = matJ2000ToEquinoxEqu * matVsop87ToJ2000 * Mat4d::translation(-position->getCenterVsop87Pos());
 
 	// These two next have to take into account the position of the observer on the earth
-	Mat4d tmp = matJ2000ToVsop87 * matEarthEquToJ2000 * matAltAzToEarthEqu;
+	Mat4d tmp = matJ2000ToVsop87 * matEquinoxEquToJ2000 * matAltAzToEquinoxEqu;
 
 	matAltAzToHeliocentricEcliptic =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
 	                      Mat4d::translation(Vec3d(0.,0., position->getDistanceFromCenter()));
@@ -354,21 +357,21 @@ void Navigator::updateModelViewMat(void)
 		// convert everything back to local coord
 		f = altAzVisionDirection;
 		f.normalize();
-		s = earthEquToAltAz( s );
+		s = equinoxEquToAltAz( s );
 	}
 
 	Vec3d u(s^f);
 	s.normalize();
 	u.normalize();
 
-	matAltAzToEye.set(s[0],u[0],-f[0],0.,
+	matAltAzModelView.set(s[0],u[0],-f[0],0.,
 	                     s[1],u[1],-f[1],0.,
 	                     s[2],u[2],-f[2],0.,
 	                     0.,0.,0.,1.);
 
-	matEarthEquToEye = matAltAzToEye*matEarthEquToAltAz;
-	matHeliocentricEclipticToEye = matAltAzToEye*matHeliocentricEclipticToAltAz;
-	matJ2000ToEye = matEarthEquToEye*matJ2000ToEarthEqu;
+	matEquinoxEquModelView = matAltAzModelView*matEquinoxEquToAltAz;
+	matHeliocentricEclipticModelView = matAltAzModelView*matHeliocentricEclipticToAltAz;
+	matJ2000ModelView = matEquinoxEquModelView*matJ2000ToEquinoxEqu;
 }
 
 

@@ -578,8 +578,8 @@ font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstanc
 		case LOCAL : frameType = StelCore::FrameLocal; break;
 		case MERIDIAN : frameType = StelCore::FrameLocal; break;
 		case ECLIPTIC : frameType = StelCore::FrameHelio; break;
-		case EQUATOR : frameType = StelCore::FrameEarthEqu; break;
-		default : frameType = StelCore::FrameEarthEqu;
+		case EQUATOR : frameType = StelCore::FrameEquinoxEqu; break;
+		default : frameType = StelCore::FrameEquinoxEqu;
 	}
 }
 
@@ -616,7 +616,7 @@ void SkyLine::draw(StelCore *core) const
 GridLinesMgr::GridLinesMgr()
 {
 	setObjectName("GridLinesMgr");
-	equGrid = new SkyGrid(StelCore::FrameEarthEqu);
+	equGrid = new SkyGrid(StelCore::FrameEquinoxEqu);
 	equJ2000Grid = new SkyGrid(StelCore::FrameJ2000);
 	aziGrid = new SkyGrid(StelCore::FrameLocal);
 	equatorLine = new SkyLine(SkyLine::EQUATOR);

@@ -89,19 +89,19 @@ public:
 	//! Return translated object's name
 	virtual QString getNameI18n(void) const = 0;
 	
-	//! Get observer centered equatorial coordinates at equinox J2000
+	//! Get observer-centered equatorial coordinates at equinox J2000
 	virtual Vec3d getJ2000EquatorialPos(const Navigator *nav) const = 0;
 	
-	//! Get observer centered equatorial coordinate at the current equinox
-	//! The frame has it's Z axis at the observer current rotation axis
+	//! Get observer-centered equatorial coordinate at the current equinox
+	//! The frame has it's Z axis at the planet's current rotation axis
 	//! At time 2000-01-01 this frame is almost the same as J2000, but ONLY if the observer is on earth
 	Vec3d getEquinoxEquatorialPos(const Navigator* nav) const;
 	
-	//! Get observer centered hour angle + declination (at current equinox)
-	//! The frame has its Z axis at the observer current rotation axis
+	//! Get observer-centered hour angle + declination (at current equinox)
+	//! The frame has its Z axis at the planet's current rotation axis
 	Vec3d getSideralPos(const StelCore* core) const;
 	
-	//! Get observer local alt/az coordinate
+	//! Get observer-centered alt/az position
 	//! The frame has it's Z axis at the zenith
 	Vec3d getAltAzPos(const Navigator* nav) const;
 	
