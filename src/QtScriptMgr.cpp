@@ -168,7 +168,6 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 	Q_ASSERT(nav);
 	double timeSpeed = nav->getTimeSpeed();
 
-	qDebug() << "StelMainScriptAPI::waitFor starting to wait for" << StelUtils::jdToIsoString(JD) << "(time is" << StelUtils::jdToIsoString(nav->getJDay()) << ")";
 	if (timeSpeed == 0.)
 	{
 		qWarning() << "waitFor called with no time passing - would be infinite. not waiting!";
@@ -184,7 +183,6 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 		while(nav->getJDay() > JD)
 			MySleep::msleep(50);
 	}
-	qDebug() << "StelMainScriptAPI::waitFor done waiting for" << StelUtils::jdToIsoString(JD) << "(time is" << StelUtils::jdToIsoString(nav->getJDay()) << ")";
 }
 
 void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, double altitude, double duration, const QString& name, const QString& planet)
