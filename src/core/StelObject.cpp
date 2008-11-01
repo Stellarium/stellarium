@@ -40,7 +40,7 @@ void intrusive_ptr_release(StelObject* p)
 
 Vec3d StelObject::getEquinoxEquatorialPos(const Navigator* nav) const
 {
-	return nav->j2000ToEarthEqu(getJ2000EquatorialPos(nav));
+	return nav->j2000ToEquinoxEqu(getJ2000EquatorialPos(nav));
 }
 
 // Return the radius of a circle containing the object on screen
@@ -55,7 +55,7 @@ Vec3d StelObject::getSideralPos(const StelCore* core) const
 	return Mat4d::zrotation(-core->getNavigation()->getLocalSideralTime())* getEquinoxEquatorialPos(core->getNavigation());
 }
 
-// Get observer local alt/az coordinate
+// Get observer-centered alt/az position
 Vec3d StelObject::getAltAzPos(const Navigator* nav) const
 {
 	return nav->j2000ToAltAz(getJ2000EquatorialPos(nav));

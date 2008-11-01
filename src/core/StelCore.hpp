@@ -47,7 +47,7 @@ public:
 	{
 		FrameLocal,
 		FrameHelio,
-		FrameEarthEqu,
+		FrameEquinoxEqu,
 		FrameJ2000
 	};
 	

@@ -76,11 +76,11 @@ public:
 	MountMode getMountMode(void) {return ((getViewingMode()==Navigator::ViewHorizon) ? MountAltAzimuthal : MountEquatorial);}
 
 	//! Get vision direction
-	const Vec3d& getEarthEquVisionDirection(void) const {return earthEquVisionDirection;}
+	const Vec3d& getEquinoxEquVisionDirection(void) const {return earthEquVisionDirection;}
 	const Vec3d& getJ2000EquVisionDirection(void) const {return J2000EquVisionDirection;}
 	const Vec3d& getAltAzVisionDirection(void) const {return altAzVisionDirection;}
 	void setAltAzVisionDirection(const Vec3d& _pos);
-	void setEarthEquVisionDirection(const Vec3d& _pos);
+	void setEquinoxEquVisionDirection(const Vec3d& _pos);
 	void setJ2000EquVisionDirection(const Vec3d& _pos);
 	
 	//! Get the informations on the current location
@@ -100,31 +100,30 @@ public:
 	//! Return the observer heliocentric ecliptic position
 	Vec3d getObserverHelioPos(void) const;
 
-	//! Transform vector from local coordinate to equatorial
-	Vec3d altAzToEarthEqu(const Vec3d& v) const { return matAltAzToEarthEqu*v; }
+	//! Transform vector from altazimuthal coordinate to equatorial
+	Vec3d altAzToEquinoxEqu(const Vec3d& v) const { return matAltAzToEquinoxEqu*v; }
 
-	//! Transform vector from equatorial coordinate to local
-	Vec3d earthEquToAltAz(const Vec3d& v) const { return matEarthEquToAltAz*v; }
-	Vec3d earthEquToJ2000(const Vec3d& v) const { return matEarthEquToJ2000*v; }
-	Vec3d j2000ToEarthEqu(const Vec3d& v) const { return matJ2000ToEarthEqu*v; }
+	//! Transform vector from equatorial coordinate to altazimuthal
+	Vec3d equinoxEquToAltAz(const Vec3d& v) const { return matEquinoxEquToAltAz*v; }
+	Vec3d equinoxEquToJ2000(const Vec3d& v) const { return matEquinoxEquToJ2000*v; }
+	Vec3d j2000ToEquinoxEqu(const Vec3d& v) const { return matJ2000ToEquinoxEqu*v; }
 	Vec3d j2000ToAltAz(const Vec3d& v) const { return matJ2000ToAltAz*v; }
 	
-	//! Transform vector from heliocentric ecliptic coordinate to local
+	//! Transform vector from heliocentric ecliptic coordinate to altazimuthal
 	Vec3d heliocentricEclipticToAltAz(const Vec3d& v) const { return matHeliocentricEclipticToAltAz*v; }
 
-	//! Transform vector from heliocentric coordinate to earth equatorial,
-	//! only needed in meteor.cpp
-	Vec3d heliocentricEclipticToEarthEqu(const Vec3d& v) const { return matHeliocentricEclipticToEarthEqu*v; }
+	//! Transform from heliocentric coordinate to equatorial at current equinox (for the planet where the observer stands)
+	Vec3d heliocentricEclipticToEquinoxEqu(const Vec3d& v) const { return matHeliocentricEclipticToEquinoxEqu*v; }
 
 	//! Transform vector from heliocentric coordinate to false equatorial : equatorial
 	//! coordinate but centered on the observer position (usefull for objects close to earth)
-	Vec3d heliocentricEclipticToEarthPosEqu(const Vec3d& v) const { return matAltAzToEarthEqu*matHeliocentricEclipticToAltAz*v; }
+	Vec3d heliocentricEclipticToEarthPosEquinoxEqu(const Vec3d& v) const { return matAltAzToEquinoxEqu*matHeliocentricEclipticToAltAz*v; }
 
 	//! Return the modelview matrix for some coordinate systems
-	const Mat4d& getHeliocentricEclipticToEyeMat(void) const {return matHeliocentricEclipticToEye;}
-	const Mat4d& getEarthEquToEyeMat(void) const {return matEarthEquToEye;}
-	const Mat4d& getAltAzToEyeMat(void) const {return matAltAzToEye;}
-	const Mat4d& getJ2000ToEyeMat(void) const {return matJ2000ToEye;}
+	const Mat4d& getHeliocentricEclipticModelViewMat(void) const {return matHeliocentricEclipticModelView;}
+	const Mat4d& getEquinoxEquModelViewMat(void) const {return matEquinoxEquModelView;}
+	const Mat4d& getAltAzModelViewMat(void) const {return matAltAzModelView;}
+	const Mat4d& getJ2000ModelViewMat(void) const {return matJ2000ModelView;}
 
 	void setViewingMode(ViewingModeType viewMode);
 	ViewingModeType getViewingMode(void) const {return viewingMode;}
@@ -140,9 +139,6 @@ public:
 	//! Return the startup mode, can be preset|Preset or anything else
 	QString getStartupTimeMode() {return startupTimeMode;}
 	void setStartupTimeMode(const QString& s);
-	
-	//! Update the modelview matrices
-	void updateModelViewMat(void);
 	
 	//! Rotation matrix from equatorial J2000 to ecliptic (Vsop87)
 	static const Mat4d matJ2000ToVsop87;
@@ -239,20 +235,23 @@ public slots:
 	void setInitViewDirectionToCurrent(void);
 	
 private:
+	//! Update the modelview matrices
+	void updateModelViewMat(void);
+	
 	// Matrices used for every coordinate transfo
 	Mat4d matHeliocentricEclipticToAltAz;	// Transform from heliocentric ecliptic (Vsop87) to observer-centric altazimuthal coordinate
 	Mat4d matAltAzToHeliocentricEcliptic;	// Transform from observer-centric altazimuthal coordinate to heliocentric ecliptic (Vsop87)
-	Mat4d matAltAzToEarthEqu;				// Transform from observer-centric altazimuthal coordinate to Earth Equatorial
-	Mat4d matEarthEquToAltAz;				// Transform from observer-centric altazimuthal coordinate to Earth Equatorial
-	Mat4d matHeliocentricEclipticToEarthEqu;// Transform from heliocentric ecliptic (Vsop87) to earth equatorial coordinate
-	Mat4d matEarthEquToJ2000;
-	Mat4d matJ2000ToEarthEqu;
+	Mat4d matAltAzToEquinoxEqu;				// Transform from observer-centric altazimuthal coordinate to Earth Equatorial
+	Mat4d matEquinoxEquToAltAz;				// Transform from observer-centric altazimuthal coordinate to Earth Equatorial
+	Mat4d matHeliocentricEclipticToEquinoxEqu;// Transform from heliocentric ecliptic (Vsop87) to earth equatorial coordinate
+	Mat4d matEquinoxEquToJ2000;
+	Mat4d matJ2000ToEquinoxEqu;
 	Mat4d matJ2000ToAltAz;
 	
-	Mat4d matAltAzToEye;					// Modelview matrix for observer-centric altazimuthal drawing
-	Mat4d matEarthEquToEye;					// Modelview matrix for observer-centric equatorial drawing
-	Mat4d matJ2000ToEye;					// Modelview matrix for observer-centric J2000 equatorial drawing
-	Mat4d matHeliocentricEclipticToEye;		// Modelview matrix for heliocentric ecliptic (Vsop87) drawing
+	Mat4d matAltAzModelView;					// Modelview matrix for observer-centric altazimuthal drawing
+	Mat4d matEquinoxEquModelView;					// Modelview matrix for observer-centric equatorial drawing
+	Mat4d matJ2000ModelView;					// Modelview matrix for observer-centric J2000 equatorial drawing
+	Mat4d matHeliocentricEclipticModelView;		// Modelview matrix for heliocentric ecliptic (Vsop87) drawing
 
 	// Vision variables
 	// Viewing direction in altazimuthal and equatorial coordinates

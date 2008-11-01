@@ -124,16 +124,16 @@ void StelCore::setCurrentFrame(FrameType frameType) const
 	switch (frameType)
 	{
 		case FrameLocal:
-			projection->setModelViewMatrix(navigation->getAltAzToEyeMat());
+			projection->setModelViewMatrix(navigation->getAltAzModelViewMat());
 			break;
 		case FrameHelio:
-			projection->setModelViewMatrix(navigation->getHeliocentricEclipticToEyeMat());
+			projection->setModelViewMatrix(navigation->getHeliocentricEclipticModelViewMat());
 			break;
-		case FrameEarthEqu:
-			projection->setModelViewMatrix(navigation->getEarthEquToEyeMat());
+		case FrameEquinoxEqu:
+			projection->setModelViewMatrix(navigation->getEquinoxEquModelViewMat());
 			break;
 		case FrameJ2000:
-			projection->setModelViewMatrix(navigation->getJ2000ToEyeMat());
+			projection->setModelViewMatrix(navigation->getJ2000ModelViewMat());
 			break;
 		default:
 			qDebug() << "Unknown reference frame type: " << (int)frameType << ".";
