@@ -67,6 +67,9 @@ public:
 
 	//! Return the associated location or NULL
 	const Location& getLocation() const {return location;}
+
+	//! Set the z-axis rotation (offset from original value when rotated
+	void setZRotation(double d) {angleRotateZOffset = d;}
 	
 protected:
 	//! Load attributes common to all landscapes
@@ -95,6 +98,8 @@ protected:
 	} landscapeTexCoord;
 	
 	Location location;
+	float angleRotateZ;
+	float angleRotateZOffset;
 };
 
 
@@ -102,7 +107,7 @@ class LandscapeOldStyle : public Landscape
 {
 public:
 	LandscapeOldStyle(float _radius = 2.);
-    virtual ~LandscapeOldStyle();
+	virtual ~LandscapeOldStyle();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
 	void create(bool _fullpath, QMap<QString, QString> param);
@@ -123,9 +128,8 @@ private:
 	float fogAngleShift;
 	float decorAltAngle;
 	float decorAngleShift;
-	float decorAngleRotatez;
 	float groundAngleShift;
-	float groundAngleRotatez;
+	float groundAngleRotateZ;
 	int drawGroundFirst;
 	bool tanMode;	// Whether the angles should be converted using tan instead of sin 
 };
@@ -138,12 +142,11 @@ public:
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
 	void create(const QString _name, bool _fullpath, const QString& _maptex,
-	            double _texturefov, double angleRotatez);
+	            double _texturefov, double angleRotateZ);
 private:
 
 	STextureSP mapTex;
 	float texFov;
-	float angleRotatez;
 };
 
 
@@ -155,11 +158,10 @@ public:
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
 	void create(const QString _name, bool _fullpath,
-	            const QString& _maptex, double angleRotatez);
+	            const QString& _maptex, double angleRotateZ);
 private:
 
 	STextureSP mapTex;
-	float angleRotatez;
 };
 
 #endif // _LANDSCAPE_HPP_

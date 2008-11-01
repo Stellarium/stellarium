@@ -94,7 +94,7 @@ public:
 	//! directory in which the files (textures and so on) for the landscape reside.
 	//! @return A pointer to the newly created landscape object.
 	Landscape* createFromFile(const QString& landscapeFile, const QString& landscapeId);
-	
+
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods callable from script and GUI
@@ -164,6 +164,12 @@ public slots:
 	
 	//! Set the light pollution following the Bortle Scale
 	void setAtmosphereBortleLightPollution(int bIndex);
+	
+	//! Set the rotation of the landscape about the z-axis.
+	//! This is intended for special uses such as when the landscape consists of
+	//! a vehicle which might change orientation over time (e.g. a ship).
+	//! @param d the rotation angle in degrees as an offset from the originally loaded value.
+	void setZRotation(double d);
 	
 private:
 	//! Get light pollution luminance level.
