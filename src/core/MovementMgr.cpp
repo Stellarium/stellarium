@@ -486,7 +486,7 @@ void MovementMgr::moveTo(const Vec3d& _aim, float moveDuration, bool _localPos, 
 	}
 	else
 	{
-		move.start=nav->getEarthEquVisionDirection();
+		move.start=nav->getEquinoxEquVisionDirection();
 	}
 	move.start.normalize();
 	move.speed=1.f/(moveDuration*1000);
@@ -537,7 +537,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 				/* could track as moves too, but would need to know if start was actually
 				   a zoomed in view on the object or an extraneous zoom out command
 				   if(move.localPos) {
-				   move.start=earthEquToAltAz(selected.getEquinoxEquatorialPos(this));
+				   move.start=equinoxEquToAltAz(selected.getEquinoxEquatorialPos(this));
 				   } else {
 				   move.start=selected.getEquinoxEquatorialPos(this);
 				   }
@@ -560,8 +560,8 @@ void MovementMgr::updateVisionVector(double deltaTime)
 		}
 		else
 		{
-			StelUtils::rectToSphe(&ra_aim, &de_aim, nav->earthEquToAltAz(move.aim));
-			StelUtils::rectToSphe(&ra_start, &de_start, nav->earthEquToAltAz(move.start));
+			StelUtils::rectToSphe(&ra_aim, &de_aim, nav->equinoxEquToAltAz(move.aim));
+			StelUtils::rectToSphe(&ra_start, &de_start, nav->equinoxEquToAltAz(move.start));
 		}
 		
 		// Trick to choose the good moving direction and never travel on a distance > PI
@@ -579,7 +579,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 		
 		Vec3d tmp;
 		StelUtils::spheToRect(ra_now, de_now, tmp);
-		nav->setEarthEquVisionDirection(nav->altAzToEarthEqu(tmp));
+		nav->setEquinoxEquVisionDirection(nav->altAzToEquinoxEqu(tmp));
 
 		move.coef+=move.speed*deltaTime*1000;
 		if (move.coef>=1.)
@@ -591,7 +591,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 			}
 			else
 			{
-				nav->setEarthEquVisionDirection(move.aim);
+				nav->setEquinoxEquVisionDirection(move.aim);
 			}
 		}
 	}
@@ -599,19 +599,19 @@ void MovementMgr::updateVisionVector(double deltaTime)
 	{
 		if (flagTracking && StelApp::getInstance().getStelObjectMgr().getWasSelected()) // Equatorial vision vector locked on selected object
 		{
-			nav->setEarthEquVisionDirection(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigation()));
+			nav->setEquinoxEquVisionDirection(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigation()));
 		}
 		else
 		{
 			if (flagLockEquPos) // Equatorial vision vector locked
 			{
 				// Recalc local vision vector
-				nav->setAltAzVisionDirection(nav->earthEquToAltAz(nav->getEarthEquVisionDirection()));
+				nav->setAltAzVisionDirection(nav->equinoxEquToAltAz(nav->getEquinoxEquVisionDirection()));
 			}
 			else // Local vision vector locked
 			{
 				// Recalc equatorial vision vector
-				nav->setEarthEquVisionDirection(nav->altAzToEarthEqu(nav->getAltAzVisionDirection()));
+				nav->setEquinoxEquVisionDirection(nav->altAzToEquinoxEqu(nav->getAltAzVisionDirection()));
 			}
 		}
 	}
@@ -624,7 +624,7 @@ void MovementMgr::panView(double deltaAz, double deltaAlt)
 	Navigator* nav = core->getNavigation();
 	double azVision, altVision;
 
-	if( nav->getViewingMode() == Navigator::ViewEquator) StelUtils::rectToSphe(&azVision,&altVision,nav->getEarthEquVisionDirection());
+	if( nav->getViewingMode() == Navigator::ViewEquator) StelUtils::rectToSphe(&azVision,&altVision,nav->getEquinoxEquVisionDirection());
 	else StelUtils::rectToSphe(&azVision,&altVision,nav->getAltAzVisionDirection());
 
 	// if we are moving in the Azimuthal angle (left/right)
@@ -644,19 +644,16 @@ void MovementMgr::panView(double deltaAz, double deltaAlt)
 		{
 			Vec3d tmp;
 			StelUtils::spheToRect(azVision, altVision, tmp);
-			nav->setAltAzVisionDirection(nav->earthEquToAltAz(tmp));
+			nav->setAltAzVisionDirection(nav->equinoxEquToAltAz(tmp));
 		}
 		else
 		{
 			Vec3d tmp;
 			StelUtils::spheToRect(azVision, altVision, tmp);
 			// Calc the equatorial coordinate of the direction of vision wich was in Altazimuthal coordinate
-			nav->setEarthEquVisionDirection(nav->altAzToEarthEqu(tmp));
+			nav->setEquinoxEquVisionDirection(nav->altAzToEquinoxEqu(tmp));
 		}
 	}
-
-	// Update the final modelview matrices
-	nav->updateModelViewMat();
 }
 
 
@@ -671,7 +668,7 @@ void MovementMgr::dragView(int x1, int y1, int x2, int y2)
 	if (nav->getViewingMode()==Navigator::ViewHorizon)
 		core->setCurrentFrame(StelCore::FrameLocal);
 	else
-		core->setCurrentFrame(StelCore::FrameEarthEqu);
+		core->setCurrentFrame(StelCore::FrameEquinoxEqu);
 		
 //johannes: StelApp already gives appropriate x/y coordinates
 //	proj->unProject(x2,proj->getViewportHeight()-y2, tempvec2);

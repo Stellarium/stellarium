@@ -904,7 +904,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 	if (!getFlagPlanets())
 		return result;
 		
-	Vec3d v = core->getNavigation()->j2000ToEarthEqu(vv);
+	Vec3d v = core->getNavigation()->j2000ToEquinoxEqu(vv);
 	v.normalize();
 	double cosLimFov = cos(limitFov * M_PI/180.);
 	static Vec3d equPos;

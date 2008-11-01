@@ -284,7 +284,7 @@ void LandscapeOldStyle::drawFog(StelCore* core) const
 	fogTex->bind();
 	
 	const double vpos = tanMode ? radius*std::tan(fogAngleShift*M_PI/180.) : radius*std::sin(fogAngleShift*M_PI/180.);
-	core->getProjection()->setModelViewMatrix(core->getNavigation()->getAltAzToEyeMat() * Mat4d::translation(Vec3d(0.,0.,vpos)));
+	core->getProjection()->setModelViewMatrix(core->getNavigation()->getAltAzModelViewMat() * Mat4d::translation(Vec3d(0.,0.,vpos)));
 	
 	const double height = tanMode ? radius*std::tan(fogAltAngle*M_PI/180.) : radius*std::sin(fogAltAngle*M_PI/180.);
 	core->getProjection()->sCylinder(radius, height, 128, 1, 1);
@@ -362,7 +362,7 @@ void LandscapeOldStyle::drawGround(StelCore* core) const
 	if (!landFader.getInterstate()) return;
 	
 	const double vshift = tanMode ? radius*std::tan(groundAngleShift*M_PI/180.) : radius*std::sin(groundAngleShift*M_PI/180.);
-	Mat4d mat = nav->getAltAzToEyeMat() * Mat4d::zrotation(groundAngleRotateZ-angleRotateZOffset*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift));
+	Mat4d mat = nav->getAltAzModelViewMat() * Mat4d::zrotation(groundAngleRotateZ-angleRotateZOffset*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift));
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
 	glColor4f(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 
@@ -447,7 +447,7 @@ void LandscapeFisheye::draw(StelCore* core)
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	mapTex->bind();
-	prj->setModelViewMatrix(nav->getAltAzToEyeMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
+	prj->setModelViewMatrix(nav->getAltAzModelViewMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
 	prj->sSphereMap(radius,40,20,texFov,1);
 
 	glDisable(GL_CULL_FACE);
@@ -524,7 +524,7 @@ void LandscapeSpherical::draw(StelCore* core)
 
 	// TODO: verify that this works correctly for custom projections
 	// seam is at East
-	prj->setModelViewMatrix(nav->getAltAzToEyeMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
+	prj->setModelViewMatrix(nav->getAltAzModelViewMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
 	prj->sSphere(radius,1.0,40,20,1);
 
 	glDisable(GL_CULL_FACE);
