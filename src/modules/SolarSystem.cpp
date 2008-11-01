@@ -794,7 +794,7 @@ void SolarSystem::draw(StelCore* core)
 	glEnable(GL_LIGHT0);
 
 	// Compute each Planet distance to the observer
-	Vec3d obsHelioPos = nav->getObserverHelioPos();
+	Vec3d obsHelioPos = nav->getObserverHeliocentricEclipticPos();
 	
 	vector<Planet*>::iterator iter;
 	iter = systemPlanets.begin();

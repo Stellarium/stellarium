@@ -377,7 +377,7 @@ void Navigator::updateModelViewMat(void)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Return the observer heliocentric position
-Vec3d Navigator::getObserverHelioPos(void) const
+Vec3d Navigator::getObserverHeliocentricEclipticPos(void) const
 {
 	static const Vec3d v(0.,0.,0.);
 	return matAltAzToHeliocentricEcliptic*v;
