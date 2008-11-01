@@ -62,7 +62,7 @@ private:
 	virtual QString getType(void) const {return "Constellation";}
 
 	//! observer centered J2000 coordinates.
-	virtual Vec3d getObsJ2000Pos(const Navigator *nav) const {return XYZname;}
+	virtual Vec3d getJ2000EquatorialPos(const Navigator *nav) const {return XYZname;}
 
 	virtual double getAngularSize(const StelCore* core) const {assert(0); return 0;}; // TODO
 	

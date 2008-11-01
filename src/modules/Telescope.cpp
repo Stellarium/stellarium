@@ -146,7 +146,7 @@ private:
 	{
 		return true;
 	}
-	Vec3d getObsJ2000Pos(const Navigator *nav=0) const
+	Vec3d getJ2000EquatorialPos(const Navigator *nav=0) const
 	{
 		return XYZ;
 	}
@@ -180,7 +180,7 @@ private:
 	{
 		return (!IS_INVALID_SOCKET(fd) && !wait_for_connection_establishment);
 	}
-	Vec3d getObsJ2000Pos(const Navigator *nav=0) const;
+	Vec3d getJ2000EquatorialPos(const Navigator *nav=0) const;
 	void prepareSelectFds(fd_set &read_fds,fd_set &write_fds,int &fd_max);
 	void handleSelectFds(const fd_set &read_fds,const fd_set &write_fds);
 	void telescopeGoto(const Vec3d &j2000Pos);
@@ -593,7 +593,7 @@ void TelescopeTcp::performReading(void)
 	}
 }
 
-Vec3d TelescopeTcp::getObsJ2000Pos(const Navigator*) const
+Vec3d TelescopeTcp::getJ2000EquatorialPos(const Navigator*) const
 {
 	if (position_pointer->client_micros == 0x7FFFFFFFFFFFFFFFLL)
 	{

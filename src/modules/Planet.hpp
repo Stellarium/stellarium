@@ -120,7 +120,7 @@ public:
 	virtual float getSelectPriority(const Navigator *nav) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual QString getType(void) const {return "Planet";}
-	virtual Vec3d getObsJ2000Pos(const Navigator *nav) const;
+	virtual Vec3d getJ2000EquatorialPos(const Navigator *nav) const;
 	virtual QString getEnglishName(void) const {return englishName;}
 	virtual QString getNameI18n(void) const {return nameI18;}
 	virtual double getAngularSize(const StelCore* core) const;

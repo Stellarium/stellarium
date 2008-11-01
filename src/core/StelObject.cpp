@@ -38,9 +38,9 @@ void intrusive_ptr_release(StelObject* p)
 	p->release();
 }
 
-Vec3d StelObject::getObsEquatorialPos(const Navigator* nav) const
+Vec3d StelObject::getEquinoxEquatorialPos(const Navigator* nav) const
 {
-	return nav->j2000ToEarthEqu(getObsJ2000Pos(nav));
+	return nav->j2000ToEarthEqu(getJ2000EquatorialPos(nav));
 }
 
 // Return the radius of a circle containing the object on screen
@@ -50,15 +50,15 @@ float StelObject::getOnScreenSize(const StelCore* core) const
 }
 
 // Get observer local sideral coordinate
-Vec3d StelObject::getObsSideralPos(const StelCore* core) const
+Vec3d StelObject::getSideralPos(const StelCore* core) const
 {
-	return Mat4d::zrotation(-core->getNavigation()->getLocalSideralTime())* getObsEquatorialPos(core->getNavigation());
+	return Mat4d::zrotation(-core->getNavigation()->getLocalSideralTime())* getEquinoxEquatorialPos(core->getNavigation());
 }
 
 // Get observer local alt/az coordinate
 Vec3d StelObject::getAltAzPos(const Navigator* nav) const
 {
-	return nav->j2000ToAltAz(getObsJ2000Pos(nav));
+	return nav->j2000ToAltAz(getJ2000EquatorialPos(nav));
 }
 
 // Format the positional info string contain J2000/of date/altaz/hour angle positions for the object
@@ -70,21 +70,21 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 	if (flags&RaDecJ2000)
 	{
 		double dec_j2000, ra_j2000;
-		StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getObsJ2000Pos(nav));
+		StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getJ2000EquatorialPos(nav));
 		res += q_("RA/DE (J2000): %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true), StelUtils::radToDmsStr(dec_j2000,true)) + "<br>";
 	}
 	
 	if (flags&RaDecOfDate)
 	{
 		double dec_equ, ra_equ;
-		StelUtils::rectToSphe(&ra_equ,&dec_equ,getObsEquatorialPos(nav));
+		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(nav));
 		res += q_("RA/DE (of date): %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ)) + "<br>";
 	}
 	
 	if (flags&HourAngle)
 	{
 		double dec_sideral, ra_sideral;
-		StelUtils::rectToSphe(&ra_sideral,&dec_sideral,getObsSideralPos(core));
+		StelUtils::rectToSphe(&ra_sideral,&dec_sideral,getSideralPos(core));
 		ra_sideral = 2.*M_PI-ra_sideral;
 		res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) + "<br>";
 	}

@@ -110,7 +110,7 @@ void TelescopeMgr::draw(StelCore* core)
 		if (tel->isConnected() && tel->hasKnownPosition())
 		{
 			Vec3d XY;
-			if (prj->projectCheck(tel->getObsJ2000Pos(0),XY))
+			if (prj->projectCheck(tel->getJ2000EquatorialPos(0),XY))
 			{
 				if (telescopeFader.getInterstate() >= 0)
 				{
@@ -171,7 +171,7 @@ QList<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, 
 	double cosLimFov = cos(limitFov * M_PI/180.);
 	foreach (Telescope* tel, telescope_map)
 	{
-		if (tel->getObsJ2000Pos(0).dot(v) >= cosLimFov)
+		if (tel->getJ2000EquatorialPos(0).dot(v) >= cosLimFov)
 		{
 			result.push_back(tel);
 		}
@@ -277,7 +277,7 @@ void TelescopeMgr::drawPointer(const Projector* prj, const Navigator * nav)
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
-		Vec3d pos=obj->getObsJ2000Pos(nav);
+		Vec3d pos=obj->getJ2000EquatorialPos(nav);
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos)) return;
