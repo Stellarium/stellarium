@@ -170,7 +170,7 @@ void NebulaMgr::drawPointer(const StelCore* core)
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
-		Vec3d pos=obj->getObsJ2000Pos(nav);
+		Vec3d pos=obj->getJ2000EquatorialPos(nav);
 		Vec3d screenpos;
 		
 		// Compute 2D pos and return if outside screen

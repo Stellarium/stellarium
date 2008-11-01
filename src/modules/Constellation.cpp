@@ -83,7 +83,7 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 
 	for(unsigned int ii=0;ii<numberOfSegments*2;++ii)
 	{
-		XYZname+= asterism[ii]->getObsJ2000Pos(0);
+		XYZname+= asterism[ii]->getJ2000EquatorialPos(0);
 	}
 	XYZname*=1./(numberOfSegments*2);
 
@@ -104,7 +104,7 @@ void Constellation::drawOptim(Projector* prj) const
 	Vec3d star2;
 	for (unsigned int i=0;i<numberOfSegments;++i)
 	{
-		if (prj->projectLineCheck(asterism[2*i]->getObsJ2000Pos(0),star1,asterism[2*i+1]->getObsJ2000Pos(0),star2))
+		if (prj->projectLineCheck(asterism[2*i]->getJ2000EquatorialPos(0),star1,asterism[2*i+1]->getJ2000EquatorialPos(0),star2))
 		{
 			glBegin(GL_LINES);
 			glVertex2f(star1[0],star1[1]);

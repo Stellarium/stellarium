@@ -98,7 +98,7 @@ bool SkyLabel::draw(Projector *proj, const Navigator* nav, const StelCore* core)
 	if(labelFader.getInterstate() <= 0.0)
 		return false;
 
-	Vec3d objectPos = labelObject->getObsJ2000Pos(nav);
+	Vec3d objectPos = labelObject->getJ2000EquatorialPos(nav);
 	Vec3d labelXY;
 	proj->project(objectPos,labelXY);
 

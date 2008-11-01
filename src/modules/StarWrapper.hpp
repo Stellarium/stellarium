@@ -80,7 +80,7 @@ protected:
   StarWrapper(const SpecialZoneArray<Star> *a,
               const SpecialZoneData<Star> *z,
               const Star *s) : a(a),z(z),s(s) {}
-  Vec3d getObsJ2000Pos(const Navigator*) const {
+  Vec3d getJ2000EquatorialPos(const Navigator*) const {
     const double d2000 = 2451545.0;
     return s->getJ2000Pos(z,
                   (M_PI/180)*(0.0001/3600)
