@@ -173,7 +173,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	
 	// Now select the object minimizing the function y = distance(in pixel) + magnitude
 	Vec3d winpos;
-	core->getProjection()->setCurrentFrame(Projector::FrameJ2000);
+	core->setCurrentFrame(StelCore::FrameJ2000);
 	core->getProjection()->project(v, winpos);
 	float xpos = winpos[0];
 	float ypos = winpos[1];
@@ -204,7 +204,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 {
 	Vec3d v;
-	core->getProjection()->setCurrentFrame(Projector::FrameJ2000);
+	core->setCurrentFrame(StelCore::FrameJ2000);
 	core->getProjection()->unProject(x,y,v);
 	return cleverFind(core, v);
 }

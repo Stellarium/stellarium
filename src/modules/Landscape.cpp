@@ -23,6 +23,7 @@
 #include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
 #include "Location.hpp"
+#include "StelCore.hpp"
 
 #include <QDebug>
 #include <QSettings>
@@ -258,18 +259,18 @@ void LandscapeOldStyle::create(bool _fullpath, QMap<QString, QString> param)
 	drawGroundFirst    = param["draw_ground_first"].toInt();
 }
 
-void LandscapeOldStyle::draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav)
+void LandscapeOldStyle::draw(StelCore* core)
 {
 	if(!validLandscape) return;
-	if (drawGroundFirst) drawGround(eye, prj, nav);
-	drawDecor(eye, prj, nav);
-	if (!drawGroundFirst) drawGround(eye, prj, nav);
-	drawFog(eye, prj, nav);
+	if (drawGroundFirst) drawGround(core);
+	drawDecor(core);
+	if (!drawGroundFirst) drawGround(core);
+	drawFog(core);
 }
 
 
 // Draw the horizon fog
-void LandscapeOldStyle::drawFog(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const
+void LandscapeOldStyle::drawFog(StelCore* core) const
 {
 	if(!fogFader.getInterstate()) return;
 	glBlendFunc(GL_ONE, GL_ONE);
@@ -283,17 +284,19 @@ void LandscapeOldStyle::drawFog(ToneReproducer * eye, const Projector* prj, cons
 	fogTex->bind();
 	
 	const double vpos = tanMode ? radius*std::tan(fogAngleShift*M_PI/180.) : radius*std::sin(fogAngleShift*M_PI/180.);
-	prj->setCustomFrame(nav->getAltAzToEyeMat() * Mat4d::translation(Vec3d(0.,0.,vpos)));
+	core->getProjection()->setModelViewMatrix(core->getNavigation()->getAltAzToEyeMat() * Mat4d::translation(Vec3d(0.,0.,vpos)));
 	
 	const double height = tanMode ? radius*std::tan(fogAltAngle*M_PI/180.) : radius*std::sin(fogAltAngle*M_PI/180.);
-	prj->sCylinder(radius, height, 128, 1, 1);
+	core->getProjection()->sCylinder(radius, height, 128, 1, 1);
 	
 	glDisable(GL_CULL_FACE);
 }
 
 // Draw the mountains with a few pieces of texture
-void LandscapeOldStyle::drawDecor(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const
+void LandscapeOldStyle::drawDecor(StelCore* core) const
 {
+	const Projector* prj = core->getProjection();
+	
 	if (!landFader.getInterstate()) return;
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_TEXTURE_2D);
@@ -302,7 +305,7 @@ void LandscapeOldStyle::drawDecor(ToneReproducer * eye, const Projector* prj, co
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
 	glColor4f(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 
-	prj->setCurrentFrame(Projector::FrameLocal);
+	core->setCurrentFrame(StelCore::FrameLocal);
 
 	const int stacks = 8;
 	  // make slices_per_side=(3<<K) so that the innermost polygon of the
@@ -351,8 +354,11 @@ void LandscapeOldStyle::drawDecor(ToneReproducer * eye, const Projector* prj, co
 
 
 // Draw the ground
-void LandscapeOldStyle::drawGround(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const
+void LandscapeOldStyle::drawGround(StelCore* core) const
 {
+	const Projector* prj = core->getProjection();
+	const Navigator* nav = core->getNavigation();
+	
 	if (!landFader.getInterstate()) return;
 	
 	const double vshift = tanMode ? radius*std::tan(groundAngleShift*M_PI/180.) : radius*std::sin(groundAngleShift*M_PI/180.);
@@ -369,7 +375,7 @@ void LandscapeOldStyle::drawGround(ToneReproducer * eye, const Projector* prj, c
 	  // fandisk becomes a triangle:
 	int slices_per_side = 3*64/(nbDecorRepeat*nbSide);
 	if (slices_per_side<=0) slices_per_side = 1;
-	prj->setCustomFrame(mat);
+	prj->setModelViewMatrix(mat);
 
 	// draw a fan disk instead of a ordinary disk to that the inner slices
 	// are not so slender. When they are too slender, culling errors occur
@@ -424,11 +430,14 @@ void LandscapeFisheye::create(const QString _name, bool _fullpath, const QString
 }
 
 
-void LandscapeFisheye::draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav)
+void LandscapeFisheye::draw(StelCore* core)
 {
 	if(!validLandscape) return;
 	if(!landFader.getInterstate()) return;
 
+	Navigator* nav = core->getNavigation();
+	Projector* prj = core->getProjection();
+	
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
@@ -438,7 +447,7 @@ void LandscapeFisheye::draw(ToneReproducer * eye, const Projector* prj, const Na
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	mapTex->bind();
-	prj->setCustomFrame(nav->getAltAzToEyeMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
+	prj->setModelViewMatrix(nav->getAltAzToEyeMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
 	prj->sSphereMap(radius,40,20,texFov,1);
 
 	glDisable(GL_CULL_FACE);
@@ -486,11 +495,14 @@ void LandscapeSpherical::create(const QString _name, bool _fullpath, const QStri
 }
 
 
-void LandscapeSpherical::draw(ToneReproducer* eye, const Projector* prj, const Navigator* nav)
+void LandscapeSpherical::draw(StelCore* core)
 {
 	if(!validLandscape) return;
 	if(!landFader.getInterstate()) return;
 
+	Navigator* nav = core->getNavigation();
+	Projector* prj = core->getProjection();
+	
 	// Need to flip texture usage horizontally due to glusphere convention
 	// so that left-right is consistent in source texture and rendering
 	glMatrixMode(GL_TEXTURE);
@@ -512,7 +524,7 @@ void LandscapeSpherical::draw(ToneReproducer* eye, const Projector* prj, const N
 
 	// TODO: verify that this works correctly for custom projections
 	// seam is at East
-	prj->setCustomFrame(nav->getAltAzToEyeMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
+	prj->setModelViewMatrix(nav->getAltAzToEyeMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
 	prj->sSphere(radius,1.0,40,20,1);
 
 	glDisable(GL_CULL_FACE);

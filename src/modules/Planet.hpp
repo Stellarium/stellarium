@@ -205,7 +205,7 @@ public:
 	///// Trail related code
 	// Should move to a TrailPath class which works on a StelObject, not on a Planet
 	void updateTrail(const Navigator* nav);
-	void drawTrail(const Navigator * nav, const Projector* prj);
+	void drawTrail(const StelCore* core);
 	//! Start/stop accumulating new trail data (clear old data)
 	void startTrail(bool b);
 	void setFlagTrail(bool b){if(b == trailFader) return; trailFader = b; startTrail(b);}
@@ -227,7 +227,7 @@ public:
 	bool getFlagOrbits(void) const {return orbitFader;}
 	LinearFader orbitFader;
 	// draw orbital path of Planet
-	void drawOrbit(const Navigator * nav, const Projector* prj);
+	void drawOrbit(const StelCore*);
 	Vec3d orbit[ORBIT_SEGMENTS];   // store heliocentric coordinates for drawing the orbit
 	double lastOrbitJD;
 	double deltaJD;
@@ -245,7 +245,7 @@ protected:
 	static STextureSP texEarthShadow;     // for lunar eclipses
 	
 	// draw earth shadow on moon for lunar eclipses
-	void drawEarthShadow(const Navigator * nav, Projector * prj); 
+	void drawEarthShadow(StelCore* core); 
 	
 	// Return the information string "ready to print" :)
 	QString getSkyLabel(const Navigator * nav) const;
