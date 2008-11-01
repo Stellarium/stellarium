@@ -93,14 +93,14 @@ SkyLabel::~SkyLabel()
 {
 }
 
-bool SkyLabel::draw(Projector *proj, const Navigator* nav, const StelCore* core)
+bool SkyLabel::draw(const StelCore* core)
 {
 	if(labelFader.getInterstate() <= 0.0)
 		return false;
 
-	Vec3d objectPos = labelObject->getJ2000EquatorialPos(nav);
+	Vec3d objectPos = labelObject->getJ2000EquatorialPos(core->getNavigation());
 	Vec3d labelXY;
-	proj->project(objectPos,labelXY);
+	core->getProjection()->project(objectPos,labelXY);
 
 	double xOffset(0.);
 	double yOffset(0.);
@@ -155,7 +155,7 @@ bool SkyLabel::draw(Projector *proj, const Navigator* nav, const StelCore* core)
 		jyOffset = labelFont->getLineHeight() / 2.;
 
 	glColor4f(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
-	proj->drawText(labelFont, labelXY[0]+xOffset-jxOffset, labelXY[1]+yOffset-jyOffset, labelText, 0, 0, 0, false);
+	core->getProjection()->drawText(labelFont, labelXY[0]+xOffset-jxOffset, labelXY[1]+yOffset-jyOffset, labelText, 0, 0, 0, false);
 
 	if (labelStyle == SkyLabel::Line)
 	{
@@ -165,7 +165,7 @@ bool SkyLabel::draw(Projector *proj, const Navigator* nav, const StelCore* core)
 
 		// screen coordinates of object
 		Vec3d objXY;
-		proj->project(objectPos,objXY);
+		core->getProjection()->project(objectPos,objXY);
 
 		double lineEndX = labelXY[0]+xOffset;
 		double lineEndY = labelXY[1]+yOffset;
@@ -205,13 +205,13 @@ ScreenLabel::~ScreenLabel()
 {
 }
 
-bool ScreenLabel::draw(Projector *proj, const Navigator* nav, const StelCore* core)
+bool ScreenLabel::draw(const StelCore* core)
 {
 	if(labelFader.getInterstate() <= 0.0)
 		return false;
 
 	glColor4f(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
-	proj->drawText(labelFont, screenX, screenY, labelText, 0, 0, 0, false);
+	core->getProjection()->drawText(labelFont, screenX, screenY, labelText, 0, 0, 0, false);
 	return true;
 }
 
@@ -229,12 +229,6 @@ LabelMgr::~LabelMgr()
 
 void LabelMgr::init()
 {
-	core = StelApp::getInstance().getCore();
-	Q_ASSERT(core);
-	proj = core->getProjection();
-	Q_ASSERT(proj);
-	nav = core->getNavigation();
-	Q_ASSERT(nav);
 }
 
 void LabelMgr::draw(StelCore* core)
@@ -243,7 +237,7 @@ void LabelMgr::draw(StelCore* core)
 	for(std::vector<StelLabel*>::iterator i=allLabels.begin(); i!=allLabels.end(); i++)
 	{
 		if (*i != NULL)
-			(*i)->draw(proj, nav, core);
+			(*i)->draw(core);
 	}
 }
 	

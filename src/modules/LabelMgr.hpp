@@ -31,8 +31,6 @@
 #include <QString>
 
 class StelCore;
-class Navigator;
-class Projector;
 class SFont;
 
 // Base class from which other label types inherit
@@ -43,10 +41,8 @@ public:
 	virtual ~StelLabel() {;}
 
 	//! draw the label on the sky
-	//! @param proj the Projector object
-	//! @param nav the Navigator object
 	//! @param core the StelCore object
-	virtual bool draw(Projector *proj, const Navigator* nav, const StelCore* core) = 0;
+	virtual bool draw(const StelCore* core) = 0;
 	//! update fade for on/off action
 	virtual void update(double deltaTime);
 	//! Set the duration used for the fade in / fade out of the label.
@@ -96,9 +92,8 @@ public:
 	// SkyLabel(const QString& text, Vec3d coords, QString side="NE", double distance=-1.0, SkyLabel::Style style=TextOnly, double enclosureSize=-1.0);
 
 	//! draw the label on the sky
-	//! @param proj the Projector object
-	//! @param nav the Navigator object
-	virtual bool draw(Projector *proj, const Navigator* nav, const StelCore* core);
+	//! @param core the StelCore object
+	virtual bool draw(const StelCore* core);
 
 private:
 	StelObjectP labelObject;
@@ -124,9 +119,8 @@ public:
 	virtual ~ScreenLabel();
 
 	//! draw the label on the sky
-	//! @param proj the Projector object
-	//! @param nav the Navigator object
-	virtual bool draw(Projector *proj, const Navigator* nav, const StelCore* core);
+	//! @param core the StelCore object
+	virtual bool draw(const StelCore* core);
 
 private:
 	int screenX;
@@ -208,9 +202,6 @@ public slots:
 private:
 	SkyLabel::Style stringToStyle(const QString& s);
 	std::vector<StelLabel*> allLabels;
-	StelCore* core;
-	Projector* proj;
-	Navigator* nav;
 };
 
 #endif // _SKYLABELMGR_HPP_
