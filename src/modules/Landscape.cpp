@@ -319,8 +319,8 @@ void LandscapeOldStyle::drawDecor(StelCore* core) const
 	const double alpha = 2.0*M_PI/(nbDecorRepeat*nbSide*slices_per_side);
 	const double ca = cos(alpha);
 	const double sa = sin(alpha);
-	double y0 = radius*cos(angleRotateZ+angleRotateZOffset*M_PI/180.0);
-	double x0 = radius*sin(angleRotateZ+angleRotateZOffset*M_PI/180.0);
+	double y0 = radius*cos((angleRotateZ+angleRotateZOffset)*M_PI/180.0);
+	double x0 = radius*sin((angleRotateZ+angleRotateZOffset)*M_PI/180.0);
 	for (int n=0;n<nbDecorRepeat;n++) for (int i=0;i<nbSide;i++) {
 		sides[i].tex->bind();
 		double tx0 = sides[i].texCoords[0];
@@ -362,7 +362,7 @@ void LandscapeOldStyle::drawGround(StelCore* core) const
 	if (!landFader.getInterstate()) return;
 	
 	const double vshift = tanMode ? radius*std::tan(groundAngleShift*M_PI/180.) : radius*std::sin(groundAngleShift*M_PI/180.);
-	Mat4d mat = nav->getAltAzModelViewMat() * Mat4d::zrotation(groundAngleRotateZ-angleRotateZOffset*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift));
+	Mat4d mat = nav->getAltAzModelViewMat() * Mat4d::zrotation((groundAngleRotateZ-angleRotateZOffset)*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift));
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
 	glColor4f(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 
