@@ -1138,8 +1138,7 @@ void Projector::drawRectSprite2dMode(double x, double y, double sizex, double si
 ///////////////////////////////////////////////////////////////////////////
 // Drawing methods for general (non-linear) mode
 
-void Projector::sSphere(GLdouble radius, GLdouble oneMinusOblateness,
-                        GLint slices, GLint stacks, int orientInside) const
+void Projector::sSphere(GLdouble radius, GLdouble oneMinusOblateness, GLint slices, GLint stacks, int orientInside) const
 {
 	// It is really good for performance to have Vec4f,Vec3f objects
 	// static rather than on the stack. But why?
@@ -1196,14 +1195,12 @@ void Projector::sSphere(GLdouble radius, GLdouble oneMinusOblateness,
 	const GLfloat ds = 1.0 / slices;
 	const GLfloat dt = nsign / stacks; // from inside texture is reversed
 
-
 	// draw intermediate  as quad strips
-	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks;
-	     i++,cos_sin_rho_p+=2)
+	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
 	{
 		glBegin(GL_QUAD_STRIP);
 		s = 0.0;
-		for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;j++,cos_sin_theta_p+=2)
+		for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;++j,cos_sin_theta_p+=2)
 		{
 			x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
 			y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
@@ -1211,9 +1208,7 @@ void Projector::sSphere(GLdouble radius, GLdouble oneMinusOblateness,
 			glTexCoord2f(s, t);
 			if (isLightOn)
 			{
-				c = nsign * lightPos3.dot(Vec3f(x * oneMinusOblateness,
-				                                y * oneMinusOblateness,
-				                                z));
+				c = nsign * lightPos3.dot(Vec3f(x * oneMinusOblateness, y * oneMinusOblateness, z));
 				if (c<0) {c=0;}
 				glColor3f(c*diffuseLight[0] + ambientLight[0],
 				          c*diffuseLight[1] + ambientLight[1],
@@ -1226,9 +1221,7 @@ void Projector::sSphere(GLdouble radius, GLdouble oneMinusOblateness,
 			glTexCoord2f(s, t - dt);
 			if (isLightOn)
 			{
-				c = nsign * lightPos3.dot(Vec3f(x * oneMinusOblateness,
-				                                y * oneMinusOblateness,
-				                                z));
+				c = nsign * lightPos3.dot(Vec3f(x * oneMinusOblateness,y * oneMinusOblateness,z));
 				if (c<0) {c=0;}
 				glColor3f(c*diffuseLight[0] + ambientLight[0],
 				          c*diffuseLight[1] + ambientLight[1],
