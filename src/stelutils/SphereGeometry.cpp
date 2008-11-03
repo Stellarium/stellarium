@@ -123,39 +123,70 @@ Vec3d ConvexPolygon::getBarycenter() const
 	return barycenter;
 }
 
-	
-/*
-
-void ConvexPolygon::getBoundingLonLat(double result[4]) const
+namespace StelGeom
 {
-	assert(vertex.size()==4);
-	const Vec3d oneZ(Vec3d(0,0,1));
+
+//! Compute the intersection of the planes defined by the 2 halfspaces on the sphere (usually on 2 points) and return it in p1 and p2.
+//! If the 2 HalfSpaces don't interesect or intersect only at 1 point, false is returned and p1 and p2 are undefined
+bool planeIntersect2(const HalfSpace& h1, const HalfSpace& h2, Vec3d& p1, Vec3d& p2)
+{
+	const Vec3d& n1 = h1.n;
+	const Vec3d& n2 = h2.n;
+	const double& d1 = h1.d;
+	const double& d2 = h2.d;
+	const double& a1 = n1[0];
+	const double& b1 = n1[1];
+	const double& c1 = n1[2];
+	const double& a2 = n2[0];
+	const double& b2 = n2[1];
+	const double& c2 = n2[2];
+		
+	// Compute the parametric equation of the line at the intersection of the 2 planes
+	Vec3d u = n1^n2;
+	if (u==Vec3d(0,0,0))
+	{
+		// The planes are parallel
+		return false;
+	}
 	
-	// Get the bounding meridian and parallel for the viewport
-	bool insideUp = inside(Vec3d(0,0,1));
-	bool insideDown = inside(Vec3d(0,0,-1));
-
-
-	result[2] = qMin(qMin(vertex[0].latitude(), vertex[1].latitude()), qMin(vertex[2].latitude(), vertex[3].latitude()));
-	result[3] = qMax(qMax(vertex[0].latitude(), vertex[1].latitude()), qMax(vertex[2].latitude(), vertex[3].latitude()));
-	if (result[2]<-M_PI/2)
-		result[2] = -M_PI/2;
-	if (result[3]>M_PI/2)
-		result[3] = M_PI/2;
-
-	if (insideUp) result[3] = M_PI/2;
-	if (insideDown) result[2] = -M_PI/2;
-
-	// Look for long bounds
-	if (insideUp || insideDown)
+	// u gives the direction of the line, still need to find a suitable start point p0
+	u.normalize();
+	int maxI = (fabs(u[0])>fabs(u[1])) ? (fabs(u[0])>fabs(u[2]) ? 0 : 2) : (fabs(u[1])>fabs(u[2]) ? 1 : 2);
+	Vec3d p0;
+	if (maxI==0)
 	{
-		result[0] = 0.;
-		result[1] = 2.*M_PI;
+		const double denom = c1*b2-c2*b1;
+		p0[1] = (d2*c1-d1*c2)/denom;
+		p0[2] = (d1*b2-d2*b1)/denom;
 	}
-	else
+	else if (maxI==1)
 	{
-		result[0] = qMin(qMin(vertex[0].longitude(), vertex[1].longitude()), qMin(vertex[2].longitude(), vertex[3].longitude()));
-		result[1] = qMax(qMax(vertex[0].longitude(), vertex[1].longitude()), qMax(vertex[2].longitude(), vertex[3].longitude()));
+		const double denom = a1*c2-a2*c1;
+		p0[0]=(c1*d2-c2*d1)/denom;
+		p0[2]=(a2*d1-d2*d1)/denom;
 	}
+	else if (maxI==2)
+	{
+		const double denom = a1*b2-a2*b1;
+		p0[0]=(b1*d2-b2*d1)/denom;
+		p0[1]=(a2*d1-a1*d2)/denom;
+	}
+	
+	// The points are on the unit sphere x^2+y^2+z^2=1, replace y and z and get something of the form ax^2+b*x+c=0
+	const double a = 1.;
+	const double b = 2.*p0*u;
+	const double c = p0.lengthSquared()-1.;
+	
+	// If discriminant <=0, zero or 1 real solution
+	const double D = b*b-4.*a*c;
+	if (D<=0)
+		return false;
+	
+	const double t1 = (-b+std::sqrt(D))/(2.*a);
+	const double t2 = (-b-std::sqrt(D))/(2.*a);
+	p1 = p0+u*t1;
+	p2 = p0+u*t2;
+	
+	return true;
 }
-*/
+}
