@@ -233,23 +233,23 @@ void Navigator::setInitViewDirectionToCurrent(void)
 //! Increase the time speed
 void Navigator::increaseTimeSpeed()
 {
-	double s = getTimeSpeed();
+	double s = getTimeRate();
 	if (s>=JD_SECOND) s*=10.;
 	else if (s<-JD_SECOND) s/=10.;
 	else if (s>=0. && s<JD_SECOND) s=JD_SECOND;
 	else if (s>=-JD_SECOND && s<0.) s=0.;
-	setTimeSpeed(s);
+	setTimeRate(s);
 }
 
 //! Decrease the time speed
 void Navigator::decreaseTimeSpeed()
 {
-	double s = getTimeSpeed();
+	double s = getTimeRate();
 	if (s>JD_SECOND) s/=10.;
 	else if (s<=-JD_SECOND) s*=10.;
 	else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
 	else if (s>0. && s<=JD_SECOND) s=0.;
-	setTimeSpeed(s);
+	setTimeRate(s);
 }
 	
 ////////////////////////////////////////////////////////////////////////////////

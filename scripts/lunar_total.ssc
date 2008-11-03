@@ -39,6 +39,6 @@ core.wait(2);
 // good candidate for aforementioned include system
 // function although it's not so bad now we can do
 // arithmetic in scripts  :-)
-core.setTimeSpeed(.00001157407407407407 * 250);
+core.setTimeRate(.00001157407407407407 * 250);
 
 

@@ -8,7 +8,6 @@ PROJECT_NUMBER         = 0.10.0
 OUTPUT_DIRECTORY       = ./builds/doc
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
-USE_WINDOWS_ENCODING   = NO
 BRIEF_MEMBER_DESC      = YES
 REPEAT_BRIEF           = YES
 ABBREVIATE_BRIEF       = "The $name class" \
@@ -78,22 +77,24 @@ WARN_IF_UNDOCUMENTED   = YES
 WARN_IF_DOC_ERROR      = YES
 WARN_NO_PARAMDOC       = NO
 WARN_FORMAT            = "$file:$line: $text"
-WARN_LOGFILE           = /home/fab1/prog/trunk/stellarium/builds/doc/warnings.log
+WARN_LOGFILE           = ./builds/doc/warnings.log
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = ./src/
+INPUT                  = ./src/ \
+                         ./doc/
 FILE_PATTERNS          = *.h \
-                         *.hpp
+                         *.hpp \
+                         *.doxygen
 RECURSIVE              = YES
 EXCLUDE                = ./src/stelutils/typeface.h \
                          ./src/stelutils/typeface.cpp \
-                         /home/fab1/prog/trunk/stellarium/src/stelutils/callback_helpers.hpp \
-                         /home/fab1/prog/trunk/stellarium/src/stelutils/callbacks.hpp \
-                         /home/fab1/prog/trunk/stellarium/src/stelutils/GLee.h \
-                         /home/fab1/prog/trunk/stellarium/src/stelutils/GLee.c
+                         ./src/stelutils/callback_helpers.hpp \
+                         ./src/stelutils/callbacks.hpp \
+                         ./src/stelutils/GLee.h \
+                         ./src/stelutils/GLee.c
 EXCLUDE_SYMLINKS       = NO
-EXCLUDE_PATTERNS       = 
+EXCLUDE_PATTERNS       = */.svn/*
 EXAMPLE_PATH           = 
 EXAMPLE_PATTERNS       = *
 EXAMPLE_RECURSIVE      = NO
@@ -228,8 +229,6 @@ DIRECTORY_GRAPH        = YES
 DOT_IMAGE_FORMAT       = png
 DOT_PATH               = 
 DOTFILE_DIRS           = 
-MAX_DOT_GRAPH_WIDTH    = 1024
-MAX_DOT_GRAPH_HEIGHT   = 1024
 MAX_DOT_GRAPH_DEPTH    = 1000
 DOT_TRANSPARENT        = NO
 DOT_MULTI_TARGETS      = NO

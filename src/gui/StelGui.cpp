@@ -630,7 +630,7 @@ void StelGui::updateI18n()
 void StelGui::update(double deltaTime)
 {
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
-	if (nav->getTimeSpeed()<-0.99*JD_SECOND)
+	if (nav->getTimeRate()<-0.99*JD_SECOND)
 	{
 		if (buttonTimeRewind->isChecked()==false)
 			buttonTimeRewind->setChecked(true);
@@ -640,7 +640,7 @@ void StelGui::update(double deltaTime)
 		if (buttonTimeRewind->isChecked()==true)
 			buttonTimeRewind->setChecked(false);
 	}
-	if (nav->getTimeSpeed()>1.01*JD_SECOND)
+	if (nav->getTimeRate()>1.01*JD_SECOND)
 	{
 		if (buttonTimeForward->isChecked()==false)
 			buttonTimeForward->setChecked(true);
