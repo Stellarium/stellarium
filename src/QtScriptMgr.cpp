@@ -35,6 +35,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelMainGraphicsView.hpp"
 #include "SkyDrawer.hpp"
 #include "StarMgr.hpp"
 #include "Projector.hpp"
@@ -218,6 +219,14 @@ void StelMainScriptAPI::setObserverLocation(const QString id, double duration)
 		return;	// location find fail
 
 	nav->moveObserverTo(loc, duration);
+}
+
+void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir)
+{
+	bool oldInvertSetting = StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors();
+	StelMainGraphicsView::getInstance().setFlagInvertScreenShotColors(invert);
+	StelMainGraphicsView::getInstance().saveScreenShot(prefix, dir);
+	StelMainGraphicsView::getInstance().setFlagInvertScreenShotColors(oldInvertSetting);
 }
 
 void StelMainScriptAPI::debug(const QString& s)

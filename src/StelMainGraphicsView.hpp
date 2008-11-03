@@ -64,7 +64,7 @@ public slots:
 	//! @arg filePrefix changes the beginning of the file name
 	//! @arg shotDir changes the directory where the screenshot is saved
 	//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
-	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& saveDir="") const;
+	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& saveDir="");
 	
 	//! Get whether colors are inverted when saving screenshot
 	bool getFlagInvertScreenShotColors() const {return flagInvertScreenShotColors;}
@@ -73,9 +73,18 @@ public slots:
 			
 protected:
 	virtual void resizeEvent(QResizeEvent* event);
+
+signals:
+	//! emitted when saveScreenShot is requested with saveScreenShot().
+	//! doScreenshot() does th actual work (it has to do it in the main
+	//! thread, where as saveScreenShot() might get called from another one.
+	void screenshotRequested(void);
+
+private slots:
+	// Do the actual screenshot generation in the main thread with this method.
+	void doScreenshot(void);
 	
 private:
-	
 	//! The StelMainWindow singleton
 	static StelMainGraphicsView* singleton;
 	
@@ -86,6 +95,10 @@ private:
 	bool wasDeinit;
 	
 	bool flagInvertScreenShotColors;
+
+	QString screenShotPrefix;
+	QString screenShotDir;
+
 };
 
 

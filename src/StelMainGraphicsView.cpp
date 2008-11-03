@@ -41,7 +41,12 @@
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
-StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** argv)  : QGraphicsView(parent), wasDeinit(false), flagInvertScreenShotColors(false)
+StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** argv) 
+	: QGraphicsView(parent), 
+	  wasDeinit(false), 
+	  flagInvertScreenShotColors(false), 
+	  screenShotPrefix("stellarium-"), 
+	  screenShotDir("")
 {
 	setScene(new QGraphicsScene(this));
 	// Can't create 2 StelMainWindow instances
@@ -69,6 +74,8 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	// Create the main instance of stellarium
 	stelApp = new StelApp(argc, argv);
 	setScene(new StelAppGraphicsScene());
+
+	connect(this, SIGNAL(screenshotRequested()), this, SLOT(doScreenshot()));
 }
 
 StelMainGraphicsView::~StelMainGraphicsView()
@@ -132,45 +139,56 @@ void StelMainGraphicsView::deinitGL()
 	delete stelApp;
 }
 
-void StelMainGraphicsView::saveScreenShot(const QString& filePrefix, const QString& saveDir) const
+void StelMainGraphicsView::saveScreenShot(const QString& filePrefix, const QString& saveDir)
+{
+	screenShotPrefix = filePrefix;
+	screenShotDir = saveDir;
+	emit(screenshotRequested());
+}
+
+void StelMainGraphicsView::doScreenshot(void)
 {
 	QString shotDir;
 	QImage im = glWidget->grabFrameBuffer();
 	if (flagInvertScreenShotColors)
 		im.invertPixels();
 
-	if (saveDir == "")
+	if (screenShotDir == "")
 	{
 		try
 		{
 			shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
 			if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
 			{
-				qWarning() << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << qPrintable(shotDir);
+				qWarning() << "ERROR StelMainGraphicsView::saveScreenShot: screenshot directory is not writable: " << qPrintable(shotDir);
 				return;
 			}
 		}
 		catch(std::exception& e)
 		{
-			qWarning() << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: " << e.what();
+			qWarning() << "ERROR StelMainGraphicsView::saveScreenShot: could not determine screenshot directory: " << e.what();
 			return;
 		}
 	}
 	else
 	{
-		shotDir = saveDir;
+		shotDir = screenShotDir;
 	}
 
 	QString shotPath;
 	for (int j=0; j<100000; ++j)
 	{
-		shotPath = shotDir+"/"+filePrefix + QString("%1").arg(j, 3, 10, QLatin1Char('0')) + ".png";
+		shotPath = shotDir+"/"+ screenShotPrefix + QString("%1").arg(j, 3, 10, QLatin1Char('0')) + ".png";
 		if (!StelApp::getInstance().getFileMgr().exists(shotPath))
 			break;
 	}
 	
 	qDebug() << "Saving screenshot in file: " << shotPath;
 	im.save(shotPath);
+	if (!StelApp::getInstance().getFileMgr().exists(shotPath))
+		return;
+	else
+		return;
 }
 
 // Add a new progress bar in the lower right corner of the screen.
