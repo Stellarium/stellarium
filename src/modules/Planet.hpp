@@ -68,7 +68,7 @@ class Ring
 public:
 	Ring(double radiusMin,double radiusMax,const QString &texname);
 	~Ring(void);
-	void draw(const Projector* prj,const Mat4d& mat,double screenSz);
+	void draw(Projector* prj,const Mat4d& mat,double screenSz);
 	double getSize(void) const {return radiusMax;}
 private:
 	const double radiusMin;

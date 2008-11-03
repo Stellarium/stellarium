@@ -238,7 +238,8 @@ public:
 	//! Set a custom model view matrix.
 	//! The new setting remains active until the next call to setCurrentFrame or setCustomFrame.
 	//! @param m the openGL MODELVIEW matrix to use.
-	void setModelViewMatrix(const Mat4d& m) const;
+	void setModelViewMatrix(const Mat4d& m);
+	Mat4d getModelViewMatrix() const {return modelViewMatrix;}
 
 	//! Set the current projection mapping to use.
 	//! The mapping must have been registered before being used.
@@ -435,7 +436,7 @@ private:
 	
 	bool flagGlPointSprite;        // Define whether glPointSprite is activated
 	
-	mutable Mat4d modelViewMatrix; // openGL MODELVIEW Matrix
+	Mat4d modelViewMatrix; // openGL MODELVIEW Matrix
 	
 	const Mapping *mapping;
 	QMap<QString,const Mapping*> projectionMapping;

@@ -336,7 +336,7 @@ void Projector::setClippingPlanes(double znear, double zfar)
  Set a custom model view matrix, it is valid until the next call to 
  setCurrentFrame or setCustomFrame
 *************************************************************************/
-void Projector::setModelViewMatrix(const Mat4d& m) const
+void Projector::setModelViewMatrix(const Mat4d& m)
 {
 	modelViewMatrix = m;
 }
