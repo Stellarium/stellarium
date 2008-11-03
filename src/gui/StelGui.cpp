@@ -119,6 +119,7 @@ StelGui::StelGui()
 	flipHoriz = NULL;
 	flipVert = NULL;
 	btShowNebulaeBackground = NULL;
+	guiHidden = false;
 }
 
 StelGui::~StelGui()
@@ -211,6 +212,7 @@ void StelGui::init()
 	
 	addGuiActions("actionAutoHideHorizontalButtonBar", N_("Auto hide horizontal button bar"), "", group, true, false);
 	addGuiActions("actionAutoHideVerticalButtonBar", N_("Auto hide vertical button bar"), "", group, true, false);
+	addGuiActions("actionToggle_GuiHidden_Global", N_("Toggle visibility of toolbars"), "Ctrl+T", group, true, false);
 	
 	//QMetaObject::connectSlotsByName(Form);
 	
@@ -316,6 +318,7 @@ void StelGui::init()
 	QObject::connect(&searchDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Search_Window_Global"), SLOT(setChecked(bool)));
 	
 	QObject::connect(getGuiActions("actionSave_Screenshot_Global"), SIGNAL(triggered()), &StelMainGraphicsView::getInstance(), SLOT(saveScreenShot()));
+	QObject::connect(getGuiActions("actionToggle_GuiHidden_Global"), SIGNAL(triggered()), this, SLOT(toggleHideGui()));
 
 	const Projector* proj = StelApp::getInstance().getCore()->getProjection();
 	QObject::connect(getGuiActions("actionHorizontal_Flip"), SIGNAL(toggled(bool)), proj, SLOT(setFlipHorz(bool)));
@@ -886,3 +889,13 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 	}
 	flagShowNebulaBackgroundButton = b;
 }
+
+void StelGui::setHideGui(bool b)
+{
+	guiHidden = b;
+	buttonBar->setVisible(b);
+	winBar->setVisible(b);
+	autoHidebts->setVisible(b);
+	buttonBarPath->setVisible(b);
+}
+
