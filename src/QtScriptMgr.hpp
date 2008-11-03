@@ -24,7 +24,6 @@
 #include <QtScript>
 #include <QStringList>
 #include "vecmath.h"
-
 	
 //! Provide script API for Stellarium global functions
 class StelMainScriptAPI : public QObject
@@ -138,6 +137,12 @@ public slots:
 	//! where is.  e.g. "York, UnitedKingdom".
 	//! @param duration the number of seconds to take to move location.
 	void setObserverLocation(const QString id, double duration=1.);
+
+	//! Save a screenshot.
+	//! @param prefix the prefix for the file name to use
+	//! @param dir the path of the directory to save the screenshot in.  If
+	//! none is specified, the default screenshot directory will be used.
+	void screenshot(const QString& prefix, bool invert=false, const QString& dir="");
 
 	//! print a debugging message to the console
 	void debug(const QString& s);
