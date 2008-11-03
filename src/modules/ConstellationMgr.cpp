@@ -481,12 +481,13 @@ void ConstellationMgr::drawLines(Projector * prj) const
 {
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
-
+	glEnable(GL_LINE_SMOOTH);
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		(*iter)->drawOptim(prj);
 	}
+	glDisable(GL_LINE_SMOOTH);
 }
 
 // Draw the names of all the constellations
@@ -943,7 +944,7 @@ void ConstellationMgr::drawBoundaries(Projector * prj) const
 {
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
-
+	glEnable(GL_LINE_SMOOTH);
 	glLineStipple(2, 0x3333);
 	glEnable(GL_LINE_STIPPLE);
 
@@ -953,6 +954,7 @@ void ConstellationMgr::drawBoundaries(Projector * prj) const
 		(*iter)->drawBoundaryOptim(prj);
 	}
 	glDisable(GL_LINE_STIPPLE);
+	glDisable(GL_LINE_SMOOTH);
 }
 
 ///unsigned int ConstellationMgr::getFirstSelectedHP(void) {
