@@ -892,10 +892,10 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 
 void StelGui::setHideGui(bool b)
 {
-	buttonBar->setVisible(b);
-	winBar->setVisible(b);
-	autoHidebts->setVisible(b);
-	buttonBarPath->setVisible(b);
+	buttonBar->setVisible(!b);
+	winBar->setVisible(!b);
+	autoHidebts->setVisible(!b);
+	buttonBarPath->setVisible(!b);
 }
 
 bool StelGui::getHideGui(void)
