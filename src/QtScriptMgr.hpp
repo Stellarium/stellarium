@@ -146,6 +146,9 @@ public slots:
 	//! none is specified, the default screenshot directory will be used.
 	void screenshot(const QString& prefix, bool invert=false, const QString& dir="");
 
+	//! Hide or show the GUI (toolbars)
+	void setHideGui(bool b);
+
 	//! print a debugging message to the console
 	void debug(const QString& s);
 
