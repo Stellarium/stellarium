@@ -23,16 +23,9 @@
 #include <vector>
 #include "vecmath.h"
 
-//! In this namespace we define different geometrical shapes :
-//! <ul>
-//! <li> HalfSpace
-//! <li> ConvexS
-//! <li> Polygon
-//! <li> ConvexPolygon
-//! <li> Disk
-//! <ul>
+//! @namespace StelGeom In this namespace we define different geometrical shapes.
 //! We also define two functions, contains(x, y) and intersect(x, y) = intersect(y, x) 
-//! which is defined for most of the pair of geometrical shapes
+//! which is defined for most of the pair of geometrical shapes.
 namespace StelGeom
 {
 /****************

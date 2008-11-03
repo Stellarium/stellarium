@@ -135,16 +135,16 @@ void StelMainScriptAPI::setDate(const QString& dt, const QString& spec)
 
 //! Set time speed in JDay/sec
 //! @param ts time speed in JDay/sec
-void StelMainScriptAPI::setTimeSpeed(double ts)
+void StelMainScriptAPI::setTimeRate(double ts)
 {
-	StelApp::getInstance().getCore()->getNavigation()->setTimeSpeed(ts);
+	StelApp::getInstance().getCore()->getNavigation()->setTimeRate(ts);
 }
 
 //! Get time speed in JDay/sec
 //! @return time speed in JDay/sec
-double StelMainScriptAPI::getTimeSpeed(void) const
+double StelMainScriptAPI::getTimeRate(void) const
 {
-	return StelApp::getInstance().getCore()->getNavigation()->getTimeSpeed();
+	return StelApp::getInstance().getCore()->getNavigation()->getTimeRate();
 }
 
 // This class let's us sleep in milleseconds
@@ -167,7 +167,7 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 	double JD = jdFromDateString(dt, spec);
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 	Q_ASSERT(nav);
-	double timeSpeed = nav->getTimeSpeed();
+	double timeSpeed = nav->getTimeRate();
 
 	if (timeSpeed == 0.)
 	{

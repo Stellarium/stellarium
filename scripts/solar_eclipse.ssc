@@ -36,7 +36,7 @@ function clearLabels(ids)
 
 // While we're setting up, change the time to go nice and slow
 LabelMgr.deleteAllLabels();
-core.setTimeSpeed(normalTime);
+core.setTimeRate(normalTime);
 
 // Setup display mode
 core.clear("natural");
@@ -65,7 +65,7 @@ core.wait(1);
 // slowly ramp up the time rate
 for(t=1; t<=250; t++)
 {
-	core.setTimeSpeed(normalTime*t);
+	core.setTimeRate(normalTime*t);
 	core.wait(0.007);
 }
 
@@ -85,7 +85,7 @@ ids = blockText(Array("The Moon starts to obscure the Sun's disc",
 core.waitFor("2009:07:22T00:15:00");
 for(t=250; t>150; t--)
 {
-	core.setTimeSpeed(normalTime*t);
+	core.setTimeRate(normalTime*t);
 	core.wait(0.007);
 }
 core.waitFor("2009:07:22T00:30:00");
@@ -93,13 +93,13 @@ clearLabels(ids);
 core.wait(7);
 for(t=150; t>25; t--)
 {
-	core.setTimeSpeed(normalTime*t);
+	core.setTimeRate(normalTime*t);
 	core.wait(0.007);
 }
 core.waitFor("2009:07:22T00:56:00");
 for(t=25; t>8; t--)
 {
-	core.setTimeSpeed(normalTime*t);
+	core.setTimeRate(normalTime*t);
 	core.wait(0.007);
 }
 ids = blockText(Array("As the last of the Sun is covered by the Moon",
@@ -108,7 +108,7 @@ ids = blockText(Array("As the last of the Sun is covered by the Moon",
 core.waitFor("2009:07:22T00:58:20");
 for(t=8; t>5; t--)
 {
-	core.setTimeSpeed(normalTime*t);
+	core.setTimeRate(normalTime*t);
 	core.wait(0.007);
 }
 clearLabels(ids);
@@ -134,7 +134,7 @@ MovementMgr.zoomTo(60, 4);
 core.waitFor("2009:07:22T01:01:45");
 for(t=5; t>2; t--)
 {
-	core.setTimeSpeed(normalTime*t);
+	core.setTimeRate(normalTime*t);
 	core.wait(0.007);
 }
 clearLabels(ids);
@@ -143,7 +143,7 @@ ids = blockText(Array("The Sun emerges from behind the Moon",
 core.waitFor("2009:07:22T01:02:50");
 for(t=3; t<150; t++)
 {
-	core.setTimeSpeed(normalTime*t);
+	core.setTimeRate(normalTime*t);
 	core.wait(0.02);
 }
 clearLabels(ids);
@@ -151,8 +151,6 @@ core.wait(3);
 ids = blockText(Array("The End"));
 core.wait(4);
 clearLabels(ids);
-
-
 
 
 

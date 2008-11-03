@@ -25,12 +25,17 @@
 #include <QStringList>
 #include "vecmath.h"
 	
-//! Provide script API for Stellarium global functions
+//! Provide script API for Stellarium global functions.  Public slots in this class
+//! may be used in Stellarium scripts, and are accessed as member function to the
+//! "core" scripting object.  Module-specific functions, such as setting and clearing
+//! of display flags (e.g. LandscapeMgr::setFlagAtmosphere) can be accessed directly
+//! via the scripting object with the class name, e.g.  by using the scripting command:
+//!  LandscapeMgr.setFlagAtmosphere(true);
 class StelMainScriptAPI : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(double JDay READ getJDay WRITE setJDay)
-	Q_PROPERTY(double timeSpeed READ getTimeSpeed WRITE setTimeSpeed)
+	Q_PROPERTY(double timeSpeed READ getTimeRate WRITE setTimeRate)
 					
 public:
 	StelMainScriptAPI(QObject *parent = 0);
@@ -65,13 +70,17 @@ public slots:
 	void setDate(const QString& dt, const QString& spec="utc");
 		
 	//! Set time speed in JDay/sec
-	//! @param ts time speed in JDay/sec
-	void setTimeSpeed(double ts);
-	//! Get time speed in JDay/sec
-	//! @return time speed in JDay/sec
-	double getTimeSpeed(void) const;
+	//! @param ts the new rate of passage of time as a multiple of real time.
+	//! For example if ts is 1, time will pass at the normal rate.  If ts == 10
+	//! then simulation time will pass at 10 times the normal rate.
+	//! If ts is negative, simulation time will go backwards.
+	void setTimeRate(double ts);
+	//! Get simulation time rate.
+	//! @return time speed as a multiple of real time.
+	double getTimeRate(void) const;
 	
 	//! Pauses the script for t seconds
+	//! @param t the number of seconds to wait
 	void wait(double t);
 
 	//! Waits until a specified simulation date/time.  This function
@@ -147,9 +156,12 @@ public slots:
 	void screenshot(const QString& prefix, bool invert=false, const QString& dir="");
 
 	//! Hide or show the GUI (toolbars)
+	//! @param b the new hidden status of the toolbars, i.e. if b==true, the 
+	//! toolbars will be hidden, else they will be made visible.
 	void setHideGui(bool b);
 
 	//! print a debugging message to the console
+	//! @param s the message to be displayed on the console.
 	void debug(const QString& s);
 
 private:

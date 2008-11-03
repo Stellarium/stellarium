@@ -32,6 +32,7 @@
 // speed of light (km/sec)
 #define SPEED_OF_LIGHT 299792.458
 
+//! @namespace StelUtils contains general purpose utility functions.
 namespace StelUtils
 {
 
