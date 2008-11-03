@@ -86,8 +86,10 @@ public slots:
 	
 	//! Select an object by name
 	//! @param name the name of the object to select (english)
+	//! If the name is "", any currently selected objects will be
+	//! de-selected.
 	//! @param pointer whether or not to have the selection pointer enabled
-	void selectObjectByName(const QString& name, bool pointer);
+	void selectObjectByName(const QString& name, bool pointer=false);
 
 	//! Clear the display options, setting a "standard" view.
 	//! Preset states:

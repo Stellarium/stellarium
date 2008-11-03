@@ -144,6 +144,14 @@ public slots:
 	//! Get the auto-hide status of the vertical toolbar.
 	void setAutoHideVerticalButtonBar(bool b) {autoHideVerticalButtonBar=b;}
 
+	//! show or hide the toolbars
+	//! @param b when true, toolbars will be shown, else they will be hidden.
+	void setHideGui(bool b);
+	//! get the current visible status of the toolbars
+	bool getHideGui() {return guiHidden;}
+	//! toggle the status of the toolbars
+	void toggleHideGui(void) {setHideGui(!guiHidden);}
+
 private slots:
 	//! Update the position of the button bars in the main window
 	void updateBarsPos();
@@ -199,6 +207,7 @@ private:
 	class StelButton* btShowNebulaeBackground;
 
 	bool initDone;
+	bool guiHidden;
 };
 
 #endif // _STELGUI_HPP_
