@@ -89,6 +89,19 @@ void testContains()
 	qDebug() << "Passed intersection tests";
 }
 
+void testPlaneIntersect2()
+{
+	Vec3d p1,p2;
+	Vec3d vx(1,0,0);
+	Vec3d vz(0,0,1);
+	StelGeom::HalfSpace hx(vx, 0);
+	StelGeom::HalfSpace hz(vz, 0);
+	_assert(StelGeom::planeIntersect2(hx, hz, p1, p2)==true, "Plane intersect failed");
+	_assert(p1==Vec3d(0,-1,0));
+	_assert(p2==Vec3d(0,1,0));
+	_assert(StelGeom::planeIntersect2(hx, hx, p1, p2)==false, "Plane non-intersecting failure");
+}
+
 /************************************************************************
  Run several of the time-related functions through paces.
 ************************************************************************/
@@ -96,5 +109,6 @@ int main(int argc, char* argv[])
 {
 	testHalfSpace();
 	testContains();
+	testPlaneIntersect2();
 }
 

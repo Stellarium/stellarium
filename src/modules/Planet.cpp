@@ -716,7 +716,7 @@ Ring::~Ring(void)
 {
 }
 
-void Ring::draw(const Projector* prj,const Mat4d& mat,double screenSz)
+void Ring::draw(Projector* prj,const Mat4d& mat,double screenSz)
 {
 	screenSz -= 50;
 	screenSz /= 250.0;
