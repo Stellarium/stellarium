@@ -305,8 +305,11 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 
 void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
 {
-	StelApp::getInstance().getStelObjectMgr().findAndSelect(name);
 	StelApp::getInstance().getStelObjectMgr().setFlagSelectedObjectPointer(pointer);
+	if (name=="")
+		StelApp::getInstance().getStelObjectMgr().unSelect();
+	else
+		StelApp::getInstance().getStelObjectMgr().findAndSelect(name);
 }
 
 void StelMainScriptAPI::clear(const QString& state)
