@@ -7,7 +7,7 @@
 LabelMgr.deleteAllLabels();
 core.clear("natural");
 core.setObserverLocation("York, UnitedKingdom");
-core.setTimeRate(.00001157407407407407); // 1 x time rate
+core.setTimeRate(1); 
 core.setDate("2008:10:30T21:00:00");
 core.moveToAltAzi(30, 90);
 MovementMgr.zoomTo(70, 2);
@@ -43,10 +43,10 @@ LabelMgr.setLabelShow(id, true);
 core.wait(1);
 
 commentary("The label above is connected to " + myOb);
-core.setTimeRate(.00001157407407407407 * 150);
+core.setTimeRate(150);
 commentary("Watch as the time advances");
 commentary("The label is stuck to the object");
-core.setTimeRate(.00001157407407407407);
+core.setTimeRate(1);
 LabelMgr.deleteLabel(id);
 
 commentary("You can display object labels in different positions...")
