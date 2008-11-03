@@ -119,7 +119,6 @@ StelGui::StelGui()
 	flipHoriz = NULL;
 	flipVert = NULL;
 	btShowNebulaeBackground = NULL;
-	guiHidden = false;
 }
 
 StelGui::~StelGui()
@@ -318,6 +317,7 @@ void StelGui::init()
 	QObject::connect(&searchDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Search_Window_Global"), SLOT(setChecked(bool)));
 	
 	QObject::connect(getGuiActions("actionSave_Screenshot_Global"), SIGNAL(triggered()), &StelMainGraphicsView::getInstance(), SLOT(saveScreenShot()));
+	getGuiActions("actionToggle_GuiHidden_Global")->setChecked(false);
 	QObject::connect(getGuiActions("actionToggle_GuiHidden_Global"), SIGNAL(triggered()), this, SLOT(toggleHideGui()));
 
 	const Projector* proj = StelApp::getInstance().getCore()->getProjection();
@@ -892,10 +892,13 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 
 void StelGui::setHideGui(bool b)
 {
-	guiHidden = b;
 	buttonBar->setVisible(b);
 	winBar->setVisible(b);
 	autoHidebts->setVisible(b);
 	buttonBarPath->setVisible(b);
 }
 
+bool StelGui::getHideGui(void)
+{
+	return getGuiActions("actionToggle_GuiHidden_Global")->isChecked();
+}

@@ -229,6 +229,13 @@ void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QSt
 	StelMainGraphicsView::getInstance().setFlagInvertScreenShotColors(oldInvertSetting);
 }
 
+void StelMainScriptAPI::setHideGui(bool b)
+{
+	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
+	Q_ASSERT(gui);
+	gui->setHideGui(b);
+}
+
 void StelMainScriptAPI::debug(const QString& s)
 {
 	qDebug() << "script: " << s;

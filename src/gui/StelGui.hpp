@@ -148,9 +148,9 @@ public slots:
 	//! @param b when true, toolbars will be shown, else they will be hidden.
 	void setHideGui(bool b);
 	//! get the current visible status of the toolbars
-	bool getHideGui() {return guiHidden;}
+	bool getHideGui();
 	//! toggle the status of the toolbars
-	void toggleHideGui(void) {setHideGui(!guiHidden);}
+	void toggleHideGui(void) {setHideGui(!getHideGui());}
 
 private slots:
 	//! Update the position of the button bars in the main window
