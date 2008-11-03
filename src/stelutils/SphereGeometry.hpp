@@ -288,6 +288,10 @@ inline bool intersect(const ConvexPolygon& c, const HalfSpace& h)
 	return intersect(h, c);
 }
 
+//! Compute the intersection of 2 halfspaces on the sphere (usually on 2 points) and return it in p1 and p2.
+//! If the 2 HalfSpace don't interesect or intersect only at 1 point, false is returned and p1 and p2 are undefined
+bool planeIntersect2(const HalfSpace& h1, const HalfSpace& h2, Vec3d& p1, Vec3d& p2);
+
 }	// namespace StelGeom
 
 #endif // _SPHEREGEOMETRY_HPP_
