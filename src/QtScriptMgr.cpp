@@ -137,14 +137,15 @@ void StelMainScriptAPI::setDate(const QString& dt, const QString& spec)
 //! @param ts time speed in JDay/sec
 void StelMainScriptAPI::setTimeRate(double ts)
 {
-	StelApp::getInstance().getCore()->getNavigation()->setTimeRate(ts);
+	// 1 second = .00001157407407407407 JDay
+	StelApp::getInstance().getCore()->getNavigation()->setTimeRate(ts * 0.00001157407407407407);
 }
 
 //! Get time speed in JDay/sec
 //! @return time speed in JDay/sec
 double StelMainScriptAPI::getTimeRate(void) const
 {
-	return StelApp::getInstance().getCore()->getNavigation()->getTimeRate();
+	return StelApp::getInstance().getCore()->getNavigation()->getTimeRate() / 0.00001157407407407407;
 }
 
 // This class let's us sleep in milleseconds
