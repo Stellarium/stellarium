@@ -356,7 +356,7 @@ void LandscapeOldStyle::drawDecor(StelCore* core) const
 // Draw the ground
 void LandscapeOldStyle::drawGround(StelCore* core) const
 {
-	const Projector* prj = core->getProjection();
+	Projector* prj = core->getProjection();
 	const Navigator* nav = core->getNavigation();
 	
 	if (!landFader.getInterstate()) return;

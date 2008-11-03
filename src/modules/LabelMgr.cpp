@@ -181,10 +181,13 @@ bool SkyLabel::draw(const StelCore* core)
 			lineEndX += 5;
 				
 		glColor4f(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+		
+		glEnable(GL_LINE_SMOOTH);
 		glBegin(GL_LINES);
 			glVertex2f(lineEndX,lineEndY);
 			glVertex2f(objXY[0], objXY[1]);
 		glEnd();
+		glDisable(GL_LINE_SMOOTH);
 	}
 
 	return true;
