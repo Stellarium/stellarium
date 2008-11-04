@@ -38,6 +38,9 @@
 
 #include <QPainter>
 
+// Initialize static
+QMap<QString,const Mapping*> Projector::projectionMappings;
+
 const QString Projector::maskTypeToString(ProjectorMaskType type)
 {
 	if (type == Disk )
@@ -55,7 +58,8 @@ Projector::ProjectorMaskType Projector::stringToMaskType(const QString &s)
 
 void Projector::registerProjectionMapping(Mapping *c)
 {
-	if (c) projectionMapping[c->getId()] = c;
+	Q_ASSERT(c);
+	Projector::projectionMappings[c->getId()] = c;
 }
 
 void Projector::init()
@@ -147,15 +151,10 @@ void Projector::windowHasBeenResized(int width,int height)
 	setViewport(0,0,width,height, 0.5*width, 0.5*height,qMin(width,height));
 }
 
-Projector::Projector(const Vector4<GLint>& viewport, double _fov)
-		:maskType(None), fov(_fov), minFov(0.0001), maxFov(100),
-		zNear(0.1), zFar(10000),
-		viewportXywh(viewport),
-        viewportCenter(Vec2d(viewportXywh[0]+0.5*viewportXywh[2],
-		                      viewportXywh[1]+0.5*viewportXywh[3])),
-        viewportFovDiameter(qMin(viewportXywh[2],viewportXywh[3])),
-		gravityLabels(0),
-		mapping(NULL)
+Projector::Projector(const Vector4<GLint>& viewport, double _fov):
+		maskType(None), fov(_fov), minFov(0.0001), maxFov(100), zNear(0.1), zFar(10000), viewportXywh(viewport),
+        viewportCenter(Vec2d(viewportXywh[0]+0.5*viewportXywh[2],viewportXywh[1]+0.5*viewportXywh[3])),
+		gravityLabels(0), mapping(NULL)
 {
 	flipHorz = 1.0;
 	flipVert = 1.0;
@@ -164,7 +163,6 @@ Projector::Projector(const Vector4<GLint>& viewport, double _fov)
 	            viewportCenter[0]-viewportXywh[0],
                 viewportCenter[1]-viewportXywh[1],
 	            viewportFovDiameter);
-
 	setFov(_fov);
 }
 
@@ -365,8 +363,8 @@ void Projector::setCurrentMapping(const QString& mappingId)
 	if (currentProjectionType==mappingId)
 		return;
 
-	QMap<QString,const Mapping*>::const_iterator i(projectionMapping.find(mappingId));
-	if (i!=projectionMapping.end())
+	QMap<QString,const Mapping*>::const_iterator i(projectionMappings.find(mappingId));
+	if (i!=projectionMappings.end())
 	{
 		currentProjectionType = mappingId;
 

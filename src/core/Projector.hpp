@@ -68,29 +68,6 @@ public:
 	//! arrage labels so that they are aligned with the bottom of a 2d 
 	//! screen, or a 3d dome.
 	bool getFlagGravityLabels() const { return gravityLabels; }
-
-	//! Register a new projection mapping.
-	void registerProjectionMapping(Mapping *c);
-	
-	///////////////////////////////////////////////////////////////////////////
-	//! @enum ProjectorMaskType Methods for controlling viewport and mask.
-	enum ProjectorMaskType
-	{
-		Disk,	//!< For disk viewport mode (circular mask to seem like bins/telescope)
-		None	//!< Regular - no mask.
-	};
-	
-	//! Get a string description of a ProjectorMaskType.
-	static const QString maskTypeToString(ProjectorMaskType type);
-	
-	//! Get a ProjectorMaskType from a string description.
-	static ProjectorMaskType stringToMaskType(const QString &s);
-	
-	//! Get the current type of the mask if any.
-	ProjectorMaskType getMaskType(void) const {return maskType;}
-	
-	//! Set the mask type.
-	void setMaskType(ProjectorMaskType m) {maskType = m; }
 	
 	//! Set up the view port dimensions and position.
 	//! Define viewport size, center(relative to lower left corner)
@@ -113,7 +90,7 @@ public:
 		return Vec2d(viewportCenter[0]-viewportXywh[0],viewportCenter[1]-viewportXywh[1]);
 	}
 
-	//! Get the diameter of the FOV disk.
+	//! Get the diameter of the FOV disk in pixels
 	double getViewportFovDiameter(void) const {return viewportFovDiameter;}
 	
 	//! Get the horizontal viewport offset in pixels.
@@ -147,23 +124,15 @@ public:
 	//! viewportFovDiameter, viewportCenter, and viewport dimensions.
 	StelGeom::ConvexS unprojectViewport(void) const;
 
-	//! Set whether a disk mask must be drawn over the viewport.
-	void setViewportMaskDisk(void) {setMaskType(Projector::Disk);}
-	//! Get whether a disk mask must be drawn over the viewport.
-	bool getViewportMaskDisk(void) const {return getMaskType()==Projector::Disk;}
-	//! Set whether no mask must be drawn over the viewport.
-	void setViewportMaskNone(void) {setMaskType(Projector::None);}
-	
-	//! Set the clipping planes.
-	// TODO: A better explanation.
+	//! Set the near and far clipping planes.
 	void setClippingPlanes(double znear, double zfar);
-	//! Get the clipping planes.
-	// TODO: A better explanation.
+	//! Get the near and far clipping planes.
 	void getClippingPlanes(double* zn, double* zf) const {*zn = zNear; *zf = zFar;}
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods for controlling the PROJECTION matrix
-	// TODO Doxygen docs: What is this for?
+	
+	//! Get whether front faces need to be oriented in the clockwise direction
 	bool needGlFrontFaceCW(void) const {return (flipHorz*flipVert < 0.0);}
 
 	//! Set the Field of View in degrees.
@@ -251,15 +220,32 @@ public:
 
 	//! Get the list of all the registered mappings
 	//! @return a map associating each mappingId to its instance
-	const QMap<QString,const Mapping*>& getAllMappings() const {return projectionMapping;}
+	static QMap<QString,const Mapping*>& getAllMappings() {return projectionMappings;}
+	
+	//! Register a new projection mapping.
+	static void registerProjectionMapping(Mapping *c);
+	
+	///////////////////////////////////////////////////////////////////////////
+	//! @enum ProjectorMaskType Methods for controlling viewport and mask.
+	enum ProjectorMaskType
+	{
+		Disk,	//!< For disk viewport mode (circular mask to seem like bins/telescope)
+  		None	//!< Regular - no mask.
+	};
+	
+	//! Get a string description of a ProjectorMaskType.
+	static const QString maskTypeToString(ProjectorMaskType type);
+	//! Get a ProjectorMaskType from a string description.
+	static ProjectorMaskType stringToMaskType(const QString &s);
+	
+	//! Get the current type of the mask if any.
+	ProjectorMaskType getMaskType(void) const {return maskType;}
+	//! Set the mask type.
+	void setMaskType(ProjectorMaskType m) {maskType = m; }
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Standard methods for drawing primitives in general (non-linear) mode
 	///////////////////////////////////////////////////////////////////////////
-
-	//! Get whether the GL_POINT_SPRITE extension is available now.
-	bool getflagGlPointSprite() const {return flagGlPointSprite;}
-	
 	//! Fill with black around the viewport.
 	void drawViewportShape(void);
 	
@@ -427,21 +413,19 @@ private:
 
 	Vector4<GLint> viewportXywh;   // Viewport parameters
 	Vec2d viewportCenter;          // Viewport center in screen pixel
-	double viewportFovDiameter;    // diameter of a circle with 180 degrees diameter in screen pixel
-
+	double viewportFovDiameter;    // diameter of the FOV disk in pixel
 	double pixelPerRad;            // pixel per rad at the center of the viewport disk
 	double flipHorz,flipVert;      // Whether to flip in horizontal or vertical directions
-	
 	bool gravityLabels;            // should label text align with the horizon?
+	bool flagGlPointSprite;        // Whether the GL_POINT_SPRITE extension is available and activated
 	
-	bool flagGlPointSprite;        // Define whether glPointSprite is activated
-	
-	Mat4d modelViewMatrix; // openGL MODELVIEW Matrix
+	Mat4d modelViewMatrix;         // openGL MODELVIEW Matrix
 	
 	const Mapping *mapping;
-	QMap<QString,const Mapping*> projectionMapping;
-	
 	QString currentProjectionType; // Type of the projection currently used
+	
+	// List of all the available projections
+	static QMap<QString, const Mapping*> projectionMappings;
 };
 
 #endif // _PROJECTOR_HPP_
