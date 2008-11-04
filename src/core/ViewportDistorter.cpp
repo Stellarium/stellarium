@@ -126,6 +126,8 @@ ViewportDistorterFisheyeToSphericMirror
 	}
 
 	// initialize viewport parameters and texture size:
+	
+	// maximum FOV value of the not yet distorted image
 	double distorter_max_fov = conf.value("spheric_mirror/distorter_max_fov",175.0).toDouble();
 	if (distorter_max_fov > 240.0) distorter_max_fov = 240.0;
 	else if (distorter_max_fov < 120.0) distorter_max_fov = 120.0;
@@ -133,6 +135,7 @@ ViewportDistorterFisheyeToSphericMirror
 		distorter_max_fov = prj->getCurrentMapping().maxFov;
 	prj->setMaxFov(distorter_max_fov);
 
+	// width of the not yet distorted image
 	viewport_w = conf.value("spheric_mirror/viewport_width", original_viewport[2]).toInt();
 	if (viewport_w <= 0)
 	{
@@ -142,6 +145,8 @@ ViewportDistorterFisheyeToSphericMirror
 	{
 		viewport_w = screen_w;
 	}
+	
+	// height of the not yet distorted image
 	viewport_h = conf.value("spheric_mirror/viewport_height", original_viewport[3]).toInt();
 	if (viewport_h <= 0)
 	{
@@ -151,8 +156,12 @@ ViewportDistorterFisheyeToSphericMirror
 	{
 		viewport_h = screen_h;
 	}
+	
+	// center of the FOV-disk in the not yet distorted image
 	viewportCenter[0] = conf.value("spheric_mirror/viewportCenterX", 0.5*viewport_w).toDouble();
 	viewportCenter[1] = conf.value("spheric_mirror/viewportCenterY", 0.5*viewport_h).toDouble();
+	
+	// diameter of the FOV-disk in pixels
 	viewportFovDiameter = conf.value("spheric_mirror/viewport_fov_diameter", qMin(viewport_w,viewport_h)).toDouble();
 
 	texture_wh = 1;

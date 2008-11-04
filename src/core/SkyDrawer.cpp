@@ -46,8 +46,8 @@ SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
 	limitLuminance = 0;
 	oldLum=-1.f;
 	maxLum = 0.f;
-	setMaxFov(180.f);
-	setMinFov(0.1f);
+	setMaxAdaptFov(180.f);
+	setMinAdaptFov(0.1f);
 	
 	starAbsoluteScaleF = 1.f;
 	starRelativeScale = 1.f;
@@ -61,8 +61,8 @@ SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
 	setTwinkleAmount(conf->value("stars/star_twinkle_amount",0.3).toDouble());
 	setFlagTwinkle(conf->value("stars/flag_star_twinkle",true).toBool());
 	setFlagPointStar(conf->value("stars/flag_point_star",false).toBool());
-	setMaxFov(conf->value("stars/mag_converter_max_fov",70.0).toDouble());
-	setMinFov(conf->value("stars/mag_converter_min_fov",0.1).toDouble());
+	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toDouble());
+	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toDouble());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
 	
 	bool ok=true;
@@ -133,14 +133,14 @@ void SkyDrawer::init()
 void SkyDrawer::update(double deltaTime)
 {
 	float fov = prj->getFov();
-	if (fov > maxFov)
+	if (fov > maxAdaptFov)
 	{
-		fov = maxFov;
+		fov = maxAdaptFov;
 	}
 	else
 	{
-		if (fov < minFov)
-			fov = minFov;
+		if (fov < minAdaptFov)
+			fov = minAdaptFov;
 	}
 	
 	// This factor is fully arbitrary. It corresponds to the collecting area x exposure time of the instrument
