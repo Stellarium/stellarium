@@ -103,12 +103,33 @@ public slots:
 	//! @return the names of the landscapes, which are the values of the name parameter in the landscape.ini files
 	QStringList getAllLandscapeNames() const;
 		
+	//! Retrieve list of the names of all the available landscape in the
+	//! file search path sub-directories of the landscape area
+	//! @return the names of the landscapes, which are the values of the name parameter in the landscape.ini files
+	QStringList getAllLandscapeIDs() const;
+		
 	//! Get the current landscape ID.
 	const QString& getCurrentLandscapeID() const {return currentLandscapeID;}
 	//! Change the current landscape to the landscape with the ID specified.
 	//! @param id the ID of the new landscape
-	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found). True on success.
-	bool setCurrentLandscapeID(const QString& id);
+	//! @param inThread should be false when this is called from a script or a thread outside the main
+	//! program thread.  Note that if inThread is false, the return value will always be true.  The
+	//! return value may be retrieved asynchronously  by connecting the 
+	//! requestCompleteSetCurrentLandscapeID signal to the calling code.
+	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found). 
+	//! True on success or if inThread == false.
+	bool setCurrentLandscapeID(const QString& id, bool inThread=false);
+	//! Get the current landscape name.
+	QString getCurrentLandscapeName() const;
+	//! Change the current landscape to the landscape with the name specified.
+	//! @param name the name of the new landscape, as found in the landscape:name key of the landscape.ini file.
+	//! @param inThread should be false when this is called from a script or a thread outside the main
+	//! program thread.  Note that if inThread is false, the return value will always be true.  The
+	//! return value may be retrieved asynchronously  by connecting the 
+	//! requestCompleteSetCurrentLandscapeID signal to the calling code.
+	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found). 
+	//! True on success or if inThread == false.
+	bool setCurrentLandscapeName(const QString& name, bool inThread=false);
 	
 	//! Get the default landscape ID.
 	const QString& getDefaultLandscapeID() const {return defaultLandscapeID;}
@@ -116,13 +137,6 @@ public slots:
 	//! @param id the ID of the landscape to use by default
 	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found). True on success.
 	bool setDefaultLandscapeID(const QString& id);
-	
-	//! Get the current landscape name.
-	QString getCurrentLandscapeName() const;
-	//! Change the current landscape to the landscape with the name specified.
-	//! @param name the name of the new landscape, as found in the landscape:name key of the landscape.ini file.
-	//! @return false if the new landscape could not be set (e.g. no landscape of that name was found). True on success.
-	bool setCurrentLandscapeName(const QString& name);
 	
 	//! Return a pseudo HTML formated string with all informations on the current landscape
 	QString getCurrentLandscapeHtmlDescription() const;
@@ -170,6 +184,25 @@ public slots:
 	//! a vehicle which might change orientation over time (e.g. a ship).
 	//! @param d the rotation angle in degrees as an offset from the originally loaded value.
 	void setZRotation(double d);
+
+signals:
+	// used for multi-threaded mode callbacks
+	void requestSetCurrentLandscapeID(const QString& id);
+	void requestCompleteSetCurrentLandscapeID(bool success);
+	void requestSetCurrentLandscapeName(const QString& name);
+	void requestCompleteSetCurrentLandscapeName(bool success);
+
+private slots:
+	// Callbacks for threaded mode landscape setting which use signals
+
+	//! Change the current landscape to the landscape with the ID specified.
+	//! @param id the ID of the new landscape
+	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found). True on success.
+	bool doSetCurrentLandscapeID(const QString& id);
+	//! Change the current landscape to the landscape with the name specified.
+	//! @param name the name of the new landscape, as found in the landscape:name key of the landscape.ini file.
+	//! @return false if the new landscape could not be set (e.g. no landscape of that name was found). True on success.
+	bool doSetCurrentLandscapeName(const QString& name);
 	
 private:
 	//! Get light pollution luminance level.

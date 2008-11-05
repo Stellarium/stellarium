@@ -1,0 +1,36 @@
+alt = 0;
+LabelMgr.deleteAllLabels();
+core.clear("natural");
+core.setDate("2008:11:05T12:00:00", "local");
+core.setTimeRate(1);
+core.moveToAltAzi(alt, 0, 3);
+MovementMgr.zoomTo(60, 3);
+core.wait(3);
+allIDs = LandscapeMgr.getAllLandscapeIDs();
+for(i=0; i<allIDs.length; i++)
+{
+	id = allIDs[i];
+	name = LandscapeMgr.setCurrentLandscapeID(id);
+	core.wait(2);
+	name = LandscapeMgr.getCurrentLandscapeName();
+	if (name == "Mars" || name == "Moon")
+	{
+		LandscapeMgr.setFlagAtmosphere(false);
+	}
+	else
+	{
+		LandscapeMgr.setFlagAtmosphere(true);
+	}
+	core.wait(1);
+	lab = LabelMgr.labelScreen(name, 100, 100, false, 25, "#ff2200");
+	LabelMgr.setLabelShow(lab, true);
+	core.wait(2);
+	for(azi=90; azi<=360; azi+=90)
+	{
+		core.moveToAltAzi(alt, azi, 3);
+		core.wait(4);
+		LabelMgr.setLabelShow(lab, false);
+	}
+	LabelMgr.deleteLabel(lab);
+}
+
