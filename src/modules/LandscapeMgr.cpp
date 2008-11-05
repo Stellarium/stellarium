@@ -42,7 +42,7 @@ class Cardinals
 {
 public:
 	Cardinals(float _radius = 1.);
-    virtual ~Cardinals();
+	virtual ~Cardinals();
 	void draw(const StelCore* core, double latitude, bool gravityON = false) const;
 	void setColor(const Vec3f& c) {color = c;}
 	Vec3f get_color() {return color;}
@@ -254,7 +254,7 @@ void LandscapeMgr::init()
 	atmosphere = new Atmosphere();
 	landscape = new LandscapeOldStyle();
 	defaultLandscapeID = conf->value("init_location/landscape_name").toString();
-	setCurrentLandscapeID(defaultLandscapeID);
+	setCurrentLandscapeID(defaultLandscapeID, true);
 	setFlagLandscape(conf->value("landscape/flag_landscape", conf->value("landscape/flag_ground", true).toBool()).toBool());
 	setFlagFog(conf->value("landscape/flag_fog",true).toBool());
 	setFlagAtmosphere(conf->value("landscape/flag_atmosphere").toBool());
@@ -272,6 +272,8 @@ void LandscapeMgr::init()
 		setAtmosphereBortleLightPollution(3);
 		ok = true;
 	}
+	connect(this, SIGNAL(requestSetCurrentLandscapeID(const QString&)), this, SLOT(doSetCurrentLandscapeID(const QString&)));
+	connect(this, SIGNAL(requestSetCurrentLandscapeName(const QString&)), this, SLOT(doSetCurrentLandscapeName(const QString&)));
 }
 
 void LandscapeMgr::setStelStyle(const StelStyle& style)
@@ -284,61 +286,35 @@ void LandscapeMgr::setStelStyle(const StelStyle& style)
 	setColorCardinalPoints(StelUtils::strToVec3f(conf->value(section+"/cardinal_color", defaultColor).toString()));
 }
 
-
-bool LandscapeMgr::setCurrentLandscapeName(const QString& newLandscapeName)
+bool LandscapeMgr::setCurrentLandscapeID(const QString& id, bool inThread)
 {
-	if (newLandscapeName.isEmpty())
-		return 0;
-	
-	QMap<QString,QString> nameToDirMap = getNameToDirMap();
-	if (nameToDirMap.find(newLandscapeName)!=nameToDirMap.end())
-	{
-		return setCurrentLandscapeID(nameToDirMap[newLandscapeName]);
-	}
+	if (inThread)
+		return doSetCurrentLandscapeID(id);
 	else
 	{
-		qWarning() << "Can't find a landscape with name=" << newLandscapeName << endl;
-		return false;
+		emit(requestSetCurrentLandscapeID(id));
+		return true;
 	}
 }
 
-
-bool LandscapeMgr::setCurrentLandscapeID(const QString& newLandscapeID)
+bool LandscapeMgr::setCurrentLandscapeName(const QString& name, bool inThread)
 {
-	if (newLandscapeID.isEmpty())
-		return 0;
-	
-	// we want to lookup the landscape ID (dir) from the name.
-	StelFileMgr& fileMan = StelApp::getInstance().getFileMgr();
-	Landscape* newLandscape = NULL;
-	
-	try
+	QMap<QString,QString> nameToDirMap = getNameToDirMap();
+	if (nameToDirMap.find(name)!=nameToDirMap.end())
 	{
-		newLandscape = createFromFile(fileMan.findFile("landscapes/" + newLandscapeID + "/landscape.ini"), newLandscapeID);
+		if (inThread)
+			return setCurrentLandscapeID(nameToDirMap[name], true);
+		else
+		{
+			emit(requestSetCurrentLandscapeName(name));
+			return true;
+		}
 	}
-	catch (std::runtime_error& e)
+	else
 	{
-		qWarning() << "ERROR while loading landscape " << "landscapes/" + newLandscapeID + "/landscape.ini" << ", (" << e.what() << ")" << endl;
-	}
-
-	if (!newLandscape)
+		qWarning() << "Can't find a landscape with name=" << name << endl;
 		return false;
-
-	if (landscape)
-	{
-		// Copy display parameters from previous landscape to new one
-		newLandscape->setFlagShow(landscape->getFlagShow());
-		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
-		delete landscape;
-		landscape = newLandscape;
 	}
-	currentLandscapeID = newLandscapeID;
-	
-	if (getFlagLandscapeSetsLocation())
-	{
-		StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(landscape->getLocation());
-	}
-	return true;
 }
 
 // Change the default landscape to the landscape with the ID specified.
@@ -410,6 +386,19 @@ QStringList LandscapeMgr::getAllLandscapeNames() const
 	
 	// We just look over the map of names to IDs and extract the keys
 	foreach (QString i, nameToDirMap.keys())
+	{
+		result += i;
+	}
+	return result;
+}
+
+QStringList LandscapeMgr::getAllLandscapeIDs() const
+{
+	QMap<QString,QString> nameToDirMap = getNameToDirMap();
+	QStringList result;
+	
+	// We just look over the map of names to IDs and extract the keys
+	foreach (QString i, nameToDirMap.values())
 	{
 		result += i;
 	}
@@ -629,3 +618,73 @@ QMap<QString,QString> LandscapeMgr::getNameToDirMap(void) const
 
 	return result;	
 }
+
+bool LandscapeMgr::doSetCurrentLandscapeID(const QString& id)
+{
+	if (id.isEmpty())
+	{
+		emit(requestCompleteSetCurrentLandscapeID(false));
+		return false;
+	}
+	
+	// we want to lookup the landscape ID (dir) from the name.
+	StelFileMgr& fileMan = StelApp::getInstance().getFileMgr();
+	Landscape* newLandscape = NULL;
+	
+	try
+	{
+		newLandscape = createFromFile(fileMan.findFile("landscapes/" + id + "/landscape.ini"), id);
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "ERROR while loading landscape " << "landscapes/" + id + "/landscape.ini" << ", (" << e.what() << ")" << endl;
+	}
+
+	if (!newLandscape)
+	{
+		emit(requestCompleteSetCurrentLandscapeID(false));
+		return false;
+	}
+
+	if (landscape)
+	{
+		// Copy display parameters from previous landscape to new one
+		newLandscape->setFlagShow(landscape->getFlagShow());
+		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
+		delete landscape;
+		landscape = newLandscape;
+	}
+	currentLandscapeID = id;
+	
+	if (getFlagLandscapeSetsLocation())
+	{
+		StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(landscape->getLocation());
+	}
+
+	emit(requestCompleteSetCurrentLandscapeID(true));
+	return true;
+}
+
+bool LandscapeMgr::doSetCurrentLandscapeName(const QString& name)
+{
+	if (name.isEmpty())
+	{
+		emit(requestCompleteSetCurrentLandscapeName(false));
+		return false;
+	}
+	
+	QMap<QString,QString> nameToDirMap = getNameToDirMap();
+	if (nameToDirMap.find(name)!=nameToDirMap.end())
+	{
+		bool result = setCurrentLandscapeID(nameToDirMap[name], true);
+		emit(requestCompleteSetCurrentLandscapeName(result));
+		return result;
+	}
+	else
+	{
+		qWarning() << "Can't find a landscape with name=" << name << endl;
+		emit(requestCompleteSetCurrentLandscapeName(false));
+		return false;
+	}
+}
+
