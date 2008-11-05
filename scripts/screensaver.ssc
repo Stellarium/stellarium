@@ -61,10 +61,24 @@ while(1)
 	}
 	core.debug("Choosing " + objType + " (" + r + "): " + objName);
 	core.selectObjectByName(objName, true);
-	MovementMgr.autoZoomIn(6);
-	core.wait(10);
-	MovementMgr.zoomTo(60,8);
-	core.wait(10);
+	if (r == 1)
+	{
+		MovementMgr.autoZoomIn(6);
+		core.wait(1);
+		MovementMgr.zoomTo(40,8);
+		core.wait(1);
+		ConstellationMgr.setFlagArt(true);
+		core.wait(4);
+		core.wait(10);
+		ConstellationMgr.setFlagArt(false);
+	}
+	else
+	{
+		MovementMgr.autoZoomIn(6);
+		core.wait(10);
+		MovementMgr.zoomTo(60,8);
+		core.wait(10);
+	}
 }
 
 
