@@ -3,16 +3,16 @@
 
 [Setup]
 AppName=Stellarium
-AppVerName=StellariumArgus 0.8.2.20080513
-AppPublisher=Argus
-AppPublisherURL=http://www.argus-cv.com
-AppSupportURL=http://www.argus-cv.com
-AppUpdatesURL=http://www.argus-cv.com
-DefaultDirName={pf}\ArgusCV\StellariumArgus
-DefaultGroupName=ArgusCV\Stellarium
+AppVerName=StellariumITLab 0.8.2.20080513
+AppPublisher=ITLab
+AppPublisherURL=http://www.itlab.unn.ru/
+AppSupportURL=http://www.itlab.unn.ru/?dir=462
+AppUpdatesURL=http://www.itlab.unn.ru/?dir=462
+DefaultDirName={pf}\ITLab\StellariumITLab
+DefaultGroupName=ITLab\Stellarium
 AllowNoIcons=yes
 LicenseFile=..\freetype-2.1.10\docs\GPL.txt
-OutputBaseFilename=setupStellariumArgusCV
+OutputBaseFilename=setupStellariumITLab
 Compression=lzma
 SolidCompression=yes
 
