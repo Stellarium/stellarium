@@ -194,7 +194,7 @@ struct Disk : HalfSpace
 //! We rewrite the intersect for ConvexPolygon
 inline bool intersect(const ConvexS& cp1, const ConvexPolygon& cp2)
 {
-	assert(0);
+	Q_ASSERT(0);
 	// TODO
 	return false;
 }

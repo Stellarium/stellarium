@@ -25,7 +25,7 @@
 #define _VECMATH_H_
 
 #include <cmath>
-#include <cassert>
+#include <QString>
  
 template<class T> class Vector2;
 template<class T> class Vector3;
@@ -144,6 +144,8 @@ public:
 	inline void transfo4d(const Mat4d&);
 	inline void transfo4d(const Mat4f&);
 	T v[3];		// The 3 values
+	
+	QString toString() const {return QString("[%1, %2, %3]").arg(v[0]).arg(v[1]).arg(v[2]);}
 };
 
 

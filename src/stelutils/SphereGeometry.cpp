@@ -132,8 +132,8 @@ bool planeIntersect2(const HalfSpace& h1, const HalfSpace& h2, Vec3d& p1, Vec3d&
 {
 	const Vec3d& n1 = h1.n;
 	const Vec3d& n2 = h2.n;
-	const double& d1 = h1.d;
-	const double& d2 = h2.d;
+	const double& d1 = -h1.d;
+	const double& d2 = -h2.d;
 	const double& a1 = n1[0];
 	const double& b1 = n1[1];
 	const double& c1 = n1[2];
@@ -148,19 +148,18 @@ bool planeIntersect2(const HalfSpace& h1, const HalfSpace& h2, Vec3d& p1, Vec3d&
 		// The planes are parallel
 		return false;
 	}
-	
 	u.normalize();
 	
 	// u gives the direction of the line, still need to find a suitable start point p0
 	// Find the axis on which the line varies the fastest, and solve the system for value == 0 on this axis
-	int maxI = (fabs(u[0])>fabs(u[1])) ? (fabs(u[0])>fabs(u[2]) ? 0 : 2) : (fabs(u[1])>fabs(u[2]) ? 1 : 2);
+	int maxI = (fabs(u[0])>=fabs(u[1])) ? (fabs(u[0])>=fabs(u[2]) ? 0 : 2) : (fabs(u[2])>fabs(u[1]) ? 2 : 1);
 	Vec3d p0(0,0,0);
 	switch (maxI)
 	{
 		case 0:
 		{
 			// Intersection of the line with the plane x=0
-			const double denom = c1*b2-c2*b1;
+			const double denom = b1*c2-b2*c1;
 			p0[1] = (d2*c1-d1*c2)/denom;
 			p0[2] = (d1*b2-d2*b1)/denom;
 			break;
@@ -170,7 +169,7 @@ bool planeIntersect2(const HalfSpace& h1, const HalfSpace& h2, Vec3d& p1, Vec3d&
 			// Intersection of the line with the plane y=0
 			const double denom = a1*c2-a2*c1;
 			p0[0]=(c1*d2-c2*d1)/denom;
-			p0[2]=(a2*d1-d2*d1)/denom;
+			p0[2]=(a2*d1-d2*a1)/denom;
 			break;
 		}
 		case 2:
@@ -179,6 +178,7 @@ bool planeIntersect2(const HalfSpace& h1, const HalfSpace& h2, Vec3d& p1, Vec3d&
 			const double denom = a1*b2-a2*b1;
 			p0[0]=(b1*d2-b2*d1)/denom;
 			p0[1]=(a2*d1-a1*d2)/denom;
+			break;
 		}
 	}
 	
