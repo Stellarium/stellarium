@@ -21,6 +21,9 @@
 #include <iomanip>
 
 #include "BumpShader.h"
+#include "NightShader.h"
+#include "CloudShader.h"
+
 #include "planet.h"
 #include "navigator.h"
 #include "projector.h"
@@ -51,21 +54,28 @@ Planet::Planet(Planet *parent,
                float albedo,
                const string& tex_map_name,
                const string& tex_halo_name,
-			   const string& tex_bump_name,
                pos_func_type coord_func,
                OsulatingFunctType *osculating_func,
 			   bool hidden,
-			   bool flag_bump) :
+			   bool flag_bump, const string& tex_norm_name,
+			   bool flag_night,
+			   const string& tex_night_name,
+		       const string& tex_specular_name,
+			   bool flag_cloud,
+			   const string& tex_cloud_name,
+			   const string& tex_shadow_cloud_name,
+			   const string& tex_norm_cloud_name) :
 		englishName(englishName), flagHalo(flagHalo),
         flag_lighting(flag_lighting),
         radius(radius), one_minus_oblateness(1.0-oblateness),
         color(color), albedo(albedo), axis_rotation(0.),
-        tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL), tex_bump(NULL),
-        sphere_scale(1.f),
+        tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL), tex_norm(NULL),
+        sphere_scale(1.f), tex_night(NULL), tex_specular(NULL),
+		tex_cloud(NULL), tex_shadow_cloud(NULL), tex_norm_cloud(NULL),
         lastJD(J2000), last_orbitJD(0), deltaJD(JD_SECOND), orbit_cached(0),
         coord_func(coord_func), osculating_func(osculating_func),
         parent(parent), hidden(hidden),	stopDayMotion(false), restoreDayTimeDuration(3000.0), 
-		startDayMotionTime(-1.0), flag_bump(flag_bump)
+		startDayMotionTime(-1.0), mBumpEnable(flag_bump), mNightEnable(flag_night), mCloudEnable(flag_cloud)
 {
 	if (parent) parent->satellites.push_back(this);
 	ecliptic_pos=Vec3d(0.,0.,0.);
@@ -73,7 +83,27 @@ Planet::Planet(Planet *parent,
 	mat_local_to_parent = Mat4d::identity();
 	tex_map = new s_texture(tex_map_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
 	if (flagHalo) tex_halo = new s_texture(tex_halo_name);
-	if (flag_bump) tex_bump = new s_texture(tex_bump_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
+
+	if (mBumpEnable)
+	{
+		tex_norm = new s_texture(tex_norm_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
+		mProgramObject.attachShader(BumpShader::instance());
+	}
+
+	if (mNightEnable)
+	{
+		tex_night = new s_texture(tex_night_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
+		tex_specular = new s_texture(tex_specular_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
+		mProgramObject.attachShader(NightShader::instance());
+	}
+
+	if (mCloudEnable)
+	{
+		tex_cloud = new s_texture(tex_cloud_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
+		tex_shadow_cloud = new s_texture(tex_shadow_cloud_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
+		tex_norm_cloud = new s_texture(tex_norm_cloud_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
+		mCloudProgramObject.attachShader(CloudShader::instance());
+	}
 
 	// 60 day trails
 	DeltaTrail = 1;
@@ -97,8 +127,18 @@ Planet::~Planet()
 	rings = NULL;
 	if (tex_big_halo) delete tex_big_halo;
 	tex_big_halo = NULL;
-	if (tex_bump) delete tex_bump;
-	tex_bump = NULL;
+	if (tex_norm) delete tex_norm;
+	tex_norm = NULL;
+	if (tex_night) delete tex_night;
+	tex_night = NULL;
+	if (tex_specular) delete tex_specular;
+	tex_specular = NULL;
+	if (tex_cloud) delete tex_cloud;
+	tex_cloud = NULL;
+	if (tex_shadow_cloud) delete tex_shadow_cloud;
+	tex_shadow_cloud = NULL;
+	if (tex_norm_cloud) delete tex_norm_cloud;
+	tex_norm_cloud = NULL;
 }
 
 // Return the information string "ready to print" :)
@@ -707,14 +747,20 @@ void Planet::draw_sphere(/*const*/ Projector* prj, const Mat4d& mat, float scree
 	//kornyakov: black planet
 	prj->showSphereBlack = isBlack;
 
-	// Vinogradov: enable bump if it's used
-	if (flag_bump)
+	if (mBumpEnable)
 	{
-		BumpShaderPtr()->setTexMap(tex_map->getID());
-		BumpShaderPtr()->setBumpMap(tex_bump->getID());
-		BumpShaderPtr()->enable();
+		BumpShader::instance()->setTexMap(tex_map->getID());
+		BumpShader::instance()->setNormMap(tex_norm->getID());
 	}
 
+	if (mNightEnable)
+	{
+		NightShader::instance()->setDayTexMap(tex_map->getID());
+		NightShader::instance()->setNightTexMap(tex_night->getID());
+		NightShader::instance()->setSpecularTexMap(tex_specular->getID());
+	}
+
+	mProgramObject.enable();
 	if (this->getEnglishName().substr(0,4).compare("3ds_")) // todo: remake it
 	{
 		prj->sSphere(radius*sphere_scale, one_minus_oblateness, nb_facet, nb_facet,
@@ -727,10 +773,21 @@ void Planet::draw_sphere(/*const*/ Projector* prj, const Mat4d& mat, float scree
   		prj->ms3dsObject(&this->object, mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
 		prj->set_clipping_planes(0.000001, 50); //todo: avoid magic numbers
 	}
+	mProgramObject.disable();
 
-	// Vinogradov: disable bump if it's used
-	if (flag_bump)
-		BumpShaderPtr()->disable();
+	if (mCloudEnable)
+	{
+		CloudShader::instance()->setTexMap(tex_cloud->getID());
+		CloudShader::instance()->setShadowMap(tex_shadow_cloud->getID());
+		CloudShader::instance()->setNormMap(tex_norm_cloud->getID());
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		mCloudProgramObject.enable();
+		prj->sSphere((radius*1.02)*sphere_scale, one_minus_oblateness, nb_facet, nb_facet,
+			mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
+		mCloudProgramObject.disable();
+		glDisable(GL_BLEND);
+	}
 
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_LIGHTING);

@@ -2,33 +2,21 @@
 #define SHADER_H
 
 #include <string>
-#include "glew.h"
 
 class Shader
 {
 public:
-	virtual ~Shader() {}
+	Shader(const std::string& vertShader, const std::string& fragShader);
+	virtual ~Shader();
 
-	virtual void enable() = 0;
-	virtual void disable() = 0;
-};
+	unsigned int getVertShader() const;
+	unsigned int getFragShader() const;
 
-class SourceShader : public Shader
-{
-public:
-	SourceShader(const std::string& vertShader, const std::string& fragShader);
-	virtual ~SourceShader();
-
-	virtual void enable();
-	virtual void disable();
-protected:
-	virtual void setParams() = 0;
-
-	GLhandleARB getProgramObject()const;
+	virtual void setParams(unsigned int programObject, int startActiveTex) const = 0;
+	virtual int getActiveTexCount() const = 0;
 private:
-	GLhandleARB mVertShader; 
-	GLhandleARB mFragShader;
-	GLhandleARB mProgramObject;
+	unsigned int mVertShader; 
+	unsigned int mFragShader;
 };
 
 #endif // SHADER_H

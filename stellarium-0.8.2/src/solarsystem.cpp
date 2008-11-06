@@ -365,10 +365,17 @@ void SolarSystem::load(const string& planetfile)
       pd.get_double(secname, "albedo"),
       pd.get_str(secname, "tex_map"),
       pd.get_str(secname, "tex_halo"),
-	  pd.get_str(secname, "tex_bump"),
       posfunc,osculating_func,
       pd.get_boolean(secname, "hidden", 0),
-	  pd.get_boolean(secname, "bump", false));
+	  pd.get_boolean(secname, "bump", false), 
+	  pd.get_str(secname, "tex_norm", ""),
+	  pd.get_boolean(secname, "night",false), 
+	  pd.get_str(secname, "tex_night", ""), 
+	  pd.get_str(secname, "tex_specular", ""),
+	  pd.get_boolean(secname, "cloud", false), 
+	  pd.get_str(secname, "tex_cloud", ""), 
+	  pd.get_str(secname, "tex_shadow_cloud", ""), 
+	  pd.get_str(secname, "tex_norm_cloud", ""));
 
     //kornyakov&serkin: for 3d objects
    // strcpy(p->object.path, pd.get_str(secname, "3dmodel").c_str());

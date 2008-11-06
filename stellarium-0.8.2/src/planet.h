@@ -29,6 +29,9 @@
 #include "callbacks.hpp"
 #include "fader.h"
 #include "translator.h"
+
+#include "ProgramObject.h"
+
 #include "3dsloader.h"
 #include <lib3ds/file.h>
 #include <lib3ds/camera.h>
@@ -109,11 +112,18 @@ public:
            float albedo,
            const string& tex_map_name,
            const string& tex_halo_name,
-		   const string& tex_bump_name,
            pos_func_type _coord_func,
            OsulatingFunctType *osculating_func,
 		   bool hidden,
-		   bool flag_bump);
+		   bool flag_bump,
+		   const string& tex_norm_name,
+		   bool flag_night,
+		   const string& tex_night_name,
+		   const string& tex_specular_name,
+		   bool flag_cloud,
+		   const string& tex_cloud_name,
+		   const string& tex_shadow_cloud_name,
+		   const string& tex_norm_cloud_name);
 
     ~Planet();
 
@@ -291,10 +301,18 @@ protected:
 	s_texture * tex_map;			// Planet map texture
 	s_texture * tex_halo;			// Little halo texture
 	s_texture * tex_big_halo;		// Big halo texture
+	s_texture * tex_norm;
+	s_texture * tex_night;
+	s_texture * tex_specular;
+	s_texture * tex_cloud;
+	s_texture * tex_shadow_cloud;
+	s_texture * tex_norm_cloud;
 	
-	// Vinogradov : for bump
-	s_texture * tex_bump;
-	bool flag_bump;
+	ProgramObject mProgramObject;
+	ProgramObject mCloudProgramObject;
+	bool mBumpEnable;
+	bool mNightEnable;
+	bool mCloudEnable;
 
 	float big_halo_size;			// Halo size on screen
 

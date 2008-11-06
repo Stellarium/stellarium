@@ -1,9 +1,10 @@
 #include "Shader.h"
+#include "glew.h"
 #include <stdexcept>
 
 using namespace std;
 
-SourceShader::SourceShader(const string& vertShader, const string& fragShader)
+Shader::Shader(const string& vertShader, const string& fragShader)
 {
 	if (glewInit() != GLEW_OK)
 		throw runtime_error("Error in GLEW init");
@@ -29,44 +30,22 @@ SourceShader::SourceShader(const string& vertShader, const string& fragShader)
 	glGetShaderiv(mFragShader, GL_COMPILE_STATUS, &status);
 	if (!status)
 		throw runtime_error("Can't compile fragment shader");
-
-	mProgramObject = glCreateProgram(); 
-	if (!mProgramObject)
-		throw runtime_error("Can't create program object");
-
-	glAttachShader(mProgramObject, mVertShader);
-	glAttachShader(mProgramObject, mFragShader); 
-
-	glLinkProgramARB(mProgramObject); 
-	glGetProgramivARB(mProgramObject, GL_LINK_STATUS, &status);
-	if (!status)
-		throw runtime_error("Can't link program object");
 }
 
-SourceShader::~SourceShader()
+Shader::~Shader()
 {
-	disable();
 	if (mVertShader)
 		glDeleteObjectARB(mVertShader);
     if (mFragShader)
 		glDeleteObjectARB(mFragShader);
-    if (mProgramObject)
-		glDeleteObjectARB(mProgramObject); 
 }
 
-void SourceShader::enable()
+unsigned int Shader::getVertShader() const
 {
-	glUseProgram(mProgramObject);
-	setParams();
+	return mVertShader;
 }
 
-void SourceShader::disable()
+unsigned int Shader::getFragShader() const
 {
-	glUseProgram(0);
-    glActiveTexture(GL_TEXTURE0);
-}
-
-GLhandleARB SourceShader::getProgramObject()const
-{
-	return mProgramObject;
+	return mFragShader;
 }

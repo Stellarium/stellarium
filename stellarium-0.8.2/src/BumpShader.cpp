@@ -1,8 +1,9 @@
 #include "BumpShader.h"
+#include "glew.h"
 
 namespace
 {
-	const char* gVertShaderSource = 
+	const char* cVertShaderSource = 
 		"                                                                                           \
 			uniform vec3 LightPosition;                                                             \
 			varying vec2 TexCoord;                                                                  \
@@ -23,7 +24,7 @@ namespace
 			}                                                                                       \
 		";
 
-	const char* gFragShaderSource = 
+	const char* cFragShaderSource = 
 		"                                                                             \
 			uniform sampler2D TextureMap;                                             \
 			uniform sampler2D NormalMap;                                              \
@@ -45,39 +46,44 @@ namespace
 }
 
 BumpShader::BumpShader() : 
-	SourceShader(gVertShaderSource, gFragShaderSource), mTexMap(0), mBumpMap(0),
+	Shader(cVertShaderSource, cFragShaderSource), mTexMap(0), mNormMap(0),
 	mLightPos(0.0f, 0.0f, 0.0f)
 {
-	mLightPosLoc = glGetUniformLocation(getProgramObject(), "LightPosition");
-	mTexMapLoc = glGetUniformLocation(getProgramObject(), "TextureMap");
-	mBumpMapLoc = glGetUniformLocation(getProgramObject(), "NormalMap");
 }
 
 BumpShader::~BumpShader()
 {
 }
 
-void BumpShader::setParams()
+void BumpShader::setParams(unsigned int programObject, int startActiveTex) const
 {
-	glActiveTexture(GL_TEXTURE0);
+	glActiveTexture(GL_TEXTURE0 + startActiveTex);
     glBindTexture(GL_TEXTURE_2D, mTexMap);
-    glUniform1i(mTexMapLoc, 0);
+	int loc = glGetUniformLocation(programObject, "TextureMap");
+    glUniform1i(loc, startActiveTex);
 
-	glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, mBumpMap);
-    glUniform1i(mBumpMapLoc, 1);
+	glActiveTexture(GL_TEXTURE0 + startActiveTex + 1);
+    glBindTexture(GL_TEXTURE_2D, mNormMap);
+	loc = glGetUniformLocation(programObject, "NormalMap");
+    glUniform1i(loc, startActiveTex + 1);
 
-	glUniform3fvARB(mLightPosLoc, 1, mLightPos);
+	loc = glGetUniformLocation(programObject, "LightPosition");
+	glUniform3fvARB(loc, 1, mLightPos);
 }	
 
-void BumpShader::setTexMap(GLuint texMap)
+int BumpShader::getActiveTexCount() const
+{
+	return 2;
+}
+
+void BumpShader::setTexMap(unsigned int texMap)
 {
 	mTexMap = texMap;
 }
 
-void BumpShader::setBumpMap(GLuint bumpMap)
+void BumpShader::setNormMap(unsigned int normMap)
 {
-	mBumpMap = bumpMap;
+	mNormMap = normMap;
 }
 
 void BumpShader::setLightPos(const Vec3f& lightPos)
@@ -85,15 +91,8 @@ void BumpShader::setLightPos(const Vec3f& lightPos)
 	mLightPos = lightPos;
 }
 
-BumpShader* BumpShaderPtr::sBumpShader;
-
-BumpShaderPtr::BumpShaderPtr()
+BumpShader* BumpShader::instance()
 {
-	static BumpShader bumpShader;
-	sBumpShader = &bumpShader;
-}
-
-BumpShader* BumpShaderPtr::operator ->()
-{
-	return sBumpShader;
+	static BumpShader shader;
+	return &shader;
 }

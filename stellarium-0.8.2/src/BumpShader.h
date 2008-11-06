@@ -4,38 +4,25 @@
 #include "Shader.h"
 #include "vecmath.h"
 
-class BumpShader : public SourceShader
+class BumpShader : public Shader
 {
 public:
-	BumpShader();
 	virtual ~BumpShader();
 
-	void setTexMap(GLuint texMap);
-	void setBumpMap(GLuint bumpMap);
+	virtual void setParams(unsigned int programObject, int startActiveTex) const;
+	virtual int getActiveTexCount() const;
+
+	void setTexMap(unsigned int texMap);
+	void setNormMap(unsigned int normMap);
 	void setLightPos(const Vec3f& lightPos);
-protected:
-	virtual void setParams();
+
+	static BumpShader* instance();
 private:
+	BumpShader();
+
 	Vec3f mLightPos;
-	GLuint mTexMap;
-	GLuint mBumpMap;
-
-	GLint mLightPosLoc;
-	GLint mTexMapLoc;
-	GLint mBumpMapLoc;
-};
-
-class BumpShaderPtr
-{
-public:
-	BumpShaderPtr();
-
-	BumpShader* operator ->();
-private:
-	BumpShaderPtr(const BumpShaderPtr&);
-	BumpShaderPtr& operator =(const BumpShaderPtr&);
-
-	static BumpShader* sBumpShader;
+	unsigned int mTexMap;
+	unsigned int mNormMap;
 };
 
 #endif // BUMP_SHADER_H
