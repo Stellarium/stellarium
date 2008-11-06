@@ -11,7 +11,7 @@ namespace
 			varying vec3 TangentLight;                                                              \
 			void main(void)                                                                         \
 			{                                                                                       \
-				vec3 position = vec3(gl_ModelViewMatrix * gl_Vertex);                               \
+				vec3 position = vec3(gl_ModelViewMatrix * gl_Color);                                \
 				vec3 normal = normalize(gl_NormalMatrix * gl_Normal);                               \
 				vec3 view = normalize(-position);                                                   \
 				vec3 light = normalize(LightPosition - position);                                   \

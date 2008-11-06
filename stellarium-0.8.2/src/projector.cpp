@@ -296,7 +296,7 @@ void Projector::reset_perspective_projection(void) const
 
 void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
                         GLint slices, GLint stacks,
-                        const Mat4d& mat, int orient_inside) const
+                        const Mat4d& mat, int orient_inside, bool bump) const
 {
   glPushMatrix();
   glLoadMatrixd(mat);

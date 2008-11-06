@@ -308,6 +308,7 @@ protected:
 	s_texture * tex_shadow_cloud;
 	s_texture * tex_norm_cloud;
 	
+	Vec3f eye_sun;
 	ProgramObject mProgramObject;
 	ProgramObject mCloudProgramObject;
 	bool mBumpEnable;

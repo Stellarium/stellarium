@@ -11,7 +11,7 @@ namespace
 			varying vec3 TangentLight;                                                              \
 			void main(void)                                                                         \
 			{                                                                                       \
-				vec3 position = vec3(gl_ModelViewMatrix * gl_Vertex);                               \
+				vec3 position = vec3(gl_ModelViewMatrix * gl_Color);                                \
 				vec3 normal = normalize(gl_NormalMatrix * gl_Normal);                               \
 				vec3 view = normalize(-position);                                                   \
 				vec3 light = normalize(LightPosition - position);                                   \
@@ -33,10 +33,13 @@ namespace
 			varying vec3 normal;                                                          \
 			varying vec3 TangentView;                                                     \
 			varying vec3 TangentLight;                                                    \
+			float tempTransp;                                                             \
+			const vec3 Light = vec3(0,0,0);                                               \
+			vec3 color;                                                                   \
 			void main(void)                                                               \
 			{                                                                             \
-				vec3 color = vec3(texture2D(cloudTexture, TexCoord));                     \
-				float tempTransp = texture2D(cloudShadowTexture, TexCoord).x;             \
+				color = vec3(texture2D(cloudTexture, TexCoord));                          \
+				tempTransp = texture2D(cloudShadowTexture, TexCoord).x;                   \
 				vec3 light = normalize(TangentLight);                                     \
 				vec3 view = normalize(TangentView);                                       \
 				vec3 normal = 2.0 * vec3(texture2D(NormalTexture, TexCoord)) - vec3(1.0); \

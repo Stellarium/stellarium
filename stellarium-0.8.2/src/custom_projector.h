@@ -60,7 +60,7 @@ private:
 	// Reimplementation of gluSphere : glu is overrided for non standard projection
 	void sSphere(GLdouble radius, GLdouble one_minus_oblateness,
 		GLint slices, GLint stacks,
-		const Mat4d& mat, int orient_inside = 0) const;
+		const Mat4d& mat, int orient_inside = 0, bool bump=false) const;
 
 	// Reimplementation of gluCylinder : glu is overrided for non standard projection
 	void sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks,

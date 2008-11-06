@@ -65,7 +65,7 @@ Planet::Planet(Planet *parent,
 			   const string& tex_cloud_name,
 			   const string& tex_shadow_cloud_name,
 			   const string& tex_norm_cloud_name) :
-		englishName(englishName), flagHalo(flagHalo),
+		englishName(englishName), flagHalo(flagHalo), eye_sun(0.0f, 0.0f, 0.0f),
         flag_lighting(flag_lighting),
         radius(radius), one_minus_oblateness(1.0-oblateness),
         color(color), albedo(albedo), axis_rotation(0.),
@@ -588,6 +588,8 @@ float Planet::get_on_screen_size(const Projector* prj, const Navigator * nav)
 // Draw the Planet and all the related infos : name, circle etc..
 double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproductor* eye, int flag_point, bool stencil)
 {
+	eye_sun = nav->get_helio_to_eye_mat() * Vec3f(0.0f, 0.0f, 0.0f);
+
 	if (hidden) return 0;
 
 	Mat4d mat = mat_local_to_parent;
@@ -749,12 +751,14 @@ void Planet::draw_sphere(/*const*/ Projector* prj, const Mat4d& mat, float scree
 
 	if (mBumpEnable)
 	{
+		BumpShader::instance()->setLightPos(eye_sun);
 		BumpShader::instance()->setTexMap(tex_map->getID());
 		BumpShader::instance()->setNormMap(tex_norm->getID());
 	}
 
 	if (mNightEnable)
 	{
+		NightShader::instance()->setLightPos(eye_sun);
 		NightShader::instance()->setDayTexMap(tex_map->getID());
 		NightShader::instance()->setNightTexMap(tex_night->getID());
 		NightShader::instance()->setSpecularTexMap(tex_specular->getID());
@@ -764,7 +768,8 @@ void Planet::draw_sphere(/*const*/ Projector* prj, const Mat4d& mat, float scree
 	if (this->getEnglishName().substr(0,4).compare("3ds_")) // todo: remake it
 	{
 		prj->sSphere(radius*sphere_scale, one_minus_oblateness, nb_facet, nb_facet,
-			mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
+			mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)), 0, 
+			mBumpEnable | mNightEnable);
 	}
 	else
 	{
@@ -777,6 +782,7 @@ void Planet::draw_sphere(/*const*/ Projector* prj, const Mat4d& mat, float scree
 
 	if (mCloudEnable)
 	{
+		CloudShader::instance()->setLightPos(eye_sun);
 		CloudShader::instance()->setTexMap(tex_cloud->getID());
 		CloudShader::instance()->setShadowMap(tex_shadow_cloud->getID());
 		CloudShader::instance()->setNormMap(tex_norm_cloud->getID());
@@ -784,7 +790,7 @@ void Planet::draw_sphere(/*const*/ Projector* prj, const Mat4d& mat, float scree
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		mCloudProgramObject.enable();
 		prj->sSphere((radius*1.02)*sphere_scale, one_minus_oblateness, nb_facet, nb_facet,
-			mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
+			mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)), 0, true);
 		mCloudProgramObject.disable();
 		glDisable(GL_BLEND);
 	}

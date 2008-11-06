@@ -10,7 +10,7 @@ namespace
 			varying vec3 position;                                      \
 			void main()                                                 \
 			{                                                           \
-				position = vec3(gl_ModelViewMatrix * gl_Vertex);        \
+				position = vec3(gl_ModelViewMatrix * gl_Color);         \
 				normal = normalize(gl_NormalMatrix * gl_Normal);        \
 				TexCoord = gl_MultiTexCoord0.st;                        \
 				gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex; \
@@ -22,15 +22,16 @@ namespace
 			uniform sampler2D DayTexture;                                             \
 			uniform sampler2D NightTexture;                                           \
 			uniform sampler2D SpecularTexture;                                        \
-			uniform vec3 light;                                                       \
+			uniform vec3 LightPosition;                                               \
 			varying vec2 TexCoord;                                                    \
 			varying vec3 normal;                                                      \
 			varying vec3 position;                                                    \
+			vec3 light;                                                               \
 			void main(void)                                                           \
 			{                                                                         \
 				vec3 daytime = vec3(texture2D(DayTexture, TexCoord));                 \
 				vec3 nighttime = vec3(texture2D(NightTexture, TexCoord));             \
-				light = normalize(-position);                                         \
+				light = normalize(LightPosition-position);                            \
 				float diffuse = max(dot(normal, light), 0.0);                         \
 				vec3 daycolor = diffuse * daytime;                                    \
 				vec3 nightcolor = nighttime + vec3(0.1);                              \
@@ -71,7 +72,7 @@ void NightShader::setParams(unsigned int programObject, int startActiveTex) cons
 	loc = glGetUniformLocation(programObject, "SpecularTexture");
     glUniform1i(loc, startActiveTex + 2);
 
-	loc = glGetUniformLocation(programObject, "light");
+	loc = glGetUniformLocation(programObject, "LightPosition");
 	glUniform3fvARB(loc, 1, mLightPos);
 }
 
