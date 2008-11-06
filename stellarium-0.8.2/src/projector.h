@@ -216,7 +216,7 @@ public:
 	// Reimplementation of gluSphere : glu is overrided for non standard projection
 	virtual void sSphere(GLdouble radius, GLdouble one_minus_oblateness,
 		GLint slices, GLint stacks,
-		const Mat4d& mat, int orient_inside = 0, bool bump=false) const;
+		const Mat4d& mat, int orient_inside = 0, bool shader = false) const;
 
 	// Draw a half sphere
 	virtual void sHalfSphere(GLdouble radius, GLint slices, GLint stacks,

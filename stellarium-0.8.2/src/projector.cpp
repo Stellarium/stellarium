@@ -296,7 +296,7 @@ void Projector::reset_perspective_projection(void) const
 
 void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
                         GLint slices, GLint stacks,
-                        const Mat4d& mat, int orient_inside, bool bump) const
+                        const Mat4d& mat, int orient_inside, bool shader) const
 {
     glPushMatrix();
     glLoadMatrixd(mat);
@@ -396,9 +396,10 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
             y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
             z = nsign * cos_sin_rho_p[0];
             glTexCoord2f(s, t);
-			if(bump) glNormal3f(x * one_minus_oblateness * nsign,
-                                y * one_minus_oblateness * nsign,
-                                z * nsign);
+			if(shader) 
+				glNormal3f(x * one_minus_oblateness * nsign,
+                           y * one_minus_oblateness * nsign,
+                           z * nsign);
             if (isLightOn)
             {
                 transNorm = mat.multiplyWithoutTranslation(
@@ -408,21 +409,23 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
                 c = lightPos3.dot(transNorm);
                 if (c<0) c=0;
                 //kornyakov: planet fading
-				//Ljubov: something for bump-mapping
-			    if (bump) glColor3f(x * radius,y * radius,z * one_minus_oblateness * radius);
+				//Ljubov: something for shaders
+			    if (shader) 
+					glColor3f(x * radius,y * radius,z * one_minus_oblateness * radius);
 				else
-				glColor3f(intensity*(c*diffuseLight[0] + ambientLight[0]),
-                               intensity*(c*diffuseLight[1] + ambientLight[1]),
-                               intensity*(c*diffuseLight[2] + ambientLight[2])); 
+					glColor3f(intensity*(c*diffuseLight[0] + ambientLight[0]),
+                              intensity*(c*diffuseLight[1] + ambientLight[1]),
+                              intensity*(c*diffuseLight[2] + ambientLight[2])); 
             }
             sVertex3(x * radius, y * radius, z * one_minus_oblateness * radius, mat);
             x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
             y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
             z = nsign * cos_sin_rho_p[2];
             glTexCoord2f(s, t - dt);
-		    if(bump) glNormal3f(x * one_minus_oblateness * nsign,
-                                y * one_minus_oblateness * nsign,
-                                z * nsign);
+		    if(shader) 
+				glNormal3f(x * one_minus_oblateness * nsign,
+                           y * one_minus_oblateness * nsign,
+                           z * nsign);
             if (isLightOn)
             {
                 transNorm = mat.multiplyWithoutTranslation(
@@ -432,12 +435,13 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
                 c = lightPos3.dot(transNorm);
                 if (c<0) c=0;
                 //kornyakov: planet fading
-                //Ljubov: something for bump-mapping
-			    if (bump) glColor3f(x * radius,y * radius,z * one_minus_oblateness * radius);
+                //Ljubov: something for shaders
+			    if (shader) 
+					glColor3f(x * radius,y * radius,z * one_minus_oblateness * radius);
 				else
-				glColor3f(intensity*(c*diffuseLight[0] + ambientLight[0]),
-                               intensity*(c*diffuseLight[1] + ambientLight[1]),
-                               intensity*(c*diffuseLight[2] + ambientLight[2])); 
+					glColor3f(intensity*(c*diffuseLight[0] + ambientLight[0]),
+                              intensity*(c*diffuseLight[1] + ambientLight[1]),
+                              intensity*(c*diffuseLight[2] + ambientLight[2])); 
             }
             sVertex3(x * radius, y * radius, z * one_minus_oblateness * radius, mat);
             s += ds;

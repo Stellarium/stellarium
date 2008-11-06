@@ -31,7 +31,7 @@ namespace
 			{                                                                         \
 				vec3 daytime = vec3(texture2D(DayTexture, TexCoord));                 \
 				vec3 nighttime = vec3(texture2D(NightTexture, TexCoord));             \
-				light = normalize(LightPosition-position);                            \
+				light = normalize(LightPosition - position);                            \
 				float diffuse = max(dot(normal, light), 0.0);                         \
 				vec3 daycolor = diffuse * daytime;                                    \
 				vec3 nightcolor = nighttime + vec3(0.1);                              \
@@ -40,7 +40,7 @@ namespace
 				{                                                                     \
 					color = mix(nightcolor, daycolor, (diffuse + 0.1) * 5.0);         \
 				}                                                                     \
-				gl_FragColor = vec4(mix(color,vec3(0.3, 0.3, 0.4),(1.0 ) / 4.0),1.0); \
+				gl_FragColor = vec4(mix(color, vec3(0.3, 0.3, 0.4), 1.0 / 4.0), 1.0); \
 			}                                                                         \
 		";
 }
