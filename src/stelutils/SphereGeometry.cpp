@@ -140,7 +140,10 @@ bool planeIntersect2(const HalfSpace& h1, const HalfSpace& h2, Vec3d& p1, Vec3d&
 	const double& a2 = n2[0];
 	const double& b2 = n2[1];
 	const double& c2 = n2[2];
-		
+	
+	Q_ASSERT(fabs(n1.lengthSquared()-1.)<0.000001);
+	Q_ASSERT(fabs(n2.lengthSquared()-1.)<0.000001);
+	
 	// Compute the parametric equation of the line at the intersection of the 2 planes
 	Vec3d u = n1^n2;
 	if (u==Vec3d(0,0,0))
@@ -182,21 +185,27 @@ bool planeIntersect2(const HalfSpace& h1, const HalfSpace& h2, Vec3d& p1, Vec3d&
 		}
 	}
 	
-	// The intersection line is now fully defined by the parametric equation p0 + u*t
+	// The intersection line is now fully defined by the parametric equation p = p0 + u*t
 	
 	// The points are on the unit sphere x^2+y^2+z^2=1, replace x, y and z by the parametric equation to get something of the form at^2+b*t+c=0
 	// const double a = 1.;
-	// const double b = 0;
+	const double b = p0*u*2.;
 	const double c = p0.lengthSquared()-1.;
 	
 	// If discriminant <=0, zero or 1 real solution
-	const double D = -4.*c;
+	const double D = b*b-4.*c;
 	if (D<=0.)
 		return false;
 	
-	const double t1 = std::sqrt(D)/2.;
+	const double sqrtD = std::sqrt(D);
+	const double t1 = (-b+sqrtD)/2.;
+	const double t2 = (-b-sqrtD)/2.;
 	p1 = p0+u*t1;
-	p2 = p0-u*t1;
+	p2 = p0+u*t2;
+	
+	Q_ASSERT(fabs(p1.lengthSquared()-1.)<0.000001);
+	Q_ASSERT(fabs(p2.lengthSquared()-1.)<0.000001);
+	
 	return true;
 }
 
