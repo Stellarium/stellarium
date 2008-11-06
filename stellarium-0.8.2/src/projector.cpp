@@ -298,38 +298,57 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
                         GLint slices, GLint stacks,
                         const Mat4d& mat, int orient_inside, bool bump) const
 {
-  glPushMatrix();
-  glLoadMatrixd(mat);
+    glPushMatrix();
+    glLoadMatrixd(mat);
 
-  if (one_minus_oblateness == 1.0) { // gluSphere seems to have hardware acceleration
-    GLUquadricObj * p = gluNewQuadric();
-    gluQuadricTexture(p,GL_TRUE);
-    if (orient_inside) gluQuadricOrientation(p, GLU_INSIDE);
-    gluSphere(p, radius, slices, stacks);
-    gluDeleteQuadric(p);
-  } else {
-    //GLfloat rho, theta;
+      // It is really good for performance to have Vec4f,Vec3f objects
+      // static rather than on the stack. But why?
+      // Is the constructor/destructor so expensive?
+    static Vec4f lightPos4;
+    static Vec3f lightPos3;
+    GLboolean isLightOn;
+    static Vec3f transNorm;
+    float c;
+
+    static Vec4f ambientLight;
+    static Vec4f diffuseLight;
+
+    glGetBooleanv(GL_LIGHTING, &isLightOn);
+
+    if (isLightOn)
+    {
+        glGetLightfv(GL_LIGHT0, GL_POSITION, lightPos4);
+        lightPos3 = lightPos4;
+        lightPos3 -= mat * Vec3d(0.,0.,0.); // -posCenterEye
+        lightPos3.normalize();
+        glGetLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
+        glGetLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
+        glDisable(GL_LIGHTING);
+    }
+
     GLfloat x, y, z;
-    GLfloat s, t, ds, dt;
+    GLfloat s, t;
     GLint i, j;
     GLfloat nsign;
 
-    if (orient_inside) nsign = -1.0;
-    else nsign = 1.0;
+    if (orient_inside) {
+      nsign = -1.0;
+      t=0.0; // from inside texture is reversed
+    } else {
+      nsign = 1.0;
+      t=1.0;
+    }
 
     const GLfloat drho = M_PI / (GLfloat) stacks;
-    /***** MSVC Stellarium Build *****/
-    //Original == #if defined(__sun) || defined(__sun__)
+/***** MSVC Stellarium Build *****/
+//Original == #if defined(__sun) || defined(__sun__)
 #if defined(__sun) || defined(__sun__) || defined(__MSVC__)
-    // in Sun C/C++ on Solaris 8 VLAs are not allowed, so let's use new double[]
-    double* cos_sin_rho = new double[2 * (stacks + 1)];
-    double* cos_sin_theta  = new double[2*(slices+1)];
+/***** MSVC Stellarium Build *****/
+	// in Sun C/C++ on Solaris 8 VLAs are not allowed, so let's use new double[]
+    double *cos_sin_rho = new double[2*(stacks+1)];
 #else
     double cos_sin_rho[2*(stacks+1)];
-    double cos_sin_theta[2*(slices+1)];
 #endif
-    /***** MSVC Stellarium Build *****/
-
     double *cos_sin_rho_p = cos_sin_rho;
     for (i = 0; i <= stacks; i++) {
       double rho = i * drho;
@@ -338,66 +357,104 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
     }
 
     const GLfloat dtheta = 2.0 * M_PI / (GLfloat) slices;
-    /***** MSVC Stellarium Build *****/
-    //double cos_sin_theta[2*(slices+1)];
-    /***** MSVC Stellarium Build *****/
+
+/***** MSVC Stellarium Build *****/
+//Original == double cos_sin_theta[2*(slices+1)];
+#if defined(__sun) || defined(__sun__) || defined(__MSVC__)
+/***** MSVC Stellarium Build *****/
+	double *cos_sin_theta = new double[2*(slices+1)];
+#else
+    double cos_sin_theta[2*(slices+1)];
+#endif
+
     double *cos_sin_theta_p = cos_sin_theta;
     for (i = 0; i <= slices; i++) {
       double theta = (i == slices) ? 0.0 : i * dtheta;
       *cos_sin_theta_p++ = cos(theta);
       *cos_sin_theta_p++ = sin(theta);
     }
+
     // texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
     // t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
     // cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
-    ds = 1.0 / slices;
-    dt = 1.0 / stacks;
-    t = 1.0;            // because loop now runs from 0
+    const GLfloat ds = 1.0 / slices;
+    const GLfloat dt = nsign / stacks; // from inside texture is reversed
 
-    // draw intermediate stacks as quad strips
+    //kornyakov: black planets
+    float intensity = GetIntensity();
+
+    // draw intermediate as quad strips
     for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks;
-      i++,cos_sin_rho_p+=2)
+         i++,cos_sin_rho_p+=2)
     {
-      glBegin(GL_QUAD_STRIP);
-      s = 0.0;
-      for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;
-        j++,cos_sin_theta_p+=2)
-      {
-        x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
-        y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
-        z = nsign * cos_sin_rho_p[0];
-        glNormal3f(x * one_minus_oblateness * nsign,
-          y * one_minus_oblateness * nsign,
-          z * nsign);
-        glTexCoord2f(s, t);
-        sVertex3(x * radius,
-          y * radius,
-          one_minus_oblateness * z * radius, mat);
-        x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
-        y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
-        z = nsign * cos_sin_rho_p[2];
-        glNormal3f(x * one_minus_oblateness * nsign,
-          y * one_minus_oblateness * nsign,
-          z * nsign);
-        glTexCoord2f(s, t - dt);
-        s += ds;
-        sVertex3(x * radius,
-          y * radius,
-          one_minus_oblateness * z * radius, mat);
-      }
-      glEnd();
-      t -= dt;
+        glBegin(GL_QUAD_STRIP);
+        s = 0.0;
+        for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;
+             j++,cos_sin_theta_p+=2)
+        {
+            x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
+            y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
+            z = nsign * cos_sin_rho_p[0];
+            glTexCoord2f(s, t);
+			if(bump) glNormal3f(x * one_minus_oblateness * nsign,
+                                y * one_minus_oblateness * nsign,
+                                z * nsign);
+            if (isLightOn)
+            {
+                transNorm = mat.multiplyWithoutTranslation(
+                                  Vec3d(x * one_minus_oblateness * nsign,
+                                        y * one_minus_oblateness * nsign,
+                                        z * nsign));
+                c = lightPos3.dot(transNorm);
+                if (c<0) c=0;
+                //kornyakov: planet fading
+				//Ljubov: something for bump-mapping
+			    if (bump) glColor3f(x * radius,y * radius,z * one_minus_oblateness * radius);
+				else
+				glColor3f(intensity*(c*diffuseLight[0] + ambientLight[0]),
+                               intensity*(c*diffuseLight[1] + ambientLight[1]),
+                               intensity*(c*diffuseLight[2] + ambientLight[2])); 
+            }
+            sVertex3(x * radius, y * radius, z * one_minus_oblateness * radius, mat);
+            x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
+            y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
+            z = nsign * cos_sin_rho_p[2];
+            glTexCoord2f(s, t - dt);
+		    if(bump) glNormal3f(x * one_minus_oblateness * nsign,
+                                y * one_minus_oblateness * nsign,
+                                z * nsign);
+            if (isLightOn)
+            {
+                transNorm = mat.multiplyWithoutTranslation(
+                                  Vec3d(x * one_minus_oblateness * nsign,
+                                        y * one_minus_oblateness * nsign,
+                                        z * nsign));
+                c = lightPos3.dot(transNorm);
+                if (c<0) c=0;
+                //kornyakov: planet fading
+                //Ljubov: something for bump-mapping
+			    if (bump) glColor3f(x * radius,y * radius,z * one_minus_oblateness * radius);
+				else
+				glColor3f(intensity*(c*diffuseLight[0] + ambientLight[0]),
+                               intensity*(c*diffuseLight[1] + ambientLight[1]),
+                               intensity*(c*diffuseLight[2] + ambientLight[2])); 
+            }
+            sVertex3(x * radius, y * radius, z * one_minus_oblateness * radius, mat);
+            s += ds;
+        }
+        glEnd();
+        t -= dt;
     }
-    /***** MSVC Stellarium Build *****/
-    //Original == #if defined(__sun) || defined(__sun__)
-#if defined(__sun) || defined(__sun__) || defined(__MSVC__)
-    delete[] cos_sin_rho;
-    delete[] cos_sin_theta;
-#endif
-    /***** MSVC Stellarium Build *****/
-  }
+    glPopMatrix();
+    if (isLightOn) glEnable(GL_LIGHTING);
 
-  glPopMatrix();
+	/***** MSVC Stellarium Build *****/
+	//Original == #if defined(__sun) || defined(__sun__)
+	#if defined(__sun) || defined(__sun__) || defined(__MSVC__)
+		delete[] cos_sin_theta;
+	/***** MSVC Stellarium Build *****/
+		delete[] cos_sin_rho;
+	#endif
 }
 
 
