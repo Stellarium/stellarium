@@ -33,6 +33,7 @@
 #include "MilkyWay.hpp"
 #include "MeteorMgr.hpp"
 #include "LabelMgr.hpp"
+#include "ScriptImageMgr.hpp"
 #include "StarMgr.hpp"
 #include "SolarSystem.hpp"
 #include "StelIniParser.hpp"
@@ -328,6 +329,11 @@ void StelApp::init()
 	LabelMgr* skyLabels = new LabelMgr();
 	skyLabels->init();
 	getModuleMgr().registerModule(skyLabels);
+
+	// Scripting images
+	ScriptImageMgr* scriptImages = new ScriptImageMgr();
+	scriptImages->init();
+	getModuleMgr().registerModule(scriptImages);
 
 // ugly fix by Johannes: call skyCultureMgr->init twice so that
 // star names are loaded again

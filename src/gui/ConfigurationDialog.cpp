@@ -473,6 +473,8 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + scriptMgr.getName(s+".ssc") + "</h2>";
+	html += "<h3>" + q_("Author") + ": " + scriptMgr.getAuthor(s+".ssc") + "</h3>";
+	html += "<h3>" + q_("License") + ": " + scriptMgr.getLicense(s+".ssc") + "</h3>";
 	QString d = scriptMgr.getDescription(s+".ssc");
 	d.replace("\n", "<br />");
 	html += "<p>" + d + "</p>";

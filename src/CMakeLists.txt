@@ -148,6 +148,8 @@ SET(stellarium_lib_SRCS
 	modules/ConstellationMgr.hpp
 	modules/GridLinesMgr.cpp
 	modules/GridLinesMgr.hpp
+	modules/LabelMgr.hpp
+	modules/LabelMgr.cpp
 	modules/Landscape.cpp
 	modules/Landscape.hpp
 	modules/LandscapeMgr.cpp
@@ -166,12 +168,12 @@ SET(stellarium_lib_SRCS
 	modules/Orbit.hpp
 	modules/Planet.cpp
 	modules/Planet.hpp
+	modules/ScriptImageMgr.hpp
+	modules/ScriptImageMgr.cpp
 	modules/Skybright.cpp
 	modules/Skybright.hpp
 	modules/Skylight.cpp
 	modules/Skylight.hpp
-	modules/LabelMgr.hpp
-	modules/LabelMgr.cpp
 	modules/SolarSystem.cpp
 	modules/SolarSystem.hpp
 	modules/Solve.hpp
@@ -271,14 +273,15 @@ SET(stellarium_MOC_HDRS
 	core/SkyDrawer.hpp
 	core/SkyImageMgr.hpp
 	modules/ConstellationMgr.hpp
-	modules/LandscapeMgr.hpp
 	modules/GridLinesMgr.hpp
+	modules/LabelMgr.hpp
+	modules/LandscapeMgr.hpp
+	modules/MeteorMgr.hpp
 	modules/MilkyWay.hpp
 	modules/NebulaMgr.hpp
+	modules/ScriptImageMgr.hpp
 	modules/SolarSystem.hpp
-	modules/MeteorMgr.hpp
 	modules/StarMgr.hpp
-	modules/LabelMgr.hpp
 	gui/StelGui.hpp
 	gui/StelGuiItems.hpp
 	gui/HelpDialog.hpp
