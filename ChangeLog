@@ -5,6 +5,8 @@ Allowed for gzip compressed JSON files.
 Fixed flip buttons bug.
 Fixed min FPS feature.
 Implemented screenshots inverted colors feature + associated GUI.
+Re-coded grid display from scratch. It is now much faster and much more robust.
+Refactored part of the Navigator and projector classes.
 
 0.10.0 beta [2008-09-22]
 Global switch to Qt. Don't support SDL main application anymore.
