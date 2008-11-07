@@ -22,6 +22,8 @@
 
 #include <QGraphicsScene>
 
+class QTimer;
+
 //! A special QGraphicsScene for use in Stellarium.
 //! It manages initialization of the program and redirects users inputs to the core and GUI
 class StelAppGraphicsScene : public QGraphicsScene
@@ -73,6 +75,9 @@ public:
 	//! Set the mouse cursor timeout in seconds
 	void setCursorTimeout(float t) {cursorTimeout=t;}
 
+public slots:
+	void minFpsChanged();
+
 protected:
 	virtual void keyPressEvent(QKeyEvent* event);
 	virtual void keyReleaseEvent(QKeyEvent* event);
@@ -100,6 +105,8 @@ private:
 	// Number of second before the mouse cursor disappears
 	float cursorTimeout;
 	bool flagCursorTimeout;
+
+	QTimer* minFpsTimer;
 };
 
 #endif // _STELAPPGRAPHICSSCENE_HPP_

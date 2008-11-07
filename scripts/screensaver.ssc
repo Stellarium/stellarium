@@ -34,6 +34,8 @@ var nebulae = new Array("M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M
 "M109", "M110", "Horsehead nebula", "California nebula", "Rosette nebula", "NGC253", "NGC6946",
 "NGC869", "Pleiades");
 
+// prevent jerky display, at the cost of power/CPU consumption
+core.setMinFps(2000);
 core.clear("starchart");
 GridLinesMgr.setFlagEquatorGrid(false);
 core.setHideGui(true);
