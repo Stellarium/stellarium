@@ -100,6 +100,13 @@ void testPlaneIntersect2()
 	_assert(p1==Vec3d(0,-1,0));
 	_assert(p2==Vec3d(0,1,0));
 	_assert(StelGeom::planeIntersect2(hx, hx, p1, p2)==false, "Plane non-intersecting failure");
+	
+	hx.d = std::sqrt(2.)/2.;
+	_assert(StelGeom::planeIntersect2(hx, hz, p1, p2)==true, "Plane/convex intersect failed");
+	Vec3d res(p1-Vec3d(hx.d,-hx.d,0));
+	_assert(res.length()<0.0000001, QString("p1 wrong: %1").arg(p1.toString()));
+	res = p2-Vec3d(hx.d,hx.d,0);
+	_assert(res.length()<0.0000001, QString("p2 wrong: %1").arg(p2.toString()));
 }
 
 /************************************************************************
