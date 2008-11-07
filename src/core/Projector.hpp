@@ -161,15 +161,13 @@ public:
 		Vec3d v1=p1;
 		Vec3d v2=p2;
 		Vec3d v;
-		for (int i=0;i<5;++i)
+		for (int i=0;i<8;++i)
 		{
 			v=(v1+v2)*0.5;
 			if (!checkInViewport(v))
 				v2=v;
 			else
-			{
 				v1=v;
-			}
 		}
 		return v;
 	}
