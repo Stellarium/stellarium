@@ -35,7 +35,7 @@
 #include <QDebug>
 #include <QString>
 #include <QSettings>
-
+#include <QLinkedList>
 #include <QPainter>
 
 // Initialize static
@@ -169,9 +169,7 @@ Projector::Projector(const Vector4<GLint>& viewport, double _fov):
 Projector::~Projector()
 {}
 
-
-void Projector::setViewport(int x, int y, int w, int h,
-                            double cx,double cy,double fovDiam)
+void Projector::setViewport(int x, int y, int w, int h, double cx,double cy,double fovDiam)
 {
 	viewportXywh[0] = x;
 	viewportXywh[1] = y;
@@ -180,24 +178,9 @@ void Projector::setViewport(int x, int y, int w, int h,
 	viewportCenter[0] = x+cx;
 	viewportCenter[1] = y+cy;
 	viewportFovDiameter = fovDiam;
-	pixelPerRad = 0.5 * viewportFovDiameter
-	  / (mapping ? mapping->fovToViewScalingFactor(fov*(M_PI/360.0)) : 1.0);
+	pixelPerRad = 0.5 * viewportFovDiameter / (mapping ? mapping->fovToViewScalingFactor(fov*(M_PI/360.0)) : 1.0);
 	glViewport(x, y, w, h);
 	initGlMatrixOrtho2d();
-}
-
-/*************************************************************************
- Return a polygon matching precisely the real viewport defined by the area on the screen 
- where projection is valid.
-*************************************************************************/
-QList<Vec2d> Projector::getViewportVertices2d() const
-{
-	QList<Vec2d> result;
-	result.push_back(Vec2d(viewportXywh[0], viewportXywh[1]));
-	result.push_back(Vec2d(viewportXywh[0]+viewportXywh[2], viewportXywh[1]));
-	result.push_back(Vec2d(viewportXywh[0]+viewportXywh[2], viewportXywh[1]+viewportXywh[3]));
-	result.push_back(Vec2d(viewportXywh[0], viewportXywh[1]+viewportXywh[3]));
-	return result;
 }
 
 /*************************************************************************
@@ -218,7 +201,8 @@ StelGeom::ConvexPolygon Projector::getViewportConvexPolygon(double marginX, doub
 	return needGlFrontFaceCW() ? StelGeom::ConvexPolygon(e1, e0, e3, e2) : StelGeom::ConvexPolygon(e0, e1, e2, e3);
 }
 
-StelGeom::ConvexS Projector::unprojectViewport(void) const {
+StelGeom::ConvexS Projector::unprojectViewport(void) const
+{
     // This is quite ugly, but already better than nothing.
     // In fact this function should have different implementations
     // for the different mapping types. And maskType, viewportFovDiameter,
@@ -808,33 +792,77 @@ void Projector::drawText(const SFont* font, float x, float y, const QString& str
 	glPopMatrix();
 }
 
+void fIter(const Projector* prj, const Vec3d& p1, const Vec3d& p2, const Vec3d& win1, const Vec3d& win2, QLinkedList<Vec3d>& vertexList, const QLinkedList<Vec3d>::iterator& iter, double radius, const Vec3d& center, int nbI=0)
+{
+	Vec3d win3;
+	Vec3d newVertex(p1+p2);
+	newVertex.normalize();
+	newVertex*=radius;
+	const bool isValidVertex = prj->project(newVertex+center, win3);
+	
+	const Vec3d v1(win1[0]-win3[0], win1[1]-win3[1], 0);
+	const Vec3d v2(win2[0]-win3[0], win2[1]-win3[1], 0);
+	
+	const double dist = std::sqrt((v1[0]*v1[0]+v1[1]*v1[1])*(v2[0]*v2[0]+v2[1]*v2[1]));
+	const double cosAngle = (v1[0]*v2[0]+v1[1]*v2[1])/dist;
+	if ((cosAngle>-0.999 || dist>50*50) && nbI<20)
+	{
+		win3[2]= isValidVertex ? 1.0 : -1.;
+		fIter(prj, p1, newVertex, win1, win3, vertexList, vertexList.insert(iter, win3), radius, center, nbI+1);
+		fIter(prj, newVertex, p2, win3, win2, vertexList, iter, radius, center, nbI+1);
+	}
+}
+
 /*************************************************************************
  Draw a small circle arc in the current frame
 *************************************************************************/
-void Projector::drawSmallCircleArc(const Vec3d& start, const Vec3d& rotAxis, double length, void (*viewportEdgeIntersectCallback)(double angleVal, const Vec3d& screenPos, const Vec3d& direction, bool enters))
+void Projector::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(double angleVal, const Vec3d& screenPos, const Vec3d& direction, bool enters)) const
 {
 	Q_ASSERT(viewportEdgeIntersectCallback==NULL); // TODO
-	const double nbSeg = 4 + (int)(length*44./(2.*M_PI));
-	const Mat4d& dRot = Mat4d::rotation(rotAxis, length/nbSeg);
-	Vec3d v(start);
-	Vec3d pt1;
-	bool res1;
-	bool res2=true;
-	glBegin(GL_LINE_STRIP);
-	for (int i=0;i<=nbSeg;++i)
+	
+	QLinkedList<Vec3d> tessArc;	// Contains the list of projected points from the tesselated arc
+	
+	Vec3d win1, win2;
+	project(start, win1);
+	project(stop, win2);
+	tessArc.append(win1);
+	
+	double radius;
+	if (rotCenter==Vec3d(0,0,0))
 	{
-		res1 = project(v, pt1);
-		const bool toDraw = !(res2==false && res1==false);
-		res2=res1;
-		if (toDraw)
-			glVertex2f(pt1[0],pt1[1]);
+		// Great circle
+		radius=1;
+	}
+	else
+	{
+		Vec3d tmp = (rotCenter^start)/rotCenter.length();
+		radius = fabs(tmp.length());
+	}
+	
+	fIter(this, start-rotCenter, stop-rotCenter, win1, win2, tessArc, tessArc.insert(tessArc.end(), win2), radius, rotCenter);
+	
+	// And draw
+	QLinkedList<Vec3d>::ConstIterator i = tessArc.begin();
+	
+	glBegin(GL_LINE_STRIP);
+	while (i+1 != tessArc.end())
+	{
+		const Vec3d& p1 = *i;
+		const Vec3d& p2 = *(++i);
+		if ((p1[2]>0 && checkInViewport(p1)) || (p2[2]>0 && checkInViewport(p2)))
+		{
+			glVertex2dv(p1);
+		}
 		else
 		{
+			// Break the line
 			glEnd();
 			glBegin(GL_LINE_STRIP);
 		}
-		dRot.transfo(v);
 	}
+	// Add the missing last point
+	if (((*(i-1))[2]>0 && checkInViewport(*(i-1)))|| ((*i)[2]>0 && checkInViewport(*i)))
+		glVertex2dv(*i);
 	glEnd();
 }
 

@@ -54,12 +54,10 @@ public:
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() {return color;}
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
-	void set_fade_duration(float duration) {fader.setDuration((int)(duration*1000.f));}
+	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
 	void setFlagshow(bool b){fader = b;}
 	bool getFlagshow(void) const {return fader;}
-	void set_top_transparancy(bool b) { transparent_top= b; }
 private:
-	bool transparent_top;
 	Vec3f color;
 	StelCore::FrameType frameType;
 	double fontSize;
@@ -87,7 +85,7 @@ public:
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() {return color;}
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
-	void set_fade_duration(float duration) {fader.setDuration((int)(duration*1000.f));}
+	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
 	void setFlagshow(bool b){fader = b;}
 	bool getFlagshow(void) const {return fader;}
 	void setFontSize(double newSize);
@@ -104,7 +102,6 @@ private:
 SkyGrid::SkyGrid(StelCore::FrameType frame) : color(0.2,0.2,0.2), frameType(frame), fontSize(12),
 	font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize))
 {
-	transparent_top = true;
 }
 
 SkyGrid::~SkyGrid()
@@ -120,194 +117,6 @@ void SkyGrid::setFontSize(double newFontSize)
 // Conversion into mas = milli arcsecond
 static const double RADIAN_MAS = 180./M_PI*1000.*60.*60.;
 static const double DEGREE_MAS = 1000.*60.*60.;
-
-//! Return the standard longitude in radian [-pi;+pi] for a position given in the viewport
-static double getLonFrom2dPos(const Projector* prj, const Vec2d& p)
-{
-	Vec3d v;
-	prj->unProject(p[0], p[1], v);
-	return std::atan2(v[1],v[0]);
-}
-
-//! Return the standard latitude in radian [-pi/2;+pi/2] for a position given in the viewport
-static double getLatFrom2dPos(const Projector* prj, const Vec2d& p)
-{
-	Vec3d v;
-	prj->unProject(p[0], p[1], v);
-	return std::asin(v[2]);
-}
-
-//! Return a "longitude" between 0 and pi and "latitude" between 0 and 2*pi
-//! This is used to get rid of the longitude discontinuity in lon=0 
-void rectToSpheType2(double& lon, double& lat, const Vec3d& v)
-{
-	StelUtils::rectToSphe(&lon, &lat, v);
-	// lon is now between -pi and pi, we want it between 0 and pi, like a latitude
-	// lat is now between -pi/2 and pi/2, we want it between 0 and 2*pi like a longitude
-	lat += M_PI/2;
-	if (lon<0.)
-	{
-		lat = 2.*M_PI-lat;
-		lon = -lon;
-	}
-	Q_ASSERT(lat>=0. && lat<=2.*M_PI);
-	Q_ASSERT(lon>=0. && lon<=M_PI);
-}
-
-//! Create a vector from a "longitude" between 0 and pi and "latitude" between 0 and 2*pi
-//! This is used to get rid of the longitude discontinuity in lon=0 
-void spheToRectType2(double lon, double lat, Vec3d& v)
-{
-	Q_ASSERT(lat>=0. && lat<=2.*M_PI);
-	Q_ASSERT(lon>=0. && lon<=M_PI);
-	if (lat>M_PI)
-	{
-		lat = 2.*M_PI-lat;
-		lon = -lon;
-	}
-	lat -= M_PI/2;
-	StelUtils::spheToRect(lon, lat, v);
-}
-
-void spheToRectLat1802(double lon, double lat, Vec3d& v)
-{
-	Q_ASSERT(lat>=0. && lat<=2.*M_PI);
-	Q_ASSERT(lon>=0. && lon<=M_PI);
-	if (lat>M_PI)
-	{
-		lat = 2.*M_PI-lat;
-		lon += M_PI;
-	}
-	lat -= M_PI/2;
-	StelUtils::spheToRect(lon, lat, v);
-}
-
-//! Return a special latitude in radian [0;2*pi] for a position given in the viewport
-static double getLatFrom2dPosType2(const Projector* prj, const Vec2d& p)
-{
-	Vec3d v;
-	prj->unProject(p[0], p[1], v);
-	double lon, lat;
-	rectToSpheType2(lon, lat, v);
-	return lat;
-}
-
-//! Return a special longitude in radian [0;pi] for a position given in the viewport
-static double getLonFrom2dPosType2(const Projector* prj, const Vec2d& p)
-{
-	Vec3d v;
-	prj->unProject(p[0], p[1], v);
-	double lon, lat;
-	rectToSpheType2(lon, lat, v);
-	return lon;
-}
-
-
-//! Return the 2D position in the viewport from a longitude and latitude in radian
-static Vec3d get2dPosFromSpherical(const Projector* prj, double lon, double lat)
-{
-	Vec3d v;
-	Vec3d win;
-	StelUtils::spheToRect(lon, lat, v);
-	prj->project(v, win);
-	return win;
-}
-
-
-//! Return the 2D position in the viewport from special longitude and latitude in radian
-static Vec3d get2dPosFromSpherical1802(const Projector* prj, double lon, double lat)
-{
-	Vec3d v;
-	Vec3d win;
-	spheToRectLat1802(lon, lat, v);
-	prj->project(v, win);
-	return win;
-}
-
-//! Check if the given point from the viewport side is the beginning of a parallel or not
-//! Beginning means that the direction of increasing longitude goes inside the viewport 
-static bool isParallelEntering(const Projector* prj, double lon, double lat)
-{
-	return prj->checkInViewport(get2dPosFromSpherical(prj, lon+0.0001*prj->getFov(), lat));
-}
-
-//! Check if the given point from the viewport side is the beginning of a meridian or not
-//! Beginning means that the direction of increasing latitude goes inside the viewport 
-//! @param lon180 Modified longitude in radian
-static bool isMeridianEnteringLat180(const Projector* prj, double lon1802, double lat1802)
-{
-	Q_ASSERT(lat1802>=0. && lat1802<=2.*M_PI);
-	Q_ASSERT(lon1802>=0. && lon1802<=M_PI);
-	double lat2 = lat1802+0.001*prj->getFov();
-	if (lat2>2.*M_PI)
-		lat2-=2.*M_PI;
-	return prj->checkInViewport(get2dPosFromSpherical1802(prj, lon1802, lat2));
-}
-
-
-//! Return all the points p on the segment [p0 p1] for which the value of func(p) == k*step
-//! For each value of k*step, the result is then sorted ordered according to the value of func2(p)
-//! @return a map associating all the values of k*step and their associated func2(p)
-static void getPslow(std::map<int, std::set<double> > & result, const Projector* prj, 
-	const Vec2d& p0, const Vec2d& p1, double step, 
-	double (*func)(const Projector* prj, const Vec2d& p),
-	double (*func2)(const Projector* prj, const Vec2d& p))
-{
-	double precision = 0.1;
-	const Vec2d deltaP(p1-p0);
-	Vec2d p = p0;
-	const double umax = deltaP.length();
-	const Vec2d dPix1 = deltaP/umax;	// 1 pixel step
-	double funcp, funcpDpix;
-	
-	funcp = func(prj, p);
-	funcpDpix = func(prj, p+dPix1*precision);
-		
-	double u=0.;
-	bool lastLoop=false;
-	bool stop;
-	do
-	{
-		stop = lastLoop;
-		if (funcp<funcpDpix) // func(p) increases over the segment [p p+dPix]
-		{
-			// If targets are included inside the range, add them
-			double v = step*(std::ceil(funcp/step));
-			while (v<=funcpDpix)
-			{
-				result[(int)(v*RADIAN_MAS)].insert(func2(prj, p-dPix1*precision*(funcpDpix-v)/(funcpDpix-funcp)));
-				v+=step;
-			}
-		}
-		else // func(p) descreases over the segment [p p+dPix]
-		{
-			// If targets are included inside the range, add them
-			double v = step*(std::floor(funcp/step));
-			while(v>=funcpDpix)
-			{
-				result[(int)(v*RADIAN_MAS)].insert(func2(prj, p-dPix1*precision*(v-funcpDpix)/(funcp-funcpDpix)));
-				v-=step;
-			}
-		}
-		
-		precision = step/(std::fabs(funcpDpix-funcp)/precision);
-		if (precision>2 || funcpDpix-funcp==0.)
-			precision = 2.;
-		else if (precision<0.5)
-			precision = 0.5;
-		u+=precision;
-		if (u>umax)
-		{
-			precision-=u-umax;
-			u=umax;
-			lastLoop = true;
-		}
-		p+=dPix1*precision;
-		funcp = funcpDpix;
-		funcpDpix = func(prj,p);
-	}
-	while(stop==false);
-}
 
 // Step sizes in arcsec
 static const double STEP_SIZES_DMS[] = {1., 5., 10., 60., 300., 600., 1200., 3600., 3600.*5., 3600.*10.};
@@ -340,8 +149,6 @@ static double getClosestResolutionHMS(double pixelPerRad)
 }
 
 //! Draw the sky grid in the current frame
-//! This method look for each point of the viewport's contour intersecting with a meridian/parallel
-//! The the intersecting points are matched 2 by 2 to find out where to draw the arc of meridian/parallel  
 void SkyGrid::draw(const StelCore* core) const
 {
 	const Projector* prj = core->getProjection();
@@ -350,13 +157,11 @@ void SkyGrid::draw(const StelCore* core) const
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	Vec4f textColor(color[0], color[1], color[2], 0);
-	float red;
-
 	if (StelApp::getInstance().getVisionModeNight())
 	{
 		// instead of a filter which just zeros G&B, set the red 
 		// value to the mean brightness of RGB.
-		red = (color[0] + color[1] + color[2]) / 3.0;
+		float red = (color[0] + color[1] + color[2]) / 3.0;
 		textColor[0] = red;
 		textColor[1] = 0.; textColor[2] = 0.;
 		glColor4f(red, 0, 0, fader.getInterstate());
@@ -369,8 +174,9 @@ void SkyGrid::draw(const StelCore* core) const
 	textColor*=2;
 	textColor[3]=fader.getInterstate();
 
-	core->setCurrentFrame(frameType);	// set 2D coordinate
+	core->setCurrentFrame(frameType);
 
+	// Look for all meridians and parallels intersecting with the disk bounding the viewport
 	// Check whether the pole are in the viewport
 	bool northPoleInViewport = false;
 	bool southPoleInViewport = false;
@@ -379,7 +185,6 @@ void SkyGrid::draw(const StelCore* core) const
 		northPoleInViewport = true;
 	if (prj->project(Vec3d(0,0,-1), win) && prj->checkInViewport(win))
 		southPoleInViewport = true;
-
 	// Get the longitude and latitude resolution at the center of the viewport
 	Vec3d centerV;
 	double lon0, lat0, lon1, lat1, lon2, lat2;
@@ -389,180 +194,199 @@ void SkyGrid::draw(const StelCore* core) const
 	StelUtils::rectToSphe(&lon1, &lat1, centerV);
 	prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2+1, centerV);
 	StelUtils::rectToSphe(&lon2, &lat2, centerV);
-	
 	const double gridStepParallelRad = M_PI/180.*getClosestResolutionDMS(1./std::sqrt((lat1-lat0)*(lat1-lat0)+(lat2-lat0)*(lat2-lat0)));
-	
-	const double closetResLon = (frameType==StelCore::FrameLocal) ? getClosestResolutionDMS(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0))) : getClosestResolutionHMS(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0)));
+	const double closetResLon = (frameType==StelCore::FrameLocal) ? 
+		getClosestResolutionDMS(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0)))
+		: getClosestResolutionHMS(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0)));
 	const double gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : closetResLon);
 	
-	std::map<int, std::set<double> > resultsParallels;
-	std::map<int, std::set<double> > resultsMeridians;
-	const QList<Vec2d> viewportVertices = prj->getViewportVertices2d();
-	for (int i=0;i<viewportVertices.size();++i)
+	// Temp, move this projector
+	StelUtils::spheToRect(lon0, lat0, centerV);
+	centerV.normalize();
+	StelGeom::Disk viewPortHalfSpace(centerV, 1.44*prj->getFov()/2.*M_PI/180.);
+	
+	// Compute the first grid starting point. This point is close to the center of the screen
+	// and lays at the intersection of a meridien and a parallel
+	lon0 = gridStepMeridianRad*((int)(lon0/gridStepMeridianRad));
+	lat0 = gridStepParallelRad*((int)(lat0/gridStepParallelRad));
+	Vec3d firstPoint;
+	StelUtils::spheToRect(lon0, lat0, firstPoint);
+	firstPoint.normalize();
+	Q_ASSERT(viewPortHalfSpace.contains(firstPoint));
+	
+	/////////////////////////////////////////////////
+	// Draw all the meridians (great circles)
+	StelGeom::HalfSpace meridianHalfSpace(Vec3d(1,0,0), 0);
+	Mat4d rotLon = Mat4d::rotation(Vec3d(0,0,1), gridStepMeridianRad);
+	Vec3d fpt = firstPoint;
+	Vec3d p1, p2;
+	int maxNbIter = M_PI/gridStepMeridianRad;
+	int i;
+	for (i=0; i<maxNbIter; ++i)
 	{
-		// The segment of the viewport is between v0 and v1
-		Vec2d vertex0 = viewportVertices[i];
-		Vec2d vertex1 = viewportVertices[(i+1)%viewportVertices.size()];
-		getPslow(resultsParallels, prj, vertex0, vertex1, gridStepParallelRad, getLatFrom2dPos, getLonFrom2dPos);
-		getPslow(resultsMeridians, prj, vertex0, vertex1, gridStepMeridianRad, getLonFrom2dPosType2, getLatFrom2dPosType2);
-	}
-
-	// Draw the parallels
-	for (std::map<int, std::set<double> >::const_iterator iter=resultsParallels.begin(); iter!=resultsParallels.end(); ++iter)
-	{
-		if (iter->second.size()%2!=0)
+		meridianHalfSpace.n = fpt^Vec3d(0,0,1);
+		meridianHalfSpace.n.normalize();
+		if (!planeIntersect2(viewPortHalfSpace, meridianHalfSpace, p1, p2))
 		{
-			qWarning() << "ERROR drawing skygrid - parallel "<< (double)iter->first/DEGREE_MAS << iter->second.size();
-		}
-		else
-		{
-			std::set<double>::const_iterator ii = iter->second.begin();
-			if (!isParallelEntering(prj, *iter->second.begin(), (double)iter->first/RADIAN_MAS))
+			if (viewPortHalfSpace.d<meridianHalfSpace.d && viewPortHalfSpace.contains(meridianHalfSpace.n))
 			{
-				++ii;
+				// The meridian is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
+				Mat4d rotLon120 = Mat4d::rotation(meridianHalfSpace.n, 120.*M_PI/180.);
+				Vec3d rotFpt=fpt;
+				rotFpt.transfo4d(rotLon120);
+				Vec3d rotFpt2=rotFpt;
+				rotFpt2.transfo4d(rotLon120);
+				prj->drawSmallCircleArc(fpt, rotFpt, Vec3d(0,0,0));
+				prj->drawSmallCircleArc(rotFpt, rotFpt2, Vec3d(0,0,0));
+				prj->drawSmallCircleArc(rotFpt2, fpt, Vec3d(0,0,0));
+				fpt.transfo4d(rotLon);
+				continue;
 			}
-			
-			Vec3d vv;
-			double size;
-			for (unsigned int i=0;i<iter->second.size()/2;++i)
-			{
-				double lon = *ii;
-				StelUtils::spheToRect(lon, (double)iter->first/RADIAN_MAS, vv);
-				++ii;
-				if (ii==iter->second.end())
-					size = *iter->second.begin() - lon;
-				else
-					size = *ii - lon;
-				if (size<0) size+=2.*M_PI;
-				prj->drawParallel(vv, size, true, &font, &textColor);
-				++ii;
-			}
-		}
-	}
-	
-	// Draw the parallels which didn't intersect the viewport but are in the screen
-	// This can only happen for parallels around the poles fully included in the viewport (At least I hope!)
-	if (northPoleInViewport && !resultsParallels.empty())
-	{
-		const double lastLat = (double)(--resultsParallels.end())->first/RADIAN_MAS;
-		for (double lat=lastLat+gridStepParallelRad;lat<M_PI/2-0.00001;lat+=gridStepParallelRad)
-		{
-			Vec3d vv(std::cos(lat), 0, std::sin(lat));
-			prj->drawParallel(vv, 2.*M_PI);
-		}
-	}
-	if (southPoleInViewport && !resultsParallels.empty())
-	{
-		const double lastLat = (double)resultsParallels.begin()->first/RADIAN_MAS;
-		for (double lat=lastLat-gridStepParallelRad;lat>-M_PI/2+0.00001;lat-=gridStepParallelRad)
-		{
-			Vec3d vv(std::cos(lat), 0, std::sin(lat));
-			prj->drawParallel(vv, 2.*M_PI);
-		}
-	}
-	
-	// Draw meridians
-	
-	// Discriminate meridian categories, if latitude is > pi, the real longitude180 is -longitude+pi 
-	std::map<int, std::set<double> > resultsMeridiansOrdered;
-	for (std::map<int, std::set<double> >::const_iterator iter=resultsMeridians.begin(); iter!=resultsMeridians.end(); ++iter)
-	{
-		for (std::set<double>::const_iterator k=iter->second.begin();k!=iter->second.end();++k)
-		{
-			Q_ASSERT(*k>=0. && *k<=2.*M_PI);
-			Q_ASSERT((double)iter->first/RADIAN_MAS>=0. && (double)iter->first/RADIAN_MAS<=M_PI);
-			if (*k>M_PI)
-				resultsMeridiansOrdered[(int)(10*std::floor((M_PI*RADIAN_MAS-iter->first+5.0)/10.0))].insert(*k);
 			else
-				resultsMeridiansOrdered[(int)(10*std::floor((iter->first+5.0)/10.0))].insert(*k);
+				break;
 		}
-	}
-	
-	for (std::map<int, std::set<double> >::const_iterator iter=resultsMeridiansOrdered.begin(); iter!=resultsMeridiansOrdered.end(); ++iter)
-	{
-//		qDebug() << "------- lon1802=" << iter->first << "--------";
-//		for (map<double, Vec2d>::const_iterator k = iter->second.begin();k!=iter->second.end();++k)
-//		{
-//			Vec3d v;
-//			prj->unProject(k->second[0], k->second[1], v);
-//			double llon, llat;
-//			rectToSpheType2(llon, llat, v);
-//			qDebug() << k->second << " lat=" << k->first*180./M_PI << " Llon="<< llon*180./M_PI << " Llat=" << llat*180./M_PI << (isMeridianEnteringLat180(prj, (double)iter->first/RADIAN_MAS, k->first) ?" *":"");
-//		}
 		
-		if (iter->second.size()%2!=0)
-		{
-			//qDebug() << "Error meridian " << (double)iter->first/DEGREE_MAS << " " << iter->second.size();
-		}
-		else
-		{
-			// The content of the set iter->second is supposed to be the sorted list of the latitudeType2
-			// at which the meridian of longitude iter->first crosses the viewport
-			std::set<double>::const_iterator k = iter->second.begin();
-			if (!isMeridianEnteringLat180(prj, (double)iter->first/RADIAN_MAS, *k))
-			{
-				++k;
-			}
-			
-			Vec3d vv;
-			double size;
-			for (unsigned int i=0;i<iter->second.size()/2;++i)
-			{
-				double lat180 = *k;
-				spheToRectLat1802((double)iter->first/RADIAN_MAS, lat180, vv);
-				++k;
-				if (k==iter->second.end())
-					size = *iter->second.begin() - lat180;
-				else
-					size = *k - lat180;
-				if (size<0.) size+=2.*M_PI;
-				prj->drawMeridian(vv, size, true, &font, &textColor, -1, frameType==StelCore::FrameLocal);
-				++k;
-			}
-		}
-
-//		// Debug, draw a cross for all the points
-//		for (set<double>::const_iterator k=iter->second.begin();k!=iter->second.end();++k)
-//		{
-//			//const double lon180 = k->first>M_PI? (double)iter->first/RADIAN_MAS-M_PI : (double)iter->first/RADIAN_MAS;
-//			if (isMeridianEnteringLat180(prj, (double)iter->first/RADIAN_MAS, *k))
-//			{
-//				glColor3f(1,1,0);
-//			}
-//			else
-//			{
-//				glColor3f(0,0,1);
-//			}
-//			Vec3d vv, win;
-//			spheToRectLat1802((double)iter->first/RADIAN_MAS, *k, vv);
-//			prj->project(vv, win);
-//			glBegin(GL_LINES);
-//				glVertex2f(win[0]-30,win[1]);
-//				glVertex2f(win[0]+30,win[1]);
-//				glVertex2f(win[0],win[1]-30);
-//				glVertex2f(win[0],win[1]+30);
-//			glEnd();
-//		}
+		Vec3d middlePoint = p1+p2;
+		middlePoint.normalize();
+		if (!viewPortHalfSpace.contains(middlePoint))
+			middlePoint*=-1.;
+		
+		// Debug
+// 		prj->project(middlePoint, win);
+// 		prj->drawText(&font, win[0], win[1], "M");
+// 		prj->project(p1, win);
+// 		prj->drawText(&font, win[0], win[1], "P1");
+// 		prj->project(p2, win);
+// 		prj->drawText(&font, win[0], win[1], "P2");
+				
+		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
+		prj->drawSmallCircleArc(p1, middlePoint, Vec3d(0,0,0));
+		prj->drawSmallCircleArc(p2, middlePoint, Vec3d(0,0,0));
+		
+		fpt.transfo4d(rotLon);
 	}
 	
-	// Draw meridian zero which can't be found by the normal algo..
-	const Vec3d vv(1,0,0);
-	prj->drawMeridian(vv, 2.*M_PI, false, &font, NULL, -1, frameType==StelCore::FrameLocal);
-	
-	// Draw the meridians which are totally included in the viewport (and thus don't intersect with the edge of the screen)
-	if (northPoleInViewport && southPoleInViewport)
+	if (i!=maxNbIter)
 	{
-		int nbMeridian = (int)(2.*M_PI/gridStepMeridianRad);
-		int dLatMas = 360*60*60*1000/nbMeridian;
-		// qDebug() << resultsMeridiansOrdered.size()+1 << "/" << nbMeridian/2 << " dLatMas=" << dLatMas/1000/60/60;
-		for (int latMas=0;latMas<360*60*60*1000/2;latMas+=dLatMas) 
+		rotLon = Mat4d::rotation(Vec3d(0,0,1), -gridStepMeridianRad);
+		fpt = firstPoint;
+		fpt.transfo4d(rotLon);
+		for (int j=0; j<maxNbIter-i; ++j)
 		{
-			if (resultsMeridiansOrdered.find(latMas)==resultsMeridiansOrdered.end() && latMas!=0)
+			meridianHalfSpace.n = fpt^Vec3d(0,0,1);
+			meridianHalfSpace.n.normalize();
+			if (!planeIntersect2(viewPortHalfSpace, meridianHalfSpace, p1, p2))
+				break;
+			
+			Vec3d middlePoint = p1+p2;
+			middlePoint.normalize();
+			if (!viewPortHalfSpace.contains(middlePoint))
+				middlePoint*=-1;
+			
+			prj->drawSmallCircleArc(p1, middlePoint, Vec3d(0,0,0));
+			prj->drawSmallCircleArc(p2, middlePoint, Vec3d(0,0,0));
+			
+			fpt.transfo4d(rotLon);
+		}
+	}
+	
+	/////////////////////////////////////////////////
+	// Draw all the parallels (small circles)
+	StelGeom::HalfSpace parallelHalfSpace(Vec3d(0,0,1), 0);
+	rotLon = Mat4d::rotation(firstPoint^Vec3d(0,0,1), gridStepParallelRad);
+	fpt = firstPoint;
+	maxNbIter = M_PI/gridStepParallelRad-1;
+	for (i=0; i<maxNbIter; ++i)
+	{
+		parallelHalfSpace.d = fpt[2];
+		if (parallelHalfSpace.d>0.9999999)
+			break;
+		const Vec3d rotCenter(0,0,parallelHalfSpace.d);
+		if (!planeIntersect2(viewPortHalfSpace, parallelHalfSpace, p1, p2))
+		{
+			if ((viewPortHalfSpace.d<parallelHalfSpace.d && viewPortHalfSpace.contains(parallelHalfSpace.n))
+				|| (viewPortHalfSpace.d<-parallelHalfSpace.d && viewPortHalfSpace.contains(-parallelHalfSpace.n)))
 			{
-				Vec3d vvv;
-				spheToRectLat1802((double)latMas/RADIAN_MAS, 0, vvv);
-				prj->drawMeridian(vvv, 2.*M_PI, false, &font, &textColor, -1, frameType==StelCore::FrameLocal);
+				// The parallel is fully included in the viewport, draw it in 3 sub-arcs to avoid lengths >= 180 deg
+				Mat4d rotLon120 = Mat4d::rotation(Vec3d(0,0,1), 120.*M_PI/180.);
+				Vec3d rotFpt=fpt;
+				rotFpt.transfo4d(rotLon120);
+				Vec3d rotFpt2=rotFpt;
+				rotFpt2.transfo4d(rotLon120);
+				prj->drawSmallCircleArc(fpt, rotFpt, rotCenter);
+				prj->drawSmallCircleArc(rotFpt, rotFpt2, rotCenter);
+				prj->drawSmallCircleArc(rotFpt2, fpt, rotCenter);
+				fpt.transfo4d(rotLon);
+				continue;
 			}
+			else
+				break;
+		}
+		
+		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
+		Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
+		middlePoint.normalize();
+		middlePoint*=(p1-rotCenter).length();
+		middlePoint+=rotCenter;
+		if (!viewPortHalfSpace.contains(middlePoint))
+		{
+			middlePoint-=rotCenter;
+			middlePoint*=-1.;
+			middlePoint+=rotCenter;
+		}
+				
+		prj->drawSmallCircleArc(p1, middlePoint, rotCenter);
+		prj->drawSmallCircleArc(p2, middlePoint, rotCenter);
+		
+		fpt.transfo4d(rotLon);
+	}
+	
+	if (i!=maxNbIter)
+	{
+		rotLon = Mat4d::rotation(firstPoint^Vec3d(0,0,1), -gridStepParallelRad);
+		fpt = firstPoint;
+		fpt.transfo4d(rotLon);
+		for (int j=0; j<maxNbIter-i; ++j)
+		{
+			parallelHalfSpace.d = fpt[2];
+			const Vec3d rotCenter(0,0,parallelHalfSpace.d);
+			if (!planeIntersect2(viewPortHalfSpace, parallelHalfSpace, p1, p2))
+			{
+				if ((viewPortHalfSpace.d<parallelHalfSpace.d && viewPortHalfSpace.contains(parallelHalfSpace.n))
+					 || (viewPortHalfSpace.d<-parallelHalfSpace.d && viewPortHalfSpace.contains(-parallelHalfSpace.n)))
+				{
+					// The parallel is fully included in the viewport, draw it in 3 sub-arcs to avoid lengths >= 180 deg
+					Mat4d rotLon120 = Mat4d::rotation(Vec3d(0,0,1), 120.*M_PI/180.);
+					Vec3d rotFpt=fpt;
+					rotFpt.transfo4d(rotLon120);
+					Vec3d rotFpt2=rotFpt;
+					rotFpt2.transfo4d(rotLon120);
+					prj->drawSmallCircleArc(fpt, rotFpt, rotCenter);
+					prj->drawSmallCircleArc(rotFpt, rotFpt2, rotCenter);
+					prj->drawSmallCircleArc(rotFpt2, fpt, rotCenter);
+					fpt.transfo4d(rotLon);
+					continue;
+				}
+				else
+					break;
+			}
+		
+			// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
+			Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
+			middlePoint.normalize();
+			middlePoint*=(p1-rotCenter).length();
+			middlePoint+=rotCenter;
+			if (!viewPortHalfSpace.contains(middlePoint))
+			{
+				middlePoint-=rotCenter;
+				middlePoint*=-1.;
+				middlePoint+=rotCenter;
+			}
+				
+			prj->drawSmallCircleArc(p1, middlePoint, rotCenter);
+			prj->drawSmallCircleArc(p2, middlePoint, rotCenter);
+		
+			fpt.transfo4d(rotLon);
 		}
 	}
 }
