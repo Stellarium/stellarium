@@ -174,7 +174,7 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
           // for your compiler.
           // Because your compiler does not pack the data,
           // which is crucial for this application.
-        assert(sizeof(Star1) == 28);
+        Q_ASSERT(sizeof(Star1) == 28);
         rval = new ZoneArray1(f,byte_swap,use_mmap,lb,hip_star_mgr,level,
                               mag_min,mag_range,mag_steps);
         if (rval == 0) {
@@ -190,7 +190,7 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
           // for your compiler.
           // Because your compiler does not pack the data,
           // which is crucial for this application.
-        assert(sizeof(Star2) == 10);
+        Q_ASSERT(sizeof(Star2) == 10);
         rval = new SpecialZoneArray<Star2>(f,byte_swap,use_mmap,lb,hip_star_mgr,
                                            level,
                                            mag_min,mag_range,mag_steps);
@@ -207,7 +207,7 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
           // for your compiler.
           // Because your compiler does not pack the data,
           // which is crucial for this application.
-        assert(sizeof(Star3) == 6);
+        Q_ASSERT(sizeof(Star3) == 6);
         rval = new SpecialZoneArray<Star3>(f,byte_swap,use_mmap,lb,hip_star_mgr,
                                            level,
                                            mag_min,mag_range,mag_steps);

@@ -212,7 +212,7 @@ bool STexture::getAverageLuminance(float& lum)
 		int size = width*height;
 		glBindTexture(GL_TEXTURE_2D, id);
 		GLfloat* p = (GLfloat*)calloc(size, sizeof(GLfloat));
-		assert(p);
+		Q_ASSERT(p);
 
 		glGetTexImage(GL_TEXTURE_2D, 0, GL_LUMINANCE, GL_FLOAT, p);
 		float sum = 0.f;

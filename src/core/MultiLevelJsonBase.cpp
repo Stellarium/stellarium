@@ -153,10 +153,10 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 		}
 		else
 		{
-			assert(parent->getBaseUrl().startsWith("http://"));
+			Q_ASSERT(parent->getBaseUrl().startsWith("http://"));
 			qurl.setUrl(parent->getBaseUrl()+url);
 		}
-		assert(httpReply==NULL);
+		Q_ASSERT(httpReply==NULL);
 		httpReply = getNetworkAccessManager().get(QNetworkRequest(qurl));
 		connect(httpReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 		downloading = true;
@@ -274,7 +274,7 @@ void MultiLevelJsonBase::downloadFinished()
 	httpReply->deleteLater();
 	httpReply=NULL;
 	
-	assert(loadThread==NULL);
+	Q_ASSERT(loadThread==NULL);
 	loadThread = new JsonLoadThread(this, content, qZcompressed, gzCompressed);
 	connect(loadThread, SIGNAL(finished()), this, SLOT(JsonLoadFinished()));
 	loadThread->start(QThread::LowestPriority);

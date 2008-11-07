@@ -55,7 +55,7 @@ MovementMgr::~MovementMgr()
 void MovementMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
+	Q_ASSERT(conf);
 
 	flagEnableMoveAtScreenEdge = conf->value("navigation/flag_enable_move_at_screen_edge",false).toBool();
 	mouseZoomSpeed = conf->value("navigation/mouse_zoom",30).toInt();

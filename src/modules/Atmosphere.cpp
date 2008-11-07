@@ -208,7 +208,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		Vec2f &v(posGrid[i]);
 		prj->unProject(v[0],v[1],point);
 		
-		assert(fabs(point.lengthSquared()-1.0) < 1e-10);
+		Q_ASSERT(fabs(point.lengthSquared()-1.0) < 1e-10);
 		
 		if (point[2]<=0)
 		{

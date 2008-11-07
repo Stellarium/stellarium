@@ -45,7 +45,7 @@ QString Star1::getNameI18n(void) const {
 static
 int UnpackBits(bool fromBe,const char *addr,int bits_begin,
                const int bits_size) {
-  assert(bits_size <= 32);
+  Q_ASSERT(bits_size <= 32);
   while (bits_begin >= 8) {
     bits_begin -= 8;
     addr++;
@@ -90,7 +90,7 @@ int UnpackBits(bool fromBe,const char *addr,int bits_begin,
 static
 unsigned int UnpackUBits(bool fromBe,const char *addr,int bits_begin,
                          const int bits_size) {
-  assert(bits_size <= 32);
+  Q_ASSERT(bits_size <= 32);
   while (bits_begin >= 8) {
     bits_begin -= 8;
     addr++;
@@ -144,16 +144,16 @@ void Star1::repack(bool fromBe) {
   const int _dx0 = UnpackBits(fromBe,(const char*)this,128,32);
   const int _dx1 = UnpackBits(fromBe,(const char*)this,160,32);
   const int _plx = UnpackBits(fromBe,(const char*)this,192,32);
-//assert(hip == _hip);
-//assert(componentIds == _cids);
-//assert(x0 == _x0);
-//assert(x1 == _x1);
-//assert(bV == _bV);
-//assert(mag == _mag);
-//assert(spInt == _spInt);
-//assert(dx0 == _dx0);
-//assert(dx1 == _dx1);
-//assert(plx == _plx);
+//Q_ASSERT(hip == _hip);
+//Q_ASSERT(componentIds == _cids);
+//Q_ASSERT(x0 == _x0);
+//Q_ASSERT(x1 == _x1);
+//Q_ASSERT(bV == _bV);
+//Q_ASSERT(mag == _mag);
+//Q_ASSERT(spInt == _spInt);
+//Q_ASSERT(dx0 == _dx0);
+//Q_ASSERT(dx1 == _dx1);
+//Q_ASSERT(plx == _plx);
   hip = _hip;
   componentIds = _cids;
   x0 = _x0;
@@ -187,12 +187,12 @@ void Star2::repack(bool fromBe) {
   const int _dx1 = UnpackBits(fromBe,(const char*)this,54,14);
   const unsigned int _bV = UnpackUBits(fromBe,(const char*)this,68, 7);
   const unsigned int _mag = UnpackUBits(fromBe,(const char*)this,75, 5);
-//assert(x0 == _x0);
-//assert(x1 == _x1);
-//assert(dx0 == _dx0);
-//assert(dx1 == _dx1);
-//assert(bV == _bV);
-//assert(mag == _mag);
+//Q_ASSERT(x0 == _x0);
+//Q_ASSERT(x1 == _x1);
+//Q_ASSERT(dx0 == _dx0);
+//Q_ASSERT(dx1 == _dx1);
+//Q_ASSERT(bV == _bV);
+//Q_ASSERT(mag == _mag);
   x0 = _x0;
   x1 = _x1;
   dx0 = _dx0;
@@ -216,10 +216,10 @@ void Star3::repack(bool fromBe) {
   const int _x1  = UnpackBits(fromBe,(const char*)this,18,18);
   const unsigned int _bV = UnpackUBits(fromBe,(const char*)this,36, 7);
   const unsigned int _mag = UnpackUBits(fromBe,(const char*)this,43, 5);
-//assert(x0 == _x0);
-//assert(x1 == _x1);
-//assert(bV == _bV);
-//assert(mag == _mag);
+//Q_ASSERT(x0 == _x0);
+//Q_ASSERT(x1 == _x1);
+//Q_ASSERT(bV == _bV);
+//Q_ASSERT(mag == _mag);
   x0 = _x0;
   x1 = _x1;
   bV = _bV;

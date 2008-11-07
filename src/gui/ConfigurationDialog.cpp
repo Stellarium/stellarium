@@ -230,7 +230,7 @@ void ConfigurationDialog::setStartupTimeMode(void)
 void ConfigurationDialog::setDiskViewport(bool b)
 {
 	Projector* proj = StelApp::getInstance().getCore()->getProjection();
-	assert(proj);
+	Q_ASSERT(proj);
 	if (b)
 		proj->setMaskType(Projector::Disk);
 	else
@@ -248,21 +248,21 @@ void ConfigurationDialog::setSphericMirror(bool b)
 void ConfigurationDialog::setNoSelectedInfo(void)
 {
 	StelGui* newGui = (StelGui*)GETSTELMODULE("StelGui");
-	assert(newGui);
+	Q_ASSERT(newGui);
 	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(0));
 }
 
 void ConfigurationDialog::setAllSelectedInfo(void)
 {
 	StelGui* newGui = (StelGui*)GETSTELMODULE("StelGui");
-	assert(newGui);
+	Q_ASSERT(newGui);
 	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
 }
 
 void ConfigurationDialog::setBriefSelectedInfo(void)
 {
 	StelGui* newGui = (StelGui*)GETSTELMODULE("StelGui");
-	assert(newGui);
+	Q_ASSERT(newGui);
 	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
 }
 

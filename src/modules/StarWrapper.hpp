@@ -70,8 +70,8 @@ protected:
   virtual float getBV(void) const = 0;
 private:
   int ref_count;
-  void retain(void) {assert(ref_count>=0);ref_count++;}
-  void release(void) {assert(ref_count>0);if (--ref_count==0) delete this;}
+  void retain(void) {Q_ASSERT(ref_count>=0);ref_count++;}
+  void release(void) {Q_ASSERT(ref_count>0);if (--ref_count==0) delete this;}
 };
 
 template <class Star>

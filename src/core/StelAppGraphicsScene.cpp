@@ -37,7 +37,7 @@ StelAppGraphicsScene* StelAppGraphicsScene::singleton = NULL;
  
 StelAppGraphicsScene::StelAppGraphicsScene() : tempPainter(NULL), cursorTimeout(-1.f), flagCursorTimeout(false)
 {
-	assert(!singleton);
+	Q_ASSERT(!singleton);
 	singleton = this;
 	
 	distorter = ViewportDistorter::create("none",800,600,NULL);

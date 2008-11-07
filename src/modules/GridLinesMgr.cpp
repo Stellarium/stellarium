@@ -150,16 +150,16 @@ void rectToSpheType2(double& lon, double& lat, const Vec3d& v)
 		lat = 2.*M_PI-lat;
 		lon = -lon;
 	}
-	assert(lat>=0. && lat<=2.*M_PI);
-	assert(lon>=0. && lon<=M_PI);
+	Q_ASSERT(lat>=0. && lat<=2.*M_PI);
+	Q_ASSERT(lon>=0. && lon<=M_PI);
 }
 
 //! Create a vector from a "longitude" between 0 and pi and "latitude" between 0 and 2*pi
 //! This is used to get rid of the longitude discontinuity in lon=0 
 void spheToRectType2(double lon, double lat, Vec3d& v)
 {
-	assert(lat>=0. && lat<=2.*M_PI);
-	assert(lon>=0. && lon<=M_PI);
+	Q_ASSERT(lat>=0. && lat<=2.*M_PI);
+	Q_ASSERT(lon>=0. && lon<=M_PI);
 	if (lat>M_PI)
 	{
 		lat = 2.*M_PI-lat;
@@ -171,8 +171,8 @@ void spheToRectType2(double lon, double lat, Vec3d& v)
 
 void spheToRectLat1802(double lon, double lat, Vec3d& v)
 {
-	assert(lat>=0. && lat<=2.*M_PI);
-	assert(lon>=0. && lon<=M_PI);
+	Q_ASSERT(lat>=0. && lat<=2.*M_PI);
+	Q_ASSERT(lon>=0. && lon<=M_PI);
 	if (lat>M_PI)
 	{
 		lat = 2.*M_PI-lat;
@@ -236,8 +236,8 @@ static bool isParallelEntering(const Projector* prj, double lon, double lat)
 //! @param lon180 Modified longitude in radian
 static bool isMeridianEnteringLat180(const Projector* prj, double lon1802, double lat1802)
 {
-	assert(lat1802>=0. && lat1802<=2.*M_PI);
-	assert(lon1802>=0. && lon1802<=M_PI);
+	Q_ASSERT(lat1802>=0. && lat1802<=2.*M_PI);
+	Q_ASSERT(lon1802>=0. && lon1802<=M_PI);
 	double lat2 = lat1802+0.001*prj->getFov();
 	if (lat2>2.*M_PI)
 		lat2-=2.*M_PI;
@@ -469,8 +469,8 @@ void SkyGrid::draw(const StelCore* core) const
 	{
 		for (std::set<double>::const_iterator k=iter->second.begin();k!=iter->second.end();++k)
 		{
-			assert(*k>=0. && *k<=2.*M_PI);
-			assert((double)iter->first/RADIAN_MAS>=0. && (double)iter->first/RADIAN_MAS<=M_PI);
+			Q_ASSERT(*k>=0. && *k<=2.*M_PI);
+			Q_ASSERT((double)iter->first/RADIAN_MAS>=0. && (double)iter->first/RADIAN_MAS<=M_PI);
 			if (*k>M_PI)
 				resultsMeridiansOrdered[(int)(10*std::floor((M_PI*RADIAN_MAS-iter->first+5.0)/10.0))].insert(*k);
 			else
@@ -647,7 +647,7 @@ double GridLinesMgr::getCallOrder(StelModuleActionName actionName) const
 void GridLinesMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
+	Q_ASSERT(conf);
 
 	setFlagAzimuthalGrid(conf->value("viewing/flag_azimuthal_grid").toBool());
 	setFlagEquatorGrid(conf->value("viewing/flag_equatorial_grid").toBool());

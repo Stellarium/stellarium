@@ -95,7 +95,7 @@ void NebulaMgr::init()
 	loadNebulaSet("default");
 
 	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
+	Q_ASSERT(conf);
 
 	double fontSize = 12;
 	Nebula::nebulaFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
