@@ -39,10 +39,7 @@
 
 //! @class SkyGrid 
 //! Class which manages a grid to display in the sky.
-//! TODO: this class suffers a number of problems:
-//! 1- the algorithm used to find the points where the lines cross the edge of the screen
-//! is slow and very buggy at high latitudes
-//! 2- needs support for DMS/DMS labelling, not only HMS/DMS
+//! TODO needs support for DMS/DMS labelling, not only HMS/DMS
 class SkyGrid
 {
 public:
@@ -148,6 +145,36 @@ static double getClosestResolutionHMS(double pixelPerRad)
 	return 15.;
 }
 
+struct ViewportEdgeIntersectCallbackData
+{
+	const Projector* prj;
+	SFont* font;
+	Vec4f textColor;
+	QString text;
+};
+
+// Callback which draws the label of the grid
+void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direction, const void* userData)
+{
+	const ViewportEdgeIntersectCallbackData* d = static_cast<const ViewportEdgeIntersectCallbackData*>(userData);
+	Vec3d direc(direction);
+	direc.normalize();
+	static GLfloat tmpColor[4];
+	glGetFloatv(GL_CURRENT_COLOR, tmpColor);
+	glColor4fv(d->textColor);
+	
+	double angleDeg = std::atan2(-direc[1], -direc[0])*180./M_PI;
+	float xshift=6.f;
+	if (angleDeg>90. || angleDeg<-90.)
+	{
+		angleDeg+=180.;
+		xshift=-d->font->getStrLen(d->text)-6.f;
+	}
+	
+	d->prj->drawText(d->font, screenPos[0], screenPos[1], d->text, angleDeg, xshift, 3);
+	glColor4fv(tmpColor);
+}
+
 //! Draw the sky grid in the current frame
 void SkyGrid::draw(const StelCore* core) const
 {
@@ -203,7 +230,7 @@ void SkyGrid::draw(const StelCore* core) const
 	// Temp, move this projector
 	StelUtils::spheToRect(lon0, lat0, centerV);
 	centerV.normalize();
-	StelGeom::Disk viewPortHalfSpace(centerV, 1.44*prj->getFov()/2.*M_PI/180.);
+	StelGeom::Disk viewPortHalfSpace(centerV, 1.6*prj->getFov()/2.*M_PI/180.);
 	
 	// Compute the first grid starting point. This point is close to the center of the screen
 	// and lays at the intersection of a meridien and a parallel
@@ -213,6 +240,11 @@ void SkyGrid::draw(const StelCore* core) const
 	StelUtils::spheToRect(lon0, lat0, firstPoint);
 	firstPoint.normalize();
 	Q_ASSERT(viewPortHalfSpace.contains(firstPoint));
+	
+	ViewportEdgeIntersectCallbackData userData;
+	userData.font = &font;
+	userData.textColor = textColor;
+	userData.prj = prj;
 	
 	/////////////////////////////////////////////////
 	// Draw all the meridians (great circles)
@@ -224,6 +256,9 @@ void SkyGrid::draw(const StelCore* core) const
 	int i;
 	for (i=0; i<maxNbIter; ++i)
 	{
+		StelUtils::rectToSphe(&lon1, &lat1, fpt);
+		userData.text = frameType==StelCore::FrameLocal ? StelUtils::radToDmsStrAdapt(M_PI-lon1) : StelUtils::radToHmsStrAdapt(lon1);
+		
 		meridianHalfSpace.n = fpt^Vec3d(0,0,1);
 		meridianHalfSpace.n.normalize();
 		if (!planeIntersect2(viewPortHalfSpace, meridianHalfSpace, p1, p2))
@@ -236,9 +271,9 @@ void SkyGrid::draw(const StelCore* core) const
 				rotFpt.transfo4d(rotLon120);
 				Vec3d rotFpt2=rotFpt;
 				rotFpt2.transfo4d(rotLon120);
-				prj->drawSmallCircleArc(fpt, rotFpt, Vec3d(0,0,0));
-				prj->drawSmallCircleArc(rotFpt, rotFpt2, Vec3d(0,0,0));
-				prj->drawSmallCircleArc(rotFpt2, fpt, Vec3d(0,0,0));
+				prj->drawSmallCircleArc(fpt, rotFpt, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+				prj->drawSmallCircleArc(rotFpt, rotFpt2, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+				prj->drawSmallCircleArc(rotFpt2, fpt, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
 				fpt.transfo4d(rotLon);
 				continue;
 			}
@@ -260,8 +295,8 @@ void SkyGrid::draw(const StelCore* core) const
 // 		prj->drawText(&font, win[0], win[1], "P2");
 				
 		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-		prj->drawSmallCircleArc(p1, middlePoint, Vec3d(0,0,0));
-		prj->drawSmallCircleArc(p2, middlePoint, Vec3d(0,0,0));
+		prj->drawSmallCircleArc(p1, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+		prj->drawSmallCircleArc(p2, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
 		
 		fpt.transfo4d(rotLon);
 	}
@@ -273,6 +308,9 @@ void SkyGrid::draw(const StelCore* core) const
 		fpt.transfo4d(rotLon);
 		for (int j=0; j<maxNbIter-i; ++j)
 		{
+			StelUtils::rectToSphe(&lon1, &lat1, fpt);
+			userData.text = frameType==StelCore::FrameLocal ? StelUtils::radToDmsStrAdapt(M_PI-lon1) : StelUtils::radToHmsStrAdapt(lon1);
+			
 			meridianHalfSpace.n = fpt^Vec3d(0,0,1);
 			meridianHalfSpace.n.normalize();
 			if (!planeIntersect2(viewPortHalfSpace, meridianHalfSpace, p1, p2))
@@ -283,8 +321,8 @@ void SkyGrid::draw(const StelCore* core) const
 			if (!viewPortHalfSpace.contains(middlePoint))
 				middlePoint*=-1;
 			
-			prj->drawSmallCircleArc(p1, middlePoint, Vec3d(0,0,0));
-			prj->drawSmallCircleArc(p2, middlePoint, Vec3d(0,0,0));
+			prj->drawSmallCircleArc(p1, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+			prj->drawSmallCircleArc(p2, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
 			
 			fpt.transfo4d(rotLon);
 		}
@@ -298,9 +336,13 @@ void SkyGrid::draw(const StelCore* core) const
 	maxNbIter = M_PI/gridStepParallelRad-1;
 	for (i=0; i<maxNbIter; ++i)
 	{
+		StelUtils::rectToSphe(&lon1, &lat1, fpt);
+		userData.text = StelUtils::radToDmsStrAdapt(lat1);
+		
 		parallelHalfSpace.d = fpt[2];
 		if (parallelHalfSpace.d>0.9999999)
 			break;
+		
 		const Vec3d rotCenter(0,0,parallelHalfSpace.d);
 		if (!planeIntersect2(viewPortHalfSpace, parallelHalfSpace, p1, p2))
 		{
@@ -313,9 +355,9 @@ void SkyGrid::draw(const StelCore* core) const
 				rotFpt.transfo4d(rotLon120);
 				Vec3d rotFpt2=rotFpt;
 				rotFpt2.transfo4d(rotLon120);
-				prj->drawSmallCircleArc(fpt, rotFpt, rotCenter);
-				prj->drawSmallCircleArc(rotFpt, rotFpt2, rotCenter);
-				prj->drawSmallCircleArc(rotFpt2, fpt, rotCenter);
+				prj->drawSmallCircleArc(fpt, rotFpt, rotCenter, viewportEdgeIntersectCallback, &userData);
+				prj->drawSmallCircleArc(rotFpt, rotFpt2, rotCenter, viewportEdgeIntersectCallback, &userData);
+				prj->drawSmallCircleArc(rotFpt2, fpt, rotCenter, viewportEdgeIntersectCallback, &userData);
 				fpt.transfo4d(rotLon);
 				continue;
 			}
@@ -335,8 +377,8 @@ void SkyGrid::draw(const StelCore* core) const
 			middlePoint+=rotCenter;
 		}
 				
-		prj->drawSmallCircleArc(p1, middlePoint, rotCenter);
-		prj->drawSmallCircleArc(p2, middlePoint, rotCenter);
+		prj->drawSmallCircleArc(p1, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
+		prj->drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
 		
 		fpt.transfo4d(rotLon);
 	}
@@ -348,6 +390,9 @@ void SkyGrid::draw(const StelCore* core) const
 		fpt.transfo4d(rotLon);
 		for (int j=0; j<maxNbIter-i; ++j)
 		{
+			StelUtils::rectToSphe(&lon1, &lat1, fpt);
+			userData.text = StelUtils::radToDmsStrAdapt(lat1);
+			
 			parallelHalfSpace.d = fpt[2];
 			const Vec3d rotCenter(0,0,parallelHalfSpace.d);
 			if (!planeIntersect2(viewPortHalfSpace, parallelHalfSpace, p1, p2))
@@ -361,9 +406,9 @@ void SkyGrid::draw(const StelCore* core) const
 					rotFpt.transfo4d(rotLon120);
 					Vec3d rotFpt2=rotFpt;
 					rotFpt2.transfo4d(rotLon120);
-					prj->drawSmallCircleArc(fpt, rotFpt, rotCenter);
-					prj->drawSmallCircleArc(rotFpt, rotFpt2, rotCenter);
-					prj->drawSmallCircleArc(rotFpt2, fpt, rotCenter);
+					prj->drawSmallCircleArc(fpt, rotFpt, rotCenter, viewportEdgeIntersectCallback, &userData);
+					prj->drawSmallCircleArc(rotFpt, rotFpt2, rotCenter, viewportEdgeIntersectCallback, &userData);
+					prj->drawSmallCircleArc(rotFpt2, fpt, rotCenter, viewportEdgeIntersectCallback, &userData);
 					fpt.transfo4d(rotLon);
 					continue;
 				}
@@ -383,8 +428,8 @@ void SkyGrid::draw(const StelCore* core) const
 				middlePoint+=rotCenter;
 			}
 				
-			prj->drawSmallCircleArc(p1, middlePoint, rotCenter);
-			prj->drawSmallCircleArc(p2, middlePoint, rotCenter);
+			prj->drawSmallCircleArc(p1, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
+			prj->drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
 		
 			fpt.transfo4d(rotLon);
 		}

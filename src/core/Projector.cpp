@@ -792,6 +792,8 @@ void Projector::drawText(const SFont* font, float x, float y, const QString& str
 	glPopMatrix();
 }
 
+
+// Recursive method cutting a small circle in small segments
 void fIter(const Projector* prj, const Vec3d& p1, const Vec3d& p2, const Vec3d& win1, const Vec3d& win2, QLinkedList<Vec3d>& vertexList, const QLinkedList<Vec3d>::iterator& iter, double radius, const Vec3d& center, int nbI=0)
 {
 	Vec3d win3;
@@ -805,23 +807,37 @@ void fIter(const Projector* prj, const Vec3d& p1, const Vec3d& p2, const Vec3d& 
 	
 	const double dist = std::sqrt((v1[0]*v1[0]+v1[1]*v1[1])*(v2[0]*v2[0]+v2[1]*v2[1]));
 	const double cosAngle = (v1[0]*v2[0]+v1[1]*v2[1])/dist;
-	if ((cosAngle>-0.999 || dist>50*50) && nbI<20)
+	if ((cosAngle>-0.999 || dist>50*50) && nbI<10)
 	{
+		// Use the 3rd component of the vector to store whether the vertex is valid
 		win3[2]= isValidVertex ? 1.0 : -1.;
 		fIter(prj, p1, newVertex, win1, win3, vertexList, vertexList.insert(iter, win3), radius, center, nbI+1);
 		fIter(prj, newVertex, p2, win3, win2, vertexList, iter, radius, center, nbI+1);
 	}
 }
 
+// Used by the method below
+static QVector<Vec3d> smallCircleVertexArray;
+
+void drawSmallCircleVertexArray()
+{
+	glEnableClientState(GL_VERTEX_ARRAY);
+	// Load the vertex array
+	glVertexPointer(3, GL_DOUBLE, 0, smallCircleVertexArray.constData());
+	// And draw everything at once
+	glDrawArrays(GL_LINE_STRIP, 0, smallCircleVertexArray.size());
+	glDisableClientState(GL_VERTEX_ARRAY);
+	smallCircleVertexArray.clear();
+}
+
 /*************************************************************************
  Draw a small circle arc in the current frame
 *************************************************************************/
-void Projector::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(double angleVal, const Vec3d& screenPos, const Vec3d& direction, bool enters)) const
+void Projector::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, const void* userData), const void* userData) const
 {
-	Q_ASSERT(viewportEdgeIntersectCallback==NULL); // TODO
+	Q_ASSERT(smallCircleVertexArray.empty());
 	
 	QLinkedList<Vec3d> tessArc;	// Contains the list of projected points from the tesselated arc
-	
 	Vec3d win1, win2;
 	project(start, win1);
 	project(stop, win2);
@@ -839,31 +855,54 @@ void Projector::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const 
 		radius = fabs(tmp.length());
 	}
 	
+	// Perform the tesselation of the arc in small segments in a way so that the lines look smooth
 	fIter(this, start-rotCenter, stop-rotCenter, win1, win2, tessArc, tessArc.insert(tessArc.end(), win2), radius, rotCenter);
 	
-	// And draw
+	// And draw.
+	// TODO: could be optimized using openGL display list
 	QLinkedList<Vec3d>::ConstIterator i = tessArc.begin();
-	
-	glBegin(GL_LINE_STRIP);
 	while (i+1 != tessArc.end())
 	{
 		const Vec3d& p1 = *i;
 		const Vec3d& p2 = *(++i);
-		if ((p1[2]>0 && checkInViewport(p1)) || (p2[2]>0 && checkInViewport(p2)))
+		const bool p1InViewport = checkInViewport(p1);
+		const bool p2InViewport = checkInViewport(p2);
+		if ((p1[2]>0 && p1InViewport) || (p2[2]>0 && p2InViewport))
 		{
-			glVertex2dv(p1);
+			smallCircleVertexArray.append(p1);
+			if (viewportEdgeIntersectCallback && p1InViewport!=p2InViewport)
+			{
+				// We crossed the edge of the view port
+				if (p1InViewport)
+					viewportEdgeIntersectCallback(viewPortIntersect(p1, p2), p2-p1, userData);
+				else
+					viewportEdgeIntersectCallback(viewPortIntersect(p2, p1), p1-p2, userData);
+			}
 		}
 		else
 		{
-			// Break the line
-			glEnd();
-			glBegin(GL_LINE_STRIP);
+			// Break the line, draw the stored vertex and flush the list
+			drawSmallCircleVertexArray();
 		}
 	}
 	// Add the missing last point
-	if (((*(i-1))[2]>0 && checkInViewport(*(i-1)))|| ((*i)[2]>0 && checkInViewport(*i)))
-		glVertex2dv(*i);
-	glEnd();
+	const Vec3d& p1 = *(i-1);
+	const Vec3d& p2 = *i;
+	const bool p1InViewport = checkInViewport(p1);
+	const bool p2InViewport = checkInViewport(p2);
+	if ((p1[2]>0 && p1InViewport) || (p2[2]>0 && p2InViewport))
+	{
+		smallCircleVertexArray.append(p2);
+		if (viewportEdgeIntersectCallback && p1InViewport!=p2InViewport)
+		{
+			// We crossed the edge of the view port
+			if (p1InViewport)
+				viewportEdgeIntersectCallback(viewPortIntersect(p1, p2), p2-p1, userData);
+			else
+				viewportEdgeIntersectCallback(viewPortIntersect(p2, p1), p1-p2, userData);
+		}
+	}
+	drawSmallCircleVertexArray();
 }
 
 /*************************************************************************
