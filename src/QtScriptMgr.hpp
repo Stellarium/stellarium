@@ -160,6 +160,23 @@ public slots:
 	//! toolbars will be hidden, else they will be made visible.
 	void setHideGui(bool b);
 
+        //! Set the minimum frames per second.  Usually this minimum will
+        //! be switched to after there are no user events for some seconds
+        //! to save power.  However, if can be useful to set this to a high
+        //! value to improve playing smoothness in scripts.
+        //! @param m the new minimum fps setting.
+        void setMinFps(float m);
+
+        //! Get the current minimum frames per second.
+        float getMinFps();
+
+        //! Set the maximum frames per second.
+        //! @param m the new maximum fps setting.
+        void setMaxFps(float m);
+
+        //! Get the current maximum frames per second.
+        float getMaxFps();
+
 	//! print a debugging message to the console
 	//! @param s the message to be displayed on the console.
 	void debug(const QString& s);

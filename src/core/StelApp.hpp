@@ -172,6 +172,20 @@ public slots:
 	void setVisionModeNight(bool);
 	//! Get flag for activating night vision mode.
 	bool getVisionModeNight() const {return flagNightVision;}
+
+	//! Set the minimum frames per second.  Usually this minimum will
+	//! be switched to after there are no user events for some seconds 
+	//! to save power.  However, if can be useful to set this to a high
+	//! value to improve playing smoothness in scripts.
+	//! @param m the new minimum fps setting.
+	void setMinFps(float m) {minfps=m; emit(minFpsChanged());}
+	//! Get the current minimum frames per second.
+	float getMinFps() {return minfps;}
+	//! Set the maximum frames per second.
+	//! @param m the new maximum fps setting.
+	void setMaxFps(float m) {maxfps = m;}
+	//! Get the current maximum frames per second.
+	float getMaxFps() {return maxfps;}
 	
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
@@ -179,6 +193,9 @@ public slots:
 
 	//! Return the time since when stellarium is running in second.
 	static double getTotalRunTime();
+
+signals:
+	void minFpsChanged();
 	
 private:
 	//! Update all object according to the deltaTime in seconds.

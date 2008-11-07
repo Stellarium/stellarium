@@ -240,6 +240,26 @@ void StelMainScriptAPI::setHideGui(bool b)
 	gui->setHideGui(b);
 }
 
+void StelMainScriptAPI::setMinFps(float m) 
+{
+	StelApp::getInstance().setMinFps(m);
+}
+
+float StelMainScriptAPI::getMinFps() 
+{
+	return StelApp::getInstance().getMinFps();
+}
+
+void StelMainScriptAPI::setMaxFps(float m) 
+{
+	StelApp::getInstance().setMaxFps(m);
+}
+
+float StelMainScriptAPI::getMaxFps() 
+{
+	return StelApp::getInstance().getMaxFps();
+}
+
 void StelMainScriptAPI::debug(const QString& s)
 {
 	qDebug() << "script: " << s;
