@@ -51,7 +51,7 @@ public:
 	virtual void setFontColor(const Vec3f& color);
 	//! Show or hide the label.  It will fade in/out.
 	virtual void setFlagShow(bool b);
-	//! Get value of flag used to turn on and off meteor rendering.
+	//! Get value of flag used to turn on and off the label
 	virtual bool getFlagShow(void);
 
 protected:

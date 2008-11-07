@@ -1,7 +1,11 @@
-// Name: Screensaver script
+//
+// Name: Screensaver
+// License: Public Domain
+// Author: Matthew Gates
 // Description: A slow, infinite tour of the sky, looking at random objects.
+//
 
-var planets = new Array("Sun", "Mercury", "Venus", "Earth", "Moon", "Mars", "Phobos", "Deimos", 
+var planets = new Array("Sun", "Mercury", "Venus", "Moon", "Mars", "Phobos", "Deimos", 
 "Jupiter", "Io", "Europa", "Ganymede", "Callisto", "Saturn", "Mimas", "Enceladus", "Tethys", 
 "Dione", "Rhea", "Titan", "Hyperion", "Iapetus", "Uranus", "Miranda", "Ariel", "Umbriel", 
 "Titania", "Oberon", "Neptune", "Pluto", "Charon", "Solar", "C/2006", "Ceres", "Pallas", "Juno", 

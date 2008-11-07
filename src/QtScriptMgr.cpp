@@ -47,6 +47,7 @@
 #include <QSet>
 #include <QDebug>
 #include <QStringList>
+#include <QDateTime>
 
 Q_DECLARE_METATYPE(Vec3f);
 
@@ -59,6 +60,8 @@ class StelScriptThread : public QThread
 	protected:
 		void run()
 		{
+			// seed the QT PRNG
+			qsrand(QDateTime::currentDateTime().toTime_t());
 			// For startup scripts, the gui object might not 
 			// have completed init when we run. Wait for that.
 			StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
@@ -72,7 +75,7 @@ class StelScriptThread : public QThread
 
 			engine->evaluate(scriptCode);
 		}
-    
+
 	private:
 		QString scriptCode;
 		QScriptEngine* engine;
@@ -505,7 +508,7 @@ QString QtScriptMgr::runningScriptId(void)
 		return QString();
 }
 
-const QString QtScriptMgr::getName(const QString& s)
+const QString QtScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText)
 {
 	try
 	{
@@ -516,7 +519,7 @@ const QString QtScriptMgr::getName(const QString& s)
 			return QString();
 		}
 
-		QRegExp nameExp("^\\s*//\\s*Name:\\s*(.+)$");
+		QRegExp nameExp("^\\s*//\\s*" + id + ":\\s*(.+)$");
 		while (!file.atEnd()) {
 			QString line(file.readLine());
 			if (nameExp.exactMatch(line))
@@ -526,13 +529,28 @@ const QString QtScriptMgr::getName(const QString& s)
 			}
 		}
 		file.close();
-		return s;
+		return notFoundText;
 	}
 	catch(std::runtime_error& e)
 	{
 		qWarning() << "script file " << s << " could not be found:" << e.what();
 		return QString();
 	}
+}
+
+const QString QtScriptMgr::getName(const QString& s)
+{
+	return getHeaderSingleLineCommentText(s, "Name", s);
+}
+
+const QString QtScriptMgr::getAuthor(const QString& s)
+{
+	return getHeaderSingleLineCommentText(s, "Author");
+}
+
+const QString QtScriptMgr::getLicense(const QString& s)
+{
+	return getHeaderSingleLineCommentText(s, "License", "");
 }
 
 const QString QtScriptMgr::getDescription(const QString& s)
