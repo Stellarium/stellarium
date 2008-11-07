@@ -47,7 +47,7 @@ MilkyWay::~MilkyWay()
 void MilkyWay::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
+	Q_ASSERT(conf);
 
 	setTexture("milkyway.png");
 	setFlagShow(conf->value("astro/flag_milky_way").toBool());
@@ -71,7 +71,7 @@ void MilkyWay::draw(StelCore* core)
 	Projector* prj = core->getProjection();
 	ToneReproducer* eye = core->getToneReproducer();
 	
-	assert(tex);	// A texture must be loaded before calling this
+	Q_ASSERT(tex);	// A texture must be loaded before calling this
 
 	// This RGB color corresponds to the night blue scotopic color = 0.25, 0.25 in xyY mode.
 	// since milky way is always seen white RGB value in the texture (1.0,1.0,1.0)

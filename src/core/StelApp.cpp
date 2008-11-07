@@ -94,7 +94,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	networkAccessManager=NULL;
 	
 	// Can't create 2 StelApp instances
-	assert(!singleton);
+	Q_ASSERT(!singleton);
 	singleton = this;
 	
 	argList = new QStringList;
@@ -231,7 +231,7 @@ StelApp::~StelApp()
 	
 	delete currentStelStyle;
 	
-	assert(singleton);
+	Q_ASSERT(singleton);
 	singleton = NULL;
 }
 

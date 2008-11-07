@@ -234,7 +234,7 @@ ViewportDistorterFisheyeToSphericMirror
 		if (status != GL_FRAMEBUFFER_COMPLETE_EXT)
 		{
 			qDebug() << "could not initialize GL_FRAMEBUFFER_EXT";
-			assert(0);
+			Q_ASSERT(0);
 		}
 		// clear the texture
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -246,7 +246,7 @@ ViewportDistorterFisheyeToSphericMirror
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		const int size = 3*texture_wh*texture_wh;
 		unsigned char *pixel_data = new unsigned char[size];
-		assert(pixel_data);
+		Q_ASSERT(pixel_data);
 		memset(pixel_data,0,size);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
 		             texture_wh, texture_wh, 0, GL_RGB, GL_UNSIGNED_BYTE,
@@ -346,9 +346,9 @@ ViewportDistorterFisheyeToSphericMirror
 		{
 			qWarning() << "WARNING: could not open custom_distortion_file:" << custom_distortion_file << e.what();
 		}
-		assert(file.error()!=QFile::NoError);
+		Q_ASSERT(file.error()!=QFile::NoError);
 		in >> max_x >> max_y;
-		assert(in.status()==QDataStream::Ok && max_x>0 && max_y>0);
+		Q_ASSERT(in.status()==QDataStream::Ok && max_x>0 && max_y>0);
 		step_x = screen_w / (double)(max_x-0.5);
 		step_y = screen_h/ (double)max_y;
 		//qDebug() << "max_x: " << max_x << ", max_y: " << max_y
@@ -371,7 +371,7 @@ ViewportDistorterFisheyeToSphericMirror
 				>> vertex_point.color[1]
 				>> vertex_point.color[2];
 				vertex_point.color[3] = 1.0f;
-				assert(in.status()!=QDataStream::Ok);
+				Q_ASSERT(in.status()!=QDataStream::Ok);
 				//      if (x < 0.f) {x=0.f;vertex_point.h=0;}
 				//      else if (x > viewport_w) {x=viewport_w;vertex_point.h=0;}
 				//      if (y < 0.f) {y=0.f;vertex_point.h=0;}

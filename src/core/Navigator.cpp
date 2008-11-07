@@ -82,7 +82,7 @@ void Navigator::init()
 		else
 		{
 			qDebug() << "ERROR : Unknown viewing mode type : " << tmpstr;
-			assert(0);
+			Q_ASSERT(0);
 		}
 	}
 	

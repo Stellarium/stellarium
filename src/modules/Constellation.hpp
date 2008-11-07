@@ -64,7 +64,7 @@ private:
 	//! observer centered J2000 coordinates.
 	virtual Vec3d getJ2000EquatorialPos(const Navigator *nav) const {return XYZname;}
 
-	virtual double getAngularSize(const StelCore* core) const {assert(0); return 0;}; // TODO
+	virtual double getAngularSize(const StelCore* core) const {Q_ASSERT(0); return 0;}; // TODO
 	
 	//! @param record string containing the following whitespace 
 	//! separated fields: abbreviation - a three character abbreviation 

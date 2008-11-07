@@ -255,7 +255,7 @@ bool SkyImageTile::drawTile(StelCore* core)
 		const StelGeom::Polygon& poly = skyConvexPolygons.at(p).asPolygon();
 		const QList<Vec2f>& texCoords = textureCoords.at(p);
 				
-		assert((int)poly.size()==texCoords.size());
+		Q_ASSERT((int)poly.size()==texCoords.size());
 						
 		Vec3d win;
 		const int N=poly.size()-1;
@@ -368,7 +368,7 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 				throw std::runtime_error("wrong Ra and Dec, expect a double value");
 			vertices.append(v);
 		}
-		assert(vertices.size()==4);
+		Q_ASSERT(vertices.size()==4);
 		skyConvexPolygons.append(StelGeom::ConvexPolygon(vertices[0], vertices[1], vertices[2], vertices[3]));
 	}
 	
@@ -384,7 +384,7 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 			if (!ok)
 				throw std::runtime_error("wrong X and Y, expect a double value");
 		}
-		assert(vertices.size()==4);
+		Q_ASSERT(vertices.size()==4);
 		textureCoords.append(vertices);
 	}
 	

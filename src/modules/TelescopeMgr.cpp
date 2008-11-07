@@ -229,7 +229,7 @@ void TelescopeMgr::setFontSize(float fontSize)
 void TelescopeMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
+	Q_ASSERT(conf);
 
 	setFontSize(12.f);
 	StelApp::getInstance().getTextureManager().setDefaultParams();

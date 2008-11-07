@@ -176,7 +176,7 @@ QString StarMgr::getSciName(int hip) {
 
 void StarMgr::init() {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
+	Q_ASSERT(conf);
 
 	loadData();
 	double fontSize = 12;
@@ -241,7 +241,7 @@ void StarMgr::loadData()
 	LoadingBar& lb = *StelApp::getInstance().getLoadingBar();
 			
 	// Please do not init twice:
-	assert(maxGeodesicGridLevel < 0);
+	Q_ASSERT(maxGeodesicGridLevel < 0);
 
 	qDebug() << "Loading star data ...";
 
@@ -598,7 +598,7 @@ void StarMgr::draw(StelCore* core)
 
 // Look for a star by XYZ coords
 StelObjectP StarMgr::search(Vec3d pos) const {
-assert(0);
+Q_ASSERT(0);
   pos.normalize();
   QList<StelObjectP > v = searchAround(pos,
                                         0.8, // just an arbitrary number

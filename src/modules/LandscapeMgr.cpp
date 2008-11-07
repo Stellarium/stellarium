@@ -576,7 +576,7 @@ QString LandscapeMgr::nameToID(const QString& name)
 	
 	if (nameToDirMap.find(name)!=nameToDirMap.end())
 	{
- 		assert(0);
+ 		Q_ASSERT(0);
 		return "error";
 	}
 	else

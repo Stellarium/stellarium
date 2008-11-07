@@ -50,8 +50,8 @@ StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixm
 			QGraphicsPixmapItem(apixOff, parent), pixOn(apixOn), pixOff(apixOff), pixHover(apixHover),
 			checked(false), action(aaction), noBckground(noBackground), opacity(1.), hoverOpacity(0.), redMode(false)
 {
-	assert(!pixOn.isNull());
-	assert(!pixOff.isNull());
+	Q_ASSERT(!pixOn.isNull());
+	Q_ASSERT(!pixOff.isNull());
 	
 	pixOnRed = StelGui::makeRed(pixOn);
 	pixOffRed = StelGui::makeRed(pixOff);

@@ -50,7 +50,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 {
 	setScene(new QGraphicsScene(this));
 	// Can't create 2 StelMainWindow instances
-	assert(!singleton);
+	Q_ASSERT(!singleton);
 	singleton = this;
 
 	setObjectName("Mainview");
