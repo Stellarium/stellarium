@@ -28,15 +28,11 @@
 GeodesicGridDrawer::GeodesicGridDrawer(int maxLevel)
 {
 	setObjectName("GeodesicGridDrawer");
-//	geodesicGrid = new GeodesicGrid(maxLevel);
-//	geodesic_search_result = new GeodesicSearchResult(*geodesicGrid);
 	font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage());
 }
 
 GeodesicGridDrawer::~GeodesicGridDrawer()
 {
-//	delete geodesic_search_result;
-//	delete geodesicGrid;
 }
 
 void GeodesicGridDrawer::init()
@@ -62,13 +58,7 @@ double GeodesicGridDrawer::draw(StelCore* core, int maxSearchLevel)
 		lev = geodesicGrid->getMaxLevel();
 
 	lev = maxSearchLevel;
-//	Vec3d e0, e1, e2, e3;
 	Vec3d win1, win2;
-//	prj->unproject_j2000(0,0,e0);
-//	prj->unproject_j2000(prj->getViewportWidth(),0,e1);
-//	prj->unproject_j2000(prj->getViewportWidth(),prj->getViewportHeight(),e2);
-//	prj->unproject_j2000(0,prj->getViewportHeight(),e3);
-//	geodesic_search_result->search(e0, e3, e2, e1, lev);
 	int index;
 	Vec3d v0, v1, v2;
 	{

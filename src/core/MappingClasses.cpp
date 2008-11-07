@@ -3,7 +3,7 @@
 
 MappingPerspective::MappingPerspective(void)
 {
-	maxFov = 150.0;
+	maxFov = 120.0;
 }
 
 QString MappingPerspective::getNameI18() const
@@ -328,7 +328,7 @@ double MappingMercator::deltaZoom(double fov) const
 
 MappingOrthographic::MappingOrthographic(void)
 {
-  maxFov = 180.0;
+  maxFov = 179.9999;
 }
 
 QString MappingOrthographic::getNameI18() const

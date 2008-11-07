@@ -107,21 +107,16 @@ public:
 	
 	//! Handle the resizing of the window.
 	void windowHasBeenResized(int width,int height);
-
-	//! Return a polygon matching precisely the real viewport defined by 
-	//! the area on the screen where projection is valid. 
-	//! Normally, nothing should be drawn outside this area. This viewport 
-	//! is usually the rectangle defined by the screen, but in case of 
-	//! non-linear projection, it can also be a more complex shape.
-	QList<Vec2d> getViewportVertices2d() const;
 	
 	//! Return a convex polygon on the sphere which includes the viewport in the current frame.
 	//! @param marginX an extra margin in pixel which extends the polygon size in the X direction
 	//! @param marginY an extra margin in pixel which extends the polygon size in the Y direction
+	//! @TODO Should be unified with unprojectViewport
 	StelGeom::ConvexPolygon getViewportConvexPolygon(double marginX=0., double marginY=0.) const;
 
 	//! Un-project the entire viewport depending on mapping, maskType,
 	//! viewportFovDiameter, viewportCenter, and viewport dimensions.
+	//! @TODO Should be unified with getViewportConvexPolygon
 	StelGeom::ConvexS unprojectViewport(void) const;
 
 	//! Set the near and far clipping planes.
@@ -278,10 +273,11 @@ public:
 	//! @param poly The polygon to draw
 	void drawPolygon(const StelGeom::Polygon& poly) const;
 	
-	//! Draw a small circle arc starting from point start, rotating around north pole rotAxis and of the given length in radian
+	//! Draw a small circle arc between points start and stop with rotation point in rotCenter
+	//! The angle between start and stop must be < 180 deg
 	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
 	//! screen 2d position, direction of the currently drawn arc, whether it enters or leave the viewport
-	void drawSmallCircleArc(const Vec3d& start, const Vec3d& rotAxis, double length, void (*viewportEdgeIntersectCallback)(double angleVal, const Vec3d& screenPos, const Vec3d& direction, bool enters)=NULL);
+	void drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(double angleVal, const Vec3d& screenPos, const Vec3d& direction, bool enters)=NULL) const;
 	
 	//! Draw a parallel arc in the current frame.  The arc start from point start
 	//! going in the positive longitude direction and with the given length in radian.
