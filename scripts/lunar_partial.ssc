@@ -1,9 +1,13 @@
-// Name: Partial Lunar Eclispe script
+//
+// Name: Partial Lunar Eclispe
+// License: Public Domain
+// Author: Matthew Gates
 // Description: Attempt to re-implement simple script from the old
 //              scripting engine.  Each old style command is shown
 //              first as a command with OLD: at the start of the line
 //              to help users of the old scripting engine learn how
 //              to use the new one.
+//
 
 core.debug("Starting Partial Lunar Eclispe script");
 core.wait(1);

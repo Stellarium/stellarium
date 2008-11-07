@@ -31,7 +31,7 @@ class Fader
 public:
 	// Create and initialise
 	Fader(bool initialState, float minimumValue=0.f, float maximumValue=1.f) : state(initialState), minValue(minimumValue), maxValue(maximumValue) {;}
-    virtual ~Fader() {;}
+	virtual ~Fader() {;}
 	// Increments the internal counter of deltaTime ticks
 	virtual void update(int deltaTicks) = 0;
 	// Gets current switch state
@@ -59,7 +59,7 @@ class BooleanFader : public Fader
 public:
 	// Create and initialise
 	BooleanFader(bool initialState=false, float minimumValue=0.f, float maximumValue=1.f) : Fader(initialState, minimumValue, maximumValue) {;}
-    ~BooleanFader() {;}
+	~BooleanFader() {;}
 	// Increments the internal counter of deltaTime ticks
 	void update(int deltaTicks) {;}
 	// Gets current switch state
@@ -87,7 +87,7 @@ public:
 		interstate = state ? maxValue : minValue;
 	}
 	
-    ~LinearFader() {;}
+	~LinearFader() {;}
 	
 	// Increments the internal counter of deltaTime ticks
 	void update(int deltaTicks)
@@ -170,7 +170,7 @@ public:
 		interstate = state ? maxValue : minValue;
 	}
 	
-    ~ParabolicFader() {;}
+	~ParabolicFader() {;}
 	
 	// Increments the internal counter of deltaTime ticks
 	void update(int deltaTicks)

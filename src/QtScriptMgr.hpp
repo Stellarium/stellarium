@@ -200,6 +200,22 @@ public slots:
 	//! will be returned.
 	const QString getName(const QString& s);
 
+	//! Gets the name of the script Author
+	//! @param s the file name of the script whose name is to be returned.
+	//! @return text following a comment with Author: at the start.  If no 
+	//! such comment is found, "" is returned.  If the file
+	//! is not found or cannot be opened for some reason, an Empty string
+	//! will be returned.
+	const QString getAuthor(const QString& s);
+
+	//! Gets the licensing terms for the script
+	//! @param s the file name of the script whose name is to be returned.
+	//! @return text following a comment with License: at the start.  If no 
+	//! such comment is found, "" is returned.  If the file
+	//! is not found or cannot be opened for some reason, an Empty string
+	//! will be returned.
+	const QString getLicense(const QString& s);
+
 	//! Gets a description of the script.
 	//! @param s the file name of the script whose name is to be returned.
 	//! @return text following a comment with Description: at the start.
@@ -229,6 +245,13 @@ signals:
 	void scriptStopped();
 
 private:
+	//! This function is for use with getName, getAuthor and getLicense.
+	//! @param s the script id
+	//! @param id the command line id, e.g. "Name"
+	//! @param notFoundText the text to be returned if the key is not found
+	//! @return the text following the id and : on a comment line near the top of 
+	//! the script file (i.e. before there is a non-comment line).
+	const QString getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText="");	
 	QScriptEngine engine;
 	
 	//! The thread in which scripts are run
