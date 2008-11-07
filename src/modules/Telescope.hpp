@@ -55,7 +55,7 @@ public:
 	//! @return a QString containing an HMTL encoded description of the Telescope.
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
 	QString getType(void) const {return "Telescope";}
-	virtual double getAngularSize(const StelCore* core) const {assert(0); return 0;}	// TODO
+	virtual double getAngularSize(const StelCore* core) const {Q_ASSERT(0); return 0;}	// TODO
 		
 	// Methods specific to telescope
 	virtual void telescopeGoto(const Vec3d &j2000Pos) = 0;

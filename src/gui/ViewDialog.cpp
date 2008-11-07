@@ -133,7 +133,7 @@ void ViewDialog::createDialogContent()
 	
 	// Shooting stars section
 	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
-	assert(mmgr);
+	Q_ASSERT(mmgr);
 	switch(mmgr->getZHR())
 	{
 		case 0: ui->zhrNone->setChecked(true); break;

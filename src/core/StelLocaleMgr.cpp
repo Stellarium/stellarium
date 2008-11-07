@@ -91,7 +91,7 @@ void StelLocaleMgr::generateCountryList()
 void StelLocaleMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
+	Q_ASSERT(conf);
 
 	setSkyLanguage(conf->value("localization/sky_locale", "system").toString());
 	setAppLanguage(conf->value("localization/app_locale", "system").toString());

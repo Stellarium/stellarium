@@ -127,7 +127,7 @@ SFont& StelFontMgr::getFixedFont(const QString &langageName, double size)
 		}
 	}
 	// Unreachable code
-	assert(false);
+	Q_ASSERT(false);
 	
 	SFont* dummy=NULL;
 	return *dummy;

@@ -21,7 +21,7 @@
 #ifndef _CALLBACKS_HPP_
 #define _CALLBACKS_HPP_
 
-#include <cassert>
+#include <QtGlobal>
 #include "callback_helpers.hpp"
 
 namespace boost {
@@ -72,9 +72,9 @@ public:
 //  API
 //
 public:
-            RETURN_TYPE operator()() const                      {assert(mFunctor != 0); return mFunctor->Call();}
-            RETURN_TYPE operator()(ARG1 arg1) const             {assert(mFunctor != 0); return mFunctor->Call(arg1);}
-            RETURN_TYPE operator()(ARG1 arg1, ARG2 arg2) const  {assert(mFunctor != 0); return mFunctor->Call(arg1, arg2);}
+            RETURN_TYPE operator()() const                      {Q_ASSERT(mFunctor != 0); return mFunctor->Call();}
+            RETURN_TYPE operator()(ARG1 arg1) const             {Q_ASSERT(mFunctor != 0); return mFunctor->Call(arg1);}
+            RETURN_TYPE operator()(ARG1 arg1, ARG2 arg2) const  {Q_ASSERT(mFunctor != 0); return mFunctor->Call(arg1, arg2);}
                         // $$$ use boost::call_traits for the args?
 
             bool        empty() const                           {return mFunctor == 0;}

@@ -291,7 +291,7 @@ bool SkyDrawer::computeRCMag(float mag, float rcMag[2]) const
 
 void SkyDrawer::preDrawPointSource()
 {
-	assert(nbPointSources==0);
+	Q_ASSERT(nbPointSources==0);
 	glDisable(GL_LIGHTING);
 	// Blending is really important. Otherwise faint stars in the vicinity of
 	// bright star will cause tiny black squares on the bright star, e.g. see Procyon.

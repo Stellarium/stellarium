@@ -60,7 +60,7 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars) :
 	flagBoundaries(0)
 {
 	setObjectName("ConstellationMgr");
-	assert(hipStarMgr);
+	Q_ASSERT(hipStarMgr);
 	isolateSelected = false;
 }
 
@@ -84,7 +84,7 @@ ConstellationMgr::~ConstellationMgr()
 void ConstellationMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
+	Q_ASSERT(conf);
 
 	lastLoadedSkyCulture = "dummy";
 	updateSkyCulture();
@@ -266,7 +266,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	if (!in.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
 		qWarning() << "Can't open constellation data file" << fileName  << "for culture" << cultureName;
-		assert(0);
+		Q_ASSERT(0);
 	}
 
 	int totalRecords=0;
@@ -325,7 +325,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	{
 		qWarning() << "Can't open constellation art file" << fileName  << "for culture" << cultureName;
 		return; // possible to have no art - just constellations
-		assert(0);
+		Q_ASSERT(0);
 	}
 
 	totalRecords=0;

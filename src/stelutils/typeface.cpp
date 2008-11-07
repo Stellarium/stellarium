@@ -36,8 +36,8 @@
 #include <map>
 #include <iostream>
 #include <fstream>
-#include <cassert>
 #include <algorithm>
+#include <QtGlobal>
 #include <QString>
 #include <QDebug>
 
@@ -253,19 +253,19 @@ TypeFace::TypeFace(const QString& aFaceName, size_t aPointSize, size_t aResoluti
 	if (FTinitialized==false)
 	{
 		int res = FT_Init_FreeType(&ftlibrary_);
-		assert(res==0);
+		Q_ASSERT(res==0);
 		res = 0;
 		FTinitialized = true;
 	}
 
 	int res = FT_New_Face(ftlibrary_, aFaceName.toLocal8Bit(), 0, &data_->face_);
-	assert(res == 0);
+	Q_ASSERT(res == 0);
 
 	res = FT_IS_SCALABLE(data_->face_);
-	assert(res!=0);
+	Q_ASSERT(res!=0);
 
 	res = FT_IS_SFNT(data_->face_);
-	assert(res!=0);
+	Q_ASSERT(res!=0);
 
 	if(!data_->face_->charmap) 
 		FT_Set_Charmap(data_->face_, data_->face_->charmaps[0]);
@@ -275,7 +275,7 @@ TypeFace::TypeFace(const QString& aFaceName, size_t aPointSize, size_t aResoluti
                                static_cast<FT_F26Dot6>(aPointSize << 6), 
                                aResolution, 
                                aResolution);
-	assert(res == 0);
+	Q_ASSERT(res == 0);
 
 	data_->hasKerning_ = (FT_HAS_KERNING(data_->face_) != 0);
 }
@@ -299,7 +299,7 @@ void TypeFace::setPointSize(size_t aPointSize)
 		data_->pointSize_ = aPointSize;
 		const FT_F26Dot6 sz = static_cast<FT_F26Dot6>(aPointSize << 6);
 		int res = FT_Set_Char_Size(data_->face_, sz, sz, data_->resolution_, data_->resolution_);
-		assert(res == 0);
+		Q_ASSERT(res == 0);
 		res = 0;
 		FT_Set_Char_Size(data_->face_, sz, sz, data_->resolution_, data_->resolution_);
 		flushCache();
@@ -491,7 +491,7 @@ void TypeFace::cacheGlyph(size_t aGlyphIndex)
 	const FT_Error loadError = FT_Load_Glyph(data_->face_, 
 	                                         aGlyphIndex, 
 	                                         FT_LOAD_NO_HINTING | FT_LOAD_NO_BITMAP);
-	assert(loadError == 0);
+	Q_ASSERT(loadError == 0);
 	if(loadError == 0)
 	{
 		FT_Glyph glyph;
@@ -530,7 +530,7 @@ CacheEntry& TypeFace::cachedGlyph(size_t aGlyphIndex)
 	{
 		cacheGlyph(aGlyphIndex);
 		cacheIterator = data_->characterCache_.find(aGlyphIndex);
-		assert(cacheIterator != data_->characterCache_.end());
+		Q_ASSERT(cacheIterator != data_->characterCache_.end());
 	}
 	return cacheIterator->second;
 }
@@ -587,7 +587,7 @@ Vec2f TypeFace::kerning(size_t leftGlyphIndex, size_t rightGlyphIndex) const
 
 void TypeFace::bindTexture(const CacheEntry& aCacheEntry) const
 {
-	assert(aCacheEntry.textureIndex_ < data_->textures_.size());
+	Q_ASSERT(aCacheEntry.textureIndex_ < data_->textures_.size());
 	const TextureInfo& info = data_->textures_[aCacheEntry.textureIndex_];
 
 	GLint currentTextureID = -1;

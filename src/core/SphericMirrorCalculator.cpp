@@ -114,12 +114,12 @@ void SphericMirrorCalculator::initRotMatrix(double alpha,
       if (fabs(prod0)>1e-10) {
         qDebug() << "i: " << i << ", j: " << j
                  << ", prod0: " << prod0 << ", prod1: " << prod1;
-        assert(0);
+        Q_ASSERT(0);
       }
       if (fabs(prod1)>1e-10) {
         qDebug << "i: " << i << ", j: " << j
                << ", prod0: " << prod0 << ", prod1: " << prod1;
-        assert(0);
+        Q_ASSERT(0);
       }
     }
   }

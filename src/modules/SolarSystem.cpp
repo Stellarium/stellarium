@@ -101,12 +101,12 @@ double SolarSystem::getCallOrder(StelModuleActionName actionName) const
 void SolarSystem::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
+	Q_ASSERT(conf);
 
 	loadPlanets();	// Load planets data
 
 	// Compute position and matrix of sun and all the satellites (ie planets)
-	// for the first initialization assert that center is sun center (only impacts on light speed correction)
+	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)
 	computePositions(StelUtils::getJDFromSystem());
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
@@ -342,7 +342,7 @@ void SolarSystem::loadPlanets()
 					abort();
 				} else {
 					semi_major_axis /= AU;
-					assert(eccentricity != 1.0); // parabolic orbits have no semi_major_axis
+					Q_ASSERT(eccentricity != 1.0); // parabolic orbits have no semi_major_axis
 					pericenterDistance = semi_major_axis * (1.0-eccentricity);
 				}
 			} else {
@@ -447,7 +447,7 @@ void SolarSystem::loadPlanets()
 						<< ": you must provide orbit_PericenterDistance or orbit_SemiMajorAxis";
 					abort();
 				} else {
-					assert(eccentricity != 1.0); // parabolic orbits have no semi_major_axis
+					Q_ASSERT(eccentricity != 1.0); // parabolic orbits have no semi_major_axis
 					pericenterDistance = semi_major_axis * (1.0-eccentricity);
 				}
 			} else {
