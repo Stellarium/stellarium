@@ -35,7 +35,7 @@
 
 StelAppGraphicsScene* StelAppGraphicsScene::singleton = NULL;
  
-StelAppGraphicsScene::StelAppGraphicsScene() : tempPainter(NULL), cursorTimeout(-1.f), flagCursorTimeout(false)
+StelAppGraphicsScene::StelAppGraphicsScene() : tempPainter(NULL), cursorTimeout(-1.f), flagCursorTimeout(false), minFpsTimer(NULL)
 {
 	Q_ASSERT(!singleton);
 	singleton = this;
@@ -61,6 +61,8 @@ void StelAppGraphicsScene::init()
 	setViewPortDistorterType(conf->value("video/distorter","none").toString());
 	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.).toDouble());
+
+	connect(&StelApp::getInstance(), SIGNAL(minFpsChanged()), this, SLOT(minFpsChanged()));
 	
 	startMainLoop();
 }
@@ -346,7 +348,19 @@ void StelAppGraphicsScene::keyReleaseEvent(QKeyEvent* event)
 void StelAppGraphicsScene::startMainLoop()
 {
 	// Set a timer refreshing for every minfps frames
-	QTimer* timer = new QTimer(this);
-	connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-	timer->start((int)(1./StelApp::getInstance().minfps*1000.));
+	minFpsChanged();
+}
+
+void StelAppGraphicsScene::minFpsChanged()
+{
+	if (minFpsTimer!=NULL)
+	{
+		disconnect(minFpsTimer, SIGNAL(timeout()), 0, 0);
+		delete minFpsTimer;
+		minFpsTimer = NULL;
+	}
+		
+	minFpsTimer = new QTimer(this);
+	connect(minFpsTimer, SIGNAL(timeout()), this, SLOT(update()));
+	minFpsTimer->start((int)(1./StelApp::getInstance().minfps*1000.));
 }
