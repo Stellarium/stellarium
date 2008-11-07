@@ -149,10 +149,31 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Full projection methods
 	//! Check to see if a 2d position is inside the viewport.
+	//! TODO Optimize by storing viewportXywh[1] + viewportXywh[3] and viewportXywh[0] + viewportXywh[2] already computed
 	bool checkInViewport(const Vec3d& pos) const
 		{return (pos[1]>=viewportXywh[1] && pos[0]>=viewportXywh[0] &&
 		pos[1]<=(viewportXywh[1] + viewportXywh[3]) && pos[0]<=(viewportXywh[0] + viewportXywh[2]));}
 
+	//! Return the position where the 2 2D point p1 and p2 cross the viewport edge
+	//! P1 must be inside the viewport and P2 outside (check with checkInViewport() before calling this method)
+	Vec3d viewPortIntersect(const Vec3d& p1, const Vec3d& p2) const
+	{
+		Vec3d v1=p1;
+		Vec3d v2=p2;
+		Vec3d v;
+		for (int i=0;i<5;++i)
+		{
+			v=(v1+v2)*0.5;
+			if (!checkInViewport(v))
+				v2=v;
+			else
+			{
+				v1=v;
+			}
+		}
+		return v;
+	}
+		
 	//! Project the vector v from the current frame into the viewport.
 	//! @param v the vector in the current frame.
 	//! @param win the projected vector in the viewport 2D frame.
@@ -276,8 +297,8 @@ public:
 	//! Draw a small circle arc between points start and stop with rotation point in rotCenter
 	//! The angle between start and stop must be < 180 deg
 	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
-	//! screen 2d position, direction of the currently drawn arc, whether it enters or leave the viewport
-	void drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(double angleVal, const Vec3d& screenPos, const Vec3d& direction, bool enters)=NULL) const;
+	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport
+	void drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, const void* userData)=NULL, const void* userData=NULL) const;
 	
 	//! Draw a parallel arc in the current frame.  The arc start from point start
 	//! going in the positive longitude direction and with the given length in radian.
