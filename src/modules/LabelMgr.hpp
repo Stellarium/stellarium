@@ -27,7 +27,7 @@
 #include "StelObjectType.hpp"
 #include "vecmath.h"
 
-#include <vector>
+#include <QVector>
 #include <QString>
 
 class StelCore;
@@ -204,7 +204,7 @@ public slots:
 
 private:
 	SkyLabel::Style stringToStyle(const QString& s);
-	std::vector<StelLabel*> allLabels;
+	QVector<StelLabel*> allLabels;
 };
 
 #endif // _SKYLABELMGR_HPP_
