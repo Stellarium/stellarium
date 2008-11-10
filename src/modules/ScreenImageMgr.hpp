@@ -125,11 +125,11 @@ public slots:
 
 	//! Find out if an image is currently visible.
 	//! @param id the ID for the desired image.
-	bool getImageShow(const QString& id); 
+	bool getShowImage(const QString& id); 
 	//! Set an image's visible status.
 	//! @param id the ID for the desired image.
 	//! @param show the new visible state to set.
-	void setImageShow(const QString& id, bool show); 
+	void showImage(const QString& id, bool show); 
 	//! Set the x and y coordinates for the specified image
 	//! @param id the ID for the desired image.
 	//! @param x The new x-coordinate for the image.
