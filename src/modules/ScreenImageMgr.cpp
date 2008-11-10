@@ -18,7 +18,7 @@
  */
 
 
-#include "ScriptImageMgr.hpp"
+#include "ScreenImageMgr.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
@@ -110,11 +110,11 @@ void ScreenScriptImage::setXY(float x, float y)
 }
 
 //////////////////////////
-// ScriptImageMgr class //
+// ScreenImageMgr class //
 //////////////////////////
-ScriptImageMgr::ScriptImageMgr()
+ScreenImageMgr::ScreenImageMgr()
 {
-	setObjectName("ScriptImageMgr");
+	setObjectName("ScreenImageMgr");
 	connect(this, SIGNAL(requestCreateScreenImage(const QString&, const QString&, float, float, bool, float)),
 	        this, SLOT(doCreateScreenImage(const QString&, const QString&, float, float, bool, float)));
 
@@ -131,15 +131,15 @@ ScriptImageMgr::ScriptImageMgr()
 	        this, SLOT(doDeleteAllImages()));
 }
  
-ScriptImageMgr::~ScriptImageMgr()
+ScreenImageMgr::~ScreenImageMgr()
 {
 }
 
-void ScriptImageMgr::init()
+void ScreenImageMgr::init()
 {
 }
 
-void ScriptImageMgr::draw(StelCore* core)
+void ScreenImageMgr::draw(StelCore* core)
 {
 	for(std::map<QString, ScriptImage*>::iterator i=allImages.begin(); i!=allImages.end(); i++)
 	{
@@ -148,7 +148,7 @@ void ScriptImageMgr::draw(StelCore* core)
 	}
 }
 
-void ScriptImageMgr::createScreenImage(const QString& id,
+void ScreenImageMgr::createScreenImage(const QString& id,
                                        const QString& filename,
 	                               float x,
 	                               float y,
@@ -158,17 +158,17 @@ void ScriptImageMgr::createScreenImage(const QString& id,
 	emit(requestCreateScreenImage(id, filename, x, y, visible, alpha));
 }
 
-void ScriptImageMgr::deleteImage(const QString& id)
+void ScreenImageMgr::deleteImage(const QString& id)
 {
 	emit(requestDeleteImage(id));
 }
 	
-void ScriptImageMgr::deleteAllImages()
+void ScreenImageMgr::deleteAllImages()
 {
 	emit(requestDeleteAllImages());
 }
 
-QStringList ScriptImageMgr::getAllImageIDs(void)
+QStringList ScreenImageMgr::getAllImageIDs(void)
 {
 	QStringList result;
 	for(std::map<QString, ScriptImage*>::iterator i=allImages.begin(); i!=allImages.end(); i++)
@@ -178,7 +178,7 @@ QStringList ScriptImageMgr::getAllImageIDs(void)
 	return result;
 }
 
-bool ScriptImageMgr::getImageShow(const QString& id)
+bool ScreenImageMgr::getImageShow(const QString& id)
 {
 	std::map<QString, ScriptImage*>::iterator it = allImages.find(id);
 	if (it != allImages.end())
@@ -188,18 +188,18 @@ bool ScriptImageMgr::getImageShow(const QString& id)
 	return false;
 }
 	
-void ScriptImageMgr::setImageShow(const QString& id, bool show)
+void ScreenImageMgr::setImageShow(const QString& id, bool show)
 {
 	emit(requestSetImageShow(id, show));
 }
 
-void ScriptImageMgr::setImageXY(const QString& id, float x, float y)
+void ScreenImageMgr::setImageXY(const QString& id, float x, float y)
 {
 	emit(requestSetImageXY(id, x, y));
 }
 
 
-void ScriptImageMgr::update(double deltaTime)
+void ScreenImageMgr::update(double deltaTime)
 {
 	for(std::map<QString, ScriptImage*>::iterator i=allImages.begin(); i!=allImages.end(); i++)
 	{
@@ -208,14 +208,14 @@ void ScriptImageMgr::update(double deltaTime)
 	}
 }
 	
-double ScriptImageMgr::getCallOrder(StelModuleActionName actionName) const
+double ScreenImageMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
 		return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName)+11;
         return 0;
 }
 
-void ScriptImageMgr::doCreateScreenImage(const QString& id,
+void ScreenImageMgr::doCreateScreenImage(const QString& id,
                                          const QString& filename,
                                          float x,
                                          float y,
@@ -239,7 +239,7 @@ void ScriptImageMgr::doCreateScreenImage(const QString& id,
 	return;
 }
 
-void ScriptImageMgr::doSetImageShow(const QString& id, bool show)
+void ScreenImageMgr::doSetImageShow(const QString& id, bool show)
 {
 	std::map<QString, ScriptImage*>::iterator it = allImages.find(id);
 	if (it != allImages.end())
@@ -247,7 +247,7 @@ void ScriptImageMgr::doSetImageShow(const QString& id, bool show)
 			return (*it).second->setFlagShow(show);
 }
 
-void ScriptImageMgr::doSetImageXY(const QString& id, float x, float y)
+void ScreenImageMgr::doSetImageXY(const QString& id, float x, float y)
 {
 	std::map<QString, ScriptImage*>::iterator it = allImages.find(id);
 	if (it != allImages.end())
@@ -255,7 +255,7 @@ void ScriptImageMgr::doSetImageXY(const QString& id, float x, float y)
 			(*it).second->setXY(x,y);
 }
 
-void ScriptImageMgr::doDeleteImage(const QString& id)
+void ScreenImageMgr::doDeleteImage(const QString& id)
 {
 	std::map<QString, ScriptImage*>::iterator it = allImages.find(id);
 	if (it != allImages.end())
@@ -266,7 +266,7 @@ void ScriptImageMgr::doDeleteImage(const QString& id)
 	}
 }
 
-void ScriptImageMgr::doDeleteAllImages(void)
+void ScreenImageMgr::doDeleteAllImages(void)
 {
 	for(std::map<QString, ScriptImage*>::iterator i=allImages.begin(); i!=allImages.end(); i++)
 	{
