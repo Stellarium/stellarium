@@ -171,7 +171,7 @@ QStringList ScreenImageMgr::getAllImageIDs(void)
 	return allScreenImages.keys();
 }
 
-bool ScreenImageMgr::getImageShow(const QString& id)
+bool ScreenImageMgr::getShowImage(const QString& id)
 {
 	if (allScreenImages.contains(id))
 		if (allScreenImages[id]!=NULL)
@@ -180,7 +180,7 @@ bool ScreenImageMgr::getImageShow(const QString& id)
 	return false;
 }
 	
-void ScreenImageMgr::setImageShow(const QString& id, bool show)
+void ScreenImageMgr::showImage(const QString& id, bool show)
 {
 	emit(requestSetImageShow(id, show));
 }

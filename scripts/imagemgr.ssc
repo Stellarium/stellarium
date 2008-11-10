@@ -11,7 +11,7 @@ for (i=0; i<500; i++)
 	ScreenImageMgr.setImageXY("logo", i, 100);
 	if (i%40 == 0)
 	{
-		ScreenImageMgr.setImageShow("logo", !ScreenImageMgr.getImageShow("logo"));
+		ScreenImageMgr.showImage("logo", !ScreenImageMgr.getShowImage("logo"));
 	}
 	core.wait(0.02);
 }
