@@ -37,6 +37,7 @@
 #include "StelUtils.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "SkyDrawer.hpp"
+#include "SkyImageMgr.hpp"
 #include "StarMgr.hpp"
 #include "Projector.hpp"
 #include "Location.hpp"
@@ -486,6 +487,9 @@ QtScriptMgr::QtScriptMgr(const QString& startupScript, QObject *parent)
 		objectValue = engine.newQObject(m);
 		engine.globalObject().setProperty(m->objectName(), objectValue);
 	}
+
+	// Add other classes which we want to be directly accessible from scripts
+	objectValue = engine.newQObject(&StelApp::getInstance().getSkyImageMgr());
 	
 	runScript(startupScript);
 }
