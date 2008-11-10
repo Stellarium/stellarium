@@ -237,21 +237,19 @@ void LabelMgr::init()
 void LabelMgr::draw(StelCore* core)
 {
 	core->setCurrentFrame(StelCore::FrameJ2000);
-	for(std::vector<StelLabel*>::iterator i=allLabels.begin(); i!=allLabels.end(); i++)
-	{
-		if (*i != NULL)
-			(*i)->draw(core);
-	}
+	foreach(StelLabel* l, allLabels) 
+		if (l!=NULL)
+			l->draw(core);
 }
 	
 int LabelMgr::labelObject(const QString& text,
-                             const QString& objectName,
-                             bool visible,
-                             float fontSize,
-                             const QString& fontColor,
-                             const QString& side,
-                             double labelDistance,
-                             const QString& style)
+                          const QString& objectName,
+                          bool visible,
+                          float fontSize,
+                          const QString& fontColor,
+                          const QString& side,
+                          double labelDistance,
+                          const QString& style)
 {
 	SFont* font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 	Q_ASSERT(font);
@@ -269,7 +267,7 @@ int LabelMgr::labelObject(const QString& text,
 	if (visible)
 		l->setFlagShow(true);
 
-	allLabels.push_back(l);
+	allLabels.append(l);
 	return allLabels.size()-1;
 }
 
@@ -289,30 +287,30 @@ int LabelMgr::labelScreen(const QString& text,
 	if (visible)
 		l->setFlagShow(true);
 
-	allLabels.push_back(l);
+	allLabels.append(l);
 	return allLabels.size()-1;
 }
 
 bool LabelMgr::getLabelShow(int id)
 {
-	if (allLabels.at(id) == NULL)
-		return false;
-	else
+	if (allLabels.at(id)!=NULL)
 		return allLabels.at(id)->getFlagShow();
+	else
+		return false;
 }
 	
 void LabelMgr::setLabelShow(int id, bool show)
 {
-	if (allLabels.at(id) != NULL)
+	if (allLabels.at(id)!=NULL)
 		allLabels.at(id)->setFlagShow(show);
 }
 	
 bool LabelMgr::deleteLabel(int id)
 {
-	if (allLabels.at(id) != NULL)
+	if (allLabels.at(id)!=NULL)
 	{
 		delete allLabels.at(id);
-		allLabels.at(id) = NULL;
+		allLabels[id] = NULL;
 		return true;
 	}
 	else
@@ -321,11 +319,9 @@ bool LabelMgr::deleteLabel(int id)
 	
 void LabelMgr::update(double deltaTime)
 {
-	for(std::vector<StelLabel*>::iterator i=allLabels.begin(); i!=allLabels.end(); i++)
-	{
-		if (*i != NULL)
-			(*i)->update(deltaTime);
-	}
+	foreach(StelLabel* l, allLabels) 
+		if (l!=NULL)
+			l->update(deltaTime);
 }
 	
 double LabelMgr::getCallOrder(StelModuleActionName actionName) const
@@ -338,11 +334,12 @@ double LabelMgr::getCallOrder(StelModuleActionName actionName) const
 int LabelMgr::deleteAllLabels(void)
 {
 	int count=0;
-	for(std::vector<StelLabel*>::iterator i=allLabels.begin(); i!=allLabels.end(); i++)
+	foreach(StelLabel* l, allLabels) 
 	{
-		if (*i != NULL)
+		if (l!=NULL)
 		{
-			delete *i;
+			delete l;
+			l=NULL;
 			count++;
 		}
 	}
@@ -357,3 +354,4 @@ SkyLabel::Style LabelMgr::stringToStyle(const QString& s)
 	else
 		return SkyLabel::TextOnly;
 }
+
