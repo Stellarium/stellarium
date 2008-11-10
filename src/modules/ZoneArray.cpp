@@ -118,7 +118,7 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
       ReadInt(f,mag_range) < 0 ||
       ReadInt(f,mag_steps) < 0) {
     dbStr += "error - file format is bad.";
-    qWarning(qPrintable(dbStr));
+    qWarning() << dbStr;
     return 0;
   }
   const bool byte_swap = (magic == FILE_MAGIC_OTHER_ENDIAN);
@@ -130,7 +130,7 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
       dbStr += "to native format ";
 #endif
       dbStr += "before mmap loading";
-      qWarning(qPrintable(dbStr));
+      qWarning() << dbStr;
       return 0;
     }
     dbStr += "byteswap ";
@@ -157,7 +157,7 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
       // ok, will work for any architecture and any compiler
   } else {
     dbStr += "error - not a catalogue file.";
-    qWarning(qPrintable(dbStr));
+    qWarning() << dbStr;
     return 0;
   }
   ZoneArray *rval = 0;
@@ -222,11 +222,11 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
   }
   if (rval && rval->isInitialized()) {
     dbStr += QString("%1").arg(rval->getNrOfStars());
-    qDebug(qPrintable(dbStr));
+    qDebug() << dbStr;
 //    rval->generateNativeDebugFile((fname+".debug").c_str());
   } else {
     dbStr += " - initialization failed";
-    qWarning(qPrintable(dbStr));
+    qWarning() << dbStr;
     if (rval) {
       delete rval;
       rval = 0;
