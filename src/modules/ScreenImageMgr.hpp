@@ -26,7 +26,7 @@
 #include "STextureTypes.hpp"
 #include "vecmath.h"
 
-#include <map>
+#include <QMap>
 #include <QString>
 #include <QStringList>
 
@@ -34,11 +34,11 @@ class StelCore;
 class QGraphicsPixmapItem;
 
 // base class for different image types
-class ScriptImage
+class ScreenImage
 {
 public:
-	ScriptImage();
-	virtual ~ScriptImage() {;}
+	ScreenImage();
+	virtual ~ScreenImage() {;}
 
 	//! Draw the image.
 	//! @param core the StelCore object
@@ -61,10 +61,10 @@ protected:
 
 };
 
-//! @class ScreenScriptImage
+//! @class ScreenScreenImage
 //! This class is used for displaying images on the screen at x,y screen coordinates.
 //! TODO: alpha / fade.  This should wait until QT 4.5, when opacity will be settable in a QGraphicsItem.
-class ScreenScriptImage : public ScriptImage
+class ScreenScreenImage : public ScreenImage
 {
 public:
 	//! Load an image
@@ -73,8 +73,8 @@ public:
 	//! @param x the screen x-position for the texture (in pixels), measured from the left side of the screen.
 	//! @param y the screen x-position for the texture (in pixels), measured from the top of the screen.
 	//! @param show the initial displayed status of the image (false == hidden).
-	ScreenScriptImage(const QString& filename, float x, float y, bool show=false);
-	virtual ~ScreenScriptImage();
+	ScreenScreenImage(const QString& filename, float x, float y, bool show=false);
+	virtual ~ScreenScreenImage();
 	virtual bool draw(const StelCore* core);
 	virtual void setXY(float x, float y);
 
@@ -177,7 +177,7 @@ private slots:
 	void doDeleteAllImages(void);
 
 private:
-	std::map<QString, ScriptImage*> allImages;
+	QMap<QString, ScreenImage*> allScreenImages;
 };
 
 #endif // _SCREENIMAGEMGR_HPP_

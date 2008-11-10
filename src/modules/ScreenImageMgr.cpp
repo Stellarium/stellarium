@@ -30,50 +30,50 @@
 #include "StelUtils.hpp"
 #include "vecmath.h"
 
-#include <map>
 #include <QGraphicsPixmapItem>
 #include <QPixmap>
 #include <QString>
 #include <QDebug>
+#include <QMap>
 
 ///////////////////////
-// ScriptImage class //
+// ScreenImage class //
 ///////////////////////
-ScriptImage::ScriptImage()
+ScreenImage::ScreenImage()
 {
 }
 
-void ScriptImage::update(double deltaTime)
+void ScreenImage::update(double deltaTime)
 {
 	imageFader.update((int)(deltaTime*1000));
 	// TODO when we have QT 4.5 - use opacity of QGraphicsItem to set alpha
 }
 
-void ScriptImage::setFadeDuration(float duration)
+void ScreenImage::setFadeDuration(float duration)
 {
 	imageFader.setDuration(duration);
 }
 
-void ScriptImage::setFlagShow(bool b)
+void ScreenImage::setFlagShow(bool b)
 {
 	// TODO don't use this value after QT 4.5 and opacity of QGraphicsItem
 	imageFader = b;
 }
 
-bool ScriptImage::getFlagShow(void)
+bool ScreenImage::getFlagShow(void)
 {
 	return imageFader;
 }
 
-void ScriptImage::setAlpha(float a)
+void ScreenImage::setAlpha(float a)
 {
 	imageFader.setMaxValue(a);
 }
 
 ///////////////////////
-// ScreenScriptImage //
+// ScreenScreenImage //
 ///////////////////////
-ScreenScriptImage::ScreenScriptImage(const QString& filename, float x, float y, bool show)
+ScreenScreenImage::ScreenScreenImage(const QString& filename, float x, float y, bool show)
 	: tex(NULL)
 {
 	try
@@ -85,11 +85,11 @@ ScreenScriptImage::ScreenScriptImage(const QString& filename, float x, float y, 
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "Failed to create ScreenScriptImage: " << e.what();
+		qWarning() << "Failed to create ScreenScreenImage: " << e.what();
 	}
 }
 
-ScreenScriptImage::~ScreenScriptImage()
+ScreenScreenImage::~ScreenScreenImage()
 {
 	if (tex!=NULL)
 	{
@@ -98,13 +98,13 @@ ScreenScriptImage::~ScreenScriptImage()
 	}
 }
 
-bool ScreenScriptImage::draw(const StelCore* core)
+bool ScreenScreenImage::draw(const StelCore* core)
 {
 	tex->setVisible(imageFader);
 	return true;
 }
 
-void ScreenScriptImage::setXY(float x, float y)
+void ScreenScreenImage::setXY(float x, float y)
 {
 	tex->setOffset(x, y);
 }
@@ -141,11 +141,9 @@ void ScreenImageMgr::init()
 
 void ScreenImageMgr::draw(StelCore* core)
 {
-	for(std::map<QString, ScriptImage*>::iterator i=allImages.begin(); i!=allImages.end(); i++)
-	{
-		if ((*i).second != NULL)
-			(*i).second->draw(core);
-	}
+	foreach(ScreenImage* m, allScreenImages)
+		if (m!=NULL)
+			m->draw(core);
 }
 
 void ScreenImageMgr::createScreenImage(const QString& id,
@@ -170,20 +168,14 @@ void ScreenImageMgr::deleteAllImages()
 
 QStringList ScreenImageMgr::getAllImageIDs(void)
 {
-	QStringList result;
-	for(std::map<QString, ScriptImage*>::iterator i=allImages.begin(); i!=allImages.end(); i++)
-	{
-		result << (*i).first;
-	}
-	return result;
+	return allScreenImages.keys();
 }
 
 bool ScreenImageMgr::getImageShow(const QString& id)
 {
-	std::map<QString, ScriptImage*>::iterator it = allImages.find(id);
-	if (it != allImages.end())
-		if ((*it).second != NULL)
-			return (*it).second->getFlagShow();
+	if (allScreenImages.contains(id))
+		if (allScreenImages[id]!=NULL)
+			return allScreenImages[id]->getFlagShow();
 
 	return false;
 }
@@ -201,11 +193,9 @@ void ScreenImageMgr::setImageXY(const QString& id, float x, float y)
 
 void ScreenImageMgr::update(double deltaTime)
 {
-	for(std::map<QString, ScriptImage*>::iterator i=allImages.begin(); i!=allImages.end(); i++)
-	{
-		if ((*i).second != NULL)
-			(*i).second->update(deltaTime);
-	}
+	foreach(ScreenImage* m, allScreenImages)
+		if (m!=NULL)
+			m->update(deltaTime);
 }
 	
 double ScreenImageMgr::getCallOrder(StelModuleActionName actionName) const
@@ -224,55 +214,58 @@ void ScreenImageMgr::doCreateScreenImage(const QString& id,
 {
 	// First check to see if there is already an image loaded with the
 	// specified ID, and drop it if necessary
-	std::map<QString, ScriptImage*>::iterator it = allImages.find(id);
-	if (it != allImages.end())
+	if (allScreenImages.contains(id))
 		doDeleteImage(id);
 
-	ScriptImage* i = new ScreenScriptImage(filename, x, y, visible);
+	ScreenImage* i = new ScreenScreenImage(filename, x, y, visible);
 	if (i==NULL)
 		return;
 
 	if (visible)
 		i->setFlagShow(true);
 
-	allImages[id] = i;
+	allScreenImages[id] = i;
 	return;
 }
 
 void ScreenImageMgr::doSetImageShow(const QString& id, bool show)
 {
-	std::map<QString, ScriptImage*>::iterator it = allImages.find(id);
-	if (it != allImages.end())
-		if ((*it).second != NULL)
-			return (*it).second->setFlagShow(show);
+	if (allScreenImages.contains(id))
+		if (allScreenImages[id]!=NULL)
+			allScreenImages[id]->setFlagShow(show);
 }
 
 void ScreenImageMgr::doSetImageXY(const QString& id, float x, float y)
 {
-	std::map<QString, ScriptImage*>::iterator it = allImages.find(id);
-	if (it != allImages.end())
-		if ((*it).second != NULL)
-			(*it).second->setXY(x,y);
+	if (allScreenImages.contains(id))
+		if (allScreenImages[id]!=NULL)
+			allScreenImages[id]->setXY(x,y);
 }
 
 void ScreenImageMgr::doDeleteImage(const QString& id)
 {
-	std::map<QString, ScriptImage*>::iterator it = allImages.find(id);
-	if (it != allImages.end())
+	if (allScreenImages.contains(id))
 	{
-		delete (*it).second;
-		(*it).second = NULL;
-		allImages.erase(it);
+		if (allScreenImages[id]!=NULL)
+		{
+			delete allScreenImages[id];
+			allScreenImages[id] = NULL;
+		}
+
+		allScreenImages.remove(id);
 	}
 }
 
 void ScreenImageMgr::doDeleteAllImages(void)
 {
-	for(std::map<QString, ScriptImage*>::iterator i=allImages.begin(); i!=allImages.end(); i++)
+	foreach(ScreenImage* m, allScreenImages)
 	{
-		if ((*i).second != NULL)
-			delete (*i).second;
+		if (m!=NULL)
+		{
+			delete m;
+			m = NULL;
+		}
 	}
-	allImages.clear();
+	allScreenImages.clear();
 }
 
