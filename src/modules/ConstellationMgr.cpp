@@ -424,7 +424,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate
 			// We need 3 stars and the 4th point is deduced from the other to get an normal base
 			// X = B inv(A)
-			Vec3f s4 = s1 + (s2 - s1) ^ (s3 - s1);
+			Vec3f s4 = s1 + ((s2 - s1) ^ (s3 - s1));
 			Mat4f B(s1[0], s1[1], s1[2], 1, s2[0], s2[1], s2[2], 1, s3[0], s3[1], s3[2], 1, s4[0], s4[1], s4[2], 1);
 			Mat4f A(x1, texSizeY - y1, 0.f, 1.f, x2, texSizeY - y2, 0.f, 1.f, x3, texSizeY - y3, 0.f, 1.f, x1, texSizeY - y1, texSizeX, 1.f);
 			Mat4f X = B * A.inverse();
