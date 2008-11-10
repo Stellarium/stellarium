@@ -198,3 +198,20 @@ SkyImageMgr::SkyImageMgrElem::~SkyImageMgrElem()
 		delete tile;
 	tile = NULL;
 }
+
+void SkyImageMgr::showImage(const QString& id, bool b)
+{
+	if (allSkyImages.contains(id))
+		if (allSkyImages[id]!=NULL)
+			allSkyImages[id]->show = b;
+}
+
+bool SkyImageMgr::getShowImage(const QString& id)
+{
+	if (allSkyImages.contains(id))
+		if (allSkyImages[id]!=NULL)
+			return allSkyImages[id]->show;
+	return false;
+}
+
+
