@@ -33,7 +33,7 @@
 #include "MilkyWay.hpp"
 #include "MeteorMgr.hpp"
 #include "LabelMgr.hpp"
-#include "ScriptImageMgr.hpp"
+#include "ScreenImageMgr.hpp"
 #include "StarMgr.hpp"
 #include "SolarSystem.hpp"
 #include "StelIniParser.hpp"
@@ -331,7 +331,7 @@ void StelApp::init()
 	getModuleMgr().registerModule(skyLabels);
 
 	// Scripting images
-	ScriptImageMgr* scriptImages = new ScriptImageMgr();
+	ScreenImageMgr* scriptImages = new ScreenImageMgr();
 	scriptImages->init();
 	getModuleMgr().registerModule(scriptImages);
 

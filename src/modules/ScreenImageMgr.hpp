@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _SCRIPTIMAGEMGR_HPP_
-#define _SCRIPTIMAGEMGR_HPP_
+#ifndef _SCREENIMAGEMGR_HPP_
+#define _SCREENIMAGEMGR_HPP_
 
 
 #include "Fader.hpp"
@@ -83,20 +83,20 @@ private:
 
 };
 
-//! @class ScriptImageMgr
+//! @class ScreenImageMgr
 //! Module for managing images for scripting.  Images are identified by a string ID which is
-//! passed to ScriptImageMgr members when it is necessary to specify an image to work with.
+//! passed to ScreenImageMgr members when it is necessary to specify an image to work with.
 //! Member functions in this class which modify the state of the class are all mediated
 //! through the signal/slot mechanism to ensure such operations happen in the main thread
 //! where images are drawn, and not in the script thread.
-class ScriptImageMgr : public StelModule
+class ScreenImageMgr : public StelModule
 {
 	Q_OBJECT;
 
 public:
 	//! Construct a LabelMgr object.
-	ScriptImageMgr(); 
-	virtual ~ScriptImageMgr();
+	ScreenImageMgr(); 
+	virtual ~ScreenImageMgr();
  
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -138,7 +138,7 @@ public slots:
 	//! Delete an image.
 	//! @param id the ID for the desired image.
 	void deleteImage(const QString& id);
-	//! Delete all images currently managed by ScriptImageMgr.
+	//! Delete all images currently managed by ScreenImageMgr.
 	void deleteAllImages(void);
 	//! Get a list of currently loaded image IDs.
 	QStringList getAllImageIDs(void);
@@ -180,4 +180,4 @@ private:
 	std::map<QString, ScriptImage*> allImages;
 };
 
-#endif // _SCRIPTIMAGEMGR_HPP_
+#endif // _SCREENIMAGEMGR_HPP_
