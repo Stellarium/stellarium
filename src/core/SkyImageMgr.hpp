@@ -69,6 +69,19 @@ public slots:
 	void setFlagShow(bool b) {flagShow = b;}
 	//! Get whether Sky Background should be displayed
 	bool getFlagShow() const {return flagShow;}
+
+	//! Decide to show or not to show an image by it's ID
+	//! @param id the id of the image whose status is to be changed
+	//! @param b the new shown value:
+	//! - true means the specified image will be shown
+	//! - false means the specified image will not be shown
+	void showImage(const QString& id, bool b);
+	//! Get the current shown status of a specified image
+	//! @param id the ID of the image whose status is desired
+	//! @return the current shown status of the specified image:
+	//! - true means the specified image is currently shown
+	//! - false means the specified image is currently not shown
+	bool getShowImage(const QString& id);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Other slots
