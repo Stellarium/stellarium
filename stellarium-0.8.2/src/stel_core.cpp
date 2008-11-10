@@ -596,7 +596,7 @@ bool StelCore::selectObject(const string &type, const string &id)
         std::istringstream istr(id);
         istr >> hpnum;
         selected_object = hip_stars->searchHP(hpnum);
-        asterisms->setSelected(selected_object);
+        //asterisms->setSelected(selected_object);
         setPlanetsSelected("");
 
     }

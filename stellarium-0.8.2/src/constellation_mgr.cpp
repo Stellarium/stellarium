@@ -563,7 +563,23 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 		        }
 		        else
 		        {
-					(*iterStickySelection) = true;
+					if ( (*iterStickySelection) )
+					{
+						(*iterStickySelection) = false;
+    					c->setFlagLines(false);
+						c->setFlagName(false);
+						c->setFlagArt(false);
+						c->setFlagBoundaries(false);	 	
+					}
+					else
+					{
+						//bool q = cc->getFlagLines(); 
+						c->setFlagLines(getFlagLines());
+						c->setFlagName(getFlagNames()); 
+						c->setFlagArt(getFlagArt());
+						c->setFlagBoundaries(getFlagBoundaries());
+					    (*iterStickySelection) = true;									
+					}
 		        }
 			}
         }
