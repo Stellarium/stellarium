@@ -1,27 +1,24 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Stellarium's team
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-22 15:19+0200\n"
+"POT-Creation-Date: 2008-09-28 10:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2008-11-11 09:41+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: src/modules/ConstellationMgr.cpp:376
 #, qt-format
 msgid "Loading Constellation Art: %1/%2"
 msgstr ""
 
-#: src/modules/StarMgr.cpp:257
+#: src/modules/StarMgr.cpp:272
 #, qt-format
 msgid "Loading catalog %1"
 msgstr ""
@@ -492,12 +489,16 @@ msgstr ""
 msgid "Az/Alt: %1/%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:375
+#: src/gui/ConfigurationDialog.cpp:258
+msgid "Select screenshot directory"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:411
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:383
+#: src/gui/ConfigurationDialog.cpp:419
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr ""
@@ -531,7 +532,7 @@ msgstr ""
 msgid "CTRL + Left click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:196
+#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:197
 msgid "Movement and Selection"
 msgstr ""
 
@@ -613,7 +614,7 @@ msgid "{Forums} - discuss Stellarium with other users."
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:214 src/gui/HelpDialog.cpp:303
-#: src/gui/HelpDialog.cpp:305 src/gui/StelGui.cpp:203
+#: src/gui/HelpDialog.cpp:305 src/gui/StelGui.cpp:204
 msgid "Miscellaneous"
 msgstr ""
 
@@ -647,223 +648,227 @@ msgstr ""
 msgid "OSX Developer: %1"
 msgstr ""
 
-#: src/gui/StelGui.cpp:144
+#: src/gui/StelGui.cpp:145
 msgid "Display Options"
 msgstr ""
 
-#: src/gui/StelGui.cpp:145
+#: src/gui/StelGui.cpp:146
 msgid "Constellation lines"
 msgstr ""
 
-#: src/gui/StelGui.cpp:146
+#: src/gui/StelGui.cpp:147
 msgid "Constellation art"
 msgstr ""
 
-#: src/gui/StelGui.cpp:147
+#: src/gui/StelGui.cpp:148
 msgid "Constellation labels"
 msgstr ""
 
-#: src/gui/StelGui.cpp:148
+#: src/gui/StelGui.cpp:149
 msgid "Constellation boundaries"
 msgstr ""
 
-#: src/gui/StelGui.cpp:150 src/ui_viewDialog.h:1002
+#: src/gui/StelGui.cpp:151 src/ui_viewDialog.h:1002
 msgid "Azimutal grid"
 msgstr ""
 
-#: src/gui/StelGui.cpp:151 src/ui_viewDialog.h:1000
+#: src/gui/StelGui.cpp:152 src/ui_viewDialog.h:1000
 msgid "Equatorial grid"
 msgstr ""
 
-#: src/gui/StelGui.cpp:152 src/ui_viewDialog.h:1001
+#: src/gui/StelGui.cpp:153 src/ui_viewDialog.h:1001
 msgid "Equatorial J2000 grid"
 msgstr ""
 
-#: src/gui/StelGui.cpp:153 src/ui_viewDialog.h:1005
+#: src/gui/StelGui.cpp:154 src/ui_viewDialog.h:1005
 msgid "Ecliptic line"
 msgstr ""
 
-#: src/gui/StelGui.cpp:154 src/ui_viewDialog.h:1003
+#: src/gui/StelGui.cpp:155 src/ui_viewDialog.h:1003
 msgid "Equator line"
 msgstr ""
 
-#: src/gui/StelGui.cpp:155 src/ui_viewDialog.h:1004
+#: src/gui/StelGui.cpp:156 src/ui_viewDialog.h:1004
 msgid "Meridian line"
 msgstr ""
 
-#: src/gui/StelGui.cpp:156 src/ui_viewDialog.h:1006
+#: src/gui/StelGui.cpp:157 src/ui_viewDialog.h:1006
 msgid "Cardinal points"
 msgstr ""
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:159
 msgid "Ground"
 msgstr ""
 
-#: src/gui/StelGui.cpp:159 src/ui_viewDialog.h:983
+#: src/gui/StelGui.cpp:160 src/ui_viewDialog.h:983
 msgid "Atmosphere"
 msgstr ""
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:161
 msgid "Fog"
 msgstr ""
 
-#: src/gui/StelGui.cpp:162 src/ui_viewDialog.h:988
+#: src/gui/StelGui.cpp:163 src/ui_viewDialog.h:988
 msgid "Nebulas"
 msgstr ""
 
-#: src/gui/StelGui.cpp:164 src/ui_viewDialog.h:973 src/ui_viewDialog.h:987
+#: src/gui/StelGui.cpp:164
+msgid "Nebulas background images"
+msgstr ""
+
+#: src/gui/StelGui.cpp:165 src/ui_viewDialog.h:973 src/ui_viewDialog.h:987
 msgid "Stars"
 msgstr ""
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:166
 msgid "Planets hints"
 msgstr ""
 
-#: src/gui/StelGui.cpp:167
+#: src/gui/StelGui.cpp:168
 msgid "Night mode"
 msgstr ""
 
-#: src/gui/StelGui.cpp:168
+#: src/gui/StelGui.cpp:169
 msgid "Full-screen mode"
 msgstr ""
 
-#: src/gui/StelGui.cpp:169
+#: src/gui/StelGui.cpp:170
 msgid "Flip scene horizontally"
 msgstr ""
 
-#: src/gui/StelGui.cpp:170
+#: src/gui/StelGui.cpp:171
 msgid "Flip scene vertically"
 msgstr ""
 
-#: src/gui/StelGui.cpp:172
+#: src/gui/StelGui.cpp:173
 msgid "Windows"
 msgstr ""
 
-#: src/gui/StelGui.cpp:173
+#: src/gui/StelGui.cpp:174
 msgid "Help window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:174
+#: src/gui/StelGui.cpp:175
 msgid "Configuration window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:175
+#: src/gui/StelGui.cpp:176
 msgid "Search window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:177
 msgid "Sky and viewing options window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:178
 msgid "Date/time window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:179
 msgid "Location window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:180 src/ui_dateTimeDialogGui.h:294
+#: src/gui/StelGui.cpp:181 src/ui_dateTimeDialogGui.h:294
 msgid "Date and Time"
 msgstr ""
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:182
 msgid "Decrease time speed"
 msgstr ""
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:183
 msgid "Increase time speed"
 msgstr ""
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:184
 msgid "Set normal time rate"
 msgstr ""
 
-#: src/gui/StelGui.cpp:184
+#: src/gui/StelGui.cpp:185
 msgid "Set time to now"
 msgstr ""
 
-#: src/gui/StelGui.cpp:185
+#: src/gui/StelGui.cpp:186
 msgid "Add 1 solar hour"
 msgstr ""
 
-#: src/gui/StelGui.cpp:186
+#: src/gui/StelGui.cpp:187
 msgid "Subtract 1 solar hour"
 msgstr ""
 
-#: src/gui/StelGui.cpp:187
+#: src/gui/StelGui.cpp:188
 msgid "Add 1 solar day"
 msgstr ""
 
-#: src/gui/StelGui.cpp:188
+#: src/gui/StelGui.cpp:189
 msgid "Subtract 1 solar day"
 msgstr ""
 
-#: src/gui/StelGui.cpp:189
+#: src/gui/StelGui.cpp:190
 msgid "Add 1 solar week"
 msgstr ""
 
-#: src/gui/StelGui.cpp:190
+#: src/gui/StelGui.cpp:191
 msgid "Subtract 1 solar week"
 msgstr ""
 
-#: src/gui/StelGui.cpp:191
+#: src/gui/StelGui.cpp:192
 msgid "Add 1 sidereal day"
 msgstr ""
 
-#: src/gui/StelGui.cpp:192
+#: src/gui/StelGui.cpp:193
 msgid "Subtract 1 sidereal day"
 msgstr ""
 
-#: src/gui/StelGui.cpp:193
+#: src/gui/StelGui.cpp:194
 msgid "Add 1 sidereal week"
 msgstr ""
 
-#: src/gui/StelGui.cpp:194
+#: src/gui/StelGui.cpp:195
 msgid "Subtract 1 sidereal week"
 msgstr ""
 
-#: src/gui/StelGui.cpp:197
+#: src/gui/StelGui.cpp:198
 msgid "Center on selected object"
 msgstr ""
 
-#: src/gui/StelGui.cpp:198
+#: src/gui/StelGui.cpp:199
 msgid "Track object"
 msgstr ""
 
-#: src/gui/StelGui.cpp:199
+#: src/gui/StelGui.cpp:200
 msgid "Zoom in on selected object"
 msgstr ""
 
-#: src/gui/StelGui.cpp:200
+#: src/gui/StelGui.cpp:201
 msgid "Zoom out"
 msgstr ""
 
-#: src/gui/StelGui.cpp:201
+#: src/gui/StelGui.cpp:202
 msgid "Set home planet to selected planet"
 msgstr ""
 
-#: src/gui/StelGui.cpp:204
+#: src/gui/StelGui.cpp:205
 msgid "Switch between equatorial and azimuthal mount"
 msgstr ""
 
-#: src/gui/StelGui.cpp:205
+#: src/gui/StelGui.cpp:206
 msgid "Quit"
 msgstr ""
 
-#: src/gui/StelGui.cpp:206
+#: src/gui/StelGui.cpp:207
 msgid "Save screenshot"
 msgstr ""
 
-#: src/gui/StelGui.cpp:209
+#: src/gui/StelGui.cpp:210
 msgid "Auto hide horizontal button bar"
 msgstr ""
 
-#: src/gui/StelGui.cpp:210
+#: src/gui/StelGui.cpp:211
 msgid "Auto hide vertical button bar"
 msgstr ""
 
-#: src/gui/StelGui.cpp:786
+#: src/gui/StelGui.cpp:783
 msgid "Stellarium"
 msgstr ""
 
@@ -1070,7 +1075,7 @@ msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:293 src/ui_helpDialogGui.h:211
 #: src/ui_locationDialogGui.h:384 src/ui_viewDialog.h:964
-#: src/ui_configurationDialog.h:476
+#: src/ui_configurationDialog.h:526
 msgid "Form"
 msgstr ""
 
@@ -1320,182 +1325,195 @@ msgstr ""
 msgid "Starlore"
 msgstr ""
 
-#: src/ui_configurationDialog.h:477
+#: src/ui_configurationDialog.h:527
 msgid "Configuration"
 msgstr ""
 
-#: src/ui_configurationDialog.h:489
+#: src/ui_configurationDialog.h:539
 msgid "Program language"
 msgstr ""
 
-#: src/ui_configurationDialog.h:490
+#: src/ui_configurationDialog.h:540
 msgid "Selected object information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:493
+#: src/ui_configurationDialog.h:543
 msgid "Display all of the information which is available"
 msgstr ""
 
-#: src/ui_configurationDialog.h:496
-msgid "All availalable"
+#: src/ui_configurationDialog.h:546
+msgid "All available"
 msgstr ""
 
-#: src/ui_configurationDialog.h:499
+#: src/ui_configurationDialog.h:549
 msgid "Display only abbreviated information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:502
+#: src/ui_configurationDialog.h:552
 msgid "Short"
 msgstr ""
 
-#: src/ui_configurationDialog.h:503
+#: src/ui_configurationDialog.h:553
 msgid "None"
 msgstr ""
 
-#: src/ui_configurationDialog.h:504
+#: src/ui_configurationDialog.h:554
 msgid "Default options"
 msgstr ""
 
-#: src/ui_configurationDialog.h:505
-msgid "Save current options as default"
+#: src/ui_configurationDialog.h:555
+msgid "Save settings"
 msgstr ""
 
-#: src/ui_configurationDialog.h:506
+#: src/ui_configurationDialog.h:556
+msgid "Restore defaults"
+msgstr ""
+
+#: src/ui_configurationDialog.h:557
 msgid ""
-"Save all the current options including the current FOV and direction of view "
-"for use at next startup."
+"Restoring default settings requires a restart of Stellarium. Saving all the "
+"current options includes the current FOV and direction of view for use at "
+"next startup."
 msgstr ""
 
-#: src/ui_configurationDialog.h:507
+#: src/ui_configurationDialog.h:558
 msgid "Startup FOV: XX"
 msgstr ""
 
-#: src/ui_configurationDialog.h:508
+#: src/ui_configurationDialog.h:559
 msgid "Startup direction of view: xxxx"
 msgstr ""
 
-#: src/ui_configurationDialog.h:509
+#: src/ui_configurationDialog.h:560
 msgid "Main"
 msgstr ""
 
-#: src/ui_configurationDialog.h:510
+#: src/ui_configurationDialog.h:561
 msgid "Control"
 msgstr ""
 
-#: src/ui_configurationDialog.h:513
+#: src/ui_configurationDialog.h:564
 msgid "Allow keyboard to pan and zoom"
 msgstr ""
 
-#: src/ui_configurationDialog.h:516
+#: src/ui_configurationDialog.h:567
 msgid "Enable keyboard navigation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:519
+#: src/ui_configurationDialog.h:570
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:522
+#: src/ui_configurationDialog.h:573
 msgid "Enable mouse navigation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:523
+#: src/ui_configurationDialog.h:574
 msgid "Startup date and time"
 msgstr ""
 
-#: src/ui_configurationDialog.h:526
+#: src/ui_configurationDialog.h:577
 msgid "Starts Stellarium at system clock date and time"
 msgstr ""
 
-#: src/ui_configurationDialog.h:529
+#: src/ui_configurationDialog.h:580
 msgid "System date and time"
 msgstr ""
 
-#: src/ui_configurationDialog.h:532
+#: src/ui_configurationDialog.h:583
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
 
-#: src/ui_configurationDialog.h:535
+#: src/ui_configurationDialog.h:586
 msgid "System date at:"
 msgstr ""
 
-#: src/ui_configurationDialog.h:538
+#: src/ui_configurationDialog.h:589
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr ""
 
-#: src/ui_configurationDialog.h:541
+#: src/ui_configurationDialog.h:592
 msgid "Other:"
 msgstr ""
 
-#: src/ui_configurationDialog.h:542
+#: src/ui_configurationDialog.h:593
 msgid "Navigation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:543
+#: src/ui_configurationDialog.h:594
 msgid "Amateur astronomer options"
 msgstr ""
 
-#: src/ui_configurationDialog.h:546
+#: src/ui_configurationDialog.h:597
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr ""
 
-#: src/ui_configurationDialog.h:549
+#: src/ui_configurationDialog.h:600
 msgid "Show flip buttons"
 msgstr ""
 
-#: src/ui_configurationDialog.h:550
+#: src/ui_configurationDialog.h:601
 msgid "Planetarium options"
 msgstr ""
 
-#: src/ui_configurationDialog.h:553
+#: src/ui_configurationDialog.h:604
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr ""
 
-#: src/ui_configurationDialog.h:556
+#: src/ui_configurationDialog.h:607
 msgid "Spheric mirror distortion"
 msgstr ""
 
-#: src/ui_configurationDialog.h:559
+#: src/ui_configurationDialog.h:610
 msgid "Align labels with the horizon"
 msgstr ""
 
-#: src/ui_configurationDialog.h:562
+#: src/ui_configurationDialog.h:613
 msgid "Gravity labels"
 msgstr ""
 
-#: src/ui_configurationDialog.h:565
+#: src/ui_configurationDialog.h:616
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
 
-#: src/ui_configurationDialog.h:568
+#: src/ui_configurationDialog.h:619
 msgid "Auto zoom out returns to initial direction of view"
 msgstr ""
 
-#: src/ui_configurationDialog.h:571
+#: src/ui_configurationDialog.h:622
 msgid "Mask out everything outside a central circle in the main view"
 msgstr ""
 
-#: src/ui_configurationDialog.h:574
+#: src/ui_configurationDialog.h:625
 msgid "Disc viewport"
 msgstr ""
 
-#: src/ui_configurationDialog.h:575
+#: src/ui_configurationDialog.h:626
+msgid "Sceenshots"
+msgstr ""
+
+#: src/ui_configurationDialog.h:627
+msgid "Screenshot Directory"
+msgstr ""
+
+#: src/ui_configurationDialog.h:629
 msgid "Other"
 msgstr ""
 
-#: src/ui_configurationDialog.h:578
+#: src/ui_configurationDialog.h:632
 msgid "Hides the mouse cursor when inactive"
 msgstr ""
 
-#: src/ui_configurationDialog.h:581
+#: src/ui_configurationDialog.h:635
 msgid "Mouse cursor timeout (seconds):"
 msgstr ""
 
-#: src/ui_configurationDialog.h:582
+#: src/ui_configurationDialog.h:636
 msgid "Tools"
 msgstr ""
