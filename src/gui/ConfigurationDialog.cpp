@@ -368,6 +368,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	// configuration dialog / main tab
 	QString langName = StelApp::getInstance().getLocaleMgr().getAppLanguage();
 	conf->setValue("localization/app_locale", Translator::nativeNameToIso639_1Code(langName));
+	langName = StelApp::getInstance().getLocaleMgr().getSkyLanguage();
+	conf->setValue("localization/sky_locale", Translator::nativeNameToIso639_1Code(langName));
 
 	if (gui->getInfoPanel()->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
 		conf->setValue("gui/selected_object_info", "none");
