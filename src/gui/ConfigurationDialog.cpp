@@ -91,22 +91,6 @@ void ConfigurationDialog::createDialogContent()
 	
 	// Main tab
 	// Fill the language list widget from the available list
-// 	QListWidget* c = ui->programLanguageListWidget;
-// 	c->clear();
-// 	c->addItems(Translator::globalTranslator.getAvailableLanguagesNamesNative(StelApp::getInstance().getFileMgr().getLocaleDir()));
-// 	
-// 	QString l = Translator::iso639_1CodeToNativeName(appLang);
-// 	QList<QListWidgetItem*> litem = c->findItems(l, Qt::MatchExactly);
-// 	if (litem.empty() && appLang.contains('_'))
-// 	{
-// 		l = appLang.left(appLang.indexOf('_'));
-// 		l=Translator::iso639_1CodeToNativeName(l);
-// 		litem = c->findItems(l, Qt::MatchExactly);
-// 	}
-// 	if (!litem.empty())
-// 		c->setCurrentItem(litem.at(0));
-// 	connect(c, SIGNAL(currentTextChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
-
 	QString appLang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
 	QComboBox* cb = ui->programLanguageComboBox;
 	cb->clear();
@@ -207,8 +191,10 @@ void ConfigurationDialog::createDialogContent()
 
 void ConfigurationDialog::languageChanged(const QString& langName)
 {
-	StelApp::getInstance().getLocaleMgr().setAppLanguage(Translator::nativeNameToIso639_1Code(langName));
-	StelApp::getInstance().getLocaleMgr().setSkyLanguage(Translator::nativeNameToIso639_1Code(langName));
+	QString code = Translator::nativeNameToIso639_1Code(langName);
+	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
+	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
+	updateConfigLabels();
 }
 
 void ConfigurationDialog::setStartupTimeMode(void)

@@ -7,252 +7,253 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-22 15:19+0200\n"
-"PO-Revision-Date: 2008-09-07 12:37+0000\n"
-"Last-Translator: Fehim Koylu <fehimkoylu@erciyes.edu.tr>\n"
+"POT-Creation-Date: 2008-09-28 10:37+0200\n"
+"PO-Revision-Date: 2008-11-07 22:00+0000\n"
+"Last-Translator: kemalt <Unknown>\n"
 "Language-Team: <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-09-22 12:17+0000\n"
+"X-Launchpad-Export-Date: 2008-11-11 09:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/ui_locationDialogGui.h:411
-msgid " m"
-msgstr ""
-
-#: src/gui/StelGuiItems.cpp:432
-#, no-c-format, qt-format
-msgid "%1m"
-msgstr ""
-
-#: src/modules/LandscapeMgr.cpp:441
+#: src/modules/ConstellationMgr.cpp:376
 #, qt-format
-msgid ", %1 m"
-msgstr ""
+msgid "Loading Constellation Art: %1/%2"
+msgstr "Takımyıldızı Görselleri Yükleniyor: %1/%2"
 
-#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
-msgid "/"
-msgstr ""
-
-#: src/ui_viewDialog.h:992
-msgid "0"
-msgstr ""
-
-#: src/ui_viewDialog.h:993
-msgid "10"
-msgstr ""
-
-#: src/ui_viewDialog.h:995
-msgid "10000"
-msgstr ""
-
-#: src/ui_viewDialog.h:996
-msgid "144000"
-msgstr ""
-
-#: src/ui_viewDialog.h:994
-msgid "80"
-msgstr ""
-
-#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
-msgid ":"
-msgstr ""
-
-#: src/ui_helpDialogGui.h:215
-msgid "About"
-msgstr ""
-
-#: src/modules/Planet.cpp:133 src/modules/StarWrapper.cpp:102
+#: src/modules/StarMgr.cpp:272
 #, qt-format
-msgid "Absolute Magnitude: %1"
-msgstr ""
-
-#: src/ui_viewDialog.h:974
-msgid "Absolute scale:"
-msgstr ""
-
-#: src/modules/TextUI.cpp:86
-msgid "Actual Time"
-msgstr "Şu anki zaman"
-
-#: src/gui/StelGui.cpp:191
-msgid "Add 1 sidereal day"
-msgstr ""
-
-#: src/gui/StelGui.cpp:193
-msgid "Add 1 sidereal week"
-msgstr ""
-
-#: src/gui/StelGui.cpp:187
-msgid "Add 1 solar day"
-msgstr ""
-
-#: src/gui/StelGui.cpp:185
-msgid "Add 1 solar hour"
-msgstr ""
-
-#: src/gui/StelGui.cpp:189
-msgid "Add 1 solar week"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:392
-msgid "Add to list"
-msgstr ""
-
-#: src/modules/TextUI.cpp:70
-msgid "Administration "
-msgstr "Yönetim "
-
-#: src/ui_configurationDialog.h:559
-msgid "Align labels with the horizon"
-msgstr ""
-
-#: src/ui_configurationDialog.h:496
-msgid "All availalable"
-msgstr ""
-
-#: src/ui_configurationDialog.h:513
-msgid "Allow keyboard to pan and zoom"
-msgstr ""
-
-#: src/ui_configurationDialog.h:519
-msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr ""
-
-#: src/modules/TextUI.cpp:75
-msgid "Altitude (m): "
-msgstr "Rakım (m): "
-
-#: src/ui_locationDialogGui.h:405
-msgid "Altitude:"
-msgstr ""
-
-#: src/ui_configurationDialog.h:543
-msgid "Amateur astronomer options"
-msgstr ""
-
-#: src/modules/Planet.cpp:144
-#, qt-format
-msgid "Apparent diameter: %1"
-msgstr ""
-
-#: src/modules/TextUI.cpp:136
-msgid "Arrow down to load list."
-msgstr "Listeyi görüntülemek için aşağı yön tuşuna basın."
-
-#: src/gui/HelpDialog.cpp:52
-msgid "Arrow keys & left mouse drag"
-msgstr ""
-
-#: src/ui_viewDialog.h:1012
-msgid "Art brightness: "
-msgstr ""
-
-#: src/gui/StelGui.cpp:159 src/ui_viewDialog.h:983
-msgid "Atmosphere"
-msgstr ""
+msgid "Loading catalog %1"
+msgstr "katalog %1 yükleniyor"
 
 #: src/modules/LandscapeMgr.cpp:433
 msgid "Author: "
 msgstr "Yazar: "
 
-#: src/gui/StelGui.cpp:209
-msgid "Auto hide horizontal button bar"
-msgstr ""
+#: src/modules/LandscapeMgr.cpp:436
+msgid "Location: "
+msgstr "Konum: "
 
-#: src/gui/StelGui.cpp:210
-msgid "Auto hide vertical button bar"
-msgstr ""
-
-#: src/ui_configurationDialog.h:568
-msgid "Auto zoom out returns to initial direction of view"
-msgstr ""
-
-#: src/core/StelObject.cpp:100
+#: src/modules/LandscapeMgr.cpp:441
 #, qt-format
-msgid "Az/Alt: %1/%2"
-msgstr ""
+msgid ", %1 m"
+msgstr ", %1 metre"
 
-#: src/gui/StelGui.cpp:150 src/ui_viewDialog.h:1002
-msgid "Azimutal grid"
-msgstr ""
+#: src/modules/LandscapeMgr.cpp:444
+msgid "Planet: "
+msgstr "Gezegen: "
 
-#: src/modules/TextUI.cpp:113
-msgid "Azimuthal Grid"
-msgstr "Azimutal İzdüşüm"
+#: src/modules/Nebula.cpp:93
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr "Türü: <b>%1</b>"
 
-#: src/modules/TextUI.cpp:134
-msgid "CD/DVD Script: "
-msgstr "CD/DVD Betikleri: "
+#: src/modules/Nebula.cpp:96 src/modules/Planet.cpp:130
+#, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr "Kadir: <b>%1</b>"
 
-#: src/gui/HelpDialog.cpp:57
-msgid "CTRL + Left click"
-msgstr ""
+#: src/modules/Nebula.cpp:101
+#, qt-format
+msgid "Size: %1"
+msgstr "Boyut: %1"
 
-#: src/gui/HelpDialog.cpp:54
-msgid "CTRL + Up/Down"
-msgstr ""
+#: src/modules/Nebula.cpp:237
+msgid "Galaxy"
+msgstr "Gökada"
 
-#: src/modules/TextUI.cpp:82
-msgid "Calendar"
-msgstr "Takvim"
+#: src/modules/Nebula.cpp:240
+msgid "Open cluster"
+msgstr "Açık yıldız kümesi"
 
-#: src/translations.h:45
-msgid "Callisto"
-msgstr "Callisto"
+#: src/modules/Nebula.cpp:243
+msgid "Globular cluster"
+msgstr "Küresel yıldız kümesi"
 
-#: src/modules/TextUI.cpp:108
-msgid "Cardinal Points"
-msgstr "Ana Yönler"
+#: src/modules/Nebula.cpp:246
+msgid "Nebula"
+msgstr "Bulutsu"
 
-#: src/gui/StelGui.cpp:156 src/ui_viewDialog.h:1006
-msgid "Cardinal points"
-msgstr ""
-
-#: src/ui_viewDialog.h:999
-msgid "Celestial Sphere"
-msgstr ""
-
-#: src/gui/StelGui.cpp:197
-msgid "Center on selected object"
-msgstr ""
-
-#: src/translations.h:59
-msgid "Charon"
-msgstr "Kharon"
-
-#: src/translations.h:69
-msgid "Chinese"
-msgstr "Çin"
-
-#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
-msgid "Clear selection"
-msgstr "Seçimi temizle"
+#: src/modules/Nebula.cpp:249
+msgid "Planetary nebula"
+msgstr "Gezegenimsi bulutsu"
 
 #: src/modules/Nebula.cpp:252
 msgid "Cluster associated with nebulosity"
 msgstr ""
 
+#: src/modules/Nebula.cpp:255
+msgid "Unknown"
+msgstr "Bilinmeyen"
+
+#: src/modules/Nebula.cpp:258
+msgid "Undocumented type"
+msgstr "belgelenmemiş tip"
+
+#: src/modules/NebulaMgr.cpp:372
+#, qt-format
+msgid "Loading NGC catalog: %1/%2"
+msgstr "NGC kataloğu: %1/%2 yükleniyor"
+
+#: src/modules/Planet.cpp:133 src/modules/StarWrapper.cpp:102
+#, qt-format
+msgid "Absolute Magnitude: %1"
+msgstr "Mutlak Kadir: %1"
+
+#: src/modules/Planet.cpp:140
+#, no-c-format, qt-format
+msgid "Distance: %1AU"
+msgstr "Uzaklık: %1 GB"
+
+#: src/modules/Planet.cpp:144
+#, qt-format
+msgid "Apparent diameter: %1"
+msgstr "Görünürdeki Çap: %1"
+
+#: src/modules/StarWrapper.cpp:41 src/modules/StarWrapper.cpp:98
+#, qt-format
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr "Kadir: <b>%1</b> (B-V: %2)"
+
+#: src/modules/StarWrapper.cpp:108
+#, qt-format
+msgid "Spectral Type: %1"
+msgstr "Tayf Örneği: %1"
+
+#: src/modules/StarWrapper.cpp:112
+#, qt-format
+msgid "Distance: %1 Light Years"
+msgstr "Uzaklık: %1 Işık Yılı"
+
+#: src/modules/StarWrapper.cpp:115
+#, qt-format
+msgid "Parallax: %1\""
+msgstr "Iraklık açısı: %1\""
+
+#: src/modules/TextUI.cpp:63
+msgid "Set Location "
+msgstr "Konumu Ayarla "
+
+#: src/modules/TextUI.cpp:64
+msgid "Set Time "
+msgstr "Saati Ayarla "
+
+#: src/modules/TextUI.cpp:65
+msgid "General "
+msgstr "Genel "
+
+#: src/modules/TextUI.cpp:66
+msgid "Stars "
+msgstr "Yıldızlar "
+
 #: src/modules/TextUI.cpp:67
 msgid "Colors "
 msgstr "Renkler "
 
-#: src/ui_configurationDialog.h:477
-msgid "Configuration"
-msgstr "Yapılandırma"
+#: src/modules/TextUI.cpp:68
+msgid "Effects "
+msgstr "Efektler "
 
-#: src/gui/StelGui.cpp:174
-msgid "Configuration window"
+#: src/modules/TextUI.cpp:69
+msgid "Scripts "
+msgstr "Betikler "
+
+#: src/modules/TextUI.cpp:70
+msgid "Administration "
+msgstr "Yönetim "
+
+#: src/modules/TextUI.cpp:73
+msgid "Latitude: "
+msgstr "Enlem: "
+
+#: src/modules/TextUI.cpp:74
+msgid "Longitude: "
+msgstr "Boylam: "
+
+#: src/modules/TextUI.cpp:75
+msgid "Altitude (m): "
+msgstr "Rakım (m): "
+
+#: src/modules/TextUI.cpp:76
+msgid "Solar System Body: "
+msgstr "Güneş Sistemi Gezegeni: "
+
+#: src/modules/TextUI.cpp:79
+msgid "Sky Time: "
+msgstr "Gök Zamanı: "
+
+#: src/modules/TextUI.cpp:80
+msgid "Set Time Zone: "
+msgstr "Zaman Dilimini Ayarla: "
+
+#: src/modules/TextUI.cpp:81
+msgid "Day keys: "
+msgstr "Gün Anahtarı "
+
+#: src/modules/TextUI.cpp:82
+msgid "Calendar"
+msgstr "Takvim"
+
+#: src/modules/TextUI.cpp:83
+msgid "Sidereal"
+msgstr "Yıldız"
+
+#: src/modules/TextUI.cpp:84
+msgid "Preset Sky Time: "
+msgstr "Gök Zamanını Ayarla: "
+
+#: src/modules/TextUI.cpp:85
+msgid "Sky Time At Start-up: "
+msgstr "Açılışta Gök Zamanı: "
+
+#: src/modules/TextUI.cpp:86
+msgid "Actual Time"
+msgstr "Şu anki zaman"
+
+#: src/modules/TextUI.cpp:87
+msgid "Preset Time"
+msgstr "Saati Ayarla"
+
+#: src/modules/TextUI.cpp:88
+msgid "Time Display Format: "
+msgstr "Zaman Gösterim Biçimi: "
+
+#: src/modules/TextUI.cpp:89
+msgid "Date Display Format: "
+msgstr "Tarih Gösterim Biçimi: "
+
+#: src/modules/TextUI.cpp:92
+msgid "Sky Culture: "
+msgstr "Gök Kültürü: "
+
+#: src/modules/TextUI.cpp:93
+msgid "Sky Language: "
+msgstr "Gök Dili: "
+
+#: src/modules/TextUI.cpp:96
+msgid "Show: "
+msgstr "Göster: "
+
+#: src/modules/TextUI.cpp:97
+msgid "Star Value Multiplier: "
+msgstr "Yıldız Değeri Çarpanı: "
+
+#: src/modules/TextUI.cpp:98
+msgid "Magnitude Sizing Multiplier: "
+msgstr "Kadir Numarası Çarpanı: "
+
+#: src/modules/TextUI.cpp:99
+msgid "Maximum Magnitude to Label: "
+msgstr "En Yüksek Kadir Oranı: "
+
+#: src/modules/TextUI.cpp:100
+msgid "Twinkling: "
+msgstr "Pırıldama: "
+
+#: src/modules/TextUI.cpp:101
+msgid "Limiting Magnitude: "
 msgstr ""
-
-#: src/modules/TextUI.cpp:106
-msgid "Constellation Art Intensity"
-msgstr "Takımyıldızı Göstergesi Yoğunluğu"
-
-#: src/modules/TextUI.cpp:107
-msgid "Constellation Boundaries"
-msgstr "Takımyıldızı Sınırları"
 
 #: src/modules/TextUI.cpp:104
 msgid "Constellation Lines"
@@ -262,636 +263,17 @@ msgstr "Takımyıldızı Çizgileri"
 msgid "Constellation Names"
 msgstr "Takımyıldızı Adları"
 
-#: src/gui/StelGui.cpp:146
-msgid "Constellation art"
-msgstr ""
-
-#: src/gui/StelGui.cpp:148
-msgid "Constellation boundaries"
-msgstr ""
-
-#: src/gui/StelGui.cpp:147
-msgid "Constellation labels"
-msgstr ""
-
-#: src/gui/StelGui.cpp:145
-msgid "Constellation lines"
-msgstr ""
-
-#: src/ui_viewDialog.h:1007
-msgid "Constellations"
-msgstr ""
-
-#: src/ui_configurationDialog.h:510
-msgid "Control"
-msgstr ""
-
-#: src/modules/TextUI.cpp:130
-msgid "Correct for light travel time: "
-msgstr ""
-
-#: src/ui_locationDialogGui.h:413
-msgid "Country:"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:389
-msgid "Current location information"
-msgstr ""
-
-#: src/modules/TextUI.cpp:129
-msgid "Cursor Timeout: "
-msgstr "İmleç Gecikmesi: "
-
-#: src/core/MappingClasses.cpp:223
-msgid "Cylinder"
-msgstr ""
-
-#: src/modules/TextUI.cpp:89
-msgid "Date Display Format: "
-msgstr "Tarih Gösterim Biçimi: "
-
-#: src/gui/StelGui.cpp:180 src/ui_dateTimeDialogGui.h:294
-msgid "Date and Time"
-msgstr ""
-
-#: src/gui/StelGui.cpp:177
-msgid "Date/time window"
-msgstr ""
-
-#: src/modules/TextUI.cpp:81
-msgid "Day keys: "
-msgstr "Gün Anahtarı "
-
-#: src/gui/StelGui.cpp:181
-msgid "Decrease time speed"
-msgstr ""
-
-#: src/ui_configurationDialog.h:504
-msgid "Default options"
-msgstr ""
-
-#: src/translations.h:39
-msgid "Deimos"
-msgstr "Deimos"
-
-#: src/ui_locationDialogGui.h:391
-msgid "Delete"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:274 src/gui/HelpDialog.cpp:276
-#: src/gui/HelpDialog.cpp:279
-#, qt-format
-msgid "Developer: %1"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:272
-msgid "Developers"
-msgstr ""
-
-#: src/ui_viewDialog.h:979
-msgid "Dim faint stars when a very bright object is visible"
-msgstr ""
-
-#: src/translations.h:50
-msgid "Dione"
-msgstr "Dione"
-
-#: src/ui_configurationDialog.h:574
-msgid "Disc viewport"
-msgstr ""
-
-#: src/gui/StelGui.cpp:144
-msgid "Display Options"
-msgstr ""
-
-#: src/ui_configurationDialog.h:493
-msgid "Display all of the information which is available"
-msgstr ""
-
-#: src/ui_configurationDialog.h:499
-msgid "Display only abbreviated information"
-msgstr ""
-
-#: src/modules/StarWrapper.cpp:112
-#, qt-format
-msgid "Distance: %1 Light Years"
-msgstr ""
-
-#: src/modules/Planet.cpp:140
-#, no-c-format, qt-format
-msgid "Distance: %1AU"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:277
-#, qt-format
-msgid "Doc author/developer: %1"
-msgstr ""
-
-#: src/ui_viewDialog.h:982
-msgid "Dynamic eye adaptation"
-msgstr ""
-
-#: src/translations.h:65
-msgid "E"
-msgstr "D"
-
-#: src/translations.h:36
-msgid "Earth"
-msgstr "Dünya"
-
-#: src/modules/TextUI.cpp:116
-msgid "Ecliptic Line"
-msgstr "Yörünge Çizgisi"
-
-#: src/gui/StelGui.cpp:153 src/ui_viewDialog.h:1005
-msgid "Ecliptic line"
-msgstr ""
-
-#: src/modules/TextUI.cpp:68
-msgid "Effects "
-msgstr "Efektler "
-
-#: src/translations.h:70
-msgid "Egyptian"
-msgstr "Mısır"
-
-#: src/ui_configurationDialog.h:516
-msgid "Enable keyboard navigation"
-msgstr ""
-
-#: src/ui_configurationDialog.h:522
-msgid "Enable mouse navigation"
-msgstr ""
-
-#: src/translations.h:48
-msgid "Enceladus"
-msgstr "Enceladus"
-
-#: src/ui_locationDialogGui.h:408
-msgid "Enter the altitude in meter"
-msgstr ""
-
-#: src/core/MappingClasses.cpp:77
-msgid "Equal Area"
-msgstr ""
-
-#: src/modules/TextUI.cpp:115
-msgid "Equator Line"
-msgstr "Ekvator Çizgisi"
-
-#: src/gui/StelGui.cpp:154 src/ui_viewDialog.h:1003
-msgid "Equator line"
-msgstr ""
-
-#: src/modules/TextUI.cpp:114
-msgid "Equatorial Grid"
-msgstr "Ekvatoral İzdüşüm"
-
-#: src/gui/StelGui.cpp:152 src/ui_viewDialog.h:1001
-msgid "Equatorial J2000 grid"
-msgstr ""
-
-#: src/gui/StelGui.cpp:151 src/ui_viewDialog.h:1000
-msgid "Equatorial grid"
-msgstr ""
-
-#: src/translations.h:43
-msgid "Europa"
-msgstr "Europa"
-
-#: src/gui/ViewDialog.cpp:418
-msgid "Exceptional Leonid rate"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:199 src/ui_searchDialogGui.h:200
-msgid "Find Object"
-msgstr ""
-
-#: src/core/MappingClasses.cpp:178
-msgid "Fish-eye"
-msgstr "Balık-gözü mercek"
-
-#: src/gui/StelGui.cpp:169
-msgid "Flip scene horizontally"
-msgstr ""
-
-#: src/gui/StelGui.cpp:170
-msgid "Flip scene vertically"
-msgstr ""
-
-#: src/gui/StelGui.cpp:160
-msgid "Fog"
-msgstr "Sis"
-
-#: src/ui_dateTimeDialogGui.h:293 src/ui_helpDialogGui.h:211
-#: src/ui_locationDialogGui.h:384 src/ui_viewDialog.h:964
-#: src/ui_configurationDialog.h:476
-msgid "Form"
-msgstr ""
-
-#: src/gui/StelGui.cpp:168
-msgid "Full-screen mode"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:147
-msgid "Further Reading"
-msgstr ""
-
-#: src/modules/Nebula.cpp:237
-msgid "Galaxy"
-msgstr "Galaksi"
-
-#: src/translations.h:44
-msgid "Ganymede"
-msgstr "Ganymede"
-
-#: src/modules/TextUI.cpp:65
-msgid "General "
-msgstr "Genel "
-
-#: src/modules/Nebula.cpp:243
-msgid "Globular cluster"
-msgstr "Dairesel yıldız kümesi"
-
-#: src/gui/HelpDialog.cpp:275
-#, qt-format
-msgid "Graphic/other designer: %1"
-msgstr ""
-
-#: src/ui_configurationDialog.h:562
-msgid "Gravity labels"
-msgstr ""
-
-#: src/gui/StelGui.cpp:158
-msgid "Ground"
-msgstr "Yeryüzü"
-
-#: src/ui_helpDialogGui.h:212 src/ui_helpDialogGui.h:214
-msgid "Help"
-msgstr "Yardım"
-
-#: src/gui/StelGui.cpp:173
-msgid "Help window"
-msgstr ""
-
-#: src/ui_configurationDialog.h:578
-msgid "Hides the mouse cursor when inactive"
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:421
-msgid "Highest rate ever (1966 Leonids)"
-msgstr ""
-
-#: src/core/StelObject.cpp:89
-#, qt-format
-msgid "Hour angle/DE: %1/%2"
-msgstr ""
-
-#: src/ui_viewDialog.h:991
-msgid "Hourly zenith rate:"
-msgstr ""
-
-#: src/translations.h:53
-msgid "Hyperion"
-msgstr "Hyperion"
-
-#: src/translations.h:54
-msgid "Iapetus"
-msgstr "Iapetus"
-
-#: src/core/MappingClasses.cpp:183
-msgid ""
-"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
-"lines become curves when they appear a large angular distance from the "
-"centre of the field of view (like the distortions seen with very wide angle "
-"camera lenses)."
-msgstr ""
-
-#: src/gui/StelGui.cpp:182
-msgid "Increase time speed"
-msgstr ""
-
-#: src/translations.h:71
-msgid "Inuit"
-msgstr "Eskimo"
-
-#: src/translations.h:42
-msgid "Io"
-msgstr "Io"
-
-#: src/translations.h:41
-msgid "Jupiter"
-msgstr "Jüpiter"
-
-#: src/gui/HelpDialog.cpp:139
-msgid "Keys"
-msgstr ""
-
-#: src/translations.h:72
-msgid "Korean"
-msgstr "Kore"
-
-#: src/ui_viewDialog.h:986
-msgid "Labels and Markers"
-msgstr ""
-
-#: src/translations.h:73
-msgid "Lakota"
-msgstr "Lakota (Kuzey Amerika yerlileri)"
-
-#: src/ui_viewDialog.h:1020
-msgid "Landscape"
-msgstr ""
-
-#: src/modules/TextUI.cpp:122
-msgid "Landscape: "
-msgstr "Yeryüzü Şekli: "
-
-#: src/ui_locationDialogGui.h:393
-msgid "Latitude:"
-msgstr ""
-
-#: src/modules/TextUI.cpp:73
-msgid "Latitude: "
-msgstr "Enlem: "
-
-#: src/gui/HelpDialog.cpp:55
-msgid "Left click"
-msgstr ""
-
-#: src/modules/TextUI.cpp:121
-msgid "Light Pollution Luminance: "
-msgstr "Işık Kirliliği Parlaklığı: "
-
-#: src/ui_viewDialog.h:985
-msgid "Light pollution: "
-msgstr ""
-
-#: src/modules/TextUI.cpp:101
-msgid "Limiting Magnitude: "
-msgstr ""
-
-#: src/modules/TextUI.cpp:140
-msgid "Load Default Configuration: "
-msgstr "Öntanımlı Yapılandırmayı Yükle: "
-
-#: src/modules/ConstellationMgr.cpp:376
-#, qt-format
-msgid "Loading Constellation Art: %1/%2"
-msgstr "Takımyıldızı Göstergesi Yükleniyor: %1/%2"
-
-#: src/modules/NebulaMgr.cpp:372
-#, qt-format
-msgid "Loading NGC catalog: %1/%2"
-msgstr ""
-
-#: src/modules/StarMgr.cpp:257
-#, qt-format
-msgid "Loading catalog %1"
-msgstr "%1 kataloğu yükleniyor"
-
-#: src/modules/TextUI.cpp:133
-msgid "Local Script: "
-msgstr "Yerel Betik: "
-
-#: src/ui_locationDialogGui.h:385
-msgid "Location"
-msgstr "Konum"
-
-#: src/gui/StelGui.cpp:178
-msgid "Location window"
-msgstr ""
-
-#: src/modules/LandscapeMgr.cpp:436
-msgid "Location: "
-msgstr "Konum: "
-
-#: src/ui_locationDialogGui.h:399
-msgid "Longitude:"
-msgstr ""
-
-#: src/modules/TextUI.cpp:74
-msgid "Longitude: "
-msgstr "Boylam: "
-
-#: src/modules/TextUI.cpp:125
-msgid "Magnitude Scaling Multiplier: "
-msgstr "Kadir Ölçekleme Çarpanı: "
-
-#: src/modules/TextUI.cpp:98
-msgid "Magnitude Sizing Multiplier: "
-msgstr "Kadir Numarası Çarpanı: "
-
-#: src/modules/Nebula.cpp:96 src/modules/Planet.cpp:130
-#, qt-format
-msgid "Magnitude: <b>%1</b>"
-msgstr ""
-
-#: src/modules/StarWrapper.cpp:41 src/modules/StarWrapper.cpp:98
-#, qt-format
-msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr ""
-
-#: src/ui_configurationDialog.h:509
-msgid "Main"
-msgstr ""
-
-#: src/modules/TextUI.cpp:123
-msgid "Manual zoom: "
-msgstr "Elle büyütme: "
-
-#: src/ui_viewDialog.h:1014
-msgid "Markings"
-msgstr ""
-
-#: src/translations.h:38
-msgid "Mars"
-msgstr "Mars"
-
-#: src/ui_configurationDialog.h:571
-msgid "Mask out everything outside a central circle in the main view"
-msgstr ""
-
-#: src/core/Mapping.cpp:28
-msgid "Maximum FOV: "
-msgstr "Azami görüş alanı: "
-
-#: src/modules/TextUI.cpp:99
-msgid "Maximum Magnitude to Label: "
-msgstr "En Yüksek Kadir Oranı: "
-
-#: src/modules/TextUI.cpp:127
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "En Yüksek Bulutsu Kadir Oranı: "
-
-#: src/core/MappingClasses.cpp:278
-msgid "Mercator"
-msgstr ""
-
-#: src/translations.h:34
-msgid "Mercury"
-msgstr "Merkür"
-
-#: src/modules/TextUI.cpp:112
-msgid "Meridian Line"
-msgstr "Meridyan Çizgisi"
-
-#: src/gui/StelGui.cpp:155 src/ui_viewDialog.h:1004
-msgid "Meridian line"
-msgstr ""
-
-#: src/modules/TextUI.cpp:126
-msgid "Milky Way intensity: "
-msgstr "Samanyolu Yoğunluğu: "
-
-#: src/translations.h:47
-msgid "Mimas"
-msgstr "Mimas"
-
-#: src/gui/HelpDialog.cpp:214 src/gui/HelpDialog.cpp:303
-#: src/gui/HelpDialog.cpp:305 src/gui/StelGui.cpp:203
-msgid "Miscellaneous"
-msgstr ""
-
-#: src/translations.h:37
-msgid "Moon"
-msgstr "Ay"
-
-#: src/ui_configurationDialog.h:581
-msgid "Mouse cursor timeout (seconds):"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:196
-msgid "Movement and Selection"
-msgstr "Seçme ve taşıma"
-
-#: src/translations.h:63
-msgid "N"
-msgstr "K"
-
-#: src/ui_locationDialogGui.h:412
-msgid "Name/City:"
-msgstr ""
-
-#: src/translations.h:74
-msgid "Navajo"
-msgstr "Navajo"
-
-#: src/ui_configurationDialog.h:542
-msgid "Navigation"
-msgstr ""
-
-#: src/modules/Nebula.cpp:246
-msgid "Nebula"
-msgstr "Bulutsu"
-
-#: src/modules/TextUI.cpp:118
-msgid "Nebula Circles"
-msgstr "Bulutsu Çemberleri"
-
-#: src/modules/TextUI.cpp:117
-msgid "Nebula Names"
-msgstr "Bulutsu Adları"
-
-#: src/gui/StelGui.cpp:162 src/ui_viewDialog.h:988
-msgid "Nebulas"
-msgstr ""
-
-#: src/translations.h:56
-msgid "Neptune"
-msgstr "Neptün"
-
-#: src/gui/StelGui.cpp:167
-msgid "Night mode"
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:345
-msgid "No description"
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:409
-msgid "No shooting stars"
-msgstr ""
-
-#: src/ui_configurationDialog.h:503
-msgid "None"
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:412
-msgid "Normal rate"
-msgstr ""
-
-#: src/translations.h:75
-msgid "Norse"
-msgstr "Viking"
-
-#: src/gui/HelpDialog.cpp:278
-#, qt-format
-msgid "OSX Developer: %1"
-msgstr ""
-
-#: src/modules/TextUI.cpp:124
-msgid "Object Sizing Rule: "
-msgstr "Cisim Boyutlama Kuralı: "
-
-#: src/modules/Nebula.cpp:240
-msgid "Open cluster"
-msgstr "Açık yıldız kümesi"
-
-#: src/ui_viewDialog.h:1015 src/ui_viewDialog.h:1021
-msgid "Options"
-msgstr ""
-
-#: src/core/MappingClasses.cpp:336
-msgid "Orthographic"
-msgstr ""
-
-#: src/core/MappingClasses.cpp:341
-msgid ""
-"Orthographic projection is related to perspective projection, but the point "
-"of perspective is set to an infinite distance."
-msgstr ""
-
-#: src/ui_configurationDialog.h:575
-msgid "Other"
-msgstr ""
-
-#: src/ui_configurationDialog.h:541
-msgid "Other:"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:53
-msgid "Page Up/Down"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:61
-msgid "Pan view around the sky"
-msgstr ""
-
-#: src/modules/StarWrapper.cpp:115
-#, qt-format
-msgid "Parallax: %1\""
-msgstr ""
-
-#: src/core/MappingClasses.cpp:11
-msgid "Perspective"
-msgstr ""
-
-#: src/core/MappingClasses.cpp:16
-msgid ""
-"Perspective projection keeps the horizon a straight line. The mathematical "
-"name for this projection method is <i>gnomonic projection</i>."
-msgstr ""
-"Perspektif izdüşümü ufku düz bir çizgi konumunda tutar. Bu izdüşümün "
-"matematiksel ingilizce adı <i>gnomonic projection</i>'dır."
-
-#: src/translations.h:40
-msgid "Phobos"
-msgstr "Phobos"
-
-#: src/translations.h:55
-msgid "Phoebe"
-msgstr "Phoebe"
+#: src/modules/TextUI.cpp:106
+msgid "Constellation Art Intensity"
+msgstr "Takımyıldızı Göstergesi Yoğunluğu"
+
+#: src/modules/TextUI.cpp:107
+msgid "Constellation Boundaries"
+msgstr "Takımyıldızı Sınırları"
+
+#: src/modules/TextUI.cpp:108
+msgid "Cardinal Points"
+msgstr "Ana Yönler"
 
 #: src/modules/TextUI.cpp:109
 msgid "Planet Names"
@@ -905,351 +287,137 @@ msgstr "Gezegen Yörüngeleri"
 msgid "Planet Trails"
 msgstr "Gezegen İzleri"
 
-#: src/ui_locationDialogGui.h:414
-msgid "Planet:"
+#: src/modules/TextUI.cpp:112
+msgid "Meridian Line"
+msgstr "Meridyan Çizgisi"
+
+#: src/modules/TextUI.cpp:113
+msgid "Azimuthal Grid"
+msgstr "Azimutal İzdüşüm"
+
+#: src/modules/TextUI.cpp:114
+msgid "Equatorial Grid"
+msgstr "Ekvatoral İzdüşüm"
+
+#: src/modules/TextUI.cpp:115
+msgid "Equator Line"
+msgstr "Ekvator Çizgisi"
+
+#: src/modules/TextUI.cpp:116
+msgid "Ecliptic Line"
+msgstr "Yörünge Çizgisi"
+
+#: src/modules/TextUI.cpp:117
+msgid "Nebula Names"
+msgstr "Bulutsu Adları"
+
+#: src/modules/TextUI.cpp:118
+msgid "Nebula Circles"
+msgstr "Bulutsu Çemberleri"
+
+#: src/modules/TextUI.cpp:121
+msgid "Light Pollution Luminance: "
+msgstr "Işık Kirliliği Parlaklığı: "
+
+#: src/modules/TextUI.cpp:122
+msgid "Landscape: "
+msgstr "Yeryüzü Şekli: "
+
+#: src/modules/TextUI.cpp:123
+msgid "Manual zoom: "
+msgstr "Elle büyütme: "
+
+#: src/modules/TextUI.cpp:124
+msgid "Object Sizing Rule: "
+msgstr "Cisim Boyutlama Kuralı: "
+
+#: src/modules/TextUI.cpp:125
+msgid "Magnitude Scaling Multiplier: "
+msgstr "Kadir Ölçekleme Çarpanı: "
+
+#: src/modules/TextUI.cpp:126
+msgid "Milky Way intensity: "
+msgstr "Samanyolu Yoğunluğu: "
+
+#: src/modules/TextUI.cpp:127
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "En Yüksek Bulutsu Kadir Oranı: "
+
+#: src/modules/TextUI.cpp:128
+msgid "Zoom Duration: "
+msgstr "Büyütme Süresi: "
+
+#: src/modules/TextUI.cpp:129
+msgid "Cursor Timeout: "
+msgstr "İmleç Gecikmesi: "
+
+#: src/modules/TextUI.cpp:130
+msgid "Correct for light travel time: "
 msgstr ""
 
-#: src/modules/LandscapeMgr.cpp:444
-msgid "Planet: "
-msgstr "Gezegen: "
+#: src/modules/TextUI.cpp:133
+msgid "Local Script: "
+msgstr "Yerel Betik: "
 
-#: src/ui_configurationDialog.h:550
-msgid "Planetarium options"
-msgstr ""
+#: src/modules/TextUI.cpp:134
+msgid "CD/DVD Script: "
+msgstr "CD/DVD Betikleri: "
 
-#: src/modules/Nebula.cpp:249
-msgid "Planetary nebula"
-msgstr ""
+#: src/modules/TextUI.cpp:135
+msgid "USB Script: "
+msgstr "USB Betiği: "
 
-#: src/ui_viewDialog.h:989
-msgid "Planets"
-msgstr "Gezegenler"
-
-#: src/ui_viewDialog.h:967
-msgid "Planets and satellites"
-msgstr ""
-
-#: src/gui/StelGui.cpp:165
-msgid "Planets hints"
-msgstr ""
-
-#: src/translations.h:58
-msgid "Pluto"
-msgstr "Plüton"
-
-#: src/translations.h:76
-msgid "Polynesian"
-msgstr "Polinezya"
-
-#: src/modules/TextUI.cpp:84
-msgid "Preset Sky Time: "
-msgstr "Gök Zamanını Ayarla: "
-
-#: src/modules/TextUI.cpp:87
-msgid "Preset Time"
-msgstr "Saati Ayarla"
-
-#: src/ui_configurationDialog.h:489
-msgid "Program language"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:273
-#, qt-format
-msgid "Project coordinator & lead developer: %1"
-msgstr ""
-
-#: src/ui_viewDialog.h:1013
-msgid "Projection"
-msgstr ""
-
-#: src/gui/StelGui.cpp:205
-msgid "Quit"
-msgstr ""
-
-#: src/core/StelObject.cpp:74
-#, qt-format
-msgid "RA/DE (J2000): %1/%2"
-msgstr ""
-
-#: src/core/StelObject.cpp:81
-#, qt-format
-msgid "RA/DE (of date): %1/%2"
-msgstr ""
-
-#: src/ui_viewDialog.h:975
-msgid "Relative scale:"
-msgstr ""
-
-#: src/translations.h:51
-msgid "Rhea"
-msgstr "Rhea"
-
-#: src/gui/HelpDialog.cpp:56
-msgid "Right click"
-msgstr ""
-
-#: src/translations.h:64
-msgid "S"
-msgstr "G"
-
-#: src/translations.h:46
-msgid "Saturn"
-msgstr "Satürn"
-
-#: src/modules/TextUI.cpp:141
-msgid "Save Current Configuration as Default: "
-msgstr "Mevcut Yapılandırmayı Öntanımlı Olarak Ata: "
-
-#: src/ui_configurationDialog.h:506
-msgid ""
-"Save all the current options including the current FOV and direction of view "
-"for use at next startup."
-msgstr ""
-
-#: src/ui_configurationDialog.h:505
-msgid "Save current options as default"
-msgstr ""
-
-#: src/gui/StelGui.cpp:206
-msgid "Save screenshot"
-msgstr ""
-
-#: src/ui_viewDialog.h:972
-msgid "Scale Moon"
-msgstr ""
-
-#: src/modules/TextUI.cpp:69
-msgid "Scripts "
-msgstr "Betikler "
-
-#: src/gui/StelGui.cpp:175
-msgid "Search window"
-msgstr ""
+#: src/modules/TextUI.cpp:136
+msgid "Arrow down to load list."
+msgstr "Listeyi görüntülemek için aşağı yön tuşuna basın."
 
 #: src/modules/TextUI.cpp:137
 msgid "Select and exit to run."
 msgstr "Başlatmak için seç ve çık"
 
-#: src/gui/HelpDialog.cpp:64
-msgid "Select object"
-msgstr ""
+#: src/modules/TextUI.cpp:140
+msgid "Load Default Configuration: "
+msgstr "Öntanımlı Yapılandırmayı Yükle: "
 
-#: src/ui_configurationDialog.h:490
-msgid "Selected object information"
-msgstr ""
-
-#: src/modules/TextUI.cpp:63
-msgid "Set Location "
-msgstr "Konumu Ayarla "
-
-#: src/modules/TextUI.cpp:64
-msgid "Set Time "
-msgstr "Saati Ayarla "
-
-#: src/modules/TextUI.cpp:80
-msgid "Set Time Zone: "
-msgstr "Zaman Dilimini Ayarla: "
-
-#: src/modules/TextUI.cpp:144
-msgid "Set UI Locale: "
-msgstr "Yerel Saate Ayarla: "
-
-#: src/gui/StelGui.cpp:201
-msgid "Set home planet to selected planet"
-msgstr ""
-
-#: src/gui/StelGui.cpp:183
-msgid "Set normal time rate"
-msgstr ""
-
-#: src/gui/StelGui.cpp:184
-msgid "Set time to now"
-msgstr ""
-
-#: src/ui_configurationDialog.h:532
-msgid ""
-"Sets the simulation time to the next instance of this time of day when "
-"Stellarium starts"
-msgstr ""
-
-#: src/ui_viewDialog.h:990
-msgid "Shooting Stars"
-msgstr ""
-
-#: src/ui_configurationDialog.h:502
-msgid "Short"
-msgstr ""
-
-#: src/ui_viewDialog.h:1011
-msgid "Show art"
-msgstr ""
-
-#: src/ui_viewDialog.h:984
-msgid "Show atmosphere"
-msgstr ""
-
-#: src/ui_viewDialog.h:1010
-msgid "Show boundaries"
-msgstr ""
-
-#: src/ui_configurationDialog.h:549
-msgid "Show flip buttons"
-msgstr ""
-
-#: src/ui_viewDialog.h:1017
-msgid "Show fog"
-msgstr ""
-
-#: src/ui_viewDialog.h:1016
-msgid "Show ground"
-msgstr ""
-
-#: src/ui_viewDialog.h:1009
-msgid "Show labels"
-msgstr ""
-
-#: src/ui_viewDialog.h:1008
-msgid "Show lines"
-msgstr ""
-
-#: src/ui_viewDialog.h:969
-msgid "Show planet markers"
-msgstr ""
-
-#: src/ui_viewDialog.h:970
-msgid "Show planet orbits"
-msgstr ""
-
-#: src/ui_viewDialog.h:968
-msgid "Show planets"
-msgstr ""
-
-#: src/modules/TextUI.cpp:96
-msgid "Show: "
-msgstr "Göster: "
+#: src/modules/TextUI.cpp:141
+msgid "Save Current Configuration as Default: "
+msgstr "Mevcut Yapılandırmayı Öntanımlı Olarak Ata: "
 
 #: src/modules/TextUI.cpp:142
 msgid "Shut Down: "
 msgstr "Kapat: "
 
-#: src/modules/TextUI.cpp:83
-msgid "Sidereal"
-msgstr "Yıldız"
+#: src/modules/TextUI.cpp:143
+msgid "Update me via Internet: "
+msgstr "İnternet aracılığı ile güncelle: "
 
-#: src/ui_viewDialog.h:971
-msgid "Simulate light speed"
-msgstr ""
+#: src/modules/TextUI.cpp:144
+msgid "Set UI Locale: "
+msgstr "Yerel Saate Ayarla: "
 
-#: src/modules/Nebula.cpp:101
-#, qt-format
-msgid "Size: %1"
-msgstr ""
+#: src/core/MappingClasses.cpp:11
+msgid "Perspective"
+msgstr "Perspektif"
 
-#: src/ui_viewDialog.h:998
-msgid "Sky"
-msgstr ""
-
-#: src/modules/TextUI.cpp:92
-msgid "Sky Culture: "
-msgstr "Gök Kültürü: "
-
-#: src/modules/TextUI.cpp:93
-msgid "Sky Language: "
-msgstr "Gök Dili: "
-
-#: src/modules/TextUI.cpp:85
-msgid "Sky Time At Start-up: "
-msgstr "Açılışta Gök Zamanı: "
-
-#: src/modules/TextUI.cpp:79
-msgid "Sky Time: "
-msgstr "Gök Zamanı: "
-
-#: src/gui/StelGui.cpp:176
-msgid "Sky and viewing options window"
-msgstr ""
-
-#: src/modules/TextUI.cpp:76
-msgid "Solar System Body: "
-msgstr "Güneş Sistemi Gezegeni: "
-
-#: src/translations.h:60
-msgid "Solar System Observer"
-msgstr "Güneş Sistemi Gözlemevi"
-
-#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:208
-#: src/gui/StelGuiItems.cpp:531
-msgid "Space"
-msgstr ""
-
-#: src/modules/StarWrapper.cpp:108
-#, qt-format
-msgid "Spectral Type: %1"
-msgstr ""
-
-#: src/ui_configurationDialog.h:556
-msgid "Spheric mirror distortion"
-msgstr ""
-
-#: src/ui_configurationDialog.h:553
+#: src/core/MappingClasses.cpp:16
 msgid ""
-"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
-"mirror for low-cost planetarium systems."
+"Perspective projection keeps the horizon a straight line. The mathematical "
+"name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"Perspektif izdüşümü ufku düz bir çizgi konumunda tutar. Bu izdüşümün "
+"matematiksel ingilizce adı <i>gnomonic projection</i>'dır."
 
-#: src/gui/ViewDialog.cpp:415
-msgid "Standard Perseids rate"
+#: src/core/MappingClasses.cpp:77
+msgid "Equal Area"
+msgstr "Eşit Alan"
+
+#: src/core/MappingClasses.cpp:82
+msgid ""
+"The full name of this projection method is, <i>Lambert azimuthal equal-area "
+"projection</i>. It preserves the area but not the angle."
 msgstr ""
-
-#: src/modules/TextUI.cpp:97
-msgid "Star Value Multiplier: "
-msgstr "Yıldız Değeri Çarpanı: "
-
-#: src/ui_viewDialog.h:1024
-msgid "Starlore"
-msgstr ""
-
-#: src/gui/StelGui.cpp:164 src/ui_viewDialog.h:973 src/ui_viewDialog.h:987
-msgid "Stars"
-msgstr "Yıldızlar"
-
-#: src/modules/TextUI.cpp:66
-msgid "Stars "
-msgstr "Yıldızlar "
-
-#: src/ui_configurationDialog.h:526
-msgid "Starts Stellarium at system clock date and time"
-msgstr "Stellarium'u sistem tarih ve saati ile başlatır."
-
-#: src/gui/ConfigurationDialog.cpp:375
-#, qt-format
-msgid "Startup FOV: %1%2"
-msgstr ""
-
-#: src/ui_configurationDialog.h:507
-msgid "Startup FOV: XX"
-msgstr ""
-
-#: src/ui_configurationDialog.h:523
-msgid "Startup date and time"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:383
-#, qt-format
-msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr ""
-
-#: src/ui_configurationDialog.h:508
-msgid "Startup direction of view: xxxx"
-msgstr ""
-
-#: src/gui/StelGui.cpp:786
-msgid "Stellarium"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:138
-msgid "Stellarium Help"
-msgstr "Program Yardımı"
+"Bu izdüşüm tekniğinin tam adı <i>Lambert azimut eşit-alan izdüşümüdür.</i>. "
+"Bu izdüşümü açıyı korumaz fakat alanı korur."
 
 #: src/core/MappingClasses.cpp:133
 msgid "Stereographic"
@@ -1262,68 +430,30 @@ msgid ""
 "cross each other but it does not preserve area."
 msgstr ""
 
-#: src/gui/StelGui.cpp:192
-msgid "Subtract 1 sidereal day"
-msgstr ""
+#: src/core/MappingClasses.cpp:178
+msgid "Fish-eye"
+msgstr "Balık-gözü mercek"
 
-#: src/gui/StelGui.cpp:194
-msgid "Subtract 1 sidereal week"
-msgstr ""
-
-#: src/gui/StelGui.cpp:188
-msgid "Subtract 1 solar day"
-msgstr ""
-
-#: src/gui/StelGui.cpp:186
-msgid "Subtract 1 solar hour"
-msgstr ""
-
-#: src/gui/StelGui.cpp:190
-msgid "Subtract 1 solar week"
-msgstr ""
-
-#: src/translations.h:33
-msgid "Sun"
-msgstr "Güneş"
-
-#: src/gui/StelGui.cpp:204
-msgid "Switch between equatorial and azimuthal mount"
-msgstr ""
-
-#: src/ui_configurationDialog.h:529
-msgid "System date and time"
-msgstr "Sistem tarih ve saati"
-
-#: src/ui_configurationDialog.h:535
-msgid "System date at:"
-msgstr "Sistem Tarihi:"
-
-#: src/translations.h:49
-msgid "Tethys"
-msgstr "Tethys"
-
-#: src/gui/HelpDialog.cpp:149
-msgid "The Stellarium User Guide"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:148
+#: src/core/MappingClasses.cpp:183
 msgid ""
-"The following links are external web links, and will launch your web "
-"browser:\n"
+"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
+"lines become curves when they appear a large angular distance from the "
+"centre of the field of view (like the distortions seen with very wide angle "
+"camera lenses)."
 msgstr ""
 
-#: src/core/MappingClasses.cpp:82
-msgid ""
-"The full name of this projection method is, <i>Lambert azimuthal equal-area "
-"projection</i>. It preserves the area but not the angle."
-msgstr ""
-"Bu izdüşüm tekniğinin tam adı <i>Lambert azimut eşit-alan izdüşümüdür.</i>. "
-"Bu izdüşümü açıyı korumaz fakat alanı korur."
+#: src/core/MappingClasses.cpp:223
+msgid "Cylinder"
+msgstr "Silindir"
 
 #: src/core/MappingClasses.cpp:228
 msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
+msgstr ""
+
+#: src/core/MappingClasses.cpp:278
+msgid "Mercator"
 msgstr ""
 
 #: src/core/MappingClasses.cpp:283
@@ -1333,137 +463,142 @@ msgid ""
 "away from the equator."
 msgstr ""
 
-#: src/main.cpp:55
-msgid "This system does not support OpenGL."
+#: src/core/MappingClasses.cpp:336
+msgid "Orthographic"
 msgstr ""
 
-#: src/modules/TextUI.cpp:88
-msgid "Time Display Format: "
-msgstr "Zaman Gösterim Biçimi: "
-
-#: src/translations.h:52
-msgid "Titan"
-msgstr "Titan"
-
-#: src/ui_configurationDialog.h:546
-msgid "Toggle vertical and horizontal image flip buttons."
+#: src/core/MappingClasses.cpp:341
+msgid ""
+"Orthographic projection is related to perspective projection, but the point "
+"of perspective is set to an infinite distance."
 msgstr ""
 
-#: src/ui_configurationDialog.h:582
-msgid "Tools"
-msgstr ""
+#: src/core/Mapping.cpp:28
+msgid "Maximum FOV: "
+msgstr "Azami görüş alanı: "
 
-#: src/gui/StelGui.cpp:198
-msgid "Track object"
-msgstr ""
-
-#: src/translations.h:78
-msgid "Tupi-Guarani"
-msgstr ""
-
-#: src/ui_viewDialog.h:976
-msgid "Twinkle:"
-msgstr ""
-
-#: src/modules/TextUI.cpp:100
-msgid "Twinkling: "
-msgstr "Pırıldama: "
-
-#: src/modules/Nebula.cpp:93
+#: src/core/StelObject.cpp:74
 #, qt-format
-msgid "Type: <b>%1</b>"
+msgid "RA/DE (J2000): %1/%2"
 msgstr ""
 
-#: src/modules/TextUI.cpp:135
-msgid "USB Script: "
-msgstr "USB Betiği: "
-
-#: src/modules/Nebula.cpp:258
-msgid "Undocumented type"
+#: src/core/StelObject.cpp:81
+#, qt-format
+msgid "RA/DE (of date): %1/%2"
 msgstr ""
 
-#: src/modules/Nebula.cpp:255
-msgid "Unknown"
-msgstr "Bilinmiyor"
-
-#: src/modules/TextUI.cpp:143
-msgid "Update me via Internet: "
-msgstr "İnternet aracılığı ile güncelle: "
-
-#: src/translations.h:57
-msgid "Uranus"
-msgstr "Uranüs"
-
-#: src/ui_configurationDialog.h:538
-msgid "Use a specific date and time when Stellarium starts up"
+#: src/core/StelObject.cpp:89
+#, qt-format
+msgid "Hour angle/DE: %1/%2"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:390
-msgid "Use as default"
+#: src/core/StelObject.cpp:100
+#, qt-format
+msgid "Az/Alt: %1/%2"
 msgstr ""
 
-#: src/ui_viewDialog.h:1022
-msgid "Use associated language for sky labeling"
+#: src/gui/ConfigurationDialog.cpp:258
+msgid "Select screenshot directory"
 msgstr ""
 
-#: src/ui_viewDialog.h:1018
-msgid "Use associated planet and position"
+#: src/gui/ConfigurationDialog.cpp:411
+#, qt-format
+msgid "Startup FOV: %1%2"
 msgstr ""
 
-#: src/ui_viewDialog.h:1019
-msgid "Use this landscape as default"
+#: src/gui/ConfigurationDialog.cpp:419
+#, qt-format
+msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr ""
 
-#: src/ui_viewDialog.h:1023
-msgid "Use this sky culture as default"
+#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:208
+#: src/gui/StelGuiItems.cpp:531
+msgid "Space"
 msgstr ""
 
-#: src/translations.h:35
-msgid "Venus"
-msgstr "Venüs"
-
-#: src/ui_viewDialog.h:965
-msgid "View"
+#: src/gui/HelpDialog.cpp:52
+msgid "Arrow keys & left mouse drag"
 msgstr ""
 
-#: src/translations.h:66
-msgid "W"
-msgstr "B"
-
-#: src/translations.h:77
-msgid "Western"
-msgstr "Batı"
-
-#: src/ui_configurationDialog.h:565
-msgid ""
-"When enabled, the \"auto zoom out\" key will also set the initial viewing "
-"direction"
+#: src/gui/HelpDialog.cpp:53
+msgid "Page Up/Down"
 msgstr ""
 
-#: src/gui/StelGui.cpp:172
-msgid "Windows"
+#: src/gui/HelpDialog.cpp:54
+msgid "CTRL + Up/Down"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:396 src/ui_locationDialogGui.h:402
-msgid ""
-"You can enter values in decimal degrees, or using dms format, for example: "
-"+1d 12m 8s"
+#: src/gui/HelpDialog.cpp:55
+msgid "Left click"
 msgstr ""
 
-#: src/modules/TextUI.cpp:128
-msgid "Zoom Duration: "
-msgstr "Büyütme Süresi: "
+#: src/gui/HelpDialog.cpp:56
+msgid "Right click"
+msgstr ""
 
-#: src/gui/StelGui.cpp:199
-msgid "Zoom in on selected object"
+#: src/gui/HelpDialog.cpp:57
+msgid "CTRL + Left click"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:197
+msgid "Movement and Selection"
+msgstr "Seçme ve taşıma"
+
+#: src/gui/HelpDialog.cpp:61
+msgid "Pan view around the sky"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
 msgid "Zoom in/out"
 msgstr "Yaklaş/Uzaklaş"
 
-#: src/gui/StelGui.cpp:200
-msgid "Zoom out"
+#: src/gui/HelpDialog.cpp:64
+msgid "Select object"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
+msgid "Clear selection"
+msgstr "Seçimi temizle"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Stellarium Help"
+msgstr "Program Yardımı"
+
+#: src/gui/HelpDialog.cpp:139
+msgid "Keys"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:147
+msgid "Further Reading"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:148
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:149
+msgid "The Stellarium User Guide"
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:153
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:158
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:163
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
@@ -1486,54 +621,913 @@ msgstr ""
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr ""
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:153
-msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+#: src/gui/HelpDialog.cpp:214 src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:305 src/gui/StelGui.cpp:204
+msgid "Miscellaneous"
 msgstr ""
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:163
+#: src/gui/HelpDialog.cpp:272
+msgid "Developers"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:273
+#, qt-format
+msgid "Project coordinator & lead developer: %1"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:274 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:279
+#, qt-format
+msgid "Developer: %1"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:275
+#, qt-format
+msgid "Graphic/other designer: %1"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:277
+#, qt-format
+msgid "Doc author/developer: %1"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:278
+#, qt-format
+msgid "OSX Developer: %1"
+msgstr ""
+
+#: src/gui/StelGui.cpp:145
+msgid "Display Options"
+msgstr ""
+
+#: src/gui/StelGui.cpp:146
+msgid "Constellation lines"
+msgstr ""
+
+#: src/gui/StelGui.cpp:147
+msgid "Constellation art"
+msgstr ""
+
+#: src/gui/StelGui.cpp:148
+msgid "Constellation labels"
+msgstr ""
+
+#: src/gui/StelGui.cpp:149
+msgid "Constellation boundaries"
+msgstr ""
+
+#: src/gui/StelGui.cpp:151 src/ui_viewDialog.h:1002
+msgid "Azimutal grid"
+msgstr ""
+
+#: src/gui/StelGui.cpp:152 src/ui_viewDialog.h:1000
+msgid "Equatorial grid"
+msgstr ""
+
+#: src/gui/StelGui.cpp:153 src/ui_viewDialog.h:1001
+msgid "Equatorial J2000 grid"
+msgstr ""
+
+#: src/gui/StelGui.cpp:154 src/ui_viewDialog.h:1005
+msgid "Ecliptic line"
+msgstr ""
+
+#: src/gui/StelGui.cpp:155 src/ui_viewDialog.h:1003
+msgid "Equator line"
+msgstr ""
+
+#: src/gui/StelGui.cpp:156 src/ui_viewDialog.h:1004
+msgid "Meridian line"
+msgstr ""
+
+#: src/gui/StelGui.cpp:157 src/ui_viewDialog.h:1006
+msgid "Cardinal points"
+msgstr ""
+
+#: src/gui/StelGui.cpp:159
+msgid "Ground"
+msgstr "Yeryüzü"
+
+#: src/gui/StelGui.cpp:160 src/ui_viewDialog.h:983
+msgid "Atmosphere"
+msgstr ""
+
+#: src/gui/StelGui.cpp:161
+msgid "Fog"
+msgstr "Sis"
+
+#: src/gui/StelGui.cpp:163 src/ui_viewDialog.h:988
+msgid "Nebulas"
+msgstr ""
+
+#: src/gui/StelGui.cpp:164
+msgid "Nebulas background images"
+msgstr ""
+
+#: src/gui/StelGui.cpp:165 src/ui_viewDialog.h:973 src/ui_viewDialog.h:987
+msgid "Stars"
+msgstr "Yıldızlar"
+
+#: src/gui/StelGui.cpp:166
+msgid "Planets hints"
+msgstr ""
+
+#: src/gui/StelGui.cpp:168
+msgid "Night mode"
+msgstr ""
+
+#: src/gui/StelGui.cpp:169
+msgid "Full-screen mode"
+msgstr ""
+
+#: src/gui/StelGui.cpp:170
+msgid "Flip scene horizontally"
+msgstr ""
+
+#: src/gui/StelGui.cpp:171
+msgid "Flip scene vertically"
+msgstr ""
+
+#: src/gui/StelGui.cpp:173
+msgid "Windows"
+msgstr ""
+
+#: src/gui/StelGui.cpp:174
+msgid "Help window"
+msgstr ""
+
+#: src/gui/StelGui.cpp:175
+msgid "Configuration window"
+msgstr ""
+
+#: src/gui/StelGui.cpp:176
+msgid "Search window"
+msgstr ""
+
+#: src/gui/StelGui.cpp:177
+msgid "Sky and viewing options window"
+msgstr ""
+
+#: src/gui/StelGui.cpp:178
+msgid "Date/time window"
+msgstr ""
+
+#: src/gui/StelGui.cpp:179
+msgid "Location window"
+msgstr ""
+
+#: src/gui/StelGui.cpp:181 src/ui_dateTimeDialogGui.h:294
+msgid "Date and Time"
+msgstr ""
+
+#: src/gui/StelGui.cpp:182
+msgid "Decrease time speed"
+msgstr ""
+
+#: src/gui/StelGui.cpp:183
+msgid "Increase time speed"
+msgstr ""
+
+#: src/gui/StelGui.cpp:184
+msgid "Set normal time rate"
+msgstr ""
+
+#: src/gui/StelGui.cpp:185
+msgid "Set time to now"
+msgstr ""
+
+#: src/gui/StelGui.cpp:186
+msgid "Add 1 solar hour"
+msgstr ""
+
+#: src/gui/StelGui.cpp:187
+msgid "Subtract 1 solar hour"
+msgstr ""
+
+#: src/gui/StelGui.cpp:188
+msgid "Add 1 solar day"
+msgstr ""
+
+#: src/gui/StelGui.cpp:189
+msgid "Subtract 1 solar day"
+msgstr ""
+
+#: src/gui/StelGui.cpp:190
+msgid "Add 1 solar week"
+msgstr ""
+
+#: src/gui/StelGui.cpp:191
+msgid "Subtract 1 solar week"
+msgstr ""
+
+#: src/gui/StelGui.cpp:192
+msgid "Add 1 sidereal day"
+msgstr ""
+
+#: src/gui/StelGui.cpp:193
+msgid "Subtract 1 sidereal day"
+msgstr ""
+
+#: src/gui/StelGui.cpp:194
+msgid "Add 1 sidereal week"
+msgstr ""
+
+#: src/gui/StelGui.cpp:195
+msgid "Subtract 1 sidereal week"
+msgstr ""
+
+#: src/gui/StelGui.cpp:198
+msgid "Center on selected object"
+msgstr ""
+
+#: src/gui/StelGui.cpp:199
+msgid "Track object"
+msgstr ""
+
+#: src/gui/StelGui.cpp:200
+msgid "Zoom in on selected object"
+msgstr ""
+
+#: src/gui/StelGui.cpp:201
+msgid "Zoom out"
+msgstr ""
+
+#: src/gui/StelGui.cpp:202
+msgid "Set home planet to selected planet"
+msgstr ""
+
+#: src/gui/StelGui.cpp:205
+msgid "Switch between equatorial and azimuthal mount"
+msgstr ""
+
+#: src/gui/StelGui.cpp:206
+msgid "Quit"
+msgstr ""
+
+#: src/gui/StelGui.cpp:207
+msgid "Save screenshot"
+msgstr ""
+
+#: src/gui/StelGui.cpp:210
+msgid "Auto hide horizontal button bar"
+msgstr ""
+
+#: src/gui/StelGui.cpp:211
+msgid "Auto hide vertical button bar"
+msgstr ""
+
+#: src/gui/StelGui.cpp:783
+msgid "Stellarium"
+msgstr ""
+
+#: src/gui/StelGuiItems.cpp:432
+#, no-c-format, qt-format
+msgid "%1m"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:345
+msgid "No description"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:409
+msgid "No shooting stars"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:412
+msgid "Normal rate"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:415
+msgid "Standard Perseids rate"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:418
+msgid "Exceptional Leonid rate"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:421
+msgid "Highest rate ever (1966 Leonids)"
+msgstr ""
+
+#: src/main.cpp:55
+msgid "This system does not support OpenGL."
+msgstr ""
+
+#: src/translations.h:33
+msgid "Sun"
+msgstr "Güneş"
+
+#: src/translations.h:34
+msgid "Mercury"
+msgstr "Merkür"
+
+#: src/translations.h:35
+msgid "Venus"
+msgstr "Venüs"
+
+#: src/translations.h:36
+msgid "Earth"
+msgstr "Dünya"
+
+#: src/translations.h:37
+msgid "Moon"
+msgstr "Ay"
+
+#: src/translations.h:38
+msgid "Mars"
+msgstr "Mars"
+
+#: src/translations.h:39
+msgid "Deimos"
+msgstr "Deimos"
+
+#: src/translations.h:40
+msgid "Phobos"
+msgstr "Phobos"
+
+#: src/translations.h:41
+msgid "Jupiter"
+msgstr "Jüpiter"
+
+#: src/translations.h:42
+msgid "Io"
+msgstr "Io"
+
+#: src/translations.h:43
+msgid "Europa"
+msgstr "Europa"
+
+#: src/translations.h:44
+msgid "Ganymede"
+msgstr "Ganymede"
+
+#: src/translations.h:45
+msgid "Callisto"
+msgstr "Callisto"
+
+#: src/translations.h:46
+msgid "Saturn"
+msgstr "Satürn"
+
+#: src/translations.h:47
+msgid "Mimas"
+msgstr "Mimas"
+
+#: src/translations.h:48
+msgid "Enceladus"
+msgstr "Enceladus"
+
+#: src/translations.h:49
+msgid "Tethys"
+msgstr "Tethys"
+
+#: src/translations.h:50
+msgid "Dione"
+msgstr "Dione"
+
+#: src/translations.h:51
+msgid "Rhea"
+msgstr "Rhea"
+
+#: src/translations.h:52
+msgid "Titan"
+msgstr "Titan"
+
+#: src/translations.h:53
+msgid "Hyperion"
+msgstr "Hyperion"
+
+#: src/translations.h:54
+msgid "Iapetus"
+msgstr "Iapetus"
+
+#: src/translations.h:55
+msgid "Phoebe"
+msgstr "Phoebe"
+
+#: src/translations.h:56
+msgid "Neptune"
+msgstr "Neptün"
+
+#: src/translations.h:57
+msgid "Uranus"
+msgstr "Uranüs"
+
+#: src/translations.h:58
+msgid "Pluto"
+msgstr "Plüton"
+
+#: src/translations.h:59
+msgid "Charon"
+msgstr "Kharon"
+
+#: src/translations.h:60
+msgid "Solar System Observer"
+msgstr "Güneş Sistemi Gözlemevi"
+
+#: src/translations.h:63
+msgid "N"
+msgstr "K"
+
+#: src/translations.h:64
+msgid "S"
+msgstr "G"
+
+#: src/translations.h:65
+msgid "E"
+msgstr "D"
+
+#: src/translations.h:66
+msgid "W"
+msgstr "B"
+
+#: src/translations.h:69
+msgid "Chinese"
+msgstr "Çin"
+
+#: src/translations.h:70
+msgid "Egyptian"
+msgstr "Mısır"
+
+#: src/translations.h:71
+msgid "Inuit"
+msgstr "Eskimo"
+
+#: src/translations.h:72
+msgid "Korean"
+msgstr "Kore"
+
+#: src/translations.h:73
+msgid "Lakota"
+msgstr "Lakota (Kuzey Amerika yerlileri)"
+
+#: src/translations.h:74
+msgid "Navajo"
+msgstr "Navajo"
+
+#: src/translations.h:75
+msgid "Norse"
+msgstr "Viking"
+
+#: src/translations.h:76
+msgid "Polynesian"
+msgstr "Polinezya"
+
+#: src/translations.h:77
+msgid "Western"
+msgstr "Batı"
+
+#: src/translations.h:78
+msgid "Tupi-Guarani"
+msgstr ""
+
+#: src/ui_dateTimeDialogGui.h:293 src/ui_helpDialogGui.h:211
+#: src/ui_locationDialogGui.h:384 src/ui_viewDialog.h:964
+#: src/ui_configurationDialog.h:526
+msgid "Form"
+msgstr ""
+
+#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
+msgid "/"
+msgstr ""
+
+#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
+msgid ":"
+msgstr ""
+
+#: src/ui_helpDialogGui.h:212 src/ui_helpDialogGui.h:214
+msgid "Help"
+msgstr "Yardım"
+
+#: src/ui_helpDialogGui.h:215
+msgid "About"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:385
+msgid "Location"
+msgstr "Konum"
+
+#: src/ui_locationDialogGui.h:389
+msgid "Current location information"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:390
+msgid "Use as default"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:391
+msgid "Delete"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:392
+msgid "Add to list"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:393
+msgid "Latitude:"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:396 src/ui_locationDialogGui.h:402
 msgid ""
-"{Support ticket system} - if you need help using Stellarium, post a support "
-"request here and we'll try to help."
+"You can enter values in decimal degrees, or using dms format, for example: "
+"+1d 12m 8s"
 msgstr ""
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:158
+#: src/ui_locationDialogGui.h:399
+msgid "Longitude:"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:405
+msgid "Altitude:"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:408
+msgid "Enter the altitude in meter"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:411
+msgid " m"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:412
+msgid "Name/City:"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:413
+msgid "Country:"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:414
+msgid "Planet:"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:199 src/ui_searchDialogGui.h:200
+msgid "Find Object"
+msgstr ""
+
+#: src/ui_viewDialog.h:965
+msgid "View"
+msgstr ""
+
+#: src/ui_viewDialog.h:967
+msgid "Planets and satellites"
+msgstr ""
+
+#: src/ui_viewDialog.h:968
+msgid "Show planets"
+msgstr ""
+
+#: src/ui_viewDialog.h:969
+msgid "Show planet markers"
+msgstr ""
+
+#: src/ui_viewDialog.h:970
+msgid "Show planet orbits"
+msgstr ""
+
+#: src/ui_viewDialog.h:971
+msgid "Simulate light speed"
+msgstr ""
+
+#: src/ui_viewDialog.h:972
+msgid "Scale Moon"
+msgstr ""
+
+#: src/ui_viewDialog.h:974
+msgid "Absolute scale:"
+msgstr ""
+
+#: src/ui_viewDialog.h:975
+msgid "Relative scale:"
+msgstr ""
+
+#: src/ui_viewDialog.h:976
+msgid "Twinkle:"
+msgstr ""
+
+#: src/ui_viewDialog.h:979
+msgid "Dim faint stars when a very bright object is visible"
+msgstr ""
+
+#: src/ui_viewDialog.h:982
+msgid "Dynamic eye adaptation"
+msgstr ""
+
+#: src/ui_viewDialog.h:984
+msgid "Show atmosphere"
+msgstr ""
+
+#: src/ui_viewDialog.h:985
+msgid "Light pollution: "
+msgstr ""
+
+#: src/ui_viewDialog.h:986
+msgid "Labels and Markers"
+msgstr ""
+
+#: src/ui_viewDialog.h:989
+msgid "Planets"
+msgstr "Gezegenler"
+
+#: src/ui_viewDialog.h:990
+msgid "Shooting Stars"
+msgstr ""
+
+#: src/ui_viewDialog.h:991
+msgid "Hourly zenith rate:"
+msgstr ""
+
+#: src/ui_viewDialog.h:992
+msgid "0"
+msgstr ""
+
+#: src/ui_viewDialog.h:993
+msgid "10"
+msgstr ""
+
+#: src/ui_viewDialog.h:994
+msgid "80"
+msgstr ""
+
+#: src/ui_viewDialog.h:995
+msgid "10000"
+msgstr ""
+
+#: src/ui_viewDialog.h:996
+msgid "144000"
+msgstr ""
+
+#: src/ui_viewDialog.h:998
+msgid "Sky"
+msgstr ""
+
+#: src/ui_viewDialog.h:999
+msgid "Celestial Sphere"
+msgstr ""
+
+#: src/ui_viewDialog.h:1007
+msgid "Constellations"
+msgstr ""
+
+#: src/ui_viewDialog.h:1008
+msgid "Show lines"
+msgstr ""
+
+#: src/ui_viewDialog.h:1009
+msgid "Show labels"
+msgstr ""
+
+#: src/ui_viewDialog.h:1010
+msgid "Show boundaries"
+msgstr ""
+
+#: src/ui_viewDialog.h:1011
+msgid "Show art"
+msgstr ""
+
+#: src/ui_viewDialog.h:1012
+msgid "Art brightness: "
+msgstr ""
+
+#: src/ui_viewDialog.h:1013
+msgid "Projection"
+msgstr ""
+
+#: src/ui_viewDialog.h:1014
+msgid "Markings"
+msgstr ""
+
+#: src/ui_viewDialog.h:1015 src/ui_viewDialog.h:1021
+msgid "Options"
+msgstr ""
+
+#: src/ui_viewDialog.h:1016
+msgid "Show ground"
+msgstr ""
+
+#: src/ui_viewDialog.h:1017
+msgid "Show fog"
+msgstr ""
+
+#: src/ui_viewDialog.h:1018
+msgid "Use associated planet and position"
+msgstr ""
+
+#: src/ui_viewDialog.h:1019
+msgid "Use this landscape as default"
+msgstr ""
+
+#: src/ui_viewDialog.h:1020
+msgid "Landscape"
+msgstr ""
+
+#: src/ui_viewDialog.h:1022
+msgid "Use associated language for sky labeling"
+msgstr ""
+
+#: src/ui_viewDialog.h:1023
+msgid "Use this sky culture as default"
+msgstr ""
+
+#: src/ui_viewDialog.h:1024
+msgid "Starlore"
+msgstr ""
+
+#: src/ui_configurationDialog.h:527
+msgid "Configuration"
+msgstr "Yapılandırma"
+
+#: src/ui_configurationDialog.h:539
+msgid "Program language"
+msgstr ""
+
+#: src/ui_configurationDialog.h:540
+msgid "Selected object information"
+msgstr ""
+
+#: src/ui_configurationDialog.h:543
+msgid "Display all of the information which is available"
+msgstr ""
+
+#: src/ui_configurationDialog.h:546
+msgid "All available"
+msgstr ""
+
+#: src/ui_configurationDialog.h:549
+msgid "Display only abbreviated information"
+msgstr ""
+
+#: src/ui_configurationDialog.h:552
+msgid "Short"
+msgstr ""
+
+#: src/ui_configurationDialog.h:553
+msgid "None"
+msgstr ""
+
+#: src/ui_configurationDialog.h:554
+msgid "Default options"
+msgstr ""
+
+#: src/ui_configurationDialog.h:555
+msgid "Save settings"
+msgstr ""
+
+#: src/ui_configurationDialog.h:556
+msgid "Restore defaults"
+msgstr ""
+
+#: src/ui_configurationDialog.h:557
 msgid ""
-"{The Stellarium Wiki} - General information.  You can also find user-"
-"contributed landscapes and scripts here."
+"Restoring default settings requires a restart of Stellarium. Saving all the "
+"current options includes the current FOV and direction of view for use at "
+"next startup."
 msgstr ""
 
-#~ msgid ""
-#~ "   Please check for newer versions and send bug reports\n"
-#~ "and comments to us at: http://stellarium.sourceforge.net\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Lütfen güncel sürümü kullandığınızdan emin olun ve \n"
-#~ " http://www.stellarium.org sitesine önerilerinizi  bildirin.\n"
-#~ "\n"
+#: src/ui_configurationDialog.h:558
+msgid "Startup FOV: XX"
+msgstr ""
 
-#~ msgid " Choose landscapes :"
-#~ msgstr "Yeryüzü Şeklini Seç:"
+#: src/ui_configurationDialog.h:559
+msgid "Startup direction of view: xxxx"
+msgstr ""
 
-#~ msgid " Current Time :"
-#~ msgstr "Şu Anki Saat:"
+#: src/ui_configurationDialog.h:560
+msgid "Main"
+msgstr ""
 
-#~ msgid " Projection :"
-#~ msgstr "Projeksiyon:"
+#: src/ui_configurationDialog.h:561
+msgid "Control"
+msgstr ""
 
-#~ msgid " Screen Resolution :"
-#~ msgstr "Ekran Çözünürlüğü:"
+#: src/ui_configurationDialog.h:564
+msgid "Allow keyboard to pan and zoom"
+msgstr ""
 
-#~ msgid " Time Zone :"
-#~ msgstr "Zaman Dilimi:"
+#: src/ui_configurationDialog.h:567
+msgid "Enable keyboard navigation"
+msgstr ""
 
-#~ msgid " Time speed : "
-#~ msgstr "Zaman Akış Hızı: "
+#: src/ui_configurationDialog.h:570
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr ""
 
-#~ msgid " Using System Default Time Zone"
-#~ msgstr "Öntanımlı Sistem Saatini Kullanımı"
+#: src/ui_configurationDialog.h:573
+msgid "Enable mouse navigation"
+msgstr ""
+
+#: src/ui_configurationDialog.h:574
+msgid "Startup date and time"
+msgstr ""
+
+#: src/ui_configurationDialog.h:577
+msgid "Starts Stellarium at system clock date and time"
+msgstr "Stellarium'u sistem tarih ve saati ile başlatır."
+
+#: src/ui_configurationDialog.h:580
+msgid "System date and time"
+msgstr "Sistem tarih ve saati"
+
+#: src/ui_configurationDialog.h:583
+msgid ""
+"Sets the simulation time to the next instance of this time of day when "
+"Stellarium starts"
+msgstr ""
+
+#: src/ui_configurationDialog.h:586
+msgid "System date at:"
+msgstr "Sistem Tarihi:"
+
+#: src/ui_configurationDialog.h:589
+msgid "Use a specific date and time when Stellarium starts up"
+msgstr ""
+
+#: src/ui_configurationDialog.h:592
+msgid "Other:"
+msgstr ""
+
+#: src/ui_configurationDialog.h:593
+msgid "Navigation"
+msgstr ""
+
+#: src/ui_configurationDialog.h:594
+msgid "Amateur astronomer options"
+msgstr ""
+
+#: src/ui_configurationDialog.h:597
+msgid "Toggle vertical and horizontal image flip buttons."
+msgstr ""
+
+#: src/ui_configurationDialog.h:600
+msgid "Show flip buttons"
+msgstr ""
+
+#: src/ui_configurationDialog.h:601
+msgid "Planetarium options"
+msgstr ""
+
+#: src/ui_configurationDialog.h:604
+msgid ""
+"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
+"mirror for low-cost planetarium systems."
+msgstr ""
+
+#: src/ui_configurationDialog.h:607
+msgid "Spheric mirror distortion"
+msgstr ""
+
+#: src/ui_configurationDialog.h:610
+msgid "Align labels with the horizon"
+msgstr ""
+
+#: src/ui_configurationDialog.h:613
+msgid "Gravity labels"
+msgstr ""
+
+#: src/ui_configurationDialog.h:616
+msgid ""
+"When enabled, the \"auto zoom out\" key will also set the initial viewing "
+"direction"
+msgstr ""
+
+#: src/ui_configurationDialog.h:619
+msgid "Auto zoom out returns to initial direction of view"
+msgstr ""
+
+#: src/ui_configurationDialog.h:622
+msgid "Mask out everything outside a central circle in the main view"
+msgstr ""
+
+#: src/ui_configurationDialog.h:625
+msgid "Disc viewport"
+msgstr ""
+
+#: src/ui_configurationDialog.h:626
+msgid "Sceenshots"
+msgstr ""
+
+#: src/ui_configurationDialog.h:627
+msgid "Screenshot Directory"
+msgstr ""
+
+#: src/ui_configurationDialog.h:629
+msgid "Other"
+msgstr ""
+
+#: src/ui_configurationDialog.h:632
+msgid "Hides the mouse cursor when inactive"
+msgstr ""
+
+#: src/ui_configurationDialog.h:635
+msgid "Mouse cursor timeout (seconds):"
+msgstr ""
+
+#: src/ui_configurationDialog.h:636
+msgid "Tools"
+msgstr ""
+
+#~ msgid "m"
+#~ msgstr "m"
 
 #~ msgid ""
 #~ "   Please check for newer versions and send bug reports\n"
@@ -1591,9 +1585,6 @@ msgstr ""
 
 #~ msgid "Ara"
 #~ msgstr "Sunak"
-
-#~ msgid "Are you sure ?"
-#~ msgstr "Emin misiniz ?"
 
 #~ msgid "Aries"
 #~ msgstr "Koç"
@@ -1663,53 +1654,26 @@ msgstr ""
 #~ "CTRL + S : Ekran görüntüsü al\n"
 #~ "CTRL + R : Betik kayıt  modu\n"
 
-#~ msgid "Arsenal"
-#~ msgstr "Cephanelik"
-
 #~ msgid "Atmosphere [A]"
 #~ msgstr "Atmosfer [A]"
 
 #~ msgid "Auriga"
 #~ msgstr "Arabacı"
 
-#~ msgid "Aurvandil's Toe"
-#~ msgstr "Aurvandil'in Ayak Parmağı"
-
 #~ msgid "Azimuthal Grid [Z]"
 #~ msgstr "Ufuksal Koordinat Sistemi"
-
-#~ msgid "Bailer"
-#~ msgstr "Kefil"
-
-#~ msgid "Banner of Three Stars"
-#~ msgstr "Üç Yıldızlı Bayrak"
-
-#~ msgid "Bear's Lodge"
-#~ msgstr "Ayı İni"
 
 #~ msgid "Bird"
 #~ msgstr "Kuş"
 
-#~ msgid "Blubber Container"
-#~ msgstr "Donyağı Kırbası"
-
 #~ msgid "Boat"
 #~ msgstr "Tekne"
-
-#~ msgid "Bond"
-#~ msgstr "Bağ"
 
 #~ msgid "Bootes"
 #~ msgstr "Çoban"
 
 #~ msgid "Bow and Arrow"
 #~ msgstr "Ok ve Yay"
-
-#~ msgid "Breastbone"
-#~ msgstr "Kaburga Kemiği"
-
-#~ msgid "Bull's Foreleg"
-#~ msgstr "Boğanın Ön Ayağı"
 
 #~ msgid "CMD + Q  : Quit\n"
 #~ msgstr "CMD + Q: Çık\n"
@@ -1756,17 +1720,11 @@ msgstr ""
 #~ msgid "Cardinal Points [Q]"
 #~ msgstr "Ana Yönler [Q]"
 
-#~ msgid "Cared for by Moon"
-#~ msgstr "Aya Adanmış"
-
 #~ msgid "Caribou"
 #~ msgstr "Karibu Geyiği"
 
 #~ msgid "Cassiopeia"
 #~ msgstr "Kraliçe"
-
-#~ msgid "Cat's Cradle"
-#~ msgstr "Kedi Beşiği"
 
 #~ msgid "Centaurus"
 #~ msgstr "Erboğa"
@@ -1780,26 +1738,11 @@ msgstr ""
 #~ msgid "Chamaeleon"
 #~ msgstr "Bukalemun"
 
-#~ msgid "Chariot"
-#~ msgstr "Savaş Arabası"
-
-#~ msgid "Chariot Yard"
-#~ msgstr "Atlı Araba Ağılı"
-
-#~ msgid "Chematy"
-#~ msgstr "Chematy"
-
 #~ msgid "Choose landscapes:"
 #~ msgstr "Manzara seçiniz"
 
 #~ msgid "Circinus"
 #~ msgstr "Pergel"
-
-#~ msgid "Circular Granary"
-#~ msgstr "Yuvarlak Tahıl Ambarı"
-
-#~ msgid "Coiled Thong"
-#~ msgstr "Kayış"
 
 #~ msgid "Collarbones"
 #~ msgstr "Köprücük Kemikleri"
@@ -1852,9 +1795,6 @@ msgstr ""
 #~ msgid "Current Time Speed is x"
 #~ msgstr "Şu Anki Zaman Akış Hızı x"
 
-#~ msgid "Curved Array"
-#~ msgstr "Eğrisel Dizi"
-
 #~ msgid "Cygnus"
 #~ msgstr "Kuğu"
 
@@ -1881,63 +1821,11 @@ msgstr ""
 #~ "CTRL + F : Gök Cismi arama modu\n"
 #~ "\n"
 
-#~ msgid ""
-#~ "Dialogs & other controls:\n"
-#~ "H   : Help                      I   : About Stellarium\n"
-#~ "M   : Text menu                 1 (one)  : Configuration\n"
-#~ "CTRL + S : Take a screenshot\n"
-#~ "CTRL + R : Toggle script recording\n"
-#~ "CTRL + F : Toggle object finder\n"
-#~ "CTRL + G : Goto selected solar system object\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Dialoglar ve diğer kontroller :\n"
-#~ "H: Yardım I : Stellarium Hakkında \n"
-#~ "M : Metin menüsü 1 (bir) : Konfigürasyon\n"
-#~ "CTRL+S : Ekran görüntüsü al\n"
-#~ "CTRL+R : Komut kaydına geçiş \n"
-#~ "CTRL+F : Nesne bulmaya geçiş\n"
-#~ "CTRL+G : Seçilen güneş sistemi cismine git\n"
-#~ "\n"
-
 #~ msgid "Did not recognize locale language code "
 #~ msgstr "Yerel dil kodu tanımlanamadı "
 
-#~ msgid "Dilyehe"
-#~ msgstr "Dilyehe"
-
-#~ msgid "Dipper"
-#~ msgstr "Maşrapa"
-
 #~ msgid "Disk Viewport"
 #~ msgstr "Disk Görünümü"
-
-#~ msgid ""
-#~ "Display options:\n"
-#~ "ENTER : Equatorial/altazimuthal mount\n"
-#~ "F1  : Toggle fullscreen / window.\n"
-#~ "C   : Constellation lines       V   : Constellation labels\n"
-#~ "R   : Constellation art         E   : Equatorial grid\n"
-#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
-#~ "P   : Planet labels             G   : Ground\n"
-#~ "A   : Atmosphere                F   : Fog\n"
-#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
-#~ "T   : Object tracking           S   : Stars\n"
-#~ "4 , : Ecliptic line             5 . : Equator line\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Götrüntü seçenekleri : \n"
-#~ "ENTER : Ekvatoral/altazimutal montaj\n"
-#~ "F1 : Tam ekran/ pencere.\n"
-#~ "C: Takımyıldızı çizgileri V:Takımyıldızı etiketleri\n"
-#~ "R: Takımyıldızı fotoğrafı E: Ekvatoryal ızgara\n"
-#~ "Z:Azimutal ızgara N:Bulutsu Etiketleri\n"
-#~ "P:Gezegen etiketleri G:Yer\n"
-#~ "A:Atmosfer F: Sis\n"
-#~ "Q:Ana yönler O:Ay Ölçeklemesine Geçiş\n"
-#~ "T:Nesne takibi S: Yıldızlar\n"
-#~ "4,:Ekliptik Çizgisi 5.:Ekvator çizgisi\n"
-#~ "\n"
 
 #~ msgid ""
 #~ "Display options:\n"
@@ -1965,17 +1853,11 @@ msgstr ""
 #~ "4 : Yörünge Çizgisi  5 : Ekvator Çizgisi\n"
 #~ "\n"
 
-#~ msgid "Do"
-#~ msgstr "Yap"
-
 #~ msgid "Dog"
 #~ msgstr "köpek"
 
 #~ msgid "Dolphin"
 #~ msgstr "Yunus"
-
-#~ msgid "Done"
-#~ msgstr "Yapıldı"
 
 #~ msgid "Dorado"
 #~ msgstr "Kılıç Balığı"
@@ -1985,9 +1867,6 @@ msgstr ""
 
 #~ msgid "Drawing of the Constellations [C]"
 #~ msgstr "Takımyıldız Çizgileri"
-
-#~ msgid "Dried Willow"
-#~ msgstr "Kurutulmuş Söğüt"
 
 #~ msgid "Drum"
 #~ msgstr "Davul"
@@ -2012,14 +1891,13 @@ msgstr ""
 #~ msgid ""
 #~ "ERROR : I can't find the datas directories in :\n"
 #~ "%s/ nor in ./ nor in ../\n"
-#~ "You may fully install the software (type \"make install\" on POSIX "
-#~ "systems)\n"
+#~ "You may fully install the software (type \"make install\" on POSIX systems)\n"
 #~ "or launch the application from the stellarium package directory.\n"
 #~ msgstr ""
 #~ "HATA: Şu dizinlerde veri bulamadım:\n"
 #~ "%s/ ne de ./ ne de../\n"
-#~ "Yazılımı yeniden yüklemeyi deneyebilir (POSIX sistemlerde \"make install"
-#~ "\" yazarak)\n"
+#~ "Yazılımı yeniden yüklemeyi deneyebilir (POSIX sistemlerde \"make install\" "
+#~ "yazarak)\n"
 #~ "ya da yazılımı Stellarium paket dizininden başlatabilirsiniz.\n"
 
 #~ msgid "ERROR : The current config file is from a different version ("
@@ -2027,21 +1905,6 @@ msgstr ""
 
 #~ msgid "ERROR on line %d of %s\n"
 #~ msgstr "%d satırında %s hatası\n"
-
-#~ msgid "Earth God's Temple"
-#~ msgstr "Tanrı'nın Yeryüzündeki Evi"
-
-#~ msgid "Eastern Door"
-#~ msgstr "Doğu Kapısı"
-
-#~ msgid "Elk"
-#~ msgstr "Geyik"
-
-#~ msgid "Emptiness"
-#~ msgstr "Yoksunluk"
-
-#~ msgid "Encampment"
-#~ msgstr "Ordugâh"
 
 #~ msgid "Enter observatory name"
 #~ msgstr "Gözlem yeri adını girin"
@@ -2061,50 +1924,17 @@ msgstr ""
 #~ msgid "Error: Unable to open script file to record commands."
 #~ msgstr "Hata: Komutları kaydetmek için betik dosyası açılamadı."
 
-#~ msgid "Establishment"
-#~ msgstr "Yönetici Sınıf"
-
-#~ msgid "Extended Net"
-#~ msgstr "Genişletilmiş Ağ"
-
-#~ msgid "Farmland"
-#~ msgstr "Çiftlik Evi"
-
 #~ msgid "Ferry Boat"
 #~ msgstr "Feribot"
 
-#~ msgid "Fireplace"
-#~ msgstr "Ocak"
-
-#~ msgid "First Big One"
-#~ msgstr "İlk İri Yapılı"
-
-#~ msgid "First Slim One"
-#~ msgstr "İlk Zayıf Yapılı"
-
 #~ msgid "Fisheye Projection Mode"
 #~ msgstr "Balıkgözü Gösterimi"
-
-#~ msgid "Five Chariots"
-#~ msgstr "Beş Savaş Arabası"
-
-#~ msgid "Five Feudal Kings"
-#~ msgstr "Beş Derebeyi"
-
-#~ msgid "Flail"
-#~ msgstr "Harman Döven"
 
 #~ msgid "Flip horizontally [CTRL + SHIFT + H]"
 #~ msgstr "Yatayda döndür"
 
 #~ msgid "Flip vertically [CTRL + SHIFT + V]"
 #~ msgstr "Dikeyde döndür"
-
-#~ msgid "Flock"
-#~ msgstr "Flok"
-
-#~ msgid "Flying Corridor"
-#~ msgstr "Uçuş Koridoru"
 
 #~ msgid "For unlisted screen resolution, edit the file :"
 #~ msgstr "Listelenmemiş ekran çözünürlükleri için dosyayı düzenleyin:"
@@ -2115,41 +1945,20 @@ msgstr ""
 #~ msgid "Four Channels"
 #~ msgstr "Dört Kanal"
 
-#~ msgid "Frigate Bird"
-#~ msgstr "Fırkateyn Kuşu"
-
 #~ msgid "GO"
 #~ msgstr "GİT"
 
 #~ msgid "Gemini"
 #~ msgstr "İkizler"
 
-#~ msgid "Ghosts"
-#~ msgstr "Hayaletler"
-
-#~ msgid "Giant"
-#~ msgstr "Dev"
-
 #~ msgid "Girl"
 #~ msgstr "Kız"
-
-#~ msgid "Good Gourd"
-#~ msgstr "Olgun Kabak"
-
-#~ msgid "Great General"
-#~ msgstr "Büyük General"
 
 #~ msgid "Ground [G]"
 #~ msgstr "Yeryüzü [G]"
 
 #~ msgid "Grus"
 #~ msgstr "Turna"
-
-#~ msgid "HP No./Name"
-#~ msgstr "HP No./Adı"
-
-#~ msgid "Hand"
-#~ msgstr "El"
 
 #~ msgid "Heart"
 #~ msgstr "Yürek"
@@ -2159,9 +1968,6 @@ msgstr ""
 
 #~ msgid "Hercules"
 #~ msgstr "Herkül"
-
-#~ msgid "Hippopotamus"
-#~ msgstr "Suaygırı"
 
 #~ msgid "Hit CTRL-R again to stop.\n"
 #~ msgstr "Bitirmek için CTTL-R tuşlarına tekrar basın.\n"
@@ -2175,9 +1981,6 @@ msgstr ""
 #~ msgid "Horologium"
 #~ msgstr "Saat"
 
-#~ msgid "Horus"
-#~ msgstr "Horus"
-
 #~ msgid "Hour"
 #~ msgstr "Saat"
 
@@ -2186,12 +1989,6 @@ msgstr ""
 
 #~ msgid "Hydrus"
 #~ msgstr "Küçük Su Yılanı"
-
-#~ msgid "Imperial Guards"
-#~ msgstr "İmparatorluk Muhafızları"
-
-#~ msgid "Imperial Passageway"
-#~ msgstr "İmparatorluk Geçidi"
 
 #~ msgid "Indus"
 #~ msgstr "Kızılderili"
@@ -2208,29 +2005,11 @@ msgstr ""
 #~ msgid "Invalid sky culture directory: "
 #~ msgstr "Geçersiz Gök Kültü dizini: "
 
-#~ msgid "Jade Well"
-#~ msgstr "Yeşim Kuyu"
-
 #~ msgid "Jaw"
 #~ msgstr "Çene"
 
-#~ msgid "Kenemet"
-#~ msgstr "Kenemet"
-
-#~ msgid "Khanuwy Fish"
-#~ msgstr "Hanuvi Balığı"
-
-#~ msgid "Kitchen"
-#~ msgstr "Mutfak"
-
-#~ msgid "Kite of Kawelo"
-#~ msgstr "Kawelo Kartalı"
-
 #~ msgid "Lacerta"
 #~ msgstr "Kertenkele"
-
-#~ msgid "Lamp Stand"
-#~ msgstr "Şamdan"
 
 #~ msgid "Language"
 #~ msgstr "Dil"
@@ -2262,14 +2041,8 @@ msgstr ""
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Hipparkos Kataloğu yükleniyor:"
 
-#~ msgid "Loading Hipparcos catalog: %d/%d"
-#~ msgstr "Hipparcos Kataloğu yükleniyor: %d/%d"
-
 #~ msgid "Loading Hipparcos star data "
 #~ msgstr "Hipparcos Kataloğu'ndan yıldız verileri yükleniyor "
-
-#~ msgid "Loading Nebula Data: %d/%d"
-#~ msgstr "Nebula Verisi Yükleniyor: %d/%d"
 
 #~ msgid "Loading Nebula Textures:"
 #~ msgstr "Bulutsu Dokuları Yükleniyor:"
@@ -2301,23 +2074,8 @@ msgstr ""
 #~ msgid "Magnitude"
 #~ msgstr "Kadir"
 
-#~ msgid "Man with Feet Apart"
-#~ msgstr "Ayrık Bacaklı Adam"
-
-#~ msgid "Man's Cart"
-#~ msgstr "Bey'in At Arabası"
-
 #~ msgid "Market"
 #~ msgstr "Pazar Yeri"
-
-#~ msgid "Market Officer"
-#~ msgstr "Pazar Görevlisi"
-
-#~ msgid "Maui's Fishhook"
-#~ msgstr "Maui İğnesi"
-
-#~ msgid "Mausoleum"
-#~ msgstr "Mozole"
 
 #~ msgid "Meadows"
 #~ msgstr "Çayır"
@@ -2358,12 +2116,6 @@ msgstr ""
 
 #~ msgid "Month"
 #~ msgstr "Ay"
-
-#~ msgid "Mooring Post"
-#~ msgstr "Palamar Babası"
-
-#~ msgid "Mortar"
-#~ msgstr "Havan"
 
 #~ msgid ""
 #~ "Movement & selection:\n"
@@ -2437,17 +2189,11 @@ msgstr ""
 #~ msgid "Names of the Constellations [V]"
 #~ msgstr "Takımyıldız İsimleri"
 
-#~ msgid "Navigator's Triangle"
-#~ msgstr "Denizci'nin Üçgeni"
-
 #~ msgid "Nebulas Names. Up to mag :"
 #~ msgstr "Şu kadirden fazla Bulutsu İsimleri:"
 
 #~ msgid "Nebulas [N]"
 #~ msgstr "Bulutsular [N]"
-
-#~ msgid "Neck"
-#~ msgstr "Boyun"
 
 #~ msgid "Net"
 #~ msgstr "Ağ"
@@ -2457,15 +2203,6 @@ msgstr ""
 
 #~ msgid "No"
 #~ msgstr "Hayır"
-
-#~ msgid "Norma"
-#~ msgstr "Cetvel"
-
-#~ msgid "North River"
-#~ msgstr "Kuzey Irmağı"
-
-#~ msgid "Northern Dipper"
-#~ msgstr "Kuzey Maşrapası"
 
 #~ msgid "OK"
 #~ msgstr "Tamam"
@@ -2479,20 +2216,11 @@ msgstr ""
 #~ msgid "Ophiuchus"
 #~ msgstr "Yılancı"
 
-#~ msgid "Orchard"
-#~ msgstr "Meyve Bahçesi"
-
-#~ msgid "Outer Fence"
-#~ msgstr "Dış Siper"
-
 #~ msgid "Ox"
 #~ msgstr "Öküz"
 
 #~ msgid "Pair of Stars"
 #~ msgstr "Yıldız Çifti"
-
-#~ msgid "Palace Gate"
-#~ msgstr "Saray Kapısı"
 
 #~ msgid "Pavo"
 #~ msgstr "Tavus Kuşu"
@@ -2502,9 +2230,6 @@ msgstr ""
 
 #~ msgid "Perseus"
 #~ msgstr "Kahraman"
-
-#~ msgid "Pestle"
-#~ msgstr "Tokmak"
 
 #~ msgid "Phoenix"
 #~ msgstr "Anka Kuşu"
@@ -2539,14 +2264,8 @@ msgstr ""
 #~ msgid "Point"
 #~ msgstr "Nokta"
 
-#~ msgid "Prow"
-#~ msgstr "Pruva"
-
 #~ msgid "Puppis"
 #~ msgstr "Pupa"
-
-#~ msgid "Purple Palace"
-#~ msgstr "Kraliyet Sarayı"
 
 #~ msgid "Pyxis"
 #~ msgstr "Pusula"
@@ -2556,15 +2275,6 @@ msgstr ""
 
 #~ msgid "Quit [CTRL + Q]"
 #~ msgstr "Çık [CTRL + Q]"
-
-#~ msgid "Rabbit Tracks"
-#~ msgstr "Tavşan İzleri"
-
-#~ msgid "Race Track"
-#~ msgstr "Koşu Yolu"
-
-#~ msgid "Ramparts"
-#~ msgstr "Siperler"
 
 #~ msgid "Real Time Speed [K]"
 #~ msgstr "Gerçek Zamanlı Hız [K]"
@@ -2584,47 +2294,14 @@ msgstr ""
 #~ msgid "Return to Current Time"
 #~ msgstr "Şu Anki Zamana Dön"
 
-#~ msgid "Return to Current Time [8]"
-#~ msgstr "Şimdiki zamana dön [8]"
-
-#~ msgid "Revolving Female"
-#~ msgstr "Dönen Kadın"
-
-#~ msgid "Revolving Male"
-#~ msgstr "Dönen Adam"
-
-#~ msgid "River Turtle"
-#~ msgstr "Nehir Kaplumbağası"
-
-#~ msgid "Rolled Tongue"
-#~ msgstr "Yuvarlanmış Dil"
-
-#~ msgid "Rooftop"
-#~ msgstr "Çatı"
-
-#~ msgid "Room"
-#~ msgstr "Oda"
-
 #~ msgid "Root"
 #~ msgstr "Kök"
-
-#~ msgid "Rotten Gourd"
-#~ msgstr "Kelek Kabak"
-
-#~ msgid "Runners"
-#~ msgstr "Koşucular"
 
 #~ msgid "Sagitta"
 #~ msgstr "Ok"
 
 #~ msgid "Sagittarius"
 #~ msgstr "Yay"
-
-#~ msgid "Sah"
-#~ msgstr "Sah"
-
-#~ msgid "Salamander"
-#~ msgstr "Semender"
 
 #~ msgid "Save as default"
 #~ msgstr "Öntanımlı olarak kaydet"
@@ -2635,17 +2312,11 @@ msgstr ""
 #~ msgid "Saving rendering options in file "
 #~ msgstr "Kaplama özellikleri dosyaya kaydediliyor "
 
-#~ msgid "Saving settings will save current full screen status"
-#~ msgstr "Ayarlar şu anki tam ekran konumuyla birlikte kaydedilecek"
-
 #~ msgid "Saving video size "
 #~ msgstr "Video boyutunu kaydediyor "
 
 #~ msgid "Scorpius"
 #~ msgstr "Akrep"
-
-#~ msgid "Screen"
-#~ msgstr "Ekran"
 
 #~ msgid "Screen Resolution :"
 #~ msgstr "Ekran Çözünürlüğü :"
@@ -2671,50 +2342,14 @@ msgstr ""
 #~ msgid "Selected Constellation Only"
 #~ msgstr "Sadece Seçili Takımyıldızları"
 
-#~ msgid "Selkis"
-#~ msgstr "Selkis"
-
 #~ msgid "Serpens"
 #~ msgstr "Yılan"
-
-#~ msgid "Setting Landscape Sets Location: "
-#~ msgstr "Konum Belirleme Ayarı "
-
-#~ msgid "Setting landscape updates the location"
-#~ msgstr "Konum Güncelleme Ayarı"
-
-#~ msgid "Seven Excellencies"
-#~ msgstr "Yedi Ekselans"
-
-#~ msgid "Seven Little Girls"
-#~ msgstr "Yedi Kandilli Süreyya"
 
 #~ msgid "Sextans"
 #~ msgstr "Sekstant"
 
 #~ msgid "Sheep"
 #~ msgstr "Koyun"
-
-#~ msgid "Sheepfold"
-#~ msgstr "Koyun Ağılı"
-
-#~ msgid "Snake"
-#~ msgstr "Yılan"
-
-#~ msgid "Soldiers Market"
-#~ msgstr "Asker Pazarı"
-
-#~ msgid "South River"
-#~ msgstr "Güney Irmağı"
-
-#~ msgid "Spear"
-#~ msgstr "Mızrak"
-
-#~ msgid "Spring"
-#~ msgstr "Bahar"
-
-#~ msgid "Square Granary"
-#~ msgstr "Kare Tahıl Ambarı"
 
 #~ msgid "Star Magnitude Multiplier: "
 #~ msgstr "Yıldız Kadir Çarpanı: "
@@ -2725,15 +2360,6 @@ msgstr ""
 #~ msgid "Star Twinkle. Amount :"
 #~ msgstr "Yıldız Pırıldama Miktarı:"
 
-#~ msgid "Stars of Water"
-#~ msgstr "Su Yıldızları"
-
-#~ msgid "Stomach"
-#~ msgstr "Mide"
-
-#~ msgid "Supreme Palace"
-#~ msgstr "Kutsal Saray"
-
 #~ msgid "Tail"
 #~ msgstr "Kuyruk"
 
@@ -2742,15 +2368,6 @@ msgstr ""
 
 #~ msgid "Telescopium"
 #~ msgstr "Teleskop"
-
-#~ msgid "The Asar Battlefield"
-#~ msgstr "Asar Muharebe Meydanı"
-
-#~ msgid "The Fishermen"
-#~ msgstr "Balıkçı"
-
-#~ msgid "The Seven"
-#~ msgstr "Yedili"
 
 #~ msgid ""
 #~ "The current config file is from a previous version (>=0.6.0).\n"
@@ -2774,12 +2391,6 @@ msgstr ""
 #~ msgid "Thunder and Lightning"
 #~ msgstr "Gökgürültüsü ve Şimşek"
 
-#~ msgid "Thunderbird"
-#~ msgstr "Yıldırım"
-
-#~ msgid "Thunderbolt"
-#~ msgstr "Yıldırım"
-
 #~ msgid ""
 #~ "Time & Date:\n"
 #~ "6   : Time rate pause           7   : Time rate 0\n"
@@ -2797,33 +2408,11 @@ msgstr ""
 #~ "[ : 7 gün geri git   ] : 7 gün ileri git\n"
 #~ "\n"
 
-#~ msgid ""
-#~ "Time & Date:\n"
-#~ "6   : Time rate pause           7   : Time rate 0\n"
-#~ "8   : Set current time          J   : Decrease time rate\n"
-#~ "K   : Normal time rate          L   : Increase time rate\n"
-#~ "- and = :  Back and forward one day (press ALT for sidereal day)\n"
-#~ "[ and ] :  Back and forward 7 days (press ALT for sidereal days)\n"
-#~ "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Zaman & Tarih \n"
-#~ "6 : Zaman akışını durdurma 7 : Zaman akış hızı 0\n"
-#~ "8 : Şimdiki zamanı ayarla J : Zaman akış hızını artır\n"
-#~ "K : Normal zaman akış hızı L : Zaman akış hızını artır\n"
-#~ "-ve=bir gün geri veya ileri git (yıldız günü için ALT'a bas)\n"
-#~ "[ ve ] : 7 gün geri veya ileri git (yıldız günü için ALT'a bas)\n"
-#~ "CTRL + - : Bir saat geri CTRL + = : Bir saat ileri\n"
-#~ "\n"
-
 #~ msgid "Time Zone :"
 #~ msgstr "Zaman Dilimi :"
 
 #~ msgid "Time speed : "
 #~ msgstr "Zaman akış hızı : "
-
-#~ msgid "Toilet"
-#~ msgstr "Tuvalet"
 
 #~ msgid "Triangle"
 #~ msgstr "Üçgen"
@@ -2834,9 +2423,6 @@ msgstr ""
 #~ msgid "Triangulum Australe"
 #~ msgstr "Güney Üçgeni"
 
-#~ msgid "Tripod"
-#~ msgstr "Üç Ayak"
-
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Daha fazla bilgi için `%s --help' yazın.\n"
 
@@ -2846,23 +2432,14 @@ msgstr ""
 #~ msgid "Tucana"
 #~ msgstr "Tukan"
 
-#~ msgid "Turtle"
-#~ msgstr "Kaplumbağa"
-
 #~ msgid "Two Jaws"
 #~ msgstr "İki Çene"
-
-#~ msgid "Two Placed Far Apart"
-#~ msgstr "İki Ayrı Yerleşim"
 
 #~ msgid "Two Poles"
 #~ msgstr "Kutuplar"
 
 #~ msgid "Two Sunbeams"
 #~ msgstr "İki Güneş Işını"
-
-#~ msgid "Two in Front"
-#~ msgstr "Karşıda İki Kişi"
 
 #~ msgid "Type: "
 #~ msgstr "Türü: "
@@ -2897,14 +2474,8 @@ msgstr ""
 #~ msgid "Vela"
 #~ msgstr "Yelken"
 
-#~ msgid "Viewport Distorter"
-#~ msgstr "Görünüm Bozulması"
-
 #~ msgid "Virgo"
 #~ msgstr "Başak"
-
-#~ msgid "Voice of Joy"
-#~ msgstr "Neşeli Ses"
 
 #~ msgid "Volans"
 #~ msgstr "Uçan Balık"
@@ -2915,50 +2486,14 @@ msgstr ""
 #~ msgid "Wall"
 #~ msgstr "Duvar"
 
-#~ msgid "Waty Bekety"
-#~ msgstr "Waty Bekety"
-
-#~ msgid "Weaving Girl"
-#~ msgstr "Dokumacı kız"
-
-#~ msgid "Well"
-#~ msgstr "Kuyu"
-
-#~ msgid "Western Door"
-#~ msgstr "Batı Kapısı"
-
 #~ msgid "Will create config files in %s\n"
 #~ msgstr "Yapılandırma dosyası  %s dizininde yaratılacak\n"
-
-#~ msgid "Willow"
-#~ msgstr "Söğüt"
-
-#~ msgid "Wings"
-#~ msgstr "Kanatlar"
-
-#~ msgid "Winnowing Basket"
-#~ msgstr "Harman Eleği"
-
-#~ msgid "Wolf's Mouth"
-#~ msgstr "Kurt Ağzı"
-
-#~ msgid "Woman's Bed"
-#~ msgstr "Kadının Yatağı"
-
-#~ msgid "Woman's Cart"
-#~ msgstr "Hanım'ın At Arabası"
-
-#~ msgid "Xuanyuan"
-#~ msgstr "Xuanyuan"
 
 #~ msgid "Year"
 #~ msgstr "Yıl"
 
 #~ msgid "Yes"
 #~ msgstr "Evet"
-
-#~ msgid "Zaofu"
-#~ msgstr "Zaofu"
 
 #~ msgid "change to apply."
 #~ msgstr "değişiklik uygulanıyor."
@@ -2975,8 +2510,493 @@ msgstr ""
 #~ msgid "eg. Pluto or Io"
 #~ msgstr "Örn. Pluton ya da Ay"
 
-#~ msgid "m"
-#~ msgstr "m"
-
 #~ msgid "to save current landscape as the default landscape."
 #~ msgstr "bulunduğunuz noktayı işaretleyip kaydedin."
+
+#~ msgid "Are you sure ?"
+#~ msgstr "Emin misiniz ?"
+
+#~ msgid "Arsenal"
+#~ msgstr "Cephanelik"
+
+#~ msgid "Bailer"
+#~ msgstr "Kefil"
+
+#~ msgid "Banner of Three Stars"
+#~ msgstr "Üç Yıldızlı Bayrak"
+
+#~ msgid "Bear's Lodge"
+#~ msgstr "Ayı İni"
+
+#~ msgid "Bond"
+#~ msgstr "Bağ"
+
+#~ msgid "Bull's Foreleg"
+#~ msgstr "Boğanın Ön Ayağı"
+
+#~ msgid "Cared for by Moon"
+#~ msgstr "Aya Adanmış"
+
+#~ msgid "Cat's Cradle"
+#~ msgstr "Kedi Beşiği"
+
+#~ msgid "Chariot"
+#~ msgstr "Savaş Arabası"
+
+#~ msgid "Chariot Yard"
+#~ msgstr "Atlı Araba Ağılı"
+
+#~ msgid "Chematy"
+#~ msgstr "Chematy"
+
+#~ msgid "Circular Granary"
+#~ msgstr "Yuvarlak Tahıl Ambarı"
+
+#~ msgid "Coiled Thong"
+#~ msgstr "Kayış"
+
+#~ msgid "Curved Array"
+#~ msgstr "Eğrisel Dizi"
+
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "CTRL + G : Goto selected solar system object\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Dialoglar ve diğer kontroller :\n"
+#~ "H: Yardım I : Stellarium Hakkında \n"
+#~ "M : Metin menüsü 1 (bir) : Konfigürasyon\n"
+#~ "CTRL+S : Ekran görüntüsü al\n"
+#~ "CTRL+R : Komut kaydına geçiş \n"
+#~ "CTRL+F : Nesne bulmaya geçiş\n"
+#~ "CTRL+G : Seçilen güneş sistemi cismine git\n"
+#~ "\n"
+
+#~ msgid "Dilyehe"
+#~ msgstr "Dilyehe"
+
+#~ msgid "Dipper"
+#~ msgstr "Maşrapa"
+
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen / window.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Götrüntü seçenekleri : \n"
+#~ "ENTER : Ekvatoral/altazimutal montaj\n"
+#~ "F1 : Tam ekran/ pencere.\n"
+#~ "C: Takımyıldızı çizgileri V:Takımyıldızı etiketleri\n"
+#~ "R: Takımyıldızı fotoğrafı E: Ekvatoryal ızgara\n"
+#~ "Z:Azimutal ızgara N:Bulutsu Etiketleri\n"
+#~ "P:Gezegen etiketleri G:Yer\n"
+#~ "A:Atmosfer F: Sis\n"
+#~ "Q:Ana yönler O:Ay Ölçeklemesine Geçiş\n"
+#~ "T:Nesne takibi S: Yıldızlar\n"
+#~ "4,:Ekliptik Çizgisi 5.:Ekvator çizgisi\n"
+#~ "\n"
+
+#~ msgid "Do"
+#~ msgstr "Yap"
+
+#~ msgid "Done"
+#~ msgstr "Yapıldı"
+
+#~ msgid "Dried Willow"
+#~ msgstr "Kurutulmuş Söğüt"
+
+#~ msgid "Earth God's Temple"
+#~ msgstr "Tanrı'nın Yeryüzündeki Evi"
+
+#~ msgid "Eastern Door"
+#~ msgstr "Doğu Kapısı"
+
+#~ msgid "Elk"
+#~ msgstr "Geyik"
+
+#~ msgid "Emptiness"
+#~ msgstr "Yoksunluk"
+
+#~ msgid "Encampment"
+#~ msgstr "Ordugâh"
+
+#~ msgid "Establishment"
+#~ msgstr "Yönetici Sınıf"
+
+#~ msgid "Extended Net"
+#~ msgstr "Genişletilmiş Ağ"
+
+#~ msgid "Farmland"
+#~ msgstr "Çiftlik Evi"
+
+#~ msgid "Fireplace"
+#~ msgstr "Ocak"
+
+#~ msgid "First Big One"
+#~ msgstr "İlk İri Yapılı"
+
+#~ msgid "Five Chariots"
+#~ msgstr "Beş Savaş Arabası"
+
+#~ msgid "Five Feudal Kings"
+#~ msgstr "Beş Derebeyi"
+
+#~ msgid "Flail"
+#~ msgstr "Harman Döven"
+
+#~ msgid "Flock"
+#~ msgstr "Flok"
+
+#~ msgid "Flying Corridor"
+#~ msgstr "Uçuş Koridoru"
+
+#~ msgid "Frigate Bird"
+#~ msgstr "Fırkateyn Kuşu"
+
+#~ msgid "Ghosts"
+#~ msgstr "Hayaletler"
+
+#~ msgid "Giant"
+#~ msgstr "Dev"
+
+#~ msgid "Good Gourd"
+#~ msgstr "Olgun Kabak"
+
+#~ msgid "Great General"
+#~ msgstr "Büyük General"
+
+#~ msgid "Hippopotamus"
+#~ msgstr "Suaygırı"
+
+#~ msgid "Horus"
+#~ msgstr "Horus"
+
+#~ msgid "Imperial Guards"
+#~ msgstr "İmparatorluk Muhafızları"
+
+#~ msgid "Imperial Passageway"
+#~ msgstr "İmparatorluk Geçidi"
+
+#~ msgid "Jade Well"
+#~ msgstr "Yeşim Kuyu"
+
+#~ msgid "Kenemet"
+#~ msgstr "Kenemet"
+
+#~ msgid "Khanuwy Fish"
+#~ msgstr "Hanuvi Balığı"
+
+#~ msgid "Kitchen"
+#~ msgstr "Mutfak"
+
+#~ msgid "Kite of Kawelo"
+#~ msgstr "Kawelo Kartalı"
+
+#~ msgid "Man with Feet Apart"
+#~ msgstr "Ayrık Bacaklı Adam"
+
+#~ msgid "Market Officer"
+#~ msgstr "Pazar Görevlisi"
+
+#~ msgid "Maui's Fishhook"
+#~ msgstr "Maui İğnesi"
+
+#~ msgid "Mausoleum"
+#~ msgstr "Mozole"
+
+#~ msgid "Mooring Post"
+#~ msgstr "Palamar Babası"
+
+#~ msgid "Mortar"
+#~ msgstr "Havan"
+
+#~ msgid "Navigator's Triangle"
+#~ msgstr "Denizci'nin Üçgeni"
+
+#~ msgid "Neck"
+#~ msgstr "Boyun"
+
+#~ msgid "Norma"
+#~ msgstr "Cetvel"
+
+#~ msgid "North River"
+#~ msgstr "Kuzey Irmağı"
+
+#~ msgid "Northern Dipper"
+#~ msgstr "Kuzey Maşrapası"
+
+#~ msgid "Orchard"
+#~ msgstr "Meyve Bahçesi"
+
+#~ msgid "Outer Fence"
+#~ msgstr "Dış Siper"
+
+#~ msgid "Palace Gate"
+#~ msgstr "Saray Kapısı"
+
+#~ msgid "Pestle"
+#~ msgstr "Tokmak"
+
+#~ msgid "Prow"
+#~ msgstr "Pruva"
+
+#~ msgid "Purple Palace"
+#~ msgstr "Kraliyet Sarayı"
+
+#~ msgid "Rabbit Tracks"
+#~ msgstr "Tavşan İzleri"
+
+#~ msgid "Race Track"
+#~ msgstr "Koşu Yolu"
+
+#~ msgid "Ramparts"
+#~ msgstr "Siperler"
+
+#~ msgid "Return to Current Time [8]"
+#~ msgstr "Şimdiki zamana dön [8]"
+
+#~ msgid "Revolving Female"
+#~ msgstr "Dönen Kadın"
+
+#~ msgid "Revolving Male"
+#~ msgstr "Dönen Adam"
+
+#~ msgid "River Turtle"
+#~ msgstr "Nehir Kaplumbağası"
+
+#~ msgid "Rolled Tongue"
+#~ msgstr "Yuvarlanmış Dil"
+
+#~ msgid "Rooftop"
+#~ msgstr "Çatı"
+
+#~ msgid "Room"
+#~ msgstr "Oda"
+
+#~ msgid "Rotten Gourd"
+#~ msgstr "Kelek Kabak"
+
+#~ msgid "Sah"
+#~ msgstr "Sah"
+
+#~ msgid "Salamander"
+#~ msgstr "Semender"
+
+#~ msgid "Saving settings will save current full screen status"
+#~ msgstr "Ayarlar şu anki tam ekran konumuyla birlikte kaydedilecek"
+
+#~ msgid "Screen"
+#~ msgstr "Ekran"
+
+#~ msgid "Selkis"
+#~ msgstr "Selkis"
+
+#~ msgid "Setting Landscape Sets Location: "
+#~ msgstr "Konum Belirleme Ayarı "
+
+#~ msgid "Setting landscape updates the location"
+#~ msgstr "Konum Güncelleme Ayarı"
+
+#~ msgid "Seven Excellencies"
+#~ msgstr "Yedi Ekselans"
+
+#~ msgid "Seven Little Girls"
+#~ msgstr "Yedi Kandilli Süreyya"
+
+#~ msgid "Sheepfold"
+#~ msgstr "Koyun Ağılı"
+
+#~ msgid "Snake"
+#~ msgstr "Yılan"
+
+#~ msgid "Soldiers Market"
+#~ msgstr "Asker Pazarı"
+
+#~ msgid "South River"
+#~ msgstr "Güney Irmağı"
+
+#~ msgid "Spear"
+#~ msgstr "Mızrak"
+
+#~ msgid "Spring"
+#~ msgstr "Bahar"
+
+#~ msgid "Square Granary"
+#~ msgstr "Kare Tahıl Ambarı"
+
+#~ msgid "Stars of Water"
+#~ msgstr "Su Yıldızları"
+
+#~ msgid "Stomach"
+#~ msgstr "Mide"
+
+#~ msgid "Supreme Palace"
+#~ msgstr "Kutsal Saray"
+
+#~ msgid "The Seven"
+#~ msgstr "Yedili"
+
+#~ msgid "Thunderbird"
+#~ msgstr "Yıldırım"
+
+#~ msgid "Thunderbolt"
+#~ msgstr "Yıldırım"
+
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "6   : Time rate pause           7   : Time rate 0\n"
+#~ "8   : Set current time          J   : Decrease time rate\n"
+#~ "K   : Normal time rate          L   : Increase time rate\n"
+#~ "- and = :  Back and forward one day (press ALT for sidereal day)\n"
+#~ "[ and ] :  Back and forward 7 days (press ALT for sidereal days)\n"
+#~ "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Zaman & Tarih \n"
+#~ "6 : Zaman akışını durdurma 7 : Zaman akış hızı 0\n"
+#~ "8 : Şimdiki zamanı ayarla J : Zaman akış hızını artır\n"
+#~ "K : Normal zaman akış hızı L : Zaman akış hızını artır\n"
+#~ "-ve=bir gün geri veya ileri git (yıldız günü için ALT'a bas)\n"
+#~ "[ ve ] : 7 gün geri veya ileri git (yıldız günü için ALT'a bas)\n"
+#~ "CTRL + - : Bir saat geri CTRL + = : Bir saat ileri\n"
+#~ "\n"
+
+#~ msgid "Toilet"
+#~ msgstr "Tuvalet"
+
+#~ msgid "Tripod"
+#~ msgstr "Üç Ayak"
+
+#~ msgid "Turtle"
+#~ msgstr "Kaplumbağa"
+
+#~ msgid "Viewport Distorter"
+#~ msgstr "Görünüm Bozulması"
+
+#~ msgid "Voice of Joy"
+#~ msgstr "Neşeli Ses"
+
+#~ msgid "Waty Bekety"
+#~ msgstr "Waty Bekety"
+
+#~ msgid "Weaving Girl"
+#~ msgstr "Dokumacı kız"
+
+#~ msgid "Well"
+#~ msgstr "Kuyu"
+
+#~ msgid "Western Door"
+#~ msgstr "Batı Kapısı"
+
+#~ msgid "Willow"
+#~ msgstr "Söğüt"
+
+#~ msgid "Wings"
+#~ msgstr "Kanatlar"
+
+#~ msgid "Winnowing Basket"
+#~ msgstr "Harman Eleği"
+
+#~ msgid "Woman's Bed"
+#~ msgstr "Kadının Yatağı"
+
+#~ msgid "Xuanyuan"
+#~ msgstr "Xuanyuan"
+
+#~ msgid "Zaofu"
+#~ msgstr "Zaofu"
+
+#~ msgid "Aurvandil's Toe"
+#~ msgstr "Aurvandil'in Ayak Parmağı"
+
+#~ msgid "Blubber Container"
+#~ msgstr "Donyağı Kırbası"
+
+#~ msgid "Breastbone"
+#~ msgstr "Kaburga Kemiği"
+
+#~ msgid "First Slim One"
+#~ msgstr "İlk Zayıf Yapılı"
+
+#~ msgid "Hand"
+#~ msgstr "El"
+
+#~ msgid "Lamp Stand"
+#~ msgstr "Şamdan"
+
+#~ msgid "Man's Cart"
+#~ msgstr "Bey'in At Arabası"
+
+#~ msgid "Runners"
+#~ msgstr "Koşucular"
+
+#~ msgid "The Asar Battlefield"
+#~ msgstr "Asar Muharebe Meydanı"
+
+#~ msgid "The Fishermen"
+#~ msgstr "Balıkçı"
+
+#~ msgid "Two Placed Far Apart"
+#~ msgstr "İki Ayrı Yerleşim"
+
+#~ msgid "Two in Front"
+#~ msgstr "Karşıda İki Kişi"
+
+#~ msgid "Wolf's Mouth"
+#~ msgstr "Kurt Ağzı"
+
+#~ msgid "Woman's Cart"
+#~ msgstr "Hanım'ın At Arabası"
+
+#~ msgid ""
+#~ "   Please check for newer versions and send bug reports\n"
+#~ "and comments to us at: http://stellarium.sourceforge.net\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Lütfen güncel sürümü kullandığınızdan emin olun ve \n"
+#~ " http://www.stellarium.org sitesine önerilerinizi  bildirin.\n"
+#~ "\n"
+
+#~ msgid " Current Time :"
+#~ msgstr "Şu Anki Saat:"
+
+#~ msgid " Projection :"
+#~ msgstr "Projeksiyon:"
+
+#~ msgid " Screen Resolution :"
+#~ msgstr "Ekran Çözünürlüğü:"
+
+#~ msgid " Time Zone :"
+#~ msgstr "Zaman Dilimi:"
+
+#~ msgid " Time speed : "
+#~ msgstr "Zaman Akış Hızı: "
+
+#~ msgid " Using System Default Time Zone"
+#~ msgstr "Öntanımlı Sistem Saatini Kullanımı"
+
+#~ msgid " Choose landscapes :"
+#~ msgstr "Yeryüzü Şeklini Seç:"
+
+#~ msgid "HP No./Name"
+#~ msgstr "HP No./Adı"
+
+#~ msgid "Loading Hipparcos catalog: %d/%d"
+#~ msgstr "Hipparcos Kataloğu yükleniyor: %d/%d"
+
+#~ msgid "Loading Nebula Data: %d/%d"
+#~ msgstr "Nebula Verisi Yükleniyor: %d/%d"

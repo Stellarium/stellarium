@@ -80,7 +80,8 @@ public:
 	//! Get available language name in native language from passed locales directory
 	QStringList getAvailableLanguagesNamesNative(const QString& localeDir="") const;	
 
-	//! Convert from ISO639-1 2 letters langage code to native language name
+	//! Convert from ISO639-1 langage code to native language name
+	//! @param languageCode the code to look up
 	static QString iso639_1CodeToNativeName(const QString& languageCode);
 	
 	//! Convert from native language name to ISO639-1 2 letters langage code 
