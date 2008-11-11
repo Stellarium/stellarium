@@ -27,6 +27,7 @@
 #include <QFile>
 #include <QDebug>
 #include <QStringList>
+#include <QRegExp>
 #include <QLocale>
 
 #include "StelUtils.hpp"
@@ -152,24 +153,29 @@ QString Translator::iso639_1CodeToNativeName(const QString& languageCode)
 {
 	QLocale loc(languageCode);
 	QString l = loc.name();
-	if (l.contains('_'))
-		l.truncate(l.indexOf('_'));
-	if (iso639codes.find(l)!=iso639codes.end())
-	{
-		return iso639codes[l]+ (languageCode.size()==2 ? "" : QString(" (")+QLocale::countryToString(loc.country())+")");
-	}
-	return languageCode;
+		// There is a QLocale for this code.  This should be the case for most
+		// language codes, but there are a few without QLocales, e.g. Interlingua
+		if (l.contains('_'))
+			l.truncate(l.indexOf('_'));
+		if (iso639codes.find(l)!=iso639codes.end())
+			return iso639codes[l]+ (languageCode.size()==2 ? "" : QString(" (")+QLocale::countryToString(loc.country())+")");
+
+		// For codes which return the locale C, use the language code to do the lookup
+		if (iso639codes.contains(languageCode))
+			return iso639codes[languageCode];
+		
+		// qWarning() << "WARNING: Cannot determine name of language for code" << languageCode;
+		return languageCode;
 }
-	
+
 //! Convert from native language name to ISO639-1 2(+3) letters langage code 
 QString Translator::nativeNameToIso639_1Code(const QString& languageName)
 {
 	QMap<QString, QString>::iterator iter;
 	for (iter=iso639codes.begin();iter!=iso639codes.end();++iter)
-	{
 		if (iter.value() == languageName)
 			return iter.key();
-	}
+
 	return languageName;
 }
 
@@ -183,7 +189,7 @@ QStringList Translator::getAvailableLanguagesNamesNative(const QString& localeDi
 	QStringList output;
 	foreach (QString lang, codeList)
 	{
-		output+=iso639_1CodeToNativeName(lang);
+		output += iso639_1CodeToNativeName(lang);
 	}
 	return output;
 }
@@ -239,17 +245,9 @@ void Translator::initIso639_1LanguageCodes(const QString& fileName)
 	
 	while (!inf.atEnd())
 	{
-		QByteArray record = inf.readLine();
-		int pos = record.indexOf('\t', 4);
-		if (pos==-1)
-		{
-			qWarning() << "Error: invalid entry in ISO639 codes: " << record << "from file " << fileName;
-		}
-		else
-		{
-			// remove trailing newline, see QFile.readLine()
-			record.chop(1);
-			iso639codes.insert(record.left(2), QString::fromUtf8(record.mid(pos+1)));
-		}
+		QString record = QString::fromUtf8(inf.readLine());
+		record.remove(QRegExp("[\\n\\r]*$")); // chomp new lines
+		QStringList fields = record.split("\t", QString::SkipEmptyParts);
+		iso639codes.insert(fields.at(0), fields.at(2));
 	}
 }

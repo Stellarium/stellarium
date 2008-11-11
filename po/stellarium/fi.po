@@ -7,253 +7,253 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-22 15:19+0200\n"
-"PO-Revision-Date: 2008-08-10 15:04+0000\n"
+"POT-Creation-Date: 2008-09-28 10:37+0200\n"
+"PO-Revision-Date: 2008-10-06 12:09+0000\n"
 "Last-Translator: VeikkoM <veikko.makela@ursa.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-09-22 12:17+0000\n"
+"X-Launchpad-Export-Date: 2008-11-11 09:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/ui_locationDialogGui.h:411
-msgid " m"
-msgstr ""
+#: src/modules/ConstellationMgr.cpp:376
+#, qt-format
+msgid "Loading Constellation Art: %1/%2"
+msgstr "Luetaan tähdistökuvia: %1/%2"
 
-#: src/gui/StelGuiItems.cpp:432
-#, no-c-format, qt-format
-msgid "%1m"
-msgstr "%1m"
+#: src/modules/StarMgr.cpp:272
+#, qt-format
+msgid "Loading catalog %1"
+msgstr "Luetaan luetteloa %1"
+
+#: src/modules/LandscapeMgr.cpp:433
+msgid "Author: "
+msgstr "Tekijä: "
+
+#: src/modules/LandscapeMgr.cpp:436
+msgid "Location: "
+msgstr "Sijainti: "
 
 #: src/modules/LandscapeMgr.cpp:441
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
-msgid "/"
-msgstr ""
+#: src/modules/LandscapeMgr.cpp:444
+msgid "Planet: "
+msgstr "Planeetta: "
 
-#: src/ui_viewDialog.h:992
-msgid "0"
-msgstr "0"
+#: src/modules/Nebula.cpp:93
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr "Tyyppi: <b>%1</b>"
 
-#: src/ui_viewDialog.h:993
-msgid "10"
-msgstr "10"
+#: src/modules/Nebula.cpp:96 src/modules/Planet.cpp:130
+#, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr "Magnitudi: <b>%1</b>"
 
-#: src/ui_viewDialog.h:995
-msgid "10000"
-msgstr "10000"
+#: src/modules/Nebula.cpp:101
+#, qt-format
+msgid "Size: %1"
+msgstr "Koko: %1"
 
-#: src/ui_viewDialog.h:996
-msgid "144000"
-msgstr "144000"
+#: src/modules/Nebula.cpp:237
+msgid "Galaxy"
+msgstr "Galaksi"
 
-#: src/ui_viewDialog.h:994
-msgid "80"
-msgstr "80"
+#: src/modules/Nebula.cpp:240
+msgid "Open cluster"
+msgstr "Avonainen tähtijoukko"
 
-#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
-msgid ":"
-msgstr ""
+#: src/modules/Nebula.cpp:243
+msgid "Globular cluster"
+msgstr "Pallomainen tähtijoukko"
 
-#: src/ui_helpDialogGui.h:215
-msgid "About"
-msgstr ""
+#: src/modules/Nebula.cpp:246
+msgid "Nebula"
+msgstr "Tähtisumu"
+
+#: src/modules/Nebula.cpp:249
+msgid "Planetary nebula"
+msgstr "Planetaarinen sumu"
+
+#: src/modules/Nebula.cpp:252
+msgid "Cluster associated with nebulosity"
+msgstr "Tähtijoukko ja -sumu"
+
+#: src/modules/Nebula.cpp:255
+msgid "Unknown"
+msgstr "Tuntematon"
+
+#: src/modules/Nebula.cpp:258
+msgid "Undocumented type"
+msgstr "Dokumentoimaton tyyppi"
+
+#: src/modules/NebulaMgr.cpp:372
+#, qt-format
+msgid "Loading NGC catalog: %1/%2"
+msgstr "Luetaan NGC-luetteloa: %1/%2"
 
 #: src/modules/Planet.cpp:133 src/modules/StarWrapper.cpp:102
 #, qt-format
 msgid "Absolute Magnitude: %1"
-msgstr ""
+msgstr "Absoluuttinen magnitudi: %1"
 
-#: src/ui_viewDialog.h:974
-msgid "Absolute scale:"
-msgstr "Absoluuttinen mittakaava:"
-
-#: src/modules/TextUI.cpp:86
-msgid "Actual Time"
-msgstr "Nykyinen aika"
-
-#: src/gui/StelGui.cpp:191
-msgid "Add 1 sidereal day"
-msgstr "Lisää tähtipäivä"
-
-#: src/gui/StelGui.cpp:193
-msgid "Add 1 sidereal week"
-msgstr "Lisää tähtiviikko"
-
-#: src/gui/StelGui.cpp:187
-msgid "Add 1 solar day"
-msgstr "Lisää aurinkopäivä"
-
-#: src/gui/StelGui.cpp:185
-msgid "Add 1 solar hour"
-msgstr "Lisää aurinkotunti"
-
-#: src/gui/StelGui.cpp:189
-msgid "Add 1 solar week"
-msgstr "Lisää aurinkoviikko"
-
-#: src/ui_locationDialogGui.h:392
-msgid "Add to list"
-msgstr ""
-
-#: src/modules/TextUI.cpp:70
-msgid "Administration "
-msgstr "Hallinta "
-
-#: src/ui_configurationDialog.h:559
-msgid "Align labels with the horizon"
-msgstr "Suuntaa nimet horisontin mukaan"
-
-#: src/ui_configurationDialog.h:496
-msgid "All availalable"
-msgstr ""
-
-#: src/ui_configurationDialog.h:513
-msgid "Allow keyboard to pan and zoom"
-msgstr "Salli siirtyminen ja suurennus/loitonnus näppäimistöllä"
-
-#: src/ui_configurationDialog.h:519
-msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr ""
-"Salli hiirellä liikkuminen (vetämällä) ja suurennus/loitonnus (rullalla)"
-
-#: src/modules/TextUI.cpp:75
-msgid "Altitude (m): "
-msgstr "Korkeus (m): "
-
-#: src/ui_locationDialogGui.h:405
-msgid "Altitude:"
-msgstr "Korkeus:"
-
-#: src/ui_configurationDialog.h:543
-msgid "Amateur astronomer options"
-msgstr ""
+#: src/modules/Planet.cpp:140
+#, no-c-format, qt-format
+msgid "Distance: %1AU"
+msgstr "Etäisyys: %1 AU"
 
 #: src/modules/Planet.cpp:144
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Näennäinen läpimitta: %1"
 
-#: src/modules/TextUI.cpp:136
-msgid "Arrow down to load list."
-msgstr "Hae lista alanuolella."
-
-#: src/gui/HelpDialog.cpp:52
-msgid "Arrow keys & left mouse drag"
-msgstr "Nuolinäppäimet & veto hiiren vasemmalla näppäimellä"
-
-#: src/ui_viewDialog.h:1012
-msgid "Art brightness: "
-msgstr "Kuvien voimakkuus: "
-
-#: src/gui/StelGui.cpp:159 src/ui_viewDialog.h:983
-msgid "Atmosphere"
-msgstr "Ilmakehä"
-
-#: src/modules/LandscapeMgr.cpp:433
-msgid "Author: "
-msgstr "Tekijä: "
-
-#: src/gui/StelGui.cpp:209
-msgid "Auto hide horizontal button bar"
-msgstr ""
-
-#: src/gui/StelGui.cpp:210
-msgid "Auto hide vertical button bar"
-msgstr ""
-
-#: src/ui_configurationDialog.h:568
-msgid "Auto zoom out returns to initial direction of view"
-msgstr ""
-
-#: src/core/StelObject.cpp:100
+#: src/modules/StarWrapper.cpp:41 src/modules/StarWrapper.cpp:98
 #, qt-format
-msgid "Az/Alt: %1/%2"
-msgstr "Atsim./Kork.: %1/%2"
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr "Magnitudi: <b>%1</b> (B-V: %2)"
 
-#: src/gui/StelGui.cpp:150 src/ui_viewDialog.h:1002
-msgid "Azimutal grid"
-msgstr "Atsimuuttiasteikko"
+#: src/modules/StarWrapper.cpp:108
+#, qt-format
+msgid "Spectral Type: %1"
+msgstr "Spektriluokka: %1"
 
-#: src/modules/TextUI.cpp:113
-msgid "Azimuthal Grid"
-msgstr "Atsimuuttiasteikko"
+#: src/modules/StarWrapper.cpp:112
+#, qt-format
+msgid "Distance: %1 Light Years"
+msgstr "Etäisyys: %1 valovuotta"
 
-#: src/modules/TextUI.cpp:134
-msgid "CD/DVD Script: "
-msgstr "CD/DVD-komentojono: "
+#: src/modules/StarWrapper.cpp:115
+#, qt-format
+msgid "Parallax: %1\""
+msgstr "Parallaksi: %1\""
 
-#: src/gui/HelpDialog.cpp:57
-msgid "CTRL + Left click"
-msgstr "CTRL + napsauta vasemmalla"
+#: src/modules/TextUI.cpp:63
+msgid "Set Location "
+msgstr "Aseta paikkakunta "
 
-#: src/gui/HelpDialog.cpp:54
-msgid "CTRL + Up/Down"
-msgstr "CTRL + Ylös/alas"
+#: src/modules/TextUI.cpp:64
+msgid "Set Time "
+msgstr "Aseta aika "
 
-#: src/modules/TextUI.cpp:82
-msgid "Calendar"
-msgstr "Kalenteri"
+#: src/modules/TextUI.cpp:65
+msgid "General "
+msgstr "Yleistä "
 
-#: src/translations.h:45
-msgid "Callisto"
-msgstr "Kallisto"
-
-#: src/modules/TextUI.cpp:108
-msgid "Cardinal Points"
-msgstr "Ilmansuunnat"
-
-#: src/gui/StelGui.cpp:156 src/ui_viewDialog.h:1006
-msgid "Cardinal points"
-msgstr "Ilmansuunnat"
-
-#: src/ui_viewDialog.h:999
-msgid "Celestial Sphere"
-msgstr "Taivaanpallo"
-
-#: src/gui/StelGui.cpp:197
-msgid "Center on selected object"
-msgstr "Keskitä valittuun kohteeseen"
-
-#: src/translations.h:59
-msgid "Charon"
-msgstr "Kharon"
-
-#: src/translations.h:69
-msgid "Chinese"
-msgstr "Kiinalainen"
-
-#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
-msgid "Clear selection"
-msgstr "Poista valinta"
-
-#: src/modules/Nebula.cpp:252
-msgid "Cluster associated with nebulosity"
-msgstr "Tähtijoukko ja -sumu"
+#: src/modules/TextUI.cpp:66
+msgid "Stars "
+msgstr "Tähdet "
 
 #: src/modules/TextUI.cpp:67
 msgid "Colors "
 msgstr "Värit "
 
-#: src/ui_configurationDialog.h:477
-msgid "Configuration"
-msgstr "Asetukset"
+#: src/modules/TextUI.cpp:68
+msgid "Effects "
+msgstr "Tehosteet "
 
-#: src/gui/StelGui.cpp:174
-msgid "Configuration window"
-msgstr "Asetusikkuna"
+#: src/modules/TextUI.cpp:69
+msgid "Scripts "
+msgstr "Komentosarjat "
 
-#: src/modules/TextUI.cpp:106
-msgid "Constellation Art Intensity"
-msgstr "Tähdistökuvien voimakkuus"
+#: src/modules/TextUI.cpp:70
+msgid "Administration "
+msgstr "Hallinta "
 
-#: src/modules/TextUI.cpp:107
-msgid "Constellation Boundaries"
-msgstr "Tähdistöjen rajat"
+#: src/modules/TextUI.cpp:73
+msgid "Latitude: "
+msgstr "Leveys: "
+
+#: src/modules/TextUI.cpp:74
+msgid "Longitude: "
+msgstr "Pituus: "
+
+#: src/modules/TextUI.cpp:75
+msgid "Altitude (m): "
+msgstr "Korkeus (m): "
+
+#: src/modules/TextUI.cpp:76
+msgid "Solar System Body: "
+msgstr "Aurinkokunnan kohde: "
+
+#: src/modules/TextUI.cpp:79
+msgid "Sky Time: "
+msgstr "Taivaan aika: "
+
+#: src/modules/TextUI.cpp:80
+msgid "Set Time Zone: "
+msgstr "Aseta aikavyöhyke: "
+
+#: src/modules/TextUI.cpp:81
+msgid "Day keys: "
+msgstr "Päivänäppäimet: "
+
+#: src/modules/TextUI.cpp:82
+msgid "Calendar"
+msgstr "Kalenteri"
+
+#: src/modules/TextUI.cpp:83
+msgid "Sidereal"
+msgstr "Tähtiaika"
+
+#: src/modules/TextUI.cpp:84
+msgid "Preset Sky Time: "
+msgstr "Esiasetettu taivaan aika: "
+
+#: src/modules/TextUI.cpp:85
+msgid "Sky Time At Start-up: "
+msgstr "Taivaan aika aloitettaessa: "
+
+#: src/modules/TextUI.cpp:86
+msgid "Actual Time"
+msgstr "Nykyinen aika"
+
+#: src/modules/TextUI.cpp:87
+msgid "Preset Time"
+msgstr "Esiasetettu aika"
+
+#: src/modules/TextUI.cpp:88
+msgid "Time Display Format: "
+msgstr "Kellonajan muoto: "
+
+#: src/modules/TextUI.cpp:89
+msgid "Date Display Format: "
+msgstr "Päiväyksen muoto: "
+
+#: src/modules/TextUI.cpp:92
+msgid "Sky Culture: "
+msgstr "Tähtitaivaskulttuuri: "
+
+#: src/modules/TextUI.cpp:93
+msgid "Sky Language: "
+msgstr "Tähtitaivaskieli: "
+
+#: src/modules/TextUI.cpp:96
+msgid "Show: "
+msgstr "Näytä: "
+
+#: src/modules/TextUI.cpp:97
+msgid "Star Value Multiplier: "
+msgstr "Tähtien määrän kerroin: "
+
+#: src/modules/TextUI.cpp:98
+msgid "Magnitude Sizing Multiplier: "
+msgstr "Magnitudin kokokerroin: "
+
+#: src/modules/TextUI.cpp:99
+msgid "Maximum Magnitude to Label: "
+msgstr "Maksimimagnitudi nimelle: "
+
+#: src/modules/TextUI.cpp:100
+msgid "Twinkling: "
+msgstr "Tuikkiminen: "
+
+#: src/modules/TextUI.cpp:101
+msgid "Limiting Magnitude: "
+msgstr "Rajamagnitudi: "
 
 #: src/modules/TextUI.cpp:104
 msgid "Constellation Lines"
@@ -263,641 +263,17 @@ msgstr "Tähtikuvioviivat"
 msgid "Constellation Names"
 msgstr "Tähdistöjen nimet"
 
-#: src/gui/StelGui.cpp:146
-msgid "Constellation art"
-msgstr "Tähdistökuvat"
-
-#: src/gui/StelGui.cpp:148
-msgid "Constellation boundaries"
-msgstr "Tähdistöjen rajaviivat"
-
-#: src/gui/StelGui.cpp:147
-msgid "Constellation labels"
-msgstr "Tähdistöjen nimet"
-
-#: src/gui/StelGui.cpp:145
-msgid "Constellation lines"
-msgstr "Tähdistöviivat"
-
-#: src/ui_viewDialog.h:1007
-msgid "Constellations"
-msgstr "Tähdistöt"
-
-#: src/ui_configurationDialog.h:510
-msgid "Control"
-msgstr ""
-
-#: src/modules/TextUI.cpp:130
-msgid "Correct for light travel time: "
-msgstr "Korjaa valon matka-aika: "
-
-#: src/ui_locationDialogGui.h:413
-msgid "Country:"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:389
-msgid "Current location information"
-msgstr ""
-
-#: src/modules/TextUI.cpp:129
-msgid "Cursor Timeout: "
-msgstr "Kohdistimen aikakatkaisu: "
-
-#: src/core/MappingClasses.cpp:223
-msgid "Cylinder"
-msgstr "Lieriö"
-
-#: src/modules/TextUI.cpp:89
-msgid "Date Display Format: "
-msgstr "Päiväyksen muoto: "
-
-#: src/gui/StelGui.cpp:180 src/ui_dateTimeDialogGui.h:294
-msgid "Date and Time"
-msgstr "Päivays ja aika"
-
-#: src/gui/StelGui.cpp:177
-msgid "Date/time window"
-msgstr "Päiväys/aika-ikkuna"
-
-#: src/modules/TextUI.cpp:81
-msgid "Day keys: "
-msgstr "Päivänäppäimet: "
-
-#: src/gui/StelGui.cpp:181
-msgid "Decrease time speed"
-msgstr "Pienennä aika-askelta"
-
-#: src/ui_configurationDialog.h:504
-msgid "Default options"
-msgstr ""
-
-#: src/translations.h:39
-msgid "Deimos"
-msgstr "Deimos"
-
-#: src/ui_locationDialogGui.h:391
-msgid "Delete"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:274 src/gui/HelpDialog.cpp:276
-#: src/gui/HelpDialog.cpp:279
-#, qt-format
-msgid "Developer: %1"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:272
-msgid "Developers"
-msgstr ""
-
-#: src/ui_viewDialog.h:979
-msgid "Dim faint stars when a very bright object is visible"
-msgstr "Heikennä himmeitä tähtiä, jos hyvin kirkas kohde on näkyvissä"
-
-#: src/translations.h:50
-msgid "Dione"
-msgstr "Dione"
-
-#: src/ui_configurationDialog.h:574
-msgid "Disc viewport"
-msgstr "Putkinäkymä"
-
-#: src/gui/StelGui.cpp:144
-msgid "Display Options"
-msgstr "Näyttöasetukset"
-
-#: src/ui_configurationDialog.h:493
-msgid "Display all of the information which is available"
-msgstr "Näytä kaikki saatavilla olevat tiedot"
-
-#: src/ui_configurationDialog.h:499
-msgid "Display only abbreviated information"
-msgstr "Näytä vain karsitut tiedot"
-
-#: src/modules/StarWrapper.cpp:112
-#, qt-format
-msgid "Distance: %1 Light Years"
-msgstr "Etäisyys: %1 valovuotta"
-
-#: src/modules/Planet.cpp:140
-#, no-c-format, qt-format
-msgid "Distance: %1AU"
-msgstr "Etäisyys: %1 AU"
-
-#: src/gui/HelpDialog.cpp:277
-#, qt-format
-msgid "Doc author/developer: %1"
-msgstr ""
-
-#: src/ui_viewDialog.h:982
-msgid "Dynamic eye adaptation"
-msgstr "Dynaaminen silmän sopeutuminen"
-
-#: src/translations.h:65
-msgid "E"
-msgstr "I"
-
-#: src/translations.h:36
-msgid "Earth"
-msgstr "Maa"
-
-#: src/modules/TextUI.cpp:116
-msgid "Ecliptic Line"
-msgstr "Ekliptika"
-
-#: src/gui/StelGui.cpp:153 src/ui_viewDialog.h:1005
-msgid "Ecliptic line"
-msgstr "Ekliptika"
-
-#: src/modules/TextUI.cpp:68
-msgid "Effects "
-msgstr "Tehosteet "
-
-#: src/translations.h:70
-msgid "Egyptian"
-msgstr "Egyptiläinen"
-
-#: src/ui_configurationDialog.h:516
-msgid "Enable keyboard navigation"
-msgstr "Salli liikkuminen näppäimistöllä"
-
-#: src/ui_configurationDialog.h:522
-msgid "Enable mouse navigation"
-msgstr "Salli hiirellä liikkuminen"
-
-#: src/translations.h:48
-msgid "Enceladus"
-msgstr "Enceladus"
-
-#: src/ui_locationDialogGui.h:408
-msgid "Enter the altitude in meter"
-msgstr "Anna korkeus metreinä"
-
-#: src/core/MappingClasses.cpp:77
-msgid "Equal Area"
-msgstr "Yhtäsuuri pinta-ala"
-
-#: src/modules/TextUI.cpp:115
-msgid "Equator Line"
-msgstr "Ekvaattori"
-
-#: src/gui/StelGui.cpp:154 src/ui_viewDialog.h:1003
-msgid "Equator line"
-msgstr "Ekvaattori"
-
-#: src/modules/TextUI.cpp:114
-msgid "Equatorial Grid"
-msgstr "Ekvatoriaaliasteikko"
-
-#: src/gui/StelGui.cpp:152 src/ui_viewDialog.h:1001
-msgid "Equatorial J2000 grid"
-msgstr "Ekvatoriaaliasteikko (J2000)"
-
-#: src/gui/StelGui.cpp:151 src/ui_viewDialog.h:1000
-msgid "Equatorial grid"
-msgstr "Ekvatoriaaliasteikko"
-
-#: src/translations.h:43
-msgid "Europa"
-msgstr "Europa"
-
-#: src/gui/ViewDialog.cpp:418
-msgid "Exceptional Leonid rate"
-msgstr "Poikkeuksellinen leonidien aktiivisuus"
-
-#: src/ui_searchDialogGui.h:199 src/ui_searchDialogGui.h:200
-msgid "Find Object"
-msgstr "Etsi kohde"
-
-#: src/core/MappingClasses.cpp:178
-msgid "Fish-eye"
-msgstr "Kalansilmä"
-
-#: src/gui/StelGui.cpp:169
-msgid "Flip scene horizontally"
-msgstr "Peilaa vaakasuunnassa"
-
-#: src/gui/StelGui.cpp:170
-msgid "Flip scene vertically"
-msgstr "Peilaa pystysuunnassa"
-
-#: src/gui/StelGui.cpp:160
-msgid "Fog"
-msgstr "Sumu"
-
-#: src/ui_dateTimeDialogGui.h:293 src/ui_helpDialogGui.h:211
-#: src/ui_locationDialogGui.h:384 src/ui_viewDialog.h:964
-#: src/ui_configurationDialog.h:476
-msgid "Form"
-msgstr "Muoto"
-
-#: src/gui/StelGui.cpp:168
-msgid "Full-screen mode"
-msgstr "Kokonäyttötila"
-
-#: src/gui/HelpDialog.cpp:147
-msgid "Further Reading"
-msgstr "Lisälukemista"
-
-#: src/modules/Nebula.cpp:237
-msgid "Galaxy"
-msgstr "Galaksi"
-
-#: src/translations.h:44
-msgid "Ganymede"
-msgstr "Ganymedes"
-
-#: src/modules/TextUI.cpp:65
-msgid "General "
-msgstr "Yleistä "
-
-#: src/modules/Nebula.cpp:243
-msgid "Globular cluster"
-msgstr "Pallomainen tähtijoukko"
-
-#: src/gui/HelpDialog.cpp:275
-#, qt-format
-msgid "Graphic/other designer: %1"
-msgstr ""
-
-#: src/ui_configurationDialog.h:562
-msgid "Gravity labels"
-msgstr "\"Gravitaatio\"nimet"
-
-#: src/gui/StelGui.cpp:158
-msgid "Ground"
-msgstr "Maanpinta"
-
-#: src/ui_helpDialogGui.h:212 src/ui_helpDialogGui.h:214
-msgid "Help"
-msgstr "Apua"
-
-#: src/gui/StelGui.cpp:173
-msgid "Help window"
-msgstr "Avustusikkuna"
-
-#: src/ui_configurationDialog.h:578
-msgid "Hides the mouse cursor when inactive"
-msgstr "Piilota hiiren osoitin ei-aktiivisessa tilassa"
-
-#: src/gui/ViewDialog.cpp:421
-msgid "Highest rate ever (1966 Leonids)"
-msgstr "Suurin tunnettu aktiivisuus (1966 leonidit)"
-
-#: src/core/StelObject.cpp:89
-#, qt-format
-msgid "Hour angle/DE: %1/%2"
-msgstr "Tuntikulma/Dekl.: %1/%2"
-
-#: src/ui_viewDialog.h:991
-msgid "Hourly zenith rate:"
-msgstr ""
-
-#: src/translations.h:53
-msgid "Hyperion"
-msgstr "Hyperion"
-
-#: src/translations.h:54
-msgid "Iapetus"
-msgstr "Japetus"
-
-#: src/core/MappingClasses.cpp:183
-msgid ""
-"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
-"lines become curves when they appear a large angular distance from the "
-"centre of the field of view (like the distortions seen with very wide angle "
-"camera lenses)."
-msgstr ""
-"Kalansilmäprojektiossa eli <i>atsimutaalisessa pituustarkassa projektiossa</"
-"i> suorat viivat muuttuvat käyriksi suurilla kulmaetäisyyksillä näkökentän "
-"keskustasta (kuten hyvin laajakulmaisten kameraobjektiivien vääristymissä)."
-
-#: src/gui/StelGui.cpp:182
-msgid "Increase time speed"
-msgstr "Kasvata aika-askelta"
-
-#: src/translations.h:71
-msgid "Inuit"
-msgstr "Inuiittien"
-
-#: src/translations.h:42
-msgid "Io"
-msgstr "Io"
-
-#: src/translations.h:41
-msgid "Jupiter"
-msgstr "Jupiter"
-
-#: src/gui/HelpDialog.cpp:139
-msgid "Keys"
-msgstr "Näppäimet"
-
-#: src/translations.h:72
-msgid "Korean"
-msgstr "Korealainen"
-
-#: src/ui_viewDialog.h:986
-msgid "Labels and Markers"
-msgstr "Nimet ja merkit"
-
-#: src/translations.h:73
-msgid "Lakota"
-msgstr "Lakotien"
-
-#: src/ui_viewDialog.h:1020
-msgid "Landscape"
-msgstr "Maisemat"
-
-#: src/modules/TextUI.cpp:122
-msgid "Landscape: "
-msgstr "Maisema: "
-
-#: src/ui_locationDialogGui.h:393
-msgid "Latitude:"
-msgstr "Leveys:"
-
-#: src/modules/TextUI.cpp:73
-msgid "Latitude: "
-msgstr "Leveys: "
-
-#: src/gui/HelpDialog.cpp:55
-msgid "Left click"
-msgstr "Napsauta vasemmalla"
-
-#: src/modules/TextUI.cpp:121
-msgid "Light Pollution Luminance: "
-msgstr "Valosaasteen voimakkuus: "
-
-#: src/ui_viewDialog.h:985
-msgid "Light pollution: "
-msgstr ""
-
-#: src/modules/TextUI.cpp:101
-msgid "Limiting Magnitude: "
-msgstr "Rajamagnitudi: "
-
-#: src/modules/TextUI.cpp:140
-msgid "Load Default Configuration: "
-msgstr "Hae oletusasetukset: "
-
-#: src/modules/ConstellationMgr.cpp:376
-#, qt-format
-msgid "Loading Constellation Art: %1/%2"
-msgstr "Luetaan tähdistökuvia: %1/%2"
-
-#: src/modules/NebulaMgr.cpp:372
-#, qt-format
-msgid "Loading NGC catalog: %1/%2"
-msgstr "Luetaan NGC-luetteloa: %1/%2"
-
-#: src/modules/StarMgr.cpp:257
-#, qt-format
-msgid "Loading catalog %1"
-msgstr "Luetaan luetteloa %1"
-
-#: src/modules/TextUI.cpp:133
-msgid "Local Script: "
-msgstr "Paikallinen komentojono: "
-
-#: src/ui_locationDialogGui.h:385
-msgid "Location"
-msgstr "Paikkakunta"
-
-#: src/gui/StelGui.cpp:178
-msgid "Location window"
-msgstr "Paikkakunta-ikkuna"
-
-#: src/modules/LandscapeMgr.cpp:436
-msgid "Location: "
-msgstr "Sijainti: "
-
-#: src/ui_locationDialogGui.h:399
-msgid "Longitude:"
-msgstr "Pituus:"
-
-#: src/modules/TextUI.cpp:74
-msgid "Longitude: "
-msgstr "Pituus: "
-
-#: src/modules/TextUI.cpp:125
-msgid "Magnitude Scaling Multiplier: "
-msgstr "Magnitudimittakaavan kerroin: "
-
-#: src/modules/TextUI.cpp:98
-msgid "Magnitude Sizing Multiplier: "
-msgstr "Magnitudin kokokerroin: "
-
-#: src/modules/Nebula.cpp:96 src/modules/Planet.cpp:130
-#, qt-format
-msgid "Magnitude: <b>%1</b>"
-msgstr "Magnitudi: <b>%1</b>"
-
-#: src/modules/StarWrapper.cpp:41 src/modules/StarWrapper.cpp:98
-#, qt-format
-msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr "Magnitudi: <b>%1</b> (B-V: %2)"
-
-#: src/ui_configurationDialog.h:509
-msgid "Main"
-msgstr "Pää"
-
-#: src/modules/TextUI.cpp:123
-msgid "Manual zoom: "
-msgstr "Käsisuurennus: "
-
-#: src/ui_viewDialog.h:1014
-msgid "Markings"
-msgstr "Merkinnät"
-
-#: src/translations.h:38
-msgid "Mars"
-msgstr "Mars"
-
-#: src/ui_configurationDialog.h:571
-msgid "Mask out everything outside a central circle in the main view"
-msgstr "Peitä päänäkymästä kaikki keskusympyrän ulkopuolinen"
-
-#: src/core/Mapping.cpp:28
-msgid "Maximum FOV: "
-msgstr "Maksiminäkökenttä: "
-
-#: src/modules/TextUI.cpp:99
-msgid "Maximum Magnitude to Label: "
-msgstr "Maksimimagnitudi nimelle: "
-
-#: src/modules/TextUI.cpp:127
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Maksimimagnitudi tähtisumujen nimille: "
-
-#: src/core/MappingClasses.cpp:278
-msgid "Mercator"
-msgstr "Mercator"
-
-#: src/translations.h:34
-msgid "Mercury"
-msgstr "Merkurius"
-
-#: src/modules/TextUI.cpp:112
-msgid "Meridian Line"
-msgstr "Meridiaaniviiva"
-
-#: src/gui/StelGui.cpp:155 src/ui_viewDialog.h:1004
-msgid "Meridian line"
-msgstr "Meridiaaniviiva"
-
-#: src/modules/TextUI.cpp:126
-msgid "Milky Way intensity: "
-msgstr "Linnunradan voimakkuus: "
-
-#: src/translations.h:47
-msgid "Mimas"
-msgstr "Mimas"
-
-#: src/gui/HelpDialog.cpp:214 src/gui/HelpDialog.cpp:303
-#: src/gui/HelpDialog.cpp:305 src/gui/StelGui.cpp:203
-msgid "Miscellaneous"
-msgstr "Sekalaista"
-
-#: src/translations.h:37
-msgid "Moon"
-msgstr "Kuu"
-
-#: src/ui_configurationDialog.h:581
-msgid "Mouse cursor timeout (seconds):"
-msgstr "Hiiren osoittimen aikaraja (sekunteja):"
-
-#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:196
-msgid "Movement and Selection"
-msgstr "Liikkuminen ja valinta"
-
-#: src/translations.h:63
-msgid "N"
-msgstr "P"
-
-#: src/ui_locationDialogGui.h:412
-msgid "Name/City:"
-msgstr ""
-
-#: src/translations.h:74
-msgid "Navajo"
-msgstr "Navajojen"
-
-#: src/ui_configurationDialog.h:542
-msgid "Navigation"
-msgstr "Siirtyminen"
-
-#: src/modules/Nebula.cpp:246
-msgid "Nebula"
-msgstr "Tähtisumu"
-
-#: src/modules/TextUI.cpp:118
-msgid "Nebula Circles"
-msgstr "Tähtisumujen ympyrät"
-
-#: src/modules/TextUI.cpp:117
-msgid "Nebula Names"
-msgstr "Tähtisumujen nimet"
-
-#: src/gui/StelGui.cpp:162 src/ui_viewDialog.h:988
-msgid "Nebulas"
-msgstr "Tähtisumut"
-
-#: src/translations.h:56
-msgid "Neptune"
-msgstr "Neptunus"
-
-#: src/gui/StelGui.cpp:167
-msgid "Night mode"
-msgstr "Yötila"
-
-#: src/gui/ViewDialog.cpp:345
-msgid "No description"
-msgstr "Ei kuvausta"
-
-#: src/gui/ViewDialog.cpp:409
-msgid "No shooting stars"
-msgstr "Ei tähdenlentoja"
-
-#: src/ui_configurationDialog.h:503
-msgid "None"
-msgstr "Ei mitään"
-
-#: src/gui/ViewDialog.cpp:412
-msgid "Normal rate"
-msgstr "Normaali aktiivisuus"
-
-#: src/translations.h:75
-msgid "Norse"
-msgstr "Muinaisnorjalainen"
-
-#: src/gui/HelpDialog.cpp:278
-#, qt-format
-msgid "OSX Developer: %1"
-msgstr ""
-
-#: src/modules/TextUI.cpp:124
-msgid "Object Sizing Rule: "
-msgstr "Kohteen koon sääntö: "
-
-#: src/modules/Nebula.cpp:240
-msgid "Open cluster"
-msgstr "Avonainen tähtijoukko"
-
-#: src/ui_viewDialog.h:1015 src/ui_viewDialog.h:1021
-msgid "Options"
-msgstr "Asetukset"
-
-#: src/core/MappingClasses.cpp:336
-msgid "Orthographic"
-msgstr "Ortograafinen"
-
-#: src/core/MappingClasses.cpp:341
-msgid ""
-"Orthographic projection is related to perspective projection, but the point "
-"of perspective is set to an infinite distance."
-msgstr ""
-"Ortograafinen projektio on sukua perspektiiviprojektiolle, mutta "
-"perspektiivipiste on asetettu äärettömän kauas."
-
-#: src/ui_configurationDialog.h:575
-msgid "Other"
-msgstr ""
-
-#: src/ui_configurationDialog.h:541
-msgid "Other:"
-msgstr "Muu:"
-
-#: src/gui/HelpDialog.cpp:53
-msgid "Page Up/Down"
-msgstr "Sivu ylös/alas"
-
-#: src/gui/HelpDialog.cpp:61
-msgid "Pan view around the sky"
-msgstr "Pyöritä näkymää taivaan ympäri"
-
-#: src/modules/StarWrapper.cpp:115
-#, qt-format
-msgid "Parallax: %1\""
-msgstr ""
-
-#: src/core/MappingClasses.cpp:11
-msgid "Perspective"
-msgstr "Perspektiivi"
-
-#: src/core/MappingClasses.cpp:16
-msgid ""
-"Perspective projection keeps the horizon a straight line. The mathematical "
-"name for this projection method is <i>gnomonic projection</i>."
-msgstr ""
-"Perspektiiviprojektio pitää horisontin suorana viivana. Matemaattinen nimi "
-"tälle projektioille on <i>gnomoninen projektio</i>."
-
-#: src/translations.h:40
-msgid "Phobos"
-msgstr "Phobos"
-
-#: src/translations.h:55
-msgid "Phoebe"
-msgstr "Phoebe"
+#: src/modules/TextUI.cpp:106
+msgid "Constellation Art Intensity"
+msgstr "Tähdistökuvien voimakkuus"
+
+#: src/modules/TextUI.cpp:107
+msgid "Constellation Boundaries"
+msgstr "Tähdistöjen rajat"
+
+#: src/modules/TextUI.cpp:108
+msgid "Cardinal Points"
+msgstr "Ilmansuunnat"
 
 #: src/modules/TextUI.cpp:109
 msgid "Planet Names"
@@ -911,354 +287,137 @@ msgstr "Planeettojen radat"
 msgid "Planet Trails"
 msgstr "Planeettojen reitit"
 
-#: src/ui_locationDialogGui.h:414
-msgid "Planet:"
-msgstr ""
+#: src/modules/TextUI.cpp:112
+msgid "Meridian Line"
+msgstr "Meridiaaniviiva"
 
-#: src/modules/LandscapeMgr.cpp:444
-msgid "Planet: "
-msgstr "Planeetta: "
+#: src/modules/TextUI.cpp:113
+msgid "Azimuthal Grid"
+msgstr "Atsimuuttiasteikko"
 
-#: src/ui_configurationDialog.h:550
-msgid "Planetarium options"
-msgstr ""
+#: src/modules/TextUI.cpp:114
+msgid "Equatorial Grid"
+msgstr "Ekvatoriaaliasteikko"
 
-#: src/modules/Nebula.cpp:249
-msgid "Planetary nebula"
-msgstr "Planetaarinen sumu"
+#: src/modules/TextUI.cpp:115
+msgid "Equator Line"
+msgstr "Ekvaattori"
 
-#: src/ui_viewDialog.h:989
-msgid "Planets"
-msgstr "Planeetat"
+#: src/modules/TextUI.cpp:116
+msgid "Ecliptic Line"
+msgstr "Ekliptika"
 
-#: src/ui_viewDialog.h:967
-msgid "Planets and satellites"
-msgstr ""
+#: src/modules/TextUI.cpp:117
+msgid "Nebula Names"
+msgstr "Tähtisumujen nimet"
 
-#: src/gui/StelGui.cpp:165
-msgid "Planets hints"
-msgstr "Planeettojen osoittimet"
+#: src/modules/TextUI.cpp:118
+msgid "Nebula Circles"
+msgstr "Tähtisumujen ympyrät"
 
-#: src/translations.h:58
-msgid "Pluto"
-msgstr "Pluto"
+#: src/modules/TextUI.cpp:121
+msgid "Light Pollution Luminance: "
+msgstr "Valosaasteen voimakkuus: "
 
-#: src/translations.h:76
-msgid "Polynesian"
-msgstr "Polynesialainen"
+#: src/modules/TextUI.cpp:122
+msgid "Landscape: "
+msgstr "Maisema: "
 
-#: src/modules/TextUI.cpp:84
-msgid "Preset Sky Time: "
-msgstr "Esiasetettu taivaan aika: "
+#: src/modules/TextUI.cpp:123
+msgid "Manual zoom: "
+msgstr "Käsisuurennus: "
 
-#: src/modules/TextUI.cpp:87
-msgid "Preset Time"
-msgstr "Asetettu aika"
+#: src/modules/TextUI.cpp:124
+msgid "Object Sizing Rule: "
+msgstr "Kohteen koon sääntö: "
 
-#: src/ui_configurationDialog.h:489
-msgid "Program language"
-msgstr "Ohjelman kieli"
+#: src/modules/TextUI.cpp:125
+msgid "Magnitude Scaling Multiplier: "
+msgstr "Magnitudimittakaavan kerroin: "
 
-#: src/gui/HelpDialog.cpp:273
-#, qt-format
-msgid "Project coordinator & lead developer: %1"
-msgstr ""
+#: src/modules/TextUI.cpp:126
+msgid "Milky Way intensity: "
+msgstr "Linnunradan voimakkuus: "
 
-#: src/ui_viewDialog.h:1013
-msgid "Projection"
-msgstr "Projektio"
+#: src/modules/TextUI.cpp:127
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "Maksimimagnitudi tähtisumujen nimille: "
 
-#: src/gui/StelGui.cpp:205
-msgid "Quit"
-msgstr "Lopet"
+#: src/modules/TextUI.cpp:128
+msgid "Zoom Duration: "
+msgstr "Suurennuksen kesto: "
 
-#: src/core/StelObject.cpp:74
-#, qt-format
-msgid "RA/DE (J2000): %1/%2"
-msgstr "Rekt./Dekl. (J2000): %1/%2"
+#: src/modules/TextUI.cpp:129
+msgid "Cursor Timeout: "
+msgstr "Kohdistimen aikakatkaisu: "
 
-#: src/core/StelObject.cpp:81
-#, qt-format
-msgid "RA/DE (of date): %1/%2"
-msgstr "Rekl./Dekl. (nykyhetki): %1/%2"
+#: src/modules/TextUI.cpp:130
+msgid "Correct for light travel time: "
+msgstr "Korjaa valon matka-aika: "
 
-#: src/ui_viewDialog.h:975
-msgid "Relative scale:"
-msgstr "Suhteellinen mittakaava:"
+#: src/modules/TextUI.cpp:133
+msgid "Local Script: "
+msgstr "Paikallinen komentosarja: "
 
-#: src/translations.h:51
-msgid "Rhea"
-msgstr "Rhea"
+#: src/modules/TextUI.cpp:134
+msgid "CD/DVD Script: "
+msgstr "CD/DVD-komentosarja: "
 
-#: src/gui/HelpDialog.cpp:56
-msgid "Right click"
-msgstr "Napsauta oikealla"
+#: src/modules/TextUI.cpp:135
+msgid "USB Script: "
+msgstr "USB-komentosarja: "
 
-#: src/translations.h:64
-msgid "S"
-msgstr "E"
-
-#: src/translations.h:46
-msgid "Saturn"
-msgstr "Saturnus"
-
-#: src/modules/TextUI.cpp:141
-msgid "Save Current Configuration as Default: "
-msgstr "Tallenna nykyiset asetukset oletusarvoiksi: "
-
-#: src/ui_configurationDialog.h:506
-msgid ""
-"Save all the current options including the current FOV and direction of view "
-"for use at next startup."
-msgstr ""
-
-#: src/ui_configurationDialog.h:505
-msgid "Save current options as default"
-msgstr ""
-
-#: src/gui/StelGui.cpp:206
-msgid "Save screenshot"
-msgstr "Tallenna kuvankaappaus"
-
-#: src/ui_viewDialog.h:972
-msgid "Scale Moon"
-msgstr "Kuun koko"
-
-#: src/modules/TextUI.cpp:69
-msgid "Scripts "
-msgstr "Komentojonot "
-
-#: src/gui/StelGui.cpp:175
-msgid "Search window"
-msgstr "Etsintäikkuna"
+#: src/modules/TextUI.cpp:136
+msgid "Arrow down to load list."
+msgstr "Hae lista alanuolella."
 
 #: src/modules/TextUI.cpp:137
 msgid "Select and exit to run."
 msgstr "Valitse ja poistu käynnistääksesi."
 
-#: src/gui/HelpDialog.cpp:64
-msgid "Select object"
-msgstr "Valitse kohde"
+#: src/modules/TextUI.cpp:140
+msgid "Load Default Configuration: "
+msgstr "Hae oletusasetukset: "
 
-#: src/ui_configurationDialog.h:490
-msgid "Selected object information"
-msgstr ""
-
-#: src/modules/TextUI.cpp:63
-msgid "Set Location "
-msgstr "Aseta paikkakunta "
-
-#: src/modules/TextUI.cpp:64
-msgid "Set Time "
-msgstr "Aseta aika "
-
-#: src/modules/TextUI.cpp:80
-msgid "Set Time Zone: "
-msgstr "Aseta aikavyöhyke: "
-
-#: src/modules/TextUI.cpp:144
-msgid "Set UI Locale: "
-msgstr "Aseta käyttöliittymän kieli: "
-
-#: src/gui/StelGui.cpp:201
-msgid "Set home planet to selected planet"
-msgstr "Aseta valittu planeetta kotiplaneetaksi"
-
-#: src/gui/StelGui.cpp:183
-msgid "Set normal time rate"
-msgstr "Aseta normaali aika-askel"
-
-#: src/gui/StelGui.cpp:184
-msgid "Set time to now"
-msgstr "Aseta aika nykyhetkeen"
-
-#: src/ui_configurationDialog.h:532
-msgid ""
-"Sets the simulation time to the next instance of this time of day when "
-"Stellarium starts"
-msgstr ""
-"Asettaa simulaation ajaksi Stellariumin käynnistyspäivää seuraavaksi ajaksi"
-
-#: src/ui_viewDialog.h:990
-msgid "Shooting Stars"
-msgstr "Tähdenlennot"
-
-#: src/ui_configurationDialog.h:502
-msgid "Short"
-msgstr ""
-
-#: src/ui_viewDialog.h:1011
-msgid "Show art"
-msgstr "Näytä kuvat"
-
-#: src/ui_viewDialog.h:984
-msgid "Show atmosphere"
-msgstr "Näytä ilmakehä"
-
-#: src/ui_viewDialog.h:1010
-msgid "Show boundaries"
-msgstr "Näytä rajat"
-
-#: src/ui_configurationDialog.h:549
-msgid "Show flip buttons"
-msgstr "Näytä peilauspainikkeet"
-
-#: src/ui_viewDialog.h:1017
-msgid "Show fog"
-msgstr "Näytä sumu"
-
-#: src/ui_viewDialog.h:1016
-msgid "Show ground"
-msgstr "Näytä maanpinta"
-
-#: src/ui_viewDialog.h:1009
-msgid "Show labels"
-msgstr "Näytä nimet"
-
-#: src/ui_viewDialog.h:1008
-msgid "Show lines"
-msgstr "Näytä viivat"
-
-#: src/ui_viewDialog.h:969
-msgid "Show planet markers"
-msgstr ""
-
-#: src/ui_viewDialog.h:970
-msgid "Show planet orbits"
-msgstr ""
-
-#: src/ui_viewDialog.h:968
-msgid "Show planets"
-msgstr ""
-
-#: src/modules/TextUI.cpp:96
-msgid "Show: "
-msgstr "Näytä: "
+#: src/modules/TextUI.cpp:141
+msgid "Save Current Configuration as Default: "
+msgstr "Tallenna nykyiset asetukset oletukseksi: "
 
 #: src/modules/TextUI.cpp:142
 msgid "Shut Down: "
 msgstr "Sulje tietokone: "
 
-#: src/modules/TextUI.cpp:83
-msgid "Sidereal"
-msgstr "Tähtiaika"
+#: src/modules/TextUI.cpp:143
+msgid "Update me via Internet: "
+msgstr "Päivitä Internetin kautta: "
 
-#: src/ui_viewDialog.h:971
-msgid "Simulate light speed"
-msgstr "Jäljittele valonnopeutta"
+#: src/modules/TextUI.cpp:144
+msgid "Set UI Locale: "
+msgstr "Aseta käyttöliittymän kieli: "
 
-#: src/modules/Nebula.cpp:101
-#, qt-format
-msgid "Size: %1"
-msgstr "Koko: %1"
+#: src/core/MappingClasses.cpp:11
+msgid "Perspective"
+msgstr "Perspektiivi"
 
-#: src/ui_viewDialog.h:998
-msgid "Sky"
-msgstr "Taivas"
-
-#: src/modules/TextUI.cpp:92
-msgid "Sky Culture: "
-msgstr "Tähtitaivaskulttuuri: "
-
-#: src/modules/TextUI.cpp:93
-msgid "Sky Language: "
-msgstr "Tähtitaivaskieli: "
-
-#: src/modules/TextUI.cpp:85
-msgid "Sky Time At Start-up: "
-msgstr "Taivaan aika aloitettaessa: "
-
-#: src/modules/TextUI.cpp:79
-msgid "Sky Time: "
-msgstr "Taivaan aika: "
-
-#: src/gui/StelGui.cpp:176
-msgid "Sky and viewing options window"
-msgstr "Taivas- ja näyttöasetusten ikkuna"
-
-#: src/modules/TextUI.cpp:76
-msgid "Solar System Body: "
-msgstr "Aurinkokunnan kohde: "
-
-#: src/translations.h:60
-msgid "Solar System Observer"
-msgstr "Aurinkokunnan havaitsija"
-
-#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:208
-#: src/gui/StelGuiItems.cpp:531
-msgid "Space"
-msgstr "Välilyönti"
-
-#: src/modules/StarWrapper.cpp:108
-#, qt-format
-msgid "Spectral Type: %1"
-msgstr "Spektriluokka: %1"
-
-#: src/ui_configurationDialog.h:556
-msgid "Spheric mirror distortion"
-msgstr "Pallopeilikorjaus"
-
-#: src/ui_configurationDialog.h:553
+#: src/core/MappingClasses.cpp:16
 msgid ""
-"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
-"mirror for low-cost planetarium systems."
+"Perspective projection keeps the horizon a straight line. The mathematical "
+"name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
-"Pallopeilikorjausta käytetään, kun Stellarium heijastetaan pallopeilille "
-"halvoissa planetaariojärjestelmissä."
+"Perspektiiviprojektio pitää horisontin suorana viivana. Matemaattinen nimi "
+"projektioille on <i>gnomoninen projektio</i>."
 
-#: src/gui/ViewDialog.cpp:415
-msgid "Standard Perseids rate"
-msgstr "Perseidien normaaliaktiivisuus"
+#: src/core/MappingClasses.cpp:77
+msgid "Equal Area"
+msgstr "Oikeapintainen"
 
-#: src/modules/TextUI.cpp:97
-msgid "Star Value Multiplier: "
-msgstr "Tähtien määrän kerroin: "
-
-#: src/ui_viewDialog.h:1024
-msgid "Starlore"
-msgstr "Tähtitarusto"
-
-#: src/gui/StelGui.cpp:164 src/ui_viewDialog.h:973 src/ui_viewDialog.h:987
-msgid "Stars"
-msgstr "Tähdet"
-
-#: src/modules/TextUI.cpp:66
-msgid "Stars "
-msgstr "Tähdet "
-
-#: src/ui_configurationDialog.h:526
-msgid "Starts Stellarium at system clock date and time"
-msgstr "Käynnistää Stellariumin järjestelmän päiväyksellä ja ajalla"
-
-#: src/gui/ConfigurationDialog.cpp:375
-#, qt-format
-msgid "Startup FOV: %1%2"
+#: src/core/MappingClasses.cpp:82
+msgid ""
+"The full name of this projection method is, <i>Lambert azimuthal equal-area "
+"projection</i>. It preserves the area but not the angle."
 msgstr ""
-
-#: src/ui_configurationDialog.h:507
-msgid "Startup FOV: XX"
-msgstr ""
-
-#: src/ui_configurationDialog.h:523
-msgid "Startup date and time"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:383
-#, qt-format
-msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr ""
-
-#: src/ui_configurationDialog.h:508
-msgid "Startup direction of view: xxxx"
-msgstr ""
-
-#: src/gui/StelGui.cpp:786
-msgid "Stellarium"
-msgstr "Stellarium"
-
-#: src/gui/HelpDialog.cpp:138
-msgid "Stellarium Help"
-msgstr "Stellariumin avustus"
+"Täydellinen nimi projektiolle on <i>Lambertin atsimutaalinen oikeapintainen "
+"projektio</i>. Se kuvaa pinta-alat oikein, muttei kulmia."
 
 #: src/core/MappingClasses.cpp:133
 msgid "Stereographic"
@@ -1270,67 +429,29 @@ msgid ""
 "known as the planisphere projection. It preserves the angles at which curves "
 "cross each other but it does not preserve area."
 msgstr ""
-"Stereograafinen projektio on tunnettu antiikin ajoista ja tunnettiin "
-"alkujaan nimellä planisfääriprojektio. Se kuvaa käyrien leikkauskohtien "
-"kulmat oikein, mutta vääristää pinta-aloja."
+"Stereograafinen projektio on tunnettu antiikin ajoista ja tunnettiin alkuaan "
+"nimellä planisfääriprojektio. Se kuvaa käyrien leikkauskohtien kulmat "
+"oikein, mutta vääristää pinta-aloja."
 
-#: src/gui/StelGui.cpp:192
-msgid "Subtract 1 sidereal day"
-msgstr "Vähennä tähtipäivä"
+#: src/core/MappingClasses.cpp:178
+msgid "Fish-eye"
+msgstr "Kalansilmä"
 
-#: src/gui/StelGui.cpp:194
-msgid "Subtract 1 sidereal week"
-msgstr "Vähennä tähtiviikko"
-
-#: src/gui/StelGui.cpp:188
-msgid "Subtract 1 solar day"
-msgstr "Vähennä aurinkopäivä"
-
-#: src/gui/StelGui.cpp:186
-msgid "Subtract 1 solar hour"
-msgstr "Vähennä aurinkotunti"
-
-#: src/gui/StelGui.cpp:190
-msgid "Subtract 1 solar week"
-msgstr "Vähennä aurinkoviikko"
-
-#: src/translations.h:33
-msgid "Sun"
-msgstr "Aurinko"
-
-#: src/gui/StelGui.cpp:204
-msgid "Switch between equatorial and azimuthal mount"
-msgstr "Vaihda ekvatoriaali- tai atsimutaalijalustan välillä"
-
-#: src/ui_configurationDialog.h:529
-msgid "System date and time"
-msgstr "Järjestelmän päiväys ja aika"
-
-#: src/ui_configurationDialog.h:535
-msgid "System date at:"
-msgstr "Järjestelmän päiväys:"
-
-#: src/translations.h:49
-msgid "Tethys"
-msgstr "Tethys"
-
-#: src/gui/HelpDialog.cpp:149
-msgid "The Stellarium User Guide"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:148
+#: src/core/MappingClasses.cpp:183
 msgid ""
-"The following links are external web links, and will launch your web "
-"browser:\n"
-msgstr "Seuraavat linkit ovat verkkolinkkejä ja käynnistävät WWW-selaimesi::\n"
-
-#: src/core/MappingClasses.cpp:82
-msgid ""
-"The full name of this projection method is, <i>Lambert azimuthal equal-area "
-"projection</i>. It preserves the area but not the angle."
+"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
+"lines become curves when they appear a large angular distance from the "
+"centre of the field of view (like the distortions seen with very wide angle "
+"camera lenses)."
 msgstr ""
-"Täydellinen nimi tälle projektiolle on <i>Lambertin atsimutaalinen "
-"oikeapintainen projektio</li>. Se kuvaa pinta-alat oikein, muttei kulmia."
+"Kalansilmäprojektiossa eli <i>atsimutaalisessa oikeapituisessa "
+"projektiossa</i> suorat viivat muuttuvat käyriksi suurilla "
+"kulmaetäisyyksillä näkökentän keskustasta (kuten erittäin laajakulmaisten "
+"kameraobjektiivien vääristymissä)."
+
+#: src/core/MappingClasses.cpp:223
+msgid "Cylinder"
+msgstr "Lieriö"
 
 #: src/core/MappingClasses.cpp:228
 msgid ""
@@ -1340,6 +461,10 @@ msgstr ""
 "Täydellinen nimi tälle projektiolle on <i>oikeakeskipituinen "
 "lieriöprojektio</i>. Tässä projektiossa yhdensuuntaiset viivat ovat "
 "vakioetäisyyksillä toisistaan."
+
+#: src/core/MappingClasses.cpp:278
+msgid "Mercator"
+msgstr "Mercator"
 
 #: src/core/MappingClasses.cpp:283
 msgid ""
@@ -1351,140 +476,150 @@ msgstr ""
 "Se kuvaa oikein suunnat ja muodot, mutta vääristää kokoja suurentaen niitä "
 "etäisyyden kasvaessa ekvaattorilta."
 
-#: src/main.cpp:55
-msgid "This system does not support OpenGL."
-msgstr "Tämä järjestelmä ei tue OpenGL-ominaisuutta."
+#: src/core/MappingClasses.cpp:336
+msgid "Orthographic"
+msgstr "Ortograafinen"
 
-#: src/modules/TextUI.cpp:88
-msgid "Time Display Format: "
-msgstr "Kellonajan muoto: "
-
-#: src/translations.h:52
-msgid "Titan"
-msgstr "Titan"
-
-#: src/ui_configurationDialog.h:546
-msgid "Toggle vertical and horizontal image flip buttons."
+#: src/core/MappingClasses.cpp:341
+msgid ""
+"Orthographic projection is related to perspective projection, but the point "
+"of perspective is set to an infinite distance."
 msgstr ""
+"Ortograafinen projektio on sukua perspektiiviprojektiolle, mutta "
+"perspektiivipiste on asetettu äärettömän kauas."
 
-#: src/ui_configurationDialog.h:582
-msgid "Tools"
-msgstr "Työkalut"
+#: src/core/Mapping.cpp:28
+msgid "Maximum FOV: "
+msgstr "Maksiminäkökenttä: "
 
-#: src/gui/StelGui.cpp:198
-msgid "Track object"
-msgstr "Seuraa kohdetta"
-
-#: src/translations.h:78
-msgid "Tupi-Guarani"
-msgstr "Tupi-guaranilainen"
-
-#: src/ui_viewDialog.h:976
-msgid "Twinkle:"
-msgstr "Tuikkiminen:"
-
-#: src/modules/TextUI.cpp:100
-msgid "Twinkling: "
-msgstr "Tuikkiminen: "
-
-#: src/modules/Nebula.cpp:93
+#: src/core/StelObject.cpp:74
 #, qt-format
-msgid "Type: <b>%1</b>"
-msgstr "Tyyppi: <b>%1</b>"
+msgid "RA/DE (J2000): %1/%2"
+msgstr "Rekt./Dekl. (J2000): %1/%2"
 
-#: src/modules/TextUI.cpp:135
-msgid "USB Script: "
-msgstr "USB-komentojono: "
+#: src/core/StelObject.cpp:81
+#, qt-format
+msgid "RA/DE (of date): %1/%2"
+msgstr "Rekl./Dekl. (nykyhetki): %1/%2"
 
-#: src/modules/Nebula.cpp:258
-msgid "Undocumented type"
-msgstr "Dokumentoimaton tyyppi"
+#: src/core/StelObject.cpp:89
+#, qt-format
+msgid "Hour angle/DE: %1/%2"
+msgstr "Tuntikulma/Dekl.: %1/%2"
 
-#: src/modules/Nebula.cpp:255
-msgid "Unknown"
-msgstr "Tuntematon"
+#: src/core/StelObject.cpp:100
+#, qt-format
+msgid "Az/Alt: %1/%2"
+msgstr "Atsim./Kork.: %1/%2"
 
-#: src/modules/TextUI.cpp:143
-msgid "Update me via Internet: "
-msgstr "Päivitä Internetin kautta: "
+#: src/gui/ConfigurationDialog.cpp:258
+msgid "Select screenshot directory"
+msgstr "Valitse kuvankaappaushakemisto"
 
-#: src/translations.h:57
-msgid "Uranus"
-msgstr "Uranus"
+#: src/gui/ConfigurationDialog.cpp:411
+#, qt-format
+msgid "Startup FOV: %1%2"
+msgstr "Aloitusnäkökenttä: %1%2"
 
-#: src/ui_configurationDialog.h:538
-msgid "Use a specific date and time when Stellarium starts up"
-msgstr "Käytä tiettyä päiväystä ja aikaa Stellariumin käynnistyessä"
+#: src/gui/ConfigurationDialog.cpp:419
+#, qt-format
+msgid "Startup direction of view Az/Alt: %1/%2"
+msgstr "Aloituskatselusuunta Atsim./Kork.: %1/%2"
 
-#: src/ui_locationDialogGui.h:390
-msgid "Use as default"
-msgstr ""
+#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:208
+#: src/gui/StelGuiItems.cpp:531
+msgid "Space"
+msgstr "Välilyönti"
 
-#: src/ui_viewDialog.h:1022
-msgid "Use associated language for sky labeling"
-msgstr "Käytä liittyvää kieltä taivaan nimistönä"
+#: src/gui/HelpDialog.cpp:52
+msgid "Arrow keys & left mouse drag"
+msgstr "Nuolinäppäimet & veto hiiren vasemmalla näppäimellä"
 
-#: src/ui_viewDialog.h:1018
-msgid "Use associated planet and position"
-msgstr "Käytä valittua planeettaa ja sijaintia"
+#: src/gui/HelpDialog.cpp:53
+msgid "Page Up/Down"
+msgstr "Sivu ylös/alas"
 
-#: src/ui_viewDialog.h:1019
-msgid "Use this landscape as default"
-msgstr ""
+#: src/gui/HelpDialog.cpp:54
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Ylös/alas"
 
-#: src/ui_viewDialog.h:1023
-msgid "Use this sky culture as default"
-msgstr ""
+#: src/gui/HelpDialog.cpp:55
+msgid "Left click"
+msgstr "Napsauta vasemmalla"
 
-#: src/translations.h:35
-msgid "Venus"
-msgstr "Venus"
+#: src/gui/HelpDialog.cpp:56
+msgid "Right click"
+msgstr "Napsauta oikealla"
 
-#: src/ui_viewDialog.h:965
-msgid "View"
-msgstr "Näytä"
+#: src/gui/HelpDialog.cpp:57
+msgid "CTRL + Left click"
+msgstr "CTRL + napsauta vasemmalla"
 
-#: src/translations.h:66
-msgid "W"
-msgstr "L"
+#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:197
+msgid "Movement and Selection"
+msgstr "Liikkuminen ja valinta"
 
-#: src/translations.h:77
-msgid "Western"
-msgstr "Länsimainen"
-
-#: src/ui_configurationDialog.h:565
-msgid ""
-"When enabled, the \"auto zoom out\" key will also set the initial viewing "
-"direction"
-msgstr ""
-
-#: src/gui/StelGui.cpp:172
-msgid "Windows"
-msgstr "Ikkunat"
-
-#: src/ui_locationDialogGui.h:396 src/ui_locationDialogGui.h:402
-msgid ""
-"You can enter values in decimal degrees, or using dms format, for example: "
-"+1d 12m 8s"
-msgstr ""
-"Voit antaa arvot asteina ja desimaaleina tai käyttää asteet-minuutit-"
-"sekunnit-muotoa, esimerkiksi: +1d 12m 8s"
-
-#: src/modules/TextUI.cpp:128
-msgid "Zoom Duration: "
-msgstr "Suurennuksen kesto: "
-
-#: src/gui/StelGui.cpp:199
-msgid "Zoom in on selected object"
-msgstr "Suurenna valittuun kohteeseen"
+#: src/gui/HelpDialog.cpp:61
+msgid "Pan view around the sky"
+msgstr "Pyöritä näkymää taivaan ympäri"
 
 #: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
 msgid "Zoom in/out"
 msgstr "Suurenna/loitonna"
 
-#: src/gui/StelGui.cpp:200
-msgid "Zoom out"
-msgstr "Loitonna"
+#: src/gui/HelpDialog.cpp:64
+msgid "Select object"
+msgstr "Valitse kohde"
+
+#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
+msgid "Clear selection"
+msgstr "Poista valinta"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Stellarium Help"
+msgstr "Stellariumin avustus"
+
+#: src/gui/HelpDialog.cpp:139
+msgid "Keys"
+msgstr "Näppäimet"
+
+#: src/gui/HelpDialog.cpp:147
+msgid "Further Reading"
+msgstr "Lisälukemista"
+
+#: src/gui/HelpDialog.cpp:148
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"Seuraavat linkit ovat verkkolinkkejä ja käynnistävät WWW-selaimesi:\n"
+
+#: src/gui/HelpDialog.cpp:149
+msgid "The Stellarium User Guide"
+msgstr "Stellarium-käyttöopas"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:153
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Usein kysyttyjä kysymyksiä} Stellariumista. Ja vastauksia."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:158
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Stellarium-wiki} - yleistä tietoa. Löydät täältä myös käyttäjien tekemiä "
+"maisemia ja komentosarjoja."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:163
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Tukipyyntöjärjestelmä} - jos tarvitset Stellariumin käyttöapua, lähetä "
+"tukipyyntösi tänne, niin yritämme auttaa."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:168
@@ -1512,28 +647,924 @@ msgstr ""
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Foorumit} - keskustele muiden Stellariumin käyttäjien kanssa."
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:153
-msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr "{Usein kysyttyjä kysymyksiä} Stellariumista. Ja vastauksia."
+#: src/gui/HelpDialog.cpp:214 src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:305 src/gui/StelGui.cpp:204
+msgid "Miscellaneous"
+msgstr "Sekalaista"
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:163
-msgid ""
-"{Support ticket system} - if you need help using Stellarium, post a support "
-"request here and we'll try to help."
-msgstr ""
-"{Tukitikettijärjestelmä} - jos tarvitset Stellariumin käyttöapua, lähetä "
-"tukipyyntösi tänne ja me yritämme auttaa."
+#: src/gui/HelpDialog.cpp:272
+msgid "Developers"
+msgstr "Kehittäjät"
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:158
+#: src/gui/HelpDialog.cpp:273
+#, qt-format
+msgid "Project coordinator & lead developer: %1"
+msgstr "Projektikoordinaattori ja johtava kehittäjä: %1"
+
+#: src/gui/HelpDialog.cpp:274 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:279
+#, qt-format
+msgid "Developer: %1"
+msgstr "Kehittäjä: %1"
+
+#: src/gui/HelpDialog.cpp:275
+#, qt-format
+msgid "Graphic/other designer: %1"
+msgstr "Graafinen/muu suunnittelija: %1"
+
+#: src/gui/HelpDialog.cpp:277
+#, qt-format
+msgid "Doc author/developer: %1"
+msgstr "Dokumentoija/kehittäjä:%1"
+
+#: src/gui/HelpDialog.cpp:278
+#, qt-format
+msgid "OSX Developer: %1"
+msgstr "OSX-kehittäjä: %1"
+
+#: src/gui/StelGui.cpp:145
+msgid "Display Options"
+msgstr "Näyttöasetukset"
+
+#: src/gui/StelGui.cpp:146
+msgid "Constellation lines"
+msgstr "Tähdistöviivat"
+
+#: src/gui/StelGui.cpp:147
+msgid "Constellation art"
+msgstr "Tähdistökuvat"
+
+#: src/gui/StelGui.cpp:148
+msgid "Constellation labels"
+msgstr "Tähdistöjen nimet"
+
+#: src/gui/StelGui.cpp:149
+msgid "Constellation boundaries"
+msgstr "Tähdistöjen rajaviivat"
+
+#: src/gui/StelGui.cpp:151 src/ui_viewDialog.h:1002
+msgid "Azimutal grid"
+msgstr "Atsimuuttiasteikko"
+
+#: src/gui/StelGui.cpp:152 src/ui_viewDialog.h:1000
+msgid "Equatorial grid"
+msgstr "Ekvatoriaaliasteikko"
+
+#: src/gui/StelGui.cpp:153 src/ui_viewDialog.h:1001
+msgid "Equatorial J2000 grid"
+msgstr "Ekvatoriaaliasteikko (J2000)"
+
+#: src/gui/StelGui.cpp:154 src/ui_viewDialog.h:1005
+msgid "Ecliptic line"
+msgstr "Ekliptika"
+
+#: src/gui/StelGui.cpp:155 src/ui_viewDialog.h:1003
+msgid "Equator line"
+msgstr "Ekvaattori"
+
+#: src/gui/StelGui.cpp:156 src/ui_viewDialog.h:1004
+msgid "Meridian line"
+msgstr "Meridiaaniviiva"
+
+#: src/gui/StelGui.cpp:157 src/ui_viewDialog.h:1006
+msgid "Cardinal points"
+msgstr "Ilmansuunnat"
+
+#: src/gui/StelGui.cpp:159
+msgid "Ground"
+msgstr "Maanpinta"
+
+#: src/gui/StelGui.cpp:160 src/ui_viewDialog.h:983
+msgid "Atmosphere"
+msgstr "Ilmakehä"
+
+#: src/gui/StelGui.cpp:161
+msgid "Fog"
+msgstr "Sumu"
+
+#: src/gui/StelGui.cpp:163 src/ui_viewDialog.h:988
+msgid "Nebulas"
+msgstr "Tähtisumut"
+
+#: src/gui/StelGui.cpp:164
+msgid "Nebulas background images"
+msgstr "Tähtisumujen taustakuvat"
+
+#: src/gui/StelGui.cpp:165 src/ui_viewDialog.h:973 src/ui_viewDialog.h:987
+msgid "Stars"
+msgstr "Tähdet"
+
+#: src/gui/StelGui.cpp:166
+msgid "Planets hints"
+msgstr "Planeettojen osoittimet"
+
+#: src/gui/StelGui.cpp:168
+msgid "Night mode"
+msgstr "Yötila"
+
+#: src/gui/StelGui.cpp:169
+msgid "Full-screen mode"
+msgstr "Kokonäyttötila"
+
+#: src/gui/StelGui.cpp:170
+msgid "Flip scene horizontally"
+msgstr "Peilaa vaakasuunnassa"
+
+#: src/gui/StelGui.cpp:171
+msgid "Flip scene vertically"
+msgstr "Peilaa pystysuunnassa"
+
+#: src/gui/StelGui.cpp:173
+msgid "Windows"
+msgstr "Ikkunat"
+
+#: src/gui/StelGui.cpp:174
+msgid "Help window"
+msgstr "Avustusikkuna"
+
+#: src/gui/StelGui.cpp:175
+msgid "Configuration window"
+msgstr "Asetusikkuna"
+
+#: src/gui/StelGui.cpp:176
+msgid "Search window"
+msgstr "Etsintäikkuna"
+
+#: src/gui/StelGui.cpp:177
+msgid "Sky and viewing options window"
+msgstr "Taivas- ja näyttöasetusten ikkuna"
+
+#: src/gui/StelGui.cpp:178
+msgid "Date/time window"
+msgstr "Päiväys/aika-ikkuna"
+
+#: src/gui/StelGui.cpp:179
+msgid "Location window"
+msgstr "Paikkakunta-ikkuna"
+
+#: src/gui/StelGui.cpp:181 src/ui_dateTimeDialogGui.h:294
+msgid "Date and Time"
+msgstr "Päivays ja aika"
+
+#: src/gui/StelGui.cpp:182
+msgid "Decrease time speed"
+msgstr "Pienennä aika-askelta"
+
+#: src/gui/StelGui.cpp:183
+msgid "Increase time speed"
+msgstr "Kasvata aika-askelta"
+
+#: src/gui/StelGui.cpp:184
+msgid "Set normal time rate"
+msgstr "Aseta normaali aika-askel"
+
+#: src/gui/StelGui.cpp:185
+msgid "Set time to now"
+msgstr "Aseta aika nykyhetkeen"
+
+#: src/gui/StelGui.cpp:186
+msgid "Add 1 solar hour"
+msgstr "Lisää aurinkotunti"
+
+#: src/gui/StelGui.cpp:187
+msgid "Subtract 1 solar hour"
+msgstr "Vähennä aurinkotunti"
+
+#: src/gui/StelGui.cpp:188
+msgid "Add 1 solar day"
+msgstr "Lisää aurinkopäivä"
+
+#: src/gui/StelGui.cpp:189
+msgid "Subtract 1 solar day"
+msgstr "Vähennä aurinkopäivä"
+
+#: src/gui/StelGui.cpp:190
+msgid "Add 1 solar week"
+msgstr "Lisää aurinkoviikko"
+
+#: src/gui/StelGui.cpp:191
+msgid "Subtract 1 solar week"
+msgstr "Vähennä aurinkoviikko"
+
+#: src/gui/StelGui.cpp:192
+msgid "Add 1 sidereal day"
+msgstr "Lisää tähtipäivä"
+
+#: src/gui/StelGui.cpp:193
+msgid "Subtract 1 sidereal day"
+msgstr "Vähennä tähtipäivä"
+
+#: src/gui/StelGui.cpp:194
+msgid "Add 1 sidereal week"
+msgstr "Lisää tähtiviikko"
+
+#: src/gui/StelGui.cpp:195
+msgid "Subtract 1 sidereal week"
+msgstr "Vähennä tähtiviikko"
+
+#: src/gui/StelGui.cpp:198
+msgid "Center on selected object"
+msgstr "Keskitä valittuun kohteeseen"
+
+#: src/gui/StelGui.cpp:199
+msgid "Track object"
+msgstr "Seuraa kohdetta"
+
+#: src/gui/StelGui.cpp:200
+msgid "Zoom in on selected object"
+msgstr "Suurenna valittuun kohteeseen"
+
+#: src/gui/StelGui.cpp:201
+msgid "Zoom out"
+msgstr "Loitonna"
+
+#: src/gui/StelGui.cpp:202
+msgid "Set home planet to selected planet"
+msgstr "Aseta valittu planeetta kotiplaneetaksi"
+
+#: src/gui/StelGui.cpp:205
+msgid "Switch between equatorial and azimuthal mount"
+msgstr "Vaihda ekvatoriaali- tai atsimutaalijalustan välillä"
+
+#: src/gui/StelGui.cpp:206
+msgid "Quit"
+msgstr "Lopeta"
+
+#: src/gui/StelGui.cpp:207
+msgid "Save screenshot"
+msgstr "Tallenna kuvankaappaus"
+
+#: src/gui/StelGui.cpp:210
+msgid "Auto hide horizontal button bar"
+msgstr "Piilota automaattisesti painikkeiden vaakapalkki"
+
+#: src/gui/StelGui.cpp:211
+msgid "Auto hide vertical button bar"
+msgstr "Piilota automaattisesti painikkeiden pystypalkki"
+
+#: src/gui/StelGui.cpp:783
+msgid "Stellarium"
+msgstr "Stellarium"
+
+#: src/gui/StelGuiItems.cpp:432
+#, no-c-format, qt-format
+msgid "%1m"
+msgstr "%1m"
+
+#: src/gui/ViewDialog.cpp:345
+msgid "No description"
+msgstr "Ei kuvausta"
+
+#: src/gui/ViewDialog.cpp:409
+msgid "No shooting stars"
+msgstr "Ei tähdenlentoja"
+
+#: src/gui/ViewDialog.cpp:412
+msgid "Normal rate"
+msgstr "Normaali aktiivisuus"
+
+#: src/gui/ViewDialog.cpp:415
+msgid "Standard Perseids rate"
+msgstr "Perseidien normaaliaktiivisuus"
+
+#: src/gui/ViewDialog.cpp:418
+msgid "Exceptional Leonid rate"
+msgstr "Poikkeuksellinen leonidien aktiivisuus"
+
+#: src/gui/ViewDialog.cpp:421
+msgid "Highest rate ever (1966 Leonids)"
+msgstr "Suurin tunnettu aktiivisuus (1966 leonidit)"
+
+#: src/main.cpp:55
+msgid "This system does not support OpenGL."
+msgstr "Tämä järjestelmä ei tue OpenGL-ominaisuutta."
+
+#: src/translations.h:33
+msgid "Sun"
+msgstr "Aurinko"
+
+#: src/translations.h:34
+msgid "Mercury"
+msgstr "Merkurius"
+
+#: src/translations.h:35
+msgid "Venus"
+msgstr "Venus"
+
+#: src/translations.h:36
+msgid "Earth"
+msgstr "Maa"
+
+#: src/translations.h:37
+msgid "Moon"
+msgstr "Kuu"
+
+#: src/translations.h:38
+msgid "Mars"
+msgstr "Mars"
+
+#: src/translations.h:39
+msgid "Deimos"
+msgstr "Deimos"
+
+#: src/translations.h:40
+msgid "Phobos"
+msgstr "Phobos"
+
+#: src/translations.h:41
+msgid "Jupiter"
+msgstr "Jupiter"
+
+#: src/translations.h:42
+msgid "Io"
+msgstr "Io"
+
+#: src/translations.h:43
+msgid "Europa"
+msgstr "Europa"
+
+#: src/translations.h:44
+msgid "Ganymede"
+msgstr "Ganymedes"
+
+#: src/translations.h:45
+msgid "Callisto"
+msgstr "Kallisto"
+
+#: src/translations.h:46
+msgid "Saturn"
+msgstr "Saturnus"
+
+#: src/translations.h:47
+msgid "Mimas"
+msgstr "Mimas"
+
+#: src/translations.h:48
+msgid "Enceladus"
+msgstr "Enceladus"
+
+#: src/translations.h:49
+msgid "Tethys"
+msgstr "Tethys"
+
+#: src/translations.h:50
+msgid "Dione"
+msgstr "Dione"
+
+#: src/translations.h:51
+msgid "Rhea"
+msgstr "Rhea"
+
+#: src/translations.h:52
+msgid "Titan"
+msgstr "Titan"
+
+#: src/translations.h:53
+msgid "Hyperion"
+msgstr "Hyperion"
+
+#: src/translations.h:54
+msgid "Iapetus"
+msgstr "Japetus"
+
+#: src/translations.h:55
+msgid "Phoebe"
+msgstr "Phoebe"
+
+#: src/translations.h:56
+msgid "Neptune"
+msgstr "Neptunus"
+
+#: src/translations.h:57
+msgid "Uranus"
+msgstr "Uranus"
+
+#: src/translations.h:58
+msgid "Pluto"
+msgstr "Pluto"
+
+#: src/translations.h:59
+msgid "Charon"
+msgstr "Kharon"
+
+#: src/translations.h:60
+msgid "Solar System Observer"
+msgstr "Aurinkokunnan havaitsija"
+
+#: src/translations.h:63
+msgid "N"
+msgstr "P"
+
+#: src/translations.h:64
+msgid "S"
+msgstr "E"
+
+#: src/translations.h:65
+msgid "E"
+msgstr "I"
+
+#: src/translations.h:66
+msgid "W"
+msgstr "L"
+
+#: src/translations.h:69
+msgid "Chinese"
+msgstr "Kiinalainen"
+
+#: src/translations.h:70
+msgid "Egyptian"
+msgstr "Egyptiläinen"
+
+#: src/translations.h:71
+msgid "Inuit"
+msgstr "Inuiittien"
+
+#: src/translations.h:72
+msgid "Korean"
+msgstr "Korealainen"
+
+#: src/translations.h:73
+msgid "Lakota"
+msgstr "Lakotien"
+
+#: src/translations.h:74
+msgid "Navajo"
+msgstr "Navajojen"
+
+#: src/translations.h:75
+msgid "Norse"
+msgstr "Muinaisnorjalainen"
+
+#: src/translations.h:76
+msgid "Polynesian"
+msgstr "Polynesialainen"
+
+#: src/translations.h:77
+msgid "Western"
+msgstr "Länsimainen"
+
+#: src/translations.h:78
+msgid "Tupi-Guarani"
+msgstr "Tupi-guaranilainen"
+
+#: src/ui_dateTimeDialogGui.h:293 src/ui_helpDialogGui.h:211
+#: src/ui_locationDialogGui.h:384 src/ui_viewDialog.h:964
+#: src/ui_configurationDialog.h:526
+msgid "Form"
+msgstr "Muoto"
+
+#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
+msgid "/"
+msgstr "/"
+
+#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
+msgid ":"
+msgstr ":"
+
+#: src/ui_helpDialogGui.h:212 src/ui_helpDialogGui.h:214
+msgid "Help"
+msgstr "Apua"
+
+#: src/ui_helpDialogGui.h:215
+msgid "About"
+msgstr "Tietoja ohjelmasta"
+
+#: src/ui_locationDialogGui.h:385
+msgid "Location"
+msgstr "Paikkakunta"
+
+#: src/ui_locationDialogGui.h:389
+msgid "Current location information"
+msgstr "Nykyisen paikkakunnan tiedot"
+
+#: src/ui_locationDialogGui.h:390
+msgid "Use as default"
+msgstr "Käytä oletuksena"
+
+#: src/ui_locationDialogGui.h:391
+msgid "Delete"
+msgstr "Poista"
+
+#: src/ui_locationDialogGui.h:392
+msgid "Add to list"
+msgstr "Lisää listaan"
+
+#: src/ui_locationDialogGui.h:393
+msgid "Latitude:"
+msgstr "Leveys:"
+
+#: src/ui_locationDialogGui.h:396 src/ui_locationDialogGui.h:402
 msgid ""
-"{The Stellarium Wiki} - General information.  You can also find user-"
-"contributed landscapes and scripts here."
+"You can enter values in decimal degrees, or using dms format, for example: "
+"+1d 12m 8s"
 msgstr ""
-"{Stellarium-wiki} - yleistä tietoa. Löydät täältä myös käyttäjien tekemiä "
-"maisemia ja komentojonoja."
+"Voit antaa arvot asteina ja desimaaleina tai käyttää asteet-minuutit-"
+"sekunnit-muotoa, esimerkiksi: +1d 12m 8s"
+
+#: src/ui_locationDialogGui.h:399
+msgid "Longitude:"
+msgstr "Pituus:"
+
+#: src/ui_locationDialogGui.h:405
+msgid "Altitude:"
+msgstr "Korkeus:"
+
+#: src/ui_locationDialogGui.h:408
+msgid "Enter the altitude in meter"
+msgstr "Anna korkeus metreinä"
+
+#: src/ui_locationDialogGui.h:411
+msgid " m"
+msgstr " m"
+
+#: src/ui_locationDialogGui.h:412
+msgid "Name/City:"
+msgstr "Nimi/kaupunki:"
+
+#: src/ui_locationDialogGui.h:413
+msgid "Country:"
+msgstr "Maa:"
+
+#: src/ui_locationDialogGui.h:414
+msgid "Planet:"
+msgstr "Planeetta:"
+
+#: src/ui_searchDialogGui.h:199 src/ui_searchDialogGui.h:200
+msgid "Find Object"
+msgstr "Etsi kohde"
+
+#: src/ui_viewDialog.h:965
+msgid "View"
+msgstr "Näytä"
+
+#: src/ui_viewDialog.h:967
+msgid "Planets and satellites"
+msgstr "Planeetat ja kuut"
+
+#: src/ui_viewDialog.h:968
+msgid "Show planets"
+msgstr "Näytä planeetat"
+
+#: src/ui_viewDialog.h:969
+msgid "Show planet markers"
+msgstr "Näytä planeettojen osoittimet"
+
+#: src/ui_viewDialog.h:970
+msgid "Show planet orbits"
+msgstr "Näytä planeettojen radat"
+
+#: src/ui_viewDialog.h:971
+msgid "Simulate light speed"
+msgstr "Jäljittele valonnopeutta"
+
+#: src/ui_viewDialog.h:972
+msgid "Scale Moon"
+msgstr "Kuun koko"
+
+#: src/ui_viewDialog.h:974
+msgid "Absolute scale:"
+msgstr "Absoluuttinen mittakaava:"
+
+#: src/ui_viewDialog.h:975
+msgid "Relative scale:"
+msgstr "Suhteellinen mittakaava:"
+
+#: src/ui_viewDialog.h:976
+msgid "Twinkle:"
+msgstr "Tuikkiminen:"
+
+#: src/ui_viewDialog.h:979
+msgid "Dim faint stars when a very bright object is visible"
+msgstr "Heikennä himmeitä tähtiä, jos hyvin kirkas kohde on näkyvissä"
+
+#: src/ui_viewDialog.h:982
+msgid "Dynamic eye adaptation"
+msgstr "Dynaaminen silmän sopeutuminen"
+
+#: src/ui_viewDialog.h:984
+msgid "Show atmosphere"
+msgstr "Näytä ilmakehä"
+
+#: src/ui_viewDialog.h:985
+msgid "Light pollution: "
+msgstr "Valosaaste: "
+
+#: src/ui_viewDialog.h:986
+msgid "Labels and Markers"
+msgstr "Nimet ja osoittimet"
+
+#: src/ui_viewDialog.h:989
+msgid "Planets"
+msgstr "Planeetat"
+
+#: src/ui_viewDialog.h:990
+msgid "Shooting Stars"
+msgstr "Tähdenlennot"
+
+#: src/ui_viewDialog.h:991
+msgid "Hourly zenith rate:"
+msgstr "Aktiivisuus tunnissa zeniitissä:"
+
+#: src/ui_viewDialog.h:992
+msgid "0"
+msgstr "0"
+
+#: src/ui_viewDialog.h:993
+msgid "10"
+msgstr "10"
+
+#: src/ui_viewDialog.h:994
+msgid "80"
+msgstr "80"
+
+#: src/ui_viewDialog.h:995
+msgid "10000"
+msgstr "10000"
+
+#: src/ui_viewDialog.h:996
+msgid "144000"
+msgstr "144000"
+
+#: src/ui_viewDialog.h:998
+msgid "Sky"
+msgstr "Taivas"
+
+#: src/ui_viewDialog.h:999
+msgid "Celestial Sphere"
+msgstr "Taivaanpallo"
+
+#: src/ui_viewDialog.h:1007
+msgid "Constellations"
+msgstr "Tähdistöt"
+
+#: src/ui_viewDialog.h:1008
+msgid "Show lines"
+msgstr "Näytä viivat"
+
+#: src/ui_viewDialog.h:1009
+msgid "Show labels"
+msgstr "Näytä nimet"
+
+#: src/ui_viewDialog.h:1010
+msgid "Show boundaries"
+msgstr "Näytä rajat"
+
+#: src/ui_viewDialog.h:1011
+msgid "Show art"
+msgstr "Näytä kuvat"
+
+#: src/ui_viewDialog.h:1012
+msgid "Art brightness: "
+msgstr "Kuvien voimakkuus: "
+
+#: src/ui_viewDialog.h:1013
+msgid "Projection"
+msgstr "Projektio"
+
+#: src/ui_viewDialog.h:1014
+msgid "Markings"
+msgstr "Merkinnät"
+
+#: src/ui_viewDialog.h:1015 src/ui_viewDialog.h:1021
+msgid "Options"
+msgstr "Asetukset"
+
+#: src/ui_viewDialog.h:1016
+msgid "Show ground"
+msgstr "Näytä maanpinta"
+
+#: src/ui_viewDialog.h:1017
+msgid "Show fog"
+msgstr "Näytä sumu"
+
+#: src/ui_viewDialog.h:1018
+msgid "Use associated planet and position"
+msgstr "Käytä valittua planeettaa ja sijaintia"
+
+#: src/ui_viewDialog.h:1019
+msgid "Use this landscape as default"
+msgstr "Käytä tätä maisemaa oletuksena"
+
+#: src/ui_viewDialog.h:1020
+msgid "Landscape"
+msgstr "Maisemat"
+
+#: src/ui_viewDialog.h:1022
+msgid "Use associated language for sky labeling"
+msgstr "Käytä liittyvää kieltä taivaan nimistönä"
+
+#: src/ui_viewDialog.h:1023
+msgid "Use this sky culture as default"
+msgstr "Käytä tätä taivaskulttuuria oletuksena"
+
+#: src/ui_viewDialog.h:1024
+msgid "Starlore"
+msgstr "Tähtitarusto"
+
+#: src/ui_configurationDialog.h:527
+msgid "Configuration"
+msgstr "Asetukset"
+
+#: src/ui_configurationDialog.h:539
+msgid "Program language"
+msgstr "Ohjelman kieli"
+
+#: src/ui_configurationDialog.h:540
+msgid "Selected object information"
+msgstr "Valitun kohteen tiedot"
+
+#: src/ui_configurationDialog.h:543
+msgid "Display all of the information which is available"
+msgstr "Näytä kaikki saatavilla olevat tiedot"
+
+#: src/ui_configurationDialog.h:546
+msgid "All available"
+msgstr "Kaikki saatavilla olevat"
+
+#: src/ui_configurationDialog.h:549
+msgid "Display only abbreviated information"
+msgstr "Näytä vain karsitut tiedot"
+
+#: src/ui_configurationDialog.h:552
+msgid "Short"
+msgstr "Lyhennetyt"
+
+#: src/ui_configurationDialog.h:553
+msgid "None"
+msgstr "Ei tietoja"
+
+#: src/ui_configurationDialog.h:554
+msgid "Default options"
+msgstr "Oletusasetukset"
+
+#: src/ui_configurationDialog.h:555
+msgid "Save settings"
+msgstr "Tallenna asetukset"
+
+#: src/ui_configurationDialog.h:556
+msgid "Restore defaults"
+msgstr "Palauta oletusarvot"
+
+#: src/ui_configurationDialog.h:557
+msgid ""
+"Restoring default settings requires a restart of Stellarium. Saving all the "
+"current options includes the current FOV and direction of view for use at "
+"next startup."
+msgstr ""
+"Oletusarvojen palautus vaati Stellariumin uudelleenkäynnistyksen. "
+"Tallennetaan seuraavaa käynnistystä varten kaikki nykyiset asetukset "
+"mukaanlukien nykyinen näkökenttä ja katselusuunta."
+
+#: src/ui_configurationDialog.h:558
+msgid "Startup FOV: XX"
+msgstr "Aloitusnäkökenttä: XX"
+
+#: src/ui_configurationDialog.h:559
+msgid "Startup direction of view: xxxx"
+msgstr "Aloituskatselusuunta: xxxx"
+
+#: src/ui_configurationDialog.h:560
+msgid "Main"
+msgstr "Pää"
+
+#: src/ui_configurationDialog.h:561
+msgid "Control"
+msgstr "Hallinta"
+
+#: src/ui_configurationDialog.h:564
+msgid "Allow keyboard to pan and zoom"
+msgstr "Salli siirtyminen ja suurennus/loitonnus näppäimistöllä"
+
+#: src/ui_configurationDialog.h:567
+msgid "Enable keyboard navigation"
+msgstr "Salli liikkuminen näppäimistöllä"
+
+#: src/ui_configurationDialog.h:570
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr ""
+"Salli hiirellä liikkuminen (vetämällä) ja suurennus/loitonnus (rullalla)"
+
+#: src/ui_configurationDialog.h:573
+msgid "Enable mouse navigation"
+msgstr "Salli hiirellä liikkuminen"
+
+#: src/ui_configurationDialog.h:574
+msgid "Startup date and time"
+msgstr "Aloituspäiväys ja -aika"
+
+#: src/ui_configurationDialog.h:577
+msgid "Starts Stellarium at system clock date and time"
+msgstr "Käynnistää Stellariumin järjestelmän päiväyksellä ja ajalla"
+
+#: src/ui_configurationDialog.h:580
+msgid "System date and time"
+msgstr "Järjestelmän päiväys ja aika"
+
+#: src/ui_configurationDialog.h:583
+msgid ""
+"Sets the simulation time to the next instance of this time of day when "
+"Stellarium starts"
+msgstr ""
+"Asettaa simulaation ajaksi Stellariumin käynnistyspäivää seuraavaksi ajaksi"
+
+#: src/ui_configurationDialog.h:586
+msgid "System date at:"
+msgstr "Järjestelmän päiväys:"
+
+#: src/ui_configurationDialog.h:589
+msgid "Use a specific date and time when Stellarium starts up"
+msgstr "Käytä tiettyä päiväystä ja aikaa Stellariumin käynnistyessä"
+
+#: src/ui_configurationDialog.h:592
+msgid "Other:"
+msgstr "Muu:"
+
+#: src/ui_configurationDialog.h:593
+msgid "Navigation"
+msgstr "Siirtyminen"
+
+#: src/ui_configurationDialog.h:594
+msgid "Amateur astronomer options"
+msgstr "Tähtiharrastajan asetukset"
+
+#: src/ui_configurationDialog.h:597
+msgid "Toggle vertical and horizontal image flip buttons."
+msgstr "Pysty- ja vaakapeilauksen painikkeet päälle/pois."
+
+#: src/ui_configurationDialog.h:600
+msgid "Show flip buttons"
+msgstr "Näytä peilauspainikkeet"
+
+#: src/ui_configurationDialog.h:601
+msgid "Planetarium options"
+msgstr "Planetaarioasetukset"
+
+#: src/ui_configurationDialog.h:604
+msgid ""
+"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
+"mirror for low-cost planetarium systems."
+msgstr ""
+"Pallopeilikorjausta käytetään, kun Stellarium heijastetaan pallopeilille "
+"halvoissa planetaariojärjestelmissä."
+
+#: src/ui_configurationDialog.h:607
+msgid "Spheric mirror distortion"
+msgstr "Pallopeilikorjaus"
+
+#: src/ui_configurationDialog.h:610
+msgid "Align labels with the horizon"
+msgstr "Suuntaa nimet horisontin mukaan"
+
+#: src/ui_configurationDialog.h:613
+msgid "Gravity labels"
+msgstr "\"Gravitaatio\"nimet"
+
+#: src/ui_configurationDialog.h:616
+msgid ""
+"When enabled, the \"auto zoom out\" key will also set the initial viewing "
+"direction"
+msgstr ""
+"Kun käytössä, \"automaattinen loitonnus\" -näppäin asettaa myös "
+"aloituskatselusuunnan"
+
+#: src/ui_configurationDialog.h:619
+msgid "Auto zoom out returns to initial direction of view"
+msgstr "Automaattinen loitonnus palauttaa aloituskatselusuunnan"
+
+#: src/ui_configurationDialog.h:622
+msgid "Mask out everything outside a central circle in the main view"
+msgstr "Peitä päänäkymästä kaikki keskusympyrän ulkopuolinen"
+
+#: src/ui_configurationDialog.h:625
+msgid "Disc viewport"
+msgstr "Putkinäkymä"
+
+#: src/ui_configurationDialog.h:626
+msgid "Sceenshots"
+msgstr "Kuvankaappaukset"
+
+#: src/ui_configurationDialog.h:627
+msgid "Screenshot Directory"
+msgstr "Kuvankaappaushakemisto"
+
+#: src/ui_configurationDialog.h:629
+msgid "Other"
+msgstr "Muut"
+
+#: src/ui_configurationDialog.h:632
+msgid "Hides the mouse cursor when inactive"
+msgstr "Piilota hiiren osoitin ei-aktiivisessa tilassa"
+
+#: src/ui_configurationDialog.h:635
+msgid "Mouse cursor timeout (seconds):"
+msgstr "Hiiren osoittimen aikakatkaisu (sekunteja):"
+
+#: src/ui_configurationDialog.h:636
+msgid "Tools"
+msgstr "Työkalut"
+
+#~ msgid "m"
+#~ msgstr "m"
 
 #~ msgid ""
 #~ "   Please check for newer versions and send bug reports\n"
@@ -1577,14 +1608,8 @@ msgstr ""
 #~ msgid "Ara"
 #~ msgstr "Alttari"
 
-#~ msgid "Are you sure ?"
-#~ msgstr "Oletko varma?"
-
 #~ msgid "Aries"
 #~ msgstr "Oinas"
-
-#~ msgid "Arsenal"
-#~ msgstr "Varikko"
 
 #~ msgid "Atmosphere [A]"
 #~ msgstr "Ilmakehä [A]"
@@ -1592,44 +1617,20 @@ msgstr ""
 #~ msgid "Auriga"
 #~ msgstr "Ajomies"
 
-#~ msgid "Aurvandil's Toe"
-#~ msgstr "Aurvandilin varvas"
-
 #~ msgid "Azimuthal Grid [Z]"
 #~ msgstr "Atsimuuttiasteikko [Z]"
-
-#~ msgid "Bailer"
-#~ msgstr "Äyskäri"
-
-#~ msgid "Banner of Three Stars"
-#~ msgstr "Kolmen tähden nauha"
-
-#~ msgid "Bear's Lodge"
-#~ msgstr "Karhun maja"
 
 #~ msgid "Bird"
 #~ msgstr "Lintu"
 
-#~ msgid "Blubber Container"
-#~ msgstr "Valaanrasva-astia"
-
 #~ msgid "Boat"
 #~ msgstr "Vene"
-
-#~ msgid "Bond"
-#~ msgstr "Side"
 
 #~ msgid "Bootes"
 #~ msgstr "Karhunvartija"
 
 #~ msgid "Bow and Arrow"
 #~ msgstr "Jousi ja nuoli"
-
-#~ msgid "Breastbone"
-#~ msgstr "Rintalasta"
-
-#~ msgid "Bull's Foreleg"
-#~ msgstr "Härän etujalat"
 
 #~ msgid "CMD + Q  : Quit\n"
 #~ msgstr "CMD + Q : Lopeta\n"
@@ -1667,17 +1668,11 @@ msgstr ""
 #~ msgid "Cardinal Points [Q]"
 #~ msgstr "Ilmansuunnat [Q]"
 
-#~ msgid "Cared for by Moon"
-#~ msgstr "Kuun kaitsema"
-
 #~ msgid "Caribou"
 #~ msgstr "Karibu"
 
 #~ msgid "Cassiopeia"
 #~ msgstr "Kassiopeia"
-
-#~ msgid "Cat's Cradle"
-#~ msgstr "Kissankehto"
 
 #~ msgid "Centaurus"
 #~ msgstr "Kentauri"
@@ -1691,26 +1686,11 @@ msgstr ""
 #~ msgid "Chamaeleon"
 #~ msgstr "Kameleontti"
 
-#~ msgid "Chariot"
-#~ msgstr "Ajuri"
-
-#~ msgid "Chariot Yard"
-#~ msgstr "Hevospiha"
-
-#~ msgid "Chematy"
-#~ msgstr "Chematy"
-
 #~ msgid "Choose landscapes:"
 #~ msgstr "Valitse maisemat"
 
 #~ msgid "Circinus"
 #~ msgstr "Harppi"
-
-#~ msgid "Circular Granary"
-#~ msgstr "Pyöreä vilja-aitta"
-
-#~ msgid "Coiled Thong"
-#~ msgstr "Kierretty hihna"
 
 #~ msgid "Collarbones"
 #~ msgstr "Solisluut"
@@ -1763,9 +1743,6 @@ msgstr ""
 #~ msgid "Current Time Speed is x"
 #~ msgstr "Nykyinen aika-askel on x"
 
-#~ msgid "Curved Array"
-#~ msgstr "Kaareva nuoli"
-
 #~ msgid "Cygnus"
 #~ msgstr "Joutsen"
 
@@ -1792,60 +1769,8 @@ msgstr ""
 #~ "CTRL + F : Kohteiden etsintä päälle/pois\n"
 #~ "\n"
 
-#~ msgid ""
-#~ "Dialogs & other controls:\n"
-#~ "H   : Help                      I   : About Stellarium\n"
-#~ "M   : Text menu                 1 (one)  : Configuration\n"
-#~ "CTRL + S : Take a screenshot\n"
-#~ "CTRL + R : Toggle script recording\n"
-#~ "CTRL + F : Toggle object finder\n"
-#~ "CTRL + G : Goto selected solar system object\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Valintaikkunat ja muut asetukset:\n"
-#~ "H     : Apua                      I   : Tietoja Stellarium-ohjelmasta\n"
-#~ "M     : Tekstivalikko             1 (yksi) : Asetukset\n"
-#~ "CTRL + S : Tee ruutukaappaus\n"
-#~ "CTRL + R : Komentosarjan nauhoitus päälle/pois\n"
-#~ "CTRL + F : Kohteen etsintä\n"
-#~ "CTRL + G : Siirry valitulle aurinkokunnan kappaleelle\n"
-#~ "\n"
-
-#~ msgid "Dilyehe"
-#~ msgstr "Dilyehe"
-
-#~ msgid "Dipper"
-#~ msgstr "Kauha"
-
 #~ msgid "Disk Viewport"
 #~ msgstr "Putkinäkymä"
-
-#~ msgid ""
-#~ "Display options:\n"
-#~ "ENTER : Equatorial/altazimuthal mount\n"
-#~ "F1  : Toggle fullscreen / window.\n"
-#~ "C   : Constellation lines       V   : Constellation labels\n"
-#~ "R   : Constellation art         E   : Equatorial grid\n"
-#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
-#~ "P   : Planet labels             G   : Ground\n"
-#~ "A   : Atmosphere                F   : Fog\n"
-#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
-#~ "T   : Object tracking           S   : Stars\n"
-#~ "4 , : Ecliptic line             5 . : Equator line\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Näyttöasetukset:\n"
-#~ "ENTER : Ekvatoriaalinen/atsimutaalinen jalusta\n"
-#~ "F1 : Vaihda kokoruutu/ikkunatilaan\n"
-#~ "C : Tähtikuvioviivat V : Tähdistöjen nimet\n"
-#~ "R : Tähdistökuvat E : Ekvatoriaaliasteikko\n"
-#~ "Z : Atsimuuttiasteikko N : Tähtisumujen nimet\n"
-#~ "P : Planeettojen nimet G : Maanpinta\n"
-#~ "A : Ilmakehä F : Sumu\n"
-#~ "Q : Ilmansuunnat O : Vaihda Kuun kokoa\n"
-#~ "T : Kohteen seuranta S : Tähdet\n"
-#~ "4 , : Ekliptika 5 . : Ekvaattori\n"
-#~ "\n"
 
 #~ msgid ""
 #~ "Display options:\n"
@@ -1874,17 +1799,11 @@ msgstr ""
 #~ "4 , : Ekliptika                 5 . : Ekvaattori\n"
 #~ "\n"
 
-#~ msgid "Do"
-#~ msgstr "Suorita"
-
 #~ msgid "Dog"
 #~ msgstr "Koira"
 
 #~ msgid "Dolphin"
 #~ msgstr "Delfiini"
-
-#~ msgid "Done"
-#~ msgstr "Valmis"
 
 #~ msgid "Dorado"
 #~ msgstr "Kultakala"
@@ -1894,9 +1813,6 @@ msgstr ""
 
 #~ msgid "Drawing of the Constellations [C]"
 #~ msgstr "Tähdistöviivat [C]"
-
-#~ msgid "Dried Willow"
-#~ msgstr "Kuivanut paju"
 
 #~ msgid "Drum"
 #~ msgstr "Rumpu"
@@ -1914,21 +1830,6 @@ msgstr ""
 #~ "CTRL + C : Lopeta komentojono\n"
 #~ "6     : Pysäytä komentojono       K   : Jatka komentojonoa\n"
 #~ "\n"
-
-#~ msgid "Earth God's Temple"
-#~ msgstr "Maan jumalien temppeli"
-
-#~ msgid "Eastern Door"
-#~ msgstr "Itäinen ovi"
-
-#~ msgid "Elk"
-#~ msgstr "Hirvi"
-
-#~ msgid "Emptiness"
-#~ msgstr "Tyhjyys"
-
-#~ msgid "Encampment"
-#~ msgstr "Leiripaikka"
 
 #~ msgid "Enter observatory name"
 #~ msgstr "Anna observatorion nimi"
@@ -1949,47 +1850,14 @@ msgstr ""
 #~ msgstr ""
 #~ "Virhe: komentojonotiedostoa ei voida avata komentojen tallennusta varten."
 
-#~ msgid "Establishment"
-#~ msgstr "Perustus"
-
-#~ msgid "Extended Net"
-#~ msgstr "Levitetty verkko"
-
-#~ msgid "Farmland"
-#~ msgstr "Maaseutu"
-
 #~ msgid "Ferry Boat"
 #~ msgstr "Lautta"
-
-#~ msgid "Fireplace"
-#~ msgstr "Tulisija"
-
-#~ msgid "First Big One"
-#~ msgstr "Suuri ensimmäinen"
-
-#~ msgid "First Slim One"
-#~ msgstr "Ensimmäinen laiha"
-
-#~ msgid "Five Chariots"
-#~ msgstr "Viisi ajuria"
-
-#~ msgid "Five Feudal Kings"
-#~ msgstr "Viisi feodaalikuningasta"
-
-#~ msgid "Flail"
-#~ msgstr "Varsta"
 
 #~ msgid "Flip horizontally [CTRL + SHIFT + H]"
 #~ msgstr "Peilaa vaakasuunnassa [CTRL + SHIFT + H]"
 
 #~ msgid "Flip vertically [CTRL + SHIFT + V]"
 #~ msgstr "Peilaa pystysuunnassa [CTRL + SHIFT + V]"
-
-#~ msgid "Flock"
-#~ msgstr "Lauma"
-
-#~ msgid "Flying Corridor"
-#~ msgstr "Lentoväylä"
 
 #~ msgid "For unlisted screen resolution, edit the file :"
 #~ msgstr "Luettelosta puuttuvalle tarkkuudelle, muokkaa tiedostoa :"
@@ -2000,38 +1868,20 @@ msgstr ""
 #~ msgid "Four Channels"
 #~ msgstr "Nejä kanaalia"
 
-#~ msgid "Frigate Bird"
-#~ msgstr "Fregattilintu"
-
 #~ msgid "GO"
 #~ msgstr "MENE"
 
 #~ msgid "Gemini"
 #~ msgstr "Kaksoset"
 
-#~ msgid "Ghosts"
-#~ msgstr "Aaveet"
-
-#~ msgid "Giant"
-#~ msgstr "Jättiläinen"
-
 #~ msgid "Girl"
 #~ msgstr "Tyttö"
-
-#~ msgid "Good Gourd"
-#~ msgstr "Hyvä kurpitsa"
-
-#~ msgid "Great General"
-#~ msgstr "Suuri kenraali"
 
 #~ msgid "Ground [G]"
 #~ msgstr "Maanpinta [G]"
 
 #~ msgid "Grus"
 #~ msgstr "Kurki"
-
-#~ msgid "Hand"
-#~ msgstr "Käsi"
 
 #~ msgid "Heart"
 #~ msgstr "Sydän"
@@ -2041,9 +1891,6 @@ msgstr ""
 
 #~ msgid "Hercules"
 #~ msgstr "Herkules"
-
-#~ msgid "Hippopotamus"
-#~ msgstr "Virtahepo"
 
 #~ msgid "Hit CTRL-R again to stop.\n"
 #~ msgstr "Anna CTRL-R uudelleen pysäyttääksesi.\n"
@@ -2057,9 +1904,6 @@ msgstr ""
 #~ msgid "Horologium"
 #~ msgstr "Heilurikello"
 
-#~ msgid "Horus"
-#~ msgstr "Horus"
-
 #~ msgid "Hour"
 #~ msgstr "Tunti"
 
@@ -2068,12 +1912,6 @@ msgstr ""
 
 #~ msgid "Hydrus"
 #~ msgstr "Etelän vesikäärme"
-
-#~ msgid "Imperial Guards"
-#~ msgstr "Keisarilliset vartijat"
-
-#~ msgid "Imperial Passageway"
-#~ msgstr "Keisarillinen käytävä"
 
 #~ msgid "Indus"
 #~ msgstr "Intiaani"
@@ -2087,29 +1925,11 @@ msgstr ""
 #~ msgid "Invalid Script command"
 #~ msgstr "Virheellinen komentosarjan komento"
 
-#~ msgid "Jade Well"
-#~ msgstr "Jadelähde"
-
 #~ msgid "Jaw"
 #~ msgstr "Kita"
 
-#~ msgid "Kenemet"
-#~ msgstr "Kenemet"
-
-#~ msgid "Khanuwy Fish"
-#~ msgstr "Khanuwy-kala"
-
-#~ msgid "Kitchen"
-#~ msgstr "Keittiö"
-
-#~ msgid "Kite of Kawelo"
-#~ msgstr "Kawelon leija"
-
 #~ msgid "Lacerta"
 #~ msgstr "Sisilisko"
-
-#~ msgid "Lamp Stand"
-#~ msgstr "Lampunjalka"
 
 #~ msgid "Language"
 #~ msgstr "Kieli"
@@ -2159,23 +1979,8 @@ msgstr ""
 #~ msgid "Magnitude"
 #~ msgstr "Magnitudi"
 
-#~ msgid "Man with Feet Apart"
-#~ msgstr "Mies haara-asennossa"
-
-#~ msgid "Man's Cart"
-#~ msgstr "Miehen kärryt"
-
 #~ msgid "Market"
 #~ msgstr "Tori"
-
-#~ msgid "Market Officer"
-#~ msgstr "Markkinavirkailija"
-
-#~ msgid "Maui's Fishhook"
-#~ msgstr "Mauin kalastuskoukko"
-
-#~ msgid "Mausoleum"
-#~ msgstr "Mausoleumi"
 
 #~ msgid "Meadows"
 #~ msgstr "Laaksot"
@@ -2218,12 +2023,6 @@ msgstr ""
 #~ msgid "Month"
 #~ msgstr "Kk"
 
-#~ msgid "Mooring Post"
-#~ msgstr "Kiinnityspaikka"
-
-#~ msgid "Mortar"
-#~ msgstr "Huhmare"
-
 #~ msgid ""
 #~ "Movement & selection:\n"
 #~ "Arrow Keys       : Change viewing RA/DE\n"
@@ -2255,14 +2054,8 @@ msgstr ""
 #~ msgid "Names of the Constellations [V]"
 #~ msgstr "Tähdistöjen nimet [V]"
 
-#~ msgid "Navigator's Triangle"
-#~ msgstr "Merenkulkijan kolmio"
-
 #~ msgid "Nebulas Names. Up to mag :"
 #~ msgstr "Tähtisumujen nimet. Magnitudiin :"
-
-#~ msgid "Neck"
-#~ msgstr "Kaula"
 
 #~ msgid "Net"
 #~ msgstr "Verkko"
@@ -2272,15 +2065,6 @@ msgstr ""
 
 #~ msgid "No"
 #~ msgstr "Ei"
-
-#~ msgid "Norma"
-#~ msgstr "Kulmaviivoitin"
-
-#~ msgid "North River"
-#~ msgstr "Pohjoinen joki"
-
-#~ msgid "Northern Dipper"
-#~ msgstr "Pohjoinen kauha"
 
 #~ msgid "OK"
 #~ msgstr "OK"
@@ -2294,20 +2078,11 @@ msgstr ""
 #~ msgid "Ophiuchus"
 #~ msgstr "Käärmeenkantaja"
 
-#~ msgid "Orchard"
-#~ msgstr "Hedelmätarha"
-
-#~ msgid "Outer Fence"
-#~ msgstr "Ulompi aitaus"
-
 #~ msgid "Ox"
 #~ msgstr "Härkä"
 
 #~ msgid "Pair of Stars"
 #~ msgstr "Tähtipari"
-
-#~ msgid "Palace Gate"
-#~ msgstr "Palatsin portti"
 
 #~ msgid "Pavo"
 #~ msgstr "Riikinkukko"
@@ -2317,9 +2092,6 @@ msgstr ""
 
 #~ msgid "Perseus"
 #~ msgstr "Perseus"
-
-#~ msgid "Pestle"
-#~ msgstr "Survin"
 
 #~ msgid "Phoenix"
 #~ msgstr "Feeniks"
@@ -2336,14 +2108,8 @@ msgstr ""
 #~ msgid "Point"
 #~ msgstr "Piste"
 
-#~ msgid "Prow"
-#~ msgstr "Keula"
-
 #~ msgid "Puppis"
 #~ msgstr "Peräkeula"
-
-#~ msgid "Purple Palace"
-#~ msgstr "Purppurapalatsi"
 
 #~ msgid "Pyxis"
 #~ msgstr "Kompassi"
@@ -2353,15 +2119,6 @@ msgstr ""
 
 #~ msgid "Quit [CTRL + Q]"
 #~ msgstr "Lopeta [CTRL + Q]"
-
-#~ msgid "Rabbit Tracks"
-#~ msgstr "Jäniksen jäljet"
-
-#~ msgid "Race Track"
-#~ msgstr "Kilpapolku"
-
-#~ msgid "Ramparts"
-#~ msgstr "Vallivarustus"
 
 #~ msgid "Real Time Speed [K]"
 #~ msgstr "Normaali aika-askel [K]"
@@ -2381,35 +2138,8 @@ msgstr ""
 #~ msgid "Return to Current Time"
 #~ msgstr "Palaa nykyhetkeen"
 
-#~ msgid "Return to Current Time [8]"
-#~ msgstr "Palaa nykyhetkeen [8]"
-
-#~ msgid "Revolving Female"
-#~ msgstr "Kiertyvä nainen"
-
-#~ msgid "Revolving Male"
-#~ msgstr "Kiertyvä mies"
-
-#~ msgid "River Turtle"
-#~ msgstr "Jokikilpikonna"
-
-#~ msgid "Rolled Tongue"
-#~ msgstr "Rullattu kieli"
-
-#~ msgid "Rooftop"
-#~ msgstr "Katonharja"
-
-#~ msgid "Room"
-#~ msgstr "Huone"
-
 #~ msgid "Root"
 #~ msgstr "Juuri"
-
-#~ msgid "Rotten Gourd"
-#~ msgstr "Mätä kurpitsa"
-
-#~ msgid "Runners"
-#~ msgstr "Juoksijat"
 
 #~ msgid "Sagitta"
 #~ msgstr "Nuoli"
@@ -2417,23 +2147,11 @@ msgstr ""
 #~ msgid "Sagittarius"
 #~ msgstr "Jousimies"
 
-#~ msgid "Sah"
-#~ msgstr "Sah"
-
-#~ msgid "Salamander"
-#~ msgstr "Salamanteri"
-
 #~ msgid "Save as default"
 #~ msgstr "Tallenna oletusarvoiksi"
 
-#~ msgid "Saving settings will save current full screen status"
-#~ msgstr "Asetusten tallennus tallentaa nykyisen kokoruututilan"
-
 #~ msgid "Scorpius"
 #~ msgstr "Skorpioni"
-
-#~ msgid "Screen"
-#~ msgstr "Kaihdin"
 
 #~ msgid "Screen Resolution :"
 #~ msgstr "Näytön tarkkuus :"
@@ -2459,50 +2177,14 @@ msgstr ""
 #~ msgid "Selected Constellation Only"
 #~ msgstr "Vain valitut tähdistöt"
 
-#~ msgid "Selkis"
-#~ msgstr "Selkis"
-
 #~ msgid "Serpens"
 #~ msgstr "Käärme"
-
-#~ msgid "Setting Landscape Sets Location: "
-#~ msgstr "Asetetaan maisemasarjat paikkakunnalle: "
-
-#~ msgid "Setting landscape updates the location"
-#~ msgstr "Aseta maisemapäivitykset paikkakunnalle"
-
-#~ msgid "Seven Excellencies"
-#~ msgstr "Seitsemän ylhäistä"
-
-#~ msgid "Seven Little Girls"
-#~ msgstr "Seitsemän pientä tyttöä"
 
 #~ msgid "Sextans"
 #~ msgstr "Sektantti"
 
 #~ msgid "Sheep"
 #~ msgstr "Lammas"
-
-#~ msgid "Sheepfold"
-#~ msgstr "Lammastarha"
-
-#~ msgid "Snake"
-#~ msgstr "Käärme"
-
-#~ msgid "Soldiers Market"
-#~ msgstr "Sotilaiden tori"
-
-#~ msgid "South River"
-#~ msgstr "Eteläinen joki"
-
-#~ msgid "Spear"
-#~ msgstr "Keihäs"
-
-#~ msgid "Spring"
-#~ msgstr "Kevät"
-
-#~ msgid "Square Granary"
-#~ msgstr "Neliskulmainen vilja-aitta"
 
 #~ msgid "Star Magnitude Multiplier: "
 #~ msgstr "Tähden magnitudin kerroin: "
@@ -2513,15 +2195,6 @@ msgstr ""
 #~ msgid "Star Twinkle. Amount :"
 #~ msgstr "Tähtien tuikkiminen. Tiheys :"
 
-#~ msgid "Stars of Water"
-#~ msgstr "Vesitähdet"
-
-#~ msgid "Stomach"
-#~ msgstr "Vatsa"
-
-#~ msgid "Supreme Palace"
-#~ msgstr "Ylin palatsi"
-
 #~ msgid "Tail"
 #~ msgstr "Häntä"
 
@@ -2531,26 +2204,11 @@ msgstr ""
 #~ msgid "Telescopium"
 #~ msgstr "Kaukoputki"
 
-#~ msgid "The Asar Battlefield"
-#~ msgstr "Asarin taistelukenttä"
-
-#~ msgid "The Fishermen"
-#~ msgstr "Kalastajat"
-
-#~ msgid "The Seven"
-#~ msgstr "Seitsemän"
-
 #~ msgid "Three Steps"
 #~ msgstr "Kolme porrasta"
 
 #~ msgid "Thunder and Lightning"
 #~ msgstr "Ukkonen ja salamat"
-
-#~ msgid "Thunderbird"
-#~ msgstr "Ukkoslintu"
-
-#~ msgid "Thunderbolt"
-#~ msgstr "Ukonnuoli"
 
 #~ msgid ""
 #~ "Time & Date:\n"
@@ -2569,34 +2227,11 @@ msgstr ""
 #~ "[   : 7 päivää taakse           ]   : 7 päivää eteen\n"
 #~ "\n"
 
-#~ msgid ""
-#~ "Time & Date:\n"
-#~ "6   : Time rate pause           7   : Time rate 0\n"
-#~ "8   : Set current time          J   : Decrease time rate\n"
-#~ "K   : Normal time rate          L   : Increase time rate\n"
-#~ "- and = :  Back and forward one day (press ALT for sidereal day)\n"
-#~ "[ and ] :  Back and forward 7 days (press ALT for sidereal days)\n"
-#~ "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Aika ja päiväys:\n"
-#~ "6     : Ajan pysäytys             7   : Nollaa aika-askel\n"
-#~ "8     : Aseta aika                J   : Pienennä aika-askelta\n"
-#~ "K     : Normaali aika-askel       L   : Kasvata aika-askelta\n"
-#~ "- ja =   : Päivä taakse- tai eteenpäin (sideerinen päivä painamalla ALT)\n"
-#~ "[ ja ]   : 7 päivää taakse- tai eteenpäin (sideeriset päivät painamalla "
-#~ "ALT)\n"
-#~ "CTRL + - : Tunti taaksepäin       CTRL + = : Tunti eteenpäin\n"
-#~ "\n"
-
 #~ msgid "Time Zone :"
 #~ msgstr "Aikavyöhyke :"
 
 #~ msgid "Time speed : "
 #~ msgstr "Aika-askel : "
-
-#~ msgid "Toilet"
-#~ msgstr "Vessa"
 
 #~ msgid "Triangle"
 #~ msgstr "Kolmio"
@@ -2607,32 +2242,20 @@ msgstr ""
 #~ msgid "Triangulum Australe"
 #~ msgstr "Etelän kolmio"
 
-#~ msgid "Tripod"
-#~ msgstr "Kolmijalka"
-
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Kirjoita '%s --help' saadaksesi lisätietoa.\n"
 
 #~ msgid "Tucana"
 #~ msgstr "Tukaani"
 
-#~ msgid "Turtle"
-#~ msgstr "Kilpikonna"
-
 #~ msgid "Two Jaws"
 #~ msgstr "Kaksi kitaa"
-
-#~ msgid "Two Placed Far Apart"
-#~ msgstr "Kaksi erotettua"
 
 #~ msgid "Two Poles"
 #~ msgstr "Kaksi napaa"
 
 #~ msgid "Two Sunbeams"
 #~ msgstr "Kaksi auringonsädettä"
-
-#~ msgid "Two in Front"
-#~ msgstr "Kaksi edessä"
 
 #~ msgid "Type: "
 #~ msgstr "Tyyppi: "
@@ -2667,14 +2290,8 @@ msgstr ""
 #~ msgid "Vela"
 #~ msgstr "Purje"
 
-#~ msgid "Viewport Distorter"
-#~ msgstr "Näyttökanavan vääristin"
-
 #~ msgid "Virgo"
 #~ msgstr "Neitsyt"
-
-#~ msgid "Voice of Joy"
-#~ msgstr "Ilon ääni"
 
 #~ msgid "Volans"
 #~ msgstr "Lentokala"
@@ -2684,6 +2301,393 @@ msgstr ""
 
 #~ msgid "Wall"
 #~ msgstr "Muuri"
+
+#~ msgid "Year"
+#~ msgstr "Vuosi"
+
+#~ msgid "Yes"
+#~ msgstr "Kyllä"
+
+#~ msgid "change to apply."
+#~ msgstr "muutoksen vahvistamiseksi."
+
+#~ msgid "Are you sure ?"
+#~ msgstr "Oletko varma?"
+
+#~ msgid "Arsenal"
+#~ msgstr "Varikko"
+
+#~ msgid "Bailer"
+#~ msgstr "Äyskäri"
+
+#~ msgid "Banner of Three Stars"
+#~ msgstr "Kolmen tähden nauha"
+
+#~ msgid "Bear's Lodge"
+#~ msgstr "Karhun maja"
+
+#~ msgid "Bond"
+#~ msgstr "Side"
+
+#~ msgid "Bull's Foreleg"
+#~ msgstr "Härän etujalat"
+
+#~ msgid "Cared for by Moon"
+#~ msgstr "Kuun kaitsema"
+
+#~ msgid "Cat's Cradle"
+#~ msgstr "Kissankehto"
+
+#~ msgid "Chariot"
+#~ msgstr "Ajuri"
+
+#~ msgid "Chariot Yard"
+#~ msgstr "Hevospiha"
+
+#~ msgid "Chematy"
+#~ msgstr "Chematy"
+
+#~ msgid "Circular Granary"
+#~ msgstr "Pyöreä vilja-aitta"
+
+#~ msgid "Coiled Thong"
+#~ msgstr "Kierretty hihna"
+
+#~ msgid "Curved Array"
+#~ msgstr "Kaareva nuoli"
+
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "CTRL + G : Goto selected solar system object\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Valintaikkunat ja muut asetukset:\n"
+#~ "H     : Apua                      I   : Tietoja Stellarium-ohjelmasta\n"
+#~ "M     : Tekstivalikko             1 (yksi) : Asetukset\n"
+#~ "CTRL + S : Tee ruutukaappaus\n"
+#~ "CTRL + R : Komentosarjan nauhoitus päälle/pois\n"
+#~ "CTRL + F : Kohteen etsintä\n"
+#~ "CTRL + G : Siirry valitulle aurinkokunnan kappaleelle\n"
+#~ "\n"
+
+#~ msgid "Dilyehe"
+#~ msgstr "Dilyehe"
+
+#~ msgid "Dipper"
+#~ msgstr "Kauha"
+
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen / window.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Näyttöasetukset:\n"
+#~ "ENTER : Ekvatoriaalinen/atsimutaalinen jalusta\n"
+#~ "F1 : Vaihda kokoruutu/ikkunatilaan\n"
+#~ "C : Tähtikuvioviivat V : Tähdistöjen nimet\n"
+#~ "R : Tähdistökuvat E : Ekvatoriaaliasteikko\n"
+#~ "Z : Atsimuuttiasteikko N : Tähtisumujen nimet\n"
+#~ "P : Planeettojen nimet G : Maanpinta\n"
+#~ "A : Ilmakehä F : Sumu\n"
+#~ "Q : Ilmansuunnat O : Vaihda Kuun kokoa\n"
+#~ "T : Kohteen seuranta S : Tähdet\n"
+#~ "4 , : Ekliptika 5 . : Ekvaattori\n"
+#~ "\n"
+
+#~ msgid "Do"
+#~ msgstr "Suorita"
+
+#~ msgid "Done"
+#~ msgstr "Valmis"
+
+#~ msgid "Dried Willow"
+#~ msgstr "Kuivanut paju"
+
+#~ msgid "Earth God's Temple"
+#~ msgstr "Maan jumalien temppeli"
+
+#~ msgid "Eastern Door"
+#~ msgstr "Itäinen ovi"
+
+#~ msgid "Elk"
+#~ msgstr "Hirvi"
+
+#~ msgid "Emptiness"
+#~ msgstr "Tyhjyys"
+
+#~ msgid "Encampment"
+#~ msgstr "Leiripaikka"
+
+#~ msgid "Establishment"
+#~ msgstr "Perustus"
+
+#~ msgid "Extended Net"
+#~ msgstr "Levitetty verkko"
+
+#~ msgid "Farmland"
+#~ msgstr "Maaseutu"
+
+#~ msgid "Fireplace"
+#~ msgstr "Tulisija"
+
+#~ msgid "First Big One"
+#~ msgstr "Suuri ensimmäinen"
+
+#~ msgid "Five Chariots"
+#~ msgstr "Viisi ajuria"
+
+#~ msgid "Five Feudal Kings"
+#~ msgstr "Viisi feodaalikuningasta"
+
+#~ msgid "Flail"
+#~ msgstr "Varsta"
+
+#~ msgid "Flock"
+#~ msgstr "Lauma"
+
+#~ msgid "Flying Corridor"
+#~ msgstr "Lentoväylä"
+
+#~ msgid "Frigate Bird"
+#~ msgstr "Fregattilintu"
+
+#~ msgid "Ghosts"
+#~ msgstr "Aaveet"
+
+#~ msgid "Giant"
+#~ msgstr "Jättiläinen"
+
+#~ msgid "Good Gourd"
+#~ msgstr "Hyvä kurpitsa"
+
+#~ msgid "Great General"
+#~ msgstr "Suuri kenraali"
+
+#~ msgid "Hippopotamus"
+#~ msgstr "Virtahepo"
+
+#~ msgid "Horus"
+#~ msgstr "Horus"
+
+#~ msgid "Imperial Guards"
+#~ msgstr "Keisarilliset vartijat"
+
+#~ msgid "Imperial Passageway"
+#~ msgstr "Keisarillinen käytävä"
+
+#~ msgid "Jade Well"
+#~ msgstr "Jadelähde"
+
+#~ msgid "Kenemet"
+#~ msgstr "Kenemet"
+
+#~ msgid "Khanuwy Fish"
+#~ msgstr "Khanuwy-kala"
+
+#~ msgid "Kitchen"
+#~ msgstr "Keittiö"
+
+#~ msgid "Kite of Kawelo"
+#~ msgstr "Kawelon leija"
+
+#~ msgid "Man with Feet Apart"
+#~ msgstr "Mies haara-asennossa"
+
+#~ msgid "Market Officer"
+#~ msgstr "Markkinavirkailija"
+
+#~ msgid "Maui's Fishhook"
+#~ msgstr "Mauin kalastuskoukko"
+
+#~ msgid "Mausoleum"
+#~ msgstr "Mausoleumi"
+
+#~ msgid "Mooring Post"
+#~ msgstr "Kiinnityspaikka"
+
+#~ msgid "Mortar"
+#~ msgstr "Huhmare"
+
+#~ msgid "Navigator's Triangle"
+#~ msgstr "Merenkulkijan kolmio"
+
+#~ msgid "Neck"
+#~ msgstr "Kaula"
+
+#~ msgid "Norma"
+#~ msgstr "Kulmaviivoitin"
+
+#~ msgid "North River"
+#~ msgstr "Pohjoinen joki"
+
+#~ msgid "Northern Dipper"
+#~ msgstr "Pohjoinen kauha"
+
+#~ msgid "Orchard"
+#~ msgstr "Hedelmätarha"
+
+#~ msgid "Outer Fence"
+#~ msgstr "Ulompi aitaus"
+
+#~ msgid "Palace Gate"
+#~ msgstr "Palatsin portti"
+
+#~ msgid "Pestle"
+#~ msgstr "Survin"
+
+#~ msgid "Prow"
+#~ msgstr "Keula"
+
+#~ msgid "Purple Palace"
+#~ msgstr "Purppurapalatsi"
+
+#~ msgid "Rabbit Tracks"
+#~ msgstr "Jäniksen jäljet"
+
+#~ msgid "Race Track"
+#~ msgstr "Kilpapolku"
+
+#~ msgid "Ramparts"
+#~ msgstr "Vallivarustus"
+
+#~ msgid "Return to Current Time [8]"
+#~ msgstr "Palaa nykyhetkeen [8]"
+
+#~ msgid "Revolving Female"
+#~ msgstr "Kiertyvä nainen"
+
+#~ msgid "Revolving Male"
+#~ msgstr "Kiertyvä mies"
+
+#~ msgid "River Turtle"
+#~ msgstr "Jokikilpikonna"
+
+#~ msgid "Rolled Tongue"
+#~ msgstr "Rullattu kieli"
+
+#~ msgid "Rooftop"
+#~ msgstr "Katonharja"
+
+#~ msgid "Room"
+#~ msgstr "Huone"
+
+#~ msgid "Rotten Gourd"
+#~ msgstr "Mätä kurpitsa"
+
+#~ msgid "Sah"
+#~ msgstr "Sah"
+
+#~ msgid "Salamander"
+#~ msgstr "Salamanteri"
+
+#~ msgid "Saving settings will save current full screen status"
+#~ msgstr "Asetusten tallennus tallentaa nykyisen kokoruututilan"
+
+#~ msgid "Screen"
+#~ msgstr "Kaihdin"
+
+#~ msgid "Selkis"
+#~ msgstr "Selkis"
+
+#~ msgid "Setting Landscape Sets Location: "
+#~ msgstr "Asetetaan maisemasarjat paikkakunnalle: "
+
+#~ msgid "Setting landscape updates the location"
+#~ msgstr "Aseta maisemapäivitykset paikkakunnalle"
+
+#~ msgid "Seven Excellencies"
+#~ msgstr "Seitsemän ylhäistä"
+
+#~ msgid "Seven Little Girls"
+#~ msgstr "Seitsemän pientä tyttöä"
+
+#~ msgid "Sheepfold"
+#~ msgstr "Lammastarha"
+
+#~ msgid "Snake"
+#~ msgstr "Käärme"
+
+#~ msgid "Soldiers Market"
+#~ msgstr "Sotilaiden tori"
+
+#~ msgid "South River"
+#~ msgstr "Eteläinen joki"
+
+#~ msgid "Spear"
+#~ msgstr "Keihäs"
+
+#~ msgid "Spring"
+#~ msgstr "Kevät"
+
+#~ msgid "Square Granary"
+#~ msgstr "Neliskulmainen vilja-aitta"
+
+#~ msgid "Stars of Water"
+#~ msgstr "Vesitähdet"
+
+#~ msgid "Stomach"
+#~ msgstr "Vatsa"
+
+#~ msgid "Supreme Palace"
+#~ msgstr "Ylin palatsi"
+
+#~ msgid "The Seven"
+#~ msgstr "Seitsemän"
+
+#~ msgid "Thunderbird"
+#~ msgstr "Ukkoslintu"
+
+#~ msgid "Thunderbolt"
+#~ msgstr "Ukonnuoli"
+
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "6   : Time rate pause           7   : Time rate 0\n"
+#~ "8   : Set current time          J   : Decrease time rate\n"
+#~ "K   : Normal time rate          L   : Increase time rate\n"
+#~ "- and = :  Back and forward one day (press ALT for sidereal day)\n"
+#~ "[ and ] :  Back and forward 7 days (press ALT for sidereal days)\n"
+#~ "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Aika ja päiväys:\n"
+#~ "6     : Ajan pysäytys             7   : Nollaa aika-askel\n"
+#~ "8     : Aseta aika                J   : Pienennä aika-askelta\n"
+#~ "K     : Normaali aika-askel       L   : Kasvata aika-askelta\n"
+#~ "- ja =   : Päivä taakse- tai eteenpäin (sideerinen päivä painamalla ALT)\n"
+#~ "[ ja ]   : 7 päivää taakse- tai eteenpäin (sideeriset päivät painamalla "
+#~ "ALT)\n"
+#~ "CTRL + - : Tunti taaksepäin       CTRL + = : Tunti eteenpäin\n"
+#~ "\n"
+
+#~ msgid "Toilet"
+#~ msgstr "Vessa"
+
+#~ msgid "Tripod"
+#~ msgstr "Kolmijalka"
+
+#~ msgid "Turtle"
+#~ msgstr "Kilpikonna"
+
+#~ msgid "Viewport Distorter"
+#~ msgstr "Näyttökanavan vääristin"
+
+#~ msgid "Voice of Joy"
+#~ msgstr "Ilon ääni"
 
 #~ msgid "Waty Bekety"
 #~ msgstr "Waty Bekety"
@@ -2706,29 +2710,53 @@ msgstr ""
 #~ msgid "Winnowing Basket"
 #~ msgstr "Seulontapussi"
 
-#~ msgid "Wolf's Mouth"
-#~ msgstr "Suden suu"
-
 #~ msgid "Woman's Bed"
 #~ msgstr "Vaimon vuode"
-
-#~ msgid "Woman's Cart"
-#~ msgstr "Naisen kärryt"
 
 #~ msgid "Xuanyuan"
 #~ msgstr "Xuanyuan"
 
-#~ msgid "Year"
-#~ msgstr "Vuosi"
-
-#~ msgid "Yes"
-#~ msgstr "Kyllä"
-
 #~ msgid "Zaofu"
 #~ msgstr "Zaofu"
 
-#~ msgid "change to apply."
-#~ msgstr "muutoksen vahvistamiseksi."
+#~ msgid "Aurvandil's Toe"
+#~ msgstr "Aurvandilin varvas"
 
-#~ msgid "m"
-#~ msgstr "m"
+#~ msgid "Blubber Container"
+#~ msgstr "Valaanrasva-astia"
+
+#~ msgid "Breastbone"
+#~ msgstr "Rintalasta"
+
+#~ msgid "First Slim One"
+#~ msgstr "Ensimmäinen laiha"
+
+#~ msgid "Hand"
+#~ msgstr "Käsi"
+
+#~ msgid "Lamp Stand"
+#~ msgstr "Lampunjalka"
+
+#~ msgid "Man's Cart"
+#~ msgstr "Miehen kärryt"
+
+#~ msgid "Runners"
+#~ msgstr "Juoksijat"
+
+#~ msgid "The Asar Battlefield"
+#~ msgstr "Asarin taistelukenttä"
+
+#~ msgid "The Fishermen"
+#~ msgstr "Kalastajat"
+
+#~ msgid "Two Placed Far Apart"
+#~ msgstr "Kaksi erotettua"
+
+#~ msgid "Two in Front"
+#~ msgstr "Kaksi edessä"
+
+#~ msgid "Wolf's Mouth"
+#~ msgstr "Suden suu"
+
+#~ msgid "Woman's Cart"
+#~ msgstr "Naisen kärryt"
