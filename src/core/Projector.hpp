@@ -117,8 +117,11 @@ public:
 	//! Un-project the entire viewport depending on mapping, maskType,
 	//! viewportFovDiameter, viewportCenter, and viewport dimensions.
 	//! @TODO Should be unified with getViewportConvexPolygon
-	StelGeom::ConvexS unprojectViewport(void) const;
+	StelGeom::ConvexS unprojectViewport() const;
 
+	//! Return a Halfspace containing the whole viewport
+	StelGeom::HalfSpace getBoundingHalfSpace() const;
+	
 	//! Set the near and far clipping planes.
 	void setClippingPlanes(double znear, double zfar);
 	//! Get the near and far clipping planes.
@@ -261,7 +264,7 @@ public:
 	// Standard methods for drawing primitives in general (non-linear) mode
 	///////////////////////////////////////////////////////////////////////////
 	//! Fill with black around the viewport.
-	void drawViewportShape(void);
+	void drawViewportShape(void) const;
 	
 	//! Generalisation of glVertex3v for non-linear projections. 
 	//! This method does not manage the lighting operations properly.

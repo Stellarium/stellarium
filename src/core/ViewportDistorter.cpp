@@ -101,10 +101,9 @@ struct VertexPoint
 
 
 
-ViewportDistorterFisheyeToSphericMirror
-::ViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h, Projector *prj)
+ViewportDistorterFisheyeToSphericMirror::ViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h, Projector *prj)
 	: prj(prj),screen_w(screen_w),screen_h(screen_h),
-	  original_max_fov(prj->getCurrentMapping().maxFov),
+	  original_max_fov(prj->getCurrentMapping().getMaxFov()),
 	  original_viewport(prj->getViewport()),
 	  original_viewportCenter(prj->getViewportCenter()),
 	  original_viewportFovDiameter(prj->getViewportFovDiameter()),
@@ -131,8 +130,8 @@ ViewportDistorterFisheyeToSphericMirror
 	double distorter_max_fov = conf.value("spheric_mirror/distorter_max_fov",175.0).toDouble();
 	if (distorter_max_fov > 240.0) distorter_max_fov = 240.0;
 	else if (distorter_max_fov < 120.0) distorter_max_fov = 120.0;
-	if (distorter_max_fov > prj->getCurrentMapping().maxFov)
-		distorter_max_fov = prj->getCurrentMapping().maxFov;
+	if (distorter_max_fov > prj->getCurrentMapping().getMaxFov())
+		distorter_max_fov = prj->getCurrentMapping().getMaxFov();
 	prj->setMaxFov(distorter_max_fov);
 
 	// width of the not yet distorted image

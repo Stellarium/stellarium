@@ -3,7 +3,6 @@
 
 MappingPerspective::MappingPerspective(void)
 {
-	maxFov = 120.0;
 }
 
 QString MappingPerspective::getNameI18() const
@@ -69,7 +68,6 @@ double MappingPerspective::deltaZoom(double fov) const
 
 MappingEqualArea::MappingEqualArea(void)
 {
-	maxFov = 360.0;
 }
 
 QString MappingEqualArea::getNameI18() const
@@ -125,7 +123,6 @@ double MappingEqualArea::deltaZoom(double fov) const
 
 MappingStereographic::MappingStereographic(void)
 {
-	maxFov = 235.0;
 }
 
 QString MappingStereographic::getNameI18() const
@@ -170,7 +167,6 @@ double MappingStereographic::deltaZoom(double fov) const
 
 MappingFisheye::MappingFisheye(void)
 {
-	maxFov = 180.00001;
 }
 
 QString MappingFisheye::getNameI18() const
@@ -214,8 +210,6 @@ double MappingFisheye::deltaZoom(double fov) const
 
 MappingCylinder::MappingCylinder(void)
 {
-	// assume aspect ration of 4/3 for getting a full 360 degree horizon:
-	maxFov = 175.0 * 4/3;
 }
 
 QString MappingCylinder::getNameI18() const
@@ -269,8 +263,6 @@ double MappingCylinder::deltaZoom(double fov) const
 
 MappingMercator::MappingMercator(void)
 {
-	// assume aspect ration of 4/3 for getting a full 360 degree horizon:
-	maxFov = 175.0 * 4/3;
 }
 
 QString MappingMercator::getNameI18() const
@@ -328,7 +320,6 @@ double MappingMercator::deltaZoom(double fov) const
 
 MappingOrthographic::MappingOrthographic(void)
 {
-  maxFov = 179.9999;
 }
 
 QString MappingOrthographic::getNameI18() const
