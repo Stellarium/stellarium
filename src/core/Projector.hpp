@@ -439,8 +439,7 @@ private:
 	
 	Mat4d modelViewMatrix;         // openGL MODELVIEW Matrix
 	
-	const Mapping *mapping;
-	QString currentProjectionType; // Type of the projection currently used
+	const Mapping* mapping;
 	
 	// List of all the available projections
 	static QMap<QString, const Mapping*> projectionMappings;
