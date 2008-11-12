@@ -29,6 +29,7 @@ public:
 	virtual QString getId() const {return "perspective";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
+	virtual double getMaxFov() const {return 120.;}
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingPerspective instance;
@@ -46,6 +47,7 @@ public:
 	virtual QString getId(void) const {return "equal_area";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
+	virtual double getMaxFov() const {return 360.;}
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingEqualArea instance;
@@ -71,6 +73,7 @@ public:
 	virtual QString getId(void) const {return "stereographic";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
+	virtual double getMaxFov() const {return 235.;}
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingStereographic instance;
@@ -103,6 +106,7 @@ public:
 	virtual QString getId(void) const {return "fisheye";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
+	virtual double getMaxFov() const {return 180.00001;}
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingFisheye instance;
@@ -141,6 +145,7 @@ public:
 	virtual QString getId(void) const {return "cylinder";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
+	virtual double getMaxFov() const {return 175. * 4./3.;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingCylinder instance;
@@ -158,6 +163,7 @@ public:
 	virtual QString getId(void) const {return "mercator";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
+	virtual double getMaxFov() const {return 175. * 4./3.;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingMercator instance;
@@ -175,6 +181,7 @@ public:
 	virtual QString getId(void) const {return "orthographic";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
+	virtual double getMaxFov() const {return 179.9999;}
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingOrthographic instance;
