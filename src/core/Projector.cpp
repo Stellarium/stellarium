@@ -84,36 +84,36 @@ void Projector::init()
 	const double viewportFovDiameter = conf->value("projection/viewport_fov_diameter", qMin(viewport_width,viewport_height)).toDouble();
 	setViewport(viewport_x,viewport_y,viewport_width,viewport_height, viewportCenterX,viewportCenterY, viewportFovDiameter);
 
-	double overwrite_max_fov = conf->value("projection/equal_area_max_fov",0.0).toDouble();
-	if (overwrite_max_fov > 360.0)
-		overwrite_max_fov = 360.0;
-	if (overwrite_max_fov > 0.0)
-		MappingEqualArea::getMapping()->maxFov = overwrite_max_fov;
-	overwrite_max_fov = conf->value("projection/stereographic_max_fov",0.0).toDouble();
-	if (overwrite_max_fov > 359.999999)
-		overwrite_max_fov = 359.999999;
-	if (overwrite_max_fov > 0.0)
-		MappingStereographic::getMapping()->maxFov = overwrite_max_fov;
-	overwrite_max_fov = conf->value("projection/fisheye_max_fov",0.0).toDouble();
-	if (overwrite_max_fov > 360.0)
-		overwrite_max_fov = 360.0;
-	if (overwrite_max_fov > 0.0)
-		MappingFisheye::getMapping()->maxFov = overwrite_max_fov;
-	overwrite_max_fov = conf->value("projection/cylinder_max_fov",0.0).toDouble();
-	if (overwrite_max_fov > 540.0)
-		overwrite_max_fov = 540.0;
-	if (overwrite_max_fov > 0.0)
-		MappingCylinder::getMapping()->maxFov = overwrite_max_fov;
-	overwrite_max_fov = conf->value("projection/perspective_max_fov",0.0).toDouble();
-	if (overwrite_max_fov > 179.999999)
-		overwrite_max_fov = 179.999999;
-	if (overwrite_max_fov > 0.0)
-		MappingPerspective::getMapping()->maxFov = overwrite_max_fov;
-	overwrite_max_fov = conf->value("projection/orthographic_max_fov",0.0).toDouble();
-	if (overwrite_max_fov > 180.0)
-		overwrite_max_fov = 180.0;
-	if (overwrite_max_fov > 0.0)
-		MappingOrthographic::getMapping()->maxFov = overwrite_max_fov;
+// 	double overwrite_max_fov = conf->value("projection/equal_area_max_fov",0.0).toDouble();
+// 	if (overwrite_max_fov > 360.0)
+// 		overwrite_max_fov = 360.0;
+// 	if (overwrite_max_fov > 0.0)
+// 		MappingEqualArea::getMapping()->maxFov = overwrite_max_fov;
+// 	overwrite_max_fov = conf->value("projection/stereographic_max_fov",0.0).toDouble();
+// 	if (overwrite_max_fov > 359.999999)
+// 		overwrite_max_fov = 359.999999;
+// 	if (overwrite_max_fov > 0.0)
+// 		MappingStereographic::getMapping()->maxFov = overwrite_max_fov;
+// 	overwrite_max_fov = conf->value("projection/fisheye_max_fov",0.0).toDouble();
+// 	if (overwrite_max_fov > 360.0)
+// 		overwrite_max_fov = 360.0;
+// 	if (overwrite_max_fov > 0.0)
+// 		MappingFisheye::getMapping()->maxFov = overwrite_max_fov;
+// 	overwrite_max_fov = conf->value("projection/cylinder_max_fov",0.0).toDouble();
+// 	if (overwrite_max_fov > 540.0)
+// 		overwrite_max_fov = 540.0;
+// 	if (overwrite_max_fov > 0.0)
+// 		MappingCylinder::getMapping()->maxFov = overwrite_max_fov;
+// 	overwrite_max_fov = conf->value("projection/perspective_max_fov",0.0).toDouble();
+// 	if (overwrite_max_fov > 179.999999)
+// 		overwrite_max_fov = 179.999999;
+// 	if (overwrite_max_fov > 0.0)
+// 		MappingPerspective::getMapping()->maxFov = overwrite_max_fov;
+// 	overwrite_max_fov = conf->value("projection/orthographic_max_fov",0.0).toDouble();
+// 	if (overwrite_max_fov > 180.0)
+// 		overwrite_max_fov = 180.0;
+// 	if (overwrite_max_fov > 0.0)
+// 		MappingOrthographic::getMapping()->maxFov = overwrite_max_fov;
 
 	setFlagGravityLabels( conf->value("viewing/flag_gravity_labels").toBool() );
 
@@ -288,6 +288,14 @@ StelGeom::ConvexS Projector::unprojectViewport(void) const
   return rval;
 }
 
+// Return a Halfspace containing the whole viewport
+StelGeom::HalfSpace Projector::getBoundingHalfSpace() const
+{
+	// TODO
+	Q_ASSERT(0);
+	return StelGeom::HalfSpace();
+}
+
 void Projector::setFov(double f)
 {
 	fov = f;
@@ -354,8 +362,8 @@ void Projector::setCurrentMapping(const QString& mappingId)
 
 		// Redefine the projection functions
 		mapping = i.value();
-		minFov = mapping->minFov;
-		maxFov = mapping->maxFov;
+		minFov = 0.0001;
+		maxFov = mapping->getMaxFov();
 
 		setFov(fov);
 		initGlMatrixOrtho2d();
@@ -403,7 +411,7 @@ bool Projector::unProject(double x, double y, Vec3d &v) const
 // Standard methods for drawing primitives
 
 // Fill with black around the circle
-void Projector::drawViewportShape(void)
+void Projector::drawViewportShape(void) const
 {
 	if (maskType != Disk)
 		return;
@@ -859,7 +867,6 @@ void Projector::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const 
 	fIter(this, start-rotCenter, stop-rotCenter, win1, win2, tessArc, tessArc.insert(tessArc.end(), win2), radius, rotCenter);
 	
 	// And draw.
-	// TODO: could be optimized using openGL display list
 	QLinkedList<Vec3d>::ConstIterator i = tessArc.begin();
 	while (i+1 != tessArc.end())
 	{

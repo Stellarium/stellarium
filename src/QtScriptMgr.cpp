@@ -368,7 +368,7 @@ void StelMainScriptAPI::clear(const QString& state)
 	Q_ASSERT(mvmgr);
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 	Q_ASSERT(nav);
-	Projector* proj = StelApp::getInstance().getCore()->getProjection();
+	const Projector* proj = StelApp::getInstance().getCore()->getProjection();
 	Q_ASSERT(proj);
 
 	if (state == "natural")

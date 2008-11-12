@@ -32,6 +32,8 @@ public:
 	virtual QString getNameI18() const = 0;
 	virtual QString getDescriptionI18() const {return "No description";}
 	QString getHtmlSummary() const;
+	//! Get the maximum FOV apperture in degree
+	virtual double getMaxFov() const = 0;
 	
 	//! Apply the transformation in the forward direction
 	//! After transformation v[2] will always contain the length
@@ -48,10 +50,6 @@ public:
 	virtual double fovToViewScalingFactor(double fov) const = 0;
 	virtual double viewScalingFactorToFov(double vsf) const = 0;
 	virtual double deltaZoom(double fov) const = 0;
-	//! Minimum FOV apperture in degree
-	double minFov;
-	//! Maximum FOV apperture in degree
-	double maxFov;
 };
 
 #endif // _MAPPING_HPP_
