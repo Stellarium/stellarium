@@ -8,13 +8,15 @@ namespace
 			uniform vec3 LightPosition;                                                             \
 			varying vec2 TexCoord;                                                                  \
 			varying vec3 TangentLight;                                                              \
+			varying vec3 normal;                                                                    \
+			varying vec3 light;                                                                     \
 			void main(void)                                                                         \
 			{                                                                                       \
 				vec3 position = vec3(gl_ModelViewMatrix * gl_Color);                                \
-				vec3 normal = normalize(gl_NormalMatrix * gl_Normal);                               \
-				vec3 light = normalize(LightPosition - position);                                   \
-				vec3 binormal = vec3(normal.y, -normal.x, 0);                                       \
-				vec3 tangent = cross(normal, binormal);                                             \
+				normal = normalize(gl_NormalMatrix * gl_Normal);                                    \
+				light = normalize(LightPosition - position);                                        \
+				vec3 binormal = vec3(0,-normal.z,normal.y);                                         \
+				vec3 tangent = cross(normal,binormal);                                              \
 				TangentLight = vec3(dot(light, tangent), dot(light, binormal), dot(light, normal)); \
 				TexCoord = gl_MultiTexCoord0.st;                                                    \
 				gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;                             \
@@ -22,29 +24,34 @@ namespace
 		";
 
 	const char* cFragShaderSource = 
-		"                                                                                 \
-			uniform sampler2D cloudTexture;                                               \
-			uniform sampler2D cloudShadowTexture;                                         \
-			uniform sampler2D NormalTexture;                                              \
-			varying vec2 TexCoord;                                                        \
-			varying vec3 normal;                                                          \
-			varying vec3 TangentLight;                                                    \
-			void main(void)                                                               \
-			{                                                                             \
-				vec3 color = vec3(texture2D(cloudTexture, TexCoord));                     \
-				float tempTransp = texture2D(cloudShadowTexture, TexCoord).x;             \
-				vec3 light = normalize(TangentLight);                                     \
-				vec3 normal = 2.0 * vec3(texture2D(NormalTexture, TexCoord)) - vec3(1.0); \
-				float diffuse = max(dot(normal, light), 0.0);		                      \
-				if (diffuse <= 0.1)                                                       \
-				{                                                                         \
-					gl_FragColor = vec4(diffuse * color, tempTransp / 4);                 \
-				}                                                                         \
-				else                                                                      \
-				{                                                                         \
-					gl_FragColor = vec4(diffuse * color, tempTransp);                     \
-				}                                                                         \
-			}                                                                             \
+		"                                                                                   \
+			uniform sampler2D cloudTexture;                                                 \
+			uniform sampler2D cloudShadowTexture;                                           \
+			uniform sampler2D NormalTexture;                                                \
+			varying vec2 TexCoord;                                                          \
+			varying vec3 TangentLight;                                                      \
+			varying vec3 normal;                                                            \
+			varying vec3 light;                                                             \
+			float tempTransp;                                                               \
+			const vec3 Light = vec3(0,0,0);                                                 \
+			vec3 color;                                                                     \
+			void main(void)                                                                 \
+			{                                                                               \
+				color = vec3(texture2D(cloudTexture, TexCoord));                            \
+				tempTransp = texture2D(cloudShadowTexture, TexCoord).x;                     \
+				vec3 light_b = normalize(TangentLight);                                     \
+				vec3 normal_b = 2.0 * vec3(texture2D(NormalTexture, TexCoord)) - vec3(1.0); \
+				float diffuse = max(dot(normal_b, light_b), 0.0);                           \
+				float d = max(dot(normal, light), 0.0);			                            \
+				if (diffuse <= 0.1)                                                         \
+				{                                                                           \
+					gl_FragColor = vec4(diffuse*color, tempTransp/4);                       \
+				}                                                                           \
+				else                                                                        \
+				{                                                                           \
+					gl_FragColor = vec4(diffuse*color, tempTransp);                         \
+				}                                                                           \
+			}                                                                               \
 		";
 }
 

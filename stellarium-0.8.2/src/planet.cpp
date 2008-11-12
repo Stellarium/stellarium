@@ -789,7 +789,7 @@ void Planet::draw_sphere(/*const*/ Projector* prj, const Mat4d& mat, float scree
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		mCloudProgramObject.enable();
-		prj->sSphere((radius*1.02)*sphere_scale, one_minus_oblateness, nb_facet, nb_facet,
+		prj->sSphere((radius * 1.002)*sphere_scale, one_minus_oblateness, nb_facet, nb_facet,
 			mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)), 0, true);
 		mCloudProgramObject.disable();
 		glDisable(GL_BLEND);

@@ -397,9 +397,7 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
             z = nsign * cos_sin_rho_p[0];
             glTexCoord2f(s, t);
 			if(shader) 
-				glNormal3f(x * one_minus_oblateness * nsign,
-                           y * one_minus_oblateness * nsign,
-                           z * nsign);
+				glNormal3f(x, y, z);
             if (isLightOn)
             {
                 transNorm = mat.multiplyWithoutTranslation(
@@ -423,9 +421,7 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
             z = nsign * cos_sin_rho_p[2];
             glTexCoord2f(s, t - dt);
 		    if(shader) 
-				glNormal3f(x * one_minus_oblateness * nsign,
-                           y * one_minus_oblateness * nsign,
-                           z * nsign);
+				glNormal3f(x, y, z);
             if (isLightOn)
             {
                 transNorm = mat.multiplyWithoutTranslation(
