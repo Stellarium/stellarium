@@ -118,13 +118,13 @@ void Projector::init()
 	setFlagGravityLabels( conf->value("viewing/flag_gravity_labels").toBool() );
 
 	// Register the default mappings
-	registerProjectionMapping(MappingEqualArea::getMapping());
-	registerProjectionMapping(MappingStereographic::getMapping());
-	registerProjectionMapping(MappingFisheye::getMapping());
-	registerProjectionMapping(MappingCylinder::getMapping());
-	registerProjectionMapping(MappingMercator::getMapping());
-	registerProjectionMapping(MappingPerspective::getMapping());
-	registerProjectionMapping(MappingOrthographic::getMapping());
+	registerProjectionMapping(new MappingEqualArea());
+	registerProjectionMapping(new MappingStereographic());
+	registerProjectionMapping(new MappingFisheye());
+	registerProjectionMapping(new MappingCylinder());
+	registerProjectionMapping(new MappingMercator());
+	registerProjectionMapping(new MappingPerspective());
+	registerProjectionMapping(new MappingOrthographic());
 
 	tmpstr = conf->value("projection/type", "stereographic").toString();
 	setCurrentMapping(tmpstr);
@@ -352,13 +352,11 @@ void Projector::initGlMatrixOrtho2d(void) const
 *************************************************************************/
 void Projector::setCurrentMapping(const QString& mappingId)
 {
-	if (currentProjectionType==mappingId)
-		return;
-
 	QMap<QString,const Mapping*>::const_iterator i(projectionMappings.find(mappingId));
 	if (i!=projectionMappings.end())
 	{
-		currentProjectionType = mappingId;
+		if (mapping == i.value())
+			return;
 
 		// Redefine the projection functions
 		mapping = i.value();
