@@ -30,9 +30,7 @@ public:
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 120.;}
-	static Mapping *getMapping(void) {return &instance;}
 private:
-	static MappingPerspective instance;
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
 	double fovToViewScalingFactor(double fov) const;
@@ -48,9 +46,7 @@ public:
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 360.;}
-	static Mapping *getMapping(void) {return &instance;}
 private:
-	static MappingEqualArea instance;
 	bool forward(Vec3d &v) const
 	{
 		const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
@@ -74,9 +70,7 @@ public:
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 235.;}
-	static Mapping *getMapping(void) {return &instance;}
 private:
-	static MappingStereographic instance;
 	bool forward(Vec3d &v) const
 	{
 		const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
@@ -107,9 +101,7 @@ public:
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 180.00001;}
-	static Mapping *getMapping(void) {return &instance;}
 private:
-	static MappingFisheye instance;
 	bool forward(Vec3d &v) const
 	{
 		const double rq1 = v[0]*v[0] + v[1]*v[1];
@@ -146,9 +138,7 @@ public:
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 175. * 4./3.;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
-	static Mapping *getMapping(void) {return &instance;}
 private:
-	static MappingCylinder instance;
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
 	double fovToViewScalingFactor(double fov) const;
@@ -164,9 +154,7 @@ public:
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 175. * 4./3.;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
-	static Mapping *getMapping(void) {return &instance;}
 private:
-	static MappingMercator instance;
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
 	double fovToViewScalingFactor(double fov) const;
@@ -182,9 +170,7 @@ public:
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 179.9999;}
-	static Mapping *getMapping(void) {return &instance;}
 private:
-	static MappingOrthographic instance;
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
 	double fovToViewScalingFactor(double fov) const;
