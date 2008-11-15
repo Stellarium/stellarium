@@ -80,7 +80,10 @@ void StelAppGraphicsScene::glWindowHasBeenResized(int w, int h)
 void StelAppGraphicsScene::switchToNativeOpenGLPainting()
 {
 	// Save openGL projection state
+	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	glMatrixMode(GL_TEXTURE);
+	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glMatrixMode(GL_MODELVIEW);
@@ -99,11 +102,14 @@ void StelAppGraphicsScene::switchToNativeOpenGLPainting()
 QPainter* StelAppGraphicsScene::revertToQtPainting()
 {
 	// Restore openGL projection state for Qt drawings
+	glMatrixMode(GL_TEXTURE);
+	glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
 	glPopAttrib();
+	glPopClientAttrib();
 	return tempPainter;
 }
 
