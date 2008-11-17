@@ -50,7 +50,6 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileDialog>
-#include <QtWebKit/QtWebKit>
 
 #include "StelAppGraphicsScene.hpp"
 
