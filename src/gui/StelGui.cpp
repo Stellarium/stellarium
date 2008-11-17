@@ -805,7 +805,7 @@ void StelGui::retranslateUi(QWidget *Form)
 } // retranslateUi
 
 // Add a new progress bar in the lower right corner of the screen.
-QProgressBar* StelGui::addProgessBar()
+QProgressBar* StelGui::addProgressBar()
 {
 	return progressBarMgr->addProgressBar();
 }

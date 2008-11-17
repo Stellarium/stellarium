@@ -142,7 +142,7 @@ void SkyImageMgr::loadingStateChanged(bool b)
 	if (b)
 	{
 		Q_ASSERT(elem->progressBar==NULL);
-		elem->progressBar = StelMainGraphicsView::getInstance().addProgessBar();
+		elem->progressBar = StelMainGraphicsView::getInstance().addProgressBar();
 		QString serverStr = elem->tile->getServerCredits().shortCredits;
 		if (!serverStr.isEmpty())
 			serverStr = " from "+serverStr;

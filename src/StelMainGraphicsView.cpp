@@ -192,10 +192,10 @@ void StelMainGraphicsView::doScreenshot(void)
 }
 
 // Add a new progress bar in the lower right corner of the screen.
-class QProgressBar* StelMainGraphicsView::addProgessBar()
+class QProgressBar* StelMainGraphicsView::addProgressBar()
 {
 	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
-	return gui->addProgessBar();
+	return gui->addProgressBar();
 }
 
 //! Activate all the QActions associated to the widget

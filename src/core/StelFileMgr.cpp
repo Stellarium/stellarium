@@ -186,6 +186,11 @@ bool StelFileMgr::isDirectory(const QString& path)
 	return QFileInfo(path).isDir();
 }
 
+qint64 StelFileMgr::size(const QString& path)
+{
+	return QFileInfo(path).size();
+}
+
 bool StelFileMgr::mkDir(const QString& path)
 {
 	return QDir("/").mkpath(path);
