@@ -87,7 +87,7 @@ public:
 	//! Add a new progress bar in the lower right corner of the screen.
 	//! When the progress bar is deleted with removeProgressBar() the layout is automatically rearranged.
 	//! @return a pointer to the progress bar
-	class QProgressBar* addProgessBar();
+	class QProgressBar* addProgressBar();
 	
 	//! Add a new action managed by the GUI. This method should be used to add new shortcuts to the program
 	//! @param actionName qt object name. Used as a reference for later uses

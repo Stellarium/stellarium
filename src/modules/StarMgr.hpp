@@ -153,6 +153,8 @@ public slots:
 	//! Show scientific or catalog names on stars without common names.
 	static void setFlagSciNames(bool f) {flagSciNames = f;}
 	static bool getFlagSciNames(void) {return flagSciNames;}
+	
+	QSettings* getStarSettings(void) {return starSettings;}
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -214,6 +216,9 @@ private:
 	//! Load all the stars from the files.
 	void loadData();
 	
+	//! Load config data from star.ini
+	void loadStarSettings(void);
+	
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const Projector* prj, const Navigator * nav);
 	
@@ -260,6 +265,8 @@ private:
 	Vec3f labelColor;
 	
 	STextureSP texPointer;		// The selection pointer texture
+	
+	QSettings* starSettings;
 };
 
 

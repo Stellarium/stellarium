@@ -49,7 +49,7 @@ public:
 	//! Add a new progress bar in the lower right corner of the screen.
 	//! When the progress bar is not used anymore, just delete it.
 	//! @return a pointer to the progress bar
-	class QProgressBar* addProgessBar();
+	class QProgressBar* addProgressBar();
 	
 	//! Activate all the QActions associated to the widget
 	void activateKeyActions(bool b);

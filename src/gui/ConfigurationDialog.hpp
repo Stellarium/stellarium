@@ -21,9 +21,18 @@
 #define _CONFIGURATIONDIALOG_HPP_
 
 #include <QObject>
+#include <QProgressBar>
+#include <QNetworkReply>
+#include <QFile>
 #include "StelDialog.hpp"
+#include "StelApp.hpp"
+#include "StelMainGraphicsView.hpp"
 
 class Ui_configurationDialogForm;
+class QSettings;
+class QDataStream;
+class QNetworkAccessManager;
+class Downloader;
 
 class ConfigurationDialog : public StelDialog
 {
@@ -35,9 +44,25 @@ public:
 	//! Notify that the application style changed
 	void styleChanged();
 protected:
+	enum UpdatesState { ShowAvailable, Checking, NoUpdates, Downloading,
+		Finished, Verifying, UpdatesError, MoveError, DownloadError,
+		ChecksumError };
+	
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();	
+	virtual void createDialogContent();
+	
+	//! Set the content of the "Star catalog updates" box
+	void setUpdatesState(ConfigurationDialog::UpdatesState);
+	void checkUpdates(void);
+	
 	Ui_configurationDialogForm* ui;
+	QSettings* starSettings;
+	QSettings* updatesData;
+	Downloader* downloader;
+	QString downloadName;
+	QString updatesFileName;
+	QStringList newCatalogs;
+	int downloaded;
 
 private slots:
 	void setNoSelectedInfo(void);
@@ -49,6 +74,16 @@ private slots:
 	void setSphericMirror(bool);
 	void cursorTimeOutChanged();
 	void cursorTimeOutChanged(double d) {cursorTimeOutChanged();}
+	
+	void downloadStars(void);
+	void cancelDownload(void);
+	void retryDownload(void);
+	void badChecksum(void);
+	void downloadFinished(void);
+	void downloadVerifying(void);
+	void downloadError(QNetworkReply::NetworkError, QString);
+	void updatesDownloadFinished(void);
+	void updatesDownloadError(QNetworkReply::NetworkError, QString);
 	
 	//! Update the labels displaying the current default state
 	void updateConfigLabels();
@@ -81,6 +116,47 @@ private slots:
 	void aScriptHasStopped(void);
 	void populateScriptsList(void);
 
+};
+
+class Downloader : public QObject
+{
+	Q_OBJECT;
+public:
+	Downloader(const QString& address, const QString& path, quint32 checksum=-1) : address(address),
+		path(path), reply(NULL), target(path), useChecksum(checksum<(quint32)-1),
+		checksum((quint16)checksum), stream(&target), networkManager(StelApp::getInstance().getNetworkAccessManager()),
+		progressBar(StelMainGraphicsView::getInstance().addProgressBar()),
+		received(0), total(0)
+		{}
+	~Downloader();
+	void get(bool showBar, const QString& barFormat = "%p%");
+	void abort(void);
+	QString url(void) { return address; }
+	QString errorString(void) { return reply ? reply->errorString() : QString(); }
+private:
+	const QString address;
+	const QString path;
+	QNetworkReply* reply;
+	QFile target;
+	bool useChecksum;
+	quint16 checksum;
+	QDataStream stream;
+	QNetworkAccessManager* networkManager;
+	QProgressBar* progressBar;
+	qint64 received;
+	qint64 total;
+	bool showProgressBar;
+
+private slots:
+	void readData(void);
+	void updateDownloadBar(qint64, qint64);
+	void fin(void);
+	void err(QNetworkReply::NetworkError);
+signals:
+	void finished(void);
+	void error(QNetworkReply::NetworkError, QString);
+	void verifying(void);
+	void badChecksum(void);
 };
 
 #endif // _CONFIGURATIONDIALOG_HPP_

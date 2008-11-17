@@ -88,14 +88,10 @@ int ReadInt(FILE *f,unsigned int &x) {
 
 ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
                              const QString& extended_file_name,
+			     bool use_mmap,
                              LoadingBar &lb) {
   QString fname(extended_file_name);
   QString dbStr; // for debugging output.
-  bool use_mmap = false;
-  if (fname.contains("mmap:")) {
-    fname.remove(0,5);
-    use_mmap = true;
-  }
   try {
     fname = StelApp::getInstance().getFileMgr().findFile("stars/default/"+fname);
   } catch (std::runtime_error &e) {
