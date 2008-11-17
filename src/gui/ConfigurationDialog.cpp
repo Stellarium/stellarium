@@ -48,20 +48,27 @@
 
 #include <QSettings>
 #include <QDebug>
-#include <QFrame>
 #include <QFile>
 #include <QFileDialog>
+#include <QtWebKit/QtWebKit>
 
 #include "StelAppGraphicsScene.hpp"
 
 ConfigurationDialog::ConfigurationDialog()
 {
 	ui = new Ui_configurationDialogForm;
+	downloader = NULL;
+	updatesData = NULL;
+	downloaded = 0;
 }
 
 ConfigurationDialog::~ConfigurationDialog()
 {
 	delete ui;
+	if(downloader != NULL)
+		delete downloader;
+	if(updatesData != NULL)
+		delete updatesData;
 }
 
 void ConfigurationDialog::languageChanged()
@@ -106,6 +113,13 @@ void ConfigurationDialog::createDialogContent()
 	if (lt!=-1)
 		cb->setCurrentIndex(lt);
 	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
+	
+	starSettings = ((StarMgr*)GETSTELMODULE("StarMgr"))->getStarSettings();
+	
+	connect(ui->getStarsButton, SIGNAL(clicked(void)), this, SLOT(downloadStars(void)));
+	connect(ui->downloadCancelButton, SIGNAL(clicked(void)), this, SLOT(cancelDownload(void)));
+	connect(ui->downloadRetryButton, SIGNAL(clicked(void)), this, SLOT(retryDownload(void)));
+	checkUpdates();
 	
 	// Selected object info
 	if (gui->getInfoPanel()->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
@@ -185,7 +199,7 @@ void ConfigurationDialog::createDialogContent()
 	populateScriptsList();
 
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateScriptsList()));
-
+	
 	updateConfigLabels();
 }
 
@@ -503,3 +517,269 @@ void ConfigurationDialog::aScriptHasStopped(void)
 	ui->stopScriptButton->setEnabled(false);
 }
 
+void ConfigurationDialog::setUpdatesState(ConfigurationDialog::UpdatesState state)
+{
+	// everything invisible by default
+	ui->getStarsButton->setVisible(false);
+	ui->downloadLabel->setText("");
+	ui->downloadCancelButton->setVisible(false);
+	ui->downloadRetryButton->setVisible(false);
+	
+	switch(state)
+	{
+		case ConfigurationDialog::ShowAvailable:
+			if(newCatalogs.size()-downloaded > 0)
+			{
+				QString cat = newCatalogs.at(downloaded);
+				ui->getStarsButton->setVisible(true);
+				ui->getStarsButton->setText(QString("Get catalog %1 of %2").arg(downloaded+1).arg(newCatalogs.size()));
+				ui->downloadLabel->setText(QString("Download size: %1MB\nStar count: %2\nMagnitude range: %3 - %4")
+					.arg(updatesData->value(cat+"/size").toString())
+					.arg(updatesData->value(cat+"/count").toString())
+					.arg(updatesData->value(cat+"/mag_lower").toString())
+					.arg(updatesData->value(cat+"/mag_upper").toString()));
+			} else
+				setUpdatesState(ConfigurationDialog::Finished);
+			break;
+		
+		case ConfigurationDialog::Checking:
+			ui->downloadLabel->setText("Checking for new star catalogs...");
+			break;
+		
+		case ConfigurationDialog::NoUpdates:
+			ui->downloadLabel->setText("All star catalogs are up to date.");
+			break;
+		
+		case ConfigurationDialog::Downloading:
+			ui->downloadLabel->setText(QString("Downloading %1...\n(You can close this window.)").arg(downloadName));
+			ui->downloadCancelButton->setVisible(true);
+			break;
+		
+		case ConfigurationDialog::Finished:
+			ui->downloadLabel->setText("Finished downloading new star catalogs!\nRestart Stellarium to display them.");
+			break;
+		
+		case ConfigurationDialog::Verifying:
+			ui->downloadLabel->setText("Verifying file integrity...");
+			break;
+		
+		case ConfigurationDialog::UpdatesError:
+			ui->downloadLabel->setText(QString("Error checking updates:\n%2").arg(downloader->url()).arg(downloader->errorString()));
+			ui->downloadRetryButton->setVisible(true);
+			break;
+		
+		case ConfigurationDialog::MoveError:
+			ui->downloadLabel->setText(QString("Could not finalize download:\nError moving temporary file %1.tmp to %1.cat").arg(downloadName));
+			break;
+		
+		case ConfigurationDialog::DownloadError:
+			ui->downloadLabel->setText(QString("Error downloading %1:\n%2").arg(downloadName).arg(downloader->errorString()));
+			ui->downloadRetryButton->setVisible(true);
+			break;
+		
+		case ConfigurationDialog::ChecksumError:
+			ui->downloadLabel->setText(QString("Error downloading %1:\nFile is corrupted.").arg(downloadName));
+			ui->downloadRetryButton->setVisible(true);
+			break;
+	}
+}
+
+void ConfigurationDialog::updatesDownloadError(QNetworkReply::NetworkError code, QString errorString)
+{
+	qDebug() << "Error checking updates from" << downloader->url() << ":" << errorString;
+	setUpdatesState(ConfigurationDialog::UpdatesError);
+}
+
+void ConfigurationDialog::updatesDownloadFinished(void)
+{
+	updatesData = new QSettings(updatesFileName, QSettings::IniFormat);
+	updatesData->beginGroup("extra_stars");
+	QListIterator<QString> it(updatesData->childKeys());
+	
+	// For some reason, updatesData->childGroups() doesn't work at
+	// all in this case. The workaround is to list the groups as key-value pairs.
+	while(it.hasNext())
+	{
+		QString catName = updatesData->value(it.next()).toString();
+		bool catPathExists = !starSettings->value(catName+"/path","").toString().isEmpty();
+		if(!catPathExists)
+			newCatalogs.append(catName);
+	}
+	
+	if(newCatalogs.size() > 0)
+		setUpdatesState(ConfigurationDialog::ShowAvailable);
+	else
+		setUpdatesState(ConfigurationDialog::NoUpdates);
+}
+
+void ConfigurationDialog::checkUpdates(void)
+{
+	setUpdatesState(ConfigurationDialog::Checking);
+	
+	updatesFileName = "stars/default/updates.ini";
+	downloader = new Downloader(starSettings->value("updates_url").toString(), updatesFileName);
+	downloader->get(false);
+	
+	connect(downloader, SIGNAL(finished()), this, SLOT(updatesDownloadFinished()));
+	connect(downloader, SIGNAL(error(QNetworkReply::NetworkError, QString)), this, SLOT(updatesDownloadError(QNetworkReply::NetworkError, QString)));
+}
+
+void ConfigurationDialog::cancelDownload(void)
+{
+	downloader->abort();
+	setUpdatesState(ConfigurationDialog::ShowAvailable);
+}
+
+void ConfigurationDialog::retryDownload(void)
+{
+	if(updatesData == NULL)
+		checkUpdates();
+	else
+		downloadStars();
+}
+
+void ConfigurationDialog::downloadError(QNetworkReply::NetworkError code, QString errorString)
+{
+	qDebug() << "Error downloading file" << downloader->url() << ":" << errorString;
+	setUpdatesState(ConfigurationDialog::DownloadError);
+}
+
+void ConfigurationDialog::downloadVerifying(void)
+{
+	setUpdatesState(ConfigurationDialog::Verifying);
+}
+
+void ConfigurationDialog::badChecksum(void)
+{
+	qDebug() << "Error downloading file" << downloader->url() << ": File is corrupted.";
+	setUpdatesState(ConfigurationDialog::ChecksumError);
+}
+
+void ConfigurationDialog::downloadFinished(void)
+{
+	downloaded++;
+	QString tempFileName = "stars/default/"+downloadName+".tmp";
+	QString finalFileName = "stars/default/"+downloadName+".cat";
+	
+	if( ( QFile::exists(finalFileName) && !QFile::remove(finalFileName) ) ||
+		!QFile::copy(tempFileName, finalFileName) ||
+		!QFile::remove(tempFileName))
+	{
+		qDebug() << "Error moving" << tempFileName << "to" << finalFileName;
+		setUpdatesState(ConfigurationDialog::MoveError);
+	}
+	else
+	{
+		starSettings->setValue(downloadName+"/path", downloadName+".cat");
+		setUpdatesState(ConfigurationDialog::ShowAvailable);
+	}
+}
+
+void ConfigurationDialog::downloadStars(void)
+{
+	if(downloader != NULL)
+		delete downloader;
+	
+	downloadName = newCatalogs.at(downloaded);
+	QString url = updatesData->value(downloadName+"/url").toString();
+	quint16 checksum = updatesData->value(downloadName+"/checksum").toUInt();
+	downloader = new Downloader(url, "stars/default/"+downloadName+".tmp", checksum);
+	downloader->get(true, QString("%p%: %1 of %2").arg(downloaded+1).arg(newCatalogs.size()));
+	
+	connect(downloader, SIGNAL(finished()), this, SLOT(downloadFinished()));
+	connect(downloader, SIGNAL(error(QNetworkReply::NetworkError, QString)), this, SLOT(downloadError(QNetworkReply::NetworkError, QString)));
+	connect(downloader, SIGNAL(verifying()), this, SLOT(downloadVerifying()));
+	connect(downloader, SIGNAL(badChecksum()), this, SLOT(badChecksum()));
+	setUpdatesState(ConfigurationDialog::Downloading);
+}
+
+Downloader::~Downloader()
+{
+	if(reply)
+		delete reply;
+}
+
+void Downloader::get(bool showBar, const QString& barFormat)
+{
+	target.open(QIODevice::WriteOnly | QIODevice::Truncate);
+	reply = networkManager->get(QNetworkRequest(QUrl(address)));
+	
+	showProgressBar = showBar;
+	if(showProgressBar)
+	{
+		progressBar->setValue(0);
+		progressBar->setVisible(true);
+		progressBar->setFormat(barFormat);
+	} else
+		progressBar->setVisible(false);
+	
+	connect(reply, SIGNAL(readyRead(void)), this, SLOT(readData(void)));
+	connect(reply, SIGNAL(finished(void)), this, SLOT(fin(void)));
+	connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(err(QNetworkReply::NetworkError)));
+	if(showProgressBar)
+		connect(reply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(updateDownloadBar(qint64, qint64)));
+}
+
+void Downloader::abort(void)
+{
+	reply->abort();
+}
+
+void Downloader::readData(void)
+{
+	int size = reply->bytesAvailable();
+	QByteArray data = reply->read(size);
+	stream.writeRawData(data.constData(), size);
+}
+
+void Downloader::updateDownloadBar(qint64 received, qint64 total)
+{
+	progressBar->setMaximum(total);
+	progressBar->setValue(received);
+}
+
+void Downloader::fin(void)
+{
+	if(reply->error())
+		return;
+	
+	if(total-received == 0)
+	{
+		target.close();
+		if(showProgressBar)
+			progressBar->setVisible(false);
+		
+		if(useChecksum)
+		{
+			emit verifying();
+			
+			target.open(QIODevice::ReadOnly);
+			quint16 fileChecksum = qChecksum(target.readAll().constData(), target.size());
+			target.close();
+			
+			if(fileChecksum != checksum)
+				emit badChecksum();
+			else
+				emit finished();
+		}
+		else
+			emit finished();
+	} else
+		if(!target.remove())
+			qDebug() << "Error deleting incomplete file" << path;
+}
+
+void Downloader::err(QNetworkReply::NetworkError code)
+{
+	if(code != QNetworkReply::NoError)
+	{
+		target.close();
+		if(!target.remove())
+			qDebug() << "Error deleting incomplete file" << path;
+		if(showProgressBar)
+			progressBar->setVisible(false);
+	}
+	
+	if(code != QNetworkReply::OperationCanceledError)
+		emit error(code, reply->errorString());
+}

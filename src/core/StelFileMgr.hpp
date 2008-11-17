@@ -114,6 +114,10 @@ public:
 	//! @param path to check
 	static bool isDirectory(const QString& path);
 	
+	//! Return the size of the file at the path.
+	//! @param path to file
+	static qint64 size(const QString& path);
+	
 	//! Make a directory
 	//! @param path the path of the directory to create.
 	//! @return true if success, else false

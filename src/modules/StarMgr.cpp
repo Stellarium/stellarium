@@ -178,6 +178,7 @@ void StarMgr::init() {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
+	loadStarSettings();
 	loadData();
 	double fontSize = 12;
 	starFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
@@ -232,6 +233,28 @@ void StarMgr::setStelStyle(const StelStyle& style)
 	setLabelColor(StelUtils::strToVec3f(conf->value(section+"/star_label_color", defaultColor).toString()));
 }
 
+void StarMgr::loadStarSettings()
+{
+	QString iniFile;
+	try
+	{
+		iniFile = StelApp::getInstance().getFileMgr().findFile("stars/default/stars.ini");
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "ERROR - could not find stars/default/stars.ini : " << e.what() << iniFile;
+		return;
+	}
+
+	starSettings = new QSettings(iniFile, StelIniFormat);
+	if (starSettings->status() != QSettings::NoError)
+	{
+		qWarning() << "ERROR while parsing " << iniFile;
+		return;
+	}
+	starSettings->beginGroup("stars");
+}
+
 /***************************************************************************
  Load star catalogue data from files.
  If a file is not found, it will be skipped.
@@ -244,49 +267,36 @@ void StarMgr::loadData()
 	Q_ASSERT(maxGeodesicGridLevel < 0);
 
 	qDebug() << "Loading star data ...";
-
-	QString iniFile;
-	try
+	
+	qulonglong memoryUsed = 0;
+	qulonglong maxMemory = StelApp::getInstance().getSettings()->value("stars/max_memory", 128).toULongLong();
+	maxMemory *= 1024*1024;
+	
+	QStringList cats = starSettings->childGroups();
+	QListIterator<QString> it(cats);
+	while(it.hasNext())
 	{
-		iniFile = StelApp::getInstance().getFileMgr().findFile("stars/default/stars.ini");
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR - could not find stars/default/stars.ini : " << e.what() << iniFile;
-		return;
-	}
-
-	QSettings conf(iniFile, StelIniFormat);
-	if (conf.status() != QSettings::NoError)
-	{
-		qWarning() << "ERROR while parsing " << iniFile;
-		return;
-	}
-				         
-	for (int i=0; i<100; i++)
-	{
-		//sprintf(key_name,"cat_file_name_%02d",i);
-		QString keyName = QString("cat_file_name_%1").arg(i,2,10,QChar('0'));
-		const QString cat_file_name = conf.value(QString("stars/")+keyName,"").toString();
-		if (!cat_file_name.isEmpty()) {
-			lb.SetMessage(q_("Loading catalog %1").arg(cat_file_name));
-			ZoneArray *const z = ZoneArray::create(*this,cat_file_name,lb);
-			if (z)
+		QString cat = it.next();
+		
+		const QString cat_file_name = starSettings->value(cat+"/path").toString();
+		lb.SetMessage(q_("Loading catalog %1 from file %2").arg(cat, cat_file_name));
+		memoryUsed += StelApp::getInstance().getFileMgr().size("stars/default/"+cat_file_name);
+		ZoneArray *const z = ZoneArray::create(*this, cat_file_name, memoryUsed > maxMemory, lb);
+		if (z)
+		{
+			if (maxGeodesicGridLevel < z->level)
 			{
-				if (maxGeodesicGridLevel < z->level)
-				{
-					maxGeodesicGridLevel = z->level;
-				}
-				ZoneArray *&pos(zoneArrays[z->level]);
-				if (pos)
-				{
-					qDebug() << cat_file_name << ", " << z->level << ": duplicate level";
-					delete z;
-				}
-				else
-				{
-					pos = z;
-				}
+				maxGeodesicGridLevel = z->level;
+			}
+			ZoneArray *&pos(zoneArrays[z->level]);
+			if (pos)
+			{
+				qDebug() << cat_file_name << ", " << z->level << ": duplicate level";
+				delete z;
+			}
+			else
+			{
+				pos = z;
 			}
 		}
 	}
@@ -303,7 +313,7 @@ void StarMgr::loadData()
 		it->second->updateHipIndex(hipIndex);
 	}
 
-	const QString cat_hip_sp_file_name = conf.value("stars/cat_hip_sp_file_name","").toString();
+	const QString cat_hip_sp_file_name = starSettings->value("cat_hip_sp_file_name","").toString();
 	if (cat_hip_sp_file_name.isEmpty())
 	{
 		qWarning() << "ERROR: stars:cat_hip_sp_file_name not found";
@@ -322,7 +332,7 @@ void StarMgr::loadData()
 		}
 	}
 
-	const QString cat_hip_cids_file_name = conf.value("stars/cat_hip_cids_file_name","").toString();
+	const QString cat_hip_cids_file_name = starSettings->value("cat_hip_cids_file_name","").toString();
 	if (cat_hip_cids_file_name.isEmpty())
 	{
 		qWarning() << "ERROR: stars:cat_hip_cids_file_name not found";
