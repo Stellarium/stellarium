@@ -24,20 +24,17 @@
 #include "vecmath.h"
 #include "SphereGeometry.hpp"
 
-class SFont;
-
 //! @class Projector
-//! Provides functions for drawing operations which are performed with some sort of 
-//! "projection" according to the current projection mode.  This projection 
-//! distorts the shape of the objects to be drawn and make the necessary calls 
-//! to OpenGL to draw the required object. This class overrides a number of openGL 
-//! functions to enable non-linear projection, such as fisheye or stereographic 
-//! projections. This class also provide drawing primitives that are optimized 
-//! according to the projection mode.
+//! Provide the main interface to all operations of projecting coordinates from sky to screen.
+//! The Projector also defines the viewport size and position.
+//! All methods from this class are threadsafe. The usual usage is to create local instances of ProjectorP using the
+//! getProjection() method from StelCore where needed.
+//! For performing drawing using a particular projection, refer to the StelPainter class.
 class Projector
 {
 public:
 	friend class StelPainter;
+	friend class StelCore;
 	
 	//! @enum ProjectorMaskType
 	//! Define viewport mask types
@@ -60,11 +57,6 @@ public:
 		double viewportFovDiameter;    //! diameter of the FOV disk in pixel
 		bool flipHorz, flipVert;       //! Whether to flip in horizontal or vertical directions
 	};
-	
-	///////////////////////////////////////////////////////////////////////////
-	// Main constructor
-	Projector(const Mat4d& modelViewMat);
-	~Projector();
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods which must be reimplemented by all instance of Projector
@@ -94,8 +86,6 @@ public:
 	virtual double viewScalingFactorToFov(double vsf) const = 0;
 	
 public:
-	//! Initialise the Projector from a param instance
-	void init(const ProjectorParams& param);
 	
 	//! Get the current state of the flag which decides whether to 
 	//! arrage labels so that they are aligned with the bottom of a 2d 
@@ -151,8 +141,10 @@ public:
 	//! Check to see if a 2d position is inside the viewport.
 	//! TODO Optimize by storing viewportXywh[1] + viewportXywh[3] and viewportXywh[0] + viewportXywh[2] already computed
 	bool checkInViewport(const Vec3d& pos) const
-		{return (pos[1]>=viewportXywh[1] && pos[0]>=viewportXywh[0] &&
-		pos[1]<=(viewportXywh[1] + viewportXywh[3]) && pos[0]<=(viewportXywh[0] + viewportXywh[2]));}
+	{
+		return (pos[1]>=viewportXywh[1] && pos[0]>=viewportXywh[0] &&
+			pos[1]<=(viewportXywh[1] + viewportXywh[3]) && pos[0]<=(viewportXywh[0] + viewportXywh[2]));
+	}
 
 	//! Return the position where the 2 2D point p1 and p2 cross the viewport edge
 	//! P1 must be inside the viewport and P2 outside (check with checkInViewport() before calling this method)
@@ -230,11 +222,17 @@ public:
 	//! Get the current type of the mask if any.
 	ProjectorMaskType getMaskType(void) const {return maskType;}
 	
-private:
+protected:
+	//! Private constructor. Only StelCore can create instances of Projector.
+	Projector(const Mat4d& modelViewMat) : modelViewMatrix(modelViewMat) {;}
 
+private:
+	//! Initialise the Projector from a param instance
+	void init(const ProjectorParams& param);
+	
 	ProjectorMaskType maskType;    // The current projector mask
 	double zNear, zFar;            // Near and far clipping planes
-	Vector4<int> viewportXywh;   // Viewport parameters
+	Vector4<int> viewportXywh;     // Viewport parameters
 	Vec2d viewportCenter;          // Viewport center in screen pixel
 	double viewportFovDiameter;    // diameter of the FOV disk in pixel
 	double pixelPerRad;            // pixel per rad at the center of the viewport disk
@@ -244,4 +242,3 @@ private:
 };
 
 #endif // _PROJECTOR_HPP_
-
