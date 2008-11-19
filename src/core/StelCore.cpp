@@ -154,7 +154,7 @@ void StelCore::init()
 
 const ProjectorP StelCore::getProjection2d() const
 {
-	ProjectorP prj(new Mapping2d());
+	ProjectorP prj(new Projector2d());
 	prj->init(currentProjectorParams);
 	return prj;
 }
@@ -170,29 +170,29 @@ const ProjectorP StelCore::getProjection(const Mat4d& modelViewMat, ProjectionTy
 	switch (projType)
 	{
 		case ProjectionPerspective:
-			prj = ProjectorP(new MappingPerspective(modelViewMat));
+			prj = ProjectorP(new ProjectorPerspective(modelViewMat));
 			break;
 		case ProjectionEqualArea:
-			prj = ProjectorP(new MappingEqualArea(modelViewMat));
+			prj = ProjectorP(new ProjectorEqualArea(modelViewMat));
 			break;
 		case ProjectionStereographic:
-			prj = ProjectorP(new MappingStereographic(modelViewMat));
+			prj = ProjectorP(new ProjectorStereographic(modelViewMat));
 			break;
 		case ProjectionFisheye:
-			prj = ProjectorP(new MappingFisheye(modelViewMat));
+			prj = ProjectorP(new ProjectorFisheye(modelViewMat));
 			break;
 		case ProjectionCylinder:
-			prj = ProjectorP(new MappingCylinder(modelViewMat));
+			prj = ProjectorP(new ProjectorCylinder(modelViewMat));
 			break;
 		case ProjectionMercator:
-			prj = ProjectorP(new MappingMercator(modelViewMat));
+			prj = ProjectorP(new ProjectorMercator(modelViewMat));
 			break;
 		case ProjectionOrthographic:
-			prj = ProjectorP(new MappingOrthographic(modelViewMat));
+			prj = ProjectorP(new ProjectorOrthographic(modelViewMat));
 			break;
 		default:
 			qWarning() << "Unknown projection type: " << projType << "using ProjectionStereographic instead";
-			prj = ProjectorP(new MappingStereographic(modelViewMat));
+			prj = ProjectorP(new ProjectorStereographic(modelViewMat));
 			Q_ASSERT(0);
 	}
 	prj->init(currentProjectorParams);

@@ -1,17 +1,17 @@
 #include "MappingClasses.hpp"
 #include "Translator.hpp"
 
-QString MappingPerspective::getNameI18() const
+QString ProjectorPerspective::getNameI18() const
 {
 	return q_("Perspective");
 }
 
-QString MappingPerspective::getDescriptionI18() const
+QString ProjectorPerspective::getDescriptionI18() const
 {
 	return q_("Perspective projection keeps the horizon a straight line. The mathematical name for this projection method is <i>gnomonic projection</i>.");
 }
 
-bool MappingPerspective::backward(Vec3d &v) const
+bool ProjectorPerspective::backward(Vec3d &v) const
 {
 	v[2] = std::sqrt(1.0/(1.0+v[0]*v[0]+v[1]*v[1]));
 	v[0] *= v[2];
@@ -20,17 +20,17 @@ bool MappingPerspective::backward(Vec3d &v) const
 	return true;
 }
 
-double MappingPerspective::fovToViewScalingFactor(double fov) const
+double ProjectorPerspective::fovToViewScalingFactor(double fov) const
 {
 	return std::tan(fov);
 }
 
-double MappingPerspective::viewScalingFactorToFov(double vsf) const
+double ProjectorPerspective::viewScalingFactorToFov(double vsf) const
 {
 	return std::atan(vsf);
 }
 
-double MappingPerspective::deltaZoom(double fov) const
+double ProjectorPerspective::deltaZoom(double fov) const
 {
     const double vsf = fovToViewScalingFactor(fov);
 // deriv_viewScalingFactorToFov(vsf) = 1.0 / (1.0+vsf*vsf)
@@ -39,17 +39,17 @@ double MappingPerspective::deltaZoom(double fov) const
 }
 
 
-QString MappingEqualArea::getNameI18() const
+QString ProjectorEqualArea::getNameI18() const
 {
 	return q_("Equal Area");
 }
 
-QString MappingEqualArea::getDescriptionI18() const
+QString ProjectorEqualArea::getDescriptionI18() const
 {
 	return q_("The full name of this projection method is, <i>Lambert azimuthal equal-area projection</i>. It preserves the area but not the angle.");
 }
 
-bool MappingEqualArea::backward(Vec3d &v) const
+bool ProjectorEqualArea::backward(Vec3d &v) const
 {
 	const double dq = v[0]*v[0] + v[1]*v[1];
 	double l = 1.0 - 0.25*dq;
@@ -69,17 +69,17 @@ bool MappingEqualArea::backward(Vec3d &v) const
 	return true;
 }
 
-double MappingEqualArea::fovToViewScalingFactor(double fov) const
+double ProjectorEqualArea::fovToViewScalingFactor(double fov) const
 {
 	return 2.0 * std::sin(0.5 * fov);
 }
 
-double MappingEqualArea::viewScalingFactorToFov(double vsf) const
+double ProjectorEqualArea::viewScalingFactorToFov(double vsf) const
 {
 	return 2.0 * std::asin(0.5 * vsf);
 }
 
-double MappingEqualArea::deltaZoom(double fov) const
+double ProjectorEqualArea::deltaZoom(double fov) const
 {
 // deriv_viewScalingFactorToFov(vsf) = 2.0 / sqrt(4.0-vsf*vsf);
 // const double vsf = fovToViewScalingFactor(fov);
@@ -87,17 +87,17 @@ double MappingEqualArea::deltaZoom(double fov) const
     return fov;
 }
 
-QString MappingStereographic::getNameI18() const
+QString ProjectorStereographic::getNameI18() const
 {
 	return q_("Stereographic");
 }
 
-QString MappingStereographic::getDescriptionI18() const
+QString ProjectorStereographic::getDescriptionI18() const
 {
 	return q_("Stereographic projection is known since the antiquity and was originally known as the planisphere projection. It preserves the angles at which curves cross each other but it does not preserve area.");
 }
 
-bool MappingStereographic::backward(Vec3d &v) const
+bool ProjectorStereographic::backward(Vec3d &v) const
 {
   const double lqq = 0.25*(v[0]*v[0] + v[1]*v[1]);
   v[2] = lqq - 1.0;
@@ -105,17 +105,17 @@ bool MappingStereographic::backward(Vec3d &v) const
   return true;
 }
 
-double MappingStereographic::fovToViewScalingFactor(double fov) const
+double ProjectorStereographic::fovToViewScalingFactor(double fov) const
 {
 	return 2.0 * std::tan(0.5 * fov);
 }
 
-double MappingStereographic::viewScalingFactorToFov(double vsf) const
+double ProjectorStereographic::viewScalingFactorToFov(double vsf) const
 {
 	return 2.0 * std::atan(0.5 * vsf);
 }
 
-double MappingStereographic::deltaZoom(double fov) const
+double ProjectorStereographic::deltaZoom(double fov) const
 {
     const double vsf = fovToViewScalingFactor(fov);
 // deriv_viewScalingFactorToFov(vsf) = 4.0 / (4.0+vsf*vsf)
@@ -126,17 +126,17 @@ double MappingStereographic::deltaZoom(double fov) const
 
 
 
-QString MappingFisheye::getNameI18() const
+QString ProjectorFisheye::getNameI18() const
 {
 	return q_("Fish-eye");
 }
 
-QString MappingFisheye::getDescriptionI18() const
+QString ProjectorFisheye::getDescriptionI18() const
 {
 	return q_("In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight lines become curves when they appear a large angular distance from the centre of the field of view (like the distortions seen with very wide angle camera lenses).");
 }
 
-bool MappingFisheye::backward(Vec3d &v) const
+bool ProjectorFisheye::backward(Vec3d &v) const
 {
 	const double a = std::sqrt(v[0]*v[0]+v[1]*v[1]);
 	const double f = (a > 0.0) ? (std::sin(a) / a) : 1.0;
@@ -146,17 +146,17 @@ bool MappingFisheye::backward(Vec3d &v) const
 	return (a < M_PI);
 }
 
-double MappingFisheye::fovToViewScalingFactor(double fov) const
+double ProjectorFisheye::fovToViewScalingFactor(double fov) const
 {
 	return fov;
 }
 
-double MappingFisheye::viewScalingFactorToFov(double vsf) const
+double ProjectorFisheye::viewScalingFactorToFov(double vsf) const
 {
 	return vsf;
 }
 
-double MappingFisheye::deltaZoom(double fov) const
+double ProjectorFisheye::deltaZoom(double fov) const
 {
 	return fov;
 }
@@ -165,17 +165,17 @@ double MappingFisheye::deltaZoom(double fov) const
 
 
 
-QString MappingCylinder::getNameI18() const
+QString ProjectorCylinder::getNameI18() const
 {
 	return q_("Cylinder");
 }
 
-QString MappingCylinder::getDescriptionI18() const
+QString ProjectorCylinder::getDescriptionI18() const
 {
 	return q_("The full name of this projection mode is <i>cylindrical equidistant projection</i>. With this projection all parallels are equally spaced.");
 }
 
-bool MappingCylinder::forward(Vec3d &v) const
+bool ProjectorCylinder::forward(Vec3d &v) const
 {
 	const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const bool rval = (-r < v[1] && v[1] < r);
@@ -187,7 +187,7 @@ bool MappingCylinder::forward(Vec3d &v) const
 	return rval;
 }
 
-bool MappingCylinder::backward(Vec3d &v) const
+bool ProjectorCylinder::backward(Vec3d &v) const
 {
 	const double cd = std::cos(v[1]);
 	v[2] = - cd * std::cos(v[0]);
@@ -196,34 +196,34 @@ bool MappingCylinder::backward(Vec3d &v) const
 	return true;
 }
 
-double MappingCylinder::fovToViewScalingFactor(double fov) const
+double ProjectorCylinder::fovToViewScalingFactor(double fov) const
 {
 	return fov;
 }
 
-double MappingCylinder::viewScalingFactorToFov(double vsf) const
+double ProjectorCylinder::viewScalingFactorToFov(double vsf) const
 {
 	return vsf;
 }
 
-double MappingCylinder::deltaZoom(double fov) const
+double ProjectorCylinder::deltaZoom(double fov) const
 {
 	return fov;
 }
 
 
 
-QString MappingMercator::getNameI18() const
+QString ProjectorMercator::getNameI18() const
 {
 	return q_("Mercator");
 }
 
-QString MappingMercator::getDescriptionI18() const
+QString ProjectorMercator::getDescriptionI18() const
 {
 	return q_("The mercator projection is one of the most used world map projection. It preserves direction and shapes but distorts size, in an increasing degree away from the equator.");
 }
 
-bool MappingMercator::forward(Vec3d &v) const
+bool ProjectorMercator::forward(Vec3d &v) const
 {
 	const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const bool rval = (-r < v[1] && v[1] < r);
@@ -235,7 +235,7 @@ bool MappingMercator::forward(Vec3d &v) const
 }
 
 
-bool MappingMercator::backward(Vec3d &v) const
+bool ProjectorMercator::backward(Vec3d &v) const
 {
 	const double E = std::exp(v[1]);
 	const double h = E*E;
@@ -248,34 +248,34 @@ bool MappingMercator::backward(Vec3d &v) const
 	return true;
 }
 
-double MappingMercator::fovToViewScalingFactor(double fov) const
+double ProjectorMercator::fovToViewScalingFactor(double fov) const
 {
 	return fov;
 }
 
-double MappingMercator::viewScalingFactorToFov(double vsf) const
+double ProjectorMercator::viewScalingFactorToFov(double vsf) const
 {
 	return vsf;
 }
 
-double MappingMercator::deltaZoom(double fov) const
+double ProjectorMercator::deltaZoom(double fov) const
 {
 	return fov;
 }
 
 
 
-QString MappingOrthographic::getNameI18() const
+QString ProjectorOrthographic::getNameI18() const
 {
 	return q_("Orthographic");
 }
 
-QString MappingOrthographic::getDescriptionI18() const
+QString ProjectorOrthographic::getDescriptionI18() const
 {
 	return q_("Orthographic projection is related to perspective projection, but the point of perspective is set to an infinite distance.");
 }
 
-bool MappingOrthographic::forward(Vec3d &v) const
+bool ProjectorOrthographic::forward(Vec3d &v) const
 {
 	const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const double h = 1.0/r;
@@ -286,7 +286,7 @@ bool MappingOrthographic::forward(Vec3d &v) const
 	return rval;
 }
 
-bool MappingOrthographic::backward(Vec3d &v) const
+bool ProjectorOrthographic::backward(Vec3d &v) const
 {
 	const double dq = v[0]*v[0] + v[1]*v[1];
 	double h = 1.0 - dq;
@@ -301,56 +301,56 @@ bool MappingOrthographic::backward(Vec3d &v) const
 	return true;
 }
 
-double MappingOrthographic::fovToViewScalingFactor(double fov) const
+double ProjectorOrthographic::fovToViewScalingFactor(double fov) const
 {
 	return std::sin(fov);
 }
 
-double MappingOrthographic::viewScalingFactorToFov(double vsf) const
+double ProjectorOrthographic::viewScalingFactorToFov(double vsf) const
 {
 	return std::asin(vsf);
 }
 
-double MappingOrthographic::deltaZoom(double fov) const
+double ProjectorOrthographic::deltaZoom(double fov) const
 {
 	return fov;
 }
 
 
 
-QString Mapping2d::getNameI18() const
+QString Projector2d::getNameI18() const
 {
 	return "2d";
 }
 
-QString Mapping2d::getDescriptionI18() const
+QString Projector2d::getDescriptionI18() const
 {
 	return "Simple 2d projection for internal use.";
 }
 
-bool Mapping2d::forward(Vec3d &v) const
+bool Projector2d::forward(Vec3d &v) const
 {
 	Q_ASSERT(0);
 	return false;
 }
 
-bool Mapping2d::backward(Vec3d &v) const
+bool Projector2d::backward(Vec3d &v) const
 {
 	Q_ASSERT(0);
 	return false;
 }
 
-double Mapping2d::fovToViewScalingFactor(double fov) const
+double Projector2d::fovToViewScalingFactor(double fov) const
 {
 	return 1.;
 }
 
-double Mapping2d::viewScalingFactorToFov(double vsf) const
+double Projector2d::viewScalingFactorToFov(double vsf) const
 {
 	return 1.;
 }
 
-double Mapping2d::deltaZoom(double fov) const
+double Projector2d::deltaZoom(double fov) const
 {
 	Q_ASSERT(0);
 	return fov;
