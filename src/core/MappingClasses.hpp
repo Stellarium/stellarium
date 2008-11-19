@@ -17,15 +17,15 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _MAPPINGCLASSES_HPP_
-#define _MAPPINGCLASSES_HPP_
+#ifndef _PROJECTIONS_HPP_
+#define _PROJECTIONS_HPP_
 
 #include "Projector.hpp"
 
-class MappingPerspective : public Projector
+class ProjectorPerspective : public Projector
 {
 public:
-	MappingPerspective(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
+	ProjectorPerspective(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
 	virtual QString getId() const {return "perspective";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
@@ -56,10 +56,10 @@ public:
 	double deltaZoom(double fov) const;
 };
 
-class MappingEqualArea : public Projector
+class ProjectorEqualArea : public Projector
 {
 public:
-	MappingEqualArea(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
+	ProjectorEqualArea(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
 	virtual QString getId(void) const {return "equal_area";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
@@ -79,10 +79,10 @@ public:
 	double deltaZoom(double fov) const;
 };
 
-class MappingStereographic : public Projector
+class ProjectorStereographic : public Projector
 {
 public:
-	MappingStereographic(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
+	ProjectorStereographic(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
 	virtual QString getId(void) const {return "stereographic";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
@@ -109,10 +109,10 @@ public:
 	double deltaZoom(double fov) const;
 };
 
-class MappingFisheye : public Projector
+class ProjectorFisheye : public Projector
 {
 public:
-	MappingFisheye(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
+	ProjectorFisheye(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
 	virtual QString getId(void) const {return "fisheye";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
@@ -145,10 +145,10 @@ public:
 	double deltaZoom(double fov) const;
 };
 
-class MappingCylinder : public Projector
+class ProjectorCylinder : public Projector
 {
 public:
-	MappingCylinder(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
+	ProjectorCylinder(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
 	virtual QString getId(void) const {return "cylinder";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
@@ -160,10 +160,10 @@ public:
 	double deltaZoom(double fov) const;
 };
 
-class MappingMercator : public Projector
+class ProjectorMercator : public Projector
 {
 public:
-	MappingMercator(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
+	ProjectorMercator(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
 	virtual QString getId(void) const {return "mercator";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
@@ -175,10 +175,10 @@ public:
 	double deltaZoom(double fov) const;
 };
 
-class MappingOrthographic : public Projector
+class ProjectorOrthographic : public Projector
 {
 public:
-	MappingOrthographic(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
+	ProjectorOrthographic(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
 	virtual QString getId(void) const {return "orthographic";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
@@ -190,10 +190,10 @@ public:
 	double deltaZoom(double fov) const;
 };
 
-class Mapping2d : public Projector
+class Projector2d : public Projector
 {
 public:
-	Mapping2d() : Projector(Mat4d::identity()) {;}
+	Projector2d() : Projector(Mat4d::identity()) {;}
 	virtual QString getId(void) const {return "2d";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
@@ -205,5 +205,5 @@ public:
 	double deltaZoom(double fov) const;
 };
 
-#endif // _MAPPINGCLASSES_HPP_
+#endif // _PROJECTIONS_HPP_
 
