@@ -582,7 +582,16 @@ void StelApp::parseCLIArgsPostConfig()
 	{
 		QString confScreenshotDir = confSettings->value("main/screenshot_dir", "").toString();
 		if (confScreenshotDir!="")
-			stelFileMgr->setScreenshotDir(confScreenshotDir);
+		{
+			try
+			{
+				stelFileMgr->setScreenshotDir(confScreenshotDir);
+			}
+			catch (std::exception& e)
+			{
+				qWarning() << "WARNING: problem while setting screenshot from config file setting: " << e.what();
+			}
+		}
 	}
 }
 
