@@ -21,13 +21,14 @@
 #define _SKYDRAWER_HPP_
 
 #include "STextureTypes.hpp"
+#include "ProjectorType.hpp"
 #include "vecmath.h"
 
 #include <QObject>
 
-class Projector;
 class ToneReproducer;
 class StelCore;
+class StelPainter;
 
 //! @class SkyDrawer
 //! Provide a set of methods used to draw sky objects taking into account
@@ -48,8 +49,12 @@ public:
 	//! @param deltaTime the time increment in second since last call.
 	void update(double deltaTime);
 	
+	//! Get the painter currently used or NULL
+	const StelPainter* getPainter() {return sPainter;}
+	
 	//! Set the proper openGL state before making calls to drawPointSource
-	void preDrawPointSource();
+	//! @param sPainter a pointer to a valid instance of a Painter. The instance must be valid until postDrawPointSource() is called
+	void preDrawPointSource(const StelPainter* p);
 		
 	//! Finalize the drawing of point sources
 	void postDrawPointSource();
@@ -75,17 +80,11 @@ public:
 	//! @return true if the source was actually visible and drawn
 	bool drawDiskSource(double x, double y, double r, float mag, const Vec3f& color);
 	
-	//! Set-up openGL lighting and color before drawing a 3d model.
-	//! @param illuminatedArea the total illuminated area in arcmin^2
-	//! @param mag the object integrated V magnitude
-	//! @param lighting whether lighting computations should be activated for rendering
-	void preDrawSky3dModel(double illuminatedArea, float mag, bool lighting=true);
-	
 	//! Terminate drawing of a 3D model, draw the halo
 	//! @param x the x position of the object centroid in pixel
 	//! @param y the y position of the object centroid in pixel
 	//! @param color the object halo RGB color
-	void postDrawSky3dModel(double x, double y, double illuminatedArea, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f));
+	void postDrawSky3dModel(double x, double y, double illuminatedArea, float mag, const StelPainter* p, const Vec3f& color = Vec3f(1.f,1.f,1.f));
 	
 	//! Compute RMag and CMag from magnitude.
 	//! @param mag the object integrated V magnitude
@@ -223,7 +222,6 @@ private:
 	float findWorldLumForMag(float mag, float targetRadius);
 			
 	StelCore* core;
-	Projector* prj;
 	ToneReproducer* eye;
 	
 	float maxAdaptFov, minAdaptFov, lnfovFactor;
@@ -279,6 +277,8 @@ private:
 	STextureSP texSunHalo;
 
 	bool flagLuminanceAdaptation;
+	
+	const StelPainter* sPainter;
 };
 
 #endif // _SKYDRAWER_HPP_

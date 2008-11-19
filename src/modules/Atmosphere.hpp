@@ -25,6 +25,8 @@
 #include "Navigator.hpp"
 #include "Skybright.hpp"
 #include "Fader.hpp"
+#include "GLee.h"
+#include "fixx11h.h"
 
 class Projector;
 class ToneReproducer;

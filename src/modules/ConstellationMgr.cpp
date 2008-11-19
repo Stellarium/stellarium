@@ -46,6 +46,7 @@
 #include "StelCore.hpp"
 #include "SFont.hpp"
 #include "StelStyle.hpp"
+#include "StelPainter.hpp"
 
 using namespace std;
 
@@ -450,9 +451,8 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 void ConstellationMgr::draw(StelCore* core)
 {
 	Navigator* nav = core->getNavigation();
-	Projector* prj = core->getProjection();
-	
-	core->setCurrentFrame(StelCore::FrameJ2000);
+	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+
 	drawLines(prj);
 	drawNames(prj);
 	drawArt(prj, nav);
@@ -460,7 +460,7 @@ void ConstellationMgr::draw(StelCore* core)
 }
 
 // Draw constellations art textures
-void ConstellationMgr::drawArt(Projector * prj, const Navigator * nav) const
+void ConstellationMgr::drawArt(const ProjectorP& prj, const Navigator * nav) const
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
@@ -477,7 +477,7 @@ void ConstellationMgr::drawArt(Projector * prj, const Navigator * nav) const
 }
 
 // Draw constellations lines
-void ConstellationMgr::drawLines(Projector * prj) const
+void ConstellationMgr::drawLines(const ProjectorP& prj) const
 {
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
@@ -491,7 +491,7 @@ void ConstellationMgr::drawLines(Projector * prj) const
 }
 
 // Draw the names of all the constellations
-void ConstellationMgr::drawNames(Projector * prj) const
+void ConstellationMgr::drawNames(const StelPainter& sPainter) const
 {
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
@@ -504,8 +504,8 @@ void ConstellationMgr::drawNames(Projector * prj) const
 	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
 	{
 		// Check if in the field of view
-		if (prj->projectCheck((*iter)->XYZname, (*iter)->XYname))
-			(*iter)->drawName(asterFont, prj);
+		if (sPainter.getProjector()->projectCheck((*iter)->XYZname, (*iter)->XYname))
+			(*iter)->drawName(asterFont, sPainter);
 	}
 }
 
@@ -940,7 +940,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	return true;
 }
 
-void ConstellationMgr::drawBoundaries(Projector * prj) const
+void ConstellationMgr::drawBoundaries(const ProjectorP& prj) const
 {
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);

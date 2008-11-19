@@ -130,7 +130,7 @@ void SolarSystem::init()
 void SolarSystem::drawPointer(const StelCore* core)
 {
 	const Navigator* nav = core->getNavigation();
-	const Projector* prj = core->getProjection();
+	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	
 	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Planet");
 	if (!newSelected.empty())
@@ -138,13 +138,12 @@ void SolarSystem::drawPointer(const StelCore* core)
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(nav);
 		Vec3d screenpos;
-		core->setCurrentFrame(StelCore::FrameJ2000);
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos)) return;
 	
 		glColor3f(1.0f,0.3f,0.3f);
 	
-		float size = obj->getOnScreenSize(core)*2;
+		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
 		size+=26.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 
 		texPointer->bind();

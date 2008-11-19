@@ -30,9 +30,17 @@ which are generally not at the apex of the Earth's way, such as the Perseids sho
 
 #include <cstdlib>
 #include "Meteor.hpp"
+#include "StelCore.hpp"
+#include "Navigator.hpp"
+#include "ToneReproducer.hpp"
+#include "MovementMgr.hpp"
+#include "StelPainter.hpp"
 
-Meteor::Meteor(Projector *proj, Navigator* nav, ToneReproducer* eye, double v)
+Meteor::Meteor(const StelCore* core, double v)
 {
+	const Navigator* nav = core->getNavigation();
+	const ToneReproducer* eye = core->getToneReproducer();
+	
   //  velocity = 11+(double)rand()/((double)RAND_MAX+1)*v;  // abs range 11-72 km/s
   velocity=v;
 
@@ -131,7 +139,7 @@ Meteor::Meteor(Projector *proj, Navigator* nav, ToneReproducer* eye, double v)
   // Compute the equivalent star luminance for a 5 arc min circle and convert it
   // in function of the eye adaptation
   rmag = eye->adaptLuminanceScaled(term1);
-  rmag = rmag/powf(proj->getFov(),0.85f)*500.f;
+  rmag = rmag/powf(core->getMovementMgr()->getCurrentFov(),0.85f)*500.f;
 
   // if size of star is too small (blink) we put its size to 1.2 --> no more blink
   // And we compensate the difference of brighteness with cmag
@@ -192,10 +200,14 @@ bool Meteor::update(double deltaTime)
 
 // returns true if visible
 // Assumes that we are in local frame
-bool Meteor::draw(Projector *proj, const Navigator* nav)
+bool Meteor::draw(const StelCore* core, const StelPainter& sPainter)
 {
-	if(!alive) return(0);
+	if (!alive)
+		return(0);
 
+	const Navigator* nav = core->getNavigation();
+	const ProjectorP proj = sPainter.getProjector();
+	
 	Vec3d start, end;
 
 	Vec3d spos = position;
@@ -244,7 +256,7 @@ bool Meteor::draw(Projector *proj, const Navigator* nav)
 		glEnd();
 	} else {
 		glPointSize(1); 
-		proj->drawPoint2d(start[0],start[1]);
+		sPainter.drawPoint2d(start[0],start[1]);
 	}
 
 	/*  

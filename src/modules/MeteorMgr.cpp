@@ -29,6 +29,7 @@
 #include "Meteor.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelPainter.hpp"
 
 MeteorMgr::MeteorMgr(int zhr, int maxv ) : flagShow(true)
 {
@@ -91,10 +92,7 @@ void MeteorMgr::update(double deltaTime)
 		return;
 	
 	deltaTime*=1000;
-	Projector * proj = StelApp::getInstance().getCore()->getProjection();
 	Navigator * nav = StelApp::getInstance().getCore()->getNavigation();
-	ToneReproducer * eye = StelApp::getInstance().getCore()->getToneReproducer();
-	
 
 	// step through and update all active meteors
 	int n =0;
@@ -150,15 +148,13 @@ void MeteorMgr::update(double deltaTime)
 		double prob = (double)rand()/((double)RAND_MAX+1);
 		if( ZHR > 0 && prob < ((double)ZHR*zhrToWsr*(double)deltaTime/1000.0f/(double)mpf) )
 		{
-			Meteor *m = new Meteor(proj, nav, eye, maxVelocity);
+			Meteor *m = new Meteor(StelApp::getInstance().getCore(), maxVelocity);
 			active.push_back(m);
 			mlaunch++;
 		}
 	}
 
 	//  qDebug("mpf: %d\tm launched: %d\t(mps: %f)\t%d\n", mpf, mlaunch, ZHR*zhrToWsr, deltaTime);
-
-
 }
 
 
@@ -170,8 +166,8 @@ void MeteorMgr::draw(StelCore* core)
 	LandscapeMgr* landmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
 	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
 		return;
-	
-	core->setCurrentFrame(StelCore::FrameLocal);
+
+	StelPainter sPainter(core->getProjection(StelCore::FrameLocal));
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
@@ -180,7 +176,7 @@ void MeteorMgr::draw(StelCore* core)
 	// step through and draw all active meteors
 	for (std::vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
 	{
-		(*iter)->draw(core->getProjection(), core->getNavigation());
+		(*iter)->draw(core, sPainter);
 	}
 
 	glEnable(GL_TEXTURE_2D);

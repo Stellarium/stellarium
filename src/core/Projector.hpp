@@ -20,16 +20,9 @@
 #ifndef _PROJECTOR_HPP_
 #define _PROJECTOR_HPP_
 
-#include "GLee.h"
-#include "fixx11h.h"
+#include "ProjectorType.hpp"
 #include "vecmath.h"
-#include "Mapping.hpp"
 #include "SphereGeometry.hpp"
-
-#include <QString>
-#include <QObject>
-#include <QList>
-#include <QMap>
 
 class SFont;
 
@@ -41,48 +34,78 @@ class SFont;
 //! functions to enable non-linear projection, such as fisheye or stereographic 
 //! projections. This class also provide drawing primitives that are optimized 
 //! according to the projection mode.
-class Projector : public QObject
+class Projector
 {
-	Q_OBJECT;
-
 public:
+	friend class StelPainter;
+	
+	//! @enum ProjectorMaskType
+	//! Define viewport mask types
+	enum ProjectorMaskType
+	{
+		MaskNone,	//!< Regular - no mask.
+		MaskDisk	//!< For disk viewport mode (circular mask to seem like bins/telescope)
+	};
+	
+	//! @struct ProjectorParams
+	//! Contains all the param needed to initialize a Projector
+	struct ProjectorParams
+	{
+		Vector4<int> viewportXywh;     //! posX, posY, width, height
+		double fov;                    //! FOV in degrees
+		bool gravityLabels;            //! the flag to use gravity labels or not
+		ProjectorMaskType maskType;    //! The current projector mask
+		double zNear, zFar;            //! Near and far clipping planes
+		Vec2d viewportCenter;          //! Viewport center in screen pixel
+		double viewportFovDiameter;    //! diameter of the FOV disk in pixel
+		bool flipHorz, flipVert;       //! Whether to flip in horizontal or vertical directions
+	};
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Main constructor
-	Projector(const Vector4<GLint>& viewport, double _fov = 60.);
+	Projector(const Mat4d& modelViewMat);
 	~Projector();
 	
-	//! Initialise the Projector.
-	//! - Sets the viewport size according to the window/screen size and settings 
-	//!   in the ini parser object.
-	//! - Sets the maximum field of view for each projection type.
-	//! - Register each projection type.
-	//! - Sets the flag to use gravity labels or not according to the ini parser 
-	//!   object.
-	//! - Sets the default projection mode and field of view.
-	//! - Sets whether to use GL points or a spite, according to the ini parser
-	//!   object and the detected hardware capabilities.
-	void init();
+	///////////////////////////////////////////////////////////////////////////
+	// Methods which must be reimplemented by all instance of Projector
+	//! Get an ID matching the projection type to use for reference in config files
+	virtual QString getId() const = 0;
+	//! Get a human-readable name for this projection type
+	virtual QString getNameI18() const = 0;
+	//! Get a human-readable short description for this projection type
+	virtual QString getDescriptionI18() const {return "No description";}
+	//! Get a HTML version of the short description for this projection type
+	QString getHtmlSummary() const;
+	//! Get the maximum FOV apperture in degree
+	virtual double getMaxFov() const = 0;	
+	//! Apply the transformation in the forward direction in place.
+	//! After transformation v[2] will always contain the length of the original v: sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2])
+	//! regardless of the projection type. This makes it possible to implement depth buffer testing in a way independent of the
+	//! projection type. I would like to return the squared length instead of the length because of performance reasons.
+	//! But then far away objects are not textured any more, perhaps because of a depth buffer overflow although
+	//! the depth test is disabled?
+	virtual bool forward(Vec3d &v) const = 0;
+	//! Apply the transformation in the backward projection in place.
+	virtual bool backward(Vec3d &v) const = 0;
+	//! Return the small zoom increment to use at the given FOV for nice movements
+	virtual double deltaZoom(double fov) const = 0;
+
+	//! Convert a Field Of View radius value in radians in ViewScalingFactor (used internally)
+	virtual double fovToViewScalingFactor(double fov) const = 0;
+	//! Convert a ViewScalingFactor value (used internally) in Field Of View radius in radians
+	virtual double viewScalingFactorToFov(double vsf) const = 0;
+	
+public:
+	//! Initialise the Projector from a param instance
+	void init(const ProjectorParams& param);
 	
 	//! Get the current state of the flag which decides whether to 
 	//! arrage labels so that they are aligned with the bottom of a 2d 
 	//! screen, or a 3d dome.
 	bool getFlagGravityLabels() const { return gravityLabels; }
-	
-	//! Set up the view port dimensions and position.
-	//! Define viewport size, center(relative to lower left corner)
-	//! and diameter of FOV disk.
-	//! @param x The x-position of the viewport.
-	//! @param y The y-position of the viewport.
-	//! @param w The width of the viewport.
-	//! @param h The height of the viewport.
-	//! @param cx The center of the viewport in the x axis (relative to left edge).
-	//! @param cy The center of the viewport in the y axis (relative to bottom edge).
-	//! @param fovDiam The field of view diameter.
-	void setViewport(int x, int y, int w, int h, double cx, double cy, double fovDiam);
 
 	//! Get the lower left corner of the viewport and the width, height.
-	const Vector4<GLint>& getViewport(void) const {return viewportXywh;}
+	const Vector4<int>& getViewport(void) const {return viewportXywh;}
 
 	//! Get the center of the viewport relative to the lower left corner.
 	Vec2d getViewportCenter(void) const
@@ -105,9 +128,6 @@ public:
 	//! Get the maximum ratio between the viewport height and width
 	float getViewportRatio() const {return getViewportWidth()>getViewportHeight() ? getViewportWidth()/getViewportHeight() : getViewportHeight()/getViewportWidth();}
 	
-	//! Handle the resizing of the window.
-	void windowHasBeenResized(int width,int height);
-	
 	//! Return a convex polygon on the sphere which includes the viewport in the current frame.
 	//! @param marginX an extra margin in pixel which extends the polygon size in the X direction
 	//! @param marginY an extra margin in pixel which extends the polygon size in the Y direction
@@ -122,32 +142,14 @@ public:
 	//! Return a Halfspace containing the whole viewport
 	StelGeom::HalfSpace getBoundingHalfSpace() const;
 	
-	//! Set the near and far clipping planes.
-	void setClippingPlanes(double znear, double zfar);
-	//! Get the near and far clipping planes.
-	void getClippingPlanes(double* zn, double* zf) const {*zn = zNear; *zf = zFar;}
-	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods for controlling the PROJECTION matrix
 	
 	//! Get whether front faces need to be oriented in the clockwise direction
 	bool needGlFrontFaceCW(void) const {return (flipHorz*flipVert < 0.0);}
-
-	//! Set the Field of View in degrees.
-	void setFov(double f);
-	//! Get the Field of View in degrees.
-	double getFov(void) const {return fov;}
 	
 	//! Get size of a radian in pixels at the center of the viewport disk
 	double getPixelPerRadAtCenter(void) const {return pixelPerRad;}
-
-	//! Set the maximum field of View in degrees.
-	void setMaxFov(double max);
-	//! Get the maximum field of View in degrees.
-	double getMaxFov(void) const {return maxFov;}
-	//! Return the initial default FOV in degree.
-	double getInitFov() const {return initFov;}
-	
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Full projection methods
@@ -188,7 +190,7 @@ public:
 				+ modelViewMatrix.r[9]*v[2] + modelViewMatrix.r[13];
 		win[2] = modelViewMatrix.r[2]*v[0] + modelViewMatrix.r[6]*v[1]
 				+ modelViewMatrix.r[10]*v[2] + modelViewMatrix.r[14];
-		const bool rval = mapping->forward(win);
+		const bool rval = forward(win);
 		// very important: even when the projected point comes from an
 		// invisible region of the sky (rval=false), we must finish
 		// reprojecting, so that OpenGl can successfully eliminate
@@ -221,35 +223,10 @@ public:
 	bool projectLineCheck(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
 		{return project(v1, win1) && project(v2, win2) && (checkInViewport(win1) || checkInViewport(win2));}
 
-	//! Set a custom model view matrix.
-	//! The new setting remains active until the next call to setCurrentFrame or setCustomFrame.
-	//! @param m the openGL MODELVIEW matrix to use.
-	void setModelViewMatrix(const Mat4d& m);
-	Mat4d getModelViewMatrix() const {return modelViewMatrix;}
-
-	//! Set the current projection mapping to use.
-	//! The mapping must have been registered before being used.
-	//! @param mappingId a string which can be e.g. "perspective", "stereographic", "fisheye", "cylinder".
-	void setCurrentMapping(const QString& mappingId);
-
-	//! Get the current Mapping used by the Projection
-	const Mapping& getCurrentMapping(void) const {return *mapping;}
-
-	//! Get the list of all the registered mappings
-	//! @return a map associating each mappingId to its instance
-	static QMap<QString,const Mapping*>& getAllMappings() {return projectionMappings;}
-	
-	//! Register a new projection mapping.
-	static void registerProjectionMapping(Mapping *c);
+	//! Get the current model view matrix.
+	const Mat4d& getModelViewMatrix() const {return modelViewMatrix;}
 	
 	///////////////////////////////////////////////////////////////////////////
-	//! @enum ProjectorMaskType Methods for controlling viewport and mask.
-	enum ProjectorMaskType
-	{
-		Disk,	//!< For disk viewport mode (circular mask to seem like bins/telescope)
-  		None	//!< Regular - no mask.
-	};
-	
 	//! Get a string description of a ProjectorMaskType.
 	static const QString maskTypeToString(ProjectorMaskType type);
 	//! Get a ProjectorMaskType from a string description.
@@ -257,192 +234,18 @@ public:
 	
 	//! Get the current type of the mask if any.
 	ProjectorMaskType getMaskType(void) const {return maskType;}
-	//! Set the mask type.
-	void setMaskType(ProjectorMaskType m) {maskType = m; }
 	
-	///////////////////////////////////////////////////////////////////////////
-	// Standard methods for drawing primitives in general (non-linear) mode
-	///////////////////////////////////////////////////////////////////////////
-	//! Fill with black around the viewport.
-	void drawViewportShape(void) const;
-	
-	//! Generalisation of glVertex3v for non-linear projections. 
-	//! This method does not manage the lighting operations properly.
-	void drawVertex3v(const Vec3d& v) const
-	{
-		Vec3d win;
-		project(v, win);
-		glVertex3dv(win);
-	}
-	//! Convenience function.
-	//! @sa drawVertex3v
-	void drawVertex3(double x, double y, double z) const {drawVertex3v(Vec3d(x, y, z));}
-
-	//! Draw the string at the given position and angle with the given font.
-	//! If the gravity label flag is set, uses drawTextGravity180.
-	//! @param font the font to use for display
-	//! @param x horizontal position of the lower left corner of the first character of the text in pixel.
-	//! @param y horizontal position of the lower left corner of the first character of the text in pixel.
-	//! @param str the text to print.
-	//! @param angleDeg rotation angle in degree. Rotation is around x,y.
-	//! @param xshift shift in pixel in the rotated x direction.
-	//! @param yshift shift in pixel in the rotated y direction.
-	//! @param noGravity don't take into account the fact that the text should be written with gravity.
-	void drawText(const SFont* font, float x, float y, const QString& str, float angleDeg=0.f, 
-		      float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
-	
-	//! Draw the given polygon
-	//! @param poly The polygon to draw
-	void drawPolygon(const StelGeom::Polygon& poly) const;
-	
-	//! Draw a small circle arc between points start and stop with rotation point in rotCenter
-	//! The angle between start and stop must be < 180 deg
-	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
-	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport
-	void drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, const void* userData)=NULL, const void* userData=NULL) const;
-	
-	//! Draw a parallel arc in the current frame.  The arc start from point start
-	//! going in the positive longitude direction and with the given length in radian.
-	//! @param start the starting position of the parallel in the current frame.
-	//! @param length the angular length in radian (or distance on the unit sphere).
-	//! @param labelAxis if true display a label indicating the latitude at begining and at the end of the arc.
-	//! @param textColor color to use for rendering text. If NULL use the current openGL painting color.
-	//! @param nbSeg if not==-1,indicate how many line segments should be used for drawing the arc, if==-1
-	//! this value is automatically adjusted to prevent seeing the curve as a polygon.
-	//! @param font the font to use for display
-	void drawParallel(const Vec3d& start, double length, bool labelAxis=false, 
-			  const SFont* font=NULL, const Vec4f* textColor=NULL, int nbSeg=-1) const;
-	
-	//! Draw a meridian arc in the current frame. The arc starts from point start
-	//! going in the positive latitude direction if longitude is in [0;180], in the negative direction
-	//! otherwise, and with the given length in radian. The length can be up to 2 pi.
-	//! @param start the starting position of the meridian in the current frame.
-	//! @param length the angular length in radian (or distance on the unit sphere).
-	//! @param labelAxis if true display a label indicating the longitude at begining and at the end of the arc.
-	//! @param textColor color to use for rendering text. If NULL use the current openGL painting color.
-	//! @param nbSeg if not==-1,indicate how many line segments should be used for drawing the arc, if==-1
-	//! this value is automatically adjusted to prevent seeing the curve as a polygon.
-	//! @param font the font to use for display
-	//! @param useDMS if true display label in DD:MM:SS. Normal is HH:MM:SS
-	void drawMeridian(const Vec3d& start, double length, bool labelAxis=false, 
-					  const SFont* font=NULL, const Vec4f* textColor=NULL, int nbSeg=-1, bool useDMS=false) const;
-
-	//! draw a simple circle, 2d viewport coordinates in pixel
-	void drawCircle(double x,double y,double r) const;
-
-	//! Draw a square using the current texture at the given projected 2d position.
-	//! @param x x position in the viewport in pixel.
-	//! @param y y position in the viewport in pixel.
-	//! @param size the size of a square side in pixel.
-	void drawSprite2dMode(double x, double y, double size) const;
-	
-	//! Draw a rotated square using the current texture at the given projected 2d position.
-	//! @param x x position in the viewport in pixel.
-	//! @param y y position in the viewport in pixel.
-	//! @param size the size of a square side in pixel.
-	//! @param rotation rotation angle in degree.
-	void drawSprite2dMode(double x, double y, double size, double rotation) const;
-	
-	//! Draw a rotated rectangle using the current texture at the given projected 2d position.
-	//! @param x x position in the viewport in pixel.
-	//! @param y y position in the viewport in pixel.
-	//! @param sizex the size of the rectangle x side in pixel.
-	//! @param sizey the size of the rectangle y side in pixel.
-	//! @param rotation rotation angle in degree.
-	void drawRectSprite2dMode(double x, double y, double sizex, double sizey, double rotation) const;
-	
-	//! Draw a GL_POINT at the given position.
-	//! @param x x position in the viewport in pixels.
-	//! @param y y position in the viewport in pixels.
-	void drawPoint2d(double x, double y) const;
-	
-	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
-	void sSphere(GLdouble radius, GLdouble oneMinusOblateness,
-	             GLint slices, GLint stacks, int orientInside = 0) const;
-
-	//! Re-implementation of gluCylinder : glu is overridden for non-standard projection.
-	void sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks, int orientInside = 0) const;
-
-	//! Draw a disk with a special texturing mode having texture center at center of disk.
-	//! The disk is made up of concentric circles with increasing refinement.
-	//! The number of slices of the outmost circle is (innerFanSlices<<level).
-	//! @param radius the radius of the disk.
-	//! @param innerFanSlices the number of slices.
-	//! @param level the numbe of concentric circles.
-	void sFanDisk(double radius,int innerFanSlices,int level) const;
-
-	//! Draw a disk with a special texturing mode having texture center at center.
-	//! @param radius the radius of the disk.
-	//! @param slices the number of slices.
-	//! @param stacks ???
-	//! @param orientInside ???
-	void sDisk(GLdouble radius, GLint slices, GLint stacks, int orientInside = 0) const;
-	
-	//! Draw a ring with a radial texturing.
-	void sRing(GLdouble rMin, GLdouble rMax, GLint slices, GLint stacks, int orientInside) const;
-
-	//! Draw a fisheye texture in a sphere.
-	void sSphereMap(GLdouble radius, GLint slices, GLint stacks,
-	                 double textureFov = 2.*M_PI, int orientInside = 0) const;
-
-public slots:
-	//! Set the flag with decides whether to arrage labels so that
-	//! they are aligned with the bottom of a 2d screen, or a 3d dome.
-	void setFlagGravityLabels(bool gravity) { gravityLabels = gravity; }
-	//! Get the state of the horizontal flip.
-	//! @return True if flipped horizontally, else false.
-	bool getFlipHorz(void) const {return (flipHorz < 0.0);}
-	//! Get the state of the vertical flip.
-	//! @return True if flipped vertically, else false.
-	bool getFlipVert(void) const {return (flipVert < 0.0);}
-	//! Set the horizontal flip status.
-	//! @param flip The new value (true = flipped, false = unflipped).
-	void setFlipHorz(bool flip) {
-		flipHorz = flip ? -1.0 : 1.0;
-		glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW); 
-	}
-	//! Set the vertical flip status.
-	//! @param flip The new value (true = flipped, false = unflipped).
-	void setFlipVert(bool flip) {
-		flipVert = flip ? -1.0 : 1.0;
-		glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW); 
-	}
-
-	//! Set the initial field of view.  Updates configuration file.
-	//! @param fov the new value for initial field of view in decimal degrees.
-	void setInitFov(double fov) {initFov=fov;}
-
 private:
-	
-	void drawTextGravity180(const SFont* font, float x, float y, const QString& str, 
-			      bool speedOptimize = 1, float xshift = 0, float yshift = 0) const;
-		
-	//! Init the real openGL Matrices to a 2d orthographic projection
-	void initGlMatrixOrtho2d(void) const;
-	
-	//! The current projector mask
-	ProjectorMaskType maskType;
 
-	double initFov;                // initial default FOV in degree
-	double fov;                    // Field of view in degree
-	double minFov;                 // Minimum fov in degree
-	double maxFov;                 // Maximum fov in degree
+	ProjectorMaskType maskType;    // The current projector mask
 	double zNear, zFar;            // Near and far clipping planes
-
-	Vector4<GLint> viewportXywh;   // Viewport parameters
+	Vector4<int> viewportXywh;   // Viewport parameters
 	Vec2d viewportCenter;          // Viewport center in screen pixel
 	double viewportFovDiameter;    // diameter of the FOV disk in pixel
 	double pixelPerRad;            // pixel per rad at the center of the viewport disk
 	double flipHorz,flipVert;      // Whether to flip in horizontal or vertical directions
 	bool gravityLabels;            // should label text align with the horizon?
-	bool flagGlPointSprite;        // Whether the GL_POINT_SPRITE extension is available and activated
-	
 	Mat4d modelViewMatrix;         // openGL MODELVIEW Matrix
-	
-	const Mapping* mapping;
-	
-	// List of all the available projections
-	static QMap<QString, const Mapping*> projectionMappings;
 };
 
 #endif // _PROJECTOR_HPP_

@@ -17,10 +17,14 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "Mapping.hpp"
-#include "Translator.hpp"
+#ifndef _PROJECTORTYPE_HPP_
+#define _PROJECTORTYPE_HPP_
 
-Mapping::Mapping()
-{}
+#include <boost/shared_ptr.hpp>
+#include <config.h>
 
+class Projector;
+//! Intrusive pointer used to manage Projector with smart pointers
+typedef boost::shared_ptr<Projector> ProjectorP;
 
+#endif // _PROJECTORTYPE_HPP_

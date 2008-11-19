@@ -32,6 +32,7 @@
 #include "SFont.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
+#include "StelPainter.hpp"
 
 #include <QDebug>
 
@@ -129,7 +130,7 @@ double Nebula::getCloseViewFov(const Navigator*) const
 	return angularSize>0 ? angularSize * 4 : 1;
 }
 						   
-void Nebula::drawHints(const StelCore* core, float maxMagHints)
+void Nebula::drawHints(const StelPainter& sPainter, float maxMagHints)
 {
 	if (mag>maxMagHints)
 		return;
@@ -138,15 +139,15 @@ void Nebula::drawHints(const StelCore* core, float maxMagHints)
 	float lum = 1.;//qMin(1,4.f/getOnScreenSize(core))*0.8;
 	glColor3f(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness);
 	Nebula::texCircle->bind();
-	core->getProjection()->drawSprite2dMode(XY[0], XY[1], 8);
+	sPainter.drawSprite2dMode(XY[0], XY[1], 8);
 }
 
-void Nebula::drawLabel(const StelCore* core, float maxMagLabel)
+void Nebula::drawLabel(const StelCore* core, const StelPainter& sPainter, float maxMagLabel)
 {
 	if (mag>maxMagLabel)
 		return;
 	glColor4f(labelColor[0], labelColor[1], labelColor[2], hintsBrightness);
-	float size = getOnScreenSize(core);
+	float size = getAngularSize(core)*M_PI/180.*core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter();
 	float shift = 4.f + size/1.8f;
 	QString str;
 	if (nameI18!="")
@@ -161,7 +162,7 @@ void Nebula::drawLabel(const StelCore* core, float maxMagLabel)
 			str = QString("IC %1").arg(IC_nb);
 	}
 	
-	core->getProjection()->drawText(nebulaFont,XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
+	sPainter.drawText(nebulaFont,XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
 }
 
 bool Nebula::readNGC(char *recordstr)

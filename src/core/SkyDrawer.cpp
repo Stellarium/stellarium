@@ -25,6 +25,8 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
+#include "MovementMgr.hpp"
+#include "StelPainter.hpp"
 
 #include <QStringList>
 #include <QSettings>
@@ -37,9 +39,10 @@
 
 SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
 {
-	prj = core->getProjection();
 	eye = core->getToneReproducer();
 
+	sPainter = NULL;
+			
 	inScale = 1.;
 	bortleScaleIndex = 3;
 	limitMagnitude = -100.f;
@@ -52,8 +55,6 @@ SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
 	starAbsoluteScaleF = 1.f;
 	starRelativeScale = 1.f;
 	starLinearScale = 19.569f;
-	
-	update(0);
 	
 	QSettings* conf = StelApp::getInstance().getSettings();
 	initColorTableFromConfigFile(conf);
@@ -128,11 +129,12 @@ void SkyDrawer::init()
 	texHalo = StelApp::getInstance().getTextureManager().createTexture("star16x16.png");
 	texBigHalo = StelApp::getInstance().getTextureManager().createTexture("haloLune.png");
 	texSunHalo = StelApp::getInstance().getTextureManager().createTexture("halo.png");
+	update(0);
 }
 
 void SkyDrawer::update(double deltaTime)
 {
-	float fov = prj->getFov();
+	float fov = core->getMovementMgr()->getCurrentFov();
 	if (fov > maxAdaptFov)
 	{
 		fov = maxAdaptFov;
@@ -289,8 +291,12 @@ bool SkyDrawer::computeRCMag(float mag, float rcMag[2]) const
 	return true;
 }
 
-void SkyDrawer::preDrawPointSource()
+void SkyDrawer::preDrawPointSource(const StelPainter* p)
 {
+	Q_ASSERT(p);
+	Q_ASSERT(sPainter==NULL);
+	sPainter=p;
+	
 	Q_ASSERT(nbPointSources==0);
 	glDisable(GL_LIGHTING);
 	// Blending is really important. Otherwise faint stars in the vicinity of
@@ -312,6 +318,9 @@ void SkyDrawer::preDrawPointSource()
 // Finalize the drawing of point sources
 void SkyDrawer::postDrawPointSource()
 {
+	Q_ASSERT(sPainter);
+	sPainter = NULL;
+	
 	if (nbPointSources==0)
 		return;
 	
@@ -335,12 +344,14 @@ void SkyDrawer::postDrawPointSource()
 	glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	
-	nbPointSources = 0;	
+	nbPointSources = 0;
 }
 
 // Draw a point source halo.
 bool SkyDrawer::drawPointSource(double x, double y, const float rcMag[2], const Vec3f& color)
-{	
+{
+	Q_ASSERT(sPainter);
+	
 	if (rcMag[0]<=0.f)
 		return false;
 	
@@ -351,7 +362,7 @@ bool SkyDrawer::drawPointSource(double x, double y, const float rcMag[2], const 
 	{
 		// Draw the star rendered as GLpoint. This may be faster but it is not so nice
 		glColor3fv(color*(rcMag[1]*tw));
-		prj->drawPoint2d(x, y);
+		sPainter->drawPoint2d(x, y);
 	}
 	else
 	{
@@ -384,43 +395,27 @@ bool SkyDrawer::drawPointSource(double x, double y, const float rcMag[2], const 
 			glEnd();
 		}
 		
-		
 		++nbPointSources;
 		if (nbPointSources>=maxPointSources)
 		{
 			// Flush the buffer (draw all buffered stars)
+			const StelPainter* savePainter = sPainter;
 			postDrawPointSource();
+			sPainter = savePainter;
 		}
 	}
 	return true;
 }
 
 
-void SkyDrawer::preDrawSky3dModel(double illuminatedArea, float mag, bool lighting)
-{
-	// Set the main source of light to be the sun
-	const Vec3d sunPos = core->getNavigation()->getHeliocentricEclipticModelViewMat()*Vec3d(0,0,0);
-	glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
-	
-	if (lighting)
-	{
-		glEnable(GL_LIGHTING);
-		const float diffuse[4] = {2.,2.,2.,1};
-		glLightfv(GL_LIGHT0,GL_DIFFUSE, diffuse);
-	}
-	else
-	{
-		glDisable(GL_LIGHTING);
-		glColor3fv(Vec3f(1.f,1.f,1.f));
-	}
-}
-
 // Terminate drawing of a 3D model, draw the halo
-void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, float mag, const Vec3f& color)
+void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, float mag, const StelPainter* painter, const Vec3f& color)
 {
+	Q_ASSERT(painter);
+	Q_ASSERT(sPainter==NULL);
 	glDisable(GL_LIGHTING);
 	
-	const float pixPerRad = core->getProjection()->getPixelPerRadAtCenter();
+	const float pixPerRad = core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter();
 	// Assume a disk shape
 	float pixRadius = std::sqrt(illuminatedArea/(60.*60.)*M_PI/180.*M_PI/180.*(pixPerRad*pixPerRad))/M_PI;
 	
@@ -486,13 +481,14 @@ void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, f
 		float wl = findWorldLumForMag(mag, rcm[0]);
 		if (wl>0)
 		{
-			reportLuminanceInFov(qMin(700., qMin((double)wl/50, (60.*60.)/(prj->getFov()*prj->getFov())*6.)));
+			const double f = core->getMovementMgr()->getCurrentFov();
+			reportLuminanceInFov(qMin(700., qMin((double)wl/50, (60.*60.)/(f*f)*6.)));
 		}
  	}
 	
 	if (!noStarHalo)
 	{
-		preDrawPointSource();
+		preDrawPointSource(painter);
 		drawPointSource(x,y,rcm,color);
 		postDrawPointSource();
 	}

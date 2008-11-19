@@ -162,8 +162,10 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	StelObjectP sobj;
 	QList<StelObjectP> candidates;
 
+	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	
 	// Field of view for a 30 pixel diameter circle on screen
-	float fov_around = core->getProjection()->getFov()/qMin(core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight()) * 30.f;
+	float fov_around = core->getMovementMgr()->getCurrentFov()/qMin(prj->getViewportWidth(), prj->getViewportHeight()) * 30.f;
 
 	// Collect the objects inside the range
 	for (QList<StelObjectModule*>::const_iterator iteromgr=objectsModule.begin();iteromgr!=objectsModule.end();++iteromgr)
@@ -173,8 +175,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	
 	// Now select the object minimizing the function y = distance(in pixel) + magnitude
 	Vec3d winpos;
-	core->setCurrentFrame(StelCore::FrameJ2000);
-	core->getProjection()->project(v, winpos);
+	prj->project(v, winpos);
 	float xpos = winpos[0];
 	float ypos = winpos[1];
 
@@ -183,7 +184,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	QList<StelObjectP>::iterator iter = candidates.begin();
 	while (iter != candidates.end())
 	{
-		core->getProjection()->project((*iter)->getJ2000EquatorialPos(core->getNavigation()), winpos);
+		prj->project((*iter)->getJ2000EquatorialPos(core->getNavigation()), winpos);
 		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
 		float priority =  (*iter)->getSelectPriority(core->getNavigation());
 		// qDebug() << (*iter).getShortInfoString(core->getNavigation()) << ": " << priority << " " << distance;
@@ -204,8 +205,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 {
 	Vec3d v;
-	core->setCurrentFrame(StelCore::FrameJ2000);
-	core->getProjection()->unProject(x,y,v);
+	core->getProjection(StelCore::FrameJ2000)->unProject(x,y,v);
 	return cleverFind(core, v);
 }
 

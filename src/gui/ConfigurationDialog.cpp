@@ -83,7 +83,7 @@ void ConfigurationDialog::styleChanged()
 
 void ConfigurationDialog::createDialogContent()
 {
-	Projector* proj = StelApp::getInstance().getCore()->getProjection();
+	const ProjectorP proj = StelApp::getInstance().getCore()->getProjection(Mat4d());
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
 	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
@@ -158,8 +158,8 @@ void ConfigurationDialog::createDialogContent()
 	ui->sphericMirrorCheckbox->setChecked(StelAppGraphicsScene::getInstance().getViewPortDistorterType() == "fisheye_to_spheric_mirror");
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
 	ui->gravityLabelCheckbox->setChecked(proj->getFlagGravityLabels());
-	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), proj, SLOT(setFlagGravityLabels(bool)));
-	ui->discViewportCheckbox->setChecked(proj->getMaskType() == Projector::Disk);
+	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlagGravityLabels(bool)));
+	ui->discViewportCheckbox->setChecked(proj->getMaskType() == Projector::MaskDisk);
 	connect(ui->discViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 	ui->autoZoomResetsDirectionCheckbox->setChecked(mvmgr->getFlagAutoZoomOutResetsDirection());
 	connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
@@ -228,12 +228,10 @@ void ConfigurationDialog::setStartupTimeMode(void)
 
 void ConfigurationDialog::setDiskViewport(bool b)
 {
-	Projector* proj = StelApp::getInstance().getCore()->getProjection();
-	Q_ASSERT(proj);
 	if (b)
-		proj->setMaskType(Projector::Disk);
+		StelApp::getInstance().getCore()->setMaskType(Projector::MaskDisk);
 	else
-		proj->setMaskType(Projector::None);
+		StelApp::getInstance().getCore()->setMaskType(Projector::MaskNone);
 }
 
 void ConfigurationDialog::setSphericMirror(bool b)
@@ -327,7 +325,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	Q_ASSERT(mvmgr);
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 	Q_ASSERT(nav);
-	Projector* proj = StelApp::getInstance().getCore()->getProjection();
+	const ProjectorP proj = StelApp::getInstance().getCore()->getProjection(Mat4d());
 	Q_ASSERT(proj);
 
 	// view dialog / sky tab settings
@@ -362,7 +360,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/labels_amount", ssmgr->getLabelsAmount());
 	conf->setValue("astro/nebula_hints_amount", nmgr->getHintsAmount());
 	conf->setValue("astro/flag_nebula_name", nmgr->getFlagHints());
-	conf->setValue("projection/type", StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getId());
+	conf->setValue("projection/type", StelApp::getInstance().getCore()->getCurrentProjectionTypeKey());
 
 	// view dialog / landscape tab settings
 	lmgr->setDefaultLandscapeID(lmgr->getCurrentLandscapeID());
@@ -395,7 +393,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/auto_hide_horizontal_toolbar", gui->getAutoHideHorizontalButtonBar());
 	conf->setValue("gui/auto_hide_vertical_toolbar", gui->getAutoHideVerticalButtonBar());
 
-	StelApp::getInstance().getCore()->getProjection()->setInitFov(StelApp::getInstance().getCore()->getProjection()->getFov());
+	mvmgr->setInitFov(StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov());
 	StelApp::getInstance().getCore()->getNavigation()->setInitViewDirectionToCurrent();
 	
 	// configuration dialog / navigation tab
@@ -405,7 +403,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("navigation/startup_time_mode", nav->getStartupTimeMode());
 	conf->setValue("navigation/today_time", nav->getInitTodayTime());
 	conf->setValue("navigation/preset_sky_time", nav->getPresetSkyTime());
-	conf->setValue("navigation/init_fov", proj->getInitFov());
+	conf->setValue("navigation/init_fov", mvmgr->getInitFov());
 
 	// configuration dialog / tools tab
 	conf->setValue("gui/flag_show_flip_buttons", gui->getFlagShowFlipButtons());
@@ -434,7 +432,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 
 void ConfigurationDialog::updateConfigLabels()
 {
-	ui->startupFOVLabel->setText(q_("Startup FOV: %1%2").arg(StelApp::getInstance().getCore()->getProjection()->getFov()).arg(QChar(0x00B0)));
+	ui->startupFOVLabel->setText(q_("Startup FOV: %1%2").arg(StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov()).arg(QChar(0x00B0)));
 	
 	double az, alt;
 	const Vec3d v = StelApp::getInstance().getCore()->getNavigation()->getInitViewingDirection();

@@ -26,6 +26,7 @@
 #include "StelMainGraphicsView.hpp"
 #include "Location.hpp"
 #include "StelGui.hpp"
+#include "MovementMgr.hpp"
 
 #include <QPainter>
 #include <QGraphicsScene>
@@ -438,7 +439,7 @@ void BottomStelBar::updateText()
 	
 	QString str;
 	QTextStream wos(&str);
-	wos << "FOV " << qSetRealNumberPrecision(3) << core->getProjection()->getFov() << QChar(0x00B0);
+	wos << "FOV " << qSetRealNumberPrecision(3) << core->getMovementMgr()->getCurrentFov() << QChar(0x00B0);
 	if (fov->text()!=str)
 	{
 		updatePos = true;

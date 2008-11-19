@@ -320,11 +320,10 @@ void StelGui::init()
 	getGuiActions("actionToggle_GuiHidden_Global")->setChecked(false);
 	QObject::connect(getGuiActions("actionToggle_GuiHidden_Global"), SIGNAL(triggered()), this, SLOT(toggleHideGui()));
 
-	const Projector* proj = StelApp::getInstance().getCore()->getProjection();
-	QObject::connect(getGuiActions("actionHorizontal_Flip"), SIGNAL(toggled(bool)), proj, SLOT(setFlipHorz(bool)));
-	getGuiActions("actionHorizontal_Flip")->setChecked(proj->getFlipHorz());
-	QObject::connect(getGuiActions("actionVertical_Flip"), SIGNAL(toggled(bool)), proj, SLOT(setFlipVert(bool)));
-	getGuiActions("actionVertical_Flip")->setChecked(proj->getFlipVert());
+	QObject::connect(getGuiActions("actionHorizontal_Flip"), SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlipHorz(bool)));
+	getGuiActions("actionHorizontal_Flip")->setChecked(StelApp::getInstance().getCore()->getFlipHorz());
+	QObject::connect(getGuiActions("actionVertical_Flip"), SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlipVert(bool)));
+	getGuiActions("actionVertical_Flip")->setChecked(StelApp::getInstance().getCore()->getFlipVert());
 	
 	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
 	QObject::connect(getGuiActions("actionShow_Stars"), SIGNAL(toggled(bool)), smgr, SLOT(setFlagStars(bool)));

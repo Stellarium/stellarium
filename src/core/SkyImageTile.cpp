@@ -26,6 +26,7 @@
 #include "StelCore.hpp"
 #include "StelTextureMgr.hpp"
 #include "SkyDrawer.hpp"
+#include "StelPainter.hpp"
 
 #include <QDebug>
 
@@ -74,9 +75,9 @@ SkyImageTile::~SkyImageTile()
 {
 }
 	
-void SkyImageTile::draw(StelCore* core)
+void SkyImageTile::draw(StelCore* core, const StelPainter& sPainter)
 {
-	Projector* prj = core->getProjection();
+	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	
 	const float limitLuminance = core->getSkyDrawer()->getLimitLuminance();
 	QMultiMap<double, SkyImageTile*> result;
@@ -87,7 +88,7 @@ void SkyImageTile::draw(StelCore* core)
 		if (t->isReadyToDisplay()==false)
 			++numToBeLoaded;
 	updatePercent(result.size(), numToBeLoaded);
-	
+
 	// Draw in the good order
 	glEnable(GL_TEXTURE_2D);
 	glBlendFunc(GL_ONE, GL_ONE);
@@ -95,7 +96,7 @@ void SkyImageTile::draw(StelCore* core)
 	while (i!=result.begin())
 	{
 		--i;
-		i.value()->drawTile(core);
+		i.value()->drawTile(core, sPainter);
 	}
 	
 	deleteUnusedSubTiles();
@@ -182,7 +183,7 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 	}
 	
 	// Check if we reach the resolution limit
-	const double degPerPixel = 1./core->getProjection()->getPixelPerRadAtCenter()*180./M_PI;
+	const double degPerPixel = 1./core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()*180./M_PI;
 	if (degPerPixel < minResolution)
 	{
 		if (subTiles.isEmpty() && !subTilesUrls.isEmpty())
@@ -218,7 +219,7 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 	
 // Draw the image on the screen.
 // Assume GL_TEXTURE_2D is enabled
-bool SkyImageTile::drawTile(StelCore* core)
+bool SkyImageTile::drawTile(StelCore* core, const StelPainter& sPainter)
 {	
 	if (!tex->bind())
 	{
@@ -231,7 +232,7 @@ bool SkyImageTile::drawTile(StelCore* core)
 		texFader->start();
 	}
 	
-	const Projector* prj = core->getProjection();
+	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	const float factorX = tex->getCoordinates()[2][0];
 	const float factorY = tex->getCoordinates()[2][1];
 

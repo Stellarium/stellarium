@@ -126,10 +126,6 @@ public:
 	//! with the circle center assumed to be at getJ2000EquatorialPos().
 	//! @return radius in degree. This value is the apparent angular size of the object, and is independent of the current FOV.
 	virtual double getAngularSize(const StelCore* core) const = 0;
-	
-	//! Return the radius of a circle containing the object on screen
-	//! @return radius in pixel
-	float getOnScreenSize(const StelCore* core) const;
 
 protected:
 	friend void intrusive_ptr_add_ref(StelObject* p);
