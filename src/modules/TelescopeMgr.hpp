@@ -24,6 +24,7 @@
 #include "Fader.hpp"
 #include "vecmath.h"
 #include "STextureTypes.hpp"
+#include "ProjectorType.hpp"
 
 #include <QString>
 #include <QStringList>
@@ -91,7 +92,7 @@ public:
 	
 private:
 	//! Draw a nice animated pointer around the object
-	void drawPointer(const Projector* prj, const Navigator * nav);
+	void drawPointer(const ProjectorP& prj, const Navigator * nav);
 
 	//! Perform the communication with the telescope servers
 	void communicate(void);

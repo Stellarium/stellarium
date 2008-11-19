@@ -20,6 +20,7 @@
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 #include "Projector.hpp"
+#include "StelPainter.hpp"
 #include "StelCore.hpp"
 
 #include <stdexcept>
@@ -52,7 +53,7 @@ SkyPolygon::~SkyPolygon()
 	
 void SkyPolygon::draw(StelCore* core)
 {
-	Projector* prj = core->getProjection();
+	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	
 	QMultiMap<double, SkyPolygon*> result;
 	getTilesToDraw(result, core, prj->getViewportConvexPolygon(0, 0), true);
@@ -124,7 +125,7 @@ void SkyPolygon::getTilesToDraw(QMultiMap<double, SkyPolygon*>& result, StelCore
 	result.insert(minResolution, this);
 	
 	// Check if we reach the resolution limit
-	const double degPerPixel = 1./core->getProjection()->getPixelPerRadAtCenter()*180./M_PI;
+	const double degPerPixel = 1./core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()*180./M_PI;
 	if (degPerPixel < minResolution)
 	{
 		if (subTiles.isEmpty() && !subTilesUrls.isEmpty())
@@ -168,10 +169,10 @@ bool SkyPolygon::drawTile(StelCore* core)
 		texFader->start();
 	}
 	
-	const Projector* prj = core->getProjection();
+	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	
 	foreach (const StelGeom::ConvexPolygon& poly, skyConvexPolygons)
-		prj->drawPolygon(poly);
+		sPainter.drawPolygon(poly);
 	
 	return true;
 }

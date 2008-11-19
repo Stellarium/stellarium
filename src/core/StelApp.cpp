@@ -250,7 +250,7 @@ void StelApp::init()
 	networkAccessManager = new QNetworkAccessManager(this);
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
-		core->getProjection()->windowHasBeenResized(saveProjW, saveProjH);
+		core->windowHasBeenResized(saveProjW, saveProjH);
 	textureMgr = new StelTextureMgr();
 	localeMgr = new StelLocaleMgr();
 	fontManager = new StelFontMgr();
@@ -262,9 +262,7 @@ void StelApp::init()
 	// Initialize AFTER creation of openGL context
 	textureMgr->init();
 
-	loadingBar = new LoadingBar(core->getProjection(), 12., "logo24bitsbeta.png",
-	              core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight(),
-	              PACKAGE_VERSION, 45, 320, 121);
+	loadingBar = new LoadingBar(12., "logo24bitsbeta.png", PACKAGE_VERSION, 45, 320, 121);
 	
 	// Stel Object Data Base manager
 	stelObjectMgr = new StelObjectMgr();
@@ -649,7 +647,7 @@ void StelApp::draw()
 void StelApp::glWindowHasBeenResized(int w, int h)
 {
 	if (core)
-		core->getProjection()->windowHasBeenResized(w, h);
+		core->windowHasBeenResized(w, h);
 	else
 	{
 		saveProjW = w;

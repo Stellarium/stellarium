@@ -29,6 +29,7 @@
 #include "Fader.hpp"
 #include "Translator.hpp"
 #include "STextureTypes.hpp"
+#include "ProjectorType.hpp"
 
 // The callback type for the external position computation function
 typedef boost::callback<void, double, double*> posFuncType;
@@ -40,6 +41,7 @@ typedef void (OsulatingFunctType)(double jd0,double jd,double xyz[3]);
 #define ORBIT_SEGMENTS 72
 
 class SFont;
+class StelPainter;
 
 struct TrailPoint
 {
@@ -68,7 +70,7 @@ class Ring
 public:
 	Ring(double radiusMin,double radiusMax,const QString &texname);
 	~Ring(void);
-	void draw(Projector* prj,const Mat4d& mat,double screenSz);
+	void draw(const StelPainter* painter,const Mat4d& mat,double screenSz);
 	double getSize(void) const {return radiusMax;}
 private:
 	const double radiusMin;
@@ -254,7 +256,7 @@ protected:
 	void draw3dModel(StelCore* core, const Mat4d& mat, float screenSz);
 	
 	// Draw the 3D sphere
-	void drawSphere(StelCore* core, const Mat4d& mat, float screenSz);
+	void drawSphere(const StelPainter* painter, float screenSz);
 
 	// Draw the circle and name of the Planet
 	void drawHints(const StelCore* core);

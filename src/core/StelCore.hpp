@@ -19,15 +19,16 @@
 #ifndef _STELCORE_HPP_
 #define _STELCORE_HPP_
 
+#include "Projector.hpp"
+#include "ProjectorType.hpp"
 #include <QString>
+#include <QStringList>
 
 class Navigator;
-class Projector;
 class ToneReproducer;
 class SkyDrawer;
-class LoadingBar;
-class Observer;
 class GeodesicGrid;
+class MovementMgr;
 
 //! @class StelCore 
 //! Main class for Stellarium core processing.
@@ -38,10 +39,12 @@ class GeodesicGrid;
 //! in the future they may be more, allowing for example to display 
 //! several independent views of the sky at the same time.
 //! @author Fabien Chereau
-class StelCore
+class StelCore : public QObject
 {
-public:
-	
+	Q_OBJECT;
+	Q_ENUMS(ProjectionType);
+
+public:	
 	//! Supported reference frame types
 	enum FrameType
 	{
@@ -49,6 +52,18 @@ public:
 		FrameHelio,
 		FrameEquinoxEqu,
 		FrameJ2000
+	};
+	
+	//! Available projection types. A value of 1000 indicate the default projection
+	enum ProjectionType
+	{
+		ProjectionPerspective,    //!< Perspective projection
+		ProjectionEqualArea,      //!< Equal Area projection
+		ProjectionStereographic,  //!< Stereograhic projection
+		ProjectionFisheye,	      //!< Fisheye projection
+		ProjectionCylinder,	      //!< Cylinder projection
+		ProjectionMercator,	      //!< Mercator projection
+		ProjectionOrthographic	  //!< Orthographic projection
 	};
 	
 	StelCore();
@@ -61,20 +76,28 @@ public:
 	//! @param deltaTime the time increment in sec.
 	void update(double deltaTime);
 
+	//! Handle the resizing of the window
+	void windowHasBeenResized(int width,int height);
+	
 	//! Update core state before drawing modules.
 	void preDraw();
 
 	//! Update core state after drawing modules.
 	void postDraw();
-
-	//! Set the frame in which we want to draw from now on.
-	void setCurrentFrame(FrameType frameType) const;
+		
+	//! Get a new instance of a simple 2d projection. This projection cannot be used to project or unproject but
+	//! only for 2d painting
+	const ProjectorP getProjection2d() const;
 			
-	//! Get the current projector used in the core.
-	Projector* getProjection() {return projection;}
-	//! Get the current projector used in the core.
-	const Projector* getProjection() const {return projection;}
-
+	//! Get a new instance of projector using the current display parameters from Navigation, MovementMgr
+	//! If not specified default the projection type is the default one set in the core
+	//! This is a smart pointer, you don't need to delete it
+	const ProjectorP getProjection(FrameType frameType, ProjectionType projType=(ProjectionType)1000) const;
+	//! Get an instance of projector using the current display parameters from Navigation, MovementMgr
+	//! and using the given modelview matrix
+	//! If not specified default the projection type is the default one set in the core
+	const ProjectorP getProjection(const Mat4d& modelViewMat, ProjectionType projType=(ProjectionType)1000) const;
+			
 	//! Get the current navigation (manages frame transformation) used in the core.
 	Navigator* getNavigation() {return navigation;}
 	//! Get the current navigation (manages frame transformation) used in the core.
@@ -95,15 +118,72 @@ public:
 	//! Get the shared instance of GeodesicGrid
 	const GeodesicGrid* getGeodesicGrid() const {return geodesicGrid;}
 	
+	//! Get the instance of movement manager
+	MovementMgr* getMovementMgr() {return movementMgr;}
+	//! Get the const instance of movement manager
+	const MovementMgr* getMovementMgr() const {return movementMgr;}
+	
+	//! Set the near and far clipping planes.
+	void setClippingPlanes(double znear, double zfar) {currentProjectorParams.zNear=znear;currentProjectorParams.zFar=zfar;} 
+	//! Get the near and far clipping planes.
+	void getClippingPlanes(double* zn, double* zf) const {*zn = currentProjectorParams.zNear; *zf = currentProjectorParams.zFar;}
+	
+	//! Get the translated projection name from its TypeKey for the current locale
+	QString projectionTypeKeyToNameI18n(const QString& key) const;
+	
+	//! Get the projection TypeKey from its translated name for the current locale
+	QString projectionNameI18nToTypeKey(const QString& nameI18n) const;
+	
+	//! Get the current set of parameters to use when creating a new Projector
+	Projector::ProjectorParams getCurrentProjectorParams() const {return currentProjectorParams;}
+	//! Set the set of parameters to use when creating a new Projector
+	void setCurrentProjectorParams(const Projector::ProjectorParams& newParams) {currentProjectorParams=newParams;}
+	
+public slots:
+	//! Set the current ProjectionType to use
+	void setCurrentProjectionType(ProjectionType type) {currentProjectionType=type;}
+	
+	//! Get the current Mapping used by the Projection
+	QString getCurrentProjectionTypeKey(void) const;
+	//! Set the current ProjectionType to use from its key
+	void setCurrentProjectionTypeKey(QString type);
+	
+	//! Get the list of all the available projections
+	QStringList getAllProjectionTypeKeys() const;
+				
+	//! Set the mask type.
+	void setMaskType(Projector::ProjectorMaskType m) {currentProjectorParams.maskType = m; }
+	
+	//! Set the flag with decides whether to arrage labels so that
+	//! they are aligned with the bottom of a 2d screen, or a 3d dome.
+	void setFlagGravityLabels(bool gravity) { currentProjectorParams.gravityLabels = gravity; }	
+	//! Set the horizontal flip status.
+	//! @param flip The new value (true = flipped, false = unflipped).
+	void setFlipHorz(bool flip) {currentProjectorParams.flipHorz = flip;}
+	//! Set the vertical flip status.
+	//! @param flip The new value (true = flipped, false = unflipped).
+	void setFlipVert(bool flip) {currentProjectorParams.flipVert = flip;}
+	//! Get the state of the horizontal flip.
+	//! @return True if flipped horizontally, else false.
+	bool getFlipHorz(void) const {return currentProjectorParams.flipHorz;}
+	//! Get the state of the vertical flip.
+	//! @return True if flipped vertically, else false.
+	bool getFlipVert(void) const {return currentProjectorParams.flipVert;}
+	
 private:
 	Navigator* navigation;			// Manage all navigation parameters, coordinate transformations etc..
-	Projector* projection;			// Manage the projection mode and matrix
 	ToneReproducer* toneConverter;		// Tones conversion between stellarium world and display device
 	SkyDrawer* skyDrawer;
-	class MovementMgr* movementMgr;		// Manage vision movements
+	MovementMgr* movementMgr;		// Manage vision movements
 	
 	// Manage geodesic grid
 	GeodesicGrid* geodesicGrid;
+	
+	// The currently used projection type
+	ProjectionType currentProjectionType;
+	
+	// Parameters to use when creating new instances of Projector
+	Projector::ProjectorParams currentProjectorParams;
 };
 
 #endif // _STELCORE_HPP_

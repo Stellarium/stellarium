@@ -36,6 +36,7 @@
 #include "SFont.hpp"
 #include "SkyDrawer.hpp"
 #include "StelStyle.hpp"
+#include "StelPainter.hpp"
 
 // Class which manages the cardinal points displaying
 class Cardinals
@@ -80,7 +81,8 @@ Cardinals::~Cardinals()
 // handles special cases at poles
 void Cardinals::draw(const StelCore* core, double latitude, bool gravityON) const
 {
-	const Projector* prj = core->getProjection();
+	const ProjectorP prj = core->getProjection(StelCore::FrameLocal);
+	StelPainter sPainter(prj);
 	
 	if (!fader.getInterstate()) return;
 
@@ -105,25 +107,23 @@ void Cardinals::draw(const StelCore* core, double latitude, bool gravityON) cons
 	Vec3f pos;
 	Vec3d xy;
 
-	core->setCurrentFrame(StelCore::FrameLocal);
-
 	float shift = font.getStrLen(sNorth)/2;
 
 	// N for North
 	pos.set(-1.f, 0.f, 0.f);
-	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], d[0], 0., -shift, -shift);
+	if (prj->project(pos,xy)) sPainter.drawText(&font, xy[0], xy[1], d[0], 0., -shift, -shift);
 
 	// S for South
 	pos.set(1.f, 0.f, 0.f);
-	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], d[1], 0., -shift, -shift);
+	if (prj->project(pos,xy)) sPainter.drawText(&font, xy[0], xy[1], d[1], 0., -shift, -shift);
 
 	// E for East
 	pos.set(0.f, 1.f, 0.f);
-	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], d[2], 0., -shift, -shift);
+	if (prj->project(pos,xy)) sPainter.drawText(&font, xy[0], xy[1], d[2], 0., -shift, -shift);
 
 	// W for West
 	pos.set(0.f, -1.f, 0.f);
-	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], d[3], 0., -shift, -shift);
+	if (prj->project(pos,xy)) sPainter.drawText(&font, xy[0], xy[1], d[3], 0., -shift, -shift);
 
 }
 

@@ -36,6 +36,8 @@
 #include "StelTextureMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StarMgr.hpp"
+#include "MovementMgr.hpp"
+#include "StelPainter.hpp"
 
 SFont* Planet::planetNameFont = NULL;
 Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
@@ -532,8 +534,7 @@ void Planet::draw(StelCore* core, float maxMagLabels)
 		return;
 
 	Navigator* nav = core->getNavigation();
-	Projector* prj = core->getProjection();
-	
+		
 	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
 	const Planet *p = parent;
 	while (p && p->parent)
@@ -551,23 +552,25 @@ void Planet::draw(StelCore* core, float maxMagLabels)
 	if (this == nav->getHomePlanet())
 	{
 		if (rings)
-			rings->draw(prj,mat,1000.0);
+		{
+			StelPainter sPainter(core->getProjection(mat));
+			rings->draw(&sPainter,mat,1000.0);
+		}
 		return;
 	}
 
 	// Compute the 2D position and check if in the screen
-	float screenSz = getOnScreenSize(core);
+	const ProjectorP prj = core->getProjection(mat);
+	float screenSz = getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
-	
-	prj->setModelViewMatrix(mat);
 	if (prj->project(Vec3f(0,0,0), screenPos) &&
 	        screenPos[1]>viewport_bottom - screenSz && screenPos[1]<viewport_bottom + prj->getViewportHeight()+screenSz &&
 	        screenPos[0]>viewport_left - screenSz && screenPos[0]<viewport_left + prj->getViewportWidth() + screenSz)
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlaping (ie for jupiter satellites)
-		float ang_dist = 300.f*atan(getEclipticPos().length()/getEquinoxEquatorialPos(nav).length())/prj->getFov();
+		float ang_dist = 300.f*atan(getEclipticPos().length()/getEquinoxEquatorialPos(nav).length())/core->getMovementMgr()->getCurrentFov();
 		if (ang_dist==0.f)
 			ang_dist = 1.f; // if ang_dist == 0, the Planet is sun..
 
@@ -592,17 +595,31 @@ void Planet::draw(StelCore* core, float maxMagLabels)
 
 void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 {
+	// This is the main method drawing a planet 3d model
+	// Some work has to be done on this method to make the rendering nicer
+	
 	Navigator* nav = core->getNavigation();
-	Projector* prj = core->getProjection();
-	
-	// Prepare openGL lighting parameters according to luminance
-	float surfArcMin2 = getSpheroidAngularSize(core)*60;
-	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI;
-	
-	core->getSkyDrawer()->preDrawSky3dModel(surfArcMin2, getVMagnitude(core->getNavigation()), flagLighting);
 	
 	if (screenSz>1.)
 	{
+		StelPainter* sPainter = new StelPainter(core->getProjection(mat * Mat4d::zrotation(M_PI/180*(axisRotation + 90.))));
+		
+		// Set the main source of light to be the sun
+		const Vec3d sunPos = core->getNavigation()->getHeliocentricEclipticModelViewMat()*Vec3d(0,0,0);
+		glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
+	
+		if (flagLighting)
+		{
+			glEnable(GL_LIGHTING);
+			const float diffuse[4] = {2.,2.,2.,1};
+			glLightfv(GL_LIGHT0,GL_DIFFUSE, diffuse);
+		}
+		else
+		{
+			glDisable(GL_LIGHTING);
+			glColor3fv(Vec3f(1.f,1.f,1.f));
+		}
+		
 		if (rings)
 		{
 			const double dist = getEquinoxEquatorialPos(nav).length();
@@ -610,16 +627,16 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 			double z_far  = 1.1*(dist + rings->getSize());
 			if (z_near < 0.0) z_near = 0.0;
 			double n,f;
-			prj->getClippingPlanes(&n,&f); // Save clipping planes
-			prj->setClippingPlanes(z_near,z_far);
+			core->getClippingPlanes(&n,&f); // Save clipping planes
+			core->setClippingPlanes(z_near,z_far);
 			glClear(GL_DEPTH_BUFFER_BIT);
 			glEnable(GL_DEPTH_TEST);
-			drawSphere(core,mat,screenSz);
+			drawSphere(sPainter, screenSz);
 			glDisable(GL_LIGHTING);
-			rings->draw(prj,mat,screenSz);
+			rings->draw(sPainter,mat,screenSz);
 			glEnable(GL_LIGHTING);
 			glDisable(GL_DEPTH_TEST);
-			prj->setClippingPlanes(n,f);  // Restore old clipping planes
+			core->setClippingPlanes(n,f);  // Restore old clipping planes
 		}
 		else
 		{
@@ -634,23 +651,149 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 				glStencilFunc(GL_ALWAYS, 0x1, 0x1);
 				glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
 				glEnable(GL_STENCIL_TEST);
-				drawSphere(core, mat, screenSz);
+				drawSphere(sPainter, screenSz);
 				glDisable(GL_STENCIL_TEST);
 				
 				glDisable(GL_LIGHTING);
+				delete sPainter;
+				sPainter=NULL;
 				drawEarthShadow(core);
 				glClear(GL_STENCIL_BUFFER_BIT);	// Clean again to let a clean buffer for later Qt display
 				glEnable(GL_LIGHTING);
 			}
 			else
 			{
-				drawSphere(core, mat, screenSz);
+				// Normal planet
+				drawSphere(sPainter, screenSz);
 			}
 		}
+		if (sPainter)
+			delete sPainter;
+		sPainter=NULL;
 	}
 	
-	//qDebug() << nameI18;
-	core->getSkyDrawer()->postDrawSky3dModel(screenPos[0],screenPos[1], surfArcMin2, getVMagnitude(core->getNavigation()), color);
+	// Draw the halo
+	
+	// Prepare openGL lighting parameters according to luminance
+	float surfArcMin2 = getSpheroidAngularSize(core)*60;
+	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI; // the total illuminated area in arcmin^2
+	
+	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
+	core->getSkyDrawer()->postDrawSky3dModel(screenPos[0],screenPos[1], surfArcMin2, getVMagnitude(core->getNavigation()), &sPainter, color);
+}
+
+
+void Planet::drawSphere(const StelPainter* painter, float screenSz)
+{
+	glEnable(GL_TEXTURE_2D);
+	glDisable(GL_BLEND);
+	glEnable(GL_CULL_FACE);
+	
+	if (texMap)
+		texMap->bind();
+
+	// Draw the spheroid itself
+	// Adapt the number of facets according with the size of the sphere for optimization
+	int nb_facet = (int)(screenSz * 40/50);	// 40 facets for 1024 pixels diameter on screen
+	if (nb_facet<10) nb_facet = 10;
+	if (nb_facet>40) nb_facet = 40;
+	glShadeModel(GL_SMOOTH);
+	// Rotate and add an extra quarter rotation so that the planet texture map
+	// fits to the observers position. No idea why this is necessary,
+	// perhaps some openGl strangeness, or confusing sin/cos.
+	painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+	glShadeModel(GL_FLAT);
+	glDisable(GL_CULL_FACE);
+}
+
+
+// draws earth shadow overlapping the moon using stencil buffer
+// umbra and penumbra are sized separately for accuracy
+void Planet::drawEarthShadow(StelCore* core)
+{
+	SolarSystem* ssm = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	Vec3d e = ssm->getEarth()->getEclipticPos();
+	Vec3d m = ssm->getMoon()->getEclipticPos();  // relative to earth
+	Vec3d mh = ssm->getMoon()->getHeliocentricEclipticPos();  // relative to sun
+	float mscale = ssm->getMoon()->getSphereScale();
+
+	// shadow location at earth + moon distance along earth vector from sun
+	Vec3d en = e;
+	en.normalize();
+	Vec3d shadow = en * (e.length() + m.length());
+
+	// find shadow radii in AU
+	double r_penumbra = shadow.length()*702378.1/AU/e.length() - 696000/AU;
+	double r_umbra = 6378.1/AU - m.length()*(689621.9/AU/e.length());
+
+	// find vector orthogonal to sun-earth vector using cross product with
+	// a non-parallel vector
+	Vec3d rpt = shadow^Vec3d(0,0,1);
+	rpt.normalize();
+	Vec3d upt = rpt*r_umbra*mscale*1.02;  // point on umbra edge
+	rpt *= r_penumbra*mscale;  // point on penumbra edge
+
+	// modify shadow location for scaled moon
+	Vec3d mdist = shadow - mh;
+	if(mdist.length() > r_penumbra + 2000/AU)
+		return;   // not visible so don't bother drawing
+
+	shadow = mh + mdist*mscale;
+	r_penumbra *= mscale;
+
+	const ProjectorP prj = core->getProjection(StelCore::FrameHelio);
+	StelPainter sPainter(prj);
+	
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glColor3f(1,1,1);
+	
+	glEnable(GL_STENCIL_TEST);
+	glStencilFunc(GL_EQUAL, 0x1, 0x1);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+
+	// shadow radial texture
+	texEarthShadow->bind();
+
+	Vec3d r, s;
+
+	// umbra first
+	glBegin(GL_TRIANGLE_FAN);
+      // johannes: work-around for nasty ATI rendering bug:
+      // use y-texture coordinate of 0.5 instead of 0.0
+	glTexCoord2f(0.f,0.5f);
+	sPainter.drawVertex3v(shadow);
+
+	for (int i=0; i<=100; i++)
+	{
+		r = Mat4d::rotation(shadow, 2*M_PI*i/100.) * upt;
+		s = shadow + r;
+
+		glTexCoord2f(0.6f,0.5f);  // position in texture of umbra edge
+		sPainter.drawVertex3v(s);
+	}
+	glEnd();
+
+
+	// now penumbra
+	Vec3d u, sp;
+	glBegin(GL_TRIANGLE_STRIP);
+	for (int i=0; i<=100; i++)
+	{
+		r = Mat4d::rotation(shadow, 2*M_PI*i/100.) * rpt;
+		u = Mat4d::rotation(shadow, 2*M_PI*i/100.) * upt;
+		s = shadow + r;
+		sp = shadow + u;
+
+		glTexCoord2f(0.6f,0.5f);
+		sPainter.drawVertex3v(sp);
+
+		glTexCoord2f(1.f,0.5f);  // position in texture of umbra edge
+		sPainter.drawVertex3v(s);
+	}
+	glEnd();
+
+	glDisable(GL_STENCIL_TEST);
 }
 
 void Planet::drawHints(const StelCore* core)
@@ -659,12 +802,13 @@ void Planet::drawHints(const StelCore* core)
 		return;
 
 	const Navigator* nav = core->getNavigation();
-	const Projector* prj = core->getProjection();
-	
+	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	StelPainter sPainter(prj);
+			
 	// Draw nameI18 + scaling if it's not == 1.
-	float tmp = 10.f + getOnScreenSize(core)/1.44; // Shift for nameI18 printing
+	float tmp = 10.f + getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()/1.44; // Shift for nameI18 printing
 	glColor4f(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate());
-	prj->drawText(planetNameFont,screenPos[0],screenPos[1], getSkyLabel(nav), 0, tmp, tmp, false);
+	sPainter.drawText(planetNameFont,screenPos[0],screenPos[1], getSkyLabel(nav), 0, tmp, tmp, false);
 
 	// hint disapears smoothly on close view
 	if (hintFader.getInterstate()<=0)
@@ -677,34 +821,8 @@ void Planet::drawHints(const StelCore* core)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	Planet::hintCircleTex->bind();
-	prj->drawSprite2dMode(screenPos[0], screenPos[1], 22);
+	sPainter.drawSprite2dMode(screenPos[0], screenPos[1], 22);
 }
-
-void Planet::drawSphere(StelCore* core, const Mat4d& mat, float screenSz)
-{
-	glEnable(GL_TEXTURE_2D);
-	glDisable(GL_BLEND);
-	glEnable(GL_CULL_FACE);
-	
-	if (texMap)
-		texMap->bind();
-
-	// Rotate and add an extra quarter rotation so that the planet texture map
-	// fits to the observers position. No idea why this is necessary,
-	// perhaps some openGl strangeness, or confusing sin/cos.
-	core->getProjection()->setModelViewMatrix(mat * Mat4d::zrotation(M_PI/180*(axisRotation + 90.)));
-	
-	// Draw the spheroid itself
-	// Adapt the number of facets according with the size of the sphere for optimization
-	int nb_facet = (int)(screenSz * 40/50);	// 40 facets for 1024 pixels diameter on screen
-	if (nb_facet<10) nb_facet = 10;
-	if (nb_facet>40) nb_facet = 40;
-	glShadeModel(GL_SMOOTH);
-	core->getProjection()->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
-	glShadeModel(GL_FLAT);
-	glDisable(GL_CULL_FACE);
-}
-
 
 Ring::Ring(double radiusMin,double radiusMax,const QString &texname)
      :radiusMin(radiusMin),radiusMax(radiusMax) 
@@ -716,18 +834,17 @@ Ring::~Ring(void)
 {
 }
 
-void Ring::draw(Projector* prj,const Mat4d& mat,double screenSz)
-{
+void Ring::draw(const StelPainter* painter,const Mat4d& mat,double screenSz)
+{	
 	screenSz -= 50;
 	screenSz /= 250.0;
 	if (screenSz < 0.0) screenSz = 0.0;
 	else if (screenSz > 1.0) screenSz = 1.0;
 	const int slices = 128+(int)((256-128)*screenSz);
 	const int stacks = 8+(int)((32-8)*screenSz);
-
+	
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//	glColor3f(1.0f, 0.88f, 0.82f); // For saturn only..
 	glColor3f(1.f, 1.f, 1.f);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_CULL_FACE);
@@ -740,8 +857,7 @@ void Ring::draw(Projector* prj,const Mat4d& mat,double screenSz)
 	const double h = mat.r[ 8]*mat.r[12]
 	               + mat.r[ 9]*mat.r[13]
 	               + mat.r[10]*mat.r[14];
-	prj->setModelViewMatrix(mat);
-	prj->sRing(radiusMin,radiusMax,(h<0.0)?slices:-slices,stacks, 0);
+	painter->sRing(radiusMin,radiusMax,(h<0.0)?slices:-slices,stacks, 0);
 	glDisable(GL_CULL_FACE);
 }
 
@@ -752,9 +868,7 @@ void Planet::drawOrbit(const StelCore* core)
 	if(!orbitFader.getInterstate()) return;
 	if(!re.siderealPeriod) return;
 
-	const Projector* prj = core->getProjection();
-	
-	core->setCurrentFrame(StelCore::FrameHelio);    // 2D coordinate
+	const ProjectorP prj = core->getProjection(StelCore::FrameHelio);
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -827,12 +941,10 @@ void Planet::drawTrail(const StelCore* core)
 	if(!trailFader.getInterstate()) return;
 
 	const Navigator* nav = core->getNavigation();
-	const Projector* prj = core->getProjection();
+	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	
 	Vec3d onscreen1;
 	Vec3d onscreen2;
-
-	core->setCurrentFrame(StelCore::FrameJ2000);
 
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
@@ -950,94 +1062,4 @@ void Planet::update(int deltaTime)
 	labelsFader.update(deltaTime);
 	orbitFader.update(deltaTime);
 	trailFader.update(deltaTime);
-}
-
-
-// draws earth shadow overlapping the moon using stencil buffer
-// umbra and penumbra are sized separately for accuracy
-void Planet::drawEarthShadow(StelCore* core)
-{
-	Projector* prj = core->getProjection();
-	
-	SolarSystem* ssm = (SolarSystem*)GETSTELMODULE("SolarSystem");
-	Vec3d e = ssm->getEarth()->getEclipticPos();
-	Vec3d m = ssm->getMoon()->getEclipticPos();  // relative to earth
-	Vec3d mh = ssm->getMoon()->getHeliocentricEclipticPos();  // relative to sun
-	float mscale = ssm->getMoon()->getSphereScale();
-
-	// shadow location at earth + moon distance along earth vector from sun
-	Vec3d en = e;
-	en.normalize();
-	Vec3d shadow = en * (e.length() + m.length());
-
-	// find shadow radii in AU
-	double r_penumbra = shadow.length()*702378.1/AU/e.length() - 696000/AU;
-	double r_umbra = 6378.1/AU - m.length()*(689621.9/AU/e.length());
-
-	// find vector orthogonal to sun-earth vector using cross product with
-	// a non-parallel vector
-	Vec3d rpt = shadow^Vec3d(0,0,1);
-	rpt.normalize();
-	Vec3d upt = rpt*r_umbra*mscale*1.02;  // point on umbra edge
-	rpt *= r_penumbra*mscale;  // point on penumbra edge
-
-	// modify shadow location for scaled moon
-	Vec3d mdist = shadow - mh;
-	if(mdist.length() > r_penumbra + 2000/AU)
-		return;   // not visible so don't bother drawing
-
-	shadow = mh + mdist*mscale;
-	r_penumbra *= mscale;
-
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glColor3f(1,1,1);
-	
-	glEnable(GL_STENCIL_TEST);
-	glStencilFunc(GL_EQUAL, 0x1, 0x1);
-	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-
-	core->setCurrentFrame(StelCore::FrameHelio);
-	// shadow radial texture
-	texEarthShadow->bind();
-
-	Vec3d r, s;
-
-	// umbra first
-	glBegin(GL_TRIANGLE_FAN);
-      // johannes: work-around for nasty ATI rendering bug:
-      // use y-texture coordinate of 0.5 instead of 0.0
-	glTexCoord2f(0.f,0.5f);
-	prj->drawVertex3v(shadow);
-
-	for (int i=0; i<=100; i++)
-	{
-		r = Mat4d::rotation(shadow, 2*M_PI*i/100.) * upt;
-		s = shadow + r;
-
-		glTexCoord2f(0.6f,0.5f);  // position in texture of umbra edge
-		prj->drawVertex3v(s);
-	}
-	glEnd();
-
-
-	// now penumbra
-	Vec3d u, sp;
-	glBegin(GL_TRIANGLE_STRIP);
-	for (int i=0; i<=100; i++)
-	{
-		r = Mat4d::rotation(shadow, 2*M_PI*i/100.) * rpt;
-		u = Mat4d::rotation(shadow, 2*M_PI*i/100.) * upt;
-		s = shadow + r;
-		sp = shadow + u;
-
-		glTexCoord2f(0.6f,0.5f);
-		prj->drawVertex3v(sp);
-
-		glTexCoord2f(1.f,0.5f);  // position in texture of umbra edge
-		prj->drawVertex3v(s);
-	}
-	glEnd();
-
-	glDisable(GL_STENCIL_TEST);
 }

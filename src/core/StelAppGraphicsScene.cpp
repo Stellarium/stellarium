@@ -40,7 +40,7 @@ StelAppGraphicsScene::StelAppGraphicsScene() : tempPainter(NULL), cursorTimeout(
 	Q_ASSERT(!singleton);
 	singleton = this;
 	
-	distorter = ViewportDistorter::create("none",800,600,NULL);
+	distorter = ViewportDistorter::create("none",800,600,ProjectorP());
 	lastEventTimeSec = StelApp::getTotalRunTime();
 	previousTime = lastEventTimeSec;
 }
@@ -218,7 +218,7 @@ void StelAppGraphicsScene::setViewPortDistorterType(const QString &type)
 		delete distorter;
 		distorter = NULL;
 	}
-	distorter = ViewportDistorter::create(type,(int)width(),(int)height(),StelApp::getInstance().getCore()->getProjection());
+	distorter = ViewportDistorter::create(type,(int)width(),(int)height(),StelApp::getInstance().getCore()->getProjection2d());
 }
 
 QString StelAppGraphicsScene::getViewPortDistorterType() const

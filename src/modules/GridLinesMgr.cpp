@@ -22,7 +22,7 @@
 #include <QDebug>
 
 #include "GridLinesMgr.hpp"
-
+#include "MovementMgr.hpp"
 #include "StelApp.hpp"
 #include "Navigator.hpp"
 #include "Translator.hpp"
@@ -36,6 +36,7 @@
 #include "StelCore.hpp"
 #include "SFont.hpp"
 #include "StelStyle.hpp"
+#include "StelPainter.hpp"
 
 //! @class SkyGrid 
 //! Class which manages a grid to display in the sky.
@@ -147,7 +148,8 @@ static double getClosestResolutionHMS(double pixelPerRad)
 
 struct ViewportEdgeIntersectCallbackData
 {
-	const Projector* prj;
+	ViewportEdgeIntersectCallbackData(const StelPainter& p) : sPainter(p) {;}
+	const StelPainter& sPainter;
 	SFont* font;
 	Vec4f textColor;
 	QString text;
@@ -159,7 +161,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	const ViewportEdgeIntersectCallbackData* d = static_cast<const ViewportEdgeIntersectCallbackData*>(userData);
 	Vec3d direc(direction);
 	direc.normalize();
-	static GLfloat tmpColor[4];
+	GLfloat tmpColor[4];
 	glGetFloatv(GL_CURRENT_COLOR, tmpColor);
 	glColor4fv(d->textColor);
 	
@@ -171,37 +173,16 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 		xshift=-d->font->getStrLen(d->text)-6.f;
 	}
 	
-	d->prj->drawText(d->font, screenPos[0], screenPos[1], d->text, angleDeg, xshift, 3);
+	d->sPainter.drawText(d->font, screenPos[0], screenPos[1], d->text, angleDeg, xshift, 3);
 	glColor4fv(tmpColor);
 }
 
 //! Draw the sky grid in the current frame
 void SkyGrid::draw(const StelCore* core) const
 {
-	const Projector* prj = core->getProjection();
-	if (!fader.getInterstate()) return;
-	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);	
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-	Vec4f textColor(color[0], color[1], color[2], 0);
-	if (StelApp::getInstance().getVisionModeNight())
-	{
-		// instead of a filter which just zeros G&B, set the red 
-		// value to the mean brightness of RGB.
-		float red = (color[0] + color[1] + color[2]) / 3.0;
-		textColor[0] = red;
-		textColor[1] = 0.; textColor[2] = 0.;
-		glColor4f(red, 0, 0, fader.getInterstate());
-	}
-	else
-	{
-		glColor4f(color[0],color[1],color[2], fader.getInterstate());
-	}
-
-	textColor*=2;
-	textColor[3]=fader.getInterstate();
-
-	core->setCurrentFrame(frameType);
+	const ProjectorP prj = core->getProjection(frameType);
+	if (!fader.getInterstate())
+		return;
 
 	// Look for all meridians and parallels intersecting with the disk bounding the viewport
 	// Check whether the pole are in the viewport
@@ -230,7 +211,7 @@ void SkyGrid::draw(const StelCore* core) const
 	// Temp, move this projector
 	StelUtils::spheToRect(lon0, lat0, centerV);
 	centerV.normalize();
-	StelGeom::Disk viewPortHalfSpace(centerV, 1.6*prj->getFov()/2.*M_PI/180.);
+	StelGeom::Disk viewPortHalfSpace(centerV, 1.6*core->getMovementMgr()->getCurrentFov()/2.*M_PI/180.);
 	
 	// Compute the first grid starting point. This point is close to the center of the screen
 	// and lays at the intersection of a meridien and a parallel
@@ -241,10 +222,33 @@ void SkyGrid::draw(const StelCore* core) const
 	firstPoint.normalize();
 	Q_ASSERT(viewPortHalfSpace.contains(firstPoint));
 	
-	ViewportEdgeIntersectCallbackData userData;
+	// Initialize a painter and set openGL state	
+	StelPainter sPainter(prj);
+	glEnable(GL_LINE_SMOOTH);
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);	
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	Vec4f textColor(color[0], color[1], color[2], 0);
+	if (StelApp::getInstance().getVisionModeNight())
+	{
+		// instead of a filter which just zeros G&B, set the red 
+		// value to the mean brightness of RGB.
+		float red = (color[0] + color[1] + color[2]) / 3.0;
+		textColor[0] = red;
+		textColor[1] = 0.; textColor[2] = 0.;
+		glColor4f(red, 0, 0, fader.getInterstate());
+	}
+	else
+	{
+		glColor4f(color[0],color[1],color[2], fader.getInterstate());
+	}
+
+	textColor*=2;
+	textColor[3]=fader.getInterstate();
+	
+	ViewportEdgeIntersectCallbackData userData(sPainter);
 	userData.font = &font;
 	userData.textColor = textColor;
-	userData.prj = prj;
 	
 	/////////////////////////////////////////////////
 	// Draw all the meridians (great circles)
@@ -271,9 +275,9 @@ void SkyGrid::draw(const StelCore* core) const
 				rotFpt.transfo4d(rotLon120);
 				Vec3d rotFpt2=rotFpt;
 				rotFpt2.transfo4d(rotLon120);
-				prj->drawSmallCircleArc(fpt, rotFpt, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
-				prj->drawSmallCircleArc(rotFpt, rotFpt2, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
-				prj->drawSmallCircleArc(rotFpt2, fpt, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+				sPainter.drawSmallCircleArc(fpt, rotFpt, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+				sPainter.drawSmallCircleArc(rotFpt, rotFpt2, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+				sPainter.drawSmallCircleArc(rotFpt2, fpt, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
 				fpt.transfo4d(rotLon);
 				continue;
 			}
@@ -295,8 +299,8 @@ void SkyGrid::draw(const StelCore* core) const
 // 		prj->drawText(&font, win[0], win[1], "P2");
 				
 		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-		prj->drawSmallCircleArc(p1, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
-		prj->drawSmallCircleArc(p2, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+		sPainter.drawSmallCircleArc(p1, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+		sPainter.drawSmallCircleArc(p2, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
 		
 		fpt.transfo4d(rotLon);
 	}
@@ -321,8 +325,8 @@ void SkyGrid::draw(const StelCore* core) const
 			if (!viewPortHalfSpace.contains(middlePoint))
 				middlePoint*=-1;
 			
-			prj->drawSmallCircleArc(p1, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
-			prj->drawSmallCircleArc(p2, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+			sPainter.drawSmallCircleArc(p1, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+			sPainter.drawSmallCircleArc(p2, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
 			
 			fpt.transfo4d(rotLon);
 		}
@@ -355,9 +359,9 @@ void SkyGrid::draw(const StelCore* core) const
 				rotFpt.transfo4d(rotLon120);
 				Vec3d rotFpt2=rotFpt;
 				rotFpt2.transfo4d(rotLon120);
-				prj->drawSmallCircleArc(fpt, rotFpt, rotCenter, viewportEdgeIntersectCallback, &userData);
-				prj->drawSmallCircleArc(rotFpt, rotFpt2, rotCenter, viewportEdgeIntersectCallback, &userData);
-				prj->drawSmallCircleArc(rotFpt2, fpt, rotCenter, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawSmallCircleArc(fpt, rotFpt, rotCenter, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawSmallCircleArc(rotFpt, rotFpt2, rotCenter, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawSmallCircleArc(rotFpt2, fpt, rotCenter, viewportEdgeIntersectCallback, &userData);
 				fpt.transfo4d(rotLon);
 				continue;
 			}
@@ -377,8 +381,8 @@ void SkyGrid::draw(const StelCore* core) const
 			middlePoint+=rotCenter;
 		}
 				
-		prj->drawSmallCircleArc(p1, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
-		prj->drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
+		sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
+		sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
 		
 		fpt.transfo4d(rotLon);
 	}
@@ -406,9 +410,9 @@ void SkyGrid::draw(const StelCore* core) const
 					rotFpt.transfo4d(rotLon120);
 					Vec3d rotFpt2=rotFpt;
 					rotFpt2.transfo4d(rotLon120);
-					prj->drawSmallCircleArc(fpt, rotFpt, rotCenter, viewportEdgeIntersectCallback, &userData);
-					prj->drawSmallCircleArc(rotFpt, rotFpt2, rotCenter, viewportEdgeIntersectCallback, &userData);
-					prj->drawSmallCircleArc(rotFpt2, fpt, rotCenter, viewportEdgeIntersectCallback, &userData);
+					sPainter.drawSmallCircleArc(fpt, rotFpt, rotCenter, viewportEdgeIntersectCallback, &userData);
+					sPainter.drawSmallCircleArc(rotFpt, rotFpt2, rotCenter, viewportEdgeIntersectCallback, &userData);
+					sPainter.drawSmallCircleArc(rotFpt2, fpt, rotCenter, viewportEdgeIntersectCallback, &userData);
 					fpt.transfo4d(rotLon);
 					continue;
 				}
@@ -428,8 +432,8 @@ void SkyGrid::draw(const StelCore* core) const
 				middlePoint+=rotCenter;
 			}
 				
-			prj->drawSmallCircleArc(p1, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
-			prj->drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
 		
 			fpt.transfo4d(rotLon);
 		}
@@ -464,22 +468,27 @@ void SkyLine::setFontSize(double newFontSize)
 
 void SkyLine::draw(StelCore *core) const
 {
-	if (!fader.getInterstate()) return;
+	if (!fader.getInterstate())
+		return;
 
+	StelPainter sPainter(core->getProjection(frameType));
 	glColor4f(color[0], color[1], color[2], fader.getInterstate());
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-
-	core->setCurrentFrame(frameType);
+	glEnable(GL_LINE_SMOOTH);
 	
 	// Johannes: use a big radius as a dirty workaround for the bug that the
 	// ecliptic line is not drawn around the observer, but around the sun:
 	const Vec3d vv(1000000,0,0);
 	if (line_type==MERIDIAN)
-		core->getProjection()->drawMeridian(vv, 2.*M_PI, false, &font);
+	{
+		sPainter.drawMeridian(vv, 2.*M_PI, false, &font);
+	}
 	else
-		core->getProjection()->drawParallel(vv, 2.*M_PI, false, &font);
+	{	
+		sPainter.drawParallel(vv, 2.*M_PI, false, &font);
+	}
 }
 
 GridLinesMgr::GridLinesMgr()
@@ -539,8 +548,6 @@ void GridLinesMgr::update(double deltaTime)
 
 void GridLinesMgr::draw(StelCore* core)
 {
-	glEnable(GL_LINE_SMOOTH);
-	
 	// Draw the equatorial grid
 	equGrid->draw(core);
 	// Draw the equatorial grid
@@ -553,8 +560,6 @@ void GridLinesMgr::draw(StelCore* core)
 	eclipticLine->draw(core);
 	// Draw the meridian line
 	meridianLine->draw(core);
-	
-	glDisable(GL_LINE_SMOOTH);
 }
 
 void GridLinesMgr::setStelStyle(const StelStyle& style)

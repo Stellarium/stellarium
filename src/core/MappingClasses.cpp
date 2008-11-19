@@ -1,10 +1,6 @@
 #include "MappingClasses.hpp"
 #include "Translator.hpp"
 
-MappingPerspective::MappingPerspective(void)
-{
-}
-
 QString MappingPerspective::getNameI18() const
 {
 	return q_("Perspective");
@@ -13,27 +9,6 @@ QString MappingPerspective::getNameI18() const
 QString MappingPerspective::getDescriptionI18() const
 {
 	return q_("Perspective projection keeps the horizon a straight line. The mathematical name for this projection method is <i>gnomonic projection</i>.");
-}
-
-bool MappingPerspective::forward(Vec3d &v) const
-{
-	const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
-	if (v[2] < 0) {
-		v[0] /= (-v[2]);
-		v[1] /= (-v[2]);
-		v[2] = r;
-		return true;
-	}
-	if (v[2] > 0) {
-		v[0] /= v[2];
-		v[1] /= v[2];
-		v[2] = r;
-		return false;
-	}
-	v[0] *= 1e99;
-	v[1] *= 1e99;
-	v[2] = r;
-	return false;
 }
 
 bool MappingPerspective::backward(Vec3d &v) const
@@ -63,10 +38,6 @@ double MappingPerspective::deltaZoom(double fov) const
 	return vsf / (1.0+vsf*vsf);
 }
 
-
-MappingEqualArea::MappingEqualArea(void)
-{
-}
 
 QString MappingEqualArea::getNameI18() const
 {
@@ -116,11 +87,6 @@ double MappingEqualArea::deltaZoom(double fov) const
     return fov;
 }
 
-
-MappingStereographic::MappingStereographic(void)
-{
-}
-
 QString MappingStereographic::getNameI18() const
 {
 	return q_("Stereographic");
@@ -158,9 +124,7 @@ double MappingStereographic::deltaZoom(double fov) const
 }
 
 
-MappingFisheye::MappingFisheye(void)
-{
-}
+
 
 QString MappingFisheye::getNameI18() const
 {
@@ -199,9 +163,7 @@ double MappingFisheye::deltaZoom(double fov) const
 
 
 
-MappingCylinder::MappingCylinder(void)
-{
-}
+
 
 QString MappingCylinder::getNameI18() const
 {
@@ -250,9 +212,6 @@ double MappingCylinder::deltaZoom(double fov) const
 }
 
 
-MappingMercator::MappingMercator(void)
-{
-}
 
 QString MappingMercator::getNameI18() const
 {
@@ -305,9 +264,6 @@ double MappingMercator::deltaZoom(double fov) const
 }
 
 
-MappingOrthographic::MappingOrthographic(void)
-{
-}
 
 QString MappingOrthographic::getNameI18() const
 {
@@ -357,5 +313,45 @@ double MappingOrthographic::viewScalingFactorToFov(double vsf) const
 
 double MappingOrthographic::deltaZoom(double fov) const
 {
+	return fov;
+}
+
+
+
+QString Mapping2d::getNameI18() const
+{
+	return "2d";
+}
+
+QString Mapping2d::getDescriptionI18() const
+{
+	return "Simple 2d projection for internal use.";
+}
+
+bool Mapping2d::forward(Vec3d &v) const
+{
+	Q_ASSERT(0);
+	return false;
+}
+
+bool Mapping2d::backward(Vec3d &v) const
+{
+	Q_ASSERT(0);
+	return false;
+}
+
+double Mapping2d::fovToViewScalingFactor(double fov) const
+{
+	return 1.;
+}
+
+double Mapping2d::viewScalingFactorToFov(double vsf) const
+{
+	return 1.;
+}
+
+double Mapping2d::deltaZoom(double fov) const
+{
+	Q_ASSERT(0);
 	return fov;
 }

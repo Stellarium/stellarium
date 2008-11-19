@@ -29,6 +29,7 @@
 
 class QIODevice;
 class StelCore;
+class StelPainter;
 
 //! Contain all the credits for a given server hosting the data
 class ServerCredits
@@ -78,7 +79,7 @@ public:
 	~SkyImageTile();
 
 	//! Draw the image on the screen.
-	void draw(StelCore* core);
+	void draw(StelCore* core, const StelPainter& sPainter);
 	
 	//! Return the dataset credits to use in the progress bar
 	DataSetCredits getDataSetCredits() const {return dataSetCredits;}
@@ -142,7 +143,7 @@ private:
 	
 	//! Draw the image on the screen.
 	//! @return true if the tile was actually displayed
-	bool drawTile(StelCore* core);
+	bool drawTile(StelCore* core, const StelPainter& sPainter);
 	
 	//! Return the minimum resolution
 	double getMinResolution() const {return minResolution;}

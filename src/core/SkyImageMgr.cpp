@@ -25,6 +25,7 @@
 #include "SkyImageTile.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMainGraphicsView.hpp"
+#include "StelPainter.hpp"
 
 #include <QNetworkAccessManager>
 #include <stdexcept>
@@ -121,14 +122,14 @@ void SkyImageMgr::draw(StelCore* core)
 {
 	if (!flagShow)
 		return;
-	
-	core->setCurrentFrame(StelCore::FrameJ2000);
+
+	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_BLEND);
 	foreach (SkyImageMgrElem* s, allSkyImages)
 	{
 		if (s->show)
-			s->tile->draw(core);
+			s->tile->draw(core, sPainter);
 	}
 }
 

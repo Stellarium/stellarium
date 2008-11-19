@@ -25,6 +25,7 @@
 #include "Fader.hpp"
 #include "StelObjectModule.hpp"
 #include "STextureTypes.hpp"
+#include "ProjectorType.hpp"
 
 class StelObject;
 class ToneReproducer;
@@ -220,7 +221,7 @@ private:
 	void loadStarSettings(void);
 	
 	//! Draw a nice animated pointer around the object.
-	void drawPointer(const Projector* prj, const Navigator * nav);
+	void drawPointer(const ProjectorP& prj, const Navigator * nav);
 	
 	LinearFader labelsFader;
 	LinearFader starsFader;

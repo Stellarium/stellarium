@@ -27,6 +27,7 @@
 #include "Navigator.hpp"
 #include "STexture.hpp"
 #include "SFont.hpp"
+#include "StelPainter.hpp"
 
 Vec3f Constellation::lineColor = Vec3f(0.4,0.4,0.8);
 Vec3f Constellation::labelColor = Vec3f(0.4,0.4,0.8);
@@ -90,7 +91,7 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 	return true;
 }
 
-void Constellation::drawOptim(Projector* prj) const
+void Constellation::drawOptim(const ProjectorP& prj) const
 {
 	if(!lineFader.getInterstate()) return;
 
@@ -114,15 +115,15 @@ void Constellation::drawOptim(Projector* prj) const
 	}
 }
 
-void Constellation::drawName(SFont *constfont, Projector* prj) const
+void Constellation::drawName(SFont *constfont, const StelPainter& sPainter) const
 {
-	if(!nameFader.getInterstate()) return;
+	if(!nameFader.getInterstate())
+		return;
 	glColor4f(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());
-	prj->drawText(constfont, XYname[0], XYname[1], nameI18, 
-	              0., -constfont->getStrLen(nameI18)/2, 0, false);
+	sPainter.drawText(constfont, XYname[0], XYname[1], nameI18, 0., -constfont->getStrLen(nameI18)/2, 0, false);
 }
 
-void Constellation::drawArtOptim(Projector* prj, const Navigator* nav) const
+void Constellation::drawArtOptim(const ProjectorP& prj, const Navigator* nav) const
 {
 	float intensity = artFader.getInterstate(); 
 	if (artTexture && intensity) 
@@ -190,7 +191,7 @@ void Constellation::drawArtOptim(Projector* prj, const Navigator* nav) const
 }
 
 // Draw the art texture
-void Constellation::drawArt(Projector* prj, const Navigator* nav) const
+void Constellation::drawArt(const ProjectorP& prj, const Navigator* nav) const
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
@@ -225,7 +226,7 @@ void Constellation::update(int deltaTime)
 	boundaryFader.update(deltaTime);
 }
 
-void Constellation::drawBoundaryOptim(Projector* prj) const
+void Constellation::drawBoundaryOptim(const ProjectorP& prj) const
 {
 	if(!boundaryFader.getInterstate()) return;
 

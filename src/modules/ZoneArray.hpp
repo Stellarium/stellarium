@@ -41,6 +41,8 @@
 #include "StarMgr.hpp"
 #include "bytes.h"
 
+#include "StelPainter.hpp"
+
 #ifndef WIN32
 #include <sys/mman.h>
 #include <errno.h>
@@ -79,7 +81,7 @@ public:
   virtual void searchAround(int index,const Vec3d &v,double cosLimFov,
                             QList<StelObjectP > &result) = 0;
   virtual void draw(int index,bool is_inside,
-                    const float *rcmag_table, Projector *prj,
+                    const float *rcmag_table, const ProjectorP& prj,
                     unsigned int maxMagStarName,float names_brightness,
                     SFont *starFont) const = 0;
   bool isInitialized(void) const {return (nr_of_zones>0);}
@@ -126,7 +128,7 @@ private:
   void searchAround(int index,const Vec3d &v,double cosLimFov,
                     QList<StelObjectP > &result);
   void draw(int index,bool is_inside,
-            const float *rcmag_table, Projector *prj,
+			const float *rcmag_table, const ProjectorP& prj,
             unsigned int maxMagStarName,float names_brightness,
             SFont *starFont) const;
 };
@@ -383,7 +385,7 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void) {
 template<class Star>
 void SpecialZoneArray<Star>::draw(int index,bool is_inside,
                                   const float *rcmag_table,
-                                  Projector *prj,
+								  const ProjectorP& prj,
                                   unsigned int maxMagStarName,
                                   float names_brightness,
                                   SFont *starFont) const
@@ -410,7 +412,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 					const float offset = (rcmag_table + 2*(s->mag))[0]*0.7;
 					const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.2, 0.2) : SkyDrawer::indexToColor(s->bV))*0.75;
 					glColor4f(colorr[0], colorr[1], colorr[2],names_brightness);
-					prj->drawText(starFont,xy[0],xy[1], starname, 0, offset, offset, false);
+					drawer->getPainter()->drawText(starFont,xy[0],xy[1], starname, 0, offset, offset, false);
 				}
 			}
 		}

@@ -45,6 +45,7 @@
 #include "StelCore.hpp"
 #include "StelStyle.hpp"
 #include "SkyImageTile.hpp"
+#include "StelPainter.hpp"
 
 using namespace std;
 
@@ -120,7 +121,9 @@ void NebulaMgr::init()
 // Draw all the Nebulae
 void NebulaMgr::draw(StelCore* core)
 {
-	Projector* prj = core->getProjection();
+	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	StelPainter sPainter(prj);
+	
 	SkyDrawer* skyDrawer = core->getSkyDrawer();
 	
 	Nebula::hintsBrightness = hintsFader.getInterstate()*flagShow.getInterstate();
@@ -131,7 +134,6 @@ void NebulaMgr::draw(StelCore* core)
 
 	Vec3f pXYZ;
 	
-	core->setCurrentFrame(StelCore::FrameJ2000);
 	// Use a 1 degree margin
 	const double margin = 1.*M_PI/180.*prj->getPixelPerRadAtCenter();
 	const StelGeom::ConvexPolygon& p = prj->getViewportConvexPolygon(margin, margin);
@@ -153,18 +155,18 @@ void NebulaMgr::draw(StelCore* core)
 		if (n->angularSize>size_limit || (hintsFader.getInterstate()>0.0001 && n->mag <= maxMagHints))
 		{
 			prj->project(n->XYZ,n->XY);
-			n->drawLabel(core, maxMagLabels);
-			n->drawHints(core, maxMagHints);
+			n->drawLabel(core, sPainter, maxMagLabels);
+			n->drawHints(sPainter, maxMagHints);
 		}
 	}
-	drawPointer(core);
+	drawPointer(core, sPainter);
 	//nebGrid.draw(prj, p);
 }
 
-void NebulaMgr::drawPointer(const StelCore* core)
+void NebulaMgr::drawPointer(const StelCore* core, const StelPainter& sPainter)
 {
 	const Navigator* nav = core->getNavigation();
-	const Projector* prj = core->getProjection();
+	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	
 	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Nebula");
 	if (!newSelected.empty())
@@ -182,13 +184,14 @@ void NebulaMgr::drawPointer(const StelCore* core)
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
-		float size = obj->getOnScreenSize(core);
+		// Size on screen
+		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 
 		size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
-		prj->drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 20, 90);
-		prj->drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 20, 0);
-		prj->drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 20, -90);
-		prj->drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 20, -180);
+		sPainter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 20, 90);
+		sPainter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 20, 0);
+		sPainter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 20, -90);
+		sPainter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 20, -180);
 	}
 }
 

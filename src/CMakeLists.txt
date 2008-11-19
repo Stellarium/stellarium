@@ -13,8 +13,6 @@ SET(stellarium_lib_SRCS
 	core/LoadingBar.hpp
 	core/MappingClasses.cpp
 	core/MappingClasses.hpp
-	core/Mapping.cpp
-	core/Mapping.hpp
 	core/MovementMgr.cpp
 	core/MovementMgr.hpp
 	core/Navigator.cpp
@@ -27,10 +25,13 @@ SET(stellarium_lib_SRCS
 	core/LocationMgr.cpp
 	core/Projector.cpp
 	core/Projector.hpp
+	core/ProjectorType.hpp
 	core/SFont.cpp
 	core/SFont.hpp
 	core/SkyDrawer.cpp
 	core/SkyDrawer.hpp
+	core/StelPainter.hpp
+	core/StelPainter.cpp
 	core/MultiLevelJsonBase.hpp
 	core/MultiLevelJsonBase.cpp
 	core/SkyImageTile.hpp
@@ -263,7 +264,7 @@ SET(stellarium_MOC_HDRS
 	core/StelApp.hpp
 	core/Navigator.hpp
 	core/LocationMgr.hpp
-	core/Projector.hpp
+	core/StelCore.hpp
 	core/StelAppGraphicsScene.hpp
 	core/STexture.hpp
 	core/MovementMgr.hpp

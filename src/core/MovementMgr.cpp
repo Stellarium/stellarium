@@ -67,6 +67,11 @@ void MovementMgr::init()
 	flagManualZoom = conf->value("navigation/flag_manual_zoom").toBool();
 	flagAutoZoomOutResetsDirection = conf->value("navigation/auto_zoom_out_resets_direction", true).toBool();
 	flagEnableMouseNavigation = conf->value("navigation/flag_enable_mouse_navigation",true).toBool();
+	
+	minFov = 0.0001;
+	maxFov = 100.; 
+	initFov = conf->value("navigation/init_fov",60.).toDouble();
+	currentFov = initFov;
 }	
 	
 bool MovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons b)
@@ -79,7 +84,7 @@ bool MovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 			turnLeft(1);
 			isMouseMovingHoriz = true;
 		}
-		else if (x >= core->getProjection()->getViewportWidth() - 2)
+		else if (x >= core->getProjection2d()->getViewportWidth() - 2)
 		{
 			turnRight(1);
 			isMouseMovingHoriz = true;
@@ -95,7 +100,7 @@ bool MovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 			turnUp(1);
 			isMouseMovingVert = true;
 		}
-		else if (y >= core->getProjection()->getViewportHeight() - 2)
+		else if (y >= core->getProjection2d()->getViewportHeight() - 2)
 		{
 			turnDown(1);
 			isMouseMovingVert = true;
@@ -313,13 +318,13 @@ void MovementMgr::zoomOut(bool s)
 // Increment/decrement smoothly the vision field and position
 void MovementMgr::updateMotion(double deltaTime)
 {
-	Projector* proj = core->getProjection();
+	const ProjectorP proj = core->getProjection(StelCore::FrameJ2000);
 	
 	updateVisionVector(deltaTime);
 	
 	// the more it is zoomed, the lower the moving speed is (in angle)
-	double depl=keyMoveSpeed*deltaTime*1000*proj->getFov();
-	double deplzoom=keyZoomSpeed*deltaTime*1000*proj->getCurrentMapping().deltaZoom(proj->getFov()*(M_PI/360.0))*(360.0/M_PI);
+	double depl=keyMoveSpeed*deltaTime*1000*currentFov;
+	double deplzoom=keyZoomSpeed*deltaTime*1000*proj->deltaZoom(currentFov*(M_PI/360.0))*(360.0/M_PI);
 
 	if (deltaAz<0)
 	{
@@ -355,8 +360,8 @@ void MovementMgr::updateMotion(double deltaTime)
 	if (deltaFov<0)
 	{
 		deltaFov = -deplzoom*5;
-		if (deltaFov<-0.15*proj->getFov())
-			deltaFov = -0.15*proj->getFov();
+		if (deltaFov<-0.15*currentFov)
+			deltaFov = -0.15*currentFov;
 	}
 	else
 	{
@@ -380,8 +385,6 @@ void MovementMgr::updateMotion(double deltaTime)
 // Go and zoom to the selected object.
 void MovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 {
-	Projector* proj = core->getProjection();
-	
 	if (!StelApp::getInstance().getStelObjectMgr().getWasSelected())
 		return;
 		
@@ -402,19 +405,19 @@ void MovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 	if( allowManualZoom && flagManualZoom )
 	{
 		// if manual zoom mode, user can zoom in incrementally
-		float newfov = proj->getFov()*0.5f;
+		float newfov = currentFov*0.5f;
 		zoomTo(newfov, manualMoveDuration);
 	}
 	else
 	{
 		float satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getSatellitesFov(core->getNavigation());
 
-		if (satfov>0.0 && proj->getFov()*0.9>satfov)
+		if (satfov>0.0 && currentFov*0.9>satfov)
 			zoomTo(satfov, moveDuration);
 		else
 		{
 			float closefov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getCloseViewFov(core->getNavigation());
-			if (proj->getFov()>closefov)
+			if (currentFov>closefov)
 				zoomTo(closefov, moveDuration);
 		}
 	}
@@ -425,7 +428,6 @@ void MovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 void MovementMgr::autoZoomOut(float moveDuration, bool full)
 {
 	Navigator* nav = core->getNavigation();
-	Projector* proj = core->getProjection();
 	
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected() && !full)
 	{
@@ -433,7 +435,7 @@ void MovementMgr::autoZoomOut(float moveDuration, bool full)
 		// unless specified otherwise
 		float satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getSatellitesFov(core->getNavigation());
 
-		if (satfov>0.0 && proj->getFov()<=satfov*0.9)
+		if (satfov>0.0 && currentFov<=satfov*0.9)
 		{
 			zoomTo(satfov, moveDuration);
 			return;
@@ -442,14 +444,14 @@ void MovementMgr::autoZoomOut(float moveDuration, bool full)
 		// If the selected object is part of a Planet subsystem (other than sun),
 		// unzoom to subsystem view
 		satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getParentSatellitesFov((core->getNavigation()));
-		if (satfov>0.0 && proj->getFov()<=satfov*0.9)
+		if (satfov>0.0 && currentFov<=satfov*0.9)
 		{
 			zoomTo(satfov, moveDuration);
 			return;
 		}
 	}
 
-	zoomTo(proj->getInitFov(), moveDuration);
+	zoomTo(initFov, moveDuration);
 	if (flagAutoZoomOutResetsDirection) 
 		moveTo(nav->getInitViewingDirection(), moveDuration, true, -1);
 	setFlagTracking(false);
@@ -661,20 +663,17 @@ void MovementMgr::panView(double deltaAz, double deltaAlt)
 void MovementMgr::dragView(int x1, int y1, int x2, int y2)
 {
 	Navigator* nav = core->getNavigation();
-	Projector* proj = core->getProjection();
 	
 	Vec3d tempvec1, tempvec2;
 	double az1, alt1, az2, alt2;
-	if (nav->getViewingMode()==Navigator::ViewHorizon)
-		core->setCurrentFrame(StelCore::FrameLocal);
-	else
-		core->setCurrentFrame(StelCore::FrameEquinoxEqu);
+	const ProjectorP prj = nav->getViewingMode()==Navigator::ViewHorizon ? core->getProjection(StelCore::FrameLocal) :
+		core->getProjection(StelCore::FrameEquinoxEqu);
 		
 //johannes: StelApp already gives appropriate x/y coordinates
 //	proj->unProject(x2,proj->getViewportHeight()-y2, tempvec2);
 //	proj->unProject(x1,proj->getViewportHeight()-y1, tempvec1);
-	proj->unProject(x2,y2, tempvec2);
-	proj->unProject(x1,y1, tempvec1);
+	prj->unProject(x2,y2, tempvec2);
+	prj->unProject(x1,y1, tempvec1);
 	StelUtils::rectToSphe(&az1, &alt1, tempvec1);
 	StelUtils::rectToSphe(&az2, &alt2, tempvec2);
 	panView(az2-az1, alt1-alt2);
@@ -688,8 +687,6 @@ void MovementMgr::updateAutoZoom(double deltaTime)
 {
 	if (flagAutoZoom)
 	{
-		Projector* proj = core->getProjection();
-		
 		// Use a smooth function
 		double c;
 
@@ -704,12 +701,12 @@ void MovementMgr::updateAutoZoom(double deltaTime)
 			c = (zoomMove.coef)*(zoomMove.coef)*(zoomMove.coef);
 		}
 
-		proj->setFov(zoomMove.start + (zoomMove.aim - zoomMove.start) * c);
+		setFov(zoomMove.start + (zoomMove.aim - zoomMove.start) * c);
 		zoomMove.coef+=zoomMove.speed*deltaTime*1000;
 		if (zoomMove.coef>=1.)
 		{
 			flagAutoZoom = 0;
-			proj->setFov(zoomMove.aim);
+			setFov(zoomMove.aim);
 		}
 	}
 }
@@ -718,7 +715,7 @@ void MovementMgr::updateAutoZoom(double deltaTime)
 void MovementMgr::zoomTo(double aim_fov, float moveDuration)
 {
 	zoomMove.aim=aim_fov;
-    zoomMove.start=core->getProjection()->getFov();
+    zoomMove.start=currentFov;
     zoomMove.speed=1.f/(moveDuration*1000);
     zoomMove.coef=0.;
     flagAutoZoom = true;
@@ -727,10 +724,20 @@ void MovementMgr::zoomTo(double aim_fov, float moveDuration)
 void MovementMgr::changeFov(double deltaFov)
 {
 	// if we are zooming in or out
-	if (deltaFov) core->getProjection()->setFov(core->getProjection()->getFov()+deltaFov);
+	if (deltaFov)
+		setFov(currentFov + deltaFov);
 }
 
 double MovementMgr::getAimFov(void) const
 {
-	return (flagAutoZoom ? zoomMove.aim : core->getProjection()->getFov());
+	return (flagAutoZoom ? zoomMove.aim : currentFov);
+}
+
+void MovementMgr::setMaxFov(double max)
+{
+	maxFov = max;
+	if (currentFov > max)
+	{
+		setFov(max);
+	}
 }

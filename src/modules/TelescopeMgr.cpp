@@ -29,6 +29,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelStyle.hpp"
+#include "StelPainter.hpp"
 
 #include <algorithm>
 #include <QSettings>
@@ -97,11 +98,11 @@ double TelescopeMgr::getCallOrder(StelModuleActionName actionName) const
 void TelescopeMgr::draw(StelCore* core)
 {
 	Navigator* nav = core->getNavigation();
-	Projector* prj = core->getProjection();
+	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	StelPainter sPainter(prj);
 	
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
-	core->setCurrentFrame(StelCore::FrameJ2000);
 	telescopeTexture->bind();
 	glBlendFunc(GL_ONE,GL_ONE);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
@@ -118,8 +119,7 @@ void TelescopeMgr::draw(StelCore* core)
 					glDisable(GL_TEXTURE_2D);
 					foreach (double occul, tel->getOculars())
 					{
-						prj->drawCircle(XY[0],XY[1],
-						0.5*prj->getPixelPerRadAtCenter()*(M_PI/180)*(occul));
+						sPainter.drawCircle(XY[0],XY[1],0.5*prj->getPixelPerRadAtCenter()*(M_PI/180)*(occul));
 					}
 					glEnable(GL_TEXTURE_2D);
 					double radius = 15;
@@ -133,7 +133,7 @@ void TelescopeMgr::draw(StelCore* core)
 				if (nameFader.getInterstate() >= 0)
 				{
 					glColor4f(labelColor[0],labelColor[1],labelColor[2], nameFader.getInterstate());
-					prj->drawText(telescope_font, XY[0],XY[1],tel->getNameI18n(), 0, 6, -4, false);
+					sPainter.drawText(telescope_font, XY[0],XY[1],tel->getNameI18n(), 0, 6, -4, false);
 					telescopeTexture->bind();
 				}
 			}
@@ -271,7 +271,7 @@ void TelescopeMgr::init()
 }
 
 
-void TelescopeMgr::drawPointer(const Projector* prj, const Navigator * nav)
+void TelescopeMgr::drawPointer(const ProjectorP& prj, const Navigator * nav)
 {
 	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Telescope");
 	if (!newSelected.empty())
@@ -282,13 +282,14 @@ void TelescopeMgr::drawPointer(const Projector* prj, const Navigator * nav)
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos)) return;
 	
+		StelPainter sPainter(prj);
 		glColor3fv(obj->getInfoColor());
 		texPointer->bind();
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		
-		prj->drawSprite2dMode(screenpos[0], screenpos[1], 50., StelApp::getInstance().getTotalRunTime()*40.);
+		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 50., StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
 

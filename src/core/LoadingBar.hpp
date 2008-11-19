@@ -21,12 +21,12 @@
 #define _LOADINGBAR_HPP_
 
 #include "STextureTypes.hpp"
+#include "ProjectorType.hpp"
 #include "vecmath.h"
 
 #include <QString>
 
 class SFont;
-class Projector;
 
 //! @class LoadingBar 
 //! This class is used to display loading bar.
@@ -53,8 +53,8 @@ public:
 	//! @param extraTextSize the size of the font used for the exta text
 	//! @param extraTextPosx the x position of the extra text
 	//! @param extraTextPosy the y position of the extra text
-	LoadingBar(Projector* prj, float fontSize, const QString&  splashTex, 
-	           int screenw, int screenh, const QString& extraTextString="", 
+	LoadingBar(float fontSize, const QString&  splashTex, 
+	           const QString& extraTextString="", 
 	           float extraTextSize = 30.f, float extraTextPosx = 0.f, float extraTextPosy = 0.f);
 
 	virtual ~LoadingBar();
@@ -70,7 +70,6 @@ public:
 
 private:
 	QString message;
-	Projector* prj;
 	int splashx, splashy, barx, bary, width, height, barwidth, barheight;
 	SFont& barfont;
 	SFont& extraTextFont;

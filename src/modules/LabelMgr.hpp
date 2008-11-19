@@ -32,6 +32,7 @@
 
 class StelCore;
 class SFont;
+class StelPainter;
 
 // Base class from which other label types inherit
 class StelLabel
@@ -42,7 +43,7 @@ public:
 
 	//! draw the label on the sky
 	//! @param core the StelCore object
-	virtual bool draw(const StelCore* core) = 0;
+	virtual bool draw(StelCore* core, const StelPainter& sPainter) = 0;
 	//! update fade for on/off action
 	virtual void update(double deltaTime);
 	//! Set the duration used for the fade in / fade out of the label.
@@ -93,7 +94,7 @@ public:
 
 	//! draw the label on the sky
 	//! @param core the StelCore object
-	virtual bool draw(const StelCore* core);
+	virtual bool draw(StelCore* core, const StelPainter& sPainter);
 
 private:
 	StelObjectP labelObject;
@@ -120,7 +121,7 @@ public:
 
 	//! draw the label on the sky
 	//! @param core the StelCore object
-	virtual bool draw(const StelCore* core);
+	virtual bool draw(StelCore* core, const StelPainter& sPainter);
 
 private:
 	int screenX;
