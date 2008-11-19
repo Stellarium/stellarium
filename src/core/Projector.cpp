@@ -53,7 +53,7 @@ void Projector::init(const ProjectorParams& params)
 	flipVert = params.flipVert ? -1. : 1.;
 	viewportFovDiameter = params.viewportFovDiameter;
 	pixelPerRad = 0.5 * viewportFovDiameter / fovToViewScalingFactor(params.fov*(M_PI/360.0));
-	Q_ASSERT(params.fov<=getMaxFov());
+	//Q_ASSERT(params.fov<=getMaxFov());
 }
 
 

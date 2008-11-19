@@ -47,6 +47,11 @@ StelPainter::StelPainter(const ProjectorP& proj) : prj(proj)
 	Q_ASSERT(proj);
 	Q_ASSERT(globalMutex);
 	
+	if (glGetError()!=GL_NO_ERROR)
+	{
+		Q_ASSERT(0);
+	}
+	
 	// Lock the global nutex ensuring that no other instances of StelPainter are currently being used
 	if (globalMutex->tryLock()==false)
 	{
