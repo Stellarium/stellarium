@@ -30,23 +30,22 @@
 
 class SFont;
 
-//! @class Projector
-//! Provides functions for drawing operations.
+//! @class StelPainter
+//! Provides functions for performing openGL drawing operations.
+//! All coordinates are converted using the Projector instance passed at construction.
+//! Because openGL is not thread safe, only one instance of StelPainter can exist at a time, enforcing thread safety.
+//! As a coding rule, no openGL calls should be performed when no instance of StelPainter exist.
+//! Typical useag is to create a local instance of StelPainter where drawing operations are needed.
 class StelPainter
 {
 public:
 	
-	///////////////////////////////////////////////////////////////////////////
-	// Main constructor
 	StelPainter(const ProjectorP& prj);
 	~StelPainter();
 	
 	//! Return the instance of projector associated to this painter
 	const ProjectorP getProjector() const {return prj;}
 	
-	///////////////////////////////////////////////////////////////////////////
-	// Standard methods for drawing primitives in general (non-linear) mode
-	///////////////////////////////////////////////////////////////////////////
 	//! Fill with black around the viewport.
 	void drawViewportShape(void) const;
 	
@@ -179,10 +178,13 @@ private:
 	//! Init the real openGL Matrices to a 2d orthographic projection
 	void initGlMatrixOrtho2d(void) const;
 	
+	//! The assoaciated instance of projector
 	const ProjectorP prj;
 	
-	static bool flagGlPointSprite;        // Whether the GL_POINT_SPRITE extension is available and activated
+	//! Whether the GL_POINT_SPRITE extension is available and activated
+	static bool flagGlPointSprite;
 	
+	//! Mutex allowing thread safety
 	static class QMutex* globalMutex;
 };
 
