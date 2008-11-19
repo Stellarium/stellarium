@@ -19,7 +19,7 @@
 #include "StelCore.hpp"
 #include "Navigator.hpp"
 #include "Projector.hpp"
-#include "MappingClasses.hpp"
+#include "ProjectorClasses.hpp"
 #include "ToneReproducer.hpp"
 #include "SkyDrawer.hpp"
 #include "StelApp.hpp"

@@ -20,7 +20,7 @@
 #include "Translator.hpp"
 
 #include "Projector.hpp"
-#include "MappingClasses.hpp"
+#include "ProjectorClasses.hpp"
 
 
 #include <QDebug>
