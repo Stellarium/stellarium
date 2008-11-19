@@ -68,8 +68,6 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods which must be reimplemented by all instance of Projector
-	//! Get an ID matching the projection type to use for reference in config files
-	virtual QString getId() const = 0;
 	//! Get a human-readable name for this projection type
 	virtual QString getNameI18() const = 0;
 	//! Get a human-readable short description for this projection type
@@ -141,9 +139,6 @@ public:
 
 	//! Return a Halfspace containing the whole viewport
 	StelGeom::HalfSpace getBoundingHalfSpace() const;
-	
-	///////////////////////////////////////////////////////////////////////////
-	// Methods for controlling the PROJECTION matrix
 	
 	//! Get whether front faces need to be oriented in the clockwise direction
 	bool needGlFrontFaceCW(void) const {return (flipHorz*flipVert < 0.0);}
