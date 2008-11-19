@@ -11,8 +11,6 @@ SET(stellarium_lib_SRCS
 	core/GeodesicGrid.hpp
 	core/LoadingBar.cpp
 	core/LoadingBar.hpp
-	core/MappingClasses.cpp
-	core/MappingClasses.hpp
 	core/MovementMgr.cpp
 	core/MovementMgr.hpp
 	core/Navigator.cpp
@@ -25,6 +23,8 @@ SET(stellarium_lib_SRCS
 	core/LocationMgr.cpp
 	core/Projector.cpp
 	core/Projector.hpp
+	core/ProjectorClasses.cpp
+	core/ProjectorClasses.hpp
 	core/ProjectorType.hpp
 	core/SFont.cpp
 	core/SFont.hpp

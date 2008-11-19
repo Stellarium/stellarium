@@ -26,7 +26,6 @@ class ProjectorPerspective : public Projector
 {
 public:
 	ProjectorPerspective(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
-	virtual QString getId() const {return "perspective";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 120.;}
@@ -60,7 +59,6 @@ class ProjectorEqualArea : public Projector
 {
 public:
 	ProjectorEqualArea(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
-	virtual QString getId(void) const {return "equal_area";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 360.;}
@@ -83,7 +81,6 @@ class ProjectorStereographic : public Projector
 {
 public:
 	ProjectorStereographic(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
-	virtual QString getId(void) const {return "stereographic";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 235.;}
@@ -113,7 +110,6 @@ class ProjectorFisheye : public Projector
 {
 public:
 	ProjectorFisheye(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
-	virtual QString getId(void) const {return "fisheye";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 180.00001;}
@@ -149,7 +145,6 @@ class ProjectorCylinder : public Projector
 {
 public:
 	ProjectorCylinder(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
-	virtual QString getId(void) const {return "cylinder";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 175. * 4./3.;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
@@ -164,7 +159,6 @@ class ProjectorMercator : public Projector
 {
 public:
 	ProjectorMercator(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
-	virtual QString getId(void) const {return "mercator";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 175. * 4./3.;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
@@ -179,7 +173,6 @@ class ProjectorOrthographic : public Projector
 {
 public:
 	ProjectorOrthographic(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
-	virtual QString getId(void) const {return "orthographic";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 179.9999;}
@@ -194,7 +187,6 @@ class Projector2d : public Projector
 {
 public:
 	Projector2d() : Projector(Mat4d::identity()) {;}
-	virtual QString getId(void) const {return "2d";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 360.;}
