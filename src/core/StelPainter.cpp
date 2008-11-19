@@ -47,9 +47,11 @@ StelPainter::StelPainter(const ProjectorP& proj) : prj(proj)
 	Q_ASSERT(proj);
 	Q_ASSERT(globalMutex);
 	
-	if (glGetError()!=GL_NO_ERROR)
+	GLenum er = glGetError();
+	if (er!=GL_NO_ERROR)
 	{
-		Q_ASSERT(0);
+		if (er==GL_INVALID_OPERATION)
+			qFatal("Invalid openGL operation. It is likely that you used openGL calls without having a valid instance of StelPainter");
 	}
 	
 	// Lock the global nutex ensuring that no other instances of StelPainter are currently being used
@@ -57,6 +59,8 @@ StelPainter::StelPainter(const ProjectorP& proj) : prj(proj)
 	{
 		qFatal("There can be only 1 instance of StelPainter at a given time");
 	}
+	
+	//glEnd();	// Testing
 	
 	// Init GL viewport to current projector values
 	glViewport(prj->viewportXywh[0], prj->viewportXywh[1], prj->viewportXywh[2], prj->viewportXywh[3]);
@@ -77,6 +81,7 @@ StelPainter::StelPainter(const ProjectorP& proj) : prj(proj)
 StelPainter::~StelPainter()
 {
 	// We are done with this StelPainter
+	//glBegin(GL_POINTS); // Testing
 	globalMutex->unlock();
 }
 

@@ -56,13 +56,6 @@ void Projector::init(const ProjectorParams& params)
 	//Q_ASSERT(params.fov<=getMaxFov());
 }
 
-
-Projector::Projector(const Mat4d& modelViewMat) : modelViewMatrix(modelViewMat)
-{}
-
-Projector::~Projector()
-{}
-
 QString Projector::getHtmlSummary() const
 {
 	return QString("<h3>%1</h3><p>%2</p><b>%3</b>%4").arg(getNameI18()).arg(getDescriptionI18()).arg(q_("Maximum FOV: ")).arg(getMaxFov())+QChar(0x00B0);
