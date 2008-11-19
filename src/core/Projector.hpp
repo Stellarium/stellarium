@@ -85,8 +85,6 @@ public:
 	//! Convert a ViewScalingFactor value (used internally) in Field Of View radius in radians
 	virtual double viewScalingFactorToFov(double vsf) const = 0;
 	
-public:
-	
 	//! Get the current state of the flag which decides whether to 
 	//! arrage labels so that they are aligned with the bottom of a 2d 
 	//! screen, or a 3d dome.
@@ -95,14 +93,11 @@ public:
 	//! Get the lower left corner of the viewport and the width, height.
 	const Vector4<int>& getViewport(void) const {return viewportXywh;}
 
-	//! Get the center of the viewport relative to the lower left corner.
+	//! Get the center of the viewport relative to the lower left corner of the screen.
 	Vec2d getViewportCenter(void) const
 	{
 		return Vec2d(viewportCenter[0]-viewportXywh[0],viewportCenter[1]-viewportXywh[1]);
 	}
-
-	//! Get the diameter of the FOV disk in pixels
-	double getViewportFovDiameter(void) const {return viewportFovDiameter;}
 	
 	//! Get the horizontal viewport offset in pixels.
 	int getViewportPosX(void) const {return viewportXywh[0];}
@@ -112,9 +107,6 @@ public:
 	int getViewportWidth(void) const {return viewportXywh[2];}
 	//! Get the viewport height in pixels.
 	int getViewportHeight(void) const {return viewportXywh[3];}
-	
-	//! Get the maximum ratio between the viewport height and width
-	float getViewportRatio() const {return getViewportWidth()>getViewportHeight() ? getViewportWidth()/getViewportHeight() : getViewportHeight()/getViewportWidth();}
 	
 	//! Return a convex polygon on the sphere which includes the viewport in the current frame.
 	//! @param marginX an extra margin in pixel which extends the polygon size in the X direction
@@ -130,11 +122,11 @@ public:
 	//! Return a Halfspace containing the whole viewport
 	StelGeom::HalfSpace getBoundingHalfSpace() const;
 	
-	//! Get whether front faces need to be oriented in the clockwise direction
-	bool needGlFrontFaceCW(void) const {return (flipHorz*flipVert < 0.0);}
-	
 	//! Get size of a radian in pixels at the center of the viewport disk
 	double getPixelPerRadAtCenter(void) const {return pixelPerRad;}
+	
+	//! Get whether front faces need to be oriented in the clockwise direction
+	bool needGlFrontFaceCW(void) const {return (flipHorz*flipVert < 0.0);}
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Full projection methods
