@@ -22,13 +22,11 @@
 
 #include <QString>
 #include "StelObject.hpp"
-#include "Projector.hpp"
-#include "Navigator.hpp"
-#include "StelCore.hpp"
 #include "Translator.hpp"
 #include "STextureTypes.hpp"
 
 class SFont;
+class StelPainter;
 
 class Nebula : public StelObject
 {
@@ -90,8 +88,8 @@ private:
 
 	bool readNGC(char *record);
 	
-	void drawLabel(const StelCore* core, float maxMagLabel);
-	void drawHints(const StelCore* core, float maxMagHints);
+	void drawLabel(const StelCore* core, const StelPainter& sPainter, float maxMagLabel);
+	void drawHints(const StelPainter& sPainter, float maxMagHints);
     
 	unsigned int M_nb;              // Messier Catalog number
 	unsigned int NGC_nb;            // New General Catalog number

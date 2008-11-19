@@ -44,10 +44,10 @@ Vec3d StelObject::getEquinoxEquatorialPos(const Navigator* nav) const
 }
 
 // Return the radius of a circle containing the object on screen
-float StelObject::getOnScreenSize(const StelCore* core) const
-{
-	return getAngularSize(core)*M_PI/180.*core->getProjection()->getPixelPerRadAtCenter();
-}
+// float StelObject::getOnScreenSize(const StelCore* core, const ProjectorP& prj) const
+// {
+// 	return getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
+// }
 
 // Get observer local sideral coordinate
 Vec3d StelObject::getSideralPos(const StelCore* core) const

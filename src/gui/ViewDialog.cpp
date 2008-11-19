@@ -25,7 +25,6 @@
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelLocaleMgr.hpp"
-#include "Mapping.hpp"
 #include "Projector.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelModuleMgr.hpp"
@@ -281,20 +280,20 @@ void ViewDialog::populateLists()
 	l->blockSignals(false);
 	updateSkyCultureText();
 
+	const StelCore* core = StelApp::getInstance().getCore();
+	
 	// Fill the projection list
 	l = ui->projectionListWidget;
 	l->blockSignals(true);
 	l->clear();
-	const QMap<QString, const Mapping*>& mappings = StelApp::getInstance().getCore()->getProjection()->getAllMappings();
-	QMapIterator<QString, const Mapping*> i(mappings);
-	while (i.hasNext())
+	const QStringList mappings = core->getAllProjectionTypeKeys();
+	foreach (QString s, mappings)
 	{
-		i.next();
-		l->addItem(i.value()->getNameI18());
+		l->addItem(core->projectionTypeKeyToNameI18n(s));
 	}
-	l->setCurrentItem(l->findItems(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getNameI18(), Qt::MatchExactly).at(0));
+	l->setCurrentItem(l->findItems(core->projectionTypeKeyToNameI18n(core->getCurrentProjectionTypeKey()), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
-	ui->projectionTextBrowser->setHtml(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getHtmlSummary());
+	ui->projectionTextBrowser->setHtml(core->getProjection(Mat4d())->getHtmlSummary());
 
 	// Fill the landscape list
 	l = ui->landscapesListWidget;
@@ -350,20 +349,12 @@ void ViewDialog::updateSkyCultureText()
 	}
 }
 
-void ViewDialog::projectionChanged(const QString& projectionName)
+void ViewDialog::projectionChanged(const QString& projectionNameI18n)
 {
-	const QMap<QString, const Mapping*>& mappings = StelApp::getInstance().getCore()->getProjection()->getAllMappings();
-	QMapIterator<QString, const Mapping*> i(mappings);
-	while (i.hasNext())
-	{
-		i.next();
-		if (i.value()->getNameI18() == projectionName)
-			break;
-	}
-
-	StelApp::getInstance().getCore()->getProjection()->setCurrentMapping(i.value()->getId());
+	StelCore* core = StelApp::getInstance().getCore();
+	core->setCurrentProjectionTypeKey(core->projectionNameI18nToTypeKey(projectionNameI18n));
 	ui->projectionTextBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
-	ui->projectionTextBrowser->setHtml(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getHtmlSummary());
+	ui->projectionTextBrowser->setHtml(core->getProjection(Mat4d())->getHtmlSummary());
 }
 
 void ViewDialog::landscapeChanged(QListWidgetItem* item)

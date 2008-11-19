@@ -34,6 +34,7 @@ class Nebula;
 class Translator;
 class ToneReproducer;
 class QSettings;
+class StelPainter;
 
 //! @class NebulaMgr
 //! Manage a collection of nebulae. This class is used 
@@ -175,7 +176,7 @@ private:
 	StelObject* search(Vec3f Pos);    // Search the Nebulae by position	
 		
 	//! Draw a nice animated pointer around the object
-	void drawPointer(const StelCore* core);
+	void drawPointer(const StelCore* core, const StelPainter& sPainter);
 		
 	Nebula *searchM(unsigned int M);
 	Nebula *searchNGC(unsigned int NGC);

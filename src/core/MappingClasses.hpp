@@ -20,33 +20,50 @@
 #ifndef _MAPPINGCLASSES_HPP_
 #define _MAPPINGCLASSES_HPP_
 
-#include "Mapping.hpp"
+#include "Projector.hpp"
 
-class MappingPerspective : public Mapping
+class MappingPerspective : public Projector
 {
 public:
-	MappingPerspective(void);
+	MappingPerspective(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
 	virtual QString getId() const {return "perspective";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 120.;}
-private:
-	bool forward(Vec3d &win) const;
+	bool forward(Vec3d &v) const
+	{
+		const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+		if (v[2] < 0) {
+			v[0] /= (-v[2]);
+			v[1] /= (-v[2]);
+			v[2] = r;
+			return true;
+		}
+		if (v[2] > 0) {
+			v[0] /= v[2];
+			v[1] /= v[2];
+			v[2] = r;
+			return false;
+		}
+		v[0] *= 1e99;
+		v[1] *= 1e99;
+		v[2] = r;
+		return false;
+	}
 	bool backward(Vec3d &v) const;
 	double fovToViewScalingFactor(double fov) const;
 	double viewScalingFactorToFov(double vsf) const;
 	double deltaZoom(double fov) const;
 };
 
-class MappingEqualArea : public Mapping
+class MappingEqualArea : public Projector
 {
 public:
-    MappingEqualArea(void);
+	MappingEqualArea(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
 	virtual QString getId(void) const {return "equal_area";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 360.;}
-private:
 	bool forward(Vec3d &v) const
 	{
 		const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
@@ -62,15 +79,14 @@ private:
 	double deltaZoom(double fov) const;
 };
 
-class MappingStereographic : public Mapping
+class MappingStereographic : public Projector
 {
 public:
-	MappingStereographic(void);
+	MappingStereographic(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
 	virtual QString getId(void) const {return "stereographic";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 235.;}
-private:
 	bool forward(Vec3d &v) const
 	{
 		const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
@@ -93,15 +109,14 @@ private:
 	double deltaZoom(double fov) const;
 };
 
-class MappingFisheye : public Mapping
+class MappingFisheye : public Projector
 {
 public:
-	MappingFisheye(void);
+	MappingFisheye(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
 	virtual QString getId(void) const {return "fisheye";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 180.00001;}
-private:
 	bool forward(Vec3d &v) const
 	{
 		const double rq1 = v[0]*v[0] + v[1]*v[1];
@@ -130,15 +145,14 @@ private:
 	double deltaZoom(double fov) const;
 };
 
-class MappingCylinder : public Mapping
+class MappingCylinder : public Projector
 {
 public:
-	MappingCylinder(void);
+	MappingCylinder(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
 	virtual QString getId(void) const {return "cylinder";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 175. * 4./3.;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
-private:
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
 	double fovToViewScalingFactor(double fov) const;
@@ -146,15 +160,14 @@ private:
 	double deltaZoom(double fov) const;
 };
 
-class MappingMercator : public Mapping
+class MappingMercator : public Projector
 {
 public:
-	MappingMercator(void);
+	MappingMercator(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
 	virtual QString getId(void) const {return "mercator";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 175. * 4./3.;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
-private:
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
 	double fovToViewScalingFactor(double fov) const;
@@ -162,15 +175,29 @@ private:
 	double deltaZoom(double fov) const;
 };
 
-class MappingOrthographic : public Mapping
+class MappingOrthographic : public Projector
 {
 public:
-	MappingOrthographic(void);
+	MappingOrthographic(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
 	virtual QString getId(void) const {return "orthographic";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 179.9999;}
-private:
+	bool forward(Vec3d &win) const;
+	bool backward(Vec3d &v) const;
+	double fovToViewScalingFactor(double fov) const;
+	double viewScalingFactorToFov(double vsf) const;
+	double deltaZoom(double fov) const;
+};
+
+class Mapping2d : public Projector
+{
+public:
+	Mapping2d() : Projector(Mat4d::identity()) {;}
+	virtual QString getId(void) const {return "2d";}
+	virtual QString getNameI18() const;
+	virtual QString getDescriptionI18() const;
+	virtual double getMaxFov() const {return 360.;}
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
 	double fovToViewScalingFactor(double fov) const;

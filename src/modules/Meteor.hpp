@@ -20,9 +20,9 @@
 #ifndef _METEOR_HPP_
 #define _METEOR_HPP_
 
-#include "Projector.hpp"
-#include "Navigator.hpp"
-#include "ToneReproducer.hpp"
+#include "vecmath.h"
+class StelCore;
+class StelPainter;
 
 // all in km - altitudes make up meteor range
 #define EARTH_RADIUS 6369.f
@@ -40,11 +40,8 @@ class Meteor
 {
 public:
 	//! Create a Meteor object.
-	//! @param proj the Projector.
-	//! @param nav the Navigator.
-	//! @param eye the ToneProducer object.
 	//! @param v the velocity of the meteor in km/s.
-	Meteor( Projector *proj, Navigator *nav, ToneReproducer* eye, double v);
+	Meteor(const StelCore*, double v);
 	virtual ~Meteor();
 	
 	//! Updates the position of the meteor, and expires it if necessary.
@@ -52,7 +49,7 @@ public:
 	bool update(double deltaTime);
 	
 	//! Draws the meteor.
-	bool draw(Projector *proj, const Navigator* nav);
+	bool draw(const StelCore* core, const StelPainter& sPainter);
 	
 	//! Determine if a meteor is alive or has burned out.
 	//! @return true if alive, else false.

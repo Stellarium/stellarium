@@ -28,6 +28,8 @@
 #include "StelTextureMgr.hpp"
 #include "StelCore.hpp"
 #include "SkyDrawer.hpp"
+#include "StelPainter.hpp"
+
 #include <QDebug>
 #include <QSettings>
 
@@ -68,7 +70,10 @@ bool MilkyWay::getFlagShow(void) const {return *fader;}
 void MilkyWay::draw(StelCore* core)
 {
 	Navigator* nav = core->getNavigation();
-	Projector* prj = core->getProjection();
+	const ProjectorP prj = core->getProjection(nav->getJ2000ModelViewMat()*
+			Mat4d::xrotation(M_PI/180*23)*
+			Mat4d::yrotation(M_PI/180*120)*
+			Mat4d::zrotation(M_PI/180*7));
 	ToneReproducer* eye = core->getToneReproducer();
 	
 	Q_ASSERT(tex);	// A texture must be loaded before calling this
@@ -94,17 +99,13 @@ void MilkyWay::draw(StelCore* core)
 	if (c[0]<0) c[0]=0;
 	if (c[1]<0) c[1]=0;
 	if (c[2]<0) c[2]=0;
+	
+	StelPainter sPainter(prj);
 	glColor3fv(c);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
 	tex->bind();
-
-	prj->setModelViewMatrix(nav->getJ2000ModelViewMat()*
-		     Mat4d::xrotation(M_PI/180*23)*
-		     Mat4d::yrotation(M_PI/180*120)*
-		     Mat4d::zrotation(M_PI/180*7));
-	prj->sSphere(radius,1.0,20,20,1);
-
+	sPainter.sSphere(radius,1.0,20,20,1);
 	glDisable(GL_CULL_FACE);
 }

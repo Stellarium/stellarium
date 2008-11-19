@@ -134,7 +134,19 @@ public slots:
 	//! @param aimFov The desired field of view in degrees.
 	//! @param moveDuration The time that the operation should take to complete.
 	void zoomTo(double aimFov, float moveDuration = 1.);
-
+	//! Get the current Field Of View in degrees
+	double getCurrentFov() const {return currentFov;}
+	
+	//! Return the initial default FOV in degree.
+	double getInitFov() const {return initFov;}
+	//! Set the initial Field Of View in degree.
+	void setInitFov(double fov) {initFov=fov;}
+	
+	//! Set the maximum field of View in degrees.
+	void setMaxFov(double max);
+	//! Get the maximum field of View in degrees.
+	double getMaxFov(void) const {return maxFov;}
+	
 	//! Go and zoom to the selected object. A later call to autoZoomOut will come back to the previous zoom level.
 	void autoZoomIn(float moveDuration = 1.f, bool allowManualZoom = 1);
 	//! Unzoom to the previous position.
@@ -152,7 +164,19 @@ public slots:
 	void zoomOut(bool);
 	
 private:
+	double currentFov;	// The current FOV in degree
+	double initFov;		// The FOV at startup
+	double minFov;		// Minimum FOV in degree
+ 	double maxFov;		// Maximum FOV in degree
 	
+	void setFov(double f)
+	{
+		currentFov = f;
+		if (f>maxFov)
+			currentFov = maxFov;
+		if (f<minFov)
+			currentFov = minFov;
+	}
 	void changeFov(double deltaFov);
 	   
 	void updateVisionVector(double deltaTime); 

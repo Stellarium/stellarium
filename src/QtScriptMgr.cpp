@@ -362,14 +362,8 @@ void StelMainScriptAPI::clear(const QString& state)
 	Q_ASSERT(nmgr);
 	GridLinesMgr* glmgr = (GridLinesMgr*)GETSTELMODULE("GridLinesMgr");
 	Q_ASSERT(glmgr);
-	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
-	Q_ASSERT(gui);
-	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
-	Q_ASSERT(mvmgr);
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 	Q_ASSERT(nav);
-	const Projector* proj = StelApp::getInstance().getCore()->getProjection();
-	Q_ASSERT(proj);
 
 	if (state == "natural")
 	{

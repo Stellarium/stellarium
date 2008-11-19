@@ -769,7 +769,7 @@ template<class T> Matrix4<T>::Matrix4()
 
 template<class T> Matrix4<T>::Matrix4(const Matrix4<T>& m)
 {
-	memcpy(r,m.r,sizeof(m.r));
+	memcpy(r,m.r,sizeof(T)*16);
 }
 
 template<class T> Matrix4<T>::Matrix4(const T* m)
@@ -779,7 +779,7 @@ template<class T> Matrix4<T>::Matrix4(const T* m)
 
 template<class T> Matrix4<T>& Matrix4<T>::operator=(const Matrix4<T>& m)
 {
-	memcpy(r,m.r,sizeof(m.r));
+	memcpy(r,m.r,sizeof(T)*16);
 	return (*this);
 }
 

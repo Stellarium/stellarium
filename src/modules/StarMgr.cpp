@@ -53,6 +53,7 @@
 #include "StelCore.hpp"
 #include "StelIniParser.hpp"
 #include "StelStyle.hpp"
+#include "StelPainter.hpp"
 
 #include "ZoneArray.hpp"
 
@@ -202,7 +203,7 @@ void StarMgr::setGrid(GeodesicGrid* geodesicGrid) {
 }
 
 
-void StarMgr::drawPointer(const Projector* prj, const Navigator * nav)
+void StarMgr::drawPointer(const ProjectorP& prj, const Navigator * nav)
 {
 	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Star");
 	if (!newSelected.empty())
@@ -211,15 +212,17 @@ void StarMgr::drawPointer(const Projector* prj, const Navigator * nav)
 		Vec3d pos=obj->getJ2000EquatorialPos(nav);
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!prj->project(pos, screenpos)) return;
+		if (!prj->project(pos, screenpos))
+			return;
 	
+		StelPainter sPainter(prj);
 		glColor3fv(obj->getInfoColor());
 		float diameter = 26.f;
 		texPointer->bind();
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-        prj->drawSprite2dMode(screenpos[0], screenpos[1], diameter, StelApp::getInstance().getTotalRunTime()*40.);
+		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], diameter, StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
 
@@ -533,7 +536,7 @@ int StarMgr::getMaxSearchLevel() const
 void StarMgr::draw(StelCore* core)
 {
 	Navigator* nav = core->getNavigation();
-	Projector* prj = core->getProjection();
+	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	SkyDrawer* skyDrawer = core->getSkyDrawer();
 	
     currentJDay = nav->getJDay();
@@ -548,11 +551,11 @@ void StarMgr::draw(StelCore* core)
 
     // Set temporary static variable for optimization
     const float names_brightness = labelsFader.getInterstate() * starsFader.getInterstate();
-    
-    core->setCurrentFrame(StelCore::FrameJ2000);
 
 	// Prepare openGL for drawing many stars
-	skyDrawer->preDrawPointSource();
+	StelPainter* sPainter = new StelPainter(prj);
+	skyDrawer->preDrawPointSource(sPainter);
+	Q_ASSERT(sPainter);
 
     // draw all the stars of all the selected zones
     float rcmag_table[2*256];
@@ -597,6 +600,9 @@ void StarMgr::draw(StelCore* core)
     exit_loop:
 	// Finish drawing many stars
 	skyDrawer->postDrawPointSource();
+	
+	delete sPainter;
+	sPainter = NULL;
 	
 	drawPointer(prj, nav);
 }

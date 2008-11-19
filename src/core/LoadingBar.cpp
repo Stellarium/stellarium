@@ -25,17 +25,23 @@
 #include "StelLocaleMgr.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "SFont.hpp"
+#include "StelPainter.hpp"
+#include "StelCore.hpp"
+
 #include <QGLWidget>
 #include <QDebug>
 
-LoadingBar::LoadingBar(Projector* _prj, float fontSize, const QString&  splashTex, 
-	int screenw, int screenh, const QString& extraTextString, float extraTextSize, 
+LoadingBar::LoadingBar(float fontSize, const QString&  splashTex, 
+	const QString& extraTextString, float extraTextSize, 
 	float extraTextPosx, float extraTextPosy) :
-	prj(_prj), width(512), height(512), barwidth(400), barheight(10),
+	width(512), height(512), barwidth(400), barheight(10),
 barfont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)),
 extraTextFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), extraTextSize)),
 			  extraText(extraTextString)
 {
+	const ProjectorP prj = StelApp::getInstance().getCore()->getProjection2d();
+	int screenw = prj->getViewportWidth();
+	int screenh = prj->getViewportHeight();
 	splashx = prj->getViewportPosX() + (screenw - width)/2;
 	splashy = prj->getViewportPosY() + (screenh - height)/2;
 	barx = prj->getViewportPosX() + (screenw - barwidth)/2;
@@ -61,6 +67,8 @@ void LoadingBar::Draw(float val)
 	if (val>1.)
 		val = 1.;
   
+	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
+
 	// Draw the splash screen if available
 	if (splash)
 	{
@@ -73,13 +81,13 @@ void LoadingBar::Draw(float val)
 
 		glBegin(GL_QUADS);
 			glTexCoord2i(0, 0);		// Bottom Left
-			glVertex3f(splashx, splashy, 0.0f);
+			glVertex2f(splashx, splashy);
 			glTexCoord2i(1, 0);		// Bottom Right
-			glVertex3f(splashx + width, splashy, 0.0f);
+			glVertex2f(splashx + width, splashy);
 			glTexCoord2i(1, 1);		// Top Right
-			glVertex3f(splashx + width, splashy + height, 0.0f);
+			glVertex2f(splashx + width, splashy + height);
 			glTexCoord2i(0, 1);		// Top Left
-			glVertex3f(splashx, splashy + height, 0.0f);
+			glVertex2f(splashx, splashy + height);
 		glEnd();
 	}
 	glDisable(GL_BLEND);
@@ -110,8 +118,8 @@ void LoadingBar::Draw(float val)
 	
 	glColor3f(1, 1, 1);
 	glEnable(GL_TEXTURE_2D);
-	prj->drawText(&barfont, barx, bary-barfont.getLineHeight()-1, message);
-	prj->drawText(&extraTextFont, splashx + extraTextPos[0], splashy + extraTextPos[1]-extraTextFont.getLineHeight()-1, extraText);
+	sPainter.drawText(&barfont, barx, bary-barfont.getLineHeight()-1, message);
+	sPainter.drawText(&extraTextFont, splashx + extraTextPos[0], splashy + extraTextPos[1]-extraTextFont.getLineHeight()-1, extraText);
 	
 	StelMainGraphicsView::getInstance().getOpenGLWin()->swapBuffers();	// And swap the buffers
 	glClear(GL_COLOR_BUFFER_BIT);

@@ -42,7 +42,7 @@ void GeodesicGridDrawer::init()
 
 double GeodesicGridDrawer::draw(StelCore* core, int maxSearchLevel)
 {
-	Projector* prj = core->getProjection();
+	const ProjectorP prj = core->getProjection();
 	GeodesicGrid* geodesicGrid = core->getGeodesicGrid();
 
 	const GeodesicSearchResult* geodesic_search_result = geodesicGrid->search(prj->unprojectViewport(), maxSearchLevel);
