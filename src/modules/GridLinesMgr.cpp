@@ -254,7 +254,7 @@ void SkyGrid::draw(const StelCore* core) const
 	Mat4d rotLon = Mat4d::rotation(Vec3d(0,0,1), gridStepMeridianRad);
 	Vec3d fpt = firstPoint;
 	Vec3d p1, p2;
-	int maxNbIter = M_PI/gridStepMeridianRad;
+	int maxNbIter = (int)(M_PI/gridStepMeridianRad);
 	int i;
 	for (i=0; i<maxNbIter; ++i)
 	{
@@ -335,7 +335,7 @@ void SkyGrid::draw(const StelCore* core) const
 	StelGeom::HalfSpace parallelHalfSpace(Vec3d(0,0,1), 0);
 	rotLon = Mat4d::rotation(firstPoint^Vec3d(0,0,1), gridStepParallelRad);
 	fpt = firstPoint;
-	maxNbIter = M_PI/gridStepParallelRad-1;
+	maxNbIter = (int)(M_PI/gridStepParallelRad)-1;
 	for (i=0; i<maxNbIter; ++i)
 	{
 		StelUtils::rectToSphe(&lon1, &lat1, fpt);
