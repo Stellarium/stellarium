@@ -181,12 +181,14 @@ StelGeom::HalfSpace Projector::getBoundingHalfSpace() const
 	Q_ASSERT(ok);	// The central point should be at a valid position by definition
 	
 	// Now need to determine the aperture
-	Vec3d e0,e1,e2,e3;
+	Vec3d e0,e1,e2,e3,e4,e5;
 	const Vec4i& vp = viewportXywh;
 	ok &= unProject(vp[0],vp[1],e0);
 	ok &= unProject(vp[0]+vp[2],vp[1],e1);
 	ok &= unProject(vp[0]+vp[2],vp[1]+vp[3],e2);
 	ok &= unProject(vp[0],vp[1]+vp[3],e3);
+	ok &= unProject(vp[0],vp[1]+vp[3]/2,e4);
+	ok &= unProject(vp[0]+vp[2],vp[1]+vp[3]/2,e5);
 	if (!ok)
 	{
 		// Some points were in invalid positions
@@ -203,7 +205,12 @@ StelGeom::HalfSpace Projector::getBoundingHalfSpace() const
 	h = result.n*e3;
 	if (result.d > h)
 		result.d=h;
-	
+	h = result.n*e4;
+	if (result.d > h)
+		result.d=h;
+	h = result.n*e5;
+	if (result.d > h)
+		result.d=h;
 	return result;
 }
 
