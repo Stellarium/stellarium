@@ -208,7 +208,7 @@ bool ProjectorCylinder::forward(Vec3d &v) const
 
 bool ProjectorCylinder::backward(Vec3d &v) const
 {
-	const bool rval = !(v[1]>M_PI_2 || v[1]<-M_PI_2);
+	const bool rval = v[1]<M_PI_2 && v[1]>-M_PI_2;
 	const double cd = std::cos(v[1]);
 	v[2] = - cd * std::cos(v[0]);
 	v[0] = cd * std::sin(v[0]);
