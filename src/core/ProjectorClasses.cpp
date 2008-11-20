@@ -208,11 +208,12 @@ bool ProjectorCylinder::forward(Vec3d &v) const
 
 bool ProjectorCylinder::backward(Vec3d &v) const
 {
+	const bool rval = !(v[1]>M_PI_2 || v[1]<-M_PI_2);
 	const double cd = std::cos(v[1]);
 	v[2] = - cd * std::cos(v[0]);
 	v[0] = cd * std::sin(v[0]);
 	v[1] = std::sin(v[1]);
-	return true;
+	return rval;
 }
 
 double ProjectorCylinder::fovToViewScalingFactor(double fov) const
@@ -256,6 +257,7 @@ bool ProjectorMercator::forward(Vec3d &v) const
 
 bool ProjectorMercator::backward(Vec3d &v) const
 {
+	const bool rval = !(v[1]>M_PI_2 || v[1]<-M_PI_2);
 	const double E = std::exp(v[1]);
 	const double h = E*E;
 	const double h1 = 1.0/(1.0+h);
@@ -264,7 +266,7 @@ bool ProjectorMercator::backward(Vec3d &v) const
 	v[2] = - cos_delta * std::cos(v[0]);
 	v[0] = cos_delta * std::sin(v[0]);
 	v[1] = sin_delta;
-	return true;
+	return rval;
 }
 
 double ProjectorMercator::fovToViewScalingFactor(double fov) const

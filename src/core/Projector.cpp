@@ -45,7 +45,7 @@ void Projector::init(const ProjectorParams& params)
 {
 	maskType = (ProjectorMaskType)params.maskType;
 	zNear = params.zNear;
-	zFar = params.zFar;
+	oneOverZNearMinusZFar = 1./(zNear-params.zFar);
 	viewportXywh = params.viewportXywh;
 	viewportCenter = params.viewportCenter;
 	gravityLabels = params.gravityLabels;
@@ -150,11 +150,14 @@ StelGeom::ConvexS Projector::unprojectViewport(void) const
 				{
 					double d = middle*e0;
 					double h = middle*e1;
-					if (d > h) d = h;
+					if (d > h)
+						d = h;
 					h = middle*e2;
-					if (d > h) d = h;
+					if (d > h)
+						d = h;
 					h = middle*e3;
-					if (d > h) d = h;
+					if (d > h)
+						d = h;
 					StelGeom::ConvexS rval(1);
 					rval[0].n = middle;
 					rval[0].d = d;
@@ -172,9 +175,36 @@ StelGeom::ConvexS Projector::unprojectViewport(void) const
 // Return a Halfspace containing the whole viewport
 StelGeom::HalfSpace Projector::getBoundingHalfSpace() const
 {
-	// TODO
-	Q_ASSERT(0);
-	return StelGeom::HalfSpace();
+	StelGeom::HalfSpace result;
+	
+	bool ok = unProject(viewportXywh[0]+0.5*viewportXywh[2], viewportXywh[1]+0.5*viewportXywh[3], result.n);
+	Q_ASSERT(ok);	// The central point should be at a valid position by definition
+	
+	// Now need to determine the aperture
+	Vec3d e0,e1,e2,e3;
+	const Vec4i& vp = viewportXywh;
+	ok &= unProject(vp[0],vp[1],e0);
+	ok &= unProject(vp[0]+vp[2],vp[1],e1);
+	ok &= unProject(vp[0]+vp[2],vp[1]+vp[3],e2);
+	ok &= unProject(vp[0],vp[1]+vp[3],e3);
+	if (!ok)
+	{
+		// Some points were in invalid positions
+		result.d = -1.;
+		return result;
+	}
+	result.d = result.n*e0;
+	double h = result.n*e1;
+	if (result.d > h)
+		result.d=h;
+	h = result.n*e2;
+	if (result.d > h)
+		result.d=h;
+	h = result.n*e3;
+	if (result.d > h)
+		result.d=h;
+	
+	return result;
 }
 
 /*************************************************************************
@@ -186,11 +216,13 @@ bool Projector::unProject(double x, double y, Vec3d &v) const
 	v[1] = flipVert * (y - viewportCenter[1]) / pixelPerRad;
 	v[2] = 0;
 	const bool rval = backward(v);
-	  // Even when the reprojected point comes from an region of the screen,
-	  // where nothing is projected to (rval=false), we finish reprojecting.
-	  // This looks good for atmosphere rendering, and it helps avoiding
-	  // discontinuities when dragging around with the mouse.
+	// Even when the reprojected point comes from a region of the screen,
+	// where nothing is projected to (rval=false), we finish reprojecting.
+	// This looks good for atmosphere rendering, and it helps avoiding
+	// discontinuities when dragging around with the mouse.
 
+	// We need no matrix inversion because we always work with orthogonal matrices (where the transposed is the inverse).
+	//v.transfo4d(inverseModelViewMatrix);
 	x = v[0] - modelViewMatrix.r[12];
 	y = v[1] - modelViewMatrix.r[13];
 	const double z = v[2] - modelViewMatrix.r[14];
@@ -198,9 +230,5 @@ bool Projector::unProject(double x, double y, Vec3d &v) const
 	v[1] = modelViewMatrix.r[4]*x + modelViewMatrix.r[5]*y + modelViewMatrix.r[6]*z;
 	v[2] = modelViewMatrix.r[8]*x + modelViewMatrix.r[9]*y + modelViewMatrix.r[10]*z;
 
-// Johannes: Get rid of the inverseModelViewMatrix.
-// We need no matrix inversion because we always work with orthogonal matrices
-// (where the transposed is the inverse).
-//	v.transfo4d(inverseModelViewMatrix);
 	return rval;
 }
