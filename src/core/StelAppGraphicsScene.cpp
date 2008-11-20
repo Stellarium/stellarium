@@ -92,7 +92,7 @@ void StelAppGraphicsScene::switchToNativeOpenGLPainting()
 	glDisable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glDisable(GL_LIGHTING);
-	glDisable(GL_MULTISAMPLE);
+	//glDisable(GL_MULTISAMPLE);
 	glDisable(GL_DITHER);
 	glDisable(GL_ALPHA_TEST);
 }
