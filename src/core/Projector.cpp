@@ -84,7 +84,7 @@ StelGeom::ConvexPolygon Projector::getViewportConvexPolygon(double marginX, doub
 // Last not least all halfplanes n*x>d really should have d<=0 or at least very small d/n.length().
 StelGeom::ConvexS Projector::unprojectViewport(void) const
 {
-	double fov = 360./M_PI*viewScalingFactorToFov(0.5*viewportFovDiameter/pixelPerRad);
+	double fov = getFov();
 	if ((dynamic_cast<const ProjectorCylinder*>(this) == 0 || fov < 90) && fov < 360.0)
 	{
 		Vec3d e0,e1,e2,e3;

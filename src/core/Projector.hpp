@@ -125,6 +125,9 @@ public:
 	//! Get size of a radian in pixels at the center of the viewport disk
 	double getPixelPerRadAtCenter(void) const {return pixelPerRad;}
 	
+	//! Get the current FOV diameter in degree
+	double getFov() const {return 360./M_PI*viewScalingFactorToFov(0.5*viewportFovDiameter/pixelPerRad);}
+	
 	//! Get whether front faces need to be oriented in the clockwise direction
 	bool needGlFrontFaceCW(void) const {return (flipHorz*flipVert < 0.0);}
 	
