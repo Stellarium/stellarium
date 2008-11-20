@@ -208,10 +208,8 @@ void SkyGrid::draw(const StelCore* core) const
 		: getClosestResolutionHMS(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0)));
 	const double gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : closetResLon);
 	
-	// Temp, move this projector
-	StelUtils::spheToRect(lon0, lat0, centerV);
-	centerV.normalize();
-	StelGeom::Disk viewPortHalfSpace(centerV, 1.6*core->getMovementMgr()->getCurrentFov()/2.*M_PI/180.);
+	// Get the bounding halfspace
+	const StelGeom::HalfSpace viewPortHalfSpace = prj->getBoundingHalfSpace();
 	
 	// Compute the first grid starting point. This point is close to the center of the screen
 	// and lays at the intersection of a meridien and a parallel
