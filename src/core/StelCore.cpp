@@ -42,6 +42,30 @@
 StelCore::StelCore() : currentProjectionType(ProjectionStereographic)
 {
 	toneConverter = new ToneReproducer();
+	movementMgr = new MovementMgr(this);
+	movementMgr->init();
+	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);	
+	
+	QSettings* conf = StelApp::getInstance().getSettings();
+	// Create and initialize the default projector params
+	QString tmpstr = conf->value("projection/viewport").toString();
+	currentProjectorParams.maskType = Projector::stringToMaskType(tmpstr);
+	const int viewport_width = conf->value("projection/viewport_width", currentProjectorParams.viewportXywh[2]).toInt();
+	const int viewport_height = conf->value("projection/viewport_height", currentProjectorParams.viewportXywh[3]).toInt();
+	const int viewport_x = conf->value("projection/viewport_x", 0).toInt();
+	const int viewport_y = conf->value("projection/viewport_y", 0).toInt();
+	currentProjectorParams.viewportXywh.set(viewport_x,viewport_y,viewport_width,viewport_height);
+	
+	const double viewportCenterX = conf->value("projection/viewport_center_x",0.5*viewport_width).toDouble();
+	const double viewportCenterY = conf->value("projection/viewport_center_y",0.5*viewport_height).toDouble();
+	currentProjectorParams.viewportCenter.set(viewportCenterX, viewportCenterY);
+	currentProjectorParams.viewportFovDiameter = conf->value("projection/viewport_fov_diameter", qMin(viewport_width,viewport_height)).toDouble();
+	currentProjectorParams.fov = movementMgr->getInitFov();
+	
+	currentProjectorParams.flipHorz = conf->value("projection/flip_horz",false).toBool();
+	currentProjectorParams.flipVert = conf->value("projection/flip_vert",false).toBool();
+	
+	currentProjectorParams.gravityLabels = conf->value("viewing/flag_gravity_labels").toBool();
 }
 
 
@@ -68,10 +92,6 @@ void StelCore::init()
 	// Navigator
 	navigation = new Navigator();
 	navigation->init();
-	
-	movementMgr = new MovementMgr(this);
-	movementMgr->init();
-	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);	
 	
 	QString tmpstr = conf->value("projection/type", "stereographic").toString();
 	setCurrentProjectionTypeKey(tmpstr);
@@ -106,26 +126,6 @@ void StelCore::init()
 // 		overwrite_max_fov = 180.0;
 // 	if (overwrite_max_fov > 0.0)
 // 		MappingOrthographic::getMapping()->maxFov = overwrite_max_fov;
-	
-	// Create and initialize the default projector params
-	tmpstr = conf->value("projection/viewport").toString();
-	currentProjectorParams.maskType = Projector::stringToMaskType(tmpstr);
-	const int viewport_width = conf->value("projection/viewport_width", currentProjectorParams.viewportXywh[2]).toInt();
-	const int viewport_height = conf->value("projection/viewport_height", currentProjectorParams.viewportXywh[3]).toInt();
-	const int viewport_x = conf->value("projection/viewport_x", 0).toInt();
-	const int viewport_y = conf->value("projection/viewport_y", 0).toInt();
-	currentProjectorParams.viewportXywh.set(viewport_x,viewport_y,viewport_width,viewport_height);
-	
-	const double viewportCenterX = conf->value("projection/viewport_center_x",0.5*viewport_width).toDouble();
-	const double viewportCenterY = conf->value("projection/viewport_center_y",0.5*viewport_height).toDouble();
-	currentProjectorParams.viewportCenter.set(viewportCenterX, viewportCenterY);
-	currentProjectorParams.viewportFovDiameter = conf->value("projection/viewport_fov_diameter", qMin(viewport_width,viewport_height)).toDouble();
-	currentProjectorParams.fov = movementMgr->getInitFov();
-	
-	currentProjectorParams.flipHorz = conf->value("projection/flip_horz",false).toBool();
-	currentProjectorParams.flipVert = conf->value("projection/flip_vert",false).toBool();
-	
-	currentProjectorParams.gravityLabels = conf->value("viewing/flag_gravity_labels").toBool();
 	
 	StarMgr* hip_stars = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("StarMgr");
 	int grid_level = hip_stars->getMaxGridLevel();
