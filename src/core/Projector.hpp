@@ -48,6 +48,7 @@ public:
 	//! Contains all the param needed to initialize a Projector
 	struct ProjectorParams
 	{
+		ProjectorParams() : fov(60.), gravityLabels(false), maskType(MaskNone), flipHorz(false), flipVert(false) {;}
 		Vector4<int> viewportXywh;     //! posX, posY, width, height
 		double fov;                    //! FOV in degrees
 		bool gravityLabels;            //! the flag to use gravity labels or not
