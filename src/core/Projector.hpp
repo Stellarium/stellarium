@@ -176,7 +176,7 @@ public:
 		// polygons by culling.
 		win[0] = viewportCenter[0] + flipHorz * pixelPerRad * win[0];
 		win[1] = viewportCenter[1] + flipVert * pixelPerRad * win[1];
-		win[2] = (win[2] - zNear) / (zNear - zFar);
+		win[2] = (win[2] - zNear) * oneOverZNearMinusZFar;
 		return rval;
 	}
 
@@ -223,7 +223,7 @@ private:
 	void init(const ProjectorParams& param);
 	
 	ProjectorMaskType maskType;    // The current projector mask
-	double zNear, zFar;            // Near and far clipping planes
+	double zNear, oneOverZNearMinusZFar;  // Near and far clipping planes
 	Vector4<int> viewportXywh;     // Viewport parameters
 	Vec2d viewportCenter;          // Viewport center in screen pixel
 	double viewportFovDiameter;    // diameter of the FOV disk in pixel
