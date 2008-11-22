@@ -153,6 +153,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableMoveKeys(bool)));
 	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableZoomKeys(bool)));
 	connect(ui->enableMouseNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableMouseNavigation(bool)));
+	connect(ui->fixedDateTimeCurrentButton, SIGNAL(clicked()), this, SLOT(setFixedDateTimeToCurrent()));
 	
 	// Tools tab
 	ui->sphericMirrorCheckbox->setChecked(StelAppGraphicsScene::getInstance().getViewPortDistorterType() == "fisheye_to_spheric_mirror");
@@ -695,6 +696,13 @@ void ConfigurationDialog::downloadStars(void)
 	setUpdatesState(ConfigurationDialog::Downloading);
 }
 
+void ConfigurationDialog::setFixedDateTimeToCurrent(void)
+{
+	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(StelApp::getInstance().getCore()->getNavigation()->getJDay()));
+	ui->fixedTimeRadio->setChecked(true);
+	setStartupTimeMode();
+}
+
 Downloader::~Downloader()
 {
 	if(reply)
@@ -785,3 +793,5 @@ void Downloader::err(QNetworkReply::NetworkError code)
 	if(code != QNetworkReply::OperationCanceledError)
 		emit error(code, reply->errorString());
 }
+
+

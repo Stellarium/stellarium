@@ -1,0 +1,49 @@
+// Name: Sky Image load test script
+// License: Public Domain
+// Author: Matthew Gates
+// Description: This script demonstrates adding and manipulating sky images
+//
+
+core.clear("StarChart");
+core.selectObjectByName("M31", false);
+MovementMgr.setFlagTracking(true);
+MovementMgr.zoomTo(2,1);
+core.wait(2);
+
+core.loadSkyImage("logo1", "../textures/logo24bits.png", 41, 11.5, 41.17, 11.5, 41.17, 11.75, 41, 11.75);
+core.wait(1);
+core.loadSkyImage("logo2", "../textures/logo24bits.png", 41.2, 11.5, 41.37, 11.5, 41.37, 11.75, 41.2, 11.75);
+core.wait(1);
+core.loadSkyImage("logo3", "../textures/logo24bits.png", 41.4, 11.5, 41.57, 11.5, 41.57, 11.75, 41.4, 11.75);
+core.wait(1);
+
+for(i=0; i<15; i++)
+{
+	core.wait(0.1);
+	if (i%3==0) { 
+		SkyImageMgr.showImage("logo1", true); 
+		SkyImageMgr.showImage("logo2", false); 
+		SkyImageMgr.showImage("logo3", false); 
+	}
+	else if ((i+1)%3==0) {
+		SkyImageMgr.showImage("logo1", false); 
+		SkyImageMgr.showImage("logo2", true); 
+		SkyImageMgr.showImage("logo3", false); 
+	}
+	else if ((i+2)%3==0) {
+		SkyImageMgr.showImage("logo1", false); 
+		SkyImageMgr.showImage("logo2", false); 
+		SkyImageMgr.showImage("logo3", true); 
+	}
+}
+
+SkyImageMgr.showImage("logo1", true); 
+SkyImageMgr.showImage("logo2", true); 
+SkyImageMgr.showImage("logo3", true); 
+core.wait(1);
+core.removeSkyImage("logo1");
+core.wait(1);
+core.removeSkyImage("logo2");
+core.wait(1);
+core.removeSkyImage("logo3");
+core.wait(1);

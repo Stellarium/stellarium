@@ -32,6 +32,8 @@
 #include <QDebug>
 #include <QString>
 #include <QProgressBar>
+#include <QVariantMap>
+#include <QVariantList>
 
 SkyImageMgr::SkyImageMgr(void) : flagShow(true)
 {
@@ -65,6 +67,7 @@ void SkyImageMgr::init()
 	{
 		qWarning() << "ERROR while loading nebula texture set " << "default" << ": " << e.what();
 	}
+	// loadSkyImage("dobbs", "./scripts/dobbs.png", 11.5, 41, 11.5, 41.17, 11.75, 41.17, 11.75, 41, 2.5, 14, true);
 }
 
 QString SkyImageMgr::insertSkyImage(SkyImageTile* tile, bool ashow, bool aexternallyOwned)
@@ -99,6 +102,7 @@ QString SkyImageMgr::insertSkyImage(const QString& uri, bool ashow)
 // Remove a sky image tile from the list of background images
 void SkyImageMgr::removeSkyImage(const QString& key)
 {
+	qDebug() << "SkyImageMgr::removeSkyImage removing image:" << key;
 	if (allSkyImages.contains(key))
 	{
 		SkyImageMgrElem* bEl = allSkyImages[key];
@@ -106,6 +110,10 @@ void SkyImageMgr::removeSkyImage(const QString& key)
 		disconnect(bEl->tile, SIGNAL(percentLoadedChanged(int)), this, SLOT(percentLoadedChanged(int)));
 		delete bEl;
 		allSkyImages.remove(key);
+	}
+	else
+	{
+		qDebug() << "SkyImageMgr::removeSkyImage there is no such key" << key << "nothing is removed";
 	}
 }
 
@@ -198,6 +206,68 @@ SkyImageMgr::SkyImageMgrElem::~SkyImageMgrElem()
 	if (!externallyOwned)
 		delete tile;
 	tile = NULL;
+}
+
+bool SkyImageMgr::loadSkyImage(const QString& id, const QString& filename, 
+                               double ra0, double dec0, 
+                               double ra1, double dec1, 
+                               double ra2, double dec2, 
+                               double ra3, double dec3, 
+                               double minRes, double maxBright, bool visible)
+{
+	qDebug() << "SkyImageMgr::loadSkyImage" << id << filename << ra0 << dec0 << ra1 << dec1 << ra2 << dec2 << ra3 << dec3 << minRes << maxBright << visible;
+	QString path;
+	// Possible exception sources: 
+	// - StelFileMgr file not found
+	// - list index out of range in insertSkyImage
+	try
+	{
+		path = StelApp::getInstance().getFileMgr().findFile(filename);
+
+		QVariantMap vm;
+		QVariantMap st;
+		QVariantList l;
+		vm["shortName"] = QVariant(id);
+		vm["minResolution"] = QVariant(0.05);
+		vm["alphaBlend"] = true;
+
+		st["imageUrl"] = QVariant(path);
+		st["minResolution"] = QVariant(minRes);
+		st["maxBrightness"] = QVariant(maxBright);
+		QVariantList cl; // coordinates list for adding worldCoords and textureCoords
+		QVariantList c;  // a map for a pair of coordinates
+		QVariantList ol; // outer list - we want a structure 3 levels deep...
+		c.append(dec0); c.append(ra0); cl.append(c); c.clear();
+		c.append(dec1); c.append(ra1); cl.append(c); c.clear();
+		c.append(dec2); c.append(ra2); cl.append(c); c.clear();
+		c.append(dec3); c.append(ra3); cl.append(c); c.clear();
+		ol.append(cl);
+		st["worldCoords"] = ol;
+
+		// textureCoords (define the ordering of worldCoords)
+		cl.clear();
+		ol.clear();
+		c.append(0); c.append(0); cl.append(c); c.clear();
+		c.append(1); c.append(0); cl.append(c); c.clear();
+		c.append(1); c.append(1); cl.append(c); c.clear();
+		c.append(0); c.append(1); cl.append(c);
+		ol.append(cl);
+		st["textureCoords"] = ol;
+		l.append(st);
+		vm["subTiles"] = l;
+
+		SkyImageTile* tile = new SkyImageTile(vm, 0);
+		QString key = insertSkyImage(tile, visible, false);
+		if (key == id)
+			return true;
+		else
+			return false;
+	}
+	catch (std::exception& e)
+	{
+		qWarning() << "Could not find image" << filename << ":" << e.what();
+		return false;
+	}
 }
 
 void SkyImageMgr::showImage(const QString& id, bool b)
