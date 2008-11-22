@@ -849,6 +849,30 @@ bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
 	return change;
 }
 
+void debugQVariantMap(const QVariant& m, const QString& indent, const QString& key)
+{
+	QVariant::Type t = m.type();
+	if (t == QVariant::Map)
+	{
+		qDebug() << indent + key + "(map):";
+		QList<QString> keys = m.toMap().keys();
+		qSort(keys);
+		foreach(QString k, keys)
+		{
+			debugQVariantMap(m.toMap()[k], indent + "    ", k);
+		}
+	}
+	else if (t == QVariant::List)
+	{
+		qDebug() << indent + key + "(list):";
+		foreach(QVariant item, m.toList())
+		{
+			debugQVariantMap(item, indent + "    ");
+		}
+	}
+	else
+		qDebug() << indent + key + " => " + m.toString();
+}
 
 } // end of the StelUtils namespace
 
