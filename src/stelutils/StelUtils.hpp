@@ -23,6 +23,7 @@
 #include "vecmath.h"
 #include "fixx11h.h"
 
+#include <QVariantMap>
 #include <QDateTime>
 #include <QString>
 
@@ -204,6 +205,8 @@ namespace StelUtils
 	bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
 	                               int* ry, int* rm, int* rd, int* rh, int* rmin, int* rs);
 
+	//! Output a QVariantMap to qDebug().  Formats like a tree where there are nested objects.
+	void debugQVariantMap(const QVariant& m, const QString& indent="", const QString& key="");
 }
 
 #endif // _STELUTILS_HPP_
