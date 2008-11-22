@@ -115,6 +115,7 @@ private slots:
 	void aScriptIsRunning(void);
 	void aScriptHasStopped(void);
 	void populateScriptsList(void);
+	void setFixedDateTimeToCurrent(void);
 
 };
 

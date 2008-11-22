@@ -177,9 +177,48 @@ public slots:
         //! Get the current maximum frames per second.
         float getMaxFps();
 
+	//! Load an image which will have sky coordinates.
+	//! @param id a string ID to be used when referring to this
+	//! image (e.g. when changing the displayed status or deleting
+	//! it.
+	//! @param filename the file name of the image.  If a relative
+	//! path is specified, "scripts/" will be prefixed before the
+	//! image is searched for using StelFileMgr.
+	//! @param ra0 The right ascension of the first corner of the image in degrees
+	//! @param dec0 The declenation of the first corner of the image in degrees
+	//! @param ra1 The right ascension of the second corner of the image in degrees
+	//! @param dec1 The declenation of the second corner of the image in degrees
+	//! @param ra2 The right ascension of the third corner of the image in degrees
+	//! @param dec2 The declenation of the third corner of the image in degrees
+	//! @param ra3 The right ascension of the fourth corner of the image in degrees
+	//! @param dec3 The declenation of the fourth corner of the image in degrees
+	//! @param minRes The minimum resolution setting for the image
+	//! @param maxBright The maximum brightness setting for the image
+	//! @param visible The initial visibility of the image
+	void loadSkyImage(const QString& id, const QString& filename,
+	                  double ra0, double dec0,
+	                  double ra1, double dec1,
+	                  double ra2, double dec2,
+	                  double ra3, double dec3,
+	                  double minRes=2.5, double maxBright=14, bool visible=true);
+
+	//! Remove a SkyImage.
+	//! @param id the ID of the image to remove.
+	void removeSkyImage(const QString& id);
+
 	//! print a debugging message to the console
 	//! @param s the message to be displayed on the console.
 	void debug(const QString& s);
+
+signals:
+	void requestLoadSkyImage(const QString& id, const QString& filename,
+	                         double c1, double c2,
+	                         double c3, double c4,
+	                         double c5, double c6,
+	                         double c7, double c8,
+	                         double minRes, double maxBright, bool visible);
+
+	void requestRemoveSkyImage(const QString& id);
 
 private:
 	//! For use in setDate and waitFor

@@ -111,6 +111,9 @@ QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 
 StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 {
+	connect(this, SIGNAL(requestLoadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)), &StelApp::getInstance().getSkyImageMgr(), SLOT(loadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)));
+
+	connect(this, SIGNAL(requestRemoveSkyImage(const QString&)), &StelApp::getInstance().getSkyImageMgr(), SLOT(removeSkyImage(const QString&)));
 }
 
 
@@ -259,6 +262,22 @@ void StelMainScriptAPI::setMaxFps(float m)
 float StelMainScriptAPI::getMaxFps() 
 {
 	return StelApp::getInstance().getMaxFps();
+}
+
+void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
+			             double ra0, double dec0,
+			             double ra1, double dec1,
+			             double ra2, double dec2,
+			             double ra3, double dec3,
+	                             double minRes, double maxBright, bool visible)
+{
+	QString path = "scripts/" + filename;
+	emit(requestLoadSkyImage(id, path, ra0, dec0, ra1, dec1, ra2, dec2, ra3, dec3, minRes, maxBright, visible));
+}
+
+void StelMainScriptAPI::removeSkyImage(const QString& id)
+{
+	emit(requestRemoveSkyImage(id));
 }
 
 void StelMainScriptAPI::debug(const QString& s)
