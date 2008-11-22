@@ -287,6 +287,7 @@ void StelGui::init()
 	QObject::connect(getGuiActions("actionSet_Time_Rate_Zero"), SIGNAL(triggered()), module, SLOT(setZeroTimeSpeed()));
 	QObject::connect(getGuiActions("actionReturn_To_Current_Time"), SIGNAL(triggered()), module, SLOT(setTimeNow()));
 	QObject::connect(getGuiActions("actionSwitch_Equatorial_Mount"), SIGNAL(toggled(bool)), module, SLOT(setEquatorialMount(bool)));
+	getGuiActions("actionSwitch_Equatorial_Mount")->setChecked(StelApp::getInstance().getCore()->getNavigation()->getMountMode() != Navigator::MountAltAzimuthal);
 	QObject::connect(getGuiActions("actionAdd_Solar_Hour"), SIGNAL(triggered()), module, SLOT(addHour()));
 	QObject::connect(getGuiActions("actionAdd_Solar_Day"), SIGNAL(triggered()), module, SLOT(addDay()));
 	QObject::connect(getGuiActions("actionAdd_Solar_Week"), SIGNAL(triggered()), module, SLOT(addWeek()));
@@ -477,7 +478,9 @@ void StelGui::init()
 	pxmapOn = QPixmap(":/graphicGui/gui/btEquatorialMount-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btEquatorialMount-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionSwitch_Equatorial_Mount"));
+	b->setChecked(getGuiActions("actionSwitch_Equatorial_Mount")->isChecked());
 	buttonBar->addButton(b, "060-othersGroup");
+	
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btGotoSelectedObject-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btGotoSelectedObject-off.png");
