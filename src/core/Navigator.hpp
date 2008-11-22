@@ -166,6 +166,8 @@ public slots:
 	//! Decrease the time speed
 	void decreaseTimeSpeed();
 	
+	//! Set time speed to 0, i.e. freeze the passage of simulation time
+	void setZeroTimeSpeed() {setTimeRate(0);}
 	//! Set real time speed, i.e. 1 sec/sec
 	void setRealTimeSpeed() {setTimeRate(JD_SECOND);}
 	//! Get whether it is real time speed, i.e. 1 sec/sec
