@@ -139,7 +139,7 @@ void TelescopeMgr::draw(StelCore* core)
 			}
 		}
 	}
-	drawPointer(prj, nav);
+	drawPointer(prj, nav, sPainter);
 }
 
 void TelescopeMgr::update(double deltaTime)
@@ -288,7 +288,7 @@ void TelescopeMgr::init()
 }
 
 
-void TelescopeMgr::drawPointer(const ProjectorP& prj, const Navigator * nav)
+void TelescopeMgr::drawPointer(const ProjectorP& prj, const Navigator * nav, const StelPainter& sPainter)
 {
 	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Telescope");
 	if (!newSelected.empty())
@@ -299,7 +299,6 @@ void TelescopeMgr::drawPointer(const ProjectorP& prj, const Navigator * nav)
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos)) return;
 	
-		StelPainter sPainter(prj);
 		glColor3fv(obj->getInfoColor());
 		texPointer->bind();
 		glEnable(GL_TEXTURE_2D);
