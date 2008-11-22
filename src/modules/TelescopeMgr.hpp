@@ -35,6 +35,7 @@ class Navigator;
 class SFont;
 class StelObject;
 class Telescope;
+class StelPainter;
 
 class TelescopeMgr : public StelObjectModule
 {
@@ -100,7 +101,7 @@ public slots:
 	
 private:
 	//! Draw a nice animated pointer around the object
-	void drawPointer(const ProjectorP& prj, const Navigator * nav);
+	void drawPointer(const ProjectorP& prj, const Navigator* nav, const StelPainter& sPainter);
 
 	//! Perform the communication with the telescope servers
 	void communicate(void);
