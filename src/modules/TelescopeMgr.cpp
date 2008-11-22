@@ -226,6 +226,23 @@ void TelescopeMgr::setFontSize(float fontSize)
 	telescope_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 }
 
+void TelescopeMgr::moveTelescopeToSelected(void)
+{
+	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().isEmpty())
+		return;
+
+	if (sender() == NULL)
+		return;
+
+	StelObjectP selectObject = StelApp::getInstance().getStelObjectMgr().getSelectedObject().at(0);
+	if (!selectObject)  // should never happen
+		return;
+
+	Vec3d objectPos = selectObject->getJ2000EquatorialPos(StelApp::getInstance().getCore()->getNavigation());
+	int telNum = sender()->objectName().right(1).toInt();
+	telescopeGoto(telNum, objectPos);
+}
+
 void TelescopeMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();

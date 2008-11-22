@@ -38,6 +38,8 @@ class Telescope;
 
 class TelescopeMgr : public StelObjectModule
 {
+	Q_OBJECT;
+
 public:
 	TelescopeMgr(void);
 	virtual ~TelescopeMgr(void);
@@ -59,16 +61,15 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to TelescopeMgr
-	//! Get the telescope labels color
-	const Vec3f& getLabelColor() const {return labelColor;}
-	//! Set the telescope labels color
-	void setLabelColor(const Vec3f &c) {labelColor = c;}
+	//! send a J2000-goto-command to the specified telescope
+	//! @param telescopeNr the number of the telescope
+	//! @param j2000Pos the direction in equatorial J2000 frame
+	void telescopeGoto(int telescopeNr, const Vec3d &j2000Pos);
 	
-	//! Set the telescope circle color
-	void setCircleColor(const Vec3f &c) {circleColor = c;}
-	//! Get the telescope circle color
-	const Vec3f& getCircleColor() const {return circleColor;}
-	
+	//! Remove all currently registered telescopes
+	void deleteAllTelescopes();
+
+public slots:
 	//! Set display flag for Telescopes
 	void setFlagTelescopes(bool b) {telescopeFader=b;}
 	//! Get display flag for Telescopes
@@ -79,16 +80,23 @@ public:
 	//! Get display flag for Telescope names
 	bool getFlagTelescopeName() const {return nameFader==true;}
 	
+	//! Set the telescope circle color
+	void setCircleColor(const Vec3f &c) {circleColor = c;}
+	//! Get the telescope circle color
+	const Vec3f& getCircleColor() const {return circleColor;}
+	
+	//! Get the telescope labels color
+	const Vec3f& getLabelColor() const {return labelColor;}
+	//! Set the telescope labels color
+	void setLabelColor(const Vec3f &c) {labelColor = c;}
+	
 	//! Define font size to use for telescope names display
 	void setFontSize(float fontSize);
 	
-	//! send a J2000-goto-command to the specified telescope
-	//! @param telescopeNr the number of the telescope
-	//! @param j2000Pos the direction in equatorial J2000 frame
-	void telescopeGoto(int telescopeNr,const Vec3d &j2000Pos);
-	
-	//! Remove all currently registered telescopes
-	void deleteAllTelescopes();
+	//! For use from the GUI.  The telescope number will be
+	//! chosen according to the action which triggered the slot to be
+	//! triggered.
+	void moveTelescopeToSelected(void);
 	
 private:
 	//! Draw a nice animated pointer around the object
