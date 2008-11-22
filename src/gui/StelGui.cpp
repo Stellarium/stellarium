@@ -29,6 +29,7 @@
 #include "StelMainWindow.hpp"
 #include "StelObjectMgr.hpp"
 #include "LandscapeMgr.hpp"
+#include "TelescopeMgr.hpp"
 #include "StarMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "GridLinesMgr.hpp"
@@ -184,6 +185,7 @@ void StelGui::init()
 	addGuiActions("actionDecrease_Time_Speed", N_("Decrease time speed"), "J", group, false, false);
 	addGuiActions("actionIncrease_Time_Speed", N_("Increase time speed"), "L", group, false, false);
 	addGuiActions("actionSet_Real_Time_Speed", N_("Set normal time rate"), "K", group, false, false);
+	addGuiActions("actionSet_Time_Rate_Zero", N_("Set time rate to zero"), "7", group, false, false);
 	addGuiActions("actionReturn_To_Current_Time", N_("Set time to now"), "8", group, false, false);
 	addGuiActions("actionAdd_Solar_Hour", N_("Add 1 solar hour"), "Ctrl+=", group, false, true);
 	addGuiActions("actionSubtract_Solar_Hour", N_("Subtract 1 solar hour"), "Ctrl+-", group, false, true);
@@ -203,6 +205,18 @@ void StelGui::init()
 	addGuiActions("actionZoom_Out_Auto", N_("Zoom out"), "\\", group, false, false);
 	addGuiActions("actionSet_Home_Planet_To_Selected", N_("Set home planet to selected planet"), "Ctrl+G", group, false, false);
 	
+	group = N_("Telescope Control");
+	addGuiActions("actionMove_Telescope_To_Selection_0", N_("Move telescope #0 to selected object"), "Ctrl+0", group, false, false);
+	addGuiActions("actionMove_Telescope_To_Selection_1", N_("Move telescope #1 to selected object"), "Ctrl+1", group, false, false);
+	addGuiActions("actionMove_Telescope_To_Selection_2", N_("Move telescope #2 to selected object"), "Ctrl+2", group, false, false);
+	addGuiActions("actionMove_Telescope_To_Selection_3", N_("Move telescope #3 to selected object"), "Ctrl+3", group, false, false);
+	addGuiActions("actionMove_Telescope_To_Selection_4", N_("Move telescope #4 to selected object"), "Ctrl+4", group, false, false);
+	addGuiActions("actionMove_Telescope_To_Selection_5", N_("Move telescope #5 to selected object"), "Ctrl+5", group, false, false);
+	addGuiActions("actionMove_Telescope_To_Selection_6", N_("Move telescope #6 to selected object"), "Ctrl+6", group, false, false);
+	addGuiActions("actionMove_Telescope_To_Selection_7", N_("Move telescope #7 to selected object"), "Ctrl+7", group, false, false);
+	addGuiActions("actionMove_Telescope_To_Selection_8", N_("Move telescope #8 to selected object"), "Ctrl+8", group, false, false);
+	addGuiActions("actionMove_Telescope_To_Selection_9", N_("Move telescope #9 to selected object"), "Ctrl+9", group, false, false);
+
 	group = N_("Miscellaneous");
 	addGuiActions("actionSwitch_Equatorial_Mount", N_("Switch between equatorial and azimuthal mount"), "Ctrl+M", group, true, false);
 	addGuiActions("actionQuit_Global", N_("Quit"), "Ctrl+Q", group, false, false);
@@ -212,6 +226,7 @@ void StelGui::init()
 	addGuiActions("actionAutoHideHorizontalButtonBar", N_("Auto hide horizontal button bar"), "", group, true, false);
 	addGuiActions("actionAutoHideVerticalButtonBar", N_("Auto hide vertical button bar"), "", group, true, false);
 	addGuiActions("actionToggle_GuiHidden_Global", N_("Toggle visibility of toolbars"), "Ctrl+T", group, true, false);
+
 	
 	//QMetaObject::connectSlotsByName(Form);
 	
@@ -269,6 +284,7 @@ void StelGui::init()
 	QObject::connect(getGuiActions("actionIncrease_Time_Speed"), SIGNAL(triggered()), module, SLOT(increaseTimeSpeed()));
 	QObject::connect(getGuiActions("actionDecrease_Time_Speed"), SIGNAL(triggered()), module, SLOT(decreaseTimeSpeed()));
 	QObject::connect(getGuiActions("actionSet_Real_Time_Speed"), SIGNAL(triggered()), module, SLOT(setRealTimeSpeed()));
+	QObject::connect(getGuiActions("actionSet_Time_Rate_Zero"), SIGNAL(triggered()), module, SLOT(setZeroTimeSpeed()));
 	QObject::connect(getGuiActions("actionReturn_To_Current_Time"), SIGNAL(triggered()), module, SLOT(setTimeNow()));
 	QObject::connect(getGuiActions("actionSwitch_Equatorial_Mount"), SIGNAL(toggled(bool)), module, SLOT(setEquatorialMount(bool)));
 	QObject::connect(getGuiActions("actionAdd_Solar_Hour"), SIGNAL(triggered()), module, SLOT(addHour()));
@@ -282,6 +298,18 @@ void StelGui::init()
 	QObject::connect(getGuiActions("actionSubtract_Sidereal_Day"), SIGNAL(triggered()), module, SLOT(subtractSiderealDay()));
 	QObject::connect(getGuiActions("actionSubtract_Sidereal_Week"), SIGNAL(triggered()), module, SLOT(subtractSiderealWeek()));
 	QObject::connect(getGuiActions("actionSet_Home_Planet_To_Selected"), SIGNAL(triggered()), module, SLOT(moveObserverToSelected()));
+
+	module = GETSTELMODULE("TelescopeMgr");
+	QObject::connect(getGuiActions("actionMove_Telescope_To_Selection_0"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
+	QObject::connect(getGuiActions("actionMove_Telescope_To_Selection_1"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
+	QObject::connect(getGuiActions("actionMove_Telescope_To_Selection_2"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
+	QObject::connect(getGuiActions("actionMove_Telescope_To_Selection_3"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
+	QObject::connect(getGuiActions("actionMove_Telescope_To_Selection_4"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
+	QObject::connect(getGuiActions("actionMove_Telescope_To_Selection_5"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
+	QObject::connect(getGuiActions("actionMove_Telescope_To_Selection_6"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
+	QObject::connect(getGuiActions("actionMove_Telescope_To_Selection_7"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
+	QObject::connect(getGuiActions("actionMove_Telescope_To_Selection_8"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
+	QObject::connect(getGuiActions("actionMove_Telescope_To_Selection_9"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
 
 	module = &StelApp::getInstance();
 	QObject::connect(getGuiActions("actionShow_Night_Mode"), SIGNAL(toggled(bool)), module, SLOT(setVisionModeNight(bool)));
