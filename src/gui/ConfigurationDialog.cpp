@@ -374,7 +374,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	StelApp::getInstance().getSkyCultureMgr().setDefaultSkyCultureID(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
 	
 	// Save default location
-	StelApp::getInstance().getCore()->getNavigation()->setDefaultLocationID(StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().getID());
+	nav->setDefaultLocationID(nav->getCurrentLocation().getID());
 
 	// configuration dialog / main tab
 	QString langName = StelApp::getInstance().getLocaleMgr().getAppLanguage();
@@ -404,6 +404,11 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("navigation/today_time", nav->getInitTodayTime());
 	conf->setValue("navigation/preset_sky_time", nav->getPresetSkyTime());
 	conf->setValue("navigation/init_fov", mvmgr->getInitFov());
+	if (nav->getMountMode() == Navigator::MountAltAzimuthal)
+		conf->setValue("navigation/viewing_mode", "horizon");
+	else
+		conf->setValue("navigation/viewing_mode", "equator");
+	
 
 	// configuration dialog / tools tab
 	conf->setValue("gui/flag_show_flip_buttons", gui->getFlagShowFlipButtons());
