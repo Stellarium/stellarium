@@ -29,7 +29,7 @@
 #include <QDebug>
 #include <QSettings>
 
-Landscape::Landscape(float _radius) : radius(_radius), skyBrightness(1.)
+Landscape::Landscape(float _radius) : radius(_radius), skyBrightness(1.), angleRotateZOffset(0.)
 {
 	validLandscape = 0;
 }
@@ -387,8 +387,9 @@ void LandscapeOldStyle::drawGround(StelCore* core) const
 	//prj->sDisk(radius,nbSide*slices_per_side*nbDecorRepeat,5, 1);
 	int slices_inside = nbSide*slices_per_side*nbDecorRepeat;
 	int level = 0;
-	while ((slices_inside&1)==0 && slices_inside > 4) {
-		level++;
+	while ((slices_inside&1)==0 && slices_inside > 4)
+	{
+		++level;
 		slices_inside>>=1;
 	}
 	sPainter.sFanDisk(radius,slices_inside,level);

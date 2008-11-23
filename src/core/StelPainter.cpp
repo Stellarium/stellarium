@@ -195,68 +195,69 @@ void ComputeCosSinRho(double phi,int segments) {
 }
 
 
-void StelPainter::sFanDisk(double radius,int innerFanSlices,int level) const {
-  Q_ASSERT(level<64);
-  double rad[64];
-  int i,j;
-  rad[level] = radius;
+void StelPainter::sFanDisk(double radius, int innerFanSlices, int level) const
+{
+	Q_ASSERT(level<64);
+	double rad[64];
+	int i,j;
+	rad[level] = radius;
 //  for (i=level-1;i>=0;i--) {
 //    double f = ((i+1)/(double)(level+1));
 //    rad[i] = radius*f*f;
 //  }
-  for (i=level-1;i>=0;i--) {
-    rad[i] = rad[i+1]*(1.0-M_PI/(innerFanSlices<<(i+1)))*2.0/3.0;
-  }
-  int slices = innerFanSlices<<level;
-  const double dtheta = 2.0 * M_PI / slices;
-  Q_ASSERT(slices<=MAX_SLICES);
-  ComputeCosSinTheta(dtheta,slices);
-  double *cos_sin_theta_p;
-  int slices_step = 2;
-  for (i=level;i>0;i--,slices_step<<=1) {
-    for (j=0,cos_sin_theta_p=cos_sin_theta;
-         j<slices;
-         j+=slices_step,cos_sin_theta_p+=2*slices_step) {
-      glBegin(GL_TRIANGLE_FAN);
-      double x = rad[i]*cos_sin_theta_p[slices_step];
-      double y = rad[i]*cos_sin_theta_p[slices_step+1];
-      glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
-      drawVertex3(x,y,0);
-
-      x = rad[i]*cos_sin_theta_p[2*slices_step];
-      y = rad[i]*cos_sin_theta_p[2*slices_step+1];
-      glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
-      drawVertex3(x,y,0);
-
-      x = rad[i-1]*cos_sin_theta_p[2*slices_step];
-      y = rad[i-1]*cos_sin_theta_p[2*slices_step+1];
-      glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
-      drawVertex3(x,y,0);
-
-      x = rad[i-1]*cos_sin_theta_p[0];
-      y = rad[i-1]*cos_sin_theta_p[1];
-      glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
-      drawVertex3(x,y,0);
-
-      x = rad[i]*cos_sin_theta_p[0];
-      y = rad[i]*cos_sin_theta_p[1];
-      glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
-      drawVertex3(x,y,0);
-      glEnd();
-    }
-  }
-    // draw the inner polygon
-  slices_step>>=1;
-  glBegin(GL_POLYGON);
-  for (j=0,cos_sin_theta_p=cos_sin_theta;
-       j<=slices;
-       j+=slices_step,cos_sin_theta_p+=2*slices_step) {
-    double x = rad[0]*cos_sin_theta_p[0];
-    double y = rad[0]*cos_sin_theta_p[1];
-    glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
-    drawVertex3(x,y,0);
-  }
-  glEnd();
+	for (i=level-1;i>=0;--i)
+	{
+		rad[i] = rad[i+1]*(1.0-M_PI/(innerFanSlices<<(i+1)))*2.0/3.0;
+	}
+	int slices = innerFanSlices<<level;
+	const double dtheta = 2.0 * M_PI / slices;
+	Q_ASSERT(slices<=MAX_SLICES);
+	ComputeCosSinTheta(dtheta,slices);
+	double *cos_sin_theta_p;
+	int slices_step = 2;
+	for (i=level;i>0;--i,slices_step<<=1)
+	{
+		for (j=0,cos_sin_theta_p=cos_sin_theta; j<slices; j+=slices_step,cos_sin_theta_p+=2*slices_step)
+		{
+			glBegin(GL_TRIANGLE_FAN);
+			double x = rad[i]*cos_sin_theta_p[slices_step];
+			double y = rad[i]*cos_sin_theta_p[slices_step+1];
+			glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
+			drawVertex3(x,y,0);
+		
+			x = rad[i]*cos_sin_theta_p[2*slices_step];
+			y = rad[i]*cos_sin_theta_p[2*slices_step+1];
+			glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
+			drawVertex3(x,y,0);
+		
+			x = rad[i-1]*cos_sin_theta_p[2*slices_step];
+			y = rad[i-1]*cos_sin_theta_p[2*slices_step+1];
+			glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
+			drawVertex3(x,y,0);
+		
+			x = rad[i-1]*cos_sin_theta_p[0];
+			y = rad[i-1]*cos_sin_theta_p[1];
+			glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
+			drawVertex3(x,y,0);
+		
+			x = rad[i]*cos_sin_theta_p[0];
+			y = rad[i]*cos_sin_theta_p[1];
+			glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
+			drawVertex3(x,y,0);
+			glEnd();
+		}
+	}
+	// draw the inner polygon
+	slices_step>>=1;
+	glBegin(GL_POLYGON);
+	for (j=0,cos_sin_theta_p=cos_sin_theta;	j<=slices; j+=slices_step,cos_sin_theta_p+=2*slices_step)
+	{
+		double x = rad[0]*cos_sin_theta_p[0];
+		double y = rad[0]*cos_sin_theta_p[1];
+		glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
+		drawVertex3(x,y,0);
+	}
+	glEnd();
 }
 
 
