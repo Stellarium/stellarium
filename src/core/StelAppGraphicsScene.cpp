@@ -90,7 +90,7 @@ void StelAppGraphicsScene::switchToNativeOpenGLPainting()
 	glPushMatrix();
 	glShadeModel(GL_FLAT);
 	glDisable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
+	glDisable(GL_CULL_FACE);
 	glDisable(GL_LIGHTING);
 	//glDisable(GL_MULTISAMPLE);
 	glDisable(GL_DITHER);
@@ -116,34 +116,48 @@ QPainter* StelAppGraphicsScene::revertToQtPainting()
 
 QPainter* StelAppGraphicsScene::switchToQPainting()
 {
-	if (tempPainter)
-	{
-		tempPainter->save();
-		tempPainter->resetTransform();
-	}
 	// Save openGL projection state
+	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	glMatrixMode(GL_TEXTURE);
+	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
-	if (!tempPainter)
-		return NULL;
+	
+	if (tempPainter)
+	{
+		if (tempPainter->isActive())
+		{
+			tempPainter->save();
+			tempPainter->end();
+			tempPainter->begin(StelAppGraphicsScene::getInstance().views().at(0));
+			tempPainter->resetTransform();
+		}
+		else
+		{
+			tempPainter->begin(StelAppGraphicsScene::getInstance().views().at(0));
+		}
+	}
 	return tempPainter;
 }
 
-//! Revert openGL state so that Qt painting works again
-//! @return a painter that can be used
+//! Revert openGL state
 void StelAppGraphicsScene::revertToOpenGL()
 {
-	if (tempPainter)
-		tempPainter->restore();
 	// Restore openGL projection state for Qt drawings
+	glMatrixMode(GL_TEXTURE);
+	glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
 	glPopAttrib();
+	glPopClientAttrib();
+	
+	if (tempPainter)
+		tempPainter->restore();
 }
 
 void StelAppGraphicsScene::drawBackground(QPainter *painter, const QRectF &)
@@ -163,6 +177,7 @@ void StelAppGraphicsScene::drawBackground(QPainter *painter, const QRectF &)
 	// Update the core and all modules
 	StelApp::getInstance().update(dt);
 	
+	tempPainter = painter;
 	switchToNativeOpenGLPainting();
 	StelApp::getInstance().glWindowHasBeenResized((int)(width()), (int)(height()));
 	
@@ -172,6 +187,7 @@ void StelAppGraphicsScene::drawBackground(QPainter *painter, const QRectF &)
 	distorter->distort();
 	
 	revertToQtPainting();
+	tempPainter = NULL;
 	
 	// Determines when the next display will need to be triggered
 	// The current policy is that after an event, the FPS is maximum for 2.5 seconds
