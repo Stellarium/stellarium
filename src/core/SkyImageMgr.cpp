@@ -215,7 +215,12 @@ bool SkyImageMgr::loadSkyImage(const QString& id, const QString& filename,
                                double ra3, double dec3, 
                                double minRes, double maxBright, bool visible)
 {
-	qDebug() << "SkyImageMgr::loadSkyImage" << id << filename << ra0 << dec0 << ra1 << dec1 << ra2 << dec2 << ra3 << dec3 << minRes << maxBright << visible;
+	if (allSkyImages.contains("id"))
+	{
+		qWarning() << "Image ID" << id << "already exists, removing old image before loading";
+		removeSkyImage(id);
+	}
+
 	QString path;
 	// Possible exception sources: 
 	// - StelFileMgr file not found
