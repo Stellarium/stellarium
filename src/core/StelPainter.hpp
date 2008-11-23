@@ -168,6 +168,8 @@ public:
 	void sSphereMap(GLdouble radius, GLint slices, GLint stacks,
 	                 double textureFov = 2.*M_PI, int orientInside = 0) const;
 
+	//! Get some informations about the OS openGL capacities.
+	//! This method needs to be called once at init
 	static void initSystemGLInfo();
 	
 private:
