@@ -74,8 +74,8 @@ public:
 	//! @param path the name of the file to search for, for example "textures/fog.png".
 	//! @param flags options which constrain the result.
 	//! @return returns a full path of the file if found, else return an empty path.
-	//! @exception std::exception what() -> "file not found: [filename]"
-	//! @exception std::exception what() -> "file does not match flags: [fullpath]".
+	//! @exception std::runtime_error what() -> "file not found: [filename]"
+	//! @exception std::runtime_error what() -> "file does not match flags: [fullpath]".
 	//! 		This exception occurs if a full path is passes at the path argument, but 
 	//!		that path does not match the flags specified.
 	QString findFile(const QString& path, const Flags& flags=(Flags)0);

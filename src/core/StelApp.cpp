@@ -493,7 +493,7 @@ void StelApp::parseCLIArgsPostConfig()
 		projectionType = argsGetOptionWithArg<QString>(argList, "", "--projection-type", "");
 		screenshotDir = argsGetOptionWithArg<QString>(argList, "", "--screenshot-dir", "");
 	}
-	catch (std::exception& e)
+	catch (std::runtime_error& e)
 	{
 		qCritical() << "ERROR while checking command line options: " << e.what();
 		exit(0);
@@ -589,7 +589,7 @@ void StelApp::parseCLIArgsPostConfig()
 			{
 				stelFileMgr->setScreenshotDir(confScreenshotDir);
 			}
-			catch (std::exception& e)
+			catch (std::runtime_error& e)
 			{
 				qWarning() << "WARNING: problem while setting screenshot from config file setting: " << e.what();
 			}
