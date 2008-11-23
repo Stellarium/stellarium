@@ -518,7 +518,7 @@ QStringList QtScriptMgr::getScriptList(void)
 	try
 	{
 		StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
-		QSet<QString> files = fileMan.listContents("scripts",StelFileMgr::File);
+		QSet<QString> files = fileMan.listContents("scripts",StelFileMgr::File, true);
 		foreach(QString f, files)
 		{
 			if (QRegExp("^.*\\.ssc$").exactMatch(f))

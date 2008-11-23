@@ -147,7 +147,7 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>2</number>
         </property>
         <property name="iconSize" >
          <size>
@@ -727,7 +727,7 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="0" colspan="2" >
+             <item row="4" column="0" colspan="2" >
               <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox" >
                <property name="toolTip" >
                 <string>When enabled, the "auto zoom out" key will also set the initial viewing direction</string>
@@ -744,6 +744,13 @@
                </property>
                <property name="text" >
                 <string>Disc viewport</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0" >
+              <widget class="QCheckBox" name="selectSingleConstellationButton" >
+               <property name="text" >
+                <string>Select single constellation</string>
                </property>
               </widget>
              </item>
