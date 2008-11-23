@@ -39,6 +39,7 @@
 #include "StelIniParser.hpp"
 #include "Projector.hpp"
 #include "LocationMgr.hpp"
+#include "DownloadMgr.hpp"
 
 #include "StelModuleMgr.hpp"
 #include "StelFontMgr.hpp"
@@ -263,6 +264,8 @@ void StelApp::init()
 	textureMgr->init();
 
 	loadingBar = new LoadingBar(12., "logo24bitsbeta.png", PACKAGE_VERSION, 45, 320, 121);
+	
+	downloadMgr = new DownloadMgr();
 	
 	// Stel Object Data Base manager
 	stelObjectMgr = new StelObjectMgr();

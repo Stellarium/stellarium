@@ -272,18 +272,19 @@ void StarMgr::loadData()
 	qDebug() << "Loading star data ...";
 	
 	qulonglong memoryUsed = 0;
-	qulonglong maxMemory = StelApp::getInstance().getSettings()->value("stars/max_memory", 128).toULongLong();
-	maxMemory *= 1024*1024;
+	const qulonglong maxMemory = StelApp::getInstance().getSettings()->value("stars/max_memory", 128).toULongLong() * 1024*1024;
 	
 	QStringList cats = starSettings->childGroups();
 	QListIterator<QString> it(cats);
+	StelFileMgr& fileMgr = StelApp::getInstance().getFileMgr();
 	while(it.hasNext())
 	{
 		QString cat = it.next();
+		QString cat_file_name = starSettings->value(cat+"/path").toString();
+		QString cat_file_path = fileMgr.findFile(cat_file_name);
 		
-		const QString cat_file_name = starSettings->value(cat+"/path").toString();
 		lb.SetMessage(q_("Loading catalog %1 from file %2").arg(cat, cat_file_name));
-		memoryUsed += StelApp::getInstance().getFileMgr().size("stars/default/"+cat_file_name);
+		memoryUsed += fileMgr.size(cat_file_path);
 		ZoneArray *const z = ZoneArray::create(*this, cat_file_name, memoryUsed > maxMemory, lb);
 		if (z)
 		{
@@ -325,7 +326,7 @@ void StarMgr::loadData()
 	{
 		try
 		{
-			spectral_array = initStringListFromFile(StelApp::getInstance().getFileMgr().findFile("stars/default/" + cat_hip_sp_file_name));
+			spectral_array = initStringListFromFile(fileMgr.findFile("stars/default/" + cat_hip_sp_file_name));
 		}
 		catch (std::runtime_error& e)
 		{
@@ -344,8 +345,7 @@ void StarMgr::loadData()
 	{
 		try
 		{
-			component_array = initStringListFromFile(StelApp::getInstance().getFileMgr()
-			        .findFile("stars/default/" + cat_hip_cids_file_name));
+			component_array = initStringListFromFile(fileMgr.findFile("stars/default/" + cat_hip_cids_file_name));
 		}
 		catch (std::runtime_error& e)
 		{

@@ -29,6 +29,7 @@
 #include "DateTimeDialog.hpp"
 #include "SearchDialog.hpp"
 #include "ConfigurationDialog.hpp"
+#include "DownloadPopup.hpp"
 #include <QDebug>
 #include <QGraphicsItem>
 
@@ -118,6 +119,8 @@ public:
 
 	//! returns true if the gui has complted init process.
 	bool initComplete(void) {return initDone;}
+	
+	DownloadPopup* getDownloadPopup() {return &downloadPopup;}
 
 public slots:
 	//! Define whether the buttons toggling image flip should be visible
@@ -157,6 +160,8 @@ private slots:
 	void updateBarsPos();
 	void reloadStyle();
 	void quitStellarium();
+	void cancelDownloadAndQuit();
+	void dontQuit();
 	
 	//! Called each time a GUI action is triggered
 	void guiActionTriggered(bool b=false);
@@ -185,6 +190,7 @@ private:
 	SearchDialog searchDialog;
 	ViewDialog viewDialog;
 	ConfigurationDialog configurationDialog;
+	DownloadPopup downloadPopup;
 	
 	class StelProgressBarMgr* progressBarMgr;
 	

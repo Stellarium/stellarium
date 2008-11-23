@@ -53,6 +53,10 @@ StelFileMgr::StelFileMgr()
 	// OK, now we have the userDir set, we will add it and the installation 
 	// dir to the search path.  The user directory is first.
 	fileLocations.append(userDir);
+	if(!exists(userDir+"/data/stars"))
+		mkDir(userDir+"/data/stars");
+	fileLocations.append(userDir+"/data/stars");
+	fileLocations.append(getInstallationDir()+"/stars/default");
 	
 	try
 	{

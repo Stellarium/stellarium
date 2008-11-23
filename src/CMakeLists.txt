@@ -7,6 +7,8 @@ INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_
 SET(stellarium_lib_SRCS
 	core/Audio.cpp
 	core/Audio.hpp
+	core/DownloadMgr.hpp
+	core/DownloadMgr.cpp
 	core/GeodesicGrid.cpp
 	core/GeodesicGrid.hpp
 	core/LoadingBar.cpp
@@ -216,6 +218,8 @@ SET(stellarium_lib_SRCS
 	gui/SearchDialog.cpp
 	gui/ConfigurationDialog.hpp
 	gui/ConfigurationDialog.cpp
+	gui/DownloadPopup.hpp
+	gui/DownloadPopup.cpp
 	gui/StelDialog.hpp
 	gui/StelDialog.cpp
 	
@@ -247,6 +251,7 @@ SET(stellarium_UIS
   gui/viewDialog.ui
   gui/searchDialogGui.ui
   gui/configurationDialog.ui
+  gui/downloadPopup.ui
   )
 QT4_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
 
@@ -259,6 +264,7 @@ QT4_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 # Add here all the files which require moc compilation
 # that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
 SET(stellarium_MOC_HDRS
+	core/DownloadMgr.hpp
 	core/StelModuleMgr.hpp
 	core/Observer.hpp
 	core/StelApp.hpp
@@ -295,6 +301,7 @@ SET(stellarium_MOC_HDRS
 	gui/ViewDialog.hpp
 	gui/SearchDialog.hpp
 	gui/ConfigurationDialog.hpp
+	gui/DownloadPopup.hpp
 	gui/StelDialog.hpp
 	StelMainGraphicsView.hpp
 	StelMainWindow.hpp

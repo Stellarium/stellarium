@@ -44,6 +44,8 @@
 #include "StelStyle.hpp"
 #include "SkyDrawer.hpp"
 #include "MeteorMgr.hpp"
+#include "DownloadPopup.hpp"
+#include "DownloadMgr.hpp"
 
 #include <QDebug>
 #include <QTimeLine>
@@ -842,7 +844,30 @@ QProgressBar* StelGui::addProgressBar()
 
 void StelGui::quitStellarium()
 {
+	if(StelApp::getInstance().getDownloadMgr().isDownloading())
+	{
+		downloadPopup.setVisible(true);
+		downloadPopup.setText(QString("Stellarium is still downloading the star "
+			"catalog %1. Would you like to cancel the download and quit "
+			"Stellarium? (You can always restart the download at a later time.)")
+			.arg(StelApp::getInstance().getDownloadMgr().name()));
+		
+		connect(&downloadPopup, SIGNAL(cancelClicked()), this, SLOT(cancelDownloadAndQuit()));
+		connect(&downloadPopup, SIGNAL(continueClicked()), this, SLOT(dontQuit()));
+	}
+	else
+		QCoreApplication::exit();
+}
+
+void StelGui::cancelDownloadAndQuit()
+{
+	StelApp::getInstance().getDownloadMgr().abort();
 	QCoreApplication::exit();
+}
+
+void StelGui::dontQuit()
+{
+	downloadPopup.setVisible(false);
 }
 
 QPixmap StelGui::makeRed(const QPixmap& p)
