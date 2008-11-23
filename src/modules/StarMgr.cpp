@@ -139,15 +139,20 @@ double StarMgr::getCallOrder(StelModuleActionName actionName) const
 }
 
 
-StarMgr::~StarMgr(void) {
-  ZoneArrayMap::iterator it(zoneArrays.end());
-  while (it!=zoneArrays.begin()) {
-    --it;
-    delete it->second;
-    it->second = NULL;
-  }
-  zoneArrays.clear();
-  if (hipIndex) delete[] hipIndex;
+StarMgr::~StarMgr(void)
+{
+	delete starSettings;
+	starSettings=NULL;
+	ZoneArrayMap::iterator it(zoneArrays.end());
+	while (it!=zoneArrays.begin())
+	{
+		--it;
+		delete it->second;
+		it->second = NULL;
+	}
+	zoneArrays.clear();
+	if (hipIndex)
+		delete[] hipIndex;
 }
 
 bool StarMgr::flagSciNames = true;
