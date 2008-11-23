@@ -107,7 +107,7 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 		{
 			fileName = StelApp::getInstance().getFileMgr().findFile(url);
 		}
-		catch (std::exception e)
+		catch (std::runtime_error e)
 		{
 			try
 			{

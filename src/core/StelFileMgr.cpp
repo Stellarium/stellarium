@@ -62,7 +62,7 @@ StelFileMgr::StelFileMgr()
 	{
 		fileLocations.append(getInstallationDir());
 	}
-	catch(std::exception &e)
+	catch(std::runtime_error &e)
 	{
 		qWarning() << "WARNING: could not locate installation directory";
 	}
@@ -251,7 +251,7 @@ void StelFileMgr::checkUserDir()
 			}
 		}
 	}
-	catch(std::exception& e)
+	catch(std::runtime_error& e)
 	{
 		// This should never happen  ;)
 		qCritical() << "ERROR: cannot work out the user directory: " << e.what();

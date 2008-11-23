@@ -164,7 +164,7 @@ void StelMainGraphicsView::doScreenshot(void)
 				return;
 			}
 		}
-		catch(std::exception& e)
+		catch(std::runtime_error& e)
 		{
 			qWarning() << "ERROR StelMainGraphicsView::saveScreenShot: could not determine screenshot directory: " << e.what();
 			return;
