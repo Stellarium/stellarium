@@ -45,6 +45,7 @@
 #include "NebulaMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "QtScriptMgr.hpp"
+#include "DownloadMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -56,16 +57,15 @@
 ConfigurationDialog::ConfigurationDialog()
 {
 	ui = new Ui_configurationDialogForm;
-	downloader = NULL;
+	downloadMgr = &StelApp::getInstance().getDownloadMgr();
 	updatesData = NULL;
+	starsDir = StelApp::getInstance().getFileMgr().getUserDir()+"/data/stars/";
 	downloaded = 0;
 }
 
 ConfigurationDialog::~ConfigurationDialog()
 {
 	delete ui;
-	if(downloader != NULL)
-		delete downloader;
 	if(updatesData != NULL)
 		delete updatesData;
 }
@@ -571,7 +571,7 @@ void ConfigurationDialog::setUpdatesState(ConfigurationDialog::UpdatesState stat
 			break;
 		
 		case ConfigurationDialog::UpdatesError:
-			ui->downloadLabel->setText(QString("Error checking updates:\n%2").arg(downloader->url()).arg(downloader->errorString()));
+			ui->downloadLabel->setText(QString("Error checking updates:\n%1").arg(downloadMgr->errorString()));
 			ui->downloadRetryButton->setVisible(true);
 			break;
 		
@@ -580,7 +580,7 @@ void ConfigurationDialog::setUpdatesState(ConfigurationDialog::UpdatesState stat
 			break;
 		
 		case ConfigurationDialog::DownloadError:
-			ui->downloadLabel->setText(QString("Error downloading %1:\n%2").arg(downloadName).arg(downloader->errorString()));
+			ui->downloadLabel->setText(QString("Error downloading %1:\n%2").arg(downloadName).arg(downloadMgr->errorString()));
 			ui->downloadRetryButton->setVisible(true);
 			break;
 		
@@ -593,7 +593,7 @@ void ConfigurationDialog::setUpdatesState(ConfigurationDialog::UpdatesState stat
 
 void ConfigurationDialog::updatesDownloadError(QNetworkReply::NetworkError code, QString errorString)
 {
-	qDebug() << "Error checking updates from" << downloader->url() << ":" << errorString;
+	qDebug() << "Error checking updates from" << downloadMgr->url() << ": Code " << code << errorString;
 	setUpdatesState(ConfigurationDialog::UpdatesError);
 }
 
@@ -622,18 +622,19 @@ void ConfigurationDialog::updatesDownloadFinished(void)
 void ConfigurationDialog::checkUpdates(void)
 {
 	setUpdatesState(ConfigurationDialog::Checking);
+	updatesFileName = starsDir+"updates.ini";
+	downloadMgr->setBarVisible(false);
+	downloadMgr->setUseChecksum(false);
+	downloadMgr->setBlockQuit(false);
+	downloadMgr->get(starSettings->value("updates_url").toString(), updatesFileName);
 	
-	updatesFileName = "stars/default/updates.ini";
-	downloader = new Downloader(starSettings->value("updates_url").toString(), updatesFileName);
-	downloader->get(false);
-	
-	connect(downloader, SIGNAL(finished()), this, SLOT(updatesDownloadFinished()));
-	connect(downloader, SIGNAL(error(QNetworkReply::NetworkError, QString)), this, SLOT(updatesDownloadError(QNetworkReply::NetworkError, QString)));
+	connect(downloadMgr, SIGNAL(finished()), this, SLOT(updatesDownloadFinished()));
+	connect(downloadMgr, SIGNAL(error(QNetworkReply::NetworkError, QString)), this, SLOT(updatesDownloadError(QNetworkReply::NetworkError, QString)));
 }
 
 void ConfigurationDialog::cancelDownload(void)
 {
-	downloader->abort();
+	downloadMgr->abort();
 	setUpdatesState(ConfigurationDialog::ShowAvailable);
 }
 
@@ -647,7 +648,7 @@ void ConfigurationDialog::retryDownload(void)
 
 void ConfigurationDialog::downloadError(QNetworkReply::NetworkError code, QString errorString)
 {
-	qDebug() << "Error downloading file" << downloader->url() << ":" << errorString;
+	qDebug() << "Error downloading file" << downloadMgr->url() << ": Code " << code << errorString;
 	setUpdatesState(ConfigurationDialog::DownloadError);
 }
 
@@ -658,15 +659,15 @@ void ConfigurationDialog::downloadVerifying(void)
 
 void ConfigurationDialog::badChecksum(void)
 {
-	qDebug() << "Error downloading file" << downloader->url() << ": File is corrupted.";
+	qDebug() << "Error downloading file" << downloadMgr->url() << ": File is corrupted.";
 	setUpdatesState(ConfigurationDialog::ChecksumError);
 }
 
 void ConfigurationDialog::downloadFinished(void)
 {
 	downloaded++;
-	QString tempFileName = "stars/default/"+downloadName+".tmp";
-	QString finalFileName = "stars/default/"+downloadName+".cat";
+	QString tempFileName = starsDir+downloadName+".tmp";
+	QString finalFileName = starsDir+downloadName+".cat";
 	
 	if( ( QFile::exists(finalFileName) && !QFile::remove(finalFileName) ) ||
 		!QFile::copy(tempFileName, finalFileName) ||
@@ -684,19 +685,22 @@ void ConfigurationDialog::downloadFinished(void)
 
 void ConfigurationDialog::downloadStars(void)
 {
-	if(downloader != NULL)
-		delete downloader;
-	
+	downloadMgr->disconnect();
 	downloadName = newCatalogs.at(downloaded);
 	QString url = updatesData->value(downloadName+"/url").toString();
+	QString path = QString("%1/data/stars/%2.tmp").arg(StelApp::getInstance().getFileMgr().getUserDir()).arg(downloadName);
 	quint16 checksum = updatesData->value(downloadName+"/checksum").toUInt();
-	downloader = new Downloader(url, "stars/default/"+downloadName+".tmp", checksum);
-	downloader->get(true, QString("%p%: %1 of %2").arg(downloaded+1).arg(newCatalogs.size()));
 	
-	connect(downloader, SIGNAL(finished()), this, SLOT(downloadFinished()));
-	connect(downloader, SIGNAL(error(QNetworkReply::NetworkError, QString)), this, SLOT(downloadError(QNetworkReply::NetworkError, QString)));
-	connect(downloader, SIGNAL(verifying()), this, SLOT(downloadVerifying()));
-	connect(downloader, SIGNAL(badChecksum()), this, SLOT(badChecksum()));
+	downloadMgr->setBarVisible(true);
+	downloadMgr->setUseChecksum(true);
+	downloadMgr->setBlockQuit(true);
+	downloadMgr->setBarFormat(QString("%p%: %1 of %2").arg(downloaded+1).arg(newCatalogs.size()));
+	downloadMgr->get(url, path, checksum);
+	
+	connect(downloadMgr, SIGNAL(finished()), this, SLOT(downloadFinished()));
+	connect(downloadMgr, SIGNAL(error(QNetworkReply::NetworkError, QString)), this, SLOT(downloadError(QNetworkReply::NetworkError, QString)));
+	connect(downloadMgr, SIGNAL(verifying()), this, SLOT(downloadVerifying()));
+	connect(downloadMgr, SIGNAL(badChecksum()), this, SLOT(badChecksum()));
 	setUpdatesState(ConfigurationDialog::Downloading);
 }
 
@@ -706,96 +710,3 @@ void ConfigurationDialog::setFixedDateTimeToCurrent(void)
 	ui->fixedTimeRadio->setChecked(true);
 	setStartupTimeMode();
 }
-
-Downloader::~Downloader()
-{
-	if(reply)
-		delete reply;
-}
-
-void Downloader::get(bool showBar, const QString& barFormat)
-{
-	target.open(QIODevice::WriteOnly | QIODevice::Truncate);
-	reply = networkManager->get(QNetworkRequest(QUrl(address)));
-	
-	showProgressBar = showBar;
-	if(showProgressBar)
-	{
-		progressBar->setValue(0);
-		progressBar->setVisible(true);
-		progressBar->setFormat(barFormat);
-	} else
-		progressBar->setVisible(false);
-	
-	connect(reply, SIGNAL(readyRead(void)), this, SLOT(readData(void)));
-	connect(reply, SIGNAL(finished(void)), this, SLOT(fin(void)));
-	connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(err(QNetworkReply::NetworkError)));
-	if(showProgressBar)
-		connect(reply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(updateDownloadBar(qint64, qint64)));
-}
-
-void Downloader::abort(void)
-{
-	reply->abort();
-}
-
-void Downloader::readData(void)
-{
-	int size = reply->bytesAvailable();
-	QByteArray data = reply->read(size);
-	stream.writeRawData(data.constData(), size);
-}
-
-void Downloader::updateDownloadBar(qint64 received, qint64 total)
-{
-	progressBar->setMaximum(total);
-	progressBar->setValue(received);
-}
-
-void Downloader::fin(void)
-{
-	if(reply->error())
-		return;
-	
-	if(total-received == 0)
-	{
-		target.close();
-		if(showProgressBar)
-			progressBar->setVisible(false);
-		
-		if(useChecksum)
-		{
-			emit verifying();
-			
-			target.open(QIODevice::ReadOnly);
-			quint16 fileChecksum = qChecksum(target.readAll().constData(), target.size());
-			target.close();
-			
-			if(fileChecksum != checksum)
-				emit badChecksum();
-			else
-				emit finished();
-		}
-		else
-			emit finished();
-	} else
-		if(!target.remove())
-			qDebug() << "Error deleting incomplete file" << path;
-}
-
-void Downloader::err(QNetworkReply::NetworkError code)
-{
-	if(code != QNetworkReply::NoError)
-	{
-		target.close();
-		if(!target.remove())
-			qDebug() << "Error deleting incomplete file" << path;
-		if(showProgressBar)
-			progressBar->setVisible(false);
-	}
-	
-	if(code != QNetworkReply::OperationCanceledError)
-		emit error(code, reply->errorString());
-}
-
-
