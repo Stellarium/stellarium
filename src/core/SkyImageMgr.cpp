@@ -268,7 +268,7 @@ bool SkyImageMgr::loadSkyImage(const QString& id, const QString& filename,
 		else
 			return false;
 	}
-	catch (std::exception& e)
+	catch (std::runtime_error& e)
 	{
 		qWarning() << "Could not find image" << filename << ":" << e.what();
 		return false;
