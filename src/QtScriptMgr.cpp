@@ -384,7 +384,7 @@ void StelMainScriptAPI::clear(const QString& state)
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 	Q_ASSERT(nav);
 
-	if (state == "natural")
+	if (state.toLower() == "natural")
 	{
 		nav->setEquatorialMount(false);
 		skyd->setFlagTwinkle(true);
@@ -413,7 +413,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		lmgr->setFlagAtmosphere(true);
 		lmgr->setFlagFog(true);
 	}
-	else if (state == "starchart")
+	else if (state.toLower() == "starchart")
 	{
 		nav->setEquatorialMount(true);
 		skyd->setFlagTwinkle(false);
@@ -438,6 +438,35 @@ void StelMainScriptAPI::clear(const QString& state)
 		smgr->setFlagLabels(true);
 		ssmgr->setFlagLabels(true);
 		nmgr->setFlagHints(true);
+		lmgr->setFlagLandscape(false);
+		lmgr->setFlagAtmosphere(false);
+		lmgr->setFlagFog(false);
+	}
+	else if (state.toLower() == "deepspace")
+	{
+		nav->setEquatorialMount(true);
+		skyd->setFlagTwinkle(false);
+		skyd->setFlagLuminanceAdaptation(false);
+		ssmgr->setFlagPlanets(false);
+		ssmgr->setFlagHints(false);
+		ssmgr->setFlagOrbits(false);
+		ssmgr->setFlagMoonScale(false);
+		ssmgr->setFlagTrails(false);
+		mmgr->setZHR(0);
+		glmgr->setFlagAzimuthalGrid(false);
+		glmgr->setFlagEquatorGrid(false);
+		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEclipticLine(false);
+		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagEquatorJ2000Grid(false);
+		lmgr->setFlagCardinalsPoints(false);
+		cmgr->setFlagLines(false);
+		cmgr->setFlagLabels(false);
+		cmgr->setFlagBoundaries(false);
+		cmgr->setFlagArt(false);
+		smgr->setFlagLabels(false);
+		ssmgr->setFlagLabels(false);
+		nmgr->setFlagHints(false);
 		lmgr->setFlagLandscape(false);
 		lmgr->setFlagAtmosphere(false);
 		lmgr->setFlagFog(false);
