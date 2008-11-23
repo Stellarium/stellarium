@@ -83,11 +83,11 @@ public:
 	//! Set a set of all possible files/directories in any Stellarium search directory
 	//! @param path the path to search inside, e.g. "landscapes"
 	//! @param flags options which constrain the result
-	//! @return returns a std::set of file and directory names (just the basename, 
-	//!         not the whole path), which are available in any of the search
-	//!         paths + path.  Returns empty list if none were found or the path
-	//!         is invalid (not a directory / not existing)
-	QSet<QString> listContents(const QString& path, const Flags& flags=(Flags)0);
+	//! @param recursive if true, all sub-directories are walked recursively
+	//! @return returns a QSet of file and.or directory names, which are available 
+	//! in any of the search paths + path.  Returns empty set if none were found 
+	//! or the path is invalid (not a directory / not existing).
+	QSet<QString> listContents(const QString& path, const Flags& flags=(Flags)0, bool recursive=false);
 		
 	//! Get a vector of strings which describes the current search paths.
 	//! @return returns a vector of strings representing the current search paths.

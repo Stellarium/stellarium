@@ -111,10 +111,26 @@ QString StelFileMgr::findFile(const QString& path, const Flags& flags)
 	throw(std::runtime_error(QString("file not found: %1").arg(path).toLocal8Bit().constData()));
 }
 
-QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::Flags& flags)
+QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::Flags& flags, bool recursive)
 {
 	QSet<QString> result;
 	QStringList listPaths;
+
+	if (recursive)
+	{
+		QSet<QString> dirs = listContents(path, Directory, false);
+		result = listContents(path, flags, false); // root
+		// add results for each sub-directory
+		foreach(QString d, dirs)
+		{
+			QSet<QString> subDirResult = listContents(path + "/" + d, flags, true);
+			foreach(QString r, subDirResult)
+			{
+				result.insert(d + "/" + r);
+			}
+		}
+		return result;
+	}
 			
 	// If path is "complete" (a full path), we just look in there, else
 	// we append relative paths to the search paths maintained by this class.
