@@ -140,13 +140,13 @@ private slots:
 private:
 	class SkyImageMgrElem
 	{
-		public:
-			SkyImageMgrElem(SkyImageTile* t, bool show=true, bool externallyOwned=true);
-			~SkyImageMgrElem();
-			SkyImageTile* tile;
-			QProgressBar* progressBar;
-			bool show;
-			bool externallyOwned;
+	public:
+		SkyImageMgrElem(SkyImageTile* t, bool show=true, bool externallyOwned=true);
+		~SkyImageMgrElem();
+		SkyImageTile* tile;
+		QProgressBar* progressBar;
+		bool show;
+		bool externallyOwned;
 	};
 	
 	SkyImageMgrElem* skyBackgroundElemForTile(const SkyImageTile*);
