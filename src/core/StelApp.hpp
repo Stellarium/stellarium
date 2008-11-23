@@ -43,6 +43,7 @@ class QTime;
 class LocationMgr;
 class SkyImageMgr;
 class QtScriptMgr;
+class DownloadMgr;
 
 //! @class StelApp 
 //! Singleton main Stellarium application class.
@@ -121,6 +122,9 @@ public:
 	
 	//! Get the script manager
 	QtScriptMgr& getScriptMgr() {return *scriptMgr;}
+	
+	//! Get the download manager
+	DownloadMgr& getDownloadMgr() {return *downloadMgr;}
 	
 	//! Get the core of the program.
 	//! It is the one which provide the projection, navigation and tone converter.
@@ -350,6 +354,9 @@ private:
 	
 	// Currently used StelStyle
 	StelStyle* currentStelStyle;
+	
+	// Download manager that uses networkAccessManager
+	DownloadMgr* downloadMgr;
 	
 	float fps;
 	//! The minimum desired frame rate in frame per second.

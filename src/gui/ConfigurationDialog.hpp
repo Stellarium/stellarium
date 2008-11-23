@@ -32,7 +32,7 @@ class Ui_configurationDialogForm;
 class QSettings;
 class QDataStream;
 class QNetworkAccessManager;
-class Downloader;
+class DownloadMgr;
 
 class ConfigurationDialog : public StelDialog
 {
@@ -58,10 +58,11 @@ protected:
 	Ui_configurationDialogForm* ui;
 	QSettings* starSettings;
 	QSettings* updatesData;
-	Downloader* downloader;
+	DownloadMgr* downloadMgr;
 	QString downloadName;
 	QString updatesFileName;
 	QStringList newCatalogs;
+	QString starsDir;
 	int downloaded;
 
 private slots:
@@ -117,47 +118,6 @@ private slots:
 	void populateScriptsList(void);
 	void setFixedDateTimeToCurrent(void);
 
-};
-
-class Downloader : public QObject
-{
-	Q_OBJECT;
-public:
-	Downloader(const QString& address, const QString& path, quint32 checksum=-1) : address(address),
-		path(path), reply(NULL), target(path), useChecksum(checksum<(quint32)-1),
-		checksum((quint16)checksum), stream(&target), networkManager(StelApp::getInstance().getNetworkAccessManager()),
-		progressBar(StelMainGraphicsView::getInstance().addProgressBar()),
-		received(0), total(0)
-		{}
-	~Downloader();
-	void get(bool showBar, const QString& barFormat = "%p%");
-	void abort(void);
-	QString url(void) { return address; }
-	QString errorString(void) { return reply ? reply->errorString() : QString(); }
-private:
-	const QString address;
-	const QString path;
-	QNetworkReply* reply;
-	QFile target;
-	bool useChecksum;
-	quint16 checksum;
-	QDataStream stream;
-	QNetworkAccessManager* networkManager;
-	QProgressBar* progressBar;
-	qint64 received;
-	qint64 total;
-	bool showProgressBar;
-
-private slots:
-	void readData(void);
-	void updateDownloadBar(qint64, qint64);
-	void fin(void);
-	void err(QNetworkReply::NetworkError);
-signals:
-	void finished(void);
-	void error(QNetworkReply::NetworkError, QString);
-	void verifying(void);
-	void badChecksum(void);
 };
 
 #endif // _CONFIGURATIONDIALOG_HPP_
