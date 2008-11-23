@@ -102,7 +102,7 @@ QString SkyImageMgr::insertSkyImage(const QString& uri, bool ashow)
 // Remove a sky image tile from the list of background images
 void SkyImageMgr::removeSkyImage(const QString& key)
 {
-	qDebug() << "SkyImageMgr::removeSkyImage removing image:" << key;
+	//qDebug() << "SkyImageMgr::removeSkyImage removing image:" << key;
 	if (allSkyImages.contains(key))
 	{
 		SkyImageMgrElem* bEl = allSkyImages[key];
