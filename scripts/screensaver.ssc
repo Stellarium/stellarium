@@ -44,6 +44,7 @@ LabelMgr.setLabelShow(id, true);
 core.wait(4);
 LabelMgr.setLabelShow(id, false);
 LabelMgr.deleteLabel(id);
+ConstellationMgr.setFlagIsolateSelected(true);
 
 while(1)
 {
