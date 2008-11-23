@@ -4,7 +4,7 @@
 // Description: This script demonstrates adding and manipulating sky images
 //
 
-core.clear("StarChart");
+core.clear("starchart");
 core.selectObjectByName("M31", false);
 MovementMgr.setFlagTracking(true);
 MovementMgr.zoomTo(2,1);
