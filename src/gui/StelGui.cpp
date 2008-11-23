@@ -95,8 +95,7 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 	}
 }
 
-StelGui::StelGui()
-	: initDone(false)
+StelGui::StelGui() : initDone(false)
 {
 	// QPixmapCache::setCacheLimit(30000); ?
 	
@@ -126,6 +125,7 @@ StelGui::StelGui()
 
 StelGui::~StelGui()
 {
+	infoPanel->deleteLater();
 }
 
 /*************************************************************************
