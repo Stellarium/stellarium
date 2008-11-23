@@ -219,6 +219,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 *************************************************************************/
 StelApp::~StelApp()
 {
+	delete scriptMgr; scriptMgr=NULL;
 	delete loadingBar; loadingBar=NULL;
 	delete core; core=NULL;
 	delete skyCultureMgr; skyCultureMgr=NULL;
