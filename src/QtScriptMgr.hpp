@@ -206,10 +206,30 @@ public slots:
 	//! @param id the ID of the image to remove.
 	void removeSkyImage(const QString& id);
 
+	//! Load a sound from a file.
+	//! @param filename the name of the file to load.
+	//! @param id the identifier which will be used to refer to the sound
+	//! when calling playSound, pauseSound, stopSound and dropSound.
 	void loadSound(const QString& filename, const QString& id);
+
+	//! Play a sound which has previously been loaded with loadSound
+	//! @param id the identifier used when loadSound was called
 	void playSound(const QString& id);
+
+	//! Pause a sound which is playing.  Subsequent playSound calls will
+	//! resume playing from the position in the file when it was paused.
+	//! @param id the identifier used when loadSound was called
 	void pauseSound(const QString& id);
+
+	//! Stop a sound from playing.  This resets the position in the 
+	//! sound to the start so that subsequent playSound calls will
+	//! start from the beginning.
+	//! @param id the identifier used when loadSound was called
 	void stopSound(const QString& id);
+
+	//! Drop a sound from memory.  You should do this before the end
+	//! of your script.
+	//! @param id the identifier used when loadSound was called
 	void dropSound(const QString& id);
 
 	//! print a debugging message to the console
