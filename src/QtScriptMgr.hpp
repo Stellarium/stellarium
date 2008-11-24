@@ -24,7 +24,7 @@
 #include <QtScript>
 #include <QStringList>
 #include "vecmath.h"
-	
+
 //! Provide script API for Stellarium global functions.  Public slots in this class
 //! may be used in Stellarium scripts, and are accessed as member function to the
 //! "core" scripting object.  Module-specific functions, such as setting and clearing
@@ -206,6 +206,12 @@ public slots:
 	//! @param id the ID of the image to remove.
 	void removeSkyImage(const QString& id);
 
+	void loadSound(const QString& filename, const QString& id);
+	void playSound(const QString& id);
+	void pauseSound(const QString& id);
+	void stopSound(const QString& id);
+	void dropSound(const QString& id);
+
 	//! print a debugging message to the console
 	//! @param s the message to be displayed on the console.
 	void debug(const QString& s);
@@ -219,6 +225,12 @@ signals:
 	                         double minRes, double maxBright, bool visible);
 
 	void requestRemoveSkyImage(const QString& id);
+
+	void requestLoadSound(const QString& filename, const QString& id);
+	void requestPlaySound(const QString& id);
+	void requestPauseSound(const QString& id);
+	void requestStopSound(const QString& id);
+	void requestDropSound(const QString& id);
 
 private:
 	//! For use in setDate and waitFor
