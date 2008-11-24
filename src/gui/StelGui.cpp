@@ -277,8 +277,7 @@ void StelGui::init()
 	QObject::connect(getGuiActions("actionShow_Nebulas"), SIGNAL(toggled(bool)), module, SLOT(setFlagHints(bool)));
 	getGuiActions("actionShow_Nebulas")->setChecked(nmgr->getFlagHints());
 	
-	module = GETSTELMODULE("SkyImageMgr");
-	SkyImageMgr* bmgr = (SkyImageMgr*)module;
+	SkyImageMgr* bmgr = &StelApp::getInstance().getSkyImageMgr();
 	QObject::connect(getGuiActions("actionShow_DSS"), SIGNAL(toggled(bool)), module, SLOT(setFlagShow(bool)));
 	getGuiActions("actionShow_DSS")->setChecked(bmgr->getFlagShow());
 	
