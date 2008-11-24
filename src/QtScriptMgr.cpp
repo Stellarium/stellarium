@@ -20,6 +20,7 @@
 #include "fixx11h.h"
 
 #include "QtScriptMgr.hpp"
+#include "AudioMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "LandscapeMgr.hpp"
@@ -63,6 +64,10 @@ class StelScriptThread : public QThread
 		{
 			// seed the QT PRNG
 			qsrand(QDateTime::currentDateTime().toTime_t());
+
+			// Stop Phonon from complaining
+			QCoreApplication::setApplicationName("stellariumscript");
+
 			// For startup scripts, the gui object might not 
 			// have completed init when we run. Wait for that.
 			StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
@@ -114,8 +119,13 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestLoadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)), &StelApp::getInstance().getSkyImageMgr(), SLOT(loadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)));
 
 	connect(this, SIGNAL(requestRemoveSkyImage(const QString&)), &StelApp::getInstance().getSkyImageMgr(), SLOT(removeSkyImage(const QString&)));
-}
 
+	connect(this, SIGNAL(requestLoadSound(const QString&, const QString&)), StelApp::getInstance().getAudioMgr(), SLOT(loadSound(const QString&, const QString&)));
+	connect(this, SIGNAL(requestPlaySound(const QString&)), StelApp::getInstance().getAudioMgr(), SLOT(playSound(const QString&)));
+	connect(this, SIGNAL(requestPauseSound(const QString&)), StelApp::getInstance().getAudioMgr(), SLOT(playSound(const QString&)));
+	connect(this, SIGNAL(requestStopSound(const QString&)), StelApp::getInstance().getAudioMgr(), SLOT(playSound(const QString&)));
+	connect(this, SIGNAL(requestDropSound(const QString&)), StelApp::getInstance().getAudioMgr(), SLOT(playSound(const QString&)));
+}
 
 StelMainScriptAPI::~StelMainScriptAPI()
 {
@@ -278,6 +288,42 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 void StelMainScriptAPI::removeSkyImage(const QString& id)
 {
 	emit(requestRemoveSkyImage(id));
+}
+
+void StelMainScriptAPI::loadSound(const QString& filename, const QString& id)
+{
+	QString path;
+	try
+	{
+		path = StelApp::getInstance().getFileMgr().findFile("scripts/" + filename);
+	}
+	catch(std::runtime_error& e)
+	{
+		qWarning() << "cannot play sound" << filename << ":" << e.what();
+		return;
+	}
+
+	emit(requestLoadSound(path, id));
+}
+
+void StelMainScriptAPI::playSound(const QString& id)
+{
+	emit(requestPlaySound(id));
+}
+
+void StelMainScriptAPI::pauseSound(const QString& id)
+{
+	emit(requestPauseSound(id));
+}
+
+void StelMainScriptAPI::stopSound(const QString& id)
+{
+	emit(requestStopSound(id));
+}
+
+void StelMainScriptAPI::dropSound(const QString& id)
+{
+	emit(requestDropSound(id));
 }
 
 void StelMainScriptAPI::debug(const QString& s)

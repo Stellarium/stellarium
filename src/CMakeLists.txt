@@ -5,8 +5,8 @@ INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_
 ########### next target ###############
 
 SET(stellarium_lib_SRCS
-	core/Audio.cpp
-	core/Audio.hpp
+	core/AudioMgr.hpp
+	core/AudioMgr.cpp
 	core/DownloadMgr.hpp
 	core/DownloadMgr.cpp
 	core/GeodesicGrid.cpp
@@ -264,6 +264,7 @@ QT4_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 # Add here all the files which require moc compilation
 # that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
 SET(stellarium_MOC_HDRS
+	core/AudioMgr.hpp
 	core/DownloadMgr.hpp
 	core/StelModuleMgr.hpp
 	core/Observer.hpp

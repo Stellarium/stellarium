@@ -50,6 +50,7 @@
 #include "QtScriptMgr.hpp"
 #include "QtJsonParser.hpp"
 #include "SkyImageMgr.hpp"
+#include "AudioMgr.hpp"
 
 #include "StelStyle.hpp"
 
@@ -219,10 +220,10 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 *************************************************************************/
 StelApp::~StelApp()
 {
-	moduleMgr->unloadModule("SkyImageMgr", false);	// We need to delete it afterward
-	moduleMgr->unloadModule("StelObjectMgr", false);	// We need to delete it afterward
+	moduleMgr->unloadModule("SkyImageMgr", false);  // We need to delete it afterward
+	moduleMgr->unloadModule("StelObjectMgr", false);// We need to delete it afterward
 	StelModuleMgr* tmp = moduleMgr;
-	moduleMgr = new StelModuleMgr();	// Create a secondary instance to avoid crashes at other deinit
+	moduleMgr = new StelModuleMgr(); // Create a secondary instance to avoid crashes at other deinit
 	delete tmp; tmp=NULL;
 	delete scriptMgr; scriptMgr=NULL;
 	delete loadingBar; loadingBar=NULL;
@@ -230,12 +231,13 @@ StelApp::~StelApp()
 	delete skyCultureMgr; skyCultureMgr=NULL;
 	delete localeMgr; localeMgr=NULL;
 	delete fontManager; fontManager=NULL;
-	delete skyImageMgr; skyImageMgr=NULL;	// Delete the module by hand afterward
-	delete stelObjectMgr; stelObjectMgr=NULL;	// Delete the module by hand afterward
+	delete skyImageMgr; skyImageMgr=NULL; // Delete the module by hand afterward
+	delete audioMgr; audioMgr=NULL;	
+	delete stelObjectMgr; stelObjectMgr=NULL; // Delete the module by hand afterward
 	delete stelFileMgr; stelFileMgr=NULL;
 	delete textureMgr; textureMgr=NULL;
 	delete planetLocationMgr; planetLocationMgr=NULL;
-	delete moduleMgr; moduleMgr=NULL;	// Delete the secondary instance
+	delete moduleMgr; moduleMgr=NULL; // Delete the secondary instance
 	delete argList; argList=NULL;
 	
 	delete currentStelStyle;
@@ -249,7 +251,11 @@ StelApp::~StelApp()
 *************************************************************************/
 QString StelApp::getApplicationName()
 {
+#ifdef SVN_REVISION
+	return QString("Stellarium")+" "+PACKAGE_VERSION+" (SVN r"+SVN_REVISION+")";
+#else
 	return QString("Stellarium")+" "+PACKAGE_VERSION;
+#endif
 }
 
 
@@ -270,7 +276,11 @@ void StelApp::init()
 	// Initialize AFTER creation of openGL context
 	textureMgr->init();
 
+#ifdef SVN_REVISION
+	loadingBar = new LoadingBar(12., "logo24bitsbeta.png", QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
+#else
 	loadingBar = new LoadingBar(12., "logo24bitsbeta.png", PACKAGE_VERSION, 45, 320, 121);
+#endif // SVN_RELEASE
 	
 	downloadMgr = new DownloadMgr();
 	
@@ -308,6 +318,9 @@ void StelApp::init()
 	skyImageMgr = new SkyImageMgr();
 	skyImageMgr->init();
 	getModuleMgr().registerModule(skyImageMgr);
+
+	// Init audio manager
+	audioMgr = new AudioMgr();
 	
 	// Telescope manager
 	TelescopeMgr* telescope_mgr = new TelescopeMgr();
