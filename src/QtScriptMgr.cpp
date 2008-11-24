@@ -122,9 +122,9 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 
 	connect(this, SIGNAL(requestLoadSound(const QString&, const QString&)), StelApp::getInstance().getAudioMgr(), SLOT(loadSound(const QString&, const QString&)));
 	connect(this, SIGNAL(requestPlaySound(const QString&)), StelApp::getInstance().getAudioMgr(), SLOT(playSound(const QString&)));
-	connect(this, SIGNAL(requestPauseSound(const QString&)), StelApp::getInstance().getAudioMgr(), SLOT(playSound(const QString&)));
-	connect(this, SIGNAL(requestStopSound(const QString&)), StelApp::getInstance().getAudioMgr(), SLOT(playSound(const QString&)));
-	connect(this, SIGNAL(requestDropSound(const QString&)), StelApp::getInstance().getAudioMgr(), SLOT(playSound(const QString&)));
+	connect(this, SIGNAL(requestPauseSound(const QString&)), StelApp::getInstance().getAudioMgr(), SLOT(pauseSound(const QString&)));
+	connect(this, SIGNAL(requestStopSound(const QString&)), StelApp::getInstance().getAudioMgr(), SLOT(stopSound(const QString&)));
+	connect(this, SIGNAL(requestDropSound(const QString&)), StelApp::getInstance().getAudioMgr(), SLOT(dropSound(const QString&)));
 }
 
 StelMainScriptAPI::~StelMainScriptAPI()
