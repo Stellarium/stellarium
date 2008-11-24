@@ -29,25 +29,43 @@ class QDataStream;
 class QNetworkAccessManager;
 class QFile;
 
+//! @class DownloadMgr
+//! Used to download files from the internet.
 class DownloadMgr : public QObject
 {
 	Q_OBJECT;
 public:
-	DownloadMgr() : networkManager(StelApp::getInstance().getNetworkAccessManager()),
-		reply(NULL), target(NULL), useChecksum(false), progressBar(NULL),
-		barVisible(true), inProgress(false), blockQuit(true)
-		{}
+	DownloadMgr();
 	~DownloadMgr();
-	void get(const QString&, const QString&, quint16 csum = 0);
+
+	//! Fetch a remote URL into a local file.
+	//! @param url the URL of the remote file.
+	//! @param filePath the path of the local file name which is to be created.
+	//! @param csum the expected checksum of the downloaded file.
+	void get(const QString& url, const QString& filePath, quint16 csum=0);
+
+	//! Abort the download.
 	void abort();
-	QString url() { return address; }
-	QString errorString() { return reply ? reply->errorString() : QString(); }
-	QString name() { return QFileInfo(path).fileName(); }
-	void setBlockQuit(bool b) { blockQuit = b; }
-	void setBarVisible(bool b) { barVisible = b; }
-	void setBarFormat(const QString& f) { barFormat = f; }
-	void setUseChecksum(bool b) { useChecksum = b; }
-	bool isDownloading() { return inProgress; }
+
+	//! Get the URL of the remote file.
+	QString url() {return address;}
+
+	//! After an error, get a description of the error.
+	QString errorString() {return reply ? reply->errorString() : QString();}
+
+	//! Get the local file name.
+	QString name() {return QFileInfo(path).fileName();}
+
+	// ???
+	void setBlockQuit(bool b) {blockQuit = b;}
+	void setBarVisible(bool b) {barVisible = b;}
+	void setBarFormat(const QString& f) {barFormat = f;}
+
+	//! Set the checksum.
+	void setUseChecksum(bool b) {useChecksum = b;}
+
+	//! Find out if the download is still in progress
+	bool isDownloading() {return inProgress;}
 private:
 	QString address;
 	QString path;
