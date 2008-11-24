@@ -219,17 +219,23 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 *************************************************************************/
 StelApp::~StelApp()
 {
+	moduleMgr->unloadModule("SkyImageMgr", false);	// We need to delete it afterward
+	moduleMgr->unloadModule("StelObjectMgr", false);	// We need to delete it afterward
+	StelModuleMgr* tmp = moduleMgr;
+	moduleMgr = new StelModuleMgr();	// Create a secondary instance to avoid crashes at other deinit
+	delete tmp; tmp=NULL;
 	delete scriptMgr; scriptMgr=NULL;
 	delete loadingBar; loadingBar=NULL;
 	delete core; core=NULL;
 	delete skyCultureMgr; skyCultureMgr=NULL;
 	delete localeMgr; localeMgr=NULL;
 	delete fontManager; fontManager=NULL;
-	delete stelObjectMgr; stelObjectMgr=NULL;
+	delete skyImageMgr; skyImageMgr=NULL;	// Delete the module by hand afterward
+	delete stelObjectMgr; stelObjectMgr=NULL;	// Delete the module by hand afterward
 	delete stelFileMgr; stelFileMgr=NULL;
-	delete moduleMgr; moduleMgr=NULL;	// Also delete all modules
 	delete textureMgr; textureMgr=NULL;
 	delete planetLocationMgr; planetLocationMgr=NULL;
+	delete moduleMgr; moduleMgr=NULL;	// Delete the secondary instance
 	delete argList; argList=NULL;
 	
 	delete currentStelStyle;

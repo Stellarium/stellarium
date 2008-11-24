@@ -74,7 +74,7 @@ void StelModuleMgr::registerModule(StelModule* m, bool fgenerateCallingLists)
 /*************************************************************************
  Unregister and delete a StelModule.
 *************************************************************************/
-void StelModuleMgr::unloadModule(const QString& moduleID)
+void StelModuleMgr::unloadModule(const QString& moduleID, bool alsoDelete)
 {
 	StelModule* m = getModule(moduleID);
 	if (!m)
@@ -83,8 +83,10 @@ void StelModuleMgr::unloadModule(const QString& moduleID)
 		return;
 	}
 	modules.remove(moduleID);
+	m->setParent(NULL);
 	callingListsToRegenerate = true;
-	m->deleteLater();
+	if (alsoDelete)
+		m->deleteLater();
 }
 
 /*************************************************************************
