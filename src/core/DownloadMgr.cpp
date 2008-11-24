@@ -23,6 +23,18 @@
 #include <QNetworkAccessManager>
 #include <QFile>
 
+DownloadMgr::DownloadMgr() 
+	: networkManager(StelApp::getInstance().getNetworkAccessManager()),
+          reply(NULL), 
+	  target(NULL), 
+	  useChecksum(false), 
+	  progressBar(NULL),
+	  barVisible(true), 
+	  inProgress(false), 
+	  blockQuit(true) 
+{
+}
+
 DownloadMgr::~DownloadMgr()
 {
 	if(reply)
