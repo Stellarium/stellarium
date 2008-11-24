@@ -28,11 +28,7 @@ AudioMgr::~AudioMgr()
 {
 	foreach(QString id, audioObjects.keys())
 	{
-		if (audioObjects[id] != NULL)
-		{
-			delete audioObjects[id];
-			audioObjects[id] = NULL;
-		}
+		dropSound(id);
 	}
 }
 
@@ -44,7 +40,7 @@ void AudioMgr::loadSound(const QString& filename, const QString& id)
 		dropSound(id);
 	}
 
-	Phonon::MediaObject* sound = Phonon::createPlayer(Phonon::MusicCategory, Phonon::MediaSource(filename));
+	Phonon::MediaObject* sound = Phonon::createPlayer(Phonon::GameCategory, Phonon::MediaSource(filename));
 	audioObjects[id] = sound;
 }
 
@@ -52,7 +48,14 @@ void AudioMgr::playSound(const QString& id)
 {
 	if (audioObjects.contains(id))
 		if (audioObjects[id]!=NULL)
+		{
+			// if already playing, stop and play from the start
+			if (audioObjects[id]->state() == Phonon::PlayingState)
+				audioObjects[id]->stop();
+
+			// otherwise just play it
 			audioObjects[id]->play();
+		}
 }
 
 void AudioMgr::pauseSound(const QString& id)
@@ -75,6 +78,7 @@ void AudioMgr::dropSound(const QString& id)
 		return;
 	if (audioObjects[id]!=NULL)
 	{
+		audioObjects[id]->stop();
 		delete audioObjects[id];
 		audioObjects.remove(id);
 	}
