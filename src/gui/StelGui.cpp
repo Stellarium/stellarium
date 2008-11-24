@@ -278,7 +278,7 @@ void StelGui::init()
 	getGuiActions("actionShow_Nebulas")->setChecked(nmgr->getFlagHints());
 	
 	SkyImageMgr* bmgr = &StelApp::getInstance().getSkyImageMgr();
-	QObject::connect(getGuiActions("actionShow_DSS"), SIGNAL(toggled(bool)), module, SLOT(setFlagShow(bool)));
+	QObject::connect(getGuiActions("actionShow_DSS"), SIGNAL(toggled(bool)), bmgr, SLOT(setFlagShow(bool)));
 	getGuiActions("actionShow_DSS")->setChecked(bmgr->getFlagShow());
 	
 	module = (QObject*)StelApp::getInstance().getCore()->getNavigation();
@@ -937,9 +937,9 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 	}
 	else
 	{
-		bool b;
-		b = getButtonBar()->hideButton("actionShow_DSS")==btShowNebulaeBackground;
-		Q_ASSERT(b);
+		bool bb;
+		bb = (getButtonBar()->hideButton("actionShow_DSS")==btShowNebulaeBackground);
+		Q_ASSERT(bb);
 	}
 	flagShowNebulaBackgroundButton = b;
 }
