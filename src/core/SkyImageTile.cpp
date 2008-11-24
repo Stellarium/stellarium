@@ -169,6 +169,7 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
  			texMgr.setMipmapsMode(true);
 			texMgr.setMinFilter(GL_LINEAR);
  			texMgr.setMagFilter(GL_LINEAR);
+ 			texMgr.setWrapMode(GL_CLAMP_TO_EDGE);
 			tex = texMgr.createTextureThread(absoluteImageURI);
 			if (!tex)
 			{
