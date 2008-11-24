@@ -167,7 +167,7 @@ class MySleep : public QThread
 
 void StelMainScriptAPI::wait(double t)
 {
-	MySleep::msleep(t*1000);
+	MySleep::msleep((unsigned long )(t*1000));
 }
 
 void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
