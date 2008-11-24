@@ -331,10 +331,14 @@ double getDecAngle(const QString& str)
 	{
 		bool neg = (re1.capturedTexts().at(1) == "-");
 		double d = re1.capturedTexts().at(2).toDouble();
-		if (re1.capturedTexts().at(3).toUpper() == "H")
-			d *= 15;
 		double m = re1.capturedTexts().at(4).toDouble();
 		double s = re1.capturedTexts().at(5).toDouble();
+		if (re1.capturedTexts().at(3).toUpper() == "H")
+		{
+			d *= 15;
+			m *= 15;
+			s *= 15;
+		}
 		QString cardinal = re1.capturedTexts().at(7);
 		double deg = d + (m/60) + (s/3600);
 		if (cardinal.toLower() == "s" || cardinal.toLower() == "w" || neg)
