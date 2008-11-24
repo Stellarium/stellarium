@@ -52,6 +52,7 @@ CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
 
 ########### Others ###########
 # Activate translation with gettext
+SET(RELEASE_BUILD 0 CACHE BOOL "Flag this build as an official release, 1 or 0.")
 SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be supported, option are: 1 or 0.")
 # Generate python wrappers
 SET(GENERATE_PYTHON_WRAPPERS 0 CACHE BOOL "Define whether python wrapper should be build using SIP, options are: 1 or 0.")
@@ -81,21 +82,11 @@ FIND_PACKAGE(Qt4 REQUIRED)
 SET(QT_USE_QTOPENGL TRUE)
 SET(QT_USE_QTSCRIPT TRUE)
 SET(QT_USE_QTNETWORK TRUE)
-INCLUDE(${QT_USE_FILE})
-
-
-SET(SDL_LIBRARY "")
 IF(ENABLE_SOUND)
-FIND_PACKAGE(SDL_mixer)
-IF(SDLMIXER_LIBRARY)
-  MESSAGE(STATUS "Found SDL_mixer. Activate sound support.")
-  SET(HAVE_SDL_SDL_MIXER_H 1)
-ELSE(SDLMIXER_LIBRARY)
-  MESSAGE(STATUS "No sound support.")
-  SET(SDLMIXER_INCLUDE_DIR "")
-  SET(SDLMIXER_LIBRARY "")
-ENDIF(SDLMIXER_LIBRARY)
+  SET(QT_USE_PHONON TRUE)
+  ADD_DEFINITIONS(-DHAVE_QT_PHONON)
 ENDIF(ENABLE_SOUND)
+INCLUDE(${QT_USE_FILE})
 
 IF(ENABLE_NLS)
   FIND_PACKAGE(Iconv REQUIRED)
@@ -129,6 +120,16 @@ ELSE(UNIX AND NOT WIN32)
   SET(INSTALL_DATADIR .)
   SET(INSTALL_LOCALEDIR ./locale)
 ENDIF(UNIX AND NOT WIN32)
+
+########### Get SVN revision for non-release builds ###########
+IF(NOT RELEASE_BUILD)
+  FIND_PACKAGE(Subversion) 
+  IF(Subversion_FOUND) 
+    Subversion_WC_INFO(${PROJECT_SOURCE_DIR} StelSvn) 
+    MESSAGE("Current SVN revision is ${StelSvn_WC_REVISION}")
+    SET(SVN_REVISION ${StelSvn_WC_REVISION})
+  ENDIF(Subversion_FOUND) 
+ENDIF(NOT RELEASE_BUILD)
 
 ########### Generate a config.h ###########
 INCLUDE(TestBigEndian)

@@ -44,6 +44,7 @@ class LocationMgr;
 class SkyImageMgr;
 class QtScriptMgr;
 class DownloadMgr;
+class AudioMgr;
 
 //! @class StelApp 
 //! Singleton main Stellarium application class.
@@ -119,6 +120,8 @@ public:
 	//! Get the SkyImageMgr managing background images
 	//! @return the SkyImageMgr managing background images
 	SkyImageMgr& getSkyImageMgr() {return *skyImageMgr;}
+
+	AudioMgr* getAudioMgr() {return audioMgr;}
 	
 	//! Get the script manager
 	QtScriptMgr& getScriptMgr() {return *scriptMgr;}
@@ -345,6 +348,9 @@ private:
 	
 	// The manager for the sky images such as nebulas or background DSS
 	SkyImageMgr* skyImageMgr;
+
+	// The audio manager.  Must execute in the main thread.
+	AudioMgr* audioMgr;
 	
 	// The script manager based on Qt script engine
 	QtScriptMgr* scriptMgr;

@@ -1,0 +1,35 @@
+// Name: Audio Test
+// Author: Matthew Gates
+// License: Public Domain
+// Description: This script plays several formats of audio file.
+//              Note that audio support is a build-time option and
+//              may not be supported for the version of Stellarium
+//              which you have.  Also, different playforms may
+//              support different audio formats.
+//
+
+core.loadSound("tests/audiotest.wav", "wav");
+core.loadSound("tests/audiotest.ogg", "ogg");
+core.loadSound("tests/audiotest.mp3", "mp3");
+
+lab = LabelMgr.labelScreen("Playing WAV file...", 100, 200, true, 20, "#ff0000");
+core.playSound("wav");
+core.wait(4);
+LabelMgr.deleteLabel(lab);
+core.wait(0.4);
+
+lab = LabelMgr.labelScreen("Playing OGG file...", 100, 200, true, 20, "#ff0000");
+core.playSound("ogg");
+core.wait(4);
+LabelMgr.deleteLabel(lab);
+core.wait(0.4);
+
+lab = LabelMgr.labelScreen("Playing MP3 file...", 100, 200, true, 20, "#ff0000");
+core.playSound("mp3");
+core.wait(4);
+LabelMgr.deleteLabel(lab);
+core.wait(0.4);
+
+core.dropSound("wav");
+core.dropSound("ogg");
+core.dropSound("mp3");
