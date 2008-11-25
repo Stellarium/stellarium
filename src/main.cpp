@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 	app.installTranslator(&trans);
 	if (!QGLFormat::hasOpenGL())
 	{
-		QMessageBox::information(0, "Stellarium", q_("This system does not support OpenGL."));
+		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
 	}
 	
 	StelMainGraphicsView* view = new StelMainGraphicsView(NULL, argc, argv);
