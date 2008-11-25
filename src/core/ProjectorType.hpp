@@ -24,7 +24,9 @@
 #include <config.h>
 
 class Projector;
-//! Intrusive pointer used to manage Projector with smart pointers
+
+//! Shared pointer on a Projector instance
+//! Implement reference counting
 typedef boost::shared_ptr<Projector> ProjectorP;
 
 #endif // _PROJECTORTYPE_HPP_
