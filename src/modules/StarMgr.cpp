@@ -196,6 +196,7 @@ void StarMgr::init() {
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
+	StelApp::getInstance().getTextureManager().setMinFilter(GL_LINEAR);
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   // Load pointer texture
 }
 

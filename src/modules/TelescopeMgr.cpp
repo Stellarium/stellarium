@@ -250,6 +250,7 @@ void TelescopeMgr::init()
 
 	setFontSize(12.f);
 	StelApp::getInstance().getTextureManager().setDefaultParams();
+	StelApp::getInstance().getTextureManager().setMinFilter(GL_LINEAR);
 	telescopeTexture = StelApp::getInstance().getTextureManager().createTexture("telescope.png");
 #ifdef WIN32
 	if (!wsaOk) return;
