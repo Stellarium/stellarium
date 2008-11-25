@@ -102,6 +102,7 @@ void NebulaMgr::init()
 	Nebula::nebulaFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
+	StelApp::getInstance().getTextureManager().setMinFilter(GL_LINEAR);
 	Nebula::texCircle = StelApp::getInstance().getTextureManager().createTexture("neb.png");   // Load circle texture
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur5.png");   // Load pointer texture
