@@ -203,7 +203,7 @@ void SkyGrid::draw(const StelCore* core) const
 	prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2+1, centerV);
 	StelUtils::rectToSphe(&lon2, &lat2, centerV);
 	const double gridStepParallelRad = M_PI/180.*getClosestResolutionDMS(1./std::sqrt((lat1-lat0)*(lat1-lat0)+(lat2-lat0)*(lat2-lat0)));
-	const double closetResLon = (frameType==StelCore::FrameLocal) ? 
+	const double closetResLon = (frameType==StelCore::FrameAltAz) ? 
 		getClosestResolutionDMS(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0)))
 		: getClosestResolutionHMS(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0)));
 	const double gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : closetResLon);
@@ -259,7 +259,7 @@ void SkyGrid::draw(const StelCore* core) const
 	for (i=0; i<maxNbIter; ++i)
 	{
 		StelUtils::rectToSphe(&lon1, &lat1, fpt);
-		userData.text = frameType==StelCore::FrameLocal ? StelUtils::radToDmsStrAdapt(M_PI-lon1) : StelUtils::radToHmsStrAdapt(lon1);
+		userData.text = frameType==StelCore::FrameAltAz ? StelUtils::radToDmsStrAdapt(M_PI-lon1) : StelUtils::radToHmsStrAdapt(lon1);
 		
 		meridianHalfSpace.n = fpt^Vec3d(0,0,1);
 		meridianHalfSpace.n.normalize();
@@ -311,7 +311,7 @@ void SkyGrid::draw(const StelCore* core) const
 		for (int j=0; j<maxNbIter-i; ++j)
 		{
 			StelUtils::rectToSphe(&lon1, &lat1, fpt);
-			userData.text = frameType==StelCore::FrameLocal ? StelUtils::radToDmsStrAdapt(M_PI-lon1) : StelUtils::radToHmsStrAdapt(lon1);
+			userData.text = frameType==StelCore::FrameAltAz ? StelUtils::radToDmsStrAdapt(M_PI-lon1) : StelUtils::radToHmsStrAdapt(lon1);
 			
 			meridianHalfSpace.n = fpt^Vec3d(0,0,1);
 			meridianHalfSpace.n.normalize();
@@ -446,8 +446,8 @@ font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstanc
 
 	switch (line_type)
 	{
-		case LOCAL : frameType = StelCore::FrameLocal; break;
-		case MERIDIAN : frameType = StelCore::FrameLocal; break;
+		case LOCAL : frameType = StelCore::FrameAltAz; break;
+		case MERIDIAN : frameType = StelCore::FrameAltAz; break;
 		case ECLIPTIC : frameType = StelCore::FrameHelio; break;
 		case EQUATOR : frameType = StelCore::FrameEquinoxEqu; break;
 		default : frameType = StelCore::FrameEquinoxEqu;
@@ -494,7 +494,7 @@ GridLinesMgr::GridLinesMgr()
 	setObjectName("GridLinesMgr");
 	equGrid = new SkyGrid(StelCore::FrameEquinoxEqu);
 	equJ2000Grid = new SkyGrid(StelCore::FrameJ2000);
-	aziGrid = new SkyGrid(StelCore::FrameLocal);
+	aziGrid = new SkyGrid(StelCore::FrameAltAz);
 	equatorLine = new SkyLine(SkyLine::EQUATOR);
 	eclipticLine = new SkyLine(SkyLine::ECLIPTIC);
 	meridianLine = new SkyLine(SkyLine::MERIDIAN);

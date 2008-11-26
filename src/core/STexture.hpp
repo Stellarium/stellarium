@@ -33,7 +33,7 @@ class QSemaphore;
 class QFile;
 
 //! @class STexture 
-//! Base texture class
+//! Base texture class. For creating an instance, use StelTextureMgr::createTexture() and StelTextureMgr::createTextureThread()
 class STexture : public QObject
 {
 	Q_OBJECT;

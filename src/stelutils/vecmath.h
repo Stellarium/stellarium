@@ -36,16 +36,38 @@ typedef Vector2<double>	Vec2d;
 typedef Vector2<float>	Vec2f;
 typedef Vector2<int>	Vec2i;
 
-typedef Vector3<float>	Vec3f;
+//! @typedef Vec3d
+//! A 3d vector of doubles compatible with openGL.
 typedef Vector3<double>	Vec3d;
 
+//! @typedef Vec3f
+//! A 3d vector of floats compatible with openGL.
+typedef Vector3<float>	Vec3f;
+
+//! @typedef Vec4d
+//! A 4d vector of doubles compatible with openGL.
 typedef Vector4<double>	Vec4d;
+
+//! @typedef Vec4f
+//! A 4d vector of floats compatible with openGL.
 typedef Vector4<float>	Vec4f;
+
+//! @typedef Vec4i
+//! A 4d vector of ints compatible with openGL.
 typedef Vector4<int>	Vec4i;
 
-typedef Matrix4<float>	Mat4f;
+//! @typedef Mat4d
+//! A 4x4 matrix of doubles compatible with openGL.
 typedef Matrix4<double>	Mat4d;
 
+//! @typedef Mat4f
+//! A 4x4 matrix of floats compatible with openGL.
+typedef Matrix4<float>	Mat4f;
+
+
+//! @class Vector2
+//! A templatized 2d vector compatible with openGL.
+//! Use Vec2d or Vec2f typdef for vectors of double and float respectively.
 template<class T> class Vector2
 {
 public:
@@ -89,7 +111,9 @@ public:
     T v[2];
 };
 
-
+//! @class Vector3
+//! A templatized 3d vector compatible with openGL.
+//! Use Vec3d or Vec3f typdef for vectors of double and float respectively.
 template<class T> class Vector3
 {
 public:
@@ -149,6 +173,9 @@ public:
 };
 
 
+//! @class Vector4
+//! A templatized 4d vector compatible with openGL.
+//! Use Vec4d or Vec4f typdef for vectors of double and float respectively.
 template<class T> class Vector4
 {
 public:
@@ -197,8 +224,9 @@ public:
 	T v[4];		// The 4 values
 };
 
-
-// Column-major matrix compatible with openGL.
+//! @class Matrix4
+//! A templatized column-major 4x4 matrix compatible with openGL.
+//! Use Mat4d or Mat4f typdef for matrices of doubles and floats respectively.
 template<class T> class Matrix4
 {
  public:

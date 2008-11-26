@@ -92,7 +92,7 @@ public:
 	bool getFlagGravityLabels() const { return gravityLabels; }
 
 	//! Get the lower left corner of the viewport and the width, height.
-	const Vector4<int>& getViewport(void) const {return viewportXywh;}
+	const Vec4i& getViewport(void) const {return viewportXywh;}
 
 	//! Get the center of the viewport relative to the lower left corner of the screen.
 	Vec2d getViewportCenter(void) const
@@ -228,7 +228,7 @@ private:
 	
 	ProjectorMaskType maskType;    // The current projector mask
 	double zNear, oneOverZNearMinusZFar;  // Near and far clipping planes
-	Vector4<int> viewportXywh;     // Viewport parameters
+	Vec4i viewportXywh;     // Viewport parameters
 	Vec2d viewportCenter;          // Viewport center in screen pixel
 	double viewportFovDiameter;    // diameter of the FOV disk in pixel
 	double pixelPerRad;            // pixel per rad at the center of the viewport disk
