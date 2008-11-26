@@ -29,7 +29,7 @@ class QAction;
 class QGraphicsTextItem;
 class QTimer;
 
-//! Progess bars in the lower right corner
+// Progess bars in the lower right corner
 class StelProgressBarMgr : public QObject, public QGraphicsItem
 {
 	Q_OBJECT;
@@ -44,7 +44,7 @@ private:
 	void updateBarsPositions();
 };
 
-//! Buttons in the bottom left corner
+// Buttons in the bottom left corner
 class CornerButtons : public QObject, public QGraphicsItem
 {
 Q_OBJECT;
@@ -57,7 +57,7 @@ private:
 	mutable double lastOpacity;
 };
 
-//! Implement a button for use in Stellarium's graphic widgets
+//! A Button Graphicsitem for use in Stellarium's graphic widgets
 class StelButton : public QObject, public QGraphicsPixmapItem
 {
 	friend class BottomStelBar;
@@ -126,7 +126,7 @@ private:
 	bool redMode;
 };
 
-//! The button bar on the left containing windows toggle buttons
+// The button bar on the left containing windows toggle buttons
 class LeftStelBar : public QObject, public QGraphicsItem
 {
 	Q_OBJECT;
@@ -149,7 +149,7 @@ private:
 	QGraphicsSimpleTextItem* helpLabel;
 };
 
-//! The button bar on the bottom containing actions toggle buttons
+// The button bar on the bottom containing actions toggle buttons
 class BottomStelBar : public QObject, public QGraphicsItem
 {
 	Q_OBJECT;
@@ -218,7 +218,7 @@ private:
 	QGraphicsSimpleTextItem* helpLabel;
 };
 
-//! The path around the bottom left button bars
+// The path around the bottom left button bars
 class StelBarsPath : public QGraphicsPathItem
 {
 	public:
