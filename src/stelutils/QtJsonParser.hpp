@@ -23,17 +23,19 @@
 #include <QVariant>
 #include <QByteArray>
 
-//! Qt-based simple JSON reader inspired by the one from Zoolib http://zoolib.sourceforge.net/
+//! Qt-based simple JSON reader inspired by the one from <a href='http://zoolib.sourceforge.net/'>Zoolib</a>.
 //! JSON is JavaScript Object Notation. See http://www.json.org/
-//! The mapping with Qt types is done as following:
-//! JSON            Qt
-//! ----          -------
-//! null          QVariant::Invalid
-//! object        QVariantMap (QVariant::Map)
-//! array         QVariantList (QVariant::List)
-//! boolean       QVariant::Bool
-//! string        QVariant::String
-//! number        QVariant::Int or QVariant::Double
+/*! <p>The mapping with Qt types is done as following:
+@verbatim
+JSON            Qt
+----          -------
+null          QVariant::Invalid
+object        QVariantMap (QVariant::Map)
+array         QVariantList (QVariant::List)
+boolean       QVariant::Bool
+string        QVariant::String
+number        QVariant::Int or QVariant::Double
+@endverbatim */
 class QtJsonParser
 {
 public:
