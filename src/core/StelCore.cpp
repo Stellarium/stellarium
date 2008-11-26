@@ -205,7 +205,7 @@ const ProjectorP StelCore::getProjection(FrameType frameType, ProjectionType pro
 	
 	switch (frameType)
 	{
-		case FrameLocal:
+		case FrameAltAz:
 			return getProjection(navigation->getAltAzModelViewMat(), projType);
 		case FrameHelio:
 			return getProjection(navigation->getHeliocentricEclipticModelViewMat(), projType);

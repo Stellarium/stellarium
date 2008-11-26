@@ -299,7 +299,7 @@ void LandscapeOldStyle::drawFog(StelCore* core) const
 // Draw the mountains with a few pieces of texture
 void LandscapeOldStyle::drawDecor(StelCore* core) const
 {
-	const ProjectorP prj = core->getProjection(StelCore::FrameLocal);
+	const ProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 	StelPainter sPainter(prj);
 	
 	if (!landFader.getInterstate()) return;
