@@ -25,8 +25,15 @@
 
 class Projector;
 
-//! Shared pointer on a Projector instance
-//! Implement reference counting
+namespace boost
+{
+	//! @class shared_ptr
+	//! Boost shared pointer class. See http://www.boost.org/doc/libs/1_37_0/libs/smart_ptr/shared_ptr.htm
+	template<class T> class shared_ptr;
+};
+
+//! @typedef ProjectorP
+//! Shared pointer on a Projector instance (implement reference counting)
 typedef boost::shared_ptr<Projector> ProjectorP;
 
 #endif // _PROJECTORTYPE_HPP_

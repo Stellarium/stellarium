@@ -24,7 +24,8 @@
 
 class STexture;
 
-//! In stellarium we now use shared pointer to simplify memory managment
+//! @typedef STextureSP
+//! Use shared pointer to simplify memory managment
 typedef boost::shared_ptr<STexture> STextureSP;
 
 namespace STextureTypes

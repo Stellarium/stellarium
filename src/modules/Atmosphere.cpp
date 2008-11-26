@@ -58,7 +58,7 @@ Atmosphere::~Atmosphere(void)
 void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase,
                                StelCore* core, float latitude, float altitude, float temperature, float relativeHumidity)
 {
-	const ProjectorP prj = core->getProjection(StelCore::FrameLocal);
+	const ProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 	if (viewport != prj->getViewport())
 	{
 		// The viewport changed: update the number of point of the grid
