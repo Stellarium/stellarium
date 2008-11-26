@@ -26,6 +26,10 @@
 This documentation concerns the inner workings of Stellarium.  This documentation 
 is targetted at developers of scripts, plugins and the core program.
 
+@section architecture_sec Program Architecture
+
+@image html stellarium-architecture.png
+
 @section intro_scripts Scripting API
 
 Stellarium uses the <a href="http://doc.trolltech.com/4.3/qtscript.html">QT 
@@ -42,5 +46,6 @@ Authors of Stellarium scripts may use application specific functions from the fo
   same name as the corresponding StelModule.  For example, to access LandscapeMgr::setFlagAtmosphere(), 
   a script author would use the scripting command: LandscapeMgr.setFlagAtmosphere(...);
 
+@image html stellarium-logo.png
 
 */
