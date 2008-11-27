@@ -25,7 +25,7 @@
 #include "Planet.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelCore.hpp"
-#include "LocationMgr.hpp"
+#include "StelLocationMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "MovementMgr.hpp"
 
@@ -182,7 +182,7 @@ void Navigator::moveObserverToSelected(void)
 		if (pl)
 		{
 			// We need to move to the selected planet. Try to generate a location from the current one
-			Location loc = getCurrentLocation();
+			StelLocation loc = getCurrentLocation();
 			loc.planetName = pl->getEnglishName();
 			loc.name = "-";
 			loc.state = "";
@@ -195,13 +195,13 @@ void Navigator::moveObserverToSelected(void)
 }
 
 // Get the informations on the current location
-const Location& Navigator::getCurrentLocation() const
+const StelLocation& Navigator::getCurrentLocation() const
 {
 	return position->getCurrentLocation();
 }
 
 // Smoothly move the observer to the given location
-void Navigator::moveObserverTo(const Location& target, double duration, double durationIfPlanetChange)
+void Navigator::moveObserverTo(const StelLocation& target, double duration, double durationIfPlanetChange)
 {
 	double d = (getCurrentLocation().planetName==target.planetName) ? duration : durationIfPlanetChange;
 	if (d>0.)

@@ -28,10 +28,10 @@
 #include "StelFader.hpp"
 #include "StelUtils.hpp"
 #include "StelTextureTypes.hpp"
-#include "Location.hpp"
+#include "StelLocation.hpp"
 
 class QSettings;
-class Location;
+class StelLocation;
 class StelCore;
 
 //! Store and manages the displaying of the Landscape
@@ -67,7 +67,7 @@ public:
 	QString getDescription() const {return description;}
 
 	//! Return the associated location or NULL
-	const Location& getLocation() const {return location;}
+	const StelLocation& getLocation() const {return location;}
 
 	//! Set the z-axis rotation (offset from original value when rotated
 	void setZRotation(double d) {angleRotateZOffset = d;}
@@ -98,7 +98,7 @@ protected:
 		float texCoords[4];
 	} landscapeTexCoord;
 	
-	Location location;
+	StelLocation location;
 	float angleRotateZ;
 	float angleRotateZOffset;
 };

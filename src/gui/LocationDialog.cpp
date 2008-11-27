@@ -20,7 +20,7 @@
 #include "Dialog.hpp"
 #include "LocationDialog.hpp"
 #include "StelMainGraphicsView.hpp"
-#include "LocationMgr.hpp"
+#include "StelLocationMgr.hpp"
 #include "ui_locationDialogGui.h"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -163,7 +163,7 @@ void LocationDialog::connectEditSignals()
 	connect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(locationNameChanged(const QString&)));
 }
 
-void LocationDialog::setFieldsFromLocation(const Location& loc)
+void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 {
 	// Deactivate edit signals
 	disconnectEditSignals();
@@ -199,7 +199,7 @@ void LocationDialog::setFieldsFromLocation(const Location& loc)
 }
 
 // Update the map for the given location.
-void LocationDialog::setMapForLocation(const Location& loc)
+void LocationDialog::setMapForLocation(const StelLocation& loc)
 {
 	// Avoids usless processing
 	if (lastPlanet==loc.planetName && lastVisionMode==StelApp::getInstance().getVisionModeNight())
@@ -255,10 +255,10 @@ void LocationDialog::setMapForLocation(const Location& loc)
 	lastVisionMode = StelApp::getInstance().getVisionModeNight();
 }
 
-// Create a Location instance from the fields
-Location LocationDialog::locationFromFields() const
+// Create a StelLocation instance from the fields
+StelLocation LocationDialog::locationFromFields() const
 {
-	Location loc;
+	StelLocation loc;
 	loc.planetName = ui->planetNameComboBox->currentText();
 	loc.name = ui->cityNameLineEdit->text();
 	loc.latitude = ui->latitudeSpinBox->valueDegrees();
@@ -273,7 +273,7 @@ void LocationDialog::listItemActivated(const QModelIndex& index)
 	isEditingNew=false;
 	ui->addLocationToListPushButton->setEnabled(false);
 	
-	Location loc = StelApp::getInstance().getLocationMgr().locationForSmallString(index.data().toString());
+	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForSmallString(index.data().toString());
 	
 	setFieldsFromLocation(loc);
 	StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(loc, 0.);
@@ -286,7 +286,7 @@ void LocationDialog::listItemActivated(const QModelIndex& index)
 void LocationDialog::setPositionFromMap(double longitude, double latitude)
 {
 	reportEdit();
-	Location loc = locationFromFields();
+	StelLocation loc = locationFromFields();
 	loc.latitude = latitude;
 	loc.longitude = longitude;
 	setFieldsFromLocation(loc);
@@ -297,7 +297,7 @@ void LocationDialog::setPositionFromMap(double longitude, double latitude)
 void LocationDialog::comboBoxChanged(const QString& text)
 {
 	reportEdit();
-	Location loc = locationFromFields();
+	StelLocation loc = locationFromFields();
 	if (loc.planetName!=StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().planetName)
 		setFieldsFromLocation(loc);
 	StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(loc, 0.);
@@ -306,7 +306,7 @@ void LocationDialog::comboBoxChanged(const QString& text)
 void LocationDialog::spinBoxChanged(int i)
 {
 	reportEdit();
-	Location loc = locationFromFields();
+	StelLocation loc = locationFromFields();
 	StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(loc, 0.);
 }
 
@@ -325,7 +325,7 @@ void LocationDialog::reportEdit()
 		isEditingNew=true;
 	}
 	
-	Location loc = locationFromFields();
+	StelLocation loc = locationFromFields();
 	if (!StelApp::getInstance().getLocationMgr().canSaveUserLocation(loc))
 	{
 		ui->cityNameLineEdit->setText("New Location");
@@ -339,7 +339,7 @@ void LocationDialog::reportEdit()
 // Called when the user clic on the save button
 void LocationDialog::addCurrentLocationToList()
 {
-	const Location& loc = locationFromFields();
+	const StelLocation& loc = locationFromFields();
 	ui->citySearchLineEdit->clear();
 	StelApp::getInstance().getLocationMgr().saveUserLocation(loc);
 	isEditingNew=false;
@@ -372,6 +372,6 @@ void LocationDialog::useAsDefaultClicked()
 // Called when the user clic on the delete button
 void LocationDialog::deleteCurrentLocationFromList()
 {
-	const Location& loc = locationFromFields();
+	const StelLocation& loc = locationFromFields();
 	StelApp::getInstance().getLocationMgr().deleteUserLocation(loc.getID());
 }

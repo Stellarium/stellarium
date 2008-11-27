@@ -20,7 +20,7 @@
 #ifndef _OBSERVER_HPP_
 #define _OBSERVER_HPP_
 
-#include "Location.hpp"
+#include "StelLocation.hpp"
 #include <QObject>
 #include <QString>
 #include "vecmath.h"
@@ -37,7 +37,7 @@ class Observer : public QObject
 	
 public:
 	//! Create a new Observer instance which is at a fixed Location
-	Observer(const Location& loc);
+	Observer(const StelLocation& loc);
 	~Observer();
 
 	//! Update Observer info if needed. Default implementation does nothing.
@@ -51,7 +51,7 @@ public:
 	virtual const Planet* getHomePlanet(void) const {return planet;}
 	
 	//! Get the informations on the current location
-	const Location& getCurrentLocation() const {return currentLocation;}
+	const StelLocation& getCurrentLocation() const {return currentLocation;}
 	
 	//! Get whether the life of this observer is over, and therefore that it should be changed to the next one
 	//! provided by the getNextObserver() method
@@ -61,7 +61,7 @@ public:
 	virtual Observer* getNextObserver() const {return new Observer(currentLocation);}
 	
 protected:
-	Location currentLocation;
+	StelLocation currentLocation;
 	const Planet* planet;    
 };
 
@@ -70,7 +70,7 @@ protected:
 class SpaceShipObserver : public Observer
 {
 public:
-	SpaceShipObserver(const Location& startLoc, const Location& target, double transitSeconds=1.f);
+	SpaceShipObserver(const StelLocation& startLoc, const StelLocation& target, double transitSeconds=1.f);
 	~SpaceShipObserver();
 	
 	//! Update Observer info if needed. Default implementation does nothing.
@@ -80,8 +80,8 @@ public:
 	virtual Observer* getNextObserver() const {return new Observer(moveTargetLocation);}
 	
 private:
-	Location moveStartLocation;
-	Location moveTargetLocation;
+	StelLocation moveStartLocation;
+	StelLocation moveTargetLocation;
 	ArtificialPlanet* artificialPlanet;
 	double timeToGo;
 	double transitSeconds;
