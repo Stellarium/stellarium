@@ -20,7 +20,7 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
-#include "STexture.hpp"
+#include "StelTexture.hpp"
 #include "Projector.hpp"
 #include "ToneReproducer.hpp"
 #include "StelCore.hpp"

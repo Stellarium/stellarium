@@ -22,7 +22,7 @@
 
 #include "StelModule.hpp"
 #include "vecmath.h"
-#include "STextureTypes.hpp"
+#include "StelTextureTypes.hpp"
 
 //! @class MilkyWay 
 //! Manages the displaying of the Milky Way.
@@ -81,7 +81,7 @@ private:
 	void setTexture(const QString& texFile);
 	
 	float radius;
-	STextureSP tex;
+	StelTextureSP tex;
 	Vec3f color;
 	float intensity;
 	class LinearFader* fader;

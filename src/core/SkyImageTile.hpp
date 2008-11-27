@@ -19,7 +19,7 @@
 #ifndef _SKYIMAGETILE_HPP_
 #define _SKYIMAGETILE_HPP_
 
-#include "STextureTypes.hpp"
+#include "StelTextureTypes.hpp"
 #include "SphereGeometry.hpp"
 #include "MultiLevelJsonBase.hpp"
 
@@ -149,7 +149,7 @@ private:
 	double getMinResolution() const {return minResolution;}
 	
 	// The texture of the tile
-	STextureSP tex;
+	StelTextureSP tex;
 
 	// Used for smooth fade in
 	QTimeLine* texFader;

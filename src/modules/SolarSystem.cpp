@@ -20,7 +20,7 @@
 
 #include <algorithm>
 #include "SolarSystem.hpp"
-#include "STexture.hpp"
+#include "StelTexture.hpp"
 #include "stellplanet.h"
 #include "Orbit.hpp"
 #include "Navigator.hpp"

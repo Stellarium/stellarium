@@ -27,7 +27,7 @@
 #include "StelObject.hpp"
 #include "StelUtils.hpp"
 #include "Fader.hpp"
-#include "STextureTypes.hpp"
+#include "StelTextureTypes.hpp"
 
 class StarMgr;
 class SFont;
@@ -150,7 +150,7 @@ private:
 	unsigned int numberOfSegments;
 	//! List of stars forming the segments
 	StelObjectP* asterism;
-	STextureSP artTexture;
+	StelTextureSP artTexture;
 	Vec3d artVertex[9];
 	
 	//! Define whether art, lines, names and boundary must be drawn

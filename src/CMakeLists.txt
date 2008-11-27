@@ -70,9 +70,9 @@ SET(stellarium_lib_SRCS
 	core/StelSkyCultureMgr.hpp
 	core/StelTextureMgr.cpp
 	core/StelTextureMgr.hpp
-	core/STexture.cpp
-	core/STexture.hpp
-	core/STextureTypes.hpp
+	core/StelTexture.cpp
+	core/StelTexture.hpp
+	core/StelTextureTypes.hpp
 	core/ToneReproducer.cpp
 	core/ToneReproducer.hpp
 	core/ViewportDistorter.cpp
@@ -271,7 +271,7 @@ SET(stellarium_MOC_HDRS
 	core/LocationMgr.hpp
 	core/StelCore.hpp
 	core/StelAppGraphicsScene.hpp
-	core/STexture.hpp
+	core/StelTexture.hpp
 	core/MovementMgr.hpp
 	core/MultiLevelJsonBase.hpp
 	core/SkyImageTile.hpp

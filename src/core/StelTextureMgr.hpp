@@ -28,7 +28,7 @@
 #include <QMap>
 #include <QMutex>
 
-#include "STexture.hpp"
+#include "StelTexture.hpp"
 
 //! @class ImageLoader 
 //! Abstract class for any Image loaders.
@@ -93,14 +93,14 @@ public:
 	//! Load an image from a file and create a new texture from it
 	//! @param filename the texture file name, can be absolute path if starts with '/' otherwise
 	//!    the file will be looked in stellarium standard textures directories.
-	STextureSP createTexture(const QString& filename);
+	StelTextureSP createTexture(const QString& filename);
 	
 	//! Load an image from a file and create a new texture from it in a new thread.
 	//! @param url the texture file name or URL, can be absolute path if starts with '/' otherwise
 	//!    the file will be looked in stellarium standard textures directories.
 	//! @param fileExtension the file extension to assume. If not set the extension is determined from url
 	//! @param lazyLoading define whether the texture should be actually loaded only when needed, i.e. when bind() is called the first time.
-	STextureSP createTextureThread(const QString& url, const QString& fileExtension="", bool lazyLoading=true);
+	StelTextureSP createTextureThread(const QString& url, const QString& fileExtension="", bool lazyLoading=true);
 	
 	//! Define if mipmaps must be created while creating textures
 	void setMipmapsMode(bool b = false) {mipmapsMode = b;}
@@ -126,7 +126,7 @@ public:
 	
 	//! Define how the dynamic range of the image will be adapted to fit on 8 bits
 	//! Note that using linear mode on 8 bits images does nothing
-	void setDynamicRangeMode(STextureTypes::DynamicRangeMode dMode = STextureTypes::Linear) {dynamicRangeMode = dMode;}
+	void setDynamicRangeMode(StelTextureTypes::DynamicRangeMode dMode = StelTextureTypes::Linear) {dynamicRangeMode = dMode;}
 	
 	//! Register a new image loader for a given image file extension
 	void registerImageLoader(const QString& fileExtension, ImageLoader* loader)
@@ -135,16 +135,16 @@ public:
 	}
 	
 private:
-	friend class STexture;
+	friend class StelTexture;
 
 	//! Internal
-	STextureSP initTex();
+	StelTextureSP initTex();
 
 	//! Load the image memory
-	bool loadImage(STexture* tex);
+	bool loadImage(StelTexture* tex);
 	
 	//! Adapt the scaling for the texture. Return true if there was no errors
-	bool reScale(STexture* tex);
+	bool reScale(StelTexture* tex);
 
 	//! List of image loaders providing image loading for the given files extensions
 	QMap<QString, ImageLoader*> imageLoaders;
@@ -153,7 +153,7 @@ private:
 	GLint wrapMode;
 	GLint minFilter;
 	GLint magFilter;
-	STextureTypes::DynamicRangeMode dynamicRangeMode;
+	StelTextureTypes::DynamicRangeMode dynamicRangeMode;
 	
 	//! The maximum texture size supported by the video card
 	GLint maxTextureSize;

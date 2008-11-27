@@ -18,7 +18,7 @@
  */
 
 #include <cstdlib>
-#include "STexture.hpp"
+#include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelApp.hpp"
@@ -45,7 +45,7 @@
 #endif
 
 // Initialize statics
-QSemaphore* STexture::maxLoadThreadSemaphore = new QSemaphore(5);
+QSemaphore* StelTexture::maxLoadThreadSemaphore = new QSemaphore(5);
 
 /*************************************************************************
   Class used to load an image and set the texture parameters in a thread
@@ -53,23 +53,23 @@ QSemaphore* STexture::maxLoadThreadSemaphore = new QSemaphore(5);
 class ImageLoadThread : public QThread
 {
 	public:
-		ImageLoadThread(STexture* tex) : QThread((QObject*)tex), texture(tex) {;}
+		ImageLoadThread(StelTexture* tex) : QThread((QObject*)tex), texture(tex) {;}
 		virtual void run();
 	private:
-		STexture* texture;
+		StelTexture* texture;
 };
 
 void ImageLoadThread::run()
 {
-	STexture::maxLoadThreadSemaphore->acquire(1);
+	StelTexture::maxLoadThreadSemaphore->acquire(1);
 	texture->imageLoad();
-	STexture::maxLoadThreadSemaphore->release(1);
+	StelTexture::maxLoadThreadSemaphore->release(1);
 }
 
 /*************************************************************************
   Constructor
  *************************************************************************/
-STexture::STexture() : httpReply(NULL), loadThread(NULL), downloaded(false), isLoadingImage(false),
+StelTexture::StelTexture() : httpReply(NULL), loadThread(NULL), downloaded(false), isLoadingImage(false),
 				   errorOccured(false), id(0), avgLuminance(-1.f), texels(NULL), type(GL_UNSIGNED_BYTE)
 {
 	mutex = new QMutex();
@@ -83,7 +83,7 @@ STexture::STexture() : httpReply(NULL), loadThread(NULL), downloaded(false), isL
 	height = -1;
 }
 
-STexture::~STexture()
+StelTexture::~StelTexture()
 {
 	if (httpReply || (loadThread && loadThread->isRunning()))
 	{
@@ -112,7 +112,7 @@ STexture::~STexture()
 	{
 		if (glIsTexture(id)==GL_FALSE)
 		{
-			qDebug() << "WARNING: in STexture::~STexture() tried to delete invalid texture with ID=" << id << " Current GL ERROR status is " << glGetError();
+			qDebug() << "WARNING: in StelTexture::~StelTexture() tried to delete invalid texture with ID=" << id << " Current GL ERROR status is " << glGetError();
 		}
 		else
 		{
@@ -127,7 +127,7 @@ STexture::~STexture()
 /*************************************************************************
  This method should be called if the texture loading failed for any reasons
  *************************************************************************/
-void STexture::reportError(const QString& aerrorMessage)
+void StelTexture::reportError(const QString& aerrorMessage)
 {
 	errorOccured = true;
 	errorMessage = aerrorMessage;
@@ -138,7 +138,7 @@ void STexture::reportError(const QString& aerrorMessage)
 /*************************************************************************
  Bind the texture so that it can be used for openGL drawing (calls glBindTexture)
  *************************************************************************/
-bool STexture::bind()
+bool StelTexture::bind()
 {
 	if (id!=0)
 	{
@@ -174,7 +174,7 @@ bool STexture::bind()
 /*************************************************************************
  Called when the download for the texture file terminated
 *************************************************************************/
-void STexture::downloadFinished()
+void StelTexture::downloadFinished()
 {
 	downloadedData = httpReply->readAll();
 	downloaded=true;
@@ -193,7 +193,7 @@ void STexture::downloadFinished()
 /*************************************************************************
  Called when the file loading thread has terminated
 *************************************************************************/
-void STexture::fileLoadFinished()
+void StelTexture::fileLoadFinished()
 {
 	glLoad();
 }
@@ -201,7 +201,7 @@ void STexture::fileLoadFinished()
 /*************************************************************************
  Return the average texture luminance, 0 is black, 1 is white
  *************************************************************************/
-bool STexture::getAverageLuminance(float& lum)
+bool StelTexture::getAverageLuminance(float& lum)
 {
 	if (id==0)
 		return false;
@@ -232,7 +232,7 @@ bool STexture::getAverageLuminance(float& lum)
 /*************************************************************************
  Return the width and heigth of the texture in pixels
 *************************************************************************/
-bool STexture::getDimensions(int &awidth, int &aheight)
+bool StelTexture::getDimensions(int &awidth, int &aheight)
 {
 	QMutexLocker lock(mutex);
 	if (width<0 || height<0)
@@ -255,7 +255,7 @@ bool STexture::getDimensions(int &awidth, int &aheight)
 /*************************************************************************
  Load the image data
  *************************************************************************/
-bool STexture::imageLoad()
+bool StelTexture::imageLoad()
 {
 	bool res=true;
 	if (downloadedData.isEmpty())
@@ -311,7 +311,7 @@ bool STexture::imageLoad()
 /*************************************************************************
  Actually load the texture already in the RAM to openGL memory
 *************************************************************************/
-bool STexture::glLoad()
+bool StelTexture::glLoad()
 {
 	if (qImage.isNull() && !texels)
 	{

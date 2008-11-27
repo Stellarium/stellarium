@@ -30,7 +30,7 @@
 #include "StelApp.hpp"
 #include "NebulaMgr.hpp"
 #include "Nebula.hpp"
-#include "STexture.hpp"
+#include "StelTexture.hpp"
 #include "Navigator.hpp"
 #include "SkyDrawer.hpp"
 #include "Translator.hpp"
@@ -64,7 +64,7 @@ NebulaMgr::NebulaMgr(void) : nebGrid(200), displayNoTexture(false)
 
 NebulaMgr::~NebulaMgr()
 {
-	Nebula::texCircle = STextureSP();
+	Nebula::texCircle = StelTextureSP();
 	
 	vector<Nebula *>::iterator iter;
 	for(iter=nebArray.begin();iter!=nebArray.end();iter++)

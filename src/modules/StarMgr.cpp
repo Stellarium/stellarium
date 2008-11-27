@@ -33,7 +33,7 @@
 #include "Projector.hpp"
 #include "StarMgr.hpp"
 #include "StelObject.hpp"
-#include "STexture.hpp"
+#include "StelTexture.hpp"
 #include "Navigator.hpp"
 #include "StelUtils.hpp"
 #include "ToneReproducer.hpp"

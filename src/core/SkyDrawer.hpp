@@ -20,7 +20,7 @@
 #ifndef _SKYDRAWER_HPP_
 #define _SKYDRAWER_HPP_
 
-#include "STextureTypes.hpp"
+#include "StelTextureTypes.hpp"
 #include "ProjectorType.hpp"
 #include "vecmath.h"
 
@@ -241,7 +241,7 @@ private:
 	float limitLuminance;
 	
 	//! Little halo texture
-	STextureSP texHalo;
+	StelTextureSP texHalo;
 	
 	//! Load B-V conversion parameters from config file
 	void initColorTableFromConfigFile(class QSettings* conf);
@@ -273,8 +273,8 @@ private:
 	float oldLum;
 	
 	//! Big halo texture
-	STextureSP texBigHalo;
-	STextureSP texSunHalo;
+	StelTextureSP texBigHalo;
+	StelTextureSP texSunHalo;
 
 	bool flagLuminanceAdaptation;
 	

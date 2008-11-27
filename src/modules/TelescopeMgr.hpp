@@ -23,7 +23,7 @@
 #include "StelObjectModule.hpp"
 #include "Fader.hpp"
 #include "vecmath.h"
-#include "STextureTypes.hpp"
+#include "StelTextureTypes.hpp"
 #include "ProjectorType.hpp"
 
 #include <QString>
@@ -111,12 +111,12 @@ private:
 	Vec3f circleColor;
 	Vec3f labelColor;
 	SFont *telescope_font;
-	STextureSP telescopeTexture;
+	StelTextureSP telescopeTexture;
 
 	QMap<int, Telescope*> telescope_map;
 	
 	// The selection pointer texture
-	STextureSP texPointer;
+	StelTextureSP texPointer;
 };
 
 

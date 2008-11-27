@@ -37,7 +37,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "SkyDrawer.hpp"
-#include "STexture.hpp"
+#include "StelTexture.hpp"
 #include "StarMgr.hpp"
 #include "bytes.h"
 
