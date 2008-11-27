@@ -30,7 +30,7 @@
 class StelObject;
 class ToneReproducer;
 class StelProjector;
-class Navigator;
+class StelNavigator;
 class StelLoadingBar;
 class StelFont;
 class QSettings;
@@ -214,7 +214,7 @@ private:
 	void loadStarSettings(void);
 	
 	//! Draw a nice animated pointer around the object.
-	void drawPointer(const StelProjectorP& prj, const Navigator * nav);
+	void drawPointer(const StelProjectorP& prj, const StelNavigator * nav);
 	
 	LinearFader labelsFader;
 	LinearFader starsFader;

@@ -450,7 +450,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 
 void ConstellationMgr::draw(StelCore* core)
 {
-	Navigator* nav = core->getNavigation();
+	StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
 	drawLines(prj);
@@ -460,7 +460,7 @@ void ConstellationMgr::draw(StelCore* core)
 }
 
 // Draw constellations art textures
-void ConstellationMgr::drawArt(const StelProjectorP& prj, const Navigator * nav) const
+void ConstellationMgr::drawArt(const StelProjectorP& prj, const StelNavigator * nav) const
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);

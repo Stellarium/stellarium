@@ -19,7 +19,7 @@
 
 
 #include "StelObject.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "StelCore.hpp"
 #include "StelProjector.hpp"
 #include "StelUtils.hpp"
@@ -38,7 +38,7 @@ void intrusive_ptr_release(StelObject* p)
 	p->release();
 }
 
-Vec3d StelObject::getEquinoxEquatorialPos(const Navigator* nav) const
+Vec3d StelObject::getEquinoxEquatorialPos(const StelNavigator* nav) const
 {
 	return nav->j2000ToEquinoxEqu(getJ2000EquatorialPos(nav));
 }
@@ -52,11 +52,11 @@ Vec3d StelObject::getEquinoxEquatorialPos(const Navigator* nav) const
 // Get observer local sideral coordinate
 Vec3d StelObject::getSideralPos(const StelCore* core) const
 {
-	return Mat4d::zrotation(-core->getNavigation()->getLocalSideralTime())* getEquinoxEquatorialPos(core->getNavigation());
+	return Mat4d::zrotation(-core->getNavigator()->getLocalSideralTime())* getEquinoxEquatorialPos(core->getNavigator());
 }
 
 // Get observer-centered alt/az position
-Vec3d StelObject::getAltAzPos(const Navigator* nav) const
+Vec3d StelObject::getAltAzPos(const StelNavigator* nav) const
 {
 	return nav->j2000ToAltAz(getJ2000EquatorialPos(nav));
 }
@@ -65,7 +65,7 @@ Vec3d StelObject::getAltAzPos(const Navigator* nav) const
 QString StelObject::getPositionInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	QString res;
-	const Navigator* nav = core->getNavigation();
+	const StelNavigator* nav = core->getNavigator();
 	
 	if (flags&RaDecJ2000)
 	{

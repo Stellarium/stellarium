@@ -33,7 +33,7 @@ namespace BigStarCatalogExtension {
 	
 QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
-	const Navigator* nav = core->getNavigation();
+	const StelNavigator* nav = core->getNavigator();
 	QString str;
 	QTextStream oss(&str);
 
@@ -58,7 +58,7 @@ QString StarWrapper1::getEnglishName(void) const
 QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	QString str;
-	const Navigator* nav = core->getNavigation();
+	const StelNavigator* nav = core->getNavigator();
 	
 	QTextStream oss(&str);
 	if (s->hip)

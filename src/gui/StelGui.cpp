@@ -35,7 +35,7 @@
 #include "GridLinesMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "StelLocaleMgr.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "StelObjectType.hpp"
 #include "StelObject.hpp"
 #include "StelProjector.hpp"
@@ -281,14 +281,14 @@ void StelGui::init()
 	QObject::connect(getGuiActions("actionShow_DSS"), SIGNAL(toggled(bool)), bmgr, SLOT(setFlagShow(bool)));
 	getGuiActions("actionShow_DSS")->setChecked(bmgr->getFlagShow());
 	
-	module = (QObject*)StelApp::getInstance().getCore()->getNavigation();
+	module = (QObject*)StelApp::getInstance().getCore()->getNavigator();
 	QObject::connect(getGuiActions("actionIncrease_Time_Speed"), SIGNAL(triggered()), module, SLOT(increaseTimeSpeed()));
 	QObject::connect(getGuiActions("actionDecrease_Time_Speed"), SIGNAL(triggered()), module, SLOT(decreaseTimeSpeed()));
 	QObject::connect(getGuiActions("actionSet_Real_Time_Speed"), SIGNAL(triggered()), module, SLOT(setRealTimeSpeed()));
 	QObject::connect(getGuiActions("actionSet_Time_Rate_Zero"), SIGNAL(triggered()), module, SLOT(setZeroTimeSpeed()));
 	QObject::connect(getGuiActions("actionReturn_To_Current_Time"), SIGNAL(triggered()), module, SLOT(setTimeNow()));
 	QObject::connect(getGuiActions("actionSwitch_Equatorial_Mount"), SIGNAL(toggled(bool)), module, SLOT(setEquatorialMount(bool)));
-	getGuiActions("actionSwitch_Equatorial_Mount")->setChecked(StelApp::getInstance().getCore()->getNavigation()->getMountMode() != Navigator::MountAltAzimuthal);
+	getGuiActions("actionSwitch_Equatorial_Mount")->setChecked(StelApp::getInstance().getCore()->getNavigator()->getMountMode() != StelNavigator::MountAltAzimuthal);
 	QObject::connect(getGuiActions("actionAdd_Solar_Hour"), SIGNAL(triggered()), module, SLOT(addHour()));
 	QObject::connect(getGuiActions("actionAdd_Solar_Day"), SIGNAL(triggered()), module, SLOT(addDay()));
 	QObject::connect(getGuiActions("actionAdd_Solar_Week"), SIGNAL(triggered()), module, SLOT(addWeek()));
@@ -660,7 +660,7 @@ void StelGui::updateI18n()
 
 void StelGui::update(double deltaTime)
 {
-	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	if (nav->getTimeRate()<-0.99*JD_SECOND)
 	{
 		if (buttonTimeRewind->isChecked()==false)

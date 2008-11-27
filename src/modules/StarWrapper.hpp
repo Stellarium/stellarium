@@ -23,7 +23,7 @@
 #include <QString>
 #include "StelObject.hpp"
 #include "StelApp.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "StarMgr.hpp"
 #include "Star.hpp"
 #include "SkyDrawer.hpp"
@@ -80,7 +80,7 @@ protected:
   StarWrapper(const SpecialZoneArray<Star> *a,
               const SpecialZoneData<Star> *z,
               const Star *s) : a(a),z(z),s(s) {}
-  Vec3d getJ2000EquatorialPos(const Navigator*) const {
+  Vec3d getJ2000EquatorialPos(const StelNavigator*) const {
     const double d2000 = 2451545.0;
     return s->getJ2000Pos(z,
                   (M_PI/180)*(0.0001/3600)
@@ -89,9 +89,9 @@ protected:
                  );
   }
   Vec3f getInfoColor(void) const {return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.2, 0.2) : SkyDrawer::indexToColor(s->bV);}
-  float getVMagnitude(const Navigator *nav) const
+  float getVMagnitude(const StelNavigator *nav) const
     {return 0.001f*a->mag_min + s->mag*(0.001f*a->mag_range)/a->mag_steps;}
-  float getSelectPriority(const Navigator *nav) const
+  float getSelectPriority(const StelNavigator *nav) const
   {
   	return getVMagnitude(nav);
   }

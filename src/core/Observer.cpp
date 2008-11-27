@@ -24,7 +24,7 @@
 #include "Translator.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "StelLocationMgr.hpp"
 #include "StelModuleMgr.hpp"
 
@@ -76,7 +76,7 @@ void ArtificialPlanet::setDest(const Planet &dest)
 	
 	// rotation:
 	const RotationElements &r(dest.getRotationElements());
-	lastJD = StelApp::getInstance().getCore()->getNavigation()->getJDay();
+	lastJD = StelApp::getInstance().getCore()->getNavigator()->getJDay();
 	
 	re.offset = r.offset + fmod(re.offset - r.offset + 360.0*( (lastJD-re.epoch)/re.period - (lastJD-r.epoch)/r.period), 360.0);
 	

@@ -21,7 +21,7 @@
 #include <QSettings>
 
 #include "StelProjector.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "TextUI.hpp"

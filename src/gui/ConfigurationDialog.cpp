@@ -28,7 +28,7 @@
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "StelCore.hpp"
 #include "MovementMgr.hpp"
 #include "StelModuleMgr.hpp"
@@ -84,7 +84,7 @@ void ConfigurationDialog::styleChanged()
 void ConfigurationDialog::createDialogContent()
 {
 	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(Mat4d());
-	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
 	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
 	
@@ -217,15 +217,15 @@ void ConfigurationDialog::languageChanged(const QString& langName)
 
 void ConfigurationDialog::setStartupTimeMode(void)
 {
-	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	Q_ASSERT(nav);
 
 	if (ui->systemTimeRadio->isChecked())
-		StelApp::getInstance().getCore()->getNavigation()->setStartupTimeMode("actual");
+		StelApp::getInstance().getCore()->getNavigator()->setStartupTimeMode("actual");
 	else if (ui->todayRadio->isChecked())
-		StelApp::getInstance().getCore()->getNavigation()->setStartupTimeMode("today");
+		StelApp::getInstance().getCore()->getNavigator()->setStartupTimeMode("today");
 	else
-		StelApp::getInstance().getCore()->getNavigation()->setStartupTimeMode("preset");
+		StelApp::getInstance().getCore()->getNavigator()->setStartupTimeMode("preset");
 
 	nav->setInitTodayTime(ui->todayTimeSpinBox->time());
 	nav->setPresetSkyTime(ui->fixedDateTimeEdit->dateTime());
@@ -328,7 +328,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	Q_ASSERT(gui);
 	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
 	Q_ASSERT(mvmgr);
-	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	Q_ASSERT(nav);
 	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(Mat4d());
 	Q_ASSERT(proj);
@@ -399,7 +399,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/auto_hide_vertical_toolbar", gui->getAutoHideVerticalButtonBar());
 
 	mvmgr->setInitFov(StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov());
-	StelApp::getInstance().getCore()->getNavigation()->setInitViewDirectionToCurrent();
+	StelApp::getInstance().getCore()->getNavigator()->setInitViewDirectionToCurrent();
 	
 	// configuration dialog / navigation tab
 	conf->setValue("navigation/flag_enable_zoom_keys", mvmgr->getFlagEnableZoomKeys());
@@ -409,7 +409,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("navigation/today_time", nav->getInitTodayTime());
 	conf->setValue("navigation/preset_sky_time", nav->getPresetSkyTime());
 	conf->setValue("navigation/init_fov", mvmgr->getInitFov());
-	if (nav->getMountMode() == Navigator::MountAltAzimuthal)
+	if (nav->getMountMode() == StelNavigator::MountAltAzimuthal)
 		conf->setValue("navigation/viewing_mode", "horizon");
 	else
 		conf->setValue("navigation/viewing_mode", "equator");
@@ -445,7 +445,7 @@ void ConfigurationDialog::updateConfigLabels()
 	ui->startupFOVLabel->setText(q_("Startup FOV: %1%2").arg(StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov()).arg(QChar(0x00B0)));
 	
 	double az, alt;
-	const Vec3d v = StelApp::getInstance().getCore()->getNavigation()->getInitViewingDirection();
+	const Vec3d v = StelApp::getInstance().getCore()->getNavigator()->getInitViewingDirection();
 	StelUtils::rectToSphe(&az, &alt, v);
 	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
 	if (az > M_PI*2)
@@ -706,7 +706,7 @@ void ConfigurationDialog::downloadStars(void)
 
 void ConfigurationDialog::setFixedDateTimeToCurrent(void)
 {
-	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(StelApp::getInstance().getCore()->getNavigation()->getJDay()));
+	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(StelApp::getInstance().getCore()->getNavigator()->getJDay()));
 	ui->fixedTimeRadio->setChecked(true);
 	setStartupTimeMode();
 }

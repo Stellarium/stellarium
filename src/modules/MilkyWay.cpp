@@ -21,7 +21,7 @@
 #include "StelFader.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "StelProjector.hpp"
 #include "ToneReproducer.hpp"
 #include "StelApp.hpp"
@@ -69,7 +69,7 @@ bool MilkyWay::getFlagShow(void) const {return *fader;}
 	
 void MilkyWay::draw(StelCore* core)
 {
-	Navigator* nav = core->getNavigation();
+	StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(nav->getJ2000ModelViewMat()*
 			Mat4d::xrotation(M_PI/180*23)*
 			Mat4d::yrotation(M_PI/180*120)*

@@ -175,7 +175,7 @@ std::vector<StelGridObject*> TreeGrid::getAllObjects()
 	
 #ifdef TREEGRIDDEBUG
 #include "StelProjector.hpp"
-#include "Navigator.hpp"				 
+#include "StelNavigator.hpp"				 
 double TreeGridNode::draw(StelProjector *prj, const StelGeom::ConvexS& roi, float opacity) const
 {
 	glDisable(GL_TEXTURE_2D);

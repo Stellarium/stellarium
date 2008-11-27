@@ -277,7 +277,7 @@ void LandscapeOldStyle::drawFog(StelCore* core) const
 		return;
 	
 	const double vpos = tanMode ? radius*std::tan(fogAngleShift*M_PI/180.) : radius*std::sin(fogAngleShift*M_PI/180.);
-	const StelProjectorP prj = core->getProjection(core->getNavigation()->getAltAzModelViewMat() * Mat4d::translation(Vec3d(0.,0.,vpos)));
+	const StelProjectorP prj = core->getProjection(core->getNavigator()->getAltAzModelViewMat() * Mat4d::translation(Vec3d(0.,0.,vpos)));
 	StelPainter sPainter(prj);
 	
 	glBlendFunc(GL_ONE, GL_ONE);
@@ -359,7 +359,7 @@ void LandscapeOldStyle::drawDecor(StelCore* core) const
 // Draw the ground
 void LandscapeOldStyle::drawGround(StelCore* core) const
 {
-	const Navigator* nav = core->getNavigation();
+	const StelNavigator* nav = core->getNavigator();
 	
 	if (!landFader.getInterstate()) return;
 	
@@ -440,7 +440,7 @@ void LandscapeFisheye::draw(StelCore* core)
 	if(!validLandscape) return;
 	if(!landFader.getInterstate()) return;
 
-	Navigator* nav = core->getNavigation();
+	StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(nav->getAltAzModelViewMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
 	StelPainter sPainter(prj);
 	
@@ -505,7 +505,7 @@ void LandscapeSpherical::draw(StelCore* core)
 	if(!validLandscape) return;
 	if(!landFader.getInterstate()) return;
 
-	Navigator* nav = core->getNavigation();
+	StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(nav->getAltAzModelViewMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
 	StelPainter sPainter(prj);
 	

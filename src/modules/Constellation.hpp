@@ -63,7 +63,7 @@ private:
 	virtual QString getType(void) const {return "Constellation";}
 
 	//! observer centered J2000 coordinates.
-	virtual Vec3d getJ2000EquatorialPos(const Navigator *nav) const {return XYZname;}
+	virtual Vec3d getJ2000EquatorialPos(const StelNavigator *nav) const {return XYZname;}
 
 	virtual double getAngularSize(const StelCore* core) const {Q_ASSERT(0); return 0;}; // TODO
 	
@@ -79,7 +79,7 @@ private:
 	//! Draw the constellation name
 	void drawName(StelFont * constfont, const StelPainter& sPainter) const;
 	//! Draw the constellation art
-	void drawArt(const StelProjectorP& prj, const Navigator* nav) const;
+	void drawArt(const StelProjectorP& prj, const StelNavigator* nav) const;
 	//! Draw the constellation boundary
 	void drawBoundaryOptim(const StelProjectorP& prj) const;
 	
@@ -107,7 +107,7 @@ private:
 	//! the class ConstellationMgr only).
 	void drawOptim(const StelProjectorP& prj) const;
 	//! Draw the art texture, optimized function to be called thru a constellation manager only.
-	void drawArtOptim(const StelProjectorP& prj, const Navigator* nav) const;
+	void drawArtOptim(const StelProjectorP& prj, const StelNavigator* nav) const;
 	//! Update fade levels according to time since various events.
 	void update(int deltaTime);
 	//! Turn on and off Constellation line rendering.

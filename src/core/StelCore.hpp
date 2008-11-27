@@ -24,7 +24,7 @@
 #include <QString>
 #include <QStringList>
 
-class Navigator;
+class StelNavigator;
 class ToneReproducer;
 class SkyDrawer;
 class GeodesicGrid;
@@ -100,9 +100,9 @@ public:
 	const StelProjectorP getProjection(const Mat4d& modelViewMat, ProjectionType projType=(ProjectionType)1000) const;
 			
 	//! Get the current navigation (manages frame transformation) used in the core.
-	Navigator* getNavigation() {return navigation;}
+	StelNavigator* getNavigator() {return navigation;}
 	//! Get the current navigation (manages frame transformation) used in the core.
-	const Navigator* getNavigation() const {return navigation;}
+	const StelNavigator* getNavigator() const {return navigation;}
 
 	//! Get the current tone reproducer used in the core.
 	ToneReproducer* getToneReproducer() {return toneConverter;}
@@ -170,7 +170,7 @@ public slots:
 	bool getFlipVert(void) const {return currentStelProjectorParams.flipVert;}
 	
 private:
-	Navigator* navigation;			// Manage all navigation parameters, coordinate transformations etc..
+	StelNavigator* navigation;			// Manage all navigation parameters, coordinate transformations etc..
 	ToneReproducer* toneConverter;		// Tones conversion between stellarium world and display device
 	SkyDrawer* skyDrawer;
 	MovementMgr* movementMgr;		// Manage vision movements

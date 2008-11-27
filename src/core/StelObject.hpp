@@ -25,7 +25,7 @@
 #include "StelObjectType.hpp"
 #include "StelGridObject.hpp"
 
-class Navigator;
+class StelNavigator;
 class StelCore;
 
 // Declare the 2 functions needed by boost intrusive pointers
@@ -69,7 +69,7 @@ public:
 	virtual ~StelObject(void) {}
 
 	//! Default implementation of the StelGridObject method
-	//! Calling this method on some object will cause an error if they need a valid Navigator instance to compute their position
+	//! Calling this method on some object will cause an error if they need a valid StelNavigator instance to compute their position
 	virtual Vec3d getPositionForGrid() const {return getJ2000EquatorialPos(NULL);}
 	
 	//! Write I18n information about the object in QString.
@@ -90,12 +90,12 @@ public:
 	virtual QString getNameI18n(void) const = 0;
 	
 	//! Get observer-centered equatorial coordinates at equinox J2000
-	virtual Vec3d getJ2000EquatorialPos(const Navigator *nav) const = 0;
+	virtual Vec3d getJ2000EquatorialPos(const StelNavigator *nav) const = 0;
 	
 	//! Get observer-centered equatorial coordinate at the current equinox
 	//! The frame has it's Z axis at the planet's current rotation axis
 	//! At time 2000-01-01 this frame is almost the same as J2000, but ONLY if the observer is on earth
-	Vec3d getEquinoxEquatorialPos(const Navigator* nav) const;
+	Vec3d getEquinoxEquatorialPos(const StelNavigator* nav) const;
 	
 	//! Get observer-centered hour angle + declination (at current equinox)
 	//! The frame has its Z axis at the planet's current rotation axis
@@ -103,24 +103,24 @@ public:
 	
 	//! Get observer-centered alt/az position
 	//! The frame has it's Z axis at the zenith
-	Vec3d getAltAzPos(const Navigator* nav) const;
+	Vec3d getAltAzPos(const StelNavigator* nav) const;
 	
 	//! Return object's apparent V magnitude as seen from observer
-	virtual float getVMagnitude(const Navigator *nav) const {return 99;}
+	virtual float getVMagnitude(const StelNavigator *nav) const {return 99;}
 	
 	//! Return a priority value which is used to discriminate objects by priority
 	//! As for magnitudes, the lower is the higher priority 
-	virtual float getSelectPriority(const Navigator *nav) const {return 99;}
+	virtual float getSelectPriority(const StelNavigator *nav) const {return 99;}
 	
 	//! Get a color used to display info about the object
 	virtual Vec3f getInfoColor(void) const {return Vec3f(1,1,1);}
 	
 	//! Return the best FOV in degree to use for a close view of the object
-	virtual double getCloseViewFov(const Navigator *nav) const {return 10.;}
+	virtual double getCloseViewFov(const StelNavigator *nav) const {return 10.;}
 	
 	//! Return the best FOV in degree to use for a global view of the object satellite system (if there are satellites)
-	virtual double getSatellitesFov(const Navigator *nav) const {return -1.;}
-	virtual double getParentSatellitesFov(const Navigator *nav) const {return -1.;}
+	virtual double getSatellitesFov(const StelNavigator *nav) const {return -1.;}
+	virtual double getParentSatellitesFov(const StelNavigator *nav) const {return -1.;}
 	
 	//! Return the angular radius of a circle containing the object as seen from the observer
 	//! with the circle center assumed to be at getJ2000EquatorialPos().

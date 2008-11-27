@@ -22,7 +22,7 @@
 
 #include "Skylight.hpp"
 #include "vecmath.h"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "Skybright.hpp"
 #include "StelFader.hpp"
 #include "GLee.h"

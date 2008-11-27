@@ -31,7 +31,7 @@
 #include "NebulaMgr.hpp"
 #include "Nebula.hpp"
 #include "StelTexture.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "SkyDrawer.hpp"
 #include "Translator.hpp"
 #include "StelLoadingBar.hpp"
@@ -166,7 +166,7 @@ void NebulaMgr::draw(StelCore* core)
 
 void NebulaMgr::drawPointer(const StelCore* core, const StelPainter& sPainter)
 {
-	const Navigator* nav = core->getNavigation();
+	const StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	
 	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Nebula");

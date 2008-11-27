@@ -24,7 +24,7 @@
 #include "StelProjector.hpp"
 #include "Constellation.hpp"
 #include "StarMgr.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "StelTexture.hpp"
 #include "StelFont.hpp"
 #include "StelPainter.hpp"
@@ -123,7 +123,7 @@ void Constellation::drawName(StelFont *constfont, const StelPainter& sPainter) c
 	sPainter.drawText(constfont, XYname[0], XYname[1], nameI18, 0., -constfont->getStrLen(nameI18)/2, 0, false);
 }
 
-void Constellation::drawArtOptim(const StelProjectorP& prj, const Navigator* nav) const
+void Constellation::drawArtOptim(const StelProjectorP& prj, const StelNavigator* nav) const
 {
 	float intensity = artFader.getInterstate(); 
 	if (artTexture && intensity) 
@@ -191,7 +191,7 @@ void Constellation::drawArtOptim(const StelProjectorP& prj, const Navigator* nav
 }
 
 // Draw the art texture
-void Constellation::drawArt(const StelProjectorP& prj, const Navigator* nav) const
+void Constellation::drawArt(const StelProjectorP& prj, const StelNavigator* nav) const
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);

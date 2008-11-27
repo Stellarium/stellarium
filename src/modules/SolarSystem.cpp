@@ -23,7 +23,7 @@
 #include "StelTexture.hpp"
 #include "stellplanet.h"
 #include "Orbit.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "StelProjector.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -36,7 +36,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelIniParser.hpp"
 #include "Planet.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "StelFont.hpp"
 #include "SkyDrawer.hpp"
 #include "StelStyle.hpp"
@@ -129,7 +129,7 @@ void SolarSystem::init()
 
 void SolarSystem::drawPointer(const StelCore* core)
 {
-	const Navigator* nav = core->getNavigation();
+	const StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	
 	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Planet");
@@ -405,7 +405,7 @@ void SolarSystem::loadPlanets()
 				const Vec3d OrbitAxis0( c_nod,       s_nod,        0.0);
 				const Vec3d OrbitAxis1(-s_nod*c_obl, c_nod*c_obl,s_obl);
 				const Vec3d OrbitPole(  s_nod*s_obl,-c_nod*s_obl,c_obl);
-				const Vec3d J2000Pole(Navigator::matJ2000ToVsop87.multiplyWithoutTranslation(Vec3d(0,0,1)));
+				const Vec3d J2000Pole(StelNavigator::matJ2000ToVsop87.multiplyWithoutTranslation(Vec3d(0,0,1)));
 				Vec3d J2000NodeOrigin(J2000Pole^OrbitPole);
 				J2000NodeOrigin.normalize();
 				parent_rot_j2000_longitude = atan2(J2000NodeOrigin*OrbitAxis1,J2000NodeOrigin*OrbitAxis0);
@@ -510,7 +510,7 @@ void SolarSystem::loadPlanets()
                            const Vec3d OrbitAxis0( c_nod,       s_nod,        0.0);
                            const Vec3d OrbitAxis1(-s_nod*c_obl, c_nod*c_obl,s_obl);
                            const Vec3d OrbitPole(  s_nod*s_obl,-c_nod*s_obl,c_obl);
-						   const Vec3d J2000Pole(Navigator::matJ2000ToVsop87.multiplyWithoutTranslation(Vec3d(0,0,1)));
+						   const Vec3d J2000Pole(StelNavigator::matJ2000ToVsop87.multiplyWithoutTranslation(Vec3d(0,0,1)));
                            Vec3d J2000NodeOrigin(J2000Pole^OrbitPole);
                            J2000NodeOrigin.normalize();
                            parent_rot_j2000_longitude = atan2(J2000NodeOrigin*OrbitAxis1,J2000NodeOrigin*OrbitAxis0);
@@ -677,7 +677,7 @@ void SolarSystem::loadPlanets()
 			Vec3d J2000NPole;
 			StelUtils::spheToRect(J2000NPoleRA,J2000NPoleDE,J2000NPole);
 		  
-			Vec3d vsop87Pole(Navigator::matJ2000ToVsop87.multiplyWithoutTranslation(J2000NPole));
+			Vec3d vsop87Pole(StelNavigator::matJ2000ToVsop87.multiplyWithoutTranslation(J2000NPole));
 		  
 			double ra, de;
 			StelUtils::rectToSphe(&ra, &de, vsop87Pole);
@@ -771,7 +771,7 @@ void SolarSystem::draw(StelCore* core)
 	if (!flagShow)
 		return;
 	
-	Navigator* nav = core->getNavigation();
+	StelNavigator* nav = core->getNavigator();
 	Planet::setFont(&planetNameFont);
 	
 	// Set the light parameters taking sun as the light source
@@ -878,7 +878,7 @@ StelObject* SolarSystem::search(Vec3d pos, const StelCore* core) const
 	vector<Planet*>::const_iterator iter = systemPlanets.begin();
 	while (iter != systemPlanets.end())
 	{
-		equPos = (*iter)->getEquinoxEquatorialPos(core->getNavigation());
+		equPos = (*iter)->getEquinoxEquatorialPos(core->getNavigator());
 		equPos.normalize();
 		double cos_ang_dist = equPos[0]*pos[0] + equPos[1]*pos[1] + equPos[2]*pos[2];
 		if (cos_ang_dist>cos_angle_closest)
@@ -903,7 +903,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 	if (!getFlagPlanets())
 		return result;
 		
-	Vec3d v = core->getNavigation()->j2000ToEquinoxEqu(vv);
+	Vec3d v = core->getNavigator()->j2000ToEquinoxEqu(vv);
 	v.normalize();
 	double cosLimFov = cos(limitFov * M_PI/180.);
 	static Vec3d equPos;
@@ -911,7 +911,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 	vector<Planet*>::const_iterator iter = systemPlanets.begin();
 	while (iter != systemPlanets.end())
 	{
-		equPos = (*iter)->getEquinoxEquatorialPos(core->getNavigation());
+		equPos = (*iter)->getEquinoxEquatorialPos(core->getNavigator());
 		equPos.normalize();
 		if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
 		{
@@ -1062,7 +1062,7 @@ void SolarSystem::setSelected(StelObject* obj)
 void SolarSystem::update(double deltaTime)
 {
 	bool restartTrails = false;
-	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 
 	// Determine if home planet has changed, and restart planet trails
 	// since the data is no longer useful

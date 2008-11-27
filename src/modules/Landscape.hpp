@@ -24,7 +24,7 @@
 #include "vecmath.h"
 #include "ToneReproducer.hpp"
 #include "StelProjector.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "StelFader.hpp"
 #include "StelUtils.hpp"
 #include "StelTextureTypes.hpp"
