@@ -230,8 +230,8 @@ SET(stellarium_lib_SRCS
 IF(MACOSX)
   SET(stellarium_lib_SRCS 
     ${stellarium_lib_SRCS}
-    stelutils/MacosxDirs.cpp
-    stelutils/MacosxDirs.hpp)
+    stelutils/StelMacosxDirs.cpp
+    stelutils/StelMacosxDirs.hpp)
 ENDIF(MACOSX)
 
 SET(stellarium_exe_SRCS

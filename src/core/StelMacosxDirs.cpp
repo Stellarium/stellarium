@@ -1,5 +1,5 @@
 
-#include "MacosxDirs.hpp"
+#include "StelMacosxDirs.hpp"
 #include <Carbon/Carbon.h>
 
 /*
@@ -33,7 +33,7 @@ OSStatus CreateCStringUTF8(CFStringRef inString, char* &outCString)
 	return err;
 }
 
-QString MacosxDirs::getApplicationDirectory()
+QString StelMacosxDirs::getApplicationDirectory()
 {
 	FSRef appBundleRef;
 	ProcessSerialNumber psn = {0, kCurrentProcess};
@@ -59,8 +59,8 @@ QString MacosxDirs::getApplicationDirectory()
 	return QString();
 }
 
-QString MacosxDirs::getApplicationResourcesDirectory()
+QString StelMacosxDirs::getApplicationResourcesDirectory()
 {
-	return MacosxDirs::getApplicationDirectory().append("/Contents/Resources");
+	return StelMacosxDirs::getApplicationDirectory().append("/Contents/Resources");
 }
 

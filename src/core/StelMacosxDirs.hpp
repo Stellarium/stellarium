@@ -25,7 +25,7 @@
 //! Functions to use MacOSX's Carbon Framework to retrieve and make
 //! usable as string's the directories of the application and its
 //! resource directories.
-class MacosxDirs
+class StelMacosxDirs
 {
 public:
 	//! Return the full path to the ".app" directory that corresponds to this macosx application.
