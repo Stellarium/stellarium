@@ -34,7 +34,7 @@
 #define JD_HOUR   0.041666666666666666666
 #define JD_DAY    1.
 
-class Observer;
+class StelObserver;
 class StelObject;
 class StelLoadingBar;
 class Planet;
@@ -271,7 +271,7 @@ private:
 	QString defaultLocationID;
 			
 	// Position variables
-	Observer* position;
+	StelObserver* position;
 
 	Vec3d initViewPos;        // Default viewing direction
 
