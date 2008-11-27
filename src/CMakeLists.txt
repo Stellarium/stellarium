@@ -9,8 +9,8 @@ SET(stellarium_lib_SRCS
 	core/StelAudioMgr.cpp
 	core/StelDownloadMgr.hpp
 	core/StelDownloadMgr.cpp
-	core/GeodesicGrid.cpp
-	core/GeodesicGrid.hpp
+	core/StelGeodesicGrid.cpp
+	core/StelGeodesicGrid.hpp
 	core/StelLoadingBar.cpp
 	core/StelLoadingBar.hpp
 	core/StelMovementMgr.cpp

@@ -27,7 +27,7 @@
 class StelNavigator;
 class ToneReproducer;
 class SkyDrawer;
-class GeodesicGrid;
+class StelGeodesicGrid;
 class StelMovementMgr;
 
 //! @class StelCore 
@@ -114,8 +114,8 @@ public:
 	//! Get the current SkyDrawer used in the core.
 	const SkyDrawer* getSkyDrawer() const {return skyDrawer;}
 
-	//! Get an instance of GeodesicGrid which is garanteed to allow for at least maxLevel levels
-	const GeodesicGrid* getGeodesicGrid(int maxLevel) const;
+	//! Get an instance of StelGeodesicGrid which is garanteed to allow for at least maxLevel levels
+	const StelGeodesicGrid* getGeodesicGrid(int maxLevel) const;
 	
 	//! Get the instance of movement manager.
 	StelMovementMgr* getMovementMgr() {return movementMgr;}
@@ -176,7 +176,7 @@ private:
 	StelMovementMgr* movementMgr;		// Manage vision movements
 	
 	// Manage geodesic grid
-	mutable GeodesicGrid* geodesicGrid;
+	mutable StelGeodesicGrid* geodesicGrid;
 	
 	// The currently used projection type
 	ProjectionType currentProjectionType;
