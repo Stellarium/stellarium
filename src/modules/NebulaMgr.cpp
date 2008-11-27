@@ -148,7 +148,7 @@ void NebulaMgr::draw(StelCore* core)
 	float maxMagHints = skyDrawer->getLimitMagnitude()*1.2-2.+(hintsAmount*1.2f)-2.f;
 	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.+(labelsAmount*1.2f)-2.f;
 	
-	for (TreeGrid::const_iterator iter = nebGrid.begin(); iter != nebGrid.end(); ++iter)
+	for (StelTreeGrid::const_iterator iter = nebGrid.begin(); iter != nebGrid.end(); ++iter)
 	{
 		n = static_cast<Nebula*>(*iter);
 
