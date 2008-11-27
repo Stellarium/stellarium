@@ -25,7 +25,7 @@
 #include "StelProjector.hpp"
 #include "fixx11h.h"
 #include "StelAppGraphicsScene.hpp"
-#include "ViewportDistorter.hpp"
+#include "StelViewportDistorter.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMainWindow.hpp"
 #include "StelMainGraphicsView.hpp"
@@ -40,7 +40,7 @@ StelAppGraphicsScene::StelAppGraphicsScene() : tempPainter(NULL), cursorTimeout(
 	Q_ASSERT(!singleton);
 	singleton = this;
 	
-	distorter = ViewportDistorter::create("none",800,600,StelProjectorP());
+	distorter = StelViewportDistorter::create("none",800,600,StelProjectorP());
 	lastEventTimeSec = StelApp::getTotalRunTime();
 	previousTime = lastEventTimeSec;
 }
@@ -234,7 +234,7 @@ void StelAppGraphicsScene::setViewPortDistorterType(const QString &type)
 		delete distorter;
 		distorter = NULL;
 	}
-	distorter = ViewportDistorter::create(type,(int)width(),(int)height(),StelApp::getInstance().getCore()->getProjection2d());
+	distorter = StelViewportDistorter::create(type,(int)width(),(int)height(),StelApp::getInstance().getCore()->getProjection2d());
 }
 
 QString StelAppGraphicsScene::getViewPortDistorterType() const

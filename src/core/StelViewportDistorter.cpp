@@ -28,7 +28,7 @@
 #include "GLee.h"
 
 #include "fixx11h.h"
-#include "ViewportDistorter.hpp"
+#include "StelViewportDistorter.hpp"
 #include "SphericMirrorCalculator.hpp"
 #include "StelUtils.hpp"
 #include "StelProjector.hpp"
@@ -37,10 +37,10 @@
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
 
-class ViewportDistorterDummy : public ViewportDistorter
+class StelViewportDistorterDummy : public StelViewportDistorter
 {
 private:
-	friend class ViewportDistorter;
+	friend class StelViewportDistorter;
 	QString getType(void) const { return "none"; }
 	void prepare(void) const {}
 	void distort(void) const {}
@@ -49,12 +49,12 @@ private:
 };
 
 
-class ViewportDistorterFisheyeToSphericMirror : public ViewportDistorter
+class StelViewportDistorterFisheyeToSphericMirror : public StelViewportDistorter
 {
 private:
-	friend class ViewportDistorter;
-	ViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h);
-	~ViewportDistorterFisheyeToSphericMirror(void);
+	friend class StelViewportDistorter;
+	StelViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h);
+	~StelViewportDistorterFisheyeToSphericMirror(void);
 	QString getType(void) const
 	{
 		return "fisheye_to_spheric_mirror";
@@ -94,7 +94,7 @@ struct VertexPoint
 
 
 
-ViewportDistorterFisheyeToSphericMirror::ViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h)
+StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h)
 	:	screen_w(screen_w), screen_h(screen_h),
 		originalProjectorParams(StelApp::getInstance().getCore()->getCurrentStelProjectorParams()),
 		texture_point_array(0)
@@ -412,8 +412,8 @@ ViewportDistorterFisheyeToSphericMirror::ViewportDistorterFisheyeToSphericMirror
 
 
 
-ViewportDistorterFisheyeToSphericMirror::
-~ViewportDistorterFisheyeToSphericMirror(void)
+StelViewportDistorterFisheyeToSphericMirror::
+~StelViewportDistorterFisheyeToSphericMirror(void)
 {
 	if (texture_point_array) delete[] texture_point_array;
 	glDeleteLists(display_list,1);
@@ -435,7 +435,7 @@ ViewportDistorterFisheyeToSphericMirror::
 
 
 
-bool ViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) const
+bool StelViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) const
 {
 	float texture_x,texture_y;
 
@@ -520,7 +520,7 @@ bool ViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) const
 	return true;
 }
 
-void ViewportDistorterFisheyeToSphericMirror::prepare(void) const
+void StelViewportDistorterFisheyeToSphericMirror::prepare(void) const
 {
 	// First we bind the FBO so we can render to it
 	if (flag_use_ext_framebuffer_object)
@@ -529,7 +529,7 @@ void ViewportDistorterFisheyeToSphericMirror::prepare(void) const
 	}
 }
 
-void ViewportDistorterFisheyeToSphericMirror::distort(void) const
+void StelViewportDistorterFisheyeToSphericMirror::distort(void) const
 {
 	// set rendering back to default frame buffer
 	if (flag_use_ext_framebuffer_object)
@@ -581,12 +581,12 @@ void ViewportDistorterFisheyeToSphericMirror::distort(void) const
 }
 
 
-ViewportDistorter *ViewportDistorter::create(const QString &type, int width,int height, StelProjectorP prj)
+StelViewportDistorter *StelViewportDistorter::create(const QString &type, int width,int height, StelProjectorP prj)
 {
 	if (type == "fisheye_to_spheric_mirror")
 	{
-		return new ViewportDistorterFisheyeToSphericMirror(width,height);
+		return new StelViewportDistorterFisheyeToSphericMirror(width,height);
 	}
-	return new ViewportDistorterDummy;
+	return new StelViewportDistorterDummy;
 }
 

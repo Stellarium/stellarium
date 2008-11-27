@@ -95,7 +95,7 @@ private:
 	double lastEventTimeSec;
 	
 	// Main elements of the StelApp
-	class ViewportDistorter *distorter;
+	class StelViewportDistorter *distorter;
 	
 	// The StelAppGraphicsScene singleton
 	static StelAppGraphicsScene* singleton;

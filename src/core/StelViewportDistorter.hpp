@@ -24,26 +24,26 @@
 #include "StelProjectorType.hpp"
 class QString;
 
-class ViewportDistorter
+class StelViewportDistorter
 {
 public:
-	static ViewportDistorter *create(const QString &type,
+	static StelViewportDistorter *create(const QString &type,
 	                                 int width,int height,
 	                                 StelProjectorP prj);
 	// StelCore is needed for getProjectionType and setMaxFov
-	virtual ~ViewportDistorter(void) {}
+	virtual ~StelViewportDistorter(void) {}
 	virtual QString getType(void) const = 0;
 	virtual void prepare(void) const = 0;
 	virtual void distort(void) const = 0;
 	virtual bool distortXY(int &x,int &y) const = 0;
 
 protected:
-	ViewportDistorter(void) {}
+	StelViewportDistorter(void) {}
 
 private:
 	// no copying:
-	ViewportDistorter(const ViewportDistorter&);
-	const ViewportDistorter &operator=(const ViewportDistorter&);
+	StelViewportDistorter(const StelViewportDistorter&);
+	const StelViewportDistorter &operator=(const StelViewportDistorter&);
 
 };
 
