@@ -22,7 +22,7 @@
 
 #include "StelProjectorType.hpp"
 #include "vecmath.h"
-#include "SphereGeometry.hpp"
+#include "StelSphereGeometry.hpp"
 
 //! @class StelProjector
 //! Provide the main interface to all operations of projecting coordinates from sky to screen.
