@@ -17,13 +17,13 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
  
-#include "DownloadMgr.hpp"
+#include "StelDownloadMgr.hpp"
 
 #include <QDebug>
 #include <QNetworkAccessManager>
 #include <QFile>
 
-DownloadMgr::DownloadMgr() 
+StelDownloadMgr::StelDownloadMgr() 
 	: networkManager(StelApp::getInstance().getNetworkAccessManager()),
           reply(NULL), 
 	  target(NULL), 
@@ -35,7 +35,7 @@ DownloadMgr::DownloadMgr()
 {
 }
 
-DownloadMgr::~DownloadMgr()
+StelDownloadMgr::~StelDownloadMgr()
 {
 	if(reply)
 	{
@@ -46,7 +46,7 @@ DownloadMgr::~DownloadMgr()
 	}
 }
 
-void DownloadMgr::get(const QString& addr, const QString& filePath, quint16 csum)
+void StelDownloadMgr::get(const QString& addr, const QString& filePath, quint16 csum)
 {
 	if(inProgress)
 	{
@@ -88,7 +88,7 @@ void DownloadMgr::get(const QString& addr, const QString& filePath, quint16 csum
 		connect(reply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(updateDownloadBar(qint64, qint64)));
 }
 
-void DownloadMgr::abort()
+void StelDownloadMgr::abort()
 {
 	inProgress = false;
 	if(barVisible)
@@ -101,20 +101,20 @@ void DownloadMgr::abort()
 	target->close();
 }
 
-void DownloadMgr::readData()
+void StelDownloadMgr::readData()
 {
 	int size = reply->bytesAvailable();
 	QByteArray data = reply->read(size);
 	stream->writeRawData(data.constData(), size);
 }
 
-void DownloadMgr::updateDownloadBar(qint64 received, qint64 total)
+void StelDownloadMgr::updateDownloadBar(qint64 received, qint64 total)
 {
 	progressBar->setMaximum(total);
 	progressBar->setValue(received);
 }
 
-void DownloadMgr::fin()
+void StelDownloadMgr::fin()
 {
 	if(reply->error())
 		return;
@@ -148,7 +148,7 @@ void DownloadMgr::fin()
 			qDebug() << "Error deleting incomplete file" << path;
 }
 
-void DownloadMgr::err(QNetworkReply::NetworkError code)
+void StelDownloadMgr::err(QNetworkReply::NetworkError code)
 {
 	if(code != QNetworkReply::NoError)
 	{

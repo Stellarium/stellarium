@@ -29,14 +29,14 @@ class QDataStream;
 class QNetworkAccessManager;
 class QFile;
 
-//! @class DownloadMgr
+//! @class StelDownloadMgr
 //! Used to download files from the internet.
-class DownloadMgr : public QObject
+class StelDownloadMgr : public QObject
 {
 	Q_OBJECT;
 public:
-	DownloadMgr();
-	~DownloadMgr();
+	StelDownloadMgr();
+	~StelDownloadMgr();
 
 	//! Fetch a remote URL into a local file.
 	//! @param url the URL of the remote file.

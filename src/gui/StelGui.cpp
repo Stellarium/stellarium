@@ -45,7 +45,7 @@
 #include "SkyDrawer.hpp"
 #include "MeteorMgr.hpp"
 #include "DownloadPopup.hpp"
-#include "DownloadMgr.hpp"
+#include "StelDownloadMgr.hpp"
 
 #include <QDebug>
 #include <QTimeLine>
