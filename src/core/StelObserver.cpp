@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "Observer.hpp"
+#include "StelObserver.hpp"
 #include "StelUtils.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
@@ -165,32 +165,32 @@ void ArtificialPlanet::computeAverage(double f1)
 
 
 
-Observer::Observer(const StelLocation &loc) : currentLocation(loc)
+StelObserver::StelObserver(const StelLocation &loc) : currentLocation(loc)
 {
 	SolarSystem* ssystem = (SolarSystem*)GETSTELMODULE("SolarSystem");
 	planet = ssystem->searchByEnglishName(loc.planetName);
 	if (planet==NULL)
 	{
-		qWarning() << "Can't create Observer on planet " + loc.planetName + " because it is unknown. Use Earth as default.";
+		qWarning() << "Can't create StelObserver on planet " + loc.planetName + " because it is unknown. Use Earth as default.";
 		planet=ssystem->getEarth();
 	}
 }
 
-Observer::~Observer()
+StelObserver::~StelObserver()
 {
 }
 
-Vec3d Observer::getCenterVsop87Pos(void) const
+Vec3d StelObserver::getCenterVsop87Pos(void) const
 {
 	return getHomePlanet()->getHeliocentricEclipticPos();
 }
 
-double Observer::getDistanceFromCenter(void) const
+double StelObserver::getDistanceFromCenter(void) const
 {
 	return getHomePlanet()->getRadius() + (currentLocation.altitude/(1000*AU));
 }
 
-Mat4d Observer::getRotAltAzToEquatorial(double jd) const
+Mat4d StelObserver::getRotAltAzToEquatorial(double jd) const
 {
 	double lat = currentLocation.latitude;
 	// TODO: Figure out how to keep continuity in sky as reach poles
@@ -202,12 +202,12 @@ Mat4d Observer::getRotAltAzToEquatorial(double jd) const
 		* Mat4d::yrotation((90.-lat)*(M_PI/180.));
 }
 
-Mat4d Observer::getRotEquatorialToVsop87(void) const
+Mat4d StelObserver::getRotEquatorialToVsop87(void) const
 {
 	return getHomePlanet()->getRotEquatorialToVsop87();
 }
 
-SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLocation& target, double atransitSeconds) : Observer(startLoc),
+SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLocation& target, double atransitSeconds) : StelObserver(startLoc),
 		moveStartLocation(startLoc), moveTargetLocation(target), artificialPlanet(NULL), transitSeconds(atransitSeconds)
 {
 	SolarSystem* ssystem = (SolarSystem*)GETSTELMODULE("SolarSystem");

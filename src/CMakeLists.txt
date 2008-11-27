@@ -17,8 +17,8 @@ SET(stellarium_lib_SRCS
 	core/MovementMgr.hpp
 	core/StelNavigator.cpp
 	core/StelNavigator.hpp
-	core/Observer.cpp
-	core/Observer.hpp
+	core/StelObserver.cpp
+	core/StelObserver.hpp
 	core/StelLocation.hpp
 	core/StelLocation.cpp
 	core/StelLocationMgr.hpp
@@ -264,7 +264,7 @@ SET(stellarium_MOC_HDRS
 	core/StelAudioMgr.hpp
 	core/DownloadMgr.hpp
 	core/StelModuleMgr.hpp
-	core/Observer.hpp
+	core/StelObserver.hpp
 	core/StelApp.hpp
 	core/StelNavigator.hpp
 	core/StelLocationMgr.hpp
