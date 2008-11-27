@@ -27,20 +27,20 @@
 
 class Planet;
 class ArtificialPlanet;
-class Observer;
+class StelObserver;
 
-//! @class Observer
-//! Should be renamed as PlanetBasedObserver and derive from a more generical Observer class
-class Observer : public QObject
+//! @class StelObserver
+//! Should be renamed as PlanetBasedObserver and derive from a more generical StelObserver class
+class StelObserver : public QObject
 {
 	Q_OBJECT;
 	
 public:
-	//! Create a new Observer instance which is at a fixed Location
-	Observer(const StelLocation& loc);
-	~Observer();
+	//! Create a new StelObserver instance which is at a fixed Location
+	StelObserver(const StelLocation& loc);
+	~StelObserver();
 
-	//! Update Observer info if needed. Default implementation does nothing.
+	//! Update StelObserver info if needed. Default implementation does nothing.
 	virtual void update(double deltaTime) {;}
 	
 	Vec3d getCenterVsop87Pos(void) const;
@@ -58,7 +58,7 @@ public:
 	virtual bool isObserverLifeOver() const {return false;}
 	
 	//! Get the next observer to use once the life of this one is over
-	virtual Observer* getNextObserver() const {return new Observer(currentLocation);}
+	virtual StelObserver* getNextObserver() const {return new StelObserver(currentLocation);}
 	
 protected:
 	StelLocation currentLocation;
@@ -67,17 +67,17 @@ protected:
 
 //! @class SpaceShipObserver
 //! An observer which moves from from one position to another one and/or from one planet to another one
-class SpaceShipObserver : public Observer
+class SpaceShipObserver : public StelObserver
 {
 public:
 	SpaceShipObserver(const StelLocation& startLoc, const StelLocation& target, double transitSeconds=1.f);
 	~SpaceShipObserver();
 	
-	//! Update Observer info if needed. Default implementation does nothing.
+	//! Update StelObserver info if needed. Default implementation does nothing.
 	virtual void update(double deltaTime);
 	virtual const Planet* getHomePlanet(void) const {return (isObserverLifeOver() || artificialPlanet==NULL)  ? planet : (Planet*)artificialPlanet;}
 	virtual bool isObserverLifeOver() const {return timeToGo <= 0.;}
-	virtual Observer* getNextObserver() const {return new Observer(moveTargetLocation);}
+	virtual StelObserver* getNextObserver() const {return new StelObserver(moveTargetLocation);}
 	
 private:
 	StelLocation moveStartLocation;

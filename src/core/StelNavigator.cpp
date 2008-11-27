@@ -21,7 +21,7 @@
 #include "StelNavigator.hpp"
 #include "StelUtils.hpp"
 #include "SolarSystem.hpp"
-#include "Observer.hpp"
+#include "StelObserver.hpp"
 #include "Planet.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelCore.hpp"
@@ -65,7 +65,7 @@ void StelNavigator::init()
 	Q_ASSERT(conf);
 
 	defaultLocationID = conf->value("init_location/location","Paris, Paris, France").toString();
-	position = new Observer(StelApp::getInstance().getLocationMgr().locationForSmallString(defaultLocationID));
+	position = new StelObserver(StelApp::getInstance().getLocationMgr().locationForSmallString(defaultLocationID));
 	
 	setTimeNow();
 	setAltAzVisionDirection(Vec3f(1,1e-05,0.2));
@@ -169,7 +169,7 @@ void StelNavigator::addSolarDays(double d)
 void StelNavigator::addSiderealDays(double d)
 {
 	const Planet* home = position->getHomePlanet();
-	if (home->getEnglishName() != "Solar System Observer")
+	if (home->getEnglishName() != "Solar System StelObserver")
 		d *= home->getSiderealDay();
 	setJDay(getJDay() + d);
 }
@@ -213,7 +213,7 @@ void StelNavigator::moveObserverTo(const StelLocation& target, double duration, 
 	else
 	{
 		delete position;
-		position = new Observer(target);
+		position = new StelObserver(target);
 	}
 }
 
@@ -297,7 +297,7 @@ void StelNavigator::updateTime(double deltaTime)
 		{
 			objmgr.unSelect();
 		}
-		Observer* newObs = position->getNextObserver();
+		StelObserver* newObs = position->getNextObserver();
 		delete position;
 		position = newObs;
 	}
