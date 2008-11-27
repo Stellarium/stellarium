@@ -91,7 +91,6 @@ SET(stellarium_lib_SRCS
 	stelutils/GLee.h
 	stelutils/Grid.hpp
 	stelutils/GridObject.hpp
-	stelutils/SimpleGrid.hpp
 	stelutils/SphereGeometry.cpp
 	stelutils/SphereGeometry.hpp
 	stelutils/StelIniParser.cpp
