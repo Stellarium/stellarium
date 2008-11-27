@@ -94,8 +94,8 @@ SET(stellarium_lib_SRCS
 	core/TreeGrid.cpp
 	core/TreeGrid.hpp
 	core/vecmath.h
-	core/QtJsonParser.hpp
-	core/QtJsonParser.cpp
+	core/StelJsonParser.hpp
+	core/StelJsonParser.cpp
 	
 	external/bytes.h
 	external/callback_helpers.hpp

@@ -17,7 +17,7 @@
  */
 
 #include "MultiLevelJsonBase.hpp"
-#include "QtJsonParser.hpp"
+#include "StelJsonParser.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelProjector.hpp"
@@ -214,7 +214,7 @@ void MultiLevelJsonBase::scheduleDeletion()
 // Load the tile information from a JSON file
 QVariantMap MultiLevelJsonBase::loadFromJSON(QIODevice& input, bool qZcompressed, bool gzCompressed)
 {
-	QtJsonParser parser;
+	StelJsonParser parser;
 	QVariantMap map;
 	if (qZcompressed && input.size()>0)
 	{

@@ -36,6 +36,7 @@
 #include <QFile>
 #include <QDebug>
 #include <QLocale>
+#include <QRegExp>
 
 namespace StelUtils
 {
@@ -882,7 +883,7 @@ void debugQVariantMap(const QVariant& m, const QString& indent, const QString& k
 QList<int> getIntsFromISO8601String(const QString & dt)
 {
 	// Represents a valid, complete date string.
-	static const QRegExp finalRe("(-0*[1-9][0-9]{0,5}|0+|0*[1-9][0-9]{0,5})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[10])[T ]([01][0-9]|2[0123]):([012345][0-9]):([012345][0-9])");
+	static QRegExp finalRe("(-0*[1-9][0-9]{0,5}|0+|0*[1-9][0-9]{0,5})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[10])[T ]([01][0-9]|2[0123]):([012345][0-9]):([012345][0-9])");
 
 	QList<int> retval;
 	if (finalRe.exactMatch(dt))
