@@ -23,7 +23,7 @@
 #include "StelUtils.hpp"
 #include "StelNavigator.hpp"
 #include "StelProjector.hpp"
-#include "ToneReproducer.hpp"
+#include "StelToneReproducer.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelCore.hpp"
@@ -74,7 +74,7 @@ void MilkyWay::draw(StelCore* core)
 			Mat4d::xrotation(M_PI/180*23)*
 			Mat4d::yrotation(M_PI/180*120)*
 			Mat4d::zrotation(M_PI/180*7));
-	ToneReproducer* eye = core->getToneReproducer();
+	StelToneReproducer* eye = core->getToneReproducer();
 	
 	Q_ASSERT(tex);	// A texture must be loaded before calling this
 

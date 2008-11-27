@@ -31,7 +31,7 @@
 
 class Nebula;
 class Translator;
-class ToneReproducer;
+class StelToneReproducer;
 class QSettings;
 class StelPainter;
 

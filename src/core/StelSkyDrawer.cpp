@@ -20,7 +20,7 @@
 #include "StelSkyDrawer.hpp"
 #include "StelProjector.hpp"
 #include "StelNavigator.hpp"
-#include "ToneReproducer.hpp"
+#include "StelToneReproducer.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"

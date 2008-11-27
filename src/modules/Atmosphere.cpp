@@ -24,7 +24,7 @@
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelProjector.hpp"
-#include "ToneReproducer.hpp"
+#include "StelToneReproducer.hpp"
 #include "StelCore.hpp"
 
 // Uncomment to try out vertex buffers
@@ -264,7 +264,7 @@ void Atmosphere::draw(StelCore* core)
 	if (StelApp::getInstance().getVisionModeNight())
 		return;
 
-	ToneReproducer* eye = core->getToneReproducer();
+	StelToneReproducer* eye = core->getToneReproducer();
 	
 	if (fader.getInterstate())
 	{

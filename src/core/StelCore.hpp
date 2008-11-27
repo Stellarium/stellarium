@@ -25,7 +25,7 @@
 #include <QStringList>
 
 class StelNavigator;
-class ToneReproducer;
+class StelToneReproducer;
 class StelSkyDrawer;
 class StelGeodesicGrid;
 class StelMovementMgr;
@@ -105,9 +105,9 @@ public:
 	const StelNavigator* getNavigator() const {return navigation;}
 
 	//! Get the current tone reproducer used in the core.
-	ToneReproducer* getToneReproducer() {return toneConverter;}
+	StelToneReproducer* getToneReproducer() {return toneConverter;}
 	//! Get the current tone reproducer used in the core.
-	const ToneReproducer* getToneReproducer() const {return toneConverter;}
+	const StelToneReproducer* getToneReproducer() const {return toneConverter;}
 
 	//! Get the current StelSkyDrawer used in the core.
 	StelSkyDrawer* getSkyDrawer() {return skyDrawer;}
@@ -171,7 +171,7 @@ public slots:
 	
 private:
 	StelNavigator* navigation;			// Manage all navigation parameters, coordinate transformations etc..
-	ToneReproducer* toneConverter;		// Tones conversion between stellarium world and display device
+	StelToneReproducer* toneConverter;		// Tones conversion between stellarium world and display device
 	StelSkyDrawer* skyDrawer;
 	StelMovementMgr* movementMgr;		// Manage vision movements
 	

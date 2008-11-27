@@ -73,8 +73,8 @@ SET(stellarium_lib_SRCS
 	core/StelTexture.cpp
 	core/StelTexture.hpp
 	core/StelTextureTypes.hpp
-	core/ToneReproducer.cpp
-	core/ToneReproducer.hpp
+	core/StelToneReproducer.cpp
+	core/StelToneReproducer.hpp
 	core/StelViewportDistorter.cpp
 	core/StelViewportDistorter.hpp
 	core/StelStyle.hpp
