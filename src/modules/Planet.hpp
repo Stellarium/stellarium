@@ -29,7 +29,7 @@
 #include "StelFader.hpp"
 #include "Translator.hpp"
 #include "StelTextureTypes.hpp"
-#include "ProjectorType.hpp"
+#include "StelProjectorType.hpp"
 
 // The callback type for the external position computation function
 typedef boost::callback<void, double, double*> posFuncType;

@@ -22,7 +22,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "fixx11h.h"
 #include "StelAppGraphicsScene.hpp"
 #include "ViewportDistorter.hpp"
@@ -40,7 +40,7 @@ StelAppGraphicsScene::StelAppGraphicsScene() : tempPainter(NULL), cursorTimeout(
 	Q_ASSERT(!singleton);
 	singleton = this;
 	
-	distorter = ViewportDistorter::create("none",800,600,ProjectorP());
+	distorter = ViewportDistorter::create("none",800,600,StelProjectorP());
 	lastEventTimeSec = StelApp::getTotalRunTime();
 	previousTime = lastEventTimeSec;
 }

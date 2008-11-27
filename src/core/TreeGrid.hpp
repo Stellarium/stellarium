@@ -39,7 +39,7 @@ struct TreeGridNode
     Children children;
     
 #ifdef TREEGRIDDEBUG
-	double draw(class Projector *prj, const StelGeom::ConvexS&, float opacity = 1.) const;
+	double draw(class StelProjector *prj, const StelGeom::ConvexS&, float opacity = 1.) const;
 #endif
 };
 

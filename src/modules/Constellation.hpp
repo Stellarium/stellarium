@@ -79,9 +79,9 @@ private:
 	//! Draw the constellation name
 	void drawName(StelFont * constfont, const StelPainter& sPainter) const;
 	//! Draw the constellation art
-	void drawArt(const ProjectorP& prj, const Navigator* nav) const;
+	void drawArt(const StelProjectorP& prj, const Navigator* nav) const;
 	//! Draw the constellation boundary
-	void drawBoundaryOptim(const ProjectorP& prj) const;
+	void drawBoundaryOptim(const StelProjectorP& prj) const;
 	
 	//! Test if a star is part of a Constellation.
 	//! This member tests to see if a star is one of those which make up
@@ -105,9 +105,9 @@ private:
 	//! Draw the lines for the Constellation.
 	//! This method uses the coords of the stars (optimized for use thru 
 	//! the class ConstellationMgr only).
-	void drawOptim(const ProjectorP& prj) const;
+	void drawOptim(const StelProjectorP& prj) const;
 	//! Draw the art texture, optimized function to be called thru a constellation manager only.
-	void drawArtOptim(const ProjectorP& prj, const Navigator* nav) const;
+	void drawArtOptim(const StelProjectorP& prj, const Navigator* nav) const;
 	//! Update fade levels according to time since various events.
 	void update(int deltaTime);
 	//! Turn on and off Constellation line rendering.

@@ -18,8 +18,8 @@
 
 #include "StelCore.hpp"
 #include "Navigator.hpp"
-#include "Projector.hpp"
-#include "ProjectorClasses.hpp"
+#include "StelProjector.hpp"
+#include "StelProjectorClasses.hpp"
 #include "ToneReproducer.hpp"
 #include "SkyDrawer.hpp"
 #include "StelApp.hpp"
@@ -48,23 +48,23 @@ StelCore::StelCore() : geodesicGrid(NULL), currentProjectionType(ProjectionStere
 	QSettings* conf = StelApp::getInstance().getSettings();
 	// Create and initialize the default projector params
 	QString tmpstr = conf->value("projection/viewport").toString();
-	currentProjectorParams.maskType = Projector::stringToMaskType(tmpstr);
-	const int viewport_width = conf->value("projection/viewport_width", currentProjectorParams.viewportXywh[2]).toInt();
-	const int viewport_height = conf->value("projection/viewport_height", currentProjectorParams.viewportXywh[3]).toInt();
+	currentStelProjectorParams.maskType = StelProjector::stringToMaskType(tmpstr);
+	const int viewport_width = conf->value("projection/viewport_width", currentStelProjectorParams.viewportXywh[2]).toInt();
+	const int viewport_height = conf->value("projection/viewport_height", currentStelProjectorParams.viewportXywh[3]).toInt();
 	const int viewport_x = conf->value("projection/viewport_x", 0).toInt();
 	const int viewport_y = conf->value("projection/viewport_y", 0).toInt();
-	currentProjectorParams.viewportXywh.set(viewport_x,viewport_y,viewport_width,viewport_height);
+	currentStelProjectorParams.viewportXywh.set(viewport_x,viewport_y,viewport_width,viewport_height);
 	
 	const double viewportCenterX = conf->value("projection/viewport_center_x",0.5*viewport_width).toDouble();
 	const double viewportCenterY = conf->value("projection/viewport_center_y",0.5*viewport_height).toDouble();
-	currentProjectorParams.viewportCenter.set(viewportCenterX, viewportCenterY);
-	currentProjectorParams.viewportFovDiameter = conf->value("projection/viewport_fov_diameter", qMin(viewport_width,viewport_height)).toDouble();
-	currentProjectorParams.fov = movementMgr->getInitFov();
+	currentStelProjectorParams.viewportCenter.set(viewportCenterX, viewportCenterY);
+	currentStelProjectorParams.viewportFovDiameter = conf->value("projection/viewport_fov_diameter", qMin(viewport_width,viewport_height)).toDouble();
+	currentStelProjectorParams.fov = movementMgr->getInitFov();
 	
-	currentProjectorParams.flipHorz = conf->value("projection/flip_horz",false).toBool();
-	currentProjectorParams.flipVert = conf->value("projection/flip_vert",false).toBool();
+	currentStelProjectorParams.flipHorz = conf->value("projection/flip_horz",false).toBool();
+	currentStelProjectorParams.flipVert = conf->value("projection/flip_vert",false).toBool();
 	
-	currentProjectorParams.gravityLabels = conf->value("viewing/flag_gravity_labels").toBool();
+	currentStelProjectorParams.gravityLabels = conf->value("viewing/flag_gravity_labels").toBool();
 }
 
 
@@ -163,55 +163,55 @@ const GeodesicGrid* StelCore::getGeodesicGrid(int maxLevel) const
 	return geodesicGrid;
 }
 	
-const ProjectorP StelCore::getProjection2d() const
+const StelProjectorP StelCore::getProjection2d() const
 {
-	ProjectorP prj(new Projector2d());
-	prj->init(currentProjectorParams);
+	StelProjectorP prj(new StelProjector2d());
+	prj->init(currentStelProjectorParams);
 	return prj;
 }
 
 // Get an instance of projector using the current display parameters from Navigation, MovementMgr
 // and using the given modelview matrix
-const ProjectorP StelCore::getProjection(const Mat4d& modelViewMat, ProjectionType projType) const
+const StelProjectorP StelCore::getProjection(const Mat4d& modelViewMat, ProjectionType projType) const
 {
 	if (projType==1000)
 		projType = currentProjectionType;
 	
-	ProjectorP prj;
+	StelProjectorP prj;
 	switch (projType)
 	{
 		case ProjectionPerspective:
-			prj = ProjectorP(new ProjectorPerspective(modelViewMat));
+			prj = StelProjectorP(new StelProjectorPerspective(modelViewMat));
 			break;
 		case ProjectionEqualArea:
-			prj = ProjectorP(new ProjectorEqualArea(modelViewMat));
+			prj = StelProjectorP(new StelProjectorEqualArea(modelViewMat));
 			break;
 		case ProjectionStereographic:
-			prj = ProjectorP(new ProjectorStereographic(modelViewMat));
+			prj = StelProjectorP(new StelProjectorStereographic(modelViewMat));
 			break;
 		case ProjectionFisheye:
-			prj = ProjectorP(new ProjectorFisheye(modelViewMat));
+			prj = StelProjectorP(new StelProjectorFisheye(modelViewMat));
 			break;
 		case ProjectionCylinder:
-			prj = ProjectorP(new ProjectorCylinder(modelViewMat));
+			prj = StelProjectorP(new StelProjectorCylinder(modelViewMat));
 			break;
 		case ProjectionMercator:
-			prj = ProjectorP(new ProjectorMercator(modelViewMat));
+			prj = StelProjectorP(new StelProjectorMercator(modelViewMat));
 			break;
 		case ProjectionOrthographic:
-			prj = ProjectorP(new ProjectorOrthographic(modelViewMat));
+			prj = StelProjectorP(new StelProjectorOrthographic(modelViewMat));
 			break;
 		default:
 			qWarning() << "Unknown projection type: " << projType << "using ProjectionStereographic instead";
-			prj = ProjectorP(new ProjectorStereographic(modelViewMat));
+			prj = StelProjectorP(new StelProjectorStereographic(modelViewMat));
 			Q_ASSERT(0);
 	}
-	prj->init(currentProjectorParams);
+	prj->init(currentStelProjectorParams);
 	return prj;
 }
 		
 // Get an instance of projector using the current display parameters from Navigation, MovementMgr
-const ProjectorP StelCore::getProjection(FrameType frameType, ProjectionType projType) const
+const StelProjectorP StelCore::getProjection(FrameType frameType, ProjectionType projType) const
 {
 	
 	switch (frameType)
@@ -235,9 +235,9 @@ const ProjectorP StelCore::getProjection(FrameType frameType, ProjectionType pro
 void StelCore::windowHasBeenResized(int width,int height)
 {
 	// Maximize display when resized since it invalidates previous options anyway
-	currentProjectorParams.viewportXywh.set(0, 0, width, height);
-	currentProjectorParams.viewportCenter.set(0.5*width, 0.5*height);
-	currentProjectorParams.viewportFovDiameter = qMin(width,height);
+	currentStelProjectorParams.viewportXywh.set(0, 0, width, height);
+	currentStelProjectorParams.viewportCenter.set(0.5*width, 0.5*height);
+	currentStelProjectorParams.viewportFovDiameter = qMin(width,height);
 }
 	
 /*************************************************************************
@@ -258,7 +258,7 @@ void StelCore::update(double deltaTime)
 	// Update direction of vision/Zoom level
 	movementMgr->updateMotion(deltaTime);	
 	
-	currentProjectorParams.fov = movementMgr->getCurrentFov();
+	currentStelProjectorParams.fov = movementMgr->getCurrentFov();
 	
 	skyDrawer->update(deltaTime);
 }
@@ -270,8 +270,8 @@ void StelCore::update(double deltaTime)
 void StelCore::preDraw()
 {
 	// Init openGL viewing with fov, screen size and clip planes
-	currentProjectorParams.zNear = 0.000001;
-	currentProjectorParams.zFar = 50.;
+	currentStelProjectorParams.zNear = 0.000001;
+	currentStelProjectorParams.zFar = 50.;
 	
 	skyDrawer->preDraw();
 	
@@ -325,11 +325,11 @@ void StelCore::setCurrentProjectionTypeKey(QString key)
 		qWarning() << "Unknown projection type: " << key << "setting \"ProjectionStereographic\" instead";
 		currentProjectionType = ProjectionStereographic;
 	}
-	const double savedFov = currentProjectorParams.fov;
-	currentProjectorParams.fov = 0.0001;	// Avoid crash
+	const double savedFov = currentStelProjectorParams.fov;
+	currentStelProjectorParams.fov = 0.0001;	// Avoid crash
 	double newMaxFov = getProjection(Mat4d())->getMaxFov();
 	movementMgr->setMaxFov(newMaxFov);
-	currentProjectorParams.fov = qMin(newMaxFov, savedFov);
+	currentStelProjectorParams.fov = qMin(newMaxFov, savedFov);
 }
 	
 //! Get the current Mapping used by the Projection

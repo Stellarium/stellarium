@@ -23,7 +23,7 @@
 #include "GeodesicGrid.hpp"
 #include "StelModule.hpp"
 
-class Projector;
+class StelProjector;
 class Navigator;
 class ToneReproductor;
 class StelFont;

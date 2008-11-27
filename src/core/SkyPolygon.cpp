@@ -19,7 +19,7 @@
 #include "SkyPolygon.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "StelPainter.hpp"
 #include "StelCore.hpp"
 
@@ -53,7 +53,7 @@ SkyPolygon::~SkyPolygon()
 	
 void SkyPolygon::draw(StelCore* core)
 {
-	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	
 	QMultiMap<double, SkyPolygon*> result;
 	getTilesToDraw(result, core, prj->getViewportConvexPolygon(0, 0), true);

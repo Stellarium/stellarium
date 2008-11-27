@@ -277,7 +277,7 @@ void LandscapeOldStyle::drawFog(StelCore* core) const
 		return;
 	
 	const double vpos = tanMode ? radius*std::tan(fogAngleShift*M_PI/180.) : radius*std::sin(fogAngleShift*M_PI/180.);
-	const ProjectorP prj = core->getProjection(core->getNavigation()->getAltAzModelViewMat() * Mat4d::translation(Vec3d(0.,0.,vpos)));
+	const StelProjectorP prj = core->getProjection(core->getNavigation()->getAltAzModelViewMat() * Mat4d::translation(Vec3d(0.,0.,vpos)));
 	StelPainter sPainter(prj);
 	
 	glBlendFunc(GL_ONE, GL_ONE);
@@ -299,7 +299,7 @@ void LandscapeOldStyle::drawFog(StelCore* core) const
 // Draw the mountains with a few pieces of texture
 void LandscapeOldStyle::drawDecor(StelCore* core) const
 {
-	const ProjectorP prj = core->getProjection(StelCore::FrameAltAz);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 	StelPainter sPainter(prj);
 	
 	if (!landFader.getInterstate()) return;
@@ -365,7 +365,7 @@ void LandscapeOldStyle::drawGround(StelCore* core) const
 	
 	const double vshift = tanMode ? radius*std::tan(groundAngleShift*M_PI/180.) : radius*std::sin(groundAngleShift*M_PI/180.);
 	Mat4d mat = nav->getAltAzModelViewMat() * Mat4d::zrotation((groundAngleRotateZ-angleRotateZOffset)*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift));
-	const ProjectorP prj = core->getProjection(mat);
+	const StelProjectorP prj = core->getProjection(mat);
 	StelPainter sPainter(prj);
 	
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
@@ -441,7 +441,7 @@ void LandscapeFisheye::draw(StelCore* core)
 	if(!landFader.getInterstate()) return;
 
 	Navigator* nav = core->getNavigation();
-	const ProjectorP prj = core->getProjection(nav->getAltAzModelViewMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
+	const StelProjectorP prj = core->getProjection(nav->getAltAzModelViewMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
 	StelPainter sPainter(prj);
 	
 	// Normal transparency mode
@@ -506,7 +506,7 @@ void LandscapeSpherical::draw(StelCore* core)
 	if(!landFader.getInterstate()) return;
 
 	Navigator* nav = core->getNavigation();
-	const ProjectorP prj = core->getProjection(nav->getAltAzModelViewMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
+	const StelProjectorP prj = core->getProjection(nav->getAltAzModelViewMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
 	StelPainter sPainter(prj);
 	
 	// Need to flip texture usage horizontally due to glusphere convention

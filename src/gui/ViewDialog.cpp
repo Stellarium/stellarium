@@ -25,7 +25,7 @@
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelLocaleMgr.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StarMgr.hpp"

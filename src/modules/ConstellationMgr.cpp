@@ -35,7 +35,7 @@
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "StelLoadingBar.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelFontMgr.hpp"
@@ -451,7 +451,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 void ConstellationMgr::draw(StelCore* core)
 {
 	Navigator* nav = core->getNavigation();
-	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
 	drawLines(prj);
 	drawNames(prj);
@@ -460,7 +460,7 @@ void ConstellationMgr::draw(StelCore* core)
 }
 
 // Draw constellations art textures
-void ConstellationMgr::drawArt(const ProjectorP& prj, const Navigator * nav) const
+void ConstellationMgr::drawArt(const StelProjectorP& prj, const Navigator * nav) const
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
@@ -477,7 +477,7 @@ void ConstellationMgr::drawArt(const ProjectorP& prj, const Navigator * nav) con
 }
 
 // Draw constellations lines
-void ConstellationMgr::drawLines(const ProjectorP& prj) const
+void ConstellationMgr::drawLines(const StelProjectorP& prj) const
 {
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
@@ -504,7 +504,7 @@ void ConstellationMgr::drawNames(const StelPainter& sPainter) const
 	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
 	{
 		// Check if in the field of view
-		if (sPainter.getProjector()->projectCheck((*iter)->XYZname, (*iter)->XYname))
+		if (sPainter.getStelProjector()->projectCheck((*iter)->XYZname, (*iter)->XYname))
 			(*iter)->drawName(asterFont, sPainter);
 	}
 }
@@ -940,7 +940,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	return true;
 }
 
-void ConstellationMgr::drawBoundaries(const ProjectorP& prj) const
+void ConstellationMgr::drawBoundaries(const StelProjectorP& prj) const
 {
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);

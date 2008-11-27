@@ -23,7 +23,7 @@
 #include <boost/shared_ptr.hpp>
 #include <config.h>
 
-class Projector;
+class StelProjector;
 
 namespace boost
 {
@@ -32,8 +32,8 @@ namespace boost
 	template<class T> class shared_ptr;
 };
 
-//! @typedef ProjectorP
-//! Shared pointer on a Projector instance (implement reference counting)
-typedef boost::shared_ptr<Projector> ProjectorP;
+//! @typedef StelProjectorP
+//! Shared pointer on a StelProjector instance (implement reference counting)
+typedef boost::shared_ptr<StelProjector> StelProjectorP;
 
 #endif // _PROJECTORTYPE_HPP_

@@ -81,7 +81,7 @@ Cardinals::~Cardinals()
 // handles special cases at poles
 void Cardinals::draw(const StelCore* core, double latitude, bool gravityON) const
 {
-	const ProjectorP prj = core->getProjection(StelCore::FrameAltAz);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 	StelPainter sPainter(prj);
 	
 	if (!fader.getInterstate()) return;

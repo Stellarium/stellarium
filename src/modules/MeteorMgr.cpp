@@ -21,7 +21,7 @@
 #include <cstdlib>
 #include <QSettings>
 
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "Navigator.hpp"
 #include "MeteorMgr.hpp"
 #include "StelApp.hpp"

@@ -21,7 +21,7 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelTexture.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "ToneReproducer.hpp"
 #include "StelCore.hpp"
 #include "StelTextureMgr.hpp"
@@ -77,7 +77,7 @@ SkyImageTile::~SkyImageTile()
 	
 void SkyImageTile::draw(StelCore* core, const StelPainter& sPainter)
 {
-	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	
 	const float limitLuminance = core->getSkyDrawer()->getLimitLuminance();
 	QMultiMap<double, SkyImageTile*> result;
@@ -233,7 +233,7 @@ bool SkyImageTile::drawTile(StelCore* core, const StelPainter& sPainter)
 		texFader->start();
 	}
 	
-	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	const float factorX = tex->getCoordinates()[2][0];
 	const float factorY = tex->getCoordinates()[2][1];
 
