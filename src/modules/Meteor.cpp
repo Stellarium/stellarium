@@ -206,7 +206,7 @@ bool Meteor::draw(const StelCore* core, const StelPainter& sPainter)
 		return(0);
 
 	const StelNavigator* nav = core->getNavigator();
-	const StelProjectorP proj = sPainter.getStelProjector();
+	const StelProjectorP proj = sPainter.getProjector();
 	
 	Vec3d start, end;
 

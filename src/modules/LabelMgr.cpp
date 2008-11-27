@@ -101,7 +101,7 @@ bool SkyLabel::draw(StelCore* core, const StelPainter& sPainter)
 
 	Vec3d objectPos = labelObject->getJ2000EquatorialPos(core->getNavigator());
 	Vec3d labelXY;
-	sPainter.getStelProjector()->project(objectPos,labelXY);
+	sPainter.getProjector()->project(objectPos,labelXY);
 
 	double xOffset(0.);
 	double yOffset(0.);
@@ -137,7 +137,7 @@ bool SkyLabel::draw(StelCore* core, const StelPainter& sPainter)
 	}
 	else
 	{
-		float shift = 4.f + labelObject->getAngularSize(core)*M_PI/180.*sPainter.getStelProjector()->getPixelPerRadAtCenter()/1.8f;
+		float shift = 4.f + labelObject->getAngularSize(core)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter()/1.8f;
 		// use the object size
 		xOffset *= shift;
 		yOffset *= shift;
@@ -166,7 +166,7 @@ bool SkyLabel::draw(StelCore* core, const StelPainter& sPainter)
 
 		// screen coordinates of object
 		Vec3d objXY;
-		sPainter.getStelProjector()->project(objectPos,objXY);
+		sPainter.getProjector()->project(objectPos,objXY);
 
 		double lineEndX = labelXY[0]+xOffset;
 		double lineEndY = labelXY[1]+yOffset;
