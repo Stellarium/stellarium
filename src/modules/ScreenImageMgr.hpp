@@ -37,12 +37,18 @@ class QGraphicsPixmapItem;
 class ScreenImage
 {
 public:
-	ScreenImage();
-	virtual ~ScreenImage() {;}
+	//! Load an image
+	//! @param filename the partial path of the file to load.  This will be searched for in the
+	//! scripts directory using StelFileMgr.
+	//! @param x the screen x-position for the texture (in pixels), measured from the left side of the screen.
+	//! @param y the screen x-position for the texture (in pixels), measured from the top of the screen.
+	//! @param show the initial displayed status of the image (false == hidden).
+	ScreenImage(const QString& filename, float x, float y, bool show=false);
+	virtual ~ScreenImage();
 
 	//! Draw the image.
 	//! @param core the StelCore object
-	virtual bool draw(const StelCore* core) = 0;
+	virtual bool draw(const StelCore* core);
 	//! update fade for on/off action
 	virtual void update(double deltaTime);
 	//! Set the duration used for the fade in / fade out of the image
@@ -54,31 +60,10 @@ public:
 	//! Set the image alpha for when it is in full "on" (after fade in).
 	virtual void setAlpha(float a);
 	//! Set the x, y position of the image.
-	virtual void setXY(float x, float y) = 0;
+	virtual void setXY(float x, float y);
 
 protected:
 	LinearFader imageFader;
-
-};
-
-//! @class ScreenScreenImage
-//! This class is used for displaying images on the screen at x,y screen coordinates.
-//! TODO: alpha / fade.  This should wait until QT 4.5, when opacity will be settable in a QGraphicsItem.
-class ScreenScreenImage : public ScreenImage
-{
-public:
-	//! Load an image
-	//! @param filename the partial path of the file to load.  This will be searched for in the
-	//! scripts directory using StelFileMgr.
-	//! @param x the screen x-position for the texture (in pixels), measured from the left side of the screen.
-	//! @param y the screen x-position for the texture (in pixels), measured from the top of the screen.
-	//! @param show the initial displayed status of the image (false == hidden).
-	ScreenScreenImage(const QString& filename, float x, float y, bool show=false);
-	virtual ~ScreenScreenImage();
-	virtual bool draw(const StelCore* core);
-	virtual void setXY(float x, float y);
-
-private:
 	QGraphicsPixmapItem* tex;
 
 };
