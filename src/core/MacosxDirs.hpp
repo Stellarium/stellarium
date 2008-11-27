@@ -21,12 +21,10 @@
 
 #include <QString>
 
-/**
- * Functions to use MacOSX's Carbon Framework to retrieve and make
- * usable as string's the directories of the application and its
- * resource directories.
- */
-
+//! @internal
+//! Functions to use MacOSX's Carbon Framework to retrieve and make
+//! usable as string's the directories of the application and its
+//! resource directories.
 class MacosxDirs
 {
 public:

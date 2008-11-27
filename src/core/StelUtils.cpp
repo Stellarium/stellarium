@@ -878,5 +878,43 @@ void debugQVariantMap(const QVariant& m, const QString& indent, const QString& k
 		qDebug() << indent + key + " => " + m.toString();
 }
 
+
+QList<int> getIntsFromISO8601String(const QString & dt)
+{
+	// Represents a valid, complete date string.
+	static const QRegExp finalRe("(-0*[1-9][0-9]{0,5}|0+|0*[1-9][0-9]{0,5})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[10])[T ]([01][0-9]|2[0123]):([012345][0-9]):([012345][0-9])");
+
+	QList<int> retval;
+	if (finalRe.exactMatch(dt))
+	{
+		QStringList number_strings = finalRe.capturedTexts();
+		bool ok;
+		int v;
+		for (int i = 1; i < number_strings.size(); i++)
+		{
+			qWarning() << ":: at capture " << i << " got a " << number_strings[i];
+			ok = true;
+			v = number_strings[i].toInt(&ok, 10);
+			qWarning() << "  :: and it was a " << v << " " << ok;
+			if (ok)
+			{
+				retval.push_back(v);
+			}
+			else
+			{
+				retval.clear();
+				qWarning() << "TextEntryDateTimeValidator::getIntsFromISO8601String: input string failed to be an exact date at capture " << i << ", returning nothing: " << dt;
+				break;
+			}
+		}
+	}
+	else
+	{
+		qWarning() << "TextEntryDateTimeValidator::getIntsFromISO8601String: input string failed to be an exact date, returning nothing: " << dt;
+	}
+	return retval;
+}
+
+
 } // end of the StelUtils namespace
 
