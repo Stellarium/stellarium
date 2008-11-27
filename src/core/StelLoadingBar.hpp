@@ -21,7 +21,7 @@
 #define _LOADINGBAR_HPP_
 
 #include "StelTextureTypes.hpp"
-#include "ProjectorType.hpp"
+#include "StelProjectorType.hpp"
 #include "vecmath.h"
 
 #include <QString>

@@ -19,8 +19,8 @@
 #ifndef _STELCORE_HPP_
 #define _STELCORE_HPP_
 
-#include "Projector.hpp"
-#include "ProjectorType.hpp"
+#include "StelProjector.hpp"
+#include "StelProjectorType.hpp"
 #include <QString>
 #include <QStringList>
 
@@ -88,16 +88,16 @@ public:
 		
 	//! Get a new instance of a simple 2d projection. This projection cannot be used to project or unproject but
 	//! only for 2d painting
-	const ProjectorP getProjection2d() const;
+	const StelProjectorP getProjection2d() const;
 			
 	//! Get a new instance of projector using the current display parameters from Navigation, MovementMgr, etc..
 	//! If not specified default the projection type is the default one set in the core.
 	//! This is a smart pointer, you don't need to delete it.
-	const ProjectorP getProjection(FrameType frameType, ProjectionType projType=(ProjectionType)1000) const;
+	const StelProjectorP getProjection(FrameType frameType, ProjectionType projType=(ProjectionType)1000) const;
 	//! Get an instance of projector using the current display parameters from Navigation, MovementMgr
 	//! and using the given modelview matrix.
 	//! If not specified default the projection type is the default one set in the core.
-	const ProjectorP getProjection(const Mat4d& modelViewMat, ProjectionType projType=(ProjectionType)1000) const;
+	const StelProjectorP getProjection(const Mat4d& modelViewMat, ProjectionType projType=(ProjectionType)1000) const;
 			
 	//! Get the current navigation (manages frame transformation) used in the core.
 	Navigator* getNavigation() {return navigation;}
@@ -123,9 +123,9 @@ public:
 	const MovementMgr* getMovementMgr() const {return movementMgr;}
 	
 	//! Set the near and far clipping planes.
-	void setClippingPlanes(double znear, double zfar) {currentProjectorParams.zNear=znear;currentProjectorParams.zFar=zfar;} 
+	void setClippingPlanes(double znear, double zfar) {currentStelProjectorParams.zNear=znear;currentStelProjectorParams.zFar=zfar;} 
 	//! Get the near and far clipping planes.
-	void getClippingPlanes(double* zn, double* zf) const {*zn = currentProjectorParams.zNear; *zf = currentProjectorParams.zFar;}
+	void getClippingPlanes(double* zn, double* zf) const {*zn = currentStelProjectorParams.zNear; *zf = currentStelProjectorParams.zFar;}
 	
 	//! Get the translated projection name from its TypeKey for the current locale.
 	QString projectionTypeKeyToNameI18n(const QString& key) const;
@@ -133,10 +133,10 @@ public:
 	//! Get the projection TypeKey from its translated name for the current locale.
 	QString projectionNameI18nToTypeKey(const QString& nameI18n) const;
 	
-	//! Get the current set of parameters to use when creating a new Projector.
-	Projector::ProjectorParams getCurrentProjectorParams() const {return currentProjectorParams;}
-	//! Set the set of parameters to use when creating a new Projector.
-	void setCurrentProjectorParams(const Projector::ProjectorParams& newParams) {currentProjectorParams=newParams;}
+	//! Get the current set of parameters to use when creating a new StelProjector.
+	StelProjector::StelProjectorParams getCurrentStelProjectorParams() const {return currentStelProjectorParams;}
+	//! Set the set of parameters to use when creating a new StelProjector.
+	void setCurrentStelProjectorParams(const StelProjector::StelProjectorParams& newParams) {currentStelProjectorParams=newParams;}
 	
 public slots:
 	//! Set the current ProjectionType to use
@@ -151,23 +151,23 @@ public slots:
 	QStringList getAllProjectionTypeKeys() const;
 				
 	//! Set the mask type.
-	void setMaskType(Projector::ProjectorMaskType m) {currentProjectorParams.maskType = m; }
+	void setMaskType(StelProjector::StelProjectorMaskType m) {currentStelProjectorParams.maskType = m; }
 	
 	//! Set the flag with decides whether to arrage labels so that
 	//! they are aligned with the bottom of a 2d screen, or a 3d dome.
-	void setFlagGravityLabels(bool gravity) { currentProjectorParams.gravityLabels = gravity; }	
+	void setFlagGravityLabels(bool gravity) { currentStelProjectorParams.gravityLabels = gravity; }	
 	//! Set the horizontal flip status.
 	//! @param flip The new value (true = flipped, false = unflipped).
-	void setFlipHorz(bool flip) {currentProjectorParams.flipHorz = flip;}
+	void setFlipHorz(bool flip) {currentStelProjectorParams.flipHorz = flip;}
 	//! Set the vertical flip status.
 	//! @param flip The new value (true = flipped, false = unflipped).
-	void setFlipVert(bool flip) {currentProjectorParams.flipVert = flip;}
+	void setFlipVert(bool flip) {currentStelProjectorParams.flipVert = flip;}
 	//! Get the state of the horizontal flip.
 	//! @return True if flipped horizontally, else false.
-	bool getFlipHorz(void) const {return currentProjectorParams.flipHorz;}
+	bool getFlipHorz(void) const {return currentStelProjectorParams.flipHorz;}
 	//! Get the state of the vertical flip.
 	//! @return True if flipped vertically, else false.
-	bool getFlipVert(void) const {return currentProjectorParams.flipVert;}
+	bool getFlipVert(void) const {return currentStelProjectorParams.flipVert;}
 	
 private:
 	Navigator* navigation;			// Manage all navigation parameters, coordinate transformations etc..
@@ -181,8 +181,8 @@ private:
 	// The currently used projection type
 	ProjectionType currentProjectionType;
 	
-	// Parameters to use when creating new instances of Projector
-	Projector::ProjectorParams currentProjectorParams;
+	// Parameters to use when creating new instances of StelProjector
+	StelProjector::StelProjectorParams currentStelProjectorParams;
 };
 
 #endif // _STELCORE_HPP_

@@ -21,7 +21,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "SkyImageTile.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMainGraphicsView.hpp"

@@ -33,7 +33,7 @@
 #include "GLee.h"
 
 #include "StelLoadingBar.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "SkyDrawer.hpp"
@@ -81,7 +81,7 @@ public:
   virtual void searchAround(int index,const Vec3d &v,double cosLimFov,
                             QList<StelObjectP > &result) = 0;
   virtual void draw(int index,bool is_inside,
-                    const float *rcmag_table, const ProjectorP& prj,
+                    const float *rcmag_table, const StelProjectorP& prj,
                     unsigned int maxMagStarName,float names_brightness,
                     StelFont *starFont) const = 0;
   bool isInitialized(void) const {return (nr_of_zones>0);}
@@ -128,7 +128,7 @@ private:
   void searchAround(int index,const Vec3d &v,double cosLimFov,
                     QList<StelObjectP > &result);
   void draw(int index,bool is_inside,
-			const float *rcmag_table, const ProjectorP& prj,
+			const float *rcmag_table, const StelProjectorP& prj,
             unsigned int maxMagStarName,float names_brightness,
             StelFont *starFont) const;
 };
@@ -385,7 +385,7 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void) {
 template<class Star>
 void SpecialZoneArray<Star>::draw(int index,bool is_inside,
                                   const float *rcmag_table,
-								  const ProjectorP& prj,
+								  const StelProjectorP& prj,
                                   unsigned int maxMagStarName,
                                   float names_brightness,
                                   StelFont *starFont) const

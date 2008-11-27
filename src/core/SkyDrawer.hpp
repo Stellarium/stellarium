@@ -21,7 +21,7 @@
 #define _SKYDRAWER_HPP_
 
 #include "StelTextureTypes.hpp"
-#include "ProjectorType.hpp"
+#include "StelProjectorType.hpp"
 #include "vecmath.h"
 
 #include <QObject>
@@ -45,7 +45,7 @@ public:
 	//! Init parameters from config file
 	void init();
 	
-	//! Update with respect to the time and Projector/ToneReproducer state
+	//! Update with respect to the time and StelProjector/ToneReproducer state
 	//! @param deltaTime the time increment in second since last call.
 	void update(double deltaTime);
 	

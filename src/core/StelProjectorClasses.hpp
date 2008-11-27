@@ -20,12 +20,12 @@
 #ifndef _PROJECTIONS_HPP_
 #define _PROJECTIONS_HPP_
 
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 
-class ProjectorPerspective : public Projector
+class StelProjectorPerspective : public StelProjector
 {
 public:
-	ProjectorPerspective(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
+	StelProjectorPerspective(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 120.;}
@@ -55,10 +55,10 @@ public:
 	double deltaZoom(double fov) const;
 };
 
-class ProjectorEqualArea : public Projector
+class StelProjectorEqualArea : public StelProjector
 {
 public:
-	ProjectorEqualArea(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
+	StelProjectorEqualArea(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 360.;}
@@ -77,10 +77,10 @@ public:
 	double deltaZoom(double fov) const;
 };
 
-class ProjectorStereographic : public Projector
+class StelProjectorStereographic : public StelProjector
 {
 public:
-	ProjectorStereographic(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
+	StelProjectorStereographic(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 235.;}
@@ -106,10 +106,10 @@ public:
 	double deltaZoom(double fov) const;
 };
 
-class ProjectorFisheye : public Projector
+class StelProjectorFisheye : public StelProjector
 {
 public:
-	ProjectorFisheye(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
+	StelProjectorFisheye(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 180.00001;}
@@ -141,10 +141,10 @@ public:
 	double deltaZoom(double fov) const;
 };
 
-class ProjectorCylinder : public Projector
+class StelProjectorCylinder : public StelProjector
 {
 public:
-	ProjectorCylinder(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
+	StelProjectorCylinder(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 175. * 4./3.;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
@@ -155,10 +155,10 @@ public:
 	double deltaZoom(double fov) const;
 };
 
-class ProjectorMercator : public Projector
+class StelProjectorMercator : public StelProjector
 {
 public:
-	ProjectorMercator(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
+	StelProjectorMercator(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 175. * 4./3.;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
@@ -169,10 +169,10 @@ public:
 	double deltaZoom(double fov) const;
 };
 
-class ProjectorOrthographic : public Projector
+class StelProjectorOrthographic : public StelProjector
 {
 public:
-	ProjectorOrthographic(const Mat4d& modelViewMat) : Projector(modelViewMat) {;}
+	StelProjectorOrthographic(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 179.9999;}
@@ -183,10 +183,10 @@ public:
 	double deltaZoom(double fov) const;
 };
 
-class Projector2d : public Projector
+class StelProjector2d : public StelProjector
 {
 public:
-	Projector2d() : Projector(Mat4d::identity()) {;}
+	StelProjector2d() : StelProjector(Mat4d::identity()) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 360.;}

@@ -19,14 +19,14 @@
 
 #include "Translator.hpp"
 
-#include "Projector.hpp"
-#include "ProjectorClasses.hpp"
+#include "StelProjector.hpp"
+#include "StelProjectorClasses.hpp"
 
 
 #include <QDebug>
 #include <QString>
 
-const QString Projector::maskTypeToString(ProjectorMaskType type)
+const QString StelProjector::maskTypeToString(StelProjectorMaskType type)
 {
 	if (type == MaskDisk )
 		return "disk";
@@ -34,16 +34,16 @@ const QString Projector::maskTypeToString(ProjectorMaskType type)
 		return "none";
 }
 
-Projector::ProjectorMaskType Projector::stringToMaskType(const QString &s)
+StelProjector::StelProjectorMaskType StelProjector::stringToMaskType(const QString &s)
 {
 	if (s=="disk")
 		return MaskDisk;
 	return MaskNone;
 }
 
-void Projector::init(const ProjectorParams& params)
+void StelProjector::init(const StelProjectorParams& params)
 {
-	maskType = (ProjectorMaskType)params.maskType;
+	maskType = (StelProjectorMaskType)params.maskType;
 	zNear = params.zNear;
 	oneOverZNearMinusZFar = 1./(zNear-params.zFar);
 	viewportXywh = params.viewportXywh;
@@ -56,7 +56,7 @@ void Projector::init(const ProjectorParams& params)
 	//Q_ASSERT(params.fov<=getMaxFov());
 }
 
-QString Projector::getHtmlSummary() const
+QString StelProjector::getHtmlSummary() const
 {
 	return QString("<h3>%1</h3><p>%2</p><b>%3</b>%4").arg(getNameI18()).arg(getDescriptionI18()).arg(q_("Maximum FOV: ")).arg(getMaxFov())+QChar(0x00B0);
 }
@@ -65,7 +65,7 @@ QString Projector::getHtmlSummary() const
  Return a convex polygon on the sphere which includes the viewport in the 
  current frame
 *************************************************************************/
-StelGeom::ConvexPolygon Projector::getViewportConvexPolygon(double marginX, double marginY) const
+StelGeom::ConvexPolygon StelProjector::getViewportConvexPolygon(double marginX, double marginY) const
 {
 	Vec3d e0, e1, e2, e3;
 	unProject(0-marginX,0-marginY,e0);
@@ -82,10 +82,10 @@ StelGeom::ConvexPolygon Projector::getViewportConvexPolygon(double marginX, doub
 //! Un-project the entire viewport depending on mapping, maskType, viewportFovDiameter,
 //! viewportCenter, and viewport dimensions.
 // Last not least all halfplanes n*x>d really should have d<=0 or at least very small d/n.length().
-StelGeom::ConvexS Projector::unprojectViewport(void) const
+StelGeom::ConvexS StelProjector::unprojectViewport(void) const
 {
 	double fov = getFov();
-	if ((dynamic_cast<const ProjectorCylinder*>(this) == 0 || fov < 90) && fov < 360.0)
+	if ((dynamic_cast<const StelProjectorCylinder*>(this) == 0 || fov < 90) && fov < 360.0)
 	{
 		Vec3d e0,e1,e2,e3;
 		bool ok;
@@ -173,7 +173,7 @@ StelGeom::ConvexS Projector::unprojectViewport(void) const
 }
 
 // Return a Halfspace containing the whole viewport
-StelGeom::HalfSpace Projector::getBoundingHalfSpace() const
+StelGeom::HalfSpace StelProjector::getBoundingHalfSpace() const
 {
 	StelGeom::HalfSpace result;
 	
@@ -217,7 +217,7 @@ StelGeom::HalfSpace Projector::getBoundingHalfSpace() const
 /*************************************************************************
  Project the vector v from the viewport frame into the current frame 
 *************************************************************************/
-bool Projector::unProject(double x, double y, Vec3d &v) const
+bool StelProjector::unProject(double x, double y, Vec3d &v) const
 {
 	v[0] = flipHorz * (x - viewportCenter[0]) / pixelPerRad;
 	v[1] = flipVert * (y - viewportCenter[1]) / pixelPerRad;

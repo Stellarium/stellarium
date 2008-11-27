@@ -23,11 +23,11 @@ SET(stellarium_lib_SRCS
 	core/StelLocation.cpp
 	core/StelLocationMgr.hpp
 	core/StelLocationMgr.cpp
-	core/Projector.cpp
-	core/Projector.hpp
-	core/ProjectorClasses.cpp
-	core/ProjectorClasses.hpp
-	core/ProjectorType.hpp
+	core/StelProjector.cpp
+	core/StelProjector.hpp
+	core/StelProjectorClasses.cpp
+	core/StelProjectorClasses.hpp
+	core/StelProjectorType.hpp
 	core/StelFont.cpp
 	core/StelFont.hpp
 	core/SkyDrawer.cpp

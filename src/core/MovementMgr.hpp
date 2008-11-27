@@ -21,7 +21,7 @@
 #define _MOVEMENTMGR_HPP_
 
 #include "StelModule.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 
 //! @class MovementMgr
 //! Manages the movement and zoomer operations.

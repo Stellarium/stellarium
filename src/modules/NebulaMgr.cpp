@@ -122,7 +122,7 @@ void NebulaMgr::init()
 // Draw all the Nebulae
 void NebulaMgr::draw(StelCore* core)
 {
-	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 	
 	SkyDrawer* skyDrawer = core->getSkyDrawer();
@@ -167,7 +167,7 @@ void NebulaMgr::draw(StelCore* core)
 void NebulaMgr::drawPointer(const StelCore* core, const StelPainter& sPainter)
 {
 	const Navigator* nav = core->getNavigation();
-	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	
 	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Nebula");
 	if (!newSelected.empty())

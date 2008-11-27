@@ -40,7 +40,7 @@
 #include "SkyDrawer.hpp"
 #include "SkyImageMgr.hpp"
 #include "StarMgr.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "StelLocation.hpp"
 #include "Planet.hpp"
 #include "StelLocationMgr.hpp"

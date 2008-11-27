@@ -20,7 +20,7 @@
 #include "QtJsonParser.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "StelCore.hpp"
 #include "kfilterdev.h"
 

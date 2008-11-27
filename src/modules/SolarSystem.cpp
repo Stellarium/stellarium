@@ -24,7 +24,7 @@
 #include "stellplanet.h"
 #include "Orbit.hpp"
 #include "Navigator.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelTextureMgr.hpp"
@@ -130,7 +130,7 @@ void SolarSystem::init()
 void SolarSystem::drawPointer(const StelCore* core)
 {
 	const Navigator* nav = core->getNavigation();
-	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	
 	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Planet");
 	if (!newSelected.empty())

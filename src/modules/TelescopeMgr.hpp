@@ -24,13 +24,13 @@
 #include "StelFader.hpp"
 #include "vecmath.h"
 #include "StelTextureTypes.hpp"
-#include "ProjectorType.hpp"
+#include "StelProjectorType.hpp"
 
 #include <QString>
 #include <QStringList>
 #include <QMap>
 
-class Projector;
+class StelProjector;
 class Navigator;
 class StelFont;
 class StelObject;
@@ -101,7 +101,7 @@ public slots:
 	
 private:
 	//! Draw a nice animated pointer around the object
-	void drawPointer(const ProjectorP& prj, const Navigator* nav, const StelPainter& sPainter);
+	void drawPointer(const StelProjectorP& prj, const Navigator* nav, const StelPainter& sPainter);
 
 	//! Perform the communication with the telescope servers
 	void communicate(void);

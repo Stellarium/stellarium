@@ -26,7 +26,7 @@
 #include <GL/glu.h>	/* Header File For The GLU Library */
 #endif
 
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
@@ -42,7 +42,7 @@
 QMutex* StelPainter::globalMutex = new QMutex();
 bool StelPainter::flagGlPointSprite = false;
 
-StelPainter::StelPainter(const ProjectorP& proj) : prj(proj)
+StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 {
 	Q_ASSERT(proj);
 	Q_ASSERT(globalMutex);
@@ -129,7 +129,7 @@ void StelPainter::initGlMatrixOrtho2d(void) const
 // Fill with black around the circle
 void StelPainter::drawViewportShape(void) const
 {
-	if (prj->maskType != Projector::MaskDisk)
+	if (prj->maskType != StelProjector::MaskDisk)
 		return;
 
 	glDisable(GL_BLEND);
@@ -518,7 +518,7 @@ void StelPainter::drawText(const StelFont* font, float x, float y, const QString
 
 
 // Recursive method cutting a small circle in small segments
-void fIter(const ProjectorP& prj, const Vec3d& p1, const Vec3d& p2, const Vec3d& win1, const Vec3d& win2, QLinkedList<Vec3d>& vertexList, const QLinkedList<Vec3d>::iterator& iter, double radius, const Vec3d& center, int nbI=0)
+void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, const Vec3d& win1, const Vec3d& win2, QLinkedList<Vec3d>& vertexList, const QLinkedList<Vec3d>::iterator& iter, double radius, const Vec3d& center, int nbI=0)
 {
 	Vec3d win3;
 	Vec3d newVertex(p1+p2);

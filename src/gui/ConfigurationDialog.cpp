@@ -27,7 +27,7 @@
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "Navigator.hpp"
 #include "StelCore.hpp"
 #include "MovementMgr.hpp"
@@ -83,7 +83,7 @@ void ConfigurationDialog::styleChanged()
 
 void ConfigurationDialog::createDialogContent()
 {
-	const ProjectorP proj = StelApp::getInstance().getCore()->getProjection(Mat4d());
+	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(Mat4d());
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
 	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
@@ -164,7 +164,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlagGravityLabels(bool)));
 	ui->selectSingleConstellationButton->setChecked(cmgr->getFlagIsolateSelected());
 	connect(ui->selectSingleConstellationButton, SIGNAL(toggled(bool)), cmgr, SLOT(setFlagIsolateSelected(bool)));
-	ui->discViewportCheckbox->setChecked(proj->getMaskType() == Projector::MaskDisk);
+	ui->discViewportCheckbox->setChecked(proj->getMaskType() == StelProjector::MaskDisk);
 	connect(ui->discViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 	ui->autoZoomResetsDirectionCheckbox->setChecked(mvmgr->getFlagAutoZoomOutResetsDirection());
 	connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
@@ -234,9 +234,9 @@ void ConfigurationDialog::setStartupTimeMode(void)
 void ConfigurationDialog::setDiskViewport(bool b)
 {
 	if (b)
-		StelApp::getInstance().getCore()->setMaskType(Projector::MaskDisk);
+		StelApp::getInstance().getCore()->setMaskType(StelProjector::MaskDisk);
 	else
-		StelApp::getInstance().getCore()->setMaskType(Projector::MaskNone);
+		StelApp::getInstance().getCore()->setMaskType(StelProjector::MaskNone);
 }
 
 void ConfigurationDialog::setSphericMirror(bool b)
@@ -330,7 +330,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	Q_ASSERT(mvmgr);
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 	Q_ASSERT(nav);
-	const ProjectorP proj = StelApp::getInstance().getCore()->getProjection(Mat4d());
+	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(Mat4d());
 	Q_ASSERT(proj);
 
 	// view dialog / sky tab settings
@@ -418,7 +418,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	// configuration dialog / tools tab
 	conf->setValue("gui/flag_show_flip_buttons", gui->getFlagShowFlipButtons());
 	conf->setValue("video/distorter", StelAppGraphicsScene::getInstance().getViewPortDistorterType());
-	conf->setValue("projection/viewport", Projector::maskTypeToString(proj->getMaskType()));
+	conf->setValue("projection/viewport", StelProjector::maskTypeToString(proj->getMaskType()));
 	conf->setValue("viewing/flag_gravity_labels", proj->getFlagGravityLabels());
 	conf->setValue("navigation/auto_zoom_out_resets_direction", mvmgr->getFlagAutoZoomOutResetsDirection());
 	conf->setValue("gui/flag_mouse_cursor_timeout", StelAppGraphicsScene::getInstance().getFlagCursorTimeout());

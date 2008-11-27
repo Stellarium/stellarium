@@ -20,39 +20,39 @@
 #ifndef _PROJECTOR_HPP_
 #define _PROJECTOR_HPP_
 
-#include "ProjectorType.hpp"
+#include "StelProjectorType.hpp"
 #include "vecmath.h"
 #include "SphereGeometry.hpp"
 
-//! @class Projector
+//! @class StelProjector
 //! Provide the main interface to all operations of projecting coordinates from sky to screen.
-//! The Projector also defines the viewport size and position.
-//! All methods from this class are threadsafe. The usual usage is to create local instances of ProjectorP using the
+//! The StelProjector also defines the viewport size and position.
+//! All methods from this class are threadsafe. The usual usage is to create local instances of StelProjectorP using the
 //! getProjection() method from StelCore where needed.
 //! For performing drawing using a particular projection, refer to the StelPainter class.
-class Projector
+class StelProjector
 {
 public:
 	friend class StelPainter;
 	friend class StelCore;
 	
-	//! @enum ProjectorMaskType
+	//! @enum StelProjectorMaskType
 	//! Define viewport mask types
-	enum ProjectorMaskType
+	enum StelProjectorMaskType
 	{
 		MaskNone,	//!< Regular - no mask.
 		MaskDisk	//!< For disk viewport mode (circular mask to seem like bins/telescope)
 	};
 	
-	//! @struct ProjectorParams
-	//! Contains all the param needed to initialize a Projector
-	struct ProjectorParams
+	//! @struct StelProjectorParams
+	//! Contains all the param needed to initialize a StelProjector
+	struct StelProjectorParams
 	{
-		ProjectorParams() : fov(60.), gravityLabels(false), maskType(MaskNone), flipHorz(false), flipVert(false) {;}
+		StelProjectorParams() : fov(60.), gravityLabels(false), maskType(MaskNone), flipHorz(false), flipVert(false) {;}
 		Vector4<int> viewportXywh;     //! posX, posY, width, height
 		double fov;                    //! FOV in degrees
 		bool gravityLabels;            //! the flag to use gravity labels or not
-		ProjectorMaskType maskType;    //! The current projector mask
+		StelProjectorMaskType maskType;    //! The current projector mask
 		double zNear, zFar;            //! Near and far clipping planes
 		Vec2d viewportCenter;          //! Viewport center in screen pixel
 		double viewportFovDiameter;    //! diameter of the FOV disk in pixel
@@ -60,7 +60,7 @@ public:
 	};
 	
 	///////////////////////////////////////////////////////////////////////////
-	// Methods which must be reimplemented by all instance of Projector
+	// Methods which must be reimplemented by all instance of StelProjector
 	//! Get a human-readable name for this projection type
 	virtual QString getNameI18() const = 0;
 	//! Get a human-readable short description for this projection type
@@ -210,23 +210,23 @@ public:
 	const Mat4d& getModelViewMatrix() const {return modelViewMatrix;}
 	
 	///////////////////////////////////////////////////////////////////////////
-	//! Get a string description of a ProjectorMaskType.
-	static const QString maskTypeToString(ProjectorMaskType type);
-	//! Get a ProjectorMaskType from a string description.
-	static ProjectorMaskType stringToMaskType(const QString &s);
+	//! Get a string description of a StelProjectorMaskType.
+	static const QString maskTypeToString(StelProjectorMaskType type);
+	//! Get a StelProjectorMaskType from a string description.
+	static StelProjectorMaskType stringToMaskType(const QString &s);
 	
 	//! Get the current type of the mask if any.
-	ProjectorMaskType getMaskType(void) const {return maskType;}
+	StelProjectorMaskType getMaskType(void) const {return maskType;}
 	
 protected:
-	//! Private constructor. Only StelCore can create instances of Projector.
-	Projector(const Mat4d& modelViewMat) : modelViewMatrix(modelViewMat) {;}
+	//! Private constructor. Only StelCore can create instances of StelProjector.
+	StelProjector(const Mat4d& modelViewMat) : modelViewMatrix(modelViewMat) {;}
 
 private:
-	//! Initialise the Projector from a param instance
-	void init(const ProjectorParams& param);
+	//! Initialise the StelProjector from a param instance
+	void init(const StelProjectorParams& param);
 	
-	ProjectorMaskType maskType;    // The current projector mask
+	StelProjectorMaskType maskType;    // The current projector mask
 	double zNear, oneOverZNearMinusZFar;  // Near and far clipping planes
 	Vec4i viewportXywh;     // Viewport parameters
 	Vec2d viewportCenter;          // Viewport center in screen pixel
