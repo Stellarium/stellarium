@@ -47,7 +47,7 @@
 #include "StelSkyCultureMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "QtScriptMgr.hpp"
+#include "StelScriptMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelSkyImageMgr.hpp"
 #include "StelAudioMgr.hpp"
@@ -369,7 +369,7 @@ void StelApp::init()
 	
 	updateI18n();
 	
-	scriptMgr = new QtScriptMgr(startupScript);
+	scriptMgr = new StelScriptMgr(startupScript);
 	initialized = true;
 }
 
