@@ -30,7 +30,7 @@ struct TreeGridNode
     TreeGridNode() {}
     TreeGridNode(const StelGeom::ConvexPolygon& s) : triangle(s) {}
         
-	typedef std::vector<GridObject*> Objects;
+	typedef std::vector<StelGridObject*> Objects;
     Objects objects;
     
     StelGeom::ConvexPolygon triangle;
@@ -49,7 +49,7 @@ public:
     TreeGrid(unsigned int maxobj = 1000);
     virtual ~TreeGrid();
     
-	void insert(GridObject* obj)
+	void insert(StelGridObject* obj)
     {
         insert(obj, *this);
     }
@@ -62,18 +62,18 @@ public:
     
 	//! Get all the objects loaded into the grid structure
 	//! This is quite slow and should not used for time critical operations
-	virtual std::vector<GridObject*> getAllObjects();
+	virtual std::vector<StelGridObject*> getAllObjects();
 	
 private:
     
-	void insert(GridObject* obj, TreeGridNode& node);
+	void insert(StelGridObject* obj, TreeGridNode& node);
     void split(TreeGridNode& node);
     
     template<class S>
     void fillIntersect(const S& s, const TreeGridNode& node, Grid& grid) const;    
     
     void fillAll(const TreeGridNode& node, Grid& grid) const;
-	void fillAll(const TreeGridNode& node, std::vector<GridObject*>& result) const;
+	void fillAll(const TreeGridNode& node, std::vector<StelGridObject*>& result) const;
     unsigned int depth(const TreeGridNode& node) const;
     
     unsigned int maxObjects;
@@ -115,7 +115,7 @@ struct NotIntersectPred
     Shape shape;
     
     NotIntersectPred(const Shape& s) : shape(s) {}
-	bool operator() (const GridObject* obj) const
+	bool operator() (const StelGridObject* obj) const
     {
 		return !intersect(shape, obj->getPositionForGrid());
     }

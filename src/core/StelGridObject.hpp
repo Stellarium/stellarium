@@ -16,21 +16,21 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _GRIDOBJECT_HPP_
-#define _GRIDOBJECT_HPP_
+#ifndef _STELGRIDOBJECT_HPP_
+#define _STELGRIDOBJECT_HPP_
 
 #include "vecmath.h"
 
 //! Simple abstract class defining the method getPositionForGrid() used
 //! by the grid algorithms to get a permanent (fixed) position.
-class GridObject
+class StelGridObject
 {
 	public:
-		virtual ~GridObject(void) {;}
+		virtual ~StelGridObject(void) {;}
 		
 		//! This method is used by the grid algorithms to get a permanent position for an object
 		//! @return a unit vector giving a permanent direction in a 3d coordinate system.
 		virtual Vec3d getPositionForGrid() const=0;
 };
 
-#endif // _GRIDOBJECT_HPP_
+#endif // _STELGRIDOBJECT_HPP_
