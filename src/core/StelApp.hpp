@@ -41,7 +41,7 @@ class QNetworkAccessManager;
 class StelStyle;
 class QTime;
 class StelLocationMgr;
-class SkyImageMgr;
+class StelSkyImageMgr;
 class QtScriptMgr;
 class StelDownloadMgr;
 class StelAudioMgr;
@@ -117,9 +117,9 @@ public:
 	//! @return the StelFileMgr manager to use for performing file operations
 	StelFileMgr& getFileMgr() {return *stelFileMgr;}
 	
-	//! Get the SkyImageMgr managing background images
-	//! @return the SkyImageMgr managing background images
-	SkyImageMgr& getSkyImageMgr() {return *skyImageMgr;}
+	//! Get the StelSkyImageMgr managing background images
+	//! @return the StelSkyImageMgr managing background images
+	StelSkyImageMgr& getSkyImageMgr() {return *skyImageMgr;}
 
 	StelAudioMgr* getStelAudioMgr() {return audioMgr;}
 	
@@ -335,7 +335,7 @@ private:
 	QNetworkAccessManager* networkAccessManager;
 	
 	// The manager for the sky images such as nebulas or background DSS
-	SkyImageMgr* skyImageMgr;
+	StelSkyImageMgr* skyImageMgr;
 
 	// The audio manager.  Must execute in the main thread.
 	StelAudioMgr* audioMgr;
