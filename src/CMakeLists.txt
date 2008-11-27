@@ -1,6 +1,6 @@
 
 
-INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/core ${CMAKE_SOURCE_DIR}/src/gui ${CMAKE_SOURCE_DIR}/src/modules ${CMAKE_SOURCE_DIR}/src/planetsephems ${CMAKE_SOURCE_DIR}/src/stelutils ${CMAKE_SOURCE_DIR}/src/stelutils/iniparser ${CMAKE_SOURCE_DIR}/src/stelutils/kfilter ${FreeType2_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${CURL_INCLUDE_DIRS} ${JPEG_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${SDL_INCLUDE_DIR} ${ICONV_INCLUDE_DIR} ${INTL_INCLUDE_DIR} ${SDLMIXER_INCLUDE_DIR} ${QT_INCLUDE_DIR}/QtScript ${QT_QTSCRIPT_INCLUDE_DIR} ${CMAKE_BINARY_DIR}/src)
+INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/core ${CMAKE_SOURCE_DIR}/src/gui ${CMAKE_SOURCE_DIR}/src/modules ${CMAKE_SOURCE_DIR}/src/planetsephems  ${CMAKE_SOURCE_DIR}/src/external ${CMAKE_SOURCE_DIR}/src/external/kfilter ${FreeType2_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${CURL_INCLUDE_DIRS} ${JPEG_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${SDL_INCLUDE_DIR} ${ICONV_INCLUDE_DIR} ${INTL_INCLUDE_DIR} ${SDLMIXER_INCLUDE_DIR} ${QT_INCLUDE_DIR}/QtScript ${QT_QTSCRIPT_INCLUDE_DIR} ${CMAKE_BINARY_DIR}/src)
 
 ########### next target ###############
 
@@ -80,40 +80,40 @@ SET(stellarium_lib_SRCS
 	core/StelStyle.hpp
 	core/SkyImageMgr.cpp
 	core/SkyImageMgr.hpp
+	core/Fader.hpp
+	core/Grid.hpp
+	core/GridObject.hpp
+	core/SphereGeometry.cpp
+	core/SphereGeometry.hpp
+	core/StelIniParser.cpp
+	core/StelIniParser.hpp
+	core/StelUtils.cpp
+	core/StelUtils.hpp
+	core/TextEntryDateTimeValidator.cpp
+	core/TextEntryDateTimeValidator.hpp
+	core/Translator.cpp
+	core/Translator.hpp
+	core/TreeGrid.cpp
+	core/TreeGrid.hpp
+	core/vecmath.h
+	core/QtJsonParser.hpp
+	core/QtJsonParser.cpp
 	
-	stelutils/bytes.h
-	stelutils/callback_helpers.hpp
-	stelutils/callbacks.hpp
-	stelutils/Fader.hpp
-	stelutils/fixx11h.h
-	stelutils/gettext.h
-	stelutils/GLee.c
-	stelutils/GLee.h
-	stelutils/Grid.hpp
-	stelutils/GridObject.hpp
-	stelutils/SphereGeometry.cpp
-	stelutils/SphereGeometry.hpp
-	stelutils/StelIniParser.cpp
-	stelutils/StelIniParser.hpp
-	stelutils/StelUtils.cpp
-	stelutils/StelUtils.hpp
-	stelutils/TextEntryDateTimeValidator.cpp
-	stelutils/TextEntryDateTimeValidator.hpp
-	stelutils/Translator.cpp
-	stelutils/Translator.hpp
-	stelutils/TreeGrid.cpp
-	stelutils/TreeGrid.hpp
-	stelutils/typeface.cpp
-	stelutils/typeface.h
-	stelutils/vecmath.h
-	stelutils/QtJsonParser.hpp
-	stelutils/QtJsonParser.cpp
-	stelutils/kfilter/kfilterdev.h
-	stelutils/kfilter/kfilterdev.cpp
-	stelutils/kfilter/kfilterbase.h
-	stelutils/kfilter/kfilterbase.cpp
-	stelutils/kfilter/kgzipfilter.h
-	stelutils/kfilter/kgzipfilter.cpp
+	external/bytes.h
+	external/callback_helpers.hpp
+	external/callbacks.hpp
+	external/fixx11h.h
+	external/gettext.h
+	external/GLee.c
+	external/GLee.h
+	external/typeface.cpp
+	external/typeface.h
+	external/kfilter/kfilterdev.h
+	external/kfilter/kfilterdev.cpp
+	external/kfilter/kfilterbase.h
+	external/kfilter/kfilterbase.cpp
+	external/kfilter/kgzipfilter.h
+	external/kfilter/kgzipfilter.cpp
 	
 	planetsephems/calc_interpolated_elements.c
 	planetsephems/calc_interpolated_elements.h
@@ -333,21 +333,21 @@ INSTALL(TARGETS stellarium DESTINATION bin)
 ## tests
 
 SET(tests_testdates_SRCS
-	stelutils/StelUtils.cpp
-	stelutils/StelUtils.hpp
+	core/StelUtils.cpp
+	core/StelUtils.hpp
 	tests/testdates.cpp
-	stelutils/TextEntryDateTimeValidator.hpp
-	stelutils/TextEntryDateTimeValidator.cpp)
+	core/TextEntryDateTimeValidator.hpp
+	core/TextEntryDateTimeValidator.cpp)
 ADD_EXECUTABLE(testdates ${tests_testdates_SRCS})
 TARGET_LINK_LIBRARIES(testdates ${extLinkerOption})
 ADD_TEST(test_testdates ${EXECUTABLE_OUTPUT_PATH}/testdates)
 
 SET(tests_testSphereGeometry_SRCS
 	tests/testSphereGeometry.cpp
-	stelutils/SphereGeometry.hpp
-	stelutils/SphereGeometry.cpp
-	stelutils/StelUtils.cpp
-	stelutils/StelUtils.hpp)
+	core/SphereGeometry.hpp
+	core/SphereGeometry.cpp
+	core/StelUtils.cpp
+	core/StelUtils.hpp)
 ADD_EXECUTABLE(testSphereGeometry ${tests_testSphereGeometry_SRCS})
 TARGET_LINK_LIBRARIES(testSphereGeometry ${extLinkerOption})
 ADD_TEST(test_testSphereGeometry ${EXECUTABLE_OUTPUT_PATH}/testSphereGeometry)
