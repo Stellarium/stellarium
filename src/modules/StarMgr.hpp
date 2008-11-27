@@ -186,13 +186,6 @@ public:
 	//! Hipparcos catalogue number.
 	static QString getSciName(int hip);
 	
-	// TODO: the StarMgr it self should call core()->getGeodesicGrid()->setMaxlevel etc..
-	//! Get the maximum level of the geodesic sphere used.
-	//! See the class description for a short introduction to the meaning of this value.
-	int getMaxGridLevel(void) const {return maxGeodesicGridLevel;}
-	//! Initializes each triangular face of the geodesic grid.
-	void setGrid(class GeodesicGrid* grid);
-	
 	static double getCurrentJDay(void) {return currentJDay;}
 	
 	static QString convertToSpectralType(int index);

@@ -90,13 +90,13 @@ public:
 	//! only for 2d painting
 	const ProjectorP getProjection2d() const;
 			
-	//! Get a new instance of projector using the current display parameters from Navigation, MovementMgr
-	//! If not specified default the projection type is the default one set in the core
-	//! This is a smart pointer, you don't need to delete it
+	//! Get a new instance of projector using the current display parameters from Navigation, MovementMgr, etc..
+	//! If not specified default the projection type is the default one set in the core.
+	//! This is a smart pointer, you don't need to delete it.
 	const ProjectorP getProjection(FrameType frameType, ProjectionType projType=(ProjectionType)1000) const;
 	//! Get an instance of projector using the current display parameters from Navigation, MovementMgr
-	//! and using the given modelview matrix
-	//! If not specified default the projection type is the default one set in the core
+	//! and using the given modelview matrix.
+	//! If not specified default the projection type is the default one set in the core.
 	const ProjectorP getProjection(const Mat4d& modelViewMat, ProjectionType projType=(ProjectionType)1000) const;
 			
 	//! Get the current navigation (manages frame transformation) used in the core.
@@ -114,14 +114,12 @@ public:
 	//! Get the current SkyDrawer used in the core.
 	const SkyDrawer* getSkyDrawer() const {return skyDrawer;}
 
-	//! Get the shared instance of GeodesicGrid
-	GeodesicGrid* getGeodesicGrid() {return geodesicGrid;}
-	//! Get the shared instance of GeodesicGrid
-	const GeodesicGrid* getGeodesicGrid() const {return geodesicGrid;}
+	//! Get an instance of GeodesicGrid which is garanteed to allow for at least maxLevel levels
+	const GeodesicGrid* getGeodesicGrid(int maxLevel) const;
 	
-	//! Get the instance of movement manager
+	//! Get the instance of movement manager.
 	MovementMgr* getMovementMgr() {return movementMgr;}
-	//! Get the const instance of movement manager
+	//! Get the const instance of movement manager.
 	const MovementMgr* getMovementMgr() const {return movementMgr;}
 	
 	//! Set the near and far clipping planes.
@@ -129,15 +127,15 @@ public:
 	//! Get the near and far clipping planes.
 	void getClippingPlanes(double* zn, double* zf) const {*zn = currentProjectorParams.zNear; *zf = currentProjectorParams.zFar;}
 	
-	//! Get the translated projection name from its TypeKey for the current locale
+	//! Get the translated projection name from its TypeKey for the current locale.
 	QString projectionTypeKeyToNameI18n(const QString& key) const;
 	
-	//! Get the projection TypeKey from its translated name for the current locale
+	//! Get the projection TypeKey from its translated name for the current locale.
 	QString projectionNameI18nToTypeKey(const QString& nameI18n) const;
 	
-	//! Get the current set of parameters to use when creating a new Projector
+	//! Get the current set of parameters to use when creating a new Projector.
 	Projector::ProjectorParams getCurrentProjectorParams() const {return currentProjectorParams;}
-	//! Set the set of parameters to use when creating a new Projector
+	//! Set the set of parameters to use when creating a new Projector.
 	void setCurrentProjectorParams(const Projector::ProjectorParams& newParams) {currentProjectorParams=newParams;}
 	
 public slots:
@@ -178,7 +176,7 @@ private:
 	MovementMgr* movementMgr;		// Manage vision movements
 	
 	// Manage geodesic grid
-	GeodesicGrid* geodesicGrid;
+	mutable GeodesicGrid* geodesicGrid;
 	
 	// The currently used projection type
 	ProjectionType currentProjectionType;
