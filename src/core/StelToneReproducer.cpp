@@ -24,12 +24,12 @@
 # define pow10(x) std::exp((x) * 2.3025850930)
 #endif
 
-#include "ToneReproducer.hpp"
+#include "StelToneReproducer.hpp"
 
 /*********************************************************************
  Constructor: Set some default values to prevent bugs in case of bad use
 *********************************************************************/
-ToneReproducer::ToneReproducer() : Lda(50.f), Lwa(40000.f), oneOverMaxdL(1.f/100.f), lnOneOverMaxdL(std::log(1.f/100.f)), oneOverGamma(1.f/2.2222f)
+StelToneReproducer::StelToneReproducer() : Lda(50.f), Lwa(40000.f), oneOverMaxdL(1.f/100.f), lnOneOverMaxdL(std::log(1.f/100.f)), oneOverGamma(1.f/2.2222f)
 {
 	// Initialize  sensor
 	setInputScale();
@@ -47,14 +47,14 @@ ToneReproducer::ToneReproducer() : Lda(50.f), Lwa(40000.f), oneOverMaxdL(1.f/100
 /*********************************************************************
  Destructor
 *********************************************************************/
-ToneReproducer::~ToneReproducer()
+StelToneReproducer::~StelToneReproducer()
 {
 }
 
 /*********************************************************************
  Set the global input scale
 *********************************************************************/
-void ToneReproducer::setInputScale(float scale)
+void StelToneReproducer::setInputScale(float scale)
 {
 	inputScale=scale;
 	lnInputScale = std::log(inputScale);
@@ -63,7 +63,7 @@ void ToneReproducer::setInputScale(float scale)
 /*********************************************************************
  Set the eye adaptation luminance for the display (and precompute what can be)
 *********************************************************************/
-void ToneReproducer::setDisplayAdaptationLuminance(float _Lda)
+void StelToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 {
 	Lda = _Lda;
 
@@ -82,7 +82,7 @@ void ToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 /*********************************************************************
  Set the eye adaptation luminance for the world (and precompute what can be)
 *********************************************************************/
-void ToneReproducer::setWorldAdaptationLuminance(float _Lwa)
+void StelToneReproducer::setWorldAdaptationLuminance(float _Lwa)
 {
 	Lwa = _Lwa;
 
@@ -103,13 +103,13 @@ void ToneReproducer::setWorldAdaptationLuminance(float _Lwa)
  Convert from xyY color system to RGB according to the adaptation
  The Y component is in cd/m^2
 *********************************************************************/
-void ToneReproducer::xyYToRGB(float* color) const
+void StelToneReproducer::xyYToRGB(float* color) const
 {
 	float log10Y;
 	// 1. Hue conversion
 	if (color[2] <= 0.f)
 	{
-		// qDebug() << "ToneReproducer::xyYToRGB: BIG WARNING: color[2]<=0: " << color[2];
+		// qDebug() << "StelToneReproducer::xyYToRGB: BIG WARNING: color[2]<=0: " << color[2];
 		log10Y = -9e50;
 	}
 	else

@@ -22,7 +22,7 @@
 
 #include <QMap>
 #include "vecmath.h"
-#include "ToneReproducer.hpp"
+#include "StelToneReproducer.hpp"
 #include "StelProjector.hpp"
 #include "StelNavigator.hpp"
 #include "StelFader.hpp"

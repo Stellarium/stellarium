@@ -28,7 +28,7 @@
 #include "StelObjectModule.hpp"
 #include "StelProjectorType.hpp"
 
-class ToneReproducer;
+class StelToneReproducer;
 class StarMgr;
 class Constellation;
 class StelProjector;

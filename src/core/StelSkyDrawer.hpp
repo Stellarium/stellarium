@@ -26,7 +26,7 @@
 
 #include <QObject>
 
-class ToneReproducer;
+class StelToneReproducer;
 class StelCore;
 class StelPainter;
 
@@ -45,7 +45,7 @@ public:
 	//! Init parameters from config file
 	void init();
 	
-	//! Update with respect to the time and StelProjector/ToneReproducer state
+	//! Update with respect to the time and StelProjector/StelToneReproducer state
 	//! @param deltaTime the time increment in second since last call.
 	void update(double deltaTime);
 	
@@ -197,9 +197,9 @@ private:
 	//! brighter any more. Must be <= 60.0.
 	void setMinAdaptFov(float fov) {minAdaptFov = (fov > 60.f) ? 60.f : fov;}
 	
-	//! Set the scaling applied to input luminance before they are converted by the ToneReproducer
+	//! Set the scaling applied to input luminance before they are converted by the StelToneReproducer
 	void setInputScale(double in) {inScale = in;}
-	//! Get the scaling applied to input luminance before they are converted by the ToneReproducer
+	//! Get the scaling applied to input luminance before they are converted by the StelToneReproducer
 	float getInputScale() const {return inScale;}
 	
 	//! Compute the luminance for a point source with the given mag for the current FOV
@@ -222,7 +222,7 @@ private:
 	float findWorldLumForMag(float mag, float targetRadius);
 			
 	StelCore* core;
-	ToneReproducer* eye;
+	StelToneReproducer* eye;
 	
 	float maxAdaptFov, minAdaptFov, lnfovFactor;
 	bool flagPointStar;
@@ -252,7 +252,7 @@ private:
 	//! The current Bortle Scale index
 	int bortleScaleIndex;
 	
-	//! The scaling applied to input luminance before they are converted by the ToneReproducer
+	//! The scaling applied to input luminance before they are converted by the StelToneReproducer
 	double inScale;
 	
 	// Variables used for GL optimization when displaying point sources

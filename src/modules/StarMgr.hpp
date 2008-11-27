@@ -28,7 +28,7 @@
 #include "StelProjectorType.hpp"
 
 class StelObject;
-class ToneReproducer;
+class StelToneReproducer;
 class StelProjector;
 class StelNavigator;
 class StelLoadingBar;
