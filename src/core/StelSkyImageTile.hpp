@@ -60,7 +60,7 @@ public:
 };
 
 //! Base class for any astro image with a fixed position
-class SkyImageTile : public MultiLevelJsonBase
+class StelSkyImageTile : public MultiLevelJsonBase
 {
 	Q_OBJECT;
 	
@@ -68,15 +68,15 @@ class SkyImageTile : public MultiLevelJsonBase
 	
 public:
 	//! Default constructor
-	SkyImageTile() {initCtor();}
+	StelSkyImageTile() {initCtor();}
 	
 	//! Constructor
-	SkyImageTile(const QString& url, SkyImageTile* parent=NULL);
+	StelSkyImageTile(const QString& url, StelSkyImageTile* parent=NULL);
 	//! Constructor
-	SkyImageTile(const QVariantMap& map, SkyImageTile* parent);
+	StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* parent);
 	
 	//! Destructor
-	~SkyImageTile();
+	~StelSkyImageTile();
 
 	//! Draw the image on the screen.
 	void draw(StelCore* core, const StelPainter& sPainter);
@@ -134,12 +134,12 @@ protected:
 	virtual void loadFromQVariantMap(const QVariantMap& map);
 	
 private:
-	//! init the SkyImageTile
+	//! init the StelSkyImageTile
 	void initCtor();
 	
 	//! Return the list of tiles which should be drawn.
 	//! @param result a map containing resolution, pointer to the tiles
-	void getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, float limitLuminance, bool recheckIntersect=true);
+	void getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, float limitLuminance, bool recheckIntersect=true);
 	
 	//! Draw the image on the screen.
 	//! @return true if the tile was actually displayed

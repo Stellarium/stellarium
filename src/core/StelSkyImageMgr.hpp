@@ -25,7 +25,7 @@
 #include <QMap>
 
 class StelCore;
-class SkyImageTile;
+class StelSkyImageTile;
 class QProgressBar;
 
 //! Manage the sky background images, including DSS and deep sky objects images
@@ -58,10 +58,10 @@ public:
 	// Other specific methods
 	//! Add a new sky image tile in the list of background images
 	//! TODO: document params, specifially, what does externallyOwned really mean?
-	QString insertSkyImage(SkyImageTile* img, bool show=true, bool externallyOwned=true);
+	QString insertSkyImage(StelSkyImageTile* img, bool show=true, bool externallyOwned=true);
 	
 	//! Remove a sky image tile from the list of background images
-	void removeSkyImage(SkyImageTile* img);
+	void removeSkyImage(StelSkyImageTile* img);
 	
 public slots:
 	///////////////////////////////////////////////////////////////////////////
@@ -141,17 +141,17 @@ private:
 	class StelSkyImageMgrElem
 	{
 	public:
-		StelSkyImageMgrElem(SkyImageTile* t, bool show=true, bool externallyOwned=true);
+		StelSkyImageMgrElem(StelSkyImageTile* t, bool show=true, bool externallyOwned=true);
 		~StelSkyImageMgrElem();
-		SkyImageTile* tile;
+		StelSkyImageTile* tile;
 		QProgressBar* progressBar;
 		bool show;
 		bool externallyOwned;
 	};
 	
-	StelSkyImageMgrElem* skyBackgroundElemForTile(const SkyImageTile*);
+	StelSkyImageMgrElem* skyBackgroundElemForTile(const StelSkyImageTile*);
 	
-	QString keyForTile(const SkyImageTile*);
+	QString keyForTile(const StelSkyImageTile*);
 	
 	//! Map image key/image
 	QMap<QString, StelSkyImageMgrElem*> allSkyImages;
