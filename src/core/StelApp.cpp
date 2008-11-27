@@ -50,7 +50,7 @@
 #include "QtScriptMgr.hpp"
 #include "QtJsonParser.hpp"
 #include "SkyImageMgr.hpp"
-#include "AudioMgr.hpp"
+#include "StelAudioMgr.hpp"
 
 #include "StelStyle.hpp"
 
@@ -321,7 +321,7 @@ void StelApp::init()
 	getModuleMgr().registerModule(skyImageMgr);
 
 	// Init audio manager
-	audioMgr = new AudioMgr();
+	audioMgr = new StelAudioMgr();
 	
 	// Telescope manager
 	TelescopeMgr* telescope_mgr = new TelescopeMgr();

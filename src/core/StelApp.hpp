@@ -44,7 +44,7 @@ class LocationMgr;
 class SkyImageMgr;
 class QtScriptMgr;
 class DownloadMgr;
-class AudioMgr;
+class StelAudioMgr;
 
 //! @class StelApp 
 //! Singleton main Stellarium application class.
@@ -121,7 +121,7 @@ public:
 	//! @return the SkyImageMgr managing background images
 	SkyImageMgr& getSkyImageMgr() {return *skyImageMgr;}
 
-	AudioMgr* getAudioMgr() {return audioMgr;}
+	StelAudioMgr* getStelAudioMgr() {return audioMgr;}
 	
 	//! Get the script manager
 	QtScriptMgr& getScriptMgr() {return *scriptMgr;}
@@ -350,7 +350,7 @@ private:
 	SkyImageMgr* skyImageMgr;
 
 	// The audio manager.  Must execute in the main thread.
-	AudioMgr* audioMgr;
+	StelAudioMgr* audioMgr;
 	
 	// The script manager based on Qt script engine
 	QtScriptMgr* scriptMgr;

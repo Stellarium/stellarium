@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _STEXTURETYPES_HPP_
-#define _STEXTURETYPES_HPP_
+#ifndef _STELTEXTURETYPES_HPP_
+#define _STELTEXTURETYPES_HPP_
 
 #include <boost/shared_ptr.hpp>
 
@@ -41,4 +41,4 @@ enum DynamicRangeMode
 	MinmaxGreylevelAuto
 };
 }
-#endif // _STEXTURETYPES_HPP_
+#endif // _STELTEXTURETYPES_HPP_
