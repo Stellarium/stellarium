@@ -16,15 +16,15 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "AudioMgr.hpp"
+#include "StelAudioMgr.hpp"
 #include <QDebug>
 
-AudioMgr::AudioMgr()
+StelAudioMgr::StelAudioMgr()
 {
 }
 
 #ifdef HAVE_QT_PHONON
-AudioMgr::~AudioMgr()
+StelAudioMgr::~StelAudioMgr()
 {
 	foreach(QString id, audioObjects.keys())
 	{
@@ -32,7 +32,7 @@ AudioMgr::~AudioMgr()
 	}
 }
 
-void AudioMgr::loadSound(const QString& filename, const QString& id)
+void StelAudioMgr::loadSound(const QString& filename, const QString& id)
 {
 	if (audioObjects.contains(id))
 	{
@@ -44,7 +44,7 @@ void AudioMgr::loadSound(const QString& filename, const QString& id)
 	audioObjects[id] = sound;
 }
 
-void AudioMgr::playSound(const QString& id)
+void StelAudioMgr::playSound(const QString& id)
 {
 	if (audioObjects.contains(id))
 		if (audioObjects[id]!=NULL)
@@ -58,21 +58,21 @@ void AudioMgr::playSound(const QString& id)
 		}
 }
 
-void AudioMgr::pauseSound(const QString& id)
+void StelAudioMgr::pauseSound(const QString& id)
 {
 	if (audioObjects.contains(id))
 		if (audioObjects[id]!=NULL)
 			audioObjects[id]->pause();
 }
 
-void AudioMgr::stopSound(const QString& id)
+void StelAudioMgr::stopSound(const QString& id)
 {
 	if (audioObjects.contains(id))
 		if (audioObjects[id]!=NULL)
 			audioObjects[id]->stop();
 }
 
-void AudioMgr::dropSound(const QString& id)
+void StelAudioMgr::dropSound(const QString& id)
 {
 	if (!audioObjects.contains(id))
 		return;
@@ -85,15 +85,15 @@ void AudioMgr::dropSound(const QString& id)
 }
 
 #else  // HAVE_QT_PHONON
-void AudioMgr::loadSound(const QString& filename, const QString& id)
+void StelAudioMgr::loadSound(const QString& filename, const QString& id)
 {
 	qWarning() << "This build of Stellarium does not support sound - cannot load audio" << filename << id;
 }
-AudioMgr::~AudioMgr() {;}
-void AudioMgr::playSound(const QString& id) {;}
-void AudioMgr::pauseSound(const QString& id) {;}
-void AudioMgr::stopSound(const QString& id) {;}
-void AudioMgr::dropSound(const QString& id) {;}
+StelAudioMgr::~StelAudioMgr() {;}
+void StelAudioMgr::playSound(const QString& id) {;}
+void StelAudioMgr::pauseSound(const QString& id) {;}
+void StelAudioMgr::stopSound(const QString& id) {;}
+void StelAudioMgr::dropSound(const QString& id) {;}
 #endif // HAVE_QT_PHONON
 
 

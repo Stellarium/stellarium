@@ -20,7 +20,7 @@
 #include "fixx11h.h"
 
 #include "QtScriptMgr.hpp"
-#include "AudioMgr.hpp"
+#include "StelAudioMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "LandscapeMgr.hpp"
@@ -120,11 +120,11 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 
 	connect(this, SIGNAL(requestRemoveSkyImage(const QString&)), &StelApp::getInstance().getSkyImageMgr(), SLOT(removeSkyImage(const QString&)));
 
-	connect(this, SIGNAL(requestLoadSound(const QString&, const QString&)), StelApp::getInstance().getAudioMgr(), SLOT(loadSound(const QString&, const QString&)));
-	connect(this, SIGNAL(requestPlaySound(const QString&)), StelApp::getInstance().getAudioMgr(), SLOT(playSound(const QString&)));
-	connect(this, SIGNAL(requestPauseSound(const QString&)), StelApp::getInstance().getAudioMgr(), SLOT(pauseSound(const QString&)));
-	connect(this, SIGNAL(requestStopSound(const QString&)), StelApp::getInstance().getAudioMgr(), SLOT(stopSound(const QString&)));
-	connect(this, SIGNAL(requestDropSound(const QString&)), StelApp::getInstance().getAudioMgr(), SLOT(dropSound(const QString&)));
+	connect(this, SIGNAL(requestLoadSound(const QString&, const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(loadSound(const QString&, const QString&)));
+	connect(this, SIGNAL(requestPlaySound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(playSound(const QString&)));
+	connect(this, SIGNAL(requestPauseSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(pauseSound(const QString&)));
+	connect(this, SIGNAL(requestStopSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(stopSound(const QString&)));
+	connect(this, SIGNAL(requestDropSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(dropSound(const QString&)));
 }
 
 StelMainScriptAPI::~StelMainScriptAPI()

@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _AUDIOMGR_HPP_
-#define _AUDIOMGR_HPP_
+#ifndef _STELAUDIOMGR_HPP_
+#define _STELAUDIOMGR_HPP_
 
 #ifdef HAVE_QT_PHONON
 #include <phonon>
@@ -27,13 +27,13 @@
 #include <QMap>
 #include <QString>
 
-class AudioMgr : public QObject
+class StelAudioMgr : public QObject
 {
 	Q_OBJECT;
 
 public:
-	AudioMgr();
-	~AudioMgr();
+	StelAudioMgr();
+	~StelAudioMgr();
 
 public slots:
 	void loadSound(const QString& filename, const QString& id);
@@ -49,4 +49,4 @@ private:
 
 };
 
-#endif // _AUDIO_HPP_
+#endif // _STELAUDIOMGR_HPP_

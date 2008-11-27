@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _STEXTURE_HPP_
-#define _STEXTURE_HPP_
+#ifndef _STELTEXTURE_HPP_
+#define _STELTEXTURE_HPP_
 
 #include "GLee.h"
 #include "fixx11h.h"
@@ -166,4 +166,4 @@ private:
 };
 
 
-#endif // _STEXTURE_HPP_
+#endif // _STELTEXTURE_HPP_
