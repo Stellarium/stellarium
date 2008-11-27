@@ -504,7 +504,7 @@ void ConstellationMgr::drawNames(const StelPainter& sPainter) const
 	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
 	{
 		// Check if in the field of view
-		if (sPainter.getStelProjector()->projectCheck((*iter)->XYZname, (*iter)->XYname))
+		if (sPainter.getProjector()->projectCheck((*iter)->XYZname, (*iter)->XYname))
 			(*iter)->drawName(asterFont, sPainter);
 	}
 }

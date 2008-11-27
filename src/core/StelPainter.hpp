@@ -44,7 +44,7 @@ public:
 	~StelPainter();
 	
 	//! Return the instance of projector associated to this painter
-	const StelProjectorP getStelProjector() const {return prj;}
+	const StelProjectorP getProjector() const {return prj;}
 	
 	//! Fill with black around the viewport.
 	void drawViewportShape(void) const;
