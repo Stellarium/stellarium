@@ -40,8 +40,8 @@ QString Translator::systemLangName;
 
 // Use system locale language by default
 #if defined(MACOSX)
-#include "MacosxDirs.hpp"
-Translator Translator::globalTranslator = Translator(PACKAGE_NAME, MacosxDirs::getApplicationResourcesDirectory().append( "/locale" ), "system");
+#include "StelMacosxDirs.hpp"
+Translator Translator::globalTranslator = Translator(PACKAGE_NAME, StelMacosxDirs::getApplicationResourcesDirectory().append( "/locale" ), "system");
 #else
 Translator Translator::globalTranslator = Translator(PACKAGE_NAME, INSTALL_LOCALEDIR, "system");
 #endif
