@@ -904,14 +904,14 @@ QList<int> getIntsFromISO8601String(const QString & dt)
 			else
 			{
 				retval.clear();
-				qWarning() << "TextEntryDateTimeValidator::getIntsFromISO8601String: input string failed to be an exact date at capture " << i << ", returning nothing: " << dt;
+				qWarning() << "StelUtils::getIntsFromISO8601String: input string failed to be an exact date at capture " << i << ", returning nothing: " << dt;
 				break;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "TextEntryDateTimeValidator::getIntsFromISO8601String: input string failed to be an exact date, returning nothing: " << dt;
+		qWarning() << "StelUtils::getIntsFromISO8601String: input string failed to be an exact date, returning nothing: " << dt;
 	}
 	return retval;
 }
