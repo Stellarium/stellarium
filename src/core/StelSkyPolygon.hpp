@@ -55,23 +55,21 @@ public:
 };
 
 //! Base class for any polygon with a fixed position in the sky
-class SkyPolygon : public MultiLevelJsonBase
+class StelSkyPolygon : public MultiLevelJsonBase
 {
 	Q_OBJECT;
 	
-	friend class SkyPolygonMgr;
-	
 public:
 	//! Default constructor
-	SkyPolygon() {initCtor();}
+	StelSkyPolygon() {initCtor();}
 	
 	//! Constructor
-	SkyPolygon(const QString& url, SkyPolygon* parent=NULL);
+	StelSkyPolygon(const QString& url, StelSkyPolygon* parent=NULL);
 	//! Constructor
-	SkyPolygon(const QVariantMap& map, SkyPolygon* parent);
+	StelSkyPolygon(const QVariantMap& map, StelSkyPolygon* parent);
 	
 	//! Destructor
-	~SkyPolygon();
+	~StelSkyPolygon();
 
 	//! Draw the image on the screen.
 	void draw(StelCore* core);
@@ -105,12 +103,12 @@ protected:
 	virtual void loadFromQVariantMap(const QVariantMap& map);
 	
 private:
-	//! init the SkyPolygon
+	//! init the StelSkyPolygon
 	void initCtor();
 	
 	//! Return the list of tiles which should be drawn.
 	//! @param result a map containing resolution, pointer to the tiles
-	void getTilesToDraw(QMultiMap<double, SkyPolygon*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, bool recheckIntersect=true);
+	void getTilesToDraw(QMultiMap<double, StelSkyPolygon*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, bool recheckIntersect=true);
 	
 	//! Draw the polygon on the screen.
 	//! @return true if the tile was actually displayed

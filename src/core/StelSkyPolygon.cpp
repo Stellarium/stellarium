@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "SkyPolygon.hpp"
+#include "StelSkyPolygon.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 #include "StelProjector.hpp"
@@ -26,42 +26,42 @@
 #include <stdexcept>
 #include <QDebug>
 
-void SkyPolygon::initCtor()
+void StelSkyPolygon::initCtor()
 {
 	minResolution = -1;
 	texFader = NULL;
 }
 
 // Constructor
-SkyPolygon::SkyPolygon(const QString& url, SkyPolygon* parent) : MultiLevelJsonBase(parent)
+StelSkyPolygon::StelSkyPolygon(const QString& url, StelSkyPolygon* parent) : MultiLevelJsonBase(parent)
 {
 	initCtor();
 	initFromUrl(url);
 }
 
 // Constructor from a map used for JSON files with more than 1 level
-SkyPolygon::SkyPolygon(const QVariantMap& map, SkyPolygon* parent) : MultiLevelJsonBase(parent)
+StelSkyPolygon::StelSkyPolygon(const QVariantMap& map, StelSkyPolygon* parent) : MultiLevelJsonBase(parent)
 {
 	initCtor();
 	initFromQVariantMap(map);
 }
 	
 // Destructor
-SkyPolygon::~SkyPolygon()
+StelSkyPolygon::~StelSkyPolygon()
 {
 }
 	
-void SkyPolygon::draw(StelCore* core)
+void StelSkyPolygon::draw(StelCore* core)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	
-	QMultiMap<double, SkyPolygon*> result;
+	QMultiMap<double, StelSkyPolygon*> result;
 	getTilesToDraw(result, core, prj->getViewportConvexPolygon(0, 0), true);
 	
 	// Draw in the good order
 	glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_ONE, GL_ONE);
-	QMap<double, SkyPolygon*>::Iterator i = result.end();
+	QMap<double, StelSkyPolygon*>::Iterator i = result.end();
 	while (i!=result.begin())
 	{
 		--i;
@@ -72,7 +72,7 @@ void SkyPolygon::draw(StelCore* core)
 }
 	
 // Return the list of tiles which should be drawn.
-void SkyPolygon::getTilesToDraw(QMultiMap<double, SkyPolygon*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, bool recheckIntersect)
+void StelSkyPolygon::getTilesToDraw(QMultiMap<double, StelSkyPolygon*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, bool recheckIntersect)
 {
 	// An error occured during loading
 	if (errorOccured)
@@ -133,13 +133,13 @@ void SkyPolygon::getTilesToDraw(QMultiMap<double, SkyPolygon*>& result, StelCore
 			// Load the sub tiles because we reached the maximum resolution and they are not yet loaded
 			foreach (QVariant s, subTilesUrls)
 			{
-				SkyPolygon* nt;
+				StelSkyPolygon* nt;
 				if (s.type()==QVariant::Map)
-					nt = new SkyPolygon(s.toMap(), this);
+					nt = new StelSkyPolygon(s.toMap(), this);
 				else
 				{
 					Q_ASSERT(s.type()==QVariant::String);
-					nt = new SkyPolygon(s.toString(), this);
+					nt = new StelSkyPolygon(s.toString(), this);
 				}
 				subTiles.append(nt);
 			}
@@ -147,7 +147,7 @@ void SkyPolygon::getTilesToDraw(QMultiMap<double, SkyPolygon*>& result, StelCore
 		// Try to add the subtiles
 		foreach (MultiLevelJsonBase* tile, subTiles)
 		{
-			qobject_cast<SkyPolygon*>(tile)->getTilesToDraw(result, core, viewPortPoly, !fullInScreen);
+			qobject_cast<StelSkyPolygon*>(tile)->getTilesToDraw(result, core, viewPortPoly, !fullInScreen);
 		}
 	}
 	else
@@ -161,7 +161,7 @@ void SkyPolygon::getTilesToDraw(QMultiMap<double, SkyPolygon*>& result, StelCore
 	
 // Draw the image on the screen.
 // Assume GL_TEXTURE_2D is enabled
-bool SkyPolygon::drawTile(StelCore* core)
+bool StelSkyPolygon::drawTile(StelCore* core)
 {	
 	if (!texFader)
 	{
@@ -178,7 +178,7 @@ bool SkyPolygon::drawTile(StelCore* core)
 }
 
 // Load the tile from a valid QVariantMap
-void SkyPolygon::loadFromQVariantMap(const QVariantMap& map)
+void StelSkyPolygon::loadFromQVariantMap(const QVariantMap& map)
 {
 	if (map.contains("imageCredits"))
 	{
@@ -220,12 +220,12 @@ void SkyPolygon::loadFromQVariantMap(const QVariantMap& map)
 	}
 	
 	// This is a list of URLs to the child tiles or a list of already loaded map containing child information
-	// (in this later case, the SkyPolygon objects will be created later)
+	// (in this later case, the StelSkyPolygon objects will be created later)
 	subTilesUrls = map.value("subTiles").toList();
 }
 
 // Convert the image informations to a map following the JSON structure.
-QVariantMap SkyPolygon::toQVariantMap() const
+QVariantMap StelSkyPolygon::toQVariantMap() const
 {
 	Q_ASSERT(0);
 	return QVariantMap();
