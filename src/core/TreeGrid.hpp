@@ -23,7 +23,7 @@
 //#define TREEGRIDDEBUG 1
 
 #include <vector>
-#include "Grid.hpp"
+#include "StelGrid.hpp"
 
 struct TreeGridNode
 {
@@ -43,7 +43,7 @@ struct TreeGridNode
 #endif
 };
 
-class TreeGrid : public Grid, public TreeGridNode
+class TreeGrid : public StelGrid, public TreeGridNode
 {
 public:
     TreeGrid(unsigned int maxobj = 1000);
@@ -70,9 +70,9 @@ private:
     void split(TreeGridNode& node);
     
     template<class S>
-    void fillIntersect(const S& s, const TreeGridNode& node, Grid& grid) const;    
+    void fillIntersect(const S& s, const TreeGridNode& node, StelGrid& grid) const;    
     
-    void fillAll(const TreeGridNode& node, Grid& grid) const;
+    void fillAll(const TreeGridNode& node, StelGrid& grid) const;
 	void fillAll(const TreeGridNode& node, std::vector<StelGridObject*>& result) const;
     unsigned int depth(const TreeGridNode& node) const;
     
@@ -84,7 +84,7 @@ private:
 
 
 template<class S>
-void TreeGrid::fillIntersect(const S& s, const TreeGridNode& node, Grid& grid) const
+void TreeGrid::fillIntersect(const S& s, const TreeGridNode& node, StelGrid& grid) const
 {
     for (TreeGridNode::Objects::const_iterator io = node.objects.begin(); io != node.objects.end(); ++io)
     {
