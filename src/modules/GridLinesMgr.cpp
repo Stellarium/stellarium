@@ -34,7 +34,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
-#include "SFont.hpp"
+#include "StelFont.hpp"
 #include "StelStyle.hpp"
 #include "StelPainter.hpp"
 
@@ -59,7 +59,7 @@ private:
 	Vec3f color;
 	StelCore::FrameType frameType;
 	double fontSize;
-	SFont& font;
+	StelFont& font;
 	LinearFader fader;
 };
 
@@ -93,7 +93,7 @@ private:
 	StelCore::FrameType frameType;
 	LinearFader fader;
 	double fontSize;
-	SFont& font;
+	StelFont& font;
 };
 
 // rms added color as parameter
@@ -150,7 +150,7 @@ struct ViewportEdgeIntersectCallbackData
 {
 	ViewportEdgeIntersectCallbackData(const StelPainter& p) : sPainter(p) {;}
 	const StelPainter& sPainter;
-	SFont* font;
+	StelFont* font;
 	Vec4f textColor;
 	QString text;
 };

@@ -22,7 +22,7 @@
 #include <map>
 #include <QString>
 
-class SFont;
+class StelFont;
 
 //! @class StelFontMgr
 //! Manage fonts for Stellarium. Take into account special font for special language.
@@ -37,12 +37,12 @@ public:
 	//! Get the standard font associated to the given language ISO code.
 	//! @param langageName the ISO language name such as "fr" or "en" or "*" for default.
 	//! @param size the font size in pixels.
-	SFont& getStandardFont(const QString& langageName, double size=12.);
+	StelFont& getStandardFont(const QString& langageName, double size=12.);
 	
 	//! Get the fixed font associated to the given language ISO code.
 	//! @param langageName the ISO language name such as "fr" or "en" or "*" for default.
 	//! @param size the font size in pixels.
-	SFont& getFixedFont(const QString& langageName, double size=12.);
+	StelFont& getFixedFont(const QString& langageName, double size=12.);
 	
 private:
 	//! @class FontForLanguage
@@ -88,7 +88,7 @@ private:
 	std::map<QString, FontForLanguage> fontMapping;
 	
 	//! Keeps references on all loaded fonts
-	std::map<LoadedFont, SFont*, ltLoadedFont> loadedFonts;
+	std::map<LoadedFont, StelFont*, ltLoadedFont> loadedFonts;
 };
 
 #endif

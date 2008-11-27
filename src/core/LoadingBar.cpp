@@ -24,7 +24,7 @@
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelMainGraphicsView.hpp"
-#include "SFont.hpp"
+#include "StelFont.hpp"
 #include "StelPainter.hpp"
 #include "StelCore.hpp"
 

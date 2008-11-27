@@ -40,7 +40,7 @@ typedef void (OsulatingFunctType)(double jd0,double jd,double xyz[3]);
 #define J2000 2451545.0
 #define ORBIT_SEGMENTS 72
 
-class SFont;
+class StelFont;
 class StelPainter;
 
 struct TrailPoint
@@ -188,7 +188,7 @@ public:
 
 	const Planet* getParent(void) const {return parent;}
 
-	static void setFont(SFont* f) {planetNameFont = f;}
+	static void setFont(StelFont* f) {planetNameFont = f;}
 	
 	static void setLabelColor(const Vec3f& lc) {labelColor = lc;}
 	static const Vec3f& getLabelColor(void) {return labelColor;}
@@ -293,7 +293,7 @@ protected:
 	bool hidden;                    // useful for fake planets used as observation positions - not drawn or labeled
 	bool atmosphere;                // Does the planet have an atmosphere?
 	
-	static SFont* planetNameFont; // Font for names
+	static StelFont* planetNameFont; // Font for names
 	static Vec3f labelColor;
 	static StelTextureSP hintCircleTex;
 };

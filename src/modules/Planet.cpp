@@ -31,7 +31,7 @@
 #include "Planet.hpp"
 #include "Navigator.hpp"
 #include "Projector.hpp"
-#include "SFont.hpp"
+#include "StelFont.hpp"
 #include "sideral_time.h"
 #include "StelTextureMgr.hpp"
 #include "StelModuleMgr.hpp"
@@ -39,7 +39,7 @@
 #include "MovementMgr.hpp"
 #include "StelPainter.hpp"
 
-SFont* Planet::planetNameFont = NULL;
+StelFont* Planet::planetNameFont = NULL;
 Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
 Vec3f Planet::trailColor = Vec3f(1,0.7,0.7);

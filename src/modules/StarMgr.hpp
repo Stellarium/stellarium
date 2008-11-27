@@ -32,7 +32,7 @@ class ToneReproducer;
 class Projector;
 class Navigator;
 class LoadingBar;
-class SFont;
+class StelFont;
 class QSettings;
 
 namespace BigStarCatalogExtension {
@@ -261,7 +261,7 @@ private:
 	static double currentJDay;
 	
 	double fontSize;
-	SFont *starFont;
+	StelFont *starFont;
 	static bool flagSciNames;
 	Vec3f labelColor;
 	
