@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "QtJsonParser.hpp"
+#include "StelJsonParser.hpp"
 #include <QDebug>
 #include <stdexcept>
 
@@ -135,7 +135,7 @@ QVariant readOther(QIODevice& input)
 }
 
 // Parse the given input stream
-QVariant QtJsonParser::parse(QIODevice& input) const
+QVariant StelJsonParser::parse(QIODevice& input) const
 {
 	skipJson(input);
 	
@@ -201,7 +201,7 @@ QVariant QtJsonParser::parse(QIODevice& input) const
 }
 
 // Serialize the passed QVariant as JSON into the output QIODevice
-void QtJsonParser::write(const QVariant& v, QIODevice& output, int indentLevel) const
+void StelJsonParser::write(const QVariant& v, QIODevice& output, int indentLevel) const
 {
 	switch (v.type())
 	{

@@ -36,7 +36,7 @@ boolean       QVariant::Bool
 string        QVariant::String
 number        QVariant::Int or QVariant::Double
 @endverbatim */
-class QtJsonParser
+class StelJsonParser
 {
 public:
 	//! Parse the given input stream
