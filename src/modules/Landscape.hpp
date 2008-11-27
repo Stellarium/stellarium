@@ -34,7 +34,9 @@ class QSettings;
 class StelLocation;
 class StelCore;
 
-//! Store and manages the displaying of the Landscape
+//! @class Landscape
+//! Store and manages the displaying of the Landscape.
+//! Don't use this class direcly, use the LandscapeMgr.
 class Landscape
 {
 public:

@@ -16,6 +16,8 @@
 
 class OrbitSampleProc;
 
+//! @internal
+//! Orbit computations used for comet and asteroids
 class Orbit
 {
 public:
