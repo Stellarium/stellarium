@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#include "TreeGrid.hpp"
+#include "StelTreeGrid.hpp"
 #include <QDebug>
 
 static const double icosahedron_G = 0.5*(1.0+std::sqrt(5.0));
@@ -64,7 +64,7 @@ static const int icosahedron_triangles[20][3] =
  { 8, 9, 5}  //  8
 };
 
-TreeGrid::TreeGrid(unsigned int maxobj) : maxObjects(maxobj), filter()
+StelTreeGrid::StelTreeGrid(unsigned int maxobj) : maxObjects(maxobj), filter()
 {
 	for (int i=0;i<20;++i)
 	{
@@ -73,11 +73,11 @@ TreeGrid::TreeGrid(unsigned int maxobj) : maxObjects(maxobj), filter()
 	}
 }
 
-TreeGrid::~TreeGrid()
+StelTreeGrid::~StelTreeGrid()
 {
 }
 
-void TreeGrid::insert(StelGridObject* obj, TreeGridNode& node)
+void StelTreeGrid::insert(StelGridObject* obj, StelTreeGridNode& node)
 {
     if (node.children.empty())
     {
@@ -86,9 +86,9 @@ void TreeGrid::insert(StelGridObject* obj, TreeGridNode& node)
         if (node.objects.size() >= maxObjects)
         {
             split(node);
-            TreeGridNode::Objects node_objects;
+            StelTreeGridNode::Objects node_objects;
             std::swap(node_objects, node.objects);
-            for (TreeGridNode::Objects::iterator iter = node_objects.begin();iter != node_objects.end(); ++iter)
+            for (StelTreeGridNode::Objects::iterator iter = node_objects.begin();iter != node_objects.end(); ++iter)
             {
                 insert(*iter, node);
             }
@@ -96,7 +96,7 @@ void TreeGrid::insert(StelGridObject* obj, TreeGridNode& node)
     }
     else // if we have children
     {
-        for (TreeGridNode::Children::iterator iter = node.children.begin();
+        for (StelTreeGridNode::Children::iterator iter = node.children.begin();
                 iter != node.children.end(); ++iter)
         {
 			if (contains(iter->triangle, obj->getPositionForGrid())) {
@@ -108,7 +108,7 @@ void TreeGrid::insert(StelGridObject* obj, TreeGridNode& node)
     }
 }
 
-void TreeGrid::split(TreeGridNode& node)
+void StelTreeGrid::split(StelTreeGridNode& node)
 {
     Q_ASSERT(node.children.empty());
     const Polygon& p = node.triangle;
@@ -133,7 +133,7 @@ void TreeGrid::split(TreeGridNode& node)
 	node.children.push_back(ConvexPolygon(e2,e0,e1));
 }
 
-void TreeGrid::fillAll(const TreeGridNode& node, StelGrid& grid) const
+void StelTreeGrid::fillAll(const StelTreeGridNode& node, StelGrid& grid) const
 {
 	grid.insertResult(node.objects);
 	for (Children::const_iterator ic = node.children.begin(); ic != node.children.end(); ++ic)
@@ -142,7 +142,7 @@ void TreeGrid::fillAll(const TreeGridNode& node, StelGrid& grid) const
 	}
 }
 
-void TreeGrid::fillAll(const TreeGridNode& node, std::vector<StelGridObject*>& result) const
+void StelTreeGrid::fillAll(const StelTreeGridNode& node, std::vector<StelGridObject*>& result) const
 {
 	result.insert(result.end(), node.objects.begin(), node.objects.end());
 	for (Children::const_iterator ic = node.children.begin(); ic != node.children.end(); ++ic)
@@ -151,7 +151,7 @@ void TreeGrid::fillAll(const TreeGridNode& node, std::vector<StelGridObject*>& r
 	}
 }
 
-unsigned int TreeGrid::depth(const TreeGridNode& node) const
+unsigned int StelTreeGrid::depth(const StelTreeGridNode& node) const
 {
     if (node.children.empty()) return 0;
     unsigned int max = 0;
@@ -166,7 +166,7 @@ unsigned int TreeGrid::depth(const TreeGridNode& node) const
 /*************************************************************************
  Get all the objects loaded into the grid structure
 *************************************************************************/
-std::vector<StelGridObject*> TreeGrid::getAllObjects()
+std::vector<StelGridObject*> StelTreeGrid::getAllObjects()
 {
 	std::vector<StelGridObject*> result;
 	fillAll(*this, result);
@@ -176,7 +176,7 @@ std::vector<StelGridObject*> TreeGrid::getAllObjects()
 #ifdef TREEGRIDDEBUG
 #include "StelProjector.hpp"
 #include "StelNavigator.hpp"				 
-double TreeGridNode::draw(StelProjector *prj, const StelGeom::ConvexS& roi, float opacity) const
+double StelTreeGridNode::draw(StelProjector *prj, const StelGeom::ConvexS& roi, float opacity) const
 {
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	

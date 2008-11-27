@@ -25,17 +25,17 @@
 #include <vector>
 #include "StelGrid.hpp"
 
-struct TreeGridNode
+struct StelTreeGridNode
 {
-    TreeGridNode() {}
-    TreeGridNode(const StelGeom::ConvexPolygon& s) : triangle(s) {}
+    StelTreeGridNode() {}
+    StelTreeGridNode(const StelGeom::ConvexPolygon& s) : triangle(s) {}
         
 	typedef std::vector<StelGridObject*> Objects;
     Objects objects;
     
     StelGeom::ConvexPolygon triangle;
     
-    typedef std::vector<TreeGridNode> Children;
+    typedef std::vector<StelTreeGridNode> Children;
     Children children;
     
 #ifdef TREEGRIDDEBUG
@@ -43,11 +43,11 @@ struct TreeGridNode
 #endif
 };
 
-class TreeGrid : public StelGrid, public TreeGridNode
+class StelTreeGrid : public StelGrid, public StelTreeGridNode
 {
 public:
-    TreeGrid(unsigned int maxobj = 1000);
-    virtual ~TreeGrid();
+    StelTreeGrid(unsigned int maxobj = 1000);
+    virtual ~StelTreeGrid();
     
 	void insert(StelGridObject* obj)
     {
@@ -66,15 +66,15 @@ public:
 	
 private:
     
-	void insert(StelGridObject* obj, TreeGridNode& node);
-    void split(TreeGridNode& node);
+	void insert(StelGridObject* obj, StelTreeGridNode& node);
+    void split(StelTreeGridNode& node);
     
     template<class S>
-    void fillIntersect(const S& s, const TreeGridNode& node, StelGrid& grid) const;    
+    void fillIntersect(const S& s, const StelTreeGridNode& node, StelGrid& grid) const;    
     
-    void fillAll(const TreeGridNode& node, StelGrid& grid) const;
-	void fillAll(const TreeGridNode& node, std::vector<StelGridObject*>& result) const;
-    unsigned int depth(const TreeGridNode& node) const;
+    void fillAll(const StelTreeGridNode& node, StelGrid& grid) const;
+	void fillAll(const StelTreeGridNode& node, std::vector<StelGridObject*>& result) const;
+    unsigned int depth(const StelTreeGridNode& node) const;
     
     unsigned int maxObjects;
     
@@ -84,9 +84,9 @@ private:
 
 
 template<class S>
-void TreeGrid::fillIntersect(const S& s, const TreeGridNode& node, StelGrid& grid) const
+void StelTreeGrid::fillIntersect(const S& s, const StelTreeGridNode& node, StelGrid& grid) const
 {
-    for (TreeGridNode::Objects::const_iterator io = node.objects.begin(); io != node.objects.end(); ++io)
+    for (StelTreeGridNode::Objects::const_iterator io = node.objects.begin(); io != node.objects.end(); ++io)
     {
 		if (intersect(s, (*io)->getPositionForGrid()))
         {
@@ -122,7 +122,7 @@ struct NotIntersectPred
 };
 
 template<class Shape>
-void TreeGrid::filterIntersect(const Shape& s)
+void StelTreeGrid::filterIntersect(const Shape& s)
 {
     // first we remove all the objects that are not in the disk
 //     this->remove_if(NotIntersectPred<Shape>(s));
