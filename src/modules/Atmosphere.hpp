@@ -33,7 +33,8 @@ class ToneReproducer;
 class StelCore;
 
 //! Compute and display the daylight sky color using openGL.
-//! The sky brightness is computed with the SkyBright class, the color with the SkyLight
+//! The sky brightness is computed with the SkyBright class, the color with the SkyLight.
+//! Don't use this class directly but use it through the LandscapeMgr.
 class Atmosphere
 {
 public:
