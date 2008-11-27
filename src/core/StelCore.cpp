@@ -24,7 +24,7 @@
 #include "SkyDrawer.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
-#include "GeodesicGrid.hpp"
+#include "StelGeodesicGrid.hpp"
 #include "SolarSystem.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
@@ -147,18 +147,18 @@ void StelCore::init()
 }
 
 
-// Get the shared instance of GeodesicGrid.
+// Get the shared instance of StelGeodesicGrid.
 // The returned instance is garanteed to allow for at least maxLevel levels
-const GeodesicGrid* StelCore::getGeodesicGrid(int maxLevel) const
+const StelGeodesicGrid* StelCore::getGeodesicGrid(int maxLevel) const
 {
 	if (geodesicGrid==NULL)
 	{
-		geodesicGrid = new GeodesicGrid(maxLevel);
+		geodesicGrid = new StelGeodesicGrid(maxLevel);
 	}
 	else if (maxLevel>geodesicGrid->getMaxLevel())
 	{
 		delete geodesicGrid;
-		geodesicGrid = new GeodesicGrid(maxLevel);
+		geodesicGrid = new StelGeodesicGrid(maxLevel);
 	}
 	return geodesicGrid;
 }

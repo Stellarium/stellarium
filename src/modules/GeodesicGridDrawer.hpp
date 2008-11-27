@@ -20,7 +20,7 @@
 #ifndef _GEODESICGRIDDRAWER_HPP_
 #define _GEODESICGRIDDRAWER_HPP_
 
-#include "GeodesicGrid.hpp"
+#include "StelGeodesicGrid.hpp"
 #include "StelModule.hpp"
 
 class StelProjector;
@@ -28,11 +28,11 @@ class StelNavigator;
 class ToneReproductor;
 class StelFont;
 
-class GeodesicGridDrawer : public StelModule
+class StelGeodesicGridDrawer : public StelModule
 {
 public:
-	GeodesicGridDrawer(int level);
-	virtual ~GeodesicGridDrawer();
+	StelGeodesicGridDrawer(int level);
+	virtual ~StelGeodesicGridDrawer();
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -43,7 +43,7 @@ public:
 	virtual void updateSkyCulture() {;}
 	
 private:
-//	GeodesicGrid* grid;
+//	StelGeodesicGrid* grid;
 //	GeodesicSearchResult* searchResult;
 	StelFont* font;
 };

@@ -24,7 +24,7 @@
 
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
-#include "GeodesicGrid.hpp"
+#include "StelGeodesicGrid.hpp"
 #include "StelObject.hpp"
 
 
@@ -240,7 +240,7 @@ ZoneArray::ZoneArray(const StarMgr &hip_star_mgr,int level,
            star_position_scale(0.0), //IntToDouble(scale_int)/Star::MaxPosVal
            hip_star_mgr(hip_star_mgr),
            zones(0) {
-  nr_of_zones = GeodesicGrid::nrOfZones(level);
+  nr_of_zones = StelGeodesicGrid::nrOfZones(level);
   nr_of_stars = 0;
 }
 
