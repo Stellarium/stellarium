@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "SkyImageTile.hpp"
+#include "StelSkyImageTile.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
@@ -34,10 +34,10 @@
  #include "StelFont.hpp"
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
- StelFont* SkyImageTile::debugFont = NULL;
+ StelFont* StelSkyImageTile::debugFont = NULL;
 #endif
 
-void SkyImageTile::initCtor()
+void StelSkyImageTile::initCtor()
 {
 	minResolution = -1;
 	luminance = -1;
@@ -47,7 +47,7 @@ void SkyImageTile::initCtor()
 }
 
 // Constructor
-SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : MultiLevelJsonBase(parent)
+StelSkyImageTile::StelSkyImageTile(const QString& url, StelSkyImageTile* parent) : MultiLevelJsonBase(parent)
 {
 	initCtor();
 	if (parent!=NULL)
@@ -59,7 +59,7 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : MultiLeve
 }
 
 // Constructor from a map used for JSON files with more than 1 level
-SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : MultiLevelJsonBase(parent)
+StelSkyImageTile::StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* parent) : MultiLevelJsonBase(parent)
 {
 	initCtor();
 	if (parent!=NULL)
@@ -71,20 +71,20 @@ SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : Multi
 }
 	
 // Destructor
-SkyImageTile::~SkyImageTile()
+StelSkyImageTile::~StelSkyImageTile()
 {
 }
 	
-void SkyImageTile::draw(StelCore* core, const StelPainter& sPainter)
+void StelSkyImageTile::draw(StelCore* core, const StelPainter& sPainter)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	
 	const float limitLuminance = core->getSkyDrawer()->getLimitLuminance();
-	QMultiMap<double, SkyImageTile*> result;
+	QMultiMap<double, StelSkyImageTile*> result;
 	getTilesToDraw(result, core, prj->getViewportConvexPolygon(0, 0), limitLuminance, true);
 	
 	int numToBeLoaded=0;
-	foreach (SkyImageTile* t, result)
+	foreach (StelSkyImageTile* t, result)
 		if (t->isReadyToDisplay()==false)
 			++numToBeLoaded;
 	updatePercent(result.size(), numToBeLoaded);
@@ -92,7 +92,7 @@ void SkyImageTile::draw(StelCore* core, const StelPainter& sPainter)
 	// Draw in the good order
 	glEnable(GL_TEXTURE_2D);
 	glBlendFunc(GL_ONE, GL_ONE);
-	QMap<double, SkyImageTile*>::Iterator i = result.end();
+	QMap<double, StelSkyImageTile*>::Iterator i = result.end();
 	while (i!=result.begin())
 	{
 		--i;
@@ -103,7 +103,7 @@ void SkyImageTile::draw(StelCore* core, const StelPainter& sPainter)
 }
 	
 // Return the list of tiles which should be drawn.
-void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, float limitLuminance, bool recheckIntersect)
+void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, float limitLuminance, bool recheckIntersect)
 {
 	// An error occured during loading
 	if (errorOccured)
@@ -192,13 +192,13 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 			// Load the sub tiles because we reached the maximum resolution and they are not yet loaded
 			foreach (QVariant s, subTilesUrls)
 			{
-				SkyImageTile* nt;
+				StelSkyImageTile* nt;
 				if (s.type()==QVariant::Map)
-					nt = new SkyImageTile(s.toMap(), this);
+					nt = new StelSkyImageTile(s.toMap(), this);
 				else
 				{
 					Q_ASSERT(s.type()==QVariant::String);
-					nt = new SkyImageTile(s.toString(), this);
+					nt = new StelSkyImageTile(s.toString(), this);
 				}
 				subTiles.append(nt);
 			}
@@ -206,7 +206,7 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 		// Try to add the subtiles
 		foreach (MultiLevelJsonBase* tile, subTiles)
 		{
-			qobject_cast<SkyImageTile*>(tile)->getTilesToDraw(result, core, viewPortPoly, limitLuminance, !fullInScreen);
+			qobject_cast<StelSkyImageTile*>(tile)->getTilesToDraw(result, core, viewPortPoly, limitLuminance, !fullInScreen);
 		}
 	}
 	else
@@ -220,7 +220,7 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 	
 // Draw the image on the screen.
 // Assume GL_TEXTURE_2D is enabled
-bool SkyImageTile::drawTile(StelCore* core, const StelPainter& sPainter)
+bool StelSkyImageTile::drawTile(StelCore* core, const StelPainter& sPainter)
 {	
 	if (!tex->bind())
 	{
@@ -302,13 +302,13 @@ bool SkyImageTile::drawTile(StelCore* core, const StelPainter& sPainter)
 }
 
 // Return true if the tile is fully loaded and can be displayed
-bool SkyImageTile::isReadyToDisplay() const
+bool StelSkyImageTile::isReadyToDisplay() const
 {
 	return tex && tex->canBind();
 }
 
 // Load the tile from a valid QVariantMap
-void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
+void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 {
 	if (map.contains("imageCredits"))
 	{
@@ -416,7 +416,7 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		noTexture = true;
 	
 	// This is a list of URLs to the child tiles or a list of already loaded map containing child information
-	// (in this later case, the SkyImageTile objects will be created later)
+	// (in this later case, the StelSkyImageTile objects will be created later)
 	subTilesUrls = map.value("subTiles").toList();
 // 	if (subTilesUrls.size()>10)
 // 	{
@@ -425,7 +425,7 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 }
 
 // Convert the image informations to a map following the JSON structure.
-QVariantMap SkyImageTile::toQVariantMap() const
+QVariantMap StelSkyImageTile::toQVariantMap() const
 {
 	QVariantMap res;
 	

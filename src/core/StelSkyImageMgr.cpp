@@ -22,7 +22,7 @@
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
 #include "StelProjector.hpp"
-#include "SkyImageTile.hpp"
+#include "StelSkyImageTile.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelPainter.hpp"
@@ -70,7 +70,7 @@ void StelSkyImageMgr::init()
 	// loadSkyImage("dobbs", "./scripts/dobbs.png", 11.5, 41, 11.5, 41.17, 11.75, 41.17, 11.75, 41, 2.5, 14, true);
 }
 
-QString StelSkyImageMgr::insertSkyImage(SkyImageTile* tile, bool ashow, bool aexternallyOwned)
+QString StelSkyImageMgr::insertSkyImage(StelSkyImageTile* tile, bool ashow, bool aexternallyOwned)
 {
 	StelSkyImageMgrElem* bEl = new StelSkyImageMgrElem(tile, ashow, aexternallyOwned);
 	QString key = tile->getShortName();
@@ -96,7 +96,7 @@ QString StelSkyImageMgr::insertSkyImage(SkyImageTile* tile, bool ashow, bool aex
 // Add a new image from its URI (URL or local file name)
 QString StelSkyImageMgr::insertSkyImage(const QString& uri, bool ashow)
 {
-	return insertSkyImage(new SkyImageTile(uri), ashow, false);
+	return insertSkyImage(new StelSkyImageTile(uri), ashow, false);
 }
 
 // Remove a sky image tile from the list of background images
@@ -118,7 +118,7 @@ void StelSkyImageMgr::removeSkyImage(const QString& key)
 }
 
 // Remove a sky image tile from the list of background images
-void StelSkyImageMgr::removeSkyImage(SkyImageTile* img)
+void StelSkyImageMgr::removeSkyImage(StelSkyImageTile* img)
 {
 	const QString k = keyForTile(img);
 	if (!k.isEmpty())
@@ -144,7 +144,7 @@ void StelSkyImageMgr::draw(StelCore* core)
 // Called when loading of data started or stopped for one collection
 void StelSkyImageMgr::loadingStateChanged(bool b)
 {
-	SkyImageTile* tile = qobject_cast<SkyImageTile*>(QObject::sender());
+	StelSkyImageTile* tile = qobject_cast<StelSkyImageTile*>(QObject::sender());
 	Q_ASSERT(tile!=0);
 	StelSkyImageMgrElem* elem = skyBackgroundElemForTile(tile);
 	Q_ASSERT(elem!=NULL);
@@ -169,7 +169,7 @@ void StelSkyImageMgr::loadingStateChanged(bool b)
 // Called when the percentage of loading tiles/tiles to be displayed changed for one collection
 void StelSkyImageMgr::percentLoadedChanged(int percentage)
 {
-	SkyImageTile* tile = qobject_cast<SkyImageTile*>(QObject::sender());
+	StelSkyImageTile* tile = qobject_cast<StelSkyImageTile*>(QObject::sender());
 	Q_ASSERT(tile!=0);
 	StelSkyImageMgrElem* elem = skyBackgroundElemForTile(tile);
 	Q_ASSERT(elem!=NULL);
@@ -177,7 +177,7 @@ void StelSkyImageMgr::percentLoadedChanged(int percentage)
 	elem->progressBar->setValue(percentage);
 }
 	
-StelSkyImageMgr::StelSkyImageMgrElem* StelSkyImageMgr::skyBackgroundElemForTile(const SkyImageTile* t)
+StelSkyImageMgr::StelSkyImageMgrElem* StelSkyImageMgr::skyBackgroundElemForTile(const StelSkyImageTile* t)
 {
 	foreach (StelSkyImageMgrElem* e, allSkyImages)
 	{
@@ -189,12 +189,12 @@ StelSkyImageMgr::StelSkyImageMgrElem* StelSkyImageMgr::skyBackgroundElemForTile(
 	return NULL;
 }
 
-QString StelSkyImageMgr::keyForTile(const SkyImageTile* t)
+QString StelSkyImageMgr::keyForTile(const StelSkyImageTile* t)
 {
 	return allSkyImages.key(skyBackgroundElemForTile(t));
 }
 
-StelSkyImageMgr::StelSkyImageMgrElem::StelSkyImageMgrElem(SkyImageTile* t, bool ashow, bool aexternallyOwned) : 
+StelSkyImageMgr::StelSkyImageMgrElem::StelSkyImageMgrElem(StelSkyImageTile* t, bool ashow, bool aexternallyOwned) : 
 		tile(t), progressBar(NULL), show(ashow), externallyOwned(aexternallyOwned)
 {;}
 				 
@@ -261,7 +261,7 @@ bool StelSkyImageMgr::loadSkyImage(const QString& id, const QString& filename,
 		l.append(st);
 		vm["subTiles"] = l;
 
-		SkyImageTile* tile = new SkyImageTile(vm, 0);
+		StelSkyImageTile* tile = new StelSkyImageTile(vm, 0);
 		QString key = insertSkyImage(tile, visible, false);
 		if (key == id)
 			return true;
