@@ -29,7 +29,7 @@
 #include "fixx11h.h"
 
 class StelProjector;
-class ToneReproducer;
+class StelToneReproducer;
 class StelCore;
 
 //! Compute and display the daylight sky color using openGL.

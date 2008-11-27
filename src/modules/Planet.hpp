@@ -23,7 +23,7 @@
 #include <QString>
 
 #include "StelObject.hpp"
-#include "ToneReproducer.hpp"
+#include "StelToneReproducer.hpp"
 #include "vecmath.h"
 #include "callbacks.hpp"
 #include "StelFader.hpp"

@@ -36,7 +36,7 @@
 #include "StelTexture.hpp"
 #include "StelNavigator.hpp"
 #include "StelUtils.hpp"
-#include "ToneReproducer.hpp"
+#include "StelToneReproducer.hpp"
 #include "Translator.hpp"
 #include "StelGeodesicGrid.hpp"
 #include "StelLoadingBar.hpp"

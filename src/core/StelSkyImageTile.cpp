@@ -22,7 +22,7 @@
 #include "StelUtils.hpp"
 #include "StelTexture.hpp"
 #include "StelProjector.hpp"
-#include "ToneReproducer.hpp"
+#include "StelToneReproducer.hpp"
 #include "StelCore.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelSkyDrawer.hpp"

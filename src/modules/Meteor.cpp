@@ -32,14 +32,14 @@ which are generally not at the apex of the Earth's way, such as the Perseids sho
 #include "Meteor.hpp"
 #include "StelCore.hpp"
 #include "StelNavigator.hpp"
-#include "ToneReproducer.hpp"
+#include "StelToneReproducer.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 
 Meteor::Meteor(const StelCore* core, double v)
 {
 	const StelNavigator* nav = core->getNavigator();
-	const ToneReproducer* eye = core->getToneReproducer();
+	const StelToneReproducer* eye = core->getToneReproducer();
 	
   //  velocity = 11+(double)rand()/((double)RAND_MAX+1)*v;  // abs range 11-72 km/s
   velocity=v;

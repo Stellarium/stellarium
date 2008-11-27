@@ -46,14 +46,14 @@
 //!
 //! [4] "A Visibility Matching Tone Reproduction Operator for High Dynamic
 //! Range Scenes", G.W. Larson, H. Rushmeier, C. Piatko
-class ToneReproducer
+class StelToneReproducer
 {
 public:
 	//! Constructor
-    ToneReproducer();
+    StelToneReproducer();
 	
 	//! Desctructor
-    virtual ~ToneReproducer();
+    virtual ~StelToneReproducer();
 
 	//! Set the eye adaptation luminance for the display (and precompute what can be)
 	//! Usual luminance range is 1-100 cd/m^2 for a CRT screen

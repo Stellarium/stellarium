@@ -20,7 +20,7 @@
 #include "StelNavigator.hpp"
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
-#include "ToneReproducer.hpp"
+#include "StelToneReproducer.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
@@ -40,7 +40,7 @@
 *************************************************************************/
 StelCore::StelCore() : geodesicGrid(NULL), currentProjectionType(ProjectionStereographic)
 {
-	toneConverter = new ToneReproducer();
+	toneConverter = new StelToneReproducer();
 	movementMgr = new StelMovementMgr(this);
 	movementMgr->init();
 	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);	
