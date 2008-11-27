@@ -68,8 +68,8 @@ private:
 	bool flag_use_ext_framebuffer_object;
 	const int screen_w;
 	const int screen_h;
-	const StelProjector::StelProjectorParams originalStelProjectorParams;
-	StelProjector::StelProjectorParams newStelProjectorParams;
+	const StelProjector::StelProjectorParams originalProjectorParams;
+	StelProjector::StelProjectorParams newProjectorParams;
 	int viewport_texture_offset[2];
 	int texture_wh;
 
@@ -96,7 +96,7 @@ struct VertexPoint
 
 ViewportDistorterFisheyeToSphericMirror::ViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h)
 	:	screen_w(screen_w), screen_h(screen_h),
-		originalStelProjectorParams(StelApp::getInstance().getCore()->getCurrentStelProjectorParams()),
+		originalProjectorParams(StelApp::getInstance().getCore()->getCurrentStelProjectorParams()),
 		texture_point_array(0)
 {
 	QSettings& conf = *StelApp::getInstance().getSettings();
@@ -130,60 +130,60 @@ ViewportDistorterFisheyeToSphericMirror::ViewportDistorterFisheyeToSphericMirror
 	core->getMovementMgr()->setMaxFov(distorter_max_fov);
 
 	// width of the not yet distorted image
-	newStelProjectorParams.viewportXywh[2] = conf.value("spheric_mirror/newStelProjectorParams.viewportXywh[2]idth", originalStelProjectorParams.viewportXywh[2]).toInt();
-	if (newStelProjectorParams.viewportXywh[2] <= 0)
+	newProjectorParams.viewportXywh[2] = conf.value("spheric_mirror/newProjectorParams.viewportXywh[2]idth", originalProjectorParams.viewportXywh[2]).toInt();
+	if (newProjectorParams.viewportXywh[2] <= 0)
 	{
-		newStelProjectorParams.viewportXywh[2] = originalStelProjectorParams.viewportXywh[2];
+		newProjectorParams.viewportXywh[2] = originalProjectorParams.viewportXywh[2];
 	}
-	else if (!flag_use_ext_framebuffer_object && newStelProjectorParams.viewportXywh[2] > screen_w)
+	else if (!flag_use_ext_framebuffer_object && newProjectorParams.viewportXywh[2] > screen_w)
 	{
-		newStelProjectorParams.viewportXywh[2] = screen_w;
+		newProjectorParams.viewportXywh[2] = screen_w;
 	}
 	
 	// height of the not yet distorted image
-	newStelProjectorParams.viewportXywh[3] = conf.value("spheric_mirror/newStelProjectorParams.viewportXywh[3]eight", originalStelProjectorParams.viewportXywh[3]).toInt();
-	if (newStelProjectorParams.viewportXywh[3] <= 0)
+	newProjectorParams.viewportXywh[3] = conf.value("spheric_mirror/newProjectorParams.viewportXywh[3]eight", originalProjectorParams.viewportXywh[3]).toInt();
+	if (newProjectorParams.viewportXywh[3] <= 0)
 	{
-		newStelProjectorParams.viewportXywh[3] = originalStelProjectorParams.viewportXywh[3];
+		newProjectorParams.viewportXywh[3] = originalProjectorParams.viewportXywh[3];
 	}
-	else if (!flag_use_ext_framebuffer_object && newStelProjectorParams.viewportXywh[3] > screen_h)
+	else if (!flag_use_ext_framebuffer_object && newProjectorParams.viewportXywh[3] > screen_h)
 	{
-		newStelProjectorParams.viewportXywh[3] = screen_h;
+		newProjectorParams.viewportXywh[3] = screen_h;
 	}
 	
 	// center of the FOV-disk in the not yet distorted image
-	newStelProjectorParams.viewportCenter[0] = conf.value("spheric_mirror/viewportCenterX", 0.5*newStelProjectorParams.viewportXywh[2]).toDouble();
-	newStelProjectorParams.viewportCenter[1] = conf.value("spheric_mirror/viewportCenterY", 0.5*newStelProjectorParams.viewportXywh[3]).toDouble();
+	newProjectorParams.viewportCenter[0] = conf.value("spheric_mirror/viewportCenterX", 0.5*newProjectorParams.viewportXywh[2]).toDouble();
+	newProjectorParams.viewportCenter[1] = conf.value("spheric_mirror/viewportCenterY", 0.5*newProjectorParams.viewportXywh[3]).toDouble();
 	
 	// diameter of the FOV-disk in pixels
-	newStelProjectorParams.viewportFovDiameter = conf.value("spheric_mirror/viewport_fov_diameter", qMin(newStelProjectorParams.viewportXywh[2],newStelProjectorParams.viewportXywh[3])).toDouble();
+	newProjectorParams.viewportFovDiameter = conf.value("spheric_mirror/viewport_fov_diameter", qMin(newProjectorParams.viewportXywh[2],newProjectorParams.viewportXywh[3])).toDouble();
 
 	texture_wh = 1;
-	while (texture_wh < newStelProjectorParams.viewportXywh[2] || texture_wh < newStelProjectorParams.viewportXywh[3])
+	while (texture_wh < newProjectorParams.viewportXywh[2] || texture_wh < newProjectorParams.viewportXywh[3])
 		texture_wh <<= 1;
-	viewport_texture_offset[0] = (texture_wh-newStelProjectorParams.viewportXywh[2])>>1;
-	viewport_texture_offset[1] = (texture_wh-newStelProjectorParams.viewportXywh[3])>>1;
+	viewport_texture_offset[0] = (texture_wh-newProjectorParams.viewportXywh[2])>>1;
+	viewport_texture_offset[1] = (texture_wh-newProjectorParams.viewportXywh[3])>>1;
 
 	if (flag_use_ext_framebuffer_object)
 	{
-		newStelProjectorParams.viewportXywh[0] = viewport_texture_offset[0];
-		newStelProjectorParams.viewportXywh[1] = viewport_texture_offset[1];
+		newProjectorParams.viewportXywh[0] = viewport_texture_offset[0];
+		newProjectorParams.viewportXywh[1] = viewport_texture_offset[1];
 	}
 	else
 	{
-		newStelProjectorParams.viewportXywh[0] = (screen_w-newStelProjectorParams.viewportXywh[2]) >> 1;
-		newStelProjectorParams.viewportXywh[1] = (screen_h-newStelProjectorParams.viewportXywh[3]) >> 1;
+		newProjectorParams.viewportXywh[0] = (screen_w-newProjectorParams.viewportXywh[2]) >> 1;
+		newProjectorParams.viewportXywh[1] = (screen_h-newProjectorParams.viewportXywh[3]) >> 1;
 	}
 	//qDebug() << "texture_wh: " << texture_wh;
 	//qDebug() << "viewportFovDiameter: " << viewportFovDiameter;
 	//qDebug() << "screen: " << screen_w << ", " << screen_h;
 	//qDebug() << "viewport: " << viewport[0] << ", " << viewport[1] << ", "
-	//         << newStelProjectorParams.viewportXywh[2] << ", " << newStelProjectorParams.viewportXywh[3];
+	//         << newProjectorParams.viewportXywh[2] << ", " << newProjectorParams.viewportXywh[3];
 	//qDebug() << "viewport_texture_offset: "
 	//         << viewport_texture_offset[0] << ", "
 	//         << viewport_texture_offset[1];
 	
-	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(newStelProjectorParams);
+	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(newProjectorParams);
 
 	// initialize mirror_texture:
 	glGenTextures(1, &mirror_texture);
@@ -266,7 +266,7 @@ ViewportDistorterFisheyeToSphericMirror::ViewportDistorterFisheyeToSphericMirror
 		double gamma = conf.value("spheric_mirror/projector_gamma",0.45).toDouble();
 		if (gamma < 0.0) gamma = 0.0;
 		
-		const float view_scaling_factor = 0.5 * newStelProjectorParams.viewportFovDiameter / prj->fovToViewScalingFactor(distorter_max_fov*(M_PI/360.0));
+		const float view_scaling_factor = 0.5 * newProjectorParams.viewportFovDiameter / prj->fovToViewScalingFactor(distorter_max_fov*(M_PI/360.0));
 		texture_point_array = new TexturePoint[(max_x+1)*(max_y+1)];
 		vertex_point_array = new VertexPoint[(max_x+1)*(max_y+1)];
 		double max_h = 0;
@@ -287,8 +287,8 @@ ViewportDistorterFisheyeToSphericMirror::ViewportDistorterFisheyeToSphericMirror
 				              (vertex_point.ver_xy[1]-0.5f*screen_h) / screen_h,
 				              v,vX,vY);
 				rc &= prj->forward(v);
-				const float x = newStelProjectorParams.viewportCenter[0] + v[0] * view_scaling_factor;
-				const float y = newStelProjectorParams.viewportCenter[1] + v[1] * view_scaling_factor;
+				const float x = newProjectorParams.viewportCenter[0] + v[0] * view_scaling_factor;
+				const float y = newProjectorParams.viewportCenter[1] + v[1] * view_scaling_factor;
 				vertex_point.h = rc ? (vX^vY).length() : 0.0;
 
 				// sharp image up to the border of the fisheye image, at the cost of
@@ -299,9 +299,9 @@ ViewportDistorterFisheyeToSphericMirror::ViewportDistorterFisheyeToSphericMirror
 				// artefacts in the 3 otherwise black hills on the bottom of the image.
 
 				//      if (x < 0.f) {x=0.f;vertex_point.h=0;}
-				//      else if (x > newStelProjectorParams.viewportXywh[2]) {x=newStelProjectorParams.viewportXywh[2];vertex_point.h=0;}
+				//      else if (x > newProjectorParams.viewportXywh[2]) {x=newProjectorParams.viewportXywh[2];vertex_point.h=0;}
 				//      if (y < 0.f) {y=0.f;vertex_point.h=0;}
-				//      else if (y > newStelProjectorParams.viewportXywh[3]) {y=newStelProjectorParams.viewportXywh[3];vertex_point.h=0;}
+				//      else if (y > newProjectorParams.viewportXywh[3]) {y=newProjectorParams.viewportXywh[3];vertex_point.h=0;}
 
 				texture_point.tex_xy[0] = (viewport_texture_offset[0]+x)/texture_wh;
 				texture_point.tex_xy[1] = (viewport_texture_offset[1]+y)/texture_wh;
@@ -364,9 +364,9 @@ ViewportDistorterFisheyeToSphericMirror::ViewportDistorterFisheyeToSphericMirror
 				vertex_point.color[3] = 1.0f;
 				Q_ASSERT(in.status()!=QDataStream::Ok);
 				//      if (x < 0.f) {x=0.f;vertex_point.h=0;}
-				//      else if (x > newStelProjectorParams.viewportXywh[2]) {x=newStelProjectorParams.viewportXywh[2];vertex_point.h=0;}
+				//      else if (x > newProjectorParams.viewportXywh[2]) {x=newProjectorParams.viewportXywh[2];vertex_point.h=0;}
 				//      if (y < 0.f) {y=0.f;vertex_point.h=0;}
-				//      else if (y > newStelProjectorParams.viewportXywh[3]) {y=newStelProjectorParams.viewportXywh[3];vertex_point.h=0;}
+				//      else if (y > newProjectorParams.viewportXywh[3]) {y=newProjectorParams.viewportXywh[3];vertex_point.h=0;}
 
 				texture_point.tex_xy[0] = (viewport_texture_offset[0]+x)/texture_wh;
 				texture_point.tex_xy[1] = (viewport_texture_offset[1]+y)/texture_wh;
@@ -515,8 +515,8 @@ bool ViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) const
 	}
 
 
-	x = (int)floorf(0.5+texture_wh*texture_x) - viewport_texture_offset[0] + newStelProjectorParams.viewportXywh[0];
-	y = (int)floorf(0.5+texture_wh*texture_y) - viewport_texture_offset[1] + newStelProjectorParams.viewportXywh[1];
+	x = (int)floorf(0.5+texture_wh*texture_x) - viewport_texture_offset[0] + newProjectorParams.viewportXywh[0];
+	y = (int)floorf(0.5+texture_wh*texture_y) - viewport_texture_offset[1] + newProjectorParams.viewportXywh[1];
 	return true;
 }
 
@@ -552,10 +552,10 @@ void ViewportDistorterFisheyeToSphericMirror::distort(void) const
 		glCopyTexSubImage2D(GL_TEXTURE_2D, 0,
 		                    viewport_texture_offset[0],
 		                    viewport_texture_offset[1],
-			 			    newStelProjectorParams.viewportXywh[0],
-	   						newStelProjectorParams.viewportXywh[1],
-		                    newStelProjectorParams.viewportXywh[2],
-					  		newStelProjectorParams.viewportXywh[3]);
+			 			    newProjectorParams.viewportXywh[0],
+	   						newProjectorParams.viewportXywh[1],
+		                    newProjectorParams.viewportXywh[2],
+					  		newProjectorParams.viewportXywh[3]);
 	}
 	glEnable(GL_TEXTURE_2D);
 
@@ -577,7 +577,7 @@ void ViewportDistorterFisheyeToSphericMirror::distort(void) const
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
-	glViewport(newStelProjectorParams.viewportXywh[0],newStelProjectorParams.viewportXywh[1],newStelProjectorParams.viewportXywh[2],newStelProjectorParams.viewportXywh[3]);
+	glViewport(newProjectorParams.viewportXywh[0],newProjectorParams.viewportXywh[1],newProjectorParams.viewportXywh[2],newProjectorParams.viewportXywh[3]);
 }
 
 
