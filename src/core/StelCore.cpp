@@ -25,7 +25,6 @@
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 #include "GeodesicGrid.hpp"
-#include "StarMgr.hpp"
 #include "SolarSystem.hpp"
 #include "MovementMgr.hpp"
 #include "StelModuleMgr.hpp"
@@ -39,7 +38,7 @@
 /*************************************************************************
  Constructor
 *************************************************************************/
-StelCore::StelCore() : currentProjectionType(ProjectionStereographic)
+StelCore::StelCore() : geodesicGrid(NULL), currentProjectionType(ProjectionStereographic)
 {
 	toneConverter = new ToneReproducer();
 	movementMgr = new MovementMgr(this);
@@ -127,11 +126,6 @@ void StelCore::init()
 // 	if (overwrite_max_fov > 0.0)
 // 		MappingOrthographic::getMapping()->maxFov = overwrite_max_fov;
 	
-	StarMgr* hip_stars = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("StarMgr");
-	int grid_level = hip_stars->getMaxGridLevel();
-	geodesicGrid = new GeodesicGrid(grid_level);
-	hip_stars->setGrid(geodesicGrid);
-	
 	skyDrawer = new SkyDrawer(this);
 	skyDrawer->init();
 	// Debug
@@ -152,6 +146,23 @@ void StelCore::init()
 // 	glUseProgram(sp);
 }
 
+
+// Get the shared instance of GeodesicGrid.
+// The returned instance is garanteed to allow for at least maxLevel levels
+const GeodesicGrid* StelCore::getGeodesicGrid(int maxLevel) const
+{
+	if (geodesicGrid==NULL)
+	{
+		geodesicGrid = new GeodesicGrid(maxLevel);
+	}
+	else if (maxLevel>geodesicGrid->getMaxLevel())
+	{
+		delete geodesicGrid;
+		geodesicGrid = new GeodesicGrid(maxLevel);
+	}
+	return geodesicGrid;
+}
+	
 const ProjectorP StelCore::getProjection2d() const
 {
 	ProjectorP prj(new Projector2d());
