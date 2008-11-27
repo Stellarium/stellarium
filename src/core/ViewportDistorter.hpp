@@ -21,7 +21,7 @@
 #ifndef _VIEWPORTDISTORTER_HPP_
 #define _VIEWPORTDISTORTER_HPP_
 
-#include "ProjectorType.hpp"
+#include "StelProjectorType.hpp"
 class QString;
 
 class ViewportDistorter
@@ -29,7 +29,7 @@ class ViewportDistorter
 public:
 	static ViewportDistorter *create(const QString &type,
 	                                 int width,int height,
-	                                 ProjectorP prj);
+	                                 StelProjectorP prj);
 	// StelCore is needed for getProjectionType and setMaxFov
 	virtual ~ViewportDistorter(void) {}
 	virtual QString getType(void) const = 0;

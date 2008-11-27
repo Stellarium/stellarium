@@ -18,7 +18,7 @@
  */
  
 #include "SkyDrawer.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "Navigator.hpp"
 #include "ToneReproducer.hpp"
 #include "StelTextureMgr.hpp"

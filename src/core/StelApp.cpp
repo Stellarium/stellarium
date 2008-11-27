@@ -37,7 +37,7 @@
 #include "StarMgr.hpp"
 #include "SolarSystem.hpp"
 #include "StelIniParser.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "StelLocationMgr.hpp"
 #include "DownloadMgr.hpp"
 

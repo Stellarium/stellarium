@@ -318,7 +318,7 @@ void MovementMgr::zoomOut(bool s)
 // Increment/decrement smoothly the vision field and position
 void MovementMgr::updateMotion(double deltaTime)
 {
-	const ProjectorP proj = core->getProjection(StelCore::FrameJ2000);
+	const StelProjectorP proj = core->getProjection(StelCore::FrameJ2000);
 	
 	updateVisionVector(deltaTime);
 	
@@ -666,7 +666,7 @@ void MovementMgr::dragView(int x1, int y1, int x2, int y2)
 	
 	Vec3d tempvec1, tempvec2;
 	double az1, alt1, az2, alt2;
-	const ProjectorP prj = nav->getViewingMode()==Navigator::ViewHorizon ? core->getProjection(StelCore::FrameAltAz) :
+	const StelProjectorP prj = nav->getViewingMode()==Navigator::ViewHorizon ? core->getProjection(StelCore::FrameAltAz) :
 		core->getProjection(StelCore::FrameEquinoxEqu);
 		
 //johannes: StelApp already gives appropriate x/y coordinates

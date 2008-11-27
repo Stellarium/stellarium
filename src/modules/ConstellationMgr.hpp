@@ -26,12 +26,12 @@
 
 #include "StelObjectType.hpp"
 #include "StelObjectModule.hpp"
-#include "ProjectorType.hpp"
+#include "StelProjectorType.hpp"
 
 class ToneReproducer;
 class StarMgr;
 class Constellation;
-class Projector;
+class StelProjector;
 class Navigator;
 class StelFont;
 class StelPainter;
@@ -188,13 +188,13 @@ private:
 	//! @param conCatFile the path to the file which contains the constellation boundary data.
 	bool loadBoundaries(const QString& conCatFile);
 	//! Draw the constellation lines.
-	void drawLines(const ProjectorP& prj) const;
+	void drawLines(const StelProjectorP& prj) const;
 	//! Draw the constellation art.
-	void drawArt(const ProjectorP& prj, const Navigator * nav) const;
+	void drawArt(const StelProjectorP& prj, const Navigator * nav) const;
 	//! Draw the constellation name labels.
 	void drawNames(const StelPainter& sPainter) const;
 	//! Draw the constellation boundaries.
-	void drawBoundaries(const ProjectorP& prj) const;	
+	void drawBoundaries(const StelProjectorP& prj) const;	
 	//! Handle single and multi-constellation selections.
 	void setSelectedConst(Constellation* c);
 	//! Handle unselecting a single constellation.

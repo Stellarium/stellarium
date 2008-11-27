@@ -28,7 +28,7 @@
 #include "GLee.h"
 #include "fixx11h.h"
 
-class Projector;
+class StelProjector;
 class ToneReproducer;
 class StelCore;
 

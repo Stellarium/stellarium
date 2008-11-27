@@ -20,7 +20,7 @@
 #include <QString>
 #include "StelCore.hpp"
 #include "GeodesicGridDrawer.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "StelApp.hpp"
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
@@ -42,7 +42,7 @@ void GeodesicGridDrawer::init()
 
 double GeodesicGridDrawer::draw(StelCore* core, int maxSearchLevel)
 {
-	const ProjectorP prj = core->getProjection();
+	const StelProjectorP prj = core->getProjection();
 	GeodesicGrid* geodesicGrid = core->getGeodesicGrid();
 
 	const GeodesicSearchResult* geodesic_search_result = geodesicGrid->search(prj->unprojectViewport(), maxSearchLevel);

@@ -19,7 +19,7 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "Navigator.hpp"
 #include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"

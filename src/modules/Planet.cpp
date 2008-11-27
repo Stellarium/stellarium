@@ -30,7 +30,7 @@
 #include "StelTexture.hpp"
 #include "Planet.hpp"
 #include "Navigator.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "StelFont.hpp"
 #include "sideral_time.h"
 #include "StelTextureMgr.hpp"
@@ -560,7 +560,7 @@ void Planet::draw(StelCore* core, float maxMagLabels)
 	}
 
 	// Compute the 2D position and check if in the screen
-	const ProjectorP prj = core->getProjection(mat);
+	const StelProjectorP prj = core->getProjection(mat);
 	float screenSz = getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
@@ -741,7 +741,7 @@ void Planet::drawEarthShadow(StelCore* core)
 	shadow = mh + mdist*mscale;
 	r_penumbra *= mscale;
 
-	const ProjectorP prj = core->getProjection(StelCore::FrameHelio);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameHelio);
 	StelPainter sPainter(prj);
 	
 	glEnable(GL_BLEND);
@@ -802,7 +802,7 @@ void Planet::drawHints(const StelCore* core)
 		return;
 
 	const Navigator* nav = core->getNavigation();
-	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 			
 	// Draw nameI18 + scaling if it's not == 1.
@@ -868,7 +868,7 @@ void Planet::drawOrbit(const StelCore* core)
 	if(!orbitFader.getInterstate()) return;
 	if(!re.siderealPeriod) return;
 
-	const ProjectorP prj = core->getProjection(StelCore::FrameHelio);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameHelio);
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -941,7 +941,7 @@ void Planet::drawTrail(const StelCore* core)
 	if(!trailFader.getInterstate()) return;
 
 	const Navigator* nav = core->getNavigation();
-	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	
 	Vec3d onscreen1;
 	Vec3d onscreen2;

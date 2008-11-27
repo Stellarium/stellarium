@@ -23,7 +23,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "MovementMgr.hpp"
 #include <QMouseEvent>
 #include <QString>
@@ -162,7 +162,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	StelObjectP sobj;
 	QList<StelObjectP> candidates;
 
-	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	
 	// Field of view for a 30 pixel diameter circle on screen
 	float fov_around = core->getMovementMgr()->getCurrentFov()/qMin(prj->getViewportWidth(), prj->getViewportHeight()) * 30.f;

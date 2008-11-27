@@ -25,7 +25,7 @@
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
 #include "Navigator.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "StelModule.hpp"
 #include "StelUtils.hpp"
 #include "vecmath.h"

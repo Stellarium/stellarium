@@ -24,15 +24,15 @@
 #include "fixx11h.h"
 #include "vecmath.h"
 #include "SphereGeometry.hpp"
-#include "ProjectorType.hpp"
-#include "Projector.hpp"
+#include "StelProjectorType.hpp"
+#include "StelProjector.hpp"
 #include <QString>
 
 class StelFont;
 
 //! @class StelPainter
 //! Provides functions for performing openGL drawing operations.
-//! All coordinates are converted using the Projector instance passed at construction.
+//! All coordinates are converted using the StelProjector instance passed at construction.
 //! Because openGL is not thread safe, only one instance of StelPainter can exist at a time, enforcing thread safety.
 //! As a coding rule, no openGL calls should be performed when no instance of StelPainter exist.
 //! Typical useag is to create a local instance of StelPainter where drawing operations are needed.
@@ -40,11 +40,11 @@ class StelPainter
 {
 public:
 	
-	StelPainter(const ProjectorP& prj);
+	StelPainter(const StelProjectorP& prj);
 	~StelPainter();
 	
 	//! Return the instance of projector associated to this painter
-	const ProjectorP getProjector() const {return prj;}
+	const StelProjectorP getStelProjector() const {return prj;}
 	
 	//! Fill with black around the viewport.
 	void drawViewportShape(void) const;
@@ -181,7 +181,7 @@ private:
 	void initGlMatrixOrtho2d(void) const;
 	
 	//! The assoaciated instance of projector
-	const ProjectorP prj;
+	const StelProjectorP prj;
 	
 	//! Whether the GL_POINT_SPRITE extension is available and activated
 	static bool flagGlPointSprite;

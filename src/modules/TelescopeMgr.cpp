@@ -20,7 +20,7 @@
 #include "TelescopeMgr.hpp"
 #include "Telescope.hpp"
 #include "StelObject.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -98,7 +98,7 @@ double TelescopeMgr::getCallOrder(StelModuleActionName actionName) const
 void TelescopeMgr::draw(StelCore* core)
 {
 	Navigator* nav = core->getNavigation();
-	const ProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 	
 	glEnable(GL_TEXTURE_2D);
@@ -289,7 +289,7 @@ void TelescopeMgr::init()
 }
 
 
-void TelescopeMgr::drawPointer(const ProjectorP& prj, const Navigator * nav, const StelPainter& sPainter)
+void TelescopeMgr::drawPointer(const StelProjectorP& prj, const Navigator * nav, const StelPainter& sPainter)
 {
 	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Telescope");
 	if (!newSelected.empty())

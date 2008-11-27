@@ -20,7 +20,7 @@
 #include <functional>
 #include <QSettings>
 
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "Navigator.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"

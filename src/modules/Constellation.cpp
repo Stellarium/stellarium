@@ -21,7 +21,7 @@
 #include <QString>
 #include <QTextStream>
 #include <QDebug>
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "Constellation.hpp"
 #include "StarMgr.hpp"
 #include "Navigator.hpp"
@@ -91,7 +91,7 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 	return true;
 }
 
-void Constellation::drawOptim(const ProjectorP& prj) const
+void Constellation::drawOptim(const StelProjectorP& prj) const
 {
 	if(!lineFader.getInterstate()) return;
 
@@ -123,7 +123,7 @@ void Constellation::drawName(StelFont *constfont, const StelPainter& sPainter) c
 	sPainter.drawText(constfont, XYname[0], XYname[1], nameI18, 0., -constfont->getStrLen(nameI18)/2, 0, false);
 }
 
-void Constellation::drawArtOptim(const ProjectorP& prj, const Navigator* nav) const
+void Constellation::drawArtOptim(const StelProjectorP& prj, const Navigator* nav) const
 {
 	float intensity = artFader.getInterstate(); 
 	if (artTexture && intensity) 
@@ -191,7 +191,7 @@ void Constellation::drawArtOptim(const ProjectorP& prj, const Navigator* nav) co
 }
 
 // Draw the art texture
-void Constellation::drawArt(const ProjectorP& prj, const Navigator* nav) const
+void Constellation::drawArt(const StelProjectorP& prj, const Navigator* nav) const
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
@@ -226,7 +226,7 @@ void Constellation::update(int deltaTime)
 	boundaryFader.update(deltaTime);
 }
 
-void Constellation::drawBoundaryOptim(const ProjectorP& prj) const
+void Constellation::drawBoundaryOptim(const StelProjectorP& prj) const
 {
 	if(!boundaryFader.getInterstate()) return;
 

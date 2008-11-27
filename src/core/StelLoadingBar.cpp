@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "StelLoadingBar.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
@@ -39,7 +39,7 @@ barfont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInst
 extraTextFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), extraTextSize)),
 			  extraText(extraTextString)
 {
-	const ProjectorP prj = StelApp::getInstance().getCore()->getProjection2d();
+	const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection2d();
 	int screenw = prj->getViewportWidth();
 	int screenh = prj->getViewportHeight();
 	splashx = prj->getViewportPosX() + (screenw - width)/2;

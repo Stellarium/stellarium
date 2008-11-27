@@ -26,7 +26,7 @@
 #include "StelApp.hpp"
 #include "Navigator.hpp"
 #include "Translator.hpp"
-#include "Projector.hpp"
+#include "StelProjector.hpp"
 #include "StelLoadingBar.hpp"
 #include "StelFader.hpp"
 #include "Planet.hpp"
@@ -180,7 +180,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 //! Draw the sky grid in the current frame
 void SkyGrid::draw(const StelCore* core) const
 {
-	const ProjectorP prj = core->getProjection(frameType);
+	const StelProjectorP prj = core->getProjection(frameType);
 	if (!fader.getInterstate())
 		return;
 

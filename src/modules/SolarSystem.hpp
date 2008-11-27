@@ -36,7 +36,7 @@ class StelObject;
 class Planet;
 class StelFont;
 class StelCore;
-class Projector;
+class StelProjector;
 class Navigator;
 class QSettings;
 
