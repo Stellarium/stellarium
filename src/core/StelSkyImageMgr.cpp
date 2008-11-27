@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "SkyImageMgr.hpp"
+#include "StelSkyImageMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
@@ -35,21 +35,21 @@
 #include <QVariantMap>
 #include <QVariantList>
 
-SkyImageMgr::SkyImageMgr(void) : flagShow(true)
+StelSkyImageMgr::StelSkyImageMgr(void) : flagShow(true)
 {
-	setObjectName("SkyImageMgr");
+	setObjectName("StelSkyImageMgr");
 }
 
-SkyImageMgr::~SkyImageMgr()
+StelSkyImageMgr::~StelSkyImageMgr()
 {
-	foreach (SkyImageMgrElem* s, allSkyImages)
+	foreach (StelSkyImageMgrElem* s, allSkyImages)
 		delete s;
 }
 
 /*************************************************************************
  Reimplementation of the getCallOrder method
 *************************************************************************/
-double SkyImageMgr::getCallOrder(StelModuleActionName actionName) const
+double StelSkyImageMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
 		return GETSTELMODULE("MilkyWay")->getCallOrder(actionName)+5;
@@ -57,7 +57,7 @@ double SkyImageMgr::getCallOrder(StelModuleActionName actionName) const
 }
 
 // read from stream
-void SkyImageMgr::init()
+void StelSkyImageMgr::init()
 {
 	try
 	{
@@ -70,9 +70,9 @@ void SkyImageMgr::init()
 	// loadSkyImage("dobbs", "./scripts/dobbs.png", 11.5, 41, 11.5, 41.17, 11.75, 41.17, 11.75, 41, 2.5, 14, true);
 }
 
-QString SkyImageMgr::insertSkyImage(SkyImageTile* tile, bool ashow, bool aexternallyOwned)
+QString StelSkyImageMgr::insertSkyImage(SkyImageTile* tile, bool ashow, bool aexternallyOwned)
 {
-	SkyImageMgrElem* bEl = new SkyImageMgrElem(tile, ashow, aexternallyOwned);
+	StelSkyImageMgrElem* bEl = new StelSkyImageMgrElem(tile, ashow, aexternallyOwned);
 	QString key = tile->getShortName();
 	if (key.isEmpty())
 		key = tile->getAbsoluteImageURI();
@@ -94,18 +94,18 @@ QString SkyImageMgr::insertSkyImage(SkyImageTile* tile, bool ashow, bool aextern
 }
 
 // Add a new image from its URI (URL or local file name)
-QString SkyImageMgr::insertSkyImage(const QString& uri, bool ashow)
+QString StelSkyImageMgr::insertSkyImage(const QString& uri, bool ashow)
 {
 	return insertSkyImage(new SkyImageTile(uri), ashow, false);
 }
 
 // Remove a sky image tile from the list of background images
-void SkyImageMgr::removeSkyImage(const QString& key)
+void StelSkyImageMgr::removeSkyImage(const QString& key)
 {
-	//qDebug() << "SkyImageMgr::removeSkyImage removing image:" << key;
+	//qDebug() << "StelSkyImageMgr::removeSkyImage removing image:" << key;
 	if (allSkyImages.contains(key))
 	{
-		SkyImageMgrElem* bEl = allSkyImages[key];
+		StelSkyImageMgrElem* bEl = allSkyImages[key];
 		disconnect(bEl->tile, SIGNAL(loadingStateChanged(bool)), this, SLOT(loadingStateChanged(bool)));
 		disconnect(bEl->tile, SIGNAL(percentLoadedChanged(int)), this, SLOT(percentLoadedChanged(int)));
 		delete bEl;
@@ -113,12 +113,12 @@ void SkyImageMgr::removeSkyImage(const QString& key)
 	}
 	else
 	{
-		qDebug() << "SkyImageMgr::removeSkyImage there is no such key" << key << "nothing is removed";
+		qDebug() << "StelSkyImageMgr::removeSkyImage there is no such key" << key << "nothing is removed";
 	}
 }
 
 // Remove a sky image tile from the list of background images
-void SkyImageMgr::removeSkyImage(SkyImageTile* img)
+void StelSkyImageMgr::removeSkyImage(SkyImageTile* img)
 {
 	const QString k = keyForTile(img);
 	if (!k.isEmpty())
@@ -126,7 +126,7 @@ void SkyImageMgr::removeSkyImage(SkyImageTile* img)
 }
 
 // Draw all the multi-res images collection
-void SkyImageMgr::draw(StelCore* core)
+void StelSkyImageMgr::draw(StelCore* core)
 {
 	if (!flagShow)
 		return;
@@ -134,7 +134,7 @@ void SkyImageMgr::draw(StelCore* core)
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_BLEND);
-	foreach (SkyImageMgrElem* s, allSkyImages)
+	foreach (StelSkyImageMgrElem* s, allSkyImages)
 	{
 		if (s->show)
 			s->tile->draw(core, sPainter);
@@ -142,11 +142,11 @@ void SkyImageMgr::draw(StelCore* core)
 }
 
 // Called when loading of data started or stopped for one collection
-void SkyImageMgr::loadingStateChanged(bool b)
+void StelSkyImageMgr::loadingStateChanged(bool b)
 {
 	SkyImageTile* tile = qobject_cast<SkyImageTile*>(QObject::sender());
 	Q_ASSERT(tile!=0);
-	SkyImageMgrElem* elem = skyBackgroundElemForTile(tile);
+	StelSkyImageMgrElem* elem = skyBackgroundElemForTile(tile);
 	Q_ASSERT(elem!=NULL);
 	if (b)
 	{
@@ -167,19 +167,19 @@ void SkyImageMgr::loadingStateChanged(bool b)
 }
 	
 // Called when the percentage of loading tiles/tiles to be displayed changed for one collection
-void SkyImageMgr::percentLoadedChanged(int percentage)
+void StelSkyImageMgr::percentLoadedChanged(int percentage)
 {
 	SkyImageTile* tile = qobject_cast<SkyImageTile*>(QObject::sender());
 	Q_ASSERT(tile!=0);
-	SkyImageMgrElem* elem = skyBackgroundElemForTile(tile);
+	StelSkyImageMgrElem* elem = skyBackgroundElemForTile(tile);
 	Q_ASSERT(elem!=NULL);
 	Q_ASSERT(elem->progressBar!=NULL);
 	elem->progressBar->setValue(percentage);
 }
 	
-SkyImageMgr::SkyImageMgrElem* SkyImageMgr::skyBackgroundElemForTile(const SkyImageTile* t)
+StelSkyImageMgr::StelSkyImageMgrElem* StelSkyImageMgr::skyBackgroundElemForTile(const SkyImageTile* t)
 {
-	foreach (SkyImageMgrElem* e, allSkyImages)
+	foreach (StelSkyImageMgrElem* e, allSkyImages)
 	{
 		if (e->tile==t)
 		{
@@ -189,16 +189,16 @@ SkyImageMgr::SkyImageMgrElem* SkyImageMgr::skyBackgroundElemForTile(const SkyIma
 	return NULL;
 }
 
-QString SkyImageMgr::keyForTile(const SkyImageTile* t)
+QString StelSkyImageMgr::keyForTile(const SkyImageTile* t)
 {
 	return allSkyImages.key(skyBackgroundElemForTile(t));
 }
 
-SkyImageMgr::SkyImageMgrElem::SkyImageMgrElem(SkyImageTile* t, bool ashow, bool aexternallyOwned) : 
+StelSkyImageMgr::StelSkyImageMgrElem::StelSkyImageMgrElem(SkyImageTile* t, bool ashow, bool aexternallyOwned) : 
 		tile(t), progressBar(NULL), show(ashow), externallyOwned(aexternallyOwned)
 {;}
 				 
-SkyImageMgr::SkyImageMgrElem::~SkyImageMgrElem()
+StelSkyImageMgr::StelSkyImageMgrElem::~StelSkyImageMgrElem()
 {
 	if (progressBar)
 		progressBar->deleteLater();
@@ -208,7 +208,7 @@ SkyImageMgr::SkyImageMgrElem::~SkyImageMgrElem()
 	tile = NULL;
 }
 
-bool SkyImageMgr::loadSkyImage(const QString& id, const QString& filename, 
+bool StelSkyImageMgr::loadSkyImage(const QString& id, const QString& filename, 
                                double ra0, double dec0, 
                                double ra1, double dec1, 
                                double ra2, double dec2, 
@@ -275,14 +275,14 @@ bool SkyImageMgr::loadSkyImage(const QString& id, const QString& filename,
 	}
 }
 
-void SkyImageMgr::showImage(const QString& id, bool b)
+void StelSkyImageMgr::showImage(const QString& id, bool b)
 {
 	if (allSkyImages.contains(id))
 		if (allSkyImages[id]!=NULL)
 			allSkyImages[id]->show = b;
 }
 
-bool SkyImageMgr::getShowImage(const QString& id)
+bool StelSkyImageMgr::getShowImage(const QString& id)
 {
 	if (allSkyImages.contains(id))
 		if (allSkyImages[id]!=NULL)

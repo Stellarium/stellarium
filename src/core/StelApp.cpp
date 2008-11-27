@@ -49,7 +49,7 @@
 #include "StelFileMgr.hpp"
 #include "QtScriptMgr.hpp"
 #include "StelJsonParser.hpp"
-#include "SkyImageMgr.hpp"
+#include "StelSkyImageMgr.hpp"
 #include "StelAudioMgr.hpp"
 
 #include "StelStyle.hpp"
@@ -221,7 +221,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 StelApp::~StelApp()
 {
 	stelObjectMgr->unSelect();
-	moduleMgr->unloadModule("SkyImageMgr", false);  // We need to delete it afterward
+	moduleMgr->unloadModule("StelSkyImageMgr", false);  // We need to delete it afterward
 	moduleMgr->unloadModule("StelObjectMgr", false);// We need to delete it afterward
 	StelModuleMgr* tmp = moduleMgr;
 	moduleMgr = new StelModuleMgr(); // Create a secondary instance to avoid crashes at other deinit
@@ -314,7 +314,7 @@ void StelApp::init()
 	getModuleMgr().registerModule(milky_way);
 	
 	// Init sky image manager
-	skyImageMgr = new SkyImageMgr();
+	skyImageMgr = new StelSkyImageMgr();
 	skyImageMgr->init();
 	getModuleMgr().registerModule(skyImageMgr);
 

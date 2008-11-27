@@ -38,7 +38,7 @@
 #include "StelUtils.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelSkyDrawer.hpp"
-#include "SkyImageMgr.hpp"
+#include "StelSkyImageMgr.hpp"
 #include "StarMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelLocation.hpp"

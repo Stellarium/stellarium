@@ -64,7 +64,7 @@ class SkyImageTile : public MultiLevelJsonBase
 {
 	Q_OBJECT;
 	
-	friend class SkyImageMgr;
+	friend class StelSkyImageMgr;
 	
 public:
 	//! Default constructor
