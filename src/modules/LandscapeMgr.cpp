@@ -33,7 +33,7 @@
 #include "StelFileMgr.hpp"
 #include "Planet.hpp"
 #include "StelIniParser.hpp"
-#include "SFont.hpp"
+#include "StelFont.hpp"
 #include "SkyDrawer.hpp"
 #include "StelStyle.hpp"
 #include "StelPainter.hpp"
@@ -55,7 +55,7 @@ public:
 private:
 	float radius;
 	double fontSize;
-	SFont& font;
+	StelFont& font;
 	Vec3f color;
 	QString sNorth, sSouth, sEast, sWest;
 	LinearFader fader;

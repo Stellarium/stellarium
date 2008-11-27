@@ -34,7 +34,7 @@ class LoadingBar;
 class Translator;
 class StelObject;
 class Planet;
-class SFont;
+class StelFont;
 class StelCore;
 class Projector;
 class Navigator;
@@ -264,7 +264,7 @@ private:
 	float moonScale;                 // Moon scale value
 
 	double fontSize;
-	SFont& planetNameFont;
+	StelFont& planetNameFont;
 	
 	//! The amount of planets labels (between 0 and 10)
 	float labelsAmount;

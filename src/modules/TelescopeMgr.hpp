@@ -32,7 +32,7 @@
 
 class Projector;
 class Navigator;
-class SFont;
+class StelFont;
 class StelObject;
 class Telescope;
 class StelPainter;
@@ -110,7 +110,7 @@ private:
 	LinearFader telescopeFader;
 	Vec3f circleColor;
 	Vec3f labelColor;
-	SFont *telescope_font;
+	StelFont *telescope_font;
 	StelTextureSP telescopeTexture;
 
 	QMap<int, Telescope*> telescope_map;

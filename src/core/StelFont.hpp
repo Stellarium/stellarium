@@ -33,11 +33,11 @@
 /*
  * Wrapper class on the TypeFace class used to display fonts in openGL
  */
-class SFont
+class StelFont
 {
 public:
-	SFont(float sizeI, const QString& ttfFileName);
-	~SFont() {;}
+	StelFont(float sizeI, const QString& ttfFileName);
+	~StelFont() {;}
     
 	void print(float x, float y, const QString& s, int upsidedown = 1) const
 	{

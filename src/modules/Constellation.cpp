@@ -26,7 +26,7 @@
 #include "StarMgr.hpp"
 #include "Navigator.hpp"
 #include "StelTexture.hpp"
-#include "SFont.hpp"
+#include "StelFont.hpp"
 #include "StelPainter.hpp"
 
 Vec3f Constellation::lineColor = Vec3f(0.4,0.4,0.8);
@@ -115,7 +115,7 @@ void Constellation::drawOptim(const ProjectorP& prj) const
 	}
 }
 
-void Constellation::drawName(SFont *constfont, const StelPainter& sPainter) const
+void Constellation::drawName(StelFont *constfont, const StelPainter& sPainter) const
 {
 	if(!nameFader.getInterstate())
 		return;

@@ -17,19 +17,19 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "SFont.hpp"
+#include "StelFont.hpp"
 #include "GLee.h"
 #include "fixx11h.h"
 #include <QFile>
 #include <QChar>
 #include <QString>
 
-SFont::SFont(float sizeI, const QString& ttfFileName) 
+StelFont::StelFont(float sizeI, const QString& ttfFileName) 
 	: typeFace(QFile::encodeName(ttfFileName).constData(), (size_t)(sizeI), 72) 
 {
 }
 
-void SFont::printCharOutlined(const QChar c) const
+void StelFont::printCharOutlined(const QChar c) const
 {
 	GLfloat current_color[4];
 	glGetFloatv(GL_CURRENT_COLOR, current_color);	 

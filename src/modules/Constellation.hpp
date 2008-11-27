@@ -30,7 +30,7 @@
 #include "StelTextureTypes.hpp"
 
 class StarMgr;
-class SFont;
+class StelFont;
 class StelPainter;
 
 //! @class Constellation
@@ -77,7 +77,7 @@ private:
 	bool read(const QString& record, StarMgr *starMgr);
 	
 	//! Draw the constellation name
-	void drawName(SFont * constfont, const StelPainter& sPainter) const;
+	void drawName(StelFont * constfont, const StelPainter& sPainter) const;
 	//! Draw the constellation art
 	void drawArt(const ProjectorP& prj, const Navigator* nav) const;
 	//! Draw the constellation boundary

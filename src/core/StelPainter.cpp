@@ -30,7 +30,7 @@
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
-#include "SFont.hpp"
+#include "StelFont.hpp"
 
 #include <QDebug>
 #include <QString>
@@ -421,7 +421,7 @@ void StelPainter::sSphereMap(GLdouble radius, GLint slices, GLint stacks, double
 	}
 }
 
-void StelPainter::drawTextGravity180(const SFont* font, float x, float y, const QString& ws,
+void StelPainter::drawTextGravity180(const StelFont* font, float x, float y, const QString& ws,
                                    bool speedOptimize, float xshift, float yshift) const
 {
 	static float dx, dy, d, theta, psi;
@@ -482,7 +482,7 @@ void StelPainter::drawTextGravity180(const SFont* font, float x, float y, const 
 /*************************************************************************
  Draw the string at the given position and angle with the given font
 *************************************************************************/
-void StelPainter::drawText(const SFont* font, float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity) const
+void StelPainter::drawText(const StelFont* font, float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity) const
 {
 	if (prj->gravityLabels && !noGravity)
 	{
@@ -631,7 +631,7 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 /*************************************************************************
  Draw a parallel arc in the current frame
 *************************************************************************/
-void StelPainter::drawParallel(const Vec3d& start, double length, bool labelAxis, const SFont* font, const Vec4f* textColor, int nbSeg) const
+void StelPainter::drawParallel(const Vec3d& start, double length, bool labelAxis, const StelFont* font, const Vec4f* textColor, int nbSeg) const
 {
 	if (nbSeg==-1)
 		nbSeg = 4 + (int)(length*44./(2.*M_PI));
@@ -705,7 +705,7 @@ void StelPainter::drawParallel(const Vec3d& start, double length, bool labelAxis
 /*************************************************************************
  Draw a meridian arc in the current frame
 *************************************************************************/
-void StelPainter::drawMeridian(const Vec3d& start, double length, bool labelAxis, const SFont* font, const Vec4f* textColor, int nbSeg, bool useDMS) const
+void StelPainter::drawMeridian(const Vec3d& start, double length, bool labelAxis, const StelFont* font, const Vec4f* textColor, int nbSeg, bool useDMS) const
 {
 	if (nbSeg==-1)
 		nbSeg = 4 + (int)(length*54./(2.*M_PI));

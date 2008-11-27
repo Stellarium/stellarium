@@ -31,14 +31,14 @@
 #include <QString>
 
 class StelCore;
-class SFont;
+class StelFont;
 class StelPainter;
 
 // Base class from which other label types inherit
 class StelLabel
 {
 public:
-	StelLabel(const QString& text, SFont* font, const Vec3f& color);
+	StelLabel(const QString& text, StelFont* font, const Vec3f& color);
 	virtual ~StelLabel() {;}
 
 	//! draw the label on the sky
@@ -57,7 +57,7 @@ public:
 
 protected:
 	QString labelText;
-	SFont* labelFont;
+	StelFont* labelFont;
 	Vec3f labelColor;
 	LinearFader labelFader;
 
@@ -85,7 +85,7 @@ public:
 	//! @param distance the distance from the object to draw the label.  If < 0.0, placement is automatic.
 	//! @param style determines how the label is drawn
 	//! @param enclosureSize determines the size of the enclosure for styles Box and Circle
-	SkyLabel(const QString& text, StelObjectP bindObject, SFont* font, Vec3f color,
+	SkyLabel(const QString& text, StelObjectP bindObject, StelFont* font, Vec3f color,
 	         QString side="NE", double distance=-1.0, SkyLabel::Style style=TextOnly, 
 	         double enclosureSize=0.0);
 
@@ -116,7 +116,7 @@ public:
 	//! @param y the y-position on the screen (pixels from the bottom side)
 	//! @param font the font to use
 	//! @param color the color for the label
-	ScreenLabel(const QString& text, int x, int y, SFont* font, Vec3f color);
+	ScreenLabel(const QString& text, int x, int y, StelFont* font, Vec3f color);
 	virtual ~ScreenLabel();
 
 	//! draw the label on the sky

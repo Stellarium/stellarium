@@ -28,7 +28,7 @@
 #include "Projector.hpp"
 #include <QString>
 
-class SFont;
+class StelFont;
 
 //! @class StelPainter
 //! Provides functions for performing openGL drawing operations.
@@ -71,7 +71,7 @@ public:
 	//! @param xshift shift in pixel in the rotated x direction.
 	//! @param yshift shift in pixel in the rotated y direction.
 	//! @param noGravity don't take into account the fact that the text should be written with gravity.
-	void drawText(const SFont* font, float x, float y, const QString& str, float angleDeg=0.f, 
+	void drawText(const StelFont* font, float x, float y, const QString& str, float angleDeg=0.f, 
 		      float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
 	
 	//! Draw the given polygon
@@ -94,7 +94,7 @@ public:
 	//! this value is automatically adjusted to prevent seeing the curve as a polygon.
 	//! @param font the font to use for display
 	void drawParallel(const Vec3d& start, double length, bool labelAxis=false, 
-			  const SFont* font=NULL, const Vec4f* textColor=NULL, int nbSeg=-1) const;
+			  const StelFont* font=NULL, const Vec4f* textColor=NULL, int nbSeg=-1) const;
 	
 	//! Draw a meridian arc in the current frame. The arc starts from point start
 	//! going in the positive latitude direction if longitude is in [0;180], in the negative direction
@@ -108,7 +108,7 @@ public:
 	//! @param font the font to use for display
 	//! @param useDMS if true display label in DD:MM:SS. Normal is HH:MM:SS
 	void drawMeridian(const Vec3d& start, double length, bool labelAxis=false, 
-					  const SFont* font=NULL, const Vec4f* textColor=NULL, int nbSeg=-1, bool useDMS=false) const;
+					  const StelFont* font=NULL, const Vec4f* textColor=NULL, int nbSeg=-1, bool useDMS=false) const;
 
 	//! draw a simple circle, 2d viewport coordinates in pixel
 	void drawCircle(double x,double y,double r) const;
@@ -174,7 +174,7 @@ public:
 	
 private:
 	
-	void drawTextGravity180(const SFont* font, float x, float y, const QString& str, 
+	void drawTextGravity180(const StelFont* font, float x, float y, const QString& str, 
 			      bool speedOptimize = 1, float xshift = 0, float yshift = 0) const;
 		
 	//! Init the real openGL Matrices to a 2d orthographic projection
