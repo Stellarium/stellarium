@@ -83,7 +83,7 @@ public:
 	ServerCredits getServerCredits() const {return serverCredits;}
 
 	//! Convert the polygon informations to a map following the JSON structure.
-	//! It can be saved as JSON using the QtJsonParser methods.
+	//! It can be saved as JSON using the StelJsonParser methods.
 	QVariantMap toQVariantMap() const;
 	
 protected:

@@ -58,7 +58,7 @@ public:
 	int getLevel() const {return parent()==NULL ? 0 : (qobject_cast<MultiLevelJsonBase*>(parent()))->getLevel()+1;}
 	
 	//! Convert the image informations to a map following the JSON structure.
-	//! It can be saved as JSON using the QtJsonParser methods.
+	//! It can be saved as JSON using the StelJsonParser methods.
 	QVariantMap toQVariantMap() const;
 	
 	//! Schedule a deletion. It will practically occur after the delay passed as argument to deleteUnusedTiles() has expired

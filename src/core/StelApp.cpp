@@ -48,7 +48,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "QtScriptMgr.hpp"
-#include "QtJsonParser.hpp"
+#include "StelJsonParser.hpp"
 #include "SkyImageMgr.hpp"
 #include "StelAudioMgr.hpp"
 
