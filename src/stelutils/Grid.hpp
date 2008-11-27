@@ -20,8 +20,6 @@
 #ifndef _GRID_HPP_
 #define _GRID_HPP_
 
-#include <list>
-
 #include "GridObject.hpp"
 #include "SphereGeometry.hpp"
 
@@ -52,6 +50,43 @@ public:
 		std::vector<GridObject*>::insert(std::vector<GridObject*>::end(), objs.begin(), objs.end());
 	}
 };
+
+class SimpleGrid : public Grid
+{
+public:
+	SimpleGrid() {}
+
+	~SimpleGrid() {}
+	void insert(GridObject* obj)
+	{
+		all.push_back(obj);
+	}
+
+	template<class Shape>
+			void filterIntersect(const Shape& s);
+
+	//! Get all the object loaded into the grid
+	virtual std::vector<GridObject*> getAllObjects() {return all;}
+
+private:
+	typedef std::vector<GridObject*> AllObjects;
+	AllObjects all;
+};
+
+template<class Shape> void SimpleGrid::filterIntersect(const Shape& s)
+{
+	// This is a totaly non-optimized method
+	// because we recompute everything each time, when we
+	// should use the previous informations we have
+	this->clear();
+	for (AllObjects::iterator iter = all.begin(); iter != all.end(); ++iter)
+	{
+		if (intersect(s, (*iter)->getPositionForGrid()))
+		{
+			this->Grid::insertResult(*iter);
+		}
+	}
+}
 
 #endif // _GRID_HPP_
 
