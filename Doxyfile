@@ -101,16 +101,7 @@ FILE_PATTERNS          = *.h \
                          *.hpp \
                          *.doxygen
 RECURSIVE              = YES
-EXCLUDE                = ./src/stelutils/typeface.h \
-                         ./src/stelutils/typeface.cpp \
-                         ./src/stelutils/callback_helpers.hpp \
-                         ./src/stelutils/callbacks.hpp \
-                         ./src/stelutils/GLee.h \
-                         ./src/stelutils/GLee.c \
-                         /home/fab1/prog/stellarium/src/stelutils/kfilter/kfilterbase.cpp \
-                         /home/fab1/prog/stellarium/src/stelutils/kfilter/kfilterbase.h \
-                         /home/fab1/prog/stellarium/src/stelutils/kfilter/kgzipfilter.cpp \
-                         /home/fab1/prog/stellarium/src/stelutils/kfilter/kgzipfilter.h
+EXCLUDE                = ./src/external
 EXCLUDE_SYMLINKS       = NO
 EXCLUDE_PATTERNS       = */.svn/*
 EXCLUDE_SYMBOLS        = 

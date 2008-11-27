@@ -22,7 +22,6 @@
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 #include "StelFileMgr.hpp"
-#include "TextEntryDateTimeValidator.hpp"
 
 #include <QLocale>
 #include <QDebug>
@@ -179,7 +178,7 @@ QString StelLocaleMgr::getISO8601TimeLocal(double JD) const
 //! of them.
 double StelLocaleMgr::getJdFromISO8601TimeLocal(const QString& t) const
 {
-	vector<int> numbers = TextEntryDateTimeValidator::getIntsFromISO8601String(t);
+	QList<int> numbers = StelUtils::getIntsFromISO8601String(t);
 	if (numbers.size() == 6)
 	{
 		int y = numbers[0];

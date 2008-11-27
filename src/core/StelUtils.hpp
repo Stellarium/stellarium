@@ -207,6 +207,9 @@ namespace StelUtils
 
 	//! Output a QVariantMap to qDebug().  Formats like a tree where there are nested objects.
 	void debugQVariantMap(const QVariant& m, const QString& indent="", const QString& key="");
+	
+	//! Use RegExp for final to parse a QString to six ints, use in the event QDateTime cannot handle the date.
+	QList<int> getIntsFromISO8601String(const QString& iso8601Date);
 }
 
 #endif // _STELUTILS_HPP_

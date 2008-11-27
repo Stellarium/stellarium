@@ -25,12 +25,10 @@
 #include "StelLocaleMgr.hpp"
 #include "StelNavigator.hpp"
 #include "ui_dateTimeDialogGui.h"
-#include "TextEntryDateTimeValidator.hpp"
 
 #include <QDebug>
 #include <QFrame>
 #include <QLineEdit>
-#include <QValidator>
 
 DateTimeDialog::DateTimeDialog() : 
   year(0),
