@@ -180,7 +180,8 @@ QString StarMgr::getSciName(int hip) {
 
 
 
-void StarMgr::init() {
+void StarMgr::init()
+{
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
@@ -198,14 +199,12 @@ void StarMgr::init() {
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setMinFilter(GL_LINEAR);
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   // Load pointer texture
-}
-
-void StarMgr::setGrid(GeodesicGrid* geodesicGrid) {
-  geodesicGrid->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
-  for (ZoneArrayMap::const_iterator it(zoneArrays.begin());
-       it!=zoneArrays.end();it++) {
-    it->second->scaleAxis();
-  }
+	
+	StelApp::getInstance().getCore()->getGeodesicGrid(maxGeodesicGridLevel)->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
+	for (ZoneArrayMap::const_iterator it(zoneArrays.begin()); it!=zoneArrays.end();it++)
+	{
+		it->second->scaleAxis();
+	}
 }
 
 
@@ -553,7 +552,7 @@ void StarMgr::draw(StelCore* core)
 		return;
 
 	int maxSearchLevel = getMaxSearchLevel();
-	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid()->search(prj->unprojectViewport(),maxSearchLevel);
+	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxSearchLevel)->search(prj->unprojectViewport(),maxSearchLevel);
 
     // Set temporary static variable for optimization
     const float names_brightness = labelsFader.getInterstate() * starsFader.getInterstate();
@@ -684,7 +683,7 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv,
   e2 *= f;
   e3 *= f;
     // search the triangles
- 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid()->search(e3,e2,e1,e0,lastMaxSearchLevel);
+  const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(e3,e2,e1,e0,lastMaxSearchLevel);
     // iterate over the stars inside the triangles:
   f = cos(limFov * M_PI/180.);
   for (ZoneArrayMap::const_iterator it(zoneArrays.begin());
