@@ -7,8 +7,8 @@ INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_
 SET(stellarium_lib_SRCS
 	core/StelAudioMgr.hpp
 	core/StelAudioMgr.cpp
-	core/DownloadMgr.hpp
-	core/DownloadMgr.cpp
+	core/StelDownloadMgr.hpp
+	core/StelDownloadMgr.cpp
 	core/GeodesicGrid.cpp
 	core/GeodesicGrid.hpp
 	core/StelLoadingBar.cpp
@@ -260,7 +260,7 @@ QT4_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 # that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
 SET(stellarium_MOC_HDRS
 	core/StelAudioMgr.hpp
-	core/DownloadMgr.hpp
+	core/StelDownloadMgr.hpp
 	core/StelModuleMgr.hpp
 	core/StelObserver.hpp
 	core/StelApp.hpp
