@@ -35,7 +35,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef _GEODESICGRID_HPP_
 #define _GEODESICGRID_HPP_
 
-#include "SphereGeometry.hpp"
+#include "StelSphereGeometry.hpp"
 
 class GeodesicSearchResult;
 

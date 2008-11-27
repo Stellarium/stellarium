@@ -83,8 +83,8 @@ SET(stellarium_lib_SRCS
 	core/StelFader.hpp
 	core/StelGrid.hpp
 	core/StelGridObject.hpp
-	core/SphereGeometry.cpp
-	core/SphereGeometry.hpp
+	core/StelSphereGeometry.cpp
+	core/StelSphereGeometry.hpp
 	core/StelIniParser.cpp
 	core/StelIniParser.hpp
 	core/StelUtils.cpp
@@ -338,12 +338,12 @@ ADD_EXECUTABLE(testdates ${tests_testdates_SRCS})
 TARGET_LINK_LIBRARIES(testdates ${extLinkerOption})
 ADD_TEST(test_testdates ${EXECUTABLE_OUTPUT_PATH}/testdates)
 
-SET(tests_testSphereGeometry_SRCS
-	tests/testSphereGeometry.cpp
-	core/SphereGeometry.hpp
-	core/SphereGeometry.cpp
+SET(tests_testStelSphereGeometry_SRCS
+	tests/testStelSphereGeometry.cpp
+	core/StelSphereGeometry.hpp
+	core/StelSphereGeometry.cpp
 	core/StelUtils.cpp
 	core/StelUtils.hpp)
-ADD_EXECUTABLE(testSphereGeometry ${tests_testSphereGeometry_SRCS})
-TARGET_LINK_LIBRARIES(testSphereGeometry ${extLinkerOption})
-ADD_TEST(test_testSphereGeometry ${EXECUTABLE_OUTPUT_PATH}/testSphereGeometry)
+ADD_EXECUTABLE(testStelSphereGeometry ${tests_testStelSphereGeometry_SRCS})
+TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOption})
+ADD_TEST(test_testStelSphereGeometry ${EXECUTABLE_OUTPUT_PATH}/testStelSphereGeometry)

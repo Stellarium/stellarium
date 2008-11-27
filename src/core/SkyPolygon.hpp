@@ -19,7 +19,7 @@
 #ifndef _SKYPOLYGON_HPP_
 #define _SKYPOLYGON_HPP_
 
-#include "SphereGeometry.hpp"
+#include "StelSphereGeometry.hpp"
 #include "MultiLevelJsonBase.hpp"
 
 #include <QTimeLine>
