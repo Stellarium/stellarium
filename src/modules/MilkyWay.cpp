@@ -18,7 +18,7 @@
  */
 
 #include "MilkyWay.hpp"
-#include "Fader.hpp"
+#include "StelFader.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
 #include "Navigator.hpp"

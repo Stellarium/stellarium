@@ -21,7 +21,7 @@
 #define _TELESCOPEMGR_HPP_
 
 #include "StelObjectModule.hpp"
-#include "Fader.hpp"
+#include "StelFader.hpp"
 #include "vecmath.h"
 #include "StelTextureTypes.hpp"
 #include "ProjectorType.hpp"

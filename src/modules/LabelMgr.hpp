@@ -21,7 +21,7 @@
 #define _SKYLABELMGR_HPP_
 
 
-#include "Fader.hpp"
+#include "StelFader.hpp"
 #include "StelModule.hpp"
 #include "StelObject.hpp"
 #include "StelObjectType.hpp"

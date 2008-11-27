@@ -22,7 +22,7 @@
 
 #include <vector>
 #include <map>
-#include "Fader.hpp"
+#include "StelFader.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
 #include "ProjectorType.hpp"
