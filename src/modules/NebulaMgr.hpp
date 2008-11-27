@@ -24,7 +24,7 @@
 #include <QString>
 #include <QStringList>
 #include "StelObjectType.hpp"
-#include "Fader.hpp"
+#include "StelFader.hpp"
 #include "TreeGrid.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"

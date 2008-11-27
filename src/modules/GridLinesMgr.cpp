@@ -28,7 +28,7 @@
 #include "Translator.hpp"
 #include "Projector.hpp"
 #include "LoadingBar.hpp"
-#include "Fader.hpp"
+#include "StelFader.hpp"
 #include "Planet.hpp"
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"

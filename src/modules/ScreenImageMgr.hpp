@@ -21,7 +21,7 @@
 #define _SCREENIMAGEMGR_HPP_
 
 
-#include "Fader.hpp"
+#include "StelFader.hpp"
 #include "StelModule.hpp"
 #include "StelTextureTypes.hpp"
 #include "vecmath.h"

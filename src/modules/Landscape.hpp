@@ -25,7 +25,7 @@
 #include "ToneReproducer.hpp"
 #include "Projector.hpp"
 #include "Navigator.hpp"
-#include "Fader.hpp"
+#include "StelFader.hpp"
 #include "StelUtils.hpp"
 #include "StelTextureTypes.hpp"
 #include "Location.hpp"

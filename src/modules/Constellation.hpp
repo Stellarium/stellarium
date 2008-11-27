@@ -26,7 +26,7 @@
 
 #include "StelObject.hpp"
 #include "StelUtils.hpp"
-#include "Fader.hpp"
+#include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 
 class StarMgr;
