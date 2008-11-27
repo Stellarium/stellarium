@@ -43,7 +43,7 @@ class QTime;
 class StelLocationMgr;
 class SkyImageMgr;
 class QtScriptMgr;
-class DownloadMgr;
+class StelDownloadMgr;
 class StelAudioMgr;
 
 //! @class StelApp 
@@ -127,7 +127,7 @@ public:
 	QtScriptMgr& getScriptMgr() {return *scriptMgr;}
 	
 	//! Get the download manager
-	DownloadMgr& getDownloadMgr() {return *downloadMgr;}
+	StelDownloadMgr& getDownloadMgr() {return *downloadMgr;}
 	
 	//! Get the core of the program.
 	//! It is the one which provide the projection, navigation and tone converter.
@@ -362,7 +362,7 @@ private:
 	StelStyle* currentStelStyle;
 	
 	// Download manager that uses networkAccessManager
-	DownloadMgr* downloadMgr;
+	StelDownloadMgr* downloadMgr;
 	
 	float fps;
 	//! The minimum desired frame rate in frame per second.

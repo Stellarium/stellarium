@@ -39,7 +39,7 @@
 #include "StelIniParser.hpp"
 #include "StelProjector.hpp"
 #include "StelLocationMgr.hpp"
-#include "DownloadMgr.hpp"
+#include "StelDownloadMgr.hpp"
 
 #include "StelModuleMgr.hpp"
 #include "StelFontMgr.hpp"
@@ -283,7 +283,7 @@ void StelApp::init()
 	loadingBar = new StelLoadingBar(12., "logo24bitsbeta.png", PACKAGE_VERSION, 45, 320, 121);
 #endif // SVN_RELEASE
 	
-	downloadMgr = new DownloadMgr();
+	downloadMgr = new StelDownloadMgr();
 	
 	// Stel Object Data Base manager
 	stelObjectMgr = new StelObjectMgr();

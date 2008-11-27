@@ -45,7 +45,7 @@
 #include "NebulaMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "QtScriptMgr.hpp"
-#include "DownloadMgr.hpp"
+#include "StelDownloadMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>

@@ -32,7 +32,7 @@ class Ui_configurationDialogForm;
 class QSettings;
 class QDataStream;
 class QNetworkAccessManager;
-class DownloadMgr;
+class StelDownloadMgr;
 
 class ConfigurationDialog : public StelDialog
 {
@@ -58,7 +58,7 @@ protected:
 	Ui_configurationDialogForm* ui;
 	QSettings* starSettings;
 	QSettings* updatesData;
-	DownloadMgr* downloadMgr;
+	StelDownloadMgr* downloadMgr;
 	QString downloadName;
 	QString updatesFileName;
 	QStringList newCatalogs;
