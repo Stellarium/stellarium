@@ -75,8 +75,8 @@ SET(stellarium_lib_SRCS
 	core/StelTextureTypes.hpp
 	core/ToneReproducer.cpp
 	core/ToneReproducer.hpp
-	core/ViewportDistorter.cpp
-	core/ViewportDistorter.hpp
+	core/StelViewportDistorter.cpp
+	core/StelViewportDistorter.hpp
 	core/StelStyle.hpp
 	core/SkyImageMgr.cpp
 	core/SkyImageMgr.hpp
