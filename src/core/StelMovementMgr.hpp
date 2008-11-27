@@ -23,15 +23,15 @@
 #include "StelModule.hpp"
 #include "StelProjector.hpp"
 
-//! @class MovementMgr
+//! @class StelMovementMgr
 //! Manages the movement and zoomer operations.
-class MovementMgr : public StelModule
+class StelMovementMgr : public StelModule
 {
 	Q_OBJECT
 
 public:
-	MovementMgr(StelCore* core);
-	virtual ~MovementMgr();
+	StelMovementMgr(StelCore* core);
+	virtual ~StelMovementMgr();
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -61,7 +61,7 @@ public:
 	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::ReplaceSelection);
 	
 	///////////////////////////////////////////////////////////////////////////
-	// Methods specific to MovementMgr
+	// Methods specific to StelMovementMgr
 	
 	//! Increment/decrement smoothly the vision field and position.
 	void updateMotion(double deltaTime);

@@ -27,7 +27,7 @@
 #include "StelCore.hpp"
 #include "StelLocationMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "MovementMgr.hpp"
+#include "StelMovementMgr.hpp"
 
 #include <QSettings>
 #include <QStringList>
@@ -189,7 +189,7 @@ void StelNavigator::moveObserverToSelected(void)
 			moveObserverTo(loc);
 		}
 	}
-	MovementMgr* mmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
+	StelMovementMgr* mmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
 	Q_ASSERT(mmgr);
 	mmgr->setFlagTracking(false);
 }

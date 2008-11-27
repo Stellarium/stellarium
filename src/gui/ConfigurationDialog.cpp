@@ -30,7 +30,7 @@
 #include "StelProjector.hpp"
 #include "StelNavigator.hpp"
 #include "StelCore.hpp"
-#include "MovementMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "SkyDrawer.hpp"
 #include "StelGui.hpp"
@@ -85,7 +85,7 @@ void ConfigurationDialog::createDialogContent()
 {
 	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(Mat4d());
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
+	StelMovementMgr* mvmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
 	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
 	
 	ui->setupUi(dialog);
@@ -326,7 +326,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	Q_ASSERT(glmgr);
 	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
 	Q_ASSERT(gui);
-	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
+	StelMovementMgr* mvmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
 	Q_ASSERT(mvmgr);
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	Q_ASSERT(nav);

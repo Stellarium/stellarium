@@ -36,7 +36,7 @@
 #include "StelTextureMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StarMgr.hpp"
-#include "MovementMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 
 StelFont* Planet::planetNameFont = NULL;

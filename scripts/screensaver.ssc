@@ -70,9 +70,9 @@ while(1)
 	core.selectObjectByName(objName, true);
 	if (r == 1)
 	{
-		MovementMgr.autoZoomIn(6);
+		StelMovementMgr.autoZoomIn(6);
 		core.wait(1);
-		MovementMgr.zoomTo(40,8);
+		StelMovementMgr.zoomTo(40,8);
 		core.wait(1);
 		ConstellationMgr.setFlagArt(true);
 		core.wait(4);
@@ -81,9 +81,9 @@ while(1)
 	}
 	else
 	{
-		MovementMgr.autoZoomIn(6);
+		StelMovementMgr.autoZoomIn(6);
 		core.wait(10);
-		MovementMgr.zoomTo(60,8);
+		StelMovementMgr.zoomTo(60,8);
 		core.wait(10);
 	}
 }

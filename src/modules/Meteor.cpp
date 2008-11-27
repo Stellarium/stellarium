@@ -33,7 +33,7 @@ which are generally not at the apex of the Earth's way, such as the Perseids sho
 #include "StelCore.hpp"
 #include "StelNavigator.hpp"
 #include "ToneReproducer.hpp"
-#include "MovementMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 
 Meteor::Meteor(const StelCore* core, double v)

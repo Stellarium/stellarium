@@ -45,7 +45,7 @@
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
-#include "MovementMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "QtScriptMgr.hpp"
 #include "QtJsonParser.hpp"

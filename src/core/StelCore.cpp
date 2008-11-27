@@ -26,7 +26,7 @@
 #include "StelUtils.hpp"
 #include "GeodesicGrid.hpp"
 #include "SolarSystem.hpp"
-#include "MovementMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "Planet.hpp"
 #include "StelPainter.hpp"
@@ -41,7 +41,7 @@
 StelCore::StelCore() : geodesicGrid(NULL), currentProjectionType(ProjectionStereographic)
 {
 	toneConverter = new ToneReproducer();
-	movementMgr = new MovementMgr(this);
+	movementMgr = new StelMovementMgr(this);
 	movementMgr->init();
 	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);	
 	
@@ -170,7 +170,7 @@ const StelProjectorP StelCore::getProjection2d() const
 	return prj;
 }
 
-// Get an instance of projector using the current display parameters from Navigation, MovementMgr
+// Get an instance of projector using the current display parameters from Navigation, StelMovementMgr
 // and using the given modelview matrix
 const StelProjectorP StelCore::getProjection(const Mat4d& modelViewMat, ProjectionType projType) const
 {
@@ -210,7 +210,7 @@ const StelProjectorP StelCore::getProjection(const Mat4d& modelViewMat, Projecti
 	return prj;
 }
 		
-// Get an instance of projector using the current display parameters from Navigation, MovementMgr
+// Get an instance of projector using the current display parameters from Navigation, StelMovementMgr
 const StelProjectorP StelCore::getProjection(FrameType frameType, ProjectionType projType) const
 {
 	
