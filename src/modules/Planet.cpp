@@ -25,7 +25,7 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "SkyDrawer.hpp"
+#include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
 #include "StelTexture.hpp"
 #include "Planet.hpp"

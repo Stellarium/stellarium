@@ -32,7 +32,7 @@
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "SkyDrawer.hpp"
+#include "StelSkyDrawer.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelLocation.hpp"
@@ -314,7 +314,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	Q_ASSERT(ssmgr);
 	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
 	Q_ASSERT(mmgr);
-	SkyDrawer* skyd = StelApp::getInstance().getCore()->getSkyDrawer();
+	StelSkyDrawer* skyd = StelApp::getInstance().getCore()->getSkyDrawer();
 	Q_ASSERT(skyd);
 	ConstellationMgr* cmgr = (ConstellationMgr*)GETSTELMODULE("ConstellationMgr");
 	Q_ASSERT(cmgr);

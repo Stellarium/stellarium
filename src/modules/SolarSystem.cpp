@@ -38,7 +38,7 @@
 #include "Planet.hpp"
 #include "StelNavigator.hpp"
 #include "StelFont.hpp"
-#include "SkyDrawer.hpp"
+#include "StelSkyDrawer.hpp"
 #include "StelStyle.hpp"
 #include "StelUtils.hpp"
 
