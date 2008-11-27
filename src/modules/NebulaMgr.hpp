@@ -87,7 +87,7 @@ public:
 	//! to search for nebulae.
 	//! @param limitFov the field of view around the position v in which to
 	//! search for nebulae.
-	//! @param nav the Navigator object.
+	//! @param nav the StelNavigator object.
 	//! @param prj the StelProjector object.
 	//! @return an stl vector containing the nebulae located inside the
 	//! limitFov circle around position v.

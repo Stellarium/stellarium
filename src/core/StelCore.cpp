@@ -17,7 +17,7 @@
  */
 
 #include "StelCore.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
 #include "ToneReproducer.hpp"
@@ -88,8 +88,8 @@ void StelCore::init()
 	
 	QSettings* conf = StelApp::getInstance().getSettings();
 	
-	// Navigator
-	navigation = new Navigator();
+	// StelNavigator
+	navigation = new StelNavigator();
 	navigation->init();
 	
 	QString tmpstr = conf->value("projection/type", "stereographic").toString();

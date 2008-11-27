@@ -20,7 +20,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelProjector.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelMainGraphicsView.hpp"
@@ -417,7 +417,7 @@ void BottomStelBar::updateText()
 {
 	bool updatePos = false;
 	StelCore* core = StelApp::getInstance().getCore();
-	double jd = core->getNavigation()->getJDay();
+	double jd = core->getNavigator()->getJDay();
 	
 	QString newDate = flagShowTime ? StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd) +"   "
 			+StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd) : " ";
@@ -427,10 +427,10 @@ void BottomStelBar::updateText()
 		datetime->setText(newDate);
 	}
 	
-	QString newLocation = flagShowLocation ? q_(core->getNavigation()->getCurrentLocation().planetName) +", "
-			+core->getNavigation()->getCurrentLocation().name + ", "
+	QString newLocation = flagShowLocation ? q_(core->getNavigator()->getCurrentLocation().planetName) +", "
+			+core->getNavigator()->getCurrentLocation().name + ", "
 			// xgettext:no-c-format
-			+q_("%1m").arg(core->getNavigation()->getCurrentLocation().altitude) : " ";
+			+q_("%1m").arg(core->getNavigator()->getCurrentLocation().altitude) : " ";
 	if (location->text()!=newLocation)
 	{
 		updatePos = true;

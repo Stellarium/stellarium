@@ -18,7 +18,7 @@
  */
 
 #include "StelApp.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "StelUtils.hpp"
 #include "SolarSystem.hpp"
 #include "Observer.hpp"
@@ -36,11 +36,11 @@
 
 // Init statics transfo matrices
 // See vsop87.doc:
-const Mat4d Navigator::matJ2000ToVsop87(Mat4d::xrotation(-23.4392803055555555556*(M_PI/180)) * Mat4d::zrotation(0.0000275*(M_PI/180)));
-const Mat4d Navigator::matVsop87ToJ2000(matJ2000ToVsop87.transpose());
+const Mat4d StelNavigator::matJ2000ToVsop87(Mat4d::xrotation(-23.4392803055555555556*(M_PI/180)) * Mat4d::zrotation(0.0000275*(M_PI/180)));
+const Mat4d StelNavigator::matVsop87ToJ2000(matJ2000ToVsop87.transpose());
 
 ////////////////////////////////////////////////////////////////////////////////
-Navigator::Navigator() : timeSpeed(JD_SECOND), JDay(0.), position(NULL)
+StelNavigator::StelNavigator() : timeSpeed(JD_SECOND), JDay(0.), position(NULL)
 {
 	altAzVisionDirection=Vec3d(1.,0.,0.);
 	earthEquVisionDirection=Vec3d(1.,0.,0.);
@@ -48,18 +48,18 @@ Navigator::Navigator() : timeSpeed(JD_SECOND), JDay(0.), position(NULL)
 	viewingMode = ViewHorizon;  // default
 }
 
-Navigator::~Navigator()
+StelNavigator::~StelNavigator()
 {
 	delete position;
 	position=NULL;
 }
 
-const Planet *Navigator::getHomePlanet(void) const
+const Planet *StelNavigator::getHomePlanet(void) const
 {
 	return position->getHomePlanet();
 }
 
-void Navigator::init()
+void StelNavigator::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -74,11 +74,11 @@ void Navigator::init()
 	updateModelViewMat();
 	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
 	if (tmpstr=="equator")
-		setViewingMode(Navigator::ViewEquator);
+		setViewingMode(StelNavigator::ViewEquator);
 	else
 	{
 		if (tmpstr=="horizon")
-			setViewingMode(Navigator::ViewHorizon);
+			setViewingMode(StelNavigator::ViewHorizon);
 		else
 		{
 			qDebug() << "ERROR : Unknown viewing mode type : " << tmpstr;
@@ -116,7 +116,7 @@ void Navigator::init()
 }
 
 // Set the location to use by default at startup
-void Navigator::setDefaultLocationID(const QString& id)
+void StelNavigator::setDefaultLocationID(const QString& id)
 {
 	defaultLocationID = id;
 	StelApp::getInstance().getLocationMgr().locationForSmallString(id);
@@ -126,12 +126,12 @@ void Navigator::setDefaultLocationID(const QString& id)
 }
 	
 //! Set stellarium time to current real world time
-void Navigator::setTimeNow()
+void StelNavigator::setTimeNow()
 {
 	setJDay(StelUtils::getJDFromSystem());
 }
 
-void Navigator::setTodayTime(const QTime& target)
+void StelNavigator::setTodayTime(const QTime& target)
 {
 	QDateTime dt = QDateTime::currentDateTime();
 	if (target.isValid())
@@ -142,13 +142,13 @@ void Navigator::setTodayTime(const QTime& target)
 	}
 	else
 	{
-		qWarning() << "WARNING - time passed to Navigator::setTodayTime is not valid. The system time will be used." << target;
+		qWarning() << "WARNING - time passed to StelNavigator::setTodayTime is not valid. The system time will be used." << target;
 		setTimeNow();
 	}
 }
 
 //! Get whether the current stellarium time is the real world time
-bool Navigator::getIsTimeNow(void) const
+bool StelNavigator::getIsTimeNow(void) const
 {
 	// cache last time to prevent to much slow system call
 	static double lastJD = getJDay();
@@ -161,12 +161,12 @@ bool Navigator::getIsTimeNow(void) const
 	return previousResult;
 }
 
-void Navigator::addSolarDays(double d)
+void StelNavigator::addSolarDays(double d)
 {
 	setJDay(getJDay() + d);
 }
 
-void Navigator::addSiderealDays(double d)
+void StelNavigator::addSiderealDays(double d)
 {
 	const Planet* home = position->getHomePlanet();
 	if (home->getEnglishName() != "Solar System Observer")
@@ -174,7 +174,7 @@ void Navigator::addSiderealDays(double d)
 	setJDay(getJDay() + d);
 }
 
-void Navigator::moveObserverToSelected(void)
+void StelNavigator::moveObserverToSelected(void)
 {
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
 	{
@@ -195,13 +195,13 @@ void Navigator::moveObserverToSelected(void)
 }
 
 // Get the informations on the current location
-const StelLocation& Navigator::getCurrentLocation() const
+const StelLocation& StelNavigator::getCurrentLocation() const
 {
 	return position->getCurrentLocation();
 }
 
 // Smoothly move the observer to the given location
-void Navigator::moveObserverTo(const StelLocation& target, double duration, double durationIfPlanetChange)
+void StelNavigator::moveObserverTo(const StelLocation& target, double duration, double durationIfPlanetChange)
 {
 	double d = (getCurrentLocation().planetName==target.planetName) ? duration : durationIfPlanetChange;
 	if (d>0.)
@@ -218,12 +218,12 @@ void Navigator::moveObserverTo(const StelLocation& target, double duration, doub
 }
 
 // Get the sideral time shifted by the observer longitude
-double Navigator::getLocalSideralTime() const
+double StelNavigator::getLocalSideralTime() const
 {
 	return (position->getHomePlanet()->getSiderealTime(JDay)+position->getCurrentLocation().longitude)*M_PI/180.;
 }
 
-void Navigator::setInitViewDirectionToCurrent(void)
+void StelNavigator::setInitViewDirectionToCurrent(void)
 {
 	initViewPos = altAzVisionDirection;
 	QString dirStr = QString("%1,%2,%3").arg(altAzVisionDirection[0]).arg(altAzVisionDirection[1]).arg(altAzVisionDirection[2]);
@@ -231,7 +231,7 @@ void Navigator::setInitViewDirectionToCurrent(void)
 }
 
 //! Increase the time speed
-void Navigator::increaseTimeSpeed()
+void StelNavigator::increaseTimeSpeed()
 {
 	double s = getTimeRate();
 	if (s>=JD_SECOND) s*=10.;
@@ -242,7 +242,7 @@ void Navigator::increaseTimeSpeed()
 }
 
 //! Decrease the time speed
-void Navigator::decreaseTimeSpeed()
+void StelNavigator::decreaseTimeSpeed()
 {
 	double s = getTimeRate();
 	if (s>JD_SECOND) s/=10.;
@@ -253,7 +253,7 @@ void Navigator::decreaseTimeSpeed()
 }
 	
 ////////////////////////////////////////////////////////////////////////////////
-void Navigator::setAltAzVisionDirection(const Vec3d& _pos)
+void StelNavigator::setAltAzVisionDirection(const Vec3d& _pos)
 {
 	altAzVisionDirection = _pos;
 	earthEquVisionDirection=altAzToEquinoxEqu(altAzVisionDirection);
@@ -262,7 +262,7 @@ void Navigator::setAltAzVisionDirection(const Vec3d& _pos)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Navigator::setEquinoxEquVisionDirection(const Vec3d& _pos)
+void StelNavigator::setEquinoxEquVisionDirection(const Vec3d& _pos)
 {
 	earthEquVisionDirection = _pos;
 	J2000EquVisionDirection = matEquinoxEquToJ2000*earthEquVisionDirection;
@@ -271,7 +271,7 @@ void Navigator::setEquinoxEquVisionDirection(const Vec3d& _pos)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Navigator::setJ2000EquVisionDirection(const Vec3d& _pos)
+void StelNavigator::setJ2000EquVisionDirection(const Vec3d& _pos)
 {
 	J2000EquVisionDirection = _pos;
 	earthEquVisionDirection = matJ2000ToEquinoxEqu*J2000EquVisionDirection;
@@ -281,7 +281,7 @@ void Navigator::setJ2000EquVisionDirection(const Vec3d& _pos)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Increment time
-void Navigator::updateTime(double deltaTime)
+void StelNavigator::updateTime(double deltaTime)
 {
 	JDay+=timeSpeed*deltaTime;
 
@@ -306,7 +306,7 @@ void Navigator::updateTime(double deltaTime)
 
 ////////////////////////////////////////////////////////////////////////////////
 // The non optimized (more clear version is available on the CVS : before date 25/07/2003)
-void Navigator::updateTransformMatrices(void)
+void StelNavigator::updateTransformMatrices(void)
 {
 	matAltAzToEquinoxEqu = position->getRotAltAzToEquatorial(JDay);
 	matEquinoxEquToAltAz = matAltAzToEquinoxEqu.transpose();
@@ -327,14 +327,14 @@ void Navigator::updateTransformMatrices(void)
 	                      Mat4d::translation(-position->getCenterVsop87Pos());
 }
 
-void Navigator::setStartupTimeMode(const QString& s)
+void StelNavigator::setStartupTimeMode(const QString& s)
 {
 	startupTimeMode = s;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Update the modelview matrices
-void Navigator::updateModelViewMat(void)
+void StelNavigator::updateModelViewMat(void)
 {
 	Vec3d f;
 
@@ -377,20 +377,20 @@ void Navigator::updateModelViewMat(void)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Return the observer heliocentric position
-Vec3d Navigator::getObserverHeliocentricEclipticPos(void) const
+Vec3d StelNavigator::getObserverHeliocentricEclipticPos(void) const
 {
 	static const Vec3d v(0.,0.,0.);
 	return matAltAzToHeliocentricEcliptic*v;
 }
 
-void Navigator::setPresetSkyTime(QDateTime dt)
+void StelNavigator::setPresetSkyTime(QDateTime dt)
 {
 	setPresetSkyTime(StelUtils::qDateTimeToJd(dt));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Set type of viewing mode (align with horizon or equatorial coordinates)
-void Navigator::setViewingMode(ViewingModeType viewMode)
+void StelNavigator::setViewingMode(ViewingModeType viewMode)
 {
 	viewingMode = viewMode;
 

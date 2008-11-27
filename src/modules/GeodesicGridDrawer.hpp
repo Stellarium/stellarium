@@ -24,7 +24,7 @@
 #include "StelModule.hpp"
 
 class StelProjector;
-class Navigator;
+class StelNavigator;
 class ToneReproductor;
 class StelFont;
 

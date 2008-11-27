@@ -34,7 +34,7 @@
 #include "StarMgr.hpp"
 #include "StelObject.hpp"
 #include "StelTexture.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "StelUtils.hpp"
 #include "ToneReproducer.hpp"
 #include "Translator.hpp"
@@ -208,7 +208,7 @@ void StarMgr::init()
 }
 
 
-void StarMgr::drawPointer(const StelProjectorP& prj, const Navigator * nav)
+void StarMgr::drawPointer(const StelProjectorP& prj, const StelNavigator * nav)
 {
 	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Star");
 	if (!newSelected.empty())
@@ -540,7 +540,7 @@ int StarMgr::getMaxSearchLevel() const
 // Draw all the stars
 void StarMgr::draw(StelCore* core)
 {
-	Navigator* nav = core->getNavigation();
+	StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	SkyDrawer* skyDrawer = core->getSkyDrawer();
 	

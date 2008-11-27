@@ -22,7 +22,7 @@
 #include <QSettings>
 
 #include "StelProjector.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "MeteorMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -92,7 +92,7 @@ void MeteorMgr::update(double deltaTime)
 		return;
 	
 	deltaTime*=1000;
-	Navigator * nav = StelApp::getInstance().getCore()->getNavigation();
+	StelNavigator * nav = StelApp::getInstance().getCore()->getNavigator();
 
 	// step through and update all active meteors
 	int n =0;

@@ -27,7 +27,7 @@
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "StelProjector.hpp"
 #include "StelModule.hpp"
 #include "StelObject.hpp"
@@ -99,7 +99,7 @@ bool SkyLabel::draw(StelCore* core, const StelPainter& sPainter)
 	if(labelFader.getInterstate() <= 0.0)
 		return false;
 
-	Vec3d objectPos = labelObject->getJ2000EquatorialPos(core->getNavigation());
+	Vec3d objectPos = labelObject->getJ2000EquatorialPos(core->getNavigator());
 	Vec3d labelXY;
 	sPainter.getStelProjector()->project(objectPos,labelXY);
 

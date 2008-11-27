@@ -115,14 +115,14 @@ public:
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Planet.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
-	virtual double getCloseViewFov(const Navigator * nav) const;
-	virtual double getSatellitesFov(const Navigator * nav) const;
-	virtual double getParentSatellitesFov(const Navigator * nav) const;
-	virtual float getVMagnitude(const Navigator * nav) const;
-	virtual float getSelectPriority(const Navigator *nav) const;
+	virtual double getCloseViewFov(const StelNavigator * nav) const;
+	virtual double getSatellitesFov(const StelNavigator * nav) const;
+	virtual double getParentSatellitesFov(const StelNavigator * nav) const;
+	virtual float getVMagnitude(const StelNavigator * nav) const;
+	virtual float getSelectPriority(const StelNavigator *nav) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual QString getType(void) const {return "Planet";}
-	virtual Vec3d getJ2000EquatorialPos(const Navigator *nav) const;
+	virtual Vec3d getJ2000EquatorialPos(const StelNavigator *nav) const;
 	virtual QString getEnglishName(void) const {return englishName;}
 	virtual QString getNameI18n(void) const {return nameI18;}
 	virtual double getAngularSize(const StelCore* core) const;
@@ -206,7 +206,7 @@ public:
 	
 	///// Trail related code
 	// Should move to a TrailPath class which works on a StelObject, not on a Planet
-	void updateTrail(const Navigator* nav);
+	void updateTrail(const StelNavigator* nav);
 	void drawTrail(const StelCore* core);
 	//! Start/stop accumulating new trail data (clear old data)
 	void startTrail(bool b);
@@ -250,7 +250,7 @@ protected:
 	void drawEarthShadow(StelCore* core); 
 	
 	// Return the information string "ready to print" :)
-	QString getSkyLabel(const Navigator * nav) const;
+	QString getSkyLabel(const StelNavigator * nav) const;
 	
 	// Draw the 3d model. Call the proper functions if there are rings etc..
 	void draw3dModel(StelCore* core, const Mat4d& mat, float screenSz);

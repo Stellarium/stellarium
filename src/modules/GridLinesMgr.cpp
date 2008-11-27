@@ -24,7 +24,7 @@
 #include "GridLinesMgr.hpp"
 #include "MovementMgr.hpp"
 #include "StelApp.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "Translator.hpp"
 #include "StelProjector.hpp"
 #include "StelLoadingBar.hpp"

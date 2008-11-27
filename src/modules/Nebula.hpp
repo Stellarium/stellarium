@@ -50,10 +50,10 @@ public:
 	//! @return a QString containing an HMTL encoded description of the Nebula.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual QString getType(void) const {return "Nebula";}
-	virtual Vec3d getJ2000EquatorialPos(const Navigator *nav) const {return XYZ;}
-	virtual double getCloseViewFov(const Navigator * nav = NULL) const;
-	virtual float getVMagnitude(const Navigator * nav = NULL) const {return mag;}
-	virtual float getSelectPriority(const Navigator *nav) const;
+	virtual Vec3d getJ2000EquatorialPos(const StelNavigator *nav) const {return XYZ;}
+	virtual double getCloseViewFov(const StelNavigator * nav = NULL) const;
+	virtual float getVMagnitude(const StelNavigator * nav = NULL) const {return mag;}
+	virtual float getSelectPriority(const StelNavigator *nav) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual QString getNameI18n(void) const {return nameI18;}
 	virtual QString getEnglishName(void) const {return englishName;}

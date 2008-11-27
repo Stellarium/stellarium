@@ -21,7 +21,7 @@
 #include "StelObjectMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "StelUtils.hpp"
 
 #include <QString>
@@ -229,7 +229,7 @@ void MovementMgr::handleMouseClicks(QMouseEvent* event)
 			{
 				if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
 				{
-					moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigation()),autoMoveDuration);
+					moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()),autoMoveDuration);
 					setFlagTracking(true);
 				}
 			}
@@ -393,7 +393,7 @@ void MovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 	if (!getFlagTracking())
 	{
 		setFlagTracking(true);
-		moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigation()), moveDuration, false, 1);
+		moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()), moveDuration, false, 1);
 		manualMoveDuration = moveDuration;
 	}
 	else
@@ -410,13 +410,13 @@ void MovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 	}
 	else
 	{
-		float satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getSatellitesFov(core->getNavigation());
+		float satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getSatellitesFov(core->getNavigator());
 
 		if (satfov>0.0 && currentFov*0.9>satfov)
 			zoomTo(satfov, moveDuration);
 		else
 		{
-			float closefov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getCloseViewFov(core->getNavigation());
+			float closefov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getCloseViewFov(core->getNavigator());
 			if (currentFov>closefov)
 				zoomTo(closefov, moveDuration);
 		}
@@ -427,13 +427,13 @@ void MovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 // Unzoom and go to the init position
 void MovementMgr::autoZoomOut(float moveDuration, bool full)
 {
-	Navigator* nav = core->getNavigation();
+	StelNavigator* nav = core->getNavigator();
 	
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected() && !full)
 	{
 		// If the selected object has satellites, unzoom to satellites view
 		// unless specified otherwise
-		float satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getSatellitesFov(core->getNavigation());
+		float satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getSatellitesFov(core->getNavigator());
 
 		if (satfov>0.0 && currentFov<=satfov*0.9)
 		{
@@ -443,7 +443,7 @@ void MovementMgr::autoZoomOut(float moveDuration, bool full)
 
 		// If the selected object is part of a Planet subsystem (other than sun),
 		// unzoom to subsystem view
-		satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getParentSatellitesFov((core->getNavigation()));
+		satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getParentSatellitesFov((core->getNavigator()));
 		if (satfov>0.0 && currentFov<=satfov*0.9)
 		{
 			zoomTo(satfov, moveDuration);
@@ -467,7 +467,7 @@ void MovementMgr::setFlagTracking(bool b)
 	}
 	else
 	{
-		moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigation()), getAutoMoveDuration());
+		moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()), getAutoMoveDuration());
 		flagTracking=true;
 	}
 }
@@ -477,7 +477,7 @@ void MovementMgr::setFlagTracking(bool b)
 // Move to the given equatorial position
 void MovementMgr::moveTo(const Vec3d& _aim, float moveDuration, bool _localPos, int zooming)
 {
-	Navigator* nav = core->getNavigation();
+	StelNavigator* nav = core->getNavigator();
 	zoomingMode = zooming;
 	move.aim=_aim;
 	move.aim.normalize();
@@ -501,7 +501,7 @@ void MovementMgr::moveTo(const Vec3d& _aim, float moveDuration, bool _localPos, 
 ////////////////////////////////////////////////////////////////////////////////
 void MovementMgr::updateVisionVector(double deltaTime)
 {
-	Navigator* nav = core->getNavigation();
+	StelNavigator* nav = core->getNavigator();
 	if (flagAutoMove)
 	{
 		double ra_aim, de_aim, ra_start, de_start, ra_now, de_now;
@@ -509,7 +509,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 		if( zoomingMode == 1 && StelApp::getInstance().getStelObjectMgr().getWasSelected())
 		{
 			// if zooming in, object may be moving so be sure to zoom to latest position
-			move.aim = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigation());
+			move.aim = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator());
 			move.aim.normalize();
 			move.aim*=2.;
 		}
@@ -601,7 +601,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 	{
 		if (flagTracking && StelApp::getInstance().getStelObjectMgr().getWasSelected()) // Equatorial vision vector locked on selected object
 		{
-			nav->setEquinoxEquVisionDirection(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigation()));
+			nav->setEquinoxEquVisionDirection(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()));
 		}
 		else
 		{
@@ -623,10 +623,10 @@ void MovementMgr::updateVisionVector(double deltaTime)
 ////////////////////////////////////////////////////////////////////////////////
 void MovementMgr::panView(double deltaAz, double deltaAlt)
 {
-	Navigator* nav = core->getNavigation();
+	StelNavigator* nav = core->getNavigator();
 	double azVision, altVision;
 
-	if( nav->getViewingMode() == Navigator::ViewEquator) StelUtils::rectToSphe(&azVision,&altVision,nav->getEquinoxEquVisionDirection());
+	if( nav->getViewingMode() == StelNavigator::ViewEquator) StelUtils::rectToSphe(&azVision,&altVision,nav->getEquinoxEquVisionDirection());
 	else StelUtils::rectToSphe(&azVision,&altVision,nav->getAltAzVisionDirection());
 
 	// if we are moving in the Azimuthal angle (left/right)
@@ -642,7 +642,7 @@ void MovementMgr::panView(double deltaAz, double deltaAlt)
 	if (deltaAz || deltaAlt)
 	{
 		setFlagTracking(false);
-		if( nav->getViewingMode() == Navigator::ViewEquator)
+		if( nav->getViewingMode() == StelNavigator::ViewEquator)
 		{
 			Vec3d tmp;
 			StelUtils::spheToRect(azVision, altVision, tmp);
@@ -662,11 +662,11 @@ void MovementMgr::panView(double deltaAz, double deltaAlt)
 //! Make the first screen position correspond to the second (useful for mouse dragging)
 void MovementMgr::dragView(int x1, int y1, int x2, int y2)
 {
-	Navigator* nav = core->getNavigation();
+	StelNavigator* nav = core->getNavigator();
 	
 	Vec3d tempvec1, tempvec2;
 	double az1, alt1, az2, alt2;
-	const StelProjectorP prj = nav->getViewingMode()==Navigator::ViewHorizon ? core->getProjection(StelCore::FrameAltAz) :
+	const StelProjectorP prj = nav->getViewingMode()==StelNavigator::ViewHorizon ? core->getProjection(StelCore::FrameAltAz) :
 		core->getProjection(StelCore::FrameEquinoxEqu);
 		
 //johannes: StelApp already gives appropriate x/y coordinates
