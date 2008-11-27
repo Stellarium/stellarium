@@ -99,9 +99,9 @@ void StelTextureMgr::setDefaultParams()
 /*************************************************************************
  Internal
 *************************************************************************/
-STextureSP StelTextureMgr::initTex()
+StelTextureSP StelTextureMgr::initTex()
 {
-	STextureSP tex(new STexture());
+	StelTextureSP tex(new StelTexture());
 	// Set parameters than can be set for this texture
 	tex->minFilter = ((mipmapsMode==true) ? GL_LINEAR_MIPMAP_NEAREST : minFilter);
 	tex->magFilter = magFilter;
@@ -114,12 +114,12 @@ STextureSP StelTextureMgr::initTex()
 /*************************************************************************
  Load an image from a file and create a new texture from it.
 *************************************************************************/
-STextureSP StelTextureMgr::createTexture(const QString& afilename)
+StelTextureSP StelTextureMgr::createTexture(const QString& afilename)
 {
 	if (afilename.isEmpty())
-		return STextureSP();
+		return StelTextureSP();
 	
-	STextureSP tex = initTex();
+	StelTextureSP tex = initTex();
 	try
 	{
 		tex->fullPath = StelApp::getInstance().getFileMgr().findFile(afilename);
@@ -134,7 +134,7 @@ STextureSP StelTextureMgr::createTexture(const QString& afilename)
 		{
 			qWarning() << "WARNING : Can't find texture file " << afilename << ": " << er.what() << endl;
 			tex->errorOccured = true;
-			return STextureSP();
+			return StelTextureSP();
 		}
 	}
 
@@ -151,7 +151,7 @@ STextureSP StelTextureMgr::createTexture(const QString& afilename)
 	if (tex->imageLoad() && tex->glLoad())
 		return tex;
 	else
-		return STextureSP();
+		return StelTextureSP();
 }
 
 
@@ -159,12 +159,12 @@ STextureSP StelTextureMgr::createTexture(const QString& afilename)
 /*************************************************************************
  Load an image from a file and create a new texture from it in a new thread. 
 *************************************************************************/
-STextureSP StelTextureMgr::createTextureThread(const QString& url, const QString& fileExtension, bool lazyLoading)
+StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const QString& fileExtension, bool lazyLoading)
 {	
 	if (url.isEmpty())
-		return STextureSP();
+		return StelTextureSP();
 	
-	STextureSP tex = initTex();
+	StelTextureSP tex = initTex();
 	if (!url.startsWith("http://"))
 	{
 		// Assume a local file
@@ -182,7 +182,7 @@ STextureSP StelTextureMgr::createTextureThread(const QString& url, const QString
 			{
 				qWarning() << "WARNING : Can't find texture file " << url << ": " << er.what() << endl;
 				tex->errorOccured = true;
-				return STextureSP();
+				return StelTextureSP();
 			}
 		}
 		tex->downloaded = true;
@@ -208,7 +208,7 @@ STextureSP StelTextureMgr::createTextureThread(const QString& url, const QString
  Adapt the scaling for the texture. Return true if there was no errors
  This method is re-entrant
 *************************************************************************/
-bool StelTextureMgr::reScale(STexture* tex)
+bool StelTextureMgr::reScale(StelTexture* tex)
 {
 	const unsigned int nbPix = tex->width*tex->height;
 	const int bitpix = tex->internalFormat*8;
@@ -217,7 +217,7 @@ bool StelTextureMgr::reScale(STexture* tex)
 	{
 		switch (tex->dynamicRangeMode)
 		{
-			case (STextureTypes::Linear):
+			case (StelTextureTypes::Linear):
 			{
 				if (tex->internalFormat==1)
 				{
@@ -240,7 +240,7 @@ bool StelTextureMgr::reScale(STexture* tex)
 				qWarning() << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath;
 				return false;
 			}
-			case (STextureTypes::MinmaxQuantile):
+			case (StelTextureTypes::MinmaxQuantile):
 			{
 				// Compute the image histogram
 				int* histo = (int*)calloc(sizeof(int), 1<<bitpix); 
@@ -347,7 +347,7 @@ bool StelTextureMgr::reScale(STexture* tex)
 /*************************************************************************
   Load the image in memory by calling the associated ImageLoader
 *************************************************************************/
-bool StelTextureMgr::loadImage(STexture* tex)
+bool StelTextureMgr::loadImage(StelTexture* tex)
 {
 	if (tex->fileExtension.isEmpty())
 		tex->fileExtension = QFileInfo(tex->fullPath).suffix();

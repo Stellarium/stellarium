@@ -23,7 +23,7 @@
 #include <QString>
 #include "StelObject.hpp"
 #include "Translator.hpp"
-#include "STextureTypes.hpp"
+#include "StelTextureTypes.hpp"
 
 class SFont;
 class StelPainter;
@@ -102,7 +102,7 @@ private:
 	Vec3d XY;                       // Store temporary 2D position
 	NebulaType nType;
 
-	static STextureSP texCircle;   // The symbolic circle texture
+	static StelTextureSP texCircle;   // The symbolic circle texture
 	static SFont* nebulaFont;      // Font used for names printing
 	static float hintsBrightness;
 

@@ -23,7 +23,7 @@
 #include "GLee.h"
 #include "fixx11h.h"
 #include "vecmath.h"
-#include "STextureTypes.hpp"
+#include "StelTextureTypes.hpp"
 
 #include <QObject>
 #include <QImage>
@@ -32,9 +32,9 @@ class QMutex;
 class QSemaphore;
 class QFile;
 
-//! @class STexture 
+//! @class StelTexture 
 //! Base texture class. For creating an instance, use StelTextureMgr::createTexture() and StelTextureMgr::createTextureThread()
-class STexture : public QObject
+class StelTexture : public QObject
 {
 	Q_OBJECT;
 	
@@ -43,7 +43,7 @@ class STexture : public QObject
 
 public:
 	//! Destructor
-	virtual ~STexture();
+	virtual ~StelTexture();
 	
 	//! Bind the texture so that it can be used for openGL drawing (calls glBindTexture).
 	//! If the texture is lazyly loaded, this starts the loading and return false immediately.
@@ -90,7 +90,7 @@ private slots:
 	
 private:
 	//! Private constructor
-	STexture();
+	StelTexture();
 	
 	//! Load the texture already in the RAM to the openGL memory
 	//! This function uses openGL routines and must be called in the main thread
@@ -107,7 +107,7 @@ private:
 	void reportError(const QString& errorMessage);
 	
 	//! Define the range mode used to rescale the texture when loading
-	STextureTypes::DynamicRangeMode dynamicRangeMode;
+	StelTextureTypes::DynamicRangeMode dynamicRangeMode;
 	
 	//! Used to download remote files if needed
 	class QNetworkReply* httpReply;

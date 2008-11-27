@@ -23,7 +23,7 @@
 
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
-#include "STexture.hpp"
+#include "StelTexture.hpp"
 #include "SFont.hpp"
 #include "Navigator.hpp"
 #include "StelUtils.hpp"
@@ -36,7 +36,7 @@
 
 #include <QDebug>
 
-STextureSP Nebula::texCircle;
+StelTextureSP Nebula::texCircle;
 SFont* Nebula::nebulaFont = NULL;
 float Nebula::circleScale = 1.f;
 float Nebula::hintsBrightness = 0;

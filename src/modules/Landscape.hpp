@@ -27,7 +27,7 @@
 #include "Navigator.hpp"
 #include "Fader.hpp"
 #include "StelUtils.hpp"
-#include "STextureTypes.hpp"
+#include "StelTextureTypes.hpp"
 #include "Location.hpp"
 
 class QSettings;
@@ -94,7 +94,7 @@ protected:
 	
 	typedef struct
 	{
-		STextureSP tex;
+		StelTextureSP tex;
 		float texCoords[4];
 	} landscapeTexCoord;
 	
@@ -116,13 +116,13 @@ private:
 	void drawFog(StelCore* core) const;
 	void drawDecor(StelCore* core) const;
 	void drawGround(StelCore* core) const;
-	STextureSP* sideTexs;
+	StelTextureSP* sideTexs;
 	int nbSideTexs;
 	int nbSide;
 	landscapeTexCoord* sides;
-	STextureSP fogTex;
+	StelTextureSP fogTex;
 	landscapeTexCoord fogTexCoord;
-	STextureSP groundTex;
+	StelTextureSP groundTex;
 	landscapeTexCoord groundTexCoord;
 	int nbDecorRepeat;
 	float fogAltAngle;
@@ -146,7 +146,7 @@ public:
 	            double _texturefov, double angleRotateZ);
 private:
 
-	STextureSP mapTex;
+	StelTextureSP mapTex;
 	float texFov;
 };
 
@@ -162,7 +162,7 @@ public:
 	            const QString& _maptex, double angleRotateZ);
 private:
 
-	STextureSP mapTex;
+	StelTextureSP mapTex;
 };
 
 #endif // _LANDSCAPE_HPP_

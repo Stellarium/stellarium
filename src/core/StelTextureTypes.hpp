@@ -22,13 +22,13 @@
 
 #include <boost/shared_ptr.hpp>
 
-class STexture;
+class StelTexture;
 
-//! @typedef STextureSP
+//! @typedef StelTextureSP
 //! Use shared pointer to simplify memory managment
-typedef boost::shared_ptr<STexture> STextureSP;
+typedef boost::shared_ptr<StelTexture> StelTextureSP;
 
-namespace STextureTypes
+namespace StelTextureTypes
 {
 
 //! Supported dynamic range modes

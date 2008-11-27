@@ -28,7 +28,7 @@
 #include "TreeGrid.hpp"
 //#include "SimpleGrid.hpp"
 #include "StelObjectModule.hpp"
-#include "STextureTypes.hpp"
+#include "StelTextureTypes.hpp"
 
 class Nebula;
 class Translator;
@@ -199,7 +199,7 @@ private:
 	bool displayNoTexture;			// Define if nebulas without textures are to be displayed
 	
 	//! The selection pointer texture
-	STextureSP texPointer;
+	StelTextureSP texPointer;
 };
 
 #endif // _NEBULAMGR_HPP_

@@ -27,7 +27,7 @@
 #include <functional>
 
 #include "StelObjectModule.hpp"
-#include "STextureTypes.hpp"
+#include "StelTextureTypes.hpp"
 
 class Orbit;
 class LoadingBar;
@@ -281,7 +281,7 @@ private:
 	bool flagOrbits;
 	bool flagLightTravelTime;
 	
-	STextureSP texPointer;           // The selection pointer texture
+	StelTextureSP texPointer;           // The selection pointer texture
 	
 	bool flagShow;
 	

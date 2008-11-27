@@ -23,7 +23,7 @@
 
 #include "Fader.hpp"
 #include "StelModule.hpp"
-#include "STextureTypes.hpp"
+#include "StelTextureTypes.hpp"
 #include "vecmath.h"
 
 #include <QMap>
