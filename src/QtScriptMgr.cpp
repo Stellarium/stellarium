@@ -26,7 +26,7 @@
 #include "LandscapeMgr.hpp"
 #include "MeteorMgr.hpp"
 #include "MovementMgr.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "NebulaMgr.hpp"
 #include "SolarSystem.hpp"
 #include "StelApp.hpp"
@@ -135,19 +135,19 @@ StelMainScriptAPI::~StelMainScriptAPI()
 //! @param JD the Julian Date
 void StelMainScriptAPI::setJDay(double JD)
 {
-	StelApp::getInstance().getCore()->getNavigation()->setJDay(JD);
+	StelApp::getInstance().getCore()->getNavigator()->setJDay(JD);
 }
 
 //! Get the current date in Julian Day
 //! @return the Julian Date
 double StelMainScriptAPI::getJDay(void) const
 {
-	return StelApp::getInstance().getCore()->getNavigation()->getJDay();
+	return StelApp::getInstance().getCore()->getNavigator()->getJDay();
 }
 
 void StelMainScriptAPI::setDate(const QString& dt, const QString& spec)
 {
-	StelApp::getInstance().getCore()->getNavigation()->setJDay(jdFromDateString(dt, spec));
+	StelApp::getInstance().getCore()->getNavigator()->setJDay(jdFromDateString(dt, spec));
 }
 
 //! Set time speed in JDay/sec
@@ -155,14 +155,14 @@ void StelMainScriptAPI::setDate(const QString& dt, const QString& spec)
 void StelMainScriptAPI::setTimeRate(double ts)
 {
 	// 1 second = .00001157407407407407 JDay
-	StelApp::getInstance().getCore()->getNavigation()->setTimeRate(ts * 0.00001157407407407407);
+	StelApp::getInstance().getCore()->getNavigator()->setTimeRate(ts * 0.00001157407407407407);
 }
 
 //! Get time speed in JDay/sec
 //! @return time speed in JDay/sec
 double StelMainScriptAPI::getTimeRate(void) const
 {
-	return StelApp::getInstance().getCore()->getNavigation()->getTimeRate() / 0.00001157407407407407;
+	return StelApp::getInstance().getCore()->getNavigator()->getTimeRate() / 0.00001157407407407407;
 }
 
 // This class let's us sleep in milleseconds
@@ -183,7 +183,7 @@ void StelMainScriptAPI::wait(double t)
 void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 {
 	double JD = jdFromDateString(dt, spec);
-	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	Q_ASSERT(nav);
 	double timeSpeed = nav->getTimeRate();
 
@@ -206,7 +206,7 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 
 void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, double altitude, double duration, const QString& name, const QString& planet)
 {
-	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	Q_ASSERT(nav);
 	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
 	Q_ASSERT(ssmgr);
@@ -227,7 +227,7 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 
 void StelMainScriptAPI::setObserverLocation(const QString id, double duration)
 {
-	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	Q_ASSERT(nav);
 	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForSmallString(id);
 	// How best to test to see if the lookup of the name was a success?
@@ -362,10 +362,10 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 		if (nowRe.capturedTexts().at(1)=="now")
 			JD = StelUtils::getJDFromSystem();
 		else
-			JD = StelApp::getInstance().getCore()->getNavigation()->getJDay();
+			JD = StelApp::getInstance().getCore()->getNavigator()->getJDay();
 
 		if (nowRe.capturedTexts().at(8) == "sidereal")
-			dayLength = StelApp::getInstance().getCore()->getNavigation()->getHomePlanet()->getSiderealDay();
+			dayLength = StelApp::getInstance().getCore()->getNavigator()->getHomePlanet()->getSiderealDay();
 
 		QString unitString = nowRe.capturedTexts().at(6);
 		if (unitString == "seconds" || unitString == "second")
@@ -427,7 +427,7 @@ void StelMainScriptAPI::clear(const QString& state)
 	Q_ASSERT(nmgr);
 	GridLinesMgr* glmgr = (GridLinesMgr*)GETSTELMODULE("GridLinesMgr");
 	Q_ASSERT(glmgr);
-	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	Q_ASSERT(nav);
 
 	if (state.toLower() == "natural")

@@ -31,7 +31,7 @@
 #include <QMap>
 
 class StelProjector;
-class Navigator;
+class StelNavigator;
 class StelFont;
 class StelObject;
 class Telescope;
@@ -101,7 +101,7 @@ public slots:
 	
 private:
 	//! Draw a nice animated pointer around the object
-	void drawPointer(const StelProjectorP& prj, const Navigator* nav, const StelPainter& sPainter);
+	void drawPointer(const StelProjectorP& prj, const StelNavigator* nav, const StelPainter& sPainter);
 
 	//! Perform the communication with the telescope servers
 	void communicate(void);

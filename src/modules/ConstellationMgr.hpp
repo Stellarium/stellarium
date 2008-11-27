@@ -32,7 +32,7 @@ class ToneReproducer;
 class StarMgr;
 class Constellation;
 class StelProjector;
-class Navigator;
+class StelNavigator;
 class StelFont;
 class StelPainter;
 
@@ -190,7 +190,7 @@ private:
 	//! Draw the constellation lines.
 	void drawLines(const StelProjectorP& prj) const;
 	//! Draw the constellation art.
-	void drawArt(const StelProjectorP& prj, const Navigator * nav) const;
+	void drawArt(const StelProjectorP& prj, const StelNavigator * nav) const;
 	//! Draw the constellation name labels.
 	void drawNames(const StelPainter& sPainter) const;
 	//! Draw the constellation boundaries.

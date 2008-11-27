@@ -40,13 +40,13 @@ class StelLoadingBar;
 class Planet;
 class StelLocation;
 
-//! @class Navigator
+//! @class StelNavigator
 //! Manages a navigation context.  This includes:
 //! - date/time
 //! - viewing direction/fov
 //! - observer position
 //! - coordinate changes
-class Navigator : public QObject
+class StelNavigator : public QObject
 {
 	Q_OBJECT;
 	
@@ -62,8 +62,8 @@ public:
 	enum MountMode { MountAltAzimuthal, MountEquatorial };
 	
 	// Create and initialise to default a navigation context
-	Navigator();
-	~Navigator();
+	StelNavigator();
+	~StelNavigator();
 
 	void init();
 
@@ -71,9 +71,9 @@ public:
 	void updateTransformMatrices(void);
 	
 	//! Set current mount type
-	void setMountMode(MountMode m) {setViewingMode((m==MountAltAzimuthal) ? Navigator::ViewHorizon : Navigator::ViewEquator);}
+	void setMountMode(MountMode m) {setViewingMode((m==MountAltAzimuthal) ? StelNavigator::ViewHorizon : StelNavigator::ViewEquator);}
 	//! Get current mount type
-	MountMode getMountMode(void) {return ((getViewingMode()==Navigator::ViewHorizon) ? MountAltAzimuthal : MountEquatorial);}
+	MountMode getMountMode(void) {return ((getViewingMode()==StelNavigator::ViewHorizon) ? MountAltAzimuthal : MountEquatorial);}
 
 	//! Get vision direction
 	const Vec3d& getEquinoxEquVisionDirection(void) const {return earthEquVisionDirection;}

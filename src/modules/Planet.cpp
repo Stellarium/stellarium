@@ -29,7 +29,7 @@
 #include "SolarSystem.hpp"
 #include "StelTexture.hpp"
 #include "Planet.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 #include "StelProjector.hpp"
 #include "StelFont.hpp"
 #include "sideral_time.h"
@@ -112,7 +112,7 @@ Planet::~Planet()
 // Return the information string "ready to print" :)
 QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
-	const Navigator* nav = core->getNavigation();
+	const StelNavigator* nav = core->getNavigator();
 	
 	QString str;
 	QTextStream oss(&str);
@@ -150,7 +150,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 }
 
 //! Get sky label (sky translation)
-QString Planet::getSkyLabel(const Navigator * nav) const
+QString Planet::getSkyLabel(const StelNavigator * nav) const
 {
 	QString str;
 	QTextStream oss(&str);
@@ -164,7 +164,7 @@ QString Planet::getSkyLabel(const Navigator * nav) const
 	return str;
 }
 
-float Planet::getSelectPriority(const Navigator *nav) const
+float Planet::getSelectPriority(const StelNavigator *nav) const
 {
 	if( ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getFlagHints() )
 	{
@@ -183,12 +183,12 @@ Vec3f Planet::getInfoColor(void) const
 }
 
 
-double Planet::getCloseViewFov(const Navigator* nav) const
+double Planet::getCloseViewFov(const StelNavigator* nav) const
 {
 	return std::atan(radius*sphereScale*2.f/getEquinoxEquatorialPos(nav).length())*180./M_PI * 4;
 }
 
-double Planet::getSatellitesFov(const Navigator * nav) const
+double Planet::getSatellitesFov(const StelNavigator * nav) const
 {
 	// TODO: calculate from satellite orbits rather than hard code
 	if (englishName=="Jupiter") return std::atan(0.005f/getEquinoxEquatorialPos(nav).length())*180./M_PI * 4;
@@ -198,7 +198,7 @@ double Planet::getSatellitesFov(const Navigator * nav) const
 	return -1.;
 }
 
-double Planet::getParentSatellitesFov(const Navigator *nav) const 
+double Planet::getParentSatellitesFov(const StelNavigator *nav) const 
 {
 	if (parent && parent->parent) return parent->getSatellitesFov(nav);
 	return -1.0;
@@ -218,9 +218,9 @@ void Planet::setRotationElements(float _period, float _offset, double _epoch, fl
 	deltaOrbitJD = re.siderealPeriod/ORBIT_SEGMENTS;
 }
 
-Vec3d Planet::getJ2000EquatorialPos(const Navigator *nav) const 
+Vec3d Planet::getJ2000EquatorialPos(const StelNavigator *nav) const 
 {
-	return Navigator::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos() - nav->getObserverHeliocentricEclipticPos());
+	return StelNavigator::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos() - nav->getObserverHeliocentricEclipticPos());
 }
 
 // Compute the position in the parent Planet coordinate system
@@ -459,7 +459,7 @@ double Planet::getPhase(Vec3d obsPos) const
 	return (1.0 - acos(cos_chi)/M_PI) * cos_chi + sqrt(1.0 - cos_chi*cos_chi) / M_PI;
 }
 
-float Planet::getVMagnitude(const Navigator * nav) const 
+float Planet::getVMagnitude(const StelNavigator * nav) const 
 {
 	Vec3d obsPos = nav->getObserverHeliocentricEclipticPos();
 	const double sq = obsPos.lengthSquared();
@@ -518,13 +518,13 @@ double Planet::getAngularSize(const StelCore* core) const
 	double rad = radius;
 	if (rings)
 		rad = rings->getSize();
-	return std::atan2(rad*sphereScale,getJ2000EquatorialPos(core->getNavigation()).length()) * 180./M_PI;
+	return std::atan2(rad*sphereScale,getJ2000EquatorialPos(core->getNavigator()).length()) * 180./M_PI;
 }
 
 
 double Planet::getSpheroidAngularSize(const StelCore* core) const
 {
-	return std::atan2(radius*sphereScale,getJ2000EquatorialPos(core->getNavigation()).length()) * 180./M_PI;
+	return std::atan2(radius*sphereScale,getJ2000EquatorialPos(core->getNavigator()).length()) * 180./M_PI;
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
@@ -533,7 +533,7 @@ void Planet::draw(StelCore* core, float maxMagLabels)
 	if (hidden)
 		return;
 
-	Navigator* nav = core->getNavigation();
+	StelNavigator* nav = core->getNavigator();
 		
 	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
 	const Planet *p = parent;
@@ -598,14 +598,14 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 	// This is the main method drawing a planet 3d model
 	// Some work has to be done on this method to make the rendering nicer
 	
-	Navigator* nav = core->getNavigation();
+	StelNavigator* nav = core->getNavigator();
 	
 	if (screenSz>1.)
 	{
 		StelPainter* sPainter = new StelPainter(core->getProjection(mat * Mat4d::zrotation(M_PI/180*(axisRotation + 90.))));
 		
 		// Set the main source of light to be the sun
-		const Vec3d sunPos = core->getNavigation()->getHeliocentricEclipticModelViewMat()*Vec3d(0,0,0);
+		const Vec3d sunPos = core->getNavigator()->getHeliocentricEclipticModelViewMat()*Vec3d(0,0,0);
 		glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
 	
 		if (flagLighting)
@@ -679,7 +679,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI; // the total illuminated area in arcmin^2
 	
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	core->getSkyDrawer()->postDrawSky3dModel(screenPos[0],screenPos[1], surfArcMin2, getVMagnitude(core->getNavigation()), &sPainter, color);
+	core->getSkyDrawer()->postDrawSky3dModel(screenPos[0],screenPos[1], surfArcMin2, getVMagnitude(core->getNavigator()), &sPainter, color);
 }
 
 
@@ -801,7 +801,7 @@ void Planet::drawHints(const StelCore* core)
 	if (labelsFader.getInterstate()<=0.f)
 		return;
 
-	const Navigator* nav = core->getNavigation();
+	const StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 			
@@ -940,7 +940,7 @@ void Planet::drawTrail(const StelCore* core)
 {
 	if(!trailFader.getInterstate()) return;
 
-	const Navigator* nav = core->getNavigation();
+	const StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	
 	Vec3d onscreen1;
@@ -990,7 +990,7 @@ void Planet::drawTrail(const StelCore* core)
 }
 
 // update trail points as needed
-void Planet::updateTrail(const Navigator* nav)
+void Planet::updateTrail(const StelNavigator* nav)
 {
 	if(!trailOn) return;
 

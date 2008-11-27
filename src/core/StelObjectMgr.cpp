@@ -184,10 +184,10 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	QList<StelObjectP>::iterator iter = candidates.begin();
 	while (iter != candidates.end())
 	{
-		prj->project((*iter)->getJ2000EquatorialPos(core->getNavigation()), winpos);
+		prj->project((*iter)->getJ2000EquatorialPos(core->getNavigator()), winpos);
 		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
-		float priority =  (*iter)->getSelectPriority(core->getNavigation());
-		// qDebug() << (*iter).getShortInfoString(core->getNavigation()) << ": " << priority << " " << distance;
+		float priority =  (*iter)->getSelectPriority(core->getNavigator());
+		// qDebug() << (*iter).getShortInfoString(core->getNavigator()) << ": " << priority << " " << distance;
 		if (distance + priority < best_object_value)
 		{
 			best_object_value = distance + priority;

@@ -173,7 +173,7 @@ void LandscapeMgr::update(double deltaTime)
 	// Compute the atmosphere color and intensity
 	// Compute the sun position in local coordinate
 	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
-	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	
 	Vec3d sunPos = ssystem->getSun()->getAltAzPos(nav);
 	// Compute the moon position in local coordinate
@@ -243,7 +243,7 @@ void LandscapeMgr::draw(StelCore* core)
 	landscape->draw(core);
 
 	// Draw the cardinal points
-	cardinalsPoints->draw(core, StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().latitude);
+	cardinalsPoints->draw(core, StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().latitude);
 }
 
 void LandscapeMgr::init()
@@ -658,7 +658,7 @@ bool LandscapeMgr::doSetCurrentLandscapeID(const QString& id)
 	
 	if (getFlagLandscapeSetsLocation())
 	{
-		StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(landscape->getLocation());
+		StelApp::getInstance().getCore()->getNavigator()->moveObserverTo(landscape->getLocation());
 	}
 
 	emit(requestCompleteSetCurrentLandscapeID(true));

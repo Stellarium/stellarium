@@ -97,7 +97,7 @@ double TelescopeMgr::getCallOrder(StelModuleActionName actionName) const
 
 void TelescopeMgr::draw(StelCore* core)
 {
-	Navigator* nav = core->getNavigation();
+	StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 	
@@ -238,7 +238,7 @@ void TelescopeMgr::moveTelescopeToSelected(void)
 	if (!selectObject)  // should never happen
 		return;
 
-	Vec3d objectPos = selectObject->getJ2000EquatorialPos(StelApp::getInstance().getCore()->getNavigation());
+	Vec3d objectPos = selectObject->getJ2000EquatorialPos(StelApp::getInstance().getCore()->getNavigator());
 	int telNum = sender()->objectName().right(1).toInt();
 	telescopeGoto(telNum, objectPos);
 }
@@ -289,7 +289,7 @@ void TelescopeMgr::init()
 }
 
 
-void TelescopeMgr::drawPointer(const StelProjectorP& prj, const Navigator * nav, const StelPainter& sPainter)
+void TelescopeMgr::drawPointer(const StelProjectorP& prj, const StelNavigator * nav, const StelPainter& sPainter)
 {
 	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Telescope");
 	if (!newSelected.empty())

@@ -28,7 +28,7 @@
 #endif
 
 #include "StelObject.hpp"
-#include "Navigator.hpp"
+#include "StelNavigator.hpp"
 
 long long int GetNow(void);
 
@@ -74,7 +74,7 @@ protected:
 	const QString name;
 private:
 	bool isInitialized(void) const {return true;}
-	float getSelectPriority(const Navigator *nav) const {return -10.f;}
+	float getSelectPriority(const StelNavigator *nav) const {return -10.f;}
 private:
 	QList<double> oculars; // fov of the oculars
 };

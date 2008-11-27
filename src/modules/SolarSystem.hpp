@@ -37,7 +37,7 @@ class Planet;
 class StelFont;
 class StelCore;
 class StelProjector;
-class Navigator;
+class StelNavigator;
 class QSettings;
 
 //! @class SolarSystem
@@ -231,7 +231,7 @@ private:
 	StelObject* search(Vec3d v, const StelCore* core) const;
 	
 	//! Update the planet motion trails.
-	// void updateTrails(const Navigator* nav);
+	// void updateTrails(const StelNavigator* nav);
 
 	//! Start/stop accumulating new trail data (clear old data).
 	void startTrails(bool b);
