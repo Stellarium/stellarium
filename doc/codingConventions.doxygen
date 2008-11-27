@@ -1,0 +1,172 @@
+/*
+ * Stellarium
+ * Copyright (C) 2008 Fabien Chereau
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
+/*!
+
+@page codingStyle Coding Style Conventions in Stellarium
+
+The increasing number of contributors require that we clearly define coding rules and guidelines. Although for historical reasons the current code of Stellarium does not always comply to these rules, they should now be respected for any addition or modification of the code.
+
+@section stylistic_conventions_sec Stylistic Conventions
+<ul>
+ <li>Source code should use ASCII character set. Characters such as 'é' or 'ö' are not portable when hard-coded. Gettext translated strings should be used for such characters. 
+ <li>Variable names and comments should be in English.
+ <li>Class names are nouns, in mixed-case, with an initial upper-case letter and the ﬁrst letter of each subsequent word capitalized (e.g. CoreFactory).
+ <li>Method names are verbs or nouns in mixed-case, starting with a lower-case letter (e.g. update() or addElement()).
+ <li>Methods that return a value should take the form getSize().
+ <li>The names of local variables should be in mixed case, starting with a lower-case letter (e.g. packetSize). This also applies to the formal parameters of methods. Do not use names starting with underscore.
+ <li>The names of macro or static const should be all upper-case words, separated by underscore:
+ @code
+#define MIN_WIDTH 3
+static const QString VERSION = "0.10.1";
+ @endcode
+ <li>Indentation should be done with tabs, not spaces. This allows each developers to use his favorite indent size without changing the code. 
+ <li>When wrapping lines from long function calls, where the wrapped line does not start at the same level of indentation as the start of the function call, tab up to the start of the function call, and then use spaces to the opening parenthesis.
+@verbatim
+ [--tab-][--tab-][--tab-]someFunction(param, ...
+ [--tab-][--tab-][--tab-][  spaces   ]moreparams, ...);
+@endverbatim
+This method will handle different tab widths gracefully.
+ <li>Use the following layout for braces:
+ @code
+void MyClass::myMethod(int x)
+{
+	if (x>10)
+	{
+		cout << "You won." << endl;
+	}
+}
+ @endcode
+ <li>Use blank lines as follows:
+ <ul>
+  <li>1 between methods, before (block or single line) comment
+  <li>1 between logical sections of a method
+  <li>2 between sections of a source ﬁle
+ </ul>
+ <li><b>enums</b> should follow the QT conventions.  i.e. CamelCase with First letter capitalization for both enum type and enum values.  Document with doxygen.  The <b>//!< </b>tag can be used to add descriptions on the same line as an enum value, e.g.
+ @code
+//! \@enum EnumName Here is a description of the enum
+enum EnumName
+{
+	EnumValueOne,  //!\< Some doxygen description of EnumValueOne
+	EnumValueTwo,  //!\< Some doxygen description of EnumValueTwo
+	EnumValueThree //!\< Some doxygen description of EnumValueThree
+};
+@endcode
+
+<li>You can use the <a href='http://astyle.sourceforge.net/'>astyle</a> program to format your code according to these conventions. Use the following options:
+@verbatim
+ astyle --style=ansi -tU source.cpp
+@endverbatim
+Note that this command will replace the file source.cpp with the re-formatted one, and create a backup of the original with the .orig suffix.  Also note that the -U option (used to un-pad parenthesis) is only available recent version of astyle.
+</ul>
+
+@section file_names_sec File Names
+
+The extensions are .hpp/.cpp for C++ headers/code, .h/.c for C headers/code.
+C++ files should have the same name and case than the class they contain. For example class StelFontMgr should be declared in file StelFontMgr.hpp and implemented in StelFontMgr.cpp.
+
+@section comments_sec Doxygen Comments
+
+Stellarium source code should be documented with <a href='http://www.doxygen.org'>Doxygen</a>. From Doxygen webpage:
+
+<i>"Doxygen is a documentation system for C++, C, Java, [...] It can generate an on-line documentation browser (in HTML) and/or an off-line reference manual (in LaTeX) from a set of documented source files. [...] The documentation is extracted directly from the sources, which makes it much easier to keep the documentation consistent with the source code. [...] You can also visualize the relations between the various elements by means of include dependency graphs, inheritance diagrams, and collaboration diagrams, which are all generated automatically.</i>
+
+All public and protected classes and methods from Stellarium should be fully documented in the headers (.hpp).
+
+There are different ways to comment C++ code with Doxygen, in Stellarium use the following for headers files:
+@verbatim
+ //! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
+ //! @param objPrefix the case insensitive first letters of the searched object.
+ //! @param maxNbItem the maximum number of returned object names.
+ //! @return a vector of matching object name by order of relevance, or an empty vector if nothing match.
+ QList<QString> listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem=5) const;
+@endverbatim
+
+Brief descriptions are single line only, and stop at the first full stop (period).  Any subsequent sentences which occur before \@param or a similar tag are considered to be part of a detailed description.
+
+For methods definitions in .cpp files, a simpler comment for each method is sufficient:
+
+@code
+// Find and return the list of at most maxNbItem objects auto-completing the 
+// passed object I18n name.
+QList<QString> listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem=5) const
+{
+     etc..
+@endcode
+
+@section cpp_code C/C++ Code
+
+Use C++ replacement for C functions and Qt replacements for C++ function/STL wherever possible.
+<ul>
+ <li>Use QString instead of std::string or  char *
+ <li>Use QIOStream instead of C file managment with fopen()
+ <li>Pass objects as references when needed instead of using pointers.
+ <li>Include standard headers the C++ way, it is more portable:
+ @code
+#include <stdio.h> // Bad
+#include <cstdio>  // Good
+#include <QString> // Good
+ @endcode
+ <li>Use <a href='http://doc.trolltech.com/4.4/containers.html'>Qt containers</a> instead of STL ones. They are easier to use, allow for the foreach keyword. Only if speed is really critical, use STL containers such as std::vector or std::map, they are extremely efficient. Documentation is <a href='http://www.sgi.com/tech/stl/'>there</a>.
+ <li>Avoid public global function and variable. Encapsulate them in classes or namespaces as static members/variable.
+ <li>Avoid using C macro, use static const variables instead. It is safer because it is type safe.
+ @code
+#define RADIUS 12 // Bad 
+static const int RADIUS = 12; // Good
+ @endcode
+ <li>Use stdc++ math functions instead of C ones. There are more portable and are also overrided for float, thus may be faster.
+ @code
+double cosLat = cos(lat);     // Bad 
+double cosLat = std::cos(lat); // Good
+ @endcode
+</ul>
+
+@section translation_sec Translatable Strings and Console Output
+
+Translatable strings are translated using the Translator class, which is a C++ wrapper around gettext. The strings should be marked using the <tt>q_()</tt> macro: it takes a QString in English and returns the translation as a QString using the current global language.
+
+<ul>
+<li>Translatable text in sources or data files should be written in English, encoded in ASCII or UTF-8 if needed.
+<li>Do not concatenate strings, use <tt>QString::arg()</tt> instead. Concatenated strings are very hard (or even impossible) to translate.
+@code
+ text << q_("Distance: ") << distance << q_("AU");   // Bad
+ text = q_("Distance: %1AU").arg(distance);          // Good
+@endcode
+<li>When using Qt format strings, if a letter follows a digit immediately, xgettext might erroneously mark the extracted string as a C format string. ''Depending on the actual translation, this might cause errors when uploading the message catalog to Rosetta, or when compiling it to binary format.'' To prevent this, add an <tt>xgettext:no-c-format</tt> comment to the line preceding the format string:
+@code
+// xgettext:no-c-format
+text = q_("Distance: %1AU").arg(distance);
+@endcode
+
+<li>Translatable text should obey English typo conventions. For example, there should be no space before the colon:
+@code
+QString myTranslatedText(q_("Distance of the planet :")); // Bad
+QString myTranslatedText(q_("Distance of the planet:"));  // Good
+@endcode
+
+<li>Translatable strings should be modified only if really necessary. Any modification to one of them means that all the translators for all the langages will have to re-translate the new string.
+<li>In general no translated text should be output on the console because there are problems when string and wstring are output on the same console. This means that you should never use wcout, wcerr or wprintf(). Console output should be used for informations, errors and warnings which are not required by the user in nominal use.
+<li>Errors and warnings should be output in the stderr file, not stdout.
+@code
+ std::cout << "Error while opening file " << qPrintable(myFileName) << "." << std::endl; // Bad 
+ std::cerr << "Error while opening file " << qPrintable(myFileName) << "." << std::endl; // Good
+@endcode
+
+*/
