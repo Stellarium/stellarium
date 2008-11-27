@@ -22,7 +22,7 @@
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 #include "StelTextureMgr.hpp"
-#include "LoadingBar.hpp"
+#include "StelLoadingBar.hpp"
 #include "StelObjectMgr.hpp"
 
 #include "TelescopeMgr.hpp"
@@ -278,9 +278,9 @@ void StelApp::init()
 	textureMgr->init();
 
 #ifdef SVN_REVISION
-	loadingBar = new LoadingBar(12., "logo24bitsbeta.png", QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
+	loadingBar = new StelLoadingBar(12., "logo24bitsbeta.png", QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
 #else
-	loadingBar = new LoadingBar(12., "logo24bitsbeta.png", PACKAGE_VERSION, 45, 320, 121);
+	loadingBar = new StelLoadingBar(12., "logo24bitsbeta.png", PACKAGE_VERSION, 45, 320, 121);
 #endif // SVN_RELEASE
 	
 	downloadMgr = new DownloadMgr();

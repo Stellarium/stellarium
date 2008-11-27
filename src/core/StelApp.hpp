@@ -35,7 +35,7 @@ class StelModuleMgr;
 class StelSkyCultureMgr;
 class StelFileMgr;
 class QStringList;
-class LoadingBar;
+class StelLoadingBar;
 class QSettings;
 class QNetworkAccessManager;
 class StelStyle;
@@ -135,8 +135,8 @@ public:
 	StelCore* getCore() {return core;}
 	
 	//! Get the main loading bar used by modules for displaying loading informations.
-	//! @return the main LoadingBar instance of the program.
-	LoadingBar* getLoadingBar() {return loadingBar;}
+	//! @return the main StelLoadingBar instance of the program.
+	StelLoadingBar* getStelLoadingBar() {return loadingBar;}
 	
 	//! Get the common instance of QNetworkAccessManager used in stellarium
 	QNetworkAccessManager* getNetworkAccessManager() {return networkAccessManager;}
@@ -356,7 +356,7 @@ private:
 	QtScriptMgr* scriptMgr;
 	
 	// The main loading bar
-	LoadingBar* loadingBar;
+	StelLoadingBar* loadingBar;
 	
 	// Currently used StelStyle
 	StelStyle* currentStelStyle;

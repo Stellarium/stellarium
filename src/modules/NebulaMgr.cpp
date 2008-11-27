@@ -34,7 +34,7 @@
 #include "Navigator.hpp"
 #include "SkyDrawer.hpp"
 #include "Translator.hpp"
-#include "LoadingBar.hpp"
+#include "StelLoadingBar.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelFontMgr.hpp"
@@ -338,7 +338,7 @@ Nebula *NebulaMgr::searchIC(unsigned int IC)
 // read from stream
 bool NebulaMgr::loadNGC(const QString& catNGC)
 {
-	LoadingBar& lb = *StelApp::getInstance().getLoadingBar();
+	StelLoadingBar& lb = *StelApp::getInstance().getStelLoadingBar();
 	QFile in(catNGC);
 	if (!in.open(QIODevice::ReadOnly | QIODevice::Text))
 		return false;
