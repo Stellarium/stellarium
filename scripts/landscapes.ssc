@@ -11,7 +11,7 @@ core.clear("natural");
 core.setDate("2008:11:05T12:00:00", "local");
 core.setTimeRate(1);
 core.moveToAltAzi(alt, 0, 3);
-MovementMgr.zoomTo(60, 3);
+StelMovementMgr.zoomTo(60, 3);
 core.wait(3);
 allIDs = LandscapeMgr.getAllLandscapeIDs();
 for(i=0; i<allIDs.length; i++)

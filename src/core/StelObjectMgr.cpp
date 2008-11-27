@@ -24,7 +24,7 @@
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 #include "StelProjector.hpp"
-#include "MovementMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include <QMouseEvent>
 #include <QString>
 #include <QDebug>
@@ -52,7 +52,7 @@ void StelObjectMgr::handleMouseClicks(QMouseEvent* event)
 		event->accept();
 		return;
 	}
-	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
+	StelMovementMgr* mvmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
 	if (event->button()==Qt::LeftButton && event->type()==QEvent::MouseButtonRelease && !mvmgr->getHasDragged())
 	{
 #ifdef MACOSX

@@ -13,8 +13,8 @@ SET(stellarium_lib_SRCS
 	core/GeodesicGrid.hpp
 	core/StelLoadingBar.cpp
 	core/StelLoadingBar.hpp
-	core/MovementMgr.cpp
-	core/MovementMgr.hpp
+	core/StelMovementMgr.cpp
+	core/StelMovementMgr.hpp
 	core/StelNavigator.cpp
 	core/StelNavigator.hpp
 	core/StelObserver.cpp
@@ -271,7 +271,7 @@ SET(stellarium_MOC_HDRS
 	core/StelCore.hpp
 	core/StelAppGraphicsScene.hpp
 	core/StelTexture.hpp
-	core/MovementMgr.hpp
+	core/StelMovementMgr.hpp
 	core/MultiLevelJsonBase.hpp
 	core/SkyImageTile.hpp
 	core/SkyPolygon.hpp

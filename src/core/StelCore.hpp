@@ -28,7 +28,7 @@ class StelNavigator;
 class ToneReproducer;
 class SkyDrawer;
 class GeodesicGrid;
-class MovementMgr;
+class StelMovementMgr;
 
 //! @class StelCore 
 //! Main class for Stellarium core processing.
@@ -90,11 +90,11 @@ public:
 	//! only for 2d painting
 	const StelProjectorP getProjection2d() const;
 			
-	//! Get a new instance of projector using the current display parameters from Navigation, MovementMgr, etc..
+	//! Get a new instance of projector using the current display parameters from Navigation, StelMovementMgr, etc..
 	//! If not specified default the projection type is the default one set in the core.
 	//! This is a smart pointer, you don't need to delete it.
 	const StelProjectorP getProjection(FrameType frameType, ProjectionType projType=(ProjectionType)1000) const;
-	//! Get an instance of projector using the current display parameters from Navigation, MovementMgr
+	//! Get an instance of projector using the current display parameters from Navigation, StelMovementMgr
 	//! and using the given modelview matrix.
 	//! If not specified default the projection type is the default one set in the core.
 	const StelProjectorP getProjection(const Mat4d& modelViewMat, ProjectionType projType=(ProjectionType)1000) const;
@@ -118,9 +118,9 @@ public:
 	const GeodesicGrid* getGeodesicGrid(int maxLevel) const;
 	
 	//! Get the instance of movement manager.
-	MovementMgr* getMovementMgr() {return movementMgr;}
+	StelMovementMgr* getMovementMgr() {return movementMgr;}
 	//! Get the const instance of movement manager.
-	const MovementMgr* getMovementMgr() const {return movementMgr;}
+	const StelMovementMgr* getMovementMgr() const {return movementMgr;}
 	
 	//! Set the near and far clipping planes.
 	void setClippingPlanes(double znear, double zfar) {currentProjectorParams.zNear=znear;currentProjectorParams.zFar=zfar;} 
@@ -173,7 +173,7 @@ private:
 	StelNavigator* navigation;			// Manage all navigation parameters, coordinate transformations etc..
 	ToneReproducer* toneConverter;		// Tones conversion between stellarium world and display device
 	SkyDrawer* skyDrawer;
-	MovementMgr* movementMgr;		// Manage vision movements
+	StelMovementMgr* movementMgr;		// Manage vision movements
 	
 	// Manage geodesic grid
 	mutable GeodesicGrid* geodesicGrid;

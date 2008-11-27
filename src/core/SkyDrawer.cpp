@@ -25,7 +25,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
-#include "MovementMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 
 #include <QStringList>

@@ -58,7 +58,7 @@ core.setObserverLocation(89.34, 26.5, 10, 0, "Rangpur, Bangladesh");
 
 // Point at a bit of sky approx above the Eastern horizon
 core.moveToAltAzi(20, 90, 3);
-MovementMgr.zoomTo(60, 4);
+StelMovementMgr.zoomTo(60, 4);
 core.wait(3);
 
 ids = blockText(Array("Place: Rangpur, Bangladesh",
@@ -126,17 +126,17 @@ SolarSystem.setFlagLabels(true);
 core.waitFor("2009:07:22T00:59:30");
 ids = blockText(Array("At totality, the Sun is completely hidden behind the Moon"));
 core.selectObjectByName("Moon", false);
-MovementMgr.setFlagTracking(true);
-MovementMgr.zoomTo(4, 5);
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(4, 5);
 core.wait(1);
 StarMgr.setFlagLabels(false);
 SolarSystem.setFlagLabels(false);
 core.wait(4);
 clearLabels(ids);
 core.wait(3);
-MovementMgr.setFlagTracking(false);
+StelMovementMgr.setFlagTracking(false);
 core.moveToAltAzi(20, 90, 3);
-MovementMgr.zoomTo(60, 4);
+StelMovementMgr.zoomTo(60, 4);
 core.waitFor("2009:07:22T01:01:45");
 for(t=5; t>2; t--)
 {

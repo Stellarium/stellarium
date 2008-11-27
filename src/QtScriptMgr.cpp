@@ -25,7 +25,7 @@
 #include "GridLinesMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "MeteorMgr.hpp"
-#include "MovementMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelNavigator.hpp"
 #include "NebulaMgr.hpp"
 #include "SolarSystem.hpp"
@@ -525,7 +525,7 @@ void StelMainScriptAPI::clear(const QString& state)
 
 void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, float duration)
 {
-	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
+	StelMovementMgr* mvmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
 	Q_ASSERT(mvmgr);
 
 	StelApp::getInstance().getStelObjectMgr().unSelect();
@@ -540,7 +540,7 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 
 void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float duration)
 {
-	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
+	StelMovementMgr* mvmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
 	Q_ASSERT(mvmgr);
 
 	StelApp::getInstance().getStelObjectMgr().unSelect();

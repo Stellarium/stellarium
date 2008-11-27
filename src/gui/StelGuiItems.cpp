@@ -26,7 +26,7 @@
 #include "StelMainGraphicsView.hpp"
 #include "StelLocation.hpp"
 #include "StelGui.hpp"
-#include "MovementMgr.hpp"
+#include "StelMovementMgr.hpp"
 
 #include <QPainter>
 #include <QGraphicsScene>

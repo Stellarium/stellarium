@@ -6,8 +6,8 @@
 
 core.clear("starchart");
 core.selectObjectByName("M31", false);
-MovementMgr.setFlagTracking(true);
-MovementMgr.zoomTo(2,1);
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(2,1);
 core.wait(2);
 
 core.loadSkyImage("logo1", "../textures/logo24bits.png", 41, 11.5, 41.17, 11.5, 41.17, 11.75, 41, 11.75);

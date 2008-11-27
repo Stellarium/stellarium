@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "MovementMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -30,7 +30,7 @@
 #include <QKeyEvent>
 #include <QDebug>
 
-MovementMgr::MovementMgr(StelCore* acore) : core(acore), 
+StelMovementMgr::StelMovementMgr(StelCore* acore) : core(acore), 
 	flagLockEquPos(false),
 	flagTracking(false),
 	isMouseMovingHoriz(false),
@@ -44,15 +44,15 @@ MovementMgr::MovementMgr(StelCore* acore) : core(acore),
 	flagAutoZoom(0),
 	flagAutoZoomOutResetsDirection(0)
 {
-	setObjectName("MovementMgr");
+	setObjectName("StelMovementMgr");
 	isDragging = false;
 }
 
-MovementMgr::~MovementMgr()
+StelMovementMgr::~StelMovementMgr()
 {
 }
 
-void MovementMgr::init()
+void StelMovementMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -74,7 +74,7 @@ void MovementMgr::init()
 	currentFov = initFov;
 }	
 	
-bool MovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons b)
+bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 {
 	// Turn if the mouse is at the edge of the screen unless config asks otherwise
 	if (flagEnableMoveAtScreenEdge)
@@ -128,7 +128,7 @@ bool MovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 }
 
 
-void MovementMgr::handleKeys(QKeyEvent* event)
+void StelMovementMgr::handleKeys(QKeyEvent* event)
 {
 	if (event->type() == QEvent::KeyPress)
 	{
@@ -184,7 +184,7 @@ void MovementMgr::handleKeys(QKeyEvent* event)
 }
 
 //! Handle mouse wheel events.
-void MovementMgr::handleMouseWheel(QWheelEvent* event)
+void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 {
 	if (flagEnableMouseNavigation==false)
 		return;
@@ -194,7 +194,7 @@ void MovementMgr::handleMouseWheel(QWheelEvent* event)
 	event->accept();
 }
 
-void MovementMgr::handleMouseClicks(QMouseEvent* event)
+void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 {
 	switch (event->button())
 	{
@@ -242,7 +242,7 @@ void MovementMgr::handleMouseClicks(QMouseEvent* event)
 /*************************************************************************
  The selected objects changed, follow it it we were already following another one
 *************************************************************************/ 
-void MovementMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)
+void StelMovementMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)
 {
 	// If an object was selected keep the earth following
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
@@ -253,7 +253,7 @@ void MovementMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)
 	}
 }
 
-void MovementMgr::turnRight(bool s)
+void StelMovementMgr::turnRight(bool s)
 {
 	if (s && flagEnableMoveKeys)
 	{
@@ -265,7 +265,7 @@ void MovementMgr::turnRight(bool s)
 		deltaAz = 0;
 }
 
-void MovementMgr::turnLeft(bool s)
+void StelMovementMgr::turnLeft(bool s)
 {
 	if (s && flagEnableMoveKeys)
 	{
@@ -277,7 +277,7 @@ void MovementMgr::turnLeft(bool s)
 		deltaAz = 0;
 }
 
-void MovementMgr::turnUp(bool s)
+void StelMovementMgr::turnUp(bool s)
 {
 	if (s && flagEnableMoveKeys)
 	{
@@ -289,7 +289,7 @@ void MovementMgr::turnUp(bool s)
 		deltaAlt = 0;
 }
 
-void MovementMgr::turnDown(bool s)
+void StelMovementMgr::turnDown(bool s)
 {
 	if (s && flagEnableMoveKeys)
 	{
@@ -302,13 +302,13 @@ void MovementMgr::turnDown(bool s)
 }
 
 
-void MovementMgr::zoomIn(bool s)
+void StelMovementMgr::zoomIn(bool s)
 {
 	if (flagEnableZoomKeys)
 		deltaFov = -1*(s!=0);
 }
 
-void MovementMgr::zoomOut(bool s)
+void StelMovementMgr::zoomOut(bool s)
 {
 	if (flagEnableZoomKeys)
 		deltaFov = (s!=0);
@@ -316,7 +316,7 @@ void MovementMgr::zoomOut(bool s)
 
 
 // Increment/decrement smoothly the vision field and position
-void MovementMgr::updateMotion(double deltaTime)
+void StelMovementMgr::updateMotion(double deltaTime)
 {
 	const StelProjectorP proj = core->getProjection(StelCore::FrameJ2000);
 	
@@ -383,7 +383,7 @@ void MovementMgr::updateMotion(double deltaTime)
 
 
 // Go and zoom to the selected object.
-void MovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
+void StelMovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 {
 	if (!StelApp::getInstance().getStelObjectMgr().getWasSelected())
 		return;
@@ -425,7 +425,7 @@ void MovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 
 
 // Unzoom and go to the init position
-void MovementMgr::autoZoomOut(float moveDuration, bool full)
+void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 {
 	StelNavigator* nav = core->getNavigator();
 	
@@ -459,7 +459,7 @@ void MovementMgr::autoZoomOut(float moveDuration, bool full)
 }
 
 
-void MovementMgr::setFlagTracking(bool b)
+void StelMovementMgr::setFlagTracking(bool b)
 {
 	if(!b || !StelApp::getInstance().getStelObjectMgr().getWasSelected())
 	{
@@ -475,7 +475,7 @@ void MovementMgr::setFlagTracking(bool b)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Move to the given equatorial position
-void MovementMgr::moveTo(const Vec3d& _aim, float moveDuration, bool _localPos, int zooming)
+void StelMovementMgr::moveTo(const Vec3d& _aim, float moveDuration, bool _localPos, int zooming)
 {
 	StelNavigator* nav = core->getNavigator();
 	zoomingMode = zooming;
@@ -499,7 +499,7 @@ void MovementMgr::moveTo(const Vec3d& _aim, float moveDuration, bool _localPos, 
 
 
 ////////////////////////////////////////////////////////////////////////////////
-void MovementMgr::updateVisionVector(double deltaTime)
+void StelMovementMgr::updateVisionVector(double deltaTime)
 {
 	StelNavigator* nav = core->getNavigator();
 	if (flagAutoMove)
@@ -621,7 +621,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 
 
 ////////////////////////////////////////////////////////////////////////////////
-void MovementMgr::panView(double deltaAz, double deltaAlt)
+void StelMovementMgr::panView(double deltaAz, double deltaAlt)
 {
 	StelNavigator* nav = core->getNavigator();
 	double azVision, altVision;
@@ -660,7 +660,7 @@ void MovementMgr::panView(double deltaAz, double deltaAlt)
 
 
 //! Make the first screen position correspond to the second (useful for mouse dragging)
-void MovementMgr::dragView(int x1, int y1, int x2, int y2)
+void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 {
 	StelNavigator* nav = core->getNavigator();
 	
@@ -683,7 +683,7 @@ void MovementMgr::dragView(int x1, int y1, int x2, int y2)
 
 
 // Update autoZoom if activated
-void MovementMgr::updateAutoZoom(double deltaTime)
+void StelMovementMgr::updateAutoZoom(double deltaTime)
 {
 	if (flagAutoZoom)
 	{
@@ -712,7 +712,7 @@ void MovementMgr::updateAutoZoom(double deltaTime)
 }
 
 // Zoom to the given field of view
-void MovementMgr::zoomTo(double aim_fov, float moveDuration)
+void StelMovementMgr::zoomTo(double aim_fov, float moveDuration)
 {
 	zoomMove.aim=aim_fov;
     zoomMove.start=currentFov;
@@ -721,19 +721,19 @@ void MovementMgr::zoomTo(double aim_fov, float moveDuration)
     flagAutoZoom = true;
 }
 
-void MovementMgr::changeFov(double deltaFov)
+void StelMovementMgr::changeFov(double deltaFov)
 {
 	// if we are zooming in or out
 	if (deltaFov)
 		setFov(currentFov + deltaFov);
 }
 
-double MovementMgr::getAimFov(void) const
+double StelMovementMgr::getAimFov(void) const
 {
 	return (flagAutoZoom ? zoomMove.aim : currentFov);
 }
 
-void MovementMgr::setMaxFov(double max)
+void StelMovementMgr::setMaxFov(double max)
 {
 	maxFov = max;
 	if (currentFov > max)

@@ -12,7 +12,7 @@ core.setObserverLocation("York, UnitedKingdom");
 core.setTimeRate(1); 
 core.setDate("2008:10:30T21:00:00");
 core.moveToAltAzi(30, 90);
-MovementMgr.zoomTo(70, 2);
+StelMovementMgr.zoomTo(70, 2);
 core.wait(2.5);
 
 // When you create a label, the return value is an ID of a label which 

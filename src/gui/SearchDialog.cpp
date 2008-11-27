@@ -24,7 +24,7 @@
 #include "StelCore.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "MovementMgr.hpp"
+#include "StelMovementMgr.hpp"
 
 #include <QTextEdit>
 #include <QLabel>
@@ -172,7 +172,7 @@ void SearchDialog::gotoObject()
 	if (name=="") return;
 	else if (StelApp::getInstance().getStelObjectMgr().findAndSelectI18n(name))
 	{
-		MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
+		StelMovementMgr* mvmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
 		const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
 		if (!newSelected.empty())
 		{
