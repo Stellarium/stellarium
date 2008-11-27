@@ -22,7 +22,7 @@
 #include <QDebug>
 
 #include "GridLinesMgr.hpp"
-#include "MovementMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelApp.hpp"
 #include "StelNavigator.hpp"
 #include "Translator.hpp"

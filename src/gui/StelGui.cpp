@@ -22,7 +22,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelProjector.hpp"
-#include "MovementMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMainGraphicsView.hpp"
@@ -317,12 +317,12 @@ void StelGui::init()
 	QObject::connect(getGuiActions("actionShow_Night_Mode"), SIGNAL(toggled(bool)), module, SLOT(setVisionModeNight(bool)));
 	getGuiActions("actionShow_Night_Mode")->setChecked(StelApp::getInstance().getVisionModeNight());
 	
-	module = GETSTELMODULE("MovementMgr");
+	module = GETSTELMODULE("StelMovementMgr");
 	QObject::connect(getGuiActions("actionGoto_Selected_Object"), SIGNAL(triggered()), module, SLOT(setFlagTracking()));
 	QObject::connect(getGuiActions("actionZoom_In_Auto"), SIGNAL(triggered()), module, SLOT(autoZoomIn()));
 	QObject::connect(getGuiActions("actionZoom_Out_Auto"), SIGNAL(triggered()), module, SLOT(autoZoomOut()));
 	QObject::connect(getGuiActions("actionSet_Tracking"), SIGNAL(toggled(bool)), module, SLOT(setFlagTracking(bool)));
-	MovementMgr* mmgr = (MovementMgr*)module;
+	StelMovementMgr* mmgr = (StelMovementMgr*)module;
 	getGuiActions("actionSet_Tracking")->setChecked(mmgr->getFlagTracking());
 	
 	QObject::connect(getGuiActions("actionSet_Full_Screen_Global"), SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
@@ -689,7 +689,7 @@ void StelGui::update(double deltaTime)
 	const bool isTimeNow=nav->getIsTimeNow();
 	if (buttonTimeCurrent->isChecked()!=isTimeNow)
 		buttonTimeCurrent->setChecked(isTimeNow);
-	MovementMgr* mmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
+	StelMovementMgr* mmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
 	const bool b = mmgr->getFlagTracking();
 	if (buttonGotoSelectedObject->isChecked()!=b)
 		buttonGotoSelectedObject->setChecked(b);

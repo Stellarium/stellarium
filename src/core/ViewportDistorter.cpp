@@ -35,7 +35,7 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
-#include "MovementMgr.hpp"
+#include "StelMovementMgr.hpp"
 
 class ViewportDistorterDummy : public ViewportDistorter
 {

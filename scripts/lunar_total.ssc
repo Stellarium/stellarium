@@ -26,13 +26,13 @@ core.setDate("2004:05:04T17:51:00");
 
 // OLD: select planet Moon pointer off
 core.selectObjectByName("Moon", false);
-MovementMgr.setFlagTracking(true);
+StelMovementMgr.setFlagTracking(true);
 
 // OLD: wait duration 2
 core.wait(2);
 
 // OLD: zoom auto in
-MovementMgr.autoZoomIn(2);
+StelMovementMgr.autoZoomIn(2);
 
 // OLD: wait duration 2
 core.wait(2);
