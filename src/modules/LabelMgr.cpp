@@ -23,7 +23,7 @@
 #include "StelApp.hpp"
 #include "StarMgr.hpp"
 #include "StelCore.hpp"
-#include "SFont.hpp"
+#include "StelFont.hpp"
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
@@ -43,7 +43,7 @@
 /////////////////////
 // StelLabel class //
 /////////////////////
-StelLabel::StelLabel(const QString& text, SFont* font, const Vec3f& color)
+StelLabel::StelLabel(const QString& text, StelFont* font, const Vec3f& color)
 	: labelText(text),
 	  labelFont(font),
 	  labelColor(color)
@@ -78,7 +78,7 @@ bool StelLabel::getFlagShow(void)
 ////////////////////
 // SkyLabel class //
 ////////////////////
-SkyLabel::SkyLabel(const QString& text, StelObjectP bindObject, SFont* font,
+SkyLabel::SkyLabel(const QString& text, StelObjectP bindObject, StelFont* font,
                    Vec3f color, QString side, double distance, SkyLabel::Style style,
                    double enclosureSize)
 	: StelLabel(text, font, color),
@@ -198,7 +198,7 @@ bool SkyLabel::draw(StelCore* core, const StelPainter& sPainter)
 ///////////////////////
 // ScreenLabel class //
 ///////////////////////
-ScreenLabel::ScreenLabel(const QString& text, int x, int y, SFont* font, Vec3f color)
+ScreenLabel::ScreenLabel(const QString& text, int x, int y, StelFont* font, Vec3f color)
 	: StelLabel(text, font, color),
 	  screenX(x),
 	  screenY(y)
@@ -252,7 +252,7 @@ int LabelMgr::labelObject(const QString& text,
                           double labelDistance,
                           const QString& style)
 {
-	SFont* font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
+	StelFont* font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 	Q_ASSERT(font);
 	StelObjectP obj = StelApp::getInstance().getStelObjectMgr().searchByName(objectName);
 	if (!obj)
@@ -279,7 +279,7 @@ int LabelMgr::labelScreen(const QString& text,
                              float fontSize,
                              const QString& fontColor)
 {
-	SFont* font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
+	StelFont* font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 	Q_ASSERT(font);
 	ScreenLabel* l = new ScreenLabel(text, x, y, font, StelUtils::htmlColorToVec3f(fontColor));
 	if (l==NULL)

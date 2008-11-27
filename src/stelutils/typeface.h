@@ -46,7 +46,7 @@ struct FT_BitmapGlyphRec_;
 //! Base class for gem type faces
 class TypeFace
 {
-	friend class SFont;
+	friend class StelFont;
 
 public:
 	//! Construction requires the name of the font file and optionally the size and resolution.

@@ -28,8 +28,8 @@ SET(stellarium_lib_SRCS
 	core/ProjectorClasses.cpp
 	core/ProjectorClasses.hpp
 	core/ProjectorType.hpp
-	core/SFont.cpp
-	core/SFont.hpp
+	core/StelFont.cpp
+	core/StelFont.hpp
 	core/SkyDrawer.cpp
 	core/SkyDrawer.hpp
 	core/StelPainter.hpp

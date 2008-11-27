@@ -155,7 +155,7 @@ private:
 	QTimeLine* texFader;
 	
 #ifdef DEBUG_SKYIMAGE_TILE
-	static class SFont* debugFont;
+	static class StelFont* debugFont;
 #endif
 };
 

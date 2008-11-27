@@ -24,12 +24,12 @@
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
 #include "StelTexture.hpp"
-#include "SFont.hpp"
+#include "StelFont.hpp"
 #include "Navigator.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
-#include "SFont.hpp"
+#include "StelFont.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
@@ -37,7 +37,7 @@
 #include <QDebug>
 
 StelTextureSP Nebula::texCircle;
-SFont* Nebula::nebulaFont = NULL;
+StelFont* Nebula::nebulaFont = NULL;
 float Nebula::circleScale = 1.f;
 float Nebula::hintsBrightness = 0;
 Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);

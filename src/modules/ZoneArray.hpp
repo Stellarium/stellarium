@@ -83,7 +83,7 @@ public:
   virtual void draw(int index,bool is_inside,
                     const float *rcmag_table, const ProjectorP& prj,
                     unsigned int maxMagStarName,float names_brightness,
-                    SFont *starFont) const = 0;
+                    StelFont *starFont) const = 0;
   bool isInitialized(void) const {return (nr_of_zones>0);}
   void initTriangle(int index,
                     const Vec3d &c0,
@@ -130,7 +130,7 @@ private:
   void draw(int index,bool is_inside,
 			const float *rcmag_table, const ProjectorP& prj,
             unsigned int maxMagStarName,float names_brightness,
-            SFont *starFont) const;
+            StelFont *starFont) const;
 };
 
 template<class Star>
@@ -388,7 +388,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 								  const ProjectorP& prj,
                                   unsigned int maxMagStarName,
                                   float names_brightness,
-                                  SFont *starFont) const
+                                  StelFont *starFont) const
 {
 	SkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
 	SpecialZoneData<Star> *const z = getZones() + index;

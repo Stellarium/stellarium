@@ -26,7 +26,7 @@
 
 #include <QString>
 
-class SFont;
+class StelFont;
 
 //! @class LoadingBar 
 //! This class is used to display loading bar.
@@ -71,8 +71,8 @@ public:
 private:
 	QString message;
 	int splashx, splashy, barx, bary, width, height, barwidth, barheight;
-	SFont& barfont;
-	SFont& extraTextFont;
+	StelFont& barfont;
+	StelFont& extraTextFont;
 	StelTextureSP splash;
 	QString extraText;
 	Vec2f extraTextPos;

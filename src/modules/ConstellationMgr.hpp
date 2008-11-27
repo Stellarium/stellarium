@@ -33,7 +33,7 @@ class StarMgr;
 class Constellation;
 class Projector;
 class Navigator;
-class SFont;
+class StelFont;
 class StelPainter;
 
 //! @class ConstellationMgr
@@ -218,7 +218,7 @@ private:
 	Constellation* findFromAbbreviation(const QString& abbreviation) const;		
 	std::vector<Constellation*> asterisms;
 	double fontSize;
-	SFont* asterFont;
+	StelFont* asterFont;
 	StarMgr* hipStarMgr;
 
 	bool isolateSelected;

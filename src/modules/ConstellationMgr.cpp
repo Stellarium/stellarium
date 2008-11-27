@@ -44,7 +44,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
-#include "SFont.hpp"
+#include "StelFont.hpp"
 #include "StelStyle.hpp"
 #include "StelPainter.hpp"
 

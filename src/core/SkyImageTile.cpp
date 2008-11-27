@@ -31,10 +31,10 @@
 #include <QDebug>
 
 #ifdef DEBUG_SKYIMAGE_TILE
- #include "SFont.hpp"
+ #include "StelFont.hpp"
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
- SFont* SkyImageTile::debugFont = NULL;
+ StelFont* SkyImageTile::debugFont = NULL;
 #endif
 
 void SkyImageTile::initCtor()
