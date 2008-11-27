@@ -30,7 +30,7 @@
 #include "StelTextureTypes.hpp"
 
 class Orbit;
-class LoadingBar;
+class StelLoadingBar;
 class Translator;
 class StelObject;
 class Planet;

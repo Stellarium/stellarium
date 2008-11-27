@@ -36,7 +36,7 @@
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "Projector.hpp"
-#include "LoadingBar.hpp"
+#include "StelLoadingBar.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
@@ -355,7 +355,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	readOk = 0;		// count of records processed OK
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	LoadingBar& lb = *StelApp::getInstance().getLoadingBar();
+	StelLoadingBar& lb = *StelApp::getInstance().getStelLoadingBar();
 	while (!fic.atEnd()) 
 	{
 		++currentLineNumber;

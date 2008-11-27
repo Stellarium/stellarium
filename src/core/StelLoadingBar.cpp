@@ -18,7 +18,7 @@
  */
 
 #include "Projector.hpp"
-#include "LoadingBar.hpp"
+#include "StelLoadingBar.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelFontMgr.hpp"
@@ -31,7 +31,7 @@
 #include <QGLWidget>
 #include <QDebug>
 
-LoadingBar::LoadingBar(float fontSize, const QString&  splashTex, 
+StelLoadingBar::StelLoadingBar(float fontSize, const QString&  splashTex, 
 	const QString& extraTextString, float extraTextSize, 
 	float extraTextPosx, float extraTextPosy) :
 	width(512), height(512), barwidth(400), barheight(10),
@@ -53,11 +53,11 @@ extraTextFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::g
 	timeCounter = StelApp::getInstance().getTotalRunTime();
 }
 
-LoadingBar::~LoadingBar()
+StelLoadingBar::~StelLoadingBar()
 {
 }
 
-void LoadingBar::Draw(float val)
+void StelLoadingBar::Draw(float val)
 {
 	// Ensure that the refresh frequency is not too high 
 	// (display may be very slow when no 3D acceleration works)

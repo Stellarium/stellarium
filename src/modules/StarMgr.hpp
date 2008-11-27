@@ -31,7 +31,7 @@ class StelObject;
 class ToneReproducer;
 class Projector;
 class Navigator;
-class LoadingBar;
+class StelLoadingBar;
 class StelFont;
 class QSettings;
 
