@@ -42,7 +42,7 @@ class StelStyle;
 class QTime;
 class StelLocationMgr;
 class StelSkyImageMgr;
-class QtScriptMgr;
+class StelScriptMgr;
 class StelDownloadMgr;
 class StelAudioMgr;
 
@@ -124,7 +124,7 @@ public:
 	StelAudioMgr* getStelAudioMgr() {return audioMgr;}
 	
 	//! Get the script manager
-	QtScriptMgr& getScriptMgr() {return *scriptMgr;}
+	StelScriptMgr& getScriptMgr() {return *scriptMgr;}
 	
 	//! Get the download manager
 	StelDownloadMgr& getDownloadMgr() {return *downloadMgr;}
@@ -341,7 +341,7 @@ private:
 	StelAudioMgr* audioMgr;
 	
 	// The script manager based on Qt script engine
-	QtScriptMgr* scriptMgr;
+	StelScriptMgr* scriptMgr;
 	
 	// The main loading bar
 	StelLoadingBar* loadingBar;

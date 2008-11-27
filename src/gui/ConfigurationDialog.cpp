@@ -44,7 +44,7 @@
 #include "StarMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "GridLinesMgr.hpp"
-#include "QtScriptMgr.hpp"
+#include "StelScriptMgr.hpp"
 #include "StelDownloadMgr.hpp"
 
 #include <QSettings>
@@ -189,7 +189,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->invertScreenShotColorsCheckBox, SIGNAL(toggled(bool)), &StelMainGraphicsView::getInstance(), SLOT(setFlagInvertScreenShotColors(bool)));
 	
 	// script tab controls
-	QtScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	connect(ui->scriptListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(scriptSelectionChanged(const QString&)));
 	connect(ui->runScriptButton, SIGNAL(clicked()), this, SLOT(runScriptClicked()));
 	connect(ui->stopScriptButton, SIGNAL(clicked()), this, SLOT(stopScriptClicked()));
@@ -464,7 +464,7 @@ void ConfigurationDialog::setDefaultViewOptions()
 void ConfigurationDialog::populateScriptsList(void)
 {
 	int prevSel = ui->scriptListWidget->currentRow();
-	QtScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	ui->scriptListWidget->clear();
 	ui->scriptListWidget->addItems(scriptMgr.getScriptList().replaceInStrings(QRegExp("\\.ssc$"), ""));
 	// If we had a valid previous selection (i.e. not first time we populate), restore it
@@ -478,7 +478,7 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 {
 	if (s.isEmpty() || s=="")
 		return;
-	QtScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + scriptMgr.getName(s+".ssc") + "</h2>";
@@ -496,7 +496,7 @@ void ConfigurationDialog::runScriptClicked(void)
 	if (ui->closeWindowAtScriptRunCheckbox->isChecked())
 		this->close();
 		
-	QtScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	if (ui->scriptListWidget->currentItem())
 	{
 		ui->runScriptButton->setEnabled(false);
