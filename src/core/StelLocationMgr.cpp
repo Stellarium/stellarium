@@ -18,13 +18,13 @@
 
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
-#include "LocationMgr.hpp"
+#include "StelLocationMgr.hpp"
 
 #include <QStringListModel>
 #include <QDebug>
 #include <QFile>
 
-LocationMgr::LocationMgr()
+StelLocationMgr::StelLocationMgr()
 {
 	loadCities("data/base_locations.txt", false);
 	loadCities("data/user_locations.txt", true);
@@ -33,7 +33,7 @@ LocationMgr::LocationMgr()
 	modelAllLocation->setStringList(locations.keys());
 }
 
-void LocationMgr::loadCities(const QString& fileName, bool isUserLocation)
+void StelLocationMgr::loadCities(const QString& fileName, bool isUserLocation)
 {
 	// Load the cities from data file
 	QString cityDataPath;
@@ -66,13 +66,13 @@ void LocationMgr::loadCities(const QString& fileName, bool isUserLocation)
 		const QString& rawline=sourcestream.readLine();
 		if (rawline.isEmpty() || rawline.startsWith('#'))
 			continue;
-		Location loc = Location::createFromLine(rawline);
+		StelLocation loc = StelLocation::createFromLine(rawline);
 		loc.isUserLocation = isUserLocation;
 		
 		if (locations.contains(loc.getID()))
 		{
 			// Add the state in the name of the existing one and the new one to differentiate
-			Location loc2 = locations[loc.getID()];
+			StelLocation loc2 = locations[loc.getID()];
 			if (!loc2.state.isEmpty())
 				loc2.name += " ("+loc2.state+")";
 			// remove and re-add the fixed version
@@ -91,13 +91,13 @@ void LocationMgr::loadCities(const QString& fileName, bool isUserLocation)
 	sourcefile.close();
 }
 
-LocationMgr::~LocationMgr()
+StelLocationMgr::~StelLocationMgr()
 {
 }
 
-const Location LocationMgr::locationForSmallString(const QString& s) const
+const StelLocation StelLocationMgr::locationForSmallString(const QString& s) const
 {
-	QMap<QString, Location>::const_iterator iter = locations.find(s);
+	QMap<QString, StelLocation>::const_iterator iter = locations.find(s);
 	if (iter==locations.end())
 	{
 		qWarning() << "Warning: location" << s << "is unknown";
@@ -110,13 +110,13 @@ const Location LocationMgr::locationForSmallString(const QString& s) const
 }
 
 // Get whether a location can be permanently added to the list of user locations
-bool LocationMgr::canSaveUserLocation(const Location& loc) const
+bool StelLocationMgr::canSaveUserLocation(const StelLocation& loc) const
 {
 	return locations.find(loc.getID())==locations.end();
 }
 
 // Add permanently a location to the list of user locations
-bool LocationMgr::saveUserLocation(const Location& loc)
+bool StelLocationMgr::saveUserLocation(const StelLocation& loc)
 {
 	if (!canSaveUserLocation(loc))
 		return false;
@@ -166,9 +166,9 @@ bool LocationMgr::saveUserLocation(const Location& loc)
 
 // Get whether a location can be deleted from the list of user locations
 // If the location comes from the base read only list, it cannot be deleted
-bool LocationMgr::canDeleteUserLocation(const QString& id) const
+bool StelLocationMgr::canDeleteUserLocation(const QString& id) const
 {
-	QMap<QString, Location>::const_iterator iter=locations.find(id);
+	QMap<QString, StelLocation>::const_iterator iter=locations.find(id);
 	
 	// If it's not known at all there is a problem
 	if (iter==locations.end())
@@ -179,7 +179,7 @@ bool LocationMgr::canDeleteUserLocation(const QString& id) const
 	
 // Delete permanently the given location from the list of user locations
 // If the location comes from the base read only list, it cannot be deleted and false is returned
-bool LocationMgr::deleteUserLocation(const QString& id)
+bool StelLocationMgr::deleteUserLocation(const QString& id)
 {
 	if (!canDeleteUserLocation(id))
 		return false;
@@ -220,7 +220,7 @@ bool LocationMgr::deleteUserLocation(const QString& id)
 	QTextStream outstream(&sourcefile);
 	outstream.setCodec("UTF-8");	
 	
-	for (QMap<QString, Location>::const_iterator iter=locations.begin();iter!=locations.end();++iter)
+	for (QMap<QString, StelLocation>::const_iterator iter=locations.begin();iter!=locations.end();++iter)
 	{
 		if (iter.value().isUserLocation)
 		{

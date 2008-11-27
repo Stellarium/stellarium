@@ -22,7 +22,7 @@
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
-#include "Location.hpp"
+#include "StelLocation.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 

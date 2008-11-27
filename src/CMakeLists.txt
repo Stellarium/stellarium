@@ -19,10 +19,10 @@ SET(stellarium_lib_SRCS
 	core/Navigator.hpp
 	core/Observer.cpp
 	core/Observer.hpp
-	core/Location.hpp
-	core/Location.cpp
-	core/LocationMgr.hpp
-	core/LocationMgr.cpp
+	core/StelLocation.hpp
+	core/StelLocation.cpp
+	core/StelLocationMgr.hpp
+	core/StelLocationMgr.cpp
 	core/Projector.cpp
 	core/Projector.hpp
 	core/ProjectorClasses.cpp
@@ -267,7 +267,7 @@ SET(stellarium_MOC_HDRS
 	core/Observer.hpp
 	core/StelApp.hpp
 	core/Navigator.hpp
-	core/LocationMgr.hpp
+	core/StelLocationMgr.hpp
 	core/StelCore.hpp
 	core/StelAppGraphicsScene.hpp
 	core/StelTexture.hpp

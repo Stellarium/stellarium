@@ -38,7 +38,7 @@ class Observer;
 class StelObject;
 class LoadingBar;
 class Planet;
-class Location;
+class StelLocation;
 
 //! @class Navigator
 //! Manages a navigation context.  This includes:
@@ -84,12 +84,12 @@ public:
 	void setJ2000EquVisionDirection(const Vec3d& _pos);
 	
 	//! Get the informations on the current location
-	const Location& getCurrentLocation() const;
+	const StelLocation& getCurrentLocation() const;
 	//! Smoothly move the observer to the given location
 	//! @param duration direction of view move duration in s
 	//! @param durationIfPlanetChange direction of view + planet travel move duration in s.
 	//! This is used only if the destination planet is different from the starting one.
-	void moveObserverTo(const Location& target, double duration=1., double durationIfPlanetChange=1.);
+	void moveObserverTo(const StelLocation& target, double duration=1., double durationIfPlanetChange=1.);
 	
 	//! Get the sideral time shifted by the observer longitude
 	//! @return the locale sideral time in radian

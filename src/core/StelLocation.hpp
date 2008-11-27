@@ -16,19 +16,19 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _LOCATION_HPP_
-#define _LOCATION_HPP_
+#ifndef _STELLOCATION_HPP_
+#define _STELLOCATION_HPP_
 
 #include <QString>
 
-//! @class Location
+//! @class StelLocation
 //! Store the informations for a location on a planet
-class Location
+class StelLocation
 {
-	friend class LocationMgr;
+	friend class StelLocationMgr;
 	
 public:
-	Location() : longitude(0.), latitude(0.), altitude(0), bortleScaleIndex(2.), isUserLocation(true) {;}
+	StelLocation() : longitude(0.), latitude(0.), altitude(0), bortleScaleIndex(2.), isUserLocation(true) {;}
 	
 	//! Return a short string which can be used in a list view
 	QString getID() const
@@ -64,11 +64,11 @@ public:
 	QChar role;
 	
 	//! Parse a location from a line serialization
-	static Location createFromLine(const QString& line);
+	static StelLocation createFromLine(const QString& line);
 	
 private:
-	//! Used privately by the LocationMgr
+	//! Used privately by the StelLocationMgr
 	bool isUserLocation;
 };
 
-#endif // _LOCATION_HPP_
+#endif // _STELLOCATION_HPP_

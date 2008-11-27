@@ -25,7 +25,7 @@
 
 class Ui_locationDialogForm;
 class QModelIndex;
-class Location;
+class StelLocation;
 
 class LocationDialog : public StelDialog
 {
@@ -45,10 +45,10 @@ protected:
 private:
 	//! Set the values of all the fields from a location info
 	//! Also move the observer to this position
-	void setFieldsFromLocation(const Location& loc);
+	void setFieldsFromLocation(const StelLocation& loc);
 	
-	//! Create a Location instance from the fields
-	Location locationFromFields() const;
+	//! Create a StelLocation instance from the fields
+	StelLocation locationFromFields() const;
 	
 	//! True if the user is currently editing a new location
 	bool isEditingNew;
@@ -60,7 +60,7 @@ private:
 	void connectEditSignals();
 	
 	//! Update the map for the given location.
-	void setMapForLocation(const Location& loc);
+	void setMapForLocation(const StelLocation& loc);
 	
 private slots:
 	//! Update the widget to make sure it is synchrone if the location is changed programmatically

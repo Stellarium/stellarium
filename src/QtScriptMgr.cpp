@@ -41,9 +41,9 @@
 #include "SkyImageMgr.hpp"
 #include "StarMgr.hpp"
 #include "Projector.hpp"
-#include "Location.hpp"
+#include "StelLocation.hpp"
 #include "Planet.hpp"
-#include "LocationMgr.hpp"
+#include "StelLocationMgr.hpp"
 
 #include <QFile>
 #include <QSet>
@@ -211,7 +211,7 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
 	Q_ASSERT(ssmgr);
 
-	Location loc = nav->getCurrentLocation();
+	StelLocation loc = nav->getCurrentLocation();
 	if (longitude < 180 || longitude > 180)
 		loc.longitude = longitude;
 	if (latitude < 180 || latitude > 180)
@@ -229,7 +229,7 @@ void StelMainScriptAPI::setObserverLocation(const QString id, double duration)
 {
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 	Q_ASSERT(nav);
-	Location loc = StelApp::getInstance().getLocationMgr().locationForSmallString(id);
+	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForSmallString(id);
 	// How best to test to see if the lookup of the name was a success?
 	// On failure, it returns Paris, but maybe we _want_ Paris.
 	// Ugly. -MNG
