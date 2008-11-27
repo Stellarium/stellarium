@@ -19,7 +19,7 @@
 #ifndef _LOCATION_MGR_HPP_
 #define _LOCATION_MGR_HPP_
 
-#include "Location.hpp"
+#include "StelLocation.hpp"
 #include <QString>
 #include <QObject>
 #include <QMetaType>
@@ -27,31 +27,31 @@
 
 class QStringListModel;
 
-//! @class LocationMgr
+//! @class StelLocationMgr
 //! Manage the list of available location.
-class LocationMgr : public QObject
+class StelLocationMgr : public QObject
 {
 	Q_OBJECT;
 	
 public:
 	//! Default constructor
-	LocationMgr();
+	StelLocationMgr();
 	//! Destructor
-	~LocationMgr();
+	~StelLocationMgr();
 	
 	//! Return the model containing all the city
 	QStringListModel* getModelAll() {return modelAllLocation;}
 	
-	//! Return the Location for the given row (match modelAllLocation index row)
-	const Location locationForSmallString(const QString& s) const;
+	//! Return the StelLocation for the given row (match modelAllLocation index row)
+	const StelLocation locationForSmallString(const QString& s) const;
 	
 	//! Get whether a location can be permanently added to the list of user locations
 	//! The main constraint is that the small string must be unique
-	bool canSaveUserLocation(const Location& loc) const;
+	bool canSaveUserLocation(const StelLocation& loc) const;
 	
 	//! Add permanently a location to the list of user locations
 	//! It is later identified by its small string
-	bool saveUserLocation(const Location& loc);
+	bool saveUserLocation(const StelLocation& loc);
 	
 	//! Get whether a location can be deleted from the list of user locations
 	//! If the location comes from the base read only list, it cannot be deleted
@@ -71,7 +71,7 @@ private:
 	QStringListModel* modelAllLocation;
 	
 	//! The list of all loaded locations
-	QMap<QString, Location> locations;
+	QMap<QString, StelLocation> locations;
 };
 
 #endif // _LOCATION_MGR_HPP_

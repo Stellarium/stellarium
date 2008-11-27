@@ -24,7 +24,7 @@
 #include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelMainGraphicsView.hpp"
-#include "Location.hpp"
+#include "StelLocation.hpp"
 #include "StelGui.hpp"
 #include "MovementMgr.hpp"
 

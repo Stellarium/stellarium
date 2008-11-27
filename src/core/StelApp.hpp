@@ -40,7 +40,7 @@ class QSettings;
 class QNetworkAccessManager;
 class StelStyle;
 class QTime;
-class LocationMgr;
+class StelLocationMgr;
 class SkyImageMgr;
 class QtScriptMgr;
 class DownloadMgr;
@@ -111,7 +111,7 @@ public:
 	
 	//! Get the Location manager to use for managing stored locations
 	//! @return the Location manager to use for managing stored locations
-	LocationMgr& getLocationMgr() {return *planetLocationMgr;}
+	StelLocationMgr& getLocationMgr() {return *planetLocationMgr;}
 	
 	//! Get the StelFileMgr for performing file operations.
 	//! @return the StelFileMgr manager to use for performing file operations
@@ -338,7 +338,7 @@ private:
 	StelObjectMgr* stelObjectMgr;
 
 	// Manager for the list of observer locations on planets
-	LocationMgr* planetLocationMgr;
+	StelLocationMgr* planetLocationMgr;
 	
 	//! Utility class for file operations, mainly locating files by name
 	StelFileMgr* stelFileMgr;

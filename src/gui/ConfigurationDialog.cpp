@@ -35,7 +35,7 @@
 #include "SkyDrawer.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "Location.hpp"
+#include "StelLocation.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "SolarSystem.hpp"
