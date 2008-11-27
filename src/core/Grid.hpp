@@ -20,12 +20,12 @@
 #ifndef _GRID_HPP_
 #define _GRID_HPP_
 
-#include "GridObject.hpp"
+#include "StelGridObject.hpp"
 #include "SphereGeometry.hpp"
 
 using namespace StelGeom;
 
-class Grid : public std::vector<GridObject*>
+class Grid : public std::vector<StelGridObject*>
 {
 public:
     Grid() {}
@@ -36,18 +36,18 @@ public:
     virtual void filterIntersect(const ConvexS& s) {;}
     
 	//! Get all the objects loaded into the grid structure
-	virtual std::vector<GridObject*> getAllObjects() = 0;
+	virtual std::vector<StelGridObject*> getAllObjects() = 0;
 
 	//! Insert an element in the resulting object list
-	void insertResult(GridObject* obj)
+	void insertResult(StelGridObject* obj)
     {
-		std::vector<GridObject*>::push_back(obj);
+		std::vector<StelGridObject*>::push_back(obj);
     }
 	
 	//! Insert several elements in the resulting object list
-	void insertResult(const std::vector<GridObject*>& objs)
+	void insertResult(const std::vector<StelGridObject*>& objs)
 	{
-		std::vector<GridObject*>::insert(std::vector<GridObject*>::end(), objs.begin(), objs.end());
+		std::vector<StelGridObject*>::insert(std::vector<StelGridObject*>::end(), objs.begin(), objs.end());
 	}
 };
 
@@ -57,7 +57,7 @@ public:
 	SimpleGrid() {}
 
 	~SimpleGrid() {}
-	void insert(GridObject* obj)
+	void insert(StelGridObject* obj)
 	{
 		all.push_back(obj);
 	}
@@ -66,10 +66,10 @@ public:
 			void filterIntersect(const Shape& s);
 
 	//! Get all the object loaded into the grid
-	virtual std::vector<GridObject*> getAllObjects() {return all;}
+	virtual std::vector<StelGridObject*> getAllObjects() {return all;}
 
 private:
-	typedef std::vector<GridObject*> AllObjects;
+	typedef std::vector<StelGridObject*> AllObjects;
 	AllObjects all;
 };
 

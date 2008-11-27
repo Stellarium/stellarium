@@ -23,7 +23,7 @@
 #include <QString>
 #include "vecmath.h"
 #include "StelObjectType.hpp"
-#include "GridObject.hpp"
+#include "StelGridObject.hpp"
 
 class Navigator;
 class StelCore;
@@ -36,7 +36,7 @@ void intrusive_ptr_release(StelObject* p);
 //! The base abstract class for sky objects used in Stellarium like Stars, Planets, Constellations etc...
 //! Normally you should use StelObjectP instead of StelObject* which have by default the same behaviour,
 //! but which can be added reference counting if needed.
-class StelObject : public GridObject
+class StelObject : public StelGridObject
 {
 public:
 	//! @enum InfoStringGroup used as named bitfield flags as specifiers to 
@@ -68,7 +68,7 @@ public:
 
 	virtual ~StelObject(void) {}
 
-	//! Default implementation of the GridObject method
+	//! Default implementation of the StelGridObject method
 	//! Calling this method on some object will cause an error if they need a valid Navigator instance to compute their position
 	virtual Vec3d getPositionForGrid() const {return getJ2000EquatorialPos(NULL);}
 	

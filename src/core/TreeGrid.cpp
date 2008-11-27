@@ -77,7 +77,7 @@ TreeGrid::~TreeGrid()
 {
 }
 
-void TreeGrid::insert(GridObject* obj, TreeGridNode& node)
+void TreeGrid::insert(StelGridObject* obj, TreeGridNode& node)
 {
     if (node.children.empty())
     {
@@ -142,7 +142,7 @@ void TreeGrid::fillAll(const TreeGridNode& node, Grid& grid) const
 	}
 }
 
-void TreeGrid::fillAll(const TreeGridNode& node, std::vector<GridObject*>& result) const
+void TreeGrid::fillAll(const TreeGridNode& node, std::vector<StelGridObject*>& result) const
 {
 	result.insert(result.end(), node.objects.begin(), node.objects.end());
 	for (Children::const_iterator ic = node.children.begin(); ic != node.children.end(); ++ic)
@@ -166,9 +166,9 @@ unsigned int TreeGrid::depth(const TreeGridNode& node) const
 /*************************************************************************
  Get all the objects loaded into the grid structure
 *************************************************************************/
-std::vector<GridObject*> TreeGrid::getAllObjects()
+std::vector<StelGridObject*> TreeGrid::getAllObjects()
 {
-	std::vector<GridObject*> result;
+	std::vector<StelGridObject*> result;
 	fillAll(*this, result);
 	return result;
 }
