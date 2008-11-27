@@ -25,7 +25,7 @@
 #include "ToneReproducer.hpp"
 #include "StelCore.hpp"
 #include "StelTextureMgr.hpp"
-#include "SkyDrawer.hpp"
+#include "StelSkyDrawer.hpp"
 #include "StelPainter.hpp"
 
 #include <QDebug>

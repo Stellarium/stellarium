@@ -30,17 +30,17 @@ class ToneReproducer;
 class StelCore;
 class StelPainter;
 
-//! @class SkyDrawer
+//! @class StelSkyDrawer
 //! Provide a set of methods used to draw sky objects taking into account
 //! eyes adaptation, zoom level and instrument model
-class SkyDrawer : public QObject
+class StelSkyDrawer : public QObject
 {
 	Q_OBJECT;
 public:
 	//! Constructor
-    SkyDrawer(StelCore* core);
+    StelSkyDrawer(StelCore* core);
 	//! Destructor
-    ~SkyDrawer();
+    ~StelSkyDrawer();
 
 	//! Init parameters from config file
 	void init();
@@ -181,17 +181,17 @@ private:
 	//! Compute the current limit luminance by dichotomy
 	float computeLimitLuminance() const;
 	
-	//! Get SkyDrawer maximum FOV.
+	//! Get StelSkyDrawer maximum FOV.
 	float getMaxAdaptFov(void) const {return maxAdaptFov;}
-	//! Set SkyDrawer maximum FOV.
+	//! Set StelSkyDrawer maximum FOV.
 	//! Usually stars/planet halos are drawn fainter when FOV gets larger, 
 	//! but when FOV gets larger than this value, the stars do not become
 	//! fainter any more. Must be >= 60.0.
 	void setMaxAdaptFov(float fov) {maxAdaptFov = (fov < 60.f) ? 60.f : fov;}
 	
-	//! Get SkyDrawer minimum FOV.
+	//! Get StelSkyDrawer minimum FOV.
 	float getMinAdaptFov(void) const {return minAdaptFov;}
-	//! Set SkyDrawer minimum FOV.
+	//! Set StelSkyDrawer minimum FOV.
 	//! Usually stars/planet halos are drawn brighter when FOV gets smaller.
 	//! But when FOV gets smaller than this value, the stars do not become
 	//! brighter any more. Must be <= 60.0.

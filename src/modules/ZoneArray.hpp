@@ -36,7 +36,7 @@
 #include "StelProjector.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "SkyDrawer.hpp"
+#include "StelSkyDrawer.hpp"
 #include "StelTexture.hpp"
 #include "StarMgr.hpp"
 #include "bytes.h"
@@ -390,7 +390,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
                                   float names_brightness,
                                   StelFont *starFont) const
 {
-	SkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
+	StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
 	SpecialZoneData<Star> *const z = getZones() + index;
 	Vec3d xy;
 	const Star *const end = z->getStars() + z->size;
@@ -410,7 +410,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 				if (!starname.isEmpty())
 				{
 					const float offset = (rcmag_table + 2*(s->mag))[0]*0.7;
-					const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.2, 0.2) : SkyDrawer::indexToColor(s->bV))*0.75;
+					const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.2, 0.2) : StelSkyDrawer::indexToColor(s->bV))*0.75;
 					glColor4f(colorr[0], colorr[1], colorr[2],names_brightness);
 					drawer->getPainter()->drawText(starFont,xy[0],xy[1], starname, 0, offset, offset, false);
 				}

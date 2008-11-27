@@ -27,7 +27,7 @@
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelCore.hpp"
-#include "SkyDrawer.hpp"
+#include "StelSkyDrawer.hpp"
 #include "StelPainter.hpp"
 
 #include <QDebug>

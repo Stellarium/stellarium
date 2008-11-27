@@ -26,7 +26,7 @@
 
 class StelNavigator;
 class ToneReproducer;
-class SkyDrawer;
+class StelSkyDrawer;
 class StelGeodesicGrid;
 class StelMovementMgr;
 
@@ -109,10 +109,10 @@ public:
 	//! Get the current tone reproducer used in the core.
 	const ToneReproducer* getToneReproducer() const {return toneConverter;}
 
-	//! Get the current SkyDrawer used in the core.
-	SkyDrawer* getSkyDrawer() {return skyDrawer;}
-	//! Get the current SkyDrawer used in the core.
-	const SkyDrawer* getSkyDrawer() const {return skyDrawer;}
+	//! Get the current StelSkyDrawer used in the core.
+	StelSkyDrawer* getSkyDrawer() {return skyDrawer;}
+	//! Get the current StelSkyDrawer used in the core.
+	const StelSkyDrawer* getSkyDrawer() const {return skyDrawer;}
 
 	//! Get an instance of StelGeodesicGrid which is garanteed to allow for at least maxLevel levels
 	const StelGeodesicGrid* getGeodesicGrid(int maxLevel) const;
@@ -172,7 +172,7 @@ public slots:
 private:
 	StelNavigator* navigation;			// Manage all navigation parameters, coordinate transformations etc..
 	ToneReproducer* toneConverter;		// Tones conversion between stellarium world and display device
-	SkyDrawer* skyDrawer;
+	StelSkyDrawer* skyDrawer;
 	StelMovementMgr* movementMgr;		// Manage vision movements
 	
 	// Manage geodesic grid
