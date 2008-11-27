@@ -158,18 +158,6 @@ public:
 	const StelStyle* getCurrentStelStyle() {return currentStelStyle;}
 	
 	///////////////////////////////////////////////////////////////////////////
-	// Deprecated methods
-	//! Set the time multiplier used when fast forwarding scripts.
-	//! n.b. - do not confuse this with sky time rate
-	//! @param multiplier new value for the time multiplier
-	void setTimeMultiplier(const int multiplier) { timeMultiplier = multiplier; }
-
-	//! Get the time multiplier used when fast forwarding scripts.
-	//! n.b. - do not confuse this with sky time rate
-	//! @return the integer time multiplier
-	const int getTimeMultiplier() { return timeMultiplier; }
-	
-	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
 	//! Return the full name of stellarium, i.e. "Stellarium 0.9.0".
@@ -372,8 +360,6 @@ private:
 	
 	int frame;
 	double timefr, timeBase;		// Used for fps counter
-
-	int timeMultiplier;	// used for adjusting deltaTime for script speeds
 	
 	//! Define whether we are in night vision mode
 	bool flagNightVision;

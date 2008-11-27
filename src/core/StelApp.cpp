@@ -272,8 +272,6 @@ void StelApp::init()
 	skyCultureMgr = new StelSkyCultureMgr();
 	planetLocationMgr = new StelLocationMgr();
 	
-	timeMultiplier = 1;
-	
 	// Initialize AFTER creation of openGL context
 	textureMgr->init();
 
@@ -631,9 +629,6 @@ void StelApp::update(double deltaTime)
 		frame = 0;
 		timeBase+=1.;
 	}
-
-	// change time rate if needed to fast forward scripts
-	deltaTime *= timeMultiplier;
 
 	core->update(deltaTime);
 	
