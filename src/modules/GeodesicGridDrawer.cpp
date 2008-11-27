@@ -19,31 +19,31 @@
  
 #include <QString>
 #include "StelCore.hpp"
-#include "GeodesicGridDrawer.hpp"
+#include "StelGeodesicGridDrawer.hpp"
 #include "StelProjector.hpp"
 #include "StelApp.hpp"
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 
-GeodesicGridDrawer::GeodesicGridDrawer(int maxLevel)
+StelGeodesicGridDrawer::StelGeodesicGridDrawer(int maxLevel)
 {
-	setObjectName("GeodesicGridDrawer");
+	setObjectName("StelGeodesicGridDrawer");
 	font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage());
 }
 
-GeodesicGridDrawer::~GeodesicGridDrawer()
+StelGeodesicGridDrawer::~StelGeodesicGridDrawer()
 {
 }
 
-void GeodesicGridDrawer::init()
+void StelGeodesicGridDrawer::init()
 {
 }
 
 
-double GeodesicGridDrawer::draw(StelCore* core, int maxSearchLevel)
+double StelGeodesicGridDrawer::draw(StelCore* core, int maxSearchLevel)
 {
 	const StelProjectorP prj = core->getProjection();
-	GeodesicGrid* geodesicGrid = core->getGeodesicGrid();
+	StelGeodesicGrid* geodesicGrid = core->getGeodesicGrid();
 
 	const GeodesicSearchResult* geodesic_search_result = geodesicGrid->search(prj->unprojectViewport(), maxSearchLevel);
 	

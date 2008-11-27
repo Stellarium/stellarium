@@ -1,6 +1,6 @@
 /*
  
-GeodesicGrid: a library for dividing the sphere into triangle zones
+StelGeodesicGrid: a library for dividing the sphere into triangle zones
 by subdividing the icosahedron
  
 Author and Copyright: Johannes Gajdosik, 2006
@@ -32,7 +32,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  
 */
 
-#include "GeodesicGrid.hpp"
+#include "StelGeodesicGrid.hpp"
 
 #include <QDebug>
 #include <cmath>
@@ -88,7 +88,7 @@ static const TopLevelTriangle icosahedron_triangles[20] =
         {{ 8, 9, 5}}  //  8
     };
 
-GeodesicGrid::GeodesicGrid(const int lev) : maxLevel(lev<0?0:lev), lastMaxSearchlevel(-1)
+StelGeodesicGrid::StelGeodesicGrid(const int lev) : maxLevel(lev<0?0:lev), lastMaxSearchlevel(-1)
 {
 	if (maxLevel > 0)
 	{
@@ -115,7 +115,7 @@ GeodesicGrid::GeodesicGrid(const int lev) : maxLevel(lev<0?0:lev), lastMaxSearch
 	cacheSearchResult = new GeodesicSearchResult(*this);
 }
 
-GeodesicGrid::~GeodesicGrid(void)
+StelGeodesicGrid::~StelGeodesicGrid(void)
 {
 	if (maxLevel > 0)
 	{
@@ -126,7 +126,7 @@ GeodesicGrid::~GeodesicGrid(void)
 	cacheSearchResult = NULL;
 }
 
-void GeodesicGrid::getTriangleCorners(int lev,int index,
+void StelGeodesicGrid::getTriangleCorners(int lev,int index,
                                       Vec3d &h0,
                                       Vec3d &h1,
                                       Vec3d &h2) const
@@ -181,7 +181,7 @@ void GeodesicGrid::getTriangleCorners(int lev,int index,
 	}
 }
 
-int GeodesicGrid::getPartnerTriangle(int lev, int index) const
+int StelGeodesicGrid::getPartnerTriangle(int lev, int index) const
 {
 	if (lev==0)
 	{
@@ -210,7 +210,7 @@ int GeodesicGrid::getPartnerTriangle(int lev, int index) const
 	return 0;
 }
 
-void GeodesicGrid::initTriangle(int lev,int index,
+void StelGeodesicGrid::initTriangle(int lev,int index,
                                 const Vec3d &c0,
                                 const Vec3d &c1,
                                 const Vec3d &c2)
@@ -235,7 +235,7 @@ void GeodesicGrid::initTriangle(int lev,int index,
 }
 
 
-void GeodesicGrid::visitTriangles(int maxVisitLevel,
+void StelGeodesicGrid::visitTriangles(int maxVisitLevel,
                                   VisitFunc *func,
                                   void *context) const
 {
@@ -254,7 +254,7 @@ void GeodesicGrid::visitTriangles(int maxVisitLevel,
 	}
 }
 
-void GeodesicGrid::visitTriangles(int lev,int index,
+void StelGeodesicGrid::visitTriangles(int lev,int index,
                                   const Vec3d &c0,
                                   const Vec3d &c1,
                                   const Vec3d &c2,
@@ -276,7 +276,7 @@ void GeodesicGrid::visitTriangles(int lev,int index,
 }
 
 
-int GeodesicGrid::searchZone(const Vec3d &v,int searchLevel) const
+int StelGeodesicGrid::searchZone(const Vec3d &v,int searchLevel) const
 {
 	for (int i=0;i<20;i++)
 	{
@@ -311,14 +311,14 @@ int GeodesicGrid::searchZone(const Vec3d &v,int searchLevel) const
 			return i;
 		}
 	}
-	qWarning() << "ERROR GeodesicGrid::searchZone - not found";
+	qWarning() << "ERROR StelGeodesicGrid::searchZone - not found";
 	exit(-1);
 	// shut up the compiler
 	return -1;
 }
 
 
-void GeodesicGrid::searchZones(const StelGeom::ConvexS& convex,
+void StelGeodesicGrid::searchZones(const StelGeom::ConvexS& convex,
                                int **inside_list,int **border_list,
                                int maxSearchLevel) const
 {
@@ -359,7 +359,7 @@ void GeodesicGrid::searchZones(const StelGeom::ConvexS& convex,
 #endif
 }
 
-void GeodesicGrid::searchZones(int lev,int index,
+void StelGeodesicGrid::searchZones(int lev,int index,
                                const StelGeom::ConvexS& convex,
                                const int *indexOfUsedHalfSpaces,
                                const int halfSpacesUsed,
@@ -458,7 +458,7 @@ void GeodesicGrid::searchZones(int lev,int index,
 /*************************************************************************
  Return a search result matching the given spatial region
 *************************************************************************/
-const GeodesicSearchResult* GeodesicGrid::search(const StelGeom::ConvexS& convex, int maxSearchLevel) const
+const GeodesicSearchResult* StelGeodesicGrid::search(const StelGeom::ConvexS& convex, int maxSearchLevel) const
 {
 	// Try to use the cached version
 	if (maxSearchLevel==lastMaxSearchlevel && convex==lastSearchRegion)
@@ -476,14 +476,14 @@ const GeodesicSearchResult* GeodesicGrid::search(const StelGeom::ConvexS& convex
 /*************************************************************************
  Return a search result matching the given spatial region
 *************************************************************************/
-const GeodesicSearchResult* GeodesicGrid::search(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2,const Vec3d &e3,int maxSearchLevel) const
+const GeodesicSearchResult* StelGeodesicGrid::search(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2,const Vec3d &e3,int maxSearchLevel) const
 {
 	StelGeom::ConvexS c(e0, e1, e2, e3);
 	return search(c,maxSearchLevel);
 }
 
 
-GeodesicSearchResult::GeodesicSearchResult(const GeodesicGrid &grid)
+GeodesicSearchResult::GeodesicSearchResult(const StelGeodesicGrid &grid)
 		:grid(grid),
 		zones(new int*[grid.getMaxLevel()+1]),
 		inside(new int*[grid.getMaxLevel()+1]),
@@ -491,7 +491,7 @@ GeodesicSearchResult::GeodesicSearchResult(const GeodesicGrid &grid)
 {
 	for (int i=0;i<=grid.getMaxLevel();i++)
 	{
-		zones[i] = new int[GeodesicGrid::nrOfZones(i)];
+		zones[i] = new int[StelGeodesicGrid::nrOfZones(i)];
 	}
 }
 
@@ -512,7 +512,7 @@ void GeodesicSearchResult::search(const StelGeom::ConvexS& convex,
 	for (int i=grid.getMaxLevel();i>=0;i--)
 	{
 		inside[i] = zones[i];
-		border[i] = zones[i]+GeodesicGrid::nrOfZones(i);
+		border[i] = zones[i]+StelGeodesicGrid::nrOfZones(i);
 	}
 	grid.searchZones(convex,inside,border,maxSearchLevel);
 }

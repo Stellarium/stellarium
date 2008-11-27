@@ -66,7 +66,7 @@
 
 namespace BigStarCatalogExtension {
 
-// A ZoneArray manages all ZoneData structures of a given GeodesicGrid level.
+// A ZoneArray manages all ZoneData structures of a given StelGeodesicGrid level.
 
 class ZoneArray {
 public:
