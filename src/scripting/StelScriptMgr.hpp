@@ -261,13 +261,13 @@ private:
 };
 		
 //! Manage scripting in Stellarium
-class QtScriptMgr : public QObject
+class StelScriptMgr : public QObject
 {
 Q_OBJECT
 		
 public:
-	QtScriptMgr(const QString& startupScript, QObject *parent=0);
-	~QtScriptMgr();
+	StelScriptMgr(const QString& startupScript, QObject *parent=0);
+	~StelScriptMgr();
 
 	QStringList getScriptList(void);
 

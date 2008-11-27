@@ -19,7 +19,7 @@
 
 #include "fixx11h.h"
 
-#include "QtScriptMgr.hpp"
+#include "StelScriptMgr.hpp"
 #include "StelAudioMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "GridLinesMgr.hpp"
@@ -553,7 +553,7 @@ void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float
 	mvmgr->moveTo(aim, duration, false);
 }
 
-QtScriptMgr::QtScriptMgr(const QString& startupScript, QObject *parent) 
+StelScriptMgr::StelScriptMgr(const QString& startupScript, QObject *parent) 
 	: QObject(parent), 
 	  thread(NULL)
 {
@@ -583,11 +583,11 @@ QtScriptMgr::QtScriptMgr(const QString& startupScript, QObject *parent)
 }
 
 
-QtScriptMgr::~QtScriptMgr()
+StelScriptMgr::~StelScriptMgr()
 {
 }
 
-QStringList QtScriptMgr::getScriptList(void)
+QStringList StelScriptMgr::getScriptList(void)
 {
 	QStringList scriptFiles;
 	try
@@ -607,12 +607,12 @@ QStringList QtScriptMgr::getScriptList(void)
 	return scriptFiles;
 }
 
-bool QtScriptMgr::scriptIsRunning(void)
+bool StelScriptMgr::scriptIsRunning(void)
 {
 	return (thread != NULL);
 }
 
-QString QtScriptMgr::runningScriptId(void)
+QString StelScriptMgr::runningScriptId(void)
 {
 	if (thread)
 		return thread->getFileName();
@@ -620,7 +620,7 @@ QString QtScriptMgr::runningScriptId(void)
 		return QString();
 }
 
-const QString QtScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText)
+const QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText)
 {
 	try
 	{
@@ -650,22 +650,22 @@ const QString QtScriptMgr::getHeaderSingleLineCommentText(const QString& s, cons
 	}
 }
 
-const QString QtScriptMgr::getName(const QString& s)
+const QString StelScriptMgr::getName(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "Name", s);
 }
 
-const QString QtScriptMgr::getAuthor(const QString& s)
+const QString StelScriptMgr::getAuthor(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "Author");
 }
 
-const QString QtScriptMgr::getLicense(const QString& s)
+const QString StelScriptMgr::getLicense(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "License", "");
 }
 
-const QString QtScriptMgr::getDescription(const QString& s)
+const QString StelScriptMgr::getDescription(const QString& s)
 {
 	try
 	{
@@ -719,7 +719,7 @@ const QString QtScriptMgr::getDescription(const QString& s)
 }
 
 // Run the script located at the given location
-bool QtScriptMgr::runScript(const QString& fileName)
+bool StelScriptMgr::runScript(const QString& fileName)
 {
 	if (thread!=NULL)
 	{
@@ -747,7 +747,7 @@ bool QtScriptMgr::runScript(const QString& fileName)
 	return true;
 }
 
-bool QtScriptMgr::stopScript(void)
+bool StelScriptMgr::stopScript(void)
 {
 	if (thread)
 	{
@@ -757,12 +757,12 @@ bool QtScriptMgr::stopScript(void)
 	}
 	else
 	{
-		qWarning() << "QtScriptMgr::stopScript - no script is running";
+		qWarning() << "StelScriptMgr::stopScript - no script is running";
 		return false;
 	}
 }
 
-void QtScriptMgr::scriptEnded()
+void StelScriptMgr::scriptEnded()
 {
 	delete thread;
 	thread=NULL;
