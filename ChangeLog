@@ -7,6 +7,7 @@ Fixed min FPS feature.
 Implemented screenshots inverted colors feature + associated GUI.
 Re-coded grid display from scratch. It is now much faster and much more robust.
 Refactored large part of the Navigator and Projector classes. Added a StelPainter class allowing many optimizations and simpler API.
+Re-added telescope control key bindings
 
 0.10.0 beta [2008-09-22]
 Global switch to Qt. Don't support SDL main application anymore.

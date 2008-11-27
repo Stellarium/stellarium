@@ -32,7 +32,7 @@
 
 #include "GLee.h"
 
-#include "LoadingBar.hpp"
+#include "StelLoadingBar.hpp"
 #include "Projector.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -73,7 +73,7 @@ public:
   static ZoneArray *create(const StarMgr &hip_star_mgr,
                            const QString &extended_file_name,
 			   bool use_mmap,
-                           LoadingBar &lb);
+                           StelLoadingBar &lb);
   virtual ~ZoneArray(void) {nr_of_zones = 0;}
   virtual void generateNativeDebugFile(const char *fname) const = 0;
   unsigned int getNrOfStars(void) const {return nr_of_stars;}
@@ -97,8 +97,8 @@ public:
   double star_position_scale;
   const StarMgr &hip_star_mgr;
 protected:
-  static bool readFileWithLoadingBar(FILE *f,
-                                     void *data,size_t size,LoadingBar &lb);
+  static bool readFileWithStelLoadingBar(FILE *f,
+                                     void *data,size_t size,StelLoadingBar &lb);
   ZoneArray(const StarMgr &hip_star_mgr,int level,
             int mag_min,int mag_range,int mag_steps);
   unsigned int nr_of_zones;
@@ -110,7 +110,7 @@ template<class Star>
 class SpecialZoneArray : public ZoneArray {
 public:
   SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
-                   LoadingBar &lb,
+                   StelLoadingBar &lb,
                    const StarMgr &hip_star_mgr,int level,
                    int mag_min,int mag_range,int mag_steps);
   ~SpecialZoneArray(void);
@@ -154,7 +154,7 @@ struct HipIndexStruct {
 class ZoneArray1 : public SpecialZoneArray<Star1> {
 public:
   ZoneArray1(FILE *f,bool byte_swap,bool use_mmap,
-             LoadingBar &lb,const StarMgr &hip_star_mgr,
+             StelLoadingBar &lb,const StarMgr &hip_star_mgr,
              int level,int mag_min,int mag_range,int mag_steps)
     : SpecialZoneArray<Star1>(f,byte_swap,use_mmap,lb,hip_star_mgr,level,
                               mag_min,mag_range,mag_steps) {}
@@ -176,7 +176,7 @@ void SpecialZoneArray<Star>::generateNativeDebugFile(const char *fname) const {
 
 template<class Star>
 SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
-                                         LoadingBar &lb,
+                                         StelLoadingBar &lb,
                                          const StarMgr &hip_star_mgr,
                                          int level,
                                          int mag_min,int mag_range,
@@ -310,7 +310,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
                      << ")::SpecialZoneArray: no memory (3)";
           exit(1);
         }
-        if (!readFileWithLoadingBar(f,stars,sizeof(Star)*nr_of_stars,lb)) {
+        if (!readFileWithStelLoadingBar(f,stars,sizeof(Star)*nr_of_stars,lb)) {
           delete[] stars;
           stars = 0;
           nr_of_stars = 0;

@@ -89,7 +89,7 @@ int ReadInt(FILE *f,unsigned int &x) {
 ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
                              const QString& extended_file_name,
 			     bool use_mmap,
-                             LoadingBar &lb) {
+                             StelLoadingBar &lb) {
   QString fname(extended_file_name);
   QString dbStr; // for debugging output.
   try {
@@ -244,8 +244,8 @@ ZoneArray::ZoneArray(const StarMgr &hip_star_mgr,int level,
   nr_of_stars = 0;
 }
 
-bool ZoneArray::readFileWithLoadingBar(FILE *f,void *data,size_t size,
-                                       LoadingBar &lb) {
+bool ZoneArray::readFileWithStelLoadingBar(FILE *f,void *data,size_t size,
+                                       StelLoadingBar &lb) {
   int parts = 256;
   size_t part_size = (size + (parts>>1)) / parts;
   if (part_size < 64*1024) {

@@ -39,7 +39,7 @@
 #include "ToneReproducer.hpp"
 #include "Translator.hpp"
 #include "GeodesicGrid.hpp"
-#include "LoadingBar.hpp"
+#include "StelLoadingBar.hpp"
 #include "Translator.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
@@ -269,7 +269,7 @@ void StarMgr::loadStarSettings()
 ***************************************************************************/
 void StarMgr::loadData()
 {
-	LoadingBar& lb = *StelApp::getInstance().getLoadingBar();
+	StelLoadingBar& lb = *StelApp::getInstance().getStelLoadingBar();
 			
 	// Please do not init twice:
 	Q_ASSERT(maxGeodesicGridLevel < 0);

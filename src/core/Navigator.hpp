@@ -36,7 +36,7 @@
 
 class Observer;
 class StelObject;
-class LoadingBar;
+class StelLoadingBar;
 class Planet;
 class StelLocation;
 

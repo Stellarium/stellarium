@@ -11,8 +11,8 @@ SET(stellarium_lib_SRCS
 	core/DownloadMgr.cpp
 	core/GeodesicGrid.cpp
 	core/GeodesicGrid.hpp
-	core/LoadingBar.cpp
-	core/LoadingBar.hpp
+	core/StelLoadingBar.cpp
+	core/StelLoadingBar.hpp
 	core/MovementMgr.cpp
 	core/MovementMgr.hpp
 	core/Navigator.cpp
