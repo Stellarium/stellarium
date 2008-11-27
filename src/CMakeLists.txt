@@ -81,7 +81,7 @@ SET(stellarium_lib_SRCS
 	core/SkyImageMgr.cpp
 	core/SkyImageMgr.hpp
 	core/StelFader.hpp
-	core/Grid.hpp
+	core/StelGrid.hpp
 	core/StelGridObject.hpp
 	core/SphereGeometry.cpp
 	core/SphereGeometry.hpp

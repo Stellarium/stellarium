@@ -17,20 +17,20 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#ifndef _GRID_HPP_
-#define _GRID_HPP_
+#ifndef _STELGRID_HPP_
+#define _STELGRID_HPP_
 
 #include "StelGridObject.hpp"
 #include "SphereGeometry.hpp"
 
 using namespace StelGeom;
 
-class Grid : public std::vector<StelGridObject*>
+class StelGrid : public std::vector<StelGridObject*>
 {
 public:
-    Grid() {}
+    StelGrid() {}
     
-    virtual ~Grid() {}
+    virtual ~StelGrid() {}
 
 	//! Preselect all the objects in the given area
     virtual void filterIntersect(const ConvexS& s) {;}
@@ -51,7 +51,7 @@ public:
 	}
 };
 
-class SimpleGrid : public Grid
+class SimpleGrid : public StelGrid
 {
 public:
 	SimpleGrid() {}
@@ -83,10 +83,10 @@ template<class Shape> void SimpleGrid::filterIntersect(const Shape& s)
 	{
 		if (intersect(s, (*iter)->getPositionForGrid()))
 		{
-			this->Grid::insertResult(*iter);
+			this->StelGrid::insertResult(*iter);
 		}
 	}
 }
 
-#endif // _GRID_HPP_
+#endif // _STELGRID_HPP_
 
