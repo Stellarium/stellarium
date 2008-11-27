@@ -21,25 +21,25 @@ for(i=0; i<15; i++)
 {
 	core.wait(0.1);
 	if (i%3==0) { 
-		SkyImageMgr.showImage("logo1", true); 
-		SkyImageMgr.showImage("logo2", false); 
-		SkyImageMgr.showImage("logo3", false); 
+		StelSkyImageMgr.showImage("logo1", true); 
+		StelSkyImageMgr.showImage("logo2", false); 
+		StelSkyImageMgr.showImage("logo3", false); 
 	}
 	else if ((i+1)%3==0) {
-		SkyImageMgr.showImage("logo1", false); 
-		SkyImageMgr.showImage("logo2", true); 
-		SkyImageMgr.showImage("logo3", false); 
+		StelSkyImageMgr.showImage("logo1", false); 
+		StelSkyImageMgr.showImage("logo2", true); 
+		StelSkyImageMgr.showImage("logo3", false); 
 	}
 	else if ((i+2)%3==0) {
-		SkyImageMgr.showImage("logo1", false); 
-		SkyImageMgr.showImage("logo2", false); 
-		SkyImageMgr.showImage("logo3", true); 
+		StelSkyImageMgr.showImage("logo1", false); 
+		StelSkyImageMgr.showImage("logo2", false); 
+		StelSkyImageMgr.showImage("logo3", true); 
 	}
 }
 
-SkyImageMgr.showImage("logo1", true); 
-SkyImageMgr.showImage("logo2", true); 
-SkyImageMgr.showImage("logo3", true); 
+StelSkyImageMgr.showImage("logo1", true); 
+StelSkyImageMgr.showImage("logo2", true); 
+StelSkyImageMgr.showImage("logo3", true); 
 core.wait(1);
 core.removeSkyImage("logo1");
 core.wait(1);

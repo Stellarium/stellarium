@@ -78,8 +78,8 @@ SET(stellarium_lib_SRCS
 	core/StelViewportDistorter.cpp
 	core/StelViewportDistorter.hpp
 	core/StelStyle.hpp
-	core/SkyImageMgr.cpp
-	core/SkyImageMgr.hpp
+	core/StelSkyImageMgr.cpp
+	core/StelSkyImageMgr.hpp
 	core/StelFader.hpp
 	core/StelGrid.hpp
 	core/StelGridObject.hpp
@@ -274,7 +274,7 @@ SET(stellarium_MOC_HDRS
 	core/SkyImageTile.hpp
 	core/SkyPolygon.hpp
 	core/StelSkyDrawer.hpp
-	core/SkyImageMgr.hpp
+	core/StelSkyImageMgr.hpp
 	modules/ConstellationMgr.hpp
 	modules/GridLinesMgr.hpp
 	modules/LabelMgr.hpp
