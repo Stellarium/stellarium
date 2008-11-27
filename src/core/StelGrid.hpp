@@ -21,7 +21,7 @@
 #define _STELGRID_HPP_
 
 #include "StelGridObject.hpp"
-#include "SphereGeometry.hpp"
+#include "StelSphereGeometry.hpp"
 
 using namespace StelGeom;
 

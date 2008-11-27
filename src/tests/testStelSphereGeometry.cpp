@@ -1,7 +1,7 @@
 #include <config.h>
 #include <QtDebug>
 
-#include "SphereGeometry.hpp"
+#include "StelSphereGeometry.hpp"
 #include "StelUtils.hpp"
 
 void _assert(bool b, QString msg = "")

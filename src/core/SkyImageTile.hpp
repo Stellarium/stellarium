@@ -20,7 +20,7 @@
 #define _SKYIMAGETILE_HPP_
 
 #include "StelTextureTypes.hpp"
-#include "SphereGeometry.hpp"
+#include "StelSphereGeometry.hpp"
 #include "MultiLevelJsonBase.hpp"
 
 #include <QTimeLine>
