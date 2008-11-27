@@ -44,7 +44,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelStyle.hpp"
-#include "SkyImageTile.hpp"
+#include "StelSkyImageTile.hpp"
 #include "StelPainter.hpp"
 
 using namespace std;
