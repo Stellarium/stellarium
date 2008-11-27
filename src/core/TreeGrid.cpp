@@ -133,7 +133,7 @@ void TreeGrid::split(TreeGridNode& node)
 	node.children.push_back(ConvexPolygon(e2,e0,e1));
 }
 
-void TreeGrid::fillAll(const TreeGridNode& node, Grid& grid) const
+void TreeGrid::fillAll(const TreeGridNode& node, StelGrid& grid) const
 {
 	grid.insertResult(node.objects);
 	for (Children::const_iterator ic = node.children.begin(); ic != node.children.end(); ++ic)
