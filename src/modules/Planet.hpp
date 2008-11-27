@@ -26,7 +26,7 @@
 #include "ToneReproducer.hpp"
 #include "vecmath.h"
 #include "callbacks.hpp"
-#include "Fader.hpp"
+#include "StelFader.hpp"
 #include "Translator.hpp"
 #include "StelTextureTypes.hpp"
 #include "ProjectorType.hpp"

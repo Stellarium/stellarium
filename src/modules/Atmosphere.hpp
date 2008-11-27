@@ -24,7 +24,7 @@
 #include "vecmath.h"
 #include "Navigator.hpp"
 #include "Skybright.hpp"
-#include "Fader.hpp"
+#include "StelFader.hpp"
 #include "GLee.h"
 #include "fixx11h.h"
 
