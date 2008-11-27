@@ -17,7 +17,7 @@
 #endif
 
 #ifdef MACOSX
-#include "MacosxDirs.hpp"
+#include "StelMacosxDirs.hpp"
 #endif
 
 #include "StelFileMgr.hpp"
