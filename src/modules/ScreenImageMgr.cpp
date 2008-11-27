@@ -39,8 +39,35 @@
 ///////////////////////
 // ScreenImage class //
 ///////////////////////
-ScreenImage::ScreenImage()
+ScreenImage::ScreenImage(const QString& filename, float x, float y, bool show)
+	: tex(NULL)
 {
+	try
+	{
+		QString path = StelApp::getInstance().getFileMgr().findFile("scripts/" + filename);
+		tex = StelMainGraphicsView::getInstance().scene()->addPixmap(QPixmap(path));
+		tex->setOffset(x, y);
+		tex->setVisible(show);
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "Failed to create ScreenImage: " << e.what();
+	}
+}
+
+ScreenImage::~ScreenImage()
+{
+	if (tex!=NULL)
+	{
+		delete tex;
+		tex = NULL;
+	}
+}
+
+bool ScreenImage::draw(const StelCore* core)
+{
+	tex->setVisible(imageFader);
+	return true;
 }
 
 void ScreenImage::update(double deltaTime)
@@ -70,41 +97,7 @@ void ScreenImage::setAlpha(float a)
 	imageFader.setMaxValue(a);
 }
 
-///////////////////////
-// ScreenScreenImage //
-///////////////////////
-ScreenScreenImage::ScreenScreenImage(const QString& filename, float x, float y, bool show)
-	: tex(NULL)
-{
-	try
-	{
-		QString path = StelApp::getInstance().getFileMgr().findFile("scripts/" + filename);
-		tex = StelMainGraphicsView::getInstance().scene()->addPixmap(QPixmap(path));
-		tex->setOffset(x, y);
-		tex->setVisible(show);
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "Failed to create ScreenScreenImage: " << e.what();
-	}
-}
-
-ScreenScreenImage::~ScreenScreenImage()
-{
-	if (tex!=NULL)
-	{
-		delete tex;
-		tex = NULL;
-	}
-}
-
-bool ScreenScreenImage::draw(const StelCore* core)
-{
-	tex->setVisible(imageFader);
-	return true;
-}
-
-void ScreenScreenImage::setXY(float x, float y)
+void ScreenImage::setXY(float x, float y)
 {
 	tex->setOffset(x, y);
 }
@@ -217,7 +210,7 @@ void ScreenImageMgr::doCreateScreenImage(const QString& id,
 	if (allScreenImages.contains(id))
 		doDeleteImage(id);
 
-	ScreenImage* i = new ScreenScreenImage(filename, x, y, visible);
+	ScreenImage* i = new ScreenImage(filename, x, y, visible);
 	if (i==NULL)
 		return;
 
