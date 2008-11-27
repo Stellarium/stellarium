@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#include "SkyDrawer.hpp"
+#include "StelSkyDrawer.hpp"
 #include "StelProjector.hpp"
 #include "StelNavigator.hpp"
 #include "ToneReproducer.hpp"
@@ -37,7 +37,7 @@
 #define EYE_RESOLUTION (0.25)
 #define MAX_LINEAR_RADIUS 8.f
 
-SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
+StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore)
 {
 	eye = core->getToneReproducer();
 
@@ -108,7 +108,7 @@ SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
 }
 
 
-SkyDrawer::~SkyDrawer()
+StelSkyDrawer::~StelSkyDrawer()
 {
 	if (verticesGrid)
 		delete[] verticesGrid;
@@ -122,7 +122,7 @@ SkyDrawer::~SkyDrawer()
 }
 
 // Init parameters from config file
-void SkyDrawer::init()
+void StelSkyDrawer::init()
 {
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	// Load star texture no mipmap:
@@ -132,7 +132,7 @@ void SkyDrawer::init()
 	update(0);
 }
 
-void SkyDrawer::update(double deltaTime)
+void StelSkyDrawer::update(double deltaTime)
 {
 	float fov = core->getMovementMgr()->getCurrentFov();
 	if (fov > maxAdaptFov)
@@ -166,7 +166,7 @@ void SkyDrawer::update(double deltaTime)
 }
 
 // Compute the current limit magnitude by dichotomy
-float SkyDrawer::computeLimitMagnitude() const
+float StelSkyDrawer::computeLimitMagnitude() const
 {
 	float a=-26.f;
 	float b=30.f;
@@ -199,7 +199,7 @@ float SkyDrawer::computeLimitMagnitude() const
 }
 
 // Compute the current limit luminance by dichotomy
-float SkyDrawer::computeLimitLuminance() const
+float StelSkyDrawer::computeLimitLuminance() const
 {
 	float a=0.f;
 	float b=500000.f;
@@ -232,30 +232,30 @@ float SkyDrawer::computeLimitLuminance() const
 }
 
 // Compute the ln of the luminance for a point source with the given mag for the current FOV
-float SkyDrawer::pointSourceMagToLnLuminance(float mag) const
+float StelSkyDrawer::pointSourceMagToLnLuminance(float mag) const
 {
 	return -0.92103f*(mag + 12.12331f) + lnfovFactor;
 }
 
-float SkyDrawer::pointSourceLuminanceToMag(float lum)
+float StelSkyDrawer::pointSourceLuminanceToMag(float lum)
 {
 	return (std::log(lum) - lnfovFactor)/-0.92103f - 12.12331f;
 }
 
 // Compute the luminance for an extended source with the given surface brightness in Vmag/arcmin^2
-float SkyDrawer::surfacebrightnessToLuminance(float sb)
+float StelSkyDrawer::surfacebrightnessToLuminance(float sb)
 {
 	return 2.*2025000.f*std::exp(-0.92103f*(sb + 12.12331f))/(1./60.*1./60.);
 }
 
 // Compute the surface brightness from the luminance of an extended source
-float SkyDrawer::luminanceToSurfacebrightness(float lum)
+float StelSkyDrawer::luminanceToSurfacebrightness(float lum)
 {
 	return std::log(lum*(1./60.*1./60.)/(2.*2025000.f))/-0.92103f - 12.12331f;
 }
 	
 // Compute RMag and CMag from magnitude for a point source.
-bool SkyDrawer::computeRCMag(float mag, float rcMag[2]) const
+bool StelSkyDrawer::computeRCMag(float mag, float rcMag[2]) const
 {
 	rcMag[0] = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), starRelativeScale*1.40f/2.f);
 	rcMag[0]*=starLinearScale;
@@ -291,7 +291,7 @@ bool SkyDrawer::computeRCMag(float mag, float rcMag[2]) const
 	return true;
 }
 
-void SkyDrawer::preDrawPointSource(const StelPainter* p)
+void StelSkyDrawer::preDrawPointSource(const StelPainter* p)
 {
 	Q_ASSERT(p);
 	Q_ASSERT(sPainter==NULL);
@@ -316,7 +316,7 @@ void SkyDrawer::preDrawPointSource(const StelPainter* p)
 }
 
 // Finalize the drawing of point sources
-void SkyDrawer::postDrawPointSource()
+void StelSkyDrawer::postDrawPointSource()
 {
 	Q_ASSERT(sPainter);
 	sPainter = NULL;
@@ -348,7 +348,7 @@ void SkyDrawer::postDrawPointSource()
 }
 
 // Draw a point source halo.
-bool SkyDrawer::drawPointSource(double x, double y, const float rcMag[2], const Vec3f& color)
+bool StelSkyDrawer::drawPointSource(double x, double y, const float rcMag[2], const Vec3f& color)
 {
 	Q_ASSERT(sPainter);
 	
@@ -409,7 +409,7 @@ bool SkyDrawer::drawPointSource(double x, double y, const float rcMag[2], const 
 
 
 // Terminate drawing of a 3D model, draw the halo
-void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, float mag, const StelPainter* painter, const Vec3f& color)
+void StelSkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, float mag, const StelPainter* painter, const Vec3f& color)
 {
 	Q_ASSERT(painter);
 	Q_ASSERT(sPainter==NULL);
@@ -495,7 +495,7 @@ void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, f
 	flagStarTwinkle=save;
 }
 
-float SkyDrawer::findWorldLumForMag(float mag, float targetRadius)
+float StelSkyDrawer::findWorldLumForMag(float mag, float targetRadius)
 {
 	const float saveLum = eye->getWorldAdaptationLuminance();	// save
 	
@@ -543,7 +543,7 @@ float SkyDrawer::findWorldLumForMag(float mag, float targetRadius)
 }
 
 // Report that an object of luminance lum is currently displayed
-void SkyDrawer::reportLuminanceInFov(double lum, bool fastAdaptation)
+void StelSkyDrawer::reportLuminanceInFov(double lum, bool fastAdaptation)
 {
 	if (lum > maxLum)
 	{
@@ -562,7 +562,7 @@ void SkyDrawer::reportLuminanceInFov(double lum, bool fastAdaptation)
 	}
 }
 
-void SkyDrawer::preDraw()
+void StelSkyDrawer::preDraw()
 {
 	eye->setWorldAdaptationLuminance(maxLum);
 	// Re-initialize for next stage
@@ -573,7 +573,7 @@ void SkyDrawer::preDraw()
 
 // Set the parameters so that the stars disapear at about the limit given by the bortle scale
 // See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
-void SkyDrawer::setBortleScale(int bIndex)
+void StelSkyDrawer::setBortleScale(int bIndex)
 {
 	// Associate the Bortle index (1 to 9) to inScale value
 	if (bIndex<1)
@@ -596,7 +596,7 @@ void SkyDrawer::setBortleScale(int bIndex)
 }
 
 // Old colors
-// Vec3f SkyDrawer::colorTable[128] = {
+// Vec3f StelSkyDrawer::colorTable[128] = {
 // 	Vec3f(0.587877,0.755546,1.000000),
 // 	Vec3f(0.609856,0.750638,1.000000),
 // 	Vec3f(0.624467,0.760192,1.000000),
@@ -728,7 +728,7 @@ void SkyDrawer::setBortleScale(int bIndex)
 // };
 
 // New colors
-Vec3f SkyDrawer::colorTable[128] = {
+Vec3f StelSkyDrawer::colorTable[128] = {
 	Vec3f(0.602745,0.713725,1.000000),
 	Vec3f(0.604902,0.715294,1.000000),
 	Vec3f(0.607059,0.716863,1.000000),
@@ -870,7 +870,7 @@ static Vec3f Gamma(double gamma,const Vec3f &x)
 }
 
 // Load B-V conversion parameters from config file
-void SkyDrawer::initColorTableFromConfigFile(QSettings* conf) 
+void StelSkyDrawer::initColorTableFromConfigFile(QSettings* conf) 
 {
 	std::map<float,Vec3f> color_map;
 	for (float bV=-0.5f;bV<=4.0f;bV+=0.01) 
@@ -893,7 +893,7 @@ void SkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 	{
 		for (int i=0;i<128;i++) 
 		{
-			const float bV = SkyDrawer::indexToBV(i);
+			const float bV = StelSkyDrawer::indexToBV(i);
 			std::map<float,Vec3f>::const_iterator greater(color_map.upper_bound(bV));
 			if (greater == color_map.begin()) 
 			{

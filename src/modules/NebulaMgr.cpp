@@ -32,7 +32,7 @@
 #include "Nebula.hpp"
 #include "StelTexture.hpp"
 #include "StelNavigator.hpp"
-#include "SkyDrawer.hpp"
+#include "StelSkyDrawer.hpp"
 #include "Translator.hpp"
 #include "StelLoadingBar.hpp"
 #include "StelTextureMgr.hpp"
@@ -125,7 +125,7 @@ void NebulaMgr::draw(StelCore* core)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 	
-	SkyDrawer* skyDrawer = core->getSkyDrawer();
+	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
 	
 	Nebula::hintsBrightness = hintsFader.getInterstate()*flagShow.getInterstate();
 	

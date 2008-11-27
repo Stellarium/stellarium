@@ -29,7 +29,7 @@
 #include "LandscapeMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StarMgr.hpp"
-#include "SkyDrawer.hpp"
+#include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
 #include "NebulaMgr.hpp"
 #include "MeteorMgr.hpp"

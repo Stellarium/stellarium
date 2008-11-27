@@ -26,7 +26,7 @@
 #include "StelNavigator.hpp"
 #include "StarMgr.hpp"
 #include "Star.hpp"
-#include "SkyDrawer.hpp"
+#include "StelSkyDrawer.hpp"
 
 namespace BigStarCatalogExtension {
 
@@ -88,7 +88,7 @@ protected:
                    / a->star_position_scale
                  );
   }
-  Vec3f getInfoColor(void) const {return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.2, 0.2) : SkyDrawer::indexToColor(s->bV);}
+  Vec3f getInfoColor(void) const {return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.2, 0.2) : StelSkyDrawer::indexToColor(s->bV);}
   float getVMagnitude(const StelNavigator *nav) const
     {return 0.001f*a->mag_min + s->mag*(0.001f*a->mag_range)/a->mag_steps;}
   float getSelectPriority(const StelNavigator *nav) const

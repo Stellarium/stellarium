@@ -21,7 +21,7 @@
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
 #include "ToneReproducer.hpp"
-#include "SkyDrawer.hpp"
+#include "StelSkyDrawer.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 #include "StelGeodesicGrid.hpp"
@@ -126,7 +126,7 @@ void StelCore::init()
 // 	if (overwrite_max_fov > 0.0)
 // 		MappingOrthographic::getMapping()->maxFov = overwrite_max_fov;
 	
-	skyDrawer = new SkyDrawer(this);
+	skyDrawer = new StelSkyDrawer(this);
 	skyDrawer->init();
 	// Debug
 	// Invert colors fragment shader

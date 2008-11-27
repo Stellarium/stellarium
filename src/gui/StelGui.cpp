@@ -42,7 +42,7 @@
 #include "SolarSystem.hpp"
 #include "SkyImageMgr.hpp"
 #include "StelStyle.hpp"
-#include "SkyDrawer.hpp"
+#include "StelSkyDrawer.hpp"
 #include "MeteorMgr.hpp"
 #include "DownloadPopup.hpp"
 #include "StelDownloadMgr.hpp"

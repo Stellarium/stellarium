@@ -542,7 +542,7 @@ void StarMgr::draw(StelCore* core)
 {
 	StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	SkyDrawer* skyDrawer = core->getSkyDrawer();
+	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
 	
     currentJDay = nav->getJDay();
 

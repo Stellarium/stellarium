@@ -30,8 +30,8 @@ SET(stellarium_lib_SRCS
 	core/StelProjectorType.hpp
 	core/StelFont.cpp
 	core/StelFont.hpp
-	core/SkyDrawer.cpp
-	core/SkyDrawer.hpp
+	core/StelSkyDrawer.cpp
+	core/StelSkyDrawer.hpp
 	core/StelPainter.hpp
 	core/StelPainter.cpp
 	core/MultiLevelJsonBase.hpp
@@ -273,7 +273,7 @@ SET(stellarium_MOC_HDRS
 	core/MultiLevelJsonBase.hpp
 	core/SkyImageTile.hpp
 	core/SkyPolygon.hpp
-	core/SkyDrawer.hpp
+	core/StelSkyDrawer.hpp
 	core/SkyImageMgr.hpp
 	modules/ConstellationMgr.hpp
 	modules/GridLinesMgr.hpp
