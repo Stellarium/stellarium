@@ -125,7 +125,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 	// Load sides textures
 	nbSideTexs = landscapeIni.value("landscape/nbsidetex", 0).toInt();
-	sideTexs = new STextureSP[nbSideTexs];
+	sideTexs = new StelTextureSP[nbSideTexs];
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setWrapMode(GL_CLAMP_TO_EDGE);
 	for (int i=0;i<nbSideTexs;++i)
@@ -195,7 +195,7 @@ void LandscapeOldStyle::create(bool _fullpath, QMap<QString, QString> param)
 
 	// Load sides textures
 	nbSideTexs = param["nbsidetex"].toInt();
-	sideTexs = new STextureSP[nbSideTexs];
+	sideTexs = new StelTextureSP[nbSideTexs];
 	
 	char tmp[255];
 	//StelApp::getInstance().getTextureManager().setMipmapsMode(true);

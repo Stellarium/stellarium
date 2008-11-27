@@ -28,7 +28,7 @@
 #include "callbacks.hpp"
 #include "Fader.hpp"
 #include "Translator.hpp"
-#include "STextureTypes.hpp"
+#include "StelTextureTypes.hpp"
 #include "ProjectorType.hpp"
 
 // The callback type for the external position computation function
@@ -75,7 +75,7 @@ public:
 private:
 	const double radiusMin;
 	const double radiusMax;
-	STextureSP tex;
+	StelTextureSP tex;
 };
 
 
@@ -244,7 +244,7 @@ public:
 	static const Vec3f& getOrbitColor() {return orbitColor;}
 	
 protected:
-	static STextureSP texEarthShadow;     // for lunar eclipses
+	static StelTextureSP texEarthShadow;     // for lunar eclipses
 	
 	// draw earth shadow on moon for lunar eclipses
 	void drawEarthShadow(StelCore* core); 
@@ -276,7 +276,7 @@ protected:
 	float albedo;                   // Planet albedo
 	Mat4d rotLocalToParent;
 	float axisRotation;            // Rotation angle of the Planet on it's axis
-	STextureSP texMap;             // Planet map texture
+	StelTextureSP texMap;             // Planet map texture
 	Ring* rings;                    // Planet rings
 	double distance;                // Temporary variable used to store the distance to a given point
 	                                // it is used for sorting while drawing
@@ -295,7 +295,7 @@ protected:
 	
 	static SFont* planetNameFont; // Font for names
 	static Vec3f labelColor;
-	static STextureSP hintCircleTex;
+	static StelTextureSP hintCircleTex;
 };
 
 #endif // _PLANET_HPP_

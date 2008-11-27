@@ -25,7 +25,7 @@
 #include "Constellation.hpp"
 #include "StarMgr.hpp"
 #include "Navigator.hpp"
-#include "STexture.hpp"
+#include "StelTexture.hpp"
 #include "SFont.hpp"
 #include "StelPainter.hpp"
 

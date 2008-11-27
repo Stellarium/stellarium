@@ -20,7 +20,7 @@
 #ifndef _LOADINGBAR_HPP_
 #define _LOADINGBAR_HPP_
 
-#include "STextureTypes.hpp"
+#include "StelTextureTypes.hpp"
 #include "ProjectorType.hpp"
 #include "vecmath.h"
 
@@ -73,7 +73,7 @@ private:
 	int splashx, splashy, barx, bary, width, height, barwidth, barheight;
 	SFont& barfont;
 	SFont& extraTextFont;
-	STextureSP splash;
+	StelTextureSP splash;
 	QString extraText;
 	Vec2f extraTextPos;
 	double timeCounter;

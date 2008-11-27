@@ -27,7 +27,7 @@
 #include "StelCore.hpp"
 #include "SkyDrawer.hpp"
 #include "SolarSystem.hpp"
-#include "STexture.hpp"
+#include "StelTexture.hpp"
 #include "Planet.hpp"
 #include "Navigator.hpp"
 #include "Projector.hpp"
@@ -43,8 +43,8 @@ SFont* Planet::planetNameFont = NULL;
 Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
 Vec3f Planet::trailColor = Vec3f(1,0.7,0.7);
-STextureSP Planet::hintCircleTex;
-STextureSP Planet::texEarthShadow;
+StelTextureSP Planet::hintCircleTex;
+StelTextureSP Planet::texEarthShadow;
 
 Planet::Planet(Planet *parent,
                const QString& englishName,
