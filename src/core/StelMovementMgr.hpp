@@ -24,7 +24,7 @@
 #include "StelProjector.hpp"
 
 //! @class StelMovementMgr
-//! Manages the movement and zoomer operations.
+//! Manages the head movements and zoom operations.
 class StelMovementMgr : public StelModule
 {
 	Q_OBJECT
@@ -204,18 +204,18 @@ private:
 	float keyMoveSpeed;			// Speed of keys movement
 	float keyZoomSpeed;			// Speed of keys zoom
 	
-	// Automove
-	// Struct used to store data for auto mov
-	typedef struct
+	//! @internal
+	//! Store data for auto-move
+	struct AutoMove
 	{
 		Vec3d start;
 		Vec3d aim;
 		float speed;
 		float coef;
 		bool localPos;  // Define if the position are in equatorial or altazimuthal
-	} autoMove;
+	};
 	
-	autoMove move;          // Current auto movement
+	AutoMove move;          // Current auto movement
 	int flagAutoMove;       // Define if automove is on or off
 	int zoomingMode;        // 0 : undefined, 1 zooming, -1 unzooming
 
@@ -228,17 +228,18 @@ private:
 	bool isDragging, hasDragged;
 	int previousX, previousY;
 	
-	// Struct used to store data for auto zoom
-	typedef struct
+	//! @internal
+	//! Store data for auto-zoom.
+	struct AutoZoom
 	{
 		double start;
 		double aim;
 		float speed;
 		float coef;
-	} autoZoom;
+	};
 	
 	// Automove
-	autoZoom zoomMove; // Current auto movement
+	AutoZoom zoomMove; // Current auto movement
 	bool flagAutoZoom; // Define if autozoom is on or off
 	bool flagAutoZoomOutResetsDirection;
 };
