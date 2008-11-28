@@ -24,13 +24,6 @@
 
 class StelObject;
 
-namespace boost
-{
-	//! @class intrusive_ptr
-	//! Boost intrusive pointer class. See http://www.boost.org/doc/libs/1_37_0/libs/smart_ptr/intrusive_ptr.html
-	template<class T> class intrusive_ptr;
-};
-
 //! @typedef StelObjectP
 //! Intrusive pointer used to manage StelObject with smart pointers
 typedef boost::intrusive_ptr<StelObject> StelObjectP;
