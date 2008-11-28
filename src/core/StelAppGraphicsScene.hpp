@@ -49,22 +49,7 @@ public:
 	//! Get the type of viewport distorter currently used
 	QString getViewPortDistorterType() const;
 	
-	//! Paint the whole Core of stellarium
-	//! This method is called automatically by the GraphicsView
-	void drawBackground(QPainter *painter, const QRectF &rect);
-	
 	void glWindowHasBeenResized(int w, int h);
-	
-	//! Switch to native OpenGL painting, i.e not using QPainter
-	//! @sa After this call revertToQtPainting MUST be called
-	void switchToNativeOpenGLPainting();
-
-	//! Revert openGL state so that Qt painting works again
-	//! @return a painter that can be used
-	QPainter* revertToQtPainting();
-	
-	QPainter* switchToQPainting();
-	void revertToOpenGL();
 	
 	//! Get the state of the mouse cursor timeout flag
 	bool getFlagCursorTimeout() {return flagCursorTimeout;}
@@ -86,7 +71,19 @@ protected:
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 	virtual void wheelEvent(QGraphicsSceneWheelEvent * wheelEvent);
 	
+	//! Paint the whole Core of stellarium
+	//! This method is called automatically by the GraphicsView
+	void drawBackground(QPainter *painter, const QRectF &rect);
+	
 private:
+	//! Switch to native OpenGL painting, i.e not using QPainter
+	//! @sa After this call revertToQtPainting MUST be called
+	void switchToNativeOpenGLPainting();
+
+	//! Revert openGL state so that Qt painting works again
+	//! @return a painter that can be used
+	QPainter* revertToQtPainting();
+	
 	//! Notify that an event was handled by the program and therefore the 
 	//! FPS should be maximized for a couple of seconds.
 	void thereWasAnEvent();
