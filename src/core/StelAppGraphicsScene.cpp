@@ -26,7 +26,6 @@
 #include "fixx11h.h"
 #include "StelAppGraphicsScene.hpp"
 #include "StelViewportDistorter.hpp"
-#include "StelModuleMgr.hpp"
 #include "StelMainWindow.hpp"
 #include "StelMainGraphicsView.hpp"
 
@@ -114,51 +113,51 @@ QPainter* StelAppGraphicsScene::revertToQtPainting()
 }
 
 
-QPainter* StelAppGraphicsScene::switchToQPainting()
-{
-	// Save openGL projection state
-	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	glMatrixMode(GL_TEXTURE);
-	glPushMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	
-	if (tempPainter)
-	{
-		if (tempPainter->isActive())
-		{
-			tempPainter->save();
-			tempPainter->end();
-			tempPainter->begin(StelAppGraphicsScene::getInstance().views().at(0));
-			tempPainter->resetTransform();
-		}
-		else
-		{
-			tempPainter->begin(StelAppGraphicsScene::getInstance().views().at(0));
-		}
-	}
-	return tempPainter;
-}
-
-//! Revert openGL state
-void StelAppGraphicsScene::revertToOpenGL()
-{
-	// Restore openGL projection state for Qt drawings
-	glMatrixMode(GL_TEXTURE);
-	glPopMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
-	glPopAttrib();
-	glPopClientAttrib();
-	
-	if (tempPainter)
-		tempPainter->restore();
-}
+// QPainter* StelAppGraphicsScene::switchToQPainting()
+// {
+// 	// Save openGL projection state
+// 	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
+// 	glPushAttrib(GL_ALL_ATTRIB_BITS);
+// 	glMatrixMode(GL_TEXTURE);
+// 	glPushMatrix();
+// 	glMatrixMode(GL_PROJECTION);
+// 	glPushMatrix();
+// 	glMatrixMode(GL_MODELVIEW);
+// 	glPushMatrix();
+// 	
+// 	if (tempPainter)
+// 	{
+// 		if (tempPainter->isActive())
+// 		{
+// 			tempPainter->save();
+// 			tempPainter->end();
+// 			tempPainter->begin(StelAppGraphicsScene::getInstance().views().at(0));
+// 			tempPainter->resetTransform();
+// 		}
+// 		else
+// 		{
+// 			tempPainter->begin(StelAppGraphicsScene::getInstance().views().at(0));
+// 		}
+// 	}
+// 	return tempPainter;
+// }
+// 
+// //! Revert openGL state
+// void StelAppGraphicsScene::revertToOpenGL()
+// {
+// 	// Restore openGL projection state for Qt drawings
+// 	glMatrixMode(GL_TEXTURE);
+// 	glPopMatrix();
+// 	glMatrixMode(GL_PROJECTION);
+// 	glPopMatrix();
+// 	glMatrixMode(GL_MODELVIEW);
+// 	glPopMatrix();
+// 	glPopAttrib();
+// 	glPopClientAttrib();
+// 	
+// 	if (tempPainter)
+// 		tempPainter->restore();
+// }
 
 void StelAppGraphicsScene::drawBackground(QPainter *painter, const QRectF &)
 {
