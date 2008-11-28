@@ -24,7 +24,10 @@
 
 #include <QSettings>
 #include "StelApp.hpp"
-		 
+
+//! @class StelMainWindow
+//! Reimplement a QMainWindow for Stellarium.
+//! It is the class in charge of switching betwee fullscreen or windowed mode.
 class StelMainWindow : public QMainWindow
 {
 	Q_OBJECT;
@@ -35,6 +38,7 @@ public:
 	//! @return the StelMainWindow singleton instance
 	static StelMainWindow& getInstance() {Q_ASSERT(singleton); return *singleton;}
 
+	//! Performs various initialization incluing the init of the StelMainGraphicsView instance.
 	void init();
 	
 public slots:

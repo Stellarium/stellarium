@@ -78,10 +78,11 @@ public:
 	//! @param poly The polygon to draw
 	void drawPolygon(const StelGeom::Polygon& poly) const;
 	
-	//! Draw a small circle arc between points start and stop with rotation point in rotCenter
-	//! The angle between start and stop must be < 180 deg
+	//! Draw a small circle arc between points start and stop with rotation point in rotCenter.
+	//! The angle between start and stop must be < 180 deg.
 	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
-	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport
+	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport.
+	//! If rotCenter is equal to 0,0,0, the method draws a great circle.
 	void drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, const void* userData)=NULL, const void* userData=NULL) const;
 	
 	//! Draw a parallel arc in the current frame.  The arc start from point start

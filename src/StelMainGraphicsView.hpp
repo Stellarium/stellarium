@@ -21,11 +21,13 @@
 #define _STELMAINGRAPHICSVIEW_HPP_
 
 #include <QGraphicsView>
-#include <QResizeEvent>
 
 class QGLWidget;
-class QGraphicsScene;
+class QResizeEvent;
 
+//! @class StelMainGraphicsView
+//! Reimplement a QGraphicsView for Stellarium.
+//! It is the class creating the singleton GL Widget, the main StelApp instance as well as the main GUI.
 class StelMainGraphicsView : public QGraphicsView
 {
 Q_OBJECT;
@@ -37,10 +39,10 @@ public:
 	void init();
 	
 	//! Get the StelMainGraphicsView singleton instance.
-	//! @return the StelMainGraphicsView singleton instance
 	static StelMainGraphicsView& getInstance() {Q_ASSERT(singleton); return *singleton;}
 	
 	//! Get the main QGLWidget
+	//! @deprecated don't use that
 	QGLWidget* getOpenGLWin() {return glWidget;}
 
 	//! Delete openGL textures (to call before the GLContext disappears)
@@ -76,7 +78,7 @@ protected:
 
 signals:
 	//! emitted when saveScreenShot is requested with saveScreenShot().
-	//! doScreenshot() does th actual work (it has to do it in the main
+	//! doScreenshot() does the actual work (it has to do it in the main
 	//! thread, where as saveScreenShot() might get called from another one.
 	void screenshotRequested(void);
 
