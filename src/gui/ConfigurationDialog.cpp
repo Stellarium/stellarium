@@ -100,13 +100,13 @@ void ConfigurationDialog::createDialogContent()
 	QString appLang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
 	QComboBox* cb = ui->programLanguageComboBox;
 	cb->clear();
-	cb->addItems(Translator::globalTranslator.getAvailableLanguagesNamesNative(StelApp::getInstance().getFileMgr().getLocaleDir()));
-	QString l2 = Translator::iso639_1CodeToNativeName(appLang);
+	cb->addItems(StelTranslator::globalTranslator.getAvailableLanguagesNamesNative(StelApp::getInstance().getFileMgr().getLocaleDir()));
+	QString l2 = StelTranslator::iso639_1CodeToNativeName(appLang);
 	int lt = cb->findText(l2, Qt::MatchExactly);
 	if (lt == -1 && appLang.contains('_'))
 	{
 		l2 = appLang.left(appLang.indexOf('_'));
-		l2=Translator::iso639_1CodeToNativeName(l2);
+		l2=StelTranslator::iso639_1CodeToNativeName(l2);
 		lt = cb->findText(l2, Qt::MatchExactly);
 	}
 	if (lt!=-1)
@@ -209,7 +209,7 @@ void ConfigurationDialog::createDialogContent()
 
 void ConfigurationDialog::languageChanged(const QString& langName)
 {
-	QString code = Translator::nativeNameToIso639_1Code(langName);
+	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
 	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
 	updateConfigLabels();
@@ -383,9 +383,9 @@ void ConfigurationDialog::saveCurrentViewOptions()
 
 	// configuration dialog / main tab
 	QString langName = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-	conf->setValue("localization/app_locale", Translator::nativeNameToIso639_1Code(langName));
+	conf->setValue("localization/app_locale", StelTranslator::nativeNameToIso639_1Code(langName));
 	langName = StelApp::getInstance().getLocaleMgr().getSkyLanguage();
-	conf->setValue("localization/sky_locale", Translator::nativeNameToIso639_1Code(langName));
+	conf->setValue("localization/sky_locale", StelTranslator::nativeNameToIso639_1Code(langName));
 
 	if (gui->getInfoPanel()->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
 		conf->setValue("gui/selected_object_info", "none");

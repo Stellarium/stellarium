@@ -925,7 +925,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 // Update i18 names from english names according to passed translator
 void SolarSystem::updateI18n()
 {
-	Translator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	vector<Planet*>::iterator iter;
 	for( iter = systemPlanets.begin(); iter < systemPlanets.end(); iter++ )
 	{

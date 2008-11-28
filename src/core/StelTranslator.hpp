@@ -29,7 +29,7 @@
 
 // These macro are used as global function replacing standard gettext operation
 #include "gettext.h"
-#define q_(String) Translator::globalTranslator.qtranslate(String)
+#define q_(String) StelTranslator::globalTranslator.qtranslate(String)
 #define N_(String) gettext_noop(String)
 
 //! Class used to translate strings to any language.
@@ -37,7 +37,7 @@
 //! All its operations do not modify the global locale.
 //! The purpose of this class is to remove all non-OO C locale functions from stellarium.
 //! @author Fabien Chereau
-class Translator
+class StelTranslator
 {
 public:
 
@@ -48,10 +48,10 @@ public:
 	//! @param adomain The name of the domain to use for translation
 	//! @param amoDirectory The directory where to look for the domain.mo translation files.
 	//! @param alangName The C locale name or language name like "fr" or "fr_FR". If string is "" or "system" it will use the system locale.
-	Translator(const QString& adomain, const QString& amoDirectory, const QString& alangName) :
+	StelTranslator(const QString& adomain, const QString& amoDirectory, const QString& alangName) :
 			domain(adomain), moDirectory(amoDirectory), langName(alangName)
 	{
-		Translator::lastUsed = NULL;
+		StelTranslator::lastUsed = NULL;
 	}
 	
 	//! Translate input message and return it as a QString.
@@ -69,13 +69,13 @@ public:
 	const QString& getTrueLocaleName(void) const
 	{
 		if (langName=="system" || langName=="system_default")
-			return Translator::systemLangName;
+			return StelTranslator::systemLangName;
 		else
 			return langName;
 	}
 
 	//! Used as a global translator by the whole app
-	static Translator globalTranslator;
+	static StelTranslator globalTranslator;
 
 	//! Get available language name in native language from passed locales directory
 	QStringList getAvailableLanguagesNamesNative(const QString& localeDir="") const;	
@@ -112,7 +112,7 @@ private:
 	QString langName;
 
 	//! Keep in memory which one was the last used transator to prevent reloading it at each tranlate() call
-	static Translator* lastUsed;
+	static StelTranslator* lastUsed;
 
 	//! Try to determine system language from system configuration
 	static void initSystemLanguage(void);

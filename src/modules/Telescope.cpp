@@ -19,7 +19,7 @@
 
 #include "Telescope.hpp"
 #include "StelUtils.hpp"
-#include "Translator.hpp"
+#include "StelTranslator.hpp"
 #include "StelCore.hpp"
 
 #include <sstream>

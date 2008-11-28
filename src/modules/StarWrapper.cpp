@@ -25,7 +25,7 @@
 #include "ZoneArray.hpp"
 
 #include "StelUtils.hpp"
-#include "Translator.hpp"
+#include "StelTranslator.hpp"
 
 #include <QTextStream>
 

@@ -19,7 +19,7 @@
 
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "Translator.hpp"
+#include "StelTranslator.hpp"
 #include "StelApp.hpp"
 #include "StelIniParser.hpp"
 

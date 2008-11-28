@@ -25,7 +25,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelApp.hpp"
 #include "StelNavigator.hpp"
-#include "Translator.hpp"
+#include "StelTranslator.hpp"
 #include "StelProjector.hpp"
 #include "StelLoadingBar.hpp"
 #include "StelFader.hpp"
