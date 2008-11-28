@@ -22,7 +22,7 @@
 
 #include <QString>
 #include "StelObject.hpp"
-#include "Translator.hpp"
+#include "StelTranslator.hpp"
 #include "StelTextureTypes.hpp"
 
 class StelFont;
@@ -84,7 +84,7 @@ private:
 	};
 	
 	//! Translate nebula name using the passed translator
-	void translateName(Translator& trans) {nameI18 = trans.qtranslate(englishName);}
+	void translateName(StelTranslator& trans) {nameI18 = trans.qtranslate(englishName);}
 
 	bool readNGC(char *record);
 	

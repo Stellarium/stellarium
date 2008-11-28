@@ -23,7 +23,7 @@
 #include "vecmath.h"
 #include "StelModule.hpp"
 
-class Translator;
+class StelTranslator;
 class SkyGrid;
 class SkyLine;
 class QSettings;

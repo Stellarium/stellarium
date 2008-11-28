@@ -26,7 +26,7 @@
 #include "StelCore.hpp"
 #include "TextUI.hpp"
 #include "StelModuleMgr.hpp"
-#include "Translator.hpp"
+#include "StelTranslator.hpp"
 
 
 void TextUI::init()

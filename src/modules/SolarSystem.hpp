@@ -31,7 +31,7 @@
 
 class Orbit;
 class StelLoadingBar;
-class Translator;
+class StelTranslator;
 class StelObject;
 class Planet;
 class StelFont;

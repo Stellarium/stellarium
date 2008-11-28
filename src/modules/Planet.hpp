@@ -27,7 +27,7 @@
 #include "vecmath.h"
 #include "callbacks.hpp"
 #include "StelFader.hpp"
-#include "Translator.hpp"
+#include "StelTranslator.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 
@@ -131,7 +131,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods of SolarSystem object
 	//! Translate planet name using the passed translator
-	void translateName(Translator& trans) {nameI18 = trans.qtranslate(englishName);}
+	void translateName(StelTranslator& trans) {nameI18 = trans.qtranslate(englishName);}
 	
 	// Draw the Planet
 	void draw(StelCore* core, float maxMagLabels);

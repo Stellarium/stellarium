@@ -89,8 +89,8 @@ SET(stellarium_lib_SRCS
 	core/StelIniParser.hpp
 	core/StelUtils.cpp
 	core/StelUtils.hpp
-	core/Translator.cpp
-	core/Translator.hpp
+	core/StelTranslator.cpp
+	core/StelTranslator.hpp
 	core/StelTreeGrid.cpp
 	core/StelTreeGrid.hpp
 	core/vecmath.h

@@ -30,7 +30,7 @@
 #include "StelTextureTypes.hpp"
 
 class Nebula;
-class Translator;
+class StelTranslator;
 class StelToneReproducer;
 class QSettings;
 class StelPainter;

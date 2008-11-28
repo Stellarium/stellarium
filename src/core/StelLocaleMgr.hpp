@@ -20,7 +20,7 @@
 #ifndef _STELLOCALEMGR_HPP_
 #define _STELLOCALEMGR_HPP_
 
-#include "Translator.hpp"
+#include "StelTranslator.hpp"
 
 //! @class StelLocaleMgr
 //! Manage i18n operations such as message translation and date/time localization.
@@ -43,7 +43,7 @@ public:
 	//! Get the application language currently used for GUI etc.
 	//! This function has no permanent effect on the global locale.
 	//! @return the abbreviated name of the language (e.g "fr").
-	QString getAppLanguage() const { return Translator::globalTranslator.getTrueLocaleName(); }
+	QString getAppLanguage() const { return StelTranslator::globalTranslator.getTrueLocaleName(); }
 	
 	//! Set the application language. 
 	//! This applies to GUI etc. This function has no permanent effect on the 
@@ -51,8 +51,8 @@ public:
 	//! @param newAppLocaleName the abbreviated name of the language (e.g fr).
 	void setAppLanguage(const QString& newAppLangName);
 	
-	//! Get the Translator object currently used for global application.
-	Translator& getAppTranslator() const;
+	//! Get the StelTranslator object currently used for global application.
+	StelTranslator& getAppStelTranslator() const;
 	
 	//! Get the language currently used for sky objects.
 	//! This function has no permanent effect on the global locale.
@@ -65,8 +65,8 @@ public:
 	//! for sky object labels.
 	void setSkyLanguage(const QString& newSkyLangName);
 	
-	//! Get a reference to the Translator object currently used for sky objects.
-	Translator& getSkyTranslator();
+	//! Get a reference to the StelTranslator object currently used for sky objects.
+	StelTranslator& getSkyTranslator();
 	
 	///////////////////////////////////////////////////////////////////////////
 	// DATE & TIME LOCALIZATION
@@ -167,7 +167,7 @@ public:
 	
 private:
 	// The translator used for astronomical object naming
-	Translator skyTranslator;
+	StelTranslator skyTranslator;
 	
 	// Date and time variables
 	STimeFormat timeFormat;

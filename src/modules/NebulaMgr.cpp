@@ -33,7 +33,7 @@
 #include "StelTexture.hpp"
 #include "StelNavigator.hpp"
 #include "StelSkyDrawer.hpp"
-#include "Translator.hpp"
+#include "StelTranslator.hpp"
 #include "StelLoadingBar.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -477,7 +477,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 
 void NebulaMgr::updateI18n()
 {
-	Translator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	vector<Nebula*>::iterator iter;
 	for( iter = nebArray.begin(); iter < nebArray.end(); iter++ )
 	{

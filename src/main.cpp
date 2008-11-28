@@ -22,14 +22,14 @@
 #include <QTranslator>
 #include "StelMainGraphicsView.hpp"
 #include "StelMainWindow.hpp"
-#include "Translator.hpp"
+#include "StelTranslator.hpp"
 #include <QDebug>
 #include <QGLFormat>
 #include <QPlastiqueStyle>
 
-//! @class GettextTranslator
+//! @class GettextStelTranslator
 //! Provides i18n support through gettext.
-class GettextTranslator : public QTranslator
+class GettextStelTranslator : public QTranslator
 {
 public:
 	virtual bool isEmpty() const { return false; }
@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 	QApplication::setStyle(new QPlastiqueStyle());
 	QApplication app(argc, argv);
 	//app.setQuitOnLastWindowClosed(false);
-	GettextTranslator trans;
+	GettextStelTranslator trans;
 	app.installTranslator(&trans);
 	if (!QGLFormat::hasOpenGL())
 	{
