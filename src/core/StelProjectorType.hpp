@@ -25,13 +25,6 @@
 
 class StelProjector;
 
-namespace boost
-{
-	//! @class shared_ptr
-	//! Boost shared pointer class. See http://www.boost.org/doc/libs/1_37_0/libs/smart_ptr/shared_ptr.htm
-	template<class T> class shared_ptr;
-};
-
 //! @typedef StelProjectorP
 //! Shared pointer on a StelProjector instance (implement reference counting)
 typedef boost::shared_ptr<StelProjector> StelProjectorP;
