@@ -18,7 +18,7 @@
  */
 
 #include "StelProjectorClasses.hpp"
-#include "Translator.hpp"
+#include "StelTranslator.hpp"
 
 QString StelProjectorPerspective::getNameI18() const
 {

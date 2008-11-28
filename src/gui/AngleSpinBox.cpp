@@ -18,7 +18,7 @@
  ***************************************************************************/
 
 #include "AngleSpinBox.hpp"
-#include "Translator.hpp"
+#include "StelTranslator.hpp"
 #include <QDebug>
 #include <QString>
 #include <QLineEdit>

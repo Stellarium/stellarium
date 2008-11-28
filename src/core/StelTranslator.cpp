@@ -31,19 +31,19 @@
 #include <QLocale>
 
 #include "StelUtils.hpp"
-#include "Translator.hpp"
+#include "StelTranslator.hpp"
 
 // Init static members
-Translator* Translator::lastUsed = NULL;
-QMap<QString, QString> Translator::iso639codes;
-QString Translator::systemLangName;
+StelTranslator* StelTranslator::lastUsed = NULL;
+QMap<QString, QString> StelTranslator::iso639codes;
+QString StelTranslator::systemLangName;
 
 // Use system locale language by default
 #if defined(MACOSX)
 #include "StelMacosxDirs.hpp"
-Translator Translator::globalTranslator = Translator(PACKAGE_NAME, StelMacosxDirs::getApplicationResourcesDirectory().append( "/locale" ), "system");
+StelTranslator StelTranslator::globalTranslator = StelTranslator(PACKAGE_NAME, StelMacosxDirs::getApplicationResourcesDirectory().append( "/locale" ), "system");
 #else
-Translator Translator::globalTranslator = Translator(PACKAGE_NAME, INSTALL_LOCALEDIR, "system");
+StelTranslator StelTranslator::globalTranslator = StelTranslator(PACKAGE_NAME, INSTALL_LOCALEDIR, "system");
 #endif
 
 #ifdef WIN32
@@ -54,14 +54,14 @@ Translator Translator::globalTranslator = Translator(PACKAGE_NAME, INSTALL_LOCAL
 
 //! Initialize Translation
 //! @param fileName file containing the list of language codes
-void Translator::init(const QString& fileName)
+void StelTranslator::init(const QString& fileName)
 {
-	Translator::initSystemLanguage();
-	Translator::initIso639_1LanguageCodes(fileName);
+	StelTranslator::initSystemLanguage();
+	StelTranslator::initIso639_1LanguageCodes(fileName);
 }
 		  
 //! Try to determine system language from system configuration
-void Translator::initSystemLanguage(void)
+void StelTranslator::initSystemLanguage(void)
 {
 	char* lang = getenv("LANGUAGE");
 	if (lang) systemLangName = lang;
@@ -95,9 +95,9 @@ void Translator::initSystemLanguage(void)
 	if (pos != -1) systemLangName.resize(pos);
 }
 
-void Translator::reload()
+void StelTranslator::reload()
 {
-	if (Translator::lastUsed == this)
+	if (StelTranslator::lastUsed == this)
 		return;
 	
 	// Find out what the system language is if not defined yet
@@ -110,7 +110,7 @@ void Translator::reload()
 	if (langName=="system" || langName=="system_default")
 #if defined (MACOSX)	// MACOSX
 	{
-		snprintf(envstr, 25, "LANG=%s", Translator::systemLangName.toUtf8().constData());
+		snprintf(envstr, 25, "LANG=%s", StelTranslator::systemLangName.toUtf8().constData());
 	}
 	else
 	{
@@ -118,7 +118,7 @@ void Translator::reload()
 	}
 #elif defined (_MSC_VER) //MSCVER
 	{
-		_snprintf(envstr, 25, "LANGUAGE=%s", Translator::systemLangName.toUtf8().constData());
+		_snprintf(envstr, 25, "LANGUAGE=%s", StelTranslator::systemLangName.toUtf8().constData());
 	}
 	else
 	{
@@ -126,7 +126,7 @@ void Translator::reload()
 	}
 #else // UNIX
 	{
-		snprintf(envstr, 25, "LANGUAGE=%s", Translator::systemLangName.toUtf8().constData());
+		snprintf(envstr, 25, "LANGUAGE=%s", StelTranslator::systemLangName.toUtf8().constData());
 	}
 	else
 	{
@@ -144,12 +144,12 @@ void Translator::reload()
 	Q_ASSERT(result=="UTF-8");
 	bindtextdomain (domain.toUtf8().constData(), QFile::encodeName(moDirectory).constData());
 	textdomain (domain.toUtf8().constData());
-	Translator::lastUsed = this;
+	StelTranslator::lastUsed = this;
 }
 
 
 //! Convert from ISO639-1 2 letters langage code to native language name
-QString Translator::iso639_1CodeToNativeName(const QString& languageCode)
+QString StelTranslator::iso639_1CodeToNativeName(const QString& languageCode)
 {
 	QLocale loc(languageCode);
 	QString l = loc.name();
@@ -169,7 +169,7 @@ QString Translator::iso639_1CodeToNativeName(const QString& languageCode)
 }
 
 //! Convert from native language name to ISO639-1 2(+3) letters langage code 
-QString Translator::nativeNameToIso639_1Code(const QString& languageName)
+QString StelTranslator::nativeNameToIso639_1Code(const QString& languageName)
 {
 	QMap<QString, QString>::iterator iter;
 	for (iter=iso639codes.begin();iter!=iso639codes.end();++iter)
@@ -180,7 +180,7 @@ QString Translator::nativeNameToIso639_1Code(const QString& languageName)
 }
 
 //! Get available native language names from directory tree
-QStringList Translator::getAvailableLanguagesNamesNative(const QString& localeDir) const
+QStringList StelTranslator::getAvailableLanguagesNamesNative(const QString& localeDir) const
 {
 	QString tmpDir = localeDir;
 	if (tmpDir.isEmpty())
@@ -195,7 +195,7 @@ QStringList Translator::getAvailableLanguagesNamesNative(const QString& localeDi
 }
 
 //! Get available language codes from directory tree
-QStringList Translator::getAvailableIso639_1Codes(const QString& localeDir) const
+QStringList StelTranslator::getAvailableIso639_1Codes(const QString& localeDir) const
 {
 	QString locDir = localeDir;
 	if (locDir.isEmpty())
@@ -231,7 +231,7 @@ QStringList Translator::getAvailableIso639_1Codes(const QString& localeDir) cons
 
 //! Initialize the languages code list from the passed file
 //! @param fileName file containing the list of language codes
-void Translator::initIso639_1LanguageCodes(const QString& fileName)
+void StelTranslator::initIso639_1LanguageCodes(const QString& fileName)
 {
 	QFile inf(fileName);
 	if (!inf.open(QIODevice::ReadOnly))

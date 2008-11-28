@@ -21,7 +21,7 @@
 #include "StelUtils.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
-#include "Translator.hpp"
+#include "StelTranslator.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelNavigator.hpp"

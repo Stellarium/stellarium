@@ -130,7 +130,7 @@ void Cardinals::draw(const StelCore* core, double latitude, bool gravityON) cons
 // Translate cardinal labels with gettext to current sky language and update font for the language
 void Cardinals::updateI18n()
 {
-	Translator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	sNorth = trans.qtranslate("N");
 	sSouth = trans.qtranslate("S");
 	sEast = trans.qtranslate("E");

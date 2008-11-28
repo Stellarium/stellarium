@@ -23,7 +23,7 @@
 #include "StelCore.hpp"
 #include "StelProjector.hpp"
 #include "StelUtils.hpp"
-#include "Translator.hpp"
+#include "StelTranslator.hpp"
 
 #include <QRegExp>
 #include <QDebug>

@@ -57,7 +57,7 @@ public:
 	
 	//! Update i18n strings from english names according to current global sky and application language.
 	//! This method also reload the proper fonts depending on the language.
-	//! The translation shall be done using the Translator provided by the StelApp singleton instance.
+	//! The translation shall be done using the StelTranslator provided by the StelApp singleton instance.
 	virtual void updateI18n() {;}
 		   
 	//! Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.

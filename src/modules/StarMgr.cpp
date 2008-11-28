@@ -37,10 +37,10 @@
 #include "StelNavigator.hpp"
 #include "StelUtils.hpp"
 #include "StelToneReproducer.hpp"
-#include "Translator.hpp"
+#include "StelTranslator.hpp"
 #include "StelGeodesicGrid.hpp"
 #include "StelLoadingBar.hpp"
-#include "Translator.hpp"
+#include "StelTranslator.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -713,7 +713,7 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv,
 //! Update i18 names from english names according to passed translator.
 //! The translation is done using gettext with translated strings defined in translations.h
 void StarMgr::updateI18n() {
-  Translator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+  StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
   commonNamesMapI18n.clear();
   commonNamesIndexI18n.clear();
   for (std::map<int,QString>::iterator it(commonNamesMap.begin());

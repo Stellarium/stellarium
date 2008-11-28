@@ -116,7 +116,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	// Load language codes
 	try
 	{
-		Translator::init(stelFileMgr->findFile("data/iso639-1.utf8"));
+		StelTranslator::init(stelFileMgr->findFile("data/iso639-1.utf8"));
 	}
 	catch (std::runtime_error& e)
 	{

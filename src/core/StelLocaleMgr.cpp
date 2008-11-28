@@ -128,8 +128,8 @@ void StelLocaleMgr::init()
 void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName)
 {
 	// Update the translator with new locale name
-	Translator::globalTranslator = Translator(PACKAGE_NAME, StelApp::getInstance().getFileMgr().getLocaleDir(), newAppLanguageName);
-	qDebug() << "Application language is " << Translator::globalTranslator.getTrueLocaleName();
+	StelTranslator::globalTranslator = StelTranslator(PACKAGE_NAME, StelApp::getInstance().getFileMgr().getLocaleDir(), newAppLanguageName);
+	qDebug() << "Application language is " << StelTranslator::globalTranslator.getTrueLocaleName();
 	StelApp::getInstance().updateI18n();
 }
 
@@ -139,7 +139,7 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName)
 void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName)
 {
 	// Update the translator with new locale name
-	skyTranslator = Translator(PACKAGE_NAME, StelApp::getInstance().getFileMgr().getLocaleDir(), newSkyLanguageName);
+	skyTranslator = StelTranslator(PACKAGE_NAME, StelApp::getInstance().getFileMgr().getLocaleDir(), newSkyLanguageName);
 	qDebug() << "Sky language is " << skyTranslator.getTrueLocaleName();
 	StelApp::getInstance().updateI18n();
 }
@@ -152,8 +152,8 @@ QString StelLocaleMgr::getSkyLanguage() const
 	return skyTranslator.getTrueLocaleName();
 }
 
-// Get the Translator currently used for sky objects.
-Translator& StelLocaleMgr::getSkyTranslator()
+// Get the StelTranslator currently used for sky objects.
+StelTranslator& StelLocaleMgr::getSkyTranslator()
 {
 	return skyTranslator;
 }
