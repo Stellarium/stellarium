@@ -26,7 +26,7 @@
 #endif
 
 #include "StelUtils.hpp"
-#include "vecmath.h"
+#include "VecMath.hpp"
 #include "GLee.h"
 
 #include "fixx11h.h"

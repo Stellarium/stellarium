@@ -20,7 +20,7 @@
 #ifndef _STELUTILS_HPP_
 #define _STELUTILS_HPP_
 
-#include "vecmath.h"
+#include "VecMath.hpp"
 #include "fixx11h.h"
 
 #include <QVariantMap>

@@ -20,7 +20,7 @@
 #ifndef _GRIDLINESMGR_HPP_
 #define _GRIDLINESMGR_HPP_
 
-#include "vecmath.h"
+#include "VecMath.hpp"
 #include "StelModule.hpp"
 
 class StelTranslator;

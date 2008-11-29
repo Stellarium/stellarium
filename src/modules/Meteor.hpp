@@ -20,7 +20,7 @@
 #ifndef _METEOR_HPP_
 #define _METEOR_HPP_
 
-#include "vecmath.h"
+#include "VecMath.hpp"
 class StelCore;
 class StelPainter;
 

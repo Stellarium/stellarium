@@ -21,7 +21,7 @@
 #define _MILKYWAY_HPP_
 
 #include "StelModule.hpp"
-#include "vecmath.h"
+#include "VecMath.hpp"
 #include "StelTextureTypes.hpp"
 
 //! @class MilkyWay 

@@ -28,7 +28,7 @@
 #include "StelProjector.hpp"
 #include "StelModule.hpp"
 #include "StelUtils.hpp"
-#include "vecmath.h"
+#include "VecMath.hpp"
 
 #include <QGraphicsPixmapItem>
 #include <QPixmap>

@@ -23,7 +23,7 @@
 #include "StelLocation.hpp"
 #include <QObject>
 #include <QString>
-#include "vecmath.h"
+#include "VecMath.hpp"
 
 class Planet;
 class ArtificialPlanet;
