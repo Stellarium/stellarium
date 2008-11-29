@@ -22,7 +22,7 @@
 
 #include <QList>
 #include <QString>
-#include "vecmath.h"
+#include "VecMath.hpp"
 #include "StelModule.hpp"
 #include "StelObject.hpp"
 

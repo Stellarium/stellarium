@@ -23,7 +23,7 @@
 #include <QObject>
 #include <QtScript>
 #include <QStringList>
-#include "vecmath.h"
+#include "VecMath.hpp"
 
 //! Provide script API for Stellarium global functions.  Public slots in this class
 //! may be used in Stellarium scripts, and are accessed as member function to the

@@ -22,7 +22,7 @@
 
 #include "GLee.h"
 #include "fixx11h.h"
-#include "vecmath.h"
+#include "VecMath.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelProjectorType.hpp"
 #include "StelProjector.hpp"

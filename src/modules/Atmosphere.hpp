@@ -21,7 +21,7 @@
 #define _ATMOSTPHERE_HPP_
 
 #include "Skylight.hpp"
-#include "vecmath.h"
+#include "VecMath.hpp"
 #include "StelNavigator.hpp"
 #include "Skybright.hpp"
 #include "StelFader.hpp"

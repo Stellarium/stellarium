@@ -22,7 +22,7 @@
 
 #include "StelObjectModule.hpp"
 #include "StelFader.hpp"
-#include "vecmath.h"
+#include "VecMath.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 

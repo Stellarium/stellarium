@@ -22,7 +22,7 @@
 
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
-#include "vecmath.h"
+#include "VecMath.hpp"
 
 #include <QObject>
 

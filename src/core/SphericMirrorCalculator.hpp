@@ -21,7 +21,7 @@
 #ifndef _SPHERICMIRRORCALCULATOR_HPP_
 #define _SPHERICMIRRORCALCULATOR_HPP_
 
-#include "vecmath.h"
+#include "VecMath.hpp"
 
 class QSettings;
 

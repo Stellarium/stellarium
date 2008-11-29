@@ -25,7 +25,7 @@
 #include "StelModule.hpp"
 #include "StelObject.hpp"
 #include "StelObjectType.hpp"
-#include "vecmath.h"
+#include "VecMath.hpp"
 
 #include <QVector>
 #include <QString>

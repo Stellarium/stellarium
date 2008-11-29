@@ -21,7 +21,7 @@
 #define _SPHEREGEOMETRY_HPP_
 
 #include <vector>
-#include "vecmath.h"
+#include "VecMath.hpp"
 
 //! @namespace StelGeom In this namespace we define different geometrical shapes.
 //! We also define two functions, contains(x, y) and intersect(x, y) = intersect(y, x) 

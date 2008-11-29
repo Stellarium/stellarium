@@ -24,7 +24,7 @@
 #include "StelFader.hpp"
 #include "StelModule.hpp"
 #include "StelTextureTypes.hpp"
-#include "vecmath.h"
+#include "VecMath.hpp"
 
 #include <QMap>
 #include <QString>

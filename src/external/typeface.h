@@ -34,7 +34,7 @@
 #ifndef __GOOEY_FONT_TYPE_FACE_H__
 #define __GOOEY_FONT_TYPE_FACE_H__
 
-#include "vecmath.h"
+#include "VecMath.hpp"
 #include <QString>
 typedef Vector2<size_t> Vec2size_t;
 

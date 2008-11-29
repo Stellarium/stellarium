@@ -7,7 +7,7 @@ Author and Copyright: Johannes Gajdosik, 2006
  
 This library requires a simple Vector library,
 which may have different copyright and license,
-for example Vec3d from vecmath.h.
+for example Vec3d from VecMath.hpp.
  
 In the moment I choose to distribute the library under the GPL,
 later I may choose to additionally distribute it under a more

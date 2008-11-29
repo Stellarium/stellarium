@@ -25,7 +25,7 @@
 #include <QStringList>
 #include "StelModule.hpp"
 #include "StelObjectType.hpp"
-#include "vecmath.h"
+#include "VecMath.hpp"
 
 //! @class StelObjectModule
 //! Specialization of StelModule which manages a collection of StelObject.

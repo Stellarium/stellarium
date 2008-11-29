@@ -19,7 +19,7 @@
 #ifndef _STELGRIDOBJECT_HPP_
 #define _STELGRIDOBJECT_HPP_
 
-#include "vecmath.h"
+#include "VecMath.hpp"
 
 //! Simple abstract class defining the method getPositionForGrid() used
 //! by the grid algorithms to get a permanent (fixed) position.
