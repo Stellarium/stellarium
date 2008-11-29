@@ -20,7 +20,7 @@
 #ifndef _NAVIGATOR_HPP_
 #define _NAVIGATOR_HPP_
 
-#include "vecmath.h"
+#include "VecMath.hpp"
 
 #include "fixx11h.h"
 #include <QObject>

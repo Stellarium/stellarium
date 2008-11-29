@@ -25,7 +25,7 @@
   // just for Vect3d.
   // Take any Vector class instead, if you want to use the star feature in a
   // different context.
-#include "vecmath.h"
+#include "VecMath.hpp"
 
 class StelObject;
 

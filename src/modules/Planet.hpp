@@ -24,7 +24,7 @@
 
 #include "StelObject.hpp"
 #include "StelToneReproducer.hpp"
-#include "vecmath.h"
+#include "VecMath.hpp"
 #include "callbacks.hpp"
 #include "StelFader.hpp"
 #include "StelTranslator.hpp"

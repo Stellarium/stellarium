@@ -93,7 +93,7 @@ SET(stellarium_lib_SRCS
 	core/StelTranslator.hpp
 	core/StelTreeGrid.cpp
 	core/StelTreeGrid.hpp
-	core/vecmath.h
+	core/VecMath.hpp
 	core/StelJsonParser.hpp
 	core/StelJsonParser.cpp
 	

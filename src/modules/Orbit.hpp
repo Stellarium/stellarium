@@ -12,7 +12,7 @@
 #ifndef _ORBIT_HPP_
 #define _ORBIT_HPP_
 
-#include "vecmath.h"
+#include "VecMath.hpp"
 
 class OrbitSampleProc;
 

@@ -21,7 +21,7 @@
 #define _LANDSCAPE_HPP_
 
 #include <QMap>
-#include "vecmath.h"
+#include "VecMath.hpp"
 #include "StelToneReproducer.hpp"
 #include "StelProjector.hpp"
 #include "StelNavigator.hpp"

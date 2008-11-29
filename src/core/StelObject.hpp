@@ -21,7 +21,7 @@
 #define _STELOBJECT_HPP_
 
 #include <QString>
-#include "vecmath.h"
+#include "VecMath.hpp"
 #include "StelObjectType.hpp"
 #include "StelGridObject.hpp"
 

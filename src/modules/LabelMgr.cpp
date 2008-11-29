@@ -33,7 +33,7 @@
 #include "StelObject.hpp"
 #include "StelObjectType.hpp"
 #include "StelUtils.hpp"
-#include "vecmath.h"
+#include "VecMath.hpp"
 #include "StelPainter.hpp"
 
 #include <vector>
