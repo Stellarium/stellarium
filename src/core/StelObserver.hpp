@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _OBSERVER_HPP_
-#define _OBSERVER_HPP_
+#ifndef _STELOBSERVER_HPP_
+#define _STELOBSERVER_HPP_
 
 #include "StelLocation.hpp"
 #include <QObject>
@@ -87,4 +87,5 @@ private:
 	double transitSeconds;
 };
 
-#endif // _OBSERVER_HPP_
+#endif // _STELOBSERVER_HPP_
+

@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _SKYDRAWER_HPP_
-#define _SKYDRAWER_HPP_
+#ifndef _STELSKYDRAWER_HPP_
+#define _STELSKYDRAWER_HPP_
 
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
@@ -281,4 +281,4 @@ private:
 	const StelPainter* sPainter;
 };
 
-#endif // _SKYDRAWER_HPP_
+#endif // _STELSKYDRAWER_HPP_

@@ -17,10 +17,10 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#ifndef _TREEGRID_HPP_
-#define _TREEGRID_HPP_
+#ifndef _STELTREEGRID_HPP_
+#define _STELTREEGRID_HPP_
 
-//#define TREEGRIDDEBUG 1
+//#define STELTREEGRIDDEBUG 1
 
 #include <vector>
 #include "StelGrid.hpp"
@@ -38,7 +38,7 @@ struct StelTreeGridNode
     typedef std::vector<StelTreeGridNode> Children;
     Children children;
     
-#ifdef TREEGRIDDEBUG
+#ifdef STELTREEGRIDDEBUG
 	double draw(class StelProjector *prj, const StelGeom::ConvexS&, float opacity = 1.) const;
 #endif
 };
@@ -135,5 +135,6 @@ void StelTreeGrid::filterIntersect(const Shape& s)
 }
 
 
-#endif // _TREEGRID_HPP_
+#endif // _STELTREEGRID_HPP_
+
 

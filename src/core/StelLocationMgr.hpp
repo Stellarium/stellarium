@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _LOCATION_MGR_HPP_
-#define _LOCATION_MGR_HPP_
+#ifndef _STELLOCATIONMGR_HPP_
+#define _STELLOCATIONMGR_HPP_
 
 #include "StelLocation.hpp"
 #include <QString>
@@ -74,4 +74,4 @@ private:
 	QMap<QString, StelLocation> locations;
 };
 
-#endif // _LOCATION_MGR_HPP_
+#endif // _STELLOCATIONMGR_HPP_

@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _PROJECTORTYPE_HPP_
-#define _PROJECTORTYPE_HPP_
+#ifndef _STELPROJECTORTYPE_HPP_
+#define _STELPROJECTORTYPE_HPP_
 
 #include <boost/shared_ptr.hpp>
 #include <config.h>
@@ -29,4 +29,4 @@ class StelProjector;
 //! Shared pointer on a StelProjector instance (implement reference counting)
 typedef boost::shared_ptr<StelProjector> StelProjectorP;
 
-#endif // _PROJECTORTYPE_HPP_
+#endif // _STELPROJECTORTYPE_HPP_

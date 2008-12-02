@@ -18,8 +18,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _VIEWPORTDISTORTER_HPP_
-#define _VIEWPORTDISTORTER_HPP_
+#ifndef _STELVIEWPORTDISTORTER_HPP_
+#define _STELVIEWPORTDISTORTER_HPP_
 
 #include "StelProjectorType.hpp"
 class QString;
@@ -47,4 +47,5 @@ private:
 
 };
 
-#endif // _VIEWPORTDISTORTER_HPP_
+#endif // _STELVIEWPORTDISTORTER_HPP_
+

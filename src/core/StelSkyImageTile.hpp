@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _SKYIMAGETILE_HPP_
-#define _SKYIMAGETILE_HPP_
+#ifndef _STELSKYIMAGETILE_HPP_
+#define _STELSKYIMAGETILE_HPP_
 
 #include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
@@ -25,7 +25,7 @@
 
 #include <QTimeLine>
 
-//#define DEBUG_SKYIMAGE_TILE
+//#define DEBUG_STELSKYIMAGE_TILE
 
 class QIODevice;
 class StelCore;
@@ -154,9 +154,9 @@ private:
 	// Used for smooth fade in
 	QTimeLine* texFader;
 	
-#ifdef DEBUG_SKYIMAGE_TILE
+#ifdef DEBUG_STELSKYIMAGE_TILE
 	static class StelFont* debugFont;
 #endif
 };
 
-#endif // _SKYIMAGETILE_HPP_
+#endif // _STELSKYIMAGETILE_HPP_

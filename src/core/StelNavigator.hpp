@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _NAVIGATOR_HPP_
-#define _NAVIGATOR_HPP_
+#ifndef _STELNAVIGATOR_HPP_
+#define _STELNAVIGATOR_HPP_
 
 #include "VecMath.hpp"
 
@@ -279,4 +279,4 @@ private:
 	ViewingModeType viewingMode;
 };
 
-#endif // _NAVIGATOR_HPP_
+#endif // _STELNAVIGATOR_HPP_
