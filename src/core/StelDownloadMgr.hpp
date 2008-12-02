@@ -30,7 +30,9 @@ class QNetworkAccessManager;
 class QFile;
 
 //! @class StelDownloadMgr
-//! Used to download files from the internet.
+//! Used to download files from the Internet. QNetworkReply is used internally,
+//! although StelDownloadMgr's signal behavior is different (particularly in
+//! error handling). Settings are remembered between downloads.
 class StelDownloadMgr : public QObject
 {
 	Q_OBJECT;
@@ -40,31 +42,56 @@ public:
 
 	//! Fetch a remote URL into a local file.
 	//! @param url the URL of the remote file.
-	//! @param filePath the path of the local file name which is to be created.
-	//! @param csum the expected checksum of the downloaded file.
-	void get(const QString& url, const QString& filePath, quint16 csum=0);
+	//! @param filePath the path of the local file name which is to be
+	//! created. If a file already exists at filePath, it will be overwritten.
+	//! @param csum (optional) the expected checksum of the downloaded file,
+	//! as returned by @c qChecksum(const char* data, uint len). If not provided,
+	//! the downloaded file will not be verified.
+	//! @sa @c qChecksum(const char* data, uint len) at
+	//! http://doc.trolltech.com/4.4/qbytearray.html#qChecksum
+	//! @n finished()
+	//! @n error(QNetworkReply::NetworkError, QString)
+	void get(const QString& url, const QString& filePath, quint16 csum);
+	// Overridden version, needed because the default parameter csum=0 can't
+	// reliably set useChecksum to false - the actual checksum might be 0.
+	void get(const QString& url, const QString& filePath);
 
-	//! Abort the download.
+	//! Abort the download and remove the partially downloaded file.
 	void abort();
 
 	//! Get the URL of the remote file.
 	QString url() {return address;}
 
-	//! After an error, get a description of the error.
+	//! Get a description of the last error that occurred.
 	QString errorString() {return reply ? reply->errorString() : QString();}
 
 	//! Get the local file name.
 	QString name() {return QFileInfo(path).fileName();}
+	
+	//! Whether or not to pop up a warning box if the user tries to quit.
+	//! @return @c true if a download is in progress @em and @c setBlockQuit(true)
+	//! was called. Otherwise, returns @c false.
+	//! @sa setBlockQuit(bool)
+	bool blockQuit() {return inProgress && block;}
 
-	// ???
-	void setBlockQuit(bool b) {blockQuit = b;}
+	//! If set to @c true and the user tries to quit Stellarium while
+	//! downloading, a warning box will pop up. Default is @c false.
+	//! @note
+	//! Calling @c setBlockQuit(true) does not guarantee that blockQuit()
+	//! will always return @c true.
+	//! @sa blockQuit()
+	void setBlockQuit(bool b) {block = b;}
+	
+	//! If set to @c true, a progress bar will appear in the lower right-hand
+	//! corner of the screen. Default is @c true.
 	void setBarVisible(bool b) {barVisible = b;}
-	void setBarFormat(const QString& f) {barFormat = f;}
+	
+	//! Set the text format of the progress bar. Default is @c "%p%".
+	//! @sa @c QProgressBar::setFormat(const QString& format) at
+	//! http://doc.trolltech.com/4.4/qprogressbar.html#format-prop
+	void setBarFormat(const QString& format) {barFormat = format;}
 
-	//! Set the checksum.
-	void setUseChecksum(bool b) {useChecksum = b;}
-
-	//! Find out if the download is still in progress
+	//! Find out if the download is still in progress.
 	bool isDownloading() {return inProgress;}
 private:
 	QString address;
@@ -81,7 +108,7 @@ private:
 	qint64 total;
 	bool barVisible;
 	bool inProgress;
-	bool blockQuit;
+	bool block;
 
 private slots:
 	void readData();
@@ -89,8 +116,28 @@ private slots:
 	void fin();
 	void err(QNetworkReply::NetworkError);
 signals:
+	//! Emitted when the file is completely downloaded and successfully
+	//! verified (this differs from @c QNetworkReply). Do not try to open the
+	//! destination file before this signal is emitted.
+	//! @note
+	//! "Completely downloaded" depends on whatever the remote server reports
+	//! the file size as. If @c QNetworkReply emits its @c %finished() signal and we
+	//! have no info about the total file size, it is assumed to be complete.
 	void finished();
-	void error(QNetworkReply::NetworkError, QString);
+	
+	//! Emitted whenever the internal @c QNetworkReply object emits an error,
+	//! except that @c QNetworkReply::OperationCanceledError is ignored. The
+	//! partially downloaded file is removed before emitting this signal.
+	//! @param code the error code from @c QNetworkReply::error()
+	//! @param errorString the error string from @c QIODevice::errorString()
+	//! @sa @c QNetworkReply::NetworkError at
+	//! http://doc.trolltech.com/4.4/qnetworkreply.html#NetworkError-enum
+	void error(QNetworkReply::NetworkError code, QString errorString);
+	
+	//! Emitted when verifying a checksum.
 	void verifying();
+	
+	//! Emitted if the provided checksum and downloaded file checksum do not
+	//! match.
 	void badChecksum();
 };
