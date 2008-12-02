@@ -535,12 +535,13 @@ void ConfigurationDialog::setUpdatesState(ConfigurationDialog::UpdatesState stat
 	switch(state)
 	{
 		case ConfigurationDialog::ShowAvailable:
+			Q_ASSERT(updatesData);
 			if(newCatalogs.size()-downloaded > 0)
 			{
 				QString cat = newCatalogs.at(downloaded);
 				ui->getStarsButton->setVisible(true);
-				ui->getStarsButton->setText(QString("Get catalog %1 of %2").arg(downloaded+1).arg(newCatalogs.size()));
-				ui->downloadLabel->setText(QString("Download size: %1MB\nStar count: %2\nMagnitude range: %3 - %4")
+				ui->getStarsButton->setText(q_("Get catalog %1 of %2").arg(downloaded+1).arg(newCatalogs.size()));
+				ui->downloadLabel->setText(q_("Download size: %1MB\nStar count: %2\nMagnitude range: %3 - %4")
 					.arg(updatesData->value(cat+"/size").toString())
 					.arg(updatesData->value(cat+"/count").toString())
 					.arg(updatesData->value(cat+"/mag_lower").toString())
@@ -550,42 +551,42 @@ void ConfigurationDialog::setUpdatesState(ConfigurationDialog::UpdatesState stat
 			break;
 		
 		case ConfigurationDialog::Checking:
-			ui->downloadLabel->setText("Checking for new star catalogs...");
+			ui->downloadLabel->setText(q_("Checking for new star catalogs..."));
 			break;
 		
 		case ConfigurationDialog::NoUpdates:
-			ui->downloadLabel->setText("All star catalogs are up to date.");
+			ui->downloadLabel->setText(q_("All star catalogs are up to date."));
 			break;
 		
 		case ConfigurationDialog::Downloading:
-			ui->downloadLabel->setText(QString("Downloading %1...\n(You can close this window.)").arg(downloadName));
+			ui->downloadLabel->setText(q_("Downloading %1...\n(You can close this window.)").arg(downloadName));
 			ui->downloadCancelButton->setVisible(true);
 			break;
 		
 		case ConfigurationDialog::Finished:
-			ui->downloadLabel->setText("Finished downloading new star catalogs!\nRestart Stellarium to display them.");
+			ui->downloadLabel->setText(q_("Finished downloading new star catalogs!\nRestart Stellarium to display them."));
 			break;
 		
 		case ConfigurationDialog::Verifying:
-			ui->downloadLabel->setText("Verifying file integrity...");
+			ui->downloadLabel->setText(q_("Verifying file integrity..."));
 			break;
 		
 		case ConfigurationDialog::UpdatesError:
-			ui->downloadLabel->setText(QString("Error checking updates:\n%1").arg(downloadMgr->errorString()));
+			ui->downloadLabel->setText(q_("Error checking updates:\n%1").arg(downloadMgr->errorString()));
 			ui->downloadRetryButton->setVisible(true);
 			break;
 		
 		case ConfigurationDialog::MoveError:
-			ui->downloadLabel->setText(QString("Could not finalize download:\nError moving temporary file %1.tmp to %1.cat").arg(downloadName));
+			ui->downloadLabel->setText(q_("Could not finalize download:\nError moving temporary file %1.tmp to %1.cat").arg(downloadName));
 			break;
 		
 		case ConfigurationDialog::DownloadError:
-			ui->downloadLabel->setText(QString("Error downloading %1:\n%2").arg(downloadName).arg(downloadMgr->errorString()));
+			ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(downloadName).arg(downloadMgr->errorString()));
 			ui->downloadRetryButton->setVisible(true);
 			break;
 		
 		case ConfigurationDialog::ChecksumError:
-			ui->downloadLabel->setText(QString("Error downloading %1:\nFile is corrupted.").arg(downloadName));
+			ui->downloadLabel->setText(q_("Error downloading %1:\nFile is corrupted.").arg(downloadName));
 			ui->downloadRetryButton->setVisible(true);
 			break;
 	}
@@ -624,7 +625,6 @@ void ConfigurationDialog::checkUpdates(void)
 	setUpdatesState(ConfigurationDialog::Checking);
 	updatesFileName = starsDir+"updates.ini";
 	downloadMgr->setBarVisible(false);
-	downloadMgr->setUseChecksum(false);
 	downloadMgr->setBlockQuit(false);
 	downloadMgr->get(starSettings->value("updates_url").toString(), updatesFileName);
 	
@@ -640,7 +640,7 @@ void ConfigurationDialog::cancelDownload(void)
 
 void ConfigurationDialog::retryDownload(void)
 {
-	if(updatesData == NULL)
+	if(!updatesData)
 		checkUpdates();
 	else
 		downloadStars();
@@ -685,6 +685,8 @@ void ConfigurationDialog::downloadFinished(void)
 
 void ConfigurationDialog::downloadStars(void)
 {
+	Q_ASSERT(updatesData);
+	
 	downloadMgr->disconnect();
 	downloadName = newCatalogs.at(downloaded);
 	QString url = updatesData->value(downloadName+"/url").toString();
@@ -692,7 +694,6 @@ void ConfigurationDialog::downloadStars(void)
 	quint16 checksum = updatesData->value(downloadName+"/checksum").toUInt();
 	
 	downloadMgr->setBarVisible(true);
-	downloadMgr->setUseChecksum(true);
 	downloadMgr->setBlockQuit(true);
 	downloadMgr->setBarFormat(QString("%p%: %1 of %2").arg(downloaded+1).arg(newCatalogs.size()));
 	downloadMgr->get(url, path, checksum);

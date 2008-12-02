@@ -843,7 +843,7 @@ QProgressBar* StelGui::addProgressBar()
 
 void StelGui::quitStellarium()
 {
-	if(StelApp::getInstance().getDownloadMgr().isDownloading())
+	if(StelApp::getInstance().getDownloadMgr().blockQuit())
 	{
 		downloadPopup.setVisible(true);
 		downloadPopup.setText(QString("Stellarium is still downloading the star "
