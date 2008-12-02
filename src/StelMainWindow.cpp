@@ -31,6 +31,8 @@
 #include "StelApp.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelFileMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelGui.hpp"
 
 // Initialize static variables
 StelMainWindow* StelMainWindow::singleton = NULL;
@@ -106,10 +108,9 @@ void StelMainWindow::setFullScreen(bool b)
 
 void StelMainWindow::closeEvent(QCloseEvent* event)
 {
-	StelMainGraphicsView::getInstance().deinitGL();
-	QCoreApplication::exit();
+	event->ignore();
+	((StelGui*)GETSTELMODULE("StelGui"))->quitStellarium();
 }
-
 
 void StelMainWindow::resizeEvent(QResizeEvent* event)
 {

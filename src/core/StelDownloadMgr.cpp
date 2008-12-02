@@ -31,7 +31,7 @@ StelDownloadMgr::StelDownloadMgr()
 	  progressBar(NULL),
 	  barVisible(true), 
 	  inProgress(false), 
-	  blockQuit(true) 
+	  block(false) 
 {
 }
 
@@ -44,6 +44,12 @@ StelDownloadMgr::~StelDownloadMgr()
 		if(barVisible)
 			delete progressBar;
 	}
+}
+
+void StelDownloadMgr::get(const QString& addr, const QString& filePath)
+{
+	useChecksum = false;
+	get(addr, filePath, 0);
 }
 
 void StelDownloadMgr::get(const QString& addr, const QString& filePath, quint16 csum)
@@ -81,6 +87,7 @@ void StelDownloadMgr::get(const QString& addr, const QString& filePath, quint16 
 		progressBar->setVisible(true);
 		progressBar->setFormat(barFormat);
 	}
+	
 	connect(reply, SIGNAL(readyRead()), this, SLOT(readData()));
 	connect(reply, SIGNAL(finished()), this, SLOT(fin()));
 	connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(err(QNetworkReply::NetworkError)));
@@ -110,6 +117,7 @@ void StelDownloadMgr::readData()
 
 void StelDownloadMgr::updateDownloadBar(qint64 received, qint64 total)
 {
+	Q_ASSERT(progressBar);
 	progressBar->setMaximum(total);
 	progressBar->setValue(received);
 }
@@ -127,7 +135,7 @@ void StelDownloadMgr::fin()
 	}
 	
 	inProgress = false;
-	if(total-received == 0)
+	if(total-received == 0 || total == 0)
 	{
 		target->close();
 		
@@ -150,18 +158,15 @@ void StelDownloadMgr::fin()
 
 void StelDownloadMgr::err(QNetworkReply::NetworkError code)
 {
-	if(code != QNetworkReply::NoError)
+	inProgress = false;
+	target->close();
+	if(!target->remove())
+		qDebug() << "Error deleting incomplete file" << path;
+	if(barVisible)
 	{
-		inProgress = false;
-		target->close();
-		if(!target->remove())
-			qDebug() << "Error deleting incomplete file" << path;
-		if(barVisible)
-		{
-			progressBar->setValue(0);
-			progressBar->setMaximum(0);
-			progressBar->setVisible(false);
-		}
+		progressBar->setValue(0);
+		progressBar->setMaximum(0);
+		progressBar->setVisible(false);
 	}
 	
 	if(code != QNetworkReply::OperationCanceledError)

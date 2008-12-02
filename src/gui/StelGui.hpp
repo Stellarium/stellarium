@@ -154,12 +154,13 @@ public slots:
 	bool getHideGui();
 	//! toggle the status of the toolbars
 	void toggleHideGui(void) {setHideGui(!getHideGui());}
+	
+	void quitStellarium();
 
 private slots:
 	//! Update the position of the button bars in the main window
 	void updateBarsPos();
 	void reloadStyle();
-	void quitStellarium();
 	void cancelDownloadAndQuit();
 	void dontQuit();
 	
