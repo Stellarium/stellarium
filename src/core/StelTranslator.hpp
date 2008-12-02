@@ -17,8 +17,8 @@
 * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#ifndef TRANSLATOR_H
-#define TRANSLATOR_H
+#ifndef _STELTRANSLATOR_HPP_
+#define _STELTRANSLATOR_HPP_
 
 #include <config.h>
 
@@ -124,5 +124,5 @@ private:
 	static QMap<QString, QString> iso639codes;
 };
 
-#endif
+#endif // _STELTRANSLATOR_HPP_
 

@@ -32,8 +32,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  
 */
 
-#ifndef _GEODESICGRID_HPP_
-#define _GEODESICGRID_HPP_
+#ifndef _STELGEODESICGRID_HPP_
+#define _STELGEODESICGRID_HPP_
 
 #include "StelSphereGeometry.hpp"
 
@@ -203,4 +203,4 @@ private:
 	int count;
 };
 
-#endif // _GEODESICGRID_HPP_
+#endif // _STELGEODESICGRID_HPP_

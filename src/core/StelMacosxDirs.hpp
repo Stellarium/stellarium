@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _MACOSXDIRS_HPP_
-#define _MACOSXDIRS_HPP_
+#ifndef _STELMACOSXDIRS_HPP_
+#define _STELMACOSXDIRS_HPP_
 
 #include <QString>
 
@@ -38,5 +38,5 @@ public:
 	static QString getApplicationResourcesDirectory();
 };
 
-#endif // _MACOSXDIRS_HPP_
+#endif // _STELMACOSXDIRS_HPP_
 

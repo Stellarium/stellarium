@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#ifndef _SPHEREGEOMETRY_HPP_
-#define _SPHEREGEOMETRY_HPP_
+#ifndef _STELSPHEREGEOMETRY_HPP_
+#define _STELSPHEREGEOMETRY_HPP_
 
 #include <vector>
 #include "VecMath.hpp"
@@ -294,4 +294,5 @@ bool planeIntersect2(const HalfSpace& h1, const HalfSpace& h2, Vec3d& p1, Vec3d&
 
 }	// namespace StelGeom
 
-#endif // _SPHEREGEOMETRY_HPP_
+#endif // _STELSPHEREGEOMETRY_HPP_
+
