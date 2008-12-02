@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _TONEREPRODUCER_HPP_
-#define _TONEREPRODUCER_HPP_
+#ifndef _STELTONEREPRODUCER_HPP_
+#define _STELTONEREPRODUCER_HPP_
 
 //! Converts tones in function of the eye adaptation to luminance.
 //! The aim is to get on the screen something which is perceptualy accurate,
@@ -162,4 +162,5 @@ private:
 	float term2TimesOneOverMaxdLpOneOverGamma;
 };
 
-#endif // _TONEREPRODUCER_HPP_
+#endif // _STELTONEREPRODUCER_HPP_
+

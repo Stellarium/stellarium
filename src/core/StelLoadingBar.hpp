@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _LOADINGBAR_HPP_
-#define _LOADINGBAR_HPP_
+#ifndef _STELLOADINGBAR_HPP_
+#define _STELLOADINGBAR_HPP_
 
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
@@ -79,4 +79,4 @@ private:
 	double timeCounter;
 };
 
-#endif // _LOADINGBAR_HPP_
+#endif // _STELLOADINGBAR_HPP_

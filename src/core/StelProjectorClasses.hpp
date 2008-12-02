@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _PROJECTIONS_HPP_
-#define _PROJECTIONS_HPP_
+#ifndef _STELPROJECTIONS_HPP_
+#define _STELPROJECTIONS_HPP_
 
 #include "StelProjector.hpp"
 
@@ -197,5 +197,5 @@ public:
 	double deltaZoom(double fov) const;
 };
 
-#endif // _PROJECTIONS_HPP_
+#endif // _STELPROJECTIONS_HPP_
 

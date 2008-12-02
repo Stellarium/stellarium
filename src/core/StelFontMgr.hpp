@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#ifndef STELFONTMGR_H
-#define STELFONTMGR_H
+#ifndef _STELFONTMGR_HPP_
+#define _STELFONTMGR_HPP_
 
 #include <map>
 #include <QString>
@@ -91,4 +91,4 @@ private:
 	std::map<LoadedFont, StelFont*, ltLoadedFont> loadedFonts;
 };
 
-#endif
+#endif // _STELFONTMGR_HPP_

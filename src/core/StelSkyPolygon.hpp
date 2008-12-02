@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _SKYPOLYGON_HPP_
-#define _SKYPOLYGON_HPP_
+#ifndef _STELSKYPOLYGON_HPP_
+#define _STELSKYPOLYGON_HPP_
 
 #include "StelSphereGeometry.hpp"
 #include "MultiLevelJsonBase.hpp"
@@ -121,4 +121,4 @@ private:
 	QTimeLine* texFader;
 };
 
-#endif // _SKYPOLYGON_HPP_
+#endif // _STELSKYPOLYGON_HPP_

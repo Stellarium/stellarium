@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _PROJECTOR_HPP_
-#define _PROJECTOR_HPP_
+#ifndef _STELPROJECTOR_HPP_
+#define _STELPROJECTOR_HPP_
 
 #include "StelProjectorType.hpp"
 #include "VecMath.hpp"
@@ -237,4 +237,4 @@ private:
 	Mat4d modelViewMatrix;         // openGL MODELVIEW Matrix
 };
 
-#endif // _PROJECTOR_HPP_
+#endif // _STELPROJECTOR_HPP_
