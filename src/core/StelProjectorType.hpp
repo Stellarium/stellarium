@@ -21,7 +21,9 @@
 #define _STELPROJECTORTYPE_HPP_
 
 #include <boost/shared_ptr.hpp>
-#include <config.h>
+
+//! @file StelProjectorType.hpp
+//! Define the StelProjectorP type.
 
 class StelProjector;
 

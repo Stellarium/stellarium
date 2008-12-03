@@ -22,6 +22,9 @@
 
 #include <boost/intrusive_ptr.hpp>
 
+//! @file StelObjectType.hpp
+//! Define the StelObjectP type.
+
 class StelObject;
 
 //! @typedef StelObjectP

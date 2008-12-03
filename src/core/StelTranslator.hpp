@@ -20,17 +20,27 @@
 #ifndef _STELTRANSLATOR_HPP_
 #define _STELTRANSLATOR_HPP_
 
+//! @file StelTranslator.hpp
+//! Define some translation macros.
+
 #include <config.h>
 
 #include <QMap>
 #include <QString>
-#include <vector>
 #include "StelUtils.hpp"
 
 // These macro are used as global function replacing standard gettext operation
 #include "gettext.h"
-#define q_(String) StelTranslator::globalTranslator.qtranslate(String)
-#define N_(String) gettext_noop(String)
+
+//! @def q_(str)
+//! Return the gettext translated english text @a str using the current global translator.
+//! The returned value is a localized QString.
+#define q_(str) StelTranslator::globalTranslator.qtranslate(str)
+
+//! @def N_(str)
+//! A pseudo function call that serves as a marker for the automated extraction of messages.
+//! A call to N_() doesn't translate.
+#define N_(str) gettext_noop(str)
 
 //! Class used to translate strings to any language.
 //! Implements a nice interface to gettext which is UTF-8 compliant and is somewhat multiplateform
