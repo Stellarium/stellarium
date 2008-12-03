@@ -68,21 +68,21 @@ namespace StelUtils
 
 	//! Convert an angle in radian to a hms formatted string.
 	//! If the second, minute part is == 0, it is not output
-	//! @param rad input angle in radian
+	//! @param angle input angle in radian
 	QString radToHmsStrAdapt(double angle);
 	
 	//! Convert an angle in radian to a hms formatted string.
-	//! @param rad input angle in radian
+	//! @param angle input angle in radian
 	QString radToHmsStr(double angle, bool decimal=false);
 	
 	//! Convert an angle in radian to a dms formatted string.
 	//! If the second, minute part is == 0, it is not output
-	//! @param rad input angle in radian
+	//! @param angle input angle in radian
 	//! @param useD Define if letter "d" must be used instead of deg sign
 	QString radToDmsStrAdapt(double angle, bool useD=false);
 	
 	//! Convert an angle in radian to a dms formatted string.
-	//! @param rad input angle in radian
+	//! @param angle input angle in radian
 	//! @param useD Define if letter "d" must be used instead of deg sign
 	QString radToDmsStr(double angle, bool decimal=false, bool useD=false);
 	
