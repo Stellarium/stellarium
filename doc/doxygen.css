@@ -4,6 +4,31 @@ BODY,H1,H2,H3,H4,H5,H6,P,CENTER,TD,TH,UL,DL,DIV {
 BODY,TD {
 	font-size: 90%;
 }
+
+table,tr
+{
+  padding: 0;
+  border: 0;
+  background: none
+}
+
+tr.stel
+{
+	background: #E5E5E5;
+	border: 1px;
+}
+
+tr.header
+{
+	background: #66B036;
+	font-weight: bold;
+}
+
+td
+{
+  border: 0;
+}
+
 H1 {
 	text-align: center;
 	font-size: 160%;
@@ -428,4 +453,3 @@ HR {
 .directory img { 
 	vertical-align: -30%; 
 }
-

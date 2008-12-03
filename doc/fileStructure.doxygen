@@ -1,0 +1,133 @@
+/*
+ * Stellarium
+ * Copyright (C) 2008 Matthew Gates
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
+/*!
+
+@page fileStructure File and Directory Structure
+
+This article explains the directory and file layout which Stellarium uses from a programmer's perspective, lays out the rationale behind it, and uses examples to illustrate the way things work.
+
+@section directoryStructure Directory Structure
+Files are broadly separated by the type of data.  For @em StelModules which need many data files, there is one directory.  e.g. @em StarMgr files are stored in the @c stars directory, @em LandscapeMgr files may be found in the @c landscapes directory.
+
+There are also directories which are shared among modules and other parts of the program, for example the @c textures directory.
+
+@section installationDirectories  User and Installation directory separation
+When Stellarium searches for data, texture and other files it looks in two separate locations:
+<ul>
+<li>The <b><em>User Data Directory</em></b>, which stores per-user copies of any customised data files.
+It is the place where Stellarium saves the configuration file, recorded scripts and can also be used to override files in the <em>Installation Data Directory</em> if the user wishes to customise Stellarium. The location of this directory varies depending on the operating system.
+
+<table>
+<tr class="header"><td>OS</td><td>Location</td></tr>
+<tr class="stel"><td>Linux / BSD / other POSIX</td><td><tt>$HOME/.stellarium</tt> where @c $HOME is your home directory.</td></tr>
+<tr class="stel"><td>Windows 2000 / XP</td><td>This is the <tt>Stellarium</tt> sub-directory of your users application data directory (usually something like <tt>C:\\Documents and Settings\\YOURUSERNAME\\Application Data\\Stellarium</tt></td></tr>
+<tr class="stel"><td>Windows Vista</td><td>This is the <tt>Stellarium</tt> sub-directory of your users application data directory (usually something like <tt>C:\\Users\\YOURUSERNAME\AppData\\Roaming\\Stellarium</tt></td></tr>
+<tr class="stel"><td>MacOS X</td><td><tt>$HOME/Library/Preferences/Stellarium</tt> where @c $HOME is your home directory.</td></tr>
+</table>
+
+The directory tree within the <em>User Data Directory</em> is the same as the <em>Installation Data Directory</em>. Any file which exists in the <em>User Data Directory</em> will over-ride that in the <em>Installation Data Directory</em>.
+
+For example, to modify the position of a nebula texture, the user may copy the <tt>nebulae/default/nebula_textures.fab</tt> file from the <em>Installation Data Directory</em> to the <tt>nebulae/default</tt> sub-directory of the <em>User Data Directory</em> and modify it there. In this manner, each user on a multi-user system may have their own customized Stellarium data files.
+</li>
+
+<li>The <b><em>Installation Data Directory</em></b>, which is where the program executable, libraries and all data files which are distributed with the program are installed.
+It is the place where Stellarium's data files are installed on your computer. This directory varies depending on the operating system.
+
+<table>
+<tr class="header"><td>OS</td><td>Location</td></tr>
+<tr class="stel"><td>Linux / BSD / other POSIX</td><td>It depends on the installation prefix used when building Stellarium. If you built from source, and didn't explicitly specify an install prefix, the prefix will be @c /usr/local. Typically, pre-built packages for distros will use the @c /usr prefix. The <em>Installation Data Directory</em> is <tt>$PREFIX/share/stellarium</tt></td></tr>
+<tr class="stel"><td>Windows</td><td>It depends on where Stellarium is installed. The main Stellarium installation directory is the <em>Installation Data Directory</em>. Typically this will be <tt>C:\\Program Files\\Stellarium\\</tt></td></tr>
+<tr class="stel"><td>MacOS X</td><td>The Installation Data Directory is found inside the application bundle.</td></tr>
+</table>
+
+Important data files which may be found in the <em>Installation Data Directory</em> include:
+<ul>
+<li><tt>data/ssystem.ini</tt>: the solar system bodies description file</li>
+<li><tt>stars/default/*</tt>: star catalogues</li>
+<li><tt>nebulae/default/*</tt>: nebula textures and data files</li>
+<li><tt>scripts/</tt>: script files</li>
+<li><tt>textures/</tt>: general purpose texture files (button icons etc)</li>
+<li><tt>landscapes/*\/*</tt>: landscape textures and data files</li>
+</ul>
+
+</li>
+</ul>
+
+If a file exists in the <em>User Data Directory</em>, it will be used in preference to a file with the same name existing in the <em>Installation Data Directory</em>. This allows users to customise data files, textures and so on without modifying the originally installed files.
+
+There are several reasons for doing this:
+<ul>
+ <li>On machines which multiple user accounts, the <em>Installation Data Directory</em> will likely not be writable by all users.  Without allowing the <em>User Data Directory</em> files to over-ride <em>Installation Data Directory</em> files such users could not customise the program without doing an entirely separate installation.</li>
+ <li>On multi-user systems, different users can customise Stellarium without affecting other users of the program.</li>
+ <li>Users who modify files in the <em>Installation Data Directory</em> will likely have their work deleted or overwritten when they upgrade Stellarium. By keeping user-customised files separate from the installation, the upgrade procedure is easier to manage, and users have better security for their work.</li>
+ <li>Users who mess up a customisation attempt need only remove the <em>User Data Directory</em> copy of a file to return to the original (working) copy.</li>
+</ul>
+
+@section findingFile Finding files with the StelFileMgr class
+
+Whenever a file is needed in Stellarium, it should be located using the StelFileMgr class. This class will find the file in the first location in the search path. An instance of this class is maintained by the StelApp singleton. StelFileMgr::findFile() will throw exceptions when a problem is encountered, so it is important to always use <tt>try ... catch ...</tt> exception handling when using it.
+
+For example. You are writing a class called Comet, and wish to search for a data file called <tt>comets.dat</tt> located in the <tt>data</tt> directory, you would go about it like this:
+
+@code
+QString path;
+try
+{
+    path = StelApp::getInstance().getFileMgr().findFile("data/comets.dat");
+}
+catch(std::runtime_error& e)
+{
+    qWarning() << "Could not locate file: data/comets.dat : " << e.what();
+}
+...
+@endcode
+
+As you can see, the file is specified only by the partial path. This partial path is appended first to the <em>User Data Directory</em>. If, and only if the file is not found there, it is searched for in the <em>Installation Data Directory</em>.  Thus if the user has a customised copy at: <tt>\<User Data Directory>/data/comets.dat</tt> it will be used, else the version in the <em>Installation Data Directory</em> will be used.
+
+@section exampleStarCatalogTool Example: Star Catalogue Download Tool
+Stellarium ships with the first four star catalogue files of nine files. The implementation of a catalogue downloading tool helps ease the task for users wanting the extra catalogues by automating the download and installation procedure.
+
+The files which come with Stellarium are found by the partial paths:
+@verbatim
+stars/default/stars_0_0v0_1.cat
+stars/default/stars_1_0v0_1.cat
+stars/default/stars_2_0v0_1.cat
+stars/default/stars_3_1v0_1.cat
+@endverbatim
+
+Naturally, these files are to be located in the <em>Installation Data Directory</em> (because they ship with the installer).
+
+The catalogue downloader tool runs within Stellarium.  When it downloads extra star catalogue files, it should place them in the User Data Directory. After downloading all the catalogues, the paths to the various files should look like this:
+
+@verbatim
+<Installation Data Directory>/stars/default/stars_0_0v0_1.cat
+<Installation Data Directory>/stars/default/stars_1_0v0_1.cat
+<Installation Data Directory>/stars/default/stars_2_0v0_1.cat
+<Installation Data Directory>/stars/default/stars_3_1v0_1.cat
+<User Data Directory>/stars/default/stars_4_1v0_0.cat
+<User Data Directory>/stars/default/stars_5_2v0_0.cat
+<User Data Directory>/stars/default/stars_6_2v0_0.cat
+<User Data Directory>/stars/default/stars_7_2v0_0.cat
+<User Data Directory>/stars/default/stars_8_2v0_0.cat
+@endverbatim
+
+It might be that someone makes a customised installer of Stellarium which includes all the star catalogues with the main installation - perhaps on a special edition DVD.  In this case, all the files would be in the <tt>\<Installation Data Directory>/stars/default</tt> directory.  The downloader tool should be able to cope with this, not re-downloading files into the <em>User Data Directory</em> which already reside in the <em>Installation Data Directory</em>.
+
+*/
