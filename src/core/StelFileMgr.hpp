@@ -36,6 +36,7 @@
 //! will try to locate that path within each of the search directories.
 //! @author Lippo Huhtala <lippo.huhtala@meridea.com>
 //! @author Matthew Gates <matthew@porpoisehead.net>
+//! @sa @ref fileStructure description.
 class StelFileMgr
 {
 public:

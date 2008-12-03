@@ -5,11 +5,12 @@ BODY,TD {
 	font-size: 90%;
 }
 
-table,tr
+table.stel
 {
   padding: 0;
   border: 0;
-  background: none
+  background: none;
+  max-width: 1000px;
 }
 
 tr.stel
