@@ -53,7 +53,7 @@ public:
 	const StelPainter* getPainter() {return sPainter;}
 	
 	//! Set the proper openGL state before making calls to drawPointSource
-	//! @param sPainter a pointer to a valid instance of a Painter. The instance must be valid until postDrawPointSource() is called
+	//! @param p a pointer to a valid instance of a Painter. The instance must be valid until postDrawPointSource() is called
 	void preDrawPointSource(const StelPainter* p);
 		
 	//! Finalize the drawing of point sources
@@ -62,7 +62,7 @@ public:
 	//! Draw a point source halo.
 	//! @param x the x position of the object on the screen
 	//! @param y the y position of the object on the screen
-	//! @param mag the source magnitude
+	//! @param rcMag the radius and luminance of the source as computed by computeRCMag()
 	//! @param bV the source B-V index
 	//! @return true if the source was actually visible and drawn
 	bool drawPointSource(double x, double y, const float rcMag[2], unsigned int bV)
