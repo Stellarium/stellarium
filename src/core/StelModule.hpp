@@ -35,9 +35,13 @@ class StelStyle;
 //! It can be called using the GETSTELMODULE macro, passing as argument its name, which is also the QObject name
 //! Because StelModules are very generic components, it is also possible to load them dynamically,
 //! thus enabling creation of external plug-ins for stellarium.
-//! @author Fabien Chereau
+//! @sa StelObjectModule for StelModule managing collections of StelObject.
+//! @sa @ref plugins for documentation on how to develop external plugins.
 class StelModule : public QObject
 {
+	// Do not add Q_OBJECT here!!
+	// This make this class compiled by the Qt moc compiler and for some unknown reasons makes it impossible to dynamically
+	// load plugins on windows.
 public:
 	StelModule() {;}
 
@@ -89,15 +93,14 @@ public:
 	//! @return set the event as accepted if it was intercepted
 	virtual void handleKeys(class QKeyEvent* event) {return;}
 
-	//! Enum used when selecting objects to define whether to add to, replace, or remove from 
-	//! the existing selection list.
+	//! Enum used when selecting objects to define whether to add to, replace, or remove from the existing selection list.
 	enum StelModuleSelectAction
 	{
-		AddToSelection,
-		ReplaceSelection,
-		RemoveFromSelection
+		AddToSelection,     //!< Add the StelObject to the current list of selected ones.
+ 		ReplaceSelection,	//!< Set the StelObject as the new list of selected ones.
+		RemoveFromSelection //!< Subtract the StelObject from the current list of selected ones.
 	};
-
+	
 	//! Indicate that the user requested selection of StelObjects.
 	//! The StelModule should then manage by themself how they handle the event
 	//! @param action define if the user requested that the objects are added to the selection or just replace it
@@ -113,11 +116,11 @@ public:
 	//! Define the possible action for which an order is defined
 	enum StelModuleActionName
 	{
-		ActionDraw,
-		ActionUpdate,
-		ActionHangleMouseClicks,
-		ActionHandleMouseMoves,
-		ActionHandleKeys
+		ActionDraw,              //!< Action associated to the draw() method
+  		ActionUpdate,            //!< Action associated to the update() method
+		ActionHandleMouseClicks, //!< Action associated to the handleMouseClicks() method
+		ActionHandleMouseMoves,  //!< Action associated to the handleMouseMoves() method
+		ActionHandleKeys         //!< Action associated to the handleKeys() method
 	};
 	
 	//! Return the value defining the order of call for the given action

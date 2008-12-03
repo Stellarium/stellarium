@@ -24,11 +24,13 @@
 @section introduction Introduction
 
 Plugins are extensions to Stellarium which are dynamically loaded into to the program at runtime.
+
 Plugins are potentially more powerful than scripts, but are more difficult to write and maintain. Unlike scripts, Plugins must be compiled for a specific platform, and will typically only be compatible with a particular version of Stellarium.
 We hope that the plugin system will allow third party developers to write extensions to Stellarium which might not otherwise be included in the core program, and that the system will allow for prototyping of new features before inclusion into the core.
 
-<em>Plugin developers - please note that while plugins are linked at runtime, classes used in plugins must inherit code from the core which is published under the GUN GPL.  If you distribute a binary plugin, you must do so under the terms of the GNU GPL license.  No sneaky closed-source shenanigans now.</em>
+Stellarium plugins are created from C++ code compiled separately as a dynamic library ( <tt>.so</tt> on linux, <tt>.dll</tt> in windows or <tt>.dylib</tt> on MacOSX). A plugin should contain a main class deriving from the StelModule class as well as an instance of the StelPluginInterface which allows stellarium to dynamically load it. At startup, the StelModuleMgr will load the library (provided that the @c .dll is put at the proper place in the stellarium file tree), and an instance of the StelModule it contains will be instanciated and added to the list of other "normal" StelModules.
 
+<em>Plugin developers - please note that while plugins are linked at runtime, classes used in plugins must inherit code from the core which is published under the GUN GPL.  If you distribute a binary plugin, you must do so under the terms of the GNU GPL license.  No sneaky closed-source shenanigans now.</em>
 
 @section examplePlugins Example Plugins
 
@@ -38,7 +40,7 @@ There are a few plugins which are written by and maintained by the Stellarium de
  <li><a href="http://stellarium.svn.sourceforge.net/viewvc/stellarium/trunk/extmodules/HelloStelModule/">HelloStelModule plugin</a>: minimal plugin, intended as an example.</li>
  <li><a href="http://stellarium.svn.sourceforge.net/viewvc/stellarium/trunk/extmodules/AngleMeasure/">AngleMeasure plugin</a>: simple plugin, intended as a guide to new developers.</li>
  <li><a href="http://stellarium.svn.sourceforge.net/viewvc/stellarium/trunk/extmodules/CompassMarks/"> CompassMarks plugin</a>: simple plugin, intended as a guide to new developers.</li>
- <li><a href="http://stellarium.svn.sourceforge.net/viewvc/stellarium/trunk/extmodules/VirGO/"> VirGO plugin</a>: fully featured extension to Stellarium sponsored by ESO.  VirGO is used by professional astronomers to display and analyse data from the ESO archive.</li>
+ <li><a href="http://stellarium.svn.sourceforge.net/viewvc/stellarium/trunk/extmodules/VirGO/"> VirGO plugin</a>: fully featured extension to Stellarium sponsored by ESO. VirGO is used by professional astronomers to display and analyse data from the ESO archive. Follow <a href="http://archive.eso.org/cms/virgo/">this link</a> for more info.</li>
 </ul>
 
 @section buildingPlugins Building Plugins

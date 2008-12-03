@@ -22,6 +22,9 @@
 
 #include <boost/shared_ptr.hpp>
 
+//! @file StelTextureType.hpp
+//! Define the StelTextureSP type.
+
 class StelTexture;
 
 //! @typedef StelTextureSP
