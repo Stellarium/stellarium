@@ -34,7 +34,7 @@ When Stellarium searches for data, texture and other files it looks in two separ
 <li>The <b><em>User Data Directory</em></b>, which stores per-user copies of any customised data files.
 It is the place where Stellarium saves the configuration file, recorded scripts and can also be used to override files in the <em>Installation Data Directory</em> if the user wishes to customise Stellarium. The location of this directory varies depending on the operating system.
 
-<table>
+<table class="stel">
 <tr class="header"><td>OS</td><td>Location</td></tr>
 <tr class="stel"><td>Linux / BSD / other POSIX</td><td><tt>$HOME/.stellarium</tt> where @c $HOME is your home directory.</td></tr>
 <tr class="stel"><td>Windows 2000 / XP</td><td>This is the <tt>Stellarium</tt> sub-directory of your users application data directory (usually something like <tt>C:\\Documents and Settings\\YOURUSERNAME\\Application Data\\Stellarium</tt></td></tr>
@@ -50,7 +50,7 @@ For example, to modify the position of a nebula texture, the user may copy the <
 <li>The <b><em>Installation Data Directory</em></b>, which is where the program executable, libraries and all data files which are distributed with the program are installed.
 It is the place where Stellarium's data files are installed on your computer. This directory varies depending on the operating system.
 
-<table>
+<table class="stel">
 <tr class="header"><td>OS</td><td>Location</td></tr>
 <tr class="stel"><td>Linux / BSD / other POSIX</td><td>It depends on the installation prefix used when building Stellarium. If you built from source, and didn't explicitly specify an install prefix, the prefix will be @c /usr/local. Typically, pre-built packages for distros will use the @c /usr prefix. The <em>Installation Data Directory</em> is <tt>$PREFIX/share/stellarium</tt></td></tr>
 <tr class="stel"><td>Windows</td><td>It depends on where Stellarium is installed. The main Stellarium installation directory is the <em>Installation Data Directory</em>. Typically this will be <tt>C:\\Program Files\\Stellarium\\</tt></td></tr>
@@ -114,7 +114,7 @@ stars/default/stars_3_1v0_1.cat
 
 Naturally, these files are to be located in the <em>Installation Data Directory</em> (because they ship with the installer).
 
-The catalogue downloader tool runs within Stellarium.  When it downloads extra star catalogue files, it should place them in the User Data Directory. After downloading all the catalogues, the paths to the various files should look like this:
+The catalogue downloader tool runs within Stellarium.  When it downloads extra star catalogue files, it should place them in the <em>User Data Directory</em>. After downloading all the catalogues, the paths to the various files should look like this:
 
 @verbatim
 <Installation Data Directory>/stars/default/stars_0_0v0_1.cat
@@ -128,6 +128,6 @@ The catalogue downloader tool runs within Stellarium.  When it downloads extra s
 <User Data Directory>/stars/default/stars_8_2v0_0.cat
 @endverbatim
 
-It might be that someone makes a customised installer of Stellarium which includes all the star catalogues with the main installation - perhaps on a special edition DVD.  In this case, all the files would be in the <tt>\<Installation Data Directory>/stars/default</tt> directory.  The downloader tool should be able to cope with this, not re-downloading files into the <em>User Data Directory</em> which already reside in the <em>Installation Data Directory</em>.
+It might be that someone makes a customised installer of Stellarium which includes all the star catalogues with the main installation - perhaps on a special edition DVD.  In this case, all the files would be in the <em> \<Installation Data Directory>/stars/default</em> directory.  The downloader tool should be able to cope with this, not re-downloading files into the <em>User Data Directory</em> which already reside in the <em>Installation Data Directory</em>.
 
 */
