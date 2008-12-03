@@ -25,12 +25,13 @@
 #include <QList>
 #include "StelModule.hpp"
 
-//! Get a module from its QObject name
+//! @def GETSTELMODULE(m)
+//! Return a pointer on a StelModule from its QObject name @a m
 #define GETSTELMODULE( m ) StelApp::getInstance().getModuleMgr().getModule( m )
 
 //! @class StelModuleMgr
 //! Manage a collection of StelModules including both core and plugin modules.
-//! 
+//! The order in which some actions like draw or update are called for each module can be retrieved with the getCallOrders() method.
 class StelModuleMgr : public QObject
 {
 	Q_OBJECT
@@ -92,15 +93,6 @@ public:
 	//! Return the list of all the external module found in the modules directories
 	static QList<PluginDescriptor> getPluginsList();
 
-	//! Enum used when selecting objects to define whether to add to, replace, or remove from the existing selection list.
-	enum SelectAction
-	{
-		AddToSelection,
-		ReplaceSelection,
-		RemoveFromSelection
-	};
-
- 
 private:
 	//! The main module list associating name:pointer
 	QMap<QString, StelModule*> modules;

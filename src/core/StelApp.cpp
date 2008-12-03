@@ -684,7 +684,7 @@ void StelApp::handleClick(QMouseEvent* event)
 {
 	event->setAccepted(false);
 	// Send the event to every StelModule
-	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHangleMouseClicks))
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks))
 	{
 		i->handleMouseClicks(event);
 		if (event->isAccepted())
@@ -697,7 +697,7 @@ void StelApp::handleWheel(QWheelEvent* event)
 {
 	event->setAccepted(false);
 	// Send the event to every StelModule
-	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHangleMouseClicks))
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks))
 	{
 		i->handleMouseWheel(event);
 		if (event->isAccepted())

@@ -21,12 +21,20 @@
 #define _STELPLUGININTERFACE_HPP_
 
 #include <QtPlugin>
+
+//! @class StelPluginInterface
+//! Define the interface to implement when creating a plugin.
+//! The interface is used by the <a href="http://doc.trolltech.com/4.4/qpluginloader.html">QPluginLoader</a> to load Stellarium plugins dynamically.
+//! @sa @ref plugins for documentation on how to develop external plugins.
 class StelPluginInterface
 {
 public:
 	virtual ~StelPluginInterface() {}
+	
+	//! Get the instance of StelModule to include in the list of standard StelModule
 	virtual class StelModule* getStelModule() const = 0;
 };
+
 Q_DECLARE_INTERFACE(StelPluginInterface,"stellarium.StelPluginInterface/1.0");
 
 #endif // _STELPLUGININTERFACE_HPP_

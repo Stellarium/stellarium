@@ -36,7 +36,7 @@ StelModuleMgr::StelModuleMgr()
 	// Initialize empty call lists for each possible actions
 	callOrders[StelModule::ActionDraw]=QList<StelModule*>();
 	callOrders[StelModule::ActionUpdate]=QList<StelModule*>();
-	callOrders[StelModule::ActionHangleMouseClicks]=QList<StelModule*>();
+	callOrders[StelModule::ActionHandleMouseClicks]=QList<StelModule*>();
 	callOrders[StelModule::ActionHandleMouseMoves]=QList<StelModule*>();
 	callOrders[StelModule::ActionHandleKeys]=QList<StelModule*>();
 	callingListsToRegenerate = false;
