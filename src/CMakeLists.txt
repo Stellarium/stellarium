@@ -96,6 +96,8 @@ SET(stellarium_lib_SRCS
 	core/VecMath.hpp
 	core/StelJsonParser.hpp
 	core/StelJsonParser.cpp
+	core/SimbadSearcher.hpp
+	core/SimbadSearcher.cpp
 	
 	external/bytes.h
 	external/callback_helpers.hpp
@@ -276,6 +278,7 @@ SET(stellarium_MOC_HDRS
 	core/StelSkyPolygon.hpp
 	core/StelSkyDrawer.hpp
 	core/StelSkyImageMgr.hpp
+	core/SimbadSearcher.hpp
 	modules/ConstellationMgr.hpp
 	modules/GridLinesMgr.hpp
 	modules/LabelMgr.hpp
