@@ -34,6 +34,7 @@ class QFile;
 
 //! @class StelTexture 
 //! Base texture class. For creating an instance, use StelTextureMgr::createTexture() and StelTextureMgr::createTextureThread()
+//! @sa StelTextureSP
 class StelTexture : public QObject
 {
 	Q_OBJECT;

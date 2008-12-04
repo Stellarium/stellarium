@@ -36,6 +36,7 @@ void intrusive_ptr_release(StelObject* p);
 //! The base abstract class for sky objects used in Stellarium like Stars, Planets, Constellations etc...
 //! Normally you should use StelObjectP instead of StelObject* which have by default the same behaviour,
 //! but which can be added reference counting if needed.
+//! @sa StelObjectP
 class StelObject : public StelGridObject
 {
 public:
