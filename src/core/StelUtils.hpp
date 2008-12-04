@@ -135,7 +135,7 @@ namespace StelUtils
 	//! - 123.567W
 	//! - -123.567
 	//! - 12h 14m 6s
-	//! The degree separator may be a degree symbol (\xBA) in addition
+	//! The degree separator may be a degree symbol (\\xBA) in addition
 	//! to a 'd' or 'D'.
 	//! @return the angle in radians. 
 	//! Latitude: North are positive, South are negative.
