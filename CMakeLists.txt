@@ -1,9 +1,11 @@
-
 IF (WIN32)
   CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 ELSE (WIN32)
   CMAKE_MINIMUM_REQUIRED(VERSION 2.4.7)
 ENDIF (WIN32)
+
+# Avoid repeating the IF statement in the ENDIF and ELSE
+SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 
 ########### Project name ###########
 PROJECT(Stellarium)
@@ -15,36 +17,34 @@ SET(PACKAGE stellarium)
 
 ########### Main global variables ###########
 IF(NOT CMAKE_BUILD_TYPE)
-  SET(CMAKE_BUILD_TYPE Release CACHE STRING
-      "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
-      FORCE)
-ENDIF(NOT CMAKE_BUILD_TYPE)
+  SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel." FORCE)
+ENDIF()
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-  SET(MACOSX 1)
-ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+  SET(APPLE 1)
+ENDIF()
 
 IF(UNIX AND NOT WIN32)
  SET(CMAKE_C_FLAGS -Wall)       # additional C compile flags
  SET(CMAKE_CXX_FLAGS -Wall)     # additional CPP compile flags
-ELSE(UNIX AND NOT WIN32)
+ELSE()
  SET(CMAKE_C_FLAGS "-Wall -fexceptions -fident -mthreads")
  SET(CMAKE_CXX_FLAGS "-Wall -Wsign-promo -fexceptions -fident -mthreads")
  SET(CMAKE_EXE_LINKER_FLAGS "-Wsign-promo -fexceptions -fident -mthreads -mwindows")
-ENDIF(UNIX AND NOT WIN32)
+ENDIF()
 
-# best way to get to MACOSX?
-IF(MACOSX)
+# best way to get to APPLE?
+IF(APPLE)
  SET(CMAKE_INCLUDE_PATH "/usr/X11/include:/usr/X11/include/freetype2:/Developer/SDKs/MacOSX10.5.sdk/usr/X11/include:/Developer/SDKs/MacOSX10.5.sdk/usr/X11/include/freetype2:/sw/include:${CMAKE_INCLUDE_PATH}")
  SET(CMAKE_LIBRARY_PATH "/Developer/SDKs/MacOSX10.5.sdk/usr/X11/lib:/sw/lib:${CMAKE_LIBRARY_PATH}")
  SET(CMAKE_C_FLAGS "-fno-common -Wall -DMACOSX -I/Developer/SDKs/MacOSX10.5.sdk/usr/X11/include -I/Developer/SDKs/MacOSX10.5.sdk/usr/X11/include/freetype2")
  SET(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS}")
  SET(CMAKE_EXE_LINKER_FLAGS "-dylib_file /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib")
-ENDIF(MACOSX)
+ENDIF()
 
 ########### Check headers ###########
 INCLUDE(CheckIncludeFiles)
-CHECK_INCLUDE_FILES( byteswap.h HAVE_BYTESWAP_H)
+CHECK_INCLUDE_FILES(byteswap.h HAVE_BYTESWAP_H)
 
 ########### Check functions ###########
 INCLUDE(CheckFunctionExists)
@@ -68,16 +68,16 @@ SET(ENABLE_SOUND 0 CACHE BOOL "Define whether sound support should be activated,
 # On WIN32 we need to split the main binary into a small binary and a dll
 # This is for allowing to link plug-ins afterward
 IF (WIN32 OR GENERATE_PYTHON_WRAPPERS)
- SET(GENERATE_STELMAINLIB 1)
-ENDIF(WIN32 OR GENERATE_PYTHON_WRAPPERS)
+  SET(GENERATE_STELMAINLIB 1)
+ENDIF()
 
 IF(WIN32)
   LINK_LIBRARIES(wsock32)
-ENDIF(WIN32)
+ENDIF()
 
 IF(COMMAND cmake_policy)
   CMAKE_POLICY(SET CMP0003 NEW)
-ENDIF(COMMAND cmake_policy)
+ENDIF()
 
 ########### Find packages ###########
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
@@ -89,12 +89,12 @@ SET(QT_USE_QTNETWORK TRUE)
 IF(ENABLE_SOUND)
   SET(QT_USE_PHONON TRUE)
   ADD_DEFINITIONS(-DHAVE_QT_PHONON)
-ENDIF(ENABLE_SOUND)
+ENDIF()
 INCLUDE(${QT_USE_FILE})
 
 IF (NOT WIN32)
   SET(QT_QTSCRIPT_LIBRARY "-lQtScript")
-ENDIF (NOT WIN32)
+ENDIF ()
 
 IF(ENABLE_NLS)
   FIND_PACKAGE(Iconv REQUIRED)
@@ -106,7 +106,7 @@ IF(ENABLE_NLS)
     /usr/lib/
     /usr/local/lib)
   FIND_PACKAGE(Gettext REQUIRED)
-ENDIF(ENABLE_NLS)
+ENDIF()
 
 FIND_PACKAGE(OpenGL REQUIRED)
 FIND_PACKAGE(PNG REQUIRED)
@@ -116,18 +116,18 @@ FIND_PACKAGE(FreeType2 REQUIRED)
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
-IF(MACOSX)
+IF(APPLE)
   SET(CMAKE_INSTALL_PREFIX "/Users/Shared/stellarium/Stellarium.app/Contents")
   SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/Resources/data")
   SET(INSTALL_LOCALEDIR "${CMAKE_INSTALL_PREFIX}/Resources/locale")
-ELSE(MACOSX)
+ELSE(APPLE)
   SET(INSTALL_DATADIR ${CMAKE_INSTALL_PREFIX}/share/stellarium)
   SET(INSTALL_LOCALEDIR ${CMAKE_INSTALL_PREFIX}/share/locale)
-ENDIF(MACOSX)
-ELSE(UNIX AND NOT WIN32)
+ENDIF(APPLE)
+ELSE()
   SET(INSTALL_DATADIR .)
   SET(INSTALL_LOCALEDIR ./locale)
-ENDIF(UNIX AND NOT WIN32)
+ENDIF()
 
 ########### Get SVN revision for non-release builds ###########
 IF(NOT RELEASE_BUILD)
@@ -136,8 +136,8 @@ IF(NOT RELEASE_BUILD)
     Subversion_WC_INFO(${PROJECT_SOURCE_DIR} StelSvn) 
     MESSAGE("Current SVN revision is ${StelSvn_WC_REVISION}")
     SET(SVN_REVISION ${StelSvn_WC_REVISION})
-  ENDIF(Subversion_FOUND) 
-ENDIF(NOT RELEASE_BUILD)
+  ENDIF() 
+ENDIF()
 
 ########### Generate a config.h ###########
 INCLUDE(TestBigEndian)
@@ -149,8 +149,8 @@ CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake ${CMAKE_BINARY_DIR}/config.h)
 ADD_DEFINITIONS(-DHAVE_CONFIG_H)
 
 IF(CMAKE_BUILD_TYPE STREQUAL "Release")
- ADD_DEFINITIONS(-DQT_NO_DEBUG)
-ENDIF(CMAKE_BUILD_TYPE STREQUAL "Release")
+  ADD_DEFINITIONS(-DQT_NO_DEBUG)
+ENDIF()
 
 ########### uninstall files ###############
 CONFIGURE_FILE(
@@ -177,7 +177,7 @@ SET(CPACK_SOURCE_GENERATOR "TGZ")
 SET(CPACK_GENERATOR "TGZ")
 SET(CPACK_STRIP_FILES "bin/stellarium")
 SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
-set(CPACK_SOURCE_IGNORE_FILES "/CVS/" "/.svn/" "/.git/" "builds/" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "~$" "\\\\.swp$" "\\\\.#" "/#")
+SET(CPACK_SOURCE_IGNORE_FILES "/CVS/" "/.svn/" "/.git/" "builds/" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "~$" "\\\\.swp$" "\\\\.#" "/#")
 INCLUDE(CPack)
 
 ########### Generate doxygen doc ###############
@@ -193,7 +193,7 @@ ADD_SUBDIRECTORY( textures )
 ADD_SUBDIRECTORY( doc ) 
 IF(ENABLE_NLS)
   ADD_SUBDIRECTORY( po ) 
-ENDIF(ENABLE_NLS)
+ENDIF()
 ADD_SUBDIRECTORY( landscapes ) 
 ADD_SUBDIRECTORY( skycultures ) 
 ADD_SUBDIRECTORY( nebulae ) 
@@ -201,9 +201,10 @@ ADD_SUBDIRECTORY( scripts )
 ADD_SUBDIRECTORY( stars ) 
 IF (GENERATE_PYTHON_WRAPPERS)
  ADD_SUBDIRECTORY( sip ) 
-ENDIF(GENERATE_PYTHON_WRAPPERS)
+ENDIF()
+
 ########### Macosx Bundling ###############
-IF(MACOSX)
+IF(APPLE)
 ADD_CUSTOM_TARGET(macosx_bundle mv ${CMAKE_INSTALL_PREFIX}/bin ${CMAKE_INSTALL_PREFIX}/MacOS COMMAND mv ${CMAKE_INSTALL_PREFIX}/share ${CMAKE_INSTALL_PREFIX}/Resources COMMAND mv ${CMAKE_INSTALL_PREFIX}/Resources/stellarium/* ${CMAKE_INSTALL_PREFIX}/Resources COMMAND rmdir ${CMAKE_INSTALL_PREFIX}/Resources/stellarium COMMAND mkdir ${CMAKE_INSTALL_PREFIX}/Frameworks COMMAND perl util/pkgApp.pl ${CMAKE_INSTALL_PREFIX} MacOS/stellarium Frameworks DEPENDS install WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "making the macosx bundle." VERBATIM)
-ENDIF(MACOSX)
+ENDIF()
 
