@@ -30,6 +30,7 @@
 //! All methods from this class are threadsafe. The usual usage is to create local instances of StelProjectorP using the
 //! getProjection() method from StelCore where needed.
 //! For performing drawing using a particular projection, refer to the StelPainter class.
+//! @sa StelProjectorP
 class StelProjector
 {
 public:
