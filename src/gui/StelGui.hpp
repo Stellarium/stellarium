@@ -129,22 +129,22 @@ public slots:
 	//! Define whether the button toggling nebulae background should be visible
 	void setFlagShowNebulaBackgroundButton(bool b);
 
+	//! Get the auto-hide status of the horizontal toolbar.
+	bool getAutoHideHorizontalButtonBar() const {return autoHideHorizontalButtonBar;}
 	//! Set the auto-hide status of the horizontal toolbar.
 	//! When set to true, the horizontal toolbar will auto-hide itself, only
 	//! making an appearance when the mouse is nearby.  When false, it will 
 	//! remain on screen.
-	//! @param b to hide or not to hide
-	bool getAutoHideHorizontalButtonBar() const {return autoHideHorizontalButtonBar;}
-	//! Get the auto-hide status of the horizontal toolbar.
+	//! @param b to hide or not to hide	
 	void setAutoHideHorizontalButtonBar(bool b) {autoHideHorizontalButtonBar=b;}
 	
+	//! Get the auto-hide status of the vertical toolbar.
+	bool getAutoHideVerticalButtonBar() const {return autoHideVerticalButtonBar;}
 	//! Set the auto-hide status of the vertical toolbar.
 	//! When set to true, the vertical toolbar will auto-hide itself, only
 	//! making an appearance when the mouse is nearby.  When false, it will 
 	//! remain on screen.
 	//! @param b to hide or not to hide
-	bool getAutoHideVerticalButtonBar() const {return autoHideVerticalButtonBar;}
-	//! Get the auto-hide status of the vertical toolbar.
 	void setAutoHideVerticalButtonBar(bool b) {autoHideVerticalButtonBar=b;}
 
 	//! show or hide the toolbars

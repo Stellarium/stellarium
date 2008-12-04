@@ -87,7 +87,7 @@ bool intersect(const Polygon& p, const T& o)
 //! @class ConvexS
 //! A Convex is defined by several HalfSpaces defining a convex region.
 //! A Convex region is not necessarily a ConvexPolygon, it can for example be a single HalfSpace.
-//! Because in X11, Convex is #defined as an int in X11/X.h: (#define Convex 2) we needed to use another name (ConvexS).
+//! Because in X11, Convex is \#defined as an int in X11/X.h: (\#define Convex 2) we needed to use another name (ConvexS).
 class ConvexS : public std::vector<HalfSpace>
 {
 public:

@@ -71,7 +71,7 @@ public slots:
 	//! Get whether Sky Background should be displayed
 	bool getFlagShow() const {return flagShow;}
 
-	//! Load an image from a file.  This should not be called directly from
+	//! Load an image from a file. This should not be called directly from
 	//! scripts because it is not thread safe.  Instead use the simiarly 
 	//! named function in the core scripting object.
 	//! @param id a string identifier for the image
@@ -87,7 +87,7 @@ public slots:
 	//! @param dec3 declenation of corner 3 in degrees
 	//! @param minRes the minimum resolution setting for the image
 	//! @param maxBright the maximum brightness setting for the image
-	//! @param visiable initial visibility setting
+	//! @param visible initial visibility setting
 	bool loadSkyImage(const QString& id, const QString& filename, 
 	                  double ra0, double dec0, 
 	                  double ra1, double dec1, 

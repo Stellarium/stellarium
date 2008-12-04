@@ -59,7 +59,11 @@ ConfigurationDialog::ConfigurationDialog()
 	ui = new Ui_configurationDialogForm;
 	downloadMgr = &StelApp::getInstance().getDownloadMgr();
 	updatesData = NULL;
-	starsDir = StelApp::getInstance().getFileMgr().getUserDir()+"/data/stars/";
+	
+	StelFileMgr& fileMgr = StelApp::getInstance().getFileMgr();
+	starsDir = fileMgr.getUserDir()+"/stars/default";
+	if(!fileMgr.exists(starsDir))
+		fileMgr.mkDir(starsDir);
 	downloaded = 0;
 }
 
@@ -594,7 +598,7 @@ void ConfigurationDialog::setUpdatesState(ConfigurationDialog::UpdatesState stat
 
 void ConfigurationDialog::updatesDownloadError(QNetworkReply::NetworkError code, QString errorString)
 {
-	qDebug() << "Error checking updates from" << downloadMgr->url() << ": Code " << code << errorString;
+	qDebug() << "Error checking updates from" << downloadMgr->url() << ": Code" << code << errorString;
 	setUpdatesState(ConfigurationDialog::UpdatesError);
 }
 
@@ -623,7 +627,7 @@ void ConfigurationDialog::updatesDownloadFinished(void)
 void ConfigurationDialog::checkUpdates(void)
 {
 	setUpdatesState(ConfigurationDialog::Checking);
-	updatesFileName = starsDir+"updates.ini";
+	updatesFileName = starsDir+"/updates.ini";
 	downloadMgr->setBarVisible(false);
 	downloadMgr->setBlockQuit(false);
 	downloadMgr->get(starSettings->value("updates_url").toString(), updatesFileName);
@@ -666,8 +670,8 @@ void ConfigurationDialog::badChecksum(void)
 void ConfigurationDialog::downloadFinished(void)
 {
 	downloaded++;
-	QString tempFileName = starsDir+downloadName+".tmp";
-	QString finalFileName = starsDir+downloadName+".cat";
+	QString tempFileName = starsDir+"/"+downloadName+".tmp";
+	QString finalFileName = starsDir+"/"+downloadName+".cat";
 	
 	if( ( QFile::exists(finalFileName) && !QFile::remove(finalFileName) ) ||
 		!QFile::copy(tempFileName, finalFileName) ||
@@ -690,7 +694,7 @@ void ConfigurationDialog::downloadStars(void)
 	downloadMgr->disconnect();
 	downloadName = newCatalogs.at(downloaded);
 	QString url = updatesData->value(downloadName+"/url").toString();
-	QString path = QString("%1/data/stars/%2.tmp").arg(StelApp::getInstance().getFileMgr().getUserDir()).arg(downloadName);
+	QString path = QString("%1/%2.tmp").arg(starsDir).arg(downloadName);
 	quint16 checksum = updatesData->value(downloadName+"/checksum").toUInt();
 	
 	downloadMgr->setBarVisible(true);
