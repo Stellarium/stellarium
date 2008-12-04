@@ -93,7 +93,7 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
   QString fname(extended_file_name);
   QString dbStr; // for debugging output.
   try {
-    fname = StelApp::getInstance().getFileMgr().findFile(fname);
+    fname = StelApp::getInstance().getFileMgr().findFile("stars/default/"+fname);
   } catch (std::runtime_error &e) {
     qWarning() << "Loading" << extended_file_name << e.what();
     return 0;

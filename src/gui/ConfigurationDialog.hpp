@@ -45,8 +45,8 @@ public:
 	void styleChanged();
 protected:
 	enum UpdatesState { ShowAvailable, Checking, NoUpdates, Downloading,
-		Finished, Verifying, UpdatesError, MoveError, DownloadError,
-		ChecksumError };
+			    Finished, Verifying, UpdatesError, MoveError,
+			    DownloadError, ChecksumError };
 	
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();

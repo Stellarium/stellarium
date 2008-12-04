@@ -286,7 +286,7 @@ void StarMgr::loadData()
 	{
 		QString cat = it.next();
 		QString cat_file_name = starSettings->value(cat+"/path").toString();
-		QString cat_file_path = fileMgr.findFile(cat_file_name);
+		QString cat_file_path = fileMgr.findFile("stars/default/"+cat_file_name);
 		
 		lb.SetMessage(q_("Loading catalog %1 from file %2").arg(cat, cat_file_name));
 		memoryUsed += fileMgr.size(cat_file_path);

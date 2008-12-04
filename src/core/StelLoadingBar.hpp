@@ -42,7 +42,6 @@ class StelLoadingBar
 {
 public:
 	//! Create and initialise the StelLoadingBar.
-	//! @param prj the projector used to display the StelLoadingBar
 	//! @param fontSize the size of the font to use in the StelLoadingBar
 	//! @param splashTex the file name of a texture to display with the StelLoadingBar
 	//! @param screenw the screen width

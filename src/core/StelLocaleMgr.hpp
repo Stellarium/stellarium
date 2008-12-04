@@ -46,9 +46,8 @@ public:
 	QString getAppLanguage() const { return StelTranslator::globalTranslator.getTrueLocaleName(); }
 	
 	//! Set the application language. 
-	//! This applies to GUI etc. This function has no permanent effect on the 
-	//! global locale.
-	//! @param newAppLocaleName the abbreviated name of the language (e.g fr).
+	//! This applies to GUI etc. This function has no permanent effect on the global locale.
+	//! @param newAppLangName the abbreviated name of the language (e.g fr).
 	void setAppLanguage(const QString& newAppLangName);
 	
 	//! Get the StelTranslator object currently used for global application.
@@ -80,7 +79,7 @@ public:
 	//! These values correspond to the similarly named values in the STimeFormat enum.
 	QString getTimeFormatStr(void) const {return sTimeFormatToString(timeFormat);}
 	//! Set the time format from a format string.
-	//! @tf value values are the same as the return values for getTimeFormatStr().
+	//! @param tf values are the same as the return values for getTimeFormatStr().
 	void setTimeFormatStr(const QString& tf) {timeFormat=stringToSTimeFormat(tf);}
 	//! Get the format string which describes the current date format.
 	//! Valid values:
@@ -156,8 +155,8 @@ public:
 	//! Return the JD time for a local time ISO 8601 format that is:
 	//! %Y-%m-%dT%H:%M:%S, but %Y can be a large number with sign, and
 	//! %Y can be zero.
-	//! @param JD the time and date expressed as a Julian date value.
-	double getJdFromISO8601TimeLocal(const QString&) const;
+	//! @param str the local time in ISO 8601 format
+	double getJdFromISO8601TimeLocal(const QString& str) const;
 
 	//! Convert a 2 letter country code to string
 	static QString countryCodeToString(const QString& countryCode);
