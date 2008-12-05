@@ -67,6 +67,8 @@ void CompletionLabel::clearValues()
 
 QString CompletionLabel::getSelected()
 {
+	if (values.isEmpty())
+		return QString();
 	return values.at(selectedIdx);
 }
 
@@ -174,8 +176,10 @@ void SearchDialog::onTextChanged(const QString& text)
 	{
 		if (simbadReply)
 		{
-			simbadReply->deleteLater();
+			disconnect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
+			delete simbadReply;
 		}
+		simbadResults.clear();
 		simbadReply = simbadSearcher->lookup(text, 3);
 		onSimbadStatusChanged();
 		connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
@@ -199,6 +203,13 @@ void SearchDialog::onSimbadStatusChanged()
 		simbadResults = simbadReply->getResults();
 		ui->completionLabel->appendValues(simbadResults.keys());
 	}
+	
+	if (simbadReply->getCurrentStatus()!=SimbadLookupReply::SimbadLookupQuerying)
+	{
+		disconnect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
+		delete simbadReply;
+		simbadReply=NULL;
+	}
 }
 	
 void SearchDialog::gotoObject()
@@ -218,7 +229,6 @@ void SearchDialog::gotoObject()
 		mvmgr->moveTo(pos, mvmgr->getAutoMoveDuration());
 		ui->lineEditSearchSkyObject->clear();
 		ui->completionLabel->clearValues();
-		simbadResults.clear();
 	}
 	else if (StelApp::getInstance().getStelObjectMgr().findAndSelectI18n(name))
 	{
@@ -230,9 +240,9 @@ void SearchDialog::gotoObject()
 			ui->completionLabel->clearValues();
 			mvmgr->moveTo(newSelected[0]->getEquinoxEquatorialPos(StelApp::getInstance().getCore()->getNavigator()),mvmgr->getAutoMoveDuration());
 			mvmgr->setFlagTracking(true);
-			simbadResults.clear();
 		}
 	}
+	simbadResults.clear();
 }
 
 bool SearchDialog::eventFilter(QObject *object, QEvent *event)
