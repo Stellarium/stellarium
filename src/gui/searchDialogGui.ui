@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>341</width>
-    <height>167</height>
+    <width>383</width>
+    <height>169</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -345,28 +345,50 @@
        </widget>
       </item>
       <item>
-       <widget class="CompletionLabel" name="completionLabel" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="MinimumExpanding" hsizetype="Preferred" >
-          <horstretch>35</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+       <widget class="QFrame" name="frame_2" >
+        <property name="frameShape" >
+         <enum>QFrame::StyledPanel</enum>
         </property>
-        <property name="text" >
-         <string/>
+        <property name="frameShadow" >
+         <enum>QFrame::Raised</enum>
         </property>
-        <property name="scaledContents" >
-         <bool>false</bool>
-        </property>
-        <property name="alignment" >
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-        </property>
-        <property name="wordWrap" >
-         <bool>true</bool>
-        </property>
-        <property name="textInteractionFlags" >
-         <set>Qt::TextSelectableByMouse</set>
-        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2" >
+         <property name="topMargin" >
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="CompletionLabel" name="completionLabel" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="MinimumExpanding" hsizetype="Preferred" >
+             <horstretch>35</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+           <property name="scaledContents" >
+            <bool>false</bool>
+           </property>
+           <property name="alignment" >
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+           </property>
+           <property name="wordWrap" >
+            <bool>true</bool>
+           </property>
+           <property name="textInteractionFlags" >
+            <set>Qt::TextSelectableByMouse</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="simbadStatusLabel" >
+           <property name="text" >
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>

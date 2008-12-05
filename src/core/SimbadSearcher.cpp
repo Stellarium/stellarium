@@ -17,34 +17,125 @@
  */
 
 #include "SimbadSearcher.hpp"
+
+#include "StelTranslator.hpp"
 #include <QNetworkReply>
 #include <QNetworkAccessManager>
+#include <QDebug>
 
-SimbadLookupReply::SimbadLookupReply(QNetworkReply* r) : reply(r)
+SimbadLookupReply::SimbadLookupReply(QNetworkReply* r) : reply(r), currentStatus(SimbadLookupQuerying)
 {
-	connect(r, SIGNAL(finished()), this, SLOT((httpQueryFinished())));
+	connect(r, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
 }
 
 SimbadLookupReply::~SimbadLookupReply()
 {
+	reply->abort();
 	reply->deleteLater();
+	reply = NULL;
 }
 
 void SimbadLookupReply::httpQueryFinished()
 {
+	if (reply->error()!=QNetworkReply::NoError)
+	{
+		currentStatus = SimbadLookupErrorOccured;
+		errorString = q_("Network error: %1").arg(reply->errorString());
+		emit statusChanged();
+		return;
+	}
 	
+	// No error, try to parse the Simbad result
+	QByteArray line;
+	bool found = false;
+	//qDebug() << reply->readAll();
+	reply->reset();
+	while (!reply->atEnd())
+	{
+		line = reply->readLine();
+		if (line.startsWith("::data"))
+		{
+			found = true;
+			line = reply->readLine();	// Discard first header line
+			break;
+		}
+	}
+	if (found)
+	{	
+		line = reply->readLine();
+		line.chop(1); // Remove a line break at the end
+		while (!line.isEmpty())
+		{
+			if (line=="No Coord.")
+			{
+				reply->readLine();
+				line = reply->readLine();
+				line.chop(1); // Remove a line break at the end
+				continue;
+			}
+			QList<QByteArray> l = line.split(' ');
+			if (l.size()!=2)
+			{
+				currentStatus = SimbadLookupErrorOccured;
+				errorString = q_("Error parsing position");
+				emit statusChanged();
+				return;
+			}
+			else
+			{
+				bool ok1, ok2;
+				const double ra = l[0].toDouble(&ok1)*M_PI/180.;
+				const double dec = l[1].toDouble(&ok2)*M_PI/180.;
+				if (ok1==false || ok2==false)
+				{
+					currentStatus = SimbadLookupErrorOccured;
+					errorString = q_("Error parsing position");
+					emit statusChanged();
+					return;
+				}
+				Vec3d v;
+				StelUtils::spheToRect(ra, dec, v);
+				line = reply->readLine();
+				line.chop(1); // Remove a line break at the end
+				line.replace("NAME " ,"");
+				resultPositions[line]=v;
+			}
+			line = reply->readLine();
+			line.chop(1); // Remove a line break at the end
+		}
+	}
+	
+	currentStatus = SimbadLookupFinished;
+	emit statusChanged();
 }
 
+// Get a I18n string describing the current status.
+QString SimbadLookupReply::getCurrentStatusString() const
+{
+	switch (currentStatus)
+	{
+		case SimbadLookupQuerying:
+			return q_("Querying");
+		case SimbadLookupErrorOccured:
+			return q_("Error");
+		case SimbadLookupFinished:
+			return resultPositions.isEmpty() ? "Not found" : "Found";
+	}
+	return QString();
+}
 
 SimbadSearcher::SimbadSearcher(QObject* parent) : QObject(parent)
 {
 	networkMgr = new QNetworkAccessManager(this);
 }
 
-//! Lookup in Simbad for the passed object name.
+// Lookup in Simbad for the passed object name.
 SimbadLookupReply* SimbadSearcher::lookup(const QString& objectName, int maxNbResult)
 {
-	QUrl url;
+	// Create the Simbad query
+	QString url("http://simbad.u-strasbg.fr/simbad/sim-script?script=format object \"%COO(d;A D)\\n%IDLIST(1)\"\n");
+	url += QString("set epoch J2000\nset limit %1\n query id ").arg(maxNbResult);
+	url += objectName;
 	QNetworkReply* netReply = networkMgr->get(QNetworkRequest(url));
 	SimbadLookupReply* r = new SimbadLookupReply(netReply);
 	return r;

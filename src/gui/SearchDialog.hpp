@@ -22,13 +22,15 @@
 
 #include <QObject>
 #include <QLabel>
+#include <QMap>
 #include "StelDialog.hpp"
+#include "VecMath.hpp"
 
 // pre declaration of the ui class
 class Ui_searchDialogForm;
 
 //! @class CompletionLabel
-//! used to display a few results matching the search string, and to
+//! Display a list of results matching the search string, and allow to
 //! tab through those selections.
 class CompletionLabel : public QLabel
 {
@@ -39,16 +41,19 @@ public:
 	~CompletionLabel();
 
 	QString getSelected(void);
-
+	void setValues(const QStringList&);
+	void appendValues(const QStringList&);
+	void clearValues();
+	
 public slots:
-	void selectNext(void);
-	void selectPrevious(void);
-	void selectFirst(void);
+	void selectNext();
+	void selectPrevious();
+	void selectFirst();
 
 private:
-	void updateSelected(void);
+	void updateText();
 	int selectedIdx;
-
+	QStringList values;
 };
 
 //! @class SearchDialog
@@ -75,6 +80,14 @@ protected:
 	virtual void createDialogContent();
 	bool eventFilter(QObject *object, QEvent *event);
 
+private slots:
+	//! Called when the current simbad query status changes
+	void onSimbadStatusChanged();
+	
+private:
+	class SimbadSearcher* simbadSearcher;
+	class SimbadLookupReply* simbadReply;
+	QMap<QString, Vec3d> simbadResults;
 };
 
 #endif // _SEARCHDIALOG_HPP_
