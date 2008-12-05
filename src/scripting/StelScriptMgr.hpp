@@ -202,6 +202,28 @@ public slots:
 	                  double ra3, double dec3,
 	                  double minRes=2.5, double maxBright=14, bool visible=true);
 
+	//! Convenience function which allows the user to provide RA and DEC angles
+	//! as strings (e.g. "12d 14m 8s" or "5h 26m 8s" - formats accepted by
+	//! StelUtils::getDecAngle()).
+	void loadSkyImage(const QString& id, const QString& filename,
+	                  const QString& ra0, const QString& dec0,
+	                  const QString& ra1, const QString& dec1,
+	                  const QString& ra2, const QString& dec2,
+	                  const QString& ra3, const QString& dec3,
+	                  double minRes=2.5, double maxBright=14, bool visible=true);
+
+	//! Convenience function which allows loading of a sky image based on a
+	//! central coordinate, angular size and rotation.
+	void loadSkyImage(const QString& id, const QString& filename,
+	                  double ra, double dec, double angSize, double rotation,
+	                  double minRes=2.5, double maxBright=14, bool visible=true);
+
+	//! Convenience function which allows loading of a sky image based on a
+	//! central coordinate, angular size and rotation.
+	void loadSkyImage(const QString& id, const QString& filename,
+	                  const QString& ra, const QString& dec, double angSize, double rotation,
+	                  double minRes=2.5, double maxBright=14, bool visible=true);
+
 	//! Remove a SkyImage.
 	//! @param id the ID of the image to remove.
 	void removeSkyImage(const QString& id);

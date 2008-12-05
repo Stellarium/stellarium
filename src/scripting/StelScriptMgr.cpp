@@ -282,7 +282,68 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 	                             double minRes, double maxBright, bool visible)
 {
 	QString path = "scripts/" + filename;
+	qDebug() << "StelMainScriptAPI::loadSkyImage" << id << filename 
+	         << "[" << ra0 << dec0 << "],[" << ra1 << dec1 << "],[" << ra2 << dec2 << "],[" << ra3 << dec3 << "]"
+	         << minRes << maxBright << visible;
 	emit(requestLoadSkyImage(id, path, ra0, dec0, ra1, dec1, ra2, dec2, ra3, dec3, minRes, maxBright, visible));
+}
+
+void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
+                                     const QString& ra0, const QString& dec0,
+                                     const QString& ra1, const QString& dec1,
+                                     const QString& ra2, const QString& dec2,
+                                     const QString& ra3, const QString& dec3,
+                                     double minRes, double maxBright, bool visible)
+{
+	loadSkyImage(id, filename,
+	             StelUtils::getDecAngle(ra0) *180./M_PI, StelUtils::getDecAngle(dec0)*180./M_PI,
+	             StelUtils::getDecAngle(ra1) *180./M_PI, StelUtils::getDecAngle(dec1)*180./M_PI,
+	             StelUtils::getDecAngle(ra2) *180./M_PI, StelUtils::getDecAngle(dec2)*180./M_PI,
+	             StelUtils::getDecAngle(ra3) *180./M_PI, StelUtils::getDecAngle(dec3)*180./M_PI,
+	             minRes, maxBright, visible);
+}
+
+void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
+                                     double ra, double dec, double angSize, double rotation,
+                                     double minRes, double maxBright, bool visible)
+{
+	Vec3d XYZ;
+	const double RADIUS_NEB = 1.;
+	//double angSizeRad = angSize/2/60*M_PI/180.;
+	StelUtils::spheToRect(ra*M_PI/180., dec*M_PI/180., XYZ);
+	XYZ*=RADIUS_NEB;
+	double texSize = RADIUS_NEB * sin(angSize/2/60*M_PI/180);
+	Mat4f matPrecomp = Mat4f::translation(XYZ) *
+	                   Mat4f::zrotation(ra*M_PI/180.) *
+	                   Mat4f::yrotation(-dec*M_PI/180.) *
+	                   Mat4f::xrotation(rotation*M_PI/180.);
+
+	Vec3d corners[4];
+        corners[0] = matPrecomp * Vec3d(0.,-texSize,-texSize); 
+        corners[1] = matPrecomp * Vec3d(0., texSize,-texSize);
+        corners[2] = matPrecomp * Vec3d(0.,-texSize, texSize);
+        corners[3] = matPrecomp * Vec3d(0., texSize, texSize);
+
+	// convert back to ra/dec (radians)
+	Vec3d cornersRaDec[4];
+	for(int i=0; i<4; i++)
+		StelUtils::rectToSphe(&cornersRaDec[i][0], &cornersRaDec[i][1], corners[i]);
+
+	loadSkyImage(id, filename, 
+	             cornersRaDec[0][0]*180./M_PI, cornersRaDec[0][1]*180./M_PI,
+	             cornersRaDec[1][0]*180./M_PI, cornersRaDec[1][1]*180./M_PI,
+	             cornersRaDec[3][0]*180./M_PI, cornersRaDec[3][1]*180./M_PI,
+	             cornersRaDec[2][0]*180./M_PI, cornersRaDec[2][1]*180./M_PI,
+	             minRes, maxBright, visible);
+}
+
+void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
+                                     const QString& ra, const QString& dec, double angSize, double rotation,
+                                     double minRes, double maxBright, bool visible)
+{
+	loadSkyImage(id, filename, StelUtils::getDecAngle(ra)*180./M_PI, 
+	             StelUtils::getDecAngle(dec)*180./M_PI, angSize, 
+	             rotation, minRes, maxBright, visible);
 }
 
 void StelMainScriptAPI::removeSkyImage(const QString& id)
