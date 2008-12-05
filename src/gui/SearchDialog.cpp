@@ -25,6 +25,7 @@
 #include "StelObjectMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelNavigator.hpp"
 
 #include <QTextEdit>
 #include <QLabel>
@@ -211,8 +212,9 @@ void SearchDialog::gotoObject()
 	if (simbadResults.contains(name))
 	{
 		close();
-		const Vec3d& pos = simbadResults[name];
+		Vec3d pos = simbadResults[name];
 		StelApp::getInstance().getStelObjectMgr().unSelect();
+		pos = StelApp::getInstance().getCore()->getNavigator()->j2000ToEquinoxEqu(pos);
 		mvmgr->moveTo(pos, mvmgr->getAutoMoveDuration());
 		ui->lineEditSearchSkyObject->clear();
 		ui->completionLabel->clearValues();
