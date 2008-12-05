@@ -34,11 +34,10 @@
 #include <QFrame>
 
 #include "StelMainGraphicsView.hpp"
+#include "SimbadSearcher.hpp"
 
 // Start of members for class CompletionLabel
-CompletionLabel::CompletionLabel(QWidget* parent)
-	: QLabel(parent), 
-	  selectedIdx(0)
+CompletionLabel::CompletionLabel(QWidget* parent) : QLabel(parent), selectedIdx(0)
 {
 }
 
@@ -46,72 +45,84 @@ CompletionLabel::~CompletionLabel()
 {
 }
 
-QString CompletionLabel::getSelected(void)
+void CompletionLabel::setValues(const QStringList& v)
 {
-	QString item = text().split(",").at(selectedIdx);
-	item.replace(QRegExp(" *</?b> *"), "");
-	return item;
+	values=v;
+	updateText();
 }
 
-void CompletionLabel::selectNext(void)
+void CompletionLabel::appendValues(const QStringList& v)
 {
-	selectedIdx++;
-	if (selectedIdx > text().count(",")) selectedIdx = 0; // wrap if necessary
-	updateSelected();
+	values+=v;
+	updateText();
 }
 
-void CompletionLabel::selectPrevious(void)
+void CompletionLabel::clearValues()
 {
-	selectedIdx--;
-	if (selectedIdx < 0) selectedIdx = text().count(","); // wrap if necessary
-	updateSelected();
+	values.clear();
+	selectedIdx=0;
+	updateText();
 }
 
-void CompletionLabel::selectFirst(void)
+QString CompletionLabel::getSelected()
+{
+	return values.at(selectedIdx);
+}
+
+void CompletionLabel::selectNext()
+{
+	++selectedIdx;
+	if (selectedIdx>=values.size())
+		selectedIdx=0;
+	updateText();
+}
+
+void CompletionLabel::selectPrevious()
+{
+	--selectedIdx;
+	if (selectedIdx<0)
+		selectedIdx = values.size()-1;
+	updateText();
+}
+
+void CompletionLabel::selectFirst()
 {
 	selectedIdx=0;
-	updateSelected();
+	updateText();
 }
 
-void CompletionLabel::updateSelected(void)
+void CompletionLabel::updateText()
 {
-	QStringList items = text().split(",");
-	QString newText("");
+	QString newText;
 	
-	// and pre-selected items, stripping bold tags if found
-	for(int i=0; i<selectedIdx; i++)
+	// Regenerate the list with the selected item in bold
+	for (int i=0;i<values.size();++i)
 	{
-		QString item(items.at(i));
-		item.replace(QRegExp("</?b>"), "");
-		newText += item.trimmed() + ", ";
+		if (i==selectedIdx)
+			newText+="<b>"+values[i]+"</b>";
+		else
+			newText+=values[i];
+		if (i!=values.size()-1)
+			newText += ", ";
 	}
-
-	// add selected item in bold
-	if (items.at(selectedIdx) != "") newText += "<b>" + items.at(selectedIdx).trimmed() + "</b>, ";
-
-	// and post-selected items, stripping bold tags if found
-	for(int i=selectedIdx+1; i<items.size(); i++)
-	{
-		QString item(items.at(i));
-		item.replace(QRegExp("</?b>"), "");
-		newText += item.trimmed() + ", ";
-	}
-
-	// remove final comma
-	newText.replace(QRegExp(", *$"), "");
-
 	setText(newText);
 }
 
 // Start of members for class SearchDialog
-SearchDialog::SearchDialog()
+SearchDialog::SearchDialog() : simbadReply(NULL)
 {
 	ui = new Ui_searchDialogForm;
+	simbadSearcher = new SimbadSearcher(this);
 }
 
 SearchDialog::~SearchDialog()
 {
 	delete ui;
+	if (simbadReply)
+	{
+		simbadReply->deleteLater();
+		simbadReply = NULL;
+	}
 }
 
 void SearchDialog::languageChanged()
@@ -152,36 +163,72 @@ void SearchDialog::setVisible(bool v)
 
 void SearchDialog::onTextChanged(const QString& text)
 {
-	if (text=="")
+	if (text.isEmpty())
 	{
 		ui->completionLabel->setText("");
 		ui->completionLabel->selectFirst();
+		ui->simbadStatusLabel->setText("");
 	}
 	else
 	{
+		if (simbadReply)
+		{
+			simbadReply->deleteLater();
+		}
+		simbadReply = simbadSearcher->lookup(text, 3);
+		onSimbadStatusChanged();
+		connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
 		QStringList matches = StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(text, 5);
-		ui->completionLabel->setText(matches.join(", "));
+		ui->completionLabel->setValues(matches);
 		ui->completionLabel->selectFirst();
 	}
 }
 
+// Called when the current simbad query status changes
+void SearchDialog::onSimbadStatusChanged()
+{
+	Q_ASSERT(simbadReply);
+	if (simbadReply->getCurrentStatus()==SimbadLookupReply::SimbadLookupErrorOccured)
+		ui->simbadStatusLabel->setText(QString("Simbad Lookup Error: ")+simbadReply->getErrorString());
+	else
+		ui->simbadStatusLabel->setText(QString("Simbad Lookup: ")+simbadReply->getCurrentStatusString());
+
+	if (simbadReply->getCurrentStatus()==SimbadLookupReply::SimbadLookupFinished)
+	{
+		simbadResults = simbadReply->getResults();
+		ui->completionLabel->appendValues(simbadResults.keys());
+	}
+}
+	
 void SearchDialog::gotoObject()
 {
 	QString name = ui->completionLabel->getSelected();
 	
-	if (name=="") return;
+	if (name.isEmpty())
+		return;
+	
+	StelMovementMgr* mvmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
+	if (simbadResults.contains(name))
+	{
+		close();
+		const Vec3d& pos = simbadResults[name];
+		StelApp::getInstance().getStelObjectMgr().unSelect();
+		mvmgr->moveTo(pos, mvmgr->getAutoMoveDuration());
+		ui->lineEditSearchSkyObject->clear();
+		ui->completionLabel->clearValues();
+		simbadResults.clear();
+	}
 	else if (StelApp::getInstance().getStelObjectMgr().findAndSelectI18n(name))
 	{
-		StelMovementMgr* mvmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
 		const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
 		if (!newSelected.empty())
 		{
+			close();
 			ui->lineEditSearchSkyObject->clear();
-			ui->completionLabel->setText("");
-			ui->completionLabel->selectFirst();
+			ui->completionLabel->clearValues();
 			mvmgr->moveTo(newSelected[0]->getEquinoxEquatorialPos(StelApp::getInstance().getCore()->getNavigator()),mvmgr->getAutoMoveDuration());
 			mvmgr->setFlagTracking(true);
-			close();
+			simbadResults.clear();
 		}
 	}
 }
