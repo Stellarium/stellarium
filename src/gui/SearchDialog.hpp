@@ -71,8 +71,6 @@ public:
 public slots:
 	// Add auto focus of the edit line
 	void setVisible(bool);
-	void onTextChanged(const QString& text);
-	void gotoObject();
 
 protected:
 	Ui_searchDialogForm* ui;
@@ -83,6 +81,8 @@ protected:
 private slots:
 	//! Called when the current simbad query status changes
 	void onSimbadStatusChanged();
+	void onTextChanged(const QString& text);
+	void gotoObject();
 	
 private:
 	class SimbadSearcher* simbadSearcher;
