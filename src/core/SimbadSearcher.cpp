@@ -30,6 +30,7 @@ SimbadLookupReply::SimbadLookupReply(QNetworkReply* r) : reply(r), currentStatus
 
 SimbadLookupReply::~SimbadLookupReply()
 {
+	disconnect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
 	reply->abort();
 	reply->deleteLater();
 	reply = NULL;
