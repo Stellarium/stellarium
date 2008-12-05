@@ -773,9 +773,9 @@ void Projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint 
   }
 }
 
-void Projector::s3dsObject(Object3DS* object3ds, const Mat4d& mat, int orient_inside)
-{
-}
+//void Projector::s3dsObject(Object3DS* object3ds, const Mat4d& mat, int orient_inside)
+//{
+//}
 
 void Projector::ms3dsObject(Object3DS* object3ds, const Mat4d& mat, int orient_inside)
 {
