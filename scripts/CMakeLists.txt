@@ -1,4 +1,4 @@
 ########### install files ###############
 
-INSTALL(FILES startup.ssc lunar_partial.ssc lunar_total.ssc solar_eclipse.ssc landscapes.ssc DESTINATION share/${PACKAGE}/scripts)
+INSTALL(FILES startup.ssc landscapes.ssc lunar_partial.ssc lunar_total.ssc screensaver.ssc solar_eclipse.ssc zodiac.ssc DESTINATION share/${PACKAGE}/scripts)
 
