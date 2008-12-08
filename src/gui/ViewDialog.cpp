@@ -117,9 +117,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->showPlanetCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagPlanets(bool)));
 	
 	ui->planetMarkerCheckBox->setChecked(ssmgr->getFlagHints());
-	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Planets_Hints");
-	connect(a, SIGNAL(toggled(bool)), ui->planetMarkerCheckBox, SLOT(setChecked(bool)));
-	connect(ui->planetMarkerCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+	connect(ui->planetMarkerCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagHints(bool)));
 	
 	ui->planetScaleMoonCheckBox->setChecked(ssmgr->getFlagMoonScale());
 	connect(ui->planetScaleMoonCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagMoonScale(bool)));
