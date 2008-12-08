@@ -39,9 +39,9 @@ public:
 	//! Possible status for a simbad query.
 	enum SimbadLookupStatus
 	{
-		SimbadLookupQuerying,
-		SimbadLookupErrorOccured,
-		SimbadLookupFinished
+		SimbadLookupQuerying,		//!< Simbad is still being queried.
+  		SimbadLookupErrorOccured,	//!< An error occured while looking up Simbad. Call getErrorString() for a description of the error.
+		SimbadLookupFinished		//!< The query is over. The reply can be deleted.
 	};
 
 	~SimbadLookupReply();
