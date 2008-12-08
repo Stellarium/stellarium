@@ -21,7 +21,7 @@
 
 //! @class Skybright
 //! Compute the luminance of the sky according to some parameters like sun moon position
-//! or time or altitude etc..
+//! or time or altitude etc...
 class Skybright
 {
 public:
@@ -38,7 +38,7 @@ public:
 	//! @param latitude observer latitude in radian
 	//! @param altitude observer altitude in m
 	//! @param temperature temperature in deg. C
-	//! @param humidity air humidity in %
+	//! @param relativeHumidity air humidity in %
 	void setLocation(float latitude, float altitude, float temperature=15.f, float relativeHumidity=40.f);
 
 	//! Set the moon and sun zenith angular distance (cosin given) and precompute what can be

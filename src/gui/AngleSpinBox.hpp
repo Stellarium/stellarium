@@ -76,6 +76,7 @@ public:
 	//! are any formats which the AngleSpinBox understands.
 	//! @param input the string value to be converted / validated.
 	//! @param state a pointer to a QValidator::State value which is set according to the validation.
+	//! @param prefix the kind of prefix to use for conversion.
 	//! @return the value of the angle expressed in input in radians.
 	double stringToDouble(QString input, QValidator::State* state, PrefixType prefix=Unknown) const;
 
@@ -84,7 +85,7 @@ public:
 	void setDecimals(int places) { decimalPlaces = places; }
 
 	//! Set the number of decimal places to express float values to (e.g. seconds in DMSLetters format)
-	//! @param places the number of decimal places to use.
+	//! @return the number of decimal places used.
 	int decimals() { return decimalPlaces; }
 
 	//! Set the display format
@@ -109,11 +110,9 @@ public slots:
 	//! Set the value of the spin box in radians.
 	//! @param radians the value to set, in radians
 	void setRadians(double radians);
-	//! Set the value of the spin box in radians.
-	//! @param radians the value to set, in radians
-	void setDegrees(double degrees);
 	//! Set the value of the spin box in decimal degrees.
-	//! @param radians the value to set, in decimal degrees
+	//! @param degrees the value to set, in decimal degrees
+	void setDegrees(double degrees);
 
 signals:
 	//! emitted when the value changes.

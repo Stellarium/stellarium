@@ -93,7 +93,8 @@ class SimbadSearcher : public QObject
 public:
 	SimbadSearcher(QObject* parent);
 
-	//! Lookup in Simbad for the passed object name.
+	//! Lookup in Simbad for object which have a name starting with @em objectName.
+	//! @param objectName the possibly truncated object name.
 	//! @param maxNbResult the maximum number of returned result.
 	//! @return a new SimbadLookupReply which is owned by the caller.
 	SimbadLookupReply* lookup(const QString& objectName, int maxNbResult=1);

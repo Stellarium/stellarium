@@ -63,9 +63,9 @@ protected:
 
 };
 
-//! @class SkyLabel is used to create user labels which are bound to some object
-//! on the celestial sphere.  The object in question can be any existing StelObject
-//! or celestial coordinates.
+//! @class SkyLabel
+//! Used to create user labels which are bound to some object on the celestial sphere.
+//! The object in question can be any existing StelObject or celestial coordinates.
 class SkyLabel : public StelLabel
 {
 public:
@@ -80,7 +80,7 @@ public:
 	//! @param text the text which will be displayed
 	//! @param bindObject a pointer to an existing object to which the label will be attached
 	//! @param font a pointer the font to use for this label
-	//! @param fontColor choose a color for the label
+	//! @param color choose a color for the label
 	//! @param side which side of the object to draw the label, values N, S, E, W, NE, NW, SE, SW, C (C is centred on the object)
 	//! @param distance the distance from the object to draw the label.  If < 0.0, placement is automatic.
 	//! @param style determines how the label is drawn
@@ -92,8 +92,9 @@ public:
 	virtual ~SkyLabel();
 	// SkyLabel(const QString& text, Vec3d coords, QString side="NE", double distance=-1.0, SkyLabel::Style style=TextOnly, double enclosureSize=-1.0);
 
-	//! draw the label on the sky
+	//! Draw the label on the sky
 	//! @param core the StelCore object
+	//! @param sPainter the StelPainter to use for drawing operations
 	virtual bool draw(StelCore* core, const StelPainter& sPainter);
 
 private:
@@ -105,8 +106,8 @@ private:
 	
 };
 
-//! @class ScreenLabel is used to create user labels which are bound to a fixed point
-//! on the screen.
+//! @class ScreenLabel
+//! Used to create user labels which are bound to a fixed point on the screen.
 class ScreenLabel : public StelLabel
 {
 public:
@@ -121,6 +122,7 @@ public:
 
 	//! draw the label on the sky
 	//! @param core the StelCore object
+	//! @param sPainter the StelPainter to use for drawing operations
 	virtual bool draw(StelCore* core, const StelPainter& sPainter);
 
 private:

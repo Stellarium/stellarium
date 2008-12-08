@@ -73,6 +73,7 @@ namespace StelUtils
 	
 	//! Convert an angle in radian to a hms formatted string.
 	//! @param angle input angle in radian
+	//! @param decimal output decimal second value
 	QString radToHmsStr(double angle, bool decimal=false);
 	
 	//! Convert an angle in radian to a dms formatted string.
@@ -84,6 +85,7 @@ namespace StelUtils
 	//! Convert an angle in radian to a dms formatted string.
 	//! @param angle input angle in radian
 	//! @param useD Define if letter "d" must be used instead of deg sign
+	//! @param decimal output decimal second value
 	QString radToDmsStr(double angle, bool decimal=false, bool useD=false);
 	
 	//! Obtains a Vec3f from a string.
@@ -105,21 +107,25 @@ namespace StelUtils
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng longitude in radian
 	//! @param lat latitude in radian
+	//! @param v the resulting 3D unit vector
 	void spheToRect(double lng, double lat, Vec3d& v);
 	
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng longitude in radian
 	//! @param lat latitude in radian
+	//! @param v the resulting 3D unti vector
 	void spheToRect(float lng, float lat, Vec3f& v);
 	
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng double* to store longitude in radian
 	//! @param lat double* to store latitude in radian
+	//! @param v the input 3D vector
 	void rectToSphe(double *lng, double *lat, const Vec3d& v);
 
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng float* to store longitude in radian
 	//! @param lat float* to store latitude in radian
+	//! @param v the input 3D vector
 	void rectToSphe(float *lng, float *lat, const Vec3d& v);
 
 	//! Convert a string longitude, latitude, RA or Declination angle

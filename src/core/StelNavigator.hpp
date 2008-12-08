@@ -85,7 +85,9 @@ public:
 	
 	//! Get the informations on the current location
 	const StelLocation& getCurrentLocation() const;
+	
 	//! Smoothly move the observer to the given location
+	//! @param target the target location
 	//! @param duration direction of view move duration in s
 	//! @param durationIfPlanetChange direction of view + planet travel move duration in s.
 	//! This is used only if the destination planet is different from the starting one.
