@@ -59,16 +59,16 @@ void MyClass::myMethod(int x)
   <li>1 between logical sections of a method
   <li>2 between sections of a source ﬁle
  </ul>
- <li><b>enums</b> should follow the QT conventions.  i.e. CamelCase with First letter capitalization for both enum type and enum values.  Document with doxygen.  The <b>//!< </b>tag can be used to add descriptions on the same line as an enum value, e.g.
- @code
-//! \@enum EnumName Here is a description of the enum
+ <li>@em enums should follow the QT conventions.  i.e. CamelCase with First letter capitalization for both enum type and enum values. Document with doxygen. The <b>//!\< </b>tag can be used to add descriptions on the same line as an enum value, e.g.
+@verbatim
+//! @enum EnumName Here is a description of the enum
 enum EnumName
 {
-	EnumValueOne,  //!\< Some doxygen description of EnumValueOne
-	EnumValueTwo,  //!\< Some doxygen description of EnumValueTwo
-	EnumValueThree //!\< Some doxygen description of EnumValueThree
+	EnumValueOne,  //!< Some doxygen description of EnumValueOne
+	EnumValueTwo,  //!< Some doxygen description of EnumValueTwo
+	EnumValueThree //!< Some doxygen description of EnumValueThree
 };
-@endcode
+@endverbatim
 
 <li>You can use the <a href='http://astyle.sourceforge.net/'>astyle</a> program to format your code according to these conventions. Use the following options:
 @verbatim

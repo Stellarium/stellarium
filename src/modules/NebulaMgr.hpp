@@ -83,14 +83,10 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
 	//! Used to get a vector of objects which are near to some position.
-	//! @param v a vector representing the position in th sky around which 
-	//! to search for nebulae.
-	//! @param limitFov the field of view around the position v in which to
-	//! search for nebulae.
-	//! @param nav the StelNavigator object.
-	//! @param prj the StelProjector object.
-	//! @return an stl vector containing the nebulae located inside the
-	//! limitFov circle around position v.
+	//! @param v a vector representing the position in th sky around which to search for nebulae.
+	//! @param limitFov the field of view around the position v in which to search for nebulae.
+	//! @param core the StelCore to use for computations.
+	//! @return an list containing the nebulae located inside the limitFov circle around position v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	
 	//! Return the matching nebula object's pointer if exists or NULL.
@@ -106,7 +102,7 @@ public:
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& QString, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
@@ -154,7 +150,7 @@ public slots:
 	
 	//! Set the amount of nebulae hints. The real amount is also proportional with FOV.
 	//! The limit is set in function of the nebulae magnitude
-	//! @param a the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
+	//! @param f the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
 	void setHintsAmount(float f) {hintsAmount = f;}
 	//! Get the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no hints, 10 is maximum of hints

@@ -55,7 +55,7 @@ public:
 	//! By default, StelFileMgr will be created with the Stellarium installation directory
 	//! config_root in the search path.  On systems which provide a per-user data/settings
 	//! directory (which we call the user_settings directory, this is also included in 
-	//! the search path, before the <config_root> directory.
+	//! the search path, before the \<config_root> directory.
 	StelFileMgr();
 	
 	//! Destructor.

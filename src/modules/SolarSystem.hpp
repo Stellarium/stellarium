@@ -95,13 +95,13 @@ public:
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	
 	//! Search for a SolarSystem object based on the localised name.
-	//! @param NameI18n The case in-sensistive translated planet name.
-	//! @return A StelObjectP for the object if found, else NULL.
+	//! @param nameI18n the case in-sensistive translated planet name.
+	//! @return a StelObjectP for the object if found, else NULL.
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
 	//! Search for a SolarSystem object based on the English name.
-	//! @param NameI18n The case in-sensistive translated planet name.
-	//! @return A StelObjectP for the object if found, else NULL.
+	//! @param name the case in-sensistive English planet name.
+	//! @return a StelObjectP for the object if found, else NULL.
 	virtual StelObjectP searchByName(const QString& name) const;
 	
 	//! Find objects by translated name prefix.
@@ -215,8 +215,8 @@ public:
 	QString getPlanetHashString();
  
 	//! Compute the position and transform matrix for every element of the solar system.
-	//! @param observerPos Position of the observer in heliocentric ecliptic frame. 
-	//! (Required for light travel time computation.)
+	//! @param observerPos Position of the observer in heliocentric ecliptic frame (Required for light travel time computation).
+	//! @param date the date in JDay
 	void computePositions(double date, const Vec3d& observerPos = Vec3d(0,0,0));
 	
 	//! Get the list of all the bodies of the solar system.

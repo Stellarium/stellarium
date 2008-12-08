@@ -153,6 +153,7 @@ public slots:
 	//! @param prefix the prefix for the file name to use
 	//! @param dir the path of the directory to save the screenshot in.  If
 	//! none is specified, the default screenshot directory will be used.
+	//! @param invert whether colors have to be inverted in the output image
 	void screenshot(const QString& prefix, bool invert=false, const QString& dir="");
 
 	//! Hide or show the GUI (toolbars)

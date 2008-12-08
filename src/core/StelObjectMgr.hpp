@@ -54,12 +54,17 @@ public:
 	//! Registered modules can have selected objects 
 	void registerStelObjectMgr(StelObjectModule* mgr);
 
-	//! Find and select an object near given equatorial position.
+	//! Find and select an object near given equatorial J2000 position.
+	//! @param core the StelCore instance to use for computations
+	//! @param pos the direction vector around which to search in equatorial J2000
 	//! @param action define whether to add to, replace, or remove from the existing selection
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
 	bool findAndSelect(const StelCore* core, const Vec3d& pos, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	//! Find and select an object near given screen position.
+	//! @param core the StelCore instance to use for computations
+	//! @param x the x screen position in pixel
+	//! @param y the y screen position in pixel
 	//! @param action define whether to add to, replace, or remove from the existing selection
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
 	bool findAndSelect(const StelCore* core, int x, int y, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
@@ -89,6 +94,7 @@ public:
 	void unSelect(void);
 
 	//! Notify that we want to select the given object.
+	//! @param obj the StelObject to select
 	//! @param action action define whether to add to, replace, or remove from the existing selection
 	//! @return true if at least 1 object was sucessfully selected
 	bool setSelectedObject(const StelObjectP obj, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
