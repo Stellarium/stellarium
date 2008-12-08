@@ -75,7 +75,7 @@ public:
 	float getLightPollutionLuminance() const { return lightPollutionLuminance; }
 
 private:
-	Vector4<GLint> viewport;
+	Vec4i viewport;
 	Skylight sky;
 	Skybright skyb;
 	int skyResolutionY,skyResolutionX;
