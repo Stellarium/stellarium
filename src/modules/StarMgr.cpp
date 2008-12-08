@@ -290,7 +290,7 @@ void StarMgr::loadData()
 		
 		lb.SetMessage(q_("Loading catalog %1 from file %2").arg(cat, cat_file_name));
 		memoryUsed += fileMgr.size(cat_file_path);
-		ZoneArray *const z = ZoneArray::create(*this, cat_file_name, memoryUsed > maxMemory, lb);
+		ZoneArray *const z = ZoneArray::create(cat_file_name, memoryUsed > maxMemory, lb);
 		if (z)
 		{
 			if (maxGeodesicGridLevel < z->level)
