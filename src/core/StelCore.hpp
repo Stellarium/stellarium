@@ -90,10 +90,11 @@ public:
 	//! only for 2d painting
 	const StelProjectorP getProjection2d() const;
 			
-	//! Get a new instance of projector using the current display parameters from Navigation, StelMovementMgr, etc..
-	//! If not specified default the projection type is the default one set in the core.
+	//! Get a new instance of projector using the current display parameters from Navigation, StelMovementMgr, etc...
+	//! If not specified the projection type is the default one set in the core.
 	//! This is a smart pointer, you don't need to delete it.
 	const StelProjectorP getProjection(FrameType frameType, ProjectionType projType=(ProjectionType)1000) const;
+	
 	//! Get an instance of projector using the current display parameters from Navigation, StelMovementMgr
 	//! and using the given modelview matrix.
 	//! If not specified default the projection type is the default one set in the core.

@@ -219,9 +219,8 @@ public:
 			: SpecialZoneArray<Star1>(file,byte_swap,use_mmap,lb,level,
 			                          mag_min,mag_range,mag_steps) {}
 	
-	//! Add Hipparcos information for all stars in this catalog into
-	//! @em hipIndex.
-	//! @param array of Hipparcos info structs
+	//! Add Hipparcos information for all stars in this catalog into @em hipIndex.
+	//! @param hipIndex array of Hipparcos info structs
 	void updateHipIndex(HipIndexStruct hipIndex[]) const;
 };
 

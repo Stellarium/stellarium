@@ -69,8 +69,8 @@ public:
 	//! @param pixOn the pixmap to display when the button is toggled
 	//! @param pixOff the pixmap to display when the button is not toggled
 	//! @param pixHover a pixmap slowly blended when mouse is over the button
-	//! @param groupName the name of a button group in which to add the button. If the group doesn't exist, create a new group.
 	//! @param action the associated action. Connections are automatically done with the signals if relevant.
+	//! @param noBackground define whether the button background image have to be used
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixHover=QPixmap(),
 			   QAction* action=NULL, bool noBackground=false);
 

@@ -49,6 +49,7 @@ public:
 	
 	//! Unregister and delete a StelModule. The program will hang if other modules depend on the removed one
 	//! @param moduleID the unique ID of the module, by convention equal to the class name
+	//! @param alsoDelete if true also delete the StelModule instance, otherwise it has to be deleted by external code.
 	void unloadModule(const QString& moduleID, bool alsoDelete=true);
 	
 	//! Load dynamically a module

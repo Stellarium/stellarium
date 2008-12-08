@@ -83,6 +83,9 @@ public:
 	//! Terminate drawing of a 3D model, draw the halo
 	//! @param x the x position of the object centroid in pixel
 	//! @param y the y position of the object centroid in pixel
+	//! @param illuminatedArea the illuminated area in arcmin^2
+	//! @param mag the source integrated magnitude
+	//! @param p the StelPainter instance to use for this drawing operation
 	//! @param color the object halo RGB color
 	void postDrawSky3dModel(double x, double y, double illuminatedArea, float mag, const StelPainter* p, const Vec3f& color = Vec3f(1.f,1.f,1.f));
 	
