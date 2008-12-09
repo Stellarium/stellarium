@@ -60,6 +60,9 @@ public:
 		bool flipHorz, flipVert;       //! Whether to flip in horizontal or vertical directions
 	};
 	
+	//! Destructor
+	virtual ~StelProjector() {;}
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods which must be reimplemented by all instance of StelProjector
 	//! Get a human-readable name for this projection type
