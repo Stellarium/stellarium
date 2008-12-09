@@ -42,7 +42,10 @@ QNetworkAccessManager* MultiLevelJsonBase::networkAccessManager = NULL;
 QNetworkAccessManager& MultiLevelJsonBase::getNetworkAccessManager()
 {
 	if (networkAccessManager==NULL)
+	{
 		networkAccessManager = new QNetworkAccessManager(&StelApp::getInstance());
+		connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), &StelApp::getInstance(), SLOT(reportFileDownloadFinished(QNetworkReply*)));
+	}
 	return *networkAccessManager;
 }
 
