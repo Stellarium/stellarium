@@ -79,6 +79,10 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	  confSettings(NULL), initialized(false), saveProjW(-1), 
 	  saveProjH(-1)
 {
+	// Stat variables
+	nbDownloadedFiles=0;
+	totalDownloadedSize=0;
+	
 	// Used for getting system date formatting
 	setlocale(LC_TIME, "");
 	// We need scanf()/printf() and friends to always work in the C locale,
@@ -263,6 +267,7 @@ QString StelApp::getApplicationName()
 void StelApp::init()
 {
 	networkAccessManager = new QNetworkAccessManager(this);
+	connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(reportFileDownloadFinished(QNetworkReply*)));
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(saveProjW, saveProjH);
@@ -995,4 +1000,12 @@ int StelApp::argsGetYesNoOption(QStringList* args, QString shortOpt, QString lon
 double StelApp::getTotalRunTime()
 {
 	return (double)StelApp::qtime->elapsed()/1000;
+}
+
+
+void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
+{
+	++nbDownloadedFiles;
+	totalDownloadedSize+=reply->size();
+	//qDebug() << QString("Download status: downloaded %1 files amounting %2 kbytes in a session of %3 seconds").arg(nbDownloadedFiles).arg(totalDownloadedSize/1024).arg(getTotalRunTime());
 }

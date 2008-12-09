@@ -45,6 +45,7 @@ class StelSkyImageMgr;
 class StelScriptMgr;
 class StelDownloadMgr;
 class StelAudioMgr;
+class QNetworkReply;
 
 //! @class StelApp 
 //! Singleton main Stellarium application class.
@@ -190,6 +191,10 @@ public slots:
 	//! Return the time since when stellarium is running in second.
 	static double getTotalRunTime();
 
+	//! Report that a download occured. This is used for statistics purposes.
+	//! Connect this slot to QNetworkAccessManager::finished() slot to obtain statistics at the end of the program.
+	void reportFileDownloadFinished(QNetworkReply* reply);
+	
 signals:
 	void minFpsChanged();
 	
@@ -378,6 +383,11 @@ private:
 	// if the core was not yet initialized
 	int saveProjW;
 	int saveProjH;
+	
+	//! Store the number of downloaded files for statistics.
+	int nbDownloadedFiles;
+	//! Store the the summed size of all downloaded files in bytes.
+	qint64 totalDownloadedSize;
 };
 
 #endif // _STELAPP_HPP_
