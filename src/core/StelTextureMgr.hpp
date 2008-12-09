@@ -160,13 +160,10 @@ private:
 	
 	//! Whether ARB_texture_non_power_of_two is supported on this card
 	bool isNoPowerOfTwoAllowed;
-
-	//! Used to correct a bug on some nvidia cards
-	bool isNoPowerOfTwoLUMINANCEAllowed;
 };
 
 //! @class TexMalloc
-//! A special multithreaded malloc which manages a memory pool to reuse the memory already allocated for loading previous textures
+//! A special multithreaded malloc which manages a memory pool to reuse the memory already allocated for loading previous textures.
 class TexMalloc
 {
 public:
