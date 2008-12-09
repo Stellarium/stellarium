@@ -224,6 +224,8 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 *************************************************************************/
 StelApp::~StelApp()
 {
+	qDebug() << qPrintable(QString("Download status: downloaded %1 files amounting %2 kbytes in a session of %3 seconds (average of %4 kB/s).").arg(nbDownloadedFiles).arg(totalDownloadedSize/1024).arg(getTotalRunTime()).arg((double)(totalDownloadedSize/1024)/getTotalRunTime()));
+	
 	stelObjectMgr->unSelect();
 	moduleMgr->unloadModule("StelSkyImageMgr", false);  // We need to delete it afterward
 	moduleMgr->unloadModule("StelObjectMgr", false);// We need to delete it afterward
@@ -1007,5 +1009,4 @@ void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
 {
 	++nbDownloadedFiles;
 	totalDownloadedSize+=reply->size();
-	//qDebug() << QString("Download status: downloaded %1 files amounting %2 kbytes in a session of %3 seconds").arg(nbDownloadedFiles).arg(totalDownloadedSize/1024).arg(getTotalRunTime());
 }
