@@ -26,8 +26,6 @@
 
 #include <QString>
 #include <QChar>
-
-#include "StelUtils.hpp"
 #include "typeface.h"
 
 /*
@@ -38,7 +36,7 @@ class StelFont
 public:
 	StelFont(float sizeI, const QString& ttfFileName);
 	~StelFont() {;}
-    
+   
 	void print(float x, float y, const QString& s, int upsidedown = 1) const
 	{
 		typeFace.render(s, Vec2f(x, y), upsidedown==1);
@@ -56,7 +54,6 @@ public:
 	float getDescent(void) const {return typeFace.descent();}
 	float getSize(void) const {return typeFace.pointSize();}
 	
-private:
 	mutable TypeFace typeFace;
 };
 
