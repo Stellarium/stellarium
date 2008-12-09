@@ -69,7 +69,8 @@ public:
 	//! @return the human friendly error message or empty string if no errors occured
 	const QString& getErrorMessage() const {return errorMessage;}
 	
-	//! Return the full path to the image file
+	//! Return the full path to the image file.
+	//! If the texture was downloaded from a remote location, this function return the full URL.
 	const QString& getFullPath() const {return fullPath;}
 	
 	//! Return whether the image is currently being loaded
