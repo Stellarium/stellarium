@@ -18,14 +18,18 @@
 */
  
 #include "StelDownloadMgr.hpp"
+#include "StelApp.hpp"
+#include "StelMainGraphicsView.hpp"
 
 #include <QDebug>
 #include <QNetworkAccessManager>
 #include <QFile>
+#include <QNetworkReply>
+#include <QFileInfo>
+#include <QProgressBar>
 
 StelDownloadMgr::StelDownloadMgr() 
-	: networkManager(StelApp::getInstance().getNetworkAccessManager()),
-          reply(NULL), 
+	: reply(NULL), 
 	  target(NULL), 
 	  useChecksum(false), 
 	  progressBar(NULL),
@@ -46,6 +50,11 @@ StelDownloadMgr::~StelDownloadMgr()
 	}
 }
 
+QString StelDownloadMgr::name()
+{
+	return QFileInfo(path).fileName();
+}
+	
 void StelDownloadMgr::get(const QString& addr, const QString& filePath)
 {
 	useChecksum = false;
@@ -76,7 +85,7 @@ void StelDownloadMgr::get(const QString& addr, const QString& filePath, quint16 
 	inProgress = true;
 	
 	target->open(QIODevice::WriteOnly | QIODevice::Truncate);
-	reply = networkManager->get(QNetworkRequest(QUrl(address)));
+	reply = StelApp::getInstance().getNetworkAccessManager()->get(QNetworkRequest(QUrl(address)));
 	
 	if(barVisible)
 	{

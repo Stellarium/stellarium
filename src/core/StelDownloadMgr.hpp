@@ -21,15 +21,10 @@
 #define _STELDOWNLOADMGR_HPP_ 1
  
 #include <QObject>
-#include <QProgressBar>
 #include <QNetworkReply>
-#include <QFileInfo>
-#include "StelDialog.hpp"
-#include "StelApp.hpp"
-#include "StelMainGraphicsView.hpp"
 
+class QProgressBar;
 class QDataStream;
-class QNetworkAccessManager;
 class QFile;
 
 //! @class StelDownloadMgr
@@ -69,7 +64,7 @@ public:
 	QString errorString() {return reply ? reply->errorString() : QString();}
 
 	//! Get the local file name.
-	QString name() {return QFileInfo(path).fileName();}
+	QString name();
 	
 	//! Whether or not to pop up a warning box if the user tries to quit.
 	//! @return @c true if a download is in progress @em and @c setBlockQuit(true)
@@ -99,7 +94,6 @@ public:
 private:
 	QString address;
 	QString path;
-	QNetworkAccessManager* networkManager;
 	QNetworkReply* reply;
 	QFile* target;
 	bool useChecksum;
