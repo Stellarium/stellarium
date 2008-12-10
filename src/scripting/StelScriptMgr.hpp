@@ -23,6 +23,7 @@
 #include <QObject>
 #include <QtScript>
 #include <QStringList>
+#include <QFile>
 #include "VecMath.hpp"
 
 //! Provide script API for Stellarium global functions.  Public slots in this class
@@ -356,6 +357,13 @@ signals:
 	void scriptStopped();
 
 private:
+	// Utility functions for preprocessor
+	QMap<QString, QString> mappify(const QStringList& args, bool lowerKey=false);
+	bool strToBool(const QString& str);
+	// Pre-processor functions
+	bool preprocessScript(QFile& input, QFile& output, const QString& scriptDir);
+	bool preprocessStratoScript(QFile& input, QFile& output, const QString& scriptDir);
+
 	//! This function is for use with getName, getAuthor and getLicense.
 	//! @param s the script id
 	//! @param id the command line id, e.g. "Name"

@@ -220,6 +220,7 @@ SET(stellarium_lib_SRCS
 	gui/StelDialog.hpp
 	gui/StelDialog.cpp
 	
+	scripting/StelScriptPreProcessor.cpp
 	scripting/StelScriptMgr.cpp
 	scripting/StelScriptMgr.hpp
 
