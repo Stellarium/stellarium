@@ -117,7 +117,7 @@ public slots:
 
 signals:
 	//! emitted when the value changes.
-	void valueChanged(void);
+	void valueChanged();
 
 protected:
 	StepEnabled stepEnabled () const;

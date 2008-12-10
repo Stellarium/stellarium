@@ -26,6 +26,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelNavigator.hpp"
+#include "StelUtils.hpp"
 
 #include <QTextEdit>
 #include <QLabel>
@@ -161,6 +162,9 @@ void SearchDialog::createDialogContent()
 	// This simply doesn't work. Probably a Qt bug
 	ui->RAAngleSpinBox->setFocusPolicy(Qt::NoFocus);
 	ui->DEAngleSpinBox->setFocusPolicy(Qt::NoFocus);
+	
+	connect(ui->RAAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
+	connect(ui->DEAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 }
 
 void SearchDialog::setVisible(bool v)
@@ -174,13 +178,19 @@ void SearchDialog::setVisible(bool v)
 
 void SearchDialog::setSimpleStyle(bool b)
 {
-	if (b)
-	{
-		ui->RAAngleSpinBox->hide();
-		ui->DEAngleSpinBox->hide();
-		ui->simbadStatusLabel->hide();
-		ui->raDecLabel->hide();
-	}
+	ui->RAAngleSpinBox->setVisible(!b);
+	ui->DEAngleSpinBox->setVisible(!b);
+	ui->simbadStatusLabel->setVisible(!b);
+	ui->raDecLabel->setVisible(!b);
+}
+
+void SearchDialog::manualPositionChanged()
+{
+	ui->completionLabel->clearValues();
+	StelMovementMgr* mvmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
+	Vec3d pos;
+	StelUtils::spheToRect(ui->RAAngleSpinBox->valueRadians(), ui->DEAngleSpinBox->valueRadians(), pos);
+	mvmgr->moveTo(pos, 0.05);
 }
 
 void SearchDialog::onTextChanged(const QString& text)

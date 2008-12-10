@@ -87,6 +87,8 @@ private slots:
 	void onTextChanged(const QString& text);
 	void gotoObject();
 	
+	void manualPositionChanged();
+	
 private:
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
