@@ -81,35 +81,76 @@ AngleSpinBox::~AngleSpinBox()
 {
 }
 
+
+AngleSpinBox::AngleSpinboxSection AngleSpinBox::getCurrentSection() const
+{
+	int cusorPos = lineEdit()->cursorPosition();
+	const QString str = lineEdit()->text();
+	int cPosMin = str.indexOf(QRegExp("[+-"+q_("N")+q_("S")+q_("E")+q_("W")+"]"), 0);
+	int cPosMax = cPosMin+1;
+	if (cusorPos>=cPosMin && cusorPos<cPosMax)
+		return SectionPrefix;
+	
+	cPosMin = cPosMax;;
+	cPosMax = str.indexOf(QRegExp(QString("[h%1]").arg(QChar(176))), 0)+1;
+	if (cusorPos>=cPosMin && cusorPos<cPosMax)
+		return SectionDegreesHours;
+	
+	cPosMin = cPosMax;
+	cPosMax = str.indexOf(QRegExp("[m']"), 0)+1;
+	if (cusorPos>=cPosMin && cusorPos<cPosMax)
+		return SectionMinutes;
+	
+	cPosMin = cPosMax;
+	cPosMax = str.indexOf(QRegExp("[s\"]"), 0)+1;
+	if (cusorPos>=cPosMin && cusorPos<cPosMax)
+		return SectionSeconds;
+	
+	return SectionNone;
+}
+	
 void AngleSpinBox::stepBy (int steps)
 {
-	switch (angleSpinBoxFormat)
-        {
-		case DMSLetters:
-		case DMSSymbols:
+	const int cusorPos = lineEdit()->cursorPosition();
+	const AngleSpinBox::AngleSpinboxSection sec = getCurrentSection();
+	switch (sec)
+	{
+		case SectionPrefix:
 		{
-			radAngle += ((steps*2*M_PI) / (360*60.0));
+			radAngle = -radAngle;
 			break;
 		}
-		case HMSLetters:
-		case HMSSymbols:
+		case SectionDegreesHours:
 		{
-			radAngle += ((steps*2*M_PI) / (24*60.0));
+			if (angleSpinBoxFormat==DMSLetters || angleSpinBoxFormat==DMSSymbols || angleSpinBoxFormat==DecimalDeg)
+				radAngle += M_PI/180.*steps;
+			else
+				radAngle += M_PI/12.*steps;
 			break;
 		}
-		case DecimalDeg:
+		case SectionMinutes:
 		{
-			radAngle += ((steps*2*M_PI) / (360*10.0));
+			if (angleSpinBoxFormat==DMSLetters || angleSpinBoxFormat==DMSSymbols || angleSpinBoxFormat==DecimalDeg)
+				radAngle += M_PI/180.*steps/60.;
+			else
+				radAngle += M_PI/12.*steps/60.;
+			break;
+		}
+		case SectionSeconds:
+		{
+			if (angleSpinBoxFormat==DMSLetters || angleSpinBoxFormat==DMSSymbols || angleSpinBoxFormat==DecimalDeg)
+				radAngle += M_PI/180.*steps/3600.;
+			else
+				radAngle += M_PI/12.*steps/3600.;
 			break;
 		}
 		default:
 		{
-			qWarning() << "AngleSpinBox::stepBy - WARNING - unknown display format";
 			return;
-			break;
 		}
 	}
 	formatText();
+	lineEdit()->setCursorPosition(cusorPos);
 	emit(valueChanged());
 }
 
@@ -272,7 +313,7 @@ void AngleSpinBox::setRadians(double radians)
 
 void AngleSpinBox::setDegrees(double degrees)
 {
-	radAngle = (degrees / 360.0) * M_PI * 2;
+	radAngle = degrees * M_PI/180.;
 	formatText();
 }
 
