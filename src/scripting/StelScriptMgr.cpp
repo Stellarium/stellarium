@@ -46,10 +46,14 @@
 #include "StelLocationMgr.hpp"
 
 #include <QFile>
+#include <QFileInfo>
 #include <QSet>
 #include <QDebug>
 #include <QStringList>
 #include <QDateTime>
+#include <QRegExp>
+#include <QDir>
+#include <QTemporaryFile>
 
 Q_DECLARE_METATYPE(Vec3f);
 
@@ -398,7 +402,7 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	double JD;
 
 	// 2008-03-24T13:21:01
-	QRegExp isoRe("^\\d{4}[:\\-]\\d\\d[:\\-]\\d\\dT\\d\\d:\\d\\d:\\d\\d$");
+	QRegExp isoRe("^\\d{4}[:\\-]\\d\\d[:\\-]\\d\\dT\\d?\\d:\\d\\d:\\d\\d$");
 	QRegExp nowRe("^(now)?(\\s*([+\\-])\\s*(\\d+(\\.\\d+)?)\\s*(second|seconds|minute|minutes|hour|hours|day|days|week|weeks))(\\s+(sidereal)?)?");
 
 	if (dt == "now")
@@ -456,7 +460,7 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	}
 	else
 	{
-		qWarning() << "StelMainScriptAPI::jdFromDateString error - date string not recognised, returning \"now\"" << dt;
+		qWarning() << "StelMainScriptAPI::jdFromDateString error - date string" << dt << "not recognised, returning \"now\"";
 		return StelUtils::getJDFromSystem();
 	}
 }
@@ -657,7 +661,7 @@ QStringList StelScriptMgr::getScriptList(void)
 		QSet<QString> files = fileMan.listContents("scripts",StelFileMgr::File, true);
 		foreach(QString f, files)
 		{
-			if (QRegExp("^.*\\.ssc$").exactMatch(f))
+			if (QRegExp("^.*\\.(ssc|sts)$").exactMatch(f))
 				scriptFiles << f;
 		}
 	}
@@ -788,19 +792,49 @@ bool StelScriptMgr::runScript(const QString& fileName)
 		return false;
 	}
 	QString absPath;
+	QString scriptDir;
 	try
 	{
 		absPath = StelApp::getInstance().getFileMgr().findFile("scripts/" + fileName);
+		scriptDir = QFileInfo(absPath).dir().path();
 	}
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "WARNING: could not find script file " << fileName << ": " << e.what();
 		return false;
 	}
+	// pre-process the script into a temporary file
+	QTemporaryFile tmpFile;
+	bool ok = false;
+	if (!tmpFile.open())
+	{
+		qWarning() << "WARNING: cannot create temporary file for script pre-processing";
+		return false;
+	}
 	QFile fic(absPath);
-	fic.open(QIODevice::ReadOnly);
-	thread = new StelScriptThread(QTextStream(&fic).readAll(), &engine, fileName);
+	if (!fic.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "WARNING: cannot open script:" << fileName;
+		tmpFile.close();
+		return false;
+	}
+
+	if (fileName.right(4) == ".ssc")
+		ok = preprocessScript(fic, tmpFile, scriptDir);
+	else if (fileName.right(4) == ".sts")
+		ok = preprocessStratoScript(fic, tmpFile, scriptDir);
+
 	fic.close();
+
+	if (ok==false)
+	{
+		tmpFile.close();
+		return false;
+	}
+
+	tmpFile.seek(0);
+	thread = new StelScriptThread(QTextStream(&tmpFile).readAll(), &engine, fileName);
+	tmpFile.close();
 	
 	connect(thread, SIGNAL(finished()), this, SLOT(scriptEnded()));
 	thread->start();
