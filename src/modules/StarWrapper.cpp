@@ -28,6 +28,17 @@
 #include "StelTranslator.hpp"
 
 #include <QTextStream>
+#include <limits>
+
+template<typename T> inline bool isNan(T value)
+{
+	return value != value;
+}
+
+template<typename T> inline bool isInf(T value)
+{
+	return std::numeric_limits<T>::has_infinity && value == std::numeric_limits<T>::infinity();
+} 
 
 namespace BigStarCatalogExtension {
 	
@@ -98,7 +109,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(nav), 'f', 2),
 		                                                QString::number(s->getBV(), 'f', 2)) << "<br>";
 	
-	if (flags&AbsoluteMagnitude)
+	if ((flags&AbsoluteMagnitude) && s->plx && !isNan(s->plx) && !isInf(s->plx))
 		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(nav)+5.*(1.+std::log10(0.00001*s->plx)), 0, 'f', 2) << "<br>";
 	
 	oss << getPositionInfoString(core, flags);
@@ -108,7 +119,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->spInt)) << "<br>";
 	}
 
-	if (flags&Distance)
+	if ((flags&Distance) && s->plx && !isNan(s->plx) && !isInf(s->plx))
 		oss << q_("Distance: %1 Light Years").arg((AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->plx*((0.00001/3600)*(M_PI/180))), 0, 'f', 2) << "<br>";
 	
 	if (s->plx && flags&Extra2)
