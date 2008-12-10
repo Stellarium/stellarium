@@ -27,13 +27,13 @@
 //! A spin box for displaying/entering angular values.
 //! This class can accept angles in various formats commonly used in astronomy
 //! including decimal degrees, DMS and HMS.
-
 class AngleSpinBox : public QAbstractSpinBox
 {
 	Q_OBJECT
 
 public:
-	//! @enum DisplayFormat used to decide how to display the angle.
+	//! @enum DisplayFormat
+	//! Used to decide how to display the angle.
 	enum DisplayFormat
 	{
 		DMSLetters,     //!< Degrees, minutes and seconds, e.g. 180d 4m 8s
@@ -43,7 +43,8 @@ public:
 		DecimalDeg      //!< Decimal degrees, e.g. 180.06888
 	};
 
-	//! @enum PrefixType deteremines how positive and negative values are indicated.
+	//! @enum PrefixType
+	//! Determines how positive and negative values are indicated.
 	enum PrefixType
 	{
 		Normal,		//!< negative values have '-' prefix
@@ -53,6 +54,16 @@ public:
  		Unknown
 	};
 
+	//! @enum AngleSpinboxSection
+	enum AngleSpinboxSection
+	{
+		SectionPrefix,			//! Section of the S/W or E/W
+  		SectionDegreesHours,	//! Section of the degree or hours
+		SectionMinutes,			//! Section of the minutes (of degree or of hours)
+  		SectionSeconds,			//! Section of the seconds (of degree or of hours)
+		SectionNone				//! No matching section, e.g. between 2 sections
+	};
+	
 	AngleSpinBox(QWidget* parent=0, DisplayFormat format=DMSSymbols, PrefixType prefix=Normal);
 	~AngleSpinBox();
 
@@ -90,7 +101,7 @@ public:
 
 	//! Set the display format
 	//! @param format the new format to use
-	void setDisplayFormat(DisplayFormat format) { angleSpinBoxFormat=format; emit(formatText()); }
+	void setDisplayFormat(DisplayFormat format) { angleSpinBoxFormat=format; formatText(); }
 
 	//! Get the current display format
 	//! @return the current DisplayFormat
@@ -98,12 +109,12 @@ public:
 
 	//! Set the prefix type
 	//! @param prefix the new prefix type to use
-	void setPrefixType(PrefixType prefix) { currentPrefixType=prefix; emit(formatText()); }
+	void setPrefixType(PrefixType prefix) { currentPrefixType=prefix; formatText(); }
 
 	//! Get the current display format
 	//! @return the current DisplayFormat
 	PrefixType prefixType() { return currentPrefixType; }
-
+	
 public slots:
 	void clear();
 
@@ -122,15 +133,19 @@ protected:
 	StepEnabled stepEnabled () const;
 
 private slots:
-	//! reformats the input according to the current value of angleSpinBoxFormat/
-	//! This is called whenever an editingFinished() signal is emitted, 
-	//! e.g. when RETURN is pressed.
-	void formatText(void);
-
 	//! updates radAngle (internal representation of the angle) and calls formatText
 	void updateValue(void);
 
 private:
+	
+	//! Get the current section in which the line edit cursor is.
+	AngleSpinboxSection getCurrentSection() const;
+	
+	//! Reformats the input according to the current value of angleSpinBoxFormat/
+	//! This is called whenever an editingFinished() signal is emitted, 
+	//! e.g. when RETURN is pressed.
+	void formatText(void);
+		
 	static const QString positivePrefix(PrefixType prefix);
 	static const QString negativePrefix(PrefixType prefix);
 
