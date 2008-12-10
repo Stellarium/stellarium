@@ -53,16 +53,6 @@ public:
 		Latitude,	//!< positive values have 'N' prefix, negative values have 'S' prefix.
  		Unknown
 	};
-
-	//! @enum AngleSpinboxSection
-	enum AngleSpinboxSection
-	{
-		SectionPrefix,			//! Section of the S/W or E/W
-  		SectionDegreesHours,	//! Section of the degree or hours
-		SectionMinutes,			//! Section of the minutes (of degree or of hours)
-  		SectionSeconds,			//! Section of the seconds (of degree or of hours)
-		SectionNone				//! No matching section, e.g. between 2 sections
-	};
 	
 	AngleSpinBox(QWidget* parent=0, DisplayFormat format=DMSSymbols, PrefixType prefix=Normal);
 	~AngleSpinBox();
@@ -137,6 +127,16 @@ private slots:
 	void updateValue(void);
 
 private:
+	
+	//! @enum AngleSpinboxSection
+	enum AngleSpinboxSection
+	{
+		SectionPrefix,			//! Section of the S/W or E/W or +/-
+  		SectionDegreesHours,	//! Section of the degree or hours
+  		SectionMinutes,			//! Section of the minutes (of degree or of hours)
+  		SectionSeconds,			//! Section of the seconds (of degree or of hours)
+  		SectionNone				//! No matching section, e.g. between 2 sections
+	};
 	
 	//! Get the current section in which the line edit cursor is.
 	AngleSpinboxSection getCurrentSection() const;
