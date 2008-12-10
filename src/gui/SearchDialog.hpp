@@ -57,7 +57,7 @@ private:
 };
 
 //! @class SearchDialog
-//! contains the search dialog widget 
+//! The sky object search dialog.
 class SearchDialog : public StelDialog
 {
 	Q_OBJECT;
@@ -68,6 +68,10 @@ public:
 	void languageChanged();
 	//! Notify that the application style changed
 	void styleChanged();
+	bool eventFilter(QObject *object, QEvent *event);
+	
+	void setSimpleStyle(bool b);
+	
 public slots:
 	// Add auto focus of the edit line
 	void setVisible(bool);
@@ -76,7 +80,6 @@ protected:
 	Ui_searchDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
-	bool eventFilter(QObject *object, QEvent *event);
 
 private slots:
 	//! Called when the current simbad query status changes
