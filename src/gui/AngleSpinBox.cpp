@@ -86,12 +86,19 @@ AngleSpinBox::AngleSpinboxSection AngleSpinBox::getCurrentSection() const
 {
 	int cusorPos = lineEdit()->cursorPosition();
 	const QString str = lineEdit()->text();
+	
 	int cPosMin = str.indexOf(QRegExp("[+-"+q_("N")+q_("S")+q_("E")+q_("W")+"]"), 0);
 	int cPosMax = cPosMin+1;
-	if (cusorPos>=cPosMin && cusorPos<cPosMax)
+	
+	if (cPosMin==0)
+	{
+		// No prefix
+		cPosMax=0;
+	}
+	else if (cusorPos>=cPosMin && cusorPos<cPosMax)
 		return SectionPrefix;
 	
-	cPosMin = cPosMax;;
+	cPosMin = cPosMax;
 	cPosMax = str.indexOf(QRegExp(QString("[h%1]").arg(QChar(176))), 0)+1;
 	if (cusorPos>=cPosMin && cusorPos<cPosMax)
 		return SectionDegreesHours;
@@ -121,6 +128,7 @@ void AngleSpinBox::stepBy (int steps)
 			break;
 		}
 		case SectionDegreesHours:
+		case SectionNone:
 		{
 			if (angleSpinBoxFormat==DMSLetters || angleSpinBoxFormat==DMSSymbols || angleSpinBoxFormat==DecimalDeg)
 				radAngle += M_PI/180.*steps;

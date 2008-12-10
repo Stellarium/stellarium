@@ -147,12 +147,20 @@ void SearchDialog::styleChanged()
 void SearchDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+	setSimpleStyle(true);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onTextChanged(const QString&)));
 	connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
 	onTextChanged(ui->lineEditSearchSkyObject->text());
 	connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
-	ui->lineEditSearchSkyObject->installEventFilter(this);
+	dialog->installEventFilter(this);
+	ui->RAAngleSpinBox->setDisplayFormat(AngleSpinBox::HMSLetters);
+	ui->DEAngleSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
+	ui->DEAngleSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+	
+	// This simply doesn't work. Probably a Qt bug
+	ui->RAAngleSpinBox->setFocusPolicy(Qt::NoFocus);
+	ui->DEAngleSpinBox->setFocusPolicy(Qt::NoFocus);
 }
 
 void SearchDialog::setVisible(bool v)
@@ -162,6 +170,17 @@ void SearchDialog::setVisible(bool v)
 	// Set the focus directly on the line edit
 	if (ui->lineEditSearchSkyObject->isVisible())
 		ui->lineEditSearchSkyObject->setFocus();
+}
+
+void SearchDialog::setSimpleStyle(bool b)
+{
+	if (b)
+	{
+		ui->RAAngleSpinBox->hide();
+		ui->DEAngleSpinBox->hide();
+		ui->simbadStatusLabel->hide();
+		ui->raDecLabel->hide();
+	}
 }
 
 void SearchDialog::onTextChanged(const QString& text)
@@ -247,21 +266,21 @@ void SearchDialog::gotoObject()
 
 bool SearchDialog::eventFilter(QObject *object, QEvent *event)
 {
-	if (object == ui->lineEditSearchSkyObject && event->type() == QEvent::KeyRelease) 
+	if (event->type() == QEvent::KeyRelease) 
 	{
 		QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
 		if (keyEvent->key() == Qt::Key_Tab || keyEvent->key() == Qt::Key_Down) 
 		{
 			ui->completionLabel->selectNext();
+			event->accept();
 			return true;
 		} 
 		if (keyEvent->key() == Qt::Key_Up) 
 		{
 			ui->completionLabel->selectPrevious();
+			event->accept();
 			return true;
 		} 
-		else
-			return false;
 	}
 
 	return false;

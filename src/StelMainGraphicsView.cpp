@@ -48,7 +48,9 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	  screenShotPrefix("stellarium-"), 
 	  screenShotDir("")
 {
-	setScene(new QGraphicsScene(this));
+	// Is this line useful??
+	//setScene(new QGraphicsScene(this));
+	
 	// Can't create 2 StelMainWindow instances
 	Q_ASSERT(!singleton);
 	singleton = this;
@@ -69,12 +71,12 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	glWidget = new QGLWidget(glFormat, NULL);
 	setViewport(glWidget);
 	
-	setFocusPolicy(Qt::ClickFocus);
-	
 	// Create the main instance of stellarium
 	stelApp = new StelApp(argc, argv);
 	setScene(new StelAppGraphicsScene());
 
+	setFocusPolicy(Qt::ClickFocus);
+	
 	connect(this, SIGNAL(screenshotRequested()), this, SLOT(doScreenshot()));
 }
 
