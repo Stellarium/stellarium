@@ -470,7 +470,7 @@ void ConfigurationDialog::populateScriptsList(void)
 	int prevSel = ui->scriptListWidget->currentRow();
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	ui->scriptListWidget->clear();
-	ui->scriptListWidget->addItems(scriptMgr.getScriptList().replaceInStrings(QRegExp("\\.ssc$"), ""));
+	ui->scriptListWidget->addItems(scriptMgr.getScriptList());
 	// If we had a valid previous selection (i.e. not first time we populate), restore it
 	if (prevSel >= 0 && prevSel < ui->scriptListWidget->count())
 		ui->scriptListWidget->setCurrentRow(prevSel);
@@ -485,10 +485,10 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + scriptMgr.getName(s+".ssc") + "</h2>";
-	html += "<h3>" + q_("Author") + ": " + scriptMgr.getAuthor(s+".ssc") + "</h3>";
-	html += "<h3>" + q_("License") + ": " + scriptMgr.getLicense(s+".ssc") + "</h3>";
-	QString d = scriptMgr.getDescription(s+".ssc");
+	html += "<h2>" + scriptMgr.getName(s) + "</h2>";
+	html += "<h3>" + q_("Author") + ": " + scriptMgr.getAuthor(s) + "</h3>";
+	html += "<h3>" + q_("License") + ": " + scriptMgr.getLicense(s) + "</h3>";
+	QString d = scriptMgr.getDescription(s);
 	d.replace("\n", "<br />");
 	html += "<p>" + d + "</p>";
 	html += "</body></html>";
@@ -505,7 +505,7 @@ void ConfigurationDialog::runScriptClicked(void)
 	{
 		ui->runScriptButton->setEnabled(false);
 		ui->stopScriptButton->setEnabled(true);
-		scriptMgr.runScript(ui->scriptListWidget->currentItem()->text()+".ssc");
+		scriptMgr.runScript(ui->scriptListWidget->currentItem()->text());
 	}
 }
 
