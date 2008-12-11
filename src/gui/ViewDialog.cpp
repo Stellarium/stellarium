@@ -82,7 +82,7 @@ void ViewDialog::createDialogContent()
 	// Set the Sky tab activated by default
 	ui->viewTabWidget->setCurrentIndex(0);
 	
-	ui->viewTabWidget->widget(4)->deleteLater();
+	ui->viewTabWidget->removeTab(4);
 	
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	
