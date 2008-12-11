@@ -741,7 +741,7 @@ void Planet::drawEarthShadow(StelCore* core)
 	shadow = mh + mdist*mscale;
 	r_penumbra *= mscale;
 
-	const StelProjectorP prj = core->getProjection(StelCore::FrameHelio);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEcliptic);
 	StelPainter sPainter(prj);
 	
 	glEnable(GL_BLEND);
@@ -868,7 +868,7 @@ void Planet::drawOrbit(const StelCore* core)
 	if(!orbitFader.getInterstate()) return;
 	if(!re.siderealPeriod) return;
 
-	const StelProjectorP prj = core->getProjection(StelCore::FrameHelio);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEcliptic);
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

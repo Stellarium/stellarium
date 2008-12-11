@@ -54,6 +54,7 @@ struct HalfSpace
     HalfSpace(const HalfSpace& other) : n(other.n), d(other.d) {}
 	bool contains(const Vec3d &v) const {return (v*n>=d);}
 	bool operator==(const HalfSpace& other) const {return (n==other.n && d==other.d);}
+	
 	//! Get the area of the halfspace in steradian
 	double getArea() const {return 2.*M_PI*(1.-d);}
 	//! The direction unit vector
