@@ -121,11 +121,16 @@ public:
 	//! coordinate but centered on the observer position (usefull for objects close to earth)
 	Vec3d heliocentricEclipticToEarthPosEquinoxEqu(const Vec3d& v) const { return matAltAzToEquinoxEqu*matHeliocentricEclipticToAltAz*v; }
 
-	//! Return the modelview matrix for some coordinate systems
-	const Mat4d& getHeliocentricEclipticModelViewMat(void) const {return matHeliocentricEclipticModelView;}
-	const Mat4d& getEquinoxEquModelViewMat(void) const {return matEquinoxEquModelView;}
+	//! Get the modelview matrix for heliocentric ecliptic (Vsop87) drawing
+	const Mat4d getHeliocentricEclipticModelViewMat(void) const {return matAltAzModelView*matHeliocentricEclipticToAltAz;}
+	//! Get the modelview matrix for observer-centric ecliptic (Vsop87) drawing
+	const Mat4d getObservercentricEclipticModelViewMat(void) const {return matAltAzModelView*matJ2000ToAltAz*matVsop87ToJ2000;}
+	//! Get the modelview matrix for observer-centric equatorial at equinox drawing
+	const Mat4d getEquinoxEquModelViewMat(void) const {return matAltAzModelView*matEquinoxEquToAltAz;}
+	//! Get the modelview matrix for observer-centric altazimuthal drawing
 	const Mat4d& getAltAzModelViewMat(void) const {return matAltAzModelView;}
-	const Mat4d& getJ2000ModelViewMat(void) const {return matJ2000ModelView;}
+	//! Get the modelview matrix for observer-centric J2000 equatorial drawing
+	const Mat4d getJ2000ModelViewMat(void) const {return matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;}
 
 	void setViewingMode(ViewingModeType viewMode);
 	ViewingModeType getViewingMode(void) const {return viewingMode;}
@@ -253,9 +258,6 @@ private:
 	Mat4d matJ2000ToAltAz;
 	
 	Mat4d matAltAzModelView;					// Modelview matrix for observer-centric altazimuthal drawing
-	Mat4d matEquinoxEquModelView;					// Modelview matrix for observer-centric equatorial drawing
-	Mat4d matJ2000ModelView;					// Modelview matrix for observer-centric J2000 equatorial drawing
-	Mat4d matHeliocentricEclipticModelView;		// Modelview matrix for heliocentric ecliptic (Vsop87) drawing
 
 	// Vision variables
 	// Viewing direction in altazimuthal and equatorial coordinates

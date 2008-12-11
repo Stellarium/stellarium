@@ -73,7 +73,6 @@ public:
 	{
 		EQUATOR,
 		ECLIPTIC,
-		LOCAL,
 		MERIDIAN
 	};
 	// Create and precompute positions of a SkyGrid
@@ -94,6 +93,7 @@ private:
 	LinearFader fader;
 	double fontSize;
 	StelFont& font;
+	QString label;
 };
 
 // rms added color as parameter
@@ -287,14 +287,6 @@ void SkyGrid::draw(const StelCore* core) const
 		middlePoint.normalize();
 		if (!viewPortHalfSpace.contains(middlePoint))
 			middlePoint*=-1.;
-		
-		// Debug
-// 		prj->project(middlePoint, win);
-// 		prj->drawText(&font, win[0], win[1], "M");
-// 		prj->project(p1, win);
-// 		prj->drawText(&font, win[0], win[1], "P1");
-// 		prj->project(p2, win);
-// 		prj->drawText(&font, win[0], win[1], "P2");
 				
 		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
 		sPainter.drawSmallCircleArc(p1, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
@@ -439,18 +431,25 @@ void SkyGrid::draw(const StelCore* core) const
 }
 
 
-SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : color(0.f, 0.f, 1.f), fontSize(1.),
+SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : color(0.f, 0.f, 1.f), fontSize(14.),
 font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize))
 {
 	line_type = _line_type;
 
 	switch (line_type)
 	{
-		case LOCAL : frameType = StelCore::FrameAltAz; break;
-		case MERIDIAN : frameType = StelCore::FrameAltAz; break;
-		case ECLIPTIC : frameType = StelCore::FrameHelio; break;
-		case EQUATOR : frameType = StelCore::FrameEquinoxEqu; break;
-		default : frameType = StelCore::FrameEquinoxEqu;
+		case MERIDIAN:
+			frameType = StelCore::FrameAltAz;
+			label = q_("Meridian");
+			break;
+		case ECLIPTIC:
+			frameType = StelCore::FrameObservercentricEcliptic;
+			label = q_("Ecliptic");
+			break;
+		case EQUATOR:
+			frameType = StelCore::FrameEquinoxEqu;
+			label = q_("Equator");
+			break;
 	}
 }
 
@@ -468,25 +467,72 @@ void SkyLine::draw(StelCore *core) const
 {
 	if (!fader.getInterstate())
 		return;
-
-	StelPainter sPainter(core->getProjection(frameType));
+	
+	StelProjectorP prj = core->getProjection(frameType);
+	
+	// Get the bounding halfspace
+	const StelGeom::HalfSpace viewPortHalfSpace = prj->getBoundingHalfSpace();
+	
+	// Initialize a painter and set openGL state	
+	StelPainter sPainter(prj);
 	glColor4f(color[0], color[1], color[2], fader.getInterstate());
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	glEnable(GL_LINE_SMOOTH);
+
+	Vec4f textColor(color[0], color[1], color[2], 0);
+	textColor*=2;
+	textColor[3]=fader.getInterstate();
 	
-	// Johannes: use a big radius as a dirty workaround for the bug that the
-	// ecliptic line is not drawn around the observer, but around the sun:
-	const Vec3d vv(1000000,0,0);
+	ViewportEdgeIntersectCallbackData userData(sPainter);
+	userData.font = &font;
+	userData.textColor = textColor;
+	userData.text = label;
+	
+	/////////////////////////////////////////////////
+	// Draw the line
+	StelGeom::HalfSpace meridianHalfSpace(Vec3d(0,0,1), 0);
+	Vec3d fpt(1,0,0);
 	if (line_type==MERIDIAN)
 	{
-		sPainter.drawMeridian(vv, 2.*M_PI, false, &font);
+		meridianHalfSpace.n.set(0,1,0);
 	}
-	else
-	{	
-		sPainter.drawParallel(vv, 2.*M_PI, false, &font);
+		
+	Vec3d p1, p2;
+	if (!planeIntersect2(viewPortHalfSpace, meridianHalfSpace, p1, p2))
+	{
+		if ((viewPortHalfSpace.d<meridianHalfSpace.d && viewPortHalfSpace.contains(meridianHalfSpace.n))
+		    || (viewPortHalfSpace.d<-meridianHalfSpace.d && viewPortHalfSpace.contains(-meridianHalfSpace.n)))
+		{
+			// The meridian is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
+			Mat4d rotLon120 = Mat4d::rotation(meridianHalfSpace.n, 120.*M_PI/180.);
+			Vec3d rotFpt=fpt;
+			rotFpt.transfo4d(rotLon120);
+			Vec3d rotFpt2=rotFpt;
+			rotFpt2.transfo4d(rotLon120);
+			sPainter.drawSmallCircleArc(fpt, rotFpt, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+			sPainter.drawSmallCircleArc(rotFpt, rotFpt2, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+			sPainter.drawSmallCircleArc(rotFpt2, fpt, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+			return;
+		}
+		else
+			return;
 	}
+	
+	Vec3d middlePoint = p1+p2;
+	middlePoint.normalize();
+	if (!viewPortHalfSpace.contains(middlePoint))
+		middlePoint*=-1.;
+			
+	// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
+	sPainter.drawSmallCircleArc(p1, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+	sPainter.drawSmallCircleArc(p2, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+
+// 	// Johannes: use a big radius as a dirty workaround for the bug that the
+// 	// ecliptic line is not drawn around the observer, but around the sun:
+// 	const Vec3d vv(1000000,0,0);
+
 }
 
 GridLinesMgr::GridLinesMgr()

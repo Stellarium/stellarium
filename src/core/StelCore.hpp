@@ -49,10 +49,11 @@ public:
 	//! Supported reference frame types
 	enum FrameType
 	{
-		FrameAltAz,      //!< Altazimuthal reference frame centered on observer.
-  		FrameHelio,      //!< Heliocentric reference frame centered on the Sun
-		FrameEquinoxEqu, //!< Equatorial reference frame at the current equinox centered on the observer. The north pole follow the precession of the planet on which the observer is located.
-  		FrameJ2000       //!< Equatorial reference frame at the J2000 equinox centered on the observer. This is also the ICRS reference frame.
+		FrameAltAz,                   //!< Altazimuthal reference frame centered on observer.
+  		FrameHeliocentricEcliptic,    //!< Ecliptic reference frame centered on the Sun
+		FrameObservercentricEcliptic, //!< Ecliptic reference frame centered on the Observer
+		FrameEquinoxEqu,              //!< Equatorial reference frame at the current equinox centered on the observer. The north pole follow the precession of the planet on which the observer is located.
+  		FrameJ2000                    //!< Equatorial reference frame at the J2000 equinox centered on the observer. This is also the ICRS reference frame.
 	};
 	
 	//! Available projection types. A value of 1000 indicate the default projection

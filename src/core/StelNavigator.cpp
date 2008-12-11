@@ -368,10 +368,6 @@ void StelNavigator::updateModelViewMat(void)
 	                     s[1],u[1],-f[1],0.,
 	                     s[2],u[2],-f[2],0.,
 	                     0.,0.,0.,1.);
-
-	matEquinoxEquModelView = matAltAzModelView*matEquinoxEquToAltAz;
-	matHeliocentricEclipticModelView = matAltAzModelView*matHeliocentricEclipticToAltAz;
-	matJ2000ModelView = matEquinoxEquModelView*matJ2000ToEquinoxEqu;
 }
 
 

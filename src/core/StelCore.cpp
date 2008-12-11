@@ -218,8 +218,10 @@ const StelProjectorP StelCore::getProjection(FrameType frameType, ProjectionType
 	{
 		case FrameAltAz:
 			return getProjection(navigation->getAltAzModelViewMat(), projType);
-		case FrameHelio:
+		case FrameHeliocentricEcliptic:
 			return getProjection(navigation->getHeliocentricEclipticModelViewMat(), projType);
+		case FrameObservercentricEcliptic:
+			return getProjection(navigation->getObservercentricEclipticModelViewMat(), projType);
 		case FrameEquinoxEqu:
 			return getProjection(navigation->getEquinoxEquModelViewMat(), projType);
 		case FrameJ2000:
