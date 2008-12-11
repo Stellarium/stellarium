@@ -647,8 +647,9 @@ float getGMTShiftFromQT(double JD)
 	QDateTime current(QDate(year, month, day), QTime(hour, minute, second));
 	if (! current.isValid())
 	{
-		qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
-		current = QDateTime::currentDateTime();
+		//qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
+		// Assumes the GMT shift was always the same before year -4710
+		current = QDateTime(QDate(-4710, month, day), QTime(hour, minute, second));
 	}
 	QDateTime c1 = QDateTime::fromString(current.toString(Qt::ISODate),Qt::ISODate);
 	QDateTime u1 = QDateTime::fromString(current.toUTC().toString(Qt::ISODate),Qt::ISODate);
