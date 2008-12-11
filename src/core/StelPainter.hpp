@@ -84,32 +84,6 @@ public:
 	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport.
 	//! If rotCenter is equal to 0,0,0, the method draws a great circle.
 	void drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, const void* userData)=NULL, const void* userData=NULL) const;
-	
-	//! Draw a parallel arc in the current frame.  The arc start from point start
-	//! going in the positive longitude direction and with the given length in radian.
-	//! @param start the starting position of the parallel in the current frame.
-	//! @param length the angular length in radian (or distance on the unit sphere).
-	//! @param labelAxis if true display a label indicating the latitude at begining and at the end of the arc.
-	//! @param textColor color to use for rendering text. If NULL use the current openGL painting color.
-	//! @param nbSeg if not==-1,indicate how many line segments should be used for drawing the arc, if==-1
-	//! this value is automatically adjusted to prevent seeing the curve as a polygon.
-	//! @param font the font to use for display
-	void drawParallel(const Vec3d& start, double length, bool labelAxis=false, 
-			  const StelFont* font=NULL, const Vec4f* textColor=NULL, int nbSeg=-1) const;
-	
-	//! Draw a meridian arc in the current frame. The arc starts from point start
-	//! going in the positive latitude direction if longitude is in [0;180], in the negative direction
-	//! otherwise, and with the given length in radian. The length can be up to 2 pi.
-	//! @param start the starting position of the meridian in the current frame.
-	//! @param length the angular length in radian (or distance on the unit sphere).
-	//! @param labelAxis if true display a label indicating the longitude at begining and at the end of the arc.
-	//! @param textColor color to use for rendering text. If NULL use the current openGL painting color.
-	//! @param nbSeg if not==-1,indicate how many line segments should be used for drawing the arc, if==-1
-	//! this value is automatically adjusted to prevent seeing the curve as a polygon.
-	//! @param font the font to use for display
-	//! @param useDMS if true display label in DD:MM:SS. Normal is HH:MM:SS
-	void drawMeridian(const Vec3d& start, double length, bool labelAxis=false, 
-					  const StelFont* font=NULL, const Vec4f* textColor=NULL, int nbSeg=-1, bool useDMS=false) const;
 
 	//! draw a simple circle, 2d viewport coordinates in pixel
 	void drawCircle(double x,double y,double r) const;
