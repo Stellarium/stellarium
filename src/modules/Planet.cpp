@@ -865,8 +865,8 @@ void Ring::draw(const StelPainter* painter,const Mat4d& mat,double screenSz)
 // draw orbital path of Planet
 void Planet::drawOrbit(const StelCore* core)
 {
-	if(!orbitFader.getInterstate()) return;
-	if(!re.siderealPeriod) return;
+	if (!orbitFader.getInterstate()) return;
+	if (!re.siderealPeriod) return;
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEcliptic);
 
