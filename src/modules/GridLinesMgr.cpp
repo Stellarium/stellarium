@@ -177,19 +177,25 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 		StelUtils::rectToSphe(&lon, &lat, tmpV);
 		if (d->frameType==StelCore::FrameAltAz)
 		{
+			double raAngle = M_PI-d->raAngle;
+			lon = M_PI-lon;
+			if (raAngle<0)
+				raAngle=+2.*M_PI;
+			if (lon<0)
+				lon=+2.*M_PI;
+			
 			if (std::fabs(2.*M_PI-lon)<0.01)
 			{
 				// We are at meridian 0
 				lon = 0.;
 			}
-			if (std::fabs(lon-d->raAngle) < 0.01)
-				text = StelUtils::radToDmsStrAdapt(M_PI-d->raAngle);
+			if (std::fabs(lon-raAngle) < 0.01)
+				text = StelUtils::radToDmsStrAdapt(raAngle);
 			else
 			{
-				const double delta = d->raAngle<M_PI ? M_PI : -M_PI;
-				text = StelUtils::radToDmsStrAdapt(M_PI-(d->raAngle+delta));
+				const double delta = raAngle<M_PI ? M_PI : -M_PI;
+				text = StelUtils::radToDmsStrAdapt(raAngle+delta);
 			}
-
 		}
 		else
 		{
