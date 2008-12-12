@@ -117,15 +117,15 @@ static const double RADIAN_MAS = 180./M_PI*1000.*60.*60.;
 static const double DEGREE_MAS = 1000.*60.*60.;
 
 // Step sizes in arcsec
-static const double STEP_SIZES_DMS[] = {1., 5., 10., 60., 300., 600., 1200., 3600., 3600.*5., 3600.*10.};
-static const double STEP_SIZES_HMS[] = {1.5, 7.5, 15., 15.*5., 15.*10., 15.*60., 15.*60.*5., 15.*60*10., 15.*60*60};
+static const double STEP_SIZES_DMS[] = {0.05, 0.2, 1., 5., 10., 60., 300., 600., 1200., 3600., 3600.*5., 3600.*10.};
+static const double STEP_SIZES_HMS[] = {0.05, 0.2, 1.5, 7.5, 15., 15.*5., 15.*10., 15.*60., 15.*60.*5., 15.*60*10., 15.*60*60};
 
 //! Return the angular grid step in degree which best fits the given scale 
 static double getClosestResolutionDMS(double pixelPerRad)
 {
 	double minResolution = 80.;
 	double minSizeArcsec = minResolution/pixelPerRad*180./M_PI*3600;
-	for (unsigned int i=0;i<10;++i)
+	for (unsigned int i=0;i<12;++i)
 		if (STEP_SIZES_DMS[i]>minSizeArcsec)
 		{
 			return STEP_SIZES_DMS[i]/3600.;
@@ -138,7 +138,7 @@ static double getClosestResolutionHMS(double pixelPerRad)
 {
 	double minResolution = 80.;
 	double minSizeArcsec = minResolution/pixelPerRad*180./M_PI*3600;
-	for (unsigned int i=0;i<9;++i)
+	for (unsigned int i=0;i<11;++i)
 		if (STEP_SIZES_HMS[i]>minSizeArcsec)
 		{
 			return STEP_SIZES_HMS[i]/3600.;
@@ -152,7 +152,9 @@ struct ViewportEdgeIntersectCallbackData
 	const StelPainter& sPainter;
 	StelFont* font;
 	Vec4f textColor;
-	QString text;
+	QString text;		// Label to display at the intersection of the lines and screen side
+	double raAngle;		// Used for meridians
+	StelCore::FrameType frameType;
 };
 
 // Callback which draws the label of the grid
@@ -165,15 +167,58 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	glGetFloatv(GL_CURRENT_COLOR, tmpColor);
 	glColor4fv(d->textColor);
 	
+	QString text;
+	if (d->text.isEmpty())
+	{
+		// We are in the case of meridians, we need to determine which of the 2 labels (3h or 15h to use)
+		Vec3d tmpV;
+		d->sPainter.getProjector()->unProject(screenPos, tmpV);
+		double lon, lat;
+		StelUtils::rectToSphe(&lon, &lat, tmpV);
+		if (d->frameType==StelCore::FrameAltAz)
+		{
+			if (std::fabs(2.*M_PI-lon)<0.01)
+			{
+				// We are at meridian 0
+				lon = 0.;
+			}
+			if (std::fabs(lon-d->raAngle) < 0.01)
+				text = StelUtils::radToDmsStrAdapt(M_PI-d->raAngle);
+			else
+			{
+				const double delta = d->raAngle<M_PI ? M_PI : -M_PI;
+				text = StelUtils::radToDmsStrAdapt(M_PI-(d->raAngle+delta));
+			}
+
+		}
+		else
+		{
+			if (std::fabs(2.*M_PI-lon)<0.01)
+			{
+				// We are at meridian 0
+				lon = 0.;
+			}
+			if (std::fabs(lon-d->raAngle) < 0.01)
+				text = StelUtils::radToHmsStrAdapt(d->raAngle);
+			else
+			{
+				const double delta = d->raAngle<M_PI ? M_PI : -M_PI;
+				text = StelUtils::radToHmsStrAdapt(d->raAngle+delta);
+			}
+		}
+	}
+	else
+		text = d->text;
+	
 	double angleDeg = std::atan2(-direc[1], -direc[0])*180./M_PI;
 	float xshift=6.f;
 	if (angleDeg>90. || angleDeg<-90.)
 	{
 		angleDeg+=180.;
-		xshift=-d->font->getStrLen(d->text)-6.f;
+		xshift=-d->font->getStrLen(text)-6.f;
 	}
 	
-	d->sPainter.drawText(d->font, screenPos[0], screenPos[1], d->text, angleDeg, xshift, 3);
+	d->sPainter.drawText(d->font, screenPos[0], screenPos[1], text, angleDeg, xshift, 3);
 	glColor4fv(tmpColor);
 }
 
@@ -195,29 +240,31 @@ void SkyGrid::draw(const StelCore* core) const
 		southPoleInViewport = true;
 	// Get the longitude and latitude resolution at the center of the viewport
 	Vec3d centerV;
-	double lon0, lat0, lon1, lat1, lon2, lat2;
-	prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2, centerV);
-	StelUtils::rectToSphe(&lon0, &lat0, centerV);
-	prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2+1, prj->getViewportPosY()+prj->getViewportHeight()/2, centerV);
-	StelUtils::rectToSphe(&lon1, &lat1, centerV);
 	prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2+1, centerV);
+	double lon2, lat2;
 	StelUtils::rectToSphe(&lon2, &lat2, centerV);
-	const double gridStepParallelRad = M_PI/180.*getClosestResolutionDMS(1./std::sqrt((lat1-lat0)*(lat1-lat0)+(lat2-lat0)*(lat2-lat0)));
-	const double closetResLon = (frameType==StelCore::FrameAltAz) ? 
-		getClosestResolutionDMS(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0)))
-		: getClosestResolutionHMS(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0)));
-	const double gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : closetResLon);
+	
+	const double gridStepParallelRad = M_PI/180.*getClosestResolutionDMS(prj->getPixelPerRadAtCenter());
+	double gridStepMeridianRad;
+	if (northPoleInViewport || southPoleInViewport)
+		gridStepMeridianRad = M_PI/180.* 15.;
+	else
+	{
+		const double closetResLon = (frameType==StelCore::FrameAltAz) ? getClosestResolutionDMS(prj->getPixelPerRadAtCenter()*std::cos(lat2)) : getClosestResolutionHMS(prj->getPixelPerRadAtCenter()*std::cos(lat2));
+		gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : closetResLon);
+	}
 	
 	// Get the bounding halfspace
 	const StelGeom::HalfSpace viewPortHalfSpace = prj->getBoundingHalfSpace();
 	
 	// Compute the first grid starting point. This point is close to the center of the screen
 	// and lays at the intersection of a meridien and a parallel
-	lon0 = gridStepMeridianRad*((int)(lon0/gridStepMeridianRad));
-	lat0 = gridStepParallelRad*((int)(lat0/gridStepParallelRad));
+	lon2 = gridStepMeridianRad*((int)(lon2/gridStepMeridianRad));
+	lat2 = gridStepParallelRad*((int)(lat2/gridStepParallelRad));
 	Vec3d firstPoint;
-	StelUtils::spheToRect(lon0, lat0, firstPoint);
+	StelUtils::spheToRect(lon2, lat2, firstPoint);
 	firstPoint.normalize();
+
 	Q_ASSERT(viewPortHalfSpace.contains(firstPoint));
 	
 	// Initialize a painter and set openGL state	
@@ -247,19 +294,20 @@ void SkyGrid::draw(const StelCore* core) const
 	ViewportEdgeIntersectCallbackData userData(sPainter);
 	userData.font = &font;
 	userData.textColor = textColor;
+	userData.frameType = frameType;
 	
 	/////////////////////////////////////////////////
 	// Draw all the meridians (great circles)
 	StelGeom::HalfSpace meridianHalfSpace(Vec3d(1,0,0), 0);
-	Mat4d rotLon = Mat4d::rotation(Vec3d(0,0,1), gridStepMeridianRad);
+	Mat4d rotLon = Mat4d::zrotation(gridStepMeridianRad);
 	Vec3d fpt = firstPoint;
 	Vec3d p1, p2;
 	int maxNbIter = (int)(M_PI/gridStepMeridianRad);
 	int i;
 	for (i=0; i<maxNbIter; ++i)
 	{
-		StelUtils::rectToSphe(&lon1, &lat1, fpt);
-		userData.text = frameType==StelCore::FrameAltAz ? StelUtils::radToDmsStrAdapt(M_PI-lon1) : StelUtils::radToHmsStrAdapt(lon1);
+		StelUtils::rectToSphe(&lon2, &lat2, fpt);
+		userData.raAngle = lon2;
 		
 		meridianHalfSpace.n = fpt^Vec3d(0,0,1);
 		meridianHalfSpace.n.normalize();
@@ -302,8 +350,8 @@ void SkyGrid::draw(const StelCore* core) const
 		fpt.transfo4d(rotLon);
 		for (int j=0; j<maxNbIter-i; ++j)
 		{
-			StelUtils::rectToSphe(&lon1, &lat1, fpt);
-			userData.text = frameType==StelCore::FrameAltAz ? StelUtils::radToDmsStrAdapt(M_PI-lon1) : StelUtils::radToHmsStrAdapt(lon1);
+			StelUtils::rectToSphe(&lon2, &lat2, fpt);
+			userData.raAngle = lon2;
 			
 			meridianHalfSpace.n = fpt^Vec3d(0,0,1);
 			meridianHalfSpace.n.normalize();
@@ -330,8 +378,8 @@ void SkyGrid::draw(const StelCore* core) const
 	maxNbIter = (int)(M_PI/gridStepParallelRad)-1;
 	for (i=0; i<maxNbIter; ++i)
 	{
-		StelUtils::rectToSphe(&lon1, &lat1, fpt);
-		userData.text = StelUtils::radToDmsStrAdapt(lat1);
+		StelUtils::rectToSphe(&lon2, &lat2, fpt);
+		userData.text = StelUtils::radToDmsStrAdapt(lat2);
 		
 		parallelHalfSpace.d = fpt[2];
 		if (parallelHalfSpace.d>0.9999999)
@@ -384,8 +432,8 @@ void SkyGrid::draw(const StelCore* core) const
 		fpt.transfo4d(rotLon);
 		for (int j=0; j<maxNbIter-i; ++j)
 		{
-			StelUtils::rectToSphe(&lon1, &lat1, fpt);
-			userData.text = StelUtils::radToDmsStrAdapt(lat1);
+			StelUtils::rectToSphe(&lon2, &lat2, fpt);
+			userData.text = StelUtils::radToDmsStrAdapt(lat2);
 			
 			parallelHalfSpace.d = fpt[2];
 			const Vec3d rotCenter(0,0,parallelHalfSpace.d);

@@ -85,7 +85,7 @@ public:
 	//! If rotCenter is equal to 0,0,0, the method draws a great circle.
 	void drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, const void* userData)=NULL, const void* userData=NULL) const;
 
-	//! draw a simple circle, 2d viewport coordinates in pixel
+	//! Draw a simple circle, 2d viewport coordinates in pixel
 	void drawCircle(double x,double y,double r) const;
 
 	//! Draw a square using the current texture at the given projected 2d position.

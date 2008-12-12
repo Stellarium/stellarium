@@ -545,6 +545,11 @@ static QVector<Vec3d> smallCircleVertexArray;
 
 void drawSmallCircleVertexArray()
 {
+	if (smallCircleVertexArray.isEmpty())
+		return;
+	
+	Q_ASSERT(smallCircleVertexArray.size()>1);
+	
 	glEnableClientState(GL_VERTEX_ARRAY);
 	// Load the vertex array
 	glVertexPointer(3, GL_DOUBLE, 0, smallCircleVertexArray.constData());
@@ -563,8 +568,8 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 	
 	QLinkedList<Vec3d> tessArc;	// Contains the list of projected points from the tesselated arc
 	Vec3d win1, win2;
-	prj->project(start, win1);
-	prj->project(stop, win2);
+	win1[2] = prj->project(start, win1) ? 1.0 : -1.;
+	win2[2] = prj->project(stop, win2) ? 1.0 : -1.;
 	tessArc.append(win1);
 	
 	double radius;
@@ -593,6 +598,11 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 		if ((p1[2]>0 && p1InViewport) || (p2[2]>0 && p2InViewport))
 		{
 			smallCircleVertexArray.append(p1);
+			if (i+1==tessArc.end())
+			{
+				smallCircleVertexArray.append(p2);
+				drawSmallCircleVertexArray();
+			}
 			if (viewportEdgeIntersectCallback && p1InViewport!=p2InViewport)
 			{
 				// We crossed the edge of the view port
@@ -605,27 +615,12 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 		else
 		{
 			// Break the line, draw the stored vertex and flush the list
+			if (!smallCircleVertexArray.isEmpty())
+				smallCircleVertexArray.append(p1);
 			drawSmallCircleVertexArray();
 		}
 	}
-	// Add the missing last point
-	const Vec3d& p1 = *(i-1);
-	const Vec3d& p2 = *i;
-	const bool p1InViewport = prj->checkInViewport(p1);
-	const bool p2InViewport = prj->checkInViewport(p2);
-	if ((p1[2]>0 && p1InViewport) || (p2[2]>0 && p2InViewport))
-	{
-		smallCircleVertexArray.append(p2);
-		if (viewportEdgeIntersectCallback && p1InViewport!=p2InViewport)
-		{
-			// We crossed the edge of the view port
-			if (p1InViewport)
-				viewportEdgeIntersectCallback(prj->viewPortIntersect(p1, p2), p2-p1, userData);
-			else
-				viewportEdgeIntersectCallback(prj->viewPortIntersect(p2, p1), p1-p2, userData);
-		}
-	}
-	drawSmallCircleVertexArray();
+	Q_ASSERT(smallCircleVertexArray.isEmpty());
 }
 
 
