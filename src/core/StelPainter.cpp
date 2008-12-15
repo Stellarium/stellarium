@@ -54,13 +54,13 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 			qFatal("Invalid openGL operation. It is likely that you used openGL calls without having a valid instance of StelPainter");
 	}
 	
-	// Lock the global nutex ensuring that no other instances of StelPainter are currently being used
+	// Lock the global mutex ensuring that no other instances of StelPainter are currently being used
 	if (globalMutex->tryLock()==false)
 	{
 		qFatal("There can be only 1 instance of StelPainter at a given time");
 	}
 	
-	//glEnd();	// Testing
+	switchToNativeOpenGLPainting();
 	
 	// Init GL viewport to current projector values
 	glViewport(prj->viewportXywh[0], prj->viewportXywh[1], prj->viewportXywh[2], prj->viewportXywh[3]);
@@ -74,17 +74,54 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	glDisable(GL_DITHER);
 	glDisable(GL_ALPHA_TEST);
 	glDisable(GL_LINE_SMOOTH);
+	glDisable(GL_TEXTURE_2D);
 	
 	glFrontFace(prj->needGlFrontFaceCW()?GL_CW:GL_CCW);
 }
 
 StelPainter::~StelPainter()
 {
+	revertToQtPainting();
+	
 	// We are done with this StelPainter
-	//glBegin(GL_POINTS); // Testing
 	globalMutex->unlock();
 }
 
+//! Switch to native OpenGL painting, i.e not using QPainter
+//! After this call revertToQtPainting MUST be called
+void StelPainter::switchToNativeOpenGLPainting()
+{
+	// Save openGL projection state
+	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	glMatrixMode(GL_TEXTURE);
+	glPushMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glShadeModel(GL_FLAT);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_CULL_FACE);
+	glDisable(GL_LIGHTING);
+	//glDisable(GL_MULTISAMPLE); doesn't work on win32
+	glDisable(GL_DITHER);
+	glDisable(GL_ALPHA_TEST);
+}
+
+//! Revert openGL state so that Qt painting works again
+void StelPainter::revertToQtPainting()
+{
+	// Restore openGL projection state for Qt drawings
+	glMatrixMode(GL_TEXTURE);
+	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
+	glPopAttrib();
+	glPopClientAttrib();
+}
 
 void StelPainter::initSystemGLInfo()
 {

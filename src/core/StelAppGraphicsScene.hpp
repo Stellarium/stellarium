@@ -71,18 +71,11 @@ protected:
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 	virtual void wheelEvent(QGraphicsSceneWheelEvent * wheelEvent);
 	
-	//! Paint the whole Core of stellarium
+	//! Paint the whole Core of stellarium.
 	//! This method is called automatically by the GraphicsView
 	void drawBackground(QPainter *painter, const QRectF &rect);
 	
 private:
-	//! Switch to native OpenGL painting, i.e not using QPainter
-	//! @sa After this call revertToQtPainting MUST be called
-	void switchToNativeOpenGLPainting();
-
-	//! Revert openGL state so that Qt painting works again
-	//! @return a painter that can be used
-	QPainter* revertToQtPainting();
 	
 	//! Notify that an event was handled by the program and therefore the 
 	//! FPS should be maximized for a couple of seconds.
@@ -96,8 +89,6 @@ private:
 	
 	// The StelAppGraphicsScene singleton
 	static StelAppGraphicsScene* singleton;
-	
-	QPainter* tempPainter;
 	
 	// Number of second before the mouse cursor disappears
 	float cursorTimeout;

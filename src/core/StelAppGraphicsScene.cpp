@@ -21,12 +21,8 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelFileMgr.hpp"
-#include "StelProjector.hpp"
-#include "fixx11h.h"
 #include "StelAppGraphicsScene.hpp"
 #include "StelViewportDistorter.hpp"
-#include "StelMainWindow.hpp"
 #include "StelMainGraphicsView.hpp"
 
 #include <QtOpenGL>
@@ -34,7 +30,7 @@
 
 StelAppGraphicsScene* StelAppGraphicsScene::singleton = NULL;
  
-StelAppGraphicsScene::StelAppGraphicsScene() : tempPainter(NULL), cursorTimeout(-1.f), flagCursorTimeout(false), minFpsTimer(NULL)
+StelAppGraphicsScene::StelAppGraphicsScene() : cursorTimeout(-1.f), flagCursorTimeout(false), minFpsTimer(NULL)
 {
 	Q_ASSERT(!singleton);
 	singleton = this;
@@ -74,92 +70,7 @@ void StelAppGraphicsScene::glWindowHasBeenResized(int w, int h)
 	}
 }
 
-//! Switch to native OpenGL painting, i.e not using QPainter
-//! After this call revertToQtPainting MUST be called
-void StelAppGraphicsScene::switchToNativeOpenGLPainting()
-{
-	// Save openGL projection state
-	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	glMatrixMode(GL_TEXTURE);
-	glPushMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glShadeModel(GL_FLAT);
-	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_CULL_FACE);
-	glDisable(GL_LIGHTING);
-	//glDisable(GL_MULTISAMPLE);
-	glDisable(GL_DITHER);
-	glDisable(GL_ALPHA_TEST);
-}
-
-//! Revert openGL state so that Qt painting works again
-//! @return a painter that can be used
-QPainter* StelAppGraphicsScene::revertToQtPainting()
-{
-	// Restore openGL projection state for Qt drawings
-	glMatrixMode(GL_TEXTURE);
-	glPopMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
-	glPopAttrib();
-	glPopClientAttrib();
-	return tempPainter;
-}
-
-
-// QPainter* StelAppGraphicsScene::switchToQPainting()
-// {
-// 	// Save openGL projection state
-// 	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
-// 	glPushAttrib(GL_ALL_ATTRIB_BITS);
-// 	glMatrixMode(GL_TEXTURE);
-// 	glPushMatrix();
-// 	glMatrixMode(GL_PROJECTION);
-// 	glPushMatrix();
-// 	glMatrixMode(GL_MODELVIEW);
-// 	glPushMatrix();
-// 	
-// 	if (tempPainter)
-// 	{
-// 		if (tempPainter->isActive())
-// 		{
-// 			tempPainter->save();
-// 			tempPainter->end();
-// 			tempPainter->begin(StelAppGraphicsScene::getInstance().views().at(0));
-// 			tempPainter->resetTransform();
-// 		}
-// 		else
-// 		{
-// 			tempPainter->begin(StelAppGraphicsScene::getInstance().views().at(0));
-// 		}
-// 	}
-// 	return tempPainter;
-// }
-// 
-// //! Revert openGL state
-// void StelAppGraphicsScene::revertToOpenGL()
-// {
-// 	// Restore openGL projection state for Qt drawings
-// 	glMatrixMode(GL_TEXTURE);
-// 	glPopMatrix();
-// 	glMatrixMode(GL_PROJECTION);
-// 	glPopMatrix();
-// 	glMatrixMode(GL_MODELVIEW);
-// 	glPopMatrix();
-// 	glPopAttrib();
-// 	glPopClientAttrib();
-// 	
-// 	if (tempPainter)
-// 		tempPainter->restore();
-// }
-
-void StelAppGraphicsScene::drawBackground(QPainter *painter, const QRectF &)
+void StelAppGraphicsScene::drawBackground(QPainter* painter, const QRectF &)
 {
 	if (painter->paintEngine()->type() != QPaintEngine::OpenGL)
 	{
@@ -176,8 +87,8 @@ void StelAppGraphicsScene::drawBackground(QPainter *painter, const QRectF &)
 	// Update the core and all modules
 	StelApp::getInstance().update(dt);
 	
-	tempPainter = painter;
-	switchToNativeOpenGLPainting();
+	painter->save();
+	//switchToNativeOpenGLPainting();
 	StelApp::getInstance().glWindowHasBeenResized((int)(width()), (int)(height()));
 	
 	// And draw them
@@ -185,8 +96,8 @@ void StelAppGraphicsScene::drawBackground(QPainter *painter, const QRectF &)
 	StelApp::getInstance().draw();
 	distorter->distort();
 	
-	revertToQtPainting();
-	tempPainter = NULL;
+	//revertToQtPainting();
+	painter->restore();
 	
 	// Determines when the next display will need to be triggered
 	// The current policy is that after an event, the FPS is maximum for 2.5 seconds

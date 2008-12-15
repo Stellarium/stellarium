@@ -26,6 +26,7 @@
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
 #include "StelCore.hpp"
+#include "StelPainter.hpp"
 
 // Uncomment to try out vertex buffers
 //#define USE_VERTEX_BUFFERS 1
@@ -270,11 +271,6 @@ void Atmosphere::draw(StelCore* core)
 	{
 		const float atm_intensity = fader.getInterstate();
 		
-		glBlendFunc(GL_ONE, GL_ONE);
-		glDisable(GL_TEXTURE_2D);
-		glEnable(GL_BLEND);
-		glShadeModel(GL_SMOOTH);
-		
 		// Adapt luminance at this point to avoid a mismatch with the adaption value
 		for (int i=0;i<(1+skyResolutionX)*(1+skyResolutionY);++i)
 		{
@@ -282,6 +278,12 @@ void Atmosphere::draw(StelCore* core)
 			eye->xyYToRGB(c);
 			c*=atm_intensity;
 		}
+		
+		StelPainter sPainter(core->getProjection2d());
+		glBlendFunc(GL_ONE, GL_ONE);
+		glDisable(GL_TEXTURE_2D);
+		glEnable(GL_BLEND);
+		glShadeModel(GL_SMOOTH);
 		
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glEnableClientState(GL_COLOR_ARRAY);
