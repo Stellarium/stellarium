@@ -603,16 +603,28 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 	if (screenSz>1.)
 	{
 		StelPainter* sPainter = new StelPainter(core->getProjection(mat * Mat4d::zrotation(M_PI/180*(axisRotation + 90.))));
-		
-		// Set the main source of light to be the sun
-		const Vec3d sunPos = core->getNavigator()->getHeliocentricEclipticModelViewMat()*Vec3d(0,0,0);
-		glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
 	
 		if (flagLighting)
 		{
 			glEnable(GL_LIGHTING);
+			
+			// Set the main source of light to be the sun
+			const Vec3d sunPos = core->getNavigator()->getHeliocentricEclipticModelViewMat()*Vec3d(0,0,0);
+			glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
+
 			const float diffuse[4] = {2.,2.,2.,1};
 			glLightfv(GL_LIGHT0,GL_DIFFUSE, diffuse);
+			
+			// Set the light parameters taking sun as the light source
+			const float zero[4] = {0,0,0,0};
+			const float ambient[4] = {0.02,0.02,0.02,0.02};
+			glLightfv(GL_LIGHT0,GL_AMBIENT, ambient);
+			glLightfv(GL_LIGHT0,GL_DIFFUSE, diffuse);
+			glLightfv(GL_LIGHT0,GL_SPECULAR,zero);
+			glMaterialfv(GL_FRONT,GL_AMBIENT,  ambient);
+			glMaterialfv(GL_FRONT,GL_EMISSION, zero);
+			glMaterialfv(GL_FRONT,GL_SHININESS,zero);
+			glMaterialfv(GL_FRONT,GL_SPECULAR, zero);
 		}
 		else
 		{
@@ -819,6 +831,7 @@ void Planet::drawHints(const StelCore* core)
 
 	// Draw the 2D small circle
 	glEnable(GL_BLEND);
+	glEnable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	Planet::hintCircleTex->bind();
 	sPainter.drawSprite2dMode(screenPos[0], screenPos[1], 22);
@@ -865,17 +878,18 @@ void Ring::draw(const StelPainter* painter,const Mat4d& mat,double screenSz)
 // draw orbital path of Planet
 void Planet::drawOrbit(const StelCore* core)
 {
-	if (!orbitFader.getInterstate()) return;
-	if (!re.siderealPeriod) return;
+	if (!orbitFader.getInterstate())
+		return;
+	if (!re.siderealPeriod)
+		return;
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEcliptic);
 
+	StelPainter sPainter(prj);
+	
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 	glEnable(GL_BLEND);
-	glDisable(GL_LIGHTING);
-	glDisable(GL_TEXTURE_2D);
 
 	glColor4f(orbitColor[0], orbitColor[1], orbitColor[2], orbitFader.getInterstate());
 
@@ -926,19 +940,16 @@ void Planet::drawOrbit(const StelCore* core)
 		}
 	}
 
-	if(on) glEnd();
-
-	glEnable(GL_BLEND);
-	glDisable(GL_LIGHTING);
-	glEnable(GL_TEXTURE_2D);
-
+	if (on)
+		glEnd();
 }
 
 
 // draw trail of Planet as seen from earth
 void Planet::drawTrail(const StelCore* core)
 {
-	if(!trailFader.getInterstate()) return;
+	if (!trailFader.getInterstate())
+		return;
 
 	const StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
@@ -946,9 +957,8 @@ void Planet::drawTrail(const StelCore* core)
 	Vec3d onscreen1;
 	Vec3d onscreen2;
 
+	StelPainter sPainter(prj);
 	glEnable(GL_BLEND);
-	glDisable(GL_LIGHTING);
-	glDisable(GL_TEXTURE_2D);
 
 	glColor3fv(trailColor*trailFader.getInterstate());
 
@@ -983,16 +993,13 @@ void Planet::drawTrail(const StelCore* core)
 		glVertex2d(onscreen2[0], onscreen2[1]);
 		glEnd();
 	}
-
-  glEnable(GL_BLEND);
-  glDisable(GL_LIGHTING);
-  glEnable(GL_TEXTURE_2D);
 }
 
 // update trail points as needed
 void Planet::updateTrail(const StelNavigator* nav)
 {
-	if(!trailOn) return;
+	if (!trailOn)
+		return;
 
 	double date = nav->getJDay();
 

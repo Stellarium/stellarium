@@ -41,6 +41,7 @@
 #include "StelSkyDrawer.hpp"
 #include "StelStyle.hpp"
 #include "StelUtils.hpp"
+#include "StelPainter.hpp"
 
 #include <QTextStream>
 #include <QSettings>
@@ -139,8 +140,11 @@ void SolarSystem::drawPointer(const StelCore* core)
 		Vec3d pos=obj->getJ2000EquatorialPos(nav);
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!prj->project(pos, screenpos)) return;
+		if (!prj->project(pos, screenpos))
+			return;
 	
+		
+		StelPainter sPainter(prj);
 		glColor3f(1.0f,0.3f,0.3f);
 	
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
@@ -773,24 +777,6 @@ void SolarSystem::draw(StelCore* core)
 	
 	StelNavigator* nav = core->getNavigator();
 	Planet::setFont(&planetNameFont);
-	
-	// Set the light parameters taking sun as the light source
-	const float zero[4] = {0,0,0,0};
-	const float ambient[4] = {0.02,0.02,0.02,0.02};
-	const float diffuse[4] = {1,1,1,1};
-	glLightfv(GL_LIGHT0,GL_AMBIENT, ambient);
-	glLightfv(GL_LIGHT0,GL_DIFFUSE, diffuse);
-	glLightfv(GL_LIGHT0,GL_SPECULAR,zero);
-
-	glMaterialfv(GL_FRONT,GL_AMBIENT,  ambient);
-	glMaterialfv(GL_FRONT,GL_DIFFUSE,  diffuse);
-	glMaterialfv(GL_FRONT,GL_EMISSION, zero);
-	glMaterialfv(GL_FRONT,GL_SHININESS,zero);
-	glMaterialfv(GL_FRONT,GL_SPECULAR, zero);
-
-	// Light pos in zero (sun)
-	glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(0.f,0.f,0.f,1.f));
-	glEnable(GL_LIGHT0);
 
 	// Compute each Planet distance to the observer
 	Vec3d obsHelioPos = nav->getObserverHeliocentricEclipticPos();
@@ -814,8 +800,6 @@ void SolarSystem::draw(StelCore* core)
 		(*iter)->draw(core, maxMagLabel);
 		++iter;
 	}
-
-	glDisable(GL_LIGHT0);
 
 	drawPointer(core);
 }

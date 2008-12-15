@@ -178,6 +178,7 @@ std::vector<StelGridObject*> StelTreeGrid::getAllObjects()
 #include "StelNavigator.hpp"				 
 double StelTreeGridNode::draw(StelProjector *prj, const StelGeom::ConvexS& roi, float opacity) const
 {
+	StelPainter sPainter();
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode

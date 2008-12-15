@@ -40,7 +40,7 @@ class StelPainter
 {
 public:
 	
-	StelPainter(const StelProjectorP& prj);
+	explicit StelPainter(const StelProjectorP& prj);
 	~StelPainter();
 	
 	//! Return the instance of projector associated to this painter
@@ -148,6 +148,13 @@ public:
 	static void initSystemGLInfo();
 	
 private:
+	
+	//! Switch to native OpenGL painting, i.e not using QPainter.
+	//! After this call revertToQtPainting() MUST be called.
+	void switchToNativeOpenGLPainting();
+
+	//! Revert openGL state so that Qt painting works again.
+	void revertToQtPainting();
 	
 	void drawTextGravity180(const StelFont* font, float x, float y, const QString& str, 
 			      bool speedOptimize = 1, float xshift = 0, float yshift = 0) const;
