@@ -35,7 +35,8 @@ class StelFont;
 //! All coordinates are converted using the StelProjector instance passed at construction.
 //! Because openGL is not thread safe, only one instance of StelPainter can exist at a time, enforcing thread safety.
 //! As a coding rule, no openGL calls should be performed when no instance of StelPainter exist.
-//! Typical useag is to create a local instance of StelPainter where drawing operations are needed.
+//! Typical usage is to create a local instance of StelPainter where drawing operations are needed.
+
 class StelPainter
 {
 public:

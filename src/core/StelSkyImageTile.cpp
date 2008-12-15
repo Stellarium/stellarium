@@ -30,7 +30,7 @@
 
 #include <QDebug>
 
-#ifdef DEBUG_SKYIMAGE_TILE
+#ifdef DEBUG_STELSKYIMAGE_TILE
  #include "StelFont.hpp"
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
@@ -105,6 +105,17 @@ void StelSkyImageTile::draw(StelCore* core, const StelPainter& sPainter)
 // Return the list of tiles which should be drawn.
 void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, float limitLuminance, bool recheckIntersect)
 {
+	
+#ifndef NEDBUG
+	// This method should be called only if the parent min resolution was reached
+	const StelSkyImageTile* parent = qobject_cast<StelSkyImageTile*>(QObject::parent());
+	if (parent!=NULL)
+	{
+		const double degPerPixel = 1./core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()*180./M_PI;
+		Q_ASSERT(degPerPixel<parent->minResolution);
+	}
+#endif
+		
 	// An error occured during loading
 	if (errorOccured)
 		return;
@@ -156,7 +167,8 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		return;
 	}
 	
-	// The tile is in screen, make sure that it's not going to be deleted
+	// The tile is in screen, and it is a precondition that its resolution is higher than the limit
+	// make sure that it's not going to be deleted
 	cancelDeletion();
 	
 	if (noTexture==false)
@@ -217,7 +229,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		}
 	}
 }
-	
+
 // Draw the image on the screen.
 // Assume GL_TEXTURE_2D is enabled
 bool StelSkyImageTile::drawTile(StelCore* core, const StelPainter& sPainter)
@@ -277,7 +289,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, const StelPainter& sPainter)
 		}
 		glEnd();
 	}
-#ifdef DEBUG_SKYIMAGE_TILE
+#ifdef DEBUG_STELSKYIMAGE_TILE
 	if (debugFont==NULL)
 	{
 		debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
@@ -288,10 +300,10 @@ bool StelSkyImageTile::drawTile(StelCore* core, const StelPainter& sPainter)
 		Vec3d win;
 		Vec3d bary = poly.getBarycenter();
 		prj->project(bary,win);
-		prj->drawText(debugFont, win[0], win[1], getAbsoluteImageURI());
+		sPainter.drawText(debugFont, win[0], win[1], getAbsoluteImageURI());
 		
 		glDisable(GL_TEXTURE_2D);
-		prj->drawPolygon(poly);
+		sPainter.drawPolygon(poly);
 		glEnable(GL_TEXTURE_2D);
 	}
 #endif
