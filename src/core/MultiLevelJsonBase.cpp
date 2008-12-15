@@ -194,7 +194,7 @@ MultiLevelJsonBase::~MultiLevelJsonBase()
 	{
 		disconnect(loadThread, SIGNAL(finished()), this, SLOT(JsonLoadFinished()));
 		// The thread is currently running, it needs to be properly stopped
-		if (loadThread->wait(500)==false)
+		if (loadThread->wait(1)==false)
 		{
 			loadThread->terminate();
 			//loadThread->wait(2000);
@@ -211,7 +211,13 @@ MultiLevelJsonBase::~MultiLevelJsonBase()
 void MultiLevelJsonBase::scheduleDeletion()
 {
 	if (timeWhenDeletionScheduled<0.)
+	{
 		timeWhenDeletionScheduled = StelApp::getInstance().getTotalRunTime();
+// 		foreach (MultiLevelJsonBase* tile, subTiles)
+// 		{
+// 			tile->scheduleDeletion();
+// 		}
+	}
 }
 	
 // Load the tile information from a JSON file
@@ -306,7 +312,7 @@ void MultiLevelJsonBase::deleteUnusedSubTiles()
 	bool deleteAll = true;
 	foreach (MultiLevelJsonBase* tile, subTiles)
 	{
-		if (tile->timeWhenDeletionScheduled<0 || now-tile->timeWhenDeletionScheduled<deletionDelay)
+		if (tile->timeWhenDeletionScheduled<0 || (now-tile->timeWhenDeletionScheduled)<deletionDelay)
 		{
 			deleteAll = false;
 			break;
@@ -314,7 +320,7 @@ void MultiLevelJsonBase::deleteUnusedSubTiles()
 	}
 	if (deleteAll==true)
 	{
-		//qDebug() << "Delete all tiles for " << contructorUrl;
+		//qDebug() << "Delete all tiles for " << this << ": " << contructorUrl;
 		foreach (MultiLevelJsonBase* tile, subTiles)
 			tile->deleteLater();
 		subTiles.clear();

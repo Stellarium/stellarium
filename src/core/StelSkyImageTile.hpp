@@ -96,9 +96,6 @@ public:
 	
 	//! Return the absolute path/URL to the image file
 	QString getAbsoluteImageURI() const {return absoluteImageURI;}
-
-	//! Delete the texture from memory. It will be reloaded automatically if needed
-	void deleteTexture() {tex.reset();}
 	
 protected:
 	//! Minimum resolution of the data of the texture in degree/pixel
