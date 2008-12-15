@@ -114,6 +114,12 @@ SET(stellarium_lib_SRCS
 	external/kfilter/kfilterbase.cpp
 	external/kfilter/kgzipfilter.h
 	external/kfilter/kgzipfilter.cpp
+	external/kfilter/kzip.h
+	external/kfilter/kzip.cpp
+	external/kfilter/klimitediodevice.h
+	external/kfilter/klimitediodevice.cpp
+	external/kfilter/karchive.h
+	external/kfilter/karchive.cpp
 	
 	planetsephems/calc_interpolated_elements.c
 	planetsephems/calc_interpolated_elements.h
