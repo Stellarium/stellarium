@@ -104,7 +104,6 @@ void TelescopeMgr::draw(StelCore* core)
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	telescopeTexture->bind();
-	glBlendFunc(GL_ONE,GL_ONE);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	foreach (Telescope* tel, telescope_map)
 	{
@@ -305,7 +304,6 @@ void TelescopeMgr::drawPointer(const StelProjectorP& prj, const StelNavigator * 
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-		
 		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 50., StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }

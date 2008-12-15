@@ -36,6 +36,7 @@
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelPainter.hpp"
 
 class StelViewportDistorterDummy : public StelViewportDistorter
 {
@@ -531,6 +532,8 @@ void StelViewportDistorterFisheyeToSphericMirror::prepare(void) const
 
 void StelViewportDistorterFisheyeToSphericMirror::distort(void) const
 {
+	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
+			
 	// set rendering back to default frame buffer
 	if (flag_use_ext_framebuffer_object)
 	{
@@ -538,13 +541,10 @@ void StelViewportDistorterFisheyeToSphericMirror::distort(void) const
 	}
 	glViewport(0, 0, screen_w, screen_h);
 	glMatrixMode(GL_PROJECTION);        // projection matrix mode
-	glPushMatrix();                     // store previous matrix
 	glLoadIdentity();
 	glOrtho(0,screen_w,0,screen_h, -1, 1); // set a 2D orthographic projection
 	glMatrixMode(GL_MODELVIEW);         // modelview matrix mode
-	glPushMatrix();
 	glLoadIdentity();
-
 
 	glBindTexture(GL_TEXTURE_2D, mirror_texture);
 	if (!flag_use_ext_framebuffer_object)
@@ -573,10 +573,6 @@ void StelViewportDistorterFisheyeToSphericMirror::distort(void) const
 	//glTexCoord2f(0.0f, 0.0f); glVertex2i(0,0);
 	//glEnd();
 
-	glMatrixMode(GL_PROJECTION);        // Restore previous matrix
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
 	glViewport(newProjectorParams.viewportXywh[0],newProjectorParams.viewportXywh[1],newProjectorParams.viewportXywh[2],newProjectorParams.viewportXywh[3]);
 }
 

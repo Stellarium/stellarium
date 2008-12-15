@@ -273,7 +273,7 @@ void LandscapeOldStyle::draw(StelCore* core)
 // Draw the horizon fog
 void LandscapeOldStyle::drawFog(StelCore* core) const
 {
-	if(!fogFader.getInterstate())
+	if (!fogFader.getInterstate())
 		return;
 	
 	const double vpos = tanMode ? radius*std::tan(fogAngleShift*M_PI/180.) : radius*std::sin(fogAngleShift*M_PI/180.);
