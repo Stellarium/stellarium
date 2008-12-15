@@ -122,7 +122,10 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 	
 	// The JSON file is currently being downloaded
 	if (downloading)
+	{
+		cancelDeletion();
 		return;
+	}
 	
 	if (luminance>0 && luminance<limitLuminance)
 	{
