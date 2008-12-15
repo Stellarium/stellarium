@@ -213,10 +213,10 @@ void MultiLevelJsonBase::scheduleDeletion()
 	if (timeWhenDeletionScheduled<0.)
 	{
 		timeWhenDeletionScheduled = StelApp::getInstance().getTotalRunTime();
-// 		foreach (MultiLevelJsonBase* tile, subTiles)
-// 		{
-// 			tile->scheduleDeletion();
-// 		}
+		foreach (MultiLevelJsonBase* tile, subTiles)
+		{
+			tile->scheduleDeletion();
+		}
 	}
 }
 	
