@@ -19,6 +19,10 @@
 
 #include <QDebug>
 #include <QFile>
+#ifdef WIN32
+#include <io.h>
+#include <windows.h>
+#endif
 
 #include "ZoneArray.hpp"
 
@@ -341,8 +345,14 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile& file,bool byte_swap,bool use_mma
         int level,
         int mag_min,int mag_range,
         int mag_steps)
-		:ZoneArray(file.fileName(), level, mag_min, mag_range, mag_steps),
-		stars(0), mmap_start(0)
+		: ZoneArray(file.fileName(), level, mag_min, mag_range, mag_steps),
+		stars(0),
+#ifndef WIN32
+		mmap_start(0)
+#else
+		mmap_start(NULL),
+		mapping_handle(NULL)
+#endif
 {
 	if (nr_of_zones > 0)
 	{
@@ -395,6 +405,8 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile& file,bool byte_swap,bool use_mma
 		{
 			if (use_mmap)
 			{
+// (theoretically) platform-independent QFile::map() version
+#ifndef WIN32
 				mmap_start = file.map(file.pos(), sizeof(Star)*nr_of_stars);
 				if (mmap_start == 0)
 				{
@@ -419,6 +431,67 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile& file,bool byte_swap,bool use_mma
 						s += getZones()[z].size;
 					}
 				}
+				file.close();
+				
+// Windows-specific MapViewOfFile() version
+#else
+				const long start_in_file = file.pos();
+				file.close();
+				FILE *f = fopen(QFile::encodeName(fname).constData(), "rb");
+				if (f == 0) {
+					qWarning() << "Loading" << fname << "failed to open file.";
+				}
+				SYSTEM_INFO system_info;
+				GetSystemInfo(&system_info);
+				const long page_size = system_info.dwAllocationGranularity;
+				const long mmap_offset = start_in_file % page_size;
+				HANDLE file_handle = (void*)_get_osfhandle(_fileno(f));
+				if (file_handle == INVALID_HANDLE_VALUE) {
+					qWarning() << "ERROR: SpecialZoneArray(" << level
+						   << ")::SpecialZoneArray: _get_osfhandle(_fileno(f)) failed";
+				}
+				else
+				{
+					mapping_handle = CreateFileMapping(file_handle,NULL,PAGE_READONLY,
+										   0,0,NULL);
+					if (mapping_handle == NULL) {
+						// yes, NULL indicates failure, not INVALID_HANDLE_VALUE
+						qWarning() << "ERROR: SpecialZoneArray(" << level
+							   << ")::SpecialZoneArray: CreateFileMapping failed: " 
+							   << GetLastError();
+					}
+					else
+					{
+						mmap_start = (uchar*)MapViewOfFile(mapping_handle, 
+										   FILE_MAP_READ, 
+										   0, 
+										   start_in_file-mmap_offset, 
+										   mmap_offset+sizeof(Star)*nr_of_stars);
+						if (mmap_start == NULL) {
+							qWarning() << "ERROR: SpecialZoneArray(" << level
+								   << ")::SpecialZoneArray: "
+								   << "MapViewOfFile failed: " 
+								   << GetLastError()
+								   << ", page_size: " << page_size;
+							stars = 0;
+							nr_of_stars = 0;
+							delete[] getZones();
+							zones = 0;
+							nr_of_zones = 0;
+						}
+						else
+						{
+							stars = (Star*)(((char*)mmap_start)+mmap_offset);
+							Star *s = stars;
+							for (unsigned int z=0;z<nr_of_zones;z++) {
+								getZones()[z].stars = s;
+								s += getZones()[z].size;
+							}
+						}
+					}
+				}
+				fclose(f);
+#endif
 			}
 			else
 			{
@@ -476,11 +549,11 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile& file,bool byte_swap,bool use_mma
 //           qDebug() << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
 //                << "): repack test end";
 				}
+				file.close();
 			}
 		}
 		lb.Draw(1.f);
 	}
-	file.close();
 }
 
 template<class Star>
@@ -488,10 +561,16 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void)
 {
 	if (stars)
 	{
+#ifndef WIN32
 		if (mmap_start != 0)
 		{
 			QFile(fname).unmap(mmap_start);
 		}
+#else
+		if (mmap_start != NULL) {
+			CloseHandle(mapping_handle);
+		}
+#endif
 		else
 		{
 			delete[] stars;
