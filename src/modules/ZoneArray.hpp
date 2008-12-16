@@ -206,6 +206,9 @@ protected:
 	Star *stars;
 private:
 	uchar *mmap_start;
+#ifdef WIN32
+	HANDLE mapping_handle;
+#endif
 };
 
 //! @class HipZoneArray
