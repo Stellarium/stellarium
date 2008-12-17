@@ -94,9 +94,6 @@ public:
 		nr_of_zones = 0;
 	}
 	
-	//! Pure virtual method. See subclass implementation.
-	virtual void generateNativeDebugFile(const QString& fname) const = 0;
-	
 	//! Get the total number of stars in this catalog.
 	unsigned int getNrOfStars(void) const { return nr_of_stars; }
 	
@@ -147,10 +144,12 @@ protected:
 					       qint64 size,StelLoadingBar &lb);
 	
 	//! Protected constructor. Initializes fields and does not load anything.
-	ZoneArray(QString fname, int level,int mag_min,int mag_range,int mag_steps);
+	ZoneArray(const QString& fname, QFile* file, int level, int mag_min,
+		  int mag_range, int mag_steps);
 	unsigned int nr_of_zones;
 	unsigned int nr_of_stars;
 	ZoneData *zones;
+	QFile* file;
 };
 
 //! @class SpecialZoneArray
@@ -171,14 +170,10 @@ public:
 	//! @param mag_min lower bound of magnitudes
 	//! @param mag_range range of magnitudes
 	//! @param mag_steps number of steps used to describe values in range
-	SpecialZoneArray(QFile& file,bool byte_swap,bool use_mmap,
+	SpecialZoneArray(QFile* file,bool byte_swap,bool use_mmap,
 	                 StelLoadingBar &lb,int level,int mag_min,
 			 int mag_range,int mag_steps);
 	~SpecialZoneArray(void);
-	
-	//! Output the first ten stars in raw format to @em fname.
-	//! @param fname path to the output file
-	void generateNativeDebugFile(const QString& fname) const;
 protected:
 	//! Get an array of all SpecialZoneData objects in this catalog.
 	SpecialZoneData<Star> *getZones(void) const
@@ -217,7 +212,7 @@ private:
 class HipZoneArray : public SpecialZoneArray<Star1>
 {
 public:
-	HipZoneArray(QFile& file,bool byte_swap,bool use_mmap,StelLoadingBar &lb,
+	HipZoneArray(QFile* file,bool byte_swap,bool use_mmap,StelLoadingBar &lb,
 		   int level,int mag_min,int mag_range,int mag_steps)
 			: SpecialZoneArray<Star1>(file,byte_swap,use_mmap,lb,level,
 			                          mag_min,mag_range,mag_steps) {}
