@@ -161,7 +161,11 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 		}
 		Q_ASSERT(httpReply==NULL);
 		httpReply = getNetworkAccessManager().get(QNetworkRequest(qurl));
+		//qDebug() << "Started downloading " << httpReply->request().url().path();
+		Q_ASSERT(httpReply->error()==QNetworkReply::NoError);
 		connect(httpReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
+		//connect(httpReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
+		//connect(httpReply, SIGNAL(destroyed()), this, SLOT(replyDestroyed()));
 		downloading = true;
 		QString turl = qurl.toString();
 		baseUrl = turl.left(turl.lastIndexOf('/')+1);
@@ -186,13 +190,18 @@ MultiLevelJsonBase::~MultiLevelJsonBase()
 {
 	if (httpReply)
 	{
-		httpReply->abort();
-		delete httpReply;
+		//qDebug() << "Abort: " << httpReply->request().url().path();
+		//httpReply->abort();
+		
+		// This line should not be commented, but I have to keep it because of a Qt bug.
+		// It cause a nasty memory leak, but prevents an even more nasty
+		//httpReply->deleteLater();
 		httpReply = NULL;
 	}
 	if (loadThread && loadThread->isRunning())
 	{
-		disconnect(loadThread, SIGNAL(finished()), this, SLOT(JsonLoadFinished()));
+		//qDebug() << "--> Abort thread " << contructorUrl;
+		disconnect(loadThread, SIGNAL(finished()), this, SLOT(jsonLoadFinished()));
 		// The thread is currently running, it needs to be properly stopped
 		if (loadThread->wait(1)==false)
 		{
@@ -202,21 +211,28 @@ MultiLevelJsonBase::~MultiLevelJsonBase()
 	}
 	foreach (MultiLevelJsonBase* tile, subTiles)
 	{
-		delete tile;
+		tile->deleteLater();
 	}
+	subTiles.clear();
 }
 
 
-// Schedule a deletion. It will practically occur after the delay passed as argument to deleteUnusedTiles() has expired
-void MultiLevelJsonBase::scheduleDeletion()
+void MultiLevelJsonBase::scheduleChildsDeletion()
 {
-	if (timeWhenDeletionScheduled<0.)
+	foreach (MultiLevelJsonBase* tile, subTiles)
 	{
-		timeWhenDeletionScheduled = StelApp::getInstance().getTotalRunTime();
-// 		foreach (MultiLevelJsonBase* tile, subTiles)
-// 		{
-// 			tile->scheduleDeletion();
-// 		}
+		if (tile->timeWhenDeletionScheduled<0)
+			tile->timeWhenDeletionScheduled = StelApp::getInstance().getTotalRunTime();
+	}
+}
+
+// If a deletion was scheduled, cancel it.
+void MultiLevelJsonBase::cancelDeletion()
+{
+	timeWhenDeletionScheduled=-1.;
+	foreach (MultiLevelJsonBase* tile, subTiles)
+	{
+		tile->cancelDeletion();
 	}
 }
 	
@@ -252,9 +268,11 @@ QVariantMap MultiLevelJsonBase::loadFromJSON(QIODevice& input, bool qZcompressed
 	return map;
 }
 
+
 // Called when the download for the JSON file terminated
 void MultiLevelJsonBase::downloadFinished()
 {
+	//qDebug() << "Finished downloading " << httpReply->request().url().path();
 	Q_ASSERT(downloading);
 	if (httpReply->error()!=QNetworkReply::NoError)
 	{
@@ -264,6 +282,7 @@ void MultiLevelJsonBase::downloadFinished()
 		httpReply->deleteLater();
 		httpReply=NULL;
 		downloading=false;
+		timeWhenDeletionScheduled = StelApp::getInstance().getTotalRunTime();
 		return;
 	}	
 	
@@ -285,12 +304,12 @@ void MultiLevelJsonBase::downloadFinished()
 	
 	Q_ASSERT(loadThread==NULL);
 	loadThread = new JsonLoadThread(this, content, qZcompressed, gzCompressed);
-	connect(loadThread, SIGNAL(finished()), this, SLOT(JsonLoadFinished()));
+	connect(loadThread, SIGNAL(finished()), this, SLOT(jsonLoadFinished()));
 	loadThread->start(QThread::LowestPriority);
 }
 
 // Called when the element is fully loaded from the JSON file
-void MultiLevelJsonBase::JsonLoadFinished()
+void MultiLevelJsonBase::jsonLoadFinished()
 {
 	loadThread->wait();
 	delete loadThread;
@@ -307,7 +326,6 @@ void MultiLevelJsonBase::deleteUnusedSubTiles()
 {
 	if (subTiles.isEmpty())
 		return;
-	
 	const double now = StelApp::getInstance().getTotalRunTime();
 	bool deleteAll = true;
 	foreach (MultiLevelJsonBase* tile, subTiles)
