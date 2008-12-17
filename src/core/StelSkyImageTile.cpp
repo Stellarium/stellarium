@@ -107,12 +107,18 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 {
 	
 #ifndef NEDBUG
-	// This method should be called only if the parent min resolution was reached
+	// When this method is called, we can assume that:
+	// - the parent tile min resolution was reached
+	// - the parent tile is intersecting FOV
+	// - the parent tile is not scheduled for deletion
+	Q_ASSERT(isDeletionScheduled()==false);
 	const StelSkyImageTile* parent = qobject_cast<StelSkyImageTile*>(QObject::parent());
 	if (parent!=NULL)
 	{
 		const double degPerPixel = 1./core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()*180./M_PI;
 		Q_ASSERT(degPerPixel<parent->minResolution);
+		
+		Q_ASSERT(parent->isDeletionScheduled()==false);
 	}
 #endif
 		
@@ -123,14 +129,14 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 	// The JSON file is currently being downloaded
 	if (downloading)
 	{
-		cancelDeletion();
+		//qDebug() << "Downloading " << contructorUrl;
 		return;
 	}
 	
 	if (luminance>0 && luminance<limitLuminance)
 	{
 		// Schedule a deletion
-		scheduleDeletion();
+		scheduleChildsDeletion();
 		return;
 	}
 	
@@ -166,7 +172,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 	if (fullInScreen==false && intersectScreen==false)
 	{
 		// Schedule a deletion
-		scheduleDeletion();
+		scheduleChildsDeletion();
 		return;
 	}
 	
@@ -226,10 +232,8 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 	}
 	else
 	{
-		foreach (MultiLevelJsonBase* tile, subTiles)
-		{
-			tile->scheduleDeletion();
-		}
+		// The subtiles should not be displayed because their resolution is too high
+		scheduleChildsDeletion();
 	}
 }
 

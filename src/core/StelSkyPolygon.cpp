@@ -114,7 +114,7 @@ void StelSkyPolygon::getTilesToDraw(QMultiMap<double, StelSkyPolygon*>& result, 
 	if (fullInScreen==false && intersectScreen==false)
 	{
 		// Schedule a deletion
-		scheduleDeletion();
+		scheduleChildsDeletion();
 		return;
 	}
 	
@@ -152,10 +152,7 @@ void StelSkyPolygon::getTilesToDraw(QMultiMap<double, StelSkyPolygon*>& result, 
 	}
 	else
 	{
-		foreach (MultiLevelJsonBase* tile, subTiles)
-		{
-			tile->scheduleDeletion();
-		}
+		scheduleChildsDeletion();
 	}
 }
 	

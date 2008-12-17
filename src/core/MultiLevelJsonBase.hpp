@@ -22,6 +22,7 @@
 #include <QList>
 #include <QString>
 #include <QVariantMap>
+#include <QNetworkReply>
 
 class QIODevice;
 class StelCore;
@@ -61,8 +62,8 @@ public:
 	//! It can be saved as JSON using the StelJsonParser methods.
 	QVariantMap toQVariantMap() const;
 	
-	//! Schedule a deletion. It will practically occur after the delay passed as argument to deleteUnusedTiles() has expired
-	void scheduleDeletion();
+	//! Schedule a deletion for all the childs. It will practically occur after the delay passed as argument to deleteUnusedTiles() has expired
+	void scheduleChildsDeletion();
 	
 signals:
 	//! Emitted when loading of data started or stopped
@@ -76,11 +77,13 @@ signals:
 private slots:
 	//! Called when the download for the JSON file terminated
 	void downloadFinished();
-	
 	//! Called when the JSON file is loaded
-	void JsonLoadFinished();
+	void jsonLoadFinished();
 
 protected:
+	//! Return true if a deletion is currently scheduled
+	bool isDeletionScheduled() const {return timeWhenDeletionScheduled>0.;}
+	
 	//! The very short name for this image set to be used in loading bar
 	QString shortName;
 	
@@ -111,7 +114,7 @@ protected:
 	bool downloading;
 	
 	//! If a deletion was scheduled, cancel it.
-	void cancelDeletion() {timeWhenDeletionScheduled=-1;}
+	void cancelDeletion();
 	
 	//! Load the element information from a JSON file
 	static QVariantMap loadFromJSON(QIODevice& input, bool qZcompressed=false, bool gzCompressed=false);
