@@ -94,28 +94,28 @@ ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
 	}
 	catch (std::runtime_error &e)
 	{
-		qWarning() << "Loading" << extended_file_name << e.what();
+		qDebug() << "Loading" << extended_file_name << e.what();
 		return 0;
 	}
-	QFile file(fname);
-	if(!file.open(QIODevice::ReadOnly))
+	QFile* file = new QFile(fname);
+	if(!file->open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Loading" << extended_file_name << "failed to open file.";
+		qDebug() << "Loading" << extended_file_name << "failed to open file.";
 		return 0;
 	}
 	dbStr = "Loading \"" + extended_file_name + "\": ";
 	unsigned int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
-	if (ReadInt(file,magic) < 0 ||
-	        ReadInt(file,type) < 0 ||
-	        ReadInt(file,major) < 0 ||
-	        ReadInt(file,minor) < 0 ||
-	        ReadInt(file,level) < 0 ||
-	        ReadInt(file,mag_min) < 0 ||
-	        ReadInt(file,mag_range) < 0 ||
-	        ReadInt(file,mag_steps) < 0)
+	if (ReadInt(*file,magic) < 0 ||
+	        ReadInt(*file,type) < 0 ||
+	        ReadInt(*file,major) < 0 ||
+	        ReadInt(*file,minor) < 0 ||
+	        ReadInt(*file,level) < 0 ||
+	        ReadInt(*file,mag_min) < 0 ||
+	        ReadInt(*file,mag_range) < 0 ||
+	        ReadInt(*file,mag_steps) < 0)
 	{
 		dbStr += "error - file format is bad.";
-		qWarning() << dbStr;
+		qDebug() << dbStr;
 		return 0;
 	}
 	const bool byte_swap = (magic == FILE_MAGIC_OTHER_ENDIAN);
@@ -129,7 +129,7 @@ ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
 			dbStr += "to native format ";
 #endif
 			dbStr += "before mmap loading";
-			qWarning() << dbStr;
+			qDebug() << dbStr;
 			return 0;
 		}
 		dbStr += "byteswap ";
@@ -149,8 +149,8 @@ ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
 		{
 			// mmap only with gcc:
 			dbStr += "warning - you must convert catalogue "
-			         += "to native format before mmap loading";
-			qWarning(qPrintable(dbStr));
+			      += "to native format before mmap loading";
+			qDebug(qPrintable(dbStr));
 
 			return 0;
 		}
@@ -163,7 +163,7 @@ ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
 	else
 	{
 		dbStr += "error - not a catalogue file.";
-		qWarning() << dbStr;
+		qDebug() << dbStr;
 		return 0;
 	}
 	ZoneArray *rval = 0;
@@ -186,8 +186,8 @@ ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
 			// Because your compiler does not pack the data,
 			// which is crucial for this application.
 			Q_ASSERT(sizeof(Star1) == 28);
-			rval = new HipZoneArray(file,byte_swap,use_mmap,lb,level,
-			                      mag_min,mag_range,mag_steps);
+			rval = new HipZoneArray(file, byte_swap, use_mmap, lb,
+						level, mag_min, mag_range, mag_steps);
 			if (rval == 0)
 			{
 				dbStr += "error - no memory ";
@@ -206,9 +206,9 @@ ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
 			// Because your compiler does not pack the data,
 			// which is crucial for this application.
 			Q_ASSERT(sizeof(Star2) == 10);
-			rval = new SpecialZoneArray<Star2>(file,byte_swap,use_mmap,lb,
-			                                   level,
-			                                   mag_min,mag_range,mag_steps);
+			rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap,
+							   lb, level, mag_min,
+							   mag_range, mag_steps);
 			if (rval == 0)
 			{
 				dbStr += "error - no memory ";
@@ -227,9 +227,9 @@ ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
 			// Because your compiler does not pack the data,
 			// which is crucial for this application.
 			Q_ASSERT(sizeof(Star3) == 6);
-			rval = new SpecialZoneArray<Star3>(file,byte_swap,use_mmap,lb,
-			                                   level,
-			                                   mag_min,mag_range,mag_steps);
+			rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap,
+							   lb, level, mag_min,
+							   mag_range, mag_steps);
 			if (rval == 0)
 			{
 				dbStr += "error - no memory ";
@@ -244,12 +244,11 @@ ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
 	{
 		dbStr += QString("%1").arg(rval->getNrOfStars());
 		qDebug() << dbStr;
-//    rval->generateNativeDebugFile((fname+".debug").c_str());
 	}
 	else
 	{
 		dbStr += " - initialization failed";
-		qWarning() << dbStr;
+		qDebug() << dbStr;
 		if (rval)
 		{
 			delete rval;
@@ -259,10 +258,11 @@ ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
 	return rval;
 }
 
-ZoneArray::ZoneArray(QString fname, int level, int mag_min,int mag_range,int mag_steps)
-		: fname(fname), level(level), mag_min(mag_min),
-		  mag_range(mag_range), mag_steps(mag_steps),
-		  star_position_scale(0.0), zones(0)
+ZoneArray::ZoneArray(const QString& fname, QFile* file, int level, int mag_min,
+		     int mag_range, int mag_steps)
+			: fname(fname), level(level), mag_min(mag_min),
+			  mag_range(mag_range), mag_steps(mag_steps),
+			  star_position_scale(0.0), zones(0), file(file)
 {
 	nr_of_zones = StelGeodesicGrid::nrOfZones(level);
 	nr_of_stars = 0;
@@ -305,7 +305,7 @@ void HipZoneArray::updateHipIndex(HipIndexStruct hipIndex[]) const
 			if (hip < 0 || NR_OF_HIP < hip)
 			{
 				qDebug() << "ERROR: HipZoneArray::updateHipIndex: invalid HP number:"
-				<< hip;
+					 << hip;
 				exit(1);
 			}
 			if (hip != 0)
@@ -330,29 +330,11 @@ void SpecialZoneArray<Star>::scaleAxis(void)
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::generateNativeDebugFile(const QString& fname) const
-{
-	QFile f(fname);
-	f.open(QIODevice::WriteOnly);
-	if(f.write((const char*)stars, sizeof(Star)*10) != sizeof(Star)*10)
-		qDebug() << "Error writing debug output to file" << fname;
-	f.close();
-}
-
-template<class Star>
-SpecialZoneArray<Star>::SpecialZoneArray(QFile& file,bool byte_swap,bool use_mmap,
-        StelLoadingBar &lb,
-        int level,
-        int mag_min,int mag_range,
-        int mag_steps)
-		: ZoneArray(file.fileName(), level, mag_min, mag_range, mag_steps),
-		stars(0),
-#ifndef WIN32
-		mmap_start(0)
-#else
-		mmap_start(NULL),
-		mapping_handle(NULL)
-#endif
+SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mmap,
+					 StelLoadingBar &lb, int level, int mag_min,
+					 int mag_range, int mag_steps)
+		: ZoneArray(file->fileName(), file, level, mag_min, mag_range, mag_steps),
+		  stars(0), mmap_start(0)
 {
 	if (nr_of_zones > 0)
 	{
@@ -360,22 +342,22 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile& file,bool byte_swap,bool use_mma
 		zones = new SpecialZoneData<Star>[nr_of_zones];
 		if (zones == 0)
 		{
-			qWarning() << "ERROR: SpecialZoneArray(" << level
-			<< ")::SpecialZoneArray: no memory (1)";
+			qDebug() << "ERROR: SpecialZoneArray(" << level
+				 << ")::SpecialZoneArray: no memory (1)";
 			exit(1);
 		}
 		
 		unsigned int *zone_size = new unsigned int[nr_of_zones];
 		if (zone_size == 0)
 		{
-			qWarning() << "ERROR: SpecialZoneArray(" << level
-			<< ")::SpecialZoneArray: no memory (2)";
+			qDebug() << "ERROR: SpecialZoneArray(" << level
+				 << ")::SpecialZoneArray: no memory (2)";
 			exit(1);
 		}
-		if ((qint64)(sizeof(unsigned int)*nr_of_zones) != file.read((char*)zone_size, sizeof(unsigned int)*nr_of_zones))
+		if ((qint64)(sizeof(unsigned int)*nr_of_zones) != file->read((char*)zone_size, sizeof(unsigned int)*nr_of_zones))
 		{
 			qDebug() << "Error reading zones from catalog:"
-			<< file.fileName();
+				 << file->fileName();
 			delete[] getZones();
 			zones = 0;
 			nr_of_zones = 0;
@@ -405,16 +387,14 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile& file,bool byte_swap,bool use_mma
 		{
 			if (use_mmap)
 			{
-// (theoretically) platform-independent QFile::map() version
-#ifndef WIN32
-				mmap_start = file.map(file.pos(), sizeof(Star)*nr_of_stars);
+				mmap_start = file->map(file->pos(), sizeof(Star)*nr_of_stars);
 				if (mmap_start == 0)
 				{
-					qWarning() << "ERROR: SpecialZoneArray(" << level
-					<< ")::SpecialZoneArray: QFile(" << file.fileName()
-					<< ".map(" << file.pos()
-					<< ',' << sizeof(Star)*nr_of_stars
-					<< ") failed: " << file.errorString();
+					qDebug() << "ERROR: SpecialZoneArray(" << level
+						 << ")::SpecialZoneArray: QFile(" << file->fileName()
+						 << ".map(" << file->pos()
+						 << ',' << sizeof(Star)*nr_of_stars
+						 << ") failed: " << file->errorString();
 					stars = 0;
 					nr_of_stars = 0;
 					delete[] getZones();
@@ -427,82 +407,23 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile& file,bool byte_swap,bool use_mma
 					Star *s = stars;
 					for (unsigned int z=0;z<nr_of_zones;z++)
 					{
+						
 						getZones()[z].stars = s;
 						s += getZones()[z].size;
 					}
 				}
-				file.close();
-				
-// Windows-specific MapViewOfFile() version
-#else
-				const long start_in_file = file.pos();
-				file.close();
-				FILE *f = fopen(QFile::encodeName(fname).constData(), "rb");
-				if (f == 0) {
-					qWarning() << "Loading" << fname << "failed to open file.";
-				}
-				SYSTEM_INFO system_info;
-				GetSystemInfo(&system_info);
-				const long page_size = system_info.dwAllocationGranularity;
-				const long mmap_offset = start_in_file % page_size;
-				HANDLE file_handle = (void*)_get_osfhandle(_fileno(f));
-				if (file_handle == INVALID_HANDLE_VALUE) {
-					qWarning() << "ERROR: SpecialZoneArray(" << level
-						   << ")::SpecialZoneArray: _get_osfhandle(_fileno(f)) failed";
-				}
-				else
-				{
-					mapping_handle = CreateFileMapping(file_handle,NULL,PAGE_READONLY,
-										   0,0,NULL);
-					if (mapping_handle == NULL) {
-						// yes, NULL indicates failure, not INVALID_HANDLE_VALUE
-						qWarning() << "ERROR: SpecialZoneArray(" << level
-							   << ")::SpecialZoneArray: CreateFileMapping failed: " 
-							   << GetLastError();
-					}
-					else
-					{
-						mmap_start = (uchar*)MapViewOfFile(mapping_handle, 
-										   FILE_MAP_READ, 
-										   0, 
-										   start_in_file-mmap_offset, 
-										   mmap_offset+sizeof(Star)*nr_of_stars);
-						if (mmap_start == NULL) {
-							qWarning() << "ERROR: SpecialZoneArray(" << level
-								   << ")::SpecialZoneArray: "
-								   << "MapViewOfFile failed: " 
-								   << GetLastError()
-								   << ", page_size: " << page_size;
-							stars = 0;
-							nr_of_stars = 0;
-							delete[] getZones();
-							zones = 0;
-							nr_of_zones = 0;
-						}
-						else
-						{
-							stars = (Star*)(((char*)mmap_start)+mmap_offset);
-							Star *s = stars;
-							for (unsigned int z=0;z<nr_of_zones;z++) {
-								getZones()[z].stars = s;
-								s += getZones()[z].size;
-							}
-						}
-					}
-				}
-				fclose(f);
-#endif
+				file->close();
 			}
 			else
 			{
 				stars = new Star[nr_of_stars];
 				if (stars == 0)
 				{
-					qWarning() << "ERROR: SpecialZoneArray(" << level
-					<< ")::SpecialZoneArray: no memory (3)";
+					qDebug() << "ERROR: SpecialZoneArray(" << level
+						 << ")::SpecialZoneArray: no memory (3)";
 					exit(1);
 				}
-				if (!readFileWithStelLoadingBar(file,stars,sizeof(Star)*nr_of_stars,lb))
+				if (!readFileWithStelLoadingBar(*file,stars,sizeof(Star)*nr_of_stars,lb))
 				{
 					delete[] stars;
 					stars = 0;
@@ -541,15 +462,8 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile& file,bool byte_swap,bool use_mma
 							);
 						}
 					}
-//           qDebug() << "\n"
-//                << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
-//                << "): repack test start";
-//           stars[0].print();
-//           stars[1].print();
-//           qDebug() << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
-//                << "): repack test end";
 				}
-				file.close();
+				file->close();
 			}
 		}
 		lb.Draw(1.f);
@@ -561,20 +475,15 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void)
 {
 	if (stars)
 	{
-#ifndef WIN32
 		if (mmap_start != 0)
 		{
-			QFile(fname).unmap(mmap_start);
+			file->unmap(mmap_start);
 		}
-#else
-		if (mmap_start != NULL) {
-			CloseHandle(mapping_handle);
-		}
-#endif
 		else
 		{
 			delete[] stars;
 		}
+		delete file;
 		stars = 0;
 	}
 	if (zones)
@@ -587,12 +496,9 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void)
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::draw(int index,bool is_inside,
-                                  const float *rcmag_table,
-                                  const StelProjectorP& prj,
-                                  unsigned int maxMagStarName,
-                                  float names_brightness,
-                                  StelFont *starFont) const
+void SpecialZoneArray<Star>::draw(int index, bool is_inside, const float *rcmag_table,
+				  const StelProjectorP& prj, unsigned int maxMagStarName,
+				  float names_brightness, StelFont *starFont) const
 {
 	StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
 	SpecialZoneData<Star> *const z = getZones() + index;
@@ -624,9 +530,8 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::searchAround(int index,const Vec3d &v,
-        double cosLimFov,
-        QList<StelObjectP > &result)
+void SpecialZoneArray<Star>::searchAround(int index, const Vec3d &v, double cosLimFov,
+					  QList<StelObjectP > &result)
 {
 	const double d2000 = 2451545.0;
 	const double movementFactor = (M_PI/180)*(0.0001/3600)
