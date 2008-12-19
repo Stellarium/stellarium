@@ -39,13 +39,7 @@
 #include <pwd.h>
 #include <assert.h>
 #include <sys/types.h>
-
-#ifdef WIN32
-#include <windows.h>
-#else
 #include <sys/stat.h>
-#endif
-
 #ifdef Q_OS_UNIX
 #include <limits.h>  // PATH_MAX
 #endif
