@@ -53,6 +53,15 @@
 #include <time.h>
 #include <string.h>
 
+#ifdef WIN32
+#include <windows.h>
+#define _S_IFLNK  0xF000    /* Pretend */
+#define S_IFLNK   _S_IFLNK  /* kio/kio/kzip.cpp */
+#define S_ISLNK(m)  (((m) & _S_IFMT) == _S_IFLNK) /* Should always be zero.*/
+#else
+#include <sys/stat.h>
+#endif
+
 const int max_path_len = 4095;	// maximum number of character a path may contain
 
 static void transformToMsDos(const QDateTime& dt, char* buffer)

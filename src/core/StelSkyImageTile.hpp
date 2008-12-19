@@ -125,6 +125,9 @@ protected:
 	//! Positions of the vertex of each convex polygons in texture space
 	QList< QList<Vec2f> > textureCoords;
 
+	//! The texture of the tile
+	StelTextureSP tex;
+	
 protected:
 
 	//! Load the tile from a valid QVariantMap
@@ -144,9 +147,6 @@ private:
 	
 	//! Return the minimum resolution
 	double getMinResolution() const {return minResolution;}
-	
-	// The texture of the tile
-	StelTextureSP tex;
 
 	// Used for smooth fade in
 	QTimeLine* texFader;
