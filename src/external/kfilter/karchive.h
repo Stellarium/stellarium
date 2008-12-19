@@ -21,7 +21,6 @@
 #ifndef KARCHIVE_H
 #define KARCHIVE_H
 
-#include <sys/stat.h>
 #include <sys/types.h>
 
 #include <QtCore/QDate>
