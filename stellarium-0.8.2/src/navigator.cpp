@@ -58,10 +58,19 @@ time_speed(JD_SECOND), JDay(0.), position(obs), projector(proj)
   startAngleZ = 0.0;
   currentAngleZ = 0.0;
   centerRotationZ = 0.0;//-80.214; // this is depends on how argus calibration has been performed
+
+  do_stop = false;
 }
 
 Navigator::~Navigator()
 {}
+
+
+double Navigator::qube_stoping(double x)
+{
+	return a_coef*x*x*x + b_coef*x*x + c_coef*x + d_coef;
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
@@ -70,6 +79,8 @@ void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
   // reset all control variables
   if ((!selected || !flag_tracking) && fabs(aimAngleX) >= 0.00001)
   {
+	do_stop = false; ////
+
     aimAngleX = 0.0;
     startAngleX = currentAngleX;
     coef = 0.0;
@@ -91,8 +102,9 @@ void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
 
   if (fabs(aimAngleX - currentAngleX) >= 0.00001)
   {
-    coef += speed * delta_time;
-    if (coef >= 0.99)
+    coef += speed * delta_time; 
+	
+	if (coef >= 0.99)
     {
       coef = 1.0;
     }
@@ -124,9 +136,13 @@ void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
 
 		if (zooming_mode == 1)
 		{
-			if( move.coef > .9 )
+			if (fabs(aimAngleX - currentAngleX) <= 0.000515)
 			{
 				c = 1.0;
+			}
+			else if(do_stop) ////
+			{
+				c = qube_stoping(move.coef);
 			}
 			else
 			{
@@ -154,6 +170,10 @@ void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
 				c =  pow(1.11*(move.coef-.1),3);
 			}
 		}
+		else if(do_stop) ////
+		{
+			c = qube_stoping(move.coef);
+		}
 		else c = atanf(smooth * 2. * move.coef - smooth)/atanf(smooth)/2+0.5;
 
 		if (move.local_pos)
@@ -164,7 +184,7 @@ void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
 		else
 		{
 			rect_to_sphe(&ra_aim, &de_aim, earth_equ_to_local(move.aim));
-      rect_to_sphe(&ra_start, &de_start, earth_equ_to_local(move.start));
+			rect_to_sphe(&ra_start, &de_start, earth_equ_to_local(move.start));
 		}
 		
 		// Trick to choose the good moving direction and never travel on a distance > PI
@@ -180,10 +200,39 @@ void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
 		de_now = de_aim*c + de_start*(1. - c);
 		ra_now = ra_aim*c + ra_start*(1. - c);
 		
+		if(!do_stop)  // плохо что считает каждый раз .. но думаю пока что можно оставить так .. 
+		{
+			if (zooming_mode == 1)
+			{
+				a_coef = 16.*(1 - pow(1.-1.11*(move.coef),3)) - 16 - 4*3.33*pow(1.-1.11*(move.coef),2);
+				b_coef = -36.*(1 - pow(1.-1.11*(move.coef),3)) + 36 + 10*3.33*pow(1.-1.11*(move.coef),2);
+				c_coef = 24.*(1 - pow(1.-1.11*(move.coef),3)) - 24 - 8*3.33*pow(1.-1.11*(move.coef),2);
+				d_coef = -4.*(1 - pow(1.-1.11*(move.coef),3)) + 5 + 2*3.33*pow(1.-1.11*(move.coef),2);
+			}
+			/*else
+			if (zooming_mode == -1)
+			{
+				a_coef = 16.*pow(1.11*(move.coef-.1),3) - 16 - 4*3.33*pow(1.11*(move.coef-.1),2);
+				b_coef = -36.*pow(1.11*(move.coef-.1),3) + 36 + 10*3.33*pow(1.11*(move.coef-.1),2);
+				c_coef = 24.*pow(1.11*(move.coef-.1),3) - 24 - 8*3.33*pow(1.11*(move.coef-.1),2);
+				d_coef = -4.*pow(1.11*(move.coef-.1),3) + 5 + 2*3.33*pow(1.11*(move.coef-.1),2);				
+			}*/
+			else if(zooming_mode != -1)
+			{
+				a_coef = 16.*(atanf(smooth * 2. * move.coef - smooth)/atanf(smooth)/2 + 0.5) - 16 - 16./(atanf(4.)*(1. + pow(8.*move.coef - 4., 2)));
+				b_coef = -36.*(atanf(smooth * 2. * move.coef - smooth)/atanf(smooth)/2 + 0.5) + 36 + 40./(atanf(4.)*(1. + pow(8.*move.coef - 4., 2)));
+				c_coef = 24.*(atanf(smooth * 2. * move.coef - smooth)/atanf(smooth)/2 + 0.5) - 24 - 32./(atanf(4.)*(1. + pow(8.*move.coef - 4., 2)));
+				d_coef = -4.*(atanf(smooth * 2. * move.coef - smooth)/atanf(smooth)/2 + 0.5) + 5 + 8./(atanf(4.)*(1. + pow(8.*move.coef - 4., 2)));
+			}
+		}
+
 		sphe_to_rect(ra_now, de_now, local_vision);
 		equ_vision = local_to_earth_equ(local_vision);
-
+		
 		move.coef += move.speed*delta_time;
+
+		do_stop = false; ////
+
 		if (move.coef >= 0.999)
 		{
 			flag_auto_move = 0;
@@ -198,6 +247,8 @@ void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
 				local_vision=earth_equ_to_local(equ_vision);
 			}
 		}
+		if((((zooming_mode == 1)&&(move.coef > 0.9)) || ((zooming_mode != 1)&&(move.coef > 0.748))) && (move.coef < 0.999)) do_stop = true; 
+															/// одно из лучших значений : 0.748
 	}
 	else
 	{

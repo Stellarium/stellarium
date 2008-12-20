@@ -41,6 +41,10 @@ class StelObject;
 class Navigator
 {
 public:
+	bool do_stop;
+	double a_coef, b_coef, c_coef, d_coef;
+
+	double qube_stoping(double coef);
 
 	enum VIEWING_MODE_TYPE
 	{
