@@ -38,26 +38,26 @@ void StelFont::printCharOutlined(const QChar c) const
 	
 	glPushMatrix();
 	glTranslatef(1,1,0);		
-	typeFace.renderGlyphs(c, false);
+	typeFace.renderGlyphs(c);
 	glPopMatrix();
 	
 	glPushMatrix();
 	glTranslatef(-1,-1,0);		
-	typeFace.renderGlyphs(c, false);
+	typeFace.renderGlyphs(c);
 	glPopMatrix();
 	
 	glPushMatrix();
 	glTranslatef(1,-1,0);		
-	typeFace.renderGlyphs(c, false);
+	typeFace.renderGlyphs(c);
 	glPopMatrix();
 	
 	glPushMatrix();
 	glTranslatef(-1,1,0);		
-	typeFace.renderGlyphs(c, false);
+	typeFace.renderGlyphs(c);
 	glPopMatrix();
 	
 	glColor4fv(current_color);
 	
-	typeFace.renderGlyphs(c,false);
+	typeFace.renderGlyphs(c);
 }
 

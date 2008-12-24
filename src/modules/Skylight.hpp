@@ -53,7 +53,36 @@ public:
 	// Same functions but in vector mode : faster because prevents extra cosine calculations
 	// The position vectors MUST be normalized, and the vertical z component is the third one
 	void setParamsv(const float * sunPos, float turbidity);
-	void getxyYValuev(skylightStruct2& position) const;
+	
+	// Compute the sky color at the given position in the CIE color system and store it in p.color
+	// p.color[0] is CIE x color component
+	// p.color[1] is CIE y color component
+	// p.color[2] is CIE Y color component (luminance)
+	void getxyYValuev(skylightStruct2& p) const
+	{
+		const float cosDistSun = sunPos[0]*p.pos[0] + sunPos[1]*p.pos[1] + sunPos[2]*p.pos[2];
+		const float distSun = fastAcos(cosDistSun);
+		const float cosDistSun_q = cosDistSun*cosDistSun;
+
+		Q_ASSERT(p.pos[2] >= 0.f);
+		const float oneOverCosZenithAngle = (p.pos[2]==0.) ? 1e99 : 1.f / p.pos[2];
+		p.color[0] = term_x * (1.f + Ax * std::exp(Bx*oneOverCosZenithAngle))
+				* (1.f + Cx * std::exp(Dx*distSun) + Ex * cosDistSun_q);
+
+		p.color[1] = term_y * (1.f + Ay * std::exp(By*oneOverCosZenithAngle))
+				* (1.f + Cy * std::exp(Dy*distSun) + Ey * cosDistSun_q);
+
+		p.color[2] = term_Y * (1.f + AY * std::exp(BY*oneOverCosZenithAngle))
+				* (1.f + CY * std::exp(DY*distSun) + EY * cosDistSun_q);
+
+
+		if (p.color[2] < 0. || p.color[0] < 0. || p.color[1] < 0.)
+		{
+			p.color[0] = 0.25;
+			p.color[1] = 0.25;
+			p.color[2] = 0.;
+		}
+	}
 
 private:
 	float thetas;  // angular distance between the zenith and the sun in radian
@@ -92,6 +121,12 @@ private:
 	// Compute the color distribution coefficients
 	inline void computeColorDistributionCoefs(void);
 
+	/// Compute acos(x)
+	//! The taylor serie is not accurate around x=1 and x=-1
+	static inline float fastAcos(float x)
+	{
+		return M_PI_2 - (x + x*x*x * (1.f/6.f + x*x * (3.f/40.f + 5.f/112.f * x*x)) );
+	}
 };
 
 // Return the current zenith color in xyY color system
