@@ -598,28 +598,12 @@ void TypeFace::bindTexture(const CacheEntry& aCacheEntry) const
 	}
 }
 
-void TypeFace::renderGlyphs(const QString& aString, bool useColorSwitch)
+void TypeFace::renderGlyphs(const QString& aString)
 {
 	Vec2f vPos(0.0f, 0.0f);
 	size_t leftChar = 0;
-	for(int pos=0; pos<aString.size(); pos++)
+	for (int pos=0; pos<aString.size(); ++pos)
 	{
-		if (useColorSwitch)
-		{
-			// Manage color highlight here
-			if(aString.at(pos)==L'\21')
-			{
-				glColor3f(0.5,1,0.5);  // normal
-				++pos;
-				continue;
-			}
-			if(aString.at(pos)==L'\22')
-			{
-				glColor3f(1,1,1);    // hilight
-				++pos;
-				continue;
-			}
-		}
 		size_t rightChar = FT_Get_Char_Index(data_->face_, aString.at(pos).unicode());
 		vPos += kerning(leftChar, rightChar);
 		vPos += renderGlyph(rightChar, vPos);

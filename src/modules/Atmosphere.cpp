@@ -245,12 +245,11 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		else
 		{
 			// Too dark to see atmosphere color, don't bother computing it
-			b2.color[0]=0.;
-			b2.color[1]=0.;
+			b2.color[0]=0.25;
+			b2.color[1]=0.25;
 		}
-		b2.color[2] = lumi;
 		
-		colorGrid[i].set(b2.color[0], b2.color[1], b2.color[2]);
+		colorGrid[i].set(b2.color[0], b2.color[1], lumi);
 	}
 			
 	// Update average luminance

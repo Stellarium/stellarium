@@ -105,31 +105,26 @@ void StelToneReproducer::setWorldAdaptationLuminance(float _Lwa)
 *********************************************************************/
 void StelToneReproducer::xyYToRGB(float* color) const
 {
-	float log10Y;
 	// 1. Hue conversion
-	if (color[2] <= 0.f)
-	{
-		// qDebug() << "StelToneReproducer::xyYToRGB: BIG WARNING: color[2]<=0: " << color[2];
-		log10Y = -9e50;
-	}
-	else
-	{
-		log10Y = std::log10(color[2]);
-	}
-
 	// if log10Y>0.6, photopic vision only (with the cones, colors are seen)
 	// else scotopic vision if log10Y<-2 (with the rods, no colors, everything blue),
 	// else mesopic vision (with rods and cones, transition state)
-	if (log10Y<0.6)
+	if (color[2] <= 0.01f)
+	{
+		// special case for s = 0 (x=0.25, y=0.25)
+		color[2] *= 0.5121445;
+		color[2] = std::pow((float)(color[2]*M_PI*0.0001f), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
+		color[0] = 0.787077*color[2];
+		color[1] = 0.9898434*color[2];
+		color[2] *= 1.9256125;
+		return;
+	}
+	
+	if (color[2]<3.9810717055349722)
 	{
 		// Compute s, ratio between scotopic and photopic vision
-		float s = 0.f;
-		if (log10Y > -2.f)
-		{
-			const float op = (log10Y + 2.f)/2.6f;
-			s = 3.f * op * op - 2 * op * op * op;
-		}
-
+		const float op = (std::log10(color[2]) + 2.f)/2.6f;
+		const float s = op * op *(3.f - 2.f * op);
 		// Do the blue shift for scotopic vision simulation (night vision) [3]
 		// The "night blue" is x,y(0.25, 0.25)
 		color[0] = (1.f - s) * 0.25f + s * color[0];	// Add scotopic + photopic components

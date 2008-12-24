@@ -33,19 +33,15 @@
 inline float fastExp(float x)
 {
 	return (x>=0)?
-		1.f + x*(1.f+ x/2.f*(1.f+ x/3.f*(1.f+x/4.f*(1.f+x/5.f)))):
-		1.f / fastExp(-x);
+		(1.f + x*(1.f+ x/2.f*(1.f+ x/3.f*(1.f+x/4.f*(1.f+x/5.f))))):
+			1.f / (1.f -x*(1.f -x/2.f*(1.f- x/3.f*(1.f-x/4.f*(1.f-x/5.f)))));
 }
 
 //! Compute acos(x)
 //! The taylor serie is not accurate around x=1 and x=-1
 inline float fastAcos(float x)
 {
-	return M_PI/2.f - (
-		x + 1.f/6.f * x*x*x + 3.f/40.f * x*x*x*x*x +
-		5.f/112.f * x*x*x*x*x*x*x
-		//105.f/3456.f * x*x*x*x*x*x*x*x*x
-	);
+	return M_PI_2 - (x + x*x*x * (1.f/6.f + x*x * (3.f/40.f + 5.f/112.f * x*x)) );
 }
 
 Skybright::Skybright() : SN(1.f)
@@ -117,31 +113,18 @@ float Skybright::getLuminance(float cosDistMoon,
                                float cosDistSun,
                                float cosDistZenith) const
 {
-	float distSun,dist_zenith;
-	
-    // catch rounding errors here or end up with white flashes in some cases
-	if (cosDistSun <= -1.f) {cosDistSun = -1.f;distSun = M_PI;}
-	else if (cosDistSun >= 1.f) {cosDistSun = 1.f;distSun = 0.f;}
-	else distSun = fastAcos(cosDistSun);
-
-	if (cosDistZenith <= -1.f) {cosDistZenith = -1.f;dist_zenith = M_PI;}
-	else if (cosDistZenith >= 1.f) {cosDistZenith = 1.f;dist_zenith = 0.f;}
-	else dist_zenith = fastAcos(cosDistZenith);
-
 	// Air mass
-	// const float X = 1.f / (cosDistZenith + 0.025f*std::exp(-11.f*cosDistZenith));
-	const float X = 1.f / (cosDistZenith + 0.025f*fastExp(-11.f*cosDistZenith));
-	const float bKX = pow10(-0.4f * K * X);
+	const float bKX = pow10(-0.4f * K * (1.f / (cosDistZenith + 0.025f*fastExp(-11.f*cosDistZenith))));
 
 	// Daylight brightness
+	const float distSun = fastAcos(cosDistSun);
 	const float FS = 18886.28f / (distSun*distSun + 0.0007f)
 	               + pow10(6.15f - (distSun+0.001f)* 1.43239f)
 	               + 229086.77f * ( 1.06f + cosDistSun*cosDistSun );
 	const float b_daylight = 9.289663e-12 * (1.f - bKX) * (FS * C4 + 440000.f * (1.f - C4));
 
 	//Twilight brightness
-	const float Ktrimed = K> 0.05f ? K : 0.05f;
-	const float b_twilight = pow10(bTwilightTerm + 0.063661977f * dist_zenith/Ktrimed) * (1.7453293f / distSun) * (1.f-bKX);
+	const float b_twilight = pow10(bTwilightTerm + 0.063661977f * fastAcos(cosDistZenith)/(K> 0.05f ? K : 0.05f)) * (1.7453293f / distSun) * (1.f-bKX);
 
 	// Total sky brightness
 	float b_total = ((b_twilight<b_daylight) ? b_twilight : b_daylight);
@@ -150,8 +133,7 @@ float Skybright::getLuminance(float cosDistMoon,
 	if ((bMoonTerm1 * (1.f - bKX) * (28860205.1341274269 * C3 + 440000.f * (1.f - C3)))/b_total>0.01f)
 	{
 		float dist_moon;
-		if (cosDistMoon <= -1.f) {cosDistMoon = -1.f;dist_moon = M_PI;}
-		else if (cosDistMoon >= 1.f) {cosDistMoon = 1.f;dist_moon = 0.f;}
+		if (cosDistMoon >= 1.f) {cosDistMoon = 1.f;dist_moon = 0.f;}
 		else
 		{
 			// Because the accuracy of our power serie is bad around 1, call the real acos if it's the case
@@ -161,18 +143,16 @@ float Skybright::getLuminance(float cosDistMoon,
 		const float FM = 18886.28f / (dist_moon*dist_moon + 0.0005f)	// The last 0.0005 should be 0, but it causes too fast brightness change
 			+ pow10(6.15f - dist_moon * 1.43239f)
 			+ 229086.77f * ( 1.06f + cosDistMoon*cosDistMoon );
-		float b_moon = bMoonTerm1 * (1.f - bKX) * (FM * C3 + 440000.f * (1.f - C3));
-		b_total += b_moon;
+		b_total += bMoonTerm1 * (1.f - bKX) * (FM * C3 + 440000.f * (1.f - C3));
 	}
 	
 	// Dark night sky brightness, don't compute if less than 1% daylight
 	if ((bNightTerm*bKX)/b_total>0.01f)
 	{
-		const float b_night = (0.4f + 0.6f / std::sqrt(0.04f + 0.96f * cosDistZenith*cosDistZenith)) * bNightTerm * bKX;
-		b_total += b_night;
+		b_total += (0.4f + 0.6f / std::sqrt(0.04f + 0.96f * cosDistZenith*cosDistZenith)) * bNightTerm * bKX;
 	}
 	
-	return (b_total<0.f) ? 0.f : b_total * 900900.9f * M_PI * 1e-4 * 3239389.*2. *1.5;
+	return (b_total<0.f) ? 0.f : b_total * (900900.9f * M_PI * 1e-4 * 3239389.*2. *1.5);
 	//5;	// In cd/m^2 : the 32393895 is empirical term because the
 	// lambert -> cd/m^2 formula seems to be wrong...
 }
