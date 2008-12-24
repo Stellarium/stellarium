@@ -61,8 +61,11 @@ void StelMainWindow::init()
 		QFontDatabase::addApplicationFont(fName);
 	
 	// Init the main window. It must be done here because it is not the responsability of StelApp to do that
+	QCoreApplication::processEvents();
+	
 	QSettings* settings = StelApp::getInstance().getSettings();
 	resize(settings->value("video/screen_w", 800).toInt(), settings->value("video/screen_h", 600).toInt());
+	
 	if (settings->value("video/fullscreen", true).toBool())
 	{
 		showFullScreen();

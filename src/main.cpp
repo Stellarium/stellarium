@@ -55,8 +55,8 @@ int main(int argc, char **argv)
 		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
 	}
 	
-	StelMainGraphicsView* view = new StelMainGraphicsView(NULL, argc, argv);
 	StelMainWindow* mainWin = new StelMainWindow(NULL);
+	StelMainGraphicsView* view = new StelMainGraphicsView(NULL, argc, argv);
 	mainWin->setCentralWidget(view);
 	mainWin->init();
 	app.exec();
