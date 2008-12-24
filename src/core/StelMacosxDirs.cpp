@@ -1,6 +1,7 @@
 
 #include "StelMacosxDirs.hpp"
 #include <Carbon/Carbon.h>
+#include <QCoreApplication>
 
 /*
   Make a utf-8 encoded string as an array of char in outCString, using
@@ -64,3 +65,7 @@ QString StelMacosxDirs::getApplicationResourcesDirectory()
 	return StelMacosxDirs::getApplicationDirectory().append("/Contents/Resources");
 }
 
+void StelMacosxDirs::addApplicationPluginDirectory()
+{
+	QCoreApplication::addLibraryPath(StelMacosxDirs::getApplicationDirectory().append("/Contents/MacOS") );
+}
