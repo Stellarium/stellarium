@@ -26,6 +26,9 @@
 #include <QDebug>
 #include <QGLFormat>
 #include <QPlastiqueStyle>
+#ifdef MACOSX
+#include "StelMacosxDirs.hpp"
+#endif
 
 //! @class GettextStelTranslator
 //! Provides i18n support through gettext.
@@ -48,6 +51,9 @@ int main(int argc, char **argv)
 	QApplication::setStyle(new QPlastiqueStyle());
 	QApplication app(argc, argv);
 	//app.setQuitOnLastWindowClosed(false);
+#ifdef MACOSX
+	StelMacosxDirs::addApplicationPluginDirectory();
+#endif
 	GettextStelTranslator trans;
 	app.installTranslator(&trans);
 	if (!QGLFormat::hasOpenGL())
