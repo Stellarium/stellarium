@@ -32,10 +32,12 @@ public:
 	//! @return the full path.
 	static QString getApplicationDirectory();
 
-
 	//! Return the full path of the Resources directory inside this macosx application.
 	//! @return the full path.
 	static QString getApplicationResourcesDirectory();
+	
+	//! Add Stellarium.app/Contents/MacOS as a plugin directory for Qt
+	static void addApplicationPluginDirectory();
 };
 
 #endif // _STELMACOSXDIRS_HPP_
