@@ -251,8 +251,8 @@ void get_nutation (double JD, struct ln_nutation * nutation)
 		for (i=0; i< TERMS; i++)
 		{
 			/* calc coefficients of sine and cosine */
-			coeff_sine = (coefficients[i].longitude1 + (coefficients[i].longitude2 * T));
-			coeff_cos = (coefficients[i].obliquity1 + (coefficients[i].obliquity2 * T));
+			coeff_sine = coefficients[i].longitude1 + (coefficients[i].longitude2 * T);
+			coeff_cos = coefficients[i].obliquity1 + (coefficients[i].obliquity2 * T);
 	
 			/* sum the arguments */
 			if (arguments[i].D != 0)

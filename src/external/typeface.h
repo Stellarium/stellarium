@@ -137,7 +137,7 @@ private:
 	Vec2f kerning(size_t leftGlyphIndex, size_t rightGlyphIndex) const;
 
 	//! Renders the glyphs of the passed in string.
-	void renderGlyphs(const QString& aString, bool useColorSwitch=true);
+	void renderGlyphs(const QString& aString);
 
 	//! binds the passed in cache entry's texture.
 	void bindTexture(const CacheEntry& aCacheEntry) const;
