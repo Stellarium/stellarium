@@ -35,13 +35,20 @@
 #include <time.h>
 #include <unistd.h>
 #include <errno.h>
-#include <grp.h>
-#include <pwd.h>
 #include <assert.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #ifdef Q_OS_UNIX
 #include <limits.h>  // PATH_MAX
+#endif
+
+#ifndef WIN32
+#include <grp.h>
+#include <pwd.h>
+#else
+#include "kdewin32/grp.h"
+#include "kdewin32/pwd.h"
+#include "kdewin32/unistd.h"
 #endif
 
 class KArchivePrivate

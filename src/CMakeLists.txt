@@ -237,6 +237,84 @@ SET(stellarium_lib_SRCS
 	translations.h
 )
 
+IF(WIN32)
+	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
+		external/kdewin32/basetyps.h
+		external/kdewin32/byteswap.h
+		external/kdewin32/comcat.h
+		external/kdewin32/dirent.h
+		external/kdewin32/docobj.h
+		external/kdewin32/errno.h
+		external/kdewin32/fcntl.h
+		external/kdewin32/grp.h
+		external/kdewin32/ifaddrs.h
+		external/kdewin32/langinfo.h
+		external/kdewin32/mshtml.h
+		external/kdewin32/netdb.h
+		external/kdewin32/nl_types.h
+		external/kdewin32/oaidl.h
+		external/kdewin32/objfwd.h
+		external/kdewin32/objidl.h
+		external/kdewin32/ocidl.h
+		external/kdewin32/olectl.h
+		external/kdewin32/oleidl.h
+		external/kdewin32/pwd.h
+		external/kdewin32/signal.h
+		external/kdewin32/stdio.h
+		external/kdewin32/stdlib.h
+		external/kdewin32/string.h
+		external/kdewin32/strings.h
+		external/kdewin32/syslog.h
+		external/kdewin32/time.h
+		external/kdewin32/unistd.h
+		external/kdewin32/unknwn.h
+		external/kdewin32/wchar.h
+		external/kdewin32/arpa/inet.h
+		external/kdewin32/asm/byteorder.h
+		external/kdewin32/net/if.h
+		external/kdewin32/netinet/in.h
+		external/kdewin32/netinet/tcp.h
+		external/kdewin32/sys/ioctl.h
+		external/kdewin32/sys/mman.h
+		external/kdewin32/sys/resource.h
+		external/kdewin32/sys/select.h
+		external/kdewin32/sys/signal.h
+		external/kdewin32/sys/socket.h
+		external/kdewin32/sys/stat.h
+		external/kdewin32/sys/time.h
+		external/kdewin32/sys/times.h
+		external/kdewin32/sys/types.h
+		external/kdewin32/sys/uio.h
+		external/kdewin32/sys/un.h
+		external/kdewin32/sys/unistd.h
+		external/kdewin32/sys/utsname.h
+		external/kdewin32/sys/wait.h
+		
+		external/kdewin32/bind/inet_ntop.c
+		external/kdewin32/bind/inet_pton.c
+		external/kdewin32/dirent.c
+		external/kdewin32/errno.c
+		external/kdewin32/fsync.c
+		external/kdewin32/getenv.c
+		external/kdewin32/grp.c
+		external/kdewin32/inet.c
+		external/kdewin32/mmap.c
+		external/kdewin32/nl_langinfo.c
+		external/kdewin32/net.c
+		external/kdewin32/pwd.c
+		external/kdewin32/realpath.c
+		external/kdewin32/resource.c
+		external/kdewin32/signal.c
+		external/kdewin32/stdlib.c
+		external/kdewin32/string.c
+		external/kdewin32/strptime.c
+		external/kdewin32/syslog.c
+		external/kdewin32/time.c
+		external/kdewin32/uname.c
+		external/kdewin32/unistd.c
+	)
+ENDIF(WIN32)
+
 IF(MACOSX)
   SET(stellarium_lib_SRCS 
     ${stellarium_lib_SRCS}
