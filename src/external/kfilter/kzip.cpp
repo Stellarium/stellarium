@@ -54,6 +54,10 @@
 #include <string.h>
 #include <sys/stat.h>
 
+#ifdef WIN32
+#include "kdewin32/sys/stat.h"
+#endif
+
 const int max_path_len = 4095;	// maximum number of character a path may contain
 
 static void transformToMsDos(const QDateTime& dt, char* buffer)
@@ -578,6 +582,7 @@ bool KZip::openArchive( QIODevice::OpenMode mode )
 		    {
 // 			qDebug() << "before interesting dev->pos(): " << dev->pos();
 			bool success = dev->seek( dev->pos() + compr_size ); // can this fail ???
+			success = success; // annoying unused variable warning
                         Q_ASSERT( success ); // let's see...
 /*			qDebug() << "after interesting dev->pos(): " << dev->pos();
 			if ( success )
@@ -1385,6 +1390,7 @@ QIODevice* KZipFileEntry::createDevice() const
             return 0L; // ouch
         static_cast<KFilterDev *>(filterDev)->setSkipHeaders(); // Just zlib, not gzip
         bool b = filterDev->open( QIODevice::ReadOnly );
+	b = b; // annoying unused variable warning
         Q_ASSERT( b );
         return filterDev;
     }
