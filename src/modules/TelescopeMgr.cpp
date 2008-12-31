@@ -319,12 +319,15 @@ void TelescopeMgr::telescopeGoto(int telescope_nr,const Vec3d &j2000Pos)
 
 void TelescopeMgr::communicate(void)
 {
+	  // The actual workhorse that does the TCP/IP communication with the
+	  // controlled telescopes:
 	if (!telescope_map.empty())
 	{
 		fd_set read_fds,write_fds;
 		FD_ZERO(&read_fds);
 		FD_ZERO(&write_fds);
 		int fd_max = -1;
+		  // check the file descriptors
 		foreach (Telescope* tel, telescope_map)
 		{
 			tel->prepareSelectFds(read_fds,write_fds,fd_max);
@@ -338,6 +341,7 @@ void TelescopeMgr::communicate(void)
 			const int select_rc = select(fd_max+1,&read_fds,&write_fds,0,&tv);
 			if (select_rc > 0)
 			{
+				  // perform the IO for each telescope:
 				foreach (Telescope* tel, telescope_map)
 				{
 					tel->handleSelectFds(read_fds,write_fds);
