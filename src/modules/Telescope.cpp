@@ -130,6 +130,9 @@ T &operator<<(T &o,const PrintRaDec &x)
 
 class TelescopeDummy : public Telescope
 {
+  //! example Telescope class. A physical telescope does not exist.
+  //! This can be used as a starting point for implementing a derived
+  //! Telescope class.
 public:
 	TelescopeDummy(const QString &name,const QString &params) : Telescope(name)
 	{
@@ -169,6 +172,11 @@ private:
 
 class TelescopeTcp : public Telescope
 {
+  //! This Telescope class can controll a telescope by communicating
+  //! to a server process ("telescope server") via 
+  //! the "Stellarium telescope control protocol" over TCP/IP.
+  //! The "Stellarium telescope control protocol" is specified in a seperate
+  //! document along with the telescope server software.
 public:
 	TelescopeTcp(const QString &name,const QString &params);
 	~TelescopeTcp(void)
@@ -397,6 +405,10 @@ void TelescopeTcp::hangup(void)
 
 void TelescopeTcp::telescopeGoto(const Vec3d &j2000Pos)
 {
+  //! queues a GOTO command with the specified position to the write buffer.
+  //! for the data format of the command see the
+  //! "Stellarium telescope control protocol"
+
 	if (isConnected())
 	{
 		if (write_buff_end-write_buff+20 < (int)sizeof(write_buff))
@@ -485,6 +497,7 @@ void TelescopeTcp::performWriting(void)
 
 void TelescopeTcp::performReading(void)
 {
+	  //! try to read some data from the telescope server
 	const int to_read = read_buff + sizeof(read_buff) - read_buff_end;
 	const int rc = recv(fd,read_buff_end,to_read,0);
 	if (rc < 0)
@@ -504,6 +517,7 @@ void TelescopeTcp::performReading(void)
 	{
 		read_buff_end += rc;
 		char *p = read_buff;
+		  // parse the data in the read buffer:
 		while (read_buff_end-p >= 2)
 		{
 			const int size = (int)(((unsigned char)(p[0])) | (((unsigned int)(unsigned char)(p[1])) << 8));
@@ -524,6 +538,9 @@ void TelescopeTcp::performReading(void)
 			{
 			case 0:
 			{
+			  // We have received position information.
+			  // For the data format of the message see the
+			  // "Stellarium telescope control protocol"
 				if (size < 24)
 				{
 					qDebug() << "TelescopeTcp(" << name << ")::performReading: " << "type 0: bad packet size: " << size;
@@ -555,6 +572,8 @@ void TelescopeTcp::performReading(void)
 					(((unsigned int)(unsigned char)(p[22])) << 16) |
 					(((unsigned int)(unsigned char)(p[23])) << 24));
 
+				  // remember the time and received position so that later we
+				  // will know where the telescope is pointing to:
 				position_pointer++;
 				if (position_pointer >= end_position)
 					position_pointer = positions;
@@ -595,6 +614,8 @@ void TelescopeTcp::performReading(void)
 
 Vec3d TelescopeTcp::getJ2000EquatorialPos(const StelNavigator*) const
 {
+	  // estimate wher the telescope is by interpolation in the stored
+	  // telescope positions:
 	if (position_pointer->client_micros == 0x7FFFFFFFFFFFFFFFLL)
 	{
 		return Vec3d(0,0,0);
@@ -628,6 +649,7 @@ Vec3d TelescopeTcp::getJ2000EquatorialPos(const StelNavigator*) const
 
 void TelescopeTcp::prepareSelectFds(fd_set &read_fds,fd_set &write_fds, int &fd_max)
 {
+	  // just plain TCP/IP programming
 	if (IS_INVALID_SOCKET(fd))
 	{
 		// try reconnecting
@@ -691,6 +713,7 @@ void TelescopeTcp::prepareSelectFds(fd_set &read_fds,fd_set &write_fds, int &fd_
 
 void TelescopeTcp::handleSelectFds(const fd_set &read_fds, const fd_set &write_fds)
 {
+	  // just plain TCP/IP programming
 	if (!IS_INVALID_SOCKET(fd))
 	{
 		if (wait_for_connection_establishment)

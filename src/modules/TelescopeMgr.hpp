@@ -39,6 +39,14 @@ class StelPainter;
 
 class TelescopeMgr : public StelObjectModule
 {
+	  //! This class manages the controlling of one or more telescopes by one
+	  //! instance of the stellarium program. "controlling a telescope"
+	  //! means receiving position information from the telescope
+	  //! and sending GOTO commands to the telescope.
+	  //! No esoteric features like motor focus, electric heating and such.
+	  //! The actual controlling of a telescope is left to the implementation
+	  //! of the abstract base class Telescope.
+
 	Q_OBJECT;
 
 public:
