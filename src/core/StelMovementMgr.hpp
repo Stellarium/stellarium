@@ -160,14 +160,15 @@ public slots:
 	void turnLeft(bool);
 	void turnUp(bool);
 	void turnDown(bool);
+	void moveSlow(bool b) {flagMoveSlow=b;}
 	void zoomIn(bool);
 	void zoomOut(bool);
 	
 private:
-	double currentFov;	// The current FOV in degree
-	double initFov;		// The FOV at startup
-	double minFov;		// Minimum FOV in degree
- 	double maxFov;		// Maximum FOV in degree
+	double currentFov; // The current FOV in degree
+	double initFov;    // The FOV at startup
+	double minFov;     // Minimum FOV in degree
+ 	double maxFov;     // Maximum FOV in degree
 	
 	void setFov(double f)
 	{
@@ -186,9 +187,7 @@ private:
 	void dragView(int x1, int y1, int x2, int y2);
 	
 	StelCore* core;          // The core on which the movement are applied
-
 	bool flagLockEquPos;     // Define if the equatorial position is locked
-
 	bool flagTracking;       // Define if the selected object is followed
 	
 	// Flags for mouse movements
@@ -201,8 +200,9 @@ private:
 	
 	bool flagEnableZoomKeys;
 	bool flagEnableMoveKeys;
-	float keyMoveSpeed;			// Speed of keys movement
-	float keyZoomSpeed;			// Speed of keys zoom
+	float keyMoveSpeed;              // Speed of keys movement
+	float keyZoomSpeed;              // Speed of keys zoom
+	bool flagMoveSlow;
 	
 	//! @internal
 	//! Store data for auto-move
