@@ -58,6 +58,11 @@ protected:
 	virtual void createDialogContent();
 	
 	Ui_helpDialogForm* ui;
+	
+private slots:
+	//! Slot that's called when the current tab changes. Updates log file
+	//! if Log tab is selected.
+	void updateLog(int);
 
 private:
 	//! Return the header text.
