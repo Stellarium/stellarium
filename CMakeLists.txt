@@ -27,7 +27,7 @@ IF(UNIX AND NOT WIN32)
 ELSE()
  SET(CMAKE_C_FLAGS "-Wall -fexceptions -fident -mthreads")
  SET(CMAKE_CXX_FLAGS "-Wall -Wsign-promo -fexceptions -fident -mthreads")
- SET(CMAKE_EXE_LINKER_FLAGS "-Wsign-promo -fexceptions -fident -mthreads -mwindows")
+ SET(CMAKE_EXE_LINKER_FLAGS "-Wsign-promo -fexceptions -fident -mthreads -mwindows --large-address-aware")
 ENDIF()
 
 # best way to get to APPLE?
