@@ -37,6 +37,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore) : core(acore),
 	isMouseMovingVert(false),
 	flagEnableMouseNavigation(true),
 	keyMoveSpeed(0.00025),
+	flagMoveSlow(false),
 	flagAutoMove(0),
 	deltaFov(0.),
 	deltaAlt(0.),
@@ -151,6 +152,8 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 				zoomIn(true); break;
 			case Qt::Key_PageDown:
 				zoomOut(true); break;
+			case Qt::Key_Shift:
+				moveSlow(true); break;
 			default:
 				return;
 		}
@@ -176,6 +179,8 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 				zoomIn(false); break;
 			case Qt::Key_PageDown:
 				zoomOut(false); break;
+			case Qt::Key_Shift:
+				moveSlow(false); break;
 			default:
 				return;
 		}
@@ -323,8 +328,14 @@ void StelMovementMgr::updateMotion(double deltaTime)
 	updateVisionVector(deltaTime);
 	
 	// the more it is zoomed, the lower the moving speed is (in angle)
-	double depl=keyMoveSpeed*deltaTime*1000*currentFov;
+	double depl=keyMoveSpeed*deltaTime*1000*currentFov; 
 	double deplzoom=keyZoomSpeed*deltaTime*1000*proj->deltaZoom(currentFov*(M_PI/360.0))*(360.0/M_PI);
+
+	if (flagMoveSlow)
+	{
+		depl *= 0.2;
+		deplzoom *= 0.2;
+	}
 
 	if (deltaAz<0)
 	{
