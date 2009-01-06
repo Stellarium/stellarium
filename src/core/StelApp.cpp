@@ -64,10 +64,16 @@
 #include <QMouseEvent>
 #include <QDebug>
 #include <QNetworkAccessManager>
+#include <QSysInfo>
+
+#ifdef WIN32
+#include <windows.h>
+#endif
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
 QTime* StelApp::qtime = NULL;
+QFile StelApp::logFile;
 
 /*************************************************************************
  Create and initialize the main Stellarium application.
@@ -108,10 +114,18 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	for(int i=0; i<argc; i++)
 		*argList << argv[i];
 	
+	// Echo debug output to log file
 	stelFileMgr = new StelFileMgr();
+	logFile.setFileName(stelFileMgr->getUserDir()+"/log.txt");
+	if(logFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
+		qInstallMsgHandler(StelApp::debugLogHandler);
+		
 	
 	StelApp::qtime = new QTime();
 	StelApp::qtime->start();
+	
+	// Print system info to log file
+	setupLog();
 	
 	// Parse for first set of CLI arguments - stuff we want to process before other
 	// output, such as --help and --version, and if we want to set the configFile value.
@@ -128,10 +142,17 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	}
 	
 	// OK, print the console splash and get on with loading the program
-	std::cout << " -------------------------------------------------------" << std::endl;
-	std::cout << "[ This is " << qPrintable(StelApp::getApplicationName()) << " - http://www.stellarium.org ]" << std::endl;
-	std::cout << "[ Copyright (C) 2000-2008 Fabien Chereau et al          ]" << std::endl;
-	std::cout << " -------------------------------------------------------" << std::endl;
+	QString versionLine = QString("This is %1 - http://www.stellarium.org").arg(StelApp::getApplicationName());
+	QString copyrightLine = QString("Copyright (C) 2000-2008 Fabien Chereau et al");
+	int maxLength = qMax(versionLine.size(), copyrightLine.size());
+	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
+	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
+	qDebug() << qPrintable(QString("[ %1 ]").arg(copyrightLine.leftJustified(maxLength, ' ')));
+	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
+	if(logFile.isOpen())
+		qDebug() << "Writing log file to:" << logFile.fileName();
+	else
+		qDebug() << "Unable to open log file:" << logFile.fileName() << ".";
 	
 	QStringList p=stelFileMgr->getSearchPaths();
 	qDebug() << "File search paths:";
@@ -265,6 +286,17 @@ QString StelApp::getApplicationName()
 #endif
 }
 
+void StelApp::debugLogHandler(QtMsgType type, const char* msg)
+{
+	fprintf(stderr, "%s\n", msg);
+	StelApp::writeLog(QString(msg));
+}
+
+void StelApp::writeLog(QString msg)
+{
+	msg += "\n";
+	StelApp::logFile.write(qPrintable(msg), msg.size());
+}
 
 void StelApp::init()
 {
@@ -397,12 +429,210 @@ void StelApp::initPlugIns()
 		}
 	}
 }
+
+void StelApp::setupLog()
+{
+	// write timestamp
+	StelApp::writeLog(QString("%1").arg(QDateTime::currentDateTime().toString("ddd MMM yyyy hh:mm:ss AP")));
 	
+	// write command line arguments
+	QString args;
+	foreach(QString arg, *argList)
+		args += QString("%1 ").arg(arg);
+	StelApp::writeLog(args);
+	
+	// write OS version
+#ifdef Q_WS_WIN
+	switch(QSysInfo::WindowsVersion)
+	{
+		case QSysInfo::WV_95:
+			StelApp::writeLog("Windows 95");
+			break;
+		case QSysInfo::WV_98:
+			StelApp::writeLog("Windows 98");
+			break;
+		case QSysInfo::WV_Me:
+			StelApp::writeLog("Windows Me");
+			break;
+		case QSysInfo::WV_NT:
+			StelApp::writeLog("Windows NT");
+			break;
+		case QSysInfo::WV_2000:
+			StelApp::writeLog("Windows 2000");
+			break;
+		case QSysInfo::WV_XP:
+			StelApp::writeLog("Windows XP");
+			break;
+		case QSysInfo::WV_2003:
+			StelApp::writeLog("Windows Server 2003");
+			break;
+		case QSysInfo::WV_VISTA:
+			StelApp::writeLog("Windows Vista");
+			break;
+		default:
+			StelApp::writeLog("Unsupported Windows version");
+			break;
+	}
+	
+	// somebody writing something useful for Macs would be great here
+#elif defined Q_WS_MAC
+	switch(QSysInfo::MacintoshVersion)
+	{
+		case QSysInfo::MV_10_3:
+			StelApp::writeLog("Mac OS X 10.3");
+			break;
+		case QSysInfo::MV_10_4:
+			StelApp::writeLog("Mac OS X 10.4");
+			break;
+		case QSysInfo::MV_10_5:
+			StelApp::writeLog("Mac OS X 10.5");
+			break;
+		default:
+			StelApp::writeLog("Unsupported Mac version");
+			break;
+	}
+	
+#elif defined Q_OS_LINUX
+	QFile procVersion("/proc/version");
+	if(!procVersion.open(QIODevice::ReadOnly | QIODevice::Text))
+		StelApp::writeLog("Unknown Linux version");
+	else
+	{
+		QString version = procVersion.readAll();
+		if(version.right(1) == "\n")
+			version.chop(1);
+		StelApp::writeLog(version);
+		procVersion.close();
+	}
+#else
+	StelApp::writeLog("Unsupported operating system");
+#endif
+	
+	// write GCC version
+#ifndef __GNUC__
+	StelApp::writeLog("Non-GCC compiler");
+#else
+	StelApp::writeLog(QString("Compiled with GCC %1.%2.%3").arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__));
+#endif
+	
+	// write Qt version
+	StelApp::writeLog(QString("Qt runtime version: %1").arg(qVersion()));
+	StelApp::writeLog(QString("Qt compilation version: %1").arg(QT_VERSION_STR));
+	
+	// write addressing mode
+#ifdef __LP64__
+	StelApp::writeLog("Addressing mode: 64-bit");
+#else
+	StelApp::writeLog("Addressing mode: 32-bit");
+#endif
+	
+	// write memory and CPU info
+#ifdef Q_OS_LINUX
+	QFile infoFile("/proc/meminfo");
+	if(!infoFile.open(QIODevice::ReadOnly | QIODevice::Text))
+		StelApp::writeLog("Could not get memory info.");
+	else
+	{
+		while(!infoFile.peek(1).isEmpty())
+		{
+			QString line = infoFile.readLine();
+			line.chop(1);
+			if(line.startsWith("Mem") || line.startsWith("SwapTotal"))
+				StelApp::writeLog(line);
+		}
+		infoFile.close();
+	}
+	
+	infoFile.setFileName("/proc/cpuinfo");
+	if(!infoFile.open(QIODevice::ReadOnly | QIODevice::Text))
+		StelApp::writeLog("Could not get CPU info.");
+	else
+	{
+		while(!infoFile.peek(1).isEmpty())
+		{
+			QString line = infoFile.readLine();
+			line.chop(1);
+			if(line.startsWith("model name") || line.startsWith("cpu MHz"))
+				StelApp::writeLog(line);
+		}
+		infoFile.close();
+	}
+	
+	// Aargh Windows API
+#elif defined Q_WS_WIN
+	// Hopefully doesn't throw a linker error on earlier systems. Not like
+	// I'm gonna test it or anything.
+	if(QSysInfo::WindowsVersion >= QSysInfo::WV_2000)
+	{
+#ifdef __LP64__
+		MEMORYSTATUSEX statex;
+		GlobalMemoryStatusEx(&statex);
+		StelApp::writeLog(QString("Total physical memory: %1 MB (unreliable)").arg(statex.ullTotalPhys/(1024<<10)));
+		StelApp::writeLog(QString("Total virtual memory: %1 MB (unreliable)").arg(statex.ullTotalVirtual/(1024<<10)));
+		StelApp::writeLog(QString("Physical memory in use: %1%").arg(statex.dwMemoryLoad));
+#else
+		MEMORYSTATUS statex;
+		GlobalMemoryStatus(&statex);
+		StelApp::writeLog(QString("Total memory: %1 MB (unreliable)").arg(statex.dwTotalPhys/(1024<<10)));
+		StelApp::writeLog(QString("Total virtual memory: %1 MB (unreliable)").arg(statex.dwTotalVirtual/(1024<<10)));
+		StelApp::writeLog(QString("Physical memory in use: %1%").arg(statex.dwMemoryLoad));
+#endif
+	}
+	else
+		StelApp::writeLog("Windows version too old to get memory info.");
+	
+	HKEY hKey = NULL;
+	DWORD dwType = REG_DWORD;
+	DWORD numVal = 0;
+	DWORD dwSize = sizeof(numVal);
+	
+	// iterate over the processors listed in the registry
+	QString procKey = "Hardware\\Description\\System\\CentralProcessor";
+	LONG lRet = ERROR_SUCCESS;
+	int i;
+	for(i = 0; lRet == ERROR_SUCCESS; i++)
+	{
+		lRet = RegOpenKeyEx(HKEY_LOCAL_MACHINE,
+				    TEXT(qPrintable(QString("%1\\%2").arg(procKey).arg(i))),
+				    0, KEY_QUERY_VALUE, &hKey);
+		
+		if(lRet == ERROR_SUCCESS)
+		{
+			if(RegQueryValueEx(hKey, "~MHz", NULL, &dwType, (LPBYTE)&numVal, &dwSize) == ERROR_SUCCESS)
+				StelApp::writeLog(QString("Processor speed: %1 MHz").arg(numVal));
+			else
+				StelApp::writeLog("Could not get processor speed.");
+		}
+		
+		// can you believe this trash?
+		dwType = REG_SZ;
+		char nameStr[512];
+		DWORD nameSize = sizeof(nameStr);
+		
+		if(lRet == ERROR_SUCCESS)
+		{
+			if(RegQueryValueEx(hKey, "ProcessorNameString", NULL, &dwType, (LPBYTE)&nameStr, &nameSize) == ERROR_SUCCESS)
+				StelApp::writeLog(QString("Processor name: %1").arg(nameStr));
+			else
+				StelApp::writeLog("Could not get processor name.");
+		}
+		
+		RegCloseKey(hKey);
+	}
+	if(i == 0)
+		StelApp::writeLog("Could not get processor info.");
+	
+#elif defined Q_WS_MAC
+	StelApp::writeLog("You look like a Mac user. How would you like to write some system info code here? That would help a lot.");
+	
+#endif
+}
+
 void StelApp::parseCLIArgsPreConfig(void)
 {	
 	if (argsGetOption(argList, "-v", "--version"))
 	{
-		std::cout << qPrintable(getApplicationName()) << std::endl;
+		qDebug() << qPrintable(getApplicationName());
 		exit(0);
 	}
 
@@ -412,30 +642,30 @@ void StelApp::parseCLIArgsPreConfig(void)
 		QString binName = argList->at(0);
 		binName.remove(QRegExp("^.*[/\\\\]"));
 		
-		std::cout << "Usage:" << std::endl
-		     << "  " 
-		     << qPrintable(binName) << " [options]" << std::endl << std::endl
-		     << "Options:" << std::endl
-		     << "--version (or -v)       : Print program name and version and exit." << std::endl
-		     << "--help (or -h)          : This cruft." << std::endl
-		     << "--config-file (or -c)   : Use an alternative name for the config file" << std::endl
-		     << "--user-dir (or -u)      : Use an alternative user data directory" << std::endl
-		     << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides" << std::endl
-		     << "                          the full screen setting in the config file" << std::endl
-		     << "--screenshot-dir        : Specify directory to save screenshots" << std::endl
-		     << "--startup-script        : Specify name of startup script" << std::endl
-		     << "--home-planet           : Specify observer planet (English name)" << std::endl
-		     << "--altitude              : Specify observer altitude in meters" << std::endl
-		     << "--longitude             : Specify longitude, e.g. +53d58\\'16.65\\\"" << std::endl
-		     << "--latitude              : Specify latitude, e.g. -1d4\\'27.48\\\"" << std::endl 
-		     << "--list-landscapes       : Print a list of value landscape IDs" << std::endl 
-		     << "--landscape             : Start using landscape whose ID (dir name)" << std::endl
-		     << "                          is passed as parameter to option" << std::endl
-		     << "--sky-date              : Specify sky date in format yyyymmdd" << std::endl
-		     << "--sky-time              : Specify sky time in format hh:mm:ss" << std::endl
-		     << "--fov                   : Specify the field of view (degrees)" << std::endl
-		     << "--projection-type       : Specify projection type, e.g. stereographic" << std::endl
-		     << "--restore-defaults      : Delete existing config.ini and use defaults" << std::endl;
+		qDebug() << "Usage:\n"
+		     << "  "
+		     << qPrintable(binName) << " [options]\n\n"
+		     << "Options:\n"
+		     << "--version (or -v)       : Print program name and version and exit.\n"
+		     << "--help (or -h)          : This cruft.\n"
+		     << "--config-file (or -c)   : Use an alternative name for the config file\n"
+		     << "--user-dir (or -u)      : Use an alternative user data directory\n"
+		     << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
+		     << "                          the full screen setting in the config file\n"
+		     << "--screenshot-dir        : Specify directory to save screenshots\n"
+		     << "--startup-script        : Specify name of startup script\n"
+		     << "--home-planet           : Specify observer planet (English name)\n"
+		     << "--altitude              : Specify observer altitude in meters\n"
+		     << "--longitude             : Specify longitude, e.g. +53d58\\'16.65\\\"\n"
+		     << "--latitude              : Specify latitude, e.g. -1d4\\'27.48\\\"\n"
+		     << "--list-landscapes       : Print a list of value landscape IDs\n"
+		     << "--landscape             : Start using landscape whose ID (dir name)\n"
+		     << "                          is passed as parameter to option\n"
+		     << "--sky-date              : Specify sky date in format yyyymmdd\n"
+		     << "--sky-time              : Specify sky time in format hh:mm:ss\n"
+		     << "--fov                   : Specify the field of view (degrees)\n"
+		     << "--projection-type       : Specify projection type, e.g. stereographic\n"
+		     << "--restore-defaults      : Delete existing config.ini and use defaults\n";
 		exit(0);
 	}
 	
@@ -449,7 +679,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 				// finding the file will throw an exception if it is not found
 				// in that case we won't output the landscape ID as it canont work
 				stelFileMgr->findFile("landscapes/" + *i + "/landscape.ini");
-				std::cout << qPrintable(*i) << std::endl;
+				qDebug() << qPrintable(*i);
 			}
 			catch (std::runtime_error& e){}
 		}
