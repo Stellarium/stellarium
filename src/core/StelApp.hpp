@@ -23,6 +23,7 @@
 #include "fixx11h.h"
 #include <QString>
 #include <QObject>
+#include <QFile>
 
 // Predeclaration of some classes
 class StelCore;
@@ -64,7 +65,7 @@ class StelApp : public QObject
 	
 public:
 	friend class StelAppGraphicsScene;
-		
+	
 	//! Create and initialize the main Stellarium application.
 	//! @param argc The number of command line parameters
 	//! @param argv an array of char* command line arguments
@@ -158,6 +159,12 @@ public:
 
 	//! Return the currently used style
 	const StelStyle* getCurrentStelStyle() {return currentStelStyle;}
+	
+	//! Handler for qDebug() and friends. Writes message to log file at
+	//! $USERDIR/log.txt and echoes to stderr. Do not call this function;
+	//! it's only for use by qInstallMsgHandler. Use writeLog(QString)
+	//! instead, but preferably qDebug().
+	static void debugLogHandler(QtMsgType, const char*);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
@@ -306,6 +313,13 @@ private:
 	//! read.  This gives us the chance to over-ride settings which are in the configuration
 	//! file.
 	void parseCLIArgsPostConfig();
+	
+	//! Prepend system information to log file before any debugging output.
+	void setupLog();
+	
+	//! Write the message plus a newline to the log file at $USERDIR/log.txt.
+	//! @param msg message to write
+	static void writeLog(QString msg);
 
 	// The StelApp singleton
 	static StelApp* singleton;
@@ -388,6 +402,8 @@ private:
 	int nbDownloadedFiles;
 	//! Store the the summed size of all downloaded files in bytes.
 	qint64 totalDownloadedSize;
+	
+	static QFile logFile;
 };
 
 #endif // _STELAPP_HPP_
