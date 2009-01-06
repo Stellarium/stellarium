@@ -134,7 +134,7 @@
       <item row="0" column="0" >
        <widget class="QTabWidget" name="helpTabWidget" >
         <property name="currentIndex" >
-         <number>0</number>
+         <number>2</number>
         </property>
         <property name="iconSize" >
          <size>
@@ -143,14 +143,6 @@
          </size>
         </property>
         <widget class="QWidget" name="helpTab" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>375</width>
-           <height>345</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Help</string>
          </attribute>
@@ -257,14 +249,6 @@
          </layout>
         </widget>
         <widget class="QWidget" name="aboutTab" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>375</width>
-           <height>345</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>About</string>
          </attribute>
@@ -281,6 +265,38 @@
           </property>
           <item>
            <widget class="QTextBrowser" name="aboutBrowser" >
+            <property name="openExternalLinks" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="logTab" >
+         <attribute name="title" >
+          <string>Log</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_4" >
+          <property name="spacing" >
+           <number>0</number>
+          </property>
+          <property name="margin" >
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QTextBrowser" name="logBrowser" >
+            <property name="font" >
+             <font>
+              <family>Lucida Console</family>
+              <kerning>false</kerning>
+             </font>
+            </property>
+            <property name="lineWrapMode" >
+             <enum>QTextEdit::NoWrap</enum>
+            </property>
+            <property name="textInteractionFlags" >
+             <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+            </property>
             <property name="openExternalLinks" >
              <bool>true</bool>
             </property>

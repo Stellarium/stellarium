@@ -93,11 +93,19 @@ void HelpDialog::styleChanged()
 
 void HelpDialog::createDialogContent()
 {
-		ui->setupUi(dialog);
-		ui->helpTabWidget->setCurrentIndex(0);
-		connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-		
-		updateText();
+	ui->setupUi(dialog);
+	ui->helpTabWidget->setCurrentIndex(0);
+	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	
+	updateText();
+	
+	connect(ui->helpTabWidget, SIGNAL(currentChanged(int)), this, SLOT(updateLog(int)));
+}
+
+void HelpDialog::updateLog(int)
+{
+	if(ui->helpTabWidget->currentWidget() == ui->logTab)
+		ui->logBrowser->setPlainText(StelApp::getInstance().getLog());
 }
 
 void HelpDialog::setKey(QString group, QString oldKey, QString newKey, QString description)
