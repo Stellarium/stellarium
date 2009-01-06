@@ -74,6 +74,7 @@
 StelApp* StelApp::singleton = NULL;
 QTime* StelApp::qtime = NULL;
 QFile StelApp::logFile;
+QString StelApp::log;
 
 /*************************************************************************
  Create and initialize the main Stellarium application.
@@ -270,6 +271,8 @@ StelApp::~StelApp()
 	
 	delete currentStelStyle;
 	
+	logFile.close();
+	
 	Q_ASSERT(singleton);
 	singleton = NULL;
 }
@@ -295,7 +298,8 @@ void StelApp::debugLogHandler(QtMsgType type, const char* msg)
 void StelApp::writeLog(QString msg)
 {
 	msg += "\n";
-	StelApp::logFile.write(qPrintable(msg), msg.size());
+	logFile.write(qPrintable(msg), msg.size());
+	log += msg;
 }
 
 void StelApp::init()

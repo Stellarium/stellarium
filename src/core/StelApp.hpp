@@ -166,6 +166,9 @@ public:
 	//! instead, but preferably qDebug().
 	static void debugLogHandler(QtMsgType, const char*);
 	
+	//! Return a copy of text of the log file.
+	QString getLog() { return log; }
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
@@ -404,6 +407,7 @@ private:
 	qint64 totalDownloadedSize;
 	
 	static QFile logFile;
+	static QString log;
 };
 
 #endif // _STELAPP_HPP_
