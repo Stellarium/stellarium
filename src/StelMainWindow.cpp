@@ -41,7 +41,7 @@ StelMainWindow::StelMainWindow(QWidget* parent) : QMainWindow(parent), initCompl
 {
 	// Can't create 2 StelMainWindow instances
 	Q_ASSERT(!singleton);
-	singleton = this;
+    singleton = this;
 }
 
 void StelMainWindow::init()

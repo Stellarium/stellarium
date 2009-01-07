@@ -106,7 +106,7 @@ void StelSkyImageTile::draw(StelCore* core, const StelPainter& sPainter)
 void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, float limitLuminance, bool recheckIntersect)
 {
 	
-#ifndef NEDBUG
+#ifndef NDEBUG
 	// When this method is called, we can assume that:
 	// - the parent tile min resolution was reached
 	// - the parent tile is intersecting FOV
