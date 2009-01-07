@@ -55,7 +55,9 @@ void StelMainWindow::init()
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "ERROR while loading font DejaVuSans : " << e.what();
+		// Removed this warning practically allowing to package the program without the font file.
+		// This is useful for distribution having already a package for DejaVu font.
+		// qWarning() << "ERROR while loading font DejaVuSans : " << e.what();
 	}
 	if (!fName.isEmpty())
 		QFontDatabase::addApplicationFont(fName);
