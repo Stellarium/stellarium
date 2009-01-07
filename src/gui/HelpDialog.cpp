@@ -99,13 +99,20 @@ void HelpDialog::createDialogContent()
 	
 	updateText();
 	
+	ui->logPathLabel->setText(QString("%1/log.txt:").arg(StelApp::getInstance().getFileMgr().getUserDir()));
 	connect(ui->helpTabWidget, SIGNAL(currentChanged(int)), this, SLOT(updateLog(int)));
+	connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(refreshLog()));
 }
 
 void HelpDialog::updateLog(int)
 {
 	if(ui->helpTabWidget->currentWidget() == ui->logTab)
-		ui->logBrowser->setPlainText(StelApp::getInstance().getLog());
+		refreshLog();
+}
+
+void HelpDialog::refreshLog()
+{
+	ui->logText->setPlainText(StelApp::getInstance().getLog());
 }
 
 void HelpDialog::setKey(QString group, QString oldKey, QString newKey, QString description)

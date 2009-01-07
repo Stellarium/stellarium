@@ -63,6 +63,9 @@ private slots:
 	//! Slot that's called when the current tab changes. Updates log file
 	//! if Log tab is selected.
 	void updateLog(int);
+	
+	//! Sync the displayed log.
+	void refreshLog();
 
 private:
 	//! Return the header text.
