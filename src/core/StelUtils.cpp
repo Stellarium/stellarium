@@ -606,7 +606,8 @@ QString localeDateString(int year, int month, int day, int dayOfWeek)
 	// try the QDateTime first
 	QDate test(year, month, day);
 
-	if (test.isValid() && !test.toString(Qt::LocaleDate).isEmpty())
+	// try to avoid QDate's non-astronomical time here, don't do BCE or year 0.
+	if (year > 0 && test.isValid() && !test.toString(Qt::LocaleDate).isEmpty())
 	{
 		return test.toString(Qt::LocaleDate);
 	}
@@ -644,6 +645,10 @@ float getGMTShiftFromQT(double JD)
 	int year, month, day, hour, minute, second;
 	getDateFromJulianDay(JD, &year, &month, &day);
 	getTimeFromJulianDay(JD, &hour, &minute, &second);
+	// as analogous to second statement in getJDFromDate, nkerr
+	if ( year <= 0 ) {
+	  year = year - 1;
+	}
 	QDateTime current(QDate(year, month, day), QTime(hour, minute, second));
 	if (! current.isValid())
 	{
