@@ -345,17 +345,20 @@
             <property name="acceptDrops" >
              <bool>false</bool>
             </property>
+            <property name="horizontalScrollBarPolicy" >
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
             <property name="undoRedoEnabled" >
              <bool>false</bool>
             </property>
             <property name="lineWrapMode" >
-             <enum>QPlainTextEdit::NoWrap</enum>
+             <enum>QPlainTextEdit::WidgetWidth</enum>
             </property>
             <property name="readOnly" >
              <bool>true</bool>
             </property>
             <property name="textInteractionFlags" >
-             <set>Qt::NoTextInteraction</set>
+             <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
             </property>
             <property name="backgroundVisible" >
              <bool>false</bool>
