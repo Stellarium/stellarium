@@ -335,32 +335,23 @@
            </widget>
           </item>
           <item>
-           <widget class="QPlainTextEdit" name="logText" >
+           <widget class="QTextBrowser" name="logBrowser" >
             <property name="font" >
              <font>
               <family>Lucida Console</family>
               <kerning>false</kerning>
              </font>
             </property>
-            <property name="acceptDrops" >
-             <bool>false</bool>
-            </property>
-            <property name="horizontalScrollBarPolicy" >
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="undoRedoEnabled" >
-             <bool>false</bool>
-            </property>
             <property name="lineWrapMode" >
-             <enum>QPlainTextEdit::WidgetWidth</enum>
+             <enum>QTextEdit::NoWrap</enum>
             </property>
-            <property name="readOnly" >
-             <bool>true</bool>
+            <property name="acceptRichText" >
+             <bool>false</bool>
             </property>
             <property name="textInteractionFlags" >
              <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
             </property>
-            <property name="backgroundVisible" >
+            <property name="openLinks" >
              <bool>false</bool>
             </property>
            </widget>
