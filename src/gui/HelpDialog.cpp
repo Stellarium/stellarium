@@ -112,7 +112,7 @@ void HelpDialog::updateLog(int)
 
 void HelpDialog::refreshLog()
 {
-	ui->logText->setPlainText(StelApp::getInstance().getLog());
+	ui->logBrowser->setPlainText(StelApp::getInstance().getLog());
 }
 
 void HelpDialog::setKey(QString group, QString oldKey, QString newKey, QString description)
