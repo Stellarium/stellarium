@@ -95,7 +95,7 @@ void StelDialog::setVisible(bool v)
 			proxy->setFocus();
 			return;
 		}
-		dialog = new QDialog(&StelMainGraphicsView::getInstance());
+		dialog = new QDialog(NULL);
 		connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
 		createDialogContent();
 		
