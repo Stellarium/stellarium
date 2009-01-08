@@ -88,7 +88,7 @@ void StelAppGraphicsScene::drawBackground(QPainter* painter, const QRectF &)
 	StelApp::getInstance().update(dt);
 	
 	painter->save();
-	//switchToNativeOpenGLPainting();
+	
 	StelApp::getInstance().glWindowHasBeenResized((int)(width()), (int)(height()));
 	
 	// And draw them
@@ -96,7 +96,6 @@ void StelAppGraphicsScene::drawBackground(QPainter* painter, const QRectF &)
 	StelApp::getInstance().draw();
 	distorter->distort();
 	
-	//revertToQtPainting();
 	painter->restore();
 	
 	// Determines when the next display will need to be triggered
