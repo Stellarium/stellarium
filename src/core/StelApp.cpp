@@ -319,9 +319,9 @@ void StelApp::init()
 	textureMgr->init();
 
 #ifdef SVN_REVISION
-	loadingBar = new StelLoadingBar(12., "logo24bitsbeta.png", QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
+	loadingBar = new StelLoadingBar(12., "logo24bits.png", QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
 #else
-	loadingBar = new StelLoadingBar(12., "logo24bitsbeta.png", PACKAGE_VERSION, 45, 320, 121);
+	loadingBar = new StelLoadingBar(12., "logo24bits.png", PACKAGE_VERSION, 45, 320, 121);
 #endif // SVN_RELEASE
 	
 	downloadMgr = new StelDownloadMgr();
