@@ -102,6 +102,10 @@ void StelMainGraphicsView::init()
 #if QT_VERSION == 0x040400
 	setMatrix(QMatrix(1,0,0,1,0.00000001,0));
 #endif
+	// Bug in the Qt 4.5 beta version
+#if QT_VERSION == 0x040500
+	setMatrix(QMatrix(1,0,0,1,0.00000001,0));
+#endif
 	
 	// Antialiasing works only with SampleBuffer, but it's much slower
 	// setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::HighQualityAntialiasing);
