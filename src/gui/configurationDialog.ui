@@ -395,7 +395,7 @@
                 </sizepolicy>
                </property>
                <property name="text" >
-                <string>Get catalog x of y</string>
+				 <string notr="true">Get catalog x of y</string>
                </property>
                <property name="icon" >
                 <iconset resource="../../data/mainRes.qrc" >
@@ -409,7 +409,7 @@
              <item>
               <widget class="QLabel" name="downloadLabel" >
                <property name="text" >
-                <string>xxx</string>
+				   <string notr="true">xxx</string>
                </property>
               </widget>
              </item>
