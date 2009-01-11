@@ -711,7 +711,7 @@ bool StelGui::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 		animLeftBarTimeLine->setDirection(QTimeLine::Forward);
 		animLeftBarTimeLine->start();
 	}
-	if (autoHideVerticalButtonBar && (x>maxX || y>maxY) && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()>=minX)
+	if (autoHideVerticalButtonBar && (x>maxX+30 || y>maxY+30) && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()>=minX)
 	{
 		animLeftBarTimeLine->setDirection(QTimeLine::Backward);
 		animLeftBarTimeLine->start();
@@ -724,7 +724,7 @@ bool StelGui::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 		animBottomBarTimeLine->setDirection(QTimeLine::Forward);
 		animBottomBarTimeLine->start();
 	}
-	if (autoHideHorizontalButtonBar && (x>maxX || y>maxY) && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()>=0.9999999)
+	if (autoHideHorizontalButtonBar && (x>maxX+30 || y>maxY+30) && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()>=0.9999999)
 	{
 		animBottomBarTimeLine->setDirection(QTimeLine::Backward);
 		animBottomBarTimeLine->start();
