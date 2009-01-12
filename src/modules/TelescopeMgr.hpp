@@ -37,16 +37,15 @@ class StelObject;
 class Telescope;
 class StelPainter;
 
+//! This class manages the controlling of one or more telescopes by one
+//! instance of the stellarium program. "controlling a telescope"
+//! means receiving position information from the telescope
+//! and sending GOTO commands to the telescope.
+//! No esoteric features like motor focus, electric heating and such.
+//! The actual controlling of a telescope is left to the implementation
+//! of the abstract base class Telescope.
 class TelescopeMgr : public StelObjectModule
 {
-	  //! This class manages the controlling of one or more telescopes by one
-	  //! instance of the stellarium program. "controlling a telescope"
-	  //! means receiving position information from the telescope
-	  //! and sending GOTO commands to the telescope.
-	  //! No esoteric features like motor focus, electric heating and such.
-	  //! The actual controlling of a telescope is left to the implementation
-	  //! of the abstract base class Telescope.
-
 	Q_OBJECT;
 
 public:
@@ -70,7 +69,7 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to TelescopeMgr
-	//! send a J2000-goto-command to the specified telescope
+	//! Send a J2000-goto-command to the specified telescope
 	//! @param telescopeNr the number of the telescope
 	//! @param j2000Pos the direction in equatorial J2000 frame
 	void telescopeGoto(int telescopeNr, const Vec3d &j2000Pos);
@@ -102,7 +101,7 @@ public slots:
 	//! Define font size to use for telescope names display
 	void setFontSize(float fontSize);
 	
-	//! For use from the GUI.  The telescope number will be
+	//! For use from the GUI. The telescope number will be
 	//! chosen according to the action which triggered the slot to be
 	//! triggered.
 	void moveTelescopeToSelected(void);
