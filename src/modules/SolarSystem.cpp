@@ -648,8 +648,7 @@ void SolarSystem::loadPlanets()
 		}
 
 		// Create the Planet and add it to the list
-		Planet* p = new Planet(parent,
-					englishName,
+		Planet* p = new Planet(englishName,
 					pd.value(secname+"/lighting").toBool(),
 					pd.value(secname+"/radius").toDouble()/AU,
 					pd.value(secname+"/oblateness", 0.0).toDouble(),
@@ -662,7 +661,8 @@ void SolarSystem::loadPlanets()
 					closeOrbit,
 					pd.value(secname+"/hidden", 0).toBool(),
 					pd.value(secname+"/atmosphere", false).toBool());
-
+		if (parent!=NULL)
+			p->setParent(parent);
 		if (secname=="earth") earth = p;
 		if (secname=="sun") sun = p;
 		if (secname=="moon") moon = p;

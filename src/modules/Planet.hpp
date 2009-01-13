@@ -83,8 +83,7 @@ class Planet : public StelObject
 {
 public:
 	friend class SolarSystem;
-	Planet(Planet *parent,
-	       const QString& englishName,
+	Planet(const QString& englishName,
 	       int flagLighting,
 	       double radius,
 	       double oblateness,
@@ -138,6 +137,9 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to Planet
+	//! Set the planet's parent, i.e. the one around which it's orbiting
+	void setParent(Planet* parent);
+	
 	//! Get the radius of the planet in AU.
 	//! @return the radius of the planet in astronomical units.
 	double getRadius(void) const {return radius;}
