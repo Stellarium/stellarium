@@ -46,8 +46,7 @@ Vec3f Planet::trailColor = Vec3f(1,0.7,0.7);
 StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
 
-Planet::Planet(Planet *parent,
-               const QString& englishName,
+Planet::Planet(const QString& englishName,
                int flagLighting,
                double radius,
                double oblateness,
@@ -59,7 +58,7 @@ Planet::Planet(Planet *parent,
                OsulatingFunctType *osculatingFunc,
                bool acloseOrbit,
                bool hidden,
-	       bool hasAtmosphere) 
+	           bool hasAtmosphere) 
 	: englishName(englishName),
 	  flagLighting(flagLighting),
 	  radius(radius), oneMinusOblateness(1.0-oblateness),
@@ -68,7 +67,7 @@ Planet::Planet(Planet *parent,
 	  lastJD(J2000), 
 	  coordFunc(coordFunc), 
 	  osculatingFunc(osculatingFunc), 
-	  parent(parent), 
+	  parent(NULL), 
 	  hidden(hidden), 
 	  atmosphere(hasAtmosphere)
 {
@@ -77,9 +76,7 @@ Planet::Planet(Planet *parent,
 	deltaJD = JD_SECOND;
 	orbitCached = 0;
 	closeOrbit = acloseOrbit;
-				 
-	if (parent) 
-		parent->satellites.push_back(this);
+
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
 	StelApp::getInstance().getTextureManager().setDefaultParams();
@@ -107,6 +104,13 @@ Planet::~Planet()
 {
 	if (rings)
 		delete rings;
+}
+
+void Planet::setParent(Planet* newParent)
+{
+	Q_ASSERT(newParent);
+	newParent->satellites.push_back(this);
+	parent = newParent;
 }
 
 // Return the information string "ready to print" :)
