@@ -562,6 +562,34 @@ void StelApp::setupLog()
 		infoFile.close();
 	}
 	
+	QString pciData;
+	FILE* lspci = popen("lspci -v", "r");
+	int s;
+	while(!feof(lspci))
+	{
+		char* buf = (char*)malloc(1024);
+		s = fread(buf, 1024, 1, lspci);
+		pciData += buf;
+	}
+	pclose(lspci);
+	QStringList pciLines = pciData.split('\n', QString::SkipEmptyParts);
+	for(int i = 0; i < pciLines.size(); i++)
+	{
+		if(pciLines.at(i).contains("VGA compatible controller"))
+		{
+			StelApp::writeLog(pciLines.at(i));
+			i++;
+			while(i < pciLines.size() && pciLines.at(i).startsWith('\t'))
+			{
+				if(pciLines.at(i).contains("Kernel driver in use"))
+					StelApp::writeLog(pciLines.at(i).trimmed());
+				else if(pciLines.at(i).contains("Kernel modules"))
+					StelApp::writeLog(pciLines.at(i).trimmed());
+				i++;
+			}
+		}
+	}
+	
 	// Aargh Windows API
 #elif defined Q_WS_WIN
 	// Hopefully doesn't throw a linker error on earlier systems. Not like
