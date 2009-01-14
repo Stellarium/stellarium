@@ -57,7 +57,7 @@ public:
 //! Base class for any polygon with a fixed position in the sky
 class StelSkyPolygon : public MultiLevelJsonBase
 {
-	Q_OBJECT;
+	Q_OBJECT
 	
 public:
 	//! Default constructor

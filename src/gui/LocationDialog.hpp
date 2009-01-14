@@ -29,7 +29,7 @@ class StelLocation;
 
 class LocationDialog : public StelDialog
 {
-	Q_OBJECT;
+	Q_OBJECT
 public:
 	LocationDialog();
 	virtual ~LocationDialog();

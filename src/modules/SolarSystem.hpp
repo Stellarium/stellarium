@@ -45,7 +45,7 @@ class QSettings;
 //! This includes the Major Planets, Minor Planets and Comets.
 class SolarSystem : public StelObjectModule
 {
-	Q_OBJECT;
+	Q_OBJECT
 
 public:
 	SolarSystem();

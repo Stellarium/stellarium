@@ -35,7 +35,7 @@ class StelPainter;
 //! eyes adaptation, zoom level and instrument model
 class StelSkyDrawer : public QObject
 {
-	Q_OBJECT;
+	Q_OBJECT
 public:
 	//! Constructor
     StelSkyDrawer(StelCore* core);

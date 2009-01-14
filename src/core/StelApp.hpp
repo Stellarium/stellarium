@@ -61,7 +61,7 @@ class QNetworkReply;
 //! @author Fabien Chereau
 class StelApp : public QObject
 {
-	Q_OBJECT;
+	Q_OBJECT
 	
 public:
 	friend class StelAppGraphicsScene;
@@ -405,6 +405,11 @@ private:
 	int nbDownloadedFiles;
 	//! Store the the summed size of all downloaded files in bytes.
 	qint64 totalDownloadedSize;
+	
+	//! Store the number of downloaded files read from the cache for statistics.
+	int nbUsedCache;
+	//! Store the the summed size of all downloaded files read from the cache in bytes.
+	qint64 totalUsedCacheSize;
 	
 	static QFile logFile;
 	static QString log;

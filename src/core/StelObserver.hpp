@@ -33,7 +33,7 @@ class StelObserver;
 //! Should be renamed as PlanetBasedObserver and derive from a more generical StelObserver class
 class StelObserver : public QObject
 {
-	Q_OBJECT;
+	Q_OBJECT
 	
 public:
 	//! Create a new StelObserver instance which is at a fixed Location

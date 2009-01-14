@@ -29,7 +29,7 @@ class Meteor;
 //! Simulates meteor showers.
 class MeteorMgr : public StelModule
 {
-	Q_OBJECT;
+	Q_OBJECT
 
 public:
 	//! Construct a MeteorMgr object.

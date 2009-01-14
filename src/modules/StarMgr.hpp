@@ -65,7 +65,7 @@ namespace BigStarCatalogExtension {
 //! to the position of the star as observed on the celestial sphere.
 class StarMgr : public StelObjectModule
 {	
-	Q_OBJECT;
+	Q_OBJECT
 	
 public:
 	StarMgr(void);

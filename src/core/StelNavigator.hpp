@@ -48,7 +48,7 @@ class StelLocation;
 //! - coordinate changes
 class StelNavigator : public QObject
 {
-	Q_OBJECT;
+	Q_OBJECT
 	
 public:
 

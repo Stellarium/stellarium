@@ -69,9 +69,6 @@ class StelScriptThread : public QThread
 			// seed the QT PRNG
 			qsrand(QDateTime::currentDateTime().toTime_t());
 
-			// Stop Phonon from complaining
-			QCoreApplication::setApplicationName("stellariumscript");
-
 			// For startup scripts, the gui object might not 
 			// have completed init when we run. Wait for that.
 			StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
