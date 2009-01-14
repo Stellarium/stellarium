@@ -34,7 +34,7 @@ class Ui_searchDialogForm;
 //! tab through those selections.
 class CompletionLabel : public QLabel
 {
-	Q_OBJECT;
+	Q_OBJECT
 
 public:
 	CompletionLabel(QWidget* parent=0);
@@ -60,7 +60,7 @@ private:
 //! The sky object search dialog.
 class SearchDialog : public StelDialog
 {
-	Q_OBJECT;
+	Q_OBJECT
 
 public:
 	SearchDialog();

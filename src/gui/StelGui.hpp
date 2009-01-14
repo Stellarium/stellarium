@@ -57,7 +57,7 @@ private:
 //! It manages the various qt configuration windows, the buttons bars, the list of QAction/shortcuts.
 class StelGui : public StelModule
 {
-	Q_OBJECT;
+	Q_OBJECT
 public:
 	friend class ViewDialog;
 	

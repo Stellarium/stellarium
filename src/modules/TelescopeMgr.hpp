@@ -46,7 +46,7 @@ class StelPainter;
 //! of the abstract base class Telescope.
 class TelescopeMgr : public StelObjectModule
 {
-	Q_OBJECT;
+	Q_OBJECT
 
 public:
 	TelescopeMgr(void);

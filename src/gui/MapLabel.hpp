@@ -27,7 +27,7 @@
 //! Special QLabel that shows a world map 
 class MapLabel : public QLabel
 {
-	Q_OBJECT;
+	Q_OBJECT
 
 public:
 	MapLabel(QWidget *parent = 0);

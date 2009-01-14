@@ -30,7 +30,7 @@ class QResizeEvent;
 //! It is the class creating the singleton GL Widget, the main StelApp instance as well as the main GUI.
 class StelMainGraphicsView : public QGraphicsView
 {
-Q_OBJECT;
+Q_OBJECT
 public:
 	StelMainGraphicsView(QWidget* parent, int argc, char** argv);
 	virtual ~StelMainGraphicsView();

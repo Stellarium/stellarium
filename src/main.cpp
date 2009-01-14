@@ -47,6 +47,7 @@ public:
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
+	QCoreApplication::setApplicationName("stellarium");
 	QApplication::setDesktopSettingsAware(false);
 	QApplication::setStyle(new QPlastiqueStyle());
 	QApplication app(argc, argv);

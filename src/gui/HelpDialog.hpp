@@ -32,7 +32,7 @@ class Ui_helpDialogForm;
 
 class HelpDialog : public StelDialog
 {
-	Q_OBJECT;
+	Q_OBJECT
 public:
 	HelpDialog();
 	~HelpDialog();

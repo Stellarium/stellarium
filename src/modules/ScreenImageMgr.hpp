@@ -76,7 +76,7 @@ protected:
 //! where images are drawn, and not in the script thread.
 class ScreenImageMgr : public StelModule
 {
-	Q_OBJECT;
+	Q_OBJECT
 
 public:
 	//! Construct a LabelMgr object.

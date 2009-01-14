@@ -36,7 +36,7 @@ class StelDownloadMgr;
 
 class ConfigurationDialog : public StelDialog
 {
-	Q_OBJECT;
+	Q_OBJECT
 public:
 	ConfigurationDialog();
 	virtual ~ConfigurationDialog();

@@ -63,7 +63,7 @@ public:
 //! Base class for any astro image with a fixed position
 class StelSkyImageTile : public MultiLevelJsonBase
 {
-	Q_OBJECT;
+	Q_OBJECT
 	
 	friend class StelSkyImageMgr;
 	

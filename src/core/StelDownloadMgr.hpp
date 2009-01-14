@@ -33,7 +33,7 @@ class QFile;
 //! error handling). Settings are remembered between downloads.
 class StelDownloadMgr : public QObject
 {
-	Q_OBJECT;
+	Q_OBJECT
 public:
 	StelDownloadMgr();
 	~StelDownloadMgr();

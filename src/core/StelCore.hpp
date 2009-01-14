@@ -41,7 +41,7 @@ class StelMovementMgr;
 //! @author Fabien Chereau
 class StelCore : public QObject
 {
-	Q_OBJECT;
+	Q_OBJECT
 	Q_ENUMS(ProjectionType);
 
 public:	

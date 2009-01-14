@@ -89,6 +89,8 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	// Stat variables
 	nbDownloadedFiles=0;
 	totalDownloadedSize=0;
+	nbUsedCache=0;
+	totalUsedCacheSize=0;
 	
 	// Used for getting system date formatting
 	setlocale(LC_TIME, "");
@@ -247,6 +249,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 StelApp::~StelApp()
 {
 	qDebug() << qPrintable(QString("Download status: downloaded %1 files amounting %2 kbytes in a session of %3 seconds (average of %4 kB/s).").arg(nbDownloadedFiles).arg(totalDownloadedSize/1024).arg(getTotalRunTime()).arg((double)(totalDownloadedSize/1024)/getTotalRunTime()));
+	qDebug() << qPrintable(QString("+ reused %1 files from cache amounting %2 kbytes.").arg(nbUsedCache).arg(totalUsedCacheSize/1024));
 	
 	stelObjectMgr->unSelect();
 	moduleMgr->unloadModule("StelSkyImageMgr", false);  // We need to delete it afterward
@@ -277,6 +280,11 @@ StelApp::~StelApp()
 	singleton = NULL;
 }
 
+#if QT_VERSION >= 0x040500
+#include <QNetworkDiskCache>
+#include <QDesktopServices>
+#endif
+
 /*************************************************************************
  Return the full name of stellarium, i.e. "stellarium 0.9.0"
 *************************************************************************/
@@ -305,6 +313,18 @@ void StelApp::writeLog(QString msg)
 void StelApp::init()
 {
 	networkAccessManager = new QNetworkAccessManager(this);
+#if QT_VERSION >= 0x040500
+	// Activate http cache if Qt version >= 4.5
+	QNetworkDiskCache* cache = new QNetworkDiskCache(networkAccessManager);
+	QString cachePath = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
+	if (cachePath.isEmpty())
+	{
+		cachePath = StelApp::getInstance().getFileMgr().getUserDir()+"/cache";
+	}
+	qDebug() << "Cache directory is: " << cachePath;
+	cache->setCacheDirectory(cachePath);
+	networkAccessManager->setCache(cache);
+#endif
 	connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(reportFileDownloadFinished(QNetworkReply*)));
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
@@ -1269,6 +1289,15 @@ double StelApp::getTotalRunTime()
 
 void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
 {
-	++nbDownloadedFiles;
-	totalDownloadedSize+=reply->size();
+	bool fromCache = reply->attribute(QNetworkRequest::SourceIsFromCacheAttribute).toBool();
+	if (fromCache)
+	{
+		++nbUsedCache;
+		totalUsedCacheSize+=reply->bytesAvailable();
+	}
+	else
+	{
+		++nbDownloadedFiles;
+		totalDownloadedSize+=reply->bytesAvailable();
+	}
 }

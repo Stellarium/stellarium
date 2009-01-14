@@ -31,7 +31,7 @@ class QStringListModel;
 //! Manage the list of available location.
 class StelLocationMgr : public QObject
 {
-	Q_OBJECT;
+	Q_OBJECT
 	
 public:
 	//! Default constructor
