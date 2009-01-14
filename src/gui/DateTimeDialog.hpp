@@ -27,7 +27,7 @@ class Ui_dateTimeDialogForm;
 
 class DateTimeDialog : public StelDialog
 {
-	Q_OBJECT;
+	Q_OBJECT
 public:
 	DateTimeDialog();
 	~DateTimeDialog();

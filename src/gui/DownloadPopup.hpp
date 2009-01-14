@@ -27,7 +27,7 @@ class Ui_downloadPopupForm;
 
 class DownloadPopup : public StelDialog
 {
-	Q_OBJECT;
+	Q_OBJECT
 public:
 	DownloadPopup();
 	virtual ~DownloadPopup();

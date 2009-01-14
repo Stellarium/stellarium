@@ -26,7 +26,7 @@
 //! Text user interface stub.
 class TextUI : public StelModule
 {
-	Q_OBJECT;
+	Q_OBJECT
 
 public:
 	//! Construct a TextUI object.

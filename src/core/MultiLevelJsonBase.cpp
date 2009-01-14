@@ -36,6 +36,11 @@
 #include <QNetworkReply>
 #include <stdexcept>
 
+// #if QT_VERSION >= 0x040500
+// #include <QNetworkDiskCache>
+// #include <QDesktopServices>
+// #endif
+
 // Init statics
 QNetworkAccessManager* MultiLevelJsonBase::networkAccessManager = NULL;
 
@@ -44,6 +49,17 @@ QNetworkAccessManager& MultiLevelJsonBase::getNetworkAccessManager()
 	if (networkAccessManager==NULL)
 	{
 		networkAccessManager = new QNetworkAccessManager(&StelApp::getInstance());
+// #if QT_VERSION >= 0x040500
+// 		QNetworkDiskCache* cache = new QNetworkDiskCache(networkAccessManager);
+// 		QString cachePath = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
+// 		if (cachePath.isEmpty())
+// 		{
+// 			cachePath = StelApp::getInstance().getFileMgr().getUserDir()+"/cache";
+// 		}
+// 		//qDebug() << cachePath;
+// 		cache->setCacheDirectory(cachePath+"/JSONCache");
+// 		networkAccessManager->setCache(cache);
+// #endif
 		connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), &StelApp::getInstance(), SLOT(reportFileDownloadFinished(QNetworkReply*)));
 	}
 	return *networkAccessManager;
@@ -163,6 +179,7 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 		httpReply = getNetworkAccessManager().get(QNetworkRequest(qurl));
 		//qDebug() << "Started downloading " << httpReply->request().url().path();
 		Q_ASSERT(httpReply->error()==QNetworkReply::NoError);
+		//qDebug() << httpReply->attribute(QNetworkRequest::SourceIsFromCacheAttribute).toBool();
 		connect(httpReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 		//connect(httpReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
 		//connect(httpReply, SIGNAL(destroyed()), this, SLOT(replyDestroyed()));

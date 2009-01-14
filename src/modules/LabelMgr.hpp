@@ -141,7 +141,7 @@ private:
 //! implemented.
 class LabelMgr : public StelModule
 {
-	Q_OBJECT;
+	Q_OBJECT
 
 public:
 	//! Construct a LabelMgr object.

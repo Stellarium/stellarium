@@ -26,7 +26,7 @@
 //! Base class for all the GUI windows in stellarium
 class StelDialog : public QObject
 {
-	Q_OBJECT;
+	Q_OBJECT
 public:
 	StelDialog();
 	virtual ~StelDialog();

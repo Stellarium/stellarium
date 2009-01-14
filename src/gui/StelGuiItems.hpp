@@ -32,7 +32,7 @@ class QTimer;
 // Progess bars in the lower right corner
 class StelProgressBarMgr : public QObject, public QGraphicsItem
 {
-	Q_OBJECT;
+	Q_OBJECT
 public:
 	StelProgressBarMgr(QGraphicsItem* parent);
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
@@ -47,7 +47,7 @@ private:
 // Buttons in the bottom left corner
 class CornerButtons : public QObject, public QGraphicsItem
 {
-Q_OBJECT;
+Q_OBJECT
 public:
 	CornerButtons(QGraphicsItem* parent=NULL);
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
@@ -62,7 +62,7 @@ class StelButton : public QObject, public QGraphicsPixmapItem
 {
 	friend class BottomStelBar;
 	friend class LeftStelBar;
-	Q_OBJECT;
+	Q_OBJECT
 public:
 	//! Constructor
 	//! @param parent the parent item
@@ -128,7 +128,7 @@ private:
 // The button bar on the left containing windows toggle buttons
 class LeftStelBar : public QObject, public QGraphicsItem
 {
-	Q_OBJECT;
+	Q_OBJECT
 public:
 	LeftStelBar(QGraphicsItem* parent);
 	~LeftStelBar();
@@ -151,7 +151,7 @@ private:
 // The button bar on the bottom containing actions toggle buttons
 class BottomStelBar : public QObject, public QGraphicsItem
 {
-	Q_OBJECT;
+	Q_OBJECT
 public:
 	BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft=QPixmap(), const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(), const QPixmap& pixSingle=QPixmap());
 	virtual ~BottomStelBar();

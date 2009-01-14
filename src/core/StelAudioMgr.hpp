@@ -29,7 +29,7 @@
 
 class StelAudioMgr : public QObject
 {
-	Q_OBJECT;
+	Q_OBJECT
 
 public:
 	StelAudioMgr();

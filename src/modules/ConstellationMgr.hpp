@@ -42,7 +42,7 @@ class StelPainter;
 //! It also supports several different sky cultures.
 class ConstellationMgr : public StelObjectModule
 {
-	Q_OBJECT;
+	Q_OBJECT
 	
 public:
 	//! Constructor

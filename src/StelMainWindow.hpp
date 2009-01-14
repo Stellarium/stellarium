@@ -30,7 +30,7 @@
 //! It is the class in charge of switching betwee fullscreen or windowed mode.
 class StelMainWindow : public QMainWindow
 {
-	Q_OBJECT;
+	Q_OBJECT
 public:
 	StelMainWindow(QWidget* parent);
 	

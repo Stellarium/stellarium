@@ -30,7 +30,7 @@ class StelCore;
 //! Abstract base class for managing multi-level tree objects stored in JSON format
 class MultiLevelJsonBase : public QObject
 {
-	Q_OBJECT;
+	Q_OBJECT
 	
 	friend class JsonLoadThread;
 	
