@@ -437,6 +437,18 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	// This is a list of URLs to the child tiles or a list of already loaded map containing child information
 	// (in this later case, the StelSkyImageTile objects will be created later)
 	subTilesUrls = map.value("subTiles").toList();
+	for (QVariantList::Iterator i=subTilesUrls.begin(); i!=subTilesUrls.end();++i)
+	{
+		if (i->type()==QVariant::Map)
+		{
+			// Check if the JSON object is a reference, i.e. if it contains a $ref key
+			QVariantMap m = i->toMap();
+			if (m.size()==1 && m.contains("$ref"))
+			{
+				*i=QString(m["$ref"].toString());
+			}
+		}
+	}
 // 	if (subTilesUrls.size()>10)
 // 	{
 // 		qWarning() << "Large tiles number for " << shortName << ": " << subTilesUrls.size();
