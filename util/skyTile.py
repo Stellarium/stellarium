@@ -7,6 +7,8 @@ import math
 import gzip
 
 def writePolys(pl, f):
+	"""Write a list of polygons pl into the file f.
+	The result is under the form [[[ra1, de1],[ra2, de2],[ra3, de3],[ra4, de4]], [[ra1, de1],[ra2, de2],[ra3, de3]]]"""
 	f.write('[')
 	for idx,poly in enumerate(pl):
 		f.write('[')
@@ -20,6 +22,7 @@ def writePolys(pl, f):
 	f.write(']')
 		
 class SkyImageTile:
+	"""Contains all the properties needed to describe a multiresolution image tile"""
 	def __init__(self):
 		self.subTiles = []
 		self.credits = None
@@ -45,6 +48,7 @@ class SkyImageTile:
 			os.remove(fName)
 
 	def __subOutJSON(self, prefix, qCompress, maxLevelPerFile, f, curLev, outDir):
+		"""Write the tile in the file f"""
 		levTab = ""
 		for i in range(0,curLev):
 			levTab += '\t'
