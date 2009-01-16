@@ -112,7 +112,7 @@ def main():
 	
 	# Create the master level 0 tile, which recursively creates the subtiles
 	masterTile = createTile(0, nbLevels, 0, 0, wcs, im, options.makeImageTiles, options.tileSize)
-	masterTile.maxBrightness = 13.
+	masterTile.maxBrightness = options.maxBrightness
 	masterTile.outputJSON(qCompress=options.gzipCompress, maxLevelPerFile=options.maxLevelPerIndex)
 	
 if __name__ == "__main__":
