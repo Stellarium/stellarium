@@ -81,10 +81,10 @@ class SkyImageTile:
 			# Write the tiles in a new file
 			for st in self.subTiles:
 				st.outputJSON(prefix, qCompress, maxLevelPerFile, outDir)
-				f.write(levTab+'\t\t"'+prefix+"x%.2d_%.2d_%.2d.json" % (2**st.level, st.i, st.j))
+				f.write(levTab+'\t\t{"$ref": "'+prefix+"x%.2d_%.2d_%.2d.json" % (2**st.level, st.i, st.j))
 				if qCompress:
 					f.write(".gz")
-				f.write('",\n')
+				f.write('"},\n')
 		f.seek(-2, os.SEEK_CUR)
 		f.write('\n'+levTab+'\t]\n')
 		f.write(levTab+'}')
