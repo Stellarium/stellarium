@@ -20,13 +20,21 @@ def writePolys(pl, f):
 		if idx!=len(pl)-1:
 			f.write(', ')
 	f.write(']')
-		
+
+class StructCredits:
+	def __init__(self):
+		self.short = None;
+		self.full = None;
+		self.infoUrl = None;
+		return
+
+
 class SkyImageTile:
 	"""Contains all the properties needed to describe a multiresolution image tile"""
 	def __init__(self):
 		self.subTiles = []
-		self.credits = None
-		self.infoUrl = None
+		self.imageCredits = StructCredits()
+		self.serverCredits = StructCredits()
 		self.imageUrl = None
 		self.maxBrightness = None
 		return
@@ -54,26 +62,28 @@ class SkyImageTile:
 			levTab += '\t'
 		
 		f.write(levTab+'{\n')
-		if self.credits:
-			f.write(levTab+'\t"credits" : "'+self.credits+'",\n')
-		if self.infoUrl:
-			f.write(levTab+'\t"infoUrl" : "'+self.infoUrl+'",\n')
+		if self.imageCredits.short!=None or self.imageCredits.full!=None or self.imageCredits.infoUrl!=None:
+			f.write(levTab+'\t"imageCredits": {\n')
+			f.write(levTab+'\t\t"short": '+self.imageCredits.short+',\n')
+			f.write(levTab+'\t\t"short": '+self.imageCredits.full+',\n')
+			f.write(levTab+'\t\t"short": '+self.imageCredits.infoUrl+',\n')
+			f.write(levTab+'\t}\n')
 		if self.imageUrl:
-			f.write(levTab+'\t"imageUrl" : "'+self.imageUrl+'",\n')
-		f.write(levTab+'\t"worldCoords" : ')
+			f.write(levTab+'\t"imageUrl": "'+self.imageUrl+'",\n')
+		f.write(levTab+'\t"worldCoords": ')
 		writePolys(self.skyConvexPolygons, f)
 		f.write(',\n')
-		f.write(levTab+'\t"textureCoords" : ')
+		f.write(levTab+'\t"textureCoords": ')
 		writePolys(self.textureCoords, f)
 		f.write(',\n')
 		if self.maxBrightness:
-			f.write(levTab+'\t"maxBrightness" : %f,\n' % self.maxBrightness)
-		f.write(levTab+'\t"minResolution" : %f' % self.minResolution)
+			f.write(levTab+'\t"maxBrightness": %f,\n' % self.maxBrightness)
+		f.write(levTab+'\t"minResolution": %f' % self.minResolution)
 		if len(self.subTiles)==0:
 			f.write('\n'+levTab+'}')
 			return
 		f.write(',\n')
-		f.write(levTab+'\t"subTiles" : [\n')
+		f.write(levTab+'\t"subTiles": [\n')
 		
 		if curLev+1<maxLevelPerFile:
 			# Write the tiles in the same file
