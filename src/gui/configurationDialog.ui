@@ -147,7 +147,7 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>2</number>
+         <number>0</number>
         </property>
         <property name="iconSize" >
          <size>
@@ -241,7 +241,7 @@
              <item>
               <widget class="QRadioButton" name="allSelectedInfoRadio" >
                <property name="toolTip" >
-                <string>Display all of the information which is available</string>
+                <string>Display all information available</string>
                </property>
                <property name="text" >
                 <string>All available</string>
@@ -251,7 +251,7 @@
              <item>
               <widget class="QRadioButton" name="briefSelectedInfoRadio" >
                <property name="toolTip" >
-                <string>Display only abbreviated information</string>
+                <string>Display less information</string>
                </property>
                <property name="text" >
                 <string>Short</string>
@@ -260,6 +260,9 @@
              </item>
              <item>
               <widget class="QRadioButton" name="noSelectedInfoRadio" >
+               <property name="toolTip" >
+                <string>Display no information</string>
+               </property>
                <property name="text" >
                 <string>None</string>
                </property>
@@ -299,6 +302,9 @@
                    <height>24</height>
                   </size>
                  </property>
+                 <property name="whatsThis" >
+                  <string>Save the settings you've changed this session to be the same the next time you start Stellarium</string>
+                 </property>
                  <property name="text" >
                   <string>Save settings</string>
                  </property>
@@ -306,6 +312,9 @@
                </item>
                <item>
                 <widget class="QPushButton" name="restoreDefaultsButton" >
+                 <property name="whatsThis" >
+                  <string>Restore the default settings that came with Stellarium</string>
+                 </property>
                  <property name="text" >
                   <string>Restore defaults</string>
                  </property>
@@ -356,8 +365,11 @@
              </item>
              <item>
               <widget class="QLabel" name="startupFOVLabel" >
+               <property name="statusTip" >
+                <string>The width of your view when Stellarium starts</string>
+               </property>
                <property name="text" >
-				   <string notr="true">Startup FOV: XX</string>
+                <string>Startup FOV: XX</string>
                </property>
                <property name="textInteractionFlags" >
                 <set>Qt::TextSelectableByMouse</set>
@@ -366,8 +378,11 @@
              </item>
              <item>
               <widget class="QLabel" name="startupDirectionOfViewlabel" >
+               <property name="statusTip" >
+                <string>The direction you're looking when Stellarium starts</string>
+               </property>
                <property name="text" >
-				   <string notr="true">Startup direction of view: xxxx</string>
+                <string>Startup direction of view: xxxx</string>
                </property>
                <property name="textInteractionFlags" >
                 <set>Qt::TextSelectableByMouse</set>
@@ -394,8 +409,11 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="toolTip" >
+                <string>Click here to start downloading</string>
+               </property>
                <property name="text" >
-				 <string notr="true">Get catalog x of y</string>
+                <string>Get catalog x of y</string>
                </property>
                <property name="icon" >
                 <iconset resource="../../data/mainRes.qrc" >
@@ -409,7 +427,7 @@
              <item>
               <widget class="QLabel" name="downloadLabel" >
                <property name="text" >
-				   <string notr="true">xxx</string>
+                <string>xxx</string>
                </property>
               </widget>
              </item>
@@ -428,6 +446,9 @@
              </item>
              <item>
               <widget class="QPushButton" name="downloadRetryButton" >
+               <property name="toolTip" >
+                <string>Restart the download</string>
+               </property>
                <property name="text" >
                 <string>Retry</string>
                </property>
@@ -435,6 +456,9 @@
              </item>
              <item>
               <widget class="QPushButton" name="downloadCancelButton" >
+               <property name="toolTip" >
+                <string>Stop the download. You can always restart it later</string>
+               </property>
                <property name="text" >
                 <string>Cancel</string>
                </property>
@@ -749,6 +773,9 @@
              </item>
              <item row="3" column="0" >
               <widget class="QCheckBox" name="selectSingleConstellationButton" >
+               <property name="statusTip" >
+                <string>Hide other constellations when you click one</string>
+               </property>
                <property name="text" >
                 <string>Select single constellation</string>
                </property>
