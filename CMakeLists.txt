@@ -198,6 +198,6 @@ ENDIF()
 
 ########### Macosx Bundling ###############
 IF(APPLE)
-ADD_CUSTOM_TARGET(macosx_bundle mv ${CMAKE_INSTALL_PREFIX}/bin ${CMAKE_INSTALL_PREFIX}/MacOS COMMAND mv ${CMAKE_INSTALL_PREFIX}/share ${CMAKE_INSTALL_PREFIX}/Resources COMMAND mv ${CMAKE_INSTALL_PREFIX}/Resources/stellarium/* ${CMAKE_INSTALL_PREFIX}/Resources COMMAND rmdir ${CMAKE_INSTALL_PREFIX}/Resources/stellarium COMMAND mkdir ${CMAKE_INSTALL_PREFIX}/Frameworks COMMAND perl util/pkgApp.pl ${CMAKE_INSTALL_PREFIX} MacOS/stellarium Frameworks DEPENDS install WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "making the macosx bundle." VERBATIM)
+ADD_CUSTOM_TARGET(macosx_bundle bash util/macosx_bundle.sh ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} DEPENDS install WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "making the macosx bundle." VERBATIM)
 ENDIF()
 
