@@ -56,33 +56,13 @@ sub recurse {
 	    my $absname = &locateFramework($fwname);
 	    my $arch = &architecture("$absname/$binary");
 
-	    if ( $arch eq $current_arch ) {
-		my $relPath = "\@executable_path/../Frameworks/$current_arch/$fwname/$binary";
-		my $fwPath = "$frameworks_dir/$current_arch/$fwname/$binary";
-
-		my $not_existed = 1;
-		if ( ! -e $fwPath ) {
-		    my $c = "cp -R -p $absname $frameworks_dir/$current_arch/$fwname";
-		    `$c`;
-		} else {
-		    $not_existed = 0;
-		}
-
-		my $c = sprintf($id_inmt, $relPath, $fwPath);
-		`$c`;
-		$c = sprintf($ch_inmt, $name, $relPath, $main_executable);
-		`$c`;
-
-		if ( $not_existed ) {
-		    &recurse($fwPath, $frameworks_dir, $current_arch);
-		}
-	    } elsif ( $arch eq 'fat' ) {
+	    if ( $arch eq $current_arch || $arch eq 'fat' ) {
 		my $relPath = "\@executable_path/../Frameworks/$fwname/$binary";
 		my $fwPath = "$frameworks_dir/$fwname/$binary";
 
 		my $not_existed = 1;
 		if ( ! -e $fwPath ) {
-		    my $c = "cp -R -p $absname $frameworks_dir";
+		    my $c = "cp -R -p $absname $frameworks_dir/$fwname";
 		    `$c`;
 		} else {
 		    $not_existed = 0;
@@ -108,13 +88,13 @@ sub recurse {
 	    my $absname = $name;
 
 	    my $arch = &architecture($absname);
-	    if ( $arch eq $current_arch ) {
-		my $relPath = "\@executable_path/../Frameworks/$arch/$basename";
-		my $fwPath = "$frameworks_dir/$arch/$basename";
+	    if ( $arch eq $current_arch || $arch eq 'fat' ) {
+		my $relPath = "\@executable_path/../Frameworks/$current_arch/$basename";
+		my $fwPath = "$frameworks_dir/$current_arch/$basename";
 
 		my $not_existed = 1;
 		if ( ! -e $fwPath ) {
-		    my $c = "cp $absname $frameworks_dir/$arch";
+		    my $c = "cp $absname $frameworks_dir/$current_arch";
 		    `$c`;
 		} else {
 		    $not_existed = 0;
@@ -147,7 +127,7 @@ sub recurse {
 	    my $absname = "MacOS/" . $name;
 
 	    my $arch = &architecture($absname);
-	    if ( $arch eq $current_arch ) {
+	    if ( $arch eq $current_arch || $arch eq 'fat') {
 		my $relPath = "\@executable_path/$basename";
 
 		my $c = sprintf($id_inmt, $relPath, $absname);

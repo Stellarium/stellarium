@@ -315,12 +315,12 @@ IF(WIN32)
 	)
 ENDIF(WIN32)
 
-IF(MACOSX)
+IF(APPLE)
   SET(stellarium_lib_SRCS 
     ${stellarium_lib_SRCS}
-    stelutils/StelMacosxDirs.cpp
-    stelutils/StelMacosxDirs.hpp)
-ENDIF(MACOSX)
+    core/StelMacosxDirs.cpp
+    core/StelMacosxDirs.hpp)
+ENDIF(APPLE)
 
 SET(stellarium_exe_SRCS
 	main.cpp
