@@ -31,6 +31,11 @@
 // Uncomment to try out vertex buffers
 //#define USE_VERTEX_BUFFERS 1
 
+inline bool myisnan(double value)
+{
+	return value != value;
+}
+
 Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL), colorGrid(NULL), indices(NULL),
             averageLuminance(0.f), eclipseFactor(1.), lightPollutionLuminance(0)
 {
@@ -127,6 +132,11 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		
 	}
 
+	if (myisnan(_sunPos.length()))
+		_sunPos.set(0.,0.,-1.*AU);
+	if (myisnan(moonPos.length()))
+		moonPos.set(0.,0.,-1.*AU);
+	
 	// Update the eclipse intensity factor to apply on atmosphere model
 	// these are for radii
 	const double sun_angular_size = atan(696000./AU/_sunPos.length());
