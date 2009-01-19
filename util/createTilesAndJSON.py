@@ -71,22 +71,22 @@ def createTile(currentLevel, maxLevel, i, j, wcs, im, doImage, tileSize):
 
 
 def main():
-	parser = OptionParser(usage="%prog [options]", version="0.1", description="This tool generates multi-resolution astronomical images from large image for display by Stellarium/VirGO. The passed image is split in small tiles and the corresponding index JSON files are generated. Everything is output in the current directory.", formatter=IndentedHelpFormatter(max_help_position=33, width=80))
+	parser = OptionParser(usage="%prog imageFile [options]", version="0.1", description="This tool generates multi-resolution astronomical images from large image for display by Stellarium/VirGO. The passed image is split in small tiles and the corresponding index JSON files are generated. Everything is output in the current directory.", formatter=IndentedHelpFormatter(max_help_position=33, width=80))
 	parser.add_option("-f", "--fitsheader", dest="fitsHeader", help="use the FITS header from FILE to get WCS info", metavar="FILE")
 	parser.add_option("-g", "--gzipcompress", dest="gzipCompress", action="store_true", default=False, help="compress the produced JSON index using gzip")
 	parser.add_option("-t", "--tilesize", dest="tileSize", type="int", default=256, help="output image tiles size in pixel (default: %default)", metavar="SIZE")
 	parser.add_option("-i", "--onlyindex", dest="makeImageTiles", action="store_false", default=True, help="output only the JSON index")
-	parser.add_option("-l", "--maxLevelPerIndex", dest="maxLevelPerIndex", default=3, type="int", help="put up to 3 levels per index file (default: %default)", metavar="MAX")
+	parser.add_option("-l", "--maxLevPerIndex", dest="maxLevelPerIndex", default=3, type="int", help="put up to MAX levels per index file (default: %default)", metavar="MAX")
 	parser.add_option("-b", "--maxBrightness", dest="maxBrightness", default=13., type="float", help="the surface brightness of a white pixel of the image in V mag/arcmin^2 (default: %default)", metavar="MAG")
 	(options, args) = parser.parse_args()
 	
 	headerFile = None
 	if len(args) < 1:
-		print "Usage: "+sys.argv[0]+" imageFile [Options]"
+		print "Usage: "+os.path.basename(sys.argv[0])+" imageFile [options]"
 		exit(0)		
 	imgFile = sys.argv[1]
 	
-	# We know have valid arguments
+	# We now have valid arguments
 	
 	if options.fitsHeader!=None:
 		# Try to read the provided FITS header file to extract the WCS
@@ -99,8 +99,7 @@ def main():
 		worldCoord = astWCS.wcs.wcskinit(nxpix, nypix, ctype1, ctype2, crpix1, crpix2, crval1, crval2, cd, cdelt1, cdelt2, crota, equinox, epoch)
 		coordFrameCstr = 'J2000'
 		wcs = astWCS.wcs.wcsininit(worldCoord, coordFrameCstr);
-	
-	#[nxpix, nypix, ctype1, ctype2, crpix1, crpix2, crval1, crval2, cd, cdelt1, cdelt2, crota, equinox, epoch]"
+		#[nxpix, nypix, ctype1, ctype2, crpix1, crpix2, crval1, crval2, cd, cdelt1, cdelt2, crota, equinox, epoch]"
 
 	
 	im = Image.open(imgFile)
