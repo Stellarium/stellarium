@@ -315,18 +315,18 @@ void StelApp::writeLog(QString msg)
 void StelApp::init()
 {
 	networkAccessManager = new QNetworkAccessManager(this);
-#if QT_VERSION >= 0x040500
-	// Activate http cache if Qt version >= 4.5
-	QNetworkDiskCache* cache = new QNetworkDiskCache(networkAccessManager);
-	QString cachePath = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
-	if (cachePath.isEmpty())
-	{
-		cachePath = StelApp::getInstance().getFileMgr().getUserDir()+"/cache";
-	}
-	qDebug() << "Cache directory is: " << cachePath;
-	cache->setCacheDirectory(cachePath);
-	networkAccessManager->setCache(cache);
-#endif
+// #if QT_VERSION >= 0x040500
+// 	// Activate http cache if Qt version >= 4.5
+// 	QNetworkDiskCache* cache = new QNetworkDiskCache(networkAccessManager);
+// 	QString cachePath = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
+// 	if (cachePath.isEmpty())
+// 	{
+// 		cachePath = StelApp::getInstance().getFileMgr().getUserDir()+"/cache";
+// 	}
+// 	qDebug() << "Cache directory is: " << cachePath;
+// 	cache->setCacheDirectory(cachePath);
+// 	networkAccessManager->setCache(cache);
+// #endif
 	connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(reportFileDownloadFinished(QNetworkReply*)));
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
