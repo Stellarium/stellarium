@@ -153,7 +153,10 @@ bool StelTexture::bind()
 	if (downloaded==false && httpReply==NULL && fullPath.startsWith("http://"))
 	{
 		// We need to start download
-		httpReply = StelApp::getInstance().getNetworkAccessManager()->get(QNetworkRequest(QUrl(fullPath)));
+		QNetworkRequest req = QNetworkRequest(QUrl(fullPath));
+		// Define that preference should be given to cached files (no etag checks)
+		req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
+		httpReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		connect(httpReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 		return false;
 	}
