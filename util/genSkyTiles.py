@@ -1,4 +1,21 @@
 #!/usr/bin/python
+# Copyright (C) 2009 Fabien Chereau
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ 
+
 # Tool which converts a large image + FITS headers into a bunch of multiresolution tiles + JSON description files
 # Fabien Chereau fchereau@eso.org
 
@@ -71,6 +88,7 @@ def createTile(currentLevel, maxLevel, i, j, wcs, im, doImage, tileSize):
 
 
 def main():
+	# Program options management
 	parser = OptionParser(usage="%prog imageFile [options]", version="0.1", description="This tool generates multi-resolution astronomical images from large image for display by Stellarium/VirGO. The passed image is split in small tiles and the corresponding index JSON files are generated. Everything is output in the current directory.", formatter=IndentedHelpFormatter(max_help_position=33, width=80))
 	parser.add_option("-f", "--fitsheader", dest="fitsHeader", help="use the FITS header from FILE to get WCS info", metavar="FILE")
 	parser.add_option("-g", "--gzipcompress", dest="gzipCompress", action="store_true", default=False, help="compress the produced JSON index using gzip")
@@ -78,19 +96,24 @@ def main():
 	parser.add_option("-i", "--onlyindex", dest="makeImageTiles", action="store_false", default=True, help="output only the JSON index")
 	parser.add_option("-l", "--maxLevPerIndex", dest="maxLevelPerIndex", default=3, type="int", help="put up to MAX levels per index file (default: %default)", metavar="MAX")
 	parser.add_option("-b", "--maxBrightness", dest="maxBrightness", default=13., type="float", help="the surface brightness of a white pixel of the image in V mag/arcmin^2 (default: %default)", metavar="MAG")
-	parser.add_option("--imgShortName", dest="imgShortName", type="string", help="the short name of the image", metavar="STR")
-	parser.add_option("--imgFullName", dest="imgFullName", type="string", help="the full name of the image", metavar="STR")
+	parser.add_option("--imgInfoShort", dest="imgInfoShort", type="string", help="the short name of the image", metavar="STR")
+	parser.add_option("--imgInfoFull", dest="imgInfoFull", type="string", help="the full name of the image", metavar="STR")
 	parser.add_option("--imgInfoUrl", dest="imgInfoUrl", type="string", help="the info URL about the image", metavar="STR")
+	parser.add_option("--imgCreditsShort", dest="imgCreditsShort", type="string", help="the short name of the image creator", metavar="STR")
+	parser.add_option("--imgCreditsFull", dest="imgCreditsFull", type="string", help="the full name of the image creator", metavar="STR")
+	parser.add_option("--imgCreditsInfoUrl", dest="imgCreditsInfoUrl", type="string", help="the info URL about the image creator", metavar="STR")
+	parser.add_option("--srvCreditsShort", dest="serverCreditsShort", type="string", help="the short name of the hosting server", metavar="STR")
+	parser.add_option("--srvCreditsFull", dest="serverCreditsFull", type="string", help="the full name of the hosting server", metavar="STR")
+	parser.add_option("--srvCreditsInfoUrl", dest="serverCreditsInfoUrl", type="string", help="the info URL about the hosting server", metavar="STR")
 	(options, args) = parser.parse_args()
 	
-	headerFile = None
+	# Need at least an image file as input
 	if len(args) < 1:
 		print "Usage: "+os.path.basename(sys.argv[0])+" imageFile [options]"
 		exit(0)		
 	imgFile = sys.argv[1]
 	
 	# We now have valid arguments
-	
 	if options.fitsHeader!=None:
 		# Try to read the provided FITS header file to extract the WCS
 		wcs = astWCS.WCS(options.fitsHeader)
@@ -114,10 +137,20 @@ def main():
 	
 	# Create the master level 0 tile, which recursively creates the subtiles
 	masterTile = createTile(0, nbLevels, 0, 0, wcs, im, options.makeImageTiles, options.tileSize)
+	
+	# Add some top-level informations
 	masterTile.maxBrightness = options.maxBrightness
-	masterTile.imageInfo.short = options.imgShortName
-	masterTile.imageInfo.full = options.imgFullName
+	masterTile.imageInfo.short = options.imgInfoShort
+	masterTile.imageInfo.full = options.imgInfoFull
 	masterTile.imageInfo.infoUrl = options.imgInfoUrl
+	masterTile.imageCredits.short = options.imgCreditsShort
+	masterTile.imageCredits.full = options.imgCreditsFull
+	masterTile.imageCredits.infoUrl = options.imgCreditsInfoUrl
+	masterTile.serverCredits.short = options.serverCreditsShort
+	masterTile.serverCredits.full = options.serverCreditsFull
+	masterTile.serverCredits.infoUrl = options.serverCreditsInfoUrl
+	
+	# masterTile contains the whole tree, just need to output it as desired
 	masterTile.outputJSON(qCompress=options.gzipCompress, maxLevelPerFile=options.maxLevelPerIndex)
 	
 if __name__ == "__main__":
