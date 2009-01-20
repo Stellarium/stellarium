@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# Simple script which convert a large image + FITS headers into a bunch of multiresolution tiles + JSON description files
+# Tool which converts a large image + FITS headers into a bunch of multiresolution tiles + JSON description files
 # Fabien Chereau fchereau@eso.org
 
 import sys
