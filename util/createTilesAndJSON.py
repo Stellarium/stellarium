@@ -78,6 +78,9 @@ def main():
 	parser.add_option("-i", "--onlyindex", dest="makeImageTiles", action="store_false", default=True, help="output only the JSON index")
 	parser.add_option("-l", "--maxLevPerIndex", dest="maxLevelPerIndex", default=3, type="int", help="put up to MAX levels per index file (default: %default)", metavar="MAX")
 	parser.add_option("-b", "--maxBrightness", dest="maxBrightness", default=13., type="float", help="the surface brightness of a white pixel of the image in V mag/arcmin^2 (default: %default)", metavar="MAG")
+	parser.add_option("--imgShortName", dest="imgShortName", type="string", help="the short name of the image", metavar="STR")
+	parser.add_option("--imgFullName", dest="imgFullName", type="string", help="the full name of the image", metavar="STR")
+	parser.add_option("--imgInfoUrl", dest="imgInfoUrl", type="string", help="the info URL about the image", metavar="STR")
 	(options, args) = parser.parse_args()
 	
 	headerFile = None
@@ -112,6 +115,9 @@ def main():
 	# Create the master level 0 tile, which recursively creates the subtiles
 	masterTile = createTile(0, nbLevels, 0, 0, wcs, im, options.makeImageTiles, options.tileSize)
 	masterTile.maxBrightness = options.maxBrightness
+	masterTile.imageInfo.short = options.imgShortName
+	masterTile.imageInfo.full = options.imgFullName
+	masterTile.imageInfo.infoUrl = options.imgInfoUrl
 	masterTile.outputJSON(qCompress=options.gzipCompress, maxLevelPerFile=options.maxLevelPerIndex)
 	
 if __name__ == "__main__":

@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>577</width>
-    <height>577</height>
+    <width>488</width>
+    <height>511</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -147,7 +147,7 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>3</number>
         </property>
         <property name="iconSize" >
          <size>
@@ -167,9 +167,6 @@
            <normaloff>:/graphicGui/gui/tabicon-main.png</normaloff>:/graphicGui/gui/tabicon-main.png</iconset>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_6" >
-          <property name="margin" >
-           <number>0</number>
-          </property>
           <item>
            <widget class="QGroupBox" name="groupBox_2" >
             <property name="sizePolicy" >
@@ -393,79 +390,17 @@
            </widget>
           </item>
           <item>
-           <widget class="QGroupBox" name="contentBox" >
-            <property name="title" >
-             <string>Star catalog updates</string>
+           <spacer name="verticalSpacer_4" >
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QCommandLinkButton" name="getStarsButton" >
-               <property name="sizePolicy" >
-                <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="toolTip" >
-                <string>Click here to start downloading</string>
-               </property>
-               <property name="text" >
-                <string>Get catalog x of y</string>
-               </property>
-               <property name="icon" >
-                <iconset resource="../../data/mainRes.qrc" >
-                 <normaloff>:/graphicGui/gui/btTimeRealtime-off.png</normaloff>:/graphicGui/gui/btTimeRealtime-off.png</iconset>
-               </property>
-               <property name="description" >
-                <string>Download this file to view even more stars</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="downloadLabel" >
-               <property name="text" >
-                <string>xxx</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_5" >
-               <property name="orientation" >
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0" >
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="downloadRetryButton" >
-               <property name="toolTip" >
-                <string>Restart the download</string>
-               </property>
-               <property name="text" >
-                <string>Retry</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="downloadCancelButton" >
-               <property name="toolTip" >
-                <string>Stop the download. You can always restart it later</string>
-               </property>
-               <property name="text" >
-                <string>Cancel</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>20</width>
+              <height>74</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>
@@ -477,10 +412,7 @@
           <iconset resource="../../data/mainRes.qrc" >
            <normaloff>:/graphicGui/gui/tabicon-navigation.png</normaloff>:/graphicGui/gui/tabicon-navigation.png</iconset>
          </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout" >
-          <property name="spacing" >
-           <number>0</number>
-          </property>
+         <layout class="QVBoxLayout" name="verticalLayout_7" >
           <property name="margin" >
            <number>0</number>
           </property>
@@ -677,6 +609,77 @@
            </widget>
           </item>
           <item>
+           <widget class="QGroupBox" name="groupBox_9" >
+            <property name="title" >
+             <string>Other</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout" >
+             <property name="margin" >
+              <number>0</number>
+             </property>
+             <item>
+              <layout class="QHBoxLayout" name="_8" >
+               <item>
+                <widget class="QCheckBox" name="mouseTimeoutCheckbox" >
+                 <property name="toolTip" >
+                  <string>Hides the mouse cursor when inactive</string>
+                 </property>
+                 <property name="text" >
+                  <string>Mouse cursor timeout (seconds):</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer" >
+                 <property name="orientation" >
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0" >
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="mouseTimeoutSpinBox" >
+                 <property name="maximumSize" >
+                  <size>
+                   <width>16777215</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="decimals" >
+                  <number>1</number>
+                 </property>
+                 <property name="minimum" >
+                  <double>0.000000000000000</double>
+                 </property>
+                 <property name="maximum" >
+                  <double>3600.000000000000000</double>
+                 </property>
+                 <property name="value" >
+                  <double>10.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="showFlipButtonsCheckbox" >
+               <property name="toolTip" >
+                <string>Toggle vertical and horizontal image flip buttons.</string>
+               </property>
+               <property name="text" >
+                <string>Show flip buttons</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer_2" >
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
@@ -700,28 +703,9 @@
            <normaloff>:/graphicGui/gui/tabicon-tools.png</normaloff>:/graphicGui/gui/tabicon-tools.png</iconset>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_4" >
-          <item>
-           <widget class="QGroupBox" name="groupBox_8" >
-            <property name="title" >
-             <string>Amateur astronomer options</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_7" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QCheckBox" name="showFlipButtonsCheckbox" >
-               <property name="toolTip" >
-                <string>Toggle vertical and horizontal image flip buttons.</string>
-               </property>
-               <property name="text" >
-                <string>Show flip buttons</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
+          <property name="margin" >
+           <number>0</number>
+          </property>
           <item>
            <widget class="QGroupBox" name="groupBox_7" >
             <property name="title" >
@@ -835,62 +819,76 @@
            </widget>
           </item>
           <item>
-           <widget class="QGroupBox" name="groupBox_9" >
+           <widget class="QGroupBox" name="contentBox" >
             <property name="title" >
-             <string>Other</string>
+             <string>Star catalog updates</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_12" >
+            <layout class="QHBoxLayout" name="horizontalLayout" >
              <property name="margin" >
               <number>0</number>
              </property>
              <item>
-              <layout class="QHBoxLayout" name="_8" >
-               <item>
-                <widget class="QCheckBox" name="mouseTimeoutCheckbox" >
-                 <property name="toolTip" >
-                  <string>Hides the mouse cursor when inactive</string>
-                 </property>
-                 <property name="text" >
-                  <string>Mouse cursor timeout (seconds):</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer" >
-                 <property name="orientation" >
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0" >
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="mouseTimeoutSpinBox" >
-                 <property name="maximumSize" >
-                  <size>
-                   <width>16777215</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="decimals" >
-                  <number>1</number>
-                 </property>
-                 <property name="minimum" >
-                  <double>0.000000000000000</double>
-                 </property>
-                 <property name="maximum" >
-                  <double>3600.000000000000000</double>
-                 </property>
-                 <property name="value" >
-                  <double>10.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+              <widget class="QCommandLinkButton" name="getStarsButton" >
+               <property name="sizePolicy" >
+                <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="toolTip" >
+                <string>Click here to start downloading</string>
+               </property>
+               <property name="text" >
+                <string>Get catalog x of y</string>
+               </property>
+               <property name="icon" >
+                <iconset resource="../../data/mainRes.qrc" >
+                 <normaloff>:/graphicGui/gui/btTimeRealtime-off.png</normaloff>:/graphicGui/gui/btTimeRealtime-off.png</iconset>
+               </property>
+               <property name="description" >
+                <string>Download this file to view even more stars</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="downloadLabel" >
+               <property name="text" >
+                <string>xxx</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_5" >
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0" >
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="downloadRetryButton" >
+               <property name="toolTip" >
+                <string>Restart the download</string>
+               </property>
+               <property name="text" >
+                <string>Retry</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="downloadCancelButton" >
+               <property name="toolTip" >
+                <string>Stop the download. You can always restart it later</string>
+               </property>
+               <property name="text" >
+                <string>Cancel</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -919,6 +917,9 @@
            <normaloff>:/graphicGui/gui/tabicon-scripts.png</normaloff>:/graphicGui/gui/tabicon-scripts.png</iconset>
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_6" >
+          <property name="margin" >
+           <number>0</number>
+          </property>
           <item>
            <widget class="QListWidget" name="scriptListWidget" />
           </item>
@@ -928,61 +929,73 @@
              <widget class="QTextBrowser" name="scriptInfoBrowser" />
             </item>
             <item>
-             <widget class="QLabel" name="scriptStatusLabel" >
-              <property name="text" >
-               <string/>
+             <widget class="QGroupBox" name="groupBox_8" >
+              <property name="title" >
+               <string>Options</string>
               </property>
+              <layout class="QVBoxLayout" name="verticalLayout_9" >
+               <property name="margin" >
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="scriptStatusLabel" >
+                 <property name="text" >
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="closeWindowAtScriptRunCheckbox" >
+                 <property name="text" >
+                  <string>Close window when script runs</string>
+                 </property>
+                 <property name="checked" >
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_4" >
+                 <item>
+                  <widget class="QPushButton" name="runScriptButton" >
+                   <property name="enabled" >
+                    <bool>true</bool>
+                   </property>
+                   <property name="toolTip" >
+                    <string>Run the selected script</string>
+                   </property>
+                   <property name="text" >
+                    <string/>
+                   </property>
+                   <property name="icon" >
+                    <iconset resource="../../data/mainRes.qrc" >
+                     <normaloff>:/graphicGui/gui/btScriptRun-on.png</normaloff>
+                     <disabledoff>:/graphicGui/gui/btScriptRun-off.png</disabledoff>:/graphicGui/gui/btScriptRun-on.png</iconset>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="stopScriptButton" >
+                   <property name="enabled" >
+                    <bool>true</bool>
+                   </property>
+                   <property name="toolTip" >
+                    <string>Stop a running script</string>
+                   </property>
+                   <property name="text" >
+                    <string/>
+                   </property>
+                   <property name="icon" >
+                    <iconset resource="../../data/mainRes.qrc" >
+                     <normaloff>:/graphicGui/gui/btScriptStop-on.png</normaloff>
+                     <disabledoff>:/graphicGui/gui/btScriptStop-off.png</disabledoff>:/graphicGui/gui/btScriptStop-on.png</iconset>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
              </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="closeWindowAtScriptRunCheckbox" >
-              <property name="text" >
-               <string>Close window when script runs</string>
-              </property>
-              <property name="checked" >
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_4" >
-              <item>
-               <widget class="QPushButton" name="runScriptButton" >
-                <property name="enabled" >
-                 <bool>true</bool>
-                </property>
-                <property name="toolTip" >
-                 <string>Run the selected script</string>
-                </property>
-                <property name="text" >
-                 <string/>
-                </property>
-                <property name="icon" >
-                 <iconset resource="../../data/mainRes.qrc" >
-                  <normaloff>:/graphicGui/gui/btScriptRun-on.png</normaloff>
-                  <disabledoff>:/graphicGui/gui/btScriptRun-off.png</disabledoff>:/graphicGui/gui/btScriptRun-on.png</iconset>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="stopScriptButton" >
-                <property name="enabled" >
-                 <bool>true</bool>
-                </property>
-                <property name="toolTip" >
-                 <string>Stop a running script</string>
-                </property>
-                <property name="text" >
-                 <string/>
-                </property>
-                <property name="icon" >
-                 <iconset resource="../../data/mainRes.qrc" >
-                  <normaloff>:/graphicGui/gui/btScriptStop-on.png</normaloff>
-                  <disabledoff>:/graphicGui/gui/btScriptStop-off.png</disabledoff>:/graphicGui/gui/btScriptStop-on.png</iconset>
-                </property>
-               </widget>
-              </item>
-             </layout>
             </item>
            </layout>
           </item>
@@ -991,9 +1004,12 @@
        </widget>
       </item>
      </layout>
+     <zorder>configurationTabWidget</zorder>
     </widget>
    </item>
   </layout>
+  <zorder>LocationBar</zorder>
+  <zorder>viewContent</zorder>
  </widget>
  <customwidgets>
   <customwidget>

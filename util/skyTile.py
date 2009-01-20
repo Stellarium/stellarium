@@ -35,6 +35,7 @@ class SkyImageTile:
 		self.subTiles = []
 		self.imageCredits = StructCredits()
 		self.serverCredits = StructCredits()
+		self.imageInfo = StructCredits()
 		self.imageUrl = None
 		self.maxBrightness = None
 		return
@@ -62,11 +63,32 @@ class SkyImageTile:
 			levTab += '\t'
 		
 		f.write(levTab+'{\n')
+		if self.imageInfo.short!=None or self.imageInfo.full!=None or self.imageInfo.infoUrl!=None:
+			f.write(levTab+'\t"imageInfo": {\n')
+			if self.imageInfo.short!=None:
+				f.write(levTab+'\t\t"short": '+self.imageInfo.short+',\n')
+			if self.imageInfo.full!=None:
+				f.write(levTab+'\t\t"full": '+self.imageInfo.full+',\n')
+			if self.imageInfo.infoUrl!=None:
+				f.write(levTab+'\t\t"infoUrl": '+self.imageInfo.infoUrl+',\n')
+			f.write(levTab+'\t}\n')
 		if self.imageCredits.short!=None or self.imageCredits.full!=None or self.imageCredits.infoUrl!=None:
 			f.write(levTab+'\t"imageCredits": {\n')
-			f.write(levTab+'\t\t"short": '+self.imageCredits.short+',\n')
-			f.write(levTab+'\t\t"short": '+self.imageCredits.full+',\n')
-			f.write(levTab+'\t\t"short": '+self.imageCredits.infoUrl+',\n')
+			if self.imageCredits.short!=None:
+				f.write(levTab+'\t\t"short": '+self.imageCredits.short+',\n')
+			if self.imageCredits.full!=None:
+				f.write(levTab+'\t\t"full": '+self.imageCredits.full+',\n')
+			if self.imageCredits.infoUrl!=None:
+				f.write(levTab+'\t\t"infoUrl": '+self.imageCredits.infoUrl+',\n')
+			f.write(levTab+'\t}\n')
+		if self.serverCredits.short!=None or self.serverCredits.full!=None or self.serverCredits.infoUrl!=None:
+			f.write(levTab+'\t"serverCredits": {\n')
+			if self.serverCredits.short!=None:
+				f.write(levTab+'\t\t"short": '+self.serverCredits.short+',\n')
+			if self.serverCredits.full!=None:
+				f.write(levTab+'\t\t"full": '+self.serverCredits.full+',\n')
+			if self.serverCredits.infoUrl!=None:
+				f.write(levTab+'\t\t"infoUrl": '+self.serverCredits.infoUrl+',\n')
 			f.write(levTab+'\t}\n')
 		if self.imageUrl:
 			f.write(levTab+'\t"imageUrl": "'+self.imageUrl+'",\n')
