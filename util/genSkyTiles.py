@@ -49,6 +49,7 @@ def createTile(currentLevel, maxLevel, i, j, wcs, im, doImage, tileSize):
 	# Create the jpg sub tile
 	realTileSize = tileSize*2**(maxLevel-currentLevel-1)
 	box = ( i*realTileSize, j*realTileSize, min((i+1)*realTileSize, im.size[0]), min((j+1)*realTileSize, im.size[1]) )
+	print box
 	if (box[0]>=im.size[0] or box[1]>=im.size[1]):
 		return None
 	imgName = 'x%.2i_%.2i_%.2i.jpg' % (2**currentLevel, i, j)
@@ -119,15 +120,52 @@ def main():
 		# Try to read the provided FITS header file to extract the WCS
 		wcs = astWCS.WCS(options.fitsHeader)
 	else:
-		# Else try to generate the WCS from the passed options
-		print "WCS options not yet supported, you need to give a fits header!"
-		exit(0)
-		(nxpix, nypix, ctype1, ctype2, crpix1, crpix2, crval1, crval2, cd, cdelt1, cdelt2, crota, equinox, epoch) = sys.argv[2:]
-		worldCoord = astWCS.wcs.wcskinit(nxpix, nypix, ctype1, ctype2, crpix1, crpix2, crval1, crval2, cd, cdelt1, cdelt2, crota, equinox, epoch)
-		coordFrameCstr = 'J2000'
-		wcs = astWCS.wcs.wcsininit(worldCoord, coordFrameCstr);
-		#[nxpix, nypix, ctype1, ctype2, crpix1, crpix2, crval1, crval2, cd, cdelt1, cdelt2, crota, equinox, epoch]"
-
+		# Else try to generate the WCS from the xmp informations contained in the file header
+		import libxmp
+		print "Try to import WCS info from the XMP headers in the image"
+		libxmp.XMPFiles.initialize()
+		xmpfile = libxmp.XMPFiles()
+		xmpfile.open_file(imgFile, libxmp.consts.XMP_OPEN_READ)
+		xmp = xmpfile.get_xmp()
+		ns = 'http://www.communicatingastronomy.org/avm/1.0/'
+		nxpix=int(xmp.get_array_item(ns, 'Spatial.ReferenceDimension', 1).keys()[0])
+		nypix=int(xmp.get_array_item(ns, 'Spatial.ReferenceDimension', 2).keys()[0])
+		ctype1='RA---TAN'
+		ctype2='DEC--TAN'
+		crpix1=float(xmp.get_array_item(ns, 'Spatial.ReferencePixel', 1).keys()[0])
+		crpix2=float(xmp.get_array_item(ns, 'Spatial.ReferencePixel', 2).keys()[0])
+		crval1=float(xmp.get_array_item(ns, 'Spatial.ReferenceValue', 1).keys()[0])
+		crval2=float(xmp.get_array_item(ns, 'Spatial.ReferenceValue', 2).keys()[0])
+		cdelt1=float(xmp.get_array_item(ns, 'Spatial.Scale', 1).keys()[0])
+		cdelt2=float(xmp.get_array_item(ns, 'Spatial.Scale', 2).keys()[0])
+		crota=xmp.get_property_float(ns, "Spatial.Rotation")
+		equinox=xmp.get_property(ns, "Spatial.Equinox")
+		if equinox=='J2000':
+			equinox=2000
+		elif equinox=='B1950':
+			equinox=1950
+		else:
+			equinox=float(equinox)
+		epoch=0.
+		coordFrameCstr=xmp.get_property(ns, "Spatial.CoordinateFrame")
+		
+		header = astWCS.pyfits.Header()
+		header.update('SIMPLE', 'T')
+		header.update('BITPIX', 8)
+		header.update('NAXIS', 2)
+		header.update('NAXIS1', nxpix)
+		header.update('NAXIS2', nypix)
+		header.update('CDELT1', cdelt1)
+		header.update('CDELT2', cdelt2)
+		header.update('CTYPE1', 'RA---TAN')
+		header.update('CTYPE2', 'DEC--TAN')
+		header.update('CRVAL1', crval1)
+		header.update('CRVAL2', crval2)
+		header.update('CRPIX1', crpix1)
+		header.update('CRPIX2', crpix2)
+		header.update('CROTA', crota)
+		header.update('EQUINOX', equinox)
+		wcs = astWCS.WCS(header, mode='pyfits')
 	
 	im = Image.open(imgFile)
 	
