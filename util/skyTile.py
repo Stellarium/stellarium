@@ -77,15 +77,15 @@ class SkyImageTile:
 		if self.imageInfo.short!=None or self.imageInfo.full!=None or self.imageInfo.infoUrl!=None:
 			f.write(levTab+'\t"imageInfo": {\n')
 			self.imageInfo.outJSON(f, levTab)
-			f.write(levTab+'\t}\n')
+			f.write(levTab+'\t},\n')
 		if self.imageCredits.short!=None or self.imageCredits.full!=None or self.imageCredits.infoUrl!=None:
 			f.write(levTab+'\t"imageCredits": {\n')
 			self.imageInfo.outJSON(f, levTab)
-			f.write(levTab+'\t}\n')
+			f.write(levTab+'\t},\n')
 		if self.serverCredits.short!=None or self.serverCredits.full!=None or self.serverCredits.infoUrl!=None:
 			f.write(levTab+'\t"serverCredits": {\n')
 			self.imageInfo.outJSON(f, levTab)
-			f.write(levTab+'\t}\n')
+			f.write(levTab+'\t},\n')
 		if self.imageUrl:
 			f.write(levTab+'\t"imageUrl": "'+self.imageUrl+'",\n')
 		f.write(levTab+'\t"worldCoords": ')
