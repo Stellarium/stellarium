@@ -171,7 +171,7 @@ def main():
 	nbTileX = (im.size[0]+options.tileSize)//options.tileSize
 	nbTileY = (im.size[1]+options.tileSize)//options.tileSize
 	nbLevels = int(math.log(max(nbTileX, nbTileY))/math.log(2)+1)
-	print "Will tesselate image (",im.size[0],"x",im.size[1],") in", nbTileX,'x',nbTileY,'tiles on', nbLevels, 'levels'
+	print "Will tesselate image (",im.size[0],"x",im.size[1],") in", nbTileX,'x',nbTileY,'tiles on', nbLevels+1, 'levels'
 	
 	# Create the master level 0 tile, which recursively creates the subtiles
 	masterTile = createTile(0, nbLevels, 0, 0, wcs, im, options.makeImageTiles, options.tileSize)
