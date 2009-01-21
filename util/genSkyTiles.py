@@ -165,12 +165,15 @@ def main():
 		header.update('EQUINOX', equinox)
 		header.update('RADECSYS', coordFrameCstr)
 		wcs = astWCS.WCS(header, mode='pyfits')
-	
+		
 	im = Image.open(imgFile)
 	
 	nbTileX = (im.size[0]+options.tileSize)//options.tileSize
 	nbTileY = (im.size[1]+options.tileSize)//options.tileSize
-	nbLevels = int(math.log(max(nbTileX, nbTileY))/math.log(2)+1)
+	maxSize = max(im.size[0], im.size[1])
+	nbLevels = 0
+	while 2**nbLevels*options.tileSize<maxSize:
+		nbLevels+=1
 	print "Will tesselate image (",im.size[0],"x",im.size[1],") in", nbTileX,'x',nbTileY,'tiles on', nbLevels+1, 'levels'
 	
 	# Create the master level 0 tile, which recursively creates the subtiles
