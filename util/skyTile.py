@@ -27,6 +27,16 @@ class StructCredits:
 		self.full = None;
 		self.infoUrl = None;
 		return
+	
+	def outJSON(self, f, levTab):
+		if self.short!=None:
+			f.write(levTab+'\t\t"short": "'+self.short+'",\n')
+		if self.full!=None:
+			f.write(levTab+'\t\t"full": "'+self.full+'",\n')
+		if self.infoUrl!=None:
+			f.write(levTab+'\t\t"infoUrl": "'+self.infoUrl+'",\n')
+		f.seek(-2, os.SEEK_CUR)
+		f.write('\n')
 
 
 class SkyImageTile:
@@ -37,6 +47,7 @@ class SkyImageTile:
 		self.serverCredits = StructCredits()
 		self.imageInfo = StructCredits()
 		self.imageUrl = None
+		self.alphaBlend = None
 		self.maxBrightness = None
 		return
 	
@@ -65,30 +76,15 @@ class SkyImageTile:
 		f.write(levTab+'{\n')
 		if self.imageInfo.short!=None or self.imageInfo.full!=None or self.imageInfo.infoUrl!=None:
 			f.write(levTab+'\t"imageInfo": {\n')
-			if self.imageInfo.short!=None:
-				f.write(levTab+'\t\t"short": '+self.imageInfo.short+',\n')
-			if self.imageInfo.full!=None:
-				f.write(levTab+'\t\t"full": '+self.imageInfo.full+',\n')
-			if self.imageInfo.infoUrl!=None:
-				f.write(levTab+'\t\t"infoUrl": '+self.imageInfo.infoUrl+',\n')
+			self.imageInfo.outJSON(f, levTab)
 			f.write(levTab+'\t}\n')
 		if self.imageCredits.short!=None or self.imageCredits.full!=None or self.imageCredits.infoUrl!=None:
 			f.write(levTab+'\t"imageCredits": {\n')
-			if self.imageCredits.short!=None:
-				f.write(levTab+'\t\t"short": '+self.imageCredits.short+',\n')
-			if self.imageCredits.full!=None:
-				f.write(levTab+'\t\t"full": '+self.imageCredits.full+',\n')
-			if self.imageCredits.infoUrl!=None:
-				f.write(levTab+'\t\t"infoUrl": '+self.imageCredits.infoUrl+',\n')
+			self.imageInfo.outJSON(f, levTab)
 			f.write(levTab+'\t}\n')
 		if self.serverCredits.short!=None or self.serverCredits.full!=None or self.serverCredits.infoUrl!=None:
 			f.write(levTab+'\t"serverCredits": {\n')
-			if self.serverCredits.short!=None:
-				f.write(levTab+'\t\t"short": '+self.serverCredits.short+',\n')
-			if self.serverCredits.full!=None:
-				f.write(levTab+'\t\t"full": '+self.serverCredits.full+',\n')
-			if self.serverCredits.infoUrl!=None:
-				f.write(levTab+'\t\t"infoUrl": '+self.serverCredits.infoUrl+',\n')
+			self.imageInfo.outJSON(f, levTab)
 			f.write(levTab+'\t}\n')
 		if self.imageUrl:
 			f.write(levTab+'\t"imageUrl": "'+self.imageUrl+'",\n')
@@ -100,6 +96,8 @@ class SkyImageTile:
 		f.write(',\n')
 		if self.maxBrightness:
 			f.write(levTab+'\t"maxBrightness": %f,\n' % self.maxBrightness)
+		if self.alphaBlend==True:
+			f.write(levTab+'\t"alphaBlend": true,\n')
 		f.write(levTab+'\t"minResolution": %f' % self.minResolution)
 		if len(self.subTiles)==0:
 			f.write('\n'+levTab+'}')

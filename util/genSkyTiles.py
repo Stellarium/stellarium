@@ -96,6 +96,7 @@ def main():
 	parser.add_option("-i", "--onlyindex", dest="makeImageTiles", action="store_false", default=True, help="output only the JSON index")
 	parser.add_option("-l", "--maxLevPerIndex", dest="maxLevelPerIndex", default=3, type="int", help="put up to MAX levels per index file (default: %default)", metavar="MAX")
 	parser.add_option("-b", "--maxBrightness", dest="maxBrightness", default=13., type="float", help="the surface brightness of a white pixel of the image in V mag/arcmin^2 (default: %default)", metavar="MAG")
+	parser.add_option("-a", "--alphaBlend", dest="alphaBlend", action="store_true", default=False, help="activate alpha blending for this image")
 	parser.add_option("--imgInfoShort", dest="imgInfoShort", type="string", help="the short name of the image", metavar="STR")
 	parser.add_option("--imgInfoFull", dest="imgInfoFull", type="string", help="the full name of the image", metavar="STR")
 	parser.add_option("--imgInfoUrl", dest="imgInfoUrl", type="string", help="the info URL about the image", metavar="STR")
@@ -140,6 +141,7 @@ def main():
 	
 	# Add some top-level informations
 	masterTile.maxBrightness = options.maxBrightness
+	masterTile.alphaBlend = options.alphaBlend
 	masterTile.imageInfo.short = options.imgInfoShort
 	masterTile.imageInfo.full = options.imgInfoFull
 	masterTile.imageInfo.infoUrl = options.imgInfoUrl
@@ -149,7 +151,7 @@ def main():
 	masterTile.serverCredits.short = options.serverCreditsShort
 	masterTile.serverCredits.full = options.serverCreditsFull
 	masterTile.serverCredits.infoUrl = options.serverCreditsInfoUrl
-	
+
 	# masterTile contains the whole tree, just need to output it as desired
 	masterTile.outputJSON(qCompress=options.gzipCompress, maxLevelPerFile=options.maxLevelPerIndex)
 	
