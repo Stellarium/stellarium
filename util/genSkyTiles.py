@@ -43,13 +43,12 @@ def angularDist(v1, v2):
 	return math.acos(dot(v1,v2)/math.sqrt(lengthSquared(v1)*lengthSquared(v2)));
 
 def createTile(currentLevel, maxLevel, i, j, wcs, im, doImage, tileSize):
-	if (currentLevel>=maxLevel):
+	if (currentLevel>maxLevel):
 		return None
 	
 	# Create the jpg sub tile
-	realTileSize = tileSize*2**(maxLevel-currentLevel-1)
+	realTileSize = tileSize*2**(maxLevel-currentLevel)
 	box = ( i*realTileSize, j*realTileSize, min((i+1)*realTileSize, im.size[0]), min((j+1)*realTileSize, im.size[1]) )
-	print box
 	if (box[0]>=im.size[0] or box[1]>=im.size[1]):
 		return None
 	imgName = 'x%.2i_%.2i_%.2i.jpg' % (2**currentLevel, i, j)
@@ -138,7 +137,7 @@ def main():
 		crval2=float(xmp.get_array_item(ns, 'Spatial.ReferenceValue', 2).keys()[0])
 		cdelt1=float(xmp.get_array_item(ns, 'Spatial.Scale', 1).keys()[0])
 		cdelt2=float(xmp.get_array_item(ns, 'Spatial.Scale', 2).keys()[0])
-		crota=xmp.get_property_float(ns, "Spatial.Rotation")
+		crota=float(xmp.get_property(ns, "Spatial.Rotation"))
 		equinox=xmp.get_property(ns, "Spatial.Equinox")
 		if equinox=='J2000':
 			equinox=2000
@@ -146,7 +145,6 @@ def main():
 			equinox=1950
 		else:
 			equinox=float(equinox)
-		epoch=0.
 		coordFrameCstr=xmp.get_property(ns, "Spatial.CoordinateFrame")
 		
 		header = astWCS.pyfits.Header()
@@ -165,6 +163,7 @@ def main():
 		header.update('CRPIX2', crpix2)
 		header.update('CROTA', crota)
 		header.update('EQUINOX', equinox)
+		header.update('RADECSYS', coordFrameCstr)
 		wcs = astWCS.WCS(header, mode='pyfits')
 	
 	im = Image.open(imgFile)
