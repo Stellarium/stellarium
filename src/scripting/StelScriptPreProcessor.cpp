@@ -100,6 +100,7 @@ bool StelScriptMgr::preprocessScript(QFile& input, QFile& output, const QString&
 	return true;
 }
 
+#ifdef ENABLE_STRATOSCRIPT_COMPAT
 bool StelScriptMgr::preprocessStratoScript(QFile& input, QFile& output, const QString& scriptDir)
 {
 	int n=0;
@@ -175,6 +176,8 @@ bool StelScriptMgr::preprocessStratoScript(QFile& input, QFile& output, const QS
 			else
 				line = "// untranslated stratoscript (date): " + line;
 		}
+		else if (args.at(0) == "deselect")
+			line = "core.selectObjectByName(\"\", false);";
 		else if (args.at(0) == "flag")
 		{
 			if (args.at(1) == "atmosphere")
@@ -236,8 +239,53 @@ bool StelScriptMgr::preprocessStratoScript(QFile& input, QFile& output, const QS
 			else
 				line = "// untranslated stratoscript (flag): " + line;
 		}
-		else if (args.at(0) == "deselect")
-			line = "core.selectObjectByName(\"\", false);";
+		else if (args.at(0) == "image")
+		{
+			args.removeFirst();
+			QMap<QString, QString> map = mappify(args, true);
+			if (map.contains("action"))
+			{
+				if (!map.contains("name"))
+					line = "// untranslated stratoscript (image but no name param): " + line;
+				else
+				{
+					if (map["action"].toLower() == "load")
+					{
+						if (!map.contains("filename") || !map.contains("scale") || !map.contains("altitude") || !map.contains("azimuth"))
+							line = "// untranslated stratoscript (image load but insufficient params): " + line;
+						else
+						{
+							QString coords="viewport";
+							int xpos=0;
+							int ypos=0;
+							bool ok;
+							if (map.contains("coordinate_system")) coords = map["coordinate_system"];
+							if (map.contains("xpos")) xpos = QVariant(map["xpos"]).toInt(&ok);
+							if (!ok || xpos!=1) xpos=0;
+							if (map.contains("ypos")) ypos = QVariant(map["ypos"]).toInt(&ok);
+							if (!ok || ypos!=1) ypos=0;
+
+							if (coords=="viewport")
+							{
+								line = QString("ScreenImageMgr.createScreenImage(\"%1\", \"%2\", %3, %4);").arg(map["name"]).arg(map["filename"]).arg(QVariant(map["azimuth"]).toInt()).arg(QVariant(map["altitude"]).toInt());
+							}
+							else if (coords=="horizontal")
+							{
+								line = "// untranslated stratoscript (image coords horizontal not implemented yet): " + line; // TODO when we have API for it.
+							}
+							else
+								line = "// untranslated stratoscript (image coords type unknown): " + line;
+						}
+					}
+					else if (map["action"].toLower() == "drop")
+						line = QString("ScreenImageMgr.deleteImage(\"%1\")").arg(map["name"]);
+					else
+						line = "// untranslated stratoscript (image): " + line;
+				}
+			}
+			else
+				line = "// untranslated stratoscropt (image): " + line;
+		}
 		else if (args.at(0) == "select")
 		{
 			args.removeFirst();
@@ -331,5 +379,7 @@ bool StelScriptMgr::preprocessStratoScript(QFile& input, QFile& output, const QS
 	}
 	return true;
 }
+
+#endif // ENABLE_STRATOSCRIPT_COMPAT
 
 

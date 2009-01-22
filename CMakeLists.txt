@@ -61,6 +61,7 @@ SET(GENERATE_PYTHON_WRAPPERS 0 CACHE BOOL "Define whether python wrapper should 
 SET(GENERATE_STELMAINLIB 0)
 # Activate sound support
 SET(ENABLE_SOUND 0 CACHE BOOL "Define whether sound support should be activated, options are: 1 or 0.")
+SET(ENABLE_STRATOSCRIPT_COMPAT 0 CACHE BOOL "Set to 1 or true if you want to build the Stratoscript compatibility mode")
 
 # On WIN32 we need to split the main binary into a small binary and a dll
 # This is for allowing to link plug-ins afterward
@@ -130,6 +131,10 @@ IF(NOT RELEASE_BUILD)
 # MESSAGE("Current SVN revision is ${StelSvn_WC_REVISION}")
     SET(SVN_REVISION ${StelSvn_WC_REVISION})
   ENDIF() 
+ENDIF()
+
+IF(ENABLE_STRATOSCRIPT_COMPAT)
+  ADD_DEFINITIONS(-DENABLE_STRATOSCRIPT_COMPAT)
 ENDIF()
 
 ########### Generate a config.h ###########

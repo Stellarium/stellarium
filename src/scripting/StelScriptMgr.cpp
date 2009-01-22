@@ -656,7 +656,12 @@ QStringList StelScriptMgr::getScriptList(void)
 		QSet<QString> files = fileMan.listContents("scripts",StelFileMgr::File, true);
 		foreach(QString f, files)
 		{
-			if (QRegExp("^.*\\.(ssc|sts)$").exactMatch(f))
+#ifdef ENABLE_STRATOSCRIPT_COMPAT
+			QRegExp fileRE("^.*\\.(ssc|sts)$");
+#else // ENABLE_STRATOSCRIPT_COMPAT
+			QRegExp fileRE("^.*\\.ssc$");
+#endif // ENABLE_STRATOSCRIPT_COMPAT
+			if (fileRE.exactMatch(f))
 				scriptFiles << f;
 		}
 	}
@@ -816,8 +821,10 @@ bool StelScriptMgr::runScript(const QString& fileName)
 
 	if (fileName.right(4) == ".ssc")
 		ok = preprocessScript(fic, tmpFile, scriptDir);
+#ifdef ENABLE_STRATOSCRIPT_COMPAT
 	else if (fileName.right(4) == ".sts")
 		ok = preprocessStratoScript(fic, tmpFile, scriptDir);
+#endif
 
 	fic.close();
 
