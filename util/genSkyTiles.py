@@ -165,7 +165,7 @@ def main():
 		header.update('EQUINOX', equinox)
 		header.update('RADECSYS', coordFrameCstr)
 		wcs = astWCS.WCS(header, mode='pyfits')
-		
+	
 	im = Image.open(imgFile)
 	
 	nbTileX = (im.size[0]+options.tileSize)//options.tileSize
