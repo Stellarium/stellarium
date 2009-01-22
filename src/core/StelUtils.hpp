@@ -29,7 +29,8 @@
 
 // astonomical unit (km)
 #define AU 149597870.691
-
+// Parsec (km)
+#define PARSEC 30.857e12
 // speed of light (km/sec)
 #define SPEED_OF_LIGHT 299792.458
 
