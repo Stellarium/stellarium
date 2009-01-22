@@ -135,7 +135,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(nav), 0, 'f', 2) << "<br>";
 
 	if (flags&AbsoluteMagnitude)
-		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(nav)-5.*(std::log10(getJ2000EquatorialPos(nav).length()*AU/(SPEED_OF_LIGHT*86400*365.25))-1.), 0, 'f', 2) << "<br>";
+		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(nav)-5.*(std::log10(getJ2000EquatorialPos(nav).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
 	
 	oss << getPositionInfoString(core, flags);
 
@@ -412,7 +412,7 @@ double Planet::getSiderealTime(double jd) const
 	return remainder * 360. + re.offset;
 }
 
-// Get the Planet position in the parent Planet ecliptic coordinate
+// Get the Planet position in the parent Planet ecliptic coordinate in AU
 Vec3d Planet::getEclipticPos() const
 {
 	return eclipticPos;
@@ -467,9 +467,11 @@ float Planet::getVMagnitude(const StelNavigator * nav) const
 {
 	Vec3d obsPos = nav->getObserverHeliocentricEclipticPos();
 	const double sq = obsPos.lengthSquared();
-	if (parent == 0) {
-		// sun
-		return -26.73f + 2.5f*std::log10(sq);
+	if (parent == 0)
+	{
+		// sun, compute the apparent magnitude for the absolute mag (4.83) and observer's distance
+		double distParsec = std::sqrt(sq)*AU/PARSEC;
+		return 4.83 + 5.*(std::log10(distParsec)-1.);
 	}
 	const Vec3d heliopos = getHeliocentricEclipticPos();
 	const double Rq = heliopos.lengthSquared();
