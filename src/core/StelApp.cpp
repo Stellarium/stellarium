@@ -842,7 +842,7 @@ void StelApp::parseCLIArgsPostConfig()
 		double skyDatePart = now.date().toJulianDay();
 		double skyTimePart = StelUtils::qTimeToJDFraction(now.time());
 		
-		// Over-ride the sktDatePart if the user specified the date using --sky-date
+		// Over-ride the skyDatePart if the user specified the date using --sky-date
 		if (skyDate != "")
 		{
 			// validate the argument format, we will tolerate yyyy-mm-dd by removing all -'s
