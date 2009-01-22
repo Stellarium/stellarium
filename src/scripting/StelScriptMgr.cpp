@@ -615,7 +615,7 @@ void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float
 	mvmgr->moveTo(aim, duration, false);
 }
 
-StelScriptMgr::StelScriptMgr(const QString& startupScript, QObject *parent) 
+StelScriptMgr::StelScriptMgr(QObject *parent) 
 	: QObject(parent), 
 	  thread(NULL)
 {
@@ -640,8 +640,6 @@ StelScriptMgr::StelScriptMgr(const QString& startupScript, QObject *parent)
 
 	// Add other classes which we want to be directly accessible from scripts
 	objectValue = engine.newQObject(&StelApp::getInstance().getSkyImageMgr());
-	
-	runScript(startupScript);
 }
 
 
