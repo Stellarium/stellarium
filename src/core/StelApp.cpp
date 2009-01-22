@@ -459,7 +459,7 @@ void StelApp::initPlugIns()
 void StelApp::setupLog()
 {
 	// write timestamp
-	StelApp::writeLog(QString("%1").arg(QDateTime::currentDateTime().toString("ddd MMM yyyy hh:mm:ss AP")));
+	StelApp::writeLog(QString("%1").arg(QDateTime::currentDateTime().toString(Qt::ISODate)));
 	
 	// write command line arguments
 	QString args;
