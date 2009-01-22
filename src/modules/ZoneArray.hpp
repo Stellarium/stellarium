@@ -31,11 +31,9 @@
 #include "Star.hpp"
 
 #include "StelLoadingBar.hpp"
-#include "StelProjector.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelSkyDrawer.hpp"
-#include "StelTexture.hpp"
 #include "StarMgr.hpp"
 #include "bytes.h"
 
