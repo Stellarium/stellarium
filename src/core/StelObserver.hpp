@@ -43,7 +43,9 @@ public:
 	//! Update StelObserver info if needed. Default implementation does nothing.
 	virtual void update(double deltaTime) {;}
 	
+	//! Get the position of the home planet center in the heliocentric VSOP87 frame in AU
 	Vec3d getCenterVsop87Pos(void) const;
+	//! Get the distance between observer and home planet center in AU
 	double getDistanceFromCenter(void) const;
 	Mat4d getRotAltAzToEquatorial(double jd) const;
 	Mat4d getRotEquatorialToVsop87(void) const;

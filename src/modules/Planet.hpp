@@ -172,7 +172,7 @@ public:
 	double getRotAscendingnode(void) const {return re.ascendingNode;}
 	double getRotObliquity(void) const {return re.obliquity;}
 
-	// Get the Planet position in the parent Planet ecliptic coordinate
+	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
 	Vec3d getEclipticPos() const;
 
 	// Return the heliocentric ecliptical position
