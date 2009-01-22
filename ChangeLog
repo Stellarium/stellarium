@@ -14,6 +14,10 @@ Fixed ecliptic line rendering.
 Fixed grid rendering bugs.
 Added ZIP archive support with code copied from KDE SVN.
 Fixed sun's magnitude bug.
+Added automatic star catalog downloader to GUI. Star catalog settings are now defined in a config file.
+Converted system-dependent star catalog memory mapping code to QFile::map().
+Added log file for debugging output. Prepends system specs, such as memory and CPU information.
+Imported KdeWin32 code for POSIX emulation on Windows.
 
 0.10.0 beta [2008-09-22]
 Global switch to Qt. Don't support SDL main application anymore.
