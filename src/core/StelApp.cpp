@@ -120,7 +120,13 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	// Echo debug output to log file
 	stelFileMgr = new StelFileMgr();
 	logFile.setFileName(stelFileMgr->getUserDir()+"/log.txt");
-	if(logFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
+	QDir userDirTmp(stelFileMgr->getUserDir());
+	if (!userDirTmp.exists())
+	{
+		// Try to create it
+		StelFileMgr::mkDir(stelFileMgr->getUserDir());
+	}
+	if (logFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
 		qInstallMsgHandler(StelApp::debugLogHandler);
 		
 	
@@ -146,13 +152,13 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	
 	// OK, print the console splash and get on with loading the program
 	QString versionLine = QString("This is %1 - http://www.stellarium.org").arg(StelApp::getApplicationName());
-	QString copyrightLine = QString("Copyright (C) 2000-2008 Fabien Chereau et al");
+	QString copyrightLine = QString("Copyright (C) 2000-2009 Fabien Chereau et al");
 	int maxLength = qMax(versionLine.size(), copyrightLine.size());
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
 	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
 	qDebug() << qPrintable(QString("[ %1 ]").arg(copyrightLine.leftJustified(maxLength, ' ')));
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
-	if(logFile.isOpen())
+	if (logFile.isOpen())
 		qDebug() << "Writing log file to:" << logFile.fileName();
 	else
 		qDebug() << "Unable to open log file:" << logFile.fileName() << ".";
