@@ -143,11 +143,21 @@ void StelDownloadMgr::fin()
 		progressBar->setVisible(false);
 	}
 	
+	target->close();
 	inProgress = false;
+	
+	QVariant redirect = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+	if(!redirect.isNull())
+	{
+		if(useChecksum)
+			get(redirect.toUrl().toString(), path, checksum);
+		else
+			get(redirect.toUrl().toString(), path);
+		return;
+	}
+	
 	if(total-received == 0 || total == 0)
 	{
-		target->close();
-		
 		if(useChecksum)
 		{
 			emit verifying();
