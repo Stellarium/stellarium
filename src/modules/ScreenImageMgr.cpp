@@ -35,19 +35,29 @@
 #include <QString>
 #include <QDebug>
 #include <QMap>
+#include <QTimeLine>
+#include <QGraphicsItemAnimation>
 
 ///////////////////////
 // ScreenImage class //
 ///////////////////////
-ScreenImage::ScreenImage(const QString& filename, float x, float y, bool show)
+ScreenImage::ScreenImage(const QString& filename, float x, float y, bool show, float scale)
 	: tex(NULL)
 {
 	try
 	{
 		QString path = StelApp::getInstance().getFileMgr().findFile("scripts/" + filename);
 		tex = StelMainGraphicsView::getInstance().scene()->addPixmap(QPixmap(path));
+		if (scale != 1.)
+			tex->scale(scale,scale);
 		tex->setOffset(x, y);
 		tex->setVisible(show);
+		anim = new QGraphicsItemAnimation();
+		moveTimer = new QTimeLine(0);
+		moveTimer->setCurveShape(QTimeLine::LinearCurve);
+		anim->setTimeLine(moveTimer);
+		anim->setItem(tex);
+		fadeTimer = new QTimeLine(0);
 	}
 	catch (std::runtime_error& e)
 	{
@@ -62,6 +72,11 @@ ScreenImage::~ScreenImage()
 		delete tex;
 		tex = NULL;
 	}
+	moveTimer->stop();
+	delete anim; anim = NULL;
+	delete moveTimer; moveTimer = NULL;
+	fadeTimer->stop();
+	delete fadeTimer; fadeTimer = NULL;
 }
 
 bool ScreenImage::draw(const StelCore* core)
@@ -92,14 +107,35 @@ bool ScreenImage::getFlagShow(void)
 	return imageFader;
 }
 
-void ScreenImage::setAlpha(float a)
+void ScreenImage::setAlpha(float a, float duration)
 {
 	imageFader.setMaxValue(a);
 }
 
-void ScreenImage::setXY(float x, float y)
+void ScreenImage::setXY(float x, float y, float duration)
 {
-	tex->setOffset(x, y);
+	if (duration<=0.)
+	{
+		moveTimer->stop();
+		tex->setOffset(x, y);
+	}
+	else
+	{
+		moveTimer->stop();
+		int durationMs = duration*1000;
+		moveTimer->setDuration(durationMs);
+		QPointF p(tex->offset());
+		float sX = p.x();
+		float sY = p.y();
+		float eX = x;
+		float eY = y;
+		float dX = (x-sX) / 200.;
+		float dY = (y-sY) / 200.;
+		for(int i=0; i<200; i++)
+			anim->setPosAt(i/200., QPointF(sX+(dX*i), sY+(dY*i)));
+		anim->setPosAt(200., QPointF(eX, eY));
+		moveTimer->start();
+	}
 }
 
 //////////////////////////
@@ -108,14 +144,14 @@ void ScreenImage::setXY(float x, float y)
 ScreenImageMgr::ScreenImageMgr()
 {
 	setObjectName("ScreenImageMgr");
-	connect(this, SIGNAL(requestCreateScreenImage(const QString&, const QString&, float, float, bool, float)),
-	        this, SLOT(doCreateScreenImage(const QString&, const QString&, float, float, bool, float)));
+	connect(this, SIGNAL(requestCreateScreenImage(const QString&, const QString&, float, float, float, bool, float)),
+	        this, SLOT(doCreateScreenImage(const QString&, const QString&, float, float, float, bool, float)));
 
 	connect(this, SIGNAL(requestSetImageShow(const QString&, bool)),
 	        this, SLOT(doSetImageShow(const QString&, bool)));
 
-	connect(this, SIGNAL(requestSetImageXY(const QString&, float, float)),
-	        this, SLOT(doSetImageXY(const QString&, float, float)));
+	connect(this, SIGNAL(requestSetImageXY(const QString&, float, float, float)),
+	        this, SLOT(doSetImageXY(const QString&, float, float, float)));
 
 	connect(this, SIGNAL(requestDeleteImage(const QString&)),
 	        this, SLOT(doDeleteImage(const QString&)));
@@ -143,10 +179,11 @@ void ScreenImageMgr::createScreenImage(const QString& id,
                                        const QString& filename,
 	                               float x,
 	                               float y,
+                                       float scale,
 	                               bool visible,
 	                               float alpha)
 {
-	emit(requestCreateScreenImage(id, filename, x, y, visible, alpha));
+	emit(requestCreateScreenImage(id, filename, x, y, scale, visible, alpha));
 }
 
 void ScreenImageMgr::deleteImage(const QString& id)
@@ -178,9 +215,9 @@ void ScreenImageMgr::showImage(const QString& id, bool show)
 	emit(requestSetImageShow(id, show));
 }
 
-void ScreenImageMgr::setImageXY(const QString& id, float x, float y)
+void ScreenImageMgr::setImageXY(const QString& id, float x, float y, float duration)
 {
-	emit(requestSetImageXY(id, x, y));
+	emit(requestSetImageXY(id, x, y, duration));
 }
 
 
@@ -202,6 +239,7 @@ void ScreenImageMgr::doCreateScreenImage(const QString& id,
                                          const QString& filename,
                                          float x,
                                          float y,
+                                         float scale,
                                          bool visible,
                                          float alpha)
 {
@@ -210,7 +248,7 @@ void ScreenImageMgr::doCreateScreenImage(const QString& id,
 	if (allScreenImages.contains(id))
 		doDeleteImage(id);
 
-	ScreenImage* i = new ScreenImage(filename, x, y, visible);
+	ScreenImage* i = new ScreenImage(filename, x, y, visible, scale);
 	if (i==NULL)
 		return;
 
@@ -228,11 +266,11 @@ void ScreenImageMgr::doSetImageShow(const QString& id, bool show)
 			allScreenImages[id]->setFlagShow(show);
 }
 
-void ScreenImageMgr::doSetImageXY(const QString& id, float x, float y)
+void ScreenImageMgr::doSetImageXY(const QString& id, float x, float y, float duration)
 {
 	if (allScreenImages.contains(id))
 		if (allScreenImages[id]!=NULL)
-			allScreenImages[id]->setXY(x,y);
+			allScreenImages[id]->setXY(x,y, duration);
 }
 
 void ScreenImageMgr::doDeleteImage(const QString& id)
