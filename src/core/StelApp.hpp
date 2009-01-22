@@ -169,6 +169,9 @@ public:
 	//! Return a copy of text of the log file.
 	QString getLog() { return log; }
 	
+	//! Get the file name of the startup script
+	QString getStartupScript() const {return startupScript;}
+			
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
