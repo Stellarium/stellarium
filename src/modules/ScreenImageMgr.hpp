@@ -32,6 +32,8 @@
 
 class StelCore;
 class QGraphicsPixmapItem;
+class QTimeLine;
+class QGraphicsItemAnimation;
 
 // base class for different image types
 class ScreenImage
@@ -43,7 +45,8 @@ public:
 	//! @param x the screen x-position for the texture (in pixels), measured from the left side of the screen.
 	//! @param y the screen x-position for the texture (in pixels), measured from the top of the screen.
 	//! @param show the initial displayed status of the image (false == hidden).
-	ScreenImage(const QString& filename, float x, float y, bool show=false);
+	//! @param scale scale factor for the image. 1 = original size, 0.5 = 50% size etc.
+	ScreenImage(const QString& filename, float x, float y, bool show=false, float scale=1.);
 	virtual ~ScreenImage();
 
 	//! Draw the image.
@@ -53,18 +56,27 @@ public:
 	virtual void update(double deltaTime);
 	//! Set the duration used for the fade in / fade out of the image
 	virtual void setFadeDuration(float duration);
-	//! Show or hide the label (it will fade in/out)
+	//! Show or hide the image (it will fade in/out)
+	//! @param b if true, the image will be shown, else it will be hidden
 	virtual void setFlagShow(bool b);
 	//! Get the displayed status of the image
 	virtual bool getFlagShow(void);
 	//! Set the image alpha for when it is in full "on" (after fade in).
-	virtual void setAlpha(float a);
+	//! @param a the new alpha (transparency) for the image.  1.0 = totally transparent, 0.0 = fully opaque.
+	//! @param duration the time for the change in alpha to take effect.
+	virtual void setAlpha(float a, float duration=0.);
 	//! Set the x, y position of the image.
-	virtual void setXY(float x, float y);
+	//! @param x new x position
+	//! @param y new y position
+	//! @param duration how long for the movement to take in seconds
+	virtual void setXY(float x, float y, float duration=0.);
 
 protected:
 	LinearFader imageFader;
 	QGraphicsPixmapItem* tex;
+	QTimeLine* moveTimer;
+	QTimeLine* fadeTimer;
+	QGraphicsItemAnimation* anim;
 
 };
 
@@ -105,6 +117,7 @@ public slots:
                               const QString& filename,
 	                      float x,
 	                      float y,
+	                      float scale=1.,
 	                      bool visible=true,
 	                      float alpha=1.0);
 
@@ -119,7 +132,7 @@ public slots:
 	//! @param id the ID for the desired image.
 	//! @param x The new x-coordinate for the image.
 	//! @param y The new y-coordinate for the image.
-	void setImageXY(const QString& id, float x, float y);
+	void setImageXY(const QString& id, float x, float y, float duration=0.);
 	//! Delete an image.
 	//! @param id the ID for the desired image.
 	void deleteImage(const QString& id);
@@ -133,12 +146,13 @@ signals:
                                       const QString& filename,
 	                              float x,
 	                              float y,
+	                              float scale,
 	                              bool visible,
 	                              float alpha);
 
 	void requestSetImageShow(const QString& id, bool b);
 
-	void requestSetImageXY(const QString& id, float x, float y);
+	void requestSetImageXY(const QString& id, float x, float y, float duration);
 
 	void requestDeleteImage(const QString& id);
 
@@ -150,12 +164,13 @@ private slots:
                                  const QString& filename,
 	                         float x,
 	                         float y,
+	                         float scale,
 	                         bool visible,
 	                         float alpha);
 
 	void doSetImageShow(const QString& id, bool b);
 
-	void doSetImageXY(const QString& id, float x, float y);
+	void doSetImageXY(const QString& id, float x, float y, float duration);
 
 	void doDeleteImage(const QString& id);
 
