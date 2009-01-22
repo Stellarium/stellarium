@@ -24,6 +24,7 @@
 #include "StelFileMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelScriptMgr.hpp"
 
 #include <QGLFormat>
 #include <QGraphicsView>
@@ -127,6 +128,8 @@ void StelMainGraphicsView::init()
 	StelApp::getInstance().getModuleMgr().registerModule(newGui, true);
 	
 	stelApp->initPlugIns();
+	
+	stelApp->getScriptMgr().runScript(stelApp->getStartupScript());
 	
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
 }

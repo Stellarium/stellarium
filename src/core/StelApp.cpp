@@ -248,18 +248,18 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 *************************************************************************/
 StelApp::~StelApp()
 {
-	qDebug() << qPrintable(QString("Download status: downloaded %1 files amounting %2 kbytes in a session of %3 seconds (average of %4 kB/s).").arg(nbDownloadedFiles).arg(totalDownloadedSize/1024).arg(getTotalRunTime()).arg((double)(totalDownloadedSize/1024)/getTotalRunTime()));
 #if QT_VERSION >= 0x040500
-	qDebug() << qPrintable(QString("+ reused %1 files from cache amounting %2 kbytes.").arg(nbUsedCache).arg(totalUsedCacheSize/1024));
+	qDebug() << qPrintable(QString("Downloaded %1 files (%2 kbytes) in a session of %3 sec (average of %4 kB/s + %5 files from cache (%6 kB)).").arg(nbDownloadedFiles).arg(totalDownloadedSize/1024).arg(getTotalRunTime()).arg((double)(totalDownloadedSize/1024)/getTotalRunTime()).arg(nbUsedCache).arg(totalUsedCacheSize/1024));
 #endif
 	
+	if (scriptMgr->scriptIsRunning())
+		scriptMgr->stopScript();
 	stelObjectMgr->unSelect();
 	moduleMgr->unloadModule("StelSkyImageMgr", false);  // We need to delete it afterward
 	moduleMgr->unloadModule("StelObjectMgr", false);// We need to delete it afterward
 	StelModuleMgr* tmp = moduleMgr;
 	moduleMgr = new StelModuleMgr(); // Create a secondary instance to avoid crashes at other deinit
 	delete tmp; tmp=NULL;
-	delete scriptMgr; scriptMgr=NULL;
 	delete loadingBar; loadingBar=NULL;
 	delete core; core=NULL;
 	delete skyCultureMgr; skyCultureMgr=NULL;
@@ -434,7 +434,7 @@ void StelApp::init()
 	
 	updateI18n();
 	
-	scriptMgr = new StelScriptMgr(startupScript);
+	scriptMgr = new StelScriptMgr(this);
 	initialized = true;
 }
 

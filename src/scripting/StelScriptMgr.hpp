@@ -290,7 +290,7 @@ class StelScriptMgr : public QObject
 Q_OBJECT
 		
 public:
-	StelScriptMgr(const QString& startupScript, QObject *parent=0);
+	StelScriptMgr(QObject *parent=0);
 	~StelScriptMgr();
 
 	QStringList getScriptList(void);
