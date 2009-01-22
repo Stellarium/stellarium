@@ -243,7 +243,7 @@ ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
 	if (rval && rval->isInitialized())
 	{
 		dbStr += QString("%1").arg(rval->getNrOfStars());
-		qDebug() << dbStr;
+		qDebug() << qPrintable(dbStr);
 	}
 	else
 	{
