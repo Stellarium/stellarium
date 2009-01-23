@@ -126,9 +126,8 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 		// Try to create it
 		StelFileMgr::mkDir(stelFileMgr->getUserDir());
 	}
-	if (logFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
+	if (logFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
 		qInstallMsgHandler(StelApp::debugLogHandler);
-		
 	
 	StelApp::qtime = new QTime();
 	StelApp::qtime->start();
