@@ -103,10 +103,12 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	QSettings& conf = *StelApp::getInstance().getSettings();
 	StelCore* core = StelApp::getInstance().getCore();
 	
+	flag_use_ext_framebuffer_object = false;
+#if 0
 	flag_use_ext_framebuffer_object = GLEE_EXT_framebuffer_object;
 	if (flag_use_ext_framebuffer_object)
 	{
-		flag_use_ext_framebuffer_object = conf.value("spheric_mirror/flag_use_ext_framebuffer_object",true).toBool();
+		flag_use_ext_framebuffer_object = conf.value("spheric_mirror/flag_use_ext_framebuffer_object",false).toBool();
 	}
 	qDebug() << "INFO: flag_use_ext_framebuffer_object = " << flag_use_ext_framebuffer_object;
 	if (flag_use_ext_framebuffer_object && !GLEE_EXT_packed_depth_stencil)
@@ -115,7 +117,8 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		"using EXT_framebuffer_object, but EXT_packed_depth_stencil "
 		"not available: no stencil buffer support";
 	}
-
+#endif
+															 
 	// initialize viewport parameters and texture size:
 	
 	// maximum FOV value of the not yet distorted image
@@ -531,21 +534,21 @@ void StelViewportDistorterFisheyeToSphericMirror::prepare(void) const
 }
 
 void StelViewportDistorterFisheyeToSphericMirror::distort(void) const
-{
-	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
-			
+{	
 	// set rendering back to default frame buffer
 	if (flag_use_ext_framebuffer_object)
 	{
 		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 	}
+	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
+	glEnable(GL_TEXTURE_2D);
 	glViewport(0, 0, screen_w, screen_h);
 	glMatrixMode(GL_PROJECTION);        // projection matrix mode
 	glLoadIdentity();
 	glOrtho(0,screen_w,0,screen_h, -1, 1); // set a 2D orthographic projection
 	glMatrixMode(GL_MODELVIEW);         // modelview matrix mode
 	glLoadIdentity();
-
+	
 	glBindTexture(GL_TEXTURE_2D, mirror_texture);
 	if (!flag_use_ext_framebuffer_object)
 	{
@@ -557,15 +560,14 @@ void StelViewportDistorterFisheyeToSphericMirror::distort(void) const
 		                    newProjectorParams.viewportXywh[2],
 					  		newProjectorParams.viewportXywh[3]);
 	}
-	glEnable(GL_TEXTURE_2D);
 
 	float color[4] = {1,1,1,1};
 	glColor4fv(color);
 	glDisable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, mirror_texture);
-
+	
 	glCallList(display_list);
-
+	
 	//glBegin(GL_QUADS);
 	//glTexCoord2f(0.0f, 1.0f); glVertex2i(0,screen_h);
 	//glTexCoord2f(1.0f, 1.0f); glVertex2i(screen_w,screen_h);
