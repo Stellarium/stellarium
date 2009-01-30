@@ -673,8 +673,6 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 				delete sPainter;
 				sPainter=NULL;
 				drawEarthShadow(core);
-				glClear(GL_STENCIL_BUFFER_BIT);	// Clean again to let a clean buffer for later Qt display
-				glEnable(GL_LIGHTING);
 			}
 			else
 			{
@@ -759,6 +757,7 @@ void Planet::drawEarthShadow(StelCore* core)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEcliptic);
 	StelPainter sPainter(prj);
 	
+	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glColor3f(1,1,1);
@@ -809,6 +808,8 @@ void Planet::drawEarthShadow(StelCore* core)
 	glEnd();
 
 	glDisable(GL_STENCIL_TEST);
+	glClearStencil(0x0);
+	glClear(GL_STENCIL_BUFFER_BIT);	// Clean again to let a clean buffer for later Qt display
 }
 
 void Planet::drawHints(const StelCore* core)
