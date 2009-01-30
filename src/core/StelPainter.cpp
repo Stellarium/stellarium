@@ -47,12 +47,12 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	Q_ASSERT(proj);
 	Q_ASSERT(globalMutex);
 	
-	GLenum er = glGetError();
-	if (er!=GL_NO_ERROR)
-	{
-		if (er==GL_INVALID_OPERATION)
-			qFatal("Invalid openGL operation. It is likely that you used openGL calls without having a valid instance of StelPainter");
-	}
+// 	GLenum er = glGetError();
+// 	if (er!=GL_NO_ERROR)
+// 	{
+// 		if (er==GL_INVALID_OPERATION)
+// 			qFatal("Invalid openGL operation. It is likely that you used openGL calls without having a valid instance of StelPainter");
+// 	}
 	
 	// Lock the global mutex ensuring that no other instances of StelPainter are currently being used
 	if (globalMutex->tryLock()==false)
@@ -107,6 +107,7 @@ void StelPainter::switchToNativeOpenGLPainting()
 	//glDisable(GL_MULTISAMPLE); doesn't work on win32
 	glDisable(GL_DITHER);
 	glDisable(GL_ALPHA_TEST);
+	glDisable(GL_TEXTURE_2D);
 }
 
 //! Revert openGL state so that Qt painting works again
@@ -121,6 +122,12 @@ void StelPainter::revertToQtPainting()
 	glPopMatrix();
 	glPopAttrib();
 	glPopClientAttrib();
+	GLenum er = glGetError();
+	if (er!=GL_NO_ERROR)
+	{
+		if (er==GL_INVALID_OPERATION)
+			qFatal("Invalid openGL operation in StelPainter::revertToQtPainting()");
+	}
 }
 
 void StelPainter::initSystemGLInfo()
