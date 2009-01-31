@@ -114,7 +114,7 @@ Vec3d ConvexPolygon::getBarycenter() const
 		return asConvex()[0].n;
 	}
 	
-	Vec3d barycenter;
+	Vec3d barycenter(0.);
 	for (unsigned int i=0;i<Polygon::size();++i)
 	{
 		barycenter += Polygon::operator[](i);

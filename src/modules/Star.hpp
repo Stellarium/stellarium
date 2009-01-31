@@ -73,7 +73,7 @@ struct Star1 { // 28 byte
     Vec3d pos = z->center
               + (x0+movementFactor*dx0)*z->axis0
               + (x1+movementFactor*dx1)*z->axis1;
-    pos.normalize();
+    //pos.normalize();
     return pos;
   }
   float getBV(void) const {return IndexToBV(bV);}
@@ -108,7 +108,7 @@ struct Star2 {  // 10 byte
     Vec3d pos = z->center
               + (x0+movementFactor*dx0)*z->axis0
               + (x1+movementFactor*dx1)*z->axis1;
-    pos.normalize();
+    //pos.normalize();
     return pos;
   }
   float getBV(void) const {return IndexToBV(bV);}
@@ -139,7 +139,7 @@ struct Star3 {  // 6 byte
                      const SpecialZoneData<Star3> *z) const;
   Vec3d getJ2000Pos(const ZoneData *z,double) const {
     Vec3d pos = z->center + (double)(x0)*z->axis0 + (double)(x1)*z->axis1;
-    pos.normalize();
+    //pos.normalize();
     return pos;
   }
   float getBV(void) const {return IndexToBV(bV);}

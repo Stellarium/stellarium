@@ -53,7 +53,7 @@ CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
 
 ########### Others ###########
 # Activate translation with gettext
-SET(RELEASE_BUILD 0 CACHE BOOL "Flag this build as an official release, 1 or 0.")
+SET(RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release, 1 or 0.")
 SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be supported, option are: 1 or 0.")
 # Generate python wrappers
 SET(GENERATE_PYTHON_WRAPPERS 0 CACHE BOOL "Define whether python wrapper should be build using SIP, options are: 1 or 0.")
