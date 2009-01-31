@@ -538,9 +538,12 @@ void SpecialZoneArray<Star>::searchAround(int index, const Vec3d &v, double cosL
 	                              * ((StarMgr::getCurrentJDay()-d2000)/365.25)
 	                              / star_position_scale;
 	const SpecialZoneData<Star> *const z = getZones()+index;
+	Vec3d tmp;
 	for (int i=0;i<z->size;i++)
 	{
-		if (z->getStars()[i].getJ2000Pos(z,movementFactor)*v >= cosLimFov)
+		tmp = z->getStars()[i].getJ2000Pos(z,movementFactor);
+		tmp.normalize();
+		if (tmp*v >= cosLimFov)
 		{
 			// TODO: do not select stars that are too faint to display
 			result.push_back(z->getStars()[i].createStelObject(this,z));
