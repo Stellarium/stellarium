@@ -1,4 +1,4 @@
-0.10.1 [2009-01-??]
+0.10.1 [2009-02-02]
 Added reset all config options button.
 Added code for uncompressing gzip files (borrowed from from libkde)
 Allowed for gzip compressed JSON files.
@@ -18,6 +18,10 @@ Added automatic star catalog downloader to GUI. Star catalog settings are now de
 Converted system-dependent star catalog memory mapping code to QFile::map().
 Added log file for debugging output. Prepends system specs, such as memory and CPU information.
 Imported KdeWin32 code for POSIX emulation on Windows.
+Fixed build with Qt 4.5.
+Fixed full screen problems at init.
+Optimized VecXX contructors (no more default values)
+Fixed many bugs.
 
 0.10.0 beta [2008-09-22]
 Global switch to Qt. Don't support SDL main application anymore.
