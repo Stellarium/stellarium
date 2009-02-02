@@ -56,6 +56,7 @@ static bool FTinitialized=false;
 //! Information on a cached glyph
 struct CacheEntry
 {
+	// CacheEntry() : topLeftUV_(0.f,0.f), bottomRightUV_(0.f,0.f), renderSize_(0,0), advance_(0.f,0.f), bitmapPosition_(0.f,0.f) {}
 	size_t textureIndex_;	    //!< Index into the TypeFace's texture array
 	Vec2f topLeftUV_;           //!< Texcoords for the top left corner of the glyph
 	Vec2f bottomRightUV_;       //!< Texcoords for the bottom right corner of the glyph
@@ -68,6 +69,7 @@ struct CacheEntry
 //! Information on a cache texture
 struct TextureInfo
 {
+	TextureInfo() : size_(0,0) {}
 	typedef GLuint Handle;      //!< typedef for a texture handle for an OpenGL texture
 	Handle handle_;             //!< The OpenGL texture handle
 	Vec2size_t size_;           //!< The size of the texture in texels
@@ -81,7 +83,7 @@ struct Data
 {
 	//! Constructor
 	Data(size_t aPointSize, size_t aResolution) :
-		pointSize_(aPointSize), resolution_(aResolution) {}
+			pointSize_(aPointSize), resolution_(aResolution), offset_(0, 0) {}
 
 	size_t pointSize_;              //!< The size of the type face in points
 	size_t resolution_;             //!< The resolution of the type face in dpi
@@ -374,7 +376,7 @@ float TypeFace::width(const QString& aString)
 {
 	float ret = 0;
 	size_t leftChar = 0;
-	for(int pos=0; pos<aString.size(); pos++)
+	for (int pos=0; pos<aString.size(); ++pos)
 	{
 		size_t rightChar = FT_Get_Char_Index(data_->face_, aString.at(pos).unicode());
 		ret += kerning(leftChar, rightChar)[0];
@@ -569,17 +571,16 @@ Vec2f TypeFace::renderGlyph(size_t aGlyphIndex, const Vec2f& aPosition)
 
 Vec2f TypeFace::kerning(size_t leftGlyphIndex, size_t rightGlyphIndex) const
 {
-	Vec2f ret;
-	if(data_->hasKerning_ && (leftGlyphIndex > 0) && (rightGlyphIndex > 0))
+	Vec2f ret(0.f, 0.f);
+	if (data_->hasKerning_ && (leftGlyphIndex > 0) && (rightGlyphIndex > 0))
 	{
 		FT_Vector kerningVector;
 		FT_Error ftError = FT_Get_Kerning(data_->face_, leftGlyphIndex, 
 		                                  rightGlyphIndex, FT_KERNING_DEFAULT, 
 		                                  &kerningVector);
-		if(!ftError)
+		if (!ftError)
 		{
-			ret = Vec2f(static_cast<float>(kerningVector.x),
-			            static_cast<float>(kerningVector.y)) * OneOver64;
+			ret.set(static_cast<float>(kerningVector.x)* OneOver64, static_cast<float>(kerningVector.y)* OneOver64);
 		}
 	}
 	return ret;

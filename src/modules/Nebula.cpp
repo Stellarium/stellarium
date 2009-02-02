@@ -184,10 +184,8 @@ bool Nebula::readNGC(char *recordstr)
 		NGC_nb = nb;
 	}
 
-	const int res = sscanf(&recordstr[12],"%d %f",&rahr, &ramin);
-	Q_ASSERT(res==2);
-	const int res2 = sscanf(&recordstr[22],"%d %f",&dedeg, &demin);
-	Q_ASSERT(res2==2);
+	sscanf(&recordstr[12],"%d %f",&rahr, &ramin);
+	sscanf(&recordstr[22],"%d %f",&dedeg, &demin);
 	float RaRad = (double)rahr+ramin/60;
 	float DecRad = (float)dedeg+demin/60;
 	if (recordstr[21] == '-') DecRad *= -1.;
