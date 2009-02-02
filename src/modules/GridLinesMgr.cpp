@@ -343,8 +343,8 @@ void SkyGrid::draw(const StelCore* core) const
 			middlePoint*=-1.;
 				
 		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-		sPainter.drawSmallCircleArc(p1, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
-		sPainter.drawSmallCircleArc(p2, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+		sPainter.drawSmallCircleArc(p1, middlePoint, Vec3d(0), viewportEdgeIntersectCallback, &userData);
+		sPainter.drawSmallCircleArc(p2, middlePoint, Vec3d(0), viewportEdgeIntersectCallback, &userData);
 		
 		fpt.transfo4d(rotLon);
 	}
@@ -369,8 +369,8 @@ void SkyGrid::draw(const StelCore* core) const
 			if (!viewPortHalfSpace.contains(middlePoint))
 				middlePoint*=-1;
 			
-			sPainter.drawSmallCircleArc(p1, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
-			sPainter.drawSmallCircleArc(p2, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+			sPainter.drawSmallCircleArc(p1, middlePoint, Vec3d(0), viewportEdgeIntersectCallback, &userData);
+			sPainter.drawSmallCircleArc(p2, middlePoint, Vec3d(0), viewportEdgeIntersectCallback, &userData);
 			
 			fpt.transfo4d(rotLon);
 		}

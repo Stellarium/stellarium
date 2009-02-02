@@ -279,7 +279,10 @@ template<class T> class Matrix4
 
 ////////////////////////// Vector2 class methods ///////////////////////////////
 
-template<class T> Vector2<T>::Vector2() {}
+template<class T> Vector2<T>::Vector2()
+{
+	v[0]=0; v[1]=0;
+}
 
 template<class T> Vector2<T>::Vector2(const Vector2<T>& a)
 {
@@ -419,7 +422,10 @@ template<class T> void Vector2<T>::normalize()
 
 ////////////////////////// Vector3 class methods ///////////////////////////////
 
-template<class T> Vector3<T>::Vector3() {}
+template<class T> Vector3<T>::Vector3()
+{
+	v[0]=0; v[1]=0; v[2]=0;
+}
 
 template<class T> Vector3<T>::Vector3(const Vector3& a)
 {
@@ -626,7 +632,7 @@ template<class T> T Vector3<T>::longitude() const
 		
 ////////////////////////// Vector4 class methods ///////////////////////////////
 
-template<class T> Vector4<T>::Vector4() {}
+template<class T> Vector4<T>::Vector4() {v[0]=0; v[1]=0; v[2]=0; v[3]=0;}
 
 template<class T> Vector4<T>::Vector4(const Vector4<T>& a)
 {
@@ -786,7 +792,11 @@ std::ostream& operator<<(std::ostream &o,const Vector4<T> &v) {
 
 ////////////////////////// Matrix4 class methods ///////////////////////////////
 
-template<class T> Matrix4<T>::Matrix4() {}
+template<class T> Matrix4<T>::Matrix4()
+{
+	r[0]=0; r[1]=0; r[2]=0; r[3]=0; r[4]=0; r[5]=0; r[6]=0; r[7]=0; 	 
+	r[8]=0; r[9]=0; r[10]=0; r[11]=0; r[12]=0; r[13]=0; r[14]=0; r[15]=0;
+}
 
 template<class T> Matrix4<T>::Matrix4(const Matrix4<T>& m)
 {
