@@ -456,6 +456,9 @@ void ConfigurationDialog::updateConfigLabels()
 	if (az > M_PI*2)
 		az -= M_PI*2;    
 	ui->startupDirectionOfViewlabel->setText(q_("Startup direction of view Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)));
+	
+	// Not a very nice way to update the text
+	checkUpdates();
 }
 
 void ConfigurationDialog::setDefaultViewOptions()
@@ -605,6 +608,7 @@ void ConfigurationDialog::updatesDownloadError(QNetworkReply::NetworkError code,
 
 void ConfigurationDialog::updatesDownloadFinished(void)
 {
+	newCatalogs.clear();
 	updatesData = new QSettings(updatesFileName, QSettings::IniFormat);
 	updatesData->beginGroup("extra_stars");
 	QListIterator<QString> it(updatesData->childKeys());
