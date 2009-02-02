@@ -7,130 +7,130 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 10:37+0200\n"
-"PO-Revision-Date: 2008-10-11 15:41+0000\n"
-"Last-Translator: Manuel R. Ciosici <manuelciosici@yahoo.com>\n"
+"POT-Creation-Date: 2009-01-14 18:52+0100\n"
+"PO-Revision-Date: 2008-12-22 03:04+0000\n"
+"Last-Translator: Nicolae Crefelean <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-11-11 09:41+0000\n"
+"X-Launchpad-Export-Date: 2009-02-02 14:16+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "100 > 19) || ((n % 100 == 0) && (n != 0))) ? 2: 1))\n"
 
-#: src/modules/ConstellationMgr.cpp:376
+#: src/modules/ConstellationMgr.cpp:377
 #, qt-format
 msgid "Loading Constellation Art: %1/%2"
-msgstr "Se încarcă arta constelațiilor: %1%2"
+msgstr "Se încarcă constelațiile artistice: %1%2"
 
-#: src/modules/StarMgr.cpp:272
+#: src/modules/StarMgr.cpp:291
 #, qt-format
-msgid "Loading catalog %1"
-msgstr "Se încarcă catalogul %1"
+msgid "Loading catalog %1 from file %2"
+msgstr ""
 
-#: src/modules/LandscapeMgr.cpp:433
+#: src/modules/LandscapeMgr.cpp:418
 msgid "Author: "
 msgstr "Autor: "
 
-#: src/modules/LandscapeMgr.cpp:436
+#: src/modules/LandscapeMgr.cpp:421
 msgid "Location: "
 msgstr "Locaţie: "
 
-#: src/modules/LandscapeMgr.cpp:441
+#: src/modules/LandscapeMgr.cpp:426
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/modules/LandscapeMgr.cpp:444
+#: src/modules/LandscapeMgr.cpp:429
 msgid "Planet: "
 msgstr "Planeta: "
 
-#: src/modules/Nebula.cpp:93
+#: src/modules/Nebula.cpp:94
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Tip: <b>%1</b>"
 
-#: src/modules/Nebula.cpp:96 src/modules/Planet.cpp:130
+#: src/modules/Nebula.cpp:97 src/modules/Planet.cpp:135
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnitudine: <b>%1</b>"
 
-#: src/modules/Nebula.cpp:101
+#: src/modules/Nebula.cpp:102
 #, qt-format
 msgid "Size: %1"
 msgstr "Mărime: %1"
 
-#: src/modules/Nebula.cpp:237
+#: src/modules/Nebula.cpp:238
 msgid "Galaxy"
 msgstr "Galaxie"
 
-#: src/modules/Nebula.cpp:240
+#: src/modules/Nebula.cpp:241
 msgid "Open cluster"
-msgstr ""
+msgstr "Roi deschis"
 
-#: src/modules/Nebula.cpp:243
+#: src/modules/Nebula.cpp:244
 msgid "Globular cluster"
-msgstr ""
+msgstr "Roi globular"
 
-#: src/modules/Nebula.cpp:246
+#: src/modules/Nebula.cpp:247
 msgid "Nebula"
 msgstr "Nebuloasă"
 
-#: src/modules/Nebula.cpp:249
+#: src/modules/Nebula.cpp:250
 msgid "Planetary nebula"
 msgstr "Nebuloasă planetară"
 
-#: src/modules/Nebula.cpp:252
+#: src/modules/Nebula.cpp:253
 msgid "Cluster associated with nebulosity"
-msgstr ""
+msgstr "Roi difuz"
 
-#: src/modules/Nebula.cpp:255
+#: src/modules/Nebula.cpp:256
 msgid "Unknown"
 msgstr "Necunoscut(ă)"
 
-#: src/modules/Nebula.cpp:258
+#: src/modules/Nebula.cpp:259
 msgid "Undocumented type"
 msgstr "Tip nedocumentat"
 
-#: src/modules/NebulaMgr.cpp:372
+#: src/modules/NebulaMgr.cpp:376
 #, qt-format
 msgid "Loading NGC catalog: %1/%2"
-msgstr "Se încarcă catalogul NGC: %1/%2"
+msgstr "Încărcare catalog NGC: %1/%2"
 
-#: src/modules/Planet.cpp:133 src/modules/StarWrapper.cpp:102
+#: src/modules/Planet.cpp:138 src/modules/StarWrapper.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Magnitudine absolută: %1"
 
-#: src/modules/Planet.cpp:140
+#: src/modules/Planet.cpp:145
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
-msgstr "Distanță: %1AU"
+msgstr "Distanţă: %1UA"
 
-#: src/modules/Planet.cpp:144
+#: src/modules/Planet.cpp:149
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Diametru aparent: %1"
 
-#: src/modules/StarWrapper.cpp:41 src/modules/StarWrapper.cpp:98
+#: src/modules/StarWrapper.cpp:52 src/modules/StarWrapper.cpp:109
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
 msgstr "Magnitudine: <b>%1</b> (B-V: %2)"
 
-#: src/modules/StarWrapper.cpp:108
+#: src/modules/StarWrapper.cpp:119
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Tip spectral: %1"
 
-#: src/modules/StarWrapper.cpp:112
+#: src/modules/StarWrapper.cpp:123
 #, qt-format
 msgid "Distance: %1 Light Years"
-msgstr "Distanță: %1 Ani Lumină"
+msgstr "Distanța: %1 ani lumină"
 
-#: src/modules/StarWrapper.cpp:115
+#: src/modules/StarWrapper.cpp:126
 #, qt-format
 msgid "Parallax: %1\""
-msgstr ""
+msgstr "Paralaxa:%1\""
 
 #: src/modules/TextUI.cpp:63
 msgid "Set Location "
@@ -178,7 +178,7 @@ msgstr "Altitudine (m): "
 
 #: src/modules/TextUI.cpp:76
 msgid "Solar System Body: "
-msgstr "Corp al Sistemului Solar: "
+msgstr "Corpul sistemului solar "
 
 #: src/modules/TextUI.cpp:79
 msgid "Sky Time: "
@@ -198,7 +198,7 @@ msgstr "Calendar"
 
 #: src/modules/TextUI.cpp:83
 msgid "Sidereal"
-msgstr ""
+msgstr "Sideral"
 
 #: src/modules/TextUI.cpp:84
 msgid "Preset Sky Time: "
@@ -206,7 +206,7 @@ msgstr "Ora prestabilită a cerului: "
 
 #: src/modules/TextUI.cpp:85
 msgid "Sky Time At Start-up: "
-msgstr "Ora de vizualizare a cerului la pornire: "
+msgstr "Ora de vizualizare a cerului la pornire "
 
 #: src/modules/TextUI.cpp:86
 msgid "Actual Time"
@@ -218,7 +218,7 @@ msgstr "Ora Prestabilită"
 
 #: src/modules/TextUI.cpp:88
 msgid "Time Display Format: "
-msgstr "Format afişare timp: "
+msgstr "Format afisare oră: "
 
 #: src/modules/TextUI.cpp:89
 msgid "Date Display Format: "
@@ -234,15 +234,15 @@ msgstr "Limbaj autohton astronomic: "
 
 #: src/modules/TextUI.cpp:96
 msgid "Show: "
-msgstr "Arată: "
+msgstr "Afişează: "
 
 #: src/modules/TextUI.cpp:97
 msgid "Star Value Multiplier: "
-msgstr ""
+msgstr "Coeficient de multiplicare al stelei: "
 
 #: src/modules/TextUI.cpp:98
 msgid "Magnitude Sizing Multiplier: "
-msgstr "Multiplicator dimensiune magnitudine: "
+msgstr "Coeficient de multiplicare a magnitudinii: "
 
 #: src/modules/TextUI.cpp:99
 msgid "Maximum Magnitude to Label: "
@@ -254,7 +254,7 @@ msgstr "Clipire stele: "
 
 #: src/modules/TextUI.cpp:101
 msgid "Limiting Magnitude: "
-msgstr ""
+msgstr "Magnitudine limitată: "
 
 #: src/modules/TextUI.cpp:104
 msgid "Constellation Lines"
@@ -266,7 +266,7 @@ msgstr "Numele Constelaţiilor"
 
 #: src/modules/TextUI.cpp:106
 msgid "Constellation Art Intensity"
-msgstr "Intensitatea Desenelor Constalaţiilor"
+msgstr "Intensitatea desenelor artistice ale constelaţiilor"
 
 #: src/modules/TextUI.cpp:107
 msgid "Constellation Boundaries"
@@ -290,15 +290,15 @@ msgstr "Urmele Planetelor"
 
 #: src/modules/TextUI.cpp:112
 msgid "Meridian Line"
-msgstr "Linia Meridianului"
+msgstr "Meridianul"
 
 #: src/modules/TextUI.cpp:113
 msgid "Azimuthal Grid"
-msgstr "Tabel azimutal"
+msgstr "Caroiajul azimutal"
 
 #: src/modules/TextUI.cpp:114
 msgid "Equatorial Grid"
-msgstr "Tabel ecuatorial"
+msgstr "Caroiajul ecuatorial"
 
 #: src/modules/TextUI.cpp:115
 msgid "Equator Line"
@@ -306,7 +306,7 @@ msgstr "Ecuatorul"
 
 #: src/modules/TextUI.cpp:116
 msgid "Ecliptic Line"
-msgstr "Eliptica"
+msgstr "Ecliptica"
 
 #: src/modules/TextUI.cpp:117
 msgid "Nebula Names"
@@ -318,7 +318,7 @@ msgstr "Cercurile Nebuloaselor"
 
 #: src/modules/TextUI.cpp:121
 msgid "Light Pollution Luminance: "
-msgstr "Luminanța poluării luminoase: "
+msgstr "Poluarea luminoasă: "
 
 #: src/modules/TextUI.cpp:122
 msgid "Landscape: "
@@ -326,15 +326,15 @@ msgstr "Peisaj: "
 
 #: src/modules/TextUI.cpp:123
 msgid "Manual zoom: "
-msgstr "Focalizare manuală: "
+msgstr "Zoom manual: "
 
 #: src/modules/TextUI.cpp:124
 msgid "Object Sizing Rule: "
-msgstr "Regula dimensionării obiectului "
+msgstr "Regula dimensionării obiectului: "
 
 #: src/modules/TextUI.cpp:125
 msgid "Magnitude Scaling Multiplier: "
-msgstr ""
+msgstr "Coeficientul de multiplicare a magnitudinii "
 
 #: src/modules/TextUI.cpp:126
 msgid "Milky Way intensity: "
@@ -342,11 +342,11 @@ msgstr "Intensitatea Căii Lactee : "
 
 #: src/modules/TextUI.cpp:127
 msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Magnitudinea maximă a nebuloaselor pentru denumire: "
+msgstr "Magnitudinea maximă a nebuloaselor ce se afişează: "
 
 #: src/modules/TextUI.cpp:128
 msgid "Zoom Duration: "
-msgstr "Durata focalizării: "
+msgstr "Durata zoomului: "
 
 #: src/modules/TextUI.cpp:129
 msgid "Cursor Timeout: "
@@ -362,11 +362,11 @@ msgstr "Script local : "
 
 #: src/modules/TextUI.cpp:134
 msgid "CD/DVD Script: "
-msgstr "Scriptul pentru CD/DVD: "
+msgstr "Scriptul CD/DVD: "
 
 #: src/modules/TextUI.cpp:135
 msgid "USB Script: "
-msgstr "USB Script: "
+msgstr "Scriptul USB: "
 
 #: src/modules/TextUI.cpp:136
 msgid "Arrow down to load list."
@@ -378,7 +378,7 @@ msgstr "Selectează şi ieşi pentru a rula."
 
 #: src/modules/TextUI.cpp:140
 msgid "Load Default Configuration: "
-msgstr "Încărcare a configuraţiei implicite : "
+msgstr "Încărcarea configuraţiei implicite : "
 
 #: src/modules/TextUI.cpp:141
 msgid "Save Current Configuration as Default: "
@@ -390,17 +390,17 @@ msgstr "Închide: "
 
 #: src/modules/TextUI.cpp:143
 msgid "Update me via Internet: "
-msgstr "Actualizează prin internet : "
+msgstr "Actualizează via Internet : "
 
 #: src/modules/TextUI.cpp:144
 msgid "Set UI Locale: "
 msgstr "Stabileşte Limba Interfeţei "
 
-#: src/core/MappingClasses.cpp:11
+#: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
 msgstr "Perspectivă"
 
-#: src/core/MappingClasses.cpp:16
+#: src/core/StelProjectorClasses.cpp:30
 msgid ""
 "Perspective projection keeps the horizon a straight line. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
@@ -408,65 +408,77 @@ msgstr ""
 "Proiecția de perspectivă menține orizontul ca pe o linie constantă. Numele "
 "matematic pentru această metodă de proiecție este <i>proiecție gnomonică</i>."
 
-#: src/core/MappingClasses.cpp:77
+#: src/core/StelProjectorClasses.cpp:63
 msgid "Equal Area"
 msgstr "Arie egală"
 
-#: src/core/MappingClasses.cpp:82
+#: src/core/StelProjectorClasses.cpp:68
 msgid ""
 "The full name of this projection method is, <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
+"Numele complet al proiecţiei este <i>Proiecţie azimutală Lambert de arie "
+"egală</i>. La această proiecţie se păstrează aria dar se modifică unghiurile."
 
-#: src/core/MappingClasses.cpp:133
+#: src/core/StelProjectorClasses.cpp:111
 msgid "Stereographic"
-msgstr ""
+msgstr "Stereografică"
 
-#: src/core/MappingClasses.cpp:138
+#: src/core/StelProjectorClasses.cpp:116
 msgid ""
 "Stereographic projection is known since the antiquity and was originally "
 "known as the planisphere projection. It preserves the angles at which curves "
 "cross each other but it does not preserve area."
 msgstr ""
+"Proiecţia stereografică este cunoscută din antichitate ca o proiecţie plană. "
+"La această proiecţie unghiurile rămân neschimbate dar se modifică aria."
 
-#: src/core/MappingClasses.cpp:178
+#: src/core/StelProjectorClasses.cpp:150
 msgid "Fish-eye"
 msgstr "Ochi de pește"
 
-#: src/core/MappingClasses.cpp:183
+#: src/core/StelProjectorClasses.cpp:155
 msgid ""
 "In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
 "lines become curves when they appear a large angular distance from the "
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
 msgstr ""
+"La proiecţia Ochi de peşte, sau <i>Proiecţie azimutală echidistantă</i> "
+"apare o distorsiune similară cu imaginile preluate de o cameră grandangulară."
 
-#: src/core/MappingClasses.cpp:223
+#: src/core/StelProjectorClasses.cpp:189
 msgid "Cylinder"
 msgstr "Cilindru"
 
-#: src/core/MappingClasses.cpp:228
+#: src/core/StelProjectorClasses.cpp:194
 msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
 msgstr ""
+"Numele complet al acestei proiecţii este <i>Proiecţie cilindrică "
+"echidistantă</i>. La această proiecţie toate liniile paralele sunt egal "
+"distanţate."
 
-#: src/core/MappingClasses.cpp:278
+#: src/core/StelProjectorClasses.cpp:238
 msgid "Mercator"
-msgstr ""
+msgstr "Mercator"
 
-#: src/core/MappingClasses.cpp:283
+#: src/core/StelProjectorClasses.cpp:243
 msgid ""
 "The mercator projection is one of the most used world map projection. It "
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
+"Proiecţia Mercator este una dintre cele mai folosite proiecţii la harta "
+"lumii. Aceasta păstrează direcţiile şi formele dar modifică dimensiuni, "
+"odată cu depărtarea de ecuator."
 
-#: src/core/MappingClasses.cpp:336
+#: src/core/StelProjectorClasses.cpp:291
 msgid "Orthographic"
-msgstr "Ortografic"
+msgstr "Ortografică"
 
-#: src/core/MappingClasses.cpp:341
+#: src/core/StelProjectorClasses.cpp:296
 msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
@@ -474,52 +486,130 @@ msgstr ""
 "Proiecția ortografică este legată de perspectiva de proiecție, dar punctul "
 "perspectivei este setat la o distanță infinită."
 
-#: src/core/Mapping.cpp:28
-msgid "Maximum FOV: "
-msgstr ""
-
 #: src/core/StelObject.cpp:74
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
-msgstr ""
+msgstr "Ascensia/Declinaţia (J2000): %1/%2"
 
 #: src/core/StelObject.cpp:81
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr ""
+msgstr "Ascensia/Declinaţia (la data): %1/%2"
 
 #: src/core/StelObject.cpp:89
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr ""
+msgstr "Unghiul orar-Declinaţia: %1/%2"
 
 #: src/core/StelObject.cpp:100
 #, qt-format
 msgid "Az/Alt: %1/%2"
-msgstr ""
+msgstr "Azimut/Altitudine: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:258
+#: src/gui/ConfigurationDialog.cpp:284
 msgid "Select screenshot directory"
-msgstr ""
+msgstr "Directorul pentru capturi de imagine:"
 
-#: src/gui/ConfigurationDialog.cpp:411
+#: src/gui/ConfigurationDialog.cpp:449
 #, qt-format
 msgid "Startup FOV: %1%2"
-msgstr ""
+msgstr "Câmpul la pornirea programului: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:419
+#: src/gui/ConfigurationDialog.cpp:457
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Direcția de privire la pornirea programului Az/Alt: %1/%2"
 
-#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:208
-#: src/gui/StelGuiItems.cpp:531
+#: src/gui/ConfigurationDialog.cpp:489
+msgid "Author"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:490
+msgid "License"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:519
+msgid "Running script: "
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:526
+msgid "Running script: [none]"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:547
+#, qt-format
+msgid "Get catalog %1 of %2"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:548
+#, qt-format
+msgid ""
+"Download size: %1MB\n"
+"Star count: %2\n"
+"Magnitude range: %3 - %4"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:558
+msgid "Checking for new star catalogs..."
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:562
+msgid "All star catalogs are up to date."
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:566
+#, qt-format
+msgid ""
+"Downloading %1...\n"
+"(You can close this window.)"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:571
+msgid ""
+"Finished downloading new star catalogs!\n"
+"Restart Stellarium to display them."
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:575
+msgid "Verifying file integrity..."
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:579
+#, qt-format
+msgid ""
+"Error checking updates:\n"
+"%1"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:584
+#, c-format, qt-format
+msgid ""
+"Could not finalize download:\n"
+"Error moving temporary file %1.tmp to %1.cat"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:588
+#, qt-format
+msgid ""
+"Error downloading %1:\n"
+"%2"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:593
+#, qt-format
+msgid ""
+"Error downloading %1:\n"
+"File is corrupted."
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:209
+#: src/gui/StelGuiItems.cpp:532
 msgid "Space"
 msgstr "Spațiu"
 
 #: src/gui/HelpDialog.cpp:52
 msgid "Arrow keys & left mouse drag"
-msgstr ""
+msgstr "Taste direcţionale şi tragere cu buton stânga de mouse"
 
 #: src/gui/HelpDialog.cpp:53
 msgid "Page Up/Down"
@@ -541,17 +631,17 @@ msgstr "Clic dreapta"
 msgid "CTRL + Left click"
 msgstr "CTRL + Clic stânga"
 
-#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:197
+#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:203
 msgid "Movement and Selection"
 msgstr "Mișcare și selecție"
 
 #: src/gui/HelpDialog.cpp:61
 msgid "Pan view around the sky"
-msgstr ""
+msgstr "Deplasare"
 
 #: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
 msgid "Zoom in/out"
-msgstr ""
+msgstr "Mărire/Micșorare"
 
 #: src/gui/HelpDialog.cpp:64
 msgid "Select object"
@@ -559,21 +649,21 @@ msgstr "Selectați un obiect"
 
 #: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
 msgid "Clear selection"
-msgstr "Eliberați selecția"
+msgstr "Anulaţi selecţia:"
 
-#: src/gui/HelpDialog.cpp:138
+#: src/gui/HelpDialog.cpp:153
 msgid "Stellarium Help"
-msgstr "Ajutor Stellarium"
+msgstr "Manualul de ajutor Stellarium"
 
-#: src/gui/HelpDialog.cpp:139
+#: src/gui/HelpDialog.cpp:154
 msgid "Keys"
 msgstr "Taste"
 
-#: src/gui/HelpDialog.cpp:147
+#: src/gui/HelpDialog.cpp:162
 msgid "Further Reading"
 msgstr "Lectură aprofundată"
 
-#: src/gui/HelpDialog.cpp:148
+#: src/gui/HelpDialog.cpp:163
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -581,33 +671,35 @@ msgstr ""
 "Următoarele legături sunt legături web externe și vor porni navigatorul "
 "dumneavoastră web:\n"
 
-#: src/gui/HelpDialog.cpp:149
+#: src/gui/HelpDialog.cpp:164
 msgid "The Stellarium User Guide"
-msgstr "Ghidul Utilizatorului pentru Stellarium"
+msgstr "Ghidul utilizatorului pentru Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:153
+#: src/gui/HelpDialog.cpp:168
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Întrebări frecvente} despre Stellarium.  De asemenea și răspunsuri."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:158
+#: src/gui/HelpDialog.cpp:173
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
 msgstr ""
-"{Wiki-ul Stellariumi} - Informații generale. Puteți de asemenea găsi aici "
-"peisaje și scripturi trimise de utilizatori."
+"{Wiki-ul Stellarium} - Informații generale. Aici puteţi găsi peisaje și "
+"scripturi trimise de utilizatori."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:163
+#: src/gui/HelpDialog.cpp:178
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr ""
+"{Sistem de asistenţă cu tichet} - dacă aveţi nevoie de ajutor în utilizarea "
+"Stellarium, solicitaţi-ne ajutorul şi vom încerca să vă ajutăm."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:168
+#: src/gui/HelpDialog.cpp:183
 msgid ""
 "{Bug reporting system} - if something doesn't work properly and is not "
 "listed in the FAQ list, you can open bug reports here."
@@ -617,307 +709,363 @@ msgstr ""
 "erori pe această listă."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:173
+#: src/gui/HelpDialog.cpp:188
 msgid ""
 "{Feature request system} - if you have an idea for a new feature, send it to "
 "us. We can't promise to implement every idea, but we appreciate the feedback "
 "and review the list when we are planning future features."
 msgstr ""
+"{Sistem de solicitare facilităţi} - dacă aveţi o idee pentru o nouă "
+"facilitate în program, anunţaţi-ne. Nu putem promite că vom implementa toate "
+"ideile, dar apreciem sugestiile şi recitim lista când planificăm "
+"facilităţile viitoare."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:178
+#: src/gui/HelpDialog.cpp:193
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forumuri} - discutați despre Stellarium cu alți utilizatori."
 
-#: src/gui/HelpDialog.cpp:214 src/gui/HelpDialog.cpp:303
-#: src/gui/HelpDialog.cpp:305 src/gui/StelGui.cpp:204
+#: src/gui/HelpDialog.cpp:229 src/gui/HelpDialog.cpp:318
+#: src/gui/HelpDialog.cpp:320 src/gui/StelGui.cpp:222
 msgid "Miscellaneous"
 msgstr "Diverse"
 
-#: src/gui/HelpDialog.cpp:272
+#: src/gui/HelpDialog.cpp:287
 msgid "Developers"
 msgstr "Dezvoltatori"
 
-#: src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:288
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Coordonator proiect și dezvoltator principal: %1"
 
-#: src/gui/HelpDialog.cpp:274 src/gui/HelpDialog.cpp:276
-#: src/gui/HelpDialog.cpp:279
+#: src/gui/HelpDialog.cpp:289 src/gui/HelpDialog.cpp:291
+#: src/gui/HelpDialog.cpp:294
 #, qt-format
 msgid "Developer: %1"
-msgstr "Dezoltator: %1"
+msgstr "Dezvoltator: %1"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:290
 #, qt-format
 msgid "Graphic/other designer: %1"
-msgstr "Designer grafica/altele: %1"
+msgstr "Designer grafică/Alţi designeri: %1"
 
-#: src/gui/HelpDialog.cpp:277
+#: src/gui/HelpDialog.cpp:292
 #, qt-format
 msgid "Doc author/developer: %1"
-msgstr "Dezvoltator/autor documentație: %1"
+msgstr "Autor documentație/dezvoltator: %1"
 
-#: src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:293
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Dezvoltator pentru OSX: %1"
 
-#: src/gui/StelGui.cpp:145
+#: src/gui/StelGui.cpp:150
 msgid "Display Options"
 msgstr "Opțiuni de afișare"
 
-#: src/gui/StelGui.cpp:146
+#: src/gui/StelGui.cpp:151
 msgid "Constellation lines"
 msgstr "Liniile constelațiilor"
 
-#: src/gui/StelGui.cpp:147
+#: src/gui/StelGui.cpp:152
 msgid "Constellation art"
-msgstr ""
+msgstr "Constelaţii artistice"
 
-#: src/gui/StelGui.cpp:148
+#: src/gui/StelGui.cpp:153
 msgid "Constellation labels"
 msgstr "Numele constelațiilor"
 
-#: src/gui/StelGui.cpp:149
+#: src/gui/StelGui.cpp:154
 msgid "Constellation boundaries"
-msgstr "Granițele constelațiilor"
+msgstr "Limitele constelațiilor"
 
-#: src/gui/StelGui.cpp:151 src/ui_viewDialog.h:1002
-msgid "Azimutal grid"
+#: src/gui/StelGui.cpp:156 src/ui_viewDialog.h:1058
+msgid "Azimuthal grid"
 msgstr ""
 
-#: src/gui/StelGui.cpp:152 src/ui_viewDialog.h:1000
+#: src/gui/StelGui.cpp:157 src/ui_viewDialog.h:1056
 msgid "Equatorial grid"
-msgstr ""
+msgstr "Caroiaj ecuatorial"
 
-#: src/gui/StelGui.cpp:153 src/ui_viewDialog.h:1001
+#: src/gui/StelGui.cpp:158 src/ui_viewDialog.h:1057
 msgid "Equatorial J2000 grid"
-msgstr ""
+msgstr "Caroiaj ecuatorial J2000"
 
-#: src/gui/StelGui.cpp:154 src/ui_viewDialog.h:1005
+#: src/gui/StelGui.cpp:159 src/ui_viewDialog.h:1061
 msgid "Ecliptic line"
-msgstr "Linie eliptică"
+msgstr "Ecliptica"
 
-#: src/gui/StelGui.cpp:155 src/ui_viewDialog.h:1003
+#: src/gui/StelGui.cpp:160 src/ui_viewDialog.h:1059
 msgid "Equator line"
-msgstr ""
+msgstr "Ecuatorul"
 
-#: src/gui/StelGui.cpp:156 src/ui_viewDialog.h:1004
+#: src/gui/StelGui.cpp:161 src/ui_viewDialog.h:1060
 msgid "Meridian line"
-msgstr ""
+msgstr "Meridianul"
 
-#: src/gui/StelGui.cpp:157 src/ui_viewDialog.h:1006
+#: src/gui/StelGui.cpp:162 src/ui_viewDialog.h:1062
 msgid "Cardinal points"
 msgstr "Punctele cardinale"
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:164
 msgid "Ground"
 msgstr "Teren"
 
-#: src/gui/StelGui.cpp:160 src/ui_viewDialog.h:983
+#: src/gui/StelGui.cpp:165 src/ui_viewDialog.h:1039
 msgid "Atmosphere"
 msgstr "Atmosferă"
 
-#: src/gui/StelGui.cpp:161
+#: src/gui/StelGui.cpp:166
 msgid "Fog"
 msgstr "Ceaţă"
 
-#: src/gui/StelGui.cpp:163 src/ui_viewDialog.h:988
+#: src/gui/StelGui.cpp:168 src/ui_viewDialog.h:1044
 msgid "Nebulas"
 msgstr "Nebuloase"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:169
 msgid "Nebulas background images"
 msgstr "Imaginile de fundal ale nebuloaselor"
 
-#: src/gui/StelGui.cpp:165 src/ui_viewDialog.h:973 src/ui_viewDialog.h:987
+#: src/gui/StelGui.cpp:170 src/ui_viewDialog.h:1031 src/ui_viewDialog.h:1043
 msgid "Stars"
 msgstr "Stele"
 
-#: src/gui/StelGui.cpp:166
-msgid "Planets hints"
-msgstr "Indicii planete"
-
-#: src/gui/StelGui.cpp:168
-msgid "Night mode"
-msgstr "Mod de noapte"
-
-#: src/gui/StelGui.cpp:169
-msgid "Full-screen mode"
-msgstr "Mod pe tot ecranul"
-
-#: src/gui/StelGui.cpp:170
-msgid "Flip scene horizontally"
-msgstr ""
-
 #: src/gui/StelGui.cpp:171
-msgid "Flip scene vertically"
+msgid "Planets labels"
 msgstr ""
 
 #: src/gui/StelGui.cpp:173
+msgid "Night mode"
+msgstr "Mod de noapte"
+
+#: src/gui/StelGui.cpp:174
+msgid "Full-screen mode"
+msgstr "Mod pe tot ecranul"
+
+#: src/gui/StelGui.cpp:175
+msgid "Flip scene horizontally"
+msgstr "Imagine în oglindă"
+
+#: src/gui/StelGui.cpp:176
+msgid "Flip scene vertically"
+msgstr "Imagine răsturnată"
+
+#: src/gui/StelGui.cpp:178
 msgid "Windows"
 msgstr "Ferestre"
 
-#: src/gui/StelGui.cpp:174
+#: src/gui/StelGui.cpp:179
 msgid "Help window"
 msgstr "Fereastra de ajutor"
 
-#: src/gui/StelGui.cpp:175
+#: src/gui/StelGui.cpp:180
 msgid "Configuration window"
 msgstr "Fereastră de configurare"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:181
 msgid "Search window"
 msgstr "Fereastră de căutare"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:182
 msgid "Sky and viewing options window"
-msgstr ""
+msgstr "Opţiuni de vizualizare"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:183
 msgid "Date/time window"
-msgstr "Fereastră pentru dată/oră"
+msgstr "Opţiuni Dată/oră"
 
-#: src/gui/StelGui.cpp:179
+#: src/gui/StelGui.cpp:184
 msgid "Location window"
-msgstr "Fereastra de locație"
+msgstr "Opţiuni locație"
 
-#: src/gui/StelGui.cpp:181 src/ui_dateTimeDialogGui.h:294
+#: src/gui/StelGui.cpp:186 src/ui_dateTimeDialogGui.h:295
 msgid "Date and Time"
 msgstr "Data şi ora"
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:187
 msgid "Decrease time speed"
-msgstr "Scade viteza timpului"
+msgstr "Scade viteza ceasului"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:188
 msgid "Increase time speed"
-msgstr "Mărește viteza timpului"
+msgstr "Mărește viteza ceasului"
 
-#: src/gui/StelGui.cpp:184
+#: src/gui/StelGui.cpp:189
 msgid "Set normal time rate"
+msgstr "Setează rata ceasului"
+
+#: src/gui/StelGui.cpp:190
+msgid "Set time rate to zero"
 msgstr ""
 
-#: src/gui/StelGui.cpp:185
+#: src/gui/StelGui.cpp:191
 msgid "Set time to now"
-msgstr "Setează timpul la prezent"
+msgstr "Setează timpul prezent"
 
-#: src/gui/StelGui.cpp:186
+#: src/gui/StelGui.cpp:192
 msgid "Add 1 solar hour"
 msgstr "Adaugă o oră solară"
 
-#: src/gui/StelGui.cpp:187
+#: src/gui/StelGui.cpp:193
 msgid "Subtract 1 solar hour"
 msgstr "Scade o oră solară"
 
-#: src/gui/StelGui.cpp:188
+#: src/gui/StelGui.cpp:194
 msgid "Add 1 solar day"
 msgstr "Adaugă o zi solară"
 
-#: src/gui/StelGui.cpp:189
+#: src/gui/StelGui.cpp:195
 msgid "Subtract 1 solar day"
 msgstr "Scade o zi solară"
 
-#: src/gui/StelGui.cpp:190
+#: src/gui/StelGui.cpp:196
 msgid "Add 1 solar week"
 msgstr "Adaugă o săptămână solară"
 
-#: src/gui/StelGui.cpp:191
+#: src/gui/StelGui.cpp:197
 msgid "Subtract 1 solar week"
 msgstr "Scade o săptămână solară"
 
-#: src/gui/StelGui.cpp:192
-msgid "Add 1 sidereal day"
-msgstr ""
-
-#: src/gui/StelGui.cpp:193
-msgid "Subtract 1 sidereal day"
-msgstr ""
-
-#: src/gui/StelGui.cpp:194
-msgid "Add 1 sidereal week"
-msgstr ""
-
-#: src/gui/StelGui.cpp:195
-msgid "Subtract 1 sidereal week"
-msgstr ""
-
 #: src/gui/StelGui.cpp:198
+msgid "Add 1 sidereal day"
+msgstr "Adaugă o zi siderală"
+
+#: src/gui/StelGui.cpp:199
+msgid "Subtract 1 sidereal day"
+msgstr "Scade o zi siderală"
+
+#: src/gui/StelGui.cpp:200
+msgid "Add 1 sidereal week"
+msgstr "Adaugă o săptămână siderală"
+
+#: src/gui/StelGui.cpp:201
+msgid "Subtract 1 sidereal week"
+msgstr "Scade o săptămână siderală"
+
+#: src/gui/StelGui.cpp:204
 msgid "Center on selected object"
 msgstr "Centrează pe obiectul selectat"
 
-#: src/gui/StelGui.cpp:199
+#: src/gui/StelGui.cpp:205
 msgid "Track object"
 msgstr "Urmărește obiectul"
 
-#: src/gui/StelGui.cpp:200
+#: src/gui/StelGui.cpp:206
 msgid "Zoom in on selected object"
 msgstr "Mărește pe obiectul selectat"
 
-#: src/gui/StelGui.cpp:201
+#: src/gui/StelGui.cpp:207
 msgid "Zoom out"
 msgstr "Micșorează"
 
-#: src/gui/StelGui.cpp:202
+#: src/gui/StelGui.cpp:208
 msgid "Set home planet to selected planet"
+msgstr "Setează ca referinţă planeta selectată"
+
+#: src/gui/StelGui.cpp:210
+msgid "Telescope Control"
 msgstr ""
 
-#: src/gui/StelGui.cpp:205
-msgid "Switch between equatorial and azimuthal mount"
-msgstr "Schimbă între montură ecuatorială și azimutală"
+#: src/gui/StelGui.cpp:211
+msgid "Move telescope #0 to selected object"
+msgstr ""
 
-#: src/gui/StelGui.cpp:206
+#: src/gui/StelGui.cpp:212
+msgid "Move telescope #1 to selected object"
+msgstr ""
+
+#: src/gui/StelGui.cpp:213
+msgid "Move telescope #2 to selected object"
+msgstr ""
+
+#: src/gui/StelGui.cpp:214
+msgid "Move telescope #3 to selected object"
+msgstr ""
+
+#: src/gui/StelGui.cpp:215
+msgid "Move telescope #4 to selected object"
+msgstr ""
+
+#: src/gui/StelGui.cpp:216
+msgid "Move telescope #5 to selected object"
+msgstr ""
+
+#: src/gui/StelGui.cpp:217
+msgid "Move telescope #6 to selected object"
+msgstr ""
+
+#: src/gui/StelGui.cpp:218
+msgid "Move telescope #7 to selected object"
+msgstr ""
+
+#: src/gui/StelGui.cpp:219
+msgid "Move telescope #8 to selected object"
+msgstr ""
+
+#: src/gui/StelGui.cpp:220
+msgid "Move telescope #9 to selected object"
+msgstr ""
+
+#: src/gui/StelGui.cpp:223
+msgid "Switch between equatorial and azimuthal mount"
+msgstr "Schimbă între montura ecuatorială și azimutală"
+
+#: src/gui/StelGui.cpp:224
 msgid "Quit"
 msgstr "Ieșire"
 
-#: src/gui/StelGui.cpp:207
+#: src/gui/StelGui.cpp:225
 msgid "Save screenshot"
 msgstr "Salvează captura de ecran"
 
-#: src/gui/StelGui.cpp:210
+#: src/gui/StelGui.cpp:228
 msgid "Auto hide horizontal button bar"
 msgstr "Ascunde automat bara orizontală cu butoane"
 
-#: src/gui/StelGui.cpp:211
+#: src/gui/StelGui.cpp:229
 msgid "Auto hide vertical button bar"
 msgstr "Ascunde automat bara verticală cu butoane"
 
-#: src/gui/StelGui.cpp:783
+#: src/gui/StelGui.cpp:230
+msgid "Toggle visibility of toolbars"
+msgstr ""
+
+#: src/gui/StelGui.cpp:835
 msgid "Stellarium"
 msgstr "Stellarium"
 
-#: src/gui/StelGuiItems.cpp:432
+#: src/gui/StelGuiItems.cpp:433
 #, no-c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:345
+#: src/gui/ViewDialog.cpp:340
 msgid "No description"
 msgstr "Fără descriere"
 
-#: src/gui/ViewDialog.cpp:409
+#: src/gui/ViewDialog.cpp:396
 msgid "No shooting stars"
-msgstr "Nicio stea căzătoare"
+msgstr "Fără stele căzătoare"
 
-#: src/gui/ViewDialog.cpp:412
+#: src/gui/ViewDialog.cpp:399
 msgid "Normal rate"
 msgstr "Rată normală"
 
-#: src/gui/ViewDialog.cpp:415
+#: src/gui/ViewDialog.cpp:402
 msgid "Standard Perseids rate"
-msgstr ""
+msgstr "Rata Perseidelor standard"
 
-#: src/gui/ViewDialog.cpp:418
+#: src/gui/ViewDialog.cpp:405
 msgid "Exceptional Leonid rate"
-msgstr ""
+msgstr "Rata Leonidelor excepţională"
 
-#: src/gui/ViewDialog.cpp:421
+#: src/gui/ViewDialog.cpp:408
 msgid "Highest rate ever (1966 Leonids)"
-msgstr ""
+msgstr "Cea mai mare rată (Curentul Leonidelor 1966)"
 
-#: src/main.cpp:55
+#: src/main.cpp:62
 msgid "This system does not support OpenGL."
 msgstr "Acest sistem nu suportă OpenGL."
 
@@ -935,7 +1083,7 @@ msgstr "Venus"
 
 #: src/translations.h:36
 msgid "Earth"
-msgstr "Terra"
+msgstr "Pamântul"
 
 #: src/translations.h:37
 msgid "Moon"
@@ -1051,11 +1199,11 @@ msgstr "V"
 
 #: src/translations.h:69
 msgid "Chinese"
-msgstr "Chineză"
+msgstr "Chinezesc"
 
 #: src/translations.h:70
 msgid "Egyptian"
-msgstr "Egiptean"
+msgstr "Egipteană"
 
 #: src/translations.h:71
 msgid "Inuit"
@@ -1079,7 +1227,7 @@ msgstr "Norse"
 
 #: src/translations.h:76
 msgid "Polynesian"
-msgstr "Polinezian"
+msgstr "Polineziană"
 
 #: src/translations.h:77
 msgid "Western"
@@ -1089,303 +1237,327 @@ msgstr "Occidental"
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
-#: src/ui_dateTimeDialogGui.h:293 src/ui_helpDialogGui.h:211
-#: src/ui_locationDialogGui.h:384 src/ui_viewDialog.h:964
-#: src/ui_configurationDialog.h:526
+#: src/ui_dateTimeDialogGui.h:294 src/ui_helpDialogGui.h:267
+#: src/ui_locationDialogGui.h:385 src/ui_viewDialog.h:1022
+#: src/ui_configurationDialog.h:669
 msgid "Form"
 msgstr "Formular"
 
-#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
+#: src/ui_dateTimeDialogGui.h:297 src/ui_dateTimeDialogGui.h:298
 msgid "/"
 msgstr "/"
 
-#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
+#: src/ui_dateTimeDialogGui.h:299 src/ui_dateTimeDialogGui.h:300
 msgid ":"
 msgstr ":"
 
-#: src/ui_helpDialogGui.h:212 src/ui_helpDialogGui.h:214
+#: src/ui_helpDialogGui.h:268 src/ui_helpDialogGui.h:270
 msgid "Help"
 msgstr "Ajutor"
 
-#: src/ui_helpDialogGui.h:215
+#: src/ui_helpDialogGui.h:271
 msgid "About"
 msgstr "Despre"
 
-#: src/ui_locationDialogGui.h:385
+#: src/ui_helpDialogGui.h:272
+msgid "Refresh"
+msgstr ""
+
+#: src/ui_helpDialogGui.h:273
+msgid "Log"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:386
 msgid "Location"
 msgstr "Locaţia"
 
-#: src/ui_locationDialogGui.h:389
+#: src/ui_locationDialogGui.h:390
 msgid "Current location information"
 msgstr "Informații despre locația curentă"
 
-#: src/ui_locationDialogGui.h:390
+#: src/ui_locationDialogGui.h:391
 msgid "Use as default"
 msgstr "Folosește ca implicit"
 
-#: src/ui_locationDialogGui.h:391
+#: src/ui_locationDialogGui.h:392
 msgid "Delete"
 msgstr "Șterge"
 
-#: src/ui_locationDialogGui.h:392
+#: src/ui_locationDialogGui.h:393
 msgid "Add to list"
 msgstr "Adaugă la listă"
 
-#: src/ui_locationDialogGui.h:393
+#: src/ui_locationDialogGui.h:394
 msgid "Latitude:"
 msgstr "Latitudine:"
 
-#: src/ui_locationDialogGui.h:396 src/ui_locationDialogGui.h:402
+#: src/ui_locationDialogGui.h:396 src/ui_locationDialogGui.h:400
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr ""
+"Introduceţi date în format sexagesimal sau utilizând formatul dms, de ex.: "
+"+1d 12m 8s"
 
-#: src/ui_locationDialogGui.h:399
+#: src/ui_locationDialogGui.h:398
 msgid "Longitude:"
 msgstr "Longitudine:"
 
-#: src/ui_locationDialogGui.h:405
+#: src/ui_locationDialogGui.h:402
 msgid "Altitude:"
 msgstr "Altitudine:"
 
-#: src/ui_locationDialogGui.h:408
+#: src/ui_locationDialogGui.h:404
 msgid "Enter the altitude in meter"
 msgstr "Introduceți altitudinea în metri"
 
-#: src/ui_locationDialogGui.h:411
+#: src/ui_locationDialogGui.h:406
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:412
+#: src/ui_locationDialogGui.h:407
 msgid "Name/City:"
 msgstr "Nume/Oraș:"
 
-#: src/ui_locationDialogGui.h:413
+#: src/ui_locationDialogGui.h:408
 msgid "Country:"
 msgstr "Țară:"
 
-#: src/ui_locationDialogGui.h:414
+#: src/ui_locationDialogGui.h:409
 msgid "Planet:"
 msgstr "Planetă:"
 
-#: src/ui_searchDialogGui.h:199 src/ui_searchDialogGui.h:200
+#: src/ui_searchDialogGui.h:233 src/ui_searchDialogGui.h:234
 msgid "Find Object"
-msgstr "Găsește obiect"
+msgstr "Căutare obiect"
 
-#: src/ui_viewDialog.h:965
+#: src/ui_searchDialogGui.h:239
+msgid "RA/Dec (J2000):"
+msgstr ""
+
+#: src/ui_viewDialog.h:1023
 msgid "View"
-msgstr "Vizualizează"
+msgstr "Vizualizare"
 
-#: src/ui_viewDialog.h:967
+#: src/ui_viewDialog.h:1025
 msgid "Planets and satellites"
 msgstr "Planete și sateliți"
 
-#: src/ui_viewDialog.h:968
+#: src/ui_viewDialog.h:1026
 msgid "Show planets"
-msgstr "Arată planetele"
+msgstr "Afişează planetele"
 
-#: src/ui_viewDialog.h:969
+#: src/ui_viewDialog.h:1027
 msgid "Show planet markers"
-msgstr ""
+msgstr "Afişează marcherii planetelor"
 
-#: src/ui_viewDialog.h:970
+#: src/ui_viewDialog.h:1028
 msgid "Show planet orbits"
-msgstr "Arată orbitele planetelor"
+msgstr "Afişează orbitele planetelor"
 
-#: src/ui_viewDialog.h:971
+#: src/ui_viewDialog.h:1029
 msgid "Simulate light speed"
 msgstr "Simulează viteza luminii"
 
-#: src/ui_viewDialog.h:972
+#: src/ui_viewDialog.h:1030
 msgid "Scale Moon"
-msgstr ""
+msgstr "Luna la scară"
 
-#: src/ui_viewDialog.h:974
+#: src/ui_viewDialog.h:1032
 msgid "Absolute scale:"
-msgstr ""
+msgstr "Scara absolută:"
 
-#: src/ui_viewDialog.h:975
+#: src/ui_viewDialog.h:1033
 msgid "Relative scale:"
-msgstr ""
+msgstr "Scara relativă:"
 
-#: src/ui_viewDialog.h:976
+#: src/ui_viewDialog.h:1034
 msgid "Twinkle:"
 msgstr "Sclipire:"
 
-#: src/ui_viewDialog.h:979
+#: src/ui_viewDialog.h:1036
 msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
+"Reduce luminozitatea unei stele atunci când un obiect strălucitor este "
+"vizibil"
 
-#: src/ui_viewDialog.h:982
+#: src/ui_viewDialog.h:1038
 msgid "Dynamic eye adaptation"
-msgstr ""
+msgstr "Adaptare oculară dinamică"
 
-#: src/ui_viewDialog.h:984
+#: src/ui_viewDialog.h:1040
 msgid "Show atmosphere"
 msgstr "Arată atmosfera"
 
-#: src/ui_viewDialog.h:985
+#: src/ui_viewDialog.h:1041
 msgid "Light pollution: "
 msgstr "Poluare luminoasă: "
 
-#: src/ui_viewDialog.h:986
+#: src/ui_viewDialog.h:1042
 msgid "Labels and Markers"
-msgstr ""
+msgstr "Etichete şi marcheri"
 
-#: src/ui_viewDialog.h:989
+#: src/ui_viewDialog.h:1045
 msgid "Planets"
 msgstr "Planete"
 
-#: src/ui_viewDialog.h:990
+#: src/ui_viewDialog.h:1046
 msgid "Shooting Stars"
 msgstr "Stele căzătoare"
 
-#: src/ui_viewDialog.h:991
+#: src/ui_viewDialog.h:1047
 msgid "Hourly zenith rate:"
-msgstr ""
+msgstr "Rata orară zenitală:"
 
-#: src/ui_viewDialog.h:992
+#: src/ui_viewDialog.h:1048
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:993
+#: src/ui_viewDialog.h:1049
 msgid "10"
 msgstr "10"
 
-#: src/ui_viewDialog.h:994
+#: src/ui_viewDialog.h:1050
 msgid "80"
 msgstr "80"
 
-#: src/ui_viewDialog.h:995
+#: src/ui_viewDialog.h:1051
 msgid "10000"
 msgstr "10000"
 
-#: src/ui_viewDialog.h:996
+#: src/ui_viewDialog.h:1052
 msgid "144000"
 msgstr "144000"
 
-#: src/ui_viewDialog.h:998
+#: src/ui_viewDialog.h:1054
 msgid "Sky"
 msgstr "Cer"
 
-#: src/ui_viewDialog.h:999
+#: src/ui_viewDialog.h:1055
 msgid "Celestial Sphere"
-msgstr ""
+msgstr "Sfera cerească"
 
-#: src/ui_viewDialog.h:1007
+#: src/ui_viewDialog.h:1063
 msgid "Constellations"
 msgstr "Constelaţii"
 
-#: src/ui_viewDialog.h:1008
+#: src/ui_viewDialog.h:1064
 msgid "Show lines"
-msgstr "Arată linii"
+msgstr "Afişează linii"
 
-#: src/ui_viewDialog.h:1009
+#: src/ui_viewDialog.h:1065
 msgid "Show labels"
-msgstr "Arată etichete"
+msgstr "Afişează etichete"
 
-#: src/ui_viewDialog.h:1010
+#: src/ui_viewDialog.h:1066
 msgid "Show boundaries"
-msgstr "Arată granițe"
+msgstr "Afişează limite"
 
-#: src/ui_viewDialog.h:1011
+#: src/ui_viewDialog.h:1067
 msgid "Show art"
-msgstr "Arată arta"
+msgstr "Afişează designul artistic"
 
-#: src/ui_viewDialog.h:1012
+#: src/ui_viewDialog.h:1068
 msgid "Art brightness: "
-msgstr "Luminozitatea artei: "
+msgstr "Luminozitatea designului artistic: "
 
-#: src/ui_viewDialog.h:1013
+#: src/ui_viewDialog.h:1069
 msgid "Projection"
 msgstr "Proiecţie"
 
-#: src/ui_viewDialog.h:1014
+#: src/ui_viewDialog.h:1070
 msgid "Markings"
-msgstr "Însemne"
+msgstr "Marcheri:"
 
-#: src/ui_viewDialog.h:1015 src/ui_viewDialog.h:1021
+#: src/ui_viewDialog.h:1071 src/ui_viewDialog.h:1077
 msgid "Options"
 msgstr "Opțiuni"
 
-#: src/ui_viewDialog.h:1016
+#: src/ui_viewDialog.h:1072
 msgid "Show ground"
-msgstr "Arată pământul"
+msgstr "Afişează terenul"
 
-#: src/ui_viewDialog.h:1017
+#: src/ui_viewDialog.h:1073
 msgid "Show fog"
-msgstr "Arată ceață"
+msgstr "Foloseşte ceaţa"
 
-#: src/ui_viewDialog.h:1018
+#: src/ui_viewDialog.h:1074
 msgid "Use associated planet and position"
-msgstr ""
+msgstr "Foloseşte planetele asociate şi poziţia"
 
-#: src/ui_viewDialog.h:1019
+#: src/ui_viewDialog.h:1075
 msgid "Use this landscape as default"
 msgstr "Folosește acest peisaj ca implicit"
 
-#: src/ui_viewDialog.h:1020
+#: src/ui_viewDialog.h:1076
 msgid "Landscape"
 msgstr "Peisaj"
 
-#: src/ui_viewDialog.h:1022
+#: src/ui_viewDialog.h:1078
 msgid "Use associated language for sky labeling"
 msgstr "Folosește limba asociată pentru etichetarea cerului"
 
-#: src/ui_viewDialog.h:1023
+#: src/ui_viewDialog.h:1079
 msgid "Use this sky culture as default"
-msgstr "Folosește această cultură a cerului ca implicită"
+msgstr "Folosește această \"Sky culture\" ca implicită"
 
-#: src/ui_viewDialog.h:1024
+#: src/ui_viewDialog.h:1080
 msgid "Starlore"
+msgstr "Starlore"
+
+#: src/ui_viewDialog.h:1081
+msgid "Add"
 msgstr ""
 
-#: src/ui_configurationDialog.h:527
+#: src/ui_viewDialog.h:1082
+msgid "Images"
+msgstr ""
+
+#: src/ui_configurationDialog.h:670
 msgid "Configuration"
 msgstr "Configurare"
 
-#: src/ui_configurationDialog.h:539
+#: src/ui_configurationDialog.h:678
 msgid "Program language"
 msgstr "Limba programului"
 
-#: src/ui_configurationDialog.h:540
+#: src/ui_configurationDialog.h:679
 msgid "Selected object information"
 msgstr "Informații despre obiectul selectat"
 
-#: src/ui_configurationDialog.h:543
+#: src/ui_configurationDialog.h:681
 msgid "Display all of the information which is available"
 msgstr "Afișează toate informațiile disponibile"
 
-#: src/ui_configurationDialog.h:546
+#: src/ui_configurationDialog.h:683
 msgid "All available"
-msgstr "Tot ce e disponibil"
+msgstr "Toate disponibile"
 
-#: src/ui_configurationDialog.h:549
+#: src/ui_configurationDialog.h:685
 msgid "Display only abbreviated information"
-msgstr "Afișează doar informații abreviate"
+msgstr "Afișează doar informații prescurtate"
 
-#: src/ui_configurationDialog.h:552
+#: src/ui_configurationDialog.h:687
 msgid "Short"
 msgstr "Scurt"
 
-#: src/ui_configurationDialog.h:553
+#: src/ui_configurationDialog.h:688
 msgid "None"
-msgstr "Niciunul/Niciuna"
+msgstr "Nimic"
 
-#: src/ui_configurationDialog.h:554
+#: src/ui_configurationDialog.h:689
 msgid "Default options"
 msgstr "Opțiunile implicite"
 
-#: src/ui_configurationDialog.h:555
+#: src/ui_configurationDialog.h:690
 msgid "Save settings"
 msgstr "Salvează setările"
 
-#: src/ui_configurationDialog.h:556
+#: src/ui_configurationDialog.h:691
 msgid "Restore defaults"
 msgstr "Restaurează setările implicite"
 
-#: src/ui_configurationDialog.h:557
+#: src/ui_configurationDialog.h:692
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -1395,149 +1567,188 @@ msgstr ""
 "tuturor opțiunilor curente include FOV-ul curent și direcția de vizualizare "
 "pentru a fi folosite la următoarea pornire a programului."
 
-#: src/ui_configurationDialog.h:558
-msgid "Startup FOV: XX"
+#: src/ui_configurationDialog.h:693
+msgid "Star catalog updates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:559
-msgid "Startup direction of view: xxxx"
+#: src/ui_configurationDialog.h:694
+msgid "Download this file to view even more stars"
 msgstr ""
 
-#: src/ui_configurationDialog.h:560
+#: src/ui_configurationDialog.h:695
+msgid "Retry"
+msgstr ""
+
+#: src/ui_configurationDialog.h:696
+msgid "Cancel"
+msgstr "Renunţă"
+
+#: src/ui_configurationDialog.h:697
 msgid "Main"
 msgstr "Principal"
 
-#: src/ui_configurationDialog.h:561
+#: src/ui_configurationDialog.h:698
 msgid "Control"
 msgstr "Control"
 
-#: src/ui_configurationDialog.h:564
+#: src/ui_configurationDialog.h:700
 msgid "Allow keyboard to pan and zoom"
-msgstr ""
+msgstr "Permite mărire/micşorare/deplasare din tastatură"
 
-#: src/ui_configurationDialog.h:567
+#: src/ui_configurationDialog.h:702
 msgid "Enable keyboard navigation"
 msgstr "Activează navigarea din tastatură"
 
-#: src/ui_configurationDialog.h:570
+#: src/ui_configurationDialog.h:704
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr ""
+msgstr "Permite mărire/micşorare/deplasare din mouse"
 
-#: src/ui_configurationDialog.h:573
+#: src/ui_configurationDialog.h:706
 msgid "Enable mouse navigation"
 msgstr "Activează navigarea cu mouse-ul"
 
-#: src/ui_configurationDialog.h:574
+#: src/ui_configurationDialog.h:707
 msgid "Startup date and time"
-msgstr ""
+msgstr "Data şi ora la pornirea programului"
 
-#: src/ui_configurationDialog.h:577
+#: src/ui_configurationDialog.h:709
 msgid "Starts Stellarium at system clock date and time"
-msgstr ""
+msgstr "Porneşte Stellarium cu data şi ora de sistem"
 
-#: src/ui_configurationDialog.h:580
+#: src/ui_configurationDialog.h:711
 msgid "System date and time"
 msgstr "Data și ora sistemului"
 
-#: src/ui_configurationDialog.h:583
+#: src/ui_configurationDialog.h:713
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
-msgstr ""
+msgstr "Stabileşte acest moment pentru pornirea viitoare a Stellarium"
 
-#: src/ui_configurationDialog.h:586
+#: src/ui_configurationDialog.h:715
 msgid "System date at:"
-msgstr ""
+msgstr "Data de sistem la:"
 
-#: src/ui_configurationDialog.h:589
+#: src/ui_configurationDialog.h:717
 msgid "Use a specific date and time when Stellarium starts up"
+msgstr "Foloseşte o dată şi oră anume când porneşte Stellarium"
+
+#: src/ui_configurationDialog.h:719
+msgid "Other:"
+msgstr "Altele:"
+
+#: src/ui_configurationDialog.h:720
+msgid "use current"
 msgstr ""
 
-#: src/ui_configurationDialog.h:592
-msgid "Other:"
-msgstr "Alta:"
-
-#: src/ui_configurationDialog.h:593
+#: src/ui_configurationDialog.h:721
 msgid "Navigation"
 msgstr "Navigare"
 
-#: src/ui_configurationDialog.h:594
+#: src/ui_configurationDialog.h:722
 msgid "Amateur astronomer options"
-msgstr ""
+msgstr "Opţiuni specifice astronomilor amatori"
 
-#: src/ui_configurationDialog.h:597
+#: src/ui_configurationDialog.h:724
 msgid "Toggle vertical and horizontal image flip buttons."
-msgstr ""
+msgstr "Buton comutare mod telescop"
 
-#: src/ui_configurationDialog.h:600
+#: src/ui_configurationDialog.h:726
 msgid "Show flip buttons"
-msgstr ""
+msgstr "Afişează butoanele pentru mod telescop"
 
-#: src/ui_configurationDialog.h:601
+#: src/ui_configurationDialog.h:727
 msgid "Planetarium options"
 msgstr "Opțiuni planetarium"
 
-#: src/ui_configurationDialog.h:604
+#: src/ui_configurationDialog.h:729
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr ""
-"Distorsionarea de oglindă sferică este folosită când se proiectează "
-"Stellarium pe o oglindă sferică pentru sisteme de planetariu cu cost scăzut."
+"Distorsiunea tip oglindă sferică este folosită atunci când Stellarium "
+"proiectează imagini pe o oglindă sferică pentru sisteme de planetariu cu "
+"cost scăzut."
 
-#: src/ui_configurationDialog.h:607
+#: src/ui_configurationDialog.h:731
 msgid "Spheric mirror distortion"
-msgstr "Distorsionare de oglidă sferică"
+msgstr "Distorsiune tip oglindă sferică"
 
-#: src/ui_configurationDialog.h:610
+#: src/ui_configurationDialog.h:733
 msgid "Align labels with the horizon"
-msgstr ""
+msgstr "Aliniază etichetele la linia orizontului"
 
-#: src/ui_configurationDialog.h:613
+#: src/ui_configurationDialog.h:735
 msgid "Gravity labels"
-msgstr ""
+msgstr "Etichete gravitaţionale"
 
-#: src/ui_configurationDialog.h:616
+#: src/ui_configurationDialog.h:737
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
+"Atunci când opţiunea Auto-micşorare este activă, aceasta va seta şi direcţia "
+"de vizualizare iniţială"
 
-#: src/ui_configurationDialog.h:619
+#: src/ui_configurationDialog.h:739
 msgid "Auto zoom out returns to initial direction of view"
-msgstr ""
+msgstr "Auto-micşorarea conduce la direcţia de vizualizare iniţială"
 
-#: src/ui_configurationDialog.h:622
+#: src/ui_configurationDialog.h:741
 msgid "Mask out everything outside a central circle in the main view"
-msgstr ""
+msgstr "Maschează tot ce e în afara cercului de vizualizare"
 
-#: src/ui_configurationDialog.h:625
+#: src/ui_configurationDialog.h:743
 msgid "Disc viewport"
+msgstr "Fereastră tip disc"
+
+#: src/ui_configurationDialog.h:744
+msgid "Select single constellation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:626
-msgid "Sceenshots"
-msgstr "Capturi de ecran"
+#: src/ui_configurationDialog.h:745
+msgid "Screenshots"
+msgstr ""
 
-#: src/ui_configurationDialog.h:627
+#: src/ui_configurationDialog.h:746
 msgid "Screenshot Directory"
-msgstr "Dosarul pentru capturi de ecran"
+msgstr "Directorul pentru capturi de ecran"
 
-#: src/ui_configurationDialog.h:629
+#: src/ui_configurationDialog.h:748
+msgid "Invert colors"
+msgstr ""
+
+#: src/ui_configurationDialog.h:749
 msgid "Other"
 msgstr "Altele"
 
-#: src/ui_configurationDialog.h:632
+#: src/ui_configurationDialog.h:751
 msgid "Hides the mouse cursor when inactive"
-msgstr "Ascunde cursorul mouseului atunci când este inactiv"
+msgstr "Ascunde cursorul mouseului atunci când acesta este inactiv"
 
-#: src/ui_configurationDialog.h:635
+#: src/ui_configurationDialog.h:753
 msgid "Mouse cursor timeout (seconds):"
+msgstr "Timeout-ul cursorului de mouse (secunde):"
+
+#: src/ui_configurationDialog.h:754
+msgid "Tools"
+msgstr "Instrumente"
+
+#: src/ui_configurationDialog.h:756
+msgid "Close window when script runs"
 msgstr ""
 
-#: src/ui_configurationDialog.h:636
-msgid "Tools"
-msgstr "Unelte"
+#: src/ui_configurationDialog.h:758
+msgid "Run the selected script"
+msgstr ""
+
+#: src/ui_configurationDialog.h:762
+msgid "Stop a running script"
+msgstr ""
+
+#: src/ui_configurationDialog.h:765
+msgid "Scripts"
+msgstr ""
 
 #~ msgid "m"
 #~ msgstr "m"
@@ -1616,9 +1827,6 @@ msgstr "Unelte"
 
 #~ msgid "Camelopardalis"
 #~ msgstr "Girafa"
-
-#~ msgid "Cancel"
-#~ msgstr "Renunţă"
 
 #~ msgid "Cancer"
 #~ msgstr "Racul"
