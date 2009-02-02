@@ -1,16 +1,16 @@
-# Hawaiian translations for stellarium package.
-# Copyright (C) 2006 Fabien Chereau (c) 2005
+# Hindi translation for stellarium
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the stellarium package.
-#  <rob@digitaliseducation.com>, 2006.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: stellarium 0.8.1\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: stellarium\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-01-14 18:52+0100\n"
-"PO-Revision-Date: 2008-06-02 20:52+0000\n"
-"Last-Translator: Rob Spearman <rob@digitaliseducation.com>\n"
-"Language-Team: English <en@translate.freefriends.org>\n"
+"PO-Revision-Date: 2009-01-31 05:55+0000\n"
+"Last-Translator: Varun <Unknown>\n"
+"Language-Team: Hindi <hi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: src/modules/ConstellationMgr.cpp:377
 #, qt-format
 msgid "Loading Constellation Art: %1/%2"
-msgstr ""
+msgstr "तारामंडल चित्र भारण: %1/%2"
 
 #: src/modules/StarMgr.cpp:291
 #, qt-format
@@ -29,7 +29,7 @@ msgstr ""
 
 #: src/modules/LandscapeMgr.cpp:418
 msgid "Author: "
-msgstr ""
+msgstr "लेखकः "
 
 #: src/modules/LandscapeMgr.cpp:421
 msgid "Location: "
@@ -42,12 +42,12 @@ msgstr ""
 
 #: src/modules/LandscapeMgr.cpp:429
 msgid "Planet: "
-msgstr ""
+msgstr "ग्रह: "
 
 #: src/modules/Nebula.cpp:94
 #, qt-format
 msgid "Type: <b>%1</b>"
-msgstr ""
+msgstr "किस्म: %1"
 
 #: src/modules/Nebula.cpp:97 src/modules/Planet.cpp:135
 #, qt-format
@@ -57,11 +57,11 @@ msgstr ""
 #: src/modules/Nebula.cpp:102
 #, qt-format
 msgid "Size: %1"
-msgstr ""
+msgstr "आकारः %1"
 
 #: src/modules/Nebula.cpp:238
 msgid "Galaxy"
-msgstr ""
+msgstr "आकाशगंगा"
 
 #: src/modules/Nebula.cpp:241
 msgid "Open cluster"
@@ -85,7 +85,7 @@ msgstr ""
 
 #: src/modules/Nebula.cpp:256
 msgid "Unknown"
-msgstr ""
+msgstr "अज्ञात"
 
 #: src/modules/Nebula.cpp:259
 msgid "Undocumented type"
@@ -137,55 +137,55 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:64
 msgid "Set Time "
-msgstr "Set Time "
+msgstr ""
 
 #: src/modules/TextUI.cpp:65
 msgid "General "
-msgstr "General "
+msgstr ""
 
 #: src/modules/TextUI.cpp:66
 msgid "Stars "
-msgstr "Stars "
+msgstr ""
 
 #: src/modules/TextUI.cpp:67
 msgid "Colors "
-msgstr "Colors "
+msgstr ""
 
 #: src/modules/TextUI.cpp:68
 msgid "Effects "
-msgstr "Effects "
+msgstr ""
 
 #: src/modules/TextUI.cpp:69
 msgid "Scripts "
-msgstr "Scripts "
+msgstr ""
 
 #: src/modules/TextUI.cpp:70
 msgid "Administration "
-msgstr "Administration "
+msgstr ""
 
 #: src/modules/TextUI.cpp:73
 msgid "Latitude: "
-msgstr "Latitude: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:74
 msgid "Longitude: "
-msgstr "Longitude: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:75
 msgid "Altitude (m): "
-msgstr "Altitude (m): "
+msgstr ""
 
 #: src/modules/TextUI.cpp:76
 msgid "Solar System Body: "
-msgstr "Solar System Body: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:79
 msgid "Sky Time: "
-msgstr "Sky Time: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:80
 msgid "Set Time Zone: "
-msgstr "Set Time Zone: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:81
 msgid "Day keys: "
@@ -201,15 +201,15 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:84
 msgid "Preset Sky Time: "
-msgstr "Preset Sky Time: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:85
 msgid "Sky Time At Start-up: "
-msgstr "Sky Time At Start-up: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:86
 msgid "Actual Time"
-msgstr "Actual Time"
+msgstr ""
 
 #: src/modules/TextUI.cpp:87
 msgid "Preset Time"
@@ -217,19 +217,19 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:88
 msgid "Time Display Format: "
-msgstr "Time Display Format: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:89
 msgid "Date Display Format: "
-msgstr "Date Display Format: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:92
 msgid "Sky Culture: "
-msgstr "Sky Culture: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:93
 msgid "Sky Language: "
-msgstr "Sky Language: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:96
 msgid "Show: "
@@ -241,15 +241,15 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:98
 msgid "Magnitude Sizing Multiplier: "
-msgstr "Magnitude Sizing Multiplier: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:99
 msgid "Maximum Magnitude to Label: "
-msgstr "Maximum Magnitude to Label: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:100
 msgid "Twinkling: "
-msgstr "Twinkling: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:101
 msgid "Limiting Magnitude: "
@@ -265,7 +265,7 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:106
 msgid "Constellation Art Intensity"
-msgstr "Constellation Art Intensity"
+msgstr ""
 
 #: src/modules/TextUI.cpp:107
 msgid "Constellation Boundaries"
@@ -277,7 +277,7 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:109
 msgid "Planet Names"
-msgstr "Planet Names"
+msgstr ""
 
 #: src/modules/TextUI.cpp:110
 msgid "Planet Orbits"
@@ -285,7 +285,7 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:111
 msgid "Planet Trails"
-msgstr "Planet Trails"
+msgstr ""
 
 #: src/modules/TextUI.cpp:112
 msgid "Meridian Line"
@@ -309,11 +309,11 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:117
 msgid "Nebula Names"
-msgstr "Nebula Names"
+msgstr ""
 
 #: src/modules/TextUI.cpp:118
 msgid "Nebula Circles"
-msgstr "Nebula Circles"
+msgstr ""
 
 #: src/modules/TextUI.cpp:121
 msgid "Light Pollution Luminance: "
@@ -321,15 +321,15 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:122
 msgid "Landscape: "
-msgstr "Landscape: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:123
 msgid "Manual zoom: "
-msgstr "Manual zoom: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:124
 msgid "Object Sizing Rule: "
-msgstr "Object Sizing Rule: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:125
 msgid "Magnitude Scaling Multiplier: "
@@ -337,11 +337,11 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:126
 msgid "Milky Way intensity: "
-msgstr "Milky Way intensity: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:127
 msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Maximum Nebula Magnitude to Label: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:128
 msgid "Zoom Duration: "
@@ -349,7 +349,7 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:129
 msgid "Cursor Timeout: "
-msgstr "Cursor Timeout: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:130
 msgid "Correct for light travel time: "
@@ -357,11 +357,11 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:133
 msgid "Local Script: "
-msgstr "Local Script: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:134
 msgid "CD/DVD Script: "
-msgstr "CD/DVD Script: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:135
 msgid "USB Script: "
@@ -369,19 +369,19 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:136
 msgid "Arrow down to load list."
-msgstr "Arrow down to load list."
+msgstr ""
 
 #: src/modules/TextUI.cpp:137
 msgid "Select and exit to run."
-msgstr "Select and exit to run."
+msgstr ""
 
 #: src/modules/TextUI.cpp:140
 msgid "Load Default Configuration: "
-msgstr "Load Default Configuration: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:141
 msgid "Save Current Configuration as Default: "
-msgstr "Save Current Configuration as Default: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:142
 msgid "Shut Down: "
@@ -389,11 +389,11 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:143
 msgid "Update me via Internet: "
-msgstr "Update me via Internet: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:144
 msgid "Set UI Locale: "
-msgstr "Set UI Locale: "
+msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
@@ -788,7 +788,7 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:166
 msgid "Fog"
-msgstr "Fog"
+msgstr ""
 
 #: src/gui/StelGui.cpp:168 src/ui_viewDialog.h:1044
 msgid "Nebulas"
@@ -800,7 +800,7 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:170 src/ui_viewDialog.h:1031 src/ui_viewDialog.h:1043
 msgid "Stars"
-msgstr "Stars"
+msgstr ""
 
 #: src/gui/StelGui.cpp:171
 msgid "Planets labels"
@@ -1041,27 +1041,27 @@ msgstr ""
 
 #: src/translations.h:33
 msgid "Sun"
-msgstr "La"
+msgstr ""
 
 #: src/translations.h:34
 msgid "Mercury"
-msgstr "Ukaliali'i"
+msgstr ""
 
 #: src/translations.h:35
 msgid "Venus"
-msgstr "Hokuloa"
+msgstr ""
 
 #: src/translations.h:36
 msgid "Earth"
-msgstr "'Aina"
+msgstr ""
 
 #: src/translations.h:37
 msgid "Moon"
-msgstr "Mahina"
+msgstr ""
 
 #: src/translations.h:38
 msgid "Mars"
-msgstr "Hoku-ula"
+msgstr ""
 
 #: src/translations.h:39
 msgid "Deimos"
@@ -1073,7 +1073,7 @@ msgstr ""
 
 #: src/translations.h:41
 msgid "Jupiter"
-msgstr "Aohoku"
+msgstr ""
 
 #: src/translations.h:42
 msgid "Io"
@@ -1093,7 +1093,7 @@ msgstr ""
 
 #: src/translations.h:46
 msgid "Saturn"
-msgstr "Makulu"
+msgstr ""
 
 #: src/translations.h:47
 msgid "Mimas"
@@ -1149,31 +1149,31 @@ msgstr ""
 
 #: src/translations.h:60
 msgid "Solar System Observer"
-msgstr "Solar System Observer"
+msgstr ""
 
 #: src/translations.h:63
 msgid "N"
-msgstr "'Akau"
+msgstr ""
 
 #: src/translations.h:64
 msgid "S"
-msgstr "Hema"
+msgstr ""
 
 #: src/translations.h:65
 msgid "E"
-msgstr "Hikina"
+msgstr ""
 
 #: src/translations.h:66
 msgid "W"
-msgstr "Komohana"
+msgstr ""
 
 #: src/translations.h:69
 msgid "Chinese"
-msgstr "Chinese"
+msgstr ""
 
 #: src/translations.h:70
 msgid "Egyptian"
-msgstr "Egyptian"
+msgstr ""
 
 #: src/translations.h:71
 msgid "Inuit"
@@ -1197,11 +1197,11 @@ msgstr ""
 
 #: src/translations.h:76
 msgid "Polynesian"
-msgstr "Polynesian"
+msgstr ""
 
 #: src/translations.h:77
 msgid "Western"
-msgstr "Western"
+msgstr ""
 
 #: src/translations.h:78
 msgid "Tupi-Guarani"
@@ -1223,7 +1223,7 @@ msgstr ""
 
 #: src/ui_helpDialogGui.h:268 src/ui_helpDialogGui.h:270
 msgid "Help"
-msgstr "Help"
+msgstr ""
 
 #: src/ui_helpDialogGui.h:271
 msgid "About"
@@ -1239,7 +1239,7 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:386
 msgid "Location"
-msgstr "Location"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:390
 msgid "Current location information"
@@ -1365,7 +1365,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1045
 msgid "Planets"
-msgstr "Planets"
+msgstr ""
 
 #: src/ui_viewDialog.h:1046
 msgid "Shooting Stars"
@@ -1481,7 +1481,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:670
 msgid "Configuration"
-msgstr "Configuration"
+msgstr ""
 
 #: src/ui_configurationDialog.h:678
 msgid "Program language"
@@ -1544,7 +1544,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:696
 msgid "Cancel"
-msgstr "Cancel"
+msgstr ""
 
 #: src/ui_configurationDialog.h:697
 msgid "Main"
@@ -1707,886 +1707,3 @@ msgstr ""
 #: src/ui_configurationDialog.h:765
 msgid "Scripts"
 msgstr ""
-
-#~ msgid ""
-#~ "   Please check for newer versions and send bug reports\n"
-#~ "    and comments to us at: http://www.stellarium.org\n"
-#~ "\n"
-#~ msgstr ""
-#~ "   Please check for newer versions and send bug reports\n"
-#~ "    and comments to us at: http://www.stellarium.org\n"
-#~ "\n"
-
-#~ msgid " (Variable)"
-#~ msgstr " (Variable)"
-
-#~ msgid "%s: Bad command line argument(s)\n"
-#~ msgstr "%s: Bad command line argument(s)\n"
-
-#~ msgid "AU"
-#~ msgstr "AU"
-
-#~ msgid "Also display Nebulas without textures"
-#~ msgstr "Also display Nebulas without textures"
-
-#~ msgid "Andromeda"
-#~ msgstr "Andromeda"
-
-#~ msgid "Antlia"
-#~ msgstr "Antlia"
-
-#~ msgid "Apus"
-#~ msgstr "Apus"
-
-#~ msgid "Aquarius"
-#~ msgstr "Aquarius"
-
-#~ msgid "Aquila"
-#~ msgstr "Aquila"
-
-#~ msgid "Ara"
-#~ msgstr "Ara"
-
-#~ msgid "Aries"
-#~ msgstr "Aries"
-
-#~ msgid "Atmosphere [A]"
-#~ msgstr "Atmosphere [A]"
-
-#~ msgid "Auriga"
-#~ msgstr "Auriga"
-
-#~ msgid "Azimuthal Grid [Z]"
-#~ msgstr "Azimuthal Grid [Z]"
-
-#~ msgid "Bird"
-#~ msgstr "Bird"
-
-#~ msgid "Boat"
-#~ msgstr "Boat"
-
-#~ msgid "Bootes"
-#~ msgstr "Bootes"
-
-#~ msgid "Bow and Arrow"
-#~ msgstr "Bow and Arrow"
-
-#~ msgid "CTRL + Q : Quit\n"
-#~ msgstr "CTRL + Q : Quit\n"
-
-#~ msgid "Caelum"
-#~ msgstr "Caelum"
-
-#~ msgid "Camelopardalis"
-#~ msgstr "Camelopardalis"
-
-#~ msgid "Cancer"
-#~ msgstr "Cancer"
-
-#~ msgid "Canes Venatici"
-#~ msgstr "Canes Venatici"
-
-#~ msgid "Canis Major"
-#~ msgstr "Canis Major"
-
-#~ msgid "Canis Minor"
-#~ msgstr "Canis Minor"
-
-#~ msgid "Capricornus"
-#~ msgstr "Capricornus"
-
-#~ msgid "Cardinal Points [Q]"
-#~ msgstr "Cardinal Points [Q]"
-
-#~ msgid "Cassiopeia"
-#~ msgstr "Cassiopeia"
-
-#~ msgid "Centaurus"
-#~ msgstr "Centaurus"
-
-#~ msgid "Cepheus"
-#~ msgstr "Cepheus"
-
-#~ msgid "Cetus"
-#~ msgstr "Cetus"
-
-#~ msgid "Chamaeleon"
-#~ msgstr "Chamaeleon"
-
-#~ msgid "Choose landscapes:"
-#~ msgstr "Choose landscapes:"
-
-#~ msgid "Circinus"
-#~ msgstr "Circinus"
-
-#~ msgid "Columba"
-#~ msgstr "Columba"
-
-#~ msgid "Coma Berenices"
-#~ msgstr "Coma Berenices"
-
-#~ msgid "Command recording stopped."
-#~ msgstr "Command recording stopped."
-
-#~ msgid "Corona Australis"
-#~ msgstr "Corona Australis"
-
-#~ msgid "Corona Borealis"
-#~ msgstr "Corona Borealis"
-
-#~ msgid "Corvus"
-#~ msgstr "Corvus"
-
-#~ msgid "Crater"
-#~ msgstr "Crater"
-
-#~ msgid "Crocodile"
-#~ msgstr "Crocodile"
-
-#~ msgid "Crux"
-#~ msgstr "Crux"
-
-#~ msgid "Current Time :"
-#~ msgstr "Current Time :"
-
-#~ msgid "Current Time Speed is x"
-#~ msgstr "Current Time Speed is x"
-
-#~ msgid "Cygnus"
-#~ msgstr "Cygnus"
-
-#~ msgid "Day"
-#~ msgstr "Day"
-
-#~ msgid "Delphinus"
-#~ msgstr "Delphinus"
-
-#~ msgid "Disk Viewport"
-#~ msgstr "Disk Viewport"
-
-#~ msgid "Dog"
-#~ msgstr "Dog"
-
-#~ msgid "Dolphin"
-#~ msgstr "Nai'a"
-
-#~ msgid "Dorado"
-#~ msgstr "Dorado"
-
-#~ msgid "Draco"
-#~ msgstr "Draco"
-
-#~ msgid "Drawing of the Constellations [C]"
-#~ msgstr "Drawing of the Constellations [C]"
-
-#~ msgid "Drum"
-#~ msgstr "Drum"
-
-#~ msgid "Drumstick"
-#~ msgstr "Drumstick"
-
-#~ msgid ""
-#~ "During Script Playback:\n"
-#~ "CTRL + C : End Script\n"
-#~ "6   : pause script              K   : resume script\n"
-#~ "\n"
-#~ msgstr ""
-#~ "During Script Playback:\n"
-#~ "CTRL + C : End Script\n"
-#~ "6   : pause script              K   : resume script\n"
-#~ "\n"
-
-#~ msgid "Enter observatory name"
-#~ msgstr "Enter observatory name"
-
-#~ msgid "Equatorial Grid [E]"
-#~ msgstr "Equatorial Grid [E]"
-
-#~ msgid "Equatorial/Altazimuthal Mount [ENTER]"
-#~ msgstr "Equatorial/Altazimuthal Mount [ENTER]"
-
-#~ msgid "Equuleus"
-#~ msgstr "Equuleus"
-
-#~ msgid "Eridanus"
-#~ msgstr "Eridanus"
-
-#~ msgid "Error: Unable to open script file to record commands."
-#~ msgstr "Error: Unable to open script file to record commands."
-
-#~ msgid "Ferry Boat"
-#~ msgstr "Ferry Boat"
-
-#~ msgid "For unlisted screen resolution, edit the file :"
-#~ msgstr "For unlisted screen resolution, edit the file :"
-
-#~ msgid "Fornax"
-#~ msgstr "Fornax"
-
-#~ msgid "Four Channels"
-#~ msgstr "Four Channels"
-
-#~ msgid "GO"
-#~ msgstr "GO"
-
-#~ msgid "Gemini"
-#~ msgstr "Gemini"
-
-#~ msgid "Girl"
-#~ msgstr "Girl"
-
-#~ msgid "Ground [G]"
-#~ msgstr "Ground [G]"
-
-#~ msgid "Grus"
-#~ msgstr "Grus"
-
-#~ msgid "Heart"
-#~ msgstr "Heart"
-
-#~ msgid "Help [H]"
-#~ msgstr "Help [H]"
-
-#~ msgid "Hercules"
-#~ msgstr "Hercules"
-
-#~ msgid "Hit CTRL-R again to stop.\n"
-#~ msgstr "Hit CTRL-R again to stop.\n"
-
-#~ msgid "Hook"
-#~ msgstr "Hook"
-
-#~ msgid "Horn"
-#~ msgstr "Horn"
-
-#~ msgid "Horologium"
-#~ msgstr "Horologium"
-
-#~ msgid "Hour"
-#~ msgstr "Hour"
-
-#~ msgid "Hydra"
-#~ msgstr "Hydra"
-
-#~ msgid "Hydrus"
-#~ msgstr "Hydrus"
-
-#~ msgid "Indus"
-#~ msgstr "Indus"
-
-#~ msgid "Information"
-#~ msgstr "Information"
-
-#~ msgid "Invalid Script command"
-#~ msgstr "Invalid Script command"
-
-#~ msgid "Jaw"
-#~ msgstr "Jaw"
-
-#~ msgid "Lacerta"
-#~ msgstr "Lacerta"
-
-#~ msgid "Language"
-#~ msgstr "Language"
-
-#~ msgid "Legs"
-#~ msgstr "Legs"
-
-#~ msgid "Leo"
-#~ msgstr "Leo"
-
-#~ msgid "Leo Minor"
-#~ msgstr "Leo Minor"
-
-#~ msgid "Lepus"
-#~ msgstr "Lepus"
-
-#~ msgid "Libra"
-#~ msgstr "Libra"
-
-#~ msgid "Lion"
-#~ msgstr "Lion"
-
-#~ msgid "Loading Hipparcos catalog:"
-#~ msgstr "Loading Hipparcos catalog:"
-
-#~ msgid "Loading Nebula Textures:"
-#~ msgstr "Loading Nebula Textures:"
-
-#~ msgid "Lupus"
-#~ msgstr "Lupus"
-
-#~ msgid "Lynx"
-#~ msgstr "Lynx"
-
-#~ msgid "Lyra"
-#~ msgstr "Lyra"
-
-#~ msgid "Magnitude"
-#~ msgstr "Magnitude"
-
-#~ msgid "Market"
-#~ msgstr "Market"
-
-#~ msgid "Meadows"
-#~ msgstr "Meadows"
-
-#~ msgid "Mensa"
-#~ msgstr "Mensa"
-
-#~ msgid "Meteor Rate per minute"
-#~ msgstr "Meteor Rate per minute"
-
-#~ msgid "Microscopium"
-#~ msgstr "Microscopium"
-
-#~ msgid "Minutes"
-#~ msgstr "Minutes"
-
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ msgstr ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-
-#~ msgid "Monoceros"
-#~ msgstr "Monoceros"
-
-#~ msgid "Month"
-#~ msgstr "Month"
-
-#~ msgid ""
-#~ "Movement & selection:\n"
-#~ "Arrow Keys       : Change viewing RA/DE\n"
-#~ "Page Up/Down     : Zoom\n"
-#~ "CTRL+Up/Down     : Zoom\n"
-#~ "Left Click       : Select object\n"
-#~ "Right Click      : Unselect\n"
-#~ "CTRL+Left Click  : Unselect\n"
-#~ "\\                : Zoom out (planet + moons if applicable)\n"
-#~ "/                : Zoom to selected object\n"
-#~ "SPACE            : Center on selected object\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Movement & selection:\n"
-#~ "Arrow Keys       : Change viewing RA/DE\n"
-#~ "Page Up/Down     : Zoom\n"
-#~ "CTRL+Up/Down     : Zoom\n"
-#~ "Left Click       : Select object\n"
-#~ "Right Click      : Unselect\n"
-#~ "CTRL+Left Click  : Unselect\n"
-#~ "\\                : Zoom out (planet + moons if applicable)\n"
-#~ "/                : Zoom to selected object\n"
-#~ "SPACE            : Center on selected object\n"
-#~ "\n"
-
-#~ msgid "Musca"
-#~ msgstr "Musca"
-
-#~ msgid "Names of the Constellations [V]"
-#~ msgstr "Names of the Constellations [V]"
-
-#~ msgid "Nebulas Names. Up to mag :"
-#~ msgstr "Nebulas Names. Up to mag :"
-
-#~ msgid "Net"
-#~ msgstr "Net"
-
-#~ msgid "Night (red) mode"
-#~ msgstr "Night (red) mode"
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid "Object Search"
-#~ msgstr "Object Search"
-
-#~ msgid "Octans"
-#~ msgstr "Octans"
-
-#~ msgid "Ophiuchus"
-#~ msgstr "Ophiuchus"
-
-#~ msgid "Ox"
-#~ msgstr "Ox"
-
-#~ msgid "Pair of Stars"
-#~ msgstr "Pair of Stars"
-
-#~ msgid "Pavo"
-#~ msgstr "Pavo"
-
-#~ msgid "Pegasus"
-#~ msgstr "Pegasus"
-
-#~ msgid "Perseus"
-#~ msgstr "Perseus"
-
-#~ msgid "Phoenix"
-#~ msgstr "Phoenix"
-
-#~ msgid "Pictor"
-#~ msgstr "Pictor"
-
-#~ msgid "Pisces"
-#~ msgstr "Pisces"
-
-#~ msgid "Piscis Austrinus"
-#~ msgstr "Piscis Austrinus"
-
-#~ msgid "Point"
-#~ msgstr "Point"
-
-#~ msgid "Puppis"
-#~ msgstr "Puppis"
-
-#~ msgid "Pyxis"
-#~ msgstr "Pyxis"
-
-#~ msgid "Quit [CMD + Q]"
-#~ msgstr "Quit [CMD + Q]"
-
-#~ msgid "Quit [CTRL + Q]"
-#~ msgstr "Quit [CTRL + Q]"
-
-#~ msgid "Recording commands to script file:\n"
-#~ msgstr "Recording commands to script file:\n"
-
-#~ msgid "Rendering"
-#~ msgstr "Rendering"
-
-#~ msgid "Restart program for"
-#~ msgstr "Restart program for"
-
-#~ msgid "Reticulum"
-#~ msgstr "Reticulum"
-
-#~ msgid "Root"
-#~ msgstr "Root"
-
-#~ msgid "Sagitta"
-#~ msgstr "Sagitta"
-
-#~ msgid "Sagittarius"
-#~ msgstr "Sagittarius"
-
-#~ msgid "Save as default"
-#~ msgstr "Save as default"
-
-#~ msgid "Scorpius"
-#~ msgstr "Scorpius"
-
-#~ msgid "Screen Resolution :"
-#~ msgstr "Screen Resolution :"
-
-#~ msgid "Script commander"
-#~ msgstr "Script commander"
-
-#~ msgid "Sculptor"
-#~ msgstr "Sculptor"
-
-#~ msgid "Scutum"
-#~ msgstr "Scutum"
-
-#~ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-#~ msgstr "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-
-#~ msgid "Selected Constellation Only"
-#~ msgstr "Selected Constellation Only"
-
-#~ msgid "Serpens"
-#~ msgstr "Serpens"
-
-#~ msgid "Sextans"
-#~ msgstr "Sextans"
-
-#~ msgid "Sheep"
-#~ msgstr "Sheep"
-
-#~ msgid "Star Names. Up to mag :"
-#~ msgstr "Star Names. Up to mag :"
-
-#~ msgid "Star Twinkle. Amount :"
-#~ msgstr "Star Twinkle. Amount :"
-
-#~ msgid "Tail"
-#~ msgstr "Tail"
-
-#~ msgid "Taurus"
-#~ msgstr "Taurus"
-
-#~ msgid "Telescopium"
-#~ msgstr "Telescopium"
-
-#~ msgid "Three Steps"
-#~ msgstr "Three Steps"
-
-#~ msgid "Thunder and Lightning"
-#~ msgstr "Thunder and Lightning"
-
-#~ msgid "Time Zone :"
-#~ msgstr "Time Zone :"
-
-#~ msgid "Time speed : "
-#~ msgstr "Time speed : "
-
-#~ msgid "Triangle"
-#~ msgstr "Triangle"
-
-#~ msgid "Triangulum"
-#~ msgstr "Triangulum"
-
-#~ msgid "Triangulum Australe"
-#~ msgstr "Triangulum Australe"
-
-#~ msgid "Try `%s --help' for more information.\n"
-#~ msgstr "Try `%s --help' for more information.\n"
-
-#~ msgid "Tucana"
-#~ msgstr "Tucana"
-
-#~ msgid "Two Jaws"
-#~ msgstr "Two Jaws"
-
-#~ msgid "Two Poles"
-#~ msgstr "Two Poles"
-
-#~ msgid "Type: "
-#~ msgstr "Type: "
-
-#~ msgid "Ursa Major"
-#~ msgstr "Ursa Major"
-
-#~ msgid "Ursa Minor"
-#~ msgstr "Ursa Minor"
-
-#~ msgid ""
-#~ "Usage: %s [OPTION] ...\n"
-#~ " -v, --version          Output version information and exit.\n"
-#~ " -h, --help             Display this help and exit.\n"
-#~ msgstr ""
-#~ "Usage: %s [OPTION] ...\n"
-#~ " -v, --version          Output version information and exit.\n"
-#~ " -h, --help             Display this help and exit.\n"
-
-#~ msgid ""
-#~ "Use key J and L to decrease and increase\n"
-#~ "   time speed.\n"
-#~ "Use key K to return to real time speed."
-#~ msgstr ""
-#~ "Use key J and L to decrease and increase\n"
-#~ "   time speed.\n"
-#~ "Use key K to return to real time speed."
-
-#~ msgid "Using System Default Time Zone"
-#~ msgstr "Using System Default Time Zone"
-
-#~ msgid "Vela"
-#~ msgstr "Vela"
-
-#~ msgid "Virgo"
-#~ msgstr "Virgo"
-
-#~ msgid "Volans"
-#~ msgstr "Volans"
-
-#~ msgid "Vulpecula"
-#~ msgstr "Vulpecula"
-
-#~ msgid "Wall"
-#~ msgstr "Wall"
-
-#~ msgid "Yes"
-#~ msgstr "Yes"
-
-#~ msgid "change to apply."
-#~ msgstr "change to apply."
-
-#~ msgid "Arsenal"
-#~ msgstr "Arsenal"
-
-#~ msgid "Bailer"
-#~ msgstr "Ke Ka o Makali'i"
-
-#~ msgid "Banner of Three Stars"
-#~ msgstr "Banner of Three Stars"
-
-#~ msgid "Bond"
-#~ msgstr "Bond"
-
-#~ msgid "Bull's Foreleg"
-#~ msgstr "Bull's Foreleg"
-
-#~ msgid "Cared for by Moon"
-#~ msgstr "Hanai-a-ka-malama"
-
-#~ msgid "Cat's Cradle"
-#~ msgstr "Ka Hei-hei o na Keiki"
-
-#~ msgid "Chariot"
-#~ msgstr "Chariot"
-
-#~ msgid "Chariot Yard"
-#~ msgstr "Chariot Yard"
-
-#~ msgid "Chematy"
-#~ msgstr "Chematy"
-
-#~ msgid "Circular Granary"
-#~ msgstr "Circular Granary"
-
-#~ msgid "Coiled Thong"
-#~ msgstr "Coiled Thong"
-
-#~ msgid "Curved Array"
-#~ msgstr "Curved Array"
-
-#~ msgid "Dipper"
-#~ msgstr "Dipper"
-
-#~ msgid "Earth God's Temple"
-#~ msgstr "Earth God's Temple"
-
-#~ msgid "Eastern Door"
-#~ msgstr "Eastern Door"
-
-#~ msgid "Emptiness"
-#~ msgstr "Emptiness"
-
-#~ msgid "Encampment"
-#~ msgstr "Encampment"
-
-#~ msgid "Establishment"
-#~ msgstr "Establishment"
-
-#~ msgid "Extended Net"
-#~ msgstr "Extended Net"
-
-#~ msgid "Farmland"
-#~ msgstr "Farmland"
-
-#~ msgid "Five Chariots"
-#~ msgstr "Five Chariots"
-
-#~ msgid "Five Feudal Kings"
-#~ msgstr "Five Feudal Kings"
-
-#~ msgid "Flail"
-#~ msgstr "Flail"
-
-#~ msgid "Flock"
-#~ msgstr "Flock"
-
-#~ msgid "Flying Corridor"
-#~ msgstr "Flying Corridor"
-
-#~ msgid "Frigate Bird"
-#~ msgstr "'Iwa Keli'i"
-
-#~ msgid "Ghosts"
-#~ msgstr "Ghosts"
-
-#~ msgid "Giant"
-#~ msgstr "Giant"
-
-#~ msgid "Good Gourd"
-#~ msgstr "Good Gourd"
-
-#~ msgid "Great General"
-#~ msgstr "Great General"
-
-#~ msgid "Hippopotamus"
-#~ msgstr "Hippopotamus"
-
-#~ msgid "Horus"
-#~ msgstr "Horus"
-
-#~ msgid "Imperial Guards"
-#~ msgstr "Imperial Guards"
-
-#~ msgid "Imperial Passageway"
-#~ msgstr "Imperial Passageway"
-
-#~ msgid "Jade Well"
-#~ msgstr "Jade Well"
-
-#~ msgid "Kenemet"
-#~ msgstr "Kenemet"
-
-#~ msgid "Khanuwy Fish"
-#~ msgstr "Khanuwy Fish"
-
-#~ msgid "Kitchen"
-#~ msgstr "Kitchen"
-
-#~ msgid "Kite of Kawelo"
-#~ msgstr "Ka Lupe o Kawelo"
-
-#~ msgid "Market Officer"
-#~ msgstr "Market Officer"
-
-#~ msgid "Maui's Fishhook"
-#~ msgstr "Manaiakalani"
-
-#~ msgid "Mausoleum"
-#~ msgstr "Mausoleum"
-
-#~ msgid "Mooring Post"
-#~ msgstr "Mooring Post"
-
-#~ msgid "Mortar"
-#~ msgstr "Mortar"
-
-#~ msgid "Navigator's Triangle"
-#~ msgstr "Navigator's Triangle"
-
-#~ msgid "Neck"
-#~ msgstr "Neck"
-
-#~ msgid "Norma"
-#~ msgstr "Norma"
-
-#~ msgid "North River"
-#~ msgstr "North River"
-
-#~ msgid "Northern Dipper"
-#~ msgstr "Northern Dipper"
-
-#~ msgid "Orchard"
-#~ msgstr "Orchard"
-
-#~ msgid "Outer Fence"
-#~ msgstr "Outer Fence"
-
-#~ msgid "Palace Gate"
-#~ msgstr "Palace Gate"
-
-#~ msgid "Pestle"
-#~ msgstr "Pestle"
-
-#~ msgid "Prow"
-#~ msgstr "Prow"
-
-#~ msgid "Purple Palace"
-#~ msgstr "Purple Palace"
-
-#~ msgid "Ramparts"
-#~ msgstr "Ramparts"
-
-#~ msgid "River Turtle"
-#~ msgstr "River Turtle"
-
-#~ msgid "Rolled Tongue"
-#~ msgstr "Rolled Tongue"
-
-#~ msgid "Rooftop"
-#~ msgstr "Rooftop"
-
-#~ msgid "Room"
-#~ msgstr "Room"
-
-#~ msgid "Rotten Gourd"
-#~ msgstr "Rotten Gourd"
-
-#~ msgid "Sah"
-#~ msgstr "Sah"
-
-#~ msgid "Screen"
-#~ msgstr "Screen"
-
-#~ msgid "Selkis"
-#~ msgstr "Selkis"
-
-#~ msgid "Seven Excellencies"
-#~ msgstr "Seven Excellencies"
-
-#~ msgid "Sheepfold"
-#~ msgstr "Sheepfold"
-
-#~ msgid "Soldiers Market"
-#~ msgstr "Soldiers Market"
-
-#~ msgid "South River"
-#~ msgstr "South River"
-
-#~ msgid "Spear"
-#~ msgstr "Spear"
-
-#~ msgid "Spring"
-#~ msgstr "Spring"
-
-#~ msgid "Square Granary"
-#~ msgstr "Square Granary"
-
-#~ msgid "Stars of Water"
-#~ msgstr "Stars of Water"
-
-#~ msgid "Stomach"
-#~ msgstr "Stomach"
-
-#~ msgid "Supreme Palace"
-#~ msgstr "Supreme Palace"
-
-#~ msgid "The Seven"
-#~ msgstr "Na Hiku"
-
-#~ msgid "Thunderbolt"
-#~ msgstr "Thunderbolt"
-
-#~ msgid "Toilet"
-#~ msgstr "Toilet"
-
-#~ msgid "Tripod"
-#~ msgstr "Tripod"
-
-#~ msgid "Voice of Joy"
-#~ msgstr "Me'e"
-
-#~ msgid "Waty Bekety"
-#~ msgstr "Waty Bekety"
-
-#~ msgid "Weaving Girl"
-#~ msgstr "Weaving Girl"
-
-#~ msgid "Well"
-#~ msgstr "Well"
-
-#~ msgid "Western Door"
-#~ msgstr "Western Door"
-
-#~ msgid "Willow"
-#~ msgstr "Willow"
-
-#~ msgid "Wings"
-#~ msgstr "Wings"
-
-#~ msgid "Winnowing Basket"
-#~ msgstr "Winnowing Basket"
-
-#~ msgid "Woman's Bed"
-#~ msgstr "Woman's Bed"
-
-#~ msgid "Xuanyuan"
-#~ msgstr "Xuanyuan"
-
-#~ msgid "Zaofu"
-#~ msgstr "Zaofu"
-
-#~ msgid "Magnitude: "
-#~ msgstr "Magnitude: "
-
-#~ msgid "Orion"
-#~ msgstr "Orion"
-
-#~ msgid "Carina"
-#~ msgstr "Carina"
-
-#~ msgid "Ford"
-#~ msgstr "Ford"
-
-#~ msgid "Sek"
-#~ msgstr "Sek"
-
-#~ msgid "Star"
-#~ msgstr "Star"
