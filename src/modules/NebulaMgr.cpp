@@ -281,7 +281,7 @@ QList<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, con
 	Vec3d v(av);
 	v.normalize();
 	double cosLimFov = cos(limitFov * M_PI/180.);
-	static Vec3d equPos;
+	Vec3d equPos;
 
 	vector<Nebula*>::const_iterator iter = nebArray.begin();
 	while (iter != nebArray.end())

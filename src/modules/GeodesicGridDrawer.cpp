@@ -66,7 +66,7 @@ double StelGeodesicGridDrawer::draw(StelCore* core, int maxSearchLevel)
 		GeodesicSearchInsideIterator it1(*geodesic_search_result, lev);
 		while((index = it1.next()) >= 0)
 		{
-			Vec3d center;
+			Vec3d center(0);
 			geodesicGrid->getTriangleCorners(lev, index, v0, v1, v2);
 			prj->project(v0, win1);
 			prj->project(v1, win2);
@@ -100,7 +100,7 @@ double StelGeodesicGridDrawer::draw(StelCore* core, int maxSearchLevel)
 	GeodesicSearchBorderIterator it1(*geodesic_search_result, lev);
 	while((index = it1.next()) >= 0)
 	{
-		Vec3d center;
+		Vec3d center(0);
 		geodesicGrid->getTriangleCorners(lev, index, v0, v1, v2);
 		prj->project(v0, win1);
 		prj->project(v1, win2);

@@ -247,7 +247,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
 		             texture_wh, texture_wh, 0, GL_RGB, GL_UNSIGNED_BYTE,
 		             pixel_data);
-		delete pixel_data;
+		delete[] pixel_data;
 	}
 
 	// init transformation

@@ -736,7 +736,7 @@ void Planet::drawEarthShadow(StelCore* core)
 	Vec3d shadow = en * (e.length() + m.length());
 
 	// find shadow radii in AU
-	double r_penumbra = shadow.length()*702378.1/AU/e.length() - 696000/AU;
+	double r_penumbra = shadow.length()*702378.1/AU/e.length() - 696000./AU;
 	double r_umbra = 6378.1/AU - m.length()*(689621.9/AU/e.length());
 
 	// find vector orthogonal to sun-earth vector using cross product with
@@ -748,7 +748,7 @@ void Planet::drawEarthShadow(StelCore* core)
 
 	// modify shadow location for scaled moon
 	Vec3d mdist = shadow - mh;
-	if(mdist.length() > r_penumbra + 2000/AU)
+	if(mdist.length() > r_penumbra + 2000./AU)
 		return;   // not visible so don't bother drawing
 
 	shadow = mh + mdist*mscale;
@@ -780,7 +780,7 @@ void Planet::drawEarthShadow(StelCore* core)
 
 	for (int i=0; i<=100; i++)
 	{
-		r = Mat4d::rotation(shadow, 2*M_PI*i/100.) * upt;
+		r = Mat4d::rotation(shadow, 2.*M_PI*i/100.) * upt;
 		s = shadow + r;
 
 		glTexCoord2f(0.6f,0.5f);  // position in texture of umbra edge
@@ -794,8 +794,8 @@ void Planet::drawEarthShadow(StelCore* core)
 	glBegin(GL_TRIANGLE_STRIP);
 	for (int i=0; i<=100; i++)
 	{
-		r = Mat4d::rotation(shadow, 2*M_PI*i/100.) * rpt;
-		u = Mat4d::rotation(shadow, 2*M_PI*i/100.) * upt;
+		r = Mat4d::rotation(shadow, 2.*M_PI*i/100.) * rpt;
+		u = Mat4d::rotation(shadow, 2.*M_PI*i/100.) * upt;
 		s = shadow + r;
 		sp = shadow + u;
 

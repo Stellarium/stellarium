@@ -82,6 +82,7 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 		}
 	}
 
+	XYZname.set(0.,0.,0.);
 	for(unsigned int ii=0;ii<numberOfSegments*2;++ii)
 	{
 		XYZname+= asterism[ii]->getJ2000EquatorialPos(0);
