@@ -111,10 +111,10 @@ public slots:
 	//! for using StelFileMgr, with "scripts/" prefixed to the filename.
 	//! @param x The x-coordinate for the image
 	//! @param y The x-coordinate for the image
-	//! @param visible The initial visiable state of the image
+	//! @param visible The initial visible state of the image
 	//! @param alpha The initial alpha (transparancy) value for the image (range 0.0 to 1.0)
 	void createScreenImage(const QString& id,
-                              const QString& filename,
+                          const QString& filename,
 	                      float x,
 	                      float y,
 	                      float scale=1.,
