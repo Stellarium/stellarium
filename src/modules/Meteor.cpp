@@ -207,8 +207,6 @@ bool Meteor::draw(const StelCore* core, const StelPainter& sPainter)
 
 	const StelNavigator* nav = core->getNavigator();
 	const StelProjectorP proj = sPainter.getProjector();
-	
-	Vec3d start, end;
 
 	Vec3d spos = position;
 	Vec3d epos = posTrain;
@@ -223,6 +221,7 @@ bool Meteor::draw(const StelCore* core, const StelPainter& sPainter)
 	spos[2] -= EARTH_RADIUS;
 	epos[2] -= EARTH_RADIUS;
 
+	Vec3d start, end;
 	int t1 = proj->projectCheck(spos/1216, start);  // 1216 is to scale down under 1 for desktop version
 	int t2 = proj->projectCheck(epos/1216, end);
 
@@ -237,12 +236,12 @@ bool Meteor::draw(const StelCore* core, const StelPainter& sPainter)
 		double tmag = mag*distMultiplier;
 
 		// compute an intermediate point so can curve slightly along projection distortions
-		Vec3d intpos;
 		Vec3d posi = posInternal; 
 		posi[2] = position[2] + (posTrain[2] - position[2])/2;
 		posi.transfo4d(mmat);
 		posi = nav->equinoxEquToAltAz( posi );
 		posi[2] -= EARTH_RADIUS;
+		Vec3d intpos;
 		proj->project(posi/1216, intpos);
 
 		// draw dark to light

@@ -49,7 +49,7 @@ public:
 	//! Contains all the param needed to initialize a StelProjector
 	struct StelProjectorParams
 	{
-		StelProjectorParams() : fov(60.), gravityLabels(false), maskType(MaskNone), flipHorz(false), flipVert(false) {;}
+		StelProjectorParams() : viewportXywh(0), fov(60.), gravityLabels(false), maskType(MaskNone), viewportCenter(0., 0.), flipHorz(false), flipVert(false) {;}
 		Vector4<int> viewportXywh;     //! posX, posY, width, height
 		double fov;                    //! FOV in degrees
 		bool gravityLabels;            //! the flag to use gravity labels or not
