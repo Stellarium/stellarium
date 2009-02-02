@@ -22,7 +22,6 @@
 import sys
 import os
 import Image
-import ImageOps
 import math
 from astLib import astWCS
 from skyTile import *

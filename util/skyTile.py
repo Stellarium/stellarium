@@ -1,9 +1,7 @@
 #!/usr/bin/python
 # Fabien Chereau fchereau@eso.org
 
-import sys
 import os
-import math
 import gzip
 
 def writePolys(pl, f):
