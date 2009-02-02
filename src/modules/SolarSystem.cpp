@@ -857,7 +857,7 @@ StelObject* SolarSystem::search(Vec3d pos, const StelCore* core) const
 	pos.normalize();
 	Planet * closest = NULL;
 	double cos_angle_closest = 0.;
-	static Vec3d equPos;
+	Vec3d equPos;
 
 	vector<Planet*>::const_iterator iter = systemPlanets.begin();
 	while (iter != systemPlanets.end())
@@ -890,7 +890,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 	Vec3d v = core->getNavigator()->j2000ToEquinoxEqu(vv);
 	v.normalize();
 	double cosLimFov = cos(limitFov * M_PI/180.);
-	static Vec3d equPos;
+	Vec3d equPos;
 
 	vector<Planet*>::const_iterator iter = systemPlanets.begin();
 	while (iter != systemPlanets.end())

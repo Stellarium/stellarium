@@ -146,7 +146,7 @@ bool planeIntersect2(const HalfSpace& h1, const HalfSpace& h2, Vec3d& p1, Vec3d&
 	
 	// Compute the parametric equation of the line at the intersection of the 2 planes
 	Vec3d u = n1^n2;
-	if (u==Vec3d(0,0,0))
+	if (u[0]==0. && u[1]==0. && u[2]==0.)
 	{
 		// The planes are parallel
 		return false;
@@ -156,7 +156,7 @@ bool planeIntersect2(const HalfSpace& h1, const HalfSpace& h2, Vec3d& p1, Vec3d&
 	// u gives the direction of the line, still need to find a suitable start point p0
 	// Find the axis on which the line varies the fastest, and solve the system for value == 0 on this axis
 	int maxI = (fabs(u[0])>=fabs(u[1])) ? (fabs(u[0])>=fabs(u[2]) ? 0 : 2) : (fabs(u[2])>fabs(u[1]) ? 2 : 1);
-	Vec3d p0(0,0,0);
+	Vec3d p0(0);
 	switch (maxI)
 	{
 		case 0:
