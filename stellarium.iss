@@ -22,8 +22,6 @@ Source: "INSTALL"; DestDir: "{app}"; DestName: "INSTALL.rtf"
 Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.rtf"
 Source: "AUTHORS"; DestDir: "{app}"; DestName: "AUTHORS.rtf"
 Source: "ChangeLog"; DestDir: "{app}";
-Source: "SDL_mixer.dll"; DestDir: "{app}";
-Source: "SDL.dll"; DestDir: "{app}";
 Source: "libpng13.dll"; DestDir: "{app}";
 Source: "zlib1.dll"; DestDir: "{app}";
 Source: "mingwm10.dll"; DestDir: "{app}";
