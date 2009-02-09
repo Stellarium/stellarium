@@ -105,7 +105,7 @@ private:
 	//! Draw the lines for the Constellation.
 	//! This method uses the coords of the stars (optimized for use thru 
 	//! the class ConstellationMgr only).
-	void drawOptim(const StelProjectorP& prj) const;
+	void drawOptim(const StelPainter& sPainter) const;
 	//! Draw the art texture, optimized function to be called thru a constellation manager only.
 	void drawArtOptim(const StelProjectorP& prj, const StelNavigator* nav) const;
 	//! Update fade levels according to time since various events.
