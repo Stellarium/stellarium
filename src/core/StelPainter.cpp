@@ -122,12 +122,14 @@ void StelPainter::revertToQtPainting()
 	glPopMatrix();
 	glPopAttrib();
 	glPopClientAttrib();
+#ifndef NDEBUG
 	GLenum er = glGetError();
 	if (er!=GL_NO_ERROR)
 	{
 		if (er==GL_INVALID_OPERATION)
 			qFatal("Invalid openGL operation in StelPainter::revertToQtPainting()");
 	}
+#endif
 }
 
 void StelPainter::initSystemGLInfo()
