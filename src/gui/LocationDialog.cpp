@@ -119,8 +119,7 @@ void LocationDialog::updateFromProgram()
 		return;
 	
 	// Check that the use as default check box needs to be updated
-	const bool b = StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().getID()
-			==StelApp::getInstance().getCore()->getNavigator()->getDefaultLocationID();
+	const bool b = StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().getID() == StelApp::getInstance().getCore()->getNavigator()->getDefaultLocationID();
 	if (b!=ui->useAsDefaultLocationCheckBox->isChecked())
 	{
 		ui->useAsDefaultLocationCheckBox->setChecked(b);
@@ -130,8 +129,8 @@ void LocationDialog::updateFromProgram()
 	// removing this check and return... we might have the location changed
 	// by a script or plugin, and as such we should update the map whenever the
 	// location window is visible.
-	//if (isEditingNew==true)
-	//	return;
+	if (isEditingNew==true)
+		return;
 
 	const QString& key1 = StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().getID();
 	const QString& key2 = locationFromFields().getID();
@@ -311,7 +310,7 @@ void LocationDialog::spinBoxChanged(int i)
 }
 
 // Called when the location name is manually changed
-void LocationDialog::locationNameChanged(const QString& text)
+void LocationDialog::locationNameChanged(const QString&)
 {
 	reportEdit();
 }
@@ -328,7 +327,7 @@ void LocationDialog::reportEdit()
 	StelLocation loc = locationFromFields();
 	if (!StelApp::getInstance().getLocationMgr().canSaveUserLocation(loc))
 	{
-		ui->cityNameLineEdit->setText("New Location");
+		ui->cityNameLineEdit->setText(q_("New Location"));
 		ui->cityNameLineEdit->selectAll();
 		loc = locationFromFields();
 	}
