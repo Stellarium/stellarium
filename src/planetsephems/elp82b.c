@@ -162749,7 +162749,8 @@ void GetElp82bCoor(const double jd,double xyz[3]) {
     const double pwqw = 2.0 * pw * qw;
     const double pw2 = 1.0 - 2.0 * pwq;
     const double qw2 = 1.0 - 2.0 * qwq;
-    const double ra = 2.0 * sqrt(1.0 - pwq - qwq);
+    const double h = 1.0 - pwq - qwq;
+    const double ra = (h > 0.0) ? (2.0 * sqrt(h)) : 0.0;
     pw *= ra;
     qw *= ra;
 
