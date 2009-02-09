@@ -327,9 +327,19 @@ void LocationDialog::reportEdit()
 	StelLocation loc = locationFromFields();
 	if (!StelApp::getInstance().getLocationMgr().canSaveUserLocation(loc))
 	{
-		ui->cityNameLineEdit->setText(q_("New Location"));
-		ui->cityNameLineEdit->selectAll();
-		loc = locationFromFields();
+		if (ui->cityNameLineEdit->hasFocus())
+		{
+			// The user is editing the location name: don't change it!
+			ui->addLocationToListPushButton->setEnabled(false);
+			ui->deleteLocationFromListPushButton->setEnabled(false);
+			return;
+		}
+		else
+		{
+			ui->cityNameLineEdit->setText(q_("New Location"));
+			ui->cityNameLineEdit->selectAll();
+			loc = locationFromFields();
+		}
 	}
 	ui->addLocationToListPushButton->setEnabled(isEditingNew && StelApp::getInstance().getLocationMgr().canSaveUserLocation(loc));
 	ui->deleteLocationFromListPushButton->setEnabled(StelApp::getInstance().getLocationMgr().canDeleteUserLocation(loc.getID()));
