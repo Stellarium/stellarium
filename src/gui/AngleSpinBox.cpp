@@ -308,6 +308,8 @@ void AngleSpinBox::updateValue(void)
 	if (state != QValidator::Acceptable)
 		return;
 
+	if (radAngle == a)
+		return;
 	radAngle = a;
 	formatText();
 	emit(valueChanged());

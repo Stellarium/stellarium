@@ -78,7 +78,7 @@ private slots:
 	//! Called when latitude/longitude/altitude is modified
 	void spinBoxChanged(int i=0);
 	//! Called when the location name is manually changed
-	void locationNameChanged(const QString& text);
+	void locationNameChanged(const QString&);
 	
 	//! Called when the user clic on the add to list button
 	void addCurrentLocationToList();
