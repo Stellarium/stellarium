@@ -454,7 +454,7 @@ void ConstellationMgr::draw(StelCore* core)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 	
-	drawLines(prj);
+	drawLines(sPainter);
 	drawNames(sPainter);
 	drawArt(prj, nav);
 	drawBoundaries(prj);
@@ -478,7 +478,7 @@ void ConstellationMgr::drawArt(const StelProjectorP& prj, const StelNavigator * 
 }
 
 // Draw constellations lines
-void ConstellationMgr::drawLines(const StelProjectorP& prj) const
+void ConstellationMgr::drawLines(const StelPainter& sPainter) const
 {
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
@@ -486,7 +486,7 @@ void ConstellationMgr::drawLines(const StelProjectorP& prj) const
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->drawOptim(prj);
+		(*iter)->drawOptim(sPainter);
 	}
 	glDisable(GL_LINE_SMOOTH);
 }
