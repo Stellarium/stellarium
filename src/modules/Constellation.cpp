@@ -92,7 +92,7 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 	return true;
 }
 
-void Constellation::drawOptim(const StelProjectorP& prj) const
+void Constellation::drawOptim(const StelPainter& sPainter) const
 {
 	if(!lineFader.getInterstate()) return;
 
@@ -106,13 +106,7 @@ void Constellation::drawOptim(const StelProjectorP& prj) const
 	Vec3d star2;
 	for (unsigned int i=0;i<numberOfSegments;++i)
 	{
-		if (prj->projectLineCheck(asterism[2*i]->getJ2000EquatorialPos(0),star1,asterism[2*i+1]->getJ2000EquatorialPos(0),star2))
-		{
-			glBegin(GL_LINES);
-			glVertex2f(star1[0],star1[1]);
-			glVertex2f(star2[0],star2[1]);
-			glEnd();
-		}
+		sPainter.drawSmallCircleArc(asterism[2*i]->getJ2000EquatorialPos(0), asterism[2*i+1]->getJ2000EquatorialPos(0), Vec3d(0));
 	}
 }
 
