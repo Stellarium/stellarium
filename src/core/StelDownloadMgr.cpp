@@ -85,7 +85,9 @@ void StelDownloadMgr::get(const QString& addr, const QString& filePath, quint16 
 	inProgress = true;
 	
 	target->open(QIODevice::WriteOnly | QIODevice::Truncate);
-	reply = StelApp::getInstance().getNetworkAccessManager()->get(QNetworkRequest(QUrl(address)));
+	QNetworkRequest req(address);
+	req.setRawHeader("User-Agent", StelApp::getApplicationName().toAscii());
+	reply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	
 	if(barVisible)
 	{

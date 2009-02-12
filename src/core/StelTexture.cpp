@@ -156,6 +156,7 @@ bool StelTexture::bind()
 		QNetworkRequest req = QNetworkRequest(QUrl(fullPath));
 		// Define that preference should be given to cached files (no etag checks)
 		req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
+		req.setRawHeader("User-Agent", StelApp::getApplicationName().toAscii());
 		httpReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		connect(httpReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 		return false;
