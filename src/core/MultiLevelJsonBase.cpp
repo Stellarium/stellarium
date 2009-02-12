@@ -176,7 +176,9 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 			qurl.setUrl(parent->getBaseUrl()+url);
 		}
 		Q_ASSERT(httpReply==NULL);
-		httpReply = getNetworkAccessManager().get(QNetworkRequest(qurl));
+		QNetworkRequest req(qurl);
+		req.setRawHeader("User-Agent", StelApp::getApplicationName().toAscii());
+		httpReply = getNetworkAccessManager().get(req);
 		//qDebug() << "Started downloading " << httpReply->request().url().path();
 		Q_ASSERT(httpReply->error()==QNetworkReply::NoError);
 		//qDebug() << httpReply->attribute(QNetworkRequest::SourceIsFromCacheAttribute).toBool();
