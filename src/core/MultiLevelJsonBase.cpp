@@ -56,7 +56,6 @@ QNetworkAccessManager& MultiLevelJsonBase::getNetworkAccessManager()
 // 		{
 // 			cachePath = StelApp::getInstance().getFileMgr().getUserDir()+"/cache";
 // 		}
-// 		//qDebug() << cachePath;
 // 		cache->setCacheDirectory(cachePath+"/JSONCache");
 // 		networkAccessManager->setCache(cache);
 // #endif
