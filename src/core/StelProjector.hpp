@@ -85,6 +85,16 @@ public:
 	//! Return the small zoom increment to use at the given FOV for nice movements
 	virtual double deltaZoom(double fov) const = 0;
 
+	//! Determine whether a great circle connection p1 and p2 intersects with a projection discontinuity.
+	//! For many projections without discontinuity, this should return always false, but for other like 
+	//! cylindrical projection it will return true if the line cuts the wrap-around line (i.e. at lon=180 if the observer look at lon=0).
+	bool intersectViewportDiscontinuity(const Vec3d& p1, const Vec3d& p2) const
+	{
+		if (hasDiscontinuity()==false)
+			return false;
+		return intersectViewportDiscontinuityInternal(modelViewMatrix*p1, modelViewMatrix*p2);
+	}
+	
 	//! Convert a Field Of View radius value in radians in ViewScalingFactor (used internally)
 	virtual double fovToViewScalingFactor(double fov) const = 0;
 	//! Convert a ViewScalingFactor value (used internally) in Field Of View radius in radians
@@ -225,7 +235,12 @@ public:
 protected:
 	//! Private constructor. Only StelCore can create instances of StelProjector.
 	StelProjector(const Mat4d& modelViewMat) : modelViewMatrix(modelViewMat) {;}
-
+	//! Return whether the projection presents discontinuities. Used for optimization.
+	virtual bool hasDiscontinuity() const =0;
+	//! Determine whether a great circle connection p1 and p2 intersects with a projection discontinuity.
+	//! For many projections without discontinuity, this should return always false, but for other like 
+	//! cylindrical projection it will return true if the line cuts the wrap-around line (i.e. at lon=180 if the observer look at lon=0).
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const = 0;
 private:
 	//! Initialise the StelProjector from a param instance
 	void init(const StelProjectorParams& param);
