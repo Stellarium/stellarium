@@ -564,8 +564,18 @@ void StelPainter::drawText(const StelFont* font, float x, float y, const QString
 
 
 // Recursive method cutting a small circle in small segments
-void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, const Vec3d& win1, const Vec3d& win2, QLinkedList<Vec3d>& vertexList, const QLinkedList<Vec3d>::iterator& iter, double radius, const Vec3d& center, int nbI=0)
+void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, Vec3d& win1, Vec3d& win2, QLinkedList<Vec3d>& vertexList, const QLinkedList<Vec3d>::iterator& iter, double radius, const Vec3d& center, int nbI=0, bool checkCrossDiscontinuity=true)
 {
+	const bool crossDiscontinuity = checkCrossDiscontinuity && prj->intersectViewportDiscontinuity(p1+center, p2+center);
+	if (crossDiscontinuity && nbI>=10)
+	{
+		win1[2]=-2.;
+		win2[2]=-2.;
+		vertexList.insert(iter, win1);
+		vertexList.insert(iter, win2);
+		return;
+	}
+	
 	Vec3d win3;
 	Vec3d newVertex(p1+p2);
 	newVertex.normalize();
@@ -577,12 +587,12 @@ void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, const Ve
 	
 	const double dist = std::sqrt((v1[0]*v1[0]+v1[1]*v1[1])*(v2[0]*v2[0]+v2[1]*v2[1]));
 	const double cosAngle = (v1[0]*v2[0]+v1[1]*v2[1])/dist;
-	if ((cosAngle>-0.999 || dist>50*50) && nbI<10)
+	if ((cosAngle>-0.999 || dist>50*50 || crossDiscontinuity) && nbI<10)
 	{
 		// Use the 3rd component of the vector to store whether the vertex is valid
 		win3[2]= isValidVertex ? 1.0 : -1.;
-		fIter(prj, p1, newVertex, win1, win3, vertexList, vertexList.insert(iter, win3), radius, center, nbI+1);
-		fIter(prj, newVertex, p2, win3, win2, vertexList, iter, radius, center, nbI+1);
+		fIter(prj, p1, newVertex, win1, win3, vertexList, vertexList.insert(iter, win3), radius, center, nbI+1, crossDiscontinuity || dist>50*50);
+		fIter(prj, newVertex, p2, win3, win2, vertexList, iter, radius, center, nbI+1, crossDiscontinuity || dist>50*50 );
 	}
 }
 

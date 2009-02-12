@@ -231,8 +231,6 @@ double StelProjectorCylinder::deltaZoom(double fov) const
 	return fov;
 }
 
-
-
 QString StelProjectorMercator::getNameI18() const
 {
 	return q_("Mercator");
@@ -283,7 +281,6 @@ double StelProjectorMercator::deltaZoom(double fov) const
 {
 	return fov;
 }
-
 
 
 QString StelProjectorOrthographic::getNameI18() const

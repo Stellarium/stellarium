@@ -53,6 +53,9 @@ public:
 	double fovToViewScalingFactor(double fov) const;
 	double viewScalingFactorToFov(double vsf) const;
 	double deltaZoom(double fov) const;
+protected:
+	virtual bool hasDiscontinuity() const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
 };
 
 class StelProjectorEqualArea : public StelProjector
@@ -75,6 +78,9 @@ public:
 	double fovToViewScalingFactor(double fov) const;
 	double viewScalingFactorToFov(double vsf) const;
 	double deltaZoom(double fov) const;
+protected:
+	virtual bool hasDiscontinuity() const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
 };
 
 class StelProjectorStereographic : public StelProjector
@@ -104,6 +110,9 @@ public:
 	double fovToViewScalingFactor(double fov) const;
 	double viewScalingFactorToFov(double vsf) const;
 	double deltaZoom(double fov) const;
+protected:
+	virtual bool hasDiscontinuity() const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
 };
 
 class StelProjectorFisheye : public StelProjector
@@ -139,6 +148,9 @@ public:
 	double fovToViewScalingFactor(double fov) const;
 	double viewScalingFactorToFov(double vsf) const;
 	double deltaZoom(double fov) const;
+protected:
+	virtual bool hasDiscontinuity() const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
 };
 
 class StelProjectorCylinder : public StelProjector
@@ -153,6 +165,12 @@ public:
 	double fovToViewScalingFactor(double fov) const;
 	double viewScalingFactorToFov(double vsf) const;
 	double deltaZoom(double fov) const;
+protected:
+	virtual bool hasDiscontinuity() const {return true;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const
+	{
+		return p1[0]*p2[0]<0 && !(p1[2]<0 && p2[2]<0);
+	}
 };
 
 class StelProjectorMercator : public StelProjector
@@ -167,6 +185,12 @@ public:
 	double fovToViewScalingFactor(double fov) const;
 	double viewScalingFactorToFov(double vsf) const;
 	double deltaZoom(double fov) const;
+protected:
+	virtual bool hasDiscontinuity() const {return true;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const
+	{
+		return p1[0]*p2[0]<0 && !(p1[2]<0 && p2[2]<0);
+	}
 };
 
 class StelProjectorOrthographic : public StelProjector
@@ -181,6 +205,9 @@ public:
 	double fovToViewScalingFactor(double fov) const;
 	double viewScalingFactorToFov(double vsf) const;
 	double deltaZoom(double fov) const;
+protected:
+	virtual bool hasDiscontinuity() const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
 };
 
 class StelProjector2d : public StelProjector
@@ -195,6 +222,9 @@ public:
 	double fovToViewScalingFactor(double fov) const;
 	double viewScalingFactorToFov(double vsf) const;
 	double deltaZoom(double fov) const;
+protected:
+	virtual bool hasDiscontinuity() const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {Q_ASSERT(0); return false;}
 };
 
 #endif // _STELPROJECTIONS_HPP_
