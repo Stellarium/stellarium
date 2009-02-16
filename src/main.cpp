@@ -50,8 +50,16 @@ int main(int argc, char **argv)
 	QCoreApplication::setApplicationName("stellarium");
 	QApplication::setDesktopSettingsAware(false);
 	QApplication::setStyle(new QPlastiqueStyle());
-	QApplication app(argc, argv);
-	//app.setQuitOnLastWindowClosed(false);
+	
+	// With Qt 4.5, force the usage of the raster backend
+	char** argv2 = (char**)malloc(sizeof(char*)*(argc+2));
+	char cmd1[] = "-graphicssystem";
+	char cmd2[] = "raster";
+	argv2[argc]=cmd1;
+	argv2[argc+1]=cmd2;
+	int argc2 = argc+2;
+	QApplication app(argc2, argv2);
+
 #ifdef MACOSX
 	StelMacosxDirs::addApplicationPluginDirectory();
 #endif
@@ -70,5 +78,6 @@ int main(int argc, char **argv)
 	view->deinitGL();
 	delete view;
 	delete mainWin;
+	free(argv2);
 	return 0;
 }
