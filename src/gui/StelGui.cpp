@@ -827,7 +827,7 @@ void StelGui::updateBarsPos()
 	// Update position of the auto-hide buttons
 	autoHidebts->setPos(0, hh-autoHidebts->childrenBoundingRect().height()+1);
 	double opacity = qMax(animLeftBarTimeLine->currentValue(), animBottomBarTimeLine->currentValue());
-	autoHidebts->setOpacity(opacity);
+	autoHidebts->setOpacity(opacity < 0.01 ? 0.01 : opacity);	// Work around a qt bug
 }
 
 void StelGui::retranslateUi(QWidget *Form)
