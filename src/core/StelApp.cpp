@@ -1180,10 +1180,11 @@ void StelApp::updateI18n()
 // Update and reload sky culture informations everywhere in the program
 void StelApp::updateSkyCulture()
 {
+	QString skyCultureDir = getSkyCultureMgr().getCurrentSkyCultureID();
 	// Send the event to every StelModule
 	foreach (StelModule* iter, moduleMgr->getAllModules())
 	{
-		iter->updateSkyCulture();
+		iter->updateSkyCulture(skyCultureDir);
 	}
 }
 

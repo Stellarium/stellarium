@@ -196,7 +196,7 @@ void NebulaMgr::drawPointer(const StelCore* core, const StelPainter& sPainter)
 	}
 }
 
-void NebulaMgr::updateSkyCulture()
+void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 {;}
 
 void NebulaMgr::setStelStyle(const StelStyle& style)

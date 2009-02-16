@@ -52,7 +52,8 @@ public:
 	virtual void updateI18n() {;}
 	
 	//! Does nothing in the MilkyWay module.
-	virtual void updateSkyCulture() {;}
+	//! @param skyCultureDir the name of the directory containing the sky culture to use.
+	virtual void updateSkyCulture(const QString& skyCultureDir) {;}
 	
 	//! Used to determine the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const {return 1.;}

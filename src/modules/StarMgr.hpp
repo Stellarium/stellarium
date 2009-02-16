@@ -94,7 +94,8 @@ public:
 	
 	//! Called when the sky culture is updated.
 	//! Loads common and scientific names of stars for a given sky culture.
-	virtual void updateSkyCulture();
+	//! @param skyCultureDir the name of the directory containing the sky culture to use.
+	virtual void updateSkyCulture(const QString& skyCultureDir);
 	
 	//! Load a color scheme
 	virtual void setStelStyle(const StelStyle& style);
