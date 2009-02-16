@@ -67,7 +67,8 @@ public:
 	virtual void updateI18n();
 	
 	//! Called for all registered modules if the sky culture changes.
-	virtual void updateSkyCulture() {;}
+	//! @param skyCultureDir the name of the directory containing the sky culture to use.
+	virtual void updateSkyCulture(const QString& skyCultureDir) {;}
 	
 	//! Load a color scheme from a configuration object
 	virtual void setStelStyle(const StelStyle& style);

@@ -65,7 +65,8 @@ public:
 	virtual void updateI18n() {;}
 		   
 	//! Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.
-	virtual void updateSkyCulture() {;}	
+	//! @param skyCultureDir the name of the directory containing the sky culture to use.
+	virtual void updateSkyCulture(const QString& skyCultureDir) {;}	
 	
 	//! Get the version of the module, default is stellarium main version
 	virtual QString getModuleVersion() const;

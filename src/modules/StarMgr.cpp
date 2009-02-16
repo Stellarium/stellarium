@@ -895,10 +895,8 @@ void StarMgr::setFontSize(double newFontSize)
 		StelApp::getInstance().getLocaleMgr().getSkyLanguage(),fontSize);
 }
 
-void StarMgr::updateSkyCulture()
+void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 {
-	QString skyCultureDir = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID();
-	
 	// Load culture star names in english
 	try
 	{
