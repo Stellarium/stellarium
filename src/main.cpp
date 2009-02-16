@@ -48,7 +48,11 @@ public:
 int main(int argc, char **argv)
 {
 	QCoreApplication::setApplicationName("stellarium");
-	QApplication::setDesktopSettingsAware(false);
+	QCoreApplication::setApplicationVersion(StelApp::getApplicationVersion());
+	QCoreApplication::setOrganizationDomain("stellarium.org");
+	QCoreApplication::setOrganizationName("stellarium");
+	
+	//QApplication::setDesktopSettingsAware(false);
 	QApplication::setStyle(new QPlastiqueStyle());
 	
 	// With Qt 4.5, force the usage of the raster backend

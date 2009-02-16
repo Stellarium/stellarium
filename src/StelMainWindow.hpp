@@ -41,6 +41,10 @@ public:
 	//! Performs various initialization incluing the init of the StelMainGraphicsView instance.
 	void init();
 	
+	//! Set the application title for the current language.
+	//! This is useful for e.g. chinese.
+	void initTitleI18n();
+			
 public slots:
 	//! Alternate fullscreen mode/windowed mode if possible
 	void toggleFullScreen();
