@@ -88,7 +88,6 @@ void ConstellationMgr::init()
 	Q_ASSERT(conf);
 
 	lastLoadedSkyCulture = "dummy";
-	updateSkyCulture();
 	fontSize = conf->value("viewing/constellation_font_size",16.).toDouble();
 	setFlagLines(conf->value("viewing/flag_constellation_drawing").toBool());
 	setFlagLabels(conf->value("viewing/flag_constellation_name").toBool());
@@ -111,13 +110,12 @@ double ConstellationMgr::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-void ConstellationMgr::updateSkyCulture()
+void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 {
-	QString newSkyCulture = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID();
 	StelFileMgr& fileMan = StelApp::getInstance().getFileMgr();
 	
 	// Check if the sky culture changed since last load, if not don't load anything
-	if (lastLoadedSkyCulture == newSkyCulture)
+	if (lastLoadedSkyCulture == skyCultureDir)
 		return;
 
 	// Find constellation art.  If this doesn't exist, warn, but continue using ""
@@ -125,19 +123,19 @@ void ConstellationMgr::updateSkyCulture()
 	QString conArtFile;
 	try
 	{
-		conArtFile = fileMan.findFile("skycultures/"+newSkyCulture+"/constellationsart.fab");
+		conArtFile = fileMan.findFile("skycultures/"+skyCultureDir+"/constellationsart.fab");
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: no constellationsart.fab file found for sky culture " << newSkyCulture;
+		qWarning() << "WARNING: no constellationsart.fab file found for sky culture " << skyCultureDir;
 	}
 
 	try
 	{
-		loadLinesAndArt(fileMan.findFile("skycultures/"+newSkyCulture+"/constellationship.fab"), conArtFile, newSkyCulture);
+		loadLinesAndArt(fileMan.findFile("skycultures/"+skyCultureDir+"/constellationship.fab"), conArtFile, skyCultureDir);
 			
 		// load constellation names
-		loadNames(fileMan.findFile("skycultures/" + newSkyCulture + "/constellation_names.eng.fab"));
+		loadNames(fileMan.findFile("skycultures/" + skyCultureDir + "/constellation_names.eng.fab"));
 
 		// Translate constellation names for the new sky culture
 		updateI18n();
@@ -148,11 +146,11 @@ void ConstellationMgr::updateSkyCulture()
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "ERROR: while loading new constellation data for sky culture " 
-			<< newSkyCulture << ", reason: " << e.what() << endl;		
+			<< skyCultureDir << ", reason: " << e.what() << endl;		
 	}
 		
 	// TODO: do we need to have an else { clearBoundaries(); } ?
-	if (newSkyCulture=="western") 
+	if (skyCultureDir=="western") 
 	{
 		try
 		{
@@ -164,7 +162,7 @@ void ConstellationMgr::updateSkyCulture()
 		}
 	}
 
-	lastLoadedSkyCulture = newSkyCulture;
+	lastLoadedSkyCulture = skyCultureDir;
 }
 
 void ConstellationMgr::setStelStyle(const StelStyle& style)

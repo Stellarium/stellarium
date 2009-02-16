@@ -70,7 +70,8 @@ public:
 	virtual void updateI18n();
 	
 	//! Loads new constellation data and art if the SkyCulture has changed.
-	virtual void updateSkyCulture();
+	//! @param skyCultureDir the name of the directory containing the sky culture to use.
+	virtual void updateSkyCulture(const QString& skyCultureDir);
 	
 	//! Limit the number of constellations to draw based on selected stars.
 	//! The selected objects changed, check if some stars are selected and display the 
