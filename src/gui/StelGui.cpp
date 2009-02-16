@@ -830,11 +830,6 @@ void StelGui::updateBarsPos()
 	autoHidebts->setOpacity(opacity < 0.01 ? 0.01 : opacity);	// Work around a qt bug
 }
 
-void StelGui::retranslateUi(QWidget *Form)
-{
-	Form->setWindowTitle(QApplication::translate("Form", "Stellarium", 0, QApplication::UnicodeUTF8));
-} // retranslateUi
-
 // Add a new progress bar in the lower right corner of the screen.
 QProgressBar* StelGui::addProgressBar()
 {

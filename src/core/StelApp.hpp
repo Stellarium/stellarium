@@ -177,6 +177,8 @@ public:
 public slots:
 	//! Return the full name of stellarium, i.e. "Stellarium 0.9.0".
 	static QString getApplicationName();
+	//! Return the version of stellarium, i.e. "0.9.0".
+	static QString getApplicationVersion();
 	
 	//! Set flag for activating night vision mode.
 	void setVisionModeNight(bool);

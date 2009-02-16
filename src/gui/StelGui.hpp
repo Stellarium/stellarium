@@ -108,6 +108,9 @@ public:
 	//! Get the button bar at the bottom of the screen
 	BottomStelBar* getButtonBar() {return buttonBar;}
 	
+	//! Get the button bar of the left of the screen
+	class LeftStelBar* getWindowsButtonBar() {return winBar;}
+	
 	//! Transform the pixmap so that it look red for night vision mode
 	static QPixmap makeRed(const QPixmap& p);
 
@@ -168,7 +171,6 @@ private slots:
 	void guiActionTriggered(bool b=false);
 	
 private:
-	void retranslateUi(QWidget *Form);
 	
 	class LeftStelBar* winBar;
 	BottomStelBar* buttonBar;

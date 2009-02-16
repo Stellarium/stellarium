@@ -26,6 +26,7 @@
 #include <QDebug>
 #include <QFontDatabase>
 #include <QCoreApplication>
+#include <QApplication>
 
 #include <stdexcept>
 #include "StelApp.hpp"
@@ -33,6 +34,8 @@
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelGui.hpp"
+
+#include "StelTranslator.hpp"
 
 // Initialize static variables
 StelMainWindow* StelMainWindow::singleton = NULL;
@@ -44,9 +47,17 @@ StelMainWindow::StelMainWindow(QWidget* parent) : QMainWindow(parent), initCompl
     singleton = this;
 }
 
+// Update the translated title
+void StelMainWindow::initTitleI18n()
+{
+	QString appNameI18n = q_("Stellarium %1").arg(StelApp::getApplicationVersion());
+	setWindowTitle(appNameI18n);
+}
+
 void StelMainWindow::init()
 {
 	setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
+	initTitleI18n();
 	
 	QString fName;
 	try
