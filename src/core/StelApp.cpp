@@ -51,7 +51,7 @@
 #include "StelJsonParser.hpp"
 #include "StelSkyImageMgr.hpp"
 #include "StelAudioMgr.hpp"
-
+#include "StelMainWindow.hpp"
 #include "StelStyle.hpp"
 
 #include <iostream>
@@ -301,6 +301,18 @@ QString StelApp::getApplicationName()
 	return QString("Stellarium")+" "+PACKAGE_VERSION+" (SVN r"+SVN_REVISION+")";
 #else
 	return QString("Stellarium")+" "+PACKAGE_VERSION;
+#endif
+}
+
+/*************************************************************************
+ Return the version of stellarium, i.e. "0.9.0"
+*************************************************************************/
+QString StelApp::getApplicationVersion()
+{
+#ifdef SVN_REVISION
+	return QString(PACKAGE_VERSION)+" (SVN r"+SVN_REVISION+")";
+#else
+	return QString(PACKAGE_VERSION);
 #endif
 }
 
@@ -1157,6 +1169,7 @@ void StelApp::setVisionModeNight(bool b)
 // Update translations and font for sky everywhere in the program
 void StelApp::updateI18n()
 {
+	StelMainWindow::getInstance().initTitleI18n();
 	// Send the event to every StelModule
 	foreach (StelModule* iter, moduleMgr->getAllModules())
 	{
