@@ -57,6 +57,7 @@ int main(int argc, char **argv)
 	
 	// With Qt 4.5, force the usage of the raster backend
 	char** argv2 = (char**)malloc(sizeof(char*)*(argc+2));
+	memcpy(argv2, argv, argc*sizeof(char*));
 	char cmd1[] = "-graphicssystem";
 	char cmd2[] = "raster";
 	argv2[argc]=cmd1;
