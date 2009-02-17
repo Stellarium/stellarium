@@ -224,6 +224,7 @@ class StelBarsPath : public QGraphicsPathItem
 		StelBarsPath(QGraphicsItem* parent);
 		void updatePath(BottomStelBar* bot, LeftStelBar* lef);
 		double getRoundSize() const {return roundSize;}
+		void setBackgroundOpacity(double opacity);
 	private:
 		double roundSize;
 };
