@@ -813,6 +813,11 @@ void StelGui::updateBarsPos()
 		lastButtonbarWidth = (int)(buttonBar->boundingRectNoHelpLabel().width());
 	}
 			
+// 	double barOpacity = 1.-(5.+StelApp::getInstance().getCore()->getSkyDrawer()->getLimitMagnitude())/10.;
+// 	barOpacity = qMin(qMax(0., barOpacity), 1.);
+// 	barOpacity = 0.2+barOpacity*0.4;
+// 	buttonBarPath->setBackgroundOpacity(barOpacity);
+	
 	if (updatePath)
 		buttonBarPath->updatePath(buttonBar, winBar);
 
