@@ -111,10 +111,10 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 	// - the parent tile min resolution was reached
 	// - the parent tile is intersecting FOV
 	// - the parent tile is not scheduled for deletion
-	Q_ASSERT(isDeletionScheduled()==false);
 	const StelSkyImageTile* parent = qobject_cast<StelSkyImageTile*>(QObject::parent());
 	if (parent!=NULL)
 	{
+		Q_ASSERT(isDeletionScheduled()==false);
 		const double degPerPixel = 1./core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()*180./M_PI;
 		Q_ASSERT(degPerPixel<parent->minResolution);
 		
