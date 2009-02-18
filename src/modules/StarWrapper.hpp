@@ -76,10 +76,10 @@ protected:
 	StarWrapper(const SpecialZoneArray<Star> *a,
 		const SpecialZoneData<Star> *z,
 		const Star *s) : a(a), z(z), s(s) {;}
-	Vec3d getJ2000EquatorialPos(const StelNavigator*) const
+	Vec3d getJ2000EquatorialPos(const StelNavigator* nav) const
 	{
 		const double d2000 = 2451545.0;
-		return s->getJ2000Pos(z, (M_PI/180.)*(0.0001/3600.)	* ((StarMgr::getCurrentJDay()-d2000)/365.25) / a->star_position_scale);
+		return s->getJ2000Pos(z, (M_PI/180.)*(0.0001/3600.)	* ((nav->getJDay()-d2000)/365.25) / a->star_position_scale);
 	}
 	Vec3f getInfoColor(void) const
 	{

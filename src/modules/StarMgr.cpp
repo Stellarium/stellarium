@@ -69,7 +69,6 @@ static QStringList component_array;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
-double StarMgr::currentJDay = 0;
 std::map<int,QString> StarMgr::commonNamesMap;
 std::map<int,QString> StarMgr::commonNamesMapI18n;
 std::map<QString,int> StarMgr::commonNamesIndex;
@@ -542,8 +541,6 @@ void StarMgr::draw(StelCore* core)
 	StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
-	
-    currentJDay = nav->getJDay();
 
     // If stars are turned off don't waste time below
     // projecting all stars just to draw disembodied labels
@@ -597,9 +594,9 @@ void StarMgr::draw(StelCore* core)
 		}
 		int zone;
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it->first);(zone = it1.next()) >= 0;)
-			it->second->draw(zone, true, rcmag_table, prj, maxMagStarName, names_brightness, starFont);
+			it->second->draw(zone, true, rcmag_table, core, maxMagStarName, names_brightness, starFont);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it->first);(zone = it1.next()) >= 0;)
-			it->second->draw(zone, false, rcmag_table, prj, maxMagStarName,names_brightness, starFont);
+			it->second->draw(zone, false, rcmag_table, core, maxMagStarName,names_brightness, starFont);
     }
     exit_loop:
 	// Finish drawing many stars
@@ -671,13 +668,13 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 		int zone;
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it->first);(zone = it1.next()) >= 0;)
 		{
-			it->second->searchAround(zone,v,f,result);
+			it->second->searchAround(core->getNavigator(), zone,v,f,result);
 			//qDebug() << " " << zone;
 		}
 		//qDebug() << endl << "search border(" << it->first << "):";
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it->first); (zone = it1.next()) >= 0;)
 		{
-			it->second->searchAround(zone,v,f,result);
+			it->second->searchAround(core->getNavigator(), zone,v,f,result);
 			//qDebug() << " " << zone;
 		}
 	}
