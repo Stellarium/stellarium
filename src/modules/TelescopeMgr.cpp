@@ -110,7 +110,7 @@ void TelescopeMgr::draw(StelCore* core)
 		if (tel->isConnected() && tel->hasKnownPosition())
 		{
 			Vec3d XY;
-			if (prj->projectCheck(tel->getJ2000EquatorialPos(0),XY))
+			if (prj->projectCheck(tel->getJ2000EquatorialPos(nav),XY))
 			{
 				if (telescopeFader.getInterstate() >= 0)
 				{
@@ -170,7 +170,7 @@ QList<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, 
 	double cosLimFov = cos(limitFov * M_PI/180.);
 	foreach (Telescope* tel, telescope_map)
 	{
-		if (tel->getJ2000EquatorialPos(0).dot(v) >= cosLimFov)
+		if (tel->getJ2000EquatorialPos(core->getNavigator()).dot(v) >= cosLimFov)
 		{
 			result.push_back(tel);
 		}
