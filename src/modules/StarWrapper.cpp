@@ -62,7 +62,7 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 QString StarWrapper1::getEnglishName(void) const
 {
 	if (s->hip)
-		return QString("HP %1").arg(s->hip);
+		return QString("HIP %1").arg(s->hip);
 	return StarWrapperBase::getEnglishName();
 }
 
@@ -97,7 +97,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << " - ";
 
 		if (flags&CatalogNumber)
-			oss << "HP " << s->hip;
+			oss << "HIP " << s->hip;
 		if (s->componentIds)
 			oss << " " << StarMgr::convertToComponentIds(s->componentIds);
 

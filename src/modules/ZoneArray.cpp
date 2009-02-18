@@ -296,16 +296,14 @@ bool ZoneArray::readFileWithStelLoadingBar(QFile& file, void *data, qint64 size,
 
 void HipZoneArray::updateHipIndex(HipIndexStruct hipIndex[]) const
 {
-	for (const SpecialZoneData<Star1> *z=getZones()+(nr_of_zones-1);
-	        z>=getZones();z--)
+	for (const SpecialZoneData<Star1> *z=getZones()+(nr_of_zones-1);z>=getZones();z--)
 	{
 		for (const Star1 *s = z->getStars()+z->size-1;s>=z->getStars();s--)
 		{
 			const int hip = s->hip;
 			if (hip < 0 || NR_OF_HIP < hip)
 			{
-				qDebug() << "ERROR: HipZoneArray::updateHipIndex: invalid HP number:"
-					 << hip;
+				qDebug() << "ERROR: HipZoneArray::updateHipIndex: invalid HIP number:" << hip;
 				exit(1);
 			}
 			if (hip != 0)
