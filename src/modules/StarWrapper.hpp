@@ -108,18 +108,18 @@ public:
 		const SpecialZoneData<Star1> *z,
 		const Star1 *s) : StarWrapper<Star1>(a,z,s) {;}
 	
-	//! StarWrapper1 supports the following InfoStringGroup flags:
-	//! - Name
-	//! - CatalogNumber
-	//! - Magnitude
-	//! - RaDecJ2000
-	//! - RaDec
-	//! - AltAzi
-	//! - Extra1 (spectral type)
-	//! - Distance
-	//! - Extra2 (parallax)
-	//! - PlainText
-	//! @param core the StelCore object
+	//! StarWrapper1 supports the following InfoStringGroup flags: <ul>
+	//! <li> Name
+	//! <li> CatalogNumber
+	//! <li> Magnitude
+	//! <li> RaDecJ2000
+	//! <li> RaDec
+	//! <li> AltAzi
+	//! <li> Extra1 (spectral type)
+	//! <li> Distance
+	//! <li> Extra2 (parallax)
+	//! <li> PlainText </ul>
+	//! @param core the StelCore object.
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the StarWrapper1.
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
