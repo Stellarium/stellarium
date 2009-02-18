@@ -67,6 +67,16 @@ using namespace BigStarCatalogExtension;
 static QStringList spectral_array;
 static QStringList component_array;
 
+// Initialise statics
+bool StarMgr::flagSciNames = true;
+double StarMgr::currentJDay = 0;
+std::map<int,QString> StarMgr::commonNamesMap;
+std::map<int,QString> StarMgr::commonNamesMapI18n;
+std::map<QString,int> StarMgr::commonNamesIndex;
+std::map<QString,int> StarMgr::commonNamesIndexI18n;
+std::map<int,QString> StarMgr::sciNamesMapI18n;
+std::map<QString,int> StarMgr::sciNamesIndexI18n;
+
 QStringList initStringListFromFile(const QString& file_name)
 {
 	QStringList list;
@@ -114,18 +124,15 @@ void StarMgr::initTriangle(int lev,int index,
 }
 
 
-StarMgr::StarMgr(void) :
-    hipIndex(new HipIndexStruct[NR_OF_HIP+1]),
-	fontSize(13.),
-    starFont(0)
+StarMgr::StarMgr(void) : hipIndex(new HipIndexStruct[NR_OF_HIP+1]), fontSize(13.), starFont(NULL)
 {
 	setObjectName("StarMgr");
-  if (hipIndex == 0) {
-    qWarning() << "ERROR: StarMgr::StarMgr: no memory";
-    exit(1);
-  }
-  maxGeodesicGridLevel = -1;
-  lastMaxSearchLevel = -1;
+	if (hipIndex == 0)
+	{
+    	qFatal("ERROR: StarMgr::StarMgr: no memory");
+	}
+	maxGeodesicGridLevel = -1;
+	lastMaxSearchLevel = -1;
 }
 
 /*************************************************************************
@@ -155,30 +162,21 @@ StarMgr::~StarMgr(void)
 		delete[] hipIndex;
 }
 
-bool StarMgr::flagSciNames = true;
-double StarMgr::currentJDay = 0;
-std::map<int,QString> StarMgr::commonNamesMap;
-std::map<int,QString> StarMgr::commonNamesMapI18n;
-std::map<QString,int> StarMgr::commonNamesIndex;
-std::map<QString,int> StarMgr::commonNamesIndexI18n;
-
-std::map<int,QString> StarMgr::sciNamesMapI18n;
-std::map<QString,int> StarMgr::sciNamesIndexI18n;
-
-QString StarMgr::getCommonName(int hip) {
-  std::map<int,QString>::const_iterator it(commonNamesMapI18n.find(hip));
-  if (it!=commonNamesMapI18n.end()) return it->second;
-  return "";
+QString StarMgr::getCommonName(int hip)
+{
+	std::map<int,QString>::const_iterator it(commonNamesMapI18n.find(hip));
+	if (it!=commonNamesMapI18n.end())
+		return it->second;
+	return QString();
 }
 
-QString StarMgr::getSciName(int hip) {
-  std::map<int,QString>::const_iterator it(sciNamesMapI18n.find(hip));
-  if (it!=sciNamesMapI18n.end()) return it->second;
-  return "";
+QString StarMgr::getSciName(int hip)
+{
+	std::map<int,QString>::const_iterator it(sciNamesMapI18n.find(hip));
+	if (it!=sciNamesMapI18n.end())
+		return it->second;
+	return QString();
 }
-
-
-
 
 void StarMgr::init()
 {
@@ -365,7 +363,8 @@ void StarMgr::loadData()
 }
 
 // Load common names from file 
-int StarMgr::loadCommonNames(const QString& commonNameFile) {
+int StarMgr::loadCommonNames(const QString& commonNameFile)
+{
 	commonNamesMap.clear();
 	commonNamesMapI18n.clear();
 	commonNamesIndex.clear();
@@ -524,16 +523,16 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 
 int StarMgr::getMaxSearchLevel() const
 {
-  int rval = -1;
-  for (ZoneArrayMap::const_iterator it(zoneArrays.begin());
-       it!=zoneArrays.end();it++) {
-    const float mag_min = 0.001f*it->second->mag_min;
-    float rcmag[2];
-    if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(mag_min,rcmag)==false)
-		break;
-    rval = it->first;
-  }
-  return rval;
+	int rval = -1;
+	for (ZoneArrayMap::const_iterator it(zoneArrays.begin());it!=zoneArrays.end();++it)
+	{
+		const float mag_min = 0.001f*it->second->mag_min;
+		float rcmag[2];
+		if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(mag_min,rcmag)==false)
+			break;
+		rval = it->first;
+	}
+	return rval;
 }
 
 
