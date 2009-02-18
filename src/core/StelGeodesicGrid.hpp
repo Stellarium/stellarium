@@ -166,10 +166,10 @@ private:
 class GeodesicSearchBorderIterator
 {
 public:
-	GeodesicSearchBorderIterator(const GeodesicSearchResult &r,int level)
-		: r(r),level((level<0)?0:(level>r.grid.getMaxLevel())
-			             ?r.grid.getMaxLevel():level),
-			end(r.zones[GeodesicSearchBorderIterator::level]+
+	GeodesicSearchBorderIterator(const GeodesicSearchResult &ar,int alevel)
+		: r(ar),level((alevel<0)?0:(alevel>ar.grid.getMaxLevel())
+			             ?ar.grid.getMaxLevel():alevel),
+			end(ar.zones[GeodesicSearchBorderIterator::level]+
 			    StelGeodesicGrid::nrOfZones(GeodesicSearchBorderIterator::level))
 	{reset();}
 	void reset(void) {index = r.border[level];}
@@ -186,9 +186,9 @@ private:
 class GeodesicSearchInsideIterator
 {
 public:
-	GeodesicSearchInsideIterator(const GeodesicSearchResult &r,int level)
-: r(r),maxLevel((level<0)?0:(level>r.grid.getMaxLevel())
-	                 ?r.grid.getMaxLevel():level)
+	GeodesicSearchInsideIterator(const GeodesicSearchResult &ar,int alevel)
+		: 	r(ar), 
+			maxLevel((alevel<0)?0:(alevel>ar.grid.getMaxLevel())?ar.grid.getMaxLevel():alevel)
 	{reset();}
 	void reset(void);
 	int next(void); // returns -1 when finished
