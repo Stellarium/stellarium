@@ -415,9 +415,10 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 				qWarning() << "Texture dimension not available";
 			}
 
-			Vec3f s1 = hipStarMgr->searchHP(hp1)->getJ2000EquatorialPos(0);
-			Vec3f s2 = hipStarMgr->searchHP(hp2)->getJ2000EquatorialPos(0);
-			Vec3f s3 = hipStarMgr->searchHP(hp3)->getJ2000EquatorialPos(0);
+			const StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
+			Vec3f s1 = hipStarMgr->searchHP(hp1)->getJ2000EquatorialPos(nav);
+			Vec3f s2 = hipStarMgr->searchHP(hp2)->getJ2000EquatorialPos(nav);
+			Vec3f s3 = hipStarMgr->searchHP(hp3)->getJ2000EquatorialPos(nav);
 
 			// To transform from texture coordinate to 2d coordinate we need to find X with XA = B
 			// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate

@@ -30,6 +30,7 @@
 #include "StelFileMgr.hpp"
 #include "StelGeodesicGrid.hpp"
 #include "StelObject.hpp"
+#include "StelNavigator.hpp"
 
 namespace BigStarCatalogExtension
 {
@@ -186,8 +187,7 @@ ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
 			// Because your compiler does not pack the data,
 			// which is crucial for this application.
 			Q_ASSERT(sizeof(Star1) == 28);
-			rval = new HipZoneArray(file, byte_swap, use_mmap, lb,
-						level, mag_min, mag_range, mag_steps);
+			rval = new HipZoneArray(file, byte_swap, use_mmap, lb, level, mag_min, mag_range, mag_steps);
 			if (rval == 0)
 			{
 				dbStr += "error - no memory ";
@@ -494,16 +494,16 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void)
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::draw(int index, bool is_inside, const float *rcmag_table,
-				  const StelProjectorP& prj, unsigned int maxMagStarName,
+void SpecialZoneArray<Star>::draw(int index, bool is_inside, const float *rcmag_table, StelCore* core, unsigned int maxMagStarName,
 				  float names_brightness, StelFont *starFont) const
 {
-	StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
+	StelSkyDrawer* drawer = core->getSkyDrawer();
+	const StelProjectorP& prj = core->getProjection(StelCore::FrameJ2000);
 	SpecialZoneData<Star> *const z = getZones() + index;
 	Vec3d xy;
 	const Star *const end = z->getStars() + z->size;
 	const double d2000 = 2451545.0;
-	const double movementFactor = (M_PI/180)*(0.0001/3600) * ((StarMgr::getCurrentJDay()-d2000)/365.25) / star_position_scale;
+	const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getNavigator()->getJDay()-d2000)/365.25) / star_position_scale;
 	for (const Star *s=z->getStars();s<end;++s)
 	{
 		if (is_inside ? prj->project(s->getJ2000Pos(z,movementFactor),xy) : prj->projectCheck(s->getJ2000Pos(z,movementFactor),xy))
@@ -528,13 +528,11 @@ void SpecialZoneArray<Star>::draw(int index, bool is_inside, const float *rcmag_
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::searchAround(int index, const Vec3d &v, double cosLimFov,
+void SpecialZoneArray<Star>::searchAround(const StelNavigator* nav, int index, const Vec3d &v, double cosLimFov,
 					  QList<StelObjectP > &result)
 {
 	const double d2000 = 2451545.0;
-	const double movementFactor = (M_PI/180)*(0.0001/3600)
-	                              * ((StarMgr::getCurrentJDay()-d2000)/365.25)
-	                              / star_position_scale;
+	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * ((nav->getJDay()-d2000)/365.25)/ star_position_scale;
 	const SpecialZoneData<Star> *const z = getZones()+index;
 	Vec3d tmp;
 	for (int i=0;i<z->size;i++)
