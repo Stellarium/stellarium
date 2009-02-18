@@ -48,7 +48,7 @@ public:
 	//! Update time-dependent things (does nothing).
 	virtual void update(double deltaTime) {;}
 	//! Implement required draw function.  Does nothing.
-	virtual void draw(StelCore* core) {;}
+	virtual void draw(StelCore* acore) {;}
 	//! Handle keyboard events.
 	virtual void handleKeys(QKeyEvent* event);
 	//! Handle mouse movement events.

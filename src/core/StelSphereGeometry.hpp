@@ -70,7 +70,7 @@ class Polygon : public std::vector<Vec3d>
 {
 public:
     //! Default contructor
-    Polygon(int size = 0) : std::vector<Vec3d>(size) {}
+    Polygon(int asize = 0) : std::vector<Vec3d>(asize) {}
     //! Special constructor for 3 points polygon
     Polygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2);
     //! Special constructor for 4 points polygon
@@ -95,7 +95,7 @@ public:
     //! copy constructor
     ConvexS(const ConvexS& c) : std::vector<HalfSpace>(c) {}
     //! Default constructor
-    ConvexS(int size = 0) : std::vector<HalfSpace>(size) {}
+    ConvexS(int asize = 0) : std::vector<HalfSpace>(asize) {}
     //! Special constructor for 3 halfspaces convex
     ConvexS(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2);
     //! Special constructor for 4 halfspaces convex
@@ -188,7 +188,7 @@ struct Disk : HalfSpace
     //! Constructor
 	//! @param n a unit vector indicating the the disk center
     //! @param r the disk radius in radian
-    Disk(const Vec3d& n, double r) : HalfSpace(n, std::cos(r))
+    Disk(const Vec3d& an, double r) : HalfSpace(an, std::cos(r))
     {}
 };
 

@@ -79,11 +79,11 @@ public:
 
 	//! Handle mouse clicks. Please note that most of the interactions will be done through the GUI module. 
 	//! @return set the event as accepted if it was intercepted
-	virtual void handleMouseClicks(class QMouseEvent* event) {return;}
+	virtual void handleMouseClicks(class QMouseEvent* e) {;}
 	
 	//! Handle mouse wheel. Please note that most of the interactions will be done through the GUI module. 
 	//! @return set the event as accepted if it was intercepted
-	virtual void handleMouseWheel(class QWheelEvent* event) {return;}
+	virtual void handleMouseWheel(class QWheelEvent* e) {;}
 	
 	//! Handle mouse moves. Please note that most of the interactions will be done through the GUI module. 
 	//! @return true if the event was intercepted
@@ -92,7 +92,7 @@ public:
 	//! Handle key events. Please note that most of the interactions will be done through the GUI module.
 	//! @param event the Key event
 	//! @return set the event as accepted if it was intercepted
-	virtual void handleKeys(class QKeyEvent* event) {return;}
+	virtual void handleKeys(class QKeyEvent* e) {;}
 
 	//! Enum used when selecting objects to define whether to add to, replace, or remove from the existing selection list.
 	enum StelModuleSelectAction
