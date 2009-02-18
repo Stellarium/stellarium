@@ -175,8 +175,6 @@ public:
 	//! Hipparcos catalogue number.
 	static QString getSciName(int hip);
 	
-	static double getCurrentJDay(void) {return currentJDay;}
-	
 	static QString convertToSpectralType(int index);
 	static QString convertToComponentIds(int index);
 	
@@ -239,8 +237,6 @@ private:
 	
 	static std::map<int, QString> sciNamesMapI18n;
 	static std::map<QString, int> sciNamesIndexI18n;
-
-	static double currentJDay;
 	
 	double fontSize;
 	StelFont *starFont;

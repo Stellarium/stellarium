@@ -28,6 +28,8 @@
 #include "StelTexture.hpp"
 #include "StelFont.hpp"
 #include "StelPainter.hpp"
+#include "StelApp.hpp"
+#include "StelCore.hpp"
 
 Vec3f Constellation::lineColor = Vec3f(0.4,0.4,0.8);
 Vec3f Constellation::labelColor = Vec3f(0.4,0.4,0.8);
@@ -85,7 +87,7 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 	XYZname.set(0.,0.,0.);
 	for(unsigned int ii=0;ii<numberOfSegments*2;++ii)
 	{
-		XYZname+= asterism[ii]->getJ2000EquatorialPos(0);
+		XYZname+= asterism[ii]->getJ2000EquatorialPos(StelApp::getInstance().getCore()->getNavigator());
 	}
 	XYZname*=1./(numberOfSegments*2);
 

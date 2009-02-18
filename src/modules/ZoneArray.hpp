@@ -99,12 +99,12 @@ public:
 	virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {}
 	
 	//! Pure virtual method. See subclass implementation.
-	virtual void searchAround(int index,const Vec3d &v,double cosLimFov,
+	virtual void searchAround(const StelNavigator* nav, int index,const Vec3d &v,double cosLimFov,
 	                          QList<StelObjectP > &result) = 0;
 	
 	//! Pure virtual method. See subclass implementation.
 	virtual void draw(int index,bool is_inside,
-	                  const float *rcmag_table, const StelProjectorP& prj,
+	                  const float *rcmag_table, StelCore* core,
 	                  unsigned int maxMagStarName,float names_brightness,
 	                  StelFont *starFont) const = 0;
 	
@@ -188,12 +188,12 @@ protected:
 	//! @param names_brightness brightness of labels
 	//! @param starFont font of labels
 	void draw(int index,bool is_inside,
-	          const float *rcmag_table, const StelProjectorP& prj,
+	          const float *rcmag_table, StelCore* core,
 	          unsigned int maxMagStarName,float names_brightness,
 	          StelFont *starFont) const;
 	
 	void scaleAxis(void);
-	void searchAround(int index,const Vec3d &v,double cosLimFov,
+	void searchAround(const StelNavigator* nav, int index,const Vec3d &v,double cosLimFov,
 	                  QList<StelObjectP > &result);
 	
 	Star *stars;
