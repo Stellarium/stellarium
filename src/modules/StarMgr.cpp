@@ -613,158 +613,110 @@ void StarMgr::draw(StelCore* core)
 }
 
 
-
-
-
-
-// Look for a star by XYZ coords
-StelObjectP StarMgr::search(Vec3d pos) const {
-Q_ASSERT(0);
-  pos.normalize();
-  QList<StelObjectP > v = searchAround(pos,
-                                        0.8, // just an arbitrary number
-                                        NULL);
-  StelObjectP nearest;
-  double cos_angle_nearest = -10.0;
-  for (QList<StelObjectP >::const_iterator it(v.begin());it!=v.end();it++) {
-    const double c = (*it)->getJ2000EquatorialPos(0)*pos;
-    if (c > cos_angle_nearest) {
-      cos_angle_nearest = c;
-      nearest = *it;
-    }
-  }
-  return nearest;
-}
-
 // Return a stl vector containing the stars located
 // inside the limFov circle around position v
-QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv,
-                                           double limFov, // degrees
-										   const StelCore* core) const {
-  QList<StelObjectP > result;
-  if (!getFlagStars())
-  	return result;
-  	
-  Vec3d v(vv);
-  v.normalize();
-    // find any vectors h0 and h1 (length 1), so that h0*v=h1*v=h0*h1=0
-  int i;
-  {
-    const double a0 = fabs(v[0]);
-    const double a1 = fabs(v[1]);
-    const double a2 = fabs(v[2]);
-    if (a0 <= a1) {
-      if (a0 <= a2) i = 0;
-      else i = 2;
-    } else {
-      if (a1 <= a2) i = 1;
-      else i = 2;
-    }
-  }
-  Vec3d h0(0.0,0.0,0.0);
-  h0[i] = 1.0;
-  Vec3d h1 = h0 ^ v;
-  h1.normalize();
-  h0 = h1 ^ v;
-  h0.normalize();
-    // now we have h0*v=h1*v=h0*h1=0.
-    // construct a region with 4 corners e0,e1,e2,e3 inside which
-    // all desired stars must be:
-  double f = 1.4142136 * tan(limFov * M_PI/180.0);
-  h0 *= f;
-  h1 *= f;
-  Vec3d e0 = v + h0;
-  Vec3d e1 = v + h1;
-  Vec3d e2 = v - h0;
-  Vec3d e3 = v - h1;
-  f = 1.0/e0.length();
-  e0 *= f;
-  e1 *= f;
-  e2 *= f;
-  e3 *= f;
-    // search the triangles
-  const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(e3,e2,e1,e0,lastMaxSearchLevel);
-    // iterate over the stars inside the triangles:
-  f = cos(limFov * M_PI/180.);
-  for (ZoneArrayMap::const_iterator it(zoneArrays.begin());
-       it!=zoneArrays.end();it++) {
-//qDebug() << "search inside(" << it->first << "):";
-    int zone;
-    for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it->first);
-         (zone = it1.next()) >= 0;) {
-      it->second->searchAround(zone,v,f,result);
-//qDebug() << " " << zone;
-    }
-//qDebug() << endl << "search border(" << it->first << "):";
-    for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it->first);
-         (zone = it1.next()) >= 0;) {
-      it->second->searchAround(zone,v,f,result);
-//qDebug() << " " << zone;
-    }
-  }
-  return result;
+QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const StelCore* core) const
+{
+	QList<StelObjectP > result;
+	if (!getFlagStars())
+		return result;
+		
+	Vec3d v(vv);
+	v.normalize();
+	
+	// find any vectors h0 and h1 (length 1), so that h0*v=h1*v=h0*h1=0
+	int i;
+	{
+		const double a0 = fabs(v[0]);
+		const double a1 = fabs(v[1]);
+		const double a2 = fabs(v[2]);
+		if (a0 <= a1)
+		{
+			if (a0 <= a2) i = 0;
+			else i = 2;
+		} else
+		{
+			if (a1 <= a2) i = 1;
+			else i = 2;
+		}
+	}
+	Vec3d h0(0.0,0.0,0.0);
+	h0[i] = 1.0;
+	Vec3d h1 = h0 ^ v;
+	h1.normalize();
+	h0 = h1 ^ v;
+	h0.normalize();
+	
+	// Now we have h0*v=h1*v=h0*h1=0.
+	// Construct a region with 4 corners e0,e1,e2,e3 inside which all desired stars must be:
+	double f = 1.4142136 * tan(limFov * M_PI/180.0);
+	h0 *= f;
+	h1 *= f;
+	Vec3d e0 = v + h0;
+	Vec3d e1 = v + h1;
+	Vec3d e2 = v - h0;
+	Vec3d e3 = v - h1;
+	f = 1.0/e0.length();
+	e0 *= f;
+	e1 *= f;
+	e2 *= f;
+	e3 *= f;
+	// Search the triangles
+	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(e3,e2,e1,e0,lastMaxSearchLevel);
+	
+	// Iterate over the stars inside the triangles
+	f = cos(limFov * M_PI/180.);
+	for (ZoneArrayMap::const_iterator it(zoneArrays.begin());it!=zoneArrays.end();it++)
+	{
+		//qDebug() << "search inside(" << it->first << "):";
+		int zone;
+		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it->first);(zone = it1.next()) >= 0;)
+		{
+			it->second->searchAround(zone,v,f,result);
+			//qDebug() << " " << zone;
+		}
+		//qDebug() << endl << "search border(" << it->first << "):";
+		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it->first); (zone = it1.next()) >= 0;)
+		{
+			it->second->searchAround(zone,v,f,result);
+			//qDebug() << " " << zone;
+		}
+	}
+	return result;
 }
-
-
-
-
 
 
 //! Update i18 names from english names according to passed translator.
 //! The translation is done using gettext with translated strings defined in translations.h
-void StarMgr::updateI18n() {
-  StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-  commonNamesMapI18n.clear();
-  commonNamesIndexI18n.clear();
-  for (std::map<int,QString>::iterator it(commonNamesMap.begin());
-       it!=commonNamesMap.end();it++) {
-    const int i = it->first;
-    const QString t(trans.qtranslate(it->second));
-    commonNamesMapI18n[i] = t;
-    commonNamesIndexI18n[t.toUpper()] = i;
-  }
-  starFont = &StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
+void StarMgr::updateI18n()
+{
+	StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	commonNamesMapI18n.clear();
+	commonNamesIndexI18n.clear();
+	for (std::map<int,QString>::iterator it(commonNamesMap.begin());it!=commonNamesMap.end();it++)
+	{
+		const int i = it->first;
+		const QString t(trans.qtranslate(it->second));
+		commonNamesMapI18n[i] = t;
+		commonNamesIndexI18n[t.toUpper()] = i;
+	}
+	starFont = &StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
-
-StelObjectP StarMgr::search(const QString& name) const
-{
-	// Use this QRegExp to extract the catalogue number and prefix
-	QRegExp catRx("^(HP|HD|SAO)\\s*(\\d+)$");
-	QString n = name.toUpper();
-	n.replace('_', ' ');
-
-	if (catRx.exactMatch(n))
-	{
-		QString cat = catRx.capturedTexts().at(1);
-		if (cat=="HP")
-			return searchHP(catRx.capturedTexts().at(2).toInt());
-		else // currently we only support searching by string for HP catalogue
-			return NULL;
-	}
-	else 
-	{
-		// Maybe the HP prefix is missing and we just have a number...
-		bool ok;
-		int num = n.toInt(&ok);
-		if (!ok)
-			return NULL;
-		else
-			return searchHP(num);
-	}
-}    
-
 // Search the star by HP number
-StelObjectP StarMgr::searchHP(int _HP) const {
-  if (0 < _HP && _HP <= NR_OF_HIP) {
-    const Star1 *const s = hipIndex[_HP].s;
-    if (s) {
-      const SpecialZoneArray<Star1> *const a = hipIndex[_HP].a;
-      const SpecialZoneData<Star1> *const z = hipIndex[_HP].z;
-      return s->createStelObject(a,z);
-    }
-  }
-  return StelObjectP();
+StelObjectP StarMgr::searchHP(int hp) const
+{
+	if (0 < hp && hp <= NR_OF_HIP)
+	{
+		const Star1 *const s = hipIndex[hp].s;
+		if (s)
+		{
+			const SpecialZoneArray<Star1> *const a = hipIndex[hp].a;
+			const SpecialZoneData<Star1> *const z = hipIndex[hp].z;
+			return s->createStelObject(a,z);
+		}
+	}
+	return StelObjectP();
 }
 
 StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
@@ -772,10 +724,10 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	QString objw = nameI18n.toUpper();
 
 	// Search by HP number if it's an HP formated number
-	QRegExp rx("^\\s*HP\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
+	QRegExp rx("^\\s*(HIP|HP)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx.exactMatch(objw))
 	{
-		return searchHP(rx.capturedTexts().at(1).toInt());
+		return searchHP(rx.capturedTexts().at(2).toInt());
 	}
 
 	// Search by I18n common name
@@ -801,24 +753,16 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	QString objw = name.toUpper();
 
 	// Search by HP number if it's an HP formated number
-	QRegExp rx("^\\s*HP\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
+	QRegExp rx("^\\s*(HP|HIP)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx.exactMatch(objw))
 	{
-		return searchHP(rx.capturedTexts().at(1).toInt());
+		return searchHP(rx.capturedTexts().at(2).toInt());
 	}
-
-
-	/* Should we try this anyway?
-	// Search by common name
-	std::map<QString,int>::const_iterator it(commonNamesIndexI18n.find(objw));
-
-	if (it!=commonNamesIndexI18n.end()) {
-		return searchHP(it->second);
-	} */
 
 	// Search by sci name
 	std::map<QString,int>::const_iterator it = sciNamesIndexI18n.find(objw);
-	if (it!=sciNamesIndexI18n.end()) {
+	if (it!=sciNamesIndexI18n.end())
+	{
 		return searchHP(it->second);
 	}
 
@@ -826,7 +770,7 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 }
 
 //! Find and return the list of at most maxNbItem objects auto-completing
-//! the passed object I18n name
+//! the passed object I18n name.
 QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const 
 {
 	QStringList result;
@@ -835,48 +779,48 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	QString objw = objPrefix.toUpper();
 
 	// Search for common names
-	for (std::map<QString,int>::const_iterator it(commonNamesIndexI18n.lower_bound(objw));
-	     it!=commonNamesIndexI18n.end();
-	     it++) 
+	for (std::map<QString,int>::const_iterator it(commonNamesIndexI18n.lower_bound(objw)); it!=commonNamesIndexI18n.end(); ++it) 
 	{
 		const QString constw(it->first.mid(0,objw.size()));
-		if (constw==objw) {
-			if (maxNbItem==0) break;
+		if (constw==objw)
+		{
+			if (maxNbItem==0)
+				break;
 			result << getCommonName(it->second);
-			maxNbItem--;
+			--maxNbItem;
 		} 
 		else 
 			break;
 	}
 
 	// Search for sci names
-	for (std::map<QString,int>::const_iterator it(sciNamesIndexI18n.lower_bound(objw));
-	     it!=sciNamesIndexI18n.end();
-	     it++) 
+	for (std::map<QString,int>::const_iterator it(sciNamesIndexI18n.lower_bound(objw)); it!=sciNamesIndexI18n.end(); ++it) 
 	{
 		const QString constw(it->first.mid(0,objw.size()));
-		if (constw==objw) {
-			if (maxNbItem==0) break;
+		if (constw==objw)
+		{
+			if (maxNbItem==0)
+				break;
 			result << getSciName(it->second);
-			maxNbItem--;
+			--maxNbItem;
 		} 
 		else 
 			break;
 	}
 
 	// Add exact Hp catalogue numbers
-	QRegExp hpRx("^HP\\s*(\\d+)\\s*$");
+	QRegExp hpRx("^(HIP|HP)\\s*(\\d+)\\s*$");
 	hpRx.setCaseSensitivity(Qt::CaseInsensitive);
 	if (hpRx.exactMatch(objw))
 	{
 		bool ok;
-		int hpNum = hpRx.capturedTexts().at(1).toInt(&ok);
+		int hpNum = hpRx.capturedTexts().at(2).toInt(&ok);
 		if (ok)
 		{
 			StelObjectP s = searchHP(hpNum);
 			if (s && maxNbItem>0)
 			{
-				result << QString("HP%1").arg(hpNum);
+				result << QString("HIP%1").arg(hpNum);
 				maxNbItem--;
 			}
 		}

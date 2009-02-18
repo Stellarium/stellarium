@@ -110,7 +110,7 @@ public:
 	
 	//! Return the matching Stars object's pointer if exists or NULL
 	//! @param nameI18n The case in-sensistive star common name or HP
-	//! catalog name (format can be HP1234 or HP 1234) or sci name
+	//! catalog name (format can be HP1234 or HP 1234 or HIP 1234) or sci name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;	
 
 	//! Return the matching star if exists or NULL
@@ -161,23 +161,11 @@ public slots:
 public:
 	///////////////////////////////////////////////////////////////////////////
 	// Other methods
-	//! Search for the nearest star to some position.
-	//! @param Pos the 3d vector representing the direction to search.
-	//! @return the nearest star from the specified position, or an 
-	//! empty StelObjectP if none were found close by.
-	StelObjectP search(Vec3d Pos) const;
-	
-	//! Search for a star by catalogue number (including catalogue prefix).
-	//! @param id the catalogue identifier for the required star.
+	//! Search by Hipparcos catalogue number.
+	//! @param hip the Hipparcos catalogue number of the star which is required.
 	//! @return the requested StelObjectP or an empty objecy if the requested
 	//! one was not found.
-	StelObjectP search(const QString& id) const;
-	
-	//! Search bu Hipparcos catalogue number.
-	//! @param num the Hipparcos catalogue number of the star which is required.
-	//! @return the requested StelObjectP or an empty objecy if the requested
-	//! one was not found.
-	StelObjectP searchHP(int num) const;
+	StelObjectP searchHP(int hip) const;
 	
 	//! Get the (translated) common name for a star with a specified 
 	//! Hipparcos catalogue number.
