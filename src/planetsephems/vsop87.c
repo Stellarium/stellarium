@@ -137264,7 +137264,7 @@ void AccumulateVsop87Terms(const unsigned char *instructions,
 
 static
 void CalcVsop87Elem(const double t,double elem[8*6]) {
-  int i;
+  unsigned int i;
   double lambda[12];
   double cos_sin_lambda[203*4];
   double accu[sizeof(vsop87_constants)/sizeof(vsop87_constants[0])];
@@ -137272,7 +137272,7 @@ void CalcVsop87Elem(const double t,double elem[8*6]) {
   double use_polynomials;
   for (i=0;i<12;i++) lambda[i] = lambda_0[i] + lambda_1[i] * t;
   PrepareLambdaArray(12,vsop87_max_lambda_factor,lambda,cos_sin_lambda);
-  for (i=0;i<(sizeof(vsop87_constants)/sizeof(vsop87_constants[0]));i++) {
+  for (i=0;i<(sizeof(vsop87_constants)/sizeof(vsop87_constants[0]));++i) {
     accu[i] = 0.0;
   }
   AccumulateVsop87Terms(vsop87_instructions,vsop87_coefficients,cos_sin_lambda,
