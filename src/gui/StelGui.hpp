@@ -45,7 +45,7 @@ class InfoPanel : public QGraphicsTextItem
 {
 public:
 	InfoPanel(QGraphicsItem* parent);
-	void setInfoTextFilters(const StelObject::InfoStringGroup& flags) {infoTextFilters=flags;}
+	void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {infoTextFilters=aflags;}
 	const StelObject::InfoStringGroup& getInfoTextFilters(void) const {return infoTextFilters;}
 	void setTextFromObjects(const QList<StelObjectP>&);
 private:
