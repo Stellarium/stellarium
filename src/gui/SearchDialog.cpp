@@ -148,7 +148,7 @@ void SearchDialog::styleChanged()
 void SearchDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	setSimpleStyle(true);
+	setSimpleStyle(false);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onTextChanged(const QString&)));
 	connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
@@ -160,8 +160,8 @@ void SearchDialog::createDialogContent()
 	ui->DEAngleSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 	
 	// This simply doesn't work. Probably a Qt bug
-	ui->RAAngleSpinBox->setFocusPolicy(Qt::NoFocus);
-	ui->DEAngleSpinBox->setFocusPolicy(Qt::NoFocus);
+	ui->RAAngleSpinBox->setFocusPolicy(Qt::StrongFocus);
+	ui->DEAngleSpinBox->setFocusPolicy(Qt::StrongFocus);
 	
 	connect(ui->RAAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->DEAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
@@ -180,7 +180,7 @@ void SearchDialog::setSimpleStyle(bool b)
 {
 	ui->RAAngleSpinBox->setVisible(!b);
 	ui->DEAngleSpinBox->setVisible(!b);
-	ui->simbadStatusLabel->setVisible(!b);
+	ui->simbadStatusLabel->setVisible(false);
 	ui->raDecLabel->setVisible(!b);
 }
 
@@ -190,6 +190,7 @@ void SearchDialog::manualPositionChanged()
 	StelMovementMgr* mvmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
 	Vec3d pos;
 	StelUtils::spheToRect(ui->RAAngleSpinBox->valueRadians(), ui->DEAngleSpinBox->valueRadians(), pos);
+	mvmgr->setFlagTracking(false);
 	mvmgr->moveTo(pos, 0.05);
 }
 
@@ -197,7 +198,7 @@ void SearchDialog::onTextChanged(const QString& text)
 {
 	if (text.isEmpty())
 	{
-		ui->completionLabel->setText("");
+		ui->completionLabel->clearValues();
 		ui->completionLabel->selectFirst();
 		ui->simbadStatusLabel->setText("");
 		ui->pushButtonGotoSearchSkyObject->setEnabled(false);
