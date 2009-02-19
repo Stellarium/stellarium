@@ -42,6 +42,7 @@ public:
 
 	QString getSelected(void);
 	void setValues(const QStringList&);
+	bool isEmpty() const {return values.isEmpty();}
 	void appendValues(const QStringList&);
 	void clearValues();
 	
@@ -69,11 +70,10 @@ public:
 	//! Notify that the application style changed
 	void styleChanged();
 	bool eventFilter(QObject *object, QEvent *event);
-	
 	void setSimpleStyle(bool b);
 	
 public slots:
-	// Add auto focus of the edit line
+	//! Add auto focus of the edit line
 	void setVisible(bool);
 
 protected:
@@ -84,9 +84,12 @@ protected:
 private slots:
 	//! Called when the current simbad query status changes
 	void onSimbadStatusChanged();
+	//! Called when the user changed the input text
 	void onTextChanged(const QString& text);
+	
 	void gotoObject();
 	
+	//! Called when the user edit the manual position controls
 	void manualPositionChanged();
 	
 private:

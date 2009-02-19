@@ -200,6 +200,7 @@ void SearchDialog::onTextChanged(const QString& text)
 		ui->completionLabel->setText("");
 		ui->completionLabel->selectFirst();
 		ui->simbadStatusLabel->setText("");
+		ui->pushButtonGotoSearchSkyObject->setEnabled(false);
 	}
 	else
 	{
@@ -215,6 +216,9 @@ void SearchDialog::onTextChanged(const QString& text)
 		QStringList matches = StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(text, 5);
 		ui->completionLabel->setValues(matches);
 		ui->completionLabel->selectFirst();
+		
+		// Update push button enabled state
+		ui->pushButtonGotoSearchSkyObject->setEnabled(true);
 	}
 }
 
@@ -223,14 +227,24 @@ void SearchDialog::onSimbadStatusChanged()
 {
 	Q_ASSERT(simbadReply);
 	if (simbadReply->getCurrentStatus()==SimbadLookupReply::SimbadLookupErrorOccured)
+	{
 		ui->simbadStatusLabel->setText(QString("Simbad Lookup Error: ")+simbadReply->getErrorString());
+		if (ui->completionLabel->isEmpty())
+			ui->pushButtonGotoSearchSkyObject->setEnabled(false);
+	}
 	else
+	{
 		ui->simbadStatusLabel->setText(QString("Simbad Lookup: ")+simbadReply->getCurrentStatusString());
+		// Query not over, don't disable button
+		ui->pushButtonGotoSearchSkyObject->setEnabled(true);
+	}
 
 	if (simbadReply->getCurrentStatus()==SimbadLookupReply::SimbadLookupFinished)
 	{
 		simbadResults = simbadReply->getResults();
 		ui->completionLabel->appendValues(simbadResults.keys());
+		// Update push button enabled state
+		ui->pushButtonGotoSearchSkyObject->setEnabled(!ui->completionLabel->isEmpty());
 	}
 	
 	if (simbadReply->getCurrentStatus()!=SimbadLookupReply::SimbadLookupQuerying)
@@ -238,6 +252,10 @@ void SearchDialog::onSimbadStatusChanged()
 		disconnect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
 		delete simbadReply;
 		simbadReply=NULL;
+		
+		// Update push button enabled state
+		// Update push button enabled state
+		ui->pushButtonGotoSearchSkyObject->setEnabled(!ui->completionLabel->isEmpty());
 	}
 }
 	
