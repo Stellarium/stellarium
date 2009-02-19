@@ -312,7 +312,7 @@
         <item>
          <widget class="AngleSpinBox" name="RAAngleSpinBox">
           <property name="focusPolicy">
-           <enum>Qt::StrongFocus</enum>
+           <enum>Qt::NoFocus</enum>
           </property>
          </widget>
         </item>
@@ -335,7 +335,7 @@
         <item>
          <widget class="AngleSpinBox" name="DEAngleSpinBox">
           <property name="focusPolicy">
-           <enum>Qt::StrongFocus</enum>
+           <enum>Qt::NoFocus</enum>
           </property>
          </widget>
         </item>
