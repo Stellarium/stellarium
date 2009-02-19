@@ -160,8 +160,8 @@ void SearchDialog::createDialogContent()
 	ui->DEAngleSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 	
 	// This simply doesn't work. Probably a Qt bug
-	ui->RAAngleSpinBox->setFocusPolicy(Qt::StrongFocus);
-	ui->DEAngleSpinBox->setFocusPolicy(Qt::StrongFocus);
+	ui->RAAngleSpinBox->setFocusPolicy(Qt::NoFocus);
+	ui->DEAngleSpinBox->setFocusPolicy(Qt::NoFocus);
 	
 	connect(ui->RAAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->DEAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));

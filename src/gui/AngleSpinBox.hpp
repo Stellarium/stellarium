@@ -58,8 +58,8 @@ public:
 	~AngleSpinBox();
 
 	// QAbstractSpinBox virtual members
-	void stepBy (int steps);
-	QValidator::State validate (QString& input, int& pos) const;
+	virtual void stepBy(int steps);
+	virtual QValidator::State validate(QString& input, int& pos) const;
 
 	//! Get the angle held in the AngleSpinBox
 	//! @return the angle in radians
@@ -68,11 +68,55 @@ public:
 	//! @return the angle in degrees
 	double valueDegrees();
 
-	//! Get the angle held in the AngleSpinBox
-	//! @return the angle as formatted according to the current format and flags
-	QString text();
+	//! Set the number of decimal places to express float values to (e.g. seconds in DMSLetters format).
+	//! @param places the number of decimal places to use.
+	void setDecimals(int places) { decimalPlaces = places; }
 
-	//! Convert a string value to a angle in radians.
+	//! Get the number of decimal places to express float values to (e.g. seconds in DMSLetters format).
+	//! @return the number of decimal places used.
+	int decimals() { return decimalPlaces; }
+
+	//! Set the display format.
+	//! @param format the new format to use.
+	void setDisplayFormat(DisplayFormat format) { angleSpinBoxFormat=format; formatText(); }
+
+	//! Get the current display format.
+	//! @return the current DisplayFormat.
+	DisplayFormat displayFormat() { return angleSpinBoxFormat; }
+
+	//! Set the prefix type.
+	//! @param prefix the new prefix type to use.
+	void setPrefixType(PrefixType prefix) { currentPrefixType=prefix; formatText(); }
+
+	//! Get the current display format.
+	//! @return the current DisplayFormat.
+	PrefixType prefixType() { return currentPrefixType; }
+	
+public slots:
+	//! Set the value to default 0 angle.
+	virtual void clear();
+	
+	//! Set the value of the spin box in radians.
+	//! @param radians the value to set, in radians.
+	void setRadians(double radians);
+	
+	//! Set the value of the spin box in decimal degrees.
+	//! @param degrees the value to set, in decimal degrees.
+	void setDegrees(double degrees);
+
+signals:
+	//! Emitted when the value changes.
+	void valueChanged();
+
+protected:
+	virtual StepEnabled stepEnabled() const;
+
+private slots:
+	//! Updates radAngle (internal representation of the angle) and calls formatText
+	void updateValue(void);
+
+private:
+	//! Convert a string value to an angle in radians.
 	//! This function can be used to validate a string as expressing an angle. Accepted
 	//! are any formats which the AngleSpinBox understands.
 	//! @param input the string value to be converted / validated.
@@ -80,53 +124,6 @@ public:
 	//! @param prefix the kind of prefix to use for conversion.
 	//! @return the value of the angle expressed in input in radians.
 	double stringToDouble(QString input, QValidator::State* state, PrefixType prefix=Unknown) const;
-
-	//! Set the number of decimal places to express float values to (e.g. seconds in DMSLetters format)
-	//! @param places the number of decimal places to use.
-	void setDecimals(int places) { decimalPlaces = places; }
-
-	//! Set the number of decimal places to express float values to (e.g. seconds in DMSLetters format)
-	//! @return the number of decimal places used.
-	int decimals() { return decimalPlaces; }
-
-	//! Set the display format
-	//! @param format the new format to use
-	void setDisplayFormat(DisplayFormat format) { angleSpinBoxFormat=format; formatText(); }
-
-	//! Get the current display format
-	//! @return the current DisplayFormat
-	DisplayFormat displayFormat() { return angleSpinBoxFormat; }
-
-	//! Set the prefix type
-	//! @param prefix the new prefix type to use
-	void setPrefixType(PrefixType prefix) { currentPrefixType=prefix; formatText(); }
-
-	//! Get the current display format
-	//! @return the current DisplayFormat
-	PrefixType prefixType() { return currentPrefixType; }
-	
-public slots:
-	void clear();
-
-	//! Set the value of the spin box in radians.
-	//! @param radians the value to set, in radians
-	void setRadians(double radians);
-	//! Set the value of the spin box in decimal degrees.
-	//! @param degrees the value to set, in decimal degrees
-	void setDegrees(double degrees);
-
-signals:
-	//! emitted when the value changes.
-	void valueChanged();
-
-protected:
-	StepEnabled stepEnabled () const;
-
-private slots:
-	//! updates radAngle (internal representation of the angle) and calls formatText
-	void updateValue(void);
-
-private:
 	
 	//! @enum AngleSpinboxSection
 	enum AngleSpinboxSection
