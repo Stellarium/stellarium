@@ -189,13 +189,8 @@ double AngleSpinBox::valueRadians()
 
 double AngleSpinBox::valueDegrees()
 {
-	return (radAngle*360)/(2*M_PI);
+	return (radAngle*360.)/(2.*M_PI);
 } 
-
-QString AngleSpinBox::text()
-{
-	return lineEdit()->text();
-}
 
 double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, PrefixType prefix) const
 {
