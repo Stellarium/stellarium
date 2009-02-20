@@ -23,6 +23,7 @@
 #include <QObject>
 #include <QLabel>
 #include <QMap>
+#include <QHash>
 #include "StelDialog.hpp"
 #include "VecMath.hpp"
 
@@ -96,6 +97,10 @@ private:
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
 	QMap<QString, Vec3d> simbadResults;
+	
+	QString substituteGreek(const QString& keyString);
+	QString getGreekLetterByName(const QString& potentialGreekLetterName);
+	QHash<QString, QString> greekLetters;
 };
 
 #endif // _SEARCHDIALOG_HPP_
