@@ -25,8 +25,8 @@ IF(UNIX AND NOT WIN32)
  SET(CMAKE_C_FLAGS "-Wall -Wextra -Wno-unused-parameter")       # additional C compile flags
  SET(CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter")     # additional CPP compile flags
 ELSE()
- SET(CMAKE_C_FLAGS "-Wall -Wextra -Wno-unused-parameter -fexceptions -fident -mthreads")
- SET(CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wsign-promo -fexceptions -fident -mthreads")
+ SET(CMAKE_C_FLAGS "-Wall -fexceptions -fident -mthreads")
+ SET(CMAKE_CXX_FLAGS "-Wall -Wsign-promo -fexceptions -fident -mthreads")
  SET(CMAKE_EXE_LINKER_FLAGS "-Wsign-promo -fexceptions -fident -mthreads -mwindows --large-address-aware")
 ENDIF()
 
