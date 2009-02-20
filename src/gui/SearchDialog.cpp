@@ -117,6 +117,31 @@ SearchDialog::SearchDialog() : simbadReply(NULL)
 {
 	ui = new Ui_searchDialogForm;
 	simbadSearcher = new SimbadSearcher(this);
+	
+	greekLetters["alpha"] = QString(QChar(0x03B1));
+	greekLetters["beta"] = QString(QChar(0x03B2));
+	greekLetters["gamma"] = QString(QChar(0x03B3));
+	greekLetters["delta"] = QString(QChar(0x03B4));
+	greekLetters["epsilon"] = QString(QChar(0x03B5));
+	greekLetters["zeta"] = QString(QChar(0x03B6));
+	greekLetters["eta"] = QString(QChar(0x03B7));
+	greekLetters["theta"] = QString(QChar(0x03B8));
+	greekLetters["iota"] = QString(QChar(0x03B9));
+	greekLetters["kappa"] = QString(QChar(0x03BA));
+	greekLetters["lambda"] = QString(QChar(0x03BB));
+	greekLetters["mu"] = QString(QChar(0x03BC));
+	greekLetters["nu"] = QString(QChar(0x03BD));
+	greekLetters["xi"] = QString(QChar(0x03BE));
+	greekLetters["omicron"] = QString(QChar(0x03BF));
+	greekLetters["pi"] = QString(QChar(0x03C0));
+	greekLetters["rho"] = QString(QChar(0x03C1));
+	greekLetters["sigma"] = QString(QChar(0x03C3)); // second lower-case sigma shouldn't affect anything
+	greekLetters["tau"] = QString(QChar(0x03C4));
+	greekLetters["upsilon"] = QString(QChar(0x03C5));
+	greekLetters["phi"] = QString(QChar(0x03C6));
+	greekLetters["chi"] = QString(QChar(0x03C7));
+	greekLetters["psi"] = QString(QChar(0x03C8));
+	greekLetters["omega"] = QString(QChar(0x03C9));
 }
 
 SearchDialog::~SearchDialog()
@@ -196,7 +221,7 @@ void SearchDialog::manualPositionChanged()
 
 void SearchDialog::onTextChanged(const QString& text)
 {
-	if (text.isEmpty())
+	if(text.trimmed().isEmpty())
 	{
 		ui->completionLabel->clearValues();
 		ui->completionLabel->selectFirst();
@@ -214,7 +239,17 @@ void SearchDialog::onTextChanged(const QString& text)
 		simbadReply = simbadSearcher->lookup(text, 3);
 		onSimbadStatusChanged();
 		connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
-		QStringList matches = StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(text, 5);
+		
+		QString greekText = substituteGreek(text);
+		QStringList matches;
+		if(greekText != text)
+		{
+			matches = StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(greekText, 3);
+			matches += StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(text, 2);
+		}
+		else
+			matches = StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(text, 5);
+		
 		ui->completionLabel->setValues(matches);
 		ui->completionLabel->selectFirst();
 		
@@ -315,4 +350,34 @@ bool SearchDialog::eventFilter(QObject *object, QEvent *event)
 	return false;
 }
 
+QString SearchDialog::substituteGreek(const QString& keyString)
+{
+	if (!keyString.contains(" "))
+		return getGreekLetterByName(keyString);
+	else
+	{
+		QStringList nameComponents = keyString.split(" ", QString::SkipEmptyParts);
+		if(!nameComponents.empty())
+			nameComponents[0] = getGreekLetterByName(nameComponents[0].toLower());
+		return nameComponents.join(" ");
+	}
+}
 
+QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterName)
+{
+	if(greekLetters.contains(potentialGreekLetterName))
+		return greekLetters[potentialGreekLetterName];
+	
+	// There can be indices (e.g. "α1 Cen" instead of "α Cen A"), so strip
+	// any trailing digit.
+	int lastCharacterIndex = potentialGreekLetterName.length()-1;
+	if(potentialGreekLetterName.at(lastCharacterIndex).isDigit())
+	{
+		QChar digit = potentialGreekLetterName.at(lastCharacterIndex);
+		QString name = potentialGreekLetterName.left(lastCharacterIndex);
+		if(greekLetters.contains(name))
+			return greekLetters[name] + digit;
+	}
+	
+	return potentialGreekLetterName;
+}
