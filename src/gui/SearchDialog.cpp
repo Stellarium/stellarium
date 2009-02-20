@@ -333,6 +333,12 @@ bool SearchDialog::eventFilter(QObject *object, QEvent *event)
 	if (event->type() == QEvent::KeyRelease) 
 	{
 		QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+		
+		// Kludgy workaround for Qt focusPolicy bug. Get rid of this if
+		// they ever fix it.
+		if(keyEvent->key() == Qt::Key_Tab)
+			ui->lineEditSearchSkyObject->setFocus(Qt::OtherFocusReason);
+		
 		if (keyEvent->key() == Qt::Key_Tab || keyEvent->key() == Qt::Key_Down) 
 		{
 			ui->completionLabel->selectNext();
