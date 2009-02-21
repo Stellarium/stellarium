@@ -221,7 +221,8 @@ void SearchDialog::manualPositionChanged()
 
 void SearchDialog::onTextChanged(const QString& text)
 {
-	if(text.trimmed().isEmpty())
+	QString trimmedText = text.trimmed();
+	if(trimmedText.isEmpty())
 	{
 		ui->completionLabel->clearValues();
 		ui->completionLabel->selectFirst();
@@ -236,19 +237,19 @@ void SearchDialog::onTextChanged(const QString& text)
 			delete simbadReply;
 		}
 		simbadResults.clear();
-		simbadReply = simbadSearcher->lookup(text, 3);
+		simbadReply = simbadSearcher->lookup(trimmedText, 3);
 		onSimbadStatusChanged();
 		connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
 		
-		QString greekText = substituteGreek(text);
+		QString greekText = substituteGreek(trimmedText);
 		QStringList matches;
-		if(greekText != text)
+		if(greekText != trimmedText)
 		{
-			matches = StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(greekText, 3);
-			matches += StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(text, 2);
+			matches = StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(trimmedText, 3);
+			matches += StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(greekText, (5 - matches.size()));
 		}
 		else
-			matches = StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(text, 5);
+			matches = StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(trimmedText, 5);
 		
 		ui->completionLabel->setValues(matches);
 		ui->completionLabel->selectFirst();
@@ -358,8 +359,8 @@ bool SearchDialog::eventFilter(QObject *object, QEvent *event)
 
 QString SearchDialog::substituteGreek(const QString& keyString)
 {
-	if (!keyString.contains(" "))
-		return getGreekLetterByName(keyString);
+	if (!keyString.contains(' '))
+		return getGreekLetterByName(keyString.toLower());
 	else
 	{
 		QStringList nameComponents = keyString.split(" ", QString::SkipEmptyParts);
