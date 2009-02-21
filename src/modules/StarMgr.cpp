@@ -777,8 +777,7 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	// Search for common names
 	for (std::map<QString,int>::const_iterator it(commonNamesIndexI18n.lower_bound(objw)); it!=commonNamesIndexI18n.end(); ++it) 
 	{
-		const QString constw(it->first.mid(0,objw.size()));
-		if (constw==objw)
+		if (it->first.startsWith(objw))
 		{
 			if (maxNbItem==0)
 				break;
@@ -790,17 +789,24 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	}
 
 	// Search for sci names
+	QString bayerPattern = objw;
+	QRegExp bayerRegEx(bayerPattern);
+	
+	// if the first character is a Greek letter, check if there's an index
+	// after it, such as "alpha1 Cen".
+	if (objw.at(0).unicode() >= 0x0391 && objw.at(0).unicode() <= 0x03A9)
+		bayerRegEx.setPattern(bayerPattern.insert(1,"\\d?"));
+	
 	for (std::map<QString,int>::const_iterator it(sciNamesIndexI18n.lower_bound(objw)); it!=sciNamesIndexI18n.end(); ++it) 
 	{
-		const QString constw(it->first.mid(0,objw.size()));
-		if (constw==objw)
+		if (it->first.indexOf(bayerRegEx)==0)
 		{
 			if (maxNbItem==0)
 				break;
 			result << getSciName(it->second);
 			--maxNbItem;
-		} 
-		else 
+		}
+		else if (it->first.at(0) != objw.at(0))
 			break;
 	}
 
