@@ -221,7 +221,7 @@ void SearchDialog::manualPositionChanged()
 
 void SearchDialog::onTextChanged(const QString& text)
 {
-	QString trimmedText = text.trimmed();
+	QString trimmedText = text.trimmed().toLower();
 	if(trimmedText.isEmpty())
 	{
 		ui->completionLabel->clearValues();
@@ -360,12 +360,12 @@ bool SearchDialog::eventFilter(QObject *object, QEvent *event)
 QString SearchDialog::substituteGreek(const QString& keyString)
 {
 	if (!keyString.contains(' '))
-		return getGreekLetterByName(keyString.toLower());
+		return getGreekLetterByName(keyString);
 	else
 	{
 		QStringList nameComponents = keyString.split(" ", QString::SkipEmptyParts);
 		if(!nameComponents.empty())
-			nameComponents[0] = getGreekLetterByName(nameComponents[0].toLower());
+			nameComponents[0] = getGreekLetterByName(nameComponents[0]);
 		return nameComponents.join(" ");
 	}
 }
@@ -373,7 +373,7 @@ QString SearchDialog::substituteGreek(const QString& keyString)
 QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterName)
 {
 	if(greekLetters.contains(potentialGreekLetterName))
-		return greekLetters[potentialGreekLetterName];
+		return greekLetters[potentialGreekLetterName.toLower()];
 	
 	// There can be indices (e.g. "α1 Cen" instead of "α Cen A"), so strip
 	// any trailing digit.
@@ -383,7 +383,7 @@ QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterNa
 		QChar digit = potentialGreekLetterName.at(lastCharacterIndex);
 		QString name = potentialGreekLetterName.left(lastCharacterIndex);
 		if(greekLetters.contains(name))
-			return greekLetters[name] + digit;
+			return greekLetters[name.toLower()] + digit;
 	}
 	
 	return potentialGreekLetterName;
