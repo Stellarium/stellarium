@@ -221,8 +221,16 @@ void SearchDialog::manualPositionChanged()
 
 void SearchDialog::onTextChanged(const QString& text)
 {
+	if (simbadReply)
+	{
+		disconnect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
+		delete simbadReply;
+		simbadReply=NULL;
+	}
+	simbadResults.clear();
+	
 	QString trimmedText = text.trimmed().toLower();
-	if(trimmedText.isEmpty())
+	if (trimmedText.isEmpty())
 	{
 		ui->completionLabel->clearValues();
 		ui->completionLabel->selectFirst();
@@ -231,12 +239,6 @@ void SearchDialog::onTextChanged(const QString& text)
 	}
 	else
 	{
-		if (simbadReply)
-		{
-			disconnect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
-			delete simbadReply;
-		}
-		simbadResults.clear();
 		simbadReply = simbadSearcher->lookup(trimmedText, 3);
 		onSimbadStatusChanged();
 		connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
