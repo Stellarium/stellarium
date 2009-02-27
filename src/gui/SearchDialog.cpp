@@ -212,7 +212,7 @@ void SearchDialog::setSimpleStyle(bool b)
 void SearchDialog::manualPositionChanged()
 {
 	ui->completionLabel->clearValues();
-	StelMovementMgr* mvmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Vec3d pos;
 	StelUtils::spheToRect(ui->RAAngleSpinBox->valueRadians(), ui->DEAngleSpinBox->valueRadians(), pos);
 	mvmgr->setFlagTracking(false);
@@ -305,7 +305,7 @@ void SearchDialog::gotoObject()
 	if (name.isEmpty())
 		return;
 	
-	StelMovementMgr* mvmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	if (simbadResults.contains(name))
 	{
 		close();

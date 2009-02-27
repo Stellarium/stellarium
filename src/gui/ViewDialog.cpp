@@ -112,7 +112,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->adaptationCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagLuminanceAdaptation(bool)));
 	
 	// Planets section
-	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	ui->showPlanetCheckBox->setChecked(ssmgr->getFlagPlanets());
 	connect(ui->showPlanetCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagPlanets(bool)));
 	
@@ -129,7 +129,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLightTravelTime(bool)));
 	
 	// Shooting stars section
-	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
+	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
 	Q_ASSERT(mmgr);
 	switch(mmgr->getZHR())
 	{
@@ -147,11 +147,11 @@ void ViewDialog::createDialogContent()
 	connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
 	
 	// Labels section
-	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
+	StarMgr* smgr = GETSTELMODULE(StarMgr);
 	ui->starLabelCheckBox->setChecked(smgr->getFlagLabels());
 	connect(ui->starLabelCheckBox, SIGNAL(toggled(bool)), smgr, SLOT(setFlagLabels(bool)));
 
-	NebulaMgr* nmgr = (NebulaMgr*)GETSTELMODULE("NebulaMgr");
+	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 	ui->nebulaLabelCheckBox->setChecked(nmgr->getFlagHints());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Nebulas");
 	connect(a, SIGNAL(toggled(bool)), ui->nebulaLabelCheckBox, SLOT(setChecked(bool)));
@@ -168,7 +168,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->nebulasLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(nebulasLabelsValueChanged(int)));
 	
 	// Landscape section
-	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
+	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	ui->showGroundCheckBox->setChecked(lmgr->getFlagLandscape());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Ground");
 	connect(a, SIGNAL(toggled(bool)), ui->showGroundCheckBox, SLOT(setChecked(bool)));
@@ -194,7 +194,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->useAsDefaultLandscapeCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentLandscapeAsDefault()));
 	
 	// Grid and lines
-	GridLinesMgr* glmgr = (GridLinesMgr*)GETSTELMODULE("GridLinesMgr");
+	GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
 	ui->showEquatorLineCheckBox->setChecked(glmgr->getFlagEquatorLine());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Equator_Line");
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorLineCheckBox, SLOT(setChecked(bool)));
@@ -231,7 +231,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->showCardinalPointsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 	
 	// Constellations
-	ConstellationMgr* cmgr = (ConstellationMgr*)GETSTELMODULE("ConstellationMgr");
+	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 	
 	ui->showConstellationLinesCheckBox->setChecked(cmgr->getFlagLines());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Constellation_Lines");
@@ -297,7 +297,7 @@ void ViewDialog::populateLists()
 	l = ui->landscapesListWidget;
 	l->blockSignals(true);
 	l->clear();
-	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
+	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	l->addItems(lmgr->getAllLandscapeNames());
 	l->setCurrentItem(l->findItems(lmgr->getCurrentLandscapeName(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
@@ -357,7 +357,7 @@ void ViewDialog::projectionChanged(const QString& projectionNameI18n)
 
 void ViewDialog::landscapeChanged(QListWidgetItem* item)
 {
-	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
+	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	lmgr->setCurrentLandscapeName(item->text());
 	ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
@@ -367,7 +367,7 @@ void ViewDialog::landscapeChanged(QListWidgetItem* item)
 
 void ViewDialog::shootingStarsZHRChanged()
 {
-	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
+	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
 	int zhr=-1;
 	if (ui->zhrNone->isChecked())
 	{
@@ -415,14 +415,14 @@ void ViewDialog::shootingStarsZHRChanged()
 
 void ViewDialog::starsLabelsValueChanged(int v)
 {
-	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
+	StarMgr* smgr = GETSTELMODULE(StarMgr);
 	float a= ((float)v)/10.f;
 	smgr->setLabelsAmount(a);
 }
 
 void ViewDialog::setCurrentLandscapeAsDefault(void)
 {
-	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
+	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	Q_ASSERT(lmgr);
 	lmgr->setDefaultLandscapeID(lmgr->getCurrentLandscapeID());
 	ui->useAsDefaultLandscapeCheckBox->setChecked(true);
@@ -438,14 +438,14 @@ void ViewDialog::setCurrentCultureAsDefault(void)
 
 void ViewDialog::planetsLabelsValueChanged(int v)
 {
-	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	float a= ((float)v)/10.f;
 	ssmgr->setLabelsAmount(a);
 }
 
 void ViewDialog::nebulasLabelsValueChanged(int v)
 {
-	NebulaMgr* nmgr = (NebulaMgr*)GETSTELMODULE("NebulaMgr");
+	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 	float a= ((float)v)/10.f;
 	nmgr->setHintsAmount(a);
 	nmgr->setLabelsAmount(a);
@@ -465,7 +465,7 @@ void ViewDialog::updateFromProgram()
 		ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
 	}
 	
-	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
+	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	Q_ASSERT(lmgr);
 	b = lmgr->getCurrentLandscapeID()==lmgr->getDefaultLandscapeID();
 	if (b!=ui->useAsDefaultLandscapeCheckBox->isChecked())

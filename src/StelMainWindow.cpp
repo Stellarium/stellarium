@@ -125,7 +125,7 @@ void StelMainWindow::setFullScreen(bool b)
 void StelMainWindow::closeEvent(QCloseEvent* event)
 {
 	event->ignore();
-	((StelGui*)GETSTELMODULE("StelGui"))->quitStellarium();
+	GETSTELMODULE(StelGui)->quitStellarium();
 }
 
 void StelMainWindow::resizeEvent(QResizeEvent* event)

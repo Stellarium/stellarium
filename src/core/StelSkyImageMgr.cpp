@@ -26,6 +26,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelPainter.hpp"
+#include "MilkyWay.hpp"
 
 #include <QNetworkAccessManager>
 #include <stdexcept>
@@ -52,7 +53,7 @@ StelSkyImageMgr::~StelSkyImageMgr()
 double StelSkyImageMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-		return GETSTELMODULE("MilkyWay")->getCallOrder(actionName)+5;
+		return GETSTELMODULE(MilkyWay)->getCallOrder(actionName)+5;
 	return 0;
 }
 
