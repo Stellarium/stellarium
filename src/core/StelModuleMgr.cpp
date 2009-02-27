@@ -59,12 +59,13 @@ void StelModuleMgr::update()
 *************************************************************************/
 void StelModuleMgr::registerModule(StelModule* m, bool fgenerateCallingLists)
 {
-	if (modules.find(m->objectName()) != modules.end())
+	QString name = m->objectName();
+	if (modules.find(name) != modules.end())
 	{		
-		qWarning() << "Module \"" << m->objectName() << "\" is already loaded.";
+		qWarning() << "Module \"" << name << "\" is already loaded.";
 		return;
 	}
-	modules.insert(m->objectName(), m);
+	modules.insert(name, m);
 	m->setParent(this);
 	
 	if (fgenerateCallingLists)
@@ -98,6 +99,7 @@ StelModule* StelModuleMgr::getModule(const QString& moduleID)
 	if (iter==modules.end())
 	{
 		qWarning() << "Warning can't find module called " << moduleID << ".";
+		abort();
 		return NULL;
 	}
 	return iter.value();

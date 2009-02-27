@@ -52,7 +52,7 @@ void StelObjectMgr::handleMouseClicks(QMouseEvent* event)
 		event->accept();
 		return;
 	}
-	StelMovementMgr* mvmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	if (event->button()==Qt::LeftButton && event->type()==QEvent::MouseButtonRelease && !mvmgr->getHasDragged())
 	{
 #ifdef MACOSX

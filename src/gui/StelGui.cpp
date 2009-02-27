@@ -239,90 +239,84 @@ void StelGui::init()
 	// Debug
 	connect(getGuiActions("action_Reload_Style"), SIGNAL(triggered()), this, SLOT(reloadStyle()));
 
-	QObject* module = GETSTELMODULE("ConstellationMgr");
-	ConstellationMgr* cmgr = (ConstellationMgr*)module;
-	connect(getGuiActions("actionShow_Constellation_Lines"), SIGNAL(toggled(bool)), module, SLOT(setFlagLines(bool)));
+	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
+	connect(getGuiActions("actionShow_Constellation_Lines"), SIGNAL(toggled(bool)), cmgr, SLOT(setFlagLines(bool)));
 	getGuiActions("actionShow_Constellation_Lines")->setChecked(cmgr->getFlagLines());
-	connect(getGuiActions("actionShow_Constellation_Art"), SIGNAL(toggled(bool)), module, SLOT(setFlagArt(bool)));
+	connect(getGuiActions("actionShow_Constellation_Art"), SIGNAL(toggled(bool)), cmgr, SLOT(setFlagArt(bool)));
 	getGuiActions("actionShow_Constellation_Art")->setChecked(cmgr->getFlagArt());
-	connect(getGuiActions("actionShow_Constellation_Labels"), SIGNAL(toggled(bool)), module, SLOT(setFlagLabels(bool)));
+	connect(getGuiActions("actionShow_Constellation_Labels"), SIGNAL(toggled(bool)), cmgr, SLOT(setFlagLabels(bool)));
 	getGuiActions("actionShow_Constellation_Labels")->setChecked(cmgr->getFlagLabels());
-	connect(getGuiActions("actionShow_Constellation_Boundaries"), SIGNAL(toggled(bool)), module, SLOT(setFlagBoundaries(bool)));
+	connect(getGuiActions("actionShow_Constellation_Boundaries"), SIGNAL(toggled(bool)), cmgr, SLOT(setFlagBoundaries(bool)));
 	getGuiActions("actionShow_Constellation_Boundaries")->setChecked(cmgr->getFlagBoundaries());
 	
-	module = GETSTELMODULE("GridLinesMgr");
-	GridLinesMgr* gmgr = (GridLinesMgr*)module;
-	connect(getGuiActions("actionShow_Equatorial_Grid"), SIGNAL(toggled(bool)), module, SLOT(setFlagEquatorGrid(bool)));
+	GridLinesMgr* gmgr = GETSTELMODULE(GridLinesMgr);
+	connect(getGuiActions("actionShow_Equatorial_Grid"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagEquatorGrid(bool)));
 	getGuiActions("actionShow_Equatorial_Grid")->setChecked(gmgr->getFlagEquatorGrid());
-	connect(getGuiActions("actionShow_Azimuthal_Grid"), SIGNAL(toggled(bool)), module, SLOT(setFlagAzimuthalGrid(bool)));
+	connect(getGuiActions("actionShow_Azimuthal_Grid"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagAzimuthalGrid(bool)));
 	getGuiActions("actionShow_Azimuthal_Grid")->setChecked(gmgr->getFlagAzimuthalGrid());
-	connect(getGuiActions("actionShow_Ecliptic_Line"), SIGNAL(toggled(bool)), module, SLOT(setFlagEclipticLine(bool)));
+	connect(getGuiActions("actionShow_Ecliptic_Line"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagEclipticLine(bool)));
 	getGuiActions("actionShow_Ecliptic_Line")->setChecked(gmgr->getFlagEclipticLine());
-	connect(getGuiActions("actionShow_Equator_Line"), SIGNAL(toggled(bool)), module, SLOT(setFlagEquatorLine(bool)));
+	connect(getGuiActions("actionShow_Equator_Line"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagEquatorLine(bool)));
 	getGuiActions("actionShow_Equator_Line")->setChecked(gmgr->getFlagEquatorLine());
 	
-	module = GETSTELMODULE("LandscapeMgr");
-	LandscapeMgr* lmgr = (LandscapeMgr*)module;
-	connect(getGuiActions("actionShow_Ground"), SIGNAL(toggled(bool)), module, SLOT(setFlagLandscape(bool)));
+	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+	connect(getGuiActions("actionShow_Ground"), SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscape(bool)));
 	getGuiActions("actionShow_Ground")->setChecked(lmgr->getFlagLandscape());
-	connect(getGuiActions("actionShow_Cardinal_Points"), SIGNAL(toggled(bool)), module, SLOT(setFlagCardinalsPoints(bool)));
+	connect(getGuiActions("actionShow_Cardinal_Points"), SIGNAL(toggled(bool)), lmgr, SLOT(setFlagCardinalsPoints(bool)));
 	getGuiActions("actionShow_Cardinal_Points")->setChecked(lmgr->getFlagCardinalsPoints());
-	connect(getGuiActions("actionShow_Atmosphere"), SIGNAL(toggled(bool)), module, SLOT(setFlagAtmosphere(bool)));
+	connect(getGuiActions("actionShow_Atmosphere"), SIGNAL(toggled(bool)), lmgr, SLOT(setFlagAtmosphere(bool)));
 	getGuiActions("actionShow_Atmosphere")->setChecked(lmgr->getFlagAtmosphere());
-	connect(getGuiActions("actionShow_Fog"), SIGNAL(toggled(bool)), module, SLOT(setFlagFog(bool)));
+	connect(getGuiActions("actionShow_Fog"), SIGNAL(toggled(bool)), lmgr, SLOT(setFlagFog(bool)));
 	getGuiActions("actionShow_Fog")->setChecked(lmgr->getFlagFog());
 	
-	module = GETSTELMODULE("NebulaMgr");
-	NebulaMgr* nmgr = (NebulaMgr*)module;
-	connect(getGuiActions("actionShow_Nebulas"), SIGNAL(toggled(bool)), module, SLOT(setFlagHints(bool)));
+	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
+	connect(getGuiActions("actionShow_Nebulas"), SIGNAL(toggled(bool)), nmgr, SLOT(setFlagHints(bool)));
 	getGuiActions("actionShow_Nebulas")->setChecked(nmgr->getFlagHints());
 	
-	StelSkyImageMgr* bmgr = &StelApp::getInstance().getSkyImageMgr();
-	connect(getGuiActions("actionShow_DSS"), SIGNAL(toggled(bool)), bmgr, SLOT(setFlagShow(bool)));
-	getGuiActions("actionShow_DSS")->setChecked(bmgr->getFlagShow());
+	StelSkyImageMgr* imgr = GETSTELMODULE(StelSkyImageMgr);
+	connect(getGuiActions("actionShow_DSS"), SIGNAL(toggled(bool)), imgr, SLOT(setFlagShow(bool)));
+	getGuiActions("actionShow_DSS")->setChecked(imgr->getFlagShow());
 	
-	module = (QObject*)StelApp::getInstance().getCore()->getNavigator();
-	connect(getGuiActions("actionIncrease_Time_Speed"), SIGNAL(triggered()), module, SLOT(increaseTimeSpeed()));
-	connect(getGuiActions("actionDecrease_Time_Speed"), SIGNAL(triggered()), module, SLOT(decreaseTimeSpeed()));
-	connect(getGuiActions("actionSet_Real_Time_Speed"), SIGNAL(triggered()), module, SLOT(setRealTimeSpeed()));
-	connect(getGuiActions("actionSet_Time_Rate_Zero"), SIGNAL(triggered()), module, SLOT(setZeroTimeSpeed()));
-	connect(getGuiActions("actionReturn_To_Current_Time"), SIGNAL(triggered()), module, SLOT(setTimeNow()));
-	connect(getGuiActions("actionSwitch_Equatorial_Mount"), SIGNAL(toggled(bool)), module, SLOT(setEquatorialMount(bool)));
+	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
+	connect(getGuiActions("actionIncrease_Time_Speed"), SIGNAL(triggered()), nav, SLOT(increaseTimeSpeed()));
+	connect(getGuiActions("actionDecrease_Time_Speed"), SIGNAL(triggered()), nav, SLOT(decreaseTimeSpeed()));
+	connect(getGuiActions("actionSet_Real_Time_Speed"), SIGNAL(triggered()), nav, SLOT(setRealTimeSpeed()));
+	connect(getGuiActions("actionSet_Time_Rate_Zero"), SIGNAL(triggered()), nav, SLOT(setZeroTimeSpeed()));
+	connect(getGuiActions("actionReturn_To_Current_Time"), SIGNAL(triggered()), nav, SLOT(setTimeNow()));
+	connect(getGuiActions("actionSwitch_Equatorial_Mount"), SIGNAL(toggled(bool)), nav, SLOT(setEquatorialMount(bool)));
 	getGuiActions("actionSwitch_Equatorial_Mount")->setChecked(StelApp::getInstance().getCore()->getNavigator()->getMountMode() != StelNavigator::MountAltAzimuthal);
-	connect(getGuiActions("actionAdd_Solar_Hour"), SIGNAL(triggered()), module, SLOT(addHour()));
-	connect(getGuiActions("actionAdd_Solar_Day"), SIGNAL(triggered()), module, SLOT(addDay()));
-	connect(getGuiActions("actionAdd_Solar_Week"), SIGNAL(triggered()), module, SLOT(addWeek()));
-	connect(getGuiActions("actionSubtract_Solar_Hour"), SIGNAL(triggered()), module, SLOT(subtractHour()));
-	connect(getGuiActions("actionSubtract_Solar_Day"), SIGNAL(triggered()), module, SLOT(subtractDay()));
-	connect(getGuiActions("actionSubtract_Solar_Week"), SIGNAL(triggered()), module, SLOT(subtractWeek()));
-	connect(getGuiActions("actionAdd_Sidereal_Day"), SIGNAL(triggered()), module, SLOT(addSiderealDay()));
-	connect(getGuiActions("actionAdd_Sidereal_Week"), SIGNAL(triggered()), module, SLOT(addSiderealWeek()));
-	connect(getGuiActions("actionSubtract_Sidereal_Day"), SIGNAL(triggered()), module, SLOT(subtractSiderealDay()));
-	connect(getGuiActions("actionSubtract_Sidereal_Week"), SIGNAL(triggered()), module, SLOT(subtractSiderealWeek()));
-	connect(getGuiActions("actionSet_Home_Planet_To_Selected"), SIGNAL(triggered()), module, SLOT(moveObserverToSelected()));
+	connect(getGuiActions("actionAdd_Solar_Hour"), SIGNAL(triggered()), nav, SLOT(addHour()));
+	connect(getGuiActions("actionAdd_Solar_Day"), SIGNAL(triggered()), nav, SLOT(addDay()));
+	connect(getGuiActions("actionAdd_Solar_Week"), SIGNAL(triggered()), nav, SLOT(addWeek()));
+	connect(getGuiActions("actionSubtract_Solar_Hour"), SIGNAL(triggered()), nav, SLOT(subtractHour()));
+	connect(getGuiActions("actionSubtract_Solar_Day"), SIGNAL(triggered()), nav, SLOT(subtractDay()));
+	connect(getGuiActions("actionSubtract_Solar_Week"), SIGNAL(triggered()), nav, SLOT(subtractWeek()));
+	connect(getGuiActions("actionAdd_Sidereal_Day"), SIGNAL(triggered()), nav, SLOT(addSiderealDay()));
+	connect(getGuiActions("actionAdd_Sidereal_Week"), SIGNAL(triggered()), nav, SLOT(addSiderealWeek()));
+	connect(getGuiActions("actionSubtract_Sidereal_Day"), SIGNAL(triggered()), nav, SLOT(subtractSiderealDay()));
+	connect(getGuiActions("actionSubtract_Sidereal_Week"), SIGNAL(triggered()), nav, SLOT(subtractSiderealWeek()));
+	connect(getGuiActions("actionSet_Home_Planet_To_Selected"), SIGNAL(triggered()), nav, SLOT(moveObserverToSelected()));
 
-	module = GETSTELMODULE("TelescopeMgr");
-	connect(getGuiActions("actionMove_Telescope_To_Selection_0"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
-	connect(getGuiActions("actionMove_Telescope_To_Selection_1"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
-	connect(getGuiActions("actionMove_Telescope_To_Selection_2"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
-	connect(getGuiActions("actionMove_Telescope_To_Selection_3"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
-	connect(getGuiActions("actionMove_Telescope_To_Selection_4"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
-	connect(getGuiActions("actionMove_Telescope_To_Selection_5"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
-	connect(getGuiActions("actionMove_Telescope_To_Selection_6"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
-	connect(getGuiActions("actionMove_Telescope_To_Selection_7"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
-	connect(getGuiActions("actionMove_Telescope_To_Selection_8"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
-	connect(getGuiActions("actionMove_Telescope_To_Selection_9"), SIGNAL(triggered()), module, SLOT(moveTelescopeToSelected()));
+	TelescopeMgr* tmgr = GETSTELMODULE(TelescopeMgr);
+	connect(getGuiActions("actionMove_Telescope_To_Selection_0"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
+	connect(getGuiActions("actionMove_Telescope_To_Selection_1"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
+	connect(getGuiActions("actionMove_Telescope_To_Selection_2"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
+	connect(getGuiActions("actionMove_Telescope_To_Selection_3"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
+	connect(getGuiActions("actionMove_Telescope_To_Selection_4"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
+	connect(getGuiActions("actionMove_Telescope_To_Selection_5"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
+	connect(getGuiActions("actionMove_Telescope_To_Selection_6"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
+	connect(getGuiActions("actionMove_Telescope_To_Selection_7"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
+	connect(getGuiActions("actionMove_Telescope_To_Selection_8"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
+	connect(getGuiActions("actionMove_Telescope_To_Selection_9"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
 
-	module = &StelApp::getInstance();
-	connect(getGuiActions("actionShow_Night_Mode"), SIGNAL(toggled(bool)), module, SLOT(setVisionModeNight(bool)));
+	connect(getGuiActions("actionShow_Night_Mode"), SIGNAL(toggled(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
 	getGuiActions("actionShow_Night_Mode")->setChecked(StelApp::getInstance().getVisionModeNight());
 	
-	module = GETSTELMODULE("StelMovementMgr");
-	connect(getGuiActions("actionGoto_Selected_Object"), SIGNAL(triggered()), module, SLOT(setFlagTracking()));
-	connect(getGuiActions("actionZoom_In_Auto"), SIGNAL(triggered()), module, SLOT(autoZoomIn()));
-	connect(getGuiActions("actionZoom_Out_Auto"), SIGNAL(triggered()), module, SLOT(autoZoomOut()));
-	connect(getGuiActions("actionSet_Tracking"), SIGNAL(toggled(bool)), module, SLOT(setFlagTracking(bool)));
-	StelMovementMgr* mmgr = (StelMovementMgr*)module;
+	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
+	connect(getGuiActions("actionGoto_Selected_Object"), SIGNAL(triggered()), mmgr, SLOT(setFlagTracking()));
+	connect(getGuiActions("actionZoom_In_Auto"), SIGNAL(triggered()), mmgr, SLOT(autoZoomIn()));
+	connect(getGuiActions("actionZoom_Out_Auto"), SIGNAL(triggered()), mmgr, SLOT(autoZoomOut()));
+	connect(getGuiActions("actionSet_Tracking"), SIGNAL(toggled(bool)), mmgr, SLOT(setFlagTracking(bool)));
 	getGuiActions("actionSet_Tracking")->setChecked(mmgr->getFlagTracking());
 	
 	connect(getGuiActions("actionSet_Full_Screen_Global"), SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
@@ -355,11 +349,11 @@ void StelGui::init()
 	connect(getGuiActions("actionVertical_Flip"), SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlipVert(bool)));
 	getGuiActions("actionVertical_Flip")->setChecked(StelApp::getInstance().getCore()->getFlipVert());
 	
-	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
+	StarMgr* smgr = GETSTELMODULE(StarMgr);
 	connect(getGuiActions("actionShow_Stars"), SIGNAL(toggled(bool)), smgr, SLOT(setFlagStars(bool)));
 	getGuiActions("actionShow_Stars")->setChecked(smgr->getFlagStars());
 	
-	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	connect(getGuiActions("actionShow_Planets_Labels"), SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLabels(bool)));
 	getGuiActions("actionShow_Planets_Labels")->setChecked(ssmgr->getFlagLabels());
 	
@@ -689,12 +683,12 @@ void StelGui::update(double deltaTime)
 	const bool isTimeNow=nav->getIsTimeNow();
 	if (buttonTimeCurrent->isChecked()!=isTimeNow)
 		buttonTimeCurrent->setChecked(isTimeNow);
-	StelMovementMgr* mmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
+	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
 	const bool b = mmgr->getFlagTracking();
 	if (buttonGotoSelectedObject->isChecked()!=b)
 		buttonGotoSelectedObject->setChecked(b);
 	
-	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
+	StarMgr* smgr = GETSTELMODULE(StarMgr);
 	if (getGuiActions("actionShow_Stars")->isChecked()!=smgr->getFlagStars())
 		getGuiActions("actionShow_Stars")->setChecked(smgr->getFlagStars());
 	
@@ -776,7 +770,7 @@ QAction* StelGui::getGuiActions(const QString& actionName)
 // Called each time a GUI action is triggered
 void StelGui::guiActionTriggered(bool b)
 {
-	// can get the action name from: QObject::sender()->objectName()
+	// can get the action name from: QObject::sender()->objectName();
 	// to get the config.ini key:
 	// and QObject::sender()->property("persistenceName").toString();
 }

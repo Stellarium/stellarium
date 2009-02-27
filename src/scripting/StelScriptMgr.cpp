@@ -71,11 +71,11 @@ class StelScriptThread : public QThread
 
 			// For startup scripts, the gui object might not 
 			// have completed init when we run. Wait for that.
-			StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
+			StelGui* gui = GETSTELMODULE(StelGui);
 			while(!gui)
 			{
 				msleep(200);
-				gui = (StelGui*)GETSTELMODULE("StelGui");
+				gui = GETSTELMODULE(StelGui);
 			}
 			while(!gui->initComplete())
 				msleep(200);
@@ -209,7 +209,7 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 {
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	Q_ASSERT(nav);
-	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	Q_ASSERT(ssmgr);
 
 	StelLocation loc = nav->getCurrentLocation();
@@ -250,7 +250,7 @@ void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QSt
 
 void StelMainScriptAPI::setHideGui(bool b)
 {
-	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
+	StelGui* gui = GETSTELMODULE(StelGui);
 	Q_ASSERT(gui);
 	gui->setHideGui(b);
 }
@@ -473,21 +473,21 @@ void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
 
 void StelMainScriptAPI::clear(const QString& state)
 {
-	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
+	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	Q_ASSERT(lmgr);
-	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	Q_ASSERT(ssmgr);
-	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
+	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
 	Q_ASSERT(mmgr);
 	StelSkyDrawer* skyd = StelApp::getInstance().getCore()->getSkyDrawer();
 	Q_ASSERT(skyd);
-	ConstellationMgr* cmgr = (ConstellationMgr*)GETSTELMODULE("ConstellationMgr");
+	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 	Q_ASSERT(cmgr);
-	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
+	StarMgr* smgr = GETSTELMODULE(StarMgr);
 	Q_ASSERT(smgr);
-	NebulaMgr* nmgr = (NebulaMgr*)GETSTELMODULE("NebulaMgr");
+	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 	Q_ASSERT(nmgr);
-	GridLinesMgr* glmgr = (GridLinesMgr*)GETSTELMODULE("GridLinesMgr");
+	GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
 	Q_ASSERT(glmgr);
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	Q_ASSERT(nav);
@@ -587,7 +587,7 @@ void StelMainScriptAPI::clear(const QString& state)
 
 void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, float duration)
 {
-	StelMovementMgr* mvmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mvmgr);
 
 	StelApp::getInstance().getStelObjectMgr().unSelect();
@@ -602,7 +602,7 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 
 void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float duration)
 {
-	StelMovementMgr* mvmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mvmgr);
 
 	StelApp::getInstance().getStelObjectMgr().unSelect();
