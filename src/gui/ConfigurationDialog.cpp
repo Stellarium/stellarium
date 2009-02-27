@@ -88,8 +88,8 @@ void ConfigurationDialog::createDialogContent()
 {
 	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(Mat4d());
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	StelMovementMgr* mvmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
-	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+	StelGui* gui = GETSTELMODULE(StelGui);
 	
 	ui->setupUi(dialog);
 	
@@ -116,7 +116,7 @@ void ConfigurationDialog::createDialogContent()
 		cb->setCurrentIndex(lt);
 	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
 	
-	starSettings = ((StarMgr*)GETSTELMODULE("StarMgr"))->getStarSettings();
+	starSettings = GETSTELMODULE(StarMgr)->getStarSettings();
 	
 	connect(ui->getStarsButton, SIGNAL(clicked(void)), this, SLOT(downloadStars(void)));
 	connect(ui->downloadCancelButton, SIGNAL(clicked(void)), this, SLOT(cancelDownload(void)));
@@ -159,7 +159,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->fixedDateTimeCurrentButton, SIGNAL(clicked()), this, SLOT(setFixedDateTimeToCurrent()));
 	
 	// Tools tab
-	ConstellationMgr* cmgr = (ConstellationMgr*)GETSTELMODULE("ConstellationMgr");
+	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 	Q_ASSERT(cmgr);
 	ui->sphericMirrorCheckbox->setChecked(StelAppGraphicsScene::getInstance().getViewPortDistorterType() == "fisheye_to_spheric_mirror");
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
@@ -252,21 +252,21 @@ void ConfigurationDialog::setSphericMirror(bool b)
 
 void ConfigurationDialog::setNoSelectedInfo(void)
 {
-	StelGui* newGui = (StelGui*)GETSTELMODULE("StelGui");
+	StelGui* newGui = GETSTELMODULE(StelGui);
 	Q_ASSERT(newGui);
 	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(0));
 }
 
 void ConfigurationDialog::setAllSelectedInfo(void)
 {
-	StelGui* newGui = (StelGui*)GETSTELMODULE("StelGui");
+	StelGui* newGui = GETSTELMODULE(StelGui);
 	Q_ASSERT(newGui);
 	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
 }
 
 void ConfigurationDialog::setBriefSelectedInfo(void)
 {
-	StelGui* newGui = (StelGui*)GETSTELMODULE("StelGui");
+	StelGui* newGui = GETSTELMODULE(StelGui);
 	Q_ASSERT(newGui);
 	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
 }
@@ -311,25 +311,25 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
+	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	Q_ASSERT(lmgr);
-	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	Q_ASSERT(ssmgr);
-	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
+	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
 	Q_ASSERT(mmgr);
 	StelSkyDrawer* skyd = StelApp::getInstance().getCore()->getSkyDrawer();
 	Q_ASSERT(skyd);
-	ConstellationMgr* cmgr = (ConstellationMgr*)GETSTELMODULE("ConstellationMgr");
+	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 	Q_ASSERT(cmgr);
-	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
+	StarMgr* smgr = GETSTELMODULE(StarMgr);
 	Q_ASSERT(smgr);
-	NebulaMgr* nmgr = (NebulaMgr*)GETSTELMODULE("NebulaMgr");
+	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 	Q_ASSERT(nmgr);
-	GridLinesMgr* glmgr = (GridLinesMgr*)GETSTELMODULE("GridLinesMgr");
+	GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
 	Q_ASSERT(glmgr);
-	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
+	StelGui* gui = GETSTELMODULE(StelGui);
 	Q_ASSERT(gui);
-	StelMovementMgr* mvmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mvmgr);
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	Q_ASSERT(nav);

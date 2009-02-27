@@ -655,7 +655,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 		}
 		else
 		{
-			SolarSystem* ssm = (SolarSystem*)GETSTELMODULE("SolarSystem");
+			SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 			if (this==ssm->getMoon() && nav->getHomePlanet()==ssm->getEarth() && ssm->nearLunarEclipse())
 			{
 				// Draw earth shadow over moon using stencil buffer if appropriate
@@ -724,7 +724,7 @@ void Planet::drawSphere(const StelPainter* painter, float screenSz)
 // umbra and penumbra are sized separately for accuracy
 void Planet::drawEarthShadow(StelCore* core)
 {
-	SolarSystem* ssm = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 	Vec3d e = ssm->getEarth()->getEclipticPos();
 	Vec3d m = ssm->getMoon()->getEclipticPos();  // relative to earth
 	Vec3d mh = ssm->getMoon()->getHeliocentricEclipticPos();  // relative to sun

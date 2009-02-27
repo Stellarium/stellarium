@@ -167,7 +167,7 @@ void ArtificialPlanet::computeAverage(double f1)
 
 StelObserver::StelObserver(const StelLocation &loc) : currentLocation(loc)
 {
-	SolarSystem* ssystem = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	planet = ssystem->searchByEnglishName(loc.planetName);
 	if (planet==NULL)
 	{
@@ -210,7 +210,7 @@ Mat4d StelObserver::getRotEquatorialToVsop87(void) const
 SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLocation& target, double atransitSeconds) : StelObserver(startLoc),
 		moveStartLocation(startLoc), moveTargetLocation(target), artificialPlanet(NULL), transitSeconds(atransitSeconds)
 {
-	SolarSystem* ssystem = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	Planet *targetPlanet = ssystem->searchByEnglishName(moveTargetLocation.planetName);
 	if (moveStartLocation.planetName!=moveTargetLocation.planetName)
 	{

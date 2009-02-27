@@ -189,7 +189,7 @@ void StelNavigator::moveObserverToSelected(void)
 			moveObserverTo(loc);
 		}
 	}
-	StelMovementMgr* mmgr = (StelMovementMgr*)GETSTELMODULE("StelMovementMgr");
+	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mmgr);
 	mmgr->setFlagTracking(false);
 }
