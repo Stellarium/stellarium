@@ -99,7 +99,6 @@ StelModule* StelModuleMgr::getModule(const QString& moduleID)
 	if (iter==modules.end())
 	{
 		qWarning() << "Warning can't find module called " << moduleID << ".";
-		abort();
 		return NULL;
 	}
 	return iter.value();
