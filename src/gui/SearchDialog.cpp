@@ -324,8 +324,16 @@ void SearchDialog::gotoObject()
 			close();
 			ui->lineEditSearchSkyObject->clear();
 			ui->completionLabel->clearValues();
-			mvmgr->moveTo(newSelected[0]->getEquinoxEquatorialPos(StelApp::getInstance().getCore()->getNavigator()),mvmgr->getAutoMoveDuration());
-			mvmgr->setFlagTracking(true);
+			// Can't point to home planet
+			if (newSelected[0].get()!= (StelObject*)(StelApp::getInstance().getCore()->getNavigator()->getHomePlanet()))
+			{
+				mvmgr->moveTo(newSelected[0]->getEquinoxEquatorialPos(StelApp::getInstance().getCore()->getNavigator()),mvmgr->getAutoMoveDuration());
+				mvmgr->setFlagTracking(true);
+			}
+			else
+			{
+				StelApp::getInstance().getStelObjectMgr().unSelect();
+			}
 		}
 	}
 	simbadResults.clear();

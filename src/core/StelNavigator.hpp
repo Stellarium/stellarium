@@ -97,10 +97,10 @@ public:
 	//! @return the locale sideral time in radian
 	double getLocalSideralTime() const;
 	
-	const Planet *getHomePlanet(void) const;
+	const Planet *getHomePlanet() const;
 
 	//! Return the observer heliocentric ecliptic position
-	Vec3d getObserverHeliocentricEclipticPos(void) const;
+	Vec3d getObserverHeliocentricEclipticPos() const;
 
 	//! Transform vector from altazimuthal coordinate to equatorial
 	Vec3d altAzToEquinoxEqu(const Vec3d& v) const { return matAltAzToEquinoxEqu*v; }
