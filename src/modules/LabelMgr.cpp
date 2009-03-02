@@ -358,7 +358,7 @@ int LabelMgr::labelObject(const QString& text,
 {
 	StelFont* font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 	Q_ASSERT(font);
-	StelObjectP obj = StelApp::getInstance().getStelObjectMgr().searchByName(objectName);
+	StelObjectP obj = GETSTELMODULE(StelObjectMgr)->searchByName(objectName);
 	if (!obj)
 	{
 		qWarning() << "LabelMgr::labelObject object not found: " << objectName;

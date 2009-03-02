@@ -176,9 +176,11 @@ void StelNavigator::addSiderealDays(double d)
 
 void StelNavigator::moveObserverToSelected(void)
 {
-	if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
+	StelObjectMgr* objmgr = GETSTELMODULE(StelObjectMgr);
+	Q_ASSERT(objmgr);
+	if (objmgr->getWasSelected())
 	{
-		Planet* pl = dynamic_cast<Planet*>(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0].get());
+		Planet* pl = dynamic_cast<Planet*>(objmgr->getSelectedObject()[0].get());
 		if (pl)
 		{
 			// We need to move to the selected planet. Try to generate a location from the current one
@@ -292,10 +294,11 @@ void StelNavigator::updateTime(double deltaTime)
 	if (position->isObserverLifeOver())
 	{
 		// Unselect if the new home planet is the previously selected object
-		StelObjectMgr &objmgr(StelApp::getInstance().getStelObjectMgr());
-		if (objmgr.getWasSelected() && objmgr.getSelectedObject()[0].get()==position->getHomePlanet())
+		StelObjectMgr* objmgr = GETSTELMODULE(StelObjectMgr);
+		Q_ASSERT(objmgr);
+		if (objmgr->getWasSelected() && objmgr->getSelectedObject()[0].get()==position->getHomePlanet())
 		{
-			objmgr.unSelect();
+			objmgr->unSelect();
 		}
 		StelObserver* newObs = position->getNextObserver();
 		delete position;

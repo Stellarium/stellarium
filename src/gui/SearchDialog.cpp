@@ -117,6 +117,8 @@ SearchDialog::SearchDialog() : simbadReply(NULL)
 {
 	ui = new Ui_searchDialogForm;
 	simbadSearcher = new SimbadSearcher(this);
+	objectMgr = GETSTELMODULE(StelObjectMgr);
+	Q_ASSERT(objectMgr);
 	
 	greekLetters["alpha"] = QString(QChar(0x03B1));
 	greekLetters["beta"] = QString(QChar(0x03B2));
@@ -247,11 +249,11 @@ void SearchDialog::onTextChanged(const QString& text)
 		QStringList matches;
 		if(greekText != trimmedText)
 		{
-			matches = StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(trimmedText, 3);
-			matches += StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(greekText, (5 - matches.size()));
+			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 3);
+			matches += objectMgr->listMatchingObjectsI18n(greekText, (5 - matches.size()));
 		}
 		else
-			matches = StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(trimmedText, 5);
+			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 5);
 		
 		ui->completionLabel->setValues(matches);
 		ui->completionLabel->selectFirst();
@@ -310,15 +312,15 @@ void SearchDialog::gotoObject()
 	{
 		close();
 		Vec3d pos = simbadResults[name];
-		StelApp::getInstance().getStelObjectMgr().unSelect();
+		objectMgr->unSelect();
 		pos = StelApp::getInstance().getCore()->getNavigator()->j2000ToEquinoxEqu(pos);
 		mvmgr->moveTo(pos, mvmgr->getAutoMoveDuration());
 		ui->lineEditSearchSkyObject->clear();
 		ui->completionLabel->clearValues();
 	}
-	else if (StelApp::getInstance().getStelObjectMgr().findAndSelectI18n(name))
+	else if (objectMgr->findAndSelectI18n(name))
 	{
-		const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
 		{
 			close();
@@ -332,7 +334,7 @@ void SearchDialog::gotoObject()
 			}
 			else
 			{
-				StelApp::getInstance().getStelObjectMgr().unSelect();
+				GETSTELMODULE(StelObjectMgr)->unSelect();
 			}
 		}
 	}
