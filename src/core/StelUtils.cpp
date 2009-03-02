@@ -263,7 +263,7 @@ QString vec3fToHtmlColor(const Vec3f& v)
 Vec3f htmlColorToVec3f(const QString& c)
 {
 	Vec3f v;
-	QRegExp re("^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$");
+	QRegExp re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
 	if (re.exactMatch(c))
 	{
 		bool ok;
