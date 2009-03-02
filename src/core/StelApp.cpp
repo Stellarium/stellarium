@@ -270,7 +270,6 @@ StelApp::~StelApp()
 	delete skyCultureMgr; skyCultureMgr=NULL;
 	delete localeMgr; localeMgr=NULL;
 	delete fontManager; fontManager=NULL;
-	delete skyImageMgr; skyImageMgr=NULL; // Delete the module by hand afterward
 	delete audioMgr; audioMgr=NULL;	
 	delete stelObjectMgr; stelObjectMgr=NULL; // Delete the module by hand afterward
 	delete stelFileMgr; stelFileMgr=NULL;
@@ -345,6 +344,12 @@ void StelApp::init()
 	networkAccessManager->setCache(cache);
 #endif
 	connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(reportFileDownloadFinished(QNetworkReply*)));
+	
+	// Stel Object Data Base manager
+	stelObjectMgr = new StelObjectMgr();
+	stelObjectMgr->init();
+	getModuleMgr().registerModule(stelObjectMgr);
+	
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(saveProjW, saveProjH);
@@ -364,11 +369,6 @@ void StelApp::init()
 #endif // SVN_RELEASE
 	
 	downloadMgr = new StelDownloadMgr();
-	
-	// Stel Object Data Base manager
-	stelObjectMgr = new StelObjectMgr();
-	stelObjectMgr->init();
-	getModuleMgr().registerModule(stelObjectMgr);
 	
 	localeMgr->init();
 	skyCultureMgr->init();
@@ -396,7 +396,7 @@ void StelApp::init()
 	getModuleMgr().registerModule(milky_way);
 	
 	// Init sky image manager
-	skyImageMgr = new StelSkyImageMgr();
+	StelSkyImageMgr* skyImageMgr = new StelSkyImageMgr();
 	skyImageMgr->init();
 	getModuleMgr().registerModule(skyImageMgr);
 

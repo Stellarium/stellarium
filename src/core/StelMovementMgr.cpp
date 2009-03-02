@@ -19,6 +19,7 @@
 
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelNavigator.hpp"
@@ -56,7 +57,9 @@ StelMovementMgr::~StelMovementMgr()
 void StelMovementMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
+	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(conf);
+	Q_ASSERT(objectMgr);
 
 	flagEnableMoveAtScreenEdge = conf->value("navigation/flag_enable_move_at_screen_edge",false).toBool();
 	mouseZoomSpeed = conf->value("navigation/mouse_zoom",30).toInt();
@@ -232,9 +235,9 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 		case Qt::MidButton :
 			if (event->type()==QEvent::MouseButtonRelease)
 			{
-				if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
+				if (objectMgr->getWasSelected())
 				{
-					moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()),autoMoveDuration);
+					moveTo(objectMgr->getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()),autoMoveDuration);
 					setFlagTracking(true);
 				}
 			}
@@ -250,7 +253,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 void StelMovementMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)
 {
 	// If an object was selected keep the earth following
-	if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
+	if (objectMgr->getWasSelected())
 	{
 		if (getFlagTracking())
 			setFlagLockEquPos(true);
@@ -396,7 +399,7 @@ void StelMovementMgr::updateMotion(double deltaTime)
 // Go and zoom to the selected object.
 void StelMovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 {
-	if (!StelApp::getInstance().getStelObjectMgr().getWasSelected())
+	if (!objectMgr->getWasSelected())
 		return;
 		
 	float manualMoveDuration;
@@ -404,7 +407,7 @@ void StelMovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 	if (!getFlagTracking())
 	{
 		setFlagTracking(true);
-		moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()), moveDuration, false, 1);
+		moveTo(objectMgr->getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()), moveDuration, false, 1);
 		manualMoveDuration = moveDuration;
 	}
 	else
@@ -421,13 +424,13 @@ void StelMovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 	}
 	else
 	{
-		float satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getSatellitesFov(core->getNavigator());
+		float satfov = objectMgr->getSelectedObject()[0]->getSatellitesFov(core->getNavigator());
 
 		if (satfov>0.0 && currentFov*0.9>satfov)
 			zoomTo(satfov, moveDuration);
 		else
 		{
-			float closefov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getCloseViewFov(core->getNavigator());
+			float closefov = objectMgr->getSelectedObject()[0]->getCloseViewFov(core->getNavigator());
 			if (currentFov>closefov)
 				zoomTo(closefov, moveDuration);
 		}
@@ -440,11 +443,11 @@ void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 {
 	StelNavigator* nav = core->getNavigator();
 	
-	if (StelApp::getInstance().getStelObjectMgr().getWasSelected() && !full)
+	if (objectMgr->getWasSelected() && !full)
 	{
 		// If the selected object has satellites, unzoom to satellites view
 		// unless specified otherwise
-		float satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getSatellitesFov(core->getNavigator());
+		float satfov = objectMgr->getSelectedObject()[0]->getSatellitesFov(core->getNavigator());
 
 		if (satfov>0.0 && currentFov<=satfov*0.9)
 		{
@@ -454,7 +457,7 @@ void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 
 		// If the selected object is part of a Planet subsystem (other than sun),
 		// unzoom to subsystem view
-		satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getParentSatellitesFov((core->getNavigator()));
+		satfov = objectMgr->getSelectedObject()[0]->getParentSatellitesFov((core->getNavigator()));
 		if (satfov>0.0 && currentFov<=satfov*0.9)
 		{
 			zoomTo(satfov, moveDuration);
@@ -472,13 +475,13 @@ void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 
 void StelMovementMgr::setFlagTracking(bool b)
 {
-	if(!b || !StelApp::getInstance().getStelObjectMgr().getWasSelected())
+	if(!b || !objectMgr->getWasSelected())
 	{
 		flagTracking=false;
 	}
 	else
 	{
-		moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()), getAutoMoveDuration());
+		moveTo(objectMgr->getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()), getAutoMoveDuration());
 		flagTracking=true;
 	}
 }
@@ -517,10 +520,10 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 	{
 		double ra_aim, de_aim, ra_start, de_start, ra_now, de_now;
 
-		if( zoomingMode == 1 && StelApp::getInstance().getStelObjectMgr().getWasSelected())
+		if( zoomingMode == 1 && objectMgr->getWasSelected())
 		{
 			// if zooming in, object may be moving so be sure to zoom to latest position
-			move.aim = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator());
+			move.aim = objectMgr->getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator());
 			move.aim.normalize();
 			move.aim*=2.;
 		}
@@ -610,9 +613,9 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 	}
 	else
 	{
-		if (flagTracking && StelApp::getInstance().getStelObjectMgr().getWasSelected()) // Equatorial vision vector locked on selected object
+		if (flagTracking && objectMgr->getWasSelected()) // Equatorial vision vector locked on selected object
 		{
-			nav->setEquinoxEquVisionDirection(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()));
+			nav->setEquinoxEquVisionDirection(objectMgr->getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()));
 		}
 		else
 		{

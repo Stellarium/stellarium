@@ -117,10 +117,12 @@ QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 
 StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 {
-	connect(this, SIGNAL(requestLoadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)), &StelApp::getInstance().getSkyImageMgr(), SLOT(loadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)));
-
-	connect(this, SIGNAL(requestRemoveSkyImage(const QString&)), &StelApp::getInstance().getSkyImageMgr(), SLOT(removeSkyImage(const QString&)));
-
+	if(StelSkyImageMgr* smgr = GETSTELMODULE(StelSkyImageMgr))
+	{
+		connect(this, SIGNAL(requestLoadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)), smgr, SLOT(loadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)));
+		connect(this, SIGNAL(requestRemoveSkyImage(const QString&)), smgr, SLOT(removeSkyImage(const QString&)));
+	}
+	
 	connect(this, SIGNAL(requestLoadSound(const QString&, const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(loadSound(const QString&, const QString&)));
 	connect(this, SIGNAL(requestPlaySound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(playSound(const QString&)));
 	connect(this, SIGNAL(requestPauseSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(pauseSound(const QString&)));
@@ -464,11 +466,12 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 
 void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
 {
-	StelApp::getInstance().getStelObjectMgr().setFlagSelectedObjectPointer(pointer);
+	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	omgr->setFlagSelectedObjectPointer(pointer);
 	if (name=="")
-		StelApp::getInstance().getStelObjectMgr().unSelect();
+		omgr->unSelect();
 	else
-		StelApp::getInstance().getStelObjectMgr().findAndSelect(name);
+		omgr->findAndSelect(name);
 }
 
 void StelMainScriptAPI::clear(const QString& state)
@@ -590,7 +593,7 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mvmgr);
 
-	StelApp::getInstance().getStelObjectMgr().unSelect();
+	GETSTELMODULE(StelObjectMgr)->unSelect();
 
 	Vec3d aim;
 	double dAlt = StelUtils::getDecAngle(alt); 
@@ -605,7 +608,7 @@ void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mvmgr);
 
-	StelApp::getInstance().getStelObjectMgr().unSelect();
+	GETSTELMODULE(StelObjectMgr)->unSelect();
 
 	Vec3d aim;
 	double dRa = StelUtils::getDecAngle(ra); 
@@ -639,7 +642,8 @@ StelScriptMgr::StelScriptMgr(QObject *parent)
 	}
 
 	// Add other classes which we want to be directly accessible from scripts
-	objectValue = engine.newQObject(&StelApp::getInstance().getSkyImageMgr());
+	if(StelSkyImageMgr* smgr = GETSTELMODULE(StelSkyImageMgr))
+		objectValue = engine.newQObject(smgr);
 }
 
 

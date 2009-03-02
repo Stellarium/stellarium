@@ -227,13 +227,14 @@ void TelescopeMgr::setFontSize(float fontSize)
 
 void TelescopeMgr::moveTelescopeToSelected(void)
 {
-	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().isEmpty())
+	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	if (omgr->getSelectedObject().isEmpty())
 		return;
 
 	if (sender() == NULL)
 		return;
 
-	StelObjectP selectObject = StelApp::getInstance().getStelObjectMgr().getSelectedObject().at(0);
+	StelObjectP selectObject = omgr->getSelectedObject().at(0);
 	if (!selectObject)  // should never happen
 		return;
 
@@ -281,7 +282,7 @@ void TelescopeMgr::init()
 	setFlagTelescopes(conf->value("astro/flag_telescopes",false).toBool());
 	setFlagTelescopeName(conf->value("astro/flag_telescope_name",false).toBool());  
 
-	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
+	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	// Load pointer texture
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   
@@ -290,7 +291,7 @@ void TelescopeMgr::init()
 
 void TelescopeMgr::drawPointer(const StelProjectorP& prj, const StelNavigator * nav, const StelPainter& sPainter)
 {
-	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Telescope");
+	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Telescope");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];

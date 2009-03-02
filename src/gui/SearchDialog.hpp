@@ -97,6 +97,7 @@ private:
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
 	QMap<QString, Vec3d> simbadResults;
+	class StelObjectMgr* objectMgr;
 	
 	QString substituteGreek(const QString& keyString);
 	QString getGreekLetterByName(const QString& potentialGreekLetterName);
