@@ -116,7 +116,7 @@ void NebulaMgr::init()
 
 	updateI18n();
 	
-	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
+	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
 
 // Draw all the Nebulae
@@ -169,7 +169,7 @@ void NebulaMgr::drawPointer(const StelCore* core, const StelPainter& sPainter)
 	const StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	
-	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Nebula");
+	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Nebula");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];

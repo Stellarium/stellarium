@@ -692,7 +692,7 @@ void StelGui::update(double deltaTime)
 	if (getGuiActions("actionShow_Stars")->isChecked()!=smgr->getFlagStars())
 		getGuiActions("actionShow_Stars")->setChecked(smgr->getFlagStars());
 	
-	infoPanel->setTextFromObjects(StelApp::getInstance().getStelObjectMgr().getSelectedObject());
+	infoPanel->setTextFromObjects(GETSTELMODULE(StelObjectMgr)->getSelectedObject());
 }
 
 bool StelGui::handleMouseMoves(int x, int y, Qt::MouseButtons b)

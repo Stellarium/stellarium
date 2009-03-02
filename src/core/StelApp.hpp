@@ -108,10 +108,6 @@ public:
 	//! @return the texture manager to use for loading textures.
 	StelTextureMgr& getTextureManager() {return *textureMgr;}
 	
-	//! Get the StelObject manager to use for querying from all stellarium objects.
-	//! @return the StelObject manager to use for querying from all stellarium objects
-	StelObjectMgr& getStelObjectMgr() {return *stelObjectMgr;}
-	
 	//! Get the Location manager to use for managing stored locations
 	//! @return the Location manager to use for managing stored locations
 	StelLocationMgr& getLocationMgr() {return *planetLocationMgr;}
@@ -119,10 +115,6 @@ public:
 	//! Get the StelFileMgr for performing file operations.
 	//! @return the StelFileMgr manager to use for performing file operations
 	StelFileMgr& getFileMgr() {return *stelFileMgr;}
-	
-	//! Get the StelSkyImageMgr managing background images
-	//! @return the StelSkyImageMgr managing background images
-	StelSkyImageMgr& getSkyImageMgr() {return *skyImageMgr;}
 
 	StelAudioMgr* getStelAudioMgr() {return audioMgr;}
 	
@@ -361,9 +353,6 @@ private:
 	
 	// Main network manager used for the program
 	QNetworkAccessManager* networkAccessManager;
-	
-	// The manager for the sky images such as nebulas or background DSS
-	StelSkyImageMgr* skyImageMgr;
 
 	// The audio manager.  Must execute in the main thread.
 	StelAudioMgr* audioMgr;

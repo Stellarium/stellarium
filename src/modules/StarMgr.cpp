@@ -128,10 +128,12 @@ StarMgr::StarMgr(void) : hipIndex(new HipIndexStruct[NR_OF_HIP+1]), fontSize(13.
 	setObjectName("StarMgr");
 	if (hipIndex == 0)
 	{
-    	qFatal("ERROR: StarMgr::StarMgr: no memory");
+		qFatal("ERROR: StarMgr::StarMgr: no memory");
 	}
 	maxGeodesicGridLevel = -1;
 	lastMaxSearchLevel = -1;
+	objectMgr = GETSTELMODULE(StelObjectMgr);
+	Q_ASSERT(objectMgr);
 }
 
 /*************************************************************************
@@ -191,7 +193,7 @@ void StarMgr::init()
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
 	setLabelsAmount(conf->value("stars/labels_amount",3).toDouble());
 	
-	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
+	objectMgr->registerStelObjectMgr(this);
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setMinFilter(GL_LINEAR);
@@ -207,7 +209,7 @@ void StarMgr::init()
 
 void StarMgr::drawPointer(const StelProjectorP& prj, const StelNavigator * nav)
 {
-	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Star");
+	const QList<StelObjectP> newSelected = objectMgr->getSelectedObject("Star");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];

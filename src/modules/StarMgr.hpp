@@ -246,6 +246,7 @@ private:
 	StelTextureSP texPointer;		// The selection pointer texture
 	
 	QSettings* starSettings;
+	class StelObjectMgr* objectMgr;
 };
 
 

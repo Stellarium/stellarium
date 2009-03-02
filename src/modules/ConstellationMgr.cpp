@@ -97,7 +97,6 @@ void ConstellationMgr::init()
 	setFlagArt(conf->value("viewing/flag_constellation_art").toBool());
 	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected",
 				conf->value("viewing/flag_constellation_pick", false).toBool() ).toBool());
-	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
 }
 
 /*************************************************************************
@@ -178,7 +177,9 @@ void ConstellationMgr::setStelStyle(const StelStyle& style)
 
 void ConstellationMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)
 {
-	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	Q_ASSERT(omgr);
+	const QList<StelObjectP> newSelected = omgr->getSelectedObject();
 	if (newSelected.empty())
 	{
 		// Even if do not have anything selected, KEEP constellation selection intact
@@ -187,11 +188,11 @@ void ConstellationMgr::selectedObjectChangeCallBack(StelModuleSelectAction actio
 		return;
 	}
 	
-	const QList<StelObjectP> newSelectedConst = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Constellation");
+	const QList<StelObjectP> newSelectedConst = omgr->getSelectedObject("Constellation");
 	if (!newSelectedConst.empty())
 	{
 //		const boost::intrusive_ptr<Constellation> c = boost::dynamic_pointer_cast<Constellation>(newSelectedConst[0]);
-//		StelApp::getInstance().getStelObjectMgr().setSelectedObject(c->getBrightestStarInConstellation());
+//		omgr->setSelectedObject(c->getBrightestStarInConstellation());
 
 		// If removing this selection
 		if(action == StelModule::RemoveFromSelection) {
@@ -203,7 +204,7 @@ void ConstellationMgr::selectedObjectChangeCallBack(StelModuleSelectAction actio
 	}
 	else
 	{
-		const QList<StelObjectP> newSelectedStar = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Star");
+		const QList<StelObjectP> newSelectedStar = omgr->getSelectedObject("Star");
 		if (!newSelectedStar.empty())
 		{
 //			if (!added)

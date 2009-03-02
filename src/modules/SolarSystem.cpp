@@ -121,7 +121,7 @@ void SolarSystem::init()
 	setFlagTrails(conf->value("astro/flag_object_trails", false).toBool());
 	startTrails(conf->value("astro/flag_object_trails", false).toBool());	
 	
-	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
+	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setMinFilter(GL_LINEAR);
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur4.png");
@@ -133,7 +133,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 	const StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	
-	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Planet");
+	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Planet");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
@@ -1115,7 +1115,7 @@ QStringList SolarSystem::listMatchingObjectsI18n(const QString& objPrefix, int m
 
 void SolarSystem::selectedObjectChangeCallBack(StelModuleSelectAction action)
 {
-	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Planet");
+	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Planet");
 	if (!newSelected.empty())
 		setSelected(newSelected[0].get());
 }
