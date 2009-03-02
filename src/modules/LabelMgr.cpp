@@ -40,6 +40,102 @@
 #include <QString>
 #include <QDebug>
 
+// Base class from which other label types inherit
+class StelLabel
+{
+public:
+	StelLabel(const QString& text, StelFont* font, const Vec3f& color);
+	virtual ~StelLabel() {;}
+
+	//! draw the label on the sky
+	//! @param core the StelCore object
+	virtual bool draw(StelCore* core, const StelPainter& sPainter) = 0;
+	//! update fade for on/off action
+	virtual void update(double deltaTime);
+	//! Set the duration used for the fade in / fade out of the label.
+	virtual void setFadeDuration(float duration);
+	//! Set the font color used for the font
+	virtual void setFontColor(const Vec3f& color);
+	//! Show or hide the label.  It will fade in/out.
+	virtual void setFlagShow(bool b);
+	//! Get value of flag used to turn on and off the label
+	virtual bool getFlagShow(void);
+
+protected:
+	QString labelText;
+	StelFont* labelFont;
+	Vec3f labelColor;
+	LinearFader labelFader;
+};
+
+//! @class SkyLabel
+//! Used to create user labels which are bound to some object on the celestial sphere.
+//! The object in question can be any existing StelObject or celestial coordinates.
+class SkyLabel : public StelLabel
+{
+public:
+	//! @enum Style determined the way the object to which the label is bound
+	//! is indicated. 
+	enum Style {
+		TextOnly,   //!< Just put the label near the object
+		Line        //!< Draw a line from the label text to the object
+	};
+
+	//! Constructor of a SkyLabel which is attached to an existing object
+	//! @param text the text which will be displayed
+	//! @param bindObject a pointer to an existing object to which the label will be attached
+	//! @param font a pointer the font to use for this label
+	//! @param color choose a color for the label
+	//! @param side which side of the object to draw the label, values N, S, E, W, NE, NW, SE, SW, C (C is centred on the object)
+	//! @param distance the distance from the object to draw the label.  If < 0.0, placement is automatic.
+	//! @param style determines how the label is drawn
+	//! @param enclosureSize determines the size of the enclosure for styles Box and Circle
+	SkyLabel(const QString& text, StelObjectP bindObject, StelFont* font, Vec3f color,
+			 QString side="NE", double distance=-1.0, SkyLabel::Style style=TextOnly, 
+	double enclosureSize=0.0);
+
+	virtual ~SkyLabel();
+	// SkyLabel(const QString& text, Vec3d coords, QString side="NE", double distance=-1.0, SkyLabel::Style style=TextOnly, double enclosureSize=-1.0);
+
+	//! Draw the label on the sky
+	//! @param core the StelCore object
+	//! @param sPainter the StelPainter to use for drawing operations
+	virtual bool draw(StelCore* core, const StelPainter& sPainter);
+
+	static SkyLabel::Style stringToStyle(const QString& s);
+	
+private:
+	StelObjectP labelObject;
+	QString labelSide;
+	double labelDistance;
+	SkyLabel::Style labelStyle;
+	double labelEnclosureSize;
+};
+
+//! @class ScreenLabel
+//! Used to create user labels which are bound to a fixed point on the screen.
+class ScreenLabel : public StelLabel
+{
+public:
+	//! Constructor of a SkyLabel which is to be displayed at a fixed position on the screen.
+	//! @param text the text for the label
+	//! @param x the x-position on the screen (pixels from the left side)
+	//! @param y the y-position on the screen (pixels from the bottom side)
+	//! @param font the font to use
+	//! @param color the color for the label
+	ScreenLabel(const QString& text, int x, int y, StelFont* font, Vec3f color);
+	virtual ~ScreenLabel();
+
+	//! draw the label on the sky
+	//! @param core the StelCore object
+	//! @param sPainter the StelPainter to use for drawing operations
+	virtual bool draw(StelCore* core, const StelPainter& sPainter);
+
+private:
+	int screenX;
+	int screenY;
+};
+
 /////////////////////
 // StelLabel class //
 /////////////////////
@@ -73,6 +169,14 @@ void StelLabel::setFlagShow(bool b)
 bool StelLabel::getFlagShow(void)
 {
 	return labelFader;
+}
+
+SkyLabel::Style SkyLabel::stringToStyle(const QString& s)
+{
+	if (s=="Line")
+		return SkyLabel::Line;
+	else
+		return SkyLabel::TextOnly;
 }
 
 ////////////////////
@@ -261,7 +365,7 @@ int LabelMgr::labelObject(const QString& text,
 		return -1;
 	}
 	
-	StelLabel* l = new SkyLabel(text, obj, font, StelUtils::htmlColorToVec3f(fontColor), side, labelDistance, stringToStyle(style));
+	StelLabel* l = new SkyLabel(text, obj, font, StelUtils::htmlColorToVec3f(fontColor), side, labelDistance, SkyLabel::stringToStyle(style));
 	if (l==NULL)
 		return -1;
 
@@ -347,12 +451,3 @@ int LabelMgr::deleteAllLabels(void)
 	allLabels.clear();
 	return count;
 }
-
-SkyLabel::Style LabelMgr::stringToStyle(const QString& s)
-{
-	if (s=="Line")
-		return SkyLabel::Line;
-	else
-		return SkyLabel::TextOnly;
-}
-
