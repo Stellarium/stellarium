@@ -142,6 +142,7 @@ void StelMainGraphicsView::deinitGL()
 		return;
 	wasDeinit = true;
 	StelApp::getInstance().getModuleMgr().unloadAllPlugins();
+	QCoreApplication::processEvents();
 	StelApp::getInstance().getModuleMgr().unloadModule("StelGui");
 	QCoreApplication::processEvents();
 	StelApp* stelApp = &StelApp::getInstance();

@@ -170,7 +170,7 @@ void StelModuleMgr::unloadAllPlugins()
 		const PluginDescriptor& d = i.previous();
 		if (d.loadAtStartup==false)
 			continue;
-		unloadModule(d.key);
+		unloadModule(d.key, true);
 		qDebug() << "Unloaded plugin " << d.key << ".";
 	}
 }

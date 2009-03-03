@@ -112,6 +112,10 @@ public:
 	//! @return the Location manager to use for managing stored locations
 	StelLocationMgr& getLocationMgr() {return *planetLocationMgr;}
 	
+	//! Get the StelObject manager to use for querying from all stellarium objects. 	 
+	//! @return the StelObject manager to use for querying from all stellarium objects 	. 
+	StelObjectMgr& getStelObjectMgr() {return *stelObjectMgr;}
+	
 	//! Get the StelFileMgr for performing file operations.
 	//! @return the StelFileMgr manager to use for performing file operations
 	StelFileMgr& getFileMgr() {return *stelFileMgr;}
