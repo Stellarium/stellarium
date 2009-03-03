@@ -124,15 +124,11 @@ public:
 	int getViewportHeight(void) const {return viewportXywh[3];}
 	
 	//! Return a convex polygon on the sphere which includes the viewport in the current frame.
-	//! @param marginX an extra margin in pixel which extends the polygon size in the X direction
-	//! @param marginY an extra margin in pixel which extends the polygon size in the Y direction
-	//! @TODO Should be unified with unprojectViewport
+	//! @param marginX an extra margin in pixel which extends the polygon size in the X direction.
+	//! @param marginY an extra margin in pixel which extends the polygon size in the Y direction.
+	//! @return a ConvexPolygon or the special fullSky ConvexPolygon if the viewport cannot be 
+	//! represented by a convex polygon (e.g. if aperture > 180 deg).
 	StelGeom::ConvexPolygon getViewportConvexPolygon(double marginX=0., double marginY=0.) const;
-
-	//! Un-project the entire viewport depending on mapping, maskType,
-	//! viewportFovDiameter, viewportCenter, and viewport dimensions.
-	//! @TODO Should be unified with getViewportConvexPolygon
-	StelGeom::ConvexS unprojectViewport() const;
 
 	//! Return a Halfspace containing the whole viewport
 	StelGeom::HalfSpace getBoundingHalfSpace() const;

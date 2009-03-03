@@ -78,6 +78,30 @@ Polygon::Polygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e
     push_back(e3);
 }
 
+ConvexPolygon ConvexPolygon::fullSky()
+{
+	ConvexPolygon poly;
+	poly.asConvex().push_back(HalfSpace(Vec3d(1.,0.,0.), -1.));
+	return poly;
+}
+
+//! Check if the polygon is valid, i.e. it has no side >180
+bool ConvexPolygon::checkValid() const
+{
+	const ConvexS& cvx = asConvex();
+	const Polygon& poly = asPolygon();
+	if (cvx.size()<3)
+		return false;
+	bool res=true;
+	for (size_t i=0;i<cvx.size();++i)
+	{
+		// Check that all points not on the current convex plane are included in it
+		for (size_t p=0;p<cvx.size()-2;++p)
+			res &= cvx[i].contains(poly[(p+i+2)%poly.size()]);
+	}
+	return res;
+}
+	
 //! Return the convex polygon area in steradians
 // TODO Optimize using add oc formulas from http://en.wikipedia.org/wiki/Solid_angle
 double ConvexPolygon::getArea() const
