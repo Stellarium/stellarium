@@ -514,6 +514,12 @@ template<class T> Vector3<T>& Vector3<T>::operator*=(T s)
     return *this;
 }
 
+template<class T> Vector3<T>& Vector3<T>::operator/=(T s)
+{
+	v[0] /= s; v[1] /= s; v[2] /= s;
+	return *this;
+}
+
 template<class T> Vector3<T> Vector3<T>::operator-() const
 {
     return Vector3<T>(-v[0], -v[1], -v[2]);
