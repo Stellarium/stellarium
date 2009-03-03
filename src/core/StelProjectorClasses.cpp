@@ -208,7 +208,7 @@ bool StelProjectorCylinder::forward(Vec3d &v) const
 
 bool StelProjectorCylinder::backward(Vec3d &v) const
 {
-	const bool rval = v[1]<M_PI_2 && v[1]>-M_PI_2;
+	const bool rval = v[1]<M_PI_2 && v[1]>-M_PI_2 && v[0]>-M_PI && v[0]<M_PI;
 	const double cd = std::cos(v[1]);
 	v[2] = - cd * std::cos(v[0]);
 	v[0] = cd * std::sin(v[0]);
@@ -255,7 +255,7 @@ bool StelProjectorMercator::forward(Vec3d &v) const
 
 bool StelProjectorMercator::backward(Vec3d &v) const
 {
-	const bool rval = !(v[1]>M_PI_2 || v[1]<-M_PI_2);
+	const bool rval = v[1]<M_PI_2 && v[1]>-M_PI_2 && v[0]>-M_PI && v[0]<M_PI;
 	const double E = std::exp(v[1]);
 	const double h = E*E;
 	const double h1 = 1.0/(1.0+h);

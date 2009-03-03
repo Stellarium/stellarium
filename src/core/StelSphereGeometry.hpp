@@ -119,7 +119,7 @@ public:
 };
 
 //! @class ConvexPolygon
-//! A special case of ConvexS for which all HalfSpace have a aperture of PI/2.
+//! A special case of ConvexS for which all HalfSpace have an aperture of PI/2.
 //! The operator [] behave as for a Polygon, i.e. return the vertex positions.
 //! To acces the HalfSpaces, use the asConvex() method.
 class ConvexPolygon : public ConvexS, public Polygon
@@ -170,6 +170,12 @@ public:
 	
 	//! Same with const
 	const ConvexS& asConvex() const {return static_cast<const ConvexS&>(*this);}
+	
+	//! Check if the polygon is valid, i.e. it has no side >180 etc
+	bool checkValid() const;
+	
+	//! Special case for degenerated polygons (>180 deg), assume full sky, i.e. intersect and contains is always true.
+	static ConvexPolygon fullSky();
 };
 
 

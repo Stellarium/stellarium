@@ -68,109 +68,27 @@ QString StelProjector::getHtmlSummary() const
 StelGeom::ConvexPolygon StelProjector::getViewportConvexPolygon(double marginX, double marginY) const
 {
 	Vec3d e0, e1, e2, e3;
-	unProject(0-marginX,0-marginY,e0);
-	unProject(getViewportWidth()+marginX,0-marginY,e1);
-	unProject(getViewportWidth()+marginX,getViewportHeight()+marginY,e2);
-	unProject(0-marginX,getViewportHeight()+marginY,e3);
+	bool ok = unProject(0-marginX,0-marginY,e0);
+	ok &= unProject(getViewportWidth()+marginX,0-marginY,e1);
+	ok &= unProject(getViewportWidth()+marginX,getViewportHeight()+marginY,e2);
+	ok &= unProject(0-marginX,getViewportHeight()+marginY,e3);
+	if (!ok)
+	{
+		// Special case for handling degenerated cases, use full sky.
+		//qDebug() << "!ok";
+ 		return StelGeom::ConvexPolygon::fullSky();
+	}
 	e0.normalize();
 	e1.normalize();
 	e2.normalize();
 	e3.normalize();
-	return needGlFrontFaceCW() ? StelGeom::ConvexPolygon(e1, e0, e3, e2) : StelGeom::ConvexPolygon(e0, e1, e2, e3);
+	StelGeom::ConvexPolygon res = needGlFrontFaceCW() ? StelGeom::ConvexPolygon(e1, e0, e3, e2) : StelGeom::ConvexPolygon(e0, e1, e2, e3);
+	if (res.checkValid())
+		return res;
+	//qDebug() << "!valid";
+	return StelGeom::ConvexPolygon::fullSky(); 
 }
 
-//! Un-project the entire viewport depending on mapping, maskType, viewportFovDiameter,
-//! viewportCenter, and viewport dimensions.
-// Last not least all halfplanes n*x>d really should have d<=0 or at least very small d/n.length().
-StelGeom::ConvexS StelProjector::unprojectViewport(void) const
-{
-	double fov = getFov();
-	if ((dynamic_cast<const StelProjectorCylinder*>(this) == 0 || fov < 90) && fov < 360.0)
-	{
-		Vec3d e0,e1,e2,e3;
-		bool ok;
-		if (maskType == MaskDisk)
-		{
-			if (fov >= 120.0)
-			{
-				unProject(viewportCenter[0],viewportCenter[1],e0);
-				StelGeom::ConvexS rval(1);
-				rval[0].n = e0;
-				rval[0].d = (fov<360.0) ? cos(fov*(M_PI/360.0)) : -1.0;
-				return rval;
-			}
-			ok  = unProject(viewportCenter[0] - 0.5*viewportFovDiameter, viewportCenter[1] - 0.5*viewportFovDiameter,e0);
-			ok &= unProject(viewportCenter[0] + 0.5*viewportFovDiameter, viewportCenter[1] + 0.5*viewportFovDiameter,e2);
-			if (needGlFrontFaceCW())
-			{
-				ok &= unProject(viewportCenter[0] - 0.5*viewportFovDiameter, viewportCenter[1] + 0.5*viewportFovDiameter,e3);
-				ok &= unProject(viewportCenter[0] + 0.5*viewportFovDiameter, viewportCenter[1] - 0.5*viewportFovDiameter,e1);
-			}
-			else
-			{
-				ok &= unProject(viewportCenter[0] - 0.5*viewportFovDiameter, viewportCenter[1] + 0.5*viewportFovDiameter,e1);
-				ok &= unProject(viewportCenter[0] + 0.5*viewportFovDiameter, viewportCenter[1] - 0.5*viewportFovDiameter,e3);
-			}
-		}
-		else
-		{
-			ok  = unProject(viewportXywh[0],viewportXywh[1],e0);
-			ok &= unProject(viewportXywh[0]+viewportXywh[2], viewportXywh[1]+viewportXywh[3],e2);
-			if (needGlFrontFaceCW())
-			{
-				ok &= unProject(viewportXywh[0],viewportXywh[1]+viewportXywh[3],e3);
-				ok &= unProject(viewportXywh[0]+viewportXywh[2],viewportXywh[1],e1);
-			}
-			else
-			{
-				ok &= unProject(viewportXywh[0],viewportXywh[1]+viewportXywh[3],e1);
-				ok &= unProject(viewportXywh[0]+viewportXywh[2],viewportXywh[1],e3);
-			}
-		}
-		if (ok)
-		{
-			StelGeom::HalfSpace h0(e0^e1);
-			StelGeom::HalfSpace h1(e1^e2);
-			StelGeom::HalfSpace h2(e2^e3);
-			StelGeom::HalfSpace h3(e3^e0);
-			if (h0.contains(e2) && h0.contains(e3) && h1.contains(e3) && h1.contains(e0) &&
-				h2.contains(e0) && h2.contains(e1) && h3.contains(e1) && h3.contains(e2))
-			{
-				StelGeom::ConvexS rval(4);
-				rval[0] = h3;
-				rval[1] = h2;
-				rval[2] = h1;
-				rval[3] = h0;
-				return rval;
-			}
-			else
-			{
-				Vec3d middle;
-				if (unProject(viewportXywh[0]+0.5*viewportXywh[2], viewportXywh[1]+0.5*viewportXywh[3],middle))
-				{
-					double d = middle*e0;
-					double h = middle*e1;
-					if (d > h)
-						d = h;
-					h = middle*e2;
-					if (d > h)
-						d = h;
-					h = middle*e3;
-					if (d > h)
-						d = h;
-					StelGeom::ConvexS rval(1);
-					rval[0].n = middle;
-					rval[0].d = d;
-					return rval;
-				}
-			}
-		}
-	}
-	StelGeom::ConvexS rval(1);
-	rval[0].n = Vec3d(1.0,0.0,0.0);
-	rval[0].d = -2.0;
-	return rval;
-}
 
 // Return a Halfspace containing the whole viewport
 StelGeom::HalfSpace StelProjector::getBoundingHalfSpace() const
