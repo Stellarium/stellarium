@@ -153,6 +153,68 @@ protected:
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
 };
 
+class StelProjectorAitoff : public StelProjector
+{
+public:
+	StelProjectorAitoff(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
+	virtual QString getNameI18() const;
+	virtual QString getDescriptionI18() const;
+	virtual double getMaxFov() const {return 360.;}
+	bool forward(Vec3d &v) const
+	{
+		// RealAitoff
+// 		const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+// 		const double alpha = std::atan2(v[0],-v[2]);
+// 		const double cosDelta = std::sqrt(1.-v[1]*v[1]/(r*r));
+// 		double z = std::acos(cosDelta*std::cos(alpha/2.));
+// 		z = std::sin(z)/z;
+// 		v[0] = 2.*cosDelta*std::sin(alpha/2.)/z;
+// 		v[1] = v[1]/r/z;
+// 		v[2] = r;
+// 		return true;
+		
+		// Hammer Aitoff
+		const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+		const double alpha = std::atan2(v[0],-v[2]);
+		const double cosDelta = std::sqrt(1.-v[1]*v[1]/(r*r));
+		double z = std::sqrt(1.+cosDelta*std::cos(alpha/2.));
+		v[0] = 2.*M_SQRT2*cosDelta*std::sin(alpha/2.)/z;
+		v[1] = M_SQRT2*v[1]/r/z;
+		v[2] = r;
+		return true;
+		
+// 		const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+// 		v/=r;
+// 		const double l = sqrt(v[2]*v[2]+v[0]*v[0]);
+// 		const double A = sqrt(0.5*l*(v[2]+l));
+// 		const double B2 = v[0]*l/A;
+// 		double h = 0.25*B2*B2+v[1]*v[1];
+// 		if (h > 0.0001) {
+// 			h = sqrt(h);
+// 			h = atan2(h,A) / h;
+// 		} else {
+// 			h /= (A*A);
+// 			h = 1.0-h*(1.0/3.0
+// 					-h*(1.0/5.0
+// 					-h*(1.0/7.0
+// 					-h*(1.0/9.0
+// 					   ))));
+// 			h /= A;
+// 		}
+// 		v[0] = B2 * h;
+// 		v[1] = v[1] * h;
+// 		v[2] = r;
+// 		return (v[2] > -1.0);
+	}
+	bool backward(Vec3d &v) const;
+	double fovToViewScalingFactor(double fov) const;
+	double viewScalingFactorToFov(double vsf) const;
+	double deltaZoom(double fov) const;
+protected:
+	virtual bool hasDiscontinuity() const {return true;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return p1[0]*p2[0]<0 && !(p1[2]<0 && p2[2]<0);}
+};
+
 class StelProjectorCylinder : public StelProjector
 {
 public:

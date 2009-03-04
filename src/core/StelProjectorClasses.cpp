@@ -184,6 +184,48 @@ double StelProjectorFisheye::deltaZoom(double fov) const
 
 
 
+QString StelProjectorAitoff::getNameI18() const
+{
+	return q_("Hammer-Aitoff");
+}
+
+QString StelProjectorAitoff::getDescriptionI18() const
+{
+	return q_("TODO.");
+}
+
+bool StelProjectorAitoff::backward(Vec3d &v) const
+{
+	// TODO: There is still a problem here. Stars disapear at some zoom level
+	const double zsq = 1.-0.25*0.25*v[0]*v[0]-0.5*0.5*v[1]*v[1];
+	const double z = zsq<0. ? 0. : std::sqrt(zsq);
+	const bool ret = 0.25*v[0]*v[0]+v[1]*v[1]<2.0;
+	const double alpha = 2.*std::atan2(z*v[0],(2.*(2.*zsq-1.)));
+	const double delta = std::asin(v[1]*z);
+	const double cd = std::cos(delta);
+	v[2] = - cd * std::cos(alpha);
+	v[0] = cd * std::sin(alpha);
+	v[1] = v[1]*z;
+	return ret;
+}
+
+double StelProjectorAitoff::fovToViewScalingFactor(double fov) const
+{
+	return fov;
+}
+
+double StelProjectorAitoff::viewScalingFactorToFov(double vsf) const
+{
+	return vsf;
+}
+
+double StelProjectorAitoff::deltaZoom(double fov) const
+{
+	return fov;
+}
+
+
+
 QString StelProjectorCylinder::getNameI18() const
 {
 	return q_("Cylinder");
