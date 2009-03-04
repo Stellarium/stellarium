@@ -396,7 +396,7 @@ void StelApp::init()
 	getModuleMgr().registerModule(milky_way);
 	
 	// Init sky image manager
-	StelSkyImageMgr* skyImageMgr = new StelSkyImageMgr();
+	skyImageMgr = new StelSkyImageMgr();
 	skyImageMgr->init();
 	getModuleMgr().registerModule(skyImageMgr);
 
