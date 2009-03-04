@@ -116,6 +116,10 @@ public:
 	//! @return the StelObject manager to use for querying from all stellarium objects 	. 
 	StelObjectMgr& getStelObjectMgr() {return *stelObjectMgr;}
 	
+	//! Get the StelObject manager to use for querying from all stellarium objects. 	 
+	//! @return the StelObject manager to use for querying from all stellarium objects 	. 
+	StelSkyImageMgr& getSkyImageMgr() {return *skyImageMgr;}
+	
 	//! Get the StelFileMgr for performing file operations.
 	//! @return the StelFileMgr manager to use for performing file operations
 	StelFileMgr& getFileMgr() {return *stelFileMgr;}
@@ -372,6 +376,8 @@ private:
 	
 	// Download manager that uses networkAccessManager
 	StelDownloadMgr* downloadMgr;
+	
+	StelSkyImageMgr* skyImageMgr;
 	
 	float fps;
 	//! The minimum desired frame rate in frame per second.
