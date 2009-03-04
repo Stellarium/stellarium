@@ -184,22 +184,21 @@ double StelProjectorFisheye::deltaZoom(double fov) const
 
 
 
-QString StelProjectorAitoff::getNameI18() const
+QString StelProjectorHammer::getNameI18() const
 {
 	return q_("Hammer-Aitoff");
 }
 
-QString StelProjectorAitoff::getDescriptionI18() const
+QString StelProjectorHammer::getDescriptionI18() const
 {
-	return q_("TODO.");
+	return q_("The Hammer projection is an equal-area map projection, described by Ernst Hammer in 1892 and directly inspired by the Aitoff projection.");
 }
 
-bool StelProjectorAitoff::backward(Vec3d &v) const
+bool StelProjectorHammer::backward(Vec3d &v) const
 {
-	// TODO: There is still a problem here. Stars disapear at some zoom level
 	const double zsq = 1.-0.25*0.25*v[0]*v[0]-0.5*0.5*v[1]*v[1];
 	const double z = zsq<0. ? 0. : std::sqrt(zsq);
-	const bool ret = 0.25*v[0]*v[0]+v[1]*v[1]<2.0;
+	const bool ret = 0.25*v[0]*v[0]+v[1]*v[1]<2.0; // This is stolen from glunatic
 	const double alpha = 2.*std::atan2(z*v[0],(2.*(2.*zsq-1.)));
 	const double delta = std::asin(v[1]*z);
 	const double cd = std::cos(delta);
@@ -209,17 +208,17 @@ bool StelProjectorAitoff::backward(Vec3d &v) const
 	return ret;
 }
 
-double StelProjectorAitoff::fovToViewScalingFactor(double fov) const
+double StelProjectorHammer::fovToViewScalingFactor(double fov) const
 {
 	return fov;
 }
 
-double StelProjectorAitoff::viewScalingFactorToFov(double vsf) const
+double StelProjectorHammer::viewScalingFactorToFov(double vsf) const
 {
 	return vsf;
 }
 
-double StelProjectorAitoff::deltaZoom(double fov) const
+double StelProjectorHammer::deltaZoom(double fov) const
 {
 	return fov;
 }
