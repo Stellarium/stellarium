@@ -63,6 +63,7 @@ public:
 		ProjectionEqualArea,      //!< Equal Area projection
 		ProjectionStereographic,  //!< Stereograhic projection
 		ProjectionFisheye,	      //!< Fisheye projection
+  		ProjectionAitoff,         //!< Aitoff projection
 		ProjectionCylinder,	      //!< Cylinder projection
 		ProjectionMercator,	      //!< Mercator projection
 		ProjectionOrthographic	  //!< Orthographic projection
