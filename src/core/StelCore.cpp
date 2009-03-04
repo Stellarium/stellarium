@@ -192,8 +192,8 @@ const StelProjectorP StelCore::getProjection(const Mat4d& modelViewMat, Projecti
 		case ProjectionFisheye:
 			prj = StelProjectorP(new StelProjectorFisheye(modelViewMat));
 			break;
-		case ProjectionAitoff:
-			prj = StelProjectorP(new StelProjectorAitoff(modelViewMat));
+		case ProjectionHammer:
+			prj = StelProjectorP(new StelProjectorHammer(modelViewMat));
 			break;
 		case ProjectionCylinder:
 			prj = StelProjectorP(new StelProjectorCylinder(modelViewMat));
