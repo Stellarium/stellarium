@@ -175,7 +175,7 @@ void SearchDialog::styleChanged()
 void SearchDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	setSimpleStyle(false);
+	setSimpleStyle(true);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onTextChanged(const QString&)));
 	connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
