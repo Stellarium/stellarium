@@ -1,13 +1,13 @@
-0.10.2 [in development]
+0.10.2 [2009-03-06]
 Based on Qt 4.5.
 Display constellations lines using nicely distorted arcs.
 Fixed GUI problems when creating a new location.
 Fixed the grid lines wrap around at the discontinuities in cylindrical and Mercator projection.
 Hide the planet computation problems after year 80608.
 Use the Qt raster engine by default. This fixes mac rendering bugs and speeds up greatly the GUI rendering.
-Added possibility to input manual position in the search window.
 Improved management of intersection of viewports with large FOV and projections with singularities.
 Added Hammer-Aitoff projection allowing full sky overview.
+Fixed various bugs.
 
 0.10.1 [2009-02-02]
 Added reset all config options button.
