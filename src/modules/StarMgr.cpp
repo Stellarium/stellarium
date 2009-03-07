@@ -544,26 +544,26 @@ void StarMgr::draw(StelCore* core)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
 
-    // If stars are turned off don't waste time below
-    // projecting all stars just to draw disembodied labels
-    if (!starsFader.getInterstate())
+	// If stars are turned off don't waste time below
+	// projecting all stars just to draw disembodied labels
+	if (!starsFader.getInterstate())
 		return;
 
 	int maxSearchLevel = getMaxSearchLevel();
 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxSearchLevel)->search(prj->getViewportConvexPolygon(),maxSearchLevel);
 
-    // Set temporary static variable for optimization
-    const float names_brightness = labelsFader.getInterstate() * starsFader.getInterstate();
+	// Set temporary static variable for optimization
+	const float names_brightness = labelsFader.getInterstate() * starsFader.getInterstate();
 
 	// Prepare openGL for drawing many stars
 	StelPainter* sPainter = new StelPainter(prj);
 	skyDrawer->preDrawPointSource(sPainter);
 	Q_ASSERT(sPainter);
 
-    // draw all the stars of all the selected zones
-    float rcmag_table[2*256];
+	// draw all the stars of all the selected zones
+	float rcmag_table[2*256];
 	
-    for (ZoneArrayMap::const_iterator it(zoneArrays.begin()); it!=zoneArrays.end();++it)
+	for (ZoneArrayMap::const_iterator it(zoneArrays.begin()); it!=zoneArrays.end();++it)
 	{
 		const float mag_min = 0.001f*it->second->mag_min;
 		const float k = (0.001f*it->second->mag_range)/it->second->mag_steps;
@@ -599,15 +599,16 @@ void StarMgr::draw(StelCore* core)
 			it->second->draw(zone, true, rcmag_table, core, maxMagStarName, names_brightness, starFont);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it->first);(zone = it1.next()) >= 0;)
 			it->second->draw(zone, false, rcmag_table, core, maxMagStarName,names_brightness, starFont);
-    }
-    exit_loop:
+	}
+	exit_loop:
 	// Finish drawing many stars
 	skyDrawer->postDrawPointSource();
 	
 	delete sPainter;
 	sPainter = NULL;
 	
-	drawPointer(prj, nav);
+	if (objectMgr->getFlagSelectedObjectPointer())
+		drawPointer(prj, nav);
 }
 
 
