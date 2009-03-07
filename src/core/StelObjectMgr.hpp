@@ -113,7 +113,9 @@ public:
 	QList<StelObjectP> getSelectedObject(const QString& type);
 
 	//! Set whether a pointer is to be drawn over selected object.
-	void setFlagSelectedObjectPointer(bool b) { objectPointerVisibility = b; }
+	void setFlagSelectedObjectPointer(bool b) {objectPointerVisibility=b;}
+	//! Get whether a pointer is to be drawn over selected object.
+	bool getFlagSelectedObjectPointer(void) {return objectPointerVisibility;}
 	
 	//! Find any kind of object by its translated name.
 	StelObjectP searchByNameI18n(const QString &name) const;
