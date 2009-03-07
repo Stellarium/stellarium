@@ -801,7 +801,8 @@ void SolarSystem::draw(StelCore* core)
 		++iter;
 	}
 
-	drawPointer(core);
+	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
+		drawPointer(core);
 }
 
 void SolarSystem::setStelStyle(const StelStyle& style)

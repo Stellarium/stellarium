@@ -292,3 +292,4 @@ QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, uns
 	result.sort();
 	return result;
 }
+
