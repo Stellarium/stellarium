@@ -155,8 +155,6 @@ public slots:
 	void setHideGui(bool b);
 	//! get the current visible status of the toolbars
 	bool getHideGui();
-	//! toggle the status of the toolbars
-	void toggleHideGui(void) {setHideGui(!getHideGui());}
 	
 	void quitStellarium();
 

@@ -45,6 +45,7 @@
 #include "Planet.hpp"
 #include "StelLocationMgr.hpp"
 
+#include <QAction>
 #include <QFile>
 #include <QFileInfo>
 #include <QSet>
@@ -252,9 +253,7 @@ void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QSt
 
 void StelMainScriptAPI::setHideGui(bool b)
 {
-	StelGui* gui = GETSTELMODULE(StelGui);
-	Q_ASSERT(gui);
-	gui->setHideGui(b);
+	GETSTELMODULE(StelGui)->getGuiActions("actionToggle_GuiHidden_Global")->setChecked(b);
 }
 
 void StelMainScriptAPI::setMinFps(float m) 
