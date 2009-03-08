@@ -228,7 +228,6 @@ void StelGui::init()
 	addGuiActions("actionAutoHideHorizontalButtonBar", N_("Auto hide horizontal button bar"), "", group, true, false);
 	addGuiActions("actionAutoHideVerticalButtonBar", N_("Auto hide vertical button bar"), "", group, true, false);
 	addGuiActions("actionToggle_GuiHidden_Global", N_("Toggle visibility of toolbars"), "Ctrl+T", group, true, false);
-
 	
 	//QMetaObject::connectSlotsByName(Form);
 	
@@ -341,8 +340,9 @@ void StelGui::init()
 	connect(&searchDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Search_Window_Global"), SLOT(setChecked(bool)));
 	
 	connect(getGuiActions("actionSave_Screenshot_Global"), SIGNAL(triggered()), &StelMainGraphicsView::getInstance(), SLOT(saveScreenShot()));
+
 	getGuiActions("actionToggle_GuiHidden_Global")->setChecked(false);
-	connect(getGuiActions("actionToggle_GuiHidden_Global"), SIGNAL(triggered()), this, SLOT(toggleHideGui()));
+	connect(getGuiActions("actionToggle_GuiHidden_Global"), SIGNAL(toggled(bool)), this, SLOT(setHideGui(bool)));
 
 	connect(getGuiActions("actionHorizontal_Flip"), SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlipHorz(bool)));
 	getGuiActions("actionHorizontal_Flip")->setChecked(StelApp::getInstance().getCore()->getFlipHorz());
@@ -940,6 +940,7 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 
 void StelGui::setHideGui(bool b)
 {
+	qDebug() << "StelGui::setHideGui -- " << b;
 	buttonBar->setVisible(!b);
 	winBar->setVisible(!b);
 	autoHidebts->setVisible(!b);
@@ -950,3 +951,4 @@ bool StelGui::getHideGui(void)
 {
 	return getGuiActions("actionToggle_GuiHidden_Global")->isChecked();
 }
+
