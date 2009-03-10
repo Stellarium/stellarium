@@ -253,9 +253,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 *************************************************************************/
 StelApp::~StelApp()
 {
-#if QT_VERSION >= 0x040500
 	qDebug() << qPrintable(QString("Downloaded %1 files (%2 kbytes) in a session of %3 sec (average of %4 kB/s + %5 files from cache (%6 kB)).").arg(nbDownloadedFiles).arg(totalDownloadedSize/1024).arg(getTotalRunTime()).arg((double)(totalDownloadedSize/1024)/getTotalRunTime()).arg(nbUsedCache).arg(totalUsedCacheSize/1024));
-#endif
 	
 	if (scriptMgr->scriptIsRunning())
 		scriptMgr->stopScript();
@@ -286,10 +284,8 @@ StelApp::~StelApp()
 	singleton = NULL;
 }
 
-#if QT_VERSION >= 0x040500
 #include <QNetworkDiskCache>
 #include <QDesktopServices>
-#endif
 
 /*************************************************************************
  Return the full name of stellarium, i.e. "stellarium 0.9.0"
@@ -331,7 +327,6 @@ void StelApp::writeLog(QString msg)
 void StelApp::init()
 {
 	networkAccessManager = new QNetworkAccessManager(this);
-#if QT_VERSION >= 0x040500
 	// Activate http cache if Qt version >= 4.5
 	QNetworkDiskCache* cache = new QNetworkDiskCache(networkAccessManager);
 	QString cachePath = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
@@ -342,7 +337,6 @@ void StelApp::init()
 	qDebug() << "Cache directory is: " << cachePath;
 	cache->setCacheDirectory(cachePath);
 	networkAccessManager->setCache(cache);
-#endif
 	connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(reportFileDownloadFinished(QNetworkReply*)));
 	
 	// Stel Object Data Base manager
@@ -1304,11 +1298,7 @@ double StelApp::getTotalRunTime()
 
 void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
 {
-#if QT_VERSION >= 0x040500
 	bool fromCache = reply->attribute(QNetworkRequest::SourceIsFromCacheAttribute).toBool();
-#else
-	bool fromCache = false;
-#endif
 	if (fromCache)
 	{
 		++nbUsedCache;
