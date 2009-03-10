@@ -181,12 +181,6 @@ void StelAppGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent* event)
 	if (event->isAccepted())
 		return;
 	
-	if (activeWindow()!=0 && activeWindow()->isUnderMouse())
-	{
-		event->accept();
-		return;
-	}
-	
 	int x = (int)event->scenePos().x();
 	int y = (int)event->scenePos().y();
 	y = (int)height() - 1 - y;
@@ -203,12 +197,6 @@ void StelAppGraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 	if (event->isAccepted())
 		return;
 
-	if (activeWindow()!=0 && activeWindow()->isUnderMouse())
-	{
-		event->accept();
-		return;
-	}
-	
 	int x = (int)event->scenePos().x();
 	int y = (int)event->scenePos().y();
 	y = (int)height() - 1 - y;
@@ -224,12 +212,6 @@ void StelAppGraphicsScene::wheelEvent(QGraphicsSceneWheelEvent* event)
 	thereWasAnEvent(); // Refresh screen ASAP
 	if (event->isAccepted())
 		return;
-	
-	if (activeWindow()!=0 && activeWindow()->isUnderMouse())
-	{
-		event->accept();
-		return;
-	}
 	
 	int x = (int)event->pos().x();
 	int y = (int)event->pos().y();
@@ -247,12 +229,6 @@ void StelAppGraphicsScene::keyPressEvent(QKeyEvent* event)
 	if (event->isAccepted())
 		return;
 	
-	if (activeWindow()!=0)
-	{
-		event->accept();
-		return;
-	}
-	
 	StelApp::getInstance().handleKeys(event);
 }
 
@@ -262,12 +238,6 @@ void StelAppGraphicsScene::keyReleaseEvent(QKeyEvent* event)
 	QGraphicsScene::keyReleaseEvent(event);
 	if (event->isAccepted())
 		return;
-	
-	if (activeWindow()!=0)
-	{
-		event->accept();
-		return;
-	}
 	
 	StelApp::getInstance().handleKeys(event);
 }
