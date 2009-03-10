@@ -191,14 +191,14 @@ inline bool intersect(const ConvexPolygon& cp1, const ConvexPolygon& cp2)
 //! A Disk is defined by a single HalfSpace
 struct Disk : HalfSpace
 {
-    //! Constructor
-	//! @param n a unit vector indicating the the disk center
-    //! @param r the disk radius in radian
+    //! Constructor.
+	//! @param an a unit vector indicating the the disk center.
+    //! @param r the disk radius in radian.
     Disk(const Vec3d& an, double r) : HalfSpace(an, std::cos(r))
     {}
 };
 
-//! We rewrite the intersect for ConvexPolygon
+//! We rewrite the intersect for ConvexPolygon.
 inline bool intersect(const ConvexS& cp1, const ConvexPolygon& cp2)
 {
 	Q_ASSERT(0);

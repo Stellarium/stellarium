@@ -178,7 +178,6 @@ void StelAppGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
 	QGraphicsScene::mousePressEvent(event);
 	thereWasAnEvent(); // Refresh screen ASAP
-	StelMainGraphicsView::getInstance().activateKeyActions(!(hasFocus() && focusItem()!=0));
 	if (event->isAccepted())
 		return;
 	
@@ -201,7 +200,6 @@ void StelAppGraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
 	QGraphicsScene::mouseReleaseEvent(event);
 	thereWasAnEvent(); // Refresh screen ASAP
-	StelMainGraphicsView::getInstance().activateKeyActions(!(hasFocus() && focusItem()!=0));
 	if (event->isAccepted())
 		return;
 
@@ -246,7 +244,6 @@ void StelAppGraphicsScene::keyPressEvent(QKeyEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
 	QGraphicsScene::keyPressEvent(event);
-	StelMainGraphicsView::getInstance().activateKeyActions(!(hasFocus() && focusItem()!=0));
 	if (event->isAccepted())
 		return;
 	
@@ -263,7 +260,6 @@ void StelAppGraphicsScene::keyReleaseEvent(QKeyEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
 	QGraphicsScene::keyReleaseEvent(event);
-	StelMainGraphicsView::getInstance().activateKeyActions(!(hasFocus() && focusItem()!=0));
 	if (event->isAccepted())
 		return;
 	
