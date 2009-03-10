@@ -8,7 +8,7 @@ SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 PROJECT(Stellarium)
 SET(STELLARIUM_MAJOR "0")
 SET(STELLARIUM_MINOR "10")
-SET(STELLARIUM_PATCH "2")
+SET(STELLARIUM_PATCH "3")
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
 SET(PACKAGE stellarium)
 
@@ -53,7 +53,7 @@ CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
 
 ########### Others ###########
 # Activate translation with gettext
-SET(RELEASE_BUILD 0 CACHE BOOL "Flag this build as an official release, 1 or 0.")
+SET(RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release, 1 or 0.")
 SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be supported, option are: 1 or 0.")
 # Generate python wrappers
 SET(GENERATE_PYTHON_WRAPPERS 0 CACHE BOOL "Define whether python wrapper should be build using SIP, options are: 1 or 0.")
@@ -79,7 +79,7 @@ ENDIF()
 
 ########### Find packages ###########
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-SET(QT_MIN_VERSION "4.4.2")
+SET(QT_MIN_VERSION "4.5.0")
 FIND_PACKAGE(Qt4 REQUIRED)
 SET(QT_USE_QTOPENGL TRUE)
 SET(QT_USE_QTSCRIPT TRUE)

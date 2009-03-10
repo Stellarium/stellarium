@@ -207,28 +207,3 @@ class QProgressBar* StelMainGraphicsView::addProgressBar()
 	StelGui* gui = GETSTELMODULE(StelGui);
 	return gui->addProgressBar();
 }
-
-//! Activate all the QActions associated to the widget
-void StelMainGraphicsView::activateKeyActions(bool b)
-{
-	QList<QAction*> globalActions = findChildren<QAction*>(QRegExp("action.*_Global"));
-	if (b==false)
-	{
-		foreach (QAction* a, actions())
-		{
-			// Special case for key actions which are named Global
-			if (!globalActions.contains(a))
-				removeAction(a);
-		}
-	}
-	else
-	{
-		foreach (QAction* a, findChildren<QAction*>())
-		{
-			// Special case for key actions which are named Global
-			if (!globalActions.contains(a))
-				addAction(a);
-		}
-	}
-}
-
