@@ -52,9 +52,6 @@ public:
 	//! When the progress bar is not used anymore, just delete it.
 	//! @return a pointer to the progress bar
 	class QProgressBar* addProgressBar();
-	
-	//! Activate all the QActions associated to the widget
-	void activateKeyActions(bool b);
 
 public slots:
 
