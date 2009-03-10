@@ -36,10 +36,8 @@
 #include <QNetworkReply>
 #include <stdexcept>
 
-// #if QT_VERSION >= 0x040500
 // #include <QNetworkDiskCache>
 // #include <QDesktopServices>
-// #endif
 
 // Init statics
 QNetworkAccessManager* MultiLevelJsonBase::networkAccessManager = NULL;
@@ -49,7 +47,6 @@ QNetworkAccessManager& MultiLevelJsonBase::getNetworkAccessManager()
 	if (networkAccessManager==NULL)
 	{
 		networkAccessManager = new QNetworkAccessManager(&StelApp::getInstance());
-// #if QT_VERSION >= 0x040500
 // 		QNetworkDiskCache* cache = new QNetworkDiskCache(networkAccessManager);
 // 		QString cachePath = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
 // 		if (cachePath.isEmpty())
@@ -58,7 +55,6 @@ QNetworkAccessManager& MultiLevelJsonBase::getNetworkAccessManager()
 // 		}
 // 		cache->setCacheDirectory(cachePath+"/JSONCache");
 // 		networkAccessManager->setCache(cache);
-// #endif
 		connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), &StelApp::getInstance(), SLOT(reportFileDownloadFinished(QNetworkReply*)));
 	}
 	return *networkAccessManager;
