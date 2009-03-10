@@ -864,7 +864,7 @@ bool StelScriptMgr::stopScript(void)
 
 void StelScriptMgr::scriptEnded()
 {
-	delete thread;
+	thread->deleteLater();
 	thread=NULL;
 	if (engine.hasUncaughtException())
 	{
