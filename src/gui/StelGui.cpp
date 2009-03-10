@@ -158,7 +158,7 @@ void StelGui::init()
 	addGuiActions("actionShow_Equatorial_J2000_Grid", N_("Equatorial J2000 grid"), "", group, true, false, "viewing/flag_equatorial_J2000_grid");
 	addGuiActions("actionShow_Ecliptic_Line", N_("Ecliptic line"), ",", group, true, false, "viewing/flag_ecliptic_line");
 	addGuiActions("actionShow_Equator_Line", N_("Equator line"), ".", group, true, false, "viewing/flag_equator_line");
-	addGuiActions("actionShow_Meridian_Line", N_("Meridian line"), "", group, true, false, "viewing/flag_meridian_line");
+	addGuiActions("actionShow_Meridian_Line", N_("Meridian line"), ";", group, true, false, "viewing/flag_meridian_line");
 	addGuiActions("actionShow_Cardinal_Points", N_("Cardinal points"), "Q", group, true, false, "viewing/flag_cardinal_points");
 
 	addGuiActions("actionShow_Ground", N_("Ground"), "G", group, true, false, "landscape/flag_landscape");
