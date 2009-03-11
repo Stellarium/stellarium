@@ -20,7 +20,7 @@
 #define _STELAUDIOMGR_HPP_
 
 #ifdef HAVE_QT_PHONON
-#include <phonon>
+#include <phonon/phonon>
 #endif
 
 #include <QObject>
