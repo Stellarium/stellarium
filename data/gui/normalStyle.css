@@ -394,11 +394,11 @@ QTabBar::tab {
 	font: bold;
 	background: rgba(0, 0, 0, 0%);
 	border: 1px solid rgba(0, 0, 0, 0%);
-	border-bottom: 0px;
-	border-top: 0px;
+	border-top: none;
+	border-bottom: none;
 	min-width: 10ex;
 	min-height: 56px;
-	padding: 6px 0px 0px 0px;
+	padding: 1px 5px 1px -3px;
 	color: rgb(174, 174, 175);
 	font-size: 12px;
 	margin-left: 5px;
