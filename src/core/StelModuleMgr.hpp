@@ -67,10 +67,6 @@ public:
 	
 	//! Get the list of all the currently registered modules
 	QList<StelModule*> getAllModules() {return modules.values();}
-	
-	//! Generate properly sorted calling lists for each action (e,g, draw, update)
-	//! according to modules orders dependencies
-	void generateCallingLists();
 
 	//! Get the list of modules in the correct order for calling the given action
 	const QList<StelModule*>& getCallOrders(StelModule::StelModuleActionName action)
@@ -95,6 +91,10 @@ public:
 	static QList<PluginDescriptor> getPluginsList();
 
 private:
+	//! Generate properly sorted calling lists for each action (e,g, draw, update)
+	//! according to modules orders dependencies
+	void generateCallingLists();
+	
 	//! The main module list associating name:pointer
 	QMap<QString, StelModule*> modules;
 	
