@@ -440,9 +440,6 @@ void StelApp::init()
 	setVisionModeNight(false);
 	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
 	
-	// Generate dependency Lists for all modules
-	moduleMgr->generateCallingLists();
-	
 	updateI18n();
 	
 	scriptMgr = new StelScriptMgr(this);
