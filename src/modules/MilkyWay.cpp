@@ -94,7 +94,8 @@ void MilkyWay::draw(StelCore* core)
 	// Bound a maximum luminance
 	aLum = qMin(0.38, aLum*2.);
 	
-	c*=aLum;
+	// intensity of 1.0 is "proper", but allow boost for dim screens
+	c*=aLum*intensity;
 	
 	if (c[0]<0) c[0]=0;
 	if (c[1]<0) c[1]=0;
