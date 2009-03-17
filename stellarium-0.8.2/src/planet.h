@@ -123,7 +123,8 @@ public:
 		   bool flag_cloud,
 		   const string& tex_cloud_name,
 		   const string& tex_shadow_cloud_name,
-		   const string& tex_norm_cloud_name);
+		   const string& tex_norm_cloud_name,
+		   bool flag_noise);	
 
     ~Planet();
 
@@ -311,9 +312,11 @@ protected:
 	Vec3f eye_sun;
 	ProgramObject mProgramObject;
 	ProgramObject mCloudProgramObject;
+	ProgramObject mNoiseProgramObject;
 	bool mBumpEnable;
 	bool mNightEnable;
 	bool mCloudEnable;
+	bool mNoiseEnable;
 
 	float big_halo_size;			// Halo size on screen
 

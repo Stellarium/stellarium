@@ -23,6 +23,7 @@
 #include "BumpShader.h"
 #include "NightShader.h"
 #include "CloudShader.h"
+#include "NoiseShader.h"
 
 #include "planet.h"
 #include "navigator.h"
@@ -64,7 +65,8 @@ Planet::Planet(Planet *parent,
 			   bool flag_cloud,
 			   const string& tex_cloud_name,
 			   const string& tex_shadow_cloud_name,
-			   const string& tex_norm_cloud_name) :
+			   const string& tex_norm_cloud_name,
+			   bool flag_noise) :
 		englishName(englishName), flagHalo(flagHalo), eye_sun(0.0f, 0.0f, 0.0f),
         flag_lighting(flag_lighting),
         radius(radius), one_minus_oblateness(1.0-oblateness),
@@ -75,7 +77,8 @@ Planet::Planet(Planet *parent,
         lastJD(J2000), last_orbitJD(0), deltaJD(JD_SECOND), orbit_cached(0),
         coord_func(coord_func), osculating_func(osculating_func),
         parent(parent), hidden(hidden),	stopDayMotion(false), restoreDayTimeDuration(3000.0), 
-		startDayMotionTime(-1.0), mBumpEnable(flag_bump), mNightEnable(flag_night), mCloudEnable(flag_cloud)
+		startDayMotionTime(-1.0), mBumpEnable(flag_bump), mNightEnable(flag_night), mCloudEnable(flag_cloud),
+		mNoiseEnable(flag_noise)
 {
 	if (parent) parent->satellites.push_back(this);
 	ecliptic_pos=Vec3d(0.,0.,0.);
@@ -103,6 +106,10 @@ Planet::Planet(Planet *parent,
 		tex_shadow_cloud = new s_texture(tex_shadow_cloud_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
 		tex_norm_cloud = new s_texture(tex_norm_cloud_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
 		mCloudProgramObject.attachShader(CloudShader::instance());
+	}
+	if(mNoiseEnable)
+	{
+		mNoiseProgramObject.attachShader(NoiseShader::instance());
 	}
 
 	// 60 day trails
@@ -793,6 +800,13 @@ void Planet::draw_sphere(/*const*/ Projector* prj, const Mat4d& mat, float scree
 			mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)), 0, true);
 		mCloudProgramObject.disable();
 		glDisable(GL_BLEND);
+	}
+	if(mNoiseEnable)
+	{
+		mNoiseProgramObject.enable();
+		prj->sSphere((radius * 1.002)*sphere_scale, one_minus_oblateness, nb_facet, nb_facet,
+			mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)), 0, true);
+		mNoiseProgramObject.disable();
 	}
 
 	glDisable(GL_CULL_FACE);

@@ -375,7 +375,8 @@ void SolarSystem::load(const string& planetfile)
 	  pd.get_boolean(secname, "cloud", false), 
 	  pd.get_str(secname, "tex_cloud", ""), 
 	  pd.get_str(secname, "tex_shadow_cloud", ""), 
-	  pd.get_str(secname, "tex_norm_cloud", ""));
+	  pd.get_str(secname, "tex_norm_cloud", ""),
+	  pd.get_boolean(secname,"noise",false));
 
     //kornyakov&serkin: for 3d objects
    // strcpy(p->object.path, pd.get_str(secname, "3dmodel").c_str());
