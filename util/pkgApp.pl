@@ -62,7 +62,7 @@ sub recurse {
 
 		my $not_existed = 1;
 		if ( ! -e $fwPath ) {
-		    my $c = "cp -R -p $absname $frameworks_dir/$fwname";
+		    my $c = "cp -RP -p $absname $frameworks_dir/$fwname";
 		    `$c`;
 		} else {
 		    $not_existed = 0;
@@ -94,7 +94,7 @@ sub recurse {
 
 		my $not_existed = 1;
 		if ( ! -e $fwPath ) {
-		    my $c = "cp $absname $frameworks_dir/$current_arch";
+		    my $c = "cp -P $absname $frameworks_dir/$current_arch";
 		    `$c`;
 		} else {
 		    $not_existed = 0;
