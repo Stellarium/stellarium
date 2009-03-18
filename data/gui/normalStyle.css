@@ -739,10 +739,21 @@ QFileDialog {
 	background: rgb(48, 49, 52);
 }
 
+QWidget#fileLoading
+{
+        background-color:transparent;
+}
+
 QWidget#resourceInformationView 
 {
 	background-color:transparent;
 }
+
+QWidget#sourceInformationInput
+{
+        background-color:transparent;
+}
+
 
 QWidget#resourceInformationEdition
 {
