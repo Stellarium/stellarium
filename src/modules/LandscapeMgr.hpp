@@ -179,6 +179,8 @@ public slots:
 	
 	//! Set the light pollution following the Bortle Scale
 	void setAtmosphereBortleLightPollution(int bIndex);
+	//! Get the light pollution following the Bortle Scale
+	int getAtmosphereBortleLightPollution(void);
 	
 	//! Set the rotation of the landscape about the z-axis.
 	//! This is intended for special uses such as when the landscape consists of
