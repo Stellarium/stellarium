@@ -29,6 +29,7 @@
 #include "init_parser.h"
 #include "navigator.h"
 #include "projector.h"
+#include "shuttle.h"
 
 //kornyakov: for 3d-objects
 #include <GL\glut.h>
@@ -162,11 +163,11 @@ void init3dsObject(Object3DS* obj)
 
 
 // Init and load the solar system data
-void SolarSystem::load(const string& planetfile)
+void SolarSystem::load(const string& dataDir, const string& planetfile)
 {
   cout << "Loading Solar System data...";
   InitParser pd;	// The Planet data ini file parser
-  pd.load(planetfile);
+  pd.load(dataDir + planetfile);
 
   int nbSections = pd.get_nsec();
   for (int i = 0;i<nbSections;++i)
@@ -355,7 +356,11 @@ void SolarSystem::load(const string& planetfile)
     }
 
     // Create the Planet and add it to the list
-    Planet* p = new Planet(parent,
+
+    Planet* p;
+    if (englishName == "Shuttle")
+    {
+        p = new Shuttle(parent,
       englishName,
       pd.get_boolean(secname, "halo"),
       pd.get_boolean(secname, "lighting"),
@@ -376,7 +381,34 @@ void SolarSystem::load(const string& planetfile)
 	  pd.get_str(secname, "tex_cloud", ""), 
 	  pd.get_str(secname, "tex_shadow_cloud", ""), 
 	  pd.get_str(secname, "tex_norm_cloud", ""),
-	  pd.get_boolean(secname,"noise",false));
+	  pd.get_boolean(secname,"noise",false),
+      this, dataDir, pd.get_str(secname, "trajectory_file"));
+    }
+    else
+    {
+        p = new Planet(parent,
+      englishName,
+      pd.get_boolean(secname, "halo"),
+      pd.get_boolean(secname, "lighting"),
+      pd.get_double(secname, "radius")/AU,
+      pd.get_double(secname, "oblateness", 0.0),
+      StelUtility::str_to_vec3f(pd.get_str(secname, "color").c_str()),
+      pd.get_double(secname, "albedo"),
+      pd.get_str(secname, "tex_map"),
+      pd.get_str(secname, "tex_halo"),
+      posfunc,osculating_func,
+      pd.get_boolean(secname, "hidden", 0),
+	  pd.get_boolean(secname, "bump", false), 
+	  pd.get_str(secname, "tex_norm", ""),
+	  pd.get_boolean(secname, "night",false), 
+	  pd.get_str(secname, "tex_night", ""), 
+	  pd.get_str(secname, "tex_specular", ""),
+	  pd.get_boolean(secname, "cloud", false), 
+	  pd.get_str(secname, "tex_cloud", ""), 
+	  pd.get_str(secname, "tex_shadow_cloud", ""), 
+	  pd.get_str(secname, "tex_norm_cloud", ""),
+	  pd.get_boolean(secname, "noise", false));
+	}
 
     //kornyakov&serkin: for 3d objects
    // strcpy(p->object.path, pd.get_str(secname, "3dmodel").c_str());

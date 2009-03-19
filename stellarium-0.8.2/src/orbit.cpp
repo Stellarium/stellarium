@@ -244,7 +244,8 @@ Vec3d EllipticalOrbit::positionAtTime(double t) const
 void EllipticalOrbit::positionAtTimevInVSOP87Coordinates(double JD, double* v) const
 {
   Vec3d pos = positionAtTime(JD);
-  v[0] = rotate_to_vsop87[0]*pos[2] + rotate_to_vsop87[1]*pos[0] + rotate_to_vsop87[1]*pos[1];
+  // vinogradov : fix rotate_to_vsop87[1]*pos[1] -> rotate_to_vsop87[2]*pos[1]
+  v[0] = rotate_to_vsop87[0]*pos[2] + rotate_to_vsop87[1]*pos[0] + rotate_to_vsop87[2]*pos[1];
   v[1] = rotate_to_vsop87[3]*pos[2] + rotate_to_vsop87[4]*pos[0] + rotate_to_vsop87[5]*pos[1];
   v[2] = rotate_to_vsop87[6]*pos[2] + rotate_to_vsop87[7]*pos[0] + rotate_to_vsop87[8]*pos[1];
 }

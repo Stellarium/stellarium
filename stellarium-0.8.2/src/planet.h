@@ -126,7 +126,7 @@ public:
 		   const string& tex_norm_cloud_name,
 		   bool flag_noise);	
 
-    ~Planet();
+    virtual ~Planet();
 
   double getRadius(void) const {return radius;}
 
@@ -149,7 +149,7 @@ public:
 
 	// Compute the position in the parent Planet coordinate system
 	void computePositionWithoutOrbits(const double date);
-	void compute_position(const double date);
+	virtual void compute_position(const double date);
 
 	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
 	void compute_trans_matrix(double date);
@@ -179,6 +179,10 @@ public:
 
 	// Return the heliocentric ecliptical position
 	Vec3d get_heliocentric_ecliptic_pos() const;
+
+    //ITLab:
+    Vec3d get_ecliptic_pos(double date) const;
+    Vec3d get_heliocentric_ecliptic_pos(double date) const;
 
 	// Compute the distance to the given position in heliocentric coordinate (in AU)
 	double compute_distance(const Vec3d& obs_helio_pos);

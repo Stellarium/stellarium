@@ -17,9 +17,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "freetype", "freetype\freetype.vcproj", "{D0087BEB-3E7B-4004-BD4A-E4D071CF8D92}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "zlib\zlib.vcproj", "{3A704DFE-5D56-45F8-B7C5-6D0B0C0E3182}"
-	ProjectSection(ProjectDependencies) = postProject
-		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68} = {81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpng", "lpng\libpng.vcproj", "{4E2A7F9D-61EA-438D-8313-D41029238F28}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -37,8 +34,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib3ds", "..\lib3ds-1.3.0\msvc8\lib3ds.vcproj", "{9CF2B398-9087-4D33-90EB-0320F42C78F4}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL_image", "..\SDL_image-1.2.6\VisualC\SDL_image.vcproj", "{571C8E24-AB93-4E18-B8E6-DF3410A6DC4E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7FAF0E58-7F96-4A98-A4E9-9E0A9D7F9AA6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68} = {81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

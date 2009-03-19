@@ -523,6 +523,33 @@ Vec3d Planet::get_heliocentric_ecliptic_pos() const
 	return pos;
 }
 
+Vec3d Planet::get_ecliptic_pos(double date) const
+{
+    Vec3d pos;
+    coord_func(date, pos);
+    return pos;
+}
+
+Vec3d Planet::get_heliocentric_ecliptic_pos(double date) const
+{
+    Vec3d pos;
+    coord_func(date, pos);
+
+    const Planet *p = parent;
+	while (p!=NULL
+	        && p->parent!=NULL)
+	{		
+		pos += p->get_ecliptic_pos(date);
+		p = p->parent;
+		if (p->parent)  // What's that?? :)
+		{
+			// a satellite has no satellites
+			exit(128);
+		}
+	}
+	return pos;
+}
+
 // Compute the distance to the given position in heliocentric coordinate (in AU)
 double Planet::compute_distance(const Vec3d& obs_helio_pos)
 {

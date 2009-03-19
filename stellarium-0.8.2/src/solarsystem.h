@@ -48,7 +48,8 @@ public:
 			        bool flag_point);
 
   // Load the bodies data from a file
-	void load(const string& planetfile);
+    // Vinogradov : divide by part data directory and ini file
+	void load(const string& dataDir, const string& planetfile);
 
 	//! @brief Update i18 names from english names according to passed translator
 	//! The translation is done using gettext with translated strings defined in translations.h

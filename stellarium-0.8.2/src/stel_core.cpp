@@ -162,7 +162,7 @@ void StelCore::init(const InitParser& conf)
     projection->setMaskType(projMaskType);
 
     // Init the solar system first
-    if (firstTime) ssystem->load(getDataDir() + "ssystem.ini");
+    if (firstTime) ssystem->load(getDataDir(), "ssystem.ini");
 
     ssystem->setFont(FontSizeSolarSystem, baseFontFile);
     setPlanetsScale(getStarScale());
