@@ -1,4 +1,5 @@
 #include "trajectory.h"
+#include "stellastro.h"
 #include "float.h"
 #include "vecmath.h"
 #include <fstream>
@@ -8,7 +9,7 @@ using namespace std;
 
 namespace
 {
-	const double cPi = 3.14159265358979323846f;
+	const double cPi = 3.14159265358979323846f;	
 
 	double ctg(double x)
 	{
@@ -36,9 +37,9 @@ namespace MotionTestImpl
 		//char buf[bufSize];
 		string buf;
 		GCPtr<CoordCalc> posCalc;
-		while (!file.eof())
+		while (file >> buf)
 		{
-			file >> buf;
+			//file >> buf;
 
 			
 			if (buf[0] == '#')
@@ -53,7 +54,7 @@ namespace MotionTestImpl
 				string planet;
 				file >> buf >> planet >> radiusA >> radiusB >> period >> phi >> thet >> psi >> startAngle;
 				Planet* planetPtr = SS->searchByEnglishName(planet);
-				GCPtr<CoordCalc> ellipseCalc = new EllipseCoordCalc(radiusA, radiusB, period, phi, thet, psi, startAngle);
+				GCPtr<CoordCalc> ellipseCalc = new EllipseCoordCalc(radiusA, radiusB, period / coeff, phi, thet, psi, startAngle);
                 GCPtr<CoordCalc> planetCoordCalc = new PlanetCoordCalc(planetPtr);
 				posCalc = new LocalSystemCoordCalc(ellipseCalc, planetCoordCalc);
 				
@@ -62,11 +63,24 @@ namespace MotionTestImpl
 			} 
 			else if (buf == "straight")
 			{
-				double x, y, z;
-				string planet;
-				file >> buf >> planet >> x >> y >> z;
+				double x, y, z, vel;
+				string planet, direction;
+				file >> buf >> direction >> planet >> x >> y >> z >> vel;
 				Planet* planetPtr = SS->searchByEnglishName(planet);
-				GCPtr<CoordCalc> straightCalc = new StraightCoordCalc(Vec3d(x, y, z));
+				GCPtr<CoordCalc> straightCalc;
+				if (direction == "to")
+				{
+					straightCalc = new StraightCoordCalc(Vec3d(x, y, z), vel, 0.0f, 1.0f );
+				}
+				else if (direction == "from")
+				{
+					straightCalc = new StraightCoordCalc(Vec3d(x, y, z), vel, 0.0f, -1.0f );
+				}
+				else
+				{
+					throw invalid_argument("Bad trajectory file format");
+				}
+				
                 GCPtr<CoordCalc> planetCoordCalc = new PlanetCoordCalc(planetPtr);
 				posCalc = new LocalSystemCoordCalc(straightCalc, planetCoordCalc);
 				
@@ -79,13 +93,16 @@ namespace MotionTestImpl
 				file >> buf >> x;
                 
                 mTrajectory.push_back( FindOrbit(buf)->GetCoordFunc() );
-                mDuration.push_back(x);
+				//double get_julian_day(const ln_date * date);
+                mDuration.push_back(x / coeff);
 			}
 			else if (buf == "pass")
 			{
 				double duration;
 				double delta;
 				file >> buf >> duration >> delta;
+				
+				duration /= coeff;
 
 				// »щем эллептическую орбиту, на которую будем переходить 
 				GCPtr<CoordCalc> orbit = FindOrbit(buf)->GetCoordFunc();
@@ -148,6 +165,8 @@ namespace MotionTestImpl
 			{
 				double duration;
 				file >> duration;
+				
+				duration /= coeff;
 
 				double t1 = 0.0f;
 				for(vector<double>::const_iterator it = mDuration.begin(); it != mDuration.end(); ++it)
@@ -156,11 +175,41 @@ namespace MotionTestImpl
 				GCPtr<CoordCalc> posCalc = new StaticCoordCalc(mTrajectory.back()->calcCoord(t1, 0.0));
 				mTrajectory.push_back(posCalc);
 				mDuration.push_back(duration);
+			}	
+			else if (buf == "durstraight")
+			{
+				double x, y, z, dur;
+				string planet, direction;
+				file >> buf >> direction >> planet >> x >> y >> z >> dur;
+
+				dur /= coeff;
+
+				Planet* planetPtr = SS->searchByEnglishName(planet);
+				GCPtr<CoordCalc> straightCalc;
+				if (direction == "to")
+				{
+					straightCalc = new DurationStraightCoordCalc(Vec3d(x, y, z), dur, 0.0f, 1.0f );
+				}
+				else if (direction == "from")
+				{
+					straightCalc = new DurationStraightCoordCalc(Vec3d(x, y, z), dur, 0.0f, -1.0f );
+				}
+				else
+				{
+					throw invalid_argument("Bad trajectory file format");
+				}
+				
+                GCPtr<CoordCalc> planetCoordCalc = new PlanetCoordCalc(planetPtr);
+				posCalc = new LocalSystemCoordCalc(straightCalc, planetCoordCalc);
+				
+				GCPtr<Orbit> orbit = new Orbit(buf, posCalc);
+				mOrbits.push_back (orbit);
 			}
 			else
 			{
 				throw invalid_argument("Bad trajectory file format");
 			}
+
 		}
 		/*const double c_obl = 1.0;
 		const double s_obl = 0.0;

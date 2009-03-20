@@ -10,6 +10,8 @@ class Section;
 
 namespace MotionTestImpl
 {
+	const double coeff = 1000.0f;
+
 	class CoordCalc
 	{
 	public:
@@ -57,25 +59,27 @@ namespace MotionTestImpl
 	class StraightCoordCalc : public CoordCalc
 	{
 	public:
-		StraightCoordCalc(const Vec3d& s, double d = 5.0f, double startTime = 0.0f);
+		StraightCoordCalc(const Vec3d& s, double d = 5.0f, double startTime = 0.0f, double direction = 1.0f);
 
-		virtual Vec3d calcCoord(double t, double /*startJD*/);        
+		virtual Vec3d calcCoord(double t, double startJD);        
 	private:
 		Vec3d start;
 		double delta;
 		double mStartTime;
+		double mDirection;
 	};
 
 	class DurationStraightCoordCalc : public CoordCalc // : public StraightCoordCalc
 	{
 	public:
-		DurationStraightCoordCalc(const Vec3d& s, double dur, double startTime = 0.0f);
+		DurationStraightCoordCalc(const Vec3d& s, double dur, double startTime = 0.0f, double direction = 1.0f);
 
-		virtual Vec3d calcCoord(double t, double /*startJD*/);
+		virtual Vec3d calcCoord(double t, double startJD);
 	private:
 		Vec3d mStart;
 		double mDur;
 		double mStartTime;
+		double mDirection;
 	};
 
 	class LocalSystemCoordCalc : public CoordCalc
