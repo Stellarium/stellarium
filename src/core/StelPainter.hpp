@@ -75,17 +75,23 @@ public:
 	void drawText(const StelFont* font, float x, float y, const QString& str, float angleDeg=0.f, 
 		      float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
 	
-	//! Draw the given polygon
-	//! @param poly The polygon to draw
+	//! Draw the given polygon.
+	//! @param poly The polygon to draw.
 	void drawPolygon(const StelGeom::Polygon& poly) const;
+	
+	//! Draw the given SphericalPolygon.
+	//! @param spoly The SphericalPolygon to draw.
+	//! @param outlineOnly if true, display only the outline of the polygon, else fill the polygon.
+	void drawSphericalPolygon(const StelGeom::SphericalPolygon& spoly, bool outlineOnly=false) const;
 	
 	//! Draw a small circle arc between points start and stop with rotation point in rotCenter.
 	//! The angle between start and stop must be < 180 deg.
+	//! The algorithm ensures that the line will look smooth, even for non linear distortion.
 	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
 	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport.
 	//! If rotCenter is equal to 0,0,0, the method draws a great circle.
 	void drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, const void* userData)=NULL, const void* userData=NULL) const;
-
+	
 	//! Draw a simple circle, 2d viewport coordinates in pixel
 	void drawCircle(double x,double y,double r) const;
 
@@ -149,6 +155,17 @@ public:
 	static void initSystemGLInfo();
 	
 private:
+	
+	//! Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
+	//! by splitting it into subtriangles. The resulting vertex arrays are appended to the passed out* ones.
+	//! The size of each edge must be < 180 deg.
+	//! @param vertices a pointer to an array of 3 vertices.
+	//! @param edgeFlags a pointer to an array of 3 flags indicating whether the next segment is an edge.
+	//! @param texturePos a pointer to an array of 3 texture coordinates, or NULL if the triangle should not be textured.
+	void projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>* outVertices,
+								  	const bool* edgeFlags=NULL, QVector<bool>* outEdgeFlags=NULL,
+		  							const Vec2d* texturePos=NULL, QVector<Vec2d>* outTexturePos=NULL,int nbI=0,
+									bool checkDisc1=true, bool checkDisc2=true, bool checkDisc3=true) const;
 	
 	//! Switch to native OpenGL painting, i.e not using QPainter.
 	//! After this call revertToQtPainting() MUST be called.
