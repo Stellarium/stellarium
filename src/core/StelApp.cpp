@@ -951,6 +951,31 @@ void StelApp::draw()
 	{
 		i->draw(core);
 	}
+
+// Testing code for new polygon code
+// 	QVector<QVector<Vec3d> > contours;
+// 	QVector<Vec3d> c1(4);
+// 	StelUtils::spheToRect(-0.5, -0.5, c1[0]);
+// 	StelUtils::spheToRect(0.5, -0.5, c1[1]);
+// 	StelUtils::spheToRect(0.5, 0.5, c1[2]);
+// 	StelUtils::spheToRect(-0.5, 0.5, c1[3]);
+// 	contours.append(c1);
+// 	QVector<Vec3d> c2(4);
+// 	StelUtils::spheToRect(-0.2, 0.2, c2[0]);
+// 	StelUtils::spheToRect(0.2, 0.2, c2[1]);
+// 	StelUtils::spheToRect(0.2, -0.2, c2[2]);
+// 	StelUtils::spheToRect(-0.2, -0.2, c2[3]);
+// 	contours.append(c2);
+// 	SphericalPolygon p(contours);
+// 	p.setContours(p.getContours());
+// 	{
+// 		glEnable(GL_BLEND);
+// 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
+// 		glColor4f(0, .6, .6, .5);
+// 		sPainter.drawSphericalPolygon(p);
+// 		glColor3f(0, 1, .6);
+// 		sPainter.drawSphericalPolygon(p, true);
+// 	}
 	
 	core->postDraw();
 }
