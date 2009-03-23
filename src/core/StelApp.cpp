@@ -936,6 +936,8 @@ void StelApp::update(double deltaTime)
 	stelObjectMgr->update(deltaTime);
 }
 
+#include "StelPainter.hpp"
+				 
 //! Main drawing function called at each frame
 void StelApp::draw()
 {
@@ -949,7 +951,7 @@ void StelApp::draw()
 	{
 		i->draw(core);
 	}
-
+	
 	core->postDraw();
 }
 
