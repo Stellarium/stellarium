@@ -216,14 +216,13 @@ double SphericalPolygon::getArea() const
 {
 	// Use Girard's theorem for each subtriangles
 	double area = 0.;
+	Vec3d v1, v2, v3;
 	for (int i=0;i<triangleVertices.size()/3;++i)
 	{
-		const Vec3d v1 = triangleVertices[i*3+0] ^ triangleVertices[i*3+1];
-		const Vec3d v2 = triangleVertices[i*3+1] ^ triangleVertices[i*3+2];
-		const Vec3d v3 = triangleVertices[i*3+2] ^ triangleVertices[i*3+0];
-		const double abg = 2.*M_PI - v1.angle(v2) - v2.angle(v3) - v3.angle(v1);
-		Q_ASSERT(abg>=0);
-		area += abg;
+		v1 = triangleVertices[i*3+0] ^ triangleVertices[i*3+1];
+		v2 = triangleVertices[i*3+1] ^ triangleVertices[i*3+2];
+		v3 = triangleVertices[i*3+2] ^ triangleVertices[i*3+0];
+		area += 2.*M_PI - v1.angle(v2) - v2.angle(v3) - v3.angle(v1);
 	}
 	return area;
 }
