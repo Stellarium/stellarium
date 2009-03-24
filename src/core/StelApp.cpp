@@ -965,17 +965,17 @@ void StelApp::draw()
 // 	StelUtils::spheToRect(0.2, 0.2, c2[1]);
 // 	StelUtils::spheToRect(0.2, -0.2, c2[2]);
 // 	StelUtils::spheToRect(-0.2, -0.2, c2[3]);
-// 	//contours.append(c2);
+// 	contours.append(c2);
 // 	SphericalPolygon p(contours);
-// 	p.setContours(p.getContours());
-// // 	{
-// // 		glEnable(GL_BLEND);
-// // 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-// // 		glColor4f(0, .6, .6, .5);
-// // 		sPainter.drawSphericalPolygon(p);
-// // 		glColor3f(0, 1, .6);
-// // 		sPainter.drawSphericalPolygon(p, true);
-// // 	}
+// // 	p.setContours(p.getContours());
+// 	{
+// 		glEnable(GL_BLEND);
+// 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
+// 		glColor4f(0, .6, .6, .5);
+// 		sPainter.drawSphericalPolygon(p);
+// 		glColor3f(0, 1, .6);
+// 		sPainter.drawSphericalPolygon(p, true);
+// 	}
 // 	
 // 	QVector<Vec3d> c3(4);
 // 	c3[0]=c2[3];c3[1]=c2[2];c3[2]=c2[1];c3[3]=c2[0];
