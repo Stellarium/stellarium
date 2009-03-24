@@ -114,7 +114,7 @@ void errorCallback(GLenum errno)
 	qWarning() << "Tesselator error:" << errno;
 }
 
-void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours)
+void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, PolyWindingRule windingRule)
 {
 	triangleVertices.clear();
 	edgeFlags.clear();
@@ -123,7 +123,8 @@ void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours)
 	gluTessCallback(tess, GLU_TESS_VERTEX_DATA, (GLvoid(*)()) &vertexCallback);
 	gluTessCallback(tess, GLU_TESS_EDGE_FLAG, (GLvoid(*)()) &edgeFlagCallback);
 	gluTessCallback(tess, GLU_TESS_ERROR, (GLvoid (*) ()) &errorCallback);
-	gluTessProperty(tess, GLU_TESS_WINDING_RULE, GLU_TESS_WINDING_POSITIVE);
+	const GLdouble windRule = (windingRule==WindingPositive) ? GLU_TESS_WINDING_POSITIVE : GLU_TESS_WINDING_ABS_GEQ_TWO;
+	gluTessProperty(tess, GLU_TESS_WINDING_RULE, windRule);
 	gluTessBeginPolygon(tess, this);
 	for (int c=0;c<contours.size();++c)
 	{
@@ -175,6 +176,39 @@ const QVector<QVector<Vec3d> >& SphericalPolygon::getContours() const
 	gluTessEndPolygon(tess);
 	gluDeleteTess(tess);
 	return tmpContours;
+}
+
+// Return a new SphericalPolygon consisting of the intersection of this and the given SphericalPolygon.
+SphericalPolygon SphericalPolygon::getIntersection(const SphericalPolygon& mpoly)
+{
+	QVector<QVector<Vec3d> > allContours = getContours();
+	allContours += mpoly.getContours();
+	SphericalPolygon p;
+	p.setContours(allContours, SphericalPolygon::WindingAbsGeqTwo);
+	return p;
+}
+
+// Return a new SphericalPolygon consisting of the union of this and the given SphericalPolygon.
+SphericalPolygon SphericalPolygon::getUnion(const SphericalPolygon& mpoly)
+{
+	QVector<QVector<Vec3d> > allContours = getContours();
+	allContours += mpoly.getContours();
+	return SphericalPolygon(allContours);
+}
+
+// Return a new SphericalPolygon consisting of the subtraction of the given SphericalPolygon from this.
+SphericalPolygon SphericalPolygon::getSubtraction(const SphericalPolygon& mpoly)
+{
+	QVector<QVector<Vec3d> > allContours = getContours();
+	foreach (const QVector<Vec3d>& c, mpoly.getContours())
+	{
+		QVector<Vec3d> cr;
+		cr.reserve(c.size());
+		for (int i=c.size()-1;i>=0;--i)
+			cr.append(c.at(i));
+		allContours.append(cr);
+	}
+	return SphericalPolygon(allContours);
 }
 
 ConvexPolygon ConvexPolygon::fullSky()

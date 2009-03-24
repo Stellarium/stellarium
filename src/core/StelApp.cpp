@@ -952,7 +952,7 @@ void StelApp::draw()
 		i->draw(core);
 	}
 
-// Testing code for new polygon code
+	// Testing code for new polygon code
 // 	QVector<QVector<Vec3d> > contours;
 // 	QVector<Vec3d> c1(4);
 // 	StelUtils::spheToRect(-0.5, -0.5, c1[0]);
@@ -965,16 +965,31 @@ void StelApp::draw()
 // 	StelUtils::spheToRect(0.2, 0.2, c2[1]);
 // 	StelUtils::spheToRect(0.2, -0.2, c2[2]);
 // 	StelUtils::spheToRect(-0.2, -0.2, c2[3]);
-// 	contours.append(c2);
+// 	//contours.append(c2);
 // 	SphericalPolygon p(contours);
 // 	p.setContours(p.getContours());
+// // 	{
+// // 		glEnable(GL_BLEND);
+// // 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
+// // 		glColor4f(0, .6, .6, .5);
+// // 		sPainter.drawSphericalPolygon(p);
+// // 		glColor3f(0, 1, .6);
+// // 		sPainter.drawSphericalPolygon(p, true);
+// // 	}
+// 	
+// 	QVector<Vec3d> c3(4);
+// 	c3[0]=c2[3];c3[1]=c2[2];c3[2]=c2[1];c3[3]=c2[0];
+// 	StelUtils::spheToRect(-0.1, 0.1, c3[3]);
+// 	contours.clear();
+// 	contours.append(c3);
+// 	SphericalPolygon p2 = p.getSubtraction(SphericalPolygon(contours));
 // 	{
 // 		glEnable(GL_BLEND);
 // 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 // 		glColor4f(0, .6, .6, .5);
-// 		sPainter.drawSphericalPolygon(p);
+// 		sPainter.drawSphericalPolygon(p2);
 // 		glColor3f(0, 1, .6);
-// 		sPainter.drawSphericalPolygon(p, true);
+// 		sPainter.drawSphericalPolygon(p2, true);
 // 	}
 	
 	core->postDraw();
