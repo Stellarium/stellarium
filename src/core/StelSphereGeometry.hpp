@@ -25,6 +25,140 @@
 #include <vector>
 #include "VecMath.hpp"
 
+class SphericalPolygon;
+
+//! @class SphericalPolygonBase
+//! Abstract class defining default implementations for some spherical geometry methods.
+class SphericalPolygonBase
+{
+public:
+  	//! @enum WindingRule
+	//! Define the possible winding rules to use when setting the contours for a polygon.
+	enum PolyWindingRule
+	{
+		WindingPositive,	//!< Positive winding rule (used for union)
+   		WindingAbsGeqTwo	//!< Abs greater or equal 2 winding rule (used for intersection)
+	};
+	
+	//! Return an openGL compatible array to be displayed using vertex arrays.
+	virtual QVector<Vec3d> getVertexArray() const = 0;
+
+	//! Return an openGL compatible array of edge flags to be displayed using vertex arrays.
+	virtual QVector<bool> getEdgeFlagArray() const = 0;
+	
+	//! Set the contours defining the SphericalPolygon.
+	//! @param contours the list of contours defining the polygon area.
+	//! @param windingRule the winding rule to use. Default value is WindingPositive, meaning that the 
+	//! polygon is the union of the positive contours minus the negative ones.
+	virtual void setContours(const QVector<QVector<Vec3d> >& contours, PolyWindingRule windingRule=WindingPositive) = 0;
+
+	//! Get the contours defining the SphericalPolygon.
+	virtual QVector<QVector<Vec3d> > getContours() const;
+	
+	//! Return the area in squared degrees.
+	virtual double getArea() const;
+
+	//! Return true if the polygon is an empty polygon.
+	virtual bool isEmpty() const {return getVertexArray().isEmpty();}
+	
+	//! Load the SphericalPolygon information from a QVariant.
+	//! The QVariant should contain a list of contours, each contours being a list of ra,dec points
+	//! with ra,dec expressed in degree in the ICRS reference frame.
+	//! Use QJSONParser to transform a JSON representation into QVariant.
+	virtual bool loadFromQVariant(const QVariantMap& contours);
+
+	//! Output the SphericalPolygon information in the form of a QVariant.
+	//! The QVariant will contain a list of contours, each contours being a list of ra,dec points
+	//! with ra,dec expressed in degree in the ICRS reference frame.
+	//! Use QJSONParser to transform a QVariant into its JSON representation.
+	virtual QVariantMap toQVariant() const;
+	
+	//! Return a new SphericalPolygon consisting of the intersection of this and the given SphericalPolygon.
+	SphericalPolygon getIntersection(const SphericalPolygonBase& mpoly);
+	//! Return a new SphericalPolygon consisting of the union of this and the given SphericalPolygon.
+	SphericalPolygon getUnion(const SphericalPolygonBase& mpoly);
+	//! Return a new SphericalPolygon consisting of the subtraction of the given SphericalPolygon from this.
+	SphericalPolygon getSubtraction(const SphericalPolygonBase& mpoly);
+};
+
+//! @class SphericalPolygon
+//! A SphericalPolygon is a complex shape defined by the union of contours.
+//! Each contour is composed of connected great circles segments with the last point connected to the first one.
+//! Contours don't need to be convex (they are internally tesselated into triangles).
+class SphericalPolygon : public SphericalPolygonBase
+{
+public:
+	//! Default constructor.
+	SphericalPolygon() {;}
+
+	//! Constructor from a list of contours.
+	SphericalPolygon(QVector<QVector<Vec3d> >& contours) {setContours(contours);}
+
+	//! Return an openGL compatible array to be displayed using vertex arrays.
+	//! The array was precomputed therefore the method is very fast.
+	virtual QVector<Vec3d> getVertexArray() const {return triangleVertices;}
+
+	//! Return an openGL compatible array of edge flags to be displayed using vertex arrays.
+	//! The array was precomputed therefore the method is very fast.
+	virtual QVector<bool> getEdgeFlagArray() const {return edgeFlags;}
+	
+	//! Set the contours defining the SphericalPolygon.
+	//! @param contours the list of contours defining the polygon area.
+	//! @param windingRule the winding rule to use. Default value is WindingPositive, meaning that the 
+	//! polygon is the union of the positive contours minus the negative ones.
+	virtual void setContours(const QVector<QVector<Vec3d> >& contours, SphericalPolygonBase::PolyWindingRule windingRule=SphericalPolygonBase::WindingPositive);
+	
+private:
+	friend void vertexCallback(void* vertexData, void* userData);
+	
+	//! A list of vertices describing the tesselated polygon. The vertices have to be
+	//! used 3 by 3, forming triangles.
+	QVector<Vec3d> triangleVertices;
+
+	//! A list of booleans: one per vertex of the triangleVertices array.
+	//! Value is true if the vertex belongs to an edge, false otherwise.
+	QVector<bool> edgeFlags;
+};
+
+//! @class SphericalConvexPolygon
+//! A special case of SphericalPolygon for which the polygon is convex.
+class SphericalConvexPolygon : public SphericalPolygonBase
+{
+public:
+	//! Default constructor.
+	SphericalConvexPolygon() {;}
+
+	//! Constructor from a list of contours.
+	SphericalConvexPolygon(QVector<QVector<Vec3d> >& contours) {setContours(contours);}
+
+	//! Return an openGL compatible array to be displayed using vertex arrays.
+	//! This method is not optimized for SphericalConvexPolygon instances.
+	virtual QVector<Vec3d> getVertexArray() const;
+
+	//! Return an openGL compatible array of edge flags to be displayed using vertex arrays.
+	//! This method is not optimized for SphericalConvexPolygon instances.
+	virtual QVector<bool> getEdgeFlagArray() const;
+	
+	//! Set the contours defining the SphericalConvexPolygon.
+	//! @param contours the list of contours defining the polygon area.
+	//! @param windingRule unused for SphericalConvexPolygon.
+	virtual void setContours(const QVector<QVector<Vec3d> >& contours, SphericalPolygonBase::PolyWindingRule windingRule=SphericalPolygonBase::WindingPositive)
+	{
+		Q_ASSERT(contours.size()==1);
+		contour=contours.at(0);
+	}
+	
+	//! Get the contours defining the SphericalConvexPolygon.
+	virtual QVector<QVector<Vec3d> > getContours() const {QVector<QVector<Vec3d> > contours; contours.append(contour); return contours;}
+	
+	//! Get the single contour defining the SphericalConvexPolygon.
+	const QVector<Vec3d>& getConvexContour() const {return contour;}
+	
+private:
+	//! A list of vertices of the convex contour.
+	QVector<Vec3d> contour;
+};
+
 //! @namespace StelGeom In this namespace we define different geometrical shapes.
 //! We also define two functions, contains(x, y) and intersect(x, y) = intersect(y, x)
 //! which is defined for most of the pair of geometrical shapes.
@@ -79,88 +213,6 @@ public:
 	Polygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3);
 };
 
-
-//! @class ShericalPolygon
-//! A ShericalPolygon is a complex shape defined by the union of contours.
-//! Each contour is composed of connected great circles segments with the last point connected to the first one.
-//! Contours don't need to be convex as they will be tesselated.
-class SphericalPolygon
-{
-public:
-	
-  	//! @enum WindingRule
-	//! Define the possible winding rules to use when setting the contours for a polygon.
-	enum PolyWindingRule
-	{
-		WindingPositive,	//!< Positive winding rule (used for union)
-  		WindingAbsGeqTwo	//!< Abs greater or equal 2 winding rule (used for intersection)
-	};
-	
-	//! Default constructor.
-	SphericalPolygon() {;}
-
-	//! Constructor from a list of contours.
-	SphericalPolygon(QVector<QVector<Vec3d> >& contours) {setContours(contours);}
-
-	//! Load the ShericalPolygon information from a QVariant.
-	//! The QVariant should contain a list of contours, each contours being a list of ra,dec points
-	//! with ra,dec expressed in degree in the ICRS reference frame.
-	//! Use QJSONParser to transform a JSON representation into QVariant.
-	bool loadFromQVariant(const QVariantMap& contours);
-
-	//! Output the ShericalPolygon information in the form of a QVariant.
-	//! The QVariant will contain a list of contours, each contours being a list of ra,dec points
-	//! with ra,dec expressed in degree in the ICRS reference frame.
-	//! Use QJSONParser to transform a QVariant into its JSON representation.
-	QVariantMap toQVariant() const;
-	
-	//! Return a new SphericalPolygon consisting of the intersection of this and the given SphericalPolygon.
-	SphericalPolygon getIntersection(const SphericalPolygon& mpoly);
-	//! Return a new SphericalPolygon consisting of the union of this and the given SphericalPolygon.
-	SphericalPolygon getUnion(const SphericalPolygon& mpoly);
-	//! Return a new SphericalPolygon consisting of the subtraction of the given SphericalPolygon from this.
-	SphericalPolygon getSubtraction(const SphericalPolygon& mpoly);
-
-	//! Return an openGL compatible array to be displayed using vertex arrays.
-	//! The array was precomputed therefore the method is very fast.
-	const QVector<Vec3d>& getVertexArray() const {return triangleVertices;}
-
-	//! Return an openGL compatible array of edge flags to be displayed using vertex arrays.
-	//! The array was precomputed therefore the method is very fast.
-	const QVector<bool>& getEdgeFlagArray() const {return edgeFlags;}
-	
-	//! Set the contours defining the SphericalPolygon.
-	//! @param contours the list of contours defining the polygon area.
-	//! @param windingRule the windong rule to use. See the documentation for gluTessProperty() for more info.
-	//! Default value is GLU_TESS_WINDING_POSITIVE, meaning that the polygon is the union of the positive contours
-	//! minus the negative ones.
-	void setContours(const QVector<QVector<Vec3d> >& contours, PolyWindingRule windingRule=WindingPositive);
-
-	//! Get the contours defining the SphericalPolygon.
-	//! The contour are generated by calling the tesselator, so this method is not optimized.
-	const QVector<QVector<Vec3d> >& getContours() const;
-	
-	//! Return the area in squared degrees.
-	double getArea() const;
-
-	//! Return true if the polygon is an empty polygon.
-	bool isEmpty() const {return triangleVertices.isEmpty();}
-	
-// TODO It seems the namespace makes friend function things broken..
-// The solution would be to remove the namespace
-//protected:
-	friend void vertexCallback(void* vertexData, void* userData);
-	friend void edgeFlagCallback(bool flag, void* userData);
-		
-	//! A list of vertices describing the tesselated polygon. The vertices have to be
-	//! used 3 by 3, forming triangles.
-	QVector<Vec3d> triangleVertices;
-
-	//! A list of booleans: one per vertex of the triangleVertices array.
-	//! Value is true if the vertex belongs to an edge, false otherwise.
-	//! If the vector is empty, can safely assume all values to true.
-	QVector<bool> edgeFlags;
-};
 
 template<class T>
 bool intersect(const Polygon& p, const T& o)
