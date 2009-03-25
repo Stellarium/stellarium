@@ -972,9 +972,9 @@ static QVector<Vec3d> polygonVertexArray;
 static QVector<bool> polygonEdgeFlagArray;
 
 // Draw the given SphericalPolygon.
-void StelPainter::drawSphericalPolygon(const StelGeom::SphericalPolygon& poly, bool outlineOnly) const
+void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, SphericalPolygonDrawMode drawMode, const Vec4f* boundaryColor) const
 {
-	const QVector<Vec3d>& a = poly.getVertexArray();
+	const QVector<Vec3d>& a = poly->getVertexArray();
 	if (a.isEmpty())
 		return;
 	
@@ -983,7 +983,7 @@ void StelPainter::drawSphericalPolygon(const StelGeom::SphericalPolygon& poly, b
 	
 	for (int i=0;i<a.size()/3;++i)
 	{
-		projectSphericalTriangle(a.constData()+i*3, &polygonVertexArray, poly.getEdgeFlagArray().constData()+i*3, &polygonEdgeFlagArray);
+		projectSphericalTriangle(a.constData()+i*3, &polygonVertexArray, poly->getEdgeFlagArray().constData()+i*3, &polygonEdgeFlagArray);
 	}
 	
 	// Load the vertex array
@@ -997,10 +997,29 @@ void StelPainter::drawSphericalPolygon(const StelGeom::SphericalPolygon& poly, b
 		glEdgeFlagPointer(0, polygonEdgeFlagArray.constData());
 	}
 	
-	// And draw everything at once
-	glPolygonMode(GL_FRONT_AND_BACK, outlineOnly ? GL_LINE : GL_FILL);
-
-	glDrawArrays(GL_TRIANGLES, 0, polygonVertexArray.size());
+	if (drawMode==SphericalPolygonDrawModeFill || drawMode==SphericalPolygonDrawModeFillAndBoundary)
+	{
+		// Draw the fill part
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glDrawArrays(GL_TRIANGLES, 0, polygonVertexArray.size());
+	}
+	if (drawMode==SphericalPolygonDrawModeBoundary || drawMode==SphericalPolygonDrawModeFillAndBoundary)
+	{
+		// Draw the boundary part, and use the extra color if defined
+		GLfloat tmpColor[4];
+		if (boundaryColor!=NULL)
+		{
+			glGetFloatv(GL_CURRENT_COLOR, tmpColor);
+			glColor4fv((float*)boundaryColor);
+		}
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glDrawArrays(GL_TRIANGLES, 0, polygonVertexArray.size());
+		if (boundaryColor!=NULL)
+		{
+			// Revert previous color
+			glColor4fv(tmpColor);
+		}
+	}
 	
 	glDisableClientState(GL_EDGE_FLAG_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);

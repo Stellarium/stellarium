@@ -85,7 +85,7 @@ Polygon::Polygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e
 	push_back(e3);
 }
 
-bool SphericalPolygon::loadFromQVariant(const QVariantMap& qv)
+bool SphericalPolygonBase::loadFromQVariant(const QVariantMap& qv)
 {
 	QVector<QVector<Vec3d> > contours;
 	Q_ASSERT(0);
@@ -93,20 +93,32 @@ bool SphericalPolygon::loadFromQVariant(const QVariantMap& qv)
 	return true;
 }
 
-// Used to stroe temporary edgeFlag found by the tesselator
-static bool edgeFlag;
+QVariantMap SphericalPolygonBase::toQVariant() const
+{
+	QVariantMap res;
+	Q_ASSERT(0);
+	return res;
+}
+
+
+// Store data for the GLU tesselation callbacks
+struct GluTessCallbackData
+{
+	SphericalPolygon* thisPolygon;	//! Reference to the instance of SphericalPolygon being tesselated.
+	bool edgeFlag;					//! Used to store temporary edgeFlag found by the tesselator.
+};
 
 void vertexCallback(void* vertexData, void* userData)
 {
-	SphericalPolygon* mp = (SphericalPolygon*)userData;
+	SphericalPolygon* mp = ((GluTessCallbackData*)userData)->thisPolygon;
 	const double* v = (double*)vertexData;
 	mp->triangleVertices.append(Vec3d(v[0], v[1], v[2]));
-	mp->edgeFlags.append(edgeFlag);
+	mp->edgeFlags.append(((GluTessCallbackData*)userData)->edgeFlag);
 }
 
-void edgeFlagCallback(GLboolean flag)
+void edgeFlagCallback(GLboolean flag, void* userData)
 {
-	edgeFlag=flag;
+	((GluTessCallbackData*)userData)->edgeFlag=flag;
 }
 
 void errorCallback(GLenum errno)
@@ -114,18 +126,21 @@ void errorCallback(GLenum errno)
 	qWarning() << "Tesselator error:" << errno;
 }
 
-void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, PolyWindingRule windingRule)
+void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, SphericalPolygonBase::PolyWindingRule windingRule)
 {
 	triangleVertices.clear();
 	edgeFlags.clear();
+	
 	// Use GLU tesselation functions to transform the polygon into a list of triangles
 	GLUtesselator* tess = gluNewTess();
 	gluTessCallback(tess, GLU_TESS_VERTEX_DATA, (GLvoid(*)()) &vertexCallback);
-	gluTessCallback(tess, GLU_TESS_EDGE_FLAG, (GLvoid(*)()) &edgeFlagCallback);
+	gluTessCallback(tess, GLU_TESS_EDGE_FLAG_DATA, (GLvoid(*)()) &edgeFlagCallback);
 	gluTessCallback(tess, GLU_TESS_ERROR, (GLvoid (*) ()) &errorCallback);
-	const GLdouble windRule = (windingRule==WindingPositive) ? GLU_TESS_WINDING_POSITIVE : GLU_TESS_WINDING_ABS_GEQ_TWO;
+	const GLdouble windRule = (windingRule==SphericalPolygonBase::WindingPositive) ? GLU_TESS_WINDING_POSITIVE : GLU_TESS_WINDING_ABS_GEQ_TWO;
 	gluTessProperty(tess, GLU_TESS_WINDING_RULE, windRule);
-	gluTessBeginPolygon(tess, this);
+	GluTessCallbackData data;
+	data.thisPolygon=this;
+	gluTessBeginPolygon(tess, &data);
 	for (int c=0;c<contours.size();++c)
 	{
 		gluTessBeginContour(tess);
@@ -139,38 +154,39 @@ void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, Pol
 	gluDeleteTess(tess);
 }
 
-// Contour used by the tesselator as temporary objects
-static QVector<QVector<Vec3d> > tmpContours;
-
-void contourBeginCallback(GLenum type)
+void contourBeginCallback(GLenum type, void* userData)
 {
 	Q_ASSERT(type==GL_LINE_LOOP);
-	tmpContours.append(QVector<Vec3d>());
+	QVector<QVector<Vec3d> >* tmpContours = static_cast<QVector<QVector<Vec3d> >*>(userData);
+	tmpContours->append(QVector<Vec3d>());
 }
 
-void contourVertexCallback(void* vertexData)
+void contourVertexCallback(void* vertexData, void* userData)
 {
 	const double* v = (double*)vertexData;
-	tmpContours[tmpContours.size()-1].append(Vec3d(v[0], v[1], v[2]));
+	QVector<QVector<Vec3d> >* tmpContours = static_cast<QVector<QVector<Vec3d> >*>(userData);
+	(*tmpContours)[tmpContours->size()-1].append(Vec3d(v[0], v[1], v[2]));
 }
 
-const QVector<QVector<Vec3d> >& SphericalPolygon::getContours() const
+QVector<QVector<Vec3d> > SphericalPolygonBase::getContours() const
 {
-	tmpContours.clear();
+	// Contour used by the tesselator as temporary objects
+	QVector<QVector<Vec3d> > tmpContours;
 	// Use GLU tesselation functions to compute the contours from the list of triangles
 	GLUtesselator* tess = gluNewTess();
-	gluTessCallback(tess, GLU_TESS_BEGIN, (GLvoid(*)()) &contourBeginCallback);
-	gluTessCallback(tess, GLU_TESS_VERTEX, (GLvoid(*)()) &contourVertexCallback);
+	gluTessCallback(tess, GLU_TESS_BEGIN_DATA, (GLvoid(*)()) &contourBeginCallback);
+	gluTessCallback(tess, GLU_TESS_VERTEX_DATA, (GLvoid(*)()) &contourVertexCallback);
 	gluTessCallback(tess, GLU_TESS_ERROR, (GLvoid (*) ()) &errorCallback);
 	gluTessProperty(tess, GLU_TESS_WINDING_RULE, GLU_TESS_WINDING_POSITIVE);
 	gluTessProperty(tess, GLU_TESS_BOUNDARY_ONLY, GL_TRUE);
-	gluTessBeginPolygon(tess, NULL);
-	for (int c=0;c<triangleVertices.size()/3;++c)
+	gluTessBeginPolygon(tess, &tmpContours);
+	const QVector<Vec3d>& trianglesArray = getVertexArray();
+	for (int c=0;c<trianglesArray.size()/3;++c)
 	{
 		gluTessBeginContour(tess);
-		gluTessVertex(tess, const_cast<GLdouble*>((const double*)triangleVertices[c*3]), const_cast<GLdouble*>((const double*)triangleVertices[c*3]));
-		gluTessVertex(tess, const_cast<GLdouble*>((const double*)triangleVertices[c*3+1]), const_cast<GLdouble*>((const double*)triangleVertices[c*3+1]));
-		gluTessVertex(tess, const_cast<GLdouble*>((const double*)triangleVertices[c*3+2]), const_cast<GLdouble*>((const double*)triangleVertices[c*3+2]));
+		gluTessVertex(tess, const_cast<GLdouble*>((const double*)trianglesArray[c*3]), const_cast<GLdouble*>((const double*)trianglesArray[c*3]));
+		gluTessVertex(tess, const_cast<GLdouble*>((const double*)trianglesArray[c*3+1]), const_cast<GLdouble*>((const double*)trianglesArray[c*3+1]));
+		gluTessVertex(tess, const_cast<GLdouble*>((const double*)trianglesArray[c*3+2]), const_cast<GLdouble*>((const double*)trianglesArray[c*3+2]));
 		gluTessEndContour(tess);
 	}
 	gluTessEndPolygon(tess);
@@ -179,17 +195,17 @@ const QVector<QVector<Vec3d> >& SphericalPolygon::getContours() const
 }
 
 // Return a new SphericalPolygon consisting of the intersection of this and the given SphericalPolygon.
-SphericalPolygon SphericalPolygon::getIntersection(const SphericalPolygon& mpoly)
+SphericalPolygon SphericalPolygonBase::getIntersection(const SphericalPolygonBase& mpoly)
 {
 	QVector<QVector<Vec3d> > allContours = getContours();
 	allContours += mpoly.getContours();
 	SphericalPolygon p;
-	p.setContours(allContours, SphericalPolygon::WindingAbsGeqTwo);
+	p.setContours(allContours, SphericalPolygonBase::WindingAbsGeqTwo);
 	return p;
 }
 
 // Return a new SphericalPolygon consisting of the union of this and the given SphericalPolygon.
-SphericalPolygon SphericalPolygon::getUnion(const SphericalPolygon& mpoly)
+SphericalPolygon SphericalPolygonBase::getUnion(const SphericalPolygonBase& mpoly)
 {
 	QVector<QVector<Vec3d> > allContours = getContours();
 	allContours += mpoly.getContours();
@@ -197,7 +213,7 @@ SphericalPolygon SphericalPolygon::getUnion(const SphericalPolygon& mpoly)
 }
 
 // Return a new SphericalPolygon consisting of the subtraction of the given SphericalPolygon from this.
-SphericalPolygon SphericalPolygon::getSubtraction(const SphericalPolygon& mpoly)
+SphericalPolygon SphericalPolygonBase::getSubtraction(const SphericalPolygonBase& mpoly)
 {
 	QVector<QVector<Vec3d> > allContours = getContours();
 	foreach (const QVector<Vec3d>& c, mpoly.getContours())
@@ -212,16 +228,17 @@ SphericalPolygon SphericalPolygon::getSubtraction(const SphericalPolygon& mpoly)
 }
 
 // Return the area in squared degrees.
-double SphericalPolygon::getArea() const
+double SphericalPolygonBase::getArea() const
 {
 	// Use Girard's theorem for each subtriangles
 	double area = 0.;
 	Vec3d v1, v2, v3;
-	for (int i=0;i<triangleVertices.size()/3;++i)
+	const QVector<Vec3d>& trianglesArray = getVertexArray();
+	for (int i=0;i<trianglesArray.size()/3;++i)
 	{
-		v1 = triangleVertices[i*3+0] ^ triangleVertices[i*3+1];
-		v2 = triangleVertices[i*3+1] ^ triangleVertices[i*3+2];
-		v3 = triangleVertices[i*3+2] ^ triangleVertices[i*3+0];
+		v1 = trianglesArray[i*3+0] ^ trianglesArray[i*3+1];
+		v2 = trianglesArray[i*3+1] ^ trianglesArray[i*3+2];
+		v3 = trianglesArray[i*3+2] ^ trianglesArray[i*3+0];
 		area += 2.*M_PI - v1.angle(v2) - v2.angle(v3) - v3.angle(v1);
 	}
 	return area;
