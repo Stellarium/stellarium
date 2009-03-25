@@ -41,6 +41,14 @@ class StelPainter
 {
 public:
 	
+	//! Define the drawing mode when drawing polygons
+	enum SphericalPolygonDrawMode
+	{
+		SphericalPolygonDrawModeFill,           //!< Draw the interior of the polygon only
+  		SphericalPolygonDrawModeBoundary,       //!< Draw the boundary of the polygon only
+		SphericalPolygonDrawModeFillAndBoundary //!< Draw both the interior and the boundary of the polygon
+	};
+	
 	explicit StelPainter(const StelProjectorP& prj);
 	~StelPainter();
 	
@@ -81,8 +89,10 @@ public:
 	
 	//! Draw the given SphericalPolygon.
 	//! @param spoly The SphericalPolygon to draw.
-	//! @param outlineOnly if true, display only the outline of the polygon, else fill the polygon.
-	void drawSphericalPolygon(const StelGeom::SphericalPolygon& spoly, bool outlineOnly=false) const;
+	//! @param drawMode define whether to draw the outline or the fill or both.
+	//! @param boundaryColor use this color for drawing the boundary only if the drawMode is SphericalPolygonDrawModeFillAndBoundary.
+	//! TODO: Can be optimized by at least a factor of 2 by avoiding projecting more than 1 time every vertex.
+	void drawSphericalPolygon(const SphericalPolygonBase* spoly, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const Vec4f* boundaryColor=NULL) const;
 	
 	//! Draw a small circle arc between points start and stop with rotation point in rotCenter.
 	//! The angle between start and stop must be < 180 deg.
