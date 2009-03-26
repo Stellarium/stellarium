@@ -56,7 +56,7 @@ public:
 	//! Get the contours defining the SphericalPolygon.
 	virtual QVector<QVector<Vec3d> > getContours() const;
 	
-	//! Return the area in squared degrees.
+	//! Return the area in steradians.
 	virtual double getArea() const;
 
 	//! Return true if the polygon is an empty polygon.
@@ -80,6 +80,9 @@ public:
 	SphericalPolygon getUnion(const SphericalPolygonBase& mpoly);
 	//! Return a new SphericalPolygon consisting of the subtraction of the given SphericalPolygon from this.
 	SphericalPolygon getSubtraction(const SphericalPolygonBase& mpoly);
+	
+	//! Find if a point is contained into a SphericalPolygon
+	bool contains(const Vec3d& p) const;
 };
 
 //! @class SphericalPolygon
@@ -179,22 +182,28 @@ bool intersect(const T& o, const Vec3d& v)
 
 //! @class HalfSpace
 //! A HalfSpace is defined by a direction and an aperture.
-//! It forms a cone from the center of the Coordinate frame with a radius d
+//! It forms a cone from the center of the Coordinate frame with a radius d.
 struct HalfSpace
 {
+	//! Construct a HalfSpace with a 90 deg aperture and an undefined direction.
 	HalfSpace() : d(0) {}
+	//! Construct a HalfSpace from its direction and assumes a 90 deg aperture.
+	//! @param an a unit vector indicating the direction.
 	HalfSpace(const Vec3d& an) : n(an), d(0) {}
-	//! Construct a HalfSpace from its direction and aperture
-	//! @param an a unit vector indicating the direction
-	//! @param ar cosinus of the aperture
-	HalfSpace(const Vec3d& an, double ar) : n(an), d(ar) {;}
+	//! Construct a HalfSpace from its direction and aperture.
+	//! @param an a unit vector indicating the direction.
+	//! @param ar cosinus of the aperture.
+	HalfSpace(const Vec3d& an, double ar) : n(an), d(ar) {Q_ASSERT(d==0 || std::fabs(n.lengthSquared()-1.)<0.0000001);}
 	HalfSpace(const HalfSpace& other) : n(other.n), d(other.d) {}
-	bool contains(const Vec3d &v) const {return (v*n>=d);}
+	//! Find if a point is contained into the halfspace.
+	//! @param v a unit vector.
+	bool contains(const Vec3d &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.)<0.0000001);return (v*n>=d);}
 	bool operator==(const HalfSpace& other) const {return (n==other.n && d==other.d);}
 
-	//! Get the area of the halfspace in steradian
+	//! Get the area of the intersection of the halfspace on the sphere in steradian.
 	double getArea() const {return 2.*M_PI*(1.-d);}
-	//! The direction unit vector
+	
+	//! The direction unit vector. Only if d==0, this vector doesn't need to be unit.
 	Vec3d n;
 	//! The cos of cone radius
 	double d;
