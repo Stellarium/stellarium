@@ -1,6 +1,6 @@
 
 
-INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/core ${CMAKE_SOURCE_DIR}/src/gui ${CMAKE_SOURCE_DIR}/src/modules ${CMAKE_SOURCE_DIR}/src/planetsephems  ${CMAKE_SOURCE_DIR}/src/external ${CMAKE_SOURCE_DIR}/src/scripting ${CMAKE_SOURCE_DIR}/src/external/kfilter ${FreeType2_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${CURL_INCLUDE_DIRS} ${JPEG_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${SDL_INCLUDE_DIR} ${ICONV_INCLUDE_DIR} ${INTL_INCLUDE_DIR} ${SDLMIXER_INCLUDE_DIR} ${QT_INCLUDE_DIR}/QtScript ${QT_QTSCRIPT_INCLUDE_DIR} ${CMAKE_BINARY_DIR}/src)
+INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/core ${CMAKE_SOURCE_DIR}/src/gui ${CMAKE_SOURCE_DIR}/src/modules ${CMAKE_SOURCE_DIR}/src/planetsephems  ${CMAKE_SOURCE_DIR}/src/external ${CMAKE_SOURCE_DIR}/src/scripting ${CMAKE_SOURCE_DIR}/src/external/kfilter ${FreeType2_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${JPEG_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${ICONV_INCLUDE_DIR} ${INTL_INCLUDE_DIR} ${QT_INCLUDE_DIR}/QtScript ${QT_QTSCRIPT_INCLUDE_DIR} ${CMAKE_BINARY_DIR}/src ${QT_QTTEST_INCLUDE_DIR})
 
 ########### next target ###############
 
@@ -424,15 +424,19 @@ SET(tests_testdates_SRCS
 	core/StelUtils.hpp
 	tests/testdates.cpp)
 ADD_EXECUTABLE(testdates ${tests_testdates_SRCS})
-TARGET_LINK_LIBRARIES(testdates ${extLinkerOption})
+TARGET_LINK_LIBRARIES(testdates ${extLinkerOption} ${QT_QTTEST_LIBRARY})
 ADD_TEST(test_testdates ${EXECUTABLE_OUTPUT_PATH}/testdates)
 
 SET(tests_testStelSphereGeometry_SRCS
+	tests/testStelSphereGeometry.hpp
 	tests/testStelSphereGeometry.cpp
 	core/StelSphereGeometry.hpp
 	core/StelSphereGeometry.cpp
 	core/StelUtils.cpp
 	core/StelUtils.hpp)
-ADD_EXECUTABLE(testStelSphereGeometry ${tests_testStelSphereGeometry_SRCS})
-TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOption})
+
+QT4_WRAP_CPP(testStelSphereGeometry_MOC_SRCS tests/testStelSphereGeometry.hpp)
+
+ADD_EXECUTABLE(testStelSphereGeometry ${tests_testStelSphereGeometry_SRCS} ${testStelSphereGeometry_MOC_SRCS})
+TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOption} ${QT_QTTEST_LIBRARY})
 ADD_TEST(test_testStelSphereGeometry ${EXECUTABLE_OUTPUT_PATH}/testStelSphereGeometry)
