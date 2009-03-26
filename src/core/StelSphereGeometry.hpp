@@ -29,6 +29,7 @@ class SphericalPolygon;
 
 //! @class SphericalPolygonBase
 //! Abstract class defining default implementations for some spherical geometry methods.
+//! All methods are reentrant.
 class SphericalPolygonBase
 {
 public:
