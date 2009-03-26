@@ -108,7 +108,7 @@ struct GluTessCallbackData
 	bool edgeFlag;					//! Used to store temporary edgeFlag found by the tesselator.
 };
 
-void vertexCallback(void* vertexData, void* userData)
+void APIENTRY vertexCallback(void* vertexData, void* userData)
 {
 	SphericalPolygon* mp = ((GluTessCallbackData*)userData)->thisPolygon;
 	const double* v = (double*)vertexData;
@@ -116,12 +116,12 @@ void vertexCallback(void* vertexData, void* userData)
 	mp->edgeFlags.append(((GluTessCallbackData*)userData)->edgeFlag);
 }
 
-void edgeFlagCallback(GLboolean flag, void* userData)
+void APIENTRY edgeFlagCallback(GLboolean flag, void* userData)
 {
 	((GluTessCallbackData*)userData)->edgeFlag=flag;
 }
 
-void errorCallback(GLenum errno)
+void APIENTRY errorCallback(GLenum errno)
 {
 	qWarning() << "Tesselator error:" << errno;
 }
@@ -133,9 +133,9 @@ void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, Sph
 	
 	// Use GLU tesselation functions to transform the polygon into a list of triangles
 	GLUtesselator* tess = gluNewTess();
-	gluTessCallback(tess, GLU_TESS_VERTEX_DATA, (GLvoid(*)()) &vertexCallback);
-	gluTessCallback(tess, GLU_TESS_EDGE_FLAG_DATA, (GLvoid(*)()) &edgeFlagCallback);
-	gluTessCallback(tess, GLU_TESS_ERROR, (GLvoid (*) ()) &errorCallback);
+	gluTessCallback(tess, GLU_TESS_VERTEX_DATA, (GLvoid(APIENTRY*)()) &vertexCallback);
+	gluTessCallback(tess, GLU_TESS_EDGE_FLAG_DATA, (GLvoid(APIENTRY*)()) &edgeFlagCallback);
+	gluTessCallback(tess, GLU_TESS_ERROR, (GLvoid (APIENTRY*) ()) &errorCallback);
 	const GLdouble windRule = (windingRule==SphericalPolygonBase::WindingPositive) ? GLU_TESS_WINDING_POSITIVE : GLU_TESS_WINDING_ABS_GEQ_TWO;
 	gluTessProperty(tess, GLU_TESS_WINDING_RULE, windRule);
 	GluTessCallbackData data;
@@ -154,14 +154,14 @@ void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, Sph
 	gluDeleteTess(tess);
 }
 
-void contourBeginCallback(GLenum type, void* userData)
+void APIENTRY contourBeginCallback(GLenum type, void* userData)
 {
 	Q_ASSERT(type==GL_LINE_LOOP);
 	QVector<QVector<Vec3d> >* tmpContours = static_cast<QVector<QVector<Vec3d> >*>(userData);
 	tmpContours->append(QVector<Vec3d>());
 }
 
-void contourVertexCallback(void* vertexData, void* userData)
+void APIENTRY contourVertexCallback(void* vertexData, void* userData)
 {
 	const double* v = (double*)vertexData;
 	QVector<QVector<Vec3d> >* tmpContours = static_cast<QVector<QVector<Vec3d> >*>(userData);
@@ -174,9 +174,9 @@ QVector<QVector<Vec3d> > SphericalPolygonBase::getContours() const
 	QVector<QVector<Vec3d> > tmpContours;
 	// Use GLU tesselation functions to compute the contours from the list of triangles
 	GLUtesselator* tess = gluNewTess();
-	gluTessCallback(tess, GLU_TESS_BEGIN_DATA, (GLvoid(*)()) &contourBeginCallback);
-	gluTessCallback(tess, GLU_TESS_VERTEX_DATA, (GLvoid(*)()) &contourVertexCallback);
-	gluTessCallback(tess, GLU_TESS_ERROR, (GLvoid (*) ()) &errorCallback);
+	gluTessCallback(tess, GLU_TESS_BEGIN_DATA, (GLvoid(APIENTRY*)()) &contourBeginCallback);
+	gluTessCallback(tess, GLU_TESS_VERTEX_DATA, (GLvoid(APIENTRY*)()) &contourVertexCallback);
+	gluTessCallback(tess, GLU_TESS_ERROR, (GLvoid (APIENTRY*) ()) &errorCallback);
 	gluTessProperty(tess, GLU_TESS_WINDING_RULE, GLU_TESS_WINDING_POSITIVE);
 	gluTessProperty(tess, GLU_TESS_BOUNDARY_ONLY, GL_TRUE);
 	gluTessBeginPolygon(tess, &tmpContours);
