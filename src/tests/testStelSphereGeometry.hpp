@@ -30,6 +30,7 @@ private slots:
 	void testHalfSpace();
 	void testContains();
 	void testPlaneIntersect2();
+	void testSphericalPolygon();
 };
 
 #endif // _TESTSTELSPHERICALGEOMETRY_HPP_

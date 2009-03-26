@@ -21,6 +21,7 @@
 #include <QObject>
 #include <QtDebug>
 #include <QtTest>
+#include "StelJsonParser.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelUtils.hpp"
 
@@ -112,4 +113,58 @@ void TestStelSphericalGeometry::testPlaneIntersect2()
 	QVERIFY2(res.length()<0.0000001, QString("p1 wrong: %1").arg(p1.toString()).toUtf8());
 	res = p2-Vec3d(hx.d,hx.d,0);
 	QVERIFY2(res.length()<0.0000001, QString("p2 wrong: %1").arg(p2.toString()).toUtf8());
+}
+
+void TestStelSphericalGeometry::testSphericalPolygon()
+{
+	// Testing code for new polygon code
+	QVector<QVector<Vec3d> > contours;
+	QVector<Vec3d> c1(4);
+	StelUtils::spheToRect(-0.5, -0.5, c1[0]);
+	StelUtils::spheToRect(0.5, -0.5, c1[1]);
+	StelUtils::spheToRect(0.5, 0.5, c1[2]);
+	StelUtils::spheToRect(-0.5, 0.5, c1[3]);
+	contours.append(c1);
+	QVector<Vec3d> c2(4);
+	StelUtils::spheToRect(-0.2, 0.2, c2[0]);
+	StelUtils::spheToRect(0.2, 0.2, c2[1]);
+	StelUtils::spheToRect(0.2, -0.2, c2[2]);
+	StelUtils::spheToRect(-0.2, -0.2, c2[3]);
+	contours.append(c2);
+	SphericalPolygon p(contours);
+	
+	contours = p.getContours();
+	QVERIFY(contours.size()==2);
+	QVERIFY(contours[0].size()==4);
+	QVERIFY(contours[1].size()==4);
+	
+	SphericalPolygon bigSquare;
+	bigSquare.setContour(c1);
+	SphericalPolygon smallSquare;
+	QVector<Vec3d> c2inv(4);
+	c2inv[0]=c2[3]; c2inv[1]=c2[2]; c2inv[2]=c2[1]; c2inv[3]=c2[0];
+	smallSquare.setContour(c2inv);
+	
+	// Booleans methods
+	QCOMPARE(bigSquare.getUnion(p).getArea(), bigSquare.getArea());
+	QCOMPARE(bigSquare.getSubtraction(smallSquare).getArea(), p.getArea());
+	QCOMPARE(bigSquare.getIntersection(smallSquare).getArea(), smallSquare.getArea());
+	
+	// Point contain methods
+	Vec3d v0, v1;
+	StelUtils::spheToRect(0., 0., v0);
+	StelUtils::spheToRect(0.3, 0.3, v1);
+	QVERIFY(smallSquare.contains(v0));
+	QVERIFY(bigSquare.contains(v0));
+	QVERIFY(!p.contains(v0));
+	
+	StelJsonParser parser;
+	QBuffer buf;
+	buf.open(QBuffer::ReadWrite);
+	parser.write(p.toQVariant(), buf);
+	buf.seek(0);
+	qDebug() << buf.buffer();
+	QVERIFY(!smallSquare.contains(v1));
+	QVERIFY(bigSquare.contains(v1));
+	QVERIFY(p.contains(v1));
 }
