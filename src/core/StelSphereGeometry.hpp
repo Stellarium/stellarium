@@ -55,6 +55,10 @@ public:
 	//! @param windingRule the winding rule to use. Default value is WindingPositive, meaning that the 
 	//! polygon is the union of the positive contours minus the negative ones.
 	virtual void setContours(const QVector<QVector<Vec3d> >& contours, PolyWindingRule windingRule=WindingPositive) = 0;
+	
+	//! Set a single contour defining the SphericalPolygon.
+	//! @param contours the list of contours defining the polygon area.
+	virtual void setContour(const QVector<Vec3d>& contour) = 0;
 
 	//! Get the contours defining the SphericalPolygon.
 	virtual QVector<QVector<Vec3d> > getContours() const;
@@ -114,6 +118,10 @@ public:
 	//! @param windingRule the winding rule to use. Default value is WindingPositive, meaning that the 
 	//! polygon is the union of the positive contours minus the negative ones.
 	virtual void setContours(const QVector<QVector<Vec3d> >& contours, SphericalPolygonBase::PolyWindingRule windingRule=SphericalPolygonBase::WindingPositive);
+	
+	//! Set a single contour defining the SphericalPolygon.
+	//! @param contours a contour defining the polygon area.
+	virtual void setContour(const QVector<Vec3d>& contour);
 	
 private:
 	friend void vertexCallback(void* vertexData, void* userData);

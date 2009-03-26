@@ -432,6 +432,8 @@ SET(tests_testStelSphereGeometry_SRCS
 	tests/testStelSphereGeometry.cpp
 	core/StelSphereGeometry.hpp
 	core/StelSphereGeometry.cpp
+	core/StelJsonParser.hpp
+	core/StelJsonParser.cpp
 	core/StelUtils.cpp
 	core/StelUtils.hpp)
 
