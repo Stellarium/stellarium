@@ -108,6 +108,10 @@ struct GluTessCallbackData
 	bool edgeFlag;					//! Used to store temporary edgeFlag found by the tesselator.
 };
 
+#ifndef APIENTRY
+ #define APIENTRY /**/
+#endif
+
 void APIENTRY vertexCallback(void* vertexData, void* userData)
 {
 	SphericalPolygon* mp = ((GluTessCallbackData*)userData)->thisPolygon;
@@ -194,6 +198,26 @@ QVector<QVector<Vec3d> > SphericalPolygonBase::getContours() const
 	return tmpContours;
 }
 
+inline static bool sideOk(const Vec3d& v1, const Vec3d& v2, const Vec3d& p)
+{
+	// TODO: Optimize
+	return (v1^v2)*p>=0;
+}
+
+// Returns whether a point is contained into the SphericalPolygon.
+bool SphericalPolygonBase::contains(const Vec3d& p) const
+{
+	const QVector<Vec3d>& trianglesArray = getVertexArray();
+	for (int i=0;i<trianglesArray.size()/3;++i)
+	{
+		if (!sideOk(trianglesArray[i*3+1], trianglesArray[i*3+0], p) ||
+			!sideOk(trianglesArray[i*3+2], trianglesArray[i*3+1], p) ||
+			!sideOk(trianglesArray[i*3+0], trianglesArray[i*3+2], p))
+			return false;
+	}
+	return true;
+}
+	
 // Return a new SphericalPolygon consisting of the intersection of this and the given SphericalPolygon.
 SphericalPolygon SphericalPolygonBase::getIntersection(const SphericalPolygonBase& mpoly)
 {

@@ -74,15 +74,15 @@ public:
 	//! Use QJSONParser to transform a QVariant into its JSON representation.
 	virtual QVariantMap toQVariant() const;
 	
+	//! Returns whether a point is contained into the SphericalPolygon.
+	virtual bool contains(const Vec3d& p) const;
+	
 	//! Return a new SphericalPolygon consisting of the intersection of this and the given SphericalPolygon.
 	SphericalPolygon getIntersection(const SphericalPolygonBase& mpoly);
 	//! Return a new SphericalPolygon consisting of the union of this and the given SphericalPolygon.
 	SphericalPolygon getUnion(const SphericalPolygonBase& mpoly);
 	//! Return a new SphericalPolygon consisting of the subtraction of the given SphericalPolygon from this.
 	SphericalPolygon getSubtraction(const SphericalPolygonBase& mpoly);
-	
-	//! Find if a point is contained into a SphericalPolygon
-	bool contains(const Vec3d& p) const;
 };
 
 //! @class SphericalPolygon
