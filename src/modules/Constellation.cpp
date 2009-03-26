@@ -116,8 +116,12 @@ void Constellation::drawOptim(const StelPainter& sPainter, const StelNavigator* 
 		v = star1^star2;
 		v.normalize();
 		if (viewportHalfspace.d<0. || StelGeom::planeIntersect2(viewportHalfspace, StelGeom::HalfSpace(v), dummy, dummy)!=false)
+		{
+			star1.normalize();
+			star2.normalize();
 			if (viewportHalfspace.contains(star1) || viewportHalfspace.contains(star2))
 				sPainter.drawSmallCircleArc(star1, star2, Vec3d(0));
+		}
 	}
 }
 
