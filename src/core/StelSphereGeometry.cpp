@@ -109,7 +109,7 @@ struct GluTessCallbackData
 };
 
 #ifndef APIENTRY
- #define APIENTRY /**/
+ #define APIENTRY
 #endif
 
 void APIENTRY vertexCallback(void* vertexData, void* userData)
