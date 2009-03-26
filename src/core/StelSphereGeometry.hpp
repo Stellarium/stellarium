@@ -41,6 +41,9 @@ public:
    		WindingAbsGeqTwo	//!< Abs greater or equal 2 winding rule (used for intersection)
 	};
 	
+	//! Destructor
+	virtual ~SphericalPolygonBase() {;}
+	
 	//! Return an openGL compatible array to be displayed using vertex arrays.
 	virtual QVector<Vec3d> getVertexArray() const = 0;
 
