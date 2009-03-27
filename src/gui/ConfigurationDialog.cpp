@@ -673,7 +673,6 @@ void ConfigurationDialog::badChecksum(void)
 
 void ConfigurationDialog::downloadFinished(void)
 {
-	downloaded++;
 	QString tempFileName = starsDir+"/"+downloadName+".tmp";
 	QString finalFileName = starsDir+"/"+downloadName+".cat";
 	
@@ -686,6 +685,7 @@ void ConfigurationDialog::downloadFinished(void)
 	}
 	else
 	{
+		downloaded++;
 		starSettings->setValue(downloadName+"/path", downloadName+".cat");
 		setUpdatesState(ConfigurationDialog::ShowAvailable);
 	}

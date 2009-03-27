@@ -285,7 +285,16 @@ void StarMgr::loadData()
 	{
 		QString cat = it.next();
 		QString cat_file_name = starSettings->value(cat+"/path").toString();
-		QString cat_file_path = fileMgr.findFile("stars/default/"+cat_file_name);
+		QString cat_file_path;
+		try
+		{
+			cat_file_path = fileMgr.findFile("stars/default/"+cat_file_name);
+		}
+		catch(std::runtime_error e)
+		{
+			qDebug() << qPrintable(QString("Error: Could not load catalog %1").arg(cat_file_name));
+			continue;
+		}
 		
 		lb.SetMessage(q_("Loading catalog %1 from file %2").arg(cat, cat_file_name));
 		memoryUsed += fileMgr.size(cat_file_path);
