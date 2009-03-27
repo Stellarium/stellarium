@@ -27,63 +27,6 @@
 #include <GL/glu.h>	/* Header File For The GLU Library */
 #endif
 
-using namespace StelGeom;
-
-//! Special constructor for 3 halfspaces convex
-ConvexS::ConvexS(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2)
-{
-	reserve(3);
-	push_back(e1^e0);
-	push_back(e2^e1);
-	push_back(e0^e2);
-
-	// Warning: vectors not normalized while they should be
-	// In this case it works because d==0 for each HalfSpace
-}
-
-//! Special constructor for 4 halfspaces convex
-ConvexS::ConvexS(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3)
-{
-	reserve(4);
-	const double d = e3*((e2-e3)^(e1-e3));
-	if (d > 0)
-	{
-		push_back(e1^e0);
-		push_back(e2^e1);
-		push_back(e3^e2);
-		push_back(e0^e3);
-
-		// Warning: vectors not normalized while they should be
-		// In this case it works because d==0 for each HalfSpace
-	}
-	else
-	{
-		push_back((e2-e3)^(e1-e3));
-		(*begin()).d = d;
-		(*begin()).n.normalize();
-	}
-}
-
-
-
-//! Special constructor for 3 points polygon
-Polygon::Polygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2)
-{
-	reserve(3);
-	push_back(e0);
-	push_back(e1);
-	push_back(e2);
-}
-
-//! Special constructor for 4 points polygon
-Polygon::Polygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3)
-{
-	reserve(4);
-	push_back(e0);
-	push_back(e1);
-	push_back(e2);
-	push_back(e3);
-}
 
 bool SphericalPolygonBase::loadFromQVariant(const QVariantMap& qv)
 {
@@ -140,6 +83,7 @@ void APIENTRY edgeFlagCallback(GLboolean flag, void* userData)
 void APIENTRY errorCallback(GLenum errno)
 {
 	qWarning() << "Tesselator error:" << errno;
+	Q_ASSERT(0);
 }
 
 void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, SphericalPolygonBase::PolyWindingRule windingRule)
@@ -218,28 +162,28 @@ QVector<QVector<Vec3d> > SphericalPolygonBase::getContours() const
 	return tmpContours;
 }
 
-inline static bool sideOk(const Vec3d& v1, const Vec3d& v2, const Vec3d& p)
-{
-	// TODO: Optimize
-	return (v2^v1).dot(p)>=0;
-}
-
 // Returns whether a point is contained into the SphericalPolygon.
 bool SphericalPolygonBase::contains(const Vec3d& p) const
 {
 	const QVector<Vec3d>& trianglesArray = getVertexArray();
 	for (int i=0;i<trianglesArray.size()/3;++i)
 	{
-		if (sideOk(trianglesArray[i*3+1], trianglesArray[i*3+0], p) &&
-			sideOk(trianglesArray[i*3+2], trianglesArray[i*3+1], p) &&
-			sideOk(trianglesArray[i*3+0], trianglesArray[i*3+2], p))
+		if (sideContains(trianglesArray[i*3+1], trianglesArray[i*3+0], p) &&
+			sideContains(trianglesArray[i*3+2], trianglesArray[i*3+1], p) &&
+			sideContains(trianglesArray[i*3+0], trianglesArray[i*3+2], p))
 			return true;
 	}
 	return false;
 }
+
+// Returns whether another SphericalPolygon intersects with the SphericalPolygon.
+bool SphericalPolygonBase::intersects(const SphericalPolygonBase& mpoly) const
+{
+	return !getIntersection(mpoly).getVertexArray().isEmpty();
+}
 	
 // Return a new SphericalPolygon consisting of the intersection of this and the given SphericalPolygon.
-SphericalPolygon SphericalPolygonBase::getIntersection(const SphericalPolygonBase& mpoly)
+SphericalPolygon SphericalPolygonBase::getIntersection(const SphericalPolygonBase& mpoly) const
 {
 	QVector<QVector<Vec3d> > allContours = getContours();
 	allContours += mpoly.getContours();
@@ -249,7 +193,7 @@ SphericalPolygon SphericalPolygonBase::getIntersection(const SphericalPolygonBas
 }
 
 // Return a new SphericalPolygon consisting of the union of this and the given SphericalPolygon.
-SphericalPolygon SphericalPolygonBase::getUnion(const SphericalPolygonBase& mpoly)
+SphericalPolygon SphericalPolygonBase::getUnion(const SphericalPolygonBase& mpoly) const
 {
 	QVector<QVector<Vec3d> > allContours = getContours();
 	allContours += mpoly.getContours();
@@ -257,7 +201,7 @@ SphericalPolygon SphericalPolygonBase::getUnion(const SphericalPolygonBase& mpol
 }
 
 // Return a new SphericalPolygon consisting of the subtraction of the given SphericalPolygon from this.
-SphericalPolygon SphericalPolygonBase::getSubtraction(const SphericalPolygonBase& mpoly)
+SphericalPolygon SphericalPolygonBase::getSubtraction(const SphericalPolygonBase& mpoly) const
 {
 	QVector<QVector<Vec3d> > allContours = getContours();
 	foreach (const QVector<Vec3d>& c, mpoly.getContours())
@@ -287,30 +231,98 @@ double SphericalPolygonBase::getArea() const
 	}
 	return area;
 }
-	
-ConvexPolygon ConvexPolygon::fullSky()
+
+// Return a point located inside the polygon.
+Vec3d SphericalPolygonBase::getPointInside() const
 {
-	ConvexPolygon poly;
-	poly.asConvex().push_back(HalfSpace(Vec3d(1.,0.,0.), -1.));
-	return poly;
+	const QVector<Vec3d>& trianglesArray = getVertexArray();
+	return trianglesArray[0]+trianglesArray[1]+trianglesArray[2];
+}
+	
+// Return an openGL compatible array to be displayed using vertex arrays.
+QVector<Vec3d> SphericalConvexPolygon::getVertexArray() const
+{
+	SphericalPolygon p;
+	p.setContour(contour);
+	return p.getVertexArray();
 }
 
-//! Check if the polygon is valid, i.e. it has no side >180
-bool ConvexPolygon::checkValid() const
+// Return an openGL compatible array of edge flags to be displayed using vertex arrays.
+QVector<bool> SphericalConvexPolygon::getEdgeFlagArray() const
 {
-	const ConvexS& cvx = asConvex();
-	const Polygon& poly = asPolygon();
-	if (cvx.size()<3)
+	SphericalPolygon p;
+	p.setContour(contour);
+	return p.getEdgeFlagArray();
+}
+	
+// Check if the polygon is valid, i.e. it has no side >180
+bool SphericalConvexPolygon::checkValid() const
+{
+	if (contour.size()<3)
 		return false;
 	bool res=true;
-	for (size_t i=0;i<cvx.size();++i)
+	for (int i=0;i<contour.size()-1;++i)
 	{
 		// Check that all points not on the current convex plane are included in it
-		for (size_t p=0;p<cvx.size()-2;++p)
-			res &= cvx[i].contains(poly[(p+i+2)%poly.size()]);
+		for (int p=0;p<contour.size()-2;++p)
+			res &= sideContains(contour.at(i), contour.at(i+1), contour[(p+i+2)%contour.size()]);
 	}
+	for (int p=0;p<contour.size()-2;++p)
+		res &= sideContains(contour.last(), contour.first(), contour[(p+contour.size()+1)%contour.size()]);
 	return res;
 }
+
+// Return the list of halfspace bounding the ConvexPolygon.
+QVector<HalfSpace> SphericalConvexPolygon::getBoundingHalfSpaces() const
+{
+	QVector<HalfSpace> res;
+	for (int i=0;i<contour.size()-1;++i)
+		res << HalfSpace(contour.at(i+1)^contour.at(i));
+	res << HalfSpace(contour.first()^contour.last());
+	return res;
+}
+
+// Returns whether a point is contained into the region.
+bool SphericalConvexPolygon::contains(const Vec3d& p) const
+{
+	for (int i=0;i<contour.size()-1;++i)
+	{
+		if (!sideContains(contour.at(i), contour.at(i+1), p))
+			return false;
+	}
+	return sideContains(contour.last(), contour.first(), p);
+}
+
+// Returns whether a SphericalPolygon is contained into the region.
+bool SphericalConvexPolygon::contains(const SphericalPolygonBase& polyBase) const
+{
+	const SphericalConvexPolygon* cvx = dynamic_cast<const SphericalConvexPolygon*>(&polyBase);
+	if (cvx!=NULL)
+	{
+		foreach (const Vec3d& v, cvx->getConvexContour())
+		{
+			if (!contains(v))
+				return false;
+		}
+		return true;
+	}
+	Q_ASSERT(0); // Not implemented
+	return false;
+}
+
+// Returns whether another SphericalPolygon intersects with the SphericalPolygon.
+bool SphericalConvexPolygon::intersects(const SphericalPolygonBase& polyBase) const
+{
+	const SphericalConvexPolygon* cvx = dynamic_cast<const SphericalConvexPolygon*>(&polyBase);
+	if (cvx!=NULL)
+	{
+		return !areAllPointsOutsideOneSide(cvx->contour) && !cvx->areAllPointsOutsideOneSide(contour);
+	}
+	Q_ASSERT(0); // Not implemented
+	return false;
+}
+	
+/*
 
 //! Return the convex polygon area in steradians
 // TODO Optimize using add oc formulas from http://en.wikipedia.org/wiki/Solid_angle
@@ -357,8 +369,29 @@ Vec3d ConvexPolygon::getBarycenter() const
 	return barycenter;
 }
 
-namespace StelGeom
-{
+//! Special constructor for 4 halfspaces convex
+// ConvexS::ConvexS(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3)
+// {
+// 	reserve(4);
+// 	const double d = e3*((e2-e3)^(e1-e3));
+// 	if (d > 0)
+// 	{
+// 		push_back(e1^e0);
+// 		push_back(e2^e1);
+// 		push_back(e3^e2);
+// 		push_back(e0^e3);
+// 
+// 		// Warning: vectors not normalized while they should be
+// 		// In this case it works because d==0 for each HalfSpace
+// 	}
+// 	else
+// 	{
+// 		push_back((e2-e3)^(e1-e3));
+// 		(*begin()).d = d;
+// 		(*begin()).n.normalize();
+// 	}
+// }
+*/
 
 //! Compute the intersection of the planes defined by the 2 halfspaces on the sphere (usually on 2 points) and return it in p1 and p2.
 //! If the 2 HalfSpaces don't interesect or intersect only at 1 point, false is returned and p1 and p2 are undefined
@@ -441,6 +474,4 @@ bool planeIntersect2(const HalfSpace& h1, const HalfSpace& h2, Vec3d& p1, Vec3d&
 	Q_ASSERT(fabs(p2.lengthSquared()-1.)<0.000001);
 
 	return true;
-}
-
 }

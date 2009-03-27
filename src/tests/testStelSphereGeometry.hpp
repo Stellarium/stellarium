@@ -22,15 +22,25 @@
 
 #include <QObject>
 #include <QtTest>
+#include "StelSphereGeometry.hpp"
 
 class TestStelSphericalGeometry : public QObject
 {
 Q_OBJECT
 private slots:
+	void initTestCase();
 	void testHalfSpace();
 	void testContains();
 	void testPlaneIntersect2();
 	void testSphericalPolygon();
+	
+	void benchmarkContains();
+	void benchmarkCheckValid();
+	
+private:
+	SphericalPolygon holySquare;
+	SphericalPolygon bigSquare;
+	SphericalPolygon smallSquare;
 };
 
 #endif // _TESTSTELSPHERICALGEOMETRY_HPP_

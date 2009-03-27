@@ -95,7 +95,7 @@ protected:
 	DataSetCredits dataSetCredits;
 	
 	//! Direction of the vertices of the convex hull in ICRS frame
-	QList<StelGeom::ConvexPolygon> skyConvexPolygons;
+	QList<SphericalConvexPolygon> skyConvexPolygons;
 	
 protected:
 
@@ -108,7 +108,7 @@ private:
 	
 	//! Return the list of tiles which should be drawn.
 	//! @param result a map containing resolution, pointer to the tiles
-	void getTilesToDraw(QMultiMap<double, StelSkyPolygon*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, bool recheckIntersect=true);
+	void getTilesToDraw(QMultiMap<double, StelSkyPolygon*>& result, StelCore* core, const SphericalRegionP& viewPortPoly, bool recheckIntersect=true);
 	
 	//! Draw the polygon on the screen.
 	//! @return true if the tile was actually displayed

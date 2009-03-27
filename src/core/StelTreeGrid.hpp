@@ -28,12 +28,12 @@
 struct StelTreeGridNode
 {
     StelTreeGridNode() {}
-    StelTreeGridNode(const StelGeom::ConvexPolygon& s) : triangle(s) {}
+    StelTreeGridNode(const SphericalConvexPolygon& s) : triangle(s) {}
         
 	typedef std::vector<StelGridObject*> Objects;
     Objects objects;
     
-    StelGeom::ConvexPolygon triangle;
+    SphericalConvexPolygon triangle;
     
     typedef std::vector<StelTreeGridNode> Children;
     Children children;
@@ -79,7 +79,7 @@ private:
     unsigned int maxObjects;
     
     // The last filter
-    ConvexS filter;
+	QVector<HalfSpace> filter;
 };
 
 
@@ -88,20 +88,20 @@ void StelTreeGrid::fillIntersect(const S& s, const StelTreeGridNode& node, StelG
 {
     for (StelTreeGridNode::Objects::const_iterator io = node.objects.begin(); io != node.objects.end(); ++io)
     {
-		if (intersect(s, (*io)->getPositionForGrid()))
+		if (s->intersects((*io)->getPositionForGrid()))
         {
             grid.insertResult(*io);
         }
     }
     for (Children::const_iterator ic = node.children.begin(); ic != node.children.end(); ++ic)
     {
-        if (contains(s, ic->triangle))
+		if (s->contains(ic->triangle))
         {
             fillAll(*ic, grid);
         }
         else
 		{
-			if(intersect(s, ic->triangle))
+			if (s->intersects(ic->triangle))
         	{
             	fillIntersect(s, *ic, grid);
         	}
@@ -109,17 +109,6 @@ void StelTreeGrid::fillIntersect(const S& s, const StelTreeGridNode& node, StelG
     }
 }
 
-template<class Shape>
-struct NotIntersectPred
-{
-    Shape shape;
-    
-    NotIntersectPred(const Shape& s) : shape(s) {}
-	bool operator() (const StelGridObject* obj) const
-    {
-		return !intersect(shape, obj->getPositionForGrid());
-    }
-};
 
 template<class Shape>
 void StelTreeGrid::filterIntersect(const Shape& s)

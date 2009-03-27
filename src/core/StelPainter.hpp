@@ -85,7 +85,7 @@ public:
 	
 	//! Draw the given polygon.
 	//! @param poly The polygon to draw.
-	void drawPolygon(const StelGeom::Polygon& poly) const;
+	//void drawPolygon(const StelGeom::Polygon& poly) const;
 	
 	//! Draw the given SphericalPolygon.
 	//! @param spoly The SphericalPolygon to draw.

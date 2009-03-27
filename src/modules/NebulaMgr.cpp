@@ -137,7 +137,7 @@ void NebulaMgr::draw(StelCore* core)
 	
 	// Use a 1 degree margin
 	const double margin = 1.*M_PI/180.*prj->getPixelPerRadAtCenter();
-	const StelGeom::ConvexPolygon& p = prj->getViewportConvexPolygon(margin, margin);
+	const SphericalRegionP& p = prj->getViewportConvexPolygon(margin, margin);
 	nebGrid.filterIntersect(p);
 	
 	// Print all the nebulae of all the selected zones

@@ -103,7 +103,7 @@ void StelSkyImageTile::draw(StelCore* core, const StelPainter& sPainter)
 }
 	
 // Return the list of tiles which should be drawn.
-void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, float limitLuminance, bool recheckIntersect)
+void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& result, StelCore* core, const SphericalRegionP& viewPortPoly, float limitLuminance, bool recheckIntersect)
 {
 	
 #ifndef NDEBUG
@@ -153,16 +153,16 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		}
 		else
 		{
-			foreach (const StelGeom::ConvexPolygon poly, skyConvexPolygons)
+			foreach (const SphericalConvexPolygon poly, skyConvexPolygons)
 			{
-				if (contains(viewPortPoly, poly))
+				if (viewPortPoly->contains(poly))
 				{
 					intersectScreen = true;
 				}
 				else
 				{
 					fullInScreen = false;
-					if (intersect(viewPortPoly, poly))
+					if (viewPortPoly->intersects(poly))
 						intersectScreen = true;
 				}
 			}
@@ -273,13 +273,13 @@ bool StelSkyImageTile::drawTile(StelCore* core, const StelPainter& sPainter)
 	
 	for (int p=0;p<skyConvexPolygons.size();++p)
 	{
-		const StelGeom::Polygon& poly = skyConvexPolygons.at(p).asPolygon();
+		const SphericalConvexPolygon& poly = skyConvexPolygons.at(p);
 		const QList<Vec2f>& texCoords = textureCoords.at(p);
 				
-		Q_ASSERT((int)poly.size()==texCoords.size());
+		Q_ASSERT(poly.getConvexContour().size()==texCoords.size());
 						
 		Vec3d win;
-		const int N=poly.size()-1;
+		const int N=poly.getConvexContour().size()-1;
 		int idx=N;
 		int diff = 0;
 		// Using TRIANGLE STRIP requires to use the following vertex order N-0,0,N-1,1,N-2,2 etc..
@@ -291,7 +291,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, const StelPainter& sPainter)
 			if (diff>1) diff=0;
 					
 			glTexCoord2d(texCoords[idx][0]*factorX, texCoords[idx][1]*factorY);
-			prj->project(poly[idx],win);
+			prj->project(poly.getConvexContour()[idx],win);
 			glVertex3dv(win);
 		}
 		glEnd();
@@ -302,7 +302,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, const StelPainter& sPainter)
 		debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
 	}
 	glColor3f(1.0,0.5,0.5);
-	foreach (const StelGeom::ConvexPolygon& poly, skyConvexPolygons)
+	foreach (const SphericalConvexPolygon& poly, skyConvexPolygons)
 	{
 		Vec3d win;
 		Vec3d bary = poly.getBarycenter();
@@ -390,7 +390,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 			vertices.append(v);
 		}
 		Q_ASSERT(vertices.size()==4);
-		skyConvexPolygons.append(StelGeom::ConvexPolygon(vertices[0], vertices[1], vertices[2], vertices[3]));
+		skyConvexPolygons.append(SphericalConvexPolygon(vertices[0], vertices[1], vertices[2], vertices[3]));
 	}
 	
 	// Load the matching textures positions (if any)
@@ -498,13 +498,13 @@ QVariantMap StelSkyImageTile::toQVariantMap() const
 	if (!skyConvexPolygons.isEmpty())
 	{
 		QVariantList polygsL;
-		foreach (const StelGeom::ConvexPolygon& poly, skyConvexPolygons)
+		foreach (const SphericalConvexPolygon& poly, skyConvexPolygons)
 		{
 			QVariantList polyL;
-			for (size_t i=0;i<poly.asPolygon().size();++i)
+			for (int i=0;i<poly.getConvexContour().size();++i)
 			{
 				double ra, dec;
-				StelUtils::rectToSphe(&ra, &dec, poly[i]);
+				StelUtils::rectToSphe(&ra, &dec, poly.getConvexContour().at(i));
 				QVariantList vL;
 				vL.append(ra);
 				vL.append(dec);

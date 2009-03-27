@@ -69,7 +69,7 @@ StelTreeGrid::StelTreeGrid(unsigned int maxobj) : maxObjects(maxobj), filter()
 	for (int i=0;i<20;++i)
 	{
 		const int* corners = icosahedron_triangles[i];
-		children.push_back(ConvexPolygon(icosahedron_corners[corners[0]],icosahedron_corners[corners[2]], icosahedron_corners[corners[1]]));
+		children.push_back(SphericalConvexPolygon(icosahedron_corners[corners[0]],icosahedron_corners[corners[2]], icosahedron_corners[corners[1]]));
 	}
 }
 
@@ -99,7 +99,7 @@ void StelTreeGrid::insert(StelGridObject* obj, StelTreeGridNode& node)
         for (StelTreeGridNode::Children::iterator iter = node.children.begin();
                 iter != node.children.end(); ++iter)
         {
-			if (contains(iter->triangle, obj->getPositionForGrid())) {
+			if (iter->triangle.contains(obj->getPositionForGrid())) {
                 insert(obj, *iter);
                 return;
             }
@@ -111,13 +111,13 @@ void StelTreeGrid::insert(StelGridObject* obj, StelTreeGridNode& node)
 void StelTreeGrid::split(StelTreeGridNode& node)
 {
     Q_ASSERT(node.children.empty());
-    const Polygon& p = node.triangle;
+    const SphericalConvexPolygon& p = node.triangle;
     
-    Q_ASSERT(p.size() == 3);
+    Q_ASSERT(p.getConvexContour().size() == 3);
 
-	const Vec3d& c0 = p[0];
-	const Vec3d& c1 = p[1];
-	const Vec3d& c2 = p[2];
+	const Vec3d& c0 = p.getConvexContour().at(0);
+	const Vec3d& c1 = p.getConvexContour().at(1);
+	const Vec3d& c2 = p.getConvexContour().at(2);
 	
 	Q_ASSERT((c1^c0)*c2 >= 0.0);
 	Vec3d e0 = c1+c2;
@@ -127,10 +127,10 @@ void StelTreeGrid::split(StelTreeGridNode& node)
 	Vec3d e2 = c0+c1;
 	e2.normalize();
 	
-	node.children.push_back(ConvexPolygon(e1,c0,e2));
-	node.children.push_back(ConvexPolygon(e0,e2,c1));
-	node.children.push_back(ConvexPolygon(c2,e1,e0));
-	node.children.push_back(ConvexPolygon(e2,e0,e1));
+	node.children.push_back(SphericalConvexPolygon(e1,c0,e2));
+	node.children.push_back(SphericalConvexPolygon(e0,e2,c1));
+	node.children.push_back(SphericalConvexPolygon(c2,e1,e0));
+	node.children.push_back(SphericalConvexPolygon(e2,e0,e1));
 }
 
 void StelTreeGrid::fillAll(const StelTreeGridNode& node, StelGrid& grid) const

@@ -65,7 +65,7 @@ QString StelProjector::getHtmlSummary() const
  Return a convex polygon on the sphere which includes the viewport in the 
  current frame
 *************************************************************************/
-StelGeom::ConvexPolygon StelProjector::getViewportConvexPolygon(double marginX, double marginY) const
+SphericalRegionP StelProjector::getViewportConvexPolygon(double marginX, double marginY) const
 {
 	Vec3d e0, e1, e2, e3;
 	bool ok = unProject(0-marginX,0-marginY,e0);
@@ -76,24 +76,43 @@ StelGeom::ConvexPolygon StelProjector::getViewportConvexPolygon(double marginX, 
 	{
 		// Special case for handling degenerated cases, use full sky.
 		//qDebug() << "!ok";
- 		return StelGeom::ConvexPolygon::fullSky();
+		return SphericalRegionP((SphericalRegion*)(new AllSkySphericalRegion()));
 	}
 	e0.normalize();
 	e1.normalize();
 	e2.normalize();
 	e3.normalize();
-	StelGeom::ConvexPolygon res = needGlFrontFaceCW() ? StelGeom::ConvexPolygon(e1, e0, e3, e2) : StelGeom::ConvexPolygon(e0, e1, e2, e3);
-	if (res.checkValid())
-		return res;
-	//qDebug() << "!valid";
-	return StelGeom::ConvexPolygon::fullSky(); 
+	if (needGlFrontFaceCW())
+	{
+		Vec3d v = e0;
+		e0 = e3;
+		e3 = v;
+		v = e1;
+		e1 = e2;
+		e2 = v;
+	}
+	const double d = e3*((e2-e3)^(e1-e3));
+	if (d > 0)
+	{
+		SphericalConvexPolygon* res = new SphericalConvexPolygon(e0, e1, e2, e3);
+		if (res->checkValid())
+		{
+			return SphericalRegionP(res);
+		}
+		//qDebug() << "!valid";
+		delete res;
+	}
+	return SphericalRegionP((SphericalRegion*)(new AllSkySphericalRegion()));
+	HalfSpace* h = new HalfSpace((e2-e3)^(e1-e3), d);
+	h->n.normalize();
+	return SphericalRegionP(h);
 }
 
 
 // Return a Halfspace containing the whole viewport
-StelGeom::HalfSpace StelProjector::getBoundingHalfSpace() const
+HalfSpace StelProjector::getBoundingHalfSpace() const
 {
-	StelGeom::HalfSpace result;
+	HalfSpace result;
 	
 	bool ok = unProject(viewportXywh[0]+0.5*viewportXywh[2], viewportXywh[1]+0.5*viewportXywh[3], result.n);
 	Q_ASSERT(ok);	// The central point should be at a valid position by definition
