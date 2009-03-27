@@ -427,6 +427,15 @@ ADD_EXECUTABLE(testdates ${tests_testdates_SRCS})
 TARGET_LINK_LIBRARIES(testdates ${extLinkerOption} ${QT_QTTEST_LIBRARY})
 ADD_TEST(test_testdates ${EXECUTABLE_OUTPUT_PATH}/testdates)
 
+SET(tests_testStelFileMgr_SRCS
+	core/StelFileMgr.cpp
+	core/StelFileMgr.hpp
+	tests/testStelFileMgr.cpp)
+QT4_WRAP_CPP(testStelFileMgr_MOC_SRCS tests/testStelFileMgr.hpp)
+ADD_EXECUTABLE(testStelFileMgr ${tests_testStelFileMgr_SRCS} ${testStelFileMgr_MOC_SRCS})
+TARGET_LINK_LIBRARIES(testStelFileMgr ${extLinkerOption} ${QT_QTTEST_LIBRARY})
+ADD_TEST(test_testStelFileMgr ${EXECUTABLE_OUTPUT_PATH}/testStelFileMgr)
+
 SET(tests_testStelSphereGeometry_SRCS
 	tests/testStelSphereGeometry.hpp
 	tests/testStelSphereGeometry.cpp
