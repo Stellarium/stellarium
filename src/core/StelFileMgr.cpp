@@ -142,7 +142,12 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 	
 	foreach (QString li, listPaths)
 	{
-		QFileInfo thisPath(li+"/"+path);
+		QFileInfo thisPath;
+		if(QFileInfo(path).isAbsolute())
+			thisPath.setFile(path);
+		else
+			thisPath.setFile(li+"/"+path);
+		
 		if (thisPath.isDir()) 
 		{
   			QDir thisDir(thisPath.absoluteFilePath());
