@@ -26,6 +26,7 @@ namespace MotionTestImpl
 	public:
 		Trajectory(const std::string& TrajectoryFile, const SolarSystem *SS);
         virtual Vec3d calcCoord(double t, double startJD);
+		void setStartJD(double t);
 	private:
 		std::vector<GCPtr<Orbit> > mOrbits;
 		std::vector<GCPtr<CoordCalc> > mTrajectory;
@@ -35,8 +36,6 @@ namespace MotionTestImpl
         int mCurrentOrbit;
 
 		GCPtr<Orbit> FindOrbit(std::string name) const;     
-
-		//double rotate_to_vsop87[9];
 	};
 }
 

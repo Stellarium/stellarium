@@ -8,7 +8,7 @@ class Shuttle : public Planet
 {
 private:
     SolarSystem *ssystem;
-    MotionTestImpl::Trajectory *trajectory;
+    MotionTestImpl::Trajectory trajectory;
 public:
     Shuttle(Planet *parent,
            const string& englishName,

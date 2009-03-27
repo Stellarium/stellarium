@@ -11,6 +11,8 @@ namespace
 {
 	const double cPi = 3.14159265358979323846f;	
 
+	const double startJD = 2451514.250011573;
+
 	double ctg(double x)
 	{
 		return cos(x) / sin(x);
@@ -30,7 +32,8 @@ namespace MotionTestImpl
     {
         return mCoordFunc;
     }
-    Trajectory::Trajectory(const std::string& TrajectoryFile, const SolarSystem *SS) : mLastOrbitChange(0.0), mCurrentOrbit(0)
+    Trajectory::Trajectory(const std::string& TrajectoryFile, const SolarSystem *SS) : 
+		mLastOrbitChange(startJD), mCurrentOrbit(0)
 	{
 		ifstream file(TrajectoryFile.c_str());
 		//const int bufSize = 1024;
@@ -70,11 +73,11 @@ namespace MotionTestImpl
 				GCPtr<CoordCalc> straightCalc;
 				if (direction == "to")
 				{
-					straightCalc = new StraightCoordCalc(Vec3d(x, y, z), vel, 0.0f, 1.0f );
+					straightCalc = new StraightCoordCalc(Vec3d(x, y, z), vel, 1.0f );
 				}
 				else if (direction == "from")
 				{
-					straightCalc = new StraightCoordCalc(Vec3d(x, y, z), vel, 0.0f, -1.0f );
+					straightCalc = new StraightCoordCalc(Vec3d(x, y, z), vel, -1.0f );
 				}
 				else
 				{
@@ -124,7 +127,7 @@ namespace MotionTestImpl
 				
 				// t1 - время начала перехода
 				// t2 - время окончания перехода (заход на орбиту)
-				double t1 = 0.0f;
+				double t1 = startJD;
 				for(vector<double>::const_iterator it = mDuration.begin(); 
 					it != mDuration.end(); ++it)
 				{
@@ -168,7 +171,7 @@ namespace MotionTestImpl
 				
 				duration /= coeff;
 
-				double t1 = 0.0f;
+				double t1 = startJD;
 				for(vector<double>::const_iterator it = mDuration.begin(); it != mDuration.end(); ++it)
 					t1 += *it;
 
@@ -188,11 +191,11 @@ namespace MotionTestImpl
 				GCPtr<CoordCalc> straightCalc;
 				if (direction == "to")
 				{
-					straightCalc = new DurationStraightCoordCalc(Vec3d(x, y, z), dur, 0.0f, 1.0f );
+					straightCalc = new DurationStraightCoordCalc(Vec3d(x, y, z), dur, 1.0f );
 				}
 				else if (direction == "from")
 				{
-					straightCalc = new DurationStraightCoordCalc(Vec3d(x, y, z), dur, 0.0f, -1.0f );
+					straightCalc = new DurationStraightCoordCalc(Vec3d(x, y, z), dur, -1.0f );
 				}
 				else
 				{
@@ -205,25 +208,39 @@ namespace MotionTestImpl
 				GCPtr<Orbit> orbit = new Orbit(buf, posCalc);
 				mOrbits.push_back (orbit);
 			}
+			else if (buf == "flyto")
+			{
+				string planetName;
+				double duration;
+				file >> planetName >> duration;
+
+				Planet* planetPtr = SS->searchByEnglishName(planetName);
+			
+				duration /= coeff;
+
+				double t1 = startJD;
+				for(vector<double>::const_iterator it = mDuration.begin(); it != mDuration.end(); ++it)
+					t1 += *it;
+								
+				GCPtr<CoordCalc> straightCalc;
+				Vec3d start = mTrajectory.back()->calcCoord(t1, 0.0) - 
+					planetPtr->get_heliocentric_ecliptic_pos(t1);
+				straightCalc = 
+					new DurationStraightCoordCalc(start, duration, 1.0f );
+
+				
+				GCPtr<CoordCalc> planetCoordCalc = new PlanetCoordCalc(planetPtr);
+				posCalc = new LocalSystemCoordCalc(straightCalc, planetCoordCalc);
+
+				mTrajectory.push_back(posCalc);
+				mDuration.push_back(duration);
+			}
 			else
 			{
 				throw invalid_argument("Bad trajectory file format");
 			}
 
 		}
-		/*const double c_obl = 1.0;
-		const double s_obl = 0.0;
-		const double c_nod = 1.0;
-		const double s_nod = 0.0;
-		  rotate_to_vsop87[0] =  c_nod;
-		  rotate_to_vsop87[1] = -s_nod * c_obl;
-		  rotate_to_vsop87[2] =  s_nod * s_obl;
-		  rotate_to_vsop87[3] =  s_nod;
-		  rotate_to_vsop87[4] =  c_nod * c_obl;
-		  rotate_to_vsop87[5] = -c_nod * s_obl;
-		  rotate_to_vsop87[6] =  0.0;
-		  rotate_to_vsop87[7] =          s_obl;
-		rotate_to_vsop87[8] =          c_obl;*/
 	}
 
     GCPtr<Orbit> Trajectory::FindOrbit(std::string name) const
@@ -250,15 +267,14 @@ namespace MotionTestImpl
                 mTrajectory.push_back(posCalc);
                 mDuration.push_back(FLT_MAX);
             }
+			mTrajectory[mCurrentOrbit]->setStartTime(t);
         }
-        Vec3d pos = mTrajectory[mCurrentOrbit]->calcCoord(t, startJD);//, v;
-		/*v[0] = rotate_to_vsop87[0]*pos[2] + rotate_to_vsop87[1]*pos[0] + rotate_to_vsop87[2]*pos[1];
-		v[1] = rotate_to_vsop87[3]*pos[2] + rotate_to_vsop87[4]*pos[0] + rotate_to_vsop87[5]*pos[1];
-		v[2] = rotate_to_vsop87[6]*pos[2] + rotate_to_vsop87[7]*pos[0] + rotate_to_vsop87[8]*pos[1];*/
-		/*v[0] = rotate_to_vsop87[0]*pos[0] + rotate_to_vsop87[1]*pos[1] + rotate_to_vsop87[2]*pos[2];
-		v[1] = rotate_to_vsop87[3]*pos[0] + rotate_to_vsop87[4]*pos[1] + rotate_to_vsop87[5]*pos[2];
-		v[2] = rotate_to_vsop87[6]*pos[0] + rotate_to_vsop87[7]*pos[1] + rotate_to_vsop87[8]*pos[2];*/
-        
-        return pos;
+
+        return mTrajectory[mCurrentOrbit]->calcCoord(t, startJD);
     }
+
+	void Trajectory::setStartJD(double t)
+	{
+		mLastOrbitChange = t;
+	}
 }
