@@ -121,7 +121,7 @@ protected:
 	bool noTexture;
 	
 	//! Direction of the vertices of each polygons in ICRS frame
-	QList<StelGeom::ConvexPolygon> skyConvexPolygons;
+	QList<SphericalConvexPolygon> skyConvexPolygons;
 	
 	//! Positions of the vertex of each convex polygons in texture space
 	QList< QList<Vec2f> > textureCoords;
@@ -140,7 +140,7 @@ private:
 	
 	//! Return the list of tiles which should be drawn.
 	//! @param result a map containing resolution, pointer to the tiles
-	void getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, float limitLuminance, bool recheckIntersect=true);
+	void getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& result, StelCore* core, const SphericalRegionP& viewPortPoly, float limitLuminance, bool recheckIntersect=true);
 	
 	//! Draw the image on the screen.
 	//! @return true if the tile was actually displayed

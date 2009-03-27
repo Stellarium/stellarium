@@ -94,13 +94,13 @@ public:
 	//! in inside[l1] for some l1 < l.
 	//! In order to restrict search depth set maxSearchLevel < maxLevel,
 	//! for full search depth set maxSearchLevel = maxLevel,
-	void searchZones(const StelGeom::ConvexS& convex,
+	void searchZones(const QVector<HalfSpace>& convex,
 	                 int **inside,int **border,int maxSearchLevel) const;
 
 	//! Return a search result matching the given spatial region
 	//! The result is cached, meaning that it is very fast to search the same region consecutively
 	//! @return a GeodesicSearchResult instance which must be used with GeodesicSearchBorderIterator and GeodesicSearchInsideIterator
-	const GeodesicSearchResult* search(const StelGeom::ConvexS& convex, int maxSearchLevel) const;
+	const GeodesicSearchResult* search(const QVector<HalfSpace>& convex, int maxSearchLevel) const;
 	
 	//! Convenience function returning a search result matching the given spatial region
 	//! The result is cached, meaning that it is very fast to search the same region consecutively
@@ -121,7 +121,7 @@ private:
 	                    VisitFunc *func,
 	                    void *context) const;
 	void searchZones(int lev,int index,
-	                 const StelGeom::ConvexS& convex,
+	                 const QVector<HalfSpace>& convex,
 	                 const int *indexOfUsedHalfSpaces,
 	                 const int halfSpacesUsed,
 	                 const bool *corner0_inside,
@@ -141,7 +141,7 @@ private:
 	//! A cached search result used to avoid doing twice the same search
 	mutable GeodesicSearchResult* cacheSearchResult;
 	mutable int lastMaxSearchlevel;
-	mutable StelGeom::ConvexS lastSearchRegion;
+	mutable QVector<HalfSpace> lastSearchRegion;
 };
 
 class GeodesicSearchResult
@@ -155,7 +155,7 @@ private:
 	friend class GeodesicSearchBorderIterator;
 	friend class StelGeodesicGrid;
 	
-	void search(const StelGeom::ConvexS& convex, int maxSearchLevel);
+	void search(const QVector<HalfSpace>& convex, int maxSearchLevel);
 	
 	const StelGeodesicGrid &grid;
 	int **const zones;

@@ -559,7 +559,7 @@ void StarMgr::draw(StelCore* core)
 		return;
 
 	int maxSearchLevel = getMaxSearchLevel();
-	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxSearchLevel)->search(prj->getViewportConvexPolygon(),maxSearchLevel);
+	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxSearchLevel)->search(prj->getViewportConvexPolygon()->getBoundingHalfSpaces(),maxSearchLevel);
 
 	// Set temporary static variable for optimization
 	const float names_brightness = labelsFader.getInterstate() * starsFader.getInterstate();

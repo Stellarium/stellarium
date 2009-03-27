@@ -1111,21 +1111,21 @@ void StelPainter::drawSprite2dMode(double x, double y, double size, double rotat
 /*************************************************************************
  Draw the given polygon
 *************************************************************************/
-void StelPainter::drawPolygon(const StelGeom::Polygon& poly) const
-{
-	const int size = poly.size();
-	if (size<3)
-		return;
-
-	Vec3d win;	
-	glBegin(GL_LINE_LOOP);
-	for (int i=0;i<size;++i)
-	{
-		prj->project(poly[i], win);
-		glVertex3dv(win);
-	}
-	glEnd();
-}
+// void StelPainter::drawPolygon(const StelGeom::Polygon& poly) const
+// {
+// 	const int size = poly.size();
+// 	if (size<3)
+// 		return;
+// 
+// 	Vec3d win;	
+// 	glBegin(GL_LINE_LOOP);
+// 	for (int i=0;i<size;++i)
+// 	{
+// 		prj->project(poly[i], win);
+// 		glVertex3dv(win);
+// 	}
+// 	glEnd();
+// }
 
 /*************************************************************************
  Draw a GL_POINT at the given position
