@@ -261,7 +261,7 @@ void SkyGrid::draw(const StelCore* core) const
 	}
 	
 	// Get the bounding halfspace
-	const StelGeom::HalfSpace viewPortHalfSpace = prj->getBoundingHalfSpace();
+	const HalfSpace viewPortHalfSpace = prj->getBoundingHalfSpace();
 	
 	// Compute the first grid starting point. This point is close to the center of the screen
 	// and lays at the intersection of a meridien and a parallel
@@ -304,7 +304,7 @@ void SkyGrid::draw(const StelCore* core) const
 	
 	/////////////////////////////////////////////////
 	// Draw all the meridians (great circles)
-	StelGeom::HalfSpace meridianHalfSpace(Vec3d(1,0,0), 0);
+	HalfSpace meridianHalfSpace(Vec3d(1,0,0), 0);
 	Mat4d rotLon = Mat4d::zrotation(gridStepMeridianRad);
 	Vec3d fpt = firstPoint;
 	Vec3d p1, p2;
@@ -378,7 +378,7 @@ void SkyGrid::draw(const StelCore* core) const
 	
 	/////////////////////////////////////////////////
 	// Draw all the parallels (small circles)
-	StelGeom::HalfSpace parallelHalfSpace(Vec3d(0,0,1), 0);
+	HalfSpace parallelHalfSpace(Vec3d(0,0,1), 0);
 	rotLon = Mat4d::rotation(firstPoint^Vec3d(0,0,1), gridStepParallelRad);
 	fpt = firstPoint;
 	maxNbIter = (int)(M_PI/gridStepParallelRad)-1;
@@ -525,7 +525,7 @@ void SkyLine::draw(StelCore *core) const
 	StelProjectorP prj = core->getProjection(frameType);
 	
 	// Get the bounding halfspace
-	const StelGeom::HalfSpace viewPortHalfSpace = prj->getBoundingHalfSpace();
+	const HalfSpace viewPortHalfSpace = prj->getBoundingHalfSpace();
 	
 	// Initialize a painter and set openGL state	
 	StelPainter sPainter(prj);
@@ -546,7 +546,7 @@ void SkyLine::draw(StelCore *core) const
 	
 	/////////////////////////////////////////////////
 	// Draw the line
-	StelGeom::HalfSpace meridianHalfSpace(Vec3d(0,0,1), 0);
+	HalfSpace meridianHalfSpace(Vec3d(0,0,1), 0);
 	Vec3d fpt(1,0,0);
 	if (line_type==MERIDIAN)
 	{

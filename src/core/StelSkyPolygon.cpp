@@ -72,7 +72,7 @@ void StelSkyPolygon::draw(StelCore* core)
 }
 	
 // Return the list of tiles which should be drawn.
-void StelSkyPolygon::getTilesToDraw(QMultiMap<double, StelSkyPolygon*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, bool recheckIntersect)
+void StelSkyPolygon::getTilesToDraw(QMultiMap<double, StelSkyPolygon*>& result, StelCore* core, const SphericalRegionP& viewPortPoly, bool recheckIntersect)
 {
 	// An error occured during loading
 	if (errorOccured)
@@ -95,16 +95,16 @@ void StelSkyPolygon::getTilesToDraw(QMultiMap<double, StelSkyPolygon*>& result, 
 		}
 		else
 		{
-			foreach (const StelGeom::ConvexPolygon poly, skyConvexPolygons)
+			foreach (const SphericalConvexPolygon poly, skyConvexPolygons)
 			{
-				if (contains(viewPortPoly, poly))
+				if (viewPortPoly->contains(poly))
 				{
 					intersectScreen = true;
 				}
 				else
 				{
 					fullInScreen = false;
-					if (intersect(viewPortPoly, poly))
+					if (viewPortPoly->intersects(poly))
 						intersectScreen = true;
 				}
 			}
@@ -168,8 +168,8 @@ bool StelSkyPolygon::drawTile(StelCore* core)
 	
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	
-	foreach (const StelGeom::ConvexPolygon& poly, skyConvexPolygons)
-		sPainter.drawPolygon(poly);
+	foreach (const SphericalConvexPolygon& poly, skyConvexPolygons)
+		sPainter.drawSphericalPolygon(&poly);
 	
 	return true;
 }
@@ -213,7 +213,7 @@ void StelSkyPolygon::loadFromQVariantMap(const QVariantMap& map)
 			vertices.append(v);
 		}
 		Q_ASSERT(vertices.size()==4);
-		skyConvexPolygons.append(StelGeom::ConvexPolygon(vertices[0], vertices[1], vertices[2], vertices[3]));
+		skyConvexPolygons.append(SphericalConvexPolygon(vertices[0], vertices[1], vertices[2], vertices[3]));
 	}
 	
 	// This is a list of URLs to the child tiles or a list of already loaded map containing child information

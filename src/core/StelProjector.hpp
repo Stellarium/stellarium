@@ -126,12 +126,12 @@ public:
 	//! Return a convex polygon on the sphere which includes the viewport in the current frame.
 	//! @param marginX an extra margin in pixel which extends the polygon size in the X direction.
 	//! @param marginY an extra margin in pixel which extends the polygon size in the Y direction.
-	//! @return a ConvexPolygon or the special fullSky ConvexPolygon if the viewport cannot be 
+	//! @return a SphericalConvexPolygon or the special fullSky region if the viewport cannot be 
 	//! represented by a convex polygon (e.g. if aperture > 180 deg).
-	StelGeom::ConvexPolygon getViewportConvexPolygon(double marginX=0., double marginY=0.) const;
+	SphericalRegionP getViewportConvexPolygon(double marginX=0., double marginY=0.) const;
 
 	//! Return a Halfspace containing the whole viewport
-	StelGeom::HalfSpace getBoundingHalfSpace() const;
+	HalfSpace getBoundingHalfSpace() const;
 	
 	//! Get size of a radian in pixels at the center of the viewport disk
 	double getPixelPerRadAtCenter(void) const {return pixelPerRad;}

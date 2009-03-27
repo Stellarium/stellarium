@@ -23,7 +23,6 @@
 #include "StelGridObject.hpp"
 #include "StelSphereGeometry.hpp"
 
-using namespace StelGeom;
 
 class StelGrid : public std::vector<StelGridObject*>
 {
@@ -33,7 +32,7 @@ public:
     virtual ~StelGrid() {}
 
 	//! Preselect all the objects in the given area
-    virtual void filterIntersect(const ConvexS& s) {;}
+    virtual void filterIntersect(const QVector<HalfSpace>& s) {;}
     
 	//! Get all the objects loaded into the grid structure
 	virtual std::vector<StelGridObject*> getAllObjects() = 0;
