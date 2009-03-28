@@ -30,7 +30,7 @@ namespace MotionTestImpl
 		mCoord = coord;
 	}
 
-	Vec3d StaticCoordCalc::calcCoord(double /*t*/, double /*startJD*/)
+	Vec3d StaticCoordCalc::calcCoord(double /*t*/)
 	{
 		return mCoord;
 	}
@@ -42,7 +42,7 @@ namespace MotionTestImpl
 	{
 	}
 
-	Vec3d EllipseCoordCalc::calcCoord(double t, double /*startJD*/)
+	Vec3d EllipseCoordCalc::calcCoord(double t)
 	{
 		Vec3d coord;
 		coord[0] = mRadiusA * cos(2.0f * cPi / mPeriod * (t - mStartTime) + cPi * mStartAngle / 180.0f);
@@ -89,7 +89,7 @@ namespace MotionTestImpl
 		else mDirection = -1.0f;
 	}
 	
-	Vec3d StraightCoordCalc::calcCoord(double t, double startJD)
+	Vec3d StraightCoordCalc::calcCoord(double t)
 	{		
 		Vec3d pos = start;
 		double q = -mDirection*(t - mStartTime) * delta;		
@@ -109,7 +109,7 @@ namespace MotionTestImpl
 		else mDirection = -1.0f;
 	}
 	
-	Vec3d DurationStraightCoordCalc::calcCoord(double t, double startJD)
+	Vec3d DurationStraightCoordCalc::calcCoord(double t)
 	{
 		double q = 1.0 - 4.0 / cPi * atan( mDirection*(t - mStartTime) / mDur);		
 		return q * mStart;
@@ -120,9 +120,9 @@ namespace MotionTestImpl
 	{
 	}
 
-	Vec3d LocalSystemCoordCalc::calcCoord(double t, double startJD)
+	Vec3d LocalSystemCoordCalc::calcCoord(double t)
 	{
-		return mCoordCalcLocal->calcCoord(t,startJD) + mCoordCalcSystem->calcCoord(t,startJD);
+		return mCoordCalcLocal->calcCoord(t) + mCoordCalcSystem->calcCoord(t);
 	}
 
 	GCPtr<CoordCalc> LocalSystemCoordCalc::getCoordCalcLocal() const
@@ -141,39 +141,13 @@ namespace MotionTestImpl
 		mCoordCalcSystem->setStartTime(startTime);
 	}
 
-	/*MyltipleCoordCalc::MyltipleCoordCalc() : mLastOrbitChange(0.0), mCurrentOrbit(0)
-	{
-	}
-
-	void MyltipleCoordCalc::addCoordCalc(double duration, GCPtr<CoordCalc> coordCalc)
-	{
-		mTrajectory.push_back(coordCalc);
-		mDuration.push_back(duration);
-	}
-	
-	Vec3d MyltipleCoordCalc::calcCoord(double t, double startJD)
-	{
-		if ( (t - mLastOrbitChange) >= mDuration[mCurrentOrbit] )
-        {
-            mCurrentOrbit++;
-            mLastOrbitChange = t;
-            if (mCurrentOrbit == mTrajectory.size())
-            {
-                GCPtr<CoordCalc> posCalc = new StaticCoordCalc(mTrajectory[mCurrentOrbit - 1]->calcCoord(t,startJD));
-                mTrajectory.push_back(posCalc);
-                mDuration.push_back(FLT_MAX);
-            }
-        }
-        Vec3d vec = mTrajectory[mCurrentOrbit]->calcCoord(t,startJD);
-        return vec;
-	}*/
 
     PlanetCoordCalc::PlanetCoordCalc(Planet* planetPtr) : planet(planetPtr)
     {
     }
 
-    Vec3d PlanetCoordCalc::calcCoord(double t, double startJD)
+    Vec3d PlanetCoordCalc::calcCoord(double t)
     {
-		return planet->get_heliocentric_ecliptic_pos(t + startJD);
+		return planet->get_heliocentric_ecliptic_pos(t);
     }
 }

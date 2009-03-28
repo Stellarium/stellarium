@@ -138,7 +138,7 @@ namespace MotionTestImpl
 				ellipseCalc->setStartTime(t2);
 				
 				// Конечная точка орбиты
-				Vec3d vf = ellipseCalc->calcCoord(t2, 0.0);
+				Vec3d vf = ellipseCalc->calcCoord(t2);
 
 				// Вычисляем касательную к эллипсу в точка захода
 				double xf = a * cos(phi0);
@@ -175,7 +175,7 @@ namespace MotionTestImpl
 				for(vector<double>::const_iterator it = mDuration.begin(); it != mDuration.end(); ++it)
 					t1 += *it;
 
-				GCPtr<CoordCalc> posCalc = new StaticCoordCalc(mTrajectory.back()->calcCoord(t1, 0.0));
+				GCPtr<CoordCalc> posCalc = new StaticCoordCalc(mTrajectory.back()->calcCoord(t1));
 				mTrajectory.push_back(posCalc);
 				mDuration.push_back(duration);
 			}	
@@ -223,7 +223,7 @@ namespace MotionTestImpl
 					t1 += *it;
 								
 				GCPtr<CoordCalc> straightCalc;
-				Vec3d start = mTrajectory.back()->calcCoord(t1, 0.0) - 
+				Vec3d start = mTrajectory.back()->calcCoord(t1) - 
 					planetPtr->get_heliocentric_ecliptic_pos(t1);
 				straightCalc = 
 					new DurationStraightCoordCalc(start, duration, 1.0f );
@@ -255,7 +255,7 @@ namespace MotionTestImpl
         return NULL;
 	}
     
-    Vec3d Trajectory::calcCoord(double t, double startJD)
+    Vec3d Trajectory::calcCoord(double t)
     {             
         if ( (t - mLastOrbitChange) >= mDuration[mCurrentOrbit] )
         {
@@ -263,14 +263,14 @@ namespace MotionTestImpl
             mLastOrbitChange = t;
             if (mCurrentOrbit == mTrajectory.size())
             {
-                GCPtr<CoordCalc> posCalc = new StaticCoordCalc(mTrajectory[mCurrentOrbit - 1]->calcCoord(t,startJD));
+                GCPtr<CoordCalc> posCalc = new StaticCoordCalc(mTrajectory[mCurrentOrbit - 1]->calcCoord(t));
                 mTrajectory.push_back(posCalc);
                 mDuration.push_back(FLT_MAX);
             }
 			mTrajectory[mCurrentOrbit]->setStartTime(t);
         }
 
-        return mTrajectory[mCurrentOrbit]->calcCoord(t, startJD);
+        return mTrajectory[mCurrentOrbit]->calcCoord(t);
     }
 
 	void Trajectory::setStartJD(double t)

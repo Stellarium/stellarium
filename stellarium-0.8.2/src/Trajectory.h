@@ -25,7 +25,7 @@ namespace MotionTestImpl
     {
 	public:
 		Trajectory(const std::string& TrajectoryFile, const SolarSystem *SS);
-        virtual Vec3d calcCoord(double t, double startJD);
+        virtual Vec3d calcCoord(double t);
 		void setStartJD(double t);
 	private:
 		std::vector<GCPtr<Orbit> > mOrbits;

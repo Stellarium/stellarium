@@ -8,7 +8,7 @@
 
 namespace MotionTestImpl
 {
-	const double coeff = 1000.0f;
+	const double coeff = 86400.0f;
 
 	class CoordCalc
 	{
@@ -16,7 +16,7 @@ namespace MotionTestImpl
 		CoordCalc();
 		virtual ~CoordCalc() {}
 
-		virtual Vec3d calcCoord(double t, double /*startJD*/) = 0;
+		virtual Vec3d calcCoord(double t) = 0;
 
 		virtual void setStartTime(double startTime);
 	protected:
@@ -30,7 +30,7 @@ namespace MotionTestImpl
 
 		void setCoord(const Vec3d& coord);
 		
-		virtual Vec3d calcCoord(double /*t*/, double /*startJD*/);
+		virtual Vec3d calcCoord(double /*t*/);
 	private:
 		Vec3d mCoord;
 	};
@@ -41,7 +41,7 @@ namespace MotionTestImpl
 		EllipseCoordCalc(double radiusA, double radiusB, double period, double phi, double thet, double psi,
 			double startAngle = 0.0f);
 
-		virtual Vec3d calcCoord(double t, double /*startJD*/);
+		virtual Vec3d calcCoord(double t);
 
 		double getRadiusA() const;
 		double getRadiusB() const;
@@ -62,7 +62,7 @@ namespace MotionTestImpl
 	public:
 		StraightCoordCalc(const Vec3d& s, double d = 5.0f, double direction = 1.0f);
 
-		virtual Vec3d calcCoord(double t, double startJD);        
+		virtual Vec3d calcCoord(double t);        
 	private:
 		Vec3d start;
 		double delta;
@@ -74,7 +74,7 @@ namespace MotionTestImpl
 	public:
 		DurationStraightCoordCalc(const Vec3d& s, double dur, double direction = 1.0f);
 
-		virtual Vec3d calcCoord(double t, double startJD);
+		virtual Vec3d calcCoord(double t);
 	private:
 		Vec3d mStart;
 		double mDur;
@@ -86,7 +86,7 @@ namespace MotionTestImpl
 	public:
 		LocalSystemCoordCalc(GCPtr<CoordCalc> coordCalcLocal, GCPtr<CoordCalc> coordCalcSystem);
 
-		virtual Vec3d calcCoord(double t, double /*startJD*/);
+		virtual Vec3d calcCoord(double t);
 
 		virtual void setStartTime(double startTime);
 
@@ -97,27 +97,12 @@ namespace MotionTestImpl
 		GCPtr<CoordCalc> mCoordCalcSystem;
 	};
 
-	/*class MyltipleCoordCalc : public CoordCalc
-	{
-	public:
-		MyltipleCoordCalc();
-
-		void addCoordCalc(double duration, GCPtr<CoordCalc> coordCalc);
-
-		virtual Vec3d calcCoord(double t, double startJD);
-	private:
-		std::vector<GCPtr<CoordCalc> > mTrajectory;
-		std::vector<double> mDuration;
-
-		double mLastOrbitChange;
-        int mCurrentOrbit;
-	};*/
 
     class PlanetCoordCalc : public CoordCalc
     {    
     public:
         PlanetCoordCalc(Planet* planetPtr);
-        virtual Vec3d calcCoord(double t, double startJD);
+        virtual Vec3d calcCoord(double t);
     private:
         Planet* planet;
     };
