@@ -102,6 +102,11 @@ public:
 	//! @param path to check
 	static bool exists(const QString& path);
 	
+	//! Check if a path is readable.
+	//! @return true if file at path is readable, false if not or if the
+	//! file does not exist
+	static bool isReadable(const QString& path);
+	
 	//! Check if a path is writable
 	//! For files, true is returned if the file exists and is writable
 	//! or if the file doesn't exist, but it's parent directory does,

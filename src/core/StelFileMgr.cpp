@@ -198,6 +198,11 @@ bool StelFileMgr::exists(const QString& path)
 	return QFileInfo(path).exists();
 }
 
+bool StelFileMgr::isReadable(const QString& path)
+{
+	return QFileInfo(path).isReadable();
+}
+
 bool StelFileMgr::isWritable(const QString& path)
 {
 	return QFileInfo(path).isWritable();
