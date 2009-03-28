@@ -295,6 +295,12 @@ void StarMgr::loadData()
 			qDebug() << qPrintable(QString("Error: Could not find catalog %1").arg(cat_file_name));
 			continue;
 		}
+		// possibly fixes crash on Vista
+		if(!fileMgr.isReadable(cat_file_path))
+		{
+			qDebug() << qPrintable(QString("Error: User does not have permissions to read catalog %1").arg(cat_file_name));
+			continue;
+		}
 		
 		lb.SetMessage(q_("Loading catalog %1 from file %2").arg(cat, cat_file_name));
 		memoryUsed += fileMgr.size(cat_file_path);
