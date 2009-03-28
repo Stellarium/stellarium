@@ -292,7 +292,7 @@ void StarMgr::loadData()
 		}
 		catch(std::runtime_error e)
 		{
-			qDebug() << qPrintable(QString("Error: Could not load catalog %1").arg(cat_file_name));
+			qDebug() << qPrintable(QString("Error: Could not find catalog %1").arg(cat_file_name));
 			continue;
 		}
 		
