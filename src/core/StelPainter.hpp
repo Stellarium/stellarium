@@ -83,10 +83,6 @@ public:
 	void drawText(const StelFont* font, float x, float y, const QString& str, float angleDeg=0.f, 
 		      float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
 	
-	//! Draw the given polygon.
-	//! @param poly The polygon to draw.
-	//void drawPolygon(const StelGeom::Polygon& poly) const;
-	
 	//! Draw the given SphericalPolygon.
 	//! @param spoly The SphericalPolygon to draw.
 	//! @param drawMode define whether to draw the outline or the fill or both.

@@ -22,7 +22,6 @@
 
 #include <QVector>
 #include <QVariant>
-#include <vector>
 #include "VecMath.hpp"
 #include <boost/shared_ptr.hpp>
 
@@ -33,7 +32,7 @@ class SphericalRegion;
 class HalfSpace;
 
 //! @file StelSphereGeometry.hpp
-//! Define all SphericalGeometry primitves as well as the SphericalRegionP type.
+//! Define all SphericalGeometry primitives as well as the SphericalRegionP type.
 
 //! @typedef SphericalRegionP
 //! Use shared pointer to simplify memory managment
@@ -250,6 +249,9 @@ public:
 	//! Constructor from a list of contours.
 	SphericalPolygon(QVector<QVector<Vec3d> >& contours) {setContours(contours);}
 
+	//! Constructor from one contour.
+	SphericalPolygon(QVector<Vec3d>& contour) {setContour(contour);}
+	
 	//! Return an openGL compatible array to be displayed using vertex arrays.
 	//! The array was precomputed therefore the method is very fast.
 	virtual QVector<Vec3d> getVertexArray() const {return triangleVertices;}
@@ -291,6 +293,9 @@ public:
 	//! Constructor from a list of contours.
 	SphericalConvexPolygon(QVector<QVector<Vec3d> >& contours) {setContours(contours);}
 
+	//! Constructor from one contour.
+	SphericalConvexPolygon(QVector<Vec3d>& contour) {setContour(contour);}
+	
 	//! Special constructor for triangle.
 	SphericalConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2) {contour << e0 << e1 << e2;}
 	
