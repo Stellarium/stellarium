@@ -419,13 +419,14 @@ INSTALL(TARGETS stellarium DESTINATION bin)
 
 ## tests
 
-SET(tests_testdates_SRCS
+SET(tests_testDates_SRCS
 	core/StelUtils.cpp
 	core/StelUtils.hpp
-	tests/testdates.cpp)
-ADD_EXECUTABLE(testdates ${tests_testdates_SRCS})
-TARGET_LINK_LIBRARIES(testdates ${extLinkerOption} ${QT_QTTEST_LIBRARY})
-ADD_TEST(test_testdates ${EXECUTABLE_OUTPUT_PATH}/testdates)
+	tests/testDates.cpp)
+QT4_WRAP_CPP(testDates_MOC_SRCS tests/testDates.hpp)
+ADD_EXECUTABLE(testDates ${tests_testDates_SRCS} ${testDates_MOC_SRCS})
+TARGET_LINK_LIBRARIES(testDates ${extLinkerOption} ${QT_QTTEST_LIBRARY})
+ADD_TEST(test_testDates ${EXECUTABLE_OUTPUT_PATH}/testDates)
 
 SET(tests_testStelFileMgr_SRCS
 	core/StelFileMgr.cpp
