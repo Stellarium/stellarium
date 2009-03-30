@@ -200,6 +200,9 @@ public:
 	virtual bool contains(const Vec3d& p) const;
 	
 	//! Returns whether another SphericalPolygon intersects with the SphericalPolygon.
+	bool intersects(const Vec3d& p) const {return contains(p);}
+	
+	//! Returns whether another SphericalPolygon intersects with the SphericalPolygon.
 	virtual bool intersects(const SphericalPolygonBase& mpoly) const;
 	
 	//! Returns whether a SphericalPolygon is contained into the region.
