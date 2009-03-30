@@ -22,6 +22,7 @@
 
 #include "fixx11h.h"
 #include <QString>
+#include <QVariant>
 #include <QObject>
 #include <QFile>
 
@@ -286,8 +287,7 @@ private:
 	//! @return The value of the argument to the specified option which 
 	//! occurs before the first element with the value "--".  If the option 
 	//! is not found, defaultValue is returned.
-	template<class T>
-			T argsGetOptionWithArg(QStringList* args, QString shortOpt, QString longOpt, T defaultValue);
+	QVariant argsGetOptionWithArg(QStringList* args, QString shortOpt, QString longOpt, QVariant defaultValue);
 	
 	//! Check if a QStringList has a yes/no CLI-style option in it, and 
 	//! find out the argument to that parameter.

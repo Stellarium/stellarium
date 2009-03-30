@@ -115,7 +115,10 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	
 	argList = new QStringList;
 	for(int i=0; i<argc; i++)
+	{
 		*argList << argv[i];
+		qDebug() << "adding argument:\"" << argv[i] << "\"";
+	}
 	
 	// Echo debug output to log file
 	stelFileMgr = new StelFileMgr();
@@ -745,7 +748,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 	try
 	{
 		QString newUserDir;
-		newUserDir = argsGetOptionWithArg<QString>(argList, "-u", "--user-dir", "");
+		newUserDir = argsGetOptionWithArg(argList, "-u", "--user-dir", "").toString();
 		if (newUserDir!="" && !newUserDir.isEmpty())
 			stelFileMgr->setUserDir(newUserDir);
 	}
@@ -771,7 +774,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 	
 	try
 	{
-		setConfigFile(argsGetOptionWithArg<QString>(argList, "-c", "--config-file", "config.ini"), restoreDefaultConfigFile);
+		setConfigFile(argsGetOptionWithArg(argList, "-c", "--config-file", "config.ini").toString(), restoreDefaultConfigFile);
 	}
 	catch (std::runtime_error& e)
 	{
@@ -779,7 +782,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 		setConfigFile("config.ini", restoreDefaultConfigFile);		
 	}
 
-	startupScript = argsGetOptionWithArg<QString>(argList, "", "--startup-script", "startup.ssc");
+	startupScript = argsGetOptionWithArg(argList, "", "--startup-script", "startup.ssc").toString();
 }
 
 void StelApp::parseCLIArgsPostConfig()
@@ -793,16 +796,16 @@ void StelApp::parseCLIArgsPostConfig()
 	try
 	{
 		fullScreen = argsGetYesNoOption(argList, "-f", "--full-screen", -1);
-		landscapeId = argsGetOptionWithArg<QString>(argList, "", "--landscape", "");
-		homePlanet = argsGetOptionWithArg<QString>(argList, "", "--home-planet", "");
-		altitude = argsGetOptionWithArg<int>(argList, "", "--altitude", -1);
-		longitude = argsGetOptionWithArg<QString>(argList, "", "--longitude", "");
-		latitude = argsGetOptionWithArg<QString>(argList, "", "--latitude", "");
-		skyDate = argsGetOptionWithArg<QString>(argList, "", "--sky-date", "");
-		skyTime = argsGetOptionWithArg<QString>(argList, "", "--sky-time", "");
-		fov = argsGetOptionWithArg<float>(argList, "", "--fov", -1.0);
-		projectionType = argsGetOptionWithArg<QString>(argList, "", "--projection-type", "");
-		screenshotDir = argsGetOptionWithArg<QString>(argList, "", "--screenshot-dir", "");
+		landscapeId = argsGetOptionWithArg(argList, "", "--landscape", "").toString();
+		homePlanet = argsGetOptionWithArg(argList, "", "--home-planet", "").toString();
+		altitude = argsGetOptionWithArg(argList, "", "--altitude", -1).toInt();
+		longitude = argsGetOptionWithArg(argList, "", "--longitude", "").toString();
+		latitude = argsGetOptionWithArg(argList, "", "--latitude", "").toString();
+		skyDate = argsGetOptionWithArg(argList, "", "--sky-date", "").toString();
+		skyTime = argsGetOptionWithArg(argList, "", "--sky-time", "").toString();
+		fov = argsGetOptionWithArg(argList, "", "--fov", -1.0).toDouble();
+		projectionType = argsGetOptionWithArg(argList, "", "--projection-type", "").toString();
+		screenshotDir = argsGetOptionWithArg(argList, "", "--screenshot-dir", "").toString();
 	}
 	catch (std::runtime_error& e)
 	{
@@ -882,7 +885,7 @@ void StelApp::parseCLIArgsPostConfig()
 	{
 		try
 		{
-			QString newShotDir = argsGetOptionWithArg<QString>(argList, "", "--screenshot-dir", "");
+			QString newShotDir = argsGetOptionWithArg(argList, "", "--screenshot-dir", "").toString();
 			if (!newShotDir.isEmpty() && newShotDir!="")
 				stelFileMgr->setScreenshotDir(newShotDir);
 		}
@@ -1254,8 +1257,7 @@ bool StelApp::argsGetOption(QStringList* args, QString shortOpt, QString longOpt
 	return result;
 }
 
-template<class T>
-T StelApp::argsGetOptionWithArg(QStringList* args, QString shortOpt, QString longOpt, T defaultValue)
+QVariant StelApp::argsGetOptionWithArg(QStringList* args, QString shortOpt, QString longOpt, QVariant defaultValue)
 {
 	// Don't see anything after a -- as an option
 	int lastOptIdx = args->indexOf("--");
@@ -1296,22 +1298,15 @@ T StelApp::argsGetOptionWithArg(QStringList* args, QString shortOpt, QString lon
 
 		if (match)
 		{
-			T retVal;
-			QTextStream converter(qPrintable(argStr));
-			converter >> retVal;
-			if (converter.status() != QTextStream::Ok)
-				throw (std::runtime_error(qPrintable("optarg_type ("+longOpt+")")));
-			else
-				return retVal;
+			return QVariant(argStr);
 		}
 	}
-
 	return defaultValue;
 }
 
 int StelApp::argsGetYesNoOption(QStringList* args, QString shortOpt, QString longOpt, int defaultValue)
 {
-	QString strArg = argsGetOptionWithArg<QString>(args, shortOpt, longOpt, "");
+	QString strArg = argsGetOptionWithArg(args, shortOpt, longOpt, "").toString();
 	if (strArg == "")
 	{
 		return defaultValue;
