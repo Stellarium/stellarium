@@ -156,7 +156,12 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 			{
 				if ((*fileIt != "..") && (*fileIt != "."))
 				{
-					QFileInfo fullPath(li+"/"+path+"/"+*fileIt);
+					QFileInfo fullPath;
+					if(QFileInfo(path).isAbsolute())
+						fullPath.setFile(path+"/"+*fileIt);
+					else
+						fullPath.setFile(li+"/"+path+"/"+*fileIt);
+					
 					// default is to return all objects in this directory
 					bool returnThisOne = true;
 				
