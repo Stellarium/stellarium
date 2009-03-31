@@ -107,10 +107,10 @@ struct HalfSpace : public SphericalRegion
 	bool operator==(const HalfSpace& other) const {return (n==other.n && d==other.d);}
 
 	//! Returns whether a SphericalPolygon intersects with the region.
-	virtual bool intersects(const SphericalPolygonBase& mpoly) const {Q_ASSERT(0); return false;}
+	virtual bool intersects(const SphericalPolygonBase& mpoly) const;
 	
 	//! Returns whether a SphericalPolygon is contained into the region.
-	virtual bool contains(const SphericalPolygonBase& poly) const {Q_ASSERT(0); return false;}
+	virtual bool contains(const SphericalPolygonBase& poly) const;
 	
 	//! Return the list of HalfSpace bounding the region.
 	virtual QVector<HalfSpace> getBoundingHalfSpaces() const {QVector<HalfSpace> res; res << *this; return res;}

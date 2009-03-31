@@ -28,6 +28,41 @@
 #endif
 
 
+// Returns whether a SphericalPolygon is contained into the region.
+bool HalfSpace::contains(const SphericalPolygonBase& polyBase) const
+{
+	const SphericalConvexPolygon* cvx = dynamic_cast<const SphericalConvexPolygon*>(&polyBase);
+	if (cvx!=NULL)
+	{
+		foreach (const Vec3d& v, cvx->getConvexContour())
+		{
+			if (!contains(v))
+				return false;
+		}
+		return true;
+	}
+	Q_ASSERT(0); // Not implemented
+	return false;
+}
+
+// Returns whether a SphericalPolygon intersects the region.
+bool HalfSpace::intersects(const SphericalPolygonBase& polyBase) const
+{
+	// TODO This algo is WRONG!!!!!!!
+	const SphericalConvexPolygon* cvx = dynamic_cast<const SphericalConvexPolygon*>(&polyBase);
+	if (cvx!=NULL)
+	{
+		foreach (const Vec3d& v, cvx->getConvexContour())
+		{
+			if (contains(v))
+				return true;
+		}
+		return cvx->contains(n);
+	}
+	Q_ASSERT(0); // Not implemented
+	return false;
+}
+
 bool SphericalPolygonBase::loadFromQVariant(const QVariantMap& qv)
 {
 	QVector<QVector<Vec3d> > contours;
