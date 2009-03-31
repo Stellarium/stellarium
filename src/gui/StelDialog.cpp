@@ -20,6 +20,7 @@
 
 #include "StelDialog.hpp"
 #include "StelMainGraphicsView.hpp"
+#include "StelMainWindow.hpp"
 
 #include <QDebug>
 #include <QDialog>
@@ -101,6 +102,10 @@ void StelDialog::setVisible(bool v)
 		
 		proxy = new CustomProxy(NULL, Qt::Tool);
 		proxy->setWidget(dialog);
+		QRectF bound = proxy->boundingRect();
+		
+		// centre with dialog according to current window size.
+		proxy->setPos((StelMainWindow::getInstance().size().width()-bound.width())/2, (StelMainWindow::getInstance().size().height()-bound.height())/2);
 		StelMainGraphicsView::getInstance().scene()->addItem(proxy);
 		proxy->setWindowFrameMargins(2,0,2,2);
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache); // , QSize(proxy->boundingRect().width()/2, proxy->boundingRect().height()/2)
