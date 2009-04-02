@@ -67,15 +67,6 @@ bool HalfSpace::intersects(const SphericalPolygonBase& polyBase) const
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalPolygonBase
 ///////////////////////////////////////////////////////////////////////////////
-
-bool SphericalPolygonBase::loadFromQVariant(const QVariantMap& qv)
-{
-	QVector<QVector<Vec3d> > contours;
-	Q_ASSERT(0);
-	setContours(contours);
-	return true;
-}
-
 QVariantMap SphericalPolygonBase::toQVariant() const
 {
 	QVariantMap res;
@@ -248,12 +239,10 @@ void APIENTRY edgeFlagCallback(GLboolean flag, void* userData)
 	((GluTessCallbackData*)userData)->edgeFlag=flag;
 }
 
-void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, SphericalPolygonBase::PolyWindingRule windingRule,
-	const QVector<QVector<Vec2d> >& textureCoordsContours)
+void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, SphericalPolygonBase::PolyWindingRule windingRule)
 {
 	triangleVertices.clear();
 	edgeFlags.clear();
-	Q_ASSERT(textureCoordsContours.isEmpty());
 	
 	// Use GLU tesselation functions to transform the polygon into a list of triangles
 	GLUtesselator* tess = gluNewTess();
@@ -276,6 +265,9 @@ void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, Sph
 	}
 	gluTessEndPolygon(tess);
 	gluDeleteTess(tess);
+	
+	// There should always be an edge flag matching each vertex.
+	Q_ASSERT(triangleVertices.size() == edgeFlags.size());
 }
 
 // Set a single contour defining the SphericalPolygon.
@@ -291,35 +283,20 @@ void SphericalPolygon::setContour(const QVector<Vec3d>& contour)
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalPolygonTexture
 ///////////////////////////////////////////////////////////////////////////////
-
-struct GluTessVertexCallbackData
-{
-	const Vec3d* vertex;
-	const Vec2d* texCoord;
-};
-
 void APIENTRY vertexTextureCallback(void* vertexData, void* userData)
 {
 	SphericalPolygonTexture* mp = static_cast<SphericalPolygonTexture*>(((GluTessCallbackData*)userData)->thisPolygon);
-	const GluTessVertexCallbackData* vData = (GluTessVertexCallbackData*)vertexData;
-	mp->triangleVertices.append(*vData->vertex);
-	mp->textureCoords.append(*vData->texCoord);
+	const TextureVertex* vData = (TextureVertex*)vertexData;
+	mp->triangleVertices.append(vData->vertex);
+	mp->textureCoords.append(vData->texCoord);
 	mp->edgeFlags.append(((GluTessCallbackData*)userData)->edgeFlag);
 }
 
-void SphericalPolygonTexture::setContours(const QVector<QVector<Vec3d> >& contours, SphericalPolygonBase::PolyWindingRule windingRule,
-										  const QVector<QVector<Vec2d> >& textureCoordsContours)
+void SphericalPolygonTexture::setContours(const QVector<QVector<TextureVertex> >& contours, SphericalPolygonBase::PolyWindingRule windingRule)
 {
 	triangleVertices.clear();
 	edgeFlags.clear();
 	textureCoords.clear();
-	
-	// There should always be a texture coord matching each vertex.
-	Q_ASSERT(contours.size() == textureCoordsContours.size());
-#ifndef NDEBUG
-	for (int i=0;i<contours.size();++i)
-		Q_ASSERT(contours.at(i).size()==textureCoordsContours.at(i).size());
-#endif
 	
 	// Use GLU tesselation functions to transform the polygon into a list of triangles
 	GLUtesselator* tess = gluNewTess();
@@ -330,30 +307,29 @@ void SphericalPolygonTexture::setContours(const QVector<QVector<Vec3d> >& contou
 	gluTessProperty(tess, GLU_TESS_WINDING_RULE, windRule);
 	GluTessCallbackData data;
 	data.thisPolygon=this;
-	GluTessVertexCallbackData vData;
 	gluTessBeginPolygon(tess, &data);
 	for (int c=0;c<contours.size();++c)
 	{
 		gluTessBeginContour(tess);
 		for (int i=0;i<contours[c].size();++i)
 		{
-			vData.vertex = &contours[c][i];
-			vData.texCoord = &textureCoordsContours[c][i];
-			gluTessVertex(tess, const_cast<GLdouble*>((const double*)contours[c][i]), const_cast<void*>((const void*)&vData));
+			gluTessVertex(tess, const_cast<GLdouble*>((const double*)contours[c][i].vertex), const_cast<void*>((const void*)&(contours[c][i])));
 		}
 		gluTessEndContour(tess);
 	}
 	gluTessEndPolygon(tess);
 	gluDeleteTess(tess);
+	
+	// There should always be a texture coord matching each vertex.
+	Q_ASSERT(triangleVertices.size() == edgeFlags.size());
+	Q_ASSERT(triangleVertices.size() == textureCoords.size());
 }
 
-void SphericalPolygonTexture::setContour(const QVector<Vec3d>& contour, const QVector<Vec2d>& textureCoordsContour)
+void SphericalPolygonTexture::setContour(const QVector<TextureVertex>& contour)
 {
-	QVector<QVector<Vec3d> > contours;
+	QVector<QVector<TextureVertex> > contours;
 	contours.append(contour);
-	QVector<QVector<Vec2d> > tCoords;
-	tCoords.append(textureCoordsContour);
-	setContours(contours, SphericalPolygonBase::WindingPositive, tCoords);
+	setContours(contours, SphericalPolygonBase::WindingPositive);
 }
 
 
@@ -444,7 +420,7 @@ bool SphericalConvexPolygon::intersects(const SphericalPolygonBase& polyBase) co
 	Q_ASSERT(0); // Not implemented
 	return false;
 }
-	
+
 /*
 
 //! Return the convex polygon area in steradians
