@@ -686,6 +686,9 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
   		const Vec2d* texturePos, QVector<Vec2d>* outTexturePos,
 		int nbI, bool checkDisc1, bool checkDisc2, bool checkDisc3) const
 {
+	Q_ASSERT(fabs(vertices[0].length()-1.)<0.00001);
+	Q_ASSERT(fabs(vertices[1].length()-1.)<0.00001);
+	Q_ASSERT(fabs(vertices[2].length()-1.)<0.00001);
 	bool cDiscontinuity1 = checkDisc1 && prj->intersectViewportDiscontinuity(vertices[0], vertices[1]);
 	bool cDiscontinuity2 = checkDisc2 && prj->intersectViewportDiscontinuity(vertices[1], vertices[2]);
 	bool cDiscontinuity3 = checkDisc3 && prj->intersectViewportDiscontinuity(vertices[0], vertices[2]);
@@ -698,106 +701,53 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	prj->project(vertices[1], e1);
 	prj->project(vertices[2], e2);
 	
-	if (!cd1 && !cd2 && !cd3 && qMax((e2-e1).lengthSquared(), qMax((e0-e1).lengthSquared(), (e0-e2).lengthSquared())) < 50)
-	{
-		// The triangle is small enough, appends it
-		outVertices->append(e0);
-		outVertices->append(e1);
-		outVertices->append(e2);
-		if (outEdgeFlags)
-		{
-			outEdgeFlags->append(edgeFlags[0]);
-			outEdgeFlags->append(edgeFlags[1]);
-			outEdgeFlags->append(edgeFlags[2]);
-		}
-		if (outTexturePos)
-		{
-			outTexturePos->append(texturePos[0]);
-			outTexturePos->append(texturePos[1]);
-			outTexturePos->append(texturePos[2]);
-		}
-		return;
-	}
-	
-	Vec2d v1, v2;
+	static const double maxSqDistortion = 5.;
 	if (checkDisc1 && cDiscontinuity1==false)
 	{
 		// If the distortion at segment e0,e1 is too big, flags it for subdivision
 		prj->project(vertices[0]+vertices[1], win3);
-		v1.set(e0[0]-win3[0], e0[1]-win3[1]);
-		v2.set(e1[0]-win3[0], e1[1]-win3[1]);
-		const double dist = std::sqrt((v1[0]*v1[0]+v1[1]*v1[1])*(v2[0]*v2[0]+v2[1]*v2[1]));
-		const double cosAngle = (v1[0]*v2[0]+v1[1]*v2[1])/dist;
-		cDiscontinuity1 = cosAngle>-0.998;
+		win3 -= (e0+e1)*0.5;
+		cDiscontinuity1 = (win3[0]*win3[0]+win3[1]*win3[1])>maxSqDistortion;
 	}
 	if (checkDisc2 && cDiscontinuity2==false)
 	{
 		// If the distortion at segment e1,e2 is too big, flags it for subdivision
 		prj->project(vertices[1]+vertices[2], win3);
-		v1.set(e1[0]-win3[0], e1[1]-win3[1]);
-		v2.set(e2[0]-win3[0], e2[1]-win3[1]);
-		const double dist = std::sqrt((v1[0]*v1[0]+v1[1]*v1[1])*(v2[0]*v2[0]+v2[1]*v2[1]));
-		const double cosAngle = (v1[0]*v2[0]+v1[1]*v2[1])/dist;
-		cDiscontinuity2 = cosAngle>-0.998;
+		win3 -= (e2+e1)*0.5;
+		cDiscontinuity2 = (win3[0]*win3[0]+win3[1]*win3[1])>maxSqDistortion;
 	}
 	if (checkDisc3 && cDiscontinuity3==false)
 	{
 		// If the distortion at segment e2,e0 is too big, flags it for subdivision
 		prj->project(vertices[2]+vertices[0], win3);
-		v1.set(e2[0]-win3[0], e2[1]-win3[1]);
-		v2.set(e0[0]-win3[0], e0[1]-win3[1]);
-		const double dist = std::sqrt((v1[0]*v1[0]+v1[1]*v1[1])*(v2[0]*v2[0]+v2[1]*v2[1]));
-		const double cosAngle = (v1[0]*v2[0]+v1[1]*v2[1])/dist;
-		cDiscontinuity3 = cosAngle>-0.998;
+		win3 -= (e0+e2)*0.5;
+		cDiscontinuity3 = (win3[0]*win3[0]+win3[1]*win3[1])>maxSqDistortion;
 	}
 	
 	if (!cDiscontinuity1 && !cDiscontinuity2 && !cDiscontinuity3)
 	{
 		// The triangle is clean, appends it
-		outVertices->append(e0);
-		outVertices->append(e1);
-		outVertices->append(e2);
+		*outVertices << e0 << e1 << e2;
 		if (outEdgeFlags)
-		{
-			outEdgeFlags->append(edgeFlags[0]);
-			outEdgeFlags->append(edgeFlags[1]);
-			outEdgeFlags->append(edgeFlags[2]);
-		}
+			*outEdgeFlags << edgeFlags[0] << edgeFlags[1] << edgeFlags[2];
 		if (outTexturePos)
-		{
-			outTexturePos->append(texturePos[0]);
-			outTexturePos->append(texturePos[1]);
-			outTexturePos->append(texturePos[2]);
-		}
+			*outTexturePos << texturePos[0] << texturePos[1] << texturePos[2];
 		return;
 	}
 	
-	if (nbI > 5)
+	if (nbI > 4)
 	{
 		// If we reached the limit number of iterations and still have a discontinuity,
 		// discard the triangle.
 		if (cd1 || cd2 || cd3)
-		{
-			// TODO, try to display an approximated triangle by computing the intersection
-			// of the sides with the discontinuity.
 			return;
-		}
+
 		// Else display it, it will be suboptimal though.
-		outVertices->append(e0);
-		outVertices->append(e1);
-		outVertices->append(e2);
+		*outVertices << e0 << e1 << e2;
 		if (outEdgeFlags)
-		{
-			outEdgeFlags->append(edgeFlags[0]);
-			outEdgeFlags->append(edgeFlags[1]);
-			outEdgeFlags->append(edgeFlags[2]);
-		}
+			*outEdgeFlags << edgeFlags[0] << edgeFlags[1] << edgeFlags[2];
 		if (outTexturePos)
-		{
-			outTexturePos->append(texturePos[0]);
-			outTexturePos->append(texturePos[1]);
-			outTexturePos->append(texturePos[2]);
-		}
+			*outTexturePos << texturePos[0] << texturePos[1] << texturePos[2];
 		return;
 	}
 	
@@ -1117,7 +1067,6 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	}
 	
 	// Last case: the 3 sides have to be split: cut in 4 triangles a' la HTM
-	
 	va[0]=vertices[0]+vertices[1];
 	va[0].normalize();
 	va[1]=vertices[1]+vertices[2];

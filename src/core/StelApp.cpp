@@ -982,7 +982,7 @@ void StelApp::draw()
 // 		ttex->bind();
 // 		glColor4f(0, .6, .6, .5);
 // 		Vec4f boundaryColor(0, 1, .6, 1);
-// 		sPainter.drawSphericalPolygon(&p, StelPainter::SphericalPolygonDrawModeTextureFill, &boundaryColor);
+// 		sPainter.drawSphericalPolygon(&p, StelPainter::SphericalPolygonDrawModeTextureFillAndBoundary, &boundaryColor);
 // 	}
 	
 // 	QVector<Vec3d> c2(4);
