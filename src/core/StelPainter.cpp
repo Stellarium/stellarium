@@ -683,7 +683,8 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 // by splitting it into subtriangles.
 void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>* outVertices,
 		const bool* edgeFlags, QVector<bool>* outEdgeFlags,
-  const Vec2d* texturePos, QVector<Vec2d>* outTexturePos, int nbI, bool checkDisc1, bool checkDisc2, bool checkDisc3) const
+  		const Vec2d* texturePos, QVector<Vec2d>* outTexturePos,
+		int nbI, bool checkDisc1, bool checkDisc2, bool checkDisc3) const
 {
 	bool cDiscontinuity1 = checkDisc1 && prj->intersectViewportDiscontinuity(vertices[0], vertices[1]);
 	bool cDiscontinuity2 = checkDisc2 && prj->intersectViewportDiscontinuity(vertices[1], vertices[2]);
@@ -693,7 +694,6 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	const bool cd3=cDiscontinuity3;
 	
 	Vec3d e0, e1, e2, win3;
-	Vec2d v1, v2;
 	prj->project(vertices[0], e0);
 	prj->project(vertices[1], e1);
 	prj->project(vertices[2], e2);
@@ -710,9 +710,16 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 			outEdgeFlags->append(edgeFlags[1]);
 			outEdgeFlags->append(edgeFlags[2]);
 		}
+		if (outTexturePos)
+		{
+			outTexturePos->append(texturePos[0]);
+			outTexturePos->append(texturePos[1]);
+			outTexturePos->append(texturePos[2]);
+		}
 		return;
 	}
 	
+	Vec2d v1, v2;
 	if (checkDisc1 && cDiscontinuity1==false)
 	{
 		// If the distortion at segment e0,e1 is too big, flags it for subdivision
@@ -744,9 +751,6 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		cDiscontinuity3 = cosAngle>-0.998;
 	}
 	
-	// Not implemented without edge flags
-	Q_ASSERT(edgeFlags && outEdgeFlags);
-	
 	if (!cDiscontinuity1 && !cDiscontinuity2 && !cDiscontinuity3)
 	{
 		// The triangle is clean, appends it
@@ -759,12 +763,18 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 			outEdgeFlags->append(edgeFlags[1]);
 			outEdgeFlags->append(edgeFlags[2]);
 		}
+		if (outTexturePos)
+		{
+			outTexturePos->append(texturePos[0]);
+			outTexturePos->append(texturePos[1]);
+			outTexturePos->append(texturePos[2]);
+		}
 		return;
 	}
 	
 	if (nbI > 5)
 	{
-		// If we reached the linit number of iterations and still have a discontinuity,
+		// If we reached the limit number of iterations and still have a discontinuity,
 		// discard the triangle.
 		if (cd1 || cd2 || cd3)
 		{
@@ -782,31 +792,58 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 			outEdgeFlags->append(edgeFlags[1]);
 			outEdgeFlags->append(edgeFlags[2]);
 		}
+		if (outTexturePos)
+		{
+			outTexturePos->append(texturePos[0]);
+			outTexturePos->append(texturePos[1]);
+			outTexturePos->append(texturePos[2]);
+		}
 		return;
 	}
 	
 	// Recursively splits the triangle into sub triangles.
 	// Depending on which combination of sides of the triangle has to be split a different strategy is used.
 	Vec3d va[3];
+	Vec2d ta[3];
 	bool ba[3];
 	// Only 1 side has to be split: split the triangle in 2
 	if (cDiscontinuity1 && !cDiscontinuity2 && !cDiscontinuity3)
 	{
 		va[0]=vertices[0];
 		va[1]=vertices[0]+vertices[1];
+		va[1].normalize();
 		va[2]=vertices[2];
-		ba[0]=edgeFlags[0];
-		ba[1]=false;
-		ba[2]=edgeFlags[2];
-		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1, true, true, false);
+		if (outTexturePos)
+		{
+			ta[0]=texturePos[0];
+			ta[1]=(texturePos[0]+texturePos[1])/2.;
+			ta[2]=texturePos[2];
+		}
+		if (outEdgeFlags)
+		{
+			ba[0]=edgeFlags[0];
+			ba[1]=false;
+			ba[2]=edgeFlags[2];
+		}
+		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1, true, true, false);
 
 		va[0]=vertices[0]+vertices[1];
+		va[0].normalize();
 		va[1]=vertices[1];
 		va[2]=vertices[2];
-		ba[0]=edgeFlags[0];
-		ba[1]=edgeFlags[1];
-		ba[2]=false;
-		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1, true, false, true);
+		if (outTexturePos)
+		{
+			ta[0]=(texturePos[0]+texturePos[1])/2.;
+			ta[1]=texturePos[1];
+			ta[2]=texturePos[2];
+		}
+		if (outEdgeFlags)
+		{
+			ba[0]=edgeFlags[0];
+			ba[1]=edgeFlags[1];
+			ba[2]=false;
+		}
+		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1, true, false, true);
 		return;
 	}
 	
@@ -815,18 +852,38 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		va[0]=vertices[0];
 		va[1]=vertices[1];
 		va[2]=vertices[1]+vertices[2];
-		ba[0]=edgeFlags[0];
-		ba[1]=edgeFlags[1];
-		ba[2]=false;
-		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1, false, true, true);
+		va[2].normalize();
+		if (outTexturePos)
+		{
+			ta[0]=texturePos[0];
+			ta[1]=texturePos[1];
+			ta[2]=(texturePos[1]+texturePos[2])/2.;
+		}
+		if (outEdgeFlags)
+		{
+			ba[0]=edgeFlags[0];
+			ba[1]=edgeFlags[1];
+			ba[2]=false;
+		}
+		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1, false, true, true);
 
 		va[0]=vertices[0];
 		va[1]=vertices[1]+vertices[2];
+		va[1].normalize();
 		va[2]=vertices[2];
-		ba[0]=false;
-		ba[1]=edgeFlags[1];
-		ba[2]=edgeFlags[2];
-		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1, true, true, false);
+		if (outTexturePos)
+		{
+			ta[0]=texturePos[0];
+			ta[1]=(texturePos[1]+texturePos[2])/2.;
+			ta[2]=texturePos[2];
+		}
+		if (outEdgeFlags)
+		{
+			ba[0]=false;
+			ba[1]=edgeFlags[1];
+			ba[2]=edgeFlags[2];
+		}
+		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1, true, true, false);
 		return;
 	}
 	
@@ -835,18 +892,38 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		va[0]=vertices[0];
 		va[1]=vertices[1];
 		va[2]=vertices[0]+vertices[2];
-		ba[0]=edgeFlags[0];
-		ba[1]=false;
-		ba[2]=edgeFlags[2];
-		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1, false, true, true);
+		va[2].normalize();
+		if (outTexturePos)
+		{
+			ta[0]=texturePos[0];
+			ta[1]=texturePos[1];
+			ta[2]=(texturePos[0]+texturePos[2])/2.;
+		}
+		if (outEdgeFlags)
+		{
+			ba[0]=edgeFlags[0];
+			ba[1]=false;
+			ba[2]=edgeFlags[2];
+		}
+		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1, false, true, true);
 
 		va[0]=vertices[0]+vertices[2];
+		va[0].normalize();
 		va[1]=vertices[1];
 		va[2]=vertices[2];
-		ba[0]=false;
-		ba[1]=edgeFlags[1];
-		ba[2]=edgeFlags[2];
-		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1, true, false, true);
+		if (outTexturePos)
+		{
+			ta[0]=(texturePos[0]+texturePos[2])/2.;
+			ta[1]=texturePos[1];
+			ta[2]=texturePos[2];
+		}
+		if (outEdgeFlags)
+		{
+			ba[0]=false;
+			ba[1]=edgeFlags[1];
+			ba[2]=edgeFlags[2];
+		}
+		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1, true, false, true);
 		return;
 	}
 	
@@ -855,54 +932,118 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	{
 		va[0]=vertices[0];
 		va[1]=vertices[0]+vertices[1];
+		va[1].normalize();
 		va[2]=vertices[1]+vertices[2];
-		ba[0]=edgeFlags[0];
-		ba[1]=false;
-		ba[2]=false;
-		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1);
+		va[2].normalize();
+		if (outTexturePos)
+		{
+			ta[0]=texturePos[0];
+			ta[1]=(texturePos[0]+texturePos[1])/2.;
+			ta[2]=(texturePos[1]+texturePos[2])/2.;
+		}
+		if (outEdgeFlags)
+		{
+			ba[0]=edgeFlags[0];
+			ba[1]=false;
+			ba[2]=false;
+		}
+		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
 
 		va[0]=vertices[0]+vertices[1];
+		va[0].normalize();
 		va[1]=vertices[1];
 		va[2]=vertices[1]+vertices[2];
-		ba[0]=edgeFlags[0];
-		ba[1]=edgeFlags[1];
-		ba[2]=false;
-		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1);
+		va[2].normalize();
+		if (outTexturePos)
+		{
+			ta[0]=(texturePos[0]+texturePos[1])/2.;
+			ta[1]=texturePos[1];
+			ta[2]=(texturePos[1]+texturePos[2])/2.;
+		}
+		if (outEdgeFlags)
+		{
+			ba[0]=edgeFlags[0];
+			ba[1]=edgeFlags[1];
+			ba[2]=false;
+		}
+		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
 	
 		va[0]=vertices[0];
 		va[1]=vertices[1]+vertices[2];
+		va[1].normalize();
 		va[2]=vertices[2];
-		ba[0]=false;
-		ba[1]=edgeFlags[1];
-		ba[2]=edgeFlags[2];
-		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1, true, true, false);
+		if (outTexturePos)
+		{
+			ta[0]=texturePos[0];
+			ta[1]=(texturePos[1]+texturePos[2])/2.;
+			ta[2]=texturePos[2];
+		}
+		if (outEdgeFlags)
+		{
+			ba[0]=false;
+			ba[1]=edgeFlags[1];
+			ba[2]=edgeFlags[2];
+		}
+		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1, true, true, false);
 		return;
 	}
 	if (cDiscontinuity1 && !cDiscontinuity2 && cDiscontinuity3)
 	{
 		va[0]=vertices[0];
 		va[1]=vertices[0]+vertices[1];
+		va[1].normalize();
 		va[2]=vertices[0]+vertices[2];
-		ba[0]=edgeFlags[0];
-		ba[1]=false;
-		ba[2]=edgeFlags[2];
-		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1);
+		va[2].normalize();
+		if (outTexturePos)
+		{
+			ta[0]=texturePos[0];
+			ta[1]=(texturePos[0]+texturePos[1])/2.;
+			ta[2]=(texturePos[0]+texturePos[2])/2.;
+		}
+		if (outEdgeFlags)
+		{
+			ba[0]=edgeFlags[0];
+			ba[1]=false;
+			ba[2]=edgeFlags[2];
+		}
+		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
 
 		va[0]=vertices[0]+vertices[1];
+		va[0].normalize();
 		va[1]=vertices[1];
 		va[2]=vertices[2];
-		ba[0]=edgeFlags[0];
-		ba[1]=edgeFlags[1];
-		ba[2]=false;
-		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1, true, false, true);
+		if (outTexturePos)
+		{
+			ta[0]=(texturePos[0]+texturePos[1])/2.;
+			ta[1]=texturePos[1];
+			ta[2]=texturePos[2];
+		}
+		if (outEdgeFlags)
+		{
+			ba[0]=edgeFlags[0];
+			ba[1]=edgeFlags[1];
+			ba[2]=false;
+		}
+		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1, true, false, true);
 	
 		va[0]=vertices[0]+vertices[1];
+		va[0].normalize();
 		va[1]=vertices[2];
 		va[2]=vertices[0]+vertices[2];
-		ba[0]=false;
-		ba[1]=edgeFlags[2];
-		ba[2]=false;
-		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1);
+		va[2].normalize();
+		if (outTexturePos)
+		{
+			ta[0]=(texturePos[0]+texturePos[1])/2.;
+			ta[1]=texturePos[2];
+			ta[2]=(texturePos[0]+texturePos[2])/2.;
+		}
+		if (outEdgeFlags)
+		{
+			ba[0]=false;
+			ba[1]=edgeFlags[2];
+			ba[2]=false;
+		}
+		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
 		return;
 	}
 	if (!cDiscontinuity1 && cDiscontinuity2 && cDiscontinuity3)
@@ -910,72 +1051,151 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		va[0]=vertices[0];
 		va[1]=vertices[1];
 		va[2]=vertices[1]+vertices[2];
-		ba[0]=edgeFlags[0];
-		ba[1]=edgeFlags[1];
-		ba[2]=false;
-		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1, false, true, true);
+		va[2].normalize();
+		if (outTexturePos)
+		{
+			ta[0]=texturePos[0];
+			ta[1]=texturePos[1];
+			ta[2]=(texturePos[1]+texturePos[2])/2.;
+		}
+		if (outEdgeFlags)
+		{
+			ba[0]=edgeFlags[0];
+			ba[1]=edgeFlags[1];
+			ba[2]=false;
+		}
+		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1, false, true, true);
 
 		va[0]=vertices[1]+vertices[2];
+		va[0].normalize();
 		va[1]=vertices[2];
 		va[2]=vertices[0]+vertices[2];
-		ba[0]=edgeFlags[1];
-		ba[1]=edgeFlags[2];
-		ba[2]=false;
-		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1);
+		va[2].normalize();
+		if (outTexturePos)
+		{
+			ta[0]=(texturePos[1]+texturePos[2])/2.;
+			ta[1]=texturePos[2];
+			ta[2]=(texturePos[0]+texturePos[2])/2.;
+		}
+		if (outEdgeFlags)
+		{
+			ba[0]=edgeFlags[1];
+			ba[1]=edgeFlags[2];
+			ba[2]=false;
+		}
+		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
 	
 		va[0]=vertices[0];
 		va[1]=vertices[1]+vertices[2];
+		va[1].normalize();
 		va[2]=vertices[0]+vertices[2];
-		ba[0]=false;
-		ba[1]=false;
-		ba[2]=edgeFlags[2];
-		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1);
+		va[2].normalize();
+		if (outTexturePos)
+		{
+			ta[0]=texturePos[0];
+			ta[1]=(texturePos[1]+texturePos[2])/2.;
+			ta[2]=(texturePos[0]+texturePos[2])/2.;
+		}
+		if (outEdgeFlags)
+		{
+			ba[0]=false;
+			ba[1]=false;
+			ba[2]=edgeFlags[2];
+		}
+		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
 		return;
 	}
 	
 	// Last case: the 3 sides have to be split: cut in 4 triangles a' la HTM
 	va[0]=vertices[0];
 	va[1]=vertices[0]+vertices[1];
+	va[1].normalize();
 	va[2]=vertices[0]+vertices[2];
-	ba[0]=edgeFlags[0];
-	ba[1]=false;
-	ba[2]=edgeFlags[2];
-	projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1);
+	va[2].normalize();
+	if (outTexturePos)
+	{
+		ta[0]=texturePos[0];
+		ta[1]=(texturePos[0]+texturePos[1])/2.;
+		ta[2]=(texturePos[0]+texturePos[2])/2.;
+	}
+	if (outEdgeFlags)
+	{
+		ba[0]=edgeFlags[0];
+		ba[1]=false;
+		ba[2]=edgeFlags[2];
+	}
+	projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
 
 	va[0]=vertices[0]+vertices[1];
+	va[0].normalize();
 	va[1]=vertices[1];
 	va[2]=vertices[1]+vertices[2];
-	ba[0]=edgeFlags[0];
-	ba[1]=edgeFlags[1];
-	ba[2]=false;
-	projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1);
+	va[2].normalize();
+	if (outTexturePos)
+	{
+		ta[0]=(texturePos[0]+texturePos[1])/2.;
+		ta[1]=texturePos[1];
+		ta[2]=(texturePos[1]+texturePos[2])/2.;
+	}
+	if (outEdgeFlags)
+	{
+		ba[0]=edgeFlags[0];
+		ba[1]=edgeFlags[1];
+		ba[2]=false;
+	}
+	projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
 	
 	va[0]=vertices[0]+vertices[2];
+	va[0].normalize();
 	va[1]=vertices[1]+vertices[2];
+	va[1].normalize();
 	va[2]=vertices[2];
-	ba[0]=false;
-	ba[1]=edgeFlags[1];
-	ba[2]=edgeFlags[2];
-	projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1);
+	if (outTexturePos)
+	{
+		ta[0]=(texturePos[0]+texturePos[2])/2.;
+		ta[1]=(texturePos[1]+texturePos[2])/2.;
+		ta[2]=texturePos[2];
+	}
+	if (outEdgeFlags)
+	{
+		ba[0]=false;
+		ba[1]=edgeFlags[1];
+		ba[2]=edgeFlags[2];
+	}
+	projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
 	
 	va[0]=vertices[0]+vertices[1];
+	va[0].normalize();
 	va[1]=vertices[1]+vertices[2];
+	va[1].normalize();
 	va[2]=vertices[0]+vertices[2];
-	ba[0]=false;
-	ba[1]=false;
-	ba[2]=false;
-	projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, NULL, NULL, nbI+1);
+	va[2].normalize();
+	if (outTexturePos)
+	{
+		ta[0]=(texturePos[0]+texturePos[1])/2.;
+		ta[1]=(texturePos[1]+texturePos[2])/2.;
+		ta[2]=(texturePos[0]+texturePos[2])/2.;
+	}
+	if (outEdgeFlags)
+	{
+		ba[0]=false;
+		ba[1]=false;
+		ba[2]=false;
+	}
+	projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
 	return;
 }
 
 static QVector<Vec3d> polygonVertexArray;
 static QVector<bool> polygonEdgeFlagArray;
+static QVector<Vec2d> polygonTextureCoordArray;
 
 // Draw the given SphericalPolygon.
 void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, SphericalPolygonDrawMode drawMode, const Vec4f* boundaryColor) const
 {
 	polygonVertexArray.clear();
 	polygonEdgeFlagArray.clear();
+	polygonTextureCoordArray.clear();
 	
 	// Use a special algo for convex polygons which are not pre-tesselated.
 	const SphericalConvexPolygon* cvx = dynamic_cast<const SphericalConvexPolygon*>(poly);
@@ -1004,9 +1224,30 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 		const QVector<Vec3d>& a = poly->getVertexArray();
 		if (a.isEmpty())
 			return;
-		for (int i=0;i<a.size()/3;++i)
+		if (drawMode==SphericalPolygonDrawModeTextureFill)
 		{
-			projectSphericalTriangle(a.constData()+i*3, &polygonVertexArray, poly->getEdgeFlagArray().constData()+i*3, &polygonEdgeFlagArray);
+			// Only texured fill, don't bother with edge flags
+			for (int i=0;i<a.size()/3;++i)
+				projectSphericalTriangle(a.constData()+i*3, &polygonVertexArray, NULL, NULL, poly->getTextureCoordArray().constData()+i*3, &polygonTextureCoordArray);
+			Q_ASSERT(polygonVertexArray.size()==polygonTextureCoordArray.size());
+		}
+		else if (drawMode==SphericalPolygonDrawModeTextureFillAndBoundary)
+		{
+			// Texured fill and edge flags
+			for (int i=0;i<a.size()/3;++i)
+				projectSphericalTriangle(a.constData()+i*3, &polygonVertexArray, poly->getEdgeFlagArray().constData()+i*3, &polygonEdgeFlagArray, poly->getTextureCoordArray().constData()+i*3, &polygonTextureCoordArray);
+			Q_ASSERT(polygonVertexArray.size()==polygonTextureCoordArray.size());
+		}
+		else if (drawMode==SphericalPolygonDrawModeBoundary || drawMode==SphericalPolygonDrawModeFillAndBoundary)
+		{
+			for (int i=0;i<a.size()/3;++i)
+				projectSphericalTriangle(a.constData()+i*3, &polygonVertexArray, poly->getEdgeFlagArray().constData()+i*3, &polygonEdgeFlagArray, NULL, NULL);
+		}
+		else
+		{
+			// Only plain fill, don't bother with edge flags and textures coordinates
+			for (int i=0;i<a.size()/3;++i)
+				projectSphericalTriangle(a.constData()+i*3, &polygonVertexArray, NULL, NULL, NULL, NULL);
 		}
 	}
 	
@@ -1014,27 +1255,38 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, polygonVertexArray.constData());
 	
-	// Load the edge flags if any
-	if (!polygonEdgeFlagArray.isEmpty())
+	// Load the textureCoordinates if any
+	if (drawMode==SphericalPolygonDrawModeTextureFill || drawMode==SphericalPolygonDrawModeTextureFillAndBoundary)
 	{
-		glEnableClientState(GL_EDGE_FLAG_ARRAY);
-		glEdgeFlagPointer(0, polygonEdgeFlagArray.constData());
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glTexCoordPointer(2, GL_DOUBLE, 0, polygonTextureCoordArray.constData());
 	}
-	
-	if (drawMode==SphericalPolygonDrawModeFill || drawMode==SphericalPolygonDrawModeFillAndBoundary)
+	// Draw the fill part
+	if (drawMode!=SphericalPolygonDrawModeBoundary)
 	{
-		// Draw the fill part
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glDrawArrays(GL_TRIANGLES, 0, polygonVertexArray.size());
 	}
-	if (drawMode==SphericalPolygonDrawModeBoundary || drawMode==SphericalPolygonDrawModeFillAndBoundary)
+	// Draw the boundary part
+	if (drawMode==SphericalPolygonDrawModeBoundary || drawMode==SphericalPolygonDrawModeFillAndBoundary || drawMode==SphericalPolygonDrawModeTextureFillAndBoundary)
 	{
+		// Load the edge flags
+		//QVector<bool> temp;
+		//temp.fill(true, polygonEdgeFlagArray.size());
+		//glEdgeFlagPointer(0, temp.constData());
+		glEdgeFlagPointer(0, polygonEdgeFlagArray.constData());
+		glEnableClientState(GL_EDGE_FLAG_ARRAY);
+		
 		// Draw the boundary part, and use the extra color if defined
 		GLfloat tmpColor[4];
 		if (boundaryColor!=NULL)
 		{
 			glGetFloatv(GL_CURRENT_COLOR, tmpColor);
 			glColor4fv((float*)boundaryColor);
+		}
+		if (drawMode==SphericalPolygonDrawModeTextureFillAndBoundary)
+		{
+			glDisable(GL_TEXTURE_2D);
 		}
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glDrawArrays(GL_TRIANGLES, 0, polygonVertexArray.size());
@@ -1043,10 +1295,15 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 			// Revert previous color
 			glColor4fv(tmpColor);
 		}
+		if (drawMode==SphericalPolygonDrawModeTextureFillAndBoundary)
+		{
+			glEnable(GL_TEXTURE_2D);
+		}
 	}
 	
 	glDisableClientState(GL_EDGE_FLAG_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 

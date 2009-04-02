@@ -177,17 +177,6 @@ public:
 	//! Return an openGL compatible array of texture coords to be used using vertex arrays.
 	//! @return the array or an empty array if the polygon has no texture.
 	virtual QVector<Vec2d> getTextureCoordArray() const = 0;
-	
-	//! Set the contours defining the SphericalPolygon.
-	//! @param contours the list of contours defining the polygon area.
-	//! @param windingRule the winding rule to use. Default value is WindingPositive, meaning that the 
-	//! polygon is the union of the positive contours minus the negative ones.
-	virtual void setContours(const QVector<QVector<Vec3d> >& contours, PolyWindingRule windingRule=WindingPositive,
-		const QVector<QVector<Vec2d> >& textureCoordsContours=QVector<QVector<Vec2d> >()) = 0;
-	
-	//! Set a single contour defining the SphericalPolygon.
-	//! @param contours the list of contours defining the polygon area.
-	virtual void setContour(const QVector<Vec3d>& contour) = 0;
 
 	//! Get the contours defining the SphericalPolygon.
 	virtual QVector<QVector<Vec3d> > getContours() const;
@@ -220,7 +209,7 @@ public:
 	//! The QVariant should contain a list of contours, each contours being a list of ra,dec points
 	//! with ra,dec expressed in degree in the ICRS reference frame.
 	//! Use QJSONParser to transform a JSON representation into QVariant.
-	virtual bool loadFromQVariant(const QVariantMap& contours);
+	//virtual bool loadFromQVariant(const QVariantMap& contours);
 
 	//! Output the SphericalPolygon information in the form of a QVariant.
 	//! The QVariant will contain a list of contours, each contours being a list of ra,dec points
@@ -242,6 +231,14 @@ protected:
 				(v2[2] * v1[0] - v2[0] * v1[2])*p[1] +
 				(v2[0] * v1[1] - v2[1] * v1[0])*p[2] >= 0.;
 	}
+};
+
+//! @struct TextureVertex
+//! A container for 3D vertex + associated texture coordinates
+struct TextureVertex
+{
+	Vec3d vertex;
+	Vec2d texCoord;
 };
 
 //! @class SphericalPolygon
@@ -275,8 +272,7 @@ public:
 	//! @param contours the list of contours defining the polygon area.
 	//! @param windingRule the winding rule to use. Default value is WindingPositive, meaning that the 
 	//! polygon is the union of the positive contours minus the negative ones.
-	virtual void setContours(const QVector<QVector<Vec3d> >& contours, SphericalPolygonBase::PolyWindingRule windingRule=SphericalPolygonBase::WindingPositive,
-		const QVector<QVector<Vec2d> >& textureCoordsContours=QVector<QVector<Vec2d> >());
+	virtual void setContours(const QVector<QVector<Vec3d> >& contours, SphericalPolygonBase::PolyWindingRule windingRule=SphericalPolygonBase::WindingPositive);
 	
 	//! Set a single contour defining the SphericalPolygon.
 	//! @param contours a contour defining the polygon area.
@@ -300,12 +296,11 @@ protected:
 class SphericalPolygonTexture : public SphericalPolygon
 {
 public:
-
 	//! Constructor from a list of contours.
-	SphericalPolygonTexture(const QVector<QVector<Vec3d> >& contours, const QVector<QVector<Vec2d> >& texCoords) {setContours(contours, SphericalPolygonBase::WindingPositive, texCoords);}
+	SphericalPolygonTexture(const QVector<QVector<TextureVertex> >& contours) {setContours(contours, SphericalPolygonBase::WindingPositive);}
 
 	//! Constructor from one contour.
-	SphericalPolygonTexture(const QVector<Vec3d>& contour, const QVector<Vec2d>& texCoords) {setContour(contour, texCoords);}
+	SphericalPolygonTexture(const QVector<TextureVertex>& contour) {setContour(contour);}
 	
 	//! Return an openGL compatible array of texture coords to be used using vertex arrays.
 	virtual QVector<Vec2d> getTextureCoordArray() const {return textureCoords;}
@@ -314,12 +309,11 @@ public:
 	//! @param contours the list of contours defining the polygon area.
 	//! @param windingRule the winding rule to use. Default value is WindingPositive, meaning that the 
 	//! polygon is the union of the positive contours minus the negative ones.
-	virtual void setContours(const QVector<QVector<Vec3d> >& contours, SphericalPolygonBase::PolyWindingRule windingRule=SphericalPolygonBase::WindingPositive,
-		const QVector<QVector<Vec2d> >& textureCoordsContours=QVector<QVector<Vec2d> >());
+	virtual void setContours(const QVector<QVector<TextureVertex> >& contours, SphericalPolygonBase::PolyWindingRule windingRule=SphericalPolygonBase::WindingPositive);
 	
 	//! Set a single contour defining the SphericalPolygon.
 	//! @param contours a contour defining the polygon area.
-	virtual void setContour(const QVector<Vec3d>& contour, const QVector<Vec2d>& textureCoordsContours=QVector<Vec2d>());
+	virtual void setContour(const QVector<TextureVertex>& contour);
 
 private:
 	friend void vertexTextureCallback(void* vertexData, void* userData);

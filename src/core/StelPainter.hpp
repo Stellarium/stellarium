@@ -46,7 +46,9 @@ public:
 	{
 		SphericalPolygonDrawModeFill,           //!< Draw the interior of the polygon only
   		SphericalPolygonDrawModeBoundary,       //!< Draw the boundary of the polygon only
-		SphericalPolygonDrawModeFillAndBoundary //!< Draw both the interior and the boundary of the polygon
+		SphericalPolygonDrawModeFillAndBoundary,//!< Draw both the interior and the boundary of the polygon
+  		SphericalPolygonDrawModeTextureFill,	//!< Draw the interior of the polygon only filled with the current texture
+		SphericalPolygonDrawModeTextureFillAndBoundary //!< Draw the interior of the polygon filled with the current texture and the boundary
 	};
 	
 	explicit StelPainter(const StelProjectorP& prj);
