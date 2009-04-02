@@ -1,0 +1,38 @@
+//
+// Name: ScreenImageMgr Demo
+// License: Public Domain
+// Author: Matthew Gates
+// Description: An example script showing how to use the ScreenImageMgr module.
+//
+
+rootLabelText = "ScreenImageMgr test 1: ";
+statusLabelId = LabelMgr.labelScreen("", 50, 50, true, 16, "#ff0000");
+
+status("image start off, fades in (1 sec), wait a second, fades off (1 sec)");
+core.wait(2.0);
+ScreenImageMgr.createScreenImage("logo", "../textures/earthmap.png", 50, 150, 1.0, false, 1.0, 1.0);
+status("loaded");
+core.wait(1);
+status("fading in...");
+ScreenImageMgr.showImage("logo", true);
+core.wait(2);
+status("fading out...");
+ScreenImageMgr.showImage("logo", false);
+core.wait(2);
+status("Again, but with alpha maximum = 0.5...");
+ScreenImageMgr.setImageAlpha("logo", 0.5);
+core.wait(2.0);
+status("fading in...");
+ScreenImageMgr.showImage("logo", true);
+core.wait(2);
+status("fading out...");
+ScreenImageMgr.showImage("logo", false);
+core.wait(2);
+
+ScreenImageMgr.deleteAllImages();
+LabelMgr.deleteAllLabels();
+
+function status(text)
+{
+	 LabelMgr.setLabelText(statusLabelId, rootLabelText + text);
+}

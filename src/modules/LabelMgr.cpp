@@ -35,6 +35,7 @@
 #include "StelUtils.hpp"
 #include "VecMath.hpp"
 #include "StelPainter.hpp"
+#include "StelMainWindow.hpp"
 
 #include <vector>
 #include <QString>
@@ -311,9 +312,9 @@ bool SkyLabel::draw(StelCore* core, const StelPainter& sPainter)
 ///////////////////////
 ScreenLabel::ScreenLabel(const QString& text, int x, int y, StelFont* font, Vec3f color)
 	: StelLabel(text, font, color),
-	  screenX(x),
-	  screenY(y)
+	  screenX(x)
 {
+	screenY = StelMainWindow::getInstance().size().height() - y - font->getLineHeight();
 }
 
 ScreenLabel::~ScreenLabel()
@@ -384,11 +385,11 @@ int LabelMgr::labelObject(const QString& text,
 }
 
 int LabelMgr::labelScreen(const QString& text,
-                             int x,
-                             int y,
-                             bool visible,
-                             float fontSize,
-                             const QString& fontColor)
+                          int x,
+                          int y,
+                          bool visible,
+                          float fontSize,
+                          const QString& fontColor)
 {
 	StelFont* font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 	Q_ASSERT(font);

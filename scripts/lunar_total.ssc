@@ -9,40 +9,17 @@
 //              to use the new one.
 //
 
-core.debug("Starting Total Lunar Eclispe script");
 core.wait(1);
-core.debug("OK, let's go...");
-
-// OLD: clear
 core.clear("natural");
 LandscapeMgr.setFlagLandscape(false);
 LandscapeMgr.setFlagAtmosphere(false);
 LandscapeMgr.setFlagFog(false);
-
 core.wait(1);
-
-// OLD: date utc 2004:05:04T17:51:00
 core.setDate("2004:05:04T17:51:00");
-
-// OLD: select planet Moon pointer off
 core.selectObjectByName("Moon", false);
 StelMovementMgr.setFlagTracking(true);
-
-// OLD: wait duration 2
 core.wait(2);
-
-// OLD: zoom auto in
 StelMovementMgr.autoZoomIn(2);
-
-// OLD: wait duration 2
 core.wait(2);
-
-// OLD: timerate rate 250
-// .00001157407407407407 julian days = 1 second.
-// we want 500 seconds per second.
-// good candidate for aforementioned include system
-// function although it's not so bad now we can do
-// arithmetic in scripts  :-)
 core.setTimeRate(250);
-
 
