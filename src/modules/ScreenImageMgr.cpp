@@ -41,22 +41,32 @@
 ///////////////////////
 // ScreenImage class //
 ///////////////////////
-ScreenImage::ScreenImage(const QString& filename, float x, float y, bool show, float scale, float fadeDuration)
-	: imageFader(1000*fadeDuration), tex(NULL)
+ScreenImage::ScreenImage(const QString& filename, float x, float y, bool show, float scale, float alpha, float fadeDuration)
+	: tex(NULL), maxAlpha(alpha)
 {
+	qDebug() << "ScreenImage(x=" << x << ", y=" << y << ", show=" << show << ", scale=" << scale << ", alpha=" << alpha <<  ", fade=" << fadeDuration;
 	try
 	{
 		QString path = StelApp::getInstance().getFileMgr().findFile("scripts/" + filename);
-		tex = StelMainGraphicsView::getInstance().scene()->addPixmap(QPixmap(path));
-		if (scale != 1.)
-			tex->scale(scale,scale);
+		QPixmap pm(path);
+		tex = StelMainGraphicsView::getInstance().scene()->addPixmap(pm.scaled(pm.size()*scale));
 		tex->setOffset(x, y);
-		tex->setVisible(show);
 		anim = new QGraphicsItemAnimation();
 		moveTimer = new QTimeLine();
 		moveTimer->setCurveShape(QTimeLine::LinearCurve);
 		anim->setTimeLine(moveTimer);
 		anim->setItem(tex);
+
+		fadeTimer = new QTimeLine();
+		fadeTimer->setCurveShape(QTimeLine::LinearCurve);
+		setFadeDuration(fadeDuration);
+		connect(fadeTimer, SIGNAL(valueChanged(qreal)), this, SLOT(setOpacity(qreal)));
+
+		// set inital displayed state
+		if (show)
+			tex->setOpacity(maxAlpha);
+		else
+			tex->setOpacity(0.);
 	}
 	catch (std::runtime_error& e)
 	{
@@ -78,35 +88,48 @@ ScreenImage::~ScreenImage()
 
 bool ScreenImage::draw(const StelCore* core)
 {
-	tex->setVisible(imageFader.getInterstate() > 0. || imageFader);
-	tex->setOpacity(imageFader.getInterstate());
 	return true;
 }
 
 void ScreenImage::update(double deltaTime)
 {
-	imageFader.update((int)(deltaTime*1000));
 }
 
 void ScreenImage::setFadeDuration(float duration)
 {
-	imageFader.setDuration(duration);
+	int fadeMs = duration * 1000;
+	if (fadeMs<=0) fadeMs=1;
+	fadeTimer->setDuration(fadeMs);
 }
 
 void ScreenImage::setFlagShow(bool b)
 {
-	imageFader = b;
+	if (b)
+	{
+		fadeTimer->setFrameRange(tex->opacity()*fadeTimer->duration(),fadeTimer->duration());
+		fadeTimer->setDirection(QTimeLine::Forward);
+	}
+	else
+	{
+		fadeTimer->setFrameRange(tex->opacity()*fadeTimer->duration(),0);
+		fadeTimer->setDirection(QTimeLine::Backward);
+	}
+	fadeTimer->start();
 }
 
 bool ScreenImage::getFlagShow(void)
 {
-	return imageFader;
+	return (tex->opacity() > 0.);
 }
 
 void ScreenImage::setAlpha(float a)
 {
-	imageFader.setMaxValue(a);
-	imageFader.setMaxValue(a);
+	maxAlpha = a;
+	if (getFlagShow())
+	{
+		fadeTimer->stop();
+		tex->setOpacity(a);
+	}
 }
 
 void ScreenImage::setXY(float x, float y, float duration)
@@ -123,15 +146,34 @@ void ScreenImage::setXY(float x, float y, float duration)
 		QPointF p(tex->offset());
 		float sX = p.x();
 		float sY = p.y();
-		float eX = x;
-		float eY = y;
 		float dX = (x-sX) / 200.;
-		float dY = (y-sY) / 200.;
+		float dY = (x-sY) / 200.;
 		for(int i=0; i<200; i++)
-			anim->setPosAt(i/200., QPointF(sX+(dX*i), sY+(dY*i)));
-		anim->setPosAt(200., QPointF(eX, eY));
+			anim->setPosAt(i/200., QPointF((dX*i), (dY*i)));
+		anim->setPosAt(200., QPointF(x, y));
 		moveTimer->start();
 	}
+}
+
+void ScreenImage::addXY(float x, float y, float duration)
+{
+	QPointF currentPos = tex->offset();
+	setXY(currentPos.x() + x, currentPos.y() + y, duration);
+}
+
+int ScreenImage::imageWidth(void)
+{
+	return tex->pixmap().size().width();
+}
+
+int ScreenImage::imageHeight(void)
+{
+	return tex->pixmap().size().height();
+}
+
+void ScreenImage::setOpacity(qreal alpha)
+{
+	tex->setOpacity(alpha*maxAlpha);
 }
 
 //////////////////////////
@@ -146,6 +188,9 @@ ScreenImageMgr::ScreenImageMgr()
 	connect(this, SIGNAL(requestSetImageShow(const QString&, bool)),
 	        this, SLOT(doSetImageShow(const QString&, bool)));
 
+	connect(this, SIGNAL(requestSetImageAlpha(const QString&, float)),
+	        this, SLOT(doSetImageAlpha(const QString&, float)));
+
 	connect(this, SIGNAL(requestSetImageXY(const QString&, float, float, float)),
 	        this, SLOT(doSetImageXY(const QString&, float, float, float)));
 
@@ -154,6 +199,7 @@ ScreenImageMgr::ScreenImageMgr()
 
 	connect(this, SIGNAL(requestDeleteAllImages()),
 	        this, SLOT(doDeleteAllImages()));
+
 }
  
 ScreenImageMgr::~ScreenImageMgr()
@@ -206,10 +252,33 @@ bool ScreenImageMgr::getShowImage(const QString& id)
 
 	return false;
 }
+
+int ScreenImageMgr::getImageWidth(const QString& id)
+{
+	if (allScreenImages.contains(id))
+		if (allScreenImages[id]!=NULL)
+			return allScreenImages[id]->imageWidth();
+
+	return 0;
+}
+	
+int ScreenImageMgr::getImageHeight(const QString& id)
+{
+	if (allScreenImages.contains(id))
+		if (allScreenImages[id]!=NULL)
+			return allScreenImages[id]->imageHeight();
+
+	return 0;
+}
 	
 void ScreenImageMgr::showImage(const QString& id, bool show)
 {
 	emit(requestSetImageShow(id, show));
+}
+
+void ScreenImageMgr::setImageAlpha(const QString& id, float alpha)
+{
+	emit(requestSetImageAlpha(id, alpha));
 }
 
 void ScreenImageMgr::setImageXY(const QString& id, float x, float y, float duration)
@@ -246,14 +315,9 @@ void ScreenImageMgr::doCreateScreenImage(const QString& id,
 	if (allScreenImages.contains(id))
 		doDeleteImage(id);
 
-	ScreenImage* i = new ScreenImage(filename, x, y, visible, scale, fadeDuration);
+	ScreenImage* i = new ScreenImage(filename, x, y, visible, scale, alpha, fadeDuration);
 	if (i==NULL)
 		return;
-
-	i->setAlpha(alpha);
-
-	if (visible)
-		i->setFlagShow(true);
 
 	allScreenImages[id] = i;
 	return;
@@ -264,6 +328,13 @@ void ScreenImageMgr::doSetImageShow(const QString& id, bool show)
 	if (allScreenImages.contains(id))
 		if (allScreenImages[id]!=NULL)
 			allScreenImages[id]->setFlagShow(show);
+}
+
+void ScreenImageMgr::doSetImageAlpha(const QString& id, float alpha)
+{
+	if (allScreenImages.contains(id))
+		if (allScreenImages[id]!=NULL)
+			allScreenImages[id]->setAlpha(alpha);
 }
 
 void ScreenImageMgr::doSetImageXY(const QString& id, float x, float y, float duration)
