@@ -956,34 +956,34 @@ void StelApp::draw()
 		i->draw(core);
 	}
 
-	// Testing code for new polygon code
-	QVector<QVector<TextureVertex> > contours;
-	QVector<TextureVertex> c1(4);
-	StelUtils::spheToRect(-0.5, -0.5, c1[0].vertex);
-	StelUtils::spheToRect(0.5, -0.5, c1[1].vertex);
-	StelUtils::spheToRect(0.5, 0.5, c1[2].vertex);
-	StelUtils::spheToRect(-0.5, 0.5, c1[3].vertex);
-	c1[0].texCoord.set(0,0);
-	c1[1].texCoord.set(1,0);
-	c1[2].texCoord.set(1,1);
-	c1[3].texCoord.set(0,1);
-	contours.append(c1);
-
-	SphericalPolygonTexture p(contours);
-	static StelTextureSP ttex;
-	if (!ttex)
-	{
-		ttex = textureMgr->createTexture("textures/tethys.png");
-	}
-	{
-		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-		glDisable(GL_BLEND);
-		glEnable(GL_TEXTURE_2D);
-		ttex->bind();
-		glColor4f(0, .6, .6, .5);
-		Vec4f boundaryColor(0, 1, .6, 1);
-		sPainter.drawSphericalPolygon(&p, StelPainter::SphericalPolygonDrawModeTextureFillAndBoundary, &boundaryColor);
-	}
+// 	// Testing code for new polygon code
+// 	QVector<QVector<TextureVertex> > contours;
+// 	QVector<TextureVertex> c1(4);
+// 	StelUtils::spheToRect(-0.5, -0.5, c1[0].vertex);
+// 	StelUtils::spheToRect(0.5, -0.5, c1[1].vertex);
+// 	StelUtils::spheToRect(0.5, 0.5, c1[2].vertex);
+// 	StelUtils::spheToRect(-0.5, 0.5, c1[3].vertex);
+// 	c1[0].texCoord.set(0,0);
+// 	c1[1].texCoord.set(1,0);
+// 	c1[2].texCoord.set(1,1);
+// 	c1[3].texCoord.set(0,1);
+// 	contours.append(c1);
+// 
+// 	SphericalPolygonTexture p(contours);
+// 	static StelTextureSP ttex;
+// 	if (!ttex)
+// 	{
+// 		ttex = textureMgr->createTexture("textures/tethys.png");
+// 	}
+// 	{
+// 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
+// 		glDisable(GL_BLEND);
+// 		glEnable(GL_TEXTURE_2D);
+// 		ttex->bind();
+// 		glColor4f(0, .6, .6, .5);
+// 		Vec4f boundaryColor(0, 1, .6, 1);
+// 		sPainter.drawSphericalPolygon(&p, StelPainter::SphericalPolygonDrawModeTextureFillAndBoundary, &boundaryColor);
+// 	}
 	
 // 	QVector<Vec3d> c2(4);
 // 	StelUtils::spheToRect(-0.2, 0.2, c2[0]);
