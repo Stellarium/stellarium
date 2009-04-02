@@ -27,7 +27,12 @@ core.wait(2.5);
 // The label is deleted after it has been displayed.
 function commentary(text)
 {
-	var id = LabelMgr.labelScreen(text, 100, 100, false, 20, "#aaaaaa");
+	commentary_at(text, 30, 30);
+}
+
+function commentary_at(text, x, y)
+{
+	var id = LabelMgr.labelScreen(text, x, y, false, 20, "#aaaaaa");
 	LabelMgr.setLabelShow(id, true);
 	core.wait(2);
 	LabelMgr.setLabelShow(id, false);
@@ -36,7 +41,11 @@ function commentary(text)
 }
 
 commentary("This script is a test of LabelMgr");
-commentary("Labels can be fixed to screen x,y values (like this label)...");
+commentary("Labels can be fixed to screen x,y values...");
+commentary_at("0,0", 0, 0);
+commentary_at("100,100", 100, 100);
+commentary_at("0,400", 0, 400);
+commentary_at("600,20", 600, 20);
 commentary("Or they can be attached to a named object...");
 
 var myOb = "HP 21421"; // Aldebaran

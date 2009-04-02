@@ -21,7 +21,6 @@
 #define _SCREENIMAGEMGR_HPP_
 
 
-#include "StelFader.hpp"
 #include "StelModule.hpp"
 #include "StelTextureTypes.hpp"
 #include "VecMath.hpp"
@@ -29,6 +28,7 @@
 #include <QMap>
 #include <QString>
 #include <QStringList>
+#include <QSize>
 
 class StelCore;
 class QGraphicsPixmapItem;
@@ -36,18 +36,20 @@ class QTimeLine;
 class QGraphicsItemAnimation;
 
 // base class for different image types
-class ScreenImage
+class ScreenImage : public QObject
 {
+	Q_OBJECT
+
 public:
 	//! Load an image
 	//! @param filename the partial path of the file to load.  This will be searched for in the
 	//! scripts directory using StelFileMgr.
 	//! @param x the screen x-position for the texture (in pixels), measured from the left side of the screen.
-	//! @param y the screen x-position for the texture (in pixels), measured from the top of the screen.
+	//! @param y the screen x-position for the texture (in pixels), measured from the bottom of the screen.
 	//! @param show the initial displayed status of the image (false == hidden).
 	//! @param scale scale factor for the image. 1 = original size, 0.5 = 50% size etc.
 	//! @param fadeDuration the time it takes for screen images to fade in/out/change alpha in seconds.
-	ScreenImage(const QString& filename, float x, float y, bool show=false, float scale=1., float fadeDuration=1.);
+	ScreenImage(const QString& filename, float x, float y, bool show=false, float scale=1., float alpha=1., float fadeDuration=1.);
 	virtual ~ScreenImage();
 
 	//! Draw the image.
@@ -71,13 +73,25 @@ public:
 	//! @param y new y position
 	//! @param duration how long for the movement to take in seconds
 	virtual void setXY(float x, float y, float duration=0.);
+	//! Set the x, y position of the image relative to the current position
+	//! @param x the offset in the x-axis
+	//! @param y the offset in the y-axis
+	//! @param duration how long for the movement to take in seconds
+	virtual void addXY(float x, float y, float duration=0.);
+	virtual int imageHeight(void);
+	virtual int imageWidth(void);
 
 protected:
-	LinearFader imageFader;
 	QGraphicsPixmapItem* tex;
 	QTimeLine* moveTimer;
 	QTimeLine* fadeTimer;
 	QGraphicsItemAnimation* anim;
+
+private slots:
+	void setOpacity(qreal alpha);
+
+private:
+	float maxAlpha;
 
 };
 
@@ -111,7 +125,7 @@ public slots:
 	//! @param filename the partial path of the file to load.  This will be searched
 	//! for using StelFileMgr, with "scripts/" prefixed to the filename.
 	//! @param x The x-coordinate for the image (0 = left of screen)
-	//! @param y The y-coordinate for the image (0 = top of screen)
+	//! @param y The y-coordinate for the image (0 = bottom of screen)
 	//! @param visible The initial visible state of the image
 	//! @param alpha The initial alpha (transparancy) value for the image (range 0.0 to 1.0)
 	//! @param fadeDuration the time it takes for screen images to fade in/out/change alpha in seconds.
@@ -130,11 +144,18 @@ public slots:
 	//! Set an image's visible status.
 	//! @param id the ID for the desired image.
 	//! @param show the new visible state to set.
+	int getImageWidth(const QString& id);
+	int getImageHeight(const QString& id);
 	void showImage(const QString& id, bool show); 
+	//! Set an image's alpha value when visible
+	//! @param id the ID for the desired image.
+	//! @param alpha the new alpha value to set.
+	void setImageAlpha(const QString& id, float alpha); 
 	//! Set the x and y coordinates for the specified image
 	//! @param id the ID for the desired image.
 	//! @param x The new x-coordinate for the image.
 	//! @param y The new y-coordinate for the image.
+	//! @param duration The time for the change to take place, in seconds.
 	void setImageXY(const QString& id, float x, float y, float duration=0.);
 	//! Delete an image.
 	//! @param id the ID for the desired image.
@@ -156,6 +177,8 @@ signals:
 
 	void requestSetImageShow(const QString& id, bool b);
 
+	void requestSetImageAlpha(const QString& id, float alpha);
+
 	void requestSetImageXY(const QString& id, float x, float y, float duration);
 
 	void requestDeleteImage(const QString& id);
@@ -174,6 +197,8 @@ private slots:
 	                         float fadeDuration);
 
 	void doSetImageShow(const QString& id, bool b);
+
+	void doSetImageAlpha(const QString& id, float alpha);
 
 	void doSetImageXY(const QString& id, float x, float y, float duration);
 

@@ -10,12 +10,12 @@ function blockText(textArray)
 {
 	var fontSize = 20;
 	var lineSep = fontSize * 1.5;
-	y = 50 + (lineSep*textArray.length);
+	y = 50;
 	ids = new Array();
 	for(i=0; i<textArray.length; i++)
 	{
 		ids[i] = LabelMgr.labelScreen(textArray[i], 30, y, false, fontSize, "#0044ff");
-		y = y - lineSep;
+		y += lineSep;
 	}
 
 	for(i=0; i<ids.length; i++)
@@ -157,6 +157,5 @@ core.wait(3);
 ids = blockText(Array("The End"));
 core.wait(4);
 clearLabels(ids);
-
 
 
