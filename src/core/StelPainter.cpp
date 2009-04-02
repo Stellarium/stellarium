@@ -697,9 +697,12 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	const bool cd3=cDiscontinuity3;
 	
 	Vec3d e0, e1, e2, win3;
-	prj->project(vertices[0], e0);
-	prj->project(vertices[1], e1);
-	prj->project(vertices[2], e2);
+	bool valid = prj->project(vertices[0], e0);
+	valid = prj->project(vertices[1], e1) || valid;
+	valid = prj->project(vertices[2], e2) || valid;
+	// Clip polygons behind the viewer
+	if (!valid)
+		return;
 	
 	static const double maxSqDistortion = 5.;
 	if (checkDisc1 && cDiscontinuity1==false)
@@ -738,7 +741,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	if (nbI > 4)
 	{
 		// If we reached the limit number of iterations and still have a discontinuity,
-		// discard the triangle.
+		// discards the triangle.
 		if (cd1 || cd2 || cd3)
 			return;
 
@@ -1218,6 +1221,8 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 	// Load the vertex array
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, polygonVertexArray.constData());
+	glEnable(GL_CULL_FACE);
+	glFrontFace(prj->needGlFrontFaceCW()?GL_CCW:GL_CW);
 	
 	// Load the textureCoordinates if any
 	if (drawMode==SphericalPolygonDrawModeTextureFill || drawMode==SphericalPolygonDrawModeTextureFillAndBoundary)
@@ -1235,9 +1240,6 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 	if (drawMode==SphericalPolygonDrawModeBoundary || drawMode==SphericalPolygonDrawModeFillAndBoundary || drawMode==SphericalPolygonDrawModeTextureFillAndBoundary)
 	{
 		// Load the edge flags
-		//QVector<bool> temp;
-		//temp.fill(true, polygonEdgeFlagArray.size());
-		//glEdgeFlagPointer(0, temp.constData());
 		glEdgeFlagPointer(0, polygonEdgeFlagArray.constData());
 		glEnableClientState(GL_EDGE_FLAG_ARRAY);
 		
@@ -1265,6 +1267,8 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 		}
 	}
 	
+	glFrontFace(prj->needGlFrontFaceCW()?GL_CW:GL_CCW);
+	glDisable(GL_CULL_FACE);
 	glDisableClientState(GL_EDGE_FLAG_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
