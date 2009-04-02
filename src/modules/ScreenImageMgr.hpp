@@ -46,7 +46,8 @@ public:
 	//! @param y the screen x-position for the texture (in pixels), measured from the top of the screen.
 	//! @param show the initial displayed status of the image (false == hidden).
 	//! @param scale scale factor for the image. 1 = original size, 0.5 = 50% size etc.
-	ScreenImage(const QString& filename, float x, float y, bool show=false, float scale=1.);
+	//! @param fadeDuration the time it takes for screen images to fade in/out/change alpha in seconds.
+	ScreenImage(const QString& filename, float x, float y, bool show=false, float scale=1., float fadeDuration=1.);
 	virtual ~ScreenImage();
 
 	//! Draw the image.
@@ -64,7 +65,7 @@ public:
 	//! Set the image alpha for when it is in full "on" (after fade in).
 	//! @param a the new alpha (transparency) for the image.  1.0 = totally transparent, 0.0 = fully opaque.
 	//! @param duration the time for the change in alpha to take effect.
-	virtual void setAlpha(float a, float duration=0.);
+	virtual void setAlpha(float a);
 	//! Set the x, y position of the image.
 	//! @param x new x position
 	//! @param y new y position
@@ -109,17 +110,19 @@ public slots:
 	//! @param id the ID to use when referring to this image (an arbitrary string).
 	//! @param filename the partial path of the file to load.  This will be searched
 	//! for using StelFileMgr, with "scripts/" prefixed to the filename.
-	//! @param x The x-coordinate for the image
-	//! @param y The x-coordinate for the image
+	//! @param x The x-coordinate for the image (0 = left of screen)
+	//! @param y The y-coordinate for the image (0 = top of screen)
 	//! @param visible The initial visible state of the image
 	//! @param alpha The initial alpha (transparancy) value for the image (range 0.0 to 1.0)
+	//! @param fadeDuration the time it takes for screen images to fade in/out/change alpha in seconds.
 	void createScreenImage(const QString& id,
-                          const QString& filename,
-	                      float x,
-	                      float y,
-	                      float scale=1.,
-	                      bool visible=true,
-	                      float alpha=1.0);
+                               const QString& filename,
+	                       float x,
+	                       float y,
+	                       float scale=1.,
+	                       bool visible=true,
+	                       float alpha=1.,
+	                       float fadeDuration=1.);
 
 	//! Find out if an image is currently visible.
 	//! @param id the ID for the desired image.
@@ -148,7 +151,8 @@ signals:
 	                              float y,
 	                              float scale,
 	                              bool visible,
-	                              float alpha);
+	                              float alpha,
+	                              float fadeDuration);
 
 	void requestSetImageShow(const QString& id, bool b);
 
@@ -166,7 +170,8 @@ private slots:
 	                         float y,
 	                         float scale,
 	                         bool visible,
-	                         float alpha);
+	                         float alpha,
+	                         float fadeDuration);
 
 	void doSetImageShow(const QString& id, bool b);
 
