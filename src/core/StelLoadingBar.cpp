@@ -76,7 +76,6 @@ void StelLoadingBar::Draw(float val)
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_TEXTURE_2D);
 		glColor3f(1, 1, 1);
-		glDisable(GL_CULL_FACE);
 		splash->bind();
 
 		glBegin(GL_QUADS);
