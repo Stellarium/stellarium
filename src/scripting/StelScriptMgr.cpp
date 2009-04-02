@@ -37,6 +37,7 @@
 #include "StelObjectMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelMainGraphicsView.hpp"
+#include "StelMainWindow.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelSkyImageMgr.hpp"
 #include "StarMgr.hpp"
@@ -387,6 +388,16 @@ void StelMainScriptAPI::stopSound(const QString& id)
 void StelMainScriptAPI::dropSound(const QString& id)
 {
 	emit(requestDropSound(id));
+}
+
+int StelMainScriptAPI::getScreenWidth(void)
+{
+	return StelMainWindow::getInstance().size().width();
+}
+
+int StelMainScriptAPI::getScreenHeight(void)
+{
+	return StelMainWindow::getInstance().size().height();
 }
 
 void StelMainScriptAPI::debug(const QString& s)

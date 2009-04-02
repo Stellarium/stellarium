@@ -256,6 +256,11 @@ public slots:
 	//! @param id the identifier used when loadSound was called
 	void dropSound(const QString& id);
 
+	//! Get the screen width in pixels. 
+	int getScreenWidth(void);
+	//! Get the screen height in pixels. 
+	int getScreenHeight(void);
+
 	//! print a debugging message to the console
 	//! @param s the message to be displayed on the console.
 	void debug(const QString& s);

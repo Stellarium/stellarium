@@ -60,6 +60,8 @@ public:
 	virtual void setFlagShow(bool b);
 	//! Get value of flag used to turn on and off the label
 	virtual bool getFlagShow(void);
+	//! Get value of flag used to turn on and off the label
+	virtual void setText(const QString& newText);
 
 protected:
 	QString labelText;
@@ -120,7 +122,7 @@ public:
 	//! Constructor of a SkyLabel which is to be displayed at a fixed position on the screen.
 	//! @param text the text for the label
 	//! @param x the x-position on the screen (pixels from the left side)
-	//! @param y the y-position on the screen (pixels from the bottom side)
+	//! @param y the y-position on the screen (pixels from the top side)
 	//! @param font the font to use
 	//! @param color the color for the label
 	ScreenLabel(const QString& text, int x, int y, StelFont* font, Vec3f color);
@@ -171,6 +173,11 @@ bool StelLabel::getFlagShow(void)
 	return labelFader;
 }
 
+void StelLabel::setText(const QString& newText)
+{
+	labelText = newText;
+}
+
 SkyLabel::Style SkyLabel::stringToStyle(const QString& s)
 {
 	if (s=="Line")
@@ -215,7 +222,7 @@ bool SkyLabel::draw(StelCore* core, const StelPainter& sPainter)
 	if (labelSide.toUpper().contains("N"))
 	{
 		yOffset = 1.0;
-		vJustify = 'b'; // bottom justufy text
+		vJustify = 'b'; // bottom justify text
 	}
 	else if (labelSide.toUpper().contains("S"))
 	{
@@ -408,6 +415,12 @@ void LabelMgr::setLabelShow(int id, bool show)
 {
 	if (allLabels.at(id)!=NULL)
 		allLabels.at(id)->setFlagShow(show);
+}
+
+void LabelMgr::setLabelText(int id, const QString& newText)
+{
+	if (allLabels.at(id)!=NULL)
+		allLabels.at(id)->setText(newText);
 }
 	
 bool LabelMgr::deleteLabel(int id)

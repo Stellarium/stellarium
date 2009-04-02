@@ -45,6 +45,8 @@
 #include "GridLinesMgr.hpp"
 #include "StelScriptMgr.hpp"
 #include "StelDownloadMgr.hpp"
+#include "LabelMgr.hpp"
+#include "ScreenImageMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -514,6 +516,8 @@ void ConfigurationDialog::runScriptClicked(void)
 
 void ConfigurationDialog::stopScriptClicked(void)
 {
+	GETSTELMODULE(LabelMgr)->deleteAllLabels();
+	GETSTELMODULE(ScreenImageMgr)->deleteAllImages();
 	StelApp::getInstance().getScriptMgr().stopScript();
 }
 

@@ -91,8 +91,8 @@ public slots:
 
 	//! Create a label at fixed screen coordinates
 	//! @param text the text to display
-	//! @param x the horizontal position on the screen, in pixels.
-	//! @param y the vertical position on the screen, in pixels.
+	//! @param x the horizontal position on the screen, in pixels, from the left of the screen
+	//! @param y the vertical position on the screen, in pixels, from the top of the screen
 	//! @param visible if true, the label starts displayed, else it starts hidden
 	//! @param fontSize size of the font to use
 	//! @param fontColor HTML-like color spec, e.g. "#ffff00" for yellow
@@ -107,6 +107,8 @@ public slots:
 	bool getLabelShow(int id); 
 	//! set a label identified by id to be shown or not
 	void setLabelShow(int id, bool show); 
+	//! set text of label identified by id to be newText
+	void setLabelText(int id, const QString& newText);
 	//! Delete a label by the ID which was returned from addLabel...
 	//! @return true if the id existed and was deleted, else false
 	bool deleteLabel(int id);
