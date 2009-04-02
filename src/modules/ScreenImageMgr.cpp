@@ -41,8 +41,8 @@
 ///////////////////////
 // ScreenImage class //
 ///////////////////////
-ScreenImage::ScreenImage(const QString& filename, float x, float y, bool show, float scale)
-	: tex(NULL)
+ScreenImage::ScreenImage(const QString& filename, float x, float y, bool show, float scale, float fadeDuration)
+	: imageFader(1000*fadeDuration), tex(NULL)
 {
 	try
 	{
@@ -53,11 +53,10 @@ ScreenImage::ScreenImage(const QString& filename, float x, float y, bool show, f
 		tex->setOffset(x, y);
 		tex->setVisible(show);
 		anim = new QGraphicsItemAnimation();
-		moveTimer = new QTimeLine(0);
+		moveTimer = new QTimeLine();
 		moveTimer->setCurveShape(QTimeLine::LinearCurve);
 		anim->setTimeLine(moveTimer);
 		anim->setItem(tex);
-		fadeTimer = new QTimeLine(0);
 	}
 	catch (std::runtime_error& e)
 	{
@@ -75,20 +74,18 @@ ScreenImage::~ScreenImage()
 	moveTimer->stop();
 	delete anim; anim = NULL;
 	delete moveTimer; moveTimer = NULL;
-	fadeTimer->stop();
-	delete fadeTimer; fadeTimer = NULL;
 }
 
 bool ScreenImage::draw(const StelCore* core)
 {
-	tex->setVisible(imageFader);
+	tex->setVisible(imageFader.getInterstate() > 0. || imageFader);
+	tex->setOpacity(imageFader.getInterstate());
 	return true;
 }
 
 void ScreenImage::update(double deltaTime)
 {
 	imageFader.update((int)(deltaTime*1000));
-	// TODO when we have QT 4.5 - use opacity of QGraphicsItem to set alpha
 }
 
 void ScreenImage::setFadeDuration(float duration)
@@ -98,7 +95,6 @@ void ScreenImage::setFadeDuration(float duration)
 
 void ScreenImage::setFlagShow(bool b)
 {
-	// TODO don't use this value after QT 4.5 and opacity of QGraphicsItem
 	imageFader = b;
 }
 
@@ -107,8 +103,9 @@ bool ScreenImage::getFlagShow(void)
 	return imageFader;
 }
 
-void ScreenImage::setAlpha(float a, float duration)
+void ScreenImage::setAlpha(float a)
 {
+	imageFader.setMaxValue(a);
 	imageFader.setMaxValue(a);
 }
 
@@ -122,8 +119,7 @@ void ScreenImage::setXY(float x, float y, float duration)
 	else
 	{
 		moveTimer->stop();
-		int durationMs = duration*1000;
-		moveTimer->setDuration(durationMs);
+		moveTimer->setDuration(duration*1000);
 		QPointF p(tex->offset());
 		float sX = p.x();
 		float sY = p.y();
@@ -144,8 +140,8 @@ void ScreenImage::setXY(float x, float y, float duration)
 ScreenImageMgr::ScreenImageMgr()
 {
 	setObjectName("ScreenImageMgr");
-	connect(this, SIGNAL(requestCreateScreenImage(const QString&, const QString&, float, float, float, bool, float)),
-	        this, SLOT(doCreateScreenImage(const QString&, const QString&, float, float, float, bool, float)));
+	connect(this, SIGNAL(requestCreateScreenImage(const QString&, const QString&, float, float, float, bool, float, float)),
+	        this, SLOT(doCreateScreenImage(const QString&, const QString&, float, float, float, bool, float, float)));
 
 	connect(this, SIGNAL(requestSetImageShow(const QString&, bool)),
 	        this, SLOT(doSetImageShow(const QString&, bool)));
@@ -181,9 +177,10 @@ void ScreenImageMgr::createScreenImage(const QString& id,
 	                               float y,
                                        float scale,
 	                               bool visible,
-	                               float alpha)
+	                               float alpha,
+                                       float fadeDuration)
 {
-	emit(requestCreateScreenImage(id, filename, x, y, scale, visible, alpha));
+	emit(requestCreateScreenImage(id, filename, x, y, scale, visible, alpha, fadeDuration));
 }
 
 void ScreenImageMgr::deleteImage(const QString& id)
@@ -241,16 +238,19 @@ void ScreenImageMgr::doCreateScreenImage(const QString& id,
                                          float y,
                                          float scale,
                                          bool visible,
-                                         float alpha)
+                                         float alpha,
+                                         float fadeDuration)
 {
 	// First check to see if there is already an image loaded with the
 	// specified ID, and drop it if necessary
 	if (allScreenImages.contains(id))
 		doDeleteImage(id);
 
-	ScreenImage* i = new ScreenImage(filename, x, y, visible, scale);
+	ScreenImage* i = new ScreenImage(filename, x, y, visible, scale, fadeDuration);
 	if (i==NULL)
 		return;
+
+	i->setAlpha(alpha);
 
 	if (visible)
 		i->setFlagShow(true);
