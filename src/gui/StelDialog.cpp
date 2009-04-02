@@ -89,10 +89,22 @@ void StelDialog::setVisible(bool v)
 {
 	if (v) 
 	{
+		QSize screenSize = StelMainWindow::getInstance().size();
 		if (dialog)
 		{
 			dialog->show();
 			StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
+			// If the main window has been resized, it is possible the dialog
+			// will be off screen.  Check for this and move it to a visible
+			// position if necessary
+			QPointF newPos = proxy->pos();
+			if (newPos.x()>=screenSize.width())
+				newPos.setX(screenSize.width() - dialog->size().width());
+			if (newPos.y()>=screenSize.height())
+				newPos.setY(screenSize.height() - dialog->size().height());
+			if (newPos != dialog->pos())
+				proxy->setPos(newPos);
+			
 			proxy->setFocus();
 			return;
 		}
@@ -105,10 +117,10 @@ void StelDialog::setVisible(bool v)
 		QRectF bound = proxy->boundingRect();
 		
 		// centre with dialog according to current window size.
-		proxy->setPos((StelMainWindow::getInstance().size().width()-bound.width())/2, (StelMainWindow::getInstance().size().height()-bound.height())/2);
+		proxy->setPos((screenSize.width()-bound.width())/2, (screenSize.height()-bound.height())/2);
 		StelMainGraphicsView::getInstance().scene()->addItem(proxy);
 		proxy->setWindowFrameMargins(2,0,2,2);
-		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache); // , QSize(proxy->boundingRect().width()/2, proxy->boundingRect().height()/2)
+		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 		proxy->setZValue(100);
 		StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
 		proxy->setFocus();
