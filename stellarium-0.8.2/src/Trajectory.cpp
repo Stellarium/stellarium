@@ -95,7 +95,9 @@ namespace MotionTestImpl
 				Vec3d start = mTrajectory.back()->calcCoord(t1) - 
 					planetPtr->get_heliocentric_ecliptic_pos(t1);
 
-				delta = q * dur / (1 - q);
+				//delta = q * dur / (1 - q);
+				//delta = dur / pow(1.0 - q, 10.0) - dur;
+				delta = dur * cPi / acos(2.0 * q - 1.0) - dur;
 				
 				straightCalc = new DurationStraightCoordCalc(start, dur + delta, 1.0f);
 				

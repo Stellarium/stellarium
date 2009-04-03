@@ -112,7 +112,9 @@ namespace MotionTestImpl
 	Vec3d DurationStraightCoordCalc::calcCoord(double t)
 	{
 		//double q = 1.0 - pow(4.0 / cPi * atan( mDirection*(t - mStartTime) / mDur), 2.0);	
-		double q = 1.0 - mDirection * (t - mStartTime) / mDur;
+		//double q = 1.0 - mDirection * (t - mStartTime) / mDur;
+		//double q = 1.0 - mDirection * pow((t - mStartTime) / mDur, 0.1);
+		double q = (1.0 + cos((t - mStartTime) / mDur * cPi)) / 2.0;
 		return q * mStart;
 	}
 
