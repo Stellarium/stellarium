@@ -83,7 +83,7 @@ bool StelScriptMgr::preprocessScript(QFile& input, QFile& output, const QString&
 			bool ok = fic.open(QIODevice::ReadOnly);
 			if (ok)
 			{
-				qDebug() << "script inlude: " << path;
+				qDebug() << "script include: " << path;
 				preprocessScript(fic, output, scriptDir);
 			}
 			else
@@ -140,7 +140,7 @@ bool StelScriptMgr::preprocessStratoScript(QFile& input, QFile& output, const QS
 				bool ok = fic.open(QIODevice::ReadOnly);
 				if (ok)
 				{
-					qDebug() << "script inlude: " << path;
+					qDebug() << "script include: " << path;
 					preprocessScript(fic, output, scriptDir);
 				}
 				else
