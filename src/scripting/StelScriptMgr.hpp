@@ -42,8 +42,8 @@ public:
 private:
 	QTime sleptTime;
 	int sleepForTime;
-	int scriptRateOnSleep;
-	int scriptRate;
+	double scriptRateOnSleep;
+	double scriptRate;
 
 };
 		
@@ -241,12 +241,25 @@ public slots:
 
 	//! Convenience function which allows loading of a sky image based on a
 	//! central coordinate, angular size and rotation.
+	//! 
+	//! @param filename the file name of the image.  If a relative
+	//! path is specified, "scripts/" will be prefixed before the
+	//! image is searched for using StelFileMgr.
+	//! @param ra The right ascension of the center of the image in J2000 frame degrees
+	//! @param dec The declenation of the center of the image in J2000 frame degrees
+	//! @param angSize The angular size of the image in arc minutes
+	//! @param rotation The clockwise rotation angle of the image in degrees
+	//! @param minRes The minimum resolution setting for the image
+	//! @param maxBright The maximum brightness setting for the image
+	//! @param visible The initial visibility of the image
 	void loadSkyImage(const QString& id, const QString& filename,
 	                  double ra, double dec, double angSize, double rotation,
 	                  double minRes=2.5, double maxBright=14, bool visible=true);
 
 	//! Convenience function which allows loading of a sky image based on a
-	//! central coordinate, angular size and rotation.
+	//! central coordinate, angular size and rotation.  Parameters are the same
+	//! as the version of this function which takes double values for the
+	//! ra and dec, except here text expressions of angles may be used.
 	void loadSkyImage(const QString& id, const QString& filename,
 	                  const QString& ra, const QString& dec, double angSize, double rotation,
 	                  double minRes=2.5, double maxBright=14, bool visible=true);
@@ -297,6 +310,9 @@ public slots:
 	//! if the script rate was 1.
 	void setScriptRate(double r);
 
+	//! stop the script
+	void exit(void);
+
 	//! print a debugging message to the console
 	//! @param s the message to be displayed on the console.
 	void debug(const QString& s);
@@ -316,6 +332,7 @@ signals:
 	void requestPauseSound(const QString& id);
 	void requestStopSound(const QString& id);
 	void requestDropSound(const QString& id);
+	void requestExit();
 
 private:
 	//! For use in setDate and waitFor

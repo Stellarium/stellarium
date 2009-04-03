@@ -1,0 +1,41 @@
+// Name: Sky Image load test script
+// License: Public Domain
+// Author: Matthew Gates
+// Description: This script demonstrates adding and manipulating sky images
+//
+
+include("status_label.inc");
+
+useStatusLabel("Sky Images Test 3: ", 50, core.getScreenHeight() - 50, 16, "#ff0000");
+
+status("Load an image using strings for angles (DMS)...");
+core.clear("starchart");
+core.selectObjectByName("M31", false);
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(2,1);
+core.wait(2);
+
+status("loading image...");
+core.loadSkyImage("image", "../textures/earthmap.png", 
+                  "41d 0m 0s", "11d 30m 0s",     // ra, dec first corner
+                  "41d 10m 12s", "11d 30m 0s",  // ra, dec second corner
+                  "41d 10m 12s", "11d 45m 0s", // ra, dec third corner
+                  "41d 0m 0s", "11d 45m 0s",    // ra, dec fourth corner
+                  2.5, 14,      // minRes, maxBright
+                  false);       // visible on load?
+
+core.wait(1.5);
+
+status("showing image (should fade in)");
+StelSkyImageMgr.showImage("image", true); 
+core.wait(1.5);
+
+status("hiding image (should fade out)");
+StelSkyImageMgr.showImage("image", false); 
+core.wait(1.5);
+
+status("removing image, kthxbye");
+core.removeSkyImage("image");
+core.wait(1.5);
+LabelMgr.deleteAllLabels();
+

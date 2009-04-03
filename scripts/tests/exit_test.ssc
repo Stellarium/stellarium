@@ -1,0 +1,21 @@
+//
+// Name: Timer Test
+// License: Public Domain
+// Author: Matthew Gates
+// Description: For testing script rates.
+//
+
+include("status_label.inc");
+useStatusLabel("Exit test (going to exit at 5): ", 50, 50, 16, "#ff0000");
+var counter = 0;
+while(1)
+{
+	status(counter++);
+	if (counter>5)
+	{
+		LabelMgr.deleteAllLabels();
+		core.exit();
+	}
+	core.wait(1);
+}
+
