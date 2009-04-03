@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2007 Fabien Chereau
+ * Copyright (C) 2007 Fabien Chereau, 2009 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,8 +24,29 @@
 #include <QtScript>
 #include <QStringList>
 #include <QFile>
+#include <QTime>
 #include "VecMath.hpp"
 
+//! @class ScriptSleeper
+//! provides a blocking sleep function which can receive a signal
+//! changing the rate at which the sleep timer counts down.
+class ScriptSleeper : public QThread
+{
+public:
+	ScriptSleeper();
+	~ScriptSleeper();
+	void sleep(int ms);
+	void setRate(double newRate);
+	double getRate(void) const;
+	
+private:
+	QTime sleptTime;
+	int sleepForTime;
+	int scriptRateOnSleep;
+	int scriptRate;
+
+};
+		
 //! Provide script API for Stellarium global functions.  Public slots in this class
 //! may be used in Stellarium scripts, and are accessed as member function to the
 //! "core" scripting object.  Module-specific functions, such as setting and clearing
@@ -41,6 +62,8 @@ class StelMainScriptAPI : public QObject
 public:
 	StelMainScriptAPI(QObject *parent = 0);
 	~StelMainScriptAPI();
+
+	ScriptSleeper& getScriptSleeper(void);
 	
 // These functions will be available in scripts
 public slots:
@@ -286,9 +309,9 @@ private:
 	//! For parameter descriptions see setDate().
 	//! @returns Julian day.
 	double jdFromDateString(const QString& dt, const QString& spec);
-
+	ScriptSleeper scriptSleeper;
 };
-		
+
 //! Manage scripting in Stellarium
 class StelScriptMgr : public QObject
 {
@@ -351,6 +374,9 @@ public slots:
 	//! @return false if no script was running, true otherwise.
 	bool stopScript(void);
 
+	void setScriptRate(double r);
+	double getScriptRate(void);
+
 private slots:
 	//! Called at the end of the running thread
 	void scriptEnded();
@@ -383,6 +409,7 @@ private:
 	
 	//! The thread in which scripts are run
 	class StelScriptThread* thread;
+	StelMainScriptAPI *mainAPI;
 };
 
 #endif // _QTSCRIPTMGR_HPP_
