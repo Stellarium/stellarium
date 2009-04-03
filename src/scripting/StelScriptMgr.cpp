@@ -128,7 +128,6 @@ ScriptSleeper::~ScriptSleeper()
 
 void ScriptSleeper::setRate(double newRate)
 {
-	qDebug() << "ScriptSleeper::setRate rate is now:" << newRate;
 	scriptRate = newRate;
 }
 
@@ -884,6 +883,7 @@ bool StelScriptMgr::runScript(const QString& fileName)
 	thread = new StelScriptThread(QTextStream(&tmpFile).readAll(), &engine, fileName);
 	tmpFile.close();
 	
+	GETSTELMODULE(StelGui)->setScriptKeys(true);
 	connect(thread, SIGNAL(finished()), this, SLOT(scriptEnded()));
 	thread->start();
 	emit(scriptRunning());
@@ -924,6 +924,8 @@ double StelScriptMgr::getScriptRate(void)
 
 void StelScriptMgr::scriptEnded()
 {
+	GETSTELMODULE(StelGui)->setScriptKeys(false);
+	mainAPI->getScriptSleeper().setRate(1);
 	thread->deleteLater();
 	thread=NULL;
 	if (engine.hasUncaughtException())
