@@ -1,0 +1,63 @@
+// Name: Sky Image load test script
+// License: Public Domain
+// Author: Matthew Gates
+// Description: This script demonstrates adding and manipulating sky images
+//
+
+include("status_label.inc");
+
+useStatusLabel("Sky Images Test 2: ", 50, core.getScreenHeight() - 50, 16, "#ff0000");
+
+status("Load mutliple images, and turn them on and off...");
+core.clear("starchart");
+core.selectObjectByName("M31", false);
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(2,1);
+core.wait(2);
+
+status("Loading images...");
+core.loadSkyImage("image1", "../textures/earthmap.png", 41, 11.5, 41.17, 11.5, 41.17, 11.75, 41, 11.75);
+core.wait(1);
+core.loadSkyImage("image2", "../textures/earthmap.png", 41.2, 11.5, 41.37, 11.5, 41.37, 11.75, 41.2, 11.75);
+core.wait(1);
+core.loadSkyImage("image3", "../textures/earthmap.png", 41.4, 11.5, 41.57, 11.5, 41.57, 11.75, 41.4, 11.75);
+core.wait(1);
+
+status("playing with the on of buttons...");
+for(i=0; i<15; i++)
+{
+	core.wait(0.1);
+	if (i%3==0) { 
+		StelSkyImageMgr.showImage("image1", true); 
+		StelSkyImageMgr.showImage("image2", false); 
+		StelSkyImageMgr.showImage("image3", false); 
+	}
+	else if ((i+1)%3==0) {
+		StelSkyImageMgr.showImage("image1", false); 
+		StelSkyImageMgr.showImage("image2", true); 
+		StelSkyImageMgr.showImage("image3", false); 
+	}
+	else if ((i+2)%3==0) {
+		StelSkyImageMgr.showImage("image1", false); 
+		StelSkyImageMgr.showImage("image2", false); 
+		StelSkyImageMgr.showImage("image3", true); 
+	}
+}
+
+status("turn off the images (fade would be nice)...");
+StelSkyImageMgr.showImage("image1", true); 
+core.wait(0.5);
+StelSkyImageMgr.showImage("image2", true); 
+core.wait(0.5);
+StelSkyImageMgr.showImage("image3", true); 
+core.wait(1);
+status("unloading images...");
+core.removeSkyImage("image1");
+core.wait(0.5);
+core.removeSkyImage("image2");
+core.wait(0.5);
+core.removeSkyImage("image3");
+status("kthxbye");
+core.wait(1);
+LabelMgr.deleteAllLabels();
+

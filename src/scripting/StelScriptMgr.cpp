@@ -166,6 +166,7 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestPauseSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(pauseSound(const QString&)));
 	connect(this, SIGNAL(requestStopSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(stopSound(const QString&)));
 	connect(this, SIGNAL(requestDropSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(dropSound(const QString&)));
+	connect(this, SIGNAL(requestExit()), this->parent(), SLOT(stopScript()));
 }
 
 StelMainScriptAPI::~StelMainScriptAPI()
@@ -316,9 +317,6 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 	                             double minRes, double maxBright, bool visible)
 {
 	QString path = "scripts/" + filename;
-	qDebug() << "StelMainScriptAPI::loadSkyImage" << id << filename 
-	         << "[" << ra0 << dec0 << "],[" << ra1 << dec1 << "],[" << ra2 << dec2 << "],[" << ra3 << dec3 << "]"
-	         << minRes << maxBright << visible;
 	emit(requestLoadSkyImage(id, path, ra0, dec0, ra1, dec1, ra2, dec2, ra3, dec3, minRes, maxBright, visible));
 }
 
@@ -343,7 +341,6 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 {
 	Vec3d XYZ;
 	const double RADIUS_NEB = 1.;
-	//double angSizeRad = angSize/2/60*M_PI/180.;
 	StelUtils::spheToRect(ra*M_PI/180., dec*M_PI/180., XYZ);
 	XYZ*=RADIUS_NEB;
 	double texSize = RADIUS_NEB * sin(angSize/2/60*M_PI/180);
@@ -439,6 +436,11 @@ double StelMainScriptAPI::getScriptRate(void)
 void StelMainScriptAPI::setScriptRate(double r)
 {
 	return scriptSleeper.setRate(r);
+}
+
+void StelMainScriptAPI::exit(void)
+{
+	emit(requestExit());
 }
 
 void StelMainScriptAPI::debug(const QString& s)

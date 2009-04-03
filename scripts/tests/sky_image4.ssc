@@ -1,0 +1,76 @@
+// Name: Sky Image load test script
+// License: Public Domain
+// Author: Matthew Gates
+// Description: This script demonstrates adding and manipulating sky images
+//
+
+include("status_label.inc");
+
+useStatusLabel("Sky Images Test 4: ", 50, core.getScreenHeight() - 50, 16, "#ff0000");
+
+status("Load a sky image by centre, size and rotation");
+core.clear("starchart");
+GridLinesMgr.setFlagEquatorJ2000Grid(true);
+GridLinesMgr.setFlagEquatorGrid(false);
+core.selectObjectByName("HP118269", false);
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(2,1);
+core.wait(2);
+
+status("loading images...");
+core.loadSkyImage("image1", "../textures/earthmap.png", 
+                  41.33333, 0,    // ra, dec centre
+                  60.0, 0,        // angSize, rotation
+                  2.5, 14,        // minRes, maxBright
+                  false);         // visible on load?
+
+core.loadSkyImage("image2", "../textures/earthmap.png", 
+                  41.33333, 0,    // ra, dec centre
+                  40.0, 90,       // angSize, rotation
+                  2.5, 14,        // minRes, maxBright
+                  false);         // visible on load?
+
+core.loadSkyImage("image3", "../textures/earthmap.png", 
+                  41.33333, 0,    // ra, dec centre
+                  20.0, 180,      // angSize, rotation
+                  2.5, 14,        // minRes, maxBright
+                  false);         // visible on load?
+
+core.loadSkyImage("image4", "../textures/earthmap.png", 
+                  41.33333, 0,    // ra, dec centre
+                  10.0, 270,      // angSize, rotation
+                  2.5, 14,        // minRes, maxBright
+                  false);         // visible on load?
+
+core.wait(1.5);
+
+status("showing image (should fade in)");
+StelSkyImageMgr.showImage("image1", true); 
+core.wait(0.5);
+StelSkyImageMgr.showImage("image2", true); 
+core.wait(0.5);
+StelSkyImageMgr.showImage("image3", true); 
+core.wait(0.5);
+StelSkyImageMgr.showImage("image4", true); 
+
+core.wait(4.5);
+
+status("hiding image (should fade out)");
+StelSkyImageMgr.showImage("image1", false); 
+core.wait(0.5);
+StelSkyImageMgr.showImage("image2", false); 
+core.wait(0.5);
+StelSkyImageMgr.showImage("image3", false); 
+core.wait(0.5);
+StelSkyImageMgr.showImage("image4", false); 
+
+core.wait(1.5);
+
+status("removing images, kthxbye");
+core.removeSkyImage("image1");
+core.removeSkyImage("image2");
+core.removeSkyImage("image3");
+core.removeSkyImage("image4");
+core.wait(1.5);
+LabelMgr.deleteAllLabels();
+
