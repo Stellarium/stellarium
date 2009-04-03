@@ -117,6 +117,43 @@ QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 	return vec3fToScriptValue(engine, c);
 }
 
+ScriptSleeper::ScriptSleeper()
+{
+	scriptRate = 1.0;
+}
+
+ScriptSleeper::~ScriptSleeper()
+{
+}
+
+void ScriptSleeper::setRate(double newRate)
+{
+	qDebug() << "ScriptSleeper::setRate rate is now:" << newRate;
+	scriptRate = newRate;
+}
+
+double ScriptSleeper::getRate(void) const
+{
+	return scriptRate;
+}
+
+void ScriptSleeper::sleep(int ms)
+{
+	scriptRateOnSleep = scriptRate;
+	sleptTime.start();
+	int sleepForTime = ms/scriptRate;
+	while(sleepForTime > sleptTime.elapsed())
+	{
+		msleep(10);
+		if (scriptRateOnSleep!=scriptRate)
+		{
+			int sleepLeft = sleepForTime - sleptTime.elapsed();
+			sleepForTime = sleptTime.elapsed() + (sleepLeft / scriptRate);
+			scriptRateOnSleep = scriptRate;
+		}
+	}
+}
+
 StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 {
 	if(StelSkyImageMgr* smgr = GETSTELMODULE(StelSkyImageMgr))
@@ -134,6 +171,11 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 
 StelMainScriptAPI::~StelMainScriptAPI()
 {
+}
+
+ScriptSleeper& StelMainScriptAPI::getScriptSleeper(void)
+{
+	return scriptSleeper;
 }
 
 //! Set the current date in Julian Day
@@ -160,29 +202,19 @@ void StelMainScriptAPI::setDate(const QString& dt, const QString& spec)
 void StelMainScriptAPI::setTimeRate(double ts)
 {
 	// 1 second = .00001157407407407407 JDay
-	StelApp::getInstance().getCore()->getNavigator()->setTimeRate(ts * 0.00001157407407407407);
+	StelApp::getInstance().getCore()->getNavigator()->setTimeRate(ts * 0.00001157407407407407 * scriptSleeper.getRate());
 }
 
 //! Get time speed in JDay/sec
 //! @return time speed in JDay/sec
 double StelMainScriptAPI::getTimeRate(void) const
 {
-	return StelApp::getInstance().getCore()->getNavigator()->getTimeRate() / 0.00001157407407407407;
+	return StelApp::getInstance().getCore()->getNavigator()->getTimeRate() / (0.00001157407407407407 * scriptSleeper.getRate());
 }
-
-// This class let's us sleep in milleseconds
-class MySleep : public QThread
-{
-	public:
-		static void msleep(unsigned long msecs) 
-		{
-			QThread::msleep(msecs);
-		}
-};
 
 void StelMainScriptAPI::wait(double t)
 {
-	MySleep::msleep((unsigned long )(t*1000));
+	scriptSleeper.sleep(t*1000);
 }
 
 void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
@@ -200,12 +232,12 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 	else if (timeSpeed > 0)
 	{
 		while(nav->getJDay() < JD)
-			MySleep::msleep(50);
+			scriptSleeper.sleep(50);
 	}
 	else
 	{
 		while(nav->getJDay() > JD)
-			MySleep::msleep(50);
+			scriptSleeper.sleep(50);
 	}
 }
 
@@ -639,7 +671,7 @@ StelScriptMgr::StelScriptMgr(QObject *parent)
 	engine.globalObject().setProperty("Vec3f", ctor);
 	
 	// Add the core object to access methods related to core
-	StelMainScriptAPI *mainAPI = new StelMainScriptAPI(this);
+	mainAPI = new StelMainScriptAPI(this);
 	QScriptValue objectValue = engine.newQObject(mainAPI);
 	engine.globalObject().setProperty("core", objectValue);
 	
@@ -871,6 +903,23 @@ bool StelScriptMgr::stopScript(void)
 		qWarning() << "StelScriptMgr::stopScript - no script is running";
 		return false;
 	}
+}
+
+void StelScriptMgr::setScriptRate(double r)
+{
+	// pre-calculate the new time rate in an effort to prevent there being much latency
+	// between setting the script rate and the time rate.
+	double factor = r / mainAPI->getScriptSleeper().getRate();
+	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
+	double newTimeRate = nav->getTimeRate() * factor;
+
+	mainAPI->getScriptSleeper().setRate(r);
+	if (scriptIsRunning()) nav->setTimeRate(newTimeRate);
+}
+
+double StelScriptMgr::getScriptRate(void)
+{
+	return mainAPI->getScriptSleeper().getRate();
 }
 
 void StelScriptMgr::scriptEnded()

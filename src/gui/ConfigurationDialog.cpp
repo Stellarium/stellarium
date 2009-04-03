@@ -198,6 +198,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->scriptListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(scriptSelectionChanged(const QString&)));
 	connect(ui->runScriptButton, SIGNAL(clicked()), this, SLOT(runScriptClicked()));
 	connect(ui->stopScriptButton, SIGNAL(clicked()), this, SLOT(stopScriptClicked()));
+	connect(ui->scriptRateSpinBox, SIGNAL(valueChanged(double)), &StelApp::getInstance().getScriptMgr(), SLOT(setScriptRate(double)));
 	if (scriptMgr.scriptIsRunning())
 		aScriptIsRunning();
 	else
