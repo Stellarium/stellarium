@@ -68,7 +68,6 @@ void StelSkyImageMgr::init()
 	{
 		qWarning() << "ERROR while loading nebula texture set " << "default" << ": " << e.what();
 	}
-	// loadSkyImage("dobbs", "./scripts/dobbs.png", 11.5, 41, 11.5, 41.17, 11.75, 41.17, 11.75, 41, 2.5, 14, true);
 }
 
 QString StelSkyImageMgr::insertSkyImage(StelSkyImageTile* tile, bool ashow, bool aexternallyOwned)
@@ -210,11 +209,11 @@ StelSkyImageMgr::StelSkyImageMgrElem::~StelSkyImageMgrElem()
 }
 
 bool StelSkyImageMgr::loadSkyImage(const QString& id, const QString& filename, 
-                               double ra0, double dec0, 
-                               double ra1, double dec1, 
-                               double ra2, double dec2, 
-                               double ra3, double dec3, 
-                               double minRes, double maxBright, bool visible)
+                                   double ra0, double dec0, 
+                                   double ra1, double dec1, 
+                                   double ra2, double dec2, 
+                                   double ra3, double dec3, 
+                                   double minRes, double maxBright, bool visible)
 {
 	if (allSkyImages.contains("id"))
 	{
@@ -231,36 +230,33 @@ bool StelSkyImageMgr::loadSkyImage(const QString& id, const QString& filename,
 		path = StelApp::getInstance().getFileMgr().findFile(filename);
 
 		QVariantMap vm;
-		QVariantMap st;
 		QVariantList l;
-		vm["shortName"] = QVariant(id);
-		vm["minResolution"] = QVariant(0.05);
-		vm["alphaBlend"] = true;
-
-		st["imageUrl"] = QVariant(path);
-		st["minResolution"] = QVariant(minRes);
-		st["maxBrightness"] = QVariant(maxBright);
 		QVariantList cl; // coordinates list for adding worldCoords and textureCoords
-		QVariantList c;  // a map for a pair of coordinates
+		QVariantList c;  // a list for a pair of coordinates
 		QVariantList ol; // outer list - we want a structure 3 levels deep...
-		c.append(dec0); c.append(ra0); cl.append(c); c.clear();
-		c.append(dec1); c.append(ra1); cl.append(c); c.clear();
-		c.append(dec2); c.append(ra2); cl.append(c); c.clear();
-		c.append(dec3); c.append(ra3); cl.append(c); c.clear();
-		ol.append(cl);
-		st["worldCoords"] = ol;
+		vm["imageUrl"] = QVariant(path);
+		vm["maxBrightness"] = QVariant(maxBright);
+		vm["minResolution"] = QVariant(minRes);
 
 		// textureCoords (define the ordering of worldCoords)
 		cl.clear();
 		ol.clear();
-		c.append(0); c.append(0); cl.append(c); c.clear();
-		c.append(1); c.append(0); cl.append(c); c.clear();
-		c.append(1); c.append(1); cl.append(c); c.clear();
-		c.append(0); c.append(1); cl.append(c);
-		ol.append(cl);
-		st["textureCoords"] = ol;
-		l.append(st);
-		vm["subTiles"] = l;
+		c.clear(); c.append(0); c.append(0); cl.append(QVariant(c));
+		c.clear(); c.append(1); c.append(0); cl.append(QVariant(c)); 
+		c.clear(); c.append(1); c.append(1); cl.append(QVariant(c)); 
+		c.clear(); c.append(0); c.append(1); cl.append(QVariant(c));
+		ol.append(QVariant(cl));
+		vm["textureCoords"] = ol;
+
+		// world coordinates
+		cl.clear();
+		ol.clear();
+		c.clear(); c.append(dec0); c.append(ra0); cl.append(QVariant(c)); 
+		c.clear(); c.append(dec1); c.append(ra1); cl.append(QVariant(c));
+		c.clear(); c.append(dec2); c.append(ra2); cl.append(QVariant(c));
+		c.clear(); c.append(dec3); c.append(ra3); cl.append(QVariant(c));
+		ol.append(QVariant(cl));
+		vm["worldCoords"] = ol;
 
 		StelSkyImageTile* tile = new StelSkyImageTile(vm, 0);
 		QString key = insertSkyImage(tile, visible, false);
