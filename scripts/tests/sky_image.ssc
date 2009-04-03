@@ -4,46 +4,44 @@
 // Description: This script demonstrates adding and manipulating sky images
 //
 
+var rootLabelText = "";
+var statusLabelId = -1;
+function useStatusLabel(root, x, y, size, color)
+{
+	rootLabelText = root
+	statusLabelId = LabelMgr.labelScreen("", x, y, true, size, color);
+}
+
+function status(text)
+{
+	if (statusLabelId!=-1)
+	{
+		if (text!="")
+		{
+			LabelMgr.setLabelText(statusLabelId, rootLabelText + text);
+		}
+		else
+		{
+			LabelMgr.setLabelText(statusLabelId, "");
+		}
+	}
+}
+
+useStatusLabel("Sky Images Test 1: ", 50, core.getScreenHeight() - 50, 16, "#ff0000");
+
+status("First lets look at the place we will load our image...");
 core.clear("starchart");
 core.selectObjectByName("M31", false);
 StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(2,1);
 core.wait(2);
 
-core.loadSkyImage("logo1", "../textures/logo24bits.png", 41, 11.5, 41.17, 11.5, 41.17, 11.75, 41, 11.75);
+status("loading...");
+core.loadSkyImage("image", "../textures/earthmap.png", 41, 11.5, 41.17, 11.5, 41.17, 11.75, 41, 11.75);
 core.wait(1);
-core.loadSkyImage("logo2", "../textures/logo24bits.png", 41.2, 11.5, 41.37, 11.5, 41.37, 11.75, 41.2, 11.75);
+status("showing image");
+StelSkyImageMgr.showImage("image", true); 
 core.wait(1);
-core.loadSkyImage("logo3", "../textures/logo24bits.png", 41.4, 11.5, 41.57, 11.5, 41.57, 11.75, 41.4, 11.75);
-core.wait(1);
-
-for(i=0; i<15; i++)
-{
-	core.wait(0.1);
-	if (i%3==0) { 
-		StelSkyImageMgr.showImage("logo1", true); 
-		StelSkyImageMgr.showImage("logo2", false); 
-		StelSkyImageMgr.showImage("logo3", false); 
-	}
-	else if ((i+1)%3==0) {
-		StelSkyImageMgr.showImage("logo1", false); 
-		StelSkyImageMgr.showImage("logo2", true); 
-		StelSkyImageMgr.showImage("logo3", false); 
-	}
-	else if ((i+2)%3==0) {
-		StelSkyImageMgr.showImage("logo1", false); 
-		StelSkyImageMgr.showImage("logo2", false); 
-		StelSkyImageMgr.showImage("logo3", true); 
-	}
-}
-
-StelSkyImageMgr.showImage("logo1", true); 
-StelSkyImageMgr.showImage("logo2", true); 
-StelSkyImageMgr.showImage("logo3", true); 
-core.wait(1);
-core.removeSkyImage("logo1");
-core.wait(1);
-core.removeSkyImage("logo2");
-core.wait(1);
-core.removeSkyImage("logo3");
+status("removing image");
+core.removeSkyImage("image");
 core.wait(1);
