@@ -62,7 +62,7 @@ ConfigurationDialog::ConfigurationDialog()
 	updatesData = NULL;
 	
 	StelFileMgr& fileMgr = StelApp::getInstance().getFileMgr();
-	starsDir = fileMgr.getUserDir()+"/stars/default";
+	starsDir = fileMgr.getUsersDataDirectoryName() + "/stars/default";
 	if(!fileMgr.exists(starsDir))
 		fileMgr.mkDir(starsDir);
 	downloaded = 0;

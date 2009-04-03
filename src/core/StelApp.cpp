@@ -122,7 +122,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	
 	// Echo debug output to log file
 	stelFileMgr = new StelFileMgr();
-	logFile.setFileName(stelFileMgr->getUserDir()+"/log.txt");
+	logFile.setFileName(stelFileMgr->getUsersDataDirectoryName()+"/log.txt");
 	QDir userDirTmp(stelFileMgr->getUserDir());
 	if (!userDirTmp.exists())
 	{
@@ -335,7 +335,7 @@ void StelApp::init()
 	QString cachePath = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
 	if (cachePath.isEmpty())
 	{
-		cachePath = StelApp::getInstance().getFileMgr().getUserDir()+"/cache";
+		cachePath = StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()+"/cache";
 	}
 	qDebug() << "Cache directory is: " << cachePath;
 	cache->setCacheDirectory(cachePath);

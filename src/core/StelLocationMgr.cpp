@@ -135,17 +135,17 @@ bool StelLocationMgr::saveUserLocation(const StelLocation& loc)
 	}
 	catch (std::runtime_error& e)
 	{
-		if (!StelFileMgr::exists(StelApp::getInstance().getFileMgr().getUserDir()+"/data"))
+		if (!StelFileMgr::exists(StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()+"/data"))
 		{
-			if (!StelFileMgr::mkDir(StelApp::getInstance().getFileMgr().getUserDir()+"/data"))
+			if (!StelFileMgr::mkDir(StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()+"/data"))
 			{
-				qWarning() << "ERROR - cannot create non-existent data directory" << StelApp::getInstance().getFileMgr().getUserDir()+"/data";
+				qWarning() << "ERROR - cannot create non-existent data directory" << StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()+"/data";
 				qWarning() << "Location cannot be saved";
 				return false;
 			}
 		}
 		
-		cityDataPath = StelApp::getInstance().getFileMgr().getUserDir()+"/data/user_locations.txt";
+		cityDataPath = StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()+"/data/user_locations.txt";
 		qWarning() << "Will create a new user location file: " << cityDataPath;
 	}
 
@@ -196,17 +196,17 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 	}
 	catch (std::runtime_error& e)
 	{
-		if (!StelFileMgr::exists(StelApp::getInstance().getFileMgr().getUserDir()+"/data"))
+		if (!StelFileMgr::exists(StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()+"/data"))
 		{
-			if (!StelFileMgr::mkDir(StelApp::getInstance().getFileMgr().getUserDir()+"/data"))
+			if (!StelFileMgr::mkDir(StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()+"/data"))
 			{
-				qWarning() << "ERROR - cannot create non-existent data directory" << StelApp::getInstance().getFileMgr().getUserDir()+"/data";
+				qWarning() << "ERROR - cannot create non-existent data directory" << StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()+"/data";
 				qWarning() << "Location cannot be saved";
 				return false;
 			}
 		}
 		
-		cityDataPath = StelApp::getInstance().getFileMgr().getUserDir()+"/data/user_locations.txt";
+		cityDataPath = StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()+"/data/user_locations.txt";
 		qWarning() << "Will create a new user location file: " << cityDataPath;
 	}
 
