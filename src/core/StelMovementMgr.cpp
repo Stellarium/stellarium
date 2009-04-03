@@ -23,6 +23,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelNavigator.hpp"
+#include "StelScriptMgr.hpp"
 #include "StelUtils.hpp"
 
 #include <QString>
@@ -401,6 +402,9 @@ void StelMovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 {
 	if (!objectMgr->getWasSelected())
 		return;
+
+	if (StelApp::getInstance().getScriptMgr().scriptIsRunning())
+		moveDuration /= StelApp::getInstance().getScriptMgr().getScriptRate();
 		
 	float manualMoveDuration;
 
@@ -443,6 +447,9 @@ void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 {
 	StelNavigator* nav = core->getNavigator();
 	
+	if (StelApp::getInstance().getScriptMgr().scriptIsRunning())
+		moveDuration /= StelApp::getInstance().getScriptMgr().getScriptRate();
+		
 	if (objectMgr->getWasSelected() && !full)
 	{
 		// If the selected object has satellites, unzoom to satellites view
@@ -492,6 +499,9 @@ void StelMovementMgr::setFlagTracking(bool b)
 void StelMovementMgr::moveTo(const Vec3d& _aim, float moveDuration, bool _localPos, int zooming)
 {
 	StelNavigator* nav = core->getNavigator();
+	if (StelApp::getInstance().getScriptMgr().scriptIsRunning())
+		moveDuration /= StelApp::getInstance().getScriptMgr().getScriptRate();
+		
 	zoomingMode = zooming;
 	move.aim=_aim;
 	move.aim.normalize();
@@ -728,11 +738,14 @@ void StelMovementMgr::updateAutoZoom(double deltaTime)
 // Zoom to the given field of view
 void StelMovementMgr::zoomTo(double aim_fov, float moveDuration)
 {
+	if (StelApp::getInstance().getScriptMgr().scriptIsRunning())
+		moveDuration /= StelApp::getInstance().getScriptMgr().getScriptRate();
+		
 	zoomMove.aim=aim_fov;
-    zoomMove.start=currentFov;
-    zoomMove.speed=1.f/(moveDuration*1000);
-    zoomMove.coef=0.;
-    flagAutoZoom = true;
+	zoomMove.start=currentFov;
+	zoomMove.speed=1.f/(moveDuration*1000);
+	zoomMove.coef=0.;
+	flagAutoZoom = true;
 }
 
 void StelMovementMgr::changeFov(double deltaFov)
