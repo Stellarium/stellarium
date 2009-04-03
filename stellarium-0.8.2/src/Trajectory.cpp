@@ -11,7 +11,7 @@ namespace
 {
 	const double cPi = 3.14159265358979323846f;	
 
-	const double startJD = 2451514.250011573;
+	//const double startJD = 2451514.250011573;
 
 	double ctg(double x)
 	{
@@ -33,8 +33,11 @@ namespace MotionTestImpl
         return mCoordFunc;
     }
     Trajectory::Trajectory(const std::string& TrajectoryFile, const SolarSystem *SS) : 
-		mLastOrbitChange(startJD), mCurrentOrbit(0)
+		mCurrentOrbit(0), startJD(2451514.250011573), mLastOrbitChange(2451514.250011573)
 	{
+		mTrajectory.push_back(new StaticCoordCalc(Vec3d(10.0, 10.0, 10.0)));
+		mDuration.push_back(0.5 / coeff);
+
 		ifstream file(TrajectoryFile.c_str());
 		//const int bufSize = 1024;
 		//char buf[bufSize];
@@ -43,13 +46,21 @@ namespace MotionTestImpl
 		while (file >> buf)
 		{
 			//file >> buf;
-
-			
 			if (buf[0] == '#')
 			{
 				// # - Комментарий в файле траекторий
 				char b[1024];
 				file.getline(b, 1024);
+			}
+			else if (buf == "date")
+			{
+				// Format : date 2007-06-01T12:00:00
+				ln_date date;
+				char delim;
+
+				file >> date.years >> delim >> date.months >> delim >> date.days >> delim >> 
+					date.hours >> delim >>  date.minutes >> delim >> date.seconds;
+				mLastOrbitChange = startJD = get_julian_day(&date);
 			}
 			else if (buf == "ellipse")
 			{
@@ -64,41 +75,75 @@ namespace MotionTestImpl
 				GCPtr<Orbit> orbit = new Orbit(buf, posCalc);
 				mOrbits.push_back (orbit);
 			} 
-			else if (buf == "straight")
+			else if (buf == "flyto")
 			{
-				double x, y, z, vel;
-				string planet, direction;
-				file >> buf >> direction >> planet >> x >> y >> z >> vel;
+				double dur, q, delta;
+				string planet;
+				
+				file >> planet >> dur >> q;
+
+				dur /= coeff;
+				
 				Planet* planetPtr = SS->searchByEnglishName(planet);
+				
 				GCPtr<CoordCalc> straightCalc;
-				if (direction == "to")
-				{
-					straightCalc = new StraightCoordCalc(Vec3d(x, y, z), vel, 1.0f );
-				}
-				else if (direction == "from")
-				{
-					straightCalc = new StraightCoordCalc(Vec3d(x, y, z), vel, -1.0f );
-				}
-				else
-				{
-					throw invalid_argument("Bad trajectory file format");
-				}
+
+				double t1 = startJD;
+				for(vector<double>::const_iterator it = mDuration.begin(); it != mDuration.end(); ++it)
+					t1 += *it;
+								
+				Vec3d start = mTrajectory.back()->calcCoord(t1) - 
+					planetPtr->get_heliocentric_ecliptic_pos(t1);
+
+				delta = q * dur / (1 - q);
+				
+				straightCalc = new DurationStraightCoordCalc(start, dur + delta, 1.0f);
 				
                 GCPtr<CoordCalc> planetCoordCalc = new PlanetCoordCalc(planetPtr);
 				posCalc = new LocalSystemCoordCalc(straightCalc, planetCoordCalc);
+				posCalc->setStartTime(t1);
+
+				mTrajectory.push_back(posCalc);
+				mDuration.push_back(dur);
+			}
+			else if (buf == "flyfrom")
+			{
+				double dur;
+				string planet;
 				
-				GCPtr<Orbit> orbit = new Orbit(buf, posCalc);
-				mOrbits.push_back (orbit);
+				file >> planet >> dur;
+
+				dur /= coeff;
+				
+				Planet* planetPtr = SS->searchByEnglishName(planet);
+				
+				GCPtr<CoordCalc> straightCalc;
+
+				double t1 = startJD;
+				for(vector<double>::const_iterator it = mDuration.begin(); it != mDuration.end(); ++it)
+					t1 += *it;
+								
+				Vec3d start = mTrajectory.back()->calcCoord(t1) - 
+					planetPtr->get_heliocentric_ecliptic_pos(t1);
+				
+				straightCalc = new DurationStraightCoordCalc(start, dur, -1.0f);
+				
+                GCPtr<CoordCalc> planetCoordCalc = new PlanetCoordCalc(planetPtr);
+				posCalc = new LocalSystemCoordCalc(straightCalc, planetCoordCalc);
+				posCalc->setStartTime(t1);
+
+				mTrajectory.push_back(posCalc);
+				mDuration.push_back(dur);
 			}
 			else if (buf == "fly")
 			{
 				double x;
 				file >> buf >> x;
                 
-                mTrajectory.push_back( FindOrbit(buf)->GetCoordFunc() );
-				//double get_julian_day(const ln_date * date);
+				mTrajectory.push_back( FindOrbit(buf)->GetCoordFunc() );
                 mDuration.push_back(x / coeff);
 			}
+			
 			else if (buf == "pass")
 			{
 				double duration;
@@ -155,11 +200,12 @@ namespace MotionTestImpl
 					(
 						new LocalSystemCoordCalc
 						(
-							new DurationStraightCoordCalc(vk - vf, duration, t1), 
+							new DurationStraightCoordCalc(vk - vf, duration, 1.0f), 
 							new StaticCoordCalc(vf)
 						), 
 						ptr->getCoordCalcSystem()
 					);
+				posCalc->setStartTime(t1);
 
 				mTrajectory.push_back(posCalc);
 				mDuration.push_back(duration);
@@ -175,71 +221,15 @@ namespace MotionTestImpl
 				for(vector<double>::const_iterator it = mDuration.begin(); it != mDuration.end(); ++it)
 					t1 += *it;
 
-				GCPtr<CoordCalc> posCalc = new StaticCoordCalc(mTrajectory.back()->calcCoord(t1));
+				GCPtr<CoordCalc> posCalc = new StaticCoordCalc(
+					mTrajectory.back()->calcCoord(t1));
 				mTrajectory.push_back(posCalc);
 				mDuration.push_back(duration);
 			}	
-			else if (buf == "durstraight")
-			{
-				double x, y, z, dur;
-				string planet, direction;
-				file >> buf >> direction >> planet >> x >> y >> z >> dur;
-
-				dur /= coeff;
-
-				Planet* planetPtr = SS->searchByEnglishName(planet);
-				GCPtr<CoordCalc> straightCalc;
-				if (direction == "to")
-				{
-					straightCalc = new DurationStraightCoordCalc(Vec3d(x, y, z), dur, 1.0f );
-				}
-				else if (direction == "from")
-				{
-					straightCalc = new DurationStraightCoordCalc(Vec3d(x, y, z), dur, -1.0f );
-				}
-				else
-				{
-					throw invalid_argument("Bad trajectory file format");
-				}
-				
-                GCPtr<CoordCalc> planetCoordCalc = new PlanetCoordCalc(planetPtr);
-				posCalc = new LocalSystemCoordCalc(straightCalc, planetCoordCalc);
-				
-				GCPtr<Orbit> orbit = new Orbit(buf, posCalc);
-				mOrbits.push_back (orbit);
-			}
-			else if (buf == "flyto")
-			{
-				string planetName;
-				double duration;
-				file >> planetName >> duration;
-
-				Planet* planetPtr = SS->searchByEnglishName(planetName);
-			
-				duration /= coeff;
-
-				double t1 = startJD;
-				for(vector<double>::const_iterator it = mDuration.begin(); it != mDuration.end(); ++it)
-					t1 += *it;
-								
-				GCPtr<CoordCalc> straightCalc;
-				Vec3d start = mTrajectory.back()->calcCoord(t1) - 
-					planetPtr->get_heliocentric_ecliptic_pos(t1);
-				straightCalc = 
-					new DurationStraightCoordCalc(start, duration, 1.0f );
-
-				
-				GCPtr<CoordCalc> planetCoordCalc = new PlanetCoordCalc(planetPtr);
-				posCalc = new LocalSystemCoordCalc(straightCalc, planetCoordCalc);
-
-				mTrajectory.push_back(posCalc);
-				mDuration.push_back(duration);
-			}
 			else
 			{
 				throw invalid_argument("Bad trajectory file format");
 			}
-
 		}
 	}
 
@@ -273,8 +263,8 @@ namespace MotionTestImpl
         return mTrajectory[mCurrentOrbit]->calcCoord(t);
     }
 
-	void Trajectory::setStartJD(double t)
+	double Trajectory::getStartJD() const
 	{
-		mLastOrbitChange = t;
+		return startJD;
 	}
 }

@@ -64,7 +64,7 @@ namespace MotionTestImpl
 
 		virtual Vec3d calcCoord(double t);        
 	private:
-		Vec3d start;
+		Vec3d mStart;
 		double delta;
 		double mDirection;
 	};

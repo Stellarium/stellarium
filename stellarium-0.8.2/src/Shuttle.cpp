@@ -8,7 +8,7 @@ using namespace MotionTestImpl;
 namespace 
 {
     bool firstTime = true; //Hi to stellarium developers
-    const double startJD = 2451514.250011573;
+    //const double startJD = 2451514.250011573;
 	//double startJD = 0.0;
 }
 
@@ -69,11 +69,12 @@ void Shuttle::compute_position(const double date)
         firstTime = false;
 		return;
     }
-	if (date < startJD)
+	if (date < trajectory.getStartJD())
 		return;
 	//Vec3f pos = trajectory.calcCoord( (date - startJD) * coef, startJD );
-    Vec3f pos = trajectory.calcCoord( date );
-	ecliptic_pos = Vec3d(pos[0], pos[1], pos[2]);
+    //Vec3f pos = trajectory.calcCoord( date );
+	//ecliptic_pos = Vec3d(pos[0], pos[1], pos[2]);
+	ecliptic_pos = trajectory.calcCoord( date );
 }
 Shuttle::~Shuttle(void)
 {

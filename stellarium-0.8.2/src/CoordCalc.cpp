@@ -83,7 +83,7 @@ namespace MotionTestImpl
 	}
 
 	StraightCoordCalc::StraightCoordCalc(const Vec3d& s, double d, double direction) : 
-	start(s), delta(d)
+	mStart(s), delta(d)
 	{
 		if (direction >= 0) mDirection = 1.0f;
 		else mDirection = -1.0f;
@@ -91,9 +91,9 @@ namespace MotionTestImpl
 	
 	Vec3d StraightCoordCalc::calcCoord(double t)
 	{		
-		Vec3d pos = start;
+		Vec3d pos = mStart;
 		double q = -mDirection*(t - mStartTime) * delta;		
-		pos += q*start;
+		pos += q*mStart;
 		return pos;
 	}
 
@@ -111,7 +111,8 @@ namespace MotionTestImpl
 	
 	Vec3d DurationStraightCoordCalc::calcCoord(double t)
 	{
-		double q = 1.0 - 4.0 / cPi * atan( mDirection*(t - mStartTime) / mDur);		
+		//double q = 1.0 - pow(4.0 / cPi * atan( mDirection*(t - mStartTime) / mDur), 2.0);	
+		double q = 1.0 - mDirection * (t - mStartTime) / mDur;
 		return q * mStart;
 	}
 
@@ -140,7 +141,6 @@ namespace MotionTestImpl
 		mCoordCalcLocal->setStartTime(startTime);
 		mCoordCalcSystem->setStartTime(startTime);
 	}
-
 
     PlanetCoordCalc::PlanetCoordCalc(Planet* planetPtr) : planet(planetPtr)
     {
