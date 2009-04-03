@@ -231,12 +231,12 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 	else if (timeSpeed > 0)
 	{
 		while(nav->getJDay() < JD)
-			scriptSleeper.sleep(50);
+			scriptSleeper.sleep(200);
 	}
 	else
 	{
 		while(nav->getJDay() > JD)
-			scriptSleeper.sleep(50);
+			scriptSleeper.sleep(200);
 	}
 }
 

@@ -44,13 +44,13 @@
 ScreenImage::ScreenImage(const QString& filename, float x, float y, bool show, float scale, float alpha, float fadeDuration)
 	: tex(NULL), maxAlpha(alpha)
 {
-	qDebug() << "ScreenImage(x=" << x << ", y=" << y << ", show=" << show << ", scale=" << scale << ", alpha=" << alpha <<  ", fade=" << fadeDuration;
 	try
 	{
 		QString path = StelApp::getInstance().getFileMgr().findFile("scripts/" + filename);
 		QPixmap pm(path);
 		tex = StelMainGraphicsView::getInstance().scene()->addPixmap(pm.scaled(pm.size()*scale));
-		tex->setOffset(x, y);
+		tex->setPos(x, y);
+
 		anim = new QGraphicsItemAnimation();
 		moveTimer = new QTimeLine();
 		moveTimer->setCurveShape(QTimeLine::LinearCurve);
@@ -61,6 +61,7 @@ ScreenImage::ScreenImage(const QString& filename, float x, float y, bool show, f
 		fadeTimer->setCurveShape(QTimeLine::LinearCurve);
 		setFadeDuration(fadeDuration);
 		connect(fadeTimer, SIGNAL(valueChanged(qreal)), this, SLOT(setOpacity(qreal)));
+
 
 		// set inital displayed state
 		if (show)
@@ -137,27 +138,29 @@ void ScreenImage::setXY(float x, float y, float duration)
 	if (duration<=0.)
 	{
 		moveTimer->stop();
-		tex->setOffset(x, y);
+		tex->setPos(x, y);
 	}
 	else
 	{
 		moveTimer->stop();
 		moveTimer->setDuration(duration*1000);
-		QPointF p(tex->offset());
+		moveTimer->setFrameRange(0,100);
+		QPointF p(tex->pos());
+		if (p == QPointF(x,y)) return;
 		float sX = p.x();
 		float sY = p.y();
 		float dX = (x-sX) / 200.;
-		float dY = (x-sY) / 200.;
+		float dY = (y-sY) / 200.;
 		for(int i=0; i<200; i++)
-			anim->setPosAt(i/200., QPointF((dX*i), (dY*i)));
-		anim->setPosAt(200., QPointF(x, y));
+			anim->setPosAt(i/200., QPointF(sX+(dX*i), (sY+(dY*i))));
+		anim->setPosAt(1.0, QPointF(x, y));
 		moveTimer->start();
 	}
 }
 
 void ScreenImage::addXY(float x, float y, float duration)
 {
-	QPointF currentPos = tex->offset();
+	QPointF currentPos = tex->pos();
 	setXY(currentPos.x() + x, currentPos.y() + y, duration);
 }
 
