@@ -104,7 +104,7 @@ void HelpDialog::createDialogContent()
 	
 	updateText();
 	
-	ui->logPathLabel->setText(QString("%1/log.txt:").arg(StelApp::getInstance().getFileMgr().getUserDir()));
+	ui->logPathLabel->setText(QString("%1/log.txt:").arg(StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()));
 	connect(ui->helpTabWidget, SIGNAL(currentChanged(int)), this, SLOT(updateLog(int)));
 	connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(refreshLog()));
 }

@@ -154,6 +154,10 @@ public:
 	//! @exception NOT_FOUND if the directory could not be found
 	QString getUserDir(void);
 
+	//! Returns the path to the users data directory
+	//! @return the path to the users data directory	
+	QString getUsersDataDirectoryName(void);
+	
 	//! Sets the user directory.  This updates the search paths (first element)
 	//! @param newDir the new value of the user directory
 	//! @exception NOT_VALID if the specified user directory is not usable
@@ -207,6 +211,8 @@ private:
 
 	//! Used to store the user data directory
 	QString userDir;
+	
+	QString usersDataDirectoryName;
 
 	//! Used to store the screenshot directory
 	QString screenshotDir;
