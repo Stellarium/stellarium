@@ -1,0 +1,39 @@
+//
+// Name: ScreenImageMgr Demo
+// License: Public Domain
+// Author: Matthew Gates
+// Description: An example script showing how to use the ScreenImageMgr module.
+//
+
+include("status_label.inc");
+useStatusLabel("ScreenImageMgr test 4: ", 50, 50, 16, "#ff0000");
+
+status("Moving an image around the screen");
+core.wait(1.0);
+status("Note that at time of writing, ScreenImageMgr is epic fail for this test");
+core.wait(1.0);
+ScreenImageMgr.createScreenImage("logo", "../textures/earthmap.png", 100, 150, 1.0, true, 0.4, 1.0);
+status("loaded image");
+core.wait(1);
+status("moving to 0,0");
+ScreenImageMgr.setImageXY("logo", 0, 0, 1);
+core.wait(1.3);
+status("moving round screen");
+w = ScreenImageMgr.getImageWidth("logo");
+h = ScreenImageMgr.getImageWidth("logo");
+sw = core.getScreenWidth();
+sh = core.getScreenHeight();
+ScreenImageMgr.setImageXY("logo", sw-w, 0, 1);
+core.wait(1.3);
+ScreenImageMgr.setImageXY("logo", sw-w, sh-h, 1);
+core.wait(1.3);
+ScreenImageMgr.setImageXY("logo", 0, sh-h, 1);
+core.wait(1.3);
+ScreenImageMgr.setImageXY("logo", 0, 0, 1);
+core.wait(1.3);
+ScreenImageMgr.setImageXY("logo", (sw+w)/2, (sh+h)/2, 1);
+core.wait(1.3);
+
+ScreenImageMgr.deleteAllImages();
+LabelMgr.deleteAllLabels();
+
