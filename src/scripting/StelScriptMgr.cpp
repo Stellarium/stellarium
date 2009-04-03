@@ -431,6 +431,16 @@ int StelMainScriptAPI::getScreenHeight(void)
 	return StelMainWindow::getInstance().size().height();
 }
 
+double StelMainScriptAPI::getScriptRate(void)
+{
+	return scriptSleeper.getRate();
+}
+
+void StelMainScriptAPI::setScriptRate(double r)
+{
+	return scriptSleeper.setRate(r);
+}
+
 void StelMainScriptAPI::debug(const QString& s)
 {
 	qDebug() << "script: " << s;

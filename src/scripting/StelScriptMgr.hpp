@@ -193,6 +193,7 @@ public slots:
         void setMinFps(float m);
 
         //! Get the current minimum frames per second.
+        //! @return The current minimum frames per secon setting.
         float getMinFps();
 
         //! Set the maximum frames per second.
@@ -200,6 +201,7 @@ public slots:
         void setMaxFps(float m);
 
         //! Get the current maximum frames per second.
+        //! @return The current maximum frames per secon setting.
         float getMaxFps();
 
 	//! Load an image which will have sky coordinates.
@@ -280,9 +282,20 @@ public slots:
 	void dropSound(const QString& id);
 
 	//! Get the screen width in pixels. 
+	//! @return The screen width in pixels
 	int getScreenWidth(void);
 	//! Get the screen height in pixels. 
+	//! @return The screen height in pixels
 	int getScreenHeight(void);
+
+	//! Get the script execution rate as a multiple of normal execution speed
+	//! @return the current script execution rate.
+	double getScriptRate(void);
+	//! Set the script execution rate as a multiple of normal execution speed
+	//! @param r the multiple of the normal script execution speed, i.e.
+	//! if 5 is passed the script will execute 5 times faster than it would
+	//! if the script rate was 1.
+	void setScriptRate(double r);
 
 	//! print a debugging message to the console
 	//! @param s the message to be displayed on the console.
