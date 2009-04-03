@@ -1,0 +1,25 @@
+//
+// Name: ScreenImageMgr Demo
+// License: Public Domain
+// Author: Matthew Gates
+// Description: An example script showing how to use the ScreenImageMgr module.
+//
+
+include("status_label.inc");
+useStatusLabel("ScreenImageMgr test 3: ", 50, 50, 16, "#ff0000");
+
+status("Messing with the alpha of a loaded image");
+core.wait(2.0);
+ScreenImageMgr.createScreenImage("logo", "../textures/earthmap.png", 50, 150, 1.0, true, 1.0, 1.0);
+status("loaded");
+core.wait(1);
+for(i=1.0; i>=0.0; i-=0.1)
+{
+	status("Alpha = " + i);
+	ScreenImageMgr.setImageAlpha("logo", i);
+	core.wait(0.5);
+}
+core.wait(2);
+ScreenImageMgr.deleteAllImages();
+LabelMgr.deleteAllLabels();
+

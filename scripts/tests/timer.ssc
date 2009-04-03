@@ -5,17 +5,12 @@
 // Description: For testing script rates.
 //
 
-rootLabelText = "Timer (script second since start): ";
-statusLabelId = LabelMgr.labelScreen("", 50, 50, true, 16, "#ff0000");
+include("status_label.inc");
+useStatusLabel("Timer (script second since start): ", 50, 50, 16, "#ff0000");
 var counter = 0;
-
 while(1)
 {
 	status(counter++);
 	core.wait(1);
 }
 
-function status(text)
-{
-	 LabelMgr.setLabelText(statusLabelId, rootLabelText + text);
-}

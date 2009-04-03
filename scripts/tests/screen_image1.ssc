@@ -5,8 +5,8 @@
 // Description: An example script showing how to use the ScreenImageMgr module.
 //
 
-rootLabelText = "ScreenImageMgr test 1: ";
-statusLabelId = LabelMgr.labelScreen("", 50, 50, true, 16, "#ff0000");
+include("status_label.inc");
+useStatusLabel("ScreenImageMgr test 1: ", 50, 50, 16, "#ff0000");
 
 status("image start off, fades in (1 sec), wait a second, fades off (1 sec)");
 core.wait(2.0);
@@ -32,7 +32,3 @@ core.wait(2);
 ScreenImageMgr.deleteAllImages();
 LabelMgr.deleteAllLabels();
 
-function status(text)
-{
-	 LabelMgr.setLabelText(statusLabelId, rootLabelText + text);
-}
