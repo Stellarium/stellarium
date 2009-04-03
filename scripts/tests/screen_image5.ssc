@@ -8,21 +8,21 @@
 include("status_label.inc");
 useStatusLabel("ScreenImageMgr test 5: ", 50, 50, 16, "#ff0000");
 
-		//     x,   y,   scale, alpha
-testData = Array(Array(0,   200, 1.0,   1.0), 
-                 Array(200, 300, 1.0,   0.9), 
-                 Array(400, 200, 1.0,   0.7), 
-                 Array(600, 300, 1.0,   0.5), 
-                 Array(800, 200, 1.0,   0.3),
-                 Array(0,   600, 1.7,   1.0), 
-                 Array(200, 700, 0.4,   0.9), 
-                 Array(400, 600, 1.2,   0.7), 
-                 Array(600, 700, 0.8,   0.5), 
-                 Array(800, 600, 1.0,   0.3));
+		//     x,   y,   scale, alpha, fadetime
+testData = Array(Array(0,   100, 1.0, 1.0, 0.5), 
+                 Array(200, 200, 1.0, 0.9, 1.5), 
+                 Array(400, 100, 1.0, 0.7, 2.5), 
+                 Array(600, 200, 1.0, 0.5, 1.5), 
+                 Array(800, 100, 1.0, 0.3, 0.5),
+                 Array(0,   400, 1.5, 1.0, 0.5), 
+                 Array(200, 600, 0.4, 0.9, 1.5), 
+                 Array(400, 400, 1.2, 0.7, 2.5), 
+                 Array(600, 600, 0.8, 0.5, 1.5), 
+                 Array(800, 400, 1.0, 0.3, 0.5));
 
 function mkLabel(dat)
 {
-	return "x,y=" + dat[0] + "," + dat[1] + " s=" + dat[2] + " a=" + dat[3];
+	return "x,y=" + dat[0] + "," + dat[1] + " s=" + dat[2] + " a=" + dat[3] + " d=" + dat[4];
 }
 
 function showAll(b)
@@ -50,7 +50,7 @@ status("Adding multiple images...");
 for(i=0; i<testData.length; i++)
 {
 	LabelMgr.labelScreen(mkLabel(testData[i]), testData[i][0], testData[i][1] - 15, true, 11, "#00ff00");
-	ScreenImageMgr.createScreenImage("logo"+i, "../textures/ganymede.png", testData[i][0], testData[i][1], testData[i][2], testData[i][3]);
+	ScreenImageMgr.createScreenImage("logo"+i, "../textures/ganymede.png", testData[i][0], testData[i][1], testData[i][2], true, testData[i][3], testData[i][4]);
 	core.wait(0.3);
 }
 
