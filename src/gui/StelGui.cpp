@@ -46,6 +46,7 @@
 #include "MeteorMgr.hpp"
 #include "DownloadPopup.hpp"
 #include "StelDownloadMgr.hpp"
+#include "StelScriptMgr.hpp"
 
 #include <QDebug>
 #include <QTimeLine>
@@ -184,6 +185,9 @@ void StelGui::init()
 	addGuiActions("actionShow_Location_Window_Global", N_("Location window"), "F6", group, true, false);
 	
 	group = N_("Date and Time");
+	addGuiActions("actionDecrease_Script_Speed", N_("Decrease script speed"), "", group, false, false);
+	addGuiActions("actionIncrease_Script_Speed", N_("Increase script speed"), "", group, false, false);
+	addGuiActions("actionSet_Real_Script_Speed", N_("Set normal script rate"), "", group, false, false);
 	addGuiActions("actionDecrease_Time_Speed", N_("Decrease time speed"), "J", group, false, false);
 	addGuiActions("actionIncrease_Time_Speed", N_("Increase time speed"), "L", group, false, false);
 	addGuiActions("actionSet_Real_Time_Speed", N_("Set normal time rate"), "K", group, false, false);
@@ -277,9 +281,13 @@ void StelGui::init()
 	getGuiActions("actionShow_DSS")->setChecked(imgr->getFlagShow());
 	
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
+	connect(getGuiActions("actionIncrease_Script_Speed"), SIGNAL(triggered()), this, SLOT(increaseScriptSpeed()));
+	connect(getGuiActions("actionDecrease_Script_Speed"), SIGNAL(triggered()), this, SLOT(decreaseScriptSpeed()));
+	connect(getGuiActions("actionSet_Real_Script_Speed"), SIGNAL(triggered()), this, SLOT(setRealScriptSpeed()));
 	connect(getGuiActions("actionIncrease_Time_Speed"), SIGNAL(triggered()), nav, SLOT(increaseTimeSpeed()));
 	connect(getGuiActions("actionDecrease_Time_Speed"), SIGNAL(triggered()), nav, SLOT(decreaseTimeSpeed()));
 	connect(getGuiActions("actionSet_Real_Time_Speed"), SIGNAL(triggered()), nav, SLOT(setRealTimeSpeed()));
+	connect(getGuiActions("actionSet_Time_Rate_Zero"), SIGNAL(triggered()), nav, SLOT(setZeroTimeSpeed()));
 	connect(getGuiActions("actionSet_Time_Rate_Zero"), SIGNAL(triggered()), nav, SLOT(setZeroTimeSpeed()));
 	connect(getGuiActions("actionReturn_To_Current_Time"), SIGNAL(triggered()), nav, SLOT(setTimeNow()));
 	connect(getGuiActions("actionSwitch_Equatorial_Mount"), SIGNAL(toggled(bool)), nav, SLOT(setEquatorialMount(bool)));
@@ -835,6 +843,43 @@ QProgressBar* StelGui::addProgressBar()
 	return progressBarMgr->addProgressBar();
 }
 
+void StelGui::setScriptKeys(bool b)
+{
+	if (b)
+	{
+		getGuiActions("actionDecrease_Time_Speed")->setShortcut(QKeySequence());
+		getGuiActions("actionIncrease_Time_Speed")->setShortcut(QKeySequence());
+		getGuiActions("actionSet_Real_Time_Speed")->setShortcut(QKeySequence());
+		getGuiActions("actionDecrease_Script_Speed")->setShortcut(QKeySequence("J"));
+		getGuiActions("actionIncrease_Script_Speed")->setShortcut(QKeySequence("L"));
+		getGuiActions("actionSet_Real_Script_Speed")->setShortcut(QKeySequence("K"));
+	}
+	else
+	{
+		getGuiActions("actionDecrease_Script_Speed")->setShortcut(QKeySequence());
+		getGuiActions("actionIncrease_Script_Speed")->setShortcut(QKeySequence());
+		getGuiActions("actionSet_Real_Script_Speed")->setShortcut(QKeySequence());
+		getGuiActions("actionDecrease_Time_Speed")->setShortcut(QKeySequence("J"));
+		getGuiActions("actionIncrease_Time_Speed")->setShortcut(QKeySequence("L"));
+		getGuiActions("actionSet_Real_Time_Speed")->setShortcut(QKeySequence("K"));
+	}
+}
+
+void StelGui::increaseScriptSpeed()
+{
+	StelApp::getInstance().getScriptMgr().setScriptRate(StelApp::getInstance().getScriptMgr().getScriptRate()*2);
+}
+
+void StelGui::decreaseScriptSpeed()
+{
+	StelApp::getInstance().getScriptMgr().setScriptRate(StelApp::getInstance().getScriptMgr().getScriptRate()/2);
+}
+
+void StelGui::setRealScriptSpeed()
+{
+	StelApp::getInstance().getScriptMgr().setScriptRate(1);
+}
+
 void StelGui::quitStellarium()
 {
 	if(StelApp::getInstance().getDownloadMgr().blockQuit())
@@ -952,3 +997,10 @@ bool StelGui::getHideGui(void)
 	return getGuiActions("actionToggle_GuiHidden_Global")->isChecked();
 }
 
+void setScriptKeys()
+{
+}
+
+void setNormalKeys()
+{
+}

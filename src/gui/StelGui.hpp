@@ -155,7 +155,14 @@ public slots:
 	void setHideGui(bool b);
 	//! get the current visible status of the toolbars
 	bool getHideGui();
-	
+
+	//! change keys when a script is running / not running
+	void setScriptKeys(bool b);
+	void increaseScriptSpeed();
+	void decreaseScriptSpeed();
+	void setRealScriptSpeed();
+
+	//! close the program
 	void quitStellarium();
 
 private slots:
