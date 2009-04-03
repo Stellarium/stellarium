@@ -237,6 +237,7 @@ bool StelSkyImageMgr::loadSkyImage(const QString& id, const QString& filename,
 		vm["imageUrl"] = QVariant(path);
 		vm["maxBrightness"] = QVariant(maxBright);
 		vm["minResolution"] = QVariant(minRes);
+		vm["shortName"] = QVariant(id);
 
 		// textureCoords (define the ordering of worldCoords)
 		cl.clear();
