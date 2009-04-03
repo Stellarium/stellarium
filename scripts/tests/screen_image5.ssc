@@ -1,0 +1,91 @@
+//
+// Name: ScreenImageMgr Demo
+// License: Public Domain
+// Author: Matthew Gates
+// Description: An example script showing how to use the ScreenImageMgr module.
+//
+
+include("status_label.inc");
+useStatusLabel("ScreenImageMgr test 5: ", 50, 50, 16, "#ff0000");
+
+		//     x,   y,   scale, alpha
+testData = Array(Array(0,   200, 1.0,   1.0), 
+                 Array(200, 300, 1.0,   0.9), 
+                 Array(400, 200, 1.0,   0.7), 
+                 Array(600, 300, 1.0,   0.5), 
+                 Array(800, 200, 1.0,   0.3),
+                 Array(0,   600, 1.7,   1.0), 
+                 Array(200, 700, 0.4,   0.9), 
+                 Array(400, 600, 1.2,   0.7), 
+                 Array(600, 700, 0.8,   0.5), 
+                 Array(800, 600, 1.0,   0.3));
+
+function mkLabel(dat)
+{
+	return "x,y=" + dat[0] + "," + dat[1] + " s=" + dat[2] + " a=" + dat[3];
+}
+
+function showAll(b)
+{
+	imageIDs = ScreenImageMgr.getAllImageIDs();
+	for(i=0; i<imageIDs.length; i++)
+	{
+		ScreenImageMgr.showImage(imageIDs[i], b);
+	}
+}
+
+function setAlphas(alpha, duration)
+{
+	status("setting alpha to " + alpha + " (ignoring duration for now)");
+	imageIDs = ScreenImageMgr.getAllImageIDs();
+	for(i=0; i<imageIDs.length; i++)
+	{
+		ScreenImageMgr.showImage(imageIDs[i], alpha);
+	}
+}
+
+status("Note that alpha setting is broken at time of writing");
+core.wait(2);
+status("Adding multiple images...");
+for(i=0; i<testData.length; i++)
+{
+	LabelMgr.labelScreen(mkLabel(testData[i]), testData[i][0], testData[i][1] - 15, true, 11, "#00ff00");
+	ScreenImageMgr.createScreenImage("logo"+i, "../textures/ganymede.png", testData[i][0], testData[i][1], testData[i][2], testData[i][3]);
+	core.wait(0.3);
+}
+
+core.wait(2);
+status("turning off images...");
+showAll(false);
+core.wait(2);
+status("turning on images...");
+showAll(true);
+core.wait(2);
+
+status("ok, lets play with the alpha values");
+core.wait(3);
+
+setAlphas(0.0, 2);
+core.wait(3);
+setAlphas(0.5, 2);
+core.wait(3);
+setAlphas(1.0, 2);
+core.wait(3);
+setAlphas(0.0, 2);
+core.wait(1);
+setAlphas(1.0, 2);
+core.wait(1);
+setAlphas(0.0, 2);
+core.wait(1);
+setAlphas(1.0, 2);
+core.wait(1);
+
+for(i=7; i>0; i--)
+{
+	status("script ending in " + i + " seconds");
+	core.wait(1);
+} 
+
+LabelMgr.deleteAllLabels();
+ScreenImageMgr.deleteAllImages();
+
