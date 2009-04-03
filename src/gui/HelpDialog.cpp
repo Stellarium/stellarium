@@ -66,6 +66,11 @@ HelpDialog::HelpDialog()
 #ifdef MACOSX
 	setKey(group, "", "!06-ctrl+left-click", N_("Clear selection"));
 #endif
+
+	group = N_("When a Script is Running");
+	setKey(group, "", "J", N_("Slow down the script execution rate"));
+	setKey(group, "", "L", N_("Speed up the script execution rate"));
+	setKey(group, "", "K", N_("Set the normal script execution rate"));
 }
 
 HelpDialog::~HelpDialog()
