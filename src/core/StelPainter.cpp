@@ -683,7 +683,7 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 // by splitting it into subtriangles.
 void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>* outVertices,
 		const bool* edgeFlags, QVector<bool>* outEdgeFlags,
-  		const Vec2d* texturePos, QVector<Vec2d>* outTexturePos,
+  		const Vec2f* texturePos, QVector<Vec2f>* outTexturePos,
 		int nbI, bool checkDisc1, bool checkDisc2, bool checkDisc3) const
 {
 	Q_ASSERT(fabs(vertices[0].length()-1.)<0.00001);
@@ -757,7 +757,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	// Recursively splits the triangle into sub triangles.
 	// Depending on which combination of sides of the triangle has to be split a different strategy is used.
 	Vec3d va[3];
-	Vec2d ta[3];
+	Vec2f ta[3];
 	bool ba[3];
 	// Only 1 side has to be split: split the triangle in 2
 	if (cDiscontinuity1 && !cDiscontinuity2 && !cDiscontinuity3)
@@ -1155,7 +1155,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 
 static QVector<Vec3d> polygonVertexArray;
 static QVector<bool> polygonEdgeFlagArray;
-static QVector<Vec2d> polygonTextureCoordArray;
+static QVector<Vec2f> polygonTextureCoordArray;
 
 // Draw the given SphericalPolygon.
 void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, SphericalPolygonDrawMode drawMode, const Vec4f* boundaryColor) const
@@ -1240,7 +1240,7 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 	if (drawMode==SphericalPolygonDrawModeTextureFill || drawMode==SphericalPolygonDrawModeTextureFillAndBoundary)
 	{
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glTexCoordPointer(2, GL_DOUBLE, 0, polygonTextureCoordArray.constData());
+		glTexCoordPointer(2, GL_FLOAT, 0, polygonTextureCoordArray.constData());
 	}
 	// Draw the fill part
 	if (drawMode!=SphericalPolygonDrawModeBoundary)
