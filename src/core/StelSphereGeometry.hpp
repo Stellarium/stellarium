@@ -183,7 +183,7 @@ public:
 	
 	//! Return an openGL compatible array of texture coords to be used using vertex arrays.
 	//! @return the array or an empty array if the polygon has no texture.
-	virtual QVector<Vec2d> getTextureCoordArray() const = 0;
+	virtual QVector<Vec2f> getTextureCoordArray() const = 0;
 
 	//! Get the contours defining the SphericalPolygon.
 	virtual QVector<QVector<Vec3d> > getContours() const;
@@ -245,7 +245,7 @@ protected:
 struct TextureVertex
 {
 	Vec3d vertex;
-	Vec2d texCoord;
+	Vec2f texCoord;
 };
 
 //! @class SphericalPolygon
@@ -273,7 +273,7 @@ public:
 	virtual QVector<bool> getEdgeFlagArray() const {return edgeFlags;}
 	
 	//! Return an openGL compatible array of texture coords to be used using vertex arrays.
-	virtual QVector<Vec2d> getTextureCoordArray() const {return QVector<Vec2d>();}
+	virtual QVector<Vec2f> getTextureCoordArray() const {return QVector<Vec2f>();}
 	
 	//! Set the contours defining the SphericalPolygon.
 	//! @param contours the list of contours defining the polygon area.
@@ -310,7 +310,7 @@ public:
 	SphericalPolygonTexture(const QVector<TextureVertex>& contour) {setContour(contour);}
 	
 	//! Return an openGL compatible array of texture coords to be used using vertex arrays.
-	virtual QVector<Vec2d> getTextureCoordArray() const {return textureCoords;}
+	virtual QVector<Vec2f> getTextureCoordArray() const {return textureCoords;}
 	
 	//! Set the contours defining the SphericalPolygon.
 	//! @param contours the list of contours defining the polygon area.
@@ -327,7 +327,7 @@ private:
 	
 	//! A list of uv textures coordinates corresponding to the triangle vertices.
 	//! There should be 1 uv position per vertex.
-	QVector<Vec2d> textureCoords;
+	QVector<Vec2f> textureCoords;
 };
 
 //! @class SphericalConvexPolygon
@@ -359,7 +359,7 @@ public:
 	virtual QVector<bool> getEdgeFlagArray() const;
 	
 	//! Return an openGL compatible array of texture coords to be used using vertex arrays.
-	virtual QVector<Vec2d> getTextureCoordArray() const {return QVector<Vec2d>();}
+	virtual QVector<Vec2f> getTextureCoordArray() const {return QVector<Vec2f>();}
 	
 	//! Return true if the polygon is an empty polygon.
 	virtual bool isEmpty() const {return contour.isEmpty();}
@@ -367,11 +367,9 @@ public:
 	//! Set the contours defining the SphericalConvexPolygon.
 	//! @param contours the list of contours defining the polygon area.
 	//! @param windingRule unused for SphericalConvexPolygon.
-	virtual void setContours(const QVector<QVector<Vec3d> >& contours, PolyWindingRule windingRule=WindingPositive,
-		const QVector<QVector<Vec2d> >& textureCoordsContours=QVector<QVector<Vec2d> >())
+	virtual void setContours(const QVector<QVector<Vec3d> >& contours, PolyWindingRule windingRule=WindingPositive)
 	{
 		Q_ASSERT(contours.size()==1);
-		Q_ASSERT(textureCoordsContours.isEmpty());
 		contour=contours.at(0);
 	}
 	

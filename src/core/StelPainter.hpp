@@ -172,7 +172,7 @@ private:
 	//! @param texturePos a pointer to an array of 3 texture coordinates, or NULL if the triangle should not be textured.
 	void projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>* outVertices,
 								  	const bool* edgeFlags=NULL, QVector<bool>* outEdgeFlags=NULL,
-		  							const Vec2d* texturePos=NULL, QVector<Vec2d>* outTexturePos=NULL,int nbI=0,
+		  							const Vec2f* texturePos=NULL, QVector<Vec2f>* outTexturePos=NULL,int nbI=0,
 									bool checkDisc1=true, bool checkDisc2=true, bool checkDisc3=true) const;
 	
 	//! Switch to native OpenGL painting, i.e not using QPainter.
