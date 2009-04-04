@@ -36,6 +36,7 @@ private slots:
 	
 	void benchmarkContains();
 	void benchmarkCheckValid();
+	void benchmarkHalfspace();
 	
 private:
 	SphericalPolygon holySquare;

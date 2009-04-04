@@ -56,10 +56,41 @@ void TestStelSphericalGeometry::initTestCase()
 void TestStelSphericalGeometry::testHalfSpace()
 {
 	Vec3d p0(1,0,0);
+	Vec3d p1(-1,0,0);
+	Vec3d p2(1,1,1);
+	p2.normalize();
+	
 	HalfSpace h0(p0, 0);
-	QVERIFY2(h0.contains(p0), "HalfSpace contains point failure");
 	HalfSpace h1(p0, 0.8);
+	HalfSpace h2(p0, -0.5);
+	HalfSpace h3(p1, 0.5);
+	HalfSpace h4(p2, 0.8);
+	HalfSpace h5(p2, 1.);
+	
+	QVERIFY2(h0.contains(p0), "HalfSpace contains point failure");
 	QVERIFY2(h1.contains(p0), "HalfSpace contains point failure");
+	
+	QVERIFY(h0.intersects(h1));
+	QVERIFY(h0.intersects(h2));
+	QVERIFY(h1.intersects(h2));
+	QVERIFY(h4.intersects(h1));
+	QVERIFY(!h0.intersects(h3));
+	QVERIFY(!h1.intersects(h3));
+	QVERIFY(h2.intersects(h3));
+	QVERIFY(h0.intersects(h5));
+	
+}
+
+void TestStelSphericalGeometry::benchmarkHalfspace()
+{
+	Vec3d p0(1,0,0);
+	Vec3d p2(1,1,1);
+	p2.normalize();
+	HalfSpace h0(p0, 0);
+	HalfSpace h4(p2, 0.8);
+	QBENCHMARK {
+		h0.intersects(h4);
+	}
 }
 
 void TestStelSphericalGeometry::testContains()

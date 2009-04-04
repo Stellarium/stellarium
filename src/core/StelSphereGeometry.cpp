@@ -63,7 +63,6 @@ bool HalfSpace::intersects(const SphericalPolygonBase& polyBase) const
 	return false;
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalPolygonBase
 ///////////////////////////////////////////////////////////////////////////////
@@ -496,6 +495,8 @@ Vec3d ConvexPolygon::getBarycenter() const
 //! If the 2 HalfSpaces don't interesect or intersect only at 1 point, false is returned and p1 and p2 are undefined
 bool planeIntersect2(const HalfSpace& h1, const HalfSpace& h2, Vec3d& p1, Vec3d& p2)
 {
+	if (!h1.intersects(h2))
+		return false;
 	const Vec3d& n1 = h1.n;
 	const Vec3d& n2 = h2.n;
 	const double& d1 = -h1.d;
