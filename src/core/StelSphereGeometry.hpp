@@ -109,6 +109,13 @@ struct HalfSpace : public SphericalRegion
 	//! Returns whether a SphericalPolygon intersects with the region.
 	virtual bool intersects(const SphericalPolygonBase& mpoly) const;
 	
+	//! Returns whether an HalfSpace intersects with this one.
+	virtual bool intersects(const HalfSpace& h) const
+	{
+		const double a = d*h.d - n*h.n;
+		return d+h.d<=0. || a<=0. || (a<=1. && a*a < (1.-d*d)*(1.-h.d*h.d));
+	}
+	
 	//! Returns whether a SphericalPolygon is contained into the region.
 	virtual bool contains(const SphericalPolygonBase& poly) const;
 	
