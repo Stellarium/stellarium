@@ -1171,29 +1171,32 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 		// Tesselate the convex polygon into a triangle fan.
 		const QVector<Vec3d>& a = cvx->getConvexContour();
 		Vec3d triangle[3];
-		// Initialize to a point inside the convex polygon.
-		triangle[2]= (a.size() == 3) ? a.at(0) + a.at(1) + a.at(2) : a.at(0) + a.at(a.size()/2);
-		const bool tmpEdges[3] = {true, false, false};
+		bool tmpEdges[3] = {true, true, false};
 		
 		if (drawMode==SphericalPolygonDrawModeTextureFillAndBoundary || drawMode==SphericalPolygonDrawModeTextureFill)
 		{
-			Q_ASSERT(0); // Not implemented
-			//const QVector<Vec3d>& a = cvx->getConvexTextureContour();
+			const QVector<Vec2f>& tex = cvx->getTextureCoordArray();
 			// Compute also textures coordinates
 			//Vec2d texCoords[3];
 		}
 		else
 		{
+			triangle[0]=a[0];
+			triangle[1]=a[1];
+			triangle[2]=a[2];
+			projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray);
+			tmpEdges[0]=false;
 			// No need for textures coordinates
-			for (int i=0;i<a.size()-1;++i)
+			for (int i=2;i<a.size()-2;++i)
 			{
-				triangle[0]=a.at(i);
-				triangle[1]=a.at(i+1);
+				triangle[1]=a.at(i);
+				triangle[2]=a.at(i+1);
 				projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray);
 			}
+			tmpEdges[2]=true;
 			// Last triangle
-			triangle[0]=a.last();
-			triangle[1]=a.first();
+			triangle[1]=a.at(a.size()-2);
+			triangle[2]=a.last();
 			projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray);
 		}
 	}
