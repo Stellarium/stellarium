@@ -339,10 +339,10 @@ public:
 	SphericalConvexPolygon() {;}
 
 	//! Constructor from a list of contours.
-	SphericalConvexPolygon(QVector<QVector<Vec3d> >& contours) {setContours(contours);}
+	SphericalConvexPolygon(const QVector<QVector<Vec3d> >& contours) {setContours(contours);}
 
 	//! Constructor from one contour.
-	SphericalConvexPolygon(QVector<Vec3d>& contour) {setContour(contour);}
+	SphericalConvexPolygon(const QVector<Vec3d>& contour) {setContour(contour);}
 	
 	//! Special constructor for triangle.
 	SphericalConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2) {contour << e0 << e1 << e2;}
@@ -400,7 +400,7 @@ public:
 	//! Return the list of halfspace bounding the ConvexPolygon.
 	QVector<HalfSpace> getBoundingHalfSpaces() const;
 	
-private:
+protected:
 	//! A list of vertices of the convex contour.
 	QVector<Vec3d> contour;
 	
@@ -432,6 +432,37 @@ private:
 	}
 };
 
+//! @class SphericalConvexPolygonTexture
+//! Extension of SphericalConvexPolygon for textured polygon.
+class SphericalConvexPolygonTexture : public SphericalConvexPolygon
+{
+public:
+	//! Default constructor.
+	SphericalConvexPolygonTexture() {;}
+
+	//! Constructor from one contour.
+	SphericalConvexPolygonTexture(const QVector<Vec3d>& contour, const QVector<Vec2f>& texCoord) {setContour(contour, texCoord);}
+	
+	//! Special constructor for quads.
+	//! Use the 4 textures corners for the 4 vertices.
+	SphericalConvexPolygonTexture(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3) 
+	{
+		contour << e0 << e1 << e2 << e3;
+		textureCoords << Vec2f(0.f, 0.f) << Vec2f(1.f, 0.f) << Vec2f(1.f, 1.f) << Vec2f(0.f, 1.f);
+	}
+	
+	//! Return an openGL compatible array of texture coords to be used using vertex arrays.
+	virtual QVector<Vec2f> getTextureCoordArray() const {return textureCoords;}
+	
+	//! Set a single contour defining the SphericalPolygon.
+	//! @param contours a contour defining the polygon area.
+	virtual void setContour(const QVector<Vec3d>& acontour, const QVector<Vec2f>& texCoord) {contour=acontour; textureCoords=texCoord;}
+	
+protected:
+	//! A list of uv textures coordinates corresponding to the triangle vertices.
+	//! There should be 1 uv position per vertex.
+	QVector<Vec2f> textureCoords;
+};
 
 //! Compute the intersection of 2 halfspaces on the sphere (usually on 2 points) and return it in p1 and p2.
 //! If the 2 HalfSpace don't interesect or intersect only at 1 point, false is returned and p1 and p2 are undefined
