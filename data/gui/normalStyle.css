@@ -763,10 +763,22 @@ QWidget#resourceInformationEdition
 QTextEdit#editResourceInformation {
 border: 1px solid rgb(0, 0, 0);
 	border-radius: 0px;
-	padding: 0 8px;
+	padding: 0px;
 	background: rgb(30, 30, 31);
 	selection-background-color: rgb(253, 216, 134);
 	color: rgb(170, 173, 164);
 	font-size: 12px;
 
+}
+
+QGroupBox#dataSourcesListGroupBox {
+        margin-right: 11px;
+        margin-left: 11px;
+        margin-top: 11px;
+        margin-bottom: 11px;
+	background-color: rgba(149, 150, 152, 30%);
+}
+
+QWidget#listManagerWidget {
+        background-color: rgb(31, 31, 31);
 }
