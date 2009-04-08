@@ -90,7 +90,7 @@ public:
 	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b) {return false;}
 	
 	//! Handle key events. Please note that most of the interactions will be done through the GUI module.
-	//! @param event the Key event
+	//! @param e the Key event
 	//! @return set the event as accepted if it was intercepted
 	virtual void handleKeys(class QKeyEvent* e) {;}
 

@@ -565,7 +565,7 @@ void StarMgr::draw(StelCore* core)
 		return;
 
 	int maxSearchLevel = getMaxSearchLevel();
-	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxSearchLevel)->search(prj->getViewportConvexPolygon()->getBoundingHalfSpaces(),maxSearchLevel);
+	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxSearchLevel)->search(prj->getViewportConvexPolygon()->getBoundingSphericalCaps(),maxSearchLevel);
 
 	// Set temporary static variable for optimization
 	const float names_brightness = labelsFader.getInterstate() * starsFader.getInterstate();
@@ -677,7 +677,7 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 	e3 *= f;
 	// Search the triangles
 	SphericalConvexPolygon c(e3, e2, e2, e0);
-	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(c.getBoundingHalfSpaces(),lastMaxSearchLevel);
+	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(c.getBoundingSphericalCaps(),lastMaxSearchLevel);
 	
 	// Iterate over the stars inside the triangles
 	f = cos(limFov * M_PI/180.);
