@@ -241,7 +241,8 @@ public slots:
 
 	//! Convenience function which allows loading of a sky image based on a
 	//! central coordinate, angular size and rotation.
-	//! 
+	//! @param id a string ID to be used when referring to this
+	//! image (e.g. when changing the displayed status or deleting it.
 	//! @param filename the file name of the image.  If a relative
 	//! path is specified, "scripts/" will be prefixed before the
 	//! image is searched for using StelFileMgr.

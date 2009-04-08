@@ -59,22 +59,22 @@ void TestStelSphericalGeometry::initTestCase()
 	triangle.setContour(triCont);
 }
 
-void TestStelSphericalGeometry::testHalfSpace()
+void TestStelSphericalGeometry::testSphericalCap()
 {
 	Vec3d p0(1,0,0);
 	Vec3d p1(-1,0,0);
 	Vec3d p2(1,1,1);
 	p2.normalize();
 	
-	HalfSpace h0(p0, 0);
-	HalfSpace h1(p0, 0.8);
-	HalfSpace h2(p0, -0.5);
-	HalfSpace h3(p1, 0.5);
-	HalfSpace h4(p2, 0.8);
-	HalfSpace h5(p2, 1.);
+	SphericalCap h0(p0, 0);
+	SphericalCap h1(p0, 0.8);
+	SphericalCap h2(p0, -0.5);
+	SphericalCap h3(p1, 0.5);
+	SphericalCap h4(p2, 0.8);
+	SphericalCap h5(p2, 1.);
 	
-	QVERIFY2(h0.contains(p0), "HalfSpace contains point failure");
-	QVERIFY2(h1.contains(p0), "HalfSpace contains point failure");
+	QVERIFY2(h0.contains(p0), "SphericalCap contains point failure");
+	QVERIFY2(h1.contains(p0), "SphericalCap contains point failure");
 	
 	QVERIFY(h0.intersects(h1));
 	QVERIFY(h0.intersects(h2));
@@ -86,13 +86,13 @@ void TestStelSphericalGeometry::testHalfSpace()
 	QVERIFY(h0.intersects(h5));
 }
 
-void TestStelSphericalGeometry::benchmarkHalfspace()
+void TestStelSphericalGeometry::benchmarkSphericalCap()
 {
 	Vec3d p0(1,0,0);
 	Vec3d p2(1,1,1);
 	p2.normalize();
-	HalfSpace h0(p0, 0);
-	HalfSpace h4(p2, 0.8);
+	SphericalCap h0(p0, 0);
+	SphericalCap h4(p2, 0.8);
 	QBENCHMARK {
 		h0.intersects(h4);
 	}
@@ -125,7 +125,7 @@ void TestStelSphericalGeometry::testContains()
 	QVERIFY2(triangle.contains(p1), "Triangle contains point failure");
 	QVERIFY2(!triangle.contains(Vec3d(-1, -1, -1)), "Triangle not contains point failure");
 	
-	foreach(const HalfSpace& h, triangle.getBoundingHalfSpaces())
+	foreach(const SphericalCap& h, triangle.getBoundingSphericalCaps())
 	{
 		QVERIFY(h.contains(p1));
 	}
@@ -180,8 +180,8 @@ void TestStelSphericalGeometry::testPlaneIntersect2()
 	Vec3d p1,p2;
 	Vec3d vx(1,0,0);
 	Vec3d vz(0,0,1);
-	HalfSpace hx(vx, 0);
-	HalfSpace hz(vz, 0);
+	SphericalCap hx(vx, 0);
+	SphericalCap hz(vz, 0);
 	QVERIFY2(planeIntersect2(hx, hz, p1, p2)==true, "Plane intersect failed");
 	QVERIFY(p1==Vec3d(0,-1,0));
 	QVERIFY(p2==Vec3d(0,1,0));
