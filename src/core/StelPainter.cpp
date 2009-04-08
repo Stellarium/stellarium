@@ -1175,29 +1175,61 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 		
 		if (drawMode==SphericalPolygonDrawModeTextureFillAndBoundary || drawMode==SphericalPolygonDrawModeTextureFill)
 		{
+			Q_ASSERT(dynamic_cast<const SphericalConvexPolygonTexture*>(cvx)!=NULL);
+			// Need to compute textures coordinates
+			Vec2f texCoord[3];
 			const QVector<Vec2f>& tex = cvx->getTextureCoordArray();
-			// Compute also textures coordinates
-			//Vec2d texCoords[3];
-		}
-		else
-		{
-			triangle[0]=a[0];
-			triangle[1]=a[1];
-			triangle[2]=a[2];
-			projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray);
+			triangle[0]=a.at(0);
+			triangle[1]=a.at(1);
+			triangle[2]=a.at(2);
+			texCoord[0]=tex.at(0);
+			texCoord[1]=tex.at(1);
+			texCoord[2]=tex.at(2);
+			projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray, texCoord, &polygonTextureCoordArray);
 			tmpEdges[0]=false;
-			// No need for textures coordinates
 			for (int i=2;i<a.size()-2;++i)
 			{
 				triangle[1]=a.at(i);
 				triangle[2]=a.at(i+1);
-				projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray);
+				texCoord[1]=tex.at(i);
+				texCoord[2]=tex.at(i+1);
+				projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray, texCoord, &polygonTextureCoordArray);
 			}
 			tmpEdges[2]=true;
 			// Last triangle
 			triangle[1]=a.at(a.size()-2);
 			triangle[2]=a.last();
-			projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray);
+			texCoord[1]=tex.at(a.size()-2);
+			texCoord[2]=tex.last();
+			projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray, texCoord, &polygonTextureCoordArray);
+		}
+		else
+		{
+			// No need for textures coordinates
+			triangle[0]=a.at(0);
+			triangle[1]=a.at(1);
+			triangle[2]=a.at(2);
+			if (a.size()==3)
+			{
+				tmpEdges[2]=true;
+				projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray);
+			}
+			else
+			{
+				projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray);
+				tmpEdges[0]=false;
+				for (int i=2;i<a.size()-2;++i)
+				{
+					triangle[1]=a.at(i);
+					triangle[2]=a.at(i+1);
+					projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray);
+				}
+				tmpEdges[2]=true;
+				// Last triangle
+				triangle[1]=a.at(a.size()-2);
+				triangle[2]=a.last();
+				projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray);
+			}
 		}
 	}
 	else
@@ -1237,8 +1269,6 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, polygonVertexArray.constData());
 	glEnable(GL_CULL_FACE);
-	glFrontFace(prj->needGlFrontFaceCW()?GL_CCW:GL_CW);
-	
 	// Load the textureCoordinates if any
 	if (drawMode==SphericalPolygonDrawModeTextureFill || drawMode==SphericalPolygonDrawModeTextureFillAndBoundary)
 	{
@@ -1281,14 +1311,21 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 			glEnable(GL_TEXTURE_2D);
 		}
 	}
-	
-	glFrontFace(prj->needGlFrontFaceCW()?GL_CW:GL_CCW);
+
 	glDisable(GL_CULL_FACE);
 	glDisableClientState(GL_EDGE_FLAG_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
+void StelPainter::drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode, const Vec4f* boundaryColor) const
+{
+	const SphericalPolygonBase* poly = dynamic_cast<const SphericalPolygonBase*>(region);
+	if (poly)
+	{
+		return drawSphericalPolygon(poly, drawMode, boundaryColor);
+	}
+}
 
 /*************************************************************************
  draw a simple circle, 2d viewport coordinates in pixel

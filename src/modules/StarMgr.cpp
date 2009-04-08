@@ -676,7 +676,8 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 	e2 *= f;
 	e3 *= f;
 	// Search the triangles
-	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(e3,e2,e1,e0,lastMaxSearchLevel);
+	SphericalConvexPolygon c(e3, e2, e2, e0);
+	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(c.getBoundingHalfSpaces(),lastMaxSearchLevel);
 	
 	// Iterate over the stars inside the triangles
 	f = cos(limFov * M_PI/180.);

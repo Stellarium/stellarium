@@ -276,7 +276,7 @@ void StelGeodesicGrid::visitTriangles(int lev,int index,
 }
 
 
-int StelGeodesicGrid::searchZone(const Vec3d &v,int searchLevel) const
+int StelGeodesicGrid::getZoneNumberForPoint(const Vec3d &v,int searchLevel) const
 {
 	for (int i=0;i<20;i++)
 	{
@@ -318,6 +318,7 @@ int StelGeodesicGrid::searchZone(const Vec3d &v,int searchLevel) const
 }
 
 
+// First iteration on the icosahedron base triangles
 void StelGeodesicGrid::searchZones(const QVector<HalfSpace>& convex,
                                int **inside_list,int **border_list,
                                int maxSearchLevel) const
@@ -405,7 +406,7 @@ void StelGeodesicGrid::searchZones(int lev,int index,
 		**border_list = index;
 		if (lev < maxSearchLevel)
 		{
-			Triangle &t(triangles[lev][index]);
+			const Triangle &t(triangles[lev][index]);
 			lev++;
 			index <<= 2;
 			inside_list++;
@@ -470,16 +471,6 @@ const GeodesicSearchResult* StelGeodesicGrid::search(const QVector<HalfSpace>& c
 	lastSearchRegion = convex;
 	cacheSearchResult->search(convex, maxSearchLevel);
 	return cacheSearchResult;
-}
-	
-
-/*************************************************************************
- Return a search result matching the given spatial region
-*************************************************************************/
-const GeodesicSearchResult* StelGeodesicGrid::search(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2,const Vec3d &e3,int maxSearchLevel) const
-{
-	SphericalConvexPolygon c(e0, e1, e2, e3);
-	return search(c.getBoundingHalfSpaces(),maxSearchLevel);
 }
 
 

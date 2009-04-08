@@ -379,7 +379,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		qWarning() << "skyConvexPolygons in preview JSON files is deprecated. Replace with worldCoords.";
 	foreach (const QVariant& polyRaDec, polyList)
 	{
-		QList<Vec3d> vertices;
+		QVector<Vec3d> vertices;
 		foreach (QVariant vRaDec, polyRaDec.toList())
 		{
 			const QVariantList vl = vRaDec.toList();
@@ -390,7 +390,9 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 			vertices.append(v);
 		}
 		Q_ASSERT(vertices.size()==4);
-		skyConvexPolygons.append(SphericalConvexPolygon(vertices[0], vertices[1], vertices[2], vertices[3]));
+		SphericalConvexPolygon pol(vertices);
+		Q_ASSERT(pol.checkValid());
+		skyConvexPolygons.append(pol);
 	}
 	
 	// Load the matching textures positions (if any)

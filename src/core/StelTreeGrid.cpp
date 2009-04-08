@@ -64,12 +64,14 @@ static const int icosahedron_triangles[20][3] =
  { 8, 9, 5}  //  8
 };
 
-StelTreeGrid::StelTreeGrid(unsigned int maxobj) : maxObjects(maxobj), filter()
+StelTreeGrid::StelTreeGrid(unsigned int maxobj) : maxObjects(maxobj)
 {
 	for (int i=0;i<20;++i)
 	{
 		const int* corners = icosahedron_triangles[i];
-		children.push_back(SphericalConvexPolygon(icosahedron_corners[corners[0]],icosahedron_corners[corners[2]], icosahedron_corners[corners[1]]));
+		SphericalConvexPolygon p(icosahedron_corners[corners[2]],icosahedron_corners[corners[1]], icosahedron_corners[corners[0]]);
+		Q_ASSERT(p.checkValid());
+		children.push_back(p);
 	}
 }
 
@@ -173,45 +175,23 @@ std::vector<StelGridObject*> StelTreeGrid::getAllObjects()
 	return result;
 }
 	
-#ifdef TREEGRIDDEBUG
+#ifdef STELTREEGRIDDEBUG
 #include "StelProjector.hpp"
-#include "StelNavigator.hpp"				 
-double StelTreeGridNode::draw(StelProjector *prj, const StelGeom::ConvexS& roi, float opacity) const
+#include "StelPainter.hpp"			 
+double StelTreeGridNode::draw(const StelPainter* sPainter, float opacity) const
 {
-	StelPainter sPainter();
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	glColor4f(0,1,0, opacity);
-	Vec3d e1, e2;
 	if (children.size()==0)
 	{
-		if (prj->projectLineCheck(triangle[0], e1, triangle[1], e2))
-		{
-			glBegin(GL_LINES);
-			glVertex2f(e1[0], e1[1]);
-			glVertex2f(e2[0], e2[1]);
-			glEnd();
-		}
-		if (prj->projectLineCheck(triangle[1], e1, triangle[2], e2))
-		{
-			glBegin(GL_LINES);
-			glVertex2f(e1[0], e1[1]);
-			glVertex2f(e2[0], e2[1]);
-			glEnd();
-		}
-		if (prj->projectLineCheck(triangle[2], e1, triangle[0], e2))
-		{
-			glBegin(GL_LINES);
-			glVertex2f(e1[0], e1[1]);
-			glVertex2f(e2[0], e2[1]);
-			glEnd();
-		}
+		sPainter->drawSphericalPolygon(&triangle, StelPainter::SphericalPolygonDrawModeBoundary);
 	}
 	opacity *= 0.75;
 	for (Children::const_iterator ic = children.begin(); ic != children.end(); ++ic)
 	{
-		ic->draw(prj, roi, opacity);
+		ic->draw(sPainter, opacity);
 	}
 	return 0.;
 }

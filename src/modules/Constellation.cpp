@@ -133,82 +133,30 @@ void Constellation::drawName(StelFont *constfont, const StelPainter& sPainter) c
 	sPainter.drawText(constfont, XYname[0], XYname[1], nameI18, 0., -constfont->getStrLen(nameI18)/2, 0, false);
 }
 
-void Constellation::drawArtOptim(const StelProjectorP& prj, const StelNavigator* nav) const
+void Constellation::drawArtOptim(const StelPainter& sPainter, const SphericalRegion& region) const
 {
 	float intensity = artFader.getInterstate(); 
-	if (artTexture && intensity) 
+	if (artTexture && intensity && region.intersects(artPolygon)) 
 	{
 		glColor3f(intensity,intensity,intensity);
 
-		Vec3d v0, v1, v2, v3, v4, v5, v6, v7, v8;
-		bool b0, b1, b2, b3, b4, b5, b6, b7, b8; 
-
-		// If one of the point is in the screen
-		b0 = prj->projectCheck(artVertex[0],v0) || (nav->getJ2000EquVisionDirection().dot(artVertex[0])>0.9);
-		b1 = prj->projectCheck(artVertex[1],v1) || (nav->getJ2000EquVisionDirection().dot(artVertex[1])>0.9);
-		b2 = prj->projectCheck(artVertex[2],v2) || (nav->getJ2000EquVisionDirection().dot(artVertex[2])>0.9);
-		b3 = prj->projectCheck(artVertex[3],v3) || (nav->getJ2000EquVisionDirection().dot(artVertex[3])>0.9);
-		b4 = prj->projectCheck(artVertex[4],v4) || (nav->getJ2000EquVisionDirection().dot(artVertex[4])>0.9);
-		b5 = prj->projectCheck(artVertex[5],v5) || (nav->getJ2000EquVisionDirection().dot(artVertex[5])>0.9);
-		b6 = prj->projectCheck(artVertex[6],v6) || (nav->getJ2000EquVisionDirection().dot(artVertex[6])>0.9);
-		b7 = prj->projectCheck(artVertex[7],v7) || (nav->getJ2000EquVisionDirection().dot(artVertex[7])>0.9);
-		b8 = prj->projectCheck(artVertex[8],v8) || (nav->getJ2000EquVisionDirection().dot(artVertex[8])>0.9);
-			
-		if (b0 || b1 || b2 || b3 || b4 || b5 || b6 || b7 || b8)
-		{
-			// The texture is not fully loaded
-			if (artTexture->bind()==false)
-				return;
+		// The texture is not fully loaded
+		if (artTexture->bind()==false)
+			return;
 		
-			if ((b0 || b1 || b2 || b3) && (v0[2]<1 && v1[2]<1 && v2[2]<1 && v3[2]<1))
-			{	
-				glBegin(GL_QUADS);
-					glTexCoord2f(0,0); 		glVertex2f(v0[0],v0[1]);
-					glTexCoord2f(0.5,0); 	glVertex2f(v1[0],v1[1]);
-					glTexCoord2f(0.5,0.5); 	glVertex2f(v2[0],v2[1]);
-					glTexCoord2f(0,0.5); 	glVertex2f(v3[0],v3[1]);
-				glEnd();
-			}
-			if ((b1 || b4 || b5 || b2) && (v1[2]<1 && v4[2]<1 && v5[2]<1 && v2[2]<1))
-			{
-				glBegin(GL_QUADS);
-					glTexCoord2f(0.5,0); glVertex2f(v1[0],v1[1]);
-					glTexCoord2f(1,0); glVertex2f(v4[0],v4[1]);
-					glTexCoord2f(1,0.5); glVertex2f(v5[0],v5[1]);
-					glTexCoord2f(0.5,0.5); glVertex2f(v2[0],v2[1]);
-				glEnd();
-			}
-			if ((b2 || b5 || b6 || b7) && (v2[2]<1 && v5[2]<1 && v6[2]<1 && v7[2]<1))
-			{
-				glBegin(GL_QUADS);
-					glTexCoord2f(0.5,0.5); 	glVertex2f(v2[0],v2[1]);
-					glTexCoord2f(1,0.5); 	glVertex2f(v5[0],v5[1]);
-					glTexCoord2f(1,1); 		glVertex2f(v6[0],v6[1]);
-					glTexCoord2f(0.5,1);	glVertex2f(v7[0],v7[1]);
-				glEnd();
-			}
-			if ((b3 || b2 || b7 || b8) && (v3[2]<1 && v2[2]<1 && v7[2]<1 && v8[2]<1))
-			{
-				glBegin(GL_QUADS);
-					glTexCoord2f(0,0.5); 	glVertex2f(v3[0],v3[1]);
-					glTexCoord2f(0.5,0.5); 	glVertex2f(v2[0],v2[1]);
-					glTexCoord2f(0.5,1); 	glVertex2f(v7[0],v7[1]);
-					glTexCoord2f(0,1);		glVertex2f(v8[0],v8[1]);
-				glEnd();
-			}
-		}
+		sPainter.drawSphericalPolygon(&artPolygon, StelPainter::SphericalPolygonDrawModeTextureFill);
 	}
 }
 
 // Draw the art texture
-void Constellation::drawArt(const StelProjectorP& prj, const StelNavigator* nav) const
+void Constellation::drawArt(const StelPainter& sPainter) const
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
-
-	drawArtOptim(prj, nav);
+	SphericalRegionP region = sPainter.getProjector()->getViewportConvexPolygon();
+	drawArtOptim(sPainter, *region);
 
 	glDisable(GL_CULL_FACE);
 }

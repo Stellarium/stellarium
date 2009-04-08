@@ -28,6 +28,7 @@
 #include "StelUtils.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
+#include "StelSphereGeometry.hpp"
 
 class StarMgr;
 class StelFont;
@@ -77,9 +78,9 @@ private:
 	bool read(const QString& record, StarMgr *starMgr);
 	
 	//! Draw the constellation name
-	void drawName(StelFont * constfont, const StelPainter& sPainter) const;
+	void drawName(StelFont* constfont, const StelPainter& sPainter) const;
 	//! Draw the constellation art
-	void drawArt(const StelProjectorP& prj, const StelNavigator* nav) const;
+	void drawArt(const StelPainter& prj) const;
 	//! Draw the constellation boundary
 	void drawBoundaryOptim(const StelProjectorP& prj) const;
 	
@@ -107,7 +108,7 @@ private:
 	//! the class ConstellationMgr only).
 	void drawOptim(const StelPainter& sPainter, const StelNavigator* nav) const;
 	//! Draw the art texture, optimized function to be called thru a constellation manager only.
-	void drawArtOptim(const StelProjectorP& prj, const StelNavigator* nav) const;
+	void drawArtOptim(const StelPainter& sPainter, const SphericalRegion& region) const;
 	//! Update fade levels according to time since various events.
 	void update(int deltaTime);
 	//! Turn on and off Constellation line rendering.
@@ -150,8 +151,9 @@ private:
 	unsigned int numberOfSegments;
 	//! List of stars forming the segments
 	StelObjectP* asterism;
+	
 	StelTextureSP artTexture;
-	Vec3d artVertex[9];
+	SphericalConvexPolygonTexture artPolygon;
 	
 	//! Define whether art, lines, names and boundary must be drawn
 	LinearFader artFader, lineFader, nameFader, boundaryFader;
