@@ -430,16 +430,23 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			Mat4f A(x1, texSizeY - y1, 0.f, 1.f, x2, texSizeY - y2, 0.f, 1.f, x3, texSizeY - y3, 0.f, 1.f, x1, texSizeY - y1, texSizeX, 1.f);
 			Mat4f X = B * A.inverse();
 
-			cons->artVertex[0] = Vec3f(X * Vec3f(0, 0, 0));
-			cons->artVertex[1] = Vec3f(X * Vec3f(texSizeX / 2, 0, 0));
-			cons->artVertex[2] = Vec3f(X * Vec3f(texSizeX / 2, texSizeY / 2, 0));
-			cons->artVertex[3] = Vec3f(X * Vec3f(0, texSizeY / 2, 0));
-			cons->artVertex[4] = Vec3f(X * Vec3f(texSizeX / 2 + texSizeX / 2, 0, 0));
-			cons->artVertex[5] = Vec3f(X * Vec3f(texSizeX / 2 + texSizeX / 2, texSizeY / 2, 0));
-			cons->artVertex[6] = Vec3f(X * Vec3f(texSizeX / 2 + texSizeX / 2, texSizeY / 2 + texSizeY / 2, 0));
-			cons->artVertex[7] = Vec3f(X * Vec3f(texSizeX / 2 + 0, texSizeY / 2 + texSizeY / 2, 0));
-			cons->artVertex[8] = Vec3f(X * Vec3f(0, texSizeY / 2 + texSizeY / 2, 0));
-
+			QVector<Vec3d> contour(4);
+			contour[0] = X * Vec3f(0., 0., 0.);
+			contour[1] = X * Vec3f(texSizeX, 0., 0.);
+			contour[2] = X * Vec3f(texSizeX, texSizeY, 0.);
+			contour[3] = X * Vec3f(0, texSizeY, 0.);
+			contour[0].normalize();
+			contour[1].normalize();
+			contour[2].normalize();
+			contour[3].normalize();
+			
+			QVector<Vec2f> texCoords(4);
+			texCoords[0].set(0,0);
+			texCoords[1].set(1,0);
+			texCoords[2].set(1,1);
+			texCoords[3].set(0,1);
+			cons->artPolygon.setContour(contour, texCoords);
+			Q_ASSERT(cons->artPolygon.checkValid());
 			++readOk;
 		}
 	}
@@ -456,12 +463,12 @@ void ConstellationMgr::draw(StelCore* core)
 	
 	drawLines(sPainter, nav);
 	drawNames(sPainter);
-	drawArt(prj, nav);
+	drawArt(sPainter);
 	drawBoundaries(prj);
 }
 
 // Draw constellations art textures
-void ConstellationMgr::drawArt(const StelProjectorP& prj, const StelNavigator * nav) const
+void ConstellationMgr::drawArt(const StelPainter& sPainter) const
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
@@ -469,9 +476,10 @@ void ConstellationMgr::drawArt(const StelProjectorP& prj, const StelNavigator * 
 	glEnable(GL_CULL_FACE);
 
 	vector < Constellation * >::const_iterator iter;
+	SphericalRegionP region = sPainter.getProjector()->getViewportConvexPolygon();
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->drawArtOptim(prj, nav);
+		(*iter)->drawArtOptim(sPainter, *region);
 	}
 
 	glDisable(GL_CULL_FACE);

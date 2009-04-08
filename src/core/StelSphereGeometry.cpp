@@ -48,7 +48,7 @@ bool HalfSpace::contains(const SphericalPolygonBase& polyBase) const
 // Returns whether a SphericalPolygon intersects the region.
 bool HalfSpace::intersects(const SphericalPolygonBase& polyBase) const
 {
-	// TODO This algo is WRONG!!!!!!!
+	// TODO This algo returns sometimes false positives!!
 	const SphericalConvexPolygon* cvx = dynamic_cast<const SphericalConvexPolygon*>(&polyBase);
 	if (cvx!=NULL)
 	{
@@ -57,7 +57,23 @@ bool HalfSpace::intersects(const SphericalPolygonBase& polyBase) const
 			if (contains(v))
 				return true;
 		}
-		return cvx->contains(n);
+		// No points of the polygon are inside the halfspace
+		if (d<=0)
+			return false;
+		
+		const QVector<Vec3d>& contour = cvx->getConvexContour();
+		for (int i=0;i<contour.size()-1;++i)
+		{
+			if (!sideHalfSpaceIntersects(contour.at(i), contour.at(i+1), *this))
+				return false;
+		}
+		if (!sideHalfSpaceIntersects(contour.last(), contour.first(), *this))
+			return false;
+		
+		// Warning!!!! There is a last case which is not managed!
+		// When all the points of the polygon are outside the circle but the halfspace of the corner the closest to the
+		// circle intersects the circle halfspace..
+		return true;
 	}
 	Q_ASSERT(0); // Not implemented
 	return false;
@@ -91,7 +107,7 @@ QVariantMap SphericalPolygonBase::toQVariant() const
 
 void APIENTRY errorCallback(GLenum errno)
 {
-	qWarning() << "Tesselator error:" << errno;
+	qWarning() << "Tesselator error:" << QString::fromAscii((char*)gluErrorString(errno));
 	Q_ASSERT(0);
 }
 
@@ -141,9 +157,9 @@ bool SphericalPolygonBase::contains(const Vec3d& p) const
 	const QVector<Vec3d>& trianglesArray = getVertexArray();
 	for (int i=0;i<trianglesArray.size()/3;++i)
 	{
-		if (sideContains(trianglesArray[i*3+1], trianglesArray[i*3+0], p) &&
-				  sideContains(trianglesArray[i*3+2], trianglesArray[i*3+1], p) &&
-				  sideContains(trianglesArray[i*3+0], trianglesArray[i*3+2], p))
+		if (sideHalfSpaceContains(trianglesArray.at(i*3+1), trianglesArray.at(i*3), p) &&
+				  sideHalfSpaceContains(trianglesArray.at(i*3+2), trianglesArray.at(i*3+1), p) &&
+				  sideHalfSpaceContains(trianglesArray.at(i*3+0), trianglesArray.at(i*3+2), p))
 			return true;
 	}
 	return false;
@@ -223,6 +239,13 @@ struct GluTessCallbackData
 {
 	SphericalPolygon* thisPolygon;	//! Reference to the instance of SphericalPolygon being tesselated.
 	bool edgeFlag;					//! Used to store temporary edgeFlag found by the tesselator.
+	QVector<double*> tempVertices;	//! Use to contain the combined vertices
+	
+	~GluTessCallbackData()
+	{
+		foreach (double* dp, tempVertices)
+			delete[] dp;
+	}
 };
 
 void APIENTRY vertexCallback(void* vertexData, void* userData)
@@ -238,6 +261,17 @@ void APIENTRY edgeFlagCallback(GLboolean flag, void* userData)
 	((GluTessCallbackData*)userData)->edgeFlag=flag;
 }
 
+void APIENTRY combineCallback(GLdouble coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
+{
+	QVector<double*>& tempVertices = ((GluTessCallbackData*)userData)->tempVertices;
+	double* v = new double[3];
+	v[0]=coords[0];
+	v[1]=coords[1];
+	v[2]=coords[2];
+	tempVertices << v;
+	*outData = v;
+}
+
 void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, SphericalPolygonBase::PolyWindingRule windingRule)
 {
 	triangleVertices.clear();
@@ -247,7 +281,8 @@ void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, Sph
 	GLUtesselator* tess = gluNewTess();
 	gluTessCallback(tess, GLU_TESS_VERTEX_DATA, (GLvoid(APIENTRY*)()) &vertexCallback);
 	gluTessCallback(tess, GLU_TESS_EDGE_FLAG_DATA, (GLvoid(APIENTRY*)()) &edgeFlagCallback);
-	gluTessCallback(tess, GLU_TESS_ERROR, (GLvoid (APIENTRY*) ()) &errorCallback);
+	gluTessCallback(tess, GLU_TESS_ERROR, (GLvoid (APIENTRY*)()) &errorCallback);
+	gluTessCallback(tess, GLU_TESS_COMBINE_DATA, (GLvoid (APIENTRY*)()) &combineCallback);
 	const GLdouble windRule = (windingRule==SphericalPolygonBase::WindingPositive) ? GLU_TESS_WINDING_POSITIVE : GLU_TESS_WINDING_ABS_GEQ_TWO;
 	gluTessProperty(tess, GLU_TESS_WINDING_RULE, windRule);
 	GluTessCallbackData data;
@@ -267,6 +302,13 @@ void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, Sph
 	
 	// There should always be an edge flag matching each vertex.
 	Q_ASSERT(triangleVertices.size() == edgeFlags.size());
+#ifndef NDEBUG
+	// Check that the orientation of all the triangles is positive
+	for (int i=0;i<triangleVertices.size()/3;++i)
+	{
+		Q_ASSERT((triangleVertices.at(i*3+1)^triangleVertices.at(i*3))*triangleVertices.at(i*3+2)>=0);
+	}
+#endif
 }
 
 // Set a single contour defining the SphericalPolygon.
@@ -363,10 +405,10 @@ bool SphericalConvexPolygon::checkValid() const
 	{
 		// Check that all points not on the current convex plane are included in it
 		for (int p=0;p<contour.size()-2;++p)
-			res &= sideContains(contour.at(i), contour.at(i+1), contour[(p+i+2)%contour.size()]);
+			res &= sideHalfSpaceContains(contour.at(i+1), contour.at(i), contour[(p+i+2)%contour.size()]);
 	}
 	for (int p=0;p<contour.size()-2;++p)
-		res &= sideContains(contour.last(), contour.first(), contour[(p+contour.size()+1)%contour.size()]);
+		res &= sideHalfSpaceContains(contour.first(), contour.last(), contour[(p+contour.size()+1)%contour.size()]);
 	return res;
 }
 
@@ -385,10 +427,10 @@ bool SphericalConvexPolygon::contains(const Vec3d& p) const
 {
 	for (int i=0;i<contour.size()-1;++i)
 	{
-		if (!sideContains(contour.at(i), contour.at(i+1), p))
+		if (!sideHalfSpaceContains(contour.at(i+1), contour.at(i), p))
 			return false;
 	}
-	return sideContains(contour.last(), contour.first(), p);
+	return sideHalfSpaceContains(contour.first(), contour.last(), p);
 }
 
 // Returns whether a SphericalPolygon is contained into the region.
@@ -404,8 +446,9 @@ bool SphericalConvexPolygon::contains(const SphericalPolygonBase& polyBase) cons
 		}
 		return true;
 	}
-	Q_ASSERT(0); // Not implemented
-	return false;
+	// TODO, optimize!
+	SphericalPolygon p(contour);
+	return p.contains(polyBase);
 }
 
 // Returns whether another SphericalPolygon intersects with the SphericalPolygon.
@@ -416,8 +459,9 @@ bool SphericalConvexPolygon::intersects(const SphericalPolygonBase& polyBase) co
 	{
 		return !areAllPointsOutsideOneSide(cvx->contour) && !cvx->areAllPointsOutsideOneSide(contour);
 	}
-	Q_ASSERT(0); // Not implemented
-	return false;
+	// TODO, optimize!
+	SphericalPolygon p(contour);
+	return p.intersects(polyBase);
 }
 
 /*

@@ -162,7 +162,7 @@ void NebulaMgr::draw(StelCore* core)
 	}
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, sPainter);
-	//nebGrid.draw(prj, p);
+	//nebGrid.draw(&sPainter);
 }
 
 void NebulaMgr::drawPointer(const StelCore* core, const StelPainter& sPainter)

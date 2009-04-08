@@ -22,6 +22,7 @@
 
 #include <QVector>
 #include <QVariant>
+#include <QDebug>
 #include "VecMath.hpp"
 #include <boost/shared_ptr.hpp>
 
@@ -110,6 +111,7 @@ struct HalfSpace : public SphericalRegion
 	virtual bool intersects(const SphericalPolygonBase& mpoly) const;
 	
 	//! Returns whether an HalfSpace intersects with this one.
+	//! I managed to make it without sqrt or acos, so it is very fast!
 	virtual bool intersects(const HalfSpace& h) const
 	{
 		const double a = d*h.d - n*h.n;
@@ -127,6 +129,23 @@ struct HalfSpace : public SphericalRegion
 	//! The cos of cone radius
 	double d;
 };
+
+//! Return whether the halfspace defined by the vectors v1^v2 and with aperture 90 deg contains the point p.
+//! The comparison is made with a double number slightly smaller than zero to avoid floating point precision
+//! errors problems (one test fails if it is set to zero).
+inline bool sideHalfSpaceContains(const Vec3d& v1, const Vec3d& v2, const Vec3d& p)
+{
+	return (v1[1] * v2[2] - v1[2] * v2[1])*p[0] +
+			(v1[2] * v2[0] - v1[0] * v2[2])*p[1] +
+			(v1[0] * v2[1] - v1[1] * v2[0])*p[2]>=-1e-17;
+}
+
+//! Return whether the halfspace defined by the vectors v1 and v2 intersects the HalfSpace h.
+//! Can be optimized.
+inline bool sideHalfSpaceIntersects(const Vec3d& v1, const Vec3d& v2, const HalfSpace& h)
+{
+	return  h.intersects(HalfSpace(Vec3d(v2[1]*v1[2]-v2[2]*v1[1], v2[2]*v1[0]-v2[0]*v1[2], v2[0]*v1[1]-v2[1]*v1[0])));
+}
 
 //! @class AllSkySphericalRegion
 //! Special SphericalRegion for the whole sphere.
@@ -230,14 +249,6 @@ public:
 	SphericalPolygon getUnion(const SphericalPolygonBase& mpoly) const;
 	//! Return a new SphericalPolygon consisting of the subtraction of the given SphericalPolygon from this.
 	SphericalPolygon getSubtraction(const SphericalPolygonBase& mpoly) const;
-	
-protected:
-	static inline bool sideContains(const Vec3d& v1, const Vec3d& v2, const Vec3d& p)
-	{
-		return  (v2[1] * v1[2] - v2[2] * v1[1])*p[0] +
-				(v2[2] * v1[0] - v2[0] * v1[2])*p[1] +
-				(v2[0] * v1[1] - v2[1] * v1[0])*p[2] >= 0.;
-	}
 };
 
 //! @struct TextureVertex
@@ -303,6 +314,9 @@ protected:
 class SphericalPolygonTexture : public SphericalPolygon
 {
 public:
+	//! Default constructor.
+	SphericalPolygonTexture() {;}
+	
 	//! Constructor from a list of contours.
 	SphericalPolygonTexture(const QVector<QVector<TextureVertex> >& contours) {setContours(contours, SphericalPolygonBase::WindingPositive);}
 
@@ -404,7 +418,7 @@ protected:
 	//! A list of vertices of the convex contour.
 	QVector<Vec3d> contour;
 	
-	//! Tell whether the points of the passed Polygon are all outside of at least one HalfSpace
+	//! Tell whether the passed points are all outside of at least one HalfSpace defining the polygon boundary.
 	bool areAllPointsOutsideOneSide(const QVector<Vec3d>& points) const
 	{
 		for (int i=0;i<contour.size()-1;++i)
@@ -412,7 +426,7 @@ protected:
 			bool allOutside = true;
 			for (QVector<Vec3d>::const_iterator v=points.begin();v!=points.end()&& allOutside==true;++v)
 			{
-				allOutside = allOutside && !sideContains(contour.at(i), contour.at(i+1), *v);
+				allOutside = allOutside && !sideHalfSpaceContains(contour.at(i+1), contour.at(i), *v);
 			}
 			if (allOutside)
 				return true;
@@ -422,7 +436,7 @@ protected:
 		bool allOutside = true;
 		for (QVector<Vec3d>::const_iterator v=points.begin();v!=points.end()&& allOutside==true;++v)
 		{
-			allOutside = allOutside && !sideContains(contour.last(), contour.at(0), *v);
+			allOutside = allOutside && !sideHalfSpaceContains(contour.first(), contour.last(), *v);
 		}
 		if (allOutside)
 			return true;

@@ -61,6 +61,7 @@ QString StelProjector::getHtmlSummary() const
 	return QString("<h3>%1</h3><p>%2</p><b>%3</b>%4").arg(getNameI18()).arg(getDescriptionI18()).arg(q_("Maximum FOV: ")).arg(getMaxFov())+QChar(0x00B0);
 }
 
+
 /*************************************************************************
  Return a convex polygon on the sphere which includes the viewport in the 
  current frame
@@ -99,12 +100,12 @@ SphericalRegionP StelProjector::getViewportConvexPolygon(double marginX, double 
 		{
 			return SphericalRegionP(res);
 		}
-		//qDebug() << "!valid";
+		qDebug() << "!valid";
 		delete res;
 	}
-	return SphericalRegionP((SphericalRegion*)(new AllSkySphericalRegion()));
-	HalfSpace* h = new HalfSpace((e2-e3)^(e1-e3), d);
-	h->n.normalize();
+	//return SphericalRegionP((SphericalRegion*)(new AllSkySphericalRegion()));
+	const HalfSpace hp = getBoundingHalfSpace();
+	HalfSpace* h = new HalfSpace(hp);
 	return SphericalRegionP(h);
 }
 
@@ -116,6 +117,7 @@ HalfSpace StelProjector::getBoundingHalfSpace() const
 	
 	bool ok = unProject(viewportXywh[0]+0.5*viewportXywh[2], viewportXywh[1]+0.5*viewportXywh[3], result.n);
 	Q_ASSERT(ok);	// The central point should be at a valid position by definition
+	Q_ASSERT(fabs(result.n.lengthSquared()-1.)<0.000001);
 	
 	// Now need to determine the aperture
 	Vec3d e0,e1,e2,e3,e4,e5;
@@ -128,7 +130,7 @@ HalfSpace StelProjector::getBoundingHalfSpace() const
 	ok &= unProject(vp[0]+vp[2],vp[1]+vp[3]/2,e5);
 	if (!ok)
 	{
-		// Some points were in invalid positions
+		// Some points were in invalid positions, use full sky.
 		result.d = -1.;
 		return result;
 	}

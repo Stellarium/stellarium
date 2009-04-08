@@ -191,7 +191,7 @@ private:
 	//! Draw the constellation lines at the epoch given by the StelNavigator.
 	void drawLines(const StelPainter& sPainter, const StelNavigator* nav) const;
 	//! Draw the constellation art.
-	void drawArt(const StelProjectorP& prj, const StelNavigator * nav) const;
+	void drawArt(const StelPainter& sPainter) const;
 	//! Draw the constellation name labels.
 	void drawNames(const StelPainter& sPainter) const;
 	//! Draw the constellation boundaries.

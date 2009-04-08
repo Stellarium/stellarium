@@ -129,7 +129,7 @@ public:
 	//! @return a SphericalConvexPolygon or the special fullSky region if the viewport cannot be 
 	//! represented by a convex polygon (e.g. if aperture > 180 deg).
 	SphericalRegionP getViewportConvexPolygon(double marginX=0., double marginY=0.) const;
-
+	
 	//! Return a Halfspace containing the whole viewport
 	HalfSpace getBoundingHalfSpace() const;
 	
