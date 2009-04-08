@@ -33,6 +33,7 @@ private slots:
 	void testContains();
 	void testPlaneIntersect2();
 	void testSphericalPolygon();
+	void testConsistency();
 	
 	void benchmarkContains();
 	void benchmarkCheckValid();
@@ -42,6 +43,9 @@ private:
 	SphericalPolygon holySquare;
 	SphericalPolygon bigSquare;
 	SphericalPolygon smallSquare;
+	SphericalConvexPolygon bigSquareConvex;
+	SphericalConvexPolygon smallSquareConvex;
+	SphericalConvexPolygon triangle;
 };
 
 #endif // _TESTSTELSPHERICALGEOMETRY_HPP_

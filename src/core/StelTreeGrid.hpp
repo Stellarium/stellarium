@@ -20,7 +20,7 @@
 #ifndef _STELTREEGRID_HPP_
 #define _STELTREEGRID_HPP_
 
-//#define STELTREEGRIDDEBUG 1
+#define STELTREEGRIDDEBUG 1
 
 #include <vector>
 #include "StelGrid.hpp"
@@ -37,9 +37,9 @@ struct StelTreeGridNode
     
     typedef std::vector<StelTreeGridNode> Children;
     Children children;
-    
+	
 #ifdef STELTREEGRIDDEBUG
-	double draw(class StelProjector *prj, const StelGeom::ConvexS&, float opacity = 1.) const;
+	double draw(const class StelPainter* sPainter, float opacity = 1.) const;
 #endif
 };
 
@@ -77,9 +77,7 @@ private:
     unsigned int depth(const StelTreeGridNode& node) const;
     
     unsigned int maxObjects;
-    
-    // The last filter
-	QVector<HalfSpace> filter;
+
 };
 
 
@@ -113,14 +111,8 @@ void StelTreeGrid::fillIntersect(const S& s, const StelTreeGridNode& node, StelG
 template<class Shape>
 void StelTreeGrid::filterIntersect(const Shape& s)
 {
-    // first we remove all the objects that are not in the disk
-//     this->remove_if(NotIntersectPred<Shape>(s));
-//     // now we add all the objects that are in the disk, but not in the old disk
-//     fillIntersect(Difference<Shape, ConvexS>(s, filter), *this, *this);
     this->clear();
     fillIntersect(s, *this, *this);
-    
-    //filter = ConvexS(s);
 }
 
 

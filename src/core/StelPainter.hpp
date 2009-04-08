@@ -92,6 +92,12 @@ public:
 	//! TODO: Can be optimized by at least a factor of 2 by avoiding projecting more than 1 time every vertex.
 	void drawSphericalPolygon(const SphericalPolygonBase* spoly, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const Vec4f* boundaryColor=NULL) const;
 	
+	//! Draw the given SphericalRegion.
+	//! @param region The SphericalRegion to draw.
+	//! @param drawMode define whether to draw the outline or the fill or both.
+	//! @param boundaryColor use this color for drawing the boundary only if the drawMode is SphericalPolygonDrawModeFillAndBoundary.
+	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const Vec4f* boundaryColor=NULL) const;
+	
 	//! Draw a small circle arc between points start and stop with rotation point in rotCenter.
 	//! The angle between start and stop must be < 180 deg.
 	//! The algorithm ensures that the line will look smooth, even for non linear distortion.
