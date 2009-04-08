@@ -108,6 +108,13 @@ void StelButton::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
 	emit(hoverChanged(false));
 }
 
+void StelButton::mouseReleaseEvent(QGraphicsSceneMouseEvent * event)
+{
+	if (action!=NULL && !action->isCheckable())
+		setChecked(!checked);
+}
+
+
 void StelButton::updateIcon()
 {
 	if (opacity<0.)
@@ -350,6 +357,22 @@ void BottomStelBar::setGroupMargin(const QString& groupName, int left, int right
 	buttonGroups[groupName].rightMargin=right;
 	updateButtonsGroups();
 }
+
+//! Change the background of a group
+void BottomStelBar::setGroupBackground(const QString& groupName, const QPixmap& pixLeft, 
+						const QPixmap& pixRight,  const QPixmap& pixMiddle, 
+						const QPixmap& pixSingle){
+	
+	if (!buttonGroups.contains(groupName))
+		return;
+	
+	buttonGroups[groupName].pixBackgroundLeft = new QPixmap(pixLeft);
+	buttonGroups[groupName].pixBackgroundRight = new QPixmap(pixRight);
+	buttonGroups[groupName].pixBackgroundMiddle = new QPixmap(pixMiddle);
+	buttonGroups[groupName].pixBackgroundSingle = new QPixmap(pixSingle);	
+	updateButtonsGroups();
+
+}
 	
 QRectF BottomStelBar::getButtonsBoundingRect() const
 {
@@ -384,22 +407,45 @@ void BottomStelBar::updateButtonsGroups()
 		int n=0;
 		foreach (StelButton* b, iter.value().elems)
 		{
+			// We check if the group has its own background if not the case
+			// We apply a default background. 
 			if (n==0)
 			{
 				if (iter.value().elems.size()==1)
-					b->pixBackground = pixBackgroundSingle;
+				{
+					if (iter.value().pixBackgroundSingle == NULL)
+						b->pixBackground = pixBackgroundSingle;
+					else 
+						b->pixBackground = *(iter.value().pixBackgroundSingle);
+				}
 				else
-					b->pixBackground = pixBackgroundLeft;
+				{
+					if (iter.value().pixBackgroundLeft == NULL)
+						b->pixBackground = pixBackgroundLeft;
+					else 
+						b->pixBackground = *(iter.value().pixBackgroundLeft);
+				}
 			}
 			else if (n==iter.value().elems.size()-1)
 			{
 				if (iter.value().elems.size()!=1)
-					b->pixBackground = pixBackgroundSingle;
-				b->pixBackground = pixBackgroundRight;
+				{
+					if (iter.value().pixBackgroundSingle == NULL)
+						b->pixBackground = pixBackgroundSingle;
+					else 
+						b->pixBackground = *(iter.value().pixBackgroundSingle);
+				}
+				if (iter.value().pixBackgroundRight == NULL)
+					b->pixBackground = pixBackgroundRight;
+				else 
+					b->pixBackground = *(iter.value().pixBackgroundRight);	
 			}
 			else
 			{
-				b->pixBackground = pixBackgroundMiddle;
+				if (iter.value().pixBackgroundMiddle == NULL)
+					b->pixBackground = pixBackgroundMiddle;
+				else 
+					b->pixBackground = *(iter.value().pixBackgroundMiddle);
 			}
 			// Update the button pixmap
 			b->animValueChanged(0.);
