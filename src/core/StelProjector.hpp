@@ -131,7 +131,7 @@ public:
 	SphericalRegionP getViewportConvexPolygon(double marginX=0., double marginY=0.) const;
 	
 	//! Return a Halfspace containing the whole viewport
-	HalfSpace getBoundingHalfSpace() const;
+	SphericalCap getBoundingSphericalCap() const;
 	
 	//! Get size of a radian in pixels at the center of the viewport disk
 	double getPixelPerRadAtCenter(void) const {return pixelPerRad;}

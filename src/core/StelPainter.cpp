@@ -1175,7 +1175,7 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 		
 		if (drawMode==SphericalPolygonDrawModeTextureFillAndBoundary || drawMode==SphericalPolygonDrawModeTextureFill)
 		{
-			Q_ASSERT(dynamic_cast<const SphericalConvexPolygonTexture*>(cvx)!=NULL);
+			Q_ASSERT(dynamic_cast<const SphericalTexturedConvexPolygon*>(cvx)!=NULL);
 			// Need to compute textures coordinates
 			Vec2f texCoord[3];
 			const QVector<Vec2f>& tex = cvx->getTextureCoordArray();

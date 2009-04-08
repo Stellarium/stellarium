@@ -29,7 +29,7 @@
 
 
 // Returns whether a SphericalPolygon is contained into the region.
-bool HalfSpace::contains(const SphericalPolygonBase& polyBase) const
+bool SphericalCap::contains(const SphericalPolygonBase& polyBase) const
 {
 	const SphericalConvexPolygon* cvx = dynamic_cast<const SphericalConvexPolygon*>(&polyBase);
 	if (cvx!=NULL)
@@ -46,7 +46,7 @@ bool HalfSpace::contains(const SphericalPolygonBase& polyBase) const
 }
 
 // Returns whether a SphericalPolygon intersects the region.
-bool HalfSpace::intersects(const SphericalPolygonBase& polyBase) const
+bool SphericalCap::intersects(const SphericalPolygonBase& polyBase) const
 {
 	// TODO This algo returns sometimes false positives!!
 	const SphericalConvexPolygon* cvx = dynamic_cast<const SphericalConvexPolygon*>(&polyBase);
@@ -322,18 +322,18 @@ void SphericalPolygon::setContour(const QVector<Vec3d>& contour)
 
 
 ///////////////////////////////////////////////////////////////////////////////
-// Methods for SphericalPolygonTexture
+// Methods for SphericalTexturedPolygon
 ///////////////////////////////////////////////////////////////////////////////
 void APIENTRY vertexTextureCallback(void* vertexData, void* userData)
 {
-	SphericalPolygonTexture* mp = static_cast<SphericalPolygonTexture*>(((GluTessCallbackData*)userData)->thisPolygon);
-	const TextureVertex* vData = (TextureVertex*)vertexData;
+	SphericalTexturedPolygon* mp = static_cast<SphericalTexturedPolygon*>(((GluTessCallbackData*)userData)->thisPolygon);
+	const SphericalTexturedPolygon::TextureVertex* vData = (SphericalTexturedPolygon::TextureVertex*)vertexData;
 	mp->triangleVertices.append(vData->vertex);
 	mp->textureCoords.append(vData->texCoord);
 	mp->edgeFlags.append(((GluTessCallbackData*)userData)->edgeFlag);
 }
 
-void SphericalPolygonTexture::setContours(const QVector<QVector<TextureVertex> >& contours, SphericalPolygonBase::PolyWindingRule windingRule)
+void SphericalTexturedPolygon::setContours(const QVector<QVector<TextureVertex> >& contours, SphericalPolygonBase::PolyWindingRule windingRule)
 {
 	triangleVertices.clear();
 	edgeFlags.clear();
@@ -366,7 +366,7 @@ void SphericalPolygonTexture::setContours(const QVector<QVector<TextureVertex> >
 	Q_ASSERT(triangleVertices.size() == textureCoords.size());
 }
 
-void SphericalPolygonTexture::setContour(const QVector<TextureVertex>& contour)
+void SphericalTexturedPolygon::setContour(const QVector<TextureVertex>& contour)
 {
 	QVector<QVector<TextureVertex> > contours;
 	contours.append(contour);
@@ -413,12 +413,12 @@ bool SphericalConvexPolygon::checkValid() const
 }
 
 // Return the list of halfspace bounding the ConvexPolygon.
-QVector<HalfSpace> SphericalConvexPolygon::getBoundingHalfSpaces() const
+QVector<SphericalCap> SphericalConvexPolygon::getBoundingSphericalCaps() const
 {
-	QVector<HalfSpace> res;
+	QVector<SphericalCap> res;
 	for (int i=0;i<contour.size()-1;++i)
-		res << HalfSpace(contour.at(i+1)^contour.at(i));
-	res << HalfSpace(contour.first()^contour.last());
+		res << SphericalCap(contour.at(i+1)^contour.at(i));
+	res << SphericalCap(contour.first()^contour.last());
 	return res;
 }
 
@@ -524,7 +524,7 @@ Vec3d ConvexPolygon::getBarycenter() const
 // 		push_back(e0^e3);
 // 
 // 		// Warning: vectors not normalized while they should be
-// 		// In this case it works because d==0 for each HalfSpace
+// 		// In this case it works because d==0 for each SphericalCap
 // 	}
 // 	else
 // 	{
@@ -536,8 +536,8 @@ Vec3d ConvexPolygon::getBarycenter() const
 */
 
 //! Compute the intersection of the planes defined by the 2 halfspaces on the sphere (usually on 2 points) and return it in p1 and p2.
-//! If the 2 HalfSpaces don't interesect or intersect only at 1 point, false is returned and p1 and p2 are undefined
-bool planeIntersect2(const HalfSpace& h1, const HalfSpace& h2, Vec3d& p1, Vec3d& p2)
+//! If the 2 SphericalCaps don't interesect or intersect only at 1 point, false is returned and p1 and p2 are undefined
+bool planeIntersect2(const SphericalCap& h1, const SphericalCap& h2, Vec3d& p1, Vec3d& p2)
 {
 	if (!h1.intersects(h2))
 		return false;

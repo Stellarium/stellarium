@@ -183,7 +183,7 @@ protected:
 	//! @param index zone index to draw
 	//! @param is_inside whether the zone is inside the current viewport
 	//! @param rcmag_table table of magnitudes
-	//! @param prj projector to draw on
+	//! @param core core to use for drawing
 	//! @param maxMagStarName magnitude limit of stars that display labels
 	//! @param names_brightness brightness of labels
 	//! @param starFont font of labels

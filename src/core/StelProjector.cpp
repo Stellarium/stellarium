@@ -104,16 +104,16 @@ SphericalRegionP StelProjector::getViewportConvexPolygon(double marginX, double 
 		delete res;
 	}
 	//return SphericalRegionP((SphericalRegion*)(new AllSkySphericalRegion()));
-	const HalfSpace hp = getBoundingHalfSpace();
-	HalfSpace* h = new HalfSpace(hp);
+	const SphericalCap hp = getBoundingSphericalCap();
+	SphericalCap* h = new SphericalCap(hp);
 	return SphericalRegionP(h);
 }
 
 
 // Return a Halfspace containing the whole viewport
-HalfSpace StelProjector::getBoundingHalfSpace() const
+SphericalCap StelProjector::getBoundingSphericalCap() const
 {
-	HalfSpace result;
+	SphericalCap result;
 	
 	bool ok = unProject(viewportXywh[0]+0.5*viewportXywh[2], viewportXywh[1]+0.5*viewportXywh[3], result.n);
 	Q_ASSERT(ok);	// The central point should be at a valid position by definition

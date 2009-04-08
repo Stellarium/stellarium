@@ -30,7 +30,7 @@ class SphericalPolygon;
 class SphericalPolygonBase;
 class ConvexRegion;
 class SphericalRegion;
-class HalfSpace;
+class SphericalCap;
 
 //! @file StelSphereGeometry.hpp
 //! Define all SphericalGeometry primitives as well as the SphericalRegionP type.
@@ -67,29 +67,30 @@ public:
 	//! Equivalent to contains() for a point.
 	bool intersects(const Vec3d& p) const {return contains(p);}
 	
-	//! Return the list of HalfSpace bounding the ConvexPolygon.
-	virtual QVector<HalfSpace> getBoundingHalfSpaces() const = 0;
+	//! Return the list of SphericalCap bounding the ConvexPolygon.
+	virtual QVector<SphericalCap> getBoundingSphericalCaps() const = 0;
 };
 
-//! @class HalfSpace
-//! A HalfSpace is defined by a direction and an aperture.
+//! @class SphericalCap
+//! A SphericalCap is defined by a direction and an aperture.
 //! It forms a cone from the center of the Coordinate frame with a radius d.
-struct HalfSpace : public SphericalRegion
+//! It is a disc on the sphere, a region above a circle on the unit sphere.
+struct SphericalCap : public SphericalRegion
 {
-	//! Construct a HalfSpace with a 90 deg aperture and an undefined direction.
-	HalfSpace() : d(0) {;}
+	//! Construct a SphericalCap with a 90 deg aperture and an undefined direction.
+	SphericalCap() : d(0) {;}
 	
-	//! Construct a HalfSpace from its direction and assumes a 90 deg aperture.
+	//! Construct a SphericalCap from its direction and assumes a 90 deg aperture.
 	//! @param an a unit vector indicating the direction.
-	HalfSpace(const Vec3d& an) : n(an), d(0) {;}
+	SphericalCap(const Vec3d& an) : n(an), d(0) {;}
 	
-	//! Construct a HalfSpace from its direction and aperture.
+	//! Construct a SphericalCap from its direction and aperture.
 	//! @param an a unit vector indicating the direction.
 	//! @param ar cosinus of the aperture.
-	HalfSpace(const Vec3d& an, double ar) : n(an), d(ar) {Q_ASSERT(d==0 || std::fabs(n.lengthSquared()-1.)<0.0000001);}
+	SphericalCap(const Vec3d& an, double ar) : n(an), d(ar) {Q_ASSERT(d==0 || std::fabs(n.lengthSquared()-1.)<0.0000001);}
 	
 	//! Copy constructor.
-	HalfSpace(const HalfSpace& other) : SphericalRegion(), n(other.n), d(other.d) {;}
+	SphericalCap(const SphericalCap& other) : SphericalRegion(), n(other.n), d(other.d) {;}
 	
 	//! Get the area of the intersection of the halfspace on the sphere in steradian.
 	virtual double getArea() const {return 2.*M_PI*(1.-d);}
@@ -105,14 +106,14 @@ struct HalfSpace : public SphericalRegion
 	virtual bool contains(const Vec3d &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.)<0.0000001);return (v*n>=d);}
 	
 	//! Comparison operator.
-	bool operator==(const HalfSpace& other) const {return (n==other.n && d==other.d);}
+	bool operator==(const SphericalCap& other) const {return (n==other.n && d==other.d);}
 
 	//! Returns whether a SphericalPolygon intersects with the region.
 	virtual bool intersects(const SphericalPolygonBase& mpoly) const;
 	
-	//! Returns whether an HalfSpace intersects with this one.
+	//! Returns whether an SphericalCap intersects with this one.
 	//! I managed to make it without sqrt or acos, so it is very fast!
-	virtual bool intersects(const HalfSpace& h) const
+	virtual bool intersects(const SphericalCap& h) const
 	{
 		const double a = d*h.d - n*h.n;
 		return d+h.d<=0. || a<=0. || (a<=1. && a*a < (1.-d*d)*(1.-h.d*h.d));
@@ -121,8 +122,8 @@ struct HalfSpace : public SphericalRegion
 	//! Returns whether a SphericalPolygon is contained into the region.
 	virtual bool contains(const SphericalPolygonBase& poly) const;
 	
-	//! Return the list of HalfSpace bounding the region.
-	virtual QVector<HalfSpace> getBoundingHalfSpaces() const {QVector<HalfSpace> res; res << *this; return res;}
+	//! Return the list of SphericalCap bounding the region.
+	virtual QVector<SphericalCap> getBoundingSphericalCaps() const {QVector<SphericalCap> res; res << *this; return res;}
 	
 	//! The direction unit vector. Only if d==0, this vector doesn't need to be unit.
 	Vec3d n;
@@ -140,11 +141,11 @@ inline bool sideHalfSpaceContains(const Vec3d& v1, const Vec3d& v2, const Vec3d&
 			(v1[0] * v2[1] - v1[1] * v2[0])*p[2]>=-1e-17;
 }
 
-//! Return whether the halfspace defined by the vectors v1 and v2 intersects the HalfSpace h.
+//! Return whether the halfspace defined by the vectors v1 and v2 intersects the SphericalCap h.
 //! Can be optimized.
-inline bool sideHalfSpaceIntersects(const Vec3d& v1, const Vec3d& v2, const HalfSpace& h)
+inline bool sideHalfSpaceIntersects(const Vec3d& v1, const Vec3d& v2, const SphericalCap& h)
 {
-	return  h.intersects(HalfSpace(Vec3d(v2[1]*v1[2]-v2[2]*v1[1], v2[2]*v1[0]-v2[0]*v1[2], v2[0]*v1[1]-v2[1]*v1[0])));
+	return  h.intersects(SphericalCap(Vec3d(v2[1]*v1[2]-v2[2]*v1[1], v2[2]*v1[0]-v2[0]*v1[2], v2[0]*v1[1]-v2[1]*v1[0])));
 }
 
 //! @class AllSkySphericalRegion
@@ -172,8 +173,8 @@ public:
 	//! Returns whether a SphericalPolygon is contained into the region.
 	virtual bool contains(const SphericalPolygonBase& poly) const {return true;}
 	
-	//! Return the list of HalfSpace bounding the region.
-	virtual QVector<HalfSpace> getBoundingHalfSpaces() const {QVector<HalfSpace> res; res << HalfSpace(Vec3d(1,0,0), -2); return res;}
+	//! Return the list of SphericalCap bounding the region.
+	virtual QVector<SphericalCap> getBoundingSphericalCaps() const {QVector<SphericalCap> res; res << SphericalCap(Vec3d(1,0,0), -2); return res;}
 };
 
 
@@ -183,7 +184,7 @@ public:
 class SphericalPolygonBase : public SphericalRegion
 {
 public:
-  	//! @enum WindingRule
+  	//! @enum PolyWindingRule
 	//! Define the possible winding rules to use when setting the contours for a polygon.
 	enum PolyWindingRule
 	{
@@ -228,8 +229,8 @@ public:
 	//! Returns whether a SphericalPolygon is contained into the region.
 	virtual bool contains(const SphericalPolygonBase& poly) const {Q_ASSERT(0); return false;}
 	
-	//! Return the list of HalfSpace bounding the ConvexPolygon.
-	virtual QVector<HalfSpace> getBoundingHalfSpaces() const {Q_ASSERT(0); return QVector<HalfSpace>();}
+	//! Return the list of SphericalCap bounding the ConvexPolygon.
+	virtual QVector<SphericalCap> getBoundingSphericalCaps() const {Q_ASSERT(0); return QVector<SphericalCap>();}
 	
 	//! Load the SphericalPolygon information from a QVariant.
 	//! The QVariant should contain a list of contours, each contours being a list of ra,dec points
@@ -249,14 +250,6 @@ public:
 	SphericalPolygon getUnion(const SphericalPolygonBase& mpoly) const;
 	//! Return a new SphericalPolygon consisting of the subtraction of the given SphericalPolygon from this.
 	SphericalPolygon getSubtraction(const SphericalPolygonBase& mpoly) const;
-};
-
-//! @struct TextureVertex
-//! A container for 3D vertex + associated texture coordinates
-struct TextureVertex
-{
-	Vec3d vertex;
-	Vec2f texCoord;
 };
 
 //! @class SphericalPolygon
@@ -309,19 +302,27 @@ protected:
 	QVector<bool> edgeFlags;
 };
 
-//! @class SphericalPolygonTexture
+//! @class SphericalTexturedPolygon
 //! An extension of SphericalPolygon with addition of texture coordinates.
-class SphericalPolygonTexture : public SphericalPolygon
+class SphericalTexturedPolygon : public SphericalPolygon
 {
 public:
+	//! @struct TextureVertex
+	//! A container for 3D vertex + associated texture coordinates
+	struct TextureVertex
+	{
+		Vec3d vertex;
+		Vec2f texCoord;
+	};
+	
 	//! Default constructor.
-	SphericalPolygonTexture() {;}
+	SphericalTexturedPolygon() {;}
 	
 	//! Constructor from a list of contours.
-	SphericalPolygonTexture(const QVector<QVector<TextureVertex> >& contours) {setContours(contours, SphericalPolygonBase::WindingPositive);}
+	SphericalTexturedPolygon(const QVector<QVector<TextureVertex> >& contours) {setContours(contours, SphericalPolygonBase::WindingPositive);}
 
 	//! Constructor from one contour.
-	SphericalPolygonTexture(const QVector<TextureVertex>& contour) {setContour(contour);}
+	SphericalTexturedPolygon(const QVector<TextureVertex>& contour) {setContour(contour);}
 	
 	//! Return an openGL compatible array of texture coords to be used using vertex arrays.
 	virtual QVector<Vec2f> getTextureCoordArray() const {return textureCoords;}
@@ -333,7 +334,7 @@ public:
 	virtual void setContours(const QVector<QVector<TextureVertex> >& contours, SphericalPolygonBase::PolyWindingRule windingRule=SphericalPolygonBase::WindingPositive);
 	
 	//! Set a single contour defining the SphericalPolygon.
-	//! @param contours a contour defining the polygon area.
+	//! @param contour a contour defining the polygon area.
 	virtual void setContour(const QVector<TextureVertex>& contour);
 
 private:
@@ -388,7 +389,7 @@ public:
 	}
 	
 	//! Set a single contour defining the SphericalPolygon.
-	//! @param contours a contour defining the polygon area.
+	//! @param acontour a contour defining the polygon area.
 	virtual void setContour(const QVector<Vec3d>& acontour) {contour=acontour;}
 	
 	//! Get the contours defining the SphericalConvexPolygon.
@@ -412,13 +413,13 @@ public:
 	bool checkValid() const;
 	
 	//! Return the list of halfspace bounding the ConvexPolygon.
-	QVector<HalfSpace> getBoundingHalfSpaces() const;
+	QVector<SphericalCap> getBoundingSphericalCaps() const;
 	
 protected:
 	//! A list of vertices of the convex contour.
 	QVector<Vec3d> contour;
 	
-	//! Tell whether the passed points are all outside of at least one HalfSpace defining the polygon boundary.
+	//! Tell whether the passed points are all outside of at least one SphericalCap defining the polygon boundary.
 	bool areAllPointsOutsideOneSide(const QVector<Vec3d>& points) const
 	{
 		for (int i=0;i<contour.size()-1;++i)
@@ -446,20 +447,20 @@ protected:
 	}
 };
 
-//! @class SphericalConvexPolygonTexture
+//! @class SphericalTexturedConvexPolygon
 //! Extension of SphericalConvexPolygon for textured polygon.
-class SphericalConvexPolygonTexture : public SphericalConvexPolygon
+class SphericalTexturedConvexPolygon : public SphericalConvexPolygon
 {
 public:
 	//! Default constructor.
-	SphericalConvexPolygonTexture() {;}
+	SphericalTexturedConvexPolygon() {;}
 
 	//! Constructor from one contour.
-	SphericalConvexPolygonTexture(const QVector<Vec3d>& contour, const QVector<Vec2f>& texCoord) {setContour(contour, texCoord);}
+	SphericalTexturedConvexPolygon(const QVector<Vec3d>& contour, const QVector<Vec2f>& texCoord) {setContour(contour, texCoord);}
 	
 	//! Special constructor for quads.
 	//! Use the 4 textures corners for the 4 vertices.
-	SphericalConvexPolygonTexture(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3) 
+	SphericalTexturedConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3) 
 	{
 		contour << e0 << e1 << e2 << e3;
 		textureCoords << Vec2f(0.f, 0.f) << Vec2f(1.f, 0.f) << Vec2f(1.f, 1.f) << Vec2f(0.f, 1.f);
@@ -469,7 +470,8 @@ public:
 	virtual QVector<Vec2f> getTextureCoordArray() const {return textureCoords;}
 	
 	//! Set a single contour defining the SphericalPolygon.
-	//! @param contours a contour defining the polygon area.
+	//! @param acontour a contour defining the polygon area.
+	//! @param texCoord a list of texture coordinates matching the vertices of the contour.
 	virtual void setContour(const QVector<Vec3d>& acontour, const QVector<Vec2f>& texCoord) {contour=acontour; textureCoords=texCoord;}
 	
 protected:
@@ -479,8 +481,8 @@ protected:
 };
 
 //! Compute the intersection of 2 halfspaces on the sphere (usually on 2 points) and return it in p1 and p2.
-//! If the 2 HalfSpace don't interesect or intersect only at 1 point, false is returned and p1 and p2 are undefined
-bool planeIntersect2(const HalfSpace& h1, const HalfSpace& h2, Vec3d& p1, Vec3d& p2);
+//! If the 2 SphericalCap don't interesect or intersect only at 1 point, false is returned and p1 and p2 are undefined
+bool planeIntersect2(const SphericalCap& h1, const SphericalCap& h2, Vec3d& p1, Vec3d& p2);
 
 
 #endif // _STELSPHEREGEOMETRY_HPP_

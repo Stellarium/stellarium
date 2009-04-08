@@ -992,7 +992,7 @@ void StelApp::draw()
 // 	c1[3].texCoord.set(0,1);
 // 	contours.append(c1);
 // 
-//  	SphericalPolygonTexture p(contours);
+//  	SphericalTexturedPolygon p(contours);
 // 	static StelTextureSP ttex;
 // 	if (!ttex)
 // 	{
@@ -1035,7 +1035,7 @@ void StelApp::draw()
 // 	StelUtils::spheToRect(-0.5, 0.5, cv1[3]);
 // 	QVector<Vec2f> tex;
 // 	tex << Vec2f(0,0) << Vec2f(1,0) << Vec2f(1,1) << Vec2f(0,1);
-// 	SphericalConvexPolygonTexture cvx(cv1, tex);
+// 	SphericalTexturedConvexPolygon cvx(cv1, tex);
 // 	{
 // 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 // 		glEnable(GL_BLEND);

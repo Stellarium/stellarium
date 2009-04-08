@@ -29,7 +29,7 @@ class TestStelSphericalGeometry : public QObject
 Q_OBJECT
 private slots:
 	void initTestCase();
-	void testHalfSpace();
+	void testSphericalCap();
 	void testContains();
 	void testPlaneIntersect2();
 	void testSphericalPolygon();
@@ -37,7 +37,7 @@ private slots:
 	
 	void benchmarkContains();
 	void benchmarkCheckValid();
-	void benchmarkHalfspace();
+	void benchmarkSphericalCap();
 	
 private:
 	SphericalPolygon holySquare;

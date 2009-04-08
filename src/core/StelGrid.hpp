@@ -32,7 +32,7 @@ public:
     virtual ~StelGrid() {}
 
 	//! Preselect all the objects in the given area
-    virtual void filterIntersect(const QVector<HalfSpace>& s) {;}
+    virtual void filterIntersect(const QVector<SphericalCap>& s) {;}
     
 	//! Get all the objects loaded into the grid structure
 	virtual std::vector<StelGridObject*> getAllObjects() = 0;

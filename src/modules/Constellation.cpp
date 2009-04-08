@@ -108,14 +108,14 @@ void Constellation::drawOptim(const StelPainter& sPainter, const StelNavigator* 
 	Vec3d star2;
 	Vec3d dummy;
 	Vec3d v;
-	const HalfSpace viewportHalfspace = sPainter.getProjector()->getBoundingHalfSpace();
+	const SphericalCap viewportHalfspace = sPainter.getProjector()->getBoundingSphericalCap();
 	for (unsigned int i=0;i<numberOfSegments;++i)
 	{
 		star1=asterism[2*i]->getJ2000EquatorialPos(nav);
 		star2=asterism[2*i+1]->getJ2000EquatorialPos(nav);
 		v = star1^star2;
 		v.normalize();
-		if (viewportHalfspace.d<0. || planeIntersect2(viewportHalfspace, HalfSpace(v), dummy, dummy)!=false)
+		if (viewportHalfspace.d<0. || planeIntersect2(viewportHalfspace, SphericalCap(v), dummy, dummy)!=false)
 		{
 			star1.normalize();
 			star2.normalize();

@@ -319,7 +319,7 @@ int StelGeodesicGrid::getZoneNumberForPoint(const Vec3d &v,int searchLevel) cons
 
 
 // First iteration on the icosahedron base triangles
-void StelGeodesicGrid::searchZones(const QVector<HalfSpace>& convex,
+void StelGeodesicGrid::searchZones(const QVector<SphericalCap>& convex,
                                int **inside_list,int **border_list,
                                int maxSearchLevel) const
 {
@@ -339,7 +339,7 @@ void StelGeodesicGrid::searchZones(const QVector<HalfSpace>& convex,
 #endif
 	for (int h=0;h<convex.size();h++)
 	{
-		const HalfSpace& half_space(convex.at(h));
+		const SphericalCap& half_space(convex.at(h));
 		for (int i=0;i<12;i++)
 		{
 			corner_inside[i][h] = half_space.contains(icosahedron_corners[i]);
@@ -361,8 +361,8 @@ void StelGeodesicGrid::searchZones(const QVector<HalfSpace>& convex,
 }
 
 void StelGeodesicGrid::searchZones(int lev,int index,
-								   const QVector<HalfSpace>&convex,
-                               const int *indexOfUsedHalfSpaces,
+								   const QVector<SphericalCap>&convex,
+                               const int *indexOfUsedSphericalCaps,
                                const int halfSpacesUsed,
                                const bool *corner0_inside,
                                const bool *corner1_inside,
@@ -378,19 +378,19 @@ void StelGeodesicGrid::searchZones(int lev,int index,
 	int halfs_used_count = 0;
 	for (int h=0;h<halfSpacesUsed;h++)
 	{
-		const int i = indexOfUsedHalfSpaces[h];
+		const int i = indexOfUsedSphericalCaps[h];
 		if (!corner0_inside[i] && !corner1_inside[i] && !corner2_inside[i])
 		{
-			// totally outside this HalfSpace
+			// totally outside this SphericalCap
 			return;
 		}
 		else if (corner0_inside[i] && corner1_inside[i] && corner2_inside[i])
 		{
-			// totally inside this HalfSpace
+			// totally inside this SphericalCap
 		}
 		else
 		{
-			// on the border of this HalfSpace
+			// on the border of this SphericalCap
 			halfs_used[halfs_used_count++] = i;
 		}
 	}
@@ -423,7 +423,7 @@ void StelGeodesicGrid::searchZones(int lev,int index,
 			for (int h=0;h<halfs_used_count;h++)
 			{
 				const int i = halfs_used[h];
-				const HalfSpace& half_space(convex.at(i));
+				const SphericalCap& half_space(convex.at(i));
 				edge0_inside[i] = half_space.contains(t.e0);
 				edge1_inside[i] = half_space.contains(t.e1);
 				edge2_inside[i] = half_space.contains(t.e2);
@@ -459,7 +459,7 @@ void StelGeodesicGrid::searchZones(int lev,int index,
 /*************************************************************************
  Return a search result matching the given spatial region
 *************************************************************************/
-const GeodesicSearchResult* StelGeodesicGrid::search(const QVector<HalfSpace>& convex, int maxSearchLevel) const
+const GeodesicSearchResult* StelGeodesicGrid::search(const QVector<SphericalCap>& convex, int maxSearchLevel) const
 {
 	// Try to use the cached version
 	if (maxSearchLevel==lastMaxSearchlevel && convex==lastSearchRegion)
@@ -497,7 +497,7 @@ GeodesicSearchResult::~GeodesicSearchResult(void)
 	delete[] zones;
 }
 
-void GeodesicSearchResult::search(const QVector<HalfSpace>& convex, int maxSearchLevel)
+void GeodesicSearchResult::search(const QVector<SphericalCap>& convex, int maxSearchLevel)
 {
 	for (int i=grid.getMaxLevel();i>=0;i--)
 	{

@@ -261,7 +261,7 @@ void SkyGrid::draw(const StelCore* core) const
 	}
 	
 	// Get the bounding halfspace
-	const HalfSpace viewPortHalfSpace = prj->getBoundingHalfSpace();
+	const SphericalCap viewPortSphericalCap = prj->getBoundingSphericalCap();
 	
 	// Compute the first grid starting point. This point is close to the center of the screen
 	// and lays at the intersection of a meridien and a parallel
@@ -271,7 +271,7 @@ void SkyGrid::draw(const StelCore* core) const
 	StelUtils::spheToRect(lon2, lat2, firstPoint);
 	firstPoint.normalize();
 
-	Q_ASSERT(viewPortHalfSpace.contains(firstPoint));
+	Q_ASSERT(viewPortSphericalCap.contains(firstPoint));
 	
 	// Initialize a painter and set openGL state	
 	StelPainter sPainter(prj);
@@ -304,7 +304,7 @@ void SkyGrid::draw(const StelCore* core) const
 	
 	/////////////////////////////////////////////////
 	// Draw all the meridians (great circles)
-	HalfSpace meridianHalfSpace(Vec3d(1,0,0), 0);
+	SphericalCap meridianSphericalCap(Vec3d(1,0,0), 0);
 	Mat4d rotLon = Mat4d::zrotation(gridStepMeridianRad);
 	Vec3d fpt = firstPoint;
 	Vec3d p1, p2;
@@ -315,14 +315,14 @@ void SkyGrid::draw(const StelCore* core) const
 		StelUtils::rectToSphe(&lon2, &lat2, fpt);
 		userData.raAngle = lon2;
 		
-		meridianHalfSpace.n = fpt^Vec3d(0,0,1);
-		meridianHalfSpace.n.normalize();
-		if (!planeIntersect2(viewPortHalfSpace, meridianHalfSpace, p1, p2))
+		meridianSphericalCap.n = fpt^Vec3d(0,0,1);
+		meridianSphericalCap.n.normalize();
+		if (!planeIntersect2(viewPortSphericalCap, meridianSphericalCap, p1, p2))
 		{
-			if (viewPortHalfSpace.d<meridianHalfSpace.d && viewPortHalfSpace.contains(meridianHalfSpace.n))
+			if (viewPortSphericalCap.d<meridianSphericalCap.d && viewPortSphericalCap.contains(meridianSphericalCap.n))
 			{
 				// The meridian is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
-				Mat4d rotLon120 = Mat4d::rotation(meridianHalfSpace.n, 120.*M_PI/180.);
+				Mat4d rotLon120 = Mat4d::rotation(meridianSphericalCap.n, 120.*M_PI/180.);
 				Vec3d rotFpt=fpt;
 				rotFpt.transfo4d(rotLon120);
 				Vec3d rotFpt2=rotFpt;
@@ -339,7 +339,7 @@ void SkyGrid::draw(const StelCore* core) const
 		
 		Vec3d middlePoint = p1+p2;
 		middlePoint.normalize();
-		if (!viewPortHalfSpace.contains(middlePoint))
+		if (!viewPortSphericalCap.contains(middlePoint))
 			middlePoint*=-1.;
 				
 		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
@@ -359,14 +359,14 @@ void SkyGrid::draw(const StelCore* core) const
 			StelUtils::rectToSphe(&lon2, &lat2, fpt);
 			userData.raAngle = lon2;
 			
-			meridianHalfSpace.n = fpt^Vec3d(0,0,1);
-			meridianHalfSpace.n.normalize();
-			if (!planeIntersect2(viewPortHalfSpace, meridianHalfSpace, p1, p2))
+			meridianSphericalCap.n = fpt^Vec3d(0,0,1);
+			meridianSphericalCap.n.normalize();
+			if (!planeIntersect2(viewPortSphericalCap, meridianSphericalCap, p1, p2))
 				break;
 			
 			Vec3d middlePoint = p1+p2;
 			middlePoint.normalize();
-			if (!viewPortHalfSpace.contains(middlePoint))
+			if (!viewPortSphericalCap.contains(middlePoint))
 				middlePoint*=-1;
 			
 			sPainter.drawSmallCircleArc(p1, middlePoint, Vec3d(0), viewportEdgeIntersectCallback, &userData);
@@ -378,7 +378,7 @@ void SkyGrid::draw(const StelCore* core) const
 	
 	/////////////////////////////////////////////////
 	// Draw all the parallels (small circles)
-	HalfSpace parallelHalfSpace(Vec3d(0,0,1), 0);
+	SphericalCap parallelSphericalCap(Vec3d(0,0,1), 0);
 	rotLon = Mat4d::rotation(firstPoint^Vec3d(0,0,1), gridStepParallelRad);
 	fpt = firstPoint;
 	maxNbIter = (int)(M_PI/gridStepParallelRad)-1;
@@ -387,15 +387,15 @@ void SkyGrid::draw(const StelCore* core) const
 		StelUtils::rectToSphe(&lon2, &lat2, fpt);
 		userData.text = StelUtils::radToDmsStrAdapt(lat2);
 		
-		parallelHalfSpace.d = fpt[2];
-		if (parallelHalfSpace.d>0.9999999)
+		parallelSphericalCap.d = fpt[2];
+		if (parallelSphericalCap.d>0.9999999)
 			break;
 		
-		const Vec3d rotCenter(0,0,parallelHalfSpace.d);
-		if (!planeIntersect2(viewPortHalfSpace, parallelHalfSpace, p1, p2))
+		const Vec3d rotCenter(0,0,parallelSphericalCap.d);
+		if (!planeIntersect2(viewPortSphericalCap, parallelSphericalCap, p1, p2))
 		{
-			if ((viewPortHalfSpace.d<parallelHalfSpace.d && viewPortHalfSpace.contains(parallelHalfSpace.n))
-				|| (viewPortHalfSpace.d<-parallelHalfSpace.d && viewPortHalfSpace.contains(-parallelHalfSpace.n)))
+			if ((viewPortSphericalCap.d<parallelSphericalCap.d && viewPortSphericalCap.contains(parallelSphericalCap.n))
+				|| (viewPortSphericalCap.d<-parallelSphericalCap.d && viewPortSphericalCap.contains(-parallelSphericalCap.n)))
 			{
 				// The parallel is fully included in the viewport, draw it in 3 sub-arcs to avoid lengths >= 180 deg
 				Mat4d rotLon120 = Mat4d::rotation(Vec3d(0,0,1), 120.*M_PI/180.);
@@ -418,7 +418,7 @@ void SkyGrid::draw(const StelCore* core) const
 		middlePoint.normalize();
 		middlePoint*=(p1-rotCenter).length();
 		middlePoint+=rotCenter;
-		if (!viewPortHalfSpace.contains(middlePoint))
+		if (!viewPortSphericalCap.contains(middlePoint))
 		{
 			middlePoint-=rotCenter;
 			middlePoint*=-1.;
@@ -441,12 +441,12 @@ void SkyGrid::draw(const StelCore* core) const
 			StelUtils::rectToSphe(&lon2, &lat2, fpt);
 			userData.text = StelUtils::radToDmsStrAdapt(lat2);
 			
-			parallelHalfSpace.d = fpt[2];
-			const Vec3d rotCenter(0,0,parallelHalfSpace.d);
-			if (!planeIntersect2(viewPortHalfSpace, parallelHalfSpace, p1, p2))
+			parallelSphericalCap.d = fpt[2];
+			const Vec3d rotCenter(0,0,parallelSphericalCap.d);
+			if (!planeIntersect2(viewPortSphericalCap, parallelSphericalCap, p1, p2))
 			{
-				if ((viewPortHalfSpace.d<parallelHalfSpace.d && viewPortHalfSpace.contains(parallelHalfSpace.n))
-					 || (viewPortHalfSpace.d<-parallelHalfSpace.d && viewPortHalfSpace.contains(-parallelHalfSpace.n)))
+				if ((viewPortSphericalCap.d<parallelSphericalCap.d && viewPortSphericalCap.contains(parallelSphericalCap.n))
+					 || (viewPortSphericalCap.d<-parallelSphericalCap.d && viewPortSphericalCap.contains(-parallelSphericalCap.n)))
 				{
 					// The parallel is fully included in the viewport, draw it in 3 sub-arcs to avoid lengths >= 180 deg
 					Mat4d rotLon120 = Mat4d::rotation(Vec3d(0,0,1), 120.*M_PI/180.);
@@ -469,7 +469,7 @@ void SkyGrid::draw(const StelCore* core) const
 			middlePoint.normalize();
 			middlePoint*=(p1-rotCenter).length();
 			middlePoint+=rotCenter;
-			if (!viewPortHalfSpace.contains(middlePoint))
+			if (!viewPortSphericalCap.contains(middlePoint))
 			{
 				middlePoint-=rotCenter;
 				middlePoint*=-1.;
@@ -525,7 +525,7 @@ void SkyLine::draw(StelCore *core) const
 	StelProjectorP prj = core->getProjection(frameType);
 	
 	// Get the bounding halfspace
-	const HalfSpace viewPortHalfSpace = prj->getBoundingHalfSpace();
+	const SphericalCap viewPortSphericalCap = prj->getBoundingSphericalCap();
 	
 	// Initialize a painter and set openGL state	
 	StelPainter sPainter(prj);
@@ -546,21 +546,21 @@ void SkyLine::draw(StelCore *core) const
 	
 	/////////////////////////////////////////////////
 	// Draw the line
-	HalfSpace meridianHalfSpace(Vec3d(0,0,1), 0);
+	SphericalCap meridianSphericalCap(Vec3d(0,0,1), 0);
 	Vec3d fpt(1,0,0);
 	if (line_type==MERIDIAN)
 	{
-		meridianHalfSpace.n.set(0,1,0);
+		meridianSphericalCap.n.set(0,1,0);
 	}
 		
 	Vec3d p1, p2;
-	if (!planeIntersect2(viewPortHalfSpace, meridianHalfSpace, p1, p2))
+	if (!planeIntersect2(viewPortSphericalCap, meridianSphericalCap, p1, p2))
 	{
-		if ((viewPortHalfSpace.d<meridianHalfSpace.d && viewPortHalfSpace.contains(meridianHalfSpace.n))
-		    || (viewPortHalfSpace.d<-meridianHalfSpace.d && viewPortHalfSpace.contains(-meridianHalfSpace.n)))
+		if ((viewPortSphericalCap.d<meridianSphericalCap.d && viewPortSphericalCap.contains(meridianSphericalCap.n))
+		    || (viewPortSphericalCap.d<-meridianSphericalCap.d && viewPortSphericalCap.contains(-meridianSphericalCap.n)))
 		{
 			// The meridian is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
-			Mat4d rotLon120 = Mat4d::rotation(meridianHalfSpace.n, 120.*M_PI/180.);
+			Mat4d rotLon120 = Mat4d::rotation(meridianSphericalCap.n, 120.*M_PI/180.);
 			Vec3d rotFpt=fpt;
 			rotFpt.transfo4d(rotLon120);
 			Vec3d rotFpt2=rotFpt;
@@ -576,7 +576,7 @@ void SkyLine::draw(StelCore *core) const
 	
 	Vec3d middlePoint = p1+p2;
 	middlePoint.normalize();
-	if (!viewPortHalfSpace.contains(middlePoint))
+	if (!viewPortSphericalCap.contains(middlePoint))
 		middlePoint*=-1.;
 			
 	// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
