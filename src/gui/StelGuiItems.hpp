@@ -100,6 +100,7 @@ protected:
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
+	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 private slots:
 	void animValueChanged(qreal value);	
 private:
@@ -170,6 +171,11 @@ public:
 	//! Set the margin at the left and right of a button group in pixels
 	void setGroupMargin(const QString& groupName, int left, int right);
 	
+	//! Set the background of a group
+	void setGroupBackground(const QString& groupName, const QPixmap& pixLeft=QPixmap(), 
+							const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(), 
+							const QPixmap& pixSingle=QPixmap());
+	
 	//! Set the color for all the sub elements
 	void setColor(const QColor& c);
 	
@@ -180,6 +186,7 @@ public:
 	void setFlagShowTime(bool b) {flagShowTime=b;}
 	//! Set whether location info must be displayed in the bottom bar
 	void setFlagShowLocation(bool b) {flagShowLocation=b;}
+
 
 private slots:	
 	//! Update the help label when a button is hovered
@@ -196,13 +203,20 @@ private:
 	
 	struct ButtonGroup
 	{
-		ButtonGroup() : leftMargin(0), rightMargin(0) {;}
+		ButtonGroup() : leftMargin(0), rightMargin(0), 
+						pixBackgroundLeft(NULL), pixBackgroundRight(NULL),
+						pixBackgroundMiddle(NULL), pixBackgroundSingle(NULL) {;}
 		//! Elements of the group
 		QList<StelButton*> elems;
 		//! Left margin size in pixel
 		int leftMargin;
 		//! Right margin size in pixel
 		int rightMargin;
+		//! Background Images;
+		QPixmap* pixBackgroundLeft;
+		QPixmap* pixBackgroundRight;
+		QPixmap* pixBackgroundMiddle;
+		QPixmap* pixBackgroundSingle;
 	};
 	
 	QMap<QString, ButtonGroup> buttonGroups;

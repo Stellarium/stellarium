@@ -484,7 +484,6 @@ void StelGui::init()
 	b->setChecked(getGuiActions("actionSwitch_Equatorial_Mount")->isChecked());
 	buttonBar->addButton(b, "060-othersGroup");
 	
-	
 	pxmapOn = QPixmap(":/graphicGui/gui/btGotoSelectedObject-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btGotoSelectedObject-off.png");
 	buttonGotoSelectedObject = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionGoto_Selected_Object"));
@@ -498,10 +497,6 @@ void StelGui::init()
 	pxmapOn = QPixmap(":/graphicGui/gui/btFullScreen-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btFullScreen-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionSet_Full_Screen_Global"));
-	buttonBar->addButton(b, "060-othersGroup");
-	
-	pxmapOn = QPixmap(":/graphicGui/gui/btQuit.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOn, pxmapGlow32x32, getGuiActions("actionQuit_Global"));
 	buttonBar->addButton(b, "060-othersGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeRewind-on.png");
@@ -525,6 +520,10 @@ void StelGui::init()
 	buttonBar->addButton(buttonTimeForward, "070-timeGroup");
 
 	buttonBar->setGroupMargin("070-timeGroup", 32, 0);
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btQuit.png");
+	b = new StelButton(NULL, pxmapOn, pxmapOn, pxmapGlow32x32, getGuiActions("actionQuit_Global"));
+	buttonBar->addButton(b, "080-quitGroup");
 	
 	// The path drawn around the button bars
 	buttonBarPath = new StelBarsPath(NULL);
