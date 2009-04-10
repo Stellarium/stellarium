@@ -9,6 +9,7 @@
 namespace MotionTestImpl
 {
 	const double coeff = 86400.0f;
+	double sign(double x);
 
 	class CoordCalc
 	{
@@ -60,12 +61,12 @@ namespace MotionTestImpl
 	class StraightCoordCalc : public CoordCalc
 	{
 	public:
-		StraightCoordCalc(const Vec3d& s, double d = 5.0f, double direction = 1.0f);
+		StraightCoordCalc(const Vec3d& s, double dur, double direction = 1.0f);
 
 		virtual Vec3d calcCoord(double t);        
 	private:
 		Vec3d mStart;
-		double delta;
+		double mDur;
 		double mDirection;
 	};
 

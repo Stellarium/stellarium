@@ -97,7 +97,7 @@ namespace MotionTestImpl
 
 				//delta = q * dur / (1 - q);
 				//delta = dur / pow(1.0 - q, 10.0) - dur;
-				delta = dur * cPi / acos(2.0 * q - 1.0) - dur;
+				delta = dur * cPi / acos( 2.0 * pow(q, 0.2) - 1.0) - dur;				
 				
 				straightCalc = new DurationStraightCoordCalc(start, dur + delta, 1.0f);
 				
@@ -202,7 +202,7 @@ namespace MotionTestImpl
 					(
 						new LocalSystemCoordCalc
 						(
-							new DurationStraightCoordCalc(vk - vf, duration, 1.0f), 
+							new StraightCoordCalc(vk - vf, duration, 1.0f),
 							new StaticCoordCalc(vf)
 						), 
 						ptr->getCoordCalcSystem()

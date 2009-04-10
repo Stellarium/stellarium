@@ -11,6 +11,15 @@ namespace
 
 namespace MotionTestImpl
 {
+	double sign(double x)
+	{
+	   if (x < 0.)
+		    return -1.;
+		else if (x > 0.)
+			return 1.;
+		else
+	        return 0.;
+	}
 	CoordCalc::CoordCalc() : mStartTime(0.0)
 	{
 	}
@@ -82,8 +91,8 @@ namespace MotionTestImpl
 		return mRotMat;
 	}
 
-	StraightCoordCalc::StraightCoordCalc(const Vec3d& s, double d, double direction) : 
-	mStart(s), delta(d)
+	StraightCoordCalc::StraightCoordCalc(const Vec3d& s, double dur, double direction) : 
+	mStart(s), mDur(dur)
 	{
 		if (direction >= 0) mDirection = 1.0f;
 		else mDirection = -1.0f;
@@ -91,10 +100,8 @@ namespace MotionTestImpl
 	
 	Vec3d StraightCoordCalc::calcCoord(double t)
 	{		
-		Vec3d pos = mStart;
-		double q = -mDirection*(t - mStartTime) * delta;		
-		pos += q*mStart;
-		return pos;
+		double q = (1.0 + cos((t - mStartTime) / mDur * cPi)) / 2.0;
+		return q * mStart;
 	}
 
 	/*DurationStraightCoordCalc::DurationStraightCoordCalc(const Vec3d& s, double dur, double startTime) :
@@ -114,7 +121,7 @@ namespace MotionTestImpl
 		//double q = 1.0 - pow(4.0 / cPi * atan( mDirection*(t - mStartTime) / mDur), 2.0);	
 		//double q = 1.0 - mDirection * (t - mStartTime) / mDur;
 		//double q = 1.0 - mDirection * pow((t - mStartTime) / mDur, 0.1);
-		double q = (1.0 + cos((t - mStartTime) / mDur * cPi)) / 2.0;
+		double q = pow((1.0 + cos((t - mStartTime) / mDur * cPi) ), 5) / pow(2.0, 5);
 		return q * mStart;
 	}
 
