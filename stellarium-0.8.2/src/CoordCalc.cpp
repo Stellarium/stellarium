@@ -99,8 +99,16 @@ namespace MotionTestImpl
 	}
 	
 	Vec3d StraightCoordCalc::calcCoord(double t)
-	{		
-		double q = (1.0 + cos((t - mStartTime) / mDur * cPi)) / 2.0;
+	{	
+		double q = 0.0;
+		if (mDirection > 0)
+		{
+			q = (1.0 + cos((t - mStartTime) / mDur * cPi)) / 2.0;
+		}
+		else
+		{
+			q = (2.0 - cos((t - mStartTime) / mDur * cPi));
+		}
 		return q * mStart;
 	}
 
@@ -121,7 +129,15 @@ namespace MotionTestImpl
 		//double q = 1.0 - pow(4.0 / cPi * atan( mDirection*(t - mStartTime) / mDur), 2.0);	
 		//double q = 1.0 - mDirection * (t - mStartTime) / mDur;
 		//double q = 1.0 - mDirection * pow((t - mStartTime) / mDur, 0.1);
-		double q = pow((1.0 + cos((t - mStartTime) / mDur * cPi) ), 5) / pow(2.0, 5);
+		double q = 0.0;		
+		if (mDirection > 0)
+		{
+			q = pow((1.0 + cos((t - mStartTime) / mDur * cPi) ), 5) / pow(2.0, 5);
+		}
+		else
+		{
+			q = pow((2.0 - cos((t - mStartTime) / mDur * cPi) ), 5); /// pow(2.0, 5);
+		}
 		return q * mStart;
 	}
 
