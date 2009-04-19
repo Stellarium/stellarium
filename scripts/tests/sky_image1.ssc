@@ -34,6 +34,14 @@ status("hiding image (should fade out)");
 StelSkyImageMgr.showImage("image", false); 
 core.wait(1.5);
 
+status("showing image (should fade in)");
+StelSkyImageMgr.showImage("image", true); 
+core.wait(1.5);
+
+status("hiding image (should fade out)");
+StelSkyImageMgr.showImage("image", false); 
+core.wait(1.5);
+
 status("removing image, kthxbye");
 core.removeSkyImage("image");
 core.wait(1.5);
