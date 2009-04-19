@@ -431,6 +431,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/mouse_cursor_timeout", StelAppGraphicsScene::getInstance().getCursorTimeout());
 	
 	conf->setValue("main/screenshot_dir", StelApp::getInstance().getFileMgr().getScreenshotDir());
+	conf->setValue("main/invert_screenshots_colors", StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors());
 
 	// full screen and window size
 	conf->setValue("video/fullscreen", StelMainWindow::getInstance().getFullScreen());
