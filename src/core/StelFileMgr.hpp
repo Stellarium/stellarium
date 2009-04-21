@@ -134,7 +134,7 @@ public:
 	//! @param path the path whose parent directory is to be returned
 	QString dirName(const QString& path);
 	
-	//! Get the user's Desktop directory
+	//! Get the user's Desktop directory.
 	//! This is a portable way to retrieve the directory for the user's desktop.
 	//! On Linux and OSX this is $HOME/Desktop.  For Windows, the system is queried
 	//! using SHGetSpecialFolderLocation.  If that doesn't work, the USERPROFILE
@@ -145,7 +145,7 @@ public:
 	//!            OS doesn't provide one.
 	QString getDesktopDir(void);
 	
-	//! Returns the path to the user directory
+	//! Returns the path to the user directory.
 	//! This is the directory where we expect to find the [default] writable 
 	//! configuration file, user versions of scripts, nebulae, stars, skycultures etc.
 	//! It will be the first directory in the path which is used when
@@ -157,6 +157,9 @@ public:
 	//! Returns the path to the users data directory
 	//! @return the path to the users data directory	
 	QString getUsersDataDirectoryName(void);
+	
+	//! Returns the path to the cache directory. Note that subdirectories may need to be created for specific caches.
+	QString getCacheDir();
 	
 	//! Sets the user directory.  This updates the search paths (first element)
 	//! @param newDir the new value of the user directory

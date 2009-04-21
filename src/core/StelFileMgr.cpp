@@ -5,6 +5,7 @@
 #include <QDir>
 #include <QString>
 #include <QDebug>
+#include <QDesktopServices>
 
 #include "StelUtils.hpp"
 
@@ -464,6 +465,17 @@ QString StelFileMgr::getLocaleDir(void)
 		qWarning() << "WARNING in StelFileMgr::getLocaleDir() - could not determine locale directory, returning \"\"";
 		return "";
 	}
+}
+
+// Returns the path to the cache directory. Note that subdirectories may need to be created for specific caches.
+QString StelFileMgr::getCacheDir()
+{
+	QString cachePath = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
+	if (cachePath.isEmpty())
+	{
+		cachePath = getUsersDataDirectoryName()+"/cache";
+	}
+	return cachePath;
 }
 
 #if defined(WIN32)

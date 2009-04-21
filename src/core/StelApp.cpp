@@ -288,7 +288,6 @@ StelApp::~StelApp()
 }
 
 #include <QNetworkDiskCache>
-#include <QDesktopServices>
 
 /*************************************************************************
  Return the full name of stellarium, i.e. "stellarium 0.9.0"
@@ -332,11 +331,8 @@ void StelApp::init()
 	networkAccessManager = new QNetworkAccessManager(this);
 	// Activate http cache if Qt version >= 4.5
 	QNetworkDiskCache* cache = new QNetworkDiskCache(networkAccessManager);
-	QString cachePath = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
-	if (cachePath.isEmpty())
-	{
-		cachePath = StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()+"/cache";
-	}
+	QString cachePath = getFileMgr().getCacheDir();
+	
 	qDebug() << "Cache directory is: " << cachePath;
 	cache->setCacheDirectory(cachePath);
 	networkAccessManager->setCache(cache);

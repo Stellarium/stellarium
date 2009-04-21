@@ -37,7 +37,6 @@
 #include <stdexcept>
 
 // #include <QNetworkDiskCache>
-// #include <QDesktopServices>
 
 // Init statics
 QNetworkAccessManager* MultiLevelJsonBase::networkAccessManager = NULL;
@@ -50,11 +49,7 @@ QNetworkAccessManager& MultiLevelJsonBase::getNetworkAccessManager()
 // Cache on JSON files doesn't work, and I don't know why.
 // There may be a problem in Qt for text objects caching (compression is activated in cache)
 // 		QNetworkDiskCache* cache = new QNetworkDiskCache(networkAccessManager);
-// 		QString cachePath = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
-// 		if (cachePath.isEmpty())
-// 		{
-// 			cachePath = StelApp::getInstance().getFileMgr().getUserDir()+"/cache";
-// 		}
+// 		QString cachePath = StelApp::getInstance().getCacheDir();
 // 		cache->setCacheDirectory(cachePath+"/JSONCache");
 // 		networkAccessManager->setCache(cache);
 		connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), &StelApp::getInstance(), SLOT(reportFileDownloadFinished(QNetworkReply*)));
