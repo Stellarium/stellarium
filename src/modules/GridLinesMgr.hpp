@@ -23,10 +23,8 @@
 #include "VecMath.hpp"
 #include "StelModule.hpp"
 
-class StelTranslator;
 class SkyGrid;
 class SkyLine;
-class QSettings;
 
 //! @class GridLinesMgr
 //! The GridLinesMgr controls the drawing of the Azimuthal and Equatorial Grids,

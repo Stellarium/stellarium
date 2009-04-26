@@ -449,7 +449,8 @@ void SkyGrid::draw(const StelCore* core) const
 					 || (viewPortSphericalCap.d<-parallelSphericalCap.d && viewPortSphericalCap.contains(-parallelSphericalCap.n)))
 				{
 					// The parallel is fully included in the viewport, draw it in 3 sub-arcs to avoid lengths >= 180 deg
-					Mat4d rotLon120 = Mat4d::rotation(Vec3d(0,0,1), 120.*M_PI/180.);
+					Mat4d rotLon120;
+					rotLon120 = Mat4d::rotation(Vec3d(0,0,1), 120.*M_PI/180.);
 					Vec3d rotFpt=fpt;
 					rotFpt.transfo4d(rotLon120);
 					Vec3d rotFpt2=rotFpt;
