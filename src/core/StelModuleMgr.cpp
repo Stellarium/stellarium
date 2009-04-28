@@ -114,6 +114,18 @@ StelModule* StelModuleMgr::getModule(const QString& moduleID)
 *************************************************************************/
 StelModule* StelModuleMgr::loadPlugin(const QString& moduleID)
 {
+	// First look if a static plugin corresponds
+	foreach (QObject *plugin, QPluginLoader::staticInstances())
+	{
+		StelPluginInterface* pluginInterface = qobject_cast<StelPluginInterface*>(plugin);
+		if (pluginInterface->getPluginId()==moduleID)
+		{
+			StelModule* sMod = pluginInterface->getStelModule();
+			qDebug() << "Loaded plugin " << moduleID << ".";
+			return sMod;
+		}
+	}
+
 	QString moduleFullPath = "modules/" + moduleID + "/lib" + moduleID;
 #ifdef WIN32
 	moduleFullPath += ".dll";
