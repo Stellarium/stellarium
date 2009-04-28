@@ -51,6 +51,13 @@ CHECK_FUNCTION_EXISTS(pow10 HAVE_POW10)
 CHECK_FUNCTION_EXISTS(setlocale HAVE_SETLOCALE)
 CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
 
+########### Static compilation of plugins ###########
+SET(USE_STATIC_PLUGINS 0 CACHE BOOL "Define whether plugins should be statically linked.")
+IF (USE_STATIC_PLUGINS)
+	SET(VIRGO_PLUGIN_DIRECTORY "$ENV{STELROOT}/../exmodules/VirGO/builds/unix/src" CACHE PATH "The directory where libVirGO.a is")
+  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES "-L${VIRGO_PLUGIN_DIRECTORY} -lVirGO")
+ENDIF()
+
 ########### Others ###########
 # Activate translation with gettext
 SET(RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release, 1 or 0.")
@@ -93,13 +100,13 @@ INCLUDE(${QT_USE_FILE})
 
 IF(ENABLE_NLS)
   FIND_PACKAGE(Iconv REQUIRED)
-  FIND_PATH(INTL_INCLUDE_DIR libintl.h 
-    /usr/include 
-    /usr/local/include) 
+  FIND_PATH(INTL_INCLUDE_DIR libintl.h
+	/usr/include
+	/usr/local/include)
   FIND_LIBRARY(INTL_LIBRARIES intl c
-    PATHS 
-    /usr/lib/
-    /usr/local/lib)
+	PATHS
+	/usr/lib/
+	/usr/local/lib)
   FIND_PACKAGE(Gettext REQUIRED)
 ENDIF()
 
@@ -126,12 +133,12 @@ ENDIF()
 
 ########### Get SVN revision for non-release builds ###########
 IF(NOT RELEASE_BUILD)
-  FIND_PACKAGE(Subversion) 
-  IF(Subversion_FOUND) 
-    Subversion_WC_INFO(${PROJECT_SOURCE_DIR} StelSvn) 
+  FIND_PACKAGE(Subversion)
+  IF(Subversion_FOUND)
+	Subversion_WC_INFO(${PROJECT_SOURCE_DIR} StelSvn)
 # MESSAGE("Current SVN revision is ${StelSvn_WC_REVISION}")
-    SET(SVN_REVISION ${StelSvn_WC_REVISION})
-  ENDIF() 
+	SET(SVN_REVISION ${StelSvn_WC_REVISION})
+  ENDIF()
 ENDIF()
 
 IF(ENABLE_STRATOSCRIPT_COMPAT)
@@ -160,7 +167,7 @@ CONFIGURE_FILE(
 
 ADD_CUSTOM_TARGET(uninstall
   "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
- 
+
 ########### Packaging info for CPack ###########
 INCLUDE(InstallRequiredSystemLibraries)
 
@@ -187,20 +194,20 @@ ADD_CUSTOM_TARGET(apidoc doxygen Doxyfile WORKING_DIRECTORY ${PROJECT_SOURCE_DIR
 ENABLE_TESTING()
 
 ########### Subdirectories ###############
-ADD_SUBDIRECTORY( data ) 
-ADD_SUBDIRECTORY( src ) 
-ADD_SUBDIRECTORY( textures ) 
-ADD_SUBDIRECTORY( doc ) 
+ADD_SUBDIRECTORY( data )
+ADD_SUBDIRECTORY( src )
+ADD_SUBDIRECTORY( textures )
+ADD_SUBDIRECTORY( doc )
 IF(ENABLE_NLS)
-  ADD_SUBDIRECTORY( po ) 
+  ADD_SUBDIRECTORY( po )
 ENDIF()
-ADD_SUBDIRECTORY( landscapes ) 
-ADD_SUBDIRECTORY( skycultures ) 
-ADD_SUBDIRECTORY( nebulae ) 
-ADD_SUBDIRECTORY( scripts ) 
-ADD_SUBDIRECTORY( stars ) 
+ADD_SUBDIRECTORY( landscapes )
+ADD_SUBDIRECTORY( skycultures )
+ADD_SUBDIRECTORY( nebulae )
+ADD_SUBDIRECTORY( scripts )
+ADD_SUBDIRECTORY( stars )
 IF (GENERATE_PYTHON_WRAPPERS)
- ADD_SUBDIRECTORY( sip ) 
+ ADD_SUBDIRECTORY( sip )
 ENDIF()
 
 ########### Macosx Bundling ###############
