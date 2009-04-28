@@ -1,22 +1,22 @@
 /*
  * Stellarium
  * Copyright (C) 2006 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
- 
+
 #include "StelApp.hpp"
 
 #include "StelCore.hpp"
@@ -80,10 +80,10 @@ QString StelApp::log;
  Create and initialize the main Stellarium application.
 *************************************************************************/
 StelApp::StelApp(int argc, char** argv, QObject* parent)
-	: QObject(parent), core(NULL), fps(0), maxfps(10000.f), frame(0), 
-	  timefr(0.), timeBase(0.), flagNightVision(false), 
-	  configFile("config.ini"), startupScript("startup.ssc"), 
-	  confSettings(NULL), initialized(false), saveProjW(-1), 
+	: QObject(parent), core(NULL), fps(0), maxfps(10000.f), frame(0),
+	  timefr(0.), timeBase(0.), flagNightVision(false),
+	  configFile("config.ini"), startupScript("startup.ssc"),
+	  confSettings(NULL), initialized(false), saveProjW(-1),
 	  saveProjH(-1)
 {
 	// Stat variables
@@ -91,15 +91,15 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	totalDownloadedSize=0;
 	nbUsedCache=0;
 	totalUsedCacheSize=0;
-	
+
 	// Used for getting system date formatting
 	setlocale(LC_TIME, "");
 	// We need scanf()/printf() and friends to always work in the C locale,
 	// otherwise configuration/INI file parsing will be erroneous.
 	setlocale(LC_NUMERIC, "C");
-	
+
 	setObjectName("StelApp");
-	
+
 	skyCultureMgr=NULL;
 	localeMgr=NULL;
 	fontManager=NULL;
@@ -108,18 +108,18 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	moduleMgr=NULL;
 	loadingBar=NULL;
 	networkAccessManager=NULL;
-	
+
 	// Can't create 2 StelApp instances
 	Q_ASSERT(!singleton);
 	singleton = this;
-	
+
 	argList = new QStringList;
 	for(int i=0; i<argc; i++)
 	{
 		*argList << argv[i];
 		qDebug() << "adding argument:\"" << argv[i] << "\"";
 	}
-	
+
 	// Echo debug output to log file
 	stelFileMgr = new StelFileMgr();
 	logFile.setFileName(stelFileMgr->getUsersDataDirectoryName()+"/log.txt");
@@ -131,13 +131,13 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	}
 	if (logFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
 		qInstallMsgHandler(StelApp::debugLogHandler);
-	
+
 	StelApp::qtime = new QTime();
 	StelApp::qtime->start();
-	
+
 	// Print system info to log file
 	setupLog();
-	
+
 	// Parse for first set of CLI arguments - stuff we want to process before other
 	// output, such as --help and --version, and if we want to set the configFile value.
 	parseCLIArgsPreConfig();
@@ -151,7 +151,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	{
 		qDebug() << "ERROR while loading translations: " << e.what() << endl;
 	}
-	
+
 	// OK, print the console splash and get on with loading the program
 	QString versionLine = QString("This is %1 - http://www.stellarium.org").arg(StelApp::getApplicationName());
 	QString copyrightLine = QString("Copyright (C) 2000-2009 Fabien Chereau et al");
@@ -164,7 +164,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 		qDebug() << "Writing log file to:" << logFile.fileName();
 	else
 		qDebug() << "Unable to open log file:" << logFile.fileName() << ".";
-	
+
 	QStringList p=stelFileMgr->getSearchPaths();
 	qDebug() << "File search paths:";
 	int n=0;
@@ -174,7 +174,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 		++n;
 	}
 	qDebug() << "Config file is: " << configFile;
-	
+
 	// implement "restore default settings" feature.
 	bool restoreDefaults = false;
 	if (stelFileMgr->exists(configFile))
@@ -198,10 +198,10 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 
 	// Load the configuration file
 	confSettings = new QSettings(getConfigFilePath(), StelIniFormat, this);
-	
+
 	// Main section
 	QString version = confSettings->value("main/version").toString();
-	
+
 	if (version.isEmpty())
 	{
 		qWarning() << "Found an invalid config file. Overwrite with default.";
@@ -212,7 +212,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 		// get the new version value from the updated config file
 		version = confSettings->value("main/version").toString();
 	}
-	
+
 	if (version!=QString(PACKAGE_VERSION))
 	{
 		QTextStream istr(&version);
@@ -225,9 +225,9 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 		if(v1==0 && v2<6)
 		{
 			// The config file is too old to try an importation
-			qDebug() << "The current config file is from a version too old for parameters to be imported (" 
-			         << (version.isEmpty() ? "<0.6.0" : version) << ").\n"
-			         << "It will be replaced by the default config file.";
+			qDebug() << "The current config file is from a version too old for parameters to be imported ("
+					 << (version.isEmpty() ? "<0.6.0" : version) << ").\n"
+					 << "It will be replaced by the default config file.";
 
 			delete confSettings;
 			QFile::remove(getConfigFilePath());
@@ -239,13 +239,13 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 			qDebug() << "Attempting to use an existing older config file.";
 		}
 	}
-	
+
 	parseCLIArgsPostConfig();
 	moduleMgr = new StelModuleMgr();
-	
+
 	maxfps = confSettings->value("video/maximum_fps",10000.).toDouble();
 	minfps = confSettings->value("video/minimum_fps",10000.).toDouble();
-	
+
 	// Init a default StelStyle, before loading modules, it will be overrided
 	currentStelStyle = NULL;
 	setColorScheme("color");
@@ -257,7 +257,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 StelApp::~StelApp()
 {
 	qDebug() << qPrintable(QString("Downloaded %1 files (%2 kbytes) in a session of %3 sec (average of %4 kB/s + %5 files from cache (%6 kB)).").arg(nbDownloadedFiles).arg(totalDownloadedSize/1024).arg(getTotalRunTime()).arg((double)(totalDownloadedSize/1024)/getTotalRunTime()).arg(nbUsedCache).arg(totalUsedCacheSize/1024));
-	
+
 	if (scriptMgr->scriptIsRunning())
 		scriptMgr->stopScript();
 	stelObjectMgr->unSelect();
@@ -271,18 +271,18 @@ StelApp::~StelApp()
 	delete skyCultureMgr; skyCultureMgr=NULL;
 	delete localeMgr; localeMgr=NULL;
 	delete fontManager; fontManager=NULL;
-	delete audioMgr; audioMgr=NULL;	
+	delete audioMgr; audioMgr=NULL;
 	delete stelObjectMgr; stelObjectMgr=NULL; // Delete the module by hand afterward
 	delete stelFileMgr; stelFileMgr=NULL;
 	delete textureMgr; textureMgr=NULL;
 	delete planetLocationMgr; planetLocationMgr=NULL;
 	delete moduleMgr; moduleMgr=NULL; // Delete the secondary instance
 	delete argList; argList=NULL;
-	
+
 	delete currentStelStyle;
-	
+
 	logFile.close();
-	
+
 	Q_ASSERT(singleton);
 	singleton = NULL;
 }
@@ -332,17 +332,17 @@ void StelApp::init()
 	// Activate http cache if Qt version >= 4.5
 	QNetworkDiskCache* cache = new QNetworkDiskCache(networkAccessManager);
 	QString cachePath = getFileMgr().getCacheDir();
-	
+
 	qDebug() << "Cache directory is: " << cachePath;
 	cache->setCacheDirectory(cachePath);
 	networkAccessManager->setCache(cache);
 	connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(reportFileDownloadFinished(QNetworkReply*)));
-	
+
 	// Stel Object Data Base manager
 	stelObjectMgr = new StelObjectMgr();
 	stelObjectMgr->init();
 	getModuleMgr().registerModule(stelObjectMgr);
-	
+
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(saveProjW, saveProjH);
@@ -351,7 +351,7 @@ void StelApp::init()
 	fontManager = new StelFontMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
 	planetLocationMgr = new StelLocationMgr();
-	
+
 	// Initialize AFTER creation of openGL context
 	textureMgr->init();
 
@@ -360,34 +360,34 @@ void StelApp::init()
 #else
 	loadingBar = new StelLoadingBar(12., "logo24bits.png", PACKAGE_VERSION, 45, 320, 121);
 #endif // SVN_RELEASE
-	
+
 	downloadMgr = new StelDownloadMgr();
-	
+
 	localeMgr->init();
 	skyCultureMgr->init();
-	
+
 	// Init the solar system first
 	SolarSystem* ssystem = new SolarSystem();
 	ssystem->init();
 	getModuleMgr().registerModule(ssystem);
-	
+
 	// Load hipparcos stars & names
 	StarMgr* hip_stars = new StarMgr();
 	hip_stars->init();
-	getModuleMgr().registerModule(hip_stars);	
-	
+	getModuleMgr().registerModule(hip_stars);
+
 	core->init();
 
 	// Init nebulas
 	NebulaMgr* nebulas = new NebulaMgr();
 	nebulas->init();
 	getModuleMgr().registerModule(nebulas);
-	
+
 	// Init milky way
 	MilkyWay* milky_way = new MilkyWay();
 	milky_way->init();
 	getModuleMgr().registerModule(milky_way);
-	
+
 	// Init sky image manager
 	skyImageMgr = new StelSkyImageMgr();
 	skyImageMgr->init();
@@ -395,17 +395,17 @@ void StelApp::init()
 
 	// Init audio manager
 	audioMgr = new StelAudioMgr();
-	
+
 	// Telescope manager
 	TelescopeMgr* telescope_mgr = new TelescopeMgr();
 	telescope_mgr->init();
 	getModuleMgr().registerModule(telescope_mgr);
-	
+
 	// Constellations
 	ConstellationMgr* asterisms = new ConstellationMgr(hip_stars);
 	asterisms->init();
 	getModuleMgr().registerModule(asterisms);
-	
+
 	// Landscape, atmosphere & cardinal points section
 	LandscapeMgr* landscape = new LandscapeMgr();
 	landscape->init();
@@ -414,7 +414,7 @@ void StelApp::init()
 	GridLinesMgr* gridLines = new GridLinesMgr();
 	gridLines->init();
 	getModuleMgr().registerModule(gridLines);
-	
+
 	// Meteors
 	MeteorMgr* meteors = new MeteorMgr(10, 60);
 	meteors->init();
@@ -433,14 +433,14 @@ void StelApp::init()
 // ugly fix by Johannes: call skyCultureMgr->init twice so that
 // star names are loaded again
 	skyCultureMgr->init();
-	
+
 	// Initialisation of the color scheme
 	flagNightVision=true;  // fool caching
 	setVisionModeNight(false);
 	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
-	
+
 	updateI18n();
-	
+
 	scriptMgr = new StelScriptMgr(this);
 	initialized = true;
 }
@@ -467,13 +467,13 @@ void StelApp::setupLog()
 {
 	// write timestamp
 	StelApp::writeLog(QString("%1").arg(QDateTime::currentDateTime().toString(Qt::ISODate)));
-	
+
 	// write command line arguments
 	QString args;
 	foreach(QString arg, *argList)
 		args += QString("%1 ").arg(arg);
 	StelApp::writeLog(args);
-	
+
 	// write OS version
 #ifdef Q_WS_WIN
 	switch(QSysInfo::WindowsVersion)
@@ -506,7 +506,7 @@ void StelApp::setupLog()
 			StelApp::writeLog("Unsupported Windows version");
 			break;
 	}
-	
+
 	// somebody writing something useful for Macs would be great here
 #elif defined Q_WS_MAC
 	switch(QSysInfo::MacintoshVersion)
@@ -524,7 +524,7 @@ void StelApp::setupLog()
 			StelApp::writeLog("Unsupported Mac version");
 			break;
 	}
-	
+
 #elif defined Q_OS_LINUX
 	QFile procVersion("/proc/version");
 	if(!procVersion.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -540,25 +540,25 @@ void StelApp::setupLog()
 #else
 	StelApp::writeLog("Unsupported operating system");
 #endif
-	
+
 	// write GCC version
 #ifndef __GNUC__
 	StelApp::writeLog("Non-GCC compiler");
 #else
 	StelApp::writeLog(QString("Compiled with GCC %1.%2.%3").arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__));
 #endif
-	
+
 	// write Qt version
 	StelApp::writeLog(QString("Qt runtime version: %1").arg(qVersion()));
 	StelApp::writeLog(QString("Qt compilation version: %1").arg(QT_VERSION_STR));
-	
+
 	// write addressing mode
 #ifdef __LP64__
 	StelApp::writeLog("Addressing mode: 64-bit");
 #else
 	StelApp::writeLog("Addressing mode: 32-bit");
 #endif
-	
+
 	// write memory and CPU info
 #ifdef Q_OS_LINUX
 	QFile infoFile("/proc/meminfo");
@@ -575,7 +575,7 @@ void StelApp::setupLog()
 		}
 		infoFile.close();
 	}
-	
+
 	infoFile.setFileName("/proc/cpuinfo");
 	if(!infoFile.open(QIODevice::ReadOnly | QIODevice::Text))
 		StelApp::writeLog("Could not get CPU info.");
@@ -590,7 +590,7 @@ void StelApp::setupLog()
 		}
 		infoFile.close();
 	}
-	
+
 	QProcess lspci;
 	lspci.start("lspci -v", QIODevice::ReadOnly);
 	lspci.waitForFinished(100);
@@ -612,7 +612,7 @@ void StelApp::setupLog()
 			}
 		}
 	}
-	
+
 	// Aargh Windows API
 #elif defined Q_WS_WIN
 	// Hopefully doesn't throw a linker error on earlier systems. Not like
@@ -635,12 +635,12 @@ void StelApp::setupLog()
 	}
 	else
 		StelApp::writeLog("Windows version too old to get memory info.");
-	
+
 	HKEY hKey = NULL;
 	DWORD dwType = REG_DWORD;
 	DWORD numVal = 0;
 	DWORD dwSize = sizeof(numVal);
-	
+
 	// iterate over the processors listed in the registry
 	QString procKey = "Hardware\\Description\\System\\CentralProcessor";
 	LONG lRet = ERROR_SUCCESS;
@@ -648,9 +648,9 @@ void StelApp::setupLog()
 	for(i = 0; lRet == ERROR_SUCCESS; i++)
 	{
 		lRet = RegOpenKeyEx(HKEY_LOCAL_MACHINE,
-				    TEXT(qPrintable(QString("%1\\%2").arg(procKey).arg(i))),
-				    0, KEY_QUERY_VALUE, &hKey);
-		
+					TEXT(qPrintable(QString("%1\\%2").arg(procKey).arg(i))),
+					0, KEY_QUERY_VALUE, &hKey);
+
 		if(lRet == ERROR_SUCCESS)
 		{
 			if(RegQueryValueEx(hKey, "~MHz", NULL, &dwType, (LPBYTE)&numVal, &dwSize) == ERROR_SUCCESS)
@@ -658,12 +658,12 @@ void StelApp::setupLog()
 			else
 				StelApp::writeLog("Could not get processor speed.");
 		}
-		
+
 		// can you believe this trash?
 		dwType = REG_SZ;
 		char nameStr[512];
 		DWORD nameSize = sizeof(nameStr);
-		
+
 		if(lRet == ERROR_SUCCESS)
 		{
 			if(RegQueryValueEx(hKey, "ProcessorNameString", NULL, &dwType, (LPBYTE)&nameStr, &nameSize) == ERROR_SUCCESS)
@@ -671,20 +671,20 @@ void StelApp::setupLog()
 			else
 				StelApp::writeLog("Could not get processor name.");
 		}
-		
+
 		RegCloseKey(hKey);
 	}
 	if(i == 0)
 		StelApp::writeLog("Could not get processor info.");
-	
+
 #elif defined Q_WS_MAC
 	StelApp::writeLog("You look like a Mac user. How would you like to write some system info code here? That would help a lot.");
-	
+
 #endif
 }
 
 void StelApp::parseCLIArgsPreConfig(void)
-{	
+{
 	if (argsGetOption(argList, "-v", "--version"))
 	{
 		qDebug() << qPrintable(getApplicationName());
@@ -696,40 +696,40 @@ void StelApp::parseCLIArgsPreConfig(void)
 		// Get the basename of binary
 		QString binName = argList->at(0);
 		binName.remove(QRegExp("^.*[/\\\\]"));
-		
+
 		qDebug() << "Usage:\n"
-		     << "  "
-		     << qPrintable(binName) << " [options]\n\n"
-		     << "Options:\n"
-		     << "--version (or -v)       : Print program name and version and exit.\n"
-		     << "--help (or -h)          : This cruft.\n"
-		     << "--config-file (or -c)   : Use an alternative name for the config file\n"
-		     << "--user-dir (or -u)      : Use an alternative user data directory\n"
-		     << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
-		     << "                          the full screen setting in the config file\n"
-		     << "--screenshot-dir        : Specify directory to save screenshots\n"
-		     << "--startup-script        : Specify name of startup script\n"
-		     << "--home-planet           : Specify observer planet (English name)\n"
-		     << "--altitude              : Specify observer altitude in meters\n"
-		     << "--longitude             : Specify longitude, e.g. +53d58\\'16.65\\\"\n"
-		     << "--latitude              : Specify latitude, e.g. -1d4\\'27.48\\\"\n"
-		     << "--list-landscapes       : Print a list of value landscape IDs\n"
-		     << "--landscape             : Start using landscape whose ID (dir name)\n"
-		     << "                          is passed as parameter to option\n"
-		     << "--sky-date              : Specify sky date in format yyyymmdd\n"
-		     << "--sky-time              : Specify sky time in format hh:mm:ss\n"
-		     << "--fov                   : Specify the field of view (degrees)\n"
-		     << "--projection-type       : Specify projection type, e.g. stereographic\n"
-		     << "--restore-defaults      : Delete existing config.ini and use defaults\n";
+			 << "  "
+			 << qPrintable(binName) << " [options]\n\n"
+			 << "Options:\n"
+			 << "--version (or -v)       : Print program name and version and exit.\n"
+			 << "--help (or -h)          : This cruft.\n"
+			 << "--config-file (or -c)   : Use an alternative name for the config file\n"
+			 << "--user-dir (or -u)      : Use an alternative user data directory\n"
+			 << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
+			 << "                          the full screen setting in the config file\n"
+			 << "--screenshot-dir        : Specify directory to save screenshots\n"
+			 << "--startup-script        : Specify name of startup script\n"
+			 << "--home-planet           : Specify observer planet (English name)\n"
+			 << "--altitude              : Specify observer altitude in meters\n"
+			 << "--longitude             : Specify longitude, e.g. +53d58\\'16.65\\\"\n"
+			 << "--latitude              : Specify latitude, e.g. -1d4\\'27.48\\\"\n"
+			 << "--list-landscapes       : Print a list of value landscape IDs\n"
+			 << "--landscape             : Start using landscape whose ID (dir name)\n"
+			 << "                          is passed as parameter to option\n"
+			 << "--sky-date              : Specify sky date in format yyyymmdd\n"
+			 << "--sky-time              : Specify sky time in format hh:mm:ss\n"
+			 << "--fov                   : Specify the field of view (degrees)\n"
+			 << "--projection-type       : Specify projection type, e.g. stereographic\n"
+			 << "--restore-defaults      : Delete existing config.ini and use defaults\n";
 		exit(0);
 	}
-	
+
 	if (argsGetOption(argList, "", "--list-landscapes"))
 	{
 		QSet<QString> landscapeIds = stelFileMgr->listContents("landscapes", StelFileMgr::Directory);
 		for(QSet<QString>::iterator i=landscapeIds.begin(); i!=landscapeIds.end(); ++i)
 		{
-			try 
+			try
 			{
 				// finding the file will throw an exception if it is not found
 				// in that case we won't output the landscape ID as it canont work
@@ -753,7 +753,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 		qCritical() << "ERROR: while processing --user-dir option: " << e.what();
 		exit(1);
 	}
-	
+
 	// If the chosen user directory does not exist we will create it
 	if (!StelFileMgr::exists(stelFileMgr->getUserDir()))
 	{
@@ -763,11 +763,11 @@ void StelApp::parseCLIArgsPreConfig(void)
 			exit(1);
 		}
 	}
-	
+
 	bool restoreDefaultConfigFile = false;
 	if (argsGetOption(argList, "", "--restore-defaults"))
 		restoreDefaultConfigFile=true;
-	
+
 	try
 	{
 		setConfigFile(argsGetOptionWithArg(argList, "-c", "--config-file", "config.ini").toString(), restoreDefaultConfigFile);
@@ -775,7 +775,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "WARNING: while looking for --config-file option: " << e.what() << ". Using \"config.ini\"";
-		setConfigFile("config.ini", restoreDefaultConfigFile);		
+		setConfigFile("config.ini", restoreDefaultConfigFile);
 	}
 
 	startupScript = argsGetOptionWithArg(argList, "", "--startup-script", "startup.ssc").toString();
@@ -788,7 +788,7 @@ void StelApp::parseCLIArgsPostConfig()
 	int fullScreen, altitude;
 	float fov;
 	QString landscapeId, homePlanet, longitude, latitude, skyDate, skyTime, projectionType, screenshotDir;
-	
+
 	try
 	{
 		fullScreen = argsGetYesNoOption(argList, "-f", "--full-screen", -1);
@@ -812,13 +812,13 @@ void StelApp::parseCLIArgsPostConfig()
 	// Will be -1 if option is not found, in which case we don't change anything.
 	if (fullScreen == 1) confSettings->setValue("video/fullscreen", true);
 	else if (fullScreen == 0) confSettings->setValue("video/fullscreen", false);
-	
+
 	if (landscapeId != "") confSettings->setValue("init_location/landscape_name", landscapeId);
-	
+
 	if (homePlanet != "") confSettings->setValue("init_location/home_planet", homePlanet);
-	
+
 	if (altitude != -1) confSettings->setValue("init_location/altitude", altitude);
-	
+
 	QRegExp longLatRx("[\\-+]?\\d+d\\d+\\'\\d+(\\.\\d+)?\"");
 	if (longitude != "")
 	{
@@ -827,7 +827,7 @@ void StelApp::parseCLIArgsPostConfig()
 		else
 			qWarning() << "WARNING: --longitude argument has unrecognised format";
 	}
-	
+
 	if (latitude != "")
 	{
 		if (longLatRx.exactMatch(latitude))
@@ -835,20 +835,20 @@ void StelApp::parseCLIArgsPostConfig()
 		else
 			qWarning() << "WARNING: --latitude argument has unrecognised format";
 	}
-	
+
 	if (skyDate != "" || skyTime != "")
 	{
 		// Get the Julian date for the start of the current day
 		// and the extra necessary for the time of day as separate
 		// components.  Then if the --sky-date and/or --sky-time flags
-		// are set we over-ride the component, and finally add them to 
+		// are set we over-ride the component, and finally add them to
 		// get the full julian date and set that.
-		
+
 		// First, lets determine the Julian day number and the part for the time of day
 		QDateTime now = QDateTime::currentDateTime();
 		double skyDatePart = now.date().toJulianDay();
 		double skyTimePart = StelUtils::qTimeToJDFraction(now.time());
-		
+
 		// Over-ride the skyDatePart if the user specified the date using --sky-date
 		if (skyDate != "")
 		{
@@ -859,7 +859,7 @@ void StelApp::parseCLIArgsPostConfig()
 			else
 				qWarning() << "WARNING: --sky-date argument has unrecognised format  (I want yyyymmdd)";
 		}
-		
+
 		if (skyTime != "")
 		{
 			QRegExp timeRx("\\d{1,2}:\\d{2}:\\d{2}");
@@ -874,7 +874,7 @@ void StelApp::parseCLIArgsPostConfig()
 	}
 
 	if (fov > 0.0) confSettings->setValue("navigation/init_fov", fov);
-	
+
 	if (projectionType != "") confSettings->setValue("projection/type", projectionType);
 
 	if (screenshotDir!="")
@@ -909,9 +909,9 @@ void StelApp::parseCLIArgsPostConfig()
 
 void StelApp::update(double deltaTime)
 {
-     if (!initialized)
-        return;
-	
+	 if (!initialized)
+		return;
+
 	++frame;
 	timefr+=deltaTime;
 	if (timefr-timeBase > 1.)
@@ -923,15 +923,15 @@ void StelApp::update(double deltaTime)
 	}
 
 	core->update(deltaTime);
-	
+
 	moduleMgr->update();
-	
+
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionUpdate))
 	{
 		i->update(deltaTime);
 	}
-	
+
 	stelObjectMgr->update(deltaTime);
 }
 
@@ -958,7 +958,7 @@ void StelApp::draw()
 // 		Vec4f boundaryColor(0, 1, .6, 1);
 // 		sPainter.drawSphericalRegion(sPainter.getProjector()->getViewportConvexPolygon(-100,-100).get(), StelPainter::SphericalPolygonDrawModeBoundary, &boundaryColor);
 // 	}
-	
+
 // 	QVector<QVector<Vec3d> > contours;
 // 	QVector<Vec3d> c1(4);
 // 	StelUtils::spheToRect(-0.5, -0.5, c1[0]);
@@ -974,7 +974,7 @@ void StelApp::draw()
 // 		Vec4f boundaryColor(0, 1, .6, 1);
 // 		sPainter.drawSphericalRegion(&p, StelPainter::SphericalPolygonDrawModeBoundary, &boundaryColor);
 // 	}
-	
+
 	// Testing code for new polygon code
 // 	QVector<QVector<TextureVertex> > contours;
 // 	QVector<TextureVertex> c1(4);
@@ -987,7 +987,7 @@ void StelApp::draw()
 // 	c1[2].texCoord.set(1,1);
 // 	c1[3].texCoord.set(0,1);
 // 	contours.append(c1);
-// 
+//
 //  	SphericalTexturedPolygon p(contours);
 // 	static StelTextureSP ttex;
 // 	if (!ttex)
@@ -1003,7 +1003,7 @@ void StelApp::draw()
 // 		Vec4f boundaryColor(0, 1, .6, 1);
 // 		sPainter.drawSphericalPolygon(&p, StelPainter::SphericalPolygonDrawModeTextureFillAndBoundary, &boundaryColor);
 // 	}
-	
+
 // 	QVector<Vec3d> c2(4);
 // 	StelUtils::spheToRect(-0.2, 0.2, c2[0]);
 // 	StelUtils::spheToRect(0.2, 0.2, c2[1]);
@@ -1012,7 +1012,7 @@ void StelApp::draw()
 // 	QVector<Vec3d> c3(4);
 // 	c3[0]=c2[3];c3[1]=c2[2];c3[2]=c2[1];c3[3]=c2[0];
 // 	StelUtils::spheToRect(-0.1, 0.1, c3[3]);
-// 	
+//
 // 	QVector<QVector<Vec3d> > contours2;
 // 	contours2.append(c3);
 // 	SphericalPolygon p2 = p.getSubtraction(SphericalPolygon(contours2));
@@ -1022,7 +1022,7 @@ void StelApp::draw()
 // 		glColor4f(0, .6, .6, .5);
 // 		sPainter.drawSphericalPolygon(&p2);
 // 	}
-// 	
+
 	// Convex polygon test
 // 	QVector<Vec3d> cv1(4);
 // 	StelUtils::spheToRect(-0.5, -0.5, cv1[0]);
@@ -1041,8 +1041,7 @@ void StelApp::draw()
 // 		Vec4f boundaryColor(0, 1, .6, 1);
 // 		sPainter.drawSphericalPolygon(&cvx, StelPainter::SphericalPolygonDrawModeTextureFillAndBoundary, &boundaryColor);
 //  	}
-
- 	core->postDraw();
+	core->postDraw();
 }
 
 /*************************************************************************
@@ -1089,7 +1088,7 @@ void StelApp::handleWheel(QWheelEvent* event)
 			return;
 	}
 }
-	
+
 // Handle mouse move
 void StelApp::handleMove(int x, int y, Qt::MouseButtons b)
 {
@@ -1136,17 +1135,17 @@ void StelApp::setConfigFile(const QString& configName, bool restoreDefaults)
 	{
 		//qDebug() << "DEBUG StelApp::setConfigFile could not locate writable config file " << configName;
 	}
-	
+
 	try
 	{
-		configFile = stelFileMgr->findFile(configName, StelFileMgr::File);	
+		configFile = stelFileMgr->findFile(configName, StelFileMgr::File);
 		return;
 	}
 	catch (std::runtime_error& e)
 	{
 		//qDebug() << "DEBUG StelApp::setConfigFile could not find read only config file " << configName;
-	}		
-	
+	}
+
 	try
 	{
 		configFile = stelFileMgr->findFile(configName, StelFileMgr::New);
@@ -1172,12 +1171,12 @@ void StelApp::copyDefaultConfigFile()
 		qCritical() << "ERROR StelApp::copyDefaultConfigFile failed to locate data/default_config.ini.  Please check your installation.";
 		exit(1);
 	}
-	
+
 	QFile::copy(defaultConfigFilePath, configFile);
 	if (!stelFileMgr->exists(configFile))
 	{
-		qCritical() << "ERROR StelApp::copyDefaultConfigFile failed to copy file " << defaultConfigFilePath 
-		         << " to " << configFile << ". You could try to copy it by hand.";
+		qCritical() << "ERROR StelApp::copyDefaultConfigFile failed to copy file " << defaultConfigFilePath
+				 << " to " << configFile << ". You could try to copy it by hand.";
 		exit(1);
 	}
 }
@@ -1187,14 +1186,14 @@ void StelApp::setColorScheme(const QString& section)
 {
 	if (!currentStelStyle)
 		currentStelStyle = new StelStyle;
-	
+
 	currentStelStyle->confSectionName = section;
-	
+
 	QString qtStyleFileName;
 	QString htmlStyleFileName;
-	
+
 	if (section=="night_color")
-	{	
+	{
 		qtStyleFileName = "data/gui/nightStyle.css";
 		htmlStyleFileName = "data/gui/nightHtml.css";
 	}
@@ -1203,7 +1202,7 @@ void StelApp::setColorScheme(const QString& section)
 		qtStyleFileName = "data/gui/normalStyle.css";
 		htmlStyleFileName = "data/gui/normalHtml.css";
 	}
-	
+
 	// Load Qt style sheet
 	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
 	QString styleFilePath;
@@ -1218,7 +1217,7 @@ void StelApp::setColorScheme(const QString& section)
 	QFile styleFile(styleFilePath);
 	styleFile.open(QIODevice::ReadOnly);
 	currentStelStyle->qtStyleSheet = styleFile.readAll();
-	
+
 	// Load HTML style sheet
 	try
 	{
@@ -1231,7 +1230,7 @@ void StelApp::setColorScheme(const QString& section)
 	QFile htmlStyleFile(styleFilePath);
 	htmlStyleFile.open(QIODevice::ReadOnly);
 	currentStelStyle->htmlStyleSheet = htmlStyleFile.readAll();
-	
+
 	// Send the event to every StelModule
 	foreach (StelModule* iter, moduleMgr->getAllModules())
 	{
@@ -1275,7 +1274,7 @@ bool StelApp::argsGetOption(QStringList* args, QString shortOpt, QString longOpt
 {
 	bool result=false;
 
-        // Don't see anything after a -- as an option
+		// Don't see anything after a -- as an option
 	int lastOptIdx = args->indexOf("--");
 	if (lastOptIdx == -1)
 		lastOptIdx = args->size();
@@ -1327,7 +1326,7 @@ QVariant StelApp::argsGetOptionWithArg(QStringList* args, QString shortOpt, QStr
 			{
 				match=true;
 				argStr=args->at(i+1);
-				i++;  // skip option argument in next iteration 
+				i++;  // skip option argument in next iteration
 			}
 		}
 

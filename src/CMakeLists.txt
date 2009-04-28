@@ -98,7 +98,7 @@ SET(stellarium_lib_SRCS
 	core/StelJsonParser.cpp
 	core/SimbadSearcher.hpp
 	core/SimbadSearcher.cpp
-	
+
 	external/bytes.h
 	external/callback_helpers.hpp
 	external/callbacks.hpp
@@ -120,7 +120,7 @@ SET(stellarium_lib_SRCS
 	external/kfilter/klimitediodevice.cpp
 	external/kfilter/karchive.h
 	external/kfilter/karchive.cpp
-	
+
 	planetsephems/calc_interpolated_elements.c
 	planetsephems/calc_interpolated_elements.h
 	planetsephems/elliptic_to_rectangular.c
@@ -145,7 +145,7 @@ SET(stellarium_lib_SRCS
 	planetsephems/tass17.h
 	planetsephems/vsop87.c
 	planetsephems/vsop87.h
-	
+
 	modules/Atmosphere.cpp
 	modules/Atmosphere.hpp
 	modules/Constellation.cpp
@@ -198,7 +198,7 @@ SET(stellarium_lib_SRCS
 	modules/ZoneArray.cpp
 	modules/ZoneArray.hpp
 	modules/ZoneData.hpp
-	
+
 	gui/StelGui.hpp
 	gui/StelGui.cpp
 	gui/StelGuiItems.hpp
@@ -225,7 +225,7 @@ SET(stellarium_lib_SRCS
 	gui/DownloadPopup.cpp
 	gui/StelDialog.hpp
 	gui/StelDialog.cpp
-	
+
 	scripting/StelScriptPreProcessor.cpp
 	scripting/StelScriptMgr.cpp
 	scripting/StelScriptMgr.hpp
@@ -289,7 +289,7 @@ IF(WIN32)
 		external/kdewin32/sys/unistd.h
 		external/kdewin32/sys/utsname.h
 		external/kdewin32/sys/wait.h
-		
+
 		external/kdewin32/bind/inet_ntop.c
 		external/kdewin32/bind/inet_pton.c
 		external/kdewin32/dirent.c
@@ -316,10 +316,10 @@ IF(WIN32)
 ENDIF(WIN32)
 
 IF(APPLE)
-  SET(stellarium_lib_SRCS 
-    ${stellarium_lib_SRCS}
-    core/StelMacosxDirs.cpp
-    core/StelMacosxDirs.hpp)
+  SET(stellarium_lib_SRCS
+	${stellarium_lib_SRCS}
+	core/StelMacosxDirs.cpp
+	core/StelMacosxDirs.hpp)
 ENDIF(APPLE)
 
 SET(stellarium_exe_SRCS
@@ -399,7 +399,7 @@ QT4_WRAP_CPP(stellarium_MOC_SRCS ${stellarium_MOC_HDRS})
 # Dummy target depending on ${stellarium_UIS_H} to trigger ui compilations
 ADD_CUSTOM_TARGET(GenerateUiHeaders ALL DEPENDS ${stellarium_UIS_H})
 
-SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${FreeType2_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${SDL_LIBRARY} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${SDLMIXER_LIBRARY})
+SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${FreeType2_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${SDL_LIBRARY} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${SDLMIXER_LIBRARY} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
 
 IF(GENERATE_STELMAINLIB)
  ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_RES_CXX})
