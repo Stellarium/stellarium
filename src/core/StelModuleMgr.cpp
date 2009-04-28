@@ -1,22 +1,22 @@
 /*
  * Stellarium
  * Copyright (C) 2006 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
- 
+
 #include <config.h>
 
 #include <QDebug>
@@ -30,6 +30,10 @@
 #include "StelPluginInterface.hpp"
 #include "StelIniParser.hpp"
 
+
+#ifdef USE_STATIC_PLUGINS
+Q_IMPORT_PLUGIN(VirGO)
+#endif
 
 StelModuleMgr::StelModuleMgr()
 {
@@ -61,13 +65,13 @@ void StelModuleMgr::registerModule(StelModule* m, bool fgenerateCallingLists)
 {
 	QString name = m->objectName();
 	if (modules.find(name) != modules.end())
-	{		
+	{
 		qWarning() << "Module \"" << name << "\" is already loaded.";
 		return;
 	}
 	modules.insert(name, m);
 	m->setParent(this);
-	
+
 	if (fgenerateCallingLists)
 		generateCallingLists();
 }
@@ -136,7 +140,7 @@ StelModule* StelModuleMgr::loadPlugin(const QString& moduleID)
 		qWarning() << "Plugin " << moduleID << " will not be loaded.";
 		return NULL;
 	}
-	
+
 	QObject* obj = loader.instance();
 	if (!obj)
 	{
@@ -144,7 +148,7 @@ StelModule* StelModuleMgr::loadPlugin(const QString& moduleID)
 		qWarning() << "Plugin " << moduleID << " will not be open.";
 		return NULL;
 	}
-	
+
 	StelPluginInterface* plugInt = qobject_cast<StelPluginInterface *>(obj);
 	StelModule* sMod = plugInt->getStelModule();
 	qDebug() << "Loaded plugin " << moduleID << ".";
@@ -203,18 +207,18 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 {
 	QList<StelModuleMgr::PluginDescriptor> result;
 	QSet<QString> moduleDirs;
-	
+
 	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
-	
+
 	try
 	{
 		moduleDirs = fileMan.listContents("modules",StelFileMgr::Directory);
 	}
 	catch(std::runtime_error& e)
 	{
-		qWarning() << "ERROR while trying list list modules:" << e.what();	
+		qWarning() << "ERROR while trying list list modules:" << e.what();
 	}
-	
+
 	for (QSet<QString>::iterator dir=moduleDirs.begin(); dir!=moduleDirs.end(); dir++)
 	{
 		try
