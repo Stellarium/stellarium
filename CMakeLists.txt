@@ -54,8 +54,9 @@ CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
 ########### Static compilation of plugins ###########
 SET(USE_STATIC_PLUGINS 0 CACHE BOOL "Define whether plugins should be statically linked.")
 IF (USE_STATIC_PLUGINS)
-	SET(VIRGO_PLUGIN_DIRECTORY "$ENV{STELROOT}/../exmodules/VirGO/builds/unix/src" CACHE PATH "The directory where libVirGO.a is")
+  SET(VIRGO_PLUGIN_DIRECTORY "$ENV{STELROOT}/../exmodules/VirGO/builds/unix/src" CACHE PATH "The directory where libVirGO.a is")
   SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES "-L${VIRGO_PLUGIN_DIRECTORY} -lVirGO")
+  SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
 ENDIF()
 
 ########### Others ###########
