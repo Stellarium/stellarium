@@ -743,7 +743,7 @@ StelScriptMgr::StelScriptMgr(QObject *parent)
 	
 	// Add all the StelModules into the script engine
 	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
-	foreach (StelModule* m, mmgr->getRegisteredModules())
+	foreach (StelModule* m, mmgr->getAllModules())
 	{
 		objectValue = engine.newQObject(m);
 		engine.globalObject().setProperty(m->objectName(), objectValue);
