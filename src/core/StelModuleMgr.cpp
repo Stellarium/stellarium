@@ -31,7 +31,7 @@
 #include "StelIniParser.hpp"
 
 
-#ifdef USE_STATIC_PLUGINS
+#ifdef USE_STATIC_PLUGIN_VIRGO
 Q_IMPORT_PLUGIN(VirGO)
 #endif
 
