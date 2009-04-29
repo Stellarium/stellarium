@@ -52,11 +52,19 @@ CHECK_FUNCTION_EXISTS(setlocale HAVE_SETLOCALE)
 CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
 
 ########### Static compilation of plugins ###########
-SET(USE_STATIC_PLUGINS 0 CACHE BOOL "Define whether plugins should be statically linked.")
-IF (USE_STATIC_PLUGINS)
-  SET(VIRGO_PLUGIN_DIRECTORY "$ENV{STELROOT}/../exmodules/VirGO/builds/unix/src" CACHE PATH "The directory where libVirGO.a is")
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES "-L${VIRGO_PLUGIN_DIRECTORY} -lVirGO")
+# VirGO
+SET(USE_STATIC_PLUGIN_VIRGO 0 CACHE BOOL "Define whether the VirGO plugin should be statically linked.")
+SET(VIRGO_STATIC_PLUGIN_PATH "$ENV{STELROOT}/../exmodules/VirGO/builds/unix/src/libVirGO.a" CACHE PATH "The location of the libVirGO.a static library")
+IF (USE_STATIC_PLUGIN_VIRGO)
+  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES "${VIRGO_STATIC_PLUGIN_PATH}")
   SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
+ENDIF()
+
+# HelloStelModule
+SET(USE_STATIC_PLUGIN_HELLOSTELMODULE 0 CACHE BOOL "Define whether the HelloStelModule plugin should be statically linked.")
+SET(HELLOSTELMODULE_STATIC_PLUGIN_PATH "$ENV{STELROOT}/../exmodules/HelloStelModule/builds/unix/src/libHelloStelModule.a" CACHE PATH "The location of the libHelloStelModule.a static library")
+IF (USE_STATIC_PLUGIN_HELLOSTELMODULE)
+  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES "${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${HELLOSTELMODULE_STATIC_PLUGIN_PATH}")
 ENDIF()
 
 ########### Others ###########
