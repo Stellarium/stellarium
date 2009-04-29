@@ -1,0 +1,28 @@
+//
+// Name: View Data Test
+// License: Public Domain
+// Author: Matthew Gates
+// Description: Gets alt/azi and ra/dec coordinates for centre of view and displays them
+//
+
+LabelMgr.deleteAllLabels();
+
+var altLabId      = LabelMgr.labelScreen("alt=xxxxx",      20,  core.getScreenHeight()-150, true, 15, "#aaaaaa");
+var aziLabId      = LabelMgr.labelScreen("azi=xxxxx",      200, core.getScreenHeight()-150, true, 15, "#aaaaaa");
+var raLabId       = LabelMgr.labelScreen("ra=xxxxx",       20,  core.getScreenHeight()-180, true, 15, "#aaaaaa");
+var decLabId      = LabelMgr.labelScreen("dec=xxxxx",      200, core.getScreenHeight()-180, true, 15, "#aaaaaa");
+var raJ2000LabId  = LabelMgr.labelScreen("raJ2000=xxxxx",  20,  core.getScreenHeight()-210, true, 15, "#aaaaaa");
+var decJ2000LabId = LabelMgr.labelScreen("decJ2000=xxxxx", 200, core.getScreenHeight()-210, true, 15, "#aaaaaa");
+
+for(i=0; i<100; i+=0.2)
+{
+	LabelMgr.setLabelText(altLabId, "alt=" + core.getViewAltitudeAngle().toFixed(4));
+	LabelMgr.setLabelText(aziLabId, "azi=" + core.getViewAzimuthAngle().toFixed(4));
+	LabelMgr.setLabelText(raLabId, "ra=" + core.getViewRaAngle().toFixed(4));
+	LabelMgr.setLabelText(decLabId, "dec=" + core.getViewDecAngle().toFixed(4));
+	LabelMgr.setLabelText(raJ2000LabId, "raJ2000=" + core.getViewRaJ2000Angle().toFixed(4));
+	LabelMgr.setLabelText(decJ2000LabId, "decJ2000=" + core.getViewDecJ2000Angle().toFixed(4));
+	core.wait(0.2);
+}
+
+LabelMgr.deleteAllLabels();
