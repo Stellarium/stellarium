@@ -1,8 +1,8 @@
 //
-// Name: ScreenImageMgr Demo
+// Name: status label include file
 // License: Public Domain
 // Author: Matthew Gates
-// Description: An example script showing how to use the ScreenImageMgr module.
+// Description: provide a simple status label function for use in other scripts
 //
 
 var rootLabelText = "";
