@@ -133,6 +133,34 @@ public slots:
 	//! @param state the name of a preset state.
 	void clear(const QString& state="natural");
 
+	//! Get the current viewing direction altitude angle at center of view.
+	//! @return the altitude angle in decimal degrees.
+	//! 0 is horizon, zenith is 180, nadir = -180.
+	double getViewAltitudeAngle();
+
+	//! Get the current viewing direction azimuth angle at center of view.
+	//! @return the azimuth angle in decimal degrees as a compass bearing
+	//! i.e.  0 is North, 90 is East, 180 is South, 270 is West.
+	double getViewAzimuthAngle();
+
+	//! Get the current viewing direction Right Ascension at center of view.
+	//! @return the Right Ascension angle in decimal degrees.
+	//! The value returned falls in the range 0 .. 360
+	double getViewRaAngle();
+
+	//! Get the current viewing direction Declination angle at center of view.
+	//! @return the Declination angle in decimal degrees.
+	//! The value returned falls in the range -180 .. 180
+	double getViewDecAngle();
+
+	//! Get the current viewing direction Right Ascension in J2000 frame at center of view.
+	//! @return the Right Ascension angle in J2000 frame in decimal degrees.
+	double getViewRaJ2000Angle();
+
+	//! Get the current viewing direction Declination angle in J2000 frame at center of view.
+	//! @return the Declination angle in J2000 frame in decimal degrees.
+	double getViewDecJ2000Angle();
+
 	//! move the current viewing direction to some specified altitude and azimuth
 	//! angles may be specified in a format recognised by StelUtils::getDecAngle()
 	//! @param alt the altitude angle

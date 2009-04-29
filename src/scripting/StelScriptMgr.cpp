@@ -57,6 +57,8 @@
 #include <QDir>
 #include <QTemporaryFile>
 
+#include <cmath>
+
 Q_DECLARE_METATYPE(Vec3f);
 
 class StelScriptThread : public QThread
@@ -641,6 +643,59 @@ void StelMainScriptAPI::clear(const QString& state)
 	}
 }
 
+double StelMainScriptAPI::getViewAltitudeAngle()
+{
+	Vec3d current = StelApp::getInstance().getCore()->getNavigator()->getAltAzVisionDirection();
+	double alt, azi;
+	StelUtils::rectToSphe(&azi, &alt, current);
+	return alt*180/M_PI; // convert to degrees from radians
+}
+
+double StelMainScriptAPI::getViewAzimuthAngle()
+{
+	Vec3d current = StelApp::getInstance().getCore()->getNavigator()->getAltAzVisionDirection();
+	double alt, azi;
+	StelUtils::rectToSphe(&azi, &alt, current);
+	// The returned azimuth angle is in radians and set up such that:
+	// N=+/-PI; E=PI/2; S=0; W=-PI/2;
+	// But we want compass bearings, i.e. N=0, E=90, S=180, W=270
+	return std::fmod(((azi*180/M_PI)*-1)+180., 360.);
+}
+
+double StelMainScriptAPI::getViewRaAngle()
+{
+	Vec3d current = StelApp::getInstance().getCore()->getNavigator()->getEquinoxEquVisionDirection();
+	double ra, dec;
+	StelUtils::rectToSphe(&ra, &dec, current);
+	// returned RA angle is in range -PI .. PI, but we want 0 .. 360
+	return std::fmod((ra*180/M_PI)+360., 360.); // convert to degrees from radians
+}
+
+double StelMainScriptAPI::getViewDecAngle()
+{
+	Vec3d current = StelApp::getInstance().getCore()->getNavigator()->getEquinoxEquVisionDirection();
+	double ra, dec;
+	StelUtils::rectToSphe(&ra, &dec, current);
+	return dec*180/M_PI; // convert to degrees from radians
+}
+
+double StelMainScriptAPI::getViewRaJ2000Angle()
+{
+	Vec3d current = StelApp::getInstance().getCore()->getNavigator()->getJ2000EquVisionDirection();
+	double ra, dec;
+	StelUtils::rectToSphe(&ra, &dec, current);
+	// returned RA angle is in range -PI .. PI, but we want 0 .. 360
+	return std::fmod((ra*180/M_PI)+360., 360.); // convert to degrees from radians
+}
+
+double StelMainScriptAPI::getViewDecJ2000Angle()
+{
+	Vec3d current = StelApp::getInstance().getCore()->getNavigator()->getJ2000EquVisionDirection();
+	double ra, dec;
+	StelUtils::rectToSphe(&ra, &dec, current);
+	return dec*180/M_PI; // convert to degrees from radians
+}
+
 void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, float duration)
 {
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
@@ -688,7 +743,7 @@ StelScriptMgr::StelScriptMgr(QObject *parent)
 	
 	// Add all the StelModules into the script engine
 	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
-	foreach (StelModule* m, mmgr->getAllModules())
+	foreach (StelModule* m, mmgr->getRegisteredModules())
 	{
 		objectValue = engine.newQObject(m);
 		engine.globalObject().setProperty(m->objectName(), objectValue);
