@@ -126,7 +126,7 @@ StelModule* StelModuleMgr::loadPlugin(const QString& moduleID)
 		if (pluginInterface->getPluginId()==moduleID)
 		{
 			StelModule* sMod = pluginInterface->getStelModule();
-			qDebug() << "Loaded plugin " << moduleID << ".";
+			qDebug() << "Loaded static plugin " << moduleID << ".";
 			return sMod;
 		}
 	}
@@ -168,7 +168,7 @@ StelModule* StelModuleMgr::loadPlugin(const QString& moduleID)
 
 	StelPluginInterface* plugInt = qobject_cast<StelPluginInterface *>(obj);
 	StelModule* sMod = plugInt->getStelModule();
-	qDebug() << "Loaded plugin " << moduleID << ".";
+	qDebug() << "Loaded dynamic plugin " << moduleID << ".";
 	return sMod;
 }
 
