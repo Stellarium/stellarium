@@ -35,7 +35,7 @@ public:
 	virtual class StelModule* getStelModule() const = 0;
 
 	//! Get the name of the plugin. It should match the lib file name, e.g. HelloStelModule, or VirGO
-	virtual QString getPluginId() = 0;
+	virtual QString getPluginId() const = 0;
 };
 
 Q_DECLARE_INTERFACE(StelPluginInterface,"stellarium.StelPluginInterface/1.0");
