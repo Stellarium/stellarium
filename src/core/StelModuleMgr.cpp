@@ -35,6 +35,7 @@
 Q_IMPORT_PLUGIN(VirGO)
 #endif
 
+
 #ifdef USE_STATIC_PLUGIN_HELLOSTELMODULE
 Q_IMPORT_PLUGIN(HelloStelModule)
 #endif
