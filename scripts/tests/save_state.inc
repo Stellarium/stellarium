@@ -71,6 +71,12 @@ function saveState(stateName)
 // restoreState("state2", {"time":"force"});  // always restore the time and time rate
 function restoreState(stateName, options)
 {
+	// prevent type error if there are no options...
+	if (!options)
+	{
+		options = {"a":1};
+	}
+
 	if (!savedStates[stateName])
 	{
 		core.debug("restoreState() - WARNING no such saved state named: " + stateName);
@@ -103,6 +109,11 @@ function restoreState(stateName, options)
 	core.setMountMode(savedStates[stateName]["MountMode"]);
 
 	// optional restoration options...
+	if (!options["time"])
+	{
+		options["time"] = "smart";
+	}
+
 	if (options["time"] == "smart")
 	{
 		if (savedStates[stateName]["TimeIsNow"])
