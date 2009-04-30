@@ -175,6 +175,13 @@ public slots:
 	//! @param duration the duration of the movement in seconds
 	void moveToRaDec(const QString& ra, const QString& dec, float duration=1.);
 
+	//! move the current viewing direction to some specified right ascension and declination in the J2000 frame
+	//! angles may be specified in a format recognised by StelUtils::getDecAngle()
+	//! @param ra the right ascension angle
+	//! @param dec the declination angle
+	//! @param duration the duration of the movement in seconds
+	void moveToRaDecJ2000(const QString& ra, const QString& dec, float duration=1.);
+
 	//! Set the observer location
 	//! @param longitude the longitude in degrees. E is +ve.  
 	//!        values out of the range -180 .. 180 mean that
