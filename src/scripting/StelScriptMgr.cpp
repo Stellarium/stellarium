@@ -214,6 +214,17 @@ double StelMainScriptAPI::getTimeRate(void) const
 	return StelApp::getInstance().getCore()->getNavigator()->getTimeRate() / (0.00001157407407407407 * scriptSleeper.getRate());
 }
 
+bool StelMainScriptAPI::isRealTime()
+{
+	return StelApp::getInstance().getCore()->getNavigator()->getIsTimeNow();
+}
+
+void StelMainScriptAPI::setRealTime()
+{
+	setTimeRate(1.0);
+	StelApp::getInstance().getCore()->getNavigator()->setTimeNow();
+}
+
 void StelMainScriptAPI::wait(double t)
 {
 	scriptSleeper.sleep(t*1000);
@@ -309,6 +320,22 @@ void StelMainScriptAPI::setMaxFps(float m)
 float StelMainScriptAPI::getMaxFps() 
 {
 	return StelApp::getInstance().getMaxFps();
+}
+
+QString StelMainScriptAPI::getMountMode()
+{
+	if (StelApp::getInstance().getCore()->getNavigator()->getMountMode() == StelNavigator::MountEquatorial)
+		return "equatorial";
+	else
+		return "azimuthal";
+}
+
+void StelMainScriptAPI::setMountMode(const QString& mode)
+{
+	if (mode=="equatorial")
+		StelApp::getInstance().getCore()->getNavigator()->setMountMode(StelNavigator::MountEquatorial);
+	else if (mode=="azimuthal")
+		StelApp::getInstance().getCore()->getNavigator()->setMountMode(StelNavigator::MountAltAzimuthal);
 }
 
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
