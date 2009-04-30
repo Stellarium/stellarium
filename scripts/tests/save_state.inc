@@ -7,7 +7,8 @@
 //              associated with some string identifier.  This is arbitrary.  You can 
 //              have as many states as you like subject to whatever memory 
 //              restrictions there are...
-//
+//              note - you can pass options to the restoreState function to get it to
+//              ignore some parts of the saved state.  See below for details.
 
 // declare a global variable to store saved state
 var savedStates = new Array();
@@ -39,11 +40,36 @@ function saveState(stateName)
 	savedStates[stateName]["LandscapeMgrFlagLandscape"] = LandscapeMgr.getFlagLandscape();
 	savedStates[stateName]["LandscapeMgrFlagAtmosphere"] = LandscapeMgr.getFlagAtmosphere();
 	savedStates[stateName]["LandscapeMgrFlagFog"] = LandscapeMgr.getFlagFog();
+	savedStates[stateName]["MountMode"] = core.getMountMode();
+	savedStates[stateName]["TimeIsNow"] = core.isRealTime();
+	savedStates[stateName]["StateTime"] = core.getJDay();
+	savedStates[stateName]["StateTimeRate"] = core.getTimeRate();
+	savedStates[stateName]["AzimuthAngle"] = core.getViewAzimuthAngle();
+	savedStates[stateName]["AltitudeAngle"] = core.getViewAltitudeAngle();
+	savedStates[stateName]["RaAngle"] = core.getViewRaAngle();
+	savedStates[stateName]["DecAngle"] = core.getViewDecAngle();
 
 	core.debug("saveState() - state saved with ID: " + stateName);
 }
 
-function restoreState(stateName)
+// The options parameter is a hash of option values. Supported options:
+// "time": "ignore"		do not restore the simulation time and time rate
+// "time": "force"		always restore the saved time and time rate
+// "time": "smart"		(default) if at saveState, the time was the same as the system
+//				time and normal time rate, set this when restore is called.
+//				However, if the time rate was not like this, restore
+//				the time and time rate as it was when the saveState was called
+//
+// "view": true 		(default) restore the viewing direction and FOV.  Note that this 
+//				will be the alt/azi direction if the saved mount mode is azimuthal,
+//				else it will be the equarotial coordinates
+// "view": false		Do not restore the viewing direction and FOV.
+//
+// Examples:
+// restoreState("state1"); // use "smart" time behaviour
+// restoreState("state2", {"time":"ignore"}); // don't restore the time and time rate
+// restoreState("state2", {"time":"force"});  // always restore the time and time rate
+function restoreState(stateName, options)
 {
 	if (!savedStates[stateName])
 	{
@@ -74,6 +100,38 @@ function restoreState(stateName)
 	LandscapeMgr.setFlagLandscape(savedStates[stateName]["LandscapeMgrFlagLandscape"]);
 	LandscapeMgr.setFlagAtmosphere(savedStates[stateName]["LandscapeMgrFlagAtmosphere"]);
 	LandscapeMgr.setFlagFog(savedStates[stateName]["LandscapeMgrFlagFog"]);
+	core.setMountMode(savedStates[stateName]["MountMode"]);
+
+	// optional restoration options...
+	if (options["time"] == "smart")
+	{
+		if (savedStates[stateName]["TimeIsNow"])
+		{
+			core.setRealTime();
+		}
+		else
+		{
+			core.setJDay(savedStates[stateName]["StateTime"]);
+			core.setTimeRate(savedStates[stateName]["StateTimeRate"]);
+		}
+	}
+	else if (options["time"] == "force")
+	{
+		core.setJDay(savedStates[stateName]["StateTime"]);
+		core.setTimeRate(savedStates[stateName]["StateTimeRate"]);
+	}
+
+	if (options["view"])
+	{
+		if (savedStates[stateName]["MountMode"] == "azimuthal")
+		{
+			core.moveToAltAzi(savedStates[stateName]["AltitudeAngle"], savedStates[stateName]["AzimuthAngle"] , 0);
+		}
+		else
+		{
+			core.moveToRaDec(savedStates[stateName]["RaAngle"], savedStates[stateName]["DecAngle"] , 0);
+		}
+	}
 
 	core.debug("restoreState() - state restored with ID: " + stateName);
 }

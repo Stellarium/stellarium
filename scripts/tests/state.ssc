@@ -8,6 +8,7 @@
 include("save_state.inc");
 include("status_label.inc");
 
+core.moveToAltAzi(20,55);
 useStatusLabel("State Save Test: ", 50, 50, 16, "#ff0000");
 status("functions from save_state.inc");
 core.wait(2);
@@ -37,6 +38,9 @@ core.wait(0.2);
 LandscapeMgr.setFlagAtmosphere(true);
 core.wait(0.2);
 StarMgr.setFlagLabels(true);
+core.wait(0.2);
+core.moveToAltAzi(24,55);
+core.setMountMode("azimuthal");
 status("saving state with ID: state2");
 saveState("state2");
 core.wait(2);
