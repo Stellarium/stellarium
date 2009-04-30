@@ -26,7 +26,7 @@
 
 #include <QTimeLine>
 
-//#define DEBUG_STELSKYIMAGE_TILE
+//#define DEBUG_STELSKYIMAGE_TILE 1
 
 class QIODevice;
 class StelCore;
@@ -38,10 +38,10 @@ class ServerCredits
 public:
 	//! Very short credit to display in the loading bar
 	QString shortCredits;
-	
+
 	//! Full credits
 	QString fullCredits;
-	
+
 	//! The URL where to get more info about the server
 	QString infoURL;
 };
@@ -52,10 +52,10 @@ class DataSetCredits
 public:
 	//! Very short credit to display in the loading bar
 	QString shortCredits;
-	
+
 	//! Full credits
 	QString fullCredits;
-	
+
 	//! The URL where to get more info about the data collection
 	QString infoURL;
 };
@@ -64,94 +64,91 @@ public:
 class StelSkyImageTile : public MultiLevelJsonBase
 {
 	Q_OBJECT
-	
+
 	friend class StelSkyImageMgr;
-	
+
 public:
 	//! Default constructor
 	StelSkyImageTile() {initCtor();}
-	
+
 	//! Constructor
 	StelSkyImageTile(const QString& url, StelSkyImageTile* parent=NULL);
 	//! Constructor
 	StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* parent);
-	
+
 	//! Destructor
 	~StelSkyImageTile();
 
 	//! Draw the image on the screen.
 	void draw(StelCore* core, const StelPainter& sPainter);
-	
+
 	//! Return the dataset credits to use in the progress bar
 	DataSetCredits getDataSetCredits() const {return dataSetCredits;}
-	
+
 	//! Return the server credits to use in the progress bar
 	ServerCredits getServerCredits() const {return serverCredits;}
-	
+
 	//! Return true if the tile is fully loaded and can be displayed
 	bool isReadyToDisplay() const;
 
 	//! Convert the image informations to a map following the JSON structure.
 	//! It can be saved as JSON using the StelJsonParser methods.
 	QVariantMap toQVariantMap() const;
-	
+
 	//! Return the absolute path/URL to the image file
 	QString getAbsoluteImageURI() const {return absoluteImageURI;}
-	
+
 protected:
 	//! Minimum resolution of the data of the texture in degree/pixel
 	float minResolution;
-	
+
 	//! The credits of the server where this data come from
 	ServerCredits serverCredits;
-	
+
 	//! The credits for the data set
 	DataSetCredits dataSetCredits;
-	
+
 	//! URL where the image is located
 	QString absoluteImageURI;
-	
+
 	//! The image luminance in cd/m^2
 	float luminance;
-	
+
 	//! Whether the texture must be blended
 	bool alphaBlend;
-	
+
 	//! True if the tile is just a list of other tiles without texture for itself
 	bool noTexture;
-	
-	//! Direction of the vertices of each polygons in ICRS frame
-	QList<SphericalConvexPolygon> skyConvexPolygons;
-	
-	//! Positions of the vertex of each convex polygons in texture space
-	QList< QList<Vec2f> > textureCoords;
+
+	//! list of all the polygons.
+	QList<SphericalRegionP> skyConvexPolygons;
 
 	//! The texture of the tile
 	StelTextureSP tex;
-	
+
 protected:
 
 	//! Load the tile from a valid QVariantMap
 	virtual void loadFromQVariantMap(const QVariantMap& map);
-	
+
 private:
 	//! init the StelSkyImageTile
 	void initCtor();
-	
+
 	//! Return the list of tiles which should be drawn.
 	//! @param result a map containing resolution, pointer to the tiles
 	void getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& result, StelCore* core, const SphericalRegionP& viewPortPoly, float limitLuminance, bool recheckIntersect=true);
-	
+
 	//! Draw the image on the screen.
 	//! @return true if the tile was actually displayed
 	bool drawTile(StelCore* core, const StelPainter& sPainter);
-	
+
 	//! Return the minimum resolution
 	double getMinResolution() const {return minResolution;}
 
 	// Used for smooth fade in
 	QTimeLine* texFader;
-	
+
 #ifdef DEBUG_STELSKYIMAGE_TILE
 	static class StelFont* debugFont;
 #endif

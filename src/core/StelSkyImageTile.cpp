@@ -69,20 +69,20 @@ StelSkyImageTile::StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* par
 	}
 	initFromQVariantMap(map);
 }
-	
+
 // Destructor
 StelSkyImageTile::~StelSkyImageTile()
 {
 }
-	
+
 void StelSkyImageTile::draw(StelCore* core, const StelPainter& sPainter)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	
+
 	const float limitLuminance = core->getSkyDrawer()->getLimitLuminance();
 	QMultiMap<double, StelSkyImageTile*> result;
 	getTilesToDraw(result, core, prj->getViewportConvexPolygon(0, 0), limitLuminance, true);
-	
+
 	int numToBeLoaded=0;
 	foreach (StelSkyImageTile* t, result)
 		if (t->isReadyToDisplay()==false)
@@ -98,14 +98,14 @@ void StelSkyImageTile::draw(StelCore* core, const StelPainter& sPainter)
 		--i;
 		i.value()->drawTile(core, sPainter);
 	}
-	
+
 	deleteUnusedSubTiles();
 }
-	
+
 // Return the list of tiles which should be drawn.
 void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& result, StelCore* core, const SphericalRegionP& viewPortPoly, float limitLuminance, bool recheckIntersect)
 {
-	
+
 #ifndef NDEBUG
 	// When this method is called, we can assume that:
 	// - the parent tile min resolution was reached
@@ -117,29 +117,29 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		Q_ASSERT(isDeletionScheduled()==false);
 		const double degPerPixel = 1./core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()*180./M_PI;
 		Q_ASSERT(degPerPixel<parent->minResolution);
-		
+
 		Q_ASSERT(parent->isDeletionScheduled()==false);
 	}
 #endif
-		
+
 	// An error occured during loading
 	if (errorOccured)
 		return;
-	
+
 	// The JSON file is currently being downloaded
 	if (downloading)
 	{
 		//qDebug() << "Downloading " << contructorUrl;
 		return;
 	}
-	
+
 	if (luminance>0 && luminance<limitLuminance)
 	{
 		// Schedule a deletion
 		scheduleChildsDeletion();
 		return;
 	}
-	
+
 	// Check that we are in the screen
 	bool fullInScreen = true;
 	bool intersectScreen = false;
@@ -153,16 +153,17 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		}
 		else
 		{
-			foreach (const SphericalConvexPolygon poly, skyConvexPolygons)
+			foreach (const SphericalRegionP poly, skyConvexPolygons)
 			{
-				if (viewPortPoly->contains(poly))
+				const SphericalPolygonBase& polyBase = *(static_cast<const SphericalPolygonBase*>(poly.get()));
+				if (viewPortPoly->contains(polyBase))
 				{
 					intersectScreen = true;
 				}
 				else
 				{
 					fullInScreen = false;
-					if (viewPortPoly->intersects(poly))
+					if (viewPortPoly->intersects(polyBase))
 						intersectScreen = true;
 				}
 			}
@@ -175,11 +176,11 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		scheduleChildsDeletion();
 		return;
 	}
-	
+
 	// The tile is in screen, and it is a precondition that its resolution is higher than the limit
 	// make sure that it's not going to be deleted
 	cancelDeletion();
-	
+
 	if (noTexture==false)
 	{
 		if (!tex)
@@ -187,10 +188,10 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 			// The tile has an associated texture, but it is not yet loaded: load it now
 			StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
 			texMgr.setDefaultParams();
- 			texMgr.setMipmapsMode(true);
+			texMgr.setMipmapsMode(true);
 			texMgr.setMinFilter(GL_LINEAR);
- 			texMgr.setMagFilter(GL_LINEAR);
- 			texMgr.setWrapMode(GL_CLAMP_TO_EDGE);
+			texMgr.setMagFilter(GL_LINEAR);
+			texMgr.setWrapMode(GL_CLAMP_TO_EDGE);
 			tex = texMgr.createTextureThread(absoluteImageURI);
 			if (!tex)
 			{
@@ -199,11 +200,11 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 				return;
 			}
 		}
-		
+
 		// The tile is in screen and has a texture: every test passed :) The tile will be displayed
 		result.insert(minResolution, this);
 	}
-	
+
 	// Check if we reach the resolution limit
 	const double degPerPixel = 1./core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()*180./M_PI;
 	if (degPerPixel < minResolution)
@@ -240,83 +241,56 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 // Draw the image on the screen.
 // Assume GL_TEXTURE_2D is enabled
 bool StelSkyImageTile::drawTile(StelCore* core, const StelPainter& sPainter)
-{	
+{
 	if (!tex->bind())
-	{
 		return false;
-	}
-	
+
 	if (!texFader)
 	{
 		texFader = new QTimeLine(1000, this);
 		texFader->start();
 	}
-	
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	const float factorX = tex->getCoordinates()[2][0];
-	const float factorY = tex->getCoordinates()[2][1];
 
 	// Draw the real texture for this image
 	const float ad_lum = (luminance>0) ? core->getToneReproducer()->adaptLuminanceScaled(luminance) : 1.f;
+	Vec4f color;
 	if (alphaBlend==true || texFader->state()==QTimeLine::Running)
 	{
 		if (!alphaBlend)
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		glEnable(GL_BLEND);
-		glColor4f(ad_lum,ad_lum,ad_lum, texFader->currentValue());
+		color.set(ad_lum,ad_lum,ad_lum, texFader->currentValue());
 	}
 	else
 	{
 		glDisable(GL_BLEND);
-		glColor3f(ad_lum,ad_lum,ad_lum);
+		color.set(ad_lum,ad_lum,ad_lum, 1.);
 	}
-	
-	for (int p=0;p<skyConvexPolygons.size();++p)
-	{
-		const SphericalConvexPolygon& poly = skyConvexPolygons.at(p);
-		const QList<Vec2f>& texCoords = textureCoords.at(p);
-				
-		Q_ASSERT(poly.getConvexContour().size()==texCoords.size());
-						
-		Vec3d win;
-		const int N=poly.getConvexContour().size()-1;
-		int idx=N;
-		int diff = 0;
-		// Using TRIANGLE STRIP requires to use the following vertex order N-0,0,N-1,1,N-2,2 etc..
-		glBegin(GL_TRIANGLE_STRIP);
-		for (int i=0;i<=N;++i)
-		{
-			idx = (diff==0 ? N-i/2 : i/2);
-			++diff;
-			if (diff>1) diff=0;
-					
-			glTexCoord2d(texCoords[idx][0]*factorX, texCoords[idx][1]*factorY);
-			prj->project(poly.getConvexContour()[idx],win);
-			glVertex3dv(win);
-		}
-		glEnd();
-	}
+
+	glColor4fv(color);
+	foreach (const SphericalRegionP& poly, skyConvexPolygons)
+		sPainter.drawSphericalRegion(poly.get(), StelPainter::SphericalPolygonDrawModeTextureFill);
+
 #ifdef DEBUG_STELSKYIMAGE_TILE
 	if (debugFont==NULL)
 	{
 		debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
 	}
-	glColor3f(1.0,0.5,0.5);
-	foreach (const SphericalConvexPolygon& poly, skyConvexPolygons)
+	color.set(1.0,0.5,0.5,1.0);
+	foreach (const SphericalRegionP& poly, skyConvexPolygons)
 	{
 		Vec3d win;
-		Vec3d bary = poly.getBarycenter();
-		prj->project(bary,win);
+		Vec3d bary = poly->getPointInside();
+		sPainter.getProjector()->project(bary,win);
 		sPainter.drawText(debugFont, win[0], win[1], getAbsoluteImageURI());
-		
 		glDisable(GL_TEXTURE_2D);
-		sPainter.drawPolygon(poly);
+		sPainter.drawSphericalRegion(poly.get(), StelPainter::SphericalPolygonDrawModeBoundary, &color);
 		glEnable(GL_TEXTURE_2D);
 	}
 #endif
 	if (!alphaBlend)
 		glBlendFunc(GL_ONE, GL_ONE); // Revert
-	
+
 	return true;
 }
 
@@ -343,13 +317,13 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		serverCredits.fullCredits = sCredits.value("full").toString();
 		serverCredits.infoURL = sCredits.value("infoUrl").toString();
 	}
-	
+
 	shortName = map.value("shortName").toString();
 	bool ok=false;
 	minResolution = map.value("minResolution").toDouble(&ok);
 	if (!ok)
 		throw std::runtime_error("minResolution expect a double value");
-	
+
 	if (map.contains("luminance"))
 	{
 		luminance = map.value("luminance").toDouble(&ok);
@@ -357,7 +331,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 			throw std::runtime_error("luminance expect a float value");
 		qWarning() << "luminance in preview JSON files is deprecated. Replace with maxBrightness.";
 	}
-	
+
 	if (map.contains("maxBrightness"))
 	{
 		luminance = map.value("maxBrightness").toDouble(&ok);
@@ -365,20 +339,27 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 			throw std::runtime_error("maxBrightness expect a float value");
 		luminance = StelApp::getInstance().getCore()->getSkyDrawer()->surfacebrightnessToLuminance(luminance);
 	}
-	
+
 	if (map.contains("alphaBlend"))
 	{
 		alphaBlend = map.value("alphaBlend").toBool();
 	}
-	
+
 	// Load the convex polygons (if any)
 	QVariantList polyList = map.value("skyConvexPolygons").toList();
 	if (polyList.empty())
 		polyList = map.value("worldCoords").toList();
 	else
 		qWarning() << "skyConvexPolygons in preview JSON files is deprecated. Replace with worldCoords.";
-	foreach (const QVariant& polyRaDec, polyList)
+
+	// Load the matching textures positions (if any)
+	QVariantList texCoordList = map.value("textureCoords").toList();
+	if (!texCoordList.isEmpty() && polyList.size()!=texCoordList.size())
+			throw std::runtime_error("the number of convex polygons does not match the number of texture space polygon");
+
+	for (int i=0;i<polyList.size();++i)
 	{
+		const QVariant& polyRaDec = polyList.at(i);
 		QVector<Vec3d> vertices;
 		foreach (QVariant vRaDec, polyRaDec.toList())
 		{
@@ -390,27 +371,32 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 			vertices.append(v);
 		}
 		Q_ASSERT(vertices.size()==4);
-		SphericalConvexPolygon pol(vertices);
-		Q_ASSERT(pol.checkValid());
-		skyConvexPolygons.append(pol);
-	}
-	
-	// Load the matching textures positions (if any)
-	polyList = map.value("textureCoords").toList();
-	foreach (const QVariant& polyXY, polyList)
-	{
-		QList<Vec2f> vertices;
-		foreach (QVariant vXY, polyXY.toList())
+
+		if (!texCoordList.isEmpty())
 		{
-			const QVariantList vl = vXY.toList();
-			vertices.append(Vec2f(vl.at(0).toDouble(&ok), vl.at(1).toDouble(&ok)));
-			if (!ok)
-				throw std::runtime_error("wrong X and Y, expect a double value");
+			const QVariant& polyXY = texCoordList.at(i);
+			QVector<Vec2f> texCoords;
+			foreach (QVariant vXY, polyXY.toList())
+			{
+				const QVariantList vl = vXY.toList();
+				texCoords.append(Vec2f(vl.at(0).toDouble(&ok), vl.at(1).toDouble(&ok)));
+				if (!ok)
+					throw std::runtime_error("wrong X and Y, expect a double value");
+			}
+			Q_ASSERT(texCoords.size()==4);
+
+			SphericalTexturedConvexPolygon* pol = new SphericalTexturedConvexPolygon(vertices, texCoords);
+			Q_ASSERT(pol->checkValid());
+			skyConvexPolygons.append(SphericalRegionP(pol));
 		}
-		Q_ASSERT(vertices.size()==4);
-		textureCoords.append(vertices);
+		else
+		{
+			SphericalConvexPolygon* pol = new SphericalConvexPolygon(vertices);
+			Q_ASSERT(pol->checkValid());
+			skyConvexPolygons.append(SphericalRegionP(pol));
+		}
 	}
-	
+
 	if (map.contains("imageUrl"))
 	{
 		QString imageUrl = map.value("imageUrl").toString();
@@ -430,12 +416,10 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 				absoluteImageURI = imageUrl;
 			}
 		}
-		if (skyConvexPolygons.size()!=textureCoords.size())
-			throw std::runtime_error("the number of convex polygons does not match the number of texture space polygon");
 	}
 	else
 		noTexture = true;
-	
+
 	// This is a list of URLs to the child tiles or a list of already loaded map containing child information
 	// (in this later case, the StelSkyImageTile objects will be created later)
 	subTilesUrls = map.value("subTiles").toList();
@@ -461,7 +445,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 QVariantMap StelSkyImageTile::toQVariantMap() const
 {
 	QVariantMap res;
-	
+
 	// Image credits
 	QVariantMap imCredits;
 	if (!dataSetCredits.shortCredits.isEmpty())
@@ -472,7 +456,7 @@ QVariantMap StelSkyImageTile::toQVariantMap() const
 		imCredits["infoUrl"]=dataSetCredits.infoURL;
 	if (!imCredits.empty())
 		res["imageCredits"]=imCredits;
-	
+
 	// Server credits
 	QVariantMap serCredits;
 	if (!serverCredits.shortCredits.isEmpty())
@@ -483,10 +467,10 @@ QVariantMap StelSkyImageTile::toQVariantMap() const
 		imCredits["infoUrl"]=serverCredits.infoURL;
 	if (!serCredits.empty())
 		res["serverCredits"]=serCredits;
-	
+
 	// Misc
 	if (!shortName.isEmpty())
-		res["shortName"] = shortName;	
+		res["shortName"] = shortName;
 	if (minResolution>0)
 		 res["minResolution"]=minResolution;
 	if (luminance>0)
@@ -495,51 +479,17 @@ QVariantMap StelSkyImageTile::toQVariantMap() const
 		res["alphaBlend"]=true;
 	if (noTexture==false)
 		res["imageUrl"]=absoluteImageURI;
-	
+
 	// Polygons
-	if (!skyConvexPolygons.isEmpty())
-	{
-		QVariantList polygsL;
-		foreach (const SphericalConvexPolygon& poly, skyConvexPolygons)
-		{
-			QVariantList polyL;
-			for (int i=0;i<poly.getConvexContour().size();++i)
-			{
-				double ra, dec;
-				StelUtils::rectToSphe(&ra, &dec, poly.getConvexContour().at(i));
-				QVariantList vL;
-				vL.append(ra);
-				vL.append(dec);
-				polyL.append(vL);
-			}
-			polygsL.append(polyL);
-		}
-		res["worldCoords"]=polygsL;
-	}
-	
+	// TODO
+
 	// textures positions
-	if (!textureCoords.empty())
-	{
-		QVariantList polygsL;
-		foreach (const QList<Vec2f>& poly, textureCoords)
-		{
-			QVariantList polyL;
-			foreach (Vec2f v, poly)
-			{
-				QVariantList vL;
-				vL.append(v[0]);
-				vL.append(v[1]);
-				polyL.append(vL);
-			}
-			polygsL.append(polyL);
-		}
-		res["textureCoords"]=polygsL;
-	}
-	
+	// TODO
+
 	if (!subTilesUrls.empty())
 	{
 		res["subTiles"] = subTilesUrls;
 	}
-	
+
 	return res;
 }
