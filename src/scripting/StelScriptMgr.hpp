@@ -102,6 +102,14 @@ public slots:
 	//! Get simulation time rate.
 	//! @return time speed as a multiple of real time.
 	double getTimeRate(void) const;
+
+	//! Get the simulation time and rate state - is it "real time"
+	//! @return true if the time rate is normal, and the simulation time 
+	//! is real time, else return false
+	bool isRealTime();
+	
+	//! Set the simulation time to the current system time, and the time rate to 1
+	void setRealTime();
 	
 	//! Pauses the script for t seconds
 	//! @param t the number of seconds to wait
@@ -238,6 +246,14 @@ public slots:
         //! Get the current maximum frames per second.
         //! @return The current maximum frames per secon setting.
         float getMaxFps();
+
+	//! Get the mount mode as a string
+	//! @return "equatorial" or "azimuthal"
+	QString getMountMode();
+
+	//! Set the mount mode
+	//! @param mode should be "equatorial" or "azimuthal"
+	void setMountMode(const QString& mode);
 
 	//! Load an image which will have sky coordinates.
 	//! @param id a string ID to be used when referring to this

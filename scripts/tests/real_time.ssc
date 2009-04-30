@@ -1,0 +1,18 @@
+//
+// Name: View Data Test
+// License: Public Domain
+// Author: Matthew Gates
+// Description: Gets alt/azi and ra/dec coordinates for centre of view and displays them
+//
+
+LabelMgr.deleteAllLabels();
+
+var labId = LabelMgr.labelScreen("realtime=", 20, core.getScreenHeight()-150, true, 15, "#aaaaaa");
+
+for(i=0; i<10; i+=0.2)
+{
+	LabelMgr.setLabelText(labId, "realtime=" + core.isRealTime());
+	core.wait(0.2);
+}
+
+LabelMgr.deleteAllLabels();
