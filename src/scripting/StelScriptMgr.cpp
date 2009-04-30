@@ -726,6 +726,22 @@ void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float
 	mvmgr->moveTo(aim, duration, false);
 }
 
+void StelMainScriptAPI::moveToRaDecJ2000(const QString& ra, const QString& dec, float duration)
+{
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+	Q_ASSERT(mvmgr);
+
+	GETSTELMODULE(StelObjectMgr)->unSelect();
+
+	Vec3d aimJ2000, aimEquofDate;
+	double dRa = StelUtils::getDecAngle(ra); 
+	double dDec = StelUtils::getDecAngle(dec);
+
+	StelUtils::spheToRect(dRa,dDec,aimJ2000);
+	aimEquofDate = StelApp::getInstance().getCore()->getNavigator()->j2000ToEquinoxEqu(aimJ2000);
+	mvmgr->moveTo(aimEquofDate, duration, false);
+}
+
 StelScriptMgr::StelScriptMgr(QObject *parent) 
 	: QObject(parent), 
 	  thread(NULL)

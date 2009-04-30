@@ -1,0 +1,49 @@
+//
+// Name: Goto Demo
+// License: Public Domain
+// Author: Matthew Gates
+// Description: An example script for checking that the core.moveToRaDec and core.moveToRaDecJ2000
+//              functions are working OK.
+//
+
+include("status_label.inc");
+
+function cycleGrids()
+{
+	status("equ of date grid on");
+	GridLinesMgr.setFlagEquatorGrid(true);
+	GridLinesMgr.setFlagEquatorJ2000Grid(false);
+	core.wait(2);
+	status("J2000 grid on");
+	GridLinesMgr.setFlagEquatorGrid(false);
+	GridLinesMgr.setFlagEquatorJ2000Grid(true);
+	core.wait(2);
+	status("both grids on");
+	GridLinesMgr.setFlagEquatorGrid(true);
+	core.wait(2);
+}
+
+core.clear("starchart");
+core.setTimeRate(0);
+StelMovementMgr.zoomTo(2, 2);
+useStatusLabel("Goto test: ", 50, 50, 16, "#ff0000");
+status("at 0,0 equ of date...");
+core.moveToRaDec(0,0);
+core.wait(2);
+cycleGrids();
+status("at 0,0 J2000...");
+core.moveToRaDecJ2000(0,0);
+core.wait(2);
+cycleGrids();
+status("at 0,0 equ of date...");
+core.moveToRaDec(0,0);
+core.wait(2);
+cycleGrids();
+status("at 0,0 J2000...");
+core.moveToRaDecJ2000(0,0);
+core.wait(2);
+cycleGrids();
+
+core.moveToRaDec()
+LabelMgr.deleteAllLabels();
+
