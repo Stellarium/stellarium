@@ -30,6 +30,9 @@
 #include "SearchDialog.hpp"
 #include "ConfigurationDialog.hpp"
 #include "DownloadPopup.hpp"
+#ifdef ENABLE_SCRIPT_CONSOLE
+#include "ScriptConsole.hpp"
+#endif
 #include <QDebug>
 #include <QGraphicsItem>
 
@@ -125,6 +128,10 @@ public:
 	
 	DownloadPopup* getDownloadPopup() {return &downloadPopup;}
 
+#ifdef ENABLE_SCRIPT_CONSOLE
+	ScriptConsole* getScriptConsole() {return &scriptConsole;}
+#endif
+
 public slots:
 	//! Define whether the buttons toggling image flip should be visible
 	void setFlagShowFlipButtons(bool b);
@@ -199,6 +206,9 @@ private:
 	ViewDialog viewDialog;
 	ConfigurationDialog configurationDialog;
 	DownloadPopup downloadPopup;
+#ifdef ENABLE_SCRIPT_CONSOLE
+	ScriptConsole scriptConsole;
+#endif
 	
 	class StelProgressBarMgr* progressBarMgr;
 	

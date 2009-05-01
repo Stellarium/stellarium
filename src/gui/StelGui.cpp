@@ -45,6 +45,9 @@
 #include "StelSkyDrawer.hpp"
 #include "MeteorMgr.hpp"
 #include "DownloadPopup.hpp"
+#ifdef ENABLE_SCRIPT_CONSOLE
+#include "ScriptConsole.hpp"
+#endif
 #include "StelDownloadMgr.hpp"
 #include "StelScriptMgr.hpp"
 
@@ -183,6 +186,9 @@ void StelGui::init()
 	addGuiActions("actionShow_SkyView_Window_Global", N_("Sky and viewing options window"), "F4", group, true, false);
 	addGuiActions("actionShow_DateTime_Window_Global", N_("Date/time window"), "F5", group, true, false);
 	addGuiActions("actionShow_Location_Window_Global", N_("Location window"), "F6", group, true, false);
+#ifdef ENABLE_SCRIPT_CONSOLE
+	addGuiActions("actionShow_ScriptConsole_Window_Global", N_("Script console window"), "F12", group, true, false);
+#endif
 	
 	group = N_("Date and Time");
 	addGuiActions("actionDecrease_Script_Speed", N_("Decrease script speed"), "", group, false, false);
@@ -331,6 +337,11 @@ void StelGui::init()
 	
 	connect(getGuiActions("actionShow_Location_Window_Global"), SIGNAL(toggled(bool)), &locationDialog, SLOT(setVisible(bool)));
 	connect(&locationDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Location_Window_Global"), SLOT(setChecked(bool)));
+
+#ifdef ENABLE_SCRIPT_CONSOLE
+	connect(getGuiActions("actionShow_ScriptConsole_Window_Global"), SIGNAL(toggled(bool)), &scriptConsole, SLOT(setVisible(bool)));
+	connect(&scriptConsole, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_ScriptConsole_Window_Global"), SLOT(setChecked(bool)));
+#endif
 
 	connect(getGuiActions("actionShow_Configuration_Window_Global"), SIGNAL(toggled(bool)), &configurationDialog, SLOT(setVisible(bool)));
 	connect(&configurationDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Configuration_Window_Global"), SLOT(setChecked(bool)));

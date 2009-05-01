@@ -954,7 +954,11 @@ bool StelScriptMgr::runScript(const QString& fileName)
 	QString scriptDir;
 	try
 	{
-		absPath = StelApp::getInstance().getFileMgr().findFile("scripts/" + fileName);
+		if (QFileInfo(fileName).isAbsolute())
+			absPath = fileName;
+		else
+			absPath = StelApp::getInstance().getFileMgr().findFile("scripts/" + fileName);
+
 		scriptDir = QFileInfo(absPath).dir().path();
 	}
 	catch (std::runtime_error& e)
