@@ -39,6 +39,7 @@ public slots:
 	void runScript();
 	void loadScript();
 	void saveScript();
+	void preprocessScript();
 	void scriptEnded();
 	void appendLogLine(const QString& s);
 	
@@ -47,6 +48,9 @@ protected:
 	
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
+
+private:
+	QString getFileMask();
 
 };
 

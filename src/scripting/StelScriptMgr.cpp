@@ -475,6 +475,7 @@ void StelMainScriptAPI::exit(void)
 void StelMainScriptAPI::debug(const QString& s)
 {
 	qDebug() << "script: " << s;
+	StelApp::getInstance().getScriptMgr().debug(s);
 }
 
 double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)
@@ -826,7 +827,9 @@ QStringList StelScriptMgr::getScriptList(void)
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: could not list scripts:" << e.what();
+		QString msg = QString("WARNING: could not list scripts: %1").arg(e.what());
+		qWarning() << msg;
+		emit(scriptDebug(msg));
 	}
 	return scriptFiles;
 }
@@ -851,7 +854,9 @@ const QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, co
 		QFile file(StelApp::getInstance().getFileMgr().findFile("scripts/" + s, StelFileMgr::File));
 		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
-			qWarning() << "script file " << s << " could not be opened for reading";
+			QString msg = QString("WARNING: script file %1 could not be opened for reading").arg(s);
+			emit(scriptDebug(msg));
+			qWarning() << msg;
 			return QString();
 		}
 
@@ -869,7 +874,9 @@ const QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, co
 	}
 	catch(std::runtime_error& e)
 	{
-		qWarning() << "script file " << s << " could not be found:" << e.what();
+		QString msg = QString("WARNING: script file %1 could not be found: %2").arg(s).arg(e.what());
+		emit(scriptDebug(msg));
+		qWarning() << msg;
 		return QString();
 	}
 }
@@ -896,7 +903,9 @@ const QString StelScriptMgr::getDescription(const QString& s)
 		QFile file(StelApp::getInstance().getFileMgr().findFile("scripts/" + s, StelFileMgr::File));
 		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
-			qWarning() << "script file " << s << " could not be opened for reading";
+			QString msg = QString("WARNING: script file %1 could not be opened for reading").arg(s);
+			emit(scriptDebug(msg));
+			qWarning() << msg;
 			return QString();
 		}
 
@@ -937,7 +946,9 @@ const QString StelScriptMgr::getDescription(const QString& s)
 	}
 	catch(std::runtime_error& e)
 	{
-		qWarning() << "script file " << s << " could not be found:" << e.what();
+		QString msg = QString("WARNING: script file %1 could not be found: %2").arg(s).arg(e.what());
+		emit(scriptDebug(msg));
+		qWarning() << msg;
 		return QString();
 	}
 }
@@ -947,7 +958,9 @@ bool StelScriptMgr::runScript(const QString& fileName)
 {
 	if (thread!=NULL)
 	{
-		qWarning() << "ERROR: there is already a script running, please wait that it's over.";
+		QString msg = QString("ERROR: there is already a script running, please wait that it's over.");
+		emit(scriptDebug(msg));
+		qWarning() << msg;
 		return false;
 	}
 	QString absPath;
@@ -963,7 +976,9 @@ bool StelScriptMgr::runScript(const QString& fileName)
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: could not find script file " << fileName << ": " << e.what();
+		QString msg = QString("WARNING: could not find script file %1: %2").arg(fileName).arg(e.what());
+		emit(scriptDebug(msg));
+		qWarning() << msg;
 		return false;
 	}
 	// pre-process the script into a temporary file
@@ -971,13 +986,17 @@ bool StelScriptMgr::runScript(const QString& fileName)
 	bool ok = false;
 	if (!tmpFile.open())
 	{
-		qWarning() << "WARNING: cannot create temporary file for script pre-processing";
+		QString msg = QString("WARNING: cannot create temporary file for script pre-processing");
+		emit(scriptDebug(msg));
+		qWarning() << msg;
 		return false;
 	}
 	QFile fic(absPath);
 	if (!fic.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "WARNING: cannot open script:" << fileName;
+		QString msg = QString("WARNING: cannot open script: %1").arg(fileName);
+		emit(scriptDebug(msg));
+		qWarning() << msg;
 		tmpFile.close();
 		return false;
 	}
@@ -1012,13 +1031,17 @@ bool StelScriptMgr::stopScript(void)
 {
 	if (thread)
 	{
-		qDebug() << "asking running script to exit";
+		QString msg = QString("INFO: asking running script to exit");
+		emit(scriptDebug(msg));
+		qDebug() << msg;
 		thread->terminate();
 		return true;
 	}
 	else
 	{
-		qWarning() << "StelScriptMgr::stopScript - no script is running";
+		QString msg = QString("WARNING: no script is running");
+		emit(scriptDebug(msg));
+		qWarning() << msg;
 		return false;
 	}
 }
@@ -1040,6 +1063,11 @@ double StelScriptMgr::getScriptRate(void)
 	return mainAPI->getScriptSleeper().getRate();
 }
 
+void StelScriptMgr::debug(const QString& msg)
+{
+	emit(scriptDebug(msg));
+}
+
 void StelScriptMgr::scriptEnded()
 {
 	GETSTELMODULE(StelGui)->setScriptKeys(false);
@@ -1048,7 +1076,9 @@ void StelScriptMgr::scriptEnded()
 	thread=NULL;
 	if (engine.hasUncaughtException())
 	{
-		qWarning() << "Script error: " << engine.uncaughtException().toString() << "@ line" << engine.uncaughtExceptionLineNumber();
+		QString msg = QString("script error: \"%1\" @ line %2").arg(engine.uncaughtException().toString()).arg(engine.uncaughtExceptionLineNumber());
+		emit(scriptDebug(msg));
+		qWarning() << msg;
 	}
 	emit(scriptStopped());
 }

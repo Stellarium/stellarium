@@ -27,6 +27,10 @@
 #include <QTime>
 #include "VecMath.hpp"
 
+#ifdef ENABLE_SCRIPT_CONSOLE
+class ScriptConsole;
+#endif
+
 //! @class ScriptSleeper
 //! provides a blocking sleep function which can receive a signal
 //! changing the rate at which the sleep timer counts down.
@@ -399,6 +403,10 @@ class StelScriptMgr : public QObject
 {
 Q_OBJECT
 		
+#ifdef ENABLE_SCRIPT_CONSOLE
+friend class ScriptConsole;
+#endif
+
 public:
 	StelScriptMgr(QObject *parent=0);
 	~StelScriptMgr();
@@ -459,6 +467,10 @@ public slots:
 	void setScriptRate(double r);
 	double getScriptRate(void);
 
+	//! cause the emission of the scriptDebug signal.  This is so that functions in
+	//! StelMainScriptAPI can explicitly send information to the ScriptConsole
+	void debug(const QString& msg);
+
 private slots:
 	//! Called at the end of the running thread
 	void scriptEnded();
@@ -468,6 +480,8 @@ signals:
 	void scriptRunning();
 	//! Notification when a script has stopped running 
 	void scriptStopped();
+	//! Notification of a script event - warnings, current execution line etc.
+	void scriptDebug(const QString&);
 
 private:
 	// Utility functions for preprocessor

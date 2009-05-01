@@ -34,6 +34,22 @@
 #include <QDateTime>
 #include <QPlainTextEdit>
 
+void dumpFile(QString fileName)
+{
+	qDebug() << "dumpFile(" + fileName + "):";
+	QFile file(fileName);
+	if (file.open(QIODevice::ReadOnly))
+	{
+		while(!file.atEnd()) 
+		{
+			QString line = file.readLine();
+			line.replace("\n", "");
+			qDebug() << line;
+		}
+		file.close();
+	}
+}
+
 ScriptConsole::ScriptConsole()
 {
 	ui = new Ui_scriptConsoleForm;
@@ -58,13 +74,23 @@ void ScriptConsole::styleChanged()
 void ScriptConsole::createDialogContent()
 {
 	ui->setupUi(dialog);
+	ui->includeEdit->setText(StelApp::getInstance().getFileMgr().getInstallationDir() + "/scripts");
+
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->clearButton, SIGNAL(clicked()), ui->scriptEdit, SLOT(clear()));
 	connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(loadScript()));
 	connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(saveScript()));
+	connect(ui->preprocessSSCButton, SIGNAL(clicked()), this, SLOT(preprocessScript()));
 	connect(ui->runButton, SIGNAL(clicked()), this, SLOT(runScript()));
 	connect(ui->stopButton, SIGNAL(clicked()), &StelApp::getInstance().getScriptMgr(), SLOT(stopScript()));
 	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptStopped()), this, SLOT(scriptEnded()));
+	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptDebug(const QString&)), this, SLOT(appendLogLine(const QString&)));
+#ifndef ENABLE_STRATOSCRIPT_COMPAT
+	ui->preprocessSTSButton->setHidden(true);
+#else
+	connect(ui->preprocessSTSButton, SIGNAL(clicked()), this, SLOT(preprocessScript()));
+#endif
+	ui->tabs->setCurrentIndex(0);
 }
 
 void ScriptConsole::loadScript()
@@ -72,11 +98,12 @@ void ScriptConsole::loadScript()
 	QString fileName = QFileDialog::getOpenFileName(&StelMainGraphicsView::getInstance(), 
 	                                                tr("Load Script"), 
 	                                                StelApp::getInstance().getFileMgr().getInstallationDir() + "/scripts", 
-	                                                tr("Script Files (*.ssc)"));
+	                                                tr("Script Files") + " " + getFileMask());
 	QFile file(fileName);
 	if (file.open(QIODevice::ReadOnly))
 	{
 		ui->scriptEdit->setPlainText(file.readAll());
+		ui->includeEdit->setText(StelFileMgr::dirName(fileName));
 		file.close();
 	}
 	ui->tabs->setCurrentIndex(0);
@@ -97,7 +124,7 @@ void ScriptConsole::saveScript()
 	QString fileName = QFileDialog::getSaveFileName(&StelMainGraphicsView::getInstance(), 
 	                                                tr("Save Script"), 
 	                                                saveDir,
-	                                                tr("Script Files (*.ssc)"));
+	                                                tr("Script Files") + " " + getFileMask());
 	QFile file(fileName);
 	if (file.open(QIODevice::WriteOnly))
 	{
@@ -107,6 +134,44 @@ void ScriptConsole::saveScript()
 	}
 	else
 		qWarning() << "ERROR - cannot write script file";
+}
+
+void ScriptConsole::preprocessScript()
+{
+	qDebug() << "ScriptConsole::preprocessScript";
+	QTemporaryFile src(QDir::tempPath() + "/stelscriptXXXXXX");
+	QTemporaryFile dest(QDir::tempPath() + "/stelscriptXXXXXX");
+	QString srcName;
+	if (src.open())
+	{
+		QTextStream out(&src);
+		out << ui->scriptEdit->toPlainText();
+		srcName = src.fileName();
+		src.close();
+		src.open();
+		if (dest.open())
+		{
+			if (sender() == ui->preprocessSSCButton)
+			{
+				qDebug() << "Preprocessing with SSC proprocessor";
+				StelApp::getInstance().getScriptMgr().preprocessScript(src, dest, ui->includeEdit->text());
+			}
+#ifdef ENABLE_STRATOSCRIPT_COMPAT
+			else if (sender() == ui->preprocessSTSButton)
+			{
+				qDebug() << "Preprocessing with STS proprocessor";
+				StelApp::getInstance().getScriptMgr().preprocessStratoScript(src, dest, ui->includeEdit->text());
+			}
+#endif
+			else
+				qWarning() << "WARNING: unknown preprocessor type";
+				
+			dest.seek(0);
+			ui->scriptEdit->setPlainText(dest.readAll());
+			dest.close();
+		}
+	}
+	ui->tabs->setCurrentIndex(0);
 }
 
 void ScriptConsole::runScript()
@@ -168,3 +233,11 @@ void ScriptConsole::appendLogLine(const QString& s)
 	ui->outputBrowser->setHtml(html);
 }
 
+QString ScriptConsole::getFileMask()
+{
+#ifdef ENABLE_STRATOSCRIPT_COMPAT
+	return "(*.ssc *.sts)";
+#else
+	return "(*.ssc)";
+#endif
+}
