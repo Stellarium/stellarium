@@ -79,6 +79,7 @@ SET(GENERATE_PYTHON_WRAPPERS 0 CACHE BOOL "Define whether python wrapper should 
 SET(GENERATE_STELMAINLIB 0)
 # Activate sound support
 SET(ENABLE_SOUND 0 CACHE BOOL "Define whether sound support should be activated, options are: 1 or 0.")
+SET(ENABLE_SCRIPT_CONSOLE 0 CACHE BOOL "Define whether to build the script console feature, options are: 1 or 0.")
 SET(ENABLE_STRATOSCRIPT_COMPAT 0 CACHE BOOL "Set to 1 or true if you want to build the Stratoscript compatibility mode")
 
 # On WIN32 we need to split the main binary into a small binary and a dll
@@ -106,6 +107,9 @@ SET(QT_USE_QTTEST TRUE)
 IF(ENABLE_SOUND)
   ADD_DEFINITIONS(-DHAVE_QT_PHONON)
   SET(QT_USE_PHONON TRUE)
+ENDIF()
+IF(ENABLE_SCRIPT_CONSOLE)
+  ADD_DEFINITIONS(-DENABLE_SCRIPT_CONSOLE)
 ENDIF()
 INCLUDE(${QT_USE_FILE})
 
