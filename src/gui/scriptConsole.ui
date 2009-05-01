@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>755</width>
-    <height>402</height>
+    <width>680</width>
+    <height>394</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -143,9 +143,139 @@
        <number>0</number>
       </property>
       <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="loadButton">
+          <property name="toolTip">
+           <string>load script from file</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../../data/mainRes.qrc">
+            <normaloff>:/graphicGui/gui/folder.png</normaloff>:/graphicGui/gui/folder.png</iconset>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+O</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="saveButton">
+          <property name="toolTip">
+           <string>save script to file</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../../data/mainRes.qrc">
+            <normaloff>:/graphicGui/gui/filesave.png</normaloff>:/graphicGui/gui/filesave.png</iconset>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+S</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="clearButton">
+          <property name="toolTip">
+           <string>clear script</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../../data/mainRes.qrc">
+            <normaloff>:/graphicGui/gui/closeButton.png</normaloff>:/graphicGui/gui/closeButton.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="preprocessSSCButton">
+          <property name="toolTip">
+           <string>pre-process script using SSC preprocessor</string>
+          </property>
+          <property name="text">
+           <string>SSC</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../data/mainRes.qrc">
+            <normaloff>:/graphicGui/gui/btFlipVertical-off.png</normaloff>:/graphicGui/gui/btFlipVertical-off.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="preprocessSTSButton">
+          <property name="toolTip">
+           <string>pre-process script using STS preprocessor</string>
+          </property>
+          <property name="text">
+           <string>STS</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../data/mainRes.qrc">
+            <normaloff>:/graphicGui/gui/btFlipVertical-off.png</normaloff>:/graphicGui/gui/btFlipVertical-off.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="runButton">
+          <property name="toolTip">
+           <string>run script</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../../data/mainRes.qrc">
+            <normaloff>:/graphicGui/gui/btScriptRun-off.png</normaloff>:/graphicGui/gui/btScriptRun-off.png</iconset>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+Return</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="stopButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>stop script</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../../data/mainRes.qrc">
+            <normaloff>:/graphicGui/gui/btScriptStop-off.png</normaloff>:/graphicGui/gui/btScriptStop-off.png</iconset>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+C</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
        <widget class="QTabWidget" name="tabs">
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="scriptTab">
          <attribute name="title">
@@ -165,6 +295,12 @@
               <family>DejaVu Sans Mono</family>
               <pointsize>8</pointsize>
              </font>
+            </property>
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOn</enum>
+            </property>
+            <property name="lineWrapMode">
+             <enum>QPlainTextEdit::NoWrap</enum>
             </property>
             <property name="plainText">
              <string/>
@@ -198,40 +334,38 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QPushButton" name="clearButton">
+         <widget class="QLabel" name="label">
           <property name="text">
-           <string>clear</string>
+           <string>Include dir:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="loadButton">
-          <property name="text">
-           <string>load</string>
+         <widget class="QLineEdit" name="includeEdit">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="saveButton">
-          <property name="text">
-           <string>save</string>
+         <widget class="QPushButton" name="pushButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="runButton">
-          <property name="text">
-           <string>run</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="stopButton">
-          <property name="enabled">
-           <bool>false</bool>
+          <property name="maximumSize">
+           <size>
+            <width>32</width>
+            <height>16777215</height>
+           </size>
           </property>
           <property name="text">
-           <string>stop</string>
+           <string>...</string>
           </property>
          </widget>
         </item>
