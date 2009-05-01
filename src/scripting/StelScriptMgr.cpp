@@ -795,6 +795,10 @@ StelScriptMgr::StelScriptMgr(QObject *parent)
 	// Add other classes which we want to be directly accessible from scripts
 	if(StelSkyImageMgr* smgr = GETSTELMODULE(StelSkyImageMgr))
 		objectValue = engine.newQObject(smgr);
+
+	// For accessing star scale, twinkle etc.
+	objectValue = engine.newQObject(StelApp::getInstance().getCore()->getSkyDrawer());
+	engine.globalObject().setProperty("StelSkyDrawer", objectValue);
 }
 
 
