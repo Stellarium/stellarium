@@ -132,7 +132,12 @@ public:
 	//! Convenience function to find the parent directory of a given path
 	//! May return relative paths if the parameter is a relative path
 	//! @param path the path whose parent directory is to be returned
-	QString dirName(const QString& path);
+	static QString dirName(const QString& path);
+	
+	//! Convenience function to find the basename of a given path
+	//! May return relative paths if the parameter is a relative path
+	//! @param path the path whose parent directory is to be returned
+	static QString baseName(const QString& path);
 	
 	//! Get the user's Desktop directory.
 	//! This is a portable way to retrieve the directory for the user's desktop.
@@ -197,11 +202,6 @@ private:
 	//! Creates it if it does not exist.  Exits the program if any of this
 	//! process fails.
 	void checkUserDir();
-	
-	//! Convenience function to find the basename of a given path
-	//! May return relative paths if the parameter is a relative path
-	//! @param path the path whose parent directory is to be returned
-	QString baseName(const QString& path);
 	
 	//! Check if a (complete) path matches a set of flags
 	//! @param path a complete path
