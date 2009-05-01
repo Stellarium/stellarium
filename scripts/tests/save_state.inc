@@ -40,6 +40,14 @@ function saveState(stateName)
 	savedStates[stateName]["LandscapeMgrFlagLandscape"] = LandscapeMgr.getFlagLandscape();
 	savedStates[stateName]["LandscapeMgrFlagAtmosphere"] = LandscapeMgr.getFlagAtmosphere();
 	savedStates[stateName]["LandscapeMgrFlagFog"] = LandscapeMgr.getFlagFog();
+	savedStates[stateName]["StelSkyDrawerRelativeStarScale"] = StelSkyDrawer.getRelativeStarScale();
+	savedStates[stateName]["StelSkyDrawerAbsoluteStarScale"] = StelSkyDrawer.getAbsoluteStarScale();
+	savedStates[stateName]["StelSkyDrawerTwinkleAmount"] = StelSkyDrawer.getTwinkleAmount();
+	savedStates[stateName]["StelSkyDrawerFlagTwinkle"] = StelSkyDrawer.getFlagTwinkle();
+	savedStates[stateName]["StelSkyDrawerFlagPointStar"] = StelSkyDrawer.getFlagPointStar();
+	savedStates[stateName]["StelSkyDrawerBortleScale"] = StelSkyDrawer.getBortleScale();
+	savedStates[stateName]["StelSkyDrawerFlagLuminanceAdaptation"] = StelSkyDrawer.getFlagLuminanceAdaptation();
+	savedStates[stateName]["StelSkyImageMgr"] = StelSkyImageMgr.getFlagShow();
 	savedStates[stateName]["MountMode"] = core.getMountMode();
 	savedStates[stateName]["TimeIsNow"] = core.isRealTime();
 	savedStates[stateName]["StateTime"] = core.getJDay();
@@ -106,6 +114,14 @@ function restoreState(stateName, options)
 	LandscapeMgr.setFlagLandscape(savedStates[stateName]["LandscapeMgrFlagLandscape"]);
 	LandscapeMgr.setFlagAtmosphere(savedStates[stateName]["LandscapeMgrFlagAtmosphere"]);
 	LandscapeMgr.setFlagFog(savedStates[stateName]["LandscapeMgrFlagFog"]);
+	StelSkyDrawer.setRelativeStarScale(savedStates[stateName]["StelSkyDrawerRelativeStarScale"]);
+	StelSkyDrawer.setAbsoluteStarScale(savedStates[stateName]["StelSkyDrawerAbsoluteStarScale"]);
+	StelSkyDrawer.setTwinkleAmount(savedStates[stateName]["StelSkyDrawerTwinkleAmount"]);
+	StelSkyDrawer.setFlagTwinkle(savedStates[stateName]["StelSkyDrawerFlagTwinkle"]);
+	StelSkyDrawer.setFlagPointStar(savedStates[stateName]["StelSkyDrawerFlagPointStar"]);
+	StelSkyDrawer.setBortleScale(savedStates[stateName]["StelSkyDrawerBortleScale"]);
+	StelSkyDrawer.setFlagLuminanceAdaptation(savedStates[stateName]["StelSkyDrawerFlagLuminanceAdaptation"]);
+	StelSkyImageMgr.setFlagShow(savedStates[stateName]["StelSkyImageMgr"]);
 	core.setMountMode(savedStates[stateName]["MountMode"]);
 
 	// optional restoration options...
