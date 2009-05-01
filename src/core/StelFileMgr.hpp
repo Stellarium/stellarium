@@ -154,6 +154,13 @@ public:
 	//! @exception NOT_FOUND if the directory could not be found
 	QString getUserDir(void);
 
+	//! Returns the path to the installation directory
+	//! This is the directory where we expect to find scripts, nebulae, stars, 
+	//! skycultures etc, and will be added at the end of the search path
+	//! @return the path to the installation data directory	
+	//! @exception NOT_FOUND if the directory could not be found
+	QString getInstallationDir(void);
+	
 	//! Returns the path to the users data directory
 	//! @return the path to the users data directory	
 	QString getUsersDataDirectoryName(void);
@@ -195,13 +202,6 @@ private:
 	//! May return relative paths if the parameter is a relative path
 	//! @param path the path whose parent directory is to be returned
 	QString baseName(const QString& path);
-	
-	//! Returns the path to the installation directory
-	//! This is the directory where we expect to find scripts, nebulae, stars, 
-	//! skycultures etc, and will be added at the end of the search path
-	//! @return the path to the installation data directory	
-	//! @exception NOT_FOUND if the directory could not be found
-	QString getInstallationDir(void);
 	
 	//! Check if a (complete) path matches a set of flags
 	//! @param path a complete path
