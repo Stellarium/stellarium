@@ -237,6 +237,13 @@ SET(stellarium_lib_SRCS
 	translations.h
 )
 
+IF(ENABLE_SCRIPT_CONSOLE)
+	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
+		gui/ScriptConsole.hpp
+		gui/ScriptConsole.cpp
+	)
+ENDIF(ENABLE_SCRIPT_CONSOLE)
+
 IF(WIN32)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
 		external/kdewin32/basetyps.h
@@ -335,7 +342,15 @@ SET(stellarium_UIS
   gui/searchDialogGui.ui
   gui/configurationDialog.ui
   gui/downloadPopup.ui
+  gui/scriptConsole.ui
   )
+
+IF(ENABLE_SCRIPT_CONSOLE)
+	SET(stellarium_UIS ${stellarium_UIS}
+		gui/scriptConsole.ui
+	)
+ENDIF(ENABLE_SCRIPT_CONSOLE)
+
 QT4_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
 
 ################# compiles resources files ############
@@ -392,6 +407,12 @@ SET(stellarium_MOC_HDRS
 	StelMainGraphicsView.hpp
 	StelMainWindow.hpp
 )
+
+IF(ENABLE_SCRIPT_CONSOLE)
+	SET(stellarium_MOC_HDRS ${stellarium_MOC_HDRS}
+		gui/ScriptConsole.hpp
+	)
+ENDIF(ENABLE_SCRIPT_CONSOLE)
 
 # After this call, stellarium_MOC_SRCS = moc_stellarium.cxx
 QT4_WRAP_CPP(stellarium_MOC_SRCS ${stellarium_MOC_HDRS})
