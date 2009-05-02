@@ -221,6 +221,13 @@
          </widget>
         </item>
         <item>
+         <widget class="QComboBox" name="quickrunCombo">
+          <property name="toolTip">
+           <string>quickly load and run a utility script</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <spacer name="horizontalSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -351,7 +358,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="includeBrowseButton">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>

@@ -457,8 +457,13 @@ public slots:
 
 	//! Run the script located at the given location
 	//! @param fileName the location of the file containing the script.
+	//! @param includePath the directory to use when searching for include files
+	//! in the SSC preprocessor.  Usually this will be the same as the 
+	//! script file itself, but if you're running a generated script from 
+	//! a temp directory, but want to include a file from elsewhere, it 
+	//! can be usetul to set it to something else (e.g. in ScriptConsole).
 	//! @return false if the named script could not be run, true otherwise
-	bool runScript(const QString& fileName);
+	bool runScript(const QString& fileName, const QString& includePath="");
 
 	//! Stops any running script.
 	//! @return false if no script was running, true otherwise.

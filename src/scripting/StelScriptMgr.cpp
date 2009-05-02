@@ -954,7 +954,7 @@ const QString StelScriptMgr::getDescription(const QString& s)
 }
 
 // Run the script located at the given location
-bool StelScriptMgr::runScript(const QString& fileName)
+bool StelScriptMgr::runScript(const QString& fileName, const QString& includePath)
 {
 	if (thread!=NULL)
 	{
@@ -1000,6 +1000,9 @@ bool StelScriptMgr::runScript(const QString& fileName)
 		tmpFile.close();
 		return false;
 	}
+
+	if (includePath!="" && !includePath.isEmpty())
+		scriptDir = includePath;
 
 	if (fileName.right(4) == ".ssc")
 		ok = preprocessScript(fic, tmpFile, scriptDir);

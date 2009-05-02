@@ -24,6 +24,7 @@
 #include "StelScriptMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelApp.hpp"
+#include "StelTranslator.hpp"
 
 #include <QDialog>
 #include <QTextStream>
@@ -76,13 +77,21 @@ void ScriptConsole::createDialogContent()
 	ui->setupUi(dialog);
 	ui->includeEdit->setText(StelApp::getInstance().getFileMgr().getInstallationDir() + "/scripts");
 
+	ui->quickrunCombo->addItem(q_("quickrun..."));
+	ui->quickrunCombo->addItem(q_("clear text"));
+	ui->quickrunCombo->addItem(q_("clear images"));
+	ui->quickrunCombo->addItem(q_("natural"));
+	ui->quickrunCombo->addItem(q_("starchart"));
+
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->clearButton, SIGNAL(clicked()), ui->scriptEdit, SLOT(clear()));
 	connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(loadScript()));
 	connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(saveScript()));
+	connect(ui->clearButton, SIGNAL(clicked()), this, SLOT(clearButtonPressed()));
 	connect(ui->preprocessSSCButton, SIGNAL(clicked()), this, SLOT(preprocessScript()));
 	connect(ui->runButton, SIGNAL(clicked()), this, SLOT(runScript()));
 	connect(ui->stopButton, SIGNAL(clicked()), &StelApp::getInstance().getScriptMgr(), SLOT(stopScript()));
+	connect(ui->includeBrowseButton, SIGNAL(clicked()), this, SLOT(includeBrowse()));
+	connect(ui->quickrunCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(quickRun(int)));
 	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptStopped()), this, SLOT(scriptEnded()));
 	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptDebug(const QString&)), this, SLOT(appendLogLine(const QString&)));
 #ifndef ENABLE_STRATOSCRIPT_COMPAT
@@ -134,6 +143,14 @@ void ScriptConsole::saveScript()
 	}
 	else
 		qWarning() << "ERROR - cannot write script file";
+}
+
+void ScriptConsole::clearButtonPressed()
+{
+	if (ui->tabs->currentIndex() == 0)
+		ui->scriptEdit->clear();
+	else if (ui->tabs->currentIndex() == 1)
+		ui->outputBrowser->clear();
 }
 
 void ScriptConsole::preprocessScript()
@@ -195,7 +212,7 @@ void ScriptConsole::runScript()
 	}
 
 	appendLogLine(QString("Starting script at %1").arg(QDateTime::currentDateTime().toString()));
-	if (!StelApp::getInstance().getScriptMgr().runScript(fileName))
+	if (!StelApp::getInstance().getScriptMgr().runScript(fileName, ui->includeEdit->text()))
 	{
 		QString msg = QString("ERROR - cannot run script from temp file: \"%1\"").arg(fileName);
 		qWarning() << "ScriptConsole::runScript " + msg;
@@ -231,6 +248,53 @@ void ScriptConsole::appendLogLine(const QString& s)
 
 	html += s;
 	ui->outputBrowser->setHtml(html);
+}
+
+void ScriptConsole::includeBrowse()
+{
+	ui->includeEdit->setText(QFileDialog::getExistingDirectory(&StelMainGraphicsView::getInstance(), 
+	                                                           tr("Select Script Includ Directory"), 
+	                                                           StelApp::getInstance().getFileMgr().getInstallationDir() + "/scripts"));
+}
+
+void ScriptConsole::quickRun(int idx)
+{
+	ui->quickrunCombo->setCurrentIndex(0);
+	QString scriptText;
+	if (idx==1)
+	{
+		scriptText = "LabelMgr.deleteAllLabels();\n";
+	}
+	if (idx==2)
+	{
+		scriptText = "ScreenImageMgr.deleteAllImages()\n";
+	}
+	if (idx==3)
+	{
+		scriptText = "core.clear(\"natural\");\n";
+	}
+	if (idx==4)
+	{
+		scriptText = "core.clear(\"starchart\");\n";
+	}
+
+	if (scriptText.isEmpty())
+		return;
+
+	QTemporaryFile file(QDir::tempPath() + "/stelscriptXXXXXX.ssc");
+	if (file.open())
+	{
+		QString fileName = file.fileName();
+		QTextStream out(&file);
+		out << scriptText;
+		file.close();
+		appendLogLine(QString("Running: %1").arg(scriptText));
+		StelApp::getInstance().getScriptMgr().runScript(fileName);
+	}
+	else
+	{
+		appendLogLine("Can't run quick script (could not open temp file)");
+	}
 }
 
 QString ScriptConsole::getFileMask()
