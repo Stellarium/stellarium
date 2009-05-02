@@ -379,6 +379,7 @@ SET(stellarium_MOC_HDRS
 	core/StelSkyPolygon.hpp
 	core/StelSkyDrawer.hpp
 	core/StelSkyImageMgr.hpp
+	core/StelSkyCultureMgr.hpp
 	core/SimbadSearcher.hpp
 	modules/ConstellationMgr.hpp
 	modules/GridLinesMgr.hpp

@@ -281,6 +281,15 @@ public slots:
 	//! - ProjectionOrthographic
 	void setProjectionMode(const QString& id);
 
+	//! Find out the current sky culture
+	//! @return the ID of the current sky culture (i.e. the name of the directory in
+	//! which the curret sky cultures files are found, e.g. "western")
+	QString getSkyCulture();
+	
+	//! Set the current sky culture
+	//! @param id the ID of the sky culture to set, e.g. western or inuit etc.
+	void setSkyCulture(const QString& id);
+
 	//! Set the mount mode
 	//! @param mode should be "equatorial" or "azimuthal"
 	void setMountMode(const QString& mode);
@@ -416,6 +425,7 @@ signals:
 	void requestDropSound(const QString& id);
 	void requestSetNightMode(bool b);
 	void requestSetProjectionMode(QString id);
+	void requestSetSkyCulture(QString id);
 	void requestExit();
 
 private:

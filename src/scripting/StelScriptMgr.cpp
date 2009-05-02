@@ -38,6 +38,7 @@
 #include "StelUtils.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelMainWindow.hpp"
+#include "StelSkyCultureMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelSkyImageMgr.hpp"
 #include "StarMgr.hpp"
@@ -171,6 +172,7 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestExit()), this->parent(), SLOT(stopScript()));
 	connect(this, SIGNAL(requestSetNightMode(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
 	connect(this, SIGNAL(requestSetProjectionMode(QString)), StelApp::getInstance().getCore(), SLOT(setCurrentProjectionTypeKey(QString)));
+	connect(this, SIGNAL(requestSetSkyCulture(QString)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureID(QString)));
 }
 
 StelMainScriptAPI::~StelMainScriptAPI()
@@ -358,6 +360,16 @@ QString StelMainScriptAPI::getProjectionMode()
 void StelMainScriptAPI::setProjectionMode(const QString& id)
 {
 	emit(requestSetProjectionMode(id));
+}
+
+QString StelMainScriptAPI::getSkyCulture()
+{
+	return StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID();
+}
+
+void StelMainScriptAPI::setSkyCulture(const QString& id)
+{
+	emit(requestSetSkyCulture(id));
 }
 
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,

@@ -42,7 +42,10 @@ public:
 //! In the installation data directory and user data directory are the "skycultures" sub-directory containing one sub-directory per sky culture.
 //! This sub-directory name is that we refer to as sky culture ID here.
 //! @author Fabien Chereau
-class StelSkyCultureMgr{
+class StelSkyCultureMgr : public QObject
+{
+	Q_OBJECT
+
 public:
 	StelSkyCultureMgr();
 	~StelSkyCultureMgr();
