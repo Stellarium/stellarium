@@ -24,6 +24,7 @@
 #include "StelDialog.hpp"
 
 class Ui_scriptConsoleForm;
+class StelScriptSyntaxHighlighter;
 
 class ScriptConsole : public StelDialog
 {
@@ -54,6 +55,7 @@ protected:
 
 private:
 	QString getFileMask();
+	StelScriptSyntaxHighlighter* highlighter;
 
 };
 
