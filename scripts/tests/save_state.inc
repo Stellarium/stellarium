@@ -67,6 +67,7 @@ function saveState(stateName)
 	savedStates[stateName]["MountMode"] = core.getMountMode();
 	savedStates[stateName]["NightMode"] = core.getNightMode();
 	savedStates[stateName]["ProjectionMode"] = core.getProjectionMode();
+	savedStates[stateName]["SkyCulture"] = core.getSkyCulture();
 	savedStates[stateName]["TimeIsNow"] = core.isRealTime();
 	savedStates[stateName]["StateTime"] = core.getJDay();
 	savedStates[stateName]["StateTimeRate"] = core.getTimeRate();
@@ -159,6 +160,7 @@ function restoreState(stateName, options)
 	core.setMountMode(savedStates[stateName]["MountMode"]);
 	core.setNightMode(savedStates[stateName]["NightMode"]);
 	core.setProjectionMode(savedStates[stateName]["ProjectionMode"]);
+	core.setSkyCulture(savedStates[stateName]["SkyCulture"]);
 
 	// optional restoration options...
 	if (!options["time"])
