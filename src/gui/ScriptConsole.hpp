@@ -39,9 +39,12 @@ public slots:
 	void runScript();
 	void loadScript();
 	void saveScript();
+	void clearButtonPressed();
 	void preprocessScript();
 	void scriptEnded();
 	void appendLogLine(const QString& s);
+	void includeBrowse();
+	void quickRun(int idx);
 	
 protected:
 	Ui_scriptConsoleForm* ui;
