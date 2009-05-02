@@ -172,6 +172,10 @@ public slots:
 	void increaseTimeSpeed();
 	//! Decrease the time speed
 	void decreaseTimeSpeed();
+	//! Increase the time speed, but not as much as with increaseTimeSpeed()
+	void increaseTimeSpeedLess();
+	//! Decrease the time speed but not as much as with decreaseTimeSpeed()
+	void decreaseTimeSpeedLess();
 	
 	//! Set time speed to 0, i.e. freeze the passage of simulation time
 	void setZeroTimeSpeed() {setTimeRate(0);}
