@@ -255,6 +255,10 @@ public slots:
 	//! @return "equatorial" or "azimuthal"
 	QString getMountMode();
 
+	//! Set the mount mode
+	//! @param mode should be "equatorial" or "azimuthal"
+	void setMountMode(const QString& mode);
+
 	//! Get the current status of Night Mode
 	//! @return true if night mode is currently set
 	bool getNightMode();
@@ -281,6 +285,14 @@ public slots:
 	//! - ProjectionOrthographic
 	void setProjectionMode(const QString& id);
 
+	//! Get the status of the disk viewport
+	//! @return true if the disk view port is currently enabled
+	bool getDiskViewport();
+
+	//! Set the disk viewport
+	//! @param b if true, sets the disk viewport on, else sets it off
+	void setDiskViewport(bool b);
+
 	//! Find out the current sky culture
 	//! @return the ID of the current sky culture (i.e. the name of the directory in
 	//! which the curret sky cultures files are found, e.g. "western")
@@ -290,9 +302,7 @@ public slots:
 	//! @param id the ID of the sky culture to set, e.g. western or inuit etc.
 	void setSkyCulture(const QString& id);
 
-	//! Set the mount mode
-	//! @param mode should be "equatorial" or "azimuthal"
-	void setMountMode(const QString& mode);
+
 
 	//! Load an image which will have sky coordinates.
 	//! @param id a string ID to be used when referring to this
@@ -426,6 +436,7 @@ signals:
 	void requestSetNightMode(bool b);
 	void requestSetProjectionMode(QString id);
 	void requestSetSkyCulture(QString id);
+	void requestSetDiskViewport(bool b);
 	void requestExit();
 
 private:
@@ -439,7 +450,7 @@ private:
 //! Manage scripting in Stellarium
 class StelScriptMgr : public QObject
 {
-Q_OBJECT
+	Q_OBJECT
 		
 #ifdef ENABLE_SCRIPT_CONSOLE
 friend class ScriptConsole;
@@ -549,6 +560,36 @@ private:
 	//! The thread in which scripts are run
 	class StelScriptThread* thread;
 	StelMainScriptAPI *mainAPI;
+};
+
+//! @class StelMainScriptAPIProxy
+//! Because the core API runs in a different thread to the main program, 
+//! direct function calls to some classes can cause problems - especially 
+//! when images must be loaded, or other non-atomic operations are involved.
+//!
+//! This class acts as a proxy - running in the Main thread.  Connect signals
+//! from the StelMainScriptAPI to the instance of this class running in the
+//! main thread and let the slots do the work which is not possible within
+//! StelMainScriptAPI itself.
+//! 
+//! Please follow the following convention:
+//! member in StelMainScriptAPI:      someSlot(...)
+//! signal in StelMainScriptAPI:      requestSomeSlot(...)
+//! member in StelMainScriptAPIProxy: someSlot(...)
+//!
+//! The dis-advantage of this method is that there is no way to get a return
+//! value.  This is because of how the signal/slot mechanism works.
+class StelMainScriptAPIProxy : public QObject
+{
+	Q_OBJECT
+
+public:
+	StelMainScriptAPIProxy(QObject* parent=0) : QObject(parent) {;}
+	~StelMainScriptAPIProxy() {;}
+
+public slots:
+	void setDiskViewport(bool b);
+
 };
 
 #endif // _QTSCRIPTMGR_HPP_

@@ -45,6 +45,7 @@ class QTime;
 class StelLocationMgr;
 class StelSkyImageMgr;
 class StelScriptMgr;
+class StelMainScriptAPIProxy;
 class StelDownloadMgr;
 class StelAudioMgr;
 class QNetworkReply;
@@ -125,8 +126,11 @@ public:
 	//! @return the StelFileMgr manager to use for performing file operations
 	StelFileMgr& getFileMgr() {return *stelFileMgr;}
 
+	//! Get the audio manager
 	StelAudioMgr* getStelAudioMgr() {return audioMgr;}
 	
+	//! Get the script API proxy (for signal handling)
+	StelMainScriptAPIProxy* getMainScriptAPIProxy() {return scriptAPIProxy;}
 	//! Get the script manager
 	StelScriptMgr& getScriptMgr() {return *scriptMgr;}
 	
@@ -365,9 +369,12 @@ private:
 	// The audio manager.  Must execute in the main thread.
 	StelAudioMgr* audioMgr;
 	
+	// The script API proxy object (for bridging threads)
+	StelMainScriptAPIProxy* scriptAPIProxy;
+	
 	// The script manager based on Qt script engine
 	StelScriptMgr* scriptMgr;
-	
+
 	// The main loading bar
 	StelLoadingBar* loadingBar;
 	
