@@ -220,14 +220,6 @@ public slots:
 	//! @param duration the number of seconds to take to move location.
 	void setObserverLocation(const QString id, double duration=1.);
 
-	//! Get the current status of Night Mode
-	//! @return true if night mode is currently set
-	bool getNightMode();
-
-	//! Set the status of Night Mode
-	//! @param b if true, set Night Mode, else set Normal Mode
-	void setNightMode(bool b);
-
 	//! Save a screenshot.
 	//! @param prefix the prefix for the file name to use
 	//! @param dir the path of the directory to save the screenshot in.  If
@@ -262,6 +254,32 @@ public slots:
 	//! Get the mount mode as a string
 	//! @return "equatorial" or "azimuthal"
 	QString getMountMode();
+
+	//! Get the current status of Night Mode
+	//! @return true if night mode is currently set
+	bool getNightMode();
+
+	//! Set the status of Night Mode
+	//! @param b if true, set Night Mode, else set Normal Mode
+	void setNightMode(bool b);
+
+	//! Get the current projection mode ID string
+	//! @return the string which identifies the current projection mode.
+	//! For a list of possibl results, see setProjectionMode();
+	QString getProjectionMode();
+	
+	//! Set the current projection mode
+	//! @param id the name of the projection mode to use, e.g. "Perspective" and so on.
+	//! valid values of id are: 
+	//! - ProjectionPerspective 
+	//! - ProjectionEqualArea 
+	//! - ProjectionStereographic
+	//! - ProjectionFisheye
+	//! - ProjectionHammer
+	//! - ProjectionCylinder
+	//! - ProjectionMercator
+	//! - ProjectionOrthographic
+	void setProjectionMode(const QString& id);
 
 	//! Set the mount mode
 	//! @param mode should be "equatorial" or "azimuthal"
@@ -397,6 +415,7 @@ signals:
 	void requestStopSound(const QString& id);
 	void requestDropSound(const QString& id);
 	void requestSetNightMode(bool b);
+	void requestSetProjectionMode(QString id);
 	void requestExit();
 
 private:
