@@ -197,6 +197,8 @@ void StelGui::init()
 	addGuiActions("actionDecrease_Time_Speed", N_("Decrease time speed"), "J", group, false, false);
 	addGuiActions("actionIncrease_Time_Speed", N_("Increase time speed"), "L", group, false, false);
 	addGuiActions("actionSet_Real_Time_Speed", N_("Set normal time rate"), "K", group, false, false);
+	addGuiActions("actionDecrease_Time_Speed_Less", N_("Decrease time speed (a little)"), "Shift+J", group, false, false);
+	addGuiActions("actionIncrease_Time_Speed_Less", N_("Increase time speed (a little)"), "Shift+L", group, false, false);
 	addGuiActions("actionSet_Time_Rate_Zero", N_("Set time rate to zero"), "7", group, false, false);
 	addGuiActions("actionReturn_To_Current_Time", N_("Set time to now"), "8", group, false, false);
 	addGuiActions("actionAdd_Solar_Hour", N_("Add 1 solar hour"), "Ctrl+=", group, false, true);
@@ -292,6 +294,8 @@ void StelGui::init()
 	connect(getGuiActions("actionSet_Real_Script_Speed"), SIGNAL(triggered()), this, SLOT(setRealScriptSpeed()));
 	connect(getGuiActions("actionIncrease_Time_Speed"), SIGNAL(triggered()), nav, SLOT(increaseTimeSpeed()));
 	connect(getGuiActions("actionDecrease_Time_Speed"), SIGNAL(triggered()), nav, SLOT(decreaseTimeSpeed()));
+	connect(getGuiActions("actionIncrease_Time_Speed_Less"), SIGNAL(triggered()), nav, SLOT(increaseTimeSpeedLess()));
+	connect(getGuiActions("actionDecrease_Time_Speed_Less"), SIGNAL(triggered()), nav, SLOT(decreaseTimeSpeedLess()));
 	connect(getGuiActions("actionSet_Real_Time_Speed"), SIGNAL(triggered()), nav, SLOT(setRealTimeSpeed()));
 	connect(getGuiActions("actionSet_Time_Rate_Zero"), SIGNAL(triggered()), nav, SLOT(setZeroTimeSpeed()));
 	connect(getGuiActions("actionSet_Time_Rate_Zero"), SIGNAL(triggered()), nav, SLOT(setZeroTimeSpeed()));
