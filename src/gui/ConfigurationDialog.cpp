@@ -169,8 +169,8 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlagGravityLabels(bool)));
 	ui->selectSingleConstellationButton->setChecked(cmgr->getFlagIsolateSelected());
 	connect(ui->selectSingleConstellationButton, SIGNAL(toggled(bool)), cmgr, SLOT(setFlagIsolateSelected(bool)));
-	ui->discViewportCheckbox->setChecked(proj->getMaskType() == StelProjector::MaskDisk);
-	connect(ui->discViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
+	ui->diskViewportCheckbox->setChecked(proj->getMaskType() == StelProjector::MaskDisk);
+	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 	ui->autoZoomResetsDirectionCheckbox->setChecked(mvmgr->getFlagAutoZoomOutResetsDirection());
 	connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
 	

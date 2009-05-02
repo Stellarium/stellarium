@@ -441,6 +441,7 @@ void StelApp::init()
 
 	updateI18n();
 
+	scriptAPIProxy = new StelMainScriptAPIProxy(this);
 	scriptMgr = new StelScriptMgr(this);
 	initialized = true;
 }

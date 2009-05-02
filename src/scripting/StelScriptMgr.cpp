@@ -173,6 +173,7 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestSetNightMode(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
 	connect(this, SIGNAL(requestSetProjectionMode(QString)), StelApp::getInstance().getCore(), SLOT(setCurrentProjectionTypeKey(QString)));
 	connect(this, SIGNAL(requestSetSkyCulture(QString)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureID(QString)));
+	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelApp::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));
 }
 
 StelMainScriptAPI::~StelMainScriptAPI()
@@ -370,6 +371,16 @@ QString StelMainScriptAPI::getSkyCulture()
 void StelMainScriptAPI::setSkyCulture(const QString& id)
 {
 	emit(requestSetSkyCulture(id));
+}
+
+bool StelMainScriptAPI::getDiskViewport()
+{
+	return StelApp::getInstance().getCore()->getProjection(Mat4d())->getMaskType() == StelProjector::MaskDisk;
+}
+
+void StelMainScriptAPI::setDiskViewport(bool b)
+{
+	emit(requestSetDiskViewport(b));
 }
 
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
@@ -1118,5 +1129,13 @@ void StelScriptMgr::scriptEnded()
 		qWarning() << msg;
 	}
 	emit(scriptStopped());
+}
+
+void StelMainScriptAPIProxy::setDiskViewport(bool b)
+{
+	if (b)
+		StelApp::getInstance().getCore()->setMaskType(StelProjector::MaskDisk);
+	else
+		StelApp::getInstance().getCore()->setMaskType(StelProjector::MaskNone);
 }
 
