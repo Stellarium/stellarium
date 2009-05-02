@@ -170,6 +170,7 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestDropSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(dropSound(const QString&)));
 	connect(this, SIGNAL(requestExit()), this->parent(), SLOT(stopScript()));
 	connect(this, SIGNAL(requestSetNightMode(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
+	connect(this, SIGNAL(requestSetProjectionMode(QString)), StelApp::getInstance().getCore(), SLOT(setCurrentProjectionTypeKey(QString)));
 }
 
 StelMainScriptAPI::~StelMainScriptAPI()
@@ -276,16 +277,6 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 	nav->moveObserverTo(loc, duration);
 }
 
-bool StelMainScriptAPI::getNightMode()
-{
-	return StelApp::getInstance().getVisionModeNight();
-}
-
-void StelMainScriptAPI::setNightMode(bool b)
-{
-	emit(requestSetNightMode(b));
-}
-
 void StelMainScriptAPI::setObserverLocation(const QString id, double duration)
 {
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
@@ -347,6 +338,26 @@ void StelMainScriptAPI::setMountMode(const QString& mode)
 		StelApp::getInstance().getCore()->getNavigator()->setMountMode(StelNavigator::MountEquatorial);
 	else if (mode=="azimuthal")
 		StelApp::getInstance().getCore()->getNavigator()->setMountMode(StelNavigator::MountAltAzimuthal);
+}
+
+bool StelMainScriptAPI::getNightMode()
+{
+	return StelApp::getInstance().getVisionModeNight();
+}
+
+void StelMainScriptAPI::setNightMode(bool b)
+{
+	emit(requestSetNightMode(b));
+}
+
+QString StelMainScriptAPI::getProjectionMode()
+{
+	return StelApp::getInstance().getCore()->getCurrentProjectionTypeKey();
+}
+
+void StelMainScriptAPI::setProjectionMode(const QString& id)
+{
+	emit(requestSetProjectionMode(id));
 }
 
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,

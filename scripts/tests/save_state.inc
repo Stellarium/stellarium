@@ -66,6 +66,7 @@ function saveState(stateName)
 	savedStates[stateName]["StelSkyImageMgr"] = StelSkyImageMgr.getFlagShow();
 	savedStates[stateName]["MountMode"] = core.getMountMode();
 	savedStates[stateName]["NightMode"] = core.getNightMode();
+	savedStates[stateName]["ProjectionMode"] = core.getProjectionMode();
 	savedStates[stateName]["TimeIsNow"] = core.isRealTime();
 	savedStates[stateName]["StateTime"] = core.getJDay();
 	savedStates[stateName]["StateTimeRate"] = core.getTimeRate();
@@ -157,6 +158,7 @@ function restoreState(stateName, options)
 	StelSkyImageMgr.setFlagShow(savedStates[stateName]["StelSkyImageMgr"]);
 	core.setMountMode(savedStates[stateName]["MountMode"]);
 	core.setNightMode(savedStates[stateName]["NightMode"]);
+	core.setProjectionMode(savedStates[stateName]["ProjectionMode"]);
 
 	// optional restoration options...
 	if (!options["time"])
