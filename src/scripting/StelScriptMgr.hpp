@@ -220,6 +220,10 @@ public slots:
 	//! @param duration the number of seconds to take to move location.
 	void setObserverLocation(const QString id, double duration=1.);
 
+	//! Get the ID of the current observer location.
+	//! @param duration the number of seconds to take to move location.
+	QString getObserverLocation();
+
 	//! Save a screenshot.
 	//! @param prefix the prefix for the file name to use
 	//! @param dir the path of the directory to save the screenshot in.  If

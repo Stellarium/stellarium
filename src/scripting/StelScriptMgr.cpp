@@ -294,6 +294,11 @@ void StelMainScriptAPI::setObserverLocation(const QString id, double duration)
 	nav->moveObserverTo(loc, duration);
 }
 
+QString StelMainScriptAPI::getObserverLocation()
+{
+	return StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().getID();
+}
+
 void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir)
 {
 	bool oldInvertSetting = StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors();
