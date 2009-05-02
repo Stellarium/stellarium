@@ -241,6 +241,8 @@ IF(ENABLE_SCRIPT_CONSOLE)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
 		gui/ScriptConsole.hpp
 		gui/ScriptConsole.cpp
+		gui/StelScriptSyntaxHighlighter.hpp
+		gui/StelScriptSyntaxHighlighter.cpp
 	)
 ENDIF(ENABLE_SCRIPT_CONSOLE)
 
@@ -342,7 +344,6 @@ SET(stellarium_UIS
   gui/searchDialogGui.ui
   gui/configurationDialog.ui
   gui/downloadPopup.ui
-  gui/scriptConsole.ui
   )
 
 IF(ENABLE_SCRIPT_CONSOLE)
@@ -411,6 +412,7 @@ SET(stellarium_MOC_HDRS
 IF(ENABLE_SCRIPT_CONSOLE)
 	SET(stellarium_MOC_HDRS ${stellarium_MOC_HDRS}
 		gui/ScriptConsole.hpp
+		gui/StelScriptSyntaxHighlighter.hpp
 	)
 ENDIF(ENABLE_SCRIPT_CONSOLE)
 

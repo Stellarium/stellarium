@@ -25,6 +25,7 @@
 #include "StelFileMgr.hpp"
 #include "StelApp.hpp"
 #include "StelTranslator.hpp"
+#include "StelScriptSyntaxHighlighter.hpp"
 
 #include <QDialog>
 #include <QTextStream>
@@ -33,23 +34,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QDateTime>
-#include <QPlainTextEdit>
-
-void dumpFile(QString fileName)
-{
-	qDebug() << "dumpFile(" + fileName + "):";
-	QFile file(fileName);
-	if (file.open(QIODevice::ReadOnly))
-	{
-		while(!file.atEnd()) 
-		{
-			QString line = file.readLine();
-			line.replace("\n", "");
-			qDebug() << line;
-		}
-		file.close();
-	}
-}
+#include <QSyntaxHighlighter>
 
 ScriptConsole::ScriptConsole()
 {
@@ -75,6 +60,8 @@ void ScriptConsole::styleChanged()
 void ScriptConsole::createDialogContent()
 {
 	ui->setupUi(dialog);
+
+	highlighter = new StelScriptSyntaxHighlighter(ui->scriptEdit->document());
 	ui->includeEdit->setText(StelApp::getInstance().getFileMgr().getInstallationDir() + "/scripts");
 
 	ui->quickrunCombo->addItem(q_("quickrun..."));
