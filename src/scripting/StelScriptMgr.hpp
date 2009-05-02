@@ -220,6 +220,14 @@ public slots:
 	//! @param duration the number of seconds to take to move location.
 	void setObserverLocation(const QString id, double duration=1.);
 
+	//! Get the current status of Night Mode
+	//! @return true if night mode is currently set
+	bool getNightMode();
+
+	//! Set the status of Night Mode
+	//! @param b if true, set Night Mode, else set Normal Mode
+	void setNightMode(bool b);
+
 	//! Save a screenshot.
 	//! @param prefix the prefix for the file name to use
 	//! @param dir the path of the directory to save the screenshot in.  If
@@ -388,6 +396,7 @@ signals:
 	void requestPauseSound(const QString& id);
 	void requestStopSound(const QString& id);
 	void requestDropSound(const QString& id);
+	void requestSetNightMode(bool b);
 	void requestExit();
 
 private:

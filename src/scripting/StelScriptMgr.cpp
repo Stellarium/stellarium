@@ -169,6 +169,7 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestStopSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(stopSound(const QString&)));
 	connect(this, SIGNAL(requestDropSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(dropSound(const QString&)));
 	connect(this, SIGNAL(requestExit()), this->parent(), SLOT(stopScript()));
+	connect(this, SIGNAL(requestSetNightMode(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
 }
 
 StelMainScriptAPI::~StelMainScriptAPI()
@@ -273,6 +274,16 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 	loc.name = name;
 
 	nav->moveObserverTo(loc, duration);
+}
+
+bool StelMainScriptAPI::getNightMode()
+{
+	return StelApp::getInstance().getVisionModeNight();
+}
+
+void StelMainScriptAPI::setNightMode(bool b)
+{
+	emit(requestSetNightMode(b));
 }
 
 void StelMainScriptAPI::setObserverLocation(const QString id, double duration)
