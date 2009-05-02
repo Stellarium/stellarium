@@ -236,8 +236,8 @@ void ScriptConsole::appendLogLine(const QString& s)
 QString ScriptConsole::getFileMask()
 {
 #ifdef ENABLE_STRATOSCRIPT_COMPAT
-	return "(*.ssc *.sts)";
+	return "(*.ssc *.sts *.inc)";
 #else
-	return "(*.ssc)";
+	return "(*.ssc *.inc)";
 #endif
 }
