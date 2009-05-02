@@ -254,6 +254,26 @@ void StelNavigator::decreaseTimeSpeed()
 	setTimeRate(s);
 }
 	
+void StelNavigator::increaseTimeSpeedLess()
+{
+	double s = getTimeRate();
+	if (s>=JD_SECOND) s*=2.;
+	else if (s<-JD_SECOND) s/=2.;
+	else if (s>=0. && s<JD_SECOND) s=JD_SECOND;
+	else if (s>=-JD_SECOND && s<0.) s=0.;
+	setTimeRate(s);
+}
+
+void StelNavigator::decreaseTimeSpeedLess()
+{
+	double s = getTimeRate();
+	if (s>JD_SECOND) s/=2.;
+	else if (s<=-JD_SECOND) s*=2.;
+	else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
+	else if (s>0. && s<=JD_SECOND) s=0.;
+	setTimeRate(s);
+}
+	
 ////////////////////////////////////////////////////////////////////////////////
 void StelNavigator::setAltAzVisionDirection(const Vec3d& _pos)
 {
