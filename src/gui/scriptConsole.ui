@@ -386,6 +386,15 @@
               <pointsize>8</pointsize>
              </font>
             </property>
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOn</enum>
+            </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOn</enum>
+            </property>
+            <property name="lineWrapMode">
+             <enum>QTextEdit::NoWrap</enum>
+            </property>
            </widget>
           </item>
          </layout>
@@ -495,9 +504,8 @@
     </widget>
    </item>
   </layout>
-  <zorder>LocationBar</zorder>
   <zorder>frame</zorder>
-  <zorder></zorder>
+  <zorder>LocationBar</zorder>
  </widget>
  <customwidgets>
   <customwidget>
