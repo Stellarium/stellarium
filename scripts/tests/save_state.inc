@@ -68,6 +68,7 @@ function saveState(stateName)
 	savedStates[stateName]["NightMode"] = core.getNightMode();
 	savedStates[stateName]["ProjectionMode"] = core.getProjectionMode();
 	savedStates[stateName]["SkyCulture"] = core.getSkyCulture();
+	savedStates[stateName]["DiskViewport"] = core.getDiskViewport();
 	savedStates[stateName]["TimeIsNow"] = core.isRealTime();
 	savedStates[stateName]["StateTime"] = core.getJDay();
 	savedStates[stateName]["StateTimeRate"] = core.getTimeRate();
@@ -161,6 +162,7 @@ function restoreState(stateName, options)
 	core.setNightMode(savedStates[stateName]["NightMode"]);
 	core.setProjectionMode(savedStates[stateName]["ProjectionMode"]);
 	core.setSkyCulture(savedStates[stateName]["SkyCulture"]);
+	core.setDiskViewport(savedStates[stateName]["DiskViewport"]);
 
 	// optional restoration options...
 	if (!options["time"])
