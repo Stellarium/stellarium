@@ -25,6 +25,7 @@
 #include "Planet.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelCore.hpp"
+#include "StelLocation.hpp"
 #include "StelLocationMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
@@ -217,6 +218,7 @@ void StelNavigator::moveObserverTo(const StelLocation& target, double duration, 
 		delete position;
 		position = new StelObserver(target);
 	}
+	emit(locationChanged(target));
 }
 
 // Get the sideral time shifted by the observer longitude
