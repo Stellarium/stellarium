@@ -35,6 +35,7 @@
 #include <QFileDialog>
 #include <QDateTime>
 #include <QSyntaxHighlighter>
+#include <QTextDocumentFragment>
 
 ScriptConsole::ScriptConsole()
 {
@@ -65,6 +66,7 @@ void ScriptConsole::createDialogContent()
 	ui->includeEdit->setText(StelApp::getInstance().getFileMgr().getInstallationDir() + "/scripts");
 
 	ui->quickrunCombo->addItem(q_("quickrun..."));
+	ui->quickrunCombo->addItem(q_("selected text"));
 	ui->quickrunCombo->addItem(q_("clear text"));
 	ui->quickrunCombo->addItem(q_("clear images"));
 	ui->quickrunCombo->addItem(q_("natural"));
@@ -250,17 +252,22 @@ void ScriptConsole::quickRun(int idx)
 	QString scriptText;
 	if (idx==1)
 	{
-		scriptText = "LabelMgr.deleteAllLabels();\n";
+		scriptText = QTextDocumentFragment::fromHtml(ui->scriptEdit->textCursor().selectedText(), ui->scriptEdit->document()).toPlainText();
+		qDebug() << "selected script text is:" << scriptText; 
 	}
 	if (idx==2)
 	{
-		scriptText = "ScreenImageMgr.deleteAllImages()\n";
+		scriptText = "LabelMgr.deleteAllLabels();\n";
 	}
 	if (idx==3)
 	{
-		scriptText = "core.clear(\"natural\");\n";
+		scriptText = "ScreenImageMgr.deleteAllImages()\n";
 	}
 	if (idx==4)
+	{
+		scriptText = "core.clear(\"natural\");\n";
+	}
+	if (idx==5)
 	{
 		scriptText = "core.clear(\"starchart\");\n";
 	}
