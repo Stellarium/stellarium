@@ -21,6 +21,7 @@
 #define _STELNAVIGATOR_HPP_
 
 #include "VecMath.hpp"
+#include "StelLocation.hpp"
 
 #include "fixx11h.h"
 #include <QObject>
@@ -38,7 +39,6 @@ class StelObserver;
 class StelObject;
 class StelLoadingBar;
 class Planet;
-class StelLocation;
 
 //! @class StelNavigator
 //! Manages a navigation context.  This includes:
@@ -246,6 +246,10 @@ public slots:
 	//! Sets the initial direction of view to the current altitude and azimuth.
 	//! Note: Updates the configuration file.
 	void setInitViewDirectionToCurrent(void);
+
+signals:
+	//! This signal is emitted when the observer location has changed.
+	void locationChanged(StelLocation);
 	
 private:
 	//! Update the modelview matrices
