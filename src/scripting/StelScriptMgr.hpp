@@ -306,7 +306,13 @@ public slots:
 	//! @param id the ID of the sky culture to set, e.g. western or inuit etc.
 	void setSkyCulture(const QString& id);
 
+	//! Get the current status of the gravity labels option
+	//! @return true if gravity labels are enabled, else false
+	bool getFlagGravityLabels();
 
+	//! Turn on/off gravity labels
+	//! @param b if true, turn on gravity labels, else turn them off
+	void setFlagGravityLabels(bool b);
 
 	//! Load an image which will have sky coordinates.
 	//! @param id a string ID to be used when referring to this
