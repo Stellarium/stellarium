@@ -96,7 +96,9 @@ void ConstellationMgr::init()
 	setArtFadeDuration(conf->value("viewing/constellation_art_fade_duration",2.).toDouble());
 	setFlagArt(conf->value("viewing/flag_constellation_art").toBool());
 	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected",
-				conf->value("viewing/flag_constellation_pick", false).toBool() ).toBool());
+	                       conf->value("viewing/flag_constellation_pick", false).toBool() ).toBool());
+
+	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
 
 /*************************************************************************
