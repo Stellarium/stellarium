@@ -227,6 +227,7 @@ SET(stellarium_lib_SRCS
 	gui/StelDialog.cpp
 
 	scripting/StelScriptMgr.cpp
+	scripting/StratoscriptPreprocessor.cpp
 	scripting/StelScriptMgr.hpp
 	scripting/ScriptSleeper.cpp
 	scripting/ScriptSleeper.hpp
