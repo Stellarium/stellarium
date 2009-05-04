@@ -1,5 +1,6 @@
 /*
  * Stellarium
+ * Copyright (C) 2009 Matthew Gates
  * Copyright (C) 2007 Fabien Chereau
  *
  * This program is free software; you can redistribute it and/or
@@ -20,43 +21,29 @@
 #include "fixx11h.h"
 
 #include "StelScriptMgr.hpp"
-#include "StelAudioMgr.hpp"
-#include "ConstellationMgr.hpp"
-#include "GridLinesMgr.hpp"
-#include "LandscapeMgr.hpp"
-#include "MeteorMgr.hpp"
-#include "StelMovementMgr.hpp"
-#include "StelNavigator.hpp"
-#include "NebulaMgr.hpp"
-#include "SolarSystem.hpp"
+#include "StelMainScriptAPI.hpp"
+
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
 #include "StelGui.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelUtils.hpp"
-#include "StelMainGraphicsView.hpp"
-#include "StelMainWindow.hpp"
-#include "StelSkyCultureMgr.hpp"
+#include "StelMovementMgr.hpp"
+#include "StelNavigator.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelSkyImageMgr.hpp"
-#include "StarMgr.hpp"
-#include "StelProjector.hpp"
-#include "StelLocation.hpp"
-#include "Planet.hpp"
-#include "StelLocationMgr.hpp"
 
 #include <QAction>
+#include <QDateTime>
+#include <QDebug>
+#include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QSet>
-#include <QDebug>
-#include <QStringList>
-#include <QDateTime>
 #include <QRegExp>
-#include <QDir>
+#include <QSet>
+#include <QStringList>
 #include <QTemporaryFile>
+#include <QVariant>
 
 #include <cmath>
 
@@ -118,716 +105,6 @@ QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 	c[1] = context->argument(1).toNumber();
 	c[2] = context->argument(2).toNumber();
 	return vec3fToScriptValue(engine, c);
-}
-
-ScriptSleeper::ScriptSleeper()
-{
-	scriptRate = 1.0;
-}
-
-ScriptSleeper::~ScriptSleeper()
-{
-}
-
-void ScriptSleeper::setRate(double newRate)
-{
-	scriptRate = newRate;
-}
-
-double ScriptSleeper::getRate(void) const
-{
-	return scriptRate;
-}
-
-void ScriptSleeper::sleep(int ms)
-{
-	scriptRateOnSleep = scriptRate;
-	sleptTime.start();
-	int sleepForTime = ms/scriptRate;
-	while(sleepForTime > sleptTime.elapsed())
-	{
-		msleep(10);
-		if (scriptRateOnSleep!=scriptRate)
-		{
-			int sleepLeft = sleepForTime - sleptTime.elapsed();
-			sleepForTime = sleptTime.elapsed() + (sleepLeft / scriptRate);
-			scriptRateOnSleep = scriptRate;
-		}
-	}
-}
-
-StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
-{
-	if(StelSkyImageMgr* smgr = GETSTELMODULE(StelSkyImageMgr))
-	{
-		connect(this, SIGNAL(requestLoadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)), smgr, SLOT(loadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)));
-		connect(this, SIGNAL(requestRemoveSkyImage(const QString&)), smgr, SLOT(removeSkyImage(const QString&)));
-	}
-	
-	connect(this, SIGNAL(requestLoadSound(const QString&, const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(loadSound(const QString&, const QString&)));
-	connect(this, SIGNAL(requestPlaySound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(playSound(const QString&)));
-	connect(this, SIGNAL(requestPauseSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(pauseSound(const QString&)));
-	connect(this, SIGNAL(requestStopSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(stopSound(const QString&)));
-	connect(this, SIGNAL(requestDropSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(dropSound(const QString&)));
-	connect(this, SIGNAL(requestExit()), this->parent(), SLOT(stopScript()));
-	connect(this, SIGNAL(requestSetNightMode(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
-	connect(this, SIGNAL(requestSetProjectionMode(QString)), StelApp::getInstance().getCore(), SLOT(setCurrentProjectionTypeKey(QString)));
-	connect(this, SIGNAL(requestSetSkyCulture(QString)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureID(QString)));
-	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelApp::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));
-}
-
-StelMainScriptAPI::~StelMainScriptAPI()
-{
-}
-
-ScriptSleeper& StelMainScriptAPI::getScriptSleeper(void)
-{
-	return scriptSleeper;
-}
-
-//! Set the current date in Julian Day
-//! @param JD the Julian Date
-void StelMainScriptAPI::setJDay(double JD)
-{
-	StelApp::getInstance().getCore()->getNavigator()->setJDay(JD);
-}
-
-//! Get the current date in Julian Day
-//! @return the Julian Date
-double StelMainScriptAPI::getJDay(void) const
-{
-	return StelApp::getInstance().getCore()->getNavigator()->getJDay();
-}
-
-void StelMainScriptAPI::setDate(const QString& dt, const QString& spec)
-{
-	StelApp::getInstance().getCore()->getNavigator()->setJDay(jdFromDateString(dt, spec));
-}
-
-//! Set time speed in JDay/sec
-//! @param ts time speed in JDay/sec
-void StelMainScriptAPI::setTimeRate(double ts)
-{
-	// 1 second = .00001157407407407407 JDay
-	StelApp::getInstance().getCore()->getNavigator()->setTimeRate(ts * 0.00001157407407407407 * scriptSleeper.getRate());
-}
-
-//! Get time speed in JDay/sec
-//! @return time speed in JDay/sec
-double StelMainScriptAPI::getTimeRate(void) const
-{
-	return StelApp::getInstance().getCore()->getNavigator()->getTimeRate() / (0.00001157407407407407 * scriptSleeper.getRate());
-}
-
-bool StelMainScriptAPI::isRealTime()
-{
-	return StelApp::getInstance().getCore()->getNavigator()->getIsTimeNow();
-}
-
-void StelMainScriptAPI::setRealTime()
-{
-	setTimeRate(1.0);
-	StelApp::getInstance().getCore()->getNavigator()->setTimeNow();
-}
-
-void StelMainScriptAPI::wait(double t)
-{
-	scriptSleeper.sleep(t*1000);
-}
-
-void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
-{
-	double JD = jdFromDateString(dt, spec);
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	Q_ASSERT(nav);
-	double timeSpeed = nav->getTimeRate();
-
-	if (timeSpeed == 0.)
-	{
-		qWarning() << "waitFor called with no time passing - would be infinite. not waiting!";
-		return;
-	}
-	else if (timeSpeed > 0)
-	{
-		while(nav->getJDay() < JD)
-			scriptSleeper.sleep(200);
-	}
-	else
-	{
-		while(nav->getJDay() > JD)
-			scriptSleeper.sleep(200);
-	}
-}
-
-void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, double altitude, double duration, const QString& name, const QString& planet)
-{
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	Q_ASSERT(nav);
-	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	Q_ASSERT(ssmgr);
-
-	StelLocation loc = nav->getCurrentLocation();
-	if (longitude < 180 || longitude > 180)
-		loc.longitude = longitude;
-	if (latitude < 180 || latitude > 180)
-		loc.latitude = latitude;
-	if (altitude < -1000)
-		loc.altitude = altitude;
-	if (ssmgr->searchByName(planet))
-		loc.planetName = planet;
-	loc.name = name;
-
-	nav->moveObserverTo(loc, duration);
-}
-
-void StelMainScriptAPI::setObserverLocation(const QString id, double duration)
-{
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	Q_ASSERT(nav);
-	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForSmallString(id);
-	// How best to test to see if the lookup of the name was a success?
-	// On failure, it returns Paris, but maybe we _want_ Paris.
-	// Ugly. -MNG
-	if (id!="Paris, France" && (loc.name=="Paris" && loc.country=="France"))
-		return;	// location find fail
-
-	nav->moveObserverTo(loc, duration);
-}
-
-QString StelMainScriptAPI::getObserverLocation()
-{
-	return StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().getID();
-}
-
-void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir)
-{
-	bool oldInvertSetting = StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors();
-	StelMainGraphicsView::getInstance().setFlagInvertScreenShotColors(invert);
-	StelMainGraphicsView::getInstance().saveScreenShot(prefix, dir);
-	StelMainGraphicsView::getInstance().setFlagInvertScreenShotColors(oldInvertSetting);
-}
-
-void StelMainScriptAPI::setHideGui(bool b)
-{
-	GETSTELMODULE(StelGui)->getGuiActions("actionToggle_GuiHidden_Global")->setChecked(b);
-}
-
-void StelMainScriptAPI::setMinFps(float m) 
-{
-	StelApp::getInstance().setMinFps(m);
-}
-
-float StelMainScriptAPI::getMinFps() 
-{
-	return StelApp::getInstance().getMinFps();
-}
-
-void StelMainScriptAPI::setMaxFps(float m) 
-{
-	StelApp::getInstance().setMaxFps(m);
-}
-
-float StelMainScriptAPI::getMaxFps() 
-{
-	return StelApp::getInstance().getMaxFps();
-}
-
-QString StelMainScriptAPI::getMountMode()
-{
-	if (StelApp::getInstance().getCore()->getNavigator()->getMountMode() == StelNavigator::MountEquatorial)
-		return "equatorial";
-	else
-		return "azimuthal";
-}
-
-void StelMainScriptAPI::setMountMode(const QString& mode)
-{
-	if (mode=="equatorial")
-		StelApp::getInstance().getCore()->getNavigator()->setMountMode(StelNavigator::MountEquatorial);
-	else if (mode=="azimuthal")
-		StelApp::getInstance().getCore()->getNavigator()->setMountMode(StelNavigator::MountAltAzimuthal);
-}
-
-bool StelMainScriptAPI::getNightMode()
-{
-	return StelApp::getInstance().getVisionModeNight();
-}
-
-void StelMainScriptAPI::setNightMode(bool b)
-{
-	emit(requestSetNightMode(b));
-}
-
-QString StelMainScriptAPI::getProjectionMode()
-{
-	return StelApp::getInstance().getCore()->getCurrentProjectionTypeKey();
-}
-
-void StelMainScriptAPI::setProjectionMode(const QString& id)
-{
-	emit(requestSetProjectionMode(id));
-}
-
-QString StelMainScriptAPI::getSkyCulture()
-{
-	return StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID();
-}
-
-void StelMainScriptAPI::setSkyCulture(const QString& id)
-{
-	emit(requestSetSkyCulture(id));
-}
-
-bool StelMainScriptAPI::getFlagGravityLabels()
-{
-	return StelApp::getInstance().getCore()->getProjection(Mat4d())->getFlagGravityLabels();
-}
-
-void StelMainScriptAPI::setFlagGravityLabels(bool b)
-{
-	StelApp::getInstance().getCore()->setFlagGravityLabels(b);
-}
-
-bool StelMainScriptAPI::getDiskViewport()
-{
-	return StelApp::getInstance().getCore()->getProjection(Mat4d())->getMaskType() == StelProjector::MaskDisk;
-}
-
-void StelMainScriptAPI::setDiskViewport(bool b)
-{
-	emit(requestSetDiskViewport(b));
-}
-
-void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
-			             double ra0, double dec0,
-			             double ra1, double dec1,
-			             double ra2, double dec2,
-			             double ra3, double dec3,
-	                             double minRes, double maxBright, bool visible)
-{
-	QString path = "scripts/" + filename;
-	emit(requestLoadSkyImage(id, path, ra0, dec0, ra1, dec1, ra2, dec2, ra3, dec3, minRes, maxBright, visible));
-}
-
-void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
-                                     const QString& ra0, const QString& dec0,
-                                     const QString& ra1, const QString& dec1,
-                                     const QString& ra2, const QString& dec2,
-                                     const QString& ra3, const QString& dec3,
-                                     double minRes, double maxBright, bool visible)
-{
-	loadSkyImage(id, filename,
-	             StelUtils::getDecAngle(ra0) *180./M_PI, StelUtils::getDecAngle(dec0)*180./M_PI,
-	             StelUtils::getDecAngle(ra1) *180./M_PI, StelUtils::getDecAngle(dec1)*180./M_PI,
-	             StelUtils::getDecAngle(ra2) *180./M_PI, StelUtils::getDecAngle(dec2)*180./M_PI,
-	             StelUtils::getDecAngle(ra3) *180./M_PI, StelUtils::getDecAngle(dec3)*180./M_PI,
-	             minRes, maxBright, visible);
-}
-
-void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
-                                     double ra, double dec, double angSize, double rotation,
-                                     double minRes, double maxBright, bool visible)
-{
-	Vec3d XYZ;
-	const double RADIUS_NEB = 1.;
-	StelUtils::spheToRect(ra*M_PI/180., dec*M_PI/180., XYZ);
-	XYZ*=RADIUS_NEB;
-	double texSize = RADIUS_NEB * sin(angSize/2/60*M_PI/180);
-	Mat4f matPrecomp = Mat4f::translation(XYZ) *
-	                   Mat4f::zrotation(ra*M_PI/180.) *
-	                   Mat4f::yrotation(-dec*M_PI/180.) *
-	                   Mat4f::xrotation(rotation*M_PI/180.);
-
-	Vec3d corners[4];
-        corners[0] = matPrecomp * Vec3d(0.,-texSize,-texSize); 
-        corners[1] = matPrecomp * Vec3d(0., texSize,-texSize);
-        corners[2] = matPrecomp * Vec3d(0.,-texSize, texSize);
-        corners[3] = matPrecomp * Vec3d(0., texSize, texSize);
-
-	// convert back to ra/dec (radians)
-	Vec3d cornersRaDec[4];
-	for(int i=0; i<4; i++)
-		StelUtils::rectToSphe(&cornersRaDec[i][0], &cornersRaDec[i][1], corners[i]);
-
-	loadSkyImage(id, filename, 
-	             cornersRaDec[0][0]*180./M_PI, cornersRaDec[0][1]*180./M_PI,
-	             cornersRaDec[1][0]*180./M_PI, cornersRaDec[1][1]*180./M_PI,
-	             cornersRaDec[3][0]*180./M_PI, cornersRaDec[3][1]*180./M_PI,
-	             cornersRaDec[2][0]*180./M_PI, cornersRaDec[2][1]*180./M_PI,
-	             minRes, maxBright, visible);
-}
-
-void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
-                                     const QString& ra, const QString& dec, double angSize, double rotation,
-                                     double minRes, double maxBright, bool visible)
-{
-	loadSkyImage(id, filename, StelUtils::getDecAngle(ra)*180./M_PI, 
-	             StelUtils::getDecAngle(dec)*180./M_PI, angSize, 
-	             rotation, minRes, maxBright, visible);
-}
-
-void StelMainScriptAPI::removeSkyImage(const QString& id)
-{
-	emit(requestRemoveSkyImage(id));
-}
-
-void StelMainScriptAPI::loadSound(const QString& filename, const QString& id)
-{
-	QString path;
-	try
-	{
-		path = StelApp::getInstance().getFileMgr().findFile("scripts/" + filename);
-	}
-	catch(std::runtime_error& e)
-	{
-		qWarning() << "cannot play sound" << filename << ":" << e.what();
-		return;
-	}
-
-	emit(requestLoadSound(path, id));
-}
-
-void StelMainScriptAPI::playSound(const QString& id)
-{
-	emit(requestPlaySound(id));
-}
-
-void StelMainScriptAPI::pauseSound(const QString& id)
-{
-	emit(requestPauseSound(id));
-}
-
-void StelMainScriptAPI::stopSound(const QString& id)
-{
-	emit(requestStopSound(id));
-}
-
-void StelMainScriptAPI::dropSound(const QString& id)
-{
-	emit(requestDropSound(id));
-}
-
-int StelMainScriptAPI::getScreenWidth(void)
-{
-	return StelMainWindow::getInstance().size().width();
-}
-
-int StelMainScriptAPI::getScreenHeight(void)
-{
-	return StelMainWindow::getInstance().size().height();
-}
-
-double StelMainScriptAPI::getScriptRate(void)
-{
-	return scriptSleeper.getRate();
-}
-
-void StelMainScriptAPI::setScriptRate(double r)
-{
-	return scriptSleeper.setRate(r);
-}
-
-void StelMainScriptAPI::exit(void)
-{
-	emit(requestExit());
-}
-
-void StelMainScriptAPI::debug(const QString& s)
-{
-	qDebug() << "script: " << s;
-	StelApp::getInstance().getScriptMgr().debug(s);
-}
-
-double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)
-{
-	QDateTime qdt;
-	double JD;
-
-	// 2008-03-24T13:21:01
-	QRegExp isoRe("^\\d{4}[:\\-]\\d\\d[:\\-]\\d\\dT\\d?\\d:\\d\\d:\\d\\d$");
-	QRegExp nowRe("^(now)?(\\s*([+\\-])\\s*(\\d+(\\.\\d+)?)\\s*(second|seconds|minute|minutes|hour|hours|day|days|week|weeks))(\\s+(sidereal)?)?");
-
-	if (dt == "now")
-		return StelUtils::getJDFromSystem();
-	else if (isoRe.exactMatch(dt))
-	{
-		qdt = QDateTime::fromString(dt, Qt::ISODate);
-
-		if (spec=="local")
-			JD = StelUtils::qDateTimeToJd(qdt.toUTC());
-		else
-			JD = StelUtils::qDateTimeToJd(qdt);
-			
-		return JD;
-	}
-	else if (nowRe.exactMatch(dt))
-	{
-		double delta;
-		double unit;
-		double dayLength = 1.0;
-
-		if (nowRe.capturedTexts().at(1)=="now")
-			JD = StelUtils::getJDFromSystem();
-		else
-			JD = StelApp::getInstance().getCore()->getNavigator()->getJDay();
-
-		if (nowRe.capturedTexts().at(8) == "sidereal")
-			dayLength = StelApp::getInstance().getCore()->getNavigator()->getHomePlanet()->getSiderealDay();
-
-		QString unitString = nowRe.capturedTexts().at(6);
-		if (unitString == "seconds" || unitString == "second")
-			unit = dayLength / (24*3600.);
-		else if (unitString == "minutes" || unitString == "minute")
-			unit = dayLength / (24*60.);
-		else if (unitString == "hours" || unitString == "hour")
-			unit = dayLength / (24.);
-		else if (unitString == "days" || unitString == "day")
-			unit = dayLength;
-		else if (unitString == "weeks" || unitString == "week")
-			unit = dayLength * 7.;
-		else
-		{
-			qWarning() << "StelMainScriptAPI::setDate - unknown time unit:" << nowRe.capturedTexts().at(4);
-			unit = 0;
-		}
-
-		delta = nowRe.capturedTexts().at(4).toDouble();
-
-		if (nowRe.capturedTexts().at(3) == "+")
-			JD += (unit * delta);
-		else if (nowRe.capturedTexts().at(3) == "-")
-			JD -= (unit * delta);
-
-		return JD;
-	}
-	else
-	{
-		qWarning() << "StelMainScriptAPI::jdFromDateString error - date string" << dt << "not recognised, returning \"now\"";
-		return StelUtils::getJDFromSystem();
-	}
-}
-
-void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
-{
-	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
-	omgr->setFlagSelectedObjectPointer(pointer);
-	if (name=="")
-		omgr->unSelect();
-	else
-		omgr->findAndSelect(name);
-}
-
-void StelMainScriptAPI::clear(const QString& state)
-{
-	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-	Q_ASSERT(lmgr);
-	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	Q_ASSERT(ssmgr);
-	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
-	Q_ASSERT(mmgr);
-	StelSkyDrawer* skyd = StelApp::getInstance().getCore()->getSkyDrawer();
-	Q_ASSERT(skyd);
-	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
-	Q_ASSERT(cmgr);
-	StarMgr* smgr = GETSTELMODULE(StarMgr);
-	Q_ASSERT(smgr);
-	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
-	Q_ASSERT(nmgr);
-	GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
-	Q_ASSERT(glmgr);
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	Q_ASSERT(nav);
-
-	if (state.toLower() == "natural")
-	{
-		nav->setEquatorialMount(false);
-		skyd->setFlagTwinkle(true);
-		skyd->setFlagLuminanceAdaptation(true);
-		ssmgr->setFlagPlanets(true);
-		ssmgr->setFlagHints(false);
-		ssmgr->setFlagOrbits(false);
-		ssmgr->setFlagMoonScale(false);
-		ssmgr->setFlagTrails(false);
-		mmgr->setZHR(10);
-		glmgr->setFlagAzimuthalGrid(false);
-		glmgr->setFlagEquatorGrid(false);
-		glmgr->setFlagEquatorLine(false);
-		glmgr->setFlagEclipticLine(false);
-		glmgr->setFlagMeridianLine(false);
-		glmgr->setFlagEquatorJ2000Grid(false);
-		lmgr->setFlagCardinalsPoints(false);
-		cmgr->setFlagLines(false);
-		cmgr->setFlagLabels(false);
-		cmgr->setFlagBoundaries(false);
-		cmgr->setFlagArt(false);
-		smgr->setFlagLabels(false);
-		ssmgr->setFlagLabels(false);
-		nmgr->setFlagHints(false);
-		lmgr->setFlagLandscape(true);
-		lmgr->setFlagAtmosphere(true);
-		lmgr->setFlagFog(true);
-	}
-	else if (state.toLower() == "starchart")
-	{
-		nav->setEquatorialMount(true);
-		skyd->setFlagTwinkle(false);
-		skyd->setFlagLuminanceAdaptation(false);
-		ssmgr->setFlagPlanets(true);
-		ssmgr->setFlagHints(false);
-		ssmgr->setFlagOrbits(false);
-		ssmgr->setFlagMoonScale(false);
-		ssmgr->setFlagTrails(false);
-		mmgr->setZHR(0);
-		glmgr->setFlagAzimuthalGrid(false);
-		glmgr->setFlagEquatorGrid(true);
-		glmgr->setFlagEquatorLine(false);
-		glmgr->setFlagEclipticLine(false);
-		glmgr->setFlagMeridianLine(false);
-		glmgr->setFlagEquatorJ2000Grid(false);
-		lmgr->setFlagCardinalsPoints(false);
-		cmgr->setFlagLines(true);
-		cmgr->setFlagLabels(true);
-		cmgr->setFlagBoundaries(true);
-		cmgr->setFlagArt(false);
-		smgr->setFlagLabels(true);
-		ssmgr->setFlagLabels(true);
-		nmgr->setFlagHints(true);
-		lmgr->setFlagLandscape(false);
-		lmgr->setFlagAtmosphere(false);
-		lmgr->setFlagFog(false);
-	}
-	else if (state.toLower() == "deepspace")
-	{
-		nav->setEquatorialMount(true);
-		skyd->setFlagTwinkle(false);
-		skyd->setFlagLuminanceAdaptation(false);
-		ssmgr->setFlagPlanets(false);
-		ssmgr->setFlagHints(false);
-		ssmgr->setFlagOrbits(false);
-		ssmgr->setFlagMoonScale(false);
-		ssmgr->setFlagTrails(false);
-		mmgr->setZHR(0);
-		glmgr->setFlagAzimuthalGrid(false);
-		glmgr->setFlagEquatorGrid(false);
-		glmgr->setFlagEquatorLine(false);
-		glmgr->setFlagEclipticLine(false);
-		glmgr->setFlagMeridianLine(false);
-		glmgr->setFlagEquatorJ2000Grid(false);
-		lmgr->setFlagCardinalsPoints(false);
-		cmgr->setFlagLines(false);
-		cmgr->setFlagLabels(false);
-		cmgr->setFlagBoundaries(false);
-		cmgr->setFlagArt(false);
-		smgr->setFlagLabels(false);
-		ssmgr->setFlagLabels(false);
-		nmgr->setFlagHints(false);
-		lmgr->setFlagLandscape(false);
-		lmgr->setFlagAtmosphere(false);
-		lmgr->setFlagFog(false);
-	}
-	else
-	{
-		qWarning() << "WARNING clear(" << state << ") - state not known";
-	}
-}
-
-double StelMainScriptAPI::getViewAltitudeAngle()
-{
-	Vec3d current = StelApp::getInstance().getCore()->getNavigator()->getAltAzVisionDirection();
-	double alt, azi;
-	StelUtils::rectToSphe(&azi, &alt, current);
-	return alt*180/M_PI; // convert to degrees from radians
-}
-
-double StelMainScriptAPI::getViewAzimuthAngle()
-{
-	Vec3d current = StelApp::getInstance().getCore()->getNavigator()->getAltAzVisionDirection();
-	double alt, azi;
-	StelUtils::rectToSphe(&azi, &alt, current);
-	// The returned azimuth angle is in radians and set up such that:
-	// N=+/-PI; E=PI/2; S=0; W=-PI/2;
-	// But we want compass bearings, i.e. N=0, E=90, S=180, W=270
-	return std::fmod(((azi*180/M_PI)*-1)+180., 360.);
-}
-
-double StelMainScriptAPI::getViewRaAngle()
-{
-	Vec3d current = StelApp::getInstance().getCore()->getNavigator()->getEquinoxEquVisionDirection();
-	double ra, dec;
-	StelUtils::rectToSphe(&ra, &dec, current);
-	// returned RA angle is in range -PI .. PI, but we want 0 .. 360
-	return std::fmod((ra*180/M_PI)+360., 360.); // convert to degrees from radians
-}
-
-double StelMainScriptAPI::getViewDecAngle()
-{
-	Vec3d current = StelApp::getInstance().getCore()->getNavigator()->getEquinoxEquVisionDirection();
-	double ra, dec;
-	StelUtils::rectToSphe(&ra, &dec, current);
-	return dec*180/M_PI; // convert to degrees from radians
-}
-
-double StelMainScriptAPI::getViewRaJ2000Angle()
-{
-	Vec3d current = StelApp::getInstance().getCore()->getNavigator()->getJ2000EquVisionDirection();
-	double ra, dec;
-	StelUtils::rectToSphe(&ra, &dec, current);
-	// returned RA angle is in range -PI .. PI, but we want 0 .. 360
-	return std::fmod((ra*180/M_PI)+360., 360.); // convert to degrees from radians
-}
-
-double StelMainScriptAPI::getViewDecJ2000Angle()
-{
-	Vec3d current = StelApp::getInstance().getCore()->getNavigator()->getJ2000EquVisionDirection();
-	double ra, dec;
-	StelUtils::rectToSphe(&ra, &dec, current);
-	return dec*180/M_PI; // convert to degrees from radians
-}
-
-void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, float duration)
-{
-	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-	Q_ASSERT(mvmgr);
-
-	GETSTELMODULE(StelObjectMgr)->unSelect();
-
-	Vec3d aim;
-	double dAlt = StelUtils::getDecAngle(alt); 
-	double dAzi = M_PI - StelUtils::getDecAngle(azi);
-
-	StelUtils::spheToRect(dAzi,dAlt,aim);
-	mvmgr->moveTo(aim, duration, true);
-}
-
-void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float duration)
-{
-	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-	Q_ASSERT(mvmgr);
-
-	GETSTELMODULE(StelObjectMgr)->unSelect();
-
-	Vec3d aim;
-	double dRa = StelUtils::getDecAngle(ra); 
-	double dDec = StelUtils::getDecAngle(dec);
-
-	StelUtils::spheToRect(dRa,dDec,aim);
-	mvmgr->moveTo(aim, duration, false);
-}
-
-void StelMainScriptAPI::moveToRaDecJ2000(const QString& ra, const QString& dec, float duration)
-{
-	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-	Q_ASSERT(mvmgr);
-
-	GETSTELMODULE(StelObjectMgr)->unSelect();
-
-	Vec3d aimJ2000, aimEquofDate;
-	double dRa = StelUtils::getDecAngle(ra); 
-	double dDec = StelUtils::getDecAngle(dec);
-
-	StelUtils::spheToRect(dRa,dDec,aimJ2000);
-	aimEquofDate = StelApp::getInstance().getCore()->getNavigator()->j2000ToEquinoxEqu(aimJ2000);
-	mvmgr->moveTo(aimEquofDate, duration, false);
 }
 
 StelScriptMgr::StelScriptMgr(QObject *parent) 
@@ -1146,11 +423,356 @@ void StelScriptMgr::scriptEnded()
 	emit(scriptStopped());
 }
 
-void StelMainScriptAPIProxy::setDiskViewport(bool b)
+QMap<QString, QString> StelScriptMgr::mappify(const QStringList& args, bool lowerKey)
 {
-	if (b)
-		StelApp::getInstance().getCore()->setMaskType(StelProjector::MaskDisk);
-	else
-		StelApp::getInstance().getCore()->setMaskType(StelProjector::MaskNone);
+	QMap<QString, QString> map;
+	for(int i=0; i+1<args.size(); i++)
+		if (lowerKey)
+			map[args.at(i).toLower()] = args.at(i+1);
+		else
+			map[args.at(i)] = args.at(i+1);
+	return map;
 }
+
+bool StelScriptMgr::strToBool(const QString& str)
+{
+	if (str.toLower() == "off" || str.toLower() == "no")
+		return false;
+	else if (str.toLower() == "on" || str.toLower() == "yes")
+		return true;
+	return QVariant(str).toBool();
+}
+
+bool StelScriptMgr::preprocessScript(QFile& input, QFile& output, const QString& scriptDir)
+{
+	while (!input.atEnd())
+	{
+		QString line = QString::fromUtf8(input.readLine());
+		QRegExp includeRe("^include\\s*\\(\\s*\"([^\"]+)\"\\s*\\)\\s*;\\s*(//.*)?$");
+		if (includeRe.exactMatch(line))
+		{
+			QString fileName = includeRe.capturedTexts().at(1);
+			QString path;
+
+			// Search for the include file.  Rules are:
+			// 1. If path is absolute, just use that
+			// 2. If path is relative, look in scriptDir + included filename
+			if (QFileInfo(fileName).isAbsolute())
+				path = fileName;
+			else
+			{
+				try
+				{
+					path = StelApp::getInstance().getFileMgr().findFile(scriptDir + "/" + fileName);
+				}
+				catch(std::runtime_error& e)
+				{
+					qWarning() << "WARNING: script include:" << fileName << e.what();
+					return false;
+				}
+			}
+
+			QFile fic(path);
+			bool ok = fic.open(QIODevice::ReadOnly);
+			if (ok)
+			{
+				qDebug() << "script include: " << path;
+				preprocessScript(fic, output, scriptDir);
+			}
+			else
+			{
+				qWarning() << "WARNING: could not open script include file for reading:" << path;
+				return false;
+			}
+		}
+		else
+		{
+			output.write(line.toUtf8());
+		}
+	}
+	return true;
+}
+
+#ifdef ENABLE_STRATOSCRIPT_COMPAT
+bool StelScriptMgr::preprocessStratoScript(QFile& input, QFile& output, const QString& scriptDir)
+{
+	int n=0;
+	qDebug() << "Translating stratoscript:";
+	while (!input.atEnd())
+	{
+		QString line = QString::fromUtf8(input.readLine());
+		line.replace(QRegExp("#.*$"), "");
+		QStringList args = line.split(QRegExp("\\s+"));
+
+		if (args.at(0) == "script")
+		{
+			if (args.at(1) == "filename")
+			{
+				QString fileName = args.at(2);
+				QString path;
+
+				// Search for the include file.  Rules are:
+				// 1. If path is absolute, just use that
+				// 2. If path is relative, look in scriptDir + included filename
+				if (QFileInfo(fileName).isAbsolute())
+					path = fileName;
+				else
+				{
+					try
+					{
+						path = StelApp::getInstance().getFileMgr().findFile(scriptDir + "/" + fileName);
+					}
+					catch(std::runtime_error& e)
+					{
+						qWarning() << "WARNING: script include:" << fileName << e.what();
+						return false;
+					}
+				}
+
+				QFile fic(path);
+				bool ok = fic.open(QIODevice::ReadOnly);
+				if (ok)
+				{
+					qDebug() << "script include: " << path;
+					preprocessScript(fic, output, scriptDir);
+				}
+				else
+				{
+					qWarning() << "WARNING: could not open script include file for reading:" << path;
+					return false;
+				}
+			}
+			else
+				line = "// untranslated stratoscript (script): " + line;
+		}
+		else if (args.at(0) == "landscape")
+		{
+			if (args.at(1) == "load")
+				line = QString("LandscapeMgr.setCurrentLandscapeID(\"%1\");").arg(args.at(2));
+			else
+				line = "// untranslated stratoscript (landscape): " + line;
+		}
+		else if (args.at(0) == "clear")
+		{
+			QString state = "natural";
+			if (args.at(1) == "state")
+				state = args.at(2);
+
+			line = QString("core.clear(\"%1\");").arg(state);
+		}
+		else if (args.at(0) == "date")
+		{
+			if (args.at(1).toLower() == "utc")
+				line = QString("core.setDate(\"%1\"); ").arg(args.at(2));
+			else if (args.at(1) == "local")
+				line = QString("core.setDate(\"%1\", \"local\"); ").arg(args.at(2));
+			else
+				line = "// untranslated stratoscript (date): " + line;
+		}
+		else if (args.at(0) == "deselect")
+			line = "core.selectObjectByName(\"\", false);";
+		else if (args.at(0) == "flag")
+		{
+			if (args.at(1) == "atmosphere")
+				line = QString("LandscapeMgr.setFlagAtmosphere(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "azimuthal_grid")
+				line = QString("GridLinesMgr.setFlagAzimuthalGrid(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "cardinal_points")
+				line = QString("LandscapeMgr.setFlagCardinalsPoints(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "constellation_art")
+				line = QString("ConstellationMgr.setFlagArt(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "constellation_boundaries")
+				line = QString("ConstellationMgr.setFlagBoundaries(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "constellation_drawing" || args.at(1) == "constellations")
+				line = QString("ConstellationMgr.setFlagLines(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "constellation_names")
+				line = QString("ConstellationMgr.setFlagLabels(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "constellation_pick")
+				line = QString("ConstellationMgr.setFlagIsolateSelected(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "ecliptic_line")
+				line = QString("GridLinesMgr.setFlagEclipticLine(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "equator_line")
+				line = QString("GridLinesMgr.setFlagEquatorLine(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "equator_grid")
+				line = QString("GridLinesMgr.setFlagEquatorGrid(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "fog")
+				line = QString("LandscapeMgr.setFlagFog(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "gravity_labels") // TODO when in new script API
+				line = "// untranslated stratoscropt (flag gravity_labels): " + line;
+			else if (args.at(1) == "moon_scaled")
+				line = QString("SolarSystem.setFlagMoonScale(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "landscape")
+				line = QString("LandscapeMgr.setFlagLandscape(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "landscape_sets_location")
+				line = QString("LandscapeMgr.setFlagLandscapeSetsLocation(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "meridian_line")
+				line = QString("GridLinesMgr.setFlagMeridianLine(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "milky_way")
+				line = QString("MilkyWay.setFlagShow(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "nebulae")
+				line = QString("NebulaMgr.setFlagShow(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "nebula_names")
+				line = QString("NebulaMgr.setFlagNames(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "night") // TODO when in new script API
+				line = "// untranslated stratoscropt (flag night): " + line;
+			else if (args.at(1) == "object_trails")
+				line = QString("SolarSystem.setFlagTrails(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "planets")
+				line = QString("SolarSystem.setFlagTrails(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "planet_names")
+				line = QString("SolarSystem.setFlagLabels(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "planet_orbits")
+				line = QString("SolarSystem.setFlagOrbits(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "star_names")
+				line = QString("StarMgr.setFlagLabels(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "star_twinkle") // TODO when in new script API
+				line = "// untranslated stratoscropt (flag star_twinkle): " + line;
+			else if (args.at(1) == "stars")
+				line = QString("StarMgr.setFlagStars(%1);").arg(strToBool(args.at(2)));
+			else
+				line = "// untranslated stratoscript (flag): " + line;
+		}
+		else if (args.at(0) == "image")
+		{
+			args.removeFirst();
+			QMap<QString, QString> map = mappify(args, true);
+			if (map.contains("action"))
+			{
+				if (!map.contains("name"))
+					line = "// untranslated stratoscript (image but no name param): " + line;
+				else
+				{
+					if (map["action"].toLower() == "load")
+					{
+						if (!map.contains("filename") || !map.contains("scale") || !map.contains("altitude") || !map.contains("azimuth"))
+							line = "// untranslated stratoscript (image load but insufficient params): " + line;
+						else
+						{
+							QString coords="viewport";
+							int xpos=0;
+							int ypos=0;
+							bool ok;
+							if (map.contains("coordinate_system")) coords = map["coordinate_system"];
+							if (map.contains("xpos")) xpos = QVariant(map["xpos"]).toInt(&ok);
+							if (!ok || xpos!=1) xpos=0;
+							if (map.contains("ypos")) ypos = QVariant(map["ypos"]).toInt(&ok);
+							if (!ok || ypos!=1) ypos=0;
+
+							if (coords=="viewport")
+							{
+								line = QString("ScreenImageMgr.createScreenImage(\"%1\", \"%2\", %3, %4);").arg(map["name"]).arg(map["filename"]).arg(QVariant(map["azimuth"]).toInt()).arg(QVariant(map["altitude"]).toInt());
+							}
+							else if (coords=="horizontal")
+							{
+								line = "// untranslated stratoscript (image coords horizontal not implemented yet): " + line; // TODO when we have API for it.
+							}
+							else
+								line = "// untranslated stratoscript (image coords type unknown): " + line;
+						}
+					}
+					else if (map["action"].toLower() == "drop")
+						line = QString("ScreenImageMgr.deleteImage(\"%1\")").arg(map["name"]);
+					else
+						line = "// untranslated stratoscript (image): " + line;
+				}
+			}
+			else
+				line = "// untranslated stratoscropt (image): " + line;
+		}
+		else if (args.at(0) == "select")
+		{
+			args.removeFirst();
+			QMap<QString, QString> map = mappify(args, true);
+			bool pointer = false;
+			QString objectName;
+			if (map.contains("pointer"))
+				pointer = QVariant(map["pointer"]).toBool();
+			if (map.contains("planet"))
+				objectName = map["planet"];
+			else if (map.contains("hp"))
+				objectName = "HP" + map["hp"];
+			else if (map.contains("constellation"))
+				objectName = map["constellation"];
+			else if (map.contains("constellation_star"))
+				objectName = map["constellation_star"];
+			else if (map.contains("nebula"))
+				objectName = map["nebula"];
+
+			line = QString("core.selectObjectByName(\"%1\", %2);").arg(objectName).arg(pointer);
+		}
+		else if (args.at(0) == "wait")
+		{
+			if (args.at(1) == "duration")
+				line = QString("core.wait(\"%1\");").arg(args.at(2));
+			else
+				line = "// untranslated stratoscript (wait): " + line;
+		}
+		else if (args.at(0) == "zoom")
+		{
+			bool ok;
+			args.removeFirst();
+			QMap<QString, QString> map = mappify(args);
+			double duration = 1.0;
+			if (map.contains("duration"))
+				duration = QVariant(map["duration"]).toDouble(&ok);
+			if (!ok)
+				duration = 1.0;
+
+			if (map.contains("auto"))
+			{
+				if (map["auto"].toLower() == "in")
+					line = QString("StelMovementMgr.autoZoomIn(%1);").arg(duration);
+				else if (map["auto"].toLower() == "out")
+					line = QString("StelMovementMgr.autoZoomOut(%1);").arg(duration);
+				else if (map["auto"].toLower() == "initial")
+					line = QString("StelMovementMgr.zoomTo(StelMovementMgr.getInitFov(), %1);").arg(duration);
+			}
+			else if (map.contains("fov"))
+			{
+				double fov;
+				fov = QVariant(map["fov"]).toDouble(&ok);
+				if (ok)
+					line = QString("StelMovementMgr.zoomTo(%1, %2);").arg(fov).arg(duration);
+				else
+					line = "// untranslated stratoscript (zoom fov): " + line;
+			}
+			else if (map.contains("delta_fov"))
+			{
+				double dfov;
+				dfov = QVariant(map["delta_fov"]).toDouble(&ok);
+				if (ok)
+					line = QString("StelMovementMgr.zoomTo(%1, %2);").arg(dfov).arg(duration);
+				else
+					line = "// untranslated stratoscript (zoom delta_fov): " + line;
+			}
+			else
+				line = "// untranslated stratoscript (zoom): " + line;
+		}
+		else if (args.at(0) == "timerate")
+		{
+			bool ok;
+			if (args.at(1) == "rate")
+			{
+				double rate = QVariant(args.at(2)).toDouble(&ok);
+				if (ok)
+					line = QString("core.setTimeRate(%1);").arg(rate);
+				else
+					line = "// untranslated stratoscript (timerate rate): " + line;
+			}
+			else
+				line = "// untranslated stratoscript (timerate): " + line;
+		}
+		else
+		{
+			line = "// untranslated stratoscript: " + line;
+		}
+		qDebug() << QString("%1: ").arg(++n, 4) + line;
+		line += "\n";
+		output.write(line.toUtf8());
+	}
+	return true;
+}
+
+#endif // ENABLE_STRATOSCRIPT_COMPAT
+
 
