@@ -226,9 +226,14 @@ SET(stellarium_lib_SRCS
 	gui/StelDialog.hpp
 	gui/StelDialog.cpp
 
-	scripting/StelScriptPreProcessor.cpp
 	scripting/StelScriptMgr.cpp
 	scripting/StelScriptMgr.hpp
+	scripting/ScriptSleeper.cpp
+	scripting/ScriptSleeper.hpp
+	scripting/StelMainScriptAPI.cpp
+	scripting/StelMainScriptAPI.hpp
+	scripting/StelMainScriptAPIProxy.cpp
+	scripting/StelMainScriptAPIProxy.hpp
 
 	StelMainGraphicsView.hpp
 	StelMainGraphicsView.cpp
@@ -406,6 +411,8 @@ SET(stellarium_MOC_HDRS
 	gui/DownloadPopup.hpp
 	gui/StelDialog.hpp
 	scripting/StelScriptMgr.hpp
+	scripting/StelMainScriptAPI.hpp
+	scripting/StelMainScriptAPIProxy.hpp
 	StelMainGraphicsView.hpp
 	StelMainWindow.hpp
 )

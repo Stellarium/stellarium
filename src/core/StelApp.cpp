@@ -48,6 +48,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelScriptMgr.hpp"
+#include "StelMainScriptAPIProxy.hpp"
 #include "StelJsonParser.hpp"
 #include "StelSkyImageMgr.hpp"
 #include "StelAudioMgr.hpp"
