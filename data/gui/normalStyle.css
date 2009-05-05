@@ -482,7 +482,7 @@ QListView#stackListWidget {
 QListView::item:selected#stackListWidget {
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(48, 49, 52), stop: 1 rgb(86, 87, 90));
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 69, 72), stop: 1 rgb(86, 87, 90));
 	color: rgb(220, 223, 214);
 }
 
