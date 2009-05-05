@@ -28,6 +28,7 @@ class QIODevice;
 class StelCore;
 
 //! Abstract base class for managing multi-level tree objects stored in JSON format.
+//! The JSON files can be stored on disk or remotely and are loaded into threads.
 class MultiLevelJsonBase : public QObject
 {
 	Q_OBJECT
@@ -62,7 +63,8 @@ public:
 	//! It can be saved as JSON using the StelJsonParser methods.
 	QVariantMap toQVariantMap() const;
 
-	//! Schedule a deletion for all the childs. It will practically occur after the delay passed as argument to deleteUnusedTiles() has expired.
+	//! Schedule a deletion for all the childs.
+	//! It will practically occur after the delay passed as argument to deleteUnusedTiles() has expired.
 	void scheduleChildsDeletion();
 
 signals:
@@ -82,6 +84,7 @@ private slots:
 
 protected:
 	//! Load the element from a valid QVariantMap.
+	//! This method is called after the JSON files are downloaded and parsed into a QVariantMap.
 	virtual void loadFromQVariantMap(const QVariantMap& map)=0;
 
 	//! Return true if a deletion is currently scheduled.
@@ -95,9 +98,6 @@ protected:
 
 	//! The relative URL passed to the constructor
 	QString contructorUrl;
-
-	//! The list of all the subTiles URL or already loaded JSON map for this tile
-	QVariantList subTilesUrls;
 
 	//! The list of all the created subtiles for this tile
 	QList<MultiLevelJsonBase*> subTiles;

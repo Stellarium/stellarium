@@ -99,8 +99,9 @@ public:
 	QString getAbsoluteImageURI() const {return absoluteImageURI;}
 
 protected:
-	//! Minimum resolution of the data of the texture in degree/pixel
-	float minResolution;
+	//! Reimplement the abstract method.
+	//! Load the tile from a valid QVariantMap.
+	virtual void loadFromQVariantMap(const QVariantMap& map);
 
 	//! The credits of the server where this data come from
 	ServerCredits serverCredits;
@@ -126,10 +127,8 @@ protected:
 	//! The texture of the tile
 	StelTextureSP tex;
 
-protected:
-
-	//! Load the tile from a valid QVariantMap
-	virtual void loadFromQVariantMap(const QVariantMap& map);
+	//! Minimum resolution of the data of the texture in degree/pixel
+	float minResolution;
 
 private:
 	//! init the StelSkyImageTile
@@ -145,6 +144,9 @@ private:
 
 	//! Return the minimum resolution
 	double getMinResolution() const {return minResolution;}
+
+	//! The list of all the subTiles URL or already loaded JSON map for this tile
+	QVariantList subTilesUrls;
 
 	// Used for smooth fade in
 	QTimeLine* texFader;

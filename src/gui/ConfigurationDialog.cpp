@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -60,7 +60,7 @@ ConfigurationDialog::ConfigurationDialog()
 	ui = new Ui_configurationDialogForm;
 	downloadMgr = &StelApp::getInstance().getDownloadMgr();
 	updatesData = NULL;
-	
+
 	StelFileMgr& fileMgr = StelApp::getInstance().getFileMgr();
 	starsDir = fileMgr.getUsersDataDirectoryName() + "/stars/default";
 	if(!fileMgr.exists(starsDir))
@@ -92,14 +92,15 @@ void ConfigurationDialog::createDialogContent()
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	StelGui* gui = GETSTELMODULE(StelGui);
-	
+
 	ui->setupUi(dialog);
-	
+
 	// Set the main tab activated by default
-	ui->configurationTabWidget->setCurrentIndex(0);
-	
+	ui->configurationStackedWidget->setCurrentIndex(0);
+	ui->stackListWidget->setCurrentRow(0);
+
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	
+
 	// Main tab
 	// Fill the language list widget from the available list
 	QString appLang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
@@ -117,14 +118,14 @@ void ConfigurationDialog::createDialogContent()
 	if (lt!=-1)
 		cb->setCurrentIndex(lt);
 	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
-	
+
 	starSettings = GETSTELMODULE(StarMgr)->getStarSettings();
-	
+
 	connect(ui->getStarsButton, SIGNAL(clicked(void)), this, SLOT(downloadStars(void)));
 	connect(ui->downloadCancelButton, SIGNAL(clicked(void)), this, SLOT(cancelDownload(void)));
 	connect(ui->downloadRetryButton, SIGNAL(clicked(void)), this, SLOT(retryDownload(void)));
 	checkUpdates();
-	
+
 	// Selected object info
 	if (gui->getInfoPanel()->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
 		ui->noSelectedInfoRadio->setChecked(true);
@@ -135,7 +136,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
-	
+
 	// Navigation tab
 	// Startup time
 	if (nav->getStartupTimeMode()=="actual")
@@ -147,7 +148,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->systemTimeRadio, SIGNAL(clicked(bool)), this, SLOT(setStartupTimeMode()));
 	connect(ui->todayRadio, SIGNAL(clicked(bool)), this, SLOT(setStartupTimeMode()));
 	connect(ui->fixedTimeRadio, SIGNAL(clicked(bool)), this, SLOT(setStartupTimeMode()));
-	
+
 	ui->todayTimeSpinBox->setTime(nav->getInitTodayTime());
 	connect(ui->todayTimeSpinBox, SIGNAL(timeChanged(QTime)), nav, SLOT(setInitTodayTime(QTime)));
 	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(nav->getPresetSkyTime()));
@@ -159,7 +160,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableZoomKeys(bool)));
 	connect(ui->enableMouseNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableMouseNavigation(bool)));
 	connect(ui->fixedDateTimeCurrentButton, SIGNAL(clicked()), this, SLOT(setFixedDateTimeToCurrent()));
-	
+
 	// Tools tab
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 	Q_ASSERT(cmgr);
@@ -173,26 +174,26 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 	ui->autoZoomResetsDirectionCheckbox->setChecked(mvmgr->getFlagAutoZoomOutResetsDirection());
 	connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
-	
+
 	ui->showFlipButtonsCheckbox->setChecked(gui->getFlagShowFlipButtons());
 	connect(ui->showFlipButtonsCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowFlipButtons(bool)));
-	
+
 	ui->mouseTimeoutCheckbox->setChecked(StelAppGraphicsScene::getInstance().getFlagCursorTimeout());
 	ui->mouseTimeoutSpinBox->setValue(StelAppGraphicsScene::getInstance().getCursorTimeout());
 	connect(ui->mouseTimeoutCheckbox, SIGNAL(clicked()), this, SLOT(cursorTimeOutChanged()));
 	connect(ui->mouseTimeoutCheckbox, SIGNAL(toggled(bool)), this, SLOT(cursorTimeOutChanged()));
 	connect(ui->mouseTimeoutSpinBox, SIGNAL(valueChanged(double)), this, SLOT(cursorTimeOutChanged(double)));
-	
+
 	connect(ui->setViewingOptionAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewOptions()));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(setDefaultViewOptions()));
 
 	ui->screenshotDirEdit->setText(StelApp::getInstance().getFileMgr().getScreenshotDir());
 	connect(ui->screenshotDirEdit, SIGNAL(textChanged(QString)), this, SLOT(selectScreenshotDir(QString)));
 	connect(ui->screenshotBrowseButton, SIGNAL(clicked()), this, SLOT(browseForScreenshotDir()));
-	
+
 	ui->invertScreenShotColorsCheckBox->setChecked(StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors());
 	connect(ui->invertScreenShotColorsCheckBox, SIGNAL(toggled(bool)), &StelMainGraphicsView::getInstance(), SLOT(setFlagInvertScreenShotColors(bool)));
-	
+
 	// script tab controls
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	connect(ui->scriptListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(scriptSelectionChanged(const QString&)));
@@ -208,7 +209,9 @@ void ConfigurationDialog::createDialogContent()
 	populateScriptsList();
 
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateScriptsList()));
-	
+
+	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+
 	updateConfigLabels();
 }
 
@@ -285,7 +288,7 @@ void ConfigurationDialog::browseForScreenshotDir()
 	QString newScreenshotDir = QFileDialog::getExistingDirectory(NULL, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::ShowDirsOnly);
 
 	if (!newScreenshotDir.isEmpty()) {
-		// remove trailing slash 
+		// remove trailing slash
 		if (newScreenshotDir.right(1) == "/")
 			newScreenshotDir = newScreenshotDir.left(newScreenshotDir.length()-1);
 
@@ -383,7 +386,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 
 	// view dialog / starlore tab
 	StelApp::getInstance().getSkyCultureMgr().setDefaultSkyCultureID(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
-	
+
 	// Save default location
 	nav->setDefaultLocationID(nav->getCurrentLocation().getID());
 
@@ -406,7 +409,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 
 	mvmgr->setInitFov(StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov());
 	StelApp::getInstance().getCore()->getNavigator()->setInitViewDirectionToCurrent();
-	
+
 	// configuration dialog / navigation tab
 	conf->setValue("navigation/flag_enable_zoom_keys", mvmgr->getFlagEnableZoomKeys());
 	conf->setValue("navigation/flag_enable_mouse_navigation", mvmgr->getFlagEnableMouseNavigation());
@@ -419,7 +422,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		conf->setValue("navigation/viewing_mode", "horizon");
 	else
 		conf->setValue("navigation/viewing_mode", "equator");
-	
+
 
 	// configuration dialog / tools tab
 	conf->setValue("gui/flag_show_flip_buttons", gui->getFlagShowFlipButtons());
@@ -429,7 +432,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("navigation/auto_zoom_out_resets_direction", mvmgr->getFlagAutoZoomOutResetsDirection());
 	conf->setValue("gui/flag_mouse_cursor_timeout", StelAppGraphicsScene::getInstance().getFlagCursorTimeout());
 	conf->setValue("gui/mouse_cursor_timeout", StelAppGraphicsScene::getInstance().getCursorTimeout());
-	
+
 	conf->setValue("main/screenshot_dir", StelApp::getInstance().getFileMgr().getScreenshotDir());
 	conf->setValue("main/invert_screenshots_colors", StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors());
 
@@ -443,22 +446,22 @@ void ConfigurationDialog::saveCurrentViewOptions()
 
 	// clear the restore defaults flag if it is set.
 	conf->setValue("main/restore_defaults", false);
-	
+
 	updateConfigLabels();
 }
 
 void ConfigurationDialog::updateConfigLabels()
 {
 	ui->startupFOVLabel->setText(q_("Startup FOV: %1%2").arg(StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov()).arg(QChar(0x00B0)));
-	
+
 	double az, alt;
 	const Vec3d v = StelApp::getInstance().getCore()->getNavigator()->getInitViewingDirection();
 	StelUtils::rectToSphe(&az, &alt, v);
 	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
 	if (az > M_PI*2)
-		az -= M_PI*2;    
+		az -= M_PI*2;
 	ui->startupDirectionOfViewlabel->setText(q_("Startup direction of view Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)));
-	
+
 	// Not a very nice way to update the text
 	checkUpdates();
 }
@@ -505,7 +508,7 @@ void ConfigurationDialog::runScriptClicked(void)
 {
 	if (ui->closeWindowAtScriptRunCheckbox->isChecked())
 		this->close();
-		
+
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	if (ui->scriptListWidget->currentItem())
 	{
@@ -543,7 +546,7 @@ void ConfigurationDialog::setUpdatesState(ConfigurationDialog::UpdatesState stat
 	ui->downloadLabel->setText("");
 	ui->downloadCancelButton->setVisible(false);
 	ui->downloadRetryButton->setVisible(false);
-	
+
 	switch(state)
 	{
 		case ConfigurationDialog::ShowAvailable:
@@ -561,42 +564,42 @@ void ConfigurationDialog::setUpdatesState(ConfigurationDialog::UpdatesState stat
 			} else
 				setUpdatesState(ConfigurationDialog::Finished);
 			break;
-		
+
 		case ConfigurationDialog::Checking:
 			ui->downloadLabel->setText(q_("Checking for new star catalogs..."));
 			break;
-		
+
 		case ConfigurationDialog::NoUpdates:
 			ui->downloadLabel->setText(q_("All star catalogs are up to date."));
 			break;
-		
+
 		case ConfigurationDialog::Downloading:
 			ui->downloadLabel->setText(q_("Downloading %1...\n(You can close this window.)").arg(downloadName));
 			ui->downloadCancelButton->setVisible(true);
 			break;
-		
+
 		case ConfigurationDialog::Finished:
 			ui->downloadLabel->setText(q_("Finished downloading new star catalogs!\nRestart Stellarium to display them."));
 			break;
-		
+
 		case ConfigurationDialog::Verifying:
 			ui->downloadLabel->setText(q_("Verifying file integrity..."));
 			break;
-		
+
 		case ConfigurationDialog::UpdatesError:
 			ui->downloadLabel->setText(q_("Error checking updates:\n%1").arg(downloadMgr->errorString()));
 			ui->downloadRetryButton->setVisible(true);
 			break;
-		
+
 		case ConfigurationDialog::MoveError:
 			ui->downloadLabel->setText(q_("Could not finalize download:\nError moving temporary file %1.tmp to %1.cat").arg(downloadName));
 			break;
-		
+
 		case ConfigurationDialog::DownloadError:
 			ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(downloadName).arg(downloadMgr->errorString()));
 			ui->downloadRetryButton->setVisible(true);
 			break;
-		
+
 		case ConfigurationDialog::ChecksumError:
 			ui->downloadLabel->setText(q_("Error downloading %1:\nFile is corrupted.").arg(downloadName));
 			ui->downloadRetryButton->setVisible(true);
@@ -616,7 +619,7 @@ void ConfigurationDialog::updatesDownloadFinished(void)
 	updatesData = new QSettings(updatesFileName, QSettings::IniFormat);
 	updatesData->beginGroup("extra_stars");
 	QListIterator<QString> it(updatesData->childKeys());
-	
+
 	// For some reason, updatesData->childGroups() doesn't work at
 	// all in this case. The workaround is to list the groups as key-value pairs.
 	while(it.hasNext())
@@ -626,7 +629,7 @@ void ConfigurationDialog::updatesDownloadFinished(void)
 		if(!catPathExists)
 			newCatalogs.append(catName);
 	}
-	
+
 	if(newCatalogs.size() > 0)
 		setUpdatesState(ConfigurationDialog::ShowAvailable);
 	else
@@ -640,7 +643,7 @@ void ConfigurationDialog::checkUpdates(void)
 	downloadMgr->setBarVisible(false);
 	downloadMgr->setBlockQuit(false);
 	downloadMgr->get(starSettings->value("updates_url").toString(), updatesFileName);
-	
+
 	connect(downloadMgr, SIGNAL(finished()), this, SLOT(updatesDownloadFinished()));
 	connect(downloadMgr, SIGNAL(error(QNetworkReply::NetworkError, QString)), this, SLOT(updatesDownloadError(QNetworkReply::NetworkError, QString)));
 }
@@ -680,7 +683,7 @@ void ConfigurationDialog::downloadFinished(void)
 {
 	QString tempFileName = starsDir+"/"+downloadName+".tmp";
 	QString finalFileName = starsDir+"/"+downloadName+".cat";
-	
+
 	if( ( QFile::exists(finalFileName) && !QFile::remove(finalFileName) ) ||
 		!QFile::copy(tempFileName, finalFileName) ||
 		!QFile::remove(tempFileName))
@@ -699,18 +702,18 @@ void ConfigurationDialog::downloadFinished(void)
 void ConfigurationDialog::downloadStars(void)
 {
 	Q_ASSERT(updatesData);
-	
+
 	downloadMgr->disconnect();
 	downloadName = newCatalogs.at(downloaded);
 	QString url = updatesData->value(downloadName+"/url").toString();
 	QString path = QString("%1/%2.tmp").arg(starsDir).arg(downloadName);
 	quint16 checksum = updatesData->value(downloadName+"/checksum").toUInt();
-	
+
 	downloadMgr->setBarVisible(true);
 	downloadMgr->setBlockQuit(true);
 	downloadMgr->setBarFormat(QString("%p%: %1 of %2").arg(downloaded+1).arg(newCatalogs.size()));
 	downloadMgr->get(url, path, checksum);
-	
+
 	connect(downloadMgr, SIGNAL(finished()), this, SLOT(downloadFinished()));
 	connect(downloadMgr, SIGNAL(error(QNetworkReply::NetworkError, QString)), this, SLOT(downloadError(QNetworkReply::NetworkError, QString)));
 	connect(downloadMgr, SIGNAL(verifying()), this, SLOT(downloadVerifying()));
@@ -723,4 +726,11 @@ void ConfigurationDialog::setFixedDateTimeToCurrent(void)
 	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(StelApp::getInstance().getCore()->getNavigator()->getJDay()));
 	ui->fixedTimeRadio->setChecked(true);
 	setStartupTimeMode();
+}
+
+void ConfigurationDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
+{
+	if (!current)
+		current = previous;
+	ui->configurationStackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
 }
