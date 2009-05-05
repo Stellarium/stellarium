@@ -6,7 +6,7 @@ QLabel {
 	background: none;
 }
 
-QLabel#stelWindowTitle { 
+QLabel#stelWindowTitle {
 	margin-left: 24px;
 	font-size: 14px;
 	color: rgb(194, 194, 195);
@@ -14,7 +14,7 @@ QLabel#stelWindowTitle {
 	background: none;
 }
 
-QDockWidget {	
+QDockWidget {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(86, 87, 90), stop: 1 rgb(48, 49, 52));
 }
 
@@ -364,7 +364,7 @@ QGroupBox {
 QGroupBox::title {
 	subcontrol-position: top left;
 	subcontrol-origin: margin;
-   	color: rgb(0, 0, 0);
+	color: rgb(0, 0, 0);
 	left: 27px;
 	top: 20px;
 }
@@ -410,7 +410,7 @@ QTabBar::tab {
 }*/
 
 QTabBar::tab:hover {
-	
+
 }
 
 QTabBar::tab:selected {
@@ -425,11 +425,11 @@ QTabBar::tab:selected {
 }*/
 
 QTabBar::tab:first {
-	margin-left: 11; 
+	margin-left: 11;
 }
 
 QTabBar::tab:last {
-	margin-right: 0; 
+	margin-right: 0;
 }
 
 /*QTabBar::tab:only-one {
@@ -475,7 +475,26 @@ QListView#citiesListView::item {
 	padding: 2px 0px;
 }
 
-QCheckBox { 
+QListView#stackListWidget {
+	font-weight: bold;
+}
+
+QListView::item:selected#stackListWidget {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(48, 49, 52), stop: 1 rgb(86, 87, 90));
+	color: rgb(220, 223, 214);
+}
+
+QListView::item#stackListWidget {
+	margin: 0px;
+	padding-top: 0px;
+	padding-bottom: 3px;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+QCheckBox {
 	background: none;
 }
 
@@ -494,7 +513,7 @@ QCheckBox::indicator:unchecked {
 	image: url(:/graphicGui/gui/checkbox-unchecked.png);
 }
 
-/*QCheckBox:disabled { 
+/*QCheckBox:disabled {
 	color: rgb(210, 0, 0);
 	font-weight: 500;
 }*/
@@ -518,7 +537,7 @@ QRadioButton::indicator:unchecked {
 }
 
 /*AngleSpinBox {
-	padding-right: 20px; 
+	padding-right: 20px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69), stop: 1 rgb(40, 40, 40));
 	border: 1px solid rgb(0, 0, 0);
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(200, 201, 202), stop: 1 rgb(104, 106, 107));
@@ -529,9 +548,9 @@ QRadioButton::indicator:unchecked {
 
 AngleSpinBox::up-button {
 	subcontrol-origin: border;
-	subcontrol-position: top right; 
-	width: 20px; 
-	border: solid 1px;	
+	subcontrol-position: top right;
+	width: 20px;
+	border: solid 1px;
 	border-right-color: rgb(0, 0, 0);
 	border-top-color: rgb(0, 0, 0);
 	image: url(:/graphicGui/gui/spinup.png);
@@ -543,7 +562,7 @@ AngleSpinBox::down-button {
 	subcontrol-origin: border;
 	subcontrol-position: bottom right;
 	width: 20px;
-	border: solid 1px;	
+	border: solid 1px;
 	border-right-color: rgb(0, 0, 0);
 	border-bottom-color: rgb(0, 0, 0);
 	image: url(:/graphicGui/gui/spindown.png);
@@ -562,8 +581,8 @@ QSpinBox,QTimeEdit,QDateTimeEdit,QDoubleSpinBox,QComboBox,AngleSpinBox {
 QSpinBox::up-button,QTimeEdit::up-button,QDoubleSpinBox::up-button,AngleSpinBox::up-button {
 	subcontrol-origin: border;
 	subcontrol-position: top right;
-	width: 20px; 
-	border: 1px solid rgba(0, 0, 0, 0%);	
+	width: 20px;
+	border: 1px solid rgba(0, 0, 0, 0%);
 	border-top: 1px solid rgb(0, 0, 0);
 	border-right: 1px solid rgb(0, 0, 0);
 	image: url(:/graphicGui/gui/spinup.png);
@@ -573,7 +592,7 @@ QSpinBox::up-button,QTimeEdit::up-button,QDoubleSpinBox::up-button,AngleSpinBox:
 QSpinBox::down-button,QTimeEdit::down-button,QDoubleSpinBox::down-button,AngleSpinBox::down-button {
 	subcontrol-origin: border;
 	subcontrol-position: bottom right;
-	width: 20px; 
+	width: 20px;
 	border: 1px solid rgba(0, 0, 0, 0%);
 	border-right: 1px solid rgb(0, 0, 0);
 	border-bottom: 1px solid rgb(0, 0, 0);
@@ -582,11 +601,11 @@ QSpinBox::down-button,QTimeEdit::down-button,QDoubleSpinBox::down-button,AngleSp
 }
 
 QSpinBox::down-button:pressed,QTimeEdit::down-button:pressed,QDoubleSpinBox::down-button:pressed,AngleSpinBox::down-button:pressed {
-     image: url(:/graphicGui/gui/spindown-pressed.png);
+	 image: url(:/graphicGui/gui/spindown-pressed.png);
  }
 
 QSpinBox::up-button:pressed,QTimeEdit::up-button:pressed,QDoubleSpinBox::up-button:pressed,AngleSpinBox::up-button:pressed {
-     image: url(:/graphicGui/gui/spinup-pressed.png);
+	 image: url(:/graphicGui/gui/spinup-pressed.png);
  }
 
 QComboBox::drop-down, .QDateTimeEdit::drop-down {
@@ -598,7 +617,7 @@ QComboBox::drop-down, .QDateTimeEdit::drop-down {
 
 
 QComboBox::down-arrow, .QDateTimeEdit::down-arrow {
-	width: 20px; 
+	width: 20px;
 	height: 22px;
 	image: url(:/graphicGui/gui/spindown.png);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 92), stop: 1 rgb(40, 40, 40));
@@ -661,7 +680,7 @@ QDockWidget::title {
 	font-size: 14px;
 	background: transparent;
 }
-	
+
 QTreeView {
 	background-color: rgb(76, 77, 80);
 	alternate-background-color: rgb(76, 80, 87);
@@ -691,7 +710,7 @@ QDateEdit::up-button {
 	subcontrol-origin: border;
 	subcontrol-position: top right; /* position at the top right corner */
 	width: 20px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
-	border: solid 1px rgb(0, 0, 0);	
+	border: solid 1px rgb(0, 0, 0);
 	image: url(:/graphicGui/gui/spinup.png);
 	border-width: 1px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 92), stop: 1 rgb(74, 74, 75));
@@ -701,7 +720,7 @@ QDateEdit::down-button {
 	subcontrol-origin: border;
 	subcontrol-position: bottom right; /* position at the bottom right corner */
 	width: 20px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
-	border: solid 1px rgb(0, 0, 0);	
+	border: solid 1px rgb(0, 0, 0);
 	image: url(:/graphicGui/gui/spindown.png);
 	border-width: 1px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69), stop: 1 rgb(40, 40, 40));
@@ -741,23 +760,23 @@ QFileDialog {
 
 QWidget#fileLoading
 {
-        background-color:transparent;
+		background-color:transparent;
 }
 
-QWidget#resourceInformationView 
+QWidget#resourceInformationView
 {
 	background-color:transparent;
 }
 
 QWidget#sourceInformationInput
 {
-        background-color:transparent;
+		background-color:transparent;
 }
 
 
 QWidget#resourceInformationEdition
 {
-        background-color:transparent;
+		background-color:transparent;
 }
 
 QTextEdit#editResourceInformation {
@@ -772,13 +791,13 @@ border: 1px solid rgb(0, 0, 0);
 }
 
 QGroupBox#dataSourcesListGroupBox {
-        margin-right: 11px;
-        margin-left: 11px;
-        margin-top: 11px;
-        margin-bottom: 11px;
+		margin-right: 11px;
+		margin-left: 11px;
+		margin-top: 11px;
+		margin-bottom: 11px;
 	background-color: rgba(149, 150, 152, 30%);
 }
 
 QWidget#listManagerWidget {
-        background-color: rgb(31, 31, 31);
+		background-color: rgb(31, 31, 31);
 }

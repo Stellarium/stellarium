@@ -32,10 +32,10 @@ class ServerCredits
 public:
 	//! Very short credit to display in the loading bar
 	QString shortCredits;
-	
+
 	//! Full credits
 	QString fullCredits;
-	
+
 	//! The URL where to get more info about the server
 	QString infoURL;
 };
@@ -46,10 +46,10 @@ class DataSetCredits
 public:
 	//! Very short credit to display in the loading bar
 	QString shortCredits;
-	
+
 	//! Full credits
 	QString fullCredits;
-	
+
 	//! The URL where to get more info about the data collection
 	QString infoURL;
 };
@@ -58,62 +58,65 @@ public:
 class StelSkyPolygon : public MultiLevelJsonBase
 {
 	Q_OBJECT
-	
+
 public:
 	//! Default constructor
 	StelSkyPolygon() {initCtor();}
-	
+
 	//! Constructor
 	StelSkyPolygon(const QString& url, StelSkyPolygon* parent=NULL);
 	//! Constructor
 	StelSkyPolygon(const QVariantMap& map, StelSkyPolygon* parent);
-	
+
 	//! Destructor
 	~StelSkyPolygon();
 
 	//! Draw the image on the screen.
 	void draw(StelCore* core);
-	
+
 	//! Return the dataset credits to use in the progress bar
 	DataSetCredits getDataSetCredits() const {return dataSetCredits;}
-	
+
 	//! Return the server credits to use in the progress bar
 	ServerCredits getServerCredits() const {return serverCredits;}
 
 	//! Convert the polygon informations to a map following the JSON structure.
 	//! It can be saved as JSON using the StelJsonParser methods.
 	QVariantMap toQVariantMap() const;
-	
+
 protected:
 	//! Minimum resolution at which the next level needs to be loaded in degree/pixel
 	float minResolution;
-	
+
 	//! The credits of the server where this data come from
 	ServerCredits serverCredits;
-	
+
 	//! The credits for the data set
 	DataSetCredits dataSetCredits;
-	
+
 	//! Direction of the vertices of the convex hull in ICRS frame
 	QList<SphericalConvexPolygon> skyConvexPolygons;
-	
+
 protected:
 
 	//! Load the polygon from a valid QVariantMap
 	virtual void loadFromQVariantMap(const QVariantMap& map);
-	
+
 private:
+	//! The list of all the subTiles URL or already loaded JSON map for this tile
+	QVariantList subTilesUrls;
+
 	//! init the StelSkyPolygon
 	void initCtor();
-	
+
 	//! Return the list of tiles which should be drawn.
 	//! @param result a map containing resolution, pointer to the tiles
 	void getTilesToDraw(QMultiMap<double, StelSkyPolygon*>& result, StelCore* core, const SphericalRegionP& viewPortPoly, bool recheckIntersect=true);
-	
+
 	//! Draw the polygon on the screen.
 	//! @return true if the tile was actually displayed
 	bool drawTile(StelCore* core);
-	
+
 	//! Return the minimum resolution
 	double getMinResolution() const {return minResolution;}
 

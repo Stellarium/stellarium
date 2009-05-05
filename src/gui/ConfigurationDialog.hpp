@@ -1,22 +1,22 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
- 
+
 #ifndef _CONFIGURATIONDIALOG_HPP_
 #define _CONFIGURATIONDIALOG_HPP_
 
@@ -33,6 +33,7 @@ class QSettings;
 class QDataStream;
 class QNetworkAccessManager;
 class StelDownloadMgr;
+class QListWidgetItem;
 
 class ConfigurationDialog : public StelDialog
 {
@@ -45,16 +46,16 @@ public:
 	void styleChanged();
 protected:
 	enum UpdatesState { ShowAvailable, Checking, NoUpdates, Downloading,
-			    Finished, Verifying, UpdatesError, MoveError,
-			    DownloadError, ChecksumError };
-	
+				Finished, Verifying, UpdatesError, MoveError,
+				DownloadError, ChecksumError };
+
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
-	
+
 	//! Set the content of the "Star catalog updates" box
 	void setUpdatesState(ConfigurationDialog::UpdatesState);
 	void checkUpdates(void);
-	
+
 	Ui_configurationDialogForm* ui;
 	QSettings* starSettings;
 	QSettings* updatesData;
@@ -75,7 +76,7 @@ private slots:
 	void setSphericMirror(bool);
 	void cursorTimeOutChanged();
 	void cursorTimeOutChanged(double d) {cursorTimeOutChanged();}
-	
+
 	void downloadStars(void);
 	void cancelDownload(void);
 	void retryDownload(void);
@@ -85,7 +86,7 @@ private slots:
 	void downloadError(QNetworkReply::NetworkError, QString);
 	void updatesDownloadFinished(void);
 	void updatesDownloadError(QNetworkReply::NetworkError, QString);
-	
+
 	//! Update the labels displaying the current default state
 	void updateConfigLabels();
 
@@ -96,10 +97,10 @@ private slots:
 	void selectScreenshotDir(const QString& dir);
 
 	//! Save the current viewing option including landscape, location and sky culture
-	//! This doesn't include the current viewing direction, time and FOV since those 
+	//! This doesn't include the current viewing direction, time and FOV since those
 	//! have specific controls
 	void saveCurrentViewOptions();
-	
+
 	//! Reset all stellarium options.
 	//! This basically replaces the config.ini by the default one
 	void setDefaultViewOptions();
@@ -118,6 +119,7 @@ private slots:
 	void populateScriptsList(void);
 	void setFixedDateTimeToCurrent(void);
 
+	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 };
 
 #endif // _CONFIGURATIONDIALOG_HPP_

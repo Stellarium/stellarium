@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -51,10 +51,10 @@ int main(int argc, char **argv)
 	QCoreApplication::setApplicationVersion(StelApp::getApplicationVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
-	
+
 	//QApplication::setDesktopSettingsAware(false);
 	QApplication::setStyle(new QPlastiqueStyle());
-	
+
 	// With Qt 4.5, force the usage of the raster backend
 	char** argv2 = (char**)malloc(sizeof(char*)*(argc+2));
 	memcpy(argv2, argv, argc*sizeof(char*));
@@ -74,7 +74,7 @@ int main(int argc, char **argv)
 	{
 		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
 	}
-	
+
 	StelMainWindow* mainWin = new StelMainWindow(NULL);
 	StelMainGraphicsView* view = new StelMainGraphicsView(NULL, argc, argv);
 	mainWin->setCentralWidget(view);
