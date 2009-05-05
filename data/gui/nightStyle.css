@@ -6,7 +6,7 @@ QLabel {
 	background: none;
 }
 
-QLabel#stelWindowTitle { 
+QLabel#stelWindowTitle {
 	margin-left: 24px;
 	font-size: 14px;
 	color: rgb(136, 0, 0);
@@ -14,7 +14,7 @@ QLabel#stelWindowTitle {
 	background: none;
 }
 
-QDockWidget {	
+QDockWidget {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(61, 0, 0), stop: 1 rgb(35, 0, 0));
 }
 
@@ -364,7 +364,7 @@ QGroupBox {
 QGroupBox::title {
 	subcontrol-position: top left;
 	subcontrol-origin: margin;
-   	color: rgb(0, 0, 0); /* (133, 0, 0) */
+	color: rgb(0, 0, 0); /* (133, 0, 0) */
 	left: 27px;
 	top: 20px;
 }
@@ -410,7 +410,7 @@ QTabBar::tab {
 }*/
 
 QTabBar::tab:hover {
-	
+
 }
 
 QTabBar::tab:selected {
@@ -429,11 +429,11 @@ QTabBar::tab:selected {
 }*/
 
 QTabBar::tab:first {
-	margin-left: 11; 
+	margin-left: 11;
 }
 
 QTabBar::tab:last {
-	margin-right: 0; 
+	margin-right: 0;
 }
 
 /*QTabBar::tab:only-one {
@@ -479,7 +479,26 @@ QListView#citiesListView::item {
 	padding: 2px 0px;
 }
 
-QCheckBox { 
+QListView#stackListWidget {
+	font-weight: bold;
+}
+
+QListView::item:selected#stackListWidget {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 0, 0), stop: 1 rgb(86, 0, 0));
+	color: rgb(220, 0, 0);
+}
+
+QListView::item#stackListWidget {
+	margin: 0px;
+	padding-top: 0px;
+	padding-bottom: 3px;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+QCheckBox {
 	background: none;
 }
 
@@ -498,7 +517,7 @@ QCheckBox::indicator:unchecked {
 	image: url(:/graphicGui/gui/nv_checkbox-unchecked.png);
 }
 
-/*QCheckBox:disabled { 
+/*QCheckBox:disabled {
 	color: rgb(210, 0, 0);
 	font-weight: 500;
 }*/
@@ -522,7 +541,7 @@ QRadioButton::indicator:unchecked {
 }
 
 /*AngleSpinBox {
-	padding-right: 20px; 
+	padding-right: 20px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(48, 0, 0), stop: 1 rgb(28, 0, 0));
 	border: 1px solid rgb(0, 0, 0);
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(140, 0, 0), stop: 1 rgb(74, 0, 0));
@@ -533,9 +552,9 @@ QRadioButton::indicator:unchecked {
 
 AngleSpinBox::up-button {
 	subcontrol-origin: border;
-	subcontrol-position: top right; 
-	width: 20px; 
-	border: solid 1px;	
+	subcontrol-position: top right;
+	width: 20px;
+	border: solid 1px;
 	border-right-color: rgb(0, 0, 0);
 	border-top-color: rgb(0, 0, 0);
 	image: url(:/graphicGui/gui/nv_spinup.png);
@@ -547,7 +566,7 @@ AngleSpinBox::down-button {
 	subcontrol-origin: border;
 	subcontrol-position: bottom right;
 	width: 20px;
-	border: solid 1px;	
+	border: solid 1px;
 	border-right-color: rgb(0, 0, 0);
 	border-bottom-color: rgb(0, 0, 0);
 	image: url(:/graphicGui/gui/nv_spindown.png);
@@ -566,8 +585,8 @@ QSpinBox, QTimeEdit, QDateTimeEdit, QDoubleSpinBox, QComboBox, AngleSpinBox {
 QSpinBox::up-button, QTimeEdit::up-button, QDoubleSpinBox::up-button, AngleSpinBox::up-button {
 	subcontrol-origin: border;
 	subcontrol-position: top right;
-	width: 20px; 
-	border: 1px solid rgba(0, 0, 0, 0%);	
+	width: 20px;
+	border: 1px solid rgba(0, 0, 0, 0%);
 	border-top: 1px solid rgb(0, 0, 0);
 	border-right: 1px solid rgb(0, 0, 0);
 	image: url(:/graphicGui/gui/nv_spinup.png);
@@ -577,7 +596,7 @@ QSpinBox::up-button, QTimeEdit::up-button, QDoubleSpinBox::up-button, AngleSpinB
 QSpinBox::down-button, QTimeEdit::down-button, QDoubleSpinBox::down-button, AngleSpinBox::down-button {
 	subcontrol-origin: border;
 	subcontrol-position: bottom right;
-	width: 20px; 
+	width: 20px;
 	border: 1px solid rgba(0, 0, 0, 0%);
 	border-right: 1px solid rgb(0, 0, 0);
 	border-bottom: 1px solid rgb(0, 0, 0);
@@ -601,7 +620,7 @@ QComboBox::drop-down, .QDateTimeEdit::drop-down {
 }
 
 QComboBox::down-arrow, .QDateTimeEdit::down-arrow {
-	width: 20px; 
+	width: 20px;
 	height: 22px;
 	image: url(:/graphicGui/gui/nv_spindown.png);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 0, 0), stop: 1 rgb(28, 0, 0));
@@ -664,7 +683,7 @@ QDockWidget::title {
 	font-size: 14px;
 	background: transparent;
 }
-	
+
 QTreeView {
 	background-color: rgb(54, 0, 0);
 	alternate-background-color: rgb(56, 0, 0);
@@ -694,7 +713,7 @@ QDateEdit::up-button {
 	subcontrol-origin: border;
 	subcontrol-position: top right; /* position at the top right corner */
 	width: 20px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
-	border: solid 1px rgb(0, 0, 0);	
+	border: solid 1px rgb(0, 0, 0);
 	image: url(:/graphicGui/gui/nv_spinup.png);
 	border-width: 1px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 0, 0), stop: 1 rgb(52, 0, 0));
@@ -704,7 +723,7 @@ QDateEdit::down-button {
 	subcontrol-origin: border;
 	subcontrol-position: bottom right; /* position at the bottom right corner */
 	width: 20px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
-	border: solid 1px rgb(0, 0, 0);	
+	border: solid 1px rgb(0, 0, 0);
 	image: url(:/graphicGui/gui/nv_spindown.png);
 	border-width: 1px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(48, 0, 0), stop: 1 rgb(28, 0, 0));
