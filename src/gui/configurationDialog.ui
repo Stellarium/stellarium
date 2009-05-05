@@ -953,7 +953,11 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QListWidget" name="scriptListWidget"/>
+           <widget class="QListWidget" name="scriptListWidget">
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
+           </widget>
           </item>
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_8">
