@@ -99,7 +99,7 @@ MultiLevelJsonBase::MultiLevelJsonBase(MultiLevelJsonBase* parent) : QObject(par
 	// Avoid tiles to be deleted just after constructed
 	timeWhenDeletionScheduled = -1.;
 	deletionDelay = 2.;
-	
+
 	if (parent!=NULL)
 	{
 		deletionDelay = parent->deletionDelay;
@@ -195,7 +195,7 @@ void MultiLevelJsonBase::initFromQVariantMap(const QVariantMap& map)
 	loadFromQVariantMap(map);
 	downloading = false;
 }
-	
+
 // Destructor
 MultiLevelJsonBase::~MultiLevelJsonBase()
 {
@@ -203,9 +203,10 @@ MultiLevelJsonBase::~MultiLevelJsonBase()
 	{
 		//qDebug() << "Abort: " << httpReply->request().url().path();
 		//httpReply->abort();
-		
-		// This line should not be commented, but I have to keep it because of a Qt bug.
-		// It cause a nasty memory leak, but prevents an even more nasty
+
+		// TODO: This line should not be commented, but I have to keep it because of a Qt bug.
+		// It should be fixed with Qt 4.5.1
+		// It causes a nasty memory leak, but prevents an even more nasty
 		//httpReply->deleteLater();
 		httpReply = NULL;
 	}
@@ -246,7 +247,7 @@ void MultiLevelJsonBase::cancelDeletion()
 		tile->cancelDeletion();
 	}
 }
-	
+
 // Load the tile information from a JSON file
 QVariantMap MultiLevelJsonBase::loadFromJSON(QIODevice& input, bool qZcompressed, bool gzCompressed)
 {
@@ -270,10 +271,10 @@ QVariantMap MultiLevelJsonBase::loadFromJSON(QIODevice& input, bool qZcompressed
 		delete d;
 	}
 	else
-	{	
+	{
 		map = parser.parse(input).toMap();
 	}
-	
+
 	if (map.isEmpty())
 		throw std::runtime_error("empty JSON file, cannot load");
 	return map;
@@ -295,8 +296,8 @@ void MultiLevelJsonBase::downloadFinished()
 		downloading=false;
 		timeWhenDeletionScheduled = StelApp::getInstance().getTotalRunTime();
 		return;
-	}	
-	
+	}
+
 	QByteArray content = httpReply->readAll();
 	if (content.isEmpty())
 	{
@@ -307,12 +308,12 @@ void MultiLevelJsonBase::downloadFinished()
 		downloading=false;
 		return;
 	}
-	
+
 	const bool qZcompressed = httpReply->request().url().path().endsWith(".qZ");
 	const bool gzCompressed = httpReply->request().url().path().endsWith(".gz");
 	httpReply->deleteLater();
 	httpReply=NULL;
-	
+
 	Q_ASSERT(loadThread==NULL);
 	loadThread = new JsonLoadThread(this, content, qZcompressed, gzCompressed);
 	connect(loadThread, SIGNAL(finished()), this, SLOT(jsonLoadFinished()));
@@ -361,7 +362,7 @@ void MultiLevelJsonBase::deleteUnusedSubTiles()
 			tile->deleteUnusedSubTiles();
 	}
 }
-	
+
 void MultiLevelJsonBase::updatePercent(int tot, int toBeLoaded)
 {
 	if (tot+toBeLoaded==0)

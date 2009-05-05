@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>524</width>
-    <height>511</height>
+    <width>540</width>
+    <height>462</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -134,21 +134,30 @@
        <number>0</number>
       </property>
       <item row="0" column="0">
-       <widget class="QTabWidget" name="configurationTabWidget">
-        <property name="toolTip">
-         <string/>
+       <widget class="QListWidget" name="stackListWidget">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>74</height>
+         </size>
         </property>
-        <property name="whatsThis">
-         <string/>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>74</height>
+         </size>
         </property>
-        <property name="tabPosition">
-         <enum>QTabWidget::North</enum>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
         </property>
-        <property name="tabShape">
-         <enum>QTabWidget::Rounded</enum>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
         </property>
-        <property name="currentIndex">
-         <number>0</number>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
         </property>
         <property name="iconSize">
          <size>
@@ -156,18 +165,88 @@
           <height>50</height>
          </size>
         </property>
-        <property name="elideMode">
-         <enum>Qt::ElideNone</enum>
+        <property name="movement">
+         <enum>QListView::Static</enum>
         </property>
-        <widget class="QWidget" name="tabMain">
-         <attribute name="icon">
-          <iconset resource="../../data/mainRes.qrc">
-           <normaloff>:/graphicGui/gui/tabicon-main.png</normaloff>:/graphicGui/gui/tabicon-main.png</iconset>
-         </attribute>
-         <attribute name="title">
+        <property name="flow">
+         <enum>QListView::LeftToRight</enum>
+        </property>
+        <property name="isWrapping" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="resizeMode">
+         <enum>QListView::Adjust</enum>
+        </property>
+        <property name="layoutMode">
+         <enum>QListView::SinglePass</enum>
+        </property>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="viewMode">
+         <enum>QListView::IconMode</enum>
+        </property>
+        <property name="uniformItemSizes">
+         <bool>false</bool>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+        <property name="selectionRectVisible">
+         <bool>false</bool>
+        </property>
+        <item>
+         <property name="text">
           <string>Main</string>
-         </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_6">
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/gui/tabicon-main.png</normalon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Navigation</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/gui/tabicon-navigation.png</normalon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Tools</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/gui/tabicon-tools.png</normalon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Scripts</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/gui/tabicon-scripts.png</normalon>
+          </iconset>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QStackedWidget" name="configurationStackedWidget">
+        <property name="currentIndex">
+         <number>3</number>
+        </property>
+        <widget class="QWidget" name="page">
+         <layout class="QVBoxLayout" name="verticalLayout_10">
+          <property name="spacing">
+           <number>0</number>
+          </property>
           <property name="margin">
            <number>0</number>
           </property>
@@ -393,30 +472,13 @@
             </layout>
            </widget>
           </item>
-          <item>
-           <spacer name="verticalSpacer_4">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>74</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="tabInterface">
-         <attribute name="icon">
-          <iconset resource="../../data/mainRes.qrc">
-           <normaloff>:/graphicGui/gui/tabicon-navigation.png</normaloff>:/graphicGui/gui/tabicon-navigation.png</iconset>
-         </attribute>
-         <attribute name="title">
-          <string>Navigation</string>
-         </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_7">
+        <widget class="QWidget" name="page_2">
+         <layout class="QVBoxLayout" name="verticalLayout_11">
+          <property name="spacing">
+           <number>0</number>
+          </property>
           <property name="margin">
            <number>0</number>
           </property>
@@ -683,30 +745,13 @@
             </layout>
            </widget>
           </item>
-          <item>
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="tabTools">
-         <attribute name="icon">
-          <iconset resource="../../data/mainRes.qrc">
-           <normaloff>:/graphicGui/gui/tabicon-tools.png</normaloff>:/graphicGui/gui/tabicon-tools.png</iconset>
-         </attribute>
-         <attribute name="title">
-          <string>Tools</string>
-         </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
+        <widget class="QWidget" name="page_3">
+         <layout class="QVBoxLayout" name="verticalLayout_12">
+          <property name="spacing">
+           <number>0</number>
+          </property>
           <property name="margin">
            <number>0</number>
           </property>
@@ -897,30 +942,13 @@
             </layout>
            </widget>
           </item>
-          <item>
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="tabScripts">
-         <attribute name="icon">
-          <iconset resource="../../data/mainRes.qrc">
-           <normaloff>:/graphicGui/gui/tabicon-scripts.png</normaloff>:/graphicGui/gui/tabicon-scripts.png</iconset>
-         </attribute>
-         <attribute name="title">
-          <string>Scripts</string>
-         </attribute>
-         <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <widget class="QWidget" name="page_4">
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <property name="spacing">
+           <number>0</number>
+          </property>
           <property name="margin">
            <number>0</number>
           </property>
