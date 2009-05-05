@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Matthew Gates
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -29,6 +29,7 @@
 #include "StelDialog.hpp"
 
 class Ui_helpDialogForm;
+class QListWidgetItem;
 
 class HelpDialog : public StelDialog
 {
@@ -36,7 +37,7 @@ class HelpDialog : public StelDialog
 public:
 	HelpDialog();
 	~HelpDialog();
-	
+
 	//! Set a key and description.
 	//!
 	//! @note @a group and @a description must be in English; this function takes
@@ -44,30 +45,32 @@ public:
 	//! translation using the <tt>N_()</tt> macro.
 	//!
 	//! @param group is the help group.  e.g. "Movement" or "Time & Date"
-	//! @param oldKey is the textual representation of the old key binding (in the 
+	//! @param oldKey is the textual representation of the old key binding (in the
 	//!        case or re-mapping), e.g. "CTRL + H".  Can be an empty string
 	//! @param newKey is the textual representation of the key binding, e.g. "CTRL + H"
 	//! @param description is a short description of what the key does
 	void setKey(QString group, QString oldKey, QString newKey, QString description);
 
 	void languageChanged();
-	
+
 	//! Notify that the application style changed
 	void styleChanged();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
-	
+
 	Ui_helpDialogForm* ui;
-	
+
 private slots:
 	//! Slot that's called when the current tab changes. Updates log file
 	//! if Log tab is selected.
 	void updateLog(int);
-	
+
 	//! Sync the displayed log.
 	void refreshLog();
+
+	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 
 private:
 	//! Return the header text.
@@ -80,7 +83,7 @@ private:
 	//! up the help text.
 	void updateText(void);
 
-	//! This uses the group key description as the key to the map, and a 
+	//! This uses the group key description as the key to the map, and a
 	//! containing the helpGroup and description as the map value.
 	//! code and description.
 	QMultiMap<QString, QPair<QString, QString> > keyData;
