@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Matthew Gates
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -99,19 +99,22 @@ void HelpDialog::styleChanged()
 void HelpDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	ui->helpTabWidget->setCurrentIndex(0);
+	ui->stackedWidget->setCurrentIndex(0);
+	ui->stackListWidget->setCurrentRow(0);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	
+
 	updateText();
-	
+
 	ui->logPathLabel->setText(QString("%1/log.txt:").arg(StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()));
-	connect(ui->helpTabWidget, SIGNAL(currentChanged(int)), this, SLOT(updateLog(int)));
+	connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(updateLog(int)));
 	connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(refreshLog()));
+
+	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 }
 
 void HelpDialog::updateLog(int)
 {
-	if(ui->helpTabWidget->currentWidget() == ui->logTab)
+	if(ui->stackedWidget->currentWidget() == ui->page_3)
 		refreshLog();
 }
 
@@ -135,7 +138,7 @@ void HelpDialog::setKey(QString group, QString oldKey, QString newKey, QString d
 		// 	this->updateText();
 		return;
 	}
-	
+
 	// Else delete the old entry if we can find it, and then insert the
 	// new entry.  Here's where the multimap makes us wince...
 	QMultiMap<QString, QPair<QString, QString> >::iterator i = keyData.begin();
@@ -207,24 +210,24 @@ void HelpDialog::updateText(void)
 {
 	// Here's how we will build the help text for the keys:
 	// 1.  Get a unique list of groups by asking for the keys and then converting the
-	//     resulting QList into a QSet.  
+	//     resulting QList into a QSet.
 	// 2   Converet back to a QList, sort and move the empty string to the end of the
 	//     list if it is present (this is the miscellaneous group).
 	// 3   Iterate over the QSet of groups names doing:
 	// 3.1  add the group title
-	// 3.2  Use QMultiMap::values(key) to get a list of QPair<QString, QString> 
+	// 3.2  Use QMultiMap::values(key) to get a list of QPair<QString, QString>
 	//      which describe the key binding (QPair::first) and the help text for
 	//      that key binding (QPair::second).
 	// 3.3  Sort this list by the first value in the pait, courtesy of qSort and
 	//      HelpDialog::helpItemSort
 	// 3.4  Iterate over the sorted list adding key and description for each item
-	
+
 	QString newHtml(getHeaderText());
 	newHtml += "<table cellpadding=\"10%\">\n";
 
 	QList<QString> groups = keyData.keys().toSet().toList(); // 1 + 2
 	qSort(groups.begin(), groups.end(), HelpDialog::helpGroupSort);
-	
+
 	// 3
 	QString lastGroup;  // to group "" and "Miscellaneous into one
 	foreach (QString group, groups)
@@ -306,7 +309,7 @@ void HelpDialog::updateText(void)
 
 bool HelpDialog::helpItemSort(const QPair<QString, QString>& p1, const QPair<QString, QString>& p2)
 {
-	// To be 100% proper, we should sort F1 F2 F11 F12 in that order, although 
+	// To be 100% proper, we should sort F1 F2 F11 F12 in that order, although
 	// right now we will get F1 F11 F12 F2.  However, at time of writing, no group
 	// of keys has F1-F9, and one from F10-F12 in it, so it doesn't really matter.
 	// -MNG 2008-06-01
@@ -331,4 +334,11 @@ bool HelpDialog::helpGroupSort(const QString& s1, const QString& s2)
 		s2c = "ZZZZ" + s2c;
 
 	return s1c < s2c;
+}
+
+void HelpDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
+{
+	if (!current)
+		current = previous;
+	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
 }
