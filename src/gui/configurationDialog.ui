@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>539</width>
-    <height>464</height>
+    <width>434</width>
+    <height>453</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -954,8 +954,17 @@
           </property>
           <item>
            <widget class="QListWidget" name="scriptListWidget">
+            <property name="minimumSize">
+             <size>
+              <width>190</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="focusPolicy">
              <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
             </property>
            </widget>
           </item>
