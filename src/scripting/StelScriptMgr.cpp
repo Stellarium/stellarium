@@ -31,7 +31,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelNavigator.hpp"
 #include "StelSkyDrawer.hpp"
-#include "StelSkyImageMgr.hpp"
+#include "StelSkyLayerMgr.hpp"
 
 #include <QAction>
 #include <QDateTime>
@@ -54,14 +54,14 @@ class StelScriptThread : public QThread
 	public:
 		StelScriptThread(const QString& ascriptCode, QScriptEngine* aengine, QString fileName) : scriptCode(ascriptCode), engine(aengine), fname(fileName) {;}
 		QString getFileName() {return fname;}
-		
+
 	protected:
 		void run()
 		{
 			// seed the QT PRNG
 			qsrand(QDateTime::currentDateTime().toTime_t());
 
-			// For startup scripts, the gui object might not 
+			// For startup scripts, the gui object might not
 			// have completed init when we run. Wait for that.
 			StelGui* gui = GETSTELMODULE(StelGui);
 			while(!gui)
@@ -107,8 +107,8 @@ QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 	return vec3fToScriptValue(engine, c);
 }
 
-StelScriptMgr::StelScriptMgr(QObject *parent) 
-	: QObject(parent), 
+StelScriptMgr::StelScriptMgr(QObject *parent)
+	: QObject(parent),
 	  thread(NULL)
 {
 	// Allow Vec3f managment in scripts
@@ -116,12 +116,12 @@ StelScriptMgr::StelScriptMgr(QObject *parent)
 	// Constructor
 	QScriptValue ctor = engine.newFunction(createVec3f);
 	engine.globalObject().setProperty("Vec3f", ctor);
-	
+
 	// Add the core object to access methods related to core
 	mainAPI = new StelMainScriptAPI(this);
 	QScriptValue objectValue = engine.newQObject(mainAPI);
 	engine.globalObject().setProperty("core", objectValue);
-	
+
 	// Add all the StelModules into the script engine
 	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
 	foreach (StelModule* m, mmgr->getAllModules())
@@ -131,7 +131,7 @@ StelScriptMgr::StelScriptMgr(QObject *parent)
 	}
 
 	// Add other classes which we want to be directly accessible from scripts
-	if(StelSkyImageMgr* smgr = GETSTELMODULE(StelSkyImageMgr))
+	if(StelSkyLayerMgr* smgr = GETSTELMODULE(StelSkyLayerMgr))
 		objectValue = engine.newQObject(smgr);
 
 	// For accessing star scale, twinkle etc.
@@ -202,7 +202,7 @@ const QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, co
 			QString line(file.readLine());
 			if (nameExp.exactMatch(line))
 			{
-				file.close();	
+				file.close();
 				return nameExp.capturedTexts().at(1);
 			}
 		}
@@ -253,7 +253,7 @@ const QString StelScriptMgr::getDescription(const QString& s)
 		QRegExp descContExp("^\\s*//\\s*([^\\s].*)\\s*$");
 		while (!file.atEnd()) {
 			QString line(file.readLine());
-			
+
 			if (!inDesc && descExp.exactMatch(line))
 			{
 				inDesc = true;
@@ -272,7 +272,7 @@ const QString StelScriptMgr::getDescription(const QString& s)
 				}
 				else
 				{
-					file.close();	
+					file.close();
 					return desc;
 				}
 				desc += d;
@@ -359,7 +359,7 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 	tmpFile.seek(0);
 	thread = new StelScriptThread(QTextStream(&tmpFile).readAll(), &engine, fileName);
 	tmpFile.close();
-	
+
 	GETSTELMODULE(StelGui)->setScriptKeys(true);
 	connect(thread, SIGNAL(finished()), this, SLOT(scriptEnded()));
 	thread->start();
