@@ -24,12 +24,14 @@
 #include <QVariantMap>
 #include <QNetworkReply>
 
+#include "StelSkyLayer.hpp"
+
 class QIODevice;
 class StelCore;
 
 //! Abstract base class for managing multi-level tree objects stored in JSON format.
 //! The JSON files can be stored on disk or remotely and are loaded into threads.
-class MultiLevelJsonBase : public QObject
+class MultiLevelJsonBase : public StelSkyLayer
 {
 	Q_OBJECT
 
@@ -66,15 +68,6 @@ public:
 	//! Schedule a deletion for all the childs.
 	//! It will practically occur after the delay passed as argument to deleteUnusedTiles() has expired.
 	void scheduleChildsDeletion();
-
-signals:
-	//! Emitted when loading of data started or stopped.
-	//! @param b true if data loading started, false if finished.
-	void loadingStateChanged(bool b);
-
-	//! Emitted when the percentage of loading tiles/tiles to be displayed changed.
-	//! @param percentage the percentage of loaded data
-	void percentLoadedChanged(int percentage);
 
 private slots:
 	//! Called when the download for the JSON file terminated.
