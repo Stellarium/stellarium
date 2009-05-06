@@ -118,7 +118,7 @@ void StelSkyLayerMgr::removeSkyLayer(const QString& key)
 // Remove a sky image tile from the list of background images
 void StelSkyLayerMgr::removeSkyLayer(StelSkyLayerP l)
 {
-	const QString k = keyForLayer(l);
+	const QString k = keyForLayer(l.data());
 	if (!k.isEmpty())
 		removeSkyLayer(k);
 }
@@ -139,6 +139,8 @@ void StelSkyLayerMgr::draw(StelCore* core)
 	}
 }
 
+void noDelete(StelSkyLayer* o) {;}
+
 // Called when loading of data started or stopped for one collection
 void StelSkyLayerMgr::loadingStateChanged(bool b)
 {
@@ -150,7 +152,7 @@ void StelSkyLayerMgr::loadingStateChanged(bool b)
 	{
 		Q_ASSERT(elem->progressBar==NULL);
 		elem->progressBar = StelMainGraphicsView::getInstance().addProgressBar();
-		QString serverStr = elem->layer->getServerCredits().shortCredits;
+		QString serverStr = elem->layer->getShortServerCredits();
 		if (!serverStr.isEmpty())
 			serverStr = " from "+serverStr;
 		elem->progressBar->setFormat("Loading "+elem->layer->getShortName()+serverStr);
@@ -175,11 +177,11 @@ void StelSkyLayerMgr::percentLoadedChanged(int percentage)
 	elem->progressBar->setValue(percentage);
 }
 
-StelSkyLayerMgr::SkyLayerElem* StelSkyLayerMgr::skyLayerElemForLayer(const StelSkyLayerP& t)
+StelSkyLayerMgr::SkyLayerElem* StelSkyLayerMgr::skyLayerElemForLayer(const StelSkyLayer* t)
 {
-	foreach (SkyLayerElem* e, allSkyLayer)
+	foreach (SkyLayerElem* e, allSkyLayers)
 	{
-		if (e->tile==t)
+		if (e->layer==t)
 		{
 			return e;
 		}
@@ -187,12 +189,12 @@ StelSkyLayerMgr::SkyLayerElem* StelSkyLayerMgr::skyLayerElemForLayer(const StelS
 	return NULL;
 }
 
-QString StelSkyLayerMgr::keyForLayer(const StelSkyLayerPconst t)
+QString StelSkyLayerMgr::keyForLayer(const StelSkyLayer* t)
 {
 	return allSkyLayers.key(skyLayerElemForLayer(t));
 }
 
-StelSkyLayerMgr::SkyLayerElem::SkyLayerElem(StelSkyLayerP t, bool ashow) : tile(t), progressBar(NULL), show(ashow)
+StelSkyLayerMgr::SkyLayerElem::SkyLayerElem(StelSkyLayerP t, bool ashow) : layer(t), progressBar(NULL), show(ashow)
 {;}
 
 StelSkyLayerMgr::SkyLayerElem::~SkyLayerElem()
@@ -212,7 +214,7 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 	if (allSkyLayers.contains("id"))
 	{
 		qWarning() << "Image ID" << id << "already exists, removing old image before loading";
-		removeSkyImage(id);
+		removeSkyLayer(id);
 	}
 
 	QString path;
