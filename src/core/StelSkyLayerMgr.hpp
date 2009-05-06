@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _SKYIMAGEMGR_HPP_
-#define _SKYIMAGEMGR_HPP_
+#ifndef _STELSKYLAYERMGR_HPP_
+#define _STELSKYLAYERMGR_HPP_
 
 #include <QString>
 #include <QStringList>
@@ -31,13 +31,13 @@ class StelSkyImageTile;
 class QProgressBar;
 
 //! Manage the sky background images, including DSS and deep sky objects images
-class StelSkyImageMgr : public StelModule
+class StelSkyLayerMgr : public StelModule
 {
 	Q_OBJECT
 
 public:
-	StelSkyImageMgr();
-	~StelSkyImageMgr();
+	StelSkyLayerMgr();
+	~StelSkyLayerMgr();
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -164,4 +164,4 @@ private:
 	bool flagShow;
 };
 
-#endif // _SKYIMAGEMGR_HPP_
+#endif // _STELSKYLAYERMGR_HPP_
