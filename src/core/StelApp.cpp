@@ -50,7 +50,7 @@
 #include "StelScriptMgr.hpp"
 #include "StelMainScriptAPIProxy.hpp"
 #include "StelJsonParser.hpp"
-#include "StelSkyImageMgr.hpp"
+#include "StelSkyLayerMgr.hpp"
 #include "StelAudioMgr.hpp"
 #include "StelMainWindow.hpp"
 #include "StelStyle.hpp"
@@ -262,7 +262,7 @@ StelApp::~StelApp()
 	if (scriptMgr->scriptIsRunning())
 		scriptMgr->stopScript();
 	stelObjectMgr->unSelect();
-	moduleMgr->unloadModule("StelSkyImageMgr", false);  // We need to delete it afterward
+	moduleMgr->unloadModule("StelSkyLayerMgr", false);  // We need to delete it afterward
 	moduleMgr->unloadModule("StelObjectMgr", false);// We need to delete it afterward
 	StelModuleMgr* tmp = moduleMgr;
 	moduleMgr = new StelModuleMgr(); // Create a secondary instance to avoid crashes at other deinit
@@ -390,7 +390,7 @@ void StelApp::init()
 	getModuleMgr().registerModule(milky_way);
 
 	// Init sky image manager
-	skyImageMgr = new StelSkyImageMgr();
+	skyImageMgr = new StelSkyLayerMgr();
 	skyImageMgr->init();
 	getModuleMgr().registerModule(skyImageMgr);
 
