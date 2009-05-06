@@ -19,10 +19,12 @@
 #ifndef _SKYIMAGEMGR_HPP_
 #define _SKYIMAGEMGR_HPP_
 
-#include "StelModule.hpp"
 #include <QString>
 #include <QStringList>
 #include <QMap>
+
+#include "StelModule.hpp"
+#include "StelSkyLayer.hpp"
 
 class StelCore;
 class StelSkyImageTile;
@@ -32,7 +34,7 @@ class QProgressBar;
 class StelSkyImageMgr : public StelModule
 {
 	Q_OBJECT
-			
+
 public:
 	StelSkyImageMgr();
 	~StelSkyImageMgr();
@@ -41,28 +43,29 @@ public:
 	// Methods defined in the StelModule class
 	//! Initialize
 	virtual void init();
-	
+
 	//! Draws sky background
 	virtual void draw(StelCore* core);
-	
+
 	//! Update state which is time dependent.
 	virtual void update(double deltaTime) {;}
-	
+
 	//! Update i18
 	virtual void updateI18n() {;}
-	
+
 	//! Determines the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Other specific methods
-	//! Add a new sky image tile in the list of background images
-	//! TODO: document params, specifially, what does externallyOwned really mean?
-	QString insertSkyImage(StelSkyImageTile* img, bool show=true, bool externallyOwned=true);
-	
-	//! Remove a sky image tile from the list of background images
-	void removeSkyImage(StelSkyImageTile* img);
-	
+	//! Add a new layer.
+	//! @param show defined whether the layer should be shown by default
+	//! @return the reference key to use when accessing this layer later on.
+	QString insertSkyLayer(StelSkyLayerP l, bool show=true);
+
+	//! Remove a layer.
+	void removeSkyLayer(StelSkyLayerP l);
+
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
@@ -72,10 +75,10 @@ public slots:
 	bool getFlagShow() const {return flagShow;}
 
 	//! Load an image from a file. This should not be called directly from
-	//! scripts because it is not thread safe.  Instead use the simiarly 
+	//! scripts because it is not thread safe.  Instead use the simiarly
 	//! named function in the core scripting object.
 	//! @param id a string identifier for the image
-	//! @param filename the name of the image file to load.  Will be 
+	//! @param filename the name of the image file to load.  Will be
 	//! searched for using StelFileMgr, so partial names are fine.
 	//! @param ra0 right ascention of corner 0 in degrees
 	//! @param dec0 declenation of corner 0 in degrees
@@ -88,74 +91,75 @@ public slots:
 	//! @param minRes the minimum resolution setting for the image
 	//! @param maxBright the maximum brightness setting for the image
 	//! @param visible initial visibility setting
-	bool loadSkyImage(const QString& id, const QString& filename, 
-	                  double ra0, double dec0, 
-	                  double ra1, double dec1, 
-	                  double ra2, double dec2,
-	                  double ra3, double dec3,
-	                  double minRes, double maxBright, bool visible);
+	bool loadSkyImage(const QString& id, const QString& filename,
+					  double ra0, double dec0,
+					  double ra1, double dec1,
+					  double ra2, double dec2,
+					  double ra3, double dec3,
+					  double minRes, double maxBright, bool visible);
 
-	//! Decide to show or not to show an image by it's ID
-	//! @param id the id of the image whose status is to be changed
+	//! Decide to show or not to show a layer by it's ID.
+	//! @param id the id of the layer whose status is to be changed.
 	//! @param b the new shown value:
-	//! - true means the specified image will be shown
-	//! - false means the specified image will not be shown
-	void showImage(const QString& id, bool b);
-	//! Get the current shown status of a specified image
-	//! @param id the ID of the image whose status is desired
+	//! - true means the specified image will be shown.
+	//! - false means the specified image will not be shown.
+	void showLayer(const QString& id, bool b);
+	//! Get the current shown status of a specified image.
+	//! @param id the ID of the image whose status is desired.
 	//! @return the current shown status of the specified image:
-	//! - true means the specified image is currently shown
-	//! - false means the specified image is currently not shown
-	bool getShowImage(const QString& id);
-	
+	//! - true means the specified image is currently shown.
+	//! - false means the specified image is currently not shown.
+	bool getShowLayer(const QString& id);
+
 	///////////////////////////////////////////////////////////////////////////
 	// Other slots
-	//! Add a new image from its URI (URL or local file name)
+	//! Add a new SkyImage from its URI (URL or local file name).
 	//! The image is owned by the manager and will be destroyed at the end of the program
 	//! or when removeSkyImage is called with the same URI
 	//! @param uri the local file or the URL where the JSON image description is located
 	//! @param show defined whether the image should be shown by default
 	//! @return the reference key to use when accessing this image later on
 	QString insertSkyImage(const QString& uri, bool show=true);
-	
-	//! Remove a sky image tile from the list of background images
+
+	//! Remove a sky layer from the list.
 	//! Note: this is not thread safe, and so should not be used directly
 	//! from scripts - use the similarly named function in the core
-	//! scripting API object to delete SkyImages.
-	//! @param key the reference key (id) generated by insertSkyImage
-	void removeSkyImage(const QString& key);
-	
-	//! Return the list of all the sky images currently loaded
-	QStringList getAllKeys() const {return allSkyImages.keys();}
+	//! scripting API object to delete SkyLayers.
+	//! @param key the reference key (id) generated by insertSkyImage.
+	void removeSkyLayer(const QString& key);
+
+	//! Return the list of all the layer currently loaded.
+	QStringList getAllKeys() const {return allSkyLayers.keys();}
 
 private slots:
 	//! Called when loading of data started or stopped for one collection
 	//! @param b true if data loading started, false if finished
 	void loadingStateChanged(bool b);
-	
+
 	//! Called when the percentage of loading tiles/tiles to be displayed changed for one collection
 	//! @param percentage the percentage of loaded data
 	void percentLoadedChanged(int percentage);
 
 private:
-	class StelSkyImageMgrElem
+
+	//! Store the informations needed for a graphical element layer.
+	class SkyLayerElem
 	{
 	public:
-		StelSkyImageMgrElem(StelSkyImageTile* t, bool show=true, bool externallyOwned=true);
-		~StelSkyImageMgrElem();
-		StelSkyImageTile* tile;
+		SkyLayerElem(StelSkyLayerP t, bool show=true);
+		~SkyLayerElem();
+		StelSkyLayerP layer;
 		QProgressBar* progressBar;
 		bool show;
-		bool externallyOwned;
 	};
-	
-	StelSkyImageMgrElem* skyBackgroundElemForTile(const StelSkyImageTile*);
-	
-	QString keyForTile(const StelSkyImageTile*);
-	
-	//! Map image key/image
-	QMap<QString, StelSkyImageMgrElem*> allSkyImages;
-	
+
+	SkyLayerElem* skyLayerElemForLayer(const StelSkyLayerP&);
+
+	QString keyForLayer(const StelSkyLayerP&);
+
+	//! Map image key/layer
+	QMap<QString, SkyLayerElem*> allSkyLayers;
+
 	// Whether to draw at all
 	bool flagShow;
 };

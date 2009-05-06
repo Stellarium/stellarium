@@ -80,7 +80,7 @@ public:
 	~StelSkyImageTile();
 
 	//! Draw the image on the screen.
-	void draw(StelCore* core, const StelPainter& sPainter);
+	void draw(StelCore* core, const StelPainter& sPainter, float opacity=1.);
 
 	//! Return the dataset credits to use in the progress bar
 	DataSetCredits getDataSetCredits() const {return dataSetCredits;}

@@ -75,7 +75,7 @@ StelSkyImageTile::~StelSkyImageTile()
 {
 }
 
-void StelSkyImageTile::draw(StelCore* core, const StelPainter& sPainter)
+void StelSkyImageTile::draw(StelCore* core, const StelPainter& sPainter, float opacity)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
