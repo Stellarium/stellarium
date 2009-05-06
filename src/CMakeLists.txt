@@ -80,6 +80,8 @@ SET(stellarium_lib_SRCS
 	core/StelStyle.hpp
 	core/StelSkyLayerMgr.cpp
 	core/StelSkyLayerMgr.hpp
+	core/StelSkyLayer.hpp
+	core/StelSkyLayer.cpp
 	core/StelFader.hpp
 	core/StelGrid.hpp
 	core/StelGridObject.hpp
@@ -385,6 +387,7 @@ SET(stellarium_MOC_HDRS
 	core/StelSkyPolygon.hpp
 	core/StelSkyDrawer.hpp
 	core/StelSkyLayerMgr.hpp
+	core/StelSkyLayer.hpp
 	core/StelSkyCultureMgr.hpp
 	core/SimbadSearcher.hpp
 	modules/ConstellationMgr.hpp

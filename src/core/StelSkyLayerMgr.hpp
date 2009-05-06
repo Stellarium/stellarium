@@ -153,9 +153,9 @@ private:
 		bool show;
 	};
 
-	SkyLayerElem* skyLayerElemForLayer(const StelSkyLayerP&);
+	SkyLayerElem* skyLayerElemForLayer(const StelSkyLayer*);
 
-	QString keyForLayer(const StelSkyLayerP&);
+	QString keyForLayer(const StelSkyLayer*);
 
 	//! Map image key/layer
 	QMap<QString, SkyLayerElem*> allSkyLayers;
