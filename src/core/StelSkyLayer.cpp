@@ -18,6 +18,3 @@
 
 #include "StelSkyLayer.hpp"
 
-StelSkyLayer::StelSkyLayer()
-{
-}

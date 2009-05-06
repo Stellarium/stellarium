@@ -52,6 +52,10 @@ public:
 	//! links and copyrights.
 	virtual QString getLayerDescriptionHtml() const {return "No description.";}
 
+	//! Define a function doing nothing for overriding the Delete operation of the QSharedPointer
+	//! in the case it's needed.
+	static void noDelete(StelSkyLayer* o) {;}
+
 signals:
 	//! Emitted when loading of data started or stopped.
 	//! @param b true if data loading started, false if finished.
