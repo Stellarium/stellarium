@@ -45,19 +45,19 @@ StelSkyPolygon::StelSkyPolygon(const QVariantMap& map, StelSkyPolygon* parent) :
 	initCtor();
 	initFromQVariantMap(map);
 }
-	
+
 // Destructor
 StelSkyPolygon::~StelSkyPolygon()
 {
 }
-	
-void StelSkyPolygon::draw(StelCore* core)
+
+void StelSkyPolygon::draw(StelCore* core, const StelPainter& sPainter, float opacity)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	
+
 	QMultiMap<double, StelSkyPolygon*> result;
 	getTilesToDraw(result, core, prj->getViewportConvexPolygon(0, 0), true);
-	
+
 	// Draw in the good order
 	glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_ONE, GL_ONE);
@@ -67,21 +67,21 @@ void StelSkyPolygon::draw(StelCore* core)
 		--i;
 		i.value()->drawTile(core);
 	}
-	
+
 	deleteUnusedSubTiles();
 }
-	
+
 // Return the list of tiles which should be drawn.
 void StelSkyPolygon::getTilesToDraw(QMultiMap<double, StelSkyPolygon*>& result, StelCore* core, const SphericalRegionP& viewPortPoly, bool recheckIntersect)
 {
 	// An error occured during loading
 	if (errorOccured)
 		return;
-	
+
 	// The JSON file is currently being downloaded
 	if (downloading)
 		return;
-	
+
 	// Check that we are in the screen
 	bool fullInScreen = true;
 	bool intersectScreen = false;
@@ -117,13 +117,13 @@ void StelSkyPolygon::getTilesToDraw(QMultiMap<double, StelSkyPolygon*>& result, 
 		scheduleChildsDeletion();
 		return;
 	}
-	
+
 	// The tile is in screen, make sure that it's not going to be deleted
 	cancelDeletion();
-		
+
 	// The tile is in screen and has a texture: every test passed :) The tile will be displayed
 	result.insert(minResolution, this);
-	
+
 	// Check if we reach the resolution limit
 	const double degPerPixel = 1./core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()*180./M_PI;
 	if (degPerPixel < minResolution)
@@ -155,22 +155,22 @@ void StelSkyPolygon::getTilesToDraw(QMultiMap<double, StelSkyPolygon*>& result, 
 		scheduleChildsDeletion();
 	}
 }
-	
+
 // Draw the image on the screen.
 // Assume GL_TEXTURE_2D is enabled
 bool StelSkyPolygon::drawTile(StelCore* core)
-{	
+{
 	if (!texFader)
 	{
 		texFader = new QTimeLine(1000, this);
 		texFader->start();
 	}
-	
+
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	
+
 	foreach (const SphericalConvexPolygon& poly, skyConvexPolygons)
 		sPainter.drawSphericalPolygon(&poly);
-	
+
 	return true;
 }
 
@@ -191,13 +191,13 @@ void StelSkyPolygon::loadFromQVariantMap(const QVariantMap& map)
 		serverCredits.fullCredits = sCredits.value("full").toString();
 		serverCredits.infoURL = sCredits.value("infoUrl").toString();
 	}
-	
+
 	shortName = map.value("shortName").toString();
 	bool ok=false;
 	minResolution = map.value("minResolution").toDouble(&ok);
 	if (!ok)
 		throw std::runtime_error("minResolution expect a double value");
-	
+
 	// Load the convex polygons (if any)
 	QVariantList polyList = map.value("worldCoords").toList();
 	foreach (const QVariant& polyRaDec, polyList)
@@ -215,7 +215,7 @@ void StelSkyPolygon::loadFromQVariantMap(const QVariantMap& map)
 		Q_ASSERT(vertices.size()==4);
 		skyConvexPolygons.append(SphericalConvexPolygon(vertices[0], vertices[1], vertices[2], vertices[3]));
 	}
-	
+
 	// This is a list of URLs to the child tiles or a list of already loaded map containing child information
 	// (in this later case, the StelSkyPolygon objects will be created later)
 	subTilesUrls = map.value("subTiles").toList();

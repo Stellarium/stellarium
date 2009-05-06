@@ -88,7 +88,7 @@ void JsonLoadThread::run()
 	}
 }
 
-MultiLevelJsonBase::MultiLevelJsonBase(MultiLevelJsonBase* parent) : QObject(parent)
+MultiLevelJsonBase::MultiLevelJsonBase(MultiLevelJsonBase* parent) : StelSkyLayer(parent)
 {
 	errorOccured = false;
 	httpReply = NULL;

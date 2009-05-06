@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -38,12 +38,12 @@
 
 StelSkyImageMgr::StelSkyImageMgr(void) : flagShow(true)
 {
-	setObjectName("StelSkyImageMgr");
+	setObjectName("StelSkyLayerMgr");
 }
 
 StelSkyImageMgr::~StelSkyImageMgr()
 {
-	foreach (StelSkyImageMgrElem* s, allSkyImages)
+	foreach (SkyLayerElem* s, allSkyLayers)
 		delete s;
 }
 
@@ -70,59 +70,57 @@ void StelSkyImageMgr::init()
 	}
 }
 
-QString StelSkyImageMgr::insertSkyImage(StelSkyImageTile* tile, bool ashow, bool aexternallyOwned)
+QString StelSkyImageMgr::insertSkyLayer(StelSkyLayerP tile, bool ashow)
 {
-	StelSkyImageMgrElem* bEl = new StelSkyImageMgrElem(tile, ashow, aexternallyOwned);
-	QString key = tile->getShortName();
-	if (key.isEmpty())
-		key = tile->getAbsoluteImageURI();
-	if (allSkyImages.contains(key))
+	SkyLayerElem* bEl = new SkyLayerElem(tile, ashow);
+	QString key = tile->getKeyHint();
+	if (allSkyLayers.contains(key))
 	{
 		QString suffix = "_01";
 		int i=1;
-		while (allSkyImages.contains(key+suffix))
+		while (allSkyLayers.contains(key+suffix))
 		{
 			suffix=QString("_%1").arg(i);
 			++i;
 		}
 		key+=suffix;
 	}
-	allSkyImages.insert(key,bEl);
-	connect(bEl->tile, SIGNAL(loadingStateChanged(bool)), this, SLOT(loadingStateChanged(bool)));
-	connect(bEl->tile, SIGNAL(percentLoadedChanged(int)), this, SLOT(percentLoadedChanged(int)));
+	allSkyLayers.insert(key,bEl);
+	connect(bEl->layer.data(), SIGNAL(loadingStateChanged(bool)), this, SLOT(loadingStateChanged(bool)));
+	connect(bEl->layer.data(), SIGNAL(percentLoadedChanged(int)), this, SLOT(percentLoadedChanged(int)));
 	return key;
 }
 
 // Add a new image from its URI (URL or local file name)
 QString StelSkyImageMgr::insertSkyImage(const QString& uri, bool ashow)
 {
-	return insertSkyImage(new StelSkyImageTile(uri), ashow, false);
+	return insertSkyLayer(StelSkyLayerP(new StelSkyImageTile(uri)), ashow);
 }
 
 // Remove a sky image tile from the list of background images
-void StelSkyImageMgr::removeSkyImage(const QString& key)
+void StelSkyImageMgr::removeSkyLayer(const QString& key)
 {
 	//qDebug() << "StelSkyImageMgr::removeSkyImage removing image:" << key;
-	if (allSkyImages.contains(key))
+	if (allSkyLayers.contains(key))
 	{
-		StelSkyImageMgrElem* bEl = allSkyImages[key];
-		disconnect(bEl->tile, SIGNAL(loadingStateChanged(bool)), this, SLOT(loadingStateChanged(bool)));
-		disconnect(bEl->tile, SIGNAL(percentLoadedChanged(int)), this, SLOT(percentLoadedChanged(int)));
+		SkyLayerElem* bEl = allSkyLayers[key];
+		disconnect(bEl->layer.data(), SIGNAL(loadingStateChanged(bool)), this, SLOT(loadingStateChanged(bool)));
+		disconnect(bEl->layer.data(), SIGNAL(percentLoadedChanged(int)), this, SLOT(percentLoadedChanged(int)));
 		delete bEl;
-		allSkyImages.remove(key);
+		allSkyLayers.remove(key);
 	}
 	else
 	{
-		qDebug() << "StelSkyImageMgr::removeSkyImage there is no such key" << key << "nothing is removed";
+		qDebug() << "StelSkyImageMgr::removeSkyLayer there is no such key" << key << "nothing is removed";
 	}
 }
 
 // Remove a sky image tile from the list of background images
-void StelSkyImageMgr::removeSkyImage(StelSkyImageTile* img)
+void StelSkyImageMgr::removeSkyLayer(StelSkyLayerP l)
 {
-	const QString k = keyForTile(img);
+	const QString k = keyForLayer(l);
 	if (!k.isEmpty())
-		removeSkyImage(k);
+		removeSkyLayer(k);
 }
 
 // Draw all the multi-res images collection
@@ -134,28 +132,28 @@ void StelSkyImageMgr::draw(StelCore* core)
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_BLEND);
-	foreach (StelSkyImageMgrElem* s, allSkyImages)
+	foreach (SkyLayerElem* s, allSkyLayers)
 	{
 		if (s->show)
-			s->tile->draw(core, sPainter);
+			s->layer->draw(core, sPainter, 1.);
 	}
 }
 
 // Called when loading of data started or stopped for one collection
 void StelSkyImageMgr::loadingStateChanged(bool b)
 {
-	StelSkyImageTile* tile = qobject_cast<StelSkyImageTile*>(QObject::sender());
+	StelSkyLayer* tile = qobject_cast<StelSkyLayer*>(QObject::sender());
 	Q_ASSERT(tile!=0);
-	StelSkyImageMgrElem* elem = skyBackgroundElemForTile(tile);
+	SkyLayerElem* elem = skyLayerElemForLayer(tile);
 	Q_ASSERT(elem!=NULL);
 	if (b)
 	{
 		Q_ASSERT(elem->progressBar==NULL);
 		elem->progressBar = StelMainGraphicsView::getInstance().addProgressBar();
-		QString serverStr = elem->tile->getServerCredits().shortCredits;
+		QString serverStr = elem->layer->getServerCredits().shortCredits;
 		if (!serverStr.isEmpty())
 			serverStr = " from "+serverStr;
-		elem->progressBar->setFormat("Loading "+elem->tile->getShortName()+serverStr);
+		elem->progressBar->setFormat("Loading "+elem->layer->getShortName()+serverStr);
 		elem->progressBar->setRange(0,100);
 	}
 	else
@@ -165,21 +163,21 @@ void StelSkyImageMgr::loadingStateChanged(bool b)
 		elem->progressBar = NULL;
 	}
 }
-	
+
 // Called when the percentage of loading tiles/tiles to be displayed changed for one collection
 void StelSkyImageMgr::percentLoadedChanged(int percentage)
 {
-	StelSkyImageTile* tile = qobject_cast<StelSkyImageTile*>(QObject::sender());
+	StelSkyLayer* tile = qobject_cast<StelSkyLayer*>(QObject::sender());
 	Q_ASSERT(tile!=0);
-	StelSkyImageMgrElem* elem = skyBackgroundElemForTile(tile);
+	SkyLayerElem* elem = skyLayerElemForLayer(tile);
 	Q_ASSERT(elem!=NULL);
 	Q_ASSERT(elem->progressBar!=NULL);
 	elem->progressBar->setValue(percentage);
 }
-	
-StelSkyImageMgr::StelSkyImageMgrElem* StelSkyImageMgr::skyBackgroundElemForTile(const StelSkyImageTile* t)
+
+StelSkyImageMgr::SkyLayerElem* StelSkyImageMgr::skyLayerElemForLayer(const StelSkyLayerP& t)
 {
-	foreach (StelSkyImageMgrElem* e, allSkyImages)
+	foreach (SkyLayerElem* e, allSkyLayer)
 	{
 		if (e->tile==t)
 		{
@@ -189,40 +187,36 @@ StelSkyImageMgr::StelSkyImageMgrElem* StelSkyImageMgr::skyBackgroundElemForTile(
 	return NULL;
 }
 
-QString StelSkyImageMgr::keyForTile(const StelSkyImageTile* t)
+QString StelSkyImageMgr::keyForLayer(const StelSkyLayerPconst t)
 {
-	return allSkyImages.key(skyBackgroundElemForTile(t));
+	return allSkyLayers.key(skyLayerElemForLayer(t));
 }
 
-StelSkyImageMgr::StelSkyImageMgrElem::StelSkyImageMgrElem(StelSkyImageTile* t, bool ashow, bool aexternallyOwned) : 
-		tile(t), progressBar(NULL), show(ashow), externallyOwned(aexternallyOwned)
+StelSkyImageMgr::SkyLayerElem::SkyLayerElem(StelSkyLayerP t, bool ashow) : tile(t), progressBar(NULL), show(ashow)
 {;}
-				 
-StelSkyImageMgr::StelSkyImageMgrElem::~StelSkyImageMgrElem()
+
+StelSkyImageMgr::SkyLayerElem::~SkyLayerElem()
 {
 	if (progressBar)
 		progressBar->deleteLater();
 	progressBar = NULL;
-	if (!externallyOwned)
-		delete tile;
-	tile = NULL;
 }
 
-bool StelSkyImageMgr::loadSkyImage(const QString& id, const QString& filename, 
-                                   double ra0, double dec0, 
-                                   double ra1, double dec1, 
-                                   double ra2, double dec2, 
-                                   double ra3, double dec3, 
-                                   double minRes, double maxBright, bool visible)
+bool StelSkyImageMgr::loadSkyImage(const QString& id, const QString& filename,
+								   double ra0, double dec0,
+								   double ra1, double dec1,
+								   double ra2, double dec2,
+								   double ra3, double dec3,
+								   double minRes, double maxBright, bool visible)
 {
-	if (allSkyImages.contains("id"))
+	if (allSkyLayers.contains("id"))
 	{
 		qWarning() << "Image ID" << id << "already exists, removing old image before loading";
 		removeSkyImage(id);
 	}
 
 	QString path;
-	// Possible exception sources: 
+	// Possible exception sources:
 	// - StelFileMgr file not found
 	// - list index out of range in insertSkyImage
 	try
@@ -243,8 +237,8 @@ bool StelSkyImageMgr::loadSkyImage(const QString& id, const QString& filename,
 		cl.clear();
 		ol.clear();
 		c.clear(); c.append(0); c.append(0); cl.append(QVariant(c));
-		c.clear(); c.append(1); c.append(0); cl.append(QVariant(c)); 
-		c.clear(); c.append(1); c.append(1); cl.append(QVariant(c)); 
+		c.clear(); c.append(1); c.append(0); cl.append(QVariant(c));
+		c.clear(); c.append(1); c.append(1); cl.append(QVariant(c));
 		c.clear(); c.append(0); c.append(1); cl.append(QVariant(c));
 		ol.append(QVariant(cl));
 		vm["textureCoords"] = ol;
@@ -252,15 +246,15 @@ bool StelSkyImageMgr::loadSkyImage(const QString& id, const QString& filename,
 		// world coordinates
 		cl.clear();
 		ol.clear();
-		c.clear(); c.append(dec0); c.append(ra0); cl.append(QVariant(c)); 
+		c.clear(); c.append(dec0); c.append(ra0); cl.append(QVariant(c));
 		c.clear(); c.append(dec1); c.append(ra1); cl.append(QVariant(c));
 		c.clear(); c.append(dec2); c.append(ra2); cl.append(QVariant(c));
 		c.clear(); c.append(dec3); c.append(ra3); cl.append(QVariant(c));
 		ol.append(QVariant(cl));
 		vm["worldCoords"] = ol;
 
-		StelSkyImageTile* tile = new StelSkyImageTile(vm, 0);
-		QString key = insertSkyImage(tile, visible, false);
+		StelSkyLayerP tile = StelSkyLayerP(new StelSkyImageTile(vm, 0));
+		QString key = insertSkyLayer(tile, visible);
 		if (key == id)
 			return true;
 		else
@@ -273,18 +267,18 @@ bool StelSkyImageMgr::loadSkyImage(const QString& id, const QString& filename,
 	}
 }
 
-void StelSkyImageMgr::showImage(const QString& id, bool b)
+void StelSkyImageMgr::showLayer(const QString& id, bool b)
 {
-	if (allSkyImages.contains(id))
-		if (allSkyImages[id]!=NULL)
-			allSkyImages[id]->show = b;
+	if (allSkyLayers.contains(id))
+		if (allSkyLayers[id]!=NULL)
+			allSkyLayers[id]->show = b;
 }
 
-bool StelSkyImageMgr::getShowImage(const QString& id)
+bool StelSkyImageMgr::getShowLayer(const QString& id)
 {
-	if (allSkyImages.contains(id))
-		if (allSkyImages[id]!=NULL)
-			return allSkyImages[id]->show;
+	if (allSkyLayers.contains(id))
+		if (allSkyLayers[id]!=NULL)
+			return allSkyLayers[id]->show;
 	return false;
 }
 
