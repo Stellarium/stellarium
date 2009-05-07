@@ -23,8 +23,8 @@
 #include <QVector>
 #include <QVariant>
 #include <QDebug>
+#include <QSharedPointer>
 #include "VecMath.hpp"
-#include <boost/shared_ptr.hpp>
 
 class SphericalPolygon;
 class SphericalPolygonBase;
@@ -36,8 +36,8 @@ class SphericalCap;
 //! Define all SphericalGeometry primitives as well as the SphericalRegionP type.
 
 //! @typedef SphericalRegionP
-//! Use shared pointer to simplify memory managment
-typedef boost::shared_ptr<SphericalRegion> SphericalRegionP;
+//! Use shared pointer to simplify memory managment.
+typedef QSharedPointer<SphericalRegion> SphericalRegionP;
 
 //! @class SphericalRegion
 //! Abstract class defining a region of the sphere.

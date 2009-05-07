@@ -69,7 +69,7 @@ class StelSkyImageTile : public MultiLevelJsonBase
 
 public:
 	//! Default constructor
-	StelSkyImageTile() {initCtor();}
+	StelSkyImageTile();
 
 	//! Constructor
 	StelSkyImageTile(const QString& url, StelSkyImageTile* parent=NULL);
