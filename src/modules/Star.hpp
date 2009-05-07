@@ -3,17 +3,17 @@
  * Author and Copyright: Johannes Gajdosik, 2006, 2007
  *
  * Thanks go to Nigel Kerr for ideas and testing of BE/LE star repacking
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -23,9 +23,7 @@
 #define _STAR_HPP_ 1
 
 #include "ZoneData.hpp"
-
-#include <boost/intrusive_ptr.hpp>
-
+#include "StelObjectType.hpp"
 #include <QString>
 
 class StelObject;
@@ -66,15 +64,14 @@ struct Star1 { // 28 byte
   Uint16 spInt;                // 14 bits needed
   Int32 dx0,dx1,plx;
   enum {MaxPosVal=0x7FFFFFFF};
-  boost::intrusive_ptr<StelObject>
-    createStelObject(const SpecialZoneArray<Star1> *a,
-                     const SpecialZoneData<Star1> *z) const;
+  StelObjectP createStelObject(const SpecialZoneArray<Star1> *a,
+					 const SpecialZoneData<Star1> *z) const;
   Vec3d getJ2000Pos(const ZoneData *z,double movementFactor) const {
-    Vec3d pos = z->center
-              + (x0+movementFactor*dx0)*z->axis0
-              + (x1+movementFactor*dx1)*z->axis1;
-    //pos.normalize();
-    return pos;
+	Vec3d pos = z->center
+			  + (x0+movementFactor*dx0)*z->axis0
+			  + (x1+movementFactor*dx1)*z->axis1;
+	//pos.normalize();
+	return pos;
   }
   float getBV(void) const {return IndexToBV(bV);}
   QString getNameI18n(void) const;
@@ -101,15 +98,14 @@ struct Star2 {  // 10 byte
   unsigned int bV:7;
   unsigned int mag:5;
   enum {MaxPosVal=((1<<19)-1)};
-  boost::intrusive_ptr<StelObject>
-    createStelObject(const SpecialZoneArray<Star2> *a,
-                     const SpecialZoneData<Star2> *z) const;
+  StelObjectP createStelObject(const SpecialZoneArray<Star2> *a,
+					 const SpecialZoneData<Star2> *z) const;
   Vec3d getJ2000Pos(const ZoneData *z,double movementFactor) const {
-    Vec3d pos = z->center
-              + (x0+movementFactor*dx0)*z->axis0
-              + (x1+movementFactor*dx1)*z->axis1;
-    //pos.normalize();
-    return pos;
+	Vec3d pos = z->center
+			  + (x0+movementFactor*dx0)*z->axis0
+			  + (x1+movementFactor*dx1)*z->axis1;
+	//pos.normalize();
+	return pos;
   }
   float getBV(void) const {return IndexToBV(bV);}
   QString getNameI18n(void) const {return "";}
@@ -134,13 +130,12 @@ struct Star3 {  // 6 byte
   unsigned int bV:7;
   unsigned int mag:5;
   enum {MaxPosVal=((1<<17)-1)};
-  boost::intrusive_ptr<StelObject>
-    createStelObject(const SpecialZoneArray<Star3> *a,
-                     const SpecialZoneData<Star3> *z) const;
+  StelObjectP createStelObject(const SpecialZoneArray<Star3> *a,
+					 const SpecialZoneData<Star3> *z) const;
   Vec3d getJ2000Pos(const ZoneData *z,double) const {
-    Vec3d pos = z->center + (double)(x0)*z->axis0 + (double)(x1)*z->axis1;
-    //pos.normalize();
-    return pos;
+	Vec3d pos = z->center + (double)(x0)*z->axis0 + (double)(x1)*z->axis1;
+	//pos.normalize();
+	return pos;
   }
   float getBV(void) const {return IndexToBV(bV);}
   QString getNameI18n(void) const {return "";}
