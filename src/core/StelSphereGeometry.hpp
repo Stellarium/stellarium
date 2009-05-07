@@ -72,11 +72,32 @@ public:
 
 	//! Create a SphericalRegion from the given input JSON stream.
 	//! The type of the region is automatically recognized from the input format.
+	//! The currently recognized format are:
+	//! <ul>
+	//! <li>Polygon vertex list:
+	//! @code{
+	//!     "worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]]
+	//! }@endcode
+	//! The format consist of a list of contours, each contours is defined by a list of ra,dec coordinates
+	//! composing connected great circles segments with the last point connected to the first one.
+	//! ra and dec are expressed in degree in the ICRS reference frame.</li>
+	//! <li>Polygon vertex list with associated texture coordinates:
+	//! @code{
+	//!     "worldCoords": [[[ra,dec],[ra,dec],[ra,dec],[ra,dec]], [[ra,dec],[ra,dec],[ra,dec]],[...]],
+	//!     "textureCoords": [[[u,v],[u,v],[u,v],[u,v]], [[u,v],[u,v],[u,v]], [...]]
+	//! }@endcode
+	//! The format is similar to the one described above, with the addition of a list of texture coordinates
+	//! in the u,v texture space (between 0 and 1). There must be one texture coordinate for each vertex.</li>
+	//! </ul>
 	//! @param in an open QIODevice ready for read.
+	//! @throws std::runtime_error when there was an error while parsing the file.
 	static SphericalRegionP loadFromJson(QIODevice* in);
 
-	//! Create a SphericalRegion from the given QVariantMap.
-	//! The type of the region is automatically recognized from the input format.
+	//! Create a SphericalRegion from the given QByteArray containing the JSON data.
+	//! @see loadFromJson(QIODevice* in) for format info.
+	static SphericalRegionP loadFromJson(const QByteArray& a);
+
+	//! Create a SphericalRegion from the given QVariantMap with a format matching the JSON file parsed in loadFromJson().
 	//! @param map a valid QVariantMap which can be created e.g. from parsing a JSON file with the StelJsonParser class.
 	static SphericalRegionP loadFromQVariant(const QVariantMap& map);
 };

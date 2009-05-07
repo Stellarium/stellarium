@@ -366,7 +366,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	{
 		const QVariant& polyRaDec = polyList.at(i);
 		QVector<Vec3d> vertices;
-		foreach (QVariant vRaDec, polyRaDec.toList())
+		foreach (const QVariant& vRaDec, polyRaDec.toList())
 		{
 			const QVariantList vl = vRaDec.toList();
 			Vec3d v;
@@ -381,7 +381,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		{
 			const QVariant& polyXY = texCoordList.at(i);
 			QVector<Vec2f> texCoords;
-			foreach (QVariant vXY, polyXY.toList())
+			foreach (const QVariant& vXY, polyXY.toList())
 			{
 				const QVariantList vl = vXY.toList();
 				texCoords.append(Vec2f(vl.at(0).toDouble(&ok), vl.at(1).toDouble(&ok)));

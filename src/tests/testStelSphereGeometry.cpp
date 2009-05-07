@@ -21,13 +21,15 @@
 #include <QObject>
 #include <QtDebug>
 #include <QtTest>
+#include <stdexcept>
+
 #include "StelJsonParser.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelUtils.hpp"
 
 #include "tests/testStelSphereGeometry.hpp"
 
-QTEST_MAIN(TestStelSphericalGeometry);
+QTEST_MAIN(TestStelSphericalGeometry)
 
 void TestStelSphericalGeometry::initTestCase()
 {
@@ -45,15 +47,15 @@ void TestStelSphericalGeometry::initTestCase()
 	StelUtils::spheToRect(0.2, -0.2, c2[1]);
 	StelUtils::spheToRect(-0.2, -0.2, c2[0]);
 	contours.append(c2);
-	
+
 	holySquare.setContours(contours);
 	bigSquare.setContour(c1);
 	bigSquareConvex.setContour(c1);
 	QVector<Vec3d> c2inv(4);
 	c2inv[0]=c2[3]; c2inv[1]=c2[2]; c2inv[2]=c2[1]; c2inv[3]=c2[0];
-	smallSquare.setContour(c2inv);	
+	smallSquare.setContour(c2inv);
 	smallSquareConvex.setContour(c2inv);
-	
+
 	QVector<Vec3d> triCont;
 	triCont << Vec3d(1,0,0) << Vec3d(0,0,1) << Vec3d(0,1,0);
 	triangle.setContour(triCont);
@@ -65,17 +67,17 @@ void TestStelSphericalGeometry::testSphericalCap()
 	Vec3d p1(-1,0,0);
 	Vec3d p2(1,1,1);
 	p2.normalize();
-	
+
 	SphericalCap h0(p0, 0);
 	SphericalCap h1(p0, 0.8);
 	SphericalCap h2(p0, -0.5);
 	SphericalCap h3(p1, 0.5);
 	SphericalCap h4(p2, 0.8);
 	SphericalCap h5(p2, 1.);
-	
+
 	QVERIFY2(h0.contains(p0), "SphericalCap contains point failure");
 	QVERIFY2(h1.contains(p0), "SphericalCap contains point failure");
-	
+
 	QVERIFY(h0.intersects(h1));
 	QVERIFY(h0.intersects(h2));
 	QVERIFY(h1.intersects(h2));
@@ -115,21 +117,21 @@ void TestStelSphericalGeometry::testContains()
 	Vec3d p0(1,0,0);
 	Vec3d p1(1,1,1);
 	p1.normalize();
-	
+
 	Vec3d v0;
 	Vec3d v1;
 	Vec3d v2;
 	Vec3d v3;
-	
+
 	// Triangle polygons
 	QVERIFY2(triangle.contains(p1), "Triangle contains point failure");
 	QVERIFY2(!triangle.contains(Vec3d(-1, -1, -1)), "Triangle not contains point failure");
-	
+
 	foreach(const SphericalCap& h, triangle.getBoundingSphericalCaps())
 	{
 		QVERIFY(h.contains(p1));
 	}
-	
+
 	// polygons-point intersect
 	double deg5 = 5.*M_PI/180.;
 	double deg2 = 2.*M_PI/180.;
@@ -142,7 +144,7 @@ void TestStelSphericalGeometry::testContains()
 	QVERIFY(square1.checkValid());
 	QVERIFY2(square1.contains(p0), "Square contains point failure");
 	QVERIFY2(!square1.contains(p1), "Square not contains point failure");
-	
+
 	// polygons-polygons intersect
 	StelUtils::spheToRect(-deg2, -deg2, v3);
 	StelUtils::spheToRect(+deg2, -deg2, v2);
@@ -154,7 +156,7 @@ void TestStelSphericalGeometry::testContains()
 	QVERIFY2(!square2.contains(square1), "Square not contains square failure");
 	QVERIFY2(square1.intersects(square2), "Square intersect square failure");
 	QVERIFY2(square2.intersects(square1), "Square intersect square failure");
-	
+
 	// Test the tricky case where 2 polygons intersect without having point within each other
 	StelUtils::spheToRect(-deg5, -deg2, v3);
 	StelUtils::spheToRect(+deg5, -deg2, v2);
@@ -162,7 +164,7 @@ void TestStelSphericalGeometry::testContains()
 	StelUtils::spheToRect(-deg5, +deg2, v0);
 	SphericalConvexPolygon squareHoriz(v0, v1, v2, v3);
 	QVERIFY(squareHoriz.checkValid());
-	
+
 	StelUtils::spheToRect(-deg2, -deg5, v3);
 	StelUtils::spheToRect(+deg2, -deg5, v2);
 	StelUtils::spheToRect(+deg2, +deg5, v1);
@@ -186,7 +188,7 @@ void TestStelSphericalGeometry::testPlaneIntersect2()
 	QVERIFY(p1==Vec3d(0,-1,0));
 	QVERIFY(p2==Vec3d(0,1,0));
 	QVERIFY2(planeIntersect2(hx, hx, p1, p2)==false, "Plane non-intersecting failure");
-	
+
 	hx.d = std::sqrt(2.)/2.;
 	QVERIFY2(planeIntersect2(hx, hz, p1, p2)==true, "Plane/convex intersect failed");
 	Vec3d res(p1-Vec3d(hx.d,-hx.d,0));
@@ -202,12 +204,12 @@ void TestStelSphericalGeometry::testSphericalPolygon()
 	QVERIFY(contours.size()==2);
 	QVERIFY(contours[0].size()==4);
 	QVERIFY(contours[1].size()==4);
-	
+
 	// Booleans methods
 	QCOMPARE(bigSquare.getUnion(holySquare).getArea(), bigSquare.getArea());
 	QCOMPARE(bigSquare.getSubtraction(smallSquare).getArea(), holySquare.getArea());
 	QCOMPARE(bigSquare.getIntersection(smallSquare).getArea(), smallSquare.getArea());
-	
+
 	// Point contain methods
 	Vec3d v0, v1, v2;
 	StelUtils::spheToRect(0, 0, v0);
@@ -217,14 +219,44 @@ void TestStelSphericalGeometry::testSphericalPolygon()
 	QVERIFY(bigSquareConvex.contains(v0));
 	QVERIFY(bigSquare.contains(v0));
 	QVERIFY(!holySquare.contains(v0));
-	
+
 	QVERIFY(!smallSquare.contains(v1));
 	QVERIFY(bigSquare.contains(v1));
 	QVERIFY(holySquare.contains(v1));
-	
+
 	QVERIFY(holySquare.intersects(bigSquare));
 	QVERIFY(bigSquare.intersects(smallSquare));
 	QVERIFY(!holySquare.intersects(smallSquare));
+}
+
+void TestStelSphericalGeometry::testLoading()
+{
+	QByteArray ar = "{\"worldCoords\": [[[-0.5,0.5],[0.5,0.5],[0.5,-0.5],[-0.5,-0.5]], [[-0.2,-0.2],[0.2,-0.2],[0.2,0.2],[-0.2,0.2]]]}";
+	QByteArray arTex = "{\"worldCoords\": [[[-0.5,0.5],[0.5,0.5],[0.5,-0.5],[-0.5,-0.5]]], \"textureCoords\": [[[-0.5,0.5],[0.5,0.5],[0.5,-0.5],[-0.5,-0.5]]]}";
+	SphericalRegionP reg;
+	SphericalRegionP regTex;
+	try
+	{
+		reg = SphericalRegion::loadFromJson(ar);
+		regTex = SphericalRegion::loadFromJson(arTex);
+	}
+	catch (std::runtime_error& e)
+	{
+		QString msg("Exception while loading: ");
+		msg+=e.what();
+		QFAIL(qPrintable(msg));
+	}
+
+	SphericalPolygon* poly = dynamic_cast<SphericalPolygon*>(reg.data());
+	QVERIFY(poly!=NULL);
+
+	SphericalTexturedPolygon* polyTex = dynamic_cast<SphericalTexturedPolygon*>(regTex.data());
+	QVERIFY(polyTex!=NULL);
+
+	QVector<QVector<Vec3d> > contours = poly->getContours();
+	QVERIFY(contours.size()==2);
+	QVERIFY(contours[0].size()==4);
+	QVERIFY(contours[1].size()==4);
 }
 
 void TestStelSphericalGeometry::benchmarkContains()
@@ -232,7 +264,7 @@ void TestStelSphericalGeometry::benchmarkContains()
 	Vec3d v0, v1;
 	StelUtils::spheToRect(0., 0., v0);
 	StelUtils::spheToRect(0.3, 0.3, v1);
-	
+
 	QBENCHMARK {
 		holySquare.contains(v1);
 		holySquare.contains(v0);
