@@ -17,10 +17,13 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include <QDebug>
+#include <QBuffer>
+#include <stdexcept>
+
 #include "StelSphereGeometry.hpp"
 #include "StelUtils.hpp"
 #include "StelJsonParser.hpp"
-#include <QDebug>
 
 #if defined(__APPLE__) && defined(__MACH__)
 #include <OpenGL/glu.h>	/* Header File For The GLU Library */
@@ -627,8 +630,100 @@ SphericalRegionP SphericalRegion::loadFromJson(QIODevice* in)
 	return loadFromQVariant(parser.parse(*in).toMap());
 }
 
+SphericalRegionP SphericalRegion::loadFromJson(const QByteArray& a)
+{
+	QBuffer buf;
+	buf.setData(a);
+	buf.open(QIODevice::ReadOnly);
+	return loadFromJson(&buf);
+}
+
 SphericalRegionP SphericalRegion::loadFromQVariant(const QVariantMap& map)
 {
-	Q_ASSERT(0); // Not implemented
+	QVariantList polyList = map.value("skyConvexPolygons").toList();
+	if (polyList.empty())
+		polyList = map.value("worldCoords").toList();
+	else
+		qWarning() << "skyConvexPolygons in preview JSON files is deprecated. Replace with worldCoords.";
+
+	if (polyList.empty())
+		throw std::runtime_error("missing vertice position required for SphericalPolygon");
+
+	// Load the matching textures positions (if any)
+	QVariantList texCoordList = map.value("textureCoords").toList();
+	if (!texCoordList.isEmpty() && polyList.size()!=texCoordList.size())
+		throw std::runtime_error("the number of convex contours does not match the number of texture space contours");
+
+	bool ok;
+	if (texCoordList.isEmpty())
+	{
+		// No texture coordinates
+		QVector<QVector<Vec3d> > contours;
+		QVector<Vec3d> vertices;
+		for (int i=0;i<polyList.size();++i)
+		{
+			const QVariantList& polyRaDecToList = polyList.at(i).toList();
+			if (polyRaDecToList.size()<3)
+				throw std::runtime_error("a polygon contour must have at least 3 vertices");
+			foreach (const QVariant& vRaDec, polyRaDecToList)
+			{
+				const QVariantList& vl = vRaDec.toList();
+				if (vl.size()!=2)
+					throw std::runtime_error("invalid Ra,Dec pair (expect 2 double values in degree)");
+				Vec3d v;
+				StelUtils::spheToRect(vl.at(0).toDouble(&ok)*M_PI/180., vl.at(1).toDouble(&ok)*M_PI/180., v);
+				if (!ok)
+					throw std::runtime_error("invalid Ra,Dec pair (expect 2 double values in degree)");
+				vertices.append(v);
+			}
+			Q_ASSERT(vertices.size()>2);
+			contours.append(vertices);
+			vertices.clear();
+		}
+		return SphericalRegionP(new SphericalPolygon(contours));
+	}
+	else
+	{
+		// With texture coordinates
+		QVector<QVector<SphericalTexturedPolygon::TextureVertex> > contours;
+		QVector<SphericalTexturedPolygon::TextureVertex> vertices;
+		for (int i=0;i<polyList.size();++i)
+		{
+			// Load vertices
+			const QVariantList& polyRaDecToList = polyList.at(i).toList();
+			if (polyRaDecToList.size()<3)
+				throw std::runtime_error("a polygon contour must have at least 3 vertices");
+			foreach (const QVariant& vRaDec, polyRaDecToList)
+			{
+				const QVariantList& vl = vRaDec.toList();
+				if (vl.size()!=2)
+					throw std::runtime_error("invalid Ra,Dec pair (expect 2 double values in degree)");
+				SphericalTexturedPolygon::TextureVertex v;
+				StelUtils::spheToRect(vl.at(0).toDouble(&ok)*M_PI/180., vl.at(1).toDouble(&ok)*M_PI/180., v.vertex);
+				if (!ok)
+					throw std::runtime_error("invalid Ra,Dec pair (expect 2 double values in degree)");
+				vertices.append(v);
+			}
+			Q_ASSERT(vertices.size()>2);
+
+			// Add the texture coordinates
+			const QVariantList& polyXYToList = texCoordList.at(i).toList();
+			if (polyXYToList.size()!=vertices.size())
+				throw std::runtime_error("texture coordinate and vertices number mismatch for contour");
+			for (int n=0;n<polyXYToList.size();++n)
+			{
+				const QVariantList& vl = polyXYToList.at(n).toList();
+				if (vl.size()!=2)
+					throw std::runtime_error("invalid texture coordinate pair (expect 2 double values in degree)");
+				vertices[n].texCoord.set(vl.at(0).toDouble(&ok), vl.at(1).toDouble(&ok));
+				if (!ok)
+					throw std::runtime_error("invalid texture coordinate pair (expect 2 double values in degree)");
+			}
+			contours.append(vertices);
+			vertices.clear();
+		}
+		return SphericalRegionP(new SphericalTexturedPolygon(contours));
+	}
+	Q_ASSERT(0);
 	return SphericalRegionP(new SphericalCap());
 }
