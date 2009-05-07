@@ -1118,7 +1118,7 @@ void SolarSystem::selectedObjectChangeCallBack(StelModuleSelectAction action)
 {
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Planet");
 	if (!newSelected.empty())
-		setSelected(newSelected[0].get());
+		setSelected(newSelected[0].data());
 }
 
 // Activate/Deactivate planets display

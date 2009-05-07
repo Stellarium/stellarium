@@ -52,7 +52,7 @@ public:
 
 	//! Set the brightness of the landscape
 	void setBrightness(float b) {skyBrightness = b;}
-	
+
 	//! Set whether landscape is displayed (does not concern fog)
 	void setFlagShow(bool b) {landFader=b;}
 	//! Get whether landscape is displayed (does not concern fog)
@@ -73,17 +73,17 @@ public:
 
 	//! Set the z-axis rotation (offset from original value when rotated
 	void setZRotation(double d) {angleRotateZOffset = d;}
-	
+
 protected:
 	//! Load attributes common to all landscapes
 	//! @param landscapeIni A reference to an existant QSettings object which describes the landscape
 	//! @param landscapeId The name of the directory for the landscape files (e.g. "ocean")
 	void loadCommon(const QSettings& landscapeIni, const QString& landscapeId);
-	
+
 	//! search for a texture in landscape directory, else global textures directory
 	//! @param basename The name of a texture file, e.g. "fog.png"
 	//! @param landscapeId The landscape ID (directory name) to which the texture belongs
-	//! @exception misc possibility of throwing boost:filesystem or "file not found" exceptions
+	//! @exception misc possibility of throwing "file not found" exceptions
 	const QString getTexturePath(const QString& basename, const QString& landscapeId);
 	float radius;
 	QString name;
@@ -93,13 +93,13 @@ protected:
 	LinearFader fogFader;
 	QString author;
 	QString description;
-	
+
 	typedef struct
 	{
 		StelTextureSP tex;
 		float texCoords[4];
 	} landscapeTexCoord;
-	
+
 	StelLocation location;
 	float angleRotateZ;
 	float angleRotateZOffset;
@@ -134,7 +134,7 @@ private:
 	float groundAngleShift;
 	float groundAngleRotateZ;
 	int drawGroundFirst;
-	bool tanMode;	// Whether the angles should be converted using tan instead of sin 
+	bool tanMode;	// Whether the angles should be converted using tan instead of sin
 };
 
 class LandscapeFisheye : public Landscape
@@ -145,7 +145,7 @@ public:
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(StelCore* core);
 	void create(const QString _name, bool _fullpath, const QString& _maptex,
-	            double _texturefov, double angleRotateZ);
+				double _texturefov, double angleRotateZ);
 private:
 
 	StelTextureSP mapTex;
@@ -161,7 +161,7 @@ public:
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(StelCore* core);
 	void create(const QString _name, bool _fullpath,
-	            const QString& _maptex, double angleRotateZ);
+				const QString& _maptex, double angleRotateZ);
 private:
 
 	StelTextureSP mapTex;

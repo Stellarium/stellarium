@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Guillaume Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -98,7 +98,7 @@ void CompletionLabel::selectFirst()
 void CompletionLabel::updateText()
 {
 	QString newText;
-	
+
 	// Regenerate the list with the selected item in bold
 	for (int i=0;i<values.size();++i)
 	{
@@ -119,7 +119,7 @@ SearchDialog::SearchDialog() : simbadReply(NULL)
 	simbadSearcher = new SimbadSearcher(this);
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
-	
+
 	greekLetters["alpha"] = QString(QChar(0x03B1));
 	greekLetters["beta"] = QString(QChar(0x03B2));
 	greekLetters["gamma"] = QString(QChar(0x03B3));
@@ -185,19 +185,19 @@ void SearchDialog::createDialogContent()
 	ui->RAAngleSpinBox->setDisplayFormat(AngleSpinBox::HMSLetters);
 	ui->DEAngleSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->DEAngleSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
-	
+
 	// This simply doesn't work. Probably a Qt bug
 	ui->RAAngleSpinBox->setFocusPolicy(Qt::NoFocus);
 	ui->DEAngleSpinBox->setFocusPolicy(Qt::NoFocus);
-	
+
 	connect(ui->RAAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->DEAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 }
 
 void SearchDialog::setVisible(bool v)
-{	
+{
 	StelDialog::setVisible(v);
-		
+
 	// Set the focus directly on the line edit
 	if (ui->lineEditSearchSkyObject->isVisible())
 		ui->lineEditSearchSkyObject->setFocus();
@@ -230,7 +230,7 @@ void SearchDialog::onTextChanged(const QString& text)
 		simbadReply=NULL;
 	}
 	simbadResults.clear();
-	
+
 	QString trimmedText = text.trimmed().toLower();
 	if (trimmedText.isEmpty())
 	{
@@ -244,7 +244,7 @@ void SearchDialog::onTextChanged(const QString& text)
 		simbadReply = simbadSearcher->lookup(trimmedText, 3);
 		onSimbadStatusChanged();
 		connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
-		
+
 		QString greekText = substituteGreek(trimmedText);
 		QStringList matches;
 		if(greekText != trimmedText)
@@ -254,10 +254,10 @@ void SearchDialog::onTextChanged(const QString& text)
 		}
 		else
 			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 5);
-		
+
 		ui->completionLabel->setValues(matches);
 		ui->completionLabel->selectFirst();
-		
+
 		// Update push button enabled state
 		ui->pushButtonGotoSearchSkyObject->setEnabled(true);
 	}
@@ -287,26 +287,26 @@ void SearchDialog::onSimbadStatusChanged()
 		// Update push button enabled state
 		ui->pushButtonGotoSearchSkyObject->setEnabled(!ui->completionLabel->isEmpty());
 	}
-	
+
 	if (simbadReply->getCurrentStatus()!=SimbadLookupReply::SimbadLookupQuerying)
 	{
 		disconnect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
 		delete simbadReply;
 		simbadReply=NULL;
-		
+
 		// Update push button enabled state
 		// Update push button enabled state
 		ui->pushButtonGotoSearchSkyObject->setEnabled(!ui->completionLabel->isEmpty());
 	}
 }
-	
+
 void SearchDialog::gotoObject()
 {
 	QString name = ui->completionLabel->getSelected();
-	
+
 	if (name.isEmpty())
 		return;
-	
+
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	if (simbadResults.contains(name))
 	{
@@ -327,7 +327,7 @@ void SearchDialog::gotoObject()
 			ui->lineEditSearchSkyObject->clear();
 			ui->completionLabel->clearValues();
 			// Can't point to home planet
-			if (newSelected[0].get()!= (StelObject*)(StelApp::getInstance().getCore()->getNavigator()->getHomePlanet()))
+			if (newSelected[0].data()!= (StelObject*)(StelApp::getInstance().getCore()->getNavigator()->getHomePlanet()))
 			{
 				mvmgr->moveTo(newSelected[0]->getEquinoxEquatorialPos(StelApp::getInstance().getCore()->getNavigator()),mvmgr->getAutoMoveDuration());
 				mvmgr->setFlagTracking(true);
@@ -343,27 +343,27 @@ void SearchDialog::gotoObject()
 
 bool SearchDialog::eventFilter(QObject *object, QEvent *event)
 {
-	if (event->type() == QEvent::KeyRelease) 
+	if (event->type() == QEvent::KeyRelease)
 	{
 		QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-		
+
 		// Kludgy workaround for Qt focusPolicy bug. Get rid of this if
 		// they ever fix it.
 		if(keyEvent->key() == Qt::Key_Tab)
 			ui->lineEditSearchSkyObject->setFocus(Qt::OtherFocusReason);
-		
-		if (keyEvent->key() == Qt::Key_Tab || keyEvent->key() == Qt::Key_Down) 
+
+		if (keyEvent->key() == Qt::Key_Tab || keyEvent->key() == Qt::Key_Down)
 		{
 			ui->completionLabel->selectNext();
 			event->accept();
 			return true;
-		} 
-		if (keyEvent->key() == Qt::Key_Up) 
+		}
+		if (keyEvent->key() == Qt::Key_Up)
 		{
 			ui->completionLabel->selectPrevious();
 			event->accept();
 			return true;
-		} 
+		}
 	}
 
 	return false;
@@ -386,7 +386,7 @@ QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterNa
 {
 	if(greekLetters.contains(potentialGreekLetterName))
 		return greekLetters[potentialGreekLetterName.toLower()];
-	
+
 	// There can be indices (e.g. "α1 Cen" instead of "α Cen A"), so strip
 	// any trailing digit.
 	int lastCharacterIndex = potentialGreekLetterName.length()-1;
@@ -397,6 +397,6 @@ QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterNa
 		if(greekLetters.contains(name))
 			return greekLetters[name.toLower()] + digit;
 	}
-	
+
 	return potentialGreekLetterName;
 }

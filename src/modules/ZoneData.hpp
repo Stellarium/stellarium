@@ -20,12 +20,11 @@
 #ifndef _ZONEDATA_HPP_
 #define _ZONEDATA_HPP_
 
-#include <boost/intrusive_ptr.hpp>
-
 // just for Vect3d.
 // Take any Vector class instead, if you want to use the star feature in a
 // different context.
 #include "VecMath.hpp"
+#include "StelObjectType.hpp"
 
 class StelObject;
 
@@ -59,11 +58,11 @@ struct ZoneData
 template <class Star>
 struct SpecialZoneData : public ZoneData
 {
-	boost::intrusive_ptr<StelObject> createStelObject(const Star *s) const
+	StelObjectP createStelObject(const Star *s) const
 	{
 		return s->createStelObject(*this);
 	}
-	
+
 	//! Get array of stars in this zone.
 	Star *getStars(void) const
 	{

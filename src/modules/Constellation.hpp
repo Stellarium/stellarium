@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -21,7 +21,6 @@
 #define _CONSTELLATION_HPP_
 
 #include <vector>
-#include <boost/intrusive_ptr.hpp>
 #include <QString>
 
 #include "StelObject.hpp"
@@ -36,7 +35,7 @@ class StelPainter;
 
 //! @class Constellation
 //! The Constellation class models a grouping of stars in a Sky Culture.
-//! Each Constellation consists of a list of stars identified by their 
+//! Each Constellation consists of a list of stars identified by their
 //! Hipparcos catalogue numbers, a name and optionally an abbreviated name,
 //! boundary shape and an artistic pictorial representation.
 class Constellation : public StelObject
@@ -45,7 +44,7 @@ class Constellation : public StelObject
 private:
 	Constellation();
 	~Constellation();
-    
+
 	// StelObject method to override
 	//! Get a string with data about the Constellation.
 	//! Constellations support the following InfoStringGroup flags:
@@ -67,32 +66,32 @@ private:
 	virtual Vec3d getJ2000EquatorialPos(const StelNavigator *nav) const {return XYZname;}
 
 	virtual double getAngularSize(const StelCore* core) const {Q_ASSERT(0); return 0;}; // TODO
-	
-	//! @param record string containing the following whitespace 
-	//! separated fields: abbreviation - a three character abbreviation 
+
+	//! @param record string containing the following whitespace
+	//! separated fields: abbreviation - a three character abbreviation
 	//! for the constellation, a number of lines, and a list of Hipparcos
-	//! catalogue numbers which, when connected form the lines of the 
+	//! catalogue numbers which, when connected form the lines of the
 	//! constellation.
 	//! @param starMgr a pointer to the StarManager object.
 	//! @return false if can't parse record, else true.
 	bool read(const QString& record, StarMgr *starMgr);
-	
+
 	//! Draw the constellation name
 	void drawName(StelFont* constfont, const StelPainter& sPainter) const;
 	//! Draw the constellation art
 	void drawArt(const StelPainter& prj) const;
 	//! Draw the constellation boundary
 	void drawBoundaryOptim(const StelProjectorP& prj) const;
-	
+
 	//! Test if a star is part of a Constellation.
 	//! This member tests to see if a star is one of those which make up
 	//! the lines of a Constellation.
-	//! @return a pointer to the constellation which the star is a part of, 
+	//! @return a pointer to the constellation which the star is a part of,
 	//! or NULL if the star is not part of a constellation
 	const Constellation* isStarIn(const StelObject*) const;
-	
+
 	//! Get the brightest star in a Constellation.
-	//! Checks all stars which make up the constellation lines, and returns 
+	//! Checks all stars which make up the constellation lines, and returns
 	//! a pointer to the one with the brightest apparent magnitude.
 	//! @return a pointer to the brightest star
 	StelObjectP getBrightestStarInConstellation(void) const;
@@ -104,7 +103,7 @@ private:
 	//! Get the short name for the Constellation (returns the abbreviation).
 	QString getShortName(void) const {return abbreviation;}
 	//! Draw the lines for the Constellation.
-	//! This method uses the coords of the stars (optimized for use thru 
+	//! This method uses the coords of the stars (optimized for use thru
 	//! the class ConstellationMgr only).
 	void drawOptim(const StelPainter& sPainter, const StelNavigator* nav) const;
 	//! Draw the art texture, optimized function to be called thru a constellation manager only.
@@ -135,7 +134,7 @@ private:
 	//! Get the current state of Constellation art rendering.
 	//! @return true if Constellation art rendering it turned on, else false.
 	bool getFlagArt(void) const {return artFader;}
-	
+
 	//! International name (translated using gettext)
 	QString nameI18;
 	//! Name in english
@@ -144,22 +143,22 @@ private:
 	QString nativeName;
 	//! Abbreviation (of the latin name for western constellations)
 	QString abbreviation;
-	//! Direction vector pointing on constellation name drawing position 
+	//! Direction vector pointing on constellation name drawing position
 	Vec3f XYZname;
 	Vec3d XYname;
 	//! Number of segments in the lines
 	unsigned int numberOfSegments;
 	//! List of stars forming the segments
 	StelObjectP* asterism;
-	
+
 	StelTextureSP artTexture;
 	SphericalTexturedConvexPolygon artPolygon;
-	
+
 	//! Define whether art, lines, names and boundary must be drawn
 	LinearFader artFader, lineFader, nameFader, boundaryFader;
 	std::vector<std::vector<Vec3f> *> isolatedBoundarySegments;
 	std::vector<std::vector<Vec3f> *> sharedBoundarySegments;
-	
+
 	//! Currently we only need one color for all constellations, this may change at some point
 	static Vec3f lineColor;
 	static Vec3f labelColor;

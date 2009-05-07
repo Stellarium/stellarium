@@ -67,7 +67,7 @@ void StelNavigator::init()
 
 	defaultLocationID = conf->value("init_location/location","Paris, Paris, France").toString();
 	position = new StelObserver(StelApp::getInstance().getLocationMgr().locationForSmallString(defaultLocationID));
-	
+
 	setTimeNow();
 	setAltAzVisionDirection(Vec3f(1,1e-05,0.2));
 	// Compute transform matrices between coordinates systems
@@ -86,10 +86,10 @@ void StelNavigator::init()
 			Q_ASSERT(0);
 		}
 	}
-	
+
 	initViewPos = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
 	setAltAzVisionDirection(initViewPos);
-	
+
 	// we want to be able to handle the old style preset time, recorded as a double
 	// jday, or as a more human readable string...
 	bool ok;
@@ -112,7 +112,7 @@ void StelNavigator::init()
 	else if (startupTimeMode=="today")
 		setTodayTime(getInitTodayTime());
 
-	// we previously set the time to "now" already, so we don't need to 
+	// we previously set the time to "now" already, so we don't need to
 	// explicitly do it if the startupTimeMode=="now".
 }
 
@@ -125,7 +125,7 @@ void StelNavigator::setDefaultLocationID(const QString& id)
 	Q_ASSERT(conf);
 	conf->setValue("init_location/location", id);
 }
-	
+
 //! Set stellarium time to current real world time
 void StelNavigator::setTimeNow()
 {
@@ -181,7 +181,7 @@ void StelNavigator::moveObserverToSelected(void)
 	Q_ASSERT(objmgr);
 	if (objmgr->getWasSelected())
 	{
-		Planet* pl = dynamic_cast<Planet*>(objmgr->getSelectedObject()[0].get());
+		Planet* pl = dynamic_cast<Planet*>(objmgr->getSelectedObject()[0].data());
 		if (pl)
 		{
 			// We need to move to the selected planet. Try to generate a location from the current one
@@ -255,7 +255,7 @@ void StelNavigator::decreaseTimeSpeed()
 	else if (s>0. && s<=JD_SECOND) s=0.;
 	setTimeRate(s);
 }
-	
+
 void StelNavigator::increaseTimeSpeedLess()
 {
 	double s = getTimeRate();
@@ -275,7 +275,7 @@ void StelNavigator::decreaseTimeSpeedLess()
 	else if (s>0. && s<=JD_SECOND) s=0.;
 	setTimeRate(s);
 }
-	
+
 ////////////////////////////////////////////////////////////////////////////////
 void StelNavigator::setAltAzVisionDirection(const Vec3d& _pos)
 {
@@ -312,13 +312,13 @@ void StelNavigator::updateTime(double deltaTime)
 	// Fix time limits to -100000 to +100000 to prevent bugs
 	if (JDay>38245309.499988) JDay = 38245309.499988;
 	if (JDay<-34803211.500012) JDay = -34803211.500012;
-	
+
 	if (position->isObserverLifeOver())
 	{
 		// Unselect if the new home planet is the previously selected object
 		StelObjectMgr* objmgr = GETSTELMODULE(StelObjectMgr);
 		Q_ASSERT(objmgr);
-		if (objmgr->getWasSelected() && objmgr->getSelectedObject()[0].get()==position->getHomePlanet())
+		if (objmgr->getWasSelected() && objmgr->getSelectedObject()[0].data()==position->getHomePlanet())
 		{
 			objmgr->unSelect();
 		}
@@ -339,17 +339,17 @@ void StelNavigator::updateTransformMatrices(void)
 	matEquinoxEquToJ2000 = matVsop87ToJ2000 * position->getRotEquatorialToVsop87();
 	matJ2000ToEquinoxEqu = matEquinoxEquToJ2000.transpose();
 	matJ2000ToAltAz = matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;
-	
+
 	matHeliocentricEclipticToEquinoxEqu = matJ2000ToEquinoxEqu * matVsop87ToJ2000 * Mat4d::translation(-position->getCenterVsop87Pos());
 
 	// These two next have to take into account the position of the observer on the earth
 	Mat4d tmp = matJ2000ToVsop87 * matEquinoxEquToJ2000 * matAltAzToEquinoxEqu;
 
 	matAltAzToHeliocentricEcliptic =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
-	                      Mat4d::translation(Vec3d(0.,0., position->getDistanceFromCenter()));
+						  Mat4d::translation(Vec3d(0.,0., position->getDistanceFromCenter()));
 
 	matHeliocentricEclipticToAltAz =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
-	                      Mat4d::translation(-position->getCenterVsop87Pos());
+						  Mat4d::translation(-position->getCenterVsop87Pos());
 }
 
 void StelNavigator::setStartupTimeMode(const QString& s)
@@ -390,9 +390,9 @@ void StelNavigator::updateModelViewMat(void)
 	u.normalize();
 
 	matAltAzModelView.set(s[0],u[0],-f[0],0.,
-	                     s[1],u[1],-f[1],0.,
-	                     s[2],u[2],-f[2],0.,
-	                     0.,0.,0.,1.);
+						 s[1],u[1],-f[1],0.,
+						 s[2],u[2],-f[2],0.,
+						 0.,0.,0.,1.);
 }
 
 

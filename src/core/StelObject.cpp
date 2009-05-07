@@ -28,15 +28,6 @@
 #include <QRegExp>
 #include <QDebug>
 
-void intrusive_ptr_add_ref(StelObject* p)
-{
-	p->retain();
-}
-
-void intrusive_ptr_release(StelObject* p)
-{
-	p->release();
-}
 
 Vec3d StelObject::getEquinoxEquatorialPos(const StelNavigator* nav) const
 {
@@ -66,21 +57,21 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 {
 	QString res;
 	const StelNavigator* nav = core->getNavigator();
-	
+
 	if (flags&RaDecJ2000)
 	{
 		double dec_j2000, ra_j2000;
 		StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getJ2000EquatorialPos(nav));
 		res += q_("RA/DE (J2000): %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true), StelUtils::radToDmsStr(dec_j2000,true)) + "<br>";
 	}
-	
+
 	if (flags&RaDecOfDate)
 	{
 		double dec_equ, ra_equ;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(nav));
 		res += q_("RA/DE (of date): %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ)) + "<br>";
 	}
-	
+
 	if (flags&HourAngle)
 	{
 		double dec_sideral, ra_sideral;
@@ -88,7 +79,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		ra_sideral = 2.*M_PI-ra_sideral;
 		res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) + "<br>";
 	}
-	
+
 	if (flags&AltAzi)
 	{
 		// calculate alt az
@@ -96,7 +87,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		StelUtils::rectToSphe(&az,&alt,getAltAzPos(nav));
 		az = 3.*M_PI - az;  // N is zero, E is 90 degrees
 		if (az > M_PI*2)
-			az -= M_PI*2;    
+			az -= M_PI*2;
 		res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + "<br>";
 	}
 	return res;

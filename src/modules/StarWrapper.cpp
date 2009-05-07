@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -38,10 +38,10 @@ template<typename T> inline bool isNan(T value)
 template<typename T> inline bool isInf(T value)
 {
 	return std::numeric_limits<T>::has_infinity && value == std::numeric_limits<T>::infinity();
-} 
+}
 
 namespace BigStarCatalogExtension {
-	
+
 QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	const StelNavigator* nav = core->getNavigator();
@@ -50,9 +50,9 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 
 	if (flags&Magnitude)
 		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(nav), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
-	
+
 	oss << getPositionInfoString(core, flags);
-	
+
 	StelObject::postProcessInfoString(str, flags);
 
 	return str;
@@ -70,7 +70,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 {
 	QString str;
 	const StelNavigator* nav = core->getNavigator();
-	
+
 	QTextStream oss(&str);
 	if (s->hip)
 	{
@@ -104,16 +104,16 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if ((flags&Name) || (flags&CatalogNumber))
 			oss << "</h2>";
 	}
-	
+
 	if (flags&Magnitude)
 		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(nav), 'f', 2),
-		                                                QString::number(s->getBV(), 'f', 2)) << "<br>";
-	
+														QString::number(s->getBV(), 'f', 2)) << "<br>";
+
 	if ((flags&AbsoluteMagnitude) && s->plx && !isNan(s->plx) && !isInf(s->plx))
 		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(nav)+5.*(1.+std::log10(0.00001*s->plx)), 0, 'f', 2) << "<br>";
-	
+
 	oss << getPositionInfoString(core, flags);
-	
+
 	if (s->spInt && flags&Extra1)
 	{
 		oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->spInt)) << "<br>";
@@ -121,28 +121,28 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	if ((flags&Distance) && s->plx && !isNan(s->plx) && !isInf(s->plx))
 		oss << q_("Distance: %1 Light Years").arg((AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->plx*((0.00001/3600)*(M_PI/180))), 0, 'f', 2) << "<br>";
-	
+
 	if (s->plx && flags&Extra2)
 		oss << q_("Parallax: %1\"").arg(0.00001*s->plx, 0, 'f', 5) << "<br>";
-	
+
 	StelObject::postProcessInfoString(str, flags);
 
 	return str;
 }
 
 StelObjectP Star1::createStelObject(const SpecialZoneArray<Star1> *a,
-                                    const SpecialZoneData<Star1> *z) const {
-  return StelObjectP(new StarWrapper1(a,z,this));
+									const SpecialZoneData<Star1> *z) const {
+  return StelObjectP(new StarWrapper1(a,z,this), true);
 }
 
 StelObjectP Star2::createStelObject(const SpecialZoneArray<Star2> *a,
-                                    const SpecialZoneData<Star2> *z) const {
-  return StelObjectP(new StarWrapper2(a,z,this));
+									const SpecialZoneData<Star2> *z) const {
+  return StelObjectP(new StarWrapper2(a,z,this), true);
 }
 
 StelObjectP Star3::createStelObject(const SpecialZoneArray<Star3> *a,
-                                    const SpecialZoneData<Star3> *z) const {
-  return StelObjectP(new StarWrapper3(a,z,this));
+									const SpecialZoneData<Star3> *z) const {
+  return StelObjectP(new StarWrapper3(a,z,this), true);
 }
 
 
