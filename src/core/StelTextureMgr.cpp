@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2006 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -35,7 +35,7 @@ extern "C" {
 #include <QDebug>
 #include <QThread>
 #include <QSettings>
-				 				 
+
 // Initialize statics
 static PngLoader pngLoader;
 static JpgLoader jpgLoader;
@@ -74,7 +74,7 @@ void StelTextureMgr::init()
 {
 	// Get whether non-power-of-2 and non square 2D textures are supported on this video card
 	isNoPowerOfTwoAllowed = GLEE_ARB_texture_non_power_of_two || GLEE_VERSION_2_0;
-	
+
 	// Check vendor and renderer
 	QString glRenderer((char*)glGetString(GL_RENDERER));
 	QString glVendor((char*)glGetString(GL_VENDOR));
@@ -118,7 +118,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename)
 {
 	if (afilename.isEmpty())
 		return StelTextureSP();
-	
+
 	StelTextureSP tex = initTex();
 	try
 	{
@@ -139,14 +139,14 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename)
 	}
 
 	tex->downloaded = true;
-	
+
 	if (tex->fullPath.startsWith(":/"))
 	{
 		QFile tmpF(tex->fullPath);
 		tmpF.open(QIODevice::ReadOnly);
 		tex->downloadedData = tmpF.readAll();
 	}
-	
+
 	// Simply load everything
 	if (tex->imageLoad() && tex->glLoad())
 		return tex;
@@ -157,13 +157,13 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename)
 
 
 /*************************************************************************
- Load an image from a file and create a new texture from it in a new thread. 
+ Load an image from a file and create a new texture from it in a new thread.
 *************************************************************************/
 StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const QString& fileExtension, bool lazyLoading)
-{	
+{
 	if (url.isEmpty())
 		return StelTextureSP();
-	
+
 	StelTextureSP tex = initTex();
 	if (!url.startsWith("http://"))
 	{
@@ -217,7 +217,7 @@ bool StelTextureMgr::reScale(StelTexture* tex)
 	{
 		switch (tex->dynamicRangeMode)
 		{
-			case (StelTextureTypes::Linear):
+			case (StelTexture::Linear):
 			{
 				if (tex->internalFormat==1)
 				{
@@ -240,11 +240,11 @@ bool StelTextureMgr::reScale(StelTexture* tex)
 				qWarning() << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath;
 				return false;
 			}
-			case (StelTextureTypes::MinmaxQuantile):
+			case (StelTexture::MinmaxQuantile):
 			{
 				// Compute the image histogram
-				int* histo = (int*)calloc(sizeof(int), 1<<bitpix); 
-				
+				int* histo = (int*)calloc(sizeof(int), 1<<bitpix);
+
 				if (tex->internalFormat==1)
 				{
 					// We assume unsigned char = GLubyte
@@ -265,7 +265,7 @@ bool StelTextureMgr::reScale(StelTexture* tex)
 					qWarning() << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath;
 					return false;
 				}
-				
+
 				// From the histogram, compute the Quantile cut at values minQuantile and maxQuantile
 				const double minQuantile = 0.01;
 				const double maxQuantile = 0.99;
@@ -282,7 +282,7 @@ bool StelTextureMgr::reScale(StelTexture* tex)
 						break;
 					}
 				}
-				
+
 				thresh = (int)((1.-maxQuantile)*nbPix);
 				int maxI = 0;
 				// Finish at 1 to ignore zeroed region in the image
@@ -296,9 +296,9 @@ bool StelTextureMgr::reScale(StelTexture* tex)
 					}
 				}
 				free(histo);
-				
+
 				qDebug() << "minCut=" << minCut << " maxCut=" << maxCut;
-				
+
 				if (tex->internalFormat==1)
 				{
 					double scaling = 255./(maxCut-minCut);
@@ -369,14 +369,14 @@ bool StelTextureMgr::loadImage(StelTexture* tex)
 	texInfo.internalFormat = tex->internalFormat;
 	texInfo.texels = tex->texels;
 	texInfo.fullPath = tex->fullPath;
-			
+
 	if (!loadFuncIter.value()->loadImage(tex->fullPath, texInfo))
 	{
 		qWarning() << "Image loading failed for file: " << tex->fullPath;
 		tex->texels = NULL;
 		return false;
 	}
-	
+
 	// Update texture parameters from TexInfo
 	tex->format = texInfo.format;
 	tex->width = texInfo.width;
@@ -384,7 +384,7 @@ bool StelTextureMgr::loadImage(StelTexture* tex)
 	tex->type = texInfo.type;
 	tex->internalFormat = texInfo.internalFormat;
 	tex->texels = texInfo.texels;
-	
+
 	if (!tex->texels)
 	{
 		qWarning() << "Image loading returned empty texels for file: " << tex->fullPath;
@@ -398,7 +398,7 @@ bool StelTextureMgr::loadImage(StelTexture* tex)
 		tex->texels = NULL;
 		return false;
 	}
-	
+
 	// Repair texture size if non power of 2 is not allowed by the video driver
 	if (!isNoPowerOfTwoAllowed && (!StelUtils::isPowerOfTwo(tex->height) || !StelUtils::isPowerOfTwo(tex->width)))
 	{
@@ -406,18 +406,18 @@ bool StelTextureMgr::loadImage(StelTexture* tex)
 		int w = StelUtils::getBiggerPowerOfTwo(tex->width);
 		int h = StelUtils::getBiggerPowerOfTwo(tex->height);
 		//qDebug() << "Resize to " << w << "x" << h;
-		
+
 		GLubyte* texels2 = (GLubyte *)calloc (sizeof (GLubyte) * tex->internalFormat,  w*h);
 		if (texels2==NULL)
 		{
-			qWarning() << "Insufficient memory for image data allocation: need to allocate array of " 
-			           << w << "x" << h << " with " << sizeof (GLubyte) * tex->internalFormat 
-			           << " bytes per pixels.";
+			qWarning() << "Insufficient memory for image data allocation: need to allocate array of "
+					   << w << "x" << h << " with " << sizeof (GLubyte) * tex->internalFormat
+					   << " bytes per pixels.";
 			TexMalloc::free(tex->texels);
 			tex->texels = NULL;
 			return false;
 		}
-		
+
 		// Copy data into the power of two buffer
 		for (int j=0;j<tex->height;++j)
 		{
@@ -441,7 +441,7 @@ bool StelTextureMgr::loadImage(StelTexture* tex)
 				}
 			}
 		}
-		
+
 		// Update the texture coordinates because the new texture does not occupy the whole buffer
 		tex->texCoordinates[0].set((double)tex->width/w, 0.);
 		tex->texCoordinates[1].set(0., 0.);
@@ -453,12 +453,12 @@ bool StelTextureMgr::loadImage(StelTexture* tex)
 		tex->texels = texels2;
 	}
 
-	// Check that the image size is compatible with the hardware 
+	// Check that the image size is compatible with the hardware
 	if (tex->width>maxTextureSize)
 	{
 		qWarning() << "Warning: texture " << tex->fullPath << " is larger than " << maxTextureSize << " pixels and might be not supported.";
 	}
-	
+
 	// The glLoading will be done later in the main thread
 	return true;
 }
@@ -554,7 +554,7 @@ bool PngLoader::loadImage(const QString& filename, TexInfo& texinfo)
 		qWarning() << "There was an error while loading PNG image: " << texinfo.fullPath;
 		return false;
 	}
-			
+
 	/* setup libpng for using standard C fread() function
 	   with our FILE pointer */
 	png_init_io (png_ptr, fp);
@@ -596,10 +596,10 @@ bool PngLoader::loadImage(const QString& filename, TexInfo& texinfo)
 	// is evel, and does not work for AMD64
 	png_uint_32 width,height;
 	png_get_IHDR (png_ptr, info_ptr,
-	              &width,
-	              &height,
-	              &bit_depth, &color_type,
-	              NULL, NULL, NULL);
+				  &width,
+				  &height,
+				  &bit_depth, &color_type,
+				  NULL, NULL, NULL);
 	texinfo.width = width;
 	texinfo.height = height;
 
@@ -634,7 +634,7 @@ bool PngLoader::loadImage(const QString& filename, TexInfo& texinfo)
 		// Badness
 		Q_ASSERT(0);
 	}
-	
+
 	/* we can now allocate memory for storing pixel data */
 	texinfo.texels = (GLubyte *)TexMalloc::malloc (sizeof (GLubyte) * texinfo.width * texinfo.height * texinfo.internalFormat);
 	if (!texinfo.texels)
@@ -644,7 +644,7 @@ bool PngLoader::loadImage(const QString& filename, TexInfo& texinfo)
 		png_destroy_read_struct (&png_ptr, &info_ptr, NULL);
 		return false;
 	}
-	
+
 	/* setup a pointer array.  Each one points at the begining of a row. */
 	row_pointers = (png_bytep *)malloc (sizeof (png_bytep) * texinfo.height);
 	if (!row_pointers)
@@ -654,11 +654,11 @@ bool PngLoader::loadImage(const QString& filename, TexInfo& texinfo)
 		png_destroy_read_struct (&png_ptr, &info_ptr, NULL);
 		return false;
 	}
-	
+
 	for (i = 0; i < texinfo.height; ++i)
 	{
 		row_pointers[i] = (png_bytep)(texinfo.texels +
-		                              ((texinfo.height - (i + 1)) * texinfo.width * texinfo.internalFormat));
+									  ((texinfo.height - (i + 1)) * texinfo.width * texinfo.internalFormat));
 	}
 
 	/* read pixel data using row pointers */
@@ -749,7 +749,7 @@ bool JpgLoader::loadImage(const QString& filename, TexInfo& texinfo)
 	/* configure error manager */
 	jerr.pub.error_exit = err_exit;
 	texinfo.texels = NULL;
-	
+
 	if (setjmp(jerr.setjmp_buffer))
 	{
 		qWarning() << "Error: couldn't read jpeg file \"" << filename << "\"!";
@@ -789,13 +789,13 @@ bool JpgLoader::loadImage(const QString& filename, TexInfo& texinfo)
 		texinfo.format = GL_RGB;
 
 	texinfo.texels = (GLubyte *)malloc (sizeof (GLubyte) * texinfo.width
-	                                    * texinfo.height * texinfo.internalFormat);
+										* texinfo.height * texinfo.internalFormat);
 
 	/* extract each scanline of the image */
 	for (int i = 0; i < texinfo.height; ++i)
 	{
 		JSAMPROW j = (texinfo.texels +
-		     ((texinfo.height - (i + 1)) * texinfo.width * texinfo.internalFormat));
+			 ((texinfo.height - (i + 1)) * texinfo.width * texinfo.internalFormat));
 		jpeg_read_scanlines (&cinfo, &j, 1);
 	}
 
@@ -916,7 +916,7 @@ bool JpgLoader::loadFromMemory(const QByteArray& data, TexInfo& texinfo)
 	jpeg_read_header (&cinfo, TRUE);
 	jpeg_start_decompress (&cinfo);
 
-  	/* Initialize image's member variables and allocate memory for pixels */
+	/* Initialize image's member variables and allocate memory for pixels */
 	texinfo.width = cinfo.image_width;
 	texinfo.height = cinfo.image_height;
 	texinfo.internalFormat = cinfo.num_components;
@@ -924,7 +924,7 @@ bool JpgLoader::loadFromMemory(const QByteArray& data, TexInfo& texinfo)
 	texinfo.texels = (GLubyte *)TexMalloc::malloc (sizeof (GLubyte) * texinfo.width * texinfo.height * texinfo.internalFormat);
 
 	// qWarning() << texinfo.width << texinfo.height << texinfo.internalFormat << texinfo.format;
-	
+
 	/* Read scanlines */
 	for (i = 0; i < texinfo.height; ++i)
 	{

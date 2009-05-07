@@ -84,8 +84,8 @@ SolarSystem::~SolarSystem()
 	sun = NULL;
 	moon = NULL;
 	earth = NULL;
-	Planet::hintCircleTex.reset();
-	Planet::texEarthShadow.reset();
+	Planet::hintCircleTex.clear();
+	Planet::texEarthShadow.clear();
 }
 
 /*************************************************************************
@@ -119,8 +119,8 @@ void SolarSystem::init()
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
 	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", false).toBool());
 	setFlagTrails(conf->value("astro/flag_object_trails", false).toBool());
-	startTrails(conf->value("astro/flag_object_trails", false).toBool());	
-	
+	startTrails(conf->value("astro/flag_object_trails", false).toBool());
+
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setMinFilter(GL_LINEAR);
@@ -132,7 +132,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 {
 	const StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	
+
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Planet");
 	if (!newSelected.empty())
 	{
@@ -142,59 +142,59 @@ void SolarSystem::drawPointer(const StelCore* core)
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos))
 			return;
-	
-		
+
+
 		StelPainter sPainter(prj);
 		glColor3f(1.0f,0.3f,0.3f);
-	
+
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
 		size+=26.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 
 		texPointer->bind();
 
-        glEnable(GL_TEXTURE_2D);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-        
-        glPushMatrix();
-        glTranslatef(screenpos[0], screenpos[1], 0.0f);
-        glRotatef(StelApp::getInstance().getTotalRunTime()*10.,0,0,-1);
+		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
-        glTranslatef(-size/2, -size/2,0.0f);
-        glRotatef(90,0,0,1);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-        glEnd ();
+		glPushMatrix();
+		glTranslatef(screenpos[0], screenpos[1], 0.0f);
+		glRotatef(StelApp::getInstance().getTotalRunTime()*10.,0,0,-1);
 
-        glRotatef(-90,0,0,1);
-        glTranslatef(0,size,0.0f);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-        glEnd ();
+		glTranslatef(-size/2, -size/2,0.0f);
+		glRotatef(90,0,0,1);
+		glBegin(GL_QUADS );
+			glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
+			glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
+			glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
+			glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
+		glEnd ();
 
-        glRotatef(-90,0,0,1);
-        glTranslatef(0, size,0.0f);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-        glEnd ();
+		glRotatef(-90,0,0,1);
+		glTranslatef(0,size,0.0f);
+		glBegin(GL_QUADS );
+			glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
+			glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
+			glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
+			glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
+		glEnd ();
 
-        glRotatef(-90,0,0,1);
-        glTranslatef(0,size,0);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-        glEnd ();
+		glRotatef(-90,0,0,1);
+		glTranslatef(0, size,0.0f);
+		glBegin(GL_QUADS );
+			glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
+			glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
+			glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
+			glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
+		glEnd ();
+
+		glRotatef(-90,0,0,1);
+		glTranslatef(0,size,0);
+		glBegin(GL_QUADS );
+			glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
+			glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
+			glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
+			glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
+		glEnd ();
 		glPopMatrix();
 	}
 }
@@ -221,23 +221,23 @@ void SolarSystem::loadPlanets()
 	}
 
 	// QSettings does not allow us to say that the sections of the file
-	// will be listed in the same order  as in the file like the old 
-	// InitParser used to so we can no longer assume that.  
+	// will be listed in the same order  as in the file like the old
+	// InitParser used to so we can no longer assume that.
 	//
 	// This means we must first decide what order to read the sections
 	// of the file in (each section contains one planet) to avoid setting
 	// the parent Planet* to one which has not yet been created.
 	//
-	// Stage 1: Make a map of body names back to the section names 
-	// which they come from. Also make a map of body name to parent body 
-	// name. These two maps can be made in a single pass through the 
+	// Stage 1: Make a map of body names back to the section names
+	// which they come from. Also make a map of body name to parent body
+	// name. These two maps can be made in a single pass through the
 	// sections of the file.
 	//
 	// Stage 2: Make an ordered list of section names such that each
 	// item is only ever dependent on items which appear earlier in the
 	// list.
 	// 2a: Make a QMultiMap relating the number of levels of dependency
-	//     to the body name, i.e. 
+	//     to the body name, i.e.
 	//     0 -> Sun
 	//     1 -> Mercury
 	//     1 -> Venus
@@ -251,7 +251,7 @@ void SolarSystem::loadPlanets()
 	//
 	// Stage 3: iterate over the ordered sections decided in stage 2,
 	// creating the planet objects from the QSettings data.
-	
+
 	// Stage 1 (as described above).
 	QMap<QString, QString> secNameMap;
 	QMap<QString, QString> parentMap;
@@ -272,7 +272,7 @@ void SolarSystem::loadPlanets()
 	{
 		const QString englishName = pd.value(sections.at(i)+"/name").toString();
 
-		// follow dependencies, incrementing level when we have one 
+		// follow dependencies, incrementing level when we have one
 		// till we run out.
 		QString p=englishName;
 		int level = 0;
@@ -304,7 +304,7 @@ void SolarSystem::loadPlanets()
 		const QString englishName = pd.value(secname+"/name").toString();
 		const QString strParent = pd.value(secname+"/parent").toString();
 		Planet *parent = NULL;
- 		if (strParent!="none")
+		if (strParent!="none")
 		{
 			// Look in the other planets the one named with strParent
 			vector<Planet*>::iterator iter = systemPlanets.begin();
@@ -351,8 +351,8 @@ void SolarSystem::loadPlanets()
 			} else {
 				pericenterDistance /= AU;
 				semi_major_axis = (eccentricity == 1.0)
-				                ? 0.0 // parabolic orbits have no semi_major_axis
-				                : pericenterDistance / (1.0-eccentricity);
+								? 0.0 // parabolic orbits have no semi_major_axis
+								: pericenterDistance / (1.0-eccentricity);
 			}
 			double meanMotion = pd.value(secname+"/orbit_MeanMotion",-1e100).toDouble();
 			double period;
@@ -360,11 +360,11 @@ void SolarSystem::loadPlanets()
 				period = pd.value(secname+"/orbit_Period",-1e100).toDouble();
 				if (period <= -1e100) {
 					meanMotion = (eccentricity == 1.0)
-					            ? 0.01720209895 * (1.5/pericenterDistance)
-					                            * sqrt(0.5/pericenterDistance)
-					            : (semi_major_axis > 0.0)
-					            ? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
-					            : 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
+								? 0.01720209895 * (1.5/pericenterDistance)
+												* sqrt(0.5/pericenterDistance)
+								: (semi_major_axis > 0.0)
+								? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
+								: 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
 					period = 2.0*M_PI/meanMotion;
 				} else {
 					meanMotion = 2.0*M_PI/period;
@@ -395,11 +395,11 @@ void SolarSystem::loadPlanets()
 
 			// when the parent is the sun use ecliptic rathe than sun equator:
 			const double parentRotObliquity = parent->getParent()
-			                                  ? parent->getRotObliquity()
-			                                  : 0.0;
+											  ? parent->getRotObliquity()
+											  : 0.0;
 			const double parent_rot_asc_node = parent->getParent()
-			                                  ? parent->getRotAscendingnode()
-			                                  : 0.0;
+											  ? parent->getRotAscendingnode()
+											  : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
 			if (parent->getParent()) {
 				const double c_obl = cos(parentRotObliquity);
@@ -417,20 +417,20 @@ void SolarSystem::loadPlanets()
 
 			// Create an elliptical orbit
 			EllipticalOrbit *orb = new EllipticalOrbit(pericenterDistance,
-			                                           eccentricity,
-			                                           inclination,
-			                                           ascending_node,
-			                                           arg_of_pericenter,
-			                                           mean_anomaly,
-			                                           period,
-			                                           epoch,
-			                                           parentRotObliquity,
-			                                           parent_rot_asc_node,
+													   eccentricity,
+													   inclination,
+													   ascending_node,
+													   arg_of_pericenter,
+													   mean_anomaly,
+													   period,
+													   epoch,
+													   parentRotObliquity,
+													   parent_rot_asc_node,
 													   parent_rot_j2000_longitude);
 			orbits.push_back(orb);
 
 			posfunc = posFuncType(orb, &EllipticalOrbit::positionAtTimevInVSOP87Coordinates);
-		} 
+		}
 		else if (funcName=="comet_orbit")
 		{
 			// Read the orbital elements
@@ -455,8 +455,8 @@ void SolarSystem::loadPlanets()
 				}
 			} else {
 				semi_major_axis = (eccentricity == 1.0)
-				                ? 0.0 // parabolic orbits have no semi_major_axis
-				                : pericenterDistance / (1.0-eccentricity);
+								? 0.0 // parabolic orbits have no semi_major_axis
+								: pericenterDistance / (1.0-eccentricity);
 			}
 			double meanMotion = pd.value(secname+"/orbit_MeanMotion",-1e100).toDouble();
 			if (meanMotion <= -1e100) {
@@ -470,11 +470,11 @@ void SolarSystem::loadPlanets()
 						// in case of parent=sun: use Gaussian gravitational constant
 						// for calculating meanMotion:
 						meanMotion = (eccentricity == 1.0)
-						            ? 0.01720209895 * (1.5/pericenterDistance)
-						                            * sqrt(0.5/pericenterDistance)
-						            : (semi_major_axis > 0.0)
-						            ? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
-						            : 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
+									? 0.01720209895 * (1.5/pericenterDistance)
+													* sqrt(0.5/pericenterDistance)
+									: (semi_major_axis > 0.0)
+									? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
+									: 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
 					}
 				} else {
 					meanMotion = 2.0*M_PI/period;
@@ -500,34 +500,34 @@ void SolarSystem::loadPlanets()
 			const double arg_of_pericenter = pd.value(secname+"/orbit_ArgOfPericenter").toDouble()*(M_PI/180.0);
 			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
 			const double parentRotObliquity = parent->getParent()
-			                                  ? parent->getRotObliquity()
-			                                  : 0.0;
+											  ? parent->getRotObliquity()
+											  : 0.0;
 			const double parent_rot_asc_node = parent->getParent()
-			                                  ? parent->getRotAscendingnode()
-			                                  : 0.0;
+											  ? parent->getRotAscendingnode()
+											  : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
-                        if (parent->getParent()) {
-                           const double c_obl = cos(parentRotObliquity);
-                           const double s_obl = sin(parentRotObliquity);
-                           const double c_nod = cos(parent_rot_asc_node);
-                           const double s_nod = sin(parent_rot_asc_node);
-                           const Vec3d OrbitAxis0( c_nod,       s_nod,        0.0);
-                           const Vec3d OrbitAxis1(-s_nod*c_obl, c_nod*c_obl,s_obl);
-                           const Vec3d OrbitPole(  s_nod*s_obl,-c_nod*s_obl,c_obl);
+						if (parent->getParent()) {
+						   const double c_obl = cos(parentRotObliquity);
+						   const double s_obl = sin(parentRotObliquity);
+						   const double c_nod = cos(parent_rot_asc_node);
+						   const double s_nod = sin(parent_rot_asc_node);
+						   const Vec3d OrbitAxis0( c_nod,       s_nod,        0.0);
+						   const Vec3d OrbitAxis1(-s_nod*c_obl, c_nod*c_obl,s_obl);
+						   const Vec3d OrbitPole(  s_nod*s_obl,-c_nod*s_obl,c_obl);
 						   const Vec3d J2000Pole(StelNavigator::matJ2000ToVsop87.multiplyWithoutTranslation(Vec3d(0,0,1)));
-                           Vec3d J2000NodeOrigin(J2000Pole^OrbitPole);
-                           J2000NodeOrigin.normalize();
-                           parent_rot_j2000_longitude = atan2(J2000NodeOrigin*OrbitAxis1,J2000NodeOrigin*OrbitAxis0);
-                        }
+						   Vec3d J2000NodeOrigin(J2000Pole^OrbitPole);
+						   J2000NodeOrigin.normalize();
+						   parent_rot_j2000_longitude = atan2(J2000NodeOrigin*OrbitAxis1,J2000NodeOrigin*OrbitAxis0);
+						}
 			CometOrbit *orb = new CometOrbit(pericenterDistance,
-			                                 eccentricity,
-			                                 inclination,
-			                                 ascending_node,
-			                                 arg_of_pericenter,
-			                                 time_at_pericenter,
-			                                 meanMotion,
-			                                 parentRotObliquity,
-			                                 parent_rot_asc_node,
+											 eccentricity,
+											 inclination,
+											 ascending_node,
+											 arg_of_pericenter,
+											 time_at_pericenter,
+											 meanMotion,
+											 parentRotObliquity,
+											 parent_rot_asc_node,
 											 parent_rot_j2000_longitude);
 			orbits.push_back(orb);
 
@@ -541,7 +541,7 @@ void SolarSystem::loadPlanets()
 			posfunc = posFuncType(get_mercury_helio_coordsv);
 			osculatingFunc = &get_mercury_helio_osculating_coords;
 		}
-        
+
 		if (funcName=="venus_special") {
 			posfunc = posFuncType(get_venus_helio_coordsv);
 			osculatingFunc = &get_venus_helio_osculating_coords;
@@ -680,27 +680,27 @@ void SolarSystem::loadPlanets()
 		{
 			Vec3d J2000NPole;
 			StelUtils::spheToRect(J2000NPoleRA,J2000NPoleDE,J2000NPole);
-		  
+
 			Vec3d vsop87Pole(StelNavigator::matJ2000ToVsop87.multiplyWithoutTranslation(J2000NPole));
-		  
+
 			double ra, de;
 			StelUtils::rectToSphe(&ra, &de, vsop87Pole);
-		  
+
 			rotObliquity = (M_PI_2 - de);
 			rotAscNode = (ra + M_PI_2);
-		  
+
 			// qDebug() << "\tCalculated rotational obliquity: " << rotObliquity*180./M_PI << endl;
 			// qDebug() << "\tCalculated rotational ascending node: " << rotAscNode*180./M_PI << endl;
 		}
 
 		p->setRotationElements(
-		    pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 24.).toDouble()).toDouble()/24.,
-		    pd.value(secname+"/rot_rotation_offset",0.).toDouble(),
-		    pd.value(secname+"/rot_epoch", J2000).toDouble(),
-		    rotObliquity,
-		    rotAscNode,
-		    pd.value(secname+"/rot_precession_rate",0.).toDouble()*M_PI/(180*36525),
-		    pd.value(secname+"/orbit_visualization_period",0.).toDouble());
+			pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 24.).toDouble()).toDouble()/24.,
+			pd.value(secname+"/rot_rotation_offset",0.).toDouble(),
+			pd.value(secname+"/rot_epoch", J2000).toDouble(),
+			rotObliquity,
+			rotAscNode,
+			pd.value(secname+"/rot_precession_rate",0.).toDouble()*M_PI/(180*36525),
+			pd.value(secname+"/orbit_visualization_period",0.).toDouble());
 
 
 		if (pd.value(secname+"/rings", 0).toBool()) {
@@ -717,7 +717,7 @@ void SolarSystem::loadPlanets()
 	// special case: load earth shadow texture
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture("earth-shadow.png");
-	
+
 	qDebug() << "Loaded" << readOk << "/" << totalPlanets << "planet orbits";
 }
 
@@ -743,7 +743,7 @@ void SolarSystem::computePositions(double date, const Vec3d& observerPos)
 		{
 			(*iter)->computePosition(date);
 		}
-	}  
+	}
 	computeTransMatrices(date, observerPos);
 }
 
@@ -758,7 +758,7 @@ void SolarSystem::computeTransMatrices(double date, const Vec3d& observerPos)
 			const double light_speed_correction = ((*iter)->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
 			(*iter)->computeTransMatrix(date-light_speed_correction);
 		}
-  	}
+	}
 	else
 	{
 		for (std::vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
@@ -774,13 +774,13 @@ void SolarSystem::draw(StelCore* core)
 {
 	if (!flagShow)
 		return;
-	
+
 	StelNavigator* nav = core->getNavigator();
 	Planet::setFont(&planetNameFont);
 
 	// Compute each Planet distance to the observer
 	Vec3d obsHelioPos = nav->getObserverHeliocentricEclipticPos();
-	
+
 	vector<Planet*>::iterator iter;
 	iter = systemPlanets.begin();
 	while (iter != systemPlanets.end())
@@ -810,7 +810,7 @@ void SolarSystem::setStelStyle(const StelStyle& style)
 	// Load colors from config file
 	QSettings* conf = StelApp::getInstance().getSettings();
 	QString section = style.confSectionName;
-	
+
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/planet_names_color", defaultColor).toString()));
 	setOrbitsColor(StelUtils::strToVec3f(conf->value(section+"/planet_orbits_color", defaultColor).toString()));
@@ -846,7 +846,7 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 	vector<Planet*>::const_iterator iter = systemPlanets.begin();
 	while (iter != systemPlanets.end())
 	{
-		if( (*iter)->getEnglishName() == name ) return (*iter); 
+		if( (*iter)->getEnglishName() == name ) return (*iter);
 		++iter;
 	}
 	return NULL;
@@ -887,7 +887,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 	QList<StelObjectP> result;
 	if (!getFlagPlanets())
 		return result;
-		
+
 	Vec3d v = core->getNavigator()->j2000ToEquinoxEqu(vv);
 	v.normalize();
 	double cosLimFov = cos(limitFov * M_PI/180.);
@@ -923,7 +923,7 @@ QString SolarSystem::getPlanetHashString(void)
 {
 	QString str;
 	QTextStream oss(&str);
-	
+
 	vector <Planet *>::iterator iter;
 	for (iter = systemPlanets.begin(); iter != systemPlanets.end(); ++iter)
 	{
@@ -931,7 +931,7 @@ QString SolarSystem::getPlanetHashString(void)
 		{
 			oss << (*iter)->getParent()->getEnglishName() << " : ";
 		}
-		
+
 		oss << (*iter)->getEnglishName() << endl;
 		oss << (*iter)->getEnglishName() << endl;
 	}
@@ -959,7 +959,7 @@ void SolarSystem::setFlagTrails(bool b)
 bool SolarSystem::getFlagTrails(void) const
 {
 	for (std::vector<Planet*>::const_iterator iter = systemPlanets.begin();
-	     iter != systemPlanets.end(); iter++ ) {
+		 iter != systemPlanets.end(); iter++ ) {
 		if ((*iter)->getFlagTrail()) return true;
 	}
 	return false;
@@ -1018,11 +1018,11 @@ void SolarSystem::setFlagOrbits(bool b)
 		// fade out non-selected ones
 		vector<Planet*>::iterator iter;
 		for (iter = systemPlanets.begin();
-		     iter != systemPlanets.end(); iter++ )
+			 iter != systemPlanets.end(); iter++ )
 		{
 			if (selected == (*iter)) (*iter)->setFlagOrbits(b);
 			else (*iter)->setFlagOrbits(false);
-		}		
+		}
 	}
 }
 
@@ -1033,10 +1033,10 @@ void SolarSystem::setFlagLightTravelTime(bool b)
 
 void SolarSystem::setSelected(StelObject* obj)
 {
-    if (obj && obj->getType() == "Planet")
-    	selected = obj;
-    else
-    	selected = NULL;
+	if (obj && obj->getType() == "Planet")
+		selected = obj;
+	else
+		selected = NULL;
 	// Undraw other objects hints, orbit, trails etc..
 	setFlagHints(getFlagHints());
 	setFlagOrbits(getFlagOrbits());
@@ -1097,9 +1097,9 @@ QStringList SolarSystem::listMatchingObjectsI18n(const QString& objPrefix, int m
 {
 	QStringList result;
 	if (maxNbItem==0) return result;
-	
+
 	QString objw = objPrefix.toUpper();
-	
+
 	vector <Planet*>::const_iterator iter;
 	for (iter=systemPlanets.begin(); iter!=systemPlanets.end(); ++iter)
 	{
@@ -1122,7 +1122,7 @@ void SolarSystem::selectedObjectChangeCallBack(StelModuleSelectAction action)
 }
 
 // Activate/Deactivate planets display
-void SolarSystem::setFlagPlanets(bool b) 
+void SolarSystem::setFlagPlanets(bool b)
 {
 	flagShow=b;
 }
@@ -1149,7 +1149,7 @@ void SolarSystem::setFlagMoonScale(bool b)
 	flagMoonScale = b;
 }
 
-// Set/Get Moon display scaling factor 
+// Set/Get Moon display scaling factor
 void SolarSystem::setMoonScale(float f)
 {
 	moonScale = f;

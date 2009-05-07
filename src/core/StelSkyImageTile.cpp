@@ -37,6 +37,11 @@
  StelFont* StelSkyImageTile::debugFont = NULL;
 #endif
 
+StelSkyImageTile::StelSkyImageTile()
+{
+	initCtor();
+}
+
 void StelSkyImageTile::initCtor()
 {
 	minResolution = -1;
@@ -155,7 +160,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		{
 			foreach (const SphericalRegionP poly, skyConvexPolygons)
 			{
-				const SphericalPolygonBase& polyBase = *(static_cast<const SphericalPolygonBase*>(poly.get()));
+				const SphericalPolygonBase& polyBase = *(static_cast<const SphericalPolygonBase*>(poly.data()));
 				if (viewPortPoly->contains(polyBase))
 				{
 					intersectScreen = true;
@@ -269,7 +274,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, const StelPainter& sPainter)
 
 	glColor4fv(color);
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
-		sPainter.drawSphericalRegion(poly.get(), StelPainter::SphericalPolygonDrawModeTextureFill);
+		sPainter.drawSphericalRegion(poly.data(), StelPainter::SphericalPolygonDrawModeTextureFill);
 
 #ifdef DEBUG_STELSKYIMAGE_TILE
 	if (debugFont==NULL)
