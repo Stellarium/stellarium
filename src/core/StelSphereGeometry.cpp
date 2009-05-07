@@ -19,6 +19,7 @@
 
 #include "StelSphereGeometry.hpp"
 #include "StelUtils.hpp"
+#include "StelJsonParser.hpp"
 #include <QDebug>
 
 #if defined(__APPLE__) && defined(__MACH__)
@@ -26,7 +27,6 @@
 #else
 #include <GL/glu.h>	/* Header File For The GLU Library */
 #endif
-
 
 // Returns whether a SphericalPolygon is contained into the region.
 bool SphericalCap::contains(const SphericalPolygonBase& polyBase) const
@@ -60,7 +60,7 @@ bool SphericalCap::intersects(const SphericalPolygonBase& polyBase) const
 		// No points of the polygon are inside the halfspace
 		if (d<=0)
 			return false;
-		
+
 		const QVector<Vec3d>& contour = cvx->getConvexContour();
 		for (int i=0;i<contour.size()-1;++i)
 		{
@@ -69,7 +69,7 @@ bool SphericalCap::intersects(const SphericalPolygonBase& polyBase) const
 		}
 		if (!sideHalfSpaceIntersects(contour.last(), contour.first(), *this))
 			return false;
-		
+
 		// Warning!!!! There is a last case which is not managed!
 		// When all the points of the polygon are outside the circle but the halfspace of the corner the closest to the
 		// circle intersects the circle halfspace..
@@ -170,7 +170,7 @@ bool SphericalPolygonBase::intersects(const SphericalPolygonBase& mpoly) const
 {
 	return !getIntersection(mpoly).getVertexArray().isEmpty();
 }
-	
+
 // Return a new SphericalPolygon consisting of the intersection of this and the given SphericalPolygon.
 SphericalPolygon SphericalPolygonBase::getIntersection(const SphericalPolygonBase& mpoly) const
 {
@@ -240,7 +240,7 @@ struct GluTessCallbackData
 	SphericalPolygon* thisPolygon;	//! Reference to the instance of SphericalPolygon being tesselated.
 	bool edgeFlag;					//! Used to store temporary edgeFlag found by the tesselator.
 	QVector<double*> tempVertices;	//! Use to contain the combined vertices
-	
+
 	~GluTessCallbackData()
 	{
 		foreach (double* dp, tempVertices)
@@ -276,7 +276,7 @@ void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, Sph
 {
 	triangleVertices.clear();
 	edgeFlags.clear();
-	
+
 	// Use GLU tesselation functions to transform the polygon into a list of triangles
 	GLUtesselator* tess = gluNewTess();
 	gluTessCallback(tess, GLU_TESS_VERTEX_DATA, (GLvoid(APIENTRY*)()) &vertexCallback);
@@ -299,7 +299,7 @@ void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, Sph
 	}
 	gluTessEndPolygon(tess);
 	gluDeleteTess(tess);
-	
+
 	// There should always be an edge flag matching each vertex.
 	Q_ASSERT(triangleVertices.size() == edgeFlags.size());
 #ifndef NDEBUG
@@ -338,7 +338,7 @@ void SphericalTexturedPolygon::setContours(const QVector<QVector<TextureVertex> 
 	triangleVertices.clear();
 	edgeFlags.clear();
 	textureCoords.clear();
-	
+
 	// Use GLU tesselation functions to transform the polygon into a list of triangles
 	GLUtesselator* tess = gluNewTess();
 	gluTessCallback(tess, GLU_TESS_VERTEX_DATA, (GLvoid(APIENTRY*)()) &vertexTextureCallback);
@@ -360,7 +360,7 @@ void SphericalTexturedPolygon::setContours(const QVector<QVector<TextureVertex> 
 	}
 	gluTessEndPolygon(tess);
 	gluDeleteTess(tess);
-	
+
 	// There should always be a texture coord matching each vertex.
 	Q_ASSERT(triangleVertices.size() == edgeFlags.size());
 	Q_ASSERT(triangleVertices.size() == textureCoords.size());
@@ -394,7 +394,7 @@ QVector<bool> SphericalConvexPolygon::getEdgeFlagArray() const
 	p.setContour(contour);
 	return p.getEdgeFlagArray();
 }
-	
+
 // Check if the polygon is valid, i.e. it has no side >180
 bool SphericalConvexPolygon::checkValid() const
 {
@@ -522,7 +522,7 @@ Vec3d ConvexPolygon::getBarycenter() const
 // 		push_back(e2^e1);
 // 		push_back(e3^e2);
 // 		push_back(e0^e3);
-// 
+//
 // 		// Warning: vectors not normalized while they should be
 // 		// In this case it works because d==0 for each SphericalCap
 // 	}
@@ -618,4 +618,17 @@ bool planeIntersect2(const SphericalCap& h1, const SphericalCap& h2, Vec3d& p1, 
 	Q_ASSERT(fabs(p2.lengthSquared()-1.)<0.000001);
 
 	return true;
+}
+
+
+SphericalRegionP SphericalRegion::loadFromJson(QIODevice* in)
+{
+	StelJsonParser parser;
+	return loadFromQVariant(parser.parse(*in).toMap());
+}
+
+SphericalRegionP SphericalRegion::loadFromQVariant(const QVariantMap& map)
+{
+	Q_ASSERT(0); // Not implemented
+	return SphericalRegionP(new SphericalCap());
 }
