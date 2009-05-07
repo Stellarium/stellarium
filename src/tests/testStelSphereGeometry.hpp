@@ -34,11 +34,12 @@ private slots:
 	void testPlaneIntersect2();
 	void testSphericalPolygon();
 	void testConsistency();
-	
+	void testLoading();
+
 	void benchmarkContains();
 	void benchmarkCheckValid();
 	void benchmarkSphericalCap();
-	
+
 private:
 	SphericalPolygon holySquare;
 	SphericalPolygon bigSquare;
