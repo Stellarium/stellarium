@@ -27,9 +27,7 @@ void skipJson(QIODevice& input)
 	while (input.getChar(&c))
 	{
 		if (QChar(c).isSpace() || c=='\n')
-		{
 			continue;
-		}
 		else
 		{
 			if (c!='/')
@@ -42,9 +40,7 @@ void skipJson(QIODevice& input)
 				return;
 
 			if (c=='/')
-			{
 				input.readLine();
-			}
 			else
 			{
 				// We have a problem, we removed an '/'..
