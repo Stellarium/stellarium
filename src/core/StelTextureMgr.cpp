@@ -35,6 +35,7 @@ extern "C" {
 #include <QDebug>
 #include <QThread>
 #include <QSettings>
+#include <cstdlib>
 
 // Initialize statics
 static PngLoader pngLoader;
