@@ -64,7 +64,7 @@ bool tryReadChar(QIODevice& input, char c)
 
 	if (r == c)
 		return true;
-		
+
 	input.ungetChar(r);
 	return false;
 }
@@ -135,10 +135,10 @@ QVariant readOther(QIODevice& input)
 }
 
 // Parse the given input stream
-QVariant StelJsonParser::parse(QIODevice& input) const
+QVariant StelJsonParser::parse(QIODevice& input)
 {
 	skipJson(input);
-	
+
 	if (tryReadChar(input, '{'))
 	{
 		// We've got an object (a tuple)
@@ -153,17 +153,17 @@ QVariant StelJsonParser::parse(QIODevice& input) const
 			skipJson(input);
 			if (!tryReadChar(input, ':'))
 				throw std::runtime_error(qPrintable(QString("Expected ':' after a member name: ")+key));
-			
+
 			skipJson(input);
 			map.insert(key, parse(input));
 			skipJson(input);
-		
+
 			if (!tryReadChar(input, ','))
 				break;
 		}
-	
+
 		skipJson(input);
-	
+
 		if (!tryReadChar(input, '}'))
 			throw std::runtime_error("Expected '}' to close an object");
 		return map;
@@ -175,7 +175,7 @@ QVariant StelJsonParser::parse(QIODevice& input) const
 		skipJson(input);
 		if (tryReadChar(input, ']'))
 			return list;
-		
+
 		for (;;)
 		{
 			list.append(parse(input));
@@ -183,12 +183,12 @@ QVariant StelJsonParser::parse(QIODevice& input) const
 			if (!tryReadChar(input, ','))
 				break;
 		}
-	
+
 		skipJson(input);
-	
+
 		if (!tryReadChar(input, ']'))
 			throw std::runtime_error("Expected ']' to close an array");
-		
+
 		return list;
 	}
 	else if (tryReadChar(input, '\"'))
@@ -201,7 +201,7 @@ QVariant StelJsonParser::parse(QIODevice& input) const
 }
 
 // Serialize the passed QVariant as JSON into the output QIODevice
-void StelJsonParser::write(const QVariant& v, QIODevice& output, int indentLevel) const
+void StelJsonParser::write(const QVariant& v, QIODevice& output, int indentLevel)
 {
 	switch (v.type())
 	{
@@ -276,5 +276,58 @@ void StelJsonParser::write(const QVariant& v, QIODevice& output, int indentLevel
 			qWarning() << "Cannot serialize QVariant of type " << v.typeName() << " in JSON";
 			break;
 	}
-		
+}
+
+
+JsonListIterator::JsonListIterator(QIODevice& input) : input(input), startPos(input.pos())
+{
+	skipJson(input);
+	if (!tryReadChar(input, '['))
+	{
+		reset();
+		throw std::runtime_error("Expected '[' to start a list iterator");
+	}
+}
+
+QVariant JsonListIterator::next() const
+{
+	skipJson(input);
+	tryReadChar(input, ',');
+	QVariant ret = StelJsonParser::parse(input);
+	return ret;
+}
+
+bool JsonListIterator::hasNext()
+{
+	skipJson(input);
+	return !tryReadChar(input, ']');
+}
+
+QVariant JsonListIterator::peekNext() const
+{
+	qint64 pos = input.pos();
+	QVariant ret = next();
+	input.seek(pos);
+	return ret;
+}
+
+bool JsonListIterator::reset()
+{
+	return input.seek(startPos);
+}
+
+void JsonListIterator::toBack()
+{
+	while(hasNext())
+		next();
+	char c;
+	input.getChar(&c);
+}
+void JsonListIterator::toFront()
+{
+	reset();
+	if(!tryReadChar(input, '['))
+		throw std::runtime_error("Expected '[' to start a list iterator");
+	char c;
+	input.getChar(&c);
 }
