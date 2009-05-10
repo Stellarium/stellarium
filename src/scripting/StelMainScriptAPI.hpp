@@ -23,6 +23,7 @@
 #include "ScriptSleeper.hpp"
 
 #include <QObject>
+#include <QVariant>
 
 //! Provide script API for Stellarium global functions.  Public slots in this class
 //! may be used in Stellarium scripts, and are accessed as member function to the
@@ -69,6 +70,13 @@ public slots:
 	//! @param spec "local" or "utc" - only has an effect when 
 	//! the ISO date type is used.
 	void setDate(const QString& dt, const QString& spec="utc");
+
+	//! get the simulation date and time as a string in ISO format, 
+	//! e.g. "2008-03-24T13:21:01"
+	//! @param spec if "utc", the returned string's timezone is UTC,
+	//! else it is local time.
+	//! @return the current simulation time.
+	QString getDate(const QString& spec="utc");
 		
 	//! Set time speed in JDay/sec
 	//! @param ts the new rate of passage of time as a multiple of real time.
@@ -108,6 +116,18 @@ public slots:
 	//! de-selected.
 	//! @param pointer whether or not to have the selection pointer enabled
 	void selectObjectByName(const QString& name, bool pointer=false);
+
+	//! Fetch a map with data about an object's position, magnitude and so on
+	//! @param name is the English name of the object for which data will be 
+	//! returned.
+	//! @return a map of object data.  Keys:
+	//! - altitude : altitude angle in decimal degrees
+	//! - azimuth : azimuth angle in decimal degrees
+	//! - ra : right ascension angle (current date frame) in decimal degrees
+	//! - dec : declenation angle in (current date frame) decimal degrees
+	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
+	//! - decJ2000 : declenation angle in (J2000 frame) decimal degrees
+	QVariantMap getObjectPosition(const QString& name);
 
 	//! Clear the display options, setting a "standard" view.
 	//! Preset states:

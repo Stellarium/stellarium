@@ -46,6 +46,7 @@ public slots:
 	void appendLogLine(const QString& s);
 	void includeBrowse();
 	void quickRun(int idx);
+	void rowColumnChanged();
 	
 protected:
 	Ui_scriptConsoleForm* ui;
