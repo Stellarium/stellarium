@@ -72,6 +72,7 @@ void ScriptConsole::createDialogContent()
 	ui->quickrunCombo->addItem(q_("natural"));
 	ui->quickrunCombo->addItem(q_("starchart"));
 
+	connect(ui->scriptEdit, SIGNAL(cursorPositionChanged()), this, SLOT(rowColumnChanged()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(loadScript()));
 	connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(saveScript()));
@@ -89,6 +90,7 @@ void ScriptConsole::createDialogContent()
 	connect(ui->preprocessSTSButton, SIGNAL(clicked()), this, SLOT(preprocessScript()));
 #endif
 	ui->tabs->setCurrentIndex(0);
+	ui->scriptEdit->setFocus();
 }
 
 void ScriptConsole::loadScript()
@@ -289,6 +291,12 @@ void ScriptConsole::quickRun(int idx)
 	{
 		appendLogLine("Can't run quick script (could not open temp file)");
 	}
+}
+
+void ScriptConsole::rowColumnChanged()
+{
+	ui->rowColumnLabel->setText(QString("R:%1 C:%2").arg(ui->scriptEdit->textCursor().blockNumber())
+	                                                .arg(ui->scriptEdit->textCursor().columnNumber()));
 }
 
 QString ScriptConsole::getFileMask()
