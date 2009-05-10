@@ -5,7 +5,7 @@
 // Description: An example script showing how to use the state_save.inc file
 //
 
-include("save_state.inc");
+include("../save_state.inc");
 include("status_label.inc");
 
 core.moveToAltAzi(20,55);

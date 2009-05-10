@@ -44,6 +44,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelNavigator.hpp"
+#include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -110,6 +111,11 @@ double StelMainScriptAPI::getJDay(void) const
 void StelMainScriptAPI::setDate(const QString& dt, const QString& spec)
 {
 	StelApp::getInstance().getCore()->getNavigator()->setJDay(jdFromDateString(dt, spec));
+}
+
+QString StelMainScriptAPI::getDate(const QString& spec)
+{
+	return StelUtils::jdToIsoString(getJDay());
 }
 
 //! Set time speed in JDay/sec
@@ -525,26 +531,59 @@ void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
 		omgr->findAndSelect(name);
 }
 
+QVariantMap StelMainScriptAPI::getObjectPosition(const QString& name)
+{
+	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	StelObjectP obj = omgr->searchByName(name);
+	QVariantMap map;
+
+	if (!obj)
+	{
+		debug("getObjectData WARNING - object not found: " + name);
+		map.insert("found", false);
+		return map;
+	}
+	else
+	{
+		map.insert("found", true);
+	}
+
+	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
+	Vec3d pos;
+	double ra, dec, alt, azi;
+
+	// ra/dec
+	pos = obj->getEquinoxEquatorialPos(nav);
+	StelUtils::rectToSphe(&ra, &dec, pos);
+	map.insert("ra", ra*180./M_PI);
+	map.insert("dec", dec*180./M_PI);
+
+	// ra/dec in J2000
+	pos = obj->getJ2000EquatorialPos(nav);
+	StelUtils::rectToSphe(&ra, &dec, pos);
+	map.insert("raJ2000", ra*180./M_PI);
+	map.insert("decJ2000", dec*180./M_PI);
+
+	// altitude/azimuth
+	pos = obj->getAltAzPos(nav);
+	StelUtils::rectToSphe(&azi, &alt, pos);
+	map.insert("altitude", alt*180./M_PI);
+	map.insert("azimuth", azi*180./M_PI);
+	
+	return map;
+}
+
 void StelMainScriptAPI::clear(const QString& state)
 {
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-	Q_ASSERT(lmgr);
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	Q_ASSERT(ssmgr);
 	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
-	Q_ASSERT(mmgr);
 	StelSkyDrawer* skyd = StelApp::getInstance().getCore()->getSkyDrawer();
-	Q_ASSERT(skyd);
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
-	Q_ASSERT(cmgr);
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
-	Q_ASSERT(smgr);
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
-	Q_ASSERT(nmgr);
 	GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
-	Q_ASSERT(glmgr);
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	Q_ASSERT(nav);
 
 	if (state.toLower() == "natural")
 	{
