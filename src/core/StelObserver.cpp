@@ -35,51 +35,51 @@
 class ArtificialPlanet : public Planet
 {
 public:
-	ArtificialPlanet(const Planet &orig);
-	void setDest(const Planet &dest);
+	ArtificialPlanet(const PlanetP& orig);
+	void setDest(const PlanetP& dest);
 	void computeAverage(double f1);
 private:
 	void setRot(const Vec3d &r);
-	static Vec3d GetRot(const Planet *p);
-	const Planet *dest;
+	static Vec3d getRot(const Planet* p);
+	PlanetP dest;
 	const QString orig_name;
 	const QString orig_name_i18n;
 };
 
-ArtificialPlanet::ArtificialPlanet(const Planet &orig) : 
+ArtificialPlanet::ArtificialPlanet(const PlanetP& orig) :
 		Planet("", 0, 0, 0, Vec3f(0,0,0), 0, "", "",
 		posFuncType(), 0, false, true, false), dest(0),
-		orig_name(orig.getEnglishName()), orig_name_i18n(orig.getNameI18n())
+		orig_name(orig->getEnglishName()), orig_name_i18n(orig->getNameI18n())
 {
 	radius = 0;
 	// set parent = sun:
-	if (orig.getParent())
+	if (orig->getParent())
 	{
-		parent = orig.getParent();
+		parent = orig->getParent();
 		while (parent->getParent())
 			parent = parent->getParent();
 	}
-	else 
+	else
 	{
-		parent = &orig; // sun
+		parent = orig; // sun
 	}
-	re = orig.getRotationElements();
-	setRotEquatorialToVsop87(orig.getRotEquatorialToVsop87());
-	setHeliocentricEclipticPos(orig.getHeliocentricEclipticPos());
+	re = orig->getRotationElements();
+	setRotEquatorialToVsop87(orig->getRotEquatorialToVsop87());
+	setHeliocentricEclipticPos(orig->getHeliocentricEclipticPos());
 }
 
-void ArtificialPlanet::setDest(const Planet &dest)
+void ArtificialPlanet::setDest(const PlanetP& dest)
 {
-	ArtificialPlanet::dest = &dest;
-	englishName = QString("%1->%2").arg(orig_name).arg(dest.getEnglishName());
-	nameI18 = QString("%1->%2").arg(orig_name_i18n).arg(dest.getNameI18n());
-	
+	ArtificialPlanet::dest = dest;
+	englishName = QString("%1->%2").arg(orig_name).arg(dest->getEnglishName());
+	nameI18 = QString("%1->%2").arg(orig_name_i18n).arg(dest->getNameI18n());
+
 	// rotation:
-	const RotationElements &r(dest.getRotationElements());
+	const RotationElements &r(dest->getRotationElements());
 	lastJD = StelApp::getInstance().getCore()->getNavigator()->getJDay();
-	
+
 	re.offset = r.offset + fmod(re.offset - r.offset + 360.0*( (lastJD-re.epoch)/re.period - (lastJD-r.epoch)/r.period), 360.0);
-	
+
 	re.epoch = r.epoch;
 	re.period = r.period;
 	if (re.offset - r.offset < -180.f) re.offset += 360.f; else
@@ -114,7 +114,7 @@ void ArtificialPlanet::setRot(const Vec3d &r)
 	setRotEquatorialToVsop87(m);
 }
 
-Vec3d ArtificialPlanet::GetRot(const Planet *p)
+Vec3d ArtificialPlanet::getRot(const Planet* p)
 {
 	const Mat4d m(p->getRotEquatorialToVsop87());
 	const double cos_r1 = sqrt(m.r[0]*m.r[0]+m.r[8]*m.r[8]);
@@ -142,10 +142,10 @@ void ArtificialPlanet::computeAverage(double f1)
 	const double f2 = 1.0 - f1;
 	// position
 	setHeliocentricEclipticPos(getHeliocentricEclipticPos()*f1 + dest->getHeliocentricEclipticPos()*f2);
-	
+
 	// 3 Euler angles
-	Vec3d a1(GetRot(this));
-	const Vec3d a2(GetRot(dest));
+	Vec3d a1(getRot(this));
+	const Vec3d a2(getRot(dest.data()));
 	if (a1[0]-a2[0] >  M_PI)
 		a1[0] -= 2.0*M_PI;
 	else
@@ -157,7 +157,7 @@ void ArtificialPlanet::computeAverage(double f1)
 		if (a1[2]-a2[2] < -M_PI)
 			a1[2] += 2.0*M_PI;
 	setRot(a1*f1 + a2*f2);
-	
+
 	// rotation offset
 	re.offset = f1*re.offset + f2*dest->getRotationElements().offset;
 }
@@ -178,6 +178,11 @@ StelObserver::StelObserver(const StelLocation &loc) : currentLocation(loc)
 
 StelObserver::~StelObserver()
 {
+}
+
+const QSharedPointer<Planet> StelObserver::getHomePlanet(void) const
+{
+	return planet;
 }
 
 Vec3d StelObserver::getCenterVsop87Pos(void) const
@@ -211,11 +216,11 @@ SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLoc
 		moveStartLocation(startLoc), moveTargetLocation(target), artificialPlanet(NULL), transitSeconds(atransitSeconds)
 {
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-	Planet *targetPlanet = ssystem->searchByEnglishName(moveTargetLocation.planetName);
+	PlanetP targetPlanet = ssystem->searchByEnglishName(moveTargetLocation.planetName);
 	if (moveStartLocation.planetName!=moveTargetLocation.planetName)
 	{
-		Planet *startPlanet = ssystem->searchByEnglishName(moveStartLocation.planetName);
-		if (startPlanet==NULL || targetPlanet==NULL)
+		PlanetP startPlanet = ssystem->searchByEnglishName(moveStartLocation.planetName);
+		if (startPlanet.isNull() || targetPlanet.isNull())
 		{
 			qWarning() << "Can't move from planet " + moveStartLocation.planetName + " to planet " + moveTargetLocation.planetName + " because it is unknown";
 			timeToGo = -1.;	// Will abort properly the move
@@ -226,9 +231,9 @@ SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLoc
 			}
 			return;
 		}
-		
-		artificialPlanet = new ArtificialPlanet(*startPlanet);
-		artificialPlanet->setDest(*targetPlanet);
+
+		artificialPlanet = new ArtificialPlanet(startPlanet);
+		artificialPlanet->setDest(targetPlanet);
 	}
 	planet = targetPlanet;
 	timeToGo = transitSeconds;
@@ -239,17 +244,17 @@ SpaceShipObserver::~SpaceShipObserver()
 	if (artificialPlanet)
 		delete artificialPlanet;
 	artificialPlanet=NULL;
-	planet = NULL;
+	planet.clear();;
 }
 
 void SpaceShipObserver::update(double deltaTime)
 {
 	timeToGo -= deltaTime;
-	
-	// If move is over 
+
+	// If move is over
 	if (timeToGo <= 0.)
 	{
-		timeToGo = 0.;	
+		timeToGo = 0.;
 		currentLocation = moveTargetLocation;
 	}
 	else
@@ -266,7 +271,7 @@ void SpaceShipObserver::update(double deltaTime)
 			currentLocation.name = moveStartLocation.name + " -> " + moveTargetLocation.name;
 			currentLocation.planetName = moveTargetLocation.planetName;
 		}
-		
+
 		// Move the lon/lat/alt on the planet
 		const double moveToMult = 1.-(timeToGo/transitSeconds);
 		currentLocation.latitude = moveStartLocation.latitude - moveToMult*(moveStartLocation.latitude-moveTargetLocation.latitude);
@@ -274,3 +279,5 @@ void SpaceShipObserver::update(double deltaTime)
 		currentLocation.altitude = int(moveStartLocation.altitude - moveToMult*(moveStartLocation.altitude-moveTargetLocation.altitude));
 	}
 }
+
+const QSharedPointer<Planet> SpaceShipObserver::getHomePlanet() const {return (isObserverLifeOver() || artificialPlanet==NULL)  ? planet : QSharedPointer<Planet>((Planet*)artificialPlanet);}

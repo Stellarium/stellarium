@@ -486,7 +486,7 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 			JD = StelApp::getInstance().getCore()->getNavigator()->getJDay();
 
 		if (nowRe.capturedTexts().at(8) == "sidereal")
-			dayLength = StelApp::getInstance().getCore()->getNavigator()->getHomePlanet()->getSiderealDay();
+			dayLength = StelApp::getInstance().getCore()->getNavigator()->getLocalSideralDayLength();
 
 		QString unitString = nowRe.capturedTexts().at(6);
 		if (unitString == "seconds" || unitString == "second")
@@ -569,7 +569,7 @@ QVariantMap StelMainScriptAPI::getObjectPosition(const QString& name)
 	StelUtils::rectToSphe(&azi, &alt, pos);
 	map.insert("altitude", alt*180./M_PI);
 	map.insert("azimuth", azi*180./M_PI);
-	
+
 	return map;
 }
 

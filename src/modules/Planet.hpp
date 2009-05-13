@@ -23,11 +23,9 @@
 #include <QString>
 
 #include "StelObject.hpp"
-#include "StelToneReproducer.hpp"
 #include "VecMath.hpp"
 #include "callbacks.hpp"
 #include "StelFader.hpp"
-#include "StelTranslator.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 
@@ -42,6 +40,7 @@ typedef void (OsulatingFunctType)(double jd0,double jd,double xyz[3]);
 
 class StelFont;
 class StelPainter;
+class StelTranslator;
 
 struct TrailPoint
 {
@@ -54,14 +53,14 @@ struct TrailPoint
 class RotationElements
 {
 public:
-    RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), precessionRate(0.) {}
-    float period;          // rotation period
-    float offset;          // rotation at epoch
-    double epoch;
-    float obliquity;       // tilt of rotation axis w.r.t. ecliptic
-    float ascendingNode;   // long. of ascending node of equator on the ecliptic
-    float precessionRate;  // rate of precession of rotation axis in rads/day
-    double siderealPeriod; // sidereal period (Planet year in earth days)
+	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), precessionRate(0.) {}
+	float period;          // rotation period
+	float offset;          // rotation at epoch
+	double epoch;
+	float obliquity;       // tilt of rotation axis w.r.t. ecliptic
+	float ascendingNode;   // long. of ascending node of equator on the ecliptic
+	float precessionRate;  // rate of precession of rotation axis in rads/day
+	double siderealPeriod; // sidereal period (Planet year in earth days)
 };
 
 // Class to manage rings for planets like saturn
@@ -84,18 +83,18 @@ class Planet : public StelObject
 public:
 	friend class SolarSystem;
 	Planet(const QString& englishName,
-	       int flagLighting,
-	       double radius,
-	       double oblateness,
-	       Vec3f color,
-	       float albedo,
-	       const QString& texMapName,
-	       const QString& texHaloName,
-	       posFuncType _coordFunc,
-	       OsulatingFunctType *osculatingFunc,
-	       bool closeOrbit,
-	       bool hidden, 
-	       bool hasAtmosphere);
+		   int flagLighting,
+		   double radius,
+		   double oblateness,
+		   Vec3f color,
+		   float albedo,
+		   const QString& texMapName,
+		   const QString& texHaloName,
+		   posFuncType _coordFunc,
+		   OsulatingFunctType *osculatingFunc,
+		   bool closeOrbit,
+		   bool hidden,
+		   bool hasAtmosphere);
 
 	~Planet();
 
@@ -126,27 +125,24 @@ public:
 	virtual QString getNameI18n(void) const {return nameI18;}
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
-	
+
 	///////////////////////////////////////////////////////////////////////////
 	// Methods of SolarSystem object
 	//! Translate planet name using the passed translator
-	void translateName(StelTranslator& trans) {nameI18 = trans.qtranslate(englishName);}
-	
+	void translateName(StelTranslator& trans);
+
 	// Draw the Planet
 	void draw(StelCore* core, float maxMagLabels);
-	
+
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to Planet
-	//! Set the planet's parent, i.e. the one around which it's orbiting
-	void setParent(Planet* parent);
-	
 	//! Get the radius of the planet in AU.
 	//! @return the radius of the planet in astronomical units.
 	double getRadius(void) const {return radius;}
 	double getSiderealDay(void) const {return re.period;}
-	
+
 	const QString& getTextMapName() const {return texMapName;}
-	
+
 	// Compute the z rotation to use from equatorial to geographic coordinates
 	double getSiderealTime(double jd) const;
 	Mat4d getRotEquatorialToVsop87(void) const;
@@ -165,7 +161,7 @@ public:
 	double getPhase(Vec3d obsPos) const;
 	// Get the angular size of the spheroid of the planet (i.e. without the rings)
 	double getSpheroidAngularSize(const StelCore* core) const;
-				
+
 	// Set the orbital elements
 	void setRotationElements(float _period, float _offset, double _epoch,
 		float _obliquity, float _ascendingNode, float _precessionRate, double _siderealPeriod);
@@ -188,24 +184,24 @@ public:
 	void setSphereScale(float s) {sphereScale = s;}
 	float getSphereScale(void) const {return sphereScale;}
 
-	const Planet* getParent(void) const {return parent;}
+	const QSharedPointer<Planet> getParent(void) const {return parent;}
 
 	static void setFont(StelFont* f) {planetNameFont = f;}
-	
+
 	static void setLabelColor(const Vec3f& lc) {labelColor = lc;}
 	static const Vec3f& getLabelColor(void) {return labelColor;}
 
 	void update(int deltaTime);
-	
+
 	void setFlagHints(bool b){hintFader = b;}
 	bool getFlagHints(void) const {return hintFader;}
-	
+
 	void setFlagLabels(bool b){flagLabels = b;}
 	bool getFlagLabels(void) const {return flagLabels;}
-	
+
 	///////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
-	
+
 	///// Trail related code
 	// Should move to a TrailPath class which works on a StelObject, not on a Planet
 	void updateTrail(const StelNavigator* nav);
@@ -224,7 +220,7 @@ public:
 	double lastTrailJD;
 	bool firstPoint;               // if need to take first point of trail still
 	LinearFader trailFader;
-	
+
 	///// Orbit related code
 	// Should move to an OrbitPath class which works on a SolarSystemObject, not a Planet
 	void setFlagOrbits(bool b){orbitFader = b;}
@@ -238,25 +234,25 @@ public:
 	double deltaOrbitJD;
 	bool orbitCached;              // whether orbit calculations are cached for drawing orbit yet
 	bool closeOrbit;               // whether to connect the beginning of the orbit line to
-	                               // the end: good for elliptical orbits, bad for parabolic
-	                               // and hyperbolic orbits
-	
+								   // the end: good for elliptical orbits, bad for parabolic
+								   // and hyperbolic orbits
+
 	static Vec3f orbitColor;
 	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
 	static const Vec3f& getOrbitColor() {return orbitColor;}
-	
+
 protected:
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
-	
+
 	// draw earth shadow on moon for lunar eclipses
-	void drawEarthShadow(StelCore* core); 
-	
+	void drawEarthShadow(StelCore* core);
+
 	// Return the information string "ready to print" :)
 	QString getSkyLabel(const StelNavigator * nav) const;
-	
+
 	// Draw the 3d model. Call the proper functions if there are rings etc..
 	void draw3dModel(StelCore* core, const Mat4d& mat, float screenSz);
-	
+
 	// Draw the 3D sphere
 	void drawSphere(const StelPainter* painter, float screenSz);
 
@@ -271,7 +267,7 @@ protected:
 	double radius;                  // Planet radius in UA
 	double oneMinusOblateness;      // (polar radius)/(equatorial radius)
 	Vec3d eclipticPos;             // Position in UA in the rectangular ecliptic coordinate system
-	                                // centered on the parent Planet
+									// centered on the parent Planet
 	Vec3d screenPos;                // Used to store temporarily the 2D position on screen
 	Vec3d previousScreenPos;        // The position of this planet in the previous frame.
 	Vec3f color;
@@ -281,20 +277,20 @@ protected:
 	StelTextureSP texMap;             // Planet map texture
 	Ring* rings;                    // Planet rings
 	double distance;                // Temporary variable used to store the distance to a given point
-	                                // it is used for sorting while drawing
+									// it is used for sorting while drawing
 	float sphereScale;             // Artificial scaling for better viewing
 	double lastJD;
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
 	posFuncType coordFunc;
 	OsulatingFunctType *const osculatingFunc;
-	const Planet *parent;           // Planet parent i.e. sun for earth
-	QList<Planet*> satellites;      // satellites of the Planet
+	QSharedPointer<Planet> parent;           // Planet parent i.e. sun for earth
+	QList<QSharedPointer<Planet> > satellites;      // satellites of the Planet
 	LinearFader hintFader;
 	LinearFader labelsFader;        // Store the current state of the label for this planet
 	bool flagLabels;                // Define whether labels should be displayed
 	bool hidden;                    // useful for fake planets used as observation positions - not drawn or labeled
 	bool atmosphere;                // Does the planet have an atmosphere?
-	
+
 	static StelFont* planetNameFont; // Font for names
 	static Vec3f labelColor;
 	static StelTextureSP hintCircleTex;
