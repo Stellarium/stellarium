@@ -25,10 +25,8 @@
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 #include "StelGeodesicGrid.hpp"
-#include "SolarSystem.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "Planet.hpp"
 #include "StelPainter.hpp"
 
 #include <QSettings>
@@ -43,8 +41,8 @@ StelCore::StelCore() : geodesicGrid(NULL), currentProjectionType(ProjectionStere
 	toneConverter = new StelToneReproducer();
 	movementMgr = new StelMovementMgr(this);
 	movementMgr->init();
-	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);	
-	
+	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);
+
 	QSettings* conf = StelApp::getInstance().getSettings();
 	// Create and initialize the default projector params
 	QString tmpstr = conf->value("projection/viewport").toString();
@@ -54,16 +52,16 @@ StelCore::StelCore() : geodesicGrid(NULL), currentProjectionType(ProjectionStere
 	const int viewport_x = conf->value("projection/viewport_x", 0).toInt();
 	const int viewport_y = conf->value("projection/viewport_y", 0).toInt();
 	currentProjectorParams.viewportXywh.set(viewport_x,viewport_y,viewport_width,viewport_height);
-	
+
 	const double viewportCenterX = conf->value("projection/viewport_center_x",0.5*viewport_width).toDouble();
 	const double viewportCenterY = conf->value("projection/viewport_center_y",0.5*viewport_height).toDouble();
 	currentProjectorParams.viewportCenter.set(viewportCenterX, viewportCenterY);
 	currentProjectorParams.viewportFovDiameter = conf->value("projection/viewport_fov_diameter", qMin(viewport_width,viewport_height)).toDouble();
 	currentProjectorParams.fov = movementMgr->getInitFov();
-	
+
 	currentProjectorParams.flipHorz = conf->value("projection/flip_horz",false).toBool();
 	currentProjectorParams.flipVert = conf->value("projection/flip_vert",false).toBool();
-	
+
 	currentProjectorParams.gravityLabels = conf->value("viewing/flag_gravity_labels").toBool();
 }
 
@@ -85,16 +83,16 @@ StelCore::~StelCore()
 void StelCore::init()
 {
 	StelPainter::initSystemGLInfo();
-	
+
 	QSettings* conf = StelApp::getInstance().getSettings();
-	
+
 	// StelNavigator
 	navigation = new StelNavigator();
 	navigation->init();
-	
+
 	QString tmpstr = conf->value("projection/type", "stereographic").toString();
 	setCurrentProjectionTypeKey(tmpstr);
-	
+
 // 	double overwrite_max_fov = conf->value("projection/equal_area_max_fov",0.0).toDouble();
 // 	if (overwrite_max_fov > 360.0)
 // 		overwrite_max_fov = 360.0;
@@ -125,7 +123,7 @@ void StelCore::init()
 // 		overwrite_max_fov = 180.0;
 // 	if (overwrite_max_fov > 0.0)
 // 		MappingOrthographic::getMapping()->maxFov = overwrite_max_fov;
-	
+
 	skyDrawer = new StelSkyDrawer(this);
 	skyDrawer->init();
 	// Debug
@@ -138,7 +136,7 @@ void StelCore::init()
 // 	glShaderSource(fs, 1, &str, NULL);
 // 	glCompileShader(fs);
 // 	printLog(fs);
-// 
+//
 // 	sp = glCreateProgram();
 // 	glAttachShader(sp, fs);
 // 	glLinkProgram(sp);
@@ -162,7 +160,7 @@ const StelGeodesicGrid* StelCore::getGeodesicGrid(int maxLevel) const
 	}
 	return geodesicGrid;
 }
-	
+
 const StelProjectorP StelCore::getProjection2d() const
 {
 	StelProjectorP prj(new StelProjector2d());
@@ -176,7 +174,7 @@ const StelProjectorP StelCore::getProjection(const Mat4d& modelViewMat, Projecti
 {
 	if (projType==1000)
 		projType = currentProjectionType;
-	
+
 	StelProjectorP prj;
 	switch (projType)
 	{
@@ -212,11 +210,11 @@ const StelProjectorP StelCore::getProjection(const Mat4d& modelViewMat, Projecti
 	prj->init(currentProjectorParams);
 	return prj;
 }
-		
+
 // Get an instance of projector using the current display parameters from Navigation, StelMovementMgr
 const StelProjectorP StelCore::getProjection(FrameType frameType, ProjectionType projType) const
 {
-	
+
 	switch (frameType)
 	{
 		case FrameAltAz:
@@ -244,27 +242,23 @@ void StelCore::windowHasBeenResized(int width,int height)
 	currentProjectorParams.viewportCenter.set(0.5*width, 0.5*height);
 	currentProjectorParams.viewportFovDiameter = qMin(width,height);
 }
-	
+
 /*************************************************************************
  Update all the objects in function of the time
 *************************************************************************/
 void StelCore::update(double deltaTime)
 {
-	// Update the position of observation and time etc...
+	// Update the position of observation and time and recompute planet positions etc...
 	navigation->updateTime(deltaTime);
-
-	// Position of sun and all the satellites (ie planets)
-	SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
-	solsystem->computePositions(navigation->getJDay(), navigation->getHomePlanet()->getHeliocentricEclipticPos());
 
 	// Transform matrices between coordinates systems
 	navigation->updateTransformMatrices();
-	
+
 	// Update direction of vision/Zoom level
-	movementMgr->updateMotion(deltaTime);	
-	
+	movementMgr->updateMotion(deltaTime);
+
 	currentProjectorParams.fov = movementMgr->getCurrentFov();
-	
+
 	skyDrawer->update(deltaTime);
 }
 
@@ -277,9 +271,9 @@ void StelCore::preDraw()
 	// Init openGL viewing with fov, screen size and clip planes
 	currentProjectorParams.zNear = 0.000001;
 	currentProjectorParams.zFar = 50.;
-	
+
 	skyDrawer->preDraw();
-	
+
 	// Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
 	glClearColor(0,0,0,0);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -293,7 +287,7 @@ void StelCore::postDraw()
 {
 	StelPainter sPainter(getProjection(StelCore::FrameJ2000));
 	sPainter.drawViewportShape();
-	
+
 // 	// Inverted mode
 // 	glPixelTransferi(GL_RED_BIAS, 1);
 // 	glPixelTransferi(GL_GREEN_BIAS, 1);
@@ -301,11 +295,11 @@ void StelCore::postDraw()
 // 	glPixelTransferi(GL_RED_SCALE, -1);
 // 	glPixelTransferi(GL_GREEN_SCALE, -1);
 // 	glPixelTransferi(GL_BLUE_SCALE, -1);
-	
+
 // 	// Night red mode
 //  glPixelTransferf(GL_GREEN_SCALE, 0.1f);
 //  glPixelTransferf(GL_BLUE_SCALE, 0.1f);
-// 	
+//
 // 	glDisable(GL_TEXTURE_2D);
 // 	glShadeModel(GL_FLAT);
 // 	glDisable(GL_DEPTH_TEST);
@@ -315,7 +309,7 @@ void StelCore::postDraw()
 // 	glDisable(GL_DITHER);
 // 	glDisable(GL_ALPHA_TEST);
 // 	glRasterPos2i(0,0);
-// 	
+//
 // 	glReadBuffer(GL_BACK);
 // 	glDrawBuffer(GL_BACK);
 // 	glCopyPixels(1, 1, 200, 200, GL_COLOR);
@@ -337,13 +331,13 @@ void StelCore::setCurrentProjectionTypeKey(QString key)
 	movementMgr->setMaxFov(newMaxFov);
 	currentProjectorParams.fov = qMin(newMaxFov, savedFov);
 }
-	
+
 //! Get the current Mapping used by the Projection
 QString StelCore::getCurrentProjectionTypeKey(void) const
 {
 	return metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType")).key(currentProjectionType);
 }
-	
+
 //! Get the list of all the available projections
 QStringList StelCore::getAllProjectionTypeKeys() const
 {

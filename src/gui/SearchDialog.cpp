@@ -327,7 +327,7 @@ void SearchDialog::gotoObject()
 			ui->lineEditSearchSkyObject->clear();
 			ui->completionLabel->clearValues();
 			// Can't point to home planet
-			if (newSelected[0].data()!= (StelObject*)(StelApp::getInstance().getCore()->getNavigator()->getHomePlanet()))
+			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().name)
 			{
 				mvmgr->moveTo(newSelected[0]->getEquinoxEquatorialPos(StelApp::getInstance().getCore()->getNavigator()),mvmgr->getAutoMoveDuration());
 				mvmgr->setFlagTracking(true);

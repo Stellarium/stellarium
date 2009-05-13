@@ -28,17 +28,19 @@
 
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
+#include "Planet.hpp"
 
 class Orbit;
 class StelLoadingBar;
 class StelTranslator;
 class StelObject;
-class Planet;
 class StelFont;
 class StelCore;
 class StelProjector;
 class StelNavigator;
 class QSettings;
+
+typedef QSharedPointer<Planet> PlanetP;
 
 //! @class SolarSystem
 //! This StelObjectModule derivative is used to model SolarSystem boies.
@@ -65,23 +67,23 @@ public:
 	//! @return The maximum squared distance in pixels that any SolarSystem object
 	//! has travelled since the last update.
 	virtual void draw(StelCore *core);
-	
+
 	//! Update time-varying components.
 	//! This includes planet motion trails.
 	virtual void update(double deltaTime);
-	
+
 	//! Translate names.
 	virtual void updateI18n();
-	
+
 	//! Called when a new object is selected.
 	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::ReplaceSelection);
-	
+
 	//! Load a color scheme
 	virtual void setStelStyle(const StelStyle& style);
-	
+
 	//! Used to determine what order to draw the various StelModules.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
-	
+
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
 	//! Search for SolarSystem objects in some area around a point.
@@ -90,10 +92,10 @@ public:
 	//! defines the size of the area to search.
 	//! @param core the core object
 	//! @return A STL vector of SpelObjectP (pointers) containing all SolarSystem
-	//! objects found in the specified area. This vector is not sorted by distance 
+	//! objects found in the specified area. This vector is not sorted by distance
 	//! from v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
-	
+
 	//! Search for a SolarSystem object based on the localised name.
 	//! @param nameI18n the case in-sensistive translated planet name.
 	//! @return a StelObjectP for the object if found, else NULL.
@@ -103,9 +105,9 @@ public:
 	//! @param name the case in-sensistive English planet name.
 	//! @return a StelObjectP for the object if found, else NULL.
 	virtual StelObjectP searchByName(const QString& name) const;
-	
+
 	//! Find objects by translated name prefix.
-	//! Find and return the list of at most maxNbItem objects auto-completing 
+	//! Find and return the list of at most maxNbItem objects auto-completing
 	//! the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object.
 	//! @param maxNbItem the maximum number of returned object names.
@@ -125,17 +127,17 @@ public slots:
 	void setFlagTrails(bool b);
 	//! Get the current value of the flag which determines if planet trails are drawn or hidden.
 	bool getFlagTrails() const;
-	
+
 	//! Set flag which determines if planet hints are drawn or hidden along labels
 	void setFlagHints(bool b);
 	//! Get the current value of the flag which determines if planet hints are drawn or hidden along labels
-	bool getFlagHints() const;	
-	
+	bool getFlagHints() const;
+
 	//! Set flag which determines if planet labels are drawn or hidden.
 	void setFlagLabels(bool b);
 	//! Get the current value of the flag which determines if planet labels are drawn or hidden.
 	bool getFlagLabels() const;
-	
+
 	//! Set the amount of planet labels. The real amount is also proportional with FOV.
 	//! The limit is set in function of the planets magnitude
 	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
@@ -143,7 +145,7 @@ public slots:
 	//! Get the amount of planet labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
 	float getLabelsAmount(void) const {return labelsAmount;}
-	
+
 	//! Set flag which determines if planet orbits are drawn or hidden.
 	void setFlagOrbits(bool b);
 	//! Get the current value of the flag which determines if planet orbits are drawn or hidden.
@@ -151,37 +153,37 @@ public slots:
 
 	//! Set flag which determines if the light travel time calculation is used or not.
 	void setFlagLightTravelTime(bool b);
-	//! Get the current value of the flag which determines if light travel time 
+	//! Get the current value of the flag which determines if light travel time
 	//! calculation is used or not.
-	bool getFlagLightTravelTime(void) const {return flagLightTravelTime;}	
-	
+	bool getFlagLightTravelTime(void) const {return flagLightTravelTime;}
+
 	//! Set planet names font size.
 	void setFontSize(float newFontSize);
-	
+
 	//! Set the color used to draw planet labels.
 	void setLabelsColor(const Vec3f& c);
 	//! Get the current color used to draw planet labels.
 	const Vec3f& getLabelsColor(void) const;
-	
+
 	//! Set the color used to draw planet orbit lines.
 	void setOrbitsColor(const Vec3f& c);
 	//! Get the current color used to draw planet orbit lines.
 	Vec3f getOrbitsColor(void) const;
-	
+
 	//! Set the color used to draw planet trails.
 	void setTrailsColor(const Vec3f& c);
 	//! Get the current color used to draw planet trails.
 	Vec3f getTrailsColor(void) const;
-	
+
 	//! Set flag which determines if Earth's moon is scaled or not.
 	void setFlagMoonScale(bool b);
 	//! Get the current value of the flag which determines if Earth's moon is scaled or not.
 	bool getFlagMoonScale(void) const {return flagMoonScale;}
-	
+
 	//! Set the display scaling factor for Earth's moon.
 	void setMoonScale(float f);
 	//! Get the display scaling factor for Earth's oon.
-	float getMoonScale(void) const {return moonScale;}		
+	float getMoonScale(void) const {return moonScale;}
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -189,23 +191,23 @@ public:
 	//! Get a pointer to a Planet object.
 	//! @param planetEnglishName the English name of the desired planet.
 	//! @return The matching planet pointer if exists or NULL.
-	Planet* searchByEnglishName(QString planetEnglishName) const;
-	
+	PlanetP searchByEnglishName(QString planetEnglishName) const;
+
 	//! Get the Planet object pointer for the Sun.
-	Planet* getSun(void) const {return sun;}
-	
+	PlanetP getSun(void) const {return sun;}
+
 	//! Get the Planet object pointer for the Earth.
-	Planet* getEarth(void) const {return earth;}
-	
+	PlanetP getEarth(void) const {return earth;}
+
 	//! Get the Planet object pointer for Earth's moon.
-	Planet* getMoon(void) const {return moon;}
-	
+	PlanetP getMoon(void) const {return moon;}
+
 	//! Determine if a lunar eclipse is close at hand?
 	bool nearLunarEclipse();
-	
+
 	//! Get the list of all the planet english names
 	QStringList getAllPlanetEnglishNames() const;
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
 	///////////////////////////////////////////////////////////////////////////////////////
@@ -213,29 +215,29 @@ public:
 	//! @return A newline delimited hash of localized:standard planet names.
 	//! Planet translated name is PARENT : NAME
 	QString getPlanetHashString();
- 
+
 	//! Compute the position and transform matrix for every element of the solar system.
 	//! @param observerPos Position of the observer in heliocentric ecliptic frame (Required for light travel time computation).
 	//! @param date the date in JDay
 	void computePositions(double date, const Vec3d& observerPos = Vec3d(0,0,0));
-	
+
 	//! Get the list of all the bodies of the solar system.
-	const std::vector<Planet*>& getAllPlanets() const {return systemPlanets;}
-	
+	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}
+
 private:
-	//! Search for SolarSystem objects which are close to the position given 
+	//! Search for SolarSystem objects which are close to the position given
 	//! in earth equatorial position.
 	//! @param v A position in earth equatorial position.
 	//! @param core the StelCore object.
 	//! @return a pointer to a StelObject if found, else NULL
-	StelObject* search(Vec3d v, const StelCore* core) const;
-	
+	StelObjectP search(Vec3d v, const StelCore* core) const;
+
 	//! Update the planet motion trails.
 	// void updateTrails(const StelNavigator* nav);
 
 	//! Start/stop accumulating new trail data (clear old data).
 	void startTrails(bool b);
-	
+
 	//! Compute the transformation matrix for every elements of the solar system.
 	//! observerPos is needed for light travel time computation.
 	void computeTransMatrices(double date, const Vec3d& observerPos = Vec3d(0,0,0));
@@ -246,49 +248,49 @@ private:
 	//! Load planet data from a file.
 	void loadPlanets();
 
-	Planet* sun;
-	Planet* moon;
-	Planet* earth;
-	
+	PlanetP sun;
+	PlanetP moon;
+	PlanetP earth;
+
 	//! Set selected planets by englishName.
 	//! @param englishName The planet name or "" to select no planet
 	void setSelected(const QString& englishName);
 	//! Set selected object from its pointer.
-	void setSelected(StelObject* obj);	
+	void setSelected(PlanetP obj);
 	//! Get selected object's pointer.
-	StelObject* getSelected(void) const {return selected;}	
+	PlanetP getSelected(void) const {return selected;}
 	//! The currently selected planet.
-	StelObject* selected;
+	PlanetP selected;
 
 	bool flagMoonScale;
 	float moonScale;                 // Moon scale value
 
 	double fontSize;
 	StelFont& planetNameFont;
-	
+
 	//! The amount of planets labels (between 0 and 10)
 	float labelsAmount;
-	
-	std::vector<Planet*> systemPlanets;  // Vector containing all the bodies of the system 
+
+	QList<PlanetP> systemPlanets;  // Vector containing all the bodies of the system
 
 	// And sort them from the furthest to the closest to the observer
-	struct biggerDistance : public std::binary_function<Planet*, Planet*, bool>
+	struct biggerDistance : public std::binary_function<PlanetP, PlanetP, bool>
 	{
-		bool operator()(Planet* p1, Planet* p2);
+		bool operator()(PlanetP p1, PlanetP p2);
 	};
 
 	// Master settings
 	bool flagOrbits;
 	bool flagLightTravelTime;
-	
+
 	StelTextureSP texPointer;           // The selection pointer texture
-	
+
 	bool flagShow;
-	
+
 	//////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
 	//////////////////////////////////////////////////////////////////////////////////
-	const Planet* lastHomePlanet;    // for tracking home planet changes for trails
+	PlanetP lastHomePlanet;    // for tracking home planet changes for trails
 	std::vector<Orbit*> orbits;           // Pointers on created elliptical orbits
 };
 

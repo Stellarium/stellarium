@@ -19,6 +19,7 @@
 #ifndef _STELGRIDOBJECT_HPP_
 #define _STELGRIDOBJECT_HPP_
 
+#include <QSharedPointer>
 #include "VecMath.hpp"
 
 //! Simple abstract class defining the method getPositionForGrid() used
@@ -27,10 +28,14 @@ class StelGridObject
 {
 	public:
 		virtual ~StelGridObject(void) {;}
-		
+
 		//! This method is used by the grid algorithms to get a permanent position for an object
 		//! @return a unit vector giving a permanent direction in a 3d coordinate system.
 		virtual Vec3d getPositionForGrid() const=0;
 };
+
+//! @typedef StelGridObjectP
+//! Shared pointer on a StelGridObject with smart pointers
+typedef QSharedPointer<StelGridObject> StelGridObjectP;
 
 #endif // _STELGRIDOBJECT_HPP_

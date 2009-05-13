@@ -1,22 +1,22 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Guillaume Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
- 
+
 #ifndef _STELTREEGRID_HPP_
 #define _STELTREEGRID_HPP_
 
@@ -27,17 +27,17 @@
 
 struct StelTreeGridNode
 {
-    StelTreeGridNode() {}
-    StelTreeGridNode(const SphericalConvexPolygon& s) : triangle(s) {}
-        
-	typedef std::vector<StelGridObject*> Objects;
-    Objects objects;
-    
-    SphericalConvexPolygon triangle;
-    
-    typedef std::vector<StelTreeGridNode> Children;
-    Children children;
-	
+	StelTreeGridNode() {}
+	StelTreeGridNode(const SphericalConvexPolygon& s) : triangle(s) {}
+
+	typedef std::vector<StelGridObjectP> Objects;
+	Objects objects;
+
+	SphericalConvexPolygon triangle;
+
+	typedef std::vector<StelTreeGridNode> Children;
+	Children children;
+
 #ifdef STELTREEGRIDDEBUG
 	double draw(const class StelPainter* sPainter, float opacity = 1.) const;
 #endif
@@ -46,37 +46,37 @@ struct StelTreeGridNode
 class StelTreeGrid : public StelGrid, public StelTreeGridNode
 {
 public:
-    StelTreeGrid(unsigned int maxobj = 1000);
-    virtual ~StelTreeGrid();
-    
-	void insert(StelGridObject* obj)
-    {
-        insert(obj, *this);
-    }
-    
-    template<class Shape>
-    void filterIntersect(const Shape& s);
-    
-    unsigned int depth() const
-    { return depth(*this); }
-    
+	StelTreeGrid(unsigned int maxobj = 1000);
+	virtual ~StelTreeGrid();
+
+	void insert(StelGridObjectP obj)
+	{
+		insert(obj, *this);
+	}
+
+	template<class Shape>
+	void filterIntersect(const Shape& s);
+
+	unsigned int depth() const
+	{ return depth(*this); }
+
 	//! Get all the objects loaded into the grid structure
 	//! This is quite slow and should not used for time critical operations
-	virtual std::vector<StelGridObject*> getAllObjects();
-	
+	virtual std::vector<StelGridObjectP> getAllObjects();
+
 private:
-    
-	void insert(StelGridObject* obj, StelTreeGridNode& node);
-    void split(StelTreeGridNode& node);
-    
-    template<class S>
-    void fillIntersect(const S& s, const StelTreeGridNode& node, StelGrid& grid) const;    
-    
-    void fillAll(const StelTreeGridNode& node, StelGrid& grid) const;
-	void fillAll(const StelTreeGridNode& node, std::vector<StelGridObject*>& result) const;
-    unsigned int depth(const StelTreeGridNode& node) const;
-    
-    unsigned int maxObjects;
+
+	void insert(StelGridObjectP obj, StelTreeGridNode& node);
+	void split(StelTreeGridNode& node);
+
+	template<class S>
+	void fillIntersect(const S& s, const StelTreeGridNode& node, StelGrid& grid) const;
+
+	void fillAll(const StelTreeGridNode& node, StelGrid& grid) const;
+	void fillAll(const StelTreeGridNode& node, std::vector<StelGridObjectP>& result) const;
+	unsigned int depth(const StelTreeGridNode& node) const;
+
+	unsigned int maxObjects;
 
 };
 
@@ -84,35 +84,35 @@ private:
 template<class S>
 void StelTreeGrid::fillIntersect(const S& s, const StelTreeGridNode& node, StelGrid& grid) const
 {
-    for (StelTreeGridNode::Objects::const_iterator io = node.objects.begin(); io != node.objects.end(); ++io)
-    {
+	for (StelTreeGridNode::Objects::const_iterator io = node.objects.begin(); io != node.objects.end(); ++io)
+	{
 		if (s->intersects((*io)->getPositionForGrid()))
-        {
-            grid.insertResult(*io);
-        }
-    }
-    for (Children::const_iterator ic = node.children.begin(); ic != node.children.end(); ++ic)
-    {
+		{
+			grid.insertResult(*io);
+		}
+	}
+	for (Children::const_iterator ic = node.children.begin(); ic != node.children.end(); ++ic)
+	{
 		if (s->contains(ic->triangle))
-        {
-            fillAll(*ic, grid);
-        }
-        else
+		{
+			fillAll(*ic, grid);
+		}
+		else
 		{
 			if (s->intersects(ic->triangle))
-        	{
-            	fillIntersect(s, *ic, grid);
-        	}
+			{
+				fillIntersect(s, *ic, grid);
+			}
 		}
-    }
+	}
 }
 
 
 template<class Shape>
 void StelTreeGrid::filterIntersect(const Shape& s)
 {
-    this->clear();
-    fillIntersect(s, *this, *this);
+	this->clear();
+	fillIntersect(s, *this, *this);
 }
 
 

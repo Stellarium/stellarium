@@ -23,9 +23,10 @@
 #include "StelLocation.hpp"
 #include <QObject>
 #include <QString>
+#include <QSharedPointer>
 #include "VecMath.hpp"
+#include "Planet.hpp"
 
-class Planet;
 class ArtificialPlanet;
 class StelObserver;
 
@@ -34,7 +35,7 @@ class StelObserver;
 class StelObserver : public QObject
 {
 	Q_OBJECT
-	
+
 public:
 	//! Create a new StelObserver instance which is at a fixed Location
 	StelObserver(const StelLocation& loc);
@@ -42,29 +43,29 @@ public:
 
 	//! Update StelObserver info if needed. Default implementation does nothing.
 	virtual void update(double deltaTime) {;}
-	
+
 	//! Get the position of the home planet center in the heliocentric VSOP87 frame in AU
 	Vec3d getCenterVsop87Pos(void) const;
 	//! Get the distance between observer and home planet center in AU
 	double getDistanceFromCenter(void) const;
 	Mat4d getRotAltAzToEquatorial(double jd) const;
 	Mat4d getRotEquatorialToVsop87(void) const;
-	
-	virtual const Planet* getHomePlanet(void) const {return planet;}
-	
+
+	virtual const QSharedPointer<Planet> getHomePlanet(void) const;
+
 	//! Get the informations on the current location
 	const StelLocation& getCurrentLocation() const {return currentLocation;}
-	
+
 	//! Get whether the life of this observer is over, and therefore that it should be changed to the next one
 	//! provided by the getNextObserver() method
 	virtual bool isObserverLifeOver() const {return false;}
-	
+
 	//! Get the next observer to use once the life of this one is over
 	virtual StelObserver* getNextObserver() const {return new StelObserver(currentLocation);}
-	
+
 protected:
 	StelLocation currentLocation;
-	const Planet* planet;    
+	QSharedPointer<Planet> planet;
 };
 
 //! @class SpaceShipObserver
@@ -74,13 +75,13 @@ class SpaceShipObserver : public StelObserver
 public:
 	SpaceShipObserver(const StelLocation& startLoc, const StelLocation& target, double transitSeconds=1.f);
 	~SpaceShipObserver();
-	
+
 	//! Update StelObserver info if needed. Default implementation does nothing.
 	virtual void update(double deltaTime);
-	virtual const Planet* getHomePlanet(void) const {return (isObserverLifeOver() || artificialPlanet==NULL)  ? planet : (Planet*)artificialPlanet;}
+	virtual const QSharedPointer<Planet> getHomePlanet() const;
 	virtual bool isObserverLifeOver() const {return timeToGo <= 0.;}
 	virtual StelObserver* getNextObserver() const {return new StelObserver(moveTargetLocation);}
-	
+
 private:
 	StelLocation moveStartLocation;
 	StelLocation moveTargetLocation;
