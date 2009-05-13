@@ -1,5 +1,5 @@
 
 ########### install files ###############
 
-INSTALL(FILES  constellationship.fab constellation_names.eng.fab info.ini  	constellation_names.exp.fab constellationsart.fab on_korea_constellations.txt star_names.fab description.en.utf8 DESTINATION share/${PACKAGE}/skycultures/korean )
+INSTALL(FILES  constellationship.fab constellation_names.eng.fab info.ini  	constellation_names.exp.fab constellationsart.fab on_korea_constellations.txt star_names.fab description.en.utf8 description.it.utf8 DESTINATION share/${PACKAGE}/skycultures/korean )
 
