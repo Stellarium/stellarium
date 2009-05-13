@@ -23,8 +23,6 @@
 #if defined(sun)
 #undef sun
 #endif
-#include <vector>
-#include <functional>
 
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
@@ -219,7 +217,7 @@ public:
 	//! Compute the position and transform matrix for every element of the solar system.
 	//! @param observerPos Position of the observer in heliocentric ecliptic frame (Required for light travel time computation).
 	//! @param date the date in JDay
-	void computePositions(double date, const Vec3d& observerPos = Vec3d(0,0,0));
+	void computePositions(double date, const Vec3d& observerPos = Vec3d(0.));
 
 	//! Get the list of all the bodies of the solar system.
 	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}
@@ -240,7 +238,7 @@ private:
 
 	//! Compute the transformation matrix for every elements of the solar system.
 	//! observerPos is needed for light travel time computation.
-	void computeTransMatrices(double date, const Vec3d& observerPos = Vec3d(0,0,0));
+	void computeTransMatrices(double date, const Vec3d& observerPos = Vec3d(0.));
 
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const StelCore* core);
@@ -262,28 +260,25 @@ private:
 	//! The currently selected planet.
 	PlanetP selected;
 
+	// Moon scale value
 	bool flagMoonScale;
-	float moonScale;                 // Moon scale value
+	float moonScale;
 
 	double fontSize;
 	StelFont& planetNameFont;
 
-	//! The amount of planets labels (between 0 and 10)
+	//! The amount of planets labels (between 0 and 10).
 	float labelsAmount;
 
-	QList<PlanetP> systemPlanets;  // Vector containing all the bodies of the system
-
-	// And sort them from the furthest to the closest to the observer
-	struct biggerDistance : public std::binary_function<PlanetP, PlanetP, bool>
-	{
-		bool operator()(PlanetP p1, PlanetP p2);
-	};
+	//! List of all the bodies of the solar system.
+	QList<PlanetP> systemPlanets;
 
 	// Master settings
 	bool flagOrbits;
 	bool flagLightTravelTime;
 
-	StelTextureSP texPointer;           // The selection pointer texture
+	//! The selection pointer texture.
+	StelTextureSP texPointer;
 
 	bool flagShow;
 
@@ -291,7 +286,7 @@ private:
 	// DEPRECATED
 	//////////////////////////////////////////////////////////////////////////////////
 	PlanetP lastHomePlanet;    // for tracking home planet changes for trails
-	std::vector<Orbit*> orbits;           // Pointers on created elliptical orbits
+	QList<Orbit*> orbits;           // Pointers on created elliptical orbits
 };
 
 
