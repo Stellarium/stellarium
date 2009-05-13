@@ -30,7 +30,9 @@ public:
 	QSharedPointerNoDelete() {;}
 	QSharedPointerNoDelete(T *ptr) : QSharedPointer<T>(ptr, QSharedPointerNoDelete::noDelete) {;}
 	QSharedPointerNoDelete(T *ptr, bool own) : QSharedPointer<T>(ptr) {Q_ASSERT(own==true);}
+	QSharedPointerNoDelete(const QSharedPointer<T>& ptr) : QSharedPointer<T>(ptr) {;}
 	static void noDelete(T *ptr) {;}
+	inline operator const QSharedPointer<T>&() const {return *(static_cast<QSharedPointer<T> >(this));}
 };
 
 //! @file StelObjectType.hpp

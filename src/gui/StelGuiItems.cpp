@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -47,26 +47,26 @@
 
 
 StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixmap& apixOff,
-		const QPixmap& apixHover, QAction* aaction, bool noBackground) : 
+		const QPixmap& apixHover, QAction* aaction, bool noBackground) :
 			QGraphicsPixmapItem(apixOff, parent), pixOn(apixOn), pixOff(apixOff), pixHover(apixHover),
 			checked(false), action(aaction), noBckground(noBackground), opacity(1.), hoverOpacity(0.), redMode(false)
 {
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());
-	
+
 	pixOnRed = StelGui::makeRed(pixOn);
 	pixOffRed = StelGui::makeRed(pixOff);
 	if (!pixHover.isNull())
 		pixHoverRed = StelGui::makeRed(pixHover);
 	if (!pixBackground.isNull())
 		pixBackgroundRed = StelGui::makeRed(pixBackground);
-	
+
 	setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
 	setAcceptsHoverEvents(true);
 	timeLine = new QTimeLine(250, this);
 	timeLine->setCurveShape(QTimeLine::EaseOutCurve);
 	connect(timeLine, SIGNAL(valueChanged(qreal)), this, SLOT(animValueChanged(qreal)));
-	
+
 	if (action!=NULL)
 	{
 		QObject::connect(action, SIGNAL(toggled(bool)), this, SLOT(setChecked(bool)));
@@ -96,10 +96,10 @@ void StelButton::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
 	timeLine->setDirection(QTimeLine::Forward);
 	if (timeLine->state()!=QTimeLine::Running)
 		timeLine->start();
-	
+
 	emit(hoverChanged(true));
 }
-		
+
 void StelButton::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
 {
 	timeLine->setDirection(QTimeLine::Backward);
@@ -139,7 +139,7 @@ void StelButton::animValueChanged(qreal value)
 	hoverOpacity = value;
 	updateIcon();
 }
-	
+
 void StelButton::setChecked(bool b)
 {
 	checked=b;
@@ -170,7 +170,7 @@ void LeftStelBar::addButton(StelButton* button)
 	}
 	button->setParentItem(this);
 	button->setPos(0.5, posY+10.5);
-	
+
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
 }
 
@@ -244,34 +244,34 @@ void LeftStelBar::setRedMode(bool b)
 	}
 }
 
-BottomStelBar::BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft, const QPixmap& pixRight, 
+BottomStelBar::BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft, const QPixmap& pixRight,
 		const QPixmap& pixMiddle, const QPixmap& pixSingle) : QGraphicsItem(parent), pixBackgroundLeft(pixLeft), pixBackgroundRight(pixRight),
 		pixBackgroundMiddle(pixMiddle), pixBackgroundSingle(pixSingle)
 {
 	QFont font("DejaVuSans");
 	font.setPixelSize(12);
-	
+
 	// The text is dummy just for testing
 	datetime = new QGraphicsSimpleTextItem("2008-02-06  17:33", this);
 	location = new QGraphicsSimpleTextItem("Munich, Earth, 500m", this);
 	fov = new QGraphicsSimpleTextItem("FOV 43.45", this);
 	fps = new QGraphicsSimpleTextItem("43.2 FPS", this);
-	
+
 	// Create the help label
 	helpLabel = new QGraphicsSimpleTextItem("", this);
 	QFont font2("DejaVuSans");
 	font2.setPixelSize(14);
 	helpLabel->setFont(font2);
 	helpLabel->setBrush(QBrush(QColor::fromRgbF(1,1,1,1)));
-	
+
 	QColor color = QColor::fromRgbF(1,1,1,1);
 	setColor(color);
-	
+
 	datetime->setFont(font);
 	location->setFont(font);
 	fov->setFont(font);
 	fps->setFont(font);
-	
+
 	flagShowTime = true;
 	flagShowLocation = true;
 }
@@ -307,11 +307,11 @@ void BottomStelBar::addButton(StelButton* button, const QString& groupName, cons
 	}
 	if (done==false)
 		g.append(button);
-	
+
 	button->setVisible(true);
 	button->setParentItem(this);
 	updateButtonsGroups();
-	
+
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
 }
 
@@ -347,7 +347,7 @@ StelButton* BottomStelBar::hideButton(const QString& actionName)
 	updateButtonsGroups();
 	return bToRemove;
 }
-	
+
 // Set the margin at the left and right of a button group in pixels
 void BottomStelBar::setGroupMargin(const QString& groupName, int left, int right)
 {
@@ -359,21 +359,21 @@ void BottomStelBar::setGroupMargin(const QString& groupName, int left, int right
 }
 
 //! Change the background of a group
-void BottomStelBar::setGroupBackground(const QString& groupName, const QPixmap& pixLeft, 
-						const QPixmap& pixRight,  const QPixmap& pixMiddle, 
+void BottomStelBar::setGroupBackground(const QString& groupName, const QPixmap& pixLeft,
+						const QPixmap& pixRight,  const QPixmap& pixMiddle,
 						const QPixmap& pixSingle){
-	
+
 	if (!buttonGroups.contains(groupName))
 		return;
-	
+
 	buttonGroups[groupName].pixBackgroundLeft = new QPixmap(pixLeft);
 	buttonGroups[groupName].pixBackgroundRight = new QPixmap(pixRight);
 	buttonGroups[groupName].pixBackgroundMiddle = new QPixmap(pixMiddle);
-	buttonGroups[groupName].pixBackgroundSingle = new QPixmap(pixSingle);	
+	buttonGroups[groupName].pixBackgroundSingle = new QPixmap(pixSingle);
 	updateButtonsGroups();
 
 }
-	
+
 QRectF BottomStelBar::getButtonsBoundingRect() const
 {
 	// Re-use original Qt code, just remove the help label
@@ -408,21 +408,21 @@ void BottomStelBar::updateButtonsGroups()
 		foreach (StelButton* b, iter.value().elems)
 		{
 			// We check if the group has its own background if not the case
-			// We apply a default background. 
+			// We apply a default background.
 			if (n==0)
 			{
 				if (iter.value().elems.size()==1)
 				{
 					if (iter.value().pixBackgroundSingle == NULL)
 						b->pixBackground = pixBackgroundSingle;
-					else 
+					else
 						b->pixBackground = *(iter.value().pixBackgroundSingle);
 				}
 				else
 				{
 					if (iter.value().pixBackgroundLeft == NULL)
 						b->pixBackground = pixBackgroundLeft;
-					else 
+					else
 						b->pixBackground = *(iter.value().pixBackgroundLeft);
 				}
 			}
@@ -432,19 +432,19 @@ void BottomStelBar::updateButtonsGroups()
 				{
 					if (iter.value().pixBackgroundSingle == NULL)
 						b->pixBackground = pixBackgroundSingle;
-					else 
+					else
 						b->pixBackground = *(iter.value().pixBackgroundSingle);
 				}
 				if (iter.value().pixBackgroundRight == NULL)
 					b->pixBackground = pixBackgroundRight;
-				else 
-					b->pixBackground = *(iter.value().pixBackgroundRight);	
+				else
+					b->pixBackground = *(iter.value().pixBackgroundRight);
 			}
 			else
 			{
 				if (iter.value().pixBackgroundMiddle == NULL)
 					b->pixBackground = pixBackgroundMiddle;
-				else 
+				else
 					b->pixBackground = *(iter.value().pixBackgroundMiddle);
 			}
 			// Update the button pixmap
@@ -464,7 +464,7 @@ void BottomStelBar::updateText()
 	bool updatePos = false;
 	StelCore* core = StelApp::getInstance().getCore();
 	double jd = core->getNavigator()->getJDay();
-	
+
 	QString newDate = flagShowTime ? StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd) +"   "
 			+StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd) : " ";
 	if (datetime->text()!=newDate)
@@ -472,7 +472,7 @@ void BottomStelBar::updateText()
 		updatePos = true;
 		datetime->setText(newDate);
 	}
-	
+
 	QString newLocation = flagShowLocation ? q_(core->getNavigator()->getCurrentLocation().planetName) +", "
 			+core->getNavigator()->getCurrentLocation().name + ", "
 			// xgettext:no-c-format
@@ -482,7 +482,7 @@ void BottomStelBar::updateText()
 		updatePos = true;
 		location->setText(newLocation);
 	}
-	
+
 	QString str;
 	QTextStream wos(&str);
 	wos << "FOV " << qSetRealNumberPrecision(3) << core->getMovementMgr()->getCurrentFov() << QChar(0x00B0);
@@ -491,7 +491,7 @@ void BottomStelBar::updateText()
 		updatePos = true;
 		fov->setText(str);
 	}
-	
+
 	str="";
 	QTextStream wos2(&str);
 	wos2 << qSetRealNumberPrecision(3) << StelApp::getInstance().getFps() << " FPS";
@@ -500,7 +500,7 @@ void BottomStelBar::updateText()
 		updatePos = true;
 		fps->setText(str);
 	}
-	
+
 	if (updatePos)
 	{
 		QRectF rectCh = getButtonsBoundingRect();
@@ -560,7 +560,7 @@ void BottomStelBar::setRedMode(bool b)
 		bt->setRedMode(b);
 	}
 }
-	
+
 // Update the help label when a button is hovered
 void BottomStelBar::buttonHoverChanged(bool b)
 {
@@ -605,7 +605,7 @@ void StelBarsPath::updatePath(BottomStelBar* bot, LeftStelBar* lef)
 	QRectF r = lef->boundingRectNoHelpLabel();
 	QPointF p2 = bot->pos();
 	QRectF r2 = bot->boundingRectNoHelpLabel();
-	
+
 	newPath.moveTo(p.x()-roundSize, p.y()-roundSize);
 	newPath.lineTo(p.x()+r.width(),p.y()-roundSize);
 	newPath.arcTo(p.x()+r.width()-roundSize, p.y()-roundSize, 2.*roundSize, 2.*roundSize, 90, -90);
@@ -625,7 +625,7 @@ void StelBarsPath::setBackgroundOpacity(double opacity)
 StelProgressBarMgr::StelProgressBarMgr(QGraphicsItem* parent)
 {
 }
-		
+
 void StelProgressBarMgr::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	// Do nothing. Just paint the child widgets
@@ -674,7 +674,7 @@ void StelProgressBarMgr::oneDestroyed(QObject* obj)
 CornerButtons::CornerButtons(QGraphicsItem* parent) : lastOpacity(10)
 {
 }
-		
+
 void CornerButtons::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	// Do nothing. Just paint the child widgets

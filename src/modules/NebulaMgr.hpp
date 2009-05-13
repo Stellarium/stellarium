@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -20,7 +20,6 @@
 #ifndef _NEBULAMGR_HPP_
 #define _NEBULAMGR_HPP_
 
-#include <vector>
 #include <QString>
 #include <QStringList>
 #include "StelObjectType.hpp"
@@ -35,13 +34,15 @@ class StelToneReproducer;
 class QSettings;
 class StelPainter;
 
+typedef QSharedPointer<Nebula> NebulaP;
+
 //! @class NebulaMgr
-//! Manage a collection of nebulae. This class is used 
+//! Manage a collection of nebulae. This class is used
 //! to display the NGC catalog with information, and textures for some of them.
 class NebulaMgr : public StelObjectModule
 {
 	Q_OBJECT
-			
+
 public:
 	NebulaMgr();
 	virtual ~NebulaMgr();
@@ -56,31 +57,31 @@ public:
 	//!  - Set flags values from ini parser which relate to nebula display.
 	//!  - call updateI18n() to translate names.
 	virtual void init();
-	
+
 	//! Draws all nebula objects.
 	virtual void draw(StelCore* core);
-	
+
 	//! Update state which is time dependent.
 	virtual void update(double deltaTime) {hintsFader.update((int)(deltaTime*1000)); flagShow.update((int)(deltaTime*1000));}
-	
+
 	//! Update i18 names from English names according to passed translator.
-	//! The translation is done using gettext with translated strings defined 
+	//! The translation is done using gettext with translated strings defined
 	//! in translations.h
 	virtual void updateI18n();
-	
+
 	//! Called when the sky culture is updated, so that the module can respond
-	//! as appropriate.  Does nothing as there are no SkyCulture specific features 
+	//! as appropriate.  Does nothing as there are no SkyCulture specific features
 	//! in the current nebula implementation.
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
 	virtual void updateSkyCulture(const QString& skyCultureDir);
-	
+
 	//! Sets the colors of the Nebula labels and markers according to the
 	//! values in a configuration object
 	virtual void setStelStyle(const StelStyle& style);
-	
+
 	//! Determines the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
-	
+
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
 	//! Used to get a vector of objects which are near to some position.
@@ -89,12 +90,12 @@ public:
 	//! @param core the StelCore to use for computations.
 	//! @return an list containing the nebulae located inside the limitFov circle around position v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
-	
+
 	//! Return the matching nebula object's pointer if exists or NULL.
-	//! @param nameI18n The case in-sensistive nebula name or NGC M catalog name : format can 
+	//! @param nameI18n The case in-sensistive nebula name or NGC M catalog name : format can
 	//! be M31, M 31, NGC31, NGC 31
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
-	
+
 	//! Return the matching nebula if exists or NULL.
 	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
@@ -104,7 +105,7 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
-	
+
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
@@ -112,35 +113,35 @@ public slots:
 	void setCirclesColor(const Vec3f& c);
 	//! Get current value of the nebula circle color.
 	const Vec3f& getCirclesColor(void) const;
-	
+
 	//! Set Nebulae Hints circle scale.
 	void setCircleScale(float scale);
 	//! Get Nebulae Hints circle scale.
 	float getCircleScale(void) const;
-	
+
 	//! Set how long it takes for nebula hints to fade in and out when turned on and off.
 	void setHintsFadeDuration(float duration) {hintsFader.setDuration((int) (duration * 1000.f));}
-	
+
 	//! Set flag for displaying Nebulae Hints.
 	void setFlagHints(bool b) {hintsFader=b;}
 	//! Get flag for displaying Nebulae Hints.
 	bool getFlagHints(void) const {return hintsFader;}
-	
+
 	//! Set flag used to turn on and off Nebula rendering.
 	void setFlagShow(bool b) { flagShow = b; }
 	//! Get value of flag used to turn on and off Nebula rendering.
 	bool getFlagShow(void) const { return flagShow; }
-	
+
 	//! Set the color used to draw nebula labels.
 	void setLabelsColor(const Vec3f& c);
 	//! Get current value of the nebula label color.
 	const Vec3f& getLabelsColor(void) const;
-	
+
 	//! Set flag for displaying nebulae even without textures.
 	void setFlagDisplayNoTexture(bool b) {displayNoTexture = b;}
 	//! Get flag for displaying nebulae without textures.
-	bool getFlagDisplayNoTexture(void) const {return displayNoTexture;}	
-	
+	bool getFlagDisplayNoTexture(void) const {return displayNoTexture;}
+
 	//! Set the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! The limit is set in function of the nebulae magnitude
 	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
@@ -148,7 +149,7 @@ public slots:
 	//! Get the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
 	float getLabelsAmount(void) const {return labelsAmount;}
-	
+
 	//! Set the amount of nebulae hints. The real amount is also proportional with FOV.
 	//! The limit is set in function of the nebulae magnitude
 	//! @param f the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
@@ -156,11 +157,14 @@ public slots:
 	//! Get the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
 	float getHintsAmount(void) const {return hintsAmount;}
-	
+
 private:
 	//! Search for a nebula object by name. e.g. M83, NGC 1123, IC 1234.
-	StelObject* search(const QString& name);
-	
+	NebulaP search(const QString& name);
+
+	//! Search the Nebulae by position
+	NebulaP search(const Vec3d& pos);
+
 	//! Load a set of nebula images.
 	//! Each sub-directory of the INSTALLDIR/nebulae directory contains a set of
 	//! nebula textures.  The sub-directory is the setName.  Each set has its
@@ -168,32 +172,30 @@ private:
 	//! This function loads a set of textures.
 	//! @param setName a string which corresponds to the directory where the set resides
 	void loadNebulaSet(const QString& setName);
-	
-	StelObject* search(Vec3f Pos);    // Search the Nebulae by position	
-		
+
 	//! Draw a nice animated pointer around the object
 	void drawPointer(const StelCore* core, const StelPainter& sPainter);
-		
-	Nebula *searchM(unsigned int M);
-	Nebula *searchNGC(unsigned int NGC);
-	Nebula *searchIC(unsigned int IC);
+
+	NebulaP searchM(unsigned int M);
+	NebulaP searchNGC(unsigned int NGC);
+	NebulaP searchIC(unsigned int IC);
 	bool loadNGC(const QString& fileName);
 	bool loadNGCNames(const QString& fileName);
 
-	std::vector<Nebula*> nebArray;		// The nebulas list
+	QList<NebulaP> nebArray;		// The nebulas list
 	LinearFader hintsFader;
 	LinearFader flagShow;
-	
+
 	//! The internal grid for fast positional lookup
 	StelTreeGrid nebGrid;
-	
+
 	//! The amount of hints (between 0 and 10)
 	float hintsAmount;
 	//! The amount of labels (between 0 and 10)
 	float labelsAmount;
-	
+
 	bool displayNoTexture;			// Define if nebulas without textures are to be displayed
-	
+
 	//! The selection pointer texture
 	StelTextureSP texPointer;
 };

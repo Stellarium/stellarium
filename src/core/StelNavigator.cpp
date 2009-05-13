@@ -55,11 +55,6 @@ StelNavigator::~StelNavigator()
 	position=NULL;
 }
 
-const Planet *StelNavigator::getHomePlanet(void) const
-{
-	return position->getHomePlanet();
-}
-
 void StelNavigator::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -169,7 +164,7 @@ void StelNavigator::addSolarDays(double d)
 
 void StelNavigator::addSiderealDays(double d)
 {
-	const Planet* home = position->getHomePlanet();
+	const PlanetP& home = position->getHomePlanet();
 	if (home->getEnglishName() != "Solar System StelObserver")
 		d *= home->getSiderealDay();
 	setJDay(getJDay() + d);
@@ -225,6 +220,12 @@ void StelNavigator::moveObserverTo(const StelLocation& target, double duration, 
 double StelNavigator::getLocalSideralTime() const
 {
 	return (position->getHomePlanet()->getSiderealTime(JDay)+position->getCurrentLocation().longitude)*M_PI/180.;
+}
+
+//! Get the duration of a sideral day for the current observer in day.
+double StelNavigator::getLocalSideralDayLength() const
+{
+	return position->getHomePlanet()->getSiderealDay();
 }
 
 void StelNavigator::setInitViewDirectionToCurrent(void)
@@ -327,6 +328,10 @@ void StelNavigator::updateTime(double deltaTime)
 		position = newObs;
 	}
 	position->update(deltaTime);
+
+	// Position of sun and all the satellites (ie planets)
+	SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+	solsystem->computePositions(getJDay(), position->getHomePlanet()->getHeliocentricEclipticPos());
 }
 
 ////////////////////////////////////////////////////////////////////////////////

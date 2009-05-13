@@ -1,22 +1,22 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Guillaume Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
- 
+
 #include "StelTreeGrid.hpp"
 #include <QDebug>
 
@@ -79,48 +79,48 @@ StelTreeGrid::~StelTreeGrid()
 {
 }
 
-void StelTreeGrid::insert(StelGridObject* obj, StelTreeGridNode& node)
+void StelTreeGrid::insert(StelGridObjectP obj, StelTreeGridNode& node)
 {
-    if (node.children.empty())
-    {
-        node.objects.push_back(obj);
-        // If we have too many objects in the node, we split it
-        if (node.objects.size() >= maxObjects)
-        {
-            split(node);
-            StelTreeGridNode::Objects node_objects;
-            std::swap(node_objects, node.objects);
-            for (StelTreeGridNode::Objects::iterator iter = node_objects.begin();iter != node_objects.end(); ++iter)
-            {
-                insert(*iter, node);
-            }
-        }
-    }
-    else // if we have children
-    {
-        for (StelTreeGridNode::Children::iterator iter = node.children.begin();
-                iter != node.children.end(); ++iter)
-        {
+	if (node.children.empty())
+	{
+		node.objects.push_back(obj);
+		// If we have too many objects in the node, we split it
+		if (node.objects.size() >= maxObjects)
+		{
+			split(node);
+			StelTreeGridNode::Objects node_objects;
+			std::swap(node_objects, node.objects);
+			for (StelTreeGridNode::Objects::iterator iter = node_objects.begin();iter != node_objects.end(); ++iter)
+			{
+				insert(*iter, node);
+			}
+		}
+	}
+	else // if we have children
+	{
+		for (StelTreeGridNode::Children::iterator iter = node.children.begin();
+				iter != node.children.end(); ++iter)
+		{
 			if (iter->triangle.contains(obj->getPositionForGrid())) {
-                insert(obj, *iter);
-                return;
-            }
-        }
-        node.objects.push_back(obj);
-    }
+				insert(obj, *iter);
+				return;
+			}
+		}
+		node.objects.push_back(obj);
+	}
 }
 
 void StelTreeGrid::split(StelTreeGridNode& node)
 {
-    Q_ASSERT(node.children.empty());
-    const SphericalConvexPolygon& p = node.triangle;
-    
-    Q_ASSERT(p.getConvexContour().size() == 3);
+	Q_ASSERT(node.children.empty());
+	const SphericalConvexPolygon& p = node.triangle;
+
+	Q_ASSERT(p.getConvexContour().size() == 3);
 
 	const Vec3d& c0 = p.getConvexContour().at(0);
 	const Vec3d& c1 = p.getConvexContour().at(1);
 	const Vec3d& c2 = p.getConvexContour().at(2);
-	
+
 	Q_ASSERT((c1^c0)*c2 >= 0.0);
 	Vec3d e0 = c1+c2;
 	e0.normalize();
@@ -128,7 +128,7 @@ void StelTreeGrid::split(StelTreeGridNode& node)
 	e1.normalize();
 	Vec3d e2 = c0+c1;
 	e2.normalize();
-	
+
 	node.children.push_back(SphericalConvexPolygon(e1,c0,e2));
 	node.children.push_back(SphericalConvexPolygon(e0,e2,c1));
 	node.children.push_back(SphericalConvexPolygon(c2,e1,e0));
@@ -144,7 +144,7 @@ void StelTreeGrid::fillAll(const StelTreeGridNode& node, StelGrid& grid) const
 	}
 }
 
-void StelTreeGrid::fillAll(const StelTreeGridNode& node, std::vector<StelGridObject*>& result) const
+void StelTreeGrid::fillAll(const StelTreeGridNode& node, std::vector<StelGridObjectP>& result) const
 {
 	result.insert(result.end(), node.objects.begin(), node.objects.end());
 	for (Children::const_iterator ic = node.children.begin(); ic != node.children.end(); ++ic)
@@ -155,33 +155,33 @@ void StelTreeGrid::fillAll(const StelTreeGridNode& node, std::vector<StelGridObj
 
 unsigned int StelTreeGrid::depth(const StelTreeGridNode& node) const
 {
-    if (node.children.empty()) return 0;
-    unsigned int max = 0;
-    for (Children::const_iterator ic = node.children.begin(); ic != node.children.end(); ++ic)
-    {
-        unsigned int d = depth(*ic);
-        if (d > max) max = d;
-    }
-    return max + 1;
+	if (node.children.empty()) return 0;
+	unsigned int max = 0;
+	for (Children::const_iterator ic = node.children.begin(); ic != node.children.end(); ++ic)
+	{
+		unsigned int d = depth(*ic);
+		if (d > max) max = d;
+	}
+	return max + 1;
 }
 
 /*************************************************************************
  Get all the objects loaded into the grid structure
 *************************************************************************/
-std::vector<StelGridObject*> StelTreeGrid::getAllObjects()
+std::vector<StelGridObjectP> StelTreeGrid::getAllObjects()
 {
-	std::vector<StelGridObject*> result;
+	std::vector<StelGridObjectP> result;
 	fillAll(*this, result);
 	return result;
 }
-	
+
 #ifdef STELTREEGRIDDEBUG
 #include "StelProjector.hpp"
-#include "StelPainter.hpp"			 
+#include "StelPainter.hpp"
 double StelTreeGridNode::draw(const StelPainter* sPainter, float opacity) const
 {
 	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);	
+	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	glColor4f(0,1,0, opacity);
 	if (children.size()==0)

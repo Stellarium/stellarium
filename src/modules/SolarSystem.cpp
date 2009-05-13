@@ -55,7 +55,7 @@
 
 using namespace std;
 
-SolarSystem::SolarSystem() :sun(NULL),moon(NULL),earth(NULL),selected(NULL), moonScale(1.), fontSize(14.),
+SolarSystem::SolarSystem() : moonScale(1.), fontSize(14.),
 	planetNameFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)),
 	flagOrbits(false),flagLightTravelTime(false), lastHomePlanet(NULL)
 {
@@ -70,20 +70,15 @@ void SolarSystem::setFontSize(float newFontSize)
 SolarSystem::~SolarSystem()
 {
 	// release selected:
-	selected = NULL;
-	for(std::vector<Planet*>::iterator iter = systemPlanets.begin(); iter != systemPlanets.end(); ++iter)
-	{
-		if (*iter) delete *iter;
-		*iter = NULL;
-	}
+	selected.clear();
 	for(std::vector<Orbit*>::iterator iter = orbits.begin(); iter != orbits.end(); ++iter)
 	{
 		if (*iter) delete *iter;
 		*iter = NULL;
 	}
-	sun = NULL;
-	moon = NULL;
-	earth = NULL;
+	sun.clear();
+	moon.clear();
+	earth.clear();
 	Planet::hintCircleTex.clear();
 	Planet::texEarthShadow.clear();
 }
@@ -303,20 +298,19 @@ void SolarSystem::loadPlanets()
 		const QString secname = orderedSections.at(i);
 		const QString englishName = pd.value(secname+"/name").toString();
 		const QString strParent = pd.value(secname+"/parent").toString();
-		Planet *parent = NULL;
+		PlanetP parent;
 		if (strParent!="none")
 		{
 			// Look in the other planets the one named with strParent
-			vector<Planet*>::iterator iter = systemPlanets.begin();
-			while (iter != systemPlanets.end())
+			foreach (const PlanetP& p, systemPlanets)
 			{
-				if ((*iter)->getEnglishName()==strParent)
+				if (p->getEnglishName()==strParent)
 				{
-					parent = (*iter);
+					parent = p;
+					break;
 				}
-				iter++;
 			}
-			if (parent == NULL)
+			if (parent.isNull())
 			{
 				qWarning() << "ERROR : can't find parent solar system body for " << englishName;
 				abort();
@@ -648,7 +642,7 @@ void SolarSystem::loadPlanets()
 		}
 
 		// Create the Planet and add it to the list
-		Planet* p = new Planet(englishName,
+		PlanetP p(new Planet(englishName,
 					pd.value(secname+"/lighting").toBool(),
 					pd.value(secname+"/radius").toDouble()/AU,
 					pd.value(secname+"/oblateness", 0.0).toDouble(),
@@ -660,9 +654,12 @@ void SolarSystem::loadPlanets()
 					osculatingFunc,
 					closeOrbit,
 					pd.value(secname+"/hidden", 0).toBool(),
-					pd.value(secname+"/atmosphere", false).toBool());
-		if (parent!=NULL)
-			p->setParent(parent);
+					pd.value(secname+"/atmosphere", false).toBool()));
+		if (!parent.isNull())
+		{
+			parent->satellites.append(p);
+			p->parent = parent;
+		}
 		if (secname=="earth") earth = p;
 		if (secname=="sun") sun = p;
 		if (secname=="moon") moon = p;
@@ -727,21 +724,21 @@ void SolarSystem::computePositions(double date, const Vec3d& observerPos)
 {
 	if (flagLightTravelTime)
 	{
-		for (std::vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
+		foreach (PlanetP p, systemPlanets)
 		{
-			(*iter)->computePositionWithoutOrbits(date);
+			p->computePositionWithoutOrbits(date);
 		}
-		for (std::vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
+		foreach (PlanetP p, systemPlanets)
 		{
-			const double light_speed_correction = ((*iter)->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
-			(*iter)->computePosition(date-light_speed_correction);
+			const double light_speed_correction = (p->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
+			p->computePosition(date-light_speed_correction);
 		}
 	}
 	else
 	{
-		for (std::vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
+		foreach (PlanetP p, systemPlanets)
 		{
-			(*iter)->computePosition(date);
+			p->computePosition(date);
 		}
 	}
 	computeTransMatrices(date, observerPos);
@@ -753,17 +750,17 @@ void SolarSystem::computeTransMatrices(double date, const Vec3d& observerPos)
 {
 	if (flagLightTravelTime)
 	{
-		for (std::vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
+		foreach (PlanetP p, systemPlanets)
 		{
-			const double light_speed_correction = ((*iter)->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
-			(*iter)->computeTransMatrix(date-light_speed_correction);
+			const double light_speed_correction = (p->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
+			p->computeTransMatrix(date-light_speed_correction);
 		}
 	}
 	else
 	{
-		for (std::vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
+		foreach (PlanetP p, systemPlanets)
 		{
-			(*iter)->computeTransMatrix(date);
+			p->computeTransMatrix(date);
 		}
 	}
 }
@@ -781,12 +778,9 @@ void SolarSystem::draw(StelCore* core)
 	// Compute each Planet distance to the observer
 	Vec3d obsHelioPos = nav->getObserverHeliocentricEclipticPos();
 
-	vector<Planet*>::iterator iter;
-	iter = systemPlanets.begin();
-	while (iter != systemPlanets.end())
+	foreach (PlanetP p, systemPlanets)
 	{
-		(*iter)->computeDistance(obsHelioPos);
-		++iter;
+		p->computeDistance(obsHelioPos);
 	}
 
 	// And sort them from the furthest to the closest
@@ -794,11 +788,9 @@ void SolarSystem::draw(StelCore* core)
 
 	// Draw the elements
 	float maxMagLabel=core->getSkyDrawer()->getLimitMagnitude()*0.80+(labelsAmount*1.2f)-2.f;
-	iter = systemPlanets.begin();
-	while (iter != systemPlanets.end())
+	foreach (const PlanetP& p, systemPlanets)
 	{
-		(*iter)->draw(core, maxMagLabel);
-		++iter;
+		p->draw(core, maxMagLabel);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
@@ -817,68 +809,62 @@ void SolarSystem::setStelStyle(const StelStyle& style)
 	setTrailsColor(StelUtils::strToVec3f(conf->value(section+"/object_trails_color", defaultColor).toString()));
 }
 
-Planet* SolarSystem::searchByEnglishName(QString planetEnglishName) const
+PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
 {
-	vector<Planet*>::const_iterator iter = systemPlanets.begin();
-	while (iter != systemPlanets.end())
+	foreach (const PlanetP& p, systemPlanets)
 	{
-		if((*iter)->getEnglishName() == planetEnglishName) return (*iter);  // also check standard ini file names
-		++iter;
+		if (p->getEnglishName() == planetEnglishName)
+			return p;
 	}
-
-	return NULL;
+	return PlanetP();
 }
 
 StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18) const
 {
-	vector<Planet*>::const_iterator iter = systemPlanets.begin();
-	while (iter != systemPlanets.end())
+	foreach (const PlanetP& p, systemPlanets)
 	{
-		if( (*iter)->getNameI18n() == planetNameI18 ) return (*iter);  // also check standard ini file names
-		++iter;
+		if (p->getNameI18n() == planetNameI18)
+			return qSharedPointerCast<StelObject>(p);
 	}
-	return NULL;
+	return StelObjectP();
 }
 
 
 StelObjectP SolarSystem::searchByName(const QString& name) const
 {
-	vector<Planet*>::const_iterator iter = systemPlanets.begin();
-	while (iter != systemPlanets.end())
+	foreach (const PlanetP& p, systemPlanets)
 	{
-		if( (*iter)->getEnglishName() == name ) return (*iter);
-		++iter;
+		if (p->getEnglishName() == name)
+			return qSharedPointerCast<StelObject>(p);
 	}
-	return NULL;
+	return StelObjectP();
 }
 
 // Search if any Planet is close to position given in earth equatorial position and return the distance
-StelObject* SolarSystem::search(Vec3d pos, const StelCore* core) const
+StelObjectP SolarSystem::search(Vec3d pos, const StelCore* core) const
 {
 	pos.normalize();
-	Planet * closest = NULL;
+	PlanetP closest;
 	double cos_angle_closest = 0.;
 	Vec3d equPos;
 
-	vector<Planet*>::const_iterator iter = systemPlanets.begin();
-	while (iter != systemPlanets.end())
+	foreach (const PlanetP& p, systemPlanets)
 	{
-		equPos = (*iter)->getEquinoxEquatorialPos(core->getNavigator());
+		equPos = p->getEquinoxEquatorialPos(core->getNavigator());
 		equPos.normalize();
-		double cos_ang_dist = equPos[0]*pos[0] + equPos[1]*pos[1] + equPos[2]*pos[2];
+		double cos_ang_dist = equPos*pos;
 		if (cos_ang_dist>cos_angle_closest)
 		{
-			closest = *iter;
+			closest = p;
 			cos_angle_closest = cos_ang_dist;
 		}
-		iter++;
 	}
 
 	if (cos_angle_closest>0.999)
 	{
-		return closest;
+		return qSharedPointerCast<StelObject>(closest);
 	}
-	else return NULL;
+	else return StelObjectP();
 }
 
 // Return a stl vector containing the planets located inside the limFov circle around position v
@@ -890,19 +876,17 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 
 	Vec3d v = core->getNavigator()->j2000ToEquinoxEqu(vv);
 	v.normalize();
-	double cosLimFov = cos(limitFov * M_PI/180.);
+	double cosLimFov = std::cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
-	vector<Planet*>::const_iterator iter = systemPlanets.begin();
-	while (iter != systemPlanets.end())
+	foreach (const PlanetP& p, systemPlanets)
 	{
-		equPos = (*iter)->getEquinoxEquatorialPos(core->getNavigator());
+		equPos = p->getEquinoxEquatorialPos(core->getNavigator());
 		equPos.normalize();
-		if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
+		if (equPos*v>=cosLimFov)
 		{
-			result.push_back(*iter);
+			result.append(qSharedPointerCast<StelObject>(p));
 		}
-		iter++;
 	}
 	return result;
 }
@@ -911,11 +895,8 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 void SolarSystem::updateI18n()
 {
 	StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-	vector<Planet*>::iterator iter;
-	for( iter = systemPlanets.begin(); iter < systemPlanets.end(); iter++ )
-	{
-		(*iter)->translateName(trans);
-	}
+	foreach (PlanetP p, systemPlanets)
+		p->translateName(trans);
 	planetNameFont = StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
@@ -923,80 +904,68 @@ QString SolarSystem::getPlanetHashString(void)
 {
 	QString str;
 	QTextStream oss(&str);
-
-	vector <Planet *>::iterator iter;
-	for (iter = systemPlanets.begin(); iter != systemPlanets.end(); ++iter)
+	foreach (const PlanetP& p, systemPlanets)
 	{
-		if((*iter)->getParent() != NULL && (*iter)->getParent()->getEnglishName() != "Sun")
+		if (!p->getParent().isNull() && p->getParent()->getEnglishName() != "Sun")
 		{
-			oss << (*iter)->getParent()->getEnglishName() << " : ";
+			oss << p->getParent()->getEnglishName() << " : ";
 		}
-
-		oss << (*iter)->getEnglishName() << endl;
-		oss << (*iter)->getEnglishName() << endl;
+		oss << p->getEnglishName() << endl;
+		oss << p->getEnglishName() << endl;
 	}
 	return str;
 }
 
 void SolarSystem::startTrails(bool b)
 {
-	vector<Planet*>::iterator iter;
-	for( iter = systemPlanets.begin(); iter < systemPlanets.end(); iter++ )
-	{
-		(*iter)->startTrail(b);
-	}
+	foreach (PlanetP p, systemPlanets)
+		p->startTrail(b);
 }
 
 void SolarSystem::setFlagTrails(bool b)
 {
-	vector<Planet*>::iterator iter;
-	for( iter = systemPlanets.begin(); iter < systemPlanets.end(); iter++ )
-	{
-		(*iter)->setFlagTrail(b);
-	}
+	foreach (PlanetP p, systemPlanets)
+		p->setFlagTrail(b);
 }
 
 bool SolarSystem::getFlagTrails(void) const
 {
-	for (std::vector<Planet*>::const_iterator iter = systemPlanets.begin();
-		 iter != systemPlanets.end(); iter++ ) {
-		if ((*iter)->getFlagTrail()) return true;
+	foreach (const PlanetP& p, systemPlanets)
+	{
+		if (p->getFlagTrail())
+			return true;
 	}
 	return false;
 }
 
 void SolarSystem::setFlagHints(bool b)
 {
-	vector<Planet*>::iterator iter;
-	for( iter = systemPlanets.begin(); iter < systemPlanets.end(); iter++ )
-	{
-		(*iter)->setFlagHints(b);
-	}
+	foreach (PlanetP p, systemPlanets)
+		p->setFlagHints(b);
 }
 
 bool SolarSystem::getFlagHints(void) const
 {
-	for (std::vector<Planet*>::const_iterator iter = systemPlanets.begin(); iter != systemPlanets.end(); iter++)
+	foreach (const PlanetP& p, systemPlanets)
 	{
-		if ((*iter)->getFlagHints()) return true;
+		if (p->getFlagHints())
+			return true;
 	}
 	return false;
 }
 
 void SolarSystem::setFlagLabels(bool b)
 {
-	vector<Planet*>::iterator iter;
-	for( iter = systemPlanets.begin(); iter < systemPlanets.end(); iter++ )
-	{
-		(*iter)->setFlagLabels(b);
-	}
+	foreach (PlanetP p, systemPlanets)
+		p->setFlagLabels(b);
 }
 
 bool SolarSystem::getFlagLabels() const
 {
-	for (std::vector<Planet*>::const_iterator iter = systemPlanets.begin(); iter != systemPlanets.end(); iter++)
+	foreach (const PlanetP& p, systemPlanets)
 	{
-		if ((*iter)->getFlagLabels()) return true;
+		if (p->getFlagLabels())
+			return true;
 	}
 	return false;
 }
@@ -1004,24 +973,20 @@ bool SolarSystem::getFlagLabels() const
 void SolarSystem::setFlagOrbits(bool b)
 {
 	flagOrbits = b;
-	if (!b || !selected || selected == sun)
+	if (!b || !selected || selected==sun)
 	{
-		vector<Planet*>::iterator iter;
-		for( iter = systemPlanets.begin(); iter < systemPlanets.end(); iter++ )
-		{
-			(*iter)->setFlagOrbits(b);
-		}
+		foreach (PlanetP p, systemPlanets)
+			p->setFlagOrbits(b);
 	}
 	else
 	{
-		// if a Planet is selected and orbits are on,
-		// fade out non-selected ones
-		vector<Planet*>::iterator iter;
-		for (iter = systemPlanets.begin();
-			 iter != systemPlanets.end(); iter++ )
+		// If a Planet is selected and orbits are on, fade out non-selected ones
+		foreach (PlanetP p, systemPlanets)
 		{
-			if (selected == (*iter)) (*iter)->setFlagOrbits(b);
-			else (*iter)->setFlagOrbits(false);
+			if (selected == p)
+				p->setFlagOrbits(b);
+			else
+				p->setFlagOrbits(false);
 		}
 	}
 }
@@ -1031,12 +996,12 @@ void SolarSystem::setFlagLightTravelTime(bool b)
 	flagLightTravelTime = b;
 }
 
-void SolarSystem::setSelected(StelObject* obj)
+void SolarSystem::setSelected(PlanetP obj)
 {
 	if (obj && obj->getType() == "Planet")
 		selected = obj;
 	else
-		selected = NULL;
+		selected.clear();;
 	// Undraw other objects hints, orbit, trails etc..
 	setFlagHints(getFlagHints());
 	setFlagOrbits(getFlagOrbits());
@@ -1051,19 +1016,19 @@ void SolarSystem::update(double deltaTime)
 
 	// Determine if home planet has changed, and restart planet trails
 	// since the data is no longer useful
-	if (nav->getHomePlanet() != lastHomePlanet)
+	if (lastHomePlanet && nav->getCurrentLocation().planetName != lastHomePlanet->getEnglishName())
 	{
-		lastHomePlanet = nav->getHomePlanet();
+		lastHomePlanet = searchByEnglishName(nav->getCurrentLocation().planetName);
+		Q_ASSERT(!lastHomePlanet.isNull());
 		restartTrails = true;
 	}
 
-	vector<Planet*>::iterator iter = systemPlanets.begin();
-	while (iter != systemPlanets.end())
+	foreach (PlanetP p, systemPlanets)
 	{
-		if(restartTrails) (*iter)->startTrail(true);
-		(*iter)->updateTrail(nav);
-		(*iter)->update((int)(deltaTime*1000));
-		iter++;
+		if (restartTrails)
+			p->startTrail(true);
+		p->updateTrail(nav);
+		p->update((int)(deltaTime*1000));
 	}
 }
 
@@ -1096,17 +1061,15 @@ bool SolarSystem::nearLunarEclipse()
 QStringList SolarSystem::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
-	if (maxNbItem==0) return result;
-
+	if (maxNbItem==0)
+		return result;
 	QString objw = objPrefix.toUpper();
-
-	vector <Planet*>::const_iterator iter;
-	for (iter=systemPlanets.begin(); iter!=systemPlanets.end(); ++iter)
+	foreach (const PlanetP& p, systemPlanets)
 	{
-		QString constw = (*iter)->getNameI18n().mid(0, objw.size()).toUpper();
+		QString constw = p->getNameI18n().mid(0, objw.size()).toUpper();
 		if (constw==objw)
 		{
-			result << (*iter)->getNameI18n();
+			result << p->getNameI18n();
 			if (result.size()==maxNbItem)
 				return result;
 		}
@@ -1118,7 +1081,7 @@ void SolarSystem::selectedObjectChangeCallBack(StelModuleSelectAction action)
 {
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Planet");
 	if (!newSelected.empty())
-		setSelected(newSelected[0].data());
+		setSelected(qSharedPointerCast<Planet>(newSelected[0]));
 }
 
 // Activate/Deactivate planets display
@@ -1163,7 +1126,7 @@ void SolarSystem::setSelected(const QString& englishName)
 	setSelected(searchByEnglishName(englishName));
 }
 
-bool SolarSystem::biggerDistance::operator()(Planet* p1, Planet* p2)
+bool SolarSystem::biggerDistance::operator()(PlanetP p1, PlanetP p2)
 {
 	return p1->getDistance() > p2->getDistance();
 }
@@ -1172,9 +1135,7 @@ bool SolarSystem::biggerDistance::operator()(Planet* p1, Planet* p2)
 QStringList SolarSystem::getAllPlanetEnglishNames() const
 {
 	QStringList res;
-	for (std::vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
-	{
-		res.append((*iter)->englishName);
-	}
+	foreach (const PlanetP& p, systemPlanets)
+		res.append(p->englishName);
 	return res;
 }

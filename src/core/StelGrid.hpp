@@ -1,22 +1,22 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Guillaume Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
- 
+
 #ifndef _STELGRID_HPP_
 #define _STELGRID_HPP_
 
@@ -24,29 +24,29 @@
 #include "StelSphereGeometry.hpp"
 
 
-class StelGrid : public std::vector<StelGridObject*>
+class StelGrid : public std::vector<StelGridObjectP>
 {
 public:
-    StelGrid() {}
-    
-    virtual ~StelGrid() {}
+	StelGrid() {}
+
+	virtual ~StelGrid() {}
 
 	//! Preselect all the objects in the given area
-    virtual void filterIntersect(const QVector<SphericalCap>& s) {;}
-    
+	virtual void filterIntersect(const QVector<SphericalCap>& s) {;}
+
 	//! Get all the objects loaded into the grid structure
-	virtual std::vector<StelGridObject*> getAllObjects() = 0;
+	virtual std::vector<StelGridObjectP> getAllObjects() = 0;
 
 	//! Insert an element in the resulting object list
-	void insertResult(StelGridObject* obj)
-    {
-		std::vector<StelGridObject*>::push_back(obj);
-    }
-	
-	//! Insert several elements in the resulting object list
-	void insertResult(const std::vector<StelGridObject*>& objs)
+	void insertResult(StelGridObjectP obj)
 	{
-		std::vector<StelGridObject*>::insert(std::vector<StelGridObject*>::end(), objs.begin(), objs.end());
+		std::vector<StelGridObjectP>::push_back(obj);
+	}
+
+	//! Insert several elements in the resulting object list
+	void insertResult(const std::vector<StelGridObjectP>& objs)
+	{
+		std::vector<StelGridObjectP>::insert(std::vector<StelGridObjectP>::end(), objs.begin(), objs.end());
 	}
 };
 
@@ -56,7 +56,7 @@ public:
 	SimpleGrid() {}
 
 	~SimpleGrid() {}
-	void insert(StelGridObject* obj)
+	void insert(StelGridObjectP obj)
 	{
 		all.push_back(obj);
 	}
@@ -65,10 +65,10 @@ public:
 			void filterIntersect(const Shape& s);
 
 	//! Get all the object loaded into the grid
-	virtual std::vector<StelGridObject*> getAllObjects() {return all;}
+	virtual std::vector<StelGridObjectP> getAllObjects() {return all;}
 
 private:
-	typedef std::vector<StelGridObject*> AllObjects;
+	typedef std::vector<StelGridObjectP> AllObjects;
 	AllObjects all;
 };
 
