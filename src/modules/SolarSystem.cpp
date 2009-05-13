@@ -17,8 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-
-#include <algorithm>
 #include "SolarSystem.hpp"
 #include "StelTexture.hpp"
 #include "stellplanet.h"
@@ -43,6 +41,9 @@
 #include "StelUtils.hpp"
 #include "StelPainter.hpp"
 
+#include <functional>
+#include <algorithm>
+
 #include <QTextStream>
 #include <QSettings>
 #include <QVariant>
@@ -52,8 +53,6 @@
 #include <QMultiMap>
 #include <QMapIterator>
 #include <QDebug>
-
-using namespace std;
 
 SolarSystem::SolarSystem() : moonScale(1.), fontSize(14.),
 	planetNameFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)),
@@ -71,10 +70,10 @@ SolarSystem::~SolarSystem()
 {
 	// release selected:
 	selected.clear();
-	for(std::vector<Orbit*>::iterator iter = orbits.begin(); iter != orbits.end(); ++iter)
+	foreach (Orbit* orb, orbits)
 	{
-		if (*iter) delete *iter;
-		*iter = NULL;
+		delete orb;
+		orb = NULL;
 	}
 	sun.clear();
 	moon.clear();
@@ -765,6 +764,15 @@ void SolarSystem::computeTransMatrices(double date, const Vec3d& observerPos)
 	}
 }
 
+// And sort them from the furthest to the closest to the observer
+struct biggerDistance : public std::binary_function<PlanetP, PlanetP, bool>
+{
+	bool operator()(PlanetP p1, PlanetP p2)
+	{
+		return p1->getDistance() > p2->getDistance();
+	}
+};
+
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
 void SolarSystem::draw(StelCore* core)
@@ -1126,10 +1134,6 @@ void SolarSystem::setSelected(const QString& englishName)
 	setSelected(searchByEnglishName(englishName));
 }
 
-bool SolarSystem::biggerDistance::operator()(PlanetP p1, PlanetP p2)
-{
-	return p1->getDistance() > p2->getDistance();
-}
 
 // Get the list of all the planet english names
 QStringList SolarSystem::getAllPlanetEnglishNames() const
