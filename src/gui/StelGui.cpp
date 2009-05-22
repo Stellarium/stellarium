@@ -694,13 +694,12 @@ void StelGui::update(double deltaTime)
 	}
 	else
 	{
-		if (buttonTimeRewind->isChecked()==true)
-			buttonTimeRewind->setChecked(false);
+		if (buttonTimeForward->isChecked()==true)
+			buttonTimeForward->setChecked(false);
 	}
 	if (buttonTimeRealTimeSpeed->isChecked()!=nav->getRealTimeSpeed())
 	{
-		if (buttonTimeRealTimeSpeed->isChecked()!=nav->getRealTimeSpeed())
-			buttonTimeRealTimeSpeed->setChecked(nav->getRealTimeSpeed());
+		buttonTimeRealTimeSpeed->setChecked(nav->getRealTimeSpeed());
 	}
 	const bool isTimeNow=nav->getIsTimeNow();
 	if (buttonTimeCurrent->isChecked()!=isTimeNow)
