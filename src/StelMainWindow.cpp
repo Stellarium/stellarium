@@ -40,7 +40,7 @@
 // Initialize static variables
 StelMainWindow* StelMainWindow::singleton = NULL;
 
-StelMainWindow::StelMainWindow(QWidget* parent) : QMainWindow(parent), initComplete(false)
+StelMainWindow::StelMainWindow(QWidget* parent) : QMainWindow(parent)
 {
 	// Can't create 2 StelMainWindow instances
 	Q_ASSERT(!singleton);
@@ -89,8 +89,6 @@ void StelMainWindow::init()
 	}
 	
 	StelMainGraphicsView::getInstance().init();
-	
-	initComplete = true;
 }
 
 // Alternate fullscreen mode/windowed mode if possible
