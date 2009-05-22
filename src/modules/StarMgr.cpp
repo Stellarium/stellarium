@@ -286,9 +286,17 @@ void StarMgr::loadData()
 		QString cat = it.next();
 		QString cat_file_name = starSettings->value(cat+"/path").toString();
 		QString cat_file_path;
+
+		/* See if it is an absolute path, else prepend default path.  */
+		if (!(fileMgr.isAbsolute(cat_file_name)))
+		{
+			/* relative path */
+			cat_file_name = "stars/default/"+cat_file_name;
+		}
+
 		try
 		{
-			cat_file_path = fileMgr.findFile("stars/default/"+cat_file_name);
+			cat_file_path = fileMgr.findFile(cat_file_name);
 		}
 		catch(std::runtime_error e)
 		{
