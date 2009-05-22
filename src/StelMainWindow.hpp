@@ -38,7 +38,7 @@ public:
 	//! @return the StelMainWindow singleton instance
 	static StelMainWindow& getInstance() {Q_ASSERT(singleton); return *singleton;}
 
-	//! Performs various initialization incluing the init of the StelMainGraphicsView instance.
+	//! Performs various initialization including the init of the StelMainGraphicsView instance.
 	void init();
 	
 	//! Set the application title for the current language.
@@ -63,9 +63,6 @@ protected:
 private:
 	//! The StelMainWindow singleton
 	static StelMainWindow* singleton;
-	
-	//! Used to prevent resize events saving to the config file until after main init is complete.
-	bool initComplete;
 };
 
 #endif // _STELMAINWINDOW_HPP_
