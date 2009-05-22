@@ -102,6 +102,10 @@ public:
 	//! @param path to check
 	static bool exists(const QString& path);
 	
+	//! Check if a path is absolute
+	//! @param path to check
+	static bool isAbsolute(const QString& path);
+
 	//! Check if a path is readable.
 	//! @return true if file at path is readable, false if not or if the
 	//! file does not exist

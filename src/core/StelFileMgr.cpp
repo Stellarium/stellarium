@@ -106,8 +106,7 @@ QString StelFileMgr::findFile(const QString& path, const Flags& flags)
 		return path;
 		
 	// explicitly specified absolute paths
-	QFileInfo thePath(path);
-	if ( thePath.isAbsolute() )
+	if ( isAbsolute(path) )
 	{
 		if (fileFlagsCheck(path, flags))
 			return path;
@@ -213,6 +212,11 @@ void StelFileMgr::setSearchPaths(const QStringList& paths)
 bool StelFileMgr::exists(const QString& path)
 {
 	return QFileInfo(path).exists();
+}
+
+bool StelFileMgr::isAbsolute(const QString& path)
+{
+	return QFileInfo(path).isAbsolute();
 }
 
 bool StelFileMgr::isReadable(const QString& path)
