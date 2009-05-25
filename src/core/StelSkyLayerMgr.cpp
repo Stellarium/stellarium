@@ -70,10 +70,21 @@ void StelSkyLayerMgr::init()
 	}
 }
 
-QString StelSkyLayerMgr::insertSkyLayer(StelSkyLayerP tile, bool ashow)
+QString StelSkyLayerMgr::insertSkyLayer(StelSkyLayerP tile, const QString& keyHint, bool ashow)
 {
 	SkyLayerElem* bEl = new SkyLayerElem(tile, ashow);
 	QString key = tile->getKeyHint();
+	if (key.isEmpty())
+	{
+		if (!keyHint.isEmpty())
+		{
+			key = keyHint;
+		}
+		else
+		{
+			key = "no name";
+		}
+	}
 	if (allSkyLayers.contains(key))
 	{
 		QString suffix = "_01";
@@ -92,9 +103,9 @@ QString StelSkyLayerMgr::insertSkyLayer(StelSkyLayerP tile, bool ashow)
 }
 
 // Add a new image from its URI (URL or local file name)
-QString StelSkyLayerMgr::insertSkyImage(const QString& uri, bool ashow)
+QString StelSkyLayerMgr::insertSkyImage(const QString& uri, const QString& keyHint, bool ashow)
 {
-	return insertSkyLayer(StelSkyLayerP(new StelSkyImageTile(uri)), ashow);
+	return insertSkyLayer(StelSkyLayerP(new StelSkyImageTile(uri)), keyHint, ashow);
 }
 
 // Remove a sky image tile from the list of background images
@@ -256,7 +267,7 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 		vm["worldCoords"] = ol;
 
 		StelSkyLayerP tile = StelSkyLayerP(new StelSkyImageTile(vm, 0));
-		QString key = insertSkyLayer(tile, visible);
+		QString key = insertSkyLayer(tile, filename, visible);
 		if (key == id)
 			return true;
 		else
@@ -276,7 +287,7 @@ void StelSkyLayerMgr::showLayer(const QString& id, bool b)
 			allSkyLayers[id]->show = b;
 }
 
-bool StelSkyLayerMgr::getShowLayer(const QString& id)
+bool StelSkyLayerMgr::getShowLayer(const QString& id) const
 {
 	if (allSkyLayers.contains(id))
 		if (allSkyLayers[id]!=NULL)
@@ -285,3 +296,21 @@ bool StelSkyLayerMgr::getShowLayer(const QString& id)
 }
 
 
+//! Get the list of all the currently loaded layers.
+QMap<QString, StelSkyLayerP> StelSkyLayerMgr::getAllSkyLayers() const
+{
+	QMap<QString, StelSkyLayerP> res;
+	for (QMap<QString, StelSkyLayerMgr::SkyLayerElem*>::const_iterator iter=allSkyLayers.begin();iter!=allSkyLayers.end();++iter)
+	{
+		qDebug() << iter.key() << iter.value()->layer->getShortName();
+		res.insert(iter.key(), iter.value()->layer);
+	}
+	return res;
+}
+
+StelSkyLayerP StelSkyLayerMgr::getSkyLayer(const QString& key) const
+{
+	if (allSkyLayers.contains(key))
+		return allSkyLayers[key]->layer;
+	return StelSkyLayerP();
+}

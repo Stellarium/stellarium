@@ -61,10 +61,15 @@ public:
 	//! Add a new layer.
 	//! @param show defined whether the layer should be shown by default
 	//! @return the reference key to use when accessing this layer later on.
-	QString insertSkyLayer(StelSkyLayerP l, bool show=true);
+	QString insertSkyLayer(StelSkyLayerP l, const QString& keyHint=QString(), bool show=true);
 
 	//! Remove a layer.
 	void removeSkyLayer(StelSkyLayerP l);
+
+	//! Get the list of all the currently loaded layers.
+	QMap<QString, StelSkyLayerP> getAllSkyLayers() const;
+
+	StelSkyLayerP getSkyLayer(const QString& key) const;
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////
@@ -109,7 +114,7 @@ public slots:
 	//! @return the current shown status of the specified image:
 	//! - true means the specified image is currently shown.
 	//! - false means the specified image is currently not shown.
-	bool getShowLayer(const QString& id);
+	bool getShowLayer(const QString& id) const;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Other slots
@@ -119,7 +124,7 @@ public slots:
 	//! @param uri the local file or the URL where the JSON image description is located
 	//! @param show defined whether the image should be shown by default
 	//! @return the reference key to use when accessing this image later on
-	QString insertSkyImage(const QString& uri, bool show=true);
+	QString insertSkyImage(const QString& uri, const QString& keyHint=QString(), bool show=true);
 
 	//! Remove a sky layer from the list.
 	//! Note: this is not thread safe, and so should not be used directly
