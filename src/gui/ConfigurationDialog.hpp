@@ -105,6 +105,10 @@ private slots:
 	//! This basically replaces the config.ini by the default one
 	void setDefaultViewOptions();
 
+	void populatePluginsList(void);
+	void pluginsSelectionChanged(const QString&);
+	void loadAtStartupChanged(int);
+
 	//! The selection of script in the script list has changed
 	//! Updates the script information panel
 	void scriptSelectionChanged(const QString& s);
@@ -116,6 +120,7 @@ private slots:
 
 	void aScriptIsRunning(void);
 	void aScriptHasStopped(void);
+
 	void populateScriptsList(void);
 	void setFixedDateTimeToCurrent(void);
 
