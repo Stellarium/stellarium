@@ -215,6 +215,19 @@ void StelModuleMgr::unloadAllPlugins()
 	}
 }
 
+void StelModuleMgr::setPluginLoadAtStartup(const QString& key, bool b)
+{
+	try
+	{
+		QSettings pd(StelApp::getInstance().getFileMgr().findFile("modules/" + key + "/module.ini"), StelIniFormat);
+		pd.setValue("module/load_at_startup", b);
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "ERROR while trying to get info for plugin " << key << ":" << e.what();
+	}
+}
+
 /*************************************************************************
  Generate properly sorted calling lists for each action (e,g, draw, update)
  according to modules orders dependencies
