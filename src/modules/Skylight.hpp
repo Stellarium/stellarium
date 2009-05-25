@@ -43,7 +43,7 @@ public:
 	Skylight();
 	virtual ~Skylight();
 	// Set the fixed parameters and precompute what can be
-	// This funtion has to be called once before any call to get_*_value()
+	// This function has to be called once before any call to get_*_value()
 	void setParams(float sunZenithAngle, float turbidity);
 	// Compute the sky color at the given position in the xyY color system and store it in position.color
 	// void getxyYValue(skylightStruct * position);

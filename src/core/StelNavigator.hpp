@@ -187,7 +187,7 @@ public slots:
 	void setTimeNow();
 	//! Set the time to some value, leaving the day the same.
 	void setTodayTime(const QTime& target);
-	//! Get wether the current stellarium time is the real world time
+	//! Get whether the current stellarium time is the real world time
 	bool getIsTimeNow() const;
 
 	//! get the initial "today time" from the config file

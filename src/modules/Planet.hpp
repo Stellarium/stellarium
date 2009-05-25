@@ -262,7 +262,7 @@ protected:
 	QString englishName;            // english planet name
 	QString nameI18;                // International translated name
 	QString texMapName;				// Texture file path
-	int flagLighting;               // Set wether light computation has to be proceed
+	int flagLighting;               // Set whether light computation has to be proceed
 	RotationElements re;            // Rotation param
 	double radius;                  // Planet radius in UA
 	double oneMinusOblateness;      // (polar radius)/(equatorial radius)
