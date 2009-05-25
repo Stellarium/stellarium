@@ -53,6 +53,11 @@ private slots:
 	//! Update the widget to make sure it is synchrone if a value was changed programmatically
 	//! This function should be called repeatidly with e.g. a timer
 	void updateFromProgram();
+
+	void populateSkyLayersList();
+	void skyLayersSelectionChanged(const QString&);
+	void skyLayersEnabledChanged(int);
+
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 private:
 	void updateSkyCultureText();

@@ -98,6 +98,9 @@ public:
 	//! Return the absolute path/URL to the image file
 	QString getAbsoluteImageURI() const {return absoluteImageURI;}
 
+	//! Return an HTML descritpion of the image to be displayed in the GUI.
+	virtual QString getLayerDescriptionHtml() const {return htmlDescription;}
+
 protected:
 	//! Reimplement the abstract method.
 	//! Load the tile from a valid QVariantMap.
@@ -150,6 +153,8 @@ private:
 
 	// Used for smooth fade in
 	QTimeLine* texFader;
+
+	QString htmlDescription;
 
 #ifdef DEBUG_STELSKYIMAGE_TILE
 	static class StelFont* debugFont;

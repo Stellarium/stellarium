@@ -36,6 +36,7 @@
 #include "GridLinesMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "StelStyle.hpp"
+#include "StelSkyLayerMgr.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -263,6 +264,11 @@ void ViewDialog::createDialogContent()
 	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
 
+	// Sky layers
+	populateSkyLayersList();
+	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateSkyLayersList()));
+	connect(ui->skyLayerListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyLayersSelectionChanged(const QString&)));
+
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 
 	QTimer* refreshTimer = new QTimer(this);
@@ -305,6 +311,31 @@ void ViewDialog::populateLists()
 	l->setCurrentItem(l->findItems(lmgr->getCurrentLandscapeName(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
+}
+
+void ViewDialog::populateSkyLayersList()
+{
+	ui->skyLayerListWidget->clear();
+	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+	ui->skyLayerListWidget->addItems(skyLayerMgr->getAllKeys());
+}
+
+void ViewDialog::skyLayersSelectionChanged(const QString& s)
+{
+	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+	StelSkyLayerP l = skyLayerMgr->getSkyLayer(s);
+
+	QString html = "<html><head></head><body>";
+	html += "<h2>" + l->getShortName()+ "</h2>";
+	html += "<p>" + l->getLayerDescriptionHtml() + "</p>";
+	html += "<h3>" + q_("Contact") + ": " + l->getShortServerCredits() + "</h3>";
+	html += "</body></html>";
+	ui->skyLayerTextBrowser->setHtml(html);
+	ui->skyLayerEnableCheckBox->setChecked(skyLayerMgr->getShowLayer(s));
+}
+
+void ViewDialog::skyLayersEnabledChanged(int state)
+{
 }
 
 void ViewDialog::skyCultureChanged(const QString& cultureName)
