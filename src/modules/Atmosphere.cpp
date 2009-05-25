@@ -222,7 +222,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		if (point[2]<=0)
 		{
 			point[2] = -point[2];
-			// The sky below the ground is the symetric of the one above :
+			// The sky below the ground is the symmetric of the one above :
 			// it looks nice and gives proper values for brightness estimation
 		}
 		

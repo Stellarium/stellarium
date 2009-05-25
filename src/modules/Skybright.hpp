@@ -42,7 +42,7 @@ public:
 	void setLocation(float latitude, float altitude, float temperature=15.f, float relativeHumidity=40.f);
 
 	//! Set the moon and sun zenith angular distance (cosin given) and precompute what can be
-	//! This funtion has to be called once before any call to getLuminance()
+	//! This function has to be called once before any call to getLuminance()
 	//! @param cosDistMoonZenith cos(angular distance between moon and zenith)
 	//! @param cosDistSunZenith cos(angular distance between sun and zenith)
 	void setSunMoon(float cosDistMoonZenith, float cosDistSunZenith);
