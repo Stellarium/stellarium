@@ -207,11 +207,16 @@ void ConfigurationDialog::createDialogContent()
 	connect(&scriptMgr, SIGNAL(scriptStopped()), this, SLOT(aScriptHasStopped()));
 	ui->scriptListWidget->setSortingEnabled(true);
 	populateScriptsList();
-
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateScriptsList()));
 
-	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+	// plugins control
+	StelApp::getInstance().getModuleMgr().getPluginsList();
+	connect(ui->pluginsListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(pluginsSelectionChanged(const QString&)));
+	connect(ui->pluginLoadAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(loadAtStartupChanged(int)));
+	populatePluginsList();
 
+
+	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 	updateConfigLabels();
 }
 
@@ -474,6 +479,60 @@ void ConfigurationDialog::setDefaultViewOptions()
 	conf->setValue("main/restore_defaults", true);
 }
 
+void ConfigurationDialog::populatePluginsList()
+{
+	int prevSel = ui->pluginsListWidget->currentRow();
+	ui->pluginsListWidget->clear();
+	QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
+	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
+	{
+		ui->pluginsListWidget->addItem(desc.name);
+	}
+	// If we had a valid previous selection (i.e. not first time we populate), restore it
+	if (prevSel >= 0 && prevSel < ui->pluginsListWidget->count())
+		ui->pluginsListWidget->setCurrentRow(prevSel);
+	else
+		ui->pluginsListWidget->setCurrentRow(0);
+}
+
+void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
+{
+	if (s.isEmpty())
+		return;
+	QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
+	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
+	{
+		if (s==desc.name)
+		{
+			QString html = "<html><head></head><body>";
+			html += "<h2>" + desc.name + "</h2>";
+			html += "<h3>" + q_("Author") + ": " + desc.author + "</h3>";
+			QString d = desc.description;
+			d.replace("\n", "<br />");
+			html += "<p>" + d + "</p>";
+			html += "<h3>" + q_("Contact") + ": " + desc.contact + "</h3>";
+			html += "</body></html>";
+			ui->pluginsInfoBrowser->setHtml(html);
+			ui->pluginLoadAtStartupCheckBox->setChecked(desc.loadAtStartup);
+			return;
+		}
+	}
+}
+
+void ConfigurationDialog::loadAtStartupChanged(int state)
+{
+	QString name = ui->pluginsListWidget->currentItem()->text();
+	QString key;
+	QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
+	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
+	{
+		if (desc.name==name)
+			key = desc.key;
+	}
+	if (!key.isEmpty())
+		StelApp::getInstance().getModuleMgr().setPluginLoadAtStartup(key, state==Qt::Checked);
+}
+
 void ConfigurationDialog::populateScriptsList(void)
 {
 	int prevSel = ui->scriptListWidget->currentRow();
@@ -489,7 +548,7 @@ void ConfigurationDialog::populateScriptsList(void)
 
 void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 {
-	if (s.isEmpty() || s=="")
+	if (s.isEmpty())
 		return;
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));

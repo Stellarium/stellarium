@@ -46,26 +46,26 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 {
 	Q_ASSERT(proj);
 	Q_ASSERT(globalMutex);
-	
+
 // 	GLenum er = glGetError();
 // 	if (er!=GL_NO_ERROR)
 // 	{
 // 		if (er==GL_INVALID_OPERATION)
 // 			qFatal("Invalid openGL operation. It is likely that you used openGL calls without having a valid instance of StelPainter");
 // 	}
-	
+
 	// Lock the global mutex ensuring that no other instances of StelPainter are currently being used
 	if (globalMutex->tryLock()==false)
 	{
 		qFatal("There can be only 1 instance of StelPainter at a given time");
 	}
-	
+
 	switchToNativeOpenGLPainting();
-	
+
 	// Init GL viewport to current projector values
 	glViewport(prj->viewportXywh[0], prj->viewportXywh[1], prj->viewportXywh[2], prj->viewportXywh[3]);
 	initGlMatrixOrtho2d();
-	
+
 	glShadeModel(GL_FLAT);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
@@ -75,14 +75,14 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	glDisable(GL_ALPHA_TEST);
 	glDisable(GL_LINE_SMOOTH);
 	glDisable(GL_TEXTURE_2D);
-	
+
 	glFrontFace(prj->needGlFrontFaceCW()?GL_CW:GL_CCW);
 }
 
 StelPainter::~StelPainter()
 {
 	revertToQtPainting();
-	
+
 	// We are done with this StelPainter
 	globalMutex->unlock();
 }
@@ -208,11 +208,11 @@ void ComputeCosSinTheta(double phi,int segments) {
   *--cos_sin_rev = -cos_sin[-1];
   *--cos_sin_rev =  cos_sin[-2];
   while (cos_sin < cos_sin_rev) {
-    cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
-    cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
-    cos_sin += 2;
-    *--cos_sin_rev = -cos_sin[-1];
-    *--cos_sin_rev =  cos_sin[-2];
+	cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
+	cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
+	cos_sin += 2;
+	*--cos_sin_rev = -cos_sin[-1];
+	*--cos_sin_rev =  cos_sin[-2];
   }
 }
 
@@ -231,12 +231,12 @@ void ComputeCosSinRho(double phi,int segments) {
   *--cos_sin_rev =  cos_sin[-1];
   *--cos_sin_rev = -cos_sin[-2];
   while (cos_sin < cos_sin_rev) {
-    cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
-    cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
-    cos_sin += 2;
-    *--cos_sin_rev =  cos_sin[-1];
-    *--cos_sin_rev = -cos_sin[-2];
-    segments--;
+	cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
+	cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
+	cos_sin += 2;
+	*--cos_sin_rev =  cos_sin[-1];
+	*--cos_sin_rev = -cos_sin[-2];
+	segments--;
   }
 }
 
@@ -270,22 +270,22 @@ void StelPainter::sFanDisk(double radius, int innerFanSlices, int level) const
 			double y = rad[i]*cos_sin_theta_p[slices_step+1];
 			glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
 			drawVertex3(x,y,0);
-		
+
 			x = rad[i]*cos_sin_theta_p[2*slices_step];
 			y = rad[i]*cos_sin_theta_p[2*slices_step+1];
 			glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
 			drawVertex3(x,y,0);
-		
+
 			x = rad[i-1]*cos_sin_theta_p[2*slices_step];
 			y = rad[i-1]*cos_sin_theta_p[2*slices_step+1];
 			glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
 			drawVertex3(x,y,0);
-		
+
 			x = rad[i-1]*cos_sin_theta_p[0];
 			y = rad[i-1]*cos_sin_theta_p[1];
 			glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
 			drawVertex3(x,y,0);
-		
+
 			x = rad[i]*cos_sin_theta_p[0];
 			y = rad[i]*cos_sin_theta_p[1];
 			glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
@@ -312,7 +312,7 @@ void StelPainter::sDisk(GLdouble radius, GLint slices, GLint stacks, int orientI
 {
 	GLint i,j;
 	const GLfloat nsign = orientInside ? -1 : 1;
-    double r;
+	double r;
 	const double dr = radius / stacks;
 
 	const double dtheta = 2.0 * M_PI / slices;
@@ -326,7 +326,7 @@ void StelPainter::sDisk(GLdouble radius, GLint slices, GLint stacks, int orientI
 	{
 		glBegin(GL_QUAD_STRIP);
 		for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;
-		     j++,cos_sin_theta_p+=2)
+			 j++,cos_sin_theta_p+=2)
 		{
 			double x = r*cos_sin_theta_p[0];
 			double y = r*cos_sin_theta_p[1];
@@ -365,8 +365,8 @@ void StelPainter::sRing(GLdouble rMin, GLdouble rMax, GLint slices, GLint stacks
 		const double tex_r1 = (r+dr-rMin)/(rMax-rMin);
 		glBegin(GL_QUAD_STRIP /*GL_TRIANGLE_STRIP*/);
 		for (j=0,cos_sin_theta_p=cos_sin_theta;
-		        j<=slices;
-		        j++,cos_sin_theta_p+=2)
+				j<=slices;
+				j++,cos_sin_theta_p+=2)
 		{
 			x = r*cos_sin_theta_p[0];
 			y = r*cos_sin_theta_p[1];
@@ -388,7 +388,7 @@ static void sSphereMapTexCoordFast(double rho_div_fov, double costheta, double s
 	if (rho_div_fov>0.5)
 		rho_div_fov=0.5;
 	glTexCoord2d(0.5 + rho_div_fov * costheta,
-	             0.5 + rho_div_fov * sintheta);
+				 0.5 + rho_div_fov * sintheta);
 }
 
 void StelPainter::sSphereMap(GLdouble radius, GLint slices, GLint stacks, double textureFov, int orientInside) const
@@ -468,7 +468,7 @@ void StelPainter::sSphereMap(GLdouble radius, GLint slices, GLint stacks, double
 }
 
 void StelPainter::drawTextGravity180(const StelFont* font, float x, float y, const QString& ws,
-                                   bool speedOptimize, float xshift, float yshift) const
+								   bool speedOptimize, float xshift, float yshift) const
 {
 	static float dx, dy, d, theta, psi;
 	dx = x - prj->viewportCenter[0];
@@ -484,7 +484,7 @@ void StelPainter::drawTextGravity180(const StelFont* font, float x, float y, con
 
 	if (psi>5)
 		psi = 5;
-	
+
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glPushMatrix();
 	glTranslatef(x,y,0);
@@ -518,7 +518,7 @@ void StelPainter::drawTextGravity180(const StelFont* font, float x, float y, con
 			if (psi>5)
 				psi = 5;
 		}
-		
+
 		glRotatef(psi,0,0,-1);
 	}
 	glPopMatrix();
@@ -535,7 +535,7 @@ void StelPainter::drawText(const StelFont* font, float x, float y, const QString
 		drawTextGravity180(font, x, y, str, true, xshift, yshift);
 		return;
 	}
-	
+
 // 	QPainter* painter = StelAppGraphicsScene::getInstance().switchToQPainting();
 // 	if (painter==NULL)
 // 	{
@@ -553,7 +553,7 @@ void StelPainter::drawText(const StelFont* font, float x, float y, const QString
 // 	painter->drawPath(text);
 // 	//painter->drawText(QPointF(xshift, -yshift), str);
 // 	StelAppGraphicsScene::getInstance().revertToOpenGL();
-	
+
 	glPushMatrix();
 	glTranslatef(x,y,0);
 	glRotatef(angleDeg,0,0,1);
@@ -575,16 +575,16 @@ void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, Vec3d& w
 		vertexList.insert(iter, win2);
 		return;
 	}
-	
+
 	Vec3d win3;
 	Vec3d newVertex(p1+p2);
 	newVertex.normalize();
 	newVertex*=radius;
 	const bool isValidVertex = prj->project(newVertex+center, win3);
-	
+
 	const Vec3d v1(win1[0]-win3[0], win1[1]-win3[1], 0);
 	const Vec3d v2(win2[0]-win3[0], win2[1]-win3[1], 0);
-	
+
 	const double dist = std::sqrt((v1[0]*v1[0]+v1[1]*v1[1])*(v2[0]*v2[0]+v2[1]*v2[1]));
 	const double cosAngle = (v1[0]*v2[0]+v1[1]*v2[1])/dist;
 	if ((cosAngle>-0.999 || dist>50*50 || crossDiscontinuity) && nbI<10)
@@ -603,9 +603,9 @@ void drawSmallCircleVertexArray()
 {
 	if (smallCircleVertexArray.isEmpty())
 		return;
-	
+
 	Q_ASSERT(smallCircleVertexArray.size()>1);
-	
+
 	glEnableClientState(GL_VERTEX_ARRAY);
 	// Load the vertex array
 	glVertexPointer(3, GL_DOUBLE, 0, smallCircleVertexArray.constData());
@@ -621,13 +621,13 @@ void drawSmallCircleVertexArray()
 void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, const void* userData), const void* userData) const
 {
 	Q_ASSERT(smallCircleVertexArray.empty());
-	
+
 	QLinkedList<Vec3d> tessArc;	// Contains the list of projected points from the tesselated arc
 	Vec3d win1, win2;
 	win1[2] = prj->project(start, win1) ? 1.0 : -1.;
 	win2[2] = prj->project(stop, win2) ? 1.0 : -1.;
 	tessArc.append(win1);
-	
+
 	double radius;
 	if (rotCenter==Vec3d(0,0,0))
 	{
@@ -639,10 +639,10 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 		Vec3d tmp = (rotCenter^start)/rotCenter.length();
 		radius = fabs(tmp.length());
 	}
-	
+
 	// Perform the tesselation of the arc in small segments in a way so that the lines look smooth
 	fIter(prj, start-rotCenter, stop-rotCenter, win1, win2, tessArc, tessArc.insert(tessArc.end(), win2), radius, rotCenter);
-	
+
 	// And draw.
 	QLinkedList<Vec3d>::ConstIterator i = tessArc.begin();
 	while (i+1 != tessArc.end())
@@ -683,7 +683,7 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 // by splitting it into subtriangles.
 void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>* outVertices,
 		const bool* edgeFlags, QVector<bool>* outEdgeFlags,
-  		const Vec2f* texturePos, QVector<Vec2f>* outTexturePos,
+		const Vec2f* texturePos, QVector<Vec2f>* outTexturePos,
 		int nbI, bool checkDisc1, bool checkDisc2, bool checkDisc3) const
 {
 	Q_ASSERT(fabs(vertices[0].length()-1.)<0.00001);
@@ -695,7 +695,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	const bool cd1=cDiscontinuity1;
 	const bool cd2=cDiscontinuity2;
 	const bool cd3=cDiscontinuity3;
-	
+
 	Vec3d e0, e1, e2, win3;
 	bool valid = prj->project(vertices[0], e0);
 	valid = prj->project(vertices[1], e1) || valid;
@@ -703,7 +703,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	// Clip polygons behind the viewer
 	if (!valid)
 		return;
-	
+
 	static const double maxSqDistortion = 5.;
 	if (checkDisc1 && cDiscontinuity1==false)
 	{
@@ -726,7 +726,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		win3 -= (e0+e2)*0.5;
 		cDiscontinuity3 = (win3[0]*win3[0]+win3[1]*win3[1])>maxSqDistortion;
 	}
-	
+
 	if (!cDiscontinuity1 && !cDiscontinuity2 && !cDiscontinuity3)
 	{
 		// The triangle is clean, appends it
@@ -737,7 +737,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 			*outTexturePos << texturePos[0] << texturePos[1] << texturePos[2];
 		return;
 	}
-	
+
 	if (nbI > 4)
 	{
 		// If we reached the limit number of iterations and still have a discontinuity,
@@ -753,7 +753,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 			*outTexturePos << texturePos[0] << texturePos[1] << texturePos[2];
 		return;
 	}
-	
+
 	// Recursively splits the triangle into sub triangles.
 	// Depending on which combination of sides of the triangle has to be split a different strategy is used.
 	Vec3d va[3];
@@ -769,7 +769,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		if (outTexturePos)
 		{
 			ta[0]=texturePos[0];
-			ta[1]=(texturePos[0]+texturePos[1])/2.;
+			ta[1]=(texturePos[0]+texturePos[1])*0.5;
 			ta[2]=texturePos[2];
 		}
 		if (outEdgeFlags)
@@ -787,7 +787,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		va[2]=vertices[2];
 		if (outTexturePos)
 		{
-			ta[0]=(texturePos[0]+texturePos[1])/2.;
+			ta[0]=(texturePos[0]+texturePos[1])*0.5;
 			ta[1]=texturePos[1];
 			ta[2]=texturePos[2];
 		}
@@ -800,7 +800,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1, true, false, true);
 		return;
 	}
-	
+
 	if (!cDiscontinuity1 && cDiscontinuity2 && !cDiscontinuity3)
 	{
 		va[0]=vertices[0];
@@ -811,7 +811,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		{
 			ta[0]=texturePos[0];
 			ta[1]=texturePos[1];
-			ta[2]=(texturePos[1]+texturePos[2])/2.;
+			ta[2]=(texturePos[1]+texturePos[2])*0.5;
 		}
 		if (outEdgeFlags)
 		{
@@ -829,7 +829,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		if (outTexturePos)
 		{
 			ta[0]=texturePos[0];
-			ta[1]=(texturePos[1]+texturePos[2])/2.;
+			ta[1]=(texturePos[1]+texturePos[2])*0.5;
 			ta[2]=texturePos[2];
 		}
 		if (outEdgeFlags)
@@ -841,7 +841,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1, true, true, false);
 		return;
 	}
-	
+
 	if (!cDiscontinuity1 && !cDiscontinuity2 && cDiscontinuity3)
 	{
 		va[0]=vertices[0];
@@ -852,7 +852,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		{
 			ta[0]=texturePos[0];
 			ta[1]=texturePos[1];
-			ta[2]=(texturePos[0]+texturePos[2])/2.;
+			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
 		if (outEdgeFlags)
 		{
@@ -869,7 +869,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		va[2]=vertices[2];
 		if (outTexturePos)
 		{
-			ta[0]=(texturePos[0]+texturePos[2])/2.;
+			ta[0]=(texturePos[0]+texturePos[2])*0.5;
 			ta[1]=texturePos[1];
 			ta[2]=texturePos[2];
 		}
@@ -882,7 +882,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1, true, false, true);
 		return;
 	}
-	
+
 	// 2 sides have to be split: split the triangle in 3
 	if (cDiscontinuity1 && cDiscontinuity2 && !cDiscontinuity3)
 	{
@@ -894,8 +894,8 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		if (outTexturePos)
 		{
 			ta[0]=texturePos[0];
-			ta[1]=(texturePos[0]+texturePos[1])/2.;
-			ta[2]=(texturePos[1]+texturePos[2])/2.;
+			ta[1]=(texturePos[0]+texturePos[1])*0.5;
+			ta[2]=(texturePos[1]+texturePos[2])*0.5;
 		}
 		if (outEdgeFlags)
 		{
@@ -913,9 +913,9 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		//va[2].normalize();
 		if (outTexturePos)
 		{
-			ta[0]=(texturePos[0]+texturePos[1])/2.;
+			ta[0]=(texturePos[0]+texturePos[1])*0.5;
 			ta[1]=texturePos[1];
-			ta[2]=(texturePos[1]+texturePos[2])/2.;
+			ta[2]=(texturePos[1]+texturePos[2])*0.5;
 		}
 		if (outEdgeFlags)
 		{
@@ -924,7 +924,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 			ba[2]=false;
 		}
 		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
-	
+
 		va[0]=vertices[0];
 		//va[1]=vertices[1]+vertices[2];
 		//va[1].normalize();
@@ -933,7 +933,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		if (outTexturePos)
 		{
 			ta[0]=texturePos[0];
-			ta[1]=(texturePos[1]+texturePos[2])/2.;
+			ta[1]=(texturePos[1]+texturePos[2])*0.5;
 			ta[2]=texturePos[2];
 		}
 		if (outEdgeFlags)
@@ -955,8 +955,8 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		if (outTexturePos)
 		{
 			ta[0]=texturePos[0];
-			ta[1]=(texturePos[0]+texturePos[1])/2.;
-			ta[2]=(texturePos[0]+texturePos[2])/2.;
+			ta[1]=(texturePos[0]+texturePos[1])*0.5;
+			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
 		if (outEdgeFlags)
 		{
@@ -965,7 +965,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 			ba[2]=edgeFlags[2];
 		}
 		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
-	
+
 		//va[0]=vertices[0]+vertices[1];
 		//va[0].normalize();
 		va[0]=va[1];
@@ -974,9 +974,9 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		//va[2].normalize();
 		if (outTexturePos)
 		{
-			ta[0]=(texturePos[0]+texturePos[1])/2.;
+			ta[0]=(texturePos[0]+texturePos[1])*0.5;
 			ta[1]=texturePos[2];
-			ta[2]=(texturePos[0]+texturePos[2])/2.;
+			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
 		if (outEdgeFlags)
 		{
@@ -985,15 +985,15 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 			ba[2]=false;
 		}
 		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
-		
-		
+
+
 		//va[0]=vertices[0]+vertices[1];
 		//va[0].normalize();
 		va[1]=vertices[1];
 		va[2]=vertices[2];
 		if (outTexturePos)
 		{
-			ta[0]=(texturePos[0]+texturePos[1])/2.;
+			ta[0]=(texturePos[0]+texturePos[1])*0.5;
 			ta[1]=texturePos[1];
 			ta[2]=texturePos[2];
 		}
@@ -1004,7 +1004,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 			ba[2]=false;
 		}
 		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1, true, false, true);
-		
+
 		return;
 	}
 	if (!cDiscontinuity1 && cDiscontinuity2 && cDiscontinuity3)
@@ -1017,7 +1017,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		{
 			ta[0]=texturePos[0];
 			ta[1]=texturePos[1];
-			ta[2]=(texturePos[1]+texturePos[2])/2.;
+			ta[2]=(texturePos[1]+texturePos[2])*0.5;
 		}
 		if (outEdgeFlags)
 		{
@@ -1035,9 +1035,9 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		va[2].normalize();
 		if (outTexturePos)
 		{
-			ta[0]=(texturePos[1]+texturePos[2])/2.;
+			ta[0]=(texturePos[1]+texturePos[2])*0.5;
 			ta[1]=texturePos[2];
-			ta[2]=(texturePos[0]+texturePos[2])/2.;
+			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
 		if (outEdgeFlags)
 		{
@@ -1046,7 +1046,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 			ba[2]=false;
 		}
 		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
-	
+
 		va[1]=va[0];
 		va[0]=vertices[0];
 		//va[1]=vertices[1]+vertices[2];
@@ -1056,8 +1056,8 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		if (outTexturePos)
 		{
 			ta[0]=texturePos[0];
-			ta[1]=(texturePos[1]+texturePos[2])/2.;
-			ta[2]=(texturePos[0]+texturePos[2])/2.;
+			ta[1]=(texturePos[1]+texturePos[2])*0.5;
+			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
 		if (outEdgeFlags)
 		{
@@ -1068,7 +1068,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
 		return;
 	}
-	
+
 	// Last case: the 3 sides have to be split: cut in 4 triangles a' la HTM
 	va[0]=vertices[0]+vertices[1];
 	va[0].normalize();
@@ -1078,9 +1078,9 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	va[2].normalize();
 	if (outTexturePos)
 	{
-		ta[0]=(texturePos[0]+texturePos[1])/2.;
-		ta[1]=(texturePos[1]+texturePos[2])/2.;
-		ta[2]=(texturePos[0]+texturePos[2])/2.;
+		ta[0]=(texturePos[0]+texturePos[1])*0.5;
+		ta[1]=(texturePos[1]+texturePos[2])*0.5;
+		ta[2]=(texturePos[0]+texturePos[2])*0.5;
 	}
 	if (outEdgeFlags)
 	{
@@ -1089,7 +1089,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		ba[2]=false;
 	}
 	projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
-	
+
 	va[1]=va[0];
 	va[0]=vertices[0];
 	//va[1]=vertices[0]+vertices[1];
@@ -1099,8 +1099,8 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	if (outTexturePos)
 	{
 		ta[0]=texturePos[0];
-		ta[1]=(texturePos[0]+texturePos[1])/2.;
-		ta[2]=(texturePos[0]+texturePos[2])/2.;
+		ta[1]=(texturePos[0]+texturePos[1])*0.5;
+		ta[2]=(texturePos[0]+texturePos[2])*0.5;
 	}
 	if (outEdgeFlags)
 	{
@@ -1118,9 +1118,9 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	va[2].normalize();
 	if (outTexturePos)
 	{
-		ta[0]=(texturePos[0]+texturePos[1])/2.;
+		ta[0]=(texturePos[0]+texturePos[1])*0.5;
 		ta[1]=texturePos[1];
-		ta[2]=(texturePos[1]+texturePos[2])/2.;
+		ta[2]=(texturePos[1]+texturePos[2])*0.5;
 	}
 	if (outEdgeFlags)
 	{
@@ -1129,7 +1129,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		ba[2]=false;
 	}
 	projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
-	
+
 	va[0]=vertices[0]+vertices[2];
 	va[0].normalize();
 	//va[1]=vertices[1]+vertices[2];
@@ -1138,8 +1138,8 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	va[2]=vertices[2];
 	if (outTexturePos)
 	{
-		ta[0]=(texturePos[0]+texturePos[2])/2.;
-		ta[1]=(texturePos[1]+texturePos[2])/2.;
+		ta[0]=(texturePos[0]+texturePos[2])*0.5;
+		ta[1]=(texturePos[1]+texturePos[2])*0.5;
 		ta[2]=texturePos[2];
 	}
 	if (outEdgeFlags)
@@ -1149,7 +1149,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		ba[2]=edgeFlags[2];
 	}
 	projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
-	
+
 	return;
 }
 
@@ -1163,7 +1163,7 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 	polygonVertexArray.clear();
 	polygonEdgeFlagArray.clear();
 	polygonTextureCoordArray.clear();
-	
+
 	// Use a special algo for convex polygons which are not pre-tesselated.
 	const SphericalConvexPolygon* cvx = dynamic_cast<const SphericalConvexPolygon*>(poly);
 	if (cvx!=NULL)
@@ -1172,7 +1172,7 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 		const QVector<Vec3d>& a = cvx->getConvexContour();
 		Vec3d triangle[3];
 		bool tmpEdges[3] = {true, true, false};
-		
+
 		if (drawMode==SphericalPolygonDrawModeTextureFillAndBoundary || drawMode==SphericalPolygonDrawModeTextureFill)
 		{
 			Q_ASSERT(dynamic_cast<const SphericalTexturedConvexPolygon*>(cvx)!=NULL);
@@ -1264,7 +1264,7 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 				projectSphericalTriangle(a.constData()+i*3, &polygonVertexArray, NULL, NULL, NULL, NULL);
 		}
 	}
-	
+
 	// Load the vertex array
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, polygonVertexArray.constData());
@@ -1287,7 +1287,7 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 		// Load the edge flags
 		glEdgeFlagPointer(0, polygonEdgeFlagArray.constData());
 		glEnableClientState(GL_EDGE_FLAG_ARRAY);
-		
+
 		// Draw the boundary part, and use the extra color if defined
 		GLfloat tmpColor[4];
 		if (boundaryColor!=NULL)
@@ -1423,7 +1423,7 @@ void StelPainter::drawPoint2d(double x, double y) const
 		glEnable(GL_POINT_SPRITE_ARB);
 		return;
 	}
-	
+
 	glBegin(GL_POINTS);
 		glVertex2f(x, y);
 	glEnd();
@@ -1528,8 +1528,8 @@ void StelPainter::sSphere(GLdouble radius, GLdouble oneMinusOblateness, GLint sl
 				c = nsign * lightPos3.dot(Vec3f(x * oneMinusOblateness, y * oneMinusOblateness, z));
 				if (c<0) {c=0;}
 				glColor3f(c*diffuseLight[0] + ambientLight[0],
-				          c*diffuseLight[1] + ambientLight[1],
-				          c*diffuseLight[2] + ambientLight[2]);
+						  c*diffuseLight[1] + ambientLight[1],
+						  c*diffuseLight[2] + ambientLight[2]);
 			}
 			drawVertex3(x * radius, y * radius, z * oneMinusOblateness * radius);
 			x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
@@ -1541,8 +1541,8 @@ void StelPainter::sSphere(GLdouble radius, GLdouble oneMinusOblateness, GLint sl
 				c = nsign * lightPos3.dot(Vec3f(x * oneMinusOblateness,y * oneMinusOblateness,z));
 				if (c<0) {c=0;}
 				glColor3f(c*diffuseLight[0] + ambientLight[0],
-				          c*diffuseLight[1] + ambientLight[1],
-				          c*diffuseLight[2] + ambientLight[2]);
+						  c*diffuseLight[1] + ambientLight[1],
+						  c*diffuseLight[2] + ambientLight[2]);
 			}
 			drawVertex3(x * radius, y * radius, z * oneMinusOblateness * radius);
 			s += ds;
