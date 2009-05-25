@@ -322,8 +322,21 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		serverCredits.fullCredits = sCredits.value("full").toString();
 		serverCredits.infoURL = sCredits.value("infoUrl").toString();
 	}
+	if (map.contains("description"))
+	{
+		htmlDescription = map.value("description").toString();
+	}
+	else
+	{
+		if (parent()==NULL)
+		{
+			htmlDescription= "<h3>Sky image</h3><h3>URL: "+contructorUrl+"</h3>";
+		}
+	}
 
 	shortName = map.value("shortName").toString();
+	if (shortName.isEmpty())
+		shortName = "no name";
 	bool ok=false;
 	minResolution = map.value("minResolution").toDouble(&ok);
 	if (!ok)
