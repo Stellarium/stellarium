@@ -115,7 +115,10 @@ void StelModuleMgr::unloadModule(const QString& moduleID, bool alsoDelete)
 	m->setParent(NULL);
 	callingListsToRegenerate = true;
 	if (alsoDelete)
+	{
+		m->deinit();
 		m->deleteLater();
+	}
 }
 
 /*************************************************************************
