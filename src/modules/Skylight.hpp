@@ -25,6 +25,7 @@
 
 #include <cmath>
 #include <QDebug>
+#include "StelUtils.hpp"
 
 typedef struct {
 	float zenithAngle;  // zenithAngle : angular distance to the zenith in radian
@@ -61,7 +62,7 @@ public:
 	void getxyYValuev(skylightStruct2& p) const
 	{
 		const float cosDistSun = sunPos[0]*p.pos[0] + sunPos[1]*p.pos[1] + sunPos[2]*p.pos[2];
-		const float distSun = fastAcos(cosDistSun);
+		const float distSun = StelUtils::fastAcos(cosDistSun);
 		const float cosDistSun_q = cosDistSun*cosDistSun;
 
 		Q_ASSERT(p.pos[2] >= 0.f);
@@ -120,13 +121,6 @@ private:
 	inline void computeLuminanceDistributionCoefs(void);
 	// Compute the color distribution coefficients
 	inline void computeColorDistributionCoefs(void);
-
-	/// Compute acos(x)
-	//! The taylor serie is not accurate around x=1 and x=-1
-	static inline float fastAcos(float x)
-	{
-		return M_PI_2 - (x + x*x*x * (1.f/6.f + x*x * (3.f/40.f + 5.f/112.f * x*x)) );
-	}
 };
 
 // Return the current zenith color in xyY color system

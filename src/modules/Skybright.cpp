@@ -28,21 +28,7 @@
 #endif
 
 #include "Skybright.hpp"
-
-//! Compute exp(x) for small x
-inline float fastExp(float x)
-{
-	return (x>=0)?
-		(1.f + x*(1.f+ x/2.f*(1.f+ x/3.f*(1.f+x/4.f*(1.f+x/5.f))))):
-			1.f / (1.f -x*(1.f -x/2.f*(1.f- x/3.f*(1.f-x/4.f*(1.f-x/5.f)))));
-}
-
-//! Compute acos(x)
-//! The taylor serie is not accurate around x=1 and x=-1
-inline float fastAcos(float x)
-{
-	return M_PI_2 - (x + x*x*x * (1.f/6.f + x*x * (3.f/40.f + 5.f/112.f * x*x)) );
-}
+#include "StelUtils.hpp"
 
 Skybright::Skybright() : SN(1.f)
 {
@@ -114,17 +100,17 @@ float Skybright::getLuminance(float cosDistMoon,
                                float cosDistZenith) const
 {
 	// Air mass
-	const float bKX = pow10(-0.4f * K * (1.f / (cosDistZenith + 0.025f*fastExp(-11.f*cosDistZenith))));
+	const float bKX = pow10(-0.4f * K * (1.f / (cosDistZenith + 0.025f*StelUtils::fastExp(-11.f*cosDistZenith))));
 
 	// Daylight brightness
-	const float distSun = fastAcos(cosDistSun);
+	const float distSun = StelUtils::fastAcos(cosDistSun);
 	const float FS = 18886.28f / (distSun*distSun + 0.0007f)
 	               + pow10(6.15f - (distSun+0.001f)* 1.43239f)
 	               + 229086.77f * ( 1.06f + cosDistSun*cosDistSun );
 	const float b_daylight = 9.289663e-12 * (1.f - bKX) * (FS * C4 + 440000.f * (1.f - C4));
 
 	//Twilight brightness
-	const float b_twilight = pow10(bTwilightTerm + 0.063661977f * fastAcos(cosDistZenith)/(K> 0.05f ? K : 0.05f)) * (1.7453293f / distSun) * (1.f-bKX);
+	const float b_twilight = pow10(bTwilightTerm + 0.063661977f * StelUtils::fastAcos(cosDistZenith)/(K> 0.05f ? K : 0.05f)) * (1.7453293f / distSun) * (1.f-bKX);
 
 	// Total sky brightness
 	float b_total = ((b_twilight<b_daylight) ? b_twilight : b_daylight);
@@ -137,7 +123,7 @@ float Skybright::getLuminance(float cosDistMoon,
 		else
 		{
 			// Because the accuracy of our power serie is bad around 1, call the real acos if it's the case
-			dist_moon = cosDistMoon > 0.99 ? std::acos(cosDistMoon) : fastAcos(cosDistMoon);
+			dist_moon = cosDistMoon > 0.99 ? std::acos(cosDistMoon) : StelUtils::fastAcos(cosDistMoon);
 		}
 		
 		const float FM = 18886.28f / (dist_moon*dist_moon + 0.0005f)	// The last 0.0005 should be 0, but it causes too fast brightness change
