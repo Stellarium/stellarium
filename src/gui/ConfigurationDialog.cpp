@@ -497,8 +497,6 @@ void ConfigurationDialog::populatePluginsList()
 
 void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 {
-	if (s.isEmpty())
-		return;
 	QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
