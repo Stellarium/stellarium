@@ -217,6 +217,21 @@ namespace StelUtils
 	
 	//! Use RegExp for final to parse a QString to six ints, use in the event QDateTime cannot handle the date.
 	QList<int> getIntsFromISO8601String(const QString& iso8601Date);
+
+	/// Compute acos(x)
+	//! The taylor serie is not accurate around x=1 and x=-1
+	inline float fastAcos(float x)
+	{
+		return M_PI_2 - (x + x*x*x * (1.f/6.f + x*x * (3.f/40.f + 5.f/112.f * x*x)) );
+	}
+
+	//! Compute exp(x) for small exponents x
+	inline float fastExp(float x)
+	{
+		return (x>=0)?
+			(1.f + x*(1.f+ x/2.f*(1.f+ x/3.f*(1.f+x/4.f*(1.f+x/5.f))))):
+				1.f / (1.f -x*(1.f -x/2.f*(1.f- x/3.f*(1.f-x/4.f*(1.f-x/5.f)))));
+	}
 }
 
 #endif // _STELUTILS_HPP_
