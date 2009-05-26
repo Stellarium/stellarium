@@ -1552,7 +1552,14 @@
                  <number>0</number>
                 </property>
                 <item>
-                 <widget class="QTextBrowser" name="skyLayerTextBrowser"/>
+                 <widget class="QTextBrowser" name="skyLayerTextBrowser">
+                  <property name="openExternalLinks">
+                   <bool>true</bool>
+                  </property>
+                  <property name="openLinks">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
                 </item>
                 <item>
                  <widget class="QGroupBox" name="groupBox">

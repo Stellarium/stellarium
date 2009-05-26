@@ -98,7 +98,7 @@ public:
 	//! Return the absolute path/URL to the image file
 	QString getAbsoluteImageURI() const {return absoluteImageURI;}
 
-	//! Return an HTML descritpion of the image to be displayed in the GUI.
+	//! Return an HTML description of the image to be displayed in the GUI.
 	virtual QString getLayerDescriptionHtml() const {return htmlDescription;}
 
 protected:
