@@ -325,6 +325,10 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	if (map.contains("description"))
 	{
 		htmlDescription = map.value("description").toString();
+		if (parent()==NULL)
+		{
+			htmlDescription+= "<h3>Sky image</h3><h3>URL: "+contructorUrl+"</h3>";
+		}
 	}
 	else
 	{
