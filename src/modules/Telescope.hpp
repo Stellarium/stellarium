@@ -23,7 +23,6 @@
 #include <QList>
 #include <QString>
 #include <cstdlib>
-#include <sys/select.h>
 
 #if defined (_MSC_VER)
 #include <winsock2.h>
@@ -36,6 +35,8 @@ long long int GetNow(void);
 
 #ifdef __MINGW32__
 struct fd_set;
+#else
+#include <sys/select.h>
 #endif
 
 class Telescope : public StelObject
