@@ -58,7 +58,7 @@ public:
 	// Compute the sky color at the given position in the CIE color system and store it in p.color
 	// p.color[0] is CIE x color component
 	// p.color[1] is CIE y color component
-	// p.color[2] is CIE Y color component (luminance)
+	// p.color[2] is undefined (CIE Y color component (luminance) if uncommented)
 	void getxyYValuev(skylightStruct2& p) const
 	{
 		const float cosDistSun = sunPos[0]*p.pos[0] + sunPos[1]*p.pos[1] + sunPos[2]*p.pos[2];
@@ -73,11 +73,11 @@ public:
 		p.color[1] = term_y * (1.f + Ay * std::exp(By*oneOverCosZenithAngle))
 				* (1.f + Cy * std::exp(Dy*distSun) + Ey * cosDistSun_q);
 
-		p.color[2] = term_Y * (1.f + AY * std::exp(BY*oneOverCosZenithAngle))
-				* (1.f + CY * std::exp(DY*distSun) + EY * cosDistSun_q);
+// 		p.color[2] = term_Y * (1.f + AY * std::exp(BY*oneOverCosZenithAngle))
+// 				* (1.f + CY * std::exp(DY*distSun) + EY * cosDistSun_q);
 
 
-		if (p.color[2] < 0. || p.color[0] < 0. || p.color[1] < 0.)
+		if (/*p.color[2] < 0. || */p.color[0] < 0. || p.color[1] < 0.)
 		{
 			p.color[0] = 0.25;
 			p.color[1] = 0.25;
