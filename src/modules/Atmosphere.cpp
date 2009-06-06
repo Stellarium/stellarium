@@ -40,6 +40,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
             averageLuminance(0.f), eclipseFactor(1.), lightPollutionLuminance(0)
 {
 	setFadeDuration(3.f);
+	GLuint glCreateShader(GLenum shaderType); 
 }
 
 Atmosphere::~Atmosphere(void)
@@ -248,7 +249,6 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		{
 			b2.pos[0] = point[0];
 			b2.pos[1] = point[1];
-			b2.pos[2] = point[2];
 			// Use the Skylight model for the color
 			sky.getxyYValuev(b2);
 		}
@@ -280,7 +280,7 @@ void Atmosphere::draw(StelCore* core)
 	{
 		const float atm_intensity = fader.getInterstate();
 		
-		// Adapt luminance at this point to avoid a mismatch with the adaption value
+		// Adapt luminance at this point to avoid a mismatch with the adaptation value
 		for (int i=0;i<(1+skyResolutionX)*(1+skyResolutionY);++i)
 		{
 			Vec3f& c = colorGrid[i];
