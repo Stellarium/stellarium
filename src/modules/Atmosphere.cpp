@@ -40,7 +40,6 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
             averageLuminance(0.f), eclipseFactor(1.), lightPollutionLuminance(0)
 {
 	setFadeDuration(3.f);
-	GLuint glCreateShader(GLenum shaderType); 
 }
 
 Atmosphere::~Atmosphere(void)
