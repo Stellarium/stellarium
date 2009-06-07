@@ -1,0 +1,58 @@
+uniform float alphaWaOverAlphaDa;
+uniform float oneOverGamma;
+uniform float term2TimesOneOverMaxdLpOneOverGamma;
+
+const float pi = 3.1415926535897931;
+
+void main()
+{
+	vec4 color = gl_Color;
+	float X,Y,Z;
+			
+	// 1. Hue conversion
+	// if log10Y>0.6, photopic vision only (with the cones, colors are seen)
+	// else scotopic vision if log10Y<-2 (with the rods, no colors, everything blue),
+	// else mesopic vision (with rods and cones, transition state)
+	if (color[2] <= 0.01)
+	{
+		// special case for s = 0 (x=0.25, y=0.25)
+		color[2] *= 0.5121445;
+		color[2] = pow(color[2]*pi*0.0001, alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
+		color[0] = 0.787077*color[2];
+		color[1] = 0.9898434*color[2];
+		color[2] *= 1.9256125;
+		gl_FragColor = color;
+		return;
+	}
+	
+	if (color[2]<3.9810717055349722)
+	{
+		// Compute s, ratio between scotopic and photopic vision
+		float op = (log10(color[2]) + 2.)/2.6;
+		float s = op * op *(3. - 2. * op);
+		float V;
+		// Do the blue shift for scotopic vision simulation (night vision) [3]
+		// The "night blue" is x,y(0.25, 0.25)
+		color[0] = (1. - s) * 0.25 + s * color[0];	// Add scotopic + photopic components
+		color[1] = (1. - s) * 0.25 + s * color[1];	// Add scotopic + photopic components
+		// Take into account the scotopic luminance approximated by V [3] [4]
+		V = color[2] * (1.33 * (1. + color[1] / color[0] + color[0] * (1. - color[0] - color[1])) - 1.68);
+		color[2] = 0.4468 * (1. - s) * V + s * color[2];
+	}
+
+	// 2. Adapt the luminance value and scale it to fit in the RGB range [2]
+	// color[2] = std::pow(adaptLuminanceScaled(color[2]), oneOverGamma);
+	color[2] = pow(color[2]*pi*0.0001, alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
+	
+	// Convert from xyY to XZY
+	X = color[0] * color[2] / color[1];
+	Y = color[2];
+	Z = (1. - color[0] - color[1]) * color[2] / color[1];
+
+	// Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white
+	color[0] = 2.04148  *X - 0.564977*Y - 0.344713 *Z;
+	color[1] =-0.969258 *X + 1.87599 *Y + 0.0415557*Z;
+	color[2] = 0.0134455*X - 0.118373*Y + 1.01527  *Z;
+
+	gl_FragColor = color;
+}
