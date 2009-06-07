@@ -81,7 +81,7 @@ private:
 	int skyResolutionY,skyResolutionX;
 	
 	Vec2f* posGrid;
-	Vec3f* colorGrid;
+	Vec4f* colorGrid;
 	GLushort* indices;
 	
 	//! The average luminance of the atmosphere in cd/m2
