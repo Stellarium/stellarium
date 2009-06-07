@@ -119,7 +119,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 			delete[] indices;
 		skyResolutionX = (int)floor(0.5+skyResolutionY*(0.5*sqrt(3.0))*prj->getViewportWidth()/prj->getViewportHeight());
 		posGrid = new Vec2f[(1+skyResolutionX)*(1+skyResolutionY)];
-		colorGrid = new Vec3f[(1+skyResolutionX)*(1+skyResolutionY)];
+		colorGrid = new Vec4f[(1+skyResolutionX)*(1+skyResolutionY)];
 		float stepX = (float)prj->getViewportWidth() / (skyResolutionX-0.5);
 		float stepY = (float)prj->getViewportHeight() / skyResolutionY;
 		float viewport_left = (float)prj->getViewportPosX();
@@ -286,21 +286,31 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		sum_lum+=lumi;
 		++nb_lum;
 		
-		if (lumi>0.01)
+		// Now need to compute the xy part of the color component
+		// This can be done in the openGL shader if possible
+		if (false && useShader)
 		{
-			b2.pos[0] = point[0];
-			b2.pos[1] = point[1];
-			// Use the Skylight model for the color
-			sky.getxyYValuev(b2);
+			// Store the back projected position + luminance in the input color to the shader
+			colorGrid[i].set(point[0], point[1], point[2], lumi);
 		}
 		else
 		{
-			// Too dark to see atmosphere color, don't bother computing it
-			b2.color[0]=0.25;
-			b2.color[1]=0.25;
+			if (lumi>0.01)
+			{
+				b2.pos[0] = point[0];
+				b2.pos[1] = point[1];
+				b2.pos[2] = point[2];
+				// Use the Skylight model for the color
+				sky.getxyYValuev(b2);
+			}
+			else
+			{
+				// Too dark to see atmosphere color, don't bother computing it
+				b2.color[0]=0.25;
+				b2.color[1]=0.25;
+			}
+			colorGrid[i].set(b2.color[0], b2.color[1], lumi, 1.f);
 		}
-		
-		colorGrid[i].set(b2.color[0], b2.color[1], lumi);
 	}
 			
 	// Update average luminance
@@ -340,7 +350,7 @@ void Atmosphere::draw(StelCore* core)
 			// Adapt luminance at this point to avoid a mismatch with the adaptation value
 			for (int i=0;i<(1+skyResolutionX)*(1+skyResolutionY);++i)
 			{
-				Vec3f& c = colorGrid[i];
+				Vec4f& c = colorGrid[i];
 				eye->xyYToRGB(c);
 				c*=atm_intensity;
 			}
@@ -356,7 +366,7 @@ void Atmosphere::draw(StelCore* core)
 		glEnableClientState(GL_COLOR_ARRAY);
 		
 		// Load the color components
-		glColorPointer(3, GL_FLOAT, 0, colorGrid);
+		glColorPointer(4, GL_FLOAT, 0, colorGrid);
 		
 		if (GLEE_ARB_vertex_buffer_object)
 		{
