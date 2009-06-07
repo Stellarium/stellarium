@@ -30,6 +30,12 @@ ELSE()
  SET(CMAKE_EXE_LINKER_FLAGS "-Wsign-promo -fexceptions -fident -mthreads -mwindows --large-address-aware")
 ENDIF()
 
+SET(OPTIMIZE_INTEL_ATOM 0 CACHE BOOL "Activate optimizations for atom processor.")
+IF(OPTIMIZE_INTEL_ATOM)
+ SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
+ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
+ENDIF()
+
 # best way to get to APPLE?
 IF(APPLE)
  SET(CMAKE_INCLUDE_PATH "/usr/X11/include:/usr/X11/include/freetype2:/Developer/SDKs/MacOSX10.5.sdk/usr/X11/include:/Developer/SDKs/MacOSX10.5.sdk/usr/X11/include/freetype2:/sw/include:${CMAKE_INCLUDE_PATH}")
