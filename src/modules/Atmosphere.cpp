@@ -339,6 +339,8 @@ void Atmosphere::draw(StelCore* core)
 			glUniform1f(loc, b);
 			loc = glGetUniformLocation(atmoShaderProgram, "term2TimesOneOverMaxdLpOneOverGamma");
 			glUniform1f(loc, c);
+			loc = glGetUniformLocation(atmoShaderProgram, "brightnessScale");
+			glUniform1f(loc, atm_intensity);
 		}
 		else
 		{
