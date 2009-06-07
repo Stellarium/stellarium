@@ -32,7 +32,7 @@
 // Uncomment to try out vertex buffers
 #define USE_VERTEX_BUFFERS 1
 // Uncomment to try out the fragment shader for xyYToRGB
-static const int USE_SHADER=0;
+static const int USE_SHADER=1;
 
 inline bool myisnan(double value)
 {
@@ -40,14 +40,18 @@ inline bool myisnan(double value)
 }
 
 Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL), colorGrid(NULL), indices(NULL),
-            averageLuminance(0.f), eclipseFactor(1.), lightPollutionLuminance(0)
+					   averageLuminance(0.f), eclipseFactor(1.), lightPollutionLuminance(0), useShader(false)
 {
 	setFadeDuration(3.f);
-
-	if (USE_SHADER && GLEE_VERSION_2_0)
+	if (GLEE_VERSION_2_0)
+	{
+		useShader=true;
+	}
+	
+	if (useShader)
 	{
 		QString filePath;
-		GLuint shaderXyYToRGB = glCreateShader(GL_FRAGMENT_SHADER);
+		GLuint shaderXyYToRGB = glCreateShader(GL_VERTEX_SHADER);
 		try
 		{
 			filePath = StelApp::getInstance().getFileMgr().findFile("data/shaders/xyYToRGB.cg");
@@ -98,6 +102,11 @@ Atmosphere::~Atmosphere(void)
 	{
 		delete[] indices;
 		indices = NULL;
+	}
+	if (useShader)
+	{
+		// Cleanup shader stuff
+		glDeleteProgram(atmoShaderProgram);
 	}
 }
 
@@ -319,9 +328,8 @@ void Atmosphere::draw(StelCore* core)
 	{
 		const float atm_intensity = fader.getInterstate();
 		
-		if (USE_SHADER && GLEE_VERSION_2_0)
+		if (useShader)
 		{
-			glClampColorARB(GL_CLAMP_VERTEX_COLOR_ARB, GL_FALSE);
 			glUseProgram(atmoShaderProgram);
 			float a, b, c;
 			eye->getShadersParams(a, b, c);
@@ -377,9 +385,8 @@ void Atmosphere::draw(StelCore* core)
 		
 		glShadeModel(GL_FLAT);
 		
-		if (USE_SHADER && GLEE_VERSION_2_0)
+		if (useShader)
 		{
-			glClampColorARB(GL_CLAMP_VERTEX_COLOR_ARB, GL_TRUE);
 			glUseProgram(0);
 		}
 	}
