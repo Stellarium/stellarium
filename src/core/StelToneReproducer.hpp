@@ -139,6 +139,12 @@ public:
 	//! @param xyY an array of 3 floats which are replaced by the converted RGB values
 	void xyYToRGB(float* xyY) const;
 	
+	void getShadersParams(float& a, float& b, float & c) const
+	{
+		a=alphaWaOverAlphaDa;
+		b=oneOverGamma;
+		c=term2TimesOneOverMaxdLpOneOverGamma;
+	}
 private:
 	// The global luminance scaling
 	float inputScale;

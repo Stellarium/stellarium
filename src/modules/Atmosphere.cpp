@@ -27,9 +27,12 @@
 #include "StelToneReproducer.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
+#include "StelFileMgr.hpp"
 
 // Uncomment to try out vertex buffers
-//#define USE_VERTEX_BUFFERS 1
+#define USE_VERTEX_BUFFERS 1
+// Uncomment to try out the fragment shader for xyYToRGB
+static const int USE_SHADER=0;
 
 inline bool myisnan(double value)
 {
@@ -40,6 +43,43 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
             averageLuminance(0.f), eclipseFactor(1.), lightPollutionLuminance(0)
 {
 	setFadeDuration(3.f);
+
+	if (USE_SHADER && GLEE_VERSION_2_0)
+	{
+		QString filePath;
+		GLuint shaderXyYToRGB = glCreateShader(GL_FRAGMENT_SHADER);
+		try
+		{
+			filePath = StelApp::getInstance().getFileMgr().findFile("data/shaders/xyYToRGB.cg");
+		}
+		catch (std::runtime_error& e)
+		{
+			qFatal("Can't find data/shaders/xyYToRGB.cg shader file to load");
+		}
+		
+		QFile fic(filePath);
+		fic.open(QIODevice::ReadOnly);
+		QByteArray qba = fic.readAll();
+		const char* data = qba.constData();
+		fic.close();
+		glShaderSource(shaderXyYToRGB, 1, &data, NULL); 
+		glCompileShader(shaderXyYToRGB);
+		char msg[4048];
+		int l;
+		glGetShaderInfoLog(shaderXyYToRGB, 4048, &l, msg);
+		qWarning() << msg;
+		int val;
+		glGetShaderiv(shaderXyYToRGB, GL_COMPILE_STATUS, &val);
+		if (val==GL_FALSE)
+		{
+			qFatal("Shader compilation error.");
+		}
+		atmoShaderProgram = glCreateProgram();
+		glAttachShader(atmoShaderProgram,shaderXyYToRGB);
+		glLinkProgram(atmoShaderProgram);
+	}
+
+	
 }
 
 Atmosphere::~Atmosphere(void)
@@ -279,12 +319,28 @@ void Atmosphere::draw(StelCore* core)
 	{
 		const float atm_intensity = fader.getInterstate();
 		
-		// Adapt luminance at this point to avoid a mismatch with the adaptation value
-		for (int i=0;i<(1+skyResolutionX)*(1+skyResolutionY);++i)
+		if (USE_SHADER && GLEE_VERSION_2_0)
 		{
-			Vec3f& c = colorGrid[i];
-			eye->xyYToRGB(c);
-			c*=atm_intensity;
+			glClampColorARB(GL_CLAMP_VERTEX_COLOR_ARB, GL_FALSE);
+			glUseProgram(atmoShaderProgram);
+			float a, b, c;
+			eye->getShadersParams(a, b, c);
+			GLint loc = glGetUniformLocation(atmoShaderProgram, "alphaWaOverAlphaDa");
+			glUniform1f(loc, a);
+			loc = glGetUniformLocation(atmoShaderProgram, "oneOverGamma");
+			glUniform1f(loc, b);
+			loc = glGetUniformLocation(atmoShaderProgram, "term2TimesOneOverMaxdLpOneOverGamma");
+			glUniform1f(loc, c);
+		}
+		else
+		{
+			// Adapt luminance at this point to avoid a mismatch with the adaptation value
+			for (int i=0;i<(1+skyResolutionX)*(1+skyResolutionY);++i)
+			{
+				Vec3f& c = colorGrid[i];
+				eye->xyYToRGB(c);
+				c*=atm_intensity;
+			}
 		}
 		
 		StelPainter sPainter(core->getProjection2d());
@@ -320,5 +376,11 @@ void Atmosphere::draw(StelCore* core)
 		glDisableClientState(GL_COLOR_ARRAY);
 		
 		glShadeModel(GL_FLAT);
+		
+		if (USE_SHADER && GLEE_VERSION_2_0)
+		{
+			glClampColorARB(GL_CLAMP_VERTEX_COLOR_ARB, GL_TRUE);
+			glUseProgram(0);
+		}
 	}
 }

@@ -92,6 +92,9 @@ private:
 	
 	unsigned int vertexBufferId;
 	unsigned int indicesBufferId;
+	
+	//! Used for xyYToRGB
+	GLuint atmoShaderProgram;
 };
 
 #endif // _ATMOSTPHERE_HPP_
