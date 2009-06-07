@@ -93,7 +93,10 @@ private:
 	unsigned int vertexBufferId;
 	unsigned int indicesBufferId;
 	
-	//! Used for xyYToRGB
+	//! Whether vertex shader should be used
+	bool useShader;
+	
+	//! Vertex shader used for xyYToRGB computation
 	GLuint atmoShaderProgram;
 };
 
