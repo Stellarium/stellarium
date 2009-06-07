@@ -288,7 +288,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		
 		// Now need to compute the xy part of the color component
 		// This can be done in the openGL shader if possible
-		if (false && useShader)
+		if (useShader)
 		{
 			// Store the back projected position + luminance in the input color to the shader
 			colorGrid[i].set(point[0], point[1], point[2], lumi);
@@ -344,6 +344,36 @@ void Atmosphere::draw(StelCore* core)
 			glUniform1f(loc, c);
 			loc = glGetUniformLocation(atmoShaderProgram, "brightnessScale");
 			glUniform1f(loc, atm_intensity);
+			
+			Vec3f sunPos;
+			float term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey;
+			sky.getShadersParams(sunPos, term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey);
+			loc = glGetUniformLocation(atmoShaderProgram, "sunPos");
+			glUniform3f(loc, sunPos[0], sunPos[1], sunPos[2]);
+			loc = glGetUniformLocation(atmoShaderProgram, "term_x");
+			glUniform1f(loc, term_x);
+			loc = glGetUniformLocation(atmoShaderProgram, "Ax");
+			glUniform1f(loc, Ax);
+			loc = glGetUniformLocation(atmoShaderProgram, "Bx");
+			glUniform1f(loc, Bx);
+			loc = glGetUniformLocation(atmoShaderProgram, "Cx");
+			glUniform1f(loc, Cx);
+			loc = glGetUniformLocation(atmoShaderProgram, "Dx");
+			glUniform1f(loc, Dx);
+			loc = glGetUniformLocation(atmoShaderProgram, "Ex");
+			glUniform1f(loc, Ex);
+			loc = glGetUniformLocation(atmoShaderProgram, "term_y");
+			glUniform1f(loc, term_y);
+			loc = glGetUniformLocation(atmoShaderProgram, "Ay");
+			glUniform1f(loc, Ay);
+			loc = glGetUniformLocation(atmoShaderProgram, "By");
+			glUniform1f(loc, By);
+			loc = glGetUniformLocation(atmoShaderProgram, "Cy");
+			glUniform1f(loc, Cy);
+			loc = glGetUniformLocation(atmoShaderProgram, "Dy");
+			glUniform1f(loc, Dy);
+			loc = glGetUniformLocation(atmoShaderProgram, "Ey");
+			glUniform1f(loc, Ey);
 		}
 		else
 		{
