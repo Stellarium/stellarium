@@ -1,4 +1,5 @@
 const float pi = 3.1415926535897931;
+const float ln10 = 2.3025850929940459;
 
 // Variable for the xyYTo RGB conversion
 uniform float alphaWaOverAlphaDa;
@@ -69,7 +70,7 @@ void main()
 	if (color[2]<3.9810717055349722)
 	{
 		// Compute s, ratio between scotopic and photopic vision
-		float op = (log10(color[2]) + 2.)/2.6;
+		float op = (log(color[2])/ln10 + 2.)/2.6;
 		float s = op * op *(3. - 2. * op);
 		float V;
 		// Do the blue shift for scotopic vision simulation (night vision) [3]
