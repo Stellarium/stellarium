@@ -85,6 +85,16 @@ public:
 		}
 	}
 
+	void getShadersParams(Vec3f& asunPos, float& aterm_x, float& aAx, float& aBx, float& aCx, float& aDx, float& aEx,
+		float& aterm_y, float& aAy, float& aBy, float& aCy, float& aDy, float& aEy) const
+	{
+		asunPos=sunPos;
+		aterm_x=term_x;aAx=Ax;aBx=Bx;aCx=Cx;aDx=Dx;aEx=Ex;
+		aterm_y=term_y;aAy=Ay;aBy=By;aCy=Cy;aDy=Dy;aEy=Ey;
+	}
+	
+	
+	
 private:
 	float thetas;  // angular distance between the zenith and the sun in radian
 	float T;       // Turbidity : i.e. sky "clarity"

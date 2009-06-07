@@ -1,9 +1,15 @@
+const float pi = 3.1415926535897931;
+
+// Variable for the xyYTo RGB conversion
 uniform float alphaWaOverAlphaDa;
 uniform float oneOverGamma;
 uniform float term2TimesOneOverMaxdLpOneOverGamma;
 uniform float brightnessScale;
-		
-const float pi = 3.1415926535897931;
+
+// Variables for the color computation
+uniform vec3 sunPos;
+uniform float term_x, Ax, Bx, Cx, Dx, Ex;
+uniform float term_y, Ay, By, Cy, Dy, Ey;
 
 void main()
 {
@@ -11,7 +17,39 @@ void main()
 
 	vec4 color = gl_Color;
 	float X,Y,Z;
-			
+
+	///////////////////////////////////////////////////////////////////////////
+	// First compute the xy color component
+	// color contains the unprojected vertex position in r,g,b
+	// + the Y (luminance) component of the color in the alpha channel
+	if (color[3]>0.01)
+	{
+		float cosDistSun = sunPos[0]*color[0] + sunPos[1]*color[1] + sunPos[2]*color[2];
+		float distSun = acos(cosDistSun);
+		float cosDistSun_q = cosDistSun*cosDistSun;
+		float oneOverCosZenithAngle = (color[2]==0.) ? 1e30 : 1. / color[2];
+		
+		color[0] = term_x * (1. + Ax * exp(Bx*oneOverCosZenithAngle))* (1. + Cx * exp(Dx*distSun) + Ex * cosDistSun_q);
+		color[1] = term_y * (1. + Ay * exp(By*oneOverCosZenithAngle))* (1. + Cy * exp(Dy*distSun) + Ey * cosDistSun_q);
+		if (color[0] < 0. || color[1] < 0.)
+		{
+			color[0] = 0.25;
+			color[1] = 0.25;
+		}
+	}
+	else
+	{
+		color[0] = 0.25;
+		color[1] = 0.25;
+	}
+	
+	color[2]=color[3];
+	color[3]=1.;
+	
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Now we have the xyY components in color, need to convert to RGB
+
 	// 1. Hue conversion
 	// if log10Y>0.6, photopic vision only (with the cones, colors are seen)
 	// else scotopic vision if log10Y<-2 (with the rods, no colors, everything blue),
