@@ -29,11 +29,6 @@
 #include "StelPainter.hpp"
 #include "StelFileMgr.hpp"
 
-// Uncomment to try out vertex buffers
-#define USE_VERTEX_BUFFERS 1
-// Uncomment to try out the fragment shader for xyYToRGB
-static const int USE_SHADER=1;
-
 inline bool myisnan(double value)
 {
 	return value != value;
@@ -82,8 +77,6 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 		glAttachShader(atmoShaderProgram,shaderXyYToRGB);
 		glLinkProgram(atmoShaderProgram);
 	}
-
-	
 }
 
 Atmosphere::~Atmosphere(void)
@@ -167,18 +160,18 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 			}
 		}
 		
-#ifdef USE_VERTEX_BUFFERS
-		// Load the data on the GPU using vertex buffers
-		glGenBuffersARB(1, &vertexBufferId);
-		glBindBufferARB(GL_ARRAY_BUFFER_ARB, vertexBufferId);
-		glBufferDataARB(GL_ARRAY_BUFFER_ARB, (1+skyResolutionX)*(1+skyResolutionY)*2*sizeof(float), posGrid, GL_STATIC_DRAW_ARB);
-		glGenBuffersARB(1, &indicesBufferId);
-		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, indicesBufferId);
-		glBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB, skyResolutionX*skyResolutionY*4*sizeof(GLushort), indices, GL_STATIC_DRAW_ARB);
-		glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
-		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
-#endif
-		
+		if (GLEE_ARB_vertex_buffer_object)
+		{
+			// Load the data on the GPU using vertex buffers
+			glGenBuffersARB(1, &vertexBufferId);
+			glBindBufferARB(GL_ARRAY_BUFFER_ARB, vertexBufferId);
+			glBufferDataARB(GL_ARRAY_BUFFER_ARB, (1+skyResolutionX)*(1+skyResolutionY)*2*sizeof(float), posGrid, GL_STATIC_DRAW_ARB);
+			glGenBuffersARB(1, &indicesBufferId);
+			glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, indicesBufferId);
+			glBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB, skyResolutionX*skyResolutionY*4*sizeof(GLushort), indices, GL_STATIC_DRAW_ARB);
+			glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
+			glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
+		}
 	}
 
 	if (myisnan(_sunPos.length()))
@@ -365,22 +358,25 @@ void Atmosphere::draw(StelCore* core)
 		// Load the color components
 		glColorPointer(3, GL_FLOAT, 0, colorGrid);
 		
-#ifdef USE_VERTEX_BUFFERS
-		// Bind the vertex and indices buffer
-		glBindBufferARB(GL_ARRAY_BUFFER_ARB, vertexBufferId);
-		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, indicesBufferId);
-		glVertexPointer(2, GL_FLOAT, 0, 0);
-		// And draw everything at once
-		glDrawElements(GL_QUADS, skyResolutionX*skyResolutionY*4, GL_UNSIGNED_SHORT, 0);
-		// Unbind buffers
-		glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
-		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
-#else
-		// Load the vertex array
-		glVertexPointer(2, GL_FLOAT, 0, posGrid);
-		// And draw everything at once
-		glDrawElements(GL_QUADS, skyResolutionX*skyResolutionY*4, GL_UNSIGNED_SHORT, indices);
-#endif
+		if (GLEE_ARB_vertex_buffer_object)
+		{
+			// Bind the vertex and indices buffer
+			glBindBufferARB(GL_ARRAY_BUFFER_ARB, vertexBufferId);
+			glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, indicesBufferId);
+			glVertexPointer(2, GL_FLOAT, 0, 0);
+			// And draw everything at once
+			glDrawElements(GL_QUADS, skyResolutionX*skyResolutionY*4, GL_UNSIGNED_SHORT, 0);
+			// Unbind buffers
+			glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
+			glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
+		}
+		else
+		{
+			// Load the vertex array
+			glVertexPointer(2, GL_FLOAT, 0, posGrid);
+			// And draw everything at once
+			glDrawElements(GL_QUADS, skyResolutionX*skyResolutionY*4, GL_UNSIGNED_SHORT, indices);
+		}
 		
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_COLOR_ARRAY);
