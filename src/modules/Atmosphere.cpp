@@ -42,9 +42,10 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 	{
 		useShader=true;
 	}
-	
+
 	if (useShader)
 	{
+		qDebug() << "Use vertex shader for atmosphere rendering.";
 		QString filePath;
 		GLuint shaderXyYToRGB = glCreateShader(GL_VERTEX_SHADER);
 		try
@@ -55,13 +56,13 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 		{
 			qFatal("Can't find data/shaders/xyYToRGB.cg shader file to load");
 		}
-		
+
 		QFile fic(filePath);
 		fic.open(QIODevice::ReadOnly);
 		QByteArray qba = fic.readAll();
 		const char* data = qba.constData();
 		fic.close();
-		glShaderSource(shaderXyYToRGB, 1, &data, NULL); 
+		glShaderSource(shaderXyYToRGB, 1, &data, NULL);
 		glCompileShader(shaderXyYToRGB);
 		char msg[4048];
 		int l;
@@ -104,7 +105,7 @@ Atmosphere::~Atmosphere(void)
 }
 
 void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase,
-                               StelCore* core, float latitude, float altitude, float temperature, float relativeHumidity)
+							   StelCore* core, float latitude, float altitude, float temperature, float relativeHumidity)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 	if (viewport != prj->getViewport())
@@ -129,12 +130,12 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 			for(int y=0; y<=skyResolutionY; ++y)
 			{
 				Vec2f &v(posGrid[y*(1+skyResolutionX)+x]);
-				v[0] = viewport_left + ((x == 0) ? 0.f : 
+				v[0] = viewport_left + ((x == 0) ? 0.f :
 						(x == skyResolutionX) ? (float)prj->getViewportWidth() : (x-0.5*(y&1))*stepX);
 				v[1] = viewport_bottom+y*stepY;
 			}
 		}
-		
+
 		// Generate the indices used to draw the quads
 		indices = new GLushort[skyResolutionX*skyResolutionY*4];
 		int i=0;
@@ -150,7 +151,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 			{
 				g0+=(1+skyResolutionX);
 			}
-			
+
 			for (int x2=0; x2<skyResolutionX; ++x2)
 			{
 				indices[i++]=g0;
@@ -159,7 +160,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 				indices[i++]=++g0;
 			}
 		}
-		
+
 		if (GLEE_ARB_vertex_buffer_object)
 		{
 			// Load the data on the GPU using vertex buffers
@@ -178,7 +179,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		_sunPos.set(0.,0.,-1.*AU);
 	if (myisnan(moonPos.length()))
 		moonPos.set(0.,0.,-1.*AU);
-	
+
 	// Update the eclipse intensity factor to apply on atmosphere model
 	// these are for radii
 	const double sun_angular_size = atan(696000./AU/_sunPos.length());
@@ -214,7 +215,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	}
 	else
 		eclipseFactor = 1.;
-		
+
 
 	// No need to calculate if not visible
 	if (!fader.getInterstate())
@@ -224,7 +225,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	}
 
 	// Calculate the atmosphere RGB for each point of the grid
-	
+
 	float sunPos[3];
 	sunPos[0] = _sunPos[0];
 	sunPos[1] = _sunPos[1];
@@ -248,26 +249,26 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	// Variables used to compute the average sky luminance
 	double sum_lum = 0.;
 	unsigned int nb_lum = 0;
-	
+
 	Vec3d point(1., 0., 0.);
 	skylightStruct2 b2;
 	float lumi;
-	
+
 	// Compute the sky color for every point above the ground
 	for (int i=0; i<(1+skyResolutionX)*(1+skyResolutionY); ++i)
 	{
 		Vec2f &v(posGrid[i]);
 		prj->unProject(v[0],v[1],point);
-		
+
 		Q_ASSERT(fabs(point.lengthSquared()-1.0) < 1e-10);
-		
+
 		if (point[2]<=0)
 		{
 			point[2] = -point[2];
 			// The sky below the ground is the symmetric of the one above :
 			// it looks nice and gives proper values for brightness estimation
 		}
-		
+
 		// Use the Skybright.cpp 's models for brightness which gives better results.
 		lumi = skyb.getLuminance(moon_pos[0]*point[0]+moon_pos[1]*point[1]+
 				moon_pos[2]*point[2], sunPos[0]*point[0]+sunPos[1]*point[1]+
@@ -277,15 +278,15 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		lumi += 0.0001;
 		// Multiply by the input scale of the ToneConverter (is not done automatically by the xyYtoRGB method called later)
 		//lumi*=eye->getInputScale();
-		
+
 		// Add the light pollution luminance AFTER the scaling to avoid scaling it because it is the cause
 		// of the scaling itself
 		lumi += lightPollutionLuminance;
-		
+
 		// Store for later statistics
 		sum_lum+=lumi;
 		++nb_lum;
-		
+
 		// Now need to compute the xy part of the color component
 		// This can be done in the openGL shader if possible
 		if (useShader)
@@ -312,7 +313,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 			colorGrid[i].set(b2.color[0], b2.color[1], lumi, 1.f);
 		}
 	}
-			
+
 	// Update average luminance
 	averageLuminance = sum_lum/nb_lum;
 }
@@ -326,11 +327,11 @@ void Atmosphere::draw(StelCore* core)
 		return;
 
 	StelToneReproducer* eye = core->getToneReproducer();
-	
+
 	if (fader.getInterstate())
 	{
 		const float atm_intensity = fader.getInterstate();
-		
+
 		if (useShader)
 		{
 			glUseProgram(atmoShaderProgram);
@@ -344,7 +345,7 @@ void Atmosphere::draw(StelCore* core)
 			glUniform1f(loc, c);
 			loc = glGetUniformLocation(atmoShaderProgram, "brightnessScale");
 			glUniform1f(loc, atm_intensity);
-			
+
 			Vec3f sunPos;
 			float term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey;
 			sky.getShadersParams(sunPos, term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey);
@@ -385,19 +386,19 @@ void Atmosphere::draw(StelCore* core)
 				c*=atm_intensity;
 			}
 		}
-		
+
 		StelPainter sPainter(core->getProjection2d());
 		glBlendFunc(GL_ONE, GL_ONE);
 		glDisable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
 		glShadeModel(GL_SMOOTH);
-		
+
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glEnableClientState(GL_COLOR_ARRAY);
-		
+
 		// Load the color components
 		glColorPointer(4, GL_FLOAT, 0, colorGrid);
-		
+
 		if (GLEE_ARB_vertex_buffer_object)
 		{
 			// Bind the vertex and indices buffer
@@ -417,12 +418,12 @@ void Atmosphere::draw(StelCore* core)
 			// And draw everything at once
 			glDrawElements(GL_QUADS, skyResolutionX*skyResolutionY*4, GL_UNSIGNED_SHORT, indices);
 		}
-		
+
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_COLOR_ARRAY);
-		
+
 		glShadeModel(GL_FLAT);
-		
+
 		if (useShader)
 		{
 			glUseProgram(0);
