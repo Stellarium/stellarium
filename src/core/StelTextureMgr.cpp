@@ -511,7 +511,13 @@ bool PngLoader::loadImage(const QString& filename, TexInfo& texinfo)
 	}
 
 	/* read magic number */
-	fread (magic, 1, sizeof (magic), fp);
+	if (fread (magic, 1, sizeof (magic), fp)!=sizeof (magic))
+	{
+		qWarning() << "error: \"" << filename << "\": cannot read magic number";
+		fclose (fp);
+		return false;
+	}
+
 
 	/* check for valid magic number */
 	if (!png_check_sig (magic, sizeof (magic)))
