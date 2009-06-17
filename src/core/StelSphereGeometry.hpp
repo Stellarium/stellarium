@@ -27,6 +27,7 @@
 #include "VecMath.hpp"
 
 class SphericalPolygon;
+class SphericalConvexPolygon;
 class SphericalPolygonBase;
 class ConvexRegion;
 class SphericalRegion;
@@ -155,6 +156,9 @@ struct SphericalCap : public SphericalRegion
 
 	//! Return the list of SphericalCap bounding the region.
 	virtual QVector<SphericalCap> getBoundingSphericalCaps() const {QVector<SphericalCap> res; res << *this; return res;}
+
+	//! Convert the cap into a SphericalRegionBase instance.
+	virtual SphericalConvexPolygon toSphericalConvexPolygon() const;
 
 	//! The direction unit vector. Only if d==0, this vector doesn't need to be unit.
 	Vec3d n;
@@ -515,6 +519,8 @@ protected:
 //! If the 2 SphericalCap don't interesect or intersect only at 1 point, false is returned and p1 and p2 are undefined
 bool planeIntersect2(const SphericalCap& h1, const SphericalCap& h2, Vec3d& p1, Vec3d& p2);
 
+//! Split the input contour into up to 8 contours, one for each HTM level 0 triangles.
+QVector<Vec3d>* splitContourHTM(const QVector<Vec3d>& inContour);
 
 #endif // _STELSPHEREGEOMETRY_HPP_
 

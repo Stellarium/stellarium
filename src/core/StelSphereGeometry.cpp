@@ -82,6 +82,22 @@ bool SphericalCap::intersects(const SphericalPolygonBase& polyBase) const
 	return false;
 }
 
+// Convert the cap into a SphericalRegionBase instance.
+SphericalConvexPolygon SphericalCap::toSphericalConvexPolygon() const
+{
+	static const int nbStep = 40;
+	QVector<Vec3d> contour;
+	Vec3d p(n);
+	p.transfo4d(Mat4d::xrotation(std::acos(d)));
+	Mat4d rot = Mat4d::rotation(n, -2.*M_PI/nbStep);
+	for (int i=0;i<nbStep;++i)
+	{
+		contour.append(p);
+		p.transfo4d(rot);
+	}
+	return SphericalConvexPolygon(contour);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalPolygonBase
 ///////////////////////////////////////////////////////////////////////////////
@@ -638,21 +654,32 @@ SphericalRegionP SphericalRegion::loadFromJson(const QByteArray& a)
 	return loadFromJson(&buf);
 }
 
+static void parseRaDec(const QVariant& vRaDec, Vec3d& v)
+{
+	const QVariantList& vl = vRaDec.toList();
+	bool ok;
+	if (vl.size()!=2)
+		throw std::runtime_error(qPrintable(QString("invalid Ra,Dec pair: \"%1\" (expect 2 double values in degree)").arg(vRaDec.toString())));
+	StelUtils::spheToRect(vl.at(0).toDouble(&ok)*M_PI/180., vl.at(1).toDouble(&ok)*M_PI/180., v);
+	if (!ok)
+		throw std::runtime_error(qPrintable(QString("invalid Ra,Dec pair: \"%1\" (expect 2 double values in degree)").arg(vRaDec.toString())));
+}
+
 SphericalRegionP SphericalRegion::loadFromQVariant(const QVariantMap& map)
 {
-	QVariantList polyList = map.value("skyConvexPolygons").toList();
-	if (polyList.empty())
-		polyList = map.value("worldCoords").toList();
+	QVariantList contoursList = map.value("skyConvexPolygons").toList();
+	if (contoursList.empty())
+		contoursList = map.value("worldCoords").toList();
 	else
 		qWarning() << "skyConvexPolygons in preview JSON files is deprecated. Replace with worldCoords.";
 
-	if (polyList.empty())
-		throw std::runtime_error("missing vertice position required for SphericalPolygon");
+	if (contoursList.empty())
+		throw std::runtime_error("missing sky contours description required for Spherical Geometry elements.");
 
 	// Load the matching textures positions (if any)
 	QVariantList texCoordList = map.value("textureCoords").toList();
-	if (!texCoordList.isEmpty() && polyList.size()!=texCoordList.size())
-		throw std::runtime_error("the number of convex contours does not match the number of texture space contours");
+	if (!texCoordList.isEmpty() && contoursList.size()!=texCoordList.size())
+		throw std::runtime_error(qPrintable(QString("the number of sky contours (%1) does not match the number of texture space contours (%2)").arg( contoursList.size()).arg(texCoordList.size())));
 
 	bool ok;
 	if (texCoordList.isEmpty())
@@ -660,20 +687,33 @@ SphericalRegionP SphericalRegion::loadFromQVariant(const QVariantMap& map)
 		// No texture coordinates
 		QVector<QVector<Vec3d> > contours;
 		QVector<Vec3d> vertices;
-		for (int i=0;i<polyList.size();++i)
+		for (int i=0;i<contoursList.size();++i)
 		{
-			const QVariantList& polyRaDecToList = polyList.at(i).toList();
-			if (polyRaDecToList.size()<3)
-				throw std::runtime_error("a polygon contour must have at least 3 vertices");
-			foreach (const QVariant& vRaDec, polyRaDecToList)
+			const QVariantList& contourToList = contoursList.at(i).toList();
+			if (contourToList.size()<1)
+				throw std::runtime_error(qPrintable(QString("invalid contour definition: %1").arg(contoursList.at(i).toString())));
+			if (contourToList.at(0).toString()=="CAP")
 			{
-				const QVariantList& vl = vRaDec.toList();
-				if (vl.size()!=2)
-					throw std::runtime_error("invalid Ra,Dec pair (expect 2 double values in degree)");
+				// We now parse a cap, the format is "CAP",[ra, dec],aperture
+				if (contourToList.size()!=3)
+					throw std::runtime_error(qPrintable(QString("invalid CAP description: %1 (expect \"CAP\",[ra, dec],aperture)").arg(contoursList.at(i).toString())));
 				Vec3d v;
-				StelUtils::spheToRect(vl.at(0).toDouble(&ok)*M_PI/180., vl.at(1).toDouble(&ok)*M_PI/180., v);
+				parseRaDec(contourToList.at(1), v);
+				double d = contourToList.at(2).toDouble(&ok)*M_PI/180.;
 				if (!ok)
-					throw std::runtime_error("invalid Ra,Dec pair (expect 2 double values in degree)");
+					throw std::runtime_error(qPrintable(QString("invalid aperture angle: \"%1\" (expect a double value in degree)").arg(contourToList.at(2).toString())));
+				SphericalCap cap(v,std::cos(d));
+				contours.append(cap.toSphericalConvexPolygon().getConvexContour());
+				vertices.clear();
+				continue;
+			}
+			// If no type is provided, assume a polygon
+			if (contourToList.size()<3)
+				throw std::runtime_error("a polygon contour must have at least 3 vertices");
+			Vec3d v;
+			foreach (const QVariant& vRaDec, contourToList)
+			{
+				parseRaDec(vRaDec, v);
 				vertices.append(v);
 			}
 			Q_ASSERT(vertices.size()>2);
@@ -687,21 +727,16 @@ SphericalRegionP SphericalRegion::loadFromQVariant(const QVariantMap& map)
 		// With texture coordinates
 		QVector<QVector<SphericalTexturedPolygon::TextureVertex> > contours;
 		QVector<SphericalTexturedPolygon::TextureVertex> vertices;
-		for (int i=0;i<polyList.size();++i)
+		for (int i=0;i<contoursList.size();++i)
 		{
 			// Load vertices
-			const QVariantList& polyRaDecToList = polyList.at(i).toList();
+			const QVariantList& polyRaDecToList = contoursList.at(i).toList();
 			if (polyRaDecToList.size()<3)
 				throw std::runtime_error("a polygon contour must have at least 3 vertices");
+			SphericalTexturedPolygon::TextureVertex v;
 			foreach (const QVariant& vRaDec, polyRaDecToList)
 			{
-				const QVariantList& vl = vRaDec.toList();
-				if (vl.size()!=2)
-					throw std::runtime_error("invalid Ra,Dec pair (expect 2 double values in degree)");
-				SphericalTexturedPolygon::TextureVertex v;
-				StelUtils::spheToRect(vl.at(0).toDouble(&ok)*M_PI/180., vl.at(1).toDouble(&ok)*M_PI/180., v.vertex);
-				if (!ok)
-					throw std::runtime_error("invalid Ra,Dec pair (expect 2 double values in degree)");
+				parseRaDec(vRaDec, v.vertex);
 				vertices.append(v);
 			}
 			Q_ASSERT(vertices.size()>2);
