@@ -74,7 +74,8 @@ public slots:
 			
 protected:
 	virtual void resizeEvent(QResizeEvent* event);
-
+	virtual void mouseMoveEvent(QMouseEvent* event);
+	
 signals:
 	//! emitted when saveScreenShot is requested with saveScreenShot().
 	//! doScreenshot() does the actual work (it has to do it in the main
