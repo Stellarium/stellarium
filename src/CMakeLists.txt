@@ -71,6 +71,8 @@ SET(stellarium_lib_SRCS
 	core/StelFontMgr.hpp
 	core/StelAppGraphicsScene.cpp
 	core/StelAppGraphicsScene.hpp
+	core/StelAppGraphicsWidget.cpp
+	core/StelAppGraphicsWidget.hpp
 	core/StelLocaleMgr.cpp
 	core/StelLocaleMgr.hpp
 	core/StelModule.cpp
@@ -222,6 +224,8 @@ SET(stellarium_lib_SRCS
 
 	gui/StelGui.hpp
 	gui/StelGui.cpp
+	gui/SkyGui.hpp
+	gui/SkyGui.cpp
 	gui/StelGuiItems.hpp
 	gui/StelGuiItems.cpp
 	gui/HelpDialog.hpp
@@ -399,6 +403,7 @@ SET(stellarium_MOC_HDRS
 	core/StelLocationMgr.hpp
 	core/StelCore.hpp
 	core/StelAppGraphicsScene.hpp
+	core/StelAppGraphicsWidget.hpp
 	core/StelTexture.hpp
 	core/StelMovementMgr.hpp
 	core/MultiLevelJsonBase.hpp
@@ -421,6 +426,7 @@ SET(stellarium_MOC_HDRS
 	modules/StarMgr.hpp
 	modules/TelescopeMgr.hpp
 	gui/StelGui.hpp
+	gui/SkyGui.hpp
 	gui/StelGuiItems.hpp
 	gui/HelpDialog.hpp
 	gui/Dialog.hpp

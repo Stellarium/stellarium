@@ -455,13 +455,12 @@ void BottomStelBar::updateButtonsGroups()
 		}
 		x+=iter.value().rightMargin;
 	}
-	updateText();
+	updateText(true);
 }
 
 // Make sure to avoid any change if not necessary to avoid triggering useless redraw
-void BottomStelBar::updateText()
+void BottomStelBar::updateText(bool updatePos)
 {
-	bool updatePos = false;
 	StelCore* core = StelApp::getInstance().getCore();
 	double jd = core->getNavigator()->getJDay();
 

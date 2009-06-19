@@ -53,6 +53,8 @@ public:
 	//! @return a pointer to the progress bar
 	class QProgressBar* addProgressBar();
 
+	QGraphicsWidget* getMainSkyItem() {return mainSkyItem;}
+	
 public slots:
 
 	///////////////////////////////////////////////////////////////////////////
@@ -86,6 +88,8 @@ private slots:
 private:
 	//! The StelMainWindow singleton
 	static StelMainGraphicsView* singleton;
+	QGraphicsWidget* backItem;
+	QGraphicsWidget* mainSkyItem;
 	
 	//! The openGL window
 	QGLWidget* glWidget;

@@ -66,8 +66,8 @@ class StelApp : public QObject
 	Q_OBJECT
 
 public:
-	friend class StelAppGraphicsScene;
-
+	friend class StelAppGraphicsWidget;
+	
 	//! Create and initialize the main Stellarium application.
 	//! @param argc The number of command line parameters
 	//! @param argv an array of char* command line arguments
@@ -177,6 +177,16 @@ public:
 	//! Get the file name of the startup script
 	QString getStartupScript() const {return startupScript;}
 
+	//! Update all object according to the deltaTime in seconds.
+	void update(double deltaTime);
+
+	//! Draw all registered StelModule in the order defined by the order lists.
+	//! @return the max squared distance in pixels that any object has travelled since the last update.
+	void draw();
+	
+	//! Call this when the size of the GL window has changed.
+	void glWindowHasBeenResized(float x, float y, float w, float h);
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
@@ -219,13 +229,6 @@ signals:
 	void minFpsChanged();
 
 private:
-	//! Update all object according to the deltaTime in seconds.
-	void update(double deltaTime);
-
-	//! Draw all registered StelModule in the order defined by the order lists.
-	//! @return the max squared distance in pixels that any object has travelled since the last update.
-	void draw();
-
 	//! Handle mouse clics.
 	void handleClick(class QMouseEvent* event);
 	//! Handle mouse wheel.
@@ -234,9 +237,6 @@ private:
 	void handleMove(int x, int y, Qt::MouseButtons b);
 	//! Handle key press and release.
 	void handleKeys(class QKeyEvent* event);
-
-	//! Call this when the size of the GL window has changed.
-	void glWindowHasBeenResized(int w, int h);
 
 	//! Set the colorscheme for all the modules
 	void setColorScheme(const QString& section);

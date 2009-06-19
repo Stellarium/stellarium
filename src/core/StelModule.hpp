@@ -115,9 +115,6 @@ public:
 	//! @param style the style object containing all necessary information on how to style widgets and text
 	virtual void setStelStyle(const StelStyle& style) {;}
 
-	//! This method is called for all StelModules when the GL window is resized
-	virtual void glWindowHasBeenResized(int w, int h) {;}
-
 	//! Define the possible action for which an order is defined
 	enum StelModuleActionName
 	{

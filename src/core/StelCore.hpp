@@ -80,7 +80,7 @@ public:
 	void update(double deltaTime);
 
 	//! Handle the resizing of the window
-	void windowHasBeenResized(int width,int height);
+	void windowHasBeenResized(float x, float y, float width, float height);
 	
 	//! Update core state before drawing modules.
 	void preDraw();
