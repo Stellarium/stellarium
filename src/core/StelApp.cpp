@@ -346,7 +346,7 @@ void StelApp::init()
 
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
-		core->windowHasBeenResized(saveProjW, saveProjH);
+		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
 	textureMgr = new StelTextureMgr();
 	localeMgr = new StelLocaleMgr();
 	fontManager = new StelFontMgr();
@@ -1049,19 +1049,14 @@ void StelApp::draw()
 /*************************************************************************
  Call this when the size of the GL window has changed
 *************************************************************************/
-void StelApp::glWindowHasBeenResized(int w, int h)
+void StelApp::glWindowHasBeenResized(float x, float y, float w, float h)
 {
 	if (core)
-		core->windowHasBeenResized(w, h);
+		core->windowHasBeenResized(x, y, w, h);
 	else
 	{
 		saveProjW = w;
 		saveProjH = h;
-	}
-	// Send the event to every StelModule
-	foreach (StelModule* iter, moduleMgr->getAllModules())
-	{
-		iter->glWindowHasBeenResized(w, h);
 	}
 }
 
@@ -1374,7 +1369,7 @@ int StelApp::argsGetYesNoOption(QStringList* args, QString shortOpt, QString lon
 // Return the time since when stellarium is running in second.
 double StelApp::getTotalRunTime()
 {
-	return (double)StelApp::qtime->elapsed()/1000;
+	return (double)(StelApp::qtime->elapsed())/1000.;
 }
 
 

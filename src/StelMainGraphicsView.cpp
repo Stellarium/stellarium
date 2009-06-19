@@ -19,6 +19,7 @@
 
 #include "StelMainGraphicsView.hpp"
 #include "StelAppGraphicsScene.hpp"
+#include "StelAppGraphicsWidget.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
@@ -36,6 +37,7 @@
 #include <QThread>
 #include <QAction>
 #include <QRegExp>
+#include <QGraphicsGridLayout>
 
 #include "gui/StelGui.hpp"
 
@@ -49,9 +51,6 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	  screenShotPrefix("stellarium-"), 
 	  screenShotDir("")
 {
-	// Is this line useful??
-	//setScene(new QGraphicsScene(this));
-	
 	// Can't create 2 StelMainWindow instances
 	Q_ASSERT(!singleton);
 	singleton = this;
@@ -75,7 +74,16 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	// Create the main instance of stellarium
 	stelApp = new StelApp(argc, argv);
 	setScene(new StelAppGraphicsScene());
-
+	
+	backItem = new QGraphicsWidget();
+	backItem->setFocusPolicy(Qt::NoFocus);
+	QGraphicsGridLayout* l = new QGraphicsGridLayout(backItem);
+	mainSkyItem = new StelAppGraphicsWidget();
+	l->addItem(mainSkyItem, 0, 0);
+	l->setContentsMargins(0,0,0,0);
+	l->setSpacing(0);
+	scene()->addItem(backItem);
+			
 	setFocusPolicy(Qt::ClickFocus);
 	
 	connect(this, SIGNAL(screenshotRequested()), this, SLOT(doScreenshot()));
@@ -89,6 +97,7 @@ void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
 {
 	if (scene())
 		scene()->setSceneRect(QRect(QPoint(0, 0), event->size()));
+	backItem->setGeometry(0,0,event->size().width(),event->size().height());
 	QGraphicsView::resizeEvent(event);
 }
 
@@ -98,11 +107,6 @@ void StelMainGraphicsView::init()
 	Q_ASSERT(conf);
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
 	
-	// This apparently useless line fixes the scrolling bug
-	// I suspect a Qt 4.4 bug -> Fixed with Qt 4.4.1
-#if QT_VERSION == 0x040400
-	setMatrix(QMatrix(1,0,0,1,0.00000001,0));
-#endif
 	// Bug in the Qt 4.5 beta version
 #if QT_VERSION == 0x040500
 	setMatrix(QMatrix(1,0,0,1,0.00000001,0));

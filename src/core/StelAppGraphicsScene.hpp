@@ -48,8 +48,7 @@ public:
 	void setViewPortDistorterType(const QString& type);
 	//! Get the type of viewport distorter currently used
 	QString getViewPortDistorterType() const;
-	
-	void glWindowHasBeenResized(int w, int h);
+
 	
 	//! Get the state of the mouse cursor timeout flag
 	bool getFlagCursorTimeout() {return flagCursorTimeout;}
@@ -81,7 +80,6 @@ private:
 	//! FPS should be maximized for a couple of seconds.
 	void thereWasAnEvent();
 	
-	double previousTime;
 	double lastEventTimeSec;
 	
 	// Main elements of the StelApp

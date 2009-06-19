@@ -235,10 +235,10 @@ const StelProjectorP StelCore::getProjection(FrameType frameType, ProjectionType
 }
 
 // Handle the resizing of the window
-void StelCore::windowHasBeenResized(int width,int height)
+void StelCore::windowHasBeenResized(float x, float y, float width, float height)
 {
 	// Maximize display when resized since it invalidates previous options anyway
-	currentProjectorParams.viewportXywh.set(0, 0, width, height);
+	currentProjectorParams.viewportXywh.set(x, y, width, height);
 	currentProjectorParams.viewportCenter.set(0.5*width, 0.5*height);
 	currentProjectorParams.viewportFovDiameter = qMin(width,height);
 }
