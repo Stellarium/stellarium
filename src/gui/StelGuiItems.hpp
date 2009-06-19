@@ -193,7 +193,7 @@ private slots:
 	void buttonHoverChanged(bool b);
 	
 private:
-	void updateText();
+	void updateText(bool forceUpdatePos=false);
 	void updateButtonsGroups();
 	QRectF getButtonsBoundingRect() const;
 	QGraphicsSimpleTextItem* location;

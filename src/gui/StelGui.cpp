@@ -19,6 +19,7 @@
 
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
+#include "SkyGui.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelProjector.hpp"
@@ -61,6 +62,8 @@
 #include <QTextDocument>
 #include <QTextBrowser>
 #include <QGraphicsWidget>
+#include <QGraphicsGridLayout>
+
 
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 {
@@ -102,26 +105,7 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 StelGui::StelGui() : initDone(false)
 {
 	// QPixmapCache::setCacheLimit(30000); ?
-
 	setObjectName("StelGui");
-	winBar = NULL;
-	buttonBar = NULL;
-	infoPanel = NULL;
-	buttonBarPath = NULL;
-	lastButtonbarWidth = 0;
-	autoHidebts = NULL;
-
-	autoHideHorizontalButtonBar = true;
-	autoHideVerticalButtonBar = true;
-
-	animLeftBarTimeLine = new QTimeLine(200, this);
-	animLeftBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);
-	connect(animLeftBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos()));
-
-	animBottomBarTimeLine = new QTimeLine(200, this);
-	animBottomBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);
-	connect(animBottomBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos()));
-
 	flipHoriz = NULL;
 	flipVert = NULL;
 	btShowNebulaeBackground = NULL;
@@ -129,7 +113,6 @@ StelGui::StelGui() : initDone(false)
 
 StelGui::~StelGui()
 {
-	infoPanel->deleteLater();
 }
 
 /*************************************************************************
@@ -148,7 +131,9 @@ double StelGui::getCallOrder(StelModuleActionName actionName) const
 void StelGui::init()
 {
 	qDebug() << "Creating GUI ...";
-
+	
+	skyGui = new SkyGui();
+	
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
 	QString group = N_("Display Options");
@@ -241,8 +226,7 @@ void StelGui::init()
 	addGuiActions("actionAutoHideVerticalButtonBar", N_("Auto hide vertical button bar"), "", group, true, false);
 	addGuiActions("actionToggle_GuiHidden_Global", N_("Toggle visibility of toolbars"), "Ctrl+T", group, true, false);
 
-	//QMetaObject::connectSlotsByName(Form);
-
+	
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
 	connect(getGuiActions("actionQuit_Global"), SIGNAL(triggered()), this, SLOT(quitStellarium()));
@@ -398,202 +382,155 @@ void StelGui::init()
 	//// QGraphicsView based GUI
 	///////////////////////////////////////////////////////////////////////////
 
-	// Construct the Windows buttons bar
-	winBar = new LeftStelBar(NULL);
-
+	// Add everything
 	QPixmap pxmapGlow(":/graphicGui/gui/glow.png");
 	QPixmap pxmapOn(":/graphicGui/gui/2-on-location.png");
 	QPixmap pxmapOff(":/graphicGui/gui/2-off-location.png");
 	StelButton*  b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Location_Window_Global"));
-	winBar->addButton(b);
+	skyGui->winBar->addButton(b);
 
 	pxmapOn = QPixmap(":/graphicGui/gui/1-on-time.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/1-off-time.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_DateTime_Window_Global"));
-	winBar->addButton(b);
+	skyGui->winBar->addButton(b);
 
 	pxmapOn = QPixmap(":/graphicGui/gui/5-on-labels.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/5-off-labels.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_SkyView_Window_Global"));
-	winBar->addButton(b);
+	skyGui->winBar->addButton(b);
 
 	pxmapOn = QPixmap(":/graphicGui/gui/6-on-search.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/6-off-search.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Search_Window_Global"));
-	winBar->addButton(b);
+	skyGui->winBar->addButton(b);
 
 
 	pxmapOn = QPixmap(":/graphicGui/gui/8-on-settings.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/8-off-settings.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Configuration_Window_Global"));
-	winBar->addButton(b);
+	skyGui->winBar->addButton(b);
 
 	pxmapOn = QPixmap(":/graphicGui/gui/9-on-help.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/9-off-help.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Help_Window_Global"));
-	winBar->addButton(b);
+	skyGui->winBar->addButton(b);
 
-
-	// Construct the bottom buttons bar
-	buttonBar = new BottomStelBar(NULL, QPixmap(":/graphicGui/gui/btbg-left.png"), QPixmap(":/graphicGui/gui/btbg-right.png"),
-			QPixmap(":/graphicGui/gui/btbg-middle.png"), QPixmap(":/graphicGui/gui/btbg-single.png"));
-
-	infoPanel = new InfoPanel(NULL);
 
 	QPixmap pxmapGlow32x32(":/graphicGui/gui/glow32x32.png");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btConstellationLines-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btConstellationLines-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Constellation_Lines"));
-	buttonBar->addButton(b, "010-constellationsGroup");
+	skyGui->buttonBar->addButton(b, "010-constellationsGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btConstellationLabels-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btConstellationLabels-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Constellation_Labels"));
-	buttonBar->addButton(b, "010-constellationsGroup");
+	skyGui->buttonBar->addButton(b, "010-constellationsGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btConstellationArt-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btConstellationArt-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Constellation_Art"));
-	buttonBar->addButton(b, "010-constellationsGroup");
+	skyGui->buttonBar->addButton(b, "010-constellationsGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btEquatorialGrid-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btEquatorialGrid-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Equatorial_Grid"));
-	buttonBar->addButton(b, "020-gridsGroup");
+	skyGui->buttonBar->addButton(b, "020-gridsGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btAzimuthalGrid-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btAzimuthalGrid-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Azimuthal_Grid"));
-	buttonBar->addButton(b, "020-gridsGroup");
+	skyGui->buttonBar->addButton(b, "020-gridsGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btGround-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btGround-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Ground"));
-	buttonBar->addButton(b, "030-landscapeGroup");
+	skyGui->buttonBar->addButton(b, "030-landscapeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btCardinalPoints-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btCardinalPoints-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Cardinal_Points"));
-	buttonBar->addButton(b, "030-landscapeGroup");
+	skyGui->buttonBar->addButton(b, "030-landscapeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btAtmosphere-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btAtmosphere-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Atmosphere"));
-	buttonBar->addButton(b, "030-landscapeGroup");
+	skyGui->buttonBar->addButton(b, "030-landscapeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btNebula-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btNebula-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Nebulas"));
-	buttonBar->addButton(b, "040-nebulaeGroup");
+	skyGui->buttonBar->addButton(b, "040-nebulaeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btPlanets-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btPlanets-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Planets_Labels"));
-	buttonBar->addButton(b, "040-nebulaeGroup");
+	skyGui->buttonBar->addButton(b, "040-nebulaeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btEquatorialMount-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btEquatorialMount-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionSwitch_Equatorial_Mount"));
 	b->setChecked(getGuiActions("actionSwitch_Equatorial_Mount")->isChecked());
-	buttonBar->addButton(b, "060-othersGroup");
+	skyGui->buttonBar->addButton(b, "060-othersGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btGotoSelectedObject-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btGotoSelectedObject-off.png");
 	buttonGotoSelectedObject = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionGoto_Selected_Object"));
-	buttonBar->addButton(buttonGotoSelectedObject, "060-othersGroup");
+	skyGui->buttonBar->addButton(buttonGotoSelectedObject, "060-othersGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btNightView-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btNightView-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Night_Mode"));
-	buttonBar->addButton(b, "060-othersGroup");
+	skyGui->buttonBar->addButton(b, "060-othersGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btFullScreen-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btFullScreen-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionSet_Full_Screen_Global"));
-	buttonBar->addButton(b, "060-othersGroup");
+	skyGui->buttonBar->addButton(b, "060-othersGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeRewind-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btTimeRewind-off.png");
 	buttonTimeRewind = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionDecrease_Time_Speed"));
-	buttonBar->addButton(buttonTimeRewind, "070-timeGroup");
+	skyGui->buttonBar->addButton(buttonTimeRewind, "070-timeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeRealtime-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btTimeRealtime-off.png");
 	buttonTimeRealTimeSpeed = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionSet_Real_Time_Speed"));
-	buttonBar->addButton(buttonTimeRealTimeSpeed, "070-timeGroup");
+	skyGui->buttonBar->addButton(buttonTimeRealTimeSpeed, "070-timeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeNow-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btTimeNow-off.png");
 	buttonTimeCurrent = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionReturn_To_Current_Time"));
-	buttonBar->addButton(buttonTimeCurrent, "070-timeGroup");
+	skyGui->buttonBar->addButton(buttonTimeCurrent, "070-timeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeForward-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btTimeForward-off.png");
 	buttonTimeForward = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionIncrease_Time_Speed"));
-	buttonBar->addButton(buttonTimeForward, "070-timeGroup");
+	skyGui->buttonBar->addButton(buttonTimeForward, "070-timeGroup");
 
-	buttonBar->setGroupMargin("070-timeGroup", 32, 0);
+	skyGui->buttonBar->setGroupMargin("070-timeGroup", 32, 0);
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btQuit.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOn, pxmapGlow32x32, getGuiActions("actionQuit_Global"));
-	buttonBar->addButton(b, "080-quitGroup");
-
-	// The path drawn around the button bars
-	buttonBarPath = new StelBarsPath(NULL);
-	buttonBarPath->updatePath(buttonBar, winBar);
-	buttonBarPath->setZValue(-0.1);
-
-	// Used to display some progress bar in the lower right corner, e.g. when loading a file
-	progressBarMgr = new StelProgressBarMgr(NULL);
-
-	// Add everything in the scene
-	QGraphicsScene* scene = StelMainGraphicsView::getInstance().scene();
-	scene->addItem(winBar);
-	scene->addItem(buttonBar);
-	scene->addItem(buttonBarPath);
-	scene->addItem(infoPanel);
-	scene->addItem(progressBarMgr);
-
-	// Create the 2 auto hide buttons in the bottom left corner
-	autoHidebts = new CornerButtons();
-	pxmapOn = QPixmap(":/graphicGui/gui/HorizontalAutoHideOn.png");
-	pxmapOff = QPixmap(":/graphicGui/gui/HorizontalAutoHideOff.png");
-	btHorizAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), getGuiActions("actionAutoHideHorizontalButtonBar"), true);
-	btHorizAutoHide->setChecked(getAutoHideHorizontalButtonBar());
-
-	pxmapOn = QPixmap(":/graphicGui/gui/VerticalAutoHideOn.png");
-	pxmapOff = QPixmap(":/graphicGui/gui/VerticalAutoHideOff.png");
-	btVertAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), getGuiActions("actionAutoHideVerticalButtonBar"), true);
-	btVertAutoHide->setChecked(getAutoHideVerticalButtonBar());
-
-	btHorizAutoHide->setPos(1,btVertAutoHide->pixmap().height()-btHorizAutoHide->pixmap().height()+1);
-	btVertAutoHide->setPos(0,0);
-	btVertAutoHide->setZValue(1000);
-	scene->addItem(autoHidebts);
-
-	// Re-adjust position
-	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
-	updateBarsPos();
-	infoPanel->setPos(8,8);
-
-	// If auto hide is off, show the relevant toolbars
-	if (!getAutoHideHorizontalButtonBar())
-	{
-		animBottomBarTimeLine->setDirection(QTimeLine::Forward);
-		animBottomBarTimeLine->start();
-	}
-
-	if (!getAutoHideVerticalButtonBar())
-	{
-		animLeftBarTimeLine->setDirection(QTimeLine::Forward);
-		animLeftBarTimeLine->start();
-	}
+	skyGui->buttonBar->addButton(b, "080-quitGroup");
 
 	// add the flip buttons if requested in the config
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
 	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());
-
+	
+	///////////////////////////////////////////////////////////////////////
+	// Create the main base widget
+	QGraphicsWidget* skyItem = StelMainGraphicsView::getInstance().getMainSkyItem();
+	skyGui->init(this);
+	QGraphicsGridLayout* l = new QGraphicsGridLayout();
+	l->setContentsMargins(0,0,0,0);
+	l->setSpacing(0);
+	l->addItem(skyGui, 0, 0);
+	skyItem->setLayout(l);	
+	
+	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
+	
 	initDone = true;
 }
 
@@ -608,43 +545,12 @@ void StelGui::setStelStyle(const StelStyle& style)
 {
 	qApp->setStyleSheet(style.qtStyleSheet);
 
-	if (style.confSectionName=="night_color")
-	{
-		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.2,0.2,0.5));
-		buttonBarPath->setBrush(QColor::fromRgbF(0.23, 0.13, 0.03, 0.2));
-		buttonBar->setColor(QColor::fromRgbF(0.9, 0.33, 0.33, 0.9));
-		winBar->setColor(QColor::fromRgbF(0.9, 0.33, 0.33, 0.9));
-		winBar->setRedMode(true);
-		buttonBar->setRedMode(true);
-		btHorizAutoHide->setRedMode(true);
-		btVertAutoHide->setRedMode(true);
-	}
-	else
-	{
-		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
-		buttonBarPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
-		buttonBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
-		winBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
-		buttonBar->setRedMode(false);
-		winBar->setRedMode(false);
-		btHorizAutoHide->setRedMode(false);
-		btVertAutoHide->setRedMode(false);
-	}
-
+	skyGui->setStelStyle(style);
 	locationDialog.styleChanged();
 	dateTimeDialog.styleChanged();
 	configurationDialog.styleChanged();
 	searchDialog.styleChanged();
 	viewDialog.styleChanged();
-}
-
-
-void StelGui::glWindowHasBeenResized(int ww, int hh)
-{
-	if (!winBar || !buttonBar)
-		return;
-
-	updateBarsPos();
 }
 
 
@@ -712,39 +618,7 @@ void StelGui::update(double deltaTime)
 	if (getGuiActions("actionShow_Stars")->isChecked()!=smgr->getFlagStars())
 		getGuiActions("actionShow_Stars")->setChecked(smgr->getFlagStars());
 
-	infoPanel->setTextFromObjects(GETSTELMODULE(StelObjectMgr)->getSelectedObject());
-}
-
-bool StelGui::handleMouseMoves(int x, int y, Qt::MouseButtons b)
-{
-	double maxX = winBar->boundingRect().width()+2.*buttonBarPath->getRoundSize();
-	double maxY = winBar->boundingRect().height()+buttonBar->boundingRect().height()+2.*buttonBarPath->getRoundSize();
-	double minX = 0;
-	if (x<=maxX && y<=maxY && b==Qt::NoButton && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()<minX)
-	{
-		animLeftBarTimeLine->setDirection(QTimeLine::Forward);
-		animLeftBarTimeLine->start();
-	}
-	if (autoHideVerticalButtonBar && (x>maxX+30 || y>maxY+30) && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()>=minX)
-	{
-		animLeftBarTimeLine->setDirection(QTimeLine::Backward);
-		animLeftBarTimeLine->start();
-	}
-
-	maxX = winBar->boundingRect().width()+buttonBar->boundingRect().width()+2.*buttonBarPath->getRoundSize();
-	maxY = buttonBar->boundingRect().height()+2.*buttonBarPath->getRoundSize();
-	if (x<=maxX && y<=maxY && b==Qt::NoButton && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()<1.)
-	{
-		animBottomBarTimeLine->setDirection(QTimeLine::Forward);
-		animBottomBarTimeLine->start();
-	}
-	if (autoHideHorizontalButtonBar && (x>maxX+30 || y>maxY+30) && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()>=0.9999999)
-	{
-		animBottomBarTimeLine->setDirection(QTimeLine::Backward);
-		animBottomBarTimeLine->start();
-	}
-
-	return false;
+	skyGui->infoPanel->setTextFromObjects(GETSTELMODULE(StelObjectMgr)->getSelectedObject());
 }
 
 
@@ -795,64 +669,11 @@ void StelGui::guiActionTriggered(bool b)
 	// and QObject::sender()->property("persistenceName").toString();
 }
 
-void StelGui::updateBarsPos()
-{
-	const int ww = StelMainGraphicsView::getInstance().width();
-	const int hh = StelMainGraphicsView::getInstance().height();
-
-	bool updatePath = false;
-
-	// Use a position cache to avoid useless redraw triggered by the position set if the bars don't move
-	double rangeX = winBar->boundingRectNoHelpLabel().width()+2.*buttonBarPath->getRoundSize()+1.;
-	const qreal newWinBarX = buttonBarPath->getRoundSize()-(1.-animLeftBarTimeLine->currentValue())*rangeX-0.5;
-	const qreal newWinBarY = hh-winBar->boundingRectNoHelpLabel().height()-buttonBar->boundingRectNoHelpLabel().height()-20;
-	if (winBar->pos().x()!=newWinBarX || winBar->pos().y()!=newWinBarY)
-	{
-		winBar->setPos(newWinBarX, newWinBarY);
-		updatePath = true;
-	}
-
-	double rangeY = buttonBar->boundingRectNoHelpLabel().height()+0.5-7.-buttonBarPath->getRoundSize();
-	const qreal newButtonBarX = winBar->boundingRectNoHelpLabel().right()+buttonBarPath->getRoundSize();
-	const qreal newButtonBarY = hh-buttonBar->boundingRectNoHelpLabel().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY;
-	if (buttonBar->pos().x()!=newButtonBarX || buttonBar->pos().y()!=newButtonBarY)
-	{
-		buttonBar->setPos(newButtonBarX, newButtonBarY);
-		updatePath = true;
-	}
-
-	if (lastButtonbarWidth != buttonBar->boundingRectNoHelpLabel().width())
-	{
-		updatePath = true;
-		lastButtonbarWidth = (int)(buttonBar->boundingRectNoHelpLabel().width());
-	}
-
-// 	double barOpacity = 1.-(5.+StelApp::getInstance().getCore()->getSkyDrawer()->getLimitMagnitude())/10.;
-// 	barOpacity = qMin(qMax(0., barOpacity), 1.);
-// 	barOpacity = 0.2+barOpacity*0.4;
-// 	buttonBarPath->setBackgroundOpacity(barOpacity);
-
-	if (updatePath)
-		buttonBarPath->updatePath(buttonBar, winBar);
-
-	const qreal newProgressBarX = ww-progressBarMgr->boundingRect().width()-5;
-	const qreal newProgressBarY = hh-progressBarMgr->boundingRect().height()-5;
-	if (progressBarMgr->pos().x()!=newProgressBarX || progressBarMgr->pos().y()!=newProgressBarY)
-	{
-		progressBarMgr->setPos(newProgressBarX, newProgressBarY);
-		updatePath = true;
-	}
-
-	// Update position of the auto-hide buttons
-	autoHidebts->setPos(0, hh-autoHidebts->childrenBoundingRect().height()+1);
-	double opacity = qMax(animLeftBarTimeLine->currentValue(), animBottomBarTimeLine->currentValue());
-	autoHidebts->setOpacity(opacity < 0.01 ? 0.01 : opacity);	// Work around a qt bug
-}
 
 // Add a new progress bar in the lower right corner of the screen.
 QProgressBar* StelGui::addProgressBar()
 {
-	return progressBarMgr->addProgressBar();
+	return skyGui->progressBarMgr->addProgressBar();
 }
 
 void StelGui::setScriptKeys(bool b)
@@ -998,10 +819,7 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 void StelGui::setHideGui(bool b)
 {
 	qDebug() << "StelGui::setHideGui -- " << b;
-	buttonBar->setVisible(!b);
-	winBar->setVisible(!b);
-	autoHidebts->setVisible(!b);
-	buttonBarPath->setVisible(!b);
+	skyGui->setVisible(!b);
 }
 
 bool StelGui::getHideGui(void)
@@ -1016,3 +834,20 @@ void setScriptKeys()
 void setNormalKeys()
 {
 }
+
+InfoPanel* StelGui::getInfoPanel(void)
+{
+	return skyGui->infoPanel;
+}
+
+BottomStelBar* StelGui::getButtonBar() {return skyGui->buttonBar;}
+	
+LeftStelBar* StelGui::getWindowsButtonBar() {return skyGui->winBar;}
+
+bool StelGui::getAutoHideHorizontalButtonBar() const {return skyGui->autoHideHorizontalButtonBar;}
+
+void StelGui::setAutoHideHorizontalButtonBar(bool b) {skyGui->autoHideHorizontalButtonBar=b;}
+
+bool StelGui::getAutoHideVerticalButtonBar() const {return skyGui->autoHideVerticalButtonBar;}
+
+void StelGui::setAutoHideVerticalButtonBar(bool b) {skyGui->autoHideVerticalButtonBar=b;}

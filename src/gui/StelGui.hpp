@@ -17,14 +17,13 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _NEWGUI_HPP_
-#define _NEWGUI_HPP_
+#ifndef _STELGUI_HPP_
+#define _STELGUI_HPP_
 
 #include "StelModule.hpp"
+#include "StelObject.hpp"
 #include "LocationDialog.hpp"
 #include "ViewDialog.hpp"
-#include "StelObjectType.hpp"
-#include "StelObject.hpp"
 #include "HelpDialog.hpp"
 #include "DateTimeDialog.hpp"
 #include "SearchDialog.hpp"
@@ -33,12 +32,11 @@
 #ifdef ENABLE_SCRIPT_CONSOLE
 #include "ScriptConsole.hpp"
 #endif
-#include <QDebug>
-#include <QGraphicsItem>
+
+#include <QGraphicsTextItem>
 
 class QGraphicsSceneMouseEvent;
 class QAction;
-class QGraphicsTextItem;
 class QTimeLine;
 class StelButton;
 class BottomStelBar;
@@ -75,8 +73,6 @@ public:
 	virtual void update(double deltaTime);
 	virtual void updateI18n();
 	virtual double getCallOrder(StelModuleActionName actionName) const;
-	virtual void glWindowHasBeenResized(int w, int h);
-	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
 	//! Load color scheme from the given ini file and section name
 	virtual void setStelStyle(const StelStyle& style);
 	
@@ -86,7 +82,7 @@ public:
 	void loadStyle(const QString& fileName);
 
 	//! Get a pointer on the info panel used to display selected object info
-	InfoPanel* getInfoPanel(void) { return infoPanel; }
+	InfoPanel* getInfoPanel(void);
 	
 	//! Add a new progress bar in the lower right corner of the screen.
 	//! When the progress bar is deleted with removeProgressBar() the layout is automatically rearranged.
@@ -109,10 +105,10 @@ public:
 	QAction* getGuiActions(const QString& actionName);
 	
 	//! Get the button bar at the bottom of the screen
-	BottomStelBar* getButtonBar() {return buttonBar;}
+	BottomStelBar* getButtonBar();
 	
 	//! Get the button bar of the left of the screen
-	class LeftStelBar* getWindowsButtonBar() {return winBar;}
+	class LeftStelBar* getWindowsButtonBar();
 	
 	//! Transform the pixmap so that it look red for night vision mode
 	static QPixmap makeRed(const QPixmap& p);
@@ -140,22 +136,22 @@ public slots:
 	void setFlagShowNebulaBackgroundButton(bool b);
 
 	//! Get the auto-hide status of the horizontal toolbar.
-	bool getAutoHideHorizontalButtonBar() const {return autoHideHorizontalButtonBar;}
+	bool getAutoHideHorizontalButtonBar() const;
 	//! Set the auto-hide status of the horizontal toolbar.
 	//! When set to true, the horizontal toolbar will auto-hide itself, only
 	//! making an appearance when the mouse is nearby.  When false, it will 
 	//! remain on screen.
 	//! @param b to hide or not to hide	
-	void setAutoHideHorizontalButtonBar(bool b) {autoHideHorizontalButtonBar=b;}
+	void setAutoHideHorizontalButtonBar(bool b);
 	
 	//! Get the auto-hide status of the vertical toolbar.
-	bool getAutoHideVerticalButtonBar() const {return autoHideVerticalButtonBar;}
+	bool getAutoHideVerticalButtonBar() const;
 	//! Set the auto-hide status of the vertical toolbar.
 	//! When set to true, the vertical toolbar will auto-hide itself, only
 	//! making an appearance when the mouse is nearby.  When false, it will 
 	//! remain on screen.
 	//! @param b to hide or not to hide
-	void setAutoHideVerticalButtonBar(bool b) {autoHideVerticalButtonBar=b;}
+	void setAutoHideVerticalButtonBar(bool b);
 
 	//! show or hide the toolbars
 	//! @param b when true, toolbars will be shown, else they will be hidden.
@@ -173,8 +169,6 @@ public slots:
 	void quitStellarium();
 
 private slots:
-	//! Update the position of the button bars in the main window
-	void updateBarsPos();
 	void reloadStyle();
 	void cancelDownloadAndQuit();
 	void dontQuit();
@@ -184,13 +178,7 @@ private slots:
 	
 private:
 	
-	class LeftStelBar* winBar;
-	BottomStelBar* buttonBar;
-	InfoPanel* infoPanel;
-	class StelBarsPath* buttonBarPath;
-
-	QTimeLine* animLeftBarTimeLine;
-	QTimeLine* animBottomBarTimeLine;
+	class SkyGui* skyGui;
 	
 	StelButton* buttonTimeRewind;
 	StelButton* buttonTimeRealTimeSpeed;
@@ -209,19 +197,6 @@ private:
 #ifdef ENABLE_SCRIPT_CONSOLE
 	ScriptConsole scriptConsole;
 #endif
-	
-	class StelProgressBarMgr* progressBarMgr;
-	
-	int lastButtonbarWidth;
-	
-	// The 2 auto hide buttons in the lower left corner
-	StelButton* btHorizAutoHide;
-	StelButton* btVertAutoHide;
-	
-	class CornerButtons* autoHidebts;
-	
-	bool autoHideHorizontalButtonBar;
-	bool autoHideVerticalButtonBar;
 
 	bool flagShowFlipButtons;
 	class StelButton* flipVert;
