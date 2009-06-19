@@ -101,6 +101,11 @@ void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
 	QGraphicsView::resizeEvent(event);
 }
 
+void StelMainGraphicsView::mouseMoveEvent(QMouseEvent* event)
+{
+	QGraphicsView::mouseMoveEvent(event);
+}
+
 void StelMainGraphicsView::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
