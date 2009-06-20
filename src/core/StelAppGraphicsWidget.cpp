@@ -28,7 +28,7 @@
 StelAppGraphicsWidget::StelAppGraphicsWidget()
 {
 	previousTime = StelApp::getTotalRunTime();
-	setFocusPolicy(Qt::NoFocus);
+	setFocusPolicy(Qt::StrongFocus);
 }
 
 StelAppGraphicsWidget::~StelAppGraphicsWidget()
