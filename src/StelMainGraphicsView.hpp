@@ -124,6 +124,8 @@ private:
 	
 	//! The openGL window
 	QGLWidget* glWidget;
+	
+	//! The main application instance.
 	class StelApp* stelApp;
 	
 	bool wasDeinit;
