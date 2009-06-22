@@ -42,7 +42,7 @@ public:
 	static StelMainGraphicsView& getInstance() {Q_ASSERT(singleton); return *singleton;}
 	
 	//! Get the main QGLWidget
-	//! @deprecated don't use that
+	//! @deprecated don't use that.
 	QGLWidget* getOpenGLWin() {return glWidget;}
 
 	//! Delete openGL textures (to call before the GLContext disappears)
@@ -93,15 +93,16 @@ public slots:
 protected:
 	virtual void resizeEvent(QResizeEvent* event);
 	virtual void mouseMoveEvent(QMouseEvent* event);
-	virtual void mousePressEvent(QMouseEvent *event);
-	virtual void mouseReleaseEvent(QMouseEvent *event);
+	virtual void mousePressEvent(QMouseEvent* event);
+	virtual void mouseReleaseEvent(QMouseEvent* event);
 	virtual void keyPressEvent(QKeyEvent* event);
 	virtual void keyReleaseEvent(QKeyEvent* event);
-	virtual void wheelEvent(QWheelEvent * wheelEvent);
+	virtual void wheelEvent(QWheelEvent* wheelEvent);
 	
 	//! Update the mouse pointer state and schedule next redraw.
 	//! This method is called automatically by Qt.
-	virtual void drawBackground(QPainter *painter, const QRectF &rect);
+	virtual void drawBackground(QPainter* painter, const QRectF &rect);
+	virtual void drawForeground(QPainter* painter, const QRectF &rect);
 	
 signals:
 	//! emitted when saveScreenShot is requested with saveScreenShot().
