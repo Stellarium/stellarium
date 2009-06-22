@@ -36,9 +36,6 @@
 #include <QCoreApplication>
 #include <QApplication>
 #include <QDebug>
-#include <QThread>
-#include <QAction>
-#include <QRegExp>
 #include <QGraphicsGridLayout>
 
 #include "gui/StelGui.hpp"
@@ -74,6 +71,11 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	glWidget = new QGLWidget(glFormat, NULL);
 	setViewport(glWidget);
 	
+	// Antialiasing works only with SampleBuffer, but it's much slower
+	//setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::HighQualityAntialiasing);
+	//setRenderHint(QPainter::TextAntialiasing, false);
+	//setOptimizationFlags(QGraphicsView::DontClipPainter|QGraphicsView::DontSavePainterState|QGraphicsView::DontAdjustForAntialiasing);
+	
 	// Create the main instance of stellarium
 	stelApp = new StelApp(argc, argv);
 	
@@ -90,8 +92,13 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	l->setSpacing(0);
 	scene()->addItem(backItem);
 			
-	setFocusPolicy(Qt::ClickFocus);
+	setFocusPolicy(Qt::StrongFocus);
+	mainSkyItem->setFocus();
 	
+	connect(&StelApp::getInstance(), SIGNAL(minFpsChanged()), this, SLOT(minFpsChanged()));
+	// Allows for precise FPS control
+	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
+
 	connect(this, SIGNAL(screenshotRequested()), this, SLOT(doScreenshot()));
 }
 
@@ -106,47 +113,27 @@ StelMainGraphicsView::~StelMainGraphicsView()
 
 void StelMainGraphicsView::init()
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
-	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
-	
-	// Bug in the Qt 4.5 beta version
-#if QT_VERSION == 0x040500
-	//setMatrix(QMatrix(1,0,0,1,0.00000001,0));
-#endif
-	
-	// Antialiasing works only with SampleBuffer, but it's much slower
-	// setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::HighQualityAntialiasing);
-	//setRenderHint(QPainter::TextAntialiasing, false);
-			
 	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
 	stelApp->init();
 	
-	setViewPortDistorterType(conf->value("video/distorter","none").toString());
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
 	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.).toDouble());
-
-	connect(&StelApp::getInstance(), SIGNAL(minFpsChanged()), this, SLOT(minFpsChanged()));
-
-	startMainLoop();
-	
-	setFocus();
-	
-	// Allows for precise FPS control
-	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
-	
-	//setOptimizationFlags(QGraphicsView::DontClipPainter|QGraphicsView::DontSavePainterState|QGraphicsView::DontAdjustForAntialiasing);
+	setViewPortDistorterType(conf->value("video/distorter","none").toString());
 	
 	StelGui* newGui = new StelGui();
 	newGui->init();
-	StelApp::getInstance().getModuleMgr().registerModule(newGui, true);
+	stelApp->getModuleMgr().registerModule(newGui, true);
 	
 	stelApp->initPlugIns();
 	
 	stelApp->getScriptMgr().runScript(stelApp->getStartupScript());
 	
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
+	startMainLoop();
 }
 
 void StelMainGraphicsView::thereWasAnEvent()

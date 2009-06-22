@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2007 Fabien Chereau
+ * Copyright (C) 2009 Fabien Chereau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,9 +22,9 @@
 
 #include <QGraphicsWidget>
 
-class QTimer;
-
-//! A special QGraphicsScene for use in Stellarium.
+//! @class StelAppGraphicsWidget
+//! A QGraphicsWidget encapsulating all the Stellarium main sky view and the embedded widgets
+//! such as the moving button bars.
 //! It manages initialization of the program and redirects users inputs to the core and GUI
 class StelAppGraphicsWidget : public QGraphicsWidget
 {
