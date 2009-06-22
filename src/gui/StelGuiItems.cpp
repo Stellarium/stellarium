@@ -44,7 +44,7 @@
 #include <QProgressBar>
 #include <QGraphicsWidget>
 #include <QGraphicsProxyWidget>
-
+#include <QGraphicsLinearLayout>
 
 StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixmap& apixOff,
 		const QPixmap& apixHover, QAction* aaction, bool noBackground) :
@@ -623,20 +623,16 @@ void StelBarsPath::setBackgroundOpacity(double opacity)
 
 StelProgressBarMgr::StelProgressBarMgr(QGraphicsItem* parent)
 {
+	setLayout(new QGraphicsLinearLayout(Qt::Vertical));
 }
-
-void StelProgressBarMgr::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-	// Do nothing. Just paint the child widgets
-}
-
+/*
 QRectF StelProgressBarMgr::boundingRect() const
 {
 	if (QGraphicsItem::children().size()==0)
 		return QRectF();
 	const QRectF& r = childrenBoundingRect();
 	return QRectF(0, 0, r.width()-1, r.height()-1);
-}
+}*/
 
 QProgressBar* StelProgressBarMgr::addProgressBar()
 {
@@ -647,28 +643,27 @@ QProgressBar* StelProgressBarMgr::addProgressBar()
 	pb->setValue(66);
 	QGraphicsProxyWidget* pbProxy = new QGraphicsProxyWidget();
 	pbProxy->setWidget(pb);
-	pbProxy->setParentItem(this);
 	pbProxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 	pbProxy->setZValue(150);
-	updateBarsPositions();
-	connect(pbProxy, SIGNAL(destroyed(QObject*)), this, SLOT(oneDestroyed(QObject*)));
+	static_cast<QGraphicsLinearLayout*>(layout())->addItem(pbProxy);
+	//connect(pbProxy, SIGNAL(destroyed(QObject*)), this, SLOT(oneDestroyed(QObject*)));
 	return pb;
 }
 
-void StelProgressBarMgr::updateBarsPositions()
-{
-	int y=0;
-	foreach(QGraphicsItem* item, childItems())
-	{
-		item->setPos(0, y);
-		y+=18;
-	}
-}
+// void StelProgressBarMgr::updateBarsPositions()
+// {
+// 	int y=0;
+// 	foreach(QGraphicsItem* item, childItems())
+// 	{
+// 		item->setPos(0, y);
+// 		y+=18;
+// 	}
+// }
 
-void StelProgressBarMgr::oneDestroyed(QObject* obj)
-{
-	updateBarsPositions();
-}
+// void StelProgressBarMgr::oneDestroyed(QObject* obj)
+// {
+// 	updateBarsPositions();
+// }
 
 CornerButtons::CornerButtons(QGraphicsItem* parent) : lastOpacity(10)
 {

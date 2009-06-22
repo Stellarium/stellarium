@@ -54,6 +54,7 @@ public:
 protected:
 	virtual void resizeEvent(QGraphicsSceneResizeEvent* event);
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event);
+
 private slots:
 	//! Update the position of the button bars in the main window
 	void updateBarsPos();
