@@ -130,6 +130,9 @@ void StelMainGraphicsView::init()
 	
 	stelApp->initPlugIns();
 	
+	// For refreshing of button bars if plugins modified the GUI, e.g. added buttons.
+	newGui->forceRefreshGui();
+	
 	stelApp->getScriptMgr().runScript(stelApp->getStartupScript());
 	
 	QThread::currentThread()->setPriority(QThread::HighestPriority);

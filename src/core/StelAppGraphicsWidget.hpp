@@ -23,9 +23,9 @@
 #include <QGraphicsWidget>
 
 //! @class StelAppGraphicsWidget
-//! A QGraphicsWidget encapsulating all the Stellarium main sky view and the embedded widgets
+//! A QGraphicsWidget encapsulating all the Stellarium main sky view and the embedded GUI widgets
 //! such as the moving button bars.
-//! It manages initialization of the program and redirects users inputs to the core and GUI
+//! It manages redirection of users inputs to the core and GUI.
 class StelAppGraphicsWidget : public QGraphicsWidget
 {
 	Q_OBJECT
@@ -33,12 +33,12 @@ public:
 	StelAppGraphicsWidget();
 	~StelAppGraphicsWidget();
 
-	//! Initialize the StelAppGraphicsWidget
+	//! Initialize the StelAppGraphicsWidget.
 	void init();
 
-	//! Paint the whole core of stellarium.
-	//! This method is called automatically by the GraphicsView
-	void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget=0);
+	//! Paint the main sky view and the embedded GUI widgets such as the moving button bars.
+	//! This method is called automatically by the GraphicsView.
+	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget=0);
 
 protected:
 	virtual void keyPressEvent(QKeyEvent* event);
