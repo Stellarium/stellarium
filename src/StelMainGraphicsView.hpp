@@ -55,6 +55,15 @@ public:
 
 	QGraphicsWidget* getMainSkyItem() {return mainSkyItem;}
 	
+	//! Start the display loop
+	void startMainLoop();
+			
+	//! Define the type of viewport distorter to use
+	//! @param type can be only 'fisheye_to_spheric_mirror' or anything else for no distorter
+	void setViewPortDistorterType(const QString& type);
+	//! Get the type of viewport distorter currently used
+	QString getViewPortDistorterType() const;
+	
 public slots:
 
 	///////////////////////////////////////////////////////////////////////////
@@ -72,9 +81,27 @@ public slots:
 	//! Set whether colors should be inverted when saving screenshot
 	void setFlagInvertScreenShotColors(bool b) {flagInvertScreenShotColors=b;}
 			
+	//! Get the state of the mouse cursor timeout flag
+	bool getFlagCursorTimeout() {return flagCursorTimeout;}
+	//! Get the mouse cursor timeout in seconds
+	float getCursorTimeout() const {return cursorTimeout;}
+	//! Get the state of the mouse cursor timeout flag
+	void setFlagCursorTimeout(bool b) {flagCursorTimeout=b;}
+	//! Set the mouse cursor timeout in seconds
+	void setCursorTimeout(float t) {cursorTimeout=t;}
+		
 protected:
 	virtual void resizeEvent(QResizeEvent* event);
 	virtual void mouseMoveEvent(QMouseEvent* event);
+	virtual void mousePressEvent(QMouseEvent *event);
+	virtual void mouseReleaseEvent(QMouseEvent *event);
+	virtual void keyPressEvent(QKeyEvent* event);
+	virtual void keyReleaseEvent(QKeyEvent* event);
+	virtual void wheelEvent(QWheelEvent * wheelEvent);
+	
+	//! Update the mouse pointer state and schedule next redraw.
+	//! This method is called automatically by Qt.
+	virtual void drawBackground(QPainter *painter, const QRectF &rect);
 	
 signals:
 	//! emitted when saveScreenShot is requested with saveScreenShot().
@@ -85,6 +112,8 @@ signals:
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
+	
+	void minFpsChanged();
 	
 private:
 	//! The StelMainWindow singleton
@@ -103,6 +132,23 @@ private:
 	QString screenShotPrefix;
 	QString screenShotDir;
 
+	// Number of second before the mouse cursor disappears
+	float cursorTimeout;
+	bool flagCursorTimeout;
+	
+	//! Notify that an event was handled by the program and therefore the 
+	//! FPS should be maximized for a couple of seconds.
+	void thereWasAnEvent();
+	
+	//! Apply viewport distortions.
+	void distortPos(QPoint* pos);
+	
+	double lastEventTimeSec;
+	
+	// The distorter currently activated
+	class StelViewportDistorter *distorter;
+	
+	QTimer* minFpsTimer;
 };
 
 
