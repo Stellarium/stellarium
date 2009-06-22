@@ -273,7 +273,9 @@ void StelMainGraphicsView::wheelEvent(QWheelEvent* event)
 	// Apply distortion on the mouse position.
 	QPoint pos = event->pos();
 	distortPos(&pos);
-	QWheelEvent newEvent(pos, event->delta(), event->buttons(), event->modifiers(), event->orientation());
+	QPoint globalPos = event->globalPos();
+	distortPos(&globalPos);
+	QWheelEvent newEvent(pos, globalPos, event->delta(), event->buttons(), event->modifiers(), event->orientation());
 	QGraphicsView::wheelEvent(&newEvent);
 }
 
