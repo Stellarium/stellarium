@@ -53,7 +53,7 @@
 #include <QFile>
 #include <QFileDialog>
 
-#include "StelAppGraphicsScene.hpp"
+#include "StelMainGraphicsView.hpp"
 
 ConfigurationDialog::ConfigurationDialog()
 {
@@ -164,7 +164,7 @@ void ConfigurationDialog::createDialogContent()
 	// Tools tab
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 	Q_ASSERT(cmgr);
-	ui->sphericMirrorCheckbox->setChecked(StelAppGraphicsScene::getInstance().getViewPortDistorterType() == "fisheye_to_spheric_mirror");
+	ui->sphericMirrorCheckbox->setChecked(StelMainGraphicsView::getInstance().getViewPortDistorterType() == "fisheye_to_spheric_mirror");
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
 	ui->gravityLabelCheckbox->setChecked(proj->getFlagGravityLabels());
 	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlagGravityLabels(bool)));
@@ -178,8 +178,8 @@ void ConfigurationDialog::createDialogContent()
 	ui->showFlipButtonsCheckbox->setChecked(gui->getFlagShowFlipButtons());
 	connect(ui->showFlipButtonsCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowFlipButtons(bool)));
 
-	ui->mouseTimeoutCheckbox->setChecked(StelAppGraphicsScene::getInstance().getFlagCursorTimeout());
-	ui->mouseTimeoutSpinBox->setValue(StelAppGraphicsScene::getInstance().getCursorTimeout());
+	ui->mouseTimeoutCheckbox->setChecked(StelMainGraphicsView::getInstance().getFlagCursorTimeout());
+	ui->mouseTimeoutSpinBox->setValue(StelMainGraphicsView::getInstance().getCursorTimeout());
 	connect(ui->mouseTimeoutCheckbox, SIGNAL(clicked()), this, SLOT(cursorTimeOutChanged()));
 	connect(ui->mouseTimeoutCheckbox, SIGNAL(toggled(bool)), this, SLOT(cursorTimeOutChanged()));
 	connect(ui->mouseTimeoutSpinBox, SIGNAL(valueChanged(double)), this, SLOT(cursorTimeOutChanged(double)));
@@ -255,9 +255,9 @@ void ConfigurationDialog::setDiskViewport(bool b)
 void ConfigurationDialog::setSphericMirror(bool b)
 {
 	if (b)
-		StelAppGraphicsScene::getInstance().setViewPortDistorterType("fisheye_to_spheric_mirror");
+		StelMainGraphicsView::getInstance().setViewPortDistorterType("fisheye_to_spheric_mirror");
 	else
-		StelAppGraphicsScene::getInstance().setViewPortDistorterType("none");
+		StelMainGraphicsView::getInstance().setViewPortDistorterType("none");
 }
 
 void ConfigurationDialog::setNoSelectedInfo(void)
@@ -283,8 +283,8 @@ void ConfigurationDialog::setBriefSelectedInfo(void)
 
 void ConfigurationDialog::cursorTimeOutChanged()
 {
-	StelAppGraphicsScene::getInstance().setFlagCursorTimeout(ui->mouseTimeoutCheckbox->isChecked());
-	StelAppGraphicsScene::getInstance().setCursorTimeout(ui->mouseTimeoutSpinBox->value());
+	StelMainGraphicsView::getInstance().setFlagCursorTimeout(ui->mouseTimeoutCheckbox->isChecked());
+	StelMainGraphicsView::getInstance().setCursorTimeout(ui->mouseTimeoutSpinBox->value());
 }
 
 void ConfigurationDialog::browseForScreenshotDir()
@@ -431,12 +431,12 @@ void ConfigurationDialog::saveCurrentViewOptions()
 
 	// configuration dialog / tools tab
 	conf->setValue("gui/flag_show_flip_buttons", gui->getFlagShowFlipButtons());
-	conf->setValue("video/distorter", StelAppGraphicsScene::getInstance().getViewPortDistorterType());
+	conf->setValue("video/distorter", StelMainGraphicsView::getInstance().getViewPortDistorterType());
 	conf->setValue("projection/viewport", StelProjector::maskTypeToString(proj->getMaskType()));
 	conf->setValue("viewing/flag_gravity_labels", proj->getFlagGravityLabels());
 	conf->setValue("navigation/auto_zoom_out_resets_direction", mvmgr->getFlagAutoZoomOutResetsDirection());
-	conf->setValue("gui/flag_mouse_cursor_timeout", StelAppGraphicsScene::getInstance().getFlagCursorTimeout());
-	conf->setValue("gui/mouse_cursor_timeout", StelAppGraphicsScene::getInstance().getCursorTimeout());
+	conf->setValue("gui/flag_mouse_cursor_timeout", StelMainGraphicsView::getInstance().getFlagCursorTimeout());
+	conf->setValue("gui/mouse_cursor_timeout", StelMainGraphicsView::getInstance().getCursorTimeout());
 
 	conf->setValue("main/screenshot_dir", StelApp::getInstance().getFileMgr().getScreenshotDir());
 	conf->setValue("main/invert_screenshots_colors", StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors());
