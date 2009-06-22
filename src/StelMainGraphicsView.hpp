@@ -53,7 +53,8 @@ public:
 	//! @return a pointer to the progress bar
 	class QProgressBar* addProgressBar();
 
-	QGraphicsWidget* getMainSkyItem() {return mainSkyItem;}
+	//! Return the QGraphicsWidget encapsulating the Stellarium main sky view.
+	QGraphicsWidget* getStelAppGraphicsWidget() {return mainSkyItem;}
 	
 	//! Start the display loop
 	void startMainLoop();
