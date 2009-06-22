@@ -47,13 +47,15 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	Q_ASSERT(proj);
 	Q_ASSERT(globalMutex);
 
-// 	GLenum er = glGetError();
-// 	if (er!=GL_NO_ERROR)
-// 	{
-// 		if (er==GL_INVALID_OPERATION)
-// 			qFatal("Invalid openGL operation. It is likely that you used openGL calls without having a valid instance of StelPainter");
-// 	}
-
+#ifndef NDEBUG
+ 	GLenum er = glGetError();
+ 	if (er!=GL_NO_ERROR)
+ 	{
+ 		if (er==GL_INVALID_OPERATION)
+ 			qFatal("Invalid openGL operation. It is likely that you used openGL calls without having a valid instance of StelPainter");
+ 	}
+#endif
+	
 	// Lock the global mutex ensuring that no other instances of StelPainter are currently being used
 	if (globalMutex->tryLock()==false)
 	{
