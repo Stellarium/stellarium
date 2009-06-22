@@ -128,6 +128,9 @@ public:
 	ScriptConsole* getScriptConsole() {return &scriptConsole;}
 #endif
 
+	//! Used to force a refreshing of the GUI elements such as the button bars.
+	void forceRefreshGui();
+	
 public slots:
 	//! Define whether the buttons toggling image flip should be visible
 	void setFlagShowFlipButtons(bool b);

@@ -54,7 +54,12 @@ public:
 	class QProgressBar* addProgressBar();
 
 	//! Return the QGraphicsWidget encapsulating the Stellarium main sky view.
+	//! Use its layout if you want to add widget on the top of the main sky view.
 	QGraphicsWidget* getStelAppGraphicsWidget() {return mainSkyItem;}
+	
+	//! Return the top level QGraphicsWidget which contains the layout containing the Stellarium main sky view.
+	//! Use its layout if you want to add widget on the side of the main sky view.
+	QGraphicsWidget* getTopLevelGraphicsWidget() {return backItem;}
 	
 	//! Start the display loop
 	void startMainLoop();

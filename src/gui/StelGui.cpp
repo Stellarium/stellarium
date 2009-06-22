@@ -851,3 +851,8 @@ void StelGui::setAutoHideHorizontalButtonBar(bool b) {skyGui->autoHideHorizontal
 bool StelGui::getAutoHideVerticalButtonBar() const {return skyGui->autoHideVerticalButtonBar;}
 
 void StelGui::setAutoHideVerticalButtonBar(bool b) {skyGui->autoHideVerticalButtonBar=b;}
+
+void StelGui::forceRefreshGui()
+{
+	skyGui->updateBarsPos();
+}

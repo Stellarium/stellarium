@@ -21,6 +21,7 @@
 #define _STELGUIITEMS_HPP_
 
 #include <QGraphicsPixmapItem>
+#include <QGraphicsWidget>
 #include <QDebug>
 
 class QGraphicsSceneMouseEvent;
@@ -30,18 +31,16 @@ class QGraphicsTextItem;
 class QTimer;
 
 // Progess bars in the lower right corner
-class StelProgressBarMgr : public QObject, public QGraphicsItem
+class StelProgressBarMgr : public QGraphicsWidget
 {
 	Q_OBJECT
 public:
 	StelProgressBarMgr(QGraphicsItem* parent);
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
-	virtual QRectF boundingRect() const;
+// 	virtual QRectF boundingRect() const;
 	class QProgressBar* addProgressBar();
+//	void updateBarsPositions();
 private slots:
-	void oneDestroyed(QObject* obj);
-private:
-	void updateBarsPositions();
+//	void oneDestroyed(QObject* obj);
 };
 
 // Buttons in the bottom left corner
