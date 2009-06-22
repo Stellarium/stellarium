@@ -18,7 +18,6 @@
  */
 
 #include "StelMainGraphicsView.hpp"
-#include "StelAppGraphicsScene.hpp"
 #include "StelAppGraphicsWidget.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -113,7 +112,7 @@ void StelMainGraphicsView::init()
 	
 	// Bug in the Qt 4.5 beta version
 #if QT_VERSION == 0x040500
-	setMatrix(QMatrix(1,0,0,1,0.00000001,0));
+	//setMatrix(QMatrix(1,0,0,1,0.00000001,0));
 #endif
 	
 	// Antialiasing works only with SampleBuffer, but it's much slower
@@ -159,7 +158,7 @@ void StelMainGraphicsView::drawBackground(QPainter* painter, const QRectF &)
 {
 	if (painter->paintEngine()->type() != QPaintEngine::OpenGL)
 	{
-		qWarning("StelAppGraphicsScene: drawBackground needs a QGLWidget to be set as viewport on the graphics view");
+		qWarning("StelMainGraphicsView: drawBackground needs a QGLWidget to be set as viewport on the graphics view");
 		return;
 	}
 
