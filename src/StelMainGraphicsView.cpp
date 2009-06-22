@@ -161,6 +161,8 @@ void StelMainGraphicsView::drawBackground(QPainter* painter, const QRectF &)
 		qWarning("StelMainGraphicsView: drawBackground needs a QGLWidget to be set as viewport on the graphics view");
 		return;
 	}
+	
+	distorter->prepare();
 
 	const double now = StelApp::getTotalRunTime();
 
@@ -184,6 +186,11 @@ void StelMainGraphicsView::drawBackground(QPainter* painter, const QRectF &)
 		if (QApplication::overrideCursor()!=0)
 			QApplication::restoreOverrideCursor();
 	}
+}
+
+void StelMainGraphicsView::drawForeground(QPainter* painter, const QRectF &rect)
+{
+	distorter->distort();
 }
 
 void StelMainGraphicsView::startMainLoop()
@@ -226,7 +233,9 @@ void StelMainGraphicsView::mouseMoveEvent(QMouseEvent* event)
 	// Apply distortion on the mouse position.
 	QPoint pos = event->pos();
 	distortPos(&pos);
-	QMouseEvent newEvent(event->type(), pos, event->button(), event->buttons(), event->modifiers());
+	QPoint globalPos = event->globalPos();
+	distortPos(&globalPos);
+	QMouseEvent newEvent(event->type(), pos, globalPos, event->button(), event->buttons(), event->modifiers());
 	QGraphicsView::mouseMoveEvent(&newEvent);
 }
 
@@ -238,7 +247,9 @@ void StelMainGraphicsView::mousePressEvent(QMouseEvent* event)
 	// Apply distortion on the mouse position.
 	QPoint pos = event->pos();
 	distortPos(&pos);
-	QMouseEvent newEvent(event->type(), pos, event->button(), event->buttons(), event->modifiers());
+	QPoint globalPos = event->globalPos();
+	distortPos(&globalPos);
+	QMouseEvent newEvent(event->type(), pos, globalPos, event->button(), event->buttons(), event->modifiers());
 	QGraphicsView::mousePressEvent(&newEvent);
 }
 
@@ -249,7 +260,9 @@ void StelMainGraphicsView::mouseReleaseEvent(QMouseEvent* event)
 	// Apply distortion on the mouse position.
 	QPoint pos = event->pos();
 	distortPos(&pos);
-	QMouseEvent newEvent(event->type(), pos, event->button(), event->buttons(), event->modifiers());
+	QPoint globalPos = event->globalPos();
+	distortPos(&globalPos);
+	QMouseEvent newEvent(event->type(), pos, globalPos, event->button(), event->buttons(), event->modifiers());
 	QGraphicsView::mouseReleaseEvent(&newEvent);
 }
 
@@ -282,11 +295,11 @@ void StelMainGraphicsView::setViewPortDistorterType(const QString &type)
 	{
 		if (type == "none")
 		{
-			getOpenGLWin()->setMaximumSize(10000,10000);
+			glWidget->setMaximumSize(10000,10000);
 		}
 		else
 		{
-			getOpenGLWin()->setFixedSize((int)(width()), (int)(height()));
+			glWidget->setFixedSize((int)(width()), (int)(height()));
 		}
 	}
 	if (distorter)
@@ -294,7 +307,7 @@ void StelMainGraphicsView::setViewPortDistorterType(const QString &type)
 		delete distorter;
 		distorter = NULL;
 	}
-	distorter = StelViewportDistorter::create(type,(int)width(),(int)height(),StelApp::getInstance().getCore()->getProjection2d());
+	distorter = StelViewportDistorter::create(type,width(),height(),StelApp::getInstance().getCore()->getProjection2d());
 }
 
 QString StelMainGraphicsView::getViewPortDistorterType() const
