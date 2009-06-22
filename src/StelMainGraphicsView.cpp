@@ -301,7 +301,7 @@ void StelMainGraphicsView::setViewPortDistorterType(const QString &type)
 		}
 		else
 		{
-			glWidget->setFixedSize((int)(width()), (int)(height()));
+			glWidget->setFixedSize(width(), height());
 		}
 	}
 	if (distorter)
