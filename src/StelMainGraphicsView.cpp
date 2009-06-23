@@ -89,7 +89,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	QGraphicsGridLayout* l = new QGraphicsGridLayout(backItem);
 	mainSkyItem = new StelAppGraphicsWidget();
 	mainSkyItem->setZValue(-10);
-	l->addItem(mainSkyItem, 1, 0);
+	l->addItem(mainSkyItem, 0, 0);
 	l->setContentsMargins(0,0,0,0);
 	l->setSpacing(0);
 	scene()->addItem(backItem);
