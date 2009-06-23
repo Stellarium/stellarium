@@ -69,10 +69,10 @@ QString StelProjector::getHtmlSummary() const
 SphericalRegionP StelProjector::getViewportConvexPolygon(double marginX, double marginY) const
 {
 	Vec3d e0, e1, e2, e3;
-	bool ok = unProject(0-marginX,0-marginY,e0);
-	ok &= unProject(getViewportWidth()+marginX,0-marginY,e1);
-	ok &= unProject(getViewportWidth()+marginX,getViewportHeight()+marginY,e2);
-	ok &= unProject(0-marginX,getViewportHeight()+marginY,e3);
+	bool ok = unProject(viewportXywh[0]-marginX,viewportXywh[1]-marginY,e0);
+	ok &= unProject(viewportXywh[0]+getViewportWidth()+marginX,viewportXywh[1]-marginY,e1);
+	ok &= unProject(viewportXywh[0]+getViewportWidth()+marginX,viewportXywh[1]+getViewportHeight()+marginY,e2);
+	ok &= unProject(viewportXywh[0]-marginX,viewportXywh[1]+getViewportHeight()+marginY,e3);
 	if (!ok)
 	{
 		// Special case for handling degenerated cases, use full sky.
