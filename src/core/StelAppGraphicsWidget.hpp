@@ -39,7 +39,7 @@ public:
 	//! Paint the main sky view and the embedded GUI widgets such as the moving button bars.
 	//! This method is called automatically by the GraphicsView.
 	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget=0);
-
+	
 protected:
 	virtual void keyPressEvent(QKeyEvent* event);
 	virtual void keyReleaseEvent(QKeyEvent* event);
