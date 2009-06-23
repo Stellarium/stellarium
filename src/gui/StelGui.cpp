@@ -521,12 +521,13 @@ void StelGui::init()
 	
 	///////////////////////////////////////////////////////////////////////
 	// Create the main base widget
-	QGraphicsWidget* skyItem = StelMainGraphicsView::getInstance().getStelAppGraphicsWidget();
 	skyGui->init(this);
 	QGraphicsGridLayout* l = new QGraphicsGridLayout();
 	l->setContentsMargins(0,0,0,0);
 	l->setSpacing(0);
 	l->addItem(skyGui, 0, 0);
+	
+	QGraphicsWidget* skyItem = StelMainGraphicsView::getInstance().getStelAppGraphicsWidget();
 	skyItem->setLayout(l);	
 	
 	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
