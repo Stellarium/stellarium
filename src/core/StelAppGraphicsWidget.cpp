@@ -46,7 +46,7 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 		qWarning("StelAppGraphicsWidget: drawBackground needs a QGLWidget to be set as viewport on the graphics view");
 		return;
 	}
-
+	
 	const double now = StelApp::getTotalRunTime();
 	double dt = now-previousTime;
 	previousTime = now;
@@ -58,7 +58,7 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 
 	painter->save();
 
-	StelApp::getInstance().glWindowHasBeenResized(scenePos().x(), scenePos().y(), geometry().width(), geometry().height());
+	//StelApp::getInstance().glWindowHasBeenResized(scenePos().x(), scene()->sceneRect().height()-(scenePos().y()+geometry().height()), geometry().width(), geometry().height());
 	
 	// And draw them
 	StelApp::getInstance().draw();
@@ -114,5 +114,6 @@ void StelAppGraphicsWidget::keyReleaseEvent(QKeyEvent* event)
 
 void StelAppGraphicsWidget::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
-	StelApp::getInstance().glWindowHasBeenResized(scenePos().x(), scenePos().y(), event->newSize().width(), event->newSize().height());
+	QGraphicsWidget::resizeEvent(event);
+	StelApp::getInstance().glWindowHasBeenResized(scenePos().x(), scene()->sceneRect().height()-(scenePos().y()+geometry().height()), geometry().width(), geometry().height());
 }

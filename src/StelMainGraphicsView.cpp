@@ -37,6 +37,7 @@
 #include <QApplication>
 #include <QDebug>
 #include <QGraphicsGridLayout>
+#include <QGraphicsProxyWidget>
 
 #include "gui/StelGui.hpp"
 
@@ -87,7 +88,8 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	backItem->setFocusPolicy(Qt::NoFocus);
 	QGraphicsGridLayout* l = new QGraphicsGridLayout(backItem);
 	mainSkyItem = new StelAppGraphicsWidget();
-	l->addItem(mainSkyItem, 0, 0);
+	mainSkyItem->setZValue(-10);
+	l->addItem(mainSkyItem, 1, 0);
 	l->setContentsMargins(0,0,0,0);
 	l->setSpacing(0);
 	scene()->addItem(backItem);
@@ -212,7 +214,6 @@ void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
 	
 // 	if (!distorter || (distorter && distorter->getType() == "none"))
 // 	{
-// 		//StelApp::getInstance().glWindowHasBeenResized(w, h);
 // 	}
 }
 
