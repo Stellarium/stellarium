@@ -139,7 +139,7 @@ void Nebula::drawHints(const StelPainter& sPainter, float maxMagHints)
 	float lum = 1.;//qMin(1,4.f/getOnScreenSize(core))*0.8;
 	glColor3f(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness);
 	Nebula::texCircle->bind();
-	sPainter.drawSprite2dMode(XY[0], XY[1], 8);
+	sPainter.drawSprite2dMode(XY[0], XY[1], 4);
 }
 
 void Nebula::drawLabel(const StelCore* core, const StelPainter& sPainter, float maxMagLabel)

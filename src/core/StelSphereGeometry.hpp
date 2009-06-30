@@ -29,9 +29,9 @@
 class SphericalPolygon;
 class SphericalConvexPolygon;
 class SphericalPolygonBase;
-class ConvexRegion;
 class SphericalRegion;
 class SphericalCap;
+class AllSkySphericalRegion;
 
 //! @file StelSphereGeometry.hpp
 //! Define all SphericalGeometry primitives as well as the SphericalRegionP type.
@@ -59,18 +59,40 @@ public:
 	//! Returns whether a point is contained into the region.
 	virtual bool contains(const Vec3d& p) const = 0;
 
+	//! Equivalent to contains() for a point.
+	bool intersects(const Vec3d& p) const {return contains(p);}
+	
+	//! Returns whether a SphericalRegion is contained into this region.
+	inline bool contains(const SphericalRegionP& region) const;
+	
+	//! Returns whether a SphericalRegion intersects with this region.
+	inline bool intersects(const SphericalRegionP& region) const;
+	
 	//! Returns whether a SphericalPolygon is contained into the region.
 	virtual bool contains(const SphericalPolygonBase& poly) const = 0;
 
 	//! Returns whether a SphericalPolygon intersects with the region.
 	virtual bool intersects(const SphericalPolygonBase& poly) const = 0;
 
-	//! Equivalent to contains() for a point.
-	bool intersects(const Vec3d& p) const {return contains(p);}
+	//! Returns whether a SphericalCap is contained into the region.
+	virtual bool contains(const SphericalCap& c) const = 0;
 
+	//! Returns whether a SphericalCap intersects with the region.
+	virtual bool intersects(const SphericalCap& c) const = 0;
+
+	//! Returns whether a AllSkySphericalRegion is contained into the region.
+	virtual bool contains(const AllSkySphericalRegion& a) const = 0;
+
+	//! Returns whether a AllSkySphericalRegion intersects with the region.
+	virtual bool intersects(const AllSkySphericalRegion& a) const = 0;
+	
 	//! Return the list of SphericalCap bounding the ConvexPolygon.
 	virtual QVector<SphericalCap> getBoundingSphericalCaps() const = 0;
 
+	//! Return a bounding SphericalCap. This method is heavily used and therefore needs to be very fast.
+	//! The returned SphericalCap doesn't have to be the smallest one, but smaller is better.
+	virtual SphericalCap getBoundingCap() const = 0;
+	
 	//! Create a SphericalRegion from the given input JSON stream.
 	//! The type of the region is automatically recognized from the input format.
 	//! The currently recognized format are:
@@ -130,18 +152,21 @@ struct SphericalCap : public SphericalRegion
 	//! Return true if the region is empty.
 	virtual bool isEmpty() const {return d>=1.;}
 
-	//! Return a point located inside the halfspace.
+	//! Return a point located inside the SphericalCap.
 	virtual Vec3d getPointInside() const {return n;}
 
-	//! Find if a point is contained into the halfspace.
+	//! Find if a point is contained into the SphericalCap.
 	//! @param v a unit vector.
 	virtual bool contains(const Vec3d &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.)<0.0000001);return (v*n>=d);}
 
-	//! Comparison operator.
-	bool operator==(const SphericalCap& other) const {return (n==other.n && d==other.d);}
-
 	//! Returns whether a SphericalPolygon intersects with the region.
 	virtual bool intersects(const SphericalPolygonBase& mpoly) const;
+
+	//! Returns whether a SphericalPolygon is contained into the region.
+	virtual bool contains(const SphericalPolygonBase& poly) const;
+
+	//! Returns whether a SphericalCap is contained into the region.
+	virtual bool contains(const SphericalCap& h) const {Q_ASSERT(0); return false;}
 
 	//! Returns whether an SphericalCap intersects with this one.
 	//! I managed to make it without sqrt or acos, so it is very fast!
@@ -151,15 +176,24 @@ struct SphericalCap : public SphericalRegion
 		return d+h.d<=0. || a<=0. || (a<=1. && a*a < (1.-d*d)*(1.-h.d*h.d));
 	}
 
-	//! Returns whether a SphericalPolygon is contained into the region.
-	virtual bool contains(const SphericalPolygonBase& poly) const;
+	//! Returns whether a AllSkySphericalRegion is contained into the region.
+	virtual bool contains(const AllSkySphericalRegion& poly) const {return d<=-1;}
 
+	//! Returns whether a AllSkySphericalRegion intersects with the region.
+	virtual bool intersects(const AllSkySphericalRegion& poly) const {return d<=1.;}
+	
 	//! Return the list of SphericalCap bounding the region.
 	virtual QVector<SphericalCap> getBoundingSphericalCaps() const {QVector<SphericalCap> res; res << *this; return res;}
 
+	//! Return itself.
+	virtual SphericalCap getBoundingCap() const {return *this;}
+	
 	//! Convert the cap into a SphericalRegionBase instance.
 	virtual SphericalConvexPolygon toSphericalConvexPolygon() const;
 
+	//! Comparison operator.
+	bool operator==(const SphericalCap& other) const {return (n==other.n && d==other.d);}
+	
 	//! The direction unit vector. Only if d==0, this vector doesn't need to be unit.
 	Vec3d n;
 	//! The cos of cone radius
@@ -208,8 +242,23 @@ public:
 	//! Returns whether a SphericalPolygon is contained into the region.
 	virtual bool contains(const SphericalPolygonBase& poly) const {return true;}
 
+	//! Returns whether a SphericalCap is contained into the region.
+	virtual bool contains(const SphericalCap& c) const {return c.contains(*this);;}
+
+	//! Returns whether a SphericalCap intersects with the region.
+	virtual bool intersects(const SphericalCap& c) const {return c.intersects(*this);}
+	
+	//! Returns whether a AllSkySphericalRegion is contained into the region.
+	virtual bool contains(const AllSkySphericalRegion& poly) const {return true;}
+
+	//! Returns whether a AllSkySphericalRegion intersects with the region.
+	virtual bool intersects(const AllSkySphericalRegion& poly) const {return true;}
+	
 	//! Return the list of SphericalCap bounding the region.
 	virtual QVector<SphericalCap> getBoundingSphericalCaps() const {QVector<SphericalCap> res; res << SphericalCap(Vec3d(1,0,0), -2); return res;}
+	
+	//! Return a full sky SphericalCap
+	virtual SphericalCap getBoundingCap() const {return SphericalCap(Vec3d(1,0,0), -2);}
 };
 
 
@@ -259,20 +308,29 @@ public:
 	bool intersects(const Vec3d& p) const {return contains(p);}
 
 	//! Returns whether another SphericalPolygon intersects with the SphericalPolygon.
-	virtual bool intersects(const SphericalPolygonBase& mpoly) const;
+	virtual bool intersects(const SphericalPolygonBase& poly) const;
 
 	//! Returns whether a SphericalPolygon is contained into the region.
 	virtual bool contains(const SphericalPolygonBase& poly) const {Q_ASSERT(0); return false;}
 
-	//! Return the list of SphericalCap bounding the ConvexPolygon.
+	//! Returns whether a SphericalCap is contained into the region.
+	virtual bool contains(const SphericalCap& c) const {Q_ASSERT(0); return false;}
+
+	//! Returns whether a SphericalCap intersects with the region.
+	virtual bool intersects(const SphericalCap& c) const {return c.intersects(*this);}
+	
+	//! Returns whether a AllSkySphericalRegion is contained into the region.
+	virtual bool contains(const AllSkySphericalRegion& poly) const {return false;}
+
+	//! Returns whether a AllSkySphericalRegion intersects with the region.
+	virtual bool intersects(const AllSkySphericalRegion& poly) const {return true;}
+	
+	//! Return the list of SphericalCap bounding the polygon.
 	virtual QVector<SphericalCap> getBoundingSphericalCaps() const {Q_ASSERT(0); return QVector<SphericalCap>();}
 
-	//! Load the SphericalPolygon information from a QVariant.
-	//! The QVariant should contain a list of contours, each contours being a list of ra,dec points
-	//! with ra,dec expressed in degree in the ICRS reference frame.
-	//! Use QJSONParser to transform a JSON representation into QVariant.
-	//virtual bool loadFromQVariant(const QVariantMap& contours);
-
+	//! Default slow implementation o(n^2).
+	virtual SphericalCap getBoundingCap() const;
+	
 	//! Output the SphericalPolygon information in the form of a QVariant.
 	//! The QVariant will contain a list of contours, each contours being a list of ra,dec points
 	//! with ra,dec expressed in degree in the ICRS reference frame.

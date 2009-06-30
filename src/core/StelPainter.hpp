@@ -106,21 +106,30 @@ public:
 	//! If rotCenter is equal to 0,0,0, the method draws a great circle.
 	void drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, const void* userData)=NULL, const void* userData=NULL) const;
 	
+	//! Draw a great circle arc between points start and stop.
+	//! The angle between start and stop must be < 180 deg.
+	//! The algorithm ensures that the line will look smooth, even for non linear distortion.
+	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
+	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport.
+	void drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, const void* userData)=NULL, const void* userData=NULL) const {drawSmallCircleArc(start, stop, Vec3d(0), viewportEdgeIntersectCallback, userData);}
+	
 	//! Draw a simple circle, 2d viewport coordinates in pixel
 	void drawCircle(double x,double y,double r) const;
 
 	//! Draw a square using the current texture at the given projected 2d position.
+	//! This method is not thread safe.
 	//! @param x x position in the viewport in pixel.
 	//! @param y y position in the viewport in pixel.
-	//! @param size the size of a square side in pixel.
-	void drawSprite2dMode(double x, double y, double size) const;
+	//! @param radius the half size of a square side in pixel.
+	void drawSprite2dMode(double x, double y, float radius) const;
 	
 	//! Draw a rotated square using the current texture at the given projected 2d position.
+	//! This method is not thread safe.
 	//! @param x x position in the viewport in pixel.
 	//! @param y y position in the viewport in pixel.
-	//! @param size the size of a square side in pixel.
+	//! @param radius the half size of a square side in pixel.
 	//! @param rotation rotation angle in degree.
-	void drawSprite2dMode(double x, double y, double size, double rotation) const;
+	void drawSprite2dMode(double x, double y, float radius, float rotation) const;
 	
 	//! Draw a rotated rectangle using the current texture at the given projected 2d position.
 	//! @param x x position in the viewport in pixel.
@@ -134,6 +143,13 @@ public:
 	//! @param x x position in the viewport in pixels.
 	//! @param y y position in the viewport in pixels.
 	void drawPoint2d(double x, double y) const;
+	
+	//! Draw a line between the 2 points.
+	//! @param x1 x position of point 1 in the viewport in pixels.
+	//! @param y1 y position of point 1 in the viewport in pixels.
+	//! @param x2 x position of point 2 in the viewport in pixels.
+	//! @param y2 y position of point 2 in the viewport in pixels.
+	void drawLine2d(double x1, double y1, double x2, double y2) const;
 	
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
 	void sSphere(GLdouble radius, GLdouble oneMinusOblateness,

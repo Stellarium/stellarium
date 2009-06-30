@@ -221,12 +221,11 @@ void StarMgr::drawPointer(const StelProjectorP& prj, const StelNavigator * nav)
 	
 		StelPainter sPainter(prj);
 		glColor3fv(obj->getInfoColor());
-		float diameter = 26.f;
 		texPointer->bind();
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], diameter, StelApp::getInstance().getTotalRunTime()*40.);
+		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
 

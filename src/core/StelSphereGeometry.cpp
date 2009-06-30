@@ -31,6 +31,26 @@
 #include <GL/glu.h>	/* Header File For The GLU Library */
 #endif
 
+bool SphericalRegion::contains(const SphericalRegionP& region) const
+{
+	if (dynamic_cast<const SphericalCap*>(region.data()))
+		return contains(*static_cast<const SphericalCap*>(region.data()));
+	if (dynamic_cast<const SphericalPolygonBase*>(region.data()))
+		return contains(*static_cast<const SphericalPolygonBase*>(region.data()));
+	if (dynamic_cast<const AllSkySphericalRegion*>(region.data()))
+		return contains(*static_cast<const AllSkySphericalRegion*>(region.data()));
+}
+	
+bool SphericalRegion::intersects(const SphericalRegionP& region) const
+{
+	if (dynamic_cast<const SphericalCap*>(region.data()))
+		return intersects(*static_cast<const SphericalCap*>(region.data()));
+	if (dynamic_cast<const SphericalPolygonBase*>(region.data()))
+		return intersects(*static_cast<const SphericalPolygonBase*>(region.data()));
+	if (dynamic_cast<const AllSkySphericalRegion*>(region.data()))
+		return intersects(*static_cast<const AllSkySphericalRegion*>(region.data()));	
+}
+	
 // Returns whether a SphericalPolygon is contained into the region.
 bool SphericalCap::contains(const SphericalPolygonBase& polyBase) const
 {
@@ -247,7 +267,28 @@ Vec3d SphericalPolygonBase::getPointInside() const
 	return trianglesArray[0]+trianglesArray[1]+trianglesArray[2];
 }
 
-
+// Default slow implementation o(n^2).
+SphericalCap SphericalPolygonBase::getBoundingCap() const
+{
+	Vec3d p1, p2;
+	double maxDist=1.;
+	const QVector<Vec3d>& trianglesArray = getVertexArray();
+	foreach (const Vec3d& v1, trianglesArray)
+	{
+		foreach (const Vec3d& v2, trianglesArray)
+		{
+			if (v1*v2<maxDist)
+			{
+				p1 = v1;
+				p2 = v2;
+				maxDist = v1*v2;	
+			}
+		}
+	}
+	Vec3d res = p1+p2;
+	res.normalize();
+	return SphericalCap(res, res*p1);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalPolygon
