@@ -200,7 +200,7 @@ void NebulaMgr::setStelStyle(const StelStyle& style)
 
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/nebula_label_color", defaultColor).toString()));
-	setCirclesColor(StelUtils::strToVec3f(conf->value(section+"/nebula_circleColor", defaultColor).toString()));
+	setCirclesColor(StelUtils::strToVec3f(conf->value(section+"/nebula_circle_color", defaultColor).toString()));
 }
 
 // Search by name
