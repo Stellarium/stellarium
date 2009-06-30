@@ -837,7 +837,7 @@ void Planet::drawHints(const StelCore* core)
 	glEnable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	Planet::hintCircleTex->bind();
-	sPainter.drawSprite2dMode(screenPos[0], screenPos[1], 22);
+	sPainter.drawSprite2dMode(screenPos[0], screenPos[1], 11);
 }
 
 Ring::Ring(double radiusMin,double radiusMax,const QString &texname)

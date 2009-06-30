@@ -79,9 +79,9 @@ private:
 	//! Draw the constellation name
 	void drawName(StelFont* constfont, const StelPainter& sPainter) const;
 	//! Draw the constellation art
-	void drawArt(const StelPainter& prj) const;
+	void drawArt(const StelPainter& sPainter) const;
 	//! Draw the constellation boundary
-	void drawBoundaryOptim(const StelProjectorP& prj) const;
+	void drawBoundaryOptim(const StelPainter& sPainter) const;
 
 	//! Test if a star is part of a Constellation.
 	//! This member tests to see if a star is one of those which make up

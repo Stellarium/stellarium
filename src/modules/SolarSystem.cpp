@@ -142,7 +142,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 		glColor3f(1.0f,0.3f,0.3f);
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
-		size+=26.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
+		size+=40.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 
 		texPointer->bind();
 
@@ -153,42 +153,14 @@ void SolarSystem::drawPointer(const StelCore* core)
 		glPushMatrix();
 		glTranslatef(screenpos[0], screenpos[1], 0.0f);
 		glRotatef(StelApp::getInstance().getTotalRunTime()*10.,0,0,-1);
-
-		glTranslatef(-size/2, -size/2,0.0f);
-		glRotatef(90,0,0,1);
-		glBegin(GL_QUADS );
-			glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-			glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-			glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-			glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-		glEnd ();
-
-		glRotatef(-90,0,0,1);
-		glTranslatef(0,size,0.0f);
-		glBegin(GL_QUADS );
-			glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-			glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-			glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-			glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-		glEnd ();
-
-		glRotatef(-90,0,0,1);
-		glTranslatef(0, size,0.0f);
-		glBegin(GL_QUADS );
-			glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-			glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-			glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-			glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-		glEnd ();
-
-		glRotatef(-90,0,0,1);
-		glTranslatef(0,size,0);
-		glBegin(GL_QUADS );
-			glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-			glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-			glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-			glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-		glEnd ();
+		
+		size*=0.5;
+		
+		sPainter.drawSprite2dMode(-size, 0, 10, 0.);
+		sPainter.drawSprite2dMode(size, 0, 10, 180.);
+		sPainter.drawSprite2dMode(0, size, 10, 90.);
+		sPainter.drawSprite2dMode(0, -size, 10, -90.);
+		
 		glPopMatrix();
 	}
 }

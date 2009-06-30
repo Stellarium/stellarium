@@ -1364,50 +1364,44 @@ void StelPainter::drawCircle(double x,double y,double r) const
 /*************************************************************************
  Same function but gives the already projected 2d position in input
 *************************************************************************/
-void StelPainter::drawSprite2dMode(double x, double y, double size) const
+void StelPainter::drawSprite2dMode(double x, double y, float radius) const
 {
 	// Use GL_POINT_SPRITE_ARB extension if available
 	if (flagGlPointSprite)
 	{
-		glPointSize(size);
+		glPointSize(radius*2.);
 		glBegin(GL_POINTS);
 		glVertex2f(x,y);
 		glEnd();
 		return;
 	}
 
-	const double radius = size*0.5;
-	glBegin(GL_QUADS );
-	glTexCoord2i(0,0);
-	glVertex2f(x-radius,y-radius);
-	glTexCoord2i(1,0);
-	glVertex2f(x+radius,y-radius);
-	glTexCoord2i(1,1);
-	glVertex2f(x+radius,y+radius);
-	glTexCoord2i(0,1);
-	glVertex2f(x-radius,y+radius);
-	glEnd();
+	static float vertexData[] = {0.,0.,-10.,-10.,0.,   1.,0.,10.,-10.,0.,  1.,1.,10.,10.,0,   0.,1.,-10.,10.,0.};
+	vertexData[2]=x-radius; vertexData[3]=y-radius;
+	vertexData[7]=x+radius; vertexData[8]=y-radius;
+	vertexData[12]=x+radius; vertexData[13]=y+radius;
+	vertexData[17]=x-radius; vertexData[18]=y+radius;
+	glInterleavedArrays(GL_T2F_V3F ,0, vertexData);
+	glDrawArrays(GL_QUADS, 0, 4);
 }
 
 /*************************************************************************
  Same function but with a rotation angle
 *************************************************************************/
-void StelPainter::drawSprite2dMode(double x, double y, double size, double rotation) const
+void StelPainter::drawSprite2dMode(double x, double y, float radius, float rotation) const
 {
 	glPushMatrix();
 	glTranslatef(x, y, 0.0);
 	glRotatef(rotation,0.,0.,1.);
-	const double radius = size*0.5;
-	glBegin(GL_QUADS );
-	glTexCoord2i(0,0);
-	glVertex2f(-radius,-radius);
-	glTexCoord2i(1,0);
-	glVertex2f(+radius,-radius);
-	glTexCoord2i(1,1);
-	glVertex2f(+radius,+radius);
-	glTexCoord2i(0,1);
-	glVertex2f(-radius,+radius);
-	glEnd();
+	
+	static float vertexData[] = {0.,0.,-10.,-10.,0.,   1.,0.,10.,-10.,0.,  1.,1.,10.,10.,0,   0.,1.,-10.,10.,0.};
+	vertexData[2]=-radius; vertexData[3]=-radius;
+	vertexData[7]=radius; vertexData[8]=-radius;
+	vertexData[12]=radius; vertexData[13]=radius;
+	vertexData[17]=-radius; vertexData[18]=radius;	
+	glInterleavedArrays(GL_T2F_V3F ,0, vertexData);
+	glDrawArrays(GL_QUADS, 0, 4);
+
 	glPopMatrix();
 }
 
@@ -1429,6 +1423,21 @@ void StelPainter::drawPoint2d(double x, double y) const
 	glBegin(GL_POINTS);
 		glVertex2f(x, y);
 	glEnd();
+}
+
+
+/*************************************************************************
+ Draw a line between the 2 points.
+*************************************************************************/
+void StelPainter::drawLine2d(double x1, double y1, double x2, double y2) const
+{
+	static float vertexData[] = {0.,0.,0.,0.};
+	vertexData[0]=x1;
+	vertexData[1]=y1;
+	vertexData[2]=x2;
+	vertexData[3]=y2;
+	glInterleavedArrays(GL_V2F ,0, vertexData);
+	glDrawArrays(GL_LINES, 0, 2);
 }
 
 /*************************************************************************

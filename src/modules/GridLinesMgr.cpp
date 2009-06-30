@@ -327,9 +327,9 @@ void SkyGrid::draw(const StelCore* core) const
 				rotFpt.transfo4d(rotLon120);
 				Vec3d rotFpt2=rotFpt;
 				rotFpt2.transfo4d(rotLon120);
-				sPainter.drawSmallCircleArc(fpt, rotFpt, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
-				sPainter.drawSmallCircleArc(rotFpt, rotFpt2, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
-				sPainter.drawSmallCircleArc(rotFpt2, fpt, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(fpt, rotFpt, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(rotFpt, rotFpt2, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(rotFpt2, fpt, viewportEdgeIntersectCallback, &userData);
 				fpt.transfo4d(rotLon);
 				continue;
 			}
@@ -343,8 +343,8 @@ void SkyGrid::draw(const StelCore* core) const
 			middlePoint*=-1.;
 				
 		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-		sPainter.drawSmallCircleArc(p1, middlePoint, Vec3d(0), viewportEdgeIntersectCallback, &userData);
-		sPainter.drawSmallCircleArc(p2, middlePoint, Vec3d(0), viewportEdgeIntersectCallback, &userData);
+		sPainter.drawGreatCircleArc(p1, middlePoint, viewportEdgeIntersectCallback, &userData);
+		sPainter.drawGreatCircleArc(p2, middlePoint, viewportEdgeIntersectCallback, &userData);
 		
 		fpt.transfo4d(rotLon);
 	}
@@ -369,8 +369,8 @@ void SkyGrid::draw(const StelCore* core) const
 			if (!viewPortSphericalCap.contains(middlePoint))
 				middlePoint*=-1;
 			
-			sPainter.drawSmallCircleArc(p1, middlePoint, Vec3d(0), viewportEdgeIntersectCallback, &userData);
-			sPainter.drawSmallCircleArc(p2, middlePoint, Vec3d(0), viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(p1, middlePoint, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(p2, middlePoint, viewportEdgeIntersectCallback, &userData);
 			
 			fpt.transfo4d(rotLon);
 		}
@@ -566,9 +566,9 @@ void SkyLine::draw(StelCore *core) const
 			rotFpt.transfo4d(rotLon120);
 			Vec3d rotFpt2=rotFpt;
 			rotFpt2.transfo4d(rotLon120);
-			sPainter.drawSmallCircleArc(fpt, rotFpt, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
-			sPainter.drawSmallCircleArc(rotFpt, rotFpt2, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
-			sPainter.drawSmallCircleArc(rotFpt2, fpt, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(fpt, rotFpt, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(rotFpt, rotFpt2, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(rotFpt2, fpt, viewportEdgeIntersectCallback, &userData);
 			return;
 		}
 		else
@@ -581,8 +581,8 @@ void SkyLine::draw(StelCore *core) const
 		middlePoint*=-1.;
 			
 	// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-	sPainter.drawSmallCircleArc(p1, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
-	sPainter.drawSmallCircleArc(p2, middlePoint, Vec3d(0,0,0), viewportEdgeIntersectCallback, &userData);
+	sPainter.drawGreatCircleArc(p1, middlePoint, viewportEdgeIntersectCallback, &userData);
+	sPainter.drawGreatCircleArc(p2, middlePoint, viewportEdgeIntersectCallback, &userData);
 
 // 	// Johannes: use a big radius as a dirty workaround for the bug that the
 // 	// ecliptic line is not drawn around the observer, but around the sun:

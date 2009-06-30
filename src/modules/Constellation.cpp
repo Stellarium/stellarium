@@ -120,7 +120,7 @@ void Constellation::drawOptim(const StelPainter& sPainter, const StelNavigator* 
 			star1.normalize();
 			star2.normalize();
 			if (viewportHalfspace.contains(star1) || viewportHalfspace.contains(star2))
-				sPainter.drawSmallCircleArc(star1, star2, Vec3d(0));
+				sPainter.drawGreatCircleArc(star1, star2);
 		}
 	}
 }
@@ -184,9 +184,10 @@ void Constellation::update(int deltaTime)
 	boundaryFader.update(deltaTime);
 }
 
-void Constellation::drawBoundaryOptim(const StelProjectorP& prj) const
+void Constellation::drawBoundaryOptim(const StelPainter& sPainter) const
 {
-	if(!boundaryFader.getInterstate()) return;
+	if (!boundaryFader.getInterstate())
+		return;
 
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
@@ -207,15 +208,7 @@ void Constellation::drawBoundaryOptim(const StelProjectorP& prj) const
 		else points = sharedBoundarySegments[i];
 
 		for (j=0;j<points->size()-1;j++)
-		{
-			if(prj->projectLineCheck(points->at(j),pt1,points->at(j+1),pt2)) 
-			{
-				glBegin(GL_LINES);
-					glVertex2f(pt1[0],pt1[1]);
-					glVertex2f(pt2[0],pt2[1]);
-				glEnd();
-			}
-		}			
+			sPainter.drawGreatCircleArc(points->at(j), points->at(j+1));		
 	}
 }
 

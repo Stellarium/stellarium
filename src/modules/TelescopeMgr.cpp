@@ -121,13 +121,7 @@ void TelescopeMgr::draw(StelCore* core)
 						sPainter.drawCircle(XY[0],XY[1],0.5*prj->getPixelPerRadAtCenter()*(M_PI/180)*(occul));
 					}
 					glEnable(GL_TEXTURE_2D);
-					double radius = 15;
-					glBegin(GL_QUADS);
-						glTexCoord2i(0,0); glVertex2d(XY[0]-radius,XY[1]-radius); // Bottom left
-						glTexCoord2i(1,0); glVertex2d(XY[0]+radius,XY[1]-radius); // Bottom right
-						glTexCoord2i(1,1); glVertex2d(XY[0]+radius,XY[1]+radius); // Top right
-						glTexCoord2i(0,1); glVertex2d(XY[0]-radius,XY[1]+radius); // Top left
-					glEnd();
+					sPainter.drawSprite2dMode(XY[0],XY[1],15.f);
 				}
 				if (nameFader.getInterstate() >= 0)
 				{
@@ -305,7 +299,7 @@ void TelescopeMgr::drawPointer(const StelProjectorP& prj, const StelNavigator * 
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 50., StelApp::getInstance().getTotalRunTime()*40.);
+		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 25., StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
 
