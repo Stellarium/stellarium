@@ -463,7 +463,7 @@ void ConstellationMgr::draw(StelCore* core)
 	drawLines(sPainter, nav);
 	drawNames(sPainter);
 	drawArt(sPainter);
-	drawBoundaries(prj);
+	drawBoundaries(sPainter);
 }
 
 // Draw constellations art textures
@@ -948,7 +948,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	return true;
 }
 
-void ConstellationMgr::drawBoundaries(const StelProjectorP& prj) const
+void ConstellationMgr::drawBoundaries(const StelPainter& sPainter) const
 {
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
@@ -959,7 +959,7 @@ void ConstellationMgr::drawBoundaries(const StelProjectorP& prj) const
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->drawBoundaryOptim(prj);
+		(*iter)->drawBoundaryOptim(sPainter);
 	}
 	glDisable(GL_LINE_STIPPLE);
 	glDisable(GL_LINE_SMOOTH);

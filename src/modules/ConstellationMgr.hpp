@@ -195,7 +195,7 @@ private:
 	//! Draw the constellation name labels.
 	void drawNames(const StelPainter& sPainter) const;
 	//! Draw the constellation boundaries.
-	void drawBoundaries(const StelProjectorP& prj) const;	
+	void drawBoundaries(const StelPainter& sPainter) const;	
 	//! Handle single and multi-constellation selections.
 	void setSelectedConst(Constellation* c);
 	//! Handle unselecting a single constellation.

@@ -119,6 +119,8 @@ SET(stellarium_lib_SRCS
 	core/StelJsonParser.cpp
 	core/SimbadSearcher.hpp
 	core/SimbadSearcher.cpp
+	core/StelSphericalIndex.hpp
+	core/StelSphericalIndex.cpp
 
 	external/bytes.h
 	external/callback_helpers.hpp

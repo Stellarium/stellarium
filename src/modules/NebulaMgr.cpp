@@ -182,10 +182,10 @@ void NebulaMgr::drawPointer(const StelCore* core, const StelPainter& sPainter)
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 
 		size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
-		sPainter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 20, 90);
-		sPainter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 20, 0);
-		sPainter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 20, -90);
-		sPainter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 20, -180);
+		sPainter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 10, 90);
+		sPainter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 10, 0);
+		sPainter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 10, -90);
+		sPainter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 10, -180);
 	}
 }
 
