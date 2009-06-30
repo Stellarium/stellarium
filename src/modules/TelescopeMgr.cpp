@@ -157,7 +157,7 @@ void TelescopeMgr::setStelStyle(const StelStyle& style)
 	
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setLabelColor(StelUtils::strToVec3f(conf->value(section+"/telescope_label_color", defaultColor).toString()));
-	setCircleColor(StelUtils::strToVec3f(conf->value(section+"/telescope_circleColor", defaultColor).toString()));
+	setCircleColor(StelUtils::strToVec3f(conf->value(section+"/telescope_circle_color", defaultColor).toString()));
 }
 
 QList<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, const StelCore* core) const
