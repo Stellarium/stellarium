@@ -565,6 +565,35 @@ void StelPainter::drawText(const StelFont* font, float x, float y, const QString
 }
 
 
+/*************************************************************************
+ Draw a gl array with 3D vertex position and optional 2D texture position.
+*************************************************************************/
+void StelPainter::drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const Vec2f* texCoords)
+{
+	// Project all the vertice
+	Vec3d win;
+	for (int i=0;i<count;++i)
+	{
+		prj->project(vertice[i], win);
+		vertice[i]=win;
+	}
+	if (texCoords==NULL)
+	{
+		glInterleavedArrays(GL_V3F ,0, vertice);
+		glDrawArrays(mode, 0, count);
+		return;
+	}
+	
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glVertexPointer(3, GL_DOUBLE, 0, vertice);
+	glTexCoordPointer(2, GL_FLOAT, 0, texCoords);
+	glDrawArrays(mode, 0, count);
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+}
+	
+
 // Recursive method cutting a small circle in small segments
 void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, Vec3d& win1, Vec3d& win2, QLinkedList<Vec3d>& vertexList, const QLinkedList<Vec3d>::iterator& iter, double radius, const Vec3d& center, int nbI=0, bool checkCrossDiscontinuity=true)
 {
@@ -1370,9 +1399,11 @@ void StelPainter::drawSprite2dMode(double x, double y, float radius) const
 	if (flagGlPointSprite)
 	{
 		glPointSize(radius*2.);
-		glBegin(GL_POINTS);
-		glVertex2f(x,y);
-		glEnd();
+		static float vertexData[] = {0.,0.};
+		vertexData[0]=x;
+		vertexData[1]=y;
+		glInterleavedArrays(GL_V2F ,0, vertexData);
+		glDrawArrays(GL_POINTS, 0, 1);
 		return;
 	}
 
@@ -1410,19 +1441,18 @@ void StelPainter::drawSprite2dMode(double x, double y, float radius, float rotat
 *************************************************************************/
 void StelPainter::drawPoint2d(double x, double y) const
 {
+	static float vertexData[] = {0.,0.};
+	vertexData[0]=x;
+	vertexData[1]=y;
+	glInterleavedArrays(GL_V2F ,0, vertexData);
 	if (flagGlPointSprite)
 	{
 		glDisable(GL_POINT_SPRITE_ARB);
-		glBegin(GL_POINTS);
-			glVertex2f(x, y);
-		glEnd();
+		glDrawArrays(GL_POINTS, 0, 1);
 		glEnable(GL_POINT_SPRITE_ARB);
 		return;
 	}
-
-	glBegin(GL_POINTS);
-		glVertex2f(x, y);
-	glEnd();
+	glDrawArrays(GL_POINTS, 0, 1);
 }
 
 
@@ -1438,29 +1468,6 @@ void StelPainter::drawLine2d(double x1, double y1, double x2, double y2) const
 	vertexData[3]=y2;
 	glInterleavedArrays(GL_V2F ,0, vertexData);
 	glDrawArrays(GL_LINES, 0, 2);
-}
-
-/*************************************************************************
- Draw a rotated rectangle using the current texture at the given position
-*************************************************************************/
-void StelPainter::drawRectSprite2dMode(double x, double y, double sizex, double sizey, double rotation) const
-{
-	glPushMatrix();
-	glTranslatef(x, y, 0.0);
-	glRotatef(rotation,0.,0.,1.);
-	const double radiusx = sizex*0.5;
-	const double radiusy = sizey*0.5;
-	glBegin(GL_QUADS );
-		glTexCoord2i(0,0);
-		glVertex2f(-radiusx,-radiusy);
-		glTexCoord2i(1,0);
-		glVertex2f(+radiusx,-radiusy);
-		glTexCoord2i(1,1);
-		glVertex2f(+radiusx,+radiusy);
-		glTexCoord2i(0,1);
-		glVertex2f(-radiusx,+radiusy);
-	glEnd();
-	glPopMatrix();
 }
 
 ///////////////////////////////////////////////////////////////////////////

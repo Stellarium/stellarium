@@ -131,14 +131,6 @@ public:
 	//! @param rotation rotation angle in degree.
 	void drawSprite2dMode(double x, double y, float radius, float rotation) const;
 	
-	//! Draw a rotated rectangle using the current texture at the given projected 2d position.
-	//! @param x x position in the viewport in pixel.
-	//! @param y y position in the viewport in pixel.
-	//! @param sizex the size of the rectangle x side in pixel.
-	//! @param sizey the size of the rectangle y side in pixel.
-	//! @param rotation rotation angle in degree.
-	void drawRectSprite2dMode(double x, double y, double sizex, double sizey, double rotation) const;
-	
 	//! Draw a GL_POINT at the given position.
 	//! @param x x position in the viewport in pixels.
 	//! @param y y position in the viewport in pixels.
@@ -150,6 +142,13 @@ public:
 	//! @param x2 x position of point 2 in the viewport in pixels.
 	//! @param y2 y position of point 2 in the viewport in pixels.
 	void drawLine2d(double x1, double y1, double x2, double y2) const;
+	
+	//! Draw a gl array with 3D vertex position and optional 2D texture position.
+	//! @param mode as defined in glDrawArray.
+	//! @param count number of vertice to draw.
+	//! @param texCoords the array of Vec2f defining the uv coordinates or NULL if there are no texturing.
+	//! @param vertice the array of Vec3d defining the xyz coordinates. It is modified by the function.
+	void drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const Vec2f* texCoords=NULL);
 	
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
 	void sSphere(GLdouble radius, GLdouble oneMinusOblateness,

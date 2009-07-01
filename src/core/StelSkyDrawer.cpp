@@ -386,13 +386,7 @@ bool StelSkyDrawer::drawPointSource(double x, double y, const float rcMag[2], co
 			texBigHalo->bind();
 			glEnable(GL_TEXTURE_2D);
 			glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-
-			glBegin(GL_QUADS);
-				glTexCoord2i(0,0); glVertex2f(x-rmag,y-rmag);
-				glTexCoord2i(1,0); glVertex2f(x+rmag,y-rmag);
-				glTexCoord2i(1,1); glVertex2f(x+rmag,y+rmag);
-				glTexCoord2i(0,1); glVertex2f(x-rmag,y+rmag);
-			glEnd();
+			sPainter->drawSprite2dMode(x, y, rmag);
 		}
 		
 		++nbPointSources;
@@ -434,12 +428,7 @@ void StelSkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedAre
 		if (rmag<pixRadius*3.f+100.)
 			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
 		glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-		glBegin(GL_QUADS);
-			glTexCoord2i(0,0); glVertex2f(x-rmag,y-rmag);
-			glTexCoord2i(1,0); glVertex2f(x+rmag,y-rmag);
-			glTexCoord2i(1,1); glVertex2f(x+rmag,y+rmag);
-			glTexCoord2i(0,1); glVertex2f(x-rmag,y+rmag);
-		glEnd();
+		sPainter->drawSprite2dMode(x, y, rmag);
 		
 		noStarHalo = true;
 	}
