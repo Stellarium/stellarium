@@ -28,6 +28,7 @@
 
 #include <QDebug>
 #include <QSettings>
+#include <QVarLengthArray>
 
 Landscape::Landscape(float _radius) : radius(_radius), skyBrightness(1.), angleRotateZOffset(0.)
 {
@@ -310,7 +311,7 @@ void LandscapeOldStyle::drawDecor(StelCore* core) const
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
 	glColor4f(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 
-	const int stacks = 8;
+	static const int stacks = 8;
 	  // make slices_per_side=(3<<K) so that the innermost polygon of the
 	  // fandisk becomes a triangle:
 	int slices_per_side = 3*64/(nbDecorRepeat*nbSide);
@@ -324,29 +325,29 @@ void LandscapeOldStyle::drawDecor(StelCore* core) const
 	const double sa = sin(alpha);
 	double y0 = radius*cos((angleRotateZ+angleRotateZOffset)*M_PI/180.0);
 	double x0 = radius*sin((angleRotateZ+angleRotateZOffset)*M_PI/180.0);
+	
+	QVarLengthArray<Vec2f, 18> texCoordsArray(stacks*2+2);
+	QVarLengthArray<Vec3d, 18> vertexArray(stacks*2+2);
 	for (int n=0;n<nbDecorRepeat;n++) for (int i=0;i<nbSide;i++) {
 		sides[i].tex->bind();
 		double tx0 = sides[i].texCoords[0];
-		const float d_tx0 = (sides[i].texCoords[2]-sides[i].texCoords[0])
-		                  / slices_per_side;
-		const float d_ty = (sides[i].texCoords[3]-sides[i].texCoords[1])
-		                 / stacks;
+		const float d_tx0 = (sides[i].texCoords[2]-sides[i].texCoords[0]) / slices_per_side;
+		const float d_ty = (sides[i].texCoords[3]-sides[i].texCoords[1]) / stacks;
 		for (int j=0;j<slices_per_side;j++) {
 			const double y1 = y0*ca - x0*sa;
 			const double x1 = y0*sa + x0*ca;
 			const float tx1 = tx0 + d_tx0;
 			double z = z0;
 			float ty0 = sides[i].texCoords[1];
-			glBegin(GL_QUAD_STRIP);
-			for (int k=0;k<=stacks;k++) {
-				glTexCoord2f(tx0,ty0);
-				sPainter.drawVertex3(x0, y0, z);
-				glTexCoord2f(tx1,ty0);
-				sPainter.drawVertex3(x1, y1, z);
+			for (int k=0;k<=stacks*2;k+=2) {
+				texCoordsArray[k].set(tx0, ty0);
+				texCoordsArray[k+1].set(tx1, ty0);
+				vertexArray[k].set(x0, y0, z);
+				vertexArray[k+1].set(x1, y1, z);
 				z += d_z;
 				ty0 += d_ty;
 			}
-			glEnd();
+			sPainter.drawArrays(GL_QUAD_STRIP, texCoordsArray.size(), vertexArray.data(), texCoordsArray.data());
 			y0 = y1;
 			x0 = x1;
 			tx0 = tx1;

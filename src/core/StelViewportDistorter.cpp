@@ -565,15 +565,7 @@ void StelViewportDistorterFisheyeToSphericMirror::distort(void) const
 	glColor4fv(color);
 	glDisable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, mirror_texture);
-	
 	glCallList(display_list);
-	
-	//glBegin(GL_QUADS);
-	//glTexCoord2f(0.0f, 1.0f); glVertex2i(0,screen_h);
-	//glTexCoord2f(1.0f, 1.0f); glVertex2i(screen_w,screen_h);
-	//glTexCoord2f(1.0f, 0.0f); glVertex2i(screen_w,0);
-	//glTexCoord2f(0.0f, 0.0f); glVertex2i(0,0);
-	//glEnd();
 
 	glViewport(newProjectorParams.viewportXywh[0],newProjectorParams.viewportXywh[1],newProjectorParams.viewportXywh[2],newProjectorParams.viewportXywh[3]);
 }
