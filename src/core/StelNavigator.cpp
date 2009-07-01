@@ -207,6 +207,7 @@ void StelNavigator::moveObserverTo(const StelLocation& target, double duration, 
 		SpaceShipObserver* newObs = new SpaceShipObserver(getCurrentLocation(), target, d);
 		delete position;
 		position = newObs;
+		newObs->update(0);
 	}
 	else
 	{

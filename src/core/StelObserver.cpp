@@ -232,8 +232,9 @@ SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLoc
 			return;
 		}
 
-		artificialPlanet = new ArtificialPlanet(startPlanet);
-		artificialPlanet->setDest(targetPlanet);
+		ArtificialPlanet* artPlanet = new ArtificialPlanet(startPlanet);
+		artPlanet->setDest(targetPlanet);
+		artificialPlanet = QSharedPointer<Planet>(artPlanet);
 	}
 	planet = targetPlanet;
 	timeToGo = transitSeconds;
@@ -241,10 +242,8 @@ SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLoc
 
 SpaceShipObserver::~SpaceShipObserver()
 {
-	if (artificialPlanet)
-		delete artificialPlanet;
-	artificialPlanet=NULL;
-	planet.clear();;
+	artificialPlanet.clear();
+	planet.clear();
 }
 
 void SpaceShipObserver::update(double deltaTime)
@@ -262,7 +261,7 @@ void SpaceShipObserver::update(double deltaTime)
 		if (artificialPlanet)
 		{
 			// Update SpaceShip position
-			artificialPlanet->computeAverage(timeToGo/(timeToGo + deltaTime));
+			static_cast<ArtificialPlanet*>(artificialPlanet.data())->computeAverage(timeToGo/(timeToGo + deltaTime));
 			currentLocation.planetName = "SpaceShip";
 			currentLocation.name = moveStartLocation.planetName + " -> " + moveTargetLocation.planetName;
 		}
@@ -280,4 +279,8 @@ void SpaceShipObserver::update(double deltaTime)
 	}
 }
 
-const QSharedPointer<Planet> SpaceShipObserver::getHomePlanet() const {return (isObserverLifeOver() || artificialPlanet==NULL)  ? planet : QSharedPointer<Planet>((Planet*)artificialPlanet);}
+const QSharedPointer<Planet> SpaceShipObserver::getHomePlanet() const
+{
+	return (isObserverLifeOver() || artificialPlanet==NULL)  ? planet : artificialPlanet;
+}
+
