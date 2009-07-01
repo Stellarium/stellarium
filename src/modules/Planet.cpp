@@ -970,32 +970,22 @@ void Planet::drawTrail(const StelCore* core)
 	std::list<TrailPoint>::iterator begin = trail.begin();
 	//  begin++;
 
-	if(trail.begin() != trail.end())
+	if (trail.begin() != trail.end())
 	{
 		nextiter = trail.end();
 		nextiter--;
 
-		for( iter=nextiter; iter != begin; iter--)
+		for (iter=nextiter; iter != begin; --iter)
 		{
 			nextiter--;
-			if( prj->projectLineCheck( (*iter).point, onscreen1, (*(nextiter)).point, onscreen2) )
-			{
-				glBegin(GL_LINE_STRIP);
-				glVertex2d(onscreen1[0], onscreen1[1]);
-				glVertex2d(onscreen2[0], onscreen2[1]);
-				glEnd();
-			}
+			if (prj->projectLineCheck( (*iter).point, onscreen1, (*(nextiter)).point, onscreen2))
+				sPainter.drawLine2d(onscreen1[0], onscreen1[1], onscreen2[0], onscreen2[1]);
 		}
 	}
 
 	// draw final segment to finish at current Planet position
-	if( !firstPoint && prj->projectLineCheck( (*trail.begin()).point, onscreen1, getEquinoxEquatorialPos(nav), onscreen2) )
-	{
-		glBegin(GL_LINE_STRIP);
-		glVertex2d(onscreen1[0], onscreen1[1]);
-		glVertex2d(onscreen2[0], onscreen2[1]);
-		glEnd();
-	}
+	if (!firstPoint && prj->projectLineCheck( (*trail.begin()).point, onscreen1, getEquinoxEquatorialPos(nav), onscreen2))
+		sPainter.drawLine2d(onscreen1[0], onscreen1[1], onscreen2[0], onscreen2[1]);
 }
 
 // update trail points as needed
