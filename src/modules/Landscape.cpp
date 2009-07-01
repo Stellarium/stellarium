@@ -347,7 +347,7 @@ void LandscapeOldStyle::drawDecor(StelCore* core) const
 				z += d_z;
 				ty0 += d_ty;
 			}
-			sPainter.drawArrays(GL_QUAD_STRIP, texCoordsArray.size(), vertexArray.data(), texCoordsArray.data());
+			sPainter.drawArrays(GL_TRIANGLE_STRIP, texCoordsArray.size(), vertexArray.data(), texCoordsArray.data());
 			y0 = y1;
 			x0 = x1;
 			tx0 = tx1;
