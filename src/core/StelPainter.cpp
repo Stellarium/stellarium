@@ -1407,13 +1407,13 @@ void StelPainter::drawSprite2dMode(double x, double y, float radius) const
 		return;
 	}
 
-	static float vertexData[] = {0.,0.,-10.,-10.,0.,   1.,0.,10.,-10.,0.,  1.,1.,10.,10.,0,   0.,1.,-10.,10.,0.};
+	static float vertexData[] = {0.,0.,-10.,-10.,0.,   1.,0.,10.,-10.,0.,  0.,1.,10.,10.,0,   1.,1.,-10.,10.,0.};
 	vertexData[2]=x-radius; vertexData[3]=y-radius;
 	vertexData[7]=x+radius; vertexData[8]=y-radius;
-	vertexData[12]=x+radius; vertexData[13]=y+radius;
-	vertexData[17]=x-radius; vertexData[18]=y+radius;
+	vertexData[12]=x-radius; vertexData[13]=y+radius;
+	vertexData[17]=x+radius; vertexData[18]=y+radius;
 	glInterleavedArrays(GL_T2F_V3F ,0, vertexData);
-	glDrawArrays(GL_QUADS, 0, 4);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
 /*************************************************************************
@@ -1425,13 +1425,13 @@ void StelPainter::drawSprite2dMode(double x, double y, float radius, float rotat
 	glTranslatef(x, y, 0.0);
 	glRotatef(rotation,0.,0.,1.);
 	
-	static float vertexData[] = {0.,0.,-10.,-10.,0.,   1.,0.,10.,-10.,0.,  1.,1.,10.,10.,0,   0.,1.,-10.,10.,0.};
+	static float vertexData[] = {0.,0.,-10.,-10.,0.,   1.,0.,10.,-10.,0.,  0.,1.,10.,10.,0,   1.,1.,-10.,10.,0.};
 	vertexData[2]=-radius; vertexData[3]=-radius;
 	vertexData[7]=radius; vertexData[8]=-radius;
-	vertexData[12]=radius; vertexData[13]=radius;
-	vertexData[17]=-radius; vertexData[18]=radius;	
+	vertexData[12]=-radius; vertexData[13]=radius;	
+	vertexData[17]=radius; vertexData[18]=radius;
 	glInterleavedArrays(GL_T2F_V3F ,0, vertexData);
-	glDrawArrays(GL_QUADS, 0, 4);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 	glPopMatrix();
 }
