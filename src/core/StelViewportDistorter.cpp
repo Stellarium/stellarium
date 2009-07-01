@@ -74,12 +74,13 @@ private:
 	int viewport_texture_offset[2];
 	int texture_wh;
 
-	struct TexturePoint { float tex_xy[2]; };
-	TexturePoint *texture_point_array;
+	Vec2f *texture_point_array;
 	int max_x,max_y;
 	double step_x,step_y;
 
-	GLuint display_list;
+	QVector<Vec2f> displayVertexList;
+	QVector<Vec4f> displayColorList;
+	QVector<Vec2f> displayTexCoordList;
 	GLuint mirror_texture;
 	GLuint fbo;             // frame buffer object
 	GLuint depth_buffer;    // depth render buffer
@@ -88,8 +89,8 @@ private:
 
 struct VertexPoint
 {
-	float ver_xy[2];
-	float color[4];
+	Vec2f ver_xy;
+	Vec4f color;
 	double h;
 };
 
@@ -271,7 +272,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		if (gamma < 0.0) gamma = 0.0;
 		
 		const float view_scaling_factor = 0.5 * newProjectorParams.viewportFovDiameter / prj->fovToViewScalingFactor(distorter_max_fov*(M_PI/360.0));
-		texture_point_array = new TexturePoint[(max_x+1)*(max_y+1)];
+		texture_point_array = new Vec2f[(max_x+1)*(max_y+1)];
 		vertex_point_array = new VertexPoint[(max_x+1)*(max_y+1)];
 		double max_h = 0;
 		SphericMirrorCalculator calc(conf);
@@ -280,7 +281,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 			for (int i=0;i<=max_x;i++)
 			{
 				VertexPoint &vertex_point(vertex_point_array[(j*(max_x+1)+i)]);
-				TexturePoint &texture_point(texture_point_array[(j*(max_x+1)+i)]);
+				Vec2f &texture_point(texture_point_array[(j*(max_x+1)+i)]);
 				vertex_point.ver_xy[0] = ((i == 0) ? 0.f :
 				                          (i == max_x) ? screen_w :
 				                          (i-0.5f*(j&1))*step_x);
@@ -307,8 +308,8 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 				//      if (y < 0.f) {y=0.f;vertex_point.h=0;}
 				//      else if (y > newProjectorParams.viewportXywh[3]) {y=newProjectorParams.viewportXywh[3];vertex_point.h=0;}
 
-				texture_point.tex_xy[0] = (viewport_texture_offset[0]+x)/texture_wh;
-				texture_point.tex_xy[1] = (viewport_texture_offset[1]+y)/texture_wh;
+				texture_point[0] = (viewport_texture_offset[0]+x)/texture_wh;
+				texture_point[1] = (viewport_texture_offset[1]+y)/texture_wh;
 
 				if (vertex_point.h > max_h) max_h = vertex_point.h;
 			}
@@ -348,14 +349,14 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		step_y = screen_h/ (double)max_y;
 		//qDebug() << "max_x: " << max_x << ", max_y: " << max_y
 		//         << ", step_x: " << step_x << ", step_y: " << step_y;
-		texture_point_array = new TexturePoint[(max_x+1)*(max_y+1)];
+		texture_point_array = new Vec2f[(max_x+1)*(max_y+1)];
 		vertex_point_array = new VertexPoint[(max_x+1)*(max_y+1)];
 		for (int j=0;j<=max_y;j++)
 		{
 			for (int i=0;i<=max_x;i++)
 			{
 				VertexPoint &vertex_point(vertex_point_array[(j*(max_x+1)+i)]);
-				TexturePoint &texture_point(texture_point_array[(j*(max_x+1)+i)]);
+				Vec2f &texture_point(texture_point_array[(j*(max_x+1)+i)]);
 				vertex_point.ver_xy[0] = ((i == 0) ? 0.f :
 				                          (i == max_x) ? screen_w :
 				                          (i-0.5f*(j&1))*step_x);
@@ -372,20 +373,19 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 				//      if (y < 0.f) {y=0.f;vertex_point.h=0;}
 				//      else if (y > newProjectorParams.viewportXywh[3]) {y=newProjectorParams.viewportXywh[3];vertex_point.h=0;}
 
-				texture_point.tex_xy[0] = (viewport_texture_offset[0]+x)/texture_wh;
-				texture_point.tex_xy[1] = (viewport_texture_offset[1]+y)/texture_wh;
+				texture_point[0] = (viewport_texture_offset[0]+x)/texture_wh;
+				texture_point[1] = (viewport_texture_offset[1]+y)/texture_wh;
 
 			}
 		}
 	}
 
 	// initialize the display list
-	display_list = glGenLists(1);
-	glNewList(display_list,GL_COMPILE);
+	displayVertexList.clear();
 	for (int j=0;j<max_y;j++)
 	{
-		const TexturePoint *t0 = texture_point_array + j*(max_x+1);
-		const TexturePoint *t1 = t0;
+		const Vec2f *t0 = texture_point_array + j*(max_x+1);
+		const Vec2f *t1 = t0;
 		const VertexPoint *v0 = vertex_point_array + j*(max_x+1);
 		const VertexPoint *v1 = v0;
 		if (j&1)
@@ -398,29 +398,21 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 			t0 += (max_x+1);
 			v0 += (max_x+1);
 		}
-		glBegin(GL_TRIANGLE_STRIP);
 		for (int i=0;i<=max_x;i++,t0++,t1++,v0++,v1++)
 		{
-			glColor4fv(v0->color);
-			glTexCoord2fv(t0->tex_xy);
-			glVertex2fv(v0->ver_xy);
-			glColor4fv(v1->color);
-			glTexCoord2fv(t1->tex_xy);
-			glVertex2fv(v1->ver_xy);
+			displayColorList << v0->color << v1->color;
+			displayTexCoordList << *t0 << *t1;
+			displayVertexList << v0->ver_xy << v1->ver_xy;
 		}
-		glEnd();
 	}
-	glEndList();
 	delete[] vertex_point_array;
 }
 
 
 
-StelViewportDistorterFisheyeToSphericMirror::
-~StelViewportDistorterFisheyeToSphericMirror(void)
+StelViewportDistorterFisheyeToSphericMirror::~StelViewportDistorterFisheyeToSphericMirror(void)
 {
 	if (texture_point_array) delete[] texture_point_array;
-	glDeleteLists(display_list,1);
 	if (flag_use_ext_framebuffer_object)
 	{
 		glDeleteFramebuffersEXT(1, &fbo);
@@ -452,7 +444,7 @@ bool StelViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) const
 		float dx = x / step_x + 0.5f*(1.f-dy);
 		const int i = (int)floorf(dx);
 		dx -= i;
-		const TexturePoint *const t = texture_point_array + (j*(max_x+1)+i);
+		const Vec2f *const t = texture_point_array + (j*(max_x+1)+i);
 		if (dx + dy <= 1.f)
 		{
 			if (i == 0)
@@ -460,12 +452,12 @@ bool StelViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) const
 				dx -= 0.5f*(1.f-dy);
 				dx *= 2.f;
 			}
-			texture_x = t[0].tex_xy[0]
-			            + dx * (t[1].tex_xy[0]-t[0].tex_xy[0])
-			            + dy * (t[max_x+1].tex_xy[0]-t[0].tex_xy[0]);
-			texture_y = t[0].tex_xy[1]
-			            + dx * (t[1].tex_xy[1]-t[0].tex_xy[1])
-			            + dy * (t[max_x+1].tex_xy[1]-t[0].tex_xy[1]);
+			texture_x = t[0][0]
+			            + dx * (t[1][0]-t[0][0])
+			            + dy * (t[max_x+1][0]-t[0][0]);
+			texture_y = t[0][1]
+			            + dx * (t[1][1]-t[0][1])
+			            + dy * (t[max_x+1][1]-t[0][1]);
 		}
 		else
 		{
@@ -474,12 +466,12 @@ bool StelViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) const
 				dx -= 0.5f*(1.f-dy);
 				dx *= 2.f;
 			}
-			texture_x = t[max_x+2].tex_xy[0]
-			            + (1.f-dy) * (t[1].tex_xy[0]-t[max_x+2].tex_xy[0])
-			            + (1.f-dx) * (t[max_x+1].tex_xy[0]-t[max_x+2].tex_xy[0]);
-			texture_y = t[max_x+2].tex_xy[1]
-			            + (1.f-dy) * (t[1].tex_xy[1]-t[max_x+2].tex_xy[1])
-			            + (1.f-dx) * (t[max_x+1].tex_xy[1]-t[max_x+2].tex_xy[1]);
+			texture_x = t[max_x+2][0]
+			            + (1.f-dy) * (t[1][0]-t[max_x+2][0])
+			            + (1.f-dx) * (t[max_x+1][0]-t[max_x+2][0]);
+			texture_y = t[max_x+2][1]
+			            + (1.f-dy) * (t[1][1]-t[max_x+2][1])
+			            + (1.f-dx) * (t[max_x+1][1]-t[max_x+2][1]);
 		}
 	}
 	else
@@ -487,7 +479,7 @@ bool StelViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) const
 		float dx = x / step_x + 0.5f*dy;
 		const int i = (int)floorf(dx);
 		dx -= i;
-		const TexturePoint *const t = texture_point_array + (j*(max_x+1)+i);
+		const Vec2f *const t = texture_point_array + (j*(max_x+1)+i);
 		if (dx >= dy)
 		{
 			if (i == max_x-1)
@@ -495,12 +487,12 @@ bool StelViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) const
 				dx -= 0.5f*dy;
 				dx *= 2.f;
 			}
-			texture_x = t[1].tex_xy[0]
-			            + (1.f-dx) * (t[0].tex_xy[0]-t[1].tex_xy[0])
-			            + dy * (t[max_x+2].tex_xy[0]-t[1].tex_xy[0]);
-			texture_y = t[1].tex_xy[1]
-			            + (1.f-dx) * (t[0].tex_xy[1]-t[1].tex_xy[1])
-			            + dy * (t[max_x+2].tex_xy[1]-t[1].tex_xy[1]);
+			texture_x = t[1][0]
+			            + (1.f-dx) * (t[0][0]-t[1][0])
+			            + dy * (t[max_x+2][0]-t[1][0]);
+			texture_y = t[1][1]
+			            + (1.f-dx) * (t[0][1]-t[1][1])
+			            + dy * (t[max_x+2][1]-t[1][1]);
 		}
 		else
 		{
@@ -509,12 +501,12 @@ bool StelViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) const
 				dx -= 0.5f*dy;
 				dx *= 2.f;
 			}
-			texture_x = t[max_x+1].tex_xy[0]
-			            + (1.f-dy) * (t[0].tex_xy[0]-t[max_x+1].tex_xy[0])
-			            + dx * (t[max_x+2].tex_xy[0]-t[max_x+1].tex_xy[0]);
-			texture_y = t[max_x+1].tex_xy[1]
-			            + (1.f-dy) * (t[0].tex_xy[1]-t[max_x+1].tex_xy[1])
-			            + dx * (t[max_x+2].tex_xy[1]-t[max_x+1].tex_xy[1]);
+			texture_x = t[max_x+1][0]
+			            + (1.f-dy) * (t[0][0]-t[max_x+1][0])
+			            + dx * (t[max_x+2][0]-t[max_x+1][0]);
+			texture_y = t[max_x+1][1]
+			            + (1.f-dy) * (t[0][1]-t[max_x+1][1])
+			            + dx * (t[max_x+2][1]-t[max_x+1][1]);
 		}
 	}
 
@@ -561,11 +553,23 @@ void StelViewportDistorterFisheyeToSphericMirror::distort(void) const
 					  		newProjectorParams.viewportXywh[3]);
 	}
 
-	float color[4] = {1,1,1,1};
-	glColor4fv(color);
+
 	glDisable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, mirror_texture);
-	glCallList(display_list);
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_COLOR_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glColorPointer(4, GL_FLOAT, 0, displayColorList.constData());
+	glVertexPointer(2, GL_FLOAT, 0, displayVertexList.constData());
+	glTexCoordPointer(2, GL_FLOAT, 0, displayTexCoordList.constData());
+	for (int j=0;j<max_y;j++)
+	{
+		glDrawArrays(GL_TRIANGLE_STRIP, j*(max_x+1)*2, (max_x+1)*2);
+	}
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_COLOR_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	glViewport(newProjectorParams.viewportXywh[0],newProjectorParams.viewportXywh[1],newProjectorParams.viewportXywh[2],newProjectorParams.viewportXywh[3]);
 }
