@@ -137,27 +137,16 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		}
 
 		// Generate the indices used to draw the quads
-		indices = new GLushort[skyResolutionX*skyResolutionY*4];
+		indices = new GLushort[(skyResolutionX+1)*skyResolutionY*2];
 		int i=0;
 		for (int y2=0; y2<skyResolutionY; ++y2)
 		{
 			GLushort g0 = y2*(1+skyResolutionX);
-			GLushort g1 = g0;
-			if (y2&1)
+			GLushort g1 = (y2+1)*(1+skyResolutionX);
+			for (int x2=0; x2<=skyResolutionX; ++x2)
 			{
-				g1+=(1+skyResolutionX);
-			}
-			else
-			{
-				g0+=(1+skyResolutionX);
-			}
-
-			for (int x2=0; x2<skyResolutionX; ++x2)
-			{
-				indices[i++]=g0;
-				indices[i++]=g1;
-				indices[i++]=++g1;
-				indices[i++]=++g0;
+				indices[i++]=g0++;
+				indices[i++]=g1++;
 			}
 		}
 
@@ -169,12 +158,12 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 			glBufferDataARB(GL_ARRAY_BUFFER_ARB, (1+skyResolutionX)*(1+skyResolutionY)*2*sizeof(float), posGrid, GL_STATIC_DRAW_ARB);
 			glGenBuffersARB(1, &indicesBufferId);
 			glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, indicesBufferId);
-			glBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB, skyResolutionX*skyResolutionY*4*sizeof(GLushort), indices, GL_STATIC_DRAW_ARB);
+			glBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB, (skyResolutionX+1)*skyResolutionY*2*sizeof(GLushort), indices, GL_STATIC_DRAW_ARB);
 			glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
 			glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
 		}
 	}
-
+	
 	if (myisnan(_sunPos.length()))
 		_sunPos.set(0.,0.,-1.*AU);
 	if (myisnan(moonPos.length()))
@@ -405,18 +394,30 @@ void Atmosphere::draw(StelCore* core)
 			glBindBufferARB(GL_ARRAY_BUFFER_ARB, vertexBufferId);
 			glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, indicesBufferId);
 			glVertexPointer(2, GL_FLOAT, 0, 0);
+
 			// And draw everything at once
-			glDrawElements(GL_QUADS, skyResolutionX*skyResolutionY*4, GL_UNSIGNED_SHORT, 0);
+			GLushort* shift=NULL;
+			for (int y=0;y<skyResolutionY;++y)
+			{
+				glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, shift);
+				shift += (skyResolutionX+1)*2;
+			}
 			// Unbind buffers
 			glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
 			glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
 		}
 		else
 		{
+			
 			// Load the vertex array
 			glVertexPointer(2, GL_FLOAT, 0, posGrid);
 			// And draw everything at once
-			glDrawElements(GL_QUADS, skyResolutionX*skyResolutionY*4, GL_UNSIGNED_SHORT, indices);
+			GLushort* shift=indices;
+			for (int y=0;y<skyResolutionY;++y)
+			{
+				glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, shift);
+				shift += (skyResolutionX+1)*2;
+			}
 		}
 
 		glDisableClientState(GL_VERTEX_ARRAY);
