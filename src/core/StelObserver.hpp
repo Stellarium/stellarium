@@ -54,7 +54,7 @@ public:
 	virtual const QSharedPointer<Planet> getHomePlanet(void) const;
 
 	//! Get the informations on the current location
-	const StelLocation& getCurrentLocation() const {return currentLocation;}
+	virtual const StelLocation& getCurrentLocation() const {return currentLocation;}
 
 	//! Get whether the life of this observer is over, and therefore that it should be changed to the next one
 	//! provided by the getNextObserver() method
@@ -81,11 +81,11 @@ public:
 	virtual const QSharedPointer<Planet> getHomePlanet() const;
 	virtual bool isObserverLifeOver() const {return timeToGo <= 0.;}
 	virtual StelObserver* getNextObserver() const {return new StelObserver(moveTargetLocation);}
-
+	
 private:
 	StelLocation moveStartLocation;
 	StelLocation moveTargetLocation;
-	ArtificialPlanet* artificialPlanet;
+	QSharedPointer<Planet> artificialPlanet;
 	double timeToGo;
 	double transitSeconds;
 };
