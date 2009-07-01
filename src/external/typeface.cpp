@@ -555,13 +555,13 @@ Vec2f TypeFace::renderGlyph(size_t aGlyphIndex, const Vec2f& aPosition)
 	vertexData[2]=position[0]; vertexData[3]=position[1];
 	vertexData[5]=bottomRightUV[0]; vertexData[6]=topLeftUV[1];
 	vertexData[7]=position[0] + glyphWidth; vertexData[8]=position[1];
-	vertexData[10]=bottomRightUV[0]; vertexData[11]=bottomRightUV[1];
-	vertexData[12]=position[0] + glyphWidth; vertexData[13]=position[1] + glyphHeight;
-	vertexData[15]=topLeftUV[0]; vertexData[16]=bottomRightUV[1];
-	vertexData[17]=position[0]; vertexData[18]=position[1] + glyphHeight;
+	vertexData[10]=topLeftUV[0]; vertexData[11]=bottomRightUV[1];
+	vertexData[12]=position[0]; vertexData[13]=position[1] + glyphHeight;
+	vertexData[15]=bottomRightUV[0]; vertexData[16]=bottomRightUV[1];
+	vertexData[17]=position[0] + glyphWidth; vertexData[18]=position[1] + glyphHeight;
 		
 	glInterleavedArrays(GL_T2F_V3F ,0, vertexData);
-	glDrawArrays(GL_QUADS, 0, 4);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 	return entry.advance_;
 }
