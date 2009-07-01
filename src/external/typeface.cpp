@@ -545,26 +545,23 @@ Vec2f TypeFace::renderGlyph(size_t aGlyphIndex, const Vec2f& aPosition)
 
 	const Vec2f position = aPosition + entry.bitmapPosition_;
 
-	const Vec2f topLeftUV     = entry.topLeftUV_;
-	const Vec2f bottomRightUV = entry.bottomRightUV_;
+	const Vec2f& topLeftUV     = entry.topLeftUV_;
+	const Vec2f& bottomRightUV = entry.bottomRightUV_;
 	const float glyphWidth  = static_cast<float>(entry.renderSize_[0]);
 	const float glyphHeight = static_cast<float>(entry.renderSize_[1]);
 
-	glBegin(GL_QUADS);
-	{
-		glTexCoord2f( topLeftUV[0], topLeftUV[1] );
-		glVertex2f( position[0], position[1] );
-
-		glTexCoord2f( bottomRightUV[0], topLeftUV[1] );
-		glVertex2f( position[0] + glyphWidth, position[1] );
-
-		glTexCoord2f( bottomRightUV[0], bottomRightUV[1] );
-		glVertex2f( position[0] + glyphWidth, position[1] + glyphHeight );
-
-		glTexCoord2f( topLeftUV[0], bottomRightUV[1] );
-		glVertex2f( position[0], position[1] + glyphHeight );
-	}
-	glEnd();
+	static float vertexData[20] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+	vertexData[0]=topLeftUV[0]; vertexData[1]=topLeftUV[1];
+	vertexData[2]=position[0]; vertexData[3]=position[1];
+	vertexData[5]=bottomRightUV[0]; vertexData[6]=topLeftUV[1];
+	vertexData[7]=position[0] + glyphWidth; vertexData[8]=position[1];
+	vertexData[10]=bottomRightUV[0]; vertexData[11]=bottomRightUV[1];
+	vertexData[12]=position[0] + glyphWidth; vertexData[13]=position[1] + glyphHeight;
+	vertexData[15]=topLeftUV[0]; vertexData[16]=bottomRightUV[1];
+	vertexData[17]=position[0]; vertexData[18]=position[1] + glyphHeight;
+		
+	glInterleavedArrays(GL_T2F_V3F ,0, vertexData);
+	glDrawArrays(GL_QUADS, 0, 4);
 
 	return entry.advance_;
 }
