@@ -569,11 +569,9 @@ void StelPainter::drawText(const StelFont* font, float x, float y, const QString
 void StelPainter::drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const Vec2f* texCoords) const
 {
 	// Project all the vertice
-	Vec3d win;
 	for (int i=0;i<count;++i)
 	{
-		prj->project(vertice[i], win);
-		vertice[i]=win;
+		prj->projectInPlace(vertice[i]);
 	}
 	if (texCoords==NULL)
 	{
@@ -593,7 +591,7 @@ void StelPainter::drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const V
 	
 
 // Recursive method cutting a small circle in small segments
-void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, Vec3d& win1, Vec3d& win2, QLinkedList<Vec3d>& vertexList, const QLinkedList<Vec3d>::iterator& iter, double radius, const Vec3d& center, int nbI=0, bool checkCrossDiscontinuity=true)
+inline void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, Vec3d& win1, Vec3d& win2, QLinkedList<Vec3d>& vertexList, const QLinkedList<Vec3d>::iterator& iter, double radius, const Vec3d& center, int nbI=0, bool checkCrossDiscontinuity=true)
 {
 	const bool crossDiscontinuity = checkCrossDiscontinuity && prj->intersectViewportDiscontinuity(p1+center, p2+center);
 	if (crossDiscontinuity && nbI>=10)
@@ -605,17 +603,19 @@ void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, Vec3d& w
 		return;
 	}
 
-	Vec3d win3;
 	Vec3d newVertex(p1+p2);
 	newVertex.normalize();
 	newVertex*=radius;
-	const bool isValidVertex = prj->project(newVertex+center, win3);
+	Vec3d win3(newVertex[0]+center[0], newVertex[1]+center[1], newVertex[2]+center[2]);
+	const bool isValidVertex = prj->projectInPlace(win3);
 
-	const Vec3d v1(win1[0]-win3[0], win1[1]-win3[1], 0);
-	const Vec3d v2(win2[0]-win3[0], win2[1]-win3[1], 0);
+	const double v10=win1[0]-win3[0];
+	const double v11=win1[1]-win3[1];
+	const double v20=win2[0]-win3[0];
+	const double v21=win2[1]-win3[1];
 
-	const double dist = std::sqrt((v1[0]*v1[0]+v1[1]*v1[1])*(v2[0]*v2[0]+v2[1]*v2[1]));
-	const double cosAngle = (v1[0]*v2[0]+v1[1]*v2[1])/dist;
+	const double dist = std::sqrt((v10*v10+v11*v11)*(v20*v20+v21*v21));
+	const double cosAngle = (v10*v20+v11*v21)/dist;
 	if ((cosAngle>-0.999 || dist>50*50 || crossDiscontinuity) && nbI<10)
 	{
 		// Use the 3rd component of the vector to store whether the vertex is valid
@@ -710,9 +710,9 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 
 // Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 // by splitting it into subtriangles.
-void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>* outVertices,
-		const bool* edgeFlags, QVector<bool>* outEdgeFlags,
-		const Vec2f* texturePos, QVector<Vec2f>* outTexturePos,
+void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArray<Vec3d, 4096>* outVertices,
+		const bool* edgeFlags, QVarLengthArray<bool, 4096>* outEdgeFlags,
+		const Vec2f* texturePos, QVarLengthArray<Vec2f, 4096>* outTexturePos,
 		int nbI, bool checkDisc1, bool checkDisc2, bool checkDisc3) const
 {
 	Q_ASSERT(fabs(vertices[0].length()-1.)<0.00001);
@@ -737,21 +737,24 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	if (checkDisc1 && cDiscontinuity1==false)
 	{
 		// If the distortion at segment e0,e1 is too big, flags it for subdivision
-		prj->project(vertices[0]+vertices[1], win3);
+		win3 = vertices[0]; win3+=vertices[1];
+		prj->projectInPlace(win3);
 		win3 -= (e0+e1)*0.5;
 		cDiscontinuity1 = (win3[0]*win3[0]+win3[1]*win3[1])>maxSqDistortion;
 	}
 	if (checkDisc2 && cDiscontinuity2==false)
 	{
 		// If the distortion at segment e1,e2 is too big, flags it for subdivision
-		prj->project(vertices[1]+vertices[2], win3);
+		win3 = vertices[1]; win3+=vertices[2];
+		prj->projectInPlace(win3);
 		win3 -= (e2+e1)*0.5;
 		cDiscontinuity2 = (win3[0]*win3[0]+win3[1]*win3[1])>maxSqDistortion;
 	}
 	if (checkDisc3 && cDiscontinuity3==false)
 	{
 		// If the distortion at segment e2,e0 is too big, flags it for subdivision
-		prj->project(vertices[2]+vertices[0], win3);
+		win3 = vertices[2]; win3+=vertices[0];
+		prj->projectInPlace(win3);
 		win3 -= (e0+e2)*0.5;
 		cDiscontinuity3 = (win3[0]*win3[0]+win3[1]*win3[1])>maxSqDistortion;
 	}
@@ -759,11 +762,11 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	if (!cDiscontinuity1 && !cDiscontinuity2 && !cDiscontinuity3)
 	{
 		// The triangle is clean, appends it
-		*outVertices << e0 << e1 << e2;
+		outVertices->append(e0); outVertices->append(e1); outVertices->append(e2);
 		if (outEdgeFlags)
-			*outEdgeFlags << edgeFlags[0] << edgeFlags[1] << edgeFlags[2];
+			outEdgeFlags->append(edgeFlags, 3);
 		if (outTexturePos)
-			*outTexturePos << texturePos[0] << texturePos[1] << texturePos[2];
+			outTexturePos->append(texturePos,3);
 		return;
 	}
 
@@ -775,11 +778,11 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 			return;
 
 		// Else display it, it will be suboptimal though.
-		*outVertices << e0 << e1 << e2;
+		outVertices->append(e0); outVertices->append(e1); outVertices->append(e2);
 		if (outEdgeFlags)
-			*outEdgeFlags << edgeFlags[0] << edgeFlags[1] << edgeFlags[2];
+			outEdgeFlags->append(edgeFlags, 3);
 		if (outTexturePos)
-			*outTexturePos << texturePos[0] << texturePos[1] << texturePos[2];
+			outTexturePos->append(texturePos,3);
 		return;
 	}
 
@@ -792,7 +795,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	if (cDiscontinuity1 && !cDiscontinuity2 && !cDiscontinuity3)
 	{
 		va[0]=vertices[0];
-		va[1]=vertices[0]+vertices[1];
+		va[1]=vertices[0];va[1]+=vertices[1];
 		va[1].normalize();
 		va[2]=vertices[2];
 		if (outTexturePos)
@@ -834,7 +837,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	{
 		va[0]=vertices[0];
 		va[1]=vertices[1];
-		va[2]=vertices[1]+vertices[2];
+		va[2]=vertices[1];va[2]+=vertices[2];
 		va[2].normalize();
 		if (outTexturePos)
 		{
@@ -875,7 +878,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	{
 		va[0]=vertices[0];
 		va[1]=vertices[1];
-		va[2]=vertices[0]+vertices[2];
+		va[2]=vertices[0];va[2]+=vertices[2];
 		va[2].normalize();
 		if (outTexturePos)
 		{
@@ -916,9 +919,9 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	if (cDiscontinuity1 && cDiscontinuity2 && !cDiscontinuity3)
 	{
 		va[0]=vertices[0];
-		va[1]=vertices[0]+vertices[1];
+		va[1]=vertices[0];va[1]+=vertices[1];
 		va[1].normalize();
-		va[2]=vertices[1]+vertices[2];
+		va[2]=vertices[1];va[2]+=vertices[2];
 		va[2].normalize();
 		if (outTexturePos)
 		{
@@ -977,9 +980,9 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	if (cDiscontinuity1 && !cDiscontinuity2 && cDiscontinuity3)
 	{
 		va[0]=vertices[0];
-		va[1]=vertices[0]+vertices[1];
+		va[1]=vertices[0];va[1]+=vertices[1];
 		va[1].normalize();
-		va[2]=vertices[0]+vertices[2];
+		va[2]=vertices[0];va[2]+=vertices[2];
 		va[2].normalize();
 		if (outTexturePos)
 		{
@@ -1040,7 +1043,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	{
 		va[0]=vertices[0];
 		va[1]=vertices[1];
-		va[2]=vertices[1]+vertices[2];
+		va[2]=vertices[1];va[2]+=vertices[2];
 		va[2].normalize();
 		if (outTexturePos)
 		{
@@ -1060,7 +1063,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 		//va[0].normalize();
 		va[0]=va[2];
 		va[1]=vertices[2];
-		va[2]=vertices[0]+vertices[2];
+		va[2]=vertices[0];va[2]+=vertices[2];
 		va[2].normalize();
 		if (outTexturePos)
 		{
@@ -1099,11 +1102,11 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	}
 
 	// Last case: the 3 sides have to be split: cut in 4 triangles a' la HTM
-	va[0]=vertices[0]+vertices[1];
+	va[0]=vertices[0];va[0]+=vertices[1];
 	va[0].normalize();
-	va[1]=vertices[1]+vertices[2];
+	va[1]=vertices[1];va[1]+=vertices[2];
 	va[1].normalize();
-	va[2]=vertices[0]+vertices[2];
+	va[2]=vertices[0];va[2]+=vertices[2];
 	va[2].normalize();
 	if (outTexturePos)
 	{
@@ -1143,7 +1146,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	//va[0].normalize();
 	va[0]=va[1];
 	va[1]=vertices[1];
-	va[2]=vertices[1]+vertices[2];
+	va[2]=vertices[1];va[2]+=vertices[2];
 	va[2].normalize();
 	if (outTexturePos)
 	{
@@ -1159,7 +1162,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	}
 	projectSphericalTriangle(va, outVertices, ba, outEdgeFlags, ta, outTexturePos, nbI+1);
 
-	va[0]=vertices[0]+vertices[2];
+	va[0]=vertices[0];va[0]+=vertices[2];
 	va[0].normalize();
 	//va[1]=vertices[1]+vertices[2];
 	//va[1].normalize();
@@ -1182,9 +1185,9 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>
 	return;
 }
 
-static QVector<Vec3d> polygonVertexArray;
-static QVector<bool> polygonEdgeFlagArray;
-static QVector<Vec2f> polygonTextureCoordArray;
+static QVarLengthArray<Vec3d, 4096> polygonVertexArray;
+static QVarLengthArray<bool, 4096> polygonEdgeFlagArray;
+static QVarLengthArray<Vec2f, 4096> polygonTextureCoordArray;
 
 // Draw the given SphericalPolygon.
 void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, SphericalPolygonDrawMode drawMode, const Vec4f* boundaryColor) const

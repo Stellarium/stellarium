@@ -27,6 +27,7 @@
 #include "StelProjectorType.hpp"
 #include "StelProjector.hpp"
 #include <QString>
+#include <QVarLengthArray>
 
 class StelFont;
 
@@ -70,7 +71,12 @@ public:
 	}
 	//! Convenience function.
 	//! @sa drawVertex3v
-	void drawVertex3(double x, double y, double z) const {drawVertex3v(Vec3d(x, y, z));}
+	void drawVertex3(double x, double y, double z) const
+	{
+		Vec3d v(x,y,z);
+		prj->projectInPlace(v);
+		glVertex3dv(v);
+	}
 
 	//! Draw the string at the given position and angle with the given font.
 	//! If the gravity label flag is set, uses drawTextGravity180.
@@ -199,10 +205,10 @@ private:
 	//! @param vertices a pointer to an array of 3 vertices.
 	//! @param edgeFlags a pointer to an array of 3 flags indicating whether the next segment is an edge.
 	//! @param texturePos a pointer to an array of 3 texture coordinates, or NULL if the triangle should not be textured.
-	void projectSphericalTriangle(const Vec3d* vertices, QVector<Vec3d>* outVertices,
-								  	const bool* edgeFlags=NULL, QVector<bool>* outEdgeFlags=NULL,
-		  							const Vec2f* texturePos=NULL, QVector<Vec2f>* outTexturePos=NULL,int nbI=0,
-									bool checkDisc1=true, bool checkDisc2=true, bool checkDisc3=true) const;
+	void projectSphericalTriangle(const Vec3d* vertices, QVarLengthArray<Vec3d, 4096>* outVertices,
+			const bool* edgeFlags=NULL, QVarLengthArray<bool, 4096>* outEdgeFlags=NULL,
+			const Vec2f* texturePos=NULL, QVarLengthArray<Vec2f, 4096>* outTexturePos=NULL,int nbI=0,
+			bool checkDisc1=true, bool checkDisc2=true, bool checkDisc3=true) const;
 	
 	//! Switch to native OpenGL painting, i.e not using QPainter.
 	//! After this call revertToQtPainting() MUST be called.
