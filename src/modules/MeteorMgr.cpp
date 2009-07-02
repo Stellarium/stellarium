@@ -172,12 +172,12 @@ void MeteorMgr::draw(StelCore* core)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);  // much dimmer without this
-
+	glShadeModel(GL_SMOOTH);
+	
 	// step through and draw all active meteors
 	for (std::vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
 	{
 		(*iter)->draw(core, sPainter);
 	}
-
-	glEnable(GL_TEXTURE_2D);
+	glShadeModel(GL_FLAT);
 }
