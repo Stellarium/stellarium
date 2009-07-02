@@ -226,13 +226,13 @@ bool Meteor::draw(const StelCore* core, const StelPainter& sPainter)
 	int t2 = proj->projectCheck(epos/1216, end);
 
 	// don't draw if not visible (but may come into view)
-	if( t1 + t2 == 0 ) return 1;
+	if( t1 + t2 == 0 )
+		return true;
 
 	//  qDebug("[%f %f %f] (%d, %d) (%d, %d)\n", position[0], position[1], position[2], (int)start[0], (int)start[1], (int)end[0], (int)end[1]);
 
 	if( train ) {
 		// connect this point with last drawn point
-
 		double tmag = mag*distMultiplier;
 
 		// compute an intermediate point so can curve slightly along projection distortions
@@ -245,40 +245,29 @@ bool Meteor::draw(const StelCore* core, const StelPainter& sPainter)
 		proj->project(posi/1216, intpos);
 
 		// draw dark to light
-		glBegin(GL_LINE_STRIP);
-		glColor4f(0,0,0,0);
-		glVertex3f(end[0],end[1],0);
-		glColor4f(1,1,1,tmag/2);
-		glVertex3f(intpos[0],intpos[1],0);
-		glColor4f(1,1,1,tmag);
-		glVertex3f(start[0],start[1],0);
-		glEnd();
+		float colorArray[] = {0,0,0,0,1,1,1,0,1,1,1,0};
+		colorArray[7]=tmag*0.5;
+		colorArray[11]=tmag;
+		Vec2f vertexArray[3];
+		vertexArray[0].set(end[0], end[1]);
+		vertexArray[1].set(intpos[0], intpos[1]);
+		vertexArray[2].set(start[0], start[1]);
+		
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_COLOR_ARRAY);
+		glColorPointer(4, GL_FLOAT, 0, colorArray);
+		glVertexPointer(2, GL_FLOAT, 0, vertexArray);
+		glDrawArrays(GL_LINE_STRIP, 0, 3);
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_COLOR_ARRAY);
+		
 	} else {
 		glPointSize(1); 
 		sPainter.drawPoint2d(start[0],start[1]);
 	}
 
-	/*  
-	// TEMP - show radiant
-	Vec3d radiant = Vec3d(0,0,0.5f);
-	radiant.transfo4d(mmat);
-	if( projection->project_earth_equ(radiant, start) ) {
-    glColor3f(1,0,1);
-    glBegin(GL_LINES);
-    glVertex3f(start[0]-10,start[1],0);
-    glVertex3f(start[0]+10,start[1],0);
-    glEnd();
-
-    glBegin(GL_LINES);
-    glVertex3f(start[0],start[1]-10,0);
-    glVertex3f(start[0],start[1]+10,0);
-    glEnd();
-	}
-	*/
-
 	train = 1;
-
-	return(1);
+	return true;
 }
 
 bool Meteor::isAlive(void)
