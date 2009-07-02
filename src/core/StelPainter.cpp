@@ -38,6 +38,7 @@
 #include <QLinkedList>
 #include <QPainter>
 #include <QMutex>
+#include <QVarLengthArray>
 
 QMutex* StelPainter::globalMutex = new QMutex();
 bool StelPainter::flagGlPointSprite = false;
@@ -327,8 +328,7 @@ void StelPainter::sDisk(GLdouble radius, GLint slices, GLint stacks, int orientI
 	for (i = 0, r = 0.0; i < stacks; i++, r+=dr)
 	{
 		glBegin(GL_QUAD_STRIP);
-		for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;
-			 j++,cos_sin_theta_p+=2)
+		for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices; ++j,cos_sin_theta_p+=2)
 		{
 			double x = r*cos_sin_theta_p[0];
 			double y = r*cos_sin_theta_p[1];
@@ -366,9 +366,7 @@ void StelPainter::sRing(GLdouble rMin, GLdouble rMax, GLint slices, GLint stacks
 		const double tex_r0 = (r-rMin)/(rMax-rMin);
 		const double tex_r1 = (r+dr-rMin)/(rMax-rMin);
 		glBegin(GL_QUAD_STRIP /*GL_TRIANGLE_STRIP*/);
-		for (j=0,cos_sin_theta_p=cos_sin_theta;
-				j<=slices;
-				j++,cos_sin_theta_p+=2)
+		for (j=0,cos_sin_theta_p=cos_sin_theta; j<=slices; ++j,cos_sin_theta_p+=2)
 		{
 			x = r*cos_sin_theta_p[0];
 			y = r*cos_sin_theta_p[1];
@@ -568,7 +566,7 @@ void StelPainter::drawText(const StelFont* font, float x, float y, const QString
 /*************************************************************************
  Draw a gl array with 3D vertex position and optional 2D texture position.
 *************************************************************************/
-void StelPainter::drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const Vec2f* texCoords)
+void StelPainter::drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const Vec2f* texCoords) const
 {
 	// Project all the vertice
 	Vec3d win;
@@ -1377,15 +1375,16 @@ void StelPainter::drawCircle(double x,double y,double r) const
 	const double sp = sin(phi);
 	double dx = r;
 	double dy = 0;
-	glBegin(GL_LINE_LOOP);
+	static QVarLengthArray<Vec3d, 180> circleVertexArray(180);
+	
 	for (int i=0;i<=segments;i++)
 	{
-		glVertex2d(x+dx,y+dy);
+		circleVertexArray[i].set(x+dx,y+dy,0);
 		r = dx*cp-dy*sp;
 		dy = dx*sp+dy*cp;
 		dx = r;
 	}
-	glEnd();
+	drawArrays(GL_LINE_LOOP, 180, circleVertexArray.data());
 }
 
 
