@@ -725,10 +725,12 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 	const bool cd2=cDiscontinuity2;
 	const bool cd3=cDiscontinuity3;
 
-	Vec3d e0, e1, e2, win3;
-	bool valid = prj->project(vertices[0], e0);
-	valid = prj->project(vertices[1], e1) || valid;
-	valid = prj->project(vertices[2], e2) || valid;
+	Vec3d e0=vertices[0];
+	Vec3d e1=vertices[1];
+	Vec3d e2=vertices[2];
+	bool valid = prj->projectInPlace(e0);
+	valid = prj->projectInPlace(e1) || valid;
+	valid = prj->projectInPlace(e2) || valid;
 	// Clip polygons behind the viewer
 	if (!valid)
 		return;
@@ -737,25 +739,26 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 	if (checkDisc1 && cDiscontinuity1==false)
 	{
 		// If the distortion at segment e0,e1 is too big, flags it for subdivision
-		win3 = vertices[0]; win3+=vertices[1];
+		Vec3d win3 = vertices[0]; win3+=vertices[1];
 		prj->projectInPlace(win3);
-		win3 -= (e0+e1)*0.5;
+		win3[0]-=(e0[0]+e1[0])*0.5; win3[1]-=(e0[1]+e1[1])*0.5;
 		cDiscontinuity1 = (win3[0]*win3[0]+win3[1]*win3[1])>maxSqDistortion;
 	}
 	if (checkDisc2 && cDiscontinuity2==false)
 	{
 		// If the distortion at segment e1,e2 is too big, flags it for subdivision
-		win3 = vertices[1]; win3+=vertices[2];
+		Vec3d win3 = vertices[1]; win3+=vertices[2];
 		prj->projectInPlace(win3);
-		win3 -= (e2+e1)*0.5;
+		win3[0]-=(e2[0]+e1[0])*0.5; win3[1]-=(e2[1]+e1[1])*0.5;
 		cDiscontinuity2 = (win3[0]*win3[0]+win3[1]*win3[1])>maxSqDistortion;
 	}
 	if (checkDisc3 && cDiscontinuity3==false)
 	{
 		// If the distortion at segment e2,e0 is too big, flags it for subdivision
-		win3 = vertices[2]; win3+=vertices[0];
+		Vec3d win3 = vertices[2]; win3+=vertices[0];
 		prj->projectInPlace(win3);
-		win3 -= (e0+e2)*0.5;
+		win3[0] -= (e0[0]+e2[0])*0.5;
+		win3[1] -= (e0[1]+e2[1])*0.5;
 		cDiscontinuity3 = (win3[0]*win3[0]+win3[1]*win3[1])>maxSqDistortion;
 	}
 

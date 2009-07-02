@@ -138,6 +138,9 @@ struct SphericalCap : public SphericalRegion
 	//! @param an a unit vector indicating the direction.
 	SphericalCap(const Vec3d& an) : n(an), d(0) {;}
 
+	//! Construct a SphericalCap from its direction and assumes a 90 deg aperture.
+	SphericalCap(double x, double y, double z) : n(x,y,z), d(0) {;}
+	
 	//! Construct a SphericalCap from its direction and aperture.
 	//! @param an a unit vector indicating the direction.
 	//! @param ar cosinus of the aperture.
@@ -176,6 +179,16 @@ struct SphericalCap : public SphericalRegion
 		return d+h.d<=0. || a<=0. || (a<=1. && a*a < (1.-d*d)*(1.-h.d*h.d));
 	}
 
+	//! Returns whether a HalfSpace (like a SphericalCap with d=0) intersects with this SphericalCap.
+	//! @param hn0 the x direction of the halfspace.
+	//! @param hn1 the y direction of the halfspace.
+	//! @param hn2 the z direction of the halfspace.
+	inline bool intersectsHalfSpace(double hn0, double hn1, double hn2) const
+	{
+		const double a = n[0]*hn0+n[1]*hn1+n[2]*hn2;
+		return d<=0. || a<=0. || (a<=1. && a*a < (1.-d*d));
+	}
+	
 	//! Returns whether a AllSkySphericalRegion is contained into the region.
 	virtual bool contains(const AllSkySphericalRegion& poly) const {return d<=-1;}
 
@@ -211,10 +224,9 @@ inline bool sideHalfSpaceContains(const Vec3d& v1, const Vec3d& v2, const Vec3d&
 }
 
 //! Return whether the halfspace defined by the vectors v1 and v2 intersects the SphericalCap h.
-//! Can be optimized.
 inline bool sideHalfSpaceIntersects(const Vec3d& v1, const Vec3d& v2, const SphericalCap& h)
 {
-	return  h.intersects(SphericalCap(Vec3d(v2[1]*v1[2]-v2[2]*v1[1], v2[2]*v1[0]-v2[0]*v1[2], v2[0]*v1[1]-v2[1]*v1[0])));
+	return  h.intersectsHalfSpace(v2[1]*v1[2]-v2[2]*v1[1], v2[2]*v1[0]-v2[0]*v1[2], v2[0]*v1[1]-v2[1]*v1[0]);
 }
 
 //! @class AllSkySphericalRegion
