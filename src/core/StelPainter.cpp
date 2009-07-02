@@ -1389,10 +1389,6 @@ void StelPainter::drawCircle(double x,double y,double r) const
 }
 
 
-
-/*************************************************************************
- Same function but gives the already projected 2d position in input
-*************************************************************************/
 void StelPainter::drawSprite2dMode(double x, double y, float radius) const
 {
 	// Use GL_POINT_SPRITE_ARB extension if available
@@ -1416,6 +1412,18 @@ void StelPainter::drawSprite2dMode(double x, double y, float radius) const
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
+
+void StelPainter::drawRect2d(float x, float y, float width, float height) const
+{
+	static float vertexData[] = {0.,0.,-10.,-10.,0.,   1.,0.,10.,-10.,0.,  0.,1.,10.,10.,0,   1.,1.,-10.,10.,0.};
+	vertexData[2]=x; vertexData[3]=y;
+	vertexData[7]=x+width; vertexData[8]=y;
+	vertexData[12]=x; vertexData[13]=y+height;
+	vertexData[17]=x+width; vertexData[18]=y+height;
+	glInterleavedArrays(GL_T2F_V3F ,0, vertexData);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+}
+
 /*************************************************************************
  Same function but with a rotation angle
 *************************************************************************/
@@ -1435,7 +1443,7 @@ void StelPainter::drawSprite2dMode(double x, double y, float radius, float rotat
 
 	glPopMatrix();
 }
-
+		
 /*************************************************************************
  Draw a GL_POINT at the given position
 *************************************************************************/

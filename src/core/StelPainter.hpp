@@ -143,6 +143,14 @@ public:
 	//! @param y2 y position of point 2 in the viewport in pixels.
 	void drawLine2d(double x1, double y1, double x2, double y2) const;
 	
+	//! Draw a rectangle using the current texture at the given projected 2d position.
+	//! This method is not thread safe.
+	//! @param x x position of the top left corner in the viewport in pixel.
+	//! @param y y position of the tope left corner in the viewport in pixel.
+	//! @param width width in pixel.
+	//! @param height height in pixel.
+	void drawRect2d(float x, float y, float width, float height) const;
+			
 	//! Draw a gl array with 3D vertex position and optional 2D texture position.
 	//! @param mode as defined in glDrawArray.
 	//! @param count number of vertice to draw.
