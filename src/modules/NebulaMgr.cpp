@@ -125,8 +125,6 @@ void NebulaMgr::draw(StelCore* core)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
 
-	Vec3f pXYZ;
-
 	// Use a 1 degree margin
 	const double margin = 1.*M_PI/180.*prj->getPixelPerRadAtCenter();
 	const SphericalRegionP& p = prj->getViewportConvexPolygon(margin, margin);
@@ -167,10 +165,9 @@ void NebulaMgr::drawPointer(const StelCore* core, const StelPainter& sPainter)
 	{
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(nav);
-		Vec3d screenpos;
 
 		// Compute 2D pos and return if outside screen
-		if (!prj->project(pos, screenpos)) return;
+		if (!prj->projectInPlace(pos)) return;
 		glColor3f(0.4f,0.5f,0.8f);
 		texPointer->bind();
 
@@ -182,10 +179,10 @@ void NebulaMgr::drawPointer(const StelCore* core, const StelPainter& sPainter)
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 
 		size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
-		sPainter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 10, 90);
-		sPainter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 10, 0);
-		sPainter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 10, -90);
-		sPainter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 10, -180);
+		sPainter.drawSprite2dMode(pos[0]-size/2, pos[1]-size/2, 10, 90);
+		sPainter.drawSprite2dMode(pos[0]-size/2, pos[1]+size/2, 10, 0);
+		sPainter.drawSprite2dMode(pos[0]+size/2, pos[1]+size/2, 10, -90);
+		sPainter.drawSprite2dMode(pos[0]+size/2, pos[1]-size/2, 10, -180);
 	}
 }
 
