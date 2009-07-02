@@ -97,7 +97,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore)
 	maxPointSources = 1000;
 	verticesGrid = new Vec2f[maxPointSources*4];
 	colorGrid = new Vec3f[maxPointSources*4];
-	textureGrid = new Vec2f[maxPointSources*4];
+	textureGrid = new Vector2<GLshort>[maxPointSources*4];
 	for (unsigned int i=0;i<maxPointSources; ++i)
 	{
 		textureGrid[i*4].set(0,0);
@@ -334,8 +334,8 @@ void StelSkyDrawer::postDrawPointSource()
 	glColorPointer(3, GL_FLOAT, 0, colorGrid);
 	// Load the vertex array
 	glVertexPointer(2, GL_FLOAT, 0, verticesGrid);
-	// Load the vertex array
-	glTexCoordPointer(2, GL_FLOAT, 0, textureGrid);
+	// Load the texture coordinates array
+	glTexCoordPointer(2, GL_SHORT, 0, textureGrid);
 	
 	// And draw everything at once
 	glDrawArrays(GL_QUADS, 0, nbPointSources*4);

@@ -23,6 +23,9 @@
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 #include "VecMath.hpp"
+#include "GLee.h"
+
+#include "fixx11h.h"
 
 #include <QObject>
 
@@ -264,7 +267,7 @@ private:
 	//! Buffer for storing the color array data
 	Vec3f* colorGrid;
 	//! Buffer for storing the texture coordinate array data
-	Vec2f* textureGrid;
+	Vector2<GLshort>* textureGrid;
 	//! Current number of sources stored in the buffers (still to display)
 	unsigned int nbPointSources;
 	//! Maximum number of sources which can be stored in the buffers
