@@ -603,7 +603,7 @@ inline void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, V
 		return;
 	}
 
-	Vec3d newVertex(p1+p2);
+	Vec3d newVertex(p1); newVertex+=p2;
 	newVertex.normalize();
 	newVertex*=radius;
 	Vec3d win3(newVertex[0]+center[0], newVertex[1]+center[1], newVertex[2]+center[2]);
