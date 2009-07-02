@@ -265,13 +265,13 @@ void SkyGrid::draw(const StelCore* core) const
 	
 	// Compute the first grid starting point. This point is close to the center of the screen
 	// and lays at the intersection of a meridien and a parallel
-	lon2 = gridStepMeridianRad*((int)(lon2/gridStepMeridianRad));
-	lat2 = gridStepParallelRad*((int)(lat2/gridStepParallelRad));
+	lon2 = gridStepMeridianRad*((int)(lon2/gridStepMeridianRad+0.5));
+	lat2 = gridStepParallelRad*((int)(lat2/gridStepParallelRad+0.5));
 	Vec3d firstPoint;
 	StelUtils::spheToRect(lon2, lat2, firstPoint);
 	firstPoint.normalize();
 
-	Q_ASSERT(viewPortSphericalCap.contains(firstPoint));
+ 	// Q_ASSERT(viewPortSphericalCap.contains(firstPoint));
 	
 	// Initialize a painter and set openGL state	
 	StelPainter sPainter(prj);
