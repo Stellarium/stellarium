@@ -122,11 +122,11 @@ void StelTreeGrid::split(StelTreeGridNode& node)
 	const Vec3d& c2 = p.getConvexContour().at(2);
 
 	Q_ASSERT((c1^c0)*c2 >= 0.0);
-	Vec3d e0 = c1+c2;
+	Vec3d e0(c1[0]+c2[0], c1[1]+c2[1], c1[2]+c2[2]);
 	e0.normalize();
-	Vec3d e1 = c2+c0;
+	Vec3d e1(c2[0]+c0[0], c2[1]+c0[1], c2[2]+c0[2]);
 	e1.normalize();
-	Vec3d e2 = c0+c1;
+	Vec3d e2(c0[0]+c1[0], c0[1]+c1[1], c0[2]+c1[2]);
 	e2.normalize();
 
 	node.children.push_back(SphericalConvexPolygon(e1,c0,e2));
