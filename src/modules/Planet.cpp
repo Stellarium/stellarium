@@ -22,6 +22,7 @@
 #include <QTextStream>
 #include <QString>
 #include <QDebug>
+#include <QVarLengthArray>
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -768,43 +769,40 @@ void Planet::drawEarthShadow(StelCore* core)
 	// shadow radial texture
 	texEarthShadow->bind();
 
-	Vec3d r, s;
+	Vec3d r;
 
-	// umbra first
-	glBegin(GL_TRIANGLE_FAN);
-	  // johannes: work-around for nasty ATI rendering bug:
-	  // use y-texture coordinate of 0.5 instead of 0.0
-	glTexCoord2f(0.f,0.5f);
-	sPainter.drawVertex3v(shadow);
+	// Draw umbra first
+	QVarLengthArray<Vec2f, 210> texCoordArray(210);
+	QVarLengthArray<Vec3d, 210> vertexArray(210);
+	texCoordArray[0].set(0.f, 0.5);
+	// johannes: work-around for nasty ATI rendering bug: use y-texture coordinate of 0.5 instead of 0.0
+	vertexArray[0]=shadow;
 
-	for (int i=0; i<=100; i++)
+	const Mat4d rotMat = Mat4d::rotation(shadow, 2.*M_PI/100.);
+	r = upt;
+	for (int i=1; i<=101; ++i)
 	{
-		r = Mat4d::rotation(shadow, 2.*M_PI*i/100.) * upt;
-		s = shadow + r;
-
-		glTexCoord2f(0.6f,0.5f);  // position in texture of umbra edge
-		sPainter.drawVertex3v(s);
+		// position in texture of umbra edge
+		texCoordArray[i].set(0.6, 0.5);
+		r.transfo4d(rotMat);
+		vertexArray[i] = shadow + r;
 	}
-	glEnd();
-
+	sPainter.drawArrays(GL_TRIANGLE_FAN, 102, vertexArray.data(), texCoordArray.constData());
 
 	// now penumbra
-	Vec3d u, sp;
-	glBegin(GL_TRIANGLE_STRIP);
-	for (int i=0; i<=100; i++)
+	Vec3d u;
+	r = rpt;
+	u = upt;
+	for (int i=0; i<=200; i+=2)
 	{
-		r = Mat4d::rotation(shadow, 2.*M_PI*i/100.) * rpt;
-		u = Mat4d::rotation(shadow, 2.*M_PI*i/100.) * upt;
-		s = shadow + r;
-		sp = shadow + u;
-
-		glTexCoord2f(0.6f,0.5f);
-		sPainter.drawVertex3v(sp);
-
-		glTexCoord2f(1.f,0.5f);  // position in texture of umbra edge
-		sPainter.drawVertex3v(s);
+		r.transfo4d(rotMat);
+		u.transfo4d(rotMat);
+		texCoordArray[i].set(0.6, 0.5);
+		texCoordArray[i+1].set(1., 0.5); // position in texture of umbra edge
+		vertexArray[i] = shadow + u;
+		vertexArray[i+1] = shadow + r;
 	}
-	glEnd();
+	sPainter.drawArrays(GL_TRIANGLE_STRIP, 202, vertexArray.data(), texCoordArray.constData());
 
 	glDisable(GL_STENCIL_TEST);
 	glClearStencil(0x0);
