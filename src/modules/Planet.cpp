@@ -912,6 +912,7 @@ void Planet::drawOrbit(const StelCore* core)
 		{
 			glInterleavedArrays(GL_V2F, 0, vertexArray.constData());
 			glDrawArrays(GL_LINE_STRIP, 0, vertexArray.size()/2);
+			vertexArray.clear();
 		}
 	}
 	orbit[ORBIT_SEGMENTS/2]=savePos;
