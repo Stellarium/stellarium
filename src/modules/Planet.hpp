@@ -228,7 +228,7 @@ public:
 	LinearFader orbitFader;
 	// draw orbital path of Planet
 	void drawOrbit(const StelCore*);
-	Vec3d orbit[ORBIT_SEGMENTS];   // store heliocentric coordinates for drawing the orbit
+	Vec3d orbit[ORBIT_SEGMENTS+1];   // store heliocentric coordinates for drawing the orbit
 	double lastOrbitJD;
 	double deltaJD;
 	double deltaOrbitJD;

@@ -893,56 +893,33 @@ void Planet::drawOrbit(const StelCore* core)
 	glEnable(GL_BLEND);
 
 	glColor4f(orbitColor[0], orbitColor[1], orbitColor[2], orbitFader.getInterstate());
-
-	int on=0;
-	int d;
 	Vec3d onscreen;
-	for( int n=0; n<=ORBIT_SEGMENTS; n++)
+	// special case - use current Planet position as center vertex so that draws
+	// on it's orbit all the time (since segmented rather than smooth curve)
+	Vec3d savePos = orbit[ORBIT_SEGMENTS/2];
+	orbit[ORBIT_SEGMENTS/2]=getHeliocentricEclipticPos();
+	orbit[ORBIT_SEGMENTS]=orbit[0];
+	int nbIter = closeOrbit ? ORBIT_SEGMENTS : ORBIT_SEGMENTS-1;
+	QVarLengthArray<float, 1024> vertexArray;
+	for (int n=0; n<=nbIter; ++n)
 	{
-		if( n==ORBIT_SEGMENTS )
+		if (prj->project(orbit[n],onscreen))
 		{
-			d = 0;  // connect loop
-			if (!closeOrbit) break;
+			vertexArray.append(onscreen[0]);
+			vertexArray.append(onscreen[1]);
 		}
-		else
+		else if (!vertexArray.isEmpty())
 		{
-			d = n;
-		}
-
-		// special case - use current Planet position as center vertex so that draws
-		// on it's orbit all the time (since segmented rather than smooth curve)
-		if( n == ORBIT_SEGMENTS/2 )
-		{
-			if(prj->project(getHeliocentricEclipticPos(), onscreen))
-			{
-				if(!on) glBegin(GL_LINE_STRIP);
-				glVertex3d(onscreen[0], onscreen[1], 0);
-				on=1;
-			}
-			else if( on )
-			{
-				glEnd();
-				on=0;
-			}
-		}
-		else
-		{
-			if(prj->project(orbit[d],onscreen))
-			{
-				if(!on) glBegin(GL_LINE_STRIP);
-				glVertex3d(onscreen[0], onscreen[1], 0);
-				on=1;
-			}
-			else if( on )
-			{
-				glEnd();
-				on=0;
-			}
+			glInterleavedArrays(GL_V2F, 0, vertexArray.constData());
+			glDrawArrays(GL_LINE_STRIP, 0, vertexArray.size()/2);
 		}
 	}
-
-	if (on)
-		glEnd();
+	orbit[ORBIT_SEGMENTS/2]=savePos;
+	if (!vertexArray.isEmpty())
+	{
+		glInterleavedArrays(GL_V2F, 0, vertexArray.constData());
+		glDrawArrays(GL_LINE_STRIP, 0, vertexArray.size()/2);
+	}
 }
 
 
