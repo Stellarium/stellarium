@@ -109,7 +109,7 @@ SphericalConvexPolygon SphericalCap::toSphericalConvexPolygon() const
 	QVector<Vec3d> contour;
 	Vec3d p(n);
 	p.transfo4d(Mat4d::xrotation(std::acos(d)));
-	Mat4d rot = Mat4d::rotation(n, -2.*M_PI/nbStep);
+	const Mat4d& rot = Mat4d::rotation(n, -2.*M_PI/nbStep);
 	for (int i=0;i<nbStep;++i)
 	{
 		contour.append(p);

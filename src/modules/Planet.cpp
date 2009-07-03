@@ -778,7 +778,7 @@ void Planet::drawEarthShadow(StelCore* core)
 	// johannes: work-around for nasty ATI rendering bug: use y-texture coordinate of 0.5 instead of 0.0
 	vertexArray[0]=shadow;
 
-	const Mat4d rotMat = Mat4d::rotation(shadow, 2.*M_PI/100.);
+	const Mat4d& rotMat = Mat4d::rotation(shadow, 2.*M_PI/100.);
 	r = upt;
 	for (int i=1; i<=101; ++i)
 	{
