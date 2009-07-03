@@ -878,69 +878,20 @@ template<class T> Matrix4<T> Matrix4<T>::translation(const Vector3<T>& a)
 						a.v[0], a.v[1], a.v[2], 1);
 }
 
-template<class T> Matrix4<T> Matrix4<T>::rotation(const Vector3<T>& a,
-                                                  T angle)
+
+template<class T> Matrix4<T> Matrix4<T>::rotation(const Vector3<T>& axis, T angle)
 {
-	Vec3d axis(a);
-	axis.normalize();
-//    T c = (T) cos(angle);
-//    T s = (T) sin(angle);
-//    T t = 1 - c;
-//
-//    return Matrix4<T>(Vector4<T>(t * axis.v[0] * axis.v[0] + c,
-//                                 t * axis.v[0] * axis.v[1] - s * axis.v[2],
-//                                 t * axis.v[0] * axis.v[2] + s * axis.v[1],
-//                                 0),
-//                      Vector4<T>(t * axis.v[0] * axis.v[1] + s * axis.v[2],
-//                                 t * axis.v[1] * axis.v[1] + c,
-//                                 t * axis.v[1] * axis.v[2] - s * axis.v[0],
-//                                 0),
-//                      Vector4<T>(t * axis.v[0] * axis.v[2] - s * axis.v[1],
-//                                 t * axis.v[1] * axis.v[2] + s * axis.v[0],
-//                                 t * axis.v[2] * axis.v[2] + c,
-//                                 0),
-//                      Vector4<T>(0, 0, 0, 1));
-                      
-	T sin_a = std::sin( angle / 2 );
-	T cos_a = std::cos( angle / 2 );
-	T X    = axis[0] * sin_a;
-	T Y    = axis[1] * sin_a;
-	T Z    = axis[2] * sin_a;
-	T W    = cos_a;
-	
-	T xx      = X * X;
-	T xy      = X * Y;
-	T xz      = X * Z;
-	T xw      = X * W;
-	
-	T yy      = Y * Y;
-	T yz      = Y * Z;
-	T yw      = Y * W;
-	
-	T zz      = Z * Z;
-	T zw      = Z * W;
-
-	return Matrix4<T>(
-	1. - 2. * ( yy + zz ), 2. * ( xy + zw ),      2. * ( xz - yw ),      0.,
-	2. * ( xy - zw ),      1. - 2. * ( xx + zz ), 2. * ( yz + xw ),      0., 
-	2. * ( xz + yw ),      2. * ( yz - xw ),      1. - 2. * ( xx + yy ), 0., 
-	0.,                    0.,                    0.,                    1.);
-}
-
-
-
-/*
-template<class T> Matrix4<T> Matrix4<T>::rotation(const Vector3<T>& a)
-{
-    T c = (T) cos(angle);
-    T s = (T) sin(angle);
-	T d = 1-c;
-	 return Matrix4<T>(	a.v[0]*a.v[0]*d+c, a.v[1]*a.v[0]*d+a.v[2]*s, a.v[0]*a.v[2]*d-a.v[1]*s, 0,
-						a.v[0]*a.v[1]*d-a.v[2]*s, a.v[1]*a.v[1]*d+c, a.v[1]*a.v[2]*d+a.v[0]*s, 0,
-						a.v[0]*a.v[2]*d+a.v[1]*s, a.v[1]*a.v[2]*d-a.v[0]*s, a.v[2]*a.v[2]*d+c, 0,
+ 	Vec3d a(axis);
+ 	a.normalize();
+    const T c = (T) cos(angle);
+    const T s = (T) sin(angle);
+	const T d = 1-c;
+	return Matrix4<T>(	a[0]*a[0]*d+c     , a[1]*a[0]*d+a[2]*s, a[0]*a[2]*d-a[1]*s, 0,
+						a[0]*a[1]*d-a[2]*s, a[1]*a[1]*d+c     , a[1]*a[2]*d+a[0]*s, 0,
+						a[0]*a[2]*d+a[1]*s, a[1]*a[2]*d-a[0]*s, a[2]*a[2]*d+c     , 0,
 						0,0,0,1	);
 }
-*/
+
 template<class T> Matrix4<T> Matrix4<T>::xrotation(T angle)
 {
     T c = (T) cos(angle);
