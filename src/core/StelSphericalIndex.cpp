@@ -133,7 +133,7 @@ void StelSphericalIndex::insert(StelRegionObjectP regObj)
 {
 	NodeElem el(regObj);
 	int i;
-	for (i=1;i<MAX_INDEX_LEVEL&&cosRadius[i]<el.cap.d;++i);
+	for (i=1;i<MAX_INDEX_LEVEL&&cosRadius[i]<el.cap.d;++i) {;}
 	RootNode* node = treeForRadius[i-1];
 	if (node==NULL)
 		treeForRadius[i-1]=new RootNode(cosRadius[i-1], maxObjectsPerNode, i-1);
