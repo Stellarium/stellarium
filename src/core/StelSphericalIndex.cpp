@@ -36,16 +36,78 @@ struct Node
 	virtual void split()
 	{
 		// Default implementation for HTM triangle more than level 0
-		
+		Q_ASSERT(children.empty());
+		Q_ASSERT(triangle.getConvexContour().size() == 3);
+
+		const Vec3d& c0 = triangle.getConvexContour().at(0);
+		const Vec3d& c1 = triangle.getConvexContour().at(1);
+		const Vec3d& c2 = triangle.getConvexContour().at(2);
+
+		Q_ASSERT((c1^c0)*c2 >= 0.0);
+		Vec3d e0(c1[0]+c2[0], c1[1]+c2[1], c1[2]+c2[2]);
+		e0.normalize();
+		Vec3d e1(c2[0]+c0[0], c2[1]+c0[1], c2[2]+c0[2]);
+		e1.normalize();
+		Vec3d e2(c0[0]+c1[0], c0[1]+c1[1], c0[2]+c1[2]);
+		e2.normalize();
+
+		children.resize(4);
+		children[0].triangle = SphericalConvexPolygon(e1,c0,e2);
+		Q_ASSERT(children[0].triangle.checkValid());
+		children[1].triangle = SphericalConvexPolygon(e0,e2,c1);
+		Q_ASSERT(children[1].triangle.checkValid());
+		children[2].triangle = SphericalConvexPolygon(c2,e1,e0);
+		Q_ASSERT(children[2].triangle.checkValid());
+		children[3].triangle = SphericalConvexPolygon(e2,e0,e1);
+		Q_ASSERT(children[3].triangle.checkValid());
 	}
 };
 
 class RootNode : public Node
 {
 	public:
-		RootNode(double amargin, int amaxObjectsPerNode, int amaxLevel) : maxObjectsPerNode(), maxLevel(amaxLevel), margin(amargin) {;}
+		RootNode(double amargin, int amaxObjectsPerNode, int amaxLevel) : maxObjectsPerNode(), maxLevel(amaxLevel), margin(amargin)
+		{
+			static const Vec3d vertice[6] =
+			{
+				Vec3d(0,0,1), Vec3d(1,0,0), Vec3d(0,1,0), Vec3d(-1,0,0), Vec3d(0,-1,0), Vec3d(0,0,-1)
+			};
+
+			static const int verticeIndice[8][3] =
+			{
+				{0,2,1}, {0,1,4}, {0,4,3}, {0,3,2}, {5,1,2}, {5,4,1}, {5,3,4}, {5,2,3}
+			};
+			
+			// Create the 8 base triangles
+			Node node;
+			for (int i=0;i<8;++i)
+			{
+				node.triangle = SphericalConvexPolygon(vertice[verticeIndice[i][0]], vertice[verticeIndice[i][1]], vertice[verticeIndice[i][2]]);
+				Q_ASSERT(node.triangle.checkValid());
+				children.append(node);
+			}
+		}
 		
-		//! Insert the given object in the StelSphericalIndex.
+		//! Insert the given element in the StelSphericalIndex.
+		void insert(const NodeElem& el, int level)
+		{
+			insert(*this, el, level);
+		}
+		
+		//! Process all the objects intersecting the given region using the passed function object.
+		template<class FuncObject> void processIntersectingRegions(const SphericalRegionP& region, FuncObject func)
+		{
+			processIntersectingRegions(*this, region, func);
+		}
+		
+		//! Process all the objects intersecting the given region using the passed function object.
+		template<class FuncObject> void processAll(FuncObject func)
+		{
+			processAll(*this, func);
+		}
+				
+	private:
+		//! Insert the given element in the given node.
 		void insert(Node& node, const NodeElem& el, int level)
 		{
 			if (node.children.isEmpty())
@@ -77,7 +139,7 @@ class RootNode : public Node
 		}
 
 		//! Process all the objects intersecting the given region using the passed function object.
-		template<class FuncObject> void processIntersectingRegions(const Node& node, const SphericalRegionP region, FuncObject func)
+		template<class FuncObject> void processIntersectingRegions(const Node& node, const SphericalRegionP& region, FuncObject func)
 		{
 			foreach (const NodeElem& el, node.elements)
 			{
@@ -102,7 +164,6 @@ class RootNode : public Node
 				processAll(child, func);
 		}
 		
-	private:
 		//! The maximum number of objects per node.
 		int maxObjectsPerNode;
 		//! The maximum level of the grid. Prevents grid split into too small triangles if unecessary.
@@ -136,17 +197,20 @@ void StelSphericalIndex::insert(StelRegionObjectP regObj)
 	for (i=1;i<MAX_INDEX_LEVEL&&cosRadius[i]<el.cap.d;++i) {;}
 	RootNode* node = treeForRadius[i-1];
 	if (node==NULL)
-		treeForRadius[i-1]=new RootNode(cosRadius[i-1], maxObjectsPerNode, i-1);
-	node->insert(*node, el, 0);
+	{
+		node=new RootNode(cosRadius[i-1], maxObjectsPerNode, i-1);
+		treeForRadius[i-1]=node;
+	}
+	node->insert(el, 0);
 }
 
-template<class FuncObject> void StelSphericalIndex::processIntersectingRegions(const SphericalRegionP region, FuncObject func)
+template<class FuncObject> void StelSphericalIndex::processIntersectingRegions(const SphericalRegionP& region, FuncObject func)
 {
 	for (int i=1;i<MAX_INDEX_LEVEL;++i)
 	{
 		const RootNode* node = treeForRadius[i-1];
 		if (node!=NULL)
-			node->processIntersectingRegions(*node, region, func);
+			node->processIntersectingRegions(region, func);
 	}
 }
 
@@ -157,7 +221,7 @@ template<class FuncObject> void StelSphericalIndex::processAll(FuncObject func)
 	{
 		const RootNode* node = treeForRadius[i-1];
 		if (node!=NULL)
-			node->processAll(*node, func);
+			node->processAll(func);
 	}
 }
 

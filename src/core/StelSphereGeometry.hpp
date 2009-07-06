@@ -240,7 +240,9 @@ inline bool sideHalfSpaceContains(const Vec3d& v1, const Vec3d& v2, const Spheri
 //! Return whether the halfspace defined by the vectors v1 and v2 intersects the SphericalCap h.
 inline bool sideHalfSpaceIntersects(const Vec3d& v1, const Vec3d& v2, const SphericalCap& h)
 {
-	return  h.intersectsHalfSpace(v2[1]*v1[2]-v2[2]*v1[1], v2[2]*v1[0]-v2[0]*v1[2], v2[0]*v1[1]-v2[1]*v1[0]);
+	Vec3d n(v2[1]*v1[2]-v2[2]*v1[1], v2[2]*v1[0]-v2[0]*v1[2], v2[0]*v1[1]-v2[1]*v1[0]);
+	n.normalize();
+	return  h.intersectsHalfSpace(n[0], n[1], n[2]);
 }
 
 //! @class AllSkySphericalRegion
