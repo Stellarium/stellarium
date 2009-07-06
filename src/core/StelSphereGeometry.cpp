@@ -493,6 +493,16 @@ bool SphericalConvexPolygon::contains(const Vec3d& p) const
 	return sideHalfSpaceContains(contour.first(), contour.last(), p);
 }
 
+bool SphericalConvexPolygon::contains(const SphericalCap& c) const
+{
+	for (int i=0;i<contour.size()-1;++i)
+	{
+		if (!sideHalfSpaceContains(contour.at(i+1), contour.at(i), c))
+			return false;
+	}
+	return sideHalfSpaceContains(contour.first(), contour.last(), c);
+}
+	
 // Returns whether a SphericalPolygon is contained into the region.
 bool SphericalConvexPolygon::contains(const SphericalPolygonBase& polyBase) const
 {
