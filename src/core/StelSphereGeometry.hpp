@@ -191,7 +191,7 @@ struct SphericalCap : public SphericalRegion
 	inline bool intersectsHalfSpace(double hn0, double hn1, double hn2) const
 	{
 		const double a = n[0]*hn0+n[1]*hn1+n[2]*hn2;
-		return d<=0. || a<=0. || (a<=1. && a*a < (1.-d*d));
+		return d<=0. || a<=0. || (a<=1. && a*a <= (1.-d*d));
 	}
 	
 	//! Returns whether a AllSkySphericalRegion is contained into the region.
@@ -226,6 +226,15 @@ inline bool sideHalfSpaceContains(const Vec3d& v1, const Vec3d& v2, const Vec3d&
 	return (v1[1] * v2[2] - v1[2] * v2[1])*p[0] +
 			(v1[2] * v2[0] - v1[0] * v2[2])*p[1] +
 			(v1[0] * v2[1] - v1[1] * v2[0])*p[2]>=-1e-17;
+}
+
+//! Return whether the halfspace defined by the vectors v1 and v2 intersects the SphericalCap h.
+inline bool sideHalfSpaceContains(const Vec3d& v1, const Vec3d& v2, const SphericalCap& h)
+{
+	Vec3d n(v2[1]*v1[2]-v2[2]*v1[1], v2[2]*v1[0]-v2[0]*v1[2], v2[0]*v1[1]-v2[1]*v1[0]);
+	n.normalize();
+	const double a = n*h.n;
+	return 0<=h.d && ( a>=1. || (a>=0. && a*a >= 1.-h.d*h.d));
 }
 
 //! Return whether the halfspace defined by the vectors v1 and v2 intersects the SphericalCap h.
@@ -332,7 +341,7 @@ public:
 
 	//! Returns whether a SphericalCap is contained into the region.
 	virtual bool contains(const SphericalCap& c) const {Q_ASSERT(0); return false;}
-
+	
 	//! Returns whether a SphericalCap intersects with the region.
 	virtual bool intersects(const SphericalCap& c) const {return c.intersects(*this);}
 	
@@ -398,7 +407,7 @@ public:
 	//! Set a single contour defining the SphericalPolygon.
 	//! @param contours a contour defining the polygon area.
 	virtual void setContour(const QVector<Vec3d>& contour);
-
+	
 protected:
 	friend void vertexCallback(void* vertexData, void* userData);
 	friend void vertexTextureCallback(void* vertexData, void* userData);
@@ -508,6 +517,9 @@ public:
 	//! Returns whether a point is contained into the region.
 	virtual bool contains(const Vec3d& p) const;
 
+	//! Returns whether a SphericalCap is contained into the region.
+	virtual bool contains(const SphericalCap& c) const;
+	
 	//! Returns whether a SphericalPolygon is contained into the region.
 	virtual bool contains(const SphericalPolygonBase& poly) const;
 
