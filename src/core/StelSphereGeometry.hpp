@@ -169,14 +169,19 @@ struct SphericalCap : public SphericalRegion
 	virtual bool contains(const SphericalPolygonBase& poly) const;
 
 	//! Returns whether a SphericalCap is contained into the region.
-	virtual bool contains(const SphericalCap& h) const {Q_ASSERT(0); return false;}
+	virtual bool contains(const SphericalCap& h) const
+	{
+		const double a = n*h.n-d*h.d;
+		return d<=h.d && ( a>=1. || (a>=0. && a*a >= (1.-d*d)*(1.-h.d*h.d)));
+	}
 
 	//! Returns whether an SphericalCap intersects with this one.
 	//! I managed to make it without sqrt or acos, so it is very fast!
+	//! @see http://f4bien.blogspot.com/2009/05/spherical-geometry-optimisations.html for detailed explanations.
 	virtual bool intersects(const SphericalCap& h) const
 	{
 		const double a = d*h.d - n*h.n;
-		return d+h.d<=0. || a<=0. || (a<=1. && a*a < (1.-d*d)*(1.-h.d*h.d));
+		return d+h.d<=0. || a<=0. || (a<=1. && a*a <= (1.-d*d)*(1.-h.d*h.d));
 	}
 
 	//! Returns whether a HalfSpace (like a SphericalCap with d=0) intersects with this SphericalCap.
