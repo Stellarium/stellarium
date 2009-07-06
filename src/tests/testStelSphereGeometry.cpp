@@ -86,6 +86,15 @@ void TestStelSphericalGeometry::testSphericalCap()
 	QVERIFY(!h1.intersects(h3));
 	QVERIFY(h2.intersects(h3));
 	QVERIFY(h0.intersects(h5));
+	
+	QVERIFY(h0.contains(h1));
+	QVERIFY(!h1.contains(h0));
+	QVERIFY(h2.contains(h0));
+	QVERIFY(!h0.contains(h2));
+	QVERIFY(h2.contains(h1));
+	QVERIFY(!h1.contains(h2));
+	QVERIFY(!h0.contains(h3));
+	QVERIFY(!h1.contains(h3));
 }
 
 void TestStelSphericalGeometry::benchmarkSphericalCap()
