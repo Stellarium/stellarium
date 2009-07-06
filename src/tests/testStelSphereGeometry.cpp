@@ -67,17 +67,21 @@ void TestStelSphericalGeometry::testSphericalCap()
 	Vec3d p1(-1,0,0);
 	Vec3d p2(1,1,1);
 	p2.normalize();
-
+	Vec3d p3(0,1,0);
+	
 	SphericalCap h0(p0, 0);
 	SphericalCap h1(p0, 0.8);
 	SphericalCap h2(p0, -0.5);
 	SphericalCap h3(p1, 0.5);
 	SphericalCap h4(p2, 0.8);
 	SphericalCap h5(p2, 1.);
+	SphericalCap h6(p1, 0);
 
 	QVERIFY2(h0.contains(p0), "SphericalCap contains point failure");
 	QVERIFY2(h1.contains(p0), "SphericalCap contains point failure");
-
+	QVERIFY2(h0.contains(p3), "SphericalCap contains point on the edge failure");
+	QVERIFY2(h6.contains(p3), "SphericalCap contains point on the edge failure");
+	
 	QVERIFY(h0.intersects(h1));
 	QVERIFY(h0.intersects(h2));
 	QVERIFY(h1.intersects(h2));
@@ -87,14 +91,38 @@ void TestStelSphericalGeometry::testSphericalCap()
 	QVERIFY(h2.intersects(h3));
 	QVERIFY(h0.intersects(h5));
 	
+	QVERIFY(h0.intersects(h0));
+	QVERIFY(h1.intersects(h1));
+	QVERIFY(h2.intersects(h2));
+	QVERIFY(h3.intersects(h3));
+	QVERIFY(h4.intersects(h4));
+	QVERIFY(h5.intersects(h5));
+	QVERIFY(h6.intersects(h0));
+	QVERIFY(h0.intersects(h6));
+	
 	QVERIFY(h0.contains(h1));
 	QVERIFY(!h1.contains(h0));
 	QVERIFY(h2.contains(h0));
 	QVERIFY(!h0.contains(h2));
+	QVERIFY(!h6.contains(h0));
+	QVERIFY(!h0.contains(h6));
 	QVERIFY(h2.contains(h1));
 	QVERIFY(!h1.contains(h2));
 	QVERIFY(!h0.contains(h3));
 	QVERIFY(!h1.contains(h3));
+	QVERIFY(h0.contains(h5));
+	QVERIFY(h2.contains(h5));
+	QVERIFY(!h5.contains(h0));
+	QVERIFY(!h5.contains(h1));
+	QVERIFY(!h5.contains(h2));
+	QVERIFY(!h5.contains(h3));
+	QVERIFY(!h5.contains(h4));
+	QVERIFY(h0.contains(h0));
+	QVERIFY(h1.contains(h1));
+	QVERIFY(h2.contains(h2));
+	QVERIFY(h3.contains(h3));
+	QVERIFY(h4.contains(h4));
+	QVERIFY(h5.contains(h5));
 }
 
 void TestStelSphericalGeometry::benchmarkSphericalCap()
