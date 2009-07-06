@@ -1,9 +1,17 @@
-0.10.3/0.11.0 [release date to be decided]
+0.10.3 [release date to be decided]
 Bundling of plugins: Satellites, Ocular, AngleMeasure, CompassMarks.
 New script engine improvements including variable script running speed.
 Made tabs in GUI smaller by moving titles under the icons.
+Allowed to compile and link plugins statically.
 Added plugins window.
 Added Sky Layers window.
+Got rid of the boost library dependency.
+The whole sky display viewport is now contained in a class deriving from QGraphicsWidget, allowing to move and resize it as a normal widget.
+Generalized the use of shared pointers for StelObject management.
+Use vertex shaders for computation of atmosphere color if the graphics card allows it.
+Optimized openGL calls by replacing glBegin()/glEnd() by the use of vertexArray.
+Optimization of critical parts of the projection code.
+Added code for managing and displaying non convex polygons.
 
 0.10.2 [2009-03-09]
 Based on Qt 4.5.

@@ -38,7 +38,7 @@ public:
 	void insert(StelRegionObjectP obj);
 
 	//! Process all the objects intersecting the given region using the passed function object.
-	template<class FuncObject> void processIntersectingRegions(const SphericalRegionP region, FuncObject func);
+	template<class FuncObject> void processIntersectingRegions(const SphericalRegionP& region, FuncObject func);
 
 	//! Process all the objects intersecting the given region using the passed function object.
 	template<class FuncObject> void processAll(FuncObject func);
