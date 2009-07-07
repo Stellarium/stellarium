@@ -41,26 +41,10 @@ void TestStelSphericalIndex::initTestCase()
 {
 }
 
-struct StartsWith
-{
-	StartsWith(const QString &string)
-	: m_string(string) { }
-
-	typedef bool result_type;
-
-	bool operator()(const QString &testString)
-	{
-		return testString.startsWith(m_string);
-	}
-
-	QString m_string;
-};
-
-
 struct CountFuncObject
 {
 	CountFuncObject() : count(0) {;}
-	void operator()(const StelRegionObjectP& obj)
+	void operator()(const StelRegionObject* obj)
 	{
 		count++;
 	}
