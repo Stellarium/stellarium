@@ -17,37 +17,44 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _STELSPHERICALINDEX_HPP_
-#define _STELSPHERICALINDEX_HPP_
+#ifndef _STELSPHERICALINDEXMULTIRES_HPP_
+#define _STELSPHERICALINDEXMULTIRES_HPP_
+
+#define MAX_INDEX_LEVEL 8
 
 #include "StelRegionObject.hpp"
 
-//! @class StelSphericalIndex
+//! @class StelSphericalIndexMultiRes
 //! Container allowing to store and query SphericalRegion.
-class StelSphericalIndex
+class StelSphericalIndexMultiRes : public StelSphericalIndex
 {
 public:
-	StelSphericalIndex(int maxObjectsPerNode = 100, int maxLevel=7);
-	virtual ~StelSphericalIndex();
+	StelSphericalIndexMultiRes(int maxObjectsPerNode = 100);
+	virtual ~StelSphericalIndexMultiRes();
 
-	//! Insert the given object in the StelSphericalIndex.
+	//! Insert the given object in the StelSphericalIndexMultiRes.
 	void insert(StelRegionObjectP obj);
 
 	//! Process all the objects intersecting the given region using the passed function object.
 	template<class FuncObject> void processIntersectingRegions(const SphericalRegionP& region, FuncObject& func) const
 	{
-		rootNode->processIntersectingRegions(region, func);
+		for (int i=1;i<MAX_INDEX_LEVEL;++i)
+		{
+			const RootNode* node = treeForRadius[i-1];
+			if (node!=NULL)
+				node->processIntersectingRegions(region, func);
+		}
 	}
 
 	//! Process all the objects intersecting the given region using the passed function object.
 	template<class FuncObject> void processAll(FuncObject& func) const
 	{
-		rootNode->processAll(func);
-	}
-	
-	void clear()
-	{
-		rootNode->clear();
+		for (int i=1;i<MAX_INDEX_LEVEL;++i)
+		{
+			const RootNode* node = treeForRadius[i-1];
+			if (node!=NULL)
+				node->processAll(func);
+		}
 	}
 
 private:
@@ -98,13 +105,6 @@ private:
 			children[3].triangle = SphericalConvexPolygon(e2,e0,e1);
 			Q_ASSERT(children[3].triangle.checkValid());
 		}
-		
-		//! Suppress everything
-		void clear()
-		{
-			elements.clear();
-			children.clear();
-		}
 	};
 
 	//! @class RootNode
@@ -112,7 +112,7 @@ private:
 	class RootNode : public Node
 	{
 		public:
-			RootNode(int amaxObjectsPerNode, int amaxLevel) : maxObjectsPerNode(amaxObjectsPerNode), maxLevel(amaxLevel)
+			RootNode(double amargin, int amaxObjectsPerNode, int amaxLevel) : maxObjectsPerNode(), maxLevel(amaxLevel), margin(amargin)
 			{
 			}
 		
@@ -139,7 +139,7 @@ private:
 				}
 			}
 		
-			//! Insert the given element in the StelSphericalIndex.
+			//! Insert the given element in the StelSphericalIndexMultiRes.
 			void insert(const NodeElem& el, int level)
 			{
 				insert(*this, el, level);
@@ -148,7 +148,7 @@ private:
 			//! Process all the objects intersecting the given region using the passed function object.
 			template<class FuncObject> void processIntersectingRegions(const SphericalRegionP& region, FuncObject& func) const
 			{
-				processIntersectingRegions(*this, region, func);
+				processIntersectingRegions(*this, region->getEnlarged(margin), func);
 			}
 		
 			//! Process all the objects intersecting the given region using the passed function object.
@@ -169,26 +169,25 @@ private:
 					{
 						node.split();
 						const QVector<NodeElem> nodeElems = node.elements;
-						node.elements.clear();
 						for (QVector<NodeElem>::ConstIterator iter = nodeElems.begin();iter != nodeElems.end(); ++iter)
 						{
-							insert(node, *iter, level);
+							insert(node, *iter, level+1);
+						}
+						node.elements.clear();
+					}
+				}
+				else
+				{
+					// If we have children, store it in a sub-level
+					for (QVector<Node>::iterator iter = node.children.begin(); iter!=node.children.end(); ++iter)
+					{
+						if (iter->triangle.contains(el.cap.n))
+						{
+							insert(*iter, el, level+1);
+							return;
 						}
 					}
-					return;
 				}
-				
-				// If we have children and one of them contains the element, store it in a sub-level
-				for (QVector<Node>::iterator iter = node.children.begin(); iter!=node.children.end(); ++iter)
-				{
-					if (iter->triangle.contains(el.cap.n))
-					{
-						insert(*iter, el, level+1);
-						return;
-					}
-				}
-				// Else store it here
-				node.elements.append(el);
 			}
 
 			//! Process all the objects intersecting the given region using the passed function object.
@@ -197,7 +196,7 @@ private:
 				foreach (const NodeElem& el, node.elements)
 				{
 					if (region->intersects(el.obj->getRegion()))
-						func(el.obj.data());
+						func(el.obj);
 				}
 				foreach (const Node& child, node.children)
 				{
@@ -212,7 +211,7 @@ private:
 			template<class FuncObject> void processAll(const Node& node, FuncObject& func) const
 			{
 				foreach (const NodeElem& el, node.elements)
-					func(el.obj.data());
+					func(el.obj);
 				foreach (const Node& child, node.children)
 					processAll(child, func);
 			}
@@ -221,14 +220,19 @@ private:
 			int maxObjectsPerNode;
 			//! The maximum level of the grid. Prevents grid split into too small triangles if unecessary.
 			int maxLevel;
+			//! The margin in radian to add to the query region.
+			double margin;
 	};
 	
 	//! The maximum allowed number of object per node.
 	int maxObjectsPerNode;
 	
-	RootNode* rootNode;
+	//! One tree per object radius. Each query is propagated to each tree with the proper additional margin.
+	RootNode* treeForRadius[MAX_INDEX_LEVEL];
+	
+	double cosRadius[MAX_INDEX_LEVEL];
 };
 
-#endif // _STELSPHERICALINDEX_HPP_
+#endif // _STELSPHERICALINDEXMULTIRES_HPP_
 
 

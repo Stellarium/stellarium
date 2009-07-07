@@ -17,23 +17,39 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "StelSphericalIndex.hpp"
+#include "StelSphericalIndexMultiRes.hpp"
 #include <QVector>
 
-StelSphericalIndex::StelSphericalIndex(int maxObjPerNode, int maxLevel) : maxObjectsPerNode(maxObjPerNode)
+StelSphericalIndexMultiRes::StelSphericalIndexMultiRes(int maxObjPerNode) : maxObjectsPerNode(maxObjPerNode)
 {
-	rootNode = new RootNode(maxObjectsPerNode, maxLevel);
+	for (int i=0;i<MAX_INDEX_LEVEL;++i)
+	{
+		cosRadius[i]=std::cos(M_PI/180.*180./(2^i));
+		treeForRadius[i]=NULL;
+	}
 }
 
-StelSphericalIndex::~StelSphericalIndex()
+StelSphericalIndexMultiRes::~StelSphericalIndexMultiRes()
 {
-	delete rootNode;
+	for (int i=0;i<MAX_INDEX_LEVEL;++i)
+	{
+		if (treeForRadius[i]!=NULL)
+			delete treeForRadius[i];
+	}
 }
 
-void StelSphericalIndex::insert(StelRegionObjectP regObj)
+void StelSphericalIndexMultiRes::insert(StelRegionObjectP regObj)
 {
 	NodeElem el(regObj);
-	rootNode->insert(el, 0);
+	int i;
+	for (i=1;i<MAX_INDEX_LEVEL&&cosRadius[i]<el.cap.d;++i) {;}
+	RootNode* node = treeForRadius[i-1];
+	if (node==NULL)
+	{
+		node=new RootNode(cosRadius[i-1], maxObjectsPerNode, i-1);
+		treeForRadius[i-1]=node;
+	}
+	node->insert(el, 0);
 }
 
 
