@@ -84,37 +84,45 @@ bool SphericalCap::contains(const SphericalPolygonBase& polyBase) const
 	return false;
 }
 
+bool SphericalCap::intersectsConvexContour(const Vec3d* vertice, int nbVertice) const
+{
+	for (int i=0;i<nbVertice;++i)
+	{
+		if (contains(vertice[i]))
+			return true;
+	}
+	// No points of the polygon are inside the halfspace
+	if (d<=0)
+		return false;
+
+	for (int i=0;i<nbVertice-1;++i)
+	{
+		if (!sideHalfSpaceIntersects(vertice[i], vertice[i+1], *this))
+			return false;
+	}
+	if (!sideHalfSpaceIntersects(vertice[nbVertice-1], vertice[0], *this))
+		return false;
+
+	// Warning!!!! There is a last case which is not managed!
+	// When all the points of the polygon are outside the circle but the halfspace of the corner the closest to the
+	// circle intersects the circle halfspace..
+	return true;
+}
+
 // Returns whether a SphericalPolygon intersects the region.
 bool SphericalCap::intersects(const SphericalPolygonBase& polyBase) const
 {
 	// TODO This algo returns sometimes false positives!!
 	const SphericalConvexPolygon* cvx = dynamic_cast<const SphericalConvexPolygon*>(&polyBase);
 	if (cvx!=NULL)
+		return intersectsConvexContour(cvx->getConvexContour().constData(), cvx->getConvexContour().size());
+	// Go through the full list of triangle
+	const QVector<Vec3d>& vArray = polyBase.getVertexArray();
+	for (int i=0;i<vArray.size()/3;++i)
 	{
-		foreach (const Vec3d& v, cvx->getConvexContour())
-		{
-			if (contains(v))
-				return true;
-		}
-		// No points of the polygon are inside the halfspace
-		if (d<=0)
-			return false;
-
-		const QVector<Vec3d>& contour = cvx->getConvexContour();
-		for (int i=0;i<contour.size()-1;++i)
-		{
-			if (!sideHalfSpaceIntersects(contour.at(i), contour.at(i+1), *this))
-				return false;
-		}
-		if (!sideHalfSpaceIntersects(contour.last(), contour.first(), *this))
-			return false;
-
-		// Warning!!!! There is a last case which is not managed!
-		// When all the points of the polygon are outside the circle but the halfspace of the corner the closest to the
-		// circle intersects the circle halfspace..
-		return true;
+		if (intersectsConvexContour(vArray.constData()+i*3, 3))
+			return true;
 	}
-	Q_ASSERT(0); // Not implemented
 	return false;
 }
 
@@ -204,20 +212,6 @@ QVector<QVector<Vec3d> > SphericalPolygonBase::getContours() const
 	gluTessEndPolygon(tess);
 	gluDeleteTess(tess);
 	return tmpContours;
-}
-
-// Returns whether a point is contained into the SphericalPolygon.
-bool SphericalPolygonBase::contains(const Vec3d& p) const
-{
-	const QVector<Vec3d>& trianglesArray = getVertexArray();
-	for (int i=0;i<trianglesArray.size()/3;++i)
-	{
-		if (sideHalfSpaceContains(trianglesArray.at(i*3+1), trianglesArray.at(i*3), p) &&
-				  sideHalfSpaceContains(trianglesArray.at(i*3+2), trianglesArray.at(i*3+1), p) &&
-				  sideHalfSpaceContains(trianglesArray.at(i*3+0), trianglesArray.at(i*3+2), p))
-			return true;
-	}
-	return false;
 }
 
 // Returns whether another SphericalPolygon intersects with the SphericalPolygon.
@@ -449,7 +443,19 @@ void SphericalTexturedPolygon::setContour(const QVector<TextureVertex>& contour)
 	setContours(contours, SphericalPolygonBase::WindingPositive);
 }
 
-
+// Returns whether a point is contained into the SphericalPolygon.
+bool SphericalPolygon::contains(const Vec3d& p) const
+{
+	const QVector<Vec3d>& trianglesArray = getVertexArray();
+	for (int i=0;i<trianglesArray.size()/3;++i)
+	{
+		if (sideHalfSpaceContains(trianglesArray.at(i*3+1), trianglesArray.at(i*3), p) &&
+				  sideHalfSpaceContains(trianglesArray.at(i*3+2), trianglesArray.at(i*3+1), p) &&
+				  sideHalfSpaceContains(trianglesArray.at(i*3+0), trianglesArray.at(i*3+2), p))
+			return true;
+	}
+	return false;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalConvexPolygon
@@ -493,8 +499,8 @@ QVector<SphericalCap> SphericalConvexPolygon::getBoundingSphericalCaps() const
 {
 	QVector<SphericalCap> res;
 	for (int i=0;i<contour.size()-1;++i)
-		res << SphericalCap(contour.at(i+1)^contour.at(i));
-	res << SphericalCap(contour.first()^contour.last());
+		res << SphericalCap(contour.at(i+1)^contour.at(i), 0);
+	res << SphericalCap(contour.first()^contour.last(), 0);
 	return res;
 }
 
@@ -518,23 +524,59 @@ bool SphericalConvexPolygon::contains(const SphericalCap& c) const
 	}
 	return sideHalfSpaceContains(contour.first(), contour.last(), c);
 }
-	
+
+bool SphericalConvexPolygon::containsConvexContour(const Vec3d* vertice, int nbVertex) const
+{
+	for (int i=0;i<nbVertex;++i)
+	{
+		if (!contains(vertice[i]))
+			return false;
+	}
+	return true;
+}
+		
 // Returns whether a SphericalPolygon is contained into the region.
 bool SphericalConvexPolygon::contains(const SphericalPolygonBase& polyBase) const
 {
 	const SphericalConvexPolygon* cvx = dynamic_cast<const SphericalConvexPolygon*>(&polyBase);
 	if (cvx!=NULL)
 	{
-		foreach (const Vec3d& v, cvx->getConvexContour())
-		{
-			if (!contains(v))
-				return false;
-		}
-		return true;
+		return containsConvexContour(cvx->getConvexContour().constData(), cvx->getConvexContour().size());
 	}
-	// TODO, optimize!
-	SphericalPolygon p(contour);
-	return p.contains(polyBase);
+	// For standard polygons, go through the full list of triangles
+	const QVector<Vec3d>& vArray = polyBase.getVertexArray();
+	for (int i=0;i<vArray.size()/3;++i)
+	{
+		if (!containsConvexContour(vArray.constData()+i*3, 3))
+			return false;
+	}
+	return true;
+}
+
+bool SphericalConvexPolygon::areAllPointsOutsideOneSide(const Vec3d* thisContour, int nbThisContour, const Vec3d* points, int nbPoints)
+{
+	for (int i=0;i<nbThisContour-1;++i)
+	{
+		bool allOutside = true;
+		for (int j=0;j<nbPoints&& allOutside==true;++j)
+		{
+			allOutside = allOutside && !sideHalfSpaceContains(thisContour[i+1], thisContour[i], points[j]);
+		}
+		if (allOutside)
+			return true;
+	}
+
+		// Last iteration
+	bool allOutside = true;
+	for (int j=0;j<nbPoints&& allOutside==true;++j)
+	{
+		allOutside = allOutside && !sideHalfSpaceContains(thisContour[0], thisContour[nbThisContour-1], points[j]);
+	}
+	if (allOutside)
+		return true;
+
+		// Else
+	return false;
 }
 
 // Returns whether another SphericalPolygon intersects with the SphericalPolygon.
@@ -545,9 +587,14 @@ bool SphericalConvexPolygon::intersects(const SphericalPolygonBase& polyBase) co
 	{
 		return !areAllPointsOutsideOneSide(cvx->contour) && !cvx->areAllPointsOutsideOneSide(contour);
 	}
-	// TODO, optimize!
-	SphericalPolygon p(contour);
-	return p.intersects(polyBase);
+	// For standard polygons, go through the full list of triangles
+	const QVector<Vec3d>& vArray = polyBase.getVertexArray();
+	for (int i=0;i<vArray.size()/3;++i)
+	{
+		if (!areAllPointsOutsideOneSide(contour.constData(), contour.size(), vArray.constData()+i*3, 3) && !cvx->areAllPointsOutsideOneSide(vArray.constData()+i*3, 3, contour.constData(), contour.size()))
+			return true;
+	}
+	return false;
 }
 
 /*
