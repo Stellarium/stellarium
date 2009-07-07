@@ -164,12 +164,13 @@ private:
 				if (node.children.isEmpty())
 				{
 					node.elements.append(el);
-					// If we have too many objects in the node, we split it
-					if (level>=maxLevel && node.elements.size() >= maxObjectsPerNode)
+					// If we have too many objects in the node, we split it.
+					if (level<maxLevel && node.elements.size() > maxObjectsPerNode)
 					{
 						node.split();
 						const QVector<NodeElem> nodeElems = node.elements;
 						node.elements.clear();
+						// Re-insert the elements
 						for (QVector<NodeElem>::ConstIterator iter = nodeElems.begin();iter != nodeElems.end(); ++iter)
 						{
 							insert(node, *iter, level);
@@ -181,7 +182,7 @@ private:
 				// If we have children and one of them contains the element, store it in a sub-level
 				for (QVector<Node>::iterator iter = node.children.begin(); iter!=node.children.end(); ++iter)
 				{
-					if (iter->triangle.contains(el.cap.n))
+					if (((SphericalRegion*)&(iter->triangle))->contains(el.obj->getRegion()))
 					{
 						insert(*iter, el, level+1);
 						return;
@@ -201,9 +202,9 @@ private:
 				}
 				foreach (const Node& child, node.children)
 				{
-					if (region->contains(node.triangle))
+					if (region->contains(child.triangle))
 						processAll(child, func);
-					else if (region->intersects(node.triangle))
+					else if (region->intersects(child.triangle))
 						processIntersectingRegions(child, region, func);
 				}
 			}
