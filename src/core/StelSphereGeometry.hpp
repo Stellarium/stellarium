@@ -144,7 +144,7 @@ struct SphericalCap : public SphericalRegion
 
 	//! Construct a SphericalCap from its direction and assumes a 90 deg aperture.
 	//! @param an a unit vector indicating the direction.
-	SphericalCap(const Vec3d& an) : n(an), d(0) {;}
+	//SphericalCap(const Vec3d& an) : n(an), d(0) {;}
 
 	//! Construct a SphericalCap from its direction and assumes a 90 deg aperture.
 	SphericalCap(double x, double y, double z) : n(x,y,z), d(0) {;}
@@ -224,6 +224,9 @@ struct SphericalCap : public SphericalRegion
 	Vec3d n;
 	//! The cos of cone radius
 	double d;
+	
+private:
+	bool intersectsConvexContour(const Vec3d* vertice, int nbVertice) const;
 };
 
 //! Return whether the halfspace defined by the vectors v1^v2 and with aperture 90 deg contains the point p.
@@ -236,7 +239,7 @@ inline bool sideHalfSpaceContains(const Vec3d& v1, const Vec3d& v2, const Vec3d&
 			(v1[0] * v2[1] - v1[1] * v2[0])*p[2]>=-1e-17;
 }
 
-//! Return whether the halfspace defined by the vectors v1 and v2 intersects the SphericalCap h.
+//! Return whether the halfspace defined by the vectors v1 and v2 contains the SphericalCap h.
 inline bool sideHalfSpaceContains(const Vec3d& v1, const Vec3d& v2, const SphericalCap& h)
 {
 	Vec3d n(v2[1]*v1[2]-v2[2]*v1[1], v2[2]*v1[0]-v2[0]*v1[2], v2[0]*v1[1]-v2[1]*v1[0]);
@@ -337,20 +340,8 @@ public:
 	//! Return true if the polygon is an empty polygon.
 	virtual bool isEmpty() const {return getVertexArray().isEmpty();}
 
-	//! Returns whether a point is contained into the SphericalPolygon.
-	virtual bool contains(const Vec3d& p) const;
-
-	//! Returns whether another SphericalPolygon intersects with the SphericalPolygon.
-	bool intersects(const Vec3d& p) const {return contains(p);}
-
 	//! Returns whether another SphericalPolygon intersects with the SphericalPolygon.
 	virtual bool intersects(const SphericalPolygonBase& poly) const;
-
-	//! Returns whether a SphericalPolygon is contained into the region.
-	virtual bool contains(const SphericalPolygonBase& poly) const {Q_ASSERT(0); return false;}
-
-	//! Returns whether a SphericalCap is contained into the region.
-	virtual bool contains(const SphericalCap& c) const {Q_ASSERT(0); return false;}
 	
 	//! Returns whether a SphericalCap intersects with the region.
 	virtual bool intersects(const SphericalCap& c) const {return c.intersects(*this);}
@@ -417,6 +408,15 @@ public:
 	//! Set a single contour defining the SphericalPolygon.
 	//! @param contours a contour defining the polygon area.
 	virtual void setContour(const QVector<Vec3d>& contour);
+	
+	//! Returns whether a point is contained into the SphericalPolygon.
+	virtual bool contains(const Vec3d& p) const;
+	
+	//! Returns whether a SphericalPolygon is contained into the region.
+	virtual bool contains(const SphericalPolygonBase& poly) const {Q_ASSERT(0); return false;}
+
+	//! Returns whether a SphericalCap is contained into the region.
+	virtual bool contains(const SphericalCap& c) const {Q_ASSERT(0); return false;}
 	
 protected:
 	friend void vertexCallback(void* vertexData, void* userData);
@@ -551,32 +551,15 @@ protected:
 	//! A list of vertices of the convex contour.
 	QVector<Vec3d> contour;
 
+	static bool areAllPointsOutsideOneSide(const Vec3d* thisContour, int nbThisContour, const Vec3d* points, int nbPoints);
+	
 	//! Tell whether the passed points are all outside of at least one SphericalCap defining the polygon boundary.
 	bool areAllPointsOutsideOneSide(const QVector<Vec3d>& points) const
 	{
-		for (int i=0;i<contour.size()-1;++i)
-		{
-			bool allOutside = true;
-			for (QVector<Vec3d>::const_iterator v=points.begin();v!=points.end()&& allOutside==true;++v)
-			{
-				allOutside = allOutside && !sideHalfSpaceContains(contour.at(i+1), contour.at(i), *v);
-			}
-			if (allOutside)
-				return true;
-		}
-
-		// Last iteration
-		bool allOutside = true;
-		for (QVector<Vec3d>::const_iterator v=points.begin();v!=points.end()&& allOutside==true;++v)
-		{
-			allOutside = allOutside && !sideHalfSpaceContains(contour.first(), contour.last(), *v);
-		}
-		if (allOutside)
-			return true;
-
-		// Else
-		return false;
+		return areAllPointsOutsideOneSide(contour.constData(), contour.size(), points.constData(), points.size());
 	}
+	
+	bool containsConvexContour(const Vec3d* vertice, int nbVertex) const;
 };
 
 //! @class SphericalTexturedConvexPolygon

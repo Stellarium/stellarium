@@ -115,7 +115,7 @@ void Constellation::drawOptim(const StelPainter& sPainter, const StelNavigator* 
 		star2=asterism[2*i+1]->getJ2000EquatorialPos(nav);
 		v = star1^star2;
 		v.normalize();
-		if (viewportHalfspace.d<0. || planeIntersect2(viewportHalfspace, SphericalCap(v), dummy, dummy)!=false)
+		if (viewportHalfspace.d<0. || planeIntersect2(viewportHalfspace, SphericalCap(v, 0), dummy, dummy)!=false)
 		{
 			star1.normalize();
 			star2.normalize();
