@@ -39,6 +39,8 @@ bool SphericalRegion::contains(const SphericalRegionP& region) const
 		return contains(*static_cast<const SphericalPolygonBase*>(region.data()));
 	if (dynamic_cast<const AllSkySphericalRegion*>(region.data()))
 		return contains(*static_cast<const AllSkySphericalRegion*>(region.data()));
+	Q_ASSERT(0);
+	return false;
 }
 	
 bool SphericalRegion::intersects(const SphericalRegionP& region) const
@@ -48,9 +50,23 @@ bool SphericalRegion::intersects(const SphericalRegionP& region) const
 	if (dynamic_cast<const SphericalPolygonBase*>(region.data()))
 		return intersects(*static_cast<const SphericalPolygonBase*>(region.data()));
 	if (dynamic_cast<const AllSkySphericalRegion*>(region.data()))
-		return intersects(*static_cast<const AllSkySphericalRegion*>(region.data()));	
+		return intersects(*static_cast<const AllSkySphericalRegion*>(region.data()));
+	Q_ASSERT(0);
+	return false;	
 }
-	
+
+SphericalRegionP SphericalRegion::getEnlarged(double margin) const
+{
+	Q_ASSERT(margin>=0);
+	if (margin>=M_PI)
+		return SphericalRegionP(new AllSkySphericalRegion());
+	const SphericalCap& cap = getBoundingCap();
+	double newRadius = std::acos(cap.d)+margin;
+	if (newRadius>=M_PI)
+		return SphericalRegionP(new AllSkySphericalRegion());
+	return SphericalRegionP(new SphericalCap(cap.n, std::cos(newRadius)));
+}
+
 // Returns whether a SphericalPolygon is contained into the region.
 bool SphericalCap::contains(const SphericalPolygonBase& polyBase) const
 {
