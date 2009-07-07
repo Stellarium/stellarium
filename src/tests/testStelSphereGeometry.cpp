@@ -234,6 +234,16 @@ void TestStelSphericalGeometry::testPlaneIntersect2()
 	QVERIFY2(res.length()<0.0000001, QString("p2 wrong: %1").arg(p2.toString()).toUtf8());
 }
 
+void TestStelSphericalGeometry::testEnlarge()
+{
+	Vec3d vx(1,0,0);
+	SphericalRegionP reg(new SphericalCap(vx, 0.9));
+	for (double margin=0.00000001;margin<15.;margin+=0.1)
+	{
+		QVERIFY(reg->getEnlarged(margin)->contains(reg));
+	}
+}
+
 void TestStelSphericalGeometry::testSphericalPolygon()
 {
 	// Testing code for new polygon code
