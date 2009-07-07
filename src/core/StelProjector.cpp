@@ -105,7 +105,7 @@ SphericalRegionP StelProjector::getViewportConvexPolygon(double marginX, double 
 		delete res;
 	}
 	//return SphericalRegionP((SphericalRegion*)(new AllSkySphericalRegion()));
-	const SphericalCap hp = getBoundingSphericalCap();
+	const SphericalCap& hp = getBoundingSphericalCap();
 	return SphericalRegionP(new SphericalCap(hp));
 }
 
