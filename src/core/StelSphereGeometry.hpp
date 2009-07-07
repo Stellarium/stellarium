@@ -63,10 +63,10 @@ public:
 	bool intersects(const Vec3d& p) const {return contains(p);}
 	
 	//! Returns whether a SphericalRegion is contained into this region.
-	inline bool contains(const SphericalRegionP& region) const;
+	bool contains(const SphericalRegionP& region) const;
 	
 	//! Returns whether a SphericalRegion intersects with this region.
-	inline bool intersects(const SphericalRegionP& region) const;
+	bool intersects(const SphericalRegionP& region) const;
 	
 	//! Returns whether a SphericalPolygon is contained into the region.
 	virtual bool contains(const SphericalPolygonBase& poly) const = 0;
@@ -92,6 +92,14 @@ public:
 	//! Return a bounding SphericalCap. This method is heavily used and therefore needs to be very fast.
 	//! The returned SphericalCap doesn't have to be the smallest one, but smaller is better.
 	virtual SphericalCap getBoundingCap() const = 0;
+	
+	//! Return an enlarged version of this SphericalRegion so that any point distant of more 
+	//! than the given margin now lays within the region.
+	//! The returned region can be larger than the smallest enlarging region, therefore returning
+	//! false positive on subsequent intersection tests.
+	//! The default implementation always return an enlarged bounding SphericalCap.
+	//! @param margin the minimum enlargement margin in radian.
+	virtual SphericalRegionP getEnlarged(double margin) const;
 	
 	//! Create a SphericalRegion from the given input JSON stream.
 	//! The type of the region is automatically recognized from the input format.
@@ -271,10 +279,10 @@ public:
 	virtual bool contains(const SphericalPolygonBase& poly) const {return true;}
 
 	//! Returns whether a SphericalCap is contained into the region.
-	virtual bool contains(const SphericalCap& c) const {return c.contains(*this);;}
+	virtual bool contains(const SphericalCap& c) const {return true;}
 
 	//! Returns whether a SphericalCap intersects with the region.
-	virtual bool intersects(const SphericalCap& c) const {return c.intersects(*this);}
+	virtual bool intersects(const SphericalCap& c) const {return true;}
 	
 	//! Returns whether a AllSkySphericalRegion is contained into the region.
 	virtual bool contains(const AllSkySphericalRegion& poly) const {return true;}

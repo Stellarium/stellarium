@@ -41,9 +41,39 @@ void TestStelSphericalIndex::initTestCase()
 {
 }
 
+struct StartsWith
+{
+	StartsWith(const QString &string)
+	: m_string(string) { }
+
+	typedef bool result_type;
+
+	bool operator()(const QString &testString)
+	{
+		return testString.startsWith(m_string);
+	}
+
+	QString m_string;
+};
+
+
+struct CountFuncObject
+{
+	CountFuncObject() : count(0) {;}
+	void operator()(const StelRegionObjectP& obj)
+	{
+		count++;
+	}
+	int count;
+};
+
 void TestStelSphericalIndex::testBase()
 {
 	StelSphericalIndex grid(10);
-	grid.insert(StelRegionObjectP(new TestRegionObject(SphericalRegionP(new SphericalCap(Vec3d(1,0,0), 0.5)))));
+	grid.insert(StelRegionObjectP(new TestRegionObject(SphericalRegionP(new SphericalCap(Vec3d(1,0,0), 0.9)))));
+	CountFuncObject countFunc;
+ 	grid.processIntersectingRegions(SphericalRegionP(new SphericalCap(Vec3d(1,0,0), 0.5)), countFunc);
+	grid.processIntersectingRegions(SphericalRegionP(new SphericalCap(Vec3d(1,0,0), 0.95)), countFunc);
+	QVERIFY(countFunc.count==2);
 }
 

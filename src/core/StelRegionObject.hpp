@@ -22,7 +22,8 @@
 #include <QSharedPointer>
 #include "StelSphereGeometry.hpp"
 
-//! Simple abstract class defining basic methods implemented by all objects defining a spatial region.
+//! Simple abstract class defining basic methods implemented by all objects that need
+//! to be stored in a StelSphericalIndex.
 class StelRegionObject
 {
 	public:
