@@ -31,23 +31,10 @@
 #include "StelStyle.hpp"
 #include "StelPainter.hpp"
 
-#include <algorithm>
 #include <QSettings>
 #include <QString>
 #include <QStringList>
 #include <QDebug>
-
-#ifdef WIN32
-#include <winsock2.h> // select
-#else
-#include <sys/select.h> // select
-#include <sys/time.h>
-#include <signal.h>
-#endif
-
-#ifdef WIN32
-bool wsaOk;
-#endif
 
 void TelescopeMgr::deleteAllTelescopes()
 {
@@ -59,30 +46,11 @@ void TelescopeMgr::deleteAllTelescopes()
 TelescopeMgr::TelescopeMgr() : telescope_font(NULL)
 {
 	setObjectName("TelescopeMgr");
-#ifdef WIN32
-	WSADATA wsaData;
-	if (WSAStartup(0x202,&wsaData) == 0)
-	{
-		wsaOk = true;
-	}
-	else
-	{
-		qWarning() << "WARNING TelescopeMgr::TelescopeMgr: WSAStartup failed, " << "you will not be able to control telescopes";
-		wsaOk = false;
-	}
-#else
-	// SIGPIPE is normal operation when we send while the other side
-	// has already closed the socket. We must ignore it:
-	signal(SIGPIPE,SIG_IGN);
-#endif
 }
 
 TelescopeMgr::~TelescopeMgr(void)
 {
-#ifdef WIN32
-	if (wsaOk)
-		WSACleanup();
-#endif
+
 }
 
 /*************************************************************************
@@ -246,9 +214,7 @@ void TelescopeMgr::init()
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setMinFilter(GL_LINEAR);
 	telescopeTexture = StelApp::getInstance().getTextureManager().createTexture("telescope.png");
-#ifdef WIN32
-	if (!wsaOk) return;
-#endif
+
 	deleteAllTelescopes();
 	for (int i=0;i<9;i++) 
 	{
@@ -314,36 +280,14 @@ void TelescopeMgr::telescopeGoto(int telescope_nr,const Vec3d &j2000Pos)
 
 void TelescopeMgr::communicate(void)
 {
-	  // The actual workhorse that does the TCP/IP communication with the
-	  // controlled telescopes:
 	if (!telescope_map.empty())
 	{
-		fd_set read_fds,write_fds;
-		FD_ZERO(&read_fds);
-		FD_ZERO(&write_fds);
-		int fd_max = -1;
-		  // check the file descriptors
 		foreach (Telescope* tel, telescope_map)
 		{
-			tel->prepareSelectFds(read_fds,write_fds,fd_max);
+			if(tel->prepareCommunication())
+				tel->performCommunication();
 		}
-		if (fd_max >= 0)
-		{
-			struct timeval tv;
-			tv.tv_sec = 0;
-			tv.tv_usec = 0;
-			// Check that data is ready to be read/write in file descriptors sets
-			const int select_rc = select(fd_max+1,&read_fds,&write_fds,0,&tv);
-			if (select_rc > 0)
-			{
-				  // perform the IO for each telescope:
-				foreach (Telescope* tel, telescope_map)
-				{
-					tel->handleSelectFds(read_fds,write_fds);
-				}
-			}
-		}
-//		t = GetNow() - t;
-//		qDebug() << "TelescopeMgr::communicate: " << t;
 	}
+//		t = getNow() - t;
+//		qDebug() << "TelescopeMgr::communicate: " << t;
 }

@@ -423,6 +423,7 @@ SET(stellarium_MOC_HDRS
 	modules/ScreenImageMgr.hpp
 	modules/SolarSystem.hpp
 	modules/StarMgr.hpp
+	modules/Telescope.hpp
 	modules/TelescopeMgr.hpp
 	gui/StelGui.hpp
 	gui/SkyGui.hpp
