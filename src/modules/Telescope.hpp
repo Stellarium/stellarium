@@ -20,27 +20,21 @@
 #ifndef _TELESCOPE_HPP_
 #define _TELESCOPE_HPP_
 
+#include <QHostAddress>
+#include <QHostInfo>
 #include <QList>
 #include <QString>
-#include <cstdlib>
-
-#if defined (_MSC_VER)
-#include <winsock2.h>
-#endif
+#include <QTcpSocket>
+#include <QObject>
 
 #include "StelObject.hpp"
 #include "StelNavigator.hpp"
 
-long long int GetNow(void);
+qint64 getNow(void);
 
-#ifdef __MINGW32__
-struct fd_set;
-#else
-#include <sys/select.h>
-#endif
-
-class Telescope : public StelObject
+class Telescope : public QObject, public StelObject
 {
+	Q_OBJECT
 public:
 	static Telescope *create(const QString &url);
 	virtual ~Telescope(void) {}
@@ -68,8 +62,8 @@ public:
 	const QList<double> &getOculars(void) const {return oculars;}
 
 	// all TCP (and all possible other style) communication shall be done in these functions:
-	virtual void prepareSelectFds(fd_set &read_fds,fd_set &write_fds, int &fdmax) = 0;
-	virtual void handleSelectFds(const fd_set &read_fds, const fd_set &write_fds) {}
+	virtual bool prepareCommunication() {return false;}
+	virtual void performCommunication() {}
 
 protected:
 	Telescope(const QString &name);
@@ -80,6 +74,67 @@ private:
 	float getSelectPriority(const StelNavigator *nav) const {return -10.f;}
 private:
 	QList<double> oculars; // fov of the oculars
+};
+
+//! This Telescope class can controll a telescope by communicating
+//! to a server process ("telescope server") via 
+//! the "Stellarium telescope control protocol" over TCP/IP.
+//! The "Stellarium telescope control protocol" is specified in a seperate
+//! document along with the telescope server software.
+class TelescopeTcp : public Telescope
+{
+	Q_OBJECT
+public:
+	TelescopeTcp(const QString &name,const QString &params);
+	~TelescopeTcp(void)
+	{
+		hangup();
+	}
+private:
+	bool isConnected(void) const
+	{
+		//return (tcpSocket->isValid() && !wait_for_connection_establishment);
+		return (tcpSocket->state() == QAbstractSocket::ConnectedState);
+	}
+	Vec3d getJ2000EquatorialPos(const StelNavigator *nav=0) const;
+	bool prepareCommunication();
+	void performCommunication();
+	void telescopeGoto(const Vec3d &j2000Pos);
+	bool isInitialized(void) const
+	{
+		return (!address.isNull());
+	}
+	void performReading(void);
+	void performWriting(void);
+private:
+	void hangup(void);
+	void resetPositions(void);
+	QHostAddress address;
+	unsigned int port;
+	QTcpSocket * tcpSocket;
+	bool wait_for_connection_establishment;
+	qint64 end_of_timeout;
+	char readBuffer[120];
+	char *readBufferEnd;
+	char writeBuffer[120];
+	char *writeBufferEnd;
+	int time_delay;
+	struct Position
+	{
+		qint64 server_micros;
+		qint64 client_micros;
+		Vec3d pos;
+		int status;
+	};
+	Position positions[16];
+	Position *position_pointer;
+	Position *const end_position;
+	virtual bool hasKnownPosition(void) const
+	{
+		return (position_pointer->client_micros != 0x7FFFFFFFFFFFFFFFLL);
+	}
+private slots:
+	void socketFailed(QAbstractSocket::SocketError socketError);
 };
 
 #endif // _TELESCOPE_HPP_
