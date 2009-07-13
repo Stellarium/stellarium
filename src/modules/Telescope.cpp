@@ -22,9 +22,7 @@
 #include "StelTranslator.hpp"
 #include "StelCore.hpp"
 
-//#include <sstream>
-//#include <iomanip>
-#include <math.h>
+#include <cmath>
 
 #include <QDebug>
 #include <QHostAddress>
