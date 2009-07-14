@@ -551,9 +551,14 @@ protected:
 	//! A list of vertices of the convex contour.
 	QVector<Vec3d> contour;
 
+	//! Computes whether the passed points are all outside of at least one SphericalCap defining the polygon boundary.
+	//! @param thisContour the vertices defining the contour.
+	//! @param nbThisContour nb of vertice of the contour.
+	//! @param points the points to test.
+	//! @param points the number of points to test.
 	static bool areAllPointsOutsideOneSide(const Vec3d* thisContour, int nbThisContour, const Vec3d* points, int nbPoints);
 	
-	//! Tell whether the passed points are all outside of at least one SphericalCap defining the polygon boundary.
+	//! Computes whether the passed points are all outside of at least one SphericalCap defining the polygon boundary.
 	bool areAllPointsOutsideOneSide(const QVector<Vec3d>& points) const
 	{
 		return areAllPointsOutsideOneSide(contour.constData(), contour.size(), points.constData(), points.size());
