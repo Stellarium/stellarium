@@ -280,7 +280,7 @@ Vec3d SphericalPolygonBase::getPointInside() const
 // Default slow implementation o(n^2).
 SphericalCap SphericalPolygonBase::getBoundingCap() const
 {
-	Vec3d p1, p2;
+	Vec3d p1(1,0,0), p2(1,0,0);
 	double maxDist=1.;
 	const QVector<Vec3d>& trianglesArray = getVertexArray();
 	foreach (const Vec3d& v1, trianglesArray)
