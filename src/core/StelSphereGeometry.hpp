@@ -73,7 +73,7 @@ public:
 
 	//! Returns whether a SphericalPolygon intersects with the region.
 	virtual bool intersects(const SphericalPolygonBase& poly) const = 0;
-
+	
 	//! Returns whether a SphericalCap is contained into the region.
 	virtual bool contains(const SphericalCap& c) const = 0;
 
@@ -255,6 +255,55 @@ inline bool sideHalfSpaceIntersects(const Vec3d& v1, const Vec3d& v2, const Sphe
 	n.normalize();
 	return  h.intersectsHalfSpace(n[0], n[1], n[2]);
 }
+
+//! @class SphericalPoint
+//! Special SphericalRegion for a point on the sphere.
+class SphericalPoint : public SphericalRegion
+{
+public:
+	SphericalPoint(const Vec3d& an) : n(an) {Q_ASSERT(std::fabs(1.-n.length())<0.0000001);}
+	
+	virtual ~SphericalPoint() {;}
+
+	//! Return the area of the region in steradians.
+	virtual double getArea() const {return 0.;}
+
+	//! Return true if the region is empty.
+	virtual bool isEmpty() const {return false;}
+
+	//! Return a point located inside the region.
+	virtual Vec3d getPointInside() const {return n;}
+
+	//! Returns whether a point is contained into the region.
+	virtual bool contains(const Vec3d& p) const {return n==p;}
+
+	//! Returns whether a SphericalPolygon intersects with the region.
+	virtual bool intersects(const SphericalPolygonBase& mpoly) const;
+
+	//! Returns whether a SphericalPolygon is contained into the region.
+	virtual bool contains(const SphericalPolygonBase& poly) const {return false;}
+
+	//! Returns whether a SphericalCap is contained into the region.
+	virtual bool contains(const SphericalCap& c) const {return false;}
+
+	//! Returns whether a SphericalCap intersects with the region.
+	virtual bool intersects(const SphericalCap& c) const {return c.contains(n);}
+	
+	//! Returns whether a AllSkySphericalRegion is contained into the region.
+	virtual bool contains(const AllSkySphericalRegion& poly) const {return false;}
+
+	//! Returns whether a AllSkySphericalRegion intersects with the region.
+	virtual bool intersects(const AllSkySphericalRegion& poly) const {return true;}
+	
+	//! Return the list of SphericalCap bounding the region.
+	virtual QVector<SphericalCap> getBoundingSphericalCaps() const {QVector<SphericalCap> res; res << SphericalCap(n, 1); return res;}
+	
+	//! Return a full sky SphericalCap
+	virtual SphericalCap getBoundingCap() const {return SphericalCap(n, 1);}
+	
+	//! The unit vector of the point direction.
+	Vec3d n;
+};
 
 //! @class AllSkySphericalRegion
 //! Special SphericalRegion for the whole sphere.

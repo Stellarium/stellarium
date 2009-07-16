@@ -33,6 +33,8 @@
 
 bool SphericalRegion::contains(const SphericalRegionP& region) const
 {
+	if (dynamic_cast<const SphericalPoint*>(region.data()))
+		return contains(static_cast<const SphericalPoint*>(region.data())->n);
 	if (dynamic_cast<const SphericalCap*>(region.data()))
 		return contains(*static_cast<const SphericalCap*>(region.data()));
 	if (dynamic_cast<const SphericalPolygonBase*>(region.data()))
@@ -45,6 +47,8 @@ bool SphericalRegion::contains(const SphericalRegionP& region) const
 	
 bool SphericalRegion::intersects(const SphericalRegionP& region) const
 {
+	if (dynamic_cast<const SphericalPoint*>(region.data()))
+		return contains(static_cast<const SphericalPoint*>(region.data())->n);
 	if (dynamic_cast<const SphericalCap*>(region.data()))
 		return intersects(*static_cast<const SphericalCap*>(region.data()));
 	if (dynamic_cast<const SphericalPolygonBase*>(region.data()))
@@ -53,6 +57,15 @@ bool SphericalRegion::intersects(const SphericalRegionP& region) const
 		return intersects(*static_cast<const AllSkySphericalRegion*>(region.data()));
 	Q_ASSERT(0);
 	return false;	
+}
+
+bool SphericalPoint::intersects(const SphericalPolygonBase& mpoly) const
+{
+	const SphericalConvexPolygon* cvx = dynamic_cast<const SphericalConvexPolygon*>(&mpoly);
+	if (cvx!=NULL)
+		return cvx->contains(n);
+	else
+		return static_cast<const SphericalPolygon*>(&mpoly)->contains(n);
 }
 
 SphericalRegionP SphericalRegion::getEnlarged(double margin) const
