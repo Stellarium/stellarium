@@ -57,7 +57,7 @@ public:
 	virtual Vec3f getInfoColor(void) const;
 	virtual QString getNameI18n(void) const {return nameI18;}
 	virtual QString getEnglishName(void) const {return englishName;}
-	virtual double getAngularSize(const StelCore *core) const {return angularSize/2;}
+	virtual double getAngularSize(const StelCore *core) const {return angularSize*0.5;}
 
 	// Methods specific to Nebula
 	void setLabelColor(const Vec3f& v) {labelColor = v;}
@@ -68,7 +68,8 @@ public:
 	QString getTypeString(void) const;
 
 private:
-
+	friend struct DrawNebulaFuncObject;
+	
 	//! @enum NebulaType Nebula types
 	enum NebulaType
 	{
@@ -88,7 +89,7 @@ private:
 
 	bool readNGC(char *record);
 
-	void drawLabel(const StelCore* core, const StelPainter& sPainter, float maxMagLabel);
+	void drawLabel(const StelPainter& sPainter, float maxMagLabel);
 	void drawHints(const StelPainter& sPainter, float maxMagHints);
 
 	unsigned int M_nb;              // Messier Catalog number

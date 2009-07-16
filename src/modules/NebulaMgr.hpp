@@ -24,7 +24,7 @@
 #include <QStringList>
 #include "StelObjectType.hpp"
 #include "StelFader.hpp"
-#include "StelTreeGrid.hpp"
+#include "StelSphericalIndex.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
 
@@ -187,7 +187,7 @@ private:
 	LinearFader flagShow;
 
 	//! The internal grid for fast positional lookup
-	StelTreeGrid nebGrid;
+	StelSphericalIndex nebGrid;
 
 	//! The amount of hints (between 0 and 10)
 	float hintsAmount;

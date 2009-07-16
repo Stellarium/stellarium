@@ -493,6 +493,11 @@ QVector<bool> SphericalConvexPolygon::getEdgeFlagArray() const
 // Check if the polygon is valid, i.e. it has no side >180
 bool SphericalConvexPolygon::checkValid() const
 {
+	return SphericalConvexPolygon::checkValidContour(contour);
+}
+
+bool SphericalConvexPolygon::checkValidContour(const QVector<Vec3d>& contour)
+{
 	if (contour.size()<3)
 		return false;
 	bool res=true;

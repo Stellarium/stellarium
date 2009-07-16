@@ -593,6 +593,9 @@ public:
 	//! Check if the polygon is valid, i.e. it has no side >180.
 	bool checkValid() const;
 
+	//! Check if the passed contour is convex and valid, i.e. it has no side >180.
+	static bool checkValidContour(const QVector<Vec3d>& contour);
+	
 	//! Return the list of halfspace bounding the ConvexPolygon.
 	QVector<SphericalCap> getBoundingSphericalCaps() const;
 

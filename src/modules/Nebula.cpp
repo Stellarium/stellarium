@@ -142,12 +142,12 @@ void Nebula::drawHints(const StelPainter& sPainter, float maxMagHints)
 	sPainter.drawSprite2dMode(XY[0], XY[1], 4);
 }
 
-void Nebula::drawLabel(const StelCore* core, const StelPainter& sPainter, float maxMagLabel)
+void Nebula::drawLabel(const StelPainter& sPainter, float maxMagLabel)
 {
 	if (mag>maxMagLabel)
 		return;
 	glColor4f(labelColor[0], labelColor[1], labelColor[2], hintsBrightness);
-	float size = getAngularSize(core)*M_PI/180.*core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter();
+	float size = getAngularSize(NULL)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
 	float shift = 4.f + size/1.8f;
 	QString str;
 	if (nameI18!="")
