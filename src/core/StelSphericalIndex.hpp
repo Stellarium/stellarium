@@ -198,7 +198,7 @@ private:
 				foreach (const NodeElem& el, node.elements)
 				{
 					if (region->intersects(el.obj->getRegion()))
-						func(el.obj.data());
+						func(el.obj);
 				}
 				foreach (const Node& child, node.children)
 				{
@@ -213,7 +213,7 @@ private:
 			template<class FuncObject> void processAll(const Node& node, FuncObject& func) const
 			{
 				foreach (const NodeElem& el, node.elements)
-					func(el.obj.data());
+					func(el.obj);
 				foreach (const Node& child, node.children)
 					processAll(child, func);
 			}

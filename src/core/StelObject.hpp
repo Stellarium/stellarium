@@ -23,7 +23,7 @@
 #include <QString>
 #include "VecMath.hpp"
 #include "StelObjectType.hpp"
-#include "StelGridObject.hpp"
+#include "StelRegionObject.hpp"
 
 class StelNavigator;
 class StelCore;
@@ -32,7 +32,7 @@ class StelCore;
 //! Normally you should use StelObjectP instead of StelObject* which have by default the same behaviour,
 //! but which can be added reference counting if needed.
 //! @sa StelObjectP
-class StelObject : public StelGridObject
+class StelObject : public StelRegionObject
 {
 public:
 	//! @enum InfoStringGroup used as named bitfield flags as specifiers to
@@ -64,9 +64,10 @@ public:
 
 	virtual ~StelObject(void) {}
 
-	//! Default implementation of the StelGridObject method
-	//! Calling this method on some object will cause an error if they need a valid StelNavigator instance to compute their position
-	virtual Vec3d getPositionForGrid() const {return getJ2000EquatorialPos(NULL);}
+	//! Default implementation of the getRegion method.
+	//! Calling this method on some object will cause an error if they need a valid StelNavigator instance to compute their position.
+	//! Return the spatial region of the object.
+	virtual SphericalRegionP getRegion() const {return SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));}
 
 	//! Write I18n information about the object in QString.
 	//! @param core the StelCore object to use
