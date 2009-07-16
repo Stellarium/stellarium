@@ -111,6 +111,29 @@ void NebulaMgr::init()
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
 
+struct DrawNebulaFuncObject
+{
+	DrawNebulaFuncObject(float amaxMagHints, float amaxMagLabels, const StelPainter& p, bool acheckMaxMagHints) : maxMagHints(amaxMagHints), maxMagLabels(amaxMagLabels), sPainter(p), checkMaxMagHints(acheckMaxMagHints)
+	{
+		angularSizeLimit = 5./sPainter.getProjector()->getPixelPerRadAtCenter()*180./M_PI;
+	}
+	void operator()(StelRegionObjectP obj)
+	{
+		Nebula* n = obj.staticCast<Nebula>().data();
+		if (n->angularSize>angularSizeLimit || (checkMaxMagHints && n->mag <= maxMagHints))
+		{
+			sPainter.getProjector()->project(n->XYZ,n->XY);
+			n->drawLabel(sPainter, maxMagLabels);
+			n->drawHints(sPainter, maxMagHints);
+		}
+	}
+	float maxMagHints;
+	float maxMagLabels;
+	const StelPainter& sPainter;
+	float angularSizeLimit;
+	bool checkMaxMagHints;
+};
+
 // Draw all the Nebulae
 void NebulaMgr::draw(StelCore* core)
 {
@@ -128,31 +151,15 @@ void NebulaMgr::draw(StelCore* core)
 	// Use a 1 degree margin
 	const double margin = 1.*M_PI/180.*prj->getPixelPerRadAtCenter();
 	const SphericalRegionP& p = prj->getViewportConvexPolygon(margin, margin);
-	nebGrid.filterIntersect(p);
 
 	// Print all the nebulae of all the selected zones
-	Nebula* n;
-
-	// speed up the computation of n->getOnScreenSize(core)>5:
-	const float size_limit = 5./prj->getPixelPerRadAtCenter()*180./M_PI;
 	float maxMagHints = skyDrawer->getLimitMagnitude()*1.2-2.+(hintsAmount*1.2f)-2.f;
 	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.+(labelsAmount*1.2f)-2.f;
-
-	for (StelTreeGrid::const_iterator iter = nebGrid.begin(); iter != nebGrid.end(); ++iter)
-	{
-		n = qSharedPointerCast<Nebula>(*iter).data();
-
-		// improve performance by skipping if too small to see
-		if (n->angularSize>size_limit || (hintsFader.getInterstate()>0.0001 && n->mag <= maxMagHints))
-		{
-			prj->project(n->XYZ,n->XY);
-			n->drawLabel(core, sPainter, maxMagLabels);
-			n->drawHints(sPainter, maxMagHints);
-		}
-	}
+	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, sPainter, hintsFader.getInterstate()>0.0001);
+	nebGrid.processIntersectingRegions(p, func);
+	
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, sPainter);
-	//nebGrid.draw(&sPainter);
 }
 
 void NebulaMgr::drawPointer(const StelCore* core, const StelPainter& sPainter)
@@ -358,7 +365,7 @@ bool NebulaMgr::loadNGC(const QString& catNGC)
 		else
 		{
 			nebArray.append(e);
-			nebGrid.insert(qSharedPointerCast<StelGridObject>(e));
+			nebGrid.insert(qSharedPointerCast<StelRegionObject>(e));
 			++readOk;
 		}
 	}

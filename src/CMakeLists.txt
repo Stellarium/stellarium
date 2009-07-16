@@ -102,8 +102,6 @@ SET(stellarium_lib_SRCS
 	core/StelSkyLayer.hpp
 	core/StelSkyLayer.cpp
 	core/StelFader.hpp
-	core/StelGrid.hpp
-	core/StelGridObject.hpp
 	core/StelSphereGeometry.cpp
 	core/StelSphereGeometry.hpp
 	core/StelIniParser.cpp
@@ -112,8 +110,6 @@ SET(stellarium_lib_SRCS
 	core/StelUtils.hpp
 	core/StelTranslator.cpp
 	core/StelTranslator.hpp
-	core/StelTreeGrid.cpp
-	core/StelTreeGrid.hpp
 	core/VecMath.hpp
 	core/StelJsonParser.hpp
 	core/StelJsonParser.cpp
