@@ -646,24 +646,8 @@ QProgressBar* StelProgressBarMgr::addProgressBar()
 	pbProxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 	pbProxy->setZValue(150);
 	static_cast<QGraphicsLinearLayout*>(layout())->addItem(pbProxy);
-	//connect(pbProxy, SIGNAL(destroyed(QObject*)), this, SLOT(oneDestroyed(QObject*)));
 	return pb;
 }
-
-// void StelProgressBarMgr::updateBarsPositions()
-// {
-// 	int y=0;
-// 	foreach(QGraphicsItem* item, childItems())
-// 	{
-// 		item->setPos(0, y);
-// 		y+=18;
-// 	}
-// }
-
-// void StelProgressBarMgr::oneDestroyed(QObject* obj)
-// {
-// 	updateBarsPositions();
-// }
 
 CornerButtons::CornerButtons(QGraphicsItem* parent) : lastOpacity(10)
 {

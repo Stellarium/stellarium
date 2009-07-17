@@ -210,6 +210,8 @@ private:
 
 	bool initDone;
 	bool guiHidden;
+	
+	QSizeF savedProgressBarSize;
 };
 
 #endif // _STELGUI_HPP_

@@ -620,6 +620,13 @@ void StelGui::update(double deltaTime)
 		getGuiActions("actionShow_Stars")->setChecked(smgr->getFlagStars());
 
 	skyGui->infoPanel->setTextFromObjects(GETSTELMODULE(StelObjectMgr)->getSelectedObject());
+	
+	// Check if the progressbar window changed, if yes update the whole view
+	if (savedProgressBarSize!=skyGui->progressBarMgr->boundingRect().size())
+	{
+		savedProgressBarSize=skyGui->progressBarMgr->boundingRect().size();
+		skyGui->updateBarsPos();
+	}
 }
 
 
