@@ -63,13 +63,13 @@ void StelDownloadMgr::get(const QString& addr, const QString& filePath)
 
 void StelDownloadMgr::get(const QString& addr, const QString& filePath, quint16 csum)
 {
-	if(inProgress)
+	if (inProgress)
 	{
 		qDebug() << "Can't begin another download while" << addr << "is still in progress.";
 		return;
 	}
 	
-	if(reply)
+	if (reply)
 	{
 		delete target;
 		delete reply;
@@ -89,9 +89,9 @@ void StelDownloadMgr::get(const QString& addr, const QString& filePath, quint16 
 	req.setRawHeader("User-Agent", StelApp::getApplicationName().toAscii());
 	reply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	
-	if(barVisible)
+	if (barVisible)
 	{
-		if(!progressBar)
+		if (!progressBar)
 			progressBar = StelMainGraphicsView::getInstance().addProgressBar();
 		progressBar->setValue(0);
 		progressBar->setMaximum(0);
@@ -102,7 +102,7 @@ void StelDownloadMgr::get(const QString& addr, const QString& filePath, quint16 
 	connect(reply, SIGNAL(readyRead()), this, SLOT(readData()));
 	connect(reply, SIGNAL(finished()), this, SLOT(fin()));
 	connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(err(QNetworkReply::NetworkError)));
-	if(barVisible)
+	if (barVisible)
 		connect(reply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(updateDownloadBar(qint64, qint64)));
 }
 

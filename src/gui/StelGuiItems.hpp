@@ -36,11 +36,7 @@ class StelProgressBarMgr : public QGraphicsWidget
 	Q_OBJECT
 public:
 	StelProgressBarMgr(QGraphicsItem* parent);
-// 	virtual QRectF boundingRect() const;
 	class QProgressBar* addProgressBar();
-//	void updateBarsPositions();
-private slots:
-//	void oneDestroyed(QObject* obj);
 };
 
 // Buttons in the bottom left corner
