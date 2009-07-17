@@ -31,7 +31,6 @@ Q_OBJECT
 private slots:
 	void initTestCase();
 	void testBase();
-
 private:
 };
 

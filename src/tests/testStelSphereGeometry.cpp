@@ -274,6 +274,9 @@ void TestStelSphericalGeometry::testSphericalPolygon()
 	QVERIFY(holySquare.intersects(bigSquare));
 	QVERIFY(bigSquare.intersects(smallSquare));
 	QVERIFY(!holySquare.intersects(smallSquare));
+	
+	SphericalCap cap(Vec3d(1,0,0), 0.99);
+	QVERIFY(bigSquareConvex.intersects(cap));
 }
 
 void TestStelSphericalGeometry::testLoading()
