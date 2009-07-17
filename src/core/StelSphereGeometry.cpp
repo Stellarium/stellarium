@@ -104,7 +104,7 @@ bool SphericalCap::intersectsConvexContour(const Vec3d* vertice, int nbVertice) 
 		if (contains(vertice[i]))
 			return true;
 	}
-	// No points of the polygon are inside the halfspace
+	// No points of the convex polygon are inside the cap
 	if (d<=0)
 		return false;
 
