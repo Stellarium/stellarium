@@ -66,6 +66,7 @@ private:
 	//! nodes link to child nodes subdivising it spatially.
 	struct Node
 	{
+		virtual ~Node() {;}
 		QVector<NodeElem> elements;
 		QVector<Node> children;
 		SphericalConvexPolygon triangle;
