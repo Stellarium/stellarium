@@ -143,10 +143,6 @@ struct SphericalCap : public SphericalRegion
 	SphericalCap() : d(0) {;}
 
 	//! Construct a SphericalCap from its direction and assumes a 90 deg aperture.
-	//! @param an a unit vector indicating the direction.
-	//SphericalCap(const Vec3d& an) : n(an), d(0) {;}
-
-	//! Construct a SphericalCap from its direction and assumes a 90 deg aperture.
 	SphericalCap(double x, double y, double z) : n(x,y,z), d(0) {;}
 	
 	//! Construct a SphericalCap from its direction and aperture.
@@ -183,7 +179,7 @@ struct SphericalCap : public SphericalRegion
 		return d<=h.d && ( a>=1. || (a>=0. && a*a >= (1.-d*d)*(1.-h.d*h.d)));
 	}
 
-	//! Returns whether an SphericalCap intersects with this one.
+	//! Returns whether a SphericalCap intersects with this one.
 	//! I managed to make it without sqrt or acos, so it is very fast!
 	//! @see http://f4bien.blogspot.com/2009/05/spherical-geometry-optimisations.html for detailed explanations.
 	virtual bool intersects(const SphericalCap& h) const
@@ -242,7 +238,7 @@ inline bool sideHalfSpaceContains(const Vec3d& v1, const Vec3d& v2, const Vec3d&
 //! Return whether the halfspace defined by the vectors v1 and v2 contains the SphericalCap h.
 inline bool sideHalfSpaceContains(const Vec3d& v1, const Vec3d& v2, const SphericalCap& h)
 {
-	Vec3d n(v2[1]*v1[2]-v2[2]*v1[1], v2[2]*v1[0]-v2[0]*v1[2], v2[0]*v1[1]-v2[1]*v1[0]);
+	Vec3d n(v1[1]*v2[2]-v1[2]*v2[1], v2[0]*v1[2]-v2[2]*v1[0], v2[1]*v1[0]-v2[0]*v1[1]);
 	n.normalize();
 	const double a = n*h.n;
 	return 0<=h.d && ( a>=1. || (a>=0. && a*a >= 1.-h.d*h.d));
@@ -251,7 +247,7 @@ inline bool sideHalfSpaceContains(const Vec3d& v1, const Vec3d& v2, const Spheri
 //! Return whether the halfspace defined by the vectors v1 and v2 intersects the SphericalCap h.
 inline bool sideHalfSpaceIntersects(const Vec3d& v1, const Vec3d& v2, const SphericalCap& h)
 {
-	Vec3d n(v2[1]*v1[2]-v2[2]*v1[1], v2[2]*v1[0]-v2[0]*v1[2], v2[0]*v1[1]-v2[1]*v1[0]);
+	Vec3d n(v1[1]*v2[2]-v1[2]*v2[1], v2[0]*v1[2]-v2[2]*v1[0], v2[1]*v1[0]-v2[0]*v1[1]);
 	n.normalize();
 	return  h.intersectsHalfSpace(n[0], n[1], n[2]);
 }
@@ -428,6 +424,10 @@ public:
 class SphericalPolygon : public SphericalPolygonBase
 {
 public:
+	// Avoid name hiding when overloading the virtual methods.
+	using SphericalPolygonBase::intersects;
+	using SphericalPolygonBase::contains;
+	
 	//! Default constructor.
 	SphericalPolygon() {;}
 
@@ -528,6 +528,11 @@ private:
 class SphericalConvexPolygon : public SphericalPolygonBase
 {
 public:
+	
+	// Avoid name hiding when overloading the virtual methods.
+	using SphericalPolygonBase::intersects;
+	using SphericalPolygonBase::contains;
+	
 	//! Default constructor.
 	SphericalConvexPolygon() {;}
 
@@ -584,7 +589,7 @@ public:
 
 	//! Returns whether another SphericalPolygon intersects with the SphericalPolygon.
 	virtual bool intersects(const SphericalPolygonBase& polyBase) const;
-
+	
 	///////////////////////////////////////
 	// Methods specific to convex polygons
 	//! Get the single contour defining the SphericalConvexPolygon.
@@ -655,9 +660,6 @@ protected:
 //! Compute the intersection of 2 halfspaces on the sphere (usually on 2 points) and return it in p1 and p2.
 //! If the 2 SphericalCap don't interesect or intersect only at 1 point, false is returned and p1 and p2 are undefined
 bool planeIntersect2(const SphericalCap& h1, const SphericalCap& h2, Vec3d& p1, Vec3d& p2);
-
-//! Split the input contour into up to 8 contours, one for each HTM level 0 triangles.
-QVector<Vec3d>* splitContourHTM(const QVector<Vec3d>& inContour);
 
 #endif // _STELSPHEREGEOMETRY_HPP_
 
