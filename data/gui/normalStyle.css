@@ -758,9 +758,24 @@ QFileDialog {
 	background: rgb(48, 49, 52);
 }
 
+QWidget#sourcesList
+{
+	background: rgb(31, 31, 31);
+}
+
 QWidget#fileLoading
 {
-		background-color:transparent;
+	background-color:transparent;
+}
+
+QWidget#fileDownLoading
+{
+	background-color:transparent;
+}
+
+QWidget#resourceDescriptionEdition
+{
+        background-color:transparent;
 }
 
 QWidget#resourceInformationView
@@ -770,16 +785,16 @@ QWidget#resourceInformationView
 
 QWidget#sourceInformationInput
 {
-		background-color:transparent;
+	background-color:transparent;
 }
-
 
 QWidget#resourceInformationEdition
 {
-		background-color:transparent;
+	background-color:transparent;
 }
 
-QTextEdit#editResourceInformation {
+
+QTextEdit#editResourceDescription {
 border: 1px solid rgb(0, 0, 0);
 	border-radius: 0px;
 	padding: 0px;
@@ -800,4 +815,8 @@ QGroupBox#dataSourcesListGroupBox {
 
 QWidget#listManagerWidget {
 		background-color: rgb(31, 31, 31);
+}
+
+QGraphicsWidget#observationListView  QLabel {
+        font-size: 40px;
 }
