@@ -36,9 +36,36 @@ class AllSkySphericalRegion;
 //! @file StelSphereGeometry.hpp
 //! Define all SphericalGeometry primitives as well as the SphericalRegionP type.
 
-//! @typedef SphericalRegionP
-//! Use shared pointer to simplify memory managment.
-typedef QSharedPointer<SphericalRegion> SphericalRegionP;
+//! @class SphericalRegionP
+//! A shared pointer on a SphericalRegion.
+class SphericalRegionP : public QSharedPointer<SphericalRegion>
+{
+public:
+	// Override the constructors of QSharedPointer
+	SphericalRegionP() {;}
+	SphericalRegionP(SphericalRegion* ptr) : QSharedPointer<SphericalRegion>(ptr) {;}
+	template <class Deleter> SphericalRegionP(SphericalRegion* ptr, Deleter deleter) : QSharedPointer<SphericalRegion>(ptr, deleter) {;}
+	SphericalRegionP(const SphericalRegionP& other) : QSharedPointer<SphericalRegion>(other) {;}
+	SphericalRegionP(const QWeakPointer<SphericalRegion>& other) : QSharedPointer<SphericalRegion>(other) {;}
+	
+	//! The QVariant type associated to a SphericalRegionP.
+	static const QVariant::Type qVariantType;
+
+	//! The meta type ID associated to a SphericalRegionP.
+	static int metaTypeId;
+	
+private:
+	//! Initialize stuff to allow SphericalRegionP to be used with Qt meta type system.
+	static int initialize();
+};
+
+// Allow to use SphericalRegionP with the Qt MetaType system.
+Q_DECLARE_METATYPE(SphericalRegionP);
+
+//! Serialize the passed SphericalRegionP into a binary blob.
+QDataStream& operator<<(QDataStream& out, const SphericalRegionP& region);
+//! Load the SphericalRegionP from a binary blob.
+QDataStream& operator>>(QDataStream& in, SphericalRegionP& region);
 
 //! @class SphericalRegion
 //! Abstract class defining a region of the sphere.
@@ -100,6 +127,9 @@ public:
 	//! The default implementation always return an enlarged bounding SphericalCap.
 	//! @param margin the minimum enlargement margin in radian.
 	virtual SphericalRegionP getEnlarged(double margin) const;
+	
+	//! Serialize the region into a QVariant map matching the JSON format.
+	virtual QVariantMap toQVariant() const = 0;
 	
 	//! Create a SphericalRegion from the given input JSON stream.
 	//! The type of the region is automatically recognized from the input format.
@@ -216,6 +246,11 @@ struct SphericalCap : public SphericalRegion
 	//! Comparison operator.
 	bool operator==(const SphericalCap& other) const {return (n==other.n && d==other.d);}
 	
+	//! Serialize the region into a QVariant map matching the JSON format.
+	//! The format is {"type": "CAP", "center": [ra, dec], "radius": radius}, with ra dec in degree in ICRS frame
+	//! and radius in degree (between 0 and 180 deg)
+	virtual QVariantMap toQVariant() const;
+	
 	//! The direction unit vector. Only if d==0, this vector doesn't need to be unit.
 	Vec3d n;
 	//! The cos of cone radius
@@ -297,6 +332,10 @@ public:
 	//! Return a full sky SphericalCap
 	virtual SphericalCap getBoundingCap() const {return SphericalCap(n, 1);}
 	
+	//! Serialize the region into a QVariant map matching the JSON format.
+	//! The format is {"type": "POINT", "pos": [ra, dec]}, with ra dec in degree in ICRS frame.
+	virtual QVariantMap toQVariant() const;
+	
 	//! The unit vector of the point direction.
 	Vec3d n;
 };
@@ -343,6 +382,10 @@ public:
 	
 	//! Return a full sky SphericalCap
 	virtual SphericalCap getBoundingCap() const {return SphericalCap(Vec3d(1,0,0), -2);}
+	
+	//! Serialize the region into a QVariant map matching the JSON format.
+	//! The format is {"type": "ALLSKY"}
+	virtual QVariantMap toQVariant() const;
 };
 
 
@@ -402,12 +445,6 @@ public:
 
 	//! Default slow implementation o(n^2).
 	virtual SphericalCap getBoundingCap() const;
-	
-	//! Output the SphericalPolygon information in the form of a QVariant.
-	//! The QVariant will contain a list of contours, each contours being a list of ra,dec points
-	//! with ra,dec expressed in degree in the ICRS reference frame.
-	//! Use QJSONParser to transform a QVariant into its JSON representation.
-	virtual QVariantMap toQVariant() const;
 
 	//! Return a new SphericalPolygon consisting of the intersection of this and the given SphericalPolygon.
 	SphericalPolygon getIntersection(const SphericalPolygonBase& mpoly) const;
@@ -467,6 +504,12 @@ public:
 	//! Returns whether a SphericalCap is contained into the region.
 	virtual bool contains(const SphericalCap& c) const {Q_ASSERT(0); return false;}
 	
+	//! Serialize the region into a QVariant map matching the JSON format.
+	//! The format is 
+	//! @code {"worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]]} @endcode
+	//! worldCoords is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
+	virtual QVariantMap toQVariant() const;
+	
 protected:
 	friend void vertexCallback(void* vertexData, void* userData);
 	friend void vertexTextureCallback(void* vertexData, void* userData);
@@ -515,6 +558,16 @@ public:
 	//! @param contour a contour defining the polygon area.
 	virtual void setContour(const QVector<TextureVertex>& contour);
 
+	//! Serialize the region into a QVariant map matching the JSON format.
+	//! The format is:
+	//! @code {"worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]],
+	//! "textureCoords": [[[u,v],[u,v],[u,v],[u,v]], [[u,v],[u,v],[u,v]], [...]]}
+	//! }@endcode
+	//! textureCoords is a list of texture coordinates in the u,v texture space (between 0 and 1).
+	//! worldCoords is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
+	//! There must be one texture coordinate for each vertex.
+	virtual QVariantMap toQVariant() const;
+	
 private:
 	friend void vertexTextureCallback(void* vertexData, void* userData);
 
@@ -590,6 +643,12 @@ public:
 	//! Returns whether another SphericalPolygon intersects with the SphericalPolygon.
 	virtual bool intersects(const SphericalPolygonBase& polyBase) const;
 	
+	//! Serialize the region into a QVariant map matching the JSON format.
+	//! The format is 
+	//! @code {"type": "CVXPOLYGON", "worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]]} @endcode
+	//! worldCoords is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
+	virtual QVariantMap toQVariant() const;
+
 	///////////////////////////////////////
 	// Methods specific to convex polygons
 	//! Get the single contour defining the SphericalConvexPolygon.
@@ -651,6 +710,16 @@ public:
 	//! @param texCoord a list of texture coordinates matching the vertices of the contour.
 	virtual void setContour(const QVector<Vec3d>& acontour, const QVector<Vec2f>& texCoord) {contour=acontour; textureCoords=texCoord;}
 
+	//! Serialize the region into a QVariant map matching the JSON format.
+	//! The format is:
+	//! @code {"type": "CVXPOLYGON", "worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]],
+	//! "textureCoords": [[[u,v],[u,v],[u,v],[u,v]], [[u,v],[u,v],[u,v]], [...]]}
+	//! }@endcode
+	//! textureCoords is a list of texture coordinates in the u,v texture space (between 0 and 1).
+	//! worldCoords is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
+	//! There must be one texture coordinate for each vertex.
+	virtual QVariantMap toQVariant() const;
+	
 protected:
 	//! A list of uv textures coordinates corresponding to the triangle vertices.
 	//! There should be 1 uv position per vertex.
