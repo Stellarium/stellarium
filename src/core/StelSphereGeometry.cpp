@@ -31,6 +31,39 @@
 #include <GL/glu.h>	/* Header File For The GLU Library */
 #endif
 
+// Definition of static constants.
+const QVariant::Type SphericalRegionP::qVariantType = (QVariant::Type)(QVariant::UserType+1);
+int SphericalRegionP::metaTypeId = SphericalRegionP::initialize();
+
+int SphericalRegionP::initialize()
+{
+	int id = SphericalRegionP::metaTypeId = qRegisterMetaType<SphericalRegionP>();
+	qRegisterMetaTypeStreamOperators<SphericalRegionP>("SphericalRegionP");
+	return id;
+}
+
+QDataStream& operator<<(QDataStream& out, const SphericalRegionP& region)
+{
+	out << region->toQVariant();
+	return out;
+}
+
+QDataStream& operator>>(QDataStream& in, SphericalRegionP& region)
+{
+	QVariantMap v;
+	in >> v;
+	try
+	{
+		region=SphericalRegion::loadFromQVariant(v);
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << e.what();
+		Q_ASSERT(0);
+	}
+	return in;
+}
+
 bool SphericalRegion::contains(const SphericalRegionP& region) const
 {
 	if (dynamic_cast<const SphericalPoint*>(region.data()))
@@ -158,25 +191,6 @@ SphericalConvexPolygon SphericalCap::toSphericalConvexPolygon() const
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalPolygonBase
 ///////////////////////////////////////////////////////////////////////////////
-QVariantMap SphericalPolygonBase::toQVariant() const
-{
-	QVariantMap res;
-	QVariantList worldCoordinates;
-	foreach(QVector<Vec3d> contour, getContours())
-	{
-		QVariantList cv;
-		foreach(Vec3d v, contour)
-		{
-			QVariantList vv;
-			vv << v[0] << v[1] << v[2];
-			cv.append((QVariant)vv);
-		}
-		worldCoordinates.append((QVariant)cv);
-	}
-	res.insert("worldCoords", worldCoordinates);
-	return res;
-}
-
 #ifndef APIENTRY
 #define APIENTRY
 #endif
@@ -287,7 +301,9 @@ double SphericalPolygonBase::getArea() const
 Vec3d SphericalPolygonBase::getPointInside() const
 {
 	const QVector<Vec3d>& trianglesArray = getVertexArray();
-	return trianglesArray[0]+trianglesArray[1]+trianglesArray[2];
+	Vec3d res = trianglesArray[0]+trianglesArray[1]+trianglesArray[2];
+	res.normalize();
+	return res;
 }
 
 // Default slow implementation o(n^2).
@@ -786,12 +802,12 @@ SphericalRegionP SphericalRegion::loadFromJson(const QByteArray& a)
 	return loadFromJson(&buf);
 }
 
-static void parseRaDec(const QVariant& vRaDec, Vec3d& v)
+inline void parseRaDec(const QVariant& vRaDec, Vec3d& v)
 {
 	const QVariantList& vl = vRaDec.toList();
 	bool ok;
 	if (vl.size()!=2)
-		throw std::runtime_error(qPrintable(QString("invalid Ra,Dec pair: \"%1\" (expect 2 double values in degree)").arg(vRaDec.toString())));
+		throw std::runtime_error(qPrintable(QString("invalid Ra,Dec pair: \"%1\" (expect 2 double values in degree, got %2)").arg(vRaDec.toString()).arg(vl.size())));
 	StelUtils::spheToRect(vl.at(0).toDouble(&ok)*M_PI/180., vl.at(1).toDouble(&ok)*M_PI/180., v);
 	if (!ok)
 		throw std::runtime_error(qPrintable(QString("invalid Ra,Dec pair: \"%1\" (expect 2 double values in degree)").arg(vRaDec.toString())));
@@ -893,4 +909,99 @@ SphericalRegionP SphericalRegion::loadFromQVariant(const QVariantMap& map)
 	}
 	Q_ASSERT(0);
 	return SphericalRegionP(new SphericalCap());
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Serialization into QVariant
+
+QVariantMap SphericalPoint::toQVariant() const
+{
+	QVariantMap res;
+	res.insert("type", "POINT");
+	double ra, dec;
+	StelUtils::rectToSphe(&ra, &dec, n);
+	QVariantList l;
+	l << ra << dec;
+	res.insert("pos", l);
+	return res;
+}
+
+QVariantMap SphericalCap::toQVariant() const
+{
+	QVariantMap res;
+	res.insert("type", "CAP");
+	double ra, dec;
+	StelUtils::rectToSphe(&ra, &dec, n);
+	QVariantList l;
+	l << ra << dec;
+	res.insert("center", l);
+	res.insert("radius", std::acos(d));
+	return res;
+}
+
+QVariantMap AllSkySphericalRegion::toQVariant() const
+{
+	QVariantMap res;
+	res.insert("type", "ALLSKY");
+	return res;
+}
+
+QVariantMap SphericalPolygon::toQVariant() const
+{
+	QVariantMap res;
+	QVariantList worldCoordinates;
+	double ra, dec;
+	foreach (const QVector<Vec3d>& contour, getContours())
+	{
+		QVariantList cv;
+		foreach (const Vec3d& v, contour)
+		{
+			StelUtils::rectToSphe(&ra, &dec, v);
+			QVariantList vv;
+			vv << ra << dec;
+			cv.append((QVariant)vv);
+		}
+		worldCoordinates.append((QVariant)cv);
+	}
+	res.insert("worldCoords", worldCoordinates);
+	return res;
+}
+
+QVariantMap SphericalTexturedPolygon::toQVariant() const
+{
+	Q_ASSERT(0);
+	// TODO store a tesselated polygon?, including edge flags?
+	return QVariantMap();
+}
+
+QVariantMap SphericalConvexPolygon::toQVariant() const
+{
+	QVariantMap res;
+	res.insert("type", "CVXPOLYGON");
+	QVariantList cv;
+	double ra, dec;
+	foreach (const Vec3d& v, contour)
+	{
+		StelUtils::rectToSphe(&ra, &dec, v);
+		QVariantList vv;
+		vv << ra << dec;
+		cv.append((QVariant)vv);
+	}
+	res.insert("worldCoords", cv);
+	return res;
+}
+
+
+QVariantMap SphericalTexturedConvexPolygon::toQVariant() const
+{
+	QVariantMap res = SphericalConvexPolygon::toQVariant();
+	QVariantList cv;
+	foreach (const Vec2f& v, textureCoords)
+	{
+		QVariantList vv;
+		vv << v[0] << v[1];
+		cv.append((QVariant)vv);
+	}
+	res.insert("textureCoords", cv);
+	return res;
 }
