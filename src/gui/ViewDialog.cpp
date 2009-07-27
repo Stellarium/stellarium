@@ -325,6 +325,9 @@ void ViewDialog::skyLayersSelectionChanged(const QString& s)
 	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
 	StelSkyLayerP l = skyLayerMgr->getSkyLayer(s);
 
+	if (l.isNull())
+		return;
+	
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + l->getShortName()+ "</h2>";
 	html += "<p>" + l->getLayerDescriptionHtml() + "</p>";
