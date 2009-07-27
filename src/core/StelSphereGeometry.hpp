@@ -82,36 +82,30 @@ public:
 
 	//! Return a point located inside the region.
 	virtual Vec3d getPointInside() const = 0;
-
-	//! Returns whether a point is contained into the region.
-	virtual bool contains(const Vec3d& p) const = 0;
-
-	//! Equivalent to contains() for a point.
-	bool intersects(const Vec3d& p) const {return contains(p);}
-	
-	//! Returns whether a SphericalRegion is contained into this region.
-	bool contains(const SphericalRegionP& region) const;
 	
 	//! Returns whether a SphericalRegion intersects with this region.
 	bool intersects(const SphericalRegionP& region) const;
+	//! Returns whether a SphericalRegion is contained into this region.
+	bool contains(const SphericalRegionP& region) const;
 	
-	//! Returns whether a SphericalPolygon is contained into the region.
-	virtual bool contains(const SphericalPolygonBase& poly) const = 0;
-
-	//! Returns whether a SphericalPolygon intersects with the region.
+	//! Returns whether regions intersects.
+	bool intersects(const Vec3d& p) const {return contains(p);}	// Equivalent to contains() for a point.
 	virtual bool intersects(const SphericalPolygonBase& poly) const = 0;
-	
-	//! Returns whether a SphericalCap is contained into the region.
-	virtual bool contains(const SphericalCap& c) const = 0;
-
-	//! Returns whether a SphericalCap intersects with the region.
 	virtual bool intersects(const SphericalCap& c) const = 0;
-
-	//! Returns whether a AllSkySphericalRegion is contained into the region.
-	virtual bool contains(const AllSkySphericalRegion& a) const = 0;
-
-	//! Returns whether a AllSkySphericalRegion intersects with the region.
 	virtual bool intersects(const AllSkySphericalRegion& a) const = 0;
+	
+	//! Returns whether the region contains another one.
+	virtual bool contains(const Vec3d& p) const = 0;
+	virtual bool contains(const SphericalPolygonBase& poly) const = 0;
+	virtual bool contains(const SphericalCap& c) const = 0;
+	virtual bool contains(const AllSkySphericalRegion& a) const = 0;
+	
+	//! Return a SphericalRegion consisting of the intersection of this and the given region..
+	//virtual SphericalRegionP getIntersection(const SphericalRegionP& other) const;
+	//! Return a SphericalRegion consisting of the union of this and the given region.
+	//virtual SphericalRegionP getUnion(const SphericalRegionP& other) const;
+	//! Return a SphericalRegion consisting of the subtraction of the given region from this.
+	//virtual SphericalRegionP getSubtraction(const SphericalRegionP& other) const;
 	
 	//! Return the list of SphericalCap bounding the ConvexPolygon.
 	virtual QVector<SphericalCap> getBoundingSphericalCaps() const = 0;
