@@ -921,7 +921,7 @@ QVariantMap SphericalPoint::toQVariant() const
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, n);
 	QVariantList l;
-	l << ra << dec;
+	l << ra*180./M_PI << dec*180./M_PI;
 	res.insert("pos", l);
 	return res;
 }
@@ -933,9 +933,9 @@ QVariantMap SphericalCap::toQVariant() const
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, n);
 	QVariantList l;
-	l << ra << dec;
+	l << ra*180./M_PI << dec*180./M_PI;
 	res.insert("center", l);
-	res.insert("radius", std::acos(d));
+	res.insert("radius", std::acos(d)*180./M_PI);
 	return res;
 }
 
@@ -958,7 +958,7 @@ QVariantMap SphericalPolygon::toQVariant() const
 		{
 			StelUtils::rectToSphe(&ra, &dec, v);
 			QVariantList vv;
-			vv << ra << dec;
+			vv << ra*180./M_PI << dec*180./M_PI;
 			cv.append((QVariant)vv);
 		}
 		worldCoordinates.append((QVariant)cv);
@@ -984,7 +984,7 @@ QVariantMap SphericalConvexPolygon::toQVariant() const
 	{
 		StelUtils::rectToSphe(&ra, &dec, v);
 		QVariantList vv;
-		vv << ra << dec;
+		vv << ra*180./M_PI << dec*180./M_PI;
 		cv.append((QVariant)vv);
 	}
 	res.insert("worldCoords", cv);
