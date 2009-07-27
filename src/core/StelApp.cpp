@@ -66,6 +66,7 @@
 #include <QDebug>
 #include <QNetworkAccessManager>
 #include <QSysInfo>
+#include <QNetworkProxy>
 
 #ifdef WIN32
 #include <windows.h>
@@ -99,6 +100,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	// otherwise configuration/INI file parsing will be erroneous.
 	setlocale(LC_NUMERIC, "C");
 
+	qDebug() << "Testing breakpoints";
 	setObjectName("StelApp");
 
 	skyCultureMgr=NULL;
@@ -439,7 +441,25 @@ void StelApp::init()
 	flagNightVision=true;  // fool caching
 	setVisionModeNight(false);
 	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
+	
+	// Proxy Initialisation 
+	QString proxyName = confSettings->value("proxy/host_name").toString();
+	QString proxyUser = confSettings->value("proxy/user").toString();
+	QString proxyPassword = confSettings->value("proxy/password").toString();
+	QVariant proxyPort = confSettings->value("proxy/port");
+	
+	if (proxyName!="" && proxyUser!="" && proxyPassword!="" && !proxyPort.isNull()){
+	
+		QNetworkProxy proxy;
+		proxy.setType(QNetworkProxy::HttpProxy);
+		proxy.setHostName(proxyName);
+		proxy.setPort(proxyPort.toUInt());
+		proxy.setUser(proxyUser);
+		proxy.setPassword(proxyPassword);
+		QNetworkProxy::setApplicationProxy(proxy);
 
+	}
+	
 	updateI18n();
 
 	scriptAPIProxy = new StelMainScriptAPIProxy(this);
