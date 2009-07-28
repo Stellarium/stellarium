@@ -448,14 +448,15 @@ void StelApp::init()
 	QString proxyPassword = confSettings->value("proxy/password").toString();
 	QVariant proxyPort = confSettings->value("proxy/port");
 	
-	if (proxyName!="" && proxyUser!="" && proxyPassword!="" && !proxyPort.isNull()){
+	if (proxyName!="" && !proxyPort.isNull()){
 	
-		QNetworkProxy proxy;
-		proxy.setType(QNetworkProxy::HttpProxy);
+		QNetworkProxy proxy(QNetworkProxy::HttpProxy);
 		proxy.setHostName(proxyName);
 		proxy.setPort(proxyPort.toUInt());
-		proxy.setUser(proxyUser);
-		proxy.setPassword(proxyPassword);
+		if(proxyUser!="" && proxyPassword!="") {
+			proxy.setUser(proxyUser);
+			proxy.setPassword(proxyPassword);
+		}
 		QNetworkProxy::setApplicationProxy(proxy);
 
 	}
@@ -1130,7 +1131,7 @@ void StelApp::handleKeys(QKeyEvent* event)
 	}
 }
 
-
+ 
 void StelApp::setConfigFile(const QString& configName, bool restoreDefaults)
 {
 	try
