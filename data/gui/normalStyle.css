@@ -669,7 +669,7 @@ QMainWindow::separator:hover {
 }
 
 QDockWidget {
-	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(41, 47, 50), stop:1 rgb(31, 33, 36));
+	background-color: rgb(255, 0, 0);
 	color: rgb(194, 194, 195);	/* Dock widget title text color */
 	font: bold;
 	border: 0px;
@@ -681,25 +681,41 @@ QDockWidget::title {
 	background: transparent;
 }
 
+QTextBrowser#selectedLineInfo {
+	background-color: rgb(76, 77, 80);
+}
+
 QTreeView {
 	background-color: rgb(76, 77, 80);
-	alternate-background-color: rgb(76, 80, 87);
-	color: rgb(143, 143, 143);
+	color: rgb(238, 238, 238);
 	font-size: 12px;
 }
 
 QListView#listViewVoResources {
 	background-color: rgb(76, 77, 80);
-	alternate-background-color: rgb(76, 80, 87);
 	color: rgb(143, 143, 143);
 	font-size: 12px;
 }
 
+QTreeView#mainVoObjectTable {
+	background-color: rgb(76, 77, 80);
+	selection-background-color: rgb(253, 216, 134);
+}
+
+QTreeView::item:selected#mainVoObjectTable {
+background-color: rgb(59, 144, 235);
+color: rgb(255,255,255);
+}
+
+QHeaderView::section {
+	background-color: rgb(31, 31, 31);
+	border: 1px solid rgb(76,77,80);
+	font: bold;
+}
+
 QDateEdit {
 	padding-right: 20px; /* make room for the arrows */
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69), stop: 1 rgb(40, 40, 40));
 	border: 1px solid rgb(0, 0, 0);
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(200, 201, 202), stop: 1 rgb(104, 106, 107));
 	color: rgb(31, 31, 31);
 	font-size: 12px;
 	padding: 0px;
@@ -713,7 +729,7 @@ QDateEdit::up-button {
 	border: solid 1px rgb(0, 0, 0);
 	image: url(:/graphicGui/gui/spinup.png);
 	border-width: 1px;
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 92), stop: 1 rgb(74, 74, 75));
+
 }
 
 QDateEdit::down-button {
@@ -723,7 +739,7 @@ QDateEdit::down-button {
 	border: solid 1px rgb(0, 0, 0);
 	image: url(:/graphicGui/gui/spindown.png);
 	border-width: 1px;
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69), stop: 1 rgb(40, 40, 40));
+
 }
 
 QMenu {
@@ -747,7 +763,6 @@ QMainWindow > QDialog {
 }
 
 QHeaderView::section {
-	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(97, 97, 97), stop: 0.5 rgb(80, 80, 80),stop: 0.6 rgb(67, 67, 67), stop:1 rgb(101, 101, 101));
 	color: rgb(255, 255, 255);
 	font-size: 12px;
 	padding-left: 4px;
@@ -793,6 +808,10 @@ QWidget#resourceInformationEdition
 	background-color:transparent;
 }
 
+QWidget#viewMode {
+	background-color: rgb(76, 77, 80);		 
+	padding-left: 0px;
+}
 
 QTextEdit#editResourceDescription {
 border: 1px solid rgb(0, 0, 0);
@@ -816,6 +835,7 @@ QGroupBox#dataSourcesListGroupBox {
 QWidget#listManagerWidget {
 		background-color: rgb(31, 31, 31);
 }
+
 
 QGraphicsWidget#observationListView  QLabel {
         font-size: 40px;
