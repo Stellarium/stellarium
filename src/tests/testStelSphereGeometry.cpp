@@ -59,6 +59,14 @@ void TestStelSphericalGeometry::initTestCase()
 	QVector<Vec3d> triCont;
 	triCont << Vec3d(1,0,0) << Vec3d(0,0,1) << Vec3d(0,1,0);
 	triangle.setContour(triCont);
+	
+	
+	QVector<Vec3d> c4(4);
+	StelUtils::spheToRect(M_PI-0.5, -0.5, c4[3]);
+	StelUtils::spheToRect(M_PI+0.5, -0.5, c4[2]);
+	StelUtils::spheToRect(M_PI+0.5, 0.5, c4[1]);
+	StelUtils::spheToRect(M_PI-0.5, 0.5, c4[0]);
+	opositeSquare.setContour(c4);
 }
 
 void TestStelSphericalGeometry::testSphericalCap()
@@ -141,8 +149,8 @@ void TestStelSphericalGeometry::testConsistency()
 {
 	QCOMPARE(bigSquare.getArea(), bigSquareConvex.getArea());
 	QCOMPARE(smallSquare.getArea(), smallSquareConvex.getArea());
-	QVERIFY(smallSquare.getContours().size()==1);
-	QVERIFY(smallSquare.getContours()[0].size()==4);
+	QVERIFY(smallSquare.getSimplifiedContours().size()==1);
+	QVERIFY(smallSquare.getSimplifiedContours()[0].size()==4);
 	QVERIFY(smallSquareConvex.checkValid());
 	QVERIFY(bigSquareConvex.checkValid());
 	QVERIFY(triangle.checkValid());
@@ -194,6 +202,13 @@ void TestStelSphericalGeometry::testContains()
 	QVERIFY2(square1.intersects(square2), "Square intersect square failure");
 	QVERIFY2(square2.intersects(square1), "Square intersect square failure");
 
+	// Check when the polygons are far appart
+	QVERIFY(!square1.intersects(opositeSquare));
+	QVERIFY(!square2.intersects(opositeSquare));
+	QVERIFY(!holySquare.intersects(opositeSquare));
+	QVERIFY(!bigSquare.intersects(opositeSquare));
+	QVERIFY(opositeSquare.intersects(opositeSquare));
+			
 	// Test the tricky case where 2 polygons intersect without having point within each other
 	StelUtils::spheToRect(-deg5, -deg2, v3);
 	StelUtils::spheToRect(+deg5, -deg2, v2);
@@ -234,6 +249,35 @@ void TestStelSphericalGeometry::testPlaneIntersect2()
 	QVERIFY2(res.length()<0.0000001, QString("p2 wrong: %1").arg(p2.toString()).toUtf8());
 }
 
+void TestStelSphericalGeometry::testGreatCircleIntersection()
+{
+	Vec3d v0,v1,v2,v3;
+	double deg5 = 5.*M_PI/180.;
+	StelUtils::spheToRect(-deg5, -deg5, v3);
+	StelUtils::spheToRect(+deg5, -deg5, v2);
+	StelUtils::spheToRect(+deg5, +deg5, v1);
+	StelUtils::spheToRect(-deg5, +deg5, v0);
+	
+	bool ok;
+	Vec3d v(0);
+	QBENCHMARK {
+		v = greatCircleIntersection(v3, v1, v0, v2, ok);
+	}
+	QVERIFY(v.angle(Vec3d(1.,0.,0.))<0.00001);
+}
+
+
+void TestStelSphericalGeometry::benchmarkGetIntersection()
+{
+	SphericalRegionP bug1 = SphericalRegion::loadFromJson("{\"worldCoords\": [[[123.023842, -49.177087], [122.167613, -49.177087], [122.167613, -48.631248], [123.023842, -48.631248]]]}");
+	SphericalRegionP bug2 = SphericalRegion::loadFromJson("{\"worldCoords\": [[[123.028902, -49.677124], [122.163995, -49.677124], [122.163995, -49.131382], [123.028902, -49.131382]]]}");
+	QVERIFY(bug1->intersects(bug2));
+	SphericalRegionP res;
+	QBENCHMARK {
+		res = SphericalRegionP::getIntersection(bug1, bug2);
+	}
+}
+
 void TestStelSphericalGeometry::testEnlarge()
 {
 	Vec3d vx(1,0,0);
@@ -247,14 +291,26 @@ void TestStelSphericalGeometry::testEnlarge()
 void TestStelSphericalGeometry::testSphericalPolygon()
 {
 	// Testing code for new polygon code
-	QVector<QVector<Vec3d> > contours = holySquare.getContours();
+	QVector<QVector<Vec3d> > contours = holySquare.getSimplifiedContours();
 	QVERIFY(contours.size()==2);
 	QVERIFY(contours[0].size()==4);
 	QVERIFY(contours[1].size()==4);
 
-	// Booleans methods
+	SphericalPolygon holySquare2 = bigSquare.getSubtraction(smallSquare);
+// 	QVector<QVector<Vec3d> > contours2 = holySquare2.getSimplifiedContours();
+// 	QVERIFY(contours2.size()==2);
+// 	QVERIFY(contours2[0].size()==4);
+// 	qDebug() << holySquare.toJSON();
+// 	qDebug() << holySquare2.toJSON();
+// 	QVERIFY(contours2[1].size()==4);
+// 	QVERIFY(contours==contours2);
+
+	QCOMPARE(holySquare2.getArea(), holySquare.getArea());
+	
+	//Booleans methods
+	QCOMPARE(holySquare.getArea(), bigSquare.getArea()-smallSquare.getArea());
 	QCOMPARE(bigSquare.getUnion(holySquare).getArea(), bigSquare.getArea());
-	QCOMPARE(bigSquare.getSubtraction(smallSquare).getArea(), holySquare.getArea());
+	QCOMPARE(bigSquare.getSubtraction(smallSquare).getArea(), bigSquare.getArea()-smallSquare.getArea());
 	QCOMPARE(bigSquare.getIntersection(smallSquare).getArea(), smallSquare.getArea());
 
 	// Point contain methods
@@ -277,6 +333,17 @@ void TestStelSphericalGeometry::testSphericalPolygon()
 	
 	SphericalCap cap(Vec3d(1,0,0), 0.99);
 	QVERIFY(bigSquareConvex.intersects(cap));
+	
+	// A case which caused a problem
+	SphericalRegionP bug1 = SphericalRegion::loadFromJson("{\"worldCoords\": [[[123.023842, -49.177087], [122.167613, -49.177087], [122.167613, -48.631248], [123.023842, -48.631248]]]}");
+	SphericalRegionP bug2 = SphericalRegion::loadFromJson("{\"worldCoords\": [[[123.028902, -49.677124], [122.163995, -49.677124], [122.163995, -49.131382], [123.028902, -49.131382]]]}");
+	QVERIFY(bug1->intersects(bug2));
+	
+	// Another one
+	bug1 = SphericalRegion::loadFromJson("{\"worldCoords\": [[[52.99403, -27.683551], [53.047302, -27.683551], [53.047302, -27.729923], [52.99403, -27.729923]]]}");
+	bug2 = SphericalRegion::loadFromJson("{\"worldCoords\": [[[52.993701, -27.683092], [53.047302, -27.683092], [53.047302, -27.729839], [52.993701, -27.729839]]]}");
+	SphericalRegionP bugIntersect = SphericalRegionP::getIntersection(bug1, bug2);
+
 }
 
 void TestStelSphericalGeometry::testLoading()
@@ -303,7 +370,7 @@ void TestStelSphericalGeometry::testLoading()
 	SphericalTexturedPolygon* polyTex = dynamic_cast<SphericalTexturedPolygon*>(regTex.data());
 	QVERIFY(polyTex!=NULL);
 
-	QVector<QVector<Vec3d> > contours = poly->getContours();
+	QVector<QVector<Vec3d> > contours = poly->getSimplifiedContours();
 	QVERIFY(contours.size()==2);
 	QVERIFY(contours[0].size()==4);
 	QVERIFY(contours[1].size()==4);

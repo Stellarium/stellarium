@@ -32,6 +32,7 @@ private slots:
 	void testSphericalCap();
 	void testContains();
 	void testPlaneIntersect2();
+	void testGreatCircleIntersection();
 	void testSphericalPolygon();
 	void testConsistency();
 	void testLoading();
@@ -39,11 +40,13 @@ private slots:
 	void benchmarkContains();
 	void benchmarkCheckValid();
 	void benchmarkSphericalCap();
-
+	void benchmarkGetIntersection();
+	
 private:
 	SphericalPolygon holySquare;
 	SphericalPolygon bigSquare;
 	SphericalPolygon smallSquare;
+	SphericalPolygon opositeSquare;
 	SphericalConvexPolygon bigSquareConvex;
 	SphericalConvexPolygon smallSquareConvex;
 	SphericalConvexPolygon triangle;
