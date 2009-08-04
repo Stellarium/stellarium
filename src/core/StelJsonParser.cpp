@@ -26,28 +26,29 @@ void skipJson(QIODevice& input)
 	char c;
 	while (input.getChar(&c))
 	{
-		if (c==' ' || c=='\t' || c=='\n')
-			continue;
-		else
+		switch (c)
 		{
-			if (c!='/')
-			{
+			case ' ':
+			case '\t':
+			case '\n':
+				break;
+			case '/':
+				{
+					if (!input.getChar(&c))
+						return;
+	
+					if (c=='/')
+						input.readLine();
+					else
+					{
+						// We have a problem, we removed a '/'.. This should never happen with properly formatted JSON though
+						throw std::runtime_error(qPrintable(QString("Unexpected '/%1' in the JSON content").arg(c)));
+					}
+				}
+				break;
+			default:
 				input.ungetChar(c);
 				return;
-			}
-
-			if (!input.getChar(&c))
-				return;
-
-			if (c=='/')
-				input.readLine();
-			else
-			{
-				// We have a problem, we removed an '/'..
-				qWarning() << "I removed a '/' while parsing JSON file.";
-				input.ungetChar(c);
-				return;
-			}
 		}
 	}
 }
@@ -65,36 +66,40 @@ bool tryReadChar(QIODevice& input, char c)
 	return false;
 }
 
-QString readString(QIODevice& input)
+QByteArray readString(QIODevice& input)
 {
 	QByteArray name;
 	char c;
 	input.getChar(&c);
 	if (c!='\"')
 		throw std::runtime_error("Expected '\"' at beginning of string");
-	for (;;)
+	while (input.getChar(&c))
 	{
-		input.getChar(&c);
-		if (c=='\\')
+		switch (c)
 		{
-			input.getChar(&c);
-	// 			case '\"': break;
-	// 			case '\\': break;
-	// 			case '/': break;
-			if (c=='b') c='\b';
-			if (c=='f') c='\f'; break;
-			if (c=='n') c='\n'; break;
-			if (c=='r') c='\r'; break;
-			if (c=='t') c='\t'; break;
-			if (c=='u') qWarning() << "don't support \\uxxxx char"; break;
+			case '\\':
+			{
+				input.getChar(&c);
+				// 	case '\"': break;
+				// 	case '\\': break;
+				// 	case '/': break;
+				if (c=='b') c='\b';
+				if (c=='f') c='\f';
+				if (c=='n') c='\n';
+				if (c=='r') c='\r';
+				if (c=='t') c='\t';
+				if (c=='u') {qWarning() << "don't support \\uxxxx char"; continue;}
+				break;
+			}
+			case '\"':
+				return name;
+			default:
+				name+=c;
 		}
-		if (c=='\"')
-			return QString(name);
-		name+=c;
-		if (input.atEnd())
-			throw std::runtime_error(qPrintable(QString("End of file before end of string: "+name)));
 	}
-	Q_ASSERT(0);
+	if (input.atEnd())
+		throw std::runtime_error(qPrintable(QString("End of file before end of string: "+name)));
+	throw std::runtime_error(qPrintable(QString("Read error before end of string: "+name)));
 	return "";
 }
 
@@ -124,8 +129,7 @@ QVariant readOther(QIODevice& input)
 	const double d = str.toDouble(&ok);
 	if (ok)
 		return d;
-	// This will cause an error, but will allow to debug more easily than returning an empty QVariant
-	return QVariant(str);
+	throw std::runtime_error(qPrintable(QString("Invalid JSON value: \"")+str+"\""));
 }
 
 // Parse the given input stream
@@ -133,65 +137,78 @@ QVariant StelJsonParser::parse(QIODevice& input)
 {
 	skipJson(input);
 
-	if (tryReadChar(input, '{'))
+	char r;
+	if (!input.getChar(&r))
+		return QVariant();
+	
+	switch (r)
 	{
-		// We've got an object (a tuple)
-		QVariantMap map;
-		skipJson(input);
-		if (tryReadChar(input, '}'))
+		case '{':
+		{
+			// We've got an object (a tuple)
+			QVariantMap map;
+			skipJson(input);
+			if (tryReadChar(input, '}'))
+				return map;
+			for (;;)
+			{
+				skipJson(input);
+				const QByteArray& ar = readString(input);
+				const QString& key = QString::fromUtf8(ar.constData(), ar.size());
+				skipJson(input);
+				if (!tryReadChar(input, ':'))
+					throw std::runtime_error(qPrintable(QString("Expected ':' after a member name: ")+key));
+	
+				skipJson(input);
+				map.insert(key, parse(input));
+				skipJson(input);
+	
+				if (!tryReadChar(input, ','))
+					break;
+			}
+	
+			skipJson(input);
+	
+			if (!tryReadChar(input, '}'))
+				throw std::runtime_error("Expected '}' to close an object");
 			return map;
-		for (;;)
-		{
-			skipJson(input);
-			QString key = readString(input);
-			skipJson(input);
-			if (!tryReadChar(input, ':'))
-				throw std::runtime_error(qPrintable(QString("Expected ':' after a member name: ")+key));
-
-			skipJson(input);
-			map.insert(key, parse(input));
-			skipJson(input);
-
-			if (!tryReadChar(input, ','))
-				break;
 		}
-
-		skipJson(input);
-
-		if (!tryReadChar(input, '}'))
-			throw std::runtime_error("Expected '}' to close an object");
-		return map;
-	}
-	else if (tryReadChar(input, '['))
-	{
-		// We've got an array (a vector)
-		QVariantList list;
-		skipJson(input);
-		if (tryReadChar(input, ']'))
+		case '[':
+		{
+			// We've got an array (a vector)
+			QVariantList list;
+			skipJson(input);
+			if (tryReadChar(input, ']'))
+				return list;
+	
+			for (;;)
+			{
+				list.append(parse(input));
+				skipJson(input);
+				if (!tryReadChar(input, ','))
+					break;
+			}
+	
+			skipJson(input);
+	
+			if (!tryReadChar(input, ']'))
+				throw std::runtime_error("Expected ']' to close an array");
+	
 			return list;
-
-		for (;;)
-		{
-			list.append(parse(input));
-			skipJson(input);
-			if (!tryReadChar(input, ','))
-				break;
 		}
-
-		skipJson(input);
-
-		if (!tryReadChar(input, ']'))
-			throw std::runtime_error("Expected ']' to close an array");
-
-		return list;
+		case '\"':
+		{
+			// We've got a string
+			input.ungetChar('\"');
+			const QByteArray& ar = readString(input);
+			return QString::fromUtf8(ar.constData(), ar.size());
+		}
+		default:
+		{
+			input.ungetChar(r);
+			return readOther(input);
+		}
 	}
-	else if (tryReadChar(input, '\"'))
-	{
-		// We've got a string
-		input.ungetChar('\"');
-		return readString(input);
-	}
-	return readOther(input);
 }
 
 // Serialize the passed QVariant as JSON into the output QIODevice
