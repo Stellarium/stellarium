@@ -522,3 +522,13 @@ QT4_WRAP_CPP(tests_testStelSphericalIndex_MOC_SRCS tests/testStelSphericalIndex.
 ADD_EXECUTABLE(testStelSphericalIndex ${tests_testStelSphericalIndex_SRCS} ${tests_testStelSphericalIndex_MOC_SRCS})
 TARGET_LINK_LIBRARIES(testStelSphericalIndex ${extLinkerOption} ${QT_QTTEST_LIBRARY})
 ADD_TEST(test_testStelSphericalIndex ${EXECUTABLE_OUTPUT_PATH}/testStelSphericalIndex)
+
+SET(tests_testStelJsonParser_SRCS
+	tests/testStelJsonParser.hpp
+	tests/testStelJsonParser.cpp
+	core/StelJsonParser.hpp
+	core/StelJsonParser.cpp)
+QT4_WRAP_CPP(tests_testStelJsonParser_MOC_SRCS tests/testStelJsonParser.hpp)
+ADD_EXECUTABLE(testStelJsonParser ${tests_testStelJsonParser_SRCS} ${tests_testStelJsonParser_MOC_SRCS})
+TARGET_LINK_LIBRARIES(testStelJsonParser ${extLinkerOption} ${QT_QTTEST_LIBRARY})
+ADD_TEST(test_testStelJsonParser ${EXECUTABLE_OUTPUT_PATH}/testStelJsonParser)
