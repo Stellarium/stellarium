@@ -385,7 +385,6 @@ void LandscapeOldStyle::drawGround(StelCore* core) const
 	// draw a fan disk instead of a ordinary disk to that the inner slices
 	// are not so slender. When they are too slender, culling errors occur
 	// in cylinder projection mode.
-	//prj->sDisk(radius,nbSide*slices_per_side*nbDecorRepeat,5, 1);
 	int slices_inside = nbSide*slices_per_side*nbDecorRepeat;
 	int level = 0;
 	while ((slices_inside&1)==0 && slices_inside > 4)
