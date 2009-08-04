@@ -89,7 +89,7 @@ QString readString(QIODevice& input)
 			if (c=='u') qWarning() << "don't support \\uxxxx char"; break;
 		}
 		if (c=='\"')
-			return QString::fromUtf8(name.constData(), name.size());
+			return QString(name);
 		name+=c;
 		if (input.atEnd())
 			throw std::runtime_error(qPrintable(QString("End of file before end of string: "+name)));
@@ -117,13 +117,14 @@ QVariant readOther(QIODevice& input)
 		return QVariant(false);
 	if (str=="null")
 		return QVariant();
-	bool ok=false;
+	bool ok;
 	const int i = str.toInt(&ok);
 	if (ok)
 		return i;
 	const double d = str.toDouble(&ok);
 	if (ok)
 		return d;
+	// This will cause an error, but will allow to debug more easily than returning an empty QVariant
 	return QVariant(str);
 }
 
