@@ -196,7 +196,7 @@ void StelSkyPolygon::loadFromQVariantMap(const QVariantMap& map)
 	bool ok=false;
 	minResolution = map.value("minResolution").toDouble(&ok);
 	if (!ok)
-		throw std::runtime_error("minResolution expect a double value");
+		throw std::runtime_error(qPrintable(QString("minResolution expect a double value, found: %1").arg(map.value("minResolution").toString())));
 
 	// Load the convex polygons (if any)
 	QVariantList polyList = map.value("worldCoords").toList();

@@ -49,8 +49,18 @@ void TestStelJsonParser::testBase()
 	buf.setData(largeJsonBuff);
 	buf.open(QIODevice::ReadOnly);
 	QVariant result = StelJsonParser::parse(buf);
+	buf.close();
 	QVERIFY(result.canConvert<QVariantMap>());
 	QVERIFY(result.toMap().size()==12);
+	
+	QByteArray doubleStr = "{\"val\": 0.000280}";
+	buf.setData(doubleStr);
+	buf.open(QIODevice::ReadOnly);
+	result = StelJsonParser::parse(buf);
+	buf.close();
+	bool ok;
+	QCOMPARE(result.toMap().value("val").toDouble(&ok), 0.000280);
+	QVERIFY(ok==true);
 }
 
 void TestStelJsonParser::benchmarkParse()
