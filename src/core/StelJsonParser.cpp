@@ -109,7 +109,7 @@ QVariant readOther(QIODevice& input)
 	char c;
 	while (input.getChar(&c))
 	{
-		if (c==' ' || c=='\t' || c==']' || c=='}' || c==',')
+		if (c==' ' || c==',' || c==']' || c=='\t' || c=='}')
 		{
 			input.ungetChar(c);
 			break;
