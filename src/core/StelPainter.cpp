@@ -224,9 +224,6 @@ void StelPainter::drawViewportShape(void) const
 	/* Enable arrays */
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, vertices);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	glDisableClientState(GL_NORMAL_ARRAY);
-	glDisableClientState(GL_COLOR_ARRAY);
 
 	radiusHigh=outerRadius-deltaRadius;
 	for (int i=0; i<=slices; i++)
