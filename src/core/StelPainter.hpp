@@ -179,13 +179,6 @@ public:
 	//! @param level the numbe of concentric circles.
 	void sFanDisk(double radius,int innerFanSlices,int level) const;
 
-	//! Draw a disk with a special texturing mode having texture center at center.
-	//! @param radius the radius of the disk.
-	//! @param slices the number of slices.
-	//! @param stacks ???
-	//! @param orientInside ???
-	void sDisk(GLdouble radius, GLint slices, GLint stacks, int orientInside = 0) const;
-	
 	//! Draw a ring with a radial texturing.
 	void sRing(GLdouble rMin, GLdouble rMax, GLint slices, GLint stacks, int orientInside) const;
 
