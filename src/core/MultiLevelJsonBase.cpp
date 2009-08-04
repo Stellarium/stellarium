@@ -192,7 +192,16 @@ void MultiLevelJsonBase::initFromQVariantMap(const QVariantMap& map)
 		baseUrl = parent->getBaseUrl();
 		contructorUrl = parent->contructorUrl + "/?";
 	}
-	loadFromQVariantMap(map);
+	try
+	{
+		loadFromQVariantMap(map);
+	}
+	catch (std::runtime_error e)
+	{
+		qWarning() << "WARNING: invalid variant map: " << e.what();
+		errorOccured = true;
+		return;
+	}
 	downloading = false;
 }
 
@@ -329,7 +338,16 @@ void MultiLevelJsonBase::jsonLoadFinished()
 	downloading = false;
 	if (errorOccured)
 		return;
-	loadFromQVariantMap(temporaryResultMap);
+	try
+	{
+		loadFromQVariantMap(temporaryResultMap);
+	}
+	catch (std::runtime_error e)
+	{
+		qWarning() << "WARNING: invalid variant map: " << e.what();
+		errorOccured = true;
+		return;
+	}
 }
 
 

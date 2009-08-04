@@ -342,9 +342,13 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	if (shortName.isEmpty())
 		shortName = "no name";
 	bool ok=false;
+	if (!map.contains("minResolution"))
+		throw std::runtime_error(qPrintable(QString("minResolution is mandatory")));
 	minResolution = map.value("minResolution").toDouble(&ok);
 	if (!ok)
-		throw std::runtime_error("minResolution expect a double value");
+	{
+		throw std::runtime_error(qPrintable(QString("minResolution expect a double value, found: \"%1\"").arg(map.value("minResolution").toString())));
+	}
 
 	if (map.contains("luminance"))
 	{
