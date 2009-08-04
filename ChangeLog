@@ -11,7 +11,10 @@ Generalized the use of shared pointers for StelObject management.
 Use vertex shaders for computation of atmosphere color if the graphics card allows it.
 Optimized openGL calls by replacing glBegin()/glEnd() by the use of vertexArray.
 Optimization of critical parts of the projection code.
-Added code for managing and displaying non convex polygons.
+Added code for managing and displaying non convex polygons + unit tests.
+Recoded the StelGrid code to support non ponctual sky regions, and optimized API (new class StelSphericalIndex + unit tests)
+Optimized many part of the code by reducing creation of temporary Vec3d/Vec3f.
+Optimized JSON parser (x5 speed improvement) + unit tests.
 
 0.10.2 [2009-03-09]
 Based on Qt 4.5.
