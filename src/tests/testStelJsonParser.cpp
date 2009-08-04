@@ -61,6 +61,25 @@ void TestStelJsonParser::testBase()
 	bool ok;
 	QCOMPARE(result.toMap().value("val").toDouble(&ok), 0.000280);
 	QVERIFY(ok==true);
+	
+	QByteArray boolStr = "{\"valtrue\": true, \"valfalse\": false}";
+	buf.setData(boolStr);
+	buf.open(QIODevice::ReadOnly);
+	result = StelJsonParser::parse(buf);
+	buf.close();
+	QVERIFY(result.toMap().value("valtrue").canConvert<bool>());
+	QVERIFY(result.toMap().value("valtrue").toBool()==true);
+	QVERIFY(result.toMap().value("valfalse").canConvert<bool>());
+	QVERIFY(result.toMap().value("valfalse").toBool()==false);
+	
+	QByteArray intStr = "{\"val\": -12356}";
+	buf.setData(intStr);
+	buf.open(QIODevice::ReadOnly);
+	result = StelJsonParser::parse(buf);
+	buf.close();
+	QVERIFY(result.toMap().value("val").canConvert<int>());
+	QVERIFY(result.toMap().value("val").toInt(&ok)==-12356);
+	QVERIFY(ok==true);
 }
 
 void TestStelJsonParser::benchmarkParse()
