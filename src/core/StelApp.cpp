@@ -958,8 +958,8 @@ void StelApp::update(double deltaTime)
 	stelObjectMgr->update(deltaTime);
 }
 
-#include "StelPainter.hpp"
-#include "StelTextureTypes.hpp"
+//#include "StelPainter.hpp"
+//#include "StelTextureTypes.hpp"
 
 //! Main drawing function called at each frame
 void StelApp::draw()

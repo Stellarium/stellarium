@@ -20,12 +20,6 @@
 #include "GLee.h"
 #include "fixx11h.h"
 
-#if defined(__APPLE__) && defined(__MACH__)
-#include <OpenGL/glu.h>	/* Header File For The GLU Library */
-#else
-#include <GL/glu.h>	/* Header File For The GLU Library */
-#endif
-
 #include "StelProjector.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
@@ -185,9 +179,69 @@ void StelPainter::drawViewportShape(void) const
 	glColor3f(0.f,0.f,0.f);
 	glPushMatrix();
 	glTranslated(prj->viewportCenter[0],prj->viewportCenter[1],0.0);
-	GLUquadricObj * p = gluNewQuadric();
-	gluDisk(p, 0.5*prj->viewportFovDiameter, prj->getViewportWidth()+prj->getViewportHeight(), 256, 1);  // should always cover whole screen
-	gluDeleteQuadric(p);
+	
+	// Got rid of GLU and therefore copied the code there
+// 	GLUquadricObj * p = gluNewQuadric();
+// 	gluDisk(p, 0.5*prj->viewportFovDiameter, , 256, 1);  // should always cover whole screen
+// 	gluDeleteQuadric(p);
+	
+	GLfloat innerRadius = 0.5*prj->viewportFovDiameter;
+	GLfloat outerRadius = prj->getViewportWidth()+prj->getViewportHeight();
+	GLint slices = 256;
+	GLfloat sweepAngle = 360.;
+	
+	GLfloat sinCache[240];
+	GLfloat cosCache[240];
+	GLfloat vertices[(240+1)*2][3];
+	GLfloat deltaRadius;
+	GLfloat radiusHigh;
+
+	if (slices>=240)
+	{
+		slices=240-1;
+	}
+
+	if (outerRadius<=0.0 || innerRadius<0.0 ||innerRadius > outerRadius)
+	{
+		Q_ASSERT(0);
+		return;
+	}
+
+	/* Compute length (needed for normal calculations) */
+	deltaRadius=outerRadius-innerRadius;
+
+	/* Cache is the vertex locations cache */
+	for (int i=0; i<=slices; i++)
+	{
+		GLfloat angle=((M_PI*sweepAngle)/180.0f)*i/slices;
+		sinCache[i]=(GLfloat)sin(angle);
+		cosCache[i]=(GLfloat)cos(angle);
+	}
+
+	sinCache[slices]=sinCache[0];
+	cosCache[slices]=cosCache[0];
+
+	/* Enable arrays */
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, vertices);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_NORMAL_ARRAY);
+	glDisableClientState(GL_COLOR_ARRAY);
+
+	radiusHigh=outerRadius-deltaRadius;
+	for (int i=0; i<=slices; i++)
+	{
+		vertices[i*2][0]=outerRadius*sinCache[i];
+		vertices[i*2][1]=outerRadius*cosCache[i];
+		vertices[i*2][2]=0.0;
+		vertices[i*2+1][0]=radiusHigh*sinCache[i];
+		vertices[i*2+1][1]=radiusHigh*cosCache[i];
+		vertices[i*2+1][2]=0.0;
+	}
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, ((slices+1)*2));
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+	
 	glPopMatrix();
 }
 
@@ -307,42 +361,6 @@ void StelPainter::sFanDisk(double radius, int innerFanSlices, int level) const
 		drawVertex3(x,y,0);
 	}
 	glEnd();
-}
-
-
-// Draw a disk with a special texturing mode having texture center at disk center
-void StelPainter::sDisk(GLdouble radius, GLint slices, GLint stacks, int orientInside) const
-{
-	GLint i,j;
-	const GLfloat nsign = orientInside ? -1 : 1;
-	double r;
-	const double dr = radius / stacks;
-
-	const double dtheta = 2.0 * M_PI / slices;
-	if (slices < 0) slices = -slices;
-	Q_ASSERT(slices<=MAX_SLICES);
-	ComputeCosSinTheta(dtheta,slices);
-	double *cos_sin_theta_p;
-
-	// draw intermediate stacks as quad strips
-	for (i = 0, r = 0.0; i < stacks; i++, r+=dr)
-	{
-		glBegin(GL_QUAD_STRIP);
-		for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices; ++j,cos_sin_theta_p+=2)
-		{
-			double x = r*cos_sin_theta_p[0];
-			double y = r*cos_sin_theta_p[1];
-			glNormal3f(0, 0, nsign);
-			glTexCoord2d(0.5+0.5*x/radius, 0.5+0.5*y/radius);
-			drawVertex3(x, y, 0);
-			x = (r+dr)*cos_sin_theta_p[0];
-			y = (r+dr)*cos_sin_theta_p[1];
-			glNormal3f(0, 0, nsign);
-			glTexCoord2d(0.5+0.5*x/radius, 0.5+0.5*y/radius);
-			drawVertex3(x, y, 0);
-		}
-		glEnd();
-	}
 }
 
 void StelPainter::sRing(GLdouble rMin, GLdouble rMax, GLint slices, GLint stacks, int orientInside) const
