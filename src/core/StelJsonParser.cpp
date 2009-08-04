@@ -26,7 +26,7 @@ void skipJson(QIODevice& input)
 	char c;
 	while (input.getChar(&c))
 	{
-		if (QChar(c).isSpace() || c=='\n')
+		if (c==' ' || c=='\t' || c=='\n')
 			continue;
 		else
 		{
@@ -89,7 +89,7 @@ QString readString(QIODevice& input)
 			if (c=='u') qWarning() << "don't support \\uxxxx char"; break;
 		}
 		if (c=='\"')
-			return QString(name);
+			return QString::fromUtf8(name.constData(), name.size());
 		name+=c;
 		if (input.atEnd())
 			throw std::runtime_error(qPrintable(QString("End of file before end of string: "+name)));
@@ -104,30 +104,27 @@ QVariant readOther(QIODevice& input)
 	char c;
 	while (input.getChar(&c))
 	{
-		if (QChar(c).isSpace() || c==']' || c=='}' || c==',')
+		if (c==' ' || c=='\t' || c==']' || c=='}' || c==',')
 		{
 			input.ungetChar(c);
 			break;
 		}
 		str+=c;
 	}
-	QTextStream ts(&str);
-	QString s;
-	ts >> s;
-	if (s=="true")
+	if (str=="true")
 		return QVariant(true);
-	if (s=="false")
+	if (str=="false")
 		return QVariant(false);
-	if (s=="null")
+	if (str=="null")
 		return QVariant();
-	QVariant v(s);
 	bool ok=false;
-	int i = v.toInt(&ok);
-	if (ok) return i;
-	double d = v.toDouble(&ok);
+	const int i = str.toInt(&ok);
+	if (ok)
+		return i;
+	const double d = str.toDouble(&ok);
 	if (ok)
 		return d;
-	return v;
+	return QVariant(str);
 }
 
 // Parse the given input stream
