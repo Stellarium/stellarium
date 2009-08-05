@@ -60,32 +60,34 @@ void StelLocationMgr::loadCities(const QString& fileName, bool isUserLocation)
 	// Read the data serialized from the file.
 	// Code below borrowed from Marble (http://edu.kde.org/marble/)
 	QTextStream sourcestream(&sourcefile);
-	sourcestream.setCodec("UTF-8");	
+	sourcestream.setCodec("UTF-8");
+	StelLocation loc;
 	while (!sourcestream.atEnd())
 	{
 		const QString& rawline=sourcestream.readLine();
 		if (rawline.isEmpty() || rawline.startsWith('#'))
 			continue;
-		StelLocation loc = StelLocation::createFromLine(rawline);
+		loc = StelLocation::createFromLine(rawline);
 		loc.isUserLocation = isUserLocation;
+		const QString& locId = loc.getID();
 		
-		if (locations.contains(loc.getID()))
+		if (locations.contains(locId))
 		{
 			// Add the state in the name of the existing one and the new one to differentiate
-			StelLocation loc2 = locations[loc.getID()];
+			StelLocation loc2 = locations[locId];
 			if (!loc2.state.isEmpty())
 				loc2.name += " ("+loc2.state+")";
 			// remove and re-add the fixed version
-			locations.remove(loc.getID());
+			locations.remove(locId);
 			locations[loc2.getID()] = loc2;
 			
 			if (!loc.state.isEmpty())
 				loc.name += " ("+loc.state+")";
-			locations[loc.getID()] = loc;
+			locations[locId] = loc;
 		}
 		else
 		{
-			locations[loc.getID()] = loc;
+			locations.insert(locId, loc);
 		}
 	}
 	sourcefile.close();
