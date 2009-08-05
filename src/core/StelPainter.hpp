@@ -28,8 +28,9 @@
 #include "StelProjector.hpp"
 #include <QString>
 #include <QVarLengthArray>
+#include <QFontMetrics>
 
-class StelFont;
+class QPainter;
 
 //! @class StelPainter
 //! Provides functions for performing openGL drawing operations.
@@ -88,7 +89,7 @@ public:
 	//! @param xshift shift in pixel in the rotated x direction.
 	//! @param yshift shift in pixel in the rotated y direction.
 	//! @param noGravity don't take into account the fact that the text should be written with gravity.
-	void drawText(const StelFont* font, float x, float y, const QString& str, float angleDeg=0.f, 
+	void drawText(float x, float y, const QString& str, float angleDeg=0.f, 
 		      float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
 	
 	//! Draw the given SphericalPolygon.
@@ -186,9 +187,18 @@ public:
 	void sSphereMap(GLdouble radius, GLint slices, GLint stacks,
 	                 double textureFov = 2.*M_PI, int orientInside = 0) const;
 
+	//! Set the font to use for subsequent text drawing.
+	void setFont(const QFont& font);
+	
+	//! Get the font metrics for the current font.
+	QFontMetrics getFontMetrics() const;
+	
 	//! Get some informations about the OS openGL capacities.
-	//! This method needs to be called once at init
+	//! This method needs to be called once at init.
 	static void initSystemGLInfo();
+	
+	//! Set the QPainter to use for performing some drawing operations.
+	static void setQPainter(QPainter* qPainter);
 	
 private:
 	
@@ -205,13 +215,12 @@ private:
 	
 	//! Switch to native OpenGL painting, i.e not using QPainter.
 	//! After this call revertToQtPainting() MUST be called.
-	void switchToNativeOpenGLPainting();
+	void switchToNativeOpenGLPainting() const;
 
 	//! Revert openGL state so that Qt painting works again.
-	void revertToQtPainting();
+	void revertToQtPainting() const;
 	
-	void drawTextGravity180(const StelFont* font, float x, float y, const QString& str, 
-			      bool speedOptimize = 1, float xshift = 0, float yshift = 0) const;
+	void drawTextGravity180(float x, float y, const QString& str, float xshift = 0, float yshift = 0) const;
 		
 	//! Init the real openGL Matrices to a 2d orthographic projection
 	void initGlMatrixOrtho2d(void) const;
@@ -224,6 +233,9 @@ private:
 	
 	//! Mutex allowing thread safety
 	static class QMutex* globalMutex;
+	
+	//! The QPainter to use for some drawing operations.
+	static QPainter* qPainter;
 };
 
 #endif // _STELPAINTER_HPP_

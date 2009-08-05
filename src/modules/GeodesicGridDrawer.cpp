@@ -22,7 +22,6 @@
 #include "StelGeodesicGridDrawer.hpp"
 #include "StelProjector.hpp"
 #include "StelApp.hpp"
-#include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 
 StelGeodesicGridDrawer::StelGeodesicGridDrawer(int maxLevel)

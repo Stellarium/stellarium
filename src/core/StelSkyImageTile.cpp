@@ -30,13 +30,6 @@
 
 #include <QDebug>
 
-#ifdef DEBUG_STELSKYIMAGE_TILE
- #include "StelFont.hpp"
-#include "StelFontMgr.hpp"
-#include "StelLocaleMgr.hpp"
- StelFont* StelSkyImageTile::debugFont = NULL;
-#endif
-
 StelSkyImageTile::StelSkyImageTile()
 {
 	initCtor();

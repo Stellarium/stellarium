@@ -37,7 +37,6 @@
 #include "StelLoadingBar.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
@@ -90,8 +89,7 @@ void NebulaMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	double fontSize = 12;
-	Nebula::nebulaFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
+	nebulaFont.setPixelSize(12);
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setMinFilter(GL_LINEAR);
@@ -155,6 +153,7 @@ void NebulaMgr::draw(StelCore* core)
 	// Print all the nebulae of all the selected zones
 	float maxMagHints = skyDrawer->getLimitMagnitude()*1.2-2.+(hintsAmount*1.2f)-2.f;
 	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.+(labelsAmount*1.2f)-2.f;
+	sPainter.setFont(nebulaFont);
 	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, sPainter, hintsFader.getInterstate()>0.0001);
 	nebGrid.processIntersectingRegions(p, func);
 	
@@ -458,8 +457,6 @@ void NebulaMgr::updateI18n()
 	StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	foreach (NebulaP n, nebArray)
 		n->translateName(trans);
-	double fontSize = 12;
-	Nebula::nebulaFont = &StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
 

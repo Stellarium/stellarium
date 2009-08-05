@@ -21,10 +21,8 @@
 #include "StelLoadingBar.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
-#include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelMainGraphicsView.hpp"
-#include "StelFont.hpp"
 #include "StelPainter.hpp"
 #include "StelCore.hpp"
 
@@ -34,11 +32,10 @@
 StelLoadingBar::StelLoadingBar(float fontSize, const QString&  splashTex, 
 	const QString& extraTextString, float extraTextSize, 
 	float extraTextPosx, float extraTextPosy) :
-	width(512), height(512), barwidth(400), barheight(10),
-barfont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)),
-extraTextFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), extraTextSize)),
-			  extraText(extraTextString)
+	width(512), height(512), barwidth(400), barheight(10), extraText(extraTextString)
 {
+	barfont.setPixelSize(fontSize);
+	extraTextFont.setPixelSize(extraTextSize);
 	const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection2d();
 	int screenw = prj->getViewportWidth();
 	int screenh = prj->getViewportHeight();
@@ -93,8 +90,10 @@ void StelLoadingBar::Draw(float val)
 	
 	glColor3f(1, 1, 1);
 	glEnable(GL_TEXTURE_2D);
-	sPainter.drawText(&barfont, barx, bary-barfont.getLineHeight()-1, message);
-	sPainter.drawText(&extraTextFont, splashx + extraTextPos[0], splashy + extraTextPos[1]-extraTextFont.getLineHeight()-1, extraText);
+	sPainter.setFont(barfont);
+	sPainter.drawText(barx, bary-sPainter.getFontMetrics().height()-1, message);
+	sPainter.setFont(extraTextFont);
+	sPainter.drawText(splashx + extraTextPos[0], splashy + extraTextPos[1]-sPainter.getFontMetrics().height()-1, extraText);
 	
 	StelMainGraphicsView::getInstance().getOpenGLWin()->swapBuffers();	// And swap the buffers
 	glClear(GL_COLOR_BUFFER_BIT);

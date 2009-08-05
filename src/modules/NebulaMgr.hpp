@@ -22,6 +22,7 @@
 
 #include <QString>
 #include <QStringList>
+#include <QFont>
 #include "StelObjectType.hpp"
 #include "StelFader.hpp"
 #include "StelSphericalIndex.hpp"
@@ -198,6 +199,8 @@ private:
 
 	//! The selection pointer texture
 	StelTextureSP texPointer;
+	
+	QFont nebulaFont;      // Font used for names printing
 };
 
 #endif // _NEBULAMGR_HPP_

@@ -155,10 +155,6 @@ private:
 	QTimeLine* texFader;
 
 	QString htmlDescription;
-
-#ifdef DEBUG_STELSKYIMAGE_TILE
-	static class StelFont* debugFont;
-#endif
 };
 
 #endif // _STELSKYIMAGETILE_HPP_

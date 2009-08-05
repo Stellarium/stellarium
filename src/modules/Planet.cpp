@@ -32,7 +32,6 @@
 #include "Planet.hpp"
 #include "StelNavigator.hpp"
 #include "StelProjector.hpp"
-#include "StelFont.hpp"
 #include "sideral_time.h"
 #include "StelTextureMgr.hpp"
 #include "StelModuleMgr.hpp"
@@ -41,7 +40,6 @@
 #include "StelPainter.hpp"
 #include "StelTranslator.hpp"
 
-StelFont* Planet::planetNameFont = NULL;
 Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
 Vec3f Planet::trailColor = Vec3f(1,0.7,0.7);
@@ -534,7 +532,7 @@ double Planet::getSpheroidAngularSize(const StelCore* core) const
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
-void Planet::draw(StelCore* core, float maxMagLabels)
+void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont)
 {
 	if (hidden)
 		return;
@@ -589,7 +587,7 @@ void Planet::draw(StelCore* core, float maxMagLabels)
 		{
 			labelsFader=false;
 		}
-		drawHints(core);
+		drawHints(core, planetNameFont);
 
 		draw3dModel(core,mat,screenSz);
 	}
@@ -809,7 +807,7 @@ void Planet::drawEarthShadow(StelCore* core)
 	glClear(GL_STENCIL_BUFFER_BIT);	// Clean again to let a clean buffer for later Qt display
 }
 
-void Planet::drawHints(const StelCore* core)
+void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 {
 	if (labelsFader.getInterstate()<=0.f)
 		return;
@@ -817,11 +815,11 @@ void Planet::drawHints(const StelCore* core)
 	const StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
-
+	sPainter.setFont(planetNameFont);
 	// Draw nameI18 + scaling if it's not == 1.
 	float tmp = 10.f + getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()/1.44; // Shift for nameI18 printing
 	glColor4f(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate());
-	sPainter.drawText(planetNameFont,screenPos[0],screenPos[1], getSkyLabel(nav), 0, tmp, tmp, false);
+	sPainter.drawText(screenPos[0],screenPos[1], getSkyLabel(nav), 0, tmp, tmp, false);
 
 	// hint disapears smoothly on close view
 	if (hintFader.getInterstate()<=0)

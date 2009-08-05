@@ -22,6 +22,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelAppGraphicsWidget.hpp"
+#include "StelPainter.hpp"
 
 #include <QtOpenGL>
 
@@ -57,12 +58,14 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 	StelApp::getInstance().update(dt);
 
 	painter->save();
-
-	//StelApp::getInstance().glWindowHasBeenResized(scenePos().x(), scene()->sceneRect().height()-(scenePos().y()+geometry().height()), geometry().width(), geometry().height());
+	
+	StelPainter::setQPainter(painter);
 	
 	// And draw them
 	StelApp::getInstance().draw();
 
+	StelPainter::setQPainter(NULL);
+	
 	painter->restore();
 }
 

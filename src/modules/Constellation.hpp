@@ -22,6 +22,7 @@
 
 #include <vector>
 #include <QString>
+#include <QFont>
 
 #include "StelObject.hpp"
 #include "StelUtils.hpp"
@@ -30,7 +31,6 @@
 #include "StelSphereGeometry.hpp"
 
 class StarMgr;
-class StelFont;
 class StelPainter;
 
 //! @class Constellation
@@ -77,7 +77,7 @@ private:
 	bool read(const QString& record, StarMgr *starMgr);
 
 	//! Draw the constellation name
-	void drawName(StelFont* constfont, const StelPainter& sPainter) const;
+	void drawName(const StelPainter& sPainter) const;
 	//! Draw the constellation art
 	void drawArt(const StelPainter& sPainter) const;
 	//! Draw the constellation boundary

@@ -23,8 +23,6 @@
 #include "StelApp.hpp"
 #include "StarMgr.hpp"
 #include "StelCore.hpp"
-#include "StelFont.hpp"
-#include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelNavigator.hpp"
@@ -45,12 +43,12 @@
 class StelLabel
 {
 public:
-	StelLabel(const QString& text, StelFont* font, const Vec3f& color);
+	StelLabel(const QString& text, const QFont& font, const Vec3f& color);
 	virtual ~StelLabel() {;}
 
 	//! draw the label on the sky
 	//! @param core the StelCore object
-	virtual bool draw(StelCore* core, const StelPainter& sPainter) = 0;
+	virtual bool draw(StelCore* core, StelPainter& sPainter) = 0;
 	//! update fade for on/off action
 	virtual void update(double deltaTime);
 	//! Set the duration used for the fade in / fade out of the label.
@@ -66,7 +64,7 @@ public:
 
 protected:
 	QString labelText;
-	StelFont* labelFont;
+	QFont labelFont;
 	Vec3f labelColor;
 	LinearFader labelFader;
 };
@@ -93,7 +91,7 @@ public:
 	//! @param distance the distance from the object to draw the label.  If < 0.0, placement is automatic.
 	//! @param style determines how the label is drawn
 	//! @param enclosureSize determines the size of the enclosure for styles Box and Circle
-	SkyLabel(const QString& text, StelObjectP bindObject, StelFont* font, Vec3f color,
+	SkyLabel(const QString& text, StelObjectP bindObject, const QFont& font, Vec3f color,
 			 QString side="NE", double distance=-1.0, SkyLabel::Style style=TextOnly, 
 	double enclosureSize=0.0);
 
@@ -103,7 +101,7 @@ public:
 	//! Draw the label on the sky
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, const StelPainter& sPainter);
+	virtual bool draw(StelCore* core, StelPainter& sPainter);
 
 	static SkyLabel::Style stringToStyle(const QString& s);
 	
@@ -126,13 +124,13 @@ public:
 	//! @param y the y-position on the screen (pixels from the top side)
 	//! @param font the font to use
 	//! @param color the color for the label
-	ScreenLabel(const QString& text, int x, int y, StelFont* font, Vec3f color);
+	ScreenLabel(const QString& text, int x, int y, const QFont& font, Vec3f color);
 	virtual ~ScreenLabel();
 
 	//! draw the label on the sky
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, const StelPainter& sPainter);
+	virtual bool draw(StelCore* core, StelPainter& sPainter);
 
 private:
 	int screenX;
@@ -142,7 +140,7 @@ private:
 /////////////////////
 // StelLabel class //
 /////////////////////
-StelLabel::StelLabel(const QString& text, StelFont* font, const Vec3f& color)
+StelLabel::StelLabel(const QString& text, const QFont& font, const Vec3f& color)
 	: labelText(text),
 	  labelFont(font),
 	  labelColor(color)
@@ -190,7 +188,7 @@ SkyLabel::Style SkyLabel::stringToStyle(const QString& s)
 ////////////////////
 // SkyLabel class //
 ////////////////////
-SkyLabel::SkyLabel(const QString& text, StelObjectP bindObject, StelFont* font,
+SkyLabel::SkyLabel(const QString& text, StelObjectP bindObject, const QFont& font,
                    Vec3f color, QString side, double distance, SkyLabel::Style style,
                    double enclosureSize)
 	: StelLabel(text, font, color),
@@ -206,7 +204,7 @@ SkyLabel::~SkyLabel()
 {
 }
 
-bool SkyLabel::draw(StelCore* core, const StelPainter& sPainter)
+bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 {
 	if(labelFader.getInterstate() <= 0.0)
 		return false;
@@ -215,6 +213,8 @@ bool SkyLabel::draw(StelCore* core, const StelPainter& sPainter)
 	Vec3d labelXY;
 	sPainter.getProjector()->project(objectPos,labelXY);
 
+	sPainter.setFont(labelFont);
+			
 	double xOffset(0.);
 	double yOffset(0.);
 	char hJustify = 'c';
@@ -258,17 +258,17 @@ bool SkyLabel::draw(StelCore* core, const StelPainter& sPainter)
 	double jxOffset(0.);
 	double jyOffset(0.); 
 	if (hJustify == 'r')
-		jxOffset = labelFont->getStrLen(labelText);
+		jxOffset = sPainter.getFontMetrics().width(labelText);
 	else if (hJustify == 'c')
-		jxOffset = labelFont->getStrLen(labelText) / 2.;
+		jxOffset = sPainter.getFontMetrics().width(labelText) / 2.;
 
 	if (vJustify == 't')
-		jyOffset = labelFont->getLineHeight();
+		jyOffset = sPainter.getFontMetrics().height();
 	else if (vJustify == 'c')
-		jyOffset = labelFont->getLineHeight() / 2.;
+		jyOffset = sPainter.getFontMetrics().height() / 2.;
 
 	glColor4f(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
-	sPainter.drawText(labelFont, labelXY[0]+xOffset-jxOffset, labelXY[1]+yOffset-jyOffset, labelText, 0, 0, 0, false);
+	sPainter.drawText(labelXY[0]+xOffset-jxOffset, labelXY[1]+yOffset-jyOffset, labelText, 0, 0, 0, false);
 
 	if (labelStyle == SkyLabel::Line)
 	{
@@ -307,24 +307,26 @@ bool SkyLabel::draw(StelCore* core, const StelPainter& sPainter)
 ///////////////////////
 // ScreenLabel class //
 ///////////////////////
-ScreenLabel::ScreenLabel(const QString& text, int x, int y, StelFont* font, Vec3f color)
+ScreenLabel::ScreenLabel(const QString& text, int x, int y, const QFont& font, Vec3f color)
 	: StelLabel(text, font, color),
 	  screenX(x)
 {
-	screenY = StelMainWindow::getInstance().size().height() - y - font->getLineHeight();
+	QFontMetrics metrics(font);
+	screenY = StelMainWindow::getInstance().size().height() - y - metrics.height();
 }
 
 ScreenLabel::~ScreenLabel()
 {
 }
 
-bool ScreenLabel::draw(StelCore* core, const StelPainter& sPainter)
+bool ScreenLabel::draw(StelCore* core, StelPainter& sPainter)
 {
 	if(labelFader.getInterstate() <= 0.0)
 		return false;
 
 	glColor4f(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
-	sPainter.drawText(labelFont, screenX, screenY, labelText, 0, 0, 0, false);
+	sPainter.setFont(labelFont);
+	sPainter.drawText(screenX, screenY, labelText, 0, 0, 0, false);
 	return true;
 }
 
@@ -361,8 +363,8 @@ int LabelMgr::labelObject(const QString& text,
                           double labelDistance,
                           const QString& style)
 {
-	StelFont* font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
-	Q_ASSERT(font);
+	QFont font;
+	font.setPixelSize(fontSize);
 	StelObjectP obj = GETSTELMODULE(StelObjectMgr)->searchByName(objectName);
 	if (!obj)
 	{
@@ -388,8 +390,8 @@ int LabelMgr::labelScreen(const QString& text,
                           float fontSize,
                           const QString& fontColor)
 {
-	StelFont* font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
-	Q_ASSERT(font);
+	QFont font;
+	font.setPixelSize(fontSize);
 	ScreenLabel* l = new ScreenLabel(text, x, y, font, StelUtils::htmlColorToVec3f(fontColor));
 	if (l==NULL)
 		return -1;
