@@ -161,7 +161,7 @@ const StelGeodesicGrid* StelCore::getGeodesicGrid(int maxLevel) const
 	return geodesicGrid;
 }
 
-const StelProjectorP StelCore::getProjection2d() const
+StelProjectorP StelCore::getProjection2d() const
 {
 	StelProjectorP prj(new StelProjector2d());
 	prj->init(currentProjectorParams);
@@ -170,7 +170,7 @@ const StelProjectorP StelCore::getProjection2d() const
 
 // Get an instance of projector using the current display parameters from Navigation, StelMovementMgr
 // and using the given modelview matrix
-const StelProjectorP StelCore::getProjection(const Mat4d& modelViewMat, ProjectionType projType) const
+StelProjectorP StelCore::getProjection(const Mat4d& modelViewMat, ProjectionType projType) const
 {
 	if (projType==1000)
 		projType = currentProjectionType;
@@ -212,9 +212,8 @@ const StelProjectorP StelCore::getProjection(const Mat4d& modelViewMat, Projecti
 }
 
 // Get an instance of projector using the current display parameters from Navigation, StelMovementMgr
-const StelProjectorP StelCore::getProjection(FrameType frameType, ProjectionType projType) const
+StelProjectorP StelCore::getProjection(FrameType frameType, ProjectionType projType) const
 {
-
 	switch (frameType)
 	{
 		case FrameAltAz:

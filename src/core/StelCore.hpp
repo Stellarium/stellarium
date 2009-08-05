@@ -90,17 +90,17 @@ public:
 		
 	//! Get a new instance of a simple 2d projection. This projection cannot be used to project or unproject but
 	//! only for 2d painting
-	const StelProjectorP getProjection2d() const;
+	StelProjectorP getProjection2d() const;
 			
 	//! Get a new instance of projector using the current display parameters from Navigation, StelMovementMgr, etc...
 	//! If not specified the projection type is the default one set in the core.
 	//! This is a smart pointer, you don't need to delete it.
-	const StelProjectorP getProjection(FrameType frameType, ProjectionType projType=(ProjectionType)1000) const;
+	StelProjectorP getProjection(FrameType frameType, ProjectionType projType=(ProjectionType)1000) const;
 	
 	//! Get an instance of projector using the current display parameters from Navigation, StelMovementMgr
 	//! and using the given modelview matrix.
 	//! If not specified default the projection type is the default one set in the core.
-	const StelProjectorP getProjection(const Mat4d& modelViewMat, ProjectionType projType=(ProjectionType)1000) const;
+	StelProjectorP getProjection(const Mat4d& modelViewMat, ProjectionType projType=(ProjectionType)1000) const;
 			
 	//! Get the current navigation (manages frame transformation) used in the core.
 	StelNavigator* getNavigator() {return navigation;}
