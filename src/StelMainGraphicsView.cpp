@@ -26,7 +26,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelScriptMgr.hpp"
 #include "StelViewportDistorter.hpp"
-
+#include "StelPainter.hpp"
 #include <QGLFormat>
 #include <QPaintEngine>
 #include <QGraphicsView>
@@ -117,6 +117,8 @@ void StelMainGraphicsView::init()
 {
 	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
+	QPainter qPainter(glWidget);
+	StelPainter::setQPainter(&qPainter);
 	stelApp->init();
 	
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -138,6 +140,7 @@ void StelMainGraphicsView::init()
 	stelApp->getScriptMgr().runScript(stelApp->getStartupScript());
 	
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
+	StelPainter::setQPainter(NULL);
 	startMainLoop();
 }
 

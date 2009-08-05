@@ -24,7 +24,6 @@
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
@@ -43,14 +42,13 @@ void TelescopeMgr::deleteAllTelescopes()
 	telescope_map.clear();
 }
 
-TelescopeMgr::TelescopeMgr() : telescope_font(NULL)
+TelescopeMgr::TelescopeMgr()
 {
 	setObjectName("TelescopeMgr");
 }
 
 TelescopeMgr::~TelescopeMgr(void)
 {
-
 }
 
 /*************************************************************************
@@ -68,7 +66,7 @@ void TelescopeMgr::draw(StelCore* core)
 	StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
-	
+	sPainter.setFont(telescope_font);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	telescopeTexture->bind();
@@ -94,7 +92,7 @@ void TelescopeMgr::draw(StelCore* core)
 				if (nameFader.getInterstate() >= 0)
 				{
 					glColor4f(labelColor[0],labelColor[1],labelColor[2], nameFader.getInterstate());
-					sPainter.drawText(telescope_font, XY[0],XY[1],tel->getNameI18n(), 0, 6, -4, false);
+					sPainter.drawText(XY[0],XY[1],tel->getNameI18n(), 0, 6, -4, false);
 					telescopeTexture->bind();
 				}
 			}
@@ -184,7 +182,7 @@ QStringList TelescopeMgr::listMatchingObjectsI18n(const QString& objPrefix, int 
 
 void TelescopeMgr::setFontSize(float fontSize)
 {
-	telescope_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
+	telescope_font.setPixelSize(fontSize);
 }
 
 void TelescopeMgr::moveTelescopeToSelected(void)

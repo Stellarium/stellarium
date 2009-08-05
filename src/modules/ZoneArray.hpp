@@ -105,8 +105,7 @@ public:
 	//! Pure virtual method. See subclass implementation.
 	virtual void draw(int index,bool is_inside,
 	                  const float *rcmag_table, StelCore* core,
-	                  unsigned int maxMagStarName,float names_brightness,
-	                  StelFont *starFont) const = 0;
+	                  unsigned int maxMagStarName,float names_brightness) const = 0;
 	
 	//! Get whether or not the catalog was successfully loaded.
 	//! @return @c true if at least one zone was loaded, otherwise @c false
@@ -189,8 +188,7 @@ protected:
 	//! @param starFont font of labels
 	void draw(int index,bool is_inside,
 	          const float *rcmag_table, StelCore* core,
-	          unsigned int maxMagStarName,float names_brightness,
-	          StelFont *starFont) const;
+	          unsigned int maxMagStarName,float names_brightness) const;
 	
 	void scaleAxis(void);
 	void searchAround(const StelNavigator* nav, int index,const Vec3d &v,double cosLimFov,

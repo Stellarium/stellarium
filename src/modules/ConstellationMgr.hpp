@@ -23,6 +23,7 @@
 #include <vector>
 #include <QString>
 #include <QStringList>
+#include <QFont>
 
 #include "StelObjectType.hpp"
 #include "StelObjectModule.hpp"
@@ -33,7 +34,6 @@ class StarMgr;
 class Constellation;
 class StelProjector;
 class StelNavigator;
-class StelFont;
 class StelPainter;
 
 //! @class ConstellationMgr
@@ -218,8 +218,7 @@ private:
 	Constellation* isStarIn(const StelObject *s) const;
 	Constellation* findFromAbbreviation(const QString& abbreviation) const;		
 	std::vector<Constellation*> asterisms;
-	double fontSize;
-	StelFont* asterFont;
+	QFont asterFont;
 	StarMgr* hipStarMgr;
 
 	bool isolateSelected;

@@ -24,6 +24,7 @@
 #undef sun
 #endif
 
+#include <QFont>
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
 #include "Planet.hpp"
@@ -32,7 +33,6 @@ class Orbit;
 class StelLoadingBar;
 class StelTranslator;
 class StelObject;
-class StelFont;
 class StelCore;
 class StelProjector;
 class StelNavigator;
@@ -264,8 +264,7 @@ private:
 	bool flagMoonScale;
 	float moonScale;
 
-	double fontSize;
-	StelFont& planetNameFont;
+	QFont planetNameFont;
 
 	//! The amount of planets labels (between 0 and 10).
 	float labelsAmount;

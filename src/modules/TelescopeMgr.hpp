@@ -29,10 +29,10 @@
 #include <QString>
 #include <QStringList>
 #include <QMap>
+#include <QFont>
 
 class StelProjector;
 class StelNavigator;
-class StelFont;
 class StelObject;
 class Telescope;
 class StelPainter;
@@ -117,7 +117,7 @@ private:
 	LinearFader telescopeFader;
 	Vec3f circleColor;
 	Vec3f labelColor;
-	StelFont *telescope_font;
+	QFont telescope_font;
 	StelTextureSP telescopeTexture;
 
 	QMap<int, Telescope*> telescope_map;

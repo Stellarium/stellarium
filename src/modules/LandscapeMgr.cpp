@@ -28,12 +28,10 @@
 #include "SolarSystem.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
-#include "StelFontMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "Planet.hpp"
 #include "StelIniParser.hpp"
-#include "StelFont.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelStyle.hpp"
 #include "StelPainter.hpp"
@@ -54,17 +52,16 @@ public:
 	bool getFlagShow(void) const {return fader;}
 private:
 	float radius;
-	double fontSize;
-	StelFont& font;
+	QFont font;
 	Vec3f color;
 	QString sNorth, sSouth, sEast, sWest;
 	LinearFader fader;
 };
 
 
-Cardinals::Cardinals(float _radius) : radius(_radius), fontSize(30),
-font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)), color(0.6,0.2,0.2)
+Cardinals::Cardinals(float _radius) : radius(_radius), color(0.6,0.2,0.2)
 {
+	font.setPixelSize(30);
 	// Default labels - if sky locale specified, loaded later
 	// Improvement for gettext translation
 	sNorth = "N";
@@ -83,6 +80,7 @@ void Cardinals::draw(const StelCore* core, double latitude, bool gravityON) cons
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 	StelPainter sPainter(prj);
+	sPainter.setFont(font);
 	
 	if (!fader.getInterstate()) return;
 
@@ -95,8 +93,8 @@ void Cardinals::draw(const StelCore* core, double latitude, bool gravityON) cons
 	d[3] = sWest;
 	
 	// fun polar special cases
-	if(latitude ==  90.0 ) d[0] = d[1] = d[2] = d[3] = sSouth;
-	if(latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = sNorth;
+	if (latitude ==  90.0 ) d[0] = d[1] = d[2] = d[3] = sSouth;
+	if (latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = sNorth;
 
 	glColor4f(color[0],color[1],color[2],fader.getInterstate());
 	glEnable(GL_BLEND);
@@ -107,23 +105,23 @@ void Cardinals::draw(const StelCore* core, double latitude, bool gravityON) cons
 	Vec3f pos;
 	Vec3d xy;
 
-	float shift = font.getStrLen(sNorth)/2;
+	float shift = sPainter.getFontMetrics().width(sNorth)/2;
 
 	// N for North
 	pos.set(-1.f, 0.f, 0.f);
-	if (prj->project(pos,xy)) sPainter.drawText(&font, xy[0], xy[1], d[0], 0., -shift, -shift);
+	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[0], 0., -shift, -shift);
 
 	// S for South
 	pos.set(1.f, 0.f, 0.f);
-	if (prj->project(pos,xy)) sPainter.drawText(&font, xy[0], xy[1], d[1], 0., -shift, -shift);
+	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[1], 0., -shift, -shift);
 
 	// E for East
 	pos.set(0.f, 1.f, 0.f);
-	if (prj->project(pos,xy)) sPainter.drawText(&font, xy[0], xy[1], d[2], 0., -shift, -shift);
+	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[2], 0., -shift, -shift);
 
 	// W for West
 	pos.set(0.f, -1.f, 0.f);
-	if (prj->project(pos,xy)) sPainter.drawText(&font, xy[0], xy[1], d[3], 0., -shift, -shift);
+	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[3], 0., -shift, -shift);
 
 }
 
@@ -135,7 +133,6 @@ void Cardinals::updateI18n()
 	sSouth = trans.qtranslate("S");
 	sEast = trans.qtranslate("E");
 	sWest = trans.qtranslate("W");	
-	font = StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
 

@@ -31,7 +31,6 @@
 #include <QString>
 
 class StelCore;
-class StelFont;
 class StelPainter;
 
 //! @class LabelMgr

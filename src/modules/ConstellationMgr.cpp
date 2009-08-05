@@ -38,13 +38,11 @@
 #include "StelProjector.hpp"
 #include "StelLoadingBar.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
-#include "StelFont.hpp"
 #include "StelStyle.hpp"
 #include "StelPainter.hpp"
 
@@ -52,8 +50,6 @@ using namespace std;
 
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars) :
-	fontSize(15),
-	asterFont(NULL),
 	hipStarMgr(_hip_stars),
 	flagNames(0),
 	flagLines(0),
@@ -63,6 +59,7 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars) :
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
 	isolateSelected = false;
+	asterFont.setPixelSize(15);
 }
 
 ConstellationMgr::~ConstellationMgr()
@@ -88,7 +85,7 @@ void ConstellationMgr::init()
 	Q_ASSERT(conf);
 
 	lastLoadedSkyCulture = "dummy";
-	fontSize = conf->value("viewing/constellation_font_size",16.).toDouble();
+	asterFont.setPixelSize(conf->value("viewing/constellation_font_size",16).toInt());
 	setFlagLines(conf->value("viewing/flag_constellation_drawing").toBool());
 	setFlagLabels(conf->value("viewing/flag_constellation_name").toBool());
 	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries",false).toBool());
@@ -250,12 +247,12 @@ Vec3f ConstellationMgr::getLabelsColor() const
 
 void ConstellationMgr::setFontSize(double newFontSize)
 {
-	asterFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
+	asterFont.setPixelSize(newFontSize);
 }
 
 double ConstellationMgr::getFontSize() const
 {
-	return asterFont->getSize();
+	return asterFont.pixelSize();
 }
 
 // Load line and art data from files
@@ -353,7 +350,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	readOk = 0;		// count of records processed OK
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	StelLoadingBar& lb = *StelApp::getInstance().getStelLoadingBar();
+	//StelLoadingBar& lb = *StelApp::getInstance().getStelLoadingBar();
 	while (!fic.atEnd())
 	{
 		++currentLineNumber;
@@ -372,8 +369,8 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		}
 
 		// Draw loading bar
-		lb.SetMessage(q_("Loading Constellation Art: %1/%2").arg(currentLineNumber).arg(totalRecords));
-		lb.Draw((float)(currentLineNumber)/totalRecords);
+// 		lb.SetMessage(q_("Loading Constellation Art: %1/%2").arg(currentLineNumber).arg(totalRecords));
+// 		lb.Draw((float)(currentLineNumber)/totalRecords);
 
 		cons = NULL;
 		cons = findFromAbbreviation(shortname);
@@ -459,7 +456,7 @@ void ConstellationMgr::draw(StelCore* core)
 	StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
-
+	sPainter.setFont(asterFont);
 	drawLines(sPainter, nav);
 	drawNames(sPainter);
 	drawArt(sPainter);
@@ -507,13 +504,12 @@ void ConstellationMgr::drawNames(const StelPainter& sPainter) const
 	glBlendFunc(GL_ONE, GL_ONE);
 	// if (draw_mode == DM_NORMAL) glBlendFunc(GL_ONE, GL_ONE);
 	// else glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // charting
-
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
 	{
 		// Check if in the field of view
 		if (sPainter.getProjector()->projectCheck((*iter)->XYZname, (*iter)->XYname))
-			(*iter)->drawName(asterFont, sPainter);
+			(*iter)->drawName(sPainter);
 	}
 }
 
@@ -631,7 +627,6 @@ void ConstellationMgr::updateI18n()
 	{
 		(*iter)->nameI18 = trans.qtranslate((*iter)->englishName);
 	}
-	asterFont = &StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
 // update faders

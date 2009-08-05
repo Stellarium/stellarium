@@ -31,7 +31,6 @@ class StelCore;
 class SkyLocalizer;
 class StelTextureMgr;
 class StelObjectMgr;
-class StelFontMgr;
 class StelLocaleMgr;
 class StelModuleMgr;
 class StelSkyCultureMgr;
@@ -97,10 +96,6 @@ public:
 	//! Get the locale manager to use for i18n & date/time localization.
 	//! @return the font manager to use for loading fonts.
 	StelLocaleMgr& getLocaleMgr() {return *localeMgr;}
-
-	//! Get the font manager to use for loading fonts.
-	//! @return the font manager to use for loading fonts.
-	StelFontMgr& getFontManager() {return *fontManager;}
 
 	//! Get the sky cultures manager.
 	//! @return the sky cultures manager
@@ -341,9 +336,6 @@ private:
 
 	// Module manager for the application
 	StelModuleMgr* moduleMgr;
-
-	// Font manager for the application
-	StelFontMgr* fontManager;
 
 	// Locale manager for the application
 	StelLocaleMgr* localeMgr;

@@ -24,12 +24,10 @@
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
 #include "StelTexture.hpp"
-#include "StelFont.hpp"
 #include "StelNavigator.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
-#include "StelFont.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
@@ -37,7 +35,6 @@
 #include <QDebug>
 
 StelTextureSP Nebula::texCircle;
-StelFont* Nebula::nebulaFont = NULL;
 float Nebula::circleScale = 1.f;
 float Nebula::hintsBrightness = 0;
 Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);
@@ -162,7 +159,7 @@ void Nebula::drawLabel(const StelPainter& sPainter, float maxMagLabel)
 			str = QString("IC %1").arg(IC_nb);
 	}
 	
-	sPainter.drawText(nebulaFont,XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
+	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
 }
 
 bool Nebula::readNGC(char *recordstr)

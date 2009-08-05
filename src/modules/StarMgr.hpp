@@ -20,6 +20,7 @@
 #ifndef _STARMGR_HPP_
 #define _STARMGR_HPP_
 
+#include <QFont>
 #include <vector>
 #include <map>
 #include "StelFader.hpp"
@@ -32,7 +33,6 @@ class StelToneReproducer;
 class StelProjector;
 class StelNavigator;
 class StelLoadingBar;
-class StelFont;
 class QSettings;
 
 namespace BigStarCatalogExtension {
@@ -238,8 +238,7 @@ private:
 	static std::map<int, QString> sciNamesMapI18n;
 	static std::map<QString, int> sciNamesIndexI18n;
 	
-	double fontSize;
-	StelFont *starFont;
+	QFont starFont;
 	static bool flagSciNames;
 	Vec3f labelColor;
 	

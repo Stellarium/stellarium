@@ -25,7 +25,6 @@
 #include "StelTranslator.hpp"
 #include "StelTextureTypes.hpp"
 
-class StelFont;
 class StelPainter;
 
 class Nebula : public StelObject
@@ -104,7 +103,6 @@ private:
 	NebulaType nType;
 
 	static StelTextureSP texCircle;   // The symbolic circle texture
-	static StelFont* nebulaFont;      // Font used for names printing
 	static float hintsBrightness;
 
 	static Vec3f labelColor, circleColor;
