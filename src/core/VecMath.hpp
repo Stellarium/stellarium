@@ -170,10 +170,6 @@ public:
 	inline void transfo4d(const Mat4f&);
 	T v[3];		// The 3 values
 	
-	inline T x() const {return v[0];}
-	inline T y() const {return v[1];}
-	inline T z() const {return v[2];}
-	
 	QString toString() const {return QString("[%1, %2, %3]").arg(v[0]).arg(v[1]).arg(v[2]);}
 };
 

@@ -273,9 +273,9 @@ private:
 //! errors problems (one test fails if it is set to zero).
 inline bool sideHalfSpaceContains(const Vec3d& v1, const Vec3d& v2, const Vec3d& p)
 {
-	return (v1.y() * v2.z() - v1.z() * v2.y())*p.x() +
-			(v1.z() * v2.x() - v1.x() * v2.z())*p.y() +
-			(v1.x() * v2.y() - v1.y() * v2.x())*p.z()>=-1e-17;
+	return (v1[1] * v2[2] - v1[2] * v2[1])*p[0] +
+			(v1[2] * v2[0] - v1[0] * v2[2])*p[1] +
+			(v1[0] * v2[1] - v1[1] * v2[0])*p[2]>=-1e-17;
 }
 
 //! Return whether the halfspace defined by the vectors v1 and v2 contains the SphericalCap h.
