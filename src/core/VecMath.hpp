@@ -170,6 +170,10 @@ public:
 	inline void transfo4d(const Mat4f&);
 	T v[3];		// The 3 values
 	
+	inline T x() const {return v[0];}
+	inline T y() const {return v[1];}
+	inline T z() const {return v[2];}
+	
 	QString toString() const {return QString("[%1, %2, %3]").arg(v[0]).arg(v[1]).arg(v[2]);}
 };
 
@@ -591,12 +595,20 @@ template<class T> void Vector3<T>::normalize()
 
 template<class T> void Vector3<T>::transfo4d(const Mat4d& m)
 {
-	(*this)=m*(*this);
+	const T v0 = v[0];
+	const T v1 = v[1];
+	v[0]=m.r[0]*v0 + m.r[4]*v1 + m.r[8]*v[2] + m.r[12];
+	v[1]=m.r[1]*v0 + m.r[5]*v1 +  m.r[9]*v[2] + m.r[13];
+	v[2]=m.r[2]*v0 + m.r[6]*v1 + m.r[10]*v[2] + m.r[14];
 }
 
 template<class T> void Vector3<T>::transfo4d(const Mat4f& m)
 {
-	(*this)=m*(*this);
+	const T v0 = v[0];
+	const T v1 = v[1];
+	v[0]=m.r[0]*v0 + m.r[4]*v1 + m.r[8]*v[2] + m.r[12];
+	v[1]=m.r[1]*v0 + m.r[5]*v1 +  m.r[9]*v[2] + m.r[13];
+	v[2]=m.r[2]*v0 + m.r[6]*v1 + m.r[10]*v[2] + m.r[14];
 }
 
 // Return latitude in rad
@@ -611,24 +623,6 @@ template<class T> T Vector3<T>::longitude() const
 	return std::atan2(v[1],v[0]);
 }
 
-// template<class T> 
-// std::ostream& operator<<(std::ostream &o,const Vector3<T> &v) {
-//   return o << '[' << v[0] << ',' << v[1] << ',' << v[2] << ']';
-// }
-
-// template<class T> 
-// std::istream& operator>> (std::istream& is, Vector3<T> &v) {
-// 	while(is.get()!='[' && !is.eof()) {;}
-// 	assert(!is.eof() && "Vector must start with a '['");
-// 	is >> v[0];
-// 	is.ignore(256, ',');
-// 	is >> v[1];
-// 	is.ignore(256, ',');
-// 	is >> v[2];
-// 	while(is.get()!=']' && !is.eof()) {;}
-// 	assert(!is.eof() && "Vector must be terminated by a ']'");
-// 	return is;
-// }
 		
 ////////////////////////// Vector4 class methods ///////////////////////////////
 

@@ -299,9 +299,8 @@ NebulaP NebulaMgr::searchM(unsigned int M)
 
 NebulaP NebulaMgr::searchNGC(unsigned int NGC)
 {
-	foreach (const NebulaP& n, nebArray)
-		if (n->NGC_nb == NGC)
-			return n;
+	if (ngcIndex.contains(NGC))
+		return ngcIndex[NGC];
 	return NebulaP();
 }
 
@@ -323,12 +322,10 @@ bool NebulaMgr::loadNGC(const QString& catNGC)
 
 	int totalRecords=0;
 	QString record;
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
 	while (!in.atEnd())
 	{
-		record = QString::fromUtf8(in.readLine());
-		if (!commentRx.exactMatch(record))
-			totalRecords++;
+		in.readLine();
+		++totalRecords;
 	}
 
 	// rewind the file to the start
@@ -343,9 +340,8 @@ bool NebulaMgr::loadNGC(const QString& catNGC)
 		++currentLineNumber;
 
 		// skip comments
-		if (commentRx.exactMatch(record))
+		if (record.startsWith("//") || record.startsWith("#"))
 			continue;
-
 		++currentRecordNumber;
 
 		// Update the status bar every 200 record
@@ -365,6 +361,8 @@ bool NebulaMgr::loadNGC(const QString& catNGC)
 		{
 			nebArray.append(e);
 			nebGrid.insert(qSharedPointerCast<StelRegionObject>(e));
+			if (e->NGC_nb!=0)
+				ngcIndex.insert(e->NGC_nb, e);
 			++readOk;
 		}
 	}
