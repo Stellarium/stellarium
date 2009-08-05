@@ -26,7 +26,6 @@
 class StelProjector;
 class StelNavigator;
 class ToneReproductor;
-class StelFont;
 
 class StelGeodesicGridDrawer : public StelModule
 {
@@ -45,7 +44,7 @@ public:
 private:
 //	StelGeodesicGrid* grid;
 //	GeodesicSearchResult* searchResult;
-	StelFont* font;
+	QFont font;
 };
 
 #endif // _GEODESICGRIDDRAWER_HPP_

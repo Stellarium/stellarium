@@ -21,12 +21,13 @@
 #include <QString>
 #include <QTextStream>
 #include <QDebug>
+#include <QFontMetrics>
+
 #include "StelProjector.hpp"
 #include "Constellation.hpp"
 #include "StarMgr.hpp"
 #include "StelNavigator.hpp"
 #include "StelTexture.hpp"
-#include "StelFont.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -125,12 +126,12 @@ void Constellation::drawOptim(const StelPainter& sPainter, const StelNavigator* 
 	}
 }
 
-void Constellation::drawName(StelFont *constfont, const StelPainter& sPainter) const
+void Constellation::drawName(const StelPainter& sPainter) const
 {
-	if(!nameFader.getInterstate())
+	if (!nameFader.getInterstate())
 		return;
 	glColor4f(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());
-	sPainter.drawText(constfont, XYname[0], XYname[1], nameI18, 0., -constfont->getStrLen(nameI18)/2, 0, false);
+	sPainter.drawText(XYname[0], XYname[1], nameI18, 0., -sPainter.getFontMetrics().width(nameI18)/2, 0, false);
 }
 
 void Constellation::drawArtOptim(const StelPainter& sPainter, const SphericalRegion& region) const

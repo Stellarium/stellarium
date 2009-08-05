@@ -132,7 +132,7 @@ public:
 	void translateName(StelTranslator& trans);
 
 	// Draw the Planet
-	void draw(StelCore* core, float maxMagLabels);
+	void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont);
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to Planet
@@ -185,8 +185,6 @@ public:
 	float getSphereScale(void) const {return sphereScale;}
 
 	const QSharedPointer<Planet> getParent(void) const {return parent;}
-
-	static void setFont(StelFont* f) {planetNameFont = f;}
 
 	static void setLabelColor(const Vec3f& lc) {labelColor = lc;}
 	static const Vec3f& getLabelColor(void) {return labelColor;}
@@ -257,7 +255,7 @@ protected:
 	void drawSphere(const StelPainter* painter, float screenSz);
 
 	// Draw the circle and name of the Planet
-	void drawHints(const StelCore* core);
+	void drawHints(const StelCore* core, const QFont& planetNameFont);
 
 	QString englishName;            // english planet name
 	QString nameI18;                // International translated name
@@ -291,7 +289,6 @@ protected:
 	bool hidden;                    // useful for fake planets used as observation positions - not drawn or labeled
 	bool atmosphere;                // Does the planet have an atmosphere?
 
-	static StelFont* planetNameFont; // Font for names
 	static Vec3f labelColor;
 	static StelTextureSP hintCircleTex;
 };

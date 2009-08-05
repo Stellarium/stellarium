@@ -44,7 +44,6 @@
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
@@ -123,7 +122,7 @@ void StarMgr::initTriangle(int lev,int index,
 }
 
 
-StarMgr::StarMgr(void) : hipIndex(new HipIndexStruct[NR_OF_HIP+1]), fontSize(13.), starFont(NULL)
+StarMgr::StarMgr(void) : hipIndex(new HipIndexStruct[NR_OF_HIP+1])
 {
 	setObjectName("StarMgr");
 	if (hipIndex == 0)
@@ -132,6 +131,7 @@ StarMgr::StarMgr(void) : hipIndex(new HipIndexStruct[NR_OF_HIP+1]), fontSize(13.
 	}
 	maxGeodesicGridLevel = -1;
 	lastMaxSearchLevel = -1;
+	starFont.setPixelSize(13.);
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
 }
@@ -186,8 +186,7 @@ void StarMgr::init()
 
 	loadStarSettings();
 	loadData();
-	double fontSize = 12;
-	starFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
+	starFont.setPixelSize(12);
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
@@ -565,7 +564,6 @@ void StarMgr::draw(StelCore* core)
 	StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
-
 	// If stars are turned off don't waste time below
 	// projecting all stars just to draw disembodied labels
 	if (!starsFader.getInterstate())
@@ -579,6 +577,7 @@ void StarMgr::draw(StelCore* core)
 
 	// Prepare openGL for drawing many stars
 	StelPainter* sPainter = new StelPainter(prj);
+	sPainter->setFont(starFont);
 	skyDrawer->preDrawPointSource(sPainter);
 	Q_ASSERT(sPainter);
 
@@ -618,9 +617,9 @@ void StarMgr::draw(StelCore* core)
 		}
 		int zone;
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it->first);(zone = it1.next()) >= 0;)
-			it->second->draw(zone, true, rcmag_table, core, maxMagStarName, names_brightness, starFont);
+			it->second->draw(zone, true, rcmag_table, core, maxMagStarName, names_brightness);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it->first);(zone = it1.next()) >= 0;)
-			it->second->draw(zone, false, rcmag_table, core, maxMagStarName,names_brightness, starFont);
+			it->second->draw(zone, false, rcmag_table, core, maxMagStarName,names_brightness);
 	}
 	exit_loop:
 	// Finish drawing many stars
@@ -722,7 +721,6 @@ void StarMgr::updateI18n()
 		commonNamesMapI18n[i] = t;
 		commonNamesIndexI18n[t.toUpper()] = i;
 	}
-	starFont = &StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
 // Search the star by HP number
@@ -862,9 +860,7 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 //! Define font file name and size to use for star names display
 void StarMgr::setFontSize(double newFontSize)
 {
-	fontSize = newFontSize;
-	starFont = &StelApp::getInstance().getFontManager().getStandardFont(
-		StelApp::getInstance().getLocaleMgr().getSkyLanguage(),fontSize);
+	starFont.setPixelSize(newFontSize);
 }
 
 void StarMgr::updateSkyCulture(const QString& skyCultureDir)

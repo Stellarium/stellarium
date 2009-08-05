@@ -20,6 +20,7 @@
 #include <set>
 #include <QSettings>
 #include <QDebug>
+#include <QFontMetrics>
 
 #include "GridLinesMgr.hpp"
 #include "StelMovementMgr.hpp"
@@ -30,11 +31,9 @@
 #include "StelLoadingBar.hpp"
 #include "StelFader.hpp"
 #include "Planet.hpp"
-#include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
-#include "StelFont.hpp"
 #include "StelStyle.hpp"
 #include "StelPainter.hpp"
 
@@ -58,8 +57,7 @@ public:
 private:
 	Vec3f color;
 	StelCore::FrameType frameType;
-	double fontSize;
-	StelFont& font;
+	QFont font;
 	LinearFader fader;
 };
 
@@ -91,15 +89,14 @@ private:
 	Vec3f color;
 	StelCore::FrameType frameType;
 	LinearFader fader;
-	double fontSize;
-	StelFont& font;
+	QFont font;
 	QString label;
 };
 
 // rms added color as parameter
-SkyGrid::SkyGrid(StelCore::FrameType frame) : color(0.2,0.2,0.2), frameType(frame), fontSize(12),
-	font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize))
+SkyGrid::SkyGrid(StelCore::FrameType frame) : color(0.2,0.2,0.2), frameType(frame)
 {
+	font.setPixelSize(12);
 }
 
 SkyGrid::~SkyGrid()
@@ -108,8 +105,7 @@ SkyGrid::~SkyGrid()
 
 void SkyGrid::setFontSize(double newFontSize)
 {
-	fontSize = newFontSize;
-	font = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize);
+	font.setPixelSize(newFontSize);
 }
 
 // Conversion into mas = milli arcsecond
@@ -150,7 +146,6 @@ struct ViewportEdgeIntersectCallbackData
 {
 	ViewportEdgeIntersectCallbackData(const StelPainter& p) : sPainter(p) {;}
 	const StelPainter& sPainter;
-	StelFont* font;
 	Vec4f textColor;
 	QString text;		// Label to display at the intersection of the lines and screen side
 	double raAngle;		// Used for meridians
@@ -221,10 +216,10 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	if (angleDeg>90. || angleDeg<-90.)
 	{
 		angleDeg+=180.;
-		xshift=-d->font->getStrLen(text)-6.f;
+		xshift=-d->sPainter.getFontMetrics().width(text)-6.f;
 	}
 	
-	d->sPainter.drawText(d->font, screenPos[0], screenPos[1], text, angleDeg, xshift, 3);
+	d->sPainter.drawText(screenPos[0], screenPos[1], text, angleDeg, xshift, 3);
 	glColor4fv(tmpColor);
 }
 
@@ -297,8 +292,8 @@ void SkyGrid::draw(const StelCore* core) const
 	textColor*=2;
 	textColor[3]=fader.getInterstate();
 	
+	sPainter.setFont(font);
 	ViewportEdgeIntersectCallbackData userData(sPainter);
-	userData.font = &font;
 	userData.textColor = textColor;
 	userData.frameType = frameType;
 	
@@ -485,9 +480,9 @@ void SkyGrid::draw(const StelCore* core) const
 }
 
 
-SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : color(0.f, 0.f, 1.f), fontSize(14.),
-font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize))
+SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : color(0.f, 0.f, 1.f)
 {
+	font.setPixelSize(14);
 	line_type = _line_type;
 
 	switch (line_type)
@@ -513,8 +508,7 @@ SkyLine::~SkyLine()
 
 void SkyLine::setFontSize(double newFontSize)
 {
-	fontSize = newFontSize;
-	font = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize);
+	font.setPixelSize(newFontSize);
 }
 
 void SkyLine::draw(StelCore *core) const
@@ -540,7 +534,7 @@ void SkyLine::draw(StelCore *core) const
 	textColor[3]=fader.getInterstate();
 	
 	ViewportEdgeIntersectCallbackData userData(sPainter);
-	userData.font = &font;
+	sPainter.setFont(font);
 	userData.textColor = textColor;
 	userData.text = label;
 	

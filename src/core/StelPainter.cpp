@@ -24,7 +24,6 @@
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
-#include "StelFont.hpp"
 
 #include <QDebug>
 #include <QString>
@@ -36,6 +35,12 @@
 
 QMutex* StelPainter::globalMutex = new QMutex();
 bool StelPainter::flagGlPointSprite = false;
+QPainter* StelPainter::qPainter = NULL;
+		
+void StelPainter::setQPainter(QPainter* p)
+{
+	qPainter=p;
+}
 
 StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 {
@@ -84,9 +89,22 @@ StelPainter::~StelPainter()
 	globalMutex->unlock();
 }
 
+
+void StelPainter::setFont(const QFont& font)
+{
+	Q_ASSERT(qPainter);
+	qPainter->setFont(font);
+}
+
+QFontMetrics StelPainter::getFontMetrics() const
+{
+	Q_ASSERT(qPainter);
+	return qPainter->fontMetrics();
+}
+
 //! Switch to native OpenGL painting, i.e not using QPainter
 //! After this call revertToQtPainting MUST be called
-void StelPainter::switchToNativeOpenGLPainting()
+void StelPainter::switchToNativeOpenGLPainting() const
 {
 	// Save openGL projection state
 	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
@@ -108,7 +126,7 @@ void StelPainter::switchToNativeOpenGLPainting()
 }
 
 //! Revert openGL state so that Qt painting works again
-void StelPainter::revertToQtPainting()
+void StelPainter::revertToQtPainting() const
 {
 	// Restore openGL projection state for Qt drawings
 	glMatrixMode(GL_TEXTURE);
@@ -482,99 +500,96 @@ void StelPainter::sSphereMap(GLdouble radius, GLint slices, GLint stacks, double
 	}
 }
 
-void StelPainter::drawTextGravity180(const StelFont* font, float x, float y, const QString& ws,
-								   bool speedOptimize, float xshift, float yshift) const
+void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float xshift, float yshift) const
 {
-	static float dx, dy, d, theta, psi;
+	float dx, dy, d, theta, psi;
 	dx = x - prj->viewportCenter[0];
 	dy = y - prj->viewportCenter[1];
-	d = sqrt(dx*dx + dy*dy);
+	d = std::sqrt(dx*dx + dy*dy);
 
 	// If the text is too far away to be visible in the screen return
 	if (d>qMax(prj->viewportXywh[3], prj->viewportXywh[2])*2)
 		return;
-
 	theta = M_PI + std::atan2(dx, dy - 1);
-	psi = std::atan2((float)font->getStrLen(ws)/ws.length(),d + 1) * 180./M_PI;
-
+	psi = std::atan2((float)qPainter->fontMetrics().width(ws)/ws.length(),d + 1) * 180./M_PI;
 	if (psi>5)
 		psi = 5;
 
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	glPushMatrix();
-	glTranslatef(x,y,0);
+	qPainter->translate(x, y);
 	if (prj->gravityLabels)
-		glRotatef(theta*180./M_PI,0,0,-1);
-	glTranslatef(xshift, -yshift, 0);
-	glScalef(1, -1, 1);
-
-	glEnable(GL_BLEND);
-	glEnable(GL_TEXTURE_2D);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		qPainter->rotate(-theta*180./M_PI);
+	qPainter->translate(xshift, yshift);
+	qPainter->scale(1, -1);
 	for (int i=0;i<ws.length();++i)
 	{
-		if( !speedOptimize )
-		{
-			font->printCharOutlined(ws[i]);
-		}
-		else
-		{
-			font->printChar(ws[i]);
-		}
+		qPainter->drawText(0,0,ws[i]);
 
 		// with typeface need to manually advance
 		// TODO, absolute rotation would be better than relative
 		// TODO: would look better with kerning information...
-		glTranslatef(font->getStrLen(ws.mid(i,1)) * 1.05, 0, 0);
-
-		if( !speedOptimize )
-		{
-			psi = std::atan2((float)font->getStrLen(ws.mid(i,1))*1.05f,(float)d) * 180./M_PI;
-			if (psi>5)
-				psi = 5;
-		}
-
-		glRotatef(psi,0,0,-1);
+		qPainter->translate((float)qPainter->fontMetrics().width(ws.mid(i,1)) * 1.05, 0);
+		qPainter->rotate(-psi);
 	}
-	glPopMatrix();
-	glPopAttrib();
 }
 
 /*************************************************************************
  Draw the string at the given position and angle with the given font
 *************************************************************************/
-void StelPainter::drawText(const StelFont* font, float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity) const
+void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity) const
 {
+	if (!qPainter)
+		return;
+	Q_ASSERT(qPainter);
+	
+	// Save openGL state
+	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	glMatrixMode(GL_TEXTURE);
+	glPushMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	
+	qPainter->save();
+	
+	qPainter->setRenderHints(QPainter::TextAntialiasing/* | QPainter::HighQualityAntialiasing*/);
+	float color[4];
+	glGetFloatv(GL_CURRENT_COLOR, color);
+	const QColor qCol(255*color[0],255*color[1],255*color[2],255*color[3]);
+	qPainter->setPen(qCol);
+	
 	if (prj->gravityLabels && !noGravity)
 	{
-		drawTextGravity180(font, x, y, str, true, xshift, yshift);
-		return;
+		drawTextGravity180(x, y, str, xshift, yshift);
 	}
+	else
+	{
+		qPainter->translate(x, y);
+		qPainter->translate(xshift, yshift);
+		qPainter->scale(1, -1);
+		qPainter->drawText(0, 0, str);
+	}
+	
+	qPainter->restore();
+	
+	glPopClientAttrib();
+	glPopAttrib();
+	glMatrixMode(GL_TEXTURE);
+	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
 
-// 	QPainter* painter = StelAppGraphicsScene::getInstance().switchToQPainting();
-// 	if (painter==NULL)
-// 	{
-// 		StelAppGraphicsScene::getInstance().revertToOpenGL();
-// 		qDebug() << "NULL Painter";
-// 		return;
-// 	}
-// 	painter->setRenderHints(QPainter::TextAntialiasing | QPainter::HighQualityAntialiasing);
-// 	painter->translate(QPointF(x+xshift, y+yshift));
-// 	//painter->scale(1, -1.00001);
-// 	painter->setBrush(QColor(255,255,0));
-// 	painter->setPen(QColor(255,255,0));
-// 	QPainterPath text;
-// 	text.addText(QPointF(0,0), QFont(), str);
-// 	painter->drawPath(text);
-// 	//painter->drawText(QPointF(xshift, -yshift), str);
-// 	StelAppGraphicsScene::getInstance().revertToOpenGL();
-
+#if 0
 	glPushMatrix();
 	glTranslatef(x,y,0);
 	glRotatef(angleDeg,0,0,1);
 	glTranslatef(0,font->getLineHeight(),0);
 	font->print(xshift, yshift, str);
 	glPopMatrix();
+#endif
 }
 
 

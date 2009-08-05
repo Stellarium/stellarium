@@ -42,7 +42,6 @@
 #include "StelDownloadMgr.hpp"
 
 #include "StelModuleMgr.hpp"
-#include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelMovementMgr.hpp"
@@ -105,7 +104,6 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 
 	skyCultureMgr=NULL;
 	localeMgr=NULL;
-	fontManager=NULL;
 	stelObjectMgr=NULL;
 	textureMgr=NULL;
 	moduleMgr=NULL;
@@ -273,7 +271,6 @@ StelApp::~StelApp()
 	delete core; core=NULL;
 	delete skyCultureMgr; skyCultureMgr=NULL;
 	delete localeMgr; localeMgr=NULL;
-	delete fontManager; fontManager=NULL;
 	delete audioMgr; audioMgr=NULL;
 	delete stelObjectMgr; stelObjectMgr=NULL; // Delete the module by hand afterward
 	delete stelFileMgr; stelFileMgr=NULL;
@@ -351,7 +348,6 @@ void StelApp::init()
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
 	textureMgr = new StelTextureMgr();
 	localeMgr = new StelLocaleMgr();
-	fontManager = new StelFontMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
 	planetLocationMgr = new StelLocationMgr();
 

@@ -25,8 +25,7 @@
 #include "VecMath.hpp"
 
 #include <QString>
-
-class StelFont;
+#include <QFont>
 
 //! @class StelLoadingBar 
 //! This class is used to display loading bar.
@@ -67,8 +66,8 @@ public:
 private:
 	QString message;
 	int splashx, splashy, barx, bary, width, height, barwidth, barheight;
-	StelFont& barfont;
-	StelFont& extraTextFont;
+	QFont barfont;
+	QFont extraTextFont;
 	StelTextureSP splash;
 	QString extraText;
 	Vec2f extraTextPos;

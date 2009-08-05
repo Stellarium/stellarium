@@ -10,7 +10,6 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_SOURCE_DIR}/src/external 
 	${CMAKE_SOURCE_DIR}/src/scripting 
 	${CMAKE_SOURCE_DIR}/src/external/kfilter 
-	${FreeType2_INCLUDE_DIR} 
 	${OPENGL_INCLUDE_DIR} 
 	${JPEG_INCLUDE_DIR} 
 	${ICONV_INCLUDE_DIR} 
@@ -47,8 +46,6 @@ SET(stellarium_lib_SRCS
 	core/StelProjectorClasses.cpp
 	core/StelProjectorClasses.hpp
 	core/StelProjectorType.hpp
-	core/StelFont.cpp
-	core/StelFont.hpp
 	core/StelSkyDrawer.cpp
 	core/StelSkyDrawer.hpp
 	core/StelPainter.hpp
@@ -67,8 +64,6 @@ SET(stellarium_lib_SRCS
 	core/StelCore.hpp
 	core/StelFileMgr.cpp
 	core/StelFileMgr.hpp
-	core/StelFontMgr.cpp
-	core/StelFontMgr.hpp
 	core/StelAppGraphicsWidget.cpp
 	core/StelAppGraphicsWidget.hpp
 	core/StelLocaleMgr.cpp
@@ -125,8 +120,6 @@ SET(stellarium_lib_SRCS
 	external/gettext.h
 	external/GLee.c
 	external/GLee.h
-	external/typeface.cpp
-	external/typeface.h
 	external/kfilter/kfilterdev.h
 	external/kfilter/kfilterdev.cpp
 	external/kfilter/kfilterbase.h
@@ -455,7 +448,7 @@ QT4_WRAP_CPP(stellarium_MOC_SRCS ${stellarium_MOC_HDRS})
 # Dummy target depending on ${stellarium_UIS_H} to trigger ui compilations
 ADD_CUSTOM_TARGET(GenerateUiHeaders ALL DEPENDS ${stellarium_UIS_H})
 
-SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${FreeType2_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${SDL_LIBRARY} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${SDLMIXER_LIBRARY} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
+SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES}  ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
 
 IF(GENERATE_STELMAINLIB)
  ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_RES_CXX})

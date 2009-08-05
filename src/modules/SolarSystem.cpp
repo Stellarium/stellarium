@@ -54,16 +54,15 @@
 #include <QMapIterator>
 #include <QDebug>
 
-SolarSystem::SolarSystem() : moonScale(1.), fontSize(14.),
-	planetNameFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)),
-	flagOrbits(false),flagLightTravelTime(false), lastHomePlanet(NULL)
+SolarSystem::SolarSystem() : moonScale(1.),	flagOrbits(false), flagLightTravelTime(false), lastHomePlanet(NULL)
 {
+	planetNameFont.setPixelSize(14.);
 	setObjectName("SolarSystem");
 }
 
 void SolarSystem::setFontSize(float newFontSize)
 {
-	planetNameFont = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
+	planetNameFont.setPixelSize(newFontSize);
 }
 
 SolarSystem::~SolarSystem()
@@ -753,7 +752,6 @@ void SolarSystem::draw(StelCore* core)
 		return;
 
 	StelNavigator* nav = core->getNavigator();
-	Planet::setFont(&planetNameFont);
 
 	// Compute each Planet distance to the observer
 	Vec3d obsHelioPos = nav->getObserverHeliocentricEclipticPos();
@@ -770,7 +768,7 @@ void SolarSystem::draw(StelCore* core)
 	float maxMagLabel=core->getSkyDrawer()->getLimitMagnitude()*0.80+(labelsAmount*1.2f)-2.f;
 	foreach (const PlanetP& p, systemPlanets)
 	{
-		p->draw(core, maxMagLabel);
+		p->draw(core, maxMagLabel, planetNameFont);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
@@ -877,7 +875,6 @@ void SolarSystem::updateI18n()
 	StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	foreach (PlanetP p, systemPlanets)
 		p->translateName(trans);
-	planetNameFont = StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
 QString SolarSystem::getPlanetHashString(void)
