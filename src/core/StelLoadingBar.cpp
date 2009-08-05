@@ -77,7 +77,6 @@ void StelLoadingBar::Draw(float val)
 
 		sPainter.drawRect2d(splashx, splashy, width, height);
 	}
-	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
 
 	// black out background of text for redraws (so can keep sky unaltered)
@@ -90,6 +89,7 @@ void StelLoadingBar::Draw(float val)
 	
 	glColor3f(1, 1, 1);
 	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
 	sPainter.setFont(barfont);
 	sPainter.drawText(barx, bary-sPainter.getFontMetrics().height()-1, message);
 	sPainter.setFont(extraTextFont);
