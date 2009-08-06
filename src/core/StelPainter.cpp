@@ -550,6 +550,9 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	glPushMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
 	
 	qPainter->save();
 	
