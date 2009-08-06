@@ -80,6 +80,15 @@ void TestStelJsonParser::testBase()
 	QVERIFY(result.toMap().value("val").canConvert<int>());
 	QVERIFY(result.toMap().value("val").toInt(&ok)==-12356);
 	QVERIFY(ok==true);
+	
+	intStr = "{\"val\": -12356\n}";
+	buf.setData(intStr);
+	buf.open(QIODevice::ReadOnly);
+	result = StelJsonParser::parse(buf);
+	buf.close();
+	QVERIFY(result.toMap().value("val").canConvert<int>());
+	QVERIFY(result.toMap().value("val").toInt(&ok)==-12356);
+	QVERIFY(ok==true);
 }
 
 void TestStelJsonParser::benchmarkParse()
