@@ -99,7 +99,6 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	// otherwise configuration/INI file parsing will be erroneous.
 	setlocale(LC_NUMERIC, "C");
 
-	qDebug() << "Testing breakpoints";
 	setObjectName("StelApp");
 
 	skyCultureMgr=NULL;
