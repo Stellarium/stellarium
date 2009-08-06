@@ -559,7 +559,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	qPainter->setRenderHints(QPainter::TextAntialiasing/* | QPainter::HighQualityAntialiasing*/);
 	float color[4];
 	glGetFloatv(GL_CURRENT_COLOR, color);
-	const QColor qCol(255*color[0],255*color[1],255*color[2],255*color[3]);
+	const QColor qCol=QColor::fromRgbF(qMin(1.f,color[0]), qMin(1.f,color[1]), qMin(1.f,color[2]), qMin(1.f,color[3]));
 	qPainter->setPen(qCol);
 	
 	if (prj->gravityLabels && !noGravity)
