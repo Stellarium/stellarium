@@ -31,6 +31,7 @@ void skipJson(QIODevice& input)
 			case ' ':
 			case '\t':
 			case '\n':
+			case '\r':
 				break;
 			case '/':
 				{
@@ -72,7 +73,7 @@ QByteArray readString(QIODevice& input)
 	char c;
 	input.getChar(&c);
 	if (c!='\"')
-		throw std::runtime_error("Expected '\"' at beginning of string");
+		throw std::runtime_error(qPrintable(QString("Expected '\"' at beginning of string, found: \"%1\" (ASCII %2)").arg(c).arg((int)(c))));
 	while (input.getChar(&c))
 	{
 		switch (c)
@@ -109,7 +110,7 @@ QVariant readOther(QIODevice& input)
 	char c;
 	while (input.getChar(&c))
 	{
-		if (c==' ' || c==',' || c=='\n' || c==']' || c=='\t' || c=='}')
+		if (c==' ' || c==',' || c=='\n' || c=='\r' || c==']' || c=='\t' || c=='}')
 		{
 			input.ungetChar(c);
 			break;
