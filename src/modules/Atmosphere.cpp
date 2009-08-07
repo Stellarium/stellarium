@@ -65,18 +65,24 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 		glShaderSource(shaderXyYToRGB, 1, &data, NULL);
 		glCompileShader(shaderXyYToRGB);
 		char msg[4048];
+		msg[0]='\0';
 		int l;
 		glGetShaderInfoLog(shaderXyYToRGB, 4048, &l, msg);
-		qWarning() << msg;
+		if (msg[0]!='\0')
+			qWarning() << msg;
 		int val;
 		glGetShaderiv(shaderXyYToRGB, GL_COMPILE_STATUS, &val);
 		if (val==GL_FALSE)
 		{
-			qFatal("Shader compilation error.");
+			useShader = false;
+			qWarning() << "Shader compilation error, fall back to standard rendering.";
 		}
-		atmoShaderProgram = glCreateProgram();
-		glAttachShader(atmoShaderProgram,shaderXyYToRGB);
-		glLinkProgram(atmoShaderProgram);
+		else
+		{
+			atmoShaderProgram = glCreateProgram();
+			glAttachShader(atmoShaderProgram,shaderXyYToRGB);
+			glLinkProgram(atmoShaderProgram);
+		}
 	}
 }
 
