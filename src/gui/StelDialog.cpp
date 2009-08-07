@@ -110,11 +110,16 @@ void StelDialog::setVisible(bool v)
 		StelMainGraphicsView::getInstance().scene()->addItem(proxy);
 		proxy->setWindowFrameMargins(2,0,2,2);
 
-		// With Qt 4.5.2 the caching is buggy
-#ifndef MACOSX
-# if QT_VERSION==0x040502
-# else
+		// The caching is buggy on MACOSX and on linux with Qt 4.5.2
+#ifdef MACOSX
+		proxy->setCacheMode(QGraphicsItem::NoCache);
+#else
+# ifdef WIN32
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+# else
+#  if QT_VERSION==0x040502
+		proxy->setCacheMode(QGraphicsItem::NoCache);
+#  endif
 # endif
 #endif
 		proxy->setZValue(100);
