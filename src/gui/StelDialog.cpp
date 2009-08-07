@@ -57,17 +57,6 @@ class CustomProxy : public QGraphicsProxyWidget
 			}
 			return QGraphicsProxyWidget::event(event);
 		}
-		
-		// Avoid blocking the program when hovering over an inactive window
-		virtual bool sceneEvent(QEvent* event)
-		{
-			if (!(isActiveWindow() || event->type()==QEvent::WindowActivate || event->type()==QEvent::GraphicsSceneMousePress))
-			{
-				event->setAccepted(false);
-				return false;
-			}
-			return QGraphicsProxyWidget::sceneEvent(event);
-		}
 };
 
 StelDialog::StelDialog() : dialog(NULL)
@@ -120,7 +109,14 @@ void StelDialog::setVisible(bool v)
 		proxy->setPos((screenSize.width()-bound.width())/2, (screenSize.height()-bound.height())/2);
 		StelMainGraphicsView::getInstance().scene()->addItem(proxy);
 		proxy->setWindowFrameMargins(2,0,2,2);
+
+		// With Qt 4.5.2 the caching is buggy
+#ifndef MACOSX
+# if QT_VERSION==0x040502
+# else
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+# endif
+#endif
 		proxy->setZValue(100);
 		StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
 		proxy->setFocus();
