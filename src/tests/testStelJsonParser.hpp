@@ -29,9 +29,11 @@ Q_OBJECT
 private slots:
 	void initTestCase();
 	void testBase();
+	void testIterator();
 	void benchmarkParse();
 private:
 	QByteArray largeJsonBuff;
+	QByteArray listJsonBuff;
 };
 
 #endif // _TESTSTELJSONPARSER_HPP_
