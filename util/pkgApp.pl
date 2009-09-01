@@ -42,7 +42,8 @@ sub recurse {
 	}
 
 	## leave sys libraries alone and dont include them
-	if ( $name =~ m,^(/System/Library|/usr/lib|\@executable_name), ) { 
+	if ( $name =~ m,^(/System/Library|/usr/lib|\@executable_name), &&
+	     $name !~ m,^(/usr/lib/libiconv), ){ 
 	    next NAME_LOOP; 
 	}
 
@@ -88,6 +89,7 @@ sub recurse {
 	    my $absname = $name;
 
 	    my $arch = &architecture($absname);
+
 	    if ( $arch eq $current_arch || $arch eq 'fat' ) {
 		my $relPath = "\@executable_path/../Frameworks/$current_arch/$basename";
 		my $fwPath = "$frameworks_dir/$current_arch/$basename";
@@ -127,6 +129,7 @@ sub recurse {
 	    my $absname = "MacOS/" . $name;
 
 	    my $arch = &architecture($absname);
+
 	    if ( $arch eq $current_arch || $arch eq 'fat') {
 		my $relPath = "\@executable_path/$basename";
 
@@ -153,9 +156,9 @@ sub architecture {
     my $file = shift;
     my(@output) = `/usr/bin/file $file`;
 
-    if ( grep(m/^${file}: symbolic link to \`([^\']+)\'/, @output) ) {
-	my($r, @junk) = grep(m/^${file}: symbolic link to \`([^\']+)\'/, @output);
-	$r =~ m,^(.+)/([^/]+.dylib): symbolic link to \`([^\']+)\',;
+    if ( grep(m/^${file}: symbolic link to ([^\']+)/, @output) ) {
+	my($r, @junk) = grep(m/^${file}: symbolic link to ([^\']+)/, @output);
+	$r =~ m,^(.+)/([^/]+.dylib): symbolic link to ([^\']+),;
 	my $root = $1;
 	my $base = $2;
 	my $target = $3;
@@ -169,7 +172,8 @@ sub architecture {
 
     my $retval = undef;
     # file with 2 architectures
-    if ( grep(m/(universal binary|fat file) with 2 architectures/i, @output)) {
+
+    if ( grep(m/(universal binary|fat file) with [0-9] architectures/i, @output)) {
 	$retval =  'fat';
     }
     elsif ( grep(m/ppc/, @output) ) {
@@ -185,7 +189,7 @@ sub architecture {
 sub locateFramework {
     my $fname = shift;
     my $lib;
-    foreach $lib ( '~/Library/Frameworks', '/Library/Frameworks' ) {
+    foreach $lib ( '~/Library/Frameworks', '/Library/Frameworks', '/usr/local/Trolltech/Qt-4.5.0/lib' ) {
 	if ( -e "$lib/$fname" ) {
 	    return "$lib/$fname";
 	}
