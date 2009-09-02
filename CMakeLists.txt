@@ -138,6 +138,15 @@ IF(WIN32)
   LINK_LIBRARIES(wsock32)
 ENDIF()
 
+# For Windows, the default back end for the graphics system should be "native", as "raster" 
+# causes problems for many ATI users.  However, for other platforms we should use raster
+# as the default as it is faster and on OSX it fixes a lot of rendering glitches.
+IF(WIN32)
+  ADD_DEFINITIONS(-DDEFAULT_GRAPHICS_SYSTEM="native")
+ELSE()
+  ADD_DEFINITIONS(-DDEFAULT_GRAPHICS_SYSTEM="raster")
+ENDIF()
+
 IF(COMMAND cmake_policy)
   CMAKE_POLICY(SET CMP0003 NEW)
 ENDIF()

@@ -16,6 +16,7 @@ Recoded the StelGrid code to support non ponctual sky regions, and optimized API
 Optimized many part of the code by reducing creation of temporary Vec3d/Vec3f.
 Optimized JSON parser (x5 speed improvement) + unit tests.
 Migrated all text drawing system to QFont. This fixes long standing bugs for displaying arabic and asian characters in the sky. Also allow to get rid of 6 source files and of the freetype dependency (managed internally to Qt)
+Switch default back end mode to native for Windows as ATI drivers often have problems, still raster default for other platforms.  Add --graphics-system option.
 
 0.10.2 [2009-03-09]
 Based on Qt 4.5.
