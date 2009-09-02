@@ -55,14 +55,44 @@ int main(int argc, char **argv)
 	//QApplication::setDesktopSettingsAware(false);
 	QApplication::setStyle(new QPlastiqueStyle());
 
-	// With Qt 4.5, force the usage of the raster backend
-	char** argv2 = (char**)malloc(sizeof(char*)*(argc+2));
-	memcpy(argv2, argv, argc*sizeof(char*));
+	// Handle command line options for alternative QT graphics system types
+	// DEFAULT_GRAPHICS_SYSTEM is defined per playform in the main CMakeLists.txt file
+	int argc2;
+	char** argv2;
 	char cmd1[] = "-graphicssystem";
-	char cmd2[] = "raster";
+	char cmd2[] = DEFAULT_GRAPHICS_SYSTEM;
+
+	// Having said that, we should also allow users to specify the mode if they like
+	// which also gives them the option to use "opengl".  Good job these three strings
+	// are all the same length, else we'd be mallocing all over the place...
+	for (int i=1; i<argc; i++)
+	{
+		QString a(argv[i]);
+		if (a == "--graphics-system" && i+1 < argc)
+		{
+			a += "=" + QString(argv[i+1]);
+		}
+
+		if (a == "--graphics-system=native")
+		{
+			strcpy(cmd2, "native");
+		}
+		else if (a == "--graphics-system=raster")
+		{
+			strcpy(cmd2, "raster");
+		}
+		else if (a == "--graphics-system=opengl")
+		{
+			strcpy(cmd2, "opengl");
+		}
+	}
+
+	argv2 = (char**)malloc(sizeof(char*)*(argc+2)); 
+	memcpy(argv2, argv, argc*sizeof(char*));
 	argv2[argc]=cmd1;
 	argv2[argc+1]=cmd2;
-	int argc2 = argc+2;
+	argc2 = argc+2;
+
 	QApplication app(argc2, argv2);
 
 #ifdef MACOSX
@@ -86,3 +116,4 @@ int main(int argc, char **argv)
 	free(argv2);
 	return 0;
 }
+

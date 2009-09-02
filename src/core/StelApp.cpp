@@ -117,7 +117,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	for(int i=0; i<argc; i++)
 	{
 		*argList << argv[i];
-		qDebug() << "adding argument:\"" << argv[i] << "\"";
+		// qDebug() << "adding argument:\"" << argv[i] << "\"";
 	}
 
 	// Echo debug output to log file
@@ -725,6 +725,9 @@ void StelApp::parseCLIArgsPreConfig(void)
 			 << "--user-dir (or -u)      : Use an alternative user data directory\n"
 			 << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
 			 << "                          the full screen setting in the config file\n"
+		         << "--graphics-system       : With argument \"native\", \"raster\", or\n"
+		         << "                          \"opengl\"; choose graphics backend \n"
+		         << "                          default is " DEFAULT_GRAPHICS_SYSTEM "\n"
 			 << "--screenshot-dir        : Specify directory to save screenshots\n"
 			 << "--startup-script        : Specify name of startup script\n"
 			 << "--home-planet           : Specify observer planet (English name)\n"
@@ -826,6 +829,10 @@ void StelApp::parseCLIArgsPostConfig()
 		qCritical() << "ERROR while checking command line options: " << e.what();
 		exit(0);
 	}
+
+	// This option is handled by main.cpp, but it's nice to have some debugging output in the log, which is
+	// only available after the processing in main.cpp...
+	qDebug() << "Using graphics system: " << argsGetOptionWithArg(argList, "", "--graphics-system", DEFAULT_GRAPHICS_SYSTEM).toString();
 
 	// Will be -1 if option is not found, in which case we don't change anything.
 	if (fullScreen == 1) confSettings->setValue("video/fullscreen", true);
