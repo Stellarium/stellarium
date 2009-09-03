@@ -298,6 +298,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		cons = new Constellation;
 		if(cons->read(record, hipStarMgr))
 		{
+			cons->artFader.setMaxValue(artMaxIntensity);
 			asterisms.push_back(cons);
 			++readOk;
 		}
