@@ -1518,6 +1518,18 @@
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout">
+                 <property name="leftMargin">
+                  <number>4</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>3</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>4</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>3</number>
+                 </property>
                  <item>
                   <widget class="QPushButton" name="addSkyLayerPushButton">
                    <property name="text">
@@ -1564,7 +1576,7 @@
                 <item>
                  <widget class="QGroupBox" name="groupBox">
                   <property name="title">
-                   <string>GroupBox</string>
+                   <string>Options</string>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_5">
                    <property name="margin">
@@ -1573,7 +1585,7 @@
                    <item row="0" column="0">
                     <widget class="QCheckBox" name="skyLayerEnableCheckBox">
                      <property name="text">
-                      <string>Enabled</string>
+                      <string>Visible</string>
                      </property>
                     </widget>
                    </item>
