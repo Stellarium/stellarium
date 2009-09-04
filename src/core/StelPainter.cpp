@@ -139,6 +139,15 @@ void StelPainter::switchToNativeOpenGLPainting() const
 //! Revert openGL state so that Qt painting works again
 void StelPainter::revertToQtPainting() const
 {
+	Q_ASSERT(qPainter);
+	// Ensure that the current GL content is the one of our main GL window
+	QGLWidget* w = dynamic_cast<QGLWidget*>(qPainter->device());
+	if (w!=0)
+	{
+		Q_ASSERT(w->isValid());
+		w->makeCurrent();
+	}
+	
 	// Restore openGL projection state for Qt drawings
 	glMatrixMode(GL_TEXTURE);
 	glPopMatrix();
