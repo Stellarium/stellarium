@@ -119,6 +119,7 @@ void StelMainGraphicsView::init()
 
 	QPainter qPainter(glWidget);
 	StelPainter::setQPainter(&qPainter);
+	glWidget->makeCurrent();
 	stelApp->init();
 	
 	QSettings* conf = StelApp::getInstance().getSettings();

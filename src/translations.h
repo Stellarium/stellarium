@@ -71,11 +71,11 @@ class Translations
 		N_("Inuit");
 		N_("Korean");
 		N_("Lakota");
+		N_("Maori");
 		N_("Navajo");
 		N_("Norse");
 		N_("Polynesian");
 		N_("Western");
 		N_("Tupi-Guarani");
-
 	}
 };
