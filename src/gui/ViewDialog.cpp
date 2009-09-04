@@ -268,9 +268,10 @@ void ViewDialog::createDialogContent()
 	populateSkyLayersList();
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateSkyLayersList()));
 	connect(ui->skyLayerListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyLayersSelectionChanged(const QString&)));
-
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
-
+	connect(ui->skyLayerEnableCheckBox, SIGNAL(stateChanged(int)), this, SLOT(skyLayersEnabledChanged(int)));
+			
+	
 	QTimer* refreshTimer = new QTimer(this);
 	connect(refreshTimer, SIGNAL(timeout()), this, SLOT(updateFromProgram()));
 	refreshTimer->start(200);
@@ -339,6 +340,8 @@ void ViewDialog::skyLayersSelectionChanged(const QString& s)
 
 void ViewDialog::skyLayersEnabledChanged(int state)
 {
+	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+	skyLayerMgr->showLayer(ui->skyLayerListWidget->currentItem()->text(), state);
 }
 
 void ViewDialog::skyCultureChanged(const QString& cultureName)
