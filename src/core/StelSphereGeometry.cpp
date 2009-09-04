@@ -570,6 +570,12 @@ void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, Sph
 	{
 		if(!((triangleVertices.at(i*3+1)^triangleVertices.at(i*3))*triangleVertices.at(i*3+2)>=0))
 		{
+			// Avoid crash but very bad!
+			qWarning() << "Warning, couldn't tesselate a polygon";
+			triangleVertices.clear();
+			edgeFlags.clear();
+			return;
+			
 // 			triangleVertices.remove(i*3, 3);
 // 			edgeFlags.remove(i*3, 3);
 			static int k=0;
