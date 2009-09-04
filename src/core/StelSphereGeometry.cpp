@@ -240,7 +240,10 @@ SphericalConvexPolygon SphericalCap::toSphericalConvexPolygon() const
 	static const int nbStep = 40;
 	QVector<Vec3d> contour;
 	Vec3d p(n);
-	p.transfo4d(Mat4d::xrotation(std::acos(d)));
+	Vec3d axis = n^Vec3d(1,0,0);
+	if (axis.lengthSquared()<0.1)
+		axis = n^Vec3d(0,1,0);	// Improve precision
+	p.transfo4d(Mat4d::rotation(axis, std::acos(d)));
 	const Mat4d& rot = Mat4d::rotation(n, -2.*M_PI/nbStep);
 	for (int i=0;i<nbStep;++i)
 	{
