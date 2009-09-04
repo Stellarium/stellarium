@@ -32,6 +32,8 @@
 #include <QPainter>
 #include <QMutex>
 #include <QVarLengthArray>
+#include <QPaintEngine>
+#include <QGLContext>
 
 QMutex* StelPainter::globalMutex = new QMutex();
 bool StelPainter::flagGlPointSprite = false;
@@ -46,7 +48,7 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 {
 	Q_ASSERT(proj);
 	Q_ASSERT(globalMutex);
-
+	
 #ifndef NDEBUG
  	GLenum er = glGetError();
  	if (er!=GL_NO_ERROR)
@@ -61,7 +63,7 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	{
 		qFatal("There can be only 1 instance of StelPainter at a given time");
 	}
-
+	
 	switchToNativeOpenGLPainting();
 
 	// Init GL viewport to current projector values
@@ -84,7 +86,7 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 StelPainter::~StelPainter()
 {
 	revertToQtPainting();
-
+	
 	// We are done with this StelPainter
 	globalMutex->unlock();
 }
@@ -106,6 +108,15 @@ QFontMetrics StelPainter::getFontMetrics() const
 //! After this call revertToQtPainting MUST be called
 void StelPainter::switchToNativeOpenGLPainting() const
 {
+	Q_ASSERT(qPainter);
+	// Ensure that the current GL content is the one of our main GL window
+	QGLWidget* w = dynamic_cast<QGLWidget*>(qPainter->device());
+	if (w!=0)
+	{
+		Q_ASSERT(w->isValid());
+		w->makeCurrent();
+	}
+	
 	// Save openGL projection state
 	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
 	glPushAttrib(GL_ALL_ATTRIB_BITS);

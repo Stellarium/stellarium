@@ -225,9 +225,9 @@ private:
 	//! Init the real openGL Matrices to a 2d orthographic projection
 	void initGlMatrixOrtho2d(void) const;
 	
-	//! The assoaciated instance of projector
+	//! The associated instance of projector
 	const StelProjectorP prj;
-	
+
 	//! Whether the GL_POINT_SPRITE extension is available and activated
 	static bool flagGlPointSprite;
 	
