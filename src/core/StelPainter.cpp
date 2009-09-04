@@ -1404,6 +1404,11 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* region, SphericalPo
 	{
 		return drawSphericalPolygon(poly, drawMode, boundaryColor);
 	}
+	else
+	{
+		SphericalPolygon pol = region->toSphericalPolygon();
+		drawSphericalPolygon(&pol, drawMode, boundaryColor);
+	}
 }
 
 /*************************************************************************
