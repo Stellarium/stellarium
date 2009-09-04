@@ -111,7 +111,7 @@ void StelDialog::setVisible(bool v)
 		proxy->setWindowFrameMargins(2,0,2,2);
 
 		// The caching is buggy on linux with Qt 4.5.2
-#ifdef Q_OS_UNIX
+#ifdef Q_WS_X11
 # if QT_VERSION==0x040502
 		proxy->setCacheMode(QGraphicsItem::NoCache);
 # endif
