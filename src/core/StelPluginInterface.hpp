@@ -21,10 +21,30 @@
 #define _STELPLUGININTERFACE_HPP_
 
 #include <QtPlugin>
+#include <QImage>
+
+//! @struct StelPluginInfo
+//! Contains information about a Stellarium plugin.
+struct StelPluginInfo
+{
+	//! The plugin ID. It MUST match the lib file name (case sensitive), e.g. "HelloStelModule", or "VirGO".
+	QString id;
+	//! The displayed name, e.g. "Artificial Satellites".
+	QString displayedName;
+	//! The comma separated list of authors, e.g. "Fabien Chereau, Matthew Gates".
+	QString authors;
+	//! The contact email or URL.
+	QString	contact;
+	//! The HTML description of the plugin.
+	QString description;
+	//! Logo or preview image to display in the information dialog or an invalid image if not applicable.
+	//! The image size should be x by x pixels.
+	QImage image;
+};
 
 //! @class StelPluginInterface
 //! Define the interface to implement when creating a plugin.
-//! The interface is used by the <a href="http://doc.trolltech.com/4.4/qpluginloader.html">QPluginLoader</a> to load Stellarium plugins dynamically.
+//! The interface is used by the <a href="http://doc.trolltech.com/4.5/qpluginloader.html">QPluginLoader</a> to load Stellarium plugins dynamically.
 //! @sa @ref plugins for documentation on how to develop external plugins.
 class StelPluginInterface
 {
@@ -33,11 +53,11 @@ public:
 
 	//! Get the instance of StelModule to include in the list of standard StelModule
 	virtual class StelModule* getStelModule() const = 0;
-
-	//! Get the name of the plugin. It should match the lib file name, e.g. HelloStelModule, or VirGO
-	virtual QString getPluginId() const = 0;
+	
+	//! Get information about the plugin.
+	virtual StelPluginInfo getPluginInfo() const = 0;
 };
 
-Q_DECLARE_INTERFACE(StelPluginInterface,"stellarium.StelPluginInterface/1.0");
+Q_DECLARE_INTERFACE(StelPluginInterface, "stellarium.StelPluginInterface/2.0");
 
 #endif // _STELPLUGININTERFACE_HPP_
