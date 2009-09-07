@@ -24,6 +24,7 @@
 #include <QMap>
 #include <QList>
 #include "StelModule.hpp"
+#include "StelPluginInterface.hpp"
 
 //! @def GETSTELMODULE(m)
 //! Return a pointer on a StelModule from its QMetaObject name @a m
@@ -81,18 +82,18 @@ public:
 	//! Contains the information read from the module.ini file
 	struct PluginDescriptor
 	{
-		//! The name of the directory and of the lib*.so with *=key
-		QString key;
-		QString name;
-		QString author;
-		QString contact;
-		QString description;
+		//! The static info for the plugin.
+		StelPluginInfo info;
 		//! If true, the module is automatically loaded at startup
 		bool loadAtStartup;
+		
+		private:
+			friend class StelModuleMgr;
+			StelPluginInterface* pluginInterface;
 	};
 
 	//! Return the list of all the external module found in the modules directories
-	static QList<PluginDescriptor> getPluginsList();
+	QList<PluginDescriptor> getPluginsList();
 
 private:
 	//! Generate properly sorted calling lists for each action (e,g, draw, update)
@@ -107,6 +108,9 @@ private:
 
 	//! True if modules were removed, and therefore the calling list need to be regenerated
 	bool callingListsToRegenerate;
+	
+	QList<StelModuleMgr::PluginDescriptor> pluginDescriptorList;
+	bool pluginDescriptorListLoaded;
 };
 
 #endif // _STELMODULEMGR_HPP_

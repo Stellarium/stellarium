@@ -472,7 +472,7 @@ void StelApp::initPlugIns()
 	{
 		if (i.loadAtStartup==false)
 			continue;
-		StelModule* m = moduleMgr->loadPlugin(i.key);
+		StelModule* m = moduleMgr->loadPlugin(i.info.id);
 		if (m!=NULL)
 		{
 			moduleMgr->registerModule(m, true);

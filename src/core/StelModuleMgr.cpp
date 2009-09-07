@@ -59,7 +59,7 @@ Q_IMPORT_PLUGIN(TextUserInterface)
 Q_IMPORT_PLUGIN(Oculars)
 #endif
 
-StelModuleMgr::StelModuleMgr()
+StelModuleMgr::StelModuleMgr() : pluginDescriptorListLoaded(false)
 {
 	// Initialize empty call lists for each possible actions
 	callOrders[StelModule::ActionDraw]=QList<StelModule*>();
@@ -141,57 +141,18 @@ StelModule* StelModuleMgr::getModule(const QString& moduleID)
 *************************************************************************/
 StelModule* StelModuleMgr::loadPlugin(const QString& moduleID)
 {
-	// First look if a static plugin corresponds
-	foreach (QObject *plugin, QPluginLoader::staticInstances())
+	foreach (const PluginDescriptor& desc, getPluginsList())
 	{
-		StelPluginInterface* pluginInterface = qobject_cast<StelPluginInterface*>(plugin);
-		if (pluginInterface->getPluginId()==moduleID)
+		if (desc.info.id==moduleID)
 		{
-			StelModule* sMod = pluginInterface->getStelModule();
-			qDebug() << "Loaded static plugin " << moduleID << ".";
+			Q_ASSERT(desc.pluginInterface);
+			StelModule* sMod = desc.pluginInterface->getStelModule();
+			qDebug() << "Loaded plugin " << moduleID << ".";
 			return sMod;
 		}
 	}
-
-	QString moduleFullPath = "modules/" + moduleID + "/lib" + moduleID;
-#ifdef WIN32
-	moduleFullPath += ".dll";
-#else
-#ifdef MACOSX
-	moduleFullPath += ".dylib";
-#else
-	moduleFullPath += ".so";
-#endif
-#endif
-	try
-	{
-		moduleFullPath = StelApp::getInstance().getFileMgr().findFile(moduleFullPath, StelFileMgr::File);
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR while locating plugin path: " << e.what();
-	}
-
-	QPluginLoader loader(moduleFullPath);
-	if (!loader.load())
-	{
-		qWarning() << "Couldn't load the dynamic library: " << moduleFullPath << ": " << loader.errorString();
-		qWarning() << "Plugin " << moduleID << " will not be loaded.";
-		return NULL;
-	}
-
-	QObject* obj = loader.instance();
-	if (!obj)
-	{
-		qWarning() << "Couldn't open the dynamic library: " << moduleFullPath << ": " << loader.errorString();
-		qWarning() << "Plugin " << moduleID << " will not be open.";
-		return NULL;
-	}
-
-	StelPluginInterface* plugInt = qobject_cast<StelPluginInterface *>(obj);
-	StelModule* sMod = plugInt->getStelModule();
-	qDebug() << "Loaded dynamic plugin " << moduleID << ".";
-	return sMod;
+	qWarning() << "Can't find plugin called " << moduleID;
+	return NULL;
 }
 
 struct StelModuleOrderComparator
@@ -213,21 +174,22 @@ void StelModuleMgr::unloadAllPlugins()
 		const PluginDescriptor& d = i.previous();
 		if (d.loadAtStartup==false)
 			continue;
-		unloadModule(d.key, true);
-		qDebug() << "Unloaded plugin " << d.key << ".";
+		unloadModule(d.info.id, true);
+		qDebug() << "Unloaded plugin " << d.info.id << ".";
 	}
 }
 
 void StelModuleMgr::setPluginLoadAtStartup(const QString& key, bool b)
 {
-	try
+	QSettings* conf = StelApp::getInstance().getSettings();
+	conf->setValue("plugins_load_at_startup/"+key, b);
+	for (QList<StelModuleMgr::PluginDescriptor>::Iterator iter=pluginDescriptorList.begin();iter!=pluginDescriptorList.end();++iter)
 	{
-		QSettings pd(StelApp::getInstance().getFileMgr().findFile("modules/" + key + "/module.ini"), StelIniFormat);
-		pd.setValue("module/load_at_startup", b);
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR while trying to get info for plugin " << key << ":" << e.what();
+		if (iter->info.id==key)
+		{
+			iter->loadAtStartup=b;
+			return;
+		}
 	}
 }
 
@@ -257,11 +219,27 @@ void StelModuleMgr::generateCallingLists()
 *************************************************************************/
 QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 {
-	QList<StelModuleMgr::PluginDescriptor> result;
+	if (pluginDescriptorListLoaded	)
+	{
+		return pluginDescriptorList;
+	}
+	
+	// First list all static plugins
+	foreach (QObject *plugin, QPluginLoader::staticInstances())
+	{
+		StelPluginInterface* pluginInterface = qobject_cast<StelPluginInterface*>(plugin);
+		if (pluginInterface)
+		{
+			StelModuleMgr::PluginDescriptor mDesc;
+			mDesc.info = pluginInterface->getPluginInfo();
+			mDesc.pluginInterface = pluginInterface;
+			pluginDescriptorList.append(mDesc);
+		}
+	}
+	
+	// Then list dynamic libraries from the modules/ directory
 	QSet<QString> moduleDirs;
-
 	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
-
 	try
 	{
 		moduleDirs = fileMan.listContents("modules",StelFileMgr::Directory);
@@ -271,25 +249,61 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 		qWarning() << "ERROR while trying list list modules:" << e.what();
 	}
 
-	for (QSet<QString>::iterator dir=moduleDirs.begin(); dir!=moduleDirs.end(); dir++)
+	foreach (QString dir, moduleDirs)
 	{
+		QString moduleFullPath = QString("modules/") + dir + "/lib" + dir;
+#ifdef WIN32
+		moduleFullPath += ".dll";
+#else
+#ifdef MACOSX
+		moduleFullPath += ".dylib";
+#else
+		moduleFullPath += ".so";
+#endif
+#endif
 		try
 		{
-			StelModuleMgr::PluginDescriptor mDesc;
-			QSettings pd(fileMan.findFile("modules/" + *dir + "/module.ini"), StelIniFormat);
-			mDesc.key = *dir;
-			mDesc.name = pd.value("module/name").toString();
-			mDesc.author = pd.value("module/author").toString();
-			mDesc.contact = pd.value("module/contact").toString();
-			mDesc.description = pd.value("module/description").toString();
-			mDesc.loadAtStartup = pd.value("module/load_at_startup").toBool();
-			result.push_back(mDesc);
+			moduleFullPath = StelApp::getInstance().getFileMgr().findFile(moduleFullPath, StelFileMgr::File);
 		}
 		catch (std::runtime_error& e)
 		{
-			qWarning() << "WARNING: unable to successfully read module.ini file from plugin " << *dir;
+			qWarning() << "ERROR while locating plugin path: " << e.what();
+		}
+
+		QPluginLoader loader(moduleFullPath);
+		if (!loader.load())
+		{
+			qWarning() << "Couldn't load the dynamic library: " << moduleFullPath << ": " << loader.errorString();
+			qWarning() << "Plugin " << dir << " will not be loaded.";
+			continue;
+		}
+
+		QObject* obj = loader.instance();
+		if (!obj)
+		{
+			qWarning() << "Couldn't open the dynamic library: " << moduleFullPath << ": " << loader.errorString();
+			qWarning() << "Plugin " << dir << " will not be open.";
+			continue;
+		}
+		
+		StelPluginInterface* pluginInterface = qobject_cast<StelPluginInterface *>(obj);
+		if (pluginInterface)
+		{
+			StelModuleMgr::PluginDescriptor mDesc;
+			mDesc.info = pluginInterface->getPluginInfo();
+			mDesc.pluginInterface = pluginInterface;
+			pluginDescriptorList.append(mDesc);
 		}
 	}
 
-	return result;
+	QSettings* conf = StelApp::getInstance().getSettings();
+	for (QList<StelModuleMgr::PluginDescriptor>::Iterator iter=pluginDescriptorList.begin();iter!=pluginDescriptorList.end();++iter)
+	{
+		if (!conf->contains("plugins_load_at_startup/"+iter->info.id))
+			conf->setValue("plugins_load_at_startup/"+iter->info.id, false);
+		iter->loadAtStartup = conf->value("plugins_load_at_startup/"+iter->info.id).toBool();
+	}
+	
+	pluginDescriptorListLoaded = true;
+	return pluginDescriptorList;
 }

@@ -483,10 +483,10 @@ void ConfigurationDialog::populatePluginsList()
 {
 	int prevSel = ui->pluginsListWidget->currentRow();
 	ui->pluginsListWidget->clear();
-	QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
+	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
-		ui->pluginsListWidget->addItem(desc.name);
+		ui->pluginsListWidget->addItem(desc.info.displayedName);
 	}
 	// If we had a valid previous selection (i.e. not first time we populate), restore it
 	if (prevSel >= 0 && prevSel < ui->pluginsListWidget->count())
@@ -497,18 +497,18 @@ void ConfigurationDialog::populatePluginsList()
 
 void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 {
-	QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
+	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
-		if (s==desc.name)
+		if (s==desc.info.displayedName)
 		{
 			QString html = "<html><head></head><body>";
-			html += "<h2>" + desc.name + "</h2>";
-			html += "<h3>" + q_("Author") + ": " + desc.author + "</h3>";
-			QString d = desc.description;
+			html += "<h2>" + desc.info.displayedName + "</h2>";
+			html += "<h3>" + q_("Authors") + ": " + desc.info.authors + "</h3>";
+			QString d = desc.info.description;
 			d.replace("\n", "<br />");
 			html += "<p>" + d + "</p>";
-			html += "<h3>" + q_("Contact") + ": " + desc.contact + "</h3>";
+			html += "<h3>" + q_("Contact") + ": " + desc.info.contact + "</h3>";
 			html += "</body></html>";
 			ui->pluginsInfoBrowser->setHtml(html);
 			ui->pluginLoadAtStartupCheckBox->setChecked(desc.loadAtStartup);
@@ -524,8 +524,8 @@ void ConfigurationDialog::loadAtStartupChanged(int state)
 	QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
-		if (desc.name==name)
-			key = desc.key;
+		if (desc.info.displayedName==name)
+			key = desc.info.id;
 	}
 	if (!key.isEmpty())
 		StelApp::getInstance().getModuleMgr().setPluginLoadAtStartup(key, state==Qt::Checked);
