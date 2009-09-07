@@ -176,9 +176,9 @@ void StelGui::init()
 #endif
 
 	group = N_("Date and Time");
-	addGuiActions("actionDecrease_Script_Speed", N_("Decrease script speed"), "", group, false, false);
-	addGuiActions("actionIncrease_Script_Speed", N_("Increase script speed"), "", group, false, false);
-	addGuiActions("actionSet_Real_Script_Speed", N_("Set normal script rate"), "", group, false, false);
+	addGuiActions("actionDecrease_Script_Speed", N_("Slow down the script execution rate"), "", group, false, false);
+	addGuiActions("actionIncrease_Script_Speed", N_("Speed up the script execution rate"), "", group, false, false);
+	addGuiActions("actionSet_Real_Script_Speed", N_("Set the normal script execution rate"), "", group, false, false);
 	addGuiActions("actionDecrease_Time_Speed", N_("Decrease time speed"), "J", group, false, false);
 	addGuiActions("actionIncrease_Time_Speed", N_("Increase time speed"), "L", group, false, false);
 	addGuiActions("actionSet_Real_Time_Speed", N_("Set normal time rate"), "K", group, false, false);
