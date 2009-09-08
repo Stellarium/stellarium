@@ -35,6 +35,7 @@
 #include <QProgressBar>
 #include <QVariantMap>
 #include <QVariantList>
+#include <QSettings>
 
 StelSkyLayerMgr::StelSkyLayerMgr(void) : flagShow(true)
 {
@@ -68,13 +69,27 @@ void StelSkyLayerMgr::init()
 	{
 		qWarning() << "ERROR while loading nebula texture set " << "default" << ": " << e.what();
 	}
+	QSettings* conf = StelApp::getInstance().getSettings();
+	conf->beginGroup("skylayers");
+	foreach (const QString& key, conf->childKeys())
+	{
+		QString uri = conf->value(key, "").toString();
+		if (!uri.isEmpty())
+		{
+			if (key=="clilayer")
+				insertSkyImage(uri, "Command-line layer");
+			else
+				insertSkyImage(uri);
+		}
+	}
+	conf->endGroup();
 }
 
 QString StelSkyLayerMgr::insertSkyLayer(StelSkyLayerP tile, const QString& keyHint, bool ashow)
 {
 	SkyLayerElem* bEl = new SkyLayerElem(tile, ashow);
 	QString key = tile->getKeyHint();
-	if (key.isEmpty())
+	if (key.isEmpty() || key=="no name")
 	{
 		if (!keyHint.isEmpty())
 		{
@@ -283,15 +298,15 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 void StelSkyLayerMgr::showLayer(const QString& id, bool b)
 {
 	if (allSkyLayers.contains(id))
-		if (allSkyLayers[id]!=NULL)
+		if (allSkyLayers.value(id)!=NULL)
 			allSkyLayers[id]->show = b;
 }
 
 bool StelSkyLayerMgr::getShowLayer(const QString& id) const
 {
 	if (allSkyLayers.contains(id))
-		if (allSkyLayers[id]!=NULL)
-			return allSkyLayers[id]->show;
+		if (allSkyLayers.value(id)!=NULL)
+			return allSkyLayers.value(id)->show;
 	return false;
 }
 

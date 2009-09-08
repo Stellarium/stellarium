@@ -332,7 +332,8 @@ void ViewDialog::skyLayersSelectionChanged(const QString& s)
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + l->getShortName()+ "</h2>";
 	html += "<p>" + l->getLayerDescriptionHtml() + "</p>";
-	html += "<h3>" + q_("Contact") + ": " + l->getShortServerCredits() + "</h3>";
+	if (!l->getShortServerCredits().isEmpty())
+		html += "<h3>" + q_("Contact") + ": " + l->getShortServerCredits() + "</h3>";
 	html += "</body></html>";
 	ui->skyLayerTextBrowser->setHtml(html);
 	ui->skyLayerEnableCheckBox->setChecked(skyLayerMgr->getShowLayer(s));
