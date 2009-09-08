@@ -39,8 +39,8 @@ static void UnixTimevalToFileTime(struct timeval t, LPFILETIME pft)
 
 //
 // sys/time.h fnctions
-//
-int gettimeofday(struct timeval *__p, void *__t)
+// Added a '2' to avoids a name collision...
+int gettimeofday2(struct timeval *__p, void *__t)
 {
 	union {
 		unsigned long long ns100; /*time since 1 Jan 1601 in 100ns units */
