@@ -418,7 +418,7 @@ void StelPainter::sRing(GLdouble rMin, GLdouble rMax, GLint slices, GLint stacks
 	{
 		const double tex_r0 = (r-rMin)/(rMax-rMin);
 		const double tex_r1 = (r+dr-rMin)/(rMax-rMin);
-		glBegin(GL_QUAD_STRIP /*GL_TRIANGLE_STRIP*/);
+		glBegin(GL_TRIANGLE_STRIP);
 		for (j=0,cos_sin_theta_p=cos_sin_theta; j<=slices; ++j,cos_sin_theta_p+=2)
 		{
 			x = r*cos_sin_theta_p[0];
@@ -474,7 +474,7 @@ void StelPainter::sSphereMap(GLdouble radius, GLint slices, GLint stacks, double
 	{
 		for (i = 0,cos_sin_rho_p=cos_sin_rho,rho=0.0; i < imax; ++i,cos_sin_rho_p+=2,rho+=drho)
 		{
-			glBegin(GL_QUAD_STRIP);
+			glBegin(GL_TRIANGLE_STRIP);
 			for (j=0,cos_sin_theta_p=cos_sin_theta;j<=slices;++j,cos_sin_theta_p+=2)
 			{
 				x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
@@ -498,7 +498,7 @@ void StelPainter::sSphereMap(GLdouble radius, GLint slices, GLint stacks, double
 	{
 		for (i = 0,cos_sin_rho_p=cos_sin_rho,rho=0.0; i < imax; ++i,cos_sin_rho_p+=2,rho+=drho)
 		{
-			glBegin(GL_QUAD_STRIP);
+			glBegin(GL_TRIANGLE_STRIP);
 			for (j=0,cos_sin_theta_p=cos_sin_theta;j<=slices;++j,cos_sin_theta_p+=2)
 			{
 				x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
@@ -1604,7 +1604,7 @@ void StelPainter::sSphere(GLdouble radius, GLdouble oneMinusOblateness, GLint sl
 	// draw intermediate  as quad strips
 	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
 	{
-		glBegin(GL_QUAD_STRIP);
+		glBegin(GL_TRIANGLE_STRIP);
 		s = 0.0;
 		for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;++j,cos_sin_theta_p+=2)
 		{
@@ -1614,7 +1614,7 @@ void StelPainter::sSphere(GLdouble radius, GLdouble oneMinusOblateness, GLint sl
 			glTexCoord2f(s, t);
 			if (isLightOn)
 			{
-				c = nsign * lightPos3.dot(Vec3f(x * oneMinusOblateness, y * oneMinusOblateness, z));
+				c = nsign * (lightPos3[0]*x*oneMinusOblateness + lightPos3[1]*y*oneMinusOblateness + lightPos3[2]*z);
 				if (c<0) {c=0;}
 				glColor3f(c*diffuseLight[0] + ambientLight[0],
 						  c*diffuseLight[1] + ambientLight[1],
@@ -1627,7 +1627,7 @@ void StelPainter::sSphere(GLdouble radius, GLdouble oneMinusOblateness, GLint sl
 			glTexCoord2f(s, t - dt);
 			if (isLightOn)
 			{
-				c = nsign * lightPos3.dot(Vec3f(x * oneMinusOblateness,y * oneMinusOblateness,z));
+				c = nsign * (lightPos3[0]*x*oneMinusOblateness + lightPos3[1]*y*oneMinusOblateness + lightPos3[2]*z);
 				if (c<0) {c=0;}
 				glColor3f(c*diffuseLight[0] + ambientLight[0],
 						  c*diffuseLight[1] + ambientLight[1],
@@ -1647,9 +1647,9 @@ void StelPainter::sSphere(GLdouble radius, GLdouble oneMinusOblateness, GLint sl
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
 void StelPainter::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks, int orientInside) const
 {
-	static GLdouble da, r, dz;
-	static GLfloat z, nsign;
-	static GLint i, j;
+	GLdouble da, r, dz;
+	GLfloat z, nsign;
+	GLint i, j;
 
 	nsign = 1.0;
 	if (orientInside)
@@ -1668,7 +1668,7 @@ void StelPainter::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLin
 	for (j = 0; j < stacks; j++)
 	{
 		GLfloat s = 0.0;
-		glBegin(GL_QUAD_STRIP);
+		glBegin(GL_TRIANGLE_STRIP);
 		for (i = 0; i <= slices; i++)
 		{
 			GLfloat x, y;
