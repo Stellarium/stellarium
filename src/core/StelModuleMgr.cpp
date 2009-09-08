@@ -264,7 +264,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 		}
 		catch (std::runtime_error& e)
 		{
-			qWarning() << "ERROR while locating plugin path: " << e.what();
+			continue;
 		}
 
 		QPluginLoader loader(moduleFullPath);
