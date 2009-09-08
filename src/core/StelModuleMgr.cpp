@@ -183,13 +183,9 @@ void StelModuleMgr::setPluginLoadAtStartup(const QString& key, bool b)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("plugins_load_at_startup/"+key, b);
-	for (QList<StelModuleMgr::PluginDescriptor>::Iterator iter=pluginDescriptorList.begin();iter!=pluginDescriptorList.end();++iter)
+	if (pluginDescriptorList.contains(key))
 	{
-		if (iter->info.id==key)
-		{
-			iter->loadAtStartup=b;
-			return;
-		}
+		pluginDescriptorList[key].loadAtStartup=b;
 	}
 }
 
@@ -219,12 +215,13 @@ void StelModuleMgr::generateCallingLists()
 *************************************************************************/
 QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 {
-	if (pluginDescriptorListLoaded	)
+	if (pluginDescriptorListLoaded)
 	{
-		return pluginDescriptorList;
+		return pluginDescriptorList.values();
 	}
-	
-	// First list all static plugins
+
+	// First list all static plugins.
+	// If a dynamic plugin with the same ID exists, it will take precedence on the static one.
 	foreach (QObject *plugin, QPluginLoader::staticInstances())
 	{
 		StelPluginInterface* pluginInterface = qobject_cast<StelPluginInterface*>(plugin);
@@ -233,7 +230,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 			StelModuleMgr::PluginDescriptor mDesc;
 			mDesc.info = pluginInterface->getPluginInfo();
 			mDesc.pluginInterface = pluginInterface;
-			pluginDescriptorList.append(mDesc);
+			pluginDescriptorList.insert(mDesc.info.id, mDesc);
 		}
 	}
 	
@@ -292,18 +289,19 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 			StelModuleMgr::PluginDescriptor mDesc;
 			mDesc.info = pluginInterface->getPluginInfo();
 			mDesc.pluginInterface = pluginInterface;
-			pluginDescriptorList.append(mDesc);
+			pluginDescriptorList.insert(mDesc.info.id, mDesc);
 		}
 	}
 
+	// Load for each plugin if it should be loaded at startup
 	QSettings* conf = StelApp::getInstance().getSettings();
-	for (QList<StelModuleMgr::PluginDescriptor>::Iterator iter=pluginDescriptorList.begin();iter!=pluginDescriptorList.end();++iter)
+	for (QMap<QString, StelModuleMgr::PluginDescriptor>::Iterator iter=pluginDescriptorList.begin();iter!=pluginDescriptorList.end();++iter)
 	{
-		if (!conf->contains("plugins_load_at_startup/"+iter->info.id))
-			conf->setValue("plugins_load_at_startup/"+iter->info.id, false);
-		iter->loadAtStartup = conf->value("plugins_load_at_startup/"+iter->info.id).toBool();
+		if (!conf->contains("plugins_load_at_startup/"+iter.key()))
+			conf->setValue("plugins_load_at_startup/"+iter.key(), false);
+		iter->loadAtStartup = conf->value("plugins_load_at_startup/"+iter.key()).toBool();
 	}
 	
 	pluginDescriptorListLoaded = true;
-	return pluginDescriptorList;
+	return pluginDescriptorList.values();
 }

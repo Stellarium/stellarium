@@ -445,8 +445,8 @@ void StelSkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedAre
 	// If the disk of the planet is big enough to be visible, we should adjust the eye adaptation luminance
 	// so that the radius of the halo is small enough to be not visible (so that we see the disk)
 
-	float tStart = 2.f;
-	float tStop = 6.f;
+	float tStart = 0.5f;
+	float tStop = 2.f;
 	bool truncated=false;
 	
 	float maxHaloRadius = qMax(tStart*3., pixRadius*3.);
