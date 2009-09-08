@@ -705,7 +705,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 {
 	if (argsGetOption(argList, "-v", "--version"))
 	{
-		qDebug() << qPrintable(getApplicationName());
+		std::cout << qPrintable(getApplicationName());
 		exit(0);
 	}
 
@@ -715,7 +715,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 		QString binName = argList->at(0);
 		binName.remove(QRegExp("^.*[/\\\\]"));
 
-		qDebug() << "Usage:\n"
+		std::cout << "Usage:\n"
 			 << "  "
 			 << qPrintable(binName) << " [options]\n\n"
 			 << "Options:\n"
@@ -725,9 +725,9 @@ void StelApp::parseCLIArgsPreConfig(void)
 			 << "--user-dir (or -u)      : Use an alternative user data directory\n"
 			 << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
 			 << "                          the full screen setting in the config file\n"
-		         << "--graphics-system       : With argument \"native\", \"raster\", or\n"
-		         << "                          \"opengl\"; choose graphics backend \n"
-		         << "                          default is " DEFAULT_GRAPHICS_SYSTEM "\n"
+		     << "--graphics-system       : With argument \"native\", \"raster\", or\n"
+		     << "                          \"opengl\"; choose graphics backend \n"
+		     << "                          default is " DEFAULT_GRAPHICS_SYSTEM "\n"
 			 << "--screenshot-dir        : Specify directory to save screenshots\n"
 			 << "--startup-script        : Specify name of startup script\n"
 			 << "--home-planet           : Specify observer planet (English name)\n"
@@ -741,7 +741,8 @@ void StelApp::parseCLIArgsPreConfig(void)
 			 << "--sky-time              : Specify sky time in format hh:mm:ss\n"
 			 << "--fov                   : Specify the field of view (degrees)\n"
 			 << "--projection-type       : Specify projection type, e.g. stereographic\n"
-			 << "--restore-defaults      : Delete existing config.ini and use defaults\n";
+			 << "--restore-defaults      : Delete existing config.ini and use defaults\n"
+			 << "--multires-image        : Specify a multi-resolution image file/URL to load\n";
 		exit(0);
 	}
 
@@ -755,7 +756,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 				// finding the file will throw an exception if it is not found
 				// in that case we won't output the landscape ID as it canont work
 				stelFileMgr->findFile("landscapes/" + *i + "/landscape.ini");
-				qDebug() << qPrintable(*i);
+				std::cout << qPrintable(*i);
 			}
 			catch (std::runtime_error& e){}
 		}
@@ -808,7 +809,7 @@ void StelApp::parseCLIArgsPostConfig()
 	// We should catch exceptions from argsGetOptionWithArg...
 	int fullScreen, altitude;
 	float fov;
-	QString landscapeId, homePlanet, longitude, latitude, skyDate, skyTime, projectionType, screenshotDir;
+	QString landscapeId, homePlanet, longitude, latitude, skyDate, skyTime, projectionType, screenshotDir, multiresImage;
 
 	try
 	{
@@ -823,6 +824,7 @@ void StelApp::parseCLIArgsPostConfig()
 		fov = argsGetOptionWithArg(argList, "", "--fov", -1.0).toDouble();
 		projectionType = argsGetOptionWithArg(argList, "", "--projection-type", "").toString();
 		screenshotDir = argsGetOptionWithArg(argList, "", "--screenshot-dir", "").toString();
+		multiresImage = argsGetOptionWithArg(argList, "", "--multires-image", "").toString();
 	}
 	catch (std::runtime_error& e)
 	{
@@ -898,6 +900,13 @@ void StelApp::parseCLIArgsPostConfig()
 		confSettings->setValue("navigation/preset_sky_time", skyDatePart + skyTimePart);
 	}
 
+	if (!multiresImage.isEmpty())
+		confSettings->setValue("skylayers/clilayer", multiresImage);
+	else
+	{
+		confSettings->remove("skylayers/clilayer");
+	}
+	
 	if (fov > 0.0) confSettings->setValue("navigation/init_fov", fov);
 
 	if (projectionType != "") confSettings->setValue("projection/type", projectionType);

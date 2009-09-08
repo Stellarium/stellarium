@@ -320,14 +320,14 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		htmlDescription = map.value("description").toString();
 		if (parent()==NULL)
 		{
-			htmlDescription+= "<h3>Sky image</h3><h3>URL: "+contructorUrl+"</h3>";
+			htmlDescription+= "<h3>URL: "+contructorUrl+"</h3>";
 		}
 	}
 	else
 	{
 		if (parent()==NULL)
 		{
-			htmlDescription= "<h3>Sky image</h3><h3>URL: "+contructorUrl+"</h3>";
+			htmlDescription= "<h3>URL: "+contructorUrl+"</h3>";
 		}
 	}
 
