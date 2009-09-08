@@ -619,14 +619,13 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 /*************************************************************************
  Draw a gl array with 3D vertex position and optional 2D texture position.
 *************************************************************************/
-void StelPainter::drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const Vec2f* texCoords) const
+void StelPainter::drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray) const
 {
+	Q_ASSERT(vertice);
 	// Project all the vertice
 	for (int i=0;i<count;++i)
-	{
 		prj->projectInPlace(vertice[i]);
-	}
-	if (texCoords==NULL)
+	if (texCoords==NULL && colorArray==NULL && normalArray==NULL)
 	{
 		glInterleavedArrays(GL_V3F ,0, vertice);
 		glDrawArrays(mode, 0, count);
@@ -634,12 +633,31 @@ void StelPainter::drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const V
 	}
 	
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, vertice);
-	glTexCoordPointer(2, GL_FLOAT, 0, texCoords);
+	
+	if (texCoords)
+	{
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glTexCoordPointer(2, GL_FLOAT, 0, texCoords);
+	}
+	if (colorArray)
+	{
+		glEnableClientState(GL_COLOR_ARRAY);
+		glColorPointer(3, GL_FLOAT, 0, colorArray);
+	}
+	if (normalArray)
+	{
+		glEnableClientState(GL_NORMAL_ARRAY);
+		glNormalPointer(GL_FLOAT, 0, normalArray);
+	}
 	glDrawArrays(mode, 0, count);
 	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	if (texCoords)
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	if (colorArray)
+		glDisableClientState(GL_COLOR_ARRAY);
+	if (normalArray)
+		glDisableClientState(GL_NORMAL_ARRAY);
 }
 	
 
@@ -1602,41 +1620,46 @@ void StelPainter::sSphere(GLdouble radius, GLdouble oneMinusOblateness, GLint sl
 	const GLfloat dt = nsign / stacks; // from inside texture is reversed
 
 	// draw intermediate  as quad strips
+	static QVector<double> vertexArr;
+	static QVector<float> texCoordArr;
+	static QVector<float> colorArr;
 	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
 	{
-		glBegin(GL_TRIANGLE_STRIP);
+		texCoordArr.clear();
+		vertexArr.clear();
+		colorArr.clear();
 		s = 0.0;
 		for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;++j,cos_sin_theta_p+=2)
 		{
 			x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
 			y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
 			z = nsign * cos_sin_rho_p[0];
-			glTexCoord2f(s, t);
+			texCoordArr << s << t;
 			if (isLightOn)
 			{
 				c = nsign * (lightPos3[0]*x*oneMinusOblateness + lightPos3[1]*y*oneMinusOblateness + lightPos3[2]*z);
 				if (c<0) {c=0;}
-				glColor3f(c*diffuseLight[0] + ambientLight[0],
-						  c*diffuseLight[1] + ambientLight[1],
-						  c*diffuseLight[2] + ambientLight[2]);
+				colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
 			}
-			drawVertex3(x * radius, y * radius, z * oneMinusOblateness * radius);
+			vertexArr << x * radius << y * radius << z * oneMinusOblateness * radius;
 			x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
 			y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
 			z = nsign * cos_sin_rho_p[2];
-			glTexCoord2f(s, t - dt);
+			texCoordArr << s << t - dt;
 			if (isLightOn)
 			{
 				c = nsign * (lightPos3[0]*x*oneMinusOblateness + lightPos3[1]*y*oneMinusOblateness + lightPos3[2]*z);
 				if (c<0) {c=0;}
-				glColor3f(c*diffuseLight[0] + ambientLight[0],
-						  c*diffuseLight[1] + ambientLight[1],
-						  c*diffuseLight[2] + ambientLight[2]);
+				colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
 			}
-			drawVertex3(x * radius, y * radius, z * oneMinusOblateness * radius);
+			vertexArr << x * radius << y * radius << z * oneMinusOblateness * radius;
 			s += ds;
 		}
-		glEnd();
+		// Draw the array now
+		if (isLightOn)
+			drawArrays(GL_TRIANGLE_STRIP, vertexArr.size()/3, (Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData());
+		else
+			drawArrays(GL_TRIANGLE_STRIP, vertexArr.size()/3, (Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
 		t -= dt;
 	}
 
@@ -1665,32 +1688,38 @@ void StelPainter::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLin
 	GLfloat t = 0.0;
 	z = 0.0;
 	r = radius;
+	QVector<float> normalArray;
+	QVector<float> texCoordArray;
+	QVector<double> vertexArray;
 	for (j = 0; j < stacks; j++)
 	{
+		normalArray.clear();
+		texCoordArray.clear();
+		vertexArray.clear();
 		GLfloat s = 0.0;
-		glBegin(GL_TRIANGLE_STRIP);
 		for (i = 0; i <= slices; i++)
 		{
 			GLfloat x, y;
 			if (i == slices)
 			{
-				x = std::sin(0.0f);
-				y = std::cos(0.0f);
+				x = 0.f;
+				y = 1.f;
 			}
 			else
 			{
 				x = std::sin(i * da);
 				y = std::cos(i * da);
 			}
-			glNormal3f(x * nsign, y * nsign, 0);
-			glTexCoord2f(s, t);
-			drawVertex3(x * r, y * r, z);
-			glNormal3f(x * nsign, y * nsign, 0);
-			glTexCoord2f(s, t + dt);
-			drawVertex3(x * r, y * r, z + dz);
+			normalArray << x * nsign << y * nsign << 0.f;
+			texCoordArray << s << t;
+			vertexArray << x*r << y*r << z;
+			normalArray << x * nsign << y * nsign << 0.f;
+			texCoordArray << s << t + dt;
+			vertexArray << x*r << y*r << z+dz;
 			s += ds;
-		}			/* for slices */
-		glEnd();
+		} // for slices
+		
+		drawArrays(GL_TRIANGLE_STRIP, vertexArray.size()/3, (Vec3d*)vertexArray.constData(), (Vec2f*)texCoordArray.constData(), NULL,  (Vec3f*)normalArray.constData());
 		t += dt;
 		z += dz;
 	}				/* for stacks */
