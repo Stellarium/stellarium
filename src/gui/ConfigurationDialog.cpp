@@ -210,7 +210,6 @@ void ConfigurationDialog::createDialogContent()
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateScriptsList()));
 
 	// plugins control
-	StelApp::getInstance().getModuleMgr().getPluginsList();
 	connect(ui->pluginsListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(pluginsSelectionChanged(const QString&)));
 	connect(ui->pluginLoadAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(loadAtStartupChanged(int)));
 	populatePluginsList();

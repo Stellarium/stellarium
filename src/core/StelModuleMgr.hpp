@@ -109,7 +109,7 @@ private:
 	//! True if modules were removed, and therefore the calling list need to be regenerated
 	bool callingListsToRegenerate;
 	
-	QList<StelModuleMgr::PluginDescriptor> pluginDescriptorList;
+	QMap<QString, StelModuleMgr::PluginDescriptor> pluginDescriptorList;
 	bool pluginDescriptorListLoaded;
 };
 
