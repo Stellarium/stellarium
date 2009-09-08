@@ -163,7 +163,7 @@ public:
 	//! @param count number of vertice to draw.
 	//! @param texCoords the array of Vec2f defining the uv coordinates or NULL if there are no texturing.
 	//! @param vertice the array of Vec3d defining the xyz coordinates. It is modified by the function.
-	void drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const Vec2f* texCoords=NULL) const;
+	void drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL) const;
 	
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
 	void sSphere(GLdouble radius, GLdouble oneMinusOblateness,
