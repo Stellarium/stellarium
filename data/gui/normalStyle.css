@@ -828,12 +828,22 @@ QWidget#sourceInformationInput
 
 QWidget#resourceInformationEdition
 {
-	background-color:transparent;
+	background-color: transparent;
+}
+
+QWidget#simbadSearch
+{
+	background-color: transparent;
 }
 
 QWidget#viewMode {
 	background-color: rgb(76, 77, 80);		 
 	padding-left: 0px;
+}
+
+QWidget#dataSourcesListGroupBox
+{
+        background-color: rgb(31,33,36);
 }
 
 QTextEdit#editResourceDescription {
