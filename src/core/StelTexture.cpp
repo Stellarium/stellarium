@@ -116,6 +116,7 @@ StelTexture::~StelTexture()
 		}
 		else
 		{
+			StelApp::makeMainGLContextCurrent();
 			glDeleteTextures(1, &id);
 		}
 		id = 0;
@@ -143,6 +144,7 @@ bool StelTexture::bind()
 	if (id!=0)
 	{
 		// The texture is already fully loaded, just bind and return true;
+		StelApp::makeMainGLContextCurrent();
 		glBindTexture(GL_TEXTURE_2D, id);
 		return true;
 	}
@@ -211,6 +213,7 @@ bool StelTexture::getAverageLuminance(float& lum)
 		return false;
 	
 	QMutexLocker lock(mutex);
+	StelApp::makeMainGLContextCurrent();
 	if (avgLuminance<0)
 	{
 		int size = width*height;
@@ -324,6 +327,8 @@ bool StelTexture::glLoad()
 		return false;
 	}
 
+	StelApp::makeMainGLContextCurrent();
+	
 	// generate texture
 	glGenTextures (1, &id);
 	glBindTexture (GL_TEXTURE_2D, id);
