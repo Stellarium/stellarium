@@ -182,6 +182,9 @@ public:
 	//! Call this when the size of the GL window has changed.
 	void glWindowHasBeenResized(float x, float y, float w, float h);
 	
+	//! Make sure that the GL context of the main window is current and valid.
+	static void makeMainGLContextCurrent();
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
