@@ -53,6 +53,7 @@
 #include "StelAudioMgr.hpp"
 #include "StelMainWindow.hpp"
 #include "StelStyle.hpp"
+#include "StelMainGraphicsView.hpp"
 
 #include <iostream>
 #include <QStringList>
@@ -66,6 +67,7 @@
 #include <QNetworkAccessManager>
 #include <QSysInfo>
 #include <QNetworkProxy>
+#include <QGLWidget>
 
 #ifdef WIN32
 #include <windows.h>
@@ -345,13 +347,14 @@ void StelApp::init()
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
+	
+	// Initialize AFTER creation of openGL context
 	textureMgr = new StelTextureMgr();
+	textureMgr->init();
+	
 	localeMgr = new StelLocaleMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
 	planetLocationMgr = new StelLocationMgr();
-
-	// Initialize AFTER creation of openGL context
-	textureMgr->init();
 
 #ifdef SVN_REVISION
 	loadingBar = new StelLoadingBar(12., "logo24bits.png", QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
@@ -755,7 +758,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 			try
 			{
 				// finding the file will throw an exception if it is not found
-				// in that case we won't output the landscape ID as it canont work
+				// in that case we won't output the landscape ID as it cannot work
 				stelFileMgr->findFile("landscapes/" + *i + "/landscape.ini");
 				std::cout << qPrintable(*i);
 			}
@@ -1419,4 +1422,11 @@ void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
 		++nbDownloadedFiles;
 		totalDownloadedSize+=reply->bytesAvailable();
 	}
+}
+
+void StelApp::makeMainGLContextCurrent()
+{
+	Q_ASSERT(StelMainGraphicsView::getInstance().getOpenGLWin()!=NULL);
+	Q_ASSERT(StelMainGraphicsView::getInstance().getOpenGLWin()->isValid());
+	StelMainGraphicsView::getInstance().getOpenGLWin()->makeCurrent();
 }
