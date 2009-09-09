@@ -518,6 +518,8 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 
 void ConfigurationDialog::loadAtStartupChanged(int state)
 {
+	if (ui->pluginsListWidget->count() <= 0)
+		return;
 	QString name = ui->pluginsListWidget->currentItem()->text();
 	QString key;
 	QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();

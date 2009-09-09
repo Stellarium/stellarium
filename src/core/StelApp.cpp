@@ -742,7 +742,8 @@ void StelApp::parseCLIArgsPreConfig(void)
 			 << "--fov                   : Specify the field of view (degrees)\n"
 			 << "--projection-type       : Specify projection type, e.g. stereographic\n"
 			 << "--restore-defaults      : Delete existing config.ini and use defaults\n"
-			 << "--multires-image        : Specify a multi-resolution image file/URL to load\n";
+			 << "--multires-image        : With filename / URL argument,specify a\n"
+		         << "                          multi-resolution image to load\n";
 		exit(0);
 	}
 
