@@ -62,7 +62,20 @@ CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
 SET(USE_STATIC_PLUGIN_VIRGO 0 CACHE BOOL "Define whether the VirGO plugin should be statically linked.")
 SET(VIRGO_STATIC_PLUGIN_PATH "$ENV{STELROOT}/../extmodules/VirGO/builds/unix/src/libVirGO.a" CACHE PATH "The location of the libVirGO.a static library")
 IF (USE_STATIC_PLUGIN_VIRGO)
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${VIRGO_STATIC_PLUGIN_PATH})
+## Special non-standard packages
+FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
+	/usr/include
+	/usr/local/include
+	/scisoft/include
+	DOC "Should point to the directory where the include files for libcfitsio are installed")
+FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
+	PATHS
+	/usr/lib/
+	/usr/local/lib
+	/scisoft/lib
+	/opt/local/lib
+	DOC "cfitsio link options")
+  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${VIRGO_STATIC_PLUGIN_PATH} -lcfitsio)
   SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
   ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_VIRGO)
 ENDIF()
