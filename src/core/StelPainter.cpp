@@ -35,10 +35,13 @@
 #include <QPaintEngine>
 #include <QGLContext>
 
+#ifndef NDEBUG
 QMutex* StelPainter::globalMutex = new QMutex();
+#endif
+
 bool StelPainter::flagGlPointSprite = false;
 QPainter* StelPainter::qPainter = NULL;
-		
+
 void StelPainter::setQPainter(QPainter* p)
 {
 	qPainter=p;
@@ -47,23 +50,23 @@ void StelPainter::setQPainter(QPainter* p)
 StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 {
 	Q_ASSERT(proj);
-	Q_ASSERT(globalMutex);
-	
+
 #ifndef NDEBUG
- 	GLenum er = glGetError();
- 	if (er!=GL_NO_ERROR)
- 	{
- 		if (er==GL_INVALID_OPERATION)
- 			qFatal("Invalid openGL operation. It is likely that you used openGL calls without having a valid instance of StelPainter");
- 	}
-#endif
-	
+	Q_ASSERT(globalMutex);
+	GLenum er = glGetError();
+	if (er!=GL_NO_ERROR)
+	{
+		if (er==GL_INVALID_OPERATION)
+			qFatal("Invalid openGL operation. It is likely that you used openGL calls without having a valid instance of StelPainter");
+	}
+
 	// Lock the global mutex ensuring that no other instances of StelPainter are currently being used
 	if (globalMutex->tryLock()==false)
 	{
 		qFatal("There can be only 1 instance of StelPainter at a given time");
 	}
-	
+#endif
+
 	switchToNativeOpenGLPainting();
 
 	// Init GL viewport to current projector values
@@ -86,9 +89,11 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 StelPainter::~StelPainter()
 {
 	revertToQtPainting();
-	
+
+#ifndef NDEBUG
 	// We are done with this StelPainter
 	globalMutex->unlock();
+#endif
 }
 
 
@@ -116,7 +121,7 @@ void StelPainter::switchToNativeOpenGLPainting() const
 		Q_ASSERT(w->isValid());
 		w->makeCurrent();
 	}
-	
+
 	// Save openGL projection state
 	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
@@ -147,7 +152,7 @@ void StelPainter::revertToQtPainting() const
 		Q_ASSERT(w->isValid());
 		w->makeCurrent();
 	}
-	
+
 	// Restore openGL projection state for Qt drawings
 	glMatrixMode(GL_TEXTURE);
 	glPopMatrix();
@@ -217,17 +222,17 @@ void StelPainter::drawViewportShape(void) const
 	glColor3f(0.f,0.f,0.f);
 	glPushMatrix();
 	glTranslated(prj->viewportCenter[0],prj->viewportCenter[1],0.0);
-	
+
 	// Got rid of GLU and therefore copied the code there
 // 	GLUquadricObj * p = gluNewQuadric();
 // 	gluDisk(p, 0.5*prj->viewportFovDiameter, , 256, 1);  // should always cover whole screen
 // 	gluDeleteQuadric(p);
-	
+
 	GLfloat innerRadius = 0.5*prj->viewportFovDiameter;
 	GLfloat outerRadius = prj->getViewportWidth()+prj->getViewportHeight();
 	GLint slices = 256;
 	GLfloat sweepAngle = 360.;
-	
+
 	GLfloat sinCache[240];
 	GLfloat cosCache[240];
 	GLfloat vertices[(240+1)*2][3];
@@ -276,7 +281,7 @@ void StelPainter::drawViewportShape(void) const
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, ((slices+1)*2));
 
 	glDisableClientState(GL_VERTEX_ARRAY);
-	
+
 	glPopMatrix();
 }
 
@@ -560,7 +565,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	if (!qPainter)
 		return;
 	Q_ASSERT(qPainter);
-	
+
 	// Save openGL state
 	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
@@ -572,16 +577,16 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	glPushMatrix();
 	//glEnable(GL_BLEND);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	
-	
+
+
 	qPainter->save();
-	
+
 	qPainter->setRenderHints(QPainter::TextAntialiasing/* | QPainter::HighQualityAntialiasing*/);
 	float color[4];
 	glGetFloatv(GL_CURRENT_COLOR, color);
 	const QColor qCol=QColor::fromRgbF(qMin(1.f,color[0]), qMin(1.f,color[1]), qMin(1.f,color[2]), qMin(1.f,color[3]));
 	qPainter->setPen(qCol);
-	
+
 	if (prj->gravityLabels && !noGravity)
 	{
 		drawTextGravity180(x, y, str, xshift, yshift);
@@ -593,9 +598,9 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		qPainter->scale(1, -1);
 		qPainter->drawText(0, 0, str);
 	}
-	
+
 	qPainter->restore();
-	
+
 	glPopClientAttrib();
 	glPopAttrib();
 	glMatrixMode(GL_TEXTURE);
@@ -631,10 +636,10 @@ void StelPainter::drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const V
 		glDrawArrays(mode, 0, count);
 		return;
 	}
-	
+
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, vertice);
-	
+
 	if (texCoords)
 	{
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -659,7 +664,7 @@ void StelPainter::drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const V
 	if (normalArray)
 		glDisableClientState(GL_NORMAL_ARRAY);
 }
-	
+
 
 // Recursive method cutting a small circle in small segments
 inline void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, Vec3d& win1, Vec3d& win2, QLinkedList<Vec3d>& vertexList, const QLinkedList<Vec3d>::iterator& iter, double radius, const Vec3d& center, int nbI=0, bool checkCrossDiscontinuity=true)
@@ -1458,7 +1463,7 @@ void StelPainter::drawCircle(double x,double y,double r) const
 	double dx = r;
 	double dy = 0;
 	static QVarLengthArray<Vec3d, 180> circleVertexArray(180);
-	
+
 	for (int i=0;i<=segments;i++)
 	{
 		circleVertexArray[i].set(x+dx,y+dy,0);
@@ -1513,18 +1518,18 @@ void StelPainter::drawSprite2dMode(double x, double y, float radius, float rotat
 	glPushMatrix();
 	glTranslatef(x, y, 0.0);
 	glRotatef(rotation,0.,0.,1.);
-	
+
 	static float vertexData[] = {0.,0.,-10.,-10.,0.,   1.,0.,10.,-10.,0.,  0.,1.,10.,10.,0,   1.,1.,-10.,10.,0.};
 	vertexData[2]=-radius; vertexData[3]=-radius;
 	vertexData[7]=radius; vertexData[8]=-radius;
-	vertexData[12]=-radius; vertexData[13]=radius;	
+	vertexData[12]=-radius; vertexData[13]=radius;
 	vertexData[17]=radius; vertexData[18]=radius;
 	glInterleavedArrays(GL_T2F_V3F ,0, vertexData);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 	glPopMatrix();
 }
-		
+
 /*************************************************************************
  Draw a GL_POINT at the given position
 *************************************************************************/
@@ -1718,7 +1723,7 @@ void StelPainter::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLin
 			vertexArray << x*r << y*r << z+dz;
 			s += ds;
 		} // for slices
-		
+
 		drawArrays(GL_TRIANGLE_STRIP, vertexArray.size()/3, (Vec3d*)vertexArray.constData(), (Vec2f*)texCoordArray.constData(), NULL,  (Vec3f*)normalArray.constData());
 		t += dt;
 		z += dz;

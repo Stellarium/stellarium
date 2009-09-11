@@ -42,27 +42,27 @@ class QPainter;
 class StelPainter
 {
 public:
-	
+
 	//! Define the drawing mode when drawing polygons
 	enum SphericalPolygonDrawMode
 	{
 		SphericalPolygonDrawModeFill=0,           //!< Draw the interior of the polygon only
-  		SphericalPolygonDrawModeBoundary=1,       //!< Draw the boundary of the polygon only
+		SphericalPolygonDrawModeBoundary=1,       //!< Draw the boundary of the polygon only
 		SphericalPolygonDrawModeFillAndBoundary=2,//!< Draw both the interior and the boundary of the polygon
-  		SphericalPolygonDrawModeTextureFill=3,	//!< Draw the interior of the polygon only filled with the current texture
+		SphericalPolygonDrawModeTextureFill=3,	//!< Draw the interior of the polygon only filled with the current texture
 		SphericalPolygonDrawModeTextureFillAndBoundary=4 //!< Draw the interior of the polygon filled with the current texture and the boundary
 	};
-	
+
 	explicit StelPainter(const StelProjectorP& prj);
 	~StelPainter();
-	
+
 	//! Return the instance of projector associated to this painter
 	const StelProjectorP getProjector() const {return prj;}
-	
+
 	//! Fill with black around the viewport.
 	void drawViewportShape(void) const;
-	
-	//! Generalisation of glVertex3v for non-linear projections. 
+
+	//! Generalisation of glVertex3v for non-linear projections.
 	//! This method does not manage the lighting operations properly.
 	void drawVertex3v(const Vec3d& v) const
 	{
@@ -89,22 +89,22 @@ public:
 	//! @param xshift shift in pixel in the rotated x direction.
 	//! @param yshift shift in pixel in the rotated y direction.
 	//! @param noGravity don't take into account the fact that the text should be written with gravity.
-	void drawText(float x, float y, const QString& str, float angleDeg=0.f, 
-		      float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
-	
+	void drawText(float x, float y, const QString& str, float angleDeg=0.f,
+			  float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
+
 	//! Draw the given SphericalPolygon.
 	//! @param spoly The SphericalPolygon to draw.
 	//! @param drawMode define whether to draw the outline or the fill or both.
 	//! @param boundaryColor use this color for drawing the boundary only if the drawMode is SphericalPolygonDrawModeFillAndBoundary.
 	//! TODO: Can be optimized by at least a factor of 2 by avoiding projecting more than 1 time every vertex.
 	void drawSphericalPolygon(const SphericalPolygonBase* spoly, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const Vec4f* boundaryColor=NULL) const;
-	
+
 	//! Draw the given SphericalRegion.
 	//! @param region The SphericalRegion to draw.
 	//! @param drawMode define whether to draw the outline or the fill or both.
 	//! @param boundaryColor use this color for drawing the boundary only if the drawMode is SphericalPolygonDrawModeFillAndBoundary.
 	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const Vec4f* boundaryColor=NULL) const;
-	
+
 	//! Draw a small circle arc between points start and stop with rotation point in rotCenter.
 	//! The angle between start and stop must be < 180 deg.
 	//! The algorithm ensures that the line will look smooth, even for non linear distortion.
@@ -112,14 +112,14 @@ public:
 	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport.
 	//! If rotCenter is equal to 0,0,0, the method draws a great circle.
 	void drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, const void* userData)=NULL, const void* userData=NULL) const;
-	
+
 	//! Draw a great circle arc between points start and stop.
 	//! The angle between start and stop must be < 180 deg.
 	//! The algorithm ensures that the line will look smooth, even for non linear distortion.
 	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
 	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport.
 	void drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, const void* userData)=NULL, const void* userData=NULL) const {drawSmallCircleArc(start, stop, Vec3d(0), viewportEdgeIntersectCallback, userData);}
-	
+
 	//! Draw a simple circle, 2d viewport coordinates in pixel
 	void drawCircle(double x,double y,double r) const;
 
@@ -129,7 +129,7 @@ public:
 	//! @param y y position in the viewport in pixel.
 	//! @param radius the half size of a square side in pixel.
 	void drawSprite2dMode(double x, double y, float radius) const;
-	
+
 	//! Draw a rotated square using the current texture at the given projected 2d position.
 	//! This method is not thread safe.
 	//! @param x x position in the viewport in pixel.
@@ -137,19 +137,19 @@ public:
 	//! @param radius the half size of a square side in pixel.
 	//! @param rotation rotation angle in degree.
 	void drawSprite2dMode(double x, double y, float radius, float rotation) const;
-	
+
 	//! Draw a GL_POINT at the given position.
 	//! @param x x position in the viewport in pixels.
 	//! @param y y position in the viewport in pixels.
 	void drawPoint2d(double x, double y) const;
-	
+
 	//! Draw a line between the 2 points.
 	//! @param x1 x position of point 1 in the viewport in pixels.
 	//! @param y1 y position of point 1 in the viewport in pixels.
 	//! @param x2 x position of point 2 in the viewport in pixels.
 	//! @param y2 y position of point 2 in the viewport in pixels.
 	void drawLine2d(double x1, double y1, double x2, double y2) const;
-	
+
 	//! Draw a rectangle using the current texture at the given projected 2d position.
 	//! This method is not thread safe.
 	//! @param x x position of the top left corner in the viewport in pixel.
@@ -157,17 +157,17 @@ public:
 	//! @param width width in pixel.
 	//! @param height height in pixel.
 	void drawRect2d(float x, float y, float width, float height) const;
-			
+
 	//! Draw a gl array with 3D vertex position and optional 2D texture position.
 	//! @param mode as defined in glDrawArray.
 	//! @param count number of vertice to draw.
 	//! @param texCoords the array of Vec2f defining the uv coordinates or NULL if there are no texturing.
 	//! @param vertice the array of Vec3d defining the xyz coordinates. It is modified by the function.
 	void drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL) const;
-	
+
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
 	void sSphere(GLdouble radius, GLdouble oneMinusOblateness,
-	             GLint slices, GLint stacks, int orientInside = 0) const;
+				 GLint slices, GLint stacks, int orientInside = 0) const;
 
 	//! Re-implementation of gluCylinder : glu is overridden for non-standard projection.
 	void sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks, int orientInside = 0) const;
@@ -185,23 +185,23 @@ public:
 
 	//! Draw a fisheye texture in a sphere.
 	void sSphereMap(GLdouble radius, GLint slices, GLint stacks,
-	                 double textureFov = 2.*M_PI, int orientInside = 0) const;
+					 double textureFov = 2.*M_PI, int orientInside = 0) const;
 
 	//! Set the font to use for subsequent text drawing.
 	void setFont(const QFont& font);
-	
+
 	//! Get the font metrics for the current font.
 	QFontMetrics getFontMetrics() const;
-	
+
 	//! Get some informations about the OS openGL capacities.
 	//! This method needs to be called once at init.
 	static void initSystemGLInfo();
-	
+
 	//! Set the QPainter to use for performing some drawing operations.
 	static void setQPainter(QPainter* qPainter);
-	
+
 private:
-	
+
 	//! Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 	//! by splitting it into subtriangles. The resulting vertex arrays are appended to the passed out* ones.
 	//! The size of each edge must be < 180 deg.
@@ -212,28 +212,30 @@ private:
 			const bool* edgeFlags=NULL, QVarLengthArray<bool, 4096>* outEdgeFlags=NULL,
 			const Vec2f* texturePos=NULL, QVarLengthArray<Vec2f, 4096>* outTexturePos=NULL,int nbI=0,
 			bool checkDisc1=true, bool checkDisc2=true, bool checkDisc3=true) const;
-	
+
 	//! Switch to native OpenGL painting, i.e not using QPainter.
 	//! After this call revertToQtPainting() MUST be called.
 	void switchToNativeOpenGLPainting() const;
 
 	//! Revert openGL state so that Qt painting works again.
 	void revertToQtPainting() const;
-	
+
 	void drawTextGravity180(float x, float y, const QString& str, float xshift = 0, float yshift = 0) const;
-		
+
 	//! Init the real openGL Matrices to a 2d orthographic projection
 	void initGlMatrixOrtho2d(void) const;
-	
+
 	//! The associated instance of projector
 	const StelProjectorP prj;
 
 	//! Whether the GL_POINT_SPRITE extension is available and activated
 	static bool flagGlPointSprite;
-	
+
+#ifndef NDEBUG
 	//! Mutex allowing thread safety
 	static class QMutex* globalMutex;
-	
+#endif
+
 	//! The QPainter to use for some drawing operations.
 	static QPainter* qPainter;
 };
