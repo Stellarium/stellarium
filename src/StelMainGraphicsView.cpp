@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -44,11 +44,11 @@
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
-StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** argv) 
-	: QGraphicsView(parent), 
-	  wasDeinit(false), 
-	  flagInvertScreenShotColors(false), 
-	  screenShotPrefix("stellarium-"), 
+StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** argv)
+	: QGraphicsView(parent),
+	  wasDeinit(false),
+	  flagInvertScreenShotColors(false),
+	  screenShotPrefix("stellarium-"),
 	  screenShotDir(""),
 	  cursorTimeout(-1.f), flagCursorTimeout(false), minFpsTimer(NULL)
 {
@@ -57,33 +57,33 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	singleton = this;
 
 	setObjectName("Mainview");
-	
+
 	// Avoid white background at init
 	setStyleSheet(QString("QGraphicsView {background: #000;}"));
 	setFrameShape(QFrame::NoFrame);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	
+
 	// Create an openGL viewport
- 	QGLFormat glFormat(QGL::StencilBuffer);
+	QGLFormat glFormat(QGL::StencilBuffer);
 	//glFormat.setSamples(16);
 	//glFormat.setSampleBuffers(true);
 	//glFormat.setDirectRendering(false);
 	glWidget = new QGLWidget(glFormat, NULL);
 	setViewport(glWidget);
-	
+
 	// Antialiasing works only with SampleBuffer, but it's much slower
 	//setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::HighQualityAntialiasing);
 	//setRenderHint(QPainter::TextAntialiasing, false);
 	//setOptimizationFlags(QGraphicsView::DontClipPainter|QGraphicsView::DontSavePainterState|QGraphicsView::DontAdjustForAntialiasing);
-	
+
 	// Create the main instance of stellarium
 	stelApp = new StelApp(argc, argv);
-	
+
 	setScene(new QGraphicsScene());
 	distorter = StelViewportDistorter::create("none",800,600,StelProjectorP());
 	lastEventTimeSec = StelApp::getTotalRunTime();
-	
+
 	backItem = new QGraphicsWidget();
 	backItem->setFocusPolicy(Qt::NoFocus);
 	QGraphicsGridLayout* l = new QGraphicsGridLayout(backItem);
@@ -93,10 +93,10 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	l->setContentsMargins(0,0,0,0);
 	l->setSpacing(0);
 	scene()->addItem(backItem);
-			
+
 	setFocusPolicy(Qt::StrongFocus);
 	mainSkyItem->setFocus();
-	
+
 	connect(&StelApp::getInstance(), SIGNAL(minFpsChanged()), this, SLOT(minFpsChanged()));
 	// Allows for precise FPS control
 	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
@@ -121,25 +121,25 @@ void StelMainGraphicsView::init()
 	StelPainter::setQPainter(&qPainter);
 	glWidget->makeCurrent();
 	stelApp->init();
-	
+
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
 	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.).toDouble());
 	setViewPortDistorterType(conf->value("video/distorter","none").toString());
-	
+
 	StelGui* newGui = new StelGui();
 	newGui->init();
 	stelApp->getModuleMgr().registerModule(newGui, true);
-	
+
 	stelApp->initPlugIns();
-	
+
 	// For refreshing of button bars if plugins modified the GUI, e.g. added buttons.
 	newGui->forceRefreshGui();
-	
+
 	stelApp->getScriptMgr().runScript(stelApp->getStartupScript());
-	
+
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
 	StelPainter::setQPainter(NULL);
 	startMainLoop();
@@ -157,7 +157,7 @@ void StelMainGraphicsView::drawBackground(QPainter* painter, const QRectF &)
 		qWarning("StelMainGraphicsView: drawBackground needs a QGLWidget to be set as viewport on the graphics view");
 		return;
 	}
-	
+
 	distorter->prepare();
 
 	const double now = StelApp::getTotalRunTime();
@@ -215,7 +215,7 @@ void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
 		scene()->setSceneRect(QRect(QPoint(0, 0), event->size()));
 	backItem->setGeometry(0,0,event->size().width(),event->size().height());
 	QGraphicsView::resizeEvent(event);
-	
+
 // 	if (!distorter || (distorter && distorter->getType() == "none"))
 // 	{
 // 	}
@@ -224,7 +224,7 @@ void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
 void StelMainGraphicsView::mouseMoveEvent(QMouseEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	
+
 	// Apply distortion on the mouse position.
 	QPoint pos = event->pos();
 	distortPos(&pos);
@@ -238,7 +238,7 @@ void StelMainGraphicsView::mouseMoveEvent(QMouseEvent* event)
 void StelMainGraphicsView::mousePressEvent(QMouseEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	
+
 	// Apply distortion on the mouse position.
 	QPoint pos = event->pos();
 	distortPos(&pos);
@@ -251,7 +251,7 @@ void StelMainGraphicsView::mousePressEvent(QMouseEvent* event)
 void StelMainGraphicsView::mouseReleaseEvent(QMouseEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	
+
 	// Apply distortion on the mouse position.
 	QPoint pos = event->pos();
 	distortPos(&pos);
@@ -264,7 +264,7 @@ void StelMainGraphicsView::mouseReleaseEvent(QMouseEvent* event)
 void StelMainGraphicsView::wheelEvent(QWheelEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	
+
 	// Apply distortion on the mouse position.
 	QPoint pos = event->pos();
 	distortPos(&pos);
@@ -382,7 +382,7 @@ void StelMainGraphicsView::doScreenshot(void)
 		if (!StelApp::getInstance().getFileMgr().exists(shotPath))
 			break;
 	}
-	
+
 	qDebug() << "Saving screenshot in file: " << shotPath;
 	im.save(shotPath);
 	if (!StelApp::getInstance().getFileMgr().exists(shotPath))
