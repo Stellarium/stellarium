@@ -441,12 +441,11 @@ void StelPainter::sRing(GLdouble rMin, GLdouble rMax, GLint slices, GLint stacks
 	}
 }
 
-static void sSphereMapTexCoordFast(double rho_div_fov, double costheta, double sintheta)
+static void sSphereMapTexCoordFast(double rho_div_fov, double costheta, double sintheta, QVector<float>& out)
 {
 	if (rho_div_fov>0.5)
 		rho_div_fov=0.5;
-	glTexCoord2d(0.5 + rho_div_fov * costheta,
-				 0.5 + rho_div_fov * sintheta);
+	out << 0.5 + rho_div_fov * costheta << 0.5 + rho_div_fov * sintheta;
 }
 
 void StelPainter::sSphereMap(GLdouble radius, GLint slices, GLint stacks, double textureFov, int orientInside) const
@@ -474,53 +473,61 @@ void StelPainter::sSphereMap(GLdouble radius, GLint slices, GLint stacks, double
 
 	const int imax = stacks;
 
+	static QVector<double> vertexArr;
+	static QVector<float> texCoordArr;
+	static QVector<float> normalArr;
+
 	// draw intermediate stacks as quad strips
 	if (!orientInside) // nsign==1
 	{
 		for (i = 0,cos_sin_rho_p=cos_sin_rho,rho=0.0; i < imax; ++i,cos_sin_rho_p+=2,rho+=drho)
 		{
-			glBegin(GL_TRIANGLE_STRIP);
+			vertexArr.resize(0);
+			texCoordArr.resize(0);
+			normalArr.resize(0);
 			for (j=0,cos_sin_theta_p=cos_sin_theta;j<=slices;++j,cos_sin_theta_p+=2)
 			{
 				x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
 				y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
 				z = cos_sin_rho_p[0];
-				glNormal3d(x * nsign, y * nsign, z * nsign);
-				sSphereMapTexCoordFast(rho, cos_sin_theta_p[0], cos_sin_theta_p[1]);
-				drawVertex3(x * radius, y * radius, z * radius);
+				normalArr << x*nsign <<  y*nsign << z*nsign;
+				sSphereMapTexCoordFast(rho, cos_sin_theta_p[0], cos_sin_theta_p[1], texCoordArr);
+				vertexArr << x*radius << y*radius << z*radius;
 
 				x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
 				y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
 				z = cos_sin_rho_p[2];
-				glNormal3d(x * nsign, y * nsign, z * nsign);
-				sSphereMapTexCoordFast(rho + drho, cos_sin_theta_p[0], cos_sin_theta_p[1]);
-				drawVertex3(x * radius, y * radius, z * radius);
+				normalArr << x*nsign <<  y*nsign << z*nsign;
+				sSphereMapTexCoordFast(rho + drho, cos_sin_theta_p[0], cos_sin_theta_p[1], texCoordArr);
+				vertexArr << x*radius << y*radius << z*radius;
 			}
-			glEnd();
+			drawArrays(GL_TRIANGLE_STRIP, vertexArr.size()/3, (Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), NULL, (Vec3f*)normalArr.constData());
 		}
 	}
 	else
 	{
 		for (i = 0,cos_sin_rho_p=cos_sin_rho,rho=0.0; i < imax; ++i,cos_sin_rho_p+=2,rho+=drho)
 		{
-			glBegin(GL_TRIANGLE_STRIP);
+			vertexArr.resize(0);
+			texCoordArr.resize(0);
+			normalArr.resize(0);
 			for (j=0,cos_sin_theta_p=cos_sin_theta;j<=slices;++j,cos_sin_theta_p+=2)
 			{
 				x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
 				y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
 				z = cos_sin_rho_p[2];
-				glNormal3d(x * nsign, y * nsign, z * nsign);
-				sSphereMapTexCoordFast(rho + drho, cos_sin_theta_p[0], -cos_sin_theta_p[1]);
-				drawVertex3(x * radius, y * radius, z * radius);
+				normalArr << x*nsign <<  y*nsign << z*nsign;
+				sSphereMapTexCoordFast(rho + drho, cos_sin_theta_p[0], -cos_sin_theta_p[1], texCoordArr);
+				vertexArr << x*radius << y*radius << z*radius;
 
 				x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
 				y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
 				z = cos_sin_rho_p[0];
-				glNormal3d(x * nsign, y * nsign, z * nsign);
-				sSphereMapTexCoordFast(rho, cos_sin_theta_p[0], -cos_sin_theta_p[1]);
-				drawVertex3(x * radius, y * radius, z * radius);
+				normalArr << x*nsign <<  y*nsign << z*nsign;
+				sSphereMapTexCoordFast(rho, cos_sin_theta_p[0], -cos_sin_theta_p[1], texCoordArr);
+				vertexArr << x*radius << y*radius << z*radius;
 			}
-			glEnd();
+			drawArrays(GL_TRIANGLE_STRIP, vertexArr.size()/3, (Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), NULL, (Vec3f*)normalArr.constData());
 		}
 	}
 }
@@ -717,7 +724,7 @@ void drawSmallCircleVertexArray()
 	// And draw everything at once
 	glDrawArrays(GL_LINE_STRIP, 0, smallCircleVertexArray.size());
 	glDisableClientState(GL_VERTEX_ARRAY);
-	smallCircleVertexArray.clear();
+	smallCircleVertexArray.resize(0);
 }
 
 /*************************************************************************
@@ -1630,9 +1637,9 @@ void StelPainter::sSphere(GLdouble radius, GLdouble oneMinusOblateness, GLint sl
 	static QVector<float> colorArr;
 	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
 	{
-		texCoordArr.clear();
-		vertexArr.clear();
-		colorArr.clear();
+		texCoordArr.resize(0);
+		vertexArr.resize(0);
+		colorArr.resize(0);
 		s = 0.0;
 		for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;++j,cos_sin_theta_p+=2)
 		{
@@ -1698,9 +1705,9 @@ void StelPainter::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLin
 	QVector<double> vertexArray;
 	for (j = 0; j < stacks; j++)
 	{
-		normalArray.clear();
-		texCoordArray.clear();
-		vertexArray.clear();
+		normalArray.resize(0);
+		texCoordArray.resize(0);
+		vertexArray.resize(0);
 		GLfloat s = 0.0;
 		for (i = 0; i <= slices; i++)
 		{
