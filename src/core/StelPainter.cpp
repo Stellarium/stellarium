@@ -1480,7 +1480,7 @@ void StelPainter::drawCircle(double x,double y,double r) const
 	double dy = 0;
 	static QVarLengthArray<Vec3d, 180> circleVertexArray(180);
 
-	for (int i=0;i<=segments;i++)
+	for (int i=0;i<segments;++i)
 	{
 		circleVertexArray[i].set(x+dx,y+dy,0);
 		r = dx*cp-dy*sp;
