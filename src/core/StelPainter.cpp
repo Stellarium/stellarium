@@ -344,10 +344,6 @@ void StelPainter::sFanDisk(double radius, int innerFanSlices, int level) const
 	double rad[64];
 	int i,j;
 	rad[level] = radius;
-//  for (i=level-1;i>=0;i--) {
-//    double f = ((i+1)/(double)(level+1));
-//    rad[i] = radius*f*f;
-//  }
 	for (i=level-1;i>=0;--i)
 	{
 		rad[i] = rad[i+1]*(1.0-M_PI/(innerFanSlices<<(i+1)))*2.0/3.0;
@@ -358,49 +354,57 @@ void StelPainter::sFanDisk(double radius, int innerFanSlices, int level) const
 	ComputeCosSinTheta(dtheta,slices);
 	double *cos_sin_theta_p;
 	int slices_step = 2;
+	static QVector<double> vertexArr;
+	static QVector<float> texCoordArr;
+	double x,y;
+
 	for (i=level;i>0;--i,slices_step<<=1)
 	{
 		for (j=0,cos_sin_theta_p=cos_sin_theta; j<slices; j+=slices_step,cos_sin_theta_p+=2*slices_step)
 		{
-			glBegin(GL_TRIANGLE_FAN);
-			double x = rad[i]*cos_sin_theta_p[slices_step];
-			double y = rad[i]*cos_sin_theta_p[slices_step+1];
-			glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
-			drawVertex3(x,y,0);
+			vertexArr.resize(0);
+			texCoordArr.resize(0);
+			x = rad[i]*cos_sin_theta_p[slices_step];
+			y = rad[i]*cos_sin_theta_p[slices_step+1];
+			texCoordArr << 0.5*(1.0+x/radius) << 0.5*(1.0+y/radius);
+			vertexArr << x << y << 0;
 
 			x = rad[i]*cos_sin_theta_p[2*slices_step];
 			y = rad[i]*cos_sin_theta_p[2*slices_step+1];
-			glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
-			drawVertex3(x,y,0);
+			texCoordArr << 0.5*(1.0+x/radius) << 0.5*(1.0+y/radius);
+			vertexArr << x << y << 0;
 
 			x = rad[i-1]*cos_sin_theta_p[2*slices_step];
 			y = rad[i-1]*cos_sin_theta_p[2*slices_step+1];
-			glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
-			drawVertex3(x,y,0);
+			texCoordArr << 0.5*(1.0+x/radius) << 0.5*(1.0+y/radius);
+			vertexArr << x << y << 0;
 
 			x = rad[i-1]*cos_sin_theta_p[0];
 			y = rad[i-1]*cos_sin_theta_p[1];
-			glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
-			drawVertex3(x,y,0);
+			texCoordArr << 0.5*(1.0+x/radius) << 0.5*(1.0+y/radius);
+			vertexArr << x << y << 0;
 
 			x = rad[i]*cos_sin_theta_p[0];
 			y = rad[i]*cos_sin_theta_p[1];
-			glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
-			drawVertex3(x,y,0);
-			glEnd();
+			texCoordArr << 0.5*(1.0+x/radius) << 0.5*(1.0+y/radius);
+			vertexArr << x << y << 0;
+			drawArrays(GL_TRIANGLE_FAN, vertexArr.size()/3, (Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
 		}
 	}
 	// draw the inner polygon
 	slices_step>>=1;
-	glBegin(GL_POLYGON);
+	vertexArr.resize(0);
+	texCoordArr.resize(0);
+	texCoordArr << 0.5 << 0.5;
+	vertexArr << 0 << 0 << 0;
 	for (j=0,cos_sin_theta_p=cos_sin_theta;	j<=slices; j+=slices_step,cos_sin_theta_p+=2*slices_step)
 	{
-		double x = rad[0]*cos_sin_theta_p[0];
-		double y = rad[0]*cos_sin_theta_p[1];
-		glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
-		drawVertex3(x,y,0);
+		x = rad[0]*cos_sin_theta_p[0];
+		y = rad[0]*cos_sin_theta_p[1];
+		texCoordArr << 0.5*(1.0+x/radius) << 0.5*(1.0+y/radius);
+		vertexArr << x << y << 0;
 	}
-	glEnd();
+	drawArrays(GL_TRIANGLE_FAN, vertexArr.size()/3, (Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
 }
 
 void StelPainter::sRing(GLdouble rMin, GLdouble rMax, GLint slices, GLint stacks, int orientInside) const
@@ -417,27 +421,32 @@ void StelPainter::sRing(GLdouble rMin, GLdouble rMax, GLint slices, GLint stacks
 	ComputeCosSinTheta(dtheta,slices);
 	double *cos_sin_theta_p;
 
+	static QVector<double> vertexArr;
+	static QVector<float> texCoordArr;
+	static QVector<float> normalArr;
 
 	// draw intermediate stacks as quad strips
 	for (double r = rMin; r < rMax; r+=dr)
 	{
 		const double tex_r0 = (r-rMin)/(rMax-rMin);
 		const double tex_r1 = (r+dr-rMin)/(rMax-rMin);
-		glBegin(GL_TRIANGLE_STRIP);
+		vertexArr.resize(0);
+		texCoordArr.resize(0);
+		normalArr.resize(0);
 		for (j=0,cos_sin_theta_p=cos_sin_theta; j<=slices; ++j,cos_sin_theta_p+=2)
 		{
 			x = r*cos_sin_theta_p[0];
 			y = r*cos_sin_theta_p[1];
-			glNormal3d(0, 0, nsign);
-			glTexCoord2d(tex_r0, 0.5);
-			drawVertex3(x, y, 0);
+			normalArr << 0 << 0 << nsign;
+			texCoordArr << tex_r0 << 0.5;
+			vertexArr << x << y << 0;
 			x = (r+dr)*cos_sin_theta_p[0];
 			y = (r+dr)*cos_sin_theta_p[1];
-			glNormal3d(0, 0, nsign);
-			glTexCoord2d(tex_r1, 0.5);
-			drawVertex3(x, y, 0);
+			normalArr << 0 << 0 << nsign;
+			texCoordArr << tex_r1 << 0.5;
+			vertexArr << x << y << 0;
 		}
-		glEnd();
+		drawArrays(GL_TRIANGLE_STRIP, vertexArr.size()/3, (Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), NULL, (Vec3f*)normalArr.constData());
 	}
 }
 
