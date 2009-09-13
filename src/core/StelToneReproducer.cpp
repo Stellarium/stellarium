@@ -69,7 +69,7 @@ void StelToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 
 	// Update alphaDa and betaDa values
 	float log10Lda = std::log10(Lda);
-	alphaDa = 0.4f * log10Lda + 1.519f;
+	alphaDa = 0.4f * log10Lda + 1.819f; // Edit: changed 1.519 to 1.819
 	betaDa = -0.4f * log10Lda*log10Lda + 0.218f * log10Lda + 6.1642f;
 
 	// Update terms
@@ -88,7 +88,7 @@ void StelToneReproducer::setWorldAdaptationLuminance(float _Lwa)
 
 	// Update alphaDa and betaDa values
 	float log10Lwa = std::log10(Lwa);
-	alphaWa = 0.4f * log10Lwa + 1.519f;
+	alphaWa = 0.4f * log10Lwa + 1.819f; // Edit: changed 1.519 to 1.819
 	betaWa = -0.4f * log10Lwa*log10Lwa + 0.218f * log10Lwa + 6.1642f;
 
 	// Update terms
