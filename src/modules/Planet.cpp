@@ -54,7 +54,8 @@ Planet::Planet(const QString& englishName,
 			   float albedo,
 			   const QString& atexMapName,
 			   const QString& texHaloName,
-			   posFuncType coordFunc,
+	  		   posFuncType coordFunc,
+		       void* auserDataPtr,
 			   OsulatingFunctType *osculatingFunc,
 			   bool acloseOrbit,
 			   bool hidden,
@@ -66,6 +67,7 @@ Planet::Planet(const QString& englishName,
 	  sphereScale(1.f),
 	  lastJD(J2000),
 	  coordFunc(coordFunc),
+      userDataPtr(auserDataPtr),
 	  osculatingFunc(osculatingFunc),
 	  parent(NULL),
 	  hidden(hidden),
@@ -228,7 +230,7 @@ void Planet::computePositionWithoutOrbits(const double date)
 {
 	if (fabs(lastJD-date)>deltaJD)
 	{
-		coordFunc(date, eclipticPos);
+		coordFunc(date, eclipticPos, userDataPtr);
 		lastJD = date;
 	}
 }
@@ -275,7 +277,7 @@ void Planet::computePosition(const double date)
 					}
 					else
 					{
-						coordFunc(calc_date, eclipticPos);
+						coordFunc(calc_date, eclipticPos, userDataPtr);
 					}
 					orbit[d] = getHeliocentricEclipticPos();
 				}
@@ -303,7 +305,7 @@ void Planet::computePosition(const double date)
 					}
 					else
 					{
-						coordFunc(calc_date, eclipticPos);
+						coordFunc(calc_date, eclipticPos, userDataPtr);
 					}
 					orbit[d] = getHeliocentricEclipticPos();
 				}
@@ -330,7 +332,7 @@ void Planet::computePosition(const double date)
 				}
 				else
 				{
-					coordFunc(calc_date, eclipticPos);
+					coordFunc(calc_date, eclipticPos, userDataPtr);
 				}
 				orbit[d] = getHeliocentricEclipticPos();
 			}
@@ -341,7 +343,7 @@ void Planet::computePosition(const double date)
 
 
 		// calculate actual Planet position
-		coordFunc(date, eclipticPos);
+		coordFunc(date, eclipticPos, userDataPtr);
 
 		lastJD = date;
 
@@ -349,7 +351,7 @@ void Planet::computePosition(const double date)
 	else if (fabs(lastJD-date)>deltaJD)
 	{
 		// calculate actual Planet position
-		coordFunc(date, eclipticPos);
+		coordFunc(date, eclipticPos, userDataPtr);
 		lastJD = date;
 	}
 

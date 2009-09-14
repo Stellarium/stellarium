@@ -162,6 +162,15 @@ void SolarSystem::drawPointer(const StelCore* core)
 	}
 }
 
+void ellipticalOrbitPosFunc(double jd,double xyz[3], void* userDataPtr)
+{
+	static_cast<EllipticalOrbit*>(userDataPtr)->positionAtTimevInVSOP87Coordinates(jd, xyz);
+}
+void cometOrbitPosFunc(double jd,double xyz[3], void* userDataPtr)
+{
+	static_cast<CometOrbit*>(userDataPtr)->positionAtTimevInVSOP87Coordinates(jd, xyz);
+}
+
 // Init and load the solar system data
 void SolarSystem::loadPlanets()
 {
@@ -288,6 +297,7 @@ void SolarSystem::loadPlanets()
 
 		const QString funcName = pd.value(secname+"/coord_func").toString();
 		posFuncType posfunc;
+		void* userDataPtr=NULL;
 		OsulatingFunctType *osculatingFunc = 0;
 		bool closeOrbit = pd.value(secname+"/closeOrbit", true).toBool();
 
@@ -391,7 +401,8 @@ void SolarSystem::loadPlanets()
 													   parent_rot_j2000_longitude);
 			orbits.push_back(orb);
 
-			posfunc = posFuncType(orb, &EllipticalOrbit::positionAtTimevInVSOP87Coordinates);
+			userDataPtr = orb;
+			posfunc = &ellipticalOrbitPosFunc;
 		}
 		else if (funcName=="comet_orbit")
 		{
@@ -492,33 +503,33 @@ void SolarSystem::loadPlanets()
 											 parent_rot_asc_node,
 											 parent_rot_j2000_longitude);
 			orbits.push_back(orb);
-
-			posfunc = posFuncType(orb,&CometOrbit::positionAtTimevInVSOP87Coordinates);
+			userDataPtr = orb;
+			posfunc = &cometOrbitPosFunc;
 		}
 
 		if (funcName=="sun_special")
-			posfunc = posFuncType(get_sun_helio_coordsv);
+			posfunc = &get_sun_helio_coordsv;
 
 		if (funcName=="mercury_special") {
-			posfunc = posFuncType(get_mercury_helio_coordsv);
+			posfunc = &get_mercury_helio_coordsv;
 			osculatingFunc = &get_mercury_helio_osculating_coords;
 		}
 
 		if (funcName=="venus_special") {
-			posfunc = posFuncType(get_venus_helio_coordsv);
+			posfunc = &get_venus_helio_coordsv;
 			osculatingFunc = &get_venus_helio_osculating_coords;
 		}
 
 		if (funcName=="earth_special") {
-			posfunc = posFuncType(get_earth_helio_coordsv);
+			posfunc = &get_earth_helio_coordsv;
 			osculatingFunc = &get_earth_helio_osculating_coords;
 		}
 
 		if (funcName=="lunar_special")
-			posfunc = posFuncType(get_lunar_parent_coordsv);
+			posfunc = &get_lunar_parent_coordsv;
 
 		if (funcName=="mars_special") {
-			posfunc = posFuncType(get_mars_helio_coordsv);
+			posfunc = &get_mars_helio_coordsv;
 			osculatingFunc = &get_mars_helio_osculating_coords;
 		}
 
@@ -526,73 +537,73 @@ void SolarSystem::loadPlanets()
 			posfunc = posFuncType(get_phobos_parent_coordsv);
 
 		if (funcName=="deimos_special")
-			posfunc = posFuncType(get_deimos_parent_coordsv);
+			posfunc = &get_deimos_parent_coordsv;
 
 		if (funcName=="jupiter_special") {
-			posfunc = posFuncType(get_jupiter_helio_coordsv);
+			posfunc = &get_jupiter_helio_coordsv;
 			osculatingFunc = &get_jupiter_helio_osculating_coords;
 		}
 
 		if (funcName=="europa_special")
-			posfunc = posFuncType(get_europa_parent_coordsv);
+			posfunc = &get_europa_parent_coordsv;
 
 		if (funcName=="calisto_special")
-			posfunc = posFuncType(get_callisto_parent_coordsv);
+			posfunc = &get_callisto_parent_coordsv;
 
 		if (funcName=="io_special")
-			posfunc = posFuncType(get_io_parent_coordsv);
+			posfunc = &get_io_parent_coordsv;
 
 		if (funcName=="ganymede_special")
-			posfunc = posFuncType(get_ganymede_parent_coordsv);
+			posfunc = &get_ganymede_parent_coordsv;
 
 		if (funcName=="saturn_special") {
-			posfunc = posFuncType(get_saturn_helio_coordsv);
+			posfunc = &get_saturn_helio_coordsv;
 			osculatingFunc = &get_saturn_helio_osculating_coords;
 		}
 
 		if (funcName=="mimas_special")
-			posfunc = posFuncType(get_mimas_parent_coordsv);
+			posfunc = &get_mimas_parent_coordsv;
 
 		if (funcName=="enceladus_special")
-			posfunc = posFuncType(get_enceladus_parent_coordsv);
+			posfunc = &get_enceladus_parent_coordsv;
 
 		if (funcName=="tethys_special")
-			posfunc = posFuncType(get_tethys_parent_coordsv);
+			posfunc = &get_tethys_parent_coordsv;
 
 		if (funcName=="dione_special")
-			posfunc = posFuncType(get_dione_parent_coordsv);
+			posfunc = &get_dione_parent_coordsv;
 
 		if (funcName=="rhea_special")
-			posfunc = posFuncType(get_rhea_parent_coordsv);
+			posfunc = &get_rhea_parent_coordsv;
 
 		if (funcName=="titan_special")
-			posfunc = posFuncType(get_titan_parent_coordsv);
+			posfunc = &get_titan_parent_coordsv;
 
 		if (funcName=="iapetus_special")
-			posfunc = posFuncType(get_iapetus_parent_coordsv);
+			posfunc = &get_iapetus_parent_coordsv;
 
 		if (funcName=="hyperion_special")
-			posfunc = posFuncType(get_hyperion_parent_coordsv);
+			posfunc = &get_hyperion_parent_coordsv;
 
 		if (funcName=="uranus_special") {
-			posfunc = posFuncType(get_uranus_helio_coordsv);
+			posfunc = &get_uranus_helio_coordsv;
 			osculatingFunc = &get_uranus_helio_osculating_coords;
 		}
 
 		if (funcName=="miranda_special")
-			posfunc = posFuncType(get_miranda_parent_coordsv);
+			posfunc = &get_miranda_parent_coordsv;
 
 		if (funcName=="ariel_special")
-			posfunc = posFuncType(get_ariel_parent_coordsv);
+			posfunc = &get_ariel_parent_coordsv;
 
 		if (funcName=="umbriel_special")
-			posfunc = posFuncType(get_umbriel_parent_coordsv);
+			posfunc = &get_umbriel_parent_coordsv;
 
 		if (funcName=="titania_special")
-			posfunc = posFuncType(get_titania_parent_coordsv);
+			posfunc = &get_titania_parent_coordsv;
 
 		if (funcName=="oberon_special")
-			posfunc = posFuncType(get_oberon_parent_coordsv);
+			posfunc = &get_oberon_parent_coordsv;
 
 		if (funcName=="neptune_special") {
 			posfunc = posFuncType(get_neptune_helio_coordsv);
@@ -600,10 +611,10 @@ void SolarSystem::loadPlanets()
 		}
 
 		if (funcName=="pluto_special")
-			posfunc = posFuncType(get_pluto_helio_coordsv);
+			posfunc = &get_pluto_helio_coordsv;
 
 
-		if (posfunc.empty())
+		if (posfunc==NULL)
 		{
 			qWarning() << "ERROR : can't find posfunc " << funcName << " for " << englishName;
 			exit(-1);
@@ -619,6 +630,7 @@ void SolarSystem::loadPlanets()
 					pd.value(secname+"/tex_map").toString(),
 					pd.value(secname+"/tex_halo").toString(),
 					posfunc,
+	 			    userDataPtr,
 					osculatingFunc,
 					closeOrbit,
 					pd.value(secname+"/hidden", 0).toBool(),
