@@ -24,13 +24,13 @@
 
 #include "StelObject.hpp"
 #include "VecMath.hpp"
-#include "callbacks.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 
 // The callback type for the external position computation function
-typedef boost::callback<void, double, double*> posFuncType;
+// The last variable is the userData pointer.
+typedef void (*posFuncType)(double, double*, void*);
 
 typedef void (OsulatingFunctType)(double jd0,double jd,double xyz[3]);
 
@@ -91,6 +91,7 @@ public:
 		   const QString& texMapName,
 		   const QString& texHaloName,
 		   posFuncType _coordFunc,
+	 	   void* userDataPtr,
 		   OsulatingFunctType *osculatingFunc,
 		   bool closeOrbit,
 		   bool hidden,
@@ -280,6 +281,8 @@ protected:
 	double lastJD;
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
 	posFuncType coordFunc;
+	void* userDataPtr;
+	
 	OsulatingFunctType *const osculatingFunc;
 	QSharedPointer<Planet> parent;           // Planet parent i.e. sun for earth
 	QList<QSharedPointer<Planet> > satellites;      // satellites of the Planet
