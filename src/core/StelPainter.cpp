@@ -1480,14 +1480,18 @@ void StelPainter::drawCircle(double x,double y,double r) const
 	double dy = 0;
 	static QVarLengthArray<Vec3d, 180> circleVertexArray(180);
 
-	for (int i=0;i<segments;++i)
+	for (int i=0;i<segments;i++)
 	{
 		circleVertexArray[i].set(x+dx,y+dy,0);
 		r = dx*cp-dy*sp;
 		dy = dx*sp+dy*cp;
 		dx = r;
 	}
-	drawArrays(GL_LINE_LOOP, 180, circleVertexArray.data());
+	//drawArrays(GL_LINE_LOOP, 180, circleVertexArray.data());//drawArrays() calls prj->projectInPlace() for each vertex
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_DOUBLE, 0, circleVertexArray.data());
+	glDrawArrays(GL_LINE_LOOP, 0, 180);
+	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 
