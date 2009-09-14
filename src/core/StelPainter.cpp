@@ -121,7 +121,8 @@ void StelPainter::switchToNativeOpenGLPainting() const
 		Q_ASSERT(w->isValid());
 		w->makeCurrent();
 	}
-
+	qPainter->save();
+	
 	// Save openGL projection state
 	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
@@ -170,6 +171,8 @@ void StelPainter::revertToQtPainting() const
 			qFatal("Invalid openGL operation in StelPainter::revertToQtPainting()");
 	}
 #endif
+	
+	qPainter->restore();
 }
 
 void StelPainter::initSystemGLInfo()
@@ -749,20 +752,20 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 	win2[2] = prj->project(stop, win2) ? 1.0 : -1.;
 	tessArc.append(win1);
 
-	double radius;
-	if (rotCenter==Vec3d(0,0,0))
+	
+	if (rotCenter.lengthSquared()<0.00000001)
 	{
 		// Great circle
-		radius=1;
+		// Perform the tesselation of the arc in small segments in a way so that the lines look smooth
+		fIter(prj, start, stop, win1, win2, tessArc, tessArc.insert(tessArc.end(), win2), 1, rotCenter);
 	}
 	else
 	{
 		Vec3d tmp = (rotCenter^start)/rotCenter.length();
-		radius = fabs(tmp.length());
+		const double radius = fabs(tmp.length());
+		// Perform the tesselation of the arc in small segments in a way so that the lines look smooth
+		fIter(prj, start-rotCenter, stop-rotCenter, win1, win2, tessArc, tessArc.insert(tessArc.end(), win2), radius, rotCenter);
 	}
-
-	// Perform the tesselation of the arc in small segments in a way so that the lines look smooth
-	fIter(prj, start-rotCenter, stop-rotCenter, win1, win2, tessArc, tessArc.insert(tessArc.end(), win2), radius, rotCenter);
 
 	// And draw.
 	QLinkedList<Vec3d>::ConstIterator i = tessArc.begin();
