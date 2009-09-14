@@ -158,11 +158,9 @@ void StelMainGraphicsView::drawBackground(QPainter* painter, const QRectF &)
 		return;
 	}
 
-	painter->save();
 	StelPainter::setQPainter(painter);
 	distorter->prepare();
 	StelPainter::setQPainter(NULL);
-	painter->restore();
 
 	const double now = StelApp::getTotalRunTime();
 
@@ -190,11 +188,9 @@ void StelMainGraphicsView::drawBackground(QPainter* painter, const QRectF &)
 
 void StelMainGraphicsView::drawForeground(QPainter* painter, const QRectF &rect)
 {
-	painter->save();
 	StelPainter::setQPainter(painter);
 	distorter->distort();
 	StelPainter::setQPainter(NULL);
-	painter->restore();
 }
 
 void StelMainGraphicsView::startMainLoop()

@@ -57,16 +57,11 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 	// Update the core and all modules
 	StelApp::getInstance().update(dt);
 
-	painter->save();
-
 	StelPainter::setQPainter(painter);
-
 	// And draw them
 	StelApp::getInstance().draw();
-
 	StelPainter::setQPainter(NULL);
 
-	painter->restore();
 }
 
 
