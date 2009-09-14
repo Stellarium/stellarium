@@ -47,6 +47,7 @@ public:
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
+	//QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelApp::getApplicationVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
