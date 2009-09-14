@@ -42,7 +42,8 @@ public:
 // Buttons in the bottom left corner
 class CornerButtons : public QObject, public QGraphicsItem
 {
-Q_OBJECT
+	Q_OBJECT
+	Q_INTERFACES(QGraphicsItem);
 public:
 	CornerButtons(QGraphicsItem* parent=NULL);
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
@@ -125,6 +126,7 @@ private:
 class LeftStelBar : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
+	Q_INTERFACES(QGraphicsItem);
 public:
 	LeftStelBar(QGraphicsItem* parent);
 	~LeftStelBar();
@@ -148,6 +150,7 @@ private:
 class BottomStelBar : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
+	Q_INTERFACES(QGraphicsItem);
 public:
 	BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft=QPixmap(), const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(), const QPixmap& pixSingle=QPixmap());
 	virtual ~BottomStelBar();
