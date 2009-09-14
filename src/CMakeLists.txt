@@ -114,8 +114,6 @@ SET(stellarium_lib_SRCS
 	core/StelSphericalIndex.cpp
 
 	external/bytes.h
-	external/callback_helpers.hpp
-	external/callbacks.hpp
 	external/fixx11h.h
 	external/gettext.h
 	external/GLee.c
