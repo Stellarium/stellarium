@@ -47,25 +47,25 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 		qWarning("StelAppGraphicsWidget: drawBackground needs a QGLWidget to be set as viewport on the graphics view");
 		return;
 	}
-	
+
 	const double now = StelApp::getTotalRunTime();
 	double dt = now-previousTime;
 	previousTime = now;
 	if (dt<0)	// This fix the star scale bug!!
 		return;
-	
+
 	// Update the core and all modules
 	StelApp::getInstance().update(dt);
 
 	painter->save();
-	
+
 	StelPainter::setQPainter(painter);
-	
+
 	// And draw them
 	StelApp::getInstance().draw();
 
 	StelPainter::setQPainter(NULL);
-	
+
 	painter->restore();
 }
 
