@@ -67,52 +67,6 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	}
 #endif
 
-	switchToNativeOpenGLPainting();
-
-	// Init GL viewport to current projector values
-	glViewport(prj->viewportXywh[0], prj->viewportXywh[1], prj->viewportXywh[2], prj->viewportXywh[3]);
-	initGlMatrixOrtho2d();
-	
-	glShadeModel(GL_FLAT);
-	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_CULL_FACE);
-	glDisable(GL_LIGHTING);
-	glDisable(GL_MULTISAMPLE);
-	glDisable(GL_DITHER);
-	glDisable(GL_ALPHA_TEST);
-	glDisable(GL_LINE_SMOOTH);
-	glDisable(GL_TEXTURE_2D);
-
-	glFrontFace(prj->needGlFrontFaceCW()?GL_CW:GL_CCW);
-}
-
-StelPainter::~StelPainter()
-{
-	revertToQtPainting();
-
-#ifndef NDEBUG
-	// We are done with this StelPainter
-	globalMutex->unlock();
-#endif
-}
-
-
-void StelPainter::setFont(const QFont& font)
-{
-	Q_ASSERT(qPainter);
-	qPainter->setFont(font);
-}
-
-QFontMetrics StelPainter::getFontMetrics() const
-{
-	Q_ASSERT(qPainter);
-	return qPainter->fontMetrics();
-}
-
-//! Switch to native OpenGL painting, i.e not using QPainter
-//! After this call revertToQtPainting MUST be called
-void StelPainter::switchToNativeOpenGLPainting() const
-{
 	Q_ASSERT(qPainter);
 	// Ensure that the current GL content is the one of our main GL window
 	QGLWidget* w = dynamic_cast<QGLWidget*>(qPainter->device());
@@ -121,6 +75,7 @@ void StelPainter::switchToNativeOpenGLPainting() const
 		Q_ASSERT(w->isValid());
 		w->makeCurrent();
 	}
+
 #if QT_VERSION>=0x040600
 	qPainter->beginNativePainting();
 #else
@@ -137,12 +92,25 @@ void StelPainter::switchToNativeOpenGLPainting() const
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 
+	// Init GL viewport to current projector values
+	glViewport(prj->viewportXywh[0], prj->viewportXywh[1], prj->viewportXywh[2], prj->viewportXywh[3]);
+	initGlMatrixOrtho2d();
+	glShadeModel(GL_FLAT);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_CULL_FACE);
+	glDisable(GL_LIGHTING);
+	glDisable(GL_MULTISAMPLE);
+	glDisable(GL_DITHER);
+	glDisable(GL_ALPHA_TEST);
+	glDisable(GL_LINE_SMOOTH);
+	glDisable(GL_TEXTURE_2D);
+	glFrontFace(prj->needGlFrontFaceCW()?GL_CW:GL_CCW);
 }
 
-//! Revert openGL state so that Qt painting works again
-void StelPainter::revertToQtPainting() const
+StelPainter::~StelPainter()
 {
 	Q_ASSERT(qPainter);
+	
 	// Ensure that the current GL content is the one of our main GL window
 	QGLWidget* w = dynamic_cast<QGLWidget*>(qPainter->device());
 	if (w!=0)
@@ -174,6 +142,24 @@ void StelPainter::revertToQtPainting() const
 #else
 	qPainter->restore();
 #endif
+
+#ifndef NDEBUG
+	// We are done with this StelPainter
+	globalMutex->unlock();
+#endif
+}
+
+
+void StelPainter::setFont(const QFont& font)
+{
+	Q_ASSERT(qPainter);
+	qPainter->setFont(font);
+}
+
+QFontMetrics StelPainter::getFontMetrics() const
+{
+	Q_ASSERT(qPainter);
+	return qPainter->fontMetrics();
 }
 
 void StelPainter::initSystemGLInfo()
@@ -595,15 +581,19 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	glPushMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
-	//glEnable(GL_BLEND);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-
-	qPainter->save();
-
-	qPainter->setRenderHints(QPainter::TextAntialiasing/* | QPainter::HighQualityAntialiasing*/);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	float color[4];
 	glGetFloatv(GL_CURRENT_COLOR, color);
+	
+#if QT_VERSION>=0x040600
+	qPainter->endNativePainting();
+#endif
+	
+	qPainter->save();
+	qPainter->resetTransform();
+	qPainter->resetMatrix();
+	qPainter->setRenderHints(QPainter::TextAntialiasing | QPainter::HighQualityAntialiasing);
 	const QColor qCol=QColor::fromRgbF(qMin(1.f,color[0]), qMin(1.f,color[1]), qMin(1.f,color[2]), qMin(1.f,color[3]));
 	qPainter->setPen(qCol);
 
@@ -613,14 +603,20 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	}
 	else
 	{
-		qPainter->translate(x, y);
-		qPainter->translate(xshift, yshift);
+#if QT_VERSION>=0x040600
+		qPainter->translate(x+xshift, prj->viewportXywh[3]-y-yshift);
+#else
+		qPainter->translate(x+xshift, y+yshift);
 		qPainter->scale(1, -1);
+#endif
 		qPainter->drawText(0, 0, str);
 	}
-
 	qPainter->restore();
 
+#if QT_VERSION>=0x040600
+	qPainter->beginNativePainting();
+#endif
+	
 	glPopClientAttrib();
 	glPopAttrib();
 	glMatrixMode(GL_TEXTURE);
@@ -630,14 +626,6 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
 
-#if 0
-	glPushMatrix();
-	glTranslatef(x,y,0);
-	glRotatef(angleDeg,0,0,1);
-	glTranslatef(0,font->getLineHeight(),0);
-	font->print(xshift, yshift, str);
-	glPopMatrix();
-#endif
 }
 
 
