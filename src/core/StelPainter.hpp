@@ -213,13 +213,6 @@ private:
 			const Vec2f* texturePos=NULL, QVarLengthArray<Vec2f, 4096>* outTexturePos=NULL,int nbI=0,
 			bool checkDisc1=true, bool checkDisc2=true, bool checkDisc3=true) const;
 
-	//! Switch to native OpenGL painting, i.e not using QPainter.
-	//! After this call revertToQtPainting() MUST be called.
-	void switchToNativeOpenGLPainting() const;
-
-	//! Revert openGL state so that Qt painting works again.
-	void revertToQtPainting() const;
-
 	void drawTextGravity180(float x, float y, const QString& str, float xshift = 0, float yshift = 0) const;
 
 	//! Init the real openGL Matrices to a 2d orthographic projection
