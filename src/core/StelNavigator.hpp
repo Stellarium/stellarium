@@ -180,6 +180,8 @@ public slots:
 	void setZeroTimeSpeed() {setTimeRate(0);}
 	//! Set real time speed, i.e. 1 sec/sec
 	void setRealTimeSpeed() {setTimeRate(JD_SECOND);}
+	//! Set real time speed or pause simulation if we are already in realtime speed.
+	void toggleRealTimeSpeed() {(!getRealTimeSpeed()) ? setRealTimeSpeed() : setZeroTimeSpeed();}
 	//! Get whether it is real time speed, i.e. 1 sec/sec
 	bool getRealTimeSpeed() const {return (fabs(timeSpeed-JD_SECOND)<0.0000001);}
 
