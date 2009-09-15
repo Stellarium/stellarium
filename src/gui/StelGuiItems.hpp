@@ -69,18 +69,33 @@ public:
 	//! @param pixHover a pixmap slowly blended when mouse is over the button
 	//! @param action the associated action. Connections are automatically done with the signals if relevant.
 	//! @param noBackground define whether the button background image have to be used
-	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixHover=QPixmap(),
+	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
+			   const QPixmap& pixHover=QPixmap(),
 			   QAction* action=NULL, bool noBackground=false);
+	//! Constructor
+	//! @param parent the parent item
+	//! @param pixOn the pixmap to display when the button is toggled
+	//! @param pixOff the pixmap to display when the button is not toggled
+	//! @param pixNoChange the pixmap to display when the button state of a tristate is not changed
+	//! @param pixHover a pixmap slowly blended when mouse is over the button
+	//! @param action the associated action. Connections are automatically done with the signals if relevant.
+	//! @param noBackground define whether the button background image have to be used
+	//! @param isTristate define whether the button is a tristate or an on/off button
+	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixNoChange,
+			   const QPixmap& pixHover=QPixmap(),
+			   QAction* action=NULL, bool noBackground=false, bool isTristate=true);
+	//! Button states
+	enum {ButtonStateOff = 0, ButtonStateOn = 1, ButtonStateNoChange = 2};
 
 	//! Get whether the button is checked
-	bool isChecked() const {return checked;}
+	int isChecked() const {return checked;}
 
 	//! Set the button opacity
 	void setOpacity(double v) {opacity=v; updateIcon();}
-	
+
 	//! Activate red mode for this button, i.e. will reduce the non red color component of the icon
 	void setRedMode(bool b) {redMode=b; updateIcon();}
-	
+
 signals:
 	//! Triggered when the button state changes
 	void toggled(bool);
@@ -92,7 +107,8 @@ signals:
 
 public slots:
 	//! set whether the button is checked
-	void setChecked(bool b);
+	void setChecked(int b);
+	void setChecked(bool b) { setChecked((int)b); }
 
 protected:
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
@@ -100,27 +116,32 @@ protected:
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 private slots:
-	void animValueChanged(qreal value);	
+	void animValueChanged(qreal value);
 private:
 	void updateIcon();
-	
+	int toggleChecked(int);
+
 	QPixmap pixOn;
 	QPixmap pixOff;
+	QPixmap pixNoChange;
 	QPixmap pixHover;
 	QPixmap pixBackground;
-	
+
 	QPixmap pixOnRed;
 	QPixmap pixOffRed;
+	QPixmap pixNoChangeRed;
 	QPixmap pixHoverRed;
 	QPixmap pixBackgroundRed;
-	
-	bool checked;
+
+	int checked;
+
 	QTimeLine* timeLine;
 	QAction* action;
 	bool noBckground;
+	bool isTristate_;
 	double opacity;
 	double hoverOpacity;
-	
+
 	bool redMode;
 };
 

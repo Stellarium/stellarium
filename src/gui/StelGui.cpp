@@ -280,7 +280,7 @@ void StelGui::init()
 	connect(getGuiActions("actionDecrease_Time_Speed"), SIGNAL(triggered()), nav, SLOT(decreaseTimeSpeed()));
 	connect(getGuiActions("actionIncrease_Time_Speed_Less"), SIGNAL(triggered()), nav, SLOT(increaseTimeSpeedLess()));
 	connect(getGuiActions("actionDecrease_Time_Speed_Less"), SIGNAL(triggered()), nav, SLOT(decreaseTimeSpeedLess()));
-	connect(getGuiActions("actionSet_Real_Time_Speed"), SIGNAL(triggered()), nav, SLOT(setRealTimeSpeed()));
+	connect(getGuiActions("actionSet_Real_Time_Speed"), SIGNAL(triggered()), nav, SLOT(toggleRealTimeSpeed()));
 	connect(getGuiActions("actionSet_Time_Rate_Zero"), SIGNAL(triggered()), nav, SLOT(setZeroTimeSpeed()));
 	connect(getGuiActions("actionReturn_To_Current_Time"), SIGNAL(triggered()), nav, SLOT(setTimeNow()));
 	connect(getGuiActions("actionSwitch_Equatorial_Mount"), SIGNAL(toggled(bool)), nav, SLOT(setEquatorialMount(bool)));
@@ -383,6 +383,7 @@ void StelGui::init()
 	///////////////////////////////////////////////////////////////////////////
 
 	// Add everything
+	QPixmap pxmapDefault;
 	QPixmap pxmapGlow(":/graphicGui/gui/glow.png");
 	QPixmap pxmapOn(":/graphicGui/gui/2-on-location.png");
 	QPixmap pxmapOff(":/graphicGui/gui/2-off-location.png");
@@ -496,7 +497,8 @@ void StelGui::init()
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeRealtime-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btTimeRealtime-off.png");
-	buttonTimeRealTimeSpeed = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionSet_Real_Time_Speed"));
+	pxmapDefault = QPixmap(":/graphicGui/gui/btTimePause-on.png");
+	buttonTimeRealTimeSpeed = new StelButton(NULL, pxmapOn, pxmapOff, pxmapDefault, pxmapGlow32x32, getGuiActions("actionSet_Real_Time_Speed"));
 	skyGui->buttonBar->addButton(buttonTimeRealTimeSpeed, "070-timeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeNow-on.png");
@@ -603,9 +605,14 @@ void StelGui::update(double deltaTime)
 		if (buttonTimeForward->isChecked()==true)
 			buttonTimeForward->setChecked(false);
 	}
-	if (buttonTimeRealTimeSpeed->isChecked()!=nav->getRealTimeSpeed())
-	{
-		buttonTimeRealTimeSpeed->setChecked(nav->getRealTimeSpeed());
+	if (nav->getTimeRate() == 0) {
+		if (buttonTimeRealTimeSpeed->isChecked() != StelButton::ButtonStateNoChange)
+			buttonTimeRealTimeSpeed->setChecked(StelButton::ButtonStateNoChange);
+	} else if (nav->getRealTimeSpeed()) {
+		if (buttonTimeRealTimeSpeed->isChecked() != StelButton::ButtonStateOn)
+			buttonTimeRealTimeSpeed->setChecked(StelButton::ButtonStateOn);
+	} else if (buttonTimeRealTimeSpeed->isChecked() != StelButton::ButtonStateOff) {
+		buttonTimeRealTimeSpeed->setChecked(StelButton::ButtonStateOff);
 	}
 	const bool isTimeNow=nav->getIsTimeNow();
 	if (buttonTimeCurrent->isChecked()!=isTimeNow)

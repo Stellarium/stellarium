@@ -49,7 +49,8 @@
 StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixmap& apixOff,
 		const QPixmap& apixHover, QAction* aaction, bool noBackground) :
 			QGraphicsPixmapItem(apixOff, parent), pixOn(apixOn), pixOff(apixOff), pixHover(apixHover),
-			checked(false), action(aaction), noBckground(noBackground), opacity(1.), hoverOpacity(0.), redMode(false)
+			checked(ButtonStateOff), action(aaction), noBckground(noBackground), isTristate_(false),
+			opacity(1.), hoverOpacity(0.), redMode(false)
 {
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());
@@ -82,11 +83,61 @@ StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixm
 	}
 }
 
+StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixmap& apixOff, const QPixmap& apixNoChange,
+		const QPixmap& apixHover, QAction* aaction, bool noBackground, bool isTristate) :
+			QGraphicsPixmapItem(apixOff, parent), pixOn(apixOn), pixOff(apixOff), pixNoChange(apixNoChange), pixHover(apixHover),
+			checked(ButtonStateOff), action(aaction), noBckground(noBackground), isTristate_(isTristate),
+			opacity(1.), hoverOpacity(0.), redMode(false)
+{
+	Q_ASSERT(!pixOn.isNull());
+	Q_ASSERT(!pixOff.isNull());
+
+	pixOnRed = StelGui::makeRed(pixOn);
+	pixOffRed = StelGui::makeRed(pixOff);
+	if (isTristate_) {
+		Q_ASSERT(!pixNoChange.isNull());
+		pixNoChangeRed = StelGui::makeRed(pixNoChange);
+	}
+	if (!pixHover.isNull())
+		pixHoverRed = StelGui::makeRed(pixHover);
+	if (!pixBackground.isNull())
+		pixBackgroundRed = StelGui::makeRed(pixBackground);
+
+	setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
+	setAcceptsHoverEvents(true);
+	timeLine = new QTimeLine(250, this);
+	timeLine->setCurveShape(QTimeLine::EaseOutCurve);
+	connect(timeLine, SIGNAL(valueChanged(qreal)), this, SLOT(animValueChanged(qreal)));
+
+	if (action!=NULL)
+	{
+		QObject::connect(action, SIGNAL(toggled(bool)), this, SLOT(setChecked(bool)));
+		if (action->isCheckable())
+		{
+			setChecked(action->isChecked());
+			QObject::connect(this, SIGNAL(toggled(bool)), action, SLOT(setChecked(bool)));
+		}
+		else
+		{
+			QObject::connect(this, SIGNAL(triggered()), action, SLOT(trigger()));
+		}
+	}
+}
+
+int StelButton::toggleChecked(int checked) {
+	if (!isTristate_)
+		checked = !!!checked;
+	else {
+		if (++checked > ButtonStateNoChange)
+			checked = ButtonStateOff;
+	}
+	return checked;
+}
 void StelButton::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
 	QGraphicsItem::mousePressEvent(event);
 	event->accept();
-	setChecked(!checked);
+	setChecked(toggleChecked(checked));
 	emit(toggled(checked));
 	emit(triggered());
 }
@@ -111,7 +162,7 @@ void StelButton::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
 void StelButton::mouseReleaseEvent(QGraphicsSceneMouseEvent * event)
 {
 	if (action!=NULL && !action->isCheckable())
-		setChecked(!checked);
+		setChecked(toggleChecked(checked));
 }
 
 
@@ -125,7 +176,10 @@ void StelButton::updateIcon()
 	painter.setOpacity(opacity);
 	if (!pixBackground.isNull() && noBckground==false)
 		painter.drawPixmap(0,0, redMode ? pixBackgroundRed : pixBackground);
-	painter.drawPixmap(0,0, redMode ? (checked ? pixOnRed : pixOffRed) : (checked ? pixOn : pixOff));
+	painter.drawPixmap(0, 0,
+		(isTristate_ && checked == ButtonStateNoChange) ? (redMode ? pixNoChangeRed : pixNoChange) :
+		(checked == ButtonStateOn) ? (redMode ? pixOnRed : pixOn) :
+		/* (checked == ButtonStateOff) ? */ (redMode ? pixOffRed : pixOff));
 	if (hoverOpacity>0)
 	{
 		painter.setOpacity(hoverOpacity*opacity);
@@ -140,7 +194,7 @@ void StelButton::animValueChanged(qreal value)
 	updateIcon();
 }
 
-void StelButton::setChecked(bool b)
+void StelButton::setChecked(int b)
 {
 	checked=b;
 	updateIcon();
