@@ -158,6 +158,7 @@ void StelGui::init()
 	addGuiActions("actionShow_DSS", N_("Nebulas background images"), "", group, true, false);
 	addGuiActions("actionShow_Stars", N_("Stars"), "S", group, true, false, "astro/flag_stars");
 	addGuiActions("actionShow_Planets_Labels", N_("Planets labels"), "P", group, true, false, "astro/flag_planets_labels");
+	addGuiActions("actionShow_Planets_Orbits", N_("Planet orbits"), "O", group, true, false, "astro/flag_planets_orbits");
 
 	addGuiActions("actionShow_Night_Mode", N_("Night mode"), "", group, true, false, "viewing/flag_night");
 	addGuiActions("actionSet_Full_Screen_Global", N_("Full-screen mode"), "F11", group, true, false); // TODO: move persistence here? (currently elsewhere)
