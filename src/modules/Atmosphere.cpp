@@ -243,7 +243,6 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 
 	// Variables used to compute the average sky luminance
 	double sum_lum = 0.;
-	unsigned int nb_lum = 0;
 
 	Vec3d point(1., 0., 0.);
 	skylightStruct2 b2;
@@ -280,7 +279,6 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 
 		// Store for later statistics
 		sum_lum+=lumi;
-		++nb_lum;
 
 		// Now need to compute the xy part of the color component
 		// This can be done in the openGL shader if possible
@@ -310,7 +308,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	}
 
 	// Update average luminance
-	averageLuminance = sum_lum/nb_lum;
+	averageLuminance = sum_lum/((1+skyResolutionX)*(1+skyResolutionY));
 }
 
 
