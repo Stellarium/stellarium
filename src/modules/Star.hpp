@@ -67,9 +67,10 @@ struct Star1 { // 28 byte
   StelObjectP createStelObject(const SpecialZoneArray<Star1> *a,
 					 const SpecialZoneData<Star1> *z) const;
   Vec3d getJ2000Pos(const ZoneData *z,double movementFactor) const {
-	Vec3d pos = z->center
-			  + (x0+movementFactor*dx0)*z->axis0
-			  + (x1+movementFactor*dx1)*z->axis1;
+	  Vec3d pos = z->axis0;
+	  pos*=((double)(x0)+movementFactor*dx0);
+	  pos+=((double)(x1)+movementFactor*dx1)*z->axis1;
+	  pos+=z->center;
 	//pos.normalize();
 	return pos;
   }
@@ -101,14 +102,16 @@ struct Star2 {  // 10 byte
   StelObjectP createStelObject(const SpecialZoneArray<Star2> *a,
 					 const SpecialZoneData<Star2> *z) const;
   Vec3d getJ2000Pos(const ZoneData *z,double movementFactor) const {
-	Vec3d pos = z->center
-			  + (x0+movementFactor*dx0)*z->axis0
-			  + (x1+movementFactor*dx1)*z->axis1;
+	  Vec3d pos = z->axis0;
+	  pos*=((double)(x0)+movementFactor*dx0);
+	  pos+=((double)(x1)+movementFactor*dx1)*z->axis1;
+	  pos+=z->center;
+			  
 	//pos.normalize();
 	return pos;
   }
   float getBV(void) const {return IndexToBV(bV);}
-  QString getNameI18n(void) const {return "";}
+  QString getNameI18n(void) const {return QString();}
   void repack(bool fromBe);
   void print(void);
 }
@@ -133,12 +136,15 @@ struct Star3 {  // 6 byte
   StelObjectP createStelObject(const SpecialZoneArray<Star3> *a,
 					 const SpecialZoneData<Star3> *z) const;
   Vec3d getJ2000Pos(const ZoneData *z,double) const {
-	Vec3d pos = z->center + (double)(x0)*z->axis0 + (double)(x1)*z->axis1;
+	  Vec3d pos = z->axis0;
+	  pos*=(double)(x0);
+	  pos+=z->center;
+	  pos+=(double)(x1)*z->axis1;
 	//pos.normalize();
 	return pos;
   }
   float getBV(void) const {return IndexToBV(bV);}
-  QString getNameI18n(void) const {return "";}
+  QString getNameI18n(void) const {return QString();}
   void repack(bool fromBe);
   void print(void);
 }
