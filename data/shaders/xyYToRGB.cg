@@ -72,13 +72,12 @@ void main()
 		// Compute s, ratio between scotopic and photopic vision
 		float op = (log(color[2])/ln10 + 2.)/2.6;
 		float s = op * op *(3. - 2. * op);
-		float V;
 		// Do the blue shift for scotopic vision simulation (night vision) [3]
 		// The "night blue" is x,y(0.25, 0.25)
 		color[0] = (1. - s) * 0.25 + s * color[0];	// Add scotopic + photopic components
 		color[1] = (1. - s) * 0.25 + s * color[1];	// Add scotopic + photopic components
 		// Take into account the scotopic luminance approximated by V [3] [4]
-		V = color[2] * (1.33 * (1. + color[1] / color[0] + color[0] * (1. - color[0] - color[1])) - 1.68);
+		float V = color[2] * (1.33 * (1. + color[1] / color[0] + color[0] * (1. - color[0] - color[1])) - 1.68);
 		color[2] = 0.4468 * (1. - s) * V + s * color[2];
 	}
 
@@ -87,14 +86,9 @@ void main()
 	color[2] = pow(color[2]*pi*0.0001, alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
 	
 	// Convert from xyY to XZY
-	X = color[0] * color[2] / color[1];
-	Y = color[2];
-	Z = (1. - color[0] - color[1]) * color[2] / color[1];
-
 	// Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white
-	color[0] = 2.04148  *X - 0.564977*Y - 0.344713 *Z;
-	color[1] =-0.969258 *X + 1.87599 *Y + 0.0415557*Z;
-	color[2] = 0.0134455*X - 0.118373*Y + 1.01527  *Z;
+	const mat4 adobeRGB = mat4(2.04148, -0.969258, 0.0134455, 0., -0.564977, 1.87599, -0.118373, 0., -0.344713, 0.0415557, 1.01527, 0., 0., 0., 0., 1.);
+	color = adobeRGB*vec4(color[0] * color[2] / color[1], color[2], (1. - color[0] - color[1]) * color[2] / color[1], 1.);
 
 	gl_FrontColor = color*brightnessScale;
 }
