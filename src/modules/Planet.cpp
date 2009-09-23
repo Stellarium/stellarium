@@ -238,7 +238,7 @@ void Planet::computePositionWithoutOrbits(const double date)
 void Planet::computePosition(const double date)
 {
 
-	if (deltaOrbitJD > 0 && (fabs(lastOrbitJD-date)>deltaOrbitJD || !orbitCached))
+	if (orbitFader.getInterstate()>0.000001 && deltaOrbitJD > 0 && (fabs(lastOrbitJD-date)>deltaOrbitJD || !orbitCached))
 	{
 
 		// calculate orbit first (for line drawing)
