@@ -64,13 +64,13 @@ class StelScriptThread : public QThread
 			// For startup scripts, the gui object might not
 			// have completed init when we run. Wait for that.
 			StelGui* gui = GETSTELMODULE(StelGui);
-			while(!gui)
+			while (!gui)
 			{
-				msleep(200);
+				msleep(50);
 				gui = GETSTELMODULE(StelGui);
 			}
-			while(!gui->initComplete())
-				msleep(200);
+			while (!gui->initComplete())
+				msleep(50);
 
 			engine->evaluate(scriptCode);
 		}

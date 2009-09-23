@@ -33,7 +33,6 @@
 #include "StelMainGraphicsView.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelGui.hpp"
 #include "StelTranslator.hpp"
 
 // Initialize static variables
@@ -122,7 +121,7 @@ void StelMainWindow::setFullScreen(bool b)
 void StelMainWindow::closeEvent(QCloseEvent* event)
 {
 	event->ignore();
-	GETSTELMODULE(StelGui)->quitStellarium();
+	StelApp::getInstance().quitStellarium();
 }
 
 void StelMainWindow::resizeEvent(QResizeEvent* event)
