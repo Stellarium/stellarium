@@ -45,11 +45,9 @@
 #include "StelStyle.hpp"
 #include "StelSkyDrawer.hpp"
 #include "MeteorMgr.hpp"
-#include "DownloadPopup.hpp"
 #ifdef ENABLE_SCRIPT_CONSOLE
 #include "ScriptConsole.hpp"
 #endif
-#include "StelDownloadMgr.hpp"
 #include "StelScriptMgr.hpp"
 
 #include <QDebug>
@@ -230,7 +228,7 @@ void StelGui::init()
 	
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
-	connect(getGuiActions("actionQuit_Global"), SIGNAL(triggered()), this, SLOT(quitStellarium()));
+	connect(getGuiActions("actionQuit_Global"), SIGNAL(triggered()), &StelApp::getInstance(), SLOT(quitStellarium()));
 
 	// Debug
 	connect(getGuiActions("action_Reload_Style"), SIGNAL(triggered()), this, SLOT(reloadStyle()));
@@ -727,34 +725,6 @@ void StelGui::decreaseScriptSpeed()
 void StelGui::setRealScriptSpeed()
 {
 	StelApp::getInstance().getScriptMgr().setScriptRate(1);
-}
-
-void StelGui::quitStellarium()
-{
-	if(StelApp::getInstance().getDownloadMgr().blockQuit())
-	{
-		downloadPopup.setVisible(true);
-		downloadPopup.setText(QString("Stellarium is still downloading the star "
-			"catalog %1. Would you like to cancel the download and quit "
-			"Stellarium? (You can always restart the download at a later time.)")
-			.arg(StelApp::getInstance().getDownloadMgr().name()));
-
-		connect(&downloadPopup, SIGNAL(cancelClicked()), this, SLOT(cancelDownloadAndQuit()));
-		connect(&downloadPopup, SIGNAL(continueClicked()), this, SLOT(dontQuit()));
-	}
-	else
-		QCoreApplication::exit();
-}
-
-void StelGui::cancelDownloadAndQuit()
-{
-	StelApp::getInstance().getDownloadMgr().abort();
-	QCoreApplication::exit();
-}
-
-void StelGui::dontQuit()
-{
-	downloadPopup.setVisible(false);
 }
 
 QPixmap StelGui::makeRed(const QPixmap& p)

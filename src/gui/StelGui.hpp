@@ -28,7 +28,6 @@
 #include "DateTimeDialog.hpp"
 #include "SearchDialog.hpp"
 #include "ConfigurationDialog.hpp"
-#include "DownloadPopup.hpp"
 #ifdef ENABLE_SCRIPT_CONSOLE
 #include "ScriptConsole.hpp"
 #endif
@@ -121,8 +120,6 @@ public:
 
 	//! returns true if the gui has complted init process.
 	bool initComplete(void) {return initDone;}
-	
-	DownloadPopup* getDownloadPopup() {return &downloadPopup;}
 
 #ifdef ENABLE_SCRIPT_CONSOLE
 	ScriptConsole* getScriptConsole() {return &scriptConsole;}
@@ -168,13 +165,8 @@ public slots:
 	void decreaseScriptSpeed();
 	void setRealScriptSpeed();
 
-	//! close the program
-	void quitStellarium();
-
 private slots:
 	void reloadStyle();
-	void cancelDownloadAndQuit();
-	void dontQuit();
 	
 	//! Called each time a GUI action is triggered
 	void guiActionTriggered(bool b=false);
@@ -196,7 +188,6 @@ private:
 	SearchDialog searchDialog;
 	ViewDialog viewDialog;
 	ConfigurationDialog configurationDialog;
-	DownloadPopup downloadPopup;
 #ifdef ENABLE_SCRIPT_CONSOLE
 	ScriptConsole scriptConsole;
 #endif

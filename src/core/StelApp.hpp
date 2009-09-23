@@ -223,6 +223,9 @@ public slots:
 	//! Connect this slot to QNetworkAccessManager::finished() slot to obtain statistics at the end of the program.
 	void reportFileDownloadFinished(QNetworkReply* reply);
 
+	//! close the program
+	void quitStellarium();
+	
 signals:
 	void minFpsChanged();
 
