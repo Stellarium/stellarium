@@ -68,6 +68,7 @@
 #include <QSysInfo>
 #include <QNetworkProxy>
 #include <QGLWidget>
+#include <QMessageBox>
 
 #ifdef WIN32
 #include <windows.h>
@@ -1429,4 +1430,21 @@ void StelApp::makeMainGLContextCurrent()
 	Q_ASSERT(StelMainGraphicsView::getInstance().getOpenGLWin()!=NULL);
 	Q_ASSERT(StelMainGraphicsView::getInstance().getOpenGLWin()->isValid());
 	StelMainGraphicsView::getInstance().getOpenGLWin()->makeCurrent();
+}
+
+void StelApp::quitStellarium()
+{
+	if (getDownloadMgr().blockQuit())
+	{
+		QMessageBox::StandardButtons b = QMessageBox::question(0, q_("Download in progress"), q_("Stellarium is still downloading the file %1. Would you like to cancel the download and quit Stellarium?").arg(getDownloadMgr().name()), QMessageBox::Yes|QMessageBox::No, QMessageBox::No);
+		if (b==QMessageBox::Yes)
+		{
+			getDownloadMgr().abort();
+		}
+		else
+		{
+			return;	// Cancel quit
+		}
+	}
+	QCoreApplication::exit();
 }
