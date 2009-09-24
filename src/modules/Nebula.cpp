@@ -163,8 +163,6 @@ void Nebula::drawLabel(const StelPainter& sPainter, float maxMagLabel)
 	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
 }
 
-QFile filess("filess.dat");
-QDataStream out;
 
 void Nebula::readNGC(QDataStream& in)
 {
@@ -186,6 +184,8 @@ void Nebula::readNGC(QDataStream& in)
 }
 
 #if 0
+QFile filess("filess.dat");
+QDataStream out;
 bool Nebula::readNGC(char *recordstr)
 {
 	int rahr;
