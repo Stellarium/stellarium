@@ -33,6 +33,7 @@
 #include "StelPainter.hpp"
 
 #include <QDebug>
+#include <QBuffer>
 
 StelTextureSP Nebula::texCircle;
 float Nebula::circleScale = 1.f;
@@ -162,6 +163,29 @@ void Nebula::drawLabel(const StelPainter& sPainter, float maxMagLabel)
 	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
 }
 
+QFile filess("filess.dat");
+QDataStream out;
+
+void Nebula::readNGC(QDataStream& in)
+{
+	bool isIc;
+	int nb;
+	float ra, dec;
+	unsigned int type;
+	in >> isIc >> nb >> ra >> dec >> mag >> angularSize >> type;
+	if (isIc)
+	{
+		IC_nb = nb;
+	}
+	else
+	{
+		NGC_nb = nb;
+	}
+	StelUtils::spheToRect(ra,dec,XYZ);
+	nType = (Nebula::NebulaType)type;
+}
+
+#if 0
 bool Nebula::readNGC(char *recordstr)
 {
 	int rahr;
@@ -203,9 +227,6 @@ bool Nebula::readNGC(char *recordstr)
 	angularSize = size/60;
 	if (angularSize<0)
 		angularSize=0;
-	
-	if (size < 0)
-		size = 1;
 
 	// this is a huge performance drag if called every frame, so cache here
 	if (!strncmp(&recordstr[8],"Gx",2)) { nType = NebGx;}
@@ -221,9 +242,19 @@ bool Nebula::readNGC(char *recordstr)
 	else if (!strncmp(&recordstr[7],"C+N",3)) { nType = NebCn;}
 	else if (!strncmp(&recordstr[8]," ?",2)) { nType = NebUnknown;}
 	else { nType = NebUnknown;}
-
+	
+	if (!filess.isOpen())
+	{
+		filess.open(QIODevice::WriteOnly);
+		out.setDevice(&filess);
+	}
+	out << ((bool)(recordstr[0] == 'I')) << nb << RaRad << DecRad << mag << angularSize << ((unsigned int)nType);
+	if (nb==5369 && recordstr[0] == 'I')
+		filess.close();
+	
 	return true;
 }
+#endif
 
 QString Nebula::getTypeString(void) const
 {
