@@ -26,6 +26,7 @@
 #include "StelTextureTypes.hpp"
 
 class StelPainter;
+class QDataStream;
 
 class Nebula : public StelObject
 {
@@ -72,22 +73,23 @@ private:
 	//! @enum NebulaType Nebula types
 	enum NebulaType
 	{
-		NebGx,     //!< Galaxy
-		NebOc,     //!< Open star cluster
-		NebGc,     //!< Globular star cluster, usually in the Milky Way Galaxy
-		NebN,      //!< Bright emission or reflection nebula
-		NebPn,     //!< Planetary nebula
-		NebDn,     //!< ???
-		NebIg,     //!< ???
-		NebCn,     //!< Cluster associated with nebulosity
-		NebUnknown //!< Unknown type
+		NebGx=0,     //!< Galaxy
+		NebOc=1,     //!< Open star cluster
+		NebGc=2,     //!< Globular star cluster, usually in the Milky Way Galaxy
+		NebN=3,      //!< Bright emission or reflection nebula
+		NebPn=4,     //!< Planetary nebula
+		NebDn=5,     //!< ???
+		NebIg=6,     //!< ???
+		NebCn=7,     //!< Cluster associated with nebulosity
+		NebUnknown=8 //!< Unknown type
 	};
 
 	//! Translate nebula name using the passed translator
 	void translateName(StelTranslator& trans) {nameI18 = trans.qtranslate(englishName);}
 
 	bool readNGC(char *record);
-
+	void readNGC(QDataStream& in);
+			
 	void drawLabel(const StelPainter& sPainter, float maxMagLabel);
 	void drawHints(const StelPainter& sPainter, float maxMagHints);
 

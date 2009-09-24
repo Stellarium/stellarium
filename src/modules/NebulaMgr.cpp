@@ -311,9 +311,9 @@ NebulaP NebulaMgr::searchIC(unsigned int IC)
 	return NebulaP();
 }
 
-
+#if 0
 // read from stream
-bool NebulaMgr::loadNGC(const QString& catNGC)
+bool NebulaMgr::loadNGCOld(const QString& catNGC)
 {
 	StelLoadingBar& lb = *StelApp::getInstance().getStelLoadingBar();
 	QFile in(catNGC);
@@ -370,7 +370,35 @@ bool NebulaMgr::loadNGC(const QString& catNGC)
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "NGC records";
 	return true;
 }
+#endif
 
+bool NebulaMgr::loadNGC(const QString& catNGC)
+{
+	StelLoadingBar& lb = *StelApp::getInstance().getStelLoadingBar();
+	QFile in(catNGC);
+	if (!in.open(QIODevice::ReadOnly))
+		return false;
+	QDataStream ins(&in);
+	lb.SetMessage(q_("Loading NGC catalog"));
+	lb.Draw(0);
+	
+	int totalRecords=0;
+	while (!ins.atEnd())
+	{
+		// Create a new Nebula record
+		NebulaP e = NebulaP(new Nebula);
+		e->readNGC(ins);
+		
+		nebArray.append(e);
+		nebGrid.insert(qSharedPointerCast<StelRegionObject>(e));
+		if (e->NGC_nb!=0)
+			ngcIndex.insert(e->NGC_nb, e);
+		++totalRecords;
+	}
+	in.close();
+	qDebug() << "Loaded" << totalRecords << "NGC records";
+	return true;
+}
 
 bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 {
