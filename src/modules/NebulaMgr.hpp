@@ -181,6 +181,7 @@ private:
 	NebulaP searchNGC(unsigned int NGC);
 	NebulaP searchIC(unsigned int IC);
 	bool loadNGC(const QString& fileName);
+	bool loadNGCOld(const QString& catNGC);
 	bool loadNGCNames(const QString& fileName);
 
 	QList<NebulaP> nebArray;		// The nebulas list
