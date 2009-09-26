@@ -107,6 +107,7 @@ private slots:
 
 	void populatePluginsList(void);
 	void pluginsSelectionChanged(const QString&);
+	void pluginConfigureCurrentSelection(void);
 	void loadAtStartupChanged(int);
 
 	//! The selection of script in the script list has changed

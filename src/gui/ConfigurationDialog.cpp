@@ -212,6 +212,7 @@ void ConfigurationDialog::createDialogContent()
 	// plugins control
 	connect(ui->pluginsListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(pluginsSelectionChanged(const QString&)));
 	connect(ui->pluginLoadAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(loadAtStartupChanged(int)));
+	connect(ui->pluginConfigureButton, SIGNAL(clicked()), this, SLOT(pluginConfigureCurrentSelection()));
 	populatePluginsList();
 
 
@@ -511,6 +512,32 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 			html += "</body></html>";
 			ui->pluginsInfoBrowser->setHtml(html);
 			ui->pluginLoadAtStartupCheckBox->setChecked(desc.loadAtStartup);
+			StelModule* pmod = StelApp::getInstance().getModuleMgr().getModule(desc.info.id);
+			if (pmod != NULL)
+				ui->pluginConfigureButton->setEnabled(pmod->configureGui(false));
+			else
+				ui->pluginConfigureButton->setEnabled(false);
+			return;
+		}
+	}
+}
+
+void ConfigurationDialog::pluginConfigureCurrentSelection(void)
+{
+	QString s = ui->pluginsListWidget->currentItem()->text();
+	if (s.isEmpty() || s=="")
+		return;
+
+	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
+	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
+	{
+		if (s==desc.info.displayedName)
+		{
+			StelModule* pmod = StelApp::getInstance().getModuleMgr().getModule(desc.info.id);
+			if (pmod != NULL)
+			{
+				pmod->configureGui(true);
+			}
 			return;
 		}
 	}
