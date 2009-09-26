@@ -982,7 +982,7 @@
               <property name="title">
                <string>Options</string>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_14">
+              <layout class="QHBoxLayout" name="horizontalLayout_8">
                <property name="margin">
                 <number>0</number>
                </property>
@@ -990,6 +990,16 @@
                 <widget class="QCheckBox" name="pluginLoadAtStartupCheckBox">
                  <property name="text">
                   <string>Load at startup</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pluginConfigureButton">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>configure</string>
                  </property>
                 </widget>
                </item>
