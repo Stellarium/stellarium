@@ -578,7 +578,7 @@ QSpinBox,QTimeEdit,QDateTimeEdit,QDoubleSpinBox,QComboBox,AngleSpinBox {
 	min-height: 22px;
 }
 
-QSpinBox::up-button,QTimeEdit::up-button,QDoubleSpinBox::up-button,AngleSpinBox::up-button {
+QSpinBox::up-button,QTimeEdit::up-button,QDoubleSpinBox::up-button,AngleSpinBox::up-button,QDateTimeEdit::up-button {
 	subcontrol-origin: border;
 	subcontrol-position: top right;
 	width: 20px;
@@ -589,7 +589,7 @@ QSpinBox::up-button,QTimeEdit::up-button,QDoubleSpinBox::up-button,AngleSpinBox:
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 92), stop: 1 rgb(74, 74, 75));
 }
 
-QSpinBox::down-button,QTimeEdit::down-button,QDoubleSpinBox::down-button,AngleSpinBox::down-button {
+QSpinBox::down-button,QTimeEdit::down-button,QDoubleSpinBox::down-button,AngleSpinBox::down-button,QDateTimeEdit::down-button {
 	subcontrol-origin: border;
 	subcontrol-position: bottom right;
 	width: 20px;
@@ -873,3 +873,4 @@ QWidget#listManagerWidget {
 QGraphicsWidget#observationListView  QLabel {
         font-size: 40px;
 }
+

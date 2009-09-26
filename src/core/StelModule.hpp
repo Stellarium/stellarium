@@ -131,6 +131,13 @@ public:
 	//! @param actionName the name of the action for which we want the call order
 	//! @return the value defining the order. The closer to 0 the earlier the module's action will be called
 	virtual double getCallOrder(StelModuleActionName actionName) const {return 0;}
+
+	//! Detect or show the configuration GUI elements for the module.  This is to be used with
+	//! plugins to display a configuration dialog from the plugin list window.
+	//! @param show if true, make the configuration GUI visible.  If false, hide the config GUI if there is one.
+	//! @return true if the module has a configuration GUI, else false.
+	virtual bool configureGui(bool show=true) {return false;}
+
 };
 
 #endif // _STELMODULE_HPP_
