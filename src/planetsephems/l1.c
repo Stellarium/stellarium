@@ -928,7 +928,6 @@ static void CalcL1Elem(const double t,const int body,double elem[6]) {
     }
   }
 
-  elem++;
   for (j=0;j<5;j++) {
     elem[j] += (*cheb++);
   }
@@ -961,7 +960,7 @@ static void CalcL1Elem(const double t,const int body,double elem[6]) {
     }
   }
 
-  elem[0] += t*bp->l;
+  elem[1] += t*bp->l;
 }
 
 
