@@ -414,6 +414,10 @@ public slots:
 	//! if the script rate was 1.
 	void setScriptRate(double r);
 
+	//! Set the amount of selected object information to display
+	//! @param level, can be "AllInfo", "ShortInfo", "None"
+	void setSelectedObjectInfo(const QString& level);
+
 	//! stop the script
 	void exit(void);
 

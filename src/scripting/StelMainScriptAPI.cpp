@@ -441,6 +441,18 @@ void StelMainScriptAPI::setScriptRate(double r)
 	return scriptSleeper.setRate(r);
 }
 
+void StelMainScriptAPI::setSelectedObjectInfo(const QString& level)
+{
+	if (level == "AllInfo")
+		GETSTELMODULE(StelGui)->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
+	else if (level == "ShortInfo")
+		GETSTELMODULE(StelGui)->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
+	else if (level == "None")
+		GETSTELMODULE(StelGui)->getInfoPanel()->setInfoTextFilters((StelObject::InfoStringGroup)0);
+	else
+		qWarning() << "setSelectedObjectInfo unknown level string \"" << level << "\"";
+}
+
 void StelMainScriptAPI::exit(void)
 {
 	emit(requestExit());
