@@ -38,11 +38,7 @@
 #include <QGLWidget>
 #include <QNetworkReply>
 
-#if defined(__APPLE__) && defined(__MACH__)
-#include <OpenGL/glu.h>	/* Header File For The GLU Library */
-#else
-#include <GL/glu.h>	/* Header File For The GLU Library */
-#endif
+#include "glues.h"
 
 // Initialize statics
 QSemaphore* StelTexture::maxLoadThreadSemaphore = new QSemaphore(5);
