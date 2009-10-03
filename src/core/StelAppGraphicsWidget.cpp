@@ -26,18 +26,22 @@
 
 #include <QtOpenGL>
 
-StelAppGraphicsWidget::StelAppGraphicsWidget()
+StelAppGraphicsWidget::StelAppGraphicsWidget(int argc, char** argv)
 {
+	StelApp::initStatic();
 	previousTime = StelApp::getTotalRunTime();
 	setFocusPolicy(Qt::StrongFocus);
+	stelApp = new StelApp(argc, argv);
 }
 
 StelAppGraphicsWidget::~StelAppGraphicsWidget()
 {
+	delete stelApp;
 }
 
 void StelAppGraphicsWidget::init()
 {
+	stelApp->init();
 }
 
 void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
@@ -63,9 +67,8 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 
 	StelPainter::setQPainter(painter);
 	// And draw them
-	StelApp::getInstance().draw();
+	stelApp->draw();
 	StelPainter::setQPainter(NULL);
-
 }
 
 
@@ -74,7 +77,7 @@ void StelAppGraphicsWidget::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 	int x = (int)event->scenePos().x();
 	int y = (int)event->scenePos().y();
 	y = scene()->height() - 1 - y;
-	StelApp::getInstance().handleMove(x, y, event->buttons());
+	stelApp->handleMove(x, y, event->buttons());
 }
 
 void StelAppGraphicsWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)
@@ -83,7 +86,7 @@ void StelAppGraphicsWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)
 	int y = (int)event->scenePos().y();
 	y = scene()->height() - 1 - y;
 	QMouseEvent newEvent(QEvent::MouseButtonPress, QPoint(x,y), event->button(), event->buttons(), event->modifiers());
-	StelApp::getInstance().handleClick(&newEvent);
+	stelApp->handleClick(&newEvent);
 }
 
 void StelAppGraphicsWidget::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
@@ -92,7 +95,7 @@ void StelAppGraphicsWidget::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 	int y = (int)event->scenePos().y();
 	y = scene()->height() - 1 - y;
 	QMouseEvent newEvent(QEvent::MouseButtonRelease, QPoint(x,y), event->button(), event->buttons(), event->modifiers());
-	StelApp::getInstance().handleClick(&newEvent);
+	stelApp->handleClick(&newEvent);
 }
 
 void StelAppGraphicsWidget::wheelEvent(QGraphicsSceneWheelEvent* event)
@@ -101,21 +104,21 @@ void StelAppGraphicsWidget::wheelEvent(QGraphicsSceneWheelEvent* event)
 	int y = (int)event->scenePos().y();
 	y = scene()->height() - 1 - y;
 	QWheelEvent newEvent(QPoint(x,y), event->delta(), event->buttons(), event->modifiers(), event->orientation());
-	StelApp::getInstance().handleWheel(&newEvent);
+	stelApp->handleWheel(&newEvent);
 }
 
 void StelAppGraphicsWidget::keyPressEvent(QKeyEvent* event)
 {
-	StelApp::getInstance().handleKeys(event);
+	stelApp->handleKeys(event);
 }
 
 void StelAppGraphicsWidget::keyReleaseEvent(QKeyEvent* event)
 {
-	StelApp::getInstance().handleKeys(event);
+	stelApp->handleKeys(event);
 }
 
 void StelAppGraphicsWidget::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
 	QGraphicsWidget::resizeEvent(event);
-	StelApp::getInstance().glWindowHasBeenResized(scenePos().x(), scene()->sceneRect().height()-(scenePos().y()+geometry().height()), geometry().width(), geometry().height());
+	stelApp->glWindowHasBeenResized(scenePos().x(), scene()->sceneRect().height()-(scenePos().y()+geometry().height()), geometry().width(), geometry().height());
 }

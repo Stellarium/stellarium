@@ -21,6 +21,7 @@
 #define _SKYGUI_HPP_
 
 #include "StelStyle.hpp"
+#include "StelObject.hpp"
 
 #include <QDebug>
 #include <QGraphicsWidget>
@@ -31,6 +32,19 @@ class QGraphicsTextItem;
 class QTimeLine;
 class StelButton;
 class BottomStelBar;
+
+
+//! The informations about the currently selected object
+class InfoPanel : public QGraphicsTextItem
+{
+	public:
+		InfoPanel(QGraphicsItem* parent);
+		void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {infoTextFilters=aflags;}
+		const StelObject::InfoStringGroup& getInfoTextFilters(void) const {return infoTextFilters;}
+		void setTextFromObjects(const QList<StelObjectP>&);
+	private:
+		StelObject::InfoStringGroup infoTextFilters;
+};
 
 //! The class managing the layout for button bars, selected object info and loading bars.
 class SkyGui: public QGraphicsWidget
@@ -50,7 +64,9 @@ public:
 	
 	//! Load color scheme from the given ini file and section name
 	void setStelStyle(const StelStyle& style);
-			
+
+	virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget* = 0);
+	
 protected:
 	virtual void resizeEvent(QGraphicsSceneResizeEvent* event);
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event);
@@ -77,6 +93,8 @@ private:
 
 	bool autoHideHorizontalButtonBar;
 	bool autoHideVerticalButtonBar;
+	
+	StelGui* stelGui;
 };
 
 #endif // _SKYGUI_HPP_

@@ -26,12 +26,12 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
-#include "StelGui.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelNavigator.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelSkyLayerMgr.hpp"
+#include "StelMainGraphicsView.hpp"
 
 #include <QAction>
 #include <QDateTime>
@@ -63,15 +63,7 @@ class StelScriptThread : public QThread
 
 			// For startup scripts, the gui object might not
 			// have completed init when we run. Wait for that.
-			StelGui* gui = GETSTELMODULE(StelGui);
-			while (!gui)
-			{
-				msleep(50);
-				gui = GETSTELMODULE(StelGui);
-			}
-			while (!gui->initComplete())
-				msleep(50);
-
+			Q_ASSERT(StelMainGraphicsView::getInstance().getGui());
 			engine->evaluate(scriptCode);
 		}
 
@@ -360,7 +352,6 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 	thread = new StelScriptThread(QTextStream(&tmpFile).readAll(), &engine, fileName);
 	tmpFile.close();
 
-	GETSTELMODULE(StelGui)->setScriptKeys(true);
 	connect(thread, SIGNAL(finished()), this, SLOT(scriptEnded()));
 	thread->start();
 	emit(scriptRunning());
@@ -410,7 +401,6 @@ void StelScriptMgr::debug(const QString& msg)
 
 void StelScriptMgr::scriptEnded()
 {
-	GETSTELMODULE(StelGui)->setScriptKeys(false);
 	mainAPI->getScriptSleeper().setRate(1);
 	thread->deleteLater();
 	thread=NULL;

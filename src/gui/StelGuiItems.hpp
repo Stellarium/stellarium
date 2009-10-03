@@ -96,6 +96,9 @@ public:
 	//! Activate red mode for this button, i.e. will reduce the non red color component of the icon
 	void setRedMode(bool b) {redMode=b; updateIcon();}
 
+	//! Transform the pixmap so that it look red for night vision mode
+	static QPixmap makeRed(const QPixmap& p);
+
 signals:
 	//! Triggered when the button state changes
 	void toggled(bool);

@@ -230,6 +230,8 @@ signals:
 	void minFpsChanged();
 
 private:
+	static void initStatic();
+	
 	//! Handle mouse clics.
 	void handleClick(class QMouseEvent* event);
 	//! Handle mouse wheel.

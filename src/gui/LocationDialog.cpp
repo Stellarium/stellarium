@@ -31,6 +31,8 @@
 #include "StelFileMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelGui.hpp"
+#include "StelGuiItems.hpp"
+
 #include <QSettings>
 #include <QDebug>
 #include <QFrame>
@@ -242,7 +244,7 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 
 	if (StelApp::getInstance().getVisionModeNight())
 	{
-		ui->mapLabel->setPixmap(StelGui::makeRed(pixmap));
+		ui->mapLabel->setPixmap(StelButton::makeRed(pixmap));
 	}
 	else
 	{

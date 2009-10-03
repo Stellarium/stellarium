@@ -45,7 +45,7 @@
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
 StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** argv)
-	: QGraphicsView(parent),
+	: QGraphicsView(parent), gui(NULL),
 	  wasDeinit(false),
 	  flagInvertScreenShotColors(false),
 	  screenShotPrefix("stellarium-"),
@@ -77,17 +77,18 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	//setRenderHint(QPainter::TextAntialiasing, false);
 	//setOptimizationFlags(QGraphicsView::DontClipPainter|QGraphicsView::DontSavePainterState|QGraphicsView::DontAdjustForAntialiasing);
 
-	// Create the main instance of stellarium
-	stelApp = new StelApp(argc, argv);
-
 	setScene(new QGraphicsScene());
+	
+	// Create the main widget for stellarium, this in turn the create the main StelApp instance.
+	mainSkyItem = new StelAppGraphicsWidget(argc, argv);
+
 	distorter = StelViewportDistorter::create("none",800,600,StelProjectorP());
 	lastEventTimeSec = StelApp::getTotalRunTime();
 
 	backItem = new QGraphicsWidget();
 	backItem->setFocusPolicy(Qt::NoFocus);
 	QGraphicsGridLayout* l = new QGraphicsGridLayout(backItem);
-	mainSkyItem = new StelAppGraphicsWidget();
+	
 	mainSkyItem->setZValue(-10);
 	l->addItem(mainSkyItem, 0, 0);
 	l->setContentsMargins(0,0,0,0);
@@ -120,8 +121,11 @@ void StelMainGraphicsView::init()
 	QPainter qPainter(glWidget);
 	StelPainter::setQPainter(&qPainter);
 	glWidget->makeCurrent();
-	stelApp->init();
+	
+	// Initialize all, including the StelApp instance.
+	mainSkyItem->init();
 
+	// This is a hack avoiding to have 2 config files
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
@@ -129,16 +133,15 @@ void StelMainGraphicsView::init()
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.).toDouble());
 	setViewPortDistorterType(conf->value("video/distorter","none").toString());
 
-	StelGui* newGui = new StelGui();
-	newGui->init();
-	stelApp->getModuleMgr().registerModule(newGui, true);
+	gui = new StelGui();
+	gui->init(backItem, mainSkyItem);
 
-	stelApp->initPlugIns();
+	StelApp::getInstance().initPlugIns();
 
-	// For refreshing of button bars if plugins modified the GUI, e.g. added buttons.
-	newGui->forceRefreshGui();
+	// Force refreshing of button bars if plugins modified the GUI, e.g. added buttons.
+	gui->forceRefreshGui();
 
-	stelApp->getScriptMgr().runScript(stelApp->getStartupScript());
+	StelApp::getInstance().getScriptMgr().runScript(StelApp::getInstance().getStartupScript());
 
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
 	StelPainter::setQPainter(NULL);
@@ -223,10 +226,6 @@ void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
 		scene()->setSceneRect(QRect(QPoint(0, 0), event->size()));
 	backItem->setGeometry(0,0,event->size().width(),event->size().height());
 	QGraphicsView::resizeEvent(event);
-
-// 	if (!distorter || (distorter && distorter->getType() == "none"))
-// 	{
-// 	}
 }
 
 void StelMainGraphicsView::mouseMoveEvent(QMouseEvent* event)
@@ -341,10 +340,7 @@ void StelMainGraphicsView::deinitGL()
 	wasDeinit = true;
 	StelApp::getInstance().getModuleMgr().unloadAllPlugins();
 	QCoreApplication::processEvents();
-	StelApp::getInstance().getModuleMgr().unloadModule("StelGui");
-	QCoreApplication::processEvents();
-	StelApp* stelApp = &StelApp::getInstance();
-	delete stelApp;
+	delete mainSkyItem;
 }
 
 void StelMainGraphicsView::saveScreenShot(const QString& filePrefix, const QString& saveDir)
@@ -399,9 +395,3 @@ void StelMainGraphicsView::doScreenshot(void)
 		return;
 }
 
-// Add a new progress bar in the lower right corner of the screen.
-class QProgressBar* StelMainGraphicsView::addProgressBar()
-{
-	StelGui* gui = GETSTELMODULE(StelGui);
-	return gui->addProgressBar();
-}

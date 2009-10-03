@@ -80,6 +80,12 @@ QTime* StelApp::qtime = NULL;
 QFile StelApp::logFile;
 QString StelApp::log;
 
+void StelApp::initStatic()
+{
+	StelApp::qtime = new QTime();
+	StelApp::qtime->start();
+}
+
 /*************************************************************************
  Create and initialize the main Stellarium application.
 *************************************************************************/
@@ -134,9 +140,6 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	}
 	if (logFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
 		qInstallMsgHandler(StelApp::debugLogHandler);
-
-	StelApp::qtime = new QTime();
-	StelApp::qtime->start();
 
 	// Print system info to log file
 	setupLog();
