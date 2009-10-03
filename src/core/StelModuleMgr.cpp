@@ -59,7 +59,7 @@ Q_IMPORT_PLUGIN(TextUserInterface)
 Q_IMPORT_PLUGIN(Oculars)
 #endif
 
-StelModuleMgr::StelModuleMgr() : pluginDescriptorListLoaded(false)
+		StelModuleMgr::StelModuleMgr() : callingListsToRegenerate(true), pluginDescriptorListLoaded(false)
 {
 	// Initialize empty call lists for each possible actions
 	callOrders[StelModule::ActionDraw]=QList<StelModule*>();
@@ -67,7 +67,6 @@ StelModuleMgr::StelModuleMgr() : pluginDescriptorListLoaded(false)
 	callOrders[StelModule::ActionHandleMouseClicks]=QList<StelModule*>();
 	callOrders[StelModule::ActionHandleMouseMoves]=QList<StelModule*>();
 	callOrders[StelModule::ActionHandleKeys]=QList<StelModule*>();
-	callingListsToRegenerate = false;
 }
 
 StelModuleMgr::~StelModuleMgr()

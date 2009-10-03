@@ -25,7 +25,6 @@
 #include "StelLocaleMgr.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelLocation.hpp"
-#include "StelGui.hpp"
 #include "StelMovementMgr.hpp"
 
 #include <QPainter>
@@ -55,12 +54,12 @@ StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixm
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());
 
-	pixOnRed = StelGui::makeRed(pixOn);
-	pixOffRed = StelGui::makeRed(pixOff);
+	pixOnRed = StelButton::makeRed(pixOn);
+	pixOffRed = StelButton::makeRed(pixOff);
 	if (!pixHover.isNull())
-		pixHoverRed = StelGui::makeRed(pixHover);
+		pixHoverRed = StelButton::makeRed(pixHover);
 	if (!pixBackground.isNull())
-		pixBackgroundRed = StelGui::makeRed(pixBackground);
+		pixBackgroundRed = StelButton::makeRed(pixBackground);
 
 	setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
 	setAcceptsHoverEvents(true);
@@ -92,16 +91,16 @@ StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixm
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());
 
-	pixOnRed = StelGui::makeRed(pixOn);
-	pixOffRed = StelGui::makeRed(pixOff);
+	pixOnRed = StelButton::makeRed(pixOn);
+	pixOffRed = StelButton::makeRed(pixOff);
 	if (isTristate_) {
 		Q_ASSERT(!pixNoChange.isNull());
-		pixNoChangeRed = StelGui::makeRed(pixNoChange);
+		pixNoChangeRed = StelButton::makeRed(pixNoChange);
 	}
 	if (!pixHover.isNull())
-		pixHoverRed = StelGui::makeRed(pixHover);
+		pixHoverRed = StelButton::makeRed(pixHover);
 	if (!pixBackground.isNull())
-		pixBackgroundRed = StelGui::makeRed(pixBackground);
+		pixBackgroundRed = StelButton::makeRed(pixBackground);
 
 	setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
 	setAcceptsHoverEvents(true);
@@ -199,6 +198,23 @@ void StelButton::setChecked(int b)
 	checked=b;
 	updateIcon();
 }
+
+QPixmap StelButton::makeRed(const QPixmap& p)
+{
+	QImage im = p.toImage().convertToFormat(QImage::Format_ARGB32);
+	Q_ASSERT(im.format()==QImage::Format_ARGB32);
+	QRgb* bits = (QRgb*)im.bits();
+	const QRgb* stop = bits+im.width()*im.height();
+	do
+	{
+		*bits = qRgba(qRed(*bits), (int)(0.2*qGreen(*bits)), (int)(0.2*qBlue(*bits)), qAlpha(*bits));
+		++bits;
+	}
+	while (bits!=stop);
+
+	return QPixmap::fromImage(im);
+}
+
 
 LeftStelBar::LeftStelBar(QGraphicsItem* parent) : QGraphicsItem(parent)
 {

@@ -37,6 +37,7 @@
 #include "ConstellationMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelSkyLayerMgr.hpp"
+#include "StelGuiBase.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -153,9 +154,10 @@ void ViewDialog::createDialogContent()
 	ui->starLabelCheckBox->setChecked(smgr->getFlagLabels());
 	connect(ui->starLabelCheckBox, SIGNAL(toggled(bool)), smgr, SLOT(setFlagLabels(bool)));
 
+	StelGuiBase* gui = StelMainGraphicsView::getInstance().getGui();
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 	ui->nebulaLabelCheckBox->setChecked(nmgr->getFlagHints());
-	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Nebulas");
+	a = gui->getGuiActions("actionShow_Nebulas");
 	connect(a, SIGNAL(toggled(bool)), ui->nebulaLabelCheckBox, SLOT(setChecked(bool)));
 	connect(ui->nebulaLabelCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
@@ -172,7 +174,7 @@ void ViewDialog::createDialogContent()
 	// Landscape section
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	ui->showGroundCheckBox->setChecked(lmgr->getFlagLandscape());
-	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Ground");
+	a = gui->getGuiActions("actionShow_Ground");
 	connect(a, SIGNAL(toggled(bool)), ui->showGroundCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showGroundCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
@@ -180,7 +182,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->showFogCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagFog(bool)));
 
 	ui->showAtmosphereCheckBox->setChecked(lmgr->getFlagAtmosphere());
-	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Atmosphere");
+	a = gui->getGuiActions("actionShow_Atmosphere");
 	connect(a, SIGNAL(toggled(bool)), ui->showAtmosphereCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showAtmosphereCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
@@ -198,37 +200,37 @@ void ViewDialog::createDialogContent()
 	// Grid and lines
 	GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
 	ui->showEquatorLineCheckBox->setChecked(glmgr->getFlagEquatorLine());
-	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Equator_Line");
+	a = gui->getGuiActions("actionShow_Equator_Line");
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorLineCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEquatorLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showEclipticLineCheckBox->setChecked(glmgr->getFlagEclipticLine());
-	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Ecliptic_Line");
+	a = gui->getGuiActions("actionShow_Ecliptic_Line");
 	connect(a, SIGNAL(toggled(bool)), ui->showEclipticLineCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEclipticLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showMeridianLineCheckBox->setChecked(glmgr->getFlagMeridianLine());
-	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Meridian_Line");
+	a = gui->getGuiActions("actionShow_Meridian_Line");
 	connect(a, SIGNAL(toggled(bool)), ui->showMeridianLineCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showMeridianLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showEquatorialGridCheckBox->setChecked(glmgr->getFlagEquatorGrid());
-	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Equatorial_Grid");
+	a = gui->getGuiActions("actionShow_Equatorial_Grid");
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorialGridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEquatorialGridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showAzimuthalGridCheckBox->setChecked(glmgr->getFlagAzimuthalGrid());
-	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Azimuthal_Grid");
+	a = gui->getGuiActions("actionShow_Azimuthal_Grid");
 	connect(a, SIGNAL(toggled(bool)), ui->showAzimuthalGridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showAzimuthalGridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showEquatorialJ2000GridCheckBox->setChecked(glmgr->getFlagEquatorJ2000Grid());
-	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Equatorial_J2000_Grid");
+	a = gui->getGuiActions("actionShow_Equatorial_J2000_Grid");
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorialJ2000GridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEquatorialJ2000GridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showCardinalPointsCheckBox->setChecked(lmgr->getFlagCardinalsPoints());
-	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Cardinal_Points");
+	a = gui->getGuiActions("actionShow_Cardinal_Points");
 	connect(a, SIGNAL(toggled(bool)), ui->showCardinalPointsCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showCardinalPointsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
@@ -236,22 +238,22 @@ void ViewDialog::createDialogContent()
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 
 	ui->showConstellationLinesCheckBox->setChecked(cmgr->getFlagLines());
-	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Constellation_Lines");
+	a = gui->getGuiActions("actionShow_Constellation_Lines");
 	connect(a, SIGNAL(toggled(bool)), ui->showConstellationLinesCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showConstellationLinesCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showConstellationLabelsCheckBox->setChecked(cmgr->getFlagLabels());
-	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Constellation_Labels");
+	a = gui->getGuiActions("actionShow_Constellation_Labels");
 	connect(a, SIGNAL(toggled(bool)), ui->showConstellationLabelsCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showConstellationLabelsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showConstellationBoundariesCheckBox->setChecked(cmgr->getFlagBoundaries());
-	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Constellation_Boundaries");
+	a = gui->getGuiActions("actionShow_Constellation_Boundaries");
 	connect(a, SIGNAL(toggled(bool)), ui->showConstellationBoundariesCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showConstellationBoundariesCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showConstellationArtCheckBox->setChecked(cmgr->getFlagArt());
-	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Constellation_Art");
+	a = gui->getGuiActions("actionShow_Constellation_Art");
 	connect(a, SIGNAL(toggled(bool)), ui->showConstellationArtCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showConstellationArtCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 

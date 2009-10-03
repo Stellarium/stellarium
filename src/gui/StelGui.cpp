@@ -49,6 +49,7 @@
 #include "ScriptConsole.hpp"
 #endif
 #include "StelScriptMgr.hpp"
+#include "StelAppGraphicsWidget.hpp"
 
 #include <QDebug>
 #include <QTimeLine>
@@ -57,53 +58,14 @@
 #include <QAction>
 #include <QApplication>
 #include <QFile>
-#include <QTextDocument>
 #include <QTextBrowser>
 #include <QGraphicsWidget>
 #include <QGraphicsGridLayout>
 
 
-InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
-{
-	QSettings* conf = StelApp::getInstance().getSettings();
-		Q_ASSERT(conf);
-	QString objectInfo = conf->value("gui/selected_object_info", "all").toString();
-	if (objectInfo == "all")
-		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
-	else if (objectInfo == "short")
-		infoTextFilters = StelObject::InfoStringGroup(StelObject::ShortInfo);
-	else if (objectInfo == "none")
-		infoTextFilters = StelObject::InfoStringGroup(0);
-	else
-	{
-		qWarning() << "config.ini option gui/selected_object_info is invalid, using \"all\"";
-		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
-	}
-
-	QFont font("DejaVuSans");
-	font.setPixelSize(13);
-	setFont(font);
-}
-
-void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
-{
-	if (selected.size() == 0)
-	{
-		if (!document()->isEmpty())
-			document()->clear();
-	}
-	else
-	{
-		// just print details of the first item for now
-		QString s = selected[0]->getInfoString(StelApp::getInstance().getCore(), infoTextFilters);
-		setHtml(s);
-	}
-}
-
-StelGui::StelGui() : initDone(false)
+StelGui::StelGui() : topLevelGraphicsWidget(NULL), stelAppGraphicsWidget(NULL), configurationDialog(NULL), initDone(false)
 {
 	// QPixmapCache::setCacheLimit(30000); ?
-	setObjectName("StelGui");
 	flipHoriz = NULL;
 	flipVert = NULL;
 	btShowNebulaeBackground = NULL;
@@ -113,53 +75,44 @@ StelGui::~StelGui()
 {
 }
 
-/*************************************************************************
- Reimplementation of the getCallOrder method
-*************************************************************************/
-double StelGui::getCallOrder(StelModuleActionName actionName) const
-{
-	if (actionName==StelModule::ActionDraw)
-		return 100000;
-	if (actionName==StelModule::ActionHandleMouseMoves)
-		return -1;
-	return 0;
-}
-
-
-void StelGui::init()
+void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidget* astelAppGraphicsWidget)
 {
 	qDebug() << "Creating GUI ...";
 	
+	topLevelGraphicsWidget = atopLevelGraphicsWidget;
+	stelAppGraphicsWidget = astelAppGraphicsWidget;
+	
 	skyGui = new SkyGui();
+	configurationDialog = new ConfigurationDialog(this);
 	
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
 	QString group = N_("Display Options");
-	addGuiActions("actionShow_Constellation_Lines", N_("Constellation lines"), "C", group, true, false, "viewing/flag_constellation_drawing");
-	addGuiActions("actionShow_Constellation_Art", N_("Constellation art"), "R", group, true, false, "viewing/flag_constellation_art");
-	addGuiActions("actionShow_Constellation_Labels", N_("Constellation labels"), "V", group, true, false, "viewing/flag_constellation_name");
-	addGuiActions("actionShow_Constellation_Boundaries", N_("Constellation boundaries"), "B", group, true, false, "viewing/flag_constellation_boundaries");
+	addGuiActions("actionShow_Constellation_Lines", N_("Constellation lines"), "C", group, true, false);
+	addGuiActions("actionShow_Constellation_Art", N_("Constellation art"), "R", group, true, false);
+	addGuiActions("actionShow_Constellation_Labels", N_("Constellation labels"), "V", group, true, false);
+	addGuiActions("actionShow_Constellation_Boundaries", N_("Constellation boundaries"), "B", group, true, false);
 
-	addGuiActions("actionShow_Azimuthal_Grid", N_("Azimuthal grid"), "Z", group, true, false, "viewing/flag_azimuthal_grid");
-	addGuiActions("actionShow_Equatorial_Grid", N_("Equatorial grid"), "E", group, true, false, "viewing/flag_equatorial_grid");
-	addGuiActions("actionShow_Equatorial_J2000_Grid", N_("Equatorial J2000 grid"), "", group, true, false, "viewing/flag_equatorial_J2000_grid");
-	addGuiActions("actionShow_Ecliptic_Line", N_("Ecliptic line"), ",", group, true, false, "viewing/flag_ecliptic_line");
-	addGuiActions("actionShow_Equator_Line", N_("Equator line"), ".", group, true, false, "viewing/flag_equator_line");
-	addGuiActions("actionShow_Meridian_Line", N_("Meridian line"), ";", group, true, false, "viewing/flag_meridian_line");
-	addGuiActions("actionShow_Cardinal_Points", N_("Cardinal points"), "Q", group, true, false, "viewing/flag_cardinal_points");
+	addGuiActions("actionShow_Azimuthal_Grid", N_("Azimuthal grid"), "Z", group, true, false);
+	addGuiActions("actionShow_Equatorial_Grid", N_("Equatorial grid"), "E", group, true, false);
+	addGuiActions("actionShow_Equatorial_J2000_Grid", N_("Equatorial J2000 grid"), "", group, true, false);
+	addGuiActions("actionShow_Ecliptic_Line", N_("Ecliptic line"), ",", group, true, false);
+	addGuiActions("actionShow_Equator_Line", N_("Equator line"), ".", group, true, false);
+	addGuiActions("actionShow_Meridian_Line", N_("Meridian line"), ";", group, true, false);
+	addGuiActions("actionShow_Cardinal_Points", N_("Cardinal points"), "Q", group, true, false);
 
-	addGuiActions("actionShow_Ground", N_("Ground"), "G", group, true, false, "landscape/flag_landscape");
-	addGuiActions("actionShow_Atmosphere", N_("Atmosphere"), "A", group, true, false, "landscape/flag_atmosphere");
-	addGuiActions("actionShow_Fog", N_("Fog"), "F", group, true, false, "landscape/flag_fog");
+	addGuiActions("actionShow_Ground", N_("Ground"), "G", group, true, false);
+	addGuiActions("actionShow_Atmosphere", N_("Atmosphere"), "A", group, true, false);
+	addGuiActions("actionShow_Fog", N_("Fog"), "F", group, true, false);
 
-	addGuiActions("actionShow_Nebulas", N_("Nebulas"), "N", group, true, false, "astro/flag_nebula_name");
+	addGuiActions("actionShow_Nebulas", N_("Nebulas"), "N", group, true, false);
 	addGuiActions("actionShow_DSS", N_("Nebulas background images"), "", group, true, false);
-	addGuiActions("actionShow_Stars", N_("Stars"), "S", group, true, false, "astro/flag_stars");
-	addGuiActions("actionShow_Planets_Labels", N_("Planets labels"), "P", group, true, false, "astro/flag_planets_labels");
-	addGuiActions("actionShow_Planets_Orbits", N_("Planet orbits"), "O", group, true, false, "astro/flag_planets_orbits");
+	addGuiActions("actionShow_Stars", N_("Stars"), "S", group, true, false);
+	addGuiActions("actionShow_Planets_Labels", N_("Planets labels"), "P", group, true, false);
+	addGuiActions("actionShow_Planets_Orbits", N_("Planet orbits"), "O", group, true, false);
 
-	addGuiActions("actionShow_Night_Mode", N_("Night mode"), "", group, true, false, "viewing/flag_night");
-	addGuiActions("actionSet_Full_Screen_Global", N_("Full-screen mode"), "F11", group, true, false); // TODO: move persistence here? (currently elsewhere)
+	addGuiActions("actionShow_Night_Mode", N_("Night mode"), "", group, true, false);
+	addGuiActions("actionSet_Full_Screen_Global", N_("Full-screen mode"), "F11", group, true, false);
 	addGuiActions("actionHorizontal_Flip", N_("Flip scene horizontally"), "Ctrl+Shift+H", group, true, false);
 	addGuiActions("actionVertical_Flip", N_("Flip scene vertically"), "Ctrl+Shift+V", group, true, false);
 
@@ -223,7 +176,7 @@ void StelGui::init()
 
 	addGuiActions("actionAutoHideHorizontalButtonBar", N_("Auto hide horizontal button bar"), "", group, true, false);
 	addGuiActions("actionAutoHideVerticalButtonBar", N_("Auto hide vertical button bar"), "", group, true, false);
-	addGuiActions("actionToggle_GuiHidden_Global", N_("Toggle visibility of toolbars"), "Ctrl+T", group, true, false);
+	addGuiActions("actionToggle_GuiHidden_Global", N_("Toggle visibility of GUI"), "Ctrl+T", group, true, false);
 
 	
 	///////////////////////////////////////////////////////////////////////
@@ -329,8 +282,8 @@ void StelGui::init()
 	connect(&scriptConsole, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_ScriptConsole_Window_Global"), SLOT(setChecked(bool)));
 #endif
 
-	connect(getGuiActions("actionShow_Configuration_Window_Global"), SIGNAL(toggled(bool)), &configurationDialog, SLOT(setVisible(bool)));
-	connect(&configurationDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Configuration_Window_Global"), SLOT(setChecked(bool)));
+	connect(getGuiActions("actionShow_Configuration_Window_Global"), SIGNAL(toggled(bool)), configurationDialog, SLOT(setVisible(bool)));
+	connect(configurationDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Configuration_Window_Global"), SLOT(setChecked(bool)));
 
 	connect(getGuiActions("actionShow_SkyView_Window_Global"), SIGNAL(toggled(bool)), &viewDialog, SLOT(setVisible(bool)));
 	connect(&viewDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_SkyView_Window_Global"), SLOT(setChecked(bool)));
@@ -346,8 +299,8 @@ void StelGui::init()
 
 	connect(getGuiActions("actionSave_Screenshot_Global"), SIGNAL(triggered()), &StelMainGraphicsView::getInstance(), SLOT(saveScreenShot()));
 
-	getGuiActions("actionToggle_GuiHidden_Global")->setChecked(false);
-	connect(getGuiActions("actionToggle_GuiHidden_Global"), SIGNAL(toggled(bool)), this, SLOT(setHideGui(bool)));
+	getGuiActions("actionToggle_GuiHidden_Global")->setChecked(true);
+	connect(getGuiActions("actionToggle_GuiHidden_Global"), SIGNAL(toggled(bool)), this, SLOT(setGuiVisible(bool)));
 
 	connect(getGuiActions("actionHorizontal_Flip"), SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlipHorz(bool)));
 	getGuiActions("actionHorizontal_Flip")->setChecked(StelApp::getInstance().getCore()->getFlipHorz());
@@ -377,6 +330,10 @@ void StelGui::init()
 	connect(getGuiActions("actionAutoHideVerticalButtonBar"), SIGNAL(toggled(bool)), this, SLOT(setAutoHideVerticalButtonBar(bool)));
 	getGuiActions("actionAutoHideVerticalButtonBar")->setChecked(getAutoHideVerticalButtonBar());
 
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
+	connect(&scriptMgr, SIGNAL(scriptRunning()), this, SLOT(scriptStarted()));
+	connect(&scriptMgr, SIGNAL(scriptStopped()), this, SLOT(scriptStopped()));
+	
 	///////////////////////////////////////////////////////////////////////////
 	//// QGraphicsView based GUI
 	///////////////////////////////////////////////////////////////////////////
@@ -528,9 +485,7 @@ void StelGui::init()
 	l->setSpacing(0);
 	l->addItem(skyGui, 0, 0);
 	
-	QGraphicsWidget* skyItem = StelMainGraphicsView::getInstance().getStelAppGraphicsWidget();
-	skyItem->setLayout(l);	
-	
+	stelAppGraphicsWidget->setLayout(l);	
 	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
 	
 	initDone = true;
@@ -550,7 +505,7 @@ void StelGui::setStelStyle(const StelStyle& style)
 	skyGui->setStelStyle(style);
 	locationDialog.styleChanged();
 	dateTimeDialog.styleChanged();
-	configurationDialog.styleChanged();
+	configurationDialog->styleChanged();
 	searchDialog.styleChanged();
 	viewDialog.styleChanged();
 }
@@ -573,7 +528,7 @@ void StelGui::updateI18n()
 	}
 
 	// Update the dialogs
-	configurationDialog.languageChanged();
+	configurationDialog->languageChanged();
 	dateTimeDialog.languageChanged();
 	helpDialog.languageChanged();
 	locationDialog.languageChanged();
@@ -581,7 +536,7 @@ void StelGui::updateI18n()
 	viewDialog.languageChanged();
 }
 
-void StelGui::update(double deltaTime)
+void StelGui::update()
 {
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	if (nav->getTimeRate()<-0.99*JD_SECOND)
@@ -635,55 +590,6 @@ void StelGui::update(double deltaTime)
 	}
 }
 
-
-// Note: "text" and "helpGroup" must be in English -- this method and the help
-// dialog take care of translating them. Of course, they still have to be
-// marked for translation using the N_() macro.
-QAction* StelGui::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat, const QString& persistenceName)
-{
-	QAction* a;
-	a = new QAction(&StelMainGraphicsView::getInstance());
-	a->setObjectName(actionName);
-	a->setText(q_(text));
-	QList<QKeySequence> shortcuts;
-	QStringList shortcutStrings = shortCut.split(QRegExp(",(?!,|$)"));
-	for (int i = 0; i < shortcutStrings.size(); ++i)
-		shortcuts << QKeySequence(shortcutStrings.at(i).trimmed());
-
-	a->setShortcuts(shortcuts);
-	a->setCheckable(checkable);
-	a->setAutoRepeat(autoRepeat);
-	a->setProperty("englishText", QVariant(text));
-	a->setProperty("persistenceName", QVariant(persistenceName));
-	a->setShortcutContext(Qt::WidgetShortcut);
-	if (!shortCut.isEmpty())
-		helpDialog.setKey(helpGroup, "", shortCut, text);
-	StelMainGraphicsView::getInstance().addAction(a);
-
-	// connect(a, SIGNAL(toggled(bool)), this, SLOT(guiActionTriggered(bool)));
-	return a;
-}
-
-QAction* StelGui::getGuiActions(const QString& actionName)
-{
-	QAction* a = StelMainGraphicsView::getInstance().findChild<QAction*>(actionName);
-	if (!a)
-	{
-		qWarning() << "Can't find action " << actionName;
-		return NULL;
-	}
-	return a;
-}
-
-// Called each time a GUI action is triggered
-void StelGui::guiActionTriggered(bool b)
-{
-	// can get the action name from: QObject::sender()->objectName();
-	// to get the config.ini key:
-	// and QObject::sender()->property("persistenceName").toString();
-}
-
-
 // Add a new progress bar in the lower right corner of the screen.
 QProgressBar* StelGui::addProgressBar()
 {
@@ -725,22 +631,6 @@ void StelGui::decreaseScriptSpeed()
 void StelGui::setRealScriptSpeed()
 {
 	StelApp::getInstance().getScriptMgr().setScriptRate(1);
-}
-
-QPixmap StelGui::makeRed(const QPixmap& p)
-{
-	QImage im = p.toImage().convertToFormat(QImage::Format_ARGB32);
-	Q_ASSERT(im.format()==QImage::Format_ARGB32);
-	QRgb* bits = (QRgb*)im.bits();
-	const QRgb* stop = bits+im.width()*im.height();
-	do
-	{
-		*bits = qRgba(qRed(*bits), (int)(0.2*qGreen(*bits)), (int)(0.2*qBlue(*bits)), qAlpha(*bits));
-		++bits;
-	}
-	while (bits!=stop);
-
-	return QPixmap::fromImage(im);
 }
 
 void StelGui::setFlagShowFlipButtons(bool b)
@@ -802,15 +692,14 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 	flagShowNebulaBackgroundButton = b;
 }
 
-void StelGui::setHideGui(bool b)
+void StelGui::setVisible(bool b)
 {
-	qDebug() << "StelGui::setHideGui -- " << b;
-	skyGui->setVisible(!b);
+	skyGui->setVisible(b);
 }
 
-bool StelGui::getHideGui(void)
+bool StelGui::getVisible() const
 {
-	return getGuiActions("actionToggle_GuiHidden_Global")->isChecked();
+	return skyGui->isVisible();
 }
 
 void setScriptKeys()
@@ -821,9 +710,14 @@ void setNormalKeys()
 {
 }
 
-InfoPanel* StelGui::getInfoPanel(void)
+void StelGui::setInfoTextFilters(const StelObject::InfoStringGroup& aflags)
 {
-	return skyGui->infoPanel;
+	skyGui->infoPanel->setInfoTextFilters(aflags);
+}
+
+const StelObject::InfoStringGroup& StelGui::getInfoTextFilters() const
+{
+	return skyGui->infoPanel->getInfoTextFilters();
 }
 
 BottomStelBar* StelGui::getButtonBar() {return skyGui->buttonBar;}
@@ -841,4 +735,55 @@ void StelGui::setAutoHideVerticalButtonBar(bool b) {skyGui->autoHideVerticalButt
 void StelGui::forceRefreshGui()
 {
 	skyGui->updateBarsPos();
+}
+
+void StelGui::scriptStarted()
+{
+	setScriptKeys(true);
+}
+
+void StelGui::scriptStopped()
+{
+	setScriptKeys(false);
+}
+
+void StelGui::setGuiVisible(bool b)
+{
+	setVisible(b);
+}
+
+// Note: "text" and "helpGroup" must be in English -- this method and the help
+// dialog take care of translating them. Of course, they still have to be
+// marked for translation using the N_() macro.
+QAction* StelGui::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat)
+{
+	QAction* a;
+	a = new QAction(stelAppGraphicsWidget);
+	a->setObjectName(actionName);
+	a->setText(q_(text));
+	QList<QKeySequence> shortcuts;
+	QStringList shortcutStrings = shortCut.split(QRegExp(",(?!,|$)"));
+	for (int i = 0; i < shortcutStrings.size(); ++i)
+		shortcuts << QKeySequence(shortcutStrings.at(i).trimmed());
+
+	a->setShortcuts(shortcuts);
+	a->setCheckable(checkable);
+	a->setAutoRepeat(autoRepeat);
+	a->setProperty("englishText", QVariant(text));
+	a->setShortcutContext(Qt::WidgetShortcut);
+	if (!shortCut.isEmpty())
+		helpDialog.setKey(helpGroup, "", shortCut, text);
+	stelAppGraphicsWidget->addAction(a);
+	return a;
+}
+
+QAction* StelGui::getGuiActions(const QString& actionName)
+{
+	QAction* a = stelAppGraphicsWidget->findChild<QAction*>(actionName);
+	if (!a)
+	{
+		qWarning() << "Can't find action " << actionName;
+		return NULL;
+	}
+	return a;
 }

@@ -27,6 +27,7 @@
 #include "StelMainGraphicsView.hpp"
 #include "StelPainter.hpp"
 #include "MilkyWay.hpp"
+#include "StelGuiBase.hpp"
 
 #include <QNetworkAccessManager>
 #include <stdexcept>
@@ -177,7 +178,7 @@ void StelSkyLayerMgr::loadingStateChanged(bool b)
 	if (b)
 	{
 		Q_ASSERT(elem->progressBar==NULL);
-		elem->progressBar = StelMainGraphicsView::getInstance().addProgressBar();
+		elem->progressBar = StelMainGraphicsView::getInstance().getGui()->addProgressBar();
 		QString serverStr = elem->layer->getShortServerCredits();
 		if (!serverStr.isEmpty())
 			serverStr = " from "+serverStr;

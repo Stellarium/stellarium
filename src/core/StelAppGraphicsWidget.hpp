@@ -30,7 +30,7 @@ class StelAppGraphicsWidget : public QGraphicsWidget
 {
 	Q_OBJECT
 public:
-	StelAppGraphicsWidget();
+	StelAppGraphicsWidget(int argc, char** argv);
 	~StelAppGraphicsWidget();
 
 	//! Initialize the StelAppGraphicsWidget.
@@ -51,6 +51,8 @@ protected:
 	
 private:
 	double previousTime;
+	//! The main application instance.
+	class StelApp* stelApp;
 };
 
 #endif // _STELAPPGRAPHICSWIDGET_HPP_

@@ -24,6 +24,7 @@
 
 class QGLWidget;
 class QResizeEvent;
+class StelGuiBase;
 
 //! @class StelMainGraphicsView
 //! Reimplement a QGraphicsView for Stellarium.
@@ -45,25 +46,19 @@ public:
 	//! @deprecated don't use that.
 	QGLWidget* getOpenGLWin() {return glWidget;}
 
+	StelGuiBase* getGui() {return gui;}
+	
 	//! Delete openGL textures (to call before the GLContext disappears)
 	void deinitGL();
 	
-	//! Add a new progress bar in the lower right corner of the screen.
-	//! When the progress bar is not used anymore, just delete it.
-	//! @return a pointer to the progress bar
-	class QProgressBar* addProgressBar();
-
 	//! Return the QGraphicsWidget encapsulating the Stellarium main sky view.
 	//! Use its layout if you want to add widget on the top of the main sky view.
-	QGraphicsWidget* getStelAppGraphicsWidget() {return mainSkyItem;}
+	class StelAppGraphicsWidget* getStelAppGraphicsWidget() {return mainSkyItem;}
 	
 	//! Return the top level QGraphicsWidget which contains the layout containing the Stellarium main sky view.
 	//! Use its layout if you want to add widget on the side of the main sky view.
 	QGraphicsWidget* getTopLevelGraphicsWidget() {return backItem;}
 	
-	//! Start the display loop
-	void startMainLoop();
-			
 	//! Define the type of viewport distorter to use
 	//! @param type can be only 'fisheye_to_spheric_mirror' or anything else for no distorter
 	void setViewPortDistorterType(const QString& type);
@@ -123,16 +118,18 @@ private slots:
 	void minFpsChanged();
 	
 private:
+	//! Start the display loop
+	void startMainLoop();
+	
 	//! The StelMainWindow singleton
 	static StelMainGraphicsView* singleton;
 	QGraphicsWidget* backItem;
-	QGraphicsWidget* mainSkyItem;
+	class StelAppGraphicsWidget* mainSkyItem;
 	
 	//! The openGL window
 	QGLWidget* glWidget;
 	
-	//! The main application instance.
-	class StelApp* stelApp;
+	StelGuiBase* gui;
 	
 	bool wasDeinit;
 	

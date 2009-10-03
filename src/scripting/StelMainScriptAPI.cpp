@@ -36,7 +36,6 @@
 #include "StelAudioMgr.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
-#include "StelGui.hpp"
 #include "StelLocation.hpp"
 #include "StelLocationMgr.hpp"
 #include "StelMainGraphicsView.hpp"
@@ -51,6 +50,7 @@
 #include "StelSkyDrawer.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelGuiBase.hpp"
 
 #include <QAction>
 #include <QDateTime>
@@ -223,7 +223,7 @@ void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QSt
 
 void StelMainScriptAPI::setHideGui(bool b)
 {
-	GETSTELMODULE(StelGui)->getGuiActions("actionToggle_GuiHidden_Global")->setChecked(b);
+	StelMainGraphicsView::getInstance().getGui()->setVisible(b);
 }
 
 void StelMainScriptAPI::setMinFps(float m)
@@ -444,11 +444,11 @@ void StelMainScriptAPI::setScriptRate(double r)
 void StelMainScriptAPI::setSelectedObjectInfo(const QString& level)
 {
 	if (level == "AllInfo")
-		GETSTELMODULE(StelGui)->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
+		StelMainGraphicsView::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
 	else if (level == "ShortInfo")
-		GETSTELMODULE(StelGui)->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
+		StelMainGraphicsView::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
 	else if (level == "None")
-		GETSTELMODULE(StelGui)->getInfoPanel()->setInfoTextFilters((StelObject::InfoStringGroup)0);
+		StelMainGraphicsView::getInstance().getGui()->setInfoTextFilters((StelObject::InfoStringGroup)0);
 	else
 		qWarning() << "setSelectedObjectInfo unknown level string \"" << level << "\"";
 }
