@@ -242,7 +242,7 @@ template<class T> class Matrix4
 	inline Matrix4& operator=(const T*);
 	inline void set(T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T);
 
-    inline T* operator[](int);
+    inline T& operator[](int);
 	inline operator T*();
 	inline operator const T*() const;
 
@@ -836,9 +836,9 @@ template<class T> void Matrix4<T>::set(T a, T b, T c, T d, T e, T f, T g, T h, T
 	r[8]=i; r[9]=j; r[10]=k; r[11]=l; r[12]=m; r[13]=n; r[14]=o; r[15]=p;
 }
 
-template<class T> T* Matrix4<T>::operator[](int n)
+template<class T> T& Matrix4<T>::operator[](int n)
 {
-    return &(r[n*4]);
+    return r[n];
 }
 
 template<class T> Matrix4<T>::operator T*()
