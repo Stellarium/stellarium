@@ -31,6 +31,7 @@
 #ifdef ENABLE_SCRIPT_CONSOLE
 #include "ScriptConsole.hpp"
 #endif
+#include "StelGuiBase.hpp"
 
 #include <QGraphicsTextItem>
 
@@ -39,23 +40,12 @@ class QAction;
 class QTimeLine;
 class StelButton;
 class BottomStelBar;
-
-//! The informations about the currently selected object
-class InfoPanel : public QGraphicsTextItem
-{
-public:
-	InfoPanel(QGraphicsItem* parent);
-	void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {infoTextFilters=aflags;}
-	const StelObject::InfoStringGroup& getInfoTextFilters(void) const {return infoTextFilters;}
-	void setTextFromObjects(const QList<StelObjectP>&);
-private:
-	StelObject::InfoStringGroup infoTextFilters;
-};
+class InfoPanel;
 
 //! @class StelGui
 //! Main class for the GUI based on QGraphicView.
 //! It manages the various qt configuration windows, the buttons bars, the list of QAction/shortcuts.
-class StelGui : public StelModule
+class StelGui : public QObject, public StelGuiBase
 {
 	Q_OBJECT
 public:
@@ -67,11 +57,10 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the StelGui object.
-	virtual void init();
-	virtual void draw(StelCore* core) {;}
-	virtual void update(double deltaTime);
+	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, StelAppGraphicsWidget* stelAppGraphicsWidget);
+	void update();
 	virtual void updateI18n();
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+
 	//! Load color scheme from the given ini file and section name
 	virtual void setStelStyle(const StelStyle& style);
 	
@@ -79,29 +68,11 @@ public:
 	// Methods specific to the StelGui class
 	//! Load a Qt style sheet to define the widgets style
 	void loadStyle(const QString& fileName);
-
-	//! Get a pointer on the info panel used to display selected object info
-	InfoPanel* getInfoPanel(void);
 	
 	//! Add a new progress bar in the lower right corner of the screen.
 	//! When the progress bar is deleted with removeProgressBar() the layout is automatically rearranged.
 	//! @return a pointer to the progress bar
 	class QProgressBar* addProgressBar();
-	
-	//! Add a new action managed by the GUI. This method should be used to add new shortcuts to the program
-	//! @param actionName qt object name. Used as a reference for later uses
-	//! @param text the text to display when hovering, or in the help window
-	//! @param shortCut the qt shortcut to use
-	//! @param helpGroup hint on how to group the text in the help window
-	//! @param checkable whether the action should be checkable
-	//! @param autoRepeat whether the action should be autorepeated
-	//! @param persistenceName name of the attribute for persistence in the config.ini. Not persistent if empty.
-	QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false, const QString& persistenceName=QString());
-	
-	//! Get a pointer on an action managed by the GUI
-	//! @param actionName qt object name for this action
-	//! @return a pointer on the QAction object or NULL if don't exist
-	QAction* getGuiActions(const QString& actionName);
 	
 	//! Get the button bar at the bottom of the screen
 	BottomStelBar* getButtonBar();
@@ -109,9 +80,6 @@ public:
 	//! Get the button bar of the left of the screen
 	class LeftStelBar* getWindowsButtonBar();
 	
-	//! Transform the pixmap so that it look red for night vision mode
-	static QPixmap makeRed(const QPixmap& p);
-
 	//! Get whether the buttons toggling image flip are visible
 	bool getFlagShowFlipButtons() {return flagShowFlipButtons;}
 	
@@ -126,7 +94,17 @@ public:
 #endif
 
 	//! Used to force a refreshing of the GUI elements such as the button bars.
-	void forceRefreshGui();
+	virtual void forceRefreshGui();
+	
+	virtual void setVisible(bool b);
+
+	virtual bool getVisible() const;
+	
+	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags);
+	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const;
+	
+	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false);
+	virtual QAction* getGuiActions(const QString& actionName);
 	
 public slots:
 	//! Define whether the buttons toggling image flip should be visible
@@ -153,12 +131,6 @@ public slots:
 	//! @param b to hide or not to hide
 	void setAutoHideVerticalButtonBar(bool b);
 
-	//! show or hide the toolbars
-	//! @param b when true, toolbars will be shown, else they will be hidden.
-	void setHideGui(bool b);
-	//! get the current visible status of the toolbars
-	bool getHideGui();
-
 	//! change keys when a script is running / not running
 	void setScriptKeys(bool b);
 	void increaseScriptSpeed();
@@ -167,12 +139,14 @@ public slots:
 
 private slots:
 	void reloadStyle();
-	
-	//! Called each time a GUI action is triggered
-	void guiActionTriggered(bool b=false);
+	void scriptStarted();
+	void scriptStopped();
+	void setGuiVisible(bool);
 	
 private:
-	
+	QGraphicsWidget* topLevelGraphicsWidget;
+	StelAppGraphicsWidget* stelAppGraphicsWidget;
+			
 	class SkyGui* skyGui;
 	
 	StelButton* buttonTimeRewind;
@@ -187,7 +161,7 @@ private:
 	DateTimeDialog dateTimeDialog;
 	SearchDialog searchDialog;
 	ViewDialog viewDialog;
-	ConfigurationDialog configurationDialog;
+	ConfigurationDialog* configurationDialog;
 #ifdef ENABLE_SCRIPT_CONSOLE
 	ScriptConsole scriptConsole;
 #endif

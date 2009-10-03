@@ -47,6 +47,7 @@
 #include "StelDownloadMgr.hpp"
 #include "LabelMgr.hpp"
 #include "ScreenImageMgr.hpp"
+#include "SkyGui.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -55,7 +56,7 @@
 
 #include "StelMainGraphicsView.hpp"
 
-ConfigurationDialog::ConfigurationDialog()
+ConfigurationDialog::ConfigurationDialog(StelGui* agui) : gui(agui)
 {
 	ui = new Ui_configurationDialogForm;
 	downloadMgr = &StelApp::getInstance().getDownloadMgr();
@@ -91,7 +92,6 @@ void ConfigurationDialog::createDialogContent()
 	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(Mat4d());
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-	StelGui* gui = GETSTELMODULE(StelGui);
 
 	ui->setupUi(dialog);
 
@@ -127,9 +127,9 @@ void ConfigurationDialog::createDialogContent()
 	checkUpdates();
 
 	// Selected object info
-	if (gui->getInfoPanel()->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
+	if (gui->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
 		ui->noSelectedInfoRadio->setChecked(true);
-	else if (gui->getInfoPanel()->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
+	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
 		ui->briefSelectedInfoRadio->setChecked(true);
 	else
 		ui->allSelectedInfoRadio->setChecked(true);
@@ -262,23 +262,17 @@ void ConfigurationDialog::setSphericMirror(bool b)
 
 void ConfigurationDialog::setNoSelectedInfo(void)
 {
-	StelGui* newGui = GETSTELMODULE(StelGui);
-	Q_ASSERT(newGui);
-	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(0));
+	gui->setInfoTextFilters(StelObject::InfoStringGroup(0));
 }
 
 void ConfigurationDialog::setAllSelectedInfo(void)
 {
-	StelGui* newGui = GETSTELMODULE(StelGui);
-	Q_ASSERT(newGui);
-	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
+	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
 }
 
 void ConfigurationDialog::setBriefSelectedInfo(void)
 {
-	StelGui* newGui = GETSTELMODULE(StelGui);
-	Q_ASSERT(newGui);
-	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
+	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
 }
 
 void ConfigurationDialog::cursorTimeOutChanged()
@@ -337,8 +331,6 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	Q_ASSERT(nmgr);
 	GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
 	Q_ASSERT(glmgr);
-	StelGui* gui = GETSTELMODULE(StelGui);
-	Q_ASSERT(gui);
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mvmgr);
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
@@ -401,9 +393,9 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	langName = StelApp::getInstance().getLocaleMgr().getSkyLanguage();
 	conf->setValue("localization/sky_locale", StelTranslator::nativeNameToIso639_1Code(langName));
 
-	if (gui->getInfoPanel()->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
+	if (gui->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
 		conf->setValue("gui/selected_object_info", "none");
-	else if (gui->getInfoPanel()->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
+	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
 		conf->setValue("gui/selected_object_info", "short");
 	else
 		conf->setValue("gui/selected_object_info", "all");

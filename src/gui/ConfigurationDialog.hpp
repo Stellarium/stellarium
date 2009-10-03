@@ -34,12 +34,13 @@ class QDataStream;
 class QNetworkAccessManager;
 class StelDownloadMgr;
 class QListWidgetItem;
+class StelGui;
 
 class ConfigurationDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	ConfigurationDialog();
+	ConfigurationDialog(StelGui* agui);
 	virtual ~ConfigurationDialog();
 	void languageChanged();
 	//! Notify that the application style changed
@@ -126,6 +127,9 @@ private slots:
 	void setFixedDateTimeToCurrent(void);
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
+	
+private:
+	StelGui* gui;	
 };
 
 #endif // _CONFIGURATIONDIALOG_HPP_

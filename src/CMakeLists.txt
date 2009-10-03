@@ -10,6 +10,8 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_SOURCE_DIR}/src/external 
 	${CMAKE_SOURCE_DIR}/src/scripting 
 	${CMAKE_SOURCE_DIR}/src/external/kfilter 
+	${CMAKE_SOURCE_DIR}/src/external/glues_stel/source/
+	${CMAKE_SOURCE_DIR}/src/external/glues_stel/source/libtess
 	${OPENGL_INCLUDE_DIR} 
 	${JPEG_INCLUDE_DIR} 
 	${ICONV_INCLUDE_DIR} 
@@ -112,6 +114,7 @@ SET(stellarium_lib_SRCS
 	core/SimbadSearcher.cpp
 	core/StelSphericalIndex.hpp
 	core/StelSphericalIndex.cpp
+	core/StelGuiBase.hpp
 
 	external/bytes.h
 	external/fixx11h.h
@@ -130,6 +133,38 @@ SET(stellarium_lib_SRCS
 	external/kfilter/klimitediodevice.cpp
 	external/kfilter/karchive.h
 	external/kfilter/karchive.cpp
+
+	external/glues_stel/source/glues_error.c
+	external/glues_stel/source/glues_error.h
+	external/glues_stel/source/glues.h
+	external/glues_stel/source/glues_mipmap.c
+	external/glues_stel/source/glues_mipmap.h
+
+	external/glues_stel/source/libtess/dict.h
+	external/glues_stel/source/libtess/dict.c
+	external/glues_stel/source/libtess/dict-list.h
+	external/glues_stel/source/libtess/geom.c
+	external/glues_stel/source/libtess/geom.h
+	external/glues_stel/source/libtess/memalloc.c
+	external/glues_stel/source/libtess/memalloc.h
+	external/glues_stel/source/libtess/mesh.c
+	external/glues_stel/source/libtess/mesh.h
+	external/glues_stel/source/libtess/normal.c
+	external/glues_stel/source/libtess/normal.h
+	external/glues_stel/source/libtess/priorityq.c
+	external/glues_stel/source/libtess/priorityq.h
+	external/glues_stel/source/libtess/priorityq-heap.h
+	external/glues_stel/source/libtess/priorityq-heap.i
+	external/glues_stel/source/libtess/priorityq-sort.h
+	external/glues_stel/source/libtess/render.c
+	external/glues_stel/source/libtess/render.h
+	external/glues_stel/source/libtess/sweep.c
+	external/glues_stel/source/libtess/sweep.h
+	external/glues_stel/source/libtess/tess.c
+	external/glues_stel/source/libtess/tess.h
+	external/glues_stel/source/libtess/tessmono.c
+	external/glues_stel/source/libtess/tessmono.h
+
 
 	planetsephems/calc_interpolated_elements.c
 	planetsephems/calc_interpolated_elements.h

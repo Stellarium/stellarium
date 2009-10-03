@@ -19,13 +19,53 @@
 
 #include "SkyGui.hpp"
 #include "StelGuiItems.hpp"
+#include "StelApp.hpp"
 #include "StelGui.hpp"
 
 #include <QDebug>
 #include <QTimeLine>
 #include <QGraphicsSceneMouseEvent>
+#include <QSettings>
+#include <QTextDocument>
 
-SkyGui::SkyGui(): QGraphicsWidget()
+InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	QString objectInfo = conf->value("gui/selected_object_info", "all").toString();
+	if (objectInfo == "all")
+		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
+	else if (objectInfo == "short")
+		infoTextFilters = StelObject::InfoStringGroup(StelObject::ShortInfo);
+	else if (objectInfo == "none")
+		infoTextFilters = StelObject::InfoStringGroup(0);
+	else
+	{
+		qWarning() << "config.ini option gui/selected_object_info is invalid, using \"all\"";
+		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
+	}
+
+	QFont font("DejaVuSans");
+	font.setPixelSize(13);
+	setFont(font);
+}
+
+void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
+{
+	if (selected.size() == 0)
+	{
+		if (!document()->isEmpty())
+			document()->clear();
+	}
+	else
+	{
+		// just print details of the first item for now
+		QString s = selected[0]->getInfoString(StelApp::getInstance().getCore(), infoTextFilters);
+		setHtml(s);
+	}
+}
+
+SkyGui::SkyGui(): QGraphicsWidget(), stelGui(NULL)
 {
 	setObjectName("StelSkyGui");
 	
@@ -59,8 +99,10 @@ SkyGui::SkyGui(): QGraphicsWidget()
 	setAcceptHoverEvents(true);
 }
 
-void SkyGui::init(StelGui* stelGui)
+void SkyGui::init(StelGui* astelGui)
 {	
+	stelGui = astelGui;
+			
 	winBar->setParentItem(this);
 	buttonBar->setParentItem(this);
 	buttonBarPath->setParentItem(this);
@@ -218,4 +260,9 @@ void SkyGui::setStelStyle(const StelStyle& style)
 QProgressBar* SkyGui::addProgressBar()
 {
 	return progressBarMgr->addProgressBar();
+}
+
+void SkyGui::paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*)
+{
+	stelGui->update();
 }

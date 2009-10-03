@@ -20,6 +20,7 @@
 #include "StelDownloadMgr.hpp"
 #include "StelApp.hpp"
 #include "StelMainGraphicsView.hpp"
+#include "StelGuiBase.hpp"
 
 #include <QDebug>
 #include <QNetworkAccessManager>
@@ -92,7 +93,7 @@ void StelDownloadMgr::get(const QString& addr, const QString& filePath, quint16 
 	if (barVisible)
 	{
 		if (!progressBar)
-			progressBar = StelMainGraphicsView::getInstance().addProgressBar();
+			progressBar = StelMainGraphicsView::getInstance().getGui()->addProgressBar();
 		progressBar->setValue(0);
 		progressBar->setMaximum(0);
 		progressBar->setVisible(true);
