@@ -25,11 +25,7 @@
 #include "StelUtils.hpp"
 #include "StelJsonParser.hpp"
 
-#if defined(__APPLE__) && defined(__MACH__)
-#include <OpenGL/glu.h>	/* Header File For The GLU Library */
-#else
-#include <GL/glu.h>	/* Header File For The GLU Library */
-#endif
+#include "glues.h"
 
 // Definition of static constants.
 const QVariant::Type SphericalRegionP::qVariantType = (QVariant::Type)(QVariant::UserType+1);
@@ -936,10 +932,16 @@ bool planeIntersect2(const SphericalCap& h1, const SphericalCap& h2, Vec3d& p1, 
 
 Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& p3, const Vec3d& p4, bool& ok)
 {
-	Vec3d n1 = p1^p2;
 	Vec3d n2 = p3^p4;
-	n1.normalize();
 	n2.normalize();
+	return greatCircleIntersection(p1, p2, n2, ok);
+}
+
+Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& n2, bool& ok)
+{
+	Vec3d n1 = p1^p2;
+	Q_ASSERT(std::fabs(n2.lengthSquared()-1.)<0.00000001);
+	n1.normalize();
 	// Compute the parametric equation of the line at the intersection of the 2 planes
 	Vec3d u = n1^n2;
 	if (u.length()<1e-7)
@@ -1164,7 +1166,6 @@ QVariantMap SphericalConvexPolygon::toQVariant() const
 	return res;
 }
 
-
 QVariantMap SphericalTexturedConvexPolygon::toQVariant() const
 {
 	QVariantMap res = SphericalConvexPolygon::toQVariant();
@@ -1179,3 +1180,266 @@ QVariantMap SphericalTexturedConvexPolygon::toQVariant() const
 	return res;
 }
 
+static int getSide(const Vec3d& v, int onLine)
+{
+	Q_ASSERT(onLine>=0 && onLine<=3);
+	return v[onLine]>0 ? 0 : 1;
+}
+
+static void interpolateAtCrossingPoint(const Vec3d& v1, const Vec3d& v2, const Vec3d& planDirection, Vec3d& result)
+{
+	bool ok;
+	result=greatCircleIntersection(v1, v2, planDirection, ok);
+	Q_ASSERT(ok);
+}
+
+QString SphericalContour::SubContour::toJSON() const
+{
+	QString res("[");
+	double ra, dec;
+	foreach (const EdgeVertex& v, *this)
+	{
+		StelUtils::rectToSphe(&ra, &dec, v.vertex);
+		res += QString(" [") + QString::number(ra*180./M_PI) + "," + QString::number(dec*180./M_PI) + ", " + (v.edgeFlag ? QString("true"): QString("false")) + "],";
+	}
+	res[res.size()-1]=' ';
+	res.append(']');
+	return res;
+};
+
+void SphericalContour::splitContourByPlan(int onLine, const SubContour& inputContour, QVector<SubContour> result[2])
+{
+	SubContour currentSubContour;
+	SubContour unfinishedSubContour;
+	int previousQuadrant=getSide(inputContour.first().vertex, onLine);
+	int currentQuadrant=0;
+	Vec3d tmpVertex;
+	EdgeVertex previousVertex=inputContour.first();
+	EdgeVertex currentVertex;
+	int i;
+	const Vec3d plan(onLine==0?1:0, onLine==1?1:0, onLine==2?1:0);
+	// Take care first of the unfinished contour
+	for (i=0;i<inputContour.size();++i)
+	{
+		currentVertex = inputContour.at(i);
+		currentQuadrant = getSide(currentVertex.vertex, onLine);
+		if (currentQuadrant==previousQuadrant)
+		{
+			unfinishedSubContour << currentVertex;
+		}
+		else
+		{
+			// We crossed the line
+			interpolateAtCrossingPoint(previousVertex.vertex, currentVertex.vertex, plan, tmpVertex);
+			unfinishedSubContour << EdgeVertex(tmpVertex, false); // Last point of the contour, it's not an edge
+			Q_ASSERT(currentSubContour.isEmpty());
+			currentSubContour << EdgeVertex(tmpVertex, previousVertex.edgeFlag);
+			previousQuadrant = currentQuadrant;
+			break;
+		}
+		previousVertex=currentVertex;
+	}
+	// Now handle the other ones
+	for (;i<inputContour.size();++i)
+	{
+		currentVertex = inputContour.at(i);
+		currentQuadrant = getSide(currentVertex.vertex, onLine);
+		if (currentQuadrant==previousQuadrant)
+		{
+			currentSubContour << currentVertex;
+		}
+		else
+		{
+			// We crossed the line
+			interpolateAtCrossingPoint(previousVertex.vertex, currentVertex.vertex, plan, tmpVertex);
+			currentSubContour << EdgeVertex(tmpVertex, false); // Last point of the contour, it's not an edge
+			result[previousQuadrant] << currentSubContour;
+			currentSubContour.clear();
+			currentSubContour << EdgeVertex(tmpVertex, previousVertex.edgeFlag);
+			currentSubContour << currentVertex;
+		}
+		previousVertex=currentVertex;
+	}
+	
+	// Handle the last line between the last and first point
+	previousQuadrant = currentQuadrant;
+	currentQuadrant = getSide(inputContour.first().vertex, onLine);
+	if (currentQuadrant==previousQuadrant)
+	{
+	}
+	else
+	{
+		// We crossed the line
+		interpolateAtCrossingPoint(previousVertex.vertex, inputContour.first().vertex, plan, tmpVertex);
+		currentSubContour << EdgeVertex(tmpVertex, false);	// Last point of the contour, it's not an edge
+		result[previousQuadrant] << currentSubContour;
+		currentSubContour.clear();
+		currentSubContour << EdgeVertex(tmpVertex, previousVertex.edgeFlag);
+	}
+	
+	// Append the last contour made from the last vertices + the previous unfinished ones
+	currentSubContour << unfinishedSubContour;
+	result[currentQuadrant] << currentSubContour;
+}
+
+SphericalContour::OctahedronContour& SphericalContour::getSplittedSubContours() const
+{
+	if (!cachedOctahedronContour.isEmpty())
+		return cachedOctahedronContour;
+	
+	cachedOctahedronContour.resize(8);
+	
+	// Create the contour list by adding the matching edge flags
+	// We assume that the contour is closed so set all the flags to true
+	SubContour initContour(vertices.size(), EdgeVertex(true));
+	for (int i=0;i<vertices.size();++i)
+		initContour[i].vertex = vertices.at(i);
+	
+	QVector<SubContour> splittedContour1[2];
+	// Split the contour on the plan Y=0
+	splitContourByPlan(1, initContour, splittedContour1);
+	// Re-split the contours on the plan X=0
+	QVector<SubContour> splittedVertices2[4];
+	foreach (const SubContour& subContour, splittedContour1[0])
+		splitContourByPlan(0, subContour, splittedVertices2);
+	foreach (const SubContour& subContour, splittedContour1[1])
+		splitContourByPlan(0, subContour, splittedVertices2+2);
+	
+	// Now complete the contours which cross the areas from one side to another by adding poles
+	for (int c=0;c<4;++c)
+	{
+		for (int i=0;i<splittedVertices2[c].size();++i)
+		{
+			SubContour& tmpSubContour = splittedVertices2[c][i];
+			Vec3d v = tmpSubContour.first().vertex^tmpSubContour.last().vertex;
+			if (v[2]>0.0000001)
+			{
+				// A south pole has to be added
+				tmpSubContour << EdgeVertex(Vec3d(0,0,-1), false);
+			}
+			else if (v[2]<-0.0000001)
+			{
+				// A north pole has to be added
+				tmpSubContour << EdgeVertex(Vec3d(0,0,1), false);
+			}
+			else
+			{
+				// else the contour ends on the same longitude line as it starts
+				Q_ASSERT(std::fabs(tmpSubContour.first().vertex.longitude()-tmpSubContour.last().vertex.longitude()<0.00000001));
+			}
+		}
+		foreach (const SubContour& subContour, splittedVertices2[c])
+		{
+			splitContourByPlan(2, subContour, cachedOctahedronContour.data()+c*2);
+		}
+	}
+	return cachedOctahedronContour;
+}
+
+Mat4d getPerspectiveMat(double fovy, double zNear, double zFar)
+{
+	Mat4d m=Mat4d::identity();
+	double sine, cotangent, deltaZ;
+	double radians=fovy/2.0*M_PI/180.0;
+
+	deltaZ=zFar-zNear;
+	sine=std::sin(radians);
+	Q_ASSERT(deltaZ!=0.0 && sine!=0.0);
+	cotangent=std::cos(radians)/sine;
+	m[0] = cotangent;
+	m[5] = cotangent;
+	m[10] = -(zFar + zNear) / deltaZ;
+	m[11] = -1.0f;
+	m[13] = -2.0f * zNear * zFar / deltaZ;
+	m[15] = 0;
+	return m;
+}
+
+Mat4d getLookAt(const Vec3d& eye)
+{
+	Vec3d forward=eye;
+	Vec3d up(0,0,1);
+	Mat4d m = Mat4d::identity();
+	forward.normalize();
+
+	Vec3d side = forward ^ up;
+	side.normalize();
+	up = side ^ forward;
+
+	m[0] = side[0];
+	m[4] = side[1];
+	m[8] = side[2];
+
+	m[1] = up[0];
+	m[5] = up[1];
+	m[9] = up[2];
+
+	m[2] = -forward[0];
+	m[5] = -forward[1];
+	m[10] = -forward[2];
+
+	m=m*Mat4d::translation(-eye);
+	return m;
+}
+
+const Mat4d& getTransfoMatOnOctahedron(int n)
+{
+	// Create the projection matrices on each sides of the octahedron
+	static const Mat4d mPerspective = getPerspectiveMat(120, 0.1, 2);
+	static const Mat4d mOctahedron[8] = {
+		mPerspective*getLookAt(Vec3d(1,1,1)), 
+		mPerspective*getLookAt(Vec3d(1,1,-1)),
+		mPerspective*getLookAt(Vec3d(-1,1,1)),
+		mPerspective*getLookAt(Vec3d(-1,1,-1)),
+		mPerspective*getLookAt(Vec3d(1,-1,1)),
+		mPerspective*getLookAt(Vec3d(1,-1,-1)),
+	 	mPerspective*getLookAt(Vec3d(-1,-1,1)),
+		mPerspective*getLookAt(Vec3d(-1,-1,-1))};
+	Q_ASSERT(n>=0 && n<8);
+	return mOctahedron[n];
+}
+
+const Mat4d& getInvTransfoMatOnOctahedron(int n)
+{
+	static const Mat4d mOctahedron[8] = {
+		getTransfoMatOnOctahedron(0).inverse(),
+		getTransfoMatOnOctahedron(1).inverse(),
+		getTransfoMatOnOctahedron(2).inverse(),
+		getTransfoMatOnOctahedron(3).inverse(),
+		getTransfoMatOnOctahedron(4).inverse(),
+		getTransfoMatOnOctahedron(5).inverse(),
+		getTransfoMatOnOctahedron(6).inverse(),
+		getTransfoMatOnOctahedron(7).inverse()};
+	Q_ASSERT(n>=0 && n<8);
+	return mOctahedron[n];
+}
+
+void SphericalContour::OctahedronContour::projectOnOctahedron()
+{
+	Q_ASSERT(size()==8);
+	QVector<SubContour>* subs = data();
+	for (int i=0;i<8;++i)
+	{
+		const Mat4d& m = getTransfoMatOnOctahedron(i);
+		for (QVector<SubContour>::Iterator iter=subs[i].begin();iter!=subs[i].end();++iter)
+		{
+			for (SubContour::Iterator v=iter->begin();v!=iter->end();++v)
+				v->vertex.transfo4d(m);
+		}
+	}
+}
+
+void SphericalContour::OctahedronContour::unprojectOnOctahedron()
+{
+	Q_ASSERT(size()==8);
+	QVector<SubContour>* subs = data();
+	for (int i=0;i<8;++i)
+	{
+		const Mat4d& m = getInvTransfoMatOnOctahedron(i);
+		for (QVector<SubContour>::Iterator iter=subs[i].begin();iter!=subs[i].end();++iter)
+		{
+			for (SubContour::Iterator v=iter->begin();v!=iter->end();++v)
+				v->vertex.transfo4d(m);
+		}
+	}
+}
