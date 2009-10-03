@@ -1,0 +1,37 @@
+
+GLU ES version 1.4
+
+This port is based on original GLU 1.3 and has original libutil and libtess
+(part of GLU) only.
+
+Warning, after gluCylinder(), gluDisk(), gluPartialDisk(), gluSphere() function
+call, color, vertex, texture and normal arrays are disabled. Array pointers are
+changed and must be reinstalled by caller to its original state.
+
+Currently QNX 6.4.x native target build is supported and Win32 x86 build for
+PowerVR OpenGL ES 1.1 emulator (http://www.imgtec.com).
+
+Win32 build uses MSVC 2005 (9.0) and you have to change path to Imagination
+Technologies PowerVR SDK in all project files.
+
+History:
+
+1.4 - Small fixes, regarding intermediate casts to double during equation
+      calculations. Added Win32 build target for PowerVR OpenGL ES 1.1
+      emulator. Added GLU ES documentation, based on the OpenGL GLU
+      documentation with ES specific fixes.
+1.3 - libtess and tesselation tests (QNX native and SDL 1.3) have been added.
+1.2 - SDL 1.3 based tests were added.
+1.1 - Removed some texture formats, which are not supported by OpenGL ES 1.x,
+      added arrays manipulation to the quadric functions. Sphere flat shading
+      fixes.  Disk texturing with inner radius more than 0.0f fixes.  Updated
+      tests.
+1.0 - Initial public release.
+
+// 17.05.2009
+// Mike Gorchak <mike@malva.ua>, <lestat@i.com.ua>
+
+
+--------------------------------------------------------
+ * Important: Fabien Chereau - September 2009
+ * Most of the content was ripped out for the use of Stellarium
