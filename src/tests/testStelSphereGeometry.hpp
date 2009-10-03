@@ -37,6 +37,7 @@ private slots:
 	void testConsistency();
 	void testLoading();
 	void testEnlarge();
+	void testSphericalContour();
 	void benchmarkContains();
 	void benchmarkCheckValid();
 	void benchmarkSphericalCap();

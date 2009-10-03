@@ -24,6 +24,7 @@
 #include <QVariant>
 #include <QDebug>
 #include <QSharedPointer>
+#include <QVarLengthArray>
 #include "VecMath.hpp"
 
 class SphericalPolygon;
@@ -608,6 +609,48 @@ private:
 	QVector<Vec2f> textureCoords;
 };
 
+struct EdgeVertex
+{
+	EdgeVertex() : edgeFlag(false) {;}
+	EdgeVertex(bool b) : edgeFlag(b) {;}
+	EdgeVertex(Vec3d v, bool b) : vertex(v), edgeFlag(b) {;}
+	Vec3d vertex;
+	bool edgeFlag;
+};
+
+//! @class SphericalContour
+class SphericalContour
+{
+public:
+	class SubContour : public QVector<EdgeVertex>
+	{
+	public:
+		SubContour() {;}
+		SubContour(int size, const EdgeVertex& v) : QVector<EdgeVertex>(size, v) {;}
+		QString toJSON() const;
+	};
+	
+	class OctahedronContour : public QVarLengthArray<QVector<SubContour>,8 >
+	{
+	public:
+		void projectOnOctahedron();
+		void unprojectOnOctahedron();
+		void tesselate();
+	private:
+		static const Mat4d& getProjectPerspective(int octant);
+	};
+	
+	SphericalContour(const QVector<Vec3d>& avertices) : vertices(avertices) {;}
+	OctahedronContour& getSplittedSubContours() const;
+private:
+	QVector<Vec3d> vertices;
+	mutable OctahedronContour cachedOctahedronContour;
+	static void splitContourByPlan(int onLine, const SubContour& contour, QVector<SubContour> result[2]);
+	
+};
+
+
+
 //! @class SphericalConvexPolygon
 //! A special case of SphericalPolygon for which the polygon is convex.
 class SphericalConvexPolygon : public SphericalPolygonBase
@@ -768,6 +811,11 @@ bool planeIntersect2(const SphericalCap& h1, const SphericalCap& h2, Vec3d& p1, 
 //! @param ok is set to false if no intersection was found.
 //! @return the intersection point on the sphere (normalized) if ok is true, or undefined of ok is false.
 Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& p3, const Vec3d& p4, bool& ok);
+
+//! Compute the intersection of a great circles segment with another great circle.
+//! @param ok is set to false if no intersection was found.
+//! @return the intersection point on the sphere (normalized) if ok is true, or undefined of ok is false.
+Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& nHalfSpace, bool& ok);
 
 #endif // _STELSPHEREGEOMETRY_HPP_
 
