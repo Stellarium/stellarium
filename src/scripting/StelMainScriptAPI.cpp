@@ -223,7 +223,7 @@ void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QSt
 
 void StelMainScriptAPI::setHideGui(bool b)
 {
-	StelMainGraphicsView::getInstance().getGui()->setVisible(b);
+	StelApp::getInstance().getGui()->setVisible(b);
 }
 
 void StelMainScriptAPI::setMinFps(float m)
@@ -444,11 +444,11 @@ void StelMainScriptAPI::setScriptRate(double r)
 void StelMainScriptAPI::setSelectedObjectInfo(const QString& level)
 {
 	if (level == "AllInfo")
-		StelMainGraphicsView::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
+		StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
 	else if (level == "ShortInfo")
-		StelMainGraphicsView::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
+		StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
 	else if (level == "None")
-		StelMainGraphicsView::getInstance().getGui()->setInfoTextFilters((StelObject::InfoStringGroup)0);
+		StelApp::getInstance().getGui()->setInfoTextFilters((StelObject::InfoStringGroup)0);
 	else
 		qWarning() << "setSelectedObjectInfo unknown level string \"" << level << "\"";
 }

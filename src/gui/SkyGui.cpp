@@ -21,7 +21,7 @@
 #include "StelGuiItems.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
-
+#include <QGraphicsView>
 #include <QDebug>
 #include <QTimeLine>
 #include <QGraphicsSceneMouseEvent>

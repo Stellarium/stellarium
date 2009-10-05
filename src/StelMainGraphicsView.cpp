@@ -136,6 +136,7 @@ void StelMainGraphicsView::init()
 	gui = new StelGui();
 	gui->init(backItem, mainSkyItem);
 
+	StelApp::getInstance().setGui(gui);
 	StelApp::getInstance().initPlugIns();
 
 	// Force refreshing of button bars if plugins modified the GUI, e.g. added buttons.

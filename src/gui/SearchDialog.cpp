@@ -35,7 +35,6 @@
 #include <QDebug>
 #include <QFrame>
 
-#include "StelMainGraphicsView.hpp"
 #include "SimbadSearcher.hpp"
 
 // Start of members for class CompletionLabel

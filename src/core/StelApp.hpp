@@ -48,6 +48,7 @@ class StelMainScriptAPIProxy;
 class StelDownloadMgr;
 class StelAudioMgr;
 class QNetworkReply;
+class StelGuiBase;
 
 //! @class StelApp
 //! Singleton main Stellarium application class.
@@ -181,6 +182,12 @@ public:
 	
 	//! Call this when the size of the GL window has changed.
 	void glWindowHasBeenResized(float x, float y, float w, float h);
+	
+	//! Get the GUI instance implementing the abstract GUI interface.
+	StelGuiBase* getGui() const {return stelGui;}
+	//! Tell the StelApp instance which GUI si currently being used.
+	//! The caller is responsible for destroying the GUI.
+	void setGui(StelGuiBase* b) {stelGui=b;}
 	
 	//! Make sure that the GL context of the main window is current and valid.
 	static void makeMainGLContextCurrent();
@@ -386,6 +393,8 @@ private:
 
 	StelSkyLayerMgr* skyImageMgr;
 
+	StelGuiBase* stelGui;
+	
 	float fps;
 	//! The minimum desired frame rate in frame per second.
 	float minfps;
