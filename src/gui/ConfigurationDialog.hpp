@@ -26,7 +26,6 @@
 #include <QFile>
 #include "StelDialog.hpp"
 #include "StelApp.hpp"
-#include "StelMainGraphicsView.hpp"
 
 class Ui_configurationDialogForm;
 class QSettings;

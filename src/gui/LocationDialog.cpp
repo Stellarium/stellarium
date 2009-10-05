@@ -19,7 +19,6 @@
 
 #include "Dialog.hpp"
 #include "LocationDialog.hpp"
-#include "StelMainGraphicsView.hpp"
 #include "StelLocationMgr.hpp"
 #include "ui_locationDialogGui.h"
 #include "StelApp.hpp"

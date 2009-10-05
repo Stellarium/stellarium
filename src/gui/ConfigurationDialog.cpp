@@ -54,8 +54,6 @@
 #include <QFile>
 #include <QFileDialog>
 
-#include "StelMainGraphicsView.hpp"
-
 ConfigurationDialog::ConfigurationDialog(StelGui* agui) : gui(agui)
 {
 	ui = new Ui_configurationDialogForm;

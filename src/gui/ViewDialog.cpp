@@ -44,8 +44,6 @@
 #include <QFile>
 #include <QSettings>
 #include <QTimer>
-
-#include "StelMainGraphicsView.hpp"
 #include <QDialog>
 
 ViewDialog::ViewDialog()
@@ -154,7 +152,7 @@ void ViewDialog::createDialogContent()
 	ui->starLabelCheckBox->setChecked(smgr->getFlagLabels());
 	connect(ui->starLabelCheckBox, SIGNAL(toggled(bool)), smgr, SLOT(setFlagLabels(bool)));
 
-	StelGuiBase* gui = StelMainGraphicsView::getInstance().getGui();
+	StelGuiBase* gui = StelApp::getInstance().getGui();
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 	ui->nebulaLabelCheckBox->setChecked(nmgr->getFlagHints());
 	a = gui->getGuiActions("actionShow_Nebulas");

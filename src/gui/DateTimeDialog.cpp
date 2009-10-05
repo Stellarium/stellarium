@@ -19,7 +19,6 @@
 
 #include "Dialog.hpp"
 #include "DateTimeDialog.hpp"
-#include "StelMainGraphicsView.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
