@@ -1193,7 +1193,7 @@ static void interpolateAtCrossingPoint(const Vec3d& v1, const Vec3d& v2, const V
 	Q_ASSERT(ok);
 }
 
-QString SphericalContour::SubContour::toJSON() const
+QString SubContour::toJSON() const
 {
 	QString res("[");
 	double ra, dec;
@@ -1207,7 +1207,7 @@ QString SphericalContour::SubContour::toJSON() const
 	return res;
 };
 
-void SphericalContour::splitContourByPlan(int onLine, const SubContour& inputContour, QVector<SubContour> result[2])
+void OctahedronContour::splitContourByPlan(int onLine, const SubContour& inputContour, QVector<SubContour> result[2])
 {
 	SubContour currentSubContour;
 	SubContour unfinishedSubContour;
@@ -1282,18 +1282,20 @@ void SphericalContour::splitContourByPlan(int onLine, const SubContour& inputCon
 	result[currentQuadrant] << currentSubContour;
 }
 
-SphericalContour::OctahedronContour& SphericalContour::getSplittedSubContours() const
+SubContour::SubContour(const QVector<Vec3d>& vertices, bool closed) : QVector<EdgeVertex>(vertices.size(), EdgeVertex(true))
 {
-	if (!cachedOctahedronContour.isEmpty())
-		return cachedOctahedronContour;
-	
-	cachedOctahedronContour.resize(8);
-	
 	// Create the contour list by adding the matching edge flags
-	// We assume that the contour is closed so set all the flags to true
-	SubContour initContour(vertices.size(), EdgeVertex(true));
 	for (int i=0;i<vertices.size();++i)
-		initContour[i].vertex = vertices.at(i);
+		(*this)[i].vertex = vertices.at(i);
+	if (closed=false)
+	{
+		this->last().edgeFlag=false;
+	}
+}
+
+OctahedronContour::OctahedronContour(const SubContour& initContour)
+{
+	resize(8);
 	
 	QVector<SubContour> splittedContour1[2];
 	// Split the contour on the plan Y=0
@@ -1330,116 +1332,46 @@ SphericalContour::OctahedronContour& SphericalContour::getSplittedSubContours() 
 		}
 		foreach (const SubContour& subContour, splittedVertices2[c])
 		{
-			splitContourByPlan(2, subContour, cachedOctahedronContour.data()+c*2);
+			splitContourByPlan(2, subContour, this->data()+c*2);
 		}
 	}
-	return cachedOctahedronContour;
+	
+	projectOnOctahedron();
 }
 
-Mat4d getPerspectiveMat(double fovy, double zNear, double zFar)
+
+void OctahedronContour::projectOnOctahedron()
 {
-	Mat4d m=Mat4d::identity();
-	double sine, cotangent, deltaZ;
-	double radians=fovy/2.0*M_PI/180.0;
+	static const Vec3d faceCenter[] = {	Vec3d(1,1,1), Vec3d(1,1,-1),Vec3d(-1,1,1),Vec3d(-1,1,-1),
+		Vec3d(1,-1,1),Vec3d(1,-1,-1),Vec3d(-1,-1,1),Vec3d(-1,-1,-1)};
 
-	deltaZ=zFar-zNear;
-	sine=std::sin(radians);
-	Q_ASSERT(deltaZ!=0.0 && sine!=0.0);
-	cotangent=std::cos(radians)/sine;
-	m[0] = cotangent;
-	m[5] = cotangent;
-	m[10] = -(zFar + zNear) / deltaZ;
-	m[11] = -1.0f;
-	m[13] = -2.0f * zNear * zFar / deltaZ;
-	m[15] = 0;
-	return m;
+	Q_ASSERT(size()==8);
+	QVector<SubContour>* subs = data();
+	
+	for (int i=0;i<8;++i)
+	{
+		for (QVector<SubContour>::Iterator iter=subs[i].begin();iter!=subs[i].end();++iter)
+		{
+			for (SubContour::Iterator v=iter->begin();v!=iter->end();++v)
+			{
+				// Project on the face with aperture = 90 deg
+				v->vertex *= 1./(faceCenter[i]*v->vertex);
+				// May want to add offsets after that to map TOAST projection
+			}
+		}
+	}
 }
 
-Mat4d getLookAt(const Vec3d& eye)
-{
-	Vec3d forward=eye;
-	Vec3d up(0,0,1);
-	Mat4d m = Mat4d::identity();
-	forward.normalize();
-
-	Vec3d side = forward ^ up;
-	side.normalize();
-	up = side ^ forward;
-
-	m[0] = side[0];
-	m[4] = side[1];
-	m[8] = side[2];
-
-	m[1] = up[0];
-	m[5] = up[1];
-	m[9] = up[2];
-
-	m[2] = -forward[0];
-	m[5] = -forward[1];
-	m[10] = -forward[2];
-
-	m=m*Mat4d::translation(-eye);
-	return m;
-}
-
-const Mat4d& getTransfoMatOnOctahedron(int n)
-{
-	// Create the projection matrices on each sides of the octahedron
-	static const Mat4d mPerspective = getPerspectiveMat(120, 0.1, 2);
-	static const Mat4d mOctahedron[8] = {
-		mPerspective*getLookAt(Vec3d(1,1,1)), 
-		mPerspective*getLookAt(Vec3d(1,1,-1)),
-		mPerspective*getLookAt(Vec3d(-1,1,1)),
-		mPerspective*getLookAt(Vec3d(-1,1,-1)),
-		mPerspective*getLookAt(Vec3d(1,-1,1)),
-		mPerspective*getLookAt(Vec3d(1,-1,-1)),
-	 	mPerspective*getLookAt(Vec3d(-1,-1,1)),
-		mPerspective*getLookAt(Vec3d(-1,-1,-1))};
-	Q_ASSERT(n>=0 && n<8);
-	return mOctahedron[n];
-}
-
-const Mat4d& getInvTransfoMatOnOctahedron(int n)
-{
-	static const Mat4d mOctahedron[8] = {
-		getTransfoMatOnOctahedron(0).inverse(),
-		getTransfoMatOnOctahedron(1).inverse(),
-		getTransfoMatOnOctahedron(2).inverse(),
-		getTransfoMatOnOctahedron(3).inverse(),
-		getTransfoMatOnOctahedron(4).inverse(),
-		getTransfoMatOnOctahedron(5).inverse(),
-		getTransfoMatOnOctahedron(6).inverse(),
-		getTransfoMatOnOctahedron(7).inverse()};
-	Q_ASSERT(n>=0 && n<8);
-	return mOctahedron[n];
-}
-
-void SphericalContour::OctahedronContour::projectOnOctahedron()
+void OctahedronContour::unprojectOnOctahedron()
 {
 	Q_ASSERT(size()==8);
 	QVector<SubContour>* subs = data();
 	for (int i=0;i<8;++i)
 	{
-		const Mat4d& m = getTransfoMatOnOctahedron(i);
 		for (QVector<SubContour>::Iterator iter=subs[i].begin();iter!=subs[i].end();++iter)
 		{
 			for (SubContour::Iterator v=iter->begin();v!=iter->end();++v)
-				v->vertex.transfo4d(m);
-		}
-	}
-}
-
-void SphericalContour::OctahedronContour::unprojectOnOctahedron()
-{
-	Q_ASSERT(size()==8);
-	QVector<SubContour>* subs = data();
-	for (int i=0;i<8;++i)
-	{
-		const Mat4d& m = getInvTransfoMatOnOctahedron(i);
-		for (QVector<SubContour>::Iterator iter=subs[i].begin();iter!=subs[i].end();++iter)
-		{
-			for (SubContour::Iterator v=iter->begin();v!=iter->end();++v)
-				v->vertex.transfo4d(m);
+				v->vertex.normalize();
 		}
 	}
 }
