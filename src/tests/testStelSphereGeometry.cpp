@@ -402,8 +402,8 @@ void TestStelSphericalGeometry::benchmarkCheckValid()
 
 void TestStelSphericalGeometry::testSphericalContour()
 {
-	SphericalContour contour(smallSquareConvex.getConvexContour());
-	SphericalContour::OctahedronContour& splittedSub = contour.getSplittedSubContours();
+	SubContour contour(smallSquareConvex.getConvexContour());
+	OctahedronContour splittedSub(contour);
 	QVERIFY(splittedSub[0].size()==1);
 	QVERIFY(splittedSub[1].size()==1);
 	QVERIFY(splittedSub[2].size()==0);

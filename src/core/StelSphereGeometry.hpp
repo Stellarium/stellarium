@@ -547,6 +547,8 @@ protected:
 	friend void vertexCallback(void* vertexData, void* userData);
 	friend void vertexTextureCallback(void* vertexData, void* userData);
 
+	
+	
 	//! A list of vertices describing the tesselated polygon. The vertices have to be
 	//! used 3 by 3, forming triangles.
 	QVector<Vec3d> triangleVertices;
@@ -618,13 +620,12 @@ struct EdgeVertex
 	bool edgeFlag;
 };
 
-//! @class SphericalContour
-class SphericalContour
-{
-public:
+
 	class SubContour : public QVector<EdgeVertex>
 	{
 	public:
+		// Create a SubContour from a list of vertices 
+		SubContour(const QVector<Vec3d>& vertices, bool closed=true);
 		SubContour() {;}
 		SubContour(int size, const EdgeVertex& v) : QVector<EdgeVertex>(size, v) {;}
 		QString toJSON() const;
@@ -633,21 +634,29 @@ public:
 	class OctahedronContour : public QVarLengthArray<QVector<SubContour>,8 >
 	{
 	public:
+		//! Create the OctahedronContour by splitting the passed SubContour on the 8 side of the octahedron.
+		OctahedronContour(const SubContour& subContour);
+		
+		//! Append all the SubContours of each octahedron sides. No tesselation occurs at this point,
+		//! and a call to tesselate will proceed on each appended SubContours per side.
+		void append(const OctahedronContour& other);
+				
+		enum TessWindingRule
+		{
+			WindingPositive=0,	//!< Positive winding rule (used for union)
+			WindingAbsGeqTwo=1	//!< Abs greater or equal 2 winding rule (used for intersection)
+		};
+		
+		//! Tesselate the contours per side, producing a list of triangles subcontours according to the given rule.
+		void tesselate(TessWindingRule rule);
+
+	private:
 		void projectOnOctahedron();
 		void unprojectOnOctahedron();
-		void tesselate();
-	private:
+
 		static const Mat4d& getProjectPerspective(int octant);
+		static void splitContourByPlan(int onLine, const SubContour& contour, QVector<SubContour> result[2]);
 	};
-	
-	SphericalContour(const QVector<Vec3d>& avertices) : vertices(avertices) {;}
-	OctahedronContour& getSplittedSubContours() const;
-private:
-	QVector<Vec3d> vertices;
-	mutable OctahedronContour cachedOctahedronContour;
-	static void splitContourByPlan(int onLine, const SubContour& contour, QVector<SubContour> result[2]);
-	
-};
 
 
 
