@@ -31,7 +31,6 @@
 #include "StelNavigator.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelSkyLayerMgr.hpp"
-#include "StelMainGraphicsView.hpp"
 
 #include <QAction>
 #include <QDateTime>
@@ -63,7 +62,7 @@ class StelScriptThread : public QThread
 
 			// For startup scripts, the gui object might not
 			// have completed init when we run. Wait for that.
-			Q_ASSERT(StelMainGraphicsView::getInstance().getGui());
+			Q_ASSERT(StelApp::getInstance().getGui());
 			engine->evaluate(scriptCode);
 		}
 

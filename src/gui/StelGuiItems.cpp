@@ -23,7 +23,6 @@
 #include "StelNavigator.hpp"
 #include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"
-#include "StelMainGraphicsView.hpp"
 #include "StelLocation.hpp"
 #include "StelMovementMgr.hpp"
 

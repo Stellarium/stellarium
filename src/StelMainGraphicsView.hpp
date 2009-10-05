@@ -45,8 +45,6 @@ public:
 	//! Get the main QGLWidget
 	//! @deprecated don't use that.
 	QGLWidget* getOpenGLWin() {return glWidget;}
-
-	StelGuiBase* getGui() {return gui;}
 	
 	//! Delete openGL textures (to call before the GLContext disappears)
 	void deinitGL();

@@ -38,7 +38,6 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelLocaleMgr.hpp"
-#include "StelMainGraphicsView.hpp"
 #include "StelStyle.hpp"
 
 HelpDialog::HelpDialog()
