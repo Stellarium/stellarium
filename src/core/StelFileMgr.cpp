@@ -33,12 +33,13 @@ StelFileMgr::StelFileMgr()
 	{
 		userDirFI = QFileInfo(winApiPath + "\\Stellarium");
 	}
-
+	usersDataDirectoryName = userDirFI.filePath();
 #elif defined(MACOSX)
 	userDirFI.setFile(QDir::homePath() + "/Library/Preferences/Stellarium");
 	usersDataDirectoryName = QDir::homePath() + "/Library/Application Support/Stellarium";
 	QDir dataDirectory(usersDataDirectoryName);
-	if (!dataDirectory.exists()) {
+	if (!dataDirectory.exists())
+	{
 		bool success = dataDirectory.mkdir(usersDataDirectoryName);
 		if (!success) {
 			qFatal("ERROR StelFileMgr::StelFileMgr could not create users data directory at %s", 
