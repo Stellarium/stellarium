@@ -54,6 +54,7 @@
 #include "StelMainWindow.hpp"
 #include "StelStyle.hpp"
 #include "StelMainGraphicsView.hpp"
+#include "StelGuiBase.hpp"
 
 #include <iostream>
 #include <QStringList>
@@ -1294,6 +1295,8 @@ void StelApp::updateI18n()
 	{
 		iter->updateI18n();
 	}
+	if (getGui())
+		getGui()->updateI18n();
 }
 
 // Update and reload sky culture informations everywhere in the program
