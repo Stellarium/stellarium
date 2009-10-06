@@ -27,7 +27,7 @@
  * other dealings in this Software without prior written authorization from
  * Silicon Graphics, Inc.
  *
- * OpenGL ES 1.0 CM port of part of GLU by Mike Gorchak <mike@malva.ua>
+ * OpenGL ES 1.0 CM port of part of GLUES by Mike Gorchak <mike@malva.ua>
  */
 
 #include <stdio.h>
@@ -35,20 +35,20 @@
 
 #include "glues_error.h"
 
-static unsigned char* __gluTessErrors[]=
+static unsigned char* __gluesTessErrors[]=
 {
    (unsigned char*) " ",
-   (unsigned char*) "gluTessBeginPolygon() must precede a gluTessEndPolygon()",
-   (unsigned char*) "gluTessBeginContour() must precede a gluTessEndContour()",
-   (unsigned char*) "gluTessEndPolygon() must follow a gluTessBeginPolygon()",
-   (unsigned char*) "gluTessEndContour() must follow a gluTessBeginContour()",
+   (unsigned char*) "gluesTessBeginPolygon() must precede a gluesTessEndPolygon()",
+   (unsigned char*) "gluesTessBeginContour() must precede a gluesTessEndContour()",
+   (unsigned char*) "gluesTessEndPolygon() must follow a gluesTessBeginPolygon()",
+   (unsigned char*) "gluesTessEndContour() must follow a gluesTessBeginContour()",
    (unsigned char*) "a coordinate is too large",
    (unsigned char*) "need combine callback",
 };
 
-const unsigned char* __gluTessErrorString(int errnum)
+const unsigned char* __gluesTessErrorString(int errnum)
 {
-   return __gluTessErrors[errnum];
+   return __gluesTessErrors[errnum];
 }
 
 struct token_string
@@ -68,16 +68,16 @@ static const struct token_string Errors[]=
    {GL_STACK_UNDERFLOW, "stack underflow"},
    {GL_OUT_OF_MEMORY, "out of memory"},
 
-   /* GLU */
-   { GLU_INVALID_ENUM, "invalid enumerant"},
-   { GLU_INVALID_VALUE, "invalid value"},
-   { GLU_OUT_OF_MEMORY, "out of memory"},
-   { GLU_INCOMPATIBLE_GL_VERSION, "incompatible gl version"},
-   { GLU_INVALID_OPERATION, "invalid operation"},
+   /* GLUES */
+   { GLUES_INVALID_ENUM, "invalid enumerant"},
+   { GLUES_INVALID_VALUE, "invalid value"},
+   { GLUES_OUT_OF_MEMORY, "out of memory"},
+   { GLUES_INCOMPATIBLE_GL_VERSION, "incompatible gl version"},
+   { GLUES_INVALID_OPERATION, "invalid operation"},
    { ~0, NULL } /* end of list indicator */
 };
 
-const GLubyte* gluErrorString(GLenum errorCode)
+const GLubyte* gluesErrorString(GLenum errorCode)
 {
    int i;
 
@@ -89,9 +89,9 @@ const GLubyte* gluErrorString(GLenum errorCode)
       }
    }
 
-   if ((errorCode>=GLU_TESS_ERROR1) && (errorCode<=GLU_TESS_ERROR6))
+   if ((errorCode>=GLUES_TESS_ERROR1) && (errorCode<=GLUES_TESS_ERROR6))
    {
-      return (const GLubyte*) __gluTessErrorString(errorCode-(GLU_TESS_ERROR1-1));
+      return (const GLubyte*) __gluesTessErrorString(errorCode-(GLUES_TESS_ERROR1-1));
    }
 
    return (const GLubyte*)0;

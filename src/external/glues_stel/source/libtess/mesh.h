@@ -38,11 +38,11 @@
 #include "glues.h"
 #include "GLee.h"
 
-typedef struct GLUmesh GLUmesh;
+typedef struct GLUESmesh GLUESmesh;
 
-typedef struct GLUvertex GLUvertex;
-typedef struct GLUface GLUface;
-typedef struct GLUhalfEdge GLUhalfEdge;
+typedef struct GLUESvertex GLUESvertex;
+typedef struct GLUESface GLUESface;
+typedef struct GLUEShalfEdge GLUEShalfEdge;
 
 typedef struct ActiveRegion ActiveRegion;       /* Internal data */
 
@@ -112,11 +112,11 @@ typedef struct ActiveRegion ActiveRegion;       /* Internal data */
  * a region which is not part of the output polygon.
  */
 
-struct GLUvertex
+struct GLUESvertex
 {
-   GLUvertex*    next;          /* next vertex (never NULL) */
-   GLUvertex*    prev;          /* previous vertex (never NULL) */
-   GLUhalfEdge*  anEdge;        /* a half-edge with this origin */
+   GLUESvertex*    next;          /* next vertex (never NULL) */
+   GLUESvertex*    prev;          /* previous vertex (never NULL) */
+   GLUEShalfEdge*  anEdge;        /* a half-edge with this origin */
    void*         data;          /* client's data */
 
    /* Internal data (keep hidden) */
@@ -125,27 +125,27 @@ struct GLUvertex
    long    pqHandle;            /* to allow deletion from priority queue */
 };
 
-struct GLUface
+struct GLUESface
 {
-   GLUface*     next;           /* next face (never NULL) */
-   GLUface*     prev;           /* previous face (never NULL) */
-   GLUhalfEdge* anEdge;         /* a half edge with this left face */
+   GLUESface*     next;           /* next face (never NULL) */
+   GLUESface*     prev;           /* previous face (never NULL) */
+   GLUEShalfEdge* anEdge;         /* a half edge with this left face */
    void*        data;           /* room for client's data */
 
    /* Internal data (keep hidden) */
-   GLUface*     trail;          /* "stack" for conversion to strips */
+   GLUESface*     trail;          /* "stack" for conversion to strips */
    GLboolean    marked;         /* flag for conversion to strips */
    GLboolean    inside;         /* this face is in the polygon interior */
 };
 
-struct GLUhalfEdge
+struct GLUEShalfEdge
 {
-   GLUhalfEdge* next;           /* doubly-linked list (prev==Sym->next) */
-   GLUhalfEdge* Sym;            /* same edge, opposite direction */
-   GLUhalfEdge* Onext;          /* next edge CCW around origin */
-   GLUhalfEdge* Lnext;          /* next edge CCW around left face */
-   GLUvertex*   Org;            /* origin vertex (Overtex too long) */
-   GLUface*     Lface;          /* left face */
+   GLUEShalfEdge* next;           /* doubly-linked list (prev==Sym->next) */
+   GLUEShalfEdge* Sym;            /* same edge, opposite direction */
+   GLUEShalfEdge* Onext;          /* next edge CCW around origin */
+   GLUEShalfEdge* Lnext;          /* next edge CCW around left face */
+   GLUESvertex*   Org;            /* origin vertex (Overtex too long) */
+   GLUESface*     Lface;          /* left face */
 
    /* Internal data (keep hidden) */
    ActiveRegion* activeRegion;  /* a region with this upper edge (sweep.c) */
@@ -163,12 +163,12 @@ struct GLUhalfEdge
 #define Dnext  Rprev->Sym      /* 3 pointers */
 #define Rnext  Oprev->Sym      /* 3 pointers */
 
-struct GLUmesh
+struct GLUESmesh
 {
-   GLUvertex   vHead;           /* dummy header for vertex list */
-   GLUface     fHead;           /* dummy header for face list */
-   GLUhalfEdge eHead;           /* dummy header for edge list */
-   GLUhalfEdge eHeadSym;        /* and its symmetric counterpart */
+   GLUESvertex   vHead;           /* dummy header for vertex list */
+   GLUESface     fHead;           /* dummy header for face list */
+   GLUEShalfEdge eHead;           /* dummy header for edge list */
+   GLUEShalfEdge eHeadSym;        /* and its symmetric counterpart */
 };
 
 /* The mesh operations below have three motivations: completeness,
@@ -248,23 +248,23 @@ struct GLUmesh
  * __gl_meshCheckMesh( mesh ) checks a mesh for self-consistency.
  */
 
-GLUhalfEdge* __gl_meshMakeEdge(GLUmesh* mesh);
-int          __gl_meshSplice(GLUhalfEdge* eOrg, GLUhalfEdge* eDst);
-int          __gl_meshDelete(GLUhalfEdge* eDel);
+GLUEShalfEdge* __gl_meshMakeEdge(GLUESmesh* mesh);
+int          __gl_meshSplice(GLUEShalfEdge* eOrg, GLUEShalfEdge* eDst);
+int          __gl_meshDelete(GLUEShalfEdge* eDel);
 
-GLUhalfEdge* __gl_meshAddEdgeVertex(GLUhalfEdge* eOrg);
-GLUhalfEdge* __gl_meshSplitEdge(GLUhalfEdge* eOrg);
-GLUhalfEdge* __gl_meshConnect(GLUhalfEdge* eOrg, GLUhalfEdge* eDst);
+GLUEShalfEdge* __gl_meshAddEdgeVertex(GLUEShalfEdge* eOrg);
+GLUEShalfEdge* __gl_meshSplitEdge(GLUEShalfEdge* eOrg);
+GLUEShalfEdge* __gl_meshConnect(GLUEShalfEdge* eOrg, GLUEShalfEdge* eDst);
 
-GLUmesh*     __gl_meshNewMesh(void);
-GLUmesh*     __gl_meshUnion(GLUmesh* mesh1, GLUmesh* mesh2);
-void         __gl_meshDeleteMesh(GLUmesh* mesh);
-void         __gl_meshZapFace(GLUface* fZap);
+GLUESmesh*     __gl_meshNewMesh(void);
+GLUESmesh*     __gl_meshUnion(GLUESmesh* mesh1, GLUESmesh* mesh2);
+void         __gl_meshDeleteMesh(GLUESmesh* mesh);
+void         __gl_meshZapFace(GLUESface* fZap);
 
 #ifdef NDEBUG
    #define __gl_meshCheckMesh(mesh)
 #else
-   void __gl_meshCheckMesh(GLUmesh* mesh);
+   void __gl_meshCheckMesh(GLUESmesh* mesh);
 #endif
 
 #endif /* __mesh_h_ */

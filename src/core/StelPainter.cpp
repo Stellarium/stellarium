@@ -213,11 +213,6 @@ void StelPainter::drawViewportShape(void) const
 	glPushMatrix();
 	glTranslated(prj->viewportCenter[0],prj->viewportCenter[1],0.0);
 
-	// Got rid of GLU and therefore copied the code there
-// 	GLUquadricObj * p = gluNewQuadric();
-// 	gluDisk(p, 0.5*prj->viewportFovDiameter, , 256, 1);  // should always cover whole screen
-// 	gluDeleteQuadric(p);
-
 	GLfloat innerRadius = 0.5*prj->viewportFovDiameter;
 	GLfloat outerRadius = prj->getViewportWidth()+prj->getViewportHeight();
 	GLint slices = 256;

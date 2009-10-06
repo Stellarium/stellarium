@@ -18,6 +18,7 @@
  */
 
 #include <cstdlib>
+#include "glues.h"
 #include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
@@ -37,8 +38,6 @@
 #include <QImage>
 #include <QGLWidget>
 #include <QNetworkReply>
-
-#include "glues.h"
 
 // Initialize statics
 QSemaphore* StelTexture::maxLoadThreadSemaphore = new QSemaphore(5);

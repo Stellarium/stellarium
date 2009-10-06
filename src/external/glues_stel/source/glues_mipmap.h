@@ -27,11 +27,11 @@
  * other dealings in this Software without prior written authorization from
  * Silicon Graphics, Inc.
  *
- * OpenGL ES CM 1.0 port of part of GLU by Mike Gorchak <mike@malva.ua>
+ * OpenGL ES CM 1.0 port of part of GLUES by Mike Gorchak <mike@malva.ua>
  */
 
-#ifndef __GLUES_MIPMAP_H__
-#define __GLUES_MIPMAP_H__
+#ifndef __GLUESES_MIPMAP_H__
+#define __GLUESES_MIPMAP_H__
 
 #include "GLee.h"
 
@@ -40,21 +40,17 @@
 #endif
 
 /* ErrorCode */
-#define GLU_INVALID_ENUM                   100900
-#define GLU_INVALID_VALUE                  100901
-#define GLU_OUT_OF_MEMORY                  100902
-#define GLU_INCOMPATIBLE_GL_VERSION        100903
-#define GLU_INVALID_OPERATION              100904
+#define GLUES_INVALID_ENUM                   100900
+#define GLUES_INVALID_VALUE                  100901
+#define GLUES_OUT_OF_MEMORY                  100902
+#define GLUES_INCOMPATIBLE_GL_VERSION        100903
+#define GLUES_INVALID_OPERATION              100904
 
-GLint gluScaleImage(GLenum format, GLsizei widthin,
-                             GLsizei heightin, GLenum typein,
-                             const void* datain, GLsizei widthout,
-                             GLsizei heightout, GLenum typeout, void* dataout);
-GLint gluBuild2DMipmapLevels(GLenum target, GLint internalFormat,
+GLint gluesBuild2DMipmapLevels(GLenum target, GLint internalFormat,
                              GLsizei width, GLsizei height, GLenum format,
                              GLenum type, GLint userLevel, GLint baseLevel,
                              GLint maxLevel, const void *data);
-GLint gluBuild2DMipmaps(GLenum target, GLint internalFormat,
+GLint gluesBuild2DMipmaps(GLenum target, GLint internalFormat,
                              GLsizei width, GLsizei height, GLenum format,
                              GLenum type, const void* data);
 
@@ -62,4 +58,4 @@ GLint gluBuild2DMipmaps(GLenum target, GLint internalFormat,
 }
 #endif
 
-#endif /* __GLUES_REGISTRY_H__ */
+#endif /* __GLUESES_REGISTRY_H__ */

@@ -43,7 +43,7 @@
  * to the polygon, according to the rule given by tess->windingRule.
  * Each interior region is guaranteed be monotone.
  */
-int __gl_computeInterior(GLUtesselator* tess);
+int __gl_computeInterior(GLUEStesselator* tess);
 
 /* The following is here *only* for access by debugging routines */
 
@@ -57,7 +57,7 @@ int __gl_computeInterior(GLUtesselator* tess);
 
 struct ActiveRegion
 {
-   GLUhalfEdge*  eUp;           /* upper edge, directed right to left      */
+   GLUEShalfEdge*  eUp;           /* upper edge, directed right to left      */
    DictNode*     nodeUp;        /* dictionary node corresponding to eUp    */
    int           windingNumber; /* used to determine which regions are
                                  * inside the polygon                      */

@@ -40,14 +40,14 @@
 #define TRUE 1
 #define FALSE 0
 
-static GLUvertex* allocVertex()
+static GLUESvertex* allocVertex()
 {
-   return (GLUvertex*)memAlloc(sizeof(GLUvertex));
+   return (GLUESvertex*)memAlloc(sizeof(GLUESvertex));
 }
 
-static GLUface* allocFace()
+static GLUESface* allocFace()
 {
-   return (GLUface*)memAlloc(sizeof(GLUface));
+   return (GLUESface*)memAlloc(sizeof(GLUESface));
 }
 
 /************************ Utility Routines ************************/
@@ -57,19 +57,19 @@ static GLUface* allocFace()
  */
 typedef struct
 {
-   GLUhalfEdge e;
-   GLUhalfEdge eSym;
+   GLUEShalfEdge e;
+   GLUEShalfEdge eSym;
 } EdgePair;
 
 /* MakeEdge creates a new pair of half-edges which form their own loop.
  * No vertex or face structures are allocated, but these must be assigned
  * before the current edge operation is completed.
  */
-static GLUhalfEdge* MakeEdge(GLUhalfEdge* eNext)
+static GLUEShalfEdge* MakeEdge(GLUEShalfEdge* eNext)
 {
-   GLUhalfEdge* e;
-   GLUhalfEdge* eSym;
-   GLUhalfEdge* ePrev;
+   GLUEShalfEdge* e;
+   GLUEShalfEdge* eSym;
+   GLUEShalfEdge* ePrev;
    EdgePair* pair=(EdgePair*)memAlloc(sizeof(EdgePair));
 
    if (pair==NULL)
@@ -120,10 +120,10 @@ static GLUhalfEdge* MakeEdge(GLUhalfEdge* eNext)
  * depending on whether a and b belong to different face or vertex rings.
  * For more explanation see __gl_meshSplice() below.
  */
-static void Splice(GLUhalfEdge* a, GLUhalfEdge* b)
+static void Splice(GLUEShalfEdge* a, GLUEShalfEdge* b)
 {
-   GLUhalfEdge* aOnext=a->Onext;
-   GLUhalfEdge* bOnext=b->Onext;
+   GLUEShalfEdge* aOnext=a->Onext;
+   GLUEShalfEdge* bOnext=b->Onext;
 
    aOnext->Sym->Lnext=b;
    bOnext->Sym->Lnext=a;
@@ -137,11 +137,11 @@ static void Splice(GLUhalfEdge* a, GLUhalfEdge* b)
  * the new vertex *before* vNext so that algorithms which walk the vertex
  * list will not see the newly created vertices.
  */
-static void MakeVertex(GLUvertex* newVertex, GLUhalfEdge* eOrig, GLUvertex* vNext)
+static void MakeVertex(GLUESvertex* newVertex, GLUEShalfEdge* eOrig, GLUESvertex* vNext)
 {
-   GLUhalfEdge* e;
-   GLUvertex*   vPrev;
-   GLUvertex*   vNew=newVertex;
+   GLUEShalfEdge* e;
+   GLUESvertex*   vPrev;
+   GLUESvertex*   vNew=newVertex;
 
    assert(vNew!=NULL);
 
@@ -171,11 +171,11 @@ static void MakeVertex(GLUvertex* newVertex, GLUhalfEdge* eOrig, GLUvertex* vNex
  * the new face *before* fNext so that algorithms which walk the face
  * list will not see the newly created faces.
  */
-static void MakeFace(GLUface* newFace, GLUhalfEdge* eOrig, GLUface* fNext)
+static void MakeFace(GLUESface* newFace, GLUEShalfEdge* eOrig, GLUESface* fNext)
 {
-   GLUhalfEdge* e;
-   GLUface* fPrev;
-   GLUface* fNew=newFace;
+   GLUEShalfEdge* e;
+   GLUESface* fPrev;
+   GLUESface* fNew=newFace;
 
    assert(fNew!=NULL);
 
@@ -207,10 +207,10 @@ static void MakeFace(GLUface* newFace, GLUhalfEdge* eOrig, GLUface* fNext)
 /* KillEdge( eDel ) destroys an edge (the half-edges eDel and eDel->Sym),
  * and removes from the global edge list.
  */
-static void KillEdge(GLUhalfEdge* eDel)
+static void KillEdge(GLUEShalfEdge* eDel)
 {
-   GLUhalfEdge* ePrev;
-   GLUhalfEdge* eNext;
+   GLUEShalfEdge* ePrev;
+   GLUEShalfEdge* eNext;
 
    /* Half-edges are allocated in pairs, see EdgePair above */
    if (eDel->Sym<eDel)
@@ -230,11 +230,11 @@ static void KillEdge(GLUhalfEdge* eDel)
 /* KillVertex(vDel) destroys a vertex and removes it from the global
  * vertex list. It updates the vertex loop to point to a given new vertex.
  */
-static void KillVertex(GLUvertex* vDel, GLUvertex* newOrg)
+static void KillVertex(GLUESvertex* vDel, GLUESvertex* newOrg)
 {
-   GLUhalfEdge* e, *eStart=vDel->anEdge;
-   GLUvertex* vPrev;
-   GLUvertex* vNext;
+   GLUEShalfEdge* e, *eStart=vDel->anEdge;
+   GLUESvertex* vPrev;
+   GLUESvertex* vNext;
 
    /* change the origin of all affected edges */
    e=eStart;
@@ -255,11 +255,11 @@ static void KillVertex(GLUvertex* vDel, GLUvertex* newOrg)
 /* KillFace(fDel) destroys a face and removes it from the global face
  * list. It updates the face loop to point to a given new face.
  */
-static void KillFace(GLUface* fDel, GLUface* newLface)
+static void KillFace(GLUESface* fDel, GLUESface* newLface)
 {
-   GLUhalfEdge* e, *eStart=fDel->anEdge;
-   GLUface* fPrev;
-   GLUface* fNext;
+   GLUEShalfEdge* e, *eStart=fDel->anEdge;
+   GLUESface* fPrev;
+   GLUESface* fNext;
 
    /* change the left face of all affected edges */
    e=eStart;
@@ -281,12 +281,12 @@ static void KillFace(GLUface* fDel, GLUface* newLface)
 /* __gl_meshMakeEdge creates one edge, two vertices, and a loop (face).
  * The loop consists of the two new half-edges.
  */
-GLUhalfEdge* __gl_meshMakeEdge(GLUmesh* mesh)
+GLUEShalfEdge* __gl_meshMakeEdge(GLUESmesh* mesh)
 {
-   GLUvertex* newVertex1=allocVertex();
-   GLUvertex* newVertex2=allocVertex();
-   GLUface* newFace=allocFace();
-   GLUhalfEdge* e;
+   GLUESvertex* newVertex1=allocVertex();
+   GLUESvertex* newVertex2=allocVertex();
+   GLUESface* newFace=allocFace();
+   GLUEShalfEdge* e;
 
    /* if any one is null then all get freed */
    if (newVertex1==NULL || newVertex2==NULL || newFace==NULL)
@@ -342,7 +342,7 @@ GLUhalfEdge* __gl_meshMakeEdge(GLUmesh* mesh)
  * If eDst == eOrg->Onext, the new vertex will have a single edge.
  * If eDst == eOrg->Oprev, the old vertex will have a single edge.
  */
-int __gl_meshSplice(GLUhalfEdge* eOrg, GLUhalfEdge* eDst)
+int __gl_meshSplice(GLUEShalfEdge* eOrg, GLUEShalfEdge* eDst)
 {
    int joiningLoops=FALSE;
    int joiningVertices=FALSE;
@@ -371,7 +371,7 @@ int __gl_meshSplice(GLUhalfEdge* eOrg, GLUhalfEdge* eDst)
 
    if (!joiningVertices)
    {
-      GLUvertex* newVertex=allocVertex();
+      GLUESvertex* newVertex=allocVertex();
       if (newVertex==NULL)
       {
          return 0;
@@ -386,7 +386,7 @@ int __gl_meshSplice(GLUhalfEdge* eOrg, GLUhalfEdge* eDst)
 
    if (!joiningLoops)
    {
-      GLUface* newFace=allocFace();
+      GLUESface* newFace=allocFace();
       if (newFace==NULL)
       {
          return 0;
@@ -412,9 +412,9 @@ int __gl_meshSplice(GLUhalfEdge* eOrg, GLUhalfEdge* eDst)
  * plus a few calls to memFree, but this would allocate and delete
  * unnecessary vertices and faces.
  */
-int __gl_meshDelete(GLUhalfEdge* eDel)
+int __gl_meshDelete(GLUEShalfEdge* eDel)
 {
-   GLUhalfEdge* eDelSym=eDel->Sym;
+   GLUEShalfEdge* eDelSym=eDel->Sym;
    int joiningLoops=FALSE;
 
    /* First step: disconnect the origin vertex eDel->Org.  We make all
@@ -440,7 +440,7 @@ int __gl_meshDelete(GLUhalfEdge* eDel)
       Splice(eDel, eDel->Oprev);
       if (!joiningLoops)
       {
-         GLUface* newFace=allocFace();
+         GLUESface* newFace=allocFace();
          if (newFace==NULL)
          {
             return 0; 
@@ -483,10 +483,10 @@ int __gl_meshDelete(GLUhalfEdge* eDel)
  * eNew == eOrg->Lnext, and eNew->Dst is a newly created vertex.
  * eOrg and eNew will have the same left face.
  */
-GLUhalfEdge* __gl_meshAddEdgeVertex(GLUhalfEdge* eOrg)
+GLUEShalfEdge* __gl_meshAddEdgeVertex(GLUEShalfEdge* eOrg)
 {
-   GLUhalfEdge* eNewSym;
-   GLUhalfEdge* eNew=MakeEdge(eOrg);
+   GLUEShalfEdge* eNewSym;
+   GLUEShalfEdge* eNew=MakeEdge(eOrg);
 
    if (eNew==NULL)
    {
@@ -501,7 +501,7 @@ GLUhalfEdge* __gl_meshAddEdgeVertex(GLUhalfEdge* eOrg)
    /* Set the vertex and face information */
    eNew->Org=eOrg->Dst;
    {
-      GLUvertex* newVertex=allocVertex();
+      GLUESvertex* newVertex=allocVertex();
       if (newVertex==NULL)
       {
          return NULL;
@@ -518,10 +518,10 @@ GLUhalfEdge* __gl_meshAddEdgeVertex(GLUhalfEdge* eOrg)
  * such that eNew == eOrg->Lnext.  The new vertex is eOrg->Dst == eNew->Org.
  * eOrg and eNew will have the same left face.
  */
-GLUhalfEdge* __gl_meshSplitEdge(GLUhalfEdge* eOrg)
+GLUEShalfEdge* __gl_meshSplitEdge(GLUEShalfEdge* eOrg)
 {
-   GLUhalfEdge* eNew;
-   GLUhalfEdge* tempHalfEdge=__gl_meshAddEdgeVertex(eOrg);
+   GLUEShalfEdge* eNew;
+   GLUEShalfEdge* tempHalfEdge=__gl_meshAddEdgeVertex(eOrg);
    if (tempHalfEdge==NULL)
    {
       return NULL;
@@ -553,11 +553,11 @@ GLUhalfEdge* __gl_meshSplitEdge(GLUhalfEdge* eOrg)
  * If (eOrg->Lnext == eDst), the old face is reduced to a single edge.
  * If (eOrg->Lnext->Lnext == eDst), the old face is reduced to two edges.
  */
-GLUhalfEdge* __gl_meshConnect(GLUhalfEdge* eOrg, GLUhalfEdge* eDst)
+GLUEShalfEdge* __gl_meshConnect(GLUEShalfEdge* eOrg, GLUEShalfEdge* eDst)
 {
-   GLUhalfEdge* eNewSym;
+   GLUEShalfEdge* eNewSym;
    int joiningLoops=FALSE;
-   GLUhalfEdge* eNew=MakeEdge(eOrg);
+   GLUEShalfEdge* eNew=MakeEdge(eOrg);
 
    if (eNew==NULL)
    {
@@ -587,7 +587,7 @@ GLUhalfEdge* __gl_meshConnect(GLUhalfEdge* eOrg, GLUhalfEdge* eDst)
 
    if (!joiningLoops)
    {
-      GLUface* newFace=allocFace();
+      GLUESface* newFace=allocFace();
 
       if (newFace==NULL)
       {
@@ -609,11 +609,11 @@ GLUhalfEdge* __gl_meshConnect(GLUhalfEdge* eOrg, GLUhalfEdge* eDst)
  * An entire mesh can be deleted by zapping its faces, one at a time,
  * in any order. Zapped faces cannot be used in further mesh operations!
  */
-void __gl_meshZapFace(GLUface* fZap)
+void __gl_meshZapFace(GLUESface* fZap)
 {
-   GLUhalfEdge* eStart=fZap->anEdge;
-   GLUhalfEdge* e, *eNext, *eSym;
-   GLUface* fPrev, *fNext;
+   GLUEShalfEdge* eStart=fZap->anEdge;
+   GLUEShalfEdge* e, *eNext, *eSym;
+   GLUESface* fPrev, *fNext;
 
    /* walk around face, deleting edges whose right face is also NULL */
    eNext=eStart->Lnext;
@@ -662,13 +662,13 @@ void __gl_meshZapFace(GLUface* fZap)
 /* __gl_meshNewMesh() creates a new mesh with no edges, no vertices,
  * and no loops (what we usually call a "face").
  */
-GLUmesh* __gl_meshNewMesh(void)
+GLUESmesh* __gl_meshNewMesh(void)
 {
-   GLUvertex* v;
-   GLUface* f;
-   GLUhalfEdge* e;
-   GLUhalfEdge* eSym;
-   GLUmesh* mesh=(GLUmesh*)memAlloc(sizeof(GLUmesh));
+   GLUESvertex* v;
+   GLUESface* f;
+   GLUEShalfEdge* e;
+   GLUEShalfEdge* eSym;
+   GLUESmesh* mesh=(GLUESmesh*)memAlloc(sizeof(GLUESmesh));
 
    if (mesh==NULL)
    {
@@ -715,14 +715,14 @@ GLUmesh* __gl_meshNewMesh(void)
 /* __gl_meshUnion( mesh1, mesh2 ) forms the union of all structures in
  * both meshes, and returns the new mesh (the old meshes are destroyed).
  */
-GLUmesh* __gl_meshUnion(GLUmesh* mesh1, GLUmesh* mesh2)
+GLUESmesh* __gl_meshUnion(GLUESmesh* mesh1, GLUESmesh* mesh2)
 {
-   GLUface* f1=&mesh1->fHead;
-   GLUvertex* v1=&mesh1->vHead;
-   GLUhalfEdge* e1=&mesh1->eHead;
-   GLUface* f2=&mesh2->fHead;
-   GLUvertex* v2=&mesh2->vHead;
-   GLUhalfEdge* e2=&mesh2->eHead;
+   GLUESface* f1=&mesh1->fHead;
+   GLUESvertex* v1=&mesh1->vHead;
+   GLUEShalfEdge* e1=&mesh1->eHead;
+   GLUESface* f2=&mesh2->fHead;
+   GLUESvertex* v2=&mesh2->vHead;
+   GLUEShalfEdge* e2=&mesh2->eHead;
 
    /* Add the faces, vertices, and edges of mesh2 to those of mesh1 */
    if (f2->next!=f2)
@@ -758,9 +758,9 @@ GLUmesh* __gl_meshUnion(GLUmesh* mesh1, GLUmesh* mesh2)
 
 /* __gl_meshDeleteMesh(mesh) will free all storage for any valid mesh.
  */
-void __gl_meshDeleteMesh( GLUmesh *mesh )
+void __gl_meshDeleteMesh( GLUESmesh *mesh )
 {
-  GLUface* fHead=&mesh->fHead;
+  GLUESface* fHead=&mesh->fHead;
 
   while(fHead->next!=fHead)
   {
@@ -775,14 +775,14 @@ void __gl_meshDeleteMesh( GLUmesh *mesh )
 
 /* __gl_meshDeleteMesh(mesh) will free all storage for any valid mesh.
  */
-void __gl_meshDeleteMesh( GLUmesh *mesh )
+void __gl_meshDeleteMesh( GLUESmesh *mesh )
 {
-   GLUface* f;
-   GLUface* fNext;
-   GLUvertex* v;
-   GLUvertex* vNext;
-   GLUhalfEdge* e;
-   GLUhalfEdge* eNext;
+   GLUESface* f;
+   GLUESface* fNext;
+   GLUESvertex* v;
+   GLUESvertex* vNext;
+   GLUEShalfEdge* e;
+   GLUEShalfEdge* eNext;
 
    for (f=mesh->fHead.next; f!=&mesh->fHead; f=fNext)
    {
@@ -812,17 +812,17 @@ void __gl_meshDeleteMesh( GLUmesh *mesh )
 
 /* __gl_meshCheckMesh( mesh ) checks a mesh for self-consistency.
  */
-void __gl_meshCheckMesh(GLUmesh* mesh)
+void __gl_meshCheckMesh(GLUESmesh* mesh)
 {
-   GLUface *fHead=&mesh->fHead;
-   GLUvertex *vHead=&mesh->vHead;
-   GLUhalfEdge *eHead=&mesh->eHead;
-   GLUface* f;
-   GLUface* fPrev;
-   GLUvertex* v;
-   GLUvertex* vPrev;
-   GLUhalfEdge* e;
-   GLUhalfEdge* ePrev;
+   GLUESface *fHead=&mesh->fHead;
+   GLUESvertex *vHead=&mesh->vHead;
+   GLUEShalfEdge *eHead=&mesh->eHead;
+   GLUESface* f;
+   GLUESface* fPrev;
+   GLUESvertex* v;
+   GLUESvertex* vPrev;
+   GLUEShalfEdge* e;
+   GLUEShalfEdge* ePrev;
 
    fPrev=fHead;
    for (fPrev=fHead; (f=fPrev->next)!=fHead; fPrev=f)
