@@ -514,7 +514,7 @@ void StelGui::setStelStyle(const StelStyle& style)
 void StelGui::updateI18n()
 {
 	// Translate all action texts
-	foreach (QObject* obj, StelMainGraphicsView::getInstance().children())
+	foreach (QObject* obj, stelAppGraphicsWidget->children())
 	{
 		QAction* a = qobject_cast<QAction*>(obj);
 		if (a)
