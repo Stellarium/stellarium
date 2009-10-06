@@ -66,7 +66,7 @@ struct GLUEStesselator
    GLUESmesh* mesh;               /* stores the input contours, and eventually
                                    the tessellation itself */
 
-   void (APIENTRY* callError)(GLenum errnum);
+   void (* callError)(GLenum errnum);
 
    /*** state needed for projecting onto the sweep plane ***/
    GLdouble normal[3]; /* user-specified normal (if provided) */
@@ -82,7 +82,7 @@ struct GLUEStesselator
    PriorityQ* pq;               /* priority queue of vertex events */
    GLUESvertex* event;            /* current sweep event being processed */
 
-   void (APIENTRY* callCombine)(GLdouble coords[3], void*  data[4],
+   void (* callCombine)(GLdouble coords[3], void*  data[4],
                                 GLfloat weight[4], void** outData);
 
   /*** state needed for rendering callbacks (see render.c) ***/
@@ -91,11 +91,11 @@ struct GLUEStesselator
   /* list of triangles which could not be rendered as strips or fans */
   GLUESface*      lonelyTriList;
 
-  void (APIENTRY* callBegin)(GLenum type);
-  void (APIENTRY* callEdgeFlag)(GLboolean boundaryEdge);
-  void (APIENTRY* callVertex)(void* data);
-  void (APIENTRY* callEnd)(void);
-  void (APIENTRY* callMesh)(GLUESmesh* mesh);
+  void (* callBegin)(GLenum type);
+  void (* callEdgeFlag)(GLboolean boundaryEdge);
+  void (* callVertex)(void* data);
+  void (* callEnd)(void);
+  void (* callMesh)(GLUESmesh* mesh);
 
   /*** state needed to cache single-contour polygons for renderCache() */
 
@@ -104,12 +104,12 @@ struct GLUEStesselator
   CachedVertex  cache[TESS_MAX_CACHE];  /* the vertex data */
 
   /*** rendering callbacks that also pass polygon data  ***/
-  void (APIENTRY* callBeginData)(GLenum type, void* polygonData);
-  void (APIENTRY* callEdgeFlagData)(GLboolean boundaryEdge, void* polygonData);
-  void (APIENTRY* callVertexData)(void* data, void* polygonData);
-  void (APIENTRY* callEndData)(void* polygonData);
-  void (APIENTRY* callErrorData)(GLenum errnum, void *polygonData);
-  void (APIENTRY* callCombineData)(GLdouble coords[3], void* data[4],
+  void (* callBeginData)(GLenum type, void* polygonData);
+  void (* callEdgeFlagData)(GLboolean boundaryEdge, void* polygonData);
+  void (* callVertexData)(void* data, void* polygonData);
+  void (* callEndData)(void* polygonData);
+  void (* callErrorData)(GLenum errnum, void *polygonData);
+  void (* callCombineData)(GLdouble coords[3], void* data[4],
                                    GLfloat weight[4], void** outData,
                                    void* polygonData);
 
@@ -118,12 +118,12 @@ struct GLUEStesselator
   void* polygonData;    /* client data for current polygon */
 };
 
- void APIENTRY __gl_noBeginData(GLenum type, void* polygonData);
- void APIENTRY __gl_noEdgeFlagData(GLboolean boundaryEdge, void* polygonData);
- void APIENTRY __gl_noVertexData(void* data, void* polygonData);
- void APIENTRY __gl_noEndData(void* polygonData);
- void APIENTRY __gl_noErrorData(GLenum errnum, void* polygonData);
- void APIENTRY __gl_noCombineData(GLdouble coords[3], void* data[4],
+ void  __gl_noBeginData(GLenum type, void* polygonData);
+ void  __gl_noEdgeFlagData(GLboolean boundaryEdge, void* polygonData);
+ void  __gl_noVertexData(void* data, void* polygonData);
+ void  __gl_noEndData(void* polygonData);
+ void  __gl_noErrorData(GLenum errnum, void* polygonData);
+ void  __gl_noCombineData(GLdouble coords[3], void* data[4],
                                        GLfloat weight[4], void** outData,
                                        void* polygonData);
 

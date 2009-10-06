@@ -54,21 +54,21 @@
 #define FALSE 0
 
 
-/*ARGSUSED*/ static void APIENTRY noBegin(GLenum type) {}
-/*ARGSUSED*/ static void APIENTRY noEdgeFlag(GLboolean boundaryEdge ) {}
-/*ARGSUSED*/ static void APIENTRY noVertex(void* data) {}
-/*ARGSUSED*/ static void APIENTRY noEnd(void) {}
-/*ARGSUSED*/ static void APIENTRY noError(GLenum errnum) {}
-/*ARGSUSED*/ static void APIENTRY noCombine(GLdouble coords[3], void *data[4],
+/*ARGSUSED*/ static void  noBegin(GLenum type) {}
+/*ARGSUSED*/ static void  noEdgeFlag(GLboolean boundaryEdge ) {}
+/*ARGSUSED*/ static void  noVertex(void* data) {}
+/*ARGSUSED*/ static void  noEnd(void) {}
+/*ARGSUSED*/ static void  noError(GLenum errnum) {}
+/*ARGSUSED*/ static void  noCombine(GLdouble coords[3], void *data[4],
                                             GLfloat weight[4], void **dataOut) {}
-/*ARGSUSED*/ static void APIENTRY noMesh(GLUESmesh* mesh) {}
+/*ARGSUSED*/ static void  noMesh(GLUESmesh* mesh) {}
 
-/*ARGSUSED*/ void APIENTRY __gl_noBeginData(GLenum type, void* polygonData) {}
-/*ARGSUSED*/ void APIENTRY __gl_noEdgeFlagData(GLboolean boundaryEdge, void* polygonData) {}
-/*ARGSUSED*/ void APIENTRY __gl_noVertexData(void* data, void* polygonData) {}
-/*ARGSUSED*/ void APIENTRY __gl_noEndData(void* polygonData) {}
-/*ARGSUSED*/ void APIENTRY __gl_noErrorData( GLenum errnum, void* polygonData) {}
-/*ARGSUSED*/ void APIENTRY __gl_noCombineData(GLdouble coords[3], void* data[4],
+/*ARGSUSED*/ void  __gl_noBeginData(GLenum type, void* polygonData) {}
+/*ARGSUSED*/ void  __gl_noEdgeFlagData(GLboolean boundaryEdge, void* polygonData) {}
+/*ARGSUSED*/ void  __gl_noVertexData(void* data, void* polygonData) {}
+/*ARGSUSED*/ void  __gl_noEndData(void* polygonData) {}
+/*ARGSUSED*/ void  __gl_noErrorData( GLenum errnum, void* polygonData) {}
+/*ARGSUSED*/ void  __gl_noCombineData(GLdouble coords[3], void* data[4],
                                               GLfloat weight[4], void** outData,
                                               void* polygonData) {}
 
@@ -80,7 +80,7 @@ typedef struct {GLUEShalfEdge e, eSym;} EdgePair;
 #define MAX_FAST_ALLOC  (MAX(sizeof(EdgePair), \
                          MAX(sizeof(GLUESvertex), sizeof(GLUESface))))
 
-GLUEStesselator* APIENTRY gluesNewTess(void)
+GLUEStesselator*  gluesNewTess(void)
 {
    GLUEStesselator* tess;
 
@@ -187,13 +187,13 @@ static void GotoState(GLUEStesselator* tess, enum TessState newState)
    }
 }
 
-void APIENTRY gluesDeleteTess(GLUEStesselator* tess)
+void  gluesDeleteTess(GLUEStesselator* tess)
 {
    RequireState(tess, T_DORMANT);
    memFree(tess);
 }
 
-void APIENTRY gluesTessProperty(GLUEStesselator* tess, GLenum which, GLdouble value)
+void  gluesTessProperty(GLUEStesselator* tess, GLenum which, GLdouble value)
 {
    GLenum windingRule;
 
@@ -238,7 +238,7 @@ void APIENTRY gluesTessProperty(GLUEStesselator* tess, GLenum which, GLdouble va
 }
 
 /* Returns tessellator property */
-void APIENTRY gluesGetTessProperty(GLUEStesselator* tess, GLenum which, GLdouble* value)
+void  gluesGetTessProperty(GLUEStesselator* tess, GLenum which, GLdouble* value)
 {
    switch (which)
    {
@@ -266,26 +266,26 @@ void APIENTRY gluesGetTessProperty(GLUEStesselator* tess, GLenum which, GLdouble
    }
 }
 
-void APIENTRY gluesTessNormal(GLUEStesselator* tess, GLdouble x, GLdouble y, GLdouble z)
+void  gluesTessNormal(GLUEStesselator* tess, GLdouble x, GLdouble y, GLdouble z)
 {
    tess->normal[0]=x;
    tess->normal[1]=y;
    tess->normal[2]=z;
 }
 
-void APIENTRY gluesTessCallback(GLUEStesselator* tess, GLenum which, _GLUESfuncptr fn)
+void  gluesTessCallback(GLUEStesselator* tess, GLenum which, _GLUESfuncptr fn)
 {
    switch (which)
    {
       case GLUES_TESS_BEGIN:
-           tess->callBegin=(fn==NULL) ? &noBegin: (void (APIENTRY*)(GLenum))fn;
+           tess->callBegin=(fn==NULL) ? &noBegin: (void (*)(GLenum))fn;
            return;
       case GLUES_TESS_BEGIN_DATA:
            tess->callBeginData=(fn==NULL) ?
-              &__gl_noBeginData: (void (APIENTRY*)(GLenum, void*))fn;
+              &__gl_noBeginData: (void (*)(GLenum, void*))fn;
            return;
       case GLUES_TESS_EDGE_FLAG:
-           tess->callEdgeFlag=(fn==NULL) ? &noEdgeFlag: (void (APIENTRY*)(GLboolean))fn;
+           tess->callEdgeFlag=(fn==NULL) ? &noEdgeFlag: (void (*)(GLboolean))fn;
            /* If the client wants boundary edges to be flagged,
             * we render everything as separate triangles (no strips or fans).
             */
@@ -293,41 +293,41 @@ void APIENTRY gluesTessCallback(GLUEStesselator* tess, GLenum which, _GLUESfuncp
            return;
       case GLUES_TESS_EDGE_FLAG_DATA:
            tess->callEdgeFlagData=(fn==NULL) ?
-              &__gl_noEdgeFlagData: (void (APIENTRY*)(GLboolean, void*))fn;
+              &__gl_noEdgeFlagData: (void (*)(GLboolean, void*))fn;
            /* If the client wants boundary edges to be flagged,
             * we render everything as separate triangles (no strips or fans).
             */
            tess->flagBoundary=(fn!=NULL);
            return;
       case GLUES_TESS_VERTEX:
-           tess->callVertex=(fn==NULL) ? &noVertex: (void (APIENTRY*)(void*))fn;
+           tess->callVertex=(fn==NULL) ? &noVertex: (void (*)(void*))fn;
            return;
       case GLUES_TESS_VERTEX_DATA:
            tess->callVertexData=(fn==NULL) ?
-              &__gl_noVertexData: (void (APIENTRY*)(void*, void*))fn;
+              &__gl_noVertexData: (void (*)(void*, void*))fn;
            return;
       case GLUES_TESS_END:
-           tess->callEnd=(fn==NULL) ? &noEnd: (void (APIENTRY*)(void))fn;
+           tess->callEnd=(fn==NULL) ? &noEnd: (void (*)(void))fn;
            return;
       case GLUES_TESS_END_DATA:
-           tess->callEndData=(fn==NULL) ? &__gl_noEndData: (void (APIENTRY*)(void*))fn;
+           tess->callEndData=(fn==NULL) ? &__gl_noEndData: (void (*)(void*))fn;
            return;
       case GLUES_TESS_ERROR:
-           tess->callError=(fn==NULL) ? &noError: (void (APIENTRY*)(GLenum))fn;
+           tess->callError=(fn==NULL) ? &noError: (void (*)(GLenum))fn;
            return;
       case GLUES_TESS_ERROR_DATA:
-           tess->callErrorData=(fn==NULL) ? &__gl_noErrorData: (void (APIENTRY*)(GLenum, void*))fn;
+           tess->callErrorData=(fn==NULL) ? &__gl_noErrorData: (void (*)(GLenum, void*))fn;
            return;
       case GLUES_TESS_COMBINE:
            tess->callCombine=(fn==NULL) ? &noCombine:
-			   (void (APIENTRY*)(GLdouble[3], void*[4], GLfloat[4], void**))fn;
+			   (void (*)(GLdouble[3], void*[4], GLfloat[4], void**))fn;
            return;
       case GLUES_TESS_COMBINE_DATA:
            tess->callCombineData=(fn==NULL) ? &__gl_noCombineData:
-			   (void (APIENTRY*)(GLdouble [3], void*[4], GLfloat[4], void**, void*))fn;
+			   (void (*)(GLdouble [3], void*[4], GLfloat[4], void**, void*))fn;
            return;
       case GLUES_TESS_MESH:
-           tess->callMesh=(fn==NULL) ? &noMesh: (void (APIENTRY*)(GLUESmesh*))fn;
+           tess->callMesh=(fn==NULL) ? &noMesh: (void (*)(GLUESmesh*))fn;
            return;
       default:
            CALL_ERROR_OR_ERROR_DATA( GLUES_INVALID_ENUM );
@@ -420,7 +420,7 @@ static int EmptyCache(GLUEStesselator* tess)
 }
 
 
-void APIENTRY gluesTessVertex(GLUEStesselator* tess, GLdouble coords[3], void* data)
+void  gluesTessVertex(GLUEStesselator* tess, GLdouble coords[3], void* data)
 {
    int i;
    int tooLarge=FALSE;
@@ -478,7 +478,7 @@ void APIENTRY gluesTessVertex(GLUEStesselator* tess, GLdouble coords[3], void* d
    }
 }
 
-void APIENTRY gluesTessBeginPolygon(GLUEStesselator* tess, void* data)
+void  gluesTessBeginPolygon(GLUEStesselator* tess, void* data)
 {
    RequireState(tess, T_DORMANT);
 
@@ -490,7 +490,7 @@ void APIENTRY gluesTessBeginPolygon(GLUEStesselator* tess, void* data)
    tess->polygonData=data;
 }
 
-void APIENTRY gluesTessBeginContour(GLUEStesselator* tess)
+void  gluesTessBeginContour(GLUEStesselator* tess)
 {
    RequireState(tess, T_IN_POLYGON);
 
@@ -506,13 +506,13 @@ void APIENTRY gluesTessBeginContour(GLUEStesselator* tess)
    }
 }
 
-void APIENTRY gluesTessEndContour(GLUEStesselator* tess)
+void  gluesTessEndContour(GLUEStesselator* tess)
 {
    RequireState(tess, T_IN_CONTOUR);
    tess->state=T_IN_POLYGON;
 }
 
-void APIENTRY gluesTessEndPolygon(GLUEStesselator* tess)
+void  gluesTessEndPolygon(GLUEStesselator* tess)
 {
    GLUESmesh* mesh;
 
@@ -625,20 +625,20 @@ void APIENTRY gluesTessEndPolygon(GLUEStesselator* tess)
 /*******************************************************/
 
 /* Obsolete calls -- for backward compatibility */
-void APIENTRY gluesBeginPolygon(GLUEStesselator* tess)
+void  gluesBeginPolygon(GLUEStesselator* tess)
 {
    gluesTessBeginPolygon(tess, NULL);
    gluesTessBeginContour(tess);
 }
 
 /*ARGSUSED*/
-void APIENTRY gluesNextContour(GLUEStesselator* tess, GLenum type)
+void  gluesNextContour(GLUEStesselator* tess, GLenum type)
 {
    gluesTessEndContour(tess);
    gluesTessBeginContour(tess);
 }
 
-void APIENTRY gluesEndPolygon(GLUEStesselator* tess)
+void  gluesEndPolygon(GLUEStesselator* tess)
 {
    gluesTessEndContour(tess);
    gluesTessEndPolygon(tess);
