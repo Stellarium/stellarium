@@ -49,7 +49,7 @@
 #define FALSE 0
 
 #ifdef FOR_TRITE_TEST_PROGRAM
-   extern void DebugEvent(GLUtesselator* tess);
+   extern void DebugEvent(GLUEStesselator* tess);
 #else
    #define DebugEvent(tess)
 #endif
@@ -95,9 +95,9 @@
 #define AddWinding(eDst,eSrc) (eDst->winding+=eSrc->winding,             \
                                eDst->Sym->winding += eSrc->Sym->winding)
 
-static void SweepEvent(GLUtesselator* tess, GLUvertex* vEvent);
-static void WalkDirtyRegions(GLUtesselator* tess, ActiveRegion* regUp);
-static int  CheckForRightSplice(GLUtesselator* tess, ActiveRegion* regUp);
+static void SweepEvent(GLUEStesselator* tess, GLUESvertex* vEvent);
+static void WalkDirtyRegions(GLUEStesselator* tess, ActiveRegion* regUp);
+static int  CheckForRightSplice(GLUEStesselator* tess, ActiveRegion* regUp);
 
 /*
  * Both edges must be directed from right to left (this is the canonical
@@ -110,11 +110,11 @@ static int  CheckForRightSplice(GLUtesselator* tess, ActiveRegion* regUp);
  * Special case: if both edge destinations are at the sweep event,
  * we sort the edges by slope (they would otherwise compare equally).
  */
-static int EdgeLeq(GLUtesselator* tess, ActiveRegion* reg1, ActiveRegion* reg2)
+static int EdgeLeq(GLUEStesselator* tess, ActiveRegion* reg1, ActiveRegion* reg2)
 {
-   GLUvertex* event=tess->event;
-   GLUhalfEdge* e1;
-   GLUhalfEdge* e2;
+   GLUESvertex* event=tess->event;
+   GLUEShalfEdge* e1;
+   GLUEShalfEdge* e2;
    GLfloat t1, t2;
 
    e1=reg1->eUp;
@@ -149,7 +149,7 @@ static int EdgeLeq(GLUtesselator* tess, ActiveRegion* reg1, ActiveRegion* reg2)
    return (t1>=t2);
 }
 
-static void DeleteRegion(GLUtesselator* tess, ActiveRegion* reg)
+static void DeleteRegion(GLUEStesselator* tess, ActiveRegion* reg)
 {
    if (reg->fixUpperEdge)
    {
@@ -167,7 +167,7 @@ static void DeleteRegion(GLUtesselator* tess, ActiveRegion* reg)
 /*
  * Replace an upper edge which needs fixing (see ConnectRightVertex).
  */
-static int FixUpperEdge(ActiveRegion* reg, GLUhalfEdge* newEdge)
+static int FixUpperEdge(ActiveRegion* reg, GLUEShalfEdge* newEdge)
 {
    assert(reg->fixUpperEdge);
    if (!__gl_meshDelete(reg->eUp))
@@ -183,8 +183,8 @@ static int FixUpperEdge(ActiveRegion* reg, GLUhalfEdge* newEdge)
 
 static ActiveRegion* TopLeftRegion(ActiveRegion* reg)
 {
-   GLUvertex* org=reg->eUp->Org;
-   GLUhalfEdge* e;
+   GLUESvertex* org=reg->eUp->Org;
+   GLUEShalfEdge* e;
 
    /* Find the region above the uppermost edge with the same origin */
    do {
@@ -212,7 +212,7 @@ static ActiveRegion* TopLeftRegion(ActiveRegion* reg)
 
 static ActiveRegion* TopRightRegion(ActiveRegion* reg)
 {
-   GLUvertex* dst=reg->eUp->Dst;
+   GLUESvertex* dst=reg->eUp->Dst;
 
    /* Find the region above the uppermost edge with the same destination */
    do {
@@ -228,8 +228,8 @@ static ActiveRegion* TopRightRegion(ActiveRegion* reg)
  * The upper edge of the new region will be "eNewUp".
  * Winding number and "inside" flag are not updated.
  */
-static ActiveRegion* AddRegionBelow(GLUtesselator* tess, ActiveRegion* regAbove,
-                                    GLUhalfEdge* eNewUp)
+static ActiveRegion* AddRegionBelow(GLUEStesselator* tess, ActiveRegion* regAbove,
+                                    GLUEShalfEdge* eNewUp)
 {
    ActiveRegion* regNew=(ActiveRegion*)memAlloc(sizeof(ActiveRegion));
    if (regNew==NULL)
@@ -253,19 +253,19 @@ static ActiveRegion* AddRegionBelow(GLUtesselator* tess, ActiveRegion* regAbove,
    return regNew;
 }
 
-static GLboolean IsWindingInside(GLUtesselator* tess, int n)
+static GLboolean IsWindingInside(GLUEStesselator* tess, int n)
 {
    switch (tess->windingRule)
    {
-      case GLU_TESS_WINDING_ODD:
+      case GLUES_TESS_WINDING_ODD:
            return (n&1);
-      case GLU_TESS_WINDING_NONZERO:
+      case GLUES_TESS_WINDING_NONZERO:
            return (n!=0);
-      case GLU_TESS_WINDING_POSITIVE:
+      case GLUES_TESS_WINDING_POSITIVE:
            return (n>0);
-      case GLU_TESS_WINDING_NEGATIVE:
+      case GLUES_TESS_WINDING_NEGATIVE:
            return (n<0);
-      case GLU_TESS_WINDING_ABS_GEQ_TWO:
+      case GLUES_TESS_WINDING_ABS_GEQ_TWO:
            return (n>=2) || (n<=-2);
    }
 
@@ -277,7 +277,7 @@ static GLboolean IsWindingInside(GLUtesselator* tess, int n)
    return GL_FALSE;
 }
 
-static void ComputeWinding(GLUtesselator* tess, ActiveRegion* reg)
+static void ComputeWinding(GLUEStesselator* tess, ActiveRegion* reg)
 {
    reg->windingNumber=RegionAbove(reg)->windingNumber+reg->eUp->winding;
    reg->inside=IsWindingInside(tess, reg->windingNumber);
@@ -290,10 +290,10 @@ static void ComputeWinding(GLUtesselator* tess, ActiveRegion* reg)
  * not do this before -- since the structure of the mesh is always
  * changing, this face may not have even existed until now).
  */
-static void FinishRegion(GLUtesselator* tess, ActiveRegion* reg)
+static void FinishRegion(GLUEStesselator* tess, ActiveRegion* reg)
 {
-   GLUhalfEdge* e=reg->eUp;
-   GLUface* f=e->Lface;
+   GLUEShalfEdge* e=reg->eUp;
+   GLUESface* f=e->Lface;
 
    f->inside=reg->inside;
    /* optimization for __gl_meshTessellateMonoRegion() */
@@ -313,13 +313,13 @@ static void FinishRegion(GLUtesselator* tess, ActiveRegion* reg)
  * mesh if necessary, so that the ordering of edges around vOrg is the
  * same as in the dictionary.
  */
-static GLUhalfEdge* FinishLeftRegions(GLUtesselator* tess, ActiveRegion* regFirst,
+static GLUEShalfEdge* FinishLeftRegions(GLUEStesselator* tess, ActiveRegion* regFirst,
                                       ActiveRegion* regLast)
 {
    ActiveRegion* reg;
    ActiveRegion* regPrev;
-   GLUhalfEdge* e;
-   GLUhalfEdge* ePrev;
+   GLUEShalfEdge* e;
+   GLUEShalfEdge* ePrev;
 
    regPrev=regFirst;
    ePrev=regFirst->eUp;
@@ -389,14 +389,14 @@ static GLUhalfEdge* FinishLeftRegions(GLUtesselator* tess, ActiveRegion* regFirs
  * contained between eTopLeft->Oprev and eTopLeft; otherwise eTopLeft
  * should be NULL.
  */
-static void AddRightEdges(GLUtesselator* tess, ActiveRegion* regUp,
-       GLUhalfEdge* eFirst, GLUhalfEdge* eLast, GLUhalfEdge* eTopLeft,
+static void AddRightEdges(GLUEStesselator* tess, ActiveRegion* regUp,
+       GLUEShalfEdge* eFirst, GLUEShalfEdge* eLast, GLUEShalfEdge* eTopLeft,
        GLboolean cleanUp)
 {
    ActiveRegion* reg;
    ActiveRegion* regPrev;
-   GLUhalfEdge* e;
-   GLUhalfEdge* ePrev;
+   GLUEShalfEdge* e;
+   GLUEShalfEdge* ePrev;
    int firstTime=TRUE;
 
    /* Insert the new right-going edges in the dictionary */
@@ -471,7 +471,7 @@ static void AddRightEdges(GLUtesselator* tess, ActiveRegion* regUp,
    }
 }
 
-static void CallCombine(GLUtesselator* tess, GLUvertex* isect,
+static void CallCombine(GLUEStesselator* tess, GLUESvertex* isect,
                         void* data[4], GLfloat weights[4], int needed)
 {
 	GLdouble coords[3];
@@ -498,7 +498,7 @@ static void CallCombine(GLUtesselator* tess, GLUvertex* isect,
              * but the user has not provided the callback necessary to handle
              * generated intersection points.
              */
-            CALL_ERROR_OR_ERROR_DATA(GLU_TESS_NEED_COMBINE_CALLBACK);
+            CALL_ERROR_OR_ERROR_DATA(GLUES_TESS_NEED_COMBINE_CALLBACK);
             tess->fatalError=TRUE;
          }
       }
@@ -509,7 +509,7 @@ static void CallCombine(GLUtesselator* tess, GLUvertex* isect,
  * Two vertices with idential coordinates are combined into one.
  * e1->Org is kept, while e2->Org is discarded.
  */
-static void SpliceMergeVertices(GLUtesselator* tess, GLUhalfEdge *e1, GLUhalfEdge* e2)
+static void SpliceMergeVertices(GLUEStesselator* tess, GLUEShalfEdge *e1, GLUEShalfEdge* e2)
 {
    void* data[4]={NULL, NULL, NULL, NULL};
    GLfloat weights[4]={0.5f, 0.5f, 0.0f, 0.0f};
@@ -530,7 +530,7 @@ static void SpliceMergeVertices(GLUtesselator* tess, GLUhalfEdge *e1, GLUhalfEdg
  * splits the weight between its org and dst according to the
  * relative distance to "isect".
  */
-static void VertexWeights(GLUvertex* isect, GLUvertex* org, GLUvertex* dst,
+static void VertexWeights(GLUESvertex* isect, GLUESvertex* org, GLUESvertex* dst,
                           GLfloat* weights)
 {
    GLfloat t1=VertL1dist(org, isect);
@@ -548,9 +548,9 @@ static void VertexWeights(GLUvertex* isect, GLUvertex* org, GLUvertex* dst,
  * from the user so that we can refer to this new vertex in the
  * rendering callbacks.
  */
-static void GetIntersectData(GLUtesselator* tess, GLUvertex* isect,
-                             GLUvertex* orgUp, GLUvertex* dstUp,
-                             GLUvertex* orgLo, GLUvertex* dstLo)
+static void GetIntersectData(GLUEStesselator* tess, GLUESvertex* isect,
+                             GLUESvertex* orgUp, GLUESvertex* dstUp,
+                             GLUESvertex* orgLo, GLUESvertex* dstLo)
 {
    void* data[4];
    GLfloat weights[4];
@@ -592,11 +592,11 @@ static void GetIntersectData(GLUtesselator* tess, GLUvertex* isect,
  * This is a guaranteed solution, no matter how degenerate things get.
  * Basically this is a combinatorial solution to a numerical problem.
  */
-static int CheckForRightSplice(GLUtesselator* tess, ActiveRegion* regUp)
+static int CheckForRightSplice(GLUEStesselator* tess, ActiveRegion* regUp)
 {
    ActiveRegion* regLo=RegionBelow(regUp);
-   GLUhalfEdge* eUp=regUp->eUp;
-   GLUhalfEdge* eLo=regLo->eUp;
+   GLUEShalfEdge* eUp=regUp->eUp;
+   GLUEShalfEdge* eLo=regLo->eUp;
 
    if (VertLeq(eUp->Org, eLo->Org))
    {
@@ -669,12 +669,12 @@ static int CheckForRightSplice(GLUtesselator* tess, ActiveRegion* regUp)
  * We fix the problem by just splicing the offending vertex into the
  * other edge.
  */
-static int CheckForLeftSplice(GLUtesselator* tess, ActiveRegion* regUp)
+static int CheckForLeftSplice(GLUEStesselator* tess, ActiveRegion* regUp)
 {
    ActiveRegion* regLo=RegionBelow(regUp);
-   GLUhalfEdge*  eUp=regUp->eUp;
-   GLUhalfEdge*  eLo=regLo->eUp;
-   GLUhalfEdge*  e;
+   GLUEShalfEdge*  eUp=regUp->eUp;
+   GLUEShalfEdge*  eLo=regLo->eUp;
+   GLUEShalfEdge*  e;
 
    assert(!VertEq(eUp->Dst, eLo->Dst));
 
@@ -731,19 +731,19 @@ static int CheckForLeftSplice(GLUtesselator* tess, ActiveRegion* regUp)
  * call to AddRightEdges(); in this case all "dirty" regions have been
  * checked for intersections, and possibly regUp has been deleted.
  */
-static int CheckForIntersect(GLUtesselator* tess, ActiveRegion* regUp)
+static int CheckForIntersect(GLUEStesselator* tess, ActiveRegion* regUp)
 {
    ActiveRegion* regLo=RegionBelow(regUp);
-   GLUhalfEdge* eUp=regUp->eUp;
-   GLUhalfEdge* eLo=regLo->eUp;
-   GLUvertex* orgUp=eUp->Org;
-   GLUvertex* orgLo=eLo->Org;
-   GLUvertex* dstUp=eUp->Dst;
-   GLUvertex* dstLo=eLo->Dst;
+   GLUEShalfEdge* eUp=regUp->eUp;
+   GLUEShalfEdge* eLo=regLo->eUp;
+   GLUESvertex* orgUp=eUp->Org;
+   GLUESvertex* orgLo=eLo->Org;
+   GLUESvertex* dstUp=eUp->Dst;
+   GLUESvertex* dstLo=eLo->Dst;
    GLfloat tMinUp, tMaxLo;
-   GLUvertex  isect;
-   GLUvertex* orgMin;
-   GLUhalfEdge* e;
+   GLUESvertex  isect;
+   GLUESvertex* orgMin;
+   GLUEShalfEdge* e;
 
    assert(!VertEq(dstLo, dstUp));
    assert(EdgeSign(dstUp, tess->event, orgUp)<=0);
@@ -946,11 +946,11 @@ static int CheckForIntersect(GLUtesselator* tess, ActiveRegion* regUp)
  * new dirty regions can be created as we make changes to restore
  * the invariants.
  */
-static void WalkDirtyRegions(GLUtesselator* tess, ActiveRegion* regUp)
+static void WalkDirtyRegions(GLUEStesselator* tess, ActiveRegion* regUp)
 {
    ActiveRegion* regLo=RegionBelow(regUp);
-   GLUhalfEdge* eUp;
-   GLUhalfEdge* eLo;
+   GLUEShalfEdge* eUp;
+   GLUEShalfEdge* eLo;
 
    for(;;)
    {
@@ -1083,14 +1083,14 @@ static void WalkDirtyRegions(GLUtesselator* tess, ActiveRegion* regUp)
  * Quite possibly the vertex we connected to will turn out to be the
  * closest one, in which case we won''t need to make any changes.
  */
-static void ConnectRightVertex(GLUtesselator* tess, ActiveRegion* regUp,
-                               GLUhalfEdge* eBottomLeft)
+static void ConnectRightVertex(GLUEStesselator* tess, ActiveRegion* regUp,
+                               GLUEShalfEdge* eBottomLeft)
 {
-   GLUhalfEdge*  eNew;
-   GLUhalfEdge*  eTopLeft=eBottomLeft->Onext;
+   GLUEShalfEdge*  eNew;
+   GLUEShalfEdge*  eTopLeft=eBottomLeft->Onext;
    ActiveRegion* regLo=RegionBelow(regUp);
-   GLUhalfEdge*  eUp=regUp->eUp;
-   GLUhalfEdge*  eLo=regLo->eUp;
+   GLUEShalfEdge*  eUp=regUp->eUp;
+   GLUEShalfEdge*  eLo=regLo->eUp;
    int degenerate=FALSE;
 
    if (eUp->Dst!=eLo->Dst)
@@ -1172,13 +1172,13 @@ static void ConnectRightVertex(GLUtesselator* tess, ActiveRegion* regUp,
  * Adding the new vertex involves splicing it into the already-processed
  * part of the mesh.
  */
-static void ConnectLeftDegenerate(GLUtesselator* tess,
-                                  ActiveRegion* regUp, GLUvertex* vEvent)
+static void ConnectLeftDegenerate(GLUEStesselator* tess,
+                                  ActiveRegion* regUp, GLUESvertex* vEvent)
 {
-   GLUhalfEdge*  e;
-   GLUhalfEdge*  eTopLeft;
-   GLUhalfEdge*  eTopRight;
-   GLUhalfEdge*  eLast;
+   GLUEShalfEdge*  e;
+   GLUEShalfEdge*  eTopLeft;
+   GLUEShalfEdge*  eTopRight;
+   GLUEShalfEdge*  eLast;
    ActiveRegion* reg;
 
    e=regUp->eUp;
@@ -1264,14 +1264,14 @@ static void ConnectLeftDegenerate(GLUtesselator* tess,
  * - merging with the active edge of U or L
  * - merging with an already-processed portion of U or L
  */
-static void ConnectLeftVertex(GLUtesselator* tess, GLUvertex* vEvent)
+static void ConnectLeftVertex(GLUEStesselator* tess, GLUESvertex* vEvent)
 {
    ActiveRegion* regUp;
    ActiveRegion* regLo;
    ActiveRegion* reg;
-   GLUhalfEdge*  eUp;
-   GLUhalfEdge*  eLo;
-   GLUhalfEdge*  eNew;
+   GLUEShalfEdge*  eUp;
+   GLUEShalfEdge*  eLo;
+   GLUEShalfEdge*  eNew;
    ActiveRegion  tmp;
 
    /* Get a pointer to the active region containing vEvent */
@@ -1306,7 +1306,7 @@ static void ConnectLeftVertex(GLUtesselator* tess, GLUvertex* vEvent)
       }
       else
       {
-         GLUhalfEdge* tempHalfEdge=__gl_meshConnect(eLo->Dnext, vEvent->anEdge);
+         GLUEShalfEdge* tempHalfEdge=__gl_meshConnect(eLo->Dnext, vEvent->anEdge);
          if (tempHalfEdge==NULL)
          {
             longjmp(tess->env, 1);
@@ -1340,13 +1340,13 @@ static void ConnectLeftVertex(GLUtesselator* tess, GLUvertex* vEvent)
  * Does everything necessary when the sweep line crosses a vertex.
  * Updates the mesh and the edge dictionary.
  */
-static void SweepEvent(GLUtesselator* tess, GLUvertex* vEvent)
+static void SweepEvent(GLUEStesselator* tess, GLUESvertex* vEvent)
 {
    ActiveRegion* regUp;
    ActiveRegion* reg;
-   GLUhalfEdge*  e;
-   GLUhalfEdge*  eTopLeft;
-   GLUhalfEdge*  eBottomLeft;
+   GLUEShalfEdge*  e;
+   GLUEShalfEdge*  eTopLeft;
+   GLUEShalfEdge*  eBottomLeft;
 
    tess->event=vEvent;  /* for access in EdgeLeq() */
    DebugEvent(tess);
@@ -1403,17 +1403,17 @@ static void SweepEvent(GLUtesselator* tess, GLUvertex* vEvent)
 /* Make the sentinel coordinates big enough that they will never be
  * merged with real input features.  (Even with the largest possible
  * input contour and the maximum tolerance of 1.0, no merging will be
- * done with coordinates larger than 3 * GLU_TESS_MAX_COORD).
+ * done with coordinates larger than 3 * GLUES_TESS_MAX_COORD).
  */
-#define SENTINEL_COORD (4.0f*GLU_TESS_MAX_COORD)
+#define SENTINEL_COORD (4.0f*GLUES_TESS_MAX_COORD)
 
 /*
  * We add two sentinel edges above and below all other edges,
  * to avoid special cases at the top and bottom.
  */
-static void AddSentinel(GLUtesselator* tess, GLfloat t)
+static void AddSentinel(GLUEStesselator* tess, GLfloat t)
 {
-   GLUhalfEdge*  e;
+   GLUEShalfEdge*  e;
    ActiveRegion* reg=(ActiveRegion*)memAlloc(sizeof(ActiveRegion));
    if (reg==NULL)
    {
@@ -1450,7 +1450,7 @@ static void AddSentinel(GLUtesselator* tess, GLfloat t)
  * We maintain an ordering of edge intersections with the sweep line.
  * This order is maintained in a dynamic dictionary.
  */
-static void InitEdgeDict(GLUtesselator* tess)
+static void InitEdgeDict(GLUEStesselator* tess)
 {
    /* __gl_dictListNewDict */
    tess->dict=dictNewDict(tess, (int (*)(void*, DictKey, DictKey))EdgeLeq);
@@ -1463,7 +1463,7 @@ static void InitEdgeDict(GLUtesselator* tess)
    AddSentinel(tess, SENTINEL_COORD);
 }
 
-static void DoneEdgeDict(GLUtesselator* tess)
+static void DoneEdgeDict(GLUEStesselator* tess)
 {
    ActiveRegion* reg;
 #ifndef NDEBUG
@@ -1492,12 +1492,12 @@ static void DoneEdgeDict(GLUtesselator* tess)
 /*
  * Remove zero-length edges, and contours with fewer than 3 vertices.
  */
-static void RemoveDegenerateEdges(GLUtesselator* tess)
+static void RemoveDegenerateEdges(GLUEStesselator* tess)
 {
-   GLUhalfEdge* e;
-   GLUhalfEdge* eNext;
-   GLUhalfEdge* eLnext;
-   GLUhalfEdge* eHead=&tess->mesh->eHead;
+   GLUEShalfEdge* e;
+   GLUEShalfEdge* eNext;
+   GLUEShalfEdge* eLnext;
+   GLUEShalfEdge* eHead=&tess->mesh->eHead;
 
    /*LINTED*/
    for(e=eHead->next; e!=eHead; e=eNext)
@@ -1547,11 +1547,11 @@ static void RemoveDegenerateEdges(GLUtesselator* tess)
  * Insert all vertices into the priority queue which determines the
  * order in which vertices cross the sweep line.
  */
-static int InitPriorityQ(GLUtesselator* tess)
+static int InitPriorityQ(GLUEStesselator* tess)
 {
    PriorityQ* pq;
-   GLUvertex* v;
-   GLUvertex* vHead;
+   GLUESvertex* v;
+   GLUESvertex* vHead;
 
    /* __gl_pqSortNewPriorityQ */
    pq=tess->pq=pqNewPriorityQ((int (*)(PQkey, PQkey))__gl_vertLeq);
@@ -1580,7 +1580,7 @@ static int InitPriorityQ(GLUtesselator* tess)
    return 1;
 }
 
-static void DonePriorityQ(GLUtesselator* tess)
+static void DonePriorityQ(GLUEStesselator* tess)
 {
    pqDeletePriorityQ(tess->pq); /* __gl_pqSortDeletePriorityQ */
 }
@@ -1599,11 +1599,11 @@ static void DonePriorityQ(GLUtesselator* tess)
  * edge at the time, since one of the routines further up the stack
  * will sometimes be keeping a pointer to that edge.
  */
-static int RemoveDegenerateFaces(GLUmesh* mesh)
+static int RemoveDegenerateFaces(GLUESmesh* mesh)
 {
-   GLUface* f;
-   GLUface* fNext;
-   GLUhalfEdge* e;
+   GLUESface* f;
+   GLUESface* fNext;
+   GLUEShalfEdge* e;
 
    /* LINTED */
    for(f=mesh->fHead.next; f!=&mesh->fHead; f=fNext)
@@ -1626,7 +1626,7 @@ static int RemoveDegenerateFaces(GLUmesh* mesh)
    return 1;
 }
 
-int __gl_computeInterior(GLUtesselator* tess)
+int __gl_computeInterior(GLUEStesselator* tess)
 /*
  * __gl_computeInterior( tess ) computes the planar arrangement specified
  * by the given contours, and further subdivides this arrangement
@@ -1635,8 +1635,8 @@ int __gl_computeInterior(GLUtesselator* tess)
  * Each interior region is guaranteed be monotone.
  */
 {
-   GLUvertex* v;
-   GLUvertex* vNext;
+   GLUESvertex* v;
+   GLUESvertex* vNext;
 
    tess->fatalError=FALSE;
 
@@ -1654,11 +1654,11 @@ int __gl_computeInterior(GLUtesselator* tess)
    InitEdgeDict(tess);
 
    /* __gl_pqSortExtractMin */
-   while((v=(GLUvertex*)pqExtractMin(tess->pq))!=NULL)
+   while((v=(GLUESvertex*)pqExtractMin(tess->pq))!=NULL)
    {
       for (;;)
       {
-         vNext=(GLUvertex*)pqMinimum(tess->pq);  /* __gl_pqSortMinimum */
+         vNext=(GLUESvertex*)pqMinimum(tess->pq);  /* __gl_pqSortMinimum */
          if (vNext==NULL || !VertEq(vNext, v))
          {
             break;
@@ -1676,9 +1676,9 @@ int __gl_computeInterior(GLUtesselator* tess)
           * so when we insert B we may compute a slightly different
           * intersection point.  This might leave two edges with a small
           * gap between them.  This kind of error is especially obvious
-          * when using boundary extraction (GLU_TESS_BOUNDARY_ONLY).
+          * when using boundary extraction (GLUES_TESS_BOUNDARY_ONLY).
           */
-         vNext=(GLUvertex*)pqExtractMin(tess->pq);  /* __gl_pqSortExtractMin*/
+         vNext=(GLUESvertex*)pqExtractMin(tess->pq);  /* __gl_pqSortExtractMin*/
          SpliceMergeVertices(tess, v->anEdge, vNext->anEdge);
       }
       SweepEvent(tess, v);

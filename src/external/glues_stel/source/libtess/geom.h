@@ -71,14 +71,14 @@
 
 #define VertCCW(u, v, w) __gl_vertCCW(u, v, w)
 
-int     __gl_vertLeq(GLUvertex* u, GLUvertex* v);
-GLfloat __gl_edgeEval(GLUvertex* u, GLUvertex* v, GLUvertex* w);
-GLfloat __gl_edgeSign(GLUvertex* u, GLUvertex* v, GLUvertex* w);
-GLfloat __gl_transEval(GLUvertex* u, GLUvertex* v, GLUvertex* w);
-GLfloat __gl_transSign(GLUvertex* u, GLUvertex* v, GLUvertex* w);
-int     __gl_vertCCW(GLUvertex* u, GLUvertex* v, GLUvertex* w);
-void    __gl_edgeIntersect(GLUvertex* o1, GLUvertex* d1,
-                           GLUvertex* o2, GLUvertex* d2,
-                           GLUvertex* v);
+int     __gl_vertLeq(GLUESvertex* u, GLUESvertex* v);
+GLfloat __gl_edgeEval(GLUESvertex* u, GLUESvertex* v, GLUESvertex* w);
+GLfloat __gl_edgeSign(GLUESvertex* u, GLUESvertex* v, GLUESvertex* w);
+GLfloat __gl_transEval(GLUESvertex* u, GLUESvertex* v, GLUESvertex* w);
+GLfloat __gl_transSign(GLUESvertex* u, GLUESvertex* v, GLUESvertex* w);
+int     __gl_vertCCW(GLUESvertex* u, GLUESvertex* v, GLUESvertex* w);
+void    __gl_edgeIntersect(GLUESvertex* o1, GLUESvertex* d1,
+                           GLUESvertex* o2, GLUESvertex* d2,
+                           GLUESvertex* v);
 
 #endif /* __geom_h_ */

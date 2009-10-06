@@ -48,20 +48,20 @@
 struct FaceCount
 {
    long         size;   /* number of triangles used */
-   GLUhalfEdge* eStart; /* edge where this primitive starts */
-   void         (*render)(GLUtesselator*, GLUhalfEdge*, long);
+   GLUEShalfEdge* eStart; /* edge where this primitive starts */
+   void         (*render)(GLUEStesselator*, GLUEShalfEdge*, long);
                         /* routine to render this primitive */
 };
 
-static struct FaceCount MaximumFan(GLUhalfEdge* eOrig);
-static struct FaceCount MaximumStrip(GLUhalfEdge* eOrig);
+static struct FaceCount MaximumFan(GLUEShalfEdge* eOrig);
+static struct FaceCount MaximumStrip(GLUEShalfEdge* eOrig);
 
-static void RenderFan(GLUtesselator* tess, GLUhalfEdge* eStart, long size);
-static void RenderStrip(GLUtesselator* tess, GLUhalfEdge* eStart, long size);
-static void RenderTriangle(GLUtesselator* tess, GLUhalfEdge* eStart, long size);
+static void RenderFan(GLUEStesselator* tess, GLUEShalfEdge* eStart, long size);
+static void RenderStrip(GLUEStesselator* tess, GLUEShalfEdge* eStart, long size);
+static void RenderTriangle(GLUEStesselator* tess, GLUEShalfEdge* eStart, long size);
 
-static void RenderMaximumFaceGroup(GLUtesselator* tess, GLUface* fOrig);
-static void RenderLonelyTriangles(GLUtesselator* tess, GLUface* head);
+static void RenderMaximumFaceGroup(GLUEStesselator* tess, GLUESface* fOrig);
+static void RenderLonelyTriangles(GLUEStesselator* tess, GLUESface* head);
 
 /************************ Strips and Fans decomposition ******************/
 /* __gl_renderMesh( tess, mesh ) takes a mesh and breaks it into triangle
@@ -71,9 +71,9 @@ static void RenderLonelyTriangles(GLUtesselator* tess, GLUface* head);
  *
  * The rendering output is provided as callbacks (see the api).
  */
-void __gl_renderMesh(GLUtesselator* tess, GLUmesh* mesh)
+void __gl_renderMesh(GLUEStesselator* tess, GLUESmesh* mesh)
 {
-   GLUface* f;
+   GLUESface* f;
 
    /* Make a list of separate triangles so we can render them all at once */
    tess->lonelyTriList=NULL;
@@ -101,7 +101,7 @@ void __gl_renderMesh(GLUtesselator* tess, GLUmesh* mesh)
    }
 }
 
-static void RenderMaximumFaceGroup(GLUtesselator* tess, GLUface* fOrig)
+static void RenderMaximumFaceGroup(GLUEStesselator* tess, GLUESface* fOrig)
 {
    /* We want to find the largest triangle fan or strip of unmarked faces
     * which includes the given face fOrig.  There are 3 possible fans
@@ -110,7 +110,7 @@ static void RenderMaximumFaceGroup(GLUtesselator* tess, GLUface* fOrig)
     * is to try all of these, and take the primitive which uses the most
     * triangles (a greedy approach).
     */
-   GLUhalfEdge* e=fOrig->anEdge;
+   GLUEShalfEdge* e=fOrig->anEdge;
    struct FaceCount max, newFace;
 
    max.size=1;
@@ -173,15 +173,15 @@ static void RenderMaximumFaceGroup(GLUtesselator* tess, GLUface* fOrig)
                         }                                    \
                      } else /* absorb trailing semicolon */
 
-static struct FaceCount MaximumFan(GLUhalfEdge* eOrig)
+static struct FaceCount MaximumFan(GLUEShalfEdge* eOrig)
 {
    /* eOrig->Lface is the face we want to render.  We want to find the size
     * of a maximal fan around eOrig->Org.  To do this we just walk around
     * the origin vertex as far as possible in both directions.
     */
    struct FaceCount newFace={0, NULL, &RenderFan};
-   GLUface* trail=NULL;
-   GLUhalfEdge* e;
+   GLUESface* trail=NULL;
+   GLUEShalfEdge* e;
 
    for (e=eOrig; !Marked(e->Lface); e=e->Onext)
    {
@@ -203,7 +203,7 @@ static struct FaceCount MaximumFan(GLUhalfEdge* eOrig)
 
 #define IsEven(n) (((n) & 1)==0)
 
-static struct FaceCount MaximumStrip(GLUhalfEdge* eOrig)
+static struct FaceCount MaximumStrip(GLUEShalfEdge* eOrig)
 {
    /* Here we are looking for a maximal strip that contains the vertices
     * eOrig->Org, eOrig->Dst, eOrig->Lnext->Dst (in that order or the
@@ -217,10 +217,10 @@ static struct FaceCount MaximumStrip(GLUhalfEdge* eOrig)
     */
    struct FaceCount newFace={0, NULL, &RenderStrip};
    long headSize=0, tailSize=0;
-   GLUface* trail=NULL;
-   GLUhalfEdge* e;
-   GLUhalfEdge* eTail;
-   GLUhalfEdge* eHead;
+   GLUESface* trail=NULL;
+   GLUEShalfEdge* e;
+   GLUEShalfEdge* eTail;
+   GLUEShalfEdge* eHead;
 
    for (e=eOrig; !Marked(e->Lface); ++tailSize, e=e->Onext)
    {
@@ -275,7 +275,7 @@ static struct FaceCount MaximumStrip(GLUhalfEdge* eOrig)
    return newFace;
 }
 
-static void RenderTriangle(GLUtesselator* tess, GLUhalfEdge* e, long size)
+static void RenderTriangle(GLUEStesselator* tess, GLUEShalfEdge* e, long size)
 {
    /* Just add the triangle to a triangle list, so we can render all
     * the separate triangles at once.
@@ -284,12 +284,12 @@ static void RenderTriangle(GLUtesselator* tess, GLUhalfEdge* e, long size)
    AddToTrail(e->Lface, tess->lonelyTriList);
 }
 
-static void RenderLonelyTriangles(GLUtesselator* tess, GLUface* f)
+static void RenderLonelyTriangles(GLUEStesselator* tess, GLUESface* f)
 {
    /* Now we render all the separate triangles which could not be
     * grouped into a triangle fan or strip.
     */
-   GLUhalfEdge* e;
+   GLUEShalfEdge* e;
    int newState;
    int edgeState=-1;    /* force edge state output for first vertex */
 
@@ -321,7 +321,7 @@ static void RenderLonelyTriangles(GLUtesselator* tess, GLUface* f)
    CALL_END_OR_END_DATA();
 }
 
-static void RenderFan(GLUtesselator* tess, GLUhalfEdge* e, long size)
+static void RenderFan(GLUEStesselator* tess, GLUEShalfEdge* e, long size)
 {
    /* Render as many CCW triangles as possible in a fan starting from
     * edge "e".  The fan *should* contain exactly "size" triangles
@@ -343,7 +343,7 @@ static void RenderFan(GLUtesselator* tess, GLUhalfEdge* e, long size)
    CALL_END_OR_END_DATA();
 }
 
-static void RenderStrip(GLUtesselator* tess, GLUhalfEdge* e, long size)
+static void RenderStrip(GLUEStesselator* tess, GLUEShalfEdge* e, long size)
 {
    /* Render as many CCW triangles as possible in a strip starting from
     * edge "e".  The strip *should* contain exactly "size" triangles
@@ -379,10 +379,10 @@ static void RenderStrip(GLUtesselator* tess, GLUhalfEdge* e, long size)
  * contour for each face marked "inside".  The rendering output is
  * provided as callbacks (see the api).
  */
-void __gl_renderBoundary(GLUtesselator* tess, GLUmesh* mesh)
+void __gl_renderBoundary(GLUEStesselator* tess, GLUESmesh* mesh)
 {
-   GLUface* f;
-   GLUhalfEdge* e;
+   GLUESface* f;
+   GLUEShalfEdge* e;
 
    for (f=mesh->fHead.next; f!=&mesh->fHead; f=f->next)
    {
@@ -403,7 +403,7 @@ void __gl_renderBoundary(GLUtesselator* tess, GLUmesh* mesh)
 
 #define SIGN_INCONSISTENT 2
 
-static int ComputeNormal(GLUtesselator* tess, GLfloat norm[3], int check)
+static int ComputeNormal(GLUEStesselator* tess, GLfloat norm[3], int check)
 /*
  * If check==FALSE, we compute the polygon normal and place it in norm[].
  * If check==TRUE, we check that each triangle in the fan from v0 has a
@@ -504,7 +504,7 @@ static int ComputeNormal(GLUtesselator* tess, GLfloat norm[3], int check)
  * Returns TRUE if the polygon was successfully rendered.  The rendering
  * output is provided as callbacks (see the api).
  */
-GLboolean __gl_renderCache(GLUtesselator* tess)
+GLboolean __gl_renderCache(GLUEStesselator* tess)
 {
    CachedVertex* v0=tess->cache;
    CachedVertex* vn=v0+tess->cacheCount;
@@ -541,22 +541,22 @@ GLboolean __gl_renderCache(GLUtesselator* tess)
    /* Make sure we do the right thing for each winding rule */
    switch(tess->windingRule)
    {
-      case GLU_TESS_WINDING_ODD:
-      case GLU_TESS_WINDING_NONZERO:
+      case GLUES_TESS_WINDING_ODD:
+      case GLUES_TESS_WINDING_NONZERO:
            break;
-      case GLU_TESS_WINDING_POSITIVE:
+      case GLUES_TESS_WINDING_POSITIVE:
            if (sign<0)
            {
               return TRUE;
            }
            break;
-      case GLU_TESS_WINDING_NEGATIVE:
+      case GLUES_TESS_WINDING_NEGATIVE:
            if (sign>0)
            {
               return TRUE;
            }
            break;
-      case GLU_TESS_WINDING_ABS_GEQ_TWO:
+      case GLUES_TESS_WINDING_ABS_GEQ_TWO:
            return TRUE;
    }
 
