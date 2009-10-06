@@ -48,7 +48,7 @@
 #else
    /* Violates modularity, but a little faster */
    #include "geom.h"
-   #define LEQ(x, y) VertLeq((GLUvertex*)x, (GLUvertex*)y)
+   #define LEQ(x, y) VertLeq((GLUESvertex*)x, (GLUESvertex*)y)
 #endif /* FOR_TRITE_TEST_PROGRAM */
 
 /* really __gl_pqHeapNewPriorityQ */

@@ -62,9 +62,9 @@
  * separate an interior region from an exterior one.
  */
 
-int  __gl_meshTessellateMonoRegion(GLUface* face);
-int  __gl_meshTessellateInterior(GLUmesh* mesh);
-void __gl_meshDiscardExterior(GLUmesh* mesh);
-int  __gl_meshSetWindingNumber(GLUmesh* mesh, int value, GLboolean keepOnlyBoundary);
+int  __gl_meshTessellateMonoRegion(GLUESface* face);
+int  __gl_meshTessellateInterior(GLUESmesh* mesh);
+void __gl_meshDiscardExterior(GLUESmesh* mesh);
+int  __gl_meshSetWindingNumber(GLUESmesh* mesh, int value, GLboolean keepOnlyBoundary);
 
 #endif /* __tessmono_h_ */

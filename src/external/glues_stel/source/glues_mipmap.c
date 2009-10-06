@@ -27,7 +27,7 @@
  * other dealings in this Software without prior written authorization from
  * Silicon Graphics, Inc.
  *
- * OpenGL ES CM 1.0 port of part of GLU by Mike Gorchak <mike@malva.ua>
+ * OpenGL ES CM 1.0 port of part of GLUES by Mike Gorchak <mike@malva.ua>
  */
 
 #include <assert.h>
@@ -68,7 +68,7 @@ typedef struct
    GLint unpack_image_height;
 } PixelStorageModes;
 
-static int gluBuild2DMipmapLevelsCore(GLenum, GLint, GLsizei, GLsizei,
+static int gluesBuild2DMipmapLevelsCore(GLenum, GLint, GLsizei, GLsizei,
                                       GLsizei, GLsizei, GLenum, GLenum,
                                       GLint, GLint, GLint, const void*);
 
@@ -205,10 +205,10 @@ static int nearestPower(GLuint value)
    }
 }
 
-#define __GLU_SWAP_2_BYTES(s)\
+#define __GLUES_SWAP_2_BYTES(s)\
 (GLushort)(((GLushort)((const GLubyte*)(s))[1])<<8 | ((const GLubyte*)(s))[0])
 
-#define __GLU_SWAP_4_BYTES(s)\
+#define __GLUES_SWAP_4_BYTES(s)\
 (GLuint)(((GLuint)((const GLubyte*)(s))[3])<<24 | \
         ((GLuint)((const GLubyte*)(s))[2])<<16 | \
         ((GLuint)((const GLubyte*)(s))[1])<<8  | ((const GLubyte*)(s))[0])
@@ -719,12 +719,12 @@ static int checkMipmapArgs(GLenum internalFormat, GLenum format, GLenum type)
 {
    if (!legalFormat(format) || !legalType(type))
    {
-      return GLU_INVALID_ENUM;
+      return GLUES_INVALID_ENUM;
    }
 
    if (!isLegalFormatForPackedPixelType(format, type))
    {
-      return GLU_INVALID_OPERATION;
+      return GLUES_INVALID_OPERATION;
    }
 
    return 0;
@@ -842,69 +842,12 @@ static void closestFit(GLenum target, GLint width, GLint height,
    }
 } /* closestFit() */
 
-GLint APIENTRY 
-gluScaleImage(GLenum format, GLsizei widthin, GLsizei heightin,
-              GLenum typein, const void* datain, GLsizei widthout,
-              GLsizei heightout, GLenum typeout, void* dataout)
-{
-   int components;
-   GLushort* beforeImage=NULL;
-   GLushort* afterImage=NULL;
-   PixelStorageModes psm;
-
-   if (widthin==0 || heightin==0 || widthout==0 || heightout==0)
-   {
-      return 0;
-   }
-
-   if (widthin<0 || heightin<0 || widthout<0 || heightout<0)
-   {
-      return GLU_INVALID_VALUE;
-   }
-
-   if (!legalFormat(format) || !legalType(typein) || !legalType(typeout))
-   {
-      return GLU_INVALID_ENUM;
-   }
-   if (!isLegalFormatForPackedPixelType(format, typein))
-   {
-      return GLU_INVALID_OPERATION;
-   }
-   if (!isLegalFormatForPackedPixelType(format, typeout))
-   {
-      return GLU_INVALID_OPERATION;
-   }
-   beforeImage=malloc(image_size(widthin, heightin, format, GL_UNSIGNED_SHORT));
-   afterImage=malloc(image_size(widthout, heightout, format, GL_UNSIGNED_SHORT));
-   if (beforeImage==NULL || afterImage==NULL)
-   {
-      if (beforeImage!=NULL)
-      {
-         free(beforeImage);
-      }
-      if (afterImage!=NULL)
-      {
-         free(afterImage);
-      }
-      return GLU_OUT_OF_MEMORY;
-   }
-
-   retrieveStoreModes(&psm);
-   fill_image(&psm,widthin, heightin, format, typein, 0, datain, beforeImage);
-   components=elements_per_group(format, 0);
-   scale_internal(components, widthin, heightin, beforeImage, widthout, heightout, afterImage);
-   empty_image(&psm, widthout, heightout, format, typeout, 0, afterImage, dataout);
-   free((GLbyte*)beforeImage);
-   free((GLbyte*)afterImage);
-
-   return 0;
-}
 
 /* To make swapping images less error prone */
-#define __GLU_INIT_SWAP_IMAGE void* tmpImage
-#define __GLU_SWAP_IMAGE(a,b) tmpImage=a; a=b; b=tmpImage;
+#define __GLUES_INIT_SWAP_IMAGE void* tmpImage
+#define __GLUES_SWAP_IMAGE(a,b) tmpImage=a; a=b; b=tmpImage;
 
-static int gluBuild2DMipmapLevelsCore(GLenum target, GLint internalFormat,
+static int gluesBuild2DMipmapLevelsCore(GLenum target, GLint internalFormat,
                                       GLsizei width, GLsizei height,
                                       GLsizei widthPowerOf2,
                                       GLsizei heightPowerOf2,
@@ -918,7 +861,7 @@ static int gluBuild2DMipmapLevelsCore(GLenum target, GLint internalFormat,
    const void* usersImage;     /* passed from user. Don't touch! */
    void* srcImage;
    void* dstImage;             /* scratch area to build mipmapped images */
-   __GLU_INIT_SWAP_IMAGE;
+   __GLUES_INIT_SWAP_IMAGE;
    GLint memreq;
    GLint cmpts;
 
@@ -1015,12 +958,12 @@ static int gluBuild2DMipmapLevelsCore(GLenum target, GLint internalFormat,
               dstImage = (GLushort *)malloc(memreq);
               break;
          default:
-              return GLU_INVALID_ENUM;
+              return GLUES_INVALID_ENUM;
       }
       if (dstImage==NULL)
       {
          glPixelStorei(GL_UNPACK_ALIGNMENT, psm.unpack_alignment);
-         return GLU_OUT_OF_MEMORY;
+         return GLUES_OUT_OF_MEMORY;
       }
       else
       {
@@ -1068,7 +1011,7 @@ static int gluBuild2DMipmapLevelsCore(GLenum target, GLint internalFormat,
       rowsize=newwidth*group_size;
       memreq=image_size(newwidth, newheight, format, type);
       /* Swap srcImage and dstImage */
-      __GLU_SWAP_IMAGE(srcImage,dstImage);
+      __GLUES_SWAP_IMAGE(srcImage,dstImage);
       switch(type)
       {
          case GL_UNSIGNED_BYTE:
@@ -1080,12 +1023,12 @@ static int gluBuild2DMipmapLevelsCore(GLenum target, GLint internalFormat,
               dstImage=(GLushort*)malloc(memreq);
               break;
          default:
-              return GLU_INVALID_ENUM;
+              return GLUES_INVALID_ENUM;
       }
       if (dstImage==NULL)
       {
          glPixelStorei(GL_UNPACK_ALIGNMENT, psm.unpack_alignment);
-         return GLU_OUT_OF_MEMORY;
+         return GLUES_OUT_OF_MEMORY;
       }
 
       /* level userLevel+1 is in srcImage; level userLevel already saved */
@@ -1106,13 +1049,13 @@ static int gluBuild2DMipmapLevelsCore(GLenum target, GLint internalFormat,
               dstImage=(GLushort*)malloc(memreq);
               break;
          default:
-              return GLU_INVALID_ENUM;
+              return GLUES_INVALID_ENUM;
       }
 
       if (dstImage==NULL)
       {
          glPixelStorei(GL_UNPACK_ALIGNMENT, psm.unpack_alignment);
-         return GLU_OUT_OF_MEMORY;
+         return GLUES_OUT_OF_MEMORY;
       }
 
       switch(type)
@@ -1145,7 +1088,7 @@ static int gluBuild2DMipmapLevelsCore(GLenum target, GLint internalFormat,
       rowsize=newwidth*group_size;
 
       /* Swap dstImage and srcImage */
-      __GLU_SWAP_IMAGE(srcImage,dstImage);
+      __GLUES_SWAP_IMAGE(srcImage,dstImage);
 
       /* use as little memory as possible */
       if (levels!=0)
@@ -1177,12 +1120,12 @@ static int gluBuild2DMipmapLevelsCore(GLenum target, GLint internalFormat,
                  dstImage = (GLushort *)malloc(memreq);
                  break;
             default:
-                 return GLU_INVALID_ENUM;
+                 return GLUES_INVALID_ENUM;
          }
          if (dstImage==NULL)
          {
             glPixelStorei(GL_UNPACK_ALIGNMENT, psm.unpack_alignment);
-            return GLU_OUT_OF_MEMORY;
+            return GLUES_OUT_OF_MEMORY;
          }
       }
 
@@ -1225,7 +1168,7 @@ static int gluBuild2DMipmapLevelsCore(GLenum target, GLint internalFormat,
               break;
       }
 
-      __GLU_SWAP_IMAGE(srcImage,dstImage);
+      __GLUES_SWAP_IMAGE(srcImage,dstImage);
 
       if (newwidth>1)
       {
@@ -1265,7 +1208,7 @@ static int gluBuild2DMipmapLevelsCore(GLenum target, GLint internalFormat,
             {
                /* out of memory so return */
                glPixelStorei(GL_UNPACK_ALIGNMENT, psm.unpack_alignment);
-               return GLU_OUT_OF_MEMORY;
+               return GLUES_OUT_OF_MEMORY;
             }
 
             /* copy image from srcImage into newMipmapImage by rows */
@@ -1302,10 +1245,10 @@ static int gluBuild2DMipmapLevelsCore(GLenum target, GLint internalFormat,
    }
 
    return 0;
-} /* gluBuild2DMipmapLevelsCore() */
+} /* gluesBuild2DMipmapLevelsCore() */
 
 GLint APIENTRY
-gluBuild2DMipmapLevels(GLenum target, GLint internalFormat,
+gluesBuild2DMipmapLevels(GLenum target, GLint internalFormat,
                        GLsizei width, GLsizei height, GLenum format,
                        GLenum type, GLint userLevel, GLint baseLevel,
                        GLint maxLevel, const void* data)
@@ -1321,7 +1264,7 @@ gluBuild2DMipmapLevels(GLenum target, GLint internalFormat,
 
    if (width<1 || height<1)
    {
-      return GLU_INVALID_VALUE;
+      return GLUES_INVALID_VALUE;
    }
 
    levels=computeLog(width);
@@ -1334,16 +1277,16 @@ gluBuild2DMipmapLevels(GLenum target, GLint internalFormat,
    levels+=userLevel;
    if (!isLegalLevels(userLevel, baseLevel, maxLevel, levels))
    {
-      return GLU_INVALID_VALUE;
+      return GLUES_INVALID_VALUE;
    }
 
-   return gluBuild2DMipmapLevelsCore(target, internalFormat, width, height,
+   return gluesBuild2DMipmapLevelsCore(target, internalFormat, width, height,
                                      width, height, format, type,
                                      userLevel, baseLevel, maxLevel, data);
-} /* gluBuild2DMipmapLevels() */
+} /* gluesBuild2DMipmapLevels() */
 
 GLint APIENTRY
-gluBuild2DMipmaps(GLenum target, GLint internalFormat, GLsizei width,
+gluesBuild2DMipmaps(GLenum target, GLint internalFormat, GLsizei width,
                   GLsizei height, GLenum format, GLenum type, const void* data)
 {
    GLint widthPowerOf2, heightPowerOf2;
@@ -1357,7 +1300,7 @@ gluBuild2DMipmaps(GLenum target, GLint internalFormat, GLsizei width,
 
    if (width<1 || height<1)
    {
-      return GLU_INVALID_VALUE;
+      return GLUES_INVALID_VALUE;
    }
 
    closestFit(target, width, height, internalFormat, format, type,
@@ -1370,10 +1313,10 @@ gluBuild2DMipmaps(GLenum target, GLint internalFormat, GLsizei width,
       levels=level;
    }
 
-   return gluBuild2DMipmapLevelsCore(target,internalFormat, width, height,
+   return gluesBuild2DMipmapLevelsCore(target,internalFormat, width, height,
                                      widthPowerOf2, heightPowerOf2, format,
                                      type, 0, 0, levels, data);
-}  /* gluBuild2DMipmaps() */
+}  /* gluesBuild2DMipmaps() */
 
 /*
  * Utility Routines
@@ -1705,7 +1648,7 @@ static void extract565(int isSwap, const void* packedPixel, GLfloat extractCompo
 
    if (isSwap)
    {
-      ushort=__GLU_SWAP_2_BYTES(packedPixel);
+      ushort=__GLUES_SWAP_2_BYTES(packedPixel);
    }
    else
    {
@@ -1743,7 +1686,7 @@ static void extract4444(int isSwap,const void* packedPixel, GLfloat extractCompo
 
    if (isSwap)
    {
-      ushort=__GLU_SWAP_2_BYTES(packedPixel);
+      ushort=__GLUES_SWAP_2_BYTES(packedPixel);
    }
    else
    {
@@ -1781,7 +1724,7 @@ static void extract5551(int isSwap,const void* packedPixel, GLfloat extractCompo
 
    if (isSwap)
    {
-      ushort=__GLU_SWAP_2_BYTES(packedPixel);
+      ushort=__GLUES_SWAP_2_BYTES(packedPixel);
    }
    else
    {

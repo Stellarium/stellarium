@@ -68,10 +68,10 @@
  * to the fan is a simple orientation test.  By making the fan as large
  * as possible, we restore the invariant (check it yourself).
  */
-int __gl_meshTessellateMonoRegion(GLUface* face)
+int __gl_meshTessellateMonoRegion(GLUESface* face)
 {
-   GLUhalfEdge* up;
-   GLUhalfEdge* lo;
+   GLUEShalfEdge* up;
+   GLUEShalfEdge* lo;
 
    /* All edges are oriented CCW around the boundary of the region.
     * First, find the half-edge whose origin vertex is rightmost.
@@ -95,7 +95,7 @@ int __gl_meshTessellateMonoRegion(GLUface* face)
           */
          while (lo->Lnext!=up && (EdgeGoesLeft(lo->Lnext) || EdgeSign(lo->Org, lo->Dst, lo->Lnext->Dst)<=0))
          {
-            GLUhalfEdge* tempHalfEdge=__gl_meshConnect(lo->Lnext, lo);
+            GLUEShalfEdge* tempHalfEdge=__gl_meshConnect(lo->Lnext, lo);
             if (tempHalfEdge==NULL)
             {
                return 0;
@@ -109,7 +109,7 @@ int __gl_meshTessellateMonoRegion(GLUface* face)
          /* lo->Org is on the left.  We can make CCW triangles from up->Dst. */
          while(lo->Lnext!=up && (EdgeGoesRight(up->Lprev) || EdgeSign(up->Dst, up->Org, up->Lprev->Org)>=0))
          {
-            GLUhalfEdge* tempHalfEdge=__gl_meshConnect(up, up->Lprev);
+            GLUEShalfEdge* tempHalfEdge=__gl_meshConnect(up, up->Lprev);
             if (tempHalfEdge==NULL)
             {
                return 0;
@@ -126,7 +126,7 @@ int __gl_meshTessellateMonoRegion(GLUface* face)
    assert(lo->Lnext!=up);
    while(lo->Lnext->Lnext!=up)
    {
-      GLUhalfEdge* tempHalfEdge=__gl_meshConnect(lo->Lnext, lo);
+      GLUEShalfEdge* tempHalfEdge=__gl_meshConnect(lo->Lnext, lo);
       if (tempHalfEdge==NULL)
       {
          return 0;
@@ -141,10 +141,10 @@ int __gl_meshTessellateMonoRegion(GLUface* face)
  * the mesh which is marked "inside" the polygon.  Each such region
  * must be monotone.
  */
-int __gl_meshTessellateInterior(GLUmesh* mesh)
+int __gl_meshTessellateInterior(GLUESmesh* mesh)
 {
-   GLUface* f;
-   GLUface* next;
+   GLUESface* f;
+   GLUESface* next;
 
    /*LINTED*/
    for (f=mesh->fHead.next; f!=&mesh->fHead; f=next)
@@ -169,10 +169,10 @@ int __gl_meshTessellateInterior(GLUmesh* mesh)
  * on NULL faces are not allowed, the main purpose is to clean up the
  * mesh so that exterior loops are not represented in the data structure.
  */
-void __gl_meshDiscardExterior(GLUmesh* mesh)
+void __gl_meshDiscardExterior(GLUESmesh* mesh)
 {
-   GLUface* f;
-   GLUface* next;
+   GLUESface* f;
+   GLUESface* next;
 
    /*LINTED*/
    for (f=mesh->fHead.next; f!=&mesh->fHead; f=next)
@@ -196,10 +196,10 @@ void __gl_meshDiscardExterior(GLUmesh* mesh)
  * If keepOnlyBoundary is TRUE, it also deletes all edges which do not
  * separate an interior region from an exterior one.
  */
-int __gl_meshSetWindingNumber(GLUmesh* mesh, int value, GLboolean keepOnlyBoundary)
+int __gl_meshSetWindingNumber(GLUESmesh* mesh, int value, GLboolean keepOnlyBoundary)
 {
-   GLUhalfEdge* e;
-   GLUhalfEdge* eNext;
+   GLUEShalfEdge* e;
+   GLUEShalfEdge* eNext;
 
    for (e=mesh->eHead.next; e!=&mesh->eHead; e=eNext)
    {

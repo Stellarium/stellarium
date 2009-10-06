@@ -36,14 +36,14 @@
 #include "mesh.h"
 #include "geom.h"
 
-int __gl_vertLeq(GLUvertex* u, GLUvertex* v)
+int __gl_vertLeq(GLUESvertex* u, GLUESvertex* v)
 {
    /* Returns TRUE if u is lexicographically <= v. */
 
    return VertLeq(u, v);
 }
 
-GLfloat __gl_edgeEval(GLUvertex* u, GLUvertex* v, GLUvertex* w)
+GLfloat __gl_edgeEval(GLUESvertex* u, GLUESvertex* v, GLUESvertex* w)
 {
    /* Given three vertices u,v,w such that VertLeq(u,v) && VertLeq(v,w),
     * evaluates the t-coord of the edge uw at the s-coord of the vertex v.
@@ -78,7 +78,7 @@ GLfloat __gl_edgeEval(GLUvertex* u, GLUvertex* v, GLUvertex* w)
    return 0;
 }
 
-GLfloat __gl_edgeSign(GLUvertex* u, GLUvertex* v, GLUvertex* w)
+GLfloat __gl_edgeSign(GLUESvertex* u, GLUESvertex* v, GLUESvertex* w)
 {
    /* Returns a number whose sign matches EdgeEval(u,v,w) but which
     * is cheaper to evaluate.  Returns > 0, == 0 , or < 0
@@ -104,7 +104,7 @@ GLfloat __gl_edgeSign(GLUvertex* u, GLUvertex* v, GLUvertex* w)
  * Define versions of EdgeSign, EdgeEval with s and t transposed.
  */
 
-GLfloat __gl_transEval(GLUvertex* u, GLUvertex* v, GLUvertex* w)
+GLfloat __gl_transEval(GLUESvertex* u, GLUESvertex* v, GLUESvertex* w)
 {
    /* Given three vertices u,v,w such that TransLeq(u,v) && TransLeq(v,w),
     * evaluates the t-coord of the edge uw at the s-coord of the vertex v.
@@ -139,7 +139,7 @@ GLfloat __gl_transEval(GLUvertex* u, GLUvertex* v, GLUvertex* w)
    return 0;
 }
 
-GLfloat __gl_transSign(GLUvertex* u, GLUvertex* v, GLUvertex* w)
+GLfloat __gl_transSign(GLUESvertex* u, GLUESvertex* v, GLUESvertex* w)
 {
    /* Returns a number whose sign matches TransEval(u,v,w) but which
     * is cheaper to evaluate.  Returns > 0, == 0 , or < 0
@@ -162,7 +162,7 @@ GLfloat __gl_transSign(GLUvertex* u, GLUvertex* v, GLUvertex* w)
 }
 
 
-int __gl_vertCCW(GLUvertex* u, GLUvertex* v, GLUvertex* w)
+int __gl_vertCCW(GLUESvertex* u, GLUESvertex* v, GLUESvertex* w)
 {
   /* For almost-degenerate situations, the results are not reliable.
    * Unless the floating-point arithmetic can be performed without
@@ -212,11 +212,11 @@ GLfloat Interpolate(GLfloat a, GLfloat x, GLfloat b, GLfloat y)
 
 #endif /* FOR_TRITE_TEST_PROGRAM */
 
-#define Swap(a, b)      if (1) { GLUvertex* t=a; a=b; b=t; } else
+#define Swap(a, b)      if (1) { GLUESvertex* t=a; a=b; b=t; } else
 
-void __gl_edgeIntersect(GLUvertex* o1, GLUvertex* d1,
-                        GLUvertex* o2, GLUvertex* d2,
-                        GLUvertex* v)
+void __gl_edgeIntersect(GLUESvertex* o1, GLUESvertex* d1,
+                        GLUESvertex* o2, GLUESvertex* d2,
+                        GLUESvertex* v)
 /* Given edges (o1,d1) and (o2,d2), compute their point of intersection.
  * The computed point is guaranteed to lie in the intersection of the
  * bounding rectangles defined by each edge.

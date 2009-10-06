@@ -62,17 +62,17 @@ static int LongAxis(GLfloat v[3])
    return i;
 }
 
-static void ComputeNormal(GLUtesselator* tess, GLfloat norm[3])
+static void ComputeNormal(GLUEStesselator* tess, GLfloat norm[3])
 {
-   GLUvertex* v, *v1, *v2;
+   GLUESvertex* v, *v1, *v2;
    GLfloat c, tLen2, maxLen2;
    GLfloat maxVal[3], minVal[3], d1[3], d2[3], tNorm[3];
-   GLUvertex* maxVert[3], *minVert[3];
-   GLUvertex* vHead=&tess->mesh->vHead;
+   GLUESvertex* maxVert[3], *minVert[3];
+   GLUESvertex* vHead=&tess->mesh->vHead;
    int i;
 
-   maxVal[0]=maxVal[1]=maxVal[2]=-2*GLU_TESS_MAX_COORD;
-   minVal[0]=minVal[1]=minVal[2]=2*GLU_TESS_MAX_COORD;
+   maxVal[0]=maxVal[1]=maxVal[2]=-2*GLUES_TESS_MAX_COORD;
+   minVal[0]=minVal[1]=minVal[2]=2*GLUES_TESS_MAX_COORD;
 
    for (v=vHead->next; v!=vHead; v=v->next)
    {
@@ -146,12 +146,12 @@ static void ComputeNormal(GLUtesselator* tess, GLfloat norm[3])
    }
 }
 
-static void CheckOrientation(GLUtesselator* tess)
+static void CheckOrientation(GLUEStesselator* tess)
 {
    GLfloat area;
-   GLUface* f, *fHead=&tess->mesh->fHead;
-   GLUvertex* v, *vHead=&tess->mesh->vHead;
-   GLUhalfEdge* e;
+   GLUESface* f, *fHead=&tess->mesh->fHead;
+   GLUESvertex* v, *vHead=&tess->mesh->vHead;
+   GLUEShalfEdge* e;
 
    /* When we compute the normal automatically, we choose the orientation
     * so that the the sum of the signed areas of all contours is non-negative.
@@ -211,9 +211,9 @@ extern int RandomSweep;
 /* Determine the polygon normal and project vertices onto the plane
  * of the polygon.
  */
-void __gl_projectPolygon(GLUtesselator* tess)
+void __gl_projectPolygon(GLUEStesselator* tess)
 {
-   GLUvertex *v, *vHead=&tess->mesh->vHead;
+   GLUESvertex *v, *vHead=&tess->mesh->vHead;
    GLfloat norm[3];
    GLfloat* sUnit;
    GLfloat* tUnit;

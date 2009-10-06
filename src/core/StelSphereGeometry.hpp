@@ -637,24 +637,26 @@ struct EdgeVertex
 		//! Create the OctahedronContour by splitting the passed SubContour on the 8 side of the octahedron.
 		OctahedronContour(const SubContour& subContour);
 		
-		//! Append all the SubContours of each octahedron sides. No tesselation occurs at this point,
-		//! and a call to tesselate will proceed on each appended SubContours per side.
-		void append(const OctahedronContour& other);
-				
-		enum TessWindingRule
-		{
-			WindingPositive=0,	//!< Positive winding rule (used for union)
-			WindingAbsGeqTwo=1	//!< Abs greater or equal 2 winding rule (used for intersection)
-		};
-		
-		//! Tesselate the contours per side, producing a list of triangles subcontours according to the given rule.
-		void tesselate(TessWindingRule rule);
+		//! Returns the list of triangles resulting from tesselating the contours.
+		QVector<EdgeVertex> getTesselatedTriangles();
 
 	private:
 		void projectOnOctahedron();
 		void unprojectOnOctahedron();
 
-		static const Mat4d& getProjectPerspective(int octant);
+		//! Append all the SubContours of each octahedron sides. No tesselation occurs at this point,
+		//! and a call to tesselate will proceed on each appended SubContours per side.
+		void append(const OctahedronContour& other);
+		
+		enum TessWindingRule
+		{
+			WindingPositive=0,	//!< Positive winding rule (used for union)
+   			WindingAbsGeqTwo=1	//!< Abs greater or equal 2 winding rule (used for intersection)
+		};
+		
+		//! Tesselate the contours per side, producing a list of triangles subcontours according to the given rule.
+		void tesselate(TessWindingRule rule);
+		
 		static void splitContourByPlan(int onLine, const SubContour& contour, QVector<SubContour> result[2]);
 	};
 

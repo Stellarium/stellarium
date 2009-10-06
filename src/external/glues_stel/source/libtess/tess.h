@@ -57,13 +57,13 @@ typedef struct CachedVertex
    void*   data;
 } CachedVertex;
 
-struct GLUtesselator
+struct GLUEStesselator
 {
    /*** state needed for collecting the input data ***/
    enum TessState state;        /* what begin/end calls have we seen? */
 
-   GLUhalfEdge* lastEdge;       /* lastEdge->Org is the most recent vertex */
-   GLUmesh* mesh;               /* stores the input contours, and eventually
+   GLUEShalfEdge* lastEdge;       /* lastEdge->Org is the most recent vertex */
+   GLUESmesh* mesh;               /* stores the input contours, and eventually
                                    the tessellation itself */
 
    void (APIENTRY* callError)(GLenum errnum);
@@ -80,7 +80,7 @@ struct GLUtesselator
 
    Dict*      dict;             /* edge dictionary for sweep line */
    PriorityQ* pq;               /* priority queue of vertex events */
-   GLUvertex* event;            /* current sweep event being processed */
+   GLUESvertex* event;            /* current sweep event being processed */
 
    void (APIENTRY* callCombine)(GLdouble coords[3], void*  data[4],
                                 GLfloat weight[4], void** outData);
@@ -89,13 +89,13 @@ struct GLUtesselator
   GLboolean     flagBoundary;   /* mark boundary edges (use EdgeFlag) */
   GLboolean     boundaryOnly;   /* Extract contours, not triangles    */
   /* list of triangles which could not be rendered as strips or fans */
-  GLUface*      lonelyTriList;
+  GLUESface*      lonelyTriList;
 
   void (APIENTRY* callBegin)(GLenum type);
   void (APIENTRY* callEdgeFlag)(GLboolean boundaryEdge);
   void (APIENTRY* callVertex)(void* data);
   void (APIENTRY* callEnd)(void);
-  void (APIENTRY* callMesh)(GLUmesh* mesh);
+  void (APIENTRY* callMesh)(GLUESmesh* mesh);
 
   /*** state needed to cache single-contour polygons for renderCache() */
 

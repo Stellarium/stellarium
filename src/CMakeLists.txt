@@ -24,6 +24,39 @@ INCLUDE_DIRECTORIES(
 
 ########### next target ###############
 
+SET(glues_lib_SRCS
+	external/glues_stel/source/glues_error.c
+	external/glues_stel/source/glues_error.h
+	external/glues_stel/source/glues.h
+	external/glues_stel/source/glues_mipmap.c
+	external/glues_stel/source/glues_mipmap.h
+
+	external/glues_stel/source/libtess/dict.h
+	external/glues_stel/source/libtess/dict.c
+	external/glues_stel/source/libtess/dict-list.h
+	external/glues_stel/source/libtess/geom.c
+	external/glues_stel/source/libtess/geom.h
+	external/glues_stel/source/libtess/memalloc.c
+	external/glues_stel/source/libtess/memalloc.h
+	external/glues_stel/source/libtess/mesh.c
+	external/glues_stel/source/libtess/mesh.h
+	external/glues_stel/source/libtess/normal.c
+	external/glues_stel/source/libtess/normal.h
+	external/glues_stel/source/libtess/priorityq.c
+	external/glues_stel/source/libtess/priorityq.h
+	external/glues_stel/source/libtess/priorityq-heap.h
+	external/glues_stel/source/libtess/priorityq-heap.i
+	external/glues_stel/source/libtess/priorityq-sort.h
+	external/glues_stel/source/libtess/render.c
+	external/glues_stel/source/libtess/render.h
+	external/glues_stel/source/libtess/sweep.c
+	external/glues_stel/source/libtess/sweep.h
+	external/glues_stel/source/libtess/tess.c
+	external/glues_stel/source/libtess/tess.h
+	external/glues_stel/source/libtess/tessmono.c
+	external/glues_stel/source/libtess/tessmono.h
+	)
+
 SET(stellarium_lib_SRCS
 	core/StelAudioMgr.hpp
 	core/StelAudioMgr.cpp
@@ -134,37 +167,7 @@ SET(stellarium_lib_SRCS
 	external/kfilter/karchive.h
 	external/kfilter/karchive.cpp
 
-	external/glues_stel/source/glues_error.c
-	external/glues_stel/source/glues_error.h
-	external/glues_stel/source/glues.h
-	external/glues_stel/source/glues_mipmap.c
-	external/glues_stel/source/glues_mipmap.h
-
-	external/glues_stel/source/libtess/dict.h
-	external/glues_stel/source/libtess/dict.c
-	external/glues_stel/source/libtess/dict-list.h
-	external/glues_stel/source/libtess/geom.c
-	external/glues_stel/source/libtess/geom.h
-	external/glues_stel/source/libtess/memalloc.c
-	external/glues_stel/source/libtess/memalloc.h
-	external/glues_stel/source/libtess/mesh.c
-	external/glues_stel/source/libtess/mesh.h
-	external/glues_stel/source/libtess/normal.c
-	external/glues_stel/source/libtess/normal.h
-	external/glues_stel/source/libtess/priorityq.c
-	external/glues_stel/source/libtess/priorityq.h
-	external/glues_stel/source/libtess/priorityq-heap.h
-	external/glues_stel/source/libtess/priorityq-heap.i
-	external/glues_stel/source/libtess/priorityq-sort.h
-	external/glues_stel/source/libtess/render.c
-	external/glues_stel/source/libtess/render.h
-	external/glues_stel/source/libtess/sweep.c
-	external/glues_stel/source/libtess/sweep.h
-	external/glues_stel/source/libtess/tess.c
-	external/glues_stel/source/libtess/tess.h
-	external/glues_stel/source/libtess/tessmono.c
-	external/glues_stel/source/libtess/tessmono.h
-
+	${glues_lib_SRCS}
 
 	planetsephems/calc_interpolated_elements.c
 	planetsephems/calc_interpolated_elements.h
@@ -523,7 +526,8 @@ SET(tests_testStelSphereGeometry_SRCS
 	core/StelJsonParser.hpp
 	core/StelJsonParser.cpp
 	core/StelUtils.cpp
-	core/StelUtils.hpp)
+	core/StelUtils.hpp
+	${glues_lib_SRCS})
 QT4_WRAP_CPP(testStelSphereGeometry_MOC_SRCS tests/testStelSphereGeometry.hpp)
 ADD_EXECUTABLE(testStelSphereGeometry ${tests_testStelSphereGeometry_SRCS} ${testStelSphereGeometry_MOC_SRCS})
 TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOption} ${QT_QTTEST_LIBRARY})
@@ -539,7 +543,8 @@ SET(tests_testStelSphericalIndex_SRCS
 	core/StelJsonParser.hpp
 	core/StelJsonParser.cpp
 	core/StelUtils.cpp
-	core/StelUtils.hpp)
+	core/StelUtils.hpp
+	${glues_lib_SRCS})
 QT4_WRAP_CPP(tests_testStelSphericalIndex_MOC_SRCS tests/testStelSphericalIndex.hpp)
 ADD_EXECUTABLE(testStelSphericalIndex ${tests_testStelSphericalIndex_SRCS} ${tests_testStelSphericalIndex_MOC_SRCS})
 TARGET_LINK_LIBRARIES(testStelSphericalIndex ${extLinkerOption} ${QT_QTTEST_LIBRARY})
