@@ -257,9 +257,6 @@ SphericalPolygon AllSkySphericalRegion::toSphericalPolygon() const
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalPolygonBase
 ///////////////////////////////////////////////////////////////////////////////
-#ifndef APIENTRY
-#define APIENTRY
-#endif
 
 struct UserDataSimplifiedContours
 {
@@ -269,27 +266,27 @@ struct UserDataSimplifiedContours
 	QVector<QVector<Vec3d> > resultContours;
 };
 
-void APIENTRY errorCallback(GLenum errno)
+void  errorCallback(GLenum errno)
 {
 	qWarning() << "Tesselator error:" << QString::fromAscii((char*)gluesErrorString(errno));
 	Q_ASSERT(0);
 }
 
-void APIENTRY contourBeginCallback(GLenum type, void* userData)
+void  contourBeginCallback(GLenum type, void* userData)
 {
 	Q_ASSERT(type==GL_LINE_LOOP);
 	UserDataSimplifiedContours* d = static_cast<UserDataSimplifiedContours*>(userData);
 	d->resultContours.append(QVector<Vec3d>());
 }
 
-void APIENTRY contourVertexCallback(void* vertexData, void* userData)
+void  contourVertexCallback(void* vertexData, void* userData)
 {
 	const double* v = (double*)vertexData;
 	UserDataSimplifiedContours* d = static_cast<UserDataSimplifiedContours*>(userData);
 	d->resultContours.last().append(Vec3d(v[0], v[1], v[2]));
 }
 
-void APIENTRY combineCallbackSimple(GLdouble coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
+void  combineCallbackSimple(GLdouble coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
 {
 	UserDataSimplifiedContours* d = static_cast<UserDataSimplifiedContours*>(userData);
 	d->tmpVectors.append(Vec3d(coords[0], coords[1], coords[2]));
@@ -301,12 +298,12 @@ QVector<QVector<Vec3d> > SphericalPolygonBase::getSimplifiedContours() const
 {
 	// Use GLUES tesselation functions to compute the contours from the list of triangles
 	GLUEStesselator* tess = gluesNewTess();
-	gluesTessCallback(tess, GLUES_TESS_BEGIN_DATA, (GLvoid(APIENTRY*)()) &contourBeginCallback);
-	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(APIENTRY*)()) &contourVertexCallback);
-	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid (APIENTRY*) ()) &errorCallback);
+	gluesTessCallback(tess, GLUES_TESS_BEGIN_DATA, (GLvoid(*)()) &contourBeginCallback);
+	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(*)()) &contourVertexCallback);
+	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid (*) ()) &errorCallback);
 	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, GLUES_TESS_WINDING_POSITIVE);
 	gluesTessProperty(tess, GLUES_TESS_BOUNDARY_ONLY, GL_TRUE);
-	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid (APIENTRY*)()) &combineCallbackSimple);
+	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid (*)()) &combineCallbackSimple);
 	//gluesTessProperty(tess, GLUES_TESS_TOLERANCE, 0.00000001);
 	
 	UserDataSimplifiedContours userData;
@@ -452,7 +449,7 @@ struct GluTessCallbackData
 	QList<Vec3d> tempVertices;	//! Use to contain the temporary combined vertices
 };
 
-void APIENTRY vertexCallback(void* vertexData, void* userData)
+void  vertexCallback(void* vertexData, void* userData)
 {
 	SphericalPolygon* mp = ((GluTessCallbackData*)userData)->thisPolygon;
 	const double* v = (double*)vertexData;
@@ -462,12 +459,12 @@ void APIENTRY vertexCallback(void* vertexData, void* userData)
 	mp->edgeFlags.append(((GluTessCallbackData*)userData)->edgeFlag);
 }
 
-void APIENTRY edgeFlagCallback(GLboolean flag, void* userData)
+void  edgeFlagCallback(GLboolean flag, void* userData)
 {
 	((GluTessCallbackData*)userData)->edgeFlag=flag;
 }
 
-void APIENTRY combineCallback(GLdouble coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
+void  combineCallback(GLdouble coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
 {
 	QList<Vec3d>& tempVertices = ((GluTessCallbackData*)userData)->tempVertices;
 	if (vertex_data[2]==NULL)
@@ -516,7 +513,7 @@ void APIENTRY combineCallback(GLdouble coords[3], void* vertex_data[4], GLfloat 
 	*outData = tempVertices.last();
 }
 
-void APIENTRY checkBeginCallback(GLenum type)
+void  checkBeginCallback(GLenum type)
 {
 	Q_ASSERT(type==GL_TRIANGLES);
 }
@@ -529,12 +526,12 @@ void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, Sph
 	// Use GLUES tesselation functions to transform the polygon into a list of triangles
 	GLUEStesselator* tess = gluesNewTess();
 #ifndef NDEBUG
-	gluesTessCallback(tess, GLUES_TESS_BEGIN, (GLvoid(APIENTRY*)()) &checkBeginCallback);
+	gluesTessCallback(tess, GLUES_TESS_BEGIN, (GLvoid(*)()) &checkBeginCallback);
 #endif
-	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(APIENTRY*)()) &vertexCallback);
-	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG_DATA, (GLvoid(APIENTRY*)()) &edgeFlagCallback);
-	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid(APIENTRY*)()) &errorCallback);
-	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid(APIENTRY*)()) &combineCallback);
+	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(*)()) &vertexCallback);
+	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG_DATA, (GLvoid(*)()) &edgeFlagCallback);
+	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid(*)()) &errorCallback);
+	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid(*)()) &combineCallback);
 	const GLdouble windRule = (windingRule==SphericalPolygonBase::WindingPositive) ? GLUES_TESS_WINDING_POSITIVE : GLUES_TESS_WINDING_ABS_GEQ_TWO;
 	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, windRule);
 	//gluesTessProperty(tess, GLUES_TESS_TOLERANCE, 0.00001);
@@ -618,7 +615,7 @@ void SphericalPolygon::setContour(const QVector<Vec3d>& contour)
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalTexturedPolygon
 ///////////////////////////////////////////////////////////////////////////////
-void APIENTRY vertexTextureCallback(void* vertexData, void* userData)
+void  vertexTextureCallback(void* vertexData, void* userData)
 {
 	SphericalTexturedPolygon* mp = static_cast<SphericalTexturedPolygon*>(((GluTessCallbackData*)userData)->thisPolygon);
 	const SphericalTexturedPolygon::TextureVertex* vData = (SphericalTexturedPolygon::TextureVertex*)vertexData;
@@ -635,9 +632,9 @@ void SphericalTexturedPolygon::setContours(const QVector<QVector<TextureVertex> 
 
 	// Use GLUES tesselation functions to transform the polygon into a list of triangles
 	GLUEStesselator* tess = gluesNewTess();
-	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(APIENTRY*)()) &vertexTextureCallback);
-	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG_DATA, (GLvoid(APIENTRY*)()) &edgeFlagCallback);
-	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid (APIENTRY*) ()) &errorCallback);
+	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(*)()) &vertexTextureCallback);
+	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG_DATA, (GLvoid(*)()) &edgeFlagCallback);
+	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid (*) ()) &errorCallback);
 	const GLdouble windRule = (windingRule==SphericalPolygonBase::WindingPositive) ? GLUES_TESS_WINDING_POSITIVE : GLUES_TESS_WINDING_ABS_GEQ_TWO;
 	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, windRule);
 	GluTessCallbackData data;
@@ -1337,6 +1334,8 @@ OctahedronContour::OctahedronContour(const SubContour& initContour)
 	}
 	
 	projectOnOctahedron();
+	// Tesselate with WindingPositive by default
+	tesselate(OctahedronContour::WindingPositive);
 }
 
 void OctahedronContour::append(const OctahedronContour& other)
@@ -1389,43 +1388,28 @@ QVector<EdgeVertex> OctahedronContour::getTesselatedTriangles()
 	return result;
 }
 
-void OctahedronContour::unprojectOnOctahedron()
-{
-	Q_ASSERT(size()==8);
-	QVector<SubContour>* subs = data();
-	for (int i=0;i<8;++i)
-	{
-		for (QVector<SubContour>::Iterator iter=subs[i].begin();iter!=subs[i].end();++iter)
-		{
-			for (SubContour::Iterator v=iter->begin();v!=iter->end();++v)
-				v->vertex.normalize();
-		}
-	}
-}
-
 // Store data for the GLUES tesselation callbacks
 struct OctTessCallbackData
 {
-	QVector<EdgeVertex> result;		//! Reference to the instance of OctahedronContour being tesselated.
+	SubContour result;		//! Reference to the instance of OctahedronContour being tesselated.
 	bool edgeFlag;					//! Used to store temporary edgeFlag found by the tesselator.
 	QVector<Vec3d> tempVertices;	//! Used to store the temporary combined vertices
 };
 
-void APIENTRY octVertexCallback(void* vertexData, void* userData)
+void  octVertexCallback(void* vertexData, void* userData)
 {
 	QVector<EdgeVertex>& res = ((OctTessCallbackData*)userData)->result;
 	const double* v = (double*)vertexData;
 	Vec3d vv(v[0], v[1], v[2]);
-	Q_ASSERT(std::fabs(vv.length()-1.)<0.000001);
 	res.append(EdgeVertex(vv, ((OctTessCallbackData*)userData)->edgeFlag));
 }
 
-void APIENTRY octEdgeFlagCallback(GLboolean flag, void* userData)
+void  octEdgeFlagCallback(GLboolean flag, void* userData)
 {
 	((OctTessCallbackData*)userData)->edgeFlag=flag;
 }
 
-void APIENTRY octCombineCallback(GLdouble coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
+void  octCombineCallback(GLdouble coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
 {
 	QVector<Vec3d>& tempVertices = ((OctTessCallbackData*)userData)->tempVertices;
 	Vec3d newVertex(0.);
@@ -1440,12 +1424,12 @@ void APIENTRY octCombineCallback(GLdouble coords[3], void* vertex_data[4], GLflo
 	*outData = tempVertices.last();
 }
 
-void APIENTRY octCheckBeginCallback(GLenum type)
+void  octCheckBeginCallback(GLenum type)
 {
 	Q_ASSERT(type==GL_TRIANGLES);
 }
 
-QVector<EdgeVertex> tesselateOneSide(GLUEStesselator* tess, const QVector<SubContour>& contours)
+SubContour tesselateOneSide(GLUEStesselator* tess, const QVector<SubContour>& contours)
 {
 	OctTessCallbackData data;
 	gluesTessBeginPolygon(tess, &data);
@@ -1467,19 +1451,23 @@ void OctahedronContour::tesselate(TessWindingRule windingRule)
 	// Use GLUES tesselation functions to transform the polygon into a list of triangles
 	GLUEStesselator* tess = gluesNewTess();
 #ifndef NDEBUG
-	gluesTessCallback(tess, GLUES_TESS_BEGIN, (GLvoid(APIENTRY*)()) &octCheckBeginCallback);
+	gluesTessCallback(tess, GLUES_TESS_BEGIN, (GLvoid(*)()) &octCheckBeginCallback);
 #endif
-	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(APIENTRY*)()) &octVertexCallback);
-	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG_DATA, (GLvoid(APIENTRY*)()) &octEdgeFlagCallback);
-	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid(APIENTRY*)()) &errorCallback);
-	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid(APIENTRY*)()) &octCombineCallback);
+	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(*)()) &octVertexCallback);
+	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG_DATA, (GLvoid(*)()) &octEdgeFlagCallback);
+	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid(*)()) &errorCallback);
+	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid(*)()) &octCombineCallback);
 	const GLdouble windRule = (windingRule==OctahedronContour::WindingPositive) ? GLUES_TESS_WINDING_POSITIVE : GLUES_TESS_WINDING_ABS_GEQ_TWO;
 	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, windRule);
-
-// 	for (int i=0;i<8;++i)
-// 	{
-// 		(*this)[i]=tesselateOneSide(tess, (*this)[i]);
-// 	}
-// 	
+	gluesTessNormal(tess, 0,0,1);
+	
+	// Call the tesselator on each side
+	for (int i=0;i<8;++i)
+	{
+		QVector<SubContour> res;
+		res.append(tesselateOneSide(tess, (*this)[i]));
+		(*this)[i]=res;
+	}
+	
 	gluesDeleteTess(tess);
 }

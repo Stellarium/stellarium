@@ -642,7 +642,6 @@ struct EdgeVertex
 
 	private:
 		void projectOnOctahedron();
-		void unprojectOnOctahedron();
 
 		//! Append all the SubContours of each octahedron sides. No tesselation occurs at this point,
 		//! and a call to tesselate will proceed on each appended SubContours per side.

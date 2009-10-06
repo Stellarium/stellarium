@@ -44,11 +44,6 @@
 #include "GLee.h"
 
 /*************************************************************/
-				 
-#ifdef APIENTRY
-# undef APIENTRY
-# define APIENTRY
-#endif
 
 /* ErrorCode */
 #define GLUES_INVALID_ENUM                   100900
