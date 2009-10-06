@@ -39,10 +39,8 @@
 
 #include "glues_mipmap.h"
 
-#ifdef GLAPI
 #undef GLAPI
 #define GLAPI
-#endif
 
 typedef union
 {
