@@ -39,9 +39,6 @@
 
 #include "glues_mipmap.h"
 
-#undef GLAPI
-#define GLAPI
-
 typedef union
 {
    unsigned char ub[4];
@@ -845,7 +842,7 @@ static void closestFit(GLenum target, GLint width, GLint height,
    }
 } /* closestFit() */
 
-GLAPI GLint APIENTRY 
+GLint APIENTRY 
 gluScaleImage(GLenum format, GLsizei widthin, GLsizei heightin,
               GLenum typein, const void* datain, GLsizei widthout,
               GLsizei heightout, GLenum typeout, void* dataout)
@@ -1307,7 +1304,7 @@ static int gluBuild2DMipmapLevelsCore(GLenum target, GLint internalFormat,
    return 0;
 } /* gluBuild2DMipmapLevelsCore() */
 
-GLAPI GLint APIENTRY
+GLint APIENTRY
 gluBuild2DMipmapLevels(GLenum target, GLint internalFormat,
                        GLsizei width, GLsizei height, GLenum format,
                        GLenum type, GLint userLevel, GLint baseLevel,
@@ -1345,7 +1342,7 @@ gluBuild2DMipmapLevels(GLenum target, GLint internalFormat,
                                      userLevel, baseLevel, maxLevel, data);
 } /* gluBuild2DMipmapLevels() */
 
-GLAPI GLint APIENTRY
+GLint APIENTRY
 gluBuild2DMipmaps(GLenum target, GLint internalFormat, GLsizei width,
                   GLsizei height, GLenum format, GLenum type, const void* data)
 {

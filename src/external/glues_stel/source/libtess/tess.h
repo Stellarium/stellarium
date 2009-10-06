@@ -118,12 +118,12 @@ struct GLUtesselator
   void* polygonData;    /* client data for current polygon */
 };
 
-GLAPI void APIENTRY __gl_noBeginData(GLenum type, void* polygonData);
-GLAPI void APIENTRY __gl_noEdgeFlagData(GLboolean boundaryEdge, void* polygonData);
-GLAPI void APIENTRY __gl_noVertexData(void* data, void* polygonData);
-GLAPI void APIENTRY __gl_noEndData(void* polygonData);
-GLAPI void APIENTRY __gl_noErrorData(GLenum errnum, void* polygonData);
-GLAPI void APIENTRY __gl_noCombineData(GLdouble coords[3], void* data[4],
+ void APIENTRY __gl_noBeginData(GLenum type, void* polygonData);
+ void APIENTRY __gl_noEdgeFlagData(GLboolean boundaryEdge, void* polygonData);
+ void APIENTRY __gl_noVertexData(void* data, void* polygonData);
+ void APIENTRY __gl_noEndData(void* polygonData);
+ void APIENTRY __gl_noErrorData(GLenum errnum, void* polygonData);
+ void APIENTRY __gl_noCombineData(GLdouble coords[3], void* data[4],
                                        GLfloat weight[4], void** outData,
                                        void* polygonData);
 
