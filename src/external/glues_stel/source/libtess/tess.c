@@ -53,13 +53,6 @@
 #define TRUE  1
 #define FALSE 0
 
-#ifdef APIENTRY
-#undef APIENTRY
-#define APIENTRY
-#endif
-
-#undef GLAPI
-#define GLAPI
 
 /*ARGSUSED*/ static void APIENTRY noBegin(GLenum type) {}
 /*ARGSUSED*/ static void APIENTRY noEdgeFlag(GLboolean boundaryEdge ) {}
@@ -87,7 +80,7 @@ typedef struct {GLUhalfEdge e, eSym;} EdgePair;
 #define MAX_FAST_ALLOC  (MAX(sizeof(EdgePair), \
                          MAX(sizeof(GLUvertex), sizeof(GLUface))))
 
-GLAPI GLUtesselator* APIENTRY gluNewTess(void)
+GLUtesselator* APIENTRY gluNewTess(void)
 {
    GLUtesselator* tess;
 
@@ -194,13 +187,13 @@ static void GotoState(GLUtesselator* tess, enum TessState newState)
    }
 }
 
-GLAPI void APIENTRY gluDeleteTess(GLUtesselator* tess)
+void APIENTRY gluDeleteTess(GLUtesselator* tess)
 {
    RequireState(tess, T_DORMANT);
    memFree(tess);
 }
 
-GLAPI void APIENTRY gluTessProperty(GLUtesselator* tess, GLenum which, GLdouble value)
+void APIENTRY gluTessProperty(GLUtesselator* tess, GLenum which, GLdouble value)
 {
    GLenum windingRule;
 
@@ -245,7 +238,7 @@ GLAPI void APIENTRY gluTessProperty(GLUtesselator* tess, GLenum which, GLdouble 
 }
 
 /* Returns tessellator property */
-GLAPI void APIENTRY gluGetTessProperty(GLUtesselator* tess, GLenum which, GLdouble* value)
+void APIENTRY gluGetTessProperty(GLUtesselator* tess, GLenum which, GLdouble* value)
 {
    switch (which)
    {
@@ -273,14 +266,14 @@ GLAPI void APIENTRY gluGetTessProperty(GLUtesselator* tess, GLenum which, GLdoub
    }
 }
 
-GLAPI void APIENTRY gluTessNormal(GLUtesselator* tess, GLdouble x, GLdouble y, GLdouble z)
+void APIENTRY gluTessNormal(GLUtesselator* tess, GLdouble x, GLdouble y, GLdouble z)
 {
    tess->normal[0]=x;
    tess->normal[1]=y;
    tess->normal[2]=z;
 }
 
-GLAPI void APIENTRY gluTessCallback(GLUtesselator* tess, GLenum which, _GLUfuncptr fn)
+void APIENTRY gluTessCallback(GLUtesselator* tess, GLenum which, _GLUfuncptr fn)
 {
    switch (which)
    {
@@ -485,7 +478,7 @@ void APIENTRY gluTessVertex(GLUtesselator* tess, GLdouble coords[3], void* data)
    }
 }
 
-GLAPI void APIENTRY gluTessBeginPolygon(GLUtesselator* tess, void* data)
+void APIENTRY gluTessBeginPolygon(GLUtesselator* tess, void* data)
 {
    RequireState(tess, T_DORMANT);
 
