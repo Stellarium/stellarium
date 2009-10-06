@@ -58,10 +58,8 @@
 #define APIENTRY
 #endif
 
-#ifdef GLAPI
 #undef GLAPI
 #define GLAPI
-#endif
 
 /*ARGSUSED*/ static void APIENTRY noBegin(GLenum type) {}
 /*ARGSUSED*/ static void APIENTRY noEdgeFlag(GLboolean boundaryEdge ) {}
