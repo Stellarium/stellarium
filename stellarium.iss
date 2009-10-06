@@ -23,12 +23,7 @@ Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.rtf"
 Source: "AUTHORS"; DestDir: "{app}"; DestName: "AUTHORS.rtf"
 Source: "ChangeLog"; DestDir: "{app}";
 Source: "libpng13.dll"; DestDir: "{app}";
-Source: "zlib1.dll"; DestDir: "{app}";
-; Source: "mingwm10.dll"; DestDir: "{app}";
-Source: "freetype6.dll"; DestDir: "{app}";
-Source: "jpeg62.dll"; DestDir: "{app}";
-Source: "intl.dll"; DestDir: "{app}";
-Source: "iconv.dll"; DestDir: "{app}";
+Source: "mingwm10.dll"; DestDir: "{app}";
 Source: "mingwm10.dll"; DestDir: "{app}";
 Source: "QtCore4.dll"; DestDir: "{app}";
 Source: "QtGui4.dll"; DestDir: "{app}";
@@ -45,4 +40,5 @@ Source: "builds\msys\_CPack_Packages\win32\TGZ\Stellarium-0.10.3-win32\share\loc
 Name: "{group}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
 Name: "{group}\Uninstall Stellarium"; Filename: "{uninstallexe}"
 Name: "{group}\config.ini"; Filename: "{userappdata}\Stellarium\config.ini"
+Name: "{group}\Last run log"; Filename: "{userappdata}\Stellarium\log.txt"
 
