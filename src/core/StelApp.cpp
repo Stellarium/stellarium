@@ -91,11 +91,10 @@ void StelApp::initStatic()
  Create and initialize the main Stellarium application.
 *************************************************************************/
 StelApp::StelApp(int argc, char** argv, QObject* parent)
-	: QObject(parent), core(NULL), fps(0), maxfps(10000.f), frame(0),
-	  timefr(0.), timeBase(0.), flagNightVision(false),
-	  configFile("config.ini"), startupScript("startup.ssc"),
-	  confSettings(NULL), initialized(false), saveProjW(-1),
-	  saveProjH(-1)
+	: QObject(parent), core(NULL), stelGui(NULL), fps(0), maxfps(10000.f), 
+	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false), 
+	  configFile("config.ini"), startupScript("startup.ssc"), 
+	  confSettings(NULL), initialized(false), saveProjW(-1), saveProjH(-1)
 {
 	// Stat variables
 	nbDownloadedFiles=0;
