@@ -31,10 +31,12 @@ class QAction;
 class StelGuiBase
 {
 public:
-	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraphicsWidget* stelAppGraphicsWidget) =0;
+	StelGuiBase();
+	
+	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraphicsWidget* stelAppGraphicsWidget);
 	
 	//! Translate all texts to the new Locale.
-	virtual void updateI18n() =0;
+	virtual void updateI18n();
 	
 	//! Load color scheme from the given ini file and section name.
 	virtual void setStelStyle(const StelStyle& style) =0;
@@ -55,12 +57,12 @@ public:
 	//! @param helpGroup hint on how to group the text in the help window
 	//! @param checkable whether the action should be checkable
 	//! @param autoRepeat whether the action should be autorepeated
-	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false) =0;
+	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false);
 	
 	//! Get a pointer on an action managed by the GUI
 	//! @param actionName qt object name for this action
 	//! @return a pointer on the QAction object or NULL if don't exist
-	virtual QAction* getGuiActions(const QString& actionName)= 0;
+	virtual QAction* getGuiActions(const QString& actionName);
 	
 	virtual void forceRefreshGui() {;}
 	
@@ -69,6 +71,32 @@ public:
 	virtual void setVisible(bool b) =0;
 	//! Get the current visible status of the GUI.
 	virtual bool getVisible() const =0;
+	
+protected:
+	class StelAppGraphicsWidget* stelAppGraphicsWidget;
 };
+
+//! @class StelNoGui
+//! Dummy implementation of StelGuiBase to use when no GUI is used.
+class StelNoGui : public StelGuiBase
+{
+public:
+	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraphicsWidget* stelAppGraphicsWidget) {;}
+	virtual void updateI18n() {;}
+	virtual void setStelStyle(const StelStyle& style) {;}
+	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {dummyInfoTextFilter=aflags;}
+	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const {return dummyInfoTextFilter;}
+	virtual class QProgressBar* addProgressBar();
+	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false) {return NULL;}
+	virtual QAction* getGuiActions(const QString& actionName) {return NULL;}
+	virtual void forceRefreshGui() {;}	
+	virtual void setVisible(bool b) {visible=b;}
+	virtual bool getVisible() const {return visible;}
+	
+private:
+	StelObject::InfoStringGroup dummyInfoTextFilter;
+	bool visible;
+};
+
 
 #endif // _STELGUIBASE_HPP_

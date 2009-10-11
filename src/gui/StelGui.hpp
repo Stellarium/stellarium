@@ -104,7 +104,6 @@ public:
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const;
 	
 	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false);
-	virtual QAction* getGuiActions(const QString& actionName);
 	
 public slots:
 	//! Define whether the buttons toggling image flip should be visible
@@ -145,7 +144,6 @@ private slots:
 	
 private:
 	QGraphicsWidget* topLevelGraphicsWidget;
-	StelAppGraphicsWidget* stelAppGraphicsWidget;
 			
 	class SkyGui* skyGui;
 	

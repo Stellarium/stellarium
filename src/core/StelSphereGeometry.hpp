@@ -611,54 +611,6 @@ private:
 	QVector<Vec2f> textureCoords;
 };
 
-struct EdgeVertex
-{
-	EdgeVertex() : edgeFlag(false) {;}
-	EdgeVertex(bool b) : edgeFlag(b) {;}
-	EdgeVertex(Vec3d v, bool b) : vertex(v), edgeFlag(b) {;}
-	Vec3d vertex;
-	bool edgeFlag;
-};
-
-
-	class SubContour : public QVector<EdgeVertex>
-	{
-	public:
-		// Create a SubContour from a list of vertices 
-		SubContour(const QVector<Vec3d>& vertices, bool closed=true);
-		SubContour() {;}
-		SubContour(int size, const EdgeVertex& v) : QVector<EdgeVertex>(size, v) {;}
-		QString toJSON() const;
-	};
-	
-	class OctahedronContour : public QVarLengthArray<QVector<SubContour>,8 >
-	{
-	public:
-		//! Create the OctahedronContour by splitting the passed SubContour on the 8 side of the octahedron.
-		OctahedronContour(const SubContour& subContour);
-		
-		//! Returns the list of triangles resulting from tesselating the contours.
-		QVector<EdgeVertex> getTesselatedTriangles();
-
-	private:
-		void projectOnOctahedron();
-
-		//! Append all the SubContours of each octahedron sides. No tesselation occurs at this point,
-		//! and a call to tesselate will proceed on each appended SubContours per side.
-		void append(const OctahedronContour& other);
-		
-		enum TessWindingRule
-		{
-			WindingPositive=0,	//!< Positive winding rule (used for union)
-   			WindingAbsGeqTwo=1	//!< Abs greater or equal 2 winding rule (used for intersection)
-		};
-		
-		//! Tesselate the contours per side, producing a list of triangles subcontours according to the given rule.
-		void tesselate(TessWindingRule rule);
-		
-		static void splitContourByPlan(int onLine, const SubContour& contour, QVector<SubContour> result[2]);
-	};
-
 
 
 //! @class SphericalConvexPolygon
@@ -812,6 +764,68 @@ protected:
 	//! There should be 1 uv position per vertex.
 	QVector<Vec2f> textureCoords;
 };
+
+
+struct EdgeVertex
+{
+	EdgeVertex() : edgeFlag(false) {;}
+	EdgeVertex(bool b) : edgeFlag(b) {;}
+	EdgeVertex(Vec3d v, bool b) : vertex(v), edgeFlag(b) {;}
+	Vec3d vertex;
+	bool edgeFlag;
+};
+
+class SubContour : public QVector<EdgeVertex>
+{
+public:
+	// Create a SubContour from a list of vertices 
+	SubContour(const QVector<Vec3d>& vertices, bool closed=true);
+	SubContour() {;}
+	SubContour(int size, const EdgeVertex& v) : QVector<EdgeVertex>(size, v) {;}
+	SubContour reversed() const;
+	QString toJSON() const;
+};
+
+class OctahedronContour
+{
+public:
+	//! Create the OctahedronContour by splitting the passed SubContour on the 8 sides of the octahedron.
+	OctahedronContour(const SubContour& subContour);
+	
+	//! Returns the list of triangles resulting from tesselating the contours.
+	QVector<EdgeVertex> getTesselatedTriangles();
+
+	//! Set this OctahedronContour as the intersection of itself with the given OctahedronContour.
+	void inPlaceIntersection(const OctahedronContour& mpoly);
+	//! Set this OctahedronContour as the union of itself with the given OctahedronContour.
+	void inPlaceUnion(const OctahedronContour& mpoly);
+	//! Set this OctahedronContour as the subtraction of itself with the given OctahedronContour.
+	void inPlaceSubtraction(const OctahedronContour& mpoly);
+	
+private:
+	void projectOnOctahedron();
+
+	//! Append all the SubContours of each octahedron sides. No tesselation occurs at this point,
+	//! and a call to tesselate will proceed on each appended SubContours per side.
+	void append(const OctahedronContour& other);
+	void appendReversed(const OctahedronContour& other);
+	
+	enum TessWindingRule
+	{
+		WindingPositive=0,	//!< Positive winding rule (used for union)
+   		WindingAbsGeqTwo=1	//!< Abs greater or equal 2 winding rule (used for intersection)
+	};
+	
+	//! Tesselate the contours per side, producing a list of triangles subcontours according to the given rule.
+	void tesselate(TessWindingRule rule) const;
+	
+	static void splitContourByPlan(int onLine, const SubContour& contour, QVector<SubContour> result[2]);
+	
+	mutable QVarLengthArray<QVector<SubContour>,8 > sides;
+	
+	mutable bool tesselated;
+};
+
 
 //! Compute the intersection of 2 halfspaces on the sphere (usually on 2 points) and return it in p1 and p2.
 //! If the 2 SphericalCap don't interesect or intersect only at 1 point, false is returned and p1 and p2 are undefined
