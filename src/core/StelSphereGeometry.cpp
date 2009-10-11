@@ -1290,9 +1290,19 @@ SubContour::SubContour(const QVector<Vec3d>& vertices, bool closed) : QVector<Ed
 	}
 }
 
-OctahedronContour::OctahedronContour(const SubContour& initContour)
+SubContour SubContour::reversed() const
 {
-	resize(8);
+	SubContour res;
+	QVectorIterator<EdgeVertex> iter(*this);
+	iter.toBack();
+	while (iter.hasPrevious())
+		res.append(iter.previous());
+	return res;
+}
+
+OctahedronContour::OctahedronContour(const SubContour& initContour) : tesselated(false)
+{
+	sides.resize(8);
 	
 	QVector<SubContour> splittedContour1[2];
 	// Split the contour on the plan Y=0
@@ -1329,31 +1339,43 @@ OctahedronContour::OctahedronContour(const SubContour& initContour)
 		}
 		foreach (const SubContour& subContour, splittedVertices2[c])
 		{
-			splitContourByPlan(2, subContour, this->data()+c*2);
+			splitContourByPlan(2, subContour, sides.data()+c*2);
 		}
 	}
 	
 	projectOnOctahedron();
-	// Tesselate with WindingPositive by default
-	tesselate(OctahedronContour::WindingPositive);
 }
 
 void OctahedronContour::append(const OctahedronContour& other)
 {
-	Q_ASSERT(size()==8 && other.size()==8);
+	Q_ASSERT(sides.size()==8 && other.sides.size()==8);
 	for (int i=0;i<8;++i)
 	{
-		(*this)[i] += other[i];
+		sides[i] += other.sides[i];
 	}
+	tesselated = false;
 }
-		
+
+void OctahedronContour::appendReversed(const OctahedronContour& other)
+{
+	Q_ASSERT(sides.size()==8 && other.sides.size()==8);
+	for (int i=0;i<8;++i)
+	{
+		foreach (const SubContour& sub, other.sides[i])
+		{
+			sides[i] += sub.reversed();
+		}
+	}
+	tesselated = false;
+}
+
 void OctahedronContour::projectOnOctahedron()
 {
 	static const Vec3d faceCenter[] = {	Vec3d(1,1,1), Vec3d(1,1,-1),Vec3d(-1,1,1),Vec3d(-1,1,-1),
 		Vec3d(1,-1,1),Vec3d(1,-1,-1),Vec3d(-1,-1,1),Vec3d(-1,-1,-1)};
 
-	Q_ASSERT(size()==8);
-	QVector<SubContour>* subs = data();
+	Q_ASSERT(sides.size()==8);
+	QVector<SubContour>* subs = sides.data();
 	
 	for (int i=0;i<8;++i)
 	{
@@ -1371,9 +1393,11 @@ void OctahedronContour::projectOnOctahedron()
 
 QVector<EdgeVertex> OctahedronContour::getTesselatedTriangles()
 {
+	if (!tesselated)
+		tesselate(WindingPositive);
 	QVector<EdgeVertex> result;
-	Q_ASSERT(size()==8);
-	QVector<SubContour>* subs = data();
+	Q_ASSERT(sides.size()==8);
+	QVector<SubContour>* subs = sides.data();
 	for (int i=0;i<8;++i)
 	{
 		for (QVector<SubContour>::Iterator iter=subs[i].begin();iter!=subs[i].end();++iter)
@@ -1396,7 +1420,7 @@ struct OctTessCallbackData
 	QVector<Vec3d> tempVertices;	//! Used to store the temporary combined vertices
 };
 
-void  octVertexCallback(void* vertexData, void* userData)
+void octVertexCallback(void* vertexData, void* userData)
 {
 	QVector<EdgeVertex>& res = ((OctTessCallbackData*)userData)->result;
 	const double* v = (double*)vertexData;
@@ -1404,12 +1428,12 @@ void  octVertexCallback(void* vertexData, void* userData)
 	res.append(EdgeVertex(vv, ((OctTessCallbackData*)userData)->edgeFlag));
 }
 
-void  octEdgeFlagCallback(GLboolean flag, void* userData)
+void octEdgeFlagCallback(GLboolean flag, void* userData)
 {
 	((OctTessCallbackData*)userData)->edgeFlag=flag;
 }
 
-void  octCombineCallback(GLdouble coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
+void octCombineCallback(GLdouble coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
 {
 	QVector<Vec3d>& tempVertices = ((OctTessCallbackData*)userData)->tempVertices;
 	Vec3d newVertex(0.);
@@ -1424,7 +1448,7 @@ void  octCombineCallback(GLdouble coords[3], void* vertex_data[4], GLfloat weigh
 	*outData = tempVertices.last();
 }
 
-void  octCheckBeginCallback(GLenum type)
+void octCheckBeginCallback(GLenum type)
 {
 	Q_ASSERT(type==GL_TRIANGLES);
 }
@@ -1446,7 +1470,7 @@ SubContour tesselateOneSide(GLUEStesselator* tess, const QVector<SubContour>& co
 	return data.result;
 }
 
-void OctahedronContour::tesselate(TessWindingRule windingRule)
+void OctahedronContour::tesselate(TessWindingRule windingRule) const
 {
 	// Use GLUES tesselation functions to transform the polygon into a list of triangles
 	GLUEStesselator* tess = gluesNewTess();
@@ -1465,9 +1489,36 @@ void OctahedronContour::tesselate(TessWindingRule windingRule)
 	for (int i=0;i<8;++i)
 	{
 		QVector<SubContour> res;
-		res.append(tesselateOneSide(tess, (*this)[i]));
-		(*this)[i]=res;
+		res.append(tesselateOneSide(tess, sides[i]));
+		sides[i]=res;
 	}
 	
 	gluesDeleteTess(tess);
+	tesselated = true;
+}
+
+
+void OctahedronContour::inPlaceIntersection(const OctahedronContour& mpoly)
+{
+	if (!tesselated)
+		tesselate(WindingPositive);
+	if (!mpoly.tesselated)
+		mpoly.tesselate(WindingPositive);
+	append(mpoly);
+	tesselate(WindingAbsGeqTwo);
+}
+
+void OctahedronContour::inPlaceUnion(const OctahedronContour& mpoly)
+{
+	append(mpoly);
+}
+
+void OctahedronContour::inPlaceSubtraction(const OctahedronContour& mpoly)
+{
+	if (!tesselated)
+		tesselate(WindingPositive);
+	if (!mpoly.tesselated)
+		mpoly.tesselate(WindingPositive);
+	appendReversed(mpoly);
+	tesselate(WindingPositive);
 }
