@@ -148,6 +148,7 @@ SET(stellarium_lib_SRCS
 	core/StelSphericalIndex.hpp
 	core/StelSphericalIndex.cpp
 	core/StelGuiBase.hpp
+	core/StelGuiBase.cpp
 
 	external/bytes.h
 	external/fixx11h.h

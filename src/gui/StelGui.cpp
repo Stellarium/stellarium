@@ -63,7 +63,7 @@
 #include <QGraphicsGridLayout>
 
 
-StelGui::StelGui() : topLevelGraphicsWidget(NULL), stelAppGraphicsWidget(NULL), configurationDialog(NULL), initDone(false)
+StelGui::StelGui() : topLevelGraphicsWidget(NULL), configurationDialog(NULL), initDone(false)
 {
 	// QPixmapCache::setCacheLimit(30000); ?
 	flipHoriz = NULL;
@@ -79,8 +79,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 {
 	qDebug() << "Creating GUI ...";
 	
-	topLevelGraphicsWidget = atopLevelGraphicsWidget;
-	stelAppGraphicsWidget = astelAppGraphicsWidget;
+	StelGuiBase::init(atopLevelGraphicsWidget, astelAppGraphicsWidget);
 	
 	skyGui = new SkyGui();
 	configurationDialog = new ConfigurationDialog(this);
@@ -513,20 +512,8 @@ void StelGui::setStelStyle(const StelStyle& style)
 
 void StelGui::updateI18n()
 {
-	// Translate all action texts
-	foreach (QObject* obj, stelAppGraphicsWidget->children())
-	{
-		QAction* a = qobject_cast<QAction*>(obj);
-		if (a)
-		{
-			const QString& englishText = a->property("englishText").toString();
-			if (!englishText.isEmpty())
-			{
-				a->setText(q_(englishText));
-			}
-		}
-	}
-
+	StelGuiBase::updateI18n();
+	
 	// Update the dialogs
 	configurationDialog->languageChanged();
 	dateTimeDialog.languageChanged();
@@ -752,38 +739,9 @@ void StelGui::setGuiVisible(bool b)
 	setVisible(b);
 }
 
-// Note: "text" and "helpGroup" must be in English -- this method and the help
-// dialog take care of translating them. Of course, they still have to be
-// marked for translation using the N_() macro.
 QAction* StelGui::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat)
 {
-	QAction* a;
-	a = new QAction(stelAppGraphicsWidget);
-	a->setObjectName(actionName);
-	a->setText(q_(text));
-	QList<QKeySequence> shortcuts;
-	QStringList shortcutStrings = shortCut.split(QRegExp(",(?!,|$)"));
-	for (int i = 0; i < shortcutStrings.size(); ++i)
-		shortcuts << QKeySequence(shortcutStrings.at(i).trimmed());
-
-	a->setShortcuts(shortcuts);
-	a->setCheckable(checkable);
-	a->setAutoRepeat(autoRepeat);
-	a->setProperty("englishText", QVariant(text));
-	a->setShortcutContext(Qt::WidgetShortcut);
 	if (!shortCut.isEmpty())
 		helpDialog.setKey(helpGroup, "", shortCut, text);
-	stelAppGraphicsWidget->addAction(a);
-	return a;
-}
-
-QAction* StelGui::getGuiActions(const QString& actionName)
-{
-	QAction* a = stelAppGraphicsWidget->findChild<QAction*>(actionName);
-	if (!a)
-	{
-		qWarning() << "Can't find action " << actionName;
-		return NULL;
-	}
-	return a;
+	return StelGuiBase::addGuiActions(actionName, text, shortCut, helpGroup, checkable, autoRepeat);
 }
