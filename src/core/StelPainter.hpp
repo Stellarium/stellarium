@@ -62,23 +62,6 @@ public:
 	//! Fill with black around the viewport.
 	void drawViewportShape(void) const;
 
-	//! Generalisation of glVertex3v for non-linear projections.
-	//! This method does not manage the lighting operations properly.
-	void drawVertex3v(const Vec3d& v) const
-	{
-		Vec3d win;
-		prj->project(v, win);
-		glVertex3dv(win);
-	}
-	//! Convenience function.
-	//! @sa drawVertex3v
-	void drawVertex3(double x, double y, double z) const
-	{
-		Vec3d v(x,y,z);
-		prj->projectInPlace(v);
-		glVertex3dv(v);
-	}
-
 	//! Draw the string at the given position and angle with the given font.
 	//! If the gravity label flag is set, uses drawTextGravity180.
 	//! @param font the font to use for display
