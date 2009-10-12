@@ -140,6 +140,12 @@ SET(GENERATE_STELMAINLIB 0)
 SET(ENABLE_SOUND 0 CACHE BOOL "Define whether sound support should be activated, options are: 1 or 0.")
 SET(ENABLE_SCRIPT_CONSOLE 0 CACHE BOOL "Define whether to build the script console feature, options are: 1 or 0.")
 SET(ENABLE_STRATOSCRIPT_COMPAT 0 CACHE BOOL "Set to 1 or true if you want to build the Stratoscript compatibility mode")
+SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
+
+IF (GUI_MODE STREQUAL "External")
+	SET(EXTERNAL_GUI_PLUGIN_PATH "/path/to/libMyGui.a" CACHE PATH "The absolute path to the .a static library containing the static GUI plugin")
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${EXTERNAL_GUI_PLUGIN_PATH})
+ENDIF()
 
 # On WIN32 we need to split the main binary into a small binary and a dll
 # This is for allowing to link plug-ins afterward

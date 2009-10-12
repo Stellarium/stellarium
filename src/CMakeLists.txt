@@ -406,90 +406,91 @@ QT4_WRAP_CPP(stellarium_MOC_SRCS ${stellarium_MOC_HDRS})
 #############################################################################################
 ############################# Standard GUI plugin compilation ###############################
 #############################################################################################
-SET(stellarium_gui_SRCS
-	gui/StelGui.hpp
-	gui/StelGui.cpp
-	gui/SkyGui.hpp
-	gui/SkyGui.cpp
-	gui/StelGuiItems.hpp
-	gui/StelGuiItems.cpp
-	gui/HelpDialog.hpp
-	gui/HelpDialog.cpp
-	gui/Dialog.hpp
-	gui/Dialog.cpp
-	gui/MapLabel.hpp
-	gui/MapLabel.cpp
-	gui/AngleSpinBox.hpp
-	gui/AngleSpinBox.cpp
-	gui/LocationDialog.hpp
-	gui/LocationDialog.cpp
-	gui/DateTimeDialog.hpp
-	gui/DateTimeDialog.cpp
-	gui/ViewDialog.hpp
-	gui/ViewDialog.cpp
-	gui/SearchDialog.hpp
-	gui/SearchDialog.cpp
-	gui/ConfigurationDialog.hpp
-	gui/ConfigurationDialog.cpp
-	gui/StelDialog.hpp
-	gui/StelDialog.cpp)
-
-################# compiles GUI moc files ############
-SET(stellarium_gui_MOC_HDRS
-	gui/StelGui.hpp
-	gui/SkyGui.hpp
-	gui/StelGuiItems.hpp
-	gui/HelpDialog.hpp
-	gui/Dialog.hpp
-	gui/MapLabel.hpp
-	gui/AngleSpinBox.hpp
-	gui/LocationDialog.hpp
-	gui/DateTimeDialog.hpp
-	gui/ViewDialog.hpp
-	gui/SearchDialog.hpp
-	gui/ConfigurationDialog.hpp
-	gui/StelDialog.hpp)
-
-################# compiles .ui files ############
-SET(stellarium_UIS
-  gui/locationDialogGui.ui
-  gui/helpDialogGui.ui
-  gui/dateTimeDialogGui.ui
-  gui/viewDialog.ui
-  gui/searchDialogGui.ui
-  gui/configurationDialog.ui)
- 
-IF(ENABLE_SCRIPT_CONSOLE)
-	SET(stellarium_gui_SRCS ${stellarium_gui_SRCS}
-		gui/ScriptConsole.hpp
-		gui/ScriptConsole.cpp
-		gui/StelScriptSyntaxHighlighter.hpp
-		gui/StelScriptSyntaxHighlighter.cpp)
-	SET(stellarium_gui_MOC_HDRS ${stellarium_gui_MOC_HDRS}
-		gui/ScriptConsole.hpp
-		gui/StelScriptSyntaxHighlighter.hpp)
-	SET(stellarium_UIS ${stellarium_UIS}
-		gui/scriptConsole.ui)
-ENDIF(ENABLE_SCRIPT_CONSOLE)
-
-QT4_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
-# Dummy target depending on ${stellarium_UIS_H} to trigger ui compilations
-ADD_CUSTOM_TARGET(GenerateUiHeaders ALL DEPENDS ${stellarium_UIS_H})
-
-# After this call, stellarium_gui_MOC_SRCS = moc_stellarium_gui.cxx
-QT4_WRAP_CPP(stellarium_gui_MOC_SRCS ${stellarium_gui_MOC_HDRS})
-
-# Compile the static library
-ADD_LIBRARY(StelGuiLib STATIC ${stellarium_gui_SRCS} ${stellarium_gui_MOC_SRCS})
-TARGET_LINK_LIBRARIES(StelGuiLib ${StelMain} ${extLinkerOption})
-SET_TARGET_PROPERTIES(StelGuiLib PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
-SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/src/libStelGuiLib.a)
-
+IF (GUI_MODE STREQUAL "Standard")
+	SET(stellarium_gui_SRCS
+		gui/StelGui.hpp
+		gui/StelGui.cpp
+		gui/SkyGui.hpp
+		gui/SkyGui.cpp
+		gui/StelGuiItems.hpp
+		gui/StelGuiItems.cpp
+		gui/HelpDialog.hpp
+		gui/HelpDialog.cpp
+		gui/Dialog.hpp
+		gui/Dialog.cpp
+		gui/MapLabel.hpp
+		gui/MapLabel.cpp
+		gui/AngleSpinBox.hpp
+		gui/AngleSpinBox.cpp
+		gui/LocationDialog.hpp
+		gui/LocationDialog.cpp
+		gui/DateTimeDialog.hpp
+		gui/DateTimeDialog.cpp
+		gui/ViewDialog.hpp
+		gui/ViewDialog.cpp
+		gui/SearchDialog.hpp
+		gui/SearchDialog.cpp
+		gui/ConfigurationDialog.hpp
+		gui/ConfigurationDialog.cpp
+		gui/StelDialog.hpp
+		gui/StelDialog.cpp)
+	
+	################# compiles GUI moc files ############
+	SET(stellarium_gui_MOC_HDRS
+		gui/StelGui.hpp
+		gui/SkyGui.hpp
+		gui/StelGuiItems.hpp
+		gui/HelpDialog.hpp
+		gui/Dialog.hpp
+		gui/MapLabel.hpp
+		gui/AngleSpinBox.hpp
+		gui/LocationDialog.hpp
+		gui/DateTimeDialog.hpp
+		gui/ViewDialog.hpp
+		gui/SearchDialog.hpp
+		gui/ConfigurationDialog.hpp
+		gui/StelDialog.hpp)
+	
+	################# compiles .ui files ############
+	SET(stellarium_UIS
+	gui/locationDialogGui.ui
+	gui/helpDialogGui.ui
+	gui/dateTimeDialogGui.ui
+	gui/viewDialog.ui
+	gui/searchDialogGui.ui
+	gui/configurationDialog.ui)
+	
+	IF(ENABLE_SCRIPT_CONSOLE)
+		SET(stellarium_gui_SRCS ${stellarium_gui_SRCS}
+			gui/ScriptConsole.hpp
+			gui/ScriptConsole.cpp
+			gui/StelScriptSyntaxHighlighter.hpp
+			gui/StelScriptSyntaxHighlighter.cpp)
+		SET(stellarium_gui_MOC_HDRS ${stellarium_gui_MOC_HDRS}
+			gui/ScriptConsole.hpp
+			gui/StelScriptSyntaxHighlighter.hpp)
+		SET(stellarium_UIS ${stellarium_UIS}
+			gui/scriptConsole.ui)
+	ENDIF(ENABLE_SCRIPT_CONSOLE)
+	
+	QT4_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
+	# Dummy target depending on ${stellarium_UIS_H} to trigger ui compilations
+	ADD_CUSTOM_TARGET(GenerateUiHeaders ALL DEPENDS ${stellarium_UIS_H})
+	
+	# After this call, stellarium_gui_MOC_SRCS = moc_stellarium_gui.cxx
+	QT4_WRAP_CPP(stellarium_gui_MOC_SRCS ${stellarium_gui_MOC_HDRS})
+	
+	# Compile the static library
+	ADD_LIBRARY(StelGuiLib STATIC ${stellarium_gui_SRCS} ${stellarium_gui_MOC_SRCS})
+	TARGET_LINK_LIBRARIES(StelGuiLib ${StelMain} ${extLinkerOption})
+	SET_TARGET_PROPERTIES(StelGuiLib PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/src/libStelGuiLib.a)
+ENDIF()
 
 #############################################################################################
 ############################ Standard NO GUI plugin compilation #############################
 #############################################################################################
-IF (COMPILE_NO_GUI)
+IF (GUI_MODE STREQUAL "None")
 	SET(stellarium_nogui_SRCS
 		noGui/StelNoGui.hpp
 		noGui/StelNoGui.cpp)
