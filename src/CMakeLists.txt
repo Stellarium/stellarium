@@ -30,7 +30,6 @@ SET(glues_lib_SRCS
 	external/glues_stel/source/glues.h
 	external/glues_stel/source/glues_mipmap.c
 	external/glues_stel/source/glues_mipmap.h
-
 	external/glues_stel/source/libtess/dict.h
 	external/glues_stel/source/libtess/dict.c
 	external/glues_stel/source/libtess/dict-list.h
@@ -248,33 +247,6 @@ SET(stellarium_lib_SRCS
 	modules/ZoneArray.hpp
 	modules/ZoneData.hpp
 
-	gui/StelGui.hpp
-	gui/StelGui.cpp
-	gui/SkyGui.hpp
-	gui/SkyGui.cpp
-	gui/StelGuiItems.hpp
-	gui/StelGuiItems.cpp
-	gui/HelpDialog.hpp
-	gui/HelpDialog.cpp
-	gui/Dialog.hpp
-	gui/Dialog.cpp
-	gui/MapLabel.hpp
-	gui/MapLabel.cpp
-	gui/AngleSpinBox.hpp
-	gui/AngleSpinBox.cpp
-	gui/LocationDialog.hpp
-	gui/LocationDialog.cpp
-	gui/DateTimeDialog.hpp
-	gui/DateTimeDialog.cpp
-	gui/ViewDialog.hpp
-	gui/ViewDialog.cpp
-	gui/SearchDialog.hpp
-	gui/SearchDialog.cpp
-	gui/ConfigurationDialog.hpp
-	gui/ConfigurationDialog.cpp
-	gui/StelDialog.hpp
-	gui/StelDialog.cpp
-
 	scripting/StelScriptMgr.cpp
 	scripting/StratoscriptPreprocessor.cpp
 	scripting/StelScriptMgr.hpp
@@ -291,15 +263,6 @@ SET(stellarium_lib_SRCS
 	StelMainWindow.cpp
 	translations.h
 )
-
-IF(ENABLE_SCRIPT_CONSOLE)
-	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
-		gui/ScriptConsole.hpp
-		gui/ScriptConsole.cpp
-		gui/StelScriptSyntaxHighlighter.hpp
-		gui/StelScriptSyntaxHighlighter.cpp
-	)
-ENDIF(ENABLE_SCRIPT_CONSOLE)
 
 IF(WIN32)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
@@ -390,24 +353,6 @@ SET(stellarium_exe_SRCS
 	main.cpp
 )
 
-################# compiles .ui files ############
-SET(stellarium_UIS
-  gui/locationDialogGui.ui
-  gui/helpDialogGui.ui
-  gui/dateTimeDialogGui.ui
-  gui/viewDialog.ui
-  gui/searchDialogGui.ui
-  gui/configurationDialog.ui
-  )
-
-IF(ENABLE_SCRIPT_CONSOLE)
-	SET(stellarium_UIS ${stellarium_UIS}
-		gui/scriptConsole.ui
-	)
-ENDIF(ENABLE_SCRIPT_CONSOLE)
-
-QT4_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
-
 ################# compiles resources files ############
 SET(stellarium_RES
   ${CMAKE_SOURCE_DIR}/data/mainRes.qrc)
@@ -448,6 +393,49 @@ SET(stellarium_MOC_HDRS
 	modules/StarMgr.hpp
 	modules/Telescope.hpp
 	modules/TelescopeMgr.hpp
+	scripting/StelScriptMgr.hpp
+	scripting/StelMainScriptAPI.hpp
+	scripting/StelMainScriptAPIProxy.hpp
+	StelMainGraphicsView.hpp
+	StelMainWindow.hpp
+)
+# After this call, stellarium_MOC_SRCS = moc_stellarium.cxx
+QT4_WRAP_CPP(stellarium_MOC_SRCS ${stellarium_MOC_HDRS})
+
+
+#############################################################################################
+############################# Standard GUI plugin compilation ###############################
+#############################################################################################
+SET(stellarium_gui_SRCS
+	gui/StelGui.hpp
+	gui/StelGui.cpp
+	gui/SkyGui.hpp
+	gui/SkyGui.cpp
+	gui/StelGuiItems.hpp
+	gui/StelGuiItems.cpp
+	gui/HelpDialog.hpp
+	gui/HelpDialog.cpp
+	gui/Dialog.hpp
+	gui/Dialog.cpp
+	gui/MapLabel.hpp
+	gui/MapLabel.cpp
+	gui/AngleSpinBox.hpp
+	gui/AngleSpinBox.cpp
+	gui/LocationDialog.hpp
+	gui/LocationDialog.cpp
+	gui/DateTimeDialog.hpp
+	gui/DateTimeDialog.cpp
+	gui/ViewDialog.hpp
+	gui/ViewDialog.cpp
+	gui/SearchDialog.hpp
+	gui/SearchDialog.cpp
+	gui/ConfigurationDialog.hpp
+	gui/ConfigurationDialog.cpp
+	gui/StelDialog.hpp
+	gui/StelDialog.cpp)
+
+################# compiles GUI moc files ############
+SET(stellarium_gui_MOC_HDRS
 	gui/StelGui.hpp
 	gui/SkyGui.hpp
 	gui/StelGuiItems.hpp
@@ -460,26 +448,63 @@ SET(stellarium_MOC_HDRS
 	gui/ViewDialog.hpp
 	gui/SearchDialog.hpp
 	gui/ConfigurationDialog.hpp
-	gui/StelDialog.hpp
-	scripting/StelScriptMgr.hpp
-	scripting/StelMainScriptAPI.hpp
-	scripting/StelMainScriptAPIProxy.hpp
-	StelMainGraphicsView.hpp
-	StelMainWindow.hpp
-)
+	gui/StelDialog.hpp)
 
+################# compiles .ui files ############
+SET(stellarium_UIS
+  gui/locationDialogGui.ui
+  gui/helpDialogGui.ui
+  gui/dateTimeDialogGui.ui
+  gui/viewDialog.ui
+  gui/searchDialogGui.ui
+  gui/configurationDialog.ui)
+ 
 IF(ENABLE_SCRIPT_CONSOLE)
+	SET(stellarium_gui_SRCS ${stellarium_gui_SRCS}
+		gui/ScriptConsole.hpp
+		gui/ScriptConsole.cpp
+		gui/StelScriptSyntaxHighlighter.hpp
+		gui/StelScriptSyntaxHighlighter.cpp)
 	SET(stellarium_MOC_HDRS ${stellarium_MOC_HDRS}
 		gui/ScriptConsole.hpp
-		gui/StelScriptSyntaxHighlighter.hpp
-	)
+		gui/StelScriptSyntaxHighlighter.hpp)
+	SET(stellarium_UIS ${stellarium_UIS}
+		gui/scriptConsole.ui)
 ENDIF(ENABLE_SCRIPT_CONSOLE)
 
-# After this call, stellarium_MOC_SRCS = moc_stellarium.cxx
-QT4_WRAP_CPP(stellarium_MOC_SRCS ${stellarium_MOC_HDRS})
-
+QT4_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
 # Dummy target depending on ${stellarium_UIS_H} to trigger ui compilations
 ADD_CUSTOM_TARGET(GenerateUiHeaders ALL DEPENDS ${stellarium_UIS_H})
+
+# After this call, stellarium_gui_MOC_SRCS = moc_stellarium_gui.cxx
+QT4_WRAP_CPP(stellarium_gui_MOC_SRCS ${stellarium_gui_MOC_HDRS})
+
+# Compile the static library
+ADD_LIBRARY(StelGuiLib STATIC ${stellarium_gui_SRCS} ${stellarium_gui_MOC_SRCS})
+TARGET_LINK_LIBRARIES(StelGuiLib ${StelMain} ${extLinkerOption})
+SET_TARGET_PROPERTIES(StelGuiLib PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
+SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/src/libStelGuiLib.a)
+
+
+#############################################################################################
+############################ Standard NO GUI plugin compilation #############################
+#############################################################################################
+IF (COMPILE_NO_GUI)
+	SET(stellarium_nogui_SRCS
+		noGui/StelNoGui.hpp
+		noGui/StelNoGui.cpp)
+	SET(stellarium_nogui_MOC_HDRS
+		noGui/StelNoGui.hpp)
+	QT4_WRAP_CPP(stellarium_nogui_MOC_SRCS ${stellarium_nogui_MOC_HDRS})
+	ADD_LIBRARY(StelNoGuiLib STATIC ${stellarium_nogui_SRCS} ${stellarium_nogui_MOC_SRCS})
+	TARGET_LINK_LIBRARIES(StelNoGuiLib ${extLinkerOption})
+	SET_TARGET_PROPERTIES(StelNoGuiLib PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/src/libStelNoGuiLib.a)
+ENDIF()
+
+#############################################################################################
+################################ Build main program #########################################
+#############################################################################################
 
 SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} )
 
@@ -499,7 +524,11 @@ ENDIF()
 
 INSTALL(TARGETS stellarium DESTINATION bin)
 
-## tests
+
+
+#############################################################################################
+################################## Build unit tests #########################################
+#############################################################################################
 
 SET(tests_testDates_SRCS
 	core/StelUtils.cpp

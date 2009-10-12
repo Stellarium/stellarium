@@ -23,6 +23,7 @@
 #include <QProgressBar>
 #include <QAction>
 
+
 StelGuiBase::StelGuiBase() : stelAppGraphicsWidget(NULL)
 {
 }
@@ -81,10 +82,4 @@ QAction* StelGuiBase::getGuiActions(const QString& actionName)
 		return NULL;
 	}
 	return a;
-}
-
-
-QProgressBar* StelNoGui::addProgressBar()
-{
-	return new QProgressBar();
 }

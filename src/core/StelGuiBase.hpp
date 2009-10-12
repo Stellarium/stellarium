@@ -21,8 +21,10 @@
 #define _STELGUIBASE_HPP_
 
 #include "StelObject.hpp"
-#include <QGraphicsTextItem>
 #include "StelStyle.hpp"
+
+#include <QGraphicsTextItem>
+#include <QtPlugin>
 
 class QAction;
 
@@ -76,27 +78,18 @@ protected:
 	class StelAppGraphicsWidget* stelAppGraphicsWidget;
 };
 
-//! @class StelNoGui
-//! Dummy implementation of StelGuiBase to use when no GUI is used.
-class StelNoGui : public StelGuiBase
+//! @class StelGuiPluginInterface
+//! Define the interface to implement when creating a GUI plugin.
+//! The interface is used by the <a href="http://doc.trolltech.com/4.5/qpluginloader.html">QPluginLoader</a> to load Stellarium plugins dynamically.
+class StelGuiPluginInterface
 {
 public:
-	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraphicsWidget* stelAppGraphicsWidget) {;}
-	virtual void updateI18n() {;}
-	virtual void setStelStyle(const StelStyle& style) {;}
-	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {dummyInfoTextFilter=aflags;}
-	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const {return dummyInfoTextFilter;}
-	virtual class QProgressBar* addProgressBar();
-	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false) {return NULL;}
-	virtual QAction* getGuiActions(const QString& actionName) {return NULL;}
-	virtual void forceRefreshGui() {;}	
-	virtual void setVisible(bool b) {visible=b;}
-	virtual bool getVisible() const {return visible;}
+	virtual ~StelGuiPluginInterface() {}
 	
-private:
-	StelObject::InfoStringGroup dummyInfoTextFilter;
-	bool visible;
+	//! Get the instance of StelGuiBase implmenting the GUI.
+	virtual class StelGuiBase* getStelGuiBase() const = 0;	
 };
+Q_DECLARE_INTERFACE(StelGuiPluginInterface, "stellarium.StelGuiPluginInterface/1.0");
 
 
 #endif // _STELGUIBASE_HPP_
