@@ -27,6 +27,7 @@
 #include "StelScriptMgr.hpp"
 #include "StelViewportDistorter.hpp"
 #include "StelPainter.hpp"
+#include "StelGuiBase.hpp"
 #include <QGLFormat>
 #include <QPaintEngine>
 #include <QGraphicsView>
@@ -39,8 +40,8 @@
 #include <QGraphicsGridLayout>
 #include <QGraphicsProxyWidget>
 
-#include "gui/StelGui.hpp"
-
+Q_IMPORT_PLUGIN(StelGui)
+		
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
@@ -133,7 +134,18 @@ void StelMainGraphicsView::init()
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.).toDouble());
 	setViewPortDistorterType(conf->value("video/distorter","none").toString());
 
-	gui = new StelGui();
+	// Look for a static GUI plugins.
+	foreach (QObject *plugin, QPluginLoader::staticInstances())
+	{
+		StelGuiPluginInterface* pluginInterface = qobject_cast<StelGuiPluginInterface*>(plugin);
+		if (pluginInterface)
+		{
+			gui = pluginInterface->getStelGuiBase();
+		}
+		break;
+	}
+	Q_ASSERT(gui);	// There was no GUI plugin found
+	
 	gui->init(backItem, mainSkyItem);
 
 	StelApp::getInstance().setGui(gui);

@@ -177,4 +177,13 @@ private:
 	QSizeF savedProgressBarSize;
 };
 
+//! Allow to load the GUI as a static plugin
+class StelStandardGuiPluginInterface : public QObject, public StelGuiPluginInterface
+{
+	Q_OBJECT
+	Q_INTERFACES(StelGuiPluginInterface)
+public:
+	virtual class StelGuiBase* getStelGuiBase() const;
+};
+
 #endif // _STELGUI_HPP_
