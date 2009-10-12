@@ -465,7 +465,7 @@ IF(ENABLE_SCRIPT_CONSOLE)
 		gui/ScriptConsole.cpp
 		gui/StelScriptSyntaxHighlighter.hpp
 		gui/StelScriptSyntaxHighlighter.cpp)
-	SET(stellarium_MOC_HDRS ${stellarium_MOC_HDRS}
+	SET(stellarium_gui_MOC_HDRS ${stellarium_gui_MOC_HDRS}
 		gui/ScriptConsole.hpp
 		gui/StelScriptSyntaxHighlighter.hpp)
 	SET(stellarium_UIS ${stellarium_UIS}
