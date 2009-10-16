@@ -67,7 +67,7 @@ class StelApp : public QObject
 
 public:
 	friend class StelAppGraphicsWidget;
-	
+
 	//! Create and initialize the main Stellarium application.
 	//! @param argc The number of command line parameters
 	//! @param argv an array of char* command line arguments
@@ -179,19 +179,19 @@ public:
 	//! Draw all registered StelModule in the order defined by the order lists.
 	//! @return the max squared distance in pixels that any object has travelled since the last update.
 	void draw();
-	
+
 	//! Call this when the size of the GL window has changed.
 	void glWindowHasBeenResized(float x, float y, float w, float h);
-	
+
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
 	//! Tell the StelApp instance which GUI si currently being used.
 	//! The caller is responsible for destroying the GUI.
 	void setGui(StelGuiBase* b) {stelGui=b;}
-	
+
 	//! Make sure that the GL context of the main window is current and valid.
 	static void makeMainGLContextCurrent();
-	
+
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
@@ -232,13 +232,13 @@ public slots:
 
 	//! close the program
 	void quitStellarium();
-	
+
 signals:
 	void minFpsChanged();
 
 private:
 	static void initStatic();
-	
+
 	//! Handle mouse clics.
 	void handleClick(class QMouseEvent* event);
 	//! Handle mouse wheel.
@@ -394,7 +394,7 @@ private:
 	StelSkyLayerMgr* skyImageMgr;
 
 	StelGuiBase* stelGui;
-	
+
 	float fps;
 	//! The minimum desired frame rate in frame per second.
 	float minfps;
