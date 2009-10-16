@@ -110,7 +110,7 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 StelPainter::~StelPainter()
 {
 	Q_ASSERT(qPainter);
-	
+
 	// Ensure that the current GL content is the one of our main GL window
 	QGLWidget* w = dynamic_cast<QGLWidget*>(qPainter->device());
 	if (w!=0)
@@ -136,7 +136,7 @@ StelPainter::~StelPainter()
 			qFatal("Invalid openGL operation in StelPainter::revertToQtPainting()");
 	}
 #endif
-	
+
 #if QT_VERSION>=0x040600
 	qPainter->endNativePainting();
 #else
@@ -580,11 +580,11 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	float color[4];
 	glGetFloatv(GL_CURRENT_COLOR, color);
-	
+
 #if QT_VERSION>=0x040600
 	qPainter->endNativePainting();
 #endif
-	
+
 	qPainter->save();
 	qPainter->resetTransform();
 	qPainter->resetMatrix();
@@ -611,7 +611,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 #if QT_VERSION>=0x040600
 	qPainter->beginNativePainting();
 #endif
-	
+
 	glPopClientAttrib();
 	glPopAttrib();
 	glMatrixMode(GL_TEXTURE);
@@ -736,7 +736,7 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 	win2[2] = prj->project(stop, win2) ? 1.0 : -1.;
 	tessArc.append(win1);
 
-	
+
 	if (rotCenter.lengthSquared()<0.00000001)
 	{
 		// Great circle
@@ -1278,105 +1278,37 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 	polygonEdgeFlagArray.clear();
 	polygonTextureCoordArray.clear();
 
-	// Use a special algo for convex polygons which are not pre-tesselated.
-	const SphericalConvexPolygon* cvx = dynamic_cast<const SphericalConvexPolygon*>(poly);
-	if (cvx!=NULL)
+	// Assumes the polygon is already tesselated as triangles
+	const StelVertexArray& va = poly->getVertexArray();
+	if (va.vertex.isEmpty())
+		return;
+	if (drawMode==SphericalPolygonDrawModeTextureFill)
 	{
-		// Tesselate the convex polygon into a triangle fan.
-		const QVector<Vec3d>& a = cvx->getConvexContour();
-		Vec3d triangle[3];
-		bool tmpEdges[3] = {true, true, false};
-
-		if (drawMode==SphericalPolygonDrawModeTextureFillAndBoundary || drawMode==SphericalPolygonDrawModeTextureFill)
-		{
-			Q_ASSERT(dynamic_cast<const SphericalTexturedConvexPolygon*>(cvx)!=NULL);
-			// Need to compute textures coordinates
-			Vec2f texCoord[3];
-			const QVector<Vec2f>& tex = cvx->getTextureCoordArray();
-			triangle[0]=a.at(0);
-			triangle[1]=a.at(1);
-			triangle[2]=a.at(2);
-			texCoord[0]=tex.at(0);
-			texCoord[1]=tex.at(1);
-			texCoord[2]=tex.at(2);
-			projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray, texCoord, &polygonTextureCoordArray);
-			tmpEdges[0]=false;
-			for (int i=2;i<a.size()-2;++i)
-			{
-				triangle[1]=a.at(i);
-				triangle[2]=a.at(i+1);
-				texCoord[1]=tex.at(i);
-				texCoord[2]=tex.at(i+1);
-				projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray, texCoord, &polygonTextureCoordArray);
-			}
-			tmpEdges[2]=true;
-			// Last triangle
-			triangle[1]=a.at(a.size()-2);
-			triangle[2]=a.last();
-			texCoord[1]=tex.at(a.size()-2);
-			texCoord[2]=tex.last();
-			projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray, texCoord, &polygonTextureCoordArray);
-		}
-		else
-		{
-			// No need for textures coordinates
-			triangle[0]=a.at(0);
-			triangle[1]=a.at(1);
-			triangle[2]=a.at(2);
-			if (a.size()==3)
-			{
-				tmpEdges[2]=true;
-				projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray);
-			}
-			else
-			{
-				projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray);
-				tmpEdges[0]=false;
-				for (int i=2;i<a.size()-2;++i)
-				{
-					triangle[1]=a.at(i);
-					triangle[2]=a.at(i+1);
-					projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray);
-				}
-				tmpEdges[2]=true;
-				// Last triangle
-				triangle[1]=a.at(a.size()-2);
-				triangle[2]=a.last();
-				projectSphericalTriangle(triangle, &polygonVertexArray, tmpEdges, &polygonEdgeFlagArray);
-			}
-		}
+		Q_ASSERT(va.vertex.size()==va.texCoords.size());
+		// Only texured fill, don't bother with edge flags
+		for (int i=0;i<va.vertex.size()/3;++i)
+			projectSphericalTriangle(va.vertex.constData()+i*3, &polygonVertexArray, NULL, NULL, va.texCoords.constData()+i*3, &polygonTextureCoordArray);
+		Q_ASSERT(polygonVertexArray.size()==polygonTextureCoordArray.size());
+	}
+	else if (drawMode==SphericalPolygonDrawModeTextureFillAndBoundary)
+	{
+		// Texured fill and edge flags
+		Q_ASSERT(va.vertex.size()==va.texCoords.size());
+		Q_ASSERT(va.vertex.size()==va.edgeFlags.size());
+		for (int i=0;i<va.vertex.size()/3;++i)
+			projectSphericalTriangle(va.vertex.constData()+i*3, &polygonVertexArray, va.edgeFlags.constData()+i*3, &polygonEdgeFlagArray, va.texCoords.constData()+i*3, &polygonTextureCoordArray);
+		Q_ASSERT(polygonVertexArray.size()==polygonTextureCoordArray.size());
+	}
+	else if (drawMode==SphericalPolygonDrawModeBoundary || drawMode==SphericalPolygonDrawModeFillAndBoundary)
+	{
+		for (int i=0;i<va.vertex.size()/3;++i)
+			projectSphericalTriangle(va.vertex.constData()+i*3, &polygonVertexArray, va.edgeFlags.constData()+i*3, &polygonEdgeFlagArray, NULL, NULL);
 	}
 	else
 	{
-		// Normal faster behaviour for already tesselated polygon
-		const QVector<Vec3d>& a = poly->getVertexArray();
-		if (a.isEmpty())
-			return;
-		if (drawMode==SphericalPolygonDrawModeTextureFill)
-		{
-			// Only texured fill, don't bother with edge flags
-			for (int i=0;i<a.size()/3;++i)
-				projectSphericalTriangle(a.constData()+i*3, &polygonVertexArray, NULL, NULL, poly->getTextureCoordArray().constData()+i*3, &polygonTextureCoordArray);
-			Q_ASSERT(polygonVertexArray.size()==polygonTextureCoordArray.size());
-		}
-		else if (drawMode==SphericalPolygonDrawModeTextureFillAndBoundary)
-		{
-			// Texured fill and edge flags
-			for (int i=0;i<a.size()/3;++i)
-				projectSphericalTriangle(a.constData()+i*3, &polygonVertexArray, poly->getEdgeFlagArray().constData()+i*3, &polygonEdgeFlagArray, poly->getTextureCoordArray().constData()+i*3, &polygonTextureCoordArray);
-			Q_ASSERT(polygonVertexArray.size()==polygonTextureCoordArray.size());
-		}
-		else if (drawMode==SphericalPolygonDrawModeBoundary || drawMode==SphericalPolygonDrawModeFillAndBoundary)
-		{
-			for (int i=0;i<a.size()/3;++i)
-				projectSphericalTriangle(a.constData()+i*3, &polygonVertexArray, poly->getEdgeFlagArray().constData()+i*3, &polygonEdgeFlagArray, NULL, NULL);
-		}
-		else
-		{
-			// Only plain fill, don't bother with edge flags and textures coordinates
-			for (int i=0;i<a.size()/3;++i)
-				projectSphericalTriangle(a.constData()+i*3, &polygonVertexArray, NULL, NULL, NULL, NULL);
-		}
+		// Only plain fill, don't bother with edge flags and textures coordinates
+		for (int i=0;i<va.vertex.size()/3;++i)
+			projectSphericalTriangle(va.vertex.constData()+i*3, &polygonVertexArray, NULL, NULL, NULL, NULL);
 	}
 
 	// Load the vertex array
