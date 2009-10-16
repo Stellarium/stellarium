@@ -48,8 +48,8 @@ SphericalRegionP SphericalRegionP::getIntersection(const SphericalRegionP& reg1,
 	}
 	if (reg2->getType()==SphericalRegion::AllSky)
 		return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon()));
-	
-	return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon().getIntersection(reg2->toSphericalPolygon())));	
+
+	return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon().getIntersection(reg2->toSphericalPolygon())));
 }
 
 SphericalRegionP SphericalRegionP::getUnion(const SphericalRegionP& reg1, const SphericalRegionP& reg2)
@@ -58,12 +58,12 @@ SphericalRegionP SphericalRegionP::getUnion(const SphericalRegionP& reg1, const 
 	{
 		return SphericalRegionP(new AllSkySphericalRegion());
 	}
-	return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon().getUnion(reg2->toSphericalPolygon())));			
+	return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon().getUnion(reg2->toSphericalPolygon())));
 }
 
 SphericalRegionP SphericalRegionP::getSubtraction(const SphericalRegionP& reg1, const SphericalRegionP& reg2)
 {
-	return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon().getSubtraction(reg2->toSphericalPolygon())));	
+	return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon().getSubtraction(reg2->toSphericalPolygon())));
 }
 
 QDataStream& operator<<(QDataStream& out, const SphericalRegionP& region)
@@ -107,7 +107,7 @@ bool SphericalRegion::contains(const SphericalRegionP& region) const
 	Q_ASSERT(0);
 	return false;
 }
-	
+
 bool SphericalRegion::intersects(const SphericalRegionP& region) const
 {
 	switch (region->getType())
@@ -125,7 +125,7 @@ bool SphericalRegion::intersects(const SphericalRegionP& region) const
 			return false;
 	}
 	Q_ASSERT(0);
-	return false;	
+	return false;
 }
 
 QByteArray SphericalRegion::toJSON() const
@@ -221,7 +221,7 @@ bool SphericalCap::intersects(const SphericalPolygonBase& polyBase) const
 	if (cvx!=NULL)
 		return intersectsConvexContour(cvx->getConvexContour().constData(), cvx->getConvexContour().size());
 	// Go through the full list of triangle
-	const QVector<Vec3d>& vArray = polyBase.getVertexArray();
+	const QVector<Vec3d>& vArray = polyBase.getVertexArray().vertex;
 	for (int i=0;i<vArray.size()/3;++i)
 	{
 		if (intersectsConvexContour(vArray.constData()+i*3, 3))
@@ -305,10 +305,10 @@ QVector<QVector<Vec3d> > SphericalPolygonBase::getSimplifiedContours() const
 	gluesTessProperty(tess, GLUES_TESS_BOUNDARY_ONLY, GL_TRUE);
 	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid (*)()) &combineCallbackSimple);
 	//gluesTessProperty(tess, GLUES_TESS_TOLERANCE, 0.00000001);
-	
+
 	UserDataSimplifiedContours userData;
 	gluesTessBeginPolygon(tess, &userData);
-	const QVector<Vec3d>& trianglesArray = getVertexArray();
+	const QVector<Vec3d>& trianglesArray = getVertexArray().vertex;
 	for (int c=0;c<trianglesArray.size()/3;++c)
 	{
 		gluesTessBeginContour(tess);
@@ -336,7 +336,7 @@ QVector<QVector<Vec3d> > SphericalPolygon::getContours() const
 	{
 		res+=triangleVertices.mid(i*3, 3);
 	}
-#ifndef NDEBUG 	
+#ifndef NDEBUG
 	foreach (const QVector<Vec3d>& l, res)
 	{
 		Q_ASSERT((l.at(1)^l.at(0))*l.at(2)>=0);
@@ -350,7 +350,7 @@ bool SphericalPolygonBase::intersects(const SphericalPolygonBase& mpoly) const
 {
 	if (!getBoundingCap().intersects(mpoly.getBoundingCap()))
 		return false;
-	return !getIntersection(mpoly).getVertexArray().isEmpty();
+	return !getIntersection(mpoly).getVertexArray().vertex.isEmpty();
 }
 
 // Return a new SphericalPolygon consisting of the intersection of this and the given SphericalPolygon.
@@ -394,7 +394,7 @@ double SphericalPolygonBase::getArea() const
 	// Use Girard's theorem for each subtriangles
 	double area = 0.;
 	Vec3d v1, v2, v3;
-	const QVector<Vec3d>& trianglesArray = getVertexArray();
+	const QVector<Vec3d>& trianglesArray = getVertexArray().vertex;
 	for (int i=0;i<trianglesArray.size()/3;++i)
 	{
 		v1 = trianglesArray[i*3+0] ^ trianglesArray[i*3+1];
@@ -408,7 +408,7 @@ double SphericalPolygonBase::getArea() const
 // Return a point located inside the polygon.
 Vec3d SphericalPolygonBase::getPointInside() const
 {
-	const QVector<Vec3d>& trianglesArray = getVertexArray();
+	const QVector<Vec3d>& trianglesArray = getVertexArray().vertex;
 	Vec3d res = trianglesArray[0]+trianglesArray[1]+trianglesArray[2];
 	res.normalize();
 	return res;
@@ -419,7 +419,7 @@ SphericalCap SphericalPolygonBase::getBoundingCap() const
 {
 	Vec3d p1(1,0,0), p2(1,0,0);
 	double maxDist=1.;
-	const QVector<Vec3d>& trianglesArray = getVertexArray();
+	const QVector<Vec3d>& trianglesArray = getVertexArray().vertex;
 	foreach (const Vec3d& v1, trianglesArray)
 	{
 		foreach (const Vec3d& v2, trianglesArray)
@@ -428,7 +428,7 @@ SphericalCap SphericalPolygonBase::getBoundingCap() const
 			{
 				p1 = v1;
 				p2 = v2;
-				maxDist = v1*v2;	
+				maxDist = v1*v2;
 			}
 		}
 	}
@@ -568,7 +568,7 @@ void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, Sph
 			triangleVertices.clear();
 			edgeFlags.clear();
 			return;
-			
+
 // 			triangleVertices.remove(i*3, 3);
 // 			edgeFlags.remove(i*3, 3);
 			static int k=0;
@@ -583,7 +583,7 @@ void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, Sph
 				contourStr += "]";
 				qDebug() << QString("Contour %1: %2").arg(i).arg(contourStr);
 			}
-		
+
 			qDebug() << triangleVertices.size()/3;
 			for (int i=0;i<triangleVertices.size()/3;++i)
 			{
@@ -596,7 +596,7 @@ void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, Sph
 				contourStr += "]";
 				qDebug() << QString("Triangle %1: %2").arg(i).arg(contourStr);
 			}
- 			Q_ASSERT(0);
+			Q_ASSERT(0);
 		}
 	}
 #endif
@@ -655,7 +655,7 @@ void SphericalTexturedPolygon::setContours(const QVector<QVector<TextureVertex> 
 	// There should always be a texture coord matching each vertex.
 	Q_ASSERT(triangleVertices.size() == edgeFlags.size());
 	Q_ASSERT(triangleVertices.size() == textureCoords.size());
-	
+
 	// There should always be an edge flag matching each vertex.
 	Q_ASSERT(triangleVertices.size() == edgeFlags.size());
 #ifndef NDEBUG
@@ -680,7 +680,7 @@ void SphericalTexturedPolygon::setContour(const QVector<TextureVertex>& contour)
 // Returns whether a point is contained into the SphericalPolygon.
 bool SphericalPolygon::contains(const Vec3d& p) const
 {
-	const QVector<Vec3d>& trianglesArray = getVertexArray();
+	const QVector<Vec3d>& trianglesArray = getVertexArray().vertex;
 	for (int i=0;i<trianglesArray.size()/3;++i)
 	{
 		if (sideHalfSpaceContains(trianglesArray.at(i*3+1), trianglesArray.at(i*3), p) &&
@@ -696,19 +696,41 @@ bool SphericalPolygon::contains(const Vec3d& p) const
 ///////////////////////////////////////////////////////////////////////////////
 
 // Return an openGL compatible array to be displayed using vertex arrays.
-QVector<Vec3d> SphericalConvexPolygon::getVertexArray() const
+StelVertexArray SphericalConvexPolygon::getVertexArray() const
 {
-	SphericalPolygon p;
-	p.setContour(contour);
-	return p.getVertexArray();
+	StelVertexArray ar;
+	ar.vertex << contour.at(0) << contour.at(1) << contour.at(2);
+	ar.edgeFlags << true << true << false;
+	for (int i=2;i<contour.size()-2;++i)
+	{
+		ar.vertex << contour.at(0) << contour.at(i) << contour.at(i+1);
+		ar.edgeFlags << false << true << false;
+	}
+	// Last triangle
+	ar.vertex << contour.at(0) << contour.at(contour.size()-2) << contour.last();
+	ar.edgeFlags << false << true << true;
+	return ar;
 }
 
-// Return an openGL compatible array of edge flags to be displayed using vertex arrays.
-QVector<bool> SphericalConvexPolygon::getEdgeFlagArray() const
+// Return an openGL compatible array to be displayed using vertex arrays.
+StelVertexArray SphericalTexturedConvexPolygon::getVertexArray() const
 {
-	SphericalPolygon p;
-	p.setContour(contour);
-	return p.getEdgeFlagArray();
+	StelVertexArray ar;
+	// Need to compute textures coordinates
+	ar.vertex << contour.at(0) << contour.at(1) << contour.at(2);
+	ar.edgeFlags << true << true << false;
+	ar.texCoords << textureCoords.at(0) << textureCoords.at(1) << textureCoords.at(2);
+	for (int i=2;i<contour.size()-2;++i)
+	{
+		ar.vertex << contour.at(0) << contour.at(i) << contour.at(i+1);
+		ar.edgeFlags << false << true << false;
+		ar.texCoords << textureCoords.at(0) << textureCoords.at(i) << textureCoords.at(i+1);
+	}
+	// Last triangle
+	ar.vertex << contour.at(0) << contour.at(contour.size()-2) << contour.last();
+	ar.edgeFlags << false << true << true;
+	ar.texCoords << textureCoords.at(0) << textureCoords.at(contour.size()-2) << textureCoords.last();
+	return ar;
 }
 
 // Check if the polygon is valid, i.e. it has no side >180
@@ -773,7 +795,7 @@ bool SphericalConvexPolygon::containsConvexContour(const Vec3d* vertice, int nbV
 	}
 	return true;
 }
-		
+
 // Returns whether a SphericalPolygon is contained into the region.
 bool SphericalConvexPolygon::contains(const SphericalPolygonBase& polyBase) const
 {
@@ -783,7 +805,7 @@ bool SphericalConvexPolygon::contains(const SphericalPolygonBase& polyBase) cons
 		return containsConvexContour(cvx->getConvexContour().constData(), cvx->getConvexContour().size());
 	}
 	// For standard polygons, go through the full list of triangles
-	const QVector<Vec3d>& vArray = polyBase.getVertexArray();
+	const QVector<Vec3d>& vArray = polyBase.getVertexArray().vertex;
 	for (int i=0;i<vArray.size()/3;++i)
 	{
 		if (!containsConvexContour(vArray.constData()+i*3, 3))
@@ -827,7 +849,7 @@ bool SphericalConvexPolygon::intersects(const SphericalPolygonBase& polyBase) co
 		return !areAllPointsOutsideOneSide(cvx->contour) && !cvx->areAllPointsOutsideOneSide(contour);
 	}
 	// For standard polygons, go through the full list of triangles
-	const QVector<Vec3d>& vArray = polyBase.getVertexArray();
+	const QVector<Vec3d>& vArray = polyBase.getVertexArray().vertex;
 	for (int i=0;i<vArray.size()/3;++i)
 	{
 		if (!areAllPointsOutsideOneSide(contour.constData(), contour.size(), vArray.constData()+i*3, 3) && !cvx->areAllPointsOutsideOneSide(vArray.constData()+i*3, 3, contour.constData(), contour.size()))
@@ -951,12 +973,12 @@ Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& n2,
 
 	// The 2 candidates are u and -u. Now need to find which point is the correct one.
 	ok = true;
-	
+
 	n1 = p1; n1+=p2;
 	n1.normalize();
 	if (n1*u>0.)
 		return u;
-	else 
+	else
 		return -u;
 }
 
@@ -1257,7 +1279,7 @@ void OctahedronContour::splitContourByPlan(int onLine, const SubContour& inputCo
 		}
 		previousVertex=currentVertex;
 	}
-	
+
 	// Handle the last line between the last and first point
 	previousQuadrant = currentQuadrant;
 	currentQuadrant = getSide(inputContour.first().vertex, onLine);
@@ -1273,7 +1295,7 @@ void OctahedronContour::splitContourByPlan(int onLine, const SubContour& inputCo
 		currentSubContour.clear();
 		currentSubContour << EdgeVertex(tmpVertex, previousVertex.edgeFlag);
 	}
-	
+
 	// Append the last contour made from the last vertices + the previous unfinished ones
 	currentSubContour << unfinishedSubContour;
 	result[currentQuadrant] << currentSubContour;
@@ -1303,7 +1325,7 @@ SubContour SubContour::reversed() const
 OctahedronContour::OctahedronContour(const SubContour& initContour) : tesselated(false)
 {
 	sides.resize(8);
-	
+
 	QVector<SubContour> splittedContour1[2];
 	// Split the contour on the plan Y=0
 	splitContourByPlan(1, initContour, splittedContour1);
@@ -1313,7 +1335,7 @@ OctahedronContour::OctahedronContour(const SubContour& initContour) : tesselated
 		splitContourByPlan(0, subContour, splittedVertices2);
 	foreach (const SubContour& subContour, splittedContour1[1])
 		splitContourByPlan(0, subContour, splittedVertices2+2);
-	
+
 	// Now complete the contours which cross the areas from one side to another by adding poles
 	for (int c=0;c<4;++c)
 	{
@@ -1342,7 +1364,7 @@ OctahedronContour::OctahedronContour(const SubContour& initContour) : tesselated
 			splitContourByPlan(2, subContour, sides.data()+c*2);
 		}
 	}
-	
+
 	projectOnOctahedron();
 }
 
@@ -1376,7 +1398,7 @@ void OctahedronContour::projectOnOctahedron()
 
 	Q_ASSERT(sides.size()==8);
 	QVector<SubContour>* subs = sides.data();
-	
+
 	for (int i=0;i<8;++i)
 	{
 		for (QVector<SubContour>::Iterator iter=subs[i].begin();iter!=subs[i].end();++iter)
@@ -1391,11 +1413,11 @@ void OctahedronContour::projectOnOctahedron()
 	}
 }
 
-QVector<EdgeVertex> OctahedronContour::getTesselatedTriangles()
+StelVertexArray OctahedronContour::getTesselatedTriangles()
 {
 	if (!tesselated)
 		tesselate(WindingPositive);
-	QVector<EdgeVertex> result;
+	StelVertexArray result;
 	Q_ASSERT(sides.size()==8);
 	QVector<SubContour>* subs = sides.data();
 	for (int i=0;i<8;++i)
@@ -1404,8 +1426,9 @@ QVector<EdgeVertex> OctahedronContour::getTesselatedTriangles()
 		{
 			for (SubContour::Iterator v=iter->begin();v!=iter->end();++v)
 			{
-				result.append(*v);
-				result.last().vertex.normalize();
+				result.vertex.append(v->vertex);
+				result.vertex.last().normalize();
+				result.edgeFlags.append(v->edgeFlag);
 			}
 		}
 	}
@@ -1417,7 +1440,7 @@ struct OctTessCallbackData
 {
 	SubContour result;		//! Reference to the instance of OctahedronContour being tesselated.
 	bool edgeFlag;					//! Used to store temporary edgeFlag found by the tesselator.
-	QVector<Vec3d> tempVertices;	//! Used to store the temporary combined vertices
+	QList<Vec3d> tempVertices;	//! Used to store the temporary combined vertices
 };
 
 void octVertexCallback(void* vertexData, void* userData)
@@ -1435,7 +1458,7 @@ void octEdgeFlagCallback(GLboolean flag, void* userData)
 
 void octCombineCallback(GLdouble coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
 {
-	QVector<Vec3d>& tempVertices = ((OctTessCallbackData*)userData)->tempVertices;
+	QList<Vec3d>& tempVertices = ((OctTessCallbackData*)userData)->tempVertices;
 	Vec3d newVertex(0.);
 	for (int i=0;i<4;++i)
 	{
@@ -1484,7 +1507,7 @@ void OctahedronContour::tesselate(TessWindingRule windingRule) const
 	const GLdouble windRule = (windingRule==OctahedronContour::WindingPositive) ? GLUES_TESS_WINDING_POSITIVE : GLUES_TESS_WINDING_ABS_GEQ_TWO;
 	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, windRule);
 	gluesTessNormal(tess, 0,0,1);
-	
+
 	// Call the tesselator on each side
 	for (int i=0;i<8;++i)
 	{
@@ -1492,7 +1515,7 @@ void OctahedronContour::tesselate(TessWindingRule windingRule) const
 		res.append(tesselateOneSide(tess, sides[i]));
 		sides[i]=res;
 	}
-	
+
 	gluesDeleteTess(tess);
 	tesselated = true;
 }
