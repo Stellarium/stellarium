@@ -48,20 +48,20 @@ public:
 	template <class Deleter> SphericalRegionP(SphericalRegion* ptr, Deleter deleter) : QSharedPointer<SphericalRegion>(ptr, deleter) {;}
 	SphericalRegionP(const SphericalRegionP& other) : QSharedPointer<SphericalRegion>(other) {;}
 	SphericalRegionP(const QWeakPointer<SphericalRegion>& other) : QSharedPointer<SphericalRegion>(other) {;}
-	
+
 	//! Return the intersection of the 2 regions.
 	static SphericalRegionP getIntersection(const SphericalRegionP& reg1, const SphericalRegionP& reg2);
 	//! Return the union of the 2 regions.
 	static SphericalRegionP getUnion(const SphericalRegionP& reg1, const SphericalRegionP& reg2);
 	//! Return the subtraction of the 2 regions.
 	static SphericalRegionP getSubtraction(const SphericalRegionP& reg1, const SphericalRegionP& reg2);
-	
+
 	//! The QVariant type associated to a SphericalRegionP.
 	static const QVariant::Type qVariantType;
 
 	//! The meta type ID associated to a SphericalRegionP.
 	static int metaTypeId;
-	
+
 private:
 	//! Initialize stuff to allow SphericalRegionP to be used with Qt meta type system.
 	static int initialize();
@@ -80,22 +80,22 @@ QDataStream& operator>>(QDataStream& in, SphericalRegionP& region);
 class SphericalRegion
 {
 public:
-	
+
 	//! @enum SphericalRegionType define types for all supported regions.
 	enum SphericalRegionType
 	{
 		Point = 0,
-  		Cap = 1,
+		Cap = 1,
 		AllSky = 2,
-  		Polygon = 3,
+		Polygon = 3,
 		ConvexPolygon = 4,
-  		Empty = 5
+		Empty = 5
 	};
-	
+
 	virtual ~SphericalRegion() {;}
 
 	virtual SphericalRegionType getType() const = 0;
-	
+
 	//! Return the area of the region in steradians.
 	virtual double getArea() const = 0;
 
@@ -104,49 +104,49 @@ public:
 
 	//! Return a point located inside the region.
 	virtual Vec3d getPointInside() const = 0;
-	
+
 	//! Returns whether a SphericalRegion intersects with this region.
 	bool intersects(const SphericalRegionP& region) const;
 	//! Returns whether a SphericalRegion is contained into this region.
 	bool contains(const SphericalRegionP& region) const;
-	
+
 	//! Returns whether regions intersects.
 	bool intersects(const Vec3d& p) const {return contains(p);}	// Equivalent to contains() for a point.
 	virtual bool intersects(const SphericalPolygonBase& poly) const = 0;
 	virtual bool intersects(const SphericalCap& c) const = 0;
 	virtual bool intersects(const AllSkySphericalRegion& a) const = 0;
-	
+
 	//! Returns whether the region contains another one.
 	virtual bool contains(const Vec3d& p) const = 0;
 	virtual bool contains(const SphericalPolygonBase& poly) const = 0;
 	virtual bool contains(const SphericalCap& c) const = 0;
 	virtual bool contains(const AllSkySphericalRegion& a) const = 0;
-	
+
 	//! Return the list of SphericalCap bounding the ConvexPolygon.
 	virtual QVector<SphericalCap> getBoundingSphericalCaps() const = 0;
 
 	//! Return a bounding SphericalCap. This method is heavily used and therefore needs to be very fast.
 	//! The returned SphericalCap doesn't have to be the smallest one, but smaller is better.
 	virtual SphericalCap getBoundingCap() const = 0;
-	
+
 	//! Convert this region to a spherical polygon.
 	virtual SphericalPolygon toSphericalPolygon() const = 0;
-	
-	//! Return an enlarged version of this SphericalRegion so that any point distant of more 
+
+	//! Return an enlarged version of this SphericalRegion so that any point distant of more
 	//! than the given margin now lays within the region.
 	//! The returned region can be larger than the smallest enlarging region, therefore returning
 	//! false positive on subsequent intersection tests.
 	//! The default implementation always return an enlarged bounding SphericalCap.
 	//! @param margin the minimum enlargement margin in radian.
 	virtual SphericalRegionP getEnlarged(double margin) const;
-	
+
 	//! Serialize the region into a QVariant map matching the JSON format.
 	virtual QVariantMap toQVariant() const = 0;
-	
+
 	//! Output a JSON string representing the polygon.
 	//! This method is convenient for debugging.
 	QByteArray toJSON() const;
-	
+
 	//! Create a SphericalRegion from the given input JSON stream.
 	//! The type of the region is automatically recognized from the input format.
 	//! The currently recognized format are:
@@ -190,7 +190,7 @@ struct SphericalCap : public SphericalRegion
 
 	//! Construct a SphericalCap from its direction and assumes a 90 deg aperture.
 	SphericalCap(double x, double y, double z) : n(x,y,z), d(0) {;}
-	
+
 	//! Construct a SphericalCap from its direction and aperture.
 	//! @param an a unit vector indicating the direction.
 	//! @param ar cosinus of the aperture.
@@ -200,7 +200,7 @@ struct SphericalCap : public SphericalRegion
 	SphericalCap(const SphericalCap& other) : SphericalRegion(), n(other.n), d(other.d) {;}
 
 	virtual SphericalRegionType getType() const {return SphericalRegion::Cap;}
-	
+
 	//! Get the area of the intersection of the halfspace on the sphere in steradian.
 	virtual double getArea() const {return 2.*M_PI*(1.-d);}
 
@@ -214,7 +214,7 @@ struct SphericalCap : public SphericalRegion
 	//! @param v a unit vector.
 	virtual bool contains(const Vec3d &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.)<0.0000001);return (v*n>=d);}
 	virtual bool contains(const SphericalPolygonBase& poly) const;
-	virtual bool contains(const AllSkySphericalRegion& poly) const {return d<=-1;}	
+	virtual bool contains(const AllSkySphericalRegion& poly) const {return d<=-1;}
 	virtual bool contains(const SphericalCap& h) const
 	{
 		const double a = n*h.n-d*h.d;
@@ -239,32 +239,32 @@ struct SphericalCap : public SphericalRegion
 		return d<=0. || a<=0. || (a<=1. && a*a <= (1.-d*d));
 	}
 	virtual bool intersects(const AllSkySphericalRegion& poly) const {return d<=1.;}
-	
+
 	//! Return the list of SphericalCap bounding the region.
 	virtual QVector<SphericalCap> getBoundingSphericalCaps() const {QVector<SphericalCap> res; res << *this; return res;}
 
 	//! Return itself.
 	virtual SphericalCap getBoundingCap() const {return *this;}
-	
+
 	//! Convert the cap into a SphericalRegionBase instance.
 	virtual SphericalConvexPolygon toSphericalConvexPolygon() const;
-	
+
 	//! Convert this region to a spherical polygon.
 	virtual SphericalPolygon toSphericalPolygon() const;
 
 	//! Comparison operator.
 	bool operator==(const SphericalCap& other) const {return (n==other.n && d==other.d);}
-	
+
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is {"type": "CAP", "center": [ra, dec], "radius": radius}, with ra dec in degree in ICRS frame
 	//! and radius in degree (between 0 and 180 deg)
 	virtual QVariantMap toQVariant() const;
-	
+
 	//! The direction unit vector. Only if d==0, this vector doesn't need to be unit.
 	Vec3d n;
 	//! The cos of cone radius
 	double d;
-	
+
 private:
 	bool intersectsConvexContour(const Vec3d* vertice, int nbVertice) const;
 };
@@ -302,11 +302,11 @@ class SphericalPoint : public SphericalRegion
 {
 public:
 	SphericalPoint(const Vec3d& an) : n(an) {Q_ASSERT(std::fabs(1.-n.length())<0.0000001);}
-	
+
 	virtual ~SphericalPoint() {;}
 
 	virtual SphericalRegionType getType() const {return SphericalRegion::Point;}
-	
+
 	//! Return the area of the region in steradians.
 	virtual double getArea() const {return 0.;}
 
@@ -324,20 +324,20 @@ public:
 	virtual bool intersects(const SphericalPolygonBase& mpoly) const;
 	virtual bool intersects(const SphericalCap& c) const {return c.contains(n);}
 	virtual bool intersects(const AllSkySphericalRegion& poly) const {return true;}
-	
+
 	//! Return the list of SphericalCap bounding the region.
 	virtual QVector<SphericalCap> getBoundingSphericalCaps() const {QVector<SphericalCap> res; res << SphericalCap(n, 1); return res;}
-	
+
 	//! Return a full sky SphericalCap
 	virtual SphericalCap getBoundingCap() const {return SphericalCap(n, 1);}
-	
+
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is {"type": "POINT", "pos": [ra, dec]}, with ra dec in degree in ICRS frame.
 	virtual QVariantMap toQVariant() const;
-	
+
 	//! Convert this region to a spherical polygon.
 	virtual SphericalPolygon toSphericalPolygon() const;
-	
+
 	//! The unit vector of the point direction.
 	Vec3d n;
 };
@@ -350,7 +350,7 @@ public:
 	virtual ~AllSkySphericalRegion() {;}
 
 	virtual SphericalRegionType getType() const {return SphericalRegion::AllSky;}
-	
+
 	//! Return the area of the region in steradians.
 	virtual double getArea() const {return 4.*M_PI;}
 
@@ -367,16 +367,16 @@ public:
 	virtual bool intersects(const SphericalPolygonBase& mpoly) const {return true;}
 	virtual bool intersects(const SphericalCap& c) const {return true;}
 	virtual bool intersects(const AllSkySphericalRegion& poly) const {return true;}
-	
+
 	//! Return the list of SphericalCap bounding the region.
 	virtual QVector<SphericalCap> getBoundingSphericalCaps() const {QVector<SphericalCap> res; res << SphericalCap(Vec3d(1,0,0), -2); return res;}
-	
+
 	//! Return a full sky SphericalCap
 	virtual SphericalCap getBoundingCap() const {return SphericalCap(Vec3d(1,0,0), -2);}
-	
+
 	//! Convert this region to a spherical polygon.
 	virtual SphericalPolygon toSphericalPolygon() const;
-	
+
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is {"type": "ALLSKY"}
 	virtual QVariantMap toQVariant() const;
@@ -390,7 +390,7 @@ public:
 	virtual ~EmptySphericalRegion() {;}
 
 	virtual SphericalRegionType getType() const {return SphericalRegion::Empty;}
-	
+
 	//! Return the area of the region in steradians.
 	virtual double getArea() const {return 0.;}
 
@@ -407,19 +407,32 @@ public:
 	virtual bool intersects(const SphericalPolygonBase& mpoly) const {return false;}
 	virtual bool intersects(const SphericalCap& c) const {return false;}
 	virtual bool intersects(const AllSkySphericalRegion& poly) const {return false;}
-	
+
 	//! Return the list of SphericalCap bounding the region.
 	virtual QVector<SphericalCap> getBoundingSphericalCaps() const {QVector<SphericalCap> res; res << SphericalCap(Vec3d(1,0,0), 2); return res;}
-	
+
 	//! Return a full sky SphericalCap
 	virtual SphericalCap getBoundingCap() const {return SphericalCap(Vec3d(1,0,0), 2);}
-	
+
 	//! Convert this region to a spherical polygon.
 	virtual SphericalPolygon toSphericalPolygon() const;
-	
+
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is {"type": "ALLSKY"}
 	virtual QVariantMap toQVariant() const;
+};
+
+struct StelVertexArray
+{
+	StelVertexArray(const QVector<Vec3d>& v=QVector<Vec3d>(), const QVector<bool>& e=QVector<bool>(),
+					const QVector<Vec2f>& t=QVector<Vec2f>()) : vertex(v), edgeFlags(e), texCoords(t) {;}
+
+	//! OpenGL compatible array of 3D vertex to be displayed using vertex arrays.
+	QVector<Vec3d> vertex;
+	//! OpenGL compatible array of edge flags to be displayed using vertex arrays.
+	QVector<bool> edgeFlags;
+	//! PpenGL compatible array of edge flags to be displayed using vertex arrays.
+	QVector<Vec2f> texCoords;
 };
 
 //! @class SphericalPolygonBase
@@ -438,23 +451,16 @@ public:
 
 	//! Destructor
 	virtual ~SphericalPolygonBase() {;}
-	
+
 	//! Return an openGL compatible array to be displayed using vertex arrays.
-	virtual QVector<Vec3d> getVertexArray() const = 0;
-
-	//! Return an openGL compatible array of edge flags to be displayed using vertex arrays.
-	virtual QVector<bool> getEdgeFlagArray() const = 0;
-
-	//! Return an openGL compatible array of texture coords to be used using vertex arrays.
-	//! @return the array or an empty array if the polygon has no texture.
-	virtual QVector<Vec2f> getTextureCoordArray() const = 0;
+	virtual StelVertexArray getVertexArray() const = 0;
 
 	//! Get the simplified contours defining the SphericalPolygon.
 	virtual QVector<QVector<Vec3d> > getSimplifiedContours() const;
 
 	//! Get the fast contours defining the SphericalConvexPolygon.
 	virtual QVector<QVector<Vec3d> > getContours() const = 0;
-	
+
 	//! Return the area in steradians.
 	virtual double getArea() const;
 
@@ -462,14 +468,14 @@ public:
 	virtual Vec3d getPointInside() const;
 
 	//! Return true if the polygon is an empty polygon.
-	virtual bool isEmpty() const {return getVertexArray().isEmpty();}
+	virtual bool isEmpty() const {return getVertexArray().vertex.isEmpty();}
 
 	//! Returns whether another SphericalPolygon intersects with the SphericalPolygon.
 	virtual bool intersects(const SphericalPolygonBase& poly) const;
 	virtual bool intersects(const SphericalCap& c) const {return c.intersects(*this);}
 	virtual bool intersects(const AllSkySphericalRegion& poly) const {return true;}
 	virtual bool contains(const AllSkySphericalRegion& poly) const {return false;}
-	
+
 	//! Return the list of SphericalCap bounding the polygon.
 	virtual QVector<SphericalCap> getBoundingSphericalCaps() const {Q_ASSERT(0); return QVector<SphericalCap>();}
 
@@ -494,7 +500,7 @@ public:
 	// Avoid name hiding when overloading the virtual methods.
 	using SphericalPolygonBase::intersects;
 	using SphericalPolygonBase::contains;
-	
+
 	//! Default constructor.
 	SphericalPolygon() {;}
 
@@ -505,21 +511,14 @@ public:
 	SphericalPolygon(const QVector<Vec3d>& contour) {setContour(contour);}
 
 	virtual SphericalRegionType getType() const {return SphericalRegion::Polygon;}
-	
+
 	//! Return an openGL compatible array to be displayed using vertex arrays.
 	//! The array was precomputed therefore the method is very fast.
-	virtual QVector<Vec3d> getVertexArray() const {return triangleVertices;}
-
-	//! Return an openGL compatible array of edge flags to be displayed using vertex arrays.
-	//! The array was precomputed therefore the method is very fast.
-	virtual QVector<bool> getEdgeFlagArray() const {return edgeFlags;}
-
-	//! Return an openGL compatible array of texture coords to be used using vertex arrays.
-	virtual QVector<Vec2f> getTextureCoordArray() const {return QVector<Vec2f>();}
+	virtual StelVertexArray getVertexArray() const {return StelVertexArray(triangleVertices, edgeFlags);}
 
 	//! Get the fast contours defining the SphericalConvexPolygon.
 	virtual QVector<QVector<Vec3d> > getContours() const;
-	
+
 	//! Set the contours defining the SphericalPolygon.
 	//! @param contours the list of contours defining the polygon area.
 	//! @param windingRule the winding rule to use. Default value is WindingPositive, meaning that the
@@ -533,22 +532,22 @@ public:
 	virtual bool contains(const Vec3d& p) const;
 	virtual bool contains(const SphericalPolygonBase& poly) const {Q_ASSERT(0); return false;}
 	virtual bool contains(const SphericalCap& c) const {Q_ASSERT(0); return false;}
-	
+
 	//! Convert this region to a spherical polygon.
 	virtual SphericalPolygon toSphericalPolygon() const {return *this;}
-	
+
 	//! Serialize the region into a QVariant map matching the JSON format.
-	//! The format is 
+	//! The format is
 	//! @code {"worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]]} @endcode
 	//! worldCoords is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
 	virtual QVariantMap toQVariant() const;
-	
+
 protected:
 	friend void vertexCallback(void* vertexData, void* userData);
 	friend void vertexTextureCallback(void* vertexData, void* userData);
 
-	
-	
+
+
 	//! A list of vertices describing the tesselated polygon. The vertices have to be
 	//! used 3 by 3, forming triangles.
 	QVector<Vec3d> triangleVertices;
@@ -602,7 +601,7 @@ public:
 	//! worldCoords is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
 	//! There must be one texture coordinate for each vertex.
 	virtual QVariantMap toQVariant() const;
-	
+
 private:
 	friend void vertexTextureCallback(void* vertexData, void* userData);
 
@@ -618,11 +617,11 @@ private:
 class SphericalConvexPolygon : public SphericalPolygonBase
 {
 public:
-	
+
 	// Avoid name hiding when overloading the virtual methods.
 	using SphericalPolygonBase::intersects;
 	using SphericalPolygonBase::contains;
-	
+
 	//! Default constructor.
 	SphericalConvexPolygon() {;}
 
@@ -639,17 +638,10 @@ public:
 	SphericalConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3)  {contour << e0 << e1 << e2 << e3;}
 
 	virtual SphericalRegionType getType() const {return SphericalRegion::ConvexPolygon;}
-	
+
 	//! Return an openGL compatible array to be displayed using vertex arrays.
 	//! This method is not optimized for SphericalConvexPolygon instances.
-	virtual QVector<Vec3d> getVertexArray() const;
-
-	//! Return an openGL compatible array of edge flags to be displayed using vertex arrays.
-	//! This method is not optimized for SphericalConvexPolygon instances.
-	virtual QVector<bool> getEdgeFlagArray() const;
-
-	//! Return an openGL compatible array of texture coords to be used using vertex arrays.
-	virtual QVector<Vec2f> getTextureCoordArray() const {return QVector<Vec2f>();}
+	virtual StelVertexArray getVertexArray() const;
 
 	//! Return true if the polygon is an empty polygon.
 	virtual bool isEmpty() const {return contour.isEmpty();}
@@ -669,7 +661,7 @@ public:
 
 	//! Get the simplest contours defining the SphericalConvexPolygon.
 	virtual QVector<QVector<Vec3d> > getSimplifiedContours() const {QVector<QVector<Vec3d> > contours; contours.append(contour); return contours;}
-	
+
 	//! Get the fast contours defining the SphericalConvexPolygon.
 	virtual QVector<QVector<Vec3d> > getContours() const {return getSimplifiedContours();}
 
@@ -678,12 +670,12 @@ public:
 	virtual bool contains(const SphericalCap& c) const;
 	virtual bool contains(const SphericalPolygonBase& poly) const;
 	virtual bool intersects(const SphericalPolygonBase& polyBase) const;
-	
+
 	//! Convert this region to a spherical polygon.
 	virtual SphericalPolygon toSphericalPolygon() const;
-	
+
 	//! Serialize the region into a QVariant map matching the JSON format.
-	//! The format is 
+	//! The format is
 	//! @code {"type": "CVXPOLYGON", "worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]]} @endcode
 	//! worldCoords is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
 	virtual QVariantMap toQVariant() const;
@@ -698,7 +690,7 @@ public:
 
 	//! Check if the passed contour is convex and valid, i.e. it has no side >180.
 	static bool checkValidContour(const QVector<Vec3d>& contour);
-	
+
 	//! Return the list of halfspace bounding the ConvexPolygon.
 	QVector<SphericalCap> getBoundingSphericalCaps() const;
 
@@ -712,13 +704,13 @@ protected:
 	//! @param points the points to test.
 	//! @param points the number of points to test.
 	static bool areAllPointsOutsideOneSide(const Vec3d* thisContour, int nbThisContour, const Vec3d* points, int nbPoints);
-	
+
 	//! Computes whether the passed points are all outside of at least one SphericalCap defining the polygon boundary.
 	bool areAllPointsOutsideOneSide(const QVector<Vec3d>& points) const
 	{
 		return areAllPointsOutsideOneSide(contour.constData(), contour.size(), points.constData(), points.size());
 	}
-	
+
 	bool containsConvexContour(const Vec3d* vertice, int nbVertex) const;
 };
 
@@ -741,8 +733,9 @@ public:
 		textureCoords << Vec2f(0.f, 0.f) << Vec2f(1.f, 0.f) << Vec2f(1.f, 1.f) << Vec2f(0.f, 1.f);
 	}
 
-	//! Return an openGL compatible array of texture coords to be used using vertex arrays.
-	virtual QVector<Vec2f> getTextureCoordArray() const {return textureCoords;}
+	//! Return an openGL compatible array to be displayed using vertex arrays.
+	//! This method is not optimized for SphericalConvexPolygon instances.
+	virtual StelVertexArray getVertexArray() const;
 
 	//! Set a single contour defining the SphericalPolygon.
 	//! @param acontour a contour defining the polygon area.
@@ -758,7 +751,7 @@ public:
 	//! worldCoords is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
 	//! There must be one texture coordinate for each vertex.
 	virtual QVariantMap toQVariant() const;
-	
+
 protected:
 	//! A list of uv textures coordinates corresponding to the triangle vertices.
 	//! There should be 1 uv position per vertex.
@@ -778,7 +771,7 @@ struct EdgeVertex
 class SubContour : public QVector<EdgeVertex>
 {
 public:
-	// Create a SubContour from a list of vertices 
+	// Create a SubContour from a list of vertices
 	SubContour(const QVector<Vec3d>& vertices, bool closed=true);
 	SubContour() {;}
 	SubContour(int size, const EdgeVertex& v) : QVector<EdgeVertex>(size, v) {;}
@@ -791,9 +784,9 @@ class OctahedronContour
 public:
 	//! Create the OctahedronContour by splitting the passed SubContour on the 8 sides of the octahedron.
 	OctahedronContour(const SubContour& subContour);
-	
+
 	//! Returns the list of triangles resulting from tesselating the contours.
-	QVector<EdgeVertex> getTesselatedTriangles();
+	StelVertexArray getTesselatedTriangles();
 
 	//! Set this OctahedronContour as the intersection of itself with the given OctahedronContour.
 	void inPlaceIntersection(const OctahedronContour& mpoly);
@@ -801,7 +794,7 @@ public:
 	void inPlaceUnion(const OctahedronContour& mpoly);
 	//! Set this OctahedronContour as the subtraction of itself with the given OctahedronContour.
 	void inPlaceSubtraction(const OctahedronContour& mpoly);
-	
+
 private:
 	void projectOnOctahedron();
 
@@ -809,20 +802,20 @@ private:
 	//! and a call to tesselate will proceed on each appended SubContours per side.
 	void append(const OctahedronContour& other);
 	void appendReversed(const OctahedronContour& other);
-	
+
 	enum TessWindingRule
 	{
 		WindingPositive=0,	//!< Positive winding rule (used for union)
-   		WindingAbsGeqTwo=1	//!< Abs greater or equal 2 winding rule (used for intersection)
+		WindingAbsGeqTwo=1	//!< Abs greater or equal 2 winding rule (used for intersection)
 	};
-	
+
 	//! Tesselate the contours per side, producing a list of triangles subcontours according to the given rule.
 	void tesselate(TessWindingRule rule) const;
-	
+
 	static void splitContourByPlan(int onLine, const SubContour& contour, QVector<SubContour> result[2]);
-	
+
 	mutable QVarLengthArray<QVector<SubContour>,8 > sides;
-	
+
 	mutable bool tesselated;
 };
 
