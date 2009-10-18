@@ -39,7 +39,6 @@
 QMutex* StelPainter::globalMutex = new QMutex();
 #endif
 
-bool StelPainter::flagGlPointSprite = false;
 QPainter* StelPainter::qPainter = NULL;
 
 void StelPainter::setQPainter(QPainter* p)
@@ -83,8 +82,10 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 #endif
 
 	// Save openGL projection state
+#ifndef USE_OPENGL_ES2
 	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
+#endif
 	glMatrixMode(GL_TEXTURE);
 	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
@@ -126,8 +127,10 @@ StelPainter::~StelPainter()
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
+#ifndef USE_OPENGL_ES2
 	glPopAttrib();
 	glPopClientAttrib();
+#endif
 #ifndef NDEBUG
 	GLenum er = glGetError();
 	if (er!=GL_NO_ERROR)
@@ -164,22 +167,6 @@ QFontMetrics StelPainter::getFontMetrics() const
 
 void StelPainter::initSystemGLInfo()
 {
-	// TODO move that in static code
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
-	flagGlPointSprite = conf->value("projection/flag_use_gl_point_sprite",false).toBool();
-	flagGlPointSprite = flagGlPointSprite && GLEE_ARB_point_sprite;
-	if (flagGlPointSprite)
-	{
-		glTexEnvf( GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE );
-		glEnable(GL_POINT_SPRITE_ARB);
-		glEnable(GL_POINT_SMOOTH);
-		qDebug() << "INFO: using GL_ARB_point_sprite";
-	}
-	else
-	{
-			//qDebug() << "WARNING: GL_ARB_point_sprite not available";
-	}
 }
 
 /*************************************************************************
@@ -209,7 +196,7 @@ void StelPainter::drawViewportShape(void) const
 		return;
 
 	glDisable(GL_BLEND);
-	glColor3f(0.f,0.f,0.f);
+	glColor4f(0.f,0.f,0.f, 1.f);
 	glPushMatrix();
 	glTranslated(prj->viewportCenter[0],prj->viewportCenter[1],0.0);
 
@@ -392,7 +379,7 @@ void StelPainter::sFanDisk(double radius, int innerFanSlices, int level) const
 	drawArrays(GL_TRIANGLE_FAN, vertexArr.size()/3, (Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
 }
 
-void StelPainter::sRing(GLdouble rMin, GLdouble rMax, GLint slices, GLint stacks, int orientInside) const
+void StelPainter::sRing(double rMin, double rMax, GLint slices, GLint stacks, int orientInside) const
 {
 	double x,y;
 	int j;
@@ -442,7 +429,7 @@ static void sSphereMapTexCoordFast(double rho_div_fov, double costheta, double s
 	out << 0.5 + rho_div_fov * costheta << 0.5 + rho_div_fov * sintheta;
 }
 
-void StelPainter::sSphereMap(GLdouble radius, GLint slices, GLint stacks, double textureFov, int orientInside) const
+void StelPainter::sSphereMap(double radius, GLint slices, GLint stacks, double textureFov, int orientInside) const
 {
 	double rho,x,y,z;
 	int i, j;
@@ -568,8 +555,10 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	Q_ASSERT(qPainter);
 
 	// Save openGL state
+#ifndef USE_OPENGL_ES2
 	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
+#endif
 	glMatrixMode(GL_TEXTURE);
 	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
@@ -612,8 +601,10 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	qPainter->beginNativePainting();
 #endif
 
+#ifndef USE_OPENGL_ES2
 	glPopClientAttrib();
 	glPopAttrib();
+#endif
 	glMatrixMode(GL_TEXTURE);
 	glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
@@ -1339,7 +1330,7 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 		if (boundaryColor!=NULL)
 		{
 			glGetFloatv(GL_CURRENT_COLOR, tmpColor);
-			glColor4fv((float*)boundaryColor);
+			glColor4f((*boundaryColor)[0], (*boundaryColor)[1], (*boundaryColor)[2], 1.f);
 		}
 		if (drawMode==SphericalPolygonDrawModeTextureFillAndBoundary)
 		{
@@ -1350,7 +1341,7 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 		if (boundaryColor!=NULL)
 		{
 			// Revert previous color
-			glColor4fv(tmpColor);
+			glColor4f(tmpColor[0], tmpColor[1], tmpColor[2], 1.f);
 		}
 		if (drawMode==SphericalPolygonDrawModeTextureFillAndBoundary)
 		{
@@ -1397,7 +1388,7 @@ void StelPainter::drawCircle(double x,double y,double r) const
 	const double sp = sin(phi);
 	double dx = r;
 	double dy = 0;
-	static QVarLengthArray<Vec3d, 180> circleVertexArray(180);
+	static QVarLengthArray<Vec3f, 180> circleVertexArray(180);
 
 	for (int i=0;i<segments;i++)
 	{
@@ -1406,9 +1397,8 @@ void StelPainter::drawCircle(double x,double y,double r) const
 		dy = dx*sp+dy*cp;
 		dx = r;
 	}
-	//drawArrays(GL_LINE_LOOP, 180, circleVertexArray.data());//drawArrays() calls prj->projectInPlace() for each vertex
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_DOUBLE, 0, circleVertexArray.data());
+	glVertexPointer(3, GL_FLOAT, 0, circleVertexArray.data());
 	glDrawArrays(GL_LINE_LOOP, 0, 180);
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
@@ -1416,18 +1406,6 @@ void StelPainter::drawCircle(double x,double y,double r) const
 
 void StelPainter::drawSprite2dMode(double x, double y, float radius) const
 {
-	// Use GL_POINT_SPRITE_ARB extension if available
-	if (flagGlPointSprite)
-	{
-		glPointSize(radius*2.);
-		static float vertexData[] = {0.,0.};
-		vertexData[0]=x;
-		vertexData[1]=y;
-		glInterleavedArrays(GL_V2F ,0, vertexData);
-		glDrawArrays(GL_POINTS, 0, 1);
-		return;
-	}
-
 	static float vertexData[] = {0.,0.,-10.,-10.,0.,   1.,0.,10.,-10.,0.,  0.,1.,10.,10.,0,   1.,1.,-10.,10.,0.};
 	vertexData[2]=x-radius; vertexData[3]=y-radius;
 	vertexData[7]=x+radius; vertexData[8]=y-radius;
@@ -1478,13 +1456,6 @@ void StelPainter::drawPoint2d(double x, double y) const
 	vertexData[0]=x;
 	vertexData[1]=y;
 	glInterleavedArrays(GL_V2F ,0, vertexData);
-	if (flagGlPointSprite)
-	{
-		glDisable(GL_POINT_SPRITE_ARB);
-		glDrawArrays(GL_POINTS, 0, 1);
-		glEnable(GL_POINT_SPRITE_ARB);
-		return;
-	}
 	glDrawArrays(GL_POINTS, 0, 1);
 }
 
@@ -1506,7 +1477,7 @@ void StelPainter::drawLine2d(double x1, double y1, double x2, double y2) const
 ///////////////////////////////////////////////////////////////////////////
 // Drawing methods for general (non-linear) mode
 
-void StelPainter::sSphere(GLdouble radius, GLdouble oneMinusOblateness, GLint slices, GLint stacks, int orientInside) const
+void StelPainter::sSphere(double radius, double oneMinusOblateness, GLint slices, GLint stacks, int orientInside) const
 {
 	// It is really good for performance to have Vec4f,Vec3f objects
 	// static rather than on the stack. But why?
@@ -1612,9 +1583,9 @@ void StelPainter::sSphere(GLdouble radius, GLdouble oneMinusOblateness, GLint sl
 }
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
-void StelPainter::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks, int orientInside) const
+void StelPainter::sCylinder(double radius, double height, GLint slices, GLint stacks, int orientInside) const
 {
-	GLdouble da, r, dz;
+        double da, r, dz;
 	GLfloat z, nsign;
 	GLint i, j;
 

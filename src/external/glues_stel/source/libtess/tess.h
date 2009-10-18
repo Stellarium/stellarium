@@ -53,7 +53,7 @@ enum TessState {T_DORMANT, T_IN_POLYGON, T_IN_CONTOUR};
 
 typedef struct CachedVertex
 {
-   GLdouble coords[3];
+   double coords[3];
    void*   data;
 } CachedVertex;
 
@@ -69,7 +69,7 @@ struct GLUEStesselator
    void (* callError)(GLenum errnum);
 
    /*** state needed for projecting onto the sweep plane ***/
-   GLdouble normal[3]; /* user-specified normal (if provided) */
+   double normal[3]; /* user-specified normal (if provided) */
    GLfloat sUnit[3];  /* unit vector in s-direction (debugging) */
    GLfloat tUnit[3];  /* unit vector in t-direction (debugging) */
 
@@ -82,7 +82,7 @@ struct GLUEStesselator
    PriorityQ* pq;               /* priority queue of vertex events */
    GLUESvertex* event;            /* current sweep event being processed */
 
-   void (* callCombine)(GLdouble coords[3], void*  data[4],
+   void (* callCombine)(double coords[3], void*  data[4],
                                 GLfloat weight[4], void** outData);
 
   /*** state needed for rendering callbacks (see render.c) ***/
@@ -109,7 +109,7 @@ struct GLUEStesselator
   void (* callVertexData)(void* data, void* polygonData);
   void (* callEndData)(void* polygonData);
   void (* callErrorData)(GLenum errnum, void *polygonData);
-  void (* callCombineData)(GLdouble coords[3], void* data[4],
+  void (* callCombineData)(double coords[3], void* data[4],
                                    GLfloat weight[4], void** outData,
                                    void* polygonData);
 
@@ -123,7 +123,7 @@ struct GLUEStesselator
  void  __gl_noVertexData(void* data, void* polygonData);
  void  __gl_noEndData(void* polygonData);
  void  __gl_noErrorData(GLenum errnum, void* polygonData);
- void  __gl_noCombineData(GLdouble coords[3], void* data[4],
+ void  __gl_noCombineData(double coords[3], void* data[4],
                                        GLfloat weight[4], void** outData,
                                        void* polygonData);
 

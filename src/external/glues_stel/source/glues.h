@@ -129,7 +129,7 @@ GLint gluesBuild2DMipmaps(GLenum target, GLint internalFormat,
 void gluesBeginPolygon(GLUEStesselator* tess);
 void gluesDeleteTess(GLUEStesselator* tess);
 void gluesEndPolygon(GLUEStesselator* tess);
-void gluesGetTessProperty(GLUEStesselator* tess, GLenum which, GLdouble* data);
+void gluesGetTessProperty(GLUEStesselator* tess, GLenum which, double* data);
 GLUEStesselator* gluesNewTess(void);
 void gluesNextContour(GLUEStesselator* tess, GLenum type);
 void gluesTessBeginContour(GLUEStesselator* tess);
@@ -137,9 +137,9 @@ void gluesTessBeginPolygon(GLUEStesselator* tess, GLvoid* data);
 void gluesTessCallback(GLUEStesselator* tess, GLenum which, _GLUESfuncptr CallBackFunc);
 void gluesTessEndContour(GLUEStesselator* tess);
 void gluesTessEndPolygon(GLUEStesselator* tess);
-void gluesTessNormal(GLUEStesselator* tess, GLdouble valueX, GLdouble valueY, GLdouble valueZ);
-void gluesTessProperty(GLUEStesselator* tess, GLenum which, GLdouble data);
-void gluesTessVertex(GLUEStesselator* tess, GLdouble* location, GLvoid* data);
+void gluesTessNormal(GLUEStesselator* tess, double valueX, double valueY, double valueZ);
+void gluesTessProperty(GLUEStesselator* tess, GLenum which, double data);
+void gluesTessVertex(GLUEStesselator* tess, double* location, GLvoid* data);
 
 const GLubyte* gluesErrorString(GLenum errorCode);
 

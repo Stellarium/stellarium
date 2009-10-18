@@ -59,7 +59,7 @@
 /*ARGSUSED*/ static void  noVertex(void* data) {}
 /*ARGSUSED*/ static void  noEnd(void) {}
 /*ARGSUSED*/ static void  noError(GLenum errnum) {}
-/*ARGSUSED*/ static void  noCombine(GLdouble coords[3], void *data[4],
+/*ARGSUSED*/ static void  noCombine(double coords[3], void *data[4],
                                             GLfloat weight[4], void **dataOut) {}
 /*ARGSUSED*/ static void  noMesh(GLUESmesh* mesh) {}
 
@@ -68,7 +68,7 @@
 /*ARGSUSED*/ void  __gl_noVertexData(void* data, void* polygonData) {}
 /*ARGSUSED*/ void  __gl_noEndData(void* polygonData) {}
 /*ARGSUSED*/ void  __gl_noErrorData( GLenum errnum, void* polygonData) {}
-/*ARGSUSED*/ void  __gl_noCombineData(GLdouble coords[3], void* data[4],
+/*ARGSUSED*/ void  __gl_noCombineData(double coords[3], void* data[4],
                                               GLfloat weight[4], void** outData,
                                               void* polygonData) {}
 
@@ -193,7 +193,7 @@ void  gluesDeleteTess(GLUEStesselator* tess)
    memFree(tess);
 }
 
-void  gluesTessProperty(GLUEStesselator* tess, GLenum which, GLdouble value)
+void  gluesTessProperty(GLUEStesselator* tess, GLenum which, double value)
 {
    GLenum windingRule;
 
@@ -238,7 +238,7 @@ void  gluesTessProperty(GLUEStesselator* tess, GLenum which, GLdouble value)
 }
 
 /* Returns tessellator property */
-void  gluesGetTessProperty(GLUEStesselator* tess, GLenum which, GLdouble* value)
+void  gluesGetTessProperty(GLUEStesselator* tess, GLenum which, double* value)
 {
    switch (which)
    {
@@ -266,7 +266,7 @@ void  gluesGetTessProperty(GLUEStesselator* tess, GLenum which, GLdouble* value)
    }
 }
 
-void  gluesTessNormal(GLUEStesselator* tess, GLdouble x, GLdouble y, GLdouble z)
+void  gluesTessNormal(GLUEStesselator* tess, double x, double y, double z)
 {
    tess->normal[0]=x;
    tess->normal[1]=y;
@@ -320,11 +320,11 @@ void  gluesTessCallback(GLUEStesselator* tess, GLenum which, _GLUESfuncptr fn)
            return;
       case GLUES_TESS_COMBINE:
            tess->callCombine=(fn==NULL) ? &noCombine:
-			   (void (*)(GLdouble[3], void*[4], GLfloat[4], void**))fn;
+                           (void (*)(double[3], void*[4], GLfloat[4], void**))fn;
            return;
       case GLUES_TESS_COMBINE_DATA:
            tess->callCombineData=(fn==NULL) ? &__gl_noCombineData:
-			   (void (*)(GLdouble [3], void*[4], GLfloat[4], void**, void*))fn;
+                           (void (*)(double [3], void*[4], GLfloat[4], void**, void*))fn;
            return;
       case GLUES_TESS_MESH:
            tess->callMesh=(fn==NULL) ? &noMesh: (void (*)(GLUESmesh*))fn;
@@ -335,7 +335,7 @@ void  gluesTessCallback(GLUEStesselator* tess, GLenum which, _GLUESfuncptr fn)
    }
 }
 
-static int AddVertex(GLUEStesselator* tess, GLdouble coords[3], void* data)
+static int AddVertex(GLUEStesselator* tess, double coords[3], void* data)
 {
    GLUEShalfEdge* e=NULL;
 
@@ -384,7 +384,7 @@ static int AddVertex(GLUEStesselator* tess, GLdouble coords[3], void* data)
    return 1;
 }
 
-static void CacheVertex(GLUEStesselator* tess, GLdouble coords[3], void* data)
+static void CacheVertex(GLUEStesselator* tess, double coords[3], void* data)
 {
    CachedVertex* v=&tess->cache[tess->cacheCount];
 
@@ -420,11 +420,11 @@ static int EmptyCache(GLUEStesselator* tess)
 }
 
 
-void  gluesTessVertex(GLUEStesselator* tess, GLdouble coords[3], void* data)
+void  gluesTessVertex(GLUEStesselator* tess, double coords[3], void* data)
 {
    int i;
    int tooLarge=FALSE;
-   GLdouble x, clamped[3];
+   double x, clamped[3];
 
    RequireState(tess, T_IN_CONTOUR);
 

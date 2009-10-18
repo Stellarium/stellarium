@@ -141,6 +141,7 @@ SET(ENABLE_SOUND 0 CACHE BOOL "Define whether sound support should be activated,
 SET(ENABLE_SCRIPT_CONSOLE 0 CACHE BOOL "Define whether to build the script console feature, options are: 1 or 0.")
 SET(ENABLE_STRATOSCRIPT_COMPAT 0 CACHE BOOL "Set to 1 or true if you want to build the Stratoscript compatibility mode")
 SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
+SET(OPENGL_MODE Desktop CACHE STRING "Choose the type of openGL to use, options are: Desktop, ES2")
 
 IF (GUI_MODE STREQUAL "External")
 	SET(EXTERNAL_GUI_PLUGIN_PATH "/path/to/libMyGui.a" CACHE PATH "The absolute path to the .a static library containing the static GUI plugin")
@@ -199,7 +200,12 @@ IF(ENABLE_NLS)
   FIND_PACKAGE(Gettext REQUIRED)
 ENDIF()
 
-FIND_PACKAGE(OpenGL REQUIRED)
+IF (OPENGL_MODE STREQUAL "Desktop")
+  FIND_PACKAGE(OpenGL REQUIRED)
+ENDIF()
+IF(OPENGL_MODE STREQUAL "ES2")
+  ADD_DEFINITIONS(-DUSE_OPENGL_ES2)
+ENDIF()
 FIND_PACKAGE(PNG REQUIRED)
 FIND_PACKAGE(JPEG REQUIRED)
 
