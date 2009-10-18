@@ -20,7 +20,6 @@
 #include "StelGuiBase.hpp"
 #include "StelAppGraphicsWidget.hpp"
 #include "StelTranslator.hpp"
-#include <QProgressBar>
 #include <QAction>
 
 

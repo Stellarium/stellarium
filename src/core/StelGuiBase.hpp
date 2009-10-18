@@ -23,9 +23,9 @@
 #include "StelObject.hpp"
 #include "StelStyle.hpp"
 
-#include <QGraphicsTextItem>
 #include <QtPlugin>
 
+class QGraphicsWidget;
 class QAction;
 
 //! @class StelGuiBase
