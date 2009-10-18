@@ -95,15 +95,17 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore)
 	// Initialize buffers for use by gl vertex array
 	nbPointSources = 0;
 	maxPointSources = 1000;
-	verticesGrid = new Vec2f[maxPointSources*4];
-	colorGrid = new Vec3f[maxPointSources*4];
-	textureGrid = new Vector2<GLshort>[maxPointSources*4];
+	verticesGrid = new Vec2f[maxPointSources*6];
+	colorGrid = new Vec3f[maxPointSources*6];
+	textureGrid = new Vector2<GLshort>[maxPointSources*6];
 	for (unsigned int i=0;i<maxPointSources; ++i)
 	{
-		textureGrid[i*4].set(0,0);
-		textureGrid[i*4+1].set(1,0);
-		textureGrid[i*4+2].set(1,1);
-		textureGrid[i*4+3].set(0,1);
+		textureGrid[i*6].set(0,0);
+		textureGrid[i*6+1].set(1,0);
+		textureGrid[i*6+2].set(1,1);
+		textureGrid[i*6+3].set(0,0);
+		textureGrid[i*6+4].set(1,1);
+		textureGrid[i*6+5].set(0,1);
 	}
 }
 
@@ -338,7 +340,7 @@ void StelSkyDrawer::postDrawPointSource()
 	glTexCoordPointer(2, GL_SHORT, 0, textureGrid);
 	
 	// And draw everything at once
-	glDrawArrays(GL_QUADS, 0, nbPointSources*4);
+	glDrawArrays(GL_TRIANGLES, 0, nbPointSources*6);
 		
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
@@ -361,18 +363,22 @@ bool StelSkyDrawer::drawPointSource(double x, double y, const float rcMag[2], co
 	if (flagPointStar)
 	{
 		// Draw the star rendered as GLpoint. This may be faster but it is not so nice
-		glColor3fv(color*tw);
+		glColor4f(color[0]*tw, color[1]*tw, color[2]*tw, 1.f);
 		sPainter->drawPoint2d(x, y);
 	}
 	else
 	{
 		// Store the drawing instructions in the vertex arrays
-		colorGrid[nbPointSources*4+3] = color;
-		colorGrid[nbPointSources*4+3]*=tw;
+		colorGrid[nbPointSources*6+2] = color;
+		colorGrid[nbPointSources*6+2]*=tw;
+		colorGrid[nbPointSources*6+5] = color;
+		colorGrid[nbPointSources*6+5]*=tw;
 		const double radius = rcMag[0];
-		Vec2f* v = &(verticesGrid[nbPointSources*4]);
+		Vec2f* v = &(verticesGrid[nbPointSources*6]);
 		v->set(x-radius,y-radius); ++v;
 		v->set(x+radius,y-radius); ++v;
+		v->set(x+radius,y+radius); ++v;
+		v->set(x-radius,y-radius); ++v;
 		v->set(x+radius,y+radius); ++v;
 		v->set(x-radius,y+radius); ++v;
 		
@@ -386,7 +392,7 @@ bool StelSkyDrawer::drawPointSource(double x, double y, const float rcMag[2], co
 
 			texBigHalo->bind();
 			glEnable(GL_TEXTURE_2D);
-			glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+			glColor4f(color[0]*cmag, color[1]*cmag, color[2]*cmag, 1.f);
 			sPainter->drawSprite2dMode(x, y, rmag);
 		}
 		
@@ -428,7 +434,7 @@ void StelSkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedAre
 		float cmag = 1.f;
 		if (rmag<pixRadius*3.f+100.)
 			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
-		glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+		glColor4f(color[0]*cmag, color[1]*cmag, color[2]*cmag, 1.f);
 		sPainter->drawSprite2dMode(x, y, rmag);
 		
 		noStarHalo = true;

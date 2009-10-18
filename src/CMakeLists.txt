@@ -56,6 +56,13 @@ SET(glues_lib_SRCS
 	external/glues_stel/source/libtess/tessmono.h
 	)
 
+IF (OPENGL_MODE STREQUAL "Desktop")
+  SET(gl_lib_SRCS external/GLee.c	external/GLee.h)
+ENDIF()
+IF(OPENGL_MODE STREQUAL "ES2")
+  SET(gl_lib_SRCS external/GLee.h)
+ENDIF()
+
 SET(stellarium_lib_SRCS
 	core/StelAudioMgr.hpp
 	core/StelAudioMgr.cpp
@@ -152,8 +159,8 @@ SET(stellarium_lib_SRCS
 	external/bytes.h
 	external/fixx11h.h
 	external/gettext.h
-	external/GLee.c
-	external/GLee.h
+        ${gl_lib_SRCS}
+
 	external/kfilter/kfilterdev.h
 	external/kfilter/kfilterdev.cpp
 	external/kfilter/kfilterbase.h

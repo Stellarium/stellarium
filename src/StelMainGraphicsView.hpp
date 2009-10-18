@@ -46,6 +46,10 @@ public:
 	//! @deprecated don't use that.
 	QGLWidget* getOpenGLWin() {return glWidget;}
 	
+	//! Swap openGL buffer.
+	//! @deprecated don't use that.
+	void swapBuffer();
+
 	//! Delete openGL textures (to call before the GLContext disappears)
 	void deinitGL();
 	

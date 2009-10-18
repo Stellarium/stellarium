@@ -286,7 +286,7 @@ void  contourVertexCallback(void* vertexData, void* userData)
 	d->resultContours.last().append(Vec3d(v[0], v[1], v[2]));
 }
 
-void  combineCallbackSimple(GLdouble coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
+void  combineCallbackSimple(double coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
 {
 	UserDataSimplifiedContours* d = static_cast<UserDataSimplifiedContours*>(userData);
 	d->tmpVectors.append(Vec3d(coords[0], coords[1], coords[2]));
@@ -312,9 +312,9 @@ QVector<QVector<Vec3d> > SphericalPolygonBase::getSimplifiedContours() const
 	for (int c=0;c<trianglesArray.size()/3;++c)
 	{
 		gluesTessBeginContour(tess);
-		gluesTessVertex(tess, const_cast<GLdouble*>((const double*)trianglesArray.at(c*3)), const_cast<GLdouble*>((const double*)trianglesArray.at(c*3)));
-		gluesTessVertex(tess, const_cast<GLdouble*>((const double*)trianglesArray.at(c*3+1)), const_cast<GLdouble*>((const double*)trianglesArray.at(c*3+1)));
-		gluesTessVertex(tess, const_cast<GLdouble*>((const double*)trianglesArray.at(c*3+2)), const_cast<GLdouble*>((const double*)trianglesArray.at(c*3+2)));
+                gluesTessVertex(tess, const_cast<double*>((const double*)trianglesArray.at(c*3)), const_cast<double*>((const double*)trianglesArray.at(c*3)));
+                gluesTessVertex(tess, const_cast<double*>((const double*)trianglesArray.at(c*3+1)), const_cast<double*>((const double*)trianglesArray.at(c*3+1)));
+                gluesTessVertex(tess, const_cast<double*>((const double*)trianglesArray.at(c*3+2)), const_cast<double*>((const double*)trianglesArray.at(c*3+2)));
 		gluesTessEndContour(tess);
 	}
 	gluesTessEndPolygon(tess);
@@ -464,7 +464,7 @@ void  edgeFlagCallback(GLboolean flag, void* userData)
 	((GluTessCallbackData*)userData)->edgeFlag=flag;
 }
 
-void  combineCallback(GLdouble coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
+void  combineCallback(double coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
 {
 	QList<Vec3d>& tempVertices = ((GluTessCallbackData*)userData)->tempVertices;
 	if (vertex_data[2]==NULL)
@@ -532,7 +532,7 @@ void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, Sph
 	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG_DATA, (GLvoid(*)()) &edgeFlagCallback);
 	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid(*)()) &errorCallback);
 	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid(*)()) &combineCallback);
-	const GLdouble windRule = (windingRule==SphericalPolygonBase::WindingPositive) ? GLUES_TESS_WINDING_POSITIVE : GLUES_TESS_WINDING_ABS_GEQ_TWO;
+        const double windRule = (windingRule==SphericalPolygonBase::WindingPositive) ? GLUES_TESS_WINDING_POSITIVE : GLUES_TESS_WINDING_ABS_GEQ_TWO;
 	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, windRule);
 	//gluesTessProperty(tess, GLUES_TESS_TOLERANCE, 0.00001);
 	GluTessCallbackData data;
@@ -543,7 +543,7 @@ void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, Sph
 		gluesTessBeginContour(tess);
 		foreach (const Vec3d& v, contours.at(c))
 		{
-			gluesTessVertex(tess, const_cast<GLdouble*>((const double*)v), const_cast<void*>((const void*)v));
+                        gluesTessVertex(tess, const_cast<double*>((const double*)v), const_cast<void*>((const void*)v));
 		}
 		gluesTessEndContour(tess);
 	}
@@ -635,7 +635,7 @@ void SphericalTexturedPolygon::setContours(const QVector<QVector<TextureVertex> 
 	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(*)()) &vertexTextureCallback);
 	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG_DATA, (GLvoid(*)()) &edgeFlagCallback);
 	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid (*) ()) &errorCallback);
-	const GLdouble windRule = (windingRule==SphericalPolygonBase::WindingPositive) ? GLUES_TESS_WINDING_POSITIVE : GLUES_TESS_WINDING_ABS_GEQ_TWO;
+        const double windRule = (windingRule==SphericalPolygonBase::WindingPositive) ? GLUES_TESS_WINDING_POSITIVE : GLUES_TESS_WINDING_ABS_GEQ_TWO;
 	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, windRule);
 	GluTessCallbackData data;
 	data.thisPolygon=this;
@@ -645,7 +645,7 @@ void SphericalTexturedPolygon::setContours(const QVector<QVector<TextureVertex> 
 		gluesTessBeginContour(tess);
 		for (int i=0;i<contours[c].size();++i)
 		{
-			gluesTessVertex(tess, const_cast<GLdouble*>((const double*)contours[c][i].vertex), const_cast<void*>((const void*)&(contours[c][i])));
+                        gluesTessVertex(tess, const_cast<double*>((const double*)contours[c][i].vertex), const_cast<void*>((const void*)&(contours[c][i])));
 		}
 		gluesTessEndContour(tess);
 	}
@@ -1456,7 +1456,7 @@ void octEdgeFlagCallback(GLboolean flag, void* userData)
 	((OctTessCallbackData*)userData)->edgeFlag=flag;
 }
 
-void octCombineCallback(GLdouble coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
+void octCombineCallback(double coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
 {
 	QList<Vec3d>& tempVertices = ((OctTessCallbackData*)userData)->tempVertices;
 	Vec3d newVertex(0.);
@@ -1485,7 +1485,7 @@ SubContour tesselateOneSide(GLUEStesselator* tess, const QVector<SubContour>& co
 		gluesTessBeginContour(tess);
 		foreach (const EdgeVertex& v, contours.at(c))
 		{
-			gluesTessVertex(tess, const_cast<GLdouble*>((const double*)v.vertex), const_cast<void*>((const void*)v.vertex));
+                        gluesTessVertex(tess, const_cast<double*>((const double*)v.vertex), const_cast<void*>((const void*)v.vertex));
 		}
 		gluesTessEndContour(tess);
 	}
@@ -1504,7 +1504,7 @@ void OctahedronContour::tesselate(TessWindingRule windingRule) const
 	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG_DATA, (GLvoid(*)()) &octEdgeFlagCallback);
 	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid(*)()) &errorCallback);
 	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid(*)()) &octCombineCallback);
-	const GLdouble windRule = (windingRule==OctahedronContour::WindingPositive) ? GLUES_TESS_WINDING_POSITIVE : GLUES_TESS_WINDING_ABS_GEQ_TWO;
+        const double windRule = (windingRule==OctahedronContour::WindingPositive) ? GLUES_TESS_WINDING_POSITIVE : GLUES_TESS_WINDING_ABS_GEQ_TWO;
 	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, windRule);
 	gluesTessNormal(tess, 0,0,1);
 

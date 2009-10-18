@@ -26,10 +26,11 @@
 #include "StelPainter.hpp"
 #include "StelCore.hpp"
 
-#include <QGLWidget>
 #include <QDebug>
 
-StelLoadingBar::StelLoadingBar(float fontSize, const QString&  splashTex, 
+#include "GLee.h"
+
+StelLoadingBar::StelLoadingBar(float fontSize, const QString&  splashTex,
 	const QString& extraTextString, float extraTextSize, 
 	float extraTextPosx, float extraTextPosy) :
 	width(512), height(512), barwidth(400), barheight(10), extraText(extraTextString)
@@ -72,7 +73,7 @@ void StelLoadingBar::Draw(float val)
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_TEXTURE_2D);
-		glColor3f(1, 1, 1);
+		glColor4f(1., 1., 1., 1.);
 		splash->bind();
 
 		sPainter.drawRect2d(splashx, splashy, width, height);
@@ -80,14 +81,14 @@ void StelLoadingBar::Draw(float val)
 	glDisable(GL_TEXTURE_2D);
 
 	// black out background of text for redraws (so can keep sky unaltered)
-	glColor3f(0, 0, 0);
+	glColor4f(0, 0, 0, 1);
 	sPainter.drawRect2d(barx, bary-5, barwidth, 12.);
-	glColor3f(0.8, 0.8, 1);
+	glColor4f(0.8, 0.8, 1, 1);
 	sPainter.drawRect2d(barx, bary, barwidth, barheight);
-	glColor3f(0.4f, 0.4f, 0.6f);
+	glColor4f(0.4f, 0.4f, 0.6f, 1.f);
 	sPainter.drawRect2d(barx+1, bary+1, barwidth * val-2, barheight-2);
 	
-	glColor3f(1, 1, 1);
+	glColor4f(1, 1, 1, 1);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	sPainter.setFont(barfont);
@@ -95,6 +96,6 @@ void StelLoadingBar::Draw(float val)
 	sPainter.setFont(extraTextFont);
 	sPainter.drawText(splashx + extraTextPos[0], splashy + extraTextPos[1]-sPainter.getFontMetrics().height()-1, extraText);
 	
-	StelMainGraphicsView::getInstance().getOpenGLWin()->swapBuffers();	// And swap the buffers
+	StelMainGraphicsView::getInstance().swapBuffer();	// And swap the buffers
 	glClear(GL_COLOR_BUFFER_BIT);
 }
