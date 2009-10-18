@@ -474,7 +474,7 @@ static void AddRightEdges(GLUEStesselator* tess, ActiveRegion* regUp,
 static void CallCombine(GLUEStesselator* tess, GLUESvertex* isect,
                         void* data[4], GLfloat weights[4], int needed)
 {
-	GLdouble coords[3];
+        double coords[3];
 
    /* Copy coord data in case the callback changes it. */
    coords[0]=isect->coords[0];

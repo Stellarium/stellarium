@@ -115,6 +115,12 @@ StelMainGraphicsView::~StelMainGraphicsView()
 	}
 }
 
+void StelMainGraphicsView::swapBuffer()
+{
+	glWidget->swapBuffers();
+}
+
+
 void StelMainGraphicsView::init()
 {
 	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);

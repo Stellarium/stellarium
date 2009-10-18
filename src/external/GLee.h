@@ -36,6 +36,10 @@
 #ifndef __glee_h_
 #define __glee_h_
 
+#ifdef USE_OPENGL_ES2
+#include "GLES/gl.h"
+#else
+
 #ifdef __gl_h_
 	#error gl.h included before glee.h
 #endif
@@ -12448,5 +12452,7 @@ GLEE_EXTERN const char * GLeeGetExtStrGLX( void );
 #ifdef __cplusplus
 }	/* end C linkage */
 #endif
+
+#endif /* USE_OPENGL_ES2 */
 
 #endif /* __glee_h_ defined */
