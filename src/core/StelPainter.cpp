@@ -178,8 +178,12 @@ void StelPainter::initGlMatrixOrtho2d(void) const
 	// thus we never need to change to 2dMode from now on before drawing
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(prj->viewportXywh[0], prj->viewportXywh[0] + prj->viewportXywh[2],
-			prj->viewportXywh[1], prj->viewportXywh[1] + prj->viewportXywh[3], -1, 1);
+	const double left = prj->viewportXywh[0];
+	const double right = prj->viewportXywh[0] + prj->viewportXywh[2];
+	const double bottom = prj->viewportXywh[1];
+	const double top = prj->viewportXywh[1] + prj->viewportXywh[3];
+	const Mat4f m(2./(right-left), 0, 0, 0, 0, 2./(top-bottom), 0, 0, 0, 0, -1., 0., -(right+left)/(right-left), -(top+bottom)/(top-bottom), 0, 1);
+	glMultMatrixf(m);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
@@ -198,7 +202,7 @@ void StelPainter::drawViewportShape(void) const
 	glDisable(GL_BLEND);
 	glColor4f(0.f,0.f,0.f, 1.f);
 	glPushMatrix();
-	glTranslated(prj->viewportCenter[0],prj->viewportCenter[1],0.0);
+	glTranslatef(prj->viewportCenter[0],prj->viewportCenter[1],0.0);
 
 	GLfloat innerRadius = 0.5*prj->viewportFovDiameter;
 	GLfloat outerRadius = prj->getViewportWidth()+prj->getViewportHeight();

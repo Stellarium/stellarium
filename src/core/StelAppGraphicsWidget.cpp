@@ -52,7 +52,7 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 #endif
 	   )
 	{
-		qWarning("StelAppGraphicsWidget: drawBackground needs a QGLWidget to be set as viewport on the graphics view");
+		qWarning("StelAppGraphicsWidget: paint needs a QGLWidget to be set as viewport on the graphics view");
 		return;
 	}
 

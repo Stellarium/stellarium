@@ -1306,7 +1306,7 @@ SubContour::SubContour(const QVector<Vec3d>& vertices, bool closed) : QVector<Ed
 	// Create the contour list by adding the matching edge flags
 	for (int i=0;i<vertices.size();++i)
 		(*this)[i].vertex = vertices.at(i);
-	if (closed=false)
+	if (closed==false)
 	{
 		this->last().edgeFlag=false;
 	}
