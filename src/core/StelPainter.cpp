@@ -628,12 +628,6 @@ void StelPainter::drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const V
 	// Project all the vertice
 	for (int i=0;i<count;++i)
 		prj->projectInPlace(vertice[i]);
-	if (texCoords==NULL && colorArray==NULL && normalArray==NULL)
-	{
-		glInterleavedArrays(GL_V3F ,0, vertice);
-		glDrawArrays(mode, 0, count);
-		return;
-	}
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, vertice);
@@ -1410,25 +1404,37 @@ void StelPainter::drawCircle(double x,double y,double r) const
 
 void StelPainter::drawSprite2dMode(double x, double y, float radius) const
 {
-	static float vertexData[] = {0.,0.,-10.,-10.,0.,   1.,0.,10.,-10.,0.,  0.,1.,10.,10.,0,   1.,1.,-10.,10.,0.};
-	vertexData[2]=x-radius; vertexData[3]=y-radius;
-	vertexData[7]=x+radius; vertexData[8]=y-radius;
-	vertexData[12]=x-radius; vertexData[13]=y+radius;
-	vertexData[17]=x+radius; vertexData[18]=y+radius;
-	glInterleavedArrays(GL_T2F_V3F ,0, vertexData);
+	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};
+	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
+	vertexData[0]=x-radius; vertexData[1]=y-radius;
+	vertexData[2]=x+radius; vertexData[3]=y-radius;
+	vertexData[4]=x-radius; vertexData[5]=y+radius;
+	vertexData[6]=x+radius; vertexData[7]=y+radius;
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(2, GL_FLOAT, 0, vertexData);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glTexCoordPointer(2, GL_FLOAT, 0, texCoordData);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 
 void StelPainter::drawRect2d(float x, float y, float width, float height) const
 {
-	static float vertexData[] = {0.,0.,-10.,-10.,0.,   1.,0.,10.,-10.,0.,  0.,1.,10.,10.,0,   1.,1.,-10.,10.,0.};
-	vertexData[2]=x; vertexData[3]=y;
-	vertexData[7]=x+width; vertexData[8]=y;
-	vertexData[12]=x; vertexData[13]=y+height;
-	vertexData[17]=x+width; vertexData[18]=y+height;
-	glInterleavedArrays(GL_T2F_V3F ,0, vertexData);
+	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};
+	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
+	vertexData[0]=x; vertexData[1]=y;
+	vertexData[2]=x+width; vertexData[3]=y;
+	vertexData[4]=x; vertexData[5]=y+height;
+	vertexData[6]=x+width; vertexData[7]=y+height;
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(2, GL_FLOAT, 0, vertexData);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glTexCoordPointer(2, GL_FLOAT, 0, texCoordData);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 /*************************************************************************
@@ -1439,15 +1445,19 @@ void StelPainter::drawSprite2dMode(double x, double y, float radius, float rotat
 	glPushMatrix();
 	glTranslatef(x, y, 0.0);
 	glRotatef(rotation,0.,0.,1.);
-
-	static float vertexData[] = {0.,0.,-10.,-10.,0.,   1.,0.,10.,-10.,0.,  0.,1.,10.,10.,0,   1.,1.,-10.,10.,0.};
-	vertexData[2]=-radius; vertexData[3]=-radius;
-	vertexData[7]=radius; vertexData[8]=-radius;
-	vertexData[12]=-radius; vertexData[13]=radius;
-	vertexData[17]=radius; vertexData[18]=radius;
-	glInterleavedArrays(GL_T2F_V3F ,0, vertexData);
+	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};
+	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
+	vertexData[0]=-radius; vertexData[1]=-radius;
+	vertexData[2]=radius; vertexData[3]=-radius;
+	vertexData[4]=-radius; vertexData[5]=radius;
+	vertexData[6]=radius; vertexData[7]=radius;
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(2, GL_FLOAT, 0, vertexData);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glTexCoordPointer(2, GL_FLOAT, 0, texCoordData);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glPopMatrix();
 }
 
@@ -1459,8 +1469,10 @@ void StelPainter::drawPoint2d(double x, double y) const
 	static float vertexData[] = {0.,0.};
 	vertexData[0]=x;
 	vertexData[1]=y;
-	glInterleavedArrays(GL_V2F ,0, vertexData);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(2, GL_FLOAT, 0, vertexData);
 	glDrawArrays(GL_POINTS, 0, 1);
+	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 
@@ -1474,8 +1486,10 @@ void StelPainter::drawLine2d(double x1, double y1, double x2, double y2) const
 	vertexData[1]=y1;
 	vertexData[2]=x2;
 	vertexData[3]=y2;
-	glInterleavedArrays(GL_V2F ,0, vertexData);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(2, GL_FLOAT, 0, vertexData);
 	glDrawArrays(GL_LINES, 0, 2);
+	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 ///////////////////////////////////////////////////////////////////////////
