@@ -1313,9 +1313,12 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 	// Draw the fill part
 	if (drawMode!=SphericalPolygonDrawModeBoundary)
 	{
+#ifndef USE_OPENGL_ES2
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+#endif
 		glDrawArrays(GL_TRIANGLES, 0, polygonVertexArray.size());
 	}
+#ifndef USE_OPENGL_ES2
 	// Draw the boundary part
 	if (drawMode==SphericalPolygonDrawModeBoundary || drawMode==SphericalPolygonDrawModeFillAndBoundary || drawMode==SphericalPolygonDrawModeTextureFillAndBoundary)
 	{
@@ -1347,10 +1350,11 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 		}
 	}
 
-	glDisable(GL_CULL_FACE);
 	glDisableClientState(GL_EDGE_FLAG_ARRAY);
+#endif
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisable(GL_CULL_FACE);
 }
 
 void StelPainter::drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode, const Vec4f* boundaryColor) const
