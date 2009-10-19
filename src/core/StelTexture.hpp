@@ -65,11 +65,6 @@ public:
 	//! Return whether the texture can be binded, i.e. it is fully loaded
 	bool canBind() const {return id!=0;}
 
-	//! Get the average texture luminance.
-	//! @param lum 0 is black, 1 is white
-	//! @return true if the returned luminance is known, false if not. In this later case, the value of num is undefined.
-	bool getAverageLuminance(float& lum);
-
 	//! Return the width and heigth of the texture in pixels
 	bool getDimensions(int &width, int &height);
 
