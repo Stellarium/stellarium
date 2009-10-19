@@ -36,8 +36,8 @@
 #include <QDebug>
 #include <QUrl>
 #include <QImage>
-#include <QGLWidget>
 #include <QNetworkReply>
+#include <QGLWidget>
 
 // Initialize statics
 QSemaphore* StelTexture::maxLoadThreadSemaphore = new QSemaphore(5);
@@ -200,38 +200,6 @@ void StelTexture::fileLoadFinished()
 }
 
 /*************************************************************************
- Return the average texture luminance, 0 is black, 1 is white
- *************************************************************************/
-bool StelTexture::getAverageLuminance(float& lum)
-{
-	if (id==0)
-		return false;
-	
-	QMutexLocker lock(mutex);
-	StelApp::makeMainGLContextCurrent();
-	if (avgLuminance<0)
-	{
-		int size = width*height;
-		glBindTexture(GL_TEXTURE_2D, id);
-		GLfloat* p = (GLfloat*)calloc(size, sizeof(GLfloat));
-		Q_ASSERT(p);
-
-		glGetTexImage(GL_TEXTURE_2D, 0, GL_LUMINANCE, GL_FLOAT, p);
-		float sum = 0.f;
-		for (int i=0;i<size;++i)
-		{
-			sum += p[i];
-		}
-		free(p);
-
-		avgLuminance = sum/size;
-	}
-	lum = avgLuminance;
-	return true;
-}
-
-
-/*************************************************************************
  Return the width and heigth of the texture in pixels
 *************************************************************************/
 bool StelTexture::getDimensions(int &awidth, int &aheight)
@@ -338,7 +306,7 @@ bool StelTexture::glLoad()
 	{
 		// Load from qImage
 		if (mipmapsMode==true)
-			gluBuild2DMipmaps(GL_TEXTURE_2D, internalFormat, width, height, format, type, qImage.bits());
+			gluesBuild2DMipmaps(GL_TEXTURE_2D, internalFormat, width, height, format, type, qImage.bits());
 		else
 			glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, type, qImage.bits());
 		
@@ -353,7 +321,7 @@ bool StelTexture::glLoad()
 		
 		// Load from texels buffer
 		if (mipmapsMode==true)
-			gluBuild2DMipmaps(GL_TEXTURE_2D, internalFormat, width, height, format, type, texels);
+			gluesBuild2DMipmaps(GL_TEXTURE_2D, internalFormat, width, height, format, type, texels);
 		else
 			glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, type, texels);
 		
