@@ -120,6 +120,12 @@ void StelMainGraphicsView::swapBuffer()
 	glWidget->swapBuffers();
 }
 
+void StelMainGraphicsView::makeGLContextCurrent()
+{
+	Q_ASSERT(glWidget!=NULL);
+	Q_ASSERT(glWidget->isValid());
+	glWidget->makeCurrent();
+}
 
 void StelMainGraphicsView::init()
 {
