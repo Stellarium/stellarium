@@ -49,7 +49,7 @@ private:
 
 };
 
-
+#ifndef USE_OPENGL_ES2
 class StelViewportDistorterFisheyeToSphericMirror : public StelViewportDistorter
 {
 private:
@@ -573,14 +573,16 @@ void StelViewportDistorterFisheyeToSphericMirror::distort(void) const
 
 	glViewport(newProjectorParams.viewportXywh[0],newProjectorParams.viewportXywh[1],newProjectorParams.viewportXywh[2],newProjectorParams.viewportXywh[3]);
 }
-
+#endif
 
 StelViewportDistorter *StelViewportDistorter::create(const QString &type, int width,int height, StelProjectorP prj)
 {
+#ifndef USE_OPENGL_ES2
 	if (type == "fisheye_to_spheric_mirror")
 	{
 		return new StelViewportDistorterFisheyeToSphericMirror(width,height);
 	}
+#endif
 	return new StelViewportDistorterDummy;
 }
 
