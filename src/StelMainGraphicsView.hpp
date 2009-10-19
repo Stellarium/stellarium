@@ -50,6 +50,8 @@ public:
 	//! @deprecated don't use that.
 	void swapBuffer();
 
+	void makeGLContextCurrent();
+	
 	//! Delete openGL textures (to call before the GLContext disappears)
 	void deinitGL();
 	
