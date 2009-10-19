@@ -901,6 +901,7 @@ void Planet::drawOrbit(const StelCore* core)
 	orbit[ORBIT_SEGMENTS]=orbit[0];
 	int nbIter = closeOrbit ? ORBIT_SEGMENTS : ORBIT_SEGMENTS-1;
 	QVarLengthArray<float, 1024> vertexArray;
+	glEnableClientState(GL_VERTEX_ARRAY);
 	for (int n=0; n<=nbIter; ++n)
 	{
 		if (prj->project(orbit[n],onscreen))
@@ -910,7 +911,7 @@ void Planet::drawOrbit(const StelCore* core)
 		}
 		else if (!vertexArray.isEmpty())
 		{
-			glInterleavedArrays(GL_V2F, 0, vertexArray.constData());
+			glVertexPointer(2, GL_FLOAT, 0, vertexArray.constData());
 			glDrawArrays(GL_LINE_STRIP, 0, vertexArray.size()/2);
 			vertexArray.clear();
 		}
@@ -918,9 +919,10 @@ void Planet::drawOrbit(const StelCore* core)
 	orbit[ORBIT_SEGMENTS/2]=savePos;
 	if (!vertexArray.isEmpty())
 	{
-		glInterleavedArrays(GL_V2F, 0, vertexArray.constData());
+		glVertexPointer(2, GL_FLOAT, 0, vertexArray.constData());
 		glDrawArrays(GL_LINE_STRIP, 0, vertexArray.size()/2);
 	}
+	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 
