@@ -33,7 +33,11 @@
 #include <QMutex>
 #include <QVarLengthArray>
 #include <QPaintEngine>
+
+#if QT_VERSION<0x040600
 #include <QGLContext>
+#endif
+
 
 #ifndef NDEBUG
 QMutex* StelPainter::globalMutex = new QMutex();
@@ -67,6 +71,10 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 #endif
 
 	Q_ASSERT(qPainter);
+
+#if QT_VERSION>=0x040600
+	qPainter->beginNativePainting();
+#else
 	// Ensure that the current GL content is the one of our main GL window
 	QGLWidget* w = dynamic_cast<QGLWidget*>(qPainter->device());
 	if (w!=0)
@@ -74,10 +82,6 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 		Q_ASSERT(w->isValid());
 		w->makeCurrent();
 	}
-
-#if QT_VERSION>=0x040600
-	qPainter->beginNativePainting();
-#else
 	qPainter->save();
 #endif
 
@@ -111,14 +115,6 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 StelPainter::~StelPainter()
 {
 	Q_ASSERT(qPainter);
-
-	// Ensure that the current GL content is the one of our main GL window
-	QGLWidget* w = dynamic_cast<QGLWidget*>(qPainter->device());
-	if (w!=0)
-	{
-		Q_ASSERT(w->isValid());
-		w->makeCurrent();
-	}
 
 	// Restore openGL projection state for Qt drawings
 	glMatrixMode(GL_TEXTURE);
