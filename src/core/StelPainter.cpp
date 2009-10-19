@@ -614,19 +614,24 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 
 }
 
-
+static QVector<Vec2f> tmpVertexArray;
 /*************************************************************************
  Draw a gl array with 3D vertex position and optional 2D texture position.
 *************************************************************************/
 void StelPainter::drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray) const
 {
 	Q_ASSERT(vertice);
+	tmpVertexArray.reserve(count);
+	
 	// Project all the vertice
 	for (int i=0;i<count;++i)
+	{
 		prj->projectInPlace(vertice[i]);
+		tmpVertexArray[i].set(vertice[i][0], vertice[i][1]);
+	}
 
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_DOUBLE, 0, vertice);
+	glVertexPointer(2, GL_FLOAT, 0, tmpVertexArray.constData());
 
 	if (texCoords)
 	{
@@ -690,7 +695,7 @@ inline void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, V
 }
 
 // Used by the method below
-static QVector<Vec3d> smallCircleVertexArray;
+static QVector<Vec2f> smallCircleVertexArray;
 
 void drawSmallCircleVertexArray()
 {
@@ -701,7 +706,7 @@ void drawSmallCircleVertexArray()
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	// Load the vertex array
-	glVertexPointer(3, GL_DOUBLE, 0, smallCircleVertexArray.constData());
+	glVertexPointer(2, GL_FLOAT, 0, smallCircleVertexArray.constData());
 	// And draw everything at once
 	glDrawArrays(GL_LINE_STRIP, 0, smallCircleVertexArray.size());
 	glDisableClientState(GL_VERTEX_ARRAY);
@@ -746,10 +751,10 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 		const bool p2InViewport = prj->checkInViewport(p2);
 		if ((p1[2]>0 && p1InViewport) || (p2[2]>0 && p2InViewport))
 		{
-			smallCircleVertexArray.append(p1);
+			smallCircleVertexArray.append(Vec2f(p1[0], p1[1]));
 			if (i+1==tessArc.end())
 			{
-				smallCircleVertexArray.append(p2);
+				smallCircleVertexArray.append(Vec2f(p2[0], p2[1]));
 				drawSmallCircleVertexArray();
 			}
 			if (viewportEdgeIntersectCallback && p1InViewport!=p2InViewport)
@@ -765,7 +770,7 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 		{
 			// Break the line, draw the stored vertex and flush the list
 			if (!smallCircleVertexArray.isEmpty())
-				smallCircleVertexArray.append(p1);
+				smallCircleVertexArray.append(Vec2f(p1[0], p1[1]));
 			drawSmallCircleVertexArray();
 		}
 	}
@@ -774,7 +779,7 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 
 // Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 // by splitting it into subtriangles.
-void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArray<Vec3d, 4096>* outVertices,
+void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArray<Vec2f, 4096>* outVertices,
 		const bool* edgeFlags, QVarLengthArray<bool, 4096>* outEdgeFlags,
 		const Vec2f* texturePos, QVarLengthArray<Vec2f, 4096>* outTexturePos,
 		int nbI, bool checkDisc1, bool checkDisc2, bool checkDisc3) const
@@ -829,7 +834,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 	if (!cDiscontinuity1 && !cDiscontinuity2 && !cDiscontinuity3)
 	{
 		// The triangle is clean, appends it
-		outVertices->append(e0); outVertices->append(e1); outVertices->append(e2);
+		outVertices->append(Vec2f(e0[0], e0[1])); outVertices->append(Vec2f(e1[0], e1[1])); outVertices->append(Vec2f(e2[0], e2[1]));
 		if (outEdgeFlags)
 			outEdgeFlags->append(edgeFlags, 3);
 		if (outTexturePos)
@@ -845,7 +850,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 			return;
 
 		// Else display it, it will be suboptimal though.
-		outVertices->append(e0); outVertices->append(e1); outVertices->append(e2);
+		outVertices->append(Vec2f(e0[0], e0[1])); outVertices->append(Vec2f(e1[0], e1[1])); outVertices->append(Vec2f(e2[0], e2[1]));
 		if (outEdgeFlags)
 			outEdgeFlags->append(edgeFlags, 3);
 		if (outTexturePos)
@@ -1252,7 +1257,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 	return;
 }
 
-static QVarLengthArray<Vec3d, 4096> polygonVertexArray;
+static QVarLengthArray<Vec2f, 4096> polygonVertexArray;
 static QVarLengthArray<bool, 4096> polygonEdgeFlagArray;
 static QVarLengthArray<Vec2f, 4096> polygonTextureCoordArray;
 
@@ -1298,7 +1303,7 @@ void StelPainter::drawSphericalPolygon(const SphericalPolygonBase* poly, Spheric
 
 	// Load the vertex array
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_DOUBLE, 0, polygonVertexArray.constData());
+	glVertexPointer(2, GL_FLOAT, 0, polygonVertexArray.constData());
 	glEnable(GL_CULL_FACE);
 	// Load the textureCoordinates if any
 	if (drawMode==SphericalPolygonDrawModeTextureFill || drawMode==SphericalPolygonDrawModeTextureFillAndBoundary)
