@@ -24,7 +24,10 @@
 #include "StelAppGraphicsWidget.hpp"
 #include "StelPainter.hpp"
 
-#include <QtOpenGL>
+#include <QPainter>
+#include <QPaintEngine>
+#include <QGraphicsSceneMouseEvent>
+#include <QGraphicsScene>
 
 StelAppGraphicsWidget::StelAppGraphicsWidget(int argc, char** argv)
 {
