@@ -68,7 +68,6 @@
 #include <QNetworkAccessManager>
 #include <QSysInfo>
 #include <QNetworkProxy>
-#include <QGLWidget>
 #include <QMessageBox>
 
 #ifdef WIN32
@@ -1435,9 +1434,7 @@ void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
 
 void StelApp::makeMainGLContextCurrent()
 {
-	Q_ASSERT(StelMainGraphicsView::getInstance().getOpenGLWin()!=NULL);
-	Q_ASSERT(StelMainGraphicsView::getInstance().getOpenGLWin()->isValid());
-	StelMainGraphicsView::getInstance().getOpenGLWin()->makeCurrent();
+	StelMainGraphicsView::getInstance().makeGLContextCurrent();
 }
 
 void StelApp::quitStellarium()
