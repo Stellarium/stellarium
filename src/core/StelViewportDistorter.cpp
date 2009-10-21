@@ -329,6 +329,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	{
 		QFile file;
 		QDataStream in;
+		in.setVersion(QDataStream::Qt_4_5);
 		try
 		{
 			file.setFileName(StelApp::getInstance().getFileMgr().findFile(custom_distortion_file));

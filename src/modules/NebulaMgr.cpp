@@ -379,6 +379,7 @@ bool NebulaMgr::loadNGC(const QString& catNGC)
 	if (!in.open(QIODevice::ReadOnly))
 		return false;
 	QDataStream ins(&in);
+	ins.setVersion(QDataStream::Qt_4_5);
 	lb.SetMessage(q_("Loading NGC catalog"));
 	lb.Draw(0);
 	

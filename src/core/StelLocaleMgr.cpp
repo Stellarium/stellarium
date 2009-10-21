@@ -51,6 +51,7 @@ StelLocaleMgr::StelLocaleMgr() : skyTranslator(PACKAGE_NAME, INSTALL_LOCALEDIR, 
 	QFile file(path);
 	file.open(QIODevice::ReadOnly);
 	QDataStream in(&file);	// read the data serialized from the file
+	in.setVersion(QDataStream::Qt_4_5);
 	in >> countryCodeToStringMap;
 	file.close();
 }
@@ -83,6 +84,7 @@ void StelLocaleMgr::generateCountryList()
 	QFile file("countryCodes.dat");
 	file.open(QIODevice::WriteOnly);
 	QDataStream out(&file);    // save the data serialized to the file
+	out.setVersion(QDataStream::Qt_4_5);
 	out << countryCodeToStringMap;
 	file.close();
 }
