@@ -621,7 +621,7 @@ static QVector<Vec2f> tmpVertexArray;
 void StelPainter::drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray) const
 {
 	Q_ASSERT(vertice);
-	tmpVertexArray.reserve(count);
+        tmpVertexArray.resize(count);
 	
 	// Project all the vertice
 	for (int i=0;i<count;++i)
