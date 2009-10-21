@@ -79,6 +79,7 @@ void StelDownloadMgr::get(const QString& addr, const QString& filePath, quint16 
 	path = filePath;
 	target = new QFile(filePath);
 	stream = new QDataStream(target);
+	stream->setVersion(QDataStream::Qt_4_5);
 	checksum = csum;
 	received = 0;
 	total = 0;

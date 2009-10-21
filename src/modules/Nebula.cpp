@@ -187,6 +187,7 @@ void Nebula::readNGC(QDataStream& in)
 #if 0
 QFile filess("filess.dat");
 QDataStream out;
+out.setVersion(QDataStream::Qt_4_5);
 bool Nebula::readNGC(char *recordstr)
 {
 	int rahr;
