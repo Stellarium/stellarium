@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -87,11 +87,11 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "</h2>";
-	
+
 	if (flags&Extra1)
 		oss << q_("Type: <b>%1</b>").arg(getTypeString()) << "<br>";
 
-	if (mag < 50 && flags&Magnitude) 
+	if (mag < 50 && flags&Magnitude)
 		oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
 
 	oss << getPositionInfoString(core, flags);
@@ -127,7 +127,7 @@ double Nebula::getCloseViewFov(const StelNavigator*) const
 {
 	return angularSize>0 ? angularSize * 4 : 1;
 }
-						   
+
 void Nebula::drawHints(const StelPainter& sPainter, float maxMagHints)
 {
 	if (mag>maxMagHints)
@@ -159,7 +159,7 @@ void Nebula::drawLabel(const StelPainter& sPainter, float maxMagLabel)
 		else if (IC_nb > 0)
 			str = QString("IC %1").arg(IC_nb);
 	}
-	
+
 	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
 }
 
@@ -180,6 +180,7 @@ void Nebula::readNGC(QDataStream& in)
 		NGC_nb = nb;
 	}
 	StelUtils::spheToRect(ra,dec,XYZ);
+	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
 	nType = (Nebula::NebulaType)type;
 }
 
@@ -242,7 +243,7 @@ bool Nebula::readNGC(char *recordstr)
 	else if (!strncmp(&recordstr[7],"C+N",3)) { nType = NebCn;}
 	else if (!strncmp(&recordstr[8]," ?",2)) { nType = NebUnknown;}
 	else { nType = NebUnknown;}
-	
+
 	if (!filess.isOpen())
 	{
 		filess.open(QIODevice::WriteOnly);
@@ -251,7 +252,7 @@ bool Nebula::readNGC(char *recordstr)
 	out << ((bool)(recordstr[0] == 'I')) << nb << RaRad << DecRad << mag << angularSize << ((unsigned int)nType);
 	if (nb==5369 && recordstr[0] == 'I')
 		filess.close();
-	
+
 	return true;
 }
 #endif
