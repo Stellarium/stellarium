@@ -238,6 +238,7 @@ void LeftStelBar::addButton(StelButton* button)
 		posY += r.bottom()-1;
 	}
 	button->setParentItem(this);
+	button->prepareGeometryChange(); // could possibly be removed when qt 4.6 become stable
 	button->setPos(0.5, posY+10.5);
 
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
