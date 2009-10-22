@@ -949,15 +949,18 @@ void ConstellationMgr::drawBoundaries(const StelPainter& sPainter) const
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
 	glEnable(GL_LINE_SMOOTH);
+#ifndef USE_OPENGL_ES2
 	glLineStipple(2, 0x3333);
 	glEnable(GL_LINE_STIPPLE);
-
+#endif
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		(*iter)->drawBoundaryOptim(sPainter);
 	}
+#ifndef USE_OPENGL_ES2
 	glDisable(GL_LINE_STIPPLE);
+#endif
 	glDisable(GL_LINE_SMOOTH);
 }
 

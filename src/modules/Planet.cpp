@@ -632,7 +632,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 		else
 		{
 			glDisable(GL_LIGHTING);
-			glColor3fv(Vec3f(1.f,1.f,1.f));
+			glColor4f(1.f,1.f,1.f,1.f);
 		}
 
 		if (rings)
@@ -760,7 +760,7 @@ void Planet::drawEarthShadow(StelCore* core)
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glColor3f(1,1,1);
+	glColor4f(1,1,1,1);
 
 	glEnable(GL_STENCIL_TEST);
 	glStencilFunc(GL_EQUAL, 0x1, 0x1);
@@ -859,7 +859,7 @@ void Ring::draw(const StelPainter* painter,const Mat4d& mat,double screenSz)
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glColor3f(1.f, 1.f, 1.f);
+	glColor4f(1.f, 1.f, 1.f, 1.f);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
@@ -941,7 +941,7 @@ void Planet::drawTrail(const StelCore* core)
 	StelPainter sPainter(prj);
 	glEnable(GL_BLEND);
 
-	glColor3fv(trailColor*trailFader.getInterstate());
+	glColor4f(trailColor[0]*trailFader.getInterstate(), trailColor[1]*trailFader.getInterstate(), trailColor[2]*trailFader.getInterstate(), 1.);
 
 	std::list<TrailPoint>::iterator iter;
 	std::list<TrailPoint>::iterator nextiter;

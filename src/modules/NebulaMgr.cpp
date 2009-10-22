@@ -174,7 +174,7 @@ void NebulaMgr::drawPointer(const StelCore* core, const StelPainter& sPainter)
 
 		// Compute 2D pos and return if outside screen
 		if (!prj->projectInPlace(pos)) return;
-		glColor3f(0.4f,0.5f,0.8f);
+		glColor4f(0.4f,0.5f,0.8f,1.f);
 		texPointer->bind();
 
 		glEnable(GL_TEXTURE_2D);
