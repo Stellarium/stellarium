@@ -258,7 +258,8 @@ void TelescopeMgr::drawPointer(const StelProjectorP& prj, const StelNavigator * 
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos)) return;
 	
-		glColor3fv(obj->getInfoColor());
+		const Vec3d& c(obj->getInfoColor());
+		glColor4f(c[0],c[1],c[2],1.f);
 		texPointer->bind();
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);

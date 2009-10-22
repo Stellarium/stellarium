@@ -283,9 +283,9 @@ void LandscapeOldStyle::drawFog(StelCore* core) const
 	
 	glBlendFunc(GL_ONE, GL_ONE);
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
-	glColor3f(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness), 
+	glColor4f(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
 	          fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter, 
-	          fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter);
+			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter, 1);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
