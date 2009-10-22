@@ -22,6 +22,9 @@
 #include <QDebug>
 #include <QFontMetrics>
 
+#include "GLee.h"
+#include "fixx11h.h"
+
 #include "GridLinesMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelApp.hpp"
@@ -160,7 +163,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	direc.normalize();
 	GLfloat tmpColor[4];
 	glGetFloatv(GL_CURRENT_COLOR, tmpColor);
-	glColor4fv(d->textColor);
+	glColor4f(d->textColor[0], d->textColor[1], d->textColor[2], d->textColor[3]);
 	
 	QString text;
 	if (d->text.isEmpty())
@@ -220,7 +223,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	}
 	
 	d->sPainter.drawText(screenPos[0], screenPos[1], text, angleDeg, xshift, 3);
-	glColor4fv(tmpColor);
+	glColor4f(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]);
 }
 
 //! Draw the sky grid in the current frame

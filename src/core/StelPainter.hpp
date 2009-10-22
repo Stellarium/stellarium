@@ -20,8 +20,6 @@
 #ifndef _STELPAINTER_HPP_
 #define _STELPAINTER_HPP_
 
-#include "GLee.h"
-#include "fixx11h.h"
 #include "VecMath.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelProjectorType.hpp"
@@ -146,14 +144,14 @@ public:
 	//! @param count number of vertice to draw.
 	//! @param texCoords the array of Vec2f defining the uv coordinates or NULL if there are no texturing.
 	//! @param vertice the array of Vec3d defining the xyz coordinates. It is modified by the function.
-	void drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL) const;
+	void drawArrays(int mode, int count, Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL) const;
 
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
 	void sSphere(double radius, double oneMinusOblateness,
-				 GLint slices, GLint stacks, int orientInside = 0) const;
+				 int slices, int stacks, int orientInside = 0) const;
 
 	//! Re-implementation of gluCylinder : glu is overridden for non-standard projection.
-    void sCylinder(double radius, double height, GLint slices, GLint stacks, int orientInside = 0) const;
+	void sCylinder(double radius, double height, int slices, int stacks, int orientInside = 0) const;
 
 	//! Draw a disk with a special texturing mode having texture center at center of disk.
 	//! The disk is made up of concentric circles with increasing refinement.
@@ -164,10 +162,10 @@ public:
 	void sFanDisk(double radius,int innerFanSlices,int level) const;
 
 	//! Draw a ring with a radial texturing.
-	void sRing(double rMin, double rMax, GLint slices, GLint stacks, int orientInside) const;
+	void sRing(double rMin, double rMax, int slices, int stacks, int orientInside) const;
 
 	//! Draw a fisheye texture in a sphere.
-	void sSphereMap(double radius, GLint slices, GLint stacks, double textureFov = 2.*M_PI, int orientInside = 0) const;
+	void sSphereMap(double radius, int slices, int stacks, double textureFov = 2.*M_PI, int orientInside = 0) const;
 
 	//! Set the font to use for subsequent text drawing.
 	void setFont(const QFont& font);

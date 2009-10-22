@@ -139,7 +139,7 @@ void Constellation::drawArtOptim(const StelPainter& sPainter, const SphericalReg
 	float intensity = artFader.getInterstate(); 
 	if (artTexture && intensity && region.intersects(artPolygon)) 
 	{
-		glColor3f(intensity,intensity,intensity);
+		glColor4f(intensity,intensity,intensity,1);
 
 		// The texture is not fully loaded
 		if (artTexture->bind()==false)

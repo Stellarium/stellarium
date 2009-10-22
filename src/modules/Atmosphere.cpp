@@ -38,6 +38,9 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 					   averageLuminance(0.f), eclipseFactor(1.), lightPollutionLuminance(0), useShader(false)
 {
 	setFadeDuration(3.f);
+#ifdef USE_OPENGL_ES2
+	useShader=false;
+#else
 	if (GLEE_VERSION_2_0)
 	{
 		useShader=true;
@@ -84,6 +87,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 			glLinkProgram(atmoShaderProgram);
 		}
 	}
+#endif
 }
 
 Atmosphere::~Atmosphere(void)
@@ -103,11 +107,13 @@ Atmosphere::~Atmosphere(void)
 		delete[] indices;
 		indices = NULL;
 	}
+#ifndef USE_OPENGL_ES2
 	if (useShader)
 	{
 		// Cleanup shader stuff
 		glDeleteProgram(atmoShaderProgram);
 	}
+#endif
 }
 
 void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase,
@@ -155,7 +161,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 				indices[i++]=g1++;
 			}
 		}
-
+#ifndef USE_OPENGL_ES2
 		if (GLEE_ARB_vertex_buffer_object)
 		{
 			// Load the data on the GPU using vertex buffers
@@ -168,6 +174,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 			glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
 			glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
 		}
+#endif
 	}
 	
 	if (myisnan(_sunPos.length()))
@@ -324,7 +331,7 @@ void Atmosphere::draw(StelCore* core)
 	if (fader.getInterstate())
 	{
 		const float atm_intensity = fader.getInterstate();
-
+#ifndef USE_OPENGL_ES2
 		if (useShader)
 		{
 			glUseProgram(atmoShaderProgram);
@@ -371,6 +378,7 @@ void Atmosphere::draw(StelCore* core)
 		}
 		else
 		{
+#endif
 			// Adapt luminance at this point to avoid a mismatch with the adaptation value
 			for (int i=0;i<(1+skyResolutionX)*(1+skyResolutionY);++i)
 			{
@@ -378,7 +386,9 @@ void Atmosphere::draw(StelCore* core)
 				eye->xyYToRGB(c);
 				c*=atm_intensity;
 			}
+#ifndef USE_OPENGL_ES2
 		}
+#endif
 
 		StelPainter sPainter(core->getProjection2d());
 		glBlendFunc(GL_ONE, GL_ONE);
@@ -391,7 +401,7 @@ void Atmosphere::draw(StelCore* core)
 
 		// Load the color components
 		glColorPointer(4, GL_FLOAT, 0, colorGrid);
-
+#ifndef USE_OPENGL_ES2
 		if (GLEE_ARB_vertex_buffer_object)
 		{
 			// Bind the vertex and indices buffer
@@ -412,7 +422,7 @@ void Atmosphere::draw(StelCore* core)
 		}
 		else
 		{
-			
+#endif
 			// Load the vertex array
 			glVertexPointer(2, GL_FLOAT, 0, posGrid);
 			// And draw everything at once
@@ -422,16 +432,18 @@ void Atmosphere::draw(StelCore* core)
 				glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, shift);
 				shift += (skyResolutionX+1)*2;
 			}
+#ifndef USE_OPENGL_ES2
 		}
-
+#endif
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_COLOR_ARRAY);
 
 		glShadeModel(GL_FLAT);
-
+#ifndef USE_OPENGL_ES2
 		if (useShader)
 		{
 			glUseProgram(0);
 		}
+#endif
 	}
 }

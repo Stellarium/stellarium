@@ -379,7 +379,7 @@ void StelPainter::sFanDisk(double radius, int innerFanSlices, int level) const
 	drawArrays(GL_TRIANGLE_FAN, vertexArr.size()/3, (Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
 }
 
-void StelPainter::sRing(double rMin, double rMax, GLint slices, GLint stacks, int orientInside) const
+void StelPainter::sRing(double rMin, double rMax, int slices, int stacks, int orientInside) const
 {
 	double x,y;
 	int j;
@@ -429,7 +429,7 @@ static void sSphereMapTexCoordFast(double rho_div_fov, double costheta, double s
 	out << 0.5 + rho_div_fov * costheta << 0.5 + rho_div_fov * sintheta;
 }
 
-void StelPainter::sSphereMap(double radius, GLint slices, GLint stacks, double textureFov, int orientInside) const
+void StelPainter::sSphereMap(double radius, int slices, int stacks, double textureFov, int orientInside) const
 {
 	double rho,x,y,z;
 	int i, j;
@@ -618,7 +618,7 @@ static QVector<Vec2f> tmpVertexArray;
 /*************************************************************************
  Draw a gl array with 3D vertex position and optional 2D texture position.
 *************************************************************************/
-void StelPainter::drawArrays(GLenum mode, GLsizei count, Vec3d* vertice, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray) const
+void StelPainter::drawArrays(int mode, int count, Vec3d* vertice, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray) const
 {
 	Q_ASSERT(vertice);
         tmpVertexArray.resize(count);
@@ -1500,7 +1500,7 @@ void StelPainter::drawLine2d(double x1, double y1, double x2, double y2) const
 ///////////////////////////////////////////////////////////////////////////
 // Drawing methods for general (non-linear) mode
 
-void StelPainter::sSphere(double radius, double oneMinusOblateness, GLint slices, GLint stacks, int orientInside) const
+void StelPainter::sSphere(double radius, double oneMinusOblateness, int slices, int stacks, int orientInside) const
 {
 	// It is really good for performance to have Vec4f,Vec3f objects
 	// static rather than on the stack. But why?
@@ -1606,7 +1606,7 @@ void StelPainter::sSphere(double radius, double oneMinusOblateness, GLint slices
 }
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
-void StelPainter::sCylinder(double radius, double height, GLint slices, GLint stacks, int orientInside) const
+void StelPainter::sCylinder(double radius, double height, int slices, int stacks, int orientInside) const
 {
         double da, r, dz;
 	GLfloat z, nsign;

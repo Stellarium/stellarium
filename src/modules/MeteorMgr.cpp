@@ -21,6 +21,9 @@
 #include <cstdlib>
 #include <QSettings>
 
+#include "GLee.h"
+#include "fixx11h.h"
+
 #include "StelProjector.hpp"
 #include "StelNavigator.hpp"
 #include "MeteorMgr.hpp"
