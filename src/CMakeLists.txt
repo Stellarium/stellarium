@@ -1,24 +1,24 @@
 
 
 INCLUDE_DIRECTORIES(
-	${CMAKE_BINARY_DIR} 
-	${CMAKE_SOURCE_DIR}/src 
-	${CMAKE_SOURCE_DIR}/src/core 
-	${CMAKE_SOURCE_DIR}/src/gui 
-	${CMAKE_SOURCE_DIR}/src/modules 
-	${CMAKE_SOURCE_DIR}/src/planetsephems  
-	${CMAKE_SOURCE_DIR}/src/external 
-	${CMAKE_SOURCE_DIR}/src/scripting 
-	${CMAKE_SOURCE_DIR}/src/external/kfilter 
+	${CMAKE_BINARY_DIR}
+	${CMAKE_SOURCE_DIR}/src
+	${CMAKE_SOURCE_DIR}/src/core
+	${CMAKE_SOURCE_DIR}/src/gui
+	${CMAKE_SOURCE_DIR}/src/modules
+	${CMAKE_SOURCE_DIR}/src/planetsephems
+	${CMAKE_SOURCE_DIR}/src/external
+	${CMAKE_SOURCE_DIR}/src/scripting
+	${CMAKE_SOURCE_DIR}/src/external/kfilter
 	${CMAKE_SOURCE_DIR}/src/external/glues_stel/source/
 	${CMAKE_SOURCE_DIR}/src/external/glues_stel/source/libtess
-	${OPENGL_INCLUDE_DIR} 
-	${JPEG_INCLUDE_DIR} 
-	${ICONV_INCLUDE_DIR} 
-	${INTL_INCLUDE_DIR} 
-	${QT_INCLUDE_DIR}/QtScript 
-	${QT_QTSCRIPT_INCLUDE_DIR} 
-	${CMAKE_BINARY_DIR}/src 
+	${OPENGL_INCLUDE_DIR}
+	${JPEG_INCLUDE_DIR}
+	${ICONV_INCLUDE_DIR}
+	${INTL_INCLUDE_DIR}
+	${QT_INCLUDE_DIR}/QtScript
+	${QT_QTSCRIPT_INCLUDE_DIR}
+	${CMAKE_BINARY_DIR}/src
 	${QT_QTTEST_INCLUDE_DIR}
 )
 
@@ -140,6 +140,8 @@ SET(stellarium_lib_SRCS
 	core/StelFader.hpp
 	core/StelSphereGeometry.cpp
 	core/StelSphereGeometry.hpp
+	core/OctahedronPolygon.cpp
+	core/OctahedronPolygon.hpp
 	core/StelIniParser.cpp
 	core/StelIniParser.hpp
 	core/StelUtils.cpp
@@ -159,7 +161,7 @@ SET(stellarium_lib_SRCS
 	external/bytes.h
 	external/fixx11h.h
 	external/gettext.h
-        ${gl_lib_SRCS}
+		${gl_lib_SRCS}
 
 	external/kfilter/kfilterdev.h
 	external/kfilter/kfilterdev.cpp
@@ -441,7 +443,7 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/ConfigurationDialog.cpp
 		gui/StelDialog.hpp
 		gui/StelDialog.cpp)
-	
+
 	################# compiles GUI moc files ############
 	SET(stellarium_gui_MOC_HDRS
 		gui/StelGui.hpp
@@ -457,7 +459,7 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/SearchDialog.hpp
 		gui/ConfigurationDialog.hpp
 		gui/StelDialog.hpp)
-	
+
 	################# compiles .ui files ############
 	SET(stellarium_UIS
 	gui/locationDialogGui.ui
@@ -466,7 +468,7 @@ IF (GUI_MODE STREQUAL "Standard")
 	gui/viewDialog.ui
 	gui/searchDialogGui.ui
 	gui/configurationDialog.ui)
-	
+
 	IF(ENABLE_SCRIPT_CONSOLE)
 		SET(stellarium_gui_SRCS ${stellarium_gui_SRCS}
 			gui/ScriptConsole.hpp
@@ -479,14 +481,14 @@ IF (GUI_MODE STREQUAL "Standard")
 		SET(stellarium_UIS ${stellarium_UIS}
 			gui/scriptConsole.ui)
 	ENDIF(ENABLE_SCRIPT_CONSOLE)
-	
+
 	QT4_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
 	# Dummy target depending on ${stellarium_UIS_H} to trigger ui compilations
 	ADD_CUSTOM_TARGET(GenerateUiHeaders ALL DEPENDS ${stellarium_UIS_H})
-	
+
 	# After this call, stellarium_gui_MOC_SRCS = moc_stellarium_gui.cxx
 	QT4_WRAP_CPP(stellarium_gui_MOC_SRCS ${stellarium_gui_MOC_HDRS})
-	
+
 	# Compile the static library
 	ADD_LIBRARY(StelGuiLib STATIC ${stellarium_gui_SRCS} ${stellarium_gui_MOC_SRCS})
 	TARGET_LINK_LIBRARIES(StelGuiLib ${StelMain} ${extLinkerOption})
@@ -561,6 +563,8 @@ SET(tests_testStelSphereGeometry_SRCS
 	tests/testStelSphereGeometry.cpp
 	core/StelSphereGeometry.hpp
 	core/StelSphereGeometry.cpp
+	core/OctahedronPolygon.hpp
+	core/OctahedronPolygon.cpp
 	core/StelJsonParser.hpp
 	core/StelJsonParser.cpp
 	core/StelUtils.cpp
@@ -578,6 +582,8 @@ SET(tests_testStelSphericalIndex_SRCS
 	core/StelSphericalIndex.cpp
 	core/StelSphereGeometry.hpp
 	core/StelSphereGeometry.cpp
+	core/OctahedronPolygon.hpp
+	core/OctahedronPolygon.cpp
 	core/StelJsonParser.hpp
 	core/StelJsonParser.cpp
 	core/StelUtils.cpp

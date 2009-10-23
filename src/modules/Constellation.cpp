@@ -1,12 +1,12 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -42,13 +42,13 @@ Constellation::Constellation() : asterism(NULL)
 }
 
 Constellation::~Constellation()
-{   
+{
 	if (asterism) delete[] asterism;
 	asterism = NULL;
 }
 
 bool Constellation::read(const QString& record, StarMgr *starMgr)
-{   
+{
 	unsigned int HP;
 
 	abbreviation.clear();
@@ -58,7 +58,7 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 	QTextStream istr(&buf, QIODevice::ReadOnly);
 	QString abb;
 	istr >> abb >> numberOfSegments;
-	if (istr.status()!=QTextStream::Ok) 
+	if (istr.status()!=QTextStream::Ok)
 		return false;
 
 	abbreviation = abb.toUpper();
@@ -100,11 +100,11 @@ void Constellation::drawOptim(const StelPainter& sPainter, const StelNavigator* 
 	if(!lineFader.getInterstate()) return;
 
 	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);	
+	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
 	glColor4f(lineColor[0], lineColor[1], lineColor[2], lineFader.getInterstate());
-	
+
 	Vec3d star1;
 	Vec3d star2;
 	Vec3d dummy;
@@ -136,16 +136,16 @@ void Constellation::drawName(const StelPainter& sPainter) const
 
 void Constellation::drawArtOptim(const StelPainter& sPainter, const SphericalRegion& region) const
 {
-	float intensity = artFader.getInterstate(); 
-	if (artTexture && intensity && region.intersects(artPolygon)) 
+	float intensity = artFader.getInterstate();
+	if (artTexture && intensity && region.intersects(artPolygon))
 	{
 		glColor4f(intensity,intensity,intensity,1);
 
 		// The texture is not fully loaded
 		if (artTexture->bind()==false)
 			return;
-		
-		sPainter.drawSphericalPolygon(&artPolygon, StelPainter::SphericalPolygonDrawModeTextureFill);
+
+		sPainter.drawSphericalRegion(&artPolygon, StelPainter::SphericalPolygonDrawModeTextureFill);
 	}
 }
 
@@ -191,7 +191,7 @@ void Constellation::drawBoundaryOptim(const StelPainter& sPainter) const
 		return;
 
 	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);	
+	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
 	glColor4f(boundaryColor[0], boundaryColor[1], boundaryColor[2], boundaryFader.getInterstate());
@@ -202,14 +202,14 @@ void Constellation::drawBoundaryOptim(const StelPainter& sPainter) const
 
 	if (singleSelected) size = isolatedBoundarySegments.size();
 	else size = sharedBoundarySegments.size();
-	
+
 	for (i=0;i<size;i++)
 	{
 		if (singleSelected) points = isolatedBoundarySegments[i];
 		else points = sharedBoundarySegments[i];
 
 		for (j=0;j<points->size()-1;j++)
-			sPainter.drawGreatCircleArc(points->at(j), points->at(j+1));		
+			sPainter.drawGreatCircleArc(points->at(j), points->at(j+1));
 	}
 }
 
