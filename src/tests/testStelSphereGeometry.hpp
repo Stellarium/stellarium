@@ -29,6 +29,7 @@ class TestStelSphericalGeometry : public QObject
 Q_OBJECT
 private slots:
 	void initTestCase();
+	void testOctahedronPolygon();
 	void testSphericalCap();
 	void testContains();
 	void testPlaneIntersect2();
@@ -37,12 +38,11 @@ private slots:
 	void testConsistency();
 	void testLoading();
 	void testEnlarge();
-	void testSphericalContour();
 	void benchmarkContains();
 	void benchmarkCheckValid();
 	void benchmarkSphericalCap();
 	void benchmarkGetIntersection();
-	
+
 private:
 	SphericalPolygon holySquare;
 	SphericalPolygon bigSquare;
@@ -51,6 +51,8 @@ private:
 	SphericalConvexPolygon bigSquareConvex;
 	SphericalConvexPolygon smallSquareConvex;
 	SphericalConvexPolygon triangle;
+	SphericalPolygon northPoleSquare;
+	SphericalPolygon southPoleSquare;
 };
 
 #endif // _TESTSTELSPHERICALGEOMETRY_HPP_
