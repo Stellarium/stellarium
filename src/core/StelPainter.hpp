@@ -44,11 +44,9 @@ public:
 	//! Define the drawing mode when drawing polygons
 	enum SphericalPolygonDrawMode
 	{
-		SphericalPolygonDrawModeFill=0,           //!< Draw the interior of the polygon only
-		SphericalPolygonDrawModeBoundary=1,       //!< Draw the boundary of the polygon only
-		SphericalPolygonDrawModeFillAndBoundary=2,//!< Draw both the interior and the boundary of the polygon
-		SphericalPolygonDrawModeTextureFill=3,	//!< Draw the interior of the polygon only filled with the current texture
-		SphericalPolygonDrawModeTextureFillAndBoundary=4 //!< Draw the interior of the polygon filled with the current texture and the boundary
+		SphericalPolygonDrawModeFill=0,			//!< Draw the interior of the polygon
+		SphericalPolygonDrawModeBoundary=1,		//!< Draw the boundary of the polygon
+		SphericalPolygonDrawModeTextureFill=2	//!< Draw the interior of the polygon filled with the current texture
 	};
 
 	explicit StelPainter(const StelProjectorP& prj);
@@ -73,18 +71,14 @@ public:
 	void drawText(float x, float y, const QString& str, float angleDeg=0.f,
 			  float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
 
-	//! Draw the given SphericalPolygon.
-	//! @param spoly The SphericalPolygon to draw.
-	//! @param drawMode define whether to draw the outline or the fill or both.
-	//! @param boundaryColor use this color for drawing the boundary only if the drawMode is SphericalPolygonDrawModeFillAndBoundary.
-	//! TODO: Can be optimized by at least a factor of 2 by avoiding projecting more than 1 time every vertex.
-	void drawSphericalPolygon(const SphericalPolygonBase* spoly, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const Vec4f* boundaryColor=NULL) const;
-
 	//! Draw the given SphericalRegion.
 	//! @param region The SphericalRegion to draw.
 	//! @param drawMode define whether to draw the outline or the fill or both.
 	//! @param boundaryColor use this color for drawing the boundary only if the drawMode is SphericalPolygonDrawModeFillAndBoundary.
-	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const Vec4f* boundaryColor=NULL) const;
+	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill) const;
+
+	void drawGreatCircleArcs(const StelVertexArray& va) const;
+	void drawSphericalTriangles(const StelVertexArray& va, bool textured) const;
 
 	//! Draw a small circle arc between points start and stop with rotation point in rotCenter.
 	//! The angle between start and stop must be < 180 deg.
@@ -147,8 +141,7 @@ public:
 	void drawArrays(int mode, int count, Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL) const;
 
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
-	void sSphere(double radius, double oneMinusOblateness,
-				 int slices, int stacks, int orientInside = 0) const;
+	void sSphere(double radius, double oneMinusOblateness, int slices, int stacks, int orientInside = 0) const;
 
 	//! Re-implementation of gluCylinder : glu is overridden for non-standard projection.
 	void sCylinder(double radius, double height, int slices, int stacks, int orientInside = 0) const;
@@ -189,7 +182,6 @@ private:
 	//! @param edgeFlags a pointer to an array of 3 flags indicating whether the next segment is an edge.
 	//! @param texturePos a pointer to an array of 3 texture coordinates, or NULL if the triangle should not be textured.
 	void projectSphericalTriangle(const Vec3d* vertices, QVarLengthArray<Vec2f, 4096>* outVertices,
-			const bool* edgeFlags=NULL, QVarLengthArray<bool, 4096>* outEdgeFlags=NULL,
 			const Vec2f* texturePos=NULL, QVarLengthArray<Vec2f, 4096>* outTexturePos=NULL,int nbI=0,
 			bool checkDisc1=true, bool checkDisc2=true, bool checkDisc3=true) const;
 
