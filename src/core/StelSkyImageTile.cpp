@@ -151,17 +151,16 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		}
 		else
 		{
-			foreach (const SphericalRegionP poly, skyConvexPolygons)
+			foreach (const SphericalRegionP& poly, skyConvexPolygons)
 			{
-				const SphericalPolygonBase& polyBase = *(static_cast<const SphericalPolygonBase*>(poly.data()));
-				if (viewPortPoly->contains(polyBase))
+				if (viewPortPoly->contains(poly))
 				{
 					intersectScreen = true;
 				}
 				else
 				{
 					fullInScreen = false;
-					if (viewPortPoly->intersects(polyBase))
+					if (viewPortPoly->intersects(poly))
 						intersectScreen = true;
 				}
 			}
@@ -265,7 +264,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, const StelPainter& sPainter)
 		color.set(ad_lum,ad_lum,ad_lum, 1.);
 	}
 
-	glColor4f(color[0], color[1], color[2], 1.f);
+	glColor4f(color[0], color[1], color[2], color[3]);
 	glEnable(GL_TEXTURE_2D);
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
 		sPainter.drawSphericalRegion(poly.data(), StelPainter::SphericalPolygonDrawModeTextureFill);

@@ -172,7 +172,7 @@ bool StelSkyPolygon::drawTile(StelCore* core)
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 
 	foreach (const SphericalConvexPolygon& poly, skyConvexPolygons)
-		sPainter.drawSphericalPolygon(&poly);
+		sPainter.drawSphericalRegion(&poly);
 
 	return true;
 }

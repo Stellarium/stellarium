@@ -44,14 +44,14 @@ public:
 	{
 		rootNode->processAll(func);
 	}
-	
+
 	void clear()
 	{
 		rootNode->clear();
 	}
 
 private:
-	
+
 	//! The elements stored in the container.
 	struct NodeElem
 	{
@@ -99,7 +99,7 @@ private:
 			children[3].triangle = SphericalConvexPolygon(e2,e0,e1);
 			Q_ASSERT(children[3].triangle.checkValid());
 		}
-		
+
 		//! Suppress everything
 		void clear()
 		{
@@ -116,7 +116,7 @@ private:
 			RootNode(int amaxObjectsPerNode, int amaxLevel) : maxObjectsPerNode(amaxObjectsPerNode), maxLevel(amaxLevel)
 			{
 			}
-		
+
 			//! Create the 8 triangles of the octahedron.
 			virtual void split()
 			{
@@ -129,7 +129,7 @@ private:
 				{
 					{0,2,1}, {0,1,4}, {0,4,3}, {0,3,2}, {5,1,2}, {5,4,1}, {5,3,4}, {5,2,3}
 				};
-			
+
 				// Create the 8 base triangles
 				Node node;
 				for (int i=0;i<8;++i)
@@ -139,25 +139,25 @@ private:
 					children.append(node);
 				}
 			}
-		
+
 			//! Insert the given element in the StelSphericalIndex.
 			void insert(const NodeElem& el, int level)
 			{
 				insert(*this, el, level);
 			}
-		
+
 			//! Process all the objects intersecting the given region using the passed function object.
 			template<class FuncObject> void processIntersectingRegions(const SphericalRegionP& region, FuncObject& func) const
 			{
 				processIntersectingRegions(*this, region, func);
 			}
-		
+
 			//! Process all the objects intersecting the given region using the passed function object.
 			template<class FuncObject> void processAll(FuncObject& func) const
 			{
 				processAll(*this, func);
 			}
-				
+
 		private:
 			//! Insert the given element in the given node.
 			void insert(Node& node, const NodeElem& el, int level)
@@ -179,11 +179,11 @@ private:
 					}
 					return;
 				}
-				
+
 				// If we have children and one of them contains the element, store it in a sub-level
 				for (QVector<Node>::iterator iter = node.children.begin(); iter!=node.children.end(); ++iter)
 				{
-					if (((SphericalRegion*)&(iter->triangle))->contains(el.obj->getRegion()))
+					if (((SphericalRegion*)&(iter->triangle))->contains(el.obj->getRegion().data()))
 					{
 						insert(*iter, el, level+1);
 						return;
@@ -198,7 +198,7 @@ private:
 			{
 				foreach (const NodeElem& el, node.elements)
 				{
-					if (region->intersects(el.obj->getRegion()))
+					if (region->intersects(el.obj->getRegion().data()))
 						func(el.obj);
 				}
 				foreach (const Node& child, node.children)
@@ -218,16 +218,16 @@ private:
 				foreach (const Node& child, node.children)
 					processAll(child, func);
 			}
-		
+
 			//! The maximum number of objects per node.
 			int maxObjectsPerNode;
 			//! The maximum level of the grid. Prevents grid split into too small triangles if unecessary.
 			int maxLevel;
 	};
-	
+
 	//! The maximum allowed number of object per node.
 	int maxObjectsPerNode;
-	
+
 	RootNode* rootNode;
 };
 

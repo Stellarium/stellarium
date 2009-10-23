@@ -25,8 +25,6 @@
 #include "StelUtils.hpp"
 #include "StelJsonParser.hpp"
 
-#include "glues.h"
-
 // Definition of static constants.
 const QVariant::Type SphericalRegionP::qVariantType = (QVariant::Type)(QVariant::UserType+1);
 int SphericalRegionP::metaTypeId = SphericalRegionP::initialize();
@@ -38,33 +36,33 @@ int SphericalRegionP::initialize()
 	return id;
 }
 
-SphericalRegionP SphericalRegionP::getIntersection(const SphericalRegionP& reg1, const SphericalRegionP& reg2)
-{
-	if (reg1->getType()==SphericalRegion::AllSky)
-	{
-		if (reg2->getType()==SphericalRegion::AllSky)
-			return SphericalRegionP(new AllSkySphericalRegion());
-		return SphericalRegionP(new SphericalPolygon(reg2->toSphericalPolygon()));
-	}
-	if (reg2->getType()==SphericalRegion::AllSky)
-		return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon()));
-
-	return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon().getIntersection(reg2->toSphericalPolygon())));
-}
-
-SphericalRegionP SphericalRegionP::getUnion(const SphericalRegionP& reg1, const SphericalRegionP& reg2)
-{
-	if (reg1->getType()==SphericalRegion::AllSky || reg2->getType()!=SphericalRegion::AllSky)
-	{
-		return SphericalRegionP(new AllSkySphericalRegion());
-	}
-	return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon().getUnion(reg2->toSphericalPolygon())));
-}
-
-SphericalRegionP SphericalRegionP::getSubtraction(const SphericalRegionP& reg1, const SphericalRegionP& reg2)
-{
-	return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon().getSubtraction(reg2->toSphericalPolygon())));
-}
+//SphericalRegionP SphericalRegionP::getIntersection(const SphericalRegionP& reg1, const SphericalRegionP& reg2)
+//{
+//	if (reg1->getType()==SphericalRegion::AllSky)
+//	{
+//		if (reg2->getType()==SphericalRegion::AllSky)
+//			return SphericalRegionP(new AllSkySphericalRegion());
+//		return SphericalRegionP(new SphericalPolygon(reg2->toSphericalPolygon()));
+//	}
+//	if (reg2->getType()==SphericalRegion::AllSky)
+//		return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon()));
+//
+//	return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon().getIntersection(reg2->toSphericalPolygon())));
+//}
+//
+//SphericalRegionP SphericalRegionP::getUnion(const SphericalRegionP& reg1, const SphericalRegionP& reg2)
+//{
+//	if (reg1->getType()==SphericalRegion::AllSky || reg2->getType()!=SphericalRegion::AllSky)
+//	{
+//		return SphericalRegionP(new AllSkySphericalRegion());
+//	}
+//	return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon().getUnion(reg2->toSphericalPolygon())));
+//}
+//
+//SphericalRegionP SphericalRegionP::getSubtraction(const SphericalRegionP& reg1, const SphericalRegionP& reg2)
+//{
+//	return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon().getSubtraction(reg2->toSphericalPolygon())));
+//}
 
 QDataStream& operator<<(QDataStream& out, const SphericalRegionP& region)
 {
@@ -78,7 +76,7 @@ QDataStream& operator>>(QDataStream& in, SphericalRegionP& region)
 	in >> v;
 	try
 	{
-		region=SphericalRegion::loadFromQVariant(v);
+		region=SphericalRegionP::loadFromQVariant(v);
 	}
 	catch (std::runtime_error& e)
 	{
@@ -88,46 +86,10 @@ QDataStream& operator>>(QDataStream& in, SphericalRegionP& region)
 	return in;
 }
 
-bool SphericalRegion::contains(const SphericalRegionP& region) const
-{
-	switch (region->getType())
-	{
-		case SphericalRegion::Point:
-			return contains(static_cast<const SphericalPoint*>(region.data())->n);
-		case SphericalRegion::Cap:
-			return contains(*static_cast<const SphericalCap*>(region.data()));
-		case SphericalRegion::Polygon:
-		case SphericalRegion::ConvexPolygon:
-			return contains(*static_cast<const SphericalPolygonBase*>(region.data()));
-		case SphericalRegion::AllSky:
-			return contains(*static_cast<const AllSkySphericalRegion*>(region.data()));
-		case SphericalRegion::Empty:
-			return false;
-	}
-	Q_ASSERT(0);
-	return false;
-}
 
-bool SphericalRegion::intersects(const SphericalRegionP& region) const
-{
-	switch (region->getType())
-	{
-		case SphericalRegion::Point:
-			return contains(static_cast<const SphericalPoint*>(region.data())->n);
-		case SphericalRegion::Cap:
-			return intersects(*static_cast<const SphericalCap*>(region.data()));
-		case SphericalRegion::Polygon:
-		case SphericalRegion::ConvexPolygon:
-			return intersects(*static_cast<const SphericalPolygonBase*>(region.data()));
-		case SphericalRegion::AllSky:
-			return intersects(*static_cast<const AllSkySphericalRegion*>(region.data()));
-		case SphericalRegion::Empty:
-			return false;
-	}
-	Q_ASSERT(0);
-	return false;
-}
-
+///////////////////////////////////////////////////////////////////////////////////////////////
+// Default implmentations of methods for SphericalRegion
+///////////////////////////////////////////////////////////////////////////////////////////////
 QByteArray SphericalRegion::toJSON() const
 {
 	QByteArray res;
@@ -136,22 +98,6 @@ QByteArray SphericalRegion::toJSON() const
 	StelJsonParser::write(toQVariant(), buf1);
 	buf1.close();
 	return res;
-}
-
-bool SphericalPoint::intersects(const SphericalPolygonBase& mpoly) const
-{
-	const SphericalConvexPolygon* cvx = dynamic_cast<const SphericalConvexPolygon*>(&mpoly);
-	if (cvx!=NULL)
-		return cvx->contains(n);
-	else
-		return static_cast<const SphericalPolygon*>(&mpoly)->contains(n);
-}
-
-SphericalPolygon SphericalPoint::toSphericalPolygon() const
-{
-	QVector<Vec3d> contour;
-	contour << n << n << n;
-	return SphericalPolygon(contour);
 }
 
 SphericalRegionP SphericalRegion::getEnlarged(double margin) const
@@ -166,26 +112,193 @@ SphericalRegionP SphericalRegion::getEnlarged(double margin) const
 	return SphericalRegionP(new SphericalCap(cap.n, std::cos(newRadius)));
 }
 
-SphericalPolygon SphericalCap::toSphericalPolygon() const
+QVector<SphericalCap> SphericalRegion::getBoundingSphericalCaps() const
 {
-	return toSphericalConvexPolygon().toSphericalPolygon();
+	QVector<SphericalCap> res;
+	res << getBoundingCap();
+	return res;
 }
 
-// Returns whether a SphericalPolygon is contained into the region.
-bool SphericalCap::contains(const SphericalPolygonBase& polyBase) const
+// Default slow implementation o(n^2).
+SphericalCap SphericalRegion::getBoundingCap() const
 {
-	const SphericalConvexPolygon* cvx = dynamic_cast<const SphericalConvexPolygon*>(&polyBase);
-	if (cvx!=NULL)
+	Vec3d p1(1,0,0), p2(1,0,0);
+	double maxDist=1.;
+	const QVector<Vec3d>& trianglesArray = getOctahedronPolygon().getFillVertexArray().vertex;
+	foreach (const Vec3d& v1, trianglesArray)
 	{
-		foreach (const Vec3d& v, cvx->getConvexContour())
+		foreach (const Vec3d& v2, trianglesArray)
 		{
-			if (!contains(v))
-				return false;
+			if (v1*v2<maxDist)
+			{
+				p1 = v1;
+				p2 = v2;
+				maxDist = v1*v2;
+			}
 		}
-		return true;
 	}
-	Q_ASSERT(0); // Not implemented
+	Vec3d res = p1+p2;
+	res.normalize();
+	return SphericalCap(res, res*p1);
+}
+
+bool SphericalRegion::contains(const SphericalPolygon& r) const {return containsDefault(&r);}
+bool SphericalRegion::contains(const SphericalConvexPolygon& r) const {return containsDefault(&r);}
+bool SphericalRegion::contains(const SphericalCap& r) const {return containsDefault(&r);}
+bool SphericalRegion::contains(const SphericalPoint& r) const {return contains(r.n);}
+bool SphericalRegion::contains(const AllSkySphericalRegion& r) const {return containsDefault(&r);}
+bool SphericalRegion::contains(const SphericalRegion* r) const
+{
+	switch (r->getType())
+	{
+		case SphericalRegion::Point:
+			return contains(static_cast<const SphericalPoint*>(r)->n);
+		case SphericalRegion::Cap:
+			return contains(*static_cast<const SphericalCap*>(r));
+		case SphericalRegion::Polygon:
+			return contains(*static_cast<const SphericalPolygon*>(r));
+		case SphericalRegion::ConvexPolygon:
+			return contains(*static_cast<const SphericalConvexPolygon*>(r));
+		case SphericalRegion::AllSky:
+			return contains(*static_cast<const AllSkySphericalRegion*>(r));
+		case SphericalRegion::Empty:
+			return false;
+		default:
+			return containsDefault(r);
+	}
+	Q_ASSERT(0);
 	return false;
+}
+
+bool SphericalRegion::intersects(const SphericalPolygon& r) const {return intersectsDefault(&r);}
+bool SphericalRegion::intersects(const SphericalConvexPolygon& r) const {return intersectsDefault(&r);}
+bool SphericalRegion::intersects(const SphericalCap& r) const {return intersectsDefault(&r);}
+bool SphericalRegion::intersects(const SphericalPoint& r) const {return contains(r.n);}
+bool SphericalRegion::intersects(const AllSkySphericalRegion& r) const {return getType()==SphericalRegion::Empty ? false : true;}
+bool SphericalRegion::intersects(const SphericalRegion* r) const
+{
+	switch (r->getType())
+	{
+		case SphericalRegion::Point:
+			return intersects(static_cast<const SphericalPoint*>(r)->n);
+		case SphericalRegion::Cap:
+			return intersects(*static_cast<const SphericalCap*>(r));
+		case SphericalRegion::Polygon:
+			return intersects(*static_cast<const SphericalPolygon*>(r));
+		case SphericalRegion::ConvexPolygon:
+			return intersects(*static_cast<const SphericalConvexPolygon*>(r));
+		case SphericalRegion::AllSky:
+			return intersects(*static_cast<const AllSkySphericalRegion*>(r));
+		case SphericalRegion::Empty:
+			return false;
+		default:
+			return intersectsDefault(r);
+	}
+	Q_ASSERT(0);
+	return false;
+}
+
+SphericalRegionP SphericalRegion::getIntersection(const SphericalRegion* r) const
+{
+	switch (r->getType())
+	{
+		case SphericalRegion::Point:
+			return getIntersection(static_cast<const SphericalPoint*>(r)->n);
+		case SphericalRegion::Cap:
+			return getIntersection(*static_cast<const SphericalCap*>(r));
+		case SphericalRegion::Polygon:
+			return getIntersection(*static_cast<const SphericalPolygon*>(r));
+		case SphericalRegion::ConvexPolygon:
+			return getIntersection(*static_cast<const SphericalConvexPolygon*>(r));
+		case SphericalRegion::AllSky:
+			return getIntersection(*static_cast<const AllSkySphericalRegion*>(r));
+		case SphericalRegion::Empty:
+			return false;
+		default:
+			return getIntersectionDefault(r);
+	}
+	Q_ASSERT(0);
+	return SphericalRegionP();
+}
+SphericalRegionP SphericalRegion::getIntersection(const SphericalPolygon& r) const {return getIntersectionDefault(&r);}
+SphericalRegionP SphericalRegion::getIntersection(const SphericalConvexPolygon& r) const {return getIntersectionDefault(&r);}
+SphericalRegionP SphericalRegion::getIntersection(const SphericalCap& r) const {return getIntersectionDefault(&r);}
+SphericalRegionP SphericalRegion::getIntersection(const SphericalPoint& r) const {return getIntersectionDefault(&r);}
+SphericalRegionP SphericalRegion::getIntersection(const AllSkySphericalRegion& r) const {return getIntersectionDefault(&r);}
+SphericalRegionP SphericalRegion::getIntersection(const EmptySphericalRegion& r) const {return SphericalRegionP(new EmptySphericalRegion());}
+
+SphericalRegionP SphericalRegion::getUnion(const SphericalPolygon& r) const {return getUnionDefault(&r);}
+SphericalRegionP SphericalRegion::getUnion(const SphericalConvexPolygon& r) const {return getUnionDefault(&r);}
+SphericalRegionP SphericalRegion::getUnion(const SphericalCap& r) const {return getUnionDefault(&r);}
+SphericalRegionP SphericalRegion::getUnion(const SphericalPoint& r) const {return getUnionDefault(&r);}
+SphericalRegionP SphericalRegion::getUnion(const AllSkySphericalRegion& r) const {return SphericalRegionP(new AllSkySphericalRegion());}
+SphericalRegionP SphericalRegion::getUnion(const EmptySphericalRegion& r) const {return getUnionDefault(&r);}
+
+SphericalRegionP SphericalRegion::getSubtraction(const SphericalPolygon& r) const {return getSubtractionDefault(&r);}
+SphericalRegionP SphericalRegion::getSubtraction(const SphericalConvexPolygon& r) const {return getSubtractionDefault(&r);}
+SphericalRegionP SphericalRegion::getSubtraction(const SphericalCap& r) const {return getSubtractionDefault(&r);}
+SphericalRegionP SphericalRegion::getSubtraction(const SphericalPoint& r) const {return getSubtractionDefault(&r);}
+SphericalRegionP SphericalRegion::getSubtraction(const AllSkySphericalRegion& r) const {return SphericalRegionP(new EmptySphericalRegion());}
+SphericalRegionP SphericalRegion::getSubtraction(const EmptySphericalRegion& r) const {return getSubtractionDefault(&r);}
+
+// Returns whether another SphericalPolygon intersects with the SphericalPolygon.
+bool SphericalRegion::containsDefault(const SphericalRegion* r) const
+{
+	if (!getBoundingCap().contains(r->getBoundingCap()))
+		return false;
+	return getOctahedronPolygon().contains(r->getOctahedronPolygon());
+}
+
+// Returns whether another SphericalPolygon intersects with the SphericalPolygon.
+bool SphericalRegion::intersectsDefault(const SphericalRegion* r) const
+{
+	if (!getBoundingCap().intersects(r->getBoundingCap()))
+		return false;
+	return getOctahedronPolygon().intersects(r->getOctahedronPolygon());
+}
+
+// Return a new SphericalPolygon consisting of the intersection of this and the given SphericalPolygon.
+SphericalRegionP SphericalRegion::getIntersectionDefault(const SphericalRegion* r) const
+{
+	if (!getBoundingCap().intersects(r->getBoundingCap()))
+		return SphericalRegionP(new EmptySphericalRegion());
+	OctahedronPolygon resOct(getOctahedronPolygon());
+	resOct.inPlaceIntersection(r->getOctahedronPolygon());
+	return SphericalRegionP(new SphericalPolygon(resOct));
+}
+
+// Return a new SphericalPolygon consisting of the union of this and the given SphericalPolygon.
+SphericalRegionP SphericalRegion::getUnionDefault(const SphericalRegion* r) const
+{
+	OctahedronPolygon resOct(getOctahedronPolygon());
+	resOct.inPlaceUnion(r->getOctahedronPolygon());
+	return SphericalRegionP(new SphericalPolygon(resOct));
+}
+
+// Return a new SphericalPolygon consisting of the subtraction of the given SphericalPolygon from this.
+SphericalRegionP SphericalRegion::getSubtractionDefault(const SphericalRegion* r) const
+{
+	OctahedronPolygon resOct(getOctahedronPolygon());
+	resOct.inPlaceSubtraction(r->getOctahedronPolygon());
+	return SphericalRegionP(new SphericalPolygon(resOct));
+}
+
+
+
+
+////////////////////////////////////////////////////////////////////////////
+// Methods for SphericalCap
+////////////////////////////////////////////////////////////////////////////
+
+// Returns whether a SphericalPolygon is contained into the region.
+bool SphericalCap::contains(const SphericalConvexPolygon& cvx) const
+{
+	foreach (const Vec3d& v, cvx.getConvexContour())
+	{
+		if (!contains(v))
+			return false;
+	}
+	return true;
 }
 
 bool SphericalCap::intersectsConvexContour(const Vec3d* vertice, int nbVertice) const
@@ -214,14 +327,16 @@ bool SphericalCap::intersectsConvexContour(const Vec3d* vertice, int nbVertice) 
 }
 
 // Returns whether a SphericalPolygon intersects the region.
-bool SphericalCap::intersects(const SphericalPolygonBase& polyBase) const
+bool SphericalCap::intersects(const SphericalConvexPolygon& cvx) const
 {
 	// TODO This algo returns sometimes false positives!!
-	const SphericalConvexPolygon* cvx = dynamic_cast<const SphericalConvexPolygon*>(&polyBase);
-	if (cvx!=NULL)
-		return intersectsConvexContour(cvx->getConvexContour().constData(), cvx->getConvexContour().size());
+	return intersectsConvexContour(cvx.getConvexContour().constData(), cvx.getConvexContour().size());
+}
+
+bool SphericalCap::intersects(const SphericalPolygon& polyBase) const
+{
 	// Go through the full list of triangle
-	const QVector<Vec3d>& vArray = polyBase.getVertexArray().vertex;
+	const QVector<Vec3d>& vArray = polyBase.getFillVertexArray().vertex;
 	for (int i=0;i<vArray.size()/3;++i)
 	{
 		if (intersectsConvexContour(vArray.constData()+i*3, 3))
@@ -230,8 +345,7 @@ bool SphericalCap::intersects(const SphericalPolygonBase& polyBase) const
 	return false;
 }
 
-// Convert the cap into a SphericalRegionBase instance.
-SphericalConvexPolygon SphericalCap::toSphericalConvexPolygon() const
+QVector<Vec3d> SphericalCap::getClosedOutlineContour() const
 {
 	static const int nbStep = 40;
 	QVector<Vec3d> contour;
@@ -246,492 +360,113 @@ SphericalConvexPolygon SphericalCap::toSphericalConvexPolygon() const
 		contour.append(p);
 		p.transfo4d(rot);
 	}
-	return SphericalConvexPolygon(contour);
+	return contour;
 }
 
-SphericalPolygon AllSkySphericalRegion::toSphericalPolygon() const
+OctahedronPolygon SphericalCap::getOctahedronPolygon() const
 {
-	Q_ASSERT(0); return SphericalPolygon();
+	return OctahedronPolygon(getClosedOutlineContour());
 }
 
-///////////////////////////////////////////////////////////////////////////////
-// Methods for SphericalPolygonBase
-///////////////////////////////////////////////////////////////////////////////
-
-struct UserDataSimplifiedContours
+QVariantMap SphericalCap::toQVariant() const
 {
-	// Contour used by the tesselator as temporary objects
-	QList<Vec3d> tmpVectors;
-	// Contour used by the tesselator as temporary objects
-	QVector<QVector<Vec3d> > resultContours;
-};
-
-void  errorCallback(GLenum errno)
-{
-	qWarning() << "Tesselator error:" << QString::fromAscii((char*)gluesErrorString(errno));
-	Q_ASSERT(0);
-}
-
-void  contourBeginCallback(GLenum type, void* userData)
-{
-	Q_ASSERT(type==GL_LINE_LOOP);
-	UserDataSimplifiedContours* d = static_cast<UserDataSimplifiedContours*>(userData);
-	d->resultContours.append(QVector<Vec3d>());
-}
-
-void  contourVertexCallback(void* vertexData, void* userData)
-{
-	const double* v = (double*)vertexData;
-	UserDataSimplifiedContours* d = static_cast<UserDataSimplifiedContours*>(userData);
-	d->resultContours.last().append(Vec3d(v[0], v[1], v[2]));
-}
-
-void  combineCallbackSimple(double coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
-{
-	UserDataSimplifiedContours* d = static_cast<UserDataSimplifiedContours*>(userData);
-	d->tmpVectors.append(Vec3d(coords[0], coords[1], coords[2]));
-	d->tmpVectors.last().normalize();
-	*outData = d->tmpVectors.last();
-}
-
-QVector<QVector<Vec3d> > SphericalPolygonBase::getSimplifiedContours() const
-{
-	// Use GLUES tesselation functions to compute the contours from the list of triangles
-	GLUEStesselator* tess = gluesNewTess();
-	gluesTessCallback(tess, GLUES_TESS_BEGIN_DATA, (GLvoid(*)()) &contourBeginCallback);
-	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(*)()) &contourVertexCallback);
-	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid (*) ()) &errorCallback);
-	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, GLUES_TESS_WINDING_POSITIVE);
-	gluesTessProperty(tess, GLUES_TESS_BOUNDARY_ONLY, GL_TRUE);
-	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid (*)()) &combineCallbackSimple);
-	//gluesTessProperty(tess, GLUES_TESS_TOLERANCE, 0.00000001);
-
-	UserDataSimplifiedContours userData;
-	gluesTessBeginPolygon(tess, &userData);
-	const QVector<Vec3d>& trianglesArray = getVertexArray().vertex;
-	for (int c=0;c<trianglesArray.size()/3;++c)
-	{
-		gluesTessBeginContour(tess);
-                gluesTessVertex(tess, const_cast<double*>((const double*)trianglesArray.at(c*3)), const_cast<double*>((const double*)trianglesArray.at(c*3)));
-                gluesTessVertex(tess, const_cast<double*>((const double*)trianglesArray.at(c*3+1)), const_cast<double*>((const double*)trianglesArray.at(c*3+1)));
-                gluesTessVertex(tess, const_cast<double*>((const double*)trianglesArray.at(c*3+2)), const_cast<double*>((const double*)trianglesArray.at(c*3+2)));
-		gluesTessEndContour(tess);
-	}
-	gluesTessEndPolygon(tess);
-	gluesDeleteTess(tess);
-#ifndef NDEBUG
-	// Check that all vectors are normalized
-	foreach (const QVector<Vec3d> c, userData.resultContours)
-		foreach (const Vec3d& v, c)
-			Q_ASSERT(std::fabs(v.lengthSquared()-1.)<0.000001);
-#endif
-	return userData.resultContours;
-}
-
-QVector<QVector<Vec3d> > SphericalPolygon::getContours() const
-{
-	Q_ASSERT(triangleVertices.size()%3==0);
-	QVector<QVector<Vec3d> > res;
-	for (int i=0;i<triangleVertices.size()/3;++i)
-	{
-		res+=triangleVertices.mid(i*3, 3);
-	}
-#ifndef NDEBUG
-	foreach (const QVector<Vec3d>& l, res)
-	{
-		Q_ASSERT((l.at(1)^l.at(0))*l.at(2)>=0);
-	}
-#endif
+	QVariantMap res;
+	res.insert("type", "CAP");
+	double ra, dec;
+	StelUtils::rectToSphe(&ra, &dec, n);
+	QVariantList l;
+	l << ra*180./M_PI << dec*180./M_PI;
+	res.insert("center", l);
+	res.insert("radius", std::acos(d)*180./M_PI);
 	return res;
 }
 
-// Returns whether another SphericalPolygon intersects with the SphericalPolygon.
-bool SphericalPolygonBase::intersects(const SphericalPolygonBase& mpoly) const
+////////////////////////////////////////////////////////////////////////////
+// Methods for SphericalPoint
+////////////////////////////////////////////////////////////////////////////
+bool SphericalPoint::intersects(const SphericalPolygon& r) const
 {
-	if (!getBoundingCap().intersects(mpoly.getBoundingCap()))
-		return false;
-	return !getIntersection(mpoly).getVertexArray().vertex.isEmpty();
+	return r.contains(n);
 }
 
-// Return a new SphericalPolygon consisting of the intersection of this and the given SphericalPolygon.
-SphericalPolygon SphericalPolygonBase::getIntersection(const SphericalPolygonBase& mpoly) const
+bool SphericalPoint::intersects(const SphericalConvexPolygon& r) const
 {
-	if (!getBoundingCap().intersects(mpoly.getBoundingCap()))
-		return SphericalPolygon();
-	QVector<QVector<Vec3d> > allContours = getSimplifiedContours();
-	allContours += mpoly.getSimplifiedContours();
-	SphericalPolygon p;
-	p.setContours(allContours, SphericalPolygonBase::WindingAbsGeqTwo);
-	return p;
+	return r.contains(n);
 }
 
-// Return a new SphericalPolygon consisting of the union of this and the given SphericalPolygon.
-SphericalPolygon SphericalPolygonBase::getUnion(const SphericalPolygonBase& mpoly) const
+OctahedronPolygon SphericalPoint::getOctahedronPolygon() const
 {
-	QVector<QVector<Vec3d> > allContours = getContours();
-	allContours += mpoly.getContours();
-	return SphericalPolygon(allContours);
+	QVector<Vec3d> contour;
+	contour << n << n << n;
+	return OctahedronPolygon(contour);
 }
 
-// Return a new SphericalPolygon consisting of the subtraction of the given SphericalPolygon from this.
-SphericalPolygon SphericalPolygonBase::getSubtraction(const SphericalPolygonBase& mpoly) const
+QVariantMap SphericalPoint::toQVariant() const
 {
-	QVector<QVector<Vec3d> > allContours = getContours();
-	foreach (const QVector<Vec3d>& c, mpoly.getContours())
-	{
-		QVector<Vec3d> cr;
-		cr.reserve(c.size());
-		for (int i=c.size()-1;i>=0;--i)
-			cr.append(c.at(i));
-		allContours.append(cr);
-	}
-	return SphericalPolygon(allContours);
-}
-
-// Return the area in squared degrees.
-double SphericalPolygonBase::getArea() const
-{
-	// Use Girard's theorem for each subtriangles
-	double area = 0.;
-	Vec3d v1, v2, v3;
-	const QVector<Vec3d>& trianglesArray = getVertexArray().vertex;
-	for (int i=0;i<trianglesArray.size()/3;++i)
-	{
-		v1 = trianglesArray[i*3+0] ^ trianglesArray[i*3+1];
-		v2 = trianglesArray[i*3+1] ^ trianglesArray[i*3+2];
-		v3 = trianglesArray[i*3+2] ^ trianglesArray[i*3+0];
-		area += 2.*M_PI - v1.angle(v2) - v2.angle(v3) - v3.angle(v1);
-	}
-	return area;
-}
-
-// Return a point located inside the polygon.
-Vec3d SphericalPolygonBase::getPointInside() const
-{
-	const QVector<Vec3d>& trianglesArray = getVertexArray().vertex;
-	Vec3d res = trianglesArray[0]+trianglesArray[1]+trianglesArray[2];
-	res.normalize();
+	QVariantMap res;
+	res.insert("type", "POINT");
+	double ra, dec;
+	StelUtils::rectToSphe(&ra, &dec, n);
+	QVariantList l;
+	l << ra*180./M_PI << dec*180./M_PI;
+	res.insert("pos", l);
 	return res;
 }
 
-// Default slow implementation o(n^2).
-SphericalCap SphericalPolygonBase::getBoundingCap() const
+
+////////////////////////////////////////////////////////////////////////////
+// Methods for AllSkySphericalRegion
+////////////////////////////////////////////////////////////////////////////
+QVariantMap AllSkySphericalRegion::toQVariant() const
 {
-	Vec3d p1(1,0,0), p2(1,0,0);
-	double maxDist=1.;
-	const QVector<Vec3d>& trianglesArray = getVertexArray().vertex;
-	foreach (const Vec3d& v1, trianglesArray)
-	{
-		foreach (const Vec3d& v2, trianglesArray)
-		{
-			if (v1*v2<maxDist)
-			{
-				p1 = v1;
-				p2 = v2;
-				maxDist = v1*v2;
-			}
-		}
-	}
-	Vec3d res = p1+p2;
-	res.normalize();
-	return SphericalCap(res, res*p1);
+	QVariantMap res;
+	res.insert("type", "ALLSKY");
+	return res;
+}
+
+
+////////////////////////////////////////////////////////////////////////////
+// Methods for EmptySphericalRegion
+////////////////////////////////////////////////////////////////////////////
+QVariantMap EmptySphericalRegion::toQVariant() const
+{
+	QVariantMap res;
+	res.insert("type", "EMPTY");
+	return res;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalPolygon
 ///////////////////////////////////////////////////////////////////////////////
-
-// Store data for the GLUES tesselation callbacks
-struct GluTessCallbackData
+QVariantMap SphericalPolygon::toQVariant() const
 {
-	SphericalPolygon* thisPolygon;	//! Reference to the instance of SphericalPolygon being tesselated.
-	bool edgeFlag;					//! Used to store temporary edgeFlag found by the tesselator.
-	QList<Vec3d> tempVertices;	//! Use to contain the temporary combined vertices
-};
-
-void  vertexCallback(void* vertexData, void* userData)
-{
-	SphericalPolygon* mp = ((GluTessCallbackData*)userData)->thisPolygon;
-	const double* v = (double*)vertexData;
-	Vec3d vv(v[0], v[1], v[2]);
-	Q_ASSERT(std::fabs(vv.length()-1.)<0.000001);
-	mp->triangleVertices.append(vv);
-	mp->edgeFlags.append(((GluTessCallbackData*)userData)->edgeFlag);
-}
-
-void  edgeFlagCallback(GLboolean flag, void* userData)
-{
-	((GluTessCallbackData*)userData)->edgeFlag=flag;
-}
-
-void  combineCallback(double coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
-{
-	QList<Vec3d>& tempVertices = ((GluTessCallbackData*)userData)->tempVertices;
-	if (vertex_data[2]==NULL)
+	QVariantMap res;
+	QVariantList worldCoordinates;
+	double ra, dec;
+	foreach (const QVector<Vec3d>& contour, getClosedOutlineContours())
 	{
-		// Only 2 vertices to combine: easy
-		double* dd = (double*)vertex_data[0];
-		Vec3d newVertex(dd[0]*weight[0],dd[1]*weight[0],dd[2]*weight[0]);
-		dd = (double*)vertex_data[1];
-		newVertex[0]+=dd[0]*weight[1];
-		newVertex[1]+=dd[1]*weight[1];
-		newVertex[2]+=dd[2]*weight[1];
-		newVertex.normalize();
-		tempVertices.append(newVertex);
-	}
-// 	else if (vertex_data[3]!=NULL)
-// 	{
-// 		// 4 vertices are given, compute the intersection of the 2 great circles
-// 		double* dd = (double*)vertex_data[0];
-// 		Vec3d v0(dd[0],dd[1],dd[2]);
-// 		dd = (double*)vertex_data[1];
-// 		const Vec3d v1(dd[0],dd[1],dd[2]);
-// 		dd = (double*)vertex_data[2];
-// 		const Vec3d v2(dd[0],dd[1],dd[2]);
-// 		dd = (double*)vertex_data[3];
-// 		const Vec3d v3(dd[0],dd[1],dd[2]);
-// 		bool ok;
-// 		v0 = greatCircleIntersection(v0, v1, v2, v3, ok);
-// 		if (!ok)
-// 		{
-// 			// The 2 great circles are identical, in this case return the closest point
-// 			const int i0= (weight[0]>weight[1]) ? 0 : 1;
-// 			const int i1= (weight[2]>weight[3]) ? 2 : 3;
-// 			const int i = (weight[i0]>weight[i1]) ? i0 : i1;
-// 			dd = (double*)vertex_data[i];
-// 			v0.set(dd[0],dd[1],dd[2]);
-// 		}
-// 		tempVertices.append(v0);
-// 	}
-	else
-	{
-		// 3 vertices: unsupported case..
-//		Q_ASSERT(0);
-		tempVertices.append(Vec3d(coords[0], coords[1], coords[2]));
-		tempVertices.last().normalize();
-	}
-	*outData = tempVertices.last();
-}
-
-void  checkBeginCallback(GLenum type)
-{
-	Q_ASSERT(type==GL_TRIANGLES);
-}
-
-void SphericalPolygon::setContours(const QVector<QVector<Vec3d> >& contours, SphericalPolygonBase::PolyWindingRule windingRule)
-{
-	triangleVertices.clear();
-	edgeFlags.clear();
-
-	// Use GLUES tesselation functions to transform the polygon into a list of triangles
-	GLUEStesselator* tess = gluesNewTess();
-#ifndef NDEBUG
-	gluesTessCallback(tess, GLUES_TESS_BEGIN, (GLvoid(*)()) &checkBeginCallback);
-#endif
-	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(*)()) &vertexCallback);
-	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG_DATA, (GLvoid(*)()) &edgeFlagCallback);
-	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid(*)()) &errorCallback);
-	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid(*)()) &combineCallback);
-        const double windRule = (windingRule==SphericalPolygonBase::WindingPositive) ? GLUES_TESS_WINDING_POSITIVE : GLUES_TESS_WINDING_ABS_GEQ_TWO;
-	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, windRule);
-	//gluesTessProperty(tess, GLUES_TESS_TOLERANCE, 0.00001);
-	GluTessCallbackData data;
-	data.thisPolygon=this;
-	gluesTessBeginPolygon(tess, &data);
-	for (int c=0;c<contours.size();++c)
-	{
-		gluesTessBeginContour(tess);
-		foreach (const Vec3d& v, contours.at(c))
+		QVariantList cv;
+		foreach (const Vec3d& v, contour)
 		{
-                        gluesTessVertex(tess, const_cast<double*>((const double*)v), const_cast<void*>((const void*)v));
+			StelUtils::rectToSphe(&ra, &dec, v);
+			QVariantList vv;
+			vv << ra*180./M_PI << dec*180./M_PI;
+			cv.append((QVariant)vv);
 		}
-		gluesTessEndContour(tess);
+		worldCoordinates.append((QVariant)cv);
 	}
-	gluesTessEndPolygon(tess);
-	gluesDeleteTess(tess);
-
-	// There should always be an edge flag matching each vertex.
-	Q_ASSERT(triangleVertices.size() == edgeFlags.size());
-	Q_ASSERT(triangleVertices.size()%3==0);
-#ifndef NDEBUG
-	// Check that all vectors are normalized
-	foreach (const Vec3d& v, triangleVertices)
-		Q_ASSERT(std::fabs(v.lengthSquared()-1.)<0.000001);
-
-	// Check that the orientation of all the triangles is positive
-	for (int i=0;i<triangleVertices.size()/3;++i)
-	{
-		if(!((triangleVertices.at(i*3+1)^triangleVertices.at(i*3))*triangleVertices.at(i*3+2)>=0))
-		{
-			// Avoid crash but very bad!
-			qWarning() << "Warning, couldn't tesselate a polygon";
-			triangleVertices.clear();
-			edgeFlags.clear();
-			return;
-
-// 			triangleVertices.remove(i*3, 3);
-// 			edgeFlags.remove(i*3, 3);
-			static int k=0;
-			qDebug() << ++k;
-			for (int i=0;i<contours.size();++i)
-			{
-				QString contourStr = "[";
-				foreach (const Vec3d& v, contours[i])
-				{
-					contourStr += QString("[%1, %2]").arg(v.longitude()*180./M_PI, 0, 'g', 15).arg(v.latitude()*180./M_PI, 0, 'g', 15);
-				}
-				contourStr += "]";
-				qDebug() << QString("Contour %1: %2").arg(i).arg(contourStr);
-			}
-
-			qDebug() << triangleVertices.size()/3;
-			for (int i=0;i<triangleVertices.size()/3;++i)
-			{
-				QString contourStr = "[";
-				for (int j=i*3;j<i*3+3;++j)
-				{
-					Vec3d v = triangleVertices.at(j);
-					contourStr += QString("[%1, %2]").arg(v.longitude()*180./M_PI, 0, 'g', 15).arg(v.latitude()*180./M_PI, 0, 'g', 15);
-				}
-				contourStr += "]";
-				qDebug() << QString("Triangle %1: %2").arg(i).arg(contourStr);
-			}
-			Q_ASSERT(0);
-		}
-	}
-#endif
+	res.insert("worldCoords", worldCoordinates);
+	return res;
 }
-
-// Set a single contour defining the SphericalPolygon.
-void SphericalPolygon::setContour(const QVector<Vec3d>& contour)
-{
-	QVector<QVector<Vec3d> > contours;
-	contours.append(contour);
-	setContours(contours);
-}
-
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalTexturedPolygon
 ///////////////////////////////////////////////////////////////////////////////
-void  vertexTextureCallback(void* vertexData, void* userData)
-{
-	SphericalTexturedPolygon* mp = static_cast<SphericalTexturedPolygon*>(((GluTessCallbackData*)userData)->thisPolygon);
-	const SphericalTexturedPolygon::TextureVertex* vData = (SphericalTexturedPolygon::TextureVertex*)vertexData;
-	mp->triangleVertices.append(vData->vertex);
-	mp->textureCoords.append(vData->texCoord);
-	mp->edgeFlags.append(((GluTessCallbackData*)userData)->edgeFlag);
-}
 
-void SphericalTexturedPolygon::setContours(const QVector<QVector<TextureVertex> >& contours, SphericalPolygonBase::PolyWindingRule windingRule)
-{
-	triangleVertices.clear();
-	edgeFlags.clear();
-	textureCoords.clear();
-
-	// Use GLUES tesselation functions to transform the polygon into a list of triangles
-	GLUEStesselator* tess = gluesNewTess();
-	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(*)()) &vertexTextureCallback);
-	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG_DATA, (GLvoid(*)()) &edgeFlagCallback);
-	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid (*) ()) &errorCallback);
-        const double windRule = (windingRule==SphericalPolygonBase::WindingPositive) ? GLUES_TESS_WINDING_POSITIVE : GLUES_TESS_WINDING_ABS_GEQ_TWO;
-	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, windRule);
-	GluTessCallbackData data;
-	data.thisPolygon=this;
-	gluesTessBeginPolygon(tess, &data);
-	for (int c=0;c<contours.size();++c)
-	{
-		gluesTessBeginContour(tess);
-		for (int i=0;i<contours[c].size();++i)
-		{
-                        gluesTessVertex(tess, const_cast<double*>((const double*)contours[c][i].vertex), const_cast<void*>((const void*)&(contours[c][i])));
-		}
-		gluesTessEndContour(tess);
-	}
-	gluesTessEndPolygon(tess);
-	gluesDeleteTess(tess);
-
-	// There should always be a texture coord matching each vertex.
-	Q_ASSERT(triangleVertices.size() == edgeFlags.size());
-	Q_ASSERT(triangleVertices.size() == textureCoords.size());
-
-	// There should always be an edge flag matching each vertex.
-	Q_ASSERT(triangleVertices.size() == edgeFlags.size());
-#ifndef NDEBUG
-	// Check that all vectors are normalized
-	foreach (const Vec3d& v, triangleVertices)
-		Q_ASSERT(std::fabs(v.lengthSquared()-1.)<0.000001);
-	// Check that the orientation of all the triangles is positive
-	for (int i=0;i<triangleVertices.size()/3;++i)
-	{
-		Q_ASSERT((triangleVertices.at(i*3+1)^triangleVertices.at(i*3))*triangleVertices.at(i*3+2)>=0);
-	}
-#endif
-}
-
-void SphericalTexturedPolygon::setContour(const QVector<TextureVertex>& contour)
-{
-	QVector<QVector<TextureVertex> > contours;
-	contours.append(contour);
-	setContours(contours, SphericalPolygonBase::WindingPositive);
-}
-
-// Returns whether a point is contained into the SphericalPolygon.
-bool SphericalPolygon::contains(const Vec3d& p) const
-{
-	const QVector<Vec3d>& trianglesArray = getVertexArray().vertex;
-	for (int i=0;i<trianglesArray.size()/3;++i)
-	{
-		if (sideHalfSpaceContains(trianglesArray.at(i*3+1), trianglesArray.at(i*3), p) &&
-				  sideHalfSpaceContains(trianglesArray.at(i*3+2), trianglesArray.at(i*3+1), p) &&
-				  sideHalfSpaceContains(trianglesArray.at(i*3+0), trianglesArray.at(i*3+2), p))
-			return true;
-	}
-	return false;
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalConvexPolygon
 ///////////////////////////////////////////////////////////////////////////////
-
-// Return an openGL compatible array to be displayed using vertex arrays.
-StelVertexArray SphericalConvexPolygon::getVertexArray() const
-{
-	StelVertexArray ar;
-	ar.vertex << contour.at(0) << contour.at(1) << contour.at(2);
-	ar.edgeFlags << true << true << false;
-	for (int i=2;i<contour.size()-2;++i)
-	{
-		ar.vertex << contour.at(0) << contour.at(i) << contour.at(i+1);
-		ar.edgeFlags << false << true << false;
-	}
-	// Last triangle
-	ar.vertex << contour.at(0) << contour.at(contour.size()-2) << contour.last();
-	ar.edgeFlags << false << true << true;
-	return ar;
-}
-
-// Return an openGL compatible array to be displayed using vertex arrays.
-StelVertexArray SphericalTexturedConvexPolygon::getVertexArray() const
-{
-	StelVertexArray ar;
-	// Need to compute textures coordinates
-	ar.vertex << contour.at(0) << contour.at(1) << contour.at(2);
-	ar.edgeFlags << true << true << false;
-	ar.texCoords << textureCoords.at(0) << textureCoords.at(1) << textureCoords.at(2);
-	for (int i=2;i<contour.size()-2;++i)
-	{
-		ar.vertex << contour.at(0) << contour.at(i) << contour.at(i+1);
-		ar.edgeFlags << false << true << false;
-		ar.texCoords << textureCoords.at(0) << textureCoords.at(i) << textureCoords.at(i+1);
-	}
-	// Last triangle
-	ar.vertex << contour.at(0) << contour.at(contour.size()-2) << contour.last();
-	ar.edgeFlags << false << true << true;
-	ar.texCoords << textureCoords.at(0) << textureCoords.at(contour.size()-2) << textureCoords.last();
-	return ar;
-}
 
 // Check if the polygon is valid, i.e. it has no side >180
 bool SphericalConvexPolygon::checkValid() const
@@ -753,6 +488,37 @@ bool SphericalConvexPolygon::checkValidContour(const QVector<Vec3d>& contour)
 	for (int p=0;p<contour.size()-2;++p)
 		res &= sideHalfSpaceContains(contour.first(), contour.last(), contour[(p+contour.size()+1)%contour.size()]);
 	return res;
+}
+
+//! Return the area of the region in steradians.
+double SphericalConvexPolygon::getArea() const
+{
+	double area = 0.;
+	Vec3d ar[3];
+	Vec3d v1, v2, v3;
+	ar[0]=contour.at(0);
+	for (int i=1;i<contour.size()-1;++i)
+	{
+		// Use Girard's theorem for each subtriangles
+		ar[1]=contour.at(i);
+		ar[2]=contour.at(i+1);
+		v1 = ar[0] ^ ar[1];
+		v2 = ar[1] ^ ar[2];
+		v3 = ar[2] ^ ar[0];
+		area += 2.*M_PI - v1.angle(v2) - v2.angle(v3) - v3.angle(v1);
+	}
+	return area;
+}
+
+//! Return a point located inside the region.
+Vec3d SphericalConvexPolygon::getPointInside() const
+{
+	Q_ASSERT(!isEmpty());
+	Vec3d p(contour.at(0));
+	p+=contour.at(1);
+	p+=contour.at(2);
+	p.normalize();
+	return p;
 }
 
 // Return the list of halfspace bounding the ConvexPolygon.
@@ -796,16 +562,15 @@ bool SphericalConvexPolygon::containsConvexContour(const Vec3d* vertice, int nbV
 	return true;
 }
 
-// Returns whether a SphericalPolygon is contained into the region.
-bool SphericalConvexPolygon::contains(const SphericalPolygonBase& polyBase) const
+bool SphericalConvexPolygon::contains(const SphericalConvexPolygon& cvx) const
 {
-	const SphericalConvexPolygon* cvx = dynamic_cast<const SphericalConvexPolygon*>(&polyBase);
-	if (cvx!=NULL)
-	{
-		return containsConvexContour(cvx->getConvexContour().constData(), cvx->getConvexContour().size());
-	}
+	return containsConvexContour(cvx.getConvexContour().constData(), cvx.getConvexContour().size());
+}
+
+bool SphericalConvexPolygon::contains(const SphericalPolygon& poly) const
+{
 	// For standard polygons, go through the full list of triangles
-	const QVector<Vec3d>& vArray = polyBase.getVertexArray().vertex;
+	const QVector<Vec3d>& vArray = poly.getFillVertexArray().vertex;
 	for (int i=0;i<vArray.size()/3;++i)
 	{
 		if (!containsConvexContour(vArray.constData()+i*3, 3))
@@ -840,30 +605,74 @@ bool SphericalConvexPolygon::areAllPointsOutsideOneSide(const Vec3d* thisContour
 	return false;
 }
 
-// Returns whether another SphericalPolygon intersects with the SphericalPolygon.
-bool SphericalConvexPolygon::intersects(const SphericalPolygonBase& polyBase) const
+bool SphericalConvexPolygon::intersects(const SphericalConvexPolygon& cvx) const
 {
-	const SphericalConvexPolygon* cvx = dynamic_cast<const SphericalConvexPolygon*>(&polyBase);
-	if (cvx!=NULL)
-	{
-		return !areAllPointsOutsideOneSide(cvx->contour) && !cvx->areAllPointsOutsideOneSide(contour);
-	}
+	return !areAllPointsOutsideOneSide(cvx.contour) && !cvx.areAllPointsOutsideOneSide(contour);
+}
+
+bool SphericalConvexPolygon::intersects(const SphericalPolygon& poly) const
+{
 	// For standard polygons, go through the full list of triangles
-	const QVector<Vec3d>& vArray = polyBase.getVertexArray().vertex;
+	const QVector<Vec3d>& vArray = poly.getFillVertexArray().vertex;
 	for (int i=0;i<vArray.size()/3;++i)
 	{
-		if (!areAllPointsOutsideOneSide(contour.constData(), contour.size(), vArray.constData()+i*3, 3) && !cvx->areAllPointsOutsideOneSide(vArray.constData()+i*3, 3, contour.constData(), contour.size()))
+		if (!areAllPointsOutsideOneSide(contour.constData(), contour.size(), vArray.constData()+i*3, 3) && !areAllPointsOutsideOneSide(vArray.constData()+i*3, 3, contour.constData(), contour.size()))
 			return true;
 	}
 	return false;
 }
 
-SphericalPolygon SphericalConvexPolygon::toSphericalPolygon() const
+
+QVariantMap SphericalConvexPolygon::toQVariant() const
 {
-	return SphericalPolygon(getConvexContour());
+	QVariantMap res;
+	res.insert("type", "CVXPOLYGON");
+	QVariantList cv;
+	double ra, dec;
+	foreach (const Vec3d& v, contour)
+	{
+		StelUtils::rectToSphe(&ra, &dec, v);
+		QVariantList vv;
+		vv << ra*180./M_PI << dec*180./M_PI;
+		cv.append((QVariant)vv);
+	}
+	res.insert("worldCoords", cv);
+	return res;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Methods for SphericalTexturedConvexPolygon
+///////////////////////////////////////////////////////////////////////////////
+QVariantMap SphericalTexturedConvexPolygon::toQVariant() const
+{
+	QVariantMap res = SphericalConvexPolygon::toQVariant();
+	QVariantList cv;
+	foreach (const Vec2f& v, textureCoords)
+	{
+		QVariantList vv;
+		vv << v[0] << v[1];
+		cv.append((QVariant)vv);
+	}
+	res.insert("textureCoords", cv);
+	return res;
 }
 
 
+///////////////////////////////////////////////////////////////////////////////
+// Methods for SphericalTexturedPolygon
+///////////////////////////////////////////////////////////////////////////////
+QVariantMap SphericalTexturedPolygon::toQVariant() const
+{
+	Q_ASSERT(0);
+	// TODO store a tesselated polygon?, including edge flags?
+	return QVariantMap();
+}
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Utility methods
+///////////////////////////////////////////////////////////////////////////////
 //! Compute the intersection of the planes defined by the 2 halfspaces on the sphere (usually on 2 points) and return it in p1 and p2.
 //! If the 2 SphericalCaps don't interesect or intersect only at 1 point, false is returned and p1 and p2 are undefined
 bool planeIntersect2(const SphericalCap& h1, const SphericalCap& h2, Vec3d& p1, Vec3d& p2)
@@ -951,6 +760,12 @@ bool planeIntersect2(const SphericalCap& h1, const SphericalCap& h2, Vec3d& p1, 
 
 Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& p3, const Vec3d& p4, bool& ok)
 {
+	if (p3*p4>1.-1E-10)
+	{
+		// p3 and p4 are too close to avoid floating point problems
+		ok=false;
+		return p3;
+	}
 	Vec3d n2 = p3^p4;
 	n2.normalize();
 	return greatCircleIntersection(p1, p2, n2, ok);
@@ -958,6 +773,12 @@ Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& p3,
 
 Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& n2, bool& ok)
 {
+	if (p1*p2>1.-1E-10)
+	{
+		// p1 and p2 are too close to avoid floating point problems
+		ok=false;
+		return p1;
+	}
 	Vec3d n1 = p1^p2;
 	Q_ASSERT(std::fabs(n2.lengthSquared()-1.)<0.00000001);
 	n1.normalize();
@@ -982,13 +803,16 @@ Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& n2,
 		return -u;
 }
 
-SphericalRegionP SphericalRegion::loadFromJson(QIODevice* in)
+///////////////////////////////////////////////////////////////////////////////
+// Methods for SphericalRegionP
+///////////////////////////////////////////////////////////////////////////////
+SphericalRegionP SphericalRegionP::loadFromJson(QIODevice* in)
 {
 	StelJsonParser parser;
 	return loadFromQVariant(parser.parse(*in).toMap());
 }
 
-SphericalRegionP SphericalRegion::loadFromJson(const QByteArray& a)
+SphericalRegionP SphericalRegionP::loadFromJson(const QByteArray& a)
 {
 	QBuffer buf;
 	buf.setData(a);
@@ -1007,7 +831,7 @@ inline void parseRaDec(const QVariant& vRaDec, Vec3d& v)
 		throw std::runtime_error(qPrintable(QString("invalid Ra,Dec pair: \"%1\" (expect 2 double values in degree)").arg(vRaDec.toString())));
 }
 
-SphericalRegionP SphericalRegion::loadFromQVariant(const QVariantMap& map)
+SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantMap& map)
 {
 	QVariantList contoursList = map.value("skyConvexPolygons").toList();
 	if (contoursList.empty())
@@ -1045,7 +869,7 @@ SphericalRegionP SphericalRegion::loadFromQVariant(const QVariantMap& map)
 				if (!ok)
 					throw std::runtime_error(qPrintable(QString("invalid aperture angle: \"%1\" (expect a double value in degree)").arg(contourToList.at(2).toString())));
 				SphericalCap cap(v,std::cos(d));
-				contours.append(cap.toSphericalConvexPolygon().getConvexContour());
+				contours.append(cap.getClosedOutlineContour());
 				vertices.clear();
 				continue;
 			}
@@ -1105,443 +929,3 @@ SphericalRegionP SphericalRegion::loadFromQVariant(const QVariantMap& map)
 	return SphericalRegionP(new SphericalCap());
 }
 
-///////////////////////////////////////////////////////////////////////////////
-// Serialization into QVariant
-
-QVariantMap SphericalPoint::toQVariant() const
-{
-	QVariantMap res;
-	res.insert("type", "POINT");
-	double ra, dec;
-	StelUtils::rectToSphe(&ra, &dec, n);
-	QVariantList l;
-	l << ra*180./M_PI << dec*180./M_PI;
-	res.insert("pos", l);
-	return res;
-}
-
-QVariantMap SphericalCap::toQVariant() const
-{
-	QVariantMap res;
-	res.insert("type", "CAP");
-	double ra, dec;
-	StelUtils::rectToSphe(&ra, &dec, n);
-	QVariantList l;
-	l << ra*180./M_PI << dec*180./M_PI;
-	res.insert("center", l);
-	res.insert("radius", std::acos(d)*180./M_PI);
-	return res;
-}
-
-QVariantMap AllSkySphericalRegion::toQVariant() const
-{
-	QVariantMap res;
-	res.insert("type", "ALLSKY");
-	return res;
-}
-
-QVariantMap SphericalPolygon::toQVariant() const
-{
-	QVariantMap res;
-	QVariantList worldCoordinates;
-	double ra, dec;
-	foreach (const QVector<Vec3d>& contour, getSimplifiedContours())
-	{
-		QVariantList cv;
-		foreach (const Vec3d& v, contour)
-		{
-			StelUtils::rectToSphe(&ra, &dec, v);
-			QVariantList vv;
-			vv << ra*180./M_PI << dec*180./M_PI;
-			cv.append((QVariant)vv);
-		}
-		worldCoordinates.append((QVariant)cv);
-	}
-	res.insert("worldCoords", worldCoordinates);
-	return res;
-}
-
-QVariantMap SphericalTexturedPolygon::toQVariant() const
-{
-	Q_ASSERT(0);
-	// TODO store a tesselated polygon?, including edge flags?
-	return QVariantMap();
-}
-
-QVariantMap SphericalConvexPolygon::toQVariant() const
-{
-	QVariantMap res;
-	res.insert("type", "CVXPOLYGON");
-	QVariantList cv;
-	double ra, dec;
-	foreach (const Vec3d& v, contour)
-	{
-		StelUtils::rectToSphe(&ra, &dec, v);
-		QVariantList vv;
-		vv << ra*180./M_PI << dec*180./M_PI;
-		cv.append((QVariant)vv);
-	}
-	res.insert("worldCoords", cv);
-	return res;
-}
-
-QVariantMap SphericalTexturedConvexPolygon::toQVariant() const
-{
-	QVariantMap res = SphericalConvexPolygon::toQVariant();
-	QVariantList cv;
-	foreach (const Vec2f& v, textureCoords)
-	{
-		QVariantList vv;
-		vv << v[0] << v[1];
-		cv.append((QVariant)vv);
-	}
-	res.insert("textureCoords", cv);
-	return res;
-}
-
-static int getSide(const Vec3d& v, int onLine)
-{
-	Q_ASSERT(onLine>=0 && onLine<=3);
-	return v[onLine]>0 ? 0 : 1;
-}
-
-static void interpolateAtCrossingPoint(const Vec3d& v1, const Vec3d& v2, const Vec3d& planDirection, Vec3d& result)
-{
-	bool ok;
-	result=greatCircleIntersection(v1, v2, planDirection, ok);
-	Q_ASSERT(ok);
-}
-
-QString SubContour::toJSON() const
-{
-	QString res("[");
-	double ra, dec;
-	foreach (const EdgeVertex& v, *this)
-	{
-		StelUtils::rectToSphe(&ra, &dec, v.vertex);
-		res += QString(" [") + QString::number(ra*180./M_PI) + "," + QString::number(dec*180./M_PI) + ", " + (v.edgeFlag ? QString("true"): QString("false")) + "],";
-	}
-	res[res.size()-1]=' ';
-	res.append(']');
-	return res;
-};
-
-void OctahedronContour::splitContourByPlan(int onLine, const SubContour& inputContour, QVector<SubContour> result[2])
-{
-	SubContour currentSubContour;
-	SubContour unfinishedSubContour;
-	int previousQuadrant=getSide(inputContour.first().vertex, onLine);
-	int currentQuadrant=0;
-	Vec3d tmpVertex;
-	EdgeVertex previousVertex=inputContour.first();
-	EdgeVertex currentVertex;
-	int i;
-	const Vec3d plan(onLine==0?1:0, onLine==1?1:0, onLine==2?1:0);
-	// Take care first of the unfinished contour
-	for (i=0;i<inputContour.size();++i)
-	{
-		currentVertex = inputContour.at(i);
-		currentQuadrant = getSide(currentVertex.vertex, onLine);
-		if (currentQuadrant==previousQuadrant)
-		{
-			unfinishedSubContour << currentVertex;
-		}
-		else
-		{
-			// We crossed the line
-			interpolateAtCrossingPoint(previousVertex.vertex, currentVertex.vertex, plan, tmpVertex);
-			unfinishedSubContour << EdgeVertex(tmpVertex, false); // Last point of the contour, it's not an edge
-			Q_ASSERT(currentSubContour.isEmpty());
-			currentSubContour << EdgeVertex(tmpVertex, previousVertex.edgeFlag);
-			previousQuadrant = currentQuadrant;
-			break;
-		}
-		previousVertex=currentVertex;
-	}
-	// Now handle the other ones
-	for (;i<inputContour.size();++i)
-	{
-		currentVertex = inputContour.at(i);
-		currentQuadrant = getSide(currentVertex.vertex, onLine);
-		if (currentQuadrant==previousQuadrant)
-		{
-			currentSubContour << currentVertex;
-		}
-		else
-		{
-			// We crossed the line
-			interpolateAtCrossingPoint(previousVertex.vertex, currentVertex.vertex, plan, tmpVertex);
-			currentSubContour << EdgeVertex(tmpVertex, false); // Last point of the contour, it's not an edge
-			result[previousQuadrant] << currentSubContour;
-			currentSubContour.clear();
-			currentSubContour << EdgeVertex(tmpVertex, previousVertex.edgeFlag);
-			currentSubContour << currentVertex;
-		}
-		previousVertex=currentVertex;
-	}
-
-	// Handle the last line between the last and first point
-	previousQuadrant = currentQuadrant;
-	currentQuadrant = getSide(inputContour.first().vertex, onLine);
-	if (currentQuadrant==previousQuadrant)
-	{
-	}
-	else
-	{
-		// We crossed the line
-		interpolateAtCrossingPoint(previousVertex.vertex, inputContour.first().vertex, plan, tmpVertex);
-		currentSubContour << EdgeVertex(tmpVertex, false);	// Last point of the contour, it's not an edge
-		result[previousQuadrant] << currentSubContour;
-		currentSubContour.clear();
-		currentSubContour << EdgeVertex(tmpVertex, previousVertex.edgeFlag);
-	}
-
-	// Append the last contour made from the last vertices + the previous unfinished ones
-	currentSubContour << unfinishedSubContour;
-	result[currentQuadrant] << currentSubContour;
-}
-
-SubContour::SubContour(const QVector<Vec3d>& vertices, bool closed) : QVector<EdgeVertex>(vertices.size(), EdgeVertex(true))
-{
-	// Create the contour list by adding the matching edge flags
-	for (int i=0;i<vertices.size();++i)
-		(*this)[i].vertex = vertices.at(i);
-	if (closed==false)
-	{
-		this->last().edgeFlag=false;
-	}
-}
-
-SubContour SubContour::reversed() const
-{
-	SubContour res;
-	QVectorIterator<EdgeVertex> iter(*this);
-	iter.toBack();
-	while (iter.hasPrevious())
-		res.append(iter.previous());
-	return res;
-}
-
-OctahedronContour::OctahedronContour(const SubContour& initContour) : tesselated(false)
-{
-	sides.resize(8);
-
-	QVector<SubContour> splittedContour1[2];
-	// Split the contour on the plan Y=0
-	splitContourByPlan(1, initContour, splittedContour1);
-	// Re-split the contours on the plan X=0
-	QVector<SubContour> splittedVertices2[4];
-	foreach (const SubContour& subContour, splittedContour1[0])
-		splitContourByPlan(0, subContour, splittedVertices2);
-	foreach (const SubContour& subContour, splittedContour1[1])
-		splitContourByPlan(0, subContour, splittedVertices2+2);
-
-	// Now complete the contours which cross the areas from one side to another by adding poles
-	for (int c=0;c<4;++c)
-	{
-		for (int i=0;i<splittedVertices2[c].size();++i)
-		{
-			SubContour& tmpSubContour = splittedVertices2[c][i];
-			Vec3d v = tmpSubContour.first().vertex^tmpSubContour.last().vertex;
-			if (v[2]>0.0000001)
-			{
-				// A south pole has to be added
-				tmpSubContour << EdgeVertex(Vec3d(0,0,-1), false);
-			}
-			else if (v[2]<-0.0000001)
-			{
-				// A north pole has to be added
-				tmpSubContour << EdgeVertex(Vec3d(0,0,1), false);
-			}
-			else
-			{
-				// else the contour ends on the same longitude line as it starts
-				Q_ASSERT(std::fabs(tmpSubContour.first().vertex.longitude()-tmpSubContour.last().vertex.longitude()<0.00000001));
-			}
-		}
-		foreach (const SubContour& subContour, splittedVertices2[c])
-		{
-			splitContourByPlan(2, subContour, sides.data()+c*2);
-		}
-	}
-
-	projectOnOctahedron();
-}
-
-void OctahedronContour::append(const OctahedronContour& other)
-{
-	Q_ASSERT(sides.size()==8 && other.sides.size()==8);
-	for (int i=0;i<8;++i)
-	{
-		sides[i] += other.sides[i];
-	}
-	tesselated = false;
-}
-
-void OctahedronContour::appendReversed(const OctahedronContour& other)
-{
-	Q_ASSERT(sides.size()==8 && other.sides.size()==8);
-	for (int i=0;i<8;++i)
-	{
-		foreach (const SubContour& sub, other.sides[i])
-		{
-			sides[i] += sub.reversed();
-		}
-	}
-	tesselated = false;
-}
-
-void OctahedronContour::projectOnOctahedron()
-{
-	static const Vec3d faceCenter[] = {	Vec3d(1,1,1), Vec3d(1,1,-1),Vec3d(-1,1,1),Vec3d(-1,1,-1),
-		Vec3d(1,-1,1),Vec3d(1,-1,-1),Vec3d(-1,-1,1),Vec3d(-1,-1,-1)};
-
-	Q_ASSERT(sides.size()==8);
-	QVector<SubContour>* subs = sides.data();
-
-	for (int i=0;i<8;++i)
-	{
-		for (QVector<SubContour>::Iterator iter=subs[i].begin();iter!=subs[i].end();++iter)
-		{
-			for (SubContour::Iterator v=iter->begin();v!=iter->end();++v)
-			{
-				// Project on the face with aperture = 90 deg
-				v->vertex *= 1./(faceCenter[i]*v->vertex);
-				// May want to add offsets after that to map TOAST projection
-			}
-		}
-	}
-}
-
-StelVertexArray OctahedronContour::getTesselatedTriangles()
-{
-	if (!tesselated)
-		tesselate(WindingPositive);
-	StelVertexArray result;
-	Q_ASSERT(sides.size()==8);
-	QVector<SubContour>* subs = sides.data();
-	for (int i=0;i<8;++i)
-	{
-		for (QVector<SubContour>::Iterator iter=subs[i].begin();iter!=subs[i].end();++iter)
-		{
-			for (SubContour::Iterator v=iter->begin();v!=iter->end();++v)
-			{
-				result.vertex.append(v->vertex);
-				result.vertex.last().normalize();
-				result.edgeFlags.append(v->edgeFlag);
-			}
-		}
-	}
-	return result;
-}
-
-// Store data for the GLUES tesselation callbacks
-struct OctTessCallbackData
-{
-	SubContour result;		//! Reference to the instance of OctahedronContour being tesselated.
-	bool edgeFlag;					//! Used to store temporary edgeFlag found by the tesselator.
-	QList<Vec3d> tempVertices;	//! Used to store the temporary combined vertices
-};
-
-void octVertexCallback(void* vertexData, void* userData)
-{
-	QVector<EdgeVertex>& res = ((OctTessCallbackData*)userData)->result;
-	const double* v = (double*)vertexData;
-	Vec3d vv(v[0], v[1], v[2]);
-	res.append(EdgeVertex(vv, ((OctTessCallbackData*)userData)->edgeFlag));
-}
-
-void octEdgeFlagCallback(GLboolean flag, void* userData)
-{
-	((OctTessCallbackData*)userData)->edgeFlag=flag;
-}
-
-void octCombineCallback(double coords[3], void* vertex_data[4], GLfloat weight[4], void** outData, void* userData)
-{
-	QList<Vec3d>& tempVertices = ((OctTessCallbackData*)userData)->tempVertices;
-	Vec3d newVertex(0.);
-	for (int i=0;i<4;++i)
-	{
-		if (vertex_data[i]==NULL)
-			break;
-		double* dd = (double*)vertex_data[i];
-		newVertex+=Vec3d(dd[i]*weight[i],dd[i]*weight[i],dd[i]*weight[i]);
-	}
-	tempVertices.append(newVertex);
-	*outData = tempVertices.last();
-}
-
-void octCheckBeginCallback(GLenum type)
-{
-	Q_ASSERT(type==GL_TRIANGLES);
-}
-
-SubContour tesselateOneSide(GLUEStesselator* tess, const QVector<SubContour>& contours)
-{
-	OctTessCallbackData data;
-	gluesTessBeginPolygon(tess, &data);
-	for (int c=0;c<contours.size();++c)
-	{
-		gluesTessBeginContour(tess);
-		foreach (const EdgeVertex& v, contours.at(c))
-		{
-                        gluesTessVertex(tess, const_cast<double*>((const double*)v.vertex), const_cast<void*>((const void*)v.vertex));
-		}
-		gluesTessEndContour(tess);
-	}
-	gluesTessEndPolygon(tess);
-	return data.result;
-}
-
-void OctahedronContour::tesselate(TessWindingRule windingRule) const
-{
-	// Use GLUES tesselation functions to transform the polygon into a list of triangles
-	GLUEStesselator* tess = gluesNewTess();
-#ifndef NDEBUG
-	gluesTessCallback(tess, GLUES_TESS_BEGIN, (GLvoid(*)()) &octCheckBeginCallback);
-#endif
-	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(*)()) &octVertexCallback);
-	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG_DATA, (GLvoid(*)()) &octEdgeFlagCallback);
-	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid(*)()) &errorCallback);
-	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid(*)()) &octCombineCallback);
-        const double windRule = (windingRule==OctahedronContour::WindingPositive) ? GLUES_TESS_WINDING_POSITIVE : GLUES_TESS_WINDING_ABS_GEQ_TWO;
-	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, windRule);
-	gluesTessNormal(tess, 0,0,1);
-
-	// Call the tesselator on each side
-	for (int i=0;i<8;++i)
-	{
-		QVector<SubContour> res;
-		res.append(tesselateOneSide(tess, sides[i]));
-		sides[i]=res;
-	}
-
-	gluesDeleteTess(tess);
-	tesselated = true;
-}
-
-
-void OctahedronContour::inPlaceIntersection(const OctahedronContour& mpoly)
-{
-	if (!tesselated)
-		tesselate(WindingPositive);
-	if (!mpoly.tesselated)
-		mpoly.tesselate(WindingPositive);
-	append(mpoly);
-	tesselate(WindingAbsGeqTwo);
-}
-
-void OctahedronContour::inPlaceUnion(const OctahedronContour& mpoly)
-{
-	append(mpoly);
-}
-
-void OctahedronContour::inPlaceSubtraction(const OctahedronContour& mpoly)
-{
-	if (!tesselated)
-		tesselate(WindingPositive);
-	if (!mpoly.tesselated)
-		mpoly.tesselate(WindingPositive);
-	appendReversed(mpoly);
-	tesselate(WindingPositive);
-}
