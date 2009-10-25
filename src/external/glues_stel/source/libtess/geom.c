@@ -212,7 +212,7 @@ GLfloat Interpolate(GLfloat a, GLfloat x, GLfloat b, GLfloat y)
 
 #endif /* FOR_TRITE_TEST_PROGRAM */
 
-#define Swap(a, b)      if (1) { GLUESvertex* t=a; a=b; b=t; } else
+#define Swap(a, b)      if (1) { GLUESvertex* t=a; a=b; b=t; } else {;}
 
 void __gl_edgeIntersect(GLUESvertex* o1, GLUESvertex* d1,
                         GLUESvertex* o2, GLUESvertex* d2,
