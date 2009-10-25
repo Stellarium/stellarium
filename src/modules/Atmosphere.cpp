@@ -17,9 +17,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <QDebug>
-
 #include "GLee.h"
+#include "fixx11h.h"
+
 #include "Atmosphere.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
@@ -28,6 +28,12 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelFileMgr.hpp"
+
+#include <QDebug>
+
+#if QT_VERSION>=0x040600
+ #include <QGLShaderProgram>
+#endif
 
 inline bool myisnan(double value)
 {
@@ -40,6 +46,46 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 	setFadeDuration(3.f);
 #ifdef USE_OPENGL_ES2
 	useShader=false;
+#else
+#if QT_VERSION>=0x040600
+	useShader = QGLShaderProgram::hasShaderPrograms();
+	if (useShader)
+	{
+		qDebug() << "Use vertex shader for atmosphere rendering.";
+		QString filePath;
+		try
+		{
+			filePath = StelApp::getInstance().getFileMgr().findFile("data/shaders/xyYToRGB.cg");
+		}
+		catch (std::runtime_error& e)
+		{
+			qFatal("Can't find data/shaders/xyYToRGB.cg shader file to load");
+		}
+		QGLShader* vShader = new QGLShader(filePath, QGLShader::VertexShader);
+		atmoShaderProgram = new QGLShaderProgram();
+		if (!vShader->isCompiled())
+		{
+			qWarning() << "Error while compiling shader: " << vShader->log();
+			useShader = false;
+		}
+		QGLShader* fShader = new QGLShader(QGLShader::FragmentShader);
+		if (!fShader->compile("void main()\n"
+						 "{\n"
+						 "   gl_FragColor = gl_Color;\n"
+						 "}"))
+		{
+			qWarning() << "Error while compiling fragment shader: " << fShader->log();
+			useShader = false;
+		}
+
+		atmoShaderProgram->addShader(vShader);
+		atmoShaderProgram->addShader(fShader);
+		if (!atmoShaderProgram->link())
+		{
+			qWarning() << "Error while linking shader program: " << atmoShaderProgram->log();
+			useShader = false;
+		}
+	}
 #else
 	if (GLEE_VERSION_2_0)
 	{
@@ -88,6 +134,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 		}
 	}
 #endif
+#endif
 }
 
 Atmosphere::~Atmosphere(void)
@@ -110,8 +157,12 @@ Atmosphere::~Atmosphere(void)
 #ifndef USE_OPENGL_ES2
 	if (useShader)
 	{
+#if QT_VERSION>=0x040600
+		delete atmoShaderProgram;
+#else
 		// Cleanup shader stuff
 		glDeleteProgram(atmoShaderProgram);
+#endif
 	}
 #endif
 }
@@ -328,122 +379,150 @@ void Atmosphere::draw(StelCore* core)
 
 	StelToneReproducer* eye = core->getToneReproducer();
 
-	if (fader.getInterstate())
+	if (!fader.getInterstate())
+		return;
+
+	StelPainter sPainter(core->getProjection2d());
+	glBlendFunc(GL_ONE, GL_ONE);
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glShadeModel(GL_SMOOTH);
+
+	const float atm_intensity = fader.getInterstate();
+#ifndef USE_OPENGL_ES2
+	if (useShader)
 	{
-		const float atm_intensity = fader.getInterstate();
-#ifndef USE_OPENGL_ES2
-		if (useShader)
-		{
-			glUseProgram(atmoShaderProgram);
-			float a, b, c;
-			eye->getShadersParams(a, b, c);
-			GLint loc = glGetUniformLocation(atmoShaderProgram, "alphaWaOverAlphaDa");
-			glUniform1f(loc, a);
-			loc = glGetUniformLocation(atmoShaderProgram, "oneOverGamma");
-			glUniform1f(loc, b);
-			loc = glGetUniformLocation(atmoShaderProgram, "term2TimesOneOverMaxdLpOneOverGamma");
-			glUniform1f(loc, c);
-			loc = glGetUniformLocation(atmoShaderProgram, "brightnessScale");
-			glUniform1f(loc, atm_intensity);
+#if QT_VERSION>=0x040600
+		atmoShaderProgram->enable();
+		float a, b, c;
+		eye->getShadersParams(a, b, c);
+		atmoShaderProgram->setUniformValue("alphaWaOverAlphaDa", a);
+		atmoShaderProgram->setUniformValue("oneOverGamma", b);
+		atmoShaderProgram->setUniformValue("term2TimesOneOverMaxdLpOneOverGamma", c);
+		atmoShaderProgram->setUniformValue("brightnessScale", atm_intensity);
+		Vec3f sunPos;
+		float term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey;
+		sky.getShadersParams(sunPos, term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey);
+		atmoShaderProgram->setUniformValue("sunPos", sunPos[0], sunPos[1], sunPos[2]);
+		atmoShaderProgram->setUniformValue("term_x", term_x);
+		atmoShaderProgram->setUniformValue("Ax", Ax);
+		atmoShaderProgram->setUniformValue("Bx", Bx);
+		atmoShaderProgram->setUniformValue("Cx", Cx);
+		atmoShaderProgram->setUniformValue("Dx", Dx);
+		atmoShaderProgram->setUniformValue("Ex", Ex);
+		atmoShaderProgram->setUniformValue("term_y", term_y);
+		atmoShaderProgram->setUniformValue("Ay", Ay);
+		atmoShaderProgram->setUniformValue("By", By);
+		atmoShaderProgram->setUniformValue("Cy", Cy);
+		atmoShaderProgram->setUniformValue("Dy", Dy);
+		atmoShaderProgram->setUniformValue("Ey", Ey);
+#else
+		glUseProgram(atmoShaderProgram);
+		float a, b, c;
+		eye->getShadersParams(a, b, c);
+		GLint loc = glGetUniformLocation(atmoShaderProgram, "alphaWaOverAlphaDa");
+		glUniform1f(loc, a);
+		loc = glGetUniformLocation(atmoShaderProgram, "oneOverGamma");
+		glUniform1f(loc, b);
+		loc = glGetUniformLocation(atmoShaderProgram, "term2TimesOneOverMaxdLpOneOverGamma");
+		glUniform1f(loc, c);
+		loc = glGetUniformLocation(atmoShaderProgram, "brightnessScale");
+		glUniform1f(loc, atm_intensity);
 
-			Vec3f sunPos;
-			float term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey;
-			sky.getShadersParams(sunPos, term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey);
-			loc = glGetUniformLocation(atmoShaderProgram, "sunPos");
-			glUniform3f(loc, sunPos[0], sunPos[1], sunPos[2]);
-			loc = glGetUniformLocation(atmoShaderProgram, "term_x");
-			glUniform1f(loc, term_x);
-			loc = glGetUniformLocation(atmoShaderProgram, "Ax");
-			glUniform1f(loc, Ax);
-			loc = glGetUniformLocation(atmoShaderProgram, "Bx");
-			glUniform1f(loc, Bx);
-			loc = glGetUniformLocation(atmoShaderProgram, "Cx");
-			glUniform1f(loc, Cx);
-			loc = glGetUniformLocation(atmoShaderProgram, "Dx");
-			glUniform1f(loc, Dx);
-			loc = glGetUniformLocation(atmoShaderProgram, "Ex");
-			glUniform1f(loc, Ex);
-			loc = glGetUniformLocation(atmoShaderProgram, "term_y");
-			glUniform1f(loc, term_y);
-			loc = glGetUniformLocation(atmoShaderProgram, "Ay");
-			glUniform1f(loc, Ay);
-			loc = glGetUniformLocation(atmoShaderProgram, "By");
-			glUniform1f(loc, By);
-			loc = glGetUniformLocation(atmoShaderProgram, "Cy");
-			glUniform1f(loc, Cy);
-			loc = glGetUniformLocation(atmoShaderProgram, "Dy");
-			glUniform1f(loc, Dy);
-			loc = glGetUniformLocation(atmoShaderProgram, "Ey");
-			glUniform1f(loc, Ey);
-		}
-		else
-		{
-#endif
-			// Adapt luminance at this point to avoid a mismatch with the adaptation value
-			for (int i=0;i<(1+skyResolutionX)*(1+skyResolutionY);++i)
-			{
-				Vec4f& c = colorGrid[i];
-				eye->xyYToRGB(c);
-				c*=atm_intensity;
-			}
-#ifndef USE_OPENGL_ES2
-		}
-#endif
-
-		StelPainter sPainter(core->getProjection2d());
-		glBlendFunc(GL_ONE, GL_ONE);
-		glDisable(GL_TEXTURE_2D);
-		glEnable(GL_BLEND);
-		glShadeModel(GL_SMOOTH);
-
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_COLOR_ARRAY);
-
-		// Load the color components
-		glColorPointer(4, GL_FLOAT, 0, colorGrid);
-#ifndef USE_OPENGL_ES2
-		if (GLEE_ARB_vertex_buffer_object)
-		{
-			// Bind the vertex and indices buffer
-			glBindBufferARB(GL_ARRAY_BUFFER_ARB, vertexBufferId);
-			glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, indicesBufferId);
-			glVertexPointer(2, GL_FLOAT, 0, 0);
-
-			// And draw everything at once
-			GLushort* shift=NULL;
-			for (int y=0;y<skyResolutionY;++y)
-			{
-				glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, shift);
-				shift += (skyResolutionX+1)*2;
-			}
-			// Unbind buffers
-			glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
-			glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
-		}
-		else
-		{
-#endif
-			// Load the vertex array
-			glVertexPointer(2, GL_FLOAT, 0, posGrid);
-			// And draw everything at once
-			GLushort* shift=indices;
-			for (int y=0;y<skyResolutionY;++y)
-			{
-				glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, shift);
-				shift += (skyResolutionX+1)*2;
-			}
-#ifndef USE_OPENGL_ES2
-		}
-#endif
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glDisableClientState(GL_COLOR_ARRAY);
-
-		glShadeModel(GL_FLAT);
-#ifndef USE_OPENGL_ES2
-		if (useShader)
-		{
-			glUseProgram(0);
-		}
+		Vec3f sunPos;
+		float term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey;
+		sky.getShadersParams(sunPos, term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey);
+		loc = glGetUniformLocation(atmoShaderProgram, "sunPos");
+		glUniform3f(loc, sunPos[0], sunPos[1], sunPos[2]);
+		loc = glGetUniformLocation(atmoShaderProgram, "term_x");
+		glUniform1f(loc, term_x);
+		loc = glGetUniformLocation(atmoShaderProgram, "Ax");
+		glUniform1f(loc, Ax);
+		loc = glGetUniformLocation(atmoShaderProgram, "Bx");
+		glUniform1f(loc, Bx);
+		loc = glGetUniformLocation(atmoShaderProgram, "Cx");
+		glUniform1f(loc, Cx);
+		loc = glGetUniformLocation(atmoShaderProgram, "Dx");
+		glUniform1f(loc, Dx);
+		loc = glGetUniformLocation(atmoShaderProgram, "Ex");
+		glUniform1f(loc, Ex);
+		loc = glGetUniformLocation(atmoShaderProgram, "term_y");
+		glUniform1f(loc, term_y);
+		loc = glGetUniformLocation(atmoShaderProgram, "Ay");
+		glUniform1f(loc, Ay);
+		loc = glGetUniformLocation(atmoShaderProgram, "By");
+		glUniform1f(loc, By);
+		loc = glGetUniformLocation(atmoShaderProgram, "Cy");
+		glUniform1f(loc, Cy);
+		loc = glGetUniformLocation(atmoShaderProgram, "Dy");
+		glUniform1f(loc, Dy);
+		loc = glGetUniformLocation(atmoShaderProgram, "Ey");
+		glUniform1f(loc, Ey);
 #endif
 	}
+	else
+	{
+#endif
+		// Adapt luminance at this point to avoid a mismatch with the adaptation value
+		for (int i=0;i<(1+skyResolutionX)*(1+skyResolutionY);++i)
+		{
+			Vec4f& c = colorGrid[i];
+			eye->xyYToRGB(c);
+			c*=atm_intensity;
+		}
+#ifndef USE_OPENGL_ES2
+	}
+#endif
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_COLOR_ARRAY);
+
+	// Load the color components
+	glColorPointer(4, GL_FLOAT, 0, colorGrid);
+#ifndef USE_OPENGL_ES2
+	if (GLEE_ARB_vertex_buffer_object)
+	{
+		// Bind the vertex and indices buffer
+		glBindBufferARB(GL_ARRAY_BUFFER_ARB, vertexBufferId);
+		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, indicesBufferId);
+		glVertexPointer(2, GL_FLOAT, 0, 0);
+
+		// And draw everything at once
+		GLushort* shift=NULL;
+		for (int y=0;y<skyResolutionY;++y)
+		{
+			glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, shift);
+			shift += (skyResolutionX+1)*2;
+		}
+		// Unbind buffers
+		glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
+		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
+	}
+	else
+	{
+#endif
+		// Load the vertex array
+		glVertexPointer(2, GL_FLOAT, 0, posGrid);
+		// And draw everything at once
+		GLushort* shift=indices;
+		for (int y=0;y<skyResolutionY;++y)
+		{
+			glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, shift);
+			shift += (skyResolutionX+1)*2;
+		}
+#ifndef USE_OPENGL_ES2
+	}
+#endif
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_COLOR_ARRAY);
+	glShadeModel(GL_FLAT);
+#ifndef USE_OPENGL_ES2
+	if (useShader)
+	{
+#if QT_VERSION>=0x040600
+		atmoShaderProgram->disable();
+#else
+		glUseProgram(0);
+#endif
+	}
+#endif
 }
