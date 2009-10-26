@@ -293,7 +293,7 @@ bool StelSkyDrawer::computeRCMag(float mag, float rcMag[2]) const
 	return true;
 }
 
-void StelSkyDrawer::preDrawPointSource(const StelPainter* p)
+void StelSkyDrawer::preDrawPointSource(StelPainter* p)
 {
 	Q_ASSERT(p);
 	Q_ASSERT(sPainter==NULL);
@@ -400,7 +400,7 @@ bool StelSkyDrawer::drawPointSource(double x, double y, const float rcMag[2], co
 		if (nbPointSources>=maxPointSources)
 		{
 			// Flush the buffer (draw all buffered stars)
-			const StelPainter* savePainter = sPainter;
+			StelPainter* savePainter = sPainter;
 			postDrawPointSource();
 			sPainter = savePainter;
 		}
@@ -410,7 +410,7 @@ bool StelSkyDrawer::drawPointSource(double x, double y, const float rcMag[2], co
 
 
 // Terminate drawing of a 3D model, draw the halo
-void StelSkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, float mag, const StelPainter* painter, const Vec3f& color)
+void StelSkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, float mag, StelPainter* painter, const Vec3f& color)
 {
 	Q_ASSERT(painter);
 	Q_ASSERT(sPainter==NULL);

@@ -23,9 +23,6 @@
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 #include "VecMath.hpp"
-#include "GLee.h"
-
-#include "fixx11h.h"
 
 #include <QObject>
 
@@ -53,11 +50,11 @@ public:
 	void update(double deltaTime);
 	
 	//! Get the painter currently used or NULL
-	const StelPainter* getPainter() {return sPainter;}
+	StelPainter* getPainter() {return sPainter;}
 	
 	//! Set the proper openGL state before making calls to drawPointSource
 	//! @param p a pointer to a valid instance of a Painter. The instance must be valid until postDrawPointSource() is called
-	void preDrawPointSource(const StelPainter* p);
+	void preDrawPointSource(StelPainter* p);
 		
 	//! Finalize the drawing of point sources
 	void postDrawPointSource();
@@ -90,7 +87,7 @@ public:
 	//! @param mag the source integrated magnitude
 	//! @param p the StelPainter instance to use for this drawing operation
 	//! @param color the object halo RGB color
-	void postDrawSky3dModel(double x, double y, double illuminatedArea, float mag, const StelPainter* p, const Vec3f& color = Vec3f(1.f,1.f,1.f));
+	void postDrawSky3dModel(double x, double y, double illuminatedArea, float mag, StelPainter* p, const Vec3f& color = Vec3f(1.f,1.f,1.f));
 	
 	//! Compute RMag and CMag from magnitude.
 	//! @param mag the object integrated V magnitude
@@ -267,7 +264,7 @@ private:
 	//! Buffer for storing the color array data
 	Vec3f* colorGrid;
 	//! Buffer for storing the texture coordinate array data
-	Vector2<GLshort>* textureGrid;
+	Vector2<short>* textureGrid;
 	//! Current number of sources stored in the buffers (still to display)
 	unsigned int nbPointSources;
 	//! Maximum number of sources which can be stored in the buffers
@@ -284,7 +281,7 @@ private:
 
 	bool flagLuminanceAdaptation;
 	
-	const StelPainter* sPainter;
+	StelPainter* sPainter;
 };
 
 #endif // _STELSKYDRAWER_HPP_
