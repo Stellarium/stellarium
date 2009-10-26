@@ -21,6 +21,13 @@
 #include <QSettings>
 #include <QString>
 
+#ifdef USE_OPENGL_ES2
+ #include "GLES2/gl2.h"
+#else
+ #include "GLee.h"
+ #include "fixx11h.h"
+#endif
+
 #include "LandscapeMgr.hpp"
 #include "Landscape.hpp"
 #include "Atmosphere.hpp"
@@ -96,7 +103,7 @@ void Cardinals::draw(const StelCore* core, double latitude, bool gravityON) cons
 	if (latitude ==  90.0 ) d[0] = d[1] = d[2] = d[3] = sSouth;
 	if (latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = sNorth;
 
-	glColor4f(color[0],color[1],color[2],fader.getInterstate());
+	sPainter.setColor(color[0],color[1],color[2],fader.getInterstate());
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 	// Normal transparency mode

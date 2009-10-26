@@ -163,6 +163,9 @@ public:
 	//! Set the font to use for subsequent text drawing.
 	void setFont(const QFont& font);
 
+	//! Set the color to use for subsequent drawing.
+	void setColor(float r, float g, float b, float a=1.f);
+
 	//! Get the font metrics for the current font.
 	QFontMetrics getFontMetrics() const;
 
@@ -186,9 +189,6 @@ private:
 			bool checkDisc1=true, bool checkDisc2=true, bool checkDisc3=true) const;
 
 	void drawTextGravity180(float x, float y, const QString& str, float xshift = 0, float yshift = 0) const;
-
-	//! Init the real openGL Matrices to a 2d orthographic projection
-	void initGlMatrixOrtho2d(void) const;
 
 	//! The associated instance of projector
 	const StelProjectorP prj;

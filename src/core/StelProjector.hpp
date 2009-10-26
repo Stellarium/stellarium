@@ -222,6 +222,9 @@ public:
 	//! Get the current model view matrix.
 	const Mat4d& getModelViewMatrix() const {return modelViewMatrix;}
 
+	//! Get the current projection matrix.
+	Mat4f getProjectionMatrix() const {return Mat4f(2./viewportXywh[2], 0, 0, 0, 0, 2./viewportXywh[3], 0, 0, 0, 0, -1., 0., -(2.f*viewportXywh[0] + viewportXywh[2])/viewportXywh[2], -(2.f*viewportXywh[1] + viewportXywh[3])/viewportXywh[3], 0, 1);}
+
 	///////////////////////////////////////////////////////////////////////////
 	//! Get a string description of a StelProjectorMaskType.
 	static const QString maskTypeToString(StelProjectorMaskType type);

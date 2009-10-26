@@ -29,6 +29,9 @@
 #include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
 
+#include "GLee.h"
+#include "fixx11h.h"
+
 #include <QSettings>
 #include <QDebug>
 #include <QMetaEnum>
@@ -274,6 +277,7 @@ void StelCore::preDraw()
 	skyDrawer->preDraw();
 
 	// Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
+	StelPainter sPainter(getProjection2d());
 	glClearColor(0,0,0,0);
 	glClear(GL_COLOR_BUFFER_BIT);
 }

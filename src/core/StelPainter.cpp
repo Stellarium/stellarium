@@ -94,12 +94,18 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
+	glLoadIdentity();
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
+	glLoadIdentity();
+	// Set the real openGL projection and modelview matrix to 2d orthographic projection
+	// thus we never need to change to 2dMode from now on before drawing
+	glMultMatrixf(prj->getProjectionMatrix());
+	glMatrixMode(GL_MODELVIEW);
 
 	// Init GL viewport to current projector values
 	glViewport(prj->viewportXywh[0], prj->viewportXywh[1], prj->viewportXywh[2], prj->viewportXywh[3]);
-	initGlMatrixOrtho2d();
+
 	glShadeModel(GL_FLAT);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
@@ -155,6 +161,11 @@ void StelPainter::setFont(const QFont& font)
 	qPainter->setFont(font);
 }
 
+void StelPainter::setColor(float r, float g, float b, float a)
+{
+	glColor4f(r,g,b,a);
+}
+
 QFontMetrics StelPainter::getFontMetrics() const
 {
 	Q_ASSERT(qPainter);
@@ -164,26 +175,6 @@ QFontMetrics StelPainter::getFontMetrics() const
 void StelPainter::initSystemGLInfo()
 {
 }
-
-/*************************************************************************
- Init the real openGL Matrices to a 2d orthographic projection
-*************************************************************************/
-void StelPainter::initGlMatrixOrtho2d(void) const
-{
-	// Set the real openGL projection and modelview matrix to orthographic projection
-	// thus we never need to change to 2dMode from now on before drawing
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	const double left = prj->viewportXywh[0];
-	const double right = prj->viewportXywh[0] + prj->viewportXywh[2];
-	const double bottom = prj->viewportXywh[1];
-	const double top = prj->viewportXywh[1] + prj->viewportXywh[3];
-	const Mat4f m(2./(right-left), 0, 0, 0, 0, 2./(top-bottom), 0, 0, 0, 0, -1., 0., -(right+left)/(right-left), -(top+bottom)/(top-bottom), 0, 1);
-	glMultMatrixf(m);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-}
-
 
 
 ///////////////////////////////////////////////////////////////////////////
