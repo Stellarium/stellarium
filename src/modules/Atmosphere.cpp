@@ -165,7 +165,6 @@ Atmosphere::~Atmosphere(void)
 		delete[] indices;
 		indices = NULL;
 	}
-#ifndef USE_OPENGL_ES2
 	if (useShader)
 	{
 #if QT_VERSION>=0x040600
@@ -175,7 +174,6 @@ Atmosphere::~Atmosphere(void)
 		glDeleteProgram(atmoShaderProgram);
 #endif
 	}
-#endif
 }
 
 void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase,
