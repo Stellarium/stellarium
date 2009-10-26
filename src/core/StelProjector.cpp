@@ -178,3 +178,4 @@ bool StelProjector::unProject(double x, double y, Vec3d &v) const
 
 	return rval;
 }
+

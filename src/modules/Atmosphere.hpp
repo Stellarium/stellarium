@@ -25,8 +25,13 @@
 #include "StelNavigator.hpp"
 #include "Skybright.hpp"
 #include "StelFader.hpp"
-#include "GLee.h"
-#include "fixx11h.h"
+
+#ifdef USE_OPENGL_ES2
+ #include "GLES2/gl2.h"
+#else
+ #include "GLee.h"
+ #include "fixx11h.h"
+#endif
 
 class StelProjector;
 class StelToneReproducer;
@@ -89,9 +94,6 @@ private:
 	double eclipseFactor;
 	ParabolicFader fader;
 	float lightPollutionLuminance;
-	
-	unsigned int vertexBufferId;
-	unsigned int indicesBufferId;
 	
 	//! Whether vertex shader should be used
 	bool useShader;
