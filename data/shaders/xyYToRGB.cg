@@ -21,7 +21,7 @@ varying vec4 resultSkyColor;
 
 void main()
 {
-	gl_Position = projectionMatrix*vec4(skyVertex[0], skyVertex[1], 0, 1);
+	gl_Position = projectionMatrix*vec4(skyVertex[0], skyVertex[1], 0., 1.);
 
 	vec4 color = skyColor;
 	float X,Y,Z;
