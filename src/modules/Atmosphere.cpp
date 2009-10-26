@@ -52,7 +52,6 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 	useShader = QGLShaderProgram::hasShaderPrograms();
 	if (useShader)
 	{
-		qDebug() << "Use vertex shader for atmosphere rendering.";
 		QString filePath;
 		try
 		{
@@ -62,6 +61,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 		{
 			qFatal("Can't find data/shaders/xyYToRGB.cg shader file to load");
 		}
+		qDebug() << "Use vertex shader for atmosphere rendering: " << filePath;
 		QGLShader* vShader = new QGLShader(filePath, QGLShader::VertexShader);
 		atmoShaderProgram = new QGLShaderProgram();
 		if (!vShader->isCompiled())
@@ -131,8 +131,17 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 		}
 		else
 		{
+			GLuint fshader = glCreateShader(GL_FRAGMENT_SHADER);
+			const char* fshaderSrc = "varying vec4 resultSkyColor;\n"
+			"void main()\n"
+			"{\n"
+			 "   gl_FragColor = resultSkyColor;\n"
+			 "}";
+			glShaderSource(fshader, 1, &fshaderSrc, NULL);
+			glCompileShader(fshader);
 			atmoShaderProgram = glCreateProgram();
 			glAttachShader(atmoShaderProgram,shaderXyYToRGB);
+			glAttachShader(atmoShaderProgram,fshader);
 			glLinkProgram(atmoShaderProgram);
 		}
 	}
@@ -399,11 +408,11 @@ void Atmosphere::draw(StelCore* core)
 		atmoShaderProgram->setUniformValue("Cy", Cy);
 		atmoShaderProgram->setUniformValue("Dy", Dy);
 		atmoShaderProgram->setUniformValue("Ey", Ey);
-		const Mat4f& m = sPainter.getProjector()->getProjectionMatrix();
+		const Mat4f m = sPainter.getProjector()->getProjectionMatrix();
 		atmoShaderProgram->setUniformValue("projectionMatrix",
-			QMatrix4x4(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11], m[12], m[13], m[14], m[15]));
-		atmoShaderProgram->setAttributeArray("skyVertex", (float*)posGrid, 2, 0);
-		atmoShaderProgram->setAttributeArray("skyColor", (float*)colorGrid, 4, 0);
+			QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]));
+		atmoShaderProgram->setAttributeArray("skyVertex", (const GLfloat*)posGrid, 2, 0);
+		atmoShaderProgram->setAttributeArray("skyColor", (const GLfloat*)colorGrid, 4, 0);
 #else
 		glUseProgram(atmoShaderProgram);
 		float a, b, c;
@@ -487,16 +496,18 @@ void Atmosphere::draw(StelCore* core)
 		shift += (skyResolutionX+1)*2;
 	}
 
-#ifndef USE_OPENGL_ES2
-	glShadeModel(GL_FLAT);
-#endif
-
 	if (useShader)
 	{
 #if QT_VERSION>=0x040600
 		atmoShaderProgram->disable();
 #else
 		glUseProgram(0);
+#endif
+	}
+	else
+	{
+#ifndef USE_OPENGL_ES2
+		glShadeModel(GL_FLAT);
 #endif
 	}
 }
