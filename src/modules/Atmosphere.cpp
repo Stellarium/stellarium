@@ -482,6 +482,10 @@ void Atmosphere::draw(StelCore* core)
 		}
 #ifndef USE_OPENGL_ES2
 		glShadeModel(GL_SMOOTH);
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_COLOR_ARRAY);
+		glColorPointer(4, GL_FLOAT, 0, colorGrid);
+		glVertexPointer(2, GL_FLOAT, 0, 0);
 #endif
 	}
 
@@ -508,6 +512,8 @@ void Atmosphere::draw(StelCore* core)
 	{
 #ifndef USE_OPENGL_ES2
 		glShadeModel(GL_FLAT);
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_COLOR_ARRAY);
 #endif
 	}
 }
