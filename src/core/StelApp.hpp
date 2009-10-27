@@ -20,7 +20,6 @@
 #ifndef _STELAPP_HPP_
 #define _STELAPP_HPP_
 
-#include "fixx11h.h"
 #include <QString>
 #include <QVariant>
 #include <QObject>

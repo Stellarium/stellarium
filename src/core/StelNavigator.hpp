@@ -23,7 +23,6 @@
 #include "VecMath.hpp"
 #include "StelLocation.hpp"
 
-#include "fixx11h.h"
 #include <QObject>
 #include <QString>
 #include <QTime>

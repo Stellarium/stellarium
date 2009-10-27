@@ -21,7 +21,6 @@
 #define _STELUTILS_HPP_
 
 #include "VecMath.hpp"
-#include "fixx11h.h"
 
 #include <QVariantMap>
 #include <QDateTime>

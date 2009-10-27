@@ -21,14 +21,13 @@
 #define _STELTEXTUREMGR_HPP_
 
 #include <config.h>
-#include "GLee.h"
-#include "fixx11h.h"
+#include "StelTexture.hpp"
 
 #include <QObject>
 #include <QMap>
 #include <QMutex>
+#include <QtOpenGL>
 
-#include "StelTexture.hpp"
 
 //! @class ImageLoader
 //! Abstract class for any Image loaders.

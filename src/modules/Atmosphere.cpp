@@ -20,8 +20,7 @@
 #ifdef USE_OPENGL_ES2
  #include "GLES2/gl2.h"
 #else
- #include "GLee.h"
- #include "fixx11h.h"
+ #include <QtOpenGL>
 #endif
 
 #include "Atmosphere.hpp"
@@ -101,7 +100,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 		}
 	}
 #else
-	if (GLEE_VERSION_2_0)
+	if (QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0))
 	{
 		useShader=true;
 	}

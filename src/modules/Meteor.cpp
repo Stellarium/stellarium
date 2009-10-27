@@ -28,9 +28,7 @@ which are generally not at the apex of the Earth's way, such as the Perseids sho
 
 // Improved realism and efficiency 2004-12
 
-#include "GLee.h"
-#include "fixx11h.h"
-
+#include <QtOpenGL>
 #include <cstdlib>
 #include "Meteor.hpp"
 #include "StelCore.hpp"

@@ -29,8 +29,7 @@
 #ifdef USE_OPENGL_ES2
  #include "GLES2/gl2.h"
 #else
- #include "GLee.h"
- #include "fixx11h.h"
+ #include <QtOpenGL>
 #endif
 
 class StelProjector;
