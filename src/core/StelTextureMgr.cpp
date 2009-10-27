@@ -73,21 +73,12 @@ StelTextureMgr::~StelTextureMgr()
 *************************************************************************/
 void StelTextureMgr::init()
 {
-	StelApp::makeMainGLContextCurrent();
-
 #ifndef USE_OPENGL_ES2
 	// Get whether non-power-of-2 and non square 2D textures are supported on this video card
 	isNoPowerOfTwoAllowed = GLEE_ARB_texture_non_power_of_two || GLEE_VERSION_2_0;
 #else
 	isNoPowerOfTwoAllowed = true;
 #endif
-	// Check vendor and renderer
-	QString glRenderer((char*)glGetString(GL_RENDERER));
-	QString glVendor((char*)glGetString(GL_VENDOR));
-	QString glVersion((char*)glGetString(GL_VERSION));
-
-	// Get Maximum Texture Size Supported by the video card
-	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTextureSize);
 }
 
 /*************************************************************************
@@ -457,12 +448,6 @@ bool StelTextureMgr::loadImage(StelTexture* tex)
 		tex->height = h;
 		TexMalloc::free(tex->texels);
 		tex->texels = texels2;
-	}
-
-	// Check that the image size is compatible with the hardware
-	if (tex->width>maxTextureSize)
-	{
-		qWarning() << "Warning: texture " << tex->fullPath << " is larger than " << maxTextureSize << " pixels and might be not supported.";
 	}
 
 	// The glLoading will be done later in the main thread
