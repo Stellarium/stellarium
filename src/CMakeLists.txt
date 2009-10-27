@@ -249,8 +249,6 @@ SET(stellarium_lib_SRCS
 	modules/Telescope.hpp
 	modules/TelescopeMgr.cpp
 	modules/TelescopeMgr.hpp
-#	modules/TextUI.cpp
-#	modules/TextUI.hpp
 	modules/ZoneArray.cpp
 	modules/ZoneArray.hpp
 	modules/ZoneData.hpp
