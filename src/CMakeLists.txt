@@ -158,7 +158,6 @@ SET(stellarium_lib_SRCS
 	core/StelGuiBase.hpp
 	core/StelGuiBase.cpp
 
-	external/bytes.h
 	external/fixx11h.h
 	external/gettext.h
 		${gl_lib_SRCS}
