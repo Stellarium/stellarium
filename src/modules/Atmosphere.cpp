@@ -19,8 +19,14 @@
 
 #ifdef USE_OPENGL_ES2
  #include "GLES2/gl2.h"
-#else
+#endif
+
+#if QT_VERSION>=0x040600
+ #include <QGLShaderProgram>
  #include <QtOpenGL>
+#else
+ #include "GLee.h"
+ #include "fixx11h.h"
 #endif
 
 #include "Atmosphere.hpp"
@@ -33,10 +39,6 @@
 #include "StelFileMgr.hpp"
 
 #include <QDebug>
-
-#if QT_VERSION>=0x040600
- #include <QGLShaderProgram>
-#endif
 
 inline bool myisnan(double value)
 {
