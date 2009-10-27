@@ -17,6 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include "config.h"
+
 #include <QDebug>
 #include <QFile>
 #ifdef WIN32
@@ -25,12 +27,20 @@
 #endif
 
 #include "ZoneArray.hpp"
-
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelGeodesicGrid.hpp"
 #include "StelObject.hpp"
 #include "StelNavigator.hpp"
+
+#ifdef HAVE_BYTESWAP_H
+#include <byteswap.h>
+#else
+static unsigned int bswap_32(unsigned int val) {
+  return (((val) & 0xff000000) >> 24) | (((val) & 0x00ff0000) >>  8) |
+	(((val) & 0x0000ff00) <<  8) | (((val) & 0x000000ff) << 24);
+}
+#endif
 
 namespace BigStarCatalogExtension
 {
@@ -450,7 +460,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 						for (unsigned int i=0;i<nr_of_stars;i++,s++)
 						{
 							s->repack(
-#ifdef WORDS_BIGENDIAN
+#if Q_BYTE_ORDER == Q_BIG_ENDIAN
 							    // need for byte_swap on a BE machine means that catalog is LE
 							    !byte_swap
 #else
