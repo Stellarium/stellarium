@@ -155,9 +155,6 @@ private:
 	GLint magFilter;
 	StelTexture::DynamicRangeMode dynamicRangeMode;
 
-	//! The maximum texture size supported by the video card
-	GLint maxTextureSize;
-
 	//! Whether ARB_texture_non_power_of_two is supported on this card
 	bool isNoPowerOfTwoAllowed;
 };
