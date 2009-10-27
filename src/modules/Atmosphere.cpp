@@ -69,6 +69,10 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 			qWarning() << "Error while compiling shader: " << vShader->log();
 			useShader = false;
 		}
+		if (!vShader->log().isEmpty())
+		{
+			qWarning() << "Warnings while compiling vertex shader: " << vShader->log();
+		}
 		QGLShader* fShader = new QGLShader(QGLShader::FragmentShader);
 		if (!fShader->compile(
 						"varying mediump vec4 resultSkyColor;\n"
@@ -80,13 +84,20 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 			qWarning() << "Error while compiling fragment shader: " << fShader->log();
 			useShader = false;
 		}
-
+		if (!fShader->log().isEmpty())
+		{
+			qWarning() << "Warnings while compiling fragment shader: " << vShader->log();
+		}
 		atmoShaderProgram->addShader(vShader);
 		atmoShaderProgram->addShader(fShader);
 		if (!atmoShaderProgram->link())
 		{
 			qWarning() << "Error while linking shader program: " << atmoShaderProgram->log();
 			useShader = false;
+		}
+		if (!atmoShaderProgram->log().isEmpty())
+		{
+			qWarning() << "Warnings while linking shader: " << atmoShaderProgram->log();
 		}
 	}
 #else
