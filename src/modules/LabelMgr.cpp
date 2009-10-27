@@ -17,9 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "GLee.h"
-#include "fixx11h.h"
-
 #include "LabelMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelApp.hpp"
@@ -40,6 +37,7 @@
 #include <vector>
 #include <QString>
 #include <QDebug>
+#include <QtOpenGL>
 
 // Base class from which other label types inherit
 class StelLabel

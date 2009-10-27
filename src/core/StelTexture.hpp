@@ -20,13 +20,12 @@
 #ifndef _STELTEXTURE_HPP_
 #define _STELTEXTURE_HPP_
 
-#include "GLee.h"
-#include "fixx11h.h"
 #include "VecMath.hpp"
 #include "StelTextureTypes.hpp"
 
 #include <QObject>
 #include <QImage>
+#include <QtOpenGL>
 
 class QMutex;
 class QSemaphore;

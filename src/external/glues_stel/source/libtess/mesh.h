@@ -36,7 +36,6 @@
 #define __mesh_h_
 
 #include "glues.h"
-#include "GLee.h"
 
 typedef struct GLUESmesh GLUESmesh;
 

@@ -20,9 +20,7 @@
 #include <functional>
 #include <cstdlib>
 #include <QSettings>
-
-#include "GLee.h"
-#include "fixx11h.h"
+#include <QtOpenGL>
 
 #include "StelProjector.hpp"
 #include "StelNavigator.hpp"

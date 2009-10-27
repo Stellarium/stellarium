@@ -33,6 +33,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#if defined(Q_WS_MAC)
+# include <OpenGL/gl.h>
+#elif defined(QT_OPENGL_ES_1) || defined(QT_OPENGL_ES_1_CL)
+# include <GLES/gl.h>
+#elif defined(QT_OPENGL_ES_2)
+# include <GLES2/gl2.h>
+#else
+# include <GL/gl.h>
+#endif
+
 #include "glues_error.h"
 
 static unsigned char* __gluesTessErrors[]=

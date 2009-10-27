@@ -39,8 +39,6 @@
 #ifdef __cplusplus
    extern "C" {
 #endif
-
-#include "GLee.h"
 				 
 /* ErrorCode */
 #define GLUES_INVALID_ENUM                   100900
@@ -103,8 +101,6 @@
 #define GLUES_NURBS_ERROR35                  100285
 #define GLUES_NURBS_ERROR36                  100286
 #define GLUES_NURBS_ERROR37                  100287
-
-const GLubyte* gluesErrorString(GLenum errorCode);
 
 #ifdef __cplusplus
 }

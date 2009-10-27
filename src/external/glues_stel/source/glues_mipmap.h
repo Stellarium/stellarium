@@ -33,7 +33,15 @@
 #ifndef __GLUESES_MIPMAP_H__
 #define __GLUESES_MIPMAP_H__
 
-#include "GLee.h"
+#if defined(Q_WS_MAC)
+# include <OpenGL/gl.h>
+#elif defined(QT_OPENGL_ES_1) || defined(QT_OPENGL_ES_1_CL)
+# include <GLES/gl.h>
+#elif defined(QT_OPENGL_ES_2)
+# include <GLES2/gl2.h>
+#else
+# include <GL/gl.h>
+#endif
 
 #ifdef __cplusplus
    extern "C" {
