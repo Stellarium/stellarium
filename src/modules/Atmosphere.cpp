@@ -55,11 +55,11 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 		QString filePath;
 		try
 		{
-			filePath = StelApp::getInstance().getFileMgr().findFile("data/shaders/xyYToRGB.cg");
+			filePath = StelApp::getInstance().getFileMgr().findFile("data/shaders/xyYToRGB.glsl");
 		}
 		catch (std::runtime_error& e)
 		{
-			qFatal("Can't find data/shaders/xyYToRGB.cg shader file to load");
+			qFatal("Can't find data/shaders/xyYToRGB.glsl shader file to load");
 		}
 		qDebug() << "Use vertex shader for atmosphere rendering: " << filePath;
 		QGLShader* vShader = new QGLShader(filePath, QGLShader::VertexShader);
@@ -113,11 +113,11 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 		GLuint shaderXyYToRGB = glCreateShader(GL_VERTEX_SHADER);
 		try
 		{
-			filePath = StelApp::getInstance().getFileMgr().findFile("data/shaders/xyYToRGB.cg");
+			filePath = StelApp::getInstance().getFileMgr().findFile("data/shaders/xyYToRGB.glsl");
 		}
 		catch (std::runtime_error& e)
 		{
-			qFatal("Can't find data/shaders/xyYToRGB.cg shader file to load");
+			qFatal("Can't find data/shaders/xyYToRGB.glsl shader file to load");
 		}
 
 		QFile fic(filePath);

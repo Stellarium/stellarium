@@ -1,4 +1,4 @@
 ########### install files ###############
 
-INSTALL(FILES xyYToRGB.cg DESTINATION share/${PACKAGE}/data/shaders)
+INSTALL(FILES xyYToRGB.glsl DESTINATION share/${PACKAGE}/data/shaders)
 
