@@ -21,9 +21,7 @@
 #include <QSettings>
 #include <QDebug>
 #include <QFontMetrics>
-
-#include "GLee.h"
-#include "fixx11h.h"
+#include <QtOpenGL>
 
 #include "GridLinesMgr.hpp"
 #include "StelMovementMgr.hpp"

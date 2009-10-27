@@ -27,9 +27,7 @@
 
 #include "StelUtils.hpp"
 #include "VecMath.hpp"
-#include "GLee.h"
-
-#include "fixx11h.h"
+#include <QtOpenGL>
 #include <QString>
 #include <QStringList>
 #include <QTextStream>

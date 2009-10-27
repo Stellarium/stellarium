@@ -37,11 +37,20 @@
 #ifndef __glues_h__
 #define __glues_h__
 
+
+#if defined(Q_WS_MAC)
+# include <OpenGL/gl.h>
+#elif defined(QT_OPENGL_ES_1) || defined(QT_OPENGL_ES_1_CL)
+# include <GLES/gl.h>
+#elif defined(QT_OPENGL_ES_2)
+# include <GLES2/gl2.h>
+#else
+# include <GL/gl.h>
+#endif
+
 #ifdef __cplusplus
    extern "C" {
 #endif
-
-#include "GLee.h"
 
 /*************************************************************/
 

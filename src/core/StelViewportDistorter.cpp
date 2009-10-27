@@ -25,9 +25,7 @@
 #include <QDataStream>
 #include <QDebug>
 
-#include "GLee.h"
-
-#include "fixx11h.h"
+#include <QtOpenGL>
 #include "StelViewportDistorter.hpp"
 #include "SphericMirrorCalculator.hpp"
 #include "StelUtils.hpp"
@@ -193,12 +191,15 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	// initialize mirror_texture:
 	glGenTextures(1, &mirror_texture);
 	glBindTexture(GL_TEXTURE_2D, mirror_texture);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	if (flag_use_ext_framebuffer_object)
 	{
+		Q_ASSERT(0);
+		// Update the code using QGLFramebufferObject class
+#if 0
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8,
 		             texture_wh,texture_wh, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
 		// create the depth buffer (which also includes the stencil buffer
@@ -237,6 +238,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		glClear(GL_COLOR_BUFFER_BIT);
 		// Unbind the FBO
 		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+#endif
 	}
 	else
 	{
@@ -416,8 +418,11 @@ StelViewportDistorterFisheyeToSphericMirror::~StelViewportDistorterFisheyeToSphe
 	if (texture_point_array) delete[] texture_point_array;
 	if (flag_use_ext_framebuffer_object)
 	{
+		Q_ASSERT(0);
+#if 0
 		glDeleteFramebuffersEXT(1, &fbo);
 		glDeleteRenderbuffersEXT(1, &depth_buffer);
+#endif
 	}
 	glDeleteTextures(1,&mirror_texture);
 	
@@ -522,7 +527,10 @@ void StelViewportDistorterFisheyeToSphericMirror::prepare(void) const
 	// First we bind the FBO so we can render to it
 	if (flag_use_ext_framebuffer_object)
 	{
+		Q_ASSERT(0);
+#if 0
 		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fbo);
+#endif
 	}
 }
 
@@ -531,7 +539,9 @@ void StelViewportDistorterFisheyeToSphericMirror::distort(void) const
 	// set rendering back to default frame buffer
 	if (flag_use_ext_framebuffer_object)
 	{
+#if 0
 		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+#endif
 	}
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
 	glEnable(GL_TEXTURE_2D);

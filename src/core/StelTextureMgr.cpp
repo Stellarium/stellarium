@@ -28,13 +28,13 @@ extern "C" {
 
 #include "StelUtils.hpp"
 
-#include "fixx11h.h"
 #include <QHttp>
 #include <QFileInfo>
 #include <QFile>
 #include <QDebug>
 #include <QThread>
 #include <QSettings>
+#include <QGLFormat>
 #include <cstdlib>
 
 // Initialize statics
@@ -73,12 +73,8 @@ StelTextureMgr::~StelTextureMgr()
 *************************************************************************/
 void StelTextureMgr::init()
 {
-#ifndef USE_OPENGL_ES2
-	// Get whether non-power-of-2 and non square 2D textures are supported on this video card
-	isNoPowerOfTwoAllowed = GLEE_ARB_texture_non_power_of_two || GLEE_VERSION_2_0;
-#else
-	isNoPowerOfTwoAllowed = true;
-#endif
+	StelApp::getInstance().makeMainGLContextCurrent();
+	isNoPowerOfTwoAllowed = QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0);
 }
 
 /*************************************************************************

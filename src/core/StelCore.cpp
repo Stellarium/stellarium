@@ -29,9 +29,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
 
-#include "GLee.h"
-#include "fixx11h.h"
-
+#include <QtOpenGL>
 #include <QSettings>
 #include <QDebug>
 #include <QMetaEnum>
