@@ -13,18 +13,22 @@ uniform vec3 sunPos;
 uniform float term_x, Ax, Bx, Cx, Dx, Ex;
 uniform float term_y, Ay, By, Cy, Dy, Ey;
 
+// The current projection matrix
 uniform mat4 projectionMatrix;
+
+// Contains the 2d position of the point on the screen (before multiplication by the projection matrix)
 attribute vec2 skyVertex;
+
+// Contains the r,g,b,Y (luminosity) components.
 attribute vec4 skyColor;
 
+// The output variable passed to the fragment shader
 varying vec4 resultSkyColor;
 
 void main()
 {
-	gl_Position = projectionMatrix*vec4(skyVertex[0], skyVertex[1], 0., 1.);
-
+	gl_Position = projectionMatrix*vec4(skyVertex, 0., 1);
 	vec4 color = skyColor;
-	float X,Y,Z;
 
 	///////////////////////////////////////////////////////////////////////////
 	// First compute the xy color component
@@ -32,9 +36,9 @@ void main()
 	// + the Y (luminance) component of the color in the alpha channel
 	if (color[3]>0.01)
 	{
-		float cosDistSun = sunPos[0]*color[0] + sunPos[1]*color[1] + sunPos[2]*color[2];
-		float distSun = acos(cosDistSun);
-		float cosDistSun_q = cosDistSun*cosDistSun;
+		float cosDistSun_q = sunPos[0]*color[0] + sunPos[1]*color[1] + sunPos[2]*color[2];
+		float distSun = acos(cosDistSun_q);
+		cosDistSun_q*=cosDistSun_q;
 		float oneOverCosZenithAngle = (color[2]==0.) ? 1e30 : 1. / color[2];
 		
 		color[0] = term_x * (1. + Ax * exp(Bx*oneOverCosZenithAngle))* (1. + Cx * exp(Dx*distSun) + Ex * cosDistSun_q);
@@ -50,7 +54,6 @@ void main()
 		color[0] = 0.25;
 		color[1] = 0.25;
 	}
-	
 	color[2]=color[3];
 	color[3]=1.;
 	
@@ -95,7 +98,5 @@ void main()
 	// Convert from xyY to XZY
 	// Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white
 	const mat4 adobeRGB = mat4(2.04148, -0.969258, 0.0134455, 0., -0.564977, 1.87599, -0.118373, 0., -0.344713, 0.0415557, 1.01527, 0., 0., 0., 0., 1.);
-	color = adobeRGB*vec4(color[0] * color[2] / color[1], color[2], (1. - color[0] - color[1]) * color[2] / color[1], 1.);
-
-	resultSkyColor = color*brightnessScale;
+	resultSkyColor = (adobeRGB*vec4(color[0] * color[2] / color[1], color[2], (1. - color[0] - color[1]) * color[2] / color[1], 1.)) * brightnessScale;
 }
