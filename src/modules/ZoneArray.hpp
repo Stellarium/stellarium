@@ -35,7 +35,6 @@
 #include "StelCore.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StarMgr.hpp"
-#include "bytes.h"
 
 #include "StelPainter.hpp"
 

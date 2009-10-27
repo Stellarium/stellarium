@@ -47,7 +47,6 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "bytes.h"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelIniParser.hpp"
@@ -187,7 +186,6 @@ void StarMgr::init()
 	loadStarSettings();
 	loadData();
 	starFont.setPixelSize(13);
-	//starFont.setStyleStrategy(QFont::NoAntialias);
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
