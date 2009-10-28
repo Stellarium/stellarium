@@ -61,6 +61,9 @@ struct EdgeVertex
 	bool edgeFlag;
 };
 
+QDataStream& operator<<(QDataStream& out, const EdgeVertex&);
+QDataStream& operator>>(QDataStream& in, EdgeVertex&);
+
 class SubContour : public QVector<EdgeVertex>
 {
 public:
@@ -116,6 +119,9 @@ private:
 	// For unit tests
 	friend class TestStelSphericalGeometry;
 
+	friend QDataStream& operator<<(QDataStream&, const OctahedronPolygon&);
+	friend QDataStream& operator>>(QDataStream&, OctahedronPolygon&);
+
 	void projectOnOctahedron();
 
 	//! Append all theOctahedronPolygonach octahedron sides. No tesselation occurs at this point,
@@ -150,6 +156,10 @@ private:
 	static bool isTriangleConvexPositive2D(const Vec3d& a, const Vec3d& b, const Vec3d& c);
 	static bool triangleContains2D(const Vec3d& a, const Vec3d& b, const Vec3d& c, const Vec3d& p);
 };
+
+// Serialization routines
+QDataStream& operator<<(QDataStream& out, const OctahedronPolygon&);
+QDataStream& operator>>(QDataStream& in, OctahedronPolygon&);
 
 #endif // _OCTAHEDRON_REGION_HPP_
 

@@ -36,59 +36,46 @@ int SphericalRegionP::initialize()
 	return id;
 }
 
-//SphericalRegionP SphericalRegionP::getIntersection(const SphericalRegionP& reg1, const SphericalRegionP& reg2)
-//{
-//	if (reg1->getType()==SphericalRegion::AllSky)
-//	{
-//		if (reg2->getType()==SphericalRegion::AllSky)
-//			return SphericalRegionP(new AllSkySphericalRegion());
-//		return SphericalRegionP(new SphericalPolygon(reg2->toSphericalPolygon()));
-//	}
-//	if (reg2->getType()==SphericalRegion::AllSky)
-//		return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon()));
-//
-//	return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon().getIntersection(reg2->toSphericalPolygon())));
-//}
-//
-//SphericalRegionP SphericalRegionP::getUnion(const SphericalRegionP& reg1, const SphericalRegionP& reg2)
-//{
-//	if (reg1->getType()==SphericalRegion::AllSky || reg2->getType()!=SphericalRegion::AllSky)
-//	{
-//		return SphericalRegionP(new AllSkySphericalRegion());
-//	}
-//	return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon().getUnion(reg2->toSphericalPolygon())));
-//}
-//
-//SphericalRegionP SphericalRegionP::getSubtraction(const SphericalRegionP& reg1, const SphericalRegionP& reg2)
-//{
-//	return SphericalRegionP(new SphericalPolygon(reg1->toSphericalPolygon().getSubtraction(reg2->toSphericalPolygon())));
-//}
-
 QDataStream& operator<<(QDataStream& out, const SphericalRegionP& region)
 {
-	out << region->toQVariant();
+	out << (quint8)region->getType();
+	region->serialize(out);
 	return out;
 }
 
 QDataStream& operator>>(QDataStream& in, SphericalRegionP& region)
 {
-	QVariantMap v;
-	in >> v;
-	try
+	quint8 regType;
+	in >> regType;
+	switch (regType)
 	{
-		region=SphericalRegionP::loadFromQVariant(v);
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << e.what();
-		Q_ASSERT(0);
+		case SphericalRegion::Empty:
+			region = EmptySphericalRegion::staticInstance;
+			return in;
+		case SphericalRegion::AllSky:
+			region = AllSkySphericalRegion::staticInstance;
+			return in;
+		case SphericalRegion::Cap:
+			region = SphericalCap::deserialize(in);
+			return in;
+		case SphericalRegion::ConvexPolygon:
+			region = SphericalConvexPolygon::deserialize(in);
+			return in;
+		case SphericalRegion::Polygon:
+			region = SphericalPolygon::deserialize(in);
+			return in;
+		case SphericalRegion::Point:
+			region = SphericalPoint::deserialize(in);
+			return in;
+		default:
+			Q_ASSERT(0);	// Unknown region type
 	}
 	return in;
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
-// Default implmentations of methods for SphericalRegion
+// Default implementations of methods for SphericalRegion
 ///////////////////////////////////////////////////////////////////////////////////////////////
 QByteArray SphericalRegion::toJSON() const
 {
@@ -381,6 +368,14 @@ QVariantMap SphericalCap::toQVariant() const
 	return res;
 }
 
+SphericalRegionP SphericalCap::deserialize(QDataStream& in)
+{
+	Vec3d nn;
+	double dd;
+	in >> nn >> dd;
+	return SphericalRegionP(new SphericalCap(nn, dd));
+}
+
 ////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalPoint
 ////////////////////////////////////////////////////////////////////////////
@@ -413,10 +408,18 @@ QVariantMap SphericalPoint::toQVariant() const
 	return res;
 }
 
+SphericalRegionP SphericalPoint::deserialize(QDataStream& in)
+{
+	Vec3d nn;
+	in >> nn;
+	return SphericalRegionP(new SphericalPoint(nn));
+}
 
 ////////////////////////////////////////////////////////////////////////////
 // Methods for AllSkySphericalRegion
 ////////////////////////////////////////////////////////////////////////////
+const SphericalRegionP AllSkySphericalRegion::staticInstance = SphericalRegionP(new AllSkySphericalRegion());
+
 QVariantMap AllSkySphericalRegion::toQVariant() const
 {
 	QVariantMap res;
@@ -428,6 +431,8 @@ QVariantMap AllSkySphericalRegion::toQVariant() const
 ////////////////////////////////////////////////////////////////////////////
 // Methods for EmptySphericalRegion
 ////////////////////////////////////////////////////////////////////////////
+const SphericalRegionP EmptySphericalRegion::staticInstance = SphericalRegionP(new EmptySphericalRegion());
+
 QVariantMap EmptySphericalRegion::toQVariant() const
 {
 	QVariantMap res;
@@ -441,22 +446,35 @@ QVariantMap EmptySphericalRegion::toQVariant() const
 QVariantMap SphericalPolygon::toQVariant() const
 {
 	QVariantMap res;
-	QVariantList worldCoordinates;
-	double ra, dec;
-	foreach (const QVector<Vec3d>& contour, getClosedOutlineContours())
-	{
-		QVariantList cv;
-		foreach (const Vec3d& v, contour)
-		{
-			StelUtils::rectToSphe(&ra, &dec, v);
-			QVariantList vv;
-			vv << ra*180./M_PI << dec*180./M_PI;
-			cv.append((QVariant)vv);
-		}
-		worldCoordinates.append((QVariant)cv);
-	}
-	res.insert("worldCoords", worldCoordinates);
+//	QVariantList worldCoordinates;
+//	double ra, dec;
+	Q_ASSERT(0);
+//	foreach (const QVector<Vec3d>& contour, getFillVertexArray().vertex)
+//	{
+//		QVariantList cv;
+//		foreach (const Vec3d& v, contour)
+//		{
+//			StelUtils::rectToSphe(&ra, &dec, v);
+//			QVariantList vv;
+//			vv << ra*180./M_PI << dec*180./M_PI;
+//			cv.append((QVariant)vv);
+//		}
+//		worldCoordinates.append((QVariant)cv);
+//	}
+//	res.insert("worldCoords", worldCoordinates);
 	return res;
+}
+
+void SphericalPolygon::serialize(QDataStream& out) const
+{
+	out << octahedronPolygon;
+}
+
+SphericalRegionP SphericalPolygon::deserialize(QDataStream& in)
+{
+	OctahedronPolygon p;
+	in >> p;
+	return SphericalRegionP(new SphericalPolygon(p));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -638,6 +656,13 @@ QVariantMap SphericalConvexPolygon::toQVariant() const
 	}
 	res.insert("worldCoords", cv);
 	return res;
+}
+
+SphericalRegionP SphericalConvexPolygon::deserialize(QDataStream& in)
+{
+	QVector<Vec3d> contour;
+	in >> contour;
+	return SphericalRegionP(new SphericalConvexPolygon(contour));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
