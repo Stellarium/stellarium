@@ -338,7 +338,7 @@ SubContour OctahedronPolygon::tesselateOneSide(GLUEStesselator* tess, int sidenb
 			static int count =0;
 			qDebug() << count++;
 			qDebug() << data.result[i*3].vertex.toString() << data.result[i*3+1].vertex.toString() << data.result[i*3+2].vertex.toString();
-			//Q_ASSERT(0);
+			Q_ASSERT(0);
 		}
 	}
 #endif
