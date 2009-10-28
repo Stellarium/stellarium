@@ -350,6 +350,8 @@ void StelApp::init()
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
+
+	setUseGLShaders(confSettings->value("main/use_glshaders", true).toBool());
 	
 	// Initialize AFTER creation of openGL context
 	textureMgr = new StelTextureMgr();
