@@ -46,11 +46,12 @@ inline bool myisnan(double value)
 }
 
 Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL), colorGrid(NULL), indices(NULL),
-					   averageLuminance(0.f), eclipseFactor(1.), lightPollutionLuminance(0), useShader(false)
+					   averageLuminance(0.f), eclipseFactor(1.), lightPollutionLuminance(0)
 {
 	setFadeDuration(3.f);
+	useShader = StelApp::getInstance().getUseGLShaders();
 #if QT_VERSION>=0x040600
-	useShader = QGLShaderProgram::hasShaderPrograms();
+	useShader = useShader && QGLShaderProgram::hasShaderPrograms();
 	if (useShader)
 	{
 		QString filePath;
@@ -102,9 +103,9 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 		}
 	}
 #else
-	if (QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0))
+	if (!QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) && !QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0))
 	{
-		useShader=true;
+		useShader=false;
 	}
 
 	if (useShader)
