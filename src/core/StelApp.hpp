@@ -204,6 +204,11 @@ public slots:
 	//! Get flag for activating night vision mode.
 	bool getVisionModeNight() const {return flagNightVision;}
 
+	//! Set flag for using opengl shaders
+	void setUseGLShaders(bool value) {useGLShaders = value;}
+	//! Get flag for using opengl shaders
+	bool getUseGLShaders() {return useGLShaders;}
+
 	//! Set the minimum frames per second.  Usually this minimum will
 	//! be switched to after there are no user events for some seconds
 	//! to save power.  However, if can be useful to set this to a high
@@ -405,6 +410,9 @@ private:
 
 	//! Define whether we are in night vision mode
 	bool flagNightVision;
+
+	//! Define whether we use opengl shaders
+	bool useGLShaders;
 
 	QString configFile;
 	QString startupScript;
