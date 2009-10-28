@@ -302,21 +302,14 @@ void TestStelSphericalGeometry::testEnlarge()
 void TestStelSphericalGeometry::testSphericalPolygon()
 {
 	SphericalRegionP holySquare2 = bigSquare.getSubtraction(smallSquare);
-// 	QVector<QVector<Vec3d> > contours2 = holySquare2.getSimplifiedContours();
-// 	QVERIFY(contours2.size()==2);
-// 	QVERIFY(contours2[0].size()==4);
-// 	qDebug() << holySquare.toJSON();
-// 	qDebug() << holySquare2.toJSON();
-// 	QVERIFY(contours2[1].size()==4);
-// 	QVERIFY(contours==contours2);
 
-// 	QCOMPARE(holySquare2.getArea(), holySquare.getArea());
-//
-// 	//Booleans methods
-// 	QCOMPARE(holySquare.getArea(), bigSquare.getArea()-smallSquare.getArea());
-// 	QCOMPARE(bigSquare.getUnion(holySquare).getArea(), bigSquare.getArea());
-// 	QCOMPARE(bigSquare.getSubtraction(smallSquare).getArea(), bigSquare.getArea()-smallSquare.getArea());
-// 	QCOMPARE(bigSquare.getIntersection(smallSquare).getArea(), smallSquare.getArea());
+	QCOMPARE(holySquare2->getArea(), holySquare.getArea());
+
+	//Booleans methods
+	QCOMPARE(holySquare.getArea(), bigSquare.getArea()-smallSquare.getArea());
+	QCOMPARE(bigSquare.getUnion(holySquare)->getArea(), bigSquare.getArea());
+	QCOMPARE(bigSquare.getSubtraction(smallSquare)->getArea(), bigSquare.getArea()-smallSquare.getArea());
+	QCOMPARE(bigSquare.getIntersection(smallSquare)->getArea(), smallSquare.getArea());
 
 	// Point contain methods
 	Vec3d v0, v1, v2;
@@ -422,6 +415,7 @@ void TestStelSphericalGeometry::testOctahedronPolygon()
 
 	SubContour contour(smallSquareConvex.getConvexContour());
 	OctahedronPolygon splittedSub(contour);
+	QCOMPARE(splittedSub.getArea(), smallSquareConvex.getArea());
 
 	QVector<Vec3d> va = northPoleSquare.getOutlineVertexArray().vertex;
 	QVERIFY(va.size()==8*2);
@@ -433,4 +427,15 @@ void TestStelSphericalGeometry::testOctahedronPolygon()
 //		StelUtils::rectToSphe(&ra, &dec, v);
 //		qDebug() << QString(" [") + QString::number(ra*180./M_PI) + "," + QString::number(dec*180./M_PI) +"]";
 //	}
+
+	// Copy
+	OctahedronPolygon splittedSubCopy;
+	splittedSubCopy = splittedSub;
+	QCOMPARE(splittedSub.getArea(), splittedSubCopy.getArea());
+	double oldArea = splittedSubCopy.getArea();
+	splittedSub = OctahedronPolygon();
+	QCOMPARE(splittedSub.getArea(), 0.);
+	QCOMPARE(splittedSubCopy.getArea(), oldArea);
+	splittedSubCopy.inPlaceIntersection(splittedSub);
+	QCOMPARE(splittedSubCopy.getArea(), 0.);
 }
