@@ -32,6 +32,18 @@ static int getSide(const Vec3d& v, int onLine)
 	return v[onLine]>=0. ? 0 : 1;
 }
 
+QDataStream& operator<<(QDataStream& out, const EdgeVertex& v)
+{
+	out << v.vertex << v.edgeFlag;
+	return out;
+}
+
+QDataStream& operator>>(QDataStream& in, EdgeVertex& v)
+{
+	in >> v.vertex >> v.edgeFlag;
+	return in;
+}
+
 QString SubContour::toJSON() const
 {
 	QString res("[");
@@ -323,8 +335,10 @@ SubContour OctahedronPolygon::tesselateOneSide(GLUEStesselator* tess, int sidenb
 			!isTriangleConvexPositive2D(data.result[i*3+2].vertex, data.result[i*3+1].vertex, data.result[i*3].vertex) :
 			!isTriangleConvexPositive2D(data.result[i*3].vertex, data.result[i*3+1].vertex, data.result[i*3+2].vertex)))
 		{
+			static int count =0;
+			qDebug() << count++;
 			qDebug() << data.result[i*3].vertex.toString() << data.result[i*3+1].vertex.toString() << data.result[i*3+2].vertex.toString();
-			Q_ASSERT(0);
+			//Q_ASSERT(0);
 		}
 	}
 #endif
@@ -670,4 +684,25 @@ const OctahedronPolygon& OctahedronPolygon::getAllSkyOctahedronPolygon()
 	//poly.sides[0]=
 	Q_ASSERT(0); // Unimplemented
 	return poly;
+}
+
+QDataStream& operator<<(QDataStream& out, const OctahedronPolygon& p)
+{
+	out << p.tesselated;
+	for (int i=0;i<8;++i)
+	{
+		out << p.sides[i];
+	}
+	return out;
+}
+
+QDataStream& operator>>(QDataStream& in, OctahedronPolygon& p)
+{
+	in >> p.tesselated;
+	for (int i=0;i<8;++i)
+	{
+		in >> p.sides[i];
+	}
+	p.vertexArrayUpToDate = false;
+	return in;
 }
