@@ -26,8 +26,12 @@
 #include <QObject>
 #include <QMap>
 #include <QMutex>
-#include <QtOpenGL>
 
+#ifdef WIN32
+ #include "GLee.h"
+#else
+ #include <QtOpenGL>
+#endif
 
 //! @class ImageLoader
 //! Abstract class for any Image loaders.
@@ -105,9 +109,9 @@ public:
 	void setMipmapsMode(bool b = false) {mipmapsMode = b;}
 
 	//! Define the texture wrapping mode to use while creating textures
-        //! @param m can be either GL_CLAMP_TO_EDGE, or GL_REPEAT.
+	//! @param m can be either GL_CLAMP_TO_EDGE, or GL_REPEAT.
 	//! See doc for glTexParameter for more info.
-        void setWrapMode(GLint m = GL_CLAMP_TO_EDGE) {wrapMode = m;}
+	void setWrapMode(GLint m = GL_CLAMP_TO_EDGE) {wrapMode = m;}
 
 	//! Define the texture min filter to use while creating textures
 	//! @param m can be either GL_NEAREST, GL_LINEAR, GL_NEAREST_MIPMAP_NEAREST,
