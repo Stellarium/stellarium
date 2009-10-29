@@ -41,7 +41,7 @@
 #include <QGraphicsProxyWidget>
 
 Q_IMPORT_PLUGIN(StelGui)
-		
+
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
@@ -79,7 +79,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	//setOptimizationFlags(QGraphicsView::DontClipPainter|QGraphicsView::DontSavePainterState|QGraphicsView::DontAdjustForAntialiasing);
 
 	setScene(new QGraphicsScene());
-	
+
 	// Create the main widget for stellarium, this in turn the create the main StelApp instance.
 	mainSkyItem = new StelAppGraphicsWidget(argc, argv);
 
@@ -89,7 +89,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	backItem = new QGraphicsWidget();
 	backItem->setFocusPolicy(Qt::NoFocus);
 	QGraphicsGridLayout* l = new QGraphicsGridLayout(backItem);
-	
+
 	mainSkyItem->setZValue(-10);
 	l->addItem(mainSkyItem, 0, 0);
 	l->setContentsMargins(0,0,0,0);
@@ -134,7 +134,7 @@ void StelMainGraphicsView::init()
 	QPainter qPainter(glWidget);
 	StelPainter::setQPainter(&qPainter);
 	glWidget->makeCurrent();
-	
+
 	// Initialize all, including the StelApp instance.
 	mainSkyItem->init();
 
@@ -157,7 +157,7 @@ void StelMainGraphicsView::init()
 		break;
 	}
 	Q_ASSERT(gui);	// There was no GUI plugin found
-	
+
 	gui->init(backItem, mainSkyItem);
 
 	StelApp::getInstance().setGui(gui);
