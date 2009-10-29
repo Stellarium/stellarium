@@ -27,6 +27,10 @@
 #include <QFile>
 #include <QDebug>
 
+#ifdef WIN32
+ #include <windows.h>
+#endif
+
 #include "ZoneData.hpp"
 #include "Star.hpp"
 
@@ -68,7 +72,7 @@ struct HipIndexStruct
 	const Star1 *s;
 };
 
-//! @class ZoneArray 
+//! @class ZoneArray
 //! Manages all ZoneData structures of a given StelGeodesicGrid level. An
 //! instance of this class is never created directly; the named constructor
 //! returns an instance of one of its subclasses. All it really does is
@@ -84,61 +88,61 @@ public:
 	//! @param lb the loading bar on the splash screen
 	//! @return an instance of SpecialZoneArray or HipZoneArray
 	static ZoneArray *create(const QString &extended_file_name,
-	                         bool use_mmap,
-	                         StelLoadingBar &lb);
+							 bool use_mmap,
+							 StelLoadingBar &lb);
 	virtual ~ZoneArray(void)
 	{
 		nr_of_zones = 0;
 	}
-	
+
 	//! Get the total number of stars in this catalog.
 	unsigned int getNrOfStars(void) const { return nr_of_stars; }
-	
+
 	//! Dummy method that does nothing. See subclass implementation.
 	virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {}
-	
+
 	//! Pure virtual method. See subclass implementation.
 	virtual void searchAround(const StelNavigator* nav, int index,const Vec3d &v,double cosLimFov,
-	                          QList<StelObjectP > &result) = 0;
-	
+							  QList<StelObjectP > &result) = 0;
+
 	//! Pure virtual method. See subclass implementation.
 	virtual void draw(int index,bool is_inside,
-	                  const float *rcmag_table, StelCore* core,
-	                  unsigned int maxMagStarName,float names_brightness) const = 0;
-	
+					  const float *rcmag_table, StelCore* core,
+					  unsigned int maxMagStarName,float names_brightness) const = 0;
+
 	//! Get whether or not the catalog was successfully loaded.
 	//! @return @c true if at least one zone was loaded, otherwise @c false
 	bool isInitialized(void) const { return (nr_of_zones>0); }
-	
+
 	//! Initialize the ZoneData struct at the given index.
 	void initTriangle(int index,
-	                  const Vec3d &c0,
-	                  const Vec3d &c1,
-	                  const Vec3d &c2);
+					  const Vec3d &c0,
+					  const Vec3d &c1,
+					  const Vec3d &c2);
 	virtual void scaleAxis(void) = 0;
-	
+
 	//! File path of the catalog.
 	const QString fname;
-	
+
 	//! Level in StelGeodesicGrid.
 	const int level;
-	
+
 	//! Lower bound of magnitudes in this catalog.
 	const int mag_min;
-	
+
 	//! Range of magnitudes in this catalog.
 	const int mag_range;
-	
+
 	//! Number of steps used to describe values in @em mag_range.
 	const int mag_steps;
-	
+
 	double star_position_scale;
 protected:
 	//! Load a catalog and display its progress on the splash screen.
 	//! @return @c true if successful, or @c false if an error occurred
 	static bool readFileWithStelLoadingBar(QFile& file, void *data,
-					       qint64 size,StelLoadingBar &lb);
-	
+						   qint64 size,StelLoadingBar &lb);
+
 	//! Protected constructor. Initializes fields and does not load anything.
 	ZoneArray(const QString& fname, QFile* file, int level, int mag_min,
 		  int mag_range, int mag_steps);
@@ -167,7 +171,7 @@ public:
 	//! @param mag_range range of magnitudes
 	//! @param mag_steps number of steps used to describe values in range
 	SpecialZoneArray(QFile* file,bool byte_swap,bool use_mmap,
-	                 StelLoadingBar &lb,int level,int mag_min,
+					 StelLoadingBar &lb,int level,int mag_min,
 			 int mag_range,int mag_steps);
 	~SpecialZoneArray(void);
 protected:
@@ -176,7 +180,7 @@ protected:
 	{
 		return static_cast<SpecialZoneData<Star>*>(zones);
 	}
-	
+
 	//! Draw stars and their names onto the viewport.
 	//! @param index zone index to draw
 	//! @param is_inside whether the zone is inside the current viewport
@@ -186,13 +190,13 @@ protected:
 	//! @param names_brightness brightness of labels
 	//! @param starFont font of labels
 	void draw(int index,bool is_inside,
-	          const float *rcmag_table, StelCore* core,
-	          unsigned int maxMagStarName,float names_brightness) const;
-	
+			  const float *rcmag_table, StelCore* core,
+			  unsigned int maxMagStarName,float names_brightness) const;
+
 	void scaleAxis(void);
 	void searchAround(const StelNavigator* nav, int index,const Vec3d &v,double cosLimFov,
-	                  QList<StelObjectP > &result);
-	
+					  QList<StelObjectP > &result);
+
 	Star *stars;
 private:
 	uchar *mmap_start;
@@ -210,8 +214,8 @@ public:
 	HipZoneArray(QFile* file,bool byte_swap,bool use_mmap,StelLoadingBar &lb,
 		   int level,int mag_min,int mag_range,int mag_steps)
 			: SpecialZoneArray<Star1>(file,byte_swap,use_mmap,lb,level,
-			                          mag_min,mag_range,mag_steps) {}
-	
+									  mag_min,mag_range,mag_steps) {}
+
 	//! Add Hipparcos information for all stars in this catalog into @em hipIndex.
 	//! @param hipIndex array of Hipparcos info structs
 	void updateHipIndex(HipIndexStruct hipIndex[]) const;
