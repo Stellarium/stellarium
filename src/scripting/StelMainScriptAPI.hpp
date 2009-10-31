@@ -24,6 +24,7 @@
 
 #include <QObject>
 #include <QVariant>
+#include <QStringList>
 
 //! Provide script API for Stellarium global functions.  Public slots in this class
 //! may be used in Stellarium scripts, and are accessed as member function to the
@@ -289,6 +290,10 @@ public slots:
 	//! Set the disk viewport
 	//! @param b if true, sets the disk viewport on, else sets it off
 	void setDiskViewport(bool b);
+
+	//! Get a list of Sky Culture IDs
+	//! @return a list of valid sky culture IDs
+	QStringList getAllSkyCultureIDs(void);
 
 	//! Find out the current sky culture
 	//! @return the ID of the current sky culture (i.e. the name of the directory in
