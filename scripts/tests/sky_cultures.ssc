@@ -1,0 +1,38 @@
+//
+// Name: Sky Culture Tour
+// License: Public Domain
+// Author: Matthew Gates
+// Description: Look round each installed landscape.
+//
+
+alt = 0;
+LabelMgr.deleteAllLabels();
+core.setDate("2006:03:14T21:21:32");
+core.clear("deepspace");
+core.moveToRaDec("17h 53m 0s", "66d 25m 0s");
+StelMovementMgr.zoomTo(210, 5);
+ConstellationMgr.setFlagBoundaries(true);
+ConstellationMgr.setFlagLabels(true);
+ConstellationMgr.setFlagLines(true);
+ConstellationMgr.setFlagArt(true);
+LandscapeMgr.setFlagAtmosphere(false);
+
+core.setTimeRate(1);
+core.moveToAltAzi(alt, 0, 90);
+StelMovementMgr.zoomTo(180, 3);
+core.wait(3);
+allIDs = core.getAllSkyCultureIDs();
+for(i=0; i<allIDs.length; i++)
+{
+	id = allIDs[i];
+	core.debug("setting sky culture: " + id);
+	core.setSkyCulture(id);
+	core.wait(2);
+	lab = LabelMgr.labelScreen(id, 100, 100, false, 25, "#ff2200");
+	LabelMgr.setLabelShow(lab, true);
+	core.wait(2);
+	LabelMgr.deleteLabel(lab);
+}
+
+LabelMgr.deleteAllLabels();
+

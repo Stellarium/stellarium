@@ -132,6 +132,10 @@ QStringList StelSkyCultureMgr::getSkyCultureListI18(void)
 	return cultures;
 }
 
+QStringList StelSkyCultureMgr::getSkyCultureListIDs(void)
+{
+	return dirToNameEnglish.keys();
+}
 
 QString StelSkyCultureMgr::directoryToSkyCultureEnglish(const QString& directory)
 {
