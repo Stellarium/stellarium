@@ -280,6 +280,11 @@ void StelMainScriptAPI::setProjectionMode(const QString& id)
 	emit(requestSetProjectionMode(id));
 }
 
+QStringList StelMainScriptAPI::getAllSkyCultureIDs(void)
+{
+	return StelApp::getInstance().getSkyCultureMgr().getSkyCultureListIDs();
+}
+
 QString StelMainScriptAPI::getSkyCulture()
 {
 	return StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID();

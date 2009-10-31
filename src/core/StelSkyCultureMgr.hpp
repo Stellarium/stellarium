@@ -84,8 +84,11 @@ public slots:
 	QString getSkyCultureListEnglish(void);
 	
 	//! Get a list of sky culture names in the current language.
-	//! @return A new-line delimited list of translated sky culture names.
+	//! @return A list of translated sky culture names.
 	QStringList getSkyCultureListI18(void);
+
+	//! Get a list of sky culture IDs
+	QStringList getSkyCultureListIDs(void);
 	
 private:
 	//! Get the culture name in English associated with a specified directory.
