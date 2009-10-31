@@ -38,24 +38,6 @@ The code of Stellarium is split into several main blocks:
 </ul>
 @image html stellarium-architecture.png
 
-@section intro_scripts Scripting API
-
-Stellarium uses the <a href="http://doc.trolltech.com/4.3/qtscript.html">QT 
-Scripting Engine</a>.  The basic scripting language is 
-<a href="http://en.wikipedia.org/wiki/ECMAScript">ECMAScript</a>, which is related to Javascript.
-
-Authors of Stellarium scripts may use application specific functions from the following places:
-
-- The public slots in the class StelMainScriptAPI.  These are available in the scripting engine via the
-  object named "core".  For example, to access StelMainScriptAPI::wait() from a script, the author would
-  use the scripting command: core.wait(...);
-
-- The public slots for each StelModule are available in the scripting engine via an object with the 
-  same name as the corresponding StelModule.  For example, to access LandscapeMgr::setFlagAtmosphere(), 
-  a script author would use the scripting command: LandscapeMgr.setFlagAtmosphere(...);
-
-- Public slots from a few additional core classes are also available within scripts: StelSkyDrawer.
-
 @image html stellarium-logo.png
 
 */
