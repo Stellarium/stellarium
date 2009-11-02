@@ -72,7 +72,7 @@ void StelLoadingBar::Draw(float val)
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_TEXTURE_2D);
-		glColor4f(1., 1., 1., 1.);
+		sPainter.setColor(1., 1., 1.);
 		splash->bind();
 
 		sPainter.drawRect2d(splashx, splashy, width, height);
@@ -80,14 +80,14 @@ void StelLoadingBar::Draw(float val)
 	glDisable(GL_TEXTURE_2D);
 
 	// black out background of text for redraws (so can keep sky unaltered)
-	glColor4f(0, 0, 0, 1);
+	sPainter.setColor(0, 0, 0, 1);
 	sPainter.drawRect2d(barx, bary-5, barwidth, 12.);
-	glColor4f(0.8, 0.8, 1, 1);
+	sPainter.setColor(0.8, 0.8, 1, 1);
 	sPainter.drawRect2d(barx, bary, barwidth, barheight);
-	glColor4f(0.4f, 0.4f, 0.6f, 1.f);
+	sPainter.setColor(0.4f, 0.4f, 0.6f, 1.f);
 	sPainter.drawRect2d(barx+1, bary+1, barwidth * val-2, barheight-2);
 	
-	glColor4f(1, 1, 1, 1);
+	sPainter.setColor(1, 1, 1, 1);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	sPainter.setFont(barfont);

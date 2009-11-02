@@ -53,7 +53,7 @@ StelSkyPolygon::~StelSkyPolygon()
 {
 }
 
-void StelSkyPolygon::draw(StelCore* core, const StelPainter& sPainter, float opacity)
+void StelSkyPolygon::draw(StelCore* core, StelPainter& sPainter, float opacity)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 

@@ -178,13 +178,13 @@ void StelPainter::initSystemGLInfo()
 // Standard methods for drawing primitives
 
 // Fill with black around the circle
-void StelPainter::drawViewportShape(void) const
+void StelPainter::drawViewportShape(void)
 {
 	if (prj->maskType != StelProjector::MaskDisk)
 		return;
 
 	glDisable(GL_BLEND);
-	glColor4f(0.f,0.f,0.f, 1.f);
+	setColor(0.f,0.f,0.f);
 	glPushMatrix();
 	glTranslatef(prj->viewportCenter[0],prj->viewportCenter[1],0.0);
 
@@ -704,7 +704,7 @@ void drawSmallCircleVertexArray()
 /*************************************************************************
  Draw a small circle arc in the current frame
 *************************************************************************/
-void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, const void* userData), const void* userData) const
+void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData), void* userData) const
 {
 	Q_ASSERT(smallCircleVertexArray.empty());
 

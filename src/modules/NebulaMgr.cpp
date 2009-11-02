@@ -111,23 +111,23 @@ void NebulaMgr::init()
 
 struct DrawNebulaFuncObject
 {
-	DrawNebulaFuncObject(float amaxMagHints, float amaxMagLabels, const StelPainter& p, bool acheckMaxMagHints) : maxMagHints(amaxMagHints), maxMagLabels(amaxMagLabels), sPainter(p), checkMaxMagHints(acheckMaxMagHints)
+	DrawNebulaFuncObject(float amaxMagHints, float amaxMagLabels, StelPainter* p, bool acheckMaxMagHints) : maxMagHints(amaxMagHints), maxMagLabels(amaxMagLabels), sPainter(p), checkMaxMagHints(acheckMaxMagHints)
 	{
-		angularSizeLimit = 5./sPainter.getProjector()->getPixelPerRadAtCenter()*180./M_PI;
+		angularSizeLimit = 5./sPainter->getProjector()->getPixelPerRadAtCenter()*180./M_PI;
 	}
 	void operator()(StelRegionObjectP obj)
 	{
 		Nebula* n = obj.staticCast<Nebula>().data();
 		if (n->angularSize>angularSizeLimit || (checkMaxMagHints && n->mag <= maxMagHints))
 		{
-			sPainter.getProjector()->project(n->XYZ,n->XY);
-			n->drawLabel(sPainter, maxMagLabels);
-			n->drawHints(sPainter, maxMagHints);
+			sPainter->getProjector()->project(n->XYZ,n->XY);
+			n->drawLabel(*sPainter, maxMagLabels);
+			n->drawHints(*sPainter, maxMagHints);
 		}
 	}
 	float maxMagHints;
 	float maxMagLabels;
-	const StelPainter& sPainter;
+	StelPainter* sPainter;
 	float angularSizeLimit;
 	bool checkMaxMagHints;
 };
@@ -154,14 +154,14 @@ void NebulaMgr::draw(StelCore* core)
 	float maxMagHints = skyDrawer->getLimitMagnitude()*1.2-2.+(hintsAmount*1.2f)-2.f;
 	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.+(labelsAmount*1.2f)-2.f;
 	sPainter.setFont(nebulaFont);
-	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, sPainter, hintsFader.getInterstate()>0.0001);
+	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, hintsFader.getInterstate()>0.0001);
 	nebGrid.processIntersectingRegions(p, func);
 	
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, sPainter);
 }
 
-void NebulaMgr::drawPointer(const StelCore* core, const StelPainter& sPainter)
+void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 {
 	const StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
@@ -174,7 +174,7 @@ void NebulaMgr::drawPointer(const StelCore* core, const StelPainter& sPainter)
 
 		// Compute 2D pos and return if outside screen
 		if (!prj->projectInPlace(pos)) return;
-		glColor4f(0.4f,0.5f,0.8f,1.f);
+		sPainter.setColor(0.4f,0.5f,0.8f);
 		texPointer->bind();
 
 		glEnable(GL_TEXTURE_2D);

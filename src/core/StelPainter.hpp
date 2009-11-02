@@ -56,7 +56,7 @@ public:
 	const StelProjectorP getProjector() const {return prj;}
 
 	//! Fill with black around the viewport.
-	void drawViewportShape(void) const;
+	void drawViewportShape(void);
 
 	//! Draw the string at the given position and angle with the given font.
 	//! If the gravity label flag is set, uses drawTextGravity180.
@@ -86,14 +86,14 @@ public:
 	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
 	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport.
 	//! If rotCenter is equal to 0,0,0, the method draws a great circle.
-	void drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, const void* userData)=NULL, const void* userData=NULL) const;
+	void drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=NULL, void* userData=NULL) const;
 
 	//! Draw a great circle arc between points start and stop.
 	//! The angle between start and stop must be < 180 deg.
 	//! The algorithm ensures that the line will look smooth, even for non linear distortion.
 	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
 	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport.
-	void drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, const void* userData)=NULL, const void* userData=NULL) const {drawSmallCircleArc(start, stop, Vec3d(0), viewportEdgeIntersectCallback, userData);}
+	void drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=NULL, void* userData=NULL) const {drawSmallCircleArc(start, stop, Vec3d(0), viewportEdgeIntersectCallback, userData);}
 
 	//! Draw a simple circle, 2d viewport coordinates in pixel
 	void drawCircle(double x,double y,double r) const;

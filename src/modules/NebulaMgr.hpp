@@ -175,7 +175,7 @@ private:
 	void loadNebulaSet(const QString& setName);
 
 	//! Draw a nice animated pointer around the object
-	void drawPointer(const StelCore* core, const StelPainter& sPainter);
+	void drawPointer(const StelCore* core, StelPainter& sPainter);
 
 	NebulaP searchM(unsigned int M);
 	NebulaP searchNGC(unsigned int NGC);

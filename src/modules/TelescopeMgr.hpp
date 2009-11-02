@@ -108,7 +108,7 @@ public slots:
 	
 private:
 	//! Draw a nice animated pointer around the object
-	void drawPointer(const StelProjectorP& prj, const StelNavigator* nav, const StelPainter& sPainter);
+	void drawPointer(const StelProjectorP& prj, const StelNavigator* nav, StelPainter& sPainter);
 
 	//! Perform the communication with the telescope servers
 	void communicate(void);

@@ -283,9 +283,9 @@ void LandscapeOldStyle::drawFog(StelCore* core) const
 	
 	glBlendFunc(GL_ONE, GL_ONE);
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
-	glColor4f(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
+	sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
 	          fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter, 
-			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter, 1);
+			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
@@ -309,7 +309,7 @@ void LandscapeOldStyle::drawDecor(StelCore* core) const
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
-	glColor4f(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
+	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 
 	static const int stacks = 8;
 	  // make slices_per_side=(3<<K) so that the innermost polygon of the
@@ -370,7 +370,7 @@ void LandscapeOldStyle::drawGround(StelCore* core) const
 	StelPainter sPainter(prj);
 	
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
-	glColor4f(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
+	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_CULL_FACE);
@@ -447,7 +447,7 @@ void LandscapeFisheye::draw(StelCore* core)
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
-	glColor4f(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
+	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
@@ -521,7 +521,7 @@ void LandscapeSpherical::draw(StelCore* core)
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
-	glColor4f(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
+	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);

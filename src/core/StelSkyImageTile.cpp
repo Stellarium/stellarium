@@ -73,7 +73,7 @@ StelSkyImageTile::~StelSkyImageTile()
 {
 }
 
-void StelSkyImageTile::draw(StelCore* core, const StelPainter& sPainter, float opacity)
+void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float opacity)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
@@ -237,7 +237,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 
 // Draw the image on the screen.
 // Assume GL_TEXTURE_2D is enabled
-bool StelSkyImageTile::drawTile(StelCore* core, const StelPainter& sPainter)
+bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 {
 	if (!tex->bind())
 		return false;
@@ -264,7 +264,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, const StelPainter& sPainter)
 		color.set(ad_lum,ad_lum,ad_lum, 1.);
 	}
 
-	glColor4f(color[0], color[1], color[2], color[3]);
+	sPainter.setColor(color[0], color[1], color[2], color[3]);
 	glEnable(GL_TEXTURE_2D);
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
 		sPainter.drawSphericalRegion(poly.data(), StelPainter::SphericalPolygonDrawModeTextureFill);
