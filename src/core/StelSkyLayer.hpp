@@ -36,7 +36,7 @@ public:
 	StelSkyLayer(QObject* parent=NULL) : QObject(parent) {;}
 
 	//! Draws the content of the layer.
-	virtual void draw(StelCore* core, const StelPainter& sPainter, float opacity=1.)=0;
+	virtual void draw(StelCore* core, StelPainter& sPainter, float opacity=1.)=0;
 
 	//! Return the short name to display in the loading bar.
 	virtual QString getShortName() const =0;

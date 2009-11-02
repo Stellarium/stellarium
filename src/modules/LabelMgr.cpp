@@ -267,7 +267,7 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 	else if (vJustify == 'c')
 		jyOffset = sPainter.getFontMetrics().height() / 2.;
 
-	glColor4f(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
 	sPainter.drawText(labelXY[0]+xOffset-jxOffset, labelXY[1]+yOffset-jyOffset, labelText, 0, 0, 0, false);
 
 	if (labelStyle == SkyLabel::Line)
@@ -293,7 +293,7 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 		else if (hJustify == 'r')
 			lineEndX += 5;
 				
-		glColor4f(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+		sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
 		
 		glEnable(GL_LINE_SMOOTH);
 		sPainter.drawLine2d(lineEndX,lineEndY,objXY[0], objXY[1]);
@@ -324,7 +324,7 @@ bool ScreenLabel::draw(StelCore* core, StelPainter& sPainter)
 	if(labelFader.getInterstate() <= 0.0)
 		return false;
 
-	glColor4f(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
 	sPainter.setFont(labelFont);
 	sPainter.drawText(screenX, screenY, labelText, 0, 0, 0, false);
 	return true;

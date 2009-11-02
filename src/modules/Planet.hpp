@@ -69,7 +69,7 @@ class Ring
 public:
 	Ring(double radiusMin,double radiusMax,const QString &texname);
 	~Ring(void);
-	void draw(const StelPainter* painter,const Mat4d& mat,double screenSz);
+	void draw(StelPainter* painter,const Mat4d& mat,double screenSz);
 	double getSize(void) const {return radiusMax;}
 private:
 	const double radiusMin;

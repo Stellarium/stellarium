@@ -632,7 +632,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 		else
 		{
 			glDisable(GL_LIGHTING);
-			glColor4f(1.f,1.f,1.f,1.f);
+			sPainter->setColor(1.f,1.f,1.f);
 		}
 
 		if (rings)
@@ -760,7 +760,7 @@ void Planet::drawEarthShadow(StelCore* core)
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glColor4f(1,1,1,1);
+	sPainter.setColor(1,1,1);
 
 	glEnable(GL_STENCIL_TEST);
 	glStencilFunc(GL_EQUAL, 0x1, 0x1);
@@ -820,7 +820,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 	sPainter.setFont(planetNameFont);
 	// Draw nameI18 + scaling if it's not == 1.
 	float tmp = 10.f + getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()/1.44; // Shift for nameI18 printing
-	glColor4f(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate());
+	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate());
 	sPainter.drawText(screenPos[0],screenPos[1], getSkyLabel(nav), 0, tmp, tmp, false);
 
 	// hint disapears smoothly on close view
@@ -828,7 +828,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 		return;
 	tmp -= 10.f;
 	if (tmp<1) tmp=1;
-	glColor4f(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate()*hintFader.getInterstate()/tmp*0.7);
+	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate()*hintFader.getInterstate()/tmp*0.7);
 
 	// Draw the 2D small circle
 	glEnable(GL_BLEND);
@@ -848,7 +848,7 @@ Ring::~Ring(void)
 {
 }
 
-void Ring::draw(const StelPainter* painter,const Mat4d& mat,double screenSz)
+void Ring::draw(StelPainter* sPainter,const Mat4d& mat,double screenSz)
 {
 	screenSz -= 50;
 	screenSz /= 250.0;
@@ -859,7 +859,7 @@ void Ring::draw(const StelPainter* painter,const Mat4d& mat,double screenSz)
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glColor4f(1.f, 1.f, 1.f, 1.f);
+	sPainter->setColor(1.f, 1.f, 1.f);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
@@ -871,7 +871,7 @@ void Ring::draw(const StelPainter* painter,const Mat4d& mat,double screenSz)
 	const double h = mat.r[ 8]*mat.r[12]
 				   + mat.r[ 9]*mat.r[13]
 				   + mat.r[10]*mat.r[14];
-	painter->sRing(radiusMin,radiusMax,(h<0.0)?slices:-slices,stacks, 0);
+	sPainter->sRing(radiusMin,radiusMax,(h<0.0)?slices:-slices,stacks, 0);
 	glDisable(GL_CULL_FACE);
 }
 
@@ -892,7 +892,7 @@ void Planet::drawOrbit(const StelCore* core)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 
-	glColor4f(orbitColor[0], orbitColor[1], orbitColor[2], orbitFader.getInterstate());
+	sPainter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], orbitFader.getInterstate());
 	Vec3d onscreen;
 	// special case - use current Planet position as center vertex so that draws
 	// on it's orbit all the time (since segmented rather than smooth curve)
@@ -941,7 +941,7 @@ void Planet::drawTrail(const StelCore* core)
 	StelPainter sPainter(prj);
 	glEnable(GL_BLEND);
 
-	glColor4f(trailColor[0]*trailFader.getInterstate(), trailColor[1]*trailFader.getInterstate(), trailColor[2]*trailFader.getInterstate(), 1.);
+	sPainter.setColor(trailColor[0]*trailFader.getInterstate(), trailColor[1]*trailFader.getInterstate(), trailColor[2]*trailFader.getInterstate(), 1.);
 
 	std::list<TrailPoint>::iterator iter;
 	std::list<TrailPoint>::iterator nextiter;

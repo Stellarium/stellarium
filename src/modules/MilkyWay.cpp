@@ -102,7 +102,7 @@ void MilkyWay::draw(StelCore* core)
 	if (c[2]<0) c[2]=0;
 	
 	StelPainter sPainter(prj);
-	glColor4f(c[0],c[1],c[2],1);
+	sPainter.setColor(c[0],c[1],c[2]);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);

@@ -80,7 +80,7 @@ void TelescopeMgr::draw(StelCore* core)
 			{
 				if (telescopeFader.getInterstate() >= 0)
 				{
-					glColor4f(circleColor[0],circleColor[1],circleColor[2], telescopeFader.getInterstate());
+					sPainter.setColor(circleColor[0],circleColor[1],circleColor[2], telescopeFader.getInterstate());
 					glDisable(GL_TEXTURE_2D);
 					foreach (double occul, tel->getOculars())
 					{
@@ -91,7 +91,7 @@ void TelescopeMgr::draw(StelCore* core)
 				}
 				if (nameFader.getInterstate() >= 0)
 				{
-					glColor4f(labelColor[0],labelColor[1],labelColor[2], nameFader.getInterstate());
+					sPainter.setColor(labelColor[0],labelColor[1],labelColor[2], nameFader.getInterstate());
 					sPainter.drawText(XY[0],XY[1],tel->getNameI18n(), 0, 6, -4, false);
 					telescopeTexture->bind();
 				}
@@ -247,7 +247,7 @@ void TelescopeMgr::init()
 }
 
 
-void TelescopeMgr::drawPointer(const StelProjectorP& prj, const StelNavigator * nav, const StelPainter& sPainter)
+void TelescopeMgr::drawPointer(const StelProjectorP& prj, const StelNavigator * nav, StelPainter& sPainter)
 {
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Telescope");
 	if (!newSelected.empty())
@@ -259,7 +259,7 @@ void TelescopeMgr::drawPointer(const StelProjectorP& prj, const StelNavigator * 
 		if (!prj->project(pos, screenpos)) return;
 	
 		const Vec3d& c(obj->getInfoColor());
-		glColor4f(c[0],c[1],c[2],1.f);
+		sPainter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
