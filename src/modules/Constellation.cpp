@@ -95,7 +95,7 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 	return true;
 }
 
-void Constellation::drawOptim(const StelPainter& sPainter, const StelNavigator* nav) const
+void Constellation::drawOptim(StelPainter& sPainter, const StelNavigator* nav) const
 {
 	if(!lineFader.getInterstate()) return;
 
@@ -103,7 +103,7 @@ void Constellation::drawOptim(const StelPainter& sPainter, const StelNavigator* 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
-	glColor4f(lineColor[0], lineColor[1], lineColor[2], lineFader.getInterstate());
+	sPainter.setColor(lineColor[0], lineColor[1], lineColor[2], lineFader.getInterstate());
 
 	Vec3d star1;
 	Vec3d star2;
@@ -126,20 +126,20 @@ void Constellation::drawOptim(const StelPainter& sPainter, const StelNavigator* 
 	}
 }
 
-void Constellation::drawName(const StelPainter& sPainter) const
+void Constellation::drawName(StelPainter& sPainter) const
 {
 	if (!nameFader.getInterstate())
 		return;
-	glColor4f(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());
+	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());
 	sPainter.drawText(XYname[0], XYname[1], nameI18, 0., -sPainter.getFontMetrics().width(nameI18)/2, 0, false);
 }
 
-void Constellation::drawArtOptim(const StelPainter& sPainter, const SphericalRegion& region) const
+void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& region) const
 {
 	float intensity = artFader.getInterstate();
 	if (artTexture && intensity && region.intersects(artPolygon))
 	{
-		glColor4f(intensity,intensity,intensity,1);
+		sPainter.setColor(intensity,intensity,intensity);
 
 		// The texture is not fully loaded
 		if (artTexture->bind()==false)
@@ -150,7 +150,7 @@ void Constellation::drawArtOptim(const StelPainter& sPainter, const SphericalReg
 }
 
 // Draw the art texture
-void Constellation::drawArt(const StelPainter& sPainter) const
+void Constellation::drawArt(StelPainter& sPainter) const
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
@@ -185,7 +185,7 @@ void Constellation::update(int deltaTime)
 	boundaryFader.update(deltaTime);
 }
 
-void Constellation::drawBoundaryOptim(const StelPainter& sPainter) const
+void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
 {
 	if (!boundaryFader.getInterstate())
 		return;
@@ -194,7 +194,7 @@ void Constellation::drawBoundaryOptim(const StelPainter& sPainter) const
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
-	glColor4f(boundaryColor[0], boundaryColor[1], boundaryColor[2], boundaryFader.getInterstate());
+	sPainter.setColor(boundaryColor[0], boundaryColor[1], boundaryColor[2], boundaryFader.getInterstate());
 
 	unsigned int i, j, size;
 	Vec3d pt1, pt2;

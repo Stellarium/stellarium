@@ -189,13 +189,13 @@ private:
 	//! @param conCatFile the path to the file which contains the constellation boundary data.
 	bool loadBoundaries(const QString& conCatFile);
 	//! Draw the constellation lines at the epoch given by the StelNavigator.
-	void drawLines(const StelPainter& sPainter, const StelNavigator* nav) const;
+	void drawLines(StelPainter& sPainter, const StelNavigator* nav) const;
 	//! Draw the constellation art.
-	void drawArt(const StelPainter& sPainter) const;
+	void drawArt(StelPainter& sPainter) const;
 	//! Draw the constellation name labels.
-	void drawNames(const StelPainter& sPainter) const;
+	void drawNames(StelPainter& sPainter) const;
 	//! Draw the constellation boundaries.
-	void drawBoundaries(const StelPainter& sPainter) const;	
+	void drawBoundaries(StelPainter& sPainter) const;
 	//! Handle single and multi-constellation selections.
 	void setSelectedConst(Constellation* c);
 	//! Handle unselecting a single constellation.

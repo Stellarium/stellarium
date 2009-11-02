@@ -77,11 +77,11 @@ private:
 	bool read(const QString& record, StarMgr *starMgr);
 
 	//! Draw the constellation name
-	void drawName(const StelPainter& sPainter) const;
+	void drawName(StelPainter& sPainter) const;
 	//! Draw the constellation art
-	void drawArt(const StelPainter& sPainter) const;
+	void drawArt(StelPainter& sPainter) const;
 	//! Draw the constellation boundary
-	void drawBoundaryOptim(const StelPainter& sPainter) const;
+	void drawBoundaryOptim(StelPainter& sPainter) const;
 
 	//! Test if a star is part of a Constellation.
 	//! This member tests to see if a star is one of those which make up
@@ -105,9 +105,9 @@ private:
 	//! Draw the lines for the Constellation.
 	//! This method uses the coords of the stars (optimized for use thru
 	//! the class ConstellationMgr only).
-	void drawOptim(const StelPainter& sPainter, const StelNavigator* nav) const;
+	void drawOptim(StelPainter& sPainter, const StelNavigator* nav) const;
 	//! Draw the art texture, optimized function to be called thru a constellation manager only.
-	void drawArtOptim(const StelPainter& sPainter, const SphericalRegion& region) const;
+	void drawArtOptim(StelPainter& sPainter, const SphericalRegion& region) const;
 	//! Update fade levels according to time since various events.
 	void update(int deltaTime);
 	//! Turn on and off Constellation line rendering.

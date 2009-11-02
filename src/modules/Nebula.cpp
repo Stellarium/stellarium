@@ -128,23 +128,23 @@ double Nebula::getCloseViewFov(const StelNavigator*) const
 	return angularSize>0 ? angularSize * 4 : 1;
 }
 
-void Nebula::drawHints(const StelPainter& sPainter, float maxMagHints)
+void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 {
 	if (mag>maxMagHints)
 		return;
 	//if (4.f/getOnScreenSize(core)<0.1) return;
 	glBlendFunc(GL_ONE, GL_ONE);
 	float lum = 1.;//qMin(1,4.f/getOnScreenSize(core))*0.8;
-	glColor4f(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness, 1);
+	sPainter.setColor(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness, 1);
 	Nebula::texCircle->bind();
 	sPainter.drawSprite2dMode(XY[0], XY[1], 4);
 }
 
-void Nebula::drawLabel(const StelPainter& sPainter, float maxMagLabel)
+void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 {
 	if (mag>maxMagLabel)
 		return;
-	glColor4f(labelColor[0], labelColor[1], labelColor[2], hintsBrightness);
+	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], hintsBrightness);
 	float size = getAngularSize(NULL)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
 	float shift = 4.f + size/1.8f;
 	QString str;

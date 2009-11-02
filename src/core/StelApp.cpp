@@ -997,7 +997,7 @@ void StelApp::draw()
 
 // 	{
 // 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-// 		glColor4f(0, .6, .6, .5);
+// 		sPainter.setColor(0, .6, .6, .5);
 // 		Vec4f boundaryColor(0, 1, .6, 1);
 // 		sPainter.drawSphericalRegion(sPainter.getProjector()->getViewportConvexPolygon(-100,-100).get(), StelPainter::SphericalPolygonDrawModeBoundary, &boundaryColor);
 // 	}
@@ -1013,7 +1013,7 @@ void StelApp::draw()
 // 	Q_ASSERT(p.checkValid());
 // 	{
 // 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-// 		glColor4f(0, .6, .6, .5);
+// 		sPainter.setColor(0, .6, .6, .5);
 // 		Vec4f boundaryColor(0, 1, .6, 1);
 // 		sPainter.drawSphericalRegion(&p, StelPainter::SphericalPolygonDrawModeBoundary, &boundaryColor);
 // 	}
@@ -1042,7 +1042,7 @@ void StelApp::draw()
 // 		glDisable(GL_BLEND);
 // 		glEnable(GL_TEXTURE_2D);
 // 		ttex->bind();
-// 		glColor4f(0, .6, .6, .5);
+// 		sPainter.setColor(0, .6, .6, .5);
 // 		Vec4f boundaryColor(0, 1, .6, 1);
 // 		sPainter.drawSphericalPolygon(&p, StelPainter::SphericalPolygonDrawModeTextureFillAndBoundary, &boundaryColor);
 // 	}
@@ -1062,7 +1062,7 @@ void StelApp::draw()
 // 	{
 // 		glEnable(GL_BLEND);
 // 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-// 		glColor4f(0, .6, .6, .5);
+// 		sPainter.setColor(0, .6, .6, .5);
 // 		sPainter.drawSphericalPolygon(&p2);
 // 	}
 
@@ -1080,7 +1080,7 @@ void StelApp::draw()
 // 		glEnable(GL_BLEND);
 // 		glEnable(GL_TEXTURE_2D);
 // 		ttex->bind();
-// 		glColor4f(0, .6, .6, .5);
+// 		sPainter.setColor(0, .6, .6, .5);
 // 		Vec4f boundaryColor(0, 1, .6, 1);
 // 		sPainter.drawSphericalPolygon(&cvx, StelPainter::SphericalPolygonDrawModeTextureFillAndBoundary, &boundaryColor);
 //  	}

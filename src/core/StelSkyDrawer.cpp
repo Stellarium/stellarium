@@ -363,7 +363,7 @@ bool StelSkyDrawer::drawPointSource(double x, double y, const float rcMag[2], co
 	if (flagPointStar)
 	{
 		// Draw the star rendered as GLpoint. This may be faster but it is not so nice
-		glColor4f(color[0]*tw, color[1]*tw, color[2]*tw, 1.f);
+		sPainter->setColor(color[0]*tw, color[1]*tw, color[2]*tw);
 		sPainter->drawPoint2d(x, y);
 	}
 	else
@@ -392,7 +392,7 @@ bool StelSkyDrawer::drawPointSource(double x, double y, const float rcMag[2], co
 
 			texBigHalo->bind();
 			glEnable(GL_TEXTURE_2D);
-			glColor4f(color[0]*cmag, color[1]*cmag, color[2]*cmag, 1.f);
+			sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
 			sPainter->drawSprite2dMode(x, y, rmag);
 		}
 		
@@ -434,7 +434,7 @@ void StelSkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedAre
 		float cmag = 1.f;
 		if (rmag<pixRadius*3.f+100.)
 			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
-		glColor4f(color[0]*cmag, color[1]*cmag, color[2]*cmag, 1.f);
+		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
 		sPainter->drawSprite2dMode(x, y, rmag);
 		
 		noStarHalo = true;

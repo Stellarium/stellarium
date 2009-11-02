@@ -80,7 +80,7 @@ public:
 	~StelSkyImageTile();
 
 	//! Draw the image on the screen.
-	void draw(StelCore* core, const StelPainter& sPainter, float opacity=1.);
+	void draw(StelCore* core, StelPainter& sPainter, float opacity=1.);
 
 	//! Return the dataset credits to use in the progress bar
 	DataSetCredits getDataSetCredits() const {return dataSetCredits;}
@@ -143,7 +143,7 @@ private:
 
 	//! Draw the image on the screen.
 	//! @return true if the tile was actually displayed
-	bool drawTile(StelCore* core, const StelPainter& sPainter);
+	bool drawTile(StelCore* core, StelPainter& sPainter);
 
 	//! Return the minimum resolution
 	double getMinResolution() const {return minResolution;}

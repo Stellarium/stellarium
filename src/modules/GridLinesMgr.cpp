@@ -145,8 +145,8 @@ static double getClosestResolutionHMS(double pixelPerRad)
 
 struct ViewportEdgeIntersectCallbackData
 {
-	ViewportEdgeIntersectCallbackData(const StelPainter& p) : sPainter(p) {;}
-	const StelPainter& sPainter;
+	ViewportEdgeIntersectCallbackData(StelPainter* p) : sPainter(p) {;}
+	StelPainter* sPainter;
 	Vec4f textColor;
 	QString text;		// Label to display at the intersection of the lines and screen side
 	double raAngle;		// Used for meridians
@@ -154,21 +154,21 @@ struct ViewportEdgeIntersectCallbackData
 };
 
 // Callback which draws the label of the grid
-void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direction, const void* userData)
+void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direction, void* userData)
 {
-	const ViewportEdgeIntersectCallbackData* d = static_cast<const ViewportEdgeIntersectCallbackData*>(userData);
+	ViewportEdgeIntersectCallbackData* d = static_cast<ViewportEdgeIntersectCallbackData*>(userData);
 	Vec3d direc(direction);
 	direc.normalize();
 	GLfloat tmpColor[4];
 	glGetFloatv(GL_CURRENT_COLOR, tmpColor);
-	glColor4f(d->textColor[0], d->textColor[1], d->textColor[2], d->textColor[3]);
+	d->sPainter->setColor(d->textColor[0], d->textColor[1], d->textColor[2], d->textColor[3]);
 	
 	QString text;
 	if (d->text.isEmpty())
 	{
 		// We are in the case of meridians, we need to determine which of the 2 labels (3h or 15h to use)
 		Vec3d tmpV;
-		d->sPainter.getProjector()->unProject(screenPos, tmpV);
+		d->sPainter->getProjector()->unProject(screenPos, tmpV);
 		double lon, lat;
 		StelUtils::rectToSphe(&lon, &lat, tmpV);
 		if (d->frameType==StelCore::FrameAltAz)
@@ -217,11 +217,11 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	if (angleDeg>90. || angleDeg<-90.)
 	{
 		angleDeg+=180.;
-		xshift=-d->sPainter.getFontMetrics().width(text)-6.f;
+		xshift=-d->sPainter->getFontMetrics().width(text)-6.f;
 	}
 	
-	d->sPainter.drawText(screenPos[0], screenPos[1], text, angleDeg, xshift, 3);
-	glColor4f(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]);
+	d->sPainter->drawText(screenPos[0], screenPos[1], text, angleDeg, xshift, 3);
+	d->sPainter->setColor(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]);
 }
 
 //! Draw the sky grid in the current frame
@@ -283,18 +283,18 @@ void SkyGrid::draw(const StelCore* core) const
 		float red = (color[0] + color[1] + color[2]) / 3.0;
 		textColor[0] = red;
 		textColor[1] = 0.; textColor[2] = 0.;
-		glColor4f(red, 0, 0, fader.getInterstate());
+		sPainter.setColor(red, 0, 0, fader.getInterstate());
 	}
 	else
 	{
-		glColor4f(color[0],color[1],color[2], fader.getInterstate());
+		sPainter.setColor(color[0],color[1],color[2], fader.getInterstate());
 	}
 
 	textColor*=2;
 	textColor[3]=fader.getInterstate();
 	
 	sPainter.setFont(font);
-	ViewportEdgeIntersectCallbackData userData(sPainter);
+	ViewportEdgeIntersectCallbackData userData(&sPainter);
 	userData.textColor = textColor;
 	userData.frameType = frameType;
 	
@@ -524,7 +524,7 @@ void SkyLine::draw(StelCore *core) const
 	
 	// Initialize a painter and set openGL state	
 	StelPainter sPainter(prj);
-	glColor4f(color[0], color[1], color[2], fader.getInterstate());
+	sPainter.setColor(color[0], color[1], color[2], fader.getInterstate());
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
@@ -534,7 +534,7 @@ void SkyLine::draw(StelCore *core) const
 	textColor*=2;
 	textColor[3]=fader.getInterstate();
 	
-	ViewportEdgeIntersectCallbackData userData(sPainter);
+	ViewportEdgeIntersectCallbackData userData(&sPainter);
 	sPainter.setFont(font);
 	userData.textColor = textColor;
 	userData.text = label;

@@ -219,7 +219,7 @@ void StarMgr::drawPointer(const StelProjectorP& prj, const StelNavigator * nav)
 	
 		StelPainter sPainter(prj);
 		const Vec3d& c(obj->getInfoColor());
-		glColor4f(c[0],c[1],c[2],1.f);
+		sPainter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);

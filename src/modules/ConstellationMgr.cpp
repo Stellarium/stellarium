@@ -465,7 +465,7 @@ void ConstellationMgr::draw(StelCore* core)
 }
 
 // Draw constellations art textures
-void ConstellationMgr::drawArt(const StelPainter& sPainter) const
+void ConstellationMgr::drawArt(StelPainter& sPainter) const
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
@@ -483,7 +483,7 @@ void ConstellationMgr::drawArt(const StelPainter& sPainter) const
 }
 
 // Draw constellations lines
-void ConstellationMgr::drawLines(const StelPainter& sPainter, const StelNavigator* nav) const
+void ConstellationMgr::drawLines(StelPainter& sPainter, const StelNavigator* nav) const
 {
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
@@ -497,7 +497,7 @@ void ConstellationMgr::drawLines(const StelPainter& sPainter, const StelNavigato
 }
 
 // Draw the names of all the constellations
-void ConstellationMgr::drawNames(const StelPainter& sPainter) const
+void ConstellationMgr::drawNames(StelPainter& sPainter) const
 {
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
@@ -944,7 +944,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	return true;
 }
 
-void ConstellationMgr::drawBoundaries(const StelPainter& sPainter) const
+void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 {
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);

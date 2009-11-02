@@ -51,7 +51,7 @@ double StelGeodesicGridDrawer::draw(StelCore* core, int maxSearchLevel)
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	core->setCurrentFrame(StelCore::FrameJ2000);	// set 2D coordinate
-	glColor4f(0.2,0.3,0.2,1);
+	sPainter.setColor(0.2,0.3,0.2);
 	
 	int lev = (int)(7./pow(prj->getFov(), 0.4))+2;
 	if (lev>geodesicGrid->getMaxLevel()) 
