@@ -332,6 +332,65 @@ bool SphericalCap::intersects(const SphericalPolygon& polyBase) const
 	return false;
 }
 
+
+bool SphericalCap::clipGreatCircle(Vec3d& v1, Vec3d& v2) const
+{
+	const bool b1 = contains(v1);
+	const bool b2 = contains(v2);
+	if (b1)
+	{
+		if (b2)
+		{
+			// Both points inside, nothing to do
+			return true;
+		}
+		else
+		{
+			// v1 inside, v2 outside. Return segment v1 -- intersection
+			Vec3d v = v1^v2;
+			v.normalize();
+			Vec3d vv;
+			planeIntersect2(*this, SphericalCap(v, 0), v, vv);
+			const float cosDist = v1*v2;
+			v2 = (v1*v >= cosDist && v2*v >= cosDist) ? v : vv;
+			return true;
+		}
+	}
+	else
+	{
+		if (b2)
+		{
+			// v2 inside, v1 outside. Return segment v2 -- intersection
+			Vec3d v = v1^v2;
+			v.normalize();
+			Vec3d vv;
+			planeIntersect2(*this, SphericalCap(v, 0), v, vv);
+			const float cosDist = v1*v2;
+			v1 = (v1*v >= cosDist && v2*v >= cosDist) ? v : vv;
+			return true;
+		}
+		else
+		{
+			// Both points outside
+			Vec3d v = v1^v2;
+			v.normalize();
+			Vec3d vv;
+			if (!planeIntersect2(*this, SphericalCap(v, 0), v, vv))
+				return false;
+			const float cosDist = v1*v2;
+			if (v1*v >= cosDist && v2*v >= cosDist && v1*vv >= cosDist && v2*vv >= cosDist)
+			{
+				v1 = v;
+				v2 = vv;
+				return true;
+			}
+			return false;
+		}
+	}
+	Q_ASSERT(0);
+	return false;
+}
+
 QVector<Vec3d> SphericalCap::getClosedOutlineContour() const
 {
 	static const int nbStep = 40;

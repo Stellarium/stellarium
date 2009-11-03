@@ -310,6 +310,10 @@ public:
 		return d<=0. || a<=0. || (a<=1. && a*a <= (1.-d*d));
 	}
 
+	//! Clip the passed great circle connecting points v1 and v2.
+	//! @return true if the great circle intersects with the cap, false otherwise.
+	bool clipGreatCircle(Vec3d& v1, Vec3d& v2) const;
+
 	//! Comparison operator.
 	bool operator==(const SphericalCap& other) const {return (n==other.n && d==other.d);}
 

@@ -140,7 +140,6 @@ struct Star3 {  // 6 byte
 	  pos*=(double)(x0);
 	  pos+=z->center;
 	  pos+=(double)(x1)*z->axis1;
-	//pos.normalize();
 	return pos;
   }
   float getBV(void) const {return IndexToBV(bV);}
