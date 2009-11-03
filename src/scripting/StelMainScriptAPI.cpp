@@ -49,7 +49,6 @@
 #include "StelSkyLayerMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelGuiBase.hpp"
-#include "StelGui.hpp"
 
 #include <QAction>
 #include <QDateTime>
@@ -222,7 +221,7 @@ void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QSt
 
 void StelMainScriptAPI::setGuiVisible(bool b)
 {
-	dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiActions("actionToggle_GuiHidden_Global")->setChecked(b);
+	StelApp::getInstance().getGui()->getGuiActions("actionToggle_GuiHidden_Global")->setChecked(b);
 }
 
 void StelMainScriptAPI::setMinFps(float m)
