@@ -23,6 +23,7 @@
 #include "StelCore.hpp"
 #include "StelAppGraphicsWidget.hpp"
 #include "StelPainter.hpp"
+#include "StelGuiBase.hpp"
 
 #include <QPainter>
 #include <QPaintEngine>
@@ -83,8 +84,6 @@ bool StelAppGraphicsWidget::paintPartial(QPainter* painter)
 	if (paintState == 1)
 	{
 		// And draw them
-		StelPainter::setQPainter(painter);
-
 		if (stelApp->drawPartial())
 			return true;
 
@@ -98,6 +97,9 @@ bool StelAppGraphicsWidget::paintPartial(QPainter* painter)
 
 void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
+	// Don't even try to draw if we don't have a core yet (fix a bug durring spalsh screen)
+	if (!StelApp::getInstance().getCore()) return;
+
 	if (painter->paintEngine()->type() != QPaintEngine::OpenGL
 #if QT_VERSION>=0x040600
 		   && painter->paintEngine()->type() != QPaintEngine::OpenGL2
@@ -114,6 +116,10 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 		backgroundBuffer->bind();
 	}
 
+	// If we are using the gui, then we try to have the best reactivity, even if we need to lower the fps for that.
+	int minFps = StelApp::getInstance().getGui()->isCurrentlyUsed() ? 16 : 2;
+
+	StelPainter::setQPainter(painter);
 	while (true)
 	{
 		bool keep = paintPartial(painter);
@@ -123,6 +129,13 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 				swapBuffers();
 			break;
 		}
+		// If we use buffers we can decide to stop the painting durring execution and use the buffer for this frame.
+		if (useBuffers)
+		{
+			double spentTime = StelApp::getTotalRunTime() - previousPaintFrameTime;
+			if (1. / spentTime <= minFps) // we spent too much time
+				break;
+		}
 	}
 
 	if (useBuffers)
@@ -130,8 +143,8 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 		backgroundBuffer->release();
 		paintBuffer(painter);
 	}
-
 	StelPainter::setQPainter(NULL);
+	previousPaintFrameTime = StelApp::getTotalRunTime();
 }
 
 //! Swap the buffers
