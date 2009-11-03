@@ -49,6 +49,7 @@
 #include "StelSkyLayerMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelGuiBase.hpp"
+#include "StelGui.hpp"
 
 #include <QAction>
 #include <QDateTime>
@@ -219,9 +220,9 @@ void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QSt
 	StelMainGraphicsView::getInstance().setFlagInvertScreenShotColors(oldInvertSetting);
 }
 
-void StelMainScriptAPI::setHideGui(bool b)
+void StelMainScriptAPI::setGuiVisible(bool b)
 {
-	StelApp::getInstance().getGui()->setVisible(b);
+	dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiActions("actionToggle_GuiHidden_Global")->setChecked(b);
 }
 
 void StelMainScriptAPI::setMinFps(float m)
