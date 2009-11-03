@@ -40,9 +40,6 @@ public:
 	//! This method is called automatically by the GraphicsView.
 	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget=0);
 
-	//! Iterate through the drawing sequence.
-	bool paintPartial(QPainter* painter);
-
 	//! Return whether we use opengl buffers.
 	bool getUseBuffers() const {return useBuffers;}
 	//! Set whether we use opengl buffers.
@@ -81,7 +78,9 @@ private:
 	//! this should be called after we finish the paint
 	void swapBuffers();
 	//! Paint the foreground buffer.
-	void paintBuffer(QPainter* painter);
+	void paintBuffer();
+	//! Iterate through the drawing sequence.
+	bool paintPartial();
 };
 
 #endif // _STELAPPGRAPHICSWIDGET_HPP_

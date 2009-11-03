@@ -61,11 +61,11 @@ void StelAppGraphicsWidget::init()
 		useBuffers = false;
 	}
 	if (useBuffers)
-		qDebug() << "Use opengl buffers";
+		qDebug() << "Use OpenGL framebuffer objects";
 }
 
 //! Iterate through the drawing sequence.
-bool StelAppGraphicsWidget::paintPartial(QPainter* painter)
+bool StelAppGraphicsWidget::paintPartial()
 {
 	// qDebug() << "paintPartial" << paintState;
 	if (paintState == 0)
@@ -77,7 +77,7 @@ bool StelAppGraphicsWidget::paintPartial(QPainter* painter)
 			return false;
 
 		// Update the core and all modules
-		StelApp::getInstance().update(dt);
+		stelApp->update(dt);
 		paintState = 1;
 		return true;
 	}
@@ -97,7 +97,7 @@ bool StelAppGraphicsWidget::paintPartial(QPainter* painter)
 
 void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-	// Don't even try to draw if we don't have a core yet (fix a bug durring spalsh screen)
+	// Don't even try to draw if we don't have a core yet (fix a bug during splash screen)
 	if (!StelApp::getInstance().getCore()) return;
 
 	if (painter->paintEngine()->type() != QPaintEngine::OpenGL
@@ -110,38 +110,37 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 		return;
 	}
 
+	StelPainter::setQPainter(painter);
+
 	if (useBuffers)
 	{
 		initBuffers();
 		backgroundBuffer->bind();
-	}
-
-	// If we are using the gui, then we try to have the best reactivity, even if we need to lower the fps for that.
-	int minFps = StelApp::getInstance().getGui()->isCurrentlyUsed() ? 16 : 2;
-
-	StelPainter::setQPainter(painter);
-	while (true)
-	{
-		bool keep = paintPartial(painter);
-		if (!keep) // The paint is done
+		// If we are using the gui, then we try to have the best reactivity, even if we need to lower the fps for that.
+		int minFps = StelApp::getInstance().getGui()->isCurrentlyUsed() ? 16 : 2;
+		while (true)
 		{
-			if (useBuffers)
+			bool keep = paintPartial();
+			if (!keep) // The paint is done
+			{
+				backgroundBuffer->release();
 				swapBuffers();
-			break;
-		}
-		// If we use buffers we can decide to stop the painting durring execution and use the buffer for this frame.
-		if (useBuffers)
-		{
+				break;
+			}
 			double spentTime = StelApp::getTotalRunTime() - previousPaintFrameTime;
 			if (1. / spentTime <= minFps) // we spent too much time
+			{
+				// We stop the painting operation for now
+				backgroundBuffer->release();
 				break;
+			}
 		}
+		// Paint the last completed painted buffer
+		paintBuffer();
 	}
-
-	if (useBuffers)
+	else
 	{
-		backgroundBuffer->release();
-		paintBuffer(painter);
+		while (paintPartial()) {;}
 	}
 	StelPainter::setQPainter(NULL);
 	previousPaintFrameTime = StelApp::getTotalRunTime();
@@ -158,14 +157,14 @@ void StelAppGraphicsWidget::swapBuffers()
 }
 
 //! Paint the foreground buffer.
-void StelAppGraphicsWidget::paintBuffer(QPainter* painter)
+void StelAppGraphicsWidget::paintBuffer()
 {
 	Q_ASSERT(useBuffers);
 	// if (!StelApp::getInstance().getCore()) return;
 	// qDebug() << "paint Buffer";
 	Q_ASSERT(foregroundBuffer);
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
-	sPainter.setQPainter(painter);
+	sPainter.setColor(1,1,1);
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, foregroundBuffer->texture());
 	sPainter.drawRect2d(0, 0, foregroundBuffer->size().width(), foregroundBuffer->size().height());
@@ -179,7 +178,7 @@ void StelAppGraphicsWidget::initBuffers()
 	Q_ASSERT(QGLFramebufferObject::hasOpenGLFramebufferObjects());
 	if (!backgroundBuffer)
 	{
-		qDebug() << "create framebuffers";
+		qDebug() << "Create OpenGL framebuffers";
 		backgroundBuffer = new QGLFramebufferObject(scene()->sceneRect().size().toSize(), QGLFramebufferObject::CombinedDepthStencil);
 		foregroundBuffer = new QGLFramebufferObject(scene()->sceneRect().size().toSize(), QGLFramebufferObject::CombinedDepthStencil);
 	}
@@ -234,4 +233,14 @@ void StelAppGraphicsWidget::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
 	QGraphicsWidget::resizeEvent(event);
 	stelApp->glWindowHasBeenResized(scenePos().x(), scene()->sceneRect().height()-(scenePos().y()+geometry().height()), geometry().width(), geometry().height());
+	if (backgroundBuffer)
+	{
+		delete backgroundBuffer;
+		backgroundBuffer = NULL;
+	}
+	if (foregroundBuffer)
+	{
+		delete foregroundBuffer;
+		foregroundBuffer = NULL;
+	}
 }
