@@ -98,7 +98,7 @@ bool StelAppGraphicsWidget::paintPartial()
 void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	// Don't even try to draw if we don't have a core yet (fix a bug during splash screen)
-	if (!StelApp::getInstance().getCore()) return;
+	if (!stelApp->getCore()) return;
 
 	if (painter->paintEngine()->type() != QPaintEngine::OpenGL
 #if QT_VERSION>=0x040600
@@ -114,8 +114,10 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 
 	if (useBuffers)
 	{
+		stelApp->makeMainGLContextCurrent();
 		initBuffers();
 		backgroundBuffer->bind();
+		Q_ASSERT(backgroundBuffer->isBound());
 		// If we are using the gui, then we try to have the best reactivity, even if we need to lower the fps for that.
 		int minFps = StelApp::getInstance().getGui()->isCurrentlyUsed() ? 16 : 2;
 		while (true)
@@ -160,8 +162,6 @@ void StelAppGraphicsWidget::swapBuffers()
 void StelAppGraphicsWidget::paintBuffer()
 {
 	Q_ASSERT(useBuffers);
-	// if (!StelApp::getInstance().getCore()) return;
-	// qDebug() << "paint Buffer";
 	Q_ASSERT(foregroundBuffer);
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
 	sPainter.setColor(1,1,1);
@@ -181,6 +181,8 @@ void StelAppGraphicsWidget::initBuffers()
 		qDebug() << "Create OpenGL framebuffers";
 		backgroundBuffer = new QGLFramebufferObject(scene()->sceneRect().size().toSize(), QGLFramebufferObject::CombinedDepthStencil);
 		foregroundBuffer = new QGLFramebufferObject(scene()->sceneRect().size().toSize(), QGLFramebufferObject::CombinedDepthStencil);
+		Q_ASSERT(backgroundBuffer->isValid());
+		Q_ASSERT(foregroundBuffer->isValid());
 	}
 }
 
