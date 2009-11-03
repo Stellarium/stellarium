@@ -37,6 +37,9 @@
 #include <QGLContext>
 #endif
 
+#ifndef GL_MULTISAMPLE
+#define GL_MULTISAMPLE  0x809D
+#endif
 
 #ifndef NDEBUG
 QMutex* StelPainter::globalMutex = new QMutex();
@@ -107,7 +110,7 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_LIGHTING);
-	//glDisable(GL_MULTISAMPLE);	unknown on win32 (openGL 1.1...)
+	glDisable(GL_MULTISAMPLE);
 	glDisable(GL_DITHER);
 	glDisable(GL_ALPHA_TEST);
 	glDisable(GL_LINE_SMOOTH);
