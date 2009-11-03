@@ -42,6 +42,11 @@ public:
 
 	//! Iterate through the drawing sequence.
 	bool paintPartial(QPainter* painter);
+
+	//! Return whether we use opengl buffers.
+	bool getUseBuffers() const {return useBuffers;}
+	//! Set whether we use opengl buffers.
+	void setUseBuffers(bool value) {useBuffers = value;}
 	
 protected:
 	virtual void keyPressEvent(QKeyEvent* event);

@@ -29,6 +29,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsScene>
 #include <QGLFramebufferObject>
+#include <QSettings>
 
 StelAppGraphicsWidget::StelAppGraphicsWidget(int argc, char** argv)
 	: paintState(0), useBuffers(false), backgroundBuffer(0), foregroundBuffer(0)
@@ -51,6 +52,15 @@ StelAppGraphicsWidget::~StelAppGraphicsWidget()
 void StelAppGraphicsWidget::init()
 {
 	stelApp->init();
+	QSettings* settings = StelApp::getInstance().getSettings();
+	useBuffers = settings->value("video/use_buffers", false).toBool();
+	if (useBuffers && !QGLFramebufferObject::hasOpenGLFramebufferObjects())
+	{
+		qDebug() << "Don't support OpenGL framebuffer objects";
+		useBuffers = false;
+	}
+	if (useBuffers)
+		qDebug() << "Use opengl buffers";
 }
 
 //! Iterate through the drawing sequence.
