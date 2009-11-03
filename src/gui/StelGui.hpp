@@ -138,11 +138,13 @@ public slots:
 	void decreaseScriptSpeed();
 	void setRealScriptSpeed();
 
+	//! Hide or show the GUI.  Public so it can be called from scripts.
+	void setGuiVisible(bool);
+
 private slots:
 	void reloadStyle();
 	void scriptStarted();
 	void scriptStopped();
-	void setGuiVisible(bool);
 	
 private:
 	QGraphicsWidget* topLevelGraphicsWidget;

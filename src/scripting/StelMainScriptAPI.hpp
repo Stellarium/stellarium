@@ -225,10 +225,10 @@ public slots:
 	//! @param invert whether colors have to be inverted in the output image
 	void screenshot(const QString& prefix, bool invert=false, const QString& dir="");
 
-	//! Hide or show the GUI (toolbars)
-	//! @param b the new hidden status of the toolbars, i.e. if b==true, the 
-	//! toolbars will be hidden, else they will be made visible.
-	void setHideGui(bool b);
+	//! Show or hide the GUI (toolbars).  Note this only applies to GUI plugins which 
+	//! provide the public slot "setGuiVisible(bool)".
+	//! @param b if true, show the GUI, if false, hide the GUI.
+	void setGuiVisible(bool b);
 
         //! Set the minimum frames per second.  Usually this minimum will
         //! be switched to after there are no user events for some seconds

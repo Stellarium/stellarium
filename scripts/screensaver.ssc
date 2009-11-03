@@ -11,7 +11,7 @@ include("common_objects.inc");
 core.setMinFps(2000);
 core.clear("starchart");
 GridLinesMgr.setFlagEquatorGrid(false);
-core.setHideGui(true);
+core.setGuiVisible(false);
 id = LabelMgr.labelScreen("Press Ctrl+T to un-hide the toolbar", 100,100, false, 20);
 LabelMgr.setLabelShow(id, true);
 core.wait(4);
