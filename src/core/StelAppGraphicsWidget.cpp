@@ -28,9 +28,10 @@
 #include <QPaintEngine>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsScene>
+#include <QGLFramebufferObject>
 
 StelAppGraphicsWidget::StelAppGraphicsWidget(int argc, char** argv)
-	: paintState(0)
+	: paintState(0), useBuffers(false), backgroundBuffer(0), foregroundBuffer(0)
 {
 	StelApp::initStatic();
 	previousPaintTime = StelApp::getTotalRunTime();
@@ -41,6 +42,10 @@ StelAppGraphicsWidget::StelAppGraphicsWidget(int argc, char** argv)
 StelAppGraphicsWidget::~StelAppGraphicsWidget()
 {
 	delete stelApp;
+	if (backgroundBuffer)
+		delete backgroundBuffer;
+	if (foregroundBuffer)
+		delete foregroundBuffer;
 }
 
 void StelAppGraphicsWidget::init()
@@ -93,16 +98,69 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 		return;
 	}
 
+	if (useBuffers)
+	{
+		initBuffers();
+		backgroundBuffer->bind();
+	}
+
 	while (true)
 	{
 		bool keep = paintPartial(painter);
-		if (!keep)
+		if (!keep) // The paint is done
+		{
+			if (useBuffers)
+				swapBuffers();
 			break;
+		}
+	}
+
+	if (useBuffers)
+	{
+		backgroundBuffer->release();
+		paintBuffer(painter);
 	}
 
 	StelPainter::setQPainter(NULL);
 }
 
+//! Swap the buffers
+//! this should be called after we finish the paint
+void StelAppGraphicsWidget::swapBuffers()
+{
+	Q_ASSERT(useBuffers);
+	QGLFramebufferObject* tmp = backgroundBuffer;
+	backgroundBuffer = foregroundBuffer;
+	foregroundBuffer = tmp;
+}
+
+//! Paint the foreground buffer.
+void StelAppGraphicsWidget::paintBuffer(QPainter* painter)
+{
+	Q_ASSERT(useBuffers);
+	// if (!StelApp::getInstance().getCore()) return;
+	// qDebug() << "paint Buffer";
+	Q_ASSERT(foregroundBuffer);
+	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
+	sPainter.setQPainter(painter);
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, foregroundBuffer->texture());
+	sPainter.drawRect2d(0, 0, foregroundBuffer->size().width(), foregroundBuffer->size().height());
+	glDisable(GL_TEXTURE_2D);
+}
+
+//! Initialize the opengl buffer objects.
+void StelAppGraphicsWidget::initBuffers()
+{
+	Q_ASSERT(useBuffers);
+	Q_ASSERT(QGLFramebufferObject::hasOpenGLFramebufferObjects());
+	if (!backgroundBuffer)
+	{
+		qDebug() << "create framebuffers";
+		backgroundBuffer = new QGLFramebufferObject(scene()->sceneRect().size().toSize(), QGLFramebufferObject::CombinedDepthStencil);
+		foregroundBuffer = new QGLFramebufferObject(scene()->sceneRect().size().toSize(), QGLFramebufferObject::CombinedDepthStencil);
+	}
+}
 
 void StelAppGraphicsWidget::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
