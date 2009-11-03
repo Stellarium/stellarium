@@ -99,6 +99,8 @@ public:
 	virtual void setVisible(bool b);
 
 	virtual bool getVisible() const;
+
+	virtual bool isCurrentlyUsed() const;
 	
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags);
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const;
