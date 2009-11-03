@@ -39,6 +39,9 @@ public:
 	//! Paint the main sky view and the embedded GUI widgets such as the moving button bars.
 	//! This method is called automatically by the GraphicsView.
 	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget=0);
+
+	//! Iterate through the drawing sequence.
+	bool paintPartial(QPainter* painter);
 	
 protected:
 	virtual void keyPressEvent(QKeyEvent* event);
@@ -50,9 +53,11 @@ protected:
 	virtual void resizeEvent(QGraphicsSceneResizeEvent* event);
 	
 private:
-	double previousTime;
+	double previousPaintTime;
 	//! The main application instance.
 	class StelApp* stelApp;
+	//! The state of paintPartial method
+	int paintState;
 };
 
 #endif // _STELAPPGRAPHICSWIDGET_HPP_

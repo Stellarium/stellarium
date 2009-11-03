@@ -30,9 +30,10 @@
 #include <QGraphicsScene>
 
 StelAppGraphicsWidget::StelAppGraphicsWidget(int argc, char** argv)
+	: paintState(0)
 {
 	StelApp::initStatic();
-	previousTime = StelApp::getTotalRunTime();
+	previousPaintTime = StelApp::getTotalRunTime();
 	setFocusPolicy(Qt::StrongFocus);
 	stelApp = new StelApp(argc, argv);
 }
@@ -47,6 +48,39 @@ void StelAppGraphicsWidget::init()
 	stelApp->init();
 }
 
+//! Iterate through the drawing sequence.
+bool StelAppGraphicsWidget::paintPartial(QPainter* painter)
+{
+	// qDebug() << "paintPartial" << paintState;
+	if (paintState == 0)
+	{
+		const double now = StelApp::getTotalRunTime();
+		double dt = now-previousPaintTime;
+		previousPaintTime = now;
+		if (dt<0)       // This fix the star scale bug!!
+			return false;
+
+		// Update the core and all modules
+		StelApp::getInstance().update(dt);
+		paintState = 1;
+		return true;
+	}
+	if (paintState == 1)
+	{
+		// And draw them
+		StelPainter::setQPainter(painter);
+
+		if (stelApp->drawPartial())
+			return true;
+
+		paintState = 0;
+		return false;
+	}
+	Q_ASSERT(false);
+	return false;
+}
+
+
 void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	if (painter->paintEngine()->type() != QPaintEngine::OpenGL
@@ -59,18 +93,13 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 		return;
 	}
 
-	const double now = StelApp::getTotalRunTime();
-	double dt = now-previousTime;
-	previousTime = now;
-	if (dt<0)	// This fix the star scale bug!!
-		return;
+	while (true)
+	{
+		bool keep = paintPartial(painter);
+		if (!keep)
+			break;
+	}
 
-	// Update the core and all modules
-	StelApp::getInstance().update(dt);
-
-	StelPainter::setQPainter(painter);
-	// And draw them
-	stelApp->draw();
 	StelPainter::setQPainter(NULL);
 }
 
