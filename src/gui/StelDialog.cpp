@@ -107,7 +107,7 @@ void StelDialog::setVisible(bool v)
 		QRectF bound = proxy->boundingRect();
 		
 		// centre with dialog according to current window size.
-		proxy->setPos((screenSize.width()-bound.width())/2, (screenSize.height()-bound.height())/2);
+		proxy->setPos((int)((screenSize.width()-bound.width())/2), (int)((screenSize.height()-bound.height())/2));
 		StelMainGraphicsView::getInstance().scene()->addItem(proxy);
 		proxy->setWindowFrameMargins(2,0,2,2);
 
