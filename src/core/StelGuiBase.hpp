@@ -73,6 +73,10 @@ public:
 	virtual void setVisible(bool b) =0;
 	//! Get the current visible status of the GUI.
 	virtual bool getVisible() const =0;
+	//! Show wether the Gui is currently used.
+	//! This can then be used to optimize the rendering to increase reactivity.
+	virtual bool isCurrentlyUsed() const =0;
+
 	
 protected:
 	class StelAppGraphicsWidget* stelAppGraphicsWidget;

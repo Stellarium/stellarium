@@ -694,6 +694,11 @@ bool StelGui::getVisible() const
 	return skyGui->isVisible();
 }
 
+bool StelGui::isCurrentlyUsed() const
+{
+	return skyGui->buttonBar->isUnderMouse() || skyGui->winBar->isUnderMouse();
+}
+
 void setScriptKeys()
 {
 }
