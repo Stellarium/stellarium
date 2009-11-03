@@ -16,6 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include "StelTextureMgr.hpp"
 #include "StelSkyImageTile.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
@@ -24,7 +25,6 @@
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
 #include "StelCore.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelPainter.hpp"
 
