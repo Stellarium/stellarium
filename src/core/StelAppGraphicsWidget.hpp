@@ -58,6 +58,21 @@ private:
 	class StelApp* stelApp;
 	//! The state of paintPartial method
 	int paintState;
+
+	//! set to true to use buffers
+	bool useBuffers;
+	//! The framebuffer where we are currently drawing the scene
+	class QGLFramebufferObject* backgroundBuffer;
+	//! The framebuffer that we use while waiting for the drawing to be done
+	class QGLFramebufferObject* foregroundBuffer;
+
+	//! Initialize the opengl buffer objects.
+	void initBuffers();
+	//! Swap the buffers
+	//! this should be called after we finish the paint
+	void swapBuffers();
+	//! Paint the foreground buffer.
+	void paintBuffer(QPainter* painter);
 };
 
 #endif // _STELAPPGRAPHICSWIDGET_HPP_
