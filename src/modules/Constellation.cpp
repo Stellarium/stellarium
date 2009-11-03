@@ -90,7 +90,7 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 	{
 		XYZname+= asterism[ii]->getJ2000EquatorialPos(StelApp::getInstance().getCore()->getNavigator());
 	}
-	XYZname*=1./(numberOfSegments*2);
+	XYZname.normalize();
 
 	return true;
 }
@@ -114,15 +114,10 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelNavigator* nav) c
 	{
 		star1=asterism[2*i]->getJ2000EquatorialPos(nav);
 		star2=asterism[2*i+1]->getJ2000EquatorialPos(nav);
-		v = star1^star2;
-		v.normalize();
-		if (viewportHalfspace.d<0. || planeIntersect2(viewportHalfspace, SphericalCap(v, 0), dummy, dummy)!=false)
-		{
-			star1.normalize();
-			star2.normalize();
-			if (viewportHalfspace.contains(star1) || viewportHalfspace.contains(star2))
-				sPainter.drawGreatCircleArc(star1, star2);
-		}
+		star1.normalize();
+		star2.normalize();
+		if (viewportHalfspace.clipGreatCircle(star1, star2))
+			sPainter.drawGreatCircleArc(star1, star2);
 	}
 }
 
@@ -203,13 +198,20 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
 	if (singleSelected) size = isolatedBoundarySegments.size();
 	else size = sharedBoundarySegments.size();
 
+	const SphericalCap viewportHalfspace = sPainter.getProjector()->getBoundingSphericalCap();
+
 	for (i=0;i<size;i++)
 	{
 		if (singleSelected) points = isolatedBoundarySegments[i];
 		else points = sharedBoundarySegments[i];
 
 		for (j=0;j<points->size()-1;j++)
-			sPainter.drawGreatCircleArc(points->at(j), points->at(j+1));
+		{
+			pt1 = points->at(j);
+			pt2 = points->at(j+1);
+			if (viewportHalfspace.clipGreatCircle(pt1, pt2))
+				sPainter.drawGreatCircleArc(pt1, pt2);
+		}
 	}
 }
 
