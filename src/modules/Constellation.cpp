@@ -209,6 +209,8 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
 		{
 			pt1 = points->at(j);
 			pt2 = points->at(j+1);
+			if (pt1*pt2>0.9999999)
+				continue;
 			if (viewportHalfspace.clipGreatCircle(pt1, pt2))
 				sPainter.drawGreatCircleArc(pt1, pt2);
 		}
