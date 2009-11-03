@@ -221,7 +221,7 @@ void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QSt
 
 void StelMainScriptAPI::setGuiVisible(bool b)
 {
-	StelApp::getInstance().getGui()->getGuiActions("actionToggle_GuiHidden_Global")->setChecked(b);
+	StelApp::getInstance().getGui()->setVisible(b);
 }
 
 void StelMainScriptAPI::setMinFps(float m)
