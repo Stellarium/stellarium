@@ -97,6 +97,6 @@ void main()
 	
 	// Convert from xyY to XZY
 	// Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white
-	const mat4 adobeRGB = mat4(2.04148, -0.969258, 0.0134455, 0., -0.564977, 1.87599, -0.118373, 0., -0.344713, 0.0415557, 1.01527, 0., 0., 0., 0., 1.);
+	const mat4 adobeRGB(2.04148, -0.969258, 0.0134455, 0., -0.564977, 1.87599, -0.118373, 0., -0.344713, 0.0415557, 1.01527, 0., 0., 0., 0., 1.);
 	resultSkyColor = (adobeRGB*vec4(color[0] * color[2] / color[1], color[2], (1. - color[0] - color[1]) * color[2] / color[1], 1.)) * brightnessScale;
 }
