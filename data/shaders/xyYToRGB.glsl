@@ -40,7 +40,7 @@ void main()
 		float distSun = acos(cosDistSun_q);
 		cosDistSun_q*=cosDistSun_q;
 		float oneOverCosZenithAngle = (color[2]==0.) ? 1e30 : 1. / color[2];
-		
+
 		color[0] = term_x * (1. + Ax * exp(Bx*oneOverCosZenithAngle))* (1. + Cx * exp(Dx*distSun) + Ex * cosDistSun_q);
 		color[1] = term_y * (1. + Ay * exp(By*oneOverCosZenithAngle))* (1. + Cy * exp(Dy*distSun) + Ey * cosDistSun_q);
 		if (color[0] < 0. || color[1] < 0.)
@@ -56,8 +56,8 @@ void main()
 	}
 	color[2]=color[3];
 	color[3]=1.;
-	
-	
+
+
 	///////////////////////////////////////////////////////////////////////////
 	// Now we have the xyY components in color, need to convert to RGB
 
@@ -76,7 +76,7 @@ void main()
 		resultSkyColor = color*brightnessScale;
 		return;
 	}
-	
+
 	if (color[2]<3.9810717055349722)
 	{
 		// Compute s, ratio between scotopic and photopic vision
@@ -94,9 +94,9 @@ void main()
 	// 2. Adapt the luminance value and scale it to fit in the RGB range [2]
 	// color[2] = std::pow(adaptLuminanceScaled(color[2]), oneOverGamma);
 	color[2] = pow(color[2]*pi*0.0001, alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
-	
+
 	// Convert from xyY to XZY
 	// Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white
-	const mat4 adobeRGB(2.04148, -0.969258, 0.0134455, 0., -0.564977, 1.87599, -0.118373, 0., -0.344713, 0.0415557, 1.01527, 0., 0., 0., 0., 1.);
+	const mat4 adobeRGB = mat4(2.04148, -0.969258, 0.0134455, 0., -0.564977, 1.87599, -0.118373, 0., -0.344713, 0.0415557, 1.01527, 0., 0., 0., 0., 1.);
 	resultSkyColor = (adobeRGB*vec4(color[0] * color[2] / color[1], color[2], (1. - color[0] - color[1]) * color[2] / color[1], 1.)) * brightnessScale;
 }
