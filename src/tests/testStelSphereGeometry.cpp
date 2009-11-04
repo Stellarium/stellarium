@@ -347,9 +347,9 @@ void TestStelSphericalGeometry::testSphericalPolygon()
 void TestStelSphericalGeometry::testLoading()
 {
 	QByteArray ar = "{\"worldCoords\": [[[-0.5,0.5],[0.5,0.5],[0.5,-0.5],[-0.5,-0.5]], [[-0.2,-0.2],[0.2,-0.2],[0.2,0.2],[-0.2,0.2]]]}";
-	QByteArray arTex = "{\"worldCoords\": [[[-0.5,0.5],[0.5,0.5],[0.5,-0.5],[-0.5,-0.5]]], \"textureCoords\": [[[-0.5,0.5],[0.5,0.5],[0.5,-0.5],[-0.5,-0.5]]]}";
+	//QByteArray arTex = "{\"worldCoords\": [[[-0.5,0.5],[0.5,0.5],[0.5,-0.5],[-0.5,-0.5]]], \"textureCoords\": [[[-0.5,0.5],[0.5,0.5],[0.5,-0.5],[-0.5,-0.5]]]}";
 	SphericalRegionP reg;
-	SphericalRegionP regTex;
+	//SphericalRegionP regTex;
 	try
 	{
 		reg = SphericalRegionP::loadFromJson(ar);
@@ -362,13 +362,10 @@ void TestStelSphericalGeometry::testLoading()
 		QFAIL(qPrintable(msg));
 	}
 
-	SphericalPolygon* poly = dynamic_cast<SphericalPolygon*>(reg.data());
-	QVERIFY(poly!=NULL);
+	QVERIFY(reg->getType()==SphericalRegion::Polygon);
+	qDebug() << reg->getArea()*180./M_PI*180/M_PI;
 
-//	SphericalTexturedPolygon* polyTex = dynamic_cast<SphericalTexturedPolygon*>(regTex.data());
-//	QVERIFY(polyTex!=NULL);
-
-	StelVertexArray vertexAr = poly->getOutlineVertexArray();
+	StelVertexArray vertexAr = reg->getOutlineVertexArray();
 	QVERIFY(vertexAr.primitiveType==StelVertexArray::Lines && vertexAr.vertex.size()%2==0);
 }
 
@@ -431,6 +428,7 @@ void TestStelSphericalGeometry::testOctahedronPolygon()
 	// Copy
 	OctahedronPolygon splittedSubCopy;
 	splittedSubCopy = splittedSub;
+
 	QCOMPARE(splittedSub.getArea(), splittedSubCopy.getArea());
 	double oldArea = splittedSubCopy.getArea();
 	splittedSub = OctahedronPolygon();
@@ -438,4 +436,13 @@ void TestStelSphericalGeometry::testOctahedronPolygon()
 	QCOMPARE(splittedSubCopy.getArea(), oldArea);
 	splittedSubCopy.inPlaceIntersection(splittedSub);
 	QCOMPARE(splittedSubCopy.getArea(), 0.);
+
+	QCOMPARE(southPoleSquare.getArea(), northPoleSquare.getArea());
+	QCOMPARE(southPoleSquare.getIntersection(northPoleSquare)->getArea(), 0.);
+	QCOMPARE(southPoleSquare.getUnion(northPoleSquare)->getArea(), 2.*southPoleSquare.getArea());
+	QCOMPARE(southPoleSquare.getSubtraction(northPoleSquare)->getArea(), southPoleSquare.getArea());
+
+	QCOMPARE(northPoleSquare.getIntersection(northPoleSquare)->getArea(), northPoleSquare.getArea());
+	QCOMPARE(northPoleSquare.getUnion(northPoleSquare)->getArea(), northPoleSquare.getArea());
+	QCOMPARE(northPoleSquare.getSubtraction(northPoleSquare)->getArea(), 0.);
 }

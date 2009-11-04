@@ -112,6 +112,8 @@ public:
 	bool contains(const Vec3d& p) const;
 	bool isEmpty() const;
 
+	void finalize() const {if (!vertexArrayUpToDate) updateVertexArray();}
+
 	static const OctahedronPolygon& getAllSkyOctahedronPolygon();
 	static const OctahedronPolygon& getEmptyOctahedronPolygon() {static OctahedronPolygon poly; return poly;}
 
@@ -135,9 +137,10 @@ private:
 		WindingAbsGeqTwo=1	//!< Abs greater or equal 2 winding rule (used for intersection)
 	};
 
+	bool sideContains2D(const Vec3d& p, int sideNb) const;
+
 	//! Tesselate the contours per side, producing a list of triangles subcontours according to the given rule.
 	void tesselate(TessWindingRule rule) const;
-	bool sideContains2D(const Vec3d& p, int sideNb) const;
 	SubContour tesselateOneSide(struct GLUEStesselator* tess, int i) const;
 
 	static void splitContourByPlan(int onLine, const SubContour& contour, QVector<SubContour> result[2]);

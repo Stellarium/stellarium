@@ -1240,7 +1240,6 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 			default:
 				Q_ASSERT(0); // Unsupported primitive yype
 		}
-		Q_ASSERT(polygonVertexArray.size()==polygonTextureCoordArray.size());
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(2, GL_FLOAT, 0, polygonVertexArray.constData());
 		glDrawArrays(mode, 0, polygonVertexArray.size());
