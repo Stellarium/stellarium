@@ -36,6 +36,10 @@
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 
+#ifndef GL_CLAMP_TO_EDGE
+#define GL_CLAMP_TO_EDGE 0x812F
+#endif
+
 class StelViewportDistorterDummy : public StelViewportDistorter
 {
 private:
