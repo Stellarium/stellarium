@@ -486,6 +486,8 @@ IF (GUI_MODE STREQUAL "Standard")
 	# After this call, stellarium_gui_MOC_SRCS = moc_stellarium_gui.cxx
 	QT4_WRAP_CPP(stellarium_gui_MOC_SRCS ${stellarium_gui_MOC_HDRS})
 
+    SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} )
+
 	# Compile the static library
 	ADD_LIBRARY(StelGuiLib STATIC ${stellarium_gui_SRCS} ${stellarium_gui_MOC_SRCS})
 	TARGET_LINK_LIBRARIES(StelGuiLib ${StelMain} ${extLinkerOption})
@@ -520,7 +522,7 @@ IF(GENERATE_STELMAINLIB)
  TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
  INSTALL(TARGETS stelMain DESTINATION lib)
  ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
- TARGET_LINK_LIBRARIES(stellarium stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
+ TARGET_LINK_LIBRARIES(stellarium stelMain ${extLinkerOption})
 ELSE()
  ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
  TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
