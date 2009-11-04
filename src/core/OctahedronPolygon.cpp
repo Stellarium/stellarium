@@ -71,7 +71,7 @@ fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(Stel
 	sides.resize(8);
 	foreach (const QVector<Vec3d>& contour, contours)
 	{
-		append(OctahedronPolygon(contour));
+		append(OctahedronPolygon(SubContour(contour)));
 	}
 }
 
@@ -79,8 +79,6 @@ OctahedronPolygon::OctahedronPolygon(const SubContour& initContour) : tesselated
 fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines)
 {
 	sides.resize(8);
-
-	//qDebug() << "--- New ---" << initContour.toJSON();
 	QVector<SubContour> splittedContour1[2];
 	// Split the contour on the plan Y=0
 	splitContourByPlan(1, initContour, splittedContour1);
@@ -173,6 +171,7 @@ void OctahedronPolygon::append(const OctahedronPolygon& other)
 		sides[i] += other.sides[i];
 	}
 	tesselated = false;
+	vertexArrayUpToDate = false;
 }
 
 void OctahedronPolygon::appendReversed(const OctahedronPolygon& other)
@@ -186,6 +185,7 @@ void OctahedronPolygon::appendReversed(const OctahedronPolygon& other)
 		}
 	}
 	tesselated = false;
+	vertexArrayUpToDate = false;
 }
 
 void OctahedronPolygon::projectOnOctahedron()
@@ -317,8 +317,10 @@ SubContour OctahedronPolygon::tesselateOneSide(GLUEStesselator* tess, int sidenb
 	OctTessCallbackData data;
 	gluesTessNormal(tess, 0,0,sidenb%2==0 ? -1 : 1);
 	gluesTessBeginPolygon(tess, &data);
+	qDebug() << contours.size();
 	for (int c=0;c<contours.size();++c)
 	{
+		qDebug() << contours.at(c).toJSON();
 		gluesTessBeginContour(tess);
 		foreach (const EdgeVertex& v, contours.at(c))
 		{
@@ -327,7 +329,7 @@ SubContour OctahedronPolygon::tesselateOneSide(GLUEStesselator* tess, int sidenb
 		gluesTessEndContour(tess);
 	}
 	gluesTessEndPolygon(tess);
-	Q_ASSERT(data.result.size()%3==0);	// There should be only triangles here
+	Q_ASSERT(data.result.size()%3==0);	// There should be only positive triangles here
 #ifndef NDEBUG
 	for (int i=0;i<data.result.size()/3;++i)
 	{
@@ -335,8 +337,6 @@ SubContour OctahedronPolygon::tesselateOneSide(GLUEStesselator* tess, int sidenb
 			!isTriangleConvexPositive2D(data.result[i*3+2].vertex, data.result[i*3+1].vertex, data.result[i*3].vertex) :
 			!isTriangleConvexPositive2D(data.result[i*3].vertex, data.result[i*3+1].vertex, data.result[i*3+2].vertex)))
 		{
-			static int count =0;
-			qDebug() << count++;
 			qDebug() << data.result[i*3].vertex.toString() << data.result[i*3+1].vertex.toString() << data.result[i*3+2].vertex.toString();
 			Q_ASSERT(0);
 		}
@@ -381,6 +381,7 @@ void OctahedronPolygon::tesselate(TessWindingRule windingRule) const
 
 	gluesDeleteTess(tess);
 	tesselated = true;
+	vertexArrayUpToDate = false;
 }
 
 
