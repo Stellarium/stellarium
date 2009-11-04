@@ -18,9 +18,9 @@
  */
 
 #include <cstdlib>
-#include "glues.h"
-#include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
+#include "StelTexture.hpp"
+#include "glues.h"
 #include "StelFileMgr.hpp"
 #include "StelApp.hpp"
 

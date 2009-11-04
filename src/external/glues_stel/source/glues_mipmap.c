@@ -37,6 +37,10 @@
 #include <limits.h>    /* UINT_MAX */
 #include <math.h>
 
+#ifdef WIN32
+#include "GLee.h"
+#endif
+
 #include "glues_mipmap.h"
 
 typedef union
