@@ -136,6 +136,8 @@ public:
 	inline const T& operator[](int) const;
 	inline operator const T*() const;
 	inline operator T*();
+	inline const T* data() const {return v;}
+	inline T* data() {return v;}
 
 	inline Vector3& operator+=(const Vector3<T>&);
 	inline Vector3& operator-=(const Vector3<T>&);
@@ -172,6 +174,7 @@ public:
 	T v[3];		// The 3 values
 
 	QString toString() const {return QString("[%1, %2, %3]").arg(v[0]).arg(v[1]).arg(v[2]);}
+	QString toStringLonLat() const {return QString("[") + QString::number(longitude()*180./M_PI, 'g', 12) + "," + QString::number(latitude()*180./M_PI, 'g', 12)+"]";}
 };
 
 

@@ -55,6 +55,7 @@
 #include "StelStyle.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelGuiBase.hpp"
+#include "StelPainter.hpp"
 
 #include <iostream>
 #include <QStringList>
@@ -90,9 +91,9 @@ void StelApp::initStatic()
  Create and initialize the main Stellarium application.
 *************************************************************************/
 StelApp::StelApp(int argc, char** argv, QObject* parent)
-	: QObject(parent), core(NULL), stelGui(NULL), fps(0), maxfps(10000.f), 
-	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false), 
-	  configFile("config.ini"), startupScript("startup.ssc"), 
+	: QObject(parent), core(NULL), stelGui(NULL), fps(0), maxfps(10000.f),
+	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false),
+	  configFile("config.ini"), startupScript("startup.ssc"),
 	  confSettings(NULL), initialized(false), saveProjW(-1), saveProjH(-1),
 	  drawState(0)
 {
@@ -353,11 +354,11 @@ void StelApp::init()
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
 
 	setUseGLShaders(confSettings->value("main/use_glshaders", true).toBool());
-	
+
 	// Initialize AFTER creation of openGL context
 	textureMgr = new StelTextureMgr();
 	textureMgr->init();
-	
+
 	localeMgr = new StelLocaleMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
 	planetLocationMgr = new StelLocationMgr();
@@ -445,15 +446,15 @@ void StelApp::init()
 	flagNightVision=true;  // fool caching
 	setVisionModeNight(false);
 	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
-	
-	// Proxy Initialisation 
+
+	// Proxy Initialisation
 	QString proxyName = confSettings->value("proxy/host_name").toString();
 	QString proxyUser = confSettings->value("proxy/user").toString();
 	QString proxyPassword = confSettings->value("proxy/password").toString();
 	QVariant proxyPort = confSettings->value("proxy/port");
-	
+
 	if (proxyName!="" && !proxyPort.isNull()){
-	
+
 		QNetworkProxy proxy(QNetworkProxy::HttpProxy);
 		proxy.setHostName(proxyName);
 		proxy.setPort(proxyPort.toUInt());
@@ -464,7 +465,7 @@ void StelApp::init()
 		QNetworkProxy::setApplicationProxy(proxy);
 
 	}
-	
+
 	updateI18n();
 
 	scriptAPIProxy = new StelMainScriptAPIProxy(this);
@@ -734,9 +735,9 @@ void StelApp::parseCLIArgsPreConfig(void)
 			 << "--user-dir (or -u)      : Use an alternative user data directory\n"
 			 << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
 			 << "                          the full screen setting in the config file\n"
-		     << "--graphics-system       : With argument \"native\", \"raster\", or\n"
-		     << "                          \"opengl\"; choose graphics backend \n"
-		     << "                          default is " DEFAULT_GRAPHICS_SYSTEM "\n"
+			 << "--graphics-system       : With argument \"native\", \"raster\", or\n"
+			 << "                          \"opengl\"; choose graphics backend \n"
+			 << "                          default is " DEFAULT_GRAPHICS_SYSTEM "\n"
 			 << "--screenshot-dir        : Specify directory to save screenshots\n"
 			 << "--startup-script        : Specify name of startup script\n"
 			 << "--home-planet           : Specify observer planet (English name)\n"
@@ -752,7 +753,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 			 << "--projection-type       : Specify projection type, e.g. stereographic\n"
 			 << "--restore-defaults      : Delete existing config.ini and use defaults\n"
 			 << "--multires-image        : With filename / URL argument,specify a\n"
-		         << "                          multi-resolution image to load\n";
+				 << "                          multi-resolution image to load\n";
 		exit(0);
 	}
 
@@ -916,7 +917,7 @@ void StelApp::parseCLIArgsPostConfig()
 	{
 		confSettings->remove("skylayers/clilayer");
 	}
-	
+
 	if (fov > 0.0) confSettings->setValue("navigation/init_fov", fov);
 
 	if (projectionType != "") confSettings->setValue("projection/type", projectionType);
@@ -1015,95 +1016,6 @@ void StelApp::draw()
 	Q_ASSERT(drawState == 0);
 	while (drawPartial()) {}
 	Q_ASSERT(drawState == 0);
-	// 	{
-	// 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	// 		glColor4f(0, .6, .6, .5);
-	// 		Vec4f boundaryColor(0, 1, .6, 1);
-	// 		sPainter.drawSphericalRegion(sPainter.getProjector()->getViewportConvexPolygon(-100,-100).get(), StelPainter::SphericalPolygonDrawModeBoundary, &boundaryColor);
-	// 	}
-
-	// 	QVector<QVector<Vec3d> > contours;
-	// 	QVector<Vec3d> c1(4);
-	// 	StelUtils::spheToRect(-0.5, -0.5, c1[0]);
-	// 	StelUtils::spheToRect(0.5, -0.5, c1[1]);
-	// 	StelUtils::spheToRect(0.5, 0.5, c1[2]);
-	// 	StelUtils::spheToRect(-0.5, 0.5, c1[3]);
-	// 	contours.append(c1);
-	// 	SphericalConvexPolygon p(c1);
-	// 	Q_ASSERT(p.checkValid());
-	// 	{
-	// 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	// 		sPainter.setColor(0, .6, .6, .5);
-	// 		Vec4f boundaryColor(0, 1, .6, 1);
-	// 		sPainter.drawSphericalRegion(&p, StelPainter::SphericalPolygonDrawModeBoundary, &boundaryColor);
-	// 	}
-
-		// Testing code for new polygon code
-	// 	QVector<QVector<TextureVertex> > contours;
-	// 	QVector<TextureVertex> c1(4);
-	// 	StelUtils::spheToRect(-0.5, -0.5, c1[0].vertex);
-	// 	StelUtils::spheToRect(0.5, -0.5, c1[1].vertex);
-	// 	StelUtils::spheToRect(0.5, 0.5, c1[2].vertex);
-	// 	StelUtils::spheToRect(-0.5, 0.5, c1[3].vertex);
-	// 	c1[0].texCoord.set(0,0);
-	// 	c1[1].texCoord.set(1,0);
-	// 	c1[2].texCoord.set(1,1);
-	// 	c1[3].texCoord.set(0,1);
-	// 	contours.append(c1);
-	//
-	//  	SphericalTexturedPolygon p(contours);
-	// 	static StelTextureSP ttex;
-	// 	if (!ttex)
-	// 	{
-	// 		ttex = textureMgr->createTexture("textures/tethys.png");
-	// 	}
-	// 	{
-	// 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	// 		glDisable(GL_BLEND);
-	// 		glEnable(GL_TEXTURE_2D);
-	// 		ttex->bind();
-	// 		sPainter.setColor(0, .6, .6, .5);
-	// 		Vec4f boundaryColor(0, 1, .6, 1);
-	// 		sPainter.drawSphericalPolygon(&p, StelPainter::SphericalPolygonDrawModeTextureFillAndBoundary, &boundaryColor);
-	// 	}
-
-	// 	QVector<Vec3d> c2(4);
-	// 	StelUtils::spheToRect(-0.2, 0.2, c2[0]);
-	// 	StelUtils::spheToRect(0.2, 0.2, c2[1]);
-	// 	StelUtils::spheToRect(0.2, -0.2, c2[2]);
-	// 	StelUtils::spheToRect(-0.2, -0.2, c2[3]);
-	// 	QVector<Vec3d> c3(4);
-	// 	c3[0]=c2[3];c3[1]=c2[2];c3[2]=c2[1];c3[3]=c2[0];
-	// 	StelUtils::spheToRect(-0.1, 0.1, c3[3]);
-	//
-	// 	QVector<QVector<Vec3d> > contours2;
-	// 	contours2.append(c3);
-	// 	SphericalPolygon p2 = p.getSubtraction(SphericalPolygon(contours2));
-	// 	{
-	// 		glEnable(GL_BLEND);
-	// 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	// 		glColor4f(0, .6, .6, .5);
-	// 		sPainter.drawSphericalPolygon(&p2);
-	// 	}
-
-		// Convex polygon test
-	// 	QVector<Vec3d> cv1(4);
-	// 	StelUtils::spheToRect(-0.5, -0.5, cv1[0]);
-	// 	StelUtils::spheToRect(0.5, -0.5, cv1[1]);
-	// 	StelUtils::spheToRect(0.5, 0.5, cv1[2]);
-	// 	StelUtils::spheToRect(-0.5, 0.5, cv1[3]);
-	// 	QVector<Vec2f> tex;
-	// 	tex << Vec2f(0,0) << Vec2f(1,0) << Vec2f(1,1) << Vec2f(0,1);
-	// 	SphericalTexturedConvexPolygon cvx(cv1, tex);
-	// 	{
-	// 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	// 		glEnable(GL_BLEND);
-	// 		glEnable(GL_TEXTURE_2D);
-	// 		ttex->bind();
-	// 		glColor4f(0, .6, .6, .5);
-	// 		Vec4f boundaryColor(0, 1, .6, 1);
-	// 		sPainter.drawSphericalPolygon(&cvx, StelPainter::SphericalPolygonDrawModeTextureFillAndBoundary, &boundaryColor);
-	//  	}
 }
 
 /*************************************************************************
@@ -1170,7 +1082,7 @@ void StelApp::handleKeys(QKeyEvent* event)
 	}
 }
 
- 
+
 void StelApp::setConfigFile(const QString& configName, bool restoreDefaults)
 {
 	try
@@ -1290,7 +1202,7 @@ void StelApp::setColorScheme(const QString& section)
 
 	if(stelGui)
 		stelGui->setStelStyle(*currentStelStyle);
-	
+
 	// Send the event to every StelModule
 	foreach (StelModule* iter, moduleMgr->getAllModules())
 	{

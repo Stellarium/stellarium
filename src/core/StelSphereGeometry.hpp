@@ -481,6 +481,13 @@ public:
 class SphericalPolygon : public SphericalRegion
 {
 public:
+	// Avoid name hiding when overloading the virtual methods.
+	using SphericalRegion::intersects;
+	using SphericalRegion::contains;
+	using SphericalRegion::getIntersection;
+	using SphericalRegion::getUnion;
+	using SphericalRegion::getSubtraction;
+
 	SphericalPolygon() {;}
 	//! Constructor from a list of contours.
 	SphericalPolygon(const QVector<QVector<Vec3d> >& contours) : octahedronPolygon(contours) {;}
@@ -497,6 +504,30 @@ public:
 	//! worldCoords is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
 	virtual QVariantMap toQVariant() const;
 	virtual void serialize(QDataStream& out) const;
+
+	virtual SphericalCap getBoundingCap() const;
+
+	virtual bool contains(const Vec3d& p) const {return octahedronPolygon.contains(p);}
+	virtual bool contains(const SphericalPolygon& r) const {return octahedronPolygon.contains(r.octahedronPolygon);}
+	virtual bool contains(const SphericalConvexPolygon& r) const;
+	virtual bool contains(const SphericalCap& r) const {return octahedronPolygon.contains(r.getOctahedronPolygon());}
+	virtual bool contains(const SphericalPoint& r) const {return octahedronPolygon.contains(r.n);}
+	virtual bool contains(const AllSkySphericalRegion& r) const {return octahedronPolygon.contains(r.getOctahedronPolygon());}
+
+	virtual bool intersects(const SphericalPolygon& r) const {return octahedronPolygon.intersects(r.octahedronPolygon);}
+	virtual bool intersects(const SphericalConvexPolygon& r) const;
+	virtual bool intersects(const SphericalCap& r) const {return r.intersects(*this);}
+	virtual bool intersects(const SphericalPoint& r) const {return octahedronPolygon.contains(r.n);}
+	virtual bool intersects(const AllSkySphericalRegion& r) const {return !isEmpty();}
+
+	virtual SphericalRegionP getIntersection(const SphericalPoint& r) const {return contains(r.n) ? SphericalRegionP(new SphericalPoint(r)) : EmptySphericalRegion::staticInstance;}
+	virtual SphericalRegionP getIntersection(const AllSkySphericalRegion& r) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
+
+	virtual SphericalRegionP getUnion(const SphericalPoint& r) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
+	virtual SphericalRegionP getUnion(const EmptySphericalRegion& r) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
+
+	virtual SphericalRegionP getSubtraction(const SphericalPoint& r) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
+	virtual SphericalRegionP getSubtraction(const EmptySphericalRegion& r) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
 
 	////////////////////////////////////////////////////////////////////
 	// Methods specific to SphericalPolygon
