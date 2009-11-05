@@ -171,7 +171,7 @@ static void RenderMaximumFaceGroup(GLUEStesselator* tess, GLUESface* fOrig)
                         {                                    \
                            (t)->marked=FALSE; t=(t)->trail;  \
                         }                                    \
-                     } else /* absorb trailing semicolon */
+					 } else {;}/* absorb trailing semicolon */
 
 static struct FaceCount MaximumFan(GLUEShalfEdge* eOrig)
 {
