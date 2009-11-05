@@ -143,6 +143,38 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 	else
 	{
 		while (paintPartial()) {;}
+//		QFile f2("src/tests/buggyOctahedronPolygon-intersect2.dat");
+//		if (!f2.open(QIODevice::ReadOnly))
+//			Q_ASSERT(0);
+//		QDataStream in2(&f2);
+//		OctahedronPolygon buggy2;
+//		in2 >> buggy2;
+//		f2.close();
+//		SphericalPolygon poly2(buggy2);
+//		QFile f1("src/tests/buggyOctahedronPolygon-intersect1.dat");
+//		if (!f1.open(QIODevice::ReadOnly))
+//			Q_ASSERT(0);
+//		QDataStream in1(&f1);
+//		OctahedronPolygon buggy1;
+//		in1 >> buggy1;
+//		f1.close();
+//		SphericalPolygon poly1(buggy1);
+//
+//		SphericalRegionP intersect = poly1.getIntersection(poly2);
+//
+//		StelPainter sPainter(stelApp->getCore()->getProjection(StelCore::FrameJ2000));
+//		sPainter.setColor(0,0,1);
+//		sPainter.drawSphericalRegion(&poly1);
+//		sPainter.setColor(1,1,0);
+//		sPainter.drawSphericalRegion(&poly1, StelPainter::SphericalPolygonDrawModeBoundary);
+//		sPainter.setColor(1,0,0);
+//		sPainter.drawSphericalRegion(&poly2);
+//		sPainter.setColor(1,1,1);
+//		sPainter.drawSphericalRegion(&poly2, StelPainter::SphericalPolygonDrawModeBoundary);
+//		sPainter.setColor(0,1,0);
+//		sPainter.drawSphericalRegion(intersect.data());
+//		sPainter.setColor(0,1,1);
+//		sPainter.drawSphericalRegion(intersect.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 	}
 	StelPainter::setQPainter(NULL);
 	previousPaintFrameTime = StelApp::getTotalRunTime();
@@ -169,6 +201,14 @@ void StelAppGraphicsWidget::paintBuffer()
 	glBindTexture(GL_TEXTURE_2D, foregroundBuffer->texture());
 	sPainter.drawRect2d(0, 0, foregroundBuffer->size().width(), foregroundBuffer->size().height());
 	glDisable(GL_TEXTURE_2D);
+
+	QFile f2("src/tests/buggyOctahedronPolygon-intersect2.dat");
+	if (!f2.open(QIODevice::ReadOnly))
+		Q_ASSERT(0);
+	QDataStream in2(&f2);
+	OctahedronPolygon buggy2;
+	in2 >> buggy2;
+	f2.close();
 }
 
 //! Initialize the opengl buffer objects.
