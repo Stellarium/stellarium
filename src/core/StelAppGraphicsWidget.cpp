@@ -60,8 +60,10 @@ void StelAppGraphicsWidget::init()
 		qDebug() << "Don't support OpenGL framebuffer objects";
 		useBuffers = false;
 	}
+#ifndef NDEBUG
 	if (useBuffers)
 		qDebug() << "Use OpenGL framebuffer objects";
+#endif
 }
 
 //! Iterate through the drawing sequence.
@@ -117,7 +119,9 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 		stelApp->makeMainGLContextCurrent();
 		initBuffers();
 		backgroundBuffer->bind();
-		Q_ASSERT(backgroundBuffer->isBound());
+		QPainter* pa = new QPainter(backgroundBuffer);
+		StelPainter::setQPainter(pa);
+
 		// If we are using the gui, then we try to have the best reactivity, even if we need to lower the fps for that.
 		int minFps = StelApp::getInstance().getGui()->isCurrentlyUsed() ? 16 : 2;
 		while (true)
@@ -125,6 +129,7 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 			bool keep = paintPartial();
 			if (!keep) // The paint is done
 			{
+				delete pa;
 				backgroundBuffer->release();
 				swapBuffers();
 				break;
@@ -133,11 +138,15 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 			if (1. / spentTime <= minFps) // we spent too much time
 			{
 				// We stop the painting operation for now
+				delete pa;
 				backgroundBuffer->release();
 				break;
 			}
 		}
+		Q_ASSERT(!backgroundBuffer->isBound());
+		Q_ASSERT(!foregroundBuffer->isBound());
 		// Paint the last completed painted buffer
+		StelPainter::setQPainter(painter);
 		paintBuffer();
 	}
 	else
@@ -201,14 +210,6 @@ void StelAppGraphicsWidget::paintBuffer()
 	glBindTexture(GL_TEXTURE_2D, foregroundBuffer->texture());
 	sPainter.drawRect2d(0, 0, foregroundBuffer->size().width(), foregroundBuffer->size().height());
 	glDisable(GL_TEXTURE_2D);
-
-	QFile f2("src/tests/buggyOctahedronPolygon-intersect2.dat");
-	if (!f2.open(QIODevice::ReadOnly))
-		Q_ASSERT(0);
-	QDataStream in2(&f2);
-	OctahedronPolygon buggy2;
-	in2 >> buggy2;
-	f2.close();
 }
 
 //! Initialize the opengl buffer objects.
@@ -218,7 +219,6 @@ void StelAppGraphicsWidget::initBuffers()
 	Q_ASSERT(QGLFramebufferObject::hasOpenGLFramebufferObjects());
 	if (!backgroundBuffer)
 	{
-		qDebug() << "Create OpenGL framebuffers";
 		backgroundBuffer = new QGLFramebufferObject(scene()->sceneRect().size().toSize(), QGLFramebufferObject::CombinedDepthStencil);
 		foregroundBuffer = new QGLFramebufferObject(scene()->sceneRect().size().toSize(), QGLFramebufferObject::CombinedDepthStencil);
 		Q_ASSERT(backgroundBuffer->isValid());
