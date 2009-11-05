@@ -418,12 +418,6 @@ void TestStelSphericalGeometry::testOctahedronPolygon()
 	QVERIFY(va.size()==8*2);
 	va = southPoleSquare.getOutlineVertexArray().vertex;
 	QVERIFY(va.size()==8*2);
-//	double ra, dec;
-//	foreach (const Vec3d& v, va)
-//	{
-//		StelUtils::rectToSphe(&ra, &dec, v);
-//		qDebug() << QString(" [") + QString::number(ra*180./M_PI) + "," + QString::number(dec*180./M_PI) +"]";
-//	}
 
 	// Copy
 	OctahedronPolygon splittedSubCopy;
@@ -445,4 +439,94 @@ void TestStelSphericalGeometry::testOctahedronPolygon()
 	QCOMPARE(northPoleSquare.getIntersection(northPoleSquare)->getArea(), northPoleSquare.getArea());
 	QCOMPARE(northPoleSquare.getUnion(northPoleSquare)->getArea(), northPoleSquare.getArea());
 	QCOMPARE(northPoleSquare.getSubtraction(northPoleSquare)->getArea(), 0.);
+
+	// Test binary IO
+	QByteArray ar;
+	QBuffer buf(&ar);
+	buf.open(QIODevice::WriteOnly);
+	QDataStream out(&buf);
+	out << northPoleSquare.getOctahedronPolygon();
+	buf.close();
+	QVERIFY(!ar.isEmpty());
+
+	// Re-read it
+	OctahedronPolygon northPoleSquareRead;
+	buf.open(QIODevice::ReadOnly);
+	QDataStream in(&buf);
+	in >> northPoleSquareRead;
+	buf.close();
+	QVERIFY(!northPoleSquareRead.isEmpty());
+	QCOMPARE(northPoleSquareRead.getArea(), northPoleSquare.getArea());
+	QVERIFY(northPoleSquareRead.intersects(northPoleSquare.getOctahedronPolygon()));
+
+	// Test buggy cases
+	OctahedronPolygon buggy1;
+	OctahedronPolygon buggy2;
+	QFile f("src/tests/buggyOctahedronPolygon-intersect1.dat");
+	if (!f.open(QIODevice::ReadOnly))
+		Q_ASSERT(0);
+	QDataStream in1(&f);
+	in1 >> buggy1;
+	f.close();
+	QVERIFY(!buggy1.isEmpty());
+
+	QFile f2("src/tests/buggyOctahedronPolygon-intersect2.dat");
+	if (!f2.open(QIODevice::ReadOnly))
+		Q_ASSERT(0);
+	QDataStream in2(&f2);
+	in2 >> buggy2;
+	f2.close();
+	QVERIFY(!buggy2.isEmpty());
+
+	qDebug() << buggy1.toJson();
+	qDebug() << buggy2.toJson();
+
+	buggy2.inPlaceIntersection(buggy1);
+	QVERIFY(buggy2.checkAllTrianglesPositive());
+}
+
+
+void TestStelSphericalGeometry::testSerialize()
+{
+	// Store a SphericalPolygon as QVariant
+	SphericalRegionP holyReg(new SphericalPolygon(holySquare));
+	QVariant vHolyReg = QVariant::fromValue(holyReg);
+	QVERIFY(QString(vHolyReg.typeName())=="SphericalRegionP");
+	QVERIFY(vHolyReg.canConvert<SphericalRegionP>());
+	// and reconvert it
+	SphericalRegionP reg2 = vHolyReg.value<SphericalRegionP>();
+	QCOMPARE(holyReg->getArea(), reg2->getArea());
+	QVERIFY(holyReg->getType()==reg2->getType());
+
+	// Store a SphericalCap as QVariant
+	SphericalRegionP capReg(new SphericalCap(Vec3d(1,0,0), 0.12));
+	QVariant vCapReg = QVariant::fromValue(capReg);
+	QVERIFY(QString(vCapReg.typeName())=="SphericalRegionP");
+	QVERIFY(vCapReg.canConvert<SphericalRegionP>());
+	// and reconvert it
+	reg2 = vCapReg.value<SphericalRegionP>();
+	QCOMPARE(capReg->getArea(), reg2->getArea());
+	QVERIFY(capReg->getType()==reg2->getType());
+
+	// Test serialize the QVariants as binary
+	QByteArray ar;
+	QBuffer buf(&ar);
+	buf.open(QIODevice::WriteOnly);
+	QDataStream out(&buf);
+	out << vHolyReg << vCapReg;
+	buf.close();
+	QVERIFY(!ar.isEmpty());
+
+	// Re-read it
+	QVariant readVCapReg, readVHolyReg;
+	buf.open(QIODevice::ReadOnly);
+	QDataStream in(&buf);
+	in >> readVHolyReg >> readVCapReg;
+	buf.close();
+	reg2 = readVHolyReg.value<SphericalRegionP>();
+	QCOMPARE(holyReg->getArea(), reg2->getArea());
+	QVERIFY(holyReg->getType()==reg2->getType());
+	reg2 = readVCapReg.value<SphericalRegionP>();
+	QCOMPARE(capReg->getArea(), reg2->getArea());
+	QVERIFY(capReg->getType()==reg2->getType());
 }

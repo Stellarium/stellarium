@@ -31,7 +31,7 @@ int SphericalRegionP::metaTypeId = SphericalRegionP::initialize();
 
 int SphericalRegionP::initialize()
 {
-	int id = SphericalRegionP::metaTypeId = qRegisterMetaType<SphericalRegionP>();
+	int id = qRegisterMetaType<SphericalRegionP>();
 	qRegisterMetaTypeStreamOperators<SphericalRegionP>("SphericalRegionP");
 	return id;
 }
@@ -109,24 +109,9 @@ QVector<SphericalCap> SphericalRegion::getBoundingSphericalCaps() const
 // Default slow implementation o(n^2).
 SphericalCap SphericalRegion::getBoundingCap() const
 {
-	Vec3d p1(1,0,0), p2(1,0,0);
-	double maxDist=1.;
-	const QVector<Vec3d>& trianglesArray = getOctahedronPolygon().getFillVertexArray().vertex;
-	foreach (const Vec3d& v1, trianglesArray)
-	{
-		foreach (const Vec3d& v2, trianglesArray)
-		{
-			if (v1*v2<maxDist)
-			{
-				p1 = v1;
-				p2 = v2;
-				maxDist = v1*v2;
-			}
-		}
-	}
-	Vec3d res = p1+p2;
-	res.normalize();
-	return SphericalCap(res, res*p1);
+	SphericalCap res;
+	getOctahedronPolygon().getBoundingCap(res.n, res.d);
+	return res;
 }
 
 bool SphericalRegion::contains(const SphericalPolygon& r) const {return containsDefault(&r);}
@@ -214,6 +199,28 @@ SphericalRegionP SphericalRegion::getIntersection(const SphericalPoint& r) const
 SphericalRegionP SphericalRegion::getIntersection(const AllSkySphericalRegion& r) const {return getIntersectionDefault(&r);}
 SphericalRegionP SphericalRegion::getIntersection(const EmptySphericalRegion& r) const {return SphericalRegionP(new EmptySphericalRegion());}
 
+SphericalRegionP SphericalRegion::getUnion(const SphericalRegion* r) const
+{
+	switch (r->getType())
+	{
+		case SphericalRegion::Point:
+			return getUnion(static_cast<const SphericalPoint*>(r)->n);
+		case SphericalRegion::Cap:
+			return getUnion(*static_cast<const SphericalCap*>(r));
+		case SphericalRegion::Polygon:
+			return getUnion(*static_cast<const SphericalPolygon*>(r));
+		case SphericalRegion::ConvexPolygon:
+			return getUnion(*static_cast<const SphericalConvexPolygon*>(r));
+		case SphericalRegion::AllSky:
+			return getUnion(*static_cast<const AllSkySphericalRegion*>(r));
+		case SphericalRegion::Empty:
+			return false;
+		default:
+			return getUnionDefault(r);
+	}
+	Q_ASSERT(0);
+	return SphericalRegionP();
+}
 SphericalRegionP SphericalRegion::getUnion(const SphericalPolygon& r) const {return getUnionDefault(&r);}
 SphericalRegionP SphericalRegion::getUnion(const SphericalConvexPolygon& r) const {return getUnionDefault(&r);}
 SphericalRegionP SphericalRegion::getUnion(const SphericalCap& r) const {return getUnionDefault(&r);}
@@ -221,6 +228,29 @@ SphericalRegionP SphericalRegion::getUnion(const SphericalPoint& r) const {retur
 SphericalRegionP SphericalRegion::getUnion(const AllSkySphericalRegion& r) const {return SphericalRegionP(new AllSkySphericalRegion());}
 SphericalRegionP SphericalRegion::getUnion(const EmptySphericalRegion& r) const {return getUnionDefault(&r);}
 
+
+SphericalRegionP SphericalRegion::getSubtraction(const SphericalRegion* r) const
+{
+	switch (r->getType())
+	{
+		case SphericalRegion::Point:
+			return getSubtraction(static_cast<const SphericalPoint*>(r)->n);
+		case SphericalRegion::Cap:
+			return getSubtraction(*static_cast<const SphericalCap*>(r));
+		case SphericalRegion::Polygon:
+			return getSubtraction(*static_cast<const SphericalPolygon*>(r));
+		case SphericalRegion::ConvexPolygon:
+			return getSubtraction(*static_cast<const SphericalConvexPolygon*>(r));
+		case SphericalRegion::AllSky:
+			return getSubtraction(*static_cast<const AllSkySphericalRegion*>(r));
+		case SphericalRegion::Empty:
+			return false;
+		default:
+			return getSubtractionDefault(r);
+	}
+	Q_ASSERT(0);
+	return SphericalRegionP();
+}
 SphericalRegionP SphericalRegion::getSubtraction(const SphericalPolygon& r) const {return getSubtractionDefault(&r);}
 SphericalRegionP SphericalRegion::getSubtraction(const SphericalConvexPolygon& r) const {return getSubtractionDefault(&r);}
 SphericalRegionP SphericalRegion::getSubtraction(const SphericalCap& r) const {return getSubtractionDefault(&r);}
@@ -502,6 +532,13 @@ QVariantMap EmptySphericalRegion::toQVariant() const
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalPolygon
 ///////////////////////////////////////////////////////////////////////////////
+SphericalCap SphericalPolygon::getBoundingCap() const
+{
+	SphericalCap res;
+	octahedronPolygon.getBoundingCap(res.n, res.d);
+	return res;
+}
+
 QVariantMap SphericalPolygon::toQVariant() const
 {
 	QVariantMap res;
@@ -535,6 +572,9 @@ SphericalRegionP SphericalPolygon::deserialize(QDataStream& in)
 	in >> p;
 	return SphericalRegionP(new SphericalPolygon(p));
 }
+
+bool SphericalPolygon::contains(const SphericalConvexPolygon& r) const {return octahedronPolygon.contains(r.getOctahedronPolygon());}
+bool SphericalPolygon::intersects(const SphericalConvexPolygon& r) const {return r.intersects(*this);}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalTexturedPolygon

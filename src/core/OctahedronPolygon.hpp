@@ -25,7 +25,6 @@
 #include <QVarLengthArray>
 #include "VecMath.hpp"
 
-
 struct StelVertexArray
 {
 	enum StelPrimitiveType
@@ -82,8 +81,7 @@ public:
 class OctahedronPolygon
 {
 public:
-	OctahedronPolygon() : tesselated(false), vertexArrayUpToDate(false),
-		fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines)
+	OctahedronPolygon() : fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines)
 	{sides.resize(8);}
 
 	//! Create the OctahedronContour by splitting the passed SubContour on the 8 sides of the octahedron.
@@ -96,8 +94,10 @@ public:
 	Vec3d getPointInside() const;
 
 	//! Returns the list of triangles resulting from tesselating the contours.
-	StelVertexArray getFillVertexArray() const {if (!vertexArrayUpToDate) updateVertexArray(); return fillCachedVertexArray;}
-	StelVertexArray getOutlineVertexArray() const {if (!vertexArrayUpToDate) updateVertexArray(); return outlineCachedVertexArray;}
+	StelVertexArray getFillVertexArray() const {return fillCachedVertexArray;}
+	StelVertexArray getOutlineVertexArray() const {return outlineCachedVertexArray;}
+
+	void getBoundingCap(Vec3d& v, double& d) const {v=capN; d=capD;}
 
 	//! Set this OctahedronContourOctahedronPolygonion of itself with the given OctahedronContour.
 	void inPlaceIntersection(const OctahedronPolygon& mpoly);
@@ -106,16 +106,16 @@ public:
 	//! Set this OctahedronContour as the subtraction of itself with the given OctahedronContour.
 	void inPlaceSubtraction(const OctahedronPolygon& mpoly);
 
-	bool intersects(const OctahedronPolygon& mpoly);
-	bool contains(const OctahedronPolygon& mpoly);
+	bool intersects(const OctahedronPolygon& mpoly) const;
+	bool contains(const OctahedronPolygon& mpoly) const;
 
 	bool contains(const Vec3d& p) const;
 	bool isEmpty() const;
 
-	void finalize() const {if (!vertexArrayUpToDate) updateVertexArray();}
-
 	static const OctahedronPolygon& getAllSkyOctahedronPolygon();
 	static const OctahedronPolygon& getEmptyOctahedronPolygon() {static OctahedronPolygon poly; return poly;}
+
+	QString toJson() const;
 
 private:
 	// For unit tests
@@ -124,12 +124,11 @@ private:
 	friend QDataStream& operator<<(QDataStream&, const OctahedronPolygon&);
 	friend QDataStream& operator>>(QDataStream&, OctahedronPolygon&);
 
-	void projectOnOctahedron();
-
 	//! Append all theOctahedronPolygonach octahedron sides. No tesselation occurs at this point,
 	//! and a call to tesselatOctahedronPolygon each appended SubContours per side.
 	void append(const OctahedronPolygon& other);
 	void appendReversed(const OctahedronPolygon& other);
+	void appendSubContour(const SubContour& contour);
 
 	enum TessWindingRule
 	{
@@ -140,24 +139,30 @@ private:
 	bool sideContains2D(const Vec3d& p, int sideNb) const;
 
 	//! Tesselate the contours per side, producing a list of triangles subcontours according to the given rule.
-	void tesselate(TessWindingRule rule) const;
+	void tesselate(TessWindingRule rule);
 	SubContour tesselateOneSide(struct GLUEStesselator* tess, int i) const;
 
-	static void splitContourByPlan(int onLine, const SubContour& contour, QVector<SubContour> result[2]);
-
-	mutable QVarLengthArray<QVector<SubContour>,8 > sides;
-	mutable bool tesselated;
+	QVarLengthArray<QVector<SubContour>,8 > sides;
 
 	//! Update the content of both cached vertex arrays.
-	void updateVertexArray() const;
-	mutable bool vertexArrayUpToDate;
-	mutable StelVertexArray fillCachedVertexArray;
-	mutable StelVertexArray outlineCachedVertexArray;
+	void updateVertexArray();
+	StelVertexArray fillCachedVertexArray;
+	StelVertexArray outlineCachedVertexArray;
+	void computeBoundingCap();
+	Vec3d capN;
+	double capD;
+
+#ifndef NDEBUG
+	bool checkAllTrianglesPositive() const;
+#endif
 
 	static const Vec3d sideDirections[];
 	static int getSideNumber(const Vec3d& v) {return v[0]>=0. ?  (v[1]>=0. ? (v[2]>=0.?0:1) : (v[2]>=0.?4:5))   :   (v[1]>=0. ? (v[2]>=0.?2:3) : (v[2]>=0.?6:7));}
 	static bool isTriangleConvexPositive2D(const Vec3d& a, const Vec3d& b, const Vec3d& c);
 	static bool triangleContains2D(const Vec3d& a, const Vec3d& b, const Vec3d& c, const Vec3d& p);
+
+	static void projectOnOctahedron(QVarLengthArray<QVector<SubContour>,8 >& inSides);
+	static void splitContourByPlan(int onLine, const SubContour& contour, QVector<SubContour> result[2]);
 };
 
 // Serialization routines
