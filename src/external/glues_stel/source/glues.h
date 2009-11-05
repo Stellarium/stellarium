@@ -38,7 +38,7 @@
 #define __glues_h__
 
 
-#if defined(Q_WS_MAC)
+#if defined(Q_WS_MAC) || defined(MACOSX) || defined(__APPLE__) || defined(__APPLE_CC__)
 # include <OpenGL/gl.h>
 #elif defined(QT_OPENGL_ES_1) || defined(QT_OPENGL_ES_1_CL)
 # include <GLES/gl.h>
@@ -71,12 +71,12 @@ typedef GLUEStesselator GLUEStriangulatorObj;
 typedef void (* _GLUESfuncptr)();
 
 GLint gluesBuild2DMipmapLevels(GLenum target, GLint internalFormat,
-                             GLsizei width, GLsizei height, GLenum format,
-                             GLenum type, GLint userLevel, GLint baseLevel,
-                             GLint maxLevel, const void *data);
+							 GLsizei width, GLsizei height, GLenum format,
+							 GLenum type, GLint userLevel, GLint baseLevel,
+							 GLint maxLevel, const void *data);
 GLint gluesBuild2DMipmaps(GLenum target, GLint internalFormat,
-                             GLsizei width, GLsizei height, GLenum format,
-                             GLenum type, const void* data);
+							 GLsizei width, GLsizei height, GLenum format,
+							 GLenum type, const void* data);
 
 #ifndef GLUES_TESS_MAX_COORD
 #define GLUES_TESS_MAX_COORD 1.0e37f

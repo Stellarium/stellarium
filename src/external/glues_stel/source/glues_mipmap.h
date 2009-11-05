@@ -33,7 +33,7 @@
 #ifndef __GLUESES_MIPMAP_H__
 #define __GLUESES_MIPMAP_H__
 
-#if defined(Q_WS_MAC)
+#if defined(Q_WS_MAC) || defined(MACOSX) || defined(__APPLE__) || defined(__APPLE_CC__)
 # include <OpenGL/gl.h>
 #elif defined(QT_OPENGL_ES_1) || defined(QT_OPENGL_ES_1_CL)
 # include <GLES/gl.h>
@@ -55,12 +55,12 @@
 #define GLUES_INVALID_OPERATION              100904
 
 GLint gluesBuild2DMipmapLevels(GLenum target, GLint internalFormat,
-                             GLsizei width, GLsizei height, GLenum format,
-                             GLenum type, GLint userLevel, GLint baseLevel,
-                             GLint maxLevel, const void *data);
+							 GLsizei width, GLsizei height, GLenum format,
+							 GLenum type, GLint userLevel, GLint baseLevel,
+							 GLint maxLevel, const void *data);
 GLint gluesBuild2DMipmaps(GLenum target, GLint internalFormat,
-                             GLsizei width, GLsizei height, GLenum format,
-                             GLenum type, const void* data);
+							 GLsizei width, GLsizei height, GLenum format,
+							 GLenum type, const void* data);
 
 #ifdef __cplusplus
 }
