@@ -98,7 +98,7 @@ void pqDeletePriorityQ(PriorityQ* pq)
 
 #define LT(x,y)   (!LEQ(y,x))
 #define GT(x,y)   (!LEQ(x,y))
-#define Swap(a, b) if(1) { PQkey* tmp=*a; *a=*b; *b=tmp; } else
+#define Swap(a, b) if(1) { PQkey* tmp=*a; *a=*b; *b=tmp; } else {;}
 
 /* really __gl_pqSortInit */
 int pqInit(PriorityQ* pq)
