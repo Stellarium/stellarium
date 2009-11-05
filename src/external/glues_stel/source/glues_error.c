@@ -33,7 +33,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#if defined(Q_WS_MAC)
+#if defined(Q_WS_MAC) || defined(MACOSX) || defined(__APPLE__) || defined(__APPLE_CC__)
 # include <OpenGL/gl.h>
 #elif defined(QT_OPENGL_ES_1) || defined(QT_OPENGL_ES_1_CL)
 # include <GLES/gl.h>
@@ -93,15 +93,15 @@ const GLubyte* gluesErrorString(GLenum errorCode)
 
    for (i=0; Errors[i].String; i++)
    {
-      if (Errors[i].Token==errorCode)
-      {
-         return (const GLubyte*) Errors[i].String;
-      }
+	  if (Errors[i].Token==errorCode)
+	  {
+		 return (const GLubyte*) Errors[i].String;
+	  }
    }
 
    if ((errorCode>=GLUES_TESS_ERROR1) && (errorCode<=GLUES_TESS_ERROR6))
    {
-      return (const GLubyte*) __gluesTessErrorString(errorCode-(GLUES_TESS_ERROR1-1));
+	  return (const GLubyte*) __gluesTessErrorString(errorCode-(GLUES_TESS_ERROR1-1));
    }
 
    return (const GLubyte*)0;
