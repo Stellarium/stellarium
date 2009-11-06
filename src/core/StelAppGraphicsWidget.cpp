@@ -96,7 +96,7 @@ bool StelAppGraphicsWidget::paintPartial()
 	return false;
 }
 
-
+#include "StelUtils.hpp"
 void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	// Don't even try to draw if we don't have a core yet (fix a bug during splash screen)
@@ -152,38 +152,27 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 	else
 	{
 		while (paintPartial()) {;}
-//		QFile f2("src/tests/buggyOctahedronPolygon-intersect2.dat");
-//		if (!f2.open(QIODevice::ReadOnly))
-//			Q_ASSERT(0);
-//		QDataStream in2(&f2);
-//		OctahedronPolygon buggy2;
-//		in2 >> buggy2;
-//		f2.close();
-//		SphericalPolygon poly2(buggy2);
-//		QFile f1("src/tests/buggyOctahedronPolygon-intersect1.dat");
-//		if (!f1.open(QIODevice::ReadOnly))
-//			Q_ASSERT(0);
-//		QDataStream in1(&f1);
-//		OctahedronPolygon buggy1;
-//		in1 >> buggy1;
-//		f1.close();
-//		SphericalPolygon poly1(buggy1);
-//
-//		SphericalRegionP intersect = poly1.getIntersection(poly2);
-//
+
+//		QVector<QVector<Vec3d> > contours;
+//		QVector<Vec3d> c1(4);
+//		StelUtils::spheToRect(-0.5, -0.5, c1[3]);
+//		StelUtils::spheToRect(0.5, -0.5, c1[2]);
+//		StelUtils::spheToRect(0.5, 0.5, c1[1]);
+//		StelUtils::spheToRect(-0.5, 0.5, c1[0]);
+//		contours.append(c1);
+//		QVector<Vec3d> c2(4);
+//		StelUtils::spheToRect(-0.2, 0.2, c2[3]);
+//		StelUtils::spheToRect(0.2, 0.2, c2[2]);
+//		StelUtils::spheToRect(0.2, -0.2, c2[1]);
+//		StelUtils::spheToRect(-0.2, -0.2, c2[0]);
+//		contours.append(c2);
+//		SphericalPolygon holySquare;
+//		holySquare.setContours(contours);
 //		StelPainter sPainter(stelApp->getCore()->getProjection(StelCore::FrameJ2000));
 //		sPainter.setColor(0,0,1);
-//		sPainter.drawSphericalRegion(&poly1);
+//		sPainter.drawSphericalRegion(&holySquare);
 //		sPainter.setColor(1,1,0);
-//		sPainter.drawSphericalRegion(&poly1, StelPainter::SphericalPolygonDrawModeBoundary);
-//		sPainter.setColor(1,0,0);
-//		sPainter.drawSphericalRegion(&poly2);
-//		sPainter.setColor(1,1,1);
-//		sPainter.drawSphericalRegion(&poly2, StelPainter::SphericalPolygonDrawModeBoundary);
-//		sPainter.setColor(0,1,0);
-//		sPainter.drawSphericalRegion(intersect.data());
-//		sPainter.setColor(0,1,1);
-//		sPainter.drawSphericalRegion(intersect.data(), StelPainter::SphericalPolygonDrawModeBoundary);
+//		sPainter.drawSphericalRegion(&holySquare, StelPainter::SphericalPolygonDrawModeBoundary);
 	}
 	StelPainter::setQPainter(NULL);
 	previousPaintFrameTime = StelApp::getTotalRunTime();
