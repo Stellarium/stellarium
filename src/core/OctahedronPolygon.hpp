@@ -81,7 +81,7 @@ public:
 class OctahedronPolygon
 {
 public:
-	OctahedronPolygon() : fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines)
+	OctahedronPolygon() : fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines), capN(1,0,0), capD(-2.)
 	{sides.resize(8);}
 
 	//! Create the OctahedronContour by splitting the passed SubContour on the 8 sides of the octahedron.
@@ -140,8 +140,9 @@ private:
 
 	//! Tesselate the contours per side, producing a list of triangles subcontours according to the given rule.
 	void tesselate(TessWindingRule rule);
-	SubContour tesselateOneSide(struct GLUEStesselator* tess, int i) const;
 
+	QVector<SubContour> tesselateOneSideLineLoop(class GLUEStesselator* tess, int sidenb) const;
+	SubContour tesselateOneSideTriangles(class GLUEStesselator* tess, int sidenb) const;
 	QVarLengthArray<QVector<SubContour>,8 > sides;
 
 	//! Update the content of both cached vertex arrays.
