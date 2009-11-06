@@ -213,52 +213,53 @@ void OctahedronPolygon::projectOnOctahedron(QVarLengthArray<QVector<SubContour>,
 			{
 				// Project on the face with aperture = 90 deg
 				v->vertex *= 1./(sideDirections[i]*v->vertex);
+				v->vertex[2]=0.;
 				// May want to add offsets after that to map TOAST projection
 			}
 		}
 	}
 }
 
-void OctahedronPolygon::updateVertexArray()
-{
-	Q_ASSERT(sides.size()==8);
-	fillCachedVertexArray.vertex.clear();
-	outlineCachedVertexArray.vertex.clear();
-	for (int i=0;i<8;++i)
-	{
-		for (QVector<SubContour>::Iterator triangle=sides[i].begin();triangle!=sides[i].end();++triangle)
-		{
-			const int idx = fillCachedVertexArray.vertex.size();
-			Q_ASSERT(triangle->size()==3);	// Only triangles here
-			fillCachedVertexArray.vertex.append(triangle->at(0).vertex);
-			fillCachedVertexArray.vertex.last().normalize();
-			fillCachedVertexArray.vertex.append(triangle->at(1).vertex);
-			fillCachedVertexArray.vertex.last().normalize();
-			fillCachedVertexArray.vertex.append(triangle->at(2).vertex);
-			fillCachedVertexArray.vertex.last().normalize();
-
-			if (triangle->at(0).edgeFlag)
-			{
-				outlineCachedVertexArray.vertex.append(fillCachedVertexArray.vertex.at(idx));
-				outlineCachedVertexArray.vertex.append(fillCachedVertexArray.vertex.at(idx+1));
-			}
-			if (triangle->at(1).edgeFlag)
-			{
-				outlineCachedVertexArray.vertex.append(fillCachedVertexArray.vertex.at(idx+1));
-				outlineCachedVertexArray.vertex.append(fillCachedVertexArray.vertex.at(idx+2));
-			}
-			if (triangle->at(2).edgeFlag)
-			{
-				outlineCachedVertexArray.vertex.append(fillCachedVertexArray.vertex.at(idx+2));
-				outlineCachedVertexArray.vertex.append(fillCachedVertexArray.vertex.at(idx));
-			}
-		}
-	}
-	computeBoundingCap();
-}
+//void OctahedronPolygon::updateVertexArray()
+//{
+//	Q_ASSERT(sides.size()==8);
+//	fillCachedVertexArray.vertex.clear();
+//	outlineCachedVertexArray.vertex.clear();
+//	for (int i=0;i<8;++i)
+//	{
+//		for (QVector<SubContour>::Iterator triangle=sides[i].begin();triangle!=sides[i].end();++triangle)
+//		{
+//			const int idx = fillCachedVertexArray.vertex.size();
+//			Q_ASSERT(triangle->size()==3);	// Only triangles here
+//			fillCachedVertexArray.vertex.append(triangle->at(0).vertex);
+//			fillCachedVertexArray.vertex.last().normalize();
+//			fillCachedVertexArray.vertex.append(triangle->at(1).vertex);
+//			fillCachedVertexArray.vertex.last().normalize();
+//			fillCachedVertexArray.vertex.append(triangle->at(2).vertex);
+//			fillCachedVertexArray.vertex.last().normalize();
+//
+//			if (triangle->at(0).edgeFlag)
+//			{
+//				outlineCachedVertexArray.vertex.append(fillCachedVertexArray.vertex.at(idx));
+//				outlineCachedVertexArray.vertex.append(fillCachedVertexArray.vertex.at(idx+1));
+//			}
+//			if (triangle->at(1).edgeFlag)
+//			{
+//				outlineCachedVertexArray.vertex.append(fillCachedVertexArray.vertex.at(idx+1));
+//				outlineCachedVertexArray.vertex.append(fillCachedVertexArray.vertex.at(idx+2));
+//			}
+//			if (triangle->at(2).edgeFlag)
+//			{
+//				outlineCachedVertexArray.vertex.append(fillCachedVertexArray.vertex.at(idx+2));
+//				outlineCachedVertexArray.vertex.append(fillCachedVertexArray.vertex.at(idx));
+//			}
+//		}
+//	}
+//	computeBoundingCap();
+//}
 
 // Store data for the GLUES tesselation callbacks
-struct OctTessCallbackData
+struct OctTessTrianglesCallbackData
 {
 	SubContour result;				//! Contains the resulting tesselated vertices.
 	bool edgeFlag;					//! Used to store temporary edgeFlag found by the tesselator.
@@ -271,35 +272,22 @@ void errorCallback(GLenum errno)
 	Q_ASSERT(0);
 }
 
-void vertexCallback(EdgeVertex* vertexData, OctTessCallbackData* userData)
+void vertexTrianglesCallback(EdgeVertex* vertexData, OctTessTrianglesCallbackData* userData)
 {
 	userData->result.append(EdgeVertex(vertexData->vertex, userData->edgeFlag && vertexData->edgeFlag));
 }
 
-void edgeFlagCallback(GLboolean flag, OctTessCallbackData* userData)
-{
-	userData->edgeFlag=flag;
-}
+void noOpCallback(GLboolean flag, void* userData) {;}
 
-void combineCallback(double coords[3], EdgeVertex* vertex_data[4], GLfloat weight[4], EdgeVertex** outData, OctTessCallbackData* userData)
+void combineTrianglesCallback(double coords[3], EdgeVertex* vertex_data[4], GLfloat weight[4], EdgeVertex** outData, OctTessTrianglesCallbackData* userData)
 {
-	bool newFlag=false;
-	//qDebug() << "Combine data" << coords[0] << coords[1] << coords[2];
-	for (int i=0;i<4;++i)
-	{
-		if (vertex_data[i]==NULL)
-			break;
-		EdgeVertex* dd = vertex_data[i];
-		//qDebug() << "Vertex " << i << dd->vertex.toString() << weight[i];
-		newFlag = newFlag && dd->edgeFlag;
-	}
 	// Check that the new coordinate lay on the octahedron plane
-	Q_ASSERT(fabs(fabs(coords[0])+fabs(coords[1])+fabs(coords[2])-1.)<0.000001);
-	userData->tempVertices.append(EdgeVertex(Vec3d(coords[0], coords[1], coords[2]),newFlag));
+	Q_ASSERT(coords[2]<0.000001);
+	userData->tempVertices.append(EdgeVertex(Vec3d(coords[0], coords[1], coords[2]),false));
 	*outData = &(userData->tempVertices.last());
 }
 
-void checkBeginCallback(GLenum type)
+void checkBeginTrianglesCallback(GLenum type)
 {
 	Q_ASSERT(type==GL_TRIANGLES);
 }
@@ -318,11 +306,11 @@ bool OctahedronPolygon::triangleContains2D(const Vec3d& a, const Vec3d& b, const
 			(a[0]-c[0])*(p[1]-c[1])-(a[1]-c[1])*(p[0]-c[0])>=0.;
 }
 
-SubContour OctahedronPolygon::tesselateOneSide(GLUEStesselator* tess, int sidenb) const
+SubContour OctahedronPolygon::tesselateOneSideTriangles(GLUEStesselator* tess, int sidenb) const
 {
 	const QVector<SubContour>& contours = sides[sidenb];
 	Q_ASSERT(!contours.isEmpty());
-	OctTessCallbackData data;
+	OctTessTrianglesCallbackData data;
 	gluesTessNormal(tess, 0.,0., (sidenb%2==0 ? -1. : 1.));
 	gluesTessBeginPolygon(tess, &data);
 	for (int c=0;c<contours.size();++c)
@@ -354,52 +342,217 @@ SubContour OctahedronPolygon::tesselateOneSide(GLUEStesselator* tess, int sidenb
 	return data.result;
 }
 
+void OctahedronPolygon::updateVertexArray()
+{
+	Q_ASSERT(sides.size()==8);
+	fillCachedVertexArray.vertex.clear();
+	outlineCachedVertexArray.vertex.clear();
+
+	Q_ASSERT(sides.size()==8);
+	// Use GLUES tesselation functions to transform the polygon into a list of triangles
+	GLUEStesselator* tess = gluesNewTess();
+#ifndef NDEBUG
+	gluesTessCallback(tess, GLUES_TESS_BEGIN, (GLvoid(*)()) &checkBeginTrianglesCallback);
+#endif
+	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(*)()) &vertexTrianglesCallback);
+	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG_DATA, (GLvoid(*)()) &noOpCallback);
+	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid(*)()) &errorCallback);
+	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid(*)()) &combineTrianglesCallback);
+	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, GLUES_TESS_WINDING_POSITIVE);
+
+	// Call the tesselator on each side
+	for (int sidenb=0;sidenb<8;++sidenb)
+	{
+		if (sides[sidenb].isEmpty())
+			continue;
+		SubContour res = tesselateOneSideTriangles(tess, sidenb);
+		Q_ASSERT(res.size()%3==0);	// There should be only triangles here
+		for (int j=0;j<res.size()/3;++j)
+		{
+			// Post processing, GLU seems to sometimes output triangles oriented in the wrong direction..
+			// Get rid of them in an ugly way. TODO Need to find the real cause.
+			if ((sidenb%2==0 ?
+			isTriangleConvexPositive2D(res[j*3+2].vertex, res[j*3+1].vertex, res[j*3].vertex) :
+			isTriangleConvexPositive2D(res[j*3].vertex, res[j*3+1].vertex, res[j*3+2].vertex)))
+			{
+				// OK
+			}
+			else
+			{
+				qDebug() << "Found a fucking CW triangle";
+				//Q_ASSERT(0);
+				res.remove(j*3,3);
+			}
+		}
+		Vec3d tmp;
+		foreach (const EdgeVertex& v, res)
+		{
+			tmp = v.vertex;
+			Q_ASSERT(tmp[2]<0.0000001);
+			tmp[2]=(1.-sideDirections[sidenb]*tmp)/sideDirections[sidenb][2];
+			tmp.normalize();
+			fillCachedVertexArray.vertex+=tmp;
+		}
+
+#ifndef NDEBUG
+		foreach (const SubContour& c, sides[sidenb])
+		{
+			foreach (const EdgeVertex& v, c)
+			{
+				Q_ASSERT(v.vertex[2]<0.0000001);
+			}
+		}
+#endif
+
+		// Now compute the outline contours, getting rid of non edge segments
+		foreach (const SubContour& c, sides[sidenb])
+		{
+			Q_ASSERT(!c.isEmpty());
+			for (int j=0;j<c.size()-1;++j)
+			{
+				if (c.at(j).edgeFlag && c.at(j+1).edgeFlag)
+				{
+					tmp = c.at(j).vertex;
+					Q_ASSERT(tmp[2]<0.0000001);
+					tmp[2]=(1.-sideDirections[sidenb]*tmp)/sideDirections[sidenb][2];
+					tmp.normalize();
+					outlineCachedVertexArray.vertex.append(tmp);
+					tmp = c.at(j+1).vertex;
+					Q_ASSERT(tmp[2]<0.0000001);
+					tmp[2]=(1.-sideDirections[sidenb]*tmp)/sideDirections[sidenb][2];
+					tmp.normalize();
+					outlineCachedVertexArray.vertex.append(tmp);
+				}
+			}
+			// Last point connects with first point
+			if (c.last().edgeFlag && c.first().edgeFlag)
+			{
+				tmp = c.last().vertex;
+				Q_ASSERT(tmp[2]<0.0000001);
+				tmp[2]=(1.-sideDirections[sidenb]*tmp)/sideDirections[sidenb][2];
+				tmp.normalize();
+				outlineCachedVertexArray.vertex.append(tmp);
+				tmp = c.first().vertex;
+				Q_ASSERT(tmp[2]<0.0000001);
+				tmp[2]=(1.-sideDirections[sidenb]*tmp)/sideDirections[sidenb][2];
+				tmp.normalize();
+				outlineCachedVertexArray.vertex.append(tmp);
+			}
+		}
+	}
+	gluesDeleteTess(tess);
+	computeBoundingCap();
+
+#ifndef NDEBUG
+	// Check that all triangles are properly oriented
+	QVector<Vec3d> c;
+	c.resize(3);
+	for (int j=0;j<fillCachedVertexArray.vertex.size()/3;++j)
+	{
+		c[0]=fillCachedVertexArray.vertex.at(j*3);
+		c[1]=fillCachedVertexArray.vertex.at(j*3+1);
+		c[2]=fillCachedVertexArray.vertex.at(j*3+2);
+		Q_ASSERT(SphericalConvexPolygon::checkValidContour(c));
+	}
+#endif
+}
+
+struct OctTessLineLoopCallbackData
+{
+	SubContour result;				//! Contains the resulting tesselated vertices.
+	QVector<SubContour> resultList;
+	QList<EdgeVertex> tempVertices;	//! Used to store the temporary combined vertices
+};
+
+QVector<SubContour> OctahedronPolygon::tesselateOneSideLineLoop(GLUEStesselator* tess, int sidenb) const
+{
+	const QVector<SubContour>& contours = sides[sidenb];
+	Q_ASSERT(!contours.isEmpty());
+	OctTessLineLoopCallbackData data;
+	gluesTessNormal(tess, 0.,0., (sidenb%2==0 ? -1. : 1.));
+	gluesTessBeginPolygon(tess, &data);
+	for (int c=0;c<contours.size();++c)
+	{
+		//qDebug() << contours.at(c).toJSON();
+		gluesTessBeginContour(tess);
+		for (int i=0;i<contours.at(c).size();++i)
+		{
+			//qDebug() << contours[c][i].vertex.toString();
+			Q_ASSERT(contours[c][i].vertex[2]<0.000001);
+			gluesTessVertex(tess, const_cast<double*>((const double*)contours[c][i].vertex.data()), const_cast<void*>((const void*)&(contours[c][i])));
+		}
+		gluesTessEndContour(tess);
+	}
+	gluesTessEndPolygon(tess);
+	return data.resultList;
+}
+
+void vertexLineLoopCallback(EdgeVertex* vertexData, OctTessLineLoopCallbackData* userData)
+{
+	Q_ASSERT(vertexData->vertex[2]<0.0000001);
+	userData->result.append(*vertexData);
+}
+
+void combineLineLoopCallback(double coords[3], EdgeVertex* vertex_data[4], GLfloat weight[4], EdgeVertex** outData, OctTessLineLoopCallbackData* userData)
+{
+	bool newFlag=false;
+	//qDebug() << "Combine data" << coords[0] << coords[1] << coords[2];
+	for (int i=0;i<4;++i)
+	{
+		if (vertex_data[i]==NULL)
+			break;
+		//qDebug() << "Vertex " << i << dd->vertex.toString() << weight[i];
+		newFlag = newFlag || vertex_data[i]->edgeFlag;
+	}
+	// Check that the new coordinate lay on the octahedron plane
+//	Q_ASSERT(fabs(fabs(coords[0])+fabs(coords[1])+fabs(coords[2])-1.)<0.000001);
+	Q_ASSERT(coords[2]<0.000001);
+	userData->tempVertices.append(EdgeVertex(Vec3d(coords[0], coords[1], coords[2]),newFlag));
+	*outData = &(userData->tempVertices.last());
+}
+
+void checkBeginLineLoopCallback(GLenum type)
+{
+	Q_ASSERT(type==GL_LINE_LOOP);
+}
+
+void endLineLoopCallback(OctTessLineLoopCallbackData* data)
+{
+	// Store the finished contour and prepare for the next one
+	data->resultList.append(data->result);
+	data->result.clear();
+}
+
 void OctahedronPolygon::tesselate(TessWindingRule windingRule)
 {
 	Q_ASSERT(sides.size()==8);
 	// Use GLUES tesselation functions to transform the polygon into a list of triangles
 	GLUEStesselator* tess = gluesNewTess();
 #ifndef NDEBUG
-	gluesTessCallback(tess, GLUES_TESS_BEGIN, (GLvoid(*)()) &checkBeginCallback);
+	gluesTessCallback(tess, GLUES_TESS_BEGIN, (GLvoid(*)()) &checkBeginLineLoopCallback);
 #endif
-	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(*)()) &vertexCallback);
-	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG_DATA, (GLvoid(*)()) &edgeFlagCallback);
+	gluesTessCallback(tess, GLUES_TESS_END_DATA, (GLvoid(*)()) &endLineLoopCallback);
+	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(*)()) &vertexLineLoopCallback);
 	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid(*)()) &errorCallback);
-	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid(*)()) &combineCallback);
+	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid(*)()) &combineLineLoopCallback);
 	const double windRule = (windingRule==OctahedronPolygon::WindingPositive) ? GLUES_TESS_WINDING_POSITIVE : GLUES_TESS_WINDING_ABS_GEQ_TWO;
 	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, windRule);
-	//gluesTessProperty(tess, GLUES_TESS_BOUNDARY_ONLY, GL_TRUE);
+	gluesTessProperty(tess, GLUES_TESS_BOUNDARY_ONLY, GL_TRUE);
 	// Call the tesselator on each side
-	SubContour res2;
-	res2.resize(3);
 	for (int i=0;i<8;++i)
 	{
 		if (sides[i].isEmpty())
 			continue;
-		qDebug() << "Before" << sides[i].size();
-		SubContour res = tesselateOneSide(tess, i);
-		sides[i].clear();
-		Q_ASSERT(res.size()%3==0);	// There should be only triangles here
-		for (int j=0;j<res.size()/3;++j)
+		sides[i] = tesselateOneSideLineLoop(tess, i);
+#ifndef NDEBUG
+		foreach (const SubContour& c, sides[i])
 		{
-			res2[0]=res[j*3];
-			res2[1]=res[j*3+1];
-			res2[2]=res[j*3+2];
-
-			// Post processing, GLU seems to sometimes output triangles oriented in the wrong direction..
-			// Get rid of them in an ugly way. TODO Need to find the real cause.
-			if ((i%2==0 ?
-			isTriangleConvexPositive2D(res2[2].vertex, res2[1].vertex, res2[0].vertex) :
-			isTriangleConvexPositive2D(res2[0].vertex, res2[1].vertex, res2[2].vertex)))
+			foreach (const EdgeVertex& v, c)
 			{
-				sides[i].append(res2);
-			}
-			else
-			{
-				qDebug() << "Discarded a CW triangle";
+				Q_ASSERT(v.vertex[2]<0.000000001);
 			}
 		}
-		qDebug() << "After" << sides[i].size();
+#endif
 	}
 	gluesDeleteTess(tess);
 }
@@ -456,33 +609,33 @@ void OctahedronPolygon::inPlaceIntersection(const OctahedronPolygon& mpoly)
 {
 	if (!intersectsBoundingCap(capN, capD, mpoly.capN, mpoly.capD))
 		return;
-	Q_ASSERT(checkAllTrianglesPositive());
-	Q_ASSERT(mpoly.checkAllTrianglesPositive());
+	//Q_ASSERT(checkAllTrianglesPositive());
+	//Q_ASSERT(mpoly.checkAllTrianglesPositive());
 	append(mpoly);
 	tesselate(WindingAbsGeqTwo);
-	tesselate(WindingPositive);
-#ifndef NDEBUG
-	// Check that we are made of already tesselated positive triangles
-	if (!checkAllTrianglesPositive())
-	{
-		qDebug() << "A buggy OctahedronPolygon was found";
-		//qDebug() << this->toJson();
-
-//		Q_ASSERT(!tmp.isEmpty());
-//		QFile f1("buggyOctahedronPolygon-intersect1.dat");
-//		f1.open(QIODevice::WriteOnly);
-//		QDataStream out1(&f1);
-//		out1 << tmp;
-//		f1.close();
+	//tesselate(WindingPositive);
+//#ifndef NDEBUG
+//	// Check that we are made of already tesselated positive triangles
+//	if (!checkAllTrianglesPositive())
+//	{
+//		qDebug() << "A buggy OctahedronPolygon was found";
+//		//qDebug() << this->toJson();
 //
-//		QFile f2("buggyOctahedronPolygon-intersect2.dat");
-//		f2.open(QIODevice::WriteOnly);
-//		QDataStream out2(&f2);
-//		out2 << mpoly;
-//		f2.close();
-		Q_ASSERT(0);
-	}
-#endif
+////		Q_ASSERT(!tmp.isEmpty());
+////		QFile f1("buggyOctahedronPolygon-intersect1.dat");
+////		f1.open(QIODevice::WriteOnly);
+////		QDataStream out1(&f1);
+////		out1 << tmp;
+////		f1.close();
+////
+////		QFile f2("buggyOctahedronPolygon-intersect2.dat");
+////		f2.open(QIODevice::WriteOnly);
+////		QDataStream out2(&f2);
+////		out2 << mpoly;
+////		f2.close();
+//		Q_ASSERT(0);
+//	}
+//#endif
 
 	updateVertexArray();
 }
@@ -523,26 +676,18 @@ bool OctahedronPolygon::contains(const OctahedronPolygon& mpoly) const
 	return resOct.getArea()-getArea()<0.00000000001;
 }
 
-bool OctahedronPolygon::sideContains2D(const Vec3d& p, int sideNb) const
+bool OctahedronPolygon::contains(const Vec3d& p) const
 {
-	foreach (const SubContour& subContour, sides[sideNb])
+	if (sides[getSideNumber(p)].isEmpty())
+		return false;
+	for (int i=0;i<fillCachedVertexArray.vertex.size()/3;++i)
 	{
-		// There should be only triangles here.
-		Q_ASSERT(subContour.size()==3);
-		if ((sideNb%2==1 ?
-			triangleContains2D(subContour.at(0).vertex, subContour.at(1).vertex, subContour.at(2).vertex, p) :
-			triangleContains2D(subContour.at(2).vertex, subContour.at(1).vertex, subContour.at(0).vertex, p)))
+		if (sideHalfSpaceContains(fillCachedVertexArray.vertex.at(i*3+1), fillCachedVertexArray.vertex.at(i*3), p) &&
+			sideHalfSpaceContains(fillCachedVertexArray.vertex.at(i*3+2), fillCachedVertexArray.vertex.at(i*3+1), p) &&
+			sideHalfSpaceContains(fillCachedVertexArray.vertex.at(i*3), fillCachedVertexArray.vertex.at(i*3+2), p))
 			return true;
 	}
 	return false;
-}
-
-bool OctahedronPolygon::contains(const Vec3d& p) const
-{
-	const int fNb = getSideNumber(p);
-	Vec3d p2(p);
-	p2 *= 1./(sideDirections[fNb]*p);
-	return sideContains2D(p2, fNb);
 }
 
 bool OctahedronPolygon::isEmpty() const
@@ -702,64 +847,6 @@ void OctahedronPolygon::computeBoundingCap()
 	capD = p2*p1;
 }
 
-/////////////////////////////////////////////////////////////////////////////////
-//// Methods for SphericalTexturedPolygon
-/////////////////////////////////////////////////////////////////////////////////
-//void  vertexTextureCallback(void* vertexData, void* userData)
-//{
-//	SphericalTexturedPolygon* mp = static_cast<SphericalTexturedPolygon*>(((GluTessCallbackData*)userData)->thisPolygon);
-//	const SphericalTexturedPolygon::TextureVertex* vData = (SphericalTexturedPolygon::TextureVertex*)vertexData;
-//	mp->triangleVertices.append(vData->vertex);
-//	mp->textureCoords.append(vData->texCoord);
-//	mp->edgeFlags.append(((GluTessCallbackData*)userData)->edgeFlag);
-//}
-//
-//void SphericalTexturedPolygon::setContours(const QVector<QVector<TextureVertex> >& contours, SphericalPolygon::PolyWindingRule windingRule)
-//{
-//	triangleVertices.clear();
-//	edgeFlags.clear();
-//	textureCoords.clear();
-//
-//	// Use GLUES tesselation functions to transform the polygon into a list of triangles
-//	GLUEStesselator* tess = gluesNewTess();
-//	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(*)()) &vertexTextureCallback);
-//	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG_DATA, (GLvoid(*)()) &edgeFlagCallback);
-//	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid (*) ()) &errorCallback);
-//		const double windRule = (windingRule==SphericalPolygon::WindingPositive) ? GLUES_TESS_WINDING_POSITIVE : GLUES_TESS_WINDING_ABS_GEQ_TWO;
-//	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, windRule);
-//	GluTessCallbackData data;
-//	data.thisPolygon=this;
-//	gluesTessBeginPolygon(tess, &data);
-//	for (int c=0;c<contours.size();++c)
-//	{
-//		gluesTessBeginContour(tess);
-//		for (int i=0;i<contours[c].size();++i)
-//		{
-//						gluesTessVertex(tess, const_cast<double*>((const double*)contours[c][i].vertex), const_cast<void*>((const void*)&(contours[c][i])));
-//		}
-//		gluesTessEndContour(tess);
-//	}
-//	gluesTessEndPolygon(tess);
-//	gluesDeleteTess(tess);
-//
-//	// There should always be a texture coord matching each vertex.
-//	Q_ASSERT(triangleVertices.size() == edgeFlags.size());
-//	Q_ASSERT(triangleVertices.size() == textureCoords.size());
-//
-//	// There should always be an edge flag matching each vertex.
-//	Q_ASSERT(triangleVertices.size() == edgeFlags.size());
-//#ifndef NDEBUG
-//	// Check that all vectors are normalized
-//	foreach (const Vec3d& v, triangleVertices)
-//		Q_ASSERT(std::fabs(v.lengthSquared()-1.)<0.000001);
-//	// Check that the orientation of all the triangles is positive
-//	for (int i=0;i<triangleVertices.size()/3;++i)
-//	{
-//		Q_ASSERT((triangleVertices.at(i*3+1)^triangleVertices.at(i*3))*triangleVertices.at(i*3+2)>=0);
-//	}
-//#endif
-//}
-
 const OctahedronPolygon& OctahedronPolygon::getAllSkyOctahedronPolygon()
 {
 	static OctahedronPolygon poly;
@@ -785,7 +872,8 @@ QDataStream& operator>>(QDataStream& in, OctahedronPolygon& p)
 	{
 		in >> p.sides[i];
 	}
+	//p.tesselate(OctahedronPolygon::WindingPositive);
 	p.updateVertexArray();
-	Q_ASSERT(p.checkAllTrianglesPositive());
+	//Q_ASSERT(p.checkAllTrianglesPositive());
 	return in;
 }
