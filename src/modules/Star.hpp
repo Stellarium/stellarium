@@ -66,15 +66,14 @@ struct Star1 { // 28 byte
   enum {MaxPosVal=0x7FFFFFFF};
   StelObjectP createStelObject(const SpecialZoneArray<Star1> *a,
 					 const SpecialZoneData<Star1> *z) const;
-  Vec3d getJ2000Pos(const ZoneData *z,double movementFactor) const {
-	  Vec3d pos = z->axis0;
+  void getJ2000Pos(const ZoneData *z,double movementFactor, Vec3d& pos) const {
+	  pos = z->axis0;
 	  pos*=((double)(x0)+movementFactor*dx0);
 	  pos+=((double)(x1)+movementFactor*dx1)*z->axis1;
 	  pos+=z->center;
-	//pos.normalize();
-	return pos;
   }
   float getBV(void) const {return IndexToBV(bV);}
+  bool hasName() const {return hip;}
   QString getNameI18n(void) const;
   void repack(bool fromBe);
   void print(void);
@@ -101,17 +100,15 @@ struct Star2 {  // 10 byte
   enum {MaxPosVal=((1<<19)-1)};
   StelObjectP createStelObject(const SpecialZoneArray<Star2> *a,
 					 const SpecialZoneData<Star2> *z) const;
-  Vec3d getJ2000Pos(const ZoneData *z,double movementFactor) const {
-	  Vec3d pos = z->axis0;
+  void getJ2000Pos(const ZoneData *z,double movementFactor, Vec3d& pos) const {
+	  pos = z->axis0;
 	  pos*=((double)(x0)+movementFactor*dx0);
 	  pos+=((double)(x1)+movementFactor*dx1)*z->axis1;
 	  pos+=z->center;
-			  
-	//pos.normalize();
-	return pos;
   }
   float getBV(void) const {return IndexToBV(bV);}
   QString getNameI18n(void) const {return QString();}
+  bool hasName() const {return false;}
   void repack(bool fromBe);
   void print(void);
 }
@@ -135,15 +132,15 @@ struct Star3 {  // 6 byte
   enum {MaxPosVal=((1<<17)-1)};
   StelObjectP createStelObject(const SpecialZoneArray<Star3> *a,
 					 const SpecialZoneData<Star3> *z) const;
-  Vec3d getJ2000Pos(const ZoneData *z,double) const {
-	  Vec3d pos = z->axis0;
+  void getJ2000Pos(const ZoneData *z,double, Vec3d& pos) const {
+	  pos = z->axis0;
 	  pos*=(double)(x0);
 	  pos+=z->center;
 	  pos+=(double)(x1)*z->axis1;
-	return pos;
   }
   float getBV(void) const {return IndexToBV(bV);}
   QString getNameI18n(void) const {return QString();}
+  bool hasName() const {return false;}
   void repack(bool fromBe);
   void print(void);
 }

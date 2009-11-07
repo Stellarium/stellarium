@@ -536,6 +536,13 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	}
 }
 
+void StelPainter::drawText(const Vec3d& v, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity) const
+{
+	Vec3d win;
+	prj->project(v, win);
+	drawText(win[0], win[1], str, angleDeg, xshift, yshift, noGravity);
+}
+
 /*************************************************************************
  Draw the string at the given position and angle with the given font
 *************************************************************************/

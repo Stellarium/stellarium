@@ -38,7 +38,7 @@ QString Star1::getNameI18n(void) const {
       return QString("HIP %1").arg(hip);
     }
   }
-  return "";
+  return QString();
 }
 
 

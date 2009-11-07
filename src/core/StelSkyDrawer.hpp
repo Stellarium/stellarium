@@ -60,34 +60,22 @@ public:
 	void postDrawPointSource();
 	
 	//! Draw a point source halo.
-	//! @param x the x position of the object on the screen
-	//! @param y the y position of the object on the screen
+	//! @param v the 3d position of the source in J2000 reference frame
 	//! @param rcMag the radius and luminance of the source as computed by computeRCMag()
 	//! @param bV the source B-V index
 	//! @return true if the source was actually visible and drawn
-	bool drawPointSource(double x, double y, const float rcMag[2], unsigned int bV)
-		{return drawPointSource(x, y, rcMag, colorTable[bV]);}
+	bool drawPointSource(const Vec3d& v, const float rcMag[2], unsigned int bV, bool checkInScreen=false)
+		{return drawPointSource(v, rcMag, colorTable[bV], checkInScreen);}
 	
-	bool drawPointSource(double x, double y, const float rcMag[2], const Vec3f& color);
-	
-	//! Draw a disk source halo. The real surface brightness is smaller as if it were a 
-	//! point source because the flux is spread on the disk area
-	//! @param x the x position of the disk center in pixel
-	//! @param y the y position of the disk centre in pixel
-	//! @param r radius of the disk in pixel
-	//! @param mag the source integrated magnitude
-	//! @param color the source RGB color
-	//! @return true if the source was actually visible and drawn
-	bool drawDiskSource(double x, double y, double r, float mag, const Vec3f& color);
+	bool drawPointSource(const Vec3d& v, const float rcMag[2], const Vec3f& color, bool checkInScreen=false);
 	
 	//! Terminate drawing of a 3D model, draw the halo
-	//! @param x the x position of the object centroid in pixel
-	//! @param y the y position of the object centroid in pixel
+	//! @param v the 3d position of the source in J2000 reference frame
 	//! @param illuminatedArea the illuminated area in arcmin^2
 	//! @param mag the source integrated magnitude
 	//! @param p the StelPainter instance to use for this drawing operation
 	//! @param color the object halo RGB color
-	void postDrawSky3dModel(double x, double y, double illuminatedArea, float mag, StelPainter* p, const Vec3f& color = Vec3f(1.f,1.f,1.f));
+	void postDrawSky3dModel(const Vec3d& v, double illuminatedArea, float mag, StelPainter* p, const Vec3f& color = Vec3f(1.f,1.f,1.f));
 	
 	//! Compute RMag and CMag from magnitude.
 	//! @param mag the object integrated V magnitude
