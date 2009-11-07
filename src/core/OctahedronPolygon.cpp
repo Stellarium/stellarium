@@ -29,12 +29,14 @@ const Vec3d OctahedronPolygon::sideDirections[] = {	Vec3d(1,1,1), Vec3d(1,1,-1),
 
 inline bool intersectsBoundingCap(const Vec3d& n1, double d1, const Vec3d& n2, double d2)
 {
-	return SphericalCap(n1, d1).intersects(SphericalCap(n2, d2));
+	const double a = d1*d2 - n1*n2;
+	return d1+d2<=0. || a<=0. || (a<=1. && a*a <= (1.-d1*d1)*(1.-d2*d2));
 }
 
 inline bool containsBoundingCap(const Vec3d& n1, double d1, const Vec3d& n2, double d2)
 {
-	return SphericalCap(n1, d1).contains(SphericalCap(n2, d2));
+	const double a = n1*n2-d1*d2;
+	return d1<=d1 && ( a>=1. || (a>=0. && a*a >= (1.-d1*d1)*(1.-d2*d2)));
 }
 
 static int getSide(const Vec3d& v, int onLine)

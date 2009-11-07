@@ -564,32 +564,23 @@ public:
 	SphericalConvexPolygon() {;}
 
 	//! Constructor from a list of contours.
-	SphericalConvexPolygon(const QVector<QVector<Vec3d> >& contours) {setContours(contours);}
+	SphericalConvexPolygon(const QVector<QVector<Vec3d> >& contours) {Q_ASSERT(contours.size()==1); setContour(contours.at(0));}
 	//! Constructor from one contour.
 	SphericalConvexPolygon(const QVector<Vec3d>& contour) {setContour(contour);}
 	//! Special constructor for triangle.
-	SphericalConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2) {contour << e0 << e1 << e2;}
+	SphericalConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2) {contour << e0 << e1 << e2; updateBoundingCap();}
 	//! Special constructor for quads.
-	SphericalConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3)  {contour << e0 << e1 << e2 << e3;}
+	SphericalConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3)  {contour << e0 << e1 << e2 << e3; updateBoundingCap();}
 
 	virtual SphericalRegionType getType() const {return SphericalRegion::ConvexPolygon;}
 	virtual OctahedronPolygon getOctahedronPolygon() const {return OctahedronPolygon(contour);}
-
 	virtual StelVertexArray getFillVertexArray() const {return StelVertexArray(contour, StelVertexArray::TriangleFan);}
 	virtual StelVertexArray getOutlineVertexArray() const {return StelVertexArray(contour, StelVertexArray::LineLoop);}
-
-	//! Return the area of the region in steradians.
 	virtual double getArea() const;
-
-	//! Return true if the region is empty.
 	virtual bool isEmpty() const {return contour.isEmpty();}
-
-	//! Return a point located inside the region.
 	virtual Vec3d getPointInside() const;
-
-	//! Return the list of halfspace bounding the ConvexPolygon.
+	virtual SphericalCap getBoundingCap() const {return cachedBoundingCap;}
 	QVector<SphericalCap> getBoundingSphericalCaps() const;
-
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is
 	//! @code {"type": "CVXPOLYGON", "worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]]} @endcode
@@ -604,25 +595,35 @@ public:
 	virtual bool contains(const SphericalCap& r) const;
 	virtual bool contains(const SphericalPoint& r) const {return contains(r.n);}
 	virtual bool contains(const AllSkySphericalRegion& r) const {return false;}
+	virtual bool intersects(const SphericalCap& r) const {if (!cachedBoundingCap.intersects(r)) return false; return r.intersects(*this);}
 	virtual bool intersects(const SphericalPolygon& r) const;
 	virtual bool intersects(const SphericalConvexPolygon& r) const;
 	virtual bool intersects(const SphericalPoint& r) const {return contains(r.n);}
 	virtual bool intersects(const AllSkySphericalRegion& r) const {return true;}
 
+	////////////////////////// TODO
+//	virtual SphericalRegionP getIntersection(const SphericalPolygon& r) const;
+//	virtual SphericalRegionP getIntersection(const SphericalConvexPolygon& r) const;
+//	virtual SphericalRegionP getIntersection(const SphericalCap& r) const;
+//	virtual SphericalRegionP getIntersection(const SphericalPoint& r) const;
+//	virtual SphericalRegionP getIntersection(const AllSkySphericalRegion& r) const;
+//	virtual SphericalRegionP getUnion(const SphericalPolygon& r) const;
+//	virtual SphericalRegionP getUnion(const SphericalConvexPolygon& r) const;
+//	virtual SphericalRegionP getUnion(const SphericalCap& r) const;
+//	virtual SphericalRegionP getUnion(const SphericalPoint& r) const;
+//	virtual SphericalRegionP getUnion(const EmptySphericalRegion& r) const;
+//	virtual SphericalRegionP getSubtraction(const SphericalPolygon& r) const;
+//	virtual SphericalRegionP getSubtraction(const SphericalConvexPolygon& r) const;
+//	virtual SphericalRegionP getSubtraction(const SphericalCap& r) const;
+//	virtual SphericalRegionP getSubtraction(const SphericalPoint& r) const;
+//	virtual SphericalRegionP getSubtraction(const EmptySphericalRegion& r) const;
+
 	////////////////////////////////////////////////////////////////////
 	// Methods specific to SphericalConvexPolygon
 	////////////////////////////////////////////////////////////////////
-	//! Set the contours defining the SphericalConvexPolygon.
-	//! @param contours the list of contours defining the polygon area.
-	void setContours(const QVector<QVector<Vec3d> >& contours)
-	{
-		Q_ASSERT(contours.size()==1);
-		contour=contours.at(0);
-	}
-
 	//! Set a single contour defining the SphericalPolygon.
 	//! @param acontour a contour defining the polygon area.
-	void setContour(const QVector<Vec3d>& acontour) {contour=acontour;}
+	void setContour(const QVector<Vec3d>& acontour) {contour=acontour; updateBoundingCap();}
 
 	//! Get the single contour defining the SphericalConvexPolygon.
 	const QVector<Vec3d>& getConvexContour() const {return contour;}
@@ -639,6 +640,12 @@ public:
 protected:
 	//! A list of vertices of the convex contour.
 	QVector<Vec3d> contour;
+
+	//! Cache the bounding cap.
+	SphericalCap cachedBoundingCap;
+
+	//! Update the bounding cap from the vertex list.
+	void updateBoundingCap();
 
 	//! Computes whether the passed points are all outside of at least one SphericalCap defining the polygon boundary.
 	//! @param thisContour the vertices defining the contour.

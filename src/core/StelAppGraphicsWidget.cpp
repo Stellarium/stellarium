@@ -153,26 +153,28 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 	{
 		while (paintPartial()) {;}
 
-//		QVector<QVector<Vec3d> > contours;
-//		QVector<Vec3d> c1(4);
-//		StelUtils::spheToRect(-0.5, -0.5, c1[3]);
-//		StelUtils::spheToRect(0.5, -0.5, c1[2]);
-//		StelUtils::spheToRect(0.5, 0.5, c1[1]);
-//		StelUtils::spheToRect(-0.5, 0.5, c1[0]);
-//		contours.append(c1);
-//		QVector<Vec3d> c2(4);
-//		StelUtils::spheToRect(-0.2, 0.2, c2[3]);
-//		StelUtils::spheToRect(0.2, 0.2, c2[2]);
-//		StelUtils::spheToRect(0.2, -0.2, c2[1]);
-//		StelUtils::spheToRect(-0.2, -0.2, c2[0]);
-//		contours.append(c2);
-//		SphericalPolygon holySquare;
-//		holySquare.setContours(contours);
-//		StelPainter sPainter(stelApp->getCore()->getProjection(StelCore::FrameJ2000));
-//		sPainter.setColor(0,0,1);
-//		sPainter.drawSphericalRegion(&holySquare);
-//		sPainter.setColor(1,1,0);
-//		sPainter.drawSphericalRegion(&holySquare, StelPainter::SphericalPolygonDrawModeBoundary);
+#if 0
+		QVector<QVector<Vec3d> > contours;
+		QVector<Vec3d> c1(4);
+		StelUtils::spheToRect(-0.5, -0.5, c1[3]);
+		StelUtils::spheToRect(0.5, -0.5, c1[2]);
+		StelUtils::spheToRect(0.5, 0.5, c1[1]);
+		StelUtils::spheToRect(-0.5, 0.5, c1[0]);
+		contours.append(c1);
+		QVector<Vec3d> c2(4);
+		StelUtils::spheToRect(-0.2, 0.2, c2[3]);
+		StelUtils::spheToRect(0.2, 0.2, c2[2]);
+		StelUtils::spheToRect(0.2, -0.2, c2[1]);
+		StelUtils::spheToRect(-0.2, -0.2, c2[0]);
+		contours.append(c2);
+		SphericalPolygon holySquare;
+		holySquare.setContours(contours);
+		StelPainter sPainter(stelApp->getCore()->getProjection(StelCore::FrameJ2000));
+		sPainter.setColor(0,0,1);
+		sPainter.drawSphericalRegion(&holySquare);
+		sPainter.setColor(1,1,0);
+		sPainter.drawSphericalRegion(&holySquare, StelPainter::SphericalPolygonDrawModeBoundary);
+#endif
 	}
 	StelPainter::setQPainter(NULL);
 	previousPaintFrameTime = StelApp::getTotalRunTime();

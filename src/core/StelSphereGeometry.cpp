@@ -651,6 +651,8 @@ QVector<SphericalCap> SphericalConvexPolygon::getBoundingSphericalCaps() const
 // Returns whether a point is contained into the region.
 bool SphericalConvexPolygon::contains(const Vec3d& p) const
 {
+	if (!cachedBoundingCap.contains(p))
+		return false;
 	for (int i=0;i<contour.size()-1;++i)
 	{
 		if (!sideHalfSpaceContains(contour.at(i+1), contour.at(i), p))
@@ -661,6 +663,8 @@ bool SphericalConvexPolygon::contains(const Vec3d& p) const
 
 bool SphericalConvexPolygon::contains(const SphericalCap& c) const
 {
+	if (!cachedBoundingCap.contains(c))
+		return false;
 	for (int i=0;i<contour.size()-1;++i)
 	{
 		if (!sideHalfSpaceContains(contour.at(i+1), contour.at(i), c))
@@ -681,11 +685,15 @@ bool SphericalConvexPolygon::containsConvexContour(const Vec3d* vertice, int nbV
 
 bool SphericalConvexPolygon::contains(const SphericalConvexPolygon& cvx) const
 {
+	if (!cachedBoundingCap.contains(cvx.cachedBoundingCap))
+		return false;
 	return containsConvexContour(cvx.getConvexContour().constData(), cvx.getConvexContour().size());
 }
 
 bool SphericalConvexPolygon::contains(const SphericalPolygon& poly) const
 {
+	if (!cachedBoundingCap.contains(poly.getBoundingCap()))
+		return false;
 	// For standard polygons, go through the full list of triangles
 	const QVector<Vec3d>& vArray = poly.getFillVertexArray().vertex;
 	for (int i=0;i<vArray.size()/3;++i)
@@ -724,11 +732,15 @@ bool SphericalConvexPolygon::areAllPointsOutsideOneSide(const Vec3d* thisContour
 
 bool SphericalConvexPolygon::intersects(const SphericalConvexPolygon& cvx) const
 {
+	if (!cachedBoundingCap.intersects(cvx.cachedBoundingCap))
+		return false;
 	return !areAllPointsOutsideOneSide(cvx.contour) && !cvx.areAllPointsOutsideOneSide(contour);
 }
 
 bool SphericalConvexPolygon::intersects(const SphericalPolygon& poly) const
 {
+	if (!cachedBoundingCap.intersects(poly.getBoundingCap()))
+		return false;
 	// For standard polygons, go through the full list of triangles
 	const QVector<Vec3d>& vArray = poly.getFillVertexArray().vertex;
 	for (int i=0;i<vArray.size()/3;++i)
@@ -739,6 +751,27 @@ bool SphericalConvexPolygon::intersects(const SphericalPolygon& poly) const
 	return false;
 }
 
+void SphericalConvexPolygon::updateBoundingCap()
+{
+	Vec3d p1(1,0,0);
+	cachedBoundingCap.n.set(1,0,0);
+	cachedBoundingCap.d=1.;
+	const Vec3d* last = contour.constData()+contour.size();
+	for (const Vec3d* v1=contour.constData();v1!=last;++v1)
+	{
+		for (const Vec3d* v2=v1;v2!=last-1;++v2)
+		{
+			if (v1->dot(*v2)<cachedBoundingCap.d)
+			{
+				p1 = *v1;
+				cachedBoundingCap.n = *v2;
+				cachedBoundingCap.d = v1->dot(*v2);
+			}
+		}
+	}
+	cachedBoundingCap.n+=p1;
+	cachedBoundingCap.n.normalize();
+}
 
 QVariantMap SphericalConvexPolygon::toQVariant() const
 {
