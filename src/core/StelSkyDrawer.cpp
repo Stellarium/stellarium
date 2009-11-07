@@ -349,14 +349,18 @@ void StelSkyDrawer::postDrawPointSource()
 	nbPointSources = 0;
 }
 
+static Vec3d win;
 // Draw a point source halo.
-bool StelSkyDrawer::drawPointSource(double x, double y, const float rcMag[2], const Vec3f& color)
+bool StelSkyDrawer::drawPointSource(const Vec3d& v, const float rcMag[2], const Vec3f& color, bool checkInScreen)
 {
 	Q_ASSERT(sPainter);
 	
 	if (rcMag[0]<=0.f)
 		return false;
 	
+	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
+		return false;
+
 	// Random coef for star twinkling
 	const float tw = flagStarTwinkle ? (1.f-twinkleAmount*rand()/RAND_MAX)*rcMag[1] : 1.f*rcMag[1];
 	
@@ -364,7 +368,7 @@ bool StelSkyDrawer::drawPointSource(double x, double y, const float rcMag[2], co
 	{
 		// Draw the star rendered as GLpoint. This may be faster but it is not so nice
 		sPainter->setColor(color[0]*tw, color[1]*tw, color[2]*tw);
-		sPainter->drawPoint2d(x, y);
+		sPainter->drawPoint2d(win[0], win[1]);
 	}
 	else
 	{
@@ -375,12 +379,12 @@ bool StelSkyDrawer::drawPointSource(double x, double y, const float rcMag[2], co
 		colorGrid[nbPointSources*6+5]*=tw;
 		const double radius = rcMag[0];
 		Vec2f* v = &(verticesGrid[nbPointSources*6]);
-		v->set(x-radius,y-radius); ++v;
-		v->set(x+radius,y-radius); ++v;
-		v->set(x+radius,y+radius); ++v;
-		v->set(x-radius,y-radius); ++v;
-		v->set(x+radius,y+radius); ++v;
-		v->set(x-radius,y+radius); ++v;
+		v->set(win[0]-radius,win[1]-radius); ++v;
+		v->set(win[0]+radius,win[1]-radius); ++v;
+		v->set(win[0]+radius,win[1]+radius); ++v;
+		v->set(win[0]-radius,win[1]-radius); ++v;
+		v->set(win[0]+radius,win[1]+radius); ++v;
+		v->set(win[0]-radius,win[1]+radius); ++v;
 		
 		// If the rmag is big, draw a big halo
 		if (radius>MAX_LINEAR_RADIUS+5.f)
@@ -393,7 +397,7 @@ bool StelSkyDrawer::drawPointSource(double x, double y, const float rcMag[2], co
 			texBigHalo->bind();
 			glEnable(GL_TEXTURE_2D);
 			sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-			sPainter->drawSprite2dMode(x, y, rmag);
+			sPainter->drawSprite2dMode(win[0], win[1], rmag);
 		}
 		
 		++nbPointSources;
@@ -410,13 +414,13 @@ bool StelSkyDrawer::drawPointSource(double x, double y, const float rcMag[2], co
 
 
 // Terminate drawing of a 3D model, draw the halo
-void StelSkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, float mag, StelPainter* painter, const Vec3f& color)
+void StelSkyDrawer::postDrawSky3dModel(const Vec3d& v, double illuminatedArea, float mag, StelPainter* painter, const Vec3f& color)
 {
 	Q_ASSERT(painter);
 	Q_ASSERT(sPainter==NULL);
 	glDisable(GL_LIGHTING);
 	
-	const float pixPerRad = core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter();
+	const float pixPerRad = painter->getProjector()->getPixelPerRadAtCenter();
 	// Assume a disk shape
 	float pixRadius = std::sqrt(illuminatedArea/(60.*60.)*M_PI/180.*M_PI/180.*(pixPerRad*pixPerRad))/M_PI;
 	
@@ -434,9 +438,9 @@ void StelSkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedAre
 		float cmag = 1.f;
 		if (rmag<pixRadius*3.f+100.)
 			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
-		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-		sPainter->drawSprite2dMode(x, y, rmag);
-		
+		painter->getProjector()->project(v, win);
+		painter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+		painter->drawSprite2dMode(win[0], win[1], rmag);
 		noStarHalo = true;
 	}
 	
@@ -485,7 +489,7 @@ void StelSkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedAre
 	if (!noStarHalo)
 	{
 		preDrawPointSource(painter);
-		drawPointSource(x,y,rcm,color);
+		drawPointSource(v,rcm,color);
 		postDrawPointSource();
 	}
 	flagStarTwinkle=save;
