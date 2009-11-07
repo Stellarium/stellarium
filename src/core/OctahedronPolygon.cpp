@@ -410,7 +410,7 @@ void OctahedronPolygon::updateVertexArray()
 			Q_ASSERT(!c.isEmpty());
 			for (int j=0;j<c.size()-1;++j)
 			{
-				if (c.at(j).edgeFlag && c.at(j+1).edgeFlag)
+				if (c.at(j).edgeFlag || c.at(j+1).edgeFlag)
 				{
 					tmp = c.at(j).vertex;
 					Q_ASSERT(tmp[2]<0.0000001);
@@ -425,7 +425,7 @@ void OctahedronPolygon::updateVertexArray()
 				}
 			}
 			// Last point connects with first point
-			if (c.last().edgeFlag && c.first().edgeFlag)
+			if (c.last().edgeFlag || c.first().edgeFlag)
 			{
 				tmp = c.last().vertex;
 				Q_ASSERT(tmp[2]<0.0000001);
@@ -731,7 +731,7 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 			else
 			{
 				unfinishedSubContour << EdgeVertex(tmpVertex, false); // Last point of the contour, it's not an edge
-				currentSubContour << EdgeVertex(tmpVertex, previousVertex.edgeFlag);
+				currentSubContour << EdgeVertex(tmpVertex, false);
 			}
 			previousQuadrant = currentQuadrant;
 			break;
@@ -755,16 +755,18 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 			{
 				// There was a problem, probably the 2 vertices are too close, just keep them like that
 				// since they are each at a different side of the plan.
+				currentSubContour.last().edgeFlag = false;
 				result[previousQuadrant] << currentSubContour;
 				currentSubContour.clear();
 				currentSubContour << currentVertex;
+				currentSubContour.last().edgeFlag = false;
 			}
 			else
 			{
 				currentSubContour << EdgeVertex(tmpVertex, false); // Last point of the contour, it's not an edge
 				result[previousQuadrant] << currentSubContour;
 				currentSubContour.clear();
-				currentSubContour << EdgeVertex(tmpVertex, previousVertex.edgeFlag);
+				currentSubContour << EdgeVertex(tmpVertex, false);
 				currentSubContour << currentVertex;
 			}
 			previousQuadrant = currentQuadrant;
@@ -786,6 +788,7 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 		{
 			// There was a problem, probably the 2 vertices are too close, just keep them like that
 			// since they are each at a different side of the plan.
+			currentSubContour.last().edgeFlag = false;
 			result[previousQuadrant] << currentSubContour;
 			currentSubContour.clear();
 		}
@@ -794,7 +797,7 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 			currentSubContour << EdgeVertex(tmpVertex, false);	// Last point of the contour, it's not an edge
 			result[previousQuadrant] << currentSubContour;
 			currentSubContour.clear();
-			currentSubContour << EdgeVertex(tmpVertex, previousVertex.edgeFlag);
+			currentSubContour << EdgeVertex(tmpVertex, false);
 		}
 	}
 
@@ -810,6 +813,7 @@ SubContour::SubContour(const QVector<Vec3d>& vertices, bool closed) : QVector<Ed
 		(*this)[i].vertex = vertices.at(i);
 	if (closed==false)
 	{
+		this->first().edgeFlag=false;
 		this->last().edgeFlag=false;
 	}
 }
