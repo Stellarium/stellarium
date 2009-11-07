@@ -416,9 +416,9 @@ void TestStelSphericalGeometry::testOctahedronPolygon()
 	QCOMPARE(splittedSub.getArea(), smallSquareConvex.getArea());
 
 	QVector<Vec3d> va = northPoleSquare.getOutlineVertexArray().vertex;
-	QCOMPARE(va.size(),8);
+	QCOMPARE(va.size(),16);
 	va = southPoleSquare.getOutlineVertexArray().vertex;
-	QCOMPARE(va.size(),8);
+	QCOMPARE(va.size(),16);
 
 	// Copy
 	OctahedronPolygon splittedSubCopy;
