@@ -751,26 +751,26 @@ bool SphericalConvexPolygon::intersects(const SphericalPolygon& poly) const
 	return false;
 }
 
+// This algo is wrong
 void SphericalConvexPolygon::updateBoundingCap()
 {
 	Q_ASSERT(contour.size()>2);
-	Vec3d p1;
-	cachedBoundingCap.d=1.;
-	const Vec3d* last = contour.constData()+contour.size();
-	for (const Vec3d* v1=contour.constData();v1!=last;++v1)
-	{
-		for (const Vec3d* v2=v1+1;v2!=last;++v2)
-		{
-			if (v1->dot(*v2)<cachedBoundingCap.d)
-			{
-				p1 = *v1;
-				cachedBoundingCap.n = *v2;
-				cachedBoundingCap.d = v1->dot(*v2);
-			}
-		}
-	}
-	cachedBoundingCap.n+=p1;
+	// Use this crapy algorithm instead
+	cachedBoundingCap.n.set(0,0,0);
+	foreach (const Vec3d& v, contour)
+		cachedBoundingCap.n+=v;
 	cachedBoundingCap.n.normalize();
+	cachedBoundingCap.d = 1.;
+	foreach (const Vec3d& v, contour)
+	{
+		if (cachedBoundingCap.n*v<cachedBoundingCap.d)
+			cachedBoundingCap.d = cachedBoundingCap.n*v;
+	}
+	cachedBoundingCap.d*=cachedBoundingCap.d>0 ? 0.9999999 : 1.0000001;
+#ifndef NDEBUG
+	foreach (const Vec3d& v, contour)
+		Q_ASSERT(cachedBoundingCap.contains(v));
+#endif
 }
 
 QVariantMap SphericalConvexPolygon::toQVariant() const
