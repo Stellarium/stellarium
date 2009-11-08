@@ -485,13 +485,15 @@ void ConstellationMgr::drawArt(StelPainter& sPainter) const
 // Draw constellations lines
 void ConstellationMgr::drawLines(StelPainter& sPainter, const StelNavigator* nav) const
 {
-	glDisable(GL_TEXTURE_2D);
-	glDisable(GL_BLEND);
 	glEnable(GL_LINE_SMOOTH);
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	const SphericalCap viewportHalfspace = sPainter.getProjector()->getBoundingSphericalCap();
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->drawOptim(sPainter, nav);
+		(*iter)->drawOptim(sPainter, nav, viewportHalfspace);
 	}
 	glDisable(GL_LINE_SMOOTH);
 }
