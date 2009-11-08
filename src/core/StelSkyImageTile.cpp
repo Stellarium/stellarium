@@ -267,7 +267,9 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 	sPainter.setColor(color[0], color[1], color[2], color[3]);
 	glEnable(GL_TEXTURE_2D);
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
+	{
 		sPainter.drawSphericalRegion(poly.data(), StelPainter::SphericalPolygonDrawModeTextureFill);
+	}
 
 #ifdef DEBUG_STELSKYIMAGE_TILE
 	if (debugFont==NULL)

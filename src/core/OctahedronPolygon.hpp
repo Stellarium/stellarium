@@ -142,7 +142,7 @@ private:
 	void tesselate(TessWindingRule rule);
 
 	QVector<SubContour> tesselateOneSideLineLoop(class GLUEStesselator* tess, int sidenb) const;
-	SubContour tesselateOneSideTriangles(class GLUEStesselator* tess, int sidenb) const;
+	QVector<Vec3d> tesselateOneSideTriangles(class GLUEStesselator* tess, int sidenb) const;
 	QVarLengthArray<QVector<SubContour>,8 > sides;
 
 	//! Update the content of both cached vertex arrays.
@@ -152,10 +152,6 @@ private:
 	void computeBoundingCap();
 	Vec3d capN;
 	double capD;
-
-#ifndef NDEBUG
-	bool checkAllTrianglesPositive() const;
-#endif
 
 	static const Vec3d sideDirections[];
 	static int getSideNumber(const Vec3d& v) {return v[0]>=0. ?  (v[1]>=0. ? (v[2]>=0.?0:1) : (v[2]>=0.?4:5))   :   (v[1]>=0. ? (v[2]>=0.?2:3) : (v[2]>=0.?6:7));}
