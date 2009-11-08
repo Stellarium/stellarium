@@ -181,7 +181,9 @@ void TestStelSphericalGeometry::testContains()
 
 	// Triangle polygons
 	QVERIFY2(triangle.contains(p1), "Triangle contains point failure");
-	QVERIFY2(!triangle.contains(Vec3d(-1, -1, -1)), "Triangle not contains point failure");
+	Vec3d vt(-1, -1, -1);
+	vt.normalize();
+	QVERIFY2(!triangle.contains(vt), "Triangle not contains point failure");
 
 	foreach(const SphericalCap& h, triangle.getBoundingSphericalCaps())
 	{
@@ -530,4 +532,25 @@ void TestStelSphericalGeometry::testSerialize()
 	reg2 = readVCapReg.value<SphericalRegionP>();
 	QCOMPARE(capReg->getArea(), reg2->getArea());
 	QVERIFY(capReg->getType()==reg2->getType());
+}
+
+void TestStelSphericalGeometry::benchmarkCreatePolygon()
+{
+	QVector<QVector<Vec3d> > contours;
+	QVector<Vec3d> c1(4);
+	StelUtils::spheToRect(-0.5, -0.5, c1[3]);
+	StelUtils::spheToRect(0.5, -0.5, c1[2]);
+	StelUtils::spheToRect(0.5, 0.5, c1[1]);
+	StelUtils::spheToRect(-0.5, 0.5, c1[0]);
+	contours.append(c1);
+	QVector<Vec3d> c2(4);
+	StelUtils::spheToRect(-0.2, 0.2, c2[3]);
+	StelUtils::spheToRect(0.2, 0.2, c2[2]);
+	StelUtils::spheToRect(0.2, -0.2, c2[1]);
+	StelUtils::spheToRect(-0.2, -0.2, c2[0]);
+	contours.append(c2);
+	QBENCHMARK
+	{
+		SphericalPolygon holySquare(contours);
+	}
 }

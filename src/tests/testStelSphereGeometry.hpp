@@ -43,7 +43,7 @@ private slots:
 	void benchmarkSphericalCap();
 	void benchmarkGetIntersection();
 	void testSerialize();
-
+	void benchmarkCreatePolygon();
 private:
 	SphericalPolygon holySquare;
 	SphericalPolygon bigSquare;
