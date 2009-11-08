@@ -95,21 +95,15 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 	return true;
 }
 
-void Constellation::drawOptim(StelPainter& sPainter, const StelNavigator* nav) const
+void Constellation::drawOptim(StelPainter& sPainter, const StelNavigator* nav, const SphericalCap& viewportHalfspace) const
 {
-	if(!lineFader.getInterstate()) return;
-
-	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	if (lineFader.getInterstate()<=0.0001f)
+		return;
 
 	sPainter.setColor(lineColor[0], lineColor[1], lineColor[2], lineFader.getInterstate());
 
 	Vec3d star1;
 	Vec3d star2;
-	Vec3d dummy;
-	Vec3d v;
-	const SphericalCap viewportHalfspace = sPainter.getProjector()->getBoundingSphericalCap();
 	for (unsigned int i=0;i<numberOfSegments;++i)
 	{
 		star1=asterism[2*i]->getJ2000EquatorialPos(nav);
@@ -131,7 +125,7 @@ void Constellation::drawName(StelPainter& sPainter) const
 
 void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& region) const
 {
-	float intensity = artFader.getInterstate();
+	const float intensity = artFader.getInterstate();
 	if (artTexture && intensity && region.intersects(artPolygon))
 	{
 		sPainter.setColor(intensity,intensity,intensity);
@@ -139,7 +133,6 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 		// The texture is not fully loaded
 		if (artTexture->bind()==false)
 			return;
-
 		sPainter.drawSphericalRegion(&artPolygon, StelPainter::SphericalPolygonDrawModeTextureFill);
 	}
 }

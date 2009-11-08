@@ -729,9 +729,8 @@ public:
 
 	//! Special constructor for quads.
 	//! Use the 4 textures corners for the 4 vertices.
-	SphericalTexturedConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3)
+	SphericalTexturedConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3) : SphericalConvexPolygon(e0,e1,e2,e3)
 	{
-		contour << e0 << e1 << e2 << e3;
 		textureCoords << Vec2f(0.f, 0.f) << Vec2f(1.f, 0.f) << Vec2f(1.f, 1.f) << Vec2f(0.f, 1.f);
 	}
 
@@ -742,7 +741,7 @@ public:
 	//! Set a single contour defining the SphericalPolygon.
 	//! @param acontour a contour defining the polygon area.
 	//! @param texCoord a list of texture coordinates matching the vertices of the contour.
-	virtual void setContour(const QVector<Vec3d>& acontour, const QVector<Vec2f>& texCoord) {contour=acontour; textureCoords=texCoord;}
+	virtual void setContour(const QVector<Vec3d>& acontour, const QVector<Vec2f>& texCoord) {SphericalConvexPolygon::setContour(acontour); textureCoords=texCoord;}
 
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is:

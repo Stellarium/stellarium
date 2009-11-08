@@ -753,13 +753,13 @@ bool SphericalConvexPolygon::intersects(const SphericalPolygon& poly) const
 
 void SphericalConvexPolygon::updateBoundingCap()
 {
-	Vec3d p1(1,0,0);
-	cachedBoundingCap.n.set(1,0,0);
+	Q_ASSERT(contour.size()>2);
+	Vec3d p1;
 	cachedBoundingCap.d=1.;
 	const Vec3d* last = contour.constData()+contour.size();
 	for (const Vec3d* v1=contour.constData();v1!=last;++v1)
 	{
-		for (const Vec3d* v2=v1;v2!=last-1;++v2)
+		for (const Vec3d* v2=v1+1;v2!=last;++v2)
 		{
 			if (v1->dot(*v2)<cachedBoundingCap.d)
 			{
