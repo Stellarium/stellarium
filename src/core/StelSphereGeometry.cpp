@@ -576,6 +576,14 @@ SphericalRegionP SphericalPolygon::deserialize(QDataStream& in)
 bool SphericalPolygon::contains(const SphericalConvexPolygon& r) const {return octahedronPolygon.contains(r.getOctahedronPolygon());}
 bool SphericalPolygon::intersects(const SphericalConvexPolygon& r) const {return r.intersects(*this);}
 
+SphericalRegionP SphericalPolygon::multiUnion(const QVector<SphericalRegionP>& regions)
+{
+	QVector<OctahedronPolygon> l;
+	foreach (const SphericalRegionP& r, regions)
+		l.append(r->getOctahedronPolygon());
+	return SphericalRegionP(new SphericalPolygon(l));
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalTexturedPolygon
 ///////////////////////////////////////////////////////////////////////////////

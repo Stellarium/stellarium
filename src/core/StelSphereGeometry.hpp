@@ -494,6 +494,7 @@ public:
 	//! Constructor from one contour.
 	SphericalPolygon(const QVector<Vec3d>& contour) : octahedronPolygon(contour) {;}
 	SphericalPolygon(const OctahedronPolygon& octContour) : octahedronPolygon(octContour) {;}
+	SphericalPolygon(const QVector<OctahedronPolygon>& octContours) : octahedronPolygon(octContours) {;}
 
 	virtual SphericalRegionType getType() const {return SphericalRegion::Polygon;}
 	virtual OctahedronPolygon getOctahedronPolygon() const {return octahedronPolygon;}
@@ -545,6 +546,9 @@ public:
 
 	//! Deserialize the region. This method must allow as fast as possible deserialization.
 	static SphericalRegionP deserialize(QDataStream& in);
+
+	//! Create a new SphericalRegionP which is the union of all the passed ones.
+	static SphericalRegionP multiUnion(const QVector<SphericalRegionP>& regions);
 
 private:
 	OctahedronPolygon octahedronPolygon;
