@@ -106,6 +106,7 @@ public:
 	//! @param y y position in the viewport in pixel.
 	//! @param radius the half size of a square side in pixel.
 	void drawSprite2dMode(double x, double y, float radius) const;
+	void drawSprite2dMode(const Vec3d& v, float radius) const;
 
 	//! Draw a rotated square using the current texture at the given projected 2d position.
 	//! This method is not thread safe.

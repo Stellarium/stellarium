@@ -1328,6 +1328,12 @@ void StelPainter::drawSprite2dMode(double x, double y, float radius) const
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
+void StelPainter::drawSprite2dMode(const Vec3d& v, float radius) const
+{
+	Vec3d win;
+	prj->project(v, win);
+	drawSprite2dMode(win[0], win[1], radius);
+}
 
 void StelPainter::drawRect2d(float x, float y, float width, float height) const
 {

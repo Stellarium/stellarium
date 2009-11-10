@@ -96,6 +96,21 @@ OctahedronPolygon::OctahedronPolygon(const SubContour& initContour)
 }
 
 
+OctahedronPolygon::OctahedronPolygon(const QVector<OctahedronPolygon>& octs) : fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines)
+{
+	sides.resize(8);
+	foreach (const OctahedronPolygon& oct, octs)
+	{
+		for (int i=0;i<8;++i)
+		{
+			Q_ASSERT(oct.sides.size()==8);
+			sides[i] += oct.sides[i];
+		}
+		tesselate(WindingPositive);
+	}
+	updateVertexArray();
+}
+
 void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 {
 	QVarLengthArray<QVector<SubContour>,8 > resultSides;
