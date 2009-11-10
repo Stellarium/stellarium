@@ -88,6 +88,7 @@ public:
 	OctahedronPolygon(const SubContour& subContour);
 	OctahedronPolygon(const QVector<QVector<Vec3d> >& contours);
 	OctahedronPolygon(const QVector<Vec3d>& contour);
+	OctahedronPolygon(const QVector<OctahedronPolygon>& octContours);
 
 	double getArea() const;
 
