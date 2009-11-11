@@ -51,7 +51,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 	setFadeDuration(3.f);
 	useShader = StelApp::getInstance().getUseGLShaders();
 #if QT_VERSION>=0x040600
-	useShader = useShader && QGLShaderProgram::hasShaderPrograms();
+	useShader = useShader && QGLShaderProgram::hasOpenGLShaderPrograms();
 	if (useShader)
 	{
 		QString filePath;
@@ -64,7 +64,8 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 			qFatal("Can't find data/shaders/xyYToRGB.glsl shader file to load");
 		}
 		qDebug() << "Use vertex shader for atmosphere rendering: " << filePath;
-		QGLShader* vShader = new QGLShader(filePath, QGLShader::VertexShader);
+		QGLShader* vShader = new QGLShader(QGLShader::Vertex);
+		vShader->compileSourceFile(filePath);
 		atmoShaderProgram = new QGLShaderProgram();
 		if (!vShader->isCompiled())
 		{
@@ -75,8 +76,8 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 		{
 			qWarning() << "Warnings while compiling vertex shader: " << vShader->log();
 		}
-		QGLShader* fShader = new QGLShader(QGLShader::FragmentShader);
-		if (!fShader->compile(
+		QGLShader* fShader = new QGLShader(QGLShader::Fragment);
+		if (!fShader->compileSourceCode(
 						"varying mediump vec4 resultSkyColor;\n"
 						"void main()\n"
 						"{\n"
@@ -235,7 +236,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 			}
 		}
 	}
-	
+
 	if (myisnan(_sunPos.length()))
 		_sunPos.set(0.,0.,-1.*AU);
 	if (myisnan(moonPos.length()))
@@ -396,7 +397,7 @@ void Atmosphere::draw(StelCore* core)
 	if (useShader)
 	{
 #if QT_VERSION>=0x040600
-		atmoShaderProgram->enable();
+		atmoShaderProgram->bind();
 		float a, b, c;
 		eye->getShadersParams(a, b, c);
 		atmoShaderProgram->setUniformValue("alphaWaOverAlphaDa", a);
@@ -514,7 +515,7 @@ void Atmosphere::draw(StelCore* core)
 	if (useShader)
 	{
 #if QT_VERSION>=0x040600
-		atmoShaderProgram->disable();
+		atmoShaderProgram->release();
 #else
 		glUseProgram(0);
 #endif
