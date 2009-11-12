@@ -18,6 +18,7 @@
 
 #include "StelJsonParser.hpp"
 #include <QDebug>
+#include <QBuffer>
 #include <stdexcept>
 
 void skipJson(QIODevice& input)
@@ -37,7 +38,7 @@ void skipJson(QIODevice& input)
 				{
 					if (!input.getChar(&c))
 						return;
-	
+
 					if (c=='/')
 						input.readLine();
 					else
@@ -141,7 +142,7 @@ QVariant StelJsonParser::parse(QIODevice& input)
 	char r;
 	if (!input.getChar(&r))
 		return QVariant();
-	
+
 	switch (r)
 	{
 		case '{':
@@ -159,17 +160,17 @@ QVariant StelJsonParser::parse(QIODevice& input)
 				skipJson(input);
 				if (!tryReadChar(input, ':'))
 					throw std::runtime_error(qPrintable(QString("Expected ':' after a member name: ")+key));
-	
+
 				skipJson(input);
 				map.insert(key, parse(input));
 				skipJson(input);
-	
+
 				if (!tryReadChar(input, ','))
 					break;
 			}
-	
+
 			skipJson(input);
-	
+
 			if (!tryReadChar(input, '}'))
 				throw std::runtime_error("Expected '}' to close an object");
 			return map;
@@ -181,7 +182,7 @@ QVariant StelJsonParser::parse(QIODevice& input)
 			skipJson(input);
 			if (tryReadChar(input, ']'))
 				return list;
-	
+
 			for (;;)
 			{
 				list.append(parse(input));
@@ -189,12 +190,12 @@ QVariant StelJsonParser::parse(QIODevice& input)
 				if (!tryReadChar(input, ','))
 					break;
 			}
-	
+
 			skipJson(input);
-	
+
 			if (!tryReadChar(input, ']'))
 				throw std::runtime_error("Expected ']' to close an array");
-	
+
 			return list;
 		}
 		case '\"':
@@ -290,6 +291,25 @@ void StelJsonParser::write(const QVariant& v, QIODevice& output, int indentLevel
 	}
 }
 
+QByteArray StelJsonParser::write(const QVariant& jsonObject, int indentLevel)
+{
+	QByteArray ar;
+	QBuffer buf(&ar);
+	buf.open(QIODevice::WriteOnly);
+	StelJsonParser::write(jsonObject, buf, indentLevel);
+	buf.close();
+	return ar;
+}
+
+QVariant StelJsonParser::parse(const QByteArray& aar)
+{
+	QByteArray ar = aar;
+	QBuffer buf(&ar);
+	buf.open(QIODevice::ReadOnly);
+	QVariant v = StelJsonParser::parse(buf);
+	buf.close();
+	return v;
+}
 
 JsonListIterator::JsonListIterator(QIODevice& input) : input(input), startPos(input.pos())
 {
