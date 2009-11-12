@@ -90,9 +90,13 @@ public:
 
 	//! Parse the given input stream.
 	static QVariant parse(QIODevice& input);
+	static QVariant parse(const QByteArray& input);
 
 	//! Serialize the passed QVariant as JSON into the output QIODevice.
 	static void write(const QVariant& jsonObject, QIODevice& output, int indentLevel=0);
+
+	//! Serialize the passed QVariant as JSON in a QByteArray.
+	static QByteArray write(const QVariant& jsonObject, int indentLevel=0);
 };
 
 #endif // _STELJSONPARSER_HPP_
