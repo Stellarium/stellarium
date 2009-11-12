@@ -74,7 +74,7 @@ QByteArray readString(QIODevice& input)
 	char c;
 	input.getChar(&c);
 	if (c!='\"')
-		throw std::runtime_error(qPrintable(QString("Expected '\"' at beginning of string, found: \"%1\" (ASCII %2)").arg(c).arg((int)(c))));
+		throw std::runtime_error(qPrintable(QString("Expected '\"' at beginning of string, found: '%1' (ASCII %2)").arg(c).arg((int)(c))));
 	while (input.getChar(&c))
 	{
 		switch (c)
@@ -224,12 +224,22 @@ void StelJsonParser::write(const QVariant& v, QIODevice& output, int indentLevel
 		case QVariant::Invalid:
 			output.write("null");
 			break;
+		case QVariant::ByteArray:
+		{
+			QByteArray s(v.toByteArray());
+			s.replace('\"', "\\\"");
+			s.replace('\b', "\\b");
+			s.replace('\n', "\\n");
+			s.replace('\f', "\\f");
+			s.replace('\r', "\\r");
+			s.replace('\t', "\\t");
+			output.write("\"" + s + "\"");
+			break;
+		}
 		case QVariant::String:
 		{
 			QString s(v.toString());
 			s.replace('\"', "\\\"");
-			//s.replace('\\', "\\\\");
-			//s.replace('/', "\\/");
 			s.replace('\b', "\\b");
 			s.replace('\n', "\\n");
 			s.replace('\f', "\\f");

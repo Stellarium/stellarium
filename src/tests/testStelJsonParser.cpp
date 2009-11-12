@@ -41,70 +41,43 @@ void TestStelJsonParser::initTestCase()
  \"test10\": {\"worldCoords\": [[[-0.5,0.5],[0.5,0.5],[0.5,-0.5],[-0.5,-0.5]], [[-0.2,-0.2],[0.2,-0.2],[0.2,0.2],[-0.2,0.2]]]}, \
  \"test11\": {\"worldCoords\": [[[-0.5,0.5],[0.5,0.5],[0.5,-0.5],[-0.5,-0.5]], [[-0.2,-0.2],[0.2,-0.2],[0.2,0.2],[-0.2,0.2]]]}, \
  \"test12\": {\"worldCoords\": [[[-0.5,0.5],[0.5,0.5],[0.5,-0.5],[-0.5,-0.5]], [[-0.2,-0.2],[0.2,-0.2],[0.2,0.2],[-0.2,0.2]]]}}";
-	
+
 	listJsonBuff = "[{\"project\":\"GOODS\",\"license\":\"ESO Data License : http://www.myLicenseToBeDefinedAtSomePoint.html\",\"copyright\":\"(c) GOODS Sep 10 2007 12:00AM\",\"creator\":\"C. Cesarsky\",\"dataType\":\"image\",\"characterization\":{\"spatialAxis\":{\"footprint\":{\"worldCoords\":[[[53.111991,-27.725812],[53.164780,-27.725812],[53.164780,-27.772234],[53.111991,-27.772234]]]},\"boundingBox\":[[53.111991,-27.725812],[53.164780,-27.725812],[53.164780,-27.772234],[53.111991,-27.772234]],\"centralPos\":[53.138382,-27.749026]},\"temporalAxis\":{\"boundingBox\":[52220.243068,52263.181794],\"integratedCoverage\":0.208333,\"centralPos\":52241.712431,\"coverage\":[52220.243068,52263.181794]}},\"publisher\":\"ESO SAF\",\"collection\":\"168.A-0485(A\",\"targetSource\":{\"names\":[\"GOODS_09\"]},\"ESO\":{\"NGASFileId\":\"GOODS_ISAAC_09_H_V2.0\",\"metadataType\":\"DataProduct\",\"processingType\":\"HighlyProcessed\"},\"acquisitionSetup\":{\"filter\":\"H\",\"instrument\":\"ISAAC\",\"facility\":\"ESO-Paranal\",\"telescope\":\"ESO-VLT-U1\",\"mode\":\"Short Wavelength\"},\"title\":\"GOODS_ISAAC_09_H_v2.0\",\"id\":\"GOODS_ISAAC_09_H_V2.0\"},{\"project\":\"GOODS\",\"license\":\"ESO Data License : http://www.myLicenseToBeDefinedAtSomePoint.html\",\"copyright\":\"(c) GOODS Sep 10 2007 12:00AM\",\"creator\":\"C. Cesarsky\",\"dataType\":\"image\",\"characterization\":{\"spatialAxis\":{\"footprint\":{\"worldCoords\":[[[53.121222,-27.641601],[53.174252,-27.641601],[53.174252,-27.687943],[53.121222,-27.687943]]]},\"boundingBox\":[[53.121222,-27.641601],[53.174252,-27.641601],[53.174252,-27.687943],[53.121222,-27.687943]],\"centralPos\":[53.147732,-27.664775]},\"temporalAxis\":{\"boundingBox\":[53729.079417,53747.174968],\"integratedCoverage\":0.122222,\"centralPos\":53738.127193,\"coverage\":[53729.079417,53747.174968]}},\"publisher\":\"ESO SAF\",\"collection\":\"168.A-0485(G)\",\"targetSource\":{\"names\":[\"GOODS_01\"]},\"ESO\":{\"NGASFileId\":\"GOODS_ISAAC_01_J_V2.0\",\"metadataType\":\"DataProduct\",\"processingType\":\"HighlyProcessed\"},\"acquisitionSetup\":{\"filter\":\"J\",\"instrument\":\"ISAAC\",\"facility\":\"ESO-Paranal\",\"telescope\":\"ESO-VLT-U1\",\"mode\":\"Short Wavelength\"},\"title\":\"GOODS_ISAAC_01_J_v2.0\",\"id\":\"GOODS_ISAAC_01_J_V2.0\"},{\"project\":\"GOODS\",\"license\":\"ESO Data License : http://www.myLicenseToBeDefinedAtSomePoint.html\",\"copyright\":\"(c) GOODS Sep 10 2007 12:00AM\",\"creator\":\"C. Cesarsky\",\"dataType\":\"image\",\"characterization\":{\"spatialAxis\":{\"footprint\":{\"worldCoords\":[[[53.121081,-27.641392],[53.174488,-27.641392],[53.174488,-27.688027],[53.121081,-27.688027]]]},\"boundingBox\":[[53.121081,-27.641392],[53.174488,-27.641392],[53.174488,-27.688027],[53.121081,-27.688027]],\"centralPos\":[53.147779,-27.664712]},\"temporalAxis\":{\"boundingBox\":[53729.179656,53749.175133],\"integratedCoverage\":0.207292,\"centralPos\":53739.177395,\"coverage\":[53729.179656,53749.175133]}},\"publisher\":\"ESO SAF\",\"collection\":\"168.A-0485(G)\",\"targetSource\":{\"names\":[\"GOODS_01\"]},\"ESO\":{\"NGASFileId\":\"GOODS_ISAAC_01_KS_V2.0\",\"metadataType\":\"DataProduct\",\"processingType\":\"HighlyProcessed\"},\"acquisitionSetup\":{\"filter\":\"Ks\",\"instrument\":\"ISAAC\",\"facility\":\"ESO-Paranal\",\"telescope\":\"ESO-VLT-U1\",\"mode\":\"Short Wavelength\"},\"title\":\"GOODS_ISAAC_01_Ks_v2.0\",\"id\":\"GOODS_ISAAC_01_KS_V2.0\"}]";
 }
 
 void TestStelJsonParser::testBase()
 {
-	QBuffer buf;
-	buf.setData(largeJsonBuff);
-	buf.open(QIODevice::ReadOnly);
-	QVariant result = StelJsonParser::parse(buf);
-	buf.close();
+	QVariant result = StelJsonParser::parse(largeJsonBuff);
 	QVERIFY(result.canConvert<QVariantMap>());
 	QVERIFY(result.toMap().size()==12);
-	
-	buf.setData(listJsonBuff);
-	buf.open(QIODevice::ReadOnly);
-	result = StelJsonParser::parse(buf);
-	buf.close();
+
+	result = StelJsonParser::parse(listJsonBuff);
 	QVERIFY(result.canConvert<QVariantList>());
 	QVERIFY(result.value<QVariantList>().size()==3);
-	
-	QByteArray doubleStr = "{\"val\": 0.000280}";
-	buf.setData(doubleStr);
-	buf.open(QIODevice::ReadOnly);
-	result = StelJsonParser::parse(buf);
-	buf.close();
+
+	result = StelJsonParser::parse("{\"val\": 0.000280}");
 	bool ok;
 	QCOMPARE(result.toMap().value("val").toDouble(&ok), 0.000280);
 	QVERIFY(ok==true);
-	
-	QByteArray boolStr = "{\"valtrue\": true, \"valfalse\": false}";
-	buf.setData(boolStr);
-	buf.open(QIODevice::ReadOnly);
-	result = StelJsonParser::parse(buf);
-	buf.close();
+
+	result = StelJsonParser::parse("{\"valtrue\": true, \"valfalse\": false}");
 	QVERIFY(result.toMap().value("valtrue").canConvert<bool>());
 	QVERIFY(result.toMap().value("valtrue").toBool()==true);
 	QVERIFY(result.toMap().value("valfalse").canConvert<bool>());
 	QVERIFY(result.toMap().value("valfalse").toBool()==false);
-	
-	QByteArray intStr = "{\"val\": -12356}";
-	buf.setData(intStr);
-	buf.open(QIODevice::ReadOnly);
-	result = StelJsonParser::parse(buf);
-	buf.close();
+
+	result = StelJsonParser::parse("{\"val\": -12356}");
 	QVERIFY(result.toMap().value("val").canConvert<int>());
 	QVERIFY(result.toMap().value("val").toInt(&ok)==-12356);
 	QVERIFY(ok==true);
-	
-	intStr = "{\"val\": -12356\n}";
-	buf.setData(intStr);
-	buf.open(QIODevice::ReadOnly);
-	result = StelJsonParser::parse(buf);
-	buf.close();
+
+	result = StelJsonParser::parse("{\"val\": -12356\n}");
 	QVERIFY(result.toMap().value("val").canConvert<int>());
 	QVERIFY(result.toMap().value("val").toInt(&ok)==-12356);
 	QVERIFY(ok==true);
-	
+
 	// Test windows line ending
-	intStr = "{\"val\": -12356\r\n}";
-	buf.setData(intStr);
-	buf.open(QIODevice::ReadOnly);
-	result = StelJsonParser::parse(buf);
-	buf.close();
+	result = StelJsonParser::parse("{\"val\": -12356\r\n}");
 	QVERIFY(result.toMap().value("val").canConvert<int>());
 	QVERIFY(result.toMap().value("val").toInt(&ok)==-12356);
 	QVERIFY(ok==true);
@@ -115,7 +88,7 @@ void TestStelJsonParser::testIterator()
 	QBuffer buf;
 	buf.setData(listJsonBuff);
 	buf.open(QIODevice::ReadOnly);
-	
+
 	try
 	{
 		int tot = 0;
@@ -135,6 +108,25 @@ void TestStelJsonParser::testIterator()
 		QFAIL(qPrintable(msg));
 	}
 	buf.close();
+}
+
+void TestStelJsonParser::testErrors()
+{
+	bool wasCatched = false;
+	QVariant result;
+	QString erMsg;
+	try
+	{
+		result = StelJsonParser::parse("{val: -12356}");
+	}
+	catch (std::runtime_error& e)
+	{
+		wasCatched = true;
+		erMsg=e.what();
+	}
+	// qDebug() << erMsg;
+	QVERIFY(wasCatched);
+	QVERIFY(result.isNull());
 }
 
 void TestStelJsonParser::benchmarkParse()
