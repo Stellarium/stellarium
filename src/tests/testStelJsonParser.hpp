@@ -31,6 +31,7 @@ private slots:
 	void testBase();
 	void testIterator();
 	void benchmarkParse();
+	void testErrors();
 private:
 	QByteArray largeJsonBuff;
 	QByteArray listJsonBuff;
