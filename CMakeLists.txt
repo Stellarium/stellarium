@@ -80,6 +80,43 @@ FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
   ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_VIRGO)
 ENDIF()
 
+# SVMT
+SET(USE_STATIC_PLUGIN_SVMT 0 CACHE BOOL "Define whether the SVMT plugin should be statically linked.")
+SET(STATIC_PLUGIN_SVMT_PATH "$ENV{STELROOT}/../extmodules/svmt/builds/unix/src/libSvmt.a" CACHE PATH "The location of the libSvmt.a static library")
+IF (USE_STATIC_PLUGIN_SVMT)
+## Special non-standard packages
+FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
+	/usr/include
+	/usr/local/include
+	/scisoft/include
+	DOC "Should point to the directory where the include files for libcfitsio are installed")
+FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
+	PATHS
+	/usr/lib/
+	/usr/local/lib
+	/scisoft/lib
+	/opt/local/lib
+	DOC "cfitsio link options")
+## Tokyo Cabinet
+FIND_PATH(TOKYOC_INCLUDE_DIR tcadb.h
+	/usr/include
+	/usr/local/include
+	/scisoft/include
+	DOC "Should point to the directory where the include files for tokyo cabinet are installed")
+FIND_LIBRARY(TOKYOC_LIBRARIES tokyocabinet
+	PATHS
+	/usr/lib/
+	/usr/local/lib
+	/scisoft/lib
+	/opt/local/lib
+	DOC "tokyo cabinet link options")
+  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_SVMT_PATH} ${CFITSIO_LIBRARIES} ${TOKYOC_LIBRARIES} "/usr/local/Trolltech/Qt-4.6.0/lib/libQtDeclarative.so")
+  SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
+  SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
+
+  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SVMT)
+ENDIF()
+
 # HelloStelModule
 SET(USE_STATIC_PLUGIN_HELLOSTELMODULE 0 CACHE BOOL "Define whether the HelloStelModule plugin should be statically linked.")
 SET(STATIC_PLUGIN_HELLOSTELMODULE_PATH "$ENV{STELROOT}/../extmodules/HelloStelModule/builds/unix/src/libHelloStelModule.a" CACHE PATH "The location of the libHelloStelModule.a static library")
@@ -158,7 +195,7 @@ IF(WIN32)
   LINK_LIBRARIES(wsock32)
 ENDIF()
 
-# For Windows, the default back end for the graphics system should be "native", as "raster" 
+# For Windows, the default back end for the graphics system should be "native", as "raster"
 # causes problems for many ATI users.  However, for other platforms we should use raster
 # as the default as it is faster and on OSX it fixes a lot of rendering glitches.
 IF(WIN32)
