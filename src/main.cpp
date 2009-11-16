@@ -39,6 +39,10 @@ Q_IMPORT_PLUGIN(StelGui)
 Q_IMPORT_PLUGIN(VirGO)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_SVMT
+Q_IMPORT_PLUGIN(SVMT)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_HELLOSTELMODULE
 Q_IMPORT_PLUGIN(HelloStelModule)
 #endif
@@ -121,7 +125,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	argv2 = (char**)malloc(sizeof(char*)*(argc+2)); 
+	argv2 = (char**)malloc(sizeof(char*)*(argc+2));
 	memcpy(argv2, argv, argc*sizeof(char*));
 	argv2[argc]=cmd1;
 	argv2[argc+1]=cmd2;
