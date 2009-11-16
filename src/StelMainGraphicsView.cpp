@@ -37,6 +37,7 @@
 #include <QCoreApplication>
 #include <QApplication>
 #include <QDebug>
+#include <QFileInfo>
 #include <QGraphicsGridLayout>
 #include <QGraphicsProxyWidget>
 
@@ -377,46 +378,37 @@ void StelMainGraphicsView::saveScreenShot(const QString& filePrefix, const QStri
 
 void StelMainGraphicsView::doScreenshot(void)
 {
-	QString shotDir;
+	QFileInfo shotDir;
 	QImage im = glWidget->grabFrameBuffer();
 	if (flagInvertScreenShotColors)
 		im.invertPixels();
 
 	if (screenShotDir == "")
-	{
-		try
-		{
-			shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
-			if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
-			{
-				qWarning() << "ERROR StelMainGraphicsView::saveScreenShot: screenshot directory is not writable: " << qPrintable(shotDir);
-				return;
-			}
-		}
-		catch(std::runtime_error& e)
-		{
-			qWarning() << "ERROR StelMainGraphicsView::saveScreenShot: could not determine screenshot directory: " << e.what();
-			return;
-		}
-	}
+		shotDir = QFileInfo(StelApp::getInstance().getFileMgr().getScreenshotDir());
 	else
+		shotDir = QFileInfo(screenShotDir);
+
+	if (!shotDir.isDir())
 	{
-		shotDir = screenShotDir;
+		qWarning() << "ERROR requested screenshot directory is not a directory: " << shotDir.filePath();
+		return;
+	}
+	else if (!shotDir.isWritable())
+	{
+		qWarning() << "ERROR requested screenshot directory is not writable: " << shotDir.filePath();
+		return;
 	}
 
-	QString shotPath;
+	QFileInfo shotPath;
 	for (int j=0; j<100000; ++j)
 	{
-		shotPath = shotDir+"/"+ screenShotPrefix + QString("%1").arg(j, 3, 10, QLatin1Char('0')) + ".png";
-		if (!StelApp::getInstance().getFileMgr().exists(shotPath))
+		shotPath = QFileInfo(shotDir.filePath() + "/" + screenShotPrefix + QString("%1").arg(j, 3, 10, QLatin1Char('0')) + ".png");
+		if (!shotPath.exists())
 			break;
 	}
 
-	qDebug() << "Saving screenshot in file: " << shotPath;
-	im.save(shotPath);
-	if (!StelApp::getInstance().getFileMgr().exists(shotPath))
-		return;
-	else
-		return;
+	qDebug() << "INFO Saving screenshot in file: " << shotPath.filePath();
+	if (!im.save(shotPath.filePath())) {
+		qWarning() << "WARNING failed to write screenshot to: " << shotPath.filePath();
+	}
 }
-
