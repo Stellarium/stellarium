@@ -16,7 +16,16 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
- 
+
+#ifdef USE_OPENGL_ES2
+ #include "GLES2/gl2.h"
+#endif
+
+#if QT_VERSION>=0x040600
+ #include <QGLShaderProgram>
+ #include <QtOpenGL>
+#endif
+
 #include "StelSkyDrawer.hpp"
 #include "StelProjector.hpp"
 #include "StelNavigator.hpp"
@@ -97,7 +106,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore)
 	maxPointSources = 1000;
 	verticesGrid = new Vec2f[maxPointSources*6];
 	colorGrid = new Vec3f[maxPointSources*6];
-	textureGrid = new Vector2<GLshort>[maxPointSources*6];
+	textureGrid = new Vec2f[maxPointSources*6];
 	for (unsigned int i=0;i<maxPointSources; ++i)
 	{
 		textureGrid[i*6].set(0,0);
@@ -107,6 +116,63 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore)
 		textureGrid[i*6+4].set(1,1);
 		textureGrid[i*6+5].set(0,1);
 	}
+
+	useShader = StelApp::getInstance().getUseGLShaders();
+#if QT_VERSION>=0x040600 && 0
+	if (useShader)
+	{
+		qDebug() << "Use vertex shader for stars rendering";
+		QGLShader* vShader = new QGLShader(QGLShader::Vertex);
+		vShader->compileSourceCode(
+						"uniform mat4 projectionMatrix;\n"
+						"attribute vec2 skyVertex;\n"
+						"attribute vec3 starColor;\n"
+						"attribute vec2 texCoord;\n"
+						"varying vec4 outColor;\n"
+						"varying vec2 outTexCoord;\n"
+						"void main()\n"
+						"{	gl_Position = projectionMatrix*vec4(skyVertex, 0., 1);\n"
+						"	outColor = starColor;\n"
+						"	outTexCoord = texCoord;}");
+		starsShaderProgram = new QGLShaderProgram();
+		if (!vShader->isCompiled())
+		{
+			qWarning() << "Error while compiling shader: " << vShader->log();
+			useShader = false;
+		}
+		if (!vShader->log().isEmpty())
+		{
+			qWarning() << "Warnings while compiling vertex shader: " << vShader->log();
+		}
+		QGLShader* fShader = new QGLShader(QGLShader::Fragment);
+		if (!fShader->compileSourceCode(
+				"uniform sampler2D tex;\n"
+				"varying mediump vec4 outColor;\n"
+				"varying mediump vec4 outTexCoord;\n"
+				"void main(){gl_FragColor = texture2D(tex,outTexCoord.st)*outColor;}"))
+		{
+			qWarning() << "Error while compiling fragment shader: " << fShader->log();
+			useShader = false;
+		}
+		if (!fShader->log().isEmpty())
+		{
+			qWarning() << "Warnings while compiling fragment shader: " << vShader->log();
+		}
+		starsShaderProgram->addShader(vShader);
+		starsShaderProgram->addShader(fShader);
+		if (!starsShaderProgram->link())
+		{
+			qWarning() << "Error while linking shader program: " << starsShaderProgram->log();
+			useShader = false;
+		}
+		if (!starsShaderProgram->log().isEmpty())
+		{
+			qWarning() << "Warnings while linking shader: " << starsShaderProgram->log();
+		}
+	}
+#else
+	useShader = false;
+#endif
 }
 
 
@@ -121,6 +187,13 @@ StelSkyDrawer::~StelSkyDrawer()
 	if (textureGrid)
 		delete[] textureGrid;
 	textureGrid = NULL;
+
+#if QT_VERSION>=0x040600
+	if (useShader)
+	{
+		delete starsShaderProgram;
+	}
+#endif
 }
 
 // Init parameters from config file
@@ -300,7 +373,7 @@ void StelSkyDrawer::preDrawPointSource(StelPainter* p)
 	sPainter=p;
 	
 	Q_ASSERT(nbPointSources==0);
-	glDisable(GL_LIGHTING);
+
 	// Blending is really important. Otherwise faint stars in the vicinity of
 	// bright star will cause tiny black squares on the bright star, e.g. see Procyon.
 	glEnable(GL_BLEND);
@@ -328,24 +401,43 @@ void StelSkyDrawer::postDrawPointSource()
 	
 	texHalo->bind();
 	
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_COLOR_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		
-	// Load the color components
-	glColorPointer(3, GL_FLOAT, 0, colorGrid);
-	// Load the vertex array
-	glVertexPointer(2, GL_FLOAT, 0, verticesGrid);
-	// Load the texture coordinates array
-	glTexCoordPointer(2, GL_SHORT, 0, textureGrid);
-	
-	// And draw everything at once
-	glDrawArrays(GL_TRIANGLES, 0, nbPointSources*6);
-		
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_COLOR_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	
+#if QT_VERSION>=0x040600
+	if (useShader)
+	{
+		starsShaderProgram->bind();
+		const Mat4f m = sPainter->getProjector()->getProjectionMatrix();
+		starsShaderProgram->setUniformValue("projectionMatrix",
+			QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]));
+		starsShaderProgram->setAttributeArray("skyVertex", (const GLfloat*)verticesGrid, 2, 0);
+		starsShaderProgram->setAttributeArray("starColor", (const GLfloat*)colorGrid, 3, 0);
+		starsShaderProgram->setAttributeArray("texCoord", (const GLfloat*)textureGrid, 2, 0);
+		glDrawArrays(GL_TRIANGLES, 0, nbPointSources*6);
+		starsShaderProgram->release();
+	}
+	else
+	{
+#else
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_COLOR_ARRAY);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+		// Load the color components
+		glColorPointer(3, GL_FLOAT, 0, colorGrid);
+		// Load the vertex array
+		glVertexPointer(2, GL_FLOAT, 0, verticesGrid);
+		// Load the texture coordinates array
+		glTexCoordPointer(2, GL_FLOAT, 0, textureGrid);
+
+		// And draw everything at once
+		glDrawArrays(GL_TRIANGLES, 0, nbPointSources*6);
+
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_COLOR_ARRAY);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+#endif
+#if QT_VERSION>=0x040600
+	}
+#endif
 	nbPointSources = 0;
 }
 
