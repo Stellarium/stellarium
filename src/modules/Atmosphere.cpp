@@ -51,7 +51,6 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 	setFadeDuration(3.f);
 	useShader = StelApp::getInstance().getUseGLShaders();
 #if QT_VERSION>=0x040600
-	useShader = useShader && QGLShaderProgram::hasOpenGLShaderPrograms();
 	if (useShader)
 	{
 		QString filePath;

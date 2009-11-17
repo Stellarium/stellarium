@@ -252,7 +252,7 @@ private:
 	//! Buffer for storing the color array data
 	Vec3f* colorGrid;
 	//! Buffer for storing the texture coordinate array data
-	Vector2<short>* textureGrid;
+	Vec2f* textureGrid;
 	//! Current number of sources stored in the buffers (still to display)
 	unsigned int nbPointSources;
 	//! Maximum number of sources which can be stored in the buffers
@@ -270,6 +270,11 @@ private:
 	bool flagLuminanceAdaptation;
 	
 	StelPainter* sPainter;
+
+	bool useShader;
+#if QT_VERSION>=0x040600
+	class QGLShaderProgram* starsShaderProgram;
+#endif
 };
 
 #endif // _STELSKYDRAWER_HPP_
