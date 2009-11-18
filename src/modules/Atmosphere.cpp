@@ -422,6 +422,8 @@ void Atmosphere::draw(StelCore* core)
 		const Mat4f m = sPainter.getProjector()->getProjectionMatrix();
 		atmoShaderProgram->setUniformValue("projectionMatrix",
 			QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]));
+		atmoShaderProgram->enableAttributeArray("skyVertex");
+		atmoShaderProgram->enableAttributeArray("skyColor");
 		atmoShaderProgram->setAttributeArray("skyVertex", (const GLfloat*)posGrid, 2, 0);
 		atmoShaderProgram->setAttributeArray("skyColor", (const GLfloat*)colorGrid, 4, 0);
 #else
@@ -514,6 +516,8 @@ void Atmosphere::draw(StelCore* core)
 	if (useShader)
 	{
 #if QT_VERSION>=0x040600
+		atmoShaderProgram->disableAttributeArray("skyVertex");
+		atmoShaderProgram->disableAttributeArray("skyColor");
 		atmoShaderProgram->release();
 #else
 		glUseProgram(0);

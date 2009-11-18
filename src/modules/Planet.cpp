@@ -54,8 +54,8 @@ Planet::Planet(const QString& englishName,
 			   float albedo,
 			   const QString& atexMapName,
 			   const QString& texHaloName,
-	  		   posFuncType coordFunc,
-		       void* auserDataPtr,
+			   posFuncType coordFunc,
+			   void* auserDataPtr,
 			   OsulatingFunctType *osculatingFunc,
 			   bool acloseOrbit,
 			   bool hidden,
@@ -67,7 +67,7 @@ Planet::Planet(const QString& englishName,
 	  sphereScale(1.f),
 	  lastJD(J2000),
 	  coordFunc(coordFunc),
-      userDataPtr(auserDataPtr),
+	  userDataPtr(auserDataPtr),
 	  osculatingFunc(osculatingFunc),
 	  parent(NULL),
 	  hidden(hidden),
@@ -692,7 +692,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI; // the total illuminated area in arcmin^2
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	core->getSkyDrawer()->postDrawSky3dModel(getJ2000EquatorialPos(nav), surfArcMin2, getVMagnitude(core->getNavigator()), &sPainter, color);
+	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, getJ2000EquatorialPos(nav), surfArcMin2, getVMagnitude(core->getNavigator()), color);
 }
 
 

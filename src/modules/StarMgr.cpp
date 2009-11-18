@@ -4,17 +4,17 @@
  *
  * The big star catalogue extension to Stellarium:
  * Author and Copyright: Johannes Gajdosik, 2006
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -96,7 +96,7 @@ QString StarMgr::convertToSpectralType(int index)
 	if (index < 0 || index >= spectral_array.size())
 	{
 		qDebug() << "convertToSpectralType: bad index: " << index << ", max: " << spectral_array.size();
-    	return "";
+		return "";
 	}
 	return spectral_array.at(index);
 }
@@ -113,9 +113,9 @@ QString StarMgr::convertToComponentIds(int index)
 
 
 void StarMgr::initTriangle(int lev,int index,
-                           const Vec3d &c0,
-                           const Vec3d &c1,
-                           const Vec3d &c2) {
+						   const Vec3d &c0,
+						   const Vec3d &c1,
+						   const Vec3d &c2) {
   ZoneArrayMap::const_iterator it(zoneArrays.find(lev));
   if (it!=zoneArrays.end()) it->second->initTriangle(index,c0,c1,c2);
 }
@@ -190,13 +190,13 @@ void StarMgr::init()
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
 	setLabelsAmount(conf->value("stars/labels_amount",3).toDouble());
-	
+
 	objectMgr->registerStelObjectMgr(this);
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setMinFilter(GL_LINEAR);
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   // Load pointer texture
-	
+
 	StelApp::getInstance().getCore()->getGeodesicGrid(maxGeodesicGridLevel)->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
 	for (ZoneArrayMap::const_iterator it(zoneArrays.begin()); it!=zoneArrays.end();it++)
 	{
@@ -216,14 +216,14 @@ void StarMgr::drawPointer(const StelProjectorP& prj, const StelNavigator * nav)
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos))
 			return;
-	
+
 		StelPainter sPainter(prj);
 		const Vec3d& c(obj->getInfoColor());
 		sPainter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
-        glEnable(GL_TEXTURE_2D);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
@@ -233,7 +233,7 @@ void StarMgr::setStelStyle(const StelStyle& style)
 	// Load colors from config file
 	QSettings* conf = StelApp::getInstance().getSettings();
 	QString section = style.confSectionName;
-	
+
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setLabelColor(StelUtils::strToVec3f(conf->value(section+"/star_label_color", defaultColor).toString()));
 }
@@ -267,15 +267,15 @@ void StarMgr::loadStarSettings()
 void StarMgr::loadData()
 {
 	StelLoadingBar& lb = *StelApp::getInstance().getStelLoadingBar();
-			
+
 	// Please do not init twice:
 	Q_ASSERT(maxGeodesicGridLevel < 0);
 
 	qDebug() << "Loading star data ...";
-	
+
 	qulonglong memoryUsed = 0;
 	const qulonglong maxMemory = StelApp::getInstance().getSettings()->value("stars/max_memory", 128).toULongLong() * 1024*1024;
-	
+
 	QStringList cats = starSettings->childGroups();
 	QListIterator<QString> it(cats);
 	StelFileMgr& fileMgr = StelApp::getInstance().getFileMgr();
@@ -307,7 +307,7 @@ void StarMgr::loadData()
 			qDebug() << qPrintable(QString("Error: User does not have permissions to read catalog %1").arg(cat_file_name));
 			continue;
 		}
-		
+
 		lb.SetMessage(q_("Loading catalog %1 from file %2").arg(cat, cat_file_name));
 		memoryUsed += fileMgr.size(cat_file_path);
 		ZoneArray *const z = ZoneArray::create(cat_file_name, memoryUsed > maxMemory, lb);
@@ -337,7 +337,7 @@ void StarMgr::loadData()
 		hipIndex[i].s = 0;
 	}
 	for (ZoneArrayMap::const_iterator it(zoneArrays.begin());
-	                it != zoneArrays.end();it++)
+					it != zoneArrays.end();it++)
 	{
 		it->second->updateHipIndex(hipIndex);
 	}
@@ -356,8 +356,8 @@ void StarMgr::loadData()
 		catch (std::runtime_error& e)
 		{
 			qWarning() << "ERROR while loading data from "
-			           << ("stars/default/" + cat_hip_sp_file_name)
-			           << ": " << e.what();
+					   << ("stars/default/" + cat_hip_sp_file_name)
+					   << ": " << e.what();
 		}
 	}
 
@@ -375,8 +375,8 @@ void StarMgr::loadData()
 		catch (std::runtime_error& e)
 		{
 			qWarning() << "ERROR while loading data from "
-			           << ("stars/default/" + cat_hip_cids_file_name)
-			           << ": " << e.what();
+					   << ("stars/default/" + cat_hip_cids_file_name)
+					   << ": " << e.what();
 		}
 	}
 
@@ -384,7 +384,7 @@ void StarMgr::loadData()
 	qDebug() << "Finished loading star catalogue data, max_geodesic_level: " << maxGeodesicGridLevel;
 }
 
-// Load common names from file 
+// Load common names from file
 int StarMgr::loadCommonNames(const QString& commonNameFile)
 {
 	commonNamesMap.clear();
@@ -406,7 +406,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 	QString record;
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
 	// record structure is delimited with a | character.  We will
-	// use a QRegExp to extract the fields. with whitespace padding permitted 
+	// use a QRegExp to extract the fields. with whitespace padding permitted
 	// (i.e. it will be stripped automatically) Example record strings:
 	// " 10819|c_And"
 	// "113726|1_And"
@@ -422,7 +422,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 		totalRecords++;
 		if (!recordRx.exactMatch(record))
 		{
-			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << commonNameFile 
+			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << commonNameFile
 				   << " - record does not match record pattern";
 			continue;
 		}
@@ -433,14 +433,14 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 			unsigned int hip = recordRx.capturedTexts().at(1).toUInt(&ok);
 			if (!ok)
 			{
-				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << commonNameFile 
+				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << commonNameFile
 					   << " - failed to convert " << recordRx.capturedTexts().at(1) << "to a number";
 				continue;
 			}
 			QString englishCommonName = recordRx.capturedTexts().at(2).trimmed();
 			if (englishCommonName.isEmpty())
 			{
-				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << commonNameFile 
+				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << commonNameFile
 					   << " - empty name field";
 				continue;
 			}
@@ -463,7 +463,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 }
 
 
-// Load scientific names from file 
+// Load scientific names from file
 void StarMgr::loadSciNames(const QString& sciNameFile)
 {
 	sciNamesMapI18n.clear();
@@ -483,7 +483,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 	QString record;
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
 	// record structure is delimited with a | character.  We will
-	// use a QRegExp to extract the fields. with whitespace padding permitted 
+	// use a QRegExp to extract the fields. with whitespace padding permitted
 	// (i.e. it will be stripped automatically) Example record strings:
 	// " 10819|c_And"
 	// "113726|1_And"
@@ -499,7 +499,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 		totalRecords++;
 		if (!recordRx.exactMatch(record))
 		{
-			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << sciNameFile 
+			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << sciNameFile
 				   << " - record does not match record pattern";
 			continue;
 		}
@@ -510,7 +510,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 			unsigned int hip = recordRx.capturedTexts().at(1).toUInt(&ok);
 			if (!ok)
 			{
-				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << sciNameFile 
+				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << sciNameFile
 					   << " - failed to convert " << recordRx.capturedTexts().at(1) << "to a number";
 				continue;
 			}
@@ -518,7 +518,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 			// Don't set the sci name if it's already set
 			if (sciNamesMapI18n.find(hip)!=sciNamesMapI18n.end())
 			{
-				//qWarning() << "WARNING - duplicate name for HP" << hip << "at line" 
+				//qWarning() << "WARNING - duplicate name for HP" << hip << "at line"
 				//           << lineNumber << "in" << sciNameFile << "SKIPPING";
 				continue;
 			}
@@ -526,7 +526,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 			QString sci_name_i18n = recordRx.capturedTexts().at(2).trimmed();
 			if (sci_name_i18n.isEmpty())
 			{
-				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << sciNameFile 
+				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << sciNameFile
 					   << " - empty name field";
 				continue;
 			}
@@ -576,14 +576,13 @@ void StarMgr::draw(StelCore* core)
 	const float names_brightness = labelsFader.getInterstate() * starsFader.getInterstate();
 
 	// Prepare openGL for drawing many stars
-	StelPainter* sPainter = new StelPainter(prj);
-	sPainter->setFont(starFont);
-	skyDrawer->preDrawPointSource(sPainter);
-	Q_ASSERT(sPainter);
+	StelPainter sPainter(prj);
+	sPainter.setFont(starFont);
+	skyDrawer->preDrawPointSource(&sPainter);
 
 	// draw all the stars of all the selected zones
 	float rcmag_table[2*256];
-	
+
 	for (ZoneArrayMap::const_iterator it(zoneArrays.begin()); it!=zoneArrays.end();++it)
 	{
 		const float mag_min = 0.001f*it->second->mag_min;
@@ -605,7 +604,7 @@ void StarMgr::draw(StelCore* core)
 			}
 		}
 		lastMaxSearchLevel = it->first;
-	
+
 		unsigned int maxMagStarName = 0;
 		if (labelsFader.getInterstate()>0.f)
 		{
@@ -617,17 +616,14 @@ void StarMgr::draw(StelCore* core)
 		}
 		int zone;
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it->first);(zone = it1.next()) >= 0;)
-			it->second->draw(zone, true, rcmag_table, core, maxMagStarName, names_brightness);
+			it->second->draw(&sPainter, zone, true, rcmag_table, core, maxMagStarName, names_brightness);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it->first);(zone = it1.next()) >= 0;)
-			it->second->draw(zone, false, rcmag_table, core, maxMagStarName,names_brightness);
+			it->second->draw(&sPainter, zone, false, rcmag_table, core, maxMagStarName,names_brightness);
 	}
 	exit_loop:
 	// Finish drawing many stars
-	skyDrawer->postDrawPointSource();
-	
-	delete sPainter;
-	sPainter = NULL;
-	
+	skyDrawer->postDrawPointSource(&sPainter);
+
 	if (objectMgr->getFlagSelectedObjectPointer())
 		drawPointer(prj, nav);
 }
@@ -640,10 +636,10 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 	QList<StelObjectP > result;
 	if (!getFlagStars())
 		return result;
-		
+
 	Vec3d v(vv);
 	v.normalize();
-	
+
 	// find any vectors h0 and h1 (length 1), so that h0*v=h1*v=h0*h1=0
 	int i;
 	{
@@ -666,7 +662,7 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 	h1.normalize();
 	h0 = h1 ^ v;
 	h0.normalize();
-	
+
 	// Now we have h0*v=h1*v=h0*h1=0.
 	// Construct a region with 4 corners e0,e1,e2,e3 inside which all desired stars must be:
 	double f = 1.4142136 * tan(limFov * M_PI/180.0);
@@ -684,7 +680,7 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 	// Search the triangles
 	SphericalConvexPolygon c(e3, e2, e2, e0);
 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(c.getBoundingSphericalCaps(),lastMaxSearchLevel);
-	
+
 	// Iterate over the stars inside the triangles
 	f = cos(limFov * M_PI/180.);
 	for (ZoneArrayMap::const_iterator it(zoneArrays.begin());it!=zoneArrays.end();it++)
@@ -752,14 +748,14 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 
 	// Search by I18n common name
 	std::map<QString,int>::const_iterator it(commonNamesIndexI18n.find(objw));
-	if (it!=commonNamesIndexI18n.end()) 
+	if (it!=commonNamesIndexI18n.end())
 	{
 		return searchHP(it->second);
 	}
 
 	// Search by sci name
 	it = sciNamesIndexI18n.find(objw);
-	if (it!=sciNamesIndexI18n.end()) 
+	if (it!=sciNamesIndexI18n.end())
 	{
 		return searchHP(it->second);
 	}
@@ -791,7 +787,7 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 
 //! Find and return the list of at most maxNbItem objects auto-completing
 //! the passed object I18n name.
-QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const 
+QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
 	if (maxNbItem==0) return result;
@@ -799,7 +795,7 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	QString objw = objPrefix.toUpper();
 
 	// Search for common names
-	for (std::map<QString,int>::const_iterator it(commonNamesIndexI18n.lower_bound(objw)); it!=commonNamesIndexI18n.end(); ++it) 
+	for (std::map<QString,int>::const_iterator it(commonNamesIndexI18n.lower_bound(objw)); it!=commonNamesIndexI18n.end(); ++it)
 	{
 		if (it->first.startsWith(objw))
 		{
@@ -807,21 +803,21 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 				break;
 			result << getCommonName(it->second);
 			--maxNbItem;
-		} 
-		else 
+		}
+		else
 			break;
 	}
 
 	// Search for sci names
 	QString bayerPattern = objw;
 	QRegExp bayerRegEx(bayerPattern);
-	
+
 	// if the first character is a Greek letter, check if there's an index
 	// after it, such as "alpha1 Cen".
 	if (objw.at(0).unicode() >= 0x0391 && objw.at(0).unicode() <= 0x03A9)
 		bayerRegEx.setPattern(bayerPattern.insert(1,"\\d?"));
-	
-	for (std::map<QString,int>::const_iterator it(sciNamesIndexI18n.lower_bound(objw)); it!=sciNamesIndexI18n.end(); ++it) 
+
+	for (std::map<QString,int>::const_iterator it(sciNamesIndexI18n.lower_bound(objw)); it!=sciNamesIndexI18n.end(); ++it)
 	{
 		if (it->first.indexOf(bayerRegEx)==0)
 		{
@@ -872,10 +868,10 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 	}
 	catch(std::runtime_error& e)
 	{
-		qWarning() << "WARNING: could not load star_names.fab for sky culture " 
-		           << skyCultureDir << ": " << e.what();	
+		qWarning() << "WARNING: could not load star_names.fab for sky culture "
+				   << skyCultureDir << ": " << e.what();
 	}
-	
+
 	try
 	{
 		loadSciNames(StelApp::getInstance().getFileMgr().findFile("stars/default/name.fab"));

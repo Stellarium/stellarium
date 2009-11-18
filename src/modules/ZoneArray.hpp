@@ -106,7 +106,7 @@ public:
 							  QList<StelObjectP > &result) = 0;
 
 	//! Pure virtual method. See subclass implementation.
-	virtual void draw(int index,bool is_inside,
+	virtual void draw(StelPainter* sPainter, int index,bool is_inside,
 					  const float *rcmag_table, StelCore* core,
 					  unsigned int maxMagStarName,float names_brightness) const = 0;
 
@@ -189,7 +189,7 @@ protected:
 	//! @param maxMagStarName magnitude limit of stars that display labels
 	//! @param names_brightness brightness of labels
 	//! @param starFont font of labels
-	void draw(int index,bool is_inside,
+	void draw(StelPainter* sPainter, int index,bool is_inside,
 			  const float *rcmag_table, StelCore* core,
 			  unsigned int maxMagStarName,float names_brightness) const;
 
