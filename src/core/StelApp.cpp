@@ -355,7 +355,7 @@ void StelApp::init()
 
 	useGLShaders = confSettings->value("main/use_glshaders", true).toBool();
 #if QT_VERSION>=0x040600
-	useShader = useShader && QGLShaderProgram::hasOpenGLShaderPrograms();
+	useGLShaders = useGLShaders && QGLShaderProgram::hasOpenGLShaderPrograms();
 #endif
 
 	// Initialize AFTER creation of openGL context
