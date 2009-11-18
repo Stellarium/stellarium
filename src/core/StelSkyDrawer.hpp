@@ -267,9 +267,7 @@ private:
 	bool flagLuminanceAdaptation;
 
 	bool useShader;
-#if QT_VERSION>=0x040600
 	class QGLShaderProgram* starsShaderProgram;
-#endif
 };
 
 #endif // _STELSKYDRAWER_HPP_

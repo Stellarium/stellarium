@@ -154,7 +154,7 @@ void StelSkyDrawer::init()
 	texBigHalo = StelApp::getInstance().getTextureManager().createTexture("haloLune.png");
 	texSunHalo = StelApp::getInstance().getTextureManager().createTexture("halo.png");
 
-	useShader = StelApp::getInstance().getUseGLShaders() && QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0);;
+	useShader = StelApp::getInstance().getUseGLShaders() && (QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0));
 #if QT_VERSION>=0x040600
 	if (useShader)
 	{
