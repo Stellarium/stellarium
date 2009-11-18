@@ -413,6 +413,9 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 		starsShaderProgram->enableAttributeArray("starColor");
 		starsShaderProgram->enableAttributeArray("texCoord");
 		glDrawArrays(GL_TRIANGLES, 0, nbPointSources*6);
+		starsShaderProgram->disableAttributeArray("skyVertex");
+		starsShaderProgram->disableAttributeArray("starColor");
+		starsShaderProgram->disableAttributeArray("texCoord");
 		starsShaderProgram->release();
 	}
 	else
