@@ -46,7 +46,7 @@
 #define EYE_RESOLUTION (0.25)
 #define MAX_LINEAR_RADIUS 8.f
 
-StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore)
+StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), starsShaderProgram(NULL)
 {
 	eye = core->getToneReproducer();
 
@@ -132,7 +132,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore)
 						"varying vec2 outTexCoord;\n"
 						"void main()\n"
 						"{	gl_Position = projectionMatrix*vec4(skyVertex, 0., 1);\n"
-						"	outColor = starColor;\n"
+						"	outColor = vec4(starColor[0], starColor[1], starColor[2], 1);\n"
 						"	outTexCoord = texCoord;}");
 		starsShaderProgram = new QGLShaderProgram();
 		if (!vShader->isCompiled())
@@ -147,8 +147,8 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore)
 		QGLShader* fShader = new QGLShader(QGLShader::Fragment);
 		if (!fShader->compileSourceCode(
 				"uniform sampler2D tex;\n"
-				"varying mediump vec4 outColor;\n"
-				"varying mediump vec4 outTexCoord;\n"
+				"varying vec4 outColor;\n"
+				"varying vec2 outTexCoord;\n"
 				"void main(){gl_FragColor = texture2D(tex,outTexCoord.st)*outColor;}"))
 		{
 			qWarning() << "Error while compiling fragment shader: " << fShader->log();
@@ -404,6 +404,7 @@ void StelSkyDrawer::postDrawPointSource()
 #if QT_VERSION>=0x040600
 	if (useShader)
 	{
+		Q_ASSERT(starsShaderProgram);
 		starsShaderProgram->bind();
 		const Mat4f m = sPainter->getProjector()->getProjectionMatrix();
 		starsShaderProgram->setUniformValue("projectionMatrix",
@@ -415,8 +416,8 @@ void StelSkyDrawer::postDrawPointSource()
 		starsShaderProgram->release();
 	}
 	else
+#endif
 	{
-#else
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glEnableClientState(GL_COLOR_ARRAY);
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -434,10 +435,7 @@ void StelSkyDrawer::postDrawPointSource()
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_COLOR_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-#endif
-#if QT_VERSION>=0x040600
 	}
-#endif
 	nbPointSources = 0;
 }
 
