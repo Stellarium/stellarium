@@ -48,7 +48,7 @@ namespace BigStarCatalogExtension
 static const Vec3d north(0,0,1);
 
 void ZoneArray::initTriangle(int index, const Vec3d &c0, const Vec3d &c1,
-                             const Vec3d &c2)
+							 const Vec3d &c2)
 {
 	// initialize center,axis0,axis1:
 	ZoneData &z(zones[index]);
@@ -95,7 +95,7 @@ int ReadInt(QFile& file, unsigned int &x)
 #endif
 
 ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
-                             StelLoadingBar &lb)
+							 StelLoadingBar &lb)
 {
 	QString fname(extended_file_name);
 	QString dbStr; // for debugging output.
@@ -117,13 +117,13 @@ ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
 	dbStr = "Loading \"" + extended_file_name + "\": ";
 	unsigned int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
 	if (ReadInt(*file,magic) < 0 ||
-	        ReadInt(*file,type) < 0 ||
-	        ReadInt(*file,major) < 0 ||
-	        ReadInt(*file,minor) < 0 ||
-	        ReadInt(*file,level) < 0 ||
-	        ReadInt(*file,mag_min) < 0 ||
-	        ReadInt(*file,mag_range) < 0 ||
-	        ReadInt(*file,mag_steps) < 0)
+			ReadInt(*file,type) < 0 ||
+			ReadInt(*file,major) < 0 ||
+			ReadInt(*file,minor) < 0 ||
+			ReadInt(*file,level) < 0 ||
+			ReadInt(*file,mag_min) < 0 ||
+			ReadInt(*file,mag_range) < 0 ||
+			ReadInt(*file,mag_steps) < 0)
 	{
 		dbStr += "error - file format is bad.";
 		qDebug() << dbStr;
@@ -160,7 +160,7 @@ ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
 		{
 			// mmap only with gcc:
 			dbStr += "warning - you must convert catalogue "
-			      += "to native format before mmap loading";
+				  += "to native format before mmap loading";
 			qDebug(qPrintable(dbStr));
 
 			return 0;
@@ -179,10 +179,10 @@ ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
 	}
 	ZoneArray *rval = 0;
 	dbStr += QString("%1_%2v%3_%4; ").arg(level)
-	         .arg(type)
-	         .arg(major)
-	         .arg(minor);
-	
+			 .arg(type)
+			 .arg(major)
+			 .arg(minor);
+
 	switch (type)
 	{
 	case 0:
@@ -269,7 +269,7 @@ ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
 }
 
 ZoneArray::ZoneArray(const QString& fname, QFile* file, int level, int mag_min,
-		     int mag_range, int mag_steps)
+			 int mag_range, int mag_steps)
 			: fname(fname), level(level), mag_min(mag_min),
 			  mag_range(mag_range), mag_steps(mag_steps),
 			  star_position_scale(0.0), zones(0), file(file)
@@ -279,7 +279,7 @@ ZoneArray::ZoneArray(const QString& fname, QFile* file, int level, int mag_min,
 }
 
 bool ZoneArray::readFileWithStelLoadingBar(QFile& file, void *data, qint64 size,
-        StelLoadingBar &lb)
+		StelLoadingBar &lb)
 {
 	int parts = 256;
 	int part_size = (size + (parts>>1)) / parts;
@@ -354,7 +354,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 				 << ")::SpecialZoneArray: no memory (1)";
 			exit(1);
 		}
-		
+
 		unsigned int *zone_size = new unsigned int[nr_of_zones];
 		if (zone_size == 0)
 		{
@@ -415,7 +415,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 					Star *s = stars;
 					for (unsigned int z=0;z<nr_of_zones;z++)
 					{
-						
+
 						getZones()[z].stars = s;
 						s += getZones()[z].size;
 					}
@@ -450,9 +450,9 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 					}
 					if (
 #if (!defined(__GNUC__))
-					    true
+						true
 #else
-					    byte_swap
+						byte_swap
 #endif
 					)
 					{
@@ -461,11 +461,11 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 						{
 							s->repack(
 #if Q_BYTE_ORDER == Q_BIG_ENDIAN
-							    // need for byte_swap on a BE machine means that catalog is LE
-							    !byte_swap
+								// need for byte_swap on a BE machine means that catalog is LE
+								!byte_swap
 #else
-							    // need for byte_swap on a LE machine means that catalog is BE
-							    byte_swap
+								// need for byte_swap on a LE machine means that catalog is BE
+								byte_swap
 #endif
 							);
 						}
@@ -504,7 +504,7 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void)
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::draw(int index, bool is_inside, const float *rcmag_table, StelCore* core, unsigned int maxMagStarName,
+void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_inside, const float *rcmag_table, StelCore* core, unsigned int maxMagStarName,
 				  float names_brightness) const
 {
 	StelSkyDrawer* drawer = core->getSkyDrawer();
@@ -520,12 +520,12 @@ void SpecialZoneArray<Star>::draw(int index, bool is_inside, const float *rcmag_
 		if (*tmpRcmag<=0.)
 			break;
 		s->getJ2000Pos(z,movementFactor, v);
-		if (drawer->drawPointSource(v,tmpRcmag,s->bV, !is_inside) && s->hasName() && s->mag < maxMagStarName)
+		if (drawer->drawPointSource(sPainter, v,tmpRcmag,s->bV, !is_inside) && s->hasName() && s->mag < maxMagStarName)
 		{
 			const float offset = *tmpRcmag*0.7;
 			const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.2, 0.2) : StelSkyDrawer::indexToColor(s->bV))*0.75;
-			drawer->getPainter()->setColor(colorr[0], colorr[1], colorr[2],names_brightness);
-			drawer->getPainter()->drawText(v, s->getNameI18n(), 0, offset, offset, false);
+			sPainter->setColor(colorr[0], colorr[1], colorr[2],names_brightness);
+			sPainter->drawText(v, s->getNameI18n(), 0, offset, offset, false);
 		}
 	}
 }
