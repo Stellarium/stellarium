@@ -46,6 +46,13 @@
 #define EYE_RESOLUTION (0.25)
 #define MAX_LINEAR_RADIUS 8.f
 
+#ifndef GL_POINT_SPRITE
+ #define GL_POINT_SPRITE 0x8861
+#endif
+#ifndef GL_VERTEX_PROGRAM_POINT_SIZE
+ #define GL_VERTEX_PROGRAM_POINT_SIZE 0x8642
+#endif
+
 StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), starsShaderProgram(NULL)
 {
 	eye = core->getToneReproducer();
@@ -147,7 +154,7 @@ void StelSkyDrawer::init()
 	texBigHalo = StelApp::getInstance().getTextureManager().createTexture("haloLune.png");
 	texSunHalo = StelApp::getInstance().getTextureManager().createTexture("halo.png");
 
-	useShader = StelApp::getInstance().getUseGLShaders();
+	useShader = StelApp::getInstance().getUseGLShaders() && QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0);;
 #if QT_VERSION>=0x040600
 	if (useShader)
 	{
@@ -157,13 +164,12 @@ void StelSkyDrawer::init()
 						"uniform mat4 projectionMatrix;\n"
 						"attribute vec2 skyVertex;\n"
 						"attribute vec3 starColor;\n"
-						"attribute vec2 texCoord;\n"
+						"attribute vec2 starSize;\n"
 						"varying vec4 outColor;\n"
-						"varying vec2 outTexCoord;\n"
 						"void main()\n"
-						"{	gl_Position = projectionMatrix*vec4(skyVertex[0], skyVertex[1], 0., 1);\n"
-						"	outColor = vec4(starColor[0], starColor[1], starColor[2], 1);\n"
-						"	outTexCoord = texCoord;}");
+						"{	gl_Position = projectionMatrix*vec4(skyVertex[0], skyVertex[1], 0., 1.);\n"
+						"	gl_PointSize = starSize[0]*2.;\n"
+						"	outColor = vec4(starColor, 1.);}");
 		starsShaderProgram = new QGLShaderProgram();
 		if (!vShader->isCompiled())
 		{
@@ -178,8 +184,7 @@ void StelSkyDrawer::init()
 		if (!fShader->compileSourceCode(
 				"uniform sampler2D tex;\n"
 				"varying vec4 outColor;\n"
-				"varying vec2 outTexCoord;\n"
-				"void main(){gl_FragColor = texture2D(tex,outTexCoord.st)*outColor;}"))
+				"void main(){gl_FragColor = texture2D(tex,gl_PointCoord.st)*outColor;}"))
 		{
 			qWarning() << "Error while compiling fragment shader: " << fShader->log();
 			useShader = false;
@@ -199,6 +204,7 @@ void StelSkyDrawer::init()
 		{
 			qWarning() << "Warnings while linking shader: " << starsShaderProgram->log();
 		}
+		maxPointSources*=6;
 	}
 #else
 	useShader = false;
@@ -402,21 +408,25 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 	if (useShader)
 	{
 		Q_ASSERT(starsShaderProgram);
+		glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
+		glEnable(GL_POINT_SPRITE);
 		starsShaderProgram->bind();
 		const Mat4f m = sPainter->getProjector()->getProjectionMatrix();
 		starsShaderProgram->setUniformValue("projectionMatrix",
 			QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]));
 		starsShaderProgram->setAttributeArray("skyVertex", (const GLfloat*)verticesGrid, 2, 0);
 		starsShaderProgram->setAttributeArray("starColor", (const GLfloat*)colorGrid, 3, 0);
-		starsShaderProgram->setAttributeArray("texCoord", (const GLfloat*)textureGrid, 2, 0);
+		starsShaderProgram->setAttributeArray("starSize", (const GLfloat*)textureGrid, 2, 0);
 		starsShaderProgram->enableAttributeArray("skyVertex");
 		starsShaderProgram->enableAttributeArray("starColor");
-		starsShaderProgram->enableAttributeArray("texCoord");
-		glDrawArrays(GL_TRIANGLES, 0, nbPointSources*6);
+		starsShaderProgram->enableAttributeArray("starSize");
+		glDrawArrays(GL_POINTS, 0, nbPointSources);
 		starsShaderProgram->disableAttributeArray("skyVertex");
 		starsShaderProgram->disableAttributeArray("starColor");
-		starsShaderProgram->disableAttributeArray("texCoord");
+		starsShaderProgram->disableAttributeArray("starSize");
 		starsShaderProgram->release();
+		glDisable(GL_POINT_SPRITE);
+		glDisable(GL_VERTEX_PROGRAM_POINT_SIZE);
 	}
 	else
 #endif
@@ -454,57 +464,68 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
 		return false;
 
+	const double radius = rcMag[0];
 	// Random coef for star twinkling
 	const float tw = flagStarTwinkle ? (1.f-twinkleAmount*rand()/RAND_MAX)*rcMag[1] : 1.f*rcMag[1];
 
-	if (flagPointStar)
+	// If the rmag is big, draw a big halo
+	if (radius>MAX_LINEAR_RADIUS+5.f)
 	{
-		// Draw the star rendered as GLpoint. This may be faster but it is not so nice
-		sPainter->setColor(color[0]*tw, color[1]*tw, color[2]*tw);
-		sPainter->drawPoint2d(win[0], win[1]);
+		float cmag = qMin(rcMag[1],(float)(radius-(MAX_LINEAR_RADIUS+5.))/30.f);
+		float rmag = 150.f;
+		if (cmag>1.f)
+			cmag = 1.f;
+
+		texBigHalo->bind();
+		glEnable(GL_TEXTURE_2D);
+		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+		sPainter->drawSprite2dMode(win[0], win[1], rmag);
+	}
+
+	if (useShader)
+	{
+		// Use point based rendering
+		verticesGrid[nbPointSources].set(win[0], win[1]);
+		colorGrid[nbPointSources]=color;
+		colorGrid[nbPointSources]*=tw;
+		textureGrid[nbPointSources][0]=radius;
 	}
 	else
 	{
-		// Store the drawing instructions in the vertex arrays
-		const double radius = rcMag[0];
-		Vec2f* v = &(verticesGrid[nbPointSources*6]);
-		v->set(win[0]-radius,win[1]-radius); ++v;
-		v->set(win[0]+radius,win[1]-radius); ++v;
-		v->set(win[0]+radius,win[1]+radius); ++v;
-		v->set(win[0]-radius,win[1]-radius); ++v;
-		v->set(win[0]+radius,win[1]+radius); ++v;
-		v->set(win[0]-radius,win[1]+radius); ++v;
-
-		win = color;
-		win*=tw;
-		Vec3f* cv = &(colorGrid[nbPointSources*6]);
-		*cv = win; ++cv;
-		*cv = win; ++cv;
-		*cv = win; ++cv;
-		*cv = win; ++cv;
-		*cv = win; ++cv;
-		*cv = win; ++cv;
-
-		// If the rmag is big, draw a big halo
-		if (radius>MAX_LINEAR_RADIUS+5.f)
+		if (flagPointStar)
 		{
-			float cmag = qMin(rcMag[1],(float)(radius-(MAX_LINEAR_RADIUS+5.))/30.f);
-			float rmag = 150.f;
-			if (cmag>1.f)
-				cmag = 1.f;
-
-			texBigHalo->bind();
-			glEnable(GL_TEXTURE_2D);
-			sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-			sPainter->drawSprite2dMode(win[0], win[1], rmag);
+			// Draw the star rendered as GLpoint. This may be faster but it is not so nice
+			sPainter->setColor(color[0]*tw, color[1]*tw, color[2]*tw);
+			sPainter->drawPoint2d(win[0], win[1]);
 		}
-
-		++nbPointSources;
-		if (nbPointSources>=maxPointSources)
+		else
 		{
-			// Flush the buffer (draw all buffered stars)
-			postDrawPointSource(sPainter);
+			// Store the drawing instructions in the vertex arrays
+			Vec2f* v = &(verticesGrid[nbPointSources*6]);
+			v->set(win[0]-radius,win[1]-radius); ++v;
+			v->set(win[0]+radius,win[1]-radius); ++v;
+			v->set(win[0]+radius,win[1]+radius); ++v;
+			v->set(win[0]-radius,win[1]-radius); ++v;
+			v->set(win[0]+radius,win[1]+radius); ++v;
+			v->set(win[0]-radius,win[1]+radius); ++v;
+
+			win = color;
+			win*=tw;
+			Vec3f* cv = &(colorGrid[nbPointSources*6]);
+			*cv = win; ++cv;
+			*cv = win; ++cv;
+			*cv = win; ++cv;
+			*cv = win; ++cv;
+			*cv = win; ++cv;
+			*cv = win; ++cv;
 		}
+	}
+
+	++nbPointSources;
+	if (nbPointSources>=maxPointSources)
+	{
+		// Flush the buffer (draw all buffered stars)
+		postDrawPointSource(sPainter);
 	}
 	return true;
 }
