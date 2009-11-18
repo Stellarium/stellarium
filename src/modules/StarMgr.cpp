@@ -205,7 +205,7 @@ void StarMgr::init()
 }
 
 
-void StarMgr::drawPointer(const StelProjectorP& prj, const StelNavigator * nav)
+void StarMgr::drawPointer(StelPainter& sPainter, const StelNavigator * nav)
 {
 	const QList<StelObjectP> newSelected = objectMgr->getSelectedObject("Star");
 	if (!newSelected.empty())
@@ -214,10 +214,9 @@ void StarMgr::drawPointer(const StelProjectorP& prj, const StelNavigator * nav)
 		Vec3d pos=obj->getJ2000EquatorialPos(nav);
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!prj->project(pos, screenpos))
+		if (!sPainter.getProjector()->project(pos, screenpos))
 			return;
 
-		StelPainter sPainter(prj);
 		const Vec3d& c(obj->getInfoColor());
 		sPainter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
@@ -625,7 +624,7 @@ void StarMgr::draw(StelCore* core)
 	skyDrawer->postDrawPointSource(&sPainter);
 
 	if (objectMgr->getFlagSelectedObjectPointer())
-		drawPointer(prj, nav);
+		drawPointer(sPainter, nav);
 }
 
 
