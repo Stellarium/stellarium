@@ -47,6 +47,38 @@ QMutex* StelPainter::globalMutex = new QMutex();
 
 QPainter* StelPainter::qPainter = NULL;
 
+//void StelPainter::init()
+//{
+//#ifdef USE_OPENGL_ES2
+//	QGLShader* vShader = new QGLShader(QGLShader::Vertex);
+//	vShader->compileSourceCode(
+//					"uniform mat4 projectionMatrix;\n"
+//					"attribute vec3 vertex;\n"
+//					"attribute vec4 color;\n"
+//					"varying vec4 outColor;\n"
+//					"void main()\n"
+//					"{	gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
+//					"	outColor = color;}");
+//	noTexturesShaderProgram = new QGLShaderProgram();
+//	Q_ASSERT(vShader->isCompiled())
+//	if (!vShader->log().isEmpty())
+//		qWarning() << "Warnings while compiling vertex shader: " << vShader->log();
+//	QGLShader* fShader = new QGLShader(QGLShader::Fragment);
+//	fShader->compileSourceCode(
+//			"varying vec4 outColor;\n"
+//			"void main(){gl_FragColor = outColor;}");
+//	Q_ASSERT(fShader->isCompiled())
+//	if (!fShader->log().isEmpty())
+//		qWarning() << "Warnings while compiling fragment shader: " << vShader->log();
+//	noTexturesShaderProgram->addShader(vShader);
+//	noTexturesShaderProgram->addShader(fShader);
+//	noTexturesShaderProgram->link();
+//	Q_ASSERT(noTexturesShaderProgram->linked())
+//	if (!starsShaderProgram->log().isEmpty())
+//		qWarning() << "Warnings while linking shader: " << starsShaderProgram->log();
+//#endif
+//}
+
 void StelPainter::setQPainter(QPainter* p)
 {
 	qPainter=p;
@@ -87,15 +119,15 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	qPainter->save();
 #endif
 
-	// Save openGL projection state
-#ifndef USE_OPENGL_ES2
-	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-#endif
-	glMatrixMode(GL_TEXTURE);
-	glPushMatrix();
 	// Init GL viewport to current projector values
 	glViewport(prj->viewportXywh[0], prj->viewportXywh[1], prj->viewportXywh[2], prj->viewportXywh[3]);
+
+#ifndef USE_OPENGL_ES2
+	// Save openGL projection state
+	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	glMatrixMode(GL_TEXTURE);
+	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
@@ -115,6 +147,7 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	glDisable(GL_ALPHA_TEST);
 	glDisable(GL_LINE_SMOOTH);
 	glDisable(GL_TEXTURE_2D);
+#endif
 	glFrontFace(prj->needGlFrontFaceCW()?GL_CW:GL_CCW);
 }
 
@@ -122,6 +155,7 @@ StelPainter::~StelPainter()
 {
 	Q_ASSERT(qPainter);
 
+#ifndef USE_OPENGL_ES2
 	// Restore openGL projection state for Qt drawings
 	glMatrixMode(GL_TEXTURE);
 	glPopMatrix();
@@ -129,7 +163,6 @@ StelPainter::~StelPainter()
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
-#ifndef USE_OPENGL_ES2
 	glPopAttrib();
 	glPopClientAttrib();
 #endif
@@ -163,7 +196,11 @@ void StelPainter::setFont(const QFont& font)
 
 void StelPainter::setColor(float r, float g, float b, float a)
 {
+#ifndef USE_OPENGL_ES2
 	glColor4f(r,g,b,a);
+#else
+
+#endif
 }
 
 QFontMetrics StelPainter::getFontMetrics() const
