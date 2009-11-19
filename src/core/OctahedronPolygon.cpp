@@ -744,13 +744,41 @@ void OctahedronPolygon::computeBoundingCap()
 #endif
 }
 
+OctahedronPolygon OctahedronPolygon::createAllSkyOctahedronPolygon()
+{
+	OctahedronPolygon poly;
+	poly.sides.resize(8);
+	static const Vec3d vertice[6] =
+	{
+		Vec3d(0,0,1), Vec3d(1,0,0), Vec3d(0,1,0), Vec3d(-1,0,0), Vec3d(0,-1,0), Vec3d(0,0,-1)
+	};
+	static const int verticeIndice[8][3] =
+	{
+		{0,2,1}, {5,1,2}, {0,3,2}, {5,2,3}, {0,1,4}, {5,4,1}, {0,4,3}, {5,3,4}
+	};
+
+	// Create the 8 base triangles
+	QVector<SubContour> side;
+	SubContour sc;
+	for (int i=0;i<8;++i)
+	{
+		sc.clear();
+		side.clear();
+		sc << EdgeVertex(vertice[verticeIndice[i][0]], false)
+				<< EdgeVertex(vertice[verticeIndice[i][1]], false)
+				<< EdgeVertex(vertice[verticeIndice[i][2]], false);
+		side.append(sc);
+		poly.sides[i]=side;
+	}
+	projectOnOctahedron(poly.sides);
+	poly.updateVertexArray();
+	Q_ASSERT(std::fabs(poly.getArea()-4.*M_PI)<0.0000001);
+	return poly;
+}
+
 const OctahedronPolygon& OctahedronPolygon::getAllSkyOctahedronPolygon()
 {
-	static OctahedronPolygon poly;
-	//QVector<SubContour> side0;
-	//side0.append();
-	//poly.sides[0]=
-	Q_ASSERT(0); // Unimplemented
+	static const OctahedronPolygon poly = createAllSkyOctahedronPolygon();
 	return poly;
 }
 

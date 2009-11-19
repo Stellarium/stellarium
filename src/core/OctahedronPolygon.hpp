@@ -124,6 +124,10 @@ private:
 
 	friend QDataStream& operator<<(QDataStream&, const OctahedronPolygon&);
 	friend QDataStream& operator>>(QDataStream&, OctahedronPolygon&);
+	friend OctahedronPolygon createAllSkyOctahedronPolygon();
+
+	//! Creates a full Octahedron.
+	static OctahedronPolygon createAllSkyOctahedronPolygon();
 
 	//! Append all theOctahedronPolygonach octahedron sides. No tesselation occurs at this point,
 	//! and a call to tesselatOctahedronPolygon each appended SubContours per side.
