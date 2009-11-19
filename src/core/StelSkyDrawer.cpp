@@ -385,7 +385,9 @@ void StelSkyDrawer::preDrawPointSource(StelPainter* p)
 	if (getFlagPointStar())
 	{
 		glDisable(GL_TEXTURE_2D);
+#ifndef USE_OPENGL_ES2
 		glPointSize(0.1);
+#endif
 	}
 	else
 	{
@@ -431,6 +433,7 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 	else
 #endif
 	{
+#ifndef USE_OPENGL_ES2
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glEnableClientState(GL_COLOR_ARRAY);
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -448,6 +451,7 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_COLOR_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+#endif
 	}
 	nbPointSources = 0;
 }
@@ -534,8 +538,6 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 // Terminate drawing of a 3D model, draw the halo
 void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, double illuminatedArea, float mag, const Vec3f& color)
 {
-	glDisable(GL_LIGHTING);
-
 	const float pixPerRad = painter->getProjector()->getPixelPerRadAtCenter();
 	// Assume a disk shape
 	float pixRadius = std::sqrt(illuminatedArea/(60.*60.)*M_PI/180.*M_PI/180.*(pixPerRad*pixPerRad))/M_PI;
