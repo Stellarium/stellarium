@@ -249,13 +249,13 @@ void TestStelSphericalGeometry::testPlaneIntersect2()
 	Vec3d vz(0,0,1);
 	SphericalCap hx(vx, 0);
 	SphericalCap hz(vz, 0);
-	QVERIFY2(planeIntersect2(hx, hz, p1, p2)==true, "Plane intersect failed");
+	QVERIFY2(SphericalCap::intersectionPoints(hx, hz, p1, p2)==true, "Plane intersect failed");
 	QVERIFY(p1==Vec3d(0,-1,0));
 	QVERIFY(p2==Vec3d(0,1,0));
-	QVERIFY2(planeIntersect2(hx, hx, p1, p2)==false, "Plane non-intersecting failure");
+	QVERIFY2(SphericalCap::intersectionPoints(hx, hx, p1, p2)==false, "Plane non-intersecting failure");
 
 	hx.d = std::sqrt(2.)/2.;
-	QVERIFY2(planeIntersect2(hx, hz, p1, p2)==true, "Plane/convex intersect failed");
+	QVERIFY2(SphericalCap::intersectionPoints(hx, hz, p1, p2)==true, "Plane/convex intersect failed");
 	Vec3d res(p1-Vec3d(hx.d,-hx.d,0));
 	QVERIFY2(res.length()<0.0000001, QString("p1 wrong: %1").arg(p1.toString()).toUtf8());
 	res = p2-Vec3d(hx.d,hx.d,0);

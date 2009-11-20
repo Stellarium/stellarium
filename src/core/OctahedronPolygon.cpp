@@ -96,7 +96,7 @@ OctahedronPolygon::OctahedronPolygon(const SubContour& initContour)
 }
 
 
-OctahedronPolygon::OctahedronPolygon(const QVector<OctahedronPolygon>& octs) : fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines)
+OctahedronPolygon::OctahedronPolygon(const QList<OctahedronPolygon>& octs) : fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines)
 {
 	sides.resize(8);
 	foreach (const OctahedronPolygon& oct, octs)
@@ -176,10 +176,7 @@ double OctahedronPolygon::getArea() const
 	Q_ASSERT(getFillVertexArray().primitiveType==StelVertexArray::Triangles);
 	for (int i=0;i<trianglesArray.size()/3;++i)
 	{
-		v1 = trianglesArray[i*3+0] ^ trianglesArray[i*3+1];
-		v2 = trianglesArray[i*3+1] ^ trianglesArray[i*3+2];
-		v3 = trianglesArray[i*3+2] ^ trianglesArray[i*3+0];
-		area += 2.*M_PI - v1.angle(v2) - v2.angle(v3) - v3.angle(v1);
+		area += OctahedronPolygon::sphericalTriangleArea(trianglesArray.at(i*3), trianglesArray.at(i*3+1), trianglesArray.at(i*3+2));
 	}
 	return area;
 }
