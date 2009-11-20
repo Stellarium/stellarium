@@ -453,70 +453,106 @@ double Planet::computeDistance(const Vec3d& obsHelioPos)
 }
 
 // Get the phase angle for an observer at pos obsPos in the heliocentric coordinate (dist in AU)
-double Planet::getPhase(Vec3d obsPos) const
+double Planet::getPhase(const Vec3d& obsPos) const
 {
-	const double sq = obsPos.lengthSquared();
-	const Vec3d heliopos = getHeliocentricEclipticPos();
-	const double Rq = heliopos.lengthSquared();
-	const double pq = (obsPos - heliopos).lengthSquared();
-	const double cos_chi = (pq + Rq - sq)/(2.0*sqrt(pq*Rq));
-	return (1.0 - acos(cos_chi)/M_PI) * cos_chi + sqrt(1.0 - cos_chi*cos_chi) / M_PI;
+	const double observerRq = obsPos.lengthSquared();
+	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
+	const double planetRq = planetHelioPos.lengthSquared();
+	const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
+	return std::acos(observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
 }
 
+// Computation of the visual magnitude (V band) of the planet.
 float Planet::getVMagnitude(const StelNavigator * nav) const
 {
-	Vec3d obsPos = nav->getObserverHeliocentricEclipticPos();
-	const double sq = obsPos.lengthSquared();
 	if (parent == 0)
 	{
 		// sun, compute the apparent magnitude for the absolute mag (4.83) and observer's distance
-		double distParsec = std::sqrt(sq)*AU/PARSEC;
+		const double distParsec = std::sqrt(nav->getObserverHeliocentricEclipticPos().lengthSquared())*AU/PARSEC;
 		return 4.83 + 5.*(std::log10(distParsec)-1.);
 	}
-	const Vec3d heliopos = getHeliocentricEclipticPos();
-	const double Rq = heliopos.lengthSquared();
-	const double pq = (obsPos - heliopos).lengthSquared();
-	const double cos_chi = (pq + Rq - sq)/(2.0*sqrt(pq*Rq));
-	const double phase = (1.0 - std::acos(cos_chi)/M_PI) * cos_chi + std::sqrt(1.0 - cos_chi*cos_chi) / M_PI;
-	double F = 2.0 * albedo * radius * radius * phase / (3.0*pq*Rq);
+	
+	// Compute the angular phase
+	const Vec3d& observerHelioPos = nav->getObserverHeliocentricEclipticPos();
+	const double observerRq = observerHelioPos.lengthSquared();
+	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
+	const double planetRq = planetHelioPos.lengthSquared();
+	const double observerPlanetRq = (observerHelioPos - planetHelioPos).lengthSquared();
+	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
+	double phase = std::acos(cos_chi);
 
+	double shadowFactor = 1.;
 	// Check if the satellite is inside the inner shadow of the parent planet:
-	if (parent->parent != 0) {
-		const Vec3d parent_heliopos = parent->getHeliocentricEclipticPos();
-		const double parent_Rq = parent_heliopos.lengthSquared();
-		const double pos_times_parent_pos = heliopos * parent_heliopos;
-		if (pos_times_parent_pos > parent_Rq) {
+	if (parent->parent != 0)
+	{
+		const Vec3d& parentHeliopos = parent->getHeliocentricEclipticPos();
+		const double parent_Rq = parentHeliopos.lengthSquared();
+		const double pos_times_parent_pos = planetHelioPos * parentHeliopos;
+		if (pos_times_parent_pos > parent_Rq)
+		{
 			// The satellite is farther away from the sun than the parent planet.
 			const double sun_radius = parent->parent->radius;
 			const double sun_minus_parent_radius = sun_radius - parent->radius;
 			const double quot = pos_times_parent_pos/parent_Rq;
-			// compute d = distance from satellite center to border
-			// of inner shadow. d>0 means inside the shadow cone.
-			double d = sun_radius - sun_minus_parent_radius*quot
-			- std::sqrt( (1.0-sun_minus_parent_radius/sqrt(parent_Rq))
-			* (Rq-pos_times_parent_pos*quot) );
-			if (d >= radius)
+
+			// Compute d = distance from satellite center to border of inner shadow.
+			// d>0 means inside the shadow cone.
+			double d = sun_radius - sun_minus_parent_radius*quot - std::sqrt((1.-sun_minus_parent_radius/sqrt(parent_Rq)) * (planetRq-pos_times_parent_pos*quot));
+			if (d>=radius)
 			{
 				// The satellite is totally inside the inner shadow.
-				F *= 1e-9;
+				shadowFactor = 1e-9;
 			}
-			else if (d > -radius)
+			else if (d>-radius)
 			{
 				// The satellite is partly inside the inner shadow,
 				// compute a fantasy value for the magnitude:
 				d /= radius;
-				F *= (0.5 - (std::asin(d)+d*std::sqrt(1.0-d*d))/M_PI);
+				shadowFactor = (0.5 - (std::asin(d)+d*std::sqrt(1.0-d*d))/M_PI);
 			}
 		}
 	}
 
-	const double rval = -26.73 - 2.5 * std::log10(F);
-	//qDebug() << "Planet(" << getEnglishName()
-	//         << ")::getVMagnitude(" << obsPos << "): "
-	//         << "phase: " << phase
-	//         << ",F: " << F
-	//         << ",rval: " << rval;
-	return rval;
+	// Use empirical formulae for main planets when seen from earth
+	// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
+	if (nav->getCurrentLocation().planetName=="Earth")
+	{
+		phase*=180./M_PI;
+		const double d = 5. * log10(sqrt(observerPlanetRq*planetRq));
+		double f1 = phase/100.;
+
+		if (englishName=="Mercury")
+		{
+			if ( phase > 150. ) f1 = 1.5;
+			return -0.36 + d + 3.8*f1 - 2.73*f1*f1 + 2*f1*f1*f1;
+		}
+		if (englishName=="Venus")
+			return -4.29 + d + 0.09*f1 + 2.39*f1*f1 - 0.65*f1*f1*f1;
+		if (englishName=="Mars")
+			return -1.52 + d + 0.016*phase;
+		if (englishName=="Jupiter")
+			return -9.25 + d + 0.005*phase;
+		if (englishName=="Saturn")
+		{
+			// TODO re-add rings computation
+			// double rings = -2.6*sinx + 1.25*sinx*sinx;
+			return -8.88 + d + 0.044*phase;// + rings;
+		}
+
+		if (englishName=="Uranus")
+			return -7.19 + d + 0.0028*phase;
+		if (englishName=="Neptune")
+			return -6.87 + d;
+		if (englishName=="Pluto")
+			return -1.01 + d + 0.041*phase;
+
+		phase/=180./M_PI;
+	}
+
+	// This formula seems to give wrong results
+	const double p = (1.0 - phase/M_PI) * cos_chi + std::sqrt(1.0 - cos_chi*cos_chi) / M_PI;
+	double F = 2.0 * albedo * radius * radius * p / (3.0*observerPlanetRq*planetRq) * shadowFactor;
+	return -26.73 - 2.5 * std::log10(F);
 }
 
 double Planet::getAngularSize(const StelCore* core) const
