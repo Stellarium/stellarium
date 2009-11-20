@@ -159,7 +159,7 @@ public:
 	void computeTransMatrix(double date);
 
 	// Get the phase angle for an observer at pos obsPos in the heliocentric coordinate (in AU)
-	double getPhase(Vec3d obsPos) const;
+	double getPhase(const Vec3d& obsPos) const;
 	// Get the angular size of the spheroid of the planet (i.e. without the rings)
 	double getSpheroidAngularSize(const StelCore* core) const;
 
