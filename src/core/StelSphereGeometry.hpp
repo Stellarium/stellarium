@@ -300,6 +300,10 @@ public:
 
 	////////////////////////////////////////////////////////////////////
 	// Methods specific to SphericalCap
+
+	//! Return the radiusof the cap  in radian
+	double getRadius() const {return std::acos(d);}
+
 	//! Returns whether a HalfSpace (like a SphericalCap with d=0) intersects with this SphericalCap.
 	//! @param hn0 the x direction of the halfspace.
 	//! @param hn1 the y direction of the halfspace.
@@ -322,6 +326,18 @@ public:
 
 	//! Deserialize the region. This method must allow as fast as possible deserialization.
 	static SphericalRegionP deserialize(QDataStream& in);
+
+	//! Return the relative overlap between the areas of the 2 caps, i.e:
+	//! min(intersectionArea/c1.area, intersectionArea/c2.area)
+	static double relativeAreaOverlap(const SphericalCap& c1, const SphericalCap& c2);
+
+	//! Return the relative overlap between the diameter of the 2 caps, i.e:
+	//! min(intersectionDistance/c1.diameter, intersectionDistance/c2.diameter)
+	static double relativeDiameterOverlap(const SphericalCap& c1, const SphericalCap& c2);
+
+	//! Compute the intersection of 2 halfspaces on the sphere (usually on 2 points) and return it in p1 and p2.
+	//! If the 2 SphericalCap don't intersect or intersect only at 1 point, false is returned and p1 and p2 are undefined.
+	static bool intersectionPoints(const SphericalCap& h1, const SphericalCap& h2, Vec3d& p1, Vec3d& p2);
 
 	//! The direction unit vector. Only if d==0, this vector doesn't need to be unit.
 	Vec3d n;
@@ -494,7 +510,7 @@ public:
 	//! Constructor from one contour.
 	SphericalPolygon(const QVector<Vec3d>& contour) : octahedronPolygon(contour) {;}
 	SphericalPolygon(const OctahedronPolygon& octContour) : octahedronPolygon(octContour) {;}
-	SphericalPolygon(const QVector<OctahedronPolygon>& octContours) : octahedronPolygon(octContours) {;}
+	SphericalPolygon(const QList<OctahedronPolygon>& octContours) : octahedronPolygon(octContours) {;}
 
 	virtual SphericalRegionType getType() const {return SphericalRegion::Polygon;}
 	virtual OctahedronPolygon getOctahedronPolygon() const {return octahedronPolygon;}
@@ -548,7 +564,7 @@ public:
 	static SphericalRegionP deserialize(QDataStream& in);
 
 	//! Create a new SphericalRegionP which is the union of all the passed ones.
-	static SphericalRegionP multiUnion(const QVector<SphericalRegionP>& regions);
+	static SphericalRegionP multiUnion(const QList<SphericalRegionP>& regions);
 
 private:
 	OctahedronPolygon octahedronPolygon;
@@ -765,10 +781,6 @@ protected:
 	QVector<Vec2f> textureCoords;
 };
 
-
-//! Compute the intersection of 2 halfspaces on the sphere (usually on 2 points) and return it in p1 and p2.
-//! If the 2 SphericalCap don't interesect or intersect only at 1 point, false is returned and p1 and p2 are undefined
-bool planeIntersect2(const SphericalCap& h1, const SphericalCap& h2, Vec3d& p1, Vec3d& p2);
 
 //! Compute the intersection of 2 great circles segments.
 //! @param ok is set to false if no intersection was found.

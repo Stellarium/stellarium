@@ -1,22 +1,22 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
- 
+
 #include <set>
 #include <QSettings>
 #include <QDebug>
@@ -38,7 +38,7 @@
 #include "StelStyle.hpp"
 #include "StelPainter.hpp"
 
-//! @class SkyGrid 
+//! @class SkyGrid
 //! Class which manages a grid to display in the sky.
 //! TODO needs support for DMS/DMS labelling, not only HMS/DMS
 class SkyGrid
@@ -46,7 +46,7 @@ class SkyGrid
 public:
 	// Create and precompute positions of a SkyGrid
 	SkyGrid(StelCore::FrameType frame);
-    virtual ~SkyGrid();
+	virtual ~SkyGrid();
 	void draw(const StelCore* prj) const;
 	void setFontSize(double newFontSize);
 	void setColor(const Vec3f& c) {color = c;}
@@ -63,7 +63,7 @@ private:
 };
 
 
-//! @class SkyLine 
+//! @class SkyLine
 //! Class which manages a line to display around the sky like the ecliptic line.
 class SkyLine
 {
@@ -76,7 +76,7 @@ public:
 	};
 	// Create and precompute positions of a SkyGrid
 	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR);
-    virtual ~SkyLine();
+	virtual ~SkyLine();
 	void draw(StelCore* core) const;
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() {return color;}
@@ -117,7 +117,7 @@ static const double DEGREE_MAS = 1000.*60.*60.;
 static const double STEP_SIZES_DMS[] = {0.05, 0.2, 1., 5., 10., 60., 300., 600., 1200., 3600., 3600.*5., 3600.*10.};
 static const double STEP_SIZES_HMS[] = {0.05, 0.2, 1.5, 7.5, 15., 15.*5., 15.*10., 15.*60., 15.*60.*5., 15.*60*10., 15.*60*60};
 
-//! Return the angular grid step in degree which best fits the given scale 
+//! Return the angular grid step in degree which best fits the given scale
 static double getClosestResolutionDMS(double pixelPerRad)
 {
 	double minResolution = 80.;
@@ -130,7 +130,7 @@ static double getClosestResolutionDMS(double pixelPerRad)
 	return 10.;
 }
 
-//! Return the angular grid step in degree which best fits the given scale 
+//! Return the angular grid step in degree which best fits the given scale
 static double getClosestResolutionHMS(double pixelPerRad)
 {
 	double minResolution = 80.;
@@ -162,7 +162,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	GLfloat tmpColor[4];
 	glGetFloatv(GL_CURRENT_COLOR, tmpColor);
 	d->sPainter->setColor(d->textColor[0], d->textColor[1], d->textColor[2], d->textColor[3]);
-	
+
 	QString text;
 	if (d->text.isEmpty())
 	{
@@ -179,7 +179,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				raAngle=+2.*M_PI;
 			if (lon<0)
 				lon=+2.*M_PI;
-			
+
 			if (std::fabs(2.*M_PI-lon)<0.01)
 			{
 				// We are at meridian 0
@@ -211,7 +211,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	}
 	else
 		text = d->text;
-	
+
 	double angleDeg = std::atan2(-direc[1], -direc[0])*180./M_PI;
 	float xshift=6.f;
 	if (angleDeg>90. || angleDeg<-90.)
@@ -219,7 +219,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 		angleDeg+=180.;
 		xshift=-d->sPainter->getFontMetrics().width(text)-6.f;
 	}
-	
+
 	d->sPainter->drawText(screenPos[0], screenPos[1], text, angleDeg, xshift, 3);
 	d->sPainter->setColor(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]);
 }
@@ -245,7 +245,7 @@ void SkyGrid::draw(const StelCore* core) const
 	prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2+1, centerV);
 	double lon2, lat2;
 	StelUtils::rectToSphe(&lon2, &lat2, centerV);
-	
+
 	const double gridStepParallelRad = M_PI/180.*getClosestResolutionDMS(prj->getPixelPerRadAtCenter());
 	double gridStepMeridianRad;
 	if (northPoleInViewport || southPoleInViewport)
@@ -255,10 +255,10 @@ void SkyGrid::draw(const StelCore* core) const
 		const double closetResLon = (frameType==StelCore::FrameAltAz) ? getClosestResolutionDMS(prj->getPixelPerRadAtCenter()*std::cos(lat2)) : getClosestResolutionHMS(prj->getPixelPerRadAtCenter()*std::cos(lat2));
 		gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : closetResLon);
 	}
-	
+
 	// Get the bounding halfspace
 	const SphericalCap viewPortSphericalCap = prj->getBoundingSphericalCap();
-	
+
 	// Compute the first grid starting point. This point is close to the center of the screen
 	// and lays at the intersection of a meridien and a parallel
 	lon2 = gridStepMeridianRad*((int)(lon2/gridStepMeridianRad+0.5));
@@ -267,18 +267,18 @@ void SkyGrid::draw(const StelCore* core) const
 	StelUtils::spheToRect(lon2, lat2, firstPoint);
 	firstPoint.normalize();
 
- 	// Q_ASSERT(viewPortSphericalCap.contains(firstPoint));
-	
-	// Initialize a painter and set openGL state	
+	// Q_ASSERT(viewPortSphericalCap.contains(firstPoint));
+
+	// Initialize a painter and set openGL state
 	StelPainter sPainter(prj);
 	glEnable(GL_LINE_SMOOTH);
 	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);	
+	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	Vec4f textColor(color[0], color[1], color[2], 0);
 	if (StelApp::getInstance().getVisionModeNight())
 	{
-		// instead of a filter which just zeros G&B, set the red 
+		// instead of a filter which just zeros G&B, set the red
 		// value to the mean brightness of RGB.
 		float red = (color[0] + color[1] + color[2]) / 3.0;
 		textColor[0] = red;
@@ -292,12 +292,12 @@ void SkyGrid::draw(const StelCore* core) const
 
 	textColor*=2;
 	textColor[3]=fader.getInterstate();
-	
+
 	sPainter.setFont(font);
 	ViewportEdgeIntersectCallbackData userData(&sPainter);
 	userData.textColor = textColor;
 	userData.frameType = frameType;
-	
+
 	/////////////////////////////////////////////////
 	// Draw all the meridians (great circles)
 	SphericalCap meridianSphericalCap(Vec3d(1,0,0), 0);
@@ -310,10 +310,10 @@ void SkyGrid::draw(const StelCore* core) const
 	{
 		StelUtils::rectToSphe(&lon2, &lat2, fpt);
 		userData.raAngle = lon2;
-		
+
 		meridianSphericalCap.n = fpt^Vec3d(0,0,1);
 		meridianSphericalCap.n.normalize();
-		if (!planeIntersect2(viewPortSphericalCap, meridianSphericalCap, p1, p2))
+		if (!SphericalCap::intersectionPoints(viewPortSphericalCap, meridianSphericalCap, p1, p2))
 		{
 			if (viewPortSphericalCap.d<meridianSphericalCap.d && viewPortSphericalCap.contains(meridianSphericalCap.n))
 			{
@@ -332,19 +332,19 @@ void SkyGrid::draw(const StelCore* core) const
 			else
 				break;
 		}
-		
+
 		Vec3d middlePoint = p1+p2;
 		middlePoint.normalize();
 		if (!viewPortSphericalCap.contains(middlePoint))
 			middlePoint*=-1.;
-				
+
 		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
 		sPainter.drawGreatCircleArc(p1, middlePoint, viewportEdgeIntersectCallback, &userData);
 		sPainter.drawGreatCircleArc(p2, middlePoint, viewportEdgeIntersectCallback, &userData);
-		
+
 		fpt.transfo4d(rotLon);
 	}
-	
+
 	if (i!=maxNbIter)
 	{
 		rotLon = Mat4d::zrotation(-gridStepMeridianRad);
@@ -354,24 +354,24 @@ void SkyGrid::draw(const StelCore* core) const
 		{
 			StelUtils::rectToSphe(&lon2, &lat2, fpt);
 			userData.raAngle = lon2;
-			
+
 			meridianSphericalCap.n = fpt^Vec3d(0,0,1);
 			meridianSphericalCap.n.normalize();
-			if (!planeIntersect2(viewPortSphericalCap, meridianSphericalCap, p1, p2))
+			if (!SphericalCap::intersectionPoints(viewPortSphericalCap, meridianSphericalCap, p1, p2))
 				break;
-			
+
 			Vec3d middlePoint = p1+p2;
 			middlePoint.normalize();
 			if (!viewPortSphericalCap.contains(middlePoint))
 				middlePoint*=-1;
-			
+
 			sPainter.drawGreatCircleArc(p1, middlePoint, viewportEdgeIntersectCallback, &userData);
 			sPainter.drawGreatCircleArc(p2, middlePoint, viewportEdgeIntersectCallback, &userData);
-			
+
 			fpt.transfo4d(rotLon);
 		}
 	}
-	
+
 	/////////////////////////////////////////////////
 	// Draw all the parallels (small circles)
 	SphericalCap parallelSphericalCap(Vec3d(0,0,1), 0);
@@ -382,13 +382,13 @@ void SkyGrid::draw(const StelCore* core) const
 	{
 		StelUtils::rectToSphe(&lon2, &lat2, fpt);
 		userData.text = StelUtils::radToDmsStrAdapt(lat2);
-		
+
 		parallelSphericalCap.d = fpt[2];
 		if (parallelSphericalCap.d>0.9999999)
 			break;
-		
+
 		const Vec3d rotCenter(0,0,parallelSphericalCap.d);
-		if (!planeIntersect2(viewPortSphericalCap, parallelSphericalCap, p1, p2))
+		if (!SphericalCap::intersectionPoints(viewPortSphericalCap, parallelSphericalCap, p1, p2))
 		{
 			if ((viewPortSphericalCap.d<parallelSphericalCap.d && viewPortSphericalCap.contains(parallelSphericalCap.n))
 				|| (viewPortSphericalCap.d<-parallelSphericalCap.d && viewPortSphericalCap.contains(-parallelSphericalCap.n)))
@@ -408,7 +408,7 @@ void SkyGrid::draw(const StelCore* core) const
 			else
 				break;
 		}
-		
+
 		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
 		Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
 		middlePoint.normalize();
@@ -420,13 +420,13 @@ void SkyGrid::draw(const StelCore* core) const
 			middlePoint*=-1.;
 			middlePoint+=rotCenter;
 		}
-				
+
 		sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
 		sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
-		
+
 		fpt.transfo4d(rotLon);
 	}
-	
+
 	if (i!=maxNbIter)
 	{
 		rotLon = Mat4d::rotation(firstPoint^Vec3d(0,0,1), -gridStepParallelRad);
@@ -436,10 +436,10 @@ void SkyGrid::draw(const StelCore* core) const
 		{
 			StelUtils::rectToSphe(&lon2, &lat2, fpt);
 			userData.text = StelUtils::radToDmsStrAdapt(lat2);
-			
+
 			parallelSphericalCap.d = fpt[2];
 			const Vec3d rotCenter(0,0,parallelSphericalCap.d);
-			if (!planeIntersect2(viewPortSphericalCap, parallelSphericalCap, p1, p2))
+			if (!SphericalCap::intersectionPoints(viewPortSphericalCap, parallelSphericalCap, p1, p2))
 			{
 				if ((viewPortSphericalCap.d<parallelSphericalCap.d && viewPortSphericalCap.contains(parallelSphericalCap.n))
 					 || (viewPortSphericalCap.d<-parallelSphericalCap.d && viewPortSphericalCap.contains(-parallelSphericalCap.n)))
@@ -459,7 +459,7 @@ void SkyGrid::draw(const StelCore* core) const
 				else
 					break;
 			}
-		
+
 			// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
 			Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
 			middlePoint.normalize();
@@ -471,10 +471,10 @@ void SkyGrid::draw(const StelCore* core) const
 				middlePoint*=-1.;
 				middlePoint+=rotCenter;
 			}
-				
+
 			sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
 			sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
-		
+
 			fpt.transfo4d(rotLon);
 		}
 	}
@@ -516,29 +516,29 @@ void SkyLine::draw(StelCore *core) const
 {
 	if (!fader.getInterstate())
 		return;
-	
+
 	StelProjectorP prj = core->getProjection(frameType);
-	
+
 	// Get the bounding halfspace
 	const SphericalCap viewPortSphericalCap = prj->getBoundingSphericalCap();
-	
-	// Initialize a painter and set openGL state	
+
+	// Initialize a painter and set openGL state
 	StelPainter sPainter(prj);
 	sPainter.setColor(color[0], color[1], color[2], fader.getInterstate());
 	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);	
+	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	glEnable(GL_LINE_SMOOTH);
 
 	Vec4f textColor(color[0], color[1], color[2], 0);
 	textColor*=2;
 	textColor[3]=fader.getInterstate();
-	
+
 	ViewportEdgeIntersectCallbackData userData(&sPainter);
 	sPainter.setFont(font);
 	userData.textColor = textColor;
 	userData.text = label;
-	
+
 	/////////////////////////////////////////////////
 	// Draw the line
 	SphericalCap meridianSphericalCap(Vec3d(0,0,1), 0);
@@ -547,12 +547,12 @@ void SkyLine::draw(StelCore *core) const
 	{
 		meridianSphericalCap.n.set(0,1,0);
 	}
-		
+
 	Vec3d p1, p2;
-	if (!planeIntersect2(viewPortSphericalCap, meridianSphericalCap, p1, p2))
+	if (!SphericalCap::intersectionPoints(viewPortSphericalCap, meridianSphericalCap, p1, p2))
 	{
 		if ((viewPortSphericalCap.d<meridianSphericalCap.d && viewPortSphericalCap.contains(meridianSphericalCap.n))
-		    || (viewPortSphericalCap.d<-meridianSphericalCap.d && viewPortSphericalCap.contains(-meridianSphericalCap.n)))
+			|| (viewPortSphericalCap.d<-meridianSphericalCap.d && viewPortSphericalCap.contains(-meridianSphericalCap.n)))
 		{
 			// The meridian is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
 			const Mat4d& rotLon120 = Mat4d::rotation(meridianSphericalCap.n, 120.*M_PI/180.);
@@ -568,12 +568,12 @@ void SkyLine::draw(StelCore *core) const
 		else
 			return;
 	}
-	
+
 	Vec3d middlePoint = p1+p2;
 	middlePoint.normalize();
 	if (!viewPortSphericalCap.contains(middlePoint))
 		middlePoint*=-1.;
-			
+
 	// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
 	sPainter.drawGreatCircleArc(p1, middlePoint, viewportEdgeIntersectCallback, &userData);
 	sPainter.drawGreatCircleArc(p2, middlePoint, viewportEdgeIntersectCallback, &userData);
@@ -626,8 +626,8 @@ void GridLinesMgr::init()
 	setFlagEquatorLine(conf->value("viewing/flag_equator_line").toBool());
 	setFlagEclipticLine(conf->value("viewing/flag_ecliptic_line").toBool());
 	setFlagMeridianLine(conf->value("viewing/flag_meridian_line").toBool());
-}	
-	
+}
+
 void GridLinesMgr::update(double deltaTime)
 {
 	// Update faders
@@ -659,7 +659,7 @@ void GridLinesMgr::setStelStyle(const StelStyle& style)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	QString section = style.confSectionName;
-	
+
 	// Load colors from config file
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setColorEquatorGrid(StelUtils::strToVec3f(conf->value(section+"/equatorial_color", defaultColor).toString()));
