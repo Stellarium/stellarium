@@ -380,7 +380,7 @@ bool SphericalCap::clipGreatCircle(Vec3d& v1, Vec3d& v2) const
 			Vec3d v = v1^v2;
 			v.normalize();
 			Vec3d vv;
-			planeIntersect2(*this, SphericalCap(v, 0), v, vv);
+			SphericalCap::intersectionPoints(*this, SphericalCap(v, 0), v, vv);
 			const float cosDist = v1*v2;
 			v2 = (v1*v >= cosDist && v2*v >= cosDist) ? v : vv;
 			return true;
@@ -394,7 +394,7 @@ bool SphericalCap::clipGreatCircle(Vec3d& v1, Vec3d& v2) const
 			Vec3d v = v1^v2;
 			v.normalize();
 			Vec3d vv;
-			planeIntersect2(*this, SphericalCap(v, 0), v, vv);
+			SphericalCap::intersectionPoints(*this, SphericalCap(v, 0), v, vv);
 			const float cosDist = v1*v2;
 			v1 = (v1*v >= cosDist && v2*v >= cosDist) ? v : vv;
 			return true;
@@ -405,7 +405,7 @@ bool SphericalCap::clipGreatCircle(Vec3d& v1, Vec3d& v2) const
 			Vec3d v = v1^v2;
 			v.normalize();
 			Vec3d vv;
-			if (!planeIntersect2(*this, SphericalCap(v, 0), v, vv))
+			if (!SphericalCap::intersectionPoints(*this, SphericalCap(v, 0), v, vv))
 				return false;
 			const float cosDist = v1*v2;
 			if (v1*v >= cosDist && v2*v >= cosDist && v1*vv >= cosDist && v2*vv >= cosDist)
@@ -419,6 +419,134 @@ bool SphericalCap::clipGreatCircle(Vec3d& v1, Vec3d& v2) const
 	}
 	Q_ASSERT(0);
 	return false;
+}
+
+//! Compute the intersection of the circles defined by the 2 caps on the sphere (usually on 2 points) and return it in p1 and p2.
+//! If the 2 SphericalCaps don't interesect or intersect only at 1 point, false is returned and p1 and p2 are undefined.
+bool SphericalCap::intersectionPoints(const SphericalCap& h1, const SphericalCap& h2, Vec3d& p1, Vec3d& p2)
+{
+	if (!h1.intersects(h2))
+		return false;
+	const Vec3d& n1 = h1.n;
+	const Vec3d& n2 = h2.n;
+	const double& d1 = -h1.d;
+	const double& d2 = -h2.d;
+	const double& a1 = n1[0];
+	const double& b1 = n1[1];
+	const double& c1 = n1[2];
+	const double& a2 = n2[0];
+	const double& b2 = n2[1];
+	const double& c2 = n2[2];
+
+	Q_ASSERT(fabs(n1.lengthSquared()-1.)<0.000001);
+	Q_ASSERT(fabs(n2.lengthSquared()-1.)<0.000001);
+
+	// Compute the parametric equation of the line at the intersection of the 2 planes
+	Vec3d u = n1^n2;
+	if (u[0]==0. && u[1]==0. && u[2]==0.)
+	{
+		// The planes are parallel
+		return false;
+	}
+	u.normalize();
+
+	// u gives the direction of the line, still need to find a suitable start point p0
+	// Find the axis on which the line varies the fastest, and solve the system for value == 0 on this axis
+	int maxI = (fabs(u[0])>=fabs(u[1])) ? (fabs(u[0])>=fabs(u[2]) ? 0 : 2) : (fabs(u[2])>fabs(u[1]) ? 2 : 1);
+	Vec3d p0(0);
+	switch (maxI)
+	{
+		case 0:
+		{
+			// Intersection of the line with the plane x=0
+			const double denom = b1*c2-b2*c1;
+			p0[1] = (d2*c1-d1*c2)/denom;
+			p0[2] = (d1*b2-d2*b1)/denom;
+			break;
+		}
+		case 1:
+		{
+			// Intersection of the line with the plane y=0
+			const double denom = a1*c2-a2*c1;
+			p0[0]=(c1*d2-c2*d1)/denom;
+			p0[2]=(a2*d1-d2*a1)/denom;
+			break;
+		}
+		case 2:
+		{
+			// Intersection of the line with the plane z=0
+			const double denom = a1*b2-a2*b1;
+			p0[0]=(b1*d2-b2*d1)/denom;
+			p0[1]=(a2*d1-a1*d2)/denom;
+			break;
+		}
+	}
+
+	// The intersection line is now fully defined by the parametric equation p = p0 + u*t
+
+	// The points are on the unit sphere x^2+y^2+z^2=1, replace x, y and z by the parametric equation to get something of the form at^2+b*t+c=0
+	// const double a = 1.;
+	const double b = p0*u*2.;
+	const double c = p0.lengthSquared()-1.;
+
+	// If discriminant <=0, zero or 1 real solution
+	const double D = b*b-4.*c;
+	if (D<=0.)
+		return false;
+
+	const double sqrtD = std::sqrt(D);
+	const double t1 = (-b+sqrtD)/2.;
+	const double t2 = (-b-sqrtD)/2.;
+	p1 = p0+u*t1;
+	p2 = p0+u*t2;
+
+	Q_ASSERT(fabs(p1.lengthSquared()-1.)<0.000001);
+	Q_ASSERT(fabs(p2.lengthSquared()-1.)<0.000001);
+
+	return true;
+}
+
+
+double SphericalCap::relativeAreaOverlap(const SphericalCap& c1, const SphericalCap& c2)
+{
+	// TODO, this is wrong for many reasons
+	Q_ASSERT(0);
+	if (!c1.intersects(c2))
+		return 0.;
+	if (c1.contains(c2))
+		return c2.getArea()/c1.getArea();
+	if (c2.contains(c1))
+		return c1.getArea()/c2.getArea();
+	Vec3d p1, p2;
+	double area1=c1.getArea();
+	double area2=c2.getArea();
+	bool ok = SphericalCap::intersectionPoints(c1, c2, p1, p2);
+	Q_ASSERT(ok);
+	Vec3d c(c1.n);
+	c*=c1.d;
+	const double a1 = std::acos((p1-c)*(p2-c)/(1.-fabs(c1.d)))/(2.*M_PI)*area1 - OctahedronPolygon::sphericalTriangleArea(p1,p2,c1.n);
+	c=c2.n;
+	c*=c2.d;
+	const double a2 = std::acos((p1-c)*(p2-c)/(1.-fabs(c2.d)))/(2.*M_PI)*area2 - OctahedronPolygon::sphericalTriangleArea(p2,p1,c2.n);
+	const double overlapArea = a1+a2;
+	return qMin(overlapArea/area1, overlapArea/area2);
+}
+
+double SphericalCap::relativeDiameterOverlap(const SphericalCap& c1, const SphericalCap& c2)
+{
+	// TODO, this is wrong for many reasons
+	if (!c1.intersects(c2))
+		return 0.;
+	if (c1.contains(c2))
+		return c2.getRadius()/c1.getRadius();
+	if (c2.contains(c1))
+		return c1.getRadius()/c2.getRadius();
+	const double r1 = c1.getRadius();
+	const double r2 = c2.getRadius();
+	const double a = c1.n.angle(c2.n);
+	const double overlapDist = (a-r1-r2)/(std::fabs(r1-r2)-r1-r2);
+	Q_ASSERT(overlapDist>=0);
+	return overlapDist*qMin(r1/r2, r2/r1);
 }
 
 QVector<Vec3d> SphericalCap::getClosedOutlineContour() const
@@ -576,9 +704,9 @@ SphericalRegionP SphericalPolygon::deserialize(QDataStream& in)
 bool SphericalPolygon::contains(const SphericalConvexPolygon& r) const {return octahedronPolygon.contains(r.getOctahedronPolygon());}
 bool SphericalPolygon::intersects(const SphericalConvexPolygon& r) const {return r.intersects(*this);}
 
-SphericalRegionP SphericalPolygon::multiUnion(const QVector<SphericalRegionP>& regions)
+SphericalRegionP SphericalPolygon::multiUnion(const QList<SphericalRegionP>& regions)
 {
-	QVector<OctahedronPolygon> l;
+	QList<OctahedronPolygon> l;
 	foreach (const SphericalRegionP& r, regions)
 		l.append(r->getOctahedronPolygon());
 	return SphericalRegionP(new SphericalPolygon(l));
@@ -838,90 +966,7 @@ QVariantMap SphericalTexturedPolygon::toQVariant() const
 ///////////////////////////////////////////////////////////////////////////////
 // Utility methods
 ///////////////////////////////////////////////////////////////////////////////
-//! Compute the intersection of the planes defined by the 2 halfspaces on the sphere (usually on 2 points) and return it in p1 and p2.
-//! If the 2 SphericalCaps don't interesect or intersect only at 1 point, false is returned and p1 and p2 are undefined
-bool planeIntersect2(const SphericalCap& h1, const SphericalCap& h2, Vec3d& p1, Vec3d& p2)
-{
-	if (!h1.intersects(h2))
-		return false;
-	const Vec3d& n1 = h1.n;
-	const Vec3d& n2 = h2.n;
-	const double& d1 = -h1.d;
-	const double& d2 = -h2.d;
-	const double& a1 = n1[0];
-	const double& b1 = n1[1];
-	const double& c1 = n1[2];
-	const double& a2 = n2[0];
-	const double& b2 = n2[1];
-	const double& c2 = n2[2];
 
-	Q_ASSERT(fabs(n1.lengthSquared()-1.)<0.000001);
-	Q_ASSERT(fabs(n2.lengthSquared()-1.)<0.000001);
-
-	// Compute the parametric equation of the line at the intersection of the 2 planes
-	Vec3d u = n1^n2;
-	if (u[0]==0. && u[1]==0. && u[2]==0.)
-	{
-		// The planes are parallel
-		return false;
-	}
-	u.normalize();
-
-	// u gives the direction of the line, still need to find a suitable start point p0
-	// Find the axis on which the line varies the fastest, and solve the system for value == 0 on this axis
-	int maxI = (fabs(u[0])>=fabs(u[1])) ? (fabs(u[0])>=fabs(u[2]) ? 0 : 2) : (fabs(u[2])>fabs(u[1]) ? 2 : 1);
-	Vec3d p0(0);
-	switch (maxI)
-	{
-		case 0:
-		{
-			// Intersection of the line with the plane x=0
-			const double denom = b1*c2-b2*c1;
-			p0[1] = (d2*c1-d1*c2)/denom;
-			p0[2] = (d1*b2-d2*b1)/denom;
-			break;
-		}
-		case 1:
-		{
-			// Intersection of the line with the plane y=0
-			const double denom = a1*c2-a2*c1;
-			p0[0]=(c1*d2-c2*d1)/denom;
-			p0[2]=(a2*d1-d2*a1)/denom;
-			break;
-		}
-		case 2:
-		{
-			// Intersection of the line with the plane z=0
-			const double denom = a1*b2-a2*b1;
-			p0[0]=(b1*d2-b2*d1)/denom;
-			p0[1]=(a2*d1-a1*d2)/denom;
-			break;
-		}
-	}
-
-	// The intersection line is now fully defined by the parametric equation p = p0 + u*t
-
-	// The points are on the unit sphere x^2+y^2+z^2=1, replace x, y and z by the parametric equation to get something of the form at^2+b*t+c=0
-	// const double a = 1.;
-	const double b = p0*u*2.;
-	const double c = p0.lengthSquared()-1.;
-
-	// If discriminant <=0, zero or 1 real solution
-	const double D = b*b-4.*c;
-	if (D<=0.)
-		return false;
-
-	const double sqrtD = std::sqrt(D);
-	const double t1 = (-b+sqrtD)/2.;
-	const double t2 = (-b-sqrtD)/2.;
-	p1 = p0+u*t1;
-	p2 = p0+u*t2;
-
-	Q_ASSERT(fabs(p1.lengthSquared()-1.)<0.000001);
-	Q_ASSERT(fabs(p2.lengthSquared()-1.)<0.000001);
-
-	return true;
-}
 
 Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& p3, const Vec3d& p4, bool& ok)
 {

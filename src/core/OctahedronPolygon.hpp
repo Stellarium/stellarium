@@ -88,7 +88,7 @@ public:
 	OctahedronPolygon(const SubContour& subContour);
 	OctahedronPolygon(const QVector<QVector<Vec3d> >& contours);
 	OctahedronPolygon(const QVector<Vec3d>& contour);
-	OctahedronPolygon(const QVector<OctahedronPolygon>& octContours);
+	OctahedronPolygon(const QList<OctahedronPolygon>& octContours);
 
 	double getArea() const;
 
@@ -115,6 +115,14 @@ public:
 
 	static const OctahedronPolygon& getAllSkyOctahedronPolygon();
 	static const OctahedronPolygon& getEmptyOctahedronPolygon() {static OctahedronPolygon poly; return poly;}
+
+	static double sphericalTriangleArea(const Vec3d& v0, const Vec3d& v1, const Vec3d& v2)
+	{
+		const Vec3d& p1 = v0 ^ v1;
+		const Vec3d& p2 = v1 ^ v2;
+		const Vec3d& p3 = v2 ^ v0;
+		return 2.*M_PI - p1.angle(p2) - p2.angle(p3) - p3.angle(p1);
+	}
 
 	QString toJson() const;
 
