@@ -201,7 +201,7 @@ bool Meteor::update(double deltaTime)
 
 // returns true if visible
 // Assumes that we are in local frame
-bool Meteor::draw(const StelCore* core, const StelPainter& sPainter)
+bool Meteor::draw(const StelCore* core, StelPainter& sPainter)
 {
 	if (!alive)
 		return(0);

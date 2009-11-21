@@ -266,8 +266,8 @@ void StelPainter::drawViewportShape(void)
 	cosCache[slices]=cosCache[0];
 
 	/* Enable arrays */
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_FLOAT, 0, vertices);
+	enableClientStates(true);
+	setVertexPointer(3, GL_FLOAT, vertices);
 
 	radiusHigh=outerRadius-deltaRadius;
 	for (int i=0; i<=slices; i++)
@@ -279,9 +279,8 @@ void StelPainter::drawViewportShape(void)
 		vertices[i*2+1][1]=radiusHigh*cosCache[i];
 		vertices[i*2+1][2]=0.0;
 	}
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, ((slices+1)*2));
-
-	glDisableClientState(GL_VERTEX_ARRAY);
+	drawFromArray(TriangleStrip, (slices+1)*2, 0, false);
+	enableClientStates(false);
 
 	glPopMatrix();
 }
@@ -1162,7 +1161,7 @@ void StelPainter::drawGreatCircleArcs(const StelVertexArray& va) const
 	}
 }
 
-void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool textured) const
+void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool textured)
 {
 	if (va.vertex.isEmpty())
 		return;
@@ -1175,19 +1174,19 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 	{
 		Q_ASSERT(va.vertex.size()==va.texCoords.size());
 		polygonTextureCoordArray.clear();
-		GLenum mode=0;
+		DrawingMode mode = Points;
 		switch (va.primitiveType)
 		{
 			case StelVertexArray::Triangles:
 				Q_ASSERT(va.vertex.size()%3==0);
-				mode = GL_TRIANGLES;
+				mode = Triangles;
 				for (int i=0;i<va.vertex.size()/3;++i)
 					projectSphericalTriangle(va.vertex.constData()+i*3, &polygonVertexArray,
 											 va.texCoords.constData()+i*3, &polygonTextureCoordArray);
 				break;
 			case StelVertexArray::TriangleFan:
 			{
-				mode = GL_TRIANGLES;
+				mode = Triangles;
 				Vec3d ar[3];
 				Vec2f te[3];
 				ar[0]=va.vertex.at(0);
@@ -1201,36 +1200,34 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 				break;
 			}
 			case StelVertexArray::TriangleStrip:
-				mode = GL_TRIANGLES;
+				mode = Triangles;
 				Q_ASSERT(0);	// Unimplemented
 				break;
 			default:
 				Q_ASSERT(0); // Unsupported primitive yype
 		}
 		Q_ASSERT(polygonVertexArray.size()==polygonTextureCoordArray.size());
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glVertexPointer(2, GL_FLOAT, 0, polygonVertexArray.constData());
-		glTexCoordPointer(2, GL_FLOAT, 0, polygonTextureCoordArray.constData());
-		glDrawArrays(mode, 0, polygonVertexArray.size());
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		enableClientStates(true, true);
+		setVertexPointer(2, GL_FLOAT, polygonVertexArray.constData());
+		setTexCoordPointer(2, GL_FLOAT, polygonTextureCoordArray.constData());
+		drawFromArray(mode, polygonVertexArray.size(), 0, false);
+		enableClientStates(false);
 		return;
 	}
 	else
 	{
-		GLenum mode=0;
+		DrawingMode mode = Points;
 		switch (va.primitiveType)
 		{
 			case StelVertexArray::Triangles:
 				Q_ASSERT(va.vertex.size()%3==0);
-				mode = GL_TRIANGLES;
+				mode = Triangles;
 				for (int i=0;i<va.vertex.size()/3;++i)
 					projectSphericalTriangle(va.vertex.constData()+i*3, &polygonVertexArray, NULL, NULL);
 				break;
 			case StelVertexArray::TriangleFan:
 			{
-				mode = GL_TRIANGLES;
+				mode = Triangles;
 				Vec3d ar[3];
 				ar[0]=va.vertex.at(0);
 				for (int i=1;i<va.vertex.size()-1;++i)
@@ -1241,22 +1238,22 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 				break;
 			}
 			case StelVertexArray::TriangleStrip:
-				mode = GL_TRIANGLE_STRIP;
+				mode = TriangleStrip;
 				Q_ASSERT(0);	// Unimplemented
 				break;
 			default:
 				Q_ASSERT(0); // Unsupported primitive yype
 		}
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glVertexPointer(2, GL_FLOAT, 0, polygonVertexArray.constData());
-		glDrawArrays(mode, 0, polygonVertexArray.size());
-		glDisableClientState(GL_VERTEX_ARRAY);
+		enableClientStates(true);
+		setVertexPointer(2, GL_FLOAT, polygonVertexArray.constData());
+		drawFromArray(mode, polygonVertexArray.size(), 0, false);
+		enableClientStates(false);
 		return;
 	}
 }
 
 // Draw the given SphericalPolygon.
-void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode) const
+void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode)
 {
 	switch (drawMode)
 	{
@@ -1279,7 +1276,7 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 /*************************************************************************
  draw a simple circle, 2d viewport coordinates in pixel
 *************************************************************************/
-void StelPainter::drawCircle(double x,double y,double r) const
+void StelPainter::drawCircle(double x,double y,double r)
 {
 	if (r <= 1.0)
 		return;
@@ -1304,14 +1301,14 @@ void StelPainter::drawCircle(double x,double y,double r) const
 		dy = dx*sp+dy*cp;
 		dx = r;
 	}
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_FLOAT, 0, circleVertexArray.data());
-	glDrawArrays(GL_LINE_LOOP, 0, 180);
-	glDisableClientState(GL_VERTEX_ARRAY);
+	enableClientStates(true);
+	setVertexPointer(3, GL_FLOAT, circleVertexArray.data());
+	drawFromArray(LineLoop, 180, 0, false);
+	enableClientStates(false);
 }
 
 
-void StelPainter::drawSprite2dMode(double x, double y, float radius) const
+void StelPainter::drawSprite2dMode(double x, double y, float radius)
 {
 	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};
 	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
@@ -1319,23 +1316,21 @@ void StelPainter::drawSprite2dMode(double x, double y, float radius) const
 	vertexData[2]=x+radius; vertexData[3]=y-radius;
 	vertexData[4]=x-radius; vertexData[5]=y+radius;
 	vertexData[6]=x+radius; vertexData[7]=y+radius;
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(2, GL_FLOAT, 0, vertexData);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glTexCoordPointer(2, GL_FLOAT, 0, texCoordData);
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	enableClientStates(true, true);
+	setVertexPointer(2, GL_FLOAT, vertexData);
+	setTexCoordPointer(2, GL_FLOAT, texCoordData);
+	drawFromArray(TriangleStrip, 4, 0, false);
+	enableClientStates(false);
 }
 
-void StelPainter::drawSprite2dMode(const Vec3d& v, float radius) const
+void StelPainter::drawSprite2dMode(const Vec3d& v, float radius)
 {
 	Vec3d win;
 	prj->project(v, win);
 	drawSprite2dMode(win[0], win[1], radius);
 }
 
-void StelPainter::drawRect2d(float x, float y, float width, float height) const
+void StelPainter::drawRect2d(float x, float y, float width, float height)
 {
 	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};
 	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
@@ -1343,19 +1338,18 @@ void StelPainter::drawRect2d(float x, float y, float width, float height) const
 	vertexData[2]=x+width; vertexData[3]=y;
 	vertexData[4]=x; vertexData[5]=y+height;
 	vertexData[6]=x+width; vertexData[7]=y+height;
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(2, GL_FLOAT, 0, vertexData);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glTexCoordPointer(2, GL_FLOAT, 0, texCoordData);
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	enableClientStates(true, true);
+	setVertexPointer(2, GL_FLOAT, vertexData);
+	setTexCoordPointer(2, GL_FLOAT, texCoordData);
+	drawFromArray(TriangleStrip, 4, 0, false);
+	enableClientStates(false);
 }
 
 /*************************************************************************
  Same function but with a rotation angle
 *************************************************************************/
-void StelPainter::drawSprite2dMode(double x, double y, float radius, float rotation) const
+void StelPainter::drawSprite2dMode(double x, double y, float radius, float rotation)
 {
 	glPushMatrix();
 	glTranslatef(x, y, 0.0);
@@ -1366,45 +1360,55 @@ void StelPainter::drawSprite2dMode(double x, double y, float radius, float rotat
 	vertexData[2]=radius; vertexData[3]=-radius;
 	vertexData[4]=-radius; vertexData[5]=radius;
 	vertexData[6]=radius; vertexData[7]=radius;
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(2, GL_FLOAT, 0, vertexData);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glTexCoordPointer(2, GL_FLOAT, 0, texCoordData);
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+//	glEnableClientState(GL_VERTEX_ARRAY);
+//	glVertexPointer(2, GL_FLOAT, 0, vertexData);
+//	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+//	glTexCoordPointer(2, GL_FLOAT, 0, texCoordData);
+//	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+//	glDisableClientState(GL_VERTEX_ARRAY);
+//	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	enableClientStates(true, true);
+	setVertexPointer(2, GL_FLOAT, vertexData);
+	setTexCoordPointer(2, GL_FLOAT, texCoordData);
+	drawFromArray(TriangleStrip, 4, 0, false);
+	enableClientStates(false);
+
 	glPopMatrix();
+
 }
 
 /*************************************************************************
  Draw a GL_POINT at the given position
 *************************************************************************/
-void StelPainter::drawPoint2d(double x, double y) const
+void StelPainter::drawPoint2d(double x, double y)
 {
 	static float vertexData[] = {0.,0.};
 	vertexData[0]=x;
 	vertexData[1]=y;
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(2, GL_FLOAT, 0, vertexData);
-	glDrawArrays(GL_POINTS, 0, 1);
-	glDisableClientState(GL_VERTEX_ARRAY);
+
+	enableClientStates(true);
+	setVertexPointer(2, GL_FLOAT, vertexData);
+	drawFromArray(Points, 1, 0, false);
+	enableClientStates(false);
 }
 
 
 /*************************************************************************
  Draw a line between the 2 points.
 *************************************************************************/
-void StelPainter::drawLine2d(double x1, double y1, double x2, double y2) const
+void StelPainter::drawLine2d(double x1, double y1, double x2, double y2)
 {
 	static float vertexData[] = {0.,0.,0.,0.};
 	vertexData[0]=x1;
 	vertexData[1]=y1;
 	vertexData[2]=x2;
 	vertexData[3]=y2;
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(2, GL_FLOAT, 0, vertexData);
-	glDrawArrays(GL_LINES, 0, 2);
-	glDisableClientState(GL_VERTEX_ARRAY);
+
+	enableClientStates(true);
+	setVertexPointer(2, GL_FLOAT, vertexData);
+	drawFromArray(Lines, 2, 0, false);
+	enableClientStates(false);
 }
 
 ///////////////////////////////////////////////////////////////////////////

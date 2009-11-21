@@ -89,10 +89,10 @@ public:
 	//! @param region The SphericalRegion to draw.
 	//! @param drawMode define whether to draw the outline or the fill or both.
 	//! @param boundaryColor use this color for drawing the boundary only if the drawMode is SphericalPolygonDrawModeFillAndBoundary.
-	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill) const;
+	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill);
 
 	void drawGreatCircleArcs(const StelVertexArray& va) const;
-	void drawSphericalTriangles(const StelVertexArray& va, bool textured) const;
+	void drawSphericalTriangles(const StelVertexArray& va, bool textured);
 
 	//! Draw a small circle arc between points start and stop with rotation point in rotCenter.
 	//! The angle between start and stop must be < 180 deg.
@@ -110,15 +110,15 @@ public:
 	void drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=NULL, void* userData=NULL) const {drawSmallCircleArc(start, stop, Vec3d(0), viewportEdgeIntersectCallback, userData);}
 
 	//! Draw a simple circle, 2d viewport coordinates in pixel
-	void drawCircle(double x,double y,double r) const;
+	void drawCircle(double x,double y,double r);
 
 	//! Draw a square using the current texture at the given projected 2d position.
 	//! This method is not thread safe.
 	//! @param x x position in the viewport in pixel.
 	//! @param y y position in the viewport in pixel.
 	//! @param radius the half size of a square side in pixel.
-	void drawSprite2dMode(double x, double y, float radius) const;
-	void drawSprite2dMode(const Vec3d& v, float radius) const;
+	void drawSprite2dMode(double x, double y, float radius);
+	void drawSprite2dMode(const Vec3d& v, float radius);
 
 	//! Draw a rotated square using the current texture at the given projected 2d position.
 	//! This method is not thread safe.
@@ -126,19 +126,19 @@ public:
 	//! @param y y position in the viewport in pixel.
 	//! @param radius the half size of a square side in pixel.
 	//! @param rotation rotation angle in degree.
-	void drawSprite2dMode(double x, double y, float radius, float rotation) const;
+	void drawSprite2dMode(double x, double y, float radius, float rotation);
 
 	//! Draw a GL_POINT at the given position.
 	//! @param x x position in the viewport in pixels.
 	//! @param y y position in the viewport in pixels.
-	void drawPoint2d(double x, double y) const;
+	void drawPoint2d(double x, double y);
 
 	//! Draw a line between the 2 points.
 	//! @param x1 x position of point 1 in the viewport in pixels.
 	//! @param y1 y position of point 1 in the viewport in pixels.
 	//! @param x2 x position of point 2 in the viewport in pixels.
 	//! @param y2 y position of point 2 in the viewport in pixels.
-	void drawLine2d(double x1, double y1, double x2, double y2) const;
+	void drawLine2d(double x1, double y1, double x2, double y2);
 
 	//! Draw a rectangle using the current texture at the given projected 2d position.
 	//! This method is not thread safe.
@@ -146,7 +146,7 @@ public:
 	//! @param y y position of the tope left corner in the viewport in pixel.
 	//! @param width width in pixel.
 	//! @param height height in pixel.
-	void drawRect2d(float x, float y, float width, float height) const;
+	void drawRect2d(float x, float y, float width, float height);
 
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
 	void sSphere(double radius, double oneMinusOblateness, int slices, int stacks, int orientInside = 0);
@@ -216,7 +216,7 @@ public:
 	}
 
 	//! use instead of glEnableClient
-	void enableClientStates(bool vertex, bool texture, bool color, bool normal);
+	void enableClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false);
 	// void disableClientStates() {enableClientStates(false, false, false, false);}
 
 	//! convenience method that enable and set all the given arrays.
