@@ -495,11 +495,10 @@ void Atmosphere::draw(StelCore* core)
 		}
 #ifndef USE_OPENGL_ES2
 		glShadeModel(GL_SMOOTH);
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_COLOR_ARRAY);
-		glColorPointer(4, GL_FLOAT, 0, colorGrid);
-		glVertexPointer(2, GL_FLOAT, 0, posGrid);
 #endif
+		sPainter.enableClientStates(true, false, true, false);
+		sPainter.setColorPointer(4, GL_FLOAT, colorGrid);
+		sPainter.setVertexPointer(2, GL_FLOAT, posGrid);
 	}
 
 	// And draw everything at once
@@ -509,7 +508,7 @@ void Atmosphere::draw(StelCore* core)
 	GLushort* shift=indices;
 	for (int y=0;y<skyResolutionY;++y)
 	{
-		glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, shift);
+		sPainter.drawFromArray(StelPainter::TriangleStrip, shift, 0, (skyResolutionX+1)*2);
 		shift += (skyResolutionX+1)*2;
 	}
 
@@ -527,8 +526,6 @@ void Atmosphere::draw(StelCore* core)
 	{
 #ifndef USE_OPENGL_ES2
 		glShadeModel(GL_FLAT);
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glDisableClientState(GL_COLOR_ARRAY);
 #endif
 	}
 }

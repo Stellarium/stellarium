@@ -732,7 +732,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 }
 
 
-void Planet::drawSphere(const StelPainter* painter, float screenSz)
+void Planet::drawSphere(StelPainter* painter, float screenSz)
 {
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
@@ -823,7 +823,8 @@ void Planet::drawEarthShadow(StelCore* core)
 		r.transfo4d(rotMat);
 		vertexArray[i] = shadow + r;
 	}
-	sPainter.drawArrays(GL_TRIANGLE_FAN, 102, vertexArray.data(), texCoordArray.constData());
+	sPainter.setArrays(vertexArray.constData(), texCoordArray.constData());
+	sPainter.drawFromArray(StelPainter::TriangleFan, 102);
 
 	// now penumbra
 	Vec3d u;
@@ -838,7 +839,8 @@ void Planet::drawEarthShadow(StelCore* core)
 		vertexArray[i] = shadow + u;
 		vertexArray[i+1] = shadow + r;
 	}
-	sPainter.drawArrays(GL_TRIANGLE_STRIP, 202, vertexArray.data(), texCoordArray.constData());
+	sPainter.setArrays(vertexArray.constData(), texCoordArray.constData());
+	sPainter.drawFromArray(StelPainter::TriangleStrip, 202);
 
 	glDisable(GL_STENCIL_TEST);
 	glClearStencil(0x0);

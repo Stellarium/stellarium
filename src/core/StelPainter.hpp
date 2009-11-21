@@ -49,6 +49,18 @@ public:
 		SphericalPolygonDrawModeTextureFill=2	//!< Draw the interior of the polygon filled with the current texture
 	};
 
+	//! Define the drawing mode when drawing vertex
+	enum DrawingMode
+	{
+		Points                      = 0x0000, // GL_POINTS
+		Lines                       = 0x0001, // GL_LINES
+		LineLoop                    = 0x0002, // GL_LINE_LOOP
+		LineStrip                   = 0x0003, // GL_LINE_STRIP
+		Triangles                   = 0x0004, // GL_TRIANGLES
+		TriangleStrip               = 0x0005, // GL_TRIANGLE_STRIP
+		TriangleFan                 = 0x0006  // GL_TRIANGLE_FAN
+	};
+
 	explicit StelPainter(const StelProjectorP& prj);
 	~StelPainter();
 
@@ -136,18 +148,11 @@ public:
 	//! @param height height in pixel.
 	void drawRect2d(float x, float y, float width, float height) const;
 
-	//! Draw a gl array with 3D vertex position and optional 2D texture position.
-	//! @param mode as defined in glDrawArray.
-	//! @param count number of vertice to draw.
-	//! @param texCoords the array of Vec2f defining the uv coordinates or NULL if there are no texturing.
-	//! @param vertice the array of Vec3d defining the xyz coordinates. It is modified by the function.
-	void drawArrays(int mode, int count, Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL) const;
-
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
-	void sSphere(double radius, double oneMinusOblateness, int slices, int stacks, int orientInside = 0) const;
+	void sSphere(double radius, double oneMinusOblateness, int slices, int stacks, int orientInside = 0);
 
 	//! Re-implementation of gluCylinder : glu is overridden for non-standard projection.
-	void sCylinder(double radius, double height, int slices, int stacks, int orientInside = 0) const;
+	void sCylinder(double radius, double height, int slices, int stacks, int orientInside = 0);
 
 	//! Draw a disk with a special texturing mode having texture center at center of disk.
 	//! The disk is made up of concentric circles with increasing refinement.
@@ -155,13 +160,13 @@ public:
 	//! @param radius the radius of the disk.
 	//! @param innerFanSlices the number of slices.
 	//! @param level the numbe of concentric circles.
-	void sFanDisk(double radius,int innerFanSlices,int level) const;
+	void sFanDisk(double radius,int innerFanSlices,int level);
 
 	//! Draw a ring with a radial texturing.
-	void sRing(double rMin, double rMax, int slices, int stacks, int orientInside) const;
+	void sRing(double rMin, double rMax, int slices, int stacks, int orientInside);
 
 	//! Draw a fisheye texture in a sphere.
-	void sSphereMap(double radius, int slices, int stacks, double textureFov = 2.*M_PI, int orientInside = 0) const;
+	void sSphereMap(double radius, int slices, int stacks, double textureFov = 2.*M_PI, int orientInside = 0);
 
 	//! Set the font to use for subsequent text drawing.
 	void setFont(const QFont& font);
@@ -179,7 +184,76 @@ public:
 	//! Set the QPainter to use for performing some drawing operations.
 	static void setQPainter(QPainter* qPainter);
 
+	// The following methods try to reflect the API of the incoming QGLPainter class
+
+	//! Sets the point size to use with draw().
+	//! This function has no effect if a shader program is in use, or on OpenGL/ES 2.0. Shader programs must set the
+	//! point size in the vertex shader.
+	void setPointSize(qreal size);
+
+	// Thoses methods should eventually be replaced by a single setVertexArray
+	//! use instead of glVertexPointer
+	void setVertexPointer(int size, int type, const void* pointer) {
+		vertexArray.size = size; vertexArray.type = type; vertexArray.pointer = pointer;
+	}
+
+	//! use instead of glTexCoordPointer
+	void setTexCoordPointer(int size, int type, const void* pointer)
+	{
+		texCoordArray.size = size; texCoordArray.type = type; texCoordArray.pointer = pointer;
+	}
+
+	//! use instead of glColorPointer
+	void setColorPointer(int size, int type, const void* pointer)
+	{
+		colorArray.size = size; colorArray.type = type; colorArray.pointer = pointer;
+	}
+
+	//! use instead of glNormalPointer
+	void setNormalPointer(int type, const void* pointer)
+	{
+		normalArray.size = 3; normalArray.type = type; normalArray.pointer = pointer;
+	}
+
+	//! use instead of glEnableClient
+	void enableClientStates(bool vertex, bool texture, bool color, bool normal);
+	// void disableClientStates() {enableClientStates(false, false, false, false);}
+
+	//! convenience method that enable and set all the given arrays.
+	//! It is equivalent to calling enableClientState and set the array pointer for each arrays.
+	void setArrays(const Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL);
+
+	//! Draws primitives using count vertices from the arrays specified by setVertexArray().
+	//! The type of primitive to draw is specified by mode.
+	//! This operation will consume count values from the enabled arrays, starting at index.
+	void drawFromArray(DrawingMode mode, int count, int index=0, bool doProj=true);
+	//! Draws primitives using vertices from the arrays specified by setVertexArray().
+	//! The type of primitive to draw is specified by mode.
+	//! This operation will consume count elements of indices, starting at offset, which are used to index into the
+	//! enabled arrays.
+	void drawFromArray(DrawingMode mode, const unsigned short* indices, int offset, int count, bool doProj=true);
+
 private:
+	//! Struct describing one opengl array
+	typedef struct
+	{
+		int size;				// The number of coordinates per vertex.
+		int type;				// The data type of each coordinate (GL_SHORT, GL_INT, GL_FLOAT, or GL_DOUBLE).
+		const void* pointer;	// Pointer to the first coordinate of the first vertex in the array.
+		bool enabled;			// Define whether the array is enabled or not.
+	} ArrayDesc;
+
+	//! Prepare an opengl array to be drawn by drawFromArray.
+	//! @param array the descriptor of the array.
+	//! @param cap Specifies the opengl capability associated to the array.
+	void prepareArray(const ArrayDesc& array, int cap);
+
+	//! Common code for each flavor of drawFromArray.
+	void prepareDrawFromArray(int count, int index=0, bool doProj=true);
+
+	//! Project an array using the current projection.
+	//! @return a descriptor of the new array
+	ArrayDesc projectArray(const ArrayDesc& array, int index, int count);
 
 	//! Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 	//! by splitting it into subtriangles. The resulting vertex arrays are appended to the passed out* ones.
@@ -203,6 +277,15 @@ private:
 
 	//! The QPainter to use for some drawing operations.
 	static QPainter* qPainter;
+
+	//! The descriptor for the current opengl vertex array
+	ArrayDesc vertexArray;
+	//! The descriptor for the current opengl texture coordinate array
+	ArrayDesc texCoordArray;
+	//! The descriptor for the current opengl normal array
+	ArrayDesc normalArray;
+	//! The descriptor for the current opengl color array
+	ArrayDesc colorArray;
 };
 
 #endif // _STELPAINTER_HPP_
