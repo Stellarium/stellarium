@@ -20,6 +20,7 @@
 #include <QtOpenGL>
 
 #include "StelProjector.hpp"
+#include "StelProjectorClasses.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
@@ -338,7 +339,7 @@ void ComputeCosSinRho(double phi,int segments) {
 }
 
 
-void StelPainter::sFanDisk(double radius, int innerFanSlices, int level) const
+void StelPainter::sFanDisk(double radius, int innerFanSlices, int level)
 {
 	Q_ASSERT(level<64);
 	double rad[64];
@@ -388,7 +389,8 @@ void StelPainter::sFanDisk(double radius, int innerFanSlices, int level) const
 			y = rad[i]*cos_sin_theta_p[1];
 			texCoordArr << 0.5*(1.0+x/radius) << 0.5*(1.0+y/radius);
 			vertexArr << x << y << 0;
-			drawArrays(GL_TRIANGLE_FAN, vertexArr.size()/3, (Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
+			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
+			drawFromArray(TriangleFan, vertexArr.size()/3);
 		}
 	}
 	// draw the inner polygon
@@ -404,10 +406,11 @@ void StelPainter::sFanDisk(double radius, int innerFanSlices, int level) const
 		texCoordArr << 0.5*(1.0+x/radius) << 0.5*(1.0+y/radius);
 		vertexArr << x << y << 0;
 	}
-	drawArrays(GL_TRIANGLE_FAN, vertexArr.size()/3, (Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
+	setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
+	drawFromArray(TriangleFan, vertexArr.size()/3);
 }
 
-void StelPainter::sRing(double rMin, double rMax, int slices, int stacks, int orientInside) const
+void StelPainter::sRing(double rMin, double rMax, int slices, int stacks, int orientInside)
 {
 	double x,y;
 	int j;
@@ -446,7 +449,8 @@ void StelPainter::sRing(double rMin, double rMax, int slices, int stacks, int or
 			texCoordArr << tex_r1 << 0.5;
 			vertexArr << x << y << 0;
 		}
-		drawArrays(GL_TRIANGLE_STRIP, vertexArr.size()/3, (Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), NULL, (Vec3f*)normalArr.constData());
+		setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), NULL, (Vec3f*)normalArr.constData());
+		drawFromArray(TriangleStrip, vertexArr.size()/3);
 	}
 }
 
@@ -457,7 +461,7 @@ static void sSphereMapTexCoordFast(double rho_div_fov, double costheta, double s
 	out << 0.5 + rho_div_fov * costheta << 0.5 + rho_div_fov * sintheta;
 }
 
-void StelPainter::sSphereMap(double radius, int slices, int stacks, double textureFov, int orientInside) const
+void StelPainter::sSphereMap(double radius, int slices, int stacks, double textureFov, int orientInside)
 {
 	double rho,x,y,z;
 	int i, j;
@@ -510,7 +514,8 @@ void StelPainter::sSphereMap(double radius, int slices, int stacks, double textu
 				sSphereMapTexCoordFast(rho + drho, cos_sin_theta_p[0], cos_sin_theta_p[1], texCoordArr);
 				vertexArr << x*radius << y*radius << z*radius;
 			}
-			drawArrays(GL_TRIANGLE_STRIP, vertexArr.size()/3, (Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), NULL, (Vec3f*)normalArr.constData());
+			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), NULL, (Vec3f*)normalArr.constData());
+			drawFromArray(TriangleStrip, vertexArr.size()/3);
 		}
 	}
 	else
@@ -536,7 +541,8 @@ void StelPainter::sSphereMap(double radius, int slices, int stacks, double textu
 				sSphereMapTexCoordFast(rho, cos_sin_theta_p[0], -cos_sin_theta_p[1], texCoordArr);
 				vertexArr << x*radius << y*radius << z*radius;
 			}
-			drawArrays(GL_TRIANGLE_STRIP, vertexArr.size()/3, (Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), NULL, (Vec3f*)normalArr.constData());
+			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), NULL, (Vec3f*)normalArr.constData());
+			drawFromArray(TriangleStrip, vertexArr.size()/3);
 		}
 	}
 }
@@ -650,49 +656,6 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 }
 
 static QVector<Vec2f> tmpVertexArray;
-/*************************************************************************
- Draw a gl array with 3D vertex position and optional 2D texture position.
-*************************************************************************/
-void StelPainter::drawArrays(int mode, int count, Vec3d* vertice, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray) const
-{
-	Q_ASSERT(vertice);
-	tmpVertexArray.resize(count);
-
-	// Project all the vertice
-	for (int i=0;i<count;++i)
-	{
-		prj->projectInPlace(vertice[i]);
-		tmpVertexArray[i].set(vertice[i][0], vertice[i][1]);
-	}
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(2, GL_FLOAT, 0, tmpVertexArray.constData());
-
-	if (texCoords)
-	{
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glTexCoordPointer(2, GL_FLOAT, 0, texCoords);
-	}
-	if (colorArray)
-	{
-		glEnableClientState(GL_COLOR_ARRAY);
-		glColorPointer(3, GL_FLOAT, 0, colorArray);
-	}
-	if (normalArray)
-	{
-		glEnableClientState(GL_NORMAL_ARRAY);
-		glNormalPointer(GL_FLOAT, 0, normalArray);
-	}
-	glDrawArrays(mode, 0, count);
-	glDisableClientState(GL_VERTEX_ARRAY);
-	if (texCoords)
-		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	if (colorArray)
-		glDisableClientState(GL_COLOR_ARRAY);
-	if (normalArray)
-		glDisableClientState(GL_NORMAL_ARRAY);
-}
-
 
 // Recursive method cutting a small circle in small segments
 inline void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, Vec3d& win1, Vec3d& win2, QLinkedList<Vec3d>& vertexList, const QLinkedList<Vec3d>::iterator& iter, double radius, const Vec3d& center, int nbI=0, bool checkCrossDiscontinuity=true)
@@ -1447,7 +1410,7 @@ void StelPainter::drawLine2d(double x1, double y1, double x2, double y2) const
 ///////////////////////////////////////////////////////////////////////////
 // Drawing methods for general (non-linear) mode
 
-void StelPainter::sSphere(double radius, double oneMinusOblateness, int slices, int stacks, int orientInside) const
+void StelPainter::sSphere(double radius, double oneMinusOblateness, int slices, int stacks, int orientInside)
 {
 	// It is really good for performance to have Vec4f,Vec3f objects
 	// static rather than on the stack. But why?
@@ -1542,9 +1505,10 @@ void StelPainter::sSphere(double radius, double oneMinusOblateness, int slices, 
 		}
 		// Draw the array now
 		if (isLightOn)
-			drawArrays(GL_TRIANGLE_STRIP, vertexArr.size()/3, (Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData());
+			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData());
 		else
-			drawArrays(GL_TRIANGLE_STRIP, vertexArr.size()/3, (Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
+			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
+		drawFromArray(TriangleStrip, vertexArr.size()/3);
 		t -= dt;
 	}
 
@@ -1553,7 +1517,7 @@ void StelPainter::sSphere(double radius, double oneMinusOblateness, int slices, 
 }
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
-void StelPainter::sCylinder(double radius, double height, int slices, int stacks, int orientInside) const
+void StelPainter::sCylinder(double radius, double height, int slices, int stacks, int orientInside)
 {
 		double da, r, dz;
 	GLfloat z, nsign;
@@ -1603,12 +1567,129 @@ void StelPainter::sCylinder(double radius, double height, int slices, int stacks
 			vertexArray << x*r << y*r << z+dz;
 			s += ds;
 		} // for slices
-
-		drawArrays(GL_TRIANGLE_STRIP, vertexArray.size()/3, (Vec3d*)vertexArray.constData(), (Vec2f*)texCoordArray.constData(), NULL,  (Vec3f*)normalArray.constData());
+		setArrays((Vec3d*)vertexArray.constData(), (Vec2f*)texCoordArray.constData(), NULL,  (Vec3f*)normalArray.constData());
+		drawFromArray(TriangleStrip, vertexArray.size()/3);
 		t += dt;
 		z += dz;
 	}				/* for stacks */
 
 	if (orientInside)
 		glCullFace(GL_BACK);
+}
+
+
+void StelPainter::setPointSize(qreal size)
+{
+#ifndef USE_OPENGL_ES2
+	glPointSize(size);
+#else
+#error GL ES2 to be done
+#endif
+}
+
+void StelPainter::setArrays(const Vec3d* vertice, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray) {
+	enableClientStates(vertice, texCoords, colorArray, normalArray);
+	setVertexPointer(3, GL_DOUBLE, vertice);
+	setTexCoordPointer(2, GL_FLOAT, texCoords);
+	setColorPointer(3, GL_FLOAT, colorArray);
+	setNormalPointer(GL_FLOAT, normalArray);
+}
+
+void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool normal) {
+	vertexArray.enabled = vertex;
+	texCoordArray.enabled = texture;
+	colorArray.enabled = color;
+	normalArray.enabled = normal;
+}
+
+void StelPainter::prepareDrawFromArray(int count, int index, bool doProj)
+{
+#ifndef USE_OPENGL_ES2
+	// Project the vertex array using current projection
+	ArrayDesc vertexArray = (doProj)? projectArray(this->vertexArray, index, count) : this->vertexArray;
+	// Enable the client state and set the opengl array for each array
+	prepareArray(vertexArray, GL_VERTEX_ARRAY);
+	prepareArray(texCoordArray, GL_TEXTURE_COORD_ARRAY);
+	prepareArray(normalArray, GL_NORMAL_ARRAY);
+	prepareArray(colorArray, GL_COLOR_ARRAY);
+#else
+#error GL ES2 to be done
+#endif
+}
+
+void StelPainter::prepareArray(const ArrayDesc& array, int cap)
+{
+#ifndef USE_OPENGL_ES2
+	if (!array.enabled)
+	{
+		glDisableClientState(cap);
+		return;
+	}
+	glEnableClientState(cap);
+	switch (cap)
+	{
+	case GL_VERTEX_ARRAY:
+		glVertexPointer(array.size, array.type, 0, array.pointer);
+		break;
+	case GL_TEXTURE_COORD_ARRAY:
+		glTexCoordPointer(array.size, array.type, 0, array.pointer);
+		break;
+	case GL_NORMAL_ARRAY:
+		glNormalPointer(array.type, 0, array.pointer);
+		break;
+	case GL_COLOR_ARRAY:
+		glColorPointer(array.size, array.type, 0, array.pointer);
+		break;
+	default:
+		Q_ASSERT(0);
+	}
+#else
+	Q_ASSERT(0);
+#endif
+}
+
+void StelPainter::drawFromArray(DrawingMode mode, int count, int index, bool doProj)
+{
+#ifndef USE_OPENGL_ES2
+	prepareDrawFromArray(count, index, doProj);
+	glDrawArrays(mode, index, count);
+#else
+#error GL ES2 to be done
+#endif
+}
+
+void StelPainter::drawFromArray(DrawingMode mode, const unsigned short* indices, int offset, int count, bool doProj)
+{
+#ifndef USE_OPENGL_ES2
+	prepareDrawFromArray(count, 0, doProj);
+	glDrawElements(mode, count, GL_UNSIGNED_SHORT, indices+offset);
+#else
+#error GL ES2 to be done
+#endif
+}
+
+StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& array, int index, int count)
+{
+	// XXX: we should use a more generic way to test whether or not to do the projection.
+	if (dynamic_cast<StelProjector2d*>(prj.data()))
+	{
+		return array;
+	}
+
+	tmpVertexArray.resize(index + count);
+	Q_ASSERT(array.size == 3);
+	Q_ASSERT(array.type == GL_DOUBLE);
+	Vec3d* vecArray = (Vec3d*)array.pointer;
+	Vec3d win;
+	for (int i=index; i< index + count; ++i)
+	{
+		prj->project(vecArray[i], win);
+		tmpVertexArray[i].set(win[0], win[1]);
+	}
+	ArrayDesc ret;
+	ret.size = 2;
+	ret.type = GL_FLOAT;
+	ret.pointer = tmpVertexArray.constData();
+	ret.enabled = array.enabled;
+	return ret;
 }
