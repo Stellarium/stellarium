@@ -391,6 +391,9 @@ void Atmosphere::draw(StelCore* core)
 		return;
 
 	StelPainter sPainter(core->getProjection2d());
+	glBlendFunc(GL_ONE, GL_ONE);
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
 
 	const float atm_intensity = fader.getInterstate();
 	if (useShader)
@@ -482,6 +485,20 @@ void Atmosphere::draw(StelCore* core)
 		glEnableVertexAttribArray(loc);
 		glVertexAttribPointer(loc, 4, GL_FLOAT, false, 0, colorGrid);
 #endif
+		// And draw everything at once
+		GLushort* shift=indices;
+		for (int y=0;y<skyResolutionY;++y)
+		{
+			glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, shift);
+			shift += (skyResolutionX+1)*2;
+		}
+#if QT_VERSION>=0x040600
+		atmoShaderProgram->disableAttributeArray("skyVertex");
+		atmoShaderProgram->disableAttributeArray("skyColor");
+		atmoShaderProgram->release();
+#else
+		glUseProgram(0);
+#endif
 	}
 	else
 	{
@@ -499,34 +516,14 @@ void Atmosphere::draw(StelCore* core)
 		sPainter.enableClientStates(true, false, true, false);
 		sPainter.setColorPointer(4, GL_FLOAT, colorGrid);
 		sPainter.setVertexPointer(2, GL_FLOAT, posGrid);
-	}
 
-	// And draw everything at once
-	glBlendFunc(GL_ONE, GL_ONE);
-	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	GLushort* shift=indices;
-	for (int y=0;y<skyResolutionY;++y)
-	{
-		if (useShader)
-			glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, shift);
-		else
+		// And draw everything at once
+		GLushort* shift=indices;
+		for (int y=0;y<skyResolutionY;++y)
+		{
 			sPainter.drawFromArray(StelPainter::TriangleStrip, shift, 0, (skyResolutionX+1)*2);
-		shift += (skyResolutionX+1)*2;
-	}
-
-	if (useShader)
-	{
-#if QT_VERSION>=0x040600
-		atmoShaderProgram->disableAttributeArray("skyVertex");
-		atmoShaderProgram->disableAttributeArray("skyColor");
-		atmoShaderProgram->release();
-#else
-		glUseProgram(0);
-#endif
-	}
-	else
-	{
+			shift += (skyResolutionX+1)*2;
+		}
 #ifndef USE_OPENGL_ES2
 		glShadeModel(GL_FLAT);
 #endif
