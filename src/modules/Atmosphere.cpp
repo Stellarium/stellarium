@@ -508,7 +508,10 @@ void Atmosphere::draw(StelCore* core)
 	GLushort* shift=indices;
 	for (int y=0;y<skyResolutionY;++y)
 	{
-		sPainter.drawFromArray(StelPainter::TriangleStrip, shift, 0, (skyResolutionX+1)*2);
+		if (useShader)
+			glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, shift);
+		else
+			sPainter.drawFromArray(StelPainter::TriangleStrip, shift, 0, (skyResolutionX+1)*2);
 		shift += (skyResolutionX+1)*2;
 	}
 
