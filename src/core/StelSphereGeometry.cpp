@@ -534,7 +534,6 @@ double SphericalCap::relativeAreaOverlap(const SphericalCap& c1, const Spherical
 
 double SphericalCap::relativeDiameterOverlap(const SphericalCap& c1, const SphericalCap& c2)
 {
-	// TODO, this is wrong for many reasons
 	if (!c1.intersects(c2))
 		return 0.;
 	if (c1.contains(c2))
