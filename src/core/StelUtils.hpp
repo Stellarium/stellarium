@@ -231,9 +231,6 @@ namespace StelUtils
 			(1.f + x*(1.f+ x/2.f*(1.f+ x/3.f*(1.f+x/4.f*(1.f+x/5.f))))):
 				1.f / (1.f -x*(1.f -x/2.f*(1.f- x/3.f*(1.f-x/4.f*(1.f-x/5.f)))));
 	}
-
-	//! Convert a vector from J2000 to Galactic reference frame, using FITS convention.
-	static const Mat4d J2000toGalactic = Mat4d(-0.054875539726, 0.494109453312, -0.867666135858, 0, -0.873437108010, -0.444829589425, -0.198076386122, 0, -0.483834985808, 0.746982251810, 0.455983795705, 0, 0, 0, 0, 1);
 }
 
 #endif // _STELUTILS_HPP_
