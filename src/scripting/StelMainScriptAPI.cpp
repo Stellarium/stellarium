@@ -246,7 +246,7 @@ float StelMainScriptAPI::getMaxFps()
 
 QString StelMainScriptAPI::getMountMode()
 {
-	if (StelApp::getInstance().getCore()->getNavigator()->getMountMode() == StelNavigator::MountEquatorial)
+	if (StelApp::getInstance().getCore()->getNavigator()->getMountMode() == StelNavigator::MountEquinoxEquatorial)
 		return "equatorial";
 	else
 		return "azimuthal";
@@ -255,7 +255,7 @@ QString StelMainScriptAPI::getMountMode()
 void StelMainScriptAPI::setMountMode(const QString& mode)
 {
 	if (mode=="equatorial")
-		StelApp::getInstance().getCore()->getNavigator()->setMountMode(StelNavigator::MountEquatorial);
+		StelApp::getInstance().getCore()->getNavigator()->setMountMode(StelNavigator::MountEquinoxEquatorial);
 	else if (mode=="azimuthal")
 		StelApp::getInstance().getCore()->getNavigator()->setMountMode(StelNavigator::MountAltAzimuthal);
 }

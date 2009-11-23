@@ -44,8 +44,6 @@ const Mat4d StelNavigator::matJ2000toGalactic(-0.054875539726, 0.494109453312, -
 ////////////////////////////////////////////////////////////////////////////////
 StelNavigator::StelNavigator() : timeSpeed(JD_SECOND), JDay(0.), position(NULL)
 {
-	altAzVisionDirection=Vec3d(1.,0.,0.);
-	earthEquVisionDirection=Vec3d(1.,0.,0.);
 	J2000EquVisionDirection=Vec3d(1.,0.,0.);  // not correct yet...
 	mountMode = MountAltAzimuthal;  // default
 }
@@ -65,13 +63,11 @@ void StelNavigator::init()
 	position = new StelObserver(StelApp::getInstance().getLocationMgr().locationForSmallString(defaultLocationID));
 
 	setTimeNow();
-	setAltAzVisionDirection(Vec3f(1,1e-05,0.2));
 	// Compute transform matrices between coordinates systems
 	updateTransformMatrices();
-	updateModelViewMat();
 	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
 	if (tmpstr=="equator")
-		setMountMode(StelNavigator::MountEquatorial);
+		setMountMode(StelNavigator::MountEquinoxEquatorial);
 	else
 	{
 		if (tmpstr=="horizon")
@@ -230,10 +226,10 @@ double StelNavigator::getLocalSideralDayLength() const
 	return position->getHomePlanet()->getSiderealDay();
 }
 
-void StelNavigator::setInitViewDirectionToCurrent(void)
+void StelNavigator::setInitViewDirectionToCurrent()
 {
-	initViewPos = altAzVisionDirection;
-	QString dirStr = QString("%1,%2,%3").arg(altAzVisionDirection[0]).arg(altAzVisionDirection[1]).arg(altAzVisionDirection[2]);
+	initViewPos = getAltAzVisionDirection();
+	QString dirStr = QString("%1,%2,%3").arg(initViewPos[0]).arg(initViewPos[1]).arg(initViewPos[2]);
 	StelApp::getInstance().getSettings()->setValue("navigation/init_view_pos", dirStr);
 }
 
@@ -280,30 +276,50 @@ void StelNavigator::decreaseTimeSpeedLess()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void StelNavigator::setAltAzVisionDirection(const Vec3d& _pos)
+void StelNavigator::setAltAzVisionDirection(const Vec3d& pos)
 {
-	altAzVisionDirection = _pos;
-	earthEquVisionDirection=altAzToEquinoxEqu(altAzVisionDirection);
-	J2000EquVisionDirection = matEquinoxEquToJ2000*earthEquVisionDirection;
-	updateModelViewMat();
+	setJ2000EquVisionDirection(equinoxEquToJ2000(altAzToEquinoxEqu(pos)));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void StelNavigator::setEquinoxEquVisionDirection(const Vec3d& _pos)
+void StelNavigator::setEquinoxEquVisionDirection(const Vec3d& pos)
 {
-	earthEquVisionDirection = _pos;
-	J2000EquVisionDirection = matEquinoxEquToJ2000*earthEquVisionDirection;
-	altAzVisionDirection = equinoxEquToAltAz(earthEquVisionDirection);
-	updateModelViewMat();
+	setJ2000EquVisionDirection(equinoxEquToJ2000(pos));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void StelNavigator::setJ2000EquVisionDirection(const Vec3d& _pos)
+void StelNavigator::setJ2000EquVisionDirection(const Vec3d& pos)
 {
-	J2000EquVisionDirection = _pos;
-	earthEquVisionDirection = matJ2000ToEquinoxEqu*J2000EquVisionDirection;
-	altAzVisionDirection = equinoxEquToAltAz(earthEquVisionDirection);
-	updateModelViewMat();
+	J2000EquVisionDirection = pos;
+
+	// Update the model view matrix
+	Vec3d f, s;
+	if (mountMode == MountEquinoxEquatorial)
+	{
+		// view will use equatorial coordinates, so that north is always up
+		f = getEquinoxEquVisionDirection();
+		f.normalize();
+		s.set(f[1],-f[0], 0.);
+		// convert everything back to local coord
+		f = getAltAzVisionDirection();
+		f.normalize();
+		s = equinoxEquToAltAz(s);
+	}
+	else
+	{
+		// view will correct for horizon (always down)
+		f = getAltAzVisionDirection();
+		f.normalize();
+		s.set(f[1],-f[0], 0.);
+	}
+
+	Vec3d u(s^f);
+	s.normalize();
+	u.normalize();
+	matAltAzModelView.set(s[0],u[0],-f[0],0.,
+						 s[1],u[1],-f[1],0.,
+						 s[2],u[2],-f[2],0.,
+						 0.,0.,0.,1.);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -363,45 +379,6 @@ void StelNavigator::setStartupTimeMode(const QString& s)
 {
 	startupTimeMode = s;
 }
-
-////////////////////////////////////////////////////////////////////////////////
-// Update the modelview matrices
-void StelNavigator::updateModelViewMat(void)
-{
-	Vec3d f;
-
-	if (mountMode == MountEquatorial)
-	{
-		// view will use equatorial coordinates, so that north is always up
-		f = earthEquVisionDirection;
-	}
-	else
-	{
-		// view will correct for horizon (always down)
-		f = altAzVisionDirection;
-	}
-
-	f.normalize();
-	Vec3d s(f[1],-f[0],0.);
-
-	if (mountMode == MountEquatorial)
-	{
-		// convert everything back to local coord
-		f = altAzVisionDirection;
-		f.normalize();
-		s = equinoxEquToAltAz( s );
-	}
-
-	Vec3d u(s^f);
-	s.normalize();
-	u.normalize();
-
-	matAltAzModelView.set(s[0],u[0],-f[0],0.,
-						 s[1],u[1],-f[1],0.,
-						 s[2],u[2],-f[2],0.,
-						 0.,0.,0.,1.);
-}
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Return the observer heliocentric position
