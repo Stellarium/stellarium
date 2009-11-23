@@ -186,6 +186,7 @@ Vec3d OctahedronPolygon::getPointInside() const
 {
 	const QVector<Vec3d>& trianglesArray = getFillVertexArray().vertex;
 	Q_ASSERT(getFillVertexArray().primitiveType==StelVertexArray::Triangles);
+	Q_ASSERT(!trianglesArray.isEmpty());
 	Vec3d res(trianglesArray[0]);
 	res+=trianglesArray[1];
 	res+=trianglesArray[2];
