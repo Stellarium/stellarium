@@ -650,8 +650,10 @@ void StelMovementMgr::panView(double deltaAz, double deltaAlt)
 	StelNavigator* nav = core->getNavigator();
 	double azVision, altVision;
 
-	if( nav->getViewingMode() == StelNavigator::ViewEquator) StelUtils::rectToSphe(&azVision,&altVision,nav->getEquinoxEquVisionDirection());
-	else StelUtils::rectToSphe(&azVision,&altVision,nav->getAltAzVisionDirection());
+	if (nav->getMountMode() == StelNavigator::MountEquatorial)
+		StelUtils::rectToSphe(&azVision,&altVision,nav->getEquinoxEquVisionDirection());
+	else
+		StelUtils::rectToSphe(&azVision,&altVision,nav->getAltAzVisionDirection());
 
 	// if we are moving in the Azimuthal angle (left/right)
 	if (deltaAz) azVision-=deltaAz;
@@ -666,7 +668,7 @@ void StelMovementMgr::panView(double deltaAz, double deltaAlt)
 	if (deltaAz || deltaAlt)
 	{
 		setFlagTracking(false);
-		if( nav->getViewingMode() == StelNavigator::ViewEquator)
+		if (nav->getMountMode() == StelNavigator::MountEquatorial)
 		{
 			Vec3d tmp;
 			StelUtils::spheToRect(azVision, altVision, tmp);
@@ -690,7 +692,7 @@ void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 	
 	Vec3d tempvec1, tempvec2;
 	double az1, alt1, az2, alt2;
-	const StelProjectorP prj = nav->getViewingMode()==StelNavigator::ViewHorizon ? core->getProjection(StelCore::FrameAltAz) :
+	const StelProjectorP prj = nav->getMountMode()==StelNavigator::MountAltAzimuthal ? core->getProjection(StelCore::FrameAltAz) :
 		core->getProjection(StelCore::FrameEquinoxEqu);
 		
 //johannes: StelApp already gives appropriate x/y coordinates

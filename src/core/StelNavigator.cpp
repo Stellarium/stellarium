@@ -39,6 +39,7 @@
 // See vsop87.doc:
 const Mat4d StelNavigator::matJ2000ToVsop87(Mat4d::xrotation(-23.4392803055555555556*(M_PI/180)) * Mat4d::zrotation(0.0000275*(M_PI/180)));
 const Mat4d StelNavigator::matVsop87ToJ2000(matJ2000ToVsop87.transpose());
+const Mat4d StelNavigator::matJ2000toGalactic(-0.054875539726, 0.494109453312, -0.867666135858, 0, -0.873437108010, -0.444829589425, -0.198076386122, 0, -0.483834985808, 0.746982251810, 0.455983795705, 0, 0, 0, 0, 1);
 
 ////////////////////////////////////////////////////////////////////////////////
 StelNavigator::StelNavigator() : timeSpeed(JD_SECOND), JDay(0.), position(NULL)
@@ -46,7 +47,7 @@ StelNavigator::StelNavigator() : timeSpeed(JD_SECOND), JDay(0.), position(NULL)
 	altAzVisionDirection=Vec3d(1.,0.,0.);
 	earthEquVisionDirection=Vec3d(1.,0.,0.);
 	J2000EquVisionDirection=Vec3d(1.,0.,0.);  // not correct yet...
-	viewingMode = ViewHorizon;  // default
+	mountMode = MountAltAzimuthal;  // default
 }
 
 StelNavigator::~StelNavigator()
@@ -70,11 +71,11 @@ void StelNavigator::init()
 	updateModelViewMat();
 	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
 	if (tmpstr=="equator")
-		setViewingMode(StelNavigator::ViewEquator);
+		setMountMode(StelNavigator::MountEquatorial);
 	else
 	{
 		if (tmpstr=="horizon")
-			setViewingMode(StelNavigator::ViewHorizon);
+			setMountMode(StelNavigator::MountAltAzimuthal);
 		else
 		{
 			qDebug() << "ERROR : Unknown viewing mode type : " << tmpstr;
@@ -369,7 +370,7 @@ void StelNavigator::updateModelViewMat(void)
 {
 	Vec3d f;
 
-	if( viewingMode == ViewEquator)
+	if (mountMode == MountEquatorial)
 	{
 		// view will use equatorial coordinates, so that north is always up
 		f = earthEquVisionDirection;
@@ -383,7 +384,7 @@ void StelNavigator::updateModelViewMat(void)
 	f.normalize();
 	Vec3d s(f[1],-f[0],0.);
 
-	if( viewingMode == ViewEquator)
+	if (mountMode == MountEquatorial)
 	{
 		// convert everything back to local coord
 		f = altAzVisionDirection;
@@ -406,21 +407,10 @@ void StelNavigator::updateModelViewMat(void)
 // Return the observer heliocentric position
 Vec3d StelNavigator::getObserverHeliocentricEclipticPos(void) const
 {
-	static const Vec3d v(0);
-	return matAltAzToHeliocentricEcliptic*v;
+	return Vec3d(matAltAzToHeliocentricEcliptic[12], matAltAzToHeliocentricEcliptic[13], matAltAzToHeliocentricEcliptic[14]);
 }
 
 void StelNavigator::setPresetSkyTime(QDateTime dt)
 {
 	setPresetSkyTime(StelUtils::qDateTimeToJd(dt));
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// Set type of viewing mode (align with horizon or equatorial coordinates)
-void StelNavigator::setViewingMode(ViewingModeType viewMode)
-{
-	viewingMode = viewMode;
-
-	// TODO: include some nice smoothing function trigger here to rotate between
-	// the two modes
 }

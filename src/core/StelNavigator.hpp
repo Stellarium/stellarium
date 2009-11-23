@@ -49,14 +49,8 @@ class StelNavigator : public QObject
 	Q_OBJECT
 
 public:
-	enum ViewingModeType
-	{
-		ViewHorizon,
-		ViewEquator
-	};
-
-	//! Possible mount modes
-	enum MountMode { MountAltAzimuthal, MountEquatorial };
+	//! Possible mount modes defining the reference frame in which head movements occur.
+	enum MountMode { MountAltAzimuthal, MountEquatorial};
 
 	// Create and initialise to default a navigation context
 	StelNavigator();
@@ -67,10 +61,10 @@ public:
 	void updateTime(double deltaTime);
 	void updateTransformMatrices(void);
 
-	//! Set current mount type
-	void setMountMode(MountMode m) {setViewingMode((m==MountAltAzimuthal) ? StelNavigator::ViewHorizon : StelNavigator::ViewEquator);}
-	//! Get current mount type
-	MountMode getMountMode(void) {return ((getViewingMode()==StelNavigator::ViewHorizon) ? MountAltAzimuthal : MountEquatorial);}
+	//! Set current mount type defining the reference frame in which head movements occur.
+	void setMountMode(MountMode m) {mountMode=m;}
+	//! Get current mount type defining the reference frame in which head movements occur.
+	MountMode getMountMode(void) const {return mountMode;}
 
 	//! Get vision direction
 	const Vec3d& getEquinoxEquVisionDirection(void) const {return earthEquVisionDirection;}
@@ -130,9 +124,6 @@ public:
 	//! Get the modelview matrix for observer-centric J2000 equatorial drawing
 	const Mat4d getJ2000ModelViewMat(void) const {return matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;}
 
-	void setViewingMode(ViewingModeType viewMode);
-	ViewingModeType getViewingMode(void) const {return viewingMode;}
-
 	//! Return the inital viewing direction in altazimuthal coordinates
 	const Vec3d& getInitViewingDirection() {return initViewPos;}
 
@@ -149,6 +140,8 @@ public:
 	static const Mat4d matJ2000ToVsop87;
 	//! Rotation matrix from ecliptic (Vsop87) to equatorial J2000
 	static const Mat4d matVsop87ToJ2000;
+	//! Rotation matrix from J2000 to Galactic reference frame, using FITS convention.
+	static const Mat4d matJ2000toGalactic;
 
 public slots:
 	//! Toggle current mount mode between equatorial and altazimuthal
@@ -288,7 +281,7 @@ private:
 	Vec3d initViewPos;        // Default viewing direction
 
 	// defines if view corrects for horizon, or uses equatorial coordinates
-	ViewingModeType viewingMode;
+	MountMode mountMode;
 };
 
 #endif // _STELNAVIGATOR_HPP_
