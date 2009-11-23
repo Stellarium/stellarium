@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -38,7 +38,6 @@
 
 namespace StelUtils
 {
-
 double hmsToRad(unsigned int h, unsigned int m, double s )
 {
 	return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.+s*M_PI/43200.;
@@ -58,7 +57,7 @@ void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
 {
 	angle = std::fmod(angle,2.0*M_PI);
 	if (angle < 0.0) angle += 2.0*M_PI; // range: [0..2.0*M_PI)
-		
+
 	angle *= 12./M_PI;
 
 	h = (unsigned int)angle;
@@ -79,7 +78,7 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 		sign = false;
 	}
 	angle *= 180./M_PI;
-	
+
 	d = (unsigned int)angle;
 	m = (unsigned int)((angle - d)*60);
 	s = (angle-d)*3600-60*m;
@@ -156,7 +155,7 @@ QString radToHmsStr(double angle, bool decimal)
 		m=0;
 		h+=1;
 	}
-	if (h==24 && m==0 && s==0) 
+	if (h==24 && m==0 && s==0)
 		h=0;
 
 	return QString("%1h%2m%3s").arg(h, width).arg(m).arg(s, 0, 'f', precision);
@@ -179,7 +178,7 @@ QString radToDmsStrAdapt(double angle, bool useD)
 	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s);
 	QString str;
 	QTextStream os(&str);
-	
+
 	os << (sign?'+':'-') << d << degsign;
 	if (std::fabs(s*100-(int)s*100)>=1)
 	{
@@ -227,9 +226,9 @@ QString radToDmsStr(double angle, bool decimal, bool useD)
 		os << qSetRealNumberPrecision(0);
 		width = 2;
 	}
-		
-	os << qSetFieldWidth(width) << m << qSetFieldWidth(0) << '\'' 
-		<< fixed << qSetFieldWidth(width) << qSetPadChar('0') << s 
+
+	os << qSetFieldWidth(width) << m << qSetFieldWidth(0) << '\''
+		<< fixed << qSetFieldWidth(width) << qSetPadChar('0') << s
 		<< qSetFieldWidth(0) << '\"';
 
 	return str;
@@ -364,7 +363,7 @@ bool isPowerOfTwo(int value)
 	return (value & -value) == value;
 }
 
-// Return the first power of two bigger than the given value 
+// Return the first power of two bigger than the given value
 int getBiggerPowerOfTwo(int value)
 {
 	int p=1;
@@ -372,7 +371,7 @@ int getBiggerPowerOfTwo(int value)
 		p<<=1;
 	return p;
 }
-	
+
 // Return the inverse sinus hyperbolic of z
 double asinh(double z)
 {
@@ -457,12 +456,12 @@ QString sixIntsToIsoString( int year, int month, int day, int hour, int minute, 
 	// formatting a negative doesnt work the way i expect
 
 	QString dt = QString("%1-%2-%3T%4:%5:%6")
-	             .arg((year >= 0 ? year : -1* year),4,10,QLatin1Char('0'))
-	             .arg(month,2,10,QLatin1Char('0'))
-	             .arg(day,2,10,QLatin1Char('0'))
-	             .arg(hour,2,10,QLatin1Char('0'))
-	             .arg(minute,2,10,QLatin1Char('0'))
-	             .arg(second,2,10,QLatin1Char('0'));
+				 .arg((year >= 0 ? year : -1* year),4,10,QLatin1Char('0'))
+				 .arg(month,2,10,QLatin1Char('0'))
+				 .arg(day,2,10,QLatin1Char('0'))
+				 .arg(hour,2,10,QLatin1Char('0'))
+				 .arg(minute,2,10,QLatin1Char('0'))
+				 .arg(second,2,10,QLatin1Char('0'));
 
 	if (year < 0)
 	{
@@ -514,8 +513,8 @@ QString localeDateString(int year, int month, int day, int dayOfWeek, QString fm
 			out += fmt.at(i);
 		}
 		else if (fmt.at(i) == QLatin1Char('d') ||
-		         fmt.at(i) == QLatin1Char('M') ||
-		         fmt.at(i) == QLatin1Char('y'))
+				 fmt.at(i) == QLatin1Char('M') ||
+				 fmt.at(i) == QLatin1Char('y'))
 		{
 			int j = i+1;
 			while ((j < fmt.length()) && (fmt.at(j) == fmt.at(i)) && (4 >= (j-i+1)))
@@ -717,7 +716,7 @@ int numberOfDaysInMonthInYear(int month, int year)
 		case 11:
 			return 30;
 			break;
-		
+
 		case 2:
 			if ( year > 1582 )
 			{
@@ -756,7 +755,7 @@ int numberOfDaysInMonthInYear(int month, int year)
 				}
 			}
 			break;
-		
+
 		case 0:
 			return numberOfDaysInMonthInYear(12, year-1);
 			break;
@@ -766,7 +765,7 @@ int numberOfDaysInMonthInYear(int month, int year)
 		default:
 			break;
 	}
-	
+
 	return 0;
 }
 
@@ -777,7 +776,7 @@ bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
 				int* ry, int* rm, int* rd, int* rh, int* rmin, int* rs)
 {
 	bool change = false;
-	
+
 	while ( os > 59 ) {
 		os -= 60;
 		omin += 1;
@@ -788,7 +787,7 @@ bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
 		omin -= 1;
 		change = true;
 	}
-	
+
 	while (omin > 59 ) {
 		omin -= 60;
 		oh += 1;
@@ -799,7 +798,7 @@ bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
 		oh -= 1;
 		change = true;
 	}
-	
+
 	while ( oh > 23 ) {
 		oh -= 24;
 		od += 1;
@@ -810,7 +809,7 @@ bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
 		od -= 1;
 		change = true;
 	}
-	
+
 	while ( od > numberOfDaysInMonthInYear(om, oy) ) {
 		od -= numberOfDaysInMonthInYear(om, oy);
 		om++;
@@ -829,7 +828,7 @@ bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
 		}
 		change = true;
 	}
-	
+
 	while ( om > 12 ) {
 		om -= 12;
 		oy += 1;
@@ -840,13 +839,13 @@ bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
 		oy -= 1;
 		change = true;
 	}
-	
+
 	// and the julian-gregorian epoch hole: round up to the 15th
 	if ( oy == 1582 && om == 10 && ( od > 4 && od < 15 ) ) {
 		od = 15;
 		change = true;
 	}
-	
+
 	if ( change ) {
 		*ry = oy;
 		*rm = om;
