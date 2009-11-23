@@ -650,7 +650,7 @@ void StelMovementMgr::panView(double deltaAz, double deltaAlt)
 	StelNavigator* nav = core->getNavigator();
 	double azVision, altVision;
 
-	if (nav->getMountMode() == StelNavigator::MountEquatorial)
+	if (nav->getMountMode() == StelNavigator::MountEquinoxEquatorial)
 		StelUtils::rectToSphe(&azVision,&altVision,nav->getEquinoxEquVisionDirection());
 	else
 		StelUtils::rectToSphe(&azVision,&altVision,nav->getAltAzVisionDirection());
@@ -668,7 +668,7 @@ void StelMovementMgr::panView(double deltaAz, double deltaAlt)
 	if (deltaAz || deltaAlt)
 	{
 		setFlagTracking(false);
-		if (nav->getMountMode() == StelNavigator::MountEquatorial)
+		if (nav->getMountMode() == StelNavigator::MountEquinoxEquatorial)
 		{
 			Vec3d tmp;
 			StelUtils::spheToRect(azVision, altVision, tmp);
