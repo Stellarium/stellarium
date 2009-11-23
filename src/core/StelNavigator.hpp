@@ -50,7 +50,7 @@ class StelNavigator : public QObject
 
 public:
 	//! Possible mount modes defining the reference frame in which head movements occur.
-	enum MountMode { MountAltAzimuthal, MountEquatorial};
+	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial};
 
 	// Create and initialise to default a navigation context
 	StelNavigator();
@@ -67,12 +67,12 @@ public:
 	MountMode getMountMode(void) const {return mountMode;}
 
 	//! Get vision direction
-	const Vec3d& getEquinoxEquVisionDirection(void) const {return earthEquVisionDirection;}
+	const Vec3d getEquinoxEquVisionDirection(void) const {return j2000ToEquinoxEqu(J2000EquVisionDirection);}
 	const Vec3d& getJ2000EquVisionDirection(void) const {return J2000EquVisionDirection;}
-	const Vec3d& getAltAzVisionDirection(void) const {return altAzVisionDirection;}
-	void setAltAzVisionDirection(const Vec3d& _pos);
-	void setEquinoxEquVisionDirection(const Vec3d& _pos);
-	void setJ2000EquVisionDirection(const Vec3d& _pos);
+	const Vec3d getAltAzVisionDirection(void) const {return j2000ToAltAz(J2000EquVisionDirection);}
+	void setAltAzVisionDirection(const Vec3d& pos);
+	void setEquinoxEquVisionDirection(const Vec3d& pos);
+	void setJ2000EquVisionDirection(const Vec3d& pos);
 
 	//! Get the informations on the current location
 	const StelLocation& getCurrentLocation() const;
@@ -145,9 +145,9 @@ public:
 
 public slots:
 	//! Toggle current mount mode between equatorial and altazimuthal
-	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquatorial); else setMountMode(MountAltAzimuthal);}
+	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquinoxEquatorial); else setMountMode(MountAltAzimuthal);}
 	//! Define whether we should use equatorial mount or altazimuthal
-	void setEquatorialMount(bool b) {setMountMode(b ? MountEquatorial : MountAltAzimuthal);}
+	void setEquatorialMount(bool b) {setMountMode(b ? MountEquinoxEquatorial : MountAltAzimuthal);}
 
 	//! Set the current date in Julian Day
 	void setJDay(double JD) {JDay=JD;}
@@ -229,7 +229,7 @@ public slots:
 
 	//! Move the observer to the selected object. This will only do something if
 	//! the selected object is of the correct type - i.e. a planet.
-	void moveObserverToSelected(void);
+	void moveObserverToSelected();
 
 	//! Get the location used by default at startup
 	QString getDefaultLocationID() const {return defaultLocationID;}
@@ -238,16 +238,13 @@ public slots:
 
 	//! Sets the initial direction of view to the current altitude and azimuth.
 	//! Note: Updates the configuration file.
-	void setInitViewDirectionToCurrent(void);
+	void setInitViewDirectionToCurrent();
 
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(StelLocation);
 
 private:
-	//! Update the modelview matrices
-	void updateModelViewMat(void);
-
 	// Matrices used for every coordinate transfo
 	Mat4d matHeliocentricEclipticToAltAz;	// Transform from heliocentric ecliptic (Vsop87) to observer-centric altazimuthal coordinate
 	Mat4d matAltAzToHeliocentricEcliptic;	// Transform from observer-centric altazimuthal coordinate to heliocentric ecliptic (Vsop87)
@@ -260,9 +257,8 @@ private:
 
 	Mat4d matAltAzModelView;					// Modelview matrix for observer-centric altazimuthal drawing
 
-	// Vision variables
-	// Viewing direction in altazimuthal and equatorial coordinates
-	Vec3d altAzVisionDirection, earthEquVisionDirection, J2000EquVisionDirection;
+	// Viewing direction in equatorial J2000 coordinates
+	Vec3d J2000EquVisionDirection;
 
 	// Time variable
 	double timeSpeed;        // Positive : forward, Negative : Backward, 1 = 1sec/sec
