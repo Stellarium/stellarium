@@ -802,7 +802,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 	Q_ASSERT(fabs(vertices[2].length()-1.)<0.00001);
 	if (clippingCap && clippingCap->containsTriangle(vertices))
 		clippingCap = NULL;
-	if (clippingCap && !clippingCap->intersectsConvexContour(vertices, 3))
+	if (clippingCap && !clippingCap->intersectsTriangle(vertices))
 		return;
 	bool cDiscontinuity1 = checkDisc1 && prj->intersectViewportDiscontinuity(vertices[0], vertices[1]);
 	bool cDiscontinuity2 = checkDisc2 && prj->intersectViewportDiscontinuity(vertices[1], vertices[2]);
