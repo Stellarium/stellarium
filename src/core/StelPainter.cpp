@@ -226,8 +226,6 @@ void StelPainter::drawViewportShape(void)
 
 	glDisable(GL_BLEND);
 	setColor(0.f,0.f,0.f);
-	glPushMatrix();
-	glTranslatef(prj->viewportCenter[0],prj->viewportCenter[1],0.0);
 
 	GLfloat innerRadius = 0.5*prj->viewportFovDiameter;
 	GLfloat outerRadius = prj->getViewportWidth()+prj->getViewportHeight();
@@ -272,12 +270,12 @@ void StelPainter::drawViewportShape(void)
 	radiusHigh=outerRadius-deltaRadius;
 	for (int i=0; i<=slices; i++)
 	{
-		vertices[i*2][0]=outerRadius*sinCache[i];
-		vertices[i*2][1]=outerRadius*cosCache[i];
-		vertices[i*2][2]=0.0;
-		vertices[i*2+1][0]=radiusHigh*sinCache[i];
-		vertices[i*2+1][1]=radiusHigh*cosCache[i];
-		vertices[i*2+1][2]=0.0;
+		vertices[i*2][0]= prj->viewportCenter[0] + outerRadius*sinCache[i];
+		vertices[i*2][1]= prj->viewportCenter[1] + outerRadius*cosCache[i];
+		vertices[i*2][2] = 0.0;
+		vertices[i*2+1][0]= prj->viewportCenter[0] + radiusHigh*sinCache[i];
+		vertices[i*2+1][1]= prj->viewportCenter[1] + radiusHigh*cosCache[i];
+		vertices[i*2+1][2] = 0.0;
 	}
 	drawFromArray(TriangleStrip, (slices+1)*2, 0, false);
 	enableClientStates(false);
