@@ -1384,13 +1384,6 @@ void StelPainter::drawSprite2dMode(double x, double y, float radius, float rotat
 	vertexData[2]=radius; vertexData[3]=-radius;
 	vertexData[4]=-radius; vertexData[5]=radius;
 	vertexData[6]=radius; vertexData[7]=radius;
-//	glEnableClientState(GL_VERTEX_ARRAY);
-//	glVertexPointer(2, GL_FLOAT, 0, vertexData);
-//	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-//	glTexCoordPointer(2, GL_FLOAT, 0, texCoordData);
-//	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-//	glDisableClientState(GL_VERTEX_ARRAY);
-//	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	enableClientStates(true, true);
 	setVertexPointer(2, GL_FLOAT, vertexData);
