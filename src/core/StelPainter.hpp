@@ -149,7 +149,7 @@ public:
 	void drawRect2d(float x, float y, float width, float height);
 
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
-	void sSphere(double radius, double oneMinusOblateness, int slices, int stacks, int orientInside = 0);
+	void sSphere(double radius, double oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
 
 	//! Re-implementation of gluCylinder : glu is overridden for non-standard projection.
 	void sCylinder(double radius, double height, int slices, int stacks, int orientInside = 0);

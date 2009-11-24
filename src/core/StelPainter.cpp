@@ -1414,7 +1414,7 @@ void StelPainter::drawLine2d(double x1, double y1, double x2, double y2)
 ///////////////////////////////////////////////////////////////////////////
 // Drawing methods for general (non-linear) mode
 
-void StelPainter::sSphere(double radius, double oneMinusOblateness, int slices, int stacks, int orientInside)
+void StelPainter::sSphere(double radius, double oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
 {
 	// It is really good for performance to have Vec4f,Vec3f objects
 	// static rather than on the stack. But why?
@@ -1468,7 +1468,8 @@ void StelPainter::sSphere(double radius, double oneMinusOblateness, int slices, 
 	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
 	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
 	// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
-	const GLfloat ds = 1.0 / slices;
+	// If the texture is flipped, we iterate the coordinates backward.
+	const GLfloat ds = ((flipTexture) ? -1 : 1) * 1.0 / slices;
 	const GLfloat dt = nsign / stacks; // from inside texture is reversed
 
 	// draw intermediate  as quad strips
@@ -1480,7 +1481,7 @@ void StelPainter::sSphere(double radius, double oneMinusOblateness, int slices, 
 		texCoordArr.resize(0);
 		vertexArr.resize(0);
 		colorArr.resize(0);
-		s = 0.0;
+		s = (!flipTexture) ? 0.0 : 1.0;
 		for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;++j,cos_sin_theta_p+=2)
 		{
 			x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
