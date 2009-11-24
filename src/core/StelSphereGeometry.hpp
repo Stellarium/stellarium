@@ -330,6 +330,9 @@ public:
 	//! Return whether the cap contains the passed triangle.
 	bool containsTriangle(const Vec3d* vertice) const;
 
+	//! Return whether the cap intersect with the passed triangle.
+	bool intersectsTriangle(const Vec3d* vertice) const;
+
 	//! Deserialize the region. This method must allow as fast as possible deserialization.
 	static SphericalRegionP deserialize(QDataStream& in);
 
