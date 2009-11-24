@@ -318,6 +318,11 @@ bool SphericalCap::contains(const SphericalConvexPolygon& cvx) const
 	return true;
 }
 
+bool SphericalCap::containsTriangle(const Vec3d* v) const
+{
+	return contains(*(v++)) && contains(*(v++)) && contains(*v);
+}
+
 bool SphericalCap::intersectsConvexContour(const Vec3d* vertice, int nbVertice) const
 {
 	for (int i=0;i<nbVertice;++i)

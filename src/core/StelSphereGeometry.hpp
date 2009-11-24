@@ -324,6 +324,12 @@ public:
 	//! Return the list of closed contours defining the polygon boundaries.
 	QVector<Vec3d> getClosedOutlineContour() const;
 
+	//! Return whether the cap intersect with a convex contour defined by nbVertice.
+	bool intersectsConvexContour(const Vec3d* vertice, int nbVertice) const;
+
+	//! Return whether the cap contains the passed triangle.
+	bool containsTriangle(const Vec3d* vertice) const;
+
 	//! Deserialize the region. This method must allow as fast as possible deserialization.
 	static SphericalRegionP deserialize(QDataStream& in);
 
@@ -343,9 +349,6 @@ public:
 	Vec3d n;
 	//! The cos of cone radius
 	double d;
-
-private:
-	bool intersectsConvexContour(const Vec3d* vertice, int nbVertice) const;
 };
 
 //! Return whether the halfspace defined by the vectors v1^v2 and with aperture 90 deg contains the point p.

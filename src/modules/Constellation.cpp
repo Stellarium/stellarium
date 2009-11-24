@@ -110,8 +110,7 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelNavigator* nav, c
 		star2=asterism[2*i+1]->getJ2000EquatorialPos(nav);
 		star1.normalize();
 		star2.normalize();
-		if (viewportHalfspace.clipGreatCircle(star1, star2))
-			sPainter.drawGreatCircleArc(star1, star2);
+		sPainter.drawGreatCircleArc(star1, star2, &viewportHalfspace);
 	}
 }
 
@@ -204,8 +203,7 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
 			pt2 = points->at(j+1);
 			if (pt1*pt2>0.9999999)
 				continue;
-			if (viewportHalfspace.clipGreatCircle(pt1, pt2))
-				sPainter.drawGreatCircleArc(pt1, pt2);
+			sPainter.drawGreatCircleArc(pt1, pt2, &viewportHalfspace);
 		}
 	}
 }
