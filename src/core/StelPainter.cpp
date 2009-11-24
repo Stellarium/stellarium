@@ -710,6 +710,23 @@ void drawSmallCircleVertexArray()
 	smallCircleVertexArray.resize(0);
 }
 
+static Vec3d pt1, pt2;
+void StelPainter::drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, const SphericalCap* clippingCap,
+	void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData), void* userData) const
+ {
+	 if (clippingCap)
+	 {
+		 pt1=start;
+		 pt2=stop;
+		 if (clippingCap->clipGreatCircle(pt1, pt2))
+		 {
+			drawSmallCircleArc(pt1, pt2, Vec3d(0), viewportEdgeIntersectCallback, userData);
+		 }
+		 return;
+	}
+	drawSmallCircleArc(start, stop, Vec3d(0), viewportEdgeIntersectCallback, userData);
+ }
+
 /*************************************************************************
  Draw a small circle arc in the current frame
 *************************************************************************/
@@ -776,13 +793,17 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 
 // Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 // by splitting it into subtriangles.
-void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArray<Vec2f, 4096>* outVertices,
+void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, const Vec3d* vertices, QVarLengthArray<Vec2f, 4096>* outVertices,
 		const Vec2f* texturePos, QVarLengthArray<Vec2f, 4096>* outTexturePos,
 		int nbI, bool checkDisc1, bool checkDisc2, bool checkDisc3) const
 {
 	Q_ASSERT(fabs(vertices[0].length()-1.)<0.00001);
 	Q_ASSERT(fabs(vertices[1].length()-1.)<0.00001);
 	Q_ASSERT(fabs(vertices[2].length()-1.)<0.00001);
+	if (clippingCap && clippingCap->containsTriangle(vertices))
+		clippingCap = NULL;
+	if (clippingCap && !clippingCap->intersectsConvexContour(vertices, 3))
+		return;
 	bool cDiscontinuity1 = checkDisc1 && prj->intersectViewportDiscontinuity(vertices[0], vertices[1]);
 	bool cDiscontinuity2 = checkDisc2 && prj->intersectViewportDiscontinuity(vertices[1], vertices[2]);
 	bool cDiscontinuity3 = checkDisc3 && prj->intersectViewportDiscontinuity(vertices[0], vertices[2]);
@@ -867,7 +888,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 			ta[1]=(texturePos[0]+texturePos[1])*0.5;
 			ta[2]=texturePos[2];
 		}
-		projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1, true, true, false);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1, true, true, false);
 
 		//va[0]=vertices[0]+vertices[1];
 		//va[0].normalize();
@@ -880,7 +901,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 			ta[1]=texturePos[1];
 			ta[2]=texturePos[2];
 		}
-		projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1, true, false, true);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1, true, false, true);
 		return;
 	}
 
@@ -896,7 +917,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 			ta[1]=texturePos[1];
 			ta[2]=(texturePos[1]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1, false, true, true);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1, false, true, true);
 
 		va[0]=vertices[0];
 		//va[1]=vertices[1]+vertices[2];
@@ -909,7 +930,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 			ta[1]=(texturePos[1]+texturePos[2])*0.5;
 			ta[2]=texturePos[2];
 		}
-		projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1, true, true, false);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1, true, true, false);
 		return;
 	}
 
@@ -925,7 +946,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 			ta[1]=texturePos[1];
 			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1, false, true, true);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1, false, true, true);
 
 		//va[0]=vertices[0]+vertices[2];
 		//va[0].normalize();
@@ -938,7 +959,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 			ta[1]=texturePos[1];
 			ta[2]=texturePos[2];
 		}
-		projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1, true, false, true);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1, true, false, true);
 		return;
 	}
 
@@ -956,7 +977,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 			ta[1]=(texturePos[0]+texturePos[1])*0.5;
 			ta[2]=(texturePos[1]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
 
 		//va[0]=vertices[0]+vertices[1];
 		//va[0].normalize();
@@ -970,7 +991,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 			ta[1]=texturePos[1];
 			ta[2]=(texturePos[1]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
 
 		va[0]=vertices[0];
 		//va[1]=vertices[1]+vertices[2];
@@ -983,7 +1004,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 			ta[1]=(texturePos[1]+texturePos[2])*0.5;
 			ta[2]=texturePos[2];
 		}
-		projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1, true, true, false);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1, true, true, false);
 		return;
 	}
 	if (cDiscontinuity1 && !cDiscontinuity2 && cDiscontinuity3)
@@ -999,7 +1020,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 			ta[1]=(texturePos[0]+texturePos[1])*0.5;
 			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
 
 		//va[0]=vertices[0]+vertices[1];
 		//va[0].normalize();
@@ -1013,7 +1034,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 			ta[1]=texturePos[2];
 			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
 
 
 		//va[0]=vertices[0]+vertices[1];
@@ -1026,7 +1047,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 			ta[1]=texturePos[1];
 			ta[2]=texturePos[2];
 		}
-		projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1, true, false, true);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1, true, false, true);
 
 		return;
 	}
@@ -1042,7 +1063,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 			ta[1]=texturePos[1];
 			ta[2]=(texturePos[1]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1, false, true, true);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1, false, true, true);
 
 		//va[0]=vertices[1]+vertices[2];
 		//va[0].normalize();
@@ -1056,7 +1077,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 			ta[1]=texturePos[2];
 			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
 
 		va[1]=va[0];
 		va[0]=vertices[0];
@@ -1070,7 +1091,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 			ta[1]=(texturePos[1]+texturePos[2])*0.5;
 			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
 		return;
 	}
 
@@ -1087,7 +1108,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 		ta[1]=(texturePos[1]+texturePos[2])*0.5;
 		ta[2]=(texturePos[0]+texturePos[2])*0.5;
 	}
-	projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1);
+	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
 
 	va[1]=va[0];
 	va[0]=vertices[0];
@@ -1101,7 +1122,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 		ta[1]=(texturePos[0]+texturePos[1])*0.5;
 		ta[2]=(texturePos[0]+texturePos[2])*0.5;
 	}
-	projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1);
+	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
 
 	//va[0]=vertices[0]+vertices[1];
 	//va[0].normalize();
@@ -1115,7 +1136,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 		ta[1]=texturePos[1];
 		ta[2]=(texturePos[1]+texturePos[2])*0.5;
 	}
-	projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1);
+	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
 
 	va[0]=vertices[0];va[0]+=vertices[2];
 	va[0].normalize();
@@ -1129,7 +1150,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 		ta[1]=(texturePos[1]+texturePos[2])*0.5;
 		ta[2]=texturePos[2];
 	}
-	projectSphericalTriangle(va, outVertices, ta, outTexturePos, nbI+1);
+	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
 
 	return;
 }
@@ -1137,7 +1158,7 @@ void StelPainter::projectSphericalTriangle(const Vec3d* vertices, QVarLengthArra
 static QVarLengthArray<Vec2f, 4096> polygonVertexArray;
 static QVarLengthArray<Vec2f, 4096> polygonTextureCoordArray;
 
-void StelPainter::drawGreatCircleArcs(const StelVertexArray& va) const
+void StelPainter::drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap) const
 {
 	Q_ASSERT(va.vertex.size()!=1);
 	switch (va.primitiveType)
@@ -1145,23 +1166,23 @@ void StelPainter::drawGreatCircleArcs(const StelVertexArray& va) const
 		case StelVertexArray::Lines:
 			Q_ASSERT(va.vertex.size()%2==0);
 			for (int i=0;i<va.vertex.size();i+=2)
-				drawGreatCircleArc(va.vertex.at(i), va.vertex.at(i+1));
+				drawGreatCircleArc(va.vertex.at(i), va.vertex.at(i+1), clippingCap);
 			return;
 		case StelVertexArray::LineStrip:
 			for (int i=0;i<va.vertex.size()-1;++i)
-				drawGreatCircleArc(va.vertex.at(i), va.vertex.at(i+1));
+				drawGreatCircleArc(va.vertex.at(i), va.vertex.at(i+1), clippingCap);
 			return;
 		case StelVertexArray::LineLoop:
 			for (int i=0;i<va.vertex.size()-1;++i)
-				drawGreatCircleArc(va.vertex.at(i), va.vertex.at(i+1));
-			drawGreatCircleArc(va.vertex.last(), va.vertex.first());
+				drawGreatCircleArc(va.vertex.at(i), va.vertex.at(i+1), clippingCap);
+			drawGreatCircleArc(va.vertex.last(), va.vertex.first(), clippingCap);
 			return;
 		default:
 			Q_ASSERT(0); // Unsupported primitive yype
 	}
 }
 
-void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool textured)
+void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool textured, bool doClip)
 {
 	if (va.vertex.isEmpty())
 		return;
@@ -1170,6 +1191,13 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 #endif
 	polygonVertexArray.clear();
+	SphericalCap cap;
+	const SphericalCap* clippingCap = NULL;
+	if (doClip)
+	{
+		cap = prj->getBoundingSphericalCap();
+		clippingCap = &cap;
+	}
 	if (textured)
 	{
 		Q_ASSERT(va.vertex.size()==va.texCoords.size());
@@ -1181,7 +1209,7 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 				Q_ASSERT(va.vertex.size()%3==0);
 				mode = Triangles;
 				for (int i=0;i<va.vertex.size()/3;++i)
-					projectSphericalTriangle(va.vertex.constData()+i*3, &polygonVertexArray,
+					projectSphericalTriangle(clippingCap, va.vertex.constData()+i*3, &polygonVertexArray,
 											 va.texCoords.constData()+i*3, &polygonTextureCoordArray);
 				break;
 			case StelVertexArray::TriangleFan:
@@ -1195,7 +1223,7 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 				{
 					ar[1]=va.vertex.at(i);    ar[2]=va.vertex.at(i+1);
 					te[1]=va.texCoords.at(i); te[2]=va.texCoords.at(i+1);
-					projectSphericalTriangle(ar, &polygonVertexArray, te, &polygonTextureCoordArray);
+					projectSphericalTriangle(clippingCap, ar, &polygonVertexArray, te, &polygonTextureCoordArray);
 				}
 				break;
 			}
@@ -1223,7 +1251,7 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 				Q_ASSERT(va.vertex.size()%3==0);
 				mode = Triangles;
 				for (int i=0;i<va.vertex.size()/3;++i)
-					projectSphericalTriangle(va.vertex.constData()+i*3, &polygonVertexArray, NULL, NULL);
+					projectSphericalTriangle(clippingCap, va.vertex.constData()+i*3, &polygonVertexArray, NULL, NULL);
 				break;
 			case StelVertexArray::TriangleFan:
 			{
@@ -1233,7 +1261,7 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 				for (int i=1;i<va.vertex.size()-1;++i)
 				{
 					ar[1]=va.vertex.at(i);    ar[2]=va.vertex.at(i+1);
-					projectSphericalTriangle(ar, &polygonVertexArray, NULL, NULL);
+					projectSphericalTriangle(clippingCap, ar, &polygonVertexArray, NULL, NULL);
 				}
 				break;
 			}
@@ -1253,18 +1281,18 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 }
 
 // Draw the given SphericalPolygon.
-void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode)
+void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap)
 {
 	switch (drawMode)
 	{
 		case SphericalPolygonDrawModeBoundary:
-			drawGreatCircleArcs(poly->getOutlineVertexArray());
+			drawGreatCircleArcs(poly->getOutlineVertexArray(), clippingCap);
 			break;
 		case SphericalPolygonDrawModeFill:
 		case SphericalPolygonDrawModeTextureFill:
 			glEnable(GL_CULL_FACE);
 			// Assumes the polygon is already tesselated as triangles
-			drawSphericalTriangles(poly->getFillVertexArray(), drawMode==SphericalPolygonDrawModeTextureFill);
+			drawSphericalTriangles(poly->getFillVertexArray(), drawMode==SphericalPolygonDrawModeTextureFill, clippingCap);
 			glDisable(GL_CULL_FACE);
 			break;
 		default:
