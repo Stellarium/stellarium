@@ -93,7 +93,7 @@ public:
 	//! Typically set that to false if you think that the region is fully contained in the viewport.
 	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const SphericalCap* clippingCap=NULL);
 
-	void drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap=NULL) const;
+	void drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap=NULL);
 	void drawSphericalTriangles(const StelVertexArray& va, bool textured, bool doClip);
 
 	//! Draw a small circle arc between points start and stop with rotation point in rotCenter.
@@ -102,14 +102,14 @@ public:
 	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
 	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport.
 	//! If rotCenter is equal to 0,0,0, the method draws a great circle.
-	void drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=NULL, void* userData=NULL) const;
+	void drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=NULL, void* userData=NULL);
 
 	//! Draw a great circle arc between points start and stop.
 	//! The angle between start and stop must be < 180 deg.
 	//! The algorithm ensures that the line will look smooth, even for non linear distortion.
 	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
 	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport.
-	void drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, const SphericalCap* clippingCap, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=NULL, void* userData=NULL) const;
+	void drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, const SphericalCap* clippingCap, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=NULL, void* userData=NULL);
 
 	//! Draw a simple circle, 2d viewport coordinates in pixel
 	void drawCircle(double x,double y,double r);
@@ -268,6 +268,10 @@ private:
 			bool checkDisc1=true, bool checkDisc2=true, bool checkDisc3=true) const;
 
 	void drawTextGravity180(float x, float y, const QString& str, float xshift = 0, float yshift = 0) const;
+
+	// Used by the method below
+	static QVector<Vec2f> smallCircleVertexArray;
+	void drawSmallCircleVertexArray();
 
 	//! The associated instance of projector
 	const StelProjectorP prj;

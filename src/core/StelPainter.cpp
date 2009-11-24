@@ -690,27 +690,25 @@ inline void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, V
 }
 
 // Used by the method below
-static QVector<Vec2f> smallCircleVertexArray;
+QVector<Vec2f> StelPainter::smallCircleVertexArray;
 
-void drawSmallCircleVertexArray()
+void StelPainter::drawSmallCircleVertexArray()
 {
 	if (smallCircleVertexArray.isEmpty())
 		return;
 
 	Q_ASSERT(smallCircleVertexArray.size()>1);
 
-	glEnableClientState(GL_VERTEX_ARRAY);
-	// Load the vertex array
-	glVertexPointer(2, GL_FLOAT, 0, smallCircleVertexArray.constData());
-	// And draw everything at once
-	glDrawArrays(GL_LINE_STRIP, 0, smallCircleVertexArray.size());
-	glDisableClientState(GL_VERTEX_ARRAY);
+	vertexArray.enabled = true;
+	setVertexPointer(2, GL_FLOAT, smallCircleVertexArray.constData());
+	drawFromArray(LineStrip, smallCircleVertexArray.size(), 0, false);
+	vertexArray.enabled = false;
 	smallCircleVertexArray.resize(0);
 }
 
 static Vec3d pt1, pt2;
 void StelPainter::drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, const SphericalCap* clippingCap,
-	void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData), void* userData) const
+	void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData), void* userData)
  {
 	 if (clippingCap)
 	 {
@@ -728,7 +726,7 @@ void StelPainter::drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, cons
 /*************************************************************************
  Draw a small circle arc in the current frame
 *************************************************************************/
-void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData), void* userData) const
+void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData), void* userData)
 {
 	Q_ASSERT(smallCircleVertexArray.empty());
 
@@ -1156,7 +1154,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 static QVarLengthArray<Vec2f, 4096> polygonVertexArray;
 static QVarLengthArray<Vec2f, 4096> polygonTextureCoordArray;
 
-void StelPainter::drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap) const
+void StelPainter::drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap)
 {
 	Q_ASSERT(va.vertex.size()!=1);
 	switch (va.primitiveType)
