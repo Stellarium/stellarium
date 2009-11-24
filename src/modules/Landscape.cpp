@@ -509,15 +509,6 @@ void LandscapeSpherical::draw(StelCore* core)
 	StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(nav->getAltAzModelViewMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
 	StelPainter sPainter(prj);
-	
-	// Need to flip texture usage horizontally due to glusphere convention
-	// so that left-right is consistent in source texture and rendering
-	glMatrixMode(GL_TEXTURE);
-	glPushMatrix();
-	glLoadIdentity();
-	glScalef(-1,1,1);
-	glTranslatef(-1,0,0);
-	glMatrixMode(GL_MODELVIEW);
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -531,7 +522,7 @@ void LandscapeSpherical::draw(StelCore* core)
 
 	// TODO: verify that this works correctly for custom projections
 	// seam is at East
-	sPainter.sSphere(radius,1.0,40,20,1);
+	sPainter.sSphere(radius, 1.0, 40, 20, 1, true);
 
 	glDisable(GL_CULL_FACE);
 
