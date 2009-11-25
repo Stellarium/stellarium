@@ -95,7 +95,7 @@ public:
 	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const SphericalCap* clippingCap=NULL);
 
 	void drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap=NULL);
-	void drawSphericalTriangles(const StelVertexArray& va, bool textured, bool doClip);
+	void drawSphericalTriangles(const StelVertexArray& va, bool textured, bool doClip, bool doSubDivide=true);
 
 	//! Draw a small circle arc between points start and stop with rotation point in rotCenter.
 	//! The angle between start and stop must be < 180 deg.
