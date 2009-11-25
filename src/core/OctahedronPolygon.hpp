@@ -27,14 +27,16 @@
 
 struct StelVertexArray
 {
+	// TODO maybe merge this with StelPainter DrawingMode
 	enum StelPrimitiveType
 	{
-		Lines,			//!< See GL_LINES
-		LineStrip,		//!< See GL_LINE_STRIP
-		LineLoop,		//!< See GL_LINE_LOOP
-		Triangles,		//!< See GL_TRIANGLES
-		TriangleStrip,	//!< See GL_TRIANGLE_STRIP
-		TriangleFan		//!< See GL_TRIANGLE_FAN
+		Points                      = 0x0000, // GL_POINTS
+		Lines                       = 0x0001, // GL_LINES
+		LineLoop                    = 0x0002, // GL_LINE_LOOP
+		LineStrip                   = 0x0003, // GL_LINE_STRIP
+		Triangles                   = 0x0004, // GL_TRIANGLES
+		TriangleStrip               = 0x0005, // GL_TRIANGLE_STRIP
+		TriangleFan                 = 0x0006  // GL_TRIANGLE_FAN
 	};
 
 	StelVertexArray(StelPrimitiveType pType=StelVertexArray::Triangles) : useIndice(false), primitiveType(pType) {;}
