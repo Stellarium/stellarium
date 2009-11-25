@@ -326,8 +326,8 @@ void LandscapeOldStyle::drawDecor(StelCore* core) const
 	double y0 = radius*cos((angleRotateZ+angleRotateZOffset)*M_PI/180.0);
 	double x0 = radius*sin((angleRotateZ+angleRotateZOffset)*M_PI/180.0);
 	
-	QVarLengthArray<Vec2f, 18> texCoordsArray(stacks*2+2);
-	QVarLengthArray<Vec3d, 18> vertexArray(stacks*2+2);
+	QVector<Vec2f> texCoordsArray(stacks*2+2);
+	QVector<Vec3d> vertexArray(stacks*2+2);
 	for (int n=0;n<nbDecorRepeat;n++) for (int i=0;i<nbSide;i++) {
 		sides[i].tex->bind();
 		double tx0 = sides[i].texCoords[0];
@@ -347,8 +347,8 @@ void LandscapeOldStyle::drawDecor(StelCore* core) const
 				z += d_z;
 				ty0 += d_ty;
 			}
-			sPainter.setArrays(vertexArray.data(), texCoordsArray.data());
-			sPainter.drawFromArray(StelPainter::TriangleStrip, texCoordsArray.size());
+			StelVertexArray array(vertexArray, StelVertexArray::TriangleStrip, texCoordsArray);
+			sPainter.drawSphericalTriangles(array, true, false, false);
 			y0 = y1;
 			x0 = x1;
 			tx0 = tx1;
