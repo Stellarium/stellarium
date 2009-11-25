@@ -1193,15 +1193,23 @@ public:
 			outTexturePos->clear();
 	}
 
-	inline void operator()(const Vec3d vertex[3], const Vec2f tex[2])
+	inline void operator()(const Vec3d* vertex[3], const Vec2f* tex[3], unsigned int indices[3])
 	{
-		painter->projectSphericalTriangle(clippingCap, vertex, outVertices, tex, outTexturePos);
+		for (int i = 0; i < 3; ++i)
+		{
+			tmpVertex[i] = *vertex[i];
+			tmpTexture[i] = *tex[i];
+		}
+		painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, tmpTexture, outTexturePos);
 	}
 private:
 	StelPainter* painter;
 	const SphericalCap* clippingCap;
 	QVarLengthArray<Vec2f, 4096>* outVertices;
 	QVarLengthArray<Vec2f, 4096>* outTexturePos;
+
+	Vec3d tmpVertex[3];
+	Vec2f tmpTexture[3];
 };
 
 

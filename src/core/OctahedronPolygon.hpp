@@ -37,9 +37,9 @@ struct StelVertexArray
 		TriangleFan		//!< See GL_TRIANGLE_FAN
 	};
 
-	StelVertexArray(StelPrimitiveType pType=StelVertexArray::Triangles) : primitiveType(pType) {;}
-	StelVertexArray(const QVector<Vec3d>& v, StelPrimitiveType pType=StelVertexArray::Triangles,const QVector<Vec2f>& t=QVector<Vec2f>()) :
-		vertex(v), texCoords(t), primitiveType(pType) {;}
+	StelVertexArray(StelPrimitiveType pType=StelVertexArray::Triangles) : useIndice(false), primitiveType(pType) {;}
+	StelVertexArray(const QVector<Vec3d>& v, StelPrimitiveType pType=StelVertexArray::Triangles,const QVector<Vec2f>& t=QVector<Vec2f>(), const QVector<unsigned int> i=QVector<unsigned int>()) :
+		vertex(v), texCoords(t), indices(i), useIndice(!i.empty()), primitiveType(pType) {;}
 
 	//! OpenGL compatible array of 3D vertex to be displayed using vertex arrays.
 	//! TODO, move to float? Most of the vectors are normalized, thus the precision is around 1E-45 using float
@@ -48,11 +48,22 @@ struct StelVertexArray
 	//! OpenGL compatible array of edge flags to be displayed using vertex arrays.
 	QVector<Vec2f> texCoords;
 
+	QVector<unsigned int> indices;
+	bool useIndice;
+
 	StelPrimitiveType primitiveType;
+
+	const Vec3d& vertexAt(int i) const {
+		return useIndice ? vertex.constData()[indices.at(i)] : vertex.constData()[i];
+	}
+	const Vec2f& texCoordAt(int i) const {
+		return useIndice ? texCoords.constData()[indices.at(i)] : texCoords.constData()[i];
+	}
 
 	//! call a function for each triangle of the array.
 	//! func should define the following method :
-	//!     void operator() (const Vec3d vertex[3], const Vec2f tex[2])
+	//!     void operator() (const Vec3d* vertex[3], const Vec2f* tex[3], unsigned int indices[3])
+	//! The method takes arrays of *pointers* as arguments because we can't assume the values are contiguous
 	template<class Func>
 	void foreachTriangle(Func& func) const;
 };
@@ -185,33 +196,47 @@ private:
 QDataStream& operator<<(QDataStream& out, const OctahedronPolygon&);
 QDataStream& operator>>(QDataStream& in, OctahedronPolygon&);
 
-
 //! call a function for each triangle of the array.
 //! func should define the following method :
-//!     void operator() (const Vec3d vertex[3], const Vec2f tex[2])
+//!     void operator() (const Vec3d* v[3], const Vec2f* t[3], unsigned int indices[3])
 template<class Func>
 void StelVertexArray::foreachTriangle(Func& func) const
 {
+	const Vec3d* ar[3];
+	const Vec2f* te[3];
+	unsigned int indices[3];
+
+	Q_ASSERT(texCoords.size() == vertex.size());
+
 	switch (primitiveType)
 	{
 		case StelVertexArray::Triangles:
 			Q_ASSERT(vertex.size() % 3 == 0);
 			for (int i = 0; i < vertex.size() / 3; ++i)
-				func(vertex.constData() + i * 3, texCoords.constData() + i * 3);
+			{
+				for (int j = 0; j < 3; ++j)
+				{
+					ar[j] = &vertexAt(i * 3 + j);
+					te[j] = &texCoordAt(i * 3 + j);
+					indices[j] = i * 3 + j;
+				}
+				func(ar, te, indices);
+			}
 			break;
 		case StelVertexArray::TriangleFan:
 		{
-			Vec3d ar[3];
-			Vec2f te[3];
-			ar[0]=vertex.at(0);
-			te[0]=texCoords.at(0);
+			ar[0]=&vertexAt(0);
+			te[0]=&texCoordAt(0);
+			indices[0] = 0;
 			for (int i = 1; i < vertex.size() - 1; ++i)
 			{
-				ar[1] = vertex.at(i);
-				ar[2] = vertex.at(i+1);
-				te[1] = texCoords.at(i);
-				te[2] = texCoords.at(i+1);
-				func(ar, te);
+				ar[1] = &vertexAt(i);
+				ar[2] = &vertexAt(i+1);
+				te[1] = &texCoordAt(i);
+				te[2] = &texCoordAt(i+1);
+				indices[1] = i;
+				indices[2] = i+1;
+				func(ar, te, indices);
 			}
 			break;
 		}
