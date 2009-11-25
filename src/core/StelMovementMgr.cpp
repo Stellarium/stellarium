@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -32,7 +32,7 @@
 #include <QKeyEvent>
 #include <QDebug>
 
-StelMovementMgr::StelMovementMgr(StelCore* acore) : core(acore), 
+StelMovementMgr::StelMovementMgr(StelCore* acore) : core(acore),
 	flagLockEquPos(false),
 	flagTracking(false),
 	isMouseMovingHoriz(false),
@@ -72,13 +72,13 @@ void StelMovementMgr::init()
 	flagManualZoom = conf->value("navigation/flag_manual_zoom").toBool();
 	flagAutoZoomOutResetsDirection = conf->value("navigation/auto_zoom_out_resets_direction", true).toBool();
 	flagEnableMouseNavigation = conf->value("navigation/flag_enable_mouse_navigation",true).toBool();
-	
+
 	minFov = 0.0001;
-	maxFov = 100.; 
+	maxFov = 100.;
 	initFov = conf->value("navigation/init_fov",60.).toDouble();
 	currentFov = initFov;
-}	
-	
+}
+
 bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 {
 	// Turn if the mouse is at the edge of the screen unless config asks otherwise
@@ -116,7 +116,7 @@ bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 			isMouseMovingVert = false;
 		}
 	}
-	
+
 	if (isDragging && flagEnableMouseNavigation)
 	{
 		if (hasDragged || (std::sqrt((double)((x-previousX)*(x-previousX) +(y-previousY)*(y-previousY)))>4.))
@@ -250,7 +250,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 
 /*************************************************************************
  The selected objects changed, follow it it we were already following another one
-*************************************************************************/ 
+*************************************************************************/
 void StelMovementMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)
 {
 	// If an object was selected keep the earth following
@@ -328,11 +328,11 @@ void StelMovementMgr::zoomOut(bool s)
 void StelMovementMgr::updateMotion(double deltaTime)
 {
 	const StelProjectorP proj = core->getProjection(StelCore::FrameJ2000);
-	
+
 	updateVisionVector(deltaTime);
-	
+
 	// the more it is zoomed, the lower the moving speed is (in angle)
-	double depl=keyMoveSpeed*deltaTime*1000*currentFov; 
+	double depl=keyMoveSpeed*deltaTime*1000*currentFov;
 	double deplzoom=keyZoomSpeed*deltaTime*1000*proj->deltaZoom(currentFov*(M_PI/360.0))*(360.0/M_PI);
 
 	if (flagMoveSlow)
@@ -405,7 +405,7 @@ void StelMovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 
 	if (StelApp::getInstance().getScriptMgr().scriptIsRunning())
 		moveDuration /= StelApp::getInstance().getScriptMgr().getScriptRate();
-		
+
 	float manualMoveDuration;
 
 	if (!getFlagTracking())
@@ -446,10 +446,10 @@ void StelMovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 {
 	StelNavigator* nav = core->getNavigator();
-	
+
 	if (StelApp::getInstance().getScriptMgr().scriptIsRunning())
 		moveDuration /= StelApp::getInstance().getScriptMgr().getScriptRate();
-		
+
 	if (objectMgr->getWasSelected() && !full)
 	{
 		// If the selected object has satellites, unzoom to satellites view
@@ -473,7 +473,7 @@ void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 	}
 
 	zoomTo(initFov, moveDuration);
-	if (flagAutoZoomOutResetsDirection) 
+	if (flagAutoZoomOutResetsDirection)
 		moveTo(nav->getInitViewingDirection(), moveDuration, true, -1);
 	setFlagTracking(false);
 	setFlagLockEquPos(false);
@@ -501,7 +501,7 @@ void StelMovementMgr::moveTo(const Vec3d& _aim, float moveDuration, bool _localP
 	StelNavigator* nav = core->getNavigator();
 	if (StelApp::getInstance().getScriptMgr().scriptIsRunning())
 		moveDuration /= StelApp::getInstance().getScriptMgr().getScriptRate();
-		
+
 	zoomingMode = zooming;
 	move.aim=_aim;
 	move.aim.normalize();
@@ -589,7 +589,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			StelUtils::rectToSphe(&ra_aim, &de_aim, nav->equinoxEquToAltAz(move.aim));
 			StelUtils::rectToSphe(&ra_start, &de_start, nav->equinoxEquToAltAz(move.start));
 		}
-		
+
 		// Trick to choose the good moving direction and never travel on a distance > PI
 		if (ra_aim-ra_start > M_PI)
 		{
@@ -599,10 +599,10 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		{
 			ra_aim += 2.*M_PI;
 		}
-		
+
 		de_now = de_aim*c + de_start*(1. - c);
 		ra_now = ra_aim*c + ra_start*(1. - c);
-		
+
 		Vec3d tmp;
 		StelUtils::spheToRect(ra_now, de_now, tmp);
 		nav->setEquinoxEquVisionDirection(nav->altAzToEquinoxEqu(tmp));
@@ -689,12 +689,12 @@ void StelMovementMgr::panView(double deltaAz, double deltaAlt)
 void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 {
 	StelNavigator* nav = core->getNavigator();
-	
+
 	Vec3d tempvec1, tempvec2;
 	double az1, alt1, az2, alt2;
 	const StelProjectorP prj = nav->getMountMode()==StelNavigator::MountAltAzimuthal ? core->getProjection(StelCore::FrameAltAz) :
 		core->getProjection(StelCore::FrameEquinoxEqu);
-		
+
 //johannes: StelApp already gives appropriate x/y coordinates
 //	proj->unProject(x2,proj->getViewportHeight()-y2, tempvec2);
 //	proj->unProject(x1,proj->getViewportHeight()-y1, tempvec1);
@@ -742,7 +742,7 @@ void StelMovementMgr::zoomTo(double aim_fov, float moveDuration)
 {
 	if (StelApp::getInstance().getScriptMgr().scriptIsRunning())
 		moveDuration /= StelApp::getInstance().getScriptMgr().getScriptRate();
-		
+
 	zoomMove.aim=aim_fov;
 	zoomMove.start=currentFov;
 	zoomMove.speed=1.f/(moveDuration*1000);
