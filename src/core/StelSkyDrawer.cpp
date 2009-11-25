@@ -413,7 +413,7 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 		glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
 		glEnable(GL_POINT_SPRITE);
 		starsShaderProgram->bind();
-		const Mat4f m = sPainter->getProjector()->getProjectionMatrix();
+		const Mat4f& m = sPainter->getProjector()->getProjectionMatrix();
 		starsShaderProgram->setUniformValue("projectionMatrix",
 			QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]));
 		starsShaderProgram->setAttributeArray("skyVertex", (const GLfloat*)verticesGrid, 2, 0);

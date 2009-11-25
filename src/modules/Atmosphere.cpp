@@ -422,7 +422,7 @@ void Atmosphere::draw(StelCore* core)
 		atmoShaderProgram->setUniformValue("Cy", Cy);
 		atmoShaderProgram->setUniformValue("Dy", Dy);
 		atmoShaderProgram->setUniformValue("Ey", Ey);
-		const Mat4f m = sPainter.getProjector()->getProjectionMatrix();
+		const Mat4f& m = sPainter.getProjector()->getProjectionMatrix();
 		atmoShaderProgram->setUniformValue("projectionMatrix",
 			QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]));
 		atmoShaderProgram->enableAttributeArray("skyVertex");

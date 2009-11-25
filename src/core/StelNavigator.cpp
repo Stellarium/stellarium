@@ -297,23 +297,23 @@ void StelNavigator::setJ2000EquVisionDirection(const Vec3d& pos)
 	if (mountMode == MountEquinoxEquatorial)
 	{
 		// view will use equatorial coordinates, so that north is always up
-		f = getEquinoxEquVisionDirection();
+		f = j2000ToEquinoxEqu(pos);
 		f.normalize();
 		s.set(f[1],-f[0], 0.);
 		// convert everything back to local coord
-		f = getAltAzVisionDirection();
+		f = j2000ToAltAz(pos);
 		f.normalize();
 		s = equinoxEquToAltAz(s);
 	}
 	else
 	{
 		// view will correct for horizon (always down)
-		f = getAltAzVisionDirection();
+		f = j2000ToAltAz(pos);
 		f.normalize();
 		s.set(f[1],-f[0], 0.);
 	}
 
-	Vec3d u(s^f);
+	Vec3d u(s^f);	// Up vector in AltAz coordinates
 	s.normalize();
 	u.normalize();
 	matAltAzModelView.set(s[0],u[0],-f[0],0.,
