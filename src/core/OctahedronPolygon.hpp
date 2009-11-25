@@ -49,6 +49,12 @@ struct StelVertexArray
 	QVector<Vec2f> texCoords;
 
 	StelPrimitiveType primitiveType;
+
+	//! call a function for each triangle of the array.
+	//! func should define the following method :
+	//!     void operator() (const Vec3d vertex[3], const Vec2f tex[2])
+	template<class Func>
+	void foreachTriangle(Func& func) const;
 };
 
 struct EdgeVertex
@@ -178,6 +184,41 @@ private:
 // Serialization routines
 QDataStream& operator<<(QDataStream& out, const OctahedronPolygon&);
 QDataStream& operator>>(QDataStream& in, OctahedronPolygon&);
+
+
+//! call a function for each triangle of the array.
+//! func should define the following method :
+//!     void operator() (const Vec3d vertex[3], const Vec2f tex[2])
+template<class Func>
+void StelVertexArray::foreachTriangle(Func& func) const
+{
+	switch (primitiveType)
+	{
+		case StelVertexArray::Triangles:
+			Q_ASSERT(vertex.size() % 3 == 0);
+			for (int i = 0; i < vertex.size() / 3; ++i)
+				func(vertex.constData() + i * 3, texCoords.constData() + i * 3);
+			break;
+		case StelVertexArray::TriangleFan:
+		{
+			Vec3d ar[3];
+			Vec2f te[3];
+			ar[0]=vertex.at(0);
+			te[0]=texCoords.at(0);
+			for (int i = 1; i < vertex.size() - 1; ++i)
+			{
+				ar[1] = vertex.at(i);
+				ar[2] = vertex.at(i+1);
+				te[1] = texCoords.at(i);
+				te[2] = texCoords.at(i+1);
+				func(ar, te);
+			}
+			break;
+		}
+		default:
+			Q_ASSERT_X(0, Q_FUNC_INFO, "unsuported primitive type");
+	}
+}
 
 #endif // _OCTAHEDRON_REGION_HPP_
 
