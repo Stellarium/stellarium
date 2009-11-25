@@ -40,6 +40,7 @@ class QPainter;
 class StelPainter
 {
 public:
+	friend class VertexArrayProjector;
 
 	//! Define the drawing mode when drawing polygons
 	enum SphericalPolygonDrawMode

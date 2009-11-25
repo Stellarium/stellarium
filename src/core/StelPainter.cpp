@@ -1178,6 +1178,33 @@ void StelPainter::drawGreatCircleArcs(const StelVertexArray& va, const Spherical
 	}
 }
 
+// The function object that we use as an interface between VertexArray::foreachTriangle and
+// StelPainter::projectSphericalTriangle.
+class VertexArrayProjector
+{
+public:
+	VertexArrayProjector(StelPainter* apainter, const SphericalCap* aclippingCap,
+						 QVarLengthArray<Vec2f, 4096>* aoutVertices, QVarLengthArray<Vec2f, 4096>* aoutTexturePos)
+		   : painter(apainter), clippingCap(aclippingCap), outVertices(aoutVertices), outTexturePos(aoutTexturePos)
+	{
+		if (outVertices)
+			outVertices->clear();
+		if (outTexturePos)
+			outTexturePos->clear();
+	}
+
+	inline void operator()(const Vec3d vertex[3], const Vec2f tex[2])
+	{
+		painter->projectSphericalTriangle(clippingCap, vertex, outVertices, tex, outTexturePos);
+	}
+private:
+	StelPainter* painter;
+	const SphericalCap* clippingCap;
+	QVarLengthArray<Vec2f, 4096>* outVertices;
+	QVarLengthArray<Vec2f, 4096>* outTexturePos;
+};
+
+
 void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool textured, bool doClip)
 {
 	if (va.vertex.isEmpty())
@@ -1194,86 +1221,17 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 		cap = prj->getBoundingSphericalCap();
 		clippingCap = &cap;
 	}
-	if (textured)
-	{
-		Q_ASSERT(va.vertex.size()==va.texCoords.size());
-		polygonTextureCoordArray.clear();
-		DrawingMode mode = Points;
-		switch (va.primitiveType)
-		{
-			case StelVertexArray::Triangles:
-				Q_ASSERT(va.vertex.size()%3==0);
-				mode = Triangles;
-				for (int i=0;i<va.vertex.size()/3;++i)
-					projectSphericalTriangle(clippingCap, va.vertex.constData()+i*3, &polygonVertexArray,
-											 va.texCoords.constData()+i*3, &polygonTextureCoordArray);
-				break;
-			case StelVertexArray::TriangleFan:
-			{
-				mode = Triangles;
-				Vec3d ar[3];
-				Vec2f te[3];
-				ar[0]=va.vertex.at(0);
-				te[0]=va.texCoords.at(0);
-				for (int i=1;i<va.vertex.size()-1;++i)
-				{
-					ar[1]=va.vertex.at(i);    ar[2]=va.vertex.at(i+1);
-					te[1]=va.texCoords.at(i); te[2]=va.texCoords.at(i+1);
-					projectSphericalTriangle(clippingCap, ar, &polygonVertexArray, te, &polygonTextureCoordArray);
-				}
-				break;
-			}
-			case StelVertexArray::TriangleStrip:
-				mode = Triangles;
-				Q_ASSERT(0);	// Unimplemented
-				break;
-			default:
-				Q_ASSERT(0); // Unsupported primitive yype
-		}
-		Q_ASSERT(polygonVertexArray.size()==polygonTextureCoordArray.size());
-		enableClientStates(true, true);
-		setVertexPointer(2, GL_FLOAT, polygonVertexArray.constData());
-		setTexCoordPointer(2, GL_FLOAT, polygonTextureCoordArray.constData());
-		drawFromArray(mode, polygonVertexArray.size(), 0, false);
-		enableClientStates(false);
-		return;
-	}
-	else
-	{
-		DrawingMode mode = Points;
-		switch (va.primitiveType)
-		{
-			case StelVertexArray::Triangles:
-				Q_ASSERT(va.vertex.size()%3==0);
-				mode = Triangles;
-				for (int i=0;i<va.vertex.size()/3;++i)
-					projectSphericalTriangle(clippingCap, va.vertex.constData()+i*3, &polygonVertexArray, NULL, NULL);
-				break;
-			case StelVertexArray::TriangleFan:
-			{
-				mode = Triangles;
-				Vec3d ar[3];
-				ar[0]=va.vertex.at(0);
-				for (int i=1;i<va.vertex.size()-1;++i)
-				{
-					ar[1]=va.vertex.at(i);    ar[2]=va.vertex.at(i+1);
-					projectSphericalTriangle(clippingCap, ar, &polygonVertexArray, NULL, NULL);
-				}
-				break;
-			}
-			case StelVertexArray::TriangleStrip:
-				mode = TriangleStrip;
-				Q_ASSERT(0);	// Unimplemented
-				break;
-			default:
-				Q_ASSERT(0); // Unsupported primitive yype
-		}
-		enableClientStates(true);
-		setVertexPointer(2, GL_FLOAT, polygonVertexArray.constData());
-		drawFromArray(mode, polygonVertexArray.size(), 0, false);
-		enableClientStates(false);
-		return;
-	}
+
+	// Project all the triangles of the VertexArray into our buffer arrays.
+	VertexArrayProjector projector(this, clippingCap, &polygonVertexArray, textured ? &polygonTextureCoordArray : NULL);
+	va.foreachTriangle(projector);
+
+	// Draw the projected arrays.
+	enableClientStates(true, textured);
+	setVertexPointer(2, GL_FLOAT, polygonVertexArray.constData());
+	setTexCoordPointer(2, GL_FLOAT, polygonTextureCoordArray.constData());
+	drawFromArray(Triangles, polygonVertexArray.size(), 0, false);
+	enableClientStates(false);
 }
 
 // Draw the given SphericalPolygon.
