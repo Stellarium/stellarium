@@ -1624,11 +1624,11 @@ void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool
 	normalArray.enabled = normal;
 }
 
-void StelPainter::prepareDrawFromArray(int count, int index, bool doProj)
+void StelPainter::prepareDrawFromArray(int count, int index, const unsigned short* indices, bool doProj)
 {
 #ifndef USE_OPENGL_ES2
 	// Project the vertex array using current projection
-	ArrayDesc vertexArray = (doProj)? projectArray(this->vertexArray, index, count) : this->vertexArray;
+	ArrayDesc vertexArray = (doProj)? projectArray(this->vertexArray, index, count, indices) : this->vertexArray;
 	// Enable the client state and set the opengl array for each array
 	prepareArray(vertexArray, GL_VERTEX_ARRAY);
 	prepareArray(texCoordArray, GL_TEXTURE_COORD_ARRAY);
@@ -1673,7 +1673,7 @@ void StelPainter::prepareArray(const ArrayDesc& array, int cap)
 void StelPainter::drawFromArray(DrawingMode mode, int count, int index, bool doProj)
 {
 #ifndef USE_OPENGL_ES2
-	prepareDrawFromArray(count, index, doProj);
+	prepareDrawFromArray(count, index, NULL, doProj);
 	glDrawArrays(mode, index, count);
 #else
 #error GL ES2 to be done
@@ -1683,14 +1683,14 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int index, bool doP
 void StelPainter::drawFromArray(DrawingMode mode, const unsigned short* indices, int offset, int count, bool doProj)
 {
 #ifndef USE_OPENGL_ES2
-	prepareDrawFromArray(count, 0, doProj);
-	glDrawElements(mode, count, GL_UNSIGNED_SHORT, indices+offset);
+	prepareDrawFromArray(count, 0, indices + offset, doProj);
+	glDrawElements(mode, count, GL_UNSIGNED_SHORT, indices + offset);
 #else
 #error GL ES2 to be done
 #endif
 }
 
-StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& array, int index, int count)
+StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& array, int index, int count, const unsigned short* indices)
 {
 	// XXX: we should use a more generic way to test whether or not to do the projection.
 	if (dynamic_cast<StelProjector2d*>(prj.data()))
@@ -1698,16 +1698,38 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 		return array;
 	}
 
-	tmpVertexArray.resize(index + count);
 	Q_ASSERT(array.size == 3);
 	Q_ASSERT(array.type == GL_DOUBLE);
 	Vec3d* vecArray = (Vec3d*)array.pointer;
 	Vec3d win;
-	for (int i=index; i< index + count; ++i)
+
+	// We have two different cases :
+	// 1) We are not using an indice array.  In that case the size of the array is known
+	// 2) We are using an indice array.  In that case we have to find the max value by iterating through the indices.
+	if (!indices)
 	{
-		prj->project(vecArray[i], win);
-		tmpVertexArray[i].set(win[0], win[1]);
+		tmpVertexArray.resize(index + count);
+		for (int i=index; i< index + count; ++i)
+		{
+			prj->project(vecArray[i], win);
+			tmpVertexArray[i].set(win[0], win[1]);
+		}
+	} else
+	{
+		// we need to find the max value of the indices !
+		unsigned short max = 0;
+		for (int i = index; i < index + count; ++i)
+		{
+			max = std::max(max, indices[i]);
+		}
+		tmpVertexArray.resize(max+1);
+		for (int i=index; i< index + count; ++i)
+		{
+			prj->project(vecArray[indices[i]], win);
+			tmpVertexArray[indices[i]].set(win[0], win[1]);
+		}
 	}
+
 	ArrayDesc ret;
 	ret.size = 2;
 	ret.type = GL_FLOAT;

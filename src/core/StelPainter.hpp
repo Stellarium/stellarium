@@ -251,11 +251,11 @@ private:
 	void prepareArray(const ArrayDesc& array, int cap);
 
 	//! Common code for each flavor of drawFromArray.
-	void prepareDrawFromArray(int count, int index=0, bool doProj=true);
+	void prepareDrawFromArray(int count, int index=0, const unsigned short* indices=NULL, bool doProj=true);
 
 	//! Project an array using the current projection.
 	//! @return a descriptor of the new array
-	ArrayDesc projectArray(const ArrayDesc& array, int index, int count);
+	ArrayDesc projectArray(const ArrayDesc& array, int index, int count, const unsigned short* indices=NULL);
 
 	//! Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 	//! by splitting it into subtriangles. The resulting vertex arrays are appended to the passed out* ones.
