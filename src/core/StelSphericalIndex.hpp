@@ -39,6 +39,12 @@ public:
 		rootNode->processIntersectingRegions(region, func);
 	}
 
+	//! Process all the objects contained in the given region using the passed function object.
+	template<class FuncObject> void processContainedRegions(const SphericalRegionP& region, FuncObject& func) const
+	{
+		rootNode->processContainedRegions(region, func);
+	}
+
 	//! Process all the objects intersecting the given region using the passed function object.
 	template<class FuncObject> void processAll(FuncObject& func) const
 	{
@@ -152,6 +158,12 @@ private:
 				processIntersectingRegions(*this, region, func);
 			}
 
+			//! Process all the objects contained the given region using the passed function object.
+			template<class FuncObject> void processContainedRegions(const SphericalRegionP& region, FuncObject& func) const
+			{
+				processContainedRegions(*this, region, func);
+			}
+
 			//! Process all the objects intersecting the given region using the passed function object.
 			template<class FuncObject> void processAll(FuncObject& func) const
 			{
@@ -207,6 +219,23 @@ private:
 						processAll(child, func);
 					else if (region->intersects(child.triangle))
 						processIntersectingRegions(child, region, func);
+				}
+			}
+
+			//! Process all the objects contained the given region using the passed function object.
+			template<class FuncObject> void processContainedRegions(const Node& node, const SphericalRegionP& region, FuncObject& func) const
+			{
+				foreach (const NodeElem& el, node.elements)
+				{
+					if (region->contains(el.obj->getRegion().data()))
+						func(el.obj);
+				}
+				foreach (const Node& child, node.children)
+				{
+					if (region->contains(child.triangle))
+						processAll(child, func);
+					else if (region->intersects(child.triangle))
+						processContainedRegions(child, region, func);
 				}
 			}
 
