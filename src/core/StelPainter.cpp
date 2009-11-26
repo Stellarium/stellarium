@@ -699,10 +699,10 @@ void StelPainter::drawSmallCircleVertexArray()
 
 	Q_ASSERT(smallCircleVertexArray.size()>1);
 
-	vertexArray.enabled = true;
+	enableClientStates(true);
 	setVertexPointer(2, GL_FLOAT, smallCircleVertexArray.constData());
 	drawFromArray(LineStrip, smallCircleVertexArray.size(), 0, false);
-	vertexArray.enabled = false;
+	enableClientStates(false);
 	smallCircleVertexArray.resize(0);
 }
 
