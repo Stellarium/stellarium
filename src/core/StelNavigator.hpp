@@ -114,15 +114,17 @@ public:
 	Vec3d heliocentricEclipticToEarthPosEquinoxEqu(const Vec3d& v) const { return matAltAzToEquinoxEqu*matHeliocentricEclipticToAltAz*v; }
 
 	//! Get the modelview matrix for heliocentric ecliptic (Vsop87) drawing
-	const Mat4d getHeliocentricEclipticModelViewMat(void) const {return matAltAzModelView*matHeliocentricEclipticToAltAz;}
+	const Mat4d getHeliocentricEclipticModelViewMat() const {return matAltAzModelView*matHeliocentricEclipticToAltAz;}
 	//! Get the modelview matrix for observer-centric ecliptic (Vsop87) drawing
-	const Mat4d getObservercentricEclipticModelViewMat(void) const {return matAltAzModelView*matJ2000ToAltAz*matVsop87ToJ2000;}
+	const Mat4d getObservercentricEclipticModelViewMat() const {return matAltAzModelView*matJ2000ToAltAz*matVsop87ToJ2000;}
 	//! Get the modelview matrix for observer-centric equatorial at equinox drawing
-	const Mat4d getEquinoxEquModelViewMat(void) const {return matAltAzModelView*matEquinoxEquToAltAz;}
+	const Mat4d getEquinoxEquModelViewMat() const {return matAltAzModelView*matEquinoxEquToAltAz;}
 	//! Get the modelview matrix for observer-centric altazimuthal drawing
-	const Mat4d& getAltAzModelViewMat(void) const {return matAltAzModelView;}
+	const Mat4d& getAltAzModelViewMat() const {return matAltAzModelView;}
 	//! Get the modelview matrix for observer-centric J2000 equatorial drawing
-	const Mat4d getJ2000ModelViewMat(void) const {return matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;}
+	const Mat4d getJ2000ModelViewMat() const {return matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;}
+	//! Get the modelview matrix for observer-centric Galactic equatorial drawing
+	const Mat4d getGalacticModelViewMat() const {return getJ2000ModelViewMat()*matGalacticToJ2000;}
 
 	//! Return the inital viewing direction in altazimuthal coordinates
 	const Vec3d& getInitViewingDirection() {return initViewPos;}
@@ -141,7 +143,9 @@ public:
 	//! Rotation matrix from ecliptic (Vsop87) to equatorial J2000
 	static const Mat4d matVsop87ToJ2000;
 	//! Rotation matrix from J2000 to Galactic reference frame, using FITS convention.
-	static const Mat4d matJ2000toGalactic;
+	static const Mat4d matJ2000ToGalactic;
+	//! Rotation matrix from J2000 to Galactic reference frame, using FITS convention.
+	static const Mat4d matGalacticToJ2000;
 
 public slots:
 	//! Toggle current mount mode between equatorial and altazimuthal
