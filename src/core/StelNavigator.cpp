@@ -39,7 +39,8 @@
 // See vsop87.doc:
 const Mat4d StelNavigator::matJ2000ToVsop87(Mat4d::xrotation(-23.4392803055555555556*(M_PI/180)) * Mat4d::zrotation(0.0000275*(M_PI/180)));
 const Mat4d StelNavigator::matVsop87ToJ2000(matJ2000ToVsop87.transpose());
-const Mat4d StelNavigator::matJ2000toGalactic(-0.054875539726, 0.494109453312, -0.867666135858, 0, -0.873437108010, -0.444829589425, -0.198076386122, 0, -0.483834985808, 0.746982251810, 0.455983795705, 0, 0, 0, 0, 1);
+const Mat4d StelNavigator::matJ2000ToGalactic(-0.054875539726, 0.494109453312, -0.867666135858, 0, -0.873437108010, -0.444829589425, -0.198076386122, 0, -0.483834985808, 0.746982251810, 0.455983795705, 0, 0, 0, 0, 1);
+const Mat4d StelNavigator::matGalacticToJ2000(matJ2000ToGalactic.transpose());
 
 ////////////////////////////////////////////////////////////////////////////////
 StelNavigator::StelNavigator() : timeSpeed(JD_SECOND), JDay(0.), position(NULL)
