@@ -77,7 +77,7 @@ void StelVertexArray::foreachTriangle(Func& func) const
 	const Vec2f* te[3];
 	unsigned int indices[3];
 
-	Q_ASSERT(texCoords.size() == vertex.size());
+	//Q_ASSERT(texCoords.size() == vertex.size());
 
 	switch (primitiveType)
 	{
