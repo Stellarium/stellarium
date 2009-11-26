@@ -55,10 +55,13 @@ struct StelVertexArray
 	StelPrimitiveType primitiveType;
 
 	const Vec3d& vertexAt(int i) const {
-		return useIndice ? vertex.constData()[indices.at(i)] : vertex.constData()[i];
+		return vertex.at(indiceAt(i));
 	}
 	const Vec2f& texCoordAt(int i) const {
-		return useIndice ? texCoords.constData()[indices.at(i)] : texCoords.constData()[i];
+		return texCoords.at(indiceAt(i));
+	}
+	unsigned int indiceAt(int i) const {
+		return useIndice ? indices.at(i) : i;
 	}
 
 	//! call a function for each triangle of the array.
@@ -74,10 +77,9 @@ template<class Func>
 void StelVertexArray::foreachTriangle(Func& func) const
 {
 	const Vec3d* ar[3];
-	const Vec2f* te[3];
+	const Vec2f* te[3] = {NULL, NULL, NULL};
 	unsigned int indices[3];
-
-	//Q_ASSERT(texCoords.size() == vertex.size());
+	bool textured = !texCoords.isEmpty();
 
 	switch (primitiveType)
 	{
@@ -88,8 +90,9 @@ void StelVertexArray::foreachTriangle(Func& func) const
 				for (int j = 0; j < 3; ++j)
 				{
 					ar[j] = &vertexAt(i * 3 + j);
-					te[j] = &texCoordAt(i * 3 + j);
-					indices[j] = i * 3 + j;
+					if (textured)
+						te[j] = &texCoordAt(i * 3 + j);
+					indices[j] = indiceAt(i * 3 + j);
 				}
 				func(ar, te, indices);
 			}
@@ -97,16 +100,39 @@ void StelVertexArray::foreachTriangle(Func& func) const
 		case StelVertexArray::TriangleFan:
 		{
 			ar[0]=&vertexAt(0);
+			if (textured)
+				te[0] = &texCoordAt(0);
 			te[0]=&texCoordAt(0);
-			indices[0] = 0;
+			indices[0] = indiceAt(0);
 			for (int i = 1; i < vertex.size() - 1; ++i)
 			{
 				ar[1] = &vertexAt(i);
 				ar[2] = &vertexAt(i+1);
-				te[1] = &texCoordAt(i);
-				te[2] = &texCoordAt(i+1);
-				indices[1] = i;
-				indices[2] = i+1;
+				if (textured)
+				{
+					te[1] = &texCoordAt(i);
+					te[2] = &texCoordAt(i+1);
+				}
+				indices[1] = indiceAt(i);
+				indices[2] = indiceAt(i+1);
+				func(ar, te, indices);
+			}
+			break;
+		}
+		case StelVertexArray::TriangleStrip:
+		{
+			for (int i = 2; i < vertex.size(); ++i)
+			{
+				int pos[3] = {i - 2, i - 1, i};
+				if (i % 2 != 0)
+					std::swap(pos[0], pos[1]);
+				for (int j = 0; j < 3; ++j)
+				{
+					indices[j] = indiceAt(pos[j]);
+					ar[j] = &vertexAt(pos[j]);
+					if (textured)
+						te[j] = &texCoordAt(pos[j]);
+				}
 				func(ar, te, indices);
 			}
 			break;
