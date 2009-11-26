@@ -1185,9 +1185,10 @@ void StelPainter::drawGreatCircleArcs(const StelVertexArray& va, const Spherical
 class VertexArrayProjector
 {
 public:
-	VertexArrayProjector(StelPainter* apainter, const SphericalCap* aclippingCap,
+	VertexArrayProjector(const StelVertexArray& ar, StelPainter* apainter, const SphericalCap* aclippingCap,
 						 QVarLengthArray<Vec2f, 4096>* aoutVertices, QVarLengthArray<Vec2f, 4096>* aoutTexturePos=NULL)
-		   : painter(apainter), clippingCap(aclippingCap), outVertices(aoutVertices), outTexturePos(aoutTexturePos)
+		   : vertexArray(ar), painter(apainter), clippingCap(aclippingCap), outVertices(aoutVertices),
+			 outTexturePos(aoutTexturePos)
 	{
 	}
 
@@ -1207,11 +1208,77 @@ public:
 		else
 			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, NULL, NULL);
 	}
+
+	void go()
+	{
+		vertexArray.foreachTriangle(*this);
+	}
+
+	void drawResult()
+	{
+		painter->setVertexPointer(2, GL_FLOAT, outVertices->constData());
+		if (outTexturePos)
+			painter->setTexCoordPointer(2, GL_FLOAT, outTexturePos->constData());
+		painter->enableClientStates(true, outTexturePos != NULL);
+		painter->drawFromArray(StelPainter::Triangles, outVertices->size(), 0, false);
+		painter->enableClientStates(false);
+	}
+
 private:
+	const StelVertexArray& vertexArray;
 	StelPainter* painter;
 	const SphericalCap* clippingCap;
 	QVarLengthArray<Vec2f, 4096>* outVertices;
 	QVarLengthArray<Vec2f, 4096>* outTexturePos;
+};
+
+
+class RemoveDisontinuousTriangles
+{
+public:
+	RemoveDisontinuousTriangles(const StelVertexArray& ar, StelPainter* apainter,
+								QVarLengthArray<unsigned short, 4096>* aoutIndices, bool isTextured)
+		: vertexArray(ar), painter(apainter), outIndices(aoutIndices), textured(isTextured)
+	{
+	}
+
+	void go()
+	{
+		vertexArray.foreachTriangle(*this);
+	}
+
+	inline void operator() (const Vec3d* vertex[3], const Vec2f* tex[3], unsigned int indices[3])
+	{
+		StelProjector* prj = painter->getProjector().data();
+		for (int i = 0; i < 3; ++i)
+		{
+			const Vec3d& v0 = *vertex[i];
+			const Vec3d& v1 = *vertex[(i + 1) % 3];
+			if (prj->intersectViewportDiscontinuity(v0, v1))
+			{
+				return;
+			}
+		}
+		outIndices->append(indices[0]);
+		outIndices->append(indices[1]);
+		outIndices->append(indices[2]);
+	}
+
+	void drawResult()
+	{
+		painter->setVertexPointer(3, GL_DOUBLE, vertexArray.vertex.constData());
+		painter->setTexCoordPointer(2, GL_FLOAT, vertexArray.texCoords.constData());
+		painter->enableClientStates(true, textured);
+		StelPainter::DrawingMode mode = (StelPainter::DrawingMode)vertexArray.primitiveType;
+		painter->drawFromArray(mode, outIndices->constData(), 0, outIndices->size());
+		painter->enableClientStates(false);
+	}
+
+private:
+	const StelVertexArray& vertexArray;
+	StelPainter* painter;
+	QVarLengthArray<unsigned short, 4096>* outIndices;
+	bool textured;
 };
 
 
@@ -1220,12 +1287,17 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 	if (va.vertex.isEmpty())
 		return;
 
+	// Never need to do clipping if the projection doesn't have a discontinuity
+	if (!prj->hasDiscontinuity())
+		doClip = false;
+
 	Q_ASSERT(va.vertex.size()>2);
 #ifndef USE_OPENGL_ES2
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 #endif
 	polygonVertexArray.clear();
 	polygonTextureCoordArray.clear();
+	indexArray.clear();
 
 	SphericalCap cap;
 	const SphericalCap* clippingCap = NULL;
@@ -1235,52 +1307,36 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 		clippingCap = &cap;
 	}
 
-	bool useIndice = va.useIndice;
-	// We can cast because both enum follow opengl convention.
-	DrawingMode mode = (DrawingMode)va.primitiveType;
-
-
-	// The simplest case, we don't need to iterate through the triangles at all.  We just project all the vertices.
+	// The simplest case, we don't need to iterate through the triangles at all.
 	if (!doClip && !doSubDivide)
 	{
-		// We could also use a method of vertexArray to iterate through the vertices here.
-		foreach(const Vec3d& v, va.vertex)
-		{
-			Vec3d win;
-			prj->project(v, win);
-			polygonVertexArray.append(Vec2f(win[0], win[1]));
-		}
+		Q_ASSERT_X(!va.useIndice, Q_FUNC_INFO, "indexed vertex array not done yet");
 
-		// We could remove this part when we remove all unsigned short in the indices.
-		indexArray.clear();
-		foreach(unsigned int i, va.indices)
-		{
-			indexArray.append(i);
-		}
-
-		setVertexPointer(2, GL_FLOAT, polygonVertexArray.constData());
+		setVertexPointer(3, GL_DOUBLE, va.vertex.constData());
 		setTexCoordPointer(2, GL_FLOAT, va.texCoords.constData());
+
+		enableClientStates(true, textured);
+		drawFromArray((DrawingMode)va.primitiveType, va.vertex.size());
+		enableClientStates(false);
+		return;
 	}
-	else
+	if (doClip && !doSubDivide)
+	{
+		RemoveDisontinuousTriangles removeTriangles(va, this, &indexArray, textured);
+		removeTriangles.go();
+		removeTriangles.drawResult();
+		return;
+	}
+
+	// the last case.  It is the slowest, it process the triangles one by one.
 	{
 		// Project all the triangles of the VertexArray into our buffer arrays.
-		VertexArrayProjector projector(this, clippingCap, &polygonVertexArray,
+		VertexArrayProjector projector(va, this, clippingCap, &polygonVertexArray,
 									   textured ? &polygonTextureCoordArray : NULL);
-		va.foreachTriangle(projector);
-		useIndice = false; // the projection destroy eventual indices
-		mode = Triangles;  // and create a set of Triangles
-
-		setVertexPointer(2, GL_FLOAT, polygonVertexArray.constData());
-		setTexCoordPointer(2, GL_FLOAT, polygonTextureCoordArray.constData());
+		projector.go();
+		projector.drawResult();
+		return;
 	}
-
-	// Draw the projected arrays.
-	enableClientStates(true, textured);
-	if (!useIndice)
-		drawFromArray(mode, polygonVertexArray.size(), 0, false);
-	else
-		drawFromArray(mode, indexArray.constData(), 0, indexArray.size(), false);
-	enableClientStates(false);
 }
 
 // Draw the given SphericalPolygon.
