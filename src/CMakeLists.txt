@@ -155,6 +155,7 @@ SET(stellarium_lib_SRCS
 	core/SimbadSearcher.cpp
 	core/StelSphericalIndex.hpp
 	core/StelSphericalIndex.cpp
+	core/StelVertexArray.hpp
 	core/StelGuiBase.hpp
 	core/StelGuiBase.cpp
 

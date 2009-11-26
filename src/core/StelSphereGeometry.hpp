@@ -27,6 +27,7 @@
 #include <QVarLengthArray>
 #include "VecMath.hpp"
 #include "OctahedronPolygon.hpp"
+#include "StelVertexArray.hpp"
 
 class SphericalRegion;
 class SphericalPolygon;
