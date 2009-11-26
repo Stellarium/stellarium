@@ -37,12 +37,9 @@
 /*************************************************************************
  Constructor
 *************************************************************************/
-StelCore::StelCore() : geodesicGrid(NULL), currentProjectionType(ProjectionStereographic)
+StelCore::StelCore() : navigation(NULL), movementMgr(NULL), geodesicGrid(NULL), currentProjectionType(ProjectionStereographic)
 {
 	toneConverter = new StelToneReproducer();
-	movementMgr = new StelMovementMgr(this);
-	movementMgr->init();
-	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	// Create and initialize the default projector params
@@ -58,8 +55,6 @@ StelCore::StelCore() : geodesicGrid(NULL), currentProjectionType(ProjectionStere
 	const double viewportCenterY = conf->value("projection/viewport_center_y",0.5*viewport_height).toDouble();
 	currentProjectorParams.viewportCenter.set(viewportCenterX, viewportCenterY);
 	currentProjectorParams.viewportFovDiameter = conf->value("projection/viewport_fov_diameter", qMin(viewport_width,viewport_height)).toDouble();
-	currentProjectorParams.fov = movementMgr->getInitFov();
-
 	currentProjectorParams.flipHorz = conf->value("projection/flip_horz",false).toBool();
 	currentProjectorParams.flipVert = conf->value("projection/flip_vert",false).toBool();
 
@@ -90,6 +85,11 @@ void StelCore::init()
 	// StelNavigator
 	navigation = new StelNavigator();
 	navigation->init();
+
+	movementMgr = new StelMovementMgr(this);
+	movementMgr->init();
+	currentProjectorParams.fov = movementMgr->getInitFov();
+	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);
 
 	QString tmpstr = conf->value("projection/type", "stereographic").toString();
 	setCurrentProjectionTypeKey(tmpstr);

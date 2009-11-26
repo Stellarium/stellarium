@@ -40,7 +40,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore) : core(acore),
 	flagEnableMouseNavigation(true),
 	keyMoveSpeed(0.00025),
 	flagMoveSlow(false),
-	flagAutoMove(0),
+	flagAutoMove(false),
 	deltaFov(0.),
 	deltaAlt(0.),
 	deltaAz(0.),
@@ -49,6 +49,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore) : core(acore),
 {
 	setObjectName("StelMovementMgr");
 	isDragging = false;
+	mountMode = MountAltAzimuthal;  // default
 }
 
 StelMovementMgr::~StelMovementMgr()
@@ -77,6 +78,40 @@ void StelMovementMgr::init()
 	maxFov = 100.;
 	initFov = conf->value("navigation/init_fov",60.).toDouble();
 	currentFov = initFov;
+
+	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
+	if (tmpstr=="equator")
+		setMountMode(StelMovementMgr::MountEquinoxEquatorial);
+	else
+	{
+		if (tmpstr=="horizon")
+			setMountMode(StelMovementMgr::MountAltAzimuthal);
+		else
+		{
+			qDebug() << "ERROR : Unknown viewing mode type : " << tmpstr;
+			Q_ASSERT(0);
+		}
+	}
+	initViewPos = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
+	viewDirectionJ2000 = core->getNavigator()->altAzToJ2000(initViewPos);
+	setViewDirectionJ2000(viewDirectionJ2000);
+
+}
+
+void StelMovementMgr::setMountMode(MountMode m)
+{
+	mountMode = m;
+	setViewDirectionJ2000(viewDirectionJ2000);
+}
+
+void StelMovementMgr::setFlagLockEquPos(bool b)
+{
+	flagLockEquPos=b;
+}
+
+Vec3d StelMovementMgr::getViewUpVectorJ2000() const
+{
+	return mountFrameToJ2000(Vec3d(0,0,1));
 }
 
 bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons b)
@@ -238,7 +273,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 			{
 				if (objectMgr->getWasSelected())
 				{
-					moveTo(objectMgr->getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()),autoMoveDuration);
+					moveToObject(objectMgr->getSelectedObject()[0],autoMoveDuration);
 					setFlagTracking(true);
 				}
 			}
@@ -246,6 +281,13 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 		default: break;
 	}
 	return;
+}
+
+void StelMovementMgr::setInitViewDirectionToCurrent()
+{
+	initViewPos = core->getNavigator()->j2000ToAltAz(viewDirectionJ2000);
+	QString dirStr = QString("%1,%2,%3").arg(initViewPos[0]).arg(initViewPos[1]).arg(initViewPos[2]);
+	StelApp::getInstance().getSettings()->setValue("navigation/init_view_pos", dirStr);
 }
 
 /*************************************************************************
@@ -327,10 +369,9 @@ void StelMovementMgr::zoomOut(bool s)
 // Increment/decrement smoothly the vision field and position
 void StelMovementMgr::updateMotion(double deltaTime)
 {
-	const StelProjectorP proj = core->getProjection(StelCore::FrameJ2000);
-
 	updateVisionVector(deltaTime);
 
+	const StelProjectorP proj = core->getProjection(StelCore::FrameJ2000);
 	// the more it is zoomed, the lower the moving speed is (in angle)
 	double depl=keyMoveSpeed*deltaTime*1000*currentFov;
 	double deplzoom=keyZoomSpeed*deltaTime*1000*proj->deltaZoom(currentFov*(M_PI/360.0))*(360.0/M_PI);
@@ -397,6 +438,97 @@ void StelMovementMgr::updateMotion(double deltaTime)
 }
 
 
+void StelMovementMgr::updateVisionVector(double deltaTime)
+{
+	if (flagAutoMove)
+	{
+		if (!move.targetObject.isNull())
+		{
+			// if zooming in, object may be moving so be sure to zoom to latest position
+			move.aim = move.targetObject->getJ2000EquatorialPos(core->getNavigator());
+			move.aim.normalize();
+			move.aim*=2.;
+		}
+
+		move.coef+=move.speed*deltaTime*1000;
+		if (move.coef>=1.)
+		{
+			flagAutoMove=false;
+			move.coef=1.;
+		}
+
+		// Use a smooth function
+		float smooth = 4.f;
+		double c;
+		if (zoomingMode==1)
+		{
+			if (move.coef>.9)
+			{
+				c = 1.;
+			}
+			else
+			{
+				c = 1. - pow(1.-1.11*move.coef,3.);
+			}
+		}
+		else if (zoomingMode==-1)
+		{
+			if (move.coef<0.1)
+			{
+				// keep in view at first as zoom out
+				c = 0;
+			}
+			else
+			{
+				c =  pow(1.11*(move.coef-.1),3.);
+			}
+		}
+		else
+			c = std::atan(smooth * 2.*move.coef-smooth)/std::atan(smooth)/2+0.5;
+
+		Vec3d tmpStart(j2000ToMountFrame(move.start));
+		Vec3d tmpAim(j2000ToMountFrame(move.aim));
+		double ra_aim, de_aim, ra_start, de_start;
+		StelUtils::rectToSphe(&ra_start, &de_start, tmpStart);
+		StelUtils::rectToSphe(&ra_aim, &de_aim, tmpAim);
+
+		// Trick to choose the good moving direction and never travel on a distance > PI
+		if (ra_aim-ra_start > M_PI)
+		{
+			ra_aim -= 2.*M_PI;
+		}
+		else if (ra_aim-ra_start < -M_PI)
+		{
+			ra_aim += 2.*M_PI;
+		}
+		const double de_now = de_aim*c + de_start*(1.-c);
+		const double ra_now = ra_aim*c + ra_start*(1.-c);
+		Vec3d tmp;
+		StelUtils::spheToRect(ra_now, de_now, tmp);
+		setViewDirectionJ2000(mountFrameToJ2000(tmp));
+	}
+	else
+	{
+		if (flagTracking && objectMgr->getWasSelected()) // Equatorial vision vector locked on selected object
+		{
+			setViewDirectionJ2000(objectMgr->getSelectedObject()[0]->getJ2000EquatorialPos(core->getNavigator()));
+		}
+		else
+		{
+			if (flagLockEquPos) // Equatorial vision vector locked
+			{
+				// Recalc local vision vector
+				setViewDirectionJ2000(viewDirectionJ2000);
+			}
+			else
+			{
+				// Vision vector locked to its position in the mountFrame
+				setViewDirectionJ2000(mountFrameToJ2000(viewDirectionMountFrame));
+			}
+		}
+	}
+}
+
 // Go and zoom to the selected object.
 void StelMovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 {
@@ -407,11 +539,10 @@ void StelMovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 		moveDuration /= StelApp::getInstance().getScriptMgr().getScriptRate();
 
 	float manualMoveDuration;
-
 	if (!getFlagTracking())
 	{
 		setFlagTracking(true);
-		moveTo(objectMgr->getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()), moveDuration, false, 1);
+		moveToObject(objectMgr->getSelectedObject()[0], moveDuration, 1);
 		manualMoveDuration = moveDuration;
 	}
 	else
@@ -445,8 +576,6 @@ void StelMovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 // Unzoom and go to the init position
 void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 {
-	StelNavigator* nav = core->getNavigator();
-
 	if (StelApp::getInstance().getScriptMgr().scriptIsRunning())
 		moveDuration /= StelApp::getInstance().getScriptMgr().getScriptRate();
 
@@ -474,7 +603,7 @@ void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 
 	zoomTo(initFov, moveDuration);
 	if (flagAutoZoomOutResetsDirection)
-		moveTo(nav->getInitViewingDirection(), moveDuration, true, -1);
+		moveToJ2000(core->getNavigator()->altAzToJ2000(getInitViewingDirection()), moveDuration, -1);
 	setFlagTracking(false);
 	setFlagLockEquPos(false);
 }
@@ -482,181 +611,97 @@ void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 
 void StelMovementMgr::setFlagTracking(bool b)
 {
-	if(!b || !objectMgr->getWasSelected())
+	if (!b || !objectMgr->getWasSelected())
 	{
 		flagTracking=false;
 	}
 	else
 	{
-		moveTo(objectMgr->getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()), getAutoMoveDuration());
+		moveToObject(objectMgr->getSelectedObject()[0], getAutoMoveDuration());
 		flagTracking=true;
 	}
 }
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// Move to the given equatorial position
-void StelMovementMgr::moveTo(const Vec3d& _aim, float moveDuration, bool _localPos, int zooming)
+// Move to the given J2000 equatorial position
+void StelMovementMgr::moveToJ2000(const Vec3d& aim, float moveDuration, int zooming)
 {
-	StelNavigator* nav = core->getNavigator();
 	if (StelApp::getInstance().getScriptMgr().scriptIsRunning())
 		moveDuration /= StelApp::getInstance().getScriptMgr().getScriptRate();
 
 	zoomingMode = zooming;
-	move.aim=_aim;
+	move.aim=aim;
 	move.aim.normalize();
 	move.aim*=2.;
-	if (_localPos)
-	{
-		move.start=nav->getAltAzVisionDirection();
-	}
-	else
-	{
-		move.start=nav->getEquinoxEquVisionDirection();
-	}
+	move.start=viewDirectionJ2000;
 	move.start.normalize();
 	move.speed=1.f/(moveDuration*1000);
 	move.coef=0.;
-	move.localPos = _localPos;
+	move.targetObject.clear();
 	flagAutoMove = true;
 }
 
-
-////////////////////////////////////////////////////////////////////////////////
-void StelMovementMgr::updateVisionVector(double deltaTime)
+void StelMovementMgr::moveToObject(const StelObjectP& target, float moveDuration, int zooming)
 {
-	StelNavigator* nav = core->getNavigator();
-	if (flagAutoMove)
-	{
-		double ra_aim, de_aim, ra_start, de_start, ra_now, de_now;
+	if (StelApp::getInstance().getScriptMgr().scriptIsRunning())
+		moveDuration /= StelApp::getInstance().getScriptMgr().getScriptRate();
 
-		if( zoomingMode == 1 && objectMgr->getWasSelected())
-		{
-			// if zooming in, object may be moving so be sure to zoom to latest position
-			move.aim = objectMgr->getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator());
-			move.aim.normalize();
-			move.aim*=2.;
-		}
-
-		// Use a smooth function
-		float smooth = 4.f;
-		double c;
-
-		if (zoomingMode == 1)
-		{
-			if( move.coef > .9 )
-			{
-				c = 1;
-			}
-			else
-			{
-				c = 1 - pow(1.-1.11*(move.coef),3);
-			}
-		}
-		else if(zoomingMode == -1)
-		{
-			if( move.coef < 0.1 )
-			{
-				// keep in view at first as zoom out
-				c = 0;
-
-				/* could track as moves too, but would need to know if start was actually
-				   a zoomed in view on the object or an extraneous zoom out command
-				   if(move.localPos) {
-				   move.start=equinoxEquToAltAz(selected.getEquinoxEquatorialPos(this));
-				   } else {
-				   move.start=selected.getEquinoxEquatorialPos(this);
-				   }
-				   move.start.normalize();
-				*/
-
-			}
-			else
-			{
-				c =  pow(1.11*(move.coef-.1),3);
-			}
-		}
-		else c = std::atan(smooth * 2.*move.coef-smooth)/std::atan(smooth)/2+0.5;
-
-
-		if (move.localPos)
-		{
-			StelUtils::rectToSphe(&ra_aim, &de_aim, move.aim);
-			StelUtils::rectToSphe(&ra_start, &de_start, move.start);
-		}
-		else
-		{
-			StelUtils::rectToSphe(&ra_aim, &de_aim, nav->equinoxEquToAltAz(move.aim));
-			StelUtils::rectToSphe(&ra_start, &de_start, nav->equinoxEquToAltAz(move.start));
-		}
-
-		// Trick to choose the good moving direction and never travel on a distance > PI
-		if (ra_aim-ra_start > M_PI)
-		{
-			ra_aim -= 2.*M_PI;
-		}
-		else if (ra_aim-ra_start < -M_PI)
-		{
-			ra_aim += 2.*M_PI;
-		}
-
-		de_now = de_aim*c + de_start*(1. - c);
-		ra_now = ra_aim*c + ra_start*(1. - c);
-
-		Vec3d tmp;
-		StelUtils::spheToRect(ra_now, de_now, tmp);
-		nav->setEquinoxEquVisionDirection(nav->altAzToEquinoxEqu(tmp));
-
-		move.coef+=move.speed*deltaTime*1000;
-		if (move.coef>=1.)
-		{
-			flagAutoMove=0;
-			if (move.localPos)
-			{
-				nav->setAltAzVisionDirection(move.aim);
-			}
-			else
-			{
-				nav->setEquinoxEquVisionDirection(move.aim);
-			}
-		}
-	}
-	else
-	{
-		if (flagTracking && objectMgr->getWasSelected()) // Equatorial vision vector locked on selected object
-		{
-			nav->setEquinoxEquVisionDirection(objectMgr->getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()));
-		}
-		else
-		{
-			if (flagLockEquPos) // Equatorial vision vector locked
-			{
-				// Recalc local vision vector
-				nav->setAltAzVisionDirection(nav->equinoxEquToAltAz(nav->getEquinoxEquVisionDirection()));
-			}
-			else // Local vision vector locked
-			{
-				// Recalc equatorial vision vector
-				nav->setEquinoxEquVisionDirection(nav->altAzToEquinoxEqu(nav->getAltAzVisionDirection()));
-			}
-		}
-	}
+	zoomingMode = zooming;
+	move.aim=Vec3d(0);
+	move.start=viewDirectionJ2000;
+	move.start.normalize();
+	move.speed=1.f/(moveDuration*1000);
+	move.coef=0.;
+	move.targetObject = target;
+	flagAutoMove = true;
 }
 
+Vec3d StelMovementMgr::j2000ToMountFrame(const Vec3d& v) const
+{
+	switch (mountMode)
+	{
+		case MountAltAzimuthal:
+			return core->getNavigator()->j2000ToAltAz(v);
+		case MountEquinoxEquatorial:
+			return core->getNavigator()->j2000ToEquinoxEqu(v);
+		case MountGalactic:
+			return core->getNavigator()->j2000ToGalactic(v);
+	}
+	Q_ASSERT(0);
+	return Vec3d(0);
+}
 
-////////////////////////////////////////////////////////////////////////////////
+Vec3d StelMovementMgr::mountFrameToJ2000(const Vec3d& v) const
+{
+	switch (mountMode)
+	{
+		case MountAltAzimuthal:
+			return core->getNavigator()->altAzToJ2000(v);
+		case MountEquinoxEquatorial:
+			return core->getNavigator()->equinoxEquToJ2000(v);
+		case MountGalactic:
+			return core->getNavigator()->galacticToJ2000(v);
+	}
+	Q_ASSERT(0);
+	return Vec3d(0);
+}
+
+void StelMovementMgr::setViewDirectionJ2000(const Vec3d& v)
+{
+	core->getNavigator()->lookAtJ2000(v, getViewUpVectorJ2000());
+	viewDirectionJ2000 = v;
+	viewDirectionMountFrame = j2000ToMountFrame(v);
+}
+
 void StelMovementMgr::panView(double deltaAz, double deltaAlt)
 {
-	StelNavigator* nav = core->getNavigator();
 	double azVision, altVision;
-
-	if (nav->getMountMode() == StelNavigator::MountEquinoxEquatorial)
-		StelUtils::rectToSphe(&azVision,&altVision,nav->getEquinoxEquVisionDirection());
-	else
-		StelUtils::rectToSphe(&azVision,&altVision,nav->getAltAzVisionDirection());
+	StelUtils::rectToSphe(&azVision,&altVision,j2000ToMountFrame(viewDirectionJ2000));
 
 	// if we are moving in the Azimuthal angle (left/right)
-	if (deltaAz) azVision-=deltaAz;
+	if (deltaAz)
+		azVision-=deltaAz;
 	if (deltaAlt)
 	{
 		if (altVision+deltaAlt <= M_PI_2 && altVision+deltaAlt >= -M_PI_2) altVision+=deltaAlt;
@@ -668,19 +713,9 @@ void StelMovementMgr::panView(double deltaAz, double deltaAlt)
 	if (deltaAz || deltaAlt)
 	{
 		setFlagTracking(false);
-		if (nav->getMountMode() == StelNavigator::MountEquinoxEquatorial)
-		{
-			Vec3d tmp;
-			StelUtils::spheToRect(azVision, altVision, tmp);
-			nav->setAltAzVisionDirection(nav->equinoxEquToAltAz(tmp));
-		}
-		else
-		{
-			Vec3d tmp;
-			StelUtils::spheToRect(azVision, altVision, tmp);
-			// Calc the equatorial coordinate of the direction of vision wich was in Altazimuthal coordinate
-			nav->setEquinoxEquVisionDirection(nav->altAzToEquinoxEqu(tmp));
-		}
+		Vec3d tmp;
+		StelUtils::spheToRect(azVision, altVision, tmp);
+		setViewDirectionJ2000(mountFrameToJ2000(tmp));
 	}
 }
 
@@ -688,20 +723,13 @@ void StelMovementMgr::panView(double deltaAz, double deltaAlt)
 //! Make the first screen position correspond to the second (useful for mouse dragging)
 void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 {
-	StelNavigator* nav = core->getNavigator();
-
 	Vec3d tempvec1, tempvec2;
 	double az1, alt1, az2, alt2;
-	const StelProjectorP prj = nav->getMountMode()==StelNavigator::MountAltAzimuthal ? core->getProjection(StelCore::FrameAltAz) :
-		core->getProjection(StelCore::FrameEquinoxEqu);
-
-//johannes: StelApp already gives appropriate x/y coordinates
-//	proj->unProject(x2,proj->getViewportHeight()-y2, tempvec2);
-//	proj->unProject(x1,proj->getViewportHeight()-y1, tempvec1);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	prj->unProject(x2,y2, tempvec2);
 	prj->unProject(x1,y1, tempvec1);
-	StelUtils::rectToSphe(&az1, &alt1, tempvec1);
-	StelUtils::rectToSphe(&az2, &alt2, tempvec2);
+	StelUtils::rectToSphe(&az1, &alt1, j2000ToMountFrame(tempvec1));
+	StelUtils::rectToSphe(&az2, &alt2, j2000ToMountFrame(tempvec2));
 	panView(az2-az1, alt1-alt2);
 	setFlagTracking(false);
 	setFlagLockEquPos(false);

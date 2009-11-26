@@ -45,8 +45,6 @@ const Mat4d StelNavigator::matGalacticToJ2000(matJ2000ToGalactic.transpose());
 ////////////////////////////////////////////////////////////////////////////////
 StelNavigator::StelNavigator() : timeSpeed(JD_SECOND), JDay(0.), position(NULL)
 {
-	J2000EquVisionDirection=Vec3d(1.,0.,0.);  // not correct yet...
-	mountMode = MountAltAzimuthal;  // default
 }
 
 StelNavigator::~StelNavigator()
@@ -66,22 +64,6 @@ void StelNavigator::init()
 	setTimeNow();
 	// Compute transform matrices between coordinates systems
 	updateTransformMatrices();
-	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
-	if (tmpstr=="equator")
-		setMountMode(StelNavigator::MountEquinoxEquatorial);
-	else
-	{
-		if (tmpstr=="horizon")
-			setMountMode(StelNavigator::MountAltAzimuthal);
-		else
-		{
-			qDebug() << "ERROR : Unknown viewing mode type : " << tmpstr;
-			Q_ASSERT(0);
-		}
-	}
-
-	initViewPos = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
-	setAltAzVisionDirection(initViewPos);
 
 	// we want to be able to handle the old style preset time, recorded as a double
 	// jday, or as a more human readable string...
@@ -227,13 +209,6 @@ double StelNavigator::getLocalSideralDayLength() const
 	return position->getHomePlanet()->getSiderealDay();
 }
 
-void StelNavigator::setInitViewDirectionToCurrent()
-{
-	initViewPos = getAltAzVisionDirection();
-	QString dirStr = QString("%1,%2,%3").arg(initViewPos[0]).arg(initViewPos[1]).arg(initViewPos[2]);
-	StelApp::getInstance().getSettings()->setValue("navigation/init_view_pos", dirStr);
-}
-
 //! Increase the time speed
 void StelNavigator::increaseTimeSpeed()
 {
@@ -277,45 +252,17 @@ void StelNavigator::decreaseTimeSpeedLess()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void StelNavigator::setAltAzVisionDirection(const Vec3d& pos)
+void StelNavigator::lookAtJ2000(const Vec3d& pos, const Vec3d& aup)
 {
-	setJ2000EquVisionDirection(equinoxEquToJ2000(altAzToEquinoxEqu(pos)));
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void StelNavigator::setEquinoxEquVisionDirection(const Vec3d& pos)
-{
-	setJ2000EquVisionDirection(equinoxEquToJ2000(pos));
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void StelNavigator::setJ2000EquVisionDirection(const Vec3d& pos)
-{
-	J2000EquVisionDirection = pos;
+	Vec3d f(j2000ToAltAz(pos));
+	Vec3d up(j2000ToAltAz(aup));
+	f.normalize();
+	up.normalize();
 
 	// Update the model view matrix
-	Vec3d f, s;
-	if (mountMode == MountEquinoxEquatorial)
-	{
-		// view will use equatorial coordinates, so that north is always up
-		f = j2000ToEquinoxEqu(pos);
-		f.normalize();
-		s.set(f[1],-f[0], 0.);
-		// convert everything back to local coord
-		f = j2000ToAltAz(pos);
-		f.normalize();
-		s = equinoxEquToAltAz(s);
-	}
-	else
-	{
-		// view will correct for horizon (always down)
-		f = j2000ToAltAz(pos);
-		f.normalize();
-		s.set(f[1],-f[0], 0.);
-	}
-
-	Vec3d u(s^f);	// Up vector in AltAz coordinates
+	Vec3d s(f^up);	// y vector
 	s.normalize();
+	Vec3d u(s^f);	// Up vector in AltAz coordinates
 	u.normalize();
 	matAltAzModelView.set(s[0],u[0],-f[0],0.,
 						 s[1],u[1],-f[1],0.,

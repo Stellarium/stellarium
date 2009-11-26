@@ -217,7 +217,7 @@ void SearchDialog::manualPositionChanged()
 	Vec3d pos;
 	StelUtils::spheToRect(ui->RAAngleSpinBox->valueRadians(), ui->DEAngleSpinBox->valueRadians(), pos);
 	mvmgr->setFlagTracking(false);
-	mvmgr->moveTo(pos, 0.05);
+	mvmgr->moveToJ2000(pos, 0.05);
 }
 
 void SearchDialog::onTextChanged(const QString& text)
@@ -312,8 +312,7 @@ void SearchDialog::gotoObject()
 		close();
 		Vec3d pos = simbadResults[name];
 		objectMgr->unSelect();
-		pos = StelApp::getInstance().getCore()->getNavigator()->j2000ToEquinoxEqu(pos);
-		mvmgr->moveTo(pos, mvmgr->getAutoMoveDuration());
+		mvmgr->moveToJ2000(pos, mvmgr->getAutoMoveDuration());
 		ui->lineEditSearchSkyObject->clear();
 		ui->completionLabel->clearValues();
 	}
@@ -328,7 +327,7 @@ void SearchDialog::gotoObject()
 			// Can't point to home planet
 			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().name)
 			{
-				mvmgr->moveTo(newSelected[0]->getEquinoxEquatorialPos(StelApp::getInstance().getCore()->getNavigator()),mvmgr->getAutoMoveDuration());
+				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
 				mvmgr->setFlagTracking(true);
 			}
 			else
