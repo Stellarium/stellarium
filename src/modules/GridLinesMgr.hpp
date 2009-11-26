@@ -1,22 +1,22 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
- 
+
 #ifndef _GRIDLINESMGR_HPP_
 #define _GRIDLINESMGR_HPP_
 
@@ -44,28 +44,28 @@ public:
 	//! sets the visibility of the Equatorial Grid, Azimuthal Grid, Meridian Line,
 	//! Equator Line and Ecliptic Line.
 	virtual void init();
-	
+
 	//! Get the module ID, returns, "gridlines".
 	virtual QString getModuleID() const {return "GridLinesMgr";}
-	
+
 	//! Draw the grids and great circle lines.
-	//! Draws the Equatorial Grid, Azimuthal Grid, Meridian Line, Equator Line 
+	//! Draws the Equatorial Grid, Azimuthal Grid, Meridian Line, Equator Line
 	//! and Ecliptic Line according to the various flags which control their
 	//! visibility.
 	virtual void draw(StelCore* core);
-	
+
 	//! Update time-dependent features.
 	//! Used to control fading when turning on and off the grid lines and great circles.
 	virtual void update(double deltaTime);
-	
+
 	//! Sets the colors of the grids and great circles.
-	//! Sets the colors of the Equatorial Grid, Azimuthal Grid, 
+	//! Sets the colors of the Equatorial Grid, Azimuthal Grid,
 	//! Meridian Line, Equator Line and Ecliptic Line.
 	virtual void setStelStyle(const StelStyle& style);
-	
+
 	//! Used to determine the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Setter and getters
 public slots:
@@ -77,7 +77,7 @@ public slots:
 	Vec3f getColorAzimuthalGrid(void) const;
 	//! Set the color of the Azimuthal Grid.
 	void setColorAzimuthalGrid(const Vec3f& v);
-	
+
 	//! Set flag for displaying Equatorial Grid.
 	void setFlagEquatorGrid(bool b);
 	//! Get flag for displaying Equatorial Grid.
@@ -86,7 +86,7 @@ public slots:
 	Vec3f getColorEquatorGrid(void) const;
 	//! Set the color of the Equatorial Grid.
 	void setColorEquatorGrid(const Vec3f& v);
-	
+
 	//! Set flag for displaying Equatorial Grid.
 	void setFlagEquatorJ2000Grid(bool b);
 	//! Get flag for displaying Equatorial Grid.
@@ -95,7 +95,16 @@ public slots:
 	Vec3f getColorEquatorJ2000Grid(void) const;
 	//! Set the color of the Equatorial J2000 Grid.
 	void setColorEquatorJ2000Grid(const Vec3f& v);
-	
+
+	//! Set flag for displaying Galactic Grid.
+	void setFlagGalacticGrid(bool b);
+	//! Get flag for displaying Galactic Grid.
+	bool getFlagGalacticGrid(void) const;
+	//! Get the current color of the Galactic Grid.
+	Vec3f getColorGalacticGrid(void) const;
+	//! Set the color of the Galactic Grid.
+	void setColorGalacticGrid(const Vec3f& v);
+
 	//! Set flag for displaying Equatorial Line.
 	void setFlagEquatorLine(bool b);
 	//! Get flag for displaying Equatorial Line.
@@ -104,7 +113,7 @@ public slots:
 	Vec3f getColorEquatorLine(void) const;
 	//! Set the color of the Meridian Line.
 	void setColorEquatorLine(const Vec3f& v);
-	
+
 	//! Set flag for displaying Ecliptic Line.
 	void setFlagEclipticLine(bool b);
 	//! Get flag for displaying Ecliptic Line.
@@ -122,10 +131,11 @@ public slots:
 	Vec3f getColorMeridianLine(void) const;
 	//! Set the color of the Meridian Line.
 	void setColorMeridianLine(const Vec3f& v);
-	
+
 private:
 	SkyGrid * equGrid;      // Equatorial grid
 	SkyGrid * equJ2000Grid; // Equatorial J2000 grid
+	SkyGrid * galacticGrid; // Galactic grid
 	SkyGrid * aziGrid;      // Azimuthal grid
 	SkyLine * equatorLine;  // Celestial Equator line
 	SkyLine * eclipticLine; // Ecliptic line
