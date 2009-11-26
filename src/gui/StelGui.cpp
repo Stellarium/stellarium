@@ -83,12 +83,12 @@ StelGui::~StelGui()
 void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidget* astelAppGraphicsWidget)
 {
 	qDebug() << "Creating GUI ...";
-	
+
 	StelGuiBase::init(atopLevelGraphicsWidget, astelAppGraphicsWidget);
-	
+
 	skyGui = new SkyGui();
 	configurationDialog = new ConfigurationDialog(this);
-	
+
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
 	QString group = N_("Display Options");
@@ -100,6 +100,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionShow_Azimuthal_Grid", N_("Azimuthal grid"), "Z", group, true, false);
 	addGuiActions("actionShow_Equatorial_Grid", N_("Equatorial grid"), "E", group, true, false);
 	addGuiActions("actionShow_Equatorial_J2000_Grid", N_("Equatorial J2000 grid"), "", group, true, false);
+	addGuiActions("actionShow_Galactic_Grid", N_("Galactic grid"), "", group, true, false);
 	addGuiActions("actionShow_Ecliptic_Line", N_("Ecliptic line"), ",", group, true, false);
 	addGuiActions("actionShow_Equator_Line", N_("Equator line"), ".", group, true, false);
 	addGuiActions("actionShow_Meridian_Line", N_("Meridian line"), ";", group, true, false);
@@ -182,7 +183,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionAutoHideVerticalButtonBar", N_("Auto hide vertical button bar"), "", group, true, false);
 	addGuiActions("actionToggle_GuiHidden_Global", N_("Toggle visibility of GUI"), "Ctrl+T", group, true, false);
 
-	
+
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
 	connect(getGuiActions("actionQuit_Global"), SIGNAL(triggered()), &StelApp::getInstance(), SLOT(quitStellarium()));
@@ -325,6 +326,9 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiActions("actionShow_Equatorial_J2000_Grid"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagEquatorJ2000Grid(bool)));
 	getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(gmgr->getFlagEquatorJ2000Grid());
 
+	connect(getGuiActions("actionShow_Galactic_Grid"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagGalacticGrid(bool)));
+	getGuiActions("actionShow_Galactic_Grid")->setChecked(gmgr->getFlagGalacticGrid());
+
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	setAutoHideHorizontalButtonBar(conf->value("gui/auto_hide_horizontal_toolbar", true).toBool());
@@ -337,7 +341,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	connect(&scriptMgr, SIGNAL(scriptRunning()), this, SLOT(scriptStarted()));
 	connect(&scriptMgr, SIGNAL(scriptStopped()), this, SLOT(scriptStopped()));
-	
+
 	///////////////////////////////////////////////////////////////////////////
 	//// QGraphicsView based GUI
 	///////////////////////////////////////////////////////////////////////////
@@ -480,7 +484,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	// add the flip buttons if requested in the config
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
 	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());
-	
+
 	///////////////////////////////////////////////////////////////////////
 	// Create the main base widget
 	skyGui->init(this);
@@ -488,10 +492,10 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	l->setContentsMargins(0,0,0,0);
 	l->setSpacing(0);
 	l->addItem(skyGui, 0, 0);
-	
-	stelAppGraphicsWidget->setLayout(l);	
+
+	stelAppGraphicsWidget->setLayout(l);
 	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
-	
+
 	initDone = true;
 }
 
@@ -518,7 +522,7 @@ void StelGui::setStelStyle(const StelStyle& style)
 void StelGui::updateI18n()
 {
 	StelGuiBase::updateI18n();
-	
+
 	// Update the dialogs
 	configurationDialog->languageChanged();
 	dateTimeDialog.languageChanged();
@@ -573,7 +577,7 @@ void StelGui::update()
 		getGuiActions("actionShow_Stars")->setChecked(smgr->getFlagStars());
 
 	skyGui->infoPanel->setTextFromObjects(GETSTELMODULE(StelObjectMgr)->getSelectedObject());
-	
+
 	// Check if the progressbar window changed, if yes update the whole view
 	if (savedProgressBarSize!=skyGui->progressBarMgr->boundingRect().size())
 	{
@@ -718,7 +722,7 @@ const StelObject::InfoStringGroup& StelGui::getInfoTextFilters() const
 }
 
 BottomStelBar* StelGui::getButtonBar() {return skyGui->buttonBar;}
-	
+
 LeftStelBar* StelGui::getWindowsButtonBar() {return skyGui->winBar;}
 
 bool StelGui::getAutoHideHorizontalButtonBar() const {return skyGui->autoHideHorizontalButtonBar;}
