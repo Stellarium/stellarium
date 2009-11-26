@@ -1186,28 +1186,32 @@ class VertexArrayProjector
 {
 public:
 	VertexArrayProjector(StelPainter* apainter, const SphericalCap* aclippingCap,
-						 QVarLengthArray<Vec2f, 4096>* aoutVertices, QVarLengthArray<Vec2f, 4096>* aoutTexturePos)
+						 QVarLengthArray<Vec2f, 4096>* aoutVertices, QVarLengthArray<Vec2f, 4096>* aoutTexturePos=NULL)
 		   : painter(apainter), clippingCap(aclippingCap), outVertices(aoutVertices), outTexturePos(aoutTexturePos)
 	{
 	}
 
 	inline void operator()(const Vec3d* vertex[3], const Vec2f* tex[3], unsigned int indices[3])
 	{
+		Vec3d tmpVertex[3];
+		Vec2f tmpTexture[3];
+
 		for (int i = 0; i < 3; ++i)
 		{
 			tmpVertex[i] = *vertex[i];
-			tmpTexture[i] = *tex[i];
+			if (outTexturePos)
+				tmpTexture[i] = *tex[i];
 		}
-		painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, tmpTexture, outTexturePos);
+		if (outTexturePos)
+			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, tmpTexture, outTexturePos);
+		else
+			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, NULL, NULL);
 	}
 private:
 	StelPainter* painter;
 	const SphericalCap* clippingCap;
 	QVarLengthArray<Vec2f, 4096>* outVertices;
 	QVarLengthArray<Vec2f, 4096>* outTexturePos;
-
-	Vec3d tmpVertex[3];
-	Vec2f tmpTexture[3];
 };
 
 
