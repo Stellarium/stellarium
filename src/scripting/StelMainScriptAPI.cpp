@@ -246,7 +246,7 @@ float StelMainScriptAPI::getMaxFps()
 
 QString StelMainScriptAPI::getMountMode()
 {
-	if (StelApp::getInstance().getCore()->getNavigator()->getMountMode() == StelNavigator::MountEquinoxEquatorial)
+	if (GETSTELMODULE(StelMovementMgr)->getMountMode() == StelMovementMgr::MountEquinoxEquatorial)
 		return "equatorial";
 	else
 		return "azimuthal";
@@ -255,9 +255,9 @@ QString StelMainScriptAPI::getMountMode()
 void StelMainScriptAPI::setMountMode(const QString& mode)
 {
 	if (mode=="equatorial")
-		StelApp::getInstance().getCore()->getNavigator()->setMountMode(StelNavigator::MountEquinoxEquatorial);
+		GETSTELMODULE(StelMovementMgr)->setMountMode(StelMovementMgr::MountEquinoxEquatorial);
 	else if (mode=="azimuthal")
-		StelApp::getInstance().getCore()->getNavigator()->setMountMode(StelNavigator::MountAltAzimuthal);
+		GETSTELMODULE(StelMovementMgr)->setMountMode(StelMovementMgr::MountAltAzimuthal);
 }
 
 bool StelMainScriptAPI::getNightMode()
@@ -598,11 +598,11 @@ void StelMainScriptAPI::clear(const QString& state)
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 	GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
+	StelMovementMgr* movmgr = GETSTELMODULE(StelMovementMgr);
 
 	if (state.toLower() == "natural")
 	{
-		nav->setEquatorialMount(false);
+		movmgr->setMountMode(StelMovementMgr::MountAltAzimuthal);
 		skyd->setFlagTwinkle(true);
 		skyd->setFlagLuminanceAdaptation(true);
 		ssmgr->setFlagPlanets(true);
@@ -631,7 +631,7 @@ void StelMainScriptAPI::clear(const QString& state)
 	}
 	else if (state.toLower() == "starchart")
 	{
-		nav->setEquatorialMount(true);
+		movmgr->setMountMode(StelMovementMgr::MountEquinoxEquatorial);
 		skyd->setFlagTwinkle(false);
 		skyd->setFlagLuminanceAdaptation(false);
 		ssmgr->setFlagPlanets(true);
@@ -660,7 +660,7 @@ void StelMainScriptAPI::clear(const QString& state)
 	}
 	else if (state.toLower() == "deepspace")
 	{
-		nav->setEquatorialMount(true);
+		movmgr->setMountMode(StelMovementMgr::MountEquinoxEquatorial);
 		skyd->setFlagTwinkle(false);
 		skyd->setFlagLuminanceAdaptation(false);
 		ssmgr->setFlagPlanets(false);
@@ -695,7 +695,7 @@ void StelMainScriptAPI::clear(const QString& state)
 
 double StelMainScriptAPI::getViewAltitudeAngle()
 {
-	Vec3d current = StelApp::getInstance().getCore()->getNavigator()->getAltAzVisionDirection();
+	const Vec3d& current = StelApp::getInstance().getCore()->getNavigator()->j2000ToAltAz(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000());
 	double alt, azi;
 	StelUtils::rectToSphe(&azi, &alt, current);
 	return alt*180/M_PI; // convert to degrees from radians
@@ -703,7 +703,7 @@ double StelMainScriptAPI::getViewAltitudeAngle()
 
 double StelMainScriptAPI::getViewAzimuthAngle()
 {
-	Vec3d current = StelApp::getInstance().getCore()->getNavigator()->getAltAzVisionDirection();
+	const Vec3d& current = StelApp::getInstance().getCore()->getNavigator()->j2000ToAltAz(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000());
 	double alt, azi;
 	StelUtils::rectToSphe(&azi, &alt, current);
 	// The returned azimuth angle is in radians and set up such that:
@@ -714,7 +714,7 @@ double StelMainScriptAPI::getViewAzimuthAngle()
 
 double StelMainScriptAPI::getViewRaAngle()
 {
-	Vec3d current = StelApp::getInstance().getCore()->getNavigator()->getEquinoxEquVisionDirection();
+	const Vec3d& current = StelApp::getInstance().getCore()->getNavigator()->j2000ToEquinoxEqu(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000());
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, current);
 	// returned RA angle is in range -PI .. PI, but we want 0 .. 360
@@ -723,7 +723,7 @@ double StelMainScriptAPI::getViewRaAngle()
 
 double StelMainScriptAPI::getViewDecAngle()
 {
-	Vec3d current = StelApp::getInstance().getCore()->getNavigator()->getEquinoxEquVisionDirection();
+	const Vec3d& current = StelApp::getInstance().getCore()->getNavigator()->j2000ToEquinoxEqu(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000());
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, current);
 	return dec*180/M_PI; // convert to degrees from radians
@@ -731,7 +731,7 @@ double StelMainScriptAPI::getViewDecAngle()
 
 double StelMainScriptAPI::getViewRaJ2000Angle()
 {
-	Vec3d current = StelApp::getInstance().getCore()->getNavigator()->getJ2000EquVisionDirection();
+	Vec3d current = GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000();
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, current);
 	// returned RA angle is in range -PI .. PI, but we want 0 .. 360
@@ -740,7 +740,7 @@ double StelMainScriptAPI::getViewRaJ2000Angle()
 
 double StelMainScriptAPI::getViewDecJ2000Angle()
 {
-	Vec3d current = StelApp::getInstance().getCore()->getNavigator()->getJ2000EquVisionDirection();
+	Vec3d current = GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000();
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, current);
 	return dec*180/M_PI; // convert to degrees from radians
@@ -758,7 +758,7 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 	double dAzi = M_PI - StelUtils::getDecAngle(azi);
 
 	StelUtils::spheToRect(dAzi,dAlt,aim);
-	mvmgr->moveTo(aim, duration, true);
+	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->getNavigator()->altAzToJ2000(aim), duration);
 }
 
 void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float duration)
@@ -773,7 +773,7 @@ void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float
 	double dDec = StelUtils::getDecAngle(dec);
 
 	StelUtils::spheToRect(dRa,dDec,aim);
-	mvmgr->moveTo(aim, duration, false);
+	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->getNavigator()->equinoxEquToJ2000(aim), duration);
 }
 
 void StelMainScriptAPI::moveToRaDecJ2000(const QString& ra, const QString& dec, float duration)
@@ -789,6 +789,6 @@ void StelMainScriptAPI::moveToRaDecJ2000(const QString& ra, const QString& dec, 
 
 	StelUtils::spheToRect(dRa,dDec,aimJ2000);
 	aimEquofDate = StelApp::getInstance().getCore()->getNavigator()->j2000ToEquinoxEqu(aimJ2000);
-	mvmgr->moveTo(aimEquofDate, duration, false);
+	mvmgr->moveToJ2000(aimEquofDate, duration);
 }
 

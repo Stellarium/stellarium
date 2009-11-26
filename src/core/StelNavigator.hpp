@@ -49,9 +49,6 @@ class StelNavigator : public QObject
 	Q_OBJECT
 
 public:
-	//! Possible mount modes defining the reference frame in which head movements occur.
-	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial};
-
 	// Create and initialise to default a navigation context
 	StelNavigator();
 	~StelNavigator();
@@ -61,18 +58,8 @@ public:
 	void updateTime(double deltaTime);
 	void updateTransformMatrices(void);
 
-	//! Set current mount type defining the reference frame in which head movements occur.
-	void setMountMode(MountMode m) {mountMode=m;}
-	//! Get current mount type defining the reference frame in which head movements occur.
-	MountMode getMountMode(void) const {return mountMode;}
-
 	//! Get vision direction
-	const Vec3d getEquinoxEquVisionDirection(void) const {return j2000ToEquinoxEqu(J2000EquVisionDirection);}
-	const Vec3d& getJ2000EquVisionDirection(void) const {return J2000EquVisionDirection;}
-	const Vec3d getAltAzVisionDirection(void) const {return j2000ToAltAz(J2000EquVisionDirection);}
-	void setAltAzVisionDirection(const Vec3d& pos);
-	void setEquinoxEquVisionDirection(const Vec3d& pos);
-	void setJ2000EquVisionDirection(const Vec3d& pos);
+	void lookAtJ2000(const Vec3d& pos, const Vec3d& up);
 
 	//! Get the informations on the current location
 	const StelLocation& getCurrentLocation() const;
@@ -94,24 +81,22 @@ public:
 	//! Return the observer heliocentric ecliptic position
 	Vec3d getObserverHeliocentricEclipticPos() const;
 
-	//! Transform vector from altazimuthal coordinate to equatorial
-	Vec3d altAzToEquinoxEqu(const Vec3d& v) const { return matAltAzToEquinoxEqu*v; }
 
-	//! Transform vector from equatorial coordinate to altazimuthal
-	Vec3d equinoxEquToAltAz(const Vec3d& v) const { return matEquinoxEquToAltAz*v; }
-	Vec3d equinoxEquToJ2000(const Vec3d& v) const { return matEquinoxEquToJ2000*v; }
-	Vec3d j2000ToEquinoxEqu(const Vec3d& v) const { return matJ2000ToEquinoxEqu*v; }
-	Vec3d j2000ToAltAz(const Vec3d& v) const { return matJ2000ToAltAz*v; }
-
+	Vec3d altAzToEquinoxEqu(const Vec3d& v) const {return matAltAzToEquinoxEqu*v;}
+	Vec3d equinoxEquToAltAz(const Vec3d& v) const {return matEquinoxEquToAltAz*v;}
+	Vec3d equinoxEquToJ2000(const Vec3d& v) const {return matEquinoxEquToJ2000*v;}
+	Vec3d altAzToJ2000(const Vec3d& v) const {return matEquinoxEquToJ2000*matAltAzToEquinoxEqu*v;}
+	Vec3d galacticToJ2000(const Vec3d& v) const {return matGalacticToJ2000*v;}
+	Vec3d j2000ToEquinoxEqu(const Vec3d& v) const {return matJ2000ToEquinoxEqu*v;}
+	Vec3d j2000ToAltAz(const Vec3d& v) const {return matJ2000ToAltAz*v;}
+	Vec3d j2000ToGalactic(const Vec3d& v) const {return matJ2000ToGalactic*v;}
 	//! Transform vector from heliocentric ecliptic coordinate to altazimuthal
-	Vec3d heliocentricEclipticToAltAz(const Vec3d& v) const { return matHeliocentricEclipticToAltAz*v; }
-
+	Vec3d heliocentricEclipticToAltAz(const Vec3d& v) const {return matHeliocentricEclipticToAltAz*v;}
 	//! Transform from heliocentric coordinate to equatorial at current equinox (for the planet where the observer stands)
-	Vec3d heliocentricEclipticToEquinoxEqu(const Vec3d& v) const { return matHeliocentricEclipticToEquinoxEqu*v; }
-
+	Vec3d heliocentricEclipticToEquinoxEqu(const Vec3d& v) const {return matHeliocentricEclipticToEquinoxEqu*v;}
 	//! Transform vector from heliocentric coordinate to false equatorial : equatorial
 	//! coordinate but centered on the observer position (usefull for objects close to earth)
-	Vec3d heliocentricEclipticToEarthPosEquinoxEqu(const Vec3d& v) const { return matAltAzToEquinoxEqu*matHeliocentricEclipticToAltAz*v; }
+	Vec3d heliocentricEclipticToEarthPosEquinoxEqu(const Vec3d& v) const {return matAltAzToEquinoxEqu*matHeliocentricEclipticToAltAz*v;}
 
 	//! Get the modelview matrix for heliocentric ecliptic (Vsop87) drawing
 	const Mat4d getHeliocentricEclipticModelViewMat() const {return matAltAzModelView*matHeliocentricEclipticToAltAz;}
@@ -125,9 +110,6 @@ public:
 	const Mat4d getJ2000ModelViewMat() const {return matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;}
 	//! Get the modelview matrix for observer-centric Galactic equatorial drawing
 	const Mat4d getGalacticModelViewMat() const {return getJ2000ModelViewMat()*matGalacticToJ2000;}
-
-	//! Return the inital viewing direction in altazimuthal coordinates
-	const Vec3d& getInitViewingDirection() {return initViewPos;}
 
 	//! Return the preset sky time in JD
 	double getPresetSkyTime() const {return presetSkyTime;}
@@ -148,11 +130,6 @@ public:
 	static const Mat4d matGalacticToJ2000;
 
 public slots:
-	//! Toggle current mount mode between equatorial and altazimuthal
-	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquinoxEquatorial); else setMountMode(MountAltAzimuthal);}
-	//! Define whether we should use equatorial mount or altazimuthal
-	void setEquatorialMount(bool b) {setMountMode(b ? MountEquinoxEquatorial : MountAltAzimuthal);}
-
 	//! Set the current date in Julian Day
 	void setJDay(double JD) {JDay=JD;}
 	//! Get the current date in Julian Day
@@ -240,10 +217,6 @@ public slots:
 	//! Set the location to use by default at startup
 	void setDefaultLocationID(const QString& id);
 
-	//! Sets the initial direction of view to the current altitude and azimuth.
-	//! Note: Updates the configuration file.
-	void setInitViewDirectionToCurrent();
-
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(StelLocation);
@@ -261,9 +234,6 @@ private:
 
 	Mat4d matAltAzModelView;					// Modelview matrix for observer-centric altazimuthal drawing
 
-	// Viewing direction in equatorial J2000 coordinates
-	Vec3d J2000EquVisionDirection;
-
 	// Time variable
 	double timeSpeed;        // Positive : forward, Negative : Backward, 1 = 1sec/sec
 	double JDay;              // Curent time in Julian day
@@ -277,11 +247,6 @@ private:
 
 	// Position variables
 	StelObserver* position;
-
-	Vec3d initViewPos;        // Default viewing direction
-
-	// defines if view corrects for horizon, or uses equatorial coordinates
-	MountMode mountMode;
 };
 
 #endif // _STELNAVIGATOR_HPP_

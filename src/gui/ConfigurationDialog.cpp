@@ -402,8 +402,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/auto_hide_horizontal_toolbar", gui->getAutoHideHorizontalButtonBar());
 	conf->setValue("gui/auto_hide_vertical_toolbar", gui->getAutoHideVerticalButtonBar());
 
-	mvmgr->setInitFov(StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov());
-	StelApp::getInstance().getCore()->getNavigator()->setInitViewDirectionToCurrent();
+	mvmgr->setInitFov(mvmgr->getCurrentFov());
+	mvmgr->setInitViewDirectionToCurrent();
 
 	// configuration dialog / navigation tab
 	conf->setValue("navigation/flag_enable_zoom_keys", mvmgr->getFlagEnableZoomKeys());
@@ -413,7 +413,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("navigation/today_time", nav->getInitTodayTime());
 	conf->setValue("navigation/preset_sky_time", nav->getPresetSkyTime());
 	conf->setValue("navigation/init_fov", mvmgr->getInitFov());
-	if (nav->getMountMode() == StelNavigator::MountAltAzimuthal)
+	if (mvmgr->getMountMode() == StelMovementMgr::MountAltAzimuthal)
 		conf->setValue("navigation/viewing_mode", "horizon");
 	else
 		conf->setValue("navigation/viewing_mode", "equator");
@@ -450,7 +450,7 @@ void ConfigurationDialog::updateConfigLabels()
 	ui->startupFOVLabel->setText(q_("Startup FOV: %1%2").arg(StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov()).arg(QChar(0x00B0)));
 
 	double az, alt;
-	const Vec3d v = StelApp::getInstance().getCore()->getNavigator()->getInitViewingDirection();
+	const Vec3d& v = GETSTELMODULE(StelMovementMgr)->getInitViewingDirection();
 	StelUtils::rectToSphe(&az, &alt, v);
 	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
 	if (az > M_PI*2)
