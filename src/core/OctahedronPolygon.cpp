@@ -404,6 +404,11 @@ void OctahedronPolygon::updateVertexArray()
 		c[2]=fillCachedVertexArray.vertex.at(j*3+2);
 		Q_ASSERT(SphericalConvexPolygon::checkValidContour(c));
 	}
+#else
+	// If I don't let this like that, the bahaviour will fail in Release mode!!!!
+	// It is either a bug in GCC either a memory problem which appears only when optimizations are activated.
+	QVector<Vec3d> c;
+	c.resize(3);
 #endif
 }
 

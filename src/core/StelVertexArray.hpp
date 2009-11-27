@@ -77,9 +77,13 @@ template<class Func>
 void StelVertexArray::foreachTriangle(Func& func) const
 {
 	const Vec3d* ar[3];
+	const bool textured = !texCoords.isEmpty();
+
+
+
 	const Vec2f* te[3] = {NULL, NULL, NULL};
 	unsigned int indices[3];
-	bool textured = !texCoords.isEmpty();
+
 
 	switch (primitiveType)
 	{
