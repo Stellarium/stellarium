@@ -603,3 +603,12 @@ QT4_WRAP_CPP(tests_testStelJsonParser_MOC_SRCS tests/testStelJsonParser.hpp)
 ADD_EXECUTABLE(testStelJsonParser ${tests_testStelJsonParser_SRCS} ${tests_testStelJsonParser_MOC_SRCS})
 TARGET_LINK_LIBRARIES(testStelJsonParser ${extLinkerOption} ${QT_QTTEST_LIBRARY})
 ADD_TEST(test_testStelJsonParser ${EXECUTABLE_OUTPUT_PATH}/testStelJsonParser)
+
+SET(tests_testStelVertexArray_SRCS
+  tests/testStelVertexArray.hpp
+  tests/testStelVertexArray.cpp
+  core/StelVertexArray.hpp)
+QT4_WRAP_CPP(tests_testStelVertexArray_MOC_SRCS tests/testStelVertexArray.hpp)
+ADD_EXECUTABLE(testStelVertexArray ${tests_testStelVertexArray_SRCS} ${tests_testStelVertexArray_MOC_SRCS})
+TARGET_LINK_LIBRARIES(testStelVertexArray ${extLinkerOption} ${QT_QTTEST_LIBRARY})
+ADD_TEST(test_testSteVertexArray ${EXECUTABLE_OUTPUT_PATH}/testStelVertexArray)
