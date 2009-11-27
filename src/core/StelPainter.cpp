@@ -1282,14 +1282,13 @@ private:
 };
 
 
-void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool textured, bool doClip, bool doSubDivide)
+void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool textured, const SphericalCap* clippingCap, bool doSubDivide)
 {
 	if (va.vertex.isEmpty())
 		return;
 
 	// Never need to do clipping if the projection doesn't have a discontinuity
-	if (!prj->hasDiscontinuity())
-		doClip = false;
+	const bool doClip = prj->hasDiscontinuity();
 
 	Q_ASSERT(va.vertex.size()>2);
 #ifndef USE_OPENGL_ES2
@@ -1298,14 +1297,6 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 	polygonVertexArray.clear();
 	polygonTextureCoordArray.clear();
 	indexArray.clear();
-
-	SphericalCap cap;
-	const SphericalCap* clippingCap = NULL;
-	if (doClip)
-	{
-		cap = prj->getBoundingSphericalCap();
-		clippingCap = &cap;
-	}
 
 	// The simplest case, we don't need to iterate through the triangles at all.
 	if (!doClip && !doSubDivide)

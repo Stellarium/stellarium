@@ -51,22 +51,22 @@ PriorityQ* pqNewPriorityQ(int (*leq)(PQkey key1, PQkey key2))
    PriorityQ* pq=(PriorityQ*)memAlloc(sizeof(PriorityQ));
    if (pq==NULL)
    {
-      return NULL;
+	  return NULL;
    }
 
    pq->heap=__gl_pqHeapNewPriorityQ(leq);
    if (pq->heap==NULL)
    {
-      memFree(pq);
-      return NULL;
+	  memFree(pq);
+	  return NULL;
    }
 
    pq->keys=(PQHeapKey*)memAlloc(INIT_SIZE*sizeof(pq->keys[0]));
    if (pq->keys==NULL)
    {
-      __gl_pqHeapDeletePriorityQ(pq->heap);
-      memFree(pq);
-      return NULL;
+	  __gl_pqHeapDeletePriorityQ(pq->heap);
+	  memFree(pq);
+	  return NULL;
    }
 
    pq->size=0;
@@ -83,15 +83,15 @@ void pqDeletePriorityQ(PriorityQ* pq)
    assert(pq!=NULL);
    if (pq->heap!=NULL)
    {
-      __gl_pqHeapDeletePriorityQ(pq->heap);
+	  __gl_pqHeapDeletePriorityQ(pq->heap);
    }
    if (pq->order!=NULL)
    {
-      memFree(pq->order);
+	  memFree(pq->order);
    }
    if (pq->keys!=NULL)
    {
-      memFree(pq->keys);
+	  memFree(pq->keys);
    }
    memFree(pq);
 }
@@ -106,17 +106,17 @@ int pqInit(PriorityQ* pq)
    PQkey**p, **r, **i, **j, *piv;
    struct
    {
-      PQkey** p;
-      PQkey** r;
+	  PQkey** p;
+	  PQkey** r;
    } Stack[50], *top=Stack;
    unsigned long seed=2016473283;
 
    /* Create an array of indirect pointers to the keys, so that we
-    * the handles we have returned are still valid.
-    */
+	* the handles we have returned are still valid.
+	*/
    /*
    pq->order = (PQHeapKey **)memAlloc( (size_t)
-                                  (pq->size * sizeof(pq->order[0])) );
+								  (pq->size * sizeof(pq->order[0])) );
    */
    pq->order=(PQHeapKey**)memAlloc((size_t)((pq->size+1)*sizeof(pq->order[0])));
    /* the previous line is a patch to compensate for the fact that IBM */
@@ -125,69 +125,69 @@ int pqInit(PriorityQ* pq)
    /* fault four lines down. from fossum@austin.ibm.com.               */
    if (pq->order==NULL)
    {
-      return 0;
+	  return 0;
    }
 
    p=pq->order;
    r=p+pq->size-1;
    for (piv=pq->keys, i=p; i<=r; ++piv, ++i)
    {
-      *i=piv;
+	  *i=piv;
    }
 
    /* Sort the indirect pointers in descending order,
-    * using randomized Quicksort
-    */
+	* using randomized Quicksort
+	*/
    top->p=p; top->r=r; ++top;
    while (--top>=Stack)
    {
-      p=top->p;
-      r=top->r;
-      while (r>p+10)
-      {
-         seed=seed*1539415821+1;
-         i=p+seed%(r-p+1);
-         piv=*i;
-         *i=*p;
-         *p=piv;
-         i=p-1;
-         j=r+1;
-         do {
-            do {
-               ++i;
-            } while(GT(**i, *piv));
-            do {
-               --j;
-            } while(LT(**j, *piv));
-            Swap(i, j);
-         } while(i<j);
-         Swap(i, j);       /* Undo last swap */
-         if (i-p<r-j)
-         {
-            top->p=j+1;
-            top->r=r;
-            ++top;
-            r=i-1;
-         }
-         else
-         {
-            top->p=p;
-            top->r=i-1;
-            ++top;
-            p=j+1;
-         }
-      }
+	  p=top->p;
+	  r=top->r;
+	  while (r>p+10)
+	  {
+		 seed=seed*1539415821+1;
+		 i=p+seed%(r-p+1);
+		 piv=*i;
+		 *i=*p;
+		 *p=piv;
+		 i=p-1;
+		 j=r+1;
+		 do {
+			do {
+			   ++i;
+			} while(GT(**i, *piv));
+			do {
+			   --j;
+			} while(LT(**j, *piv));
+			Swap(i, j);
+		 } while(i<j);
+		 Swap(i, j);       /* Undo last swap */
+		 if (i-p<r-j)
+		 {
+			top->p=j+1;
+			top->r=r;
+			++top;
+			r=i-1;
+		 }
+		 else
+		 {
+			top->p=p;
+			top->r=i-1;
+			++top;
+			p=j+1;
+		 }
+	  }
 
-      /* Insertion sort small lists */
-      for (i=p+1; i<=r; ++i)
-      {
-         piv=*i;
-         for (j=i; j>p && LT(**(j-1), *piv); --j)
-         {
-            *j=*(j-1);
-         }
-         *j=piv;
-      }
+	  /* Insertion sort small lists */
+	  for (i=p+1; i<=r; ++i)
+	  {
+		 piv=*i;
+		 for (j=i; j>p && LT(**(j-1), *piv); --j)
+		 {
+			*j=*(j-1);
+		 }
+		 *j=piv;
+	  }
    }
 
    pq->max=pq->size;
@@ -200,7 +200,7 @@ int pqInit(PriorityQ* pq)
 
    for (i=p; i<r; ++i)
    {
-      assert(LEQ(**(i+1), **i));
+	  assert(LEQ(**(i+1), **i));
    }
 #endif
 
@@ -215,23 +215,23 @@ PQhandle pqInsert(PriorityQ* pq, PQkey keyNew)
 
    if (pq->initialized)
    {
-      return __gl_pqHeapInsert(pq->heap, keyNew);
+	  return __gl_pqHeapInsert(pq->heap, keyNew);
    }
 
    curr=pq->size;
    if (++pq->size>=pq->max)
    {
-      PQkey* saveKey=pq->keys;
+	  PQkey* saveKey=pq->keys;
 
-      /* If the heap overflows, double its size. */
-      pq->max<<=1;
-      pq->keys=(PQHeapKey*)memRealloc(pq->keys, (size_t)(pq->max*sizeof(pq->keys[0])));
-      if (pq->keys==NULL)
-      {
-         /* restore ptr to free upon return */
-         pq->keys=saveKey;
-         return LONG_MAX;
-      }
+	  /* If the heap overflows, double its size. */
+	  pq->max<<=1;
+	  pq->keys=(PQHeapKey*)memRealloc(pq->keys, (size_t)(pq->max*sizeof(pq->keys[0])));
+	  if (pq->keys==NULL)
+	  {
+		 /* restore ptr to free upon return */
+		 pq->keys=saveKey;
+		 return LONG_MAX;
+	  }
    }
    assert(curr!=LONG_MAX);
    pq->keys[curr]=keyNew;
@@ -247,20 +247,20 @@ PQkey pqExtractMin(PriorityQ* pq)
 
    if (pq->size==0)
    {
-      return __gl_pqHeapExtractMin(pq->heap);
+	  return __gl_pqHeapExtractMin(pq->heap);
    }
 
    sortMin=*(pq->order[pq->size-1]);
    if (!__gl_pqHeapIsEmpty(pq->heap))
    {
-      heapMin=__gl_pqHeapMinimum(pq->heap);
-      if (LEQ(heapMin, sortMin))
-      {
-         return __gl_pqHeapExtractMin(pq->heap);
-      }
+	  heapMin=__gl_pqHeapMinimum(pq->heap);
+	  if (LEQ(heapMin, sortMin))
+	  {
+		 return __gl_pqHeapExtractMin(pq->heap);
+	  }
    }
    do {
-      --pq->size;
+	  --pq->size;
    } while(pq->size>0 && *(pq->order[pq->size-1])==NULL);
 
    return sortMin;
@@ -273,17 +273,17 @@ PQkey pqMinimum(PriorityQ* pq)
 
    if (pq->size==0)
    {
-      return __gl_pqHeapMinimum(pq->heap);
+	  return __gl_pqHeapMinimum(pq->heap);
    }
 
    sortMin=*(pq->order[pq->size-1]);
    if (!__gl_pqHeapIsEmpty(pq->heap))
    {
-      heapMin=__gl_pqHeapMinimum(pq->heap);
-      if (LEQ(heapMin, sortMin))
-      {
-         return heapMin;
-      }
+	  heapMin=__gl_pqHeapMinimum(pq->heap);
+	  if (LEQ(heapMin, sortMin))
+	  {
+		 return heapMin;
+	  }
    }
 
    return sortMin;
@@ -300,8 +300,8 @@ void pqDelete(PriorityQ* pq, PQhandle curr)
 {
    if (curr>=0)
    {
-      __gl_pqHeapDelete(pq->heap, curr);
-      return;
+	  __gl_pqHeapDelete(pq->heap, curr);
+	  return;
    }
 
    curr=-(curr+1);
@@ -311,6 +311,6 @@ void pqDelete(PriorityQ* pq, PQhandle curr)
 
    while(pq->size>0 && *(pq->order[pq->size-1])==NULL)
    {
-      --pq->size;
+	  --pq->size;
    }
 }
