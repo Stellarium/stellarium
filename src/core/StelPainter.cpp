@@ -1192,19 +1192,16 @@ public:
 	{
 	}
 
-	inline void operator()(const Vec3d* vertex[3], const Vec2f* tex[3], unsigned int indices[3])
+	inline void operator()(const Vec3d* v0, const Vec3d* v1, const Vec3d* v2,
+						   const Vec2f* t0, const Vec2f* t1, const Vec2f* t2,
+						   unsigned int i0, unsigned int i1, unsigned i2)
 	{
-		Vec3d tmpVertex[3];
-		Vec2f tmpTexture[3];
-
-		for (int i = 0; i < 3; ++i)
-		{
-			tmpVertex[i] = *vertex[i];
-			if (outTexturePos)
-				tmpTexture[i] = *tex[i];
-		}
+		Vec3d tmpVertex[3] = {*v0, *v1, *v2};
 		if (outTexturePos)
+		{
+			Vec2f tmpTexture[3] = {*t0, *t1, *t2};
 			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, tmpTexture, outTexturePos);
+		}
 		else
 			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, NULL, NULL);
 	}
@@ -1247,21 +1244,21 @@ public:
 		vertexArray.foreachTriangle(*this);
 	}
 
-	inline void operator() (const Vec3d* vertex[3], const Vec2f* tex[3], unsigned int indices[3])
+	inline void operator()(const Vec3d* v0, const Vec3d* v1, const Vec3d* v2,
+						   const Vec2f* t0, const Vec2f* t1, const Vec2f* t2,
+						   unsigned int i0, unsigned int i1, unsigned i2)
 	{
 		StelProjector* prj = painter->getProjector().data();
-		for (int i = 0; i < 3; ++i)
+		if (prj->intersectViewportDiscontinuity(*v0, *v1) ||
+			prj->intersectViewportDiscontinuity(*v1, *v2) ||
+			prj->intersectViewportDiscontinuity(*v2, *v0))
 		{
-			const Vec3d& v0 = *vertex[i];
-			const Vec3d& v1 = *vertex[(i + 1) % 3];
-			if (prj->intersectViewportDiscontinuity(v0, v1))
-			{
-				return;
-			}
+			return;
 		}
-		outIndices->append(indices[0]);
-		outIndices->append(indices[1]);
-		outIndices->append(indices[2]);
+
+		outIndices->append(i0);
+		outIndices->append(i1);
+		outIndices->append(i2);
 	}
 
 	void drawResult()
@@ -1301,7 +1298,7 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 	// The simplest case, we don't need to iterate through the triangles at all.
 	if (!doClip && !doSubDivide)
 	{
-		Q_ASSERT_X(!va.useIndice, Q_FUNC_INFO, "indexed vertex array not done yet");
+		Q_ASSERT_X(va.indices.isEmpty(), Q_FUNC_INFO, "indexed vertex array not done yet");
 
 		setVertexPointer(3, GL_DOUBLE, va.vertex.constData());
 		setTexCoordPointer(2, GL_FLOAT, va.texCoords.constData());
@@ -1313,19 +1310,16 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 	}
 	if (doClip && !doSubDivide)
 	{
-		RemoveDisontinuousTriangles removeTriangles(va, this, &indexArray, textured);
-		removeTriangles.go();
-		removeTriangles.drawResult();
+		RemoveDisontinuousTriangles result = va.foreachTriangle(RemoveDisontinuousTriangles(va, this, &indexArray, textured));
+		result.drawResult();
 		return;
 	}
 
 	// the last case.  It is the slowest, it process the triangles one by one.
 	{
 		// Project all the triangles of the VertexArray into our buffer arrays.
-		VertexArrayProjector projector(va, this, clippingCap, &polygonVertexArray,
-									   textured ? &polygonTextureCoordArray : NULL);
-		projector.go();
-		projector.drawResult();
+		VertexArrayProjector result = va.foreachTriangle(VertexArrayProjector(va, this, clippingCap, &polygonVertexArray, textured ? &polygonTextureCoordArray : NULL));
+		result.drawResult();
 		return;
 	}
 }
