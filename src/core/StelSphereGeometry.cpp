@@ -542,8 +542,12 @@ double SphericalCap::relativeAreaOverlap(const SphericalCap& c1, const Spherical
 	Vec3d p1, p2;
 	double area1=c1.getArea();
 	double area2=c2.getArea();
+#ifndef NDEBUG
 	bool ok = SphericalCap::intersectionPoints(c1, c2, p1, p2);
 	Q_ASSERT(ok);
+#else
+	SphericalCap::intersectionPoints(c1, c2, p1, p2);
+#endif
 	Vec3d c(c1.n);
 	c*=c1.d;
 	const double a1 = std::acos((p1-c)*(p2-c)/(1.-fabs(c1.d)))/(2.*M_PI)*area1 - OctahedronPolygon::sphericalTriangleArea(p1,p2,c1.n);
