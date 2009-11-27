@@ -1182,6 +1182,9 @@ void StelPainter::drawGreatCircleArcs(const StelVertexArray& va, const Spherical
 
 // The function object that we use as an interface between VertexArray::foreachTriangle and
 // StelPainter::projectSphericalTriangle.
+//
+// This is used by drawSphericalTriangles to project all the triangles coordinates in a StelVertexArray into our global
+// vertex array buffer.
 class VertexArrayProjector
 {
 public:
@@ -1192,25 +1195,23 @@ public:
 	{
 	}
 
+	// Project a single triangle and add it into the output arrays
 	inline void operator()(const Vec3d* v0, const Vec3d* v1, const Vec3d* v2,
 						   const Vec2f* t0, const Vec2f* t1, const Vec2f* t2,
 						   unsigned int i0, unsigned int i1, unsigned i2)
 	{
-		Vec3d tmpVertex[3] = {*v0, *v1, *v2};
+		// XXX: we may optimize more by putting the declaration and the test outside of this method.
+		const Vec3d tmpVertex[3] = {*v0, *v1, *v2};
 		if (outTexturePos)
 		{
-			Vec2f tmpTexture[3] = {*t0, *t1, *t2};
+			const Vec2f tmpTexture[3] = {*t0, *t1, *t2};
 			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, tmpTexture, outTexturePos);
 		}
 		else
 			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, NULL, NULL);
 	}
 
-	void go()
-	{
-		vertexArray.foreachTriangle(*this);
-	}
-
+	// Draw the resulting arrays
 	void drawResult()
 	{
 		painter->setVertexPointer(2, GL_FLOAT, outVertices->constData());
@@ -1230,18 +1231,20 @@ private:
 };
 
 
-class RemoveDisontinuousTriangles
+// The function object that can be used by the StelVertexArray::foreachTriangle method.  It removes all the triangles
+// that are intersecting a discontinuity of the projection.
+//
+// Since we don't modify the vertex (no projection is done), we only put the indices of the 'safe' triangle into the
+// outIndice array.
+//
+// We also store the remaining triangles so that we can eventually draw them afterward.
+class RemoveDiscontinuousTriangles
 {
 public:
-	RemoveDisontinuousTriangles(const StelVertexArray& ar, StelPainter* apainter,
-								QVarLengthArray<unsigned short, 4096>* aoutIndices, bool isTextured)
+	RemoveDiscontinuousTriangles(const StelVertexArray& ar, StelPainter* apainter,
+								 QVarLengthArray<unsigned short, 4096>* aoutIndices, bool isTextured)
 		: vertexArray(ar), painter(apainter), outIndices(aoutIndices), textured(isTextured)
 	{
-	}
-
-	void go()
-	{
-		vertexArray.foreachTriangle(*this);
 	}
 
 	inline void operator()(const Vec3d* v0, const Vec3d* v1, const Vec3d* v2,
@@ -1253,6 +1256,7 @@ public:
 			prj->intersectViewportDiscontinuity(*v1, *v2) ||
 			prj->intersectViewportDiscontinuity(*v2, *v0))
 		{
+			remainingTriangles << i0 << i1 << i2;
 			return;
 		}
 
@@ -1275,6 +1279,7 @@ private:
 	const StelVertexArray& vertexArray;
 	StelPainter* painter;
 	QVarLengthArray<unsigned short, 4096>* outIndices;
+	QList<unsigned short> remainingTriangles;
 	bool textured;
 };
 
@@ -1310,7 +1315,7 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 	}
 	if (doClip && !doSubDivide)
 	{
-		RemoveDisontinuousTriangles result = va.foreachTriangle(RemoveDisontinuousTriangles(va, this, &indexArray, textured));
+		RemoveDiscontinuousTriangles result = va.foreachTriangle(RemoveDiscontinuousTriangles(va, this, &indexArray, textured));
 		result.drawResult();
 		return;
 	}
