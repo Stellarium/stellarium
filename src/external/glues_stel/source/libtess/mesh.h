@@ -149,7 +149,7 @@ struct GLUEShalfEdge
    /* Internal data (keep hidden) */
    ActiveRegion* activeRegion;  /* a region with this upper edge (sweep.c) */
    int           winding;       /* change in winding number when crossing
-                                   from the right face to the left face    */
+								   from the right face to the left face    */
 };
 
 #define Rface Sym->Lface
