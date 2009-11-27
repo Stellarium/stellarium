@@ -38,9 +38,9 @@ struct StelVertexArray
 		TriangleFan                 = 0x0006  // GL_TRIANGLE_FAN
 	};
 
-	StelVertexArray(StelPrimitiveType pType=StelVertexArray::Triangles) : useIndice(false), primitiveType(pType) {;}
+	StelVertexArray(StelPrimitiveType pType=StelVertexArray::Triangles) : primitiveType(pType) {;}
 	StelVertexArray(const QVector<Vec3d>& v, StelPrimitiveType pType=StelVertexArray::Triangles,const QVector<Vec2f>& t=QVector<Vec2f>(), const QVector<unsigned int> i=QVector<unsigned int>()) :
-		vertex(v), texCoords(t), indices(i), useIndice(!i.empty()), primitiveType(pType) {;}
+		vertex(v), texCoords(t), indices(i), primitiveType(pType) {;}
 
 	//! OpenGL compatible array of 3D vertex to be displayed using vertex arrays.
 	//! TODO, move to float? Most of the vectors are normalized, thus the precision is around 1E-45 using float
@@ -48,78 +48,85 @@ struct StelVertexArray
 	QVector<Vec3d> vertex;
 	//! OpenGL compatible array of edge flags to be displayed using vertex arrays.
 	QVector<Vec2f> texCoords;
-
+	//! OpenGL compatible array of indices for the vertex and the textures
 	QVector<unsigned int> indices;
-	bool useIndice;
 
 	StelPrimitiveType primitiveType;
-
-	const Vec3d& vertexAt(int i) const {
-		return vertex.at(indiceAt(i));
-	}
-	const Vec2f& texCoordAt(int i) const {
-		return texCoords.at(indiceAt(i));
-	}
-	unsigned int indiceAt(int i) const {
-		return useIndice ? indices.at(i) : i;
-	}
 
 	//! call a function for each triangle of the array.
 	//! func should define the following method :
 	//!     void operator() (const Vec3d* vertex[3], const Vec2f* tex[3], unsigned int indices[3])
 	//! The method takes arrays of *pointers* as arguments because we can't assume the values are contiguous
 	template<class Func>
-	inline void foreachTriangle(Func& func) const;
+	inline Func foreachTriangle(Func func) const;
+
+private:
+	// Below we define a few methods that are templated to be optimized according to different types of VertexArray :
+	// The template parameter <bool T> defines whether the array has a texture.
+	// The template parameter <bool I> defines whether the array is indexed.
+	template <bool I>
+	const Vec3d* specVertexAt(int i) const {
+		return &vertex.at(specIndiceAt<I>(i));
+	}
+
+	template <bool T, bool I>
+	const Vec2f* specTexCoordAt(int i) const {
+		return T ? &texCoords.at(specIndiceAt<I>(i)) : NULL;
+	}
+
+	template<bool I>
+	unsigned int specIndiceAt(int i) const {
+		return I ? indices.at(i) : i;
+	}
+
+	template<bool T, bool I, class Func>
+	inline Func specForeachTriangle(Func func) const;
+
 };
 
-
 template<class Func>
-void StelVertexArray::foreachTriangle(Func& func) const
+Func StelVertexArray::foreachTriangle(Func func) const
 {
-	const Vec3d* ar[3];
-	const bool textured = !texCoords.isEmpty();
+	// Here we just dispach the method into one of the 4 possible cases
+	bool textured = !texCoords.isEmpty();
+	bool useIndice = !indices.isEmpty();
 
+	if (textured)
+		if (useIndice)
+			return specForeachTriangle<true, true, Func>(func);
+		else
+			return specForeachTriangle<true, false, Func>(func);
+	else
+		if (useIndice)
+			return specForeachTriangle<false, true, Func>(func);
+		else
+			return specForeachTriangle<false, false, Func>(func);
+}
 
-
-	const Vec2f* te[3] = {NULL, NULL, NULL};
-	unsigned int indices[3];
-
-
+template<bool T, bool I, class Func>
+Func StelVertexArray::specForeachTriangle(Func func) const
+{
 	switch (primitiveType)
 	{
 		case StelVertexArray::Triangles:
 			Q_ASSERT(vertex.size() % 3 == 0);
-			for (int i = 0; i < vertex.size() / 3; ++i)
+			for (int i = 0; i < vertex.size(); i += 3)
 			{
-				for (int j = 0; j < 3; ++j)
-				{
-					ar[j] = &vertexAt(i * 3 + j);
-					if (textured)
-						te[j] = &texCoordAt(i * 3 + j);
-					indices[j] = indiceAt(i * 3 + j);
-				}
-				func(ar, te, indices);
+				func(specVertexAt<I>(i), specVertexAt<I>(i+1), specVertexAt<I>(i+2),
+					 specTexCoordAt<T, I>(i), specTexCoordAt<T, I>(i+1), specTexCoordAt<T, I>(i+2),
+					 specIndiceAt<I>(i), specIndiceAt<I>(i+1), specIndiceAt<I>(i+2));
 			}
 			break;
 		case StelVertexArray::TriangleFan:
 		{
-			ar[0]=&vertexAt(0);
-			if (textured)
-				te[0] = &texCoordAt(0);
-			te[0]=&texCoordAt(0);
-			indices[0] = indiceAt(0);
+			const Vec3d* v0 = specVertexAt<I>(0);
+			const Vec2f* t0 = specTexCoordAt<T, I>(0);
+			unsigned int i0 = specIndiceAt<I>(0);
 			for (int i = 1; i < vertex.size() - 1; ++i)
 			{
-				ar[1] = &vertexAt(i);
-				ar[2] = &vertexAt(i+1);
-				if (textured)
-				{
-					te[1] = &texCoordAt(i);
-					te[2] = &texCoordAt(i+1);
-				}
-				indices[1] = indiceAt(i);
-				indices[2] = indiceAt(i+1);
-				func(ar, te, indices);
+				func(v0, specVertexAt<I>(i), specVertexAt<I>(i+1),
+					 t0, specTexCoordAt<T, I>(i), specTexCoordAt<T, I>(i+1),
+					 i0, specIndiceAt<I>(i), specIndiceAt<I>(i+1));
 			}
 			break;
 		}
@@ -127,23 +134,22 @@ void StelVertexArray::foreachTriangle(Func& func) const
 		{
 			for (int i = 2; i < vertex.size(); ++i)
 			{
-				int pos[3] = {i - 2, i - 1, i};
 				if (i % 2 != 0)
-					std::swap(pos[0], pos[1]);
-				for (int j = 0; j < 3; ++j)
-				{
-					indices[j] = indiceAt(pos[j]);
-					ar[j] = &vertexAt(pos[j]);
-					if (textured)
-						te[j] = &texCoordAt(pos[j]);
-				}
-				func(ar, te, indices);
+					func(specVertexAt<I>(i-2), specVertexAt<I>(i-1), specVertexAt<I>(i),
+						 specTexCoordAt<T, I>(i-2), specTexCoordAt<T, I>(i-1), specTexCoordAt<T, I>(i),
+						 specIndiceAt<I>(i-2), specIndiceAt<I>(i-1), specIndiceAt<I>(i));
+				else
+					func(specVertexAt<I>(i-1), specVertexAt<I>(i-2), specVertexAt<I>(i),
+						 specTexCoordAt<T, I>(i-1), specTexCoordAt<T, I>(i-2), specTexCoordAt<T, I>(i),
+						 specIndiceAt<I>(i-1), specIndiceAt<I>(i-2), specIndiceAt<I>(i));
 			}
 			break;
 		}
 		default:
 			Q_ASSERT_X(0, Q_FUNC_INFO, "unsuported primitive type");
 	}
+	return func;
 }
+
 
 #endif // __STELVERTEXARRAY_HPP__
