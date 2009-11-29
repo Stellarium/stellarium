@@ -588,8 +588,6 @@ void StelPainter::drawText(const Vec3d& v, const QString& str, float angleDeg, f
 *************************************************************************/
 void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity) const
 {
-	if (!qPainter)
-		return;
 	Q_ASSERT(qPainter);
 
 	// Save openGL state
