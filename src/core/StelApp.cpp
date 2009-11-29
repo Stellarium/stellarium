@@ -273,7 +273,6 @@ StelApp::~StelApp()
 	StelModuleMgr* tmp = moduleMgr;
 	moduleMgr = new StelModuleMgr(); // Create a secondary instance to avoid crashes at other deinit
 	delete tmp; tmp=NULL;
-	delete loadingBar; loadingBar=NULL;
 	delete core; core=NULL;
 	delete skyCultureMgr; skyCultureMgr=NULL;
 	delete localeMgr; localeMgr=NULL;
@@ -474,6 +473,8 @@ void StelApp::init()
 	scriptAPIProxy = new StelMainScriptAPIProxy(this);
 	scriptMgr = new StelScriptMgr(this);
 	initialized = true;
+	delete loadingBar;
+	loadingBar=NULL;
 }
 
 // Load and initialize external modules (plugins)

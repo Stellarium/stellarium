@@ -72,6 +72,8 @@ private:
 	QString extraText;
 	Vec2f extraTextPos;
 	double timeCounter;
+
+	class StelPainter* sPainter;
 };
 
 #endif // _STELLOADINGBAR_HPP_
