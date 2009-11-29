@@ -58,6 +58,7 @@ public:
 	virtual QString getNameI18n(void) const {return nameI18;}
 	virtual QString getEnglishName(void) const {return englishName;}
 	virtual double getAngularSize(const StelCore *core) const {return angularSize*0.5;}
+	virtual SphericalRegionP getRegion() const {return pointRegion;}
 
 	// Methods specific to Nebula
 	void setLabelColor(const Vec3f& v) {labelColor = v;}
@@ -103,6 +104,8 @@ private:
 	Vec3d XYZ;                      // Cartesian equatorial position
 	Vec3d XY;                       // Store temporary 2D position
 	NebulaType nType;
+
+	SphericalRegionP pointRegion;
 
 	static StelTextureSP texCircle;   // The symbolic circle texture
 	static float hintsBrightness;

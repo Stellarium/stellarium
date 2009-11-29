@@ -182,6 +182,7 @@ void Nebula::readNGC(QDataStream& in)
 	StelUtils::spheToRect(ra,dec,XYZ);
 	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
 	nType = (Nebula::NebulaType)type;
+	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
 }
 
 #if 0
