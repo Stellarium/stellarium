@@ -249,7 +249,7 @@ void SkyGrid::draw(const StelCore* core) const
 	const double gridStepParallelRad = M_PI/180.*getClosestResolutionDMS(prj->getPixelPerRadAtCenter());
 	double gridStepMeridianRad;
 	if (northPoleInViewport || southPoleInViewport)
-		gridStepMeridianRad = M_PI/180.* 15.;
+		gridStepMeridianRad = (frameType==StelCore::FrameAltAz) ? M_PI/180.* 10. : M_PI/180.* 15.;
 	else
 	{
 		const double closetResLon = (frameType==StelCore::FrameAltAz) ? getClosestResolutionDMS(prj->getPixelPerRadAtCenter()*std::cos(lat2)) : getClosestResolutionHMS(prj->getPixelPerRadAtCenter()*std::cos(lat2));
