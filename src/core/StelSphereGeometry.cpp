@@ -1066,6 +1066,99 @@ inline void parseRaDec(const QVariant& vRaDec, Vec3d& v)
 		throw std::runtime_error(qPrintable(QString("invalid Ra,Dec pair: \"%1\" (expect 2 double values in degree)").arg(vRaDec.toString())));
 }
 
+QVector<QVector<Vec3d> > SphericalRegionP::loadContourFromQVariant(const QVariantList& contoursList)
+{
+	QVector<QVector<Vec3d> > contours;
+	QVector<Vec3d> vertices;
+	bool ok;
+	for (int i=0;i<contoursList.size();++i)
+	{
+		const QVariantList& contourToList = contoursList.at(i).toList();
+		if (contourToList.size()<1)
+			throw std::runtime_error(qPrintable(QString("invalid contour definition: %1").arg(contoursList.at(i).toString())));
+		if (contourToList.at(0).toString()=="CAP")
+		{
+			// We now parse a cap, the format is "CAP",[ra, dec],aperture
+			if (contourToList.size()!=3)
+				throw std::runtime_error(qPrintable(QString("invalid CAP description: %1 (expect \"CAP\",[ra, dec],aperture)").arg(contoursList.at(i).toString())));
+			Vec3d v;
+			parseRaDec(contourToList.at(1), v);
+			double d = contourToList.at(2).toDouble(&ok)*M_PI/180.;
+			if (!ok)
+				throw std::runtime_error(qPrintable(QString("invalid aperture angle: \"%1\" (expect a double value in degree)").arg(contourToList.at(2).toString())));
+			SphericalCap cap(v,std::cos(d));
+			contours.append(cap.getClosedOutlineContour());
+			continue;
+		}
+		if (contourToList.at(0).toString()=="PATH")
+		{
+			// We now parse a path, the format is
+			// "PATH",[ra, dec],[["greatCircleTo", [ra, dec]], ["smallCircle", [raAxis, decAxis], angle], [etc..]]
+			Q_ASSERT(vertices.isEmpty());
+			Vec3d v;
+			parseRaDec(contourToList.at(1), v);
+			vertices.append(v);	// Starting point
+			foreach (const QVariant& elem, contourToList.at(2).toList())
+			{
+				const QVariantList& elemList = elem.toList();
+				if (elemList.size()<1)
+					throw std::runtime_error(qPrintable(QString("invalid PATH description: \"%1\" (expect a list of greatCircleTo or smallCircle").arg(contourToList.at(2).toString())));
+				if (elemList.at(0)=="greatCircleTo")
+				{
+					parseRaDec(elemList.at(1), v);
+					vertices.append(v);
+					continue;
+				}
+				if (elemList.at(0)=="smallCircle")
+				{
+					Vec3d axis;
+					parseRaDec(elemList.at(1), axis);
+					double angle = elemList.at(2).toDouble(&ok)*M_PI/180.;
+					if (!ok || std::fabs(angle)>2.*M_PI)
+						throw std::runtime_error(qPrintable(QString("invalid small circle rotation angle: \"%1\" (expect a double value in degree betwwen -2pi and 2pi)").arg(elemList.at(2).toString())));
+					int nbStep = 1+(int)(std::fabs(angle)/(2.*M_PI)*50);
+					Q_ASSERT(nbStep>0);
+					v = vertices.last();
+					const Mat4d& rotMat = Mat4d::rotation(axis, angle/nbStep);
+					for (int step=0; step<nbStep;++step)
+					{
+						v.transfo4d(rotMat);
+						vertices.append(v);
+					}
+					continue;
+				}
+				throw std::runtime_error(qPrintable(QString("invalid PATH description: \"%1\" (expect a list of greatCircleTo or smallCircle").arg(contourToList.at(2).toString())));
+			}
+			Q_ASSERT(vertices.size()>2);
+			contours.append(vertices);
+			vertices.clear();
+			continue;
+		}
+		// If no type is provided, assume a polygon
+		if (contourToList.size()<3)
+			throw std::runtime_error("a polygon contour must have at least 3 vertices");
+		Q_ASSERT(vertices.isEmpty());
+		Vec3d v;
+		foreach (const QVariant& vRaDec, contourToList)
+		{
+			parseRaDec(vRaDec, v);
+			vertices.append(v);
+		}
+		Q_ASSERT(vertices.size()>2);
+		contours.append(vertices);
+		vertices.clear();
+	}
+	return contours;
+}
+
+SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& contoursList)
+{
+	// It can only be a pure shape definition, without texture coords
+	const QVector<QVector<Vec3d> >& contours = loadContourFromQVariant(contoursList);
+	return SphericalRegionP(new SphericalPolygon(contours));
+}
+
+
 SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantMap& map)
 {
 	QVariantList contoursList = map.value("skyConvexPolygons").toList();
@@ -1086,85 +1179,7 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantMap& map)
 	if (texCoordList.isEmpty())
 	{
 		// No texture coordinates
-		QVector<QVector<Vec3d> > contours;
-		QVector<Vec3d> vertices;
-		for (int i=0;i<contoursList.size();++i)
-		{
-			const QVariantList& contourToList = contoursList.at(i).toList();
-			if (contourToList.size()<1)
-				throw std::runtime_error(qPrintable(QString("invalid contour definition: %1").arg(contoursList.at(i).toString())));
-			if (contourToList.at(0).toString()=="CAP")
-			{
-				// We now parse a cap, the format is "CAP",[ra, dec],aperture
-				if (contourToList.size()!=3)
-					throw std::runtime_error(qPrintable(QString("invalid CAP description: %1 (expect \"CAP\",[ra, dec],aperture)").arg(contoursList.at(i).toString())));
-				Vec3d v;
-				parseRaDec(contourToList.at(1), v);
-				double d = contourToList.at(2).toDouble(&ok)*M_PI/180.;
-				if (!ok)
-					throw std::runtime_error(qPrintable(QString("invalid aperture angle: \"%1\" (expect a double value in degree)").arg(contourToList.at(2).toString())));
-				SphericalCap cap(v,std::cos(d));
-				contours.append(cap.getClosedOutlineContour());
-				continue;
-			}
-			if (contourToList.at(0).toString()=="PATH")
-			{
-				// We now parse a path, the format is
-				// "PATH",[ra, dec],[["greatCircleTo", [ra, dec]], ["smallCircle", [raAxis, decAxis], angle], [etc..]]
-				Q_ASSERT(vertices.isEmpty());
-				Vec3d v;
-				parseRaDec(contourToList.at(1), v);
-				vertices.append(v);	// Starting point
-				foreach (const QVariant& elem, contourToList.at(2).toList())
-				{
-					const QVariantList& elemList = elem.toList();
-					if (elemList.size()<1)
-						throw std::runtime_error(qPrintable(QString("invalid PATH description: \"%1\" (expect a list of greatCircleTo or smallCircle").arg(contourToList.at(2).toString())));
-					if (elemList.at(0)=="greatCircleTo")
-					{
-						parseRaDec(elemList.at(1), v);
-						vertices.append(v);
-						continue;
-					}
-					if (elemList.at(0)=="smallCircle")
-					{
-						Vec3d axis;
-						parseRaDec(elemList.at(1), axis);
-						double angle = elemList.at(2).toDouble(&ok)*M_PI/180.;
-						if (!ok || std::fabs(angle)>2.*M_PI)
-							throw std::runtime_error(qPrintable(QString("invalid small circle rotation angle: \"%1\" (expect a double value in degree betwwen -2pi and 2pi)").arg(elemList.at(2).toString())));
-						int nbStep = 1+(int)(std::fabs(angle)/(2.*M_PI)*50);
-						Q_ASSERT(nbStep>0);
-						v = vertices.last();
-						const Mat4d& rotMat = Mat4d::rotation(axis, angle/nbStep);
-						for (int step=0; step<nbStep;++step)
-						{
-							v.transfo4d(rotMat);
-							vertices.append(v);
-						}
-						continue;
-					}
-					throw std::runtime_error(qPrintable(QString("invalid PATH description: \"%1\" (expect a list of greatCircleTo or smallCircle").arg(contourToList.at(2).toString())));
-				}
-				Q_ASSERT(vertices.size()>2);
-				contours.append(vertices);
-				vertices.clear();
-				continue;
-			}
-			// If no type is provided, assume a polygon
-			if (contourToList.size()<3)
-				throw std::runtime_error("a polygon contour must have at least 3 vertices");
-			Q_ASSERT(vertices.isEmpty());
-			Vec3d v;
-			foreach (const QVariant& vRaDec, contourToList)
-			{
-				parseRaDec(vRaDec, v);
-				vertices.append(v);
-			}
-			Q_ASSERT(vertices.size()>2);
-			contours.append(vertices);
-			vertices.clear();
-		}
+		const QVector<QVector<Vec3d> >& contours = loadContourFromQVariant(contoursList);
 		return SphericalRegionP(new SphericalPolygon(contours));
 	}
 	else
