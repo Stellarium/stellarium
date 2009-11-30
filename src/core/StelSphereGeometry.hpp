@@ -82,6 +82,7 @@ public:
 	//! Create a SphericalRegion from the given QVariantMap with a format matching the JSON file parsed in loadFromJson().
 	//! @param map a valid QVariantMap which can be created e.g. from parsing a JSON file with the StelJsonParser class.
 	static SphericalRegionP loadFromQVariant(const QVariantMap& map);
+	static SphericalRegionP loadFromQVariant(const QVariantList& list);
 
 	//! The QVariant type associated to a SphericalRegionP.
 	static const QVariant::Type qVariantType;
@@ -90,6 +91,8 @@ public:
 	static int metaTypeId;
 
 private:
+	static QVector<QVector<Vec3d> > loadContourFromQVariant(const QVariantList& contoursList);
+
 	//! Initialize stuff to allow SphericalRegionP to be used with Qt meta type system.
 	static int initialize();
 };
