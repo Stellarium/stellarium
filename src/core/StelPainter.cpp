@@ -1651,7 +1651,7 @@ void StelPainter::setPointSize(qreal size)
 #ifndef USE_OPENGL_ES2
 	glPointSize(size);
 #else
-#error GL ES2 to be done
+#warning GL ES2 to be done
 #endif
 }
 
@@ -1681,7 +1681,7 @@ void StelPainter::prepareDrawFromArray(int count, int index, const unsigned int*
 	prepareArray(normalArray, GL_NORMAL_ARRAY);
 	prepareArray(colorArray, GL_COLOR_ARRAY);
 #else
-#error GL ES2 to be done
+#warning GL ES2 to be done
 #endif
 }
 
@@ -1722,7 +1722,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int index, bool doP
 	prepareDrawFromArray(count, index, NULL, doProj);
 	glDrawArrays(mode, index, count);
 #else
-#error GL ES2 to be done
+#warning GL ES2 to be done
 #endif
 }
 
@@ -1732,7 +1732,7 @@ void StelPainter::drawFromArray(DrawingMode mode, const unsigned int* indices, i
 	prepareDrawFromArray(count, 0, indices + offset, doProj);
 	glDrawElements(mode, count, GL_UNSIGNED_INT, indices + offset);
 #else
-#error GL ES2 to be done
+#warning GL ES2 to be done
 #endif
 }
 
