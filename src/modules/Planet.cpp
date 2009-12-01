@@ -645,21 +645,20 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 
 		if (flagLighting)
 		{
-			glEnable(GL_LIGHTING);
+			sPainter->getLight().enable();
 
 			// Set the main source of light to be the sun
 			const Vec3d sunPos = core->getNavigator()->getHeliocentricEclipticModelViewMat()*Vec3d(0,0,0);
-			glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
-
-			const float diffuse[4] = {2.,2.,2.,1};
-			glLightfv(GL_LIGHT0,GL_DIFFUSE, diffuse);
+			sPainter->getLight().setPosition(Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
 
 			// Set the light parameters taking sun as the light source
-			const float zero[4] = {0,0,0,0};
-			const float ambient[4] = {0.02,0.02,0.02,0.02};
-			glLightfv(GL_LIGHT0,GL_AMBIENT, ambient);
-			glLightfv(GL_LIGHT0,GL_DIFFUSE, diffuse);
-			glLightfv(GL_LIGHT0,GL_SPECULAR,zero);
+			const Vec4f diffuse = Vec4f(2.,2.,2.,1);
+			const Vec4f zero = Vec4f(0,0,0,0);
+			const Vec4f ambient = Vec4f(0.02,0.02,0.02,0.02);
+			sPainter->getLight().setAmbient(ambient);
+			sPainter->getLight().setDiffuse(diffuse);
+			sPainter->getLight().setSpecular(zero);
+
 			glMaterialfv(GL_FRONT,GL_AMBIENT,  ambient);
 			glMaterialfv(GL_FRONT,GL_EMISSION, zero);
 			glMaterialfv(GL_FRONT,GL_SHININESS,zero);
@@ -667,7 +666,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 		}
 		else
 		{
-			glDisable(GL_LIGHTING);
+			sPainter->getLight().disable();
 			sPainter->setColor(1.f,1.f,1.f);
 		}
 
@@ -683,9 +682,9 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 			glClear(GL_DEPTH_BUFFER_BIT);
 			glEnable(GL_DEPTH_TEST);
 			drawSphere(sPainter, screenSz);
-			glDisable(GL_LIGHTING);
+			sPainter->getLight().disable();
 			rings->draw(sPainter,mat,screenSz);
-			glEnable(GL_LIGHTING);
+			sPainter->getLight().enable();
 			glDisable(GL_DEPTH_TEST);
 			core->setClippingPlanes(n,f);  // Restore old clipping planes
 		}
@@ -705,7 +704,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 				drawSphere(sPainter, screenSz);
 				glDisable(GL_STENCIL_TEST);
 
-				glDisable(GL_LIGHTING);
+				sPainter->getLight().disable();
 				delete sPainter;
 				sPainter=NULL;
 				drawEarthShadow(core);

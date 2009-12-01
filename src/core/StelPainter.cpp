@@ -1484,23 +1484,22 @@ void StelPainter::sSphere(double radius, double oneMinusOblateness, int slices, 
 	// static rather than on the stack. But why?
 	// Is the constructor/destructor so expensive?
 	static Vec3f lightPos3;
-	GLboolean isLightOn;
 	float c;
 
 	static Vec4f ambientLight;
 	static Vec4f diffuseLight;
 
-	glGetBooleanv(GL_LIGHTING, &isLightOn);
+	bool isLightOn = light.isEnabled();
 
 	if (isLightOn)
 	{
-		glGetLightfv(GL_LIGHT0, GL_POSITION, lightPos3);
+		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
 		lightPos3 -= prj->modelViewMatrix * Vec3d(0.,0.,0.); // -posCenterEye
 		lightPos3 = prj->modelViewMatrix.transpose().multiplyWithoutTranslation(lightPos3);
 		lightPos3.normalize();
-		glGetLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
-		glGetLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
-		glDisable(GL_LIGHTING);
+		ambientLight = light.getAmbient();
+		diffuseLight = light.getDiffuse();
+		light.disable();
 	}
 
 	GLfloat x, y, z;
@@ -1582,7 +1581,7 @@ void StelPainter::sSphere(double radius, double oneMinusOblateness, int slices, 
 	}
 
 	if (isLightOn)
-		glEnable(GL_LIGHTING);
+		light.enable();
 }
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
@@ -1779,4 +1778,62 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 	ret.pointer = polygonVertexArray.constData();
 	ret.enabled = array.enabled;
 	return ret;
+}
+
+// Light methods
+
+void StelPainterLight::setPosition(const Vec4f& v)
+{
+	position = v;
+#ifndef USE_OPENGL_ES2
+	glLightfv(light, GL_POSITION, v);
+#endif
+}
+
+void StelPainterLight::setDiffuse(const Vec4f& v)
+{
+	diffuse = v;
+#ifndef USE_OPENGL_ES2
+	glLightfv(light, GL_DIFFUSE, v);
+#endif
+}
+
+void StelPainterLight::setSpecular(const Vec4f& v)
+{
+	specular = v;
+#ifndef USE_OPENGL_ES2
+	glLightfv(light, GL_SPECULAR, v);
+#endif
+}
+
+void StelPainterLight::setAmbient(const Vec4f& v)
+{
+	ambient = v;
+#ifndef USE_OPENGL_ES2
+	glLightfv(light, GL_AMBIENT, v);
+#endif
+}
+
+void StelPainterLight::setEnable(bool v)
+{
+	if (v)
+		enable();
+	else
+		disable();
+}
+
+void StelPainterLight::enable()
+{
+	enabled = true;
+#ifndef USE_OPENGL_ES2
+	glEnable(GL_LIGHTING);
+#endif
+}
+
+void StelPainterLight::disable()
+{
+	enabled = false;
+#ifndef USE_OPENGL_ES2
+	glDisable(GL_LIGHTING);
+#endif
 }
