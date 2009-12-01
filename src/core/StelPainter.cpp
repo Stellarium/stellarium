@@ -279,8 +279,6 @@ void StelPainter::drawViewportShape(void)
 	}
 	drawFromArray(TriangleStrip, (slices+1)*2, 0, false);
 	enableClientStates(false);
-
-	glPopMatrix();
 }
 
 #define MAX_STACKS 4096
