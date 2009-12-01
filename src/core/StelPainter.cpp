@@ -650,8 +650,6 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 
 }
 
-static QVector<Vec2f> tmpVertexArray;
-
 // Recursive method cutting a small circle in small segments
 inline void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, Vec3d& win1, Vec3d& win2, QLinkedList<Vec3d>& vertexList, const QLinkedList<Vec3d>::iterator& iter, double radius, const Vec3d& center, int nbI=0, bool checkCrossDiscontinuity=true)
 {
@@ -1759,11 +1757,11 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 	// 2) We are using an indice array.  In that case we have to find the max value by iterating through the indices.
 	if (!indices)
 	{
-		tmpVertexArray.resize(index + count);
+		polygonVertexArray.resize(index + count);
 		for (int i=index; i< index + count; ++i)
 		{
 			prj->project(vecArray[i], win);
-			tmpVertexArray[i].set(win[0], win[1]);
+			polygonVertexArray[i].set(win[0], win[1]);
 		}
 	} else
 	{
@@ -1773,18 +1771,18 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 		{
 			max = std::max(max, indices[i]);
 		}
-		tmpVertexArray.resize(max+1);
+		polygonVertexArray.resize(max+1);
 		for (int i=index; i< index + count; ++i)
 		{
 			prj->project(vecArray[indices[i]], win);
-			tmpVertexArray[indices[i]].set(win[0], win[1]);
+			polygonVertexArray[indices[i]].set(win[0], win[1]);
 		}
 	}
 
 	ArrayDesc ret;
 	ret.size = 2;
 	ret.type = GL_FLOAT;
-	ret.pointer = tmpVertexArray.constData();
+	ret.pointer = polygonVertexArray.constData();
 	ret.enabled = array.enabled;
 	return ret;
 }
