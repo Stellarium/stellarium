@@ -1758,11 +1758,7 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 	if (!indices)
 	{
 		polygonVertexArray.resize(index + count);
-		for (int i=index; i< index + count; ++i)
-		{
-			prj->project(vecArray[i], win);
-			polygonVertexArray[i].set(win[0], win[1]);
-		}
+		prj->project(count, vecArray + index, polygonVertexArray.data() + index);
 	} else
 	{
 		// we need to find the max value of the indices !
