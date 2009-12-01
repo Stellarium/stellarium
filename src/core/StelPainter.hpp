@@ -30,6 +30,37 @@
 
 class QPainter;
 
+class StelPainterLight
+{
+public:
+	StelPainterLight(int alight=0) : light(alight), enabled(false) {}
+
+	void setPosition(const Vec4f& v);
+	Vec4f& getPosition() {return position;}
+
+	void setDiffuse(const Vec4f& v);
+	Vec4f& getDiffuse() {return diffuse;}
+
+	void setSpecular(const Vec4f& v);
+	Vec4f& getSpecular() {return specular;}
+
+	void setAmbient(const Vec4f& v);
+	Vec4f& getAmbient() {return ambient;}
+
+	void setEnable(bool v);
+	void enable();
+	void disable();
+	bool isEnabled() const {return enabled;}
+
+private:
+	int light;
+	Vec4f position;
+	Vec4f diffuse;
+	Vec4f specular;
+	Vec4f ambient;
+	bool enabled;
+};
+
 //! @class StelPainter
 //! Provides functions for performing openGL drawing operations.
 //! All coordinates are converted using the StelProjector instance passed at construction.
@@ -178,6 +209,9 @@ public:
 	//! Set the color to use for subsequent drawing.
 	void setColor(float r, float g, float b, float a=1.f);
 
+	//! Get the light
+	StelPainterLight& getLight() {return light;}
+
 	//! Get the font metrics for the current font.
 	QFontMetrics getFontMetrics() const;
 
@@ -294,6 +328,9 @@ private:
 	ArrayDesc normalArray;
 	//! The descriptor for the current opengl color array
 	ArrayDesc colorArray;
+
+	//! the single light used by the painter
+	StelPainterLight light;
 };
 
 #endif // _STELPAINTER_HPP_
