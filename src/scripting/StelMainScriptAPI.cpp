@@ -461,6 +461,11 @@ void StelMainScriptAPI::exit(void)
 	emit(requestExit());
 }
 
+void StelMainScriptAPI::quitStellarium(void)
+{
+	StelApp::getInstance().quitStellarium();
+}
+
 void StelMainScriptAPI::debug(const QString& s)
 {
 	qDebug() << "script: " << s;
