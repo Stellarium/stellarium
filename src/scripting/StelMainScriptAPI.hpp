@@ -426,6 +426,9 @@ public slots:
 	//! stop the script
 	void exit(void);
 
+	//! Close Stellarium
+	void quitStellarium(void);
+
 	//! print a debugging message to the console
 	//! @param s the message to be displayed on the console.
 	void debug(const QString& s);
