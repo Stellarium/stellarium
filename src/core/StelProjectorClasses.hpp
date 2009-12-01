@@ -106,6 +106,20 @@ public:
 		v[2] = r;
 		return true;
 	}
+
+	virtual void project(int n, const Vec3d* in, Vec2f* out)
+	{
+		Vec3d v;
+		for (int i = 0; i < n; ++i)
+		{
+			v = in[i];
+			v.transfo4d(modelViewMatrix);
+			StelProjectorStereographic::forward(v);
+			out[i][0] = viewportCenter[0] + flipHorz * pixelPerRad * v[0];
+			out[i][1] = viewportCenter[1] + flipVert * pixelPerRad * v[1];
+		}
+	}
+
 	bool backward(Vec3d &v) const;
 	double fovToViewScalingFactor(double fov) const;
 	double viewScalingFactorToFov(double vsf) const;

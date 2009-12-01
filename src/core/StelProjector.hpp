@@ -180,6 +180,19 @@ public:
 		return projectInPlace(win);
 	}
 
+	virtual void project(int n, const Vec3d* in, Vec2f* out)
+	{
+		Vec3d v;
+		for (int i = 0; i < n; ++i)
+		{
+			v = in[i];
+			v.transfo4d(modelViewMatrix);
+			forward(v);
+			out[i][0] = viewportCenter[0] + flipHorz * pixelPerRad * v[0];
+			out[i][1] = viewportCenter[1] + flipVert * pixelPerRad * v[1];
+		}
+	}
+
 	//! Project the vector v from the current frame into the viewport.
 	//! @param v the vector in the current frame.
 	//! @return true if the projected coordinate is valid.
@@ -243,19 +256,20 @@ protected:
 	//! For many projections without discontinuity, this should return always false, but for other like
 	//! cylindrical projection it will return true if the line cuts the wrap-around line (i.e. at lon=180 if the observer look at lon=0).
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const = 0;
-private:
-	//! Initialise the StelProjector from a param instance
-	void init(const StelProjectorParams& param);
 
+	Mat4d modelViewMatrix;         // openGL MODELVIEW Matrix
+	double flipHorz,flipVert;      // Whether to flip in horizontal or vertical directions
+	double pixelPerRad;            // pixel per rad at the center of the viewport disk
 	StelProjectorMaskType maskType;    // The current projector mask
 	double zNear, oneOverZNearMinusZFar;  // Near and far clipping planes
 	Vec4i viewportXywh;     // Viewport parameters
 	Vec2d viewportCenter;          // Viewport center in screen pixel
 	double viewportFovDiameter;    // diameter of the FOV disk in pixel
-	double pixelPerRad;            // pixel per rad at the center of the viewport disk
-	double flipHorz,flipVert;      // Whether to flip in horizontal or vertical directions
 	bool gravityLabels;            // should label text align with the horizon?
-	Mat4d modelViewMatrix;         // openGL MODELVIEW Matrix
+
+private:
+	//! Initialise the StelProjector from a param instance
+	void init(const StelProjectorParams& param);
 };
 
 #endif // _STELPROJECTOR_HPP_
