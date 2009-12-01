@@ -222,12 +222,12 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		}
 
 		// Generate the indices used to draw the quads
-		indices = new GLushort[(skyResolutionX+1)*skyResolutionY*2];
+		indices = new GLuint[(skyResolutionX+1)*skyResolutionY*2];
 		int i=0;
 		for (int y2=0; y2<skyResolutionY; ++y2)
 		{
-			GLushort g0 = y2*(1+skyResolutionX);
-			GLushort g1 = (y2+1)*(1+skyResolutionX);
+			GLuint g0 = y2*(1+skyResolutionX);
+			GLuint g1 = (y2+1)*(1+skyResolutionX);
 			for (int x2=0; x2<=skyResolutionX; ++x2)
 			{
 				indices[i++]=g0++;
@@ -486,10 +486,10 @@ void Atmosphere::draw(StelCore* core)
 		glVertexAttribPointer(loc, 4, GL_FLOAT, false, 0, colorGrid);
 #endif
 		// And draw everything at once
-		GLushort* shift=indices;
+		GLuint* shift=indices;
 		for (int y=0;y<skyResolutionY;++y)
 		{
-			glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, shift);
+			glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_INT, shift);
 			shift += (skyResolutionX+1)*2;
 		}
 #if QT_VERSION>=0x040600
@@ -518,7 +518,7 @@ void Atmosphere::draw(StelCore* core)
 		sPainter.setVertexPointer(2, GL_FLOAT, posGrid);
 
 		// And draw everything at once
-		GLushort* shift=indices;
+		GLuint* shift=indices;
 		for (int y=0;y<skyResolutionY;++y)
 		{
 			sPainter.drawFromArray(StelPainter::TriangleStrip, shift, 0, (skyResolutionX+1)*2);

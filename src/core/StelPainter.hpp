@@ -235,7 +235,7 @@ public:
 	//! The type of primitive to draw is specified by mode.
 	//! This operation will consume count elements of indices, starting at offset, which are used to index into the
 	//! enabled arrays.
-	void drawFromArray(DrawingMode mode, const unsigned short* indices, int offset, int count, bool doProj=true);
+	void drawFromArray(DrawingMode mode, const unsigned int* indices, int offset, int count, bool doProj=true);
 
 private:
 	//! Struct describing one opengl array
@@ -253,11 +253,11 @@ private:
 	void prepareArray(const ArrayDesc& array, int cap);
 
 	//! Common code for each flavor of drawFromArray.
-	void prepareDrawFromArray(int count, int index=0, const unsigned short* indices=NULL, bool doProj=true);
+	void prepareDrawFromArray(int count, int index=0, const unsigned int* indices=NULL, bool doProj=true);
 
 	//! Project an array using the current projection.
 	//! @return a descriptor of the new array
-	ArrayDesc projectArray(const ArrayDesc& array, int index, int count, const unsigned short* indices=NULL);
+	ArrayDesc projectArray(const ArrayDesc& array, int index, int count, const unsigned int* indices=NULL);
 
 	//! Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 	//! by splitting it into subtriangles. The resulting vertex arrays are appended to the passed out* ones.
