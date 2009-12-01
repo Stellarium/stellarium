@@ -1152,7 +1152,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 static QVarLengthArray<Vec2f, 4096> polygonVertexArray;
 static QVarLengthArray<Vec2f, 4096> polygonTextureCoordArray;
 // XXX: We should change the type to unsigned int
-static QVarLengthArray<unsigned short, 4096> indexArray;
+static QVarLengthArray<unsigned int, 4096> indexArray;
 
 void StelPainter::drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap)
 {
@@ -1240,7 +1240,7 @@ class RemoveDiscontinuousTriangles
 {
 public:
 	RemoveDiscontinuousTriangles(const StelVertexArray& ar, StelPainter* apainter,
-								 QVarLengthArray<unsigned short, 4096>* aoutIndices, bool isTextured)
+								 QVarLengthArray<unsigned int, 4096>* aoutIndices, bool isTextured)
 		: vertexArray(ar), painter(apainter), outIndices(aoutIndices), textured(isTextured)
 	{
 	}
@@ -1276,8 +1276,8 @@ public:
 private:
 	const StelVertexArray& vertexArray;
 	StelPainter* painter;
-	QVarLengthArray<unsigned short, 4096>* outIndices;
-	QList<unsigned short> remainingTriangles;
+	QVarLengthArray<unsigned int, 4096>* outIndices;
+	QList<unsigned int> remainingTriangles;
 	bool textured;
 };
 
@@ -1675,7 +1675,7 @@ void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool
 	normalArray.enabled = normal;
 }
 
-void StelPainter::prepareDrawFromArray(int count, int index, const unsigned short* indices, bool doProj)
+void StelPainter::prepareDrawFromArray(int count, int index, const unsigned int* indices, bool doProj)
 {
 #ifndef USE_OPENGL_ES2
 	// Project the vertex array using current projection
@@ -1731,17 +1731,17 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int index, bool doP
 #endif
 }
 
-void StelPainter::drawFromArray(DrawingMode mode, const unsigned short* indices, int offset, int count, bool doProj)
+void StelPainter::drawFromArray(DrawingMode mode, const unsigned int* indices, int offset, int count, bool doProj)
 {
 #ifndef USE_OPENGL_ES2
 	prepareDrawFromArray(count, 0, indices + offset, doProj);
-	glDrawElements(mode, count, GL_UNSIGNED_SHORT, indices + offset);
+	glDrawElements(mode, count, GL_UNSIGNED_INT, indices + offset);
 #else
 #error GL ES2 to be done
 #endif
 }
 
-StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& array, int index, int count, const unsigned short* indices)
+StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& array, int index, int count, const unsigned int* indices)
 {
 	// XXX: we should use a more generic way to test whether or not to do the projection.
 	if (dynamic_cast<StelProjector2d*>(prj.data()))
@@ -1768,7 +1768,7 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 	} else
 	{
 		// we need to find the max value of the indices !
-		unsigned short max = 0;
+		unsigned int max = 0;
 		for (int i = index; i < index + count; ++i)
 		{
 			max = std::max(max, indices[i]);
