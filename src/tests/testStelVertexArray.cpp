@@ -30,7 +30,7 @@ void TestStelVertexArray::initTestCase()
 
 	for (int i = 0; i < 1000; ++i)
 	{
-		Vec3d v(i, i, i);
+		Vec3d v(i+1, i+1, i+1);
 		v.normalize();
 		vertices.append(v);
 
@@ -61,12 +61,14 @@ void TestStelVertexArray::benchmarkForeachTriangleNoOp()
 
 struct VerticesVisitor
 {
+	VerticesVisitor(const VerticesVisitor& rst) : sum(rst.sum) {}
+
 	VerticesVisitor() : sum(0, 0, 0) {}
 	inline void operator()(const Vec3d* v0, const Vec3d* v1, const Vec3d* v2,
 						   const Vec2f* t0, const Vec2f* t1, const Vec2f* t2,
 						   unsigned int i0, unsigned int i1, unsigned int i2)
 	{
-		sum +=  *v1 + *v2;
+		sum += *v1 + *v2;
 	}
 
 	Vec3d sum;
@@ -74,11 +76,12 @@ struct VerticesVisitor
 
 void TestStelVertexArray::benchmarkForeachTriangle()
 {
-	Vec3d ret;
+	Vec3d sum(0, 0, 0);
 	QBENCHMARK {
-		ret = array.foreachTriangle(VerticesVisitor()).sum;
+		VerticesVisitor result = array.foreachTriangle(VerticesVisitor());
+		sum = result.sum;
 	}
-	qDebug() << ret;
+	qDebug() << sum.toString();
 }
 
 void TestStelVertexArray::benchmarkForeachTriangleDirect()
@@ -86,6 +89,7 @@ void TestStelVertexArray::benchmarkForeachTriangleDirect()
 	// Now we do the same thing "manually"
 	Vec3d sum(0, 0, 0);
 	QBENCHMARK {
+		sum = Vec3d(0, 0, 0);
 		for (int i = 2; i < array.vertex.size(); ++i)
 		{
 			if ((i % 2) == 0)
@@ -98,7 +102,7 @@ void TestStelVertexArray::benchmarkForeachTriangleDirect()
 			}
 		}
 	}
-	qDebug() << sum;
+	qDebug() << sum.toString();
 }
 
 
