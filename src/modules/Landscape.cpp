@@ -525,9 +525,5 @@ void LandscapeSpherical::draw(StelCore* core)
 	sPainter.sSphere(radius, 1.0, 40, 20, 1, true);
 
 	glDisable(GL_CULL_FACE);
-
-	glMatrixMode(GL_TEXTURE);
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
 }
 
