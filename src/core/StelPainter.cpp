@@ -1422,24 +1422,24 @@ void StelPainter::drawRect2d(float x, float y, float width, float height)
 *************************************************************************/
 void StelPainter::drawSprite2dMode(double x, double y, float radius, float rotation)
 {
-	glPushMatrix();
-	glTranslatef(x, y, 0.0);
-	glRotatef(rotation,0.,0.,1.);
-	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};
+	static float vertexData[8];
 	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
-	vertexData[0]=-radius; vertexData[1]=-radius;
-	vertexData[2]=radius; vertexData[3]=-radius;
-	vertexData[4]=-radius; vertexData[5]=radius;
-	vertexData[6]=radius; vertexData[7]=radius;
+
+	// compute the vertex coordinates applying the translation and the rotation
+	static const float vertexBase[] = {-1., -1., 1., -1., -1., 1., 1., 1.};
+	const float cosr = std::cos(rotation / 180 * M_PI);
+	const float sinr = std::sin(rotation / 180 * M_PI);
+	for (int i = 0; i < 8; i+=2)
+	{
+		vertexData[i] = x + radius * vertexBase[i] * cosr - radius * vertexBase[i+1] * sinr;
+		vertexData[i+1] = y + radius * vertexBase[i] * sinr + radius * vertexBase[i+1] * cosr;
+	}
 
 	enableClientStates(true, true);
 	setVertexPointer(2, GL_FLOAT, vertexData);
 	setTexCoordPointer(2, GL_FLOAT, texCoordData);
 	drawFromArray(TriangleStrip, 4, 0, false);
 	enableClientStates(false);
-
-	glPopMatrix();
-
 }
 
 /*************************************************************************
