@@ -61,6 +61,30 @@ private:
 	bool enabled;
 };
 
+
+class StelPainterMaterial
+{
+public:
+	StelPainterMaterial();
+
+	void setSpecular(const Vec4f& v);
+	Vec4f& getSpecular() {return specular;}
+
+	void setAmbient(const Vec4f& v);
+	Vec4f& getAmbient() {return ambient;}
+
+	void setEmission(const Vec4f& v);
+	Vec4f& getEmission() {return emission;}
+
+	void setShininess(float v);
+	float getShininess() {return shininess;}
+private:
+	Vec4f specular;
+	Vec4f ambient;
+	Vec4f emission;
+	float shininess;
+};
+
 //! @class StelPainter
 //! Provides functions for performing openGL drawing operations.
 //! All coordinates are converted using the StelProjector instance passed at construction.
@@ -212,6 +236,9 @@ public:
 	//! Get the light
 	StelPainterLight& getLight() {return light;}
 
+	//! Get the material
+	StelPainterMaterial& getMaterial() {return material;}
+
 	//! Get the font metrics for the current font.
 	QFontMetrics getFontMetrics() const;
 
@@ -331,6 +358,9 @@ private:
 
 	//! the single light used by the painter
 	StelPainterLight light;
+
+	//! The material used bye the painter
+	StelPainterMaterial material;
 };
 
 #endif // _STELPAINTER_HPP_

@@ -659,10 +659,10 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 			sPainter->getLight().setDiffuse(diffuse);
 			sPainter->getLight().setSpecular(zero);
 
-			glMaterialfv(GL_FRONT,GL_AMBIENT,  ambient);
-			glMaterialfv(GL_FRONT,GL_EMISSION, zero);
-			glMaterialfv(GL_FRONT,GL_SHININESS,zero);
-			glMaterialfv(GL_FRONT,GL_SPECULAR, zero);
+			sPainter->getMaterial().setAmbient(ambient);
+			sPainter->getMaterial().setEmission(zero);
+			sPainter->getMaterial().setShininess(0);
+			sPainter->getMaterial().setSpecular(zero);
 		}
 		else
 		{
