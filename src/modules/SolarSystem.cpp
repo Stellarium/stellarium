@@ -146,19 +146,17 @@ void SolarSystem::drawPointer(const StelCore* core)
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-
-		glPushMatrix();
-		glTranslatef(screenpos[0], screenpos[1], 0.0f);
-		glRotatef(StelApp::getInstance().getTotalRunTime()*10.,0,0,-1);
 		
 		size*=0.5;
-		
-		sPainter.drawSprite2dMode(-size, 0, 10, 0.);
-		sPainter.drawSprite2dMode(size, 0, 10, 180.);
-		sPainter.drawSprite2dMode(0, size, 10, 90.);
-		sPainter.drawSprite2dMode(0, -size, 10, -90.);
-		
-		glPopMatrix();
+		const float angleBase = StelApp::getInstance().getTotalRunTime() * 10;
+		// We draw 4 instances of the sprite at the corners of the pointer
+		for (int i = 0; i < 4; ++i)
+		{
+			const float angle = angleBase + i * 90;
+			const double x = screenpos[0] + size * cos(angle / 180 * M_PI);
+			const double y = screenpos[1] + size * sin(angle / 180 * M_PI);
+			sPainter.drawSprite2dMode(x, y, 10, angle);
+		}
 	}
 }
 
