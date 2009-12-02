@@ -174,6 +174,18 @@ public:
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 360.;}
+	virtual void project(int n, const Vec3d* in, Vec2f* out)
+	{
+		Vec3d v;
+		for (int i = 0; i < n; ++i)
+		{
+			v = in[i];
+			v.transfo4d(modelViewMatrix);
+			StelProjectorHammer::forward(v);
+			out[i][0] = viewportCenter[0] + flipHorz * pixelPerRad * v[0];
+			out[i][1] = viewportCenter[1] + flipVert * pixelPerRad * v[1];
+		}
+	}
 	bool forward(Vec3d &v) const
 	{
 		// RealAitoff
@@ -186,7 +198,7 @@ public:
 // 		v[1] = v[1]/r/z;
 // 		v[2] = r;
 // 		return true;
-		
+
 		// Hammer Aitoff
 		const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 		const double alpha = std::atan2(v[0],-v[2]);
