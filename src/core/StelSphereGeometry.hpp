@@ -56,20 +56,37 @@ public:
 	//! The type of the region is automatically recognized from the input format.
 	//! The currently recognized format are:
 	//! <ul>
-	//! <li>Polygon vertex list:
-	//! @code{
-	//!     "worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]]
-	//! }@endcode
-	//! The format consist of a list of contours, each contours is defined by a list of ra,dec coordinates
-	//! composing connected great circles segments with the last point connected to the first one.
-	//! ra and dec are expressed in degree in the ICRS reference frame.</li>
+	//! <li>Contour list:
+	//! @code[[contour1], [contour2],[...]]@endcode
+	//! This format consists of a list of contours. Contours defined in counterclockwise direction (CW) are
+	//! added to the final region while CCW contours are subtracted (they can be used to form complex polygons even with holes).
+	//! Each contour can have different format:
+	//! <ul>
+	//! <li>
+	//! @code[[ra,dec], [ra,dec], [ra,dec], [ra,dec]]@endcode
+	//! A list of points connected by great circles with the last point connected to the first one.
+	//! Each point is defined by its ra,dec coordinates in degrees.</li>
+	//! <li>
+	//! @code["CAP", [raCenter,decCenter], ap]@endcode
+	//! A spherical cap centered on raCenter/decCenter with aperture radius ap in degrees. For example:
+	//! @code["CAP", [0.,-90.], 90]@endcode
+	//! define the region covering the entire southern hemisphere.</li>
+	//! <li>
+	//! @code["PATH", [startRa,startDec], [[prim1],[prim2],[prim3],...]]@endcode
+	//! A path is a contour starting a startRa/startDec and defined by a list of primitives. Each primitive can be either
+	//! a great circle or a small circle. Great circles are defined by the point to link to: ["greatCircleTo", [ra,dec]]. Small
+	//! circles are defined by a rotation axis and a rotation angle: ["smallCircle",[0,90],-88]. A full example is:
+	//! @code["PATH",[330,-25],[["smallCircle",[0,90],82.5],["greatCircleTo",[52.5,-35]],["smallCircle",[0,90],-82.5]]]@endcode
+	//! This defines a box of 82.5x10 degrees following latitude and longitude lines.</li>
+	//! </ul>
 	//! <li>Polygon vertex list with associated texture coordinates:
 	//! @code{
 	//!     "worldCoords": [[[ra,dec],[ra,dec],[ra,dec],[ra,dec]], [[ra,dec],[ra,dec],[ra,dec]],[...]],
 	//!     "textureCoords": [[[u,v],[u,v],[u,v],[u,v]], [[u,v],[u,v],[u,v]], [...]]
 	//! }@endcode
-	//! The format is similar to the one described above, with the addition of a list of texture coordinates
-	//! in the u,v texture space (between 0 and 1). There must be one texture coordinate for each vertex.</li>
+	//! The format is used to describe textured polygons. The worldCoords part is similar to the one described above.
+	//! The textureCoords part is the addition of a list of texture coordinates in the u,v texture space (between 0 and 1).
+	//! There must be one texture coordinate for each vertex.</li>
 	//! </ul>
 	//! @param in an open QIODevice ready for read.
 	//! @throws std::runtime_error when there was an error while parsing the file.

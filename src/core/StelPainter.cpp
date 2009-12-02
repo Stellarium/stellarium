@@ -125,8 +125,8 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 
 #ifndef USE_OPENGL_ES2
 	// Save openGL projection state
-	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	//glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
+	//glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glMatrixMode(GL_TEXTURE);
 	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
@@ -164,8 +164,8 @@ StelPainter::~StelPainter()
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
-	glPopAttrib();
-	glPopClientAttrib();
+	//glPopAttrib();
+	//glPopClientAttrib();
 #endif
 #ifndef NDEBUG
 	GLenum er = glGetError();

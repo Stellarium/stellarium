@@ -355,7 +355,8 @@ void OctahedronPolygon::updateVertexArray()
 			}
 			else
 			{
-				qDebug() << "Found a fucking CW triangle";
+				//  Discard vertex..
+				//qDebug() << "Found a fucking CW triangle";
 			}
 		}
 
