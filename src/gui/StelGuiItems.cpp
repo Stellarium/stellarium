@@ -220,7 +220,7 @@ LeftStelBar::LeftStelBar(QGraphicsItem* parent) : QGraphicsItem(parent)
 	// Create the help label
 	helpLabel = new QGraphicsSimpleTextItem("", this);
 	QFont font("DejaVuSans");
-	font.setPixelSize(14);
+	font.setPixelSize(13);
 	helpLabel->setFont(font);
 	helpLabel->setBrush(QBrush(QColor::fromRgbF(1,1,1,1)));
 }
@@ -330,7 +330,7 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft, cons
 	// Create the help label
 	helpLabel = new QGraphicsSimpleTextItem("", this);
 	QFont font2("DejaVuSans");
-	font2.setPixelSize(14);
+	font2.setPixelSize(13);
 	helpLabel->setFont(font2);
 	helpLabel->setBrush(QBrush(QColor::fromRgbF(1,1,1,1)));
 
