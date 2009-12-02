@@ -489,7 +489,7 @@ QListView::item:selected#stackListWidget {
 QListView::item#stackListWidget {
 	margin: 0px;
 	padding-top: 0px;
-	padding-bottom: 3px;
+	padding-bottom: 5px;
 	padding-left: 8px;
 	padding-right: 8px;
 }
@@ -669,7 +669,7 @@ QMainWindow::separator:hover {
 }
 
 QDockWidget {
-    	background-color: rgb(31, 33, 36);
+		background-color: rgb(31, 33, 36);
 	color: rgb(194, 194, 195);	/* Dock widget title text color */
 	font: bold;
 	border: 0px;
@@ -813,7 +813,7 @@ QWidget#fileDownLoading
 
 QWidget#resourceDescriptionEdition
 {
-        background-color:transparent;
+		background-color:transparent;
 }
 
 QWidget#resourceInformationView
@@ -837,13 +837,13 @@ QWidget#simbadSearch
 }
 
 QWidget#viewMode {
-	background-color: rgb(76, 77, 80);		 
+	background-color: rgb(76, 77, 80);
 	padding-left: 0px;
 }
 
 QWidget#dataSourcesListGroupBox
 {
-        background-color: rgb(31,33,36);
+		background-color: rgb(31,33,36);
 }
 
 QTextEdit#editResourceDescription {
@@ -871,6 +871,6 @@ QWidget#listManagerWidget {
 
 
 QGraphicsWidget#observationListView  QLabel {
-        font-size: 40px;
+		font-size: 40px;
 }
 
