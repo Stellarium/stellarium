@@ -1837,3 +1837,42 @@ void StelPainterLight::disable()
 	glDisable(GL_LIGHTING);
 #endif
 }
+
+
+// material functions
+StelPainterMaterial::StelPainterMaterial()
+	: specular(0, 0, 0, 1), ambient(0.2, 0.2, 0.2, 1.0), emission(0, 0, 0, 1), shininess(0)
+{
+}
+
+void StelPainterMaterial::setSpecular(const Vec4f& v)
+{
+	specular = v;
+#ifndef USE_OPENGL_ES2
+	glMaterialfv(GL_FRONT, GL_SPECULAR, v);
+#endif
+}
+
+void StelPainterMaterial::setAmbient(const Vec4f& v)
+{
+	ambient = v;
+#ifndef USE_OPENGL_ES2
+	glMaterialfv(GL_FRONT, GL_AMBIENT, v);
+#endif
+}
+
+void StelPainterMaterial::setEmission(const Vec4f& v)
+{
+	emission = v;
+#ifndef USE_OPENGL_ES2
+	glMaterialfv(GL_FRONT, GL_EMISSION, v);
+#endif
+}
+
+void StelPainterMaterial::setShininess(float v)
+{
+	shininess = v;
+#ifndef USE_OPENGL_ES2
+	glMaterialfv(GL_FRONT, GL_SHININESS, &v);
+#endif
+}
