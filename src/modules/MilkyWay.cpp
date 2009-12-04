@@ -6,7 +6,7 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -34,7 +34,7 @@
 #include <QSettings>
 
 // Class which manages the displaying of the Milky Way
-MilkyWay::MilkyWay() : radius(1.f), color(1.f, 1.f, 1.f)
+MilkyWay::MilkyWay() : color(1.f, 1.f, 1.f)
 {
 	setObjectName("MilkyWay");
 	fader = new LinearFader();
@@ -66,7 +66,7 @@ void MilkyWay::update(double deltaTime) {fader->update((int)(deltaTime*1000));}
 
 void MilkyWay::setFlagShow(bool b){*fader = b;}
 bool MilkyWay::getFlagShow(void) const {return *fader;}
-	
+
 void MilkyWay::draw(StelCore* core)
 {
 	StelNavigator* nav = core->getNavigator();
@@ -75,7 +75,7 @@ void MilkyWay::draw(StelCore* core)
 			Mat4d::yrotation(M_PI/180*120)*
 			Mat4d::zrotation(M_PI/180*7));
 	StelToneReproducer* eye = core->getToneReproducer();
-	
+
 	Q_ASSERT(tex);	// A texture must be loaded before calling this
 
 	// This RGB color corresponds to the night blue scotopic color = 0.25, 0.25 in xyY mode.
@@ -83,30 +83,30 @@ void MilkyWay::draw(StelCore* core)
 	Vec3f c;
 	if (StelApp::getInstance().getVisionModeNight())
 		c = Vec3f(0.34165, 0, 0);
-	else 
+	else
 		c = Vec3f(0.34165, 0.429666, 0.63586);
 
 	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(13.5);
-	
+
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
-	
+
 	// Bound a maximum luminance
 	aLum = qMin(0.38, aLum*2.);
-	
+
 	// intensity of 1.0 is "proper", but allow boost for dim screens
 	c*=aLum*intensity;
-	
+
 	if (c[0]<0) c[0]=0;
 	if (c[1]<0) c[1]=0;
 	if (c[2]<0) c[2]=0;
-	
+
 	StelPainter sPainter(prj);
 	sPainter.setColor(c[0],c[1],c[2]);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
 	tex->bind();
-	sPainter.sSphere(radius,1.0,20,20,1);
+	sPainter.sSphere(1.,1.0,20,20,1);
 	glDisable(GL_CULL_FACE);
 }
