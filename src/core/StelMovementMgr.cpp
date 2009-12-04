@@ -79,6 +79,9 @@ void StelMovementMgr::init()
 	initFov = conf->value("navigation/init_fov",60.).toDouble();
 	currentFov = initFov;
 
+	initViewPos = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
+	viewDirectionJ2000 = core->getNavigator()->altAzToJ2000(initViewPos);
+
 	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
 	if (tmpstr=="equator")
 		setMountMode(StelMovementMgr::MountEquinoxEquatorial);
@@ -88,14 +91,10 @@ void StelMovementMgr::init()
 			setMountMode(StelMovementMgr::MountAltAzimuthal);
 		else
 		{
-			qDebug() << "ERROR : Unknown viewing mode type : " << tmpstr;
-			Q_ASSERT(0);
+			qWarning() << "ERROR : Unknown viewing mode type : " << tmpstr;
+			setMountMode(StelMovementMgr::MountEquinoxEquatorial);
 		}
 	}
-	initViewPos = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
-	viewDirectionJ2000 = core->getNavigator()->altAzToJ2000(initViewPos);
-	setViewDirectionJ2000(viewDirectionJ2000);
-
 }
 
 void StelMovementMgr::setMountMode(MountMode m)

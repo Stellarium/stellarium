@@ -1503,7 +1503,7 @@ void StelPainter::sSphere(double radius, double oneMinusOblateness, int slices, 
 	}
 
 	GLfloat x, y, z;
-	GLfloat s, t;
+	GLfloat s=0.f, t=0.f;
 	GLint i, j;
 	GLfloat nsign;
 
