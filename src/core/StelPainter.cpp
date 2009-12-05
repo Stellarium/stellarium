@@ -118,6 +118,8 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 		w->makeCurrent();
 	}
 	qPainter->save();
+	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
 #endif
 
 	// Init GL viewport to current projector values
@@ -125,8 +127,6 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 
 #ifndef USE_OPENGL_ES2
 	// Save openGL projection state
-	//glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
-	//glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glMatrixMode(GL_TEXTURE);
 	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
@@ -164,8 +164,6 @@ StelPainter::~StelPainter()
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
-	//glPopAttrib();
-	//glPopClientAttrib();
 #endif
 #ifndef NDEBUG
 	GLenum er = glGetError();
@@ -179,6 +177,8 @@ StelPainter::~StelPainter()
 #if QT_VERSION>=0x040600
 	qPainter->endNativePainting();
 #else
+	glPopAttrib();
+	glPopClientAttrib();
 	qPainter->restore();
 #endif
 
