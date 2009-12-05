@@ -159,8 +159,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	ViewportEdgeIntersectCallbackData* d = static_cast<ViewportEdgeIntersectCallbackData*>(userData);
 	Vec3d direc(direction);
 	direc.normalize();
-	GLfloat tmpColor[4];
-	glGetFloatv(GL_CURRENT_COLOR, tmpColor);
+	const Vec4f& tmpColor = d->sPainter->getColor();
 	d->sPainter->setColor(d->textColor[0], d->textColor[1], d->textColor[2], d->textColor[3]);
 
 	QString text;
@@ -271,7 +270,6 @@ void SkyGrid::draw(const StelCore* core) const
 
 	// Initialize a painter and set openGL state
 	StelPainter sPainter(prj);
-	glEnable(GL_LINE_SMOOTH);
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
@@ -528,7 +526,6 @@ void SkyLine::draw(StelCore *core) const
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-	glEnable(GL_LINE_SMOOTH);
 
 	Vec4f textColor(color[0], color[1], color[2], 0);
 	textColor*=2;
