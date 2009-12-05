@@ -263,7 +263,7 @@ bool Meteor::draw(const StelCore* core, StelPainter& sPainter)
 		glDisableClientState(GL_COLOR_ARRAY);
 		
 	} else {
-		glPointSize(1); 
+		sPainter.setPointSize(1.f);
 		sPainter.drawPoint2d(start[0],start[1]);
 	}
 

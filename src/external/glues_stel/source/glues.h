@@ -37,8 +37,9 @@
 #ifndef __glues_h__
 #define __glues_h__
 
-
-#if defined(Q_WS_MAC) || defined(MACOSX) || defined(__APPLE__) || defined(__APPLE_CC__)
+#ifdef USE_OPENGL_ES2
+# include <GLES2/gl2.h>
+#elif defined(Q_WS_MAC) || defined(MACOSX) || defined(__APPLE__) || defined(__APPLE_CC__)
 # include <OpenGL/gl.h>
 #elif defined(QT_OPENGL_ES_1) || defined(QT_OPENGL_ES_1_CL)
 # include <GLES/gl.h>

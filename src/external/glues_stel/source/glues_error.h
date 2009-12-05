@@ -46,7 +46,8 @@
 #define GLUES_OUT_OF_MEMORY                  100902
 #define GLUES_INCOMPATIBLE_GL_VERSION        100903
 #define GLUES_INVALID_OPERATION              100904
-
+#define GLUES_STACK_OVERFLOW				0x0503
+#define GLUES_STACK_UNDERFLOW				0x0504
 /* TessError */
 #define GLUES_TESS_ERROR1                    100151
 #define GLUES_TESS_ERROR2                    100152

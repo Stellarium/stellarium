@@ -74,8 +74,8 @@ static const struct token_string Errors[]=
    {GL_INVALID_ENUM, "invalid enumerant"},
    {GL_INVALID_VALUE, "invalid value"},
    {GL_INVALID_OPERATION, "invalid operation"},
-   {GL_STACK_OVERFLOW, "stack overflow"},
-   {GL_STACK_UNDERFLOW, "stack underflow"},
+   {GLUES_STACK_OVERFLOW, "stack overflow"},
+   {GLUES_STACK_UNDERFLOW, "stack underflow"},
    {GL_OUT_OF_MEMORY, "out of memory"},
 
    /* GLUES */
