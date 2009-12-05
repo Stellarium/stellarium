@@ -17,6 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include <QDebug>
+
 #ifdef USE_OPENGL_ES2
  #include "GLES2/gl2.h"
 #endif
@@ -37,8 +39,6 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelFileMgr.hpp"
-
-#include <QDebug>
 
 inline bool myisnan(double value)
 {

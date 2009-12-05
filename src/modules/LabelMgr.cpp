@@ -295,9 +295,7 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 				
 		sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
 		
-		glEnable(GL_LINE_SMOOTH);
 		sPainter.drawLine2d(lineEndX,lineEndY,objXY[0], objXY[1]);
-		glDisable(GL_LINE_SMOOTH);
 	}
 
 	return true;

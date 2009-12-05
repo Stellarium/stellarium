@@ -234,6 +234,9 @@ public:
 	//! Set the color to use for subsequent drawing.
 	void setColor(float r, float g, float b, float a=1.f);
 
+	//! Get the color currently used for drawing.
+	Vec4f getColor() const;
+
 	//! Get the light
 	StelPainterLight& getLight() {return light;}
 

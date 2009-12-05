@@ -485,7 +485,6 @@ void ConstellationMgr::drawArt(StelPainter& sPainter) const
 // Draw constellations lines
 void ConstellationMgr::drawLines(StelPainter& sPainter, const StelNavigator* nav) const
 {
-	glEnable(GL_LINE_SMOOTH);
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -495,7 +494,6 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelNavigator* nav
 	{
 		(*iter)->drawOptim(sPainter, nav, viewportHalfspace);
 	}
-	glDisable(GL_LINE_SMOOTH);
 }
 
 // Draw the names of all the constellations
@@ -950,7 +948,6 @@ void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 {
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
-	glEnable(GL_LINE_SMOOTH);
 #ifndef USE_OPENGL_ES2
 	glLineStipple(2, 0x3333);
 	glEnable(GL_LINE_STIPPLE);
@@ -963,7 +960,6 @@ void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 #ifndef USE_OPENGL_ES2
 	glDisable(GL_LINE_STIPPLE);
 #endif
-	glDisable(GL_LINE_SMOOTH);
 }
 
 ///unsigned int ConstellationMgr::getFirstSelectedHP(void) {

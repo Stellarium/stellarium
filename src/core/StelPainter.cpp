@@ -146,7 +146,7 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	glDisable(GL_MULTISAMPLE);
 	glDisable(GL_DITHER);
 	glDisable(GL_ALPHA_TEST);
-	glDisable(GL_LINE_SMOOTH);
+	glEnable(GL_LINE_SMOOTH);
 	glDisable(GL_TEXTURE_2D);
 #endif
 	glFrontFace(prj->needGlFrontFaceCW()?GL_CW:GL_CCW);
@@ -200,7 +200,19 @@ void StelPainter::setColor(float r, float g, float b, float a)
 #ifndef USE_OPENGL_ES2
 	glColor4f(r,g,b,a);
 #else
+ #warning GL ES2 to be done
+#endif
+}
 
+Vec4f StelPainter::getColor() const
+{
+#ifndef USE_OPENGL_ES2
+	GLfloat tmpColor[4];
+	glGetFloatv(GL_CURRENT_COLOR, tmpColor);
+	return Vec4f(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]);
+#else
+ #warning GL ES2 to be done
+	return Vec4f(1.);
 #endif
 }
 
@@ -588,21 +600,21 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 {
 	Q_ASSERT(qPainter);
 
-	// Save openGL state
+	float color[4];
 #ifndef USE_OPENGL_ES2
+	// Save openGL state
 	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
-#endif
 	glMatrixMode(GL_TEXTURE);
 	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
+	glGetFloatv(GL_CURRENT_COLOR, color);
+#endif
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	float color[4];
-	glGetFloatv(GL_CURRENT_COLOR, color);
 
 #if QT_VERSION>=0x040600
 	qPainter->endNativePainting();
@@ -638,14 +650,13 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 #ifndef USE_OPENGL_ES2
 	glPopClientAttrib();
 	glPopAttrib();
-#endif
 	glMatrixMode(GL_TEXTURE);
 	glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
-
+#endif
 }
 
 // Recursive method cutting a small circle in small segments
