@@ -221,14 +221,9 @@ bool Meteor::draw(const StelCore* core, StelPainter& sPainter)
 	epos = nav->equinoxEquToAltAz( epos );
 	spos[2] -= EARTH_RADIUS;
 	epos[2] -= EARTH_RADIUS;
-
-	Vec3d start, end;
-	int t1 = proj->projectCheck(spos/1216, start);  // 1216 is to scale down under 1 for desktop version
-	int t2 = proj->projectCheck(epos/1216, end);
-
-	// don't draw if not visible (but may come into view)
-	if( t1 + t2 == 0 )
-		return true;
+	// 1216 is to scale down under 1 for desktop version
+	spos/=1216;
+	epos/=1216;
 
 	//  qDebug("[%f %f %f] (%d, %d) (%d, %d)\n", position[0], position[1], position[2], (int)start[0], (int)start[1], (int)end[0], (int)end[1]);
 
@@ -242,28 +237,26 @@ bool Meteor::draw(const StelCore* core, StelPainter& sPainter)
 		posi.transfo4d(mmat);
 		posi = nav->equinoxEquToAltAz( posi );
 		posi[2] -= EARTH_RADIUS;
-		Vec3d intpos;
-		proj->project(posi/1216, intpos);
+		posi/=1216;
 
 		// draw dark to light
 		float colorArray[] = {0,0,0,0,1,1,1,0,1,1,1,0};
 		colorArray[7]=tmag*0.5;
 		colorArray[11]=tmag;
-		Vec2f vertexArray[3];
-		vertexArray[0].set(end[0], end[1]);
-		vertexArray[1].set(intpos[0], intpos[1]);
-		vertexArray[2].set(start[0], start[1]);
-		
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_COLOR_ARRAY);
-		glColorPointer(4, GL_FLOAT, 0, colorArray);
-		glVertexPointer(2, GL_FLOAT, 0, vertexArray);
-		glDrawArrays(GL_LINE_STRIP, 0, 3);
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glDisableClientState(GL_COLOR_ARRAY);
+		Vec3d vertexArray[3];
+		vertexArray[0]=epos;
+		vertexArray[1]=posi;
+		vertexArray[2]=spos;
+		sPainter.setColorPointer(4, GL_FLOAT, colorArray);
+		sPainter.setVertexPointer(3, GL_FLOAT, vertexArray);
+		sPainter.enableClientStates(true, false, true);
+		sPainter.drawFromArray(StelPainter::LineStrip, 3, 0, true);
+		sPainter.enableClientStates(false);
 		
 	} else {
 		sPainter.setPointSize(1.f);
+		Vec3d start;
+		proj->project(spos, start);
 		sPainter.drawPoint2d(start[0],start[1]);
 	}
 
