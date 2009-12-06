@@ -240,16 +240,17 @@ bool Meteor::draw(const StelCore* core, StelPainter& sPainter)
 		posi/=1216;
 
 		// draw dark to light
-		float colorArray[] = {0,0,0,0,1,1,1,0,1,1,1,0};
-		colorArray[7]=tmag*0.5;
-		colorArray[11]=tmag;
+		sPainter.enableClientStates(true, false, true);
+		Vec4f colorArray[3];
+		colorArray[0].set(0,0,0,0);
+		colorArray[1].set(1,1,1,tmag*0.5);
+		colorArray[2].set(1,1,1,tmag);
 		Vec3d vertexArray[3];
 		vertexArray[0]=epos;
 		vertexArray[1]=posi;
 		vertexArray[2]=spos;
 		sPainter.setColorPointer(4, GL_FLOAT, colorArray);
-		sPainter.setVertexPointer(3, GL_FLOAT, vertexArray);
-		sPainter.enableClientStates(true, false, true);
+		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArray);
 		sPainter.drawFromArray(StelPainter::LineStrip, 3, 0, true);
 		sPainter.enableClientStates(false);
 		
