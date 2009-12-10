@@ -643,8 +643,9 @@ float getGMTShiftFromQT(double JD)
 	getDateFromJulianDay(JD, &year, &month, &day);
 	getTimeFromJulianDay(JD, &hour, &minute, &second);
 	// as analogous to second statement in getJDFromDate, nkerr
-	if ( year <= 0 ) {
-	  year = year - 1;
+	if ( year <= 0 )
+	{
+		year = year - 1;
 	}
 	QDateTime current(QDate(year, month, day), QTime(hour, minute, second));
 	if (! current.isValid())
@@ -653,12 +654,15 @@ float getGMTShiftFromQT(double JD)
 		// Assumes the GMT shift was always the same before year -4710
 		current = QDateTime(QDate(-4710, month, day), QTime(hour, minute, second));
 	}
-	QDateTime c1 = QDateTime::fromString(current.toString(Qt::ISODate),Qt::ISODate);
-	QDateTime u1 = QDateTime::fromString(current.toUTC().toString(Qt::ISODate),Qt::ISODate);
-
-	int secsto = u1.secsTo(c1);
-	float hrsto = secsto / 3600.0f;
-	return hrsto;
+	
+	//Both timezones should be set to UTC because secsTo() converts both
+	//times to UTC if their zones have different daylight saving time rules.
+	QDateTime local = current; local.setTimeSpec(Qt::UTC);
+	QDateTime universal = current.toUTC();
+	
+	int shiftInSeconds = universal.secsTo(local);
+	float shiftInHours = shiftInSeconds / 3600.0f;
+	return shiftInHours;
 }
 
 // UTC !
