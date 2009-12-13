@@ -96,12 +96,9 @@ void MeteorMgr::update(double deltaTime)
 	StelNavigator * nav = StelApp::getInstance().getCore()->getNavigator();
 
 	// step through and update all active meteors
-	int n =0;
-	for(std::vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
+	for (std::vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
 	{
-		n++;
-		//qDebug("Meteor %d update\n", ++n);
-		if( !( (*iter)->update(deltaTime) ) )
+		if (!(*iter)->update(deltaTime))
 		{
 			// remove dead meteor
 			//      qDebug("Meteor \tdied\n");
@@ -114,47 +111,37 @@ void MeteorMgr::update(double deltaTime)
 
 	// only makes sense given lifetimes of meteors to draw when timeSpeed is realtime
 	// otherwise high overhead of large numbers of meteors
-	double tspeed = nav->getTimeRate() *86400;  // sky seconds per actual second
-	if(tspeed <= 0 || fabs(tspeed) > 1 )
+	double tspeed = nav->getTimeRate()*86400;  // sky seconds per actual second
+	if (tspeed<=0 || fabs(tspeed)>1.)
 	{
 		// don't start any more meteors
 		return;
 	}
 
-	/*
-	// debug - one at a time
-	if(active.begin() == active.end() ) {
-	  Meteor *m = new Meteor(projection, navigation, maxVelocity);
-	  active.push_back(m);
-	    }
-	*/
-
-
 	// if stellarium has been suspended, don't create huge number of meteors to
 	// make up for lost time!
-	if( deltaTime > 500 )
+	if (deltaTime > 500)
 	{
 		deltaTime = 500;
 	}
 
 	// determine average meteors per frame needing to be created
-	int mpf = (int)((double)ZHR*zhrToWsr*(double)deltaTime/1000.0f + 0.5);
-	if( mpf < 1 ) mpf = 1;
+	int mpf = (int)((double)ZHR*zhrToWsr*deltaTime/1000.0 + 0.5);
+	if (mpf<1)
+		mpf = 1;
 
 	int mlaunch = 0;
-	for(int i=0; i<mpf; i++)
+	for (int i=0; i<mpf; ++i)
 	{
-
 		// start new meteor based on ZHR time probability
-		double prob = (double)rand()/((double)RAND_MAX+1);
-		if( ZHR > 0 && prob < ((double)ZHR*zhrToWsr*(double)deltaTime/1000.0f/(double)mpf) )
+		double prob = ((double)rand())/RAND_MAX;
+		if (ZHR>0 && prob<((double)ZHR*zhrToWsr*deltaTime/1000.0/(double)mpf) )
 		{
 			Meteor *m = new Meteor(StelApp::getInstance().getCore(), maxVelocity);
 			active.push_back(m);
 			mlaunch++;
 		}
 	}
-
 	//  qDebug("mpf: %d\tm launched: %d\t(mps: %f)\t%d\n", mpf, mlaunch, ZHR*zhrToWsr, deltaTime);
 }
 
@@ -169,11 +156,9 @@ void MeteorMgr::draw(StelCore* core)
 		return;
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameAltAz));
-	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
-	glDisable(GL_TEXTURE_2D);  // much dimmer without this
-
+	glDisable(GL_TEXTURE_2D);
 	sPainter.setShadeModel(StelPainter::ShadeModelSmooth);
 
 	// step through and draw all active meteors

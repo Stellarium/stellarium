@@ -405,6 +405,8 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 
 	texHalo->bind();
 	glEnable(GL_TEXTURE_2D);
+	glBlendFunc(GL_ONE, GL_ONE);
+	glEnable(GL_BLEND);
 
 #if QT_VERSION>=0x040600
 	if (useShader)
@@ -482,6 +484,8 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 
 		texBigHalo->bind();
 		glEnable(GL_TEXTURE_2D);
+		glBlendFunc(GL_ONE, GL_ONE);
+		glEnable(GL_BLEND);
 		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
 		sPainter->drawSprite2dMode(win[0], win[1], rmag);
 	}

@@ -49,7 +49,7 @@ public:
 	bool update(double deltaTime);
 	
 	//! Draws the meteor.
-	bool draw(const StelCore* core, StelPainter& sPainter);
+	void draw(const StelCore* core, StelPainter& sPainter);
 	
 	//! Determine if a meteor is alive or has burned out.
 	//! @return true if alive, else false.
