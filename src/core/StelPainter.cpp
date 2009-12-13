@@ -1666,6 +1666,15 @@ void StelPainter::setPointSize(qreal size)
 #endif
 }
 
+void StelPainter::setShadeModel(ShadeModel m)
+{
+#ifndef USE_OPENGL_ES2
+	glShadeModel(m);
+#else
+#warning GL ES2 to be done
+#endif
+}
+
 void StelPainter::setArrays(const Vec3d* vertice, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray) {
 	enableClientStates(vertice, texCoords, colorArray, normalArray);
 	setVertexPointer(3, GL_DOUBLE, vertice);

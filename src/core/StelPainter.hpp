@@ -105,16 +105,23 @@ public:
 		SphericalPolygonDrawModeTextureFill=2	//!< Draw the interior of the polygon filled with the current texture
 	};
 
+	//! Define the shade model when interpolating polygons
+	enum ShadeModel
+	{
+		ShadeModelFlat=0x1D00,		//!< GL_FLAT
+		ShadeModelSmooth=0x1D01	//!< GL_SMOOTH
+	};
+
 	//! Define the drawing mode when drawing vertex
 	enum DrawingMode
 	{
-		Points                      = 0x0000, // GL_POINTS
-		Lines                       = 0x0001, // GL_LINES
-		LineLoop                    = 0x0002, // GL_LINE_LOOP
-		LineStrip                   = 0x0003, // GL_LINE_STRIP
-		Triangles                   = 0x0004, // GL_TRIANGLES
-		TriangleStrip               = 0x0005, // GL_TRIANGLE_STRIP
-		TriangleFan                 = 0x0006  // GL_TRIANGLE_FAN
+		Points                      = 0x0000, //!< GL_POINTS
+		Lines                       = 0x0001, //!< GL_LINES
+		LineLoop                    = 0x0002, //!< GL_LINE_LOOP
+		LineStrip                   = 0x0003, //!< GL_LINE_STRIP
+		Triangles                   = 0x0004, //!< GL_TRIANGLES
+		TriangleStrip               = 0x0005, //!< GL_TRIANGLE_STRIP
+		TriangleFan                 = 0x0006  //!< GL_TRIANGLE_FAN
 	};
 
 	explicit StelPainter(const StelProjectorP& prj);
@@ -259,6 +266,9 @@ public:
 	//! This function has no effect if a shader program is in use, or on OpenGL/ES 2.0. Shader programs must set the
 	//! point size in the vertex shader.
 	void setPointSize(qreal size);
+
+	//! Define the current shade model used when interpolating between vertex.
+	void setShadeModel(ShadeModel m);
 
 	// Thoses methods should eventually be replaced by a single setVertexArray
 	//! use instead of glVertexPointer
