@@ -201,10 +201,10 @@ bool Meteor::update(double deltaTime)
 
 // returns true if visible
 // Assumes that we are in local frame
-bool Meteor::draw(const StelCore* core, StelPainter& sPainter)
+void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 {
 	if (!alive)
-		return(0);
+		return;
 
 	const StelNavigator* nav = core->getNavigator();
 	const StelProjectorP proj = sPainter.getProjector();
@@ -227,7 +227,8 @@ bool Meteor::draw(const StelCore* core, StelPainter& sPainter)
 
 	//  qDebug("[%f %f %f] (%d, %d) (%d, %d)\n", position[0], position[1], position[2], (int)start[0], (int)start[1], (int)end[0], (int)end[1]);
 
-	if( train ) {
+	if (train)
+	{
 		// connect this point with last drawn point
 		double tmag = mag*distMultiplier;
 
@@ -240,7 +241,6 @@ bool Meteor::draw(const StelCore* core, StelPainter& sPainter)
 		posi/=1216;
 
 		// draw dark to light
-		sPainter.enableClientStates(true, false, true);
 		Vec4f colorArray[3];
 		colorArray[0].set(0,0,0,0);
 		colorArray[1].set(1,1,1,tmag*0.5);
@@ -251,10 +251,13 @@ bool Meteor::draw(const StelCore* core, StelPainter& sPainter)
 		vertexArray[2]=spos;
 		sPainter.setColorPointer(4, GL_FLOAT, colorArray);
 		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArray);
+		// TODO the crash doesn't appear when the last true is set to false
+		sPainter.enableClientStates(true, false, true);
 		sPainter.drawFromArray(StelPainter::LineStrip, 3, 0, true);
 		sPainter.enableClientStates(false);
-		
-	} else {
+	}
+	else
+	{
 		sPainter.setPointSize(1.f);
 		Vec3d start;
 		proj->project(spos, start);
@@ -262,7 +265,6 @@ bool Meteor::draw(const StelCore* core, StelPainter& sPainter)
 	}
 
 	train = 1;
-	return true;
 }
 
 bool Meteor::isAlive(void)

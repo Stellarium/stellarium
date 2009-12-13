@@ -139,16 +139,16 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	glPushMatrix();
 	glLoadIdentity();
 
-	glShadeModel(GL_FLAT);
-	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_CULL_FACE);
 	glDisable(GL_LIGHTING);
 	glDisable(GL_MULTISAMPLE);
 	glDisable(GL_DITHER);
 	glDisable(GL_ALPHA_TEST);
 	glEnable(GL_LINE_SMOOTH);
-	glDisable(GL_TEXTURE_2D);
 #endif
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_CULL_FACE);
+	glDisable(GL_TEXTURE_2D);
+	setShadeModel(StelPainter::ShadeModelFlat);
 	glFrontFace(prj->needGlFrontFaceCW()?GL_CW:GL_CCW);
 }
 
