@@ -385,9 +385,7 @@ void StelSkyDrawer::preDrawPointSource(StelPainter* p)
 	if (getFlagPointStar())
 	{
 		glDisable(GL_TEXTURE_2D);
-#ifndef USE_OPENGL_ES2
-		glPointSize(0.1);
-#endif
+		p->setPointSize(0.1);
 	}
 	else
 	{
