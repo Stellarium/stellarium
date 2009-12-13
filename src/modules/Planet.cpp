@@ -745,12 +745,12 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	int nb_facet = (int)(screenSz * 40/50);	// 40 facets for 1024 pixels diameter on screen
 	if (nb_facet<10) nb_facet = 10;
 	if (nb_facet>40) nb_facet = 40;
-	glShadeModel(GL_SMOOTH);
+	painter->setShadeModel(StelPainter::ShadeModelSmooth);
 	// Rotate and add an extra quarter rotation so that the planet texture map
 	// fits to the observers position. No idea why this is necessary,
 	// perhaps some openGl strangeness, or confusing sin/cos.
 	painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
-	glShadeModel(GL_FLAT);
+	painter->setShadeModel(StelPainter::ShadeModelFlat);
 	glDisable(GL_CULL_FACE);
 }
 
@@ -938,7 +938,8 @@ void Planet::drawOrbit(const StelCore* core)
 	orbit[ORBIT_SEGMENTS]=orbit[0];
 	int nbIter = closeOrbit ? ORBIT_SEGMENTS : ORBIT_SEGMENTS-1;
 	QVarLengthArray<float, 1024> vertexArray;
-	glEnableClientState(GL_VERTEX_ARRAY);
+
+	sPainter.enableClientStates(true, false, false);
 	for (int n=0; n<=nbIter; ++n)
 	{
 		if (prj->project(orbit[n],onscreen))
@@ -948,18 +949,18 @@ void Planet::drawOrbit(const StelCore* core)
 		}
 		else if (!vertexArray.isEmpty())
 		{
-			glVertexPointer(2, GL_FLOAT, 0, vertexArray.constData());
-			glDrawArrays(GL_LINE_STRIP, 0, vertexArray.size()/2);
+			sPainter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
+			sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size()/2, 0, false);
 			vertexArray.clear();
 		}
 	}
 	orbit[ORBIT_SEGMENTS/2]=savePos;
 	if (!vertexArray.isEmpty())
 	{
-		glVertexPointer(2, GL_FLOAT, 0, vertexArray.constData());
-		glDrawArrays(GL_LINE_STRIP, 0, vertexArray.size()/2);
+		sPainter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
+		sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size()/2, 0, false);
 	}
-	glDisableClientState(GL_VERTEX_ARRAY);
+	sPainter.enableClientStates(false);
 }
 
 
