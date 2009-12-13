@@ -510,9 +510,7 @@ void Atmosphere::draw(StelCore* core)
 			eye->xyYToRGB(c);
 			c*=atm_intensity;
 		}
-#ifndef USE_OPENGL_ES2
-		glShadeModel(GL_SMOOTH);
-#endif
+		sPainter.setShadeModel(StelPainter::ShadeModelSmooth);
 		sPainter.enableClientStates(true, false, true, false);
 		sPainter.setColorPointer(4, GL_FLOAT, colorGrid);
 		sPainter.setVertexPointer(2, GL_FLOAT, posGrid);
@@ -524,8 +522,6 @@ void Atmosphere::draw(StelCore* core)
 			sPainter.drawFromArray(StelPainter::TriangleStrip, shift, 0, (skyResolutionX+1)*2);
 			shift += (skyResolutionX+1)*2;
 		}
-#ifndef USE_OPENGL_ES2
-		glShadeModel(GL_FLAT);
-#endif
+		sPainter.setShadeModel(StelPainter::ShadeModelFlat);
 	}
 }
