@@ -28,6 +28,12 @@
 #include <QVarLengthArray>
 #include <QFontMetrics>
 
+//#define STELPAINTER_GL2 1
+
+#ifdef STELPAINTER_GL2
+class QGLShaderProgram;
+#endif
+
 class QPainter;
 
 class StelPainterLight
@@ -360,6 +366,13 @@ private:
 
 	//! The QPainter to use for some drawing operations.
 	static QPainter* qPainter;
+
+#ifdef STELPAINTER_GL2
+	Vec4f currentColor;
+	static QGLShaderProgram* basicShaderProgram;
+	static QGLShaderProgram* colorShaderProgram;
+	static QGLShaderProgram* texturesShaderProgram;
+#endif
 
 	//! The descriptor for the current opengl vertex array
 	ArrayDesc vertexArray;
