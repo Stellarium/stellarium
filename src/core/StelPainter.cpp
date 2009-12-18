@@ -17,11 +17,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include "StelPainter.hpp"
+
 #include <QtOpenGL>
 
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 
