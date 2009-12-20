@@ -79,7 +79,7 @@ public:
 	//! @exception std::runtime_error what() -> "file does not match flags: [fullpath]".
 	//! 		This exception occurs if a full path is passes at the path argument, but 
 	//!		that path does not match the flags specified.
-	QString findFile(const QString& path, const Flags& flags=(Flags)0);
+	QString findFile(const QString& path, const Flags& flags=(Flags)0) const;
 	
 	//! Set a set of all possible files/directories in any Stellarium search directory
 	//! @param path the path to search inside, e.g. "landscapes"
@@ -88,11 +88,11 @@ public:
 	//! @return returns a QSet of file and.or directory names, which are available 
 	//! in any of the search paths + path.  Returns empty set if none were found 
 	//! or the path is invalid (not a directory / not existing).
-	QSet<QString> listContents(const QString& path, const Flags& flags=(Flags)0, bool recursive=false);
+	QSet<QString> listContents(const QString& path, const Flags& flags=(Flags)0, bool recursive=false) const;
 		
 	//! Get a vector of strings which describes the current search paths.
 	//! @return returns a vector of strings representing the current search paths.
-	const QStringList& getSearchPaths(void) { return fileLocations; }
+	const QStringList& getSearchPaths(void) const {return fileLocations;}
 	
 	//! Set the search paths.
 	//! @param paths is a vector of strings which will become the new search paths
@@ -152,7 +152,7 @@ public:
 	//! @return the path to the user's desktop directory
 	//! @exception NOT_FOUND when the directory cannot be determined, or the
 	//!            OS doesn't provide one.
-	QString getDesktopDir(void);
+	QString getDesktopDir() const;
 	
 	//! Returns the path to the user directory.
 	//! This is the directory where we expect to find the [default] writable 
@@ -161,34 +161,33 @@ public:
 	//! trying to find most data files
 	//! @return the path to the user private data directory	
 	//! @exception NOT_FOUND if the directory could not be found
-	QString getUserDir(void);
+	QString getUserDir() const;
 
 	//! Returns the path to the installation directory
 	//! This is the directory where we expect to find scripts, nebulae, stars, 
 	//! skycultures etc, and will be added at the end of the search path
 	//! @return the path to the installation data directory	
 	//! @exception NOT_FOUND if the directory could not be found
-	QString getInstallationDir(void);
+	QString getInstallationDir() const;
 	
 	//! Returns the path to the users data directory
 	//! @return the path to the users data directory	
-	QString getUsersDataDirectoryName(void);
+	QString getUsersDataDirectoryName() const;
 	
 	//! Returns the path to the cache directory. Note that subdirectories may need to be created for specific caches.
-	QString getCacheDir();
+	QString getCacheDir() const;
 	
 	//! Sets the user directory.  This updates the search paths (first element)
 	//! @param newDir the new value of the user directory
 	//! @exception NOT_VALID if the specified user directory is not usable
 	void setUserDir(const QString& newDir);
 	
-	//! This is the directory into which screenshots will be saved
+	//! This is the directory into which screenshots will be saved.
 	//! It is $HOME on Linux, BSD, Solaris etc.
 	//! It is the user's Desktop on MacOS X (??? - someone please verify this)
 	//! It is ??? on Windows
 	//! @return the path to the directory where screenshots are saved
-	//! @exception NOT_FOUND if the directory could not be found
-	QString getScreenshotDir(void);
+	QString getScreenshotDir() const;
 
 	//! Sets the screenshot directory.
 	//! This is set to platform-specific values in the StelFileMgr constructor,
@@ -199,12 +198,11 @@ public:
 		
 	//! get the directory for locate files (i18n)
 	//! @return the path to the locale directory or "" if the locale directory could not be found.
-	QString getLocaleDir(void);
+	QString getLocaleDir() const;
 
 private:
-	//! Check if the user directory exists, is writable and a directory
-	//! Creates it if it does not exist.  Exits the program if any of this
-	//! process fails.
+	//! Check if the user directory exists and is a writable directory.
+	//! Creates it if it does not exist. Exits the program if any of this process fails.
 	void checkUserDir();
 	
 	//! Check if a (complete) path matches a set of flags
@@ -212,7 +210,7 @@ private:
 	//! @param flags a set of StelFileMgr::Flags to test against path
 	//! @return true if path passes all flag tests, else false
 	//! @exception misc 
-	bool fileFlagsCheck(const QString& path, const Flags& flags=(Flags)0);
+	static bool fileFlagsCheck(const QString& path, const Flags& flags=(Flags)0);
 	
 	QStringList fileLocations;
 

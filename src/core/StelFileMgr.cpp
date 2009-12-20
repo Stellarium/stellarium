@@ -89,7 +89,7 @@ StelFileMgr::~StelFileMgr()
 {
 }
 
-QString StelFileMgr::findFile(const QString& path, const Flags& flags)
+QString StelFileMgr::findFile(const QString& path, const Flags& flags) const
 {
 	if (path.isEmpty())
 		throw (std::runtime_error("Empty file path"));
@@ -124,7 +124,7 @@ QString StelFileMgr::findFile(const QString& path, const Flags& flags)
 	throw(std::runtime_error(QString("file not found: %1").arg(path).toLocal8Bit().constData()));
 }
 
-QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::Flags& flags, bool recursive)
+QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::Flags& flags, bool recursive) const
 {
 	QSet<QString> result;
 	QStringList listPaths;
@@ -337,7 +337,7 @@ bool StelFileMgr::fileFlagsCheck(const QString& path, const Flags& flags)
 	return(true);
 }
 
-QString StelFileMgr::getDesktopDir(void)
+QString StelFileMgr::getDesktopDir() const
 {
 	QString result;
 #if defined(WIN32)
@@ -356,7 +356,7 @@ QString StelFileMgr::getDesktopDir(void)
 	return result;
 }
 
-QString StelFileMgr::getUserDir(void)
+QString StelFileMgr::getUserDir() const
 {
 	return userDir;
 }
@@ -380,12 +380,12 @@ void StelFileMgr::setUserDir(const QString& newDir)
 	fileLocations.replace(0, userDir);
 }
 
-QString StelFileMgr::getUsersDataDirectoryName(void)
+QString StelFileMgr::getUsersDataDirectoryName() const
 {
 	return usersDataDirectoryName;
 }
 
-QString StelFileMgr::getInstallationDir(void)
+QString StelFileMgr::getInstallationDir() const
 {
 	// If we are running from the build tree, we use the files from there...
 	if (QFileInfo(CHECK_FILE).exists())
@@ -416,7 +416,7 @@ QString StelFileMgr::getInstallationDir(void)
 	}
 }
 	
-QString StelFileMgr::getScreenshotDir(void)
+QString StelFileMgr::getScreenshotDir() const
 {
 	return screenshotDir;
 }
@@ -439,7 +439,7 @@ void StelFileMgr::setScreenshotDir(const QString& newDir)
 	screenshotDir = userDirFI.filePath();
 }
 
-QString StelFileMgr::getLocaleDir(void)
+QString StelFileMgr::getLocaleDir() const
 {
 	QFileInfo localePath;
 #if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
@@ -473,7 +473,7 @@ QString StelFileMgr::getLocaleDir(void)
 }
 
 // Returns the path to the cache directory. Note that subdirectories may need to be created for specific caches.
-QString StelFileMgr::getCacheDir()
+QString StelFileMgr::getCacheDir() const
 {
 	QString cachePath = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
 	if (cachePath.isEmpty())

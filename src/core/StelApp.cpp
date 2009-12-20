@@ -91,7 +91,7 @@ void StelApp::initStatic()
  Create and initialize the main Stellarium application.
 *************************************************************************/
 StelApp::StelApp(int argc, char** argv, QObject* parent)
-	: QObject(parent), core(NULL), stelGui(NULL), fps(0), maxfps(10000.f),
+	: QObject(parent), core(NULL), stelGui(NULL), fps(0),
 	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false),
 	  configFile("config.ini"), startupScript("startup.ssc"),
 	  confSettings(NULL), initialized(false), saveProjW(-1), saveProjH(-1),
@@ -156,7 +156,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 	}
 	catch (std::runtime_error& e)
 	{
-		qDebug() << "ERROR while loading translations: " << e.what() << endl;
+		qWarning() << "ERROR while loading translations: " << e.what() << endl;
 	}
 
 	// OK, print the console splash and get on with loading the program
@@ -249,9 +249,6 @@ StelApp::StelApp(int argc, char** argv, QObject* parent)
 
 	parseCLIArgsPostConfig();
 	moduleMgr = new StelModuleMgr();
-
-	maxfps = confSettings->value("video/maximum_fps",10000.).toDouble();
-	minfps = confSettings->value("video/minimum_fps",10000.).toDouble();
 
 	// Init a default StelStyle, before loading modules, it will be overrided
 	currentStelStyle = NULL;
@@ -570,7 +567,7 @@ void StelApp::setupLog()
 		procVersion.close();
 	}
 #else
-	StelApp::writeLog("Unsupported operating system");
+	StelApp::writeLog("Unknown operating system");
 #endif
 
 	// write GCC version

@@ -226,22 +226,22 @@ void StelMainScriptAPI::setGuiVisible(bool b)
 
 void StelMainScriptAPI::setMinFps(float m)
 {
-	StelApp::getInstance().setMinFps(m);
+	StelMainGraphicsView::getInstance().setMinFps(m);
 }
 
 float StelMainScriptAPI::getMinFps()
 {
-	return StelApp::getInstance().getMinFps();
+	return StelMainGraphicsView::getInstance().getMinFps();
 }
 
 void StelMainScriptAPI::setMaxFps(float m)
 {
-	StelApp::getInstance().setMaxFps(m);
+	StelMainGraphicsView::getInstance().setMaxFps(m);
 }
 
 float StelMainScriptAPI::getMaxFps()
 {
-	return StelApp::getInstance().getMaxFps();
+	return StelMainGraphicsView::getInstance().getMaxFps();
 }
 
 QString StelMainScriptAPI::getMountMode()

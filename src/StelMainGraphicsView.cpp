@@ -52,7 +52,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	  flagInvertScreenShotColors(false),
 	  screenShotPrefix("stellarium-"),
 	  screenShotDir(""),
-	  cursorTimeout(-1.f), flagCursorTimeout(false), minFpsTimer(NULL)
+	  cursorTimeout(-1.f), flagCursorTimeout(false), minFpsTimer(NULL), maxfps(10000.f)
 {
 	// Can't create 2 StelMainWindow instances
 	Q_ASSERT(!singleton);
@@ -100,7 +100,6 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	setFocusPolicy(Qt::StrongFocus);
 	mainSkyItem->setFocus();
 
-	connect(&StelApp::getInstance(), SIGNAL(minFpsChanged()), this, SLOT(minFpsChanged()));
 	// Allows for precise FPS control
 	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
 
@@ -146,6 +145,9 @@ void StelMainGraphicsView::init()
 	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.).toDouble());
 	setViewPortDistorterType(conf->value("video/distorter","none").toString());
+
+	maxfps = conf->value("video/maximum_fps",10000.).toDouble();
+	minfps = conf->value("video/minimum_fps",10000.).toDouble();
 
 	// Look for a static GUI plugins.
 	foreach (QObject *plugin, QPluginLoader::staticInstances())
@@ -202,7 +204,7 @@ void StelMainGraphicsView::drawBackground(QPainter* painter, const QRectF &)
 	// after that, it switches back to the default minfps value to save power
 	if (now-lastEventTimeSec<2.5)
 	{
-		double duration = 1./StelApp::getInstance().getMaxFps();
+		double duration = 1./getMaxFps();
 		int dur = (int)(duration*1000);
 		QTimer::singleShot(dur<5 ? 5 : dur, scene(), SLOT(update()));
 	}
@@ -243,7 +245,7 @@ void StelMainGraphicsView::minFpsChanged()
 
 	minFpsTimer = new QTimer(this);
 	connect(minFpsTimer, SIGNAL(timeout()), scene(), SLOT(update()));
-	minFpsTimer->start((int)(1./StelApp::getInstance().getMinFps()*1000.));
+	minFpsTimer->start((int)(1./getMinFps()*1000.));
 }
 
 void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
