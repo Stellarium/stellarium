@@ -94,7 +94,20 @@ public slots:
 	void setFlagCursorTimeout(bool b) {flagCursorTimeout=b;}
 	//! Set the mouse cursor timeout in seconds
 	void setCursorTimeout(float t) {cursorTimeout=t;}
-		
+
+	//! Set the minimum frames per second. Usually this minimum will be switched to after there are no
+	//! user events for some seconds to save power. However, if can be useful to set this to a high
+	//! value to improve playing smoothness in scripts.
+	//! @param m the new minimum fps setting.
+	void setMinFps(float m) {minfps=m; minFpsChanged();}
+	//! Get the current minimum frames per second.
+	float getMinFps() {return minfps;}
+	//! Set the maximum frames per second.
+	//! @param m the new maximum fps setting.
+	void setMaxFps(float m) {maxfps = m;}
+	//! Get the current maximum frames per second.
+	float getMaxFps() {return maxfps;}
+
 protected:
 	virtual void resizeEvent(QResizeEvent* event);
 	virtual void mouseMoveEvent(QMouseEvent* event);
@@ -159,6 +172,10 @@ private:
 	class StelViewportDistorter *distorter;
 	
 	QTimer* minFpsTimer;
+	//! The minimum desired frame rate in frame per second.
+	float minfps;
+	//! The maximum desired frame rate in frame per second.
+	float maxfps;
 };
 
 
