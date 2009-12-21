@@ -46,7 +46,7 @@ ScreenImage::ScreenImage(const QString& filename, float x, float y, bool show, f
 {
 	try
 	{
-		QString path = StelApp::getInstance().getFileMgr().findFile("scripts/" + filename);
+		QString path = StelFileMgr::findFile("scripts/" + filename);
 		QPixmap pm(path);
 		tex = StelMainGraphicsView::getInstance().scene()->addPixmap(pm.scaled(pm.size()*scale));
 		tex->setPos(x, y);

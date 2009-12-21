@@ -32,13 +32,13 @@
 #include <QGLFramebufferObject>
 #include <QSettings>
 
-StelAppGraphicsWidget::StelAppGraphicsWidget(int argc, char** argv)
+StelAppGraphicsWidget::StelAppGraphicsWidget()
 	: paintState(0), useBuffers(false), backgroundBuffer(0), foregroundBuffer(0)
 {
 	StelApp::initStatic();
 	previousPaintTime = StelApp::getTotalRunTime();
 	setFocusPolicy(Qt::StrongFocus);
-	stelApp = new StelApp(argc, argv);
+	stelApp = new StelApp();
 }
 
 StelAppGraphicsWidget::~StelAppGraphicsWidget()
@@ -50,11 +50,9 @@ StelAppGraphicsWidget::~StelAppGraphicsWidget()
 		delete foregroundBuffer;
 }
 
-void StelAppGraphicsWidget::init()
+void StelAppGraphicsWidget::init(QSettings* conf)
 {
-	stelApp->init();
-	QSettings* settings = StelApp::getInstance().getSettings();
-	useBuffers = settings->value("video/use_buffers", false).toBool();
+	useBuffers = conf->value("video/use_buffers", false).toBool();
 	if (useBuffers && !QGLFramebufferObject::hasOpenGLFramebufferObjects())
 	{
 		qDebug() << "Don't support OpenGL framebuffer objects";
@@ -64,6 +62,7 @@ void StelAppGraphicsWidget::init()
 	if (useBuffers)
 		qDebug() << "Use OpenGL framebuffer objects";
 #endif
+	stelApp->init(conf);
 }
 
 //! Iterate through the drawing sequence.

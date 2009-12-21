@@ -28,6 +28,8 @@
 #include "StelViewportDistorter.hpp"
 #include "StelPainter.hpp"
 #include "StelGuiBase.hpp"
+#include "StelMainScriptAPIProxy.hpp"
+
 #include <QGLFormat>
 #include <QPaintEngine>
 #include <QGraphicsView>
@@ -46,15 +48,15 @@ Q_IMPORT_PLUGIN(StelGui)
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
-StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** argv)
-	: QGraphicsView(parent), gui(NULL),
+StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
+	: QGraphicsView(parent), gui(NULL), scriptAPIProxy(NULL), scriptMgr(NULL),
 	  wasDeinit(false),
 	  flagInvertScreenShotColors(false),
 	  screenShotPrefix("stellarium-"),
 	  screenShotDir(""),
 	  cursorTimeout(-1.f), flagCursorTimeout(false), minFpsTimer(NULL), maxfps(10000.f)
 {
-	// Can't create 2 StelMainWindow instances
+	// Can't create 2 StelMainGraphicsView instances
 	Q_ASSERT(!singleton);
 	singleton = this;
 
@@ -82,7 +84,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	setScene(new QGraphicsScene());
 
 	// Create the main widget for stellarium, this in turn the create the main StelApp instance.
-	mainSkyItem = new StelAppGraphicsWidget(argc, argv);
+	mainSkyItem = new StelAppGraphicsWidget();
 
 	distorter = StelViewportDistorter::create("none",800,600,StelProjectorP());
 	lastEventTimeSec = StelApp::getTotalRunTime();
@@ -127,7 +129,7 @@ void StelMainGraphicsView::makeGLContextCurrent()
 	glWidget->makeCurrent();
 }
 
-void StelMainGraphicsView::init()
+void StelMainGraphicsView::init(QSettings* conf)
 {
 	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
@@ -136,11 +138,9 @@ void StelMainGraphicsView::init()
 	glWidget->makeCurrent();
 
 	// Initialize all, including the StelApp instance.
-	mainSkyItem->init();
+	mainSkyItem->init(conf);
 
 	// This is a hack avoiding to have 2 config files
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
 	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.).toDouble());
@@ -148,6 +148,9 @@ void StelMainGraphicsView::init()
 
 	maxfps = conf->value("video/maximum_fps",10000.).toDouble();
 	minfps = conf->value("video/minimum_fps",10000.).toDouble();
+
+	scriptAPIProxy = new StelMainScriptAPIProxy(this);
+	scriptMgr = new StelScriptMgr(this);
 
 	// Look for a static GUI plugins.
 	foreach (QObject *plugin, QPluginLoader::staticInstances())
@@ -162,14 +165,14 @@ void StelMainGraphicsView::init()
 	Q_ASSERT(gui);	// There was no GUI plugin found
 
 	gui->init(backItem, mainSkyItem);
-
 	StelApp::getInstance().setGui(gui);
 	StelApp::getInstance().initPlugIns();
 
 	// Force refreshing of button bars if plugins modified the GUI, e.g. added buttons.
 	gui->forceRefreshGui();
 
-	StelApp::getInstance().getScriptMgr().runScript(StelApp::getInstance().getStartupScript());
+	const QString& startupScript = conf->value("scripts/startup_script", "startup.ssc").toString();
+	scriptMgr->runScript(startupScript);
 
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
 	StelPainter::setQPainter(NULL);
@@ -366,6 +369,8 @@ void StelMainGraphicsView::deinitGL()
 	if (wasDeinit==true)
 		return;
 	wasDeinit = true;
+	if (scriptMgr->scriptIsRunning())
+		scriptMgr->stopScript();
 	StelApp::getInstance().getModuleMgr().unloadAllPlugins();
 	QCoreApplication::processEvents();
 	delete mainSkyItem;
@@ -386,7 +391,7 @@ void StelMainGraphicsView::doScreenshot(void)
 		im.invertPixels();
 
 	if (screenShotDir == "")
-		shotDir = QFileInfo(StelApp::getInstance().getFileMgr().getScreenshotDir());
+		shotDir = QFileInfo(StelFileMgr::getScreenshotDir());
 	else
 		shotDir = QFileInfo(screenShotDir);
 

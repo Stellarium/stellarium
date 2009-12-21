@@ -94,37 +94,6 @@ void StelCore::init()
 	QString tmpstr = conf->value("projection/type", "stereographic").toString();
 	setCurrentProjectionTypeKey(tmpstr);
 
-// 	double overwrite_max_fov = conf->value("projection/equal_area_max_fov",0.0).toDouble();
-// 	if (overwrite_max_fov > 360.0)
-// 		overwrite_max_fov = 360.0;
-// 	if (overwrite_max_fov > 0.0)
-// 		MappingEqualArea::getMapping()->maxFov = overwrite_max_fov;
-// 	overwrite_max_fov = conf->value("projection/stereographic_max_fov",0.0).toDouble();
-// 	if (overwrite_max_fov > 359.999999)
-// 		overwrite_max_fov = 359.999999;
-// 	if (overwrite_max_fov > 0.0)
-// 		MappingStereographic::getMapping()->maxFov = overwrite_max_fov;
-// 	overwrite_max_fov = conf->value("projection/fisheye_max_fov",0.0).toDouble();
-// 	if (overwrite_max_fov > 360.0)
-// 		overwrite_max_fov = 360.0;
-// 	if (overwrite_max_fov > 0.0)
-// 		MappingFisheye::getMapping()->maxFov = overwrite_max_fov;
-// 	overwrite_max_fov = conf->value("projection/cylinder_max_fov",0.0).toDouble();
-// 	if (overwrite_max_fov > 540.0)
-// 		overwrite_max_fov = 540.0;
-// 	if (overwrite_max_fov > 0.0)
-// 		MappingCylinder::getMapping()->maxFov = overwrite_max_fov;
-// 	overwrite_max_fov = conf->value("projection/perspective_max_fov",0.0).toDouble();
-// 	if (overwrite_max_fov > 179.999999)
-// 		overwrite_max_fov = 179.999999;
-// 	if (overwrite_max_fov > 0.0)
-// 		MappingPerspective::getMapping()->maxFov = overwrite_max_fov;
-// 	overwrite_max_fov = conf->value("projection/orthographic_max_fov",0.0).toDouble();
-// 	if (overwrite_max_fov > 180.0)
-// 		overwrite_max_fov = 180.0;
-// 	if (overwrite_max_fov > 0.0)
-// 		MappingOrthographic::getMapping()->maxFov = overwrite_max_fov;
-
 	skyDrawer = new StelSkyDrawer(this);
 	skyDrawer->init();
 }

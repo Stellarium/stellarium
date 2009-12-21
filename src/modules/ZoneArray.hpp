@@ -35,7 +35,6 @@
 #include "Star.hpp"
 
 #include "StelLoadingBar.hpp"
-#include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StarMgr.hpp"

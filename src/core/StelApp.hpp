@@ -33,7 +33,6 @@ class StelObjectMgr;
 class StelLocaleMgr;
 class StelModuleMgr;
 class StelSkyCultureMgr;
-class StelFileMgr;
 class QStringList;
 class StelLoadingBar;
 class QSettings;
@@ -42,8 +41,6 @@ class StelStyle;
 class QTime;
 class StelLocationMgr;
 class StelSkyLayerMgr;
-class StelScriptMgr;
-class StelMainScriptAPIProxy;
 class StelDownloadMgr;
 class StelAudioMgr;
 class QNetworkReply;
@@ -74,13 +71,13 @@ public:
 	//! The configFile will be search for in the search path by the StelFileMgr,
 	//! it is therefor possible to specify either just a file name or path within the
 	//! search path, or use a full path or even a relative path to an existing file
-	StelApp(int argc, char** argv, QObject* parent=NULL);
+	StelApp(QObject* parent=NULL);
 
 	//! Deinitialize and destroy the main Stellarium application.
 	virtual ~StelApp();
 
 	//! Initialize core and default modules.
-	void init();
+	void init(QSettings* conf);
 
 	//! Load and initialize external modules (plugins)
 	void initPlugIns();
@@ -117,17 +114,8 @@ public:
 	//! @return the StelObject manager to use for querying from all stellarium objects 	.
 	StelSkyLayerMgr& getSkyImageMgr() {return *skyImageMgr;}
 
-	//! Get the StelFileMgr for performing file operations.
-	//! @return the StelFileMgr manager to use for performing file operations
-	StelFileMgr& getFileMgr() {return *stelFileMgr;}
-
 	//! Get the audio manager
 	StelAudioMgr* getStelAudioMgr() {return audioMgr;}
-
-	//! Get the script API proxy (for signal handling)
-	StelMainScriptAPIProxy* getMainScriptAPIProxy() {return scriptAPIProxy;}
-	//! Get the script manager
-	StelScriptMgr& getScriptMgr() {return *scriptMgr;}
 
 	//! Get the download manager
 	StelDownloadMgr& getDownloadMgr() {return *downloadMgr;}
@@ -150,27 +138,11 @@ public:
 	//! Update and reload sky culture informations everywhere in the program.
 	void updateSkyCulture();
 
-	//! Retrieve the full path of the current configuration file.
-	//! @return the full path of the configuration file
-	const QString& getConfigFilePath() { return configFile; }
-
 	//! Return the main configuration options
 	QSettings* getSettings() {return confSettings;}
 
 	//! Return the currently used style
 	const StelStyle* getCurrentStelStyle() {return currentStelStyle;}
-
-	//! Handler for qDebug() and friends. Writes message to log file at
-	//! $USERDIR/log.txt and echoes to stderr. Do not call this function;
-	//! it's only for use by qInstallMsgHandler. Use writeLog(QString)
-	//! instead, but preferably qDebug().
-	static void debugLogHandler(QtMsgType, const char*);
-
-	//! Return a copy of text of the log file.
-	QString getLog() { return log; }
-
-	//! Get the file name of the startup script
-	QString getStartupScript() const {return startupScript;}
 
 	//! Update all object according to the deltaTime in seconds.
 	void update(double deltaTime);
@@ -200,10 +172,6 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
-	//! Return the full name of stellarium, i.e. "Stellarium 0.9.0".
-	static QString getApplicationName();
-	//! Return the version of stellarium, i.e. "0.9.0".
-	static QString getApplicationVersion();
 
 	//! Set flag for activating night vision mode.
 	void setVisionModeNight(bool);
@@ -244,97 +212,6 @@ private:
 	//! Set the colorscheme for all the modules
 	void setColorScheme(const QString& section);
 
-	//! Sets the name of the configuration file.
-	//! It is possible to set the configuration by passing either a full path
-	//! a relative path of an existing file, or path segment which will be appended
-	//! to the serach path.  The configuration file must be writable, or there will
-	//! be trouble!
-	//! @param configName the name or full path of the configuration file
-	void setConfigFile(const QString& configName, bool restoreDefaults=false);
-
-	//! Copies the default configuration file.
-	//! This function copies the default_config.ini file to config.ini (or other
-	//! name specified on the command line located in the user data directory.
-	void copyDefaultConfigFile();
-
-	//! Somewhere to save the command line arguments
-	QStringList* argList;
-
-	//! Check if a QStringList has a CLI-style option in it (before the first --).
-	//! @param args a list of strings, think argv
-	//! @param shortOpt a short-form option string, e.g, "-h"
-	//! @param longOpt a long-form option string, e.g. "--help"
-	//! @return true if the option exists in args before any element which is "--"
-	bool argsGetOption(QStringList* args, QString shortOpt, QString longOpt);
-
-	//! Retrieve the argument to an option from a QStringList.
-	//! Given a list of strings, this function will extract the argument of
-	//! type T to an option, where the option in an element which matches
-	//! either the short or long forms, and the argument to that option
-	//! is the following element in the list, e.g. ("--option", "arg").
-	//! It is also possible to extract argument to options which are
-	//! part of the option element, separated by the "=" character, e.g.
-	//! ( "--option=arg" ).
-	//! Type conversion is done using the QTextStream class, and as such
-	//! possible types which this template function may use are restricted
-	//! to those where there is a value operator<<() defined in the
-	//! QTextStream class for that type.
-	//! The argument list is only processed as far as the first value "--".
-	//! If an argument "--" is to be retrieved, it must be apecified using
-	//! the "--option=--" form.
-	//! @param args a list of strings, think argv.
-	//! @param shortOpt the short form of the option, e.g. "-n".
-	//! @param longOpt the long form of the option, e.g. "--number".
-	//! @param defaultValue the default value to return if the option was
-	//! not found in args.
-	//! @exception runtime_error("no_optarg") the expected argument to the
-	//! option was not found.
-	//! @exception runtime_error("optarg_type") the expected argument to
-	//! the option could not be converted.
-	//! @return The value of the argument to the specified option which
-	//! occurs before the first element with the value "--".  If the option
-	//! is not found, defaultValue is returned.
-	QVariant argsGetOptionWithArg(QStringList* args, QString shortOpt, QString longOpt, QVariant defaultValue);
-
-	//! Check if a QStringList has a yes/no CLI-style option in it, and
-	//! find out the argument to that parameter.
-	//! e.g. option --use-foo can have parameter "yes" or "no"
-	//! It is also possible for the argument to take values, "1", "0";
-	//! "true", "false";
-	//! @param args a list of strings, think argv
-	//! @param shortOpt a short-form option string, e.g, "-h"
-	//! @param longOpt a long-form option string, e.g. "--help"
-	//! @param defaultValue the default value to return if the option was
-	//! not found in args.
-	//! @exception runtime_error("no_optarg") the expected argument to the
-	//! option was not found. The longOpt value is appended in parenthesis.
-	//! @exception runtime_error("optarg_type") the expected argument to
-	//! the option could not be converted. The longOpt value is appended
-	//! in parenthesis.
-	//! @return 1 if the argument to the specified opion is "yes", "y",
-	//! "true", "on" or 1; 0 if the argument to the specified opion is "no",
-	//! "n", "false", "off" or 0; the value of the defaultValue parameter if
-	//! the option was not found in the argument list before an element which
-	//! has the value "--".
-	int argsGetYesNoOption(QStringList* args, QString shortOpt, QString longOpt, int defaultValue);
-
-	//! Processing of command line options which is to be done before config file is read.
-	//! This includes the chance to set the configuration file name.  It is to be done
-	//! in the sub-class of the StelApp, as the sub-class may want to manage the
-	//! argument list, as is the case with the StelMainWindow version.
-	void parseCLIArgsPreConfig(void);
-
-	//! Processing of command line options which is to be done after the config file is
-	//! read.  This gives us the chance to over-ride settings which are in the configuration
-	//! file.
-	void parseCLIArgsPostConfig();
-
-	//! Prepend system information to log file before any debugging output.
-	void setupLog();
-
-	//! Write the message plus a newline to the log file at $USERDIR/log.txt.
-	//! @param msg message to write
-	static void writeLog(QString msg);
 
 	// The StelApp singleton
 	static StelApp* singleton;
@@ -360,20 +237,11 @@ private:
 	// Manager for the list of observer locations on planets
 	StelLocationMgr* planetLocationMgr;
 
-	//! Utility class for file operations, mainly locating files by name
-	StelFileMgr* stelFileMgr;
-
 	// Main network manager used for the program
 	QNetworkAccessManager* networkAccessManager;
 
 	// The audio manager.  Must execute in the main thread.
 	StelAudioMgr* audioMgr;
-
-	// The script API proxy object (for bridging threads)
-	StelMainScriptAPIProxy* scriptAPIProxy;
-
-	// The script manager based on Qt script engine
-	StelScriptMgr* scriptMgr;
 
 	// The main loading bar
 	StelLoadingBar* loadingBar;
@@ -398,8 +266,6 @@ private:
 	//! Define whether we use opengl shaders
 	bool useGLShaders;
 
-	QString configFile;
-	QString startupScript;
 	QSettings* confSettings;
 
 	// Define whether the StelApp instance has completed initialization
@@ -421,9 +287,6 @@ private:
 	int nbUsedCache;
 	//! Store the the summed size of all downloaded files read from the cache in bytes.
 	qint64 totalUsedCacheSize;
-
-	static QFile logFile;
-	static QString log;
 
 	//! The state of the drawing sequence
 	int drawState;

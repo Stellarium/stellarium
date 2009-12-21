@@ -115,13 +115,13 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename)
 	StelTextureSP tex = initTex();
 	try
 	{
-		tex->fullPath = StelApp::getInstance().getFileMgr().findFile(afilename);
+		tex->fullPath = StelFileMgr::findFile(afilename);
 	}
 	catch (std::runtime_error e)
 	{
 		try
 		{
-			tex->fullPath = StelApp::getInstance().getFileMgr().findFile("textures/" + afilename);
+			tex->fullPath = StelFileMgr::findFile("textures/" + afilename);
 		}
 		catch (std::runtime_error er)
 		{
@@ -163,13 +163,13 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const QStr
 		// Assume a local file
 		try
 		{
-			tex->fullPath = StelApp::getInstance().getFileMgr().findFile(url);
+			tex->fullPath = StelFileMgr::findFile(url);
 		}
 		catch (std::runtime_error e)
 		{
 			try
 			{
-				tex->fullPath = StelApp::getInstance().getFileMgr().findFile("textures/" + url);
+				tex->fullPath = StelFileMgr::findFile("textures/" + url);
 			}
 			catch (std::runtime_error er)
 			{

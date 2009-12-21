@@ -36,6 +36,11 @@
 //! @namespace StelUtils contains general purpose utility functions.
 namespace StelUtils
 {
+	//! Return the full name of stellarium, i.e. "stellarium 0.9.0"
+	QString getApplicationName();
+
+	//! Return the version of stellarium, i.e. "0.9.0"
+	QString getApplicationVersion();
 
 	//! Convert an angle in hms format to radian.
 	//! @param h hour component

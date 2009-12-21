@@ -429,7 +429,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		{
 			try
 			{
-				absoluteImageURI = StelApp::getInstance().getFileMgr().findFile(baseUrl+imageUrl);
+				absoluteImageURI = StelFileMgr::findFile(baseUrl+imageUrl);
 			}
 			catch (std::runtime_error& er)
 			{

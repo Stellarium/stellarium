@@ -23,6 +23,7 @@
 #include "StelProjector.hpp"
 #include "StelCore.hpp"
 #include "kfilterdev.h"
+#include "StelUtils.hpp"
 
 #include <QDebug>
 #include <QFile>
@@ -116,7 +117,7 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 		QString fileName;
 		try
 		{
-			fileName = StelApp::getInstance().getFileMgr().findFile(url);
+			fileName = StelFileMgr::findFile(url);
 		}
 		catch (std::runtime_error e)
 		{
@@ -124,7 +125,7 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 			{
 				if (parent==NULL)
 					throw std::runtime_error("NULL parent");
-				fileName = StelApp::getInstance().getFileMgr().findFile(parent->getBaseUrl()+url);
+				fileName = StelFileMgr::findFile(parent->getBaseUrl()+url);
 			}
 			catch (std::runtime_error e)
 			{
@@ -169,7 +170,7 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 		}
 		Q_ASSERT(httpReply==NULL);
 		QNetworkRequest req(qurl);
-		req.setRawHeader("User-Agent", StelApp::getApplicationName().toAscii());
+		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toAscii());
 		httpReply = getNetworkAccessManager().get(req);
 		//qDebug() << "Started downloading " << httpReply->request().url().path();
 		Q_ASSERT(httpReply->error()==QNetworkReply::NoError);

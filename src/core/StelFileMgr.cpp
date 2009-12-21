@@ -23,7 +23,13 @@
 
 #include "StelFileMgr.hpp"
 
-StelFileMgr::StelFileMgr()
+// Initialize static members.
+QStringList StelFileMgr::fileLocations;
+QString StelFileMgr::userDir;
+QString StelFileMgr::usersDataDirectoryName;
+QString StelFileMgr::screenshotDir;
+
+void StelFileMgr::init()
 {
 	// Set the userDir member.
 	QFileInfo userDirFI;
@@ -72,7 +78,7 @@ StelFileMgr::StelFileMgr()
 	{
 		fileLocations.append(getInstallationDir());
 	}
-	catch(std::runtime_error &e)
+	catch (std::runtime_error &e)
 	{
 		qWarning() << "WARNING: could not locate installation directory";
 	}
@@ -83,13 +89,16 @@ StelFileMgr::StelFileMgr()
 	screenshotDir = QDir::homePath();
 #endif
 
+	QDir userDirTmp(StelFileMgr::getUserDir());
+	if (!userDirTmp.exists())
+	{
+		// Try to create it
+		StelFileMgr::mkDir(StelFileMgr::getUserDir());
+	}
 }
 
-StelFileMgr::~StelFileMgr()
-{
-}
 
-QString StelFileMgr::findFile(const QString& path, const Flags& flags) const
+QString StelFileMgr::findFile(const QString& path, const Flags& flags)
 {
 	if (path.isEmpty())
 		throw (std::runtime_error("Empty file path"));
@@ -124,7 +133,7 @@ QString StelFileMgr::findFile(const QString& path, const Flags& flags) const
 	throw(std::runtime_error(QString("file not found: %1").arg(path).toLocal8Bit().constData()));
 }
 
-QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::Flags& flags, bool recursive) const
+QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::Flags& flags, bool recursive)
 {
 	QSet<QString> result;
 	QStringList listPaths;
@@ -337,7 +346,7 @@ bool StelFileMgr::fileFlagsCheck(const QString& path, const Flags& flags)
 	return(true);
 }
 
-QString StelFileMgr::getDesktopDir() const
+QString StelFileMgr::getDesktopDir()
 {
 	QString result;
 #if defined(WIN32)
@@ -356,7 +365,7 @@ QString StelFileMgr::getDesktopDir() const
 	return result;
 }
 
-QString StelFileMgr::getUserDir() const
+QString StelFileMgr::getUserDir()
 {
 	return userDir;
 }
@@ -378,14 +387,24 @@ void StelFileMgr::setUserDir(const QString& newDir)
 	}
 	userDir = userDirFI.filePath();
 	fileLocations.replace(0, userDir);
+
+	// If the chosen user directory does not exist we will create it
+	if (!StelFileMgr::exists(StelFileMgr::getUserDir()))
+	{
+		if (!StelFileMgr::mkDir(StelFileMgr::getUserDir()))
+		{
+			qCritical() << "ERROR - cannot create non-existent user directory" << StelFileMgr::getUserDir();
+			exit(1);
+		}
+	}
 }
 
-QString StelFileMgr::getUsersDataDirectoryName() const
+QString StelFileMgr::getUsersDataDirectoryName()
 {
 	return usersDataDirectoryName;
 }
 
-QString StelFileMgr::getInstallationDir() const
+QString StelFileMgr::getInstallationDir()
 {
 	// If we are running from the build tree, we use the files from there...
 	if (QFileInfo(CHECK_FILE).exists())
@@ -416,7 +435,7 @@ QString StelFileMgr::getInstallationDir() const
 	}
 }
 	
-QString StelFileMgr::getScreenshotDir() const
+QString StelFileMgr::getScreenshotDir()
 {
 	return screenshotDir;
 }
@@ -439,7 +458,7 @@ void StelFileMgr::setScreenshotDir(const QString& newDir)
 	screenshotDir = userDirFI.filePath();
 }
 
-QString StelFileMgr::getLocaleDir() const
+QString StelFileMgr::getLocaleDir()
 {
 	QFileInfo localePath;
 #if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
@@ -473,19 +492,19 @@ QString StelFileMgr::getLocaleDir() const
 }
 
 // Returns the path to the cache directory. Note that subdirectories may need to be created for specific caches.
-QString StelFileMgr::getCacheDir() const
+QString StelFileMgr::getCacheDir()
 {
-	QString cachePath = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
+	const QString& cachePath = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
 	if (cachePath.isEmpty())
 	{
-		cachePath = getUsersDataDirectoryName()+"/cache";
+		return getUsersDataDirectoryName()+"/cache";
 	}
 	return cachePath;
 }
 
 #if defined(WIN32)
 
-QString StelFileMgr::getWin32SpecialDirPath(const int csidlId)
+QString StelFileMgr::getWin32SpecialDirPath(int csidlId)
 {
 	// This function is implemented using code from QSettings implementation in QT
 	// (GPL edition, version 4.3).

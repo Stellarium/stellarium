@@ -268,6 +268,10 @@ SET(stellarium_lib_SRCS
 	StelMainGraphicsView.cpp
 	StelMainWindow.hpp
 	StelMainWindow.cpp
+	StelLogger.hpp
+	StelLogger.cpp
+	CLIProcessor.hpp
+	CLIProcessor.cpp
 	translations.h
 )
 

@@ -64,7 +64,7 @@ void StelSkyLayerMgr::init()
 {
 	try
 	{
-		insertSkyImage(StelApp::getInstance().getFileMgr().findFile("nebulae/default/textures.json"));
+		insertSkyImage(StelFileMgr::findFile("nebulae/default/textures.json"));
 	}
 	catch (std::runtime_error& e)
 	{
@@ -250,7 +250,7 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 	// - list index out of range in insertSkyImage
 	try
 	{
-		path = StelApp::getInstance().getFileMgr().findFile(filename);
+		path = StelFileMgr::findFile(filename);
 
 		QVariantMap vm;
 		QVariantList l;

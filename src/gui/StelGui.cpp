@@ -338,7 +338,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiActions("actionAutoHideVerticalButtonBar"), SIGNAL(toggled(bool)), this, SLOT(setAutoHideVerticalButtonBar(bool)));
 	getGuiActions("actionAutoHideVerticalButtonBar")->setChecked(getAutoHideVerticalButtonBar());
 
-	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
+	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
 	connect(&scriptMgr, SIGNAL(scriptRunning()), this, SLOT(scriptStarted()));
 	connect(&scriptMgr, SIGNAL(scriptStopped()), this, SLOT(scriptStopped()));
 
@@ -616,17 +616,17 @@ void StelGui::setScriptKeys(bool b)
 
 void StelGui::increaseScriptSpeed()
 {
-	StelApp::getInstance().getScriptMgr().setScriptRate(StelApp::getInstance().getScriptMgr().getScriptRate()*2);
+	StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate()*2);
 }
 
 void StelGui::decreaseScriptSpeed()
 {
-	StelApp::getInstance().getScriptMgr().setScriptRate(StelApp::getInstance().getScriptMgr().getScriptRate()/2);
+	StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate()/2);
 }
 
 void StelGui::setRealScriptSpeed()
 {
-	StelApp::getInstance().getScriptMgr().setScriptRate(1);
+	StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(1);
 }
 
 void StelGui::setFlagShowFlipButtons(bool b)

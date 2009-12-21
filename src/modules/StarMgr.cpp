@@ -242,7 +242,7 @@ void StarMgr::loadStarSettings()
 	QString iniFile;
 	try
 	{
-		iniFile = StelApp::getInstance().getFileMgr().findFile("stars/default/stars.ini");
+		iniFile = StelFileMgr::findFile("stars/default/stars.ini");
 	}
 	catch (std::runtime_error& e)
 	{
@@ -277,7 +277,6 @@ void StarMgr::loadData()
 
 	QStringList cats = starSettings->childGroups();
 	QListIterator<QString> it(cats);
-	StelFileMgr& fileMgr = StelApp::getInstance().getFileMgr();
 	while(it.hasNext())
 	{
 		QString cat = it.next();
@@ -285,7 +284,7 @@ void StarMgr::loadData()
 		QString cat_file_path;
 
 		/* See if it is an absolute path, else prepend default path.  */
-		if (!(fileMgr.isAbsolute(cat_file_name)))
+		if (!(StelFileMgr::isAbsolute(cat_file_name)))
 		{
 			/* relative path */
 			cat_file_name = "stars/default/"+cat_file_name;
@@ -293,7 +292,7 @@ void StarMgr::loadData()
 
 		try
 		{
-			cat_file_path = fileMgr.findFile(cat_file_name);
+			cat_file_path = StelFileMgr::findFile(cat_file_name);
 		}
 		catch(std::runtime_error e)
 		{
@@ -301,14 +300,14 @@ void StarMgr::loadData()
 			continue;
 		}
 		// possibly fixes crash on Vista
-		if(!fileMgr.isReadable(cat_file_path))
+		if(!StelFileMgr::isReadable(cat_file_path))
 		{
 			qDebug() << qPrintable(QString("Error: User does not have permissions to read catalog %1").arg(cat_file_name));
 			continue;
 		}
 
 		lb.SetMessage(q_("Loading catalog %1 from file %2").arg(cat, cat_file_name));
-		memoryUsed += fileMgr.size(cat_file_path);
+		memoryUsed += StelFileMgr::size(cat_file_path);
 		ZoneArray *const z = ZoneArray::create(cat_file_name, memoryUsed > maxMemory, lb);
 		if (z)
 		{
@@ -335,8 +334,7 @@ void StarMgr::loadData()
 		hipIndex[i].z = 0;
 		hipIndex[i].s = 0;
 	}
-	for (ZoneArrayMap::const_iterator it(zoneArrays.begin());
-					it != zoneArrays.end();it++)
+	for (ZoneArrayMap::const_iterator it(zoneArrays.begin()); it != zoneArrays.end();it++)
 	{
 		it->second->updateHipIndex(hipIndex);
 	}
@@ -350,7 +348,7 @@ void StarMgr::loadData()
 	{
 		try
 		{
-			spectral_array = initStringListFromFile(fileMgr.findFile("stars/default/" + cat_hip_sp_file_name));
+			spectral_array = initStringListFromFile(StelFileMgr::findFile("stars/default/" + cat_hip_sp_file_name));
 		}
 		catch (std::runtime_error& e)
 		{
@@ -369,13 +367,12 @@ void StarMgr::loadData()
 	{
 		try
 		{
-			component_array = initStringListFromFile(fileMgr.findFile("stars/default/" + cat_hip_cids_file_name));
+			component_array = initStringListFromFile(StelFileMgr::findFile("stars/default/" + cat_hip_cids_file_name));
 		}
 		catch (std::runtime_error& e)
 		{
 			qWarning() << "ERROR while loading data from "
-					   << ("stars/default/" + cat_hip_cids_file_name)
-					   << ": " << e.what();
+					   << ("stars/default/" + cat_hip_cids_file_name) << ": " << e.what();
 		}
 	}
 
@@ -863,7 +860,7 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 	// Load culture star names in english
 	try
 	{
-		loadCommonNames(StelApp::getInstance().getFileMgr().findFile("skycultures/" + skyCultureDir + "/star_names.fab"));
+		loadCommonNames(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/star_names.fab"));
 	}
 	catch(std::runtime_error& e)
 	{
@@ -873,7 +870,7 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 
 	try
 	{
-		loadSciNames(StelApp::getInstance().getFileMgr().findFile("stars/default/name.fab"));
+		loadSciNames(StelFileMgr::findFile("stars/default/name.fab"));
 	}
 	catch (std::runtime_error& e)
 	{

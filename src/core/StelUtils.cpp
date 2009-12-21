@@ -38,6 +38,26 @@
 
 namespace StelUtils
 {
+//! Return the full name of stellarium, i.e. "stellarium 0.9.0"
+QString getApplicationName()
+{
+#ifdef SVN_REVISION
+	return QString("Stellarium")+" "+PACKAGE_VERSION+" (SVN r"+SVN_REVISION+")";
+#else
+	return QString("Stellarium")+" "+PACKAGE_VERSION;
+#endif
+}
+
+//! Return the version of stellarium, i.e. "0.9.0"
+QString getApplicationVersion()
+{
+#ifdef SVN_REVISION
+	return QString(PACKAGE_VERSION)+" (SVN r"+SVN_REVISION+")";
+#else
+	return QString(PACKAGE_VERSION);
+#endif
+}
+
 double hmsToRad(unsigned int h, unsigned int m, double s )
 {
 	return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.+s*M_PI/43200.;

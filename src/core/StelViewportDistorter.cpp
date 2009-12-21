@@ -338,7 +338,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		in.setVersion(QDataStream::Qt_4_5);
 		try
 		{
-			file.setFileName(StelApp::getInstance().getFileMgr().findFile(custom_distortion_file));
+			file.setFileName(StelFileMgr::findFile(custom_distortion_file));
 			file.open(QIODevice::ReadOnly);
 			if (file.error() != QFile::NoError)
 				throw("failed to open file");

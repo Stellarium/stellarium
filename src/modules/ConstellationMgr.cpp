@@ -110,8 +110,6 @@ double ConstellationMgr::getCallOrder(StelModuleActionName actionName) const
 
 void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 {
-	StelFileMgr& fileMan = StelApp::getInstance().getFileMgr();
-
 	// Check if the sky culture changed since last load, if not don't load anything
 	if (lastLoadedSkyCulture == skyCultureDir)
 		return;
@@ -121,7 +119,7 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	QString conArtFile;
 	try
 	{
-		conArtFile = fileMan.findFile("skycultures/"+skyCultureDir+"/constellationsart.fab");
+		conArtFile = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationsart.fab");
 	}
 	catch (std::runtime_error& e)
 	{
@@ -130,10 +128,10 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 
 	try
 	{
-		loadLinesAndArt(fileMan.findFile("skycultures/"+skyCultureDir+"/constellationship.fab"), conArtFile, skyCultureDir);
+		loadLinesAndArt(StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationship.fab"), conArtFile, skyCultureDir);
 
 		// load constellation names
-		loadNames(fileMan.findFile("skycultures/" + skyCultureDir + "/constellation_names.eng.fab"));
+		loadNames(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellation_names.eng.fab"));
 
 		// Translate constellation names for the new sky culture
 		updateI18n();
@@ -152,7 +150,7 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	{
 		try
 		{
-			loadBoundaries(fileMan.findFile("data/constellations_boundaries.dat"));
+			loadBoundaries(StelFileMgr::findFile("data/constellations_boundaries.dat"));
 		}
 		catch (std::runtime_error& e)
 		{
@@ -386,7 +384,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			QString texturePath(texfile);
 			try
 			{
-				texturePath = StelApp::getInstance().getFileMgr().findFile("skycultures/"+cultureName+"/"+texfile);
+				texturePath = StelFileMgr::findFile("skycultures/"+cultureName+"/"+texfile);
 			}
 			catch (std::runtime_error& e)
 			{
@@ -397,7 +395,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 					 << " directory...  looking in general textures/ directory...";
 				try
 				{
-					texturePath = StelApp::getInstance().getFileMgr().findFile(QString("textures/")+texfile);
+					texturePath = StelFileMgr::findFile(QString("textures/")+texfile);
 				}
 				catch(exception& e2)
 				{
@@ -622,7 +620,7 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 
 void ConstellationMgr::updateI18n()
 {
-	StelTranslator trans(PACKAGE_NAME "-skycultures", StelApp::getInstance().getFileMgr().getLocaleDir(), StelApp::getInstance().getLocaleMgr().getSkyTranslator().getTrueLocaleName());
+	StelTranslator trans(PACKAGE_NAME "-skycultures", StelFileMgr::getLocaleDir(), StelApp::getInstance().getLocaleMgr().getSkyTranslator().getTrueLocaleName());
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{

@@ -63,6 +63,7 @@ void StelMovementMgr::init()
 	Q_ASSERT(conf);
 	Q_ASSERT(objectMgr);
 
+	movementsSpeedFactor=1.;
 	flagEnableMoveAtScreenEdge = conf->value("navigation/flag_enable_move_at_screen_edge",false).toBool();
 	mouseZoomSpeed = conf->value("navigation/mouse_zoom",30).toInt();
 	flagEnableZoomKeys = conf->value("navigation/flag_enable_zoom_keys").toBool();
@@ -534,8 +535,7 @@ void StelMovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 	if (!objectMgr->getWasSelected())
 		return;
 
-	if (StelApp::getInstance().getScriptMgr().scriptIsRunning())
-		moveDuration /= StelApp::getInstance().getScriptMgr().getScriptRate();
+	moveDuration /= movementsSpeedFactor;
 
 	float manualMoveDuration;
 	if (!getFlagTracking())
@@ -575,8 +575,7 @@ void StelMovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 // Unzoom and go to the init position
 void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 {
-	if (StelApp::getInstance().getScriptMgr().scriptIsRunning())
-		moveDuration /= StelApp::getInstance().getScriptMgr().getScriptRate();
+	moveDuration /= movementsSpeedFactor;
 
 	if (objectMgr->getWasSelected() && !full)
 	{
@@ -626,8 +625,7 @@ void StelMovementMgr::setFlagTracking(bool b)
 // Move to the given J2000 equatorial position
 void StelMovementMgr::moveToJ2000(const Vec3d& aim, float moveDuration, int zooming)
 {
-	if (StelApp::getInstance().getScriptMgr().scriptIsRunning())
-		moveDuration /= StelApp::getInstance().getScriptMgr().getScriptRate();
+	moveDuration /= movementsSpeedFactor;
 
 	zoomingMode = zooming;
 	move.aim=aim;
@@ -643,8 +641,7 @@ void StelMovementMgr::moveToJ2000(const Vec3d& aim, float moveDuration, int zoom
 
 void StelMovementMgr::moveToObject(const StelObjectP& target, float moveDuration, int zooming)
 {
-	if (StelApp::getInstance().getScriptMgr().scriptIsRunning())
-		moveDuration /= StelApp::getInstance().getScriptMgr().getScriptRate();
+	moveDuration /= movementsSpeedFactor;
 
 	zoomingMode = zooming;
 	move.aim=Vec3d(0);
@@ -767,8 +764,7 @@ void StelMovementMgr::updateAutoZoom(double deltaTime)
 // Zoom to the given field of view
 void StelMovementMgr::zoomTo(double aim_fov, float moveDuration)
 {
-	if (StelApp::getInstance().getScriptMgr().scriptIsRunning())
-		moveDuration /= StelApp::getInstance().getScriptMgr().getScriptRate();
+	moveDuration /= movementsSpeedFactor;
 
 	zoomMove.aim=aim_fov;
 	zoomMove.start=currentFov;
