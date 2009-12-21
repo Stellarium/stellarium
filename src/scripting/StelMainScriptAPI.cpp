@@ -36,7 +36,7 @@
 #include "StelFileMgr.hpp"
 #include "StelLocation.hpp"
 #include "StelLocationMgr.hpp"
-#include "StelMainGraphicsView.hpp
+#include "StelMainGraphicsView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelNavigator.hpp"
