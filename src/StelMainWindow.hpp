@@ -21,9 +21,7 @@
 #define _STELMAINWINDOW_HPP_
 
 #include <QMainWindow>
-
 #include <QSettings>
-#include "StelApp.hpp"
 
 //! @class StelMainWindow
 //! Reimplement a QMainWindow for Stellarium.
@@ -39,7 +37,7 @@ public:
 	static StelMainWindow& getInstance() {Q_ASSERT(singleton); return *singleton;}
 
 	//! Performs various initialization including the init of the StelMainGraphicsView instance.
-	void init();
+	void init(QSettings* settings);
 	
 	//! Set the application title for the current language.
 	//! This is useful for e.g. chinese.

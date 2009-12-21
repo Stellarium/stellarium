@@ -48,11 +48,11 @@ StelMainWindow::StelMainWindow(QWidget* parent) : QMainWindow(parent)
 // Update the translated title
 void StelMainWindow::initTitleI18n()
 {
-	QString appNameI18n = q_("Stellarium %1").arg(StelApp::getApplicationVersion());
+	QString appNameI18n = q_("Stellarium %1").arg(StelUtils::getApplicationVersion());
 	setWindowTitle(appNameI18n);
 }
 
-void StelMainWindow::init()
+void StelMainWindow::init(QSettings* conf)
 {
 	setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
 	initTitleI18n();
@@ -60,7 +60,7 @@ void StelMainWindow::init()
 	QString fName;
 	try
 	{
-		fName = StelApp::getInstance().getFileMgr().findFile("data/DejaVuSans.ttf");
+		fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
 	}
 	catch (std::runtime_error& e)
 	{
@@ -74,10 +74,9 @@ void StelMainWindow::init()
 	// Init the main window. It must be done here because it is not the responsability of StelApp to do that
 	QCoreApplication::processEvents();
 
-	QSettings* settings = StelApp::getInstance().getSettings();
-	resize(settings->value("video/screen_w", 800).toInt(), settings->value("video/screen_h", 600).toInt());
+	resize(conf->value("video/screen_w", 800).toInt(), conf->value("video/screen_h", 600).toInt());
 
-	if (settings->value("video/fullscreen", true).toBool())
+	if (conf->value("video/fullscreen", true).toBool())
 	{
 		showFullScreen();
 	}
@@ -86,7 +85,7 @@ void StelMainWindow::init()
 		show();
 	}
 
-	StelMainGraphicsView::getInstance().init();
+	StelMainGraphicsView::getInstance().init(conf);
 }
 
 // Alternate fullscreen mode/windowed mode if possible

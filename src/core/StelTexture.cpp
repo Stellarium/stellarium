@@ -23,6 +23,7 @@
 #include "glues.h"
 #include "StelFileMgr.hpp"
 #include "StelApp.hpp"
+#include "StelUtils.hpp"
 
 #include <QThread>
 #include <QMutexLocker>
@@ -156,7 +157,7 @@ bool StelTexture::bind()
 		QNetworkRequest req = QNetworkRequest(QUrl(fullPath));
 		// Define that preference should be given to cached files (no etag checks)
 		req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
-		req.setRawHeader("User-Agent", StelApp::getApplicationName().toAscii());
+		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toAscii());
 		httpReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		connect(httpReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 		return false;

@@ -34,28 +34,27 @@
 StelSkyCultureMgr::StelSkyCultureMgr()
 {
 	QSet<QString> cultureDirNames;
-	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
 	
 	try
 	{
-		cultureDirNames = fileMan.listContents("skycultures",StelFileMgr::Directory);
+		cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
 	}
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "ERROR while trying list sky cultures:" << e.what();	
 	}
 	
-	for (QSet<QString>::iterator dir=cultureDirNames.begin(); dir!=cultureDirNames.end(); dir++)
+	foreach (const QString& dir, cultureDirNames)
 	{
 		try
 		{
-			QSettings pd(fileMan.findFile("skycultures/" + *dir + "/info.ini"), StelIniFormat);
-			dirToNameEnglish[*dir].englishName = pd.value("info/name").toString();
-			dirToNameEnglish[*dir].author = pd.value("info/author").toString();
+			QSettings pd(StelFileMgr::findFile("skycultures/" + dir + "/info.ini"), StelIniFormat);
+			dirToNameEnglish[dir].englishName = pd.value("info/name").toString();
+			dirToNameEnglish[dir].author = pd.value("info/author").toString();
 		}
 		catch (std::runtime_error& e)
 		{
-			qWarning() << "WARNING: unable to successfully read info.ini file from skyculture dir" << *dir;
+			qWarning() << "WARNING: unable to successfully read info.ini file from skyculture dir" << dir;
 		}
 	}	
 }

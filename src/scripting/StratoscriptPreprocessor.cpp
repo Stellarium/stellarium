@@ -20,8 +20,6 @@
 #ifdef ENABLE_STRATOSCRIPT_COMPAT
 
 #include "StelScriptMgr.hpp"
-
-#include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 
 #include <cmath>
@@ -60,7 +58,7 @@ bool StelScriptMgr::preprocessStratoScript(QFile& input, QFile& output, const QS
 				{
 					try
 					{
-						path = StelApp::getInstance().getFileMgr().findFile(scriptDir + "/" + fileName);
+						path = StelFileMgr::findFile(scriptDir + "/" + fileName);
 					}
 					catch(std::runtime_error& e)
 					{

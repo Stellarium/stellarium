@@ -101,7 +101,7 @@ ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
 	QString dbStr; // for debugging output.
 	try
 	{
-		fname = StelApp::getInstance().getFileMgr().findFile(fname);
+		fname = StelFileMgr::findFile(fname);
 	}
 	catch (std::runtime_error &e)
 	{

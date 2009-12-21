@@ -25,6 +25,8 @@
 class QGLWidget;
 class QResizeEvent;
 class StelGuiBase;
+class StelMainScriptAPIProxy;
+class StelScriptMgr;
 
 //! @class StelMainGraphicsView
 //! Reimplement a QGraphicsView for Stellarium.
@@ -33,11 +35,11 @@ class StelMainGraphicsView : public QGraphicsView
 {
 Q_OBJECT
 public:
-	StelMainGraphicsView(QWidget* parent, int argc, char** argv);
+	StelMainGraphicsView(QWidget* parent);
 	virtual ~StelMainGraphicsView();
 	
 	//! Start the main initialization of Stellarium
-	void init();
+	void init(class QSettings* conf);
 	
 	//! Get the StelMainGraphicsView singleton instance.
 	static StelMainGraphicsView& getInstance() {Q_ASSERT(singleton); return *singleton;}
@@ -69,6 +71,11 @@ public:
 	//! Get the type of viewport distorter currently used
 	QString getViewPortDistorterType() const;
 	
+	//! Get the script API proxy (for signal handling)
+	StelMainScriptAPIProxy* getMainScriptAPIProxy() {return scriptAPIProxy;}
+	//! Get the script manager
+	StelScriptMgr& getScriptMgr() {return *scriptMgr;}
+
 public slots:
 
 	///////////////////////////////////////////////////////////////////////////
@@ -138,7 +145,7 @@ private:
 	//! Start the display loop
 	void startMainLoop();
 	
-	//! The StelMainWindow singleton
+	//! The StelMainGraphicsView singleton
 	static StelMainGraphicsView* singleton;
 	QGraphicsWidget* backItem;
 	class StelAppGraphicsWidget* mainSkyItem;
@@ -147,7 +154,13 @@ private:
 	QGLWidget* glWidget;
 	
 	StelGuiBase* gui;
-	
+
+	// The script API proxy object (for bridging threads)
+	StelMainScriptAPIProxy* scriptAPIProxy;
+
+	// The script manager based on Qt script engine
+	StelScriptMgr* scriptMgr;
+
 	bool wasDeinit;
 	
 	bool flagInvertScreenShotColors;

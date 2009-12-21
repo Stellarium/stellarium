@@ -40,7 +40,7 @@ StelLocaleMgr::StelLocaleMgr() : skyTranslator(PACKAGE_NAME, INSTALL_LOCALEDIR, 
 	QString path;
 	try
 	{
-		path = StelApp::getInstance().getFileMgr().findFile("data/countryCodes.dat");
+		path = StelFileMgr::findFile("data/countryCodes.dat");
 	}
 	catch (std::runtime_error& e)
 	{
@@ -130,7 +130,7 @@ void StelLocaleMgr::init()
 void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName)
 {
 	// Update the translator with new locale name
-	StelTranslator::globalTranslator = StelTranslator(PACKAGE_NAME, StelApp::getInstance().getFileMgr().getLocaleDir(), newAppLanguageName);
+	StelTranslator::globalTranslator = StelTranslator(PACKAGE_NAME, StelFileMgr::getLocaleDir(), newAppLanguageName);
 	qDebug() << "Application language is " << StelTranslator::globalTranslator.getTrueLocaleName();
 	StelApp::getInstance().updateI18n();
 }
@@ -141,7 +141,7 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName)
 void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName)
 {
 	// Update the translator with new locale name
-	skyTranslator = StelTranslator(PACKAGE_NAME, StelApp::getInstance().getFileMgr().getLocaleDir(), newSkyLanguageName);
+	skyTranslator = StelTranslator(PACKAGE_NAME, StelFileMgr::getLocaleDir(), newSkyLanguageName);
 	qDebug() << "Sky language is " << skyTranslator.getTrueLocaleName();
 	StelApp::getInstance().updateI18n();
 }

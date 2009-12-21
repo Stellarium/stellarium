@@ -20,6 +20,7 @@
 #include "StelDownloadMgr.hpp"
 #include "StelApp.hpp"
 #include "StelGuiBase.hpp"
+#include "StelUtils.hpp"
 
 #include <QDebug>
 #include <QNetworkAccessManager>
@@ -87,7 +88,7 @@ void StelDownloadMgr::get(const QString& addr, const QString& filePath, quint16 
 	
 	target->open(QIODevice::WriteOnly | QIODevice::Truncate);
 	QNetworkRequest req(address);
-	req.setRawHeader("User-Agent", StelApp::getApplicationName().toAscii());
+	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toAscii());
 	reply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	
 	if (barVisible)

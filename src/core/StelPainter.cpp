@@ -23,7 +23,6 @@
 
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
-#include "StelApp.hpp"
 #include "StelUtils.hpp"
 
 #include <QDebug>

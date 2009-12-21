@@ -81,6 +81,9 @@ public:
 	//! Return the current up view vector.
 	Vec3d getViewUpVectorJ2000() const;
 
+	void setMovementSpeedFactor(float s) {movementsSpeedFactor=s;}
+	float getMovementSpeedFactor() const {return movementsSpeedFactor;}
+
 public slots:
 	//! Toggle current mount mode between equatorial and altazimuthal
 	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquinoxEquatorial); else setMountMode(MountAltAzimuthal);}
@@ -234,6 +237,9 @@ private:
 	float keyMoveSpeed;              // Speed of keys movement
 	float keyZoomSpeed;              // Speed of keys zoom
 	bool flagMoveSlow;
+
+	// Speed factor for real life time movements, used for fast forward when playing scripts.
+	float movementsSpeedFactor;
 
 	//! @internal
 	//! Store data for auto-move

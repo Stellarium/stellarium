@@ -176,7 +176,7 @@ void SolarSystem::loadPlanets()
 	QString iniFile;
 	try
 	{
-		iniFile = StelApp::getInstance().getFileMgr().findFile("data/ssystem.ini");
+		iniFile = StelFileMgr::findFile("data/ssystem.ini");
 	}
 	catch(std::runtime_error& e)
 	{

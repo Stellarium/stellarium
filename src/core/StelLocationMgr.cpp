@@ -39,7 +39,7 @@ void StelLocationMgr::loadCities(const QString& fileName, bool isUserLocation)
 	QString cityDataPath;
 	try
 	{
-		cityDataPath = StelApp::getInstance().getFileMgr().findFile(fileName);
+		cityDataPath = StelFileMgr::findFile(fileName);
 	}
 	catch (std::runtime_error& e)
 	{
@@ -133,21 +133,21 @@ bool StelLocationMgr::saveUserLocation(const StelLocation& loc)
 	QString cityDataPath;
 	try
 	{
-		cityDataPath = StelApp::getInstance().getFileMgr().findFile("data/user_locations.txt", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
+		cityDataPath = StelFileMgr::findFile("data/user_locations.txt", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
 	}
 	catch (std::runtime_error& e)
 	{
-		if (!StelFileMgr::exists(StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()+"/data"))
+		if (!StelFileMgr::exists(StelFileMgr::getUsersDataDirectoryName()+"/data"))
 		{
-			if (!StelFileMgr::mkDir(StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()+"/data"))
+			if (!StelFileMgr::mkDir(StelFileMgr::getUsersDataDirectoryName()+"/data"))
 			{
-				qWarning() << "ERROR - cannot create non-existent data directory" << StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()+"/data";
+				qWarning() << "ERROR - cannot create non-existent data directory" << StelFileMgr::getUsersDataDirectoryName()+"/data";
 				qWarning() << "Location cannot be saved";
 				return false;
 			}
 		}
 		
-		cityDataPath = StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()+"/data/user_locations.txt";
+		cityDataPath = StelFileMgr::getUsersDataDirectoryName()+"/data/user_locations.txt";
 		qWarning() << "Will create a new user location file: " << cityDataPath;
 	}
 
@@ -194,21 +194,21 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 	QString cityDataPath;
 	try
 	{
-		cityDataPath = StelApp::getInstance().getFileMgr().findFile("data/user_locations.txt", StelFileMgr::Writable);
+		cityDataPath = StelFileMgr::findFile("data/user_locations.txt", StelFileMgr::Writable);
 	}
 	catch (std::runtime_error& e)
 	{
-		if (!StelFileMgr::exists(StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()+"/data"))
+		if (!StelFileMgr::exists(StelFileMgr::getUsersDataDirectoryName()+"/data"))
 		{
-			if (!StelFileMgr::mkDir(StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()+"/data"))
+			if (!StelFileMgr::mkDir(StelFileMgr::getUsersDataDirectoryName()+"/data"))
 			{
-				qWarning() << "ERROR - cannot create non-existent data directory" << StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()+"/data";
+				qWarning() << "ERROR - cannot create non-existent data directory" << StelFileMgr::getUsersDataDirectoryName()+"/data";
 				qWarning() << "Location cannot be saved";
 				return false;
 			}
 		}
 		
-		cityDataPath = StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()+"/data/user_locations.txt";
+		cityDataPath = StelFileMgr::getUsersDataDirectoryName()+"/data/user_locations.txt";
 		qWarning() << "Will create a new user location file: " << cityDataPath;
 	}
 

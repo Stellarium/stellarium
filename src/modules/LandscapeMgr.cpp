@@ -601,21 +601,20 @@ QMap<QString,QString> LandscapeMgr::getNameToDirMap(void) const
 {
 	QSet<QString> landscapeDirs;
 	QMap<QString,QString> result;
-	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
 	try
 	{
-		landscapeDirs = fileMan.listContents("landscapes",StelFileMgr::Directory);
+		landscapeDirs = StelFileMgr::listContents("landscapes",StelFileMgr::Directory);
 	}
 	catch (std::runtime_error& e)
 	{
 		qDebug() << "ERROR while trying list landscapes:" << e.what();
 	}
 	
-	foreach (QString dir, landscapeDirs)
+	foreach (const QString& dir, landscapeDirs)
 	{
 		try
 		{
-			QSettings landscapeIni(fileMan.findFile("landscapes/" + dir + "/landscape.ini"), StelIniFormat);
+			QSettings landscapeIni(StelFileMgr::findFile("landscapes/" + dir + "/landscape.ini"), StelIniFormat);
 			QString k = landscapeIni.value("landscape/name").toString();
 			result[k] = dir;
 		}
@@ -624,7 +623,6 @@ QMap<QString,QString> LandscapeMgr::getNameToDirMap(void) const
 			//qDebug << "WARNING: unable to successfully read landscape.ini file from landscape " << dir;
 		}
 	}
-
 	return result;	
 }
 
@@ -636,13 +634,12 @@ bool LandscapeMgr::doSetCurrentLandscapeID(const QString& id)
 		return false;
 	}
 	
-	// we want to lookup the landscape ID (dir) from the name.
-	StelFileMgr& fileMan = StelApp::getInstance().getFileMgr();
+	// We want to lookup the landscape ID (dir) from the name.
 	Landscape* newLandscape = NULL;
 	
 	try
 	{
-		newLandscape = createFromFile(fileMan.findFile("landscapes/" + id + "/landscape.ini"), id);
+		newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
 	}
 	catch (std::runtime_error& e)
 	{
