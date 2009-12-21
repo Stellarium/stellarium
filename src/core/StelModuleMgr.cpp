@@ -208,10 +208,9 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 	
 	// Then list dynamic libraries from the modules/ directory
 	QSet<QString> moduleDirs;
-	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
 	try
 	{
-		moduleDirs = fileMan.listContents("modules",StelFileMgr::Directory);
+		moduleDirs = StelFileMgr::listContents("modules",StelFileMgr::Directory);
 	}
 	catch(std::runtime_error& e)
 	{
@@ -232,7 +231,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 #endif
 		try
 		{
-			moduleFullPath = StelApp::getInstance().getFileMgr().findFile(moduleFullPath, StelFileMgr::File);
+			moduleFullPath = StelFileMgr::findFile(moduleFullPath, StelFileMgr::File);
 		}
 		catch (std::runtime_error& e)
 		{

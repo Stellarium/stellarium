@@ -213,7 +213,7 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 		// Special case for earth, we don't want to see the clouds
 		try
 		{
-			path = StelApp::getInstance().getFileMgr().findFile("data/gui/world.png");
+			path = StelFileMgr::findFile("data/gui/world.png");
 		}
 		catch (std::runtime_error& e)
 		{
@@ -230,7 +230,7 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 		{
 			try
 			{
-				path = StelApp::getInstance().getFileMgr().findFile("textures/"+p->getTextMapName());
+				path = StelFileMgr::findFile("textures/"+p->getTextMapName());
 			}
 			catch (std::runtime_error& e)
 			{

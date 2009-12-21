@@ -56,7 +56,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 		QString filePath;
 		try
 		{
-			filePath = StelApp::getInstance().getFileMgr().findFile("data/shaders/xyYToRGB.glsl");
+			filePath = StelFileMgr::findFile("data/shaders/xyYToRGB.glsl");
 		}
 		catch (std::runtime_error& e)
 		{
@@ -115,7 +115,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 		GLuint shaderXyYToRGB = glCreateShader(GL_VERTEX_SHADER);
 		try
 		{
-			filePath = StelApp::getInstance().getFileMgr().findFile("data/shaders/xyYToRGB.glsl");
+			filePath = StelFileMgr::findFile("data/shaders/xyYToRGB.glsl");
 		}
 		catch (std::runtime_error& e)
 		{

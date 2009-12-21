@@ -36,8 +36,7 @@
 #include "StelFileMgr.hpp"
 #include "StelLocation.hpp"
 #include "StelLocationMgr.hpp"
-#include "StelMainGraphicsView.hpp"
-#include "StelMainWindow.hpp"
+#include "StelMainGraphicsView.hpp
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelNavigator.hpp"
@@ -80,7 +79,7 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestSetNightMode(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
 	connect(this, SIGNAL(requestSetProjectionMode(QString)), StelApp::getInstance().getCore(), SLOT(setCurrentProjectionTypeKey(QString)));
 	connect(this, SIGNAL(requestSetSkyCulture(QString)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureID(QString)));
-	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelApp::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));
+	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelMainGraphicsView::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));
 }
 
 StelMainScriptAPI::~StelMainScriptAPI()
@@ -393,7 +392,7 @@ void StelMainScriptAPI::loadSound(const QString& filename, const QString& id)
 	QString path;
 	try
 	{
-		path = StelApp::getInstance().getFileMgr().findFile("scripts/" + filename);
+		path = StelFileMgr::findFile("scripts/" + filename);
 	}
 	catch(std::runtime_error& e)
 	{
@@ -426,12 +425,12 @@ void StelMainScriptAPI::dropSound(const QString& id)
 
 int StelMainScriptAPI::getScreenWidth(void)
 {
-	return StelMainWindow::getInstance().size().width();
+	return StelMainGraphicsView::getInstance().size().width();
 }
 
 int StelMainScriptAPI::getScreenHeight(void)
 {
-	return StelMainWindow::getInstance().size().height();
+	return StelMainGraphicsView::getInstance().size().height();
 }
 
 double StelMainScriptAPI::getScriptRate(void)
@@ -469,7 +468,7 @@ void StelMainScriptAPI::quitStellarium(void)
 void StelMainScriptAPI::debug(const QString& s)
 {
 	qDebug() << "script: " << s;
-	StelApp::getInstance().getScriptMgr().debug(s);
+	StelMainGraphicsView::getInstance().getScriptMgr().debug(s);
 }
 
 double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)

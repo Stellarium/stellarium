@@ -32,7 +32,6 @@
 #include "StelUtils.hpp"
 #include "VecMath.hpp"
 #include "StelPainter.hpp"
-#include "StelMainWindow.hpp"
 
 #include <vector>
 #include <QString>
@@ -124,7 +123,7 @@ public:
 	//! @param y the y-position on the screen (pixels from the top side)
 	//! @param font the font to use
 	//! @param color the color for the label
-	ScreenLabel(const QString& text, int x, int y, const QFont& font, Vec3f color);
+	ScreenLabel(const QString& text, int x, int y, const QFont& font, const Vec3f& color);
 	virtual ~ScreenLabel();
 
 	//! draw the label on the sky
@@ -305,12 +304,12 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 ///////////////////////
 // ScreenLabel class //
 ///////////////////////
-ScreenLabel::ScreenLabel(const QString& text, int x, int y, const QFont& font, Vec3f color)
+ScreenLabel::ScreenLabel(const QString& text, int x, int y, const QFont& font, const Vec3f& color)
 	: StelLabel(text, font, color),
 	  screenX(x)
 {
 	QFontMetrics metrics(font);
-	screenY = StelMainWindow::getInstance().size().height() - y - metrics.height();
+	screenY = StelApp::getInstance().getCore()->getProjection2d()->getViewportHeight() - y - metrics.height();
 }
 
 ScreenLabel::~ScreenLabel()
@@ -319,7 +318,7 @@ ScreenLabel::~ScreenLabel()
 
 bool ScreenLabel::draw(StelCore* core, StelPainter& sPainter)
 {
-	if(labelFader.getInterstate() <= 0.0)
+	if (labelFader.getInterstate() <= 0.0)
 		return false;
 
 	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());

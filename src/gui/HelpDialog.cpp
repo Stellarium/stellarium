@@ -39,6 +39,7 @@
 #include "StelFileMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelStyle.hpp"
+#include "StelLogger.hpp"
 
 HelpDialog::HelpDialog()
 {
@@ -104,7 +105,7 @@ void HelpDialog::createDialogContent()
 
 	updateText();
 
-	ui->logPathLabel->setText(QString("%1/log.txt:").arg(StelApp::getInstance().getFileMgr().getUsersDataDirectoryName()));
+	ui->logPathLabel->setText(QString("%1/log.txt:").arg(StelFileMgr::getUsersDataDirectoryName()));
 	connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(updateLog(int)));
 	connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(refreshLog()));
 
@@ -119,7 +120,7 @@ void HelpDialog::updateLog(int)
 
 void HelpDialog::refreshLog()
 {
-	ui->logBrowser->setPlainText(StelApp::getInstance().getLog());
+	ui->logBrowser->setPlainText(StelLogger::getLog());
 }
 
 void HelpDialog::setKey(QString group, QString oldKey, QString newKey, QString description)
@@ -273,7 +274,7 @@ void HelpDialog::updateText(void)
 	ui->helpBrowser->scrollToAnchor("top");
 
 	// populate About tab
-	newHtml = "<h1>" + StelApp::getInstance().getApplicationName() + "</h1>";
+	newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
 	// Note: this legal notice is not suitable for traslation
 	newHtml += "<h3>Copyright &copy; 2000-2009 Stellarium Developers</h3>";
 	newHtml += "<p>This program is free software; you can redistribute it and/or ";

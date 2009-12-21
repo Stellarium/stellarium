@@ -20,7 +20,6 @@
 
 #include "StelDialog.hpp"
 #include "StelMainGraphicsView.hpp"
-#include "StelMainWindow.hpp"
 
 #include <QDebug>
 #include <QDialog>
@@ -79,7 +78,7 @@ void StelDialog::setVisible(bool v)
 {
 	if (v) 
 	{
-		QSize screenSize = StelMainWindow::getInstance().size();
+		QSize screenSize = StelMainGraphicsView::getInstance().size();
 		if (dialog)
 		{
 			dialog->show();

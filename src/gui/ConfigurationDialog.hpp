@@ -25,7 +25,6 @@
 #include <QNetworkReply>
 #include <QFile>
 #include "StelDialog.hpp"
-#include "StelApp.hpp"
 
 class Ui_configurationDialogForm;
 class QSettings;

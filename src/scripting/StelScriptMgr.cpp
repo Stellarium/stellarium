@@ -139,8 +139,7 @@ QStringList StelScriptMgr::getScriptList(void)
 	QStringList scriptFiles;
 	try
 	{
-		StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
-		QSet<QString> files = fileMan.listContents("scripts",StelFileMgr::File, true);
+		QSet<QString> files = StelFileMgr::listContents("scripts", StelFileMgr::File, true);
 		foreach(QString f, files)
 		{
 #ifdef ENABLE_STRATOSCRIPT_COMPAT
@@ -178,7 +177,7 @@ const QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, co
 {
 	try
 	{
-		QFile file(StelApp::getInstance().getFileMgr().findFile("scripts/" + s, StelFileMgr::File));
+		QFile file(StelFileMgr::findFile("scripts/" + s, StelFileMgr::File));
 		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
 			QString msg = QString("WARNING: script file %1 could not be opened for reading").arg(s);
@@ -227,7 +226,7 @@ const QString StelScriptMgr::getDescription(const QString& s)
 {
 	try
 	{
-		QFile file(StelApp::getInstance().getFileMgr().findFile("scripts/" + s, StelFileMgr::File));
+		QFile file(StelFileMgr::findFile("scripts/" + s, StelFileMgr::File));
 		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
 			QString msg = QString("WARNING: script file %1 could not be opened for reading").arg(s);
@@ -297,7 +296,7 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 		if (QFileInfo(fileName).isAbsolute())
 			absPath = fileName;
 		else
-			absPath = StelApp::getInstance().getFileMgr().findFile("scripts/" + fileName);
+			absPath = StelFileMgr::findFile("scripts/" + fileName);
 
 		scriptDir = QFileInfo(absPath).dir().path();
 	}
@@ -384,7 +383,9 @@ void StelScriptMgr::setScriptRate(double r)
 	double newTimeRate = nav->getTimeRate() * factor;
 
 	mainAPI->getScriptSleeper().setRate(r);
-	if (scriptIsRunning()) nav->setTimeRate(newTimeRate);
+	if (scriptIsRunning())
+		nav->setTimeRate(newTimeRate);
+	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(newTimeRate);
 }
 
 double StelScriptMgr::getScriptRate(void)
@@ -451,7 +452,7 @@ bool StelScriptMgr::preprocessScript(QFile& input, QFile& output, const QString&
 			{
 				try
 				{
-					path = StelApp::getInstance().getFileMgr().findFile(scriptDir + "/" + fileName);
+					path = StelFileMgr::findFile(scriptDir + "/" + fileName);
 				}
 				catch(std::runtime_error& e)
 				{

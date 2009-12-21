@@ -30,11 +30,11 @@ class StelAppGraphicsWidget : public QGraphicsWidget
 {
 	Q_OBJECT
 public:
-	StelAppGraphicsWidget(int argc, char** argv);
+	StelAppGraphicsWidget();
 	~StelAppGraphicsWidget();
 
 	//! Initialize the StelAppGraphicsWidget.
-	void init();
+	void init(class QSettings* conf);
 
 	//! Paint the main sky view and the embedded GUI widgets such as the moving button bars.
 	//! This method is called automatically by the GraphicsView.

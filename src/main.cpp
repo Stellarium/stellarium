@@ -23,9 +23,16 @@
 #include "StelMainGraphicsView.hpp"
 #include "StelMainWindow.hpp"
 #include "StelTranslator.hpp"
+#include "StelLogger.hpp"
+#include "StelFileMgr.hpp"
+#include "CLIProcessor.hpp"
+#include "StelIniParser.hpp"
+
 #include <QDebug>
 #include <QGLFormat>
 #include <QPlastiqueStyle>
+#include <QFileInfo>
+
 #ifdef MACOSX
 #include "StelMacosxDirs.hpp"
 #endif
@@ -81,77 +88,219 @@ public:
 };
 
 
+//! Copies the default configuration file.
+//! This function copies the default_config.ini file to config.ini (or other
+//! name specified on the command line located in the user data directory.
+void copyDefaultConfigFile(const QString& newPath)
+{
+	QString defaultConfigFilePath;
+	try
+	{
+		defaultConfigFilePath = StelFileMgr::findFile("data/default_config.ini");
+	}
+	catch (std::runtime_error& e)
+	{
+		qFatal("ERROR copyDefaultConfigFile failed to locate data/default_config.ini.  Please check your installation.");
+	}
+	QFile::copy(defaultConfigFilePath, newPath);
+	if (!StelFileMgr::exists(newPath))
+	{
+		qFatal("ERROR copyDefaultConfigFile failed to copy file %s  to %s. You could try to copy it by hand.",
+			qPrintable(defaultConfigFilePath), qPrintable(newPath));
+	}
+}
+
+
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
 	//QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
 	QCoreApplication::setApplicationName("stellarium");
-	QCoreApplication::setApplicationVersion(StelApp::getApplicationVersion());
+	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
 
-	//QApplication::setDesktopSettingsAware(false);
 	QApplication::setStyle(new QPlastiqueStyle());
 
-	// Handle command line options for alternative QT graphics system types
-	// DEFAULT_GRAPHICS_SYSTEM is defined per playform in the main CMakeLists.txt file
-	int argc2;
-	char** argv2;
-	char cmd1[] = "-graphicssystem";
-	char cmd2[] = DEFAULT_GRAPHICS_SYSTEM;
+	// Init the file manager
+	StelFileMgr::init();
 
-	// Having said that, we should also allow users to specify the mode if they like
-	// which also gives them the option to use "opengl".  Good job these three strings
-	// are all the same length, else we'd be mallocing all over the place...
-	for (int i=1; i<argc; i++)
+	// Start logging.
+	StelLogger::init(StelFileMgr::getUsersDataDirectoryName()+"/log.txt");
+
+	// Log command line arguments
+	QString argStr;
+	QStringList argList;
+	for (int i=0; i<argc; ++i)
 	{
-		QString a(argv[i]);
-		if (a == "--graphics-system" && i+1 < argc)
-		{
-			a += "=" + QString(argv[i+1]);
-		}
+		argList << argv[i];
+		argStr += QString("%1 ").arg(argv[i]);
+	}
+	StelLogger::writeLog(argStr);
 
-		if (a == "--graphics-system=native")
+	// Parse for first set of CLI arguments - stuff we want to process before other
+	// output, such as --help and --version
+	CLIProcessor::parseCLIArgsPreConfig(argList);
+
+	// OK we start the full program.
+	// Print the console splash and get on with loading the program
+	QString versionLine = QString("This is %1 - http://www.stellarium.org").arg(StelUtils::getApplicationName());
+	QString copyrightLine = QString("Copyright (C) 2000-2009 Fabien Chereau et al");
+	int maxLength = qMax(versionLine.size(), copyrightLine.size());
+	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
+	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
+	qDebug() << qPrintable(QString("[ %1 ]").arg(copyrightLine.leftJustified(maxLength, ' ')));
+	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
+	qDebug() << "Writing log file to:" << StelLogger::getLogFileName();
+	qDebug() << "File search paths:";
+	int n=0;
+	foreach (QString i, StelFileMgr::getSearchPaths())
+	{
+		qDebug() << " " << n << ". " << i;
+		++n;
+	}
+
+	// Now manage the loading of the proper config file
+	QString configName;
+	try
+	{
+		configName = CLIProcessor::argsGetOptionWithArg(argList, "-c", "--config-file", "config.ini").toString();
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "WARNING: while looking for --config-file option: " << e.what() << ". Using \"config.ini\"";
+		configName = "config.ini";
+	}
+
+	QString configFileFullPath;
+	try
+	{
+		configFileFullPath = StelFileMgr::findFile(configName, StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
+	}
+	catch (std::runtime_error& e)
+	{
+		try
 		{
-			strcpy(cmd2, "native");
+			configFileFullPath = StelFileMgr::findFile(configName, StelFileMgr::New);
 		}
-		else if (a == "--graphics-system=raster")
+		catch (std::runtime_error& e)
 		{
-			strcpy(cmd2, "raster");
-		}
-		else if (a == "--graphics-system=opengl")
-		{
-			strcpy(cmd2, "opengl");
+			qFatal("Could not create configuration file %s.", qPrintable(configName));
 		}
 	}
 
-	argv2 = (char**)malloc(sizeof(char*)*(argc+2));
-	memcpy(argv2, argv, argc*sizeof(char*));
-	argv2[argc]=cmd1;
-	argv2[argc+1]=cmd2;
-	argc2 = argc+2;
+	QSettings* confSettings = NULL;
+	if (StelFileMgr::exists(configFileFullPath))
+	{
+		// Implement "restore default settings" feature.
+		bool restoreDefaultConfigFile = false;
+		if (CLIProcessor::argsGetOption(argList, "", "--restore-defaults"))
+		{
+			restoreDefaultConfigFile=true;
+		}
+		else
+		{
+			confSettings = new QSettings(configFileFullPath, StelIniFormat, NULL);
+			restoreDefaultConfigFile = confSettings->value("main/restore_defaults", false).toBool();
+		}
+		if (!restoreDefaultConfigFile)
+		{
+			QString version = confSettings->value("main/version", "0.0.0").toString();
+			if (version!=QString(PACKAGE_VERSION))
+			{
+				QTextStream istr(&version);
+				char tmp;
+				int v1=0;
+				int v2=0;
+				istr >> v1 >> tmp >> v2;
+				// Config versions less than 0.6.0 are not supported, otherwise we will try to use it
+				if (v1==0 && v2<6)
+				{
+					// The config file is too old to try an importation
+					qDebug() << "The current config file is from a version too old for parameters to be imported ("
+							 << (version.isEmpty() ? "<0.6.0" : version) << ").\n"
+							 << "It will be replaced by the default config file.";
+					restoreDefaultConfigFile = true;
+				}
+				else
+				{
+					qDebug() << "Attempting to use an existing older config file.";
+				}
+			}
+		}
+		if (restoreDefaultConfigFile)
+		{
+			if (confSettings)
+				delete confSettings;
+			QString backupFile(configFileFullPath.left(configFileFullPath.length()-3) + QString("old"));
+			if (QFileInfo(backupFile).exists())
+				QFile(backupFile).remove();
+			QFile(configFileFullPath).rename(backupFile);
+			copyDefaultConfigFile(configFileFullPath);
+			confSettings = new QSettings(configFileFullPath, StelIniFormat);
+			qWarning() << "Resetting defaults config file. Previous config file was backed up in " << backupFile;
+		}
+	}
+	else
+	{
+		qDebug() << "Config file " << configFileFullPath << " does not exist. Copying the default file.";
+		copyDefaultConfigFile(configFileFullPath);
+		confSettings = new QSettings(configFileFullPath, StelIniFormat);
+	}
 
-	QApplication app(argc2, argv2);
+	Q_ASSERT(confSettings);
+	qDebug() << "Config file is: " << configFileFullPath;
+
+	// Override config file values from CLI.
+	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
+
+	// Handle command line options for alternative Qt graphics system types.
+	// DEFAULT_GRAPHICS_SYSTEM is defined per plateform in the main CMakeLists.txt file.
+	// Avoid overriding if the user already specified the mode on the CLI.
+	bool doSetDefaultGraphicsSystem=true;
+	for (int i=1; i<argc; ++i)
+	{
+		if (QString(argv[i]) == "--graphics-system")
+			doSetDefaultGraphicsSystem=false;
+	}
+	if (doSetDefaultGraphicsSystem)
+		QApplication::setGraphicsSystem(DEFAULT_GRAPHICS_SYSTEM);
+
+	QApplication app(argc, argv);
 
 #ifdef MACOSX
 	StelMacosxDirs::addApplicationPluginDirectory();
 #endif
+
+	// Initialize translator feature
+	try
+	{
+		StelTranslator::init(StelFileMgr::findFile("data/iso639-1.utf8"));
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "ERROR while loading translations: " << e.what() << endl;
+	}
+	// Use our gettext translator for Qt translations as well
 	GettextStelTranslator trans;
 	app.installTranslator(&trans);
+
 	if (!QGLFormat::hasOpenGL())
 	{
 		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
 	}
 
 	StelMainWindow* mainWin = new StelMainWindow(NULL);
-	StelMainGraphicsView* view = new StelMainGraphicsView(NULL, argc, argv);
+	StelMainGraphicsView* view = new StelMainGraphicsView(NULL);
 	mainWin->setCentralWidget(view);
-	mainWin->init();
+	mainWin->init(confSettings);
 	app.exec();
 	view->deinitGL();
 	delete view;
 	delete mainWin;
-	free(argv2);
+
+	delete confSettings;
+	StelLogger::deinit();
 	return 0;
 }
 

@@ -60,10 +60,9 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui) : gui(agui)
 	downloadMgr = &StelApp::getInstance().getDownloadMgr();
 	updatesData = NULL;
 
-	StelFileMgr& fileMgr = StelApp::getInstance().getFileMgr();
-	starsDir = fileMgr.getUsersDataDirectoryName() + "/stars/default";
-	if(!fileMgr.exists(starsDir))
-		fileMgr.mkDir(starsDir);
+	starsDir = StelFileMgr::getUsersDataDirectoryName() + "/stars/default";
+	if(!StelFileMgr::exists(starsDir))
+		StelFileMgr::mkDir(starsDir);
 	downloaded = 0;
 }
 
@@ -104,7 +103,7 @@ void ConfigurationDialog::createDialogContent()
 	QString appLang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
 	QComboBox* cb = ui->programLanguageComboBox;
 	cb->clear();
-	cb->addItems(StelTranslator::globalTranslator.getAvailableLanguagesNamesNative(StelApp::getInstance().getFileMgr().getLocaleDir()));
+	cb->addItems(StelTranslator::globalTranslator.getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()));
 	QString l2 = StelTranslator::iso639_1CodeToNativeName(appLang);
 	int lt = cb->findText(l2, Qt::MatchExactly);
 	if (lt == -1 && appLang.contains('_'))
@@ -185,7 +184,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->setViewingOptionAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewOptions()));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(setDefaultViewOptions()));
 
-	ui->screenshotDirEdit->setText(StelApp::getInstance().getFileMgr().getScreenshotDir());
+	ui->screenshotDirEdit->setText(StelFileMgr::getScreenshotDir());
 	connect(ui->screenshotDirEdit, SIGNAL(textChanged(QString)), this, SLOT(selectScreenshotDir(QString)));
 	connect(ui->screenshotBrowseButton, SIGNAL(clicked()), this, SLOT(browseForScreenshotDir()));
 
@@ -193,7 +192,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->invertScreenShotColorsCheckBox, SIGNAL(toggled(bool)), &StelMainGraphicsView::getInstance(), SLOT(setFlagInvertScreenShotColors(bool)));
 
 	// script tab controls
-	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
+	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
 	connect(ui->scriptListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(scriptSelectionChanged(const QString&)));
 	connect(ui->runScriptButton, SIGNAL(clicked()), this, SLOT(runScriptClicked()));
 	connect(ui->stopScriptButton, SIGNAL(clicked()), this, SLOT(stopScriptClicked()));
@@ -224,6 +223,7 @@ void ConfigurationDialog::languageChanged(const QString& langName)
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
 	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
 	updateConfigLabels();
+	StelMainWindow::getInstance().initTitleI18n();
 }
 
 void ConfigurationDialog::setStartupTimeMode(void)
@@ -281,7 +281,7 @@ void ConfigurationDialog::cursorTimeOutChanged()
 
 void ConfigurationDialog::browseForScreenshotDir()
 {
-	QString oldScreenshorDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
+	QString oldScreenshorDir = StelFileMgr::getScreenshotDir();
 	QString newScreenshotDir = QFileDialog::getExistingDirectory(NULL, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::ShowDirsOnly);
 
 	if (!newScreenshotDir.isEmpty()) {
@@ -297,7 +297,7 @@ void ConfigurationDialog::selectScreenshotDir(const QString& dir)
 {
 	try
 	{
-		StelApp::getInstance().getFileMgr().setScreenshotDir(dir);
+		StelFileMgr::setScreenshotDir(dir);
 	}
 	catch (std::runtime_error& e)
 	{
@@ -428,7 +428,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/flag_mouse_cursor_timeout", StelMainGraphicsView::getInstance().getFlagCursorTimeout());
 	conf->setValue("gui/mouse_cursor_timeout", StelMainGraphicsView::getInstance().getCursorTimeout());
 
-	conf->setValue("main/screenshot_dir", StelApp::getInstance().getFileMgr().getScreenshotDir());
+	conf->setValue("main/screenshot_dir", StelFileMgr::getScreenshotDir());
 	conf->setValue("main/invert_screenshots_colors", StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors());
 
 	// full screen and window size
@@ -552,7 +552,7 @@ void ConfigurationDialog::loadAtStartupChanged(int state)
 void ConfigurationDialog::populateScriptsList(void)
 {
 	int prevSel = ui->scriptListWidget->currentRow();
-	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
+	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
 	ui->scriptListWidget->clear();
 	ui->scriptListWidget->addItems(scriptMgr.getScriptList());
 	// If we had a valid previous selection (i.e. not first time we populate), restore it
@@ -566,7 +566,7 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 {
 	if (s.isEmpty())
 		return;
-	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
+	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + scriptMgr.getName(s) + "</h2>";
@@ -584,7 +584,7 @@ void ConfigurationDialog::runScriptClicked(void)
 	if (ui->closeWindowAtScriptRunCheckbox->isChecked())
 		this->close();
 
-	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
+	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
 	if (ui->scriptListWidget->currentItem())
 	{
 		ui->runScriptButton->setEnabled(false);
@@ -597,12 +597,12 @@ void ConfigurationDialog::stopScriptClicked(void)
 {
 	GETSTELMODULE(LabelMgr)->deleteAllLabels();
 	GETSTELMODULE(ScreenImageMgr)->deleteAllImages();
-	StelApp::getInstance().getScriptMgr().stopScript();
+	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();
 }
 
 void ConfigurationDialog::aScriptIsRunning(void)
 {
-	ui->scriptStatusLabel->setText(q_("Running script: ") + StelApp::getInstance().getScriptMgr().runningScriptId());
+	ui->scriptStatusLabel->setText(q_("Running script: ") + StelMainGraphicsView::getInstance().getScriptMgr().runningScriptId());
 	ui->runScriptButton->setEnabled(false);
 	ui->stopScriptButton->setEnabled(true);
 }

@@ -86,12 +86,12 @@ const QString Landscape::getTexturePath(const QString& basename, const QString& 
 	QString path;
 	try
 	{
-		path = StelApp::getInstance().getFileMgr().findFile("landscapes/" + landscapeId + "/" + basename);
+		path = StelFileMgr::findFile("landscapes/" + landscapeId + "/" + basename);
 		return path;
 	}
 	catch (std::runtime_error& e)
 	{
-		path = StelApp::getInstance().getFileMgr().findFile("textures/" + basename);
+		path = StelFileMgr::findFile("textures/" + basename);
 		return path;
 	}
 }
