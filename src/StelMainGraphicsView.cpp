@@ -49,12 +49,12 @@ Q_IMPORT_PLUGIN(StelGui)
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
 StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
-	: QGraphicsView(parent), gui(NULL), scriptAPIProxy(NULL), scriptMgr(NULL),
+	: QGraphicsView(parent), backItem(NULL), gui(NULL), scriptAPIProxy(NULL), scriptMgr(NULL),
 	  wasDeinit(false),
 	  flagInvertScreenShotColors(false),
 	  screenShotPrefix("stellarium-"),
 	  screenShotDir(""),
-	  cursorTimeout(-1.f), flagCursorTimeout(false), minFpsTimer(NULL), maxfps(10000.f)
+	  cursorTimeout(-1.f), flagCursorTimeout(false), distorter(NULL), minFpsTimer(NULL), maxfps(10000.f)
 {
 	// Can't create 2 StelMainGraphicsView instances
 	Q_ASSERT(!singleton);
@@ -67,45 +67,31 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	setFrameShape(QFrame::NoFrame);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	setFocusPolicy(Qt::StrongFocus);
+	// Allows for precise FPS control
+	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
+	connect(this, SIGNAL(screenshotRequested()), this, SLOT(doScreenshot()));
+
+	qtime = new QTime();
+	qtime->start();
+	lastEventTimeSec = 0;
 
 	// Create an openGL viewport
 	QGLFormat glFormat(QGL::StencilBuffer);
 	//glFormat.setSamples(16);
 	//glFormat.setSampleBuffers(true);
 	//glFormat.setDirectRendering(false);
-	glWidget = new QGLWidget(glFormat, NULL);
+	glWidget = new QGLWidget(glFormat, this);
 	setViewport(glWidget);
 
 	// Antialiasing works only with SampleBuffer, but it's much slower
 	//setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::HighQualityAntialiasing);
 	//setRenderHint(QPainter::TextAntialiasing, false);
 	//setOptimizationFlags(QGraphicsView::DontClipPainter|QGraphicsView::DontSavePainterState|QGraphicsView::DontAdjustForAntialiasing);
-
 	setScene(new QGraphicsScene());
-
-	// Create the main widget for stellarium, this in turn the create the main StelApp instance.
-	mainSkyItem = new StelAppGraphicsWidget();
-
-	distorter = StelViewportDistorter::create("none",800,600,StelProjectorP());
-	lastEventTimeSec = StelApp::getTotalRunTime();
 
 	backItem = new QGraphicsWidget();
 	backItem->setFocusPolicy(Qt::NoFocus);
-	QGraphicsGridLayout* l = new QGraphicsGridLayout(backItem);
-
-	mainSkyItem->setZValue(-10);
-	l->addItem(mainSkyItem, 0, 0);
-	l->setContentsMargins(0,0,0,0);
-	l->setSpacing(0);
-	scene()->addItem(backItem);
-
-	setFocusPolicy(Qt::StrongFocus);
-	mainSkyItem->setFocus();
-
-	// Allows for precise FPS control
-	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
-
-	connect(this, SIGNAL(screenshotRequested()), this, SLOT(doScreenshot()));
 }
 
 StelMainGraphicsView::~StelMainGraphicsView()
@@ -131,23 +117,36 @@ void StelMainGraphicsView::makeGLContextCurrent()
 
 void StelMainGraphicsView::init(QSettings* conf)
 {
-	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-
-	QPainter qPainter(glWidget);
-	StelPainter::setQPainter(&qPainter);
+	Q_ASSERT(glWidget->isValid());
 	glWidget->makeCurrent();
 
-	// Initialize all, including the StelApp instance.
-	mainSkyItem->init(conf);
+	// Create the main widget for stellarium, which in turn creates the main StelApp instance.
+	mainSkyItem = new StelAppGraphicsWidget();
+	mainSkyItem->setZValue(-10);
+	QGraphicsGridLayout* l = new QGraphicsGridLayout(backItem);
+	l->setContentsMargins(0,0,0,0);
+	l->setSpacing(0);
+	l->addItem(mainSkyItem, 0, 0);
+	scene()->addItem(backItem);
 
-	// This is a hack avoiding to have 2 config files
+	// Activate the resizing caused by the layout
+	QCoreApplication::processEvents();
+
+	mainSkyItem->setFocus();
+
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
 	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.).toDouble());
-	setViewPortDistorterType(conf->value("video/distorter","none").toString());
-
 	maxfps = conf->value("video/maximum_fps",10000.).toDouble();
 	minfps = conf->value("video/minimum_fps",10000.).toDouble();
+	setViewPortDistorterType(conf->value("video/distorter","none").toString());
+	//distorter = StelViewportDistorter::create("none",800,600,StelProjectorP());
+
+	QPainter qPainter(glWidget);
+	StelPainter::setQPainter(&qPainter);
+
+	// Initialize the core, including the StelApp instance.
+	mainSkyItem->init(conf);
 
 	scriptAPIProxy = new StelMainScriptAPIProxy(this);
 	scriptMgr = new StelScriptMgr(this);
@@ -184,19 +183,22 @@ void StelMainGraphicsView::thereWasAnEvent()
 	lastEventTimeSec = StelApp::getTotalRunTime();
 }
 
-void StelMainGraphicsView::drawBackground(QPainter* painter, const QRectF &)
+void StelMainGraphicsView::drawBackground(QPainter* painter, const QRectF& rect)
 {
-	if (painter->paintEngine()->type() != QPaintEngine::OpenGL && painter->paintEngine()->type() != QPaintEngine::OpenGL2)
+	if (painter->paintEngine()->type()!=QPaintEngine::OpenGL && painter->paintEngine()->type()!=QPaintEngine::OpenGL2)
 	{
 		qWarning("StelMainGraphicsView: drawBackground needs a QGLWidget to be set as viewport on the graphics view");
 		return;
 	}
 
-	StelPainter::setQPainter(painter);
-	distorter->prepare();
-	StelPainter::setQPainter(NULL);
+	if (distorter)
+	{
+		StelPainter::setQPainter(painter);
+		distorter->prepare();
+		StelPainter::setQPainter(NULL);
+	}
 
-	const double now = StelApp::getTotalRunTime();
+	const double now = ((double)qtime->elapsed())/1000.;
 
 	// Determines when the next display will need to be triggered
 	// The current policy is that after an event, the FPS is maximum for 2.5 seconds
@@ -218,13 +220,18 @@ void StelMainGraphicsView::drawBackground(QPainter* painter, const QRectF &)
 		if (QApplication::overrideCursor()!=0)
 			QApplication::restoreOverrideCursor();
 	}
+	//QGraphicsView::drawBackground(painter, rect);
 }
 
 void StelMainGraphicsView::drawForeground(QPainter* painter, const QRectF &rect)
 {
-	StelPainter::setQPainter(painter);
-	distorter->distort();
-	StelPainter::setQPainter(NULL);
+	//QGraphicsView::drawForeground(painter, rect);
+	if (distorter)
+	{
+		StelPainter::setQPainter(painter);
+		distorter->distort();
+		StelPainter::setQPainter(NULL);
+	}
 }
 
 void StelMainGraphicsView::startMainLoop()
@@ -249,8 +256,7 @@ void StelMainGraphicsView::minFpsChanged()
 
 void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
 {
-	if (scene())
-		scene()->setSceneRect(QRect(QPoint(0, 0), event->size()));
+	scene()->setSceneRect(QRect(QPoint(0, 0), event->size()));
 	backItem->setGeometry(0,0,event->size().width(),event->size().height());
 	QGraphicsView::resizeEvent(event);
 }
@@ -338,7 +344,8 @@ void StelMainGraphicsView::setViewPortDistorterType(const QString &type)
 		delete distorter;
 		distorter = NULL;
 	}
-	distorter = StelViewportDistorter::create(type,width(),height(),StelApp::getInstance().getCore()->getProjection2d());
+	if (type!="none")
+		distorter = StelViewportDistorter::create(type,width(),height(),StelApp::getInstance().getCore()->getProjection2d());
 }
 
 QString StelMainGraphicsView::getViewPortDistorterType() const
@@ -350,6 +357,8 @@ QString StelMainGraphicsView::getViewPortDistorterType() const
 
 void StelMainGraphicsView::distortPos(QPoint* pos)
 {
+	if (!distorter)
+		return;
 	int x = pos->x();
 	int y = pos->y();
 	y = height() - 1 - y;
