@@ -675,6 +675,9 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	}
 	else
 	{
+		// There are 2 version here depending on the OpenGL engine
+		// OpenGL 1 need to reverse the text vertically, not OpenGL 2...
+		// This sounds like a Qt bug
 		if (qPainter->paintEngine()->type()==QPaintEngine::OpenGL2)
 		{
 			qPainter->translate(x+xshift, prj->viewportXywh[3]-y-yshift);
