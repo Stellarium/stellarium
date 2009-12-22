@@ -17,10 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <QtGui/QApplication>
-#include <QtGui/QMessageBox>
-#include <QTranslator>
-#include "StelMainGraphicsView.hpp"
+#include <config.h>
 #include "StelMainWindow.hpp"
 #include "StelTranslator.hpp"
 #include "StelLogger.hpp"
@@ -29,16 +26,17 @@
 #include "StelIniParser.hpp"
 
 #include <QDebug>
+#include <QApplication>
+#include <QMessageBox>
+#include <QTranslator>
 #include <QGLFormat>
 #include <QPlastiqueStyle>
 #include <QFileInfo>
+#include <QtPlugin>
 
 #ifdef MACOSX
 #include "StelMacosxDirs.hpp"
 #endif
-
-#include <config.h>
-#include "StelModuleMgr.hpp"
 
 Q_IMPORT_PLUGIN(StelGui)
 
@@ -121,6 +119,12 @@ int main(int argc, char **argv)
 	QCoreApplication::setOrganizationName("stellarium");
 
 	QApplication::setStyle(new QPlastiqueStyle());
+
+	// Used for getting system date formatting
+	setlocale(LC_TIME, "");
+	// We need scanf()/printf() and friends to always work in the C locale,
+	// otherwise configuration/INI file parsing will be erroneous.
+	setlocale(LC_NUMERIC, "C");
 
 	// Init the file manager
 	StelFileMgr::init();
@@ -290,14 +294,10 @@ int main(int argc, char **argv)
 		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
 	}
 
-	StelMainWindow* mainWin = new StelMainWindow(NULL);
-	StelMainGraphicsView* view = new StelMainGraphicsView(NULL);
-	mainWin->setCentralWidget(view);
-	mainWin->init(confSettings);
+	StelMainWindow mainWin;
+	mainWin.init(confSettings);
 	app.exec();
-	view->deinitGL();
-	delete view;
-	delete mainWin;
+	mainWin.deinit();
 
 	delete confSettings;
 	StelLogger::deinit();

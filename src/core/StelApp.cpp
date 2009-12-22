@@ -99,12 +99,6 @@ StelApp::StelApp(QObject* parent)
 	nbUsedCache=0;
 	totalUsedCacheSize=0;
 
-	// Used for getting system date formatting
-	setlocale(LC_TIME, "");
-	// We need scanf()/printf() and friends to always work in the C locale,
-	// otherwise configuration/INI file parsing will be erroneous.
-	setlocale(LC_NUMERIC, "C");
-
 	setObjectName("StelApp");
 
 	skyCultureMgr=NULL;
