@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -43,9 +43,7 @@ public:
 class CornerButtons : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
-#if QT_VERSION>=0x040600
 	Q_INTERFACES(QGraphicsItem);
-#endif
 public:
 	CornerButtons(QGraphicsItem* parent=NULL);
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
@@ -152,9 +150,7 @@ private:
 class LeftStelBar : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
-#if QT_VERSION>=0x040600
 	Q_INTERFACES(QGraphicsItem);
-#endif
 public:
 	LeftStelBar(QGraphicsItem* parent);
 	~LeftStelBar();
@@ -166,7 +162,7 @@ public:
 	void setColor(const QColor& c);
 	//! Activate red mode for the buttons, i.e. will reduce the non red color component of the icon
 	void setRedMode(bool b);
-private slots:	
+private slots:
 	//! Update the help label when a button is hovered
 	void buttonHoverChanged(bool b);
 private:
@@ -178,16 +174,14 @@ private:
 class BottomStelBar : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
-#if QT_VERSION>=0x040600
 	Q_INTERFACES(QGraphicsItem);
-#endif
 public:
 	BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft=QPixmap(), const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(), const QPixmap& pixSingle=QPixmap());
 	virtual ~BottomStelBar();
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 	virtual QRectF boundingRect() const;
 	QRectF boundingRectNoHelpLabel() const;
-			
+
 	//! Add a button in a group in the button bar. Group are displayed in alphabetic order.
 	//! @param b the button to add
 	//! @param groupName the name of the button group to which the button belongs to. If the group doesn't exist yet, a new one is created.
@@ -195,31 +189,31 @@ public:
 	void addButton(StelButton* button, const QString& groupName="defaultGroup", const QString& beforeActionName="");
 	//! Hide the button associated with the action of the passed name
 	StelButton* hideButton(const QString& actionName);
-	
+
 	//! Set the margin at the left and right of a button group in pixels
 	void setGroupMargin(const QString& groupName, int left, int right);
-	
+
 	//! Set the background of a group
-	void setGroupBackground(const QString& groupName, const QPixmap& pixLeft=QPixmap(), 
-							const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(), 
+	void setGroupBackground(const QString& groupName, const QPixmap& pixLeft=QPixmap(),
+							const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(),
 							const QPixmap& pixSingle=QPixmap());
-	
+
 	//! Set the color for all the sub elements
 	void setColor(const QColor& c);
-	
+
 	//! Activate red mode for the buttons, i.e. will reduce the non red color component of the icon
 	void setRedMode(bool b);
-	
+
 	//! Set whether time must be displayed in the bottom bar
 	void setFlagShowTime(bool b) {flagShowTime=b;}
 	//! Set whether location info must be displayed in the bottom bar
 	void setFlagShowLocation(bool b) {flagShowLocation=b;}
 
 
-private slots:	
+private slots:
 	//! Update the help label when a button is hovered
 	void buttonHoverChanged(bool b);
-	
+
 private:
 	void updateText(bool forceUpdatePos=false);
 	void updateButtonsGroups();
@@ -228,10 +222,10 @@ private:
 	QGraphicsSimpleTextItem* datetime;
 	QGraphicsSimpleTextItem* fov;
 	QGraphicsSimpleTextItem* fps;
-	
+
 	struct ButtonGroup
 	{
-		ButtonGroup() : leftMargin(0), rightMargin(0), 
+		ButtonGroup() : leftMargin(0), rightMargin(0),
 						pixBackgroundLeft(NULL), pixBackgroundRight(NULL),
 						pixBackgroundMiddle(NULL), pixBackgroundSingle(NULL) {;}
 		//! Elements of the group
@@ -246,16 +240,16 @@ private:
 		QPixmap* pixBackgroundMiddle;
 		QPixmap* pixBackgroundSingle;
 	};
-	
+
 	QMap<QString, ButtonGroup> buttonGroups;
 	QPixmap pixBackgroundLeft;
 	QPixmap pixBackgroundRight;
 	QPixmap pixBackgroundMiddle;
 	QPixmap pixBackgroundSingle;
-	
+
 	bool flagShowTime;
 	bool flagShowLocation;
-	
+
 	QGraphicsSimpleTextItem* helpLabel;
 };
 

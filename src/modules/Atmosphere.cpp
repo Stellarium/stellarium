@@ -23,13 +23,8 @@
  #include "GLES2/gl2.h"
 #endif
 
-#if QT_VERSION>=0x040600
- #include <QGLShaderProgram>
- #include <QtOpenGL>
-#else
- #include "GLee.h"
- #include "fixx11h.h"
-#endif
+#include <QGLShaderProgram>
+#include <QtOpenGL>
 
 #include "Atmosphere.hpp"
 #include "StelUtils.hpp"
@@ -50,7 +45,6 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 {
 	setFadeDuration(3.f);
 	useShader = StelApp::getInstance().getUseGLShaders();
-#if QT_VERSION>=0x040600
 	if (useShader)
 	{
 		QString filePath;
@@ -102,63 +96,6 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 			qWarning() << "Warnings while linking shader: " << atmoShaderProgram->log();
 		}
 	}
-#else
-	if (!QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) && !QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0))
-	{
-		useShader=false;
-	}
-
-	if (useShader)
-	{
-		qDebug() << "Use vertex shader for atmosphere rendering.";
-		QString filePath;
-		GLuint shaderXyYToRGB = glCreateShader(GL_VERTEX_SHADER);
-		try
-		{
-			filePath = StelFileMgr::findFile("data/shaders/xyYToRGB.glsl");
-		}
-		catch (std::runtime_error& e)
-		{
-			qFatal("Can't find data/shaders/xyYToRGB.glsl shader file to load");
-		}
-
-		QFile fic(filePath);
-		fic.open(QIODevice::ReadOnly);
-		QByteArray qba = fic.readAll();
-		const char* data = qba.constData();
-		fic.close();
-		glShaderSource(shaderXyYToRGB, 1, &data, NULL);
-		glCompileShader(shaderXyYToRGB);
-		char msg[4048];
-		msg[0]='\0';
-		int l;
-		glGetShaderInfoLog(shaderXyYToRGB, 4048, &l, msg);
-		if (msg[0]!='\0')
-			qWarning() << msg;
-		int val;
-		glGetShaderiv(shaderXyYToRGB, GL_COMPILE_STATUS, &val);
-		if (val==GL_FALSE)
-		{
-			useShader = false;
-			qWarning() << "Shader compilation error, fall back to standard rendering.";
-		}
-		else
-		{
-			GLuint fshader = glCreateShader(GL_FRAGMENT_SHADER);
-			const char* fshaderSrc = "varying vec4 resultSkyColor;\n"
-			"void main()\n"
-			"{\n"
-			 "   gl_FragColor = resultSkyColor;\n"
-			 "}";
-			glShaderSource(fshader, 1, &fshaderSrc, NULL);
-			glCompileShader(fshader);
-			atmoShaderProgram = glCreateProgram();
-			glAttachShader(atmoShaderProgram,shaderXyYToRGB);
-			glAttachShader(atmoShaderProgram,fshader);
-			glLinkProgram(atmoShaderProgram);
-		}
-	}
-#endif
 }
 
 Atmosphere::~Atmosphere(void)
@@ -180,12 +117,7 @@ Atmosphere::~Atmosphere(void)
 	}
 	if (useShader)
 	{
-#if QT_VERSION>=0x040600
 		delete atmoShaderProgram;
-#else
-		// Cleanup shader stuff
-		glDeleteProgram(atmoShaderProgram);
-#endif
 	}
 }
 
@@ -398,7 +330,6 @@ void Atmosphere::draw(StelCore* core)
 	const float atm_intensity = fader.getInterstate();
 	if (useShader)
 	{
-#if QT_VERSION>=0x040600
 		atmoShaderProgram->bind();
 		float a, b, c;
 		eye->getShadersParams(a, b, c);
@@ -429,62 +360,7 @@ void Atmosphere::draw(StelCore* core)
 		atmoShaderProgram->enableAttributeArray("skyColor");
 		atmoShaderProgram->setAttributeArray("skyVertex", (const GLfloat*)posGrid, 2, 0);
 		atmoShaderProgram->setAttributeArray("skyColor", (const GLfloat*)colorGrid, 4, 0);
-#else
-		glUseProgram(atmoShaderProgram);
-		float a, b, c;
-		eye->getShadersParams(a, b, c);
-		GLint loc = glGetUniformLocation(atmoShaderProgram, "alphaWaOverAlphaDa");
-		glUniform1f(loc, a);
-		loc = glGetUniformLocation(atmoShaderProgram, "oneOverGamma");
-		glUniform1f(loc, b);
-		loc = glGetUniformLocation(atmoShaderProgram, "term2TimesOneOverMaxdLpOneOverGamma");
-		glUniform1f(loc, c);
-		loc = glGetUniformLocation(atmoShaderProgram, "brightnessScale");
-		glUniform1f(loc, atm_intensity);
 
-		Vec3f sunPos;
-		float term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey;
-		sky.getShadersParams(sunPos, term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey);
-		loc = glGetUniformLocation(atmoShaderProgram, "sunPos");
-		glUniform3f(loc, sunPos[0], sunPos[1], sunPos[2]);
-		loc = glGetUniformLocation(atmoShaderProgram, "term_x");
-		glUniform1f(loc, term_x);
-		loc = glGetUniformLocation(atmoShaderProgram, "Ax");
-		glUniform1f(loc, Ax);
-		loc = glGetUniformLocation(atmoShaderProgram, "Bx");
-		glUniform1f(loc, Bx);
-		loc = glGetUniformLocation(atmoShaderProgram, "Cx");
-		glUniform1f(loc, Cx);
-		loc = glGetUniformLocation(atmoShaderProgram, "Dx");
-		glUniform1f(loc, Dx);
-		loc = glGetUniformLocation(atmoShaderProgram, "Ex");
-		glUniform1f(loc, Ex);
-		loc = glGetUniformLocation(atmoShaderProgram, "term_y");
-		glUniform1f(loc, term_y);
-		loc = glGetUniformLocation(atmoShaderProgram, "Ay");
-		glUniform1f(loc, Ay);
-		loc = glGetUniformLocation(atmoShaderProgram, "By");
-		glUniform1f(loc, By);
-		loc = glGetUniformLocation(atmoShaderProgram, "Cy");
-		glUniform1f(loc, Cy);
-		loc = glGetUniformLocation(atmoShaderProgram, "Dy");
-		glUniform1f(loc, Dy);
-		loc = glGetUniformLocation(atmoShaderProgram, "Ey");
-		glUniform1f(loc, Ey);
-
-		loc = glGetUniformLocation(atmoShaderProgram, "projectionMatrix");
-		glUniformMatrix4fv(loc, 1, false, (float*)sPainter.getProjector()->getProjectionMatrix());
-
-		// Load the vertex array
-		loc = glGetAttribLocation(atmoShaderProgram, "skyVertex");
-		glEnableVertexAttribArray(loc);
-		glVertexAttribPointer(loc, 2, GL_FLOAT, false, 0, posGrid);
-
-		// Load the color components
-		loc = glGetAttribLocation(atmoShaderProgram, "skyColor");
-		glEnableVertexAttribArray(loc);
-		glVertexAttribPointer(loc, 4, GL_FLOAT, false, 0, colorGrid);
-#endif
 		// And draw everything at once
 		GLuint* shift=indices;
 		for (int y=0;y<skyResolutionY;++y)
@@ -492,13 +368,9 @@ void Atmosphere::draw(StelCore* core)
 			glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_INT, shift);
 			shift += (skyResolutionX+1)*2;
 		}
-#if QT_VERSION>=0x040600
 		atmoShaderProgram->disableAttributeArray("skyVertex");
 		atmoShaderProgram->disableAttributeArray("skyColor");
 		atmoShaderProgram->release();
-#else
-		glUseProgram(0);
-#endif
 	}
 	else
 	{

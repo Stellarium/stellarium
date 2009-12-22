@@ -98,11 +98,7 @@ private:
 	bool useShader;
 
 	//! Vertex shader used for xyYToRGB computation
-#if QT_VERSION>=0x040600
 	class QGLShaderProgram* atmoShaderProgram;
-#else
-	GLuint atmoShaderProgram;
-#endif
 };
 
 #endif // _ATMOSTPHERE_HPP_
