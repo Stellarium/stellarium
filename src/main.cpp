@@ -126,6 +126,19 @@ int main(int argc, char **argv)
 	// otherwise configuration/INI file parsing will be erroneous.
 	setlocale(LC_NUMERIC, "C");
 
+	// Handle command line options for alternative Qt graphics system types.
+	// DEFAULT_GRAPHICS_SYSTEM is defined per plateform in the main CMakeLists.txt file.
+	// Avoid overriding if the user already specified the mode on the CLI.
+	bool doSetDefaultGraphicsSystem=true;
+	for (int i=1; i<argc; ++i)
+	{
+		if (QString(argv[i]) == "--graphics-system")
+			doSetDefaultGraphicsSystem=false;
+	}
+	if (doSetDefaultGraphicsSystem)
+		QApplication::setGraphicsSystem(DEFAULT_GRAPHICS_SYSTEM);
+	QApplication app(argc, argv);
+
 	// Init the file manager
 	StelFileMgr::init();
 
@@ -257,20 +270,6 @@ int main(int argc, char **argv)
 
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
-
-	// Handle command line options for alternative Qt graphics system types.
-	// DEFAULT_GRAPHICS_SYSTEM is defined per plateform in the main CMakeLists.txt file.
-	// Avoid overriding if the user already specified the mode on the CLI.
-	bool doSetDefaultGraphicsSystem=true;
-	for (int i=1; i<argc; ++i)
-	{
-		if (QString(argv[i]) == "--graphics-system")
-			doSetDefaultGraphicsSystem=false;
-	}
-	if (doSetDefaultGraphicsSystem)
-		QApplication::setGraphicsSystem(DEFAULT_GRAPHICS_SYSTEM);
-
-	QApplication app(argc, argv);
 
 #ifdef MACOSX
 	StelMacosxDirs::addApplicationPluginDirectory();
