@@ -675,9 +675,15 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	}
 	else
 	{
-		//qPainter->translate(x+xshift, prj->viewportXywh[3]-y-yshift);
-		qPainter->translate(x+xshift, y+yshift);
-		qPainter->scale(1, -1);
+		if (qPainter->paintEngine()->type()==QPaintEngine::OpenGL2)
+		{
+			qPainter->translate(x+xshift, prj->viewportXywh[3]-y-yshift);
+		}
+		else
+		{
+			qPainter->translate(x+xshift, y+yshift);
+			qPainter->scale(1, -1);
+		}
 		qPainter->drawText(0, 0, str);
 	}
 	qPainter->restore();
