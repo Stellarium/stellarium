@@ -87,25 +87,6 @@ void StelMainWindow::init(QSettings* conf)
 	show();
 	// Process the event to make the window visible and create the openGL context.
 	QCoreApplication::processEvents();
-
-	QString s;
-	switch (paintEngine()->type())
-	{
-		case QPaintEngine::X11:
-			s="X11"; break;
-		case QPaintEngine::Raster:
-			s="Raster"; break;
-		case QPaintEngine::OpenGL:
-			s="OpenGL"; break;
-		case QPaintEngine::OpenGL2:
-			 s="OpenGL2"; break;
-		case QPaintEngine::CoreGraphics:
-			s="CoreGraphics"; break;
-		default:
-			s="unkown";
-	}
-	qDebug() << "Using Qt paint engine: " << s;
-
 	mainGraphicsView->init(conf);
 }
 
