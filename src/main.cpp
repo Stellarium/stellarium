@@ -132,11 +132,16 @@ int main(int argc, char **argv)
 	bool doSetDefaultGraphicsSystem=true;
 	for (int i=1; i<argc; ++i)
 	{
-		if (QString(argv[i]) == "--graphics-system")
+		if (QString(argv[i]).startsWith("--graphics-system"))
 			doSetDefaultGraphicsSystem=false;
 	}
+	// If the user didn't set the graphics-system on the command line, use the one provided at compile time.
 	if (doSetDefaultGraphicsSystem)
+	{
+		qDebug() << "Use compilation-provided default graphics system: " << DEFAULT_GRAPHICS_SYSTEM;
 		QApplication::setGraphicsSystem(DEFAULT_GRAPHICS_SYSTEM);
+	}
+
 	QApplication app(argc, argv);
 
 	// Init the file manager
