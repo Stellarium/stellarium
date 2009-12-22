@@ -19,8 +19,12 @@
 
 #include "StelLogger.hpp"
 
+#include <config.h>
 #include <QDateTime>
 #include <QProcess>
+#ifdef WIN32
+ #include <windows.h>
+#endif
 
 // Init statics variables.
 QFile StelLogger::logFile;
