@@ -21,10 +21,8 @@
  #include "GLES2/gl2.h"
 #endif
 
-#if QT_VERSION>=0x040600
- #include <QGLShaderProgram>
- #include <QtOpenGL>
-#endif
+#include <QGLShaderProgram>
+#include <QtOpenGL>
 
 #include "StelSkyDrawer.hpp"
 #include "StelProjector.hpp"
@@ -135,12 +133,10 @@ StelSkyDrawer::~StelSkyDrawer()
 		delete[] textureGrid;
 	textureGrid = NULL;
 
-#if QT_VERSION>=0x040600
 	if (useShader)
 	{
 		delete starsShaderProgram;
 	}
-#endif
 }
 
 // Init parameters from config file
@@ -155,7 +151,6 @@ void StelSkyDrawer::init()
 	texSunHalo = StelApp::getInstance().getTextureManager().createTexture("halo.png");
 
 	useShader = StelApp::getInstance().getUseGLShaders() && (QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0));
-#if QT_VERSION>=0x040600
 	if (useShader)
 	{
 		qDebug() << "Use vertex shader for stars rendering";
@@ -206,9 +201,6 @@ void StelSkyDrawer::init()
 		}
 		maxPointSources*=6;
 	}
-#else
-	useShader = false;
-#endif
 
 	update(0);
 }
@@ -406,7 +398,6 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_BLEND);
 
-#if QT_VERSION>=0x040600
 	if (useShader)
 	{
 		Q_ASSERT(starsShaderProgram);
@@ -431,7 +422,6 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 		glDisable(GL_VERTEX_PROGRAM_POINT_SIZE);
 	}
 	else
-#endif
 	{
 #ifndef USE_OPENGL_ES2
 		glEnableClientState(GL_VERTEX_ARRAY);

@@ -99,13 +99,10 @@ bool StelAppGraphicsWidget::paintPartial()
 void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	// Don't even try to draw if we don't have a core yet (fix a bug during splash screen)
-	if (!stelApp->getCore()) return;
+	if (!stelApp->getCore())
+		return;
 
-	if (painter->paintEngine()->type() != QPaintEngine::OpenGL
-#if QT_VERSION>=0x040600
-		   && painter->paintEngine()->type() != QPaintEngine::OpenGL2
-#endif
-	   )
+	if (painter->paintEngine()->type() != QPaintEngine::OpenGL && painter->paintEngine()->type() != QPaintEngine::OpenGL2)
 	{
 		qWarning("StelAppGraphicsWidget: paint needs a QGLWidget to be set as viewport on the graphics view");
 		return;

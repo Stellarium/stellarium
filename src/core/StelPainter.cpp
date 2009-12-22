@@ -34,10 +34,6 @@
 #include <QVarLengthArray>
 #include <QPaintEngine>
 
-#if QT_VERSION<0x040600
-#include <QGLContext>
-#endif
-
 #ifndef GL_MULTISAMPLE
 #define GL_MULTISAMPLE  0x809D
 #endif
@@ -81,20 +77,19 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 
 	Q_ASSERT(qPainter);
 
-#if QT_VERSION>=0x040600
+
 	qPainter->beginNativePainting();
-#else
+
 	// Ensure that the current GL content is the one of our main GL window
-	QGLWidget* w = dynamic_cast<QGLWidget*>(qPainter->device());
-	if (w!=0)
-	{
-		Q_ASSERT(w->isValid());
-		w->makeCurrent();
-	}
-	qPainter->save();
-	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-#endif
+//	QGLWidget* w = dynamic_cast<QGLWidget*>(qPainter->device());
+//	if (w!=0)
+//	{
+//		Q_ASSERT(w->isValid());
+//		w->makeCurrent();
+//	}
+//	qPainter->save();
+//	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
+//	glPushAttrib(GL_ALL_ATTRIB_BITS);
 
 	// Init GL viewport to current projector values
 	glViewport(prj->viewportXywh[0], prj->viewportXywh[1], prj->viewportXywh[2], prj->viewportXywh[3]);
@@ -148,13 +143,11 @@ StelPainter::~StelPainter()
 	}
 #endif
 
-#if QT_VERSION>=0x040600
+
 	qPainter->endNativePainting();
-#else
-	glPopAttrib();
-	glPopClientAttrib();
-	qPainter->restore();
-#endif
+//	glPopAttrib();
+//	glPopClientAttrib();
+//	qPainter->restore();
 
 #ifndef NDEBUG
 	// We are done with this StelPainter
@@ -669,9 +662,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-#if QT_VERSION>=0x040600
 	qPainter->endNativePainting();
-#endif
 
 	qPainter->save();
 	qPainter->resetTransform();
@@ -686,19 +677,14 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	}
 	else
 	{
-#if QT_VERSION>=0x040600
 		qPainter->translate(x+xshift, prj->viewportXywh[3]-y-yshift);
-#else
-		qPainter->translate(x+xshift, y+yshift);
-		qPainter->scale(1, -1);
-#endif
+//		qPainter->translate(x+xshift, y+yshift);
+//		qPainter->scale(1, -1);
 		qPainter->drawText(0, 0, str);
 	}
 	qPainter->restore();
 
-#if QT_VERSION>=0x040600
 	qPainter->beginNativePainting();
-#endif
 
 #ifndef STELPAINTER_GL2
 	glPopClientAttrib();

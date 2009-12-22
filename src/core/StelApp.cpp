@@ -178,9 +178,7 @@ void StelApp::init(QSettings* conf)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
 
 	useGLShaders = confSettings->value("main/use_glshaders", true).toBool();
-#if QT_VERSION>=0x040600
 	useGLShaders = useGLShaders && QGLShaderProgram::hasOpenGLShaderPrograms();
-#endif
 
 	// Initialize AFTER creation of openGL context
 	textureMgr = new StelTextureMgr();
