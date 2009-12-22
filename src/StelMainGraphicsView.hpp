@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -37,40 +37,40 @@ Q_OBJECT
 public:
 	StelMainGraphicsView(QWidget* parent);
 	virtual ~StelMainGraphicsView();
-	
+
 	//! Start the main initialization of Stellarium
 	void init(class QSettings* conf);
-	
+
 	//! Get the StelMainGraphicsView singleton instance.
 	static StelMainGraphicsView& getInstance() {Q_ASSERT(singleton); return *singleton;}
-	
+
 	//! Get the main QGLWidget
 	//! @deprecated don't use that.
 	QGLWidget* getOpenGLWin() {return glWidget;}
-	
+
 	//! Swap openGL buffer.
 	//! @deprecated don't use that.
 	void swapBuffer();
 
 	void makeGLContextCurrent();
-	
+
 	//! Delete openGL textures (to call before the GLContext disappears)
 	void deinitGL();
-	
+
 	//! Return the QGraphicsWidget encapsulating the Stellarium main sky view.
 	//! Use its layout if you want to add widget on the top of the main sky view.
 	class StelAppGraphicsWidget* getStelAppGraphicsWidget() {return mainSkyItem;}
-	
+
 	//! Return the top level QGraphicsWidget which contains the layout containing the Stellarium main sky view.
 	//! Use its layout if you want to add widget on the side of the main sky view.
 	QGraphicsWidget* getTopLevelGraphicsWidget() {return backItem;}
-	
+
 	//! Define the type of viewport distorter to use
 	//! @param type can be only 'fisheye_to_spheric_mirror' or anything else for no distorter
 	void setViewPortDistorterType(const QString& type);
 	//! Get the type of viewport distorter currently used
 	QString getViewPortDistorterType() const;
-	
+
 	//! Get the script API proxy (for signal handling)
 	StelMainScriptAPIProxy* getMainScriptAPIProxy() {return scriptAPIProxy;}
 	//! Get the script manager
@@ -81,18 +81,18 @@ public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Specific methods
 	//! Save a screen shot.
-	//! The format of the file, and hence the filename extension 
+	//! The format of the file, and hence the filename extension
 	//! depends on the architecture and build type.
 	//! @arg filePrefix changes the beginning of the file name
 	//! @arg shotDir changes the directory where the screenshot is saved
 	//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
 	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& saveDir="");
-	
+
 	//! Get whether colors are inverted when saving screenshot
 	bool getFlagInvertScreenShotColors() const {return flagInvertScreenShotColors;}
 	//! Set whether colors should be inverted when saving screenshot
 	void setFlagInvertScreenShotColors(bool b) {flagInvertScreenShotColors=b;}
-			
+
 	//! Get the state of the mouse cursor timeout flag
 	bool getFlagCursorTimeout() {return flagCursorTimeout;}
 	//! Get the mouse cursor timeout in seconds
@@ -123,12 +123,12 @@ protected:
 	virtual void keyPressEvent(QKeyEvent* event);
 	virtual void keyReleaseEvent(QKeyEvent* event);
 	virtual void wheelEvent(QWheelEvent* wheelEvent);
-	
+
 	//! Update the mouse pointer state and schedule next redraw.
 	//! This method is called automatically by Qt.
 	virtual void drawBackground(QPainter* painter, const QRectF &rect);
 	virtual void drawForeground(QPainter* painter, const QRectF &rect);
-	
+
 signals:
 	//! emitted when saveScreenShot is requested with saveScreenShot().
 	//! doScreenshot() does the actual work (it has to do it in the main
@@ -138,21 +138,21 @@ signals:
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
-	
+
 	void minFpsChanged();
-	
+
 private:
 	//! Start the display loop
 	void startMainLoop();
-	
+
 	//! The StelMainGraphicsView singleton
 	static StelMainGraphicsView* singleton;
 	QGraphicsWidget* backItem;
 	class StelAppGraphicsWidget* mainSkyItem;
-	
+
 	//! The openGL window
 	QGLWidget* glWidget;
-	
+
 	StelGuiBase* gui;
 
 	// The script API proxy object (for bridging threads)
@@ -162,7 +162,7 @@ private:
 	StelScriptMgr* scriptMgr;
 
 	bool wasDeinit;
-	
+
 	bool flagInvertScreenShotColors;
 
 	QString screenShotPrefix;
@@ -171,19 +171,20 @@ private:
 	// Number of second before the mouse cursor disappears
 	float cursorTimeout;
 	bool flagCursorTimeout;
-	
-	//! Notify that an event was handled by the program and therefore the 
+
+	//! Notify that an event was handled by the program and therefore the
 	//! FPS should be maximized for a couple of seconds.
 	void thereWasAnEvent();
-	
+
 	//! Apply viewport distortions.
 	void distortPos(QPoint* pos);
-	
+
 	double lastEventTimeSec;
-	
+
 	// The distorter currently activated
 	class StelViewportDistorter *distorter;
-	
+
+	QTime* qtime;
 	QTimer* minFpsTimer;
 	//! The minimum desired frame rate in frame per second.
 	float minfps;

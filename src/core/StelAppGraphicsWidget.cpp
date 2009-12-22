@@ -52,6 +52,7 @@ StelAppGraphicsWidget::~StelAppGraphicsWidget()
 
 void StelAppGraphicsWidget::init(QSettings* conf)
 {
+
 	useBuffers = conf->value("video/use_buffers", false).toBool();
 	if (useBuffers && !QGLFramebufferObject::hasOpenGLFramebufferObjects())
 	{
@@ -99,7 +100,7 @@ bool StelAppGraphicsWidget::paintPartial()
 void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	// Don't even try to draw if we don't have a core yet (fix a bug during splash screen)
-	if (!stelApp->getCore())
+	if (!stelApp || !stelApp->getCore())
 		return;
 
 	if (painter->paintEngine()->type() != QPaintEngine::OpenGL && painter->paintEngine()->type() != QPaintEngine::OpenGL2)

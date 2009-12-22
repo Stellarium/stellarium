@@ -19,15 +19,6 @@
 
 
 #include "StelMainWindow.hpp"
-
-#include <QSettings>
-#include <QResizeEvent>
-#include <QIcon>
-#include <QDebug>
-#include <QFontDatabase>
-#include <QCoreApplication>
-#include <QApplication>
-
 #include <stdexcept>
 #include "StelApp.hpp"
 #include "StelMainGraphicsView.hpp"
@@ -35,14 +26,44 @@
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
 
+#include <QSettings>
+#include <QResizeEvent>
+#include <QIcon>
+#include <QDebug>
+#include <QCoreApplication>
+#include <QApplication>
+#include <QHBoxLayout>
+#include <QFontDatabase>
+#include <QGLWidget>
+
 // Initialize static variables
 StelMainWindow* StelMainWindow::singleton = NULL;
 
-StelMainWindow::StelMainWindow(QWidget* parent) : QMainWindow(parent)
+StelMainWindow::StelMainWindow() : QMainWindow(NULL)
 {
 	// Can't create 2 StelMainWindow instances
 	Q_ASSERT(!singleton);
 	singleton = this;
+
+	setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
+	initTitleI18n();
+
+	// Add the DejaVu font that we use everywhere in the program
+	try
+	{
+		const QString& fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
+		if (!fName.isEmpty())
+			QFontDatabase::addApplicationFont(fName);
+	}
+	catch (std::runtime_error& e)
+	{
+		// Removed this warning practically allowing to package the program without the font file.
+		// This is useful for distribution having already a package for DejaVu font.
+		// qWarning() << "ERROR while loading font DejaVuSans : " << e.what();
+	}
+
+	mainGraphicsView = new StelMainGraphicsView(this);
+	setCentralWidget(mainGraphicsView);
 }
 
 // Update the translated title
@@ -54,67 +75,54 @@ void StelMainWindow::initTitleI18n()
 
 void StelMainWindow::init(QSettings* conf)
 {
-	setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
-	initTitleI18n();
-
-	QString fName;
-	try
-	{
-		fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
-	}
-	catch (std::runtime_error& e)
-	{
-		// Removed this warning practically allowing to package the program without the font file.
-		// This is useful for distribution having already a package for DejaVu font.
-		// qWarning() << "ERROR while loading font DejaVuSans : " << e.what();
-	}
-	if (!fName.isEmpty())
-		QFontDatabase::addApplicationFont(fName);
-
-	// Init the main window. It must be done here because it is not the responsability of StelApp to do that
-	QCoreApplication::processEvents();
-
 	resize(conf->value("video/screen_w", 800).toInt(), conf->value("video/screen_h", 600).toInt());
-
 	if (conf->value("video/fullscreen", true).toBool())
 	{
-		showFullScreen();
+		setFullScreen(true);
 	}
 	else
 	{
-		show();
+		setFullScreen(false);
 	}
+	show();
+	// Process the event to make the window visible and create the openGL context.
+	QCoreApplication::processEvents();
+	mainGraphicsView->init(conf);
+}
 
-	StelMainGraphicsView::getInstance().init(conf);
+void StelMainWindow::deinit()
+{
+	StelMainGraphicsView::getInstance().deinitGL();
 }
 
 // Alternate fullscreen mode/windowed mode if possible
 void StelMainWindow::toggleFullScreen()
 {
 	// Toggle full screen
-	if (!isFullScreen())
+	if (getFullScreen())
 	{
-		showFullScreen();
+		setFullScreen(false);
 	}
 	else
 	{
-		showNormal();
+		setFullScreen(true);
 	}
 }
 
 // Get whether fullscreen is activated or not
 bool StelMainWindow::getFullScreen() const
 {
-	return isFullScreen();
+	return windowState().testFlag(Qt::WindowFullScreen);
 }
 
-// Set whether fullscreen is activated or not
+// Set whether fullscreen is activated or not.
+// Don't use the showFullScreen() and showNormal() methods since they have an unexpected behaviour.
 void StelMainWindow::setFullScreen(bool b)
 {
 	if (b)
-		showFullScreen();
+		setWindowState(windowState() | Qt::WindowFullScreen);
 	else
-		showNormal();
+		setWindowState(windowState() & ~Qt::WindowFullScreen);
 }
 
 void StelMainWindow::closeEvent(QCloseEvent* event)
