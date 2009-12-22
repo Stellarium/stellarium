@@ -112,7 +112,7 @@ void copyDefaultConfigFile(const QString& newPath)
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
-	//QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
+	QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");

@@ -646,13 +646,10 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glMatrixMode(GL_TEXTURE);
 	glPushMatrix();
-	glLoadIdentity();
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
-	glLoadIdentity();
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
-	glLoadIdentity();
 	glGetFloatv(GL_CURRENT_COLOR, color);
 #else
 	color[0]=currentColor[0];
@@ -668,7 +665,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	qPainter->save();
 	qPainter->resetTransform();
 	qPainter->resetMatrix();
-	qPainter->setRenderHints(QPainter::TextAntialiasing | QPainter::HighQualityAntialiasing);
+	qPainter->setRenderHints(QPainter::TextAntialiasing | QPainter::HighQualityAntialiasing);	//
 	const QColor qCol=QColor::fromRgbF(qMax(qMin(1.f,color[0]),0.f), qMax(qMin(1.f,color[1]),0.f), qMax(qMin(1.f,color[2]),0.f), qMax(qMin(1.f,color[3]),0.f));
 	qPainter->setPen(qCol);
 
@@ -678,9 +675,9 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	}
 	else
 	{
-		qPainter->translate(x+xshift, prj->viewportXywh[3]-y-yshift);
-//		qPainter->translate(x+xshift, y+yshift);
-//		qPainter->scale(1, -1);
+		//qPainter->translate(x+xshift, prj->viewportXywh[3]-y-yshift);
+		qPainter->translate(x+xshift, y+yshift);
+		qPainter->scale(1, -1);
 		qPainter->drawText(0, 0, str);
 	}
 	qPainter->restore();
