@@ -186,11 +186,7 @@ void StelMainGraphicsView::thereWasAnEvent()
 
 void StelMainGraphicsView::drawBackground(QPainter* painter, const QRectF &)
 {
-	if (painter->paintEngine()->type() != QPaintEngine::OpenGL
-#if QT_VERSION>=0x040600
-		   && painter->paintEngine()->type() != QPaintEngine::OpenGL2
-#endif
-	   )
+	if (painter->paintEngine()->type() != QPaintEngine::OpenGL && painter->paintEngine()->type() != QPaintEngine::OpenGL2)
 	{
 		qWarning("StelMainGraphicsView: drawBackground needs a QGLWidget to be set as viewport on the graphics view");
 		return;
