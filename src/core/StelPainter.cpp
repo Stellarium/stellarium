@@ -646,10 +646,13 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glMatrixMode(GL_TEXTURE);
 	glPushMatrix();
+	glLoadIdentity();
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
+	glLoadIdentity();
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
+	glLoadIdentity();
 	glGetFloatv(GL_CURRENT_COLOR, color);
 #else
 	color[0]=currentColor[0];
@@ -685,14 +688,14 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	qPainter->beginNativePainting();
 
 #ifndef STELPAINTER_GL2
-	glPopClientAttrib();
-	glPopAttrib();
 	glMatrixMode(GL_TEXTURE);
 	glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
+	glPopClientAttrib();
+	glPopAttrib();
 #endif
 }
 
