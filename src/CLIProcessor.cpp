@@ -134,10 +134,6 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 		exit(0);
 	}
 
-	// This option is handled by main.cpp, but it's nice to have some debugging output in the log, which is
-	// only available after the processing in main.cpp...
-	qDebug() << "Using graphics system: " << argsGetOptionWithArg(argList, "", "--graphics-system", DEFAULT_GRAPHICS_SYSTEM).toString();
-
 	// Will be -1 if option is not found, in which case we don't change anything.
 	if (fullScreen==1)
 		confSettings->setValue("video/fullscreen", true);
