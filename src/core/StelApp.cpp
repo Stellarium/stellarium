@@ -71,10 +71,6 @@
 #include <QMessageBox>
 #include <QNetworkDiskCache>
 
-#ifdef WIN32
-#include <windows.h>
-#endif
-
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
 QTime* StelApp::qtime = NULL;
