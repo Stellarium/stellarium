@@ -40,7 +40,7 @@ public:
 	virtual void forceRefreshGui() {;}	
 	virtual void setVisible(bool b) {visible=b;}
 	virtual bool getVisible() const {return visible;}
-	
+	virtual bool isCurrentlyUsed() const {return false;}
 private:
 	StelObject::InfoStringGroup dummyInfoTextFilter;
 	bool visible;
