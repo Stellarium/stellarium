@@ -77,8 +77,10 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 
 	Q_ASSERT(qPainter);
 
-
+//	qPainter->save();
 	qPainter->beginNativePainting();
+//	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
+//	glPushAttrib(GL_ALL_ATTRIB_BITS);
 
 	// Ensure that the current GL content is the one of our main GL window
 //	QGLWidget* w = dynamic_cast<QGLWidget*>(qPainter->device());
@@ -87,9 +89,6 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 //		Q_ASSERT(w->isValid());
 //		w->makeCurrent();
 //	}
-//	qPainter->save();
-//	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
-//	glPushAttrib(GL_ALL_ATTRIB_BITS);
 
 	// Init GL viewport to current projector values
 	glViewport(prj->viewportXywh[0], prj->viewportXywh[1], prj->viewportXywh[2], prj->viewportXywh[3]);
@@ -143,10 +142,9 @@ StelPainter::~StelPainter()
 	}
 #endif
 
-
-	qPainter->endNativePainting();
 //	glPopAttrib();
 //	glPopClientAttrib();
+	qPainter->endNativePainting();
 //	qPainter->restore();
 
 #ifndef NDEBUG
