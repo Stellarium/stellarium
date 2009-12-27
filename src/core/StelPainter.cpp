@@ -221,7 +221,7 @@ void StelPainter::initSystemGLInfo()
 		"attribute highp vec3 vertex;\n"
 		"attribute highp vec2 texCoord;\n"
 		"uniform mediump mat4 projectionMatrix;\n"
-		"varying highp vec2 texc;\n"
+		"varying mediump vec2 texc;\n"
 		"void main(void)\n"
 		"{\n"
 		"    gl_Position = projectionMatrix * vec4(vertex, 1.);\n"
@@ -231,11 +231,11 @@ void StelPainter::initSystemGLInfo()
 
 	QGLShader *fshader2 = new QGLShader(QGLShader::Fragment);
 	const char *fsrc2 =
-		"varying highp vec2 texc;\n"
+		"varying mediump vec2 texc;\n"
 		"uniform sampler2D tex;\n"
 		"void main(void)\n"
 		"{\n"
-		"    highp vec3 color = texture2D(tex, texc.st).rgb;\n"
+		"    mediump vec3 color = texture2D(tex, texc.st).rgb;\n"
 		"    gl_FragColor = vec4(color, 1.0);\n"
 		"}\n";
 	fshader2->compileSourceCode(fsrc2);
@@ -247,7 +247,7 @@ void StelPainter::initSystemGLInfo()
 
 	QGLShader *vshader3 = new QGLShader(QGLShader::Vertex);
 	const char *vsrc3 =
-		"attribute highp vec3 vertex;\n"
+		"attribute mediump vec3 vertex;\n"
 		"uniform mediump vec4 color;\n"
 		"uniform mediump mat4 projectionMatrix;\n"
 		"varying mediump vec4 outColor;\n"
@@ -1796,7 +1796,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int index, bool doP
 	else if (texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
 		pr = texturesShaderProgram;
-	}
+	} else
 	{
 		return;
 	}

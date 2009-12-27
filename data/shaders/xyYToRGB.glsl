@@ -1,29 +1,29 @@
 
-const float pi = 3.1415926535897931;
-const float ln10 = 2.3025850929940459;
+const mediump float pi = 3.1415926535897931;
+const mediump float ln10 = 2.3025850929940459;
 
 // Variable for the xyYTo RGB conversion
-uniform float alphaWaOverAlphaDa;
-uniform float oneOverGamma;
-uniform float term2TimesOneOverMaxdLpOneOverGamma;
-uniform float brightnessScale;
+uniform mediump float alphaWaOverAlphaDa;
+uniform mediump float oneOverGamma;
+uniform mediump float term2TimesOneOverMaxdLpOneOverGamma;
+uniform mediump float brightnessScale;
 
 // Variables for the color computation
-uniform vec3 sunPos;
-uniform float term_x, Ax, Bx, Cx, Dx, Ex;
-uniform float term_y, Ay, By, Cy, Dy, Ey;
+uniform mediump vec3 sunPos;
+uniform mediump float term_x, Ax, Bx, Cx, Dx, Ex;
+uniform mediump float term_y, Ay, By, Cy, Dy, Ey;
 
 // The current projection matrix
-uniform mat4 projectionMatrix;
+uniform mediump mat4 projectionMatrix;
 
 // Contains the 2d position of the point on the screen (before multiplication by the projection matrix)
-attribute vec2 skyVertex;
+attribute mediump vec2 skyVertex;
 
 // Contains the r,g,b,Y (luminosity) components.
-attribute vec4 skyColor;
+attribute highp vec4 skyColor;
 
 // The output variable passed to the fragment shader
-varying vec4 resultSkyColor;
+varying mediump vec4 resultSkyColor;
 
 void main()
 {
@@ -34,15 +34,15 @@ void main()
 	// First compute the xy color component
 	// color contains the unprojected vertex position in r,g,b
 	// + the Y (luminance) component of the color in the alpha channel
-	if (color[3]>0.01)
+	if (color[3]>0.01) 
 	{
-		float cosDistSun_q = sunPos[0]*color[0] + sunPos[1]*color[1] + sunPos[2]*color[2];
-		float distSun = acos(cosDistSun_q);
-		cosDistSun_q*=cosDistSun_q;
+		float cosDistSunq = sunPos[0]*color[0] + sunPos[1]*color[1] + sunPos[2]*color[2];
+		float distSun=acos(cosDistSunq);
 		float oneOverCosZenithAngle = (color[2]==0.) ? 1e30 : 1. / color[2];
 
-		color[0] = term_x * (1. + Ax * exp(Bx*oneOverCosZenithAngle))* (1. + Cx * exp(Dx*distSun) + Ex * cosDistSun_q);
-		color[1] = term_y * (1. + Ay * exp(By*oneOverCosZenithAngle))* (1. + Cy * exp(Dy*distSun) + Ey * cosDistSun_q);
+		cosDistSunq*=cosDistSunq;
+		color[0] = term_x * (1. + Ax * exp(Bx*oneOverCosZenithAngle))* (1. + Cx * exp(Dx*distSun) + Ex * cosDistSunq);
+		color[1] = term_y * (1. + Ay * exp(By*oneOverCosZenithAngle))* (1. + Cy * exp(Dy*distSun) + Ey * cosDistSunq);
 		if (color[0] < 0. || color[1] < 0.)
 		{
 			color[0] = 0.25;
