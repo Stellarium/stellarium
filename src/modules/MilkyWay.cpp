@@ -104,7 +104,7 @@ void MilkyWay::draw(StelCore* core)
 	StelPainter sPainter(prj);
 	sPainter.setColor(c[0],c[1],c[2]);
 	glEnable(GL_CULL_FACE);
-	glEnable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(true);
 	glDisable(GL_BLEND);
 	tex->bind();
 	sPainter.sSphere(1.,1.0,20,20,1);

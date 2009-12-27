@@ -466,7 +466,7 @@ void ConstellationMgr::draw(StelCore* core)
 void ConstellationMgr::drawArt(StelPainter& sPainter) const
 {
 	glBlendFunc(GL_ONE, GL_ONE);
-	glEnable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(true);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 
@@ -483,7 +483,7 @@ void ConstellationMgr::drawArt(StelPainter& sPainter) const
 // Draw constellations lines
 void ConstellationMgr::drawLines(StelPainter& sPainter, const StelNavigator* nav) const
 {
-	glDisable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(false);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	const SphericalCap viewportHalfspace = sPainter.getProjector()->getBoundingSphericalCap();
@@ -498,7 +498,7 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelNavigator* nav
 void ConstellationMgr::drawNames(StelPainter& sPainter) const
 {
 	glEnable(GL_BLEND);
-	glEnable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(true);
 
 	glBlendFunc(GL_ONE, GL_ONE);
 	// if (draw_mode == DM_NORMAL) glBlendFunc(GL_ONE, GL_ONE);
@@ -944,7 +944,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 
 void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 {
-	glDisable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(false);
 	glDisable(GL_BLEND);
 #ifndef USE_OPENGL_ES2
 	glLineStipple(2, 0x3333);

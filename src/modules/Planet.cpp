@@ -733,7 +733,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 
 void Planet::drawSphere(StelPainter* painter, float screenSz)
 {
-	glEnable(GL_TEXTURE_2D);
+	painter->enableTexture2d(true);
 	glDisable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 
@@ -792,7 +792,7 @@ void Planet::drawEarthShadow(StelCore* core)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEcliptic);
 	StelPainter sPainter(prj);
 
-	glEnable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(true);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	sPainter.setColor(1,1,1);
@@ -869,7 +869,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 
 	// Draw the 2D small circle
 	glEnable(GL_BLEND);
-	glEnable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(true);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	Planet::hintCircleTex->bind();
 	sPainter.drawSprite2dMode(screenPos[0], screenPos[1], 11);
@@ -897,7 +897,7 @@ void Ring::draw(StelPainter* sPainter,const Mat4d& mat,double screenSz)
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	sPainter->setColor(1.f, 1.f, 1.f);
-	glEnable(GL_TEXTURE_2D);
+	sPainter->enableTexture2d(true);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 
