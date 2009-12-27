@@ -143,7 +143,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 
 		texPointer->bind();
 
-		glEnable(GL_TEXTURE_2D);
+		sPainter.enableTexture2d(true);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		

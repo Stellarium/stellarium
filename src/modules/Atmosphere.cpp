@@ -324,7 +324,7 @@ void Atmosphere::draw(StelCore* core)
 
 	StelPainter sPainter(core->getProjection2d());
 	glBlendFunc(GL_ONE, GL_ONE);
-	glDisable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(false);
 	glEnable(GL_BLEND);
 
 	const float atm_intensity = fader.getInterstate();

@@ -141,6 +141,9 @@ bool StelTexture::bind()
 	{
 		// The texture is already fully loaded, just bind and return true;
 		StelApp::makeMainGLContextCurrent();
+#ifdef USE_OPENGL_ES2
+		glActiveTexture(GL_TEXTURE0);
+#endif
 		glBindTexture(GL_TEXTURE_2D, id);
 		return true;
 	}

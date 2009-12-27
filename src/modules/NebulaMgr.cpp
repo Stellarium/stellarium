@@ -142,7 +142,7 @@ void NebulaMgr::draw(StelCore* core)
 
 	Nebula::hintsBrightness = hintsFader.getInterstate()*flagShow.getInterstate();
 
-	glEnable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(true);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
 
@@ -177,7 +177,7 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 		sPainter.setColor(0.4f,0.5f,0.8f);
 		texPointer->bind();
 
-		glEnable(GL_TEXTURE_2D);
+		sPainter.enableTexture2d(true);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 

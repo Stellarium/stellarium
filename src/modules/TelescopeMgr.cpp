@@ -67,7 +67,7 @@ void TelescopeMgr::draw(StelCore* core)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 	sPainter.setFont(telescope_font);
-	glEnable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(true);
 	glEnable(GL_BLEND);
 	telescopeTexture->bind();
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
@@ -81,12 +81,12 @@ void TelescopeMgr::draw(StelCore* core)
 				if (telescopeFader.getInterstate() >= 0)
 				{
 					sPainter.setColor(circleColor[0],circleColor[1],circleColor[2], telescopeFader.getInterstate());
-					glDisable(GL_TEXTURE_2D);
+					sPainter.enableTexture2d(false);
 					foreach (double occul, tel->getOculars())
 					{
 						sPainter.drawCircle(XY[0],XY[1],0.5*prj->getPixelPerRadAtCenter()*(M_PI/180)*(occul));
 					}
-					glEnable(GL_TEXTURE_2D);
+					sPainter.enableTexture2d(true);
 					sPainter.drawSprite2dMode(XY[0],XY[1],15.f);
 				}
 				if (nameFader.getInterstate() >= 0)
@@ -261,7 +261,7 @@ void TelescopeMgr::drawPointer(const StelProjectorP& prj, const StelNavigator * 
 		const Vec3d& c(obj->getInfoColor());
 		sPainter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
-		glEnable(GL_TEXTURE_2D);
+		sPainter.enableTexture2d(true);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 25., StelApp::getInstance().getTotalRunTime()*40.);

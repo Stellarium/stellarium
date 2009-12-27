@@ -376,12 +376,12 @@ void StelSkyDrawer::preDrawPointSource(StelPainter* p)
 
 	if (getFlagPointStar())
 	{
-		glDisable(GL_TEXTURE_2D);
+		p->enableTexture2d(false);
 		p->setPointSize(0.1);
 	}
 	else
 	{
-		glEnable(GL_TEXTURE_2D);
+		p->enableTexture2d(true);
 	}
 }
 
@@ -394,7 +394,7 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 		return;
 
 	texHalo->bind();
-	glEnable(GL_TEXTURE_2D);
+	sPainter->enableTexture2d(true);
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_BLEND);
 
@@ -471,7 +471,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 			cmag = 1.f;
 
 		texBigHalo->bind();
-		glEnable(GL_TEXTURE_2D);
+		sPainter->enableTexture2d(true);
 		glBlendFunc(GL_ONE, GL_ONE);
 		glEnable(GL_BLEND);
 		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
@@ -543,7 +543,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, dou
 		texSunHalo->bind();
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_ONE, GL_ONE);
-		glEnable(GL_TEXTURE_2D);
+		painter->enableTexture2d(true);
 		float rmag = 150.f*(mag+15.f)/-11.f;
 		float cmag = 1.f;
 		if (rmag<pixRadius*3.f+100.)

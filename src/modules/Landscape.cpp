@@ -286,7 +286,7 @@ void LandscapeOldStyle::drawFog(StelCore* core) const
 	sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
 	          fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter, 
 			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter);
-	glEnable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(true);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 	fogTex->bind();
@@ -305,7 +305,7 @@ void LandscapeOldStyle::drawDecor(StelCore* core) const
 	
 	if (!landFader.getInterstate()) return;
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(true);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
@@ -375,7 +375,7 @@ void LandscapeOldStyle::drawGround(StelCore* core) const
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_CULL_FACE);
-	glEnable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(true);
 	glEnable(GL_BLEND);
 	groundTex->bind();
 	  // make slices_per_side=(3<<K) so that the innermost polygon of the
@@ -451,7 +451,7 @@ void LandscapeFisheye::draw(StelCore* core)
 	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 
 	glEnable(GL_CULL_FACE);
-	glEnable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(true);
 	glEnable(GL_BLEND);
 	mapTex->bind();
 	sPainter.sSphereMap(radius,40,20,texFov,1);
@@ -516,7 +516,7 @@ void LandscapeSpherical::draw(StelCore* core)
 	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 
 	glEnable(GL_CULL_FACE);
-	glEnable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(true);
 	glEnable(GL_BLEND);
 	mapTex->bind();
 

@@ -88,7 +88,7 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float opacity
 	updatePercent(result.size(), numToBeLoaded);
 
 	// Draw in the good order
-	glEnable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(true);
 	glBlendFunc(GL_ONE, GL_ONE);
 	QMap<double, StelSkyImageTile*>::Iterator i = result.end();
 	while (i!=result.begin())
@@ -265,7 +265,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 	}
 
 	sPainter.setColor(color[0], color[1], color[2], color[3]);
-	glEnable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(true);
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
 	{
 		sPainter.drawSphericalRegion(poly.data(), StelPainter::SphericalPolygonDrawModeTextureFill);
@@ -283,9 +283,9 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 		Vec3d bary = poly->getPointInside();
 		sPainter.getProjector()->project(bary,win);
 		sPainter.drawText(debugFont, win[0], win[1], getAbsoluteImageURI());
-		glDisable(GL_TEXTURE_2D);
+		sPainter.enableTexture2d(false);
 		sPainter.drawSphericalRegion(poly.get(), StelPainter::SphericalPolygonDrawModeBoundary, &color);
-		glEnable(GL_TEXTURE_2D);
+		sPainter.enableTexture2d(true);
 	}
 #endif
 	if (!alphaBlend)

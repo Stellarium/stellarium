@@ -115,7 +115,7 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 #endif
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
-	glDisable(GL_TEXTURE_2D);
+	enableTexture2d(false);
 	setShadeModel(StelPainter::ShadeModelFlat);
 	glFrontFace(prj->needGlFrontFaceCW()?GL_CW:GL_CCW);
 }
@@ -233,10 +233,10 @@ void StelPainter::initSystemGLInfo()
 	const char *fsrc2 =
 		"varying mediump vec2 texc;\n"
 		"uniform sampler2D tex;\n"
+		"uniform mediump vec4 texColor;\n"
 		"void main(void)\n"
 		"{\n"
-		"    mediump vec3 color = texture2D(tex, texc.st).rgb;\n"
-		"    gl_FragColor = vec4(color, 1.0);\n"
+		"    gl_FragColor = texture2D(tex, texc)*texColor;\n"
 		"}\n";
 	fshader2->compileSourceCode(fsrc2);
 
@@ -1458,35 +1458,6 @@ void StelPainter::drawSprite2dMode(const Vec3d& v, float radius)
 	drawSprite2dMode(win[0], win[1], radius);
 }
 
-void StelPainter::drawRect2d(float x, float y, float width, float height)
-{
-	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};
-	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
-	vertexData[0]=x; vertexData[1]=y;
-	vertexData[2]=x+width; vertexData[3]=y;
-	vertexData[4]=x; vertexData[5]=y+height;
-	vertexData[6]=x+width; vertexData[7]=y+height;
-
-	int b;
-	glGetIntegerv(GL_TEXTURE_2D, &b);
-	if (b==GL_TRUE)
-	{
-		enableClientStates(true, true);
-		setVertexPointer(2, GL_FLOAT, vertexData);
-		setTexCoordPointer(2, GL_FLOAT, texCoordData);
-	}
-	else
-	{
-		enableClientStates(true);
-		setVertexPointer(2, GL_FLOAT, vertexData);
-	}
-	drawFromArray(TriangleStrip, 4, 0, false);
-	enableClientStates(false);
-}
-
-/*************************************************************************
- Same function but with a rotation angle
-*************************************************************************/
 void StelPainter::drawSprite2dMode(double x, double y, float radius, float rotation)
 {
 	static float vertexData[8];
@@ -1505,6 +1476,29 @@ void StelPainter::drawSprite2dMode(double x, double y, float radius, float rotat
 	enableClientStates(true, true);
 	setVertexPointer(2, GL_FLOAT, vertexData);
 	setTexCoordPointer(2, GL_FLOAT, texCoordData);
+	drawFromArray(TriangleStrip, 4, 0, false);
+	enableClientStates(false);
+}
+
+void StelPainter::drawRect2d(float x, float y, float width, float height, bool textured)
+{
+	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};
+	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
+	vertexData[0]=x; vertexData[1]=y;
+	vertexData[2]=x+width; vertexData[3]=y;
+	vertexData[4]=x; vertexData[5]=y+height;
+	vertexData[6]=x+width; vertexData[7]=y+height;
+	if (textured)
+	{
+		enableClientStates(true, true);
+		setVertexPointer(2, GL_FLOAT, vertexData);
+		setTexCoordPointer(2, GL_FLOAT, texCoordData);
+	}
+	else
+	{
+		enableClientStates(true);
+		setVertexPointer(2, GL_FLOAT, vertexData);
+	}
 	drawFromArray(TriangleStrip, 4, 0, false);
 	enableClientStates(false);
 }
@@ -1731,6 +1725,18 @@ void StelPainter::setShadeModel(ShadeModel m)
 #endif
 }
 
+void StelPainter::enableTexture2d(bool b)
+{
+#ifndef STELPAINTER_GL2
+	if (b)
+		glEnable(GL_TEXTURE_2D);
+	else
+		glDisable(GL_TEXTURE_2D);
+#else
+	texture2dEnabled = b;
+#endif
+}
+
 void StelPainter::setArrays(const Vec3d* vertice, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray)
 {
 	enableClientStates(vertice, texCoords, colorArray, normalArray);
@@ -1820,6 +1826,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int index, bool doP
 		pr->setUniformValue("color", currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
 	if (pr==texturesShaderProgram)
 	{
+		pr->setUniformValue("texColor", currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
 		pr->setAttributeArray("texCoord", (const GLfloat*)texCoordArray.pointer, 2);
 		pr->enableAttributeArray("texCoord");
 	}
