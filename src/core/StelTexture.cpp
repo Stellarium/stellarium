@@ -38,10 +38,7 @@
 #include <QUrl>
 #include <QImage>
 #include <QNetworkReply>
-
-#ifndef USE_OPENGL_ES2
 #include <QGLWidget>
-#endif
 
 // Initialize statics
 QSemaphore* StelTexture::maxLoadThreadSemaphore = new QSemaphore(5);
@@ -260,7 +257,6 @@ bool StelTexture::imageLoad()
 				texels = texInfo.texels;
 			}
 		}
-#ifndef USE_OPENGL_ES2
 		else
 		{
 			// Use Qt QImage which is slower but works for many formats
@@ -277,7 +273,6 @@ bool StelTexture::imageLoad()
 				internalFormat = 4;
 			}
 		}
-#endif
 		// Release the memory
 		downloadedData = QByteArray();
 	}
