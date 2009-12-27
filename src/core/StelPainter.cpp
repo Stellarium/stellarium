@@ -1846,7 +1846,10 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int index, bool doP
 void StelPainter::drawFromArray(DrawingMode mode, const unsigned int* indices, int offset, int count, bool doProj)
 {
 	prepareDrawFromArray(count, 0, indices + offset, doProj);
+#ifdef STELPAINTER_GL2
+#else
 	glDrawElements(mode, count, GL_UNSIGNED_INT, indices + offset);
+#endif
 }
 
 StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& array, int index, int count, const unsigned int* indices)
