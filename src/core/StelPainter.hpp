@@ -28,9 +28,9 @@
 #include <QVarLengthArray>
 #include <QFontMetrics>
 
-#ifdef USE_OPENGL_ES2
+//#ifdef USE_OPENGL_ES2
  #define STELPAINTER_GL2 1
-#endif
+//#endif
 
 #ifdef STELPAINTER_GL2
 class QGLShaderProgram;
@@ -221,7 +221,7 @@ public:
 	//! @param y y position of the tope left corner in the viewport in pixel.
 	//! @param width width in pixel.
 	//! @param height height in pixel.
-	void drawRect2d(float x, float y, float width, float height);
+	void drawRect2d(float x, float y, float width, float height, bool textured=true);
 
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
 	void sSphere(double radius, double oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
@@ -277,6 +277,9 @@ public:
 
 	//! Define the current shade model used when interpolating between vertex.
 	void setShadeModel(ShadeModel m);
+
+	//! Set whether texturing is enabled.
+	void enableTexture2d(bool b);
 
 	// Thoses methods should eventually be replaced by a single setVertexArray
 	//! use instead of glVertexPointer
@@ -371,6 +374,7 @@ private:
 
 #ifdef STELPAINTER_GL2
 	Vec4f currentColor;
+	bool texture2dEnabled;
 	static QGLShaderProgram* basicShaderProgram;
 	static QGLShaderProgram* colorShaderProgram;
 	static QGLShaderProgram* texturesShaderProgram;

@@ -194,10 +194,10 @@ void StelAppGraphicsWidget::paintBuffer()
 	Q_ASSERT(foregroundBuffer);
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
 	sPainter.setColor(1,1,1);
-	glEnable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(true);
 	glBindTexture(GL_TEXTURE_2D, foregroundBuffer->texture());
 	sPainter.drawRect2d(0, 0, foregroundBuffer->size().width(), foregroundBuffer->size().height());
-	glDisable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(false);
 }
 
 //! Initialize the opengl buffer objects.

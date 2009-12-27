@@ -140,7 +140,7 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 void Constellation::drawArt(StelPainter& sPainter) const
 {
 	glBlendFunc(GL_ONE, GL_ONE);
-	glEnable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(true);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 	SphericalRegionP region = sPainter.getProjector()->getViewportConvexPolygon();
@@ -177,7 +177,7 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
 	if (!boundaryFader.getInterstate())
 		return;
 
-	glDisable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(false);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 

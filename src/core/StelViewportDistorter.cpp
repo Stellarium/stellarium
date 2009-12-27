@@ -548,7 +548,7 @@ void StelViewportDistorterFisheyeToSphericMirror::distort(void) const
 #endif
 	}
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
-	glEnable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(true);
 	glViewport(0, 0, screen_w, screen_h);
 	glMatrixMode(GL_PROJECTION);        // projection matrix mode
 	glLoadIdentity();

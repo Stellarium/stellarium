@@ -271,7 +271,7 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 
 	if (labelStyle == SkyLabel::Line)
 	{
-		glDisable(GL_TEXTURE_2D);
+		sPainter.enableTexture2d(false);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 

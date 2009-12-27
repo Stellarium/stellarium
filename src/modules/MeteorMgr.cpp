@@ -158,7 +158,6 @@ void MeteorMgr::draw(StelCore* core)
 	StelPainter sPainter(core->getProjection(StelCore::FrameAltAz));
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
-	glDisable(GL_TEXTURE_2D);
 	sPainter.setShadeModel(StelPainter::ShadeModelSmooth);
 
 	// step through and draw all active meteors

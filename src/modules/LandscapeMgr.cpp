@@ -104,7 +104,7 @@ void Cardinals::draw(const StelCore* core, double latitude, bool gravityON) cons
 
 	sPainter.setColor(color[0],color[1],color[2],fader.getInterstate());
 	glEnable(GL_BLEND);
-	glEnable(GL_TEXTURE_2D);
+	sPainter.enableTexture2d(true);
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
