@@ -170,6 +170,8 @@ void StelApp::init(QSettings* conf)
 	useGLShaders = confSettings->value("main/use_glshaders", true).toBool();
 	useGLShaders = useGLShaders && QGLShaderProgram::hasOpenGLShaderPrograms();
 
+	StelPainter::initSystemGLInfo();
+
 	// Initialize AFTER creation of openGL context
 	textureMgr = new StelTextureMgr();
 	textureMgr->init();
@@ -332,10 +334,6 @@ void StelApp::update(double deltaTime)
 
 	stelObjectMgr->update(deltaTime);
 }
-
-//#include "StelPainter.hpp"
-//#include "StelTextureTypes.hpp"
-
 
 //! Iterate through the drawing sequence.
 bool StelApp::drawPartial()
