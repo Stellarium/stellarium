@@ -156,11 +156,11 @@ void StelSkyDrawer::init()
 		qDebug() << "Use vertex shader for stars rendering";
 		QGLShader* vShader = new QGLShader(QGLShader::Vertex);
 		vShader->compileSourceCode(
-						"uniform mat4 projectionMatrix;\n"
-						"attribute vec2 skyVertex;\n"
-						"attribute vec3 starColor;\n"
-						"attribute vec2 starSize;\n"
-						"varying vec4 outColor;\n"
+						"uniform mediump mat4 projectionMatrix;\n"
+						"attribute mediump vec2 skyVertex;\n"
+						"attribute mediump vec3 starColor;\n"
+						"attribute lowp vec2 starSize;\n"
+						"varying mediump vec4 outColor;\n"
 						"void main()\n"
 						"{	gl_Position = projectionMatrix*vec4(skyVertex[0], skyVertex[1], 0., 1.);\n"
 						"	gl_PointSize = starSize[0]*2.;\n"
@@ -178,7 +178,7 @@ void StelSkyDrawer::init()
 		QGLShader* fShader = new QGLShader(QGLShader::Fragment);
 		if (!fShader->compileSourceCode(
 				"uniform sampler2D tex;\n"
-				"varying vec4 outColor;\n"
+				"varying mediump vec4 outColor;\n"
 				"void main(){gl_FragColor = texture2D(tex,gl_PointCoord.st)*outColor;}"))
 		{
 			qWarning() << "Error while compiling fragment shader: " << fShader->log();
