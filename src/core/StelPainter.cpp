@@ -219,7 +219,7 @@ void StelPainter::initSystemGLInfo()
 	QGLShader *vshader2 = new QGLShader(QGLShader::Vertex);
 	const char *vsrc2 =
 		"attribute highp vec3 vertex;\n"
-		"attribute highp vec2 texCoord;\n"
+		"attribute mediump vec2 texCoord;\n"
 		"uniform mediump mat4 projectionMatrix;\n"
 		"varying mediump vec2 texc;\n"
 		"void main(void)\n"
@@ -1467,9 +1467,19 @@ void StelPainter::drawRect2d(float x, float y, float width, float height)
 	vertexData[4]=x; vertexData[5]=y+height;
 	vertexData[6]=x+width; vertexData[7]=y+height;
 
-	enableClientStates(true, true);
-	setVertexPointer(2, GL_FLOAT, vertexData);
-	setTexCoordPointer(2, GL_FLOAT, texCoordData);
+	int b;
+	glGetIntegerv(GL_TEXTURE_2D, &b);
+	if (b==GL_TRUE)
+	{
+		enableClientStates(true, true);
+		setVertexPointer(2, GL_FLOAT, vertexData);
+		setTexCoordPointer(2, GL_FLOAT, texCoordData);
+	}
+	else
+	{
+		enableClientStates(true);
+		setVertexPointer(2, GL_FLOAT, vertexData);
+	}
 	drawFromArray(TriangleStrip, 4, 0, false);
 	enableClientStates(false);
 }
@@ -1801,7 +1811,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int index, bool doP
 		return;
 	}
 	pr->bind();
-	pr->setAttributeArray("vertex", (const GLfloat*)vertexArray.pointer, 3);
+	pr->setAttributeArray("vertex", (const GLfloat*)vertexArray.pointer, vertexArray.size);
 	pr->enableAttributeArray("vertex");
 	const Mat4f& m = getProjector()->getProjectionMatrix();
 	pr->setUniformValue("projectionMatrix", QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]));
@@ -1817,7 +1827,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int index, bool doP
 #endif
 	glDrawArrays(mode, index, count);
 #ifdef STELPAINTER_GL2
-	if (texCoordArray.enabled)
+	if (pr==texturesShaderProgram)
 	{
 		pr->disableAttributeArray("texCoord");
 	}

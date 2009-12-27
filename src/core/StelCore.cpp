@@ -78,8 +78,6 @@ StelCore::~StelCore()
 *************************************************************************/
 void StelCore::init()
 {
-	StelPainter::initSystemGLInfo();
-
 	QSettings* conf = StelApp::getInstance().getSettings();
 
 	// StelNavigator
