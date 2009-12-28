@@ -298,6 +298,9 @@ bool StelTexture::glLoad()
 	
 	// generate texture
 	glGenTextures (1, &id);
+#ifdef USE_OPENGL_ES2
+	glActiveTexture(GL_TEXTURE0);
+#endif
 	glBindTexture (GL_TEXTURE_2D, id);
 
 	// setup some parameters for texture filters and mipmapping
