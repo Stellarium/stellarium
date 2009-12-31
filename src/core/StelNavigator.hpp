@@ -47,6 +47,7 @@ class StelLoadingBar;
 class StelNavigator : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(double timeRate READ getTimeRate WRITE setTimeRate)
 
 public:
 	// Create and initialise to default a navigation context
@@ -136,7 +137,7 @@ public slots:
 	double getJDay() const {return JDay;}
 
 	//! Set time speed in JDay/sec
-	void setTimeRate(double ts) {timeSpeed=ts;}
+	void setTimeRate(double ts) {timeSpeed=ts; emit timeRateChanged(timeSpeed);}
 	//! Get time speed in JDay/sec
 	double getTimeRate() const {return timeSpeed;}
 
@@ -220,6 +221,8 @@ public slots:
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(StelLocation);
+	//! This signal is emitted when the time rate has changed
+	void timeRateChanged(double rate);
 
 private:
 	// Matrices used for every coordinate transfo
