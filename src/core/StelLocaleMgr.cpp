@@ -355,5 +355,6 @@ QStringList StelLocaleMgr::getAllCountryNames()
 	QStringList res;
 	for (QMap<QString, QString>::ConstIterator i = countryCodeToStringMap.begin();i!=countryCodeToStringMap.end();++i)
 		res.append(i.value());
+	res.sort();
 	return res;
 }
