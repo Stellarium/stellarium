@@ -188,12 +188,7 @@ QString HelpDialog::getFooterText(void)
 
 	footer += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	footer += Qt::escape(q_("{Bug reporting system} - if something doesn't work properly and is not listed in the FAQ list, you can open bug reports here.")).replace(a_rx, "<a href=\"http://bugs.launchpad.net/stellarium/+filebug\">\\1</a>");
-	footer += "</p>\n";
-
-	footer += "<p>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	footer += Qt::escape(q_("{Feature request system} - if you have an idea for a new feature, send it to us. We can't promise to implement every idea, but we appreciate the feedback and review the list when we are planning future features.")).replace(a_rx, "<a href=\"https://blueprints.launchpad.net/stellarium\">\\1</a>");
+	footer += Qt::escape(q_("{Bug reporting and feature request system} - if something doesn't work properly or is missing and is not listed in the tracker, you can open bug reports here.")).replace(a_rx, "<a href=\"http://bugs.launchpad.net/stellarium/+filebug\">\\1</a>");
 	footer += "</p>\n";
 
 	footer += "<p>";
