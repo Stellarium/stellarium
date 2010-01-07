@@ -77,11 +77,19 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	lastEventTimeSec = 0;
 
 	// Create an openGL viewport
-	QGLFormat glFormat(QGL::StencilBuffer);
+	QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer | QGL::AlphaChannel);
 	//glFormat.setSamples(16);
 	//glFormat.setSampleBuffers(true);
 	//glFormat.setDirectRendering(false);
 	glWidget = new QGLWidget(glFormat, this);
+
+	if (!glWidget->format().stencil())
+		qWarning("Could not get stencil buffer; results will be suboptimal");
+	if (!glWidget->format().alpha())
+		qWarning("Could not get alpha channel; results will be suboptimal");
+	if (!glWidget->format().depth())
+		qWarning("Could not get depth buffer; results will be suboptimal");
+
 	setViewport(glWidget);
 
 	// Antialiasing works only with SampleBuffer, but it's much slower
