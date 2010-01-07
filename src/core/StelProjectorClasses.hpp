@@ -107,7 +107,7 @@ public:
 		return true;
 	}
 
-	virtual void project(int n, const Vec3d* in, Vec2f* out)
+	virtual void project(int n, const Vec3d* in, Vec3f* out)
 	{
 		Vec3d v;
 		for (int i = 0; i < n; ++i)
@@ -117,6 +117,7 @@ public:
 			StelProjectorStereographic::forward(v);
 			out[i][0] = viewportCenter[0] + flipHorz * pixelPerRad * v[0];
 			out[i][1] = viewportCenter[1] + flipVert * pixelPerRad * v[1];
+			out[i][2] = (v[2] - zNear) * oneOverZNearMinusZFar;
 		}
 	}
 
