@@ -351,7 +351,7 @@ private:
 	//! @param vertices a pointer to an array of 3 vertices.
 	//! @param edgeFlags a pointer to an array of 3 flags indicating whether the next segment is an edge.
 	//! @param texturePos a pointer to an array of 3 texture coordinates, or NULL if the triangle should not be textured.
-	void projectSphericalTriangle(const SphericalCap* clippingCap, const Vec3d* vertices, QVarLengthArray<Vec2f, 4096>* outVertices,
+	void projectSphericalTriangle(const SphericalCap* clippingCap, const Vec3d* vertices, QVarLengthArray<Vec3f, 4096>* outVertices,
 			const Vec2f* texturePos=NULL, QVarLengthArray<Vec2f, 4096>* outTexturePos=NULL,int nbI=0,
 			bool checkDisc1=true, bool checkDisc2=true, bool checkDisc3=true) const;
 

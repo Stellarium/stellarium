@@ -845,7 +845,7 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 
 // Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 // by splitting it into subtriangles.
-void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, const Vec3d* vertices, QVarLengthArray<Vec2f, 4096>* outVertices,
+void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, const Vec3d* vertices, QVarLengthArray<Vec3f, 4096>* outVertices,
 		const Vec2f* texturePos, QVarLengthArray<Vec2f, 4096>* outTexturePos,
 		int nbI, bool checkDisc1, bool checkDisc2, bool checkDisc3) const
 {
@@ -903,7 +903,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 	if (!cDiscontinuity1 && !cDiscontinuity2 && !cDiscontinuity3)
 	{
 		// The triangle is clean, appends it
-		outVertices->append(Vec2f(e0[0], e0[1])); outVertices->append(Vec2f(e1[0], e1[1])); outVertices->append(Vec2f(e2[0], e2[1]));
+		outVertices->append(Vec3f(e0[0], e0[1], e0[2])); outVertices->append(Vec3f(e1[0], e1[1], e1[2])); outVertices->append(Vec3f(e2[0], e2[1], e2[2]));
 		if (outTexturePos)
 			outTexturePos->append(texturePos,3);
 		return;
@@ -917,7 +917,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			return;
 
 		// Else display it, it will be suboptimal though.
-		outVertices->append(Vec2f(e0[0], e0[1])); outVertices->append(Vec2f(e1[0], e1[1])); outVertices->append(Vec2f(e2[0], e2[1]));
+		outVertices->append(Vec3f(e0[0], e0[1], e0[2])); outVertices->append(Vec3f(e1[0], e1[1], e2[2])); outVertices->append(Vec3f(e2[0], e2[1], e2[2]));
 		if (outTexturePos)
 			outTexturePos->append(texturePos,3);
 		return;
@@ -1207,7 +1207,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 	return;
 }
 
-static QVarLengthArray<Vec2f, 4096> polygonVertexArray;
+static QVarLengthArray<Vec3f, 4096> polygonVertexArray;
 static QVarLengthArray<Vec2f, 4096> polygonTextureCoordArray;
 // XXX: We should change the type to unsigned int
 static QVarLengthArray<unsigned int, 4096> indexArray;
@@ -1245,7 +1245,7 @@ class VertexArrayProjector
 {
 public:
 	VertexArrayProjector(const StelVertexArray& ar, StelPainter* apainter, const SphericalCap* aclippingCap,
-						 QVarLengthArray<Vec2f, 4096>* aoutVertices, QVarLengthArray<Vec2f, 4096>* aoutTexturePos=NULL)
+						 QVarLengthArray<Vec3f, 4096>* aoutVertices, QVarLengthArray<Vec2f, 4096>* aoutTexturePos=NULL)
 		   : vertexArray(ar), painter(apainter), clippingCap(aclippingCap), outVertices(aoutVertices),
 			 outTexturePos(aoutTexturePos)
 	{
@@ -1270,7 +1270,7 @@ public:
 	// Draw the resulting arrays
 	void drawResult()
 	{
-		painter->setVertexPointer(2, GL_FLOAT, outVertices->constData());
+		painter->setVertexPointer(3, GL_FLOAT, outVertices->constData());
 		if (outTexturePos)
 			painter->setTexCoordPointer(2, GL_FLOAT, outTexturePos->constData());
 		painter->enableClientStates(true, outTexturePos != NULL);
@@ -1282,7 +1282,7 @@ private:
 	const StelVertexArray& vertexArray;
 	StelPainter* painter;
 	const SphericalCap* clippingCap;
-	QVarLengthArray<Vec2f, 4096>* outVertices;
+	QVarLengthArray<Vec3f, 4096>* outVertices;
 	QVarLengthArray<Vec2f, 4096>* outTexturePos;
 };
 
@@ -1889,12 +1889,12 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 		for (int i=index; i< index + count; ++i)
 		{
 			prj->project(vecArray[indices[i]], win);
-			polygonVertexArray[indices[i]].set(win[0], win[1]);
+			polygonVertexArray[indices[i]].set(win[0], win[1], win[2]);
 		}
 	}
 
 	ArrayDesc ret;
-	ret.size = 2;
+	ret.size = 3;
 	ret.type = GL_FLOAT;
 	ret.pointer = polygonVertexArray.constData();
 	ret.enabled = array.enabled;
