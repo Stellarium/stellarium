@@ -115,6 +115,8 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 #endif
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
+	// Fix some problem when using OpenGL2 engine
+	glStencilMask(0x11111111);
 	enableTexture2d(false);
 	setShadeModel(StelPainter::ShadeModelFlat);
 	glFrontFace(prj->needGlFrontFaceCW()?GL_CW:GL_CCW);

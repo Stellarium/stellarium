@@ -471,7 +471,7 @@ float Planet::getVMagnitude(const StelNavigator * nav) const
 		const double distParsec = std::sqrt(nav->getObserverHeliocentricEclipticPos().lengthSquared())*AU/PARSEC;
 		return 4.83 + 5.*(std::log10(distParsec)-1.);
 	}
-	
+
 	// Compute the angular phase
 	const Vec3d& observerHelioPos = nav->getObserverHeliocentricEclipticPos();
 	const double observerRq = observerHelioPos.lengthSquared();
@@ -783,7 +783,7 @@ void Planet::drawEarthShadow(StelCore* core)
 
 	// modify shadow location for scaled moon
 	Vec3d mdist = shadow - mh;
-	if(mdist.length() > r_penumbra + 2000./AU)
+	if (mdist.length() > r_penumbra + 2000./AU)
 		return;   // not visible so don't bother drawing
 
 	shadow = mh + mdist*mscale;
@@ -798,7 +798,9 @@ void Planet::drawEarthShadow(StelCore* core)
 	sPainter.setColor(1,1,1);
 
 	glEnable(GL_STENCIL_TEST);
+	// We draw only where the stencil buffer is at 1, i.e. where the moon was drawn
 	glStencilFunc(GL_EQUAL, 0x1, 0x1);
+	// Don't change stencil buffer value
 	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 
 	// shadow radial texture
