@@ -705,9 +705,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 				glDisable(GL_STENCIL_TEST);
 
 				sPainter->getLight().disable();
-				delete sPainter;
-				sPainter=NULL;
-				drawEarthShadow(core);
+				drawEarthShadow(core, sPainter);
 			}
 			else
 			{
@@ -757,7 +755,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 
 // draws earth shadow overlapping the moon using stencil buffer
 // umbra and penumbra are sized separately for accuracy
-void Planet::drawEarthShadow(StelCore* core)
+void Planet::drawEarthShadow(StelCore* core, StelPainter* sPainter)
 {
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 	Vec3d e = ssm->getEarth()->getEclipticPos();
@@ -789,13 +787,13 @@ void Planet::drawEarthShadow(StelCore* core)
 	shadow = mh + mdist*mscale;
 	r_penumbra *= mscale;
 
-	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEcliptic);
-	StelPainter sPainter(prj);
+	StelProjectorP saveProj = sPainter->getProjector();
+	sPainter->setProjector(core->getProjection(StelCore::FrameHeliocentricEcliptic));
 
-	sPainter.enableTexture2d(true);
+	sPainter->enableTexture2d(true);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	sPainter.setColor(1,1,1);
+	sPainter->setColor(1,1,1);
 
 	glEnable(GL_STENCIL_TEST);
 	// We draw only where the stencil buffer is at 1, i.e. where the moon was drawn
@@ -824,8 +822,8 @@ void Planet::drawEarthShadow(StelCore* core)
 		r.transfo4d(rotMat);
 		vertexArray[i] = shadow + r;
 	}
-	sPainter.setArrays(vertexArray.constData(), texCoordArray.constData());
-	sPainter.drawFromArray(StelPainter::TriangleFan, 102);
+	sPainter->setArrays(vertexArray.constData(), texCoordArray.constData());
+	sPainter->drawFromArray(StelPainter::TriangleFan, 102);
 
 	// now penumbra
 	Vec3d u;
@@ -840,12 +838,12 @@ void Planet::drawEarthShadow(StelCore* core)
 		vertexArray[i] = shadow + u;
 		vertexArray[i+1] = shadow + r;
 	}
-	sPainter.setArrays(vertexArray.constData(), texCoordArray.constData());
-	sPainter.drawFromArray(StelPainter::TriangleStrip, 202);
-
+	sPainter->setArrays(vertexArray.constData(), texCoordArray.constData());
+	sPainter->drawFromArray(StelPainter::TriangleStrip, 202);
 	glDisable(GL_STENCIL_TEST);
 	glClearStencil(0x0);
 	glClear(GL_STENCIL_BUFFER_BIT);	// Clean again to let a clean buffer for later Qt display
+	sPainter->setProjector(saveProj);
 }
 
 void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
