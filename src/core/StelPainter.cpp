@@ -76,11 +76,7 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 #endif
 
 	Q_ASSERT(qPainter);
-
-//	qPainter->save();
 	qPainter->beginNativePainting();
-//	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
-//	glPushAttrib(GL_ALL_ATTRIB_BITS);
 
 	// Ensure that the current GL content is the one of our main GL window
 //	QGLWidget* w = dynamic_cast<QGLWidget*>(qPainter->device());
@@ -110,6 +106,8 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	glDisable(GL_CULL_FACE);
 	// Fix some problem when using OpenGL2 engine
 	glStencilMask(0x11111111);
+	// Deactivate drawing in depth buffer by default
+	glDepthMask(GL_FALSE);
 	enableTexture2d(false);
 	setShadeModel(StelPainter::ShadeModelFlat);
 	setProjector(proj);
@@ -127,6 +125,7 @@ void StelPainter::setProjector(const StelProjectorP& p)
 	// Set the real openGL projection and modelview matrix to 2d orthographic projection
 	// thus we never need to change to 2dMode from now on before drawing
 	glMultMatrixf(prj->getProjectionMatrix());
+	glMatrixMode(GL_MODELVIEW);
 #endif
 }
 
@@ -148,14 +147,10 @@ StelPainter::~StelPainter()
 	if (er!=GL_NO_ERROR)
 	{
 		if (er==GL_INVALID_OPERATION)
-			qFatal("Invalid openGL operation in StelPainter::revertToQtPainting()");
+			qFatal("Invalid openGL operation detected in ~StelPainter()");
 	}
 #endif
-
-//	glPopAttrib();
-//	glPopClientAttrib();
 	qPainter->endNativePainting();
-//	qPainter->restore();
 
 #ifndef NDEBUG
 	// We are done with this StelPainter

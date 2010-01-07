@@ -590,6 +590,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 
 	if (getEnglishName() == nav->getCurrentLocation().planetName)
 	{
+		// Draw the rings if we are located on a planet with rings, but not the planet itself.
 		if (rings)
 		{
 			StelPainter sPainter(core->getProjection(mat));
@@ -648,13 +649,13 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 			sPainter->getLight().enable();
 
 			// Set the main source of light to be the sun
-			const Vec3d sunPos = core->getNavigator()->getHeliocentricEclipticModelViewMat()*Vec3d(0,0,0);
+			const Vec3d& sunPos = core->getNavigator()->getHeliocentricEclipticModelViewMat()*Vec3d(0,0,0);
 			sPainter->getLight().setPosition(Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
 
 			// Set the light parameters taking sun as the light source
-			const Vec4f diffuse = Vec4f(2.,2.,2.,1);
-			const Vec4f zero = Vec4f(0,0,0,0);
-			const Vec4f ambient = Vec4f(0.02,0.02,0.02,0.02);
+			static const Vec4f diffuse = Vec4f(2.,2.,2.,1);
+			static const Vec4f zero = Vec4f(0,0,0,0);
+			static const Vec4f ambient = Vec4f(0.02,0.02,0.02,0.02);
 			sPainter->getLight().setAmbient(ambient);
 			sPainter->getLight().setDiffuse(diffuse);
 			sPainter->getLight().setSpecular(zero);
@@ -679,14 +680,22 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 			double n,f;
 			core->getClippingPlanes(&n,&f); // Save clipping planes
 			core->setClippingPlanes(z_near,z_far);
+//			StelProjectorP saveProj = sPainter->getProjector();
+//			sPainter->setProjector(core->getProjection(mat * Mat4d::zrotation(M_PI/180*(axisRotation + 90.))));
+			glDepthMask(GL_TRUE);
+//			glDepthFunc(GL_LESS);
+//			glDepthRange(0,1);
+//			glClearDepth(1);
 			glClear(GL_DEPTH_BUFFER_BIT);
 			glEnable(GL_DEPTH_TEST);
 			drawSphere(sPainter, screenSz);
+			glDepthMask(GL_FALSE);
 			sPainter->getLight().disable();
 			rings->draw(sPainter,mat,screenSz);
 			sPainter->getLight().enable();
 			glDisable(GL_DEPTH_TEST);
 			core->setClippingPlanes(n,f);  // Restore old clipping planes
+			//sPainter->setProjector(saveProj);
 		}
 		else
 		{
