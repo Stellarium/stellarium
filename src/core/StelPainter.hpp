@@ -136,7 +136,8 @@ public:
 	~StelPainter();
 
 	//! Return the instance of projector associated to this painter
-	const StelProjectorP getProjector() const {return prj;}
+	const StelProjectorP& getProjector() const {return prj;}
+	void setProjector(const StelProjectorP& p);
 
 	//! Fill with black around the viewport.
 	void drawViewportShape(void);
@@ -307,7 +308,6 @@ public:
 
 	//! use instead of glEnableClient
 	void enableClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false);
-	// void disableClientStates() {enableClientStates(false, false, false, false);}
 
 	//! convenience method that enable and set all the given arrays.
 	//! It is equivalent to calling enableClientState and set the array pointer for each arrays.
@@ -362,7 +362,7 @@ private:
 	void drawSmallCircleVertexArray();
 
 	//! The associated instance of projector
-	const StelProjectorP prj;
+	StelProjectorP prj;
 
 #ifndef NDEBUG
 	//! Mutex allowing thread safety

@@ -90,19 +90,12 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 //		w->makeCurrent();
 //	}
 
-	// Init GL viewport to current projector values
-	glViewport(prj->viewportXywh[0], prj->viewportXywh[1], prj->viewportXywh[2], prj->viewportXywh[3]);
-
 #ifndef STELPAINTER_GL2
 	// Save openGL projection state
 	glMatrixMode(GL_TEXTURE);
 	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
-	glLoadIdentity();
-	// Set the real openGL projection and modelview matrix to 2d orthographic projection
-	// thus we never need to change to 2dMode from now on before drawing
-	glMultMatrixf(prj->getProjectionMatrix());
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	glLoadIdentity();
@@ -119,7 +112,22 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	glStencilMask(0x11111111);
 	enableTexture2d(false);
 	setShadeModel(StelPainter::ShadeModelFlat);
+	setProjector(proj);
+}
+
+void StelPainter::setProjector(const StelProjectorP& p)
+{
+	prj=p;
+	// Init GL viewport to current projector values
+	glViewport(prj->viewportXywh[0], prj->viewportXywh[1], prj->viewportXywh[2], prj->viewportXywh[3]);
 	glFrontFace(prj->needGlFrontFaceCW()?GL_CW:GL_CCW);
+#ifndef STELPAINTER_GL2
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	// Set the real openGL projection and modelview matrix to 2d orthographic projection
+	// thus we never need to change to 2dMode from now on before drawing
+	glMultMatrixf(prj->getProjectionMatrix());
+#endif
 }
 
 StelPainter::~StelPainter()

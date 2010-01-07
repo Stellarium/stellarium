@@ -1,4 +1,5 @@
 0.10.3 [release date to be decided]
+Based on Qt 4.6.
 Bundling of plugins: Satellites, Ocular, AngleMeasure, CompassMarks.
 New script engine improvements including variable script running speed.
 Made tabs in GUI smaller by moving titles under the icons.
@@ -18,6 +19,9 @@ Optimized JSON parser (x5 speed improvement) + unit tests.
 Migrated all text drawing system to QFont. This fixes long standing bugs for displaying arabic and asian characters in the sky. Also allow to get rid of 6 source files and of the freetype dependency (managed internally to Qt)
 Switch default back end mode to native for Windows as ATI drivers often have problems, still raster default for other platforms.  Add --graphics-system option.
 Updated the plugin API, allowing easier distribution of static plugins.
+Fixed magnitude computation for most of the planets.
+Use GL Shader for stars rendering if available.
+Re-organized the startup by moving log and command line processing to main.cpp.
 
 0.10.2 [2009-03-09]
 Based on Qt 4.5.

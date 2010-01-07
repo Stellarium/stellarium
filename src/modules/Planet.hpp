@@ -244,7 +244,7 @@ protected:
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
 
 	// draw earth shadow on moon for lunar eclipses
-	void drawEarthShadow(StelCore* core);
+	void drawEarthShadow(StelCore* core, StelPainter* sPainter);
 
 	// Return the information string "ready to print" :)
 	QString getSkyLabel(const StelNavigator * nav) const;
