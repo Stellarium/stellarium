@@ -72,6 +72,10 @@ Q_IMPORT_PLUGIN(TextUserInterface)
 Q_IMPORT_PLUGIN(Oculars)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_TELESCOPECONTROL
+Q_IMPORT_PLUGIN(TelescopeControl)
+#endif
+
 //! @class GettextStelTranslator
 //! Provides i18n support through gettext.
 class GettextStelTranslator : public QTranslator
