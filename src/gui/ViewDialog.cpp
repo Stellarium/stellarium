@@ -270,8 +270,8 @@ void ViewDialog::createDialogContent()
 	connect(ui->skyLayerListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyLayersSelectionChanged(const QString&)));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 	connect(ui->skyLayerEnableCheckBox, SIGNAL(stateChanged(int)), this, SLOT(skyLayersEnabledChanged(int)));
-			
-	
+
+
 	QTimer* refreshTimer = new QTimer(this);
 	connect(refreshTimer, SIGNAL(timeout()), this, SLOT(updateFromProgram()));
 	refreshTimer->start(200);
@@ -328,7 +328,7 @@ void ViewDialog::skyLayersSelectionChanged(const QString& s)
 
 	if (l.isNull())
 		return;
-	
+
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + l->getShortName()+ "</h2>";
 	html += "<p>" + l->getLayerDescriptionHtml() + "</p>";
@@ -373,6 +373,14 @@ void ViewDialog::updateSkyCultureText()
 		}
 	}
 
+	QStringList searchPaths;
+	try
+	{
+		searchPaths << StelFileMgr::findFile("skycultures/" + StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
+	}
+	catch (std::runtime_error& e) {}
+
+	ui->skyCultureTextBrowser->setSearchPaths(searchPaths);
 	ui->skyCultureTextBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 
 	if (descPath.isEmpty())
