@@ -168,6 +168,14 @@ IF (USE_STATIC_PLUGIN_OCULARS)
   ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_OCULARS)
 ENDIF()
 
+# TelescopeControl
+SET(USE_STATIC_PLUGIN_TELESCOPECONTROL 0 CACHE BOOL "Define whether the TelescopeControl plug-in should be statically linked.")
+SET(STATIC_PLUGIN_TELESCOPECONTROL_PATH "$ENV{STELROOT}/../extmodules/TelescopeControl/builds/unix/src/libTelescopeControl.a" CACHE PATH "The location of the libTelescopeControl.a static library")
+IF (USE_STATIC_PLUGIN_TELESCOPECONTROL)
+  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_TELESCOPECONTROL_PATH})
+  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TELESCOPECONTROL)
+ENDIF()
+
 ########### Others ###########
 # Activate translation with gettext
 SET(RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release, 1 or 0.")
