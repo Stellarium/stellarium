@@ -27,6 +27,7 @@
 #include <QDebug>
 #include <QSettings>
 #include <QString>
+#include <QTextStream>
 
 #include <QFile>
 
@@ -63,30 +64,26 @@ StelLocaleMgr::~StelLocaleMgr()
 // Mehtod which generates and save the map between 2 letters country code and english country names
 void StelLocaleMgr::generateCountryList()
 {
-	// Init country codes to string using Qt data (slow)
-	for (int i=1;i<165;++i)
+	// Load ISO 3166-1 two-letter country codes from file (slow)
+	// The format is "[code][tab][country name containing spaces][newline]"
+	QFile textFile("data/iso3166-1-alpha-2.utf8");
+	textFile.open(QFile::ReadOnly | QFile::Text);
+	QTextStream list(&textFile);
+	QString line;
+	while(!(line = list.readLine()).isNull())
 	{
-		foreach (QLocale::Country c, QLocale::countriesForLanguage((QLocale::Language)i))
-		{
-			QLocale ll_CC((QLocale::Language)i, c);
-			QString cCode = ll_CC.name().right(2).toLower();
-			countryCodeToStringMap[cCode]=QLocale::countryToString(c);
-		}
+		qDebug() << line.section(QChar('\t'), 0, 0) << ":" << line.section(QChar('\t'), 1, 1);
+		countryCodeToStringMap.insert(line.section(QChar('\t'), 0, 0), line.section(QChar('\t'), 1, 1));
 	}
-	// Add here missing Qt countries
-	countryCodeToStringMap["cu"]="Cuba";
-	countryCodeToStringMap["mg"]="Madagascar";
-	countryCodeToStringMap["rs"]="Serbia";
-	countryCodeToStringMap["ps"]="Palestinian Territories";
-	countryCodeToStringMap["tm"]="Turkmenistan";
+	textFile.close();
 	
-	// Save to file
-	QFile file("countryCodes.dat");
-	file.open(QIODevice::WriteOnly);
-	QDataStream out(&file);    // save the data serialized to the file
+	// Save to binary file
+	QFile binaryFile("data/countryCodes.dat");
+	binaryFile.open(QIODevice::WriteOnly);
+	QDataStream out(&binaryFile);    // save the data serialized to the file
 	out.setVersion(QDataStream::Qt_4_5);
 	out << countryCodeToStringMap;
-	file.close();
+	binaryFile.close();
 }
 
 void StelLocaleMgr::init()
