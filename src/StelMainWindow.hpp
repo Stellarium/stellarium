@@ -58,8 +58,6 @@ protected:
 	//! Reimplemented to delete openGL textures before the GLContext disappears
 	virtual void closeEvent(QCloseEvent* event);
 
-	virtual void resizeEvent(QResizeEvent* event);
-
 private:
 	//! The StelMainWindow singleton
 	static StelMainWindow* singleton;
