@@ -127,8 +127,6 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	// Load sides textures
 	nbSideTexs = landscapeIni.value("landscape/nbsidetex", 0).toInt();
 	sideTexs = new StelTextureSP[nbSideTexs];
-	StelApp::getInstance().getTextureManager().setDefaultParams();
-	StelApp::getInstance().getTextureManager().setWrapMode(GL_CLAMP_TO_EDGE);
 	for (int i=0;i<nbSideTexs;++i)
 	{
 		QString tmp = QString("tex%1").arg(i);
@@ -156,8 +154,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 	nbDecorRepeat = landscapeIni.value("landscape/nb_decor_repeat", 1).toInt();
 
-	StelApp::getInstance().getTextureManager().setDefaultParams();
-	groundTex = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(landscapeIni.value("landscape/groundtex").toString(), landscapeId));
+	groundTex = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(landscapeIni.value("landscape/groundtex").toString(), landscapeId), StelTexture::StelTextureParams(true));
 	s = landscapeIni.value("landscape/ground").toString();
 	sscanf(s.toLocal8Bit(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	groundTexCoord.tex = groundTex;
@@ -166,8 +163,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	groundTexCoord.texCoords[2] = c;
 	groundTexCoord.texCoords[3] = d;
 
-	StelApp::getInstance().getTextureManager().setWrapMode(GL_REPEAT);
-	fogTex = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(landscapeIni.value("landscape/fogtex").toString(), landscapeId));
+	fogTex = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(landscapeIni.value("landscape/fogtex").toString(), landscapeId), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 	s = landscapeIni.value("landscape/fog").toString();
 	sscanf(s.toLocal8Bit(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	fogTexCoord.tex = fogTex;
@@ -204,7 +200,7 @@ void LandscapeOldStyle::create(bool _fullpath, QMap<QString, QString> param)
 	for (int i=0;i<nbSideTexs;++i)
 	{
 		sprintf(tmp,"tex%d",i);
-		sideTexs[i] = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param[tmp]);
+		sideTexs[i] = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param[tmp], StelTexture::StelTextureParams(true));
 	}
 
 	// Init sides parameters
@@ -232,7 +228,7 @@ void LandscapeOldStyle::create(bool _fullpath, QMap<QString, QString> param)
 	if (!ok)
 		nbDecorRepeat = 1;
 
-	groundTex = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param["groundtex"]);
+	groundTex = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param["groundtex"], StelTexture::StelTextureParams(true));
 	s = param["ground"];
 	sscanf(s.toUtf8().constData(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	groundTexCoord.tex = groundTex;
@@ -241,8 +237,7 @@ void LandscapeOldStyle::create(bool _fullpath, QMap<QString, QString> param)
 	groundTexCoord.texCoords[2] = c;
 	groundTexCoord.texCoords[3] = d;
 
-	StelApp::getInstance().getTextureManager().setWrapMode(GL_REPEAT);
-	fogTex = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param["fogtex"]);
+	fogTex = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param["fogtex"], StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 	s = param["fog"];
 	sscanf(s.toUtf8().constData(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	fogTexCoord.tex = fogTex;
@@ -429,8 +424,7 @@ void LandscapeFisheye::create(const QString _name, bool _fullpath, const QString
 	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	validLandscape = 1;  // assume ok...
 	name = _name;
-	StelApp::getInstance().getTextureManager().setDefaultParams();
-	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex);
+	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
 	texFov = _texturefov*M_PI/180.;
 	angleRotateZ = _angleRotateZ*M_PI/180.;
 }
@@ -495,8 +489,7 @@ void LandscapeSpherical::create(const QString _name, bool _fullpath, const QStri
 	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	validLandscape = 1;  // assume ok...
 	name = _name;
-	StelApp::getInstance().getTextureManager().setDefaultParams();
-	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex);
+	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
 	angleRotateZ = _angleRotateZ*M_PI/180.;
 }
 

@@ -20,7 +20,6 @@
 #ifndef _STELTEXTURE_HPP_
 #define _STELTEXTURE_HPP_
 
-#include "VecMath.hpp"
 #include "StelTextureTypes.hpp"
 
 #include <QObject>
@@ -38,19 +37,20 @@ class StelTexture : public QObject
 {
 	Q_OBJECT
 
-	friend class StelTextureMgr;
-	friend class ImageLoadThread;
-
 public:
-
-	//! Supported dynamic range modes
-	enum DynamicRangeMode
+	//! Contains the parameters defining how a texture is created.
+	struct StelTextureParams
 	{
-		Linear,
-		MinmaxUser,
-		MinmaxQuantile,
-		MinmaxGreylevel,
-		MinmaxGreylevelAuto
+		StelTextureParams(bool qgenerateMipmaps=false, GLint afiltering=GL_LINEAR, GLint awrapMode=GL_CLAMP_TO_EDGE) :
+				generateMipmaps(qgenerateMipmaps),
+				filtering(afiltering),
+				wrapMode(awrapMode) {;}
+		//! Define if mipmaps must be created.
+		bool generateMipmaps;
+		//! Define the scaling filter to use. Must be one of GL_NEAREST or GL_LINEAR
+		GLint filtering;
+		//! Define the wrapping mode to use. Must be one of GL_CLAMP_TO_EDGE, or GL_REPEAT.
+		GLint wrapMode;
 	};
 
 	//! Destructor
@@ -67,9 +67,6 @@ public:
 	//! Return the width and heigth of the texture in pixels
 	bool getDimensions(int &width, int &height);
 
-	//! Return the position of the 4 corners of the texture in texture coordinates
-	const Vec2d* getCoordinates() const {return texCoordinates;}
-
 	//! Get the error message which caused the texture loading to fail
 	//! @return the human friendly error message or empty string if no errors occured
 	const QString& getErrorMessage() const {return errorMessage;}
@@ -80,6 +77,11 @@ public:
 
 	//! Return whether the image is currently being loaded
 	bool isLoading() const {return isLoadingImage && !canBind();}
+
+	//! Load the texture already in the RAM to the openGL memory
+	//! This function uses openGL routines and must be called in the main thread
+	//! @return false if an error occured
+	bool glLoad();
 
 signals:
 	//! Emitted when the texture is ready to be bind(), i.e. when downloaded, imageLoading and	glLoading is over
@@ -96,13 +98,11 @@ private slots:
 	void fileLoadFinished();
 
 private:
+	friend class StelTextureMgr;
+	friend class ImageLoadThread;
+
 	//! Private constructor
 	StelTexture();
-
-	//! Load the texture already in the RAM to the openGL memory
-	//! This function uses openGL routines and must be called in the main thread
-	//! @return false if an error occured
-	bool glLoad();
 
 	//! Loading of the image data.
 	//! This method is thread safe
@@ -113,8 +113,7 @@ private:
 	//! @param errorMessage the human friendly error message
 	void reportError(const QString& errorMessage);
 
-	//! Define the range mode used to rescale the texture when loading
-	DynamicRangeMode dynamicRangeMode;
+	StelTextureParams loadParams;
 
 	//! Used to download remote files if needed
 	class QNetworkReply* httpReply;
@@ -130,7 +129,7 @@ private:
 	//! The URL where to download the file
 	QString fullPath;
 
-	//! The data that was laoded from http
+	//! The data that was loaded from http
 	QByteArray downloadedData;
 	QImage qImage;
 
@@ -145,10 +144,6 @@ private:
 
 	//! OpenGL id
 	GLuint id;
-	bool mipmapsMode;
-	GLint wrapMode;
-	GLint minFilter;
-	GLint magFilter;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Attributes protected by the Mutex
@@ -160,13 +155,6 @@ private:
 
 	GLsizei width;	//! Texture image width
 	GLsizei height;	//! Texture image height
-	GLenum format;
-	GLint internalFormat;
-	GLubyte* texels;
-	GLenum type;
-
-	//! Position of the 4 corners of the texture in texture coordinates
-	Vec2d texCoordinates[4];
 
 	//! Fix a limit to the number of maximum simultaneous loading threads
 	static QSemaphore* maxLoadThreadSemaphore;

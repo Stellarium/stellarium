@@ -58,7 +58,6 @@ void MilkyWay::init()
 
 void MilkyWay::setTexture(const QString& texFile)
 {
-	StelApp::getInstance().getTextureManager().setDefaultParams();
 	tex = StelApp::getInstance().getTextureManager().createTexture(texFile);
 }
 

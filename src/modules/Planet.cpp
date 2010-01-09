@@ -81,9 +81,7 @@ Planet::Planet(const QString& englishName,
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
-	StelApp::getInstance().getTextureManager().setDefaultParams();
-	StelApp::getInstance().getTextureManager().setWrapMode(GL_REPEAT);
-	texMap = StelApp::getInstance().getTextureManager().createTexture(texMapName);
+	texMap = StelApp::getInstance().getTextureManager().createTexture(texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	// 60 day trails
 	DeltaTrail = 1;
