@@ -494,6 +494,9 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	l->addItem(skyGui, 0, 0);
 
 	stelAppGraphicsWidget->setLayout(l);
+	skyGui->setGeometry(stelAppGraphicsWidget->geometry());
+	skyGui->updateBarsPos();
+
 	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
 
 	initDone = true;

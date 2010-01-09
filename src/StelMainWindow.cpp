@@ -131,7 +131,3 @@ void StelMainWindow::closeEvent(QCloseEvent* event)
 	StelApp::getInstance().quitStellarium();
 }
 
-void StelMainWindow::resizeEvent(QResizeEvent* event)
-{
-	QMainWindow::resizeEvent(event);
-}
