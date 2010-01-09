@@ -253,6 +253,11 @@ bool StelTexture::glLoad()
 	switch (qImage.format())
 	{
 		case QImage::Format_Indexed8:
+			if (qImage.isGrayscale())
+				glformat = GL_LUMINANCE;
+			else
+				glformat = GL_RGB;
+				break;
 		case QImage::Format_RGB32:
 			 glformat = GL_RGB;
 			 break;
