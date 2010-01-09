@@ -13,7 +13,6 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_SOURCE_DIR}/src/external/glues_stel/source/
 	${CMAKE_SOURCE_DIR}/src/external/glues_stel/source/libtess
 	${OPENGL_INCLUDE_DIR}
-	${JPEG_INCLUDE_DIR}
 	${ICONV_INCLUDE_DIR}
 	${INTL_INCLUDE_DIR}
 	${QT_INCLUDE_DIR}/QtScript
@@ -491,7 +490,7 @@ IF (GUI_MODE STREQUAL "Standard")
 	# After this call, stellarium_gui_MOC_SRCS = moc_stellarium_gui.cxx
 	QT4_WRAP_CPP(stellarium_gui_MOC_SRCS ${stellarium_gui_MOC_HDRS})
 
-    SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} )
+	SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} )
 
 	# Compile the static library
 	ADD_LIBRARY(StelGuiLib STATIC ${stellarium_gui_SRCS} ${stellarium_gui_MOC_SRCS})
@@ -520,7 +519,7 @@ ENDIF()
 ################################ Build main program #########################################
 #############################################################################################
 
-SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} )
+SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} )
 
 IF(GENERATE_STELMAINLIB)
  ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_RES_CXX})

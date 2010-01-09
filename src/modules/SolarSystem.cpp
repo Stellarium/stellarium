@@ -113,8 +113,6 @@ void SolarSystem::init()
 	startTrails(conf->value("astro/flag_object_trails", false).toBool());
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
-	StelApp::getInstance().getTextureManager().setDefaultParams();
-	StelApp::getInstance().getTextureManager().setMinFilter(GL_LINEAR);
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur4.png");
 	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture("planet-indicator.png");
 }
@@ -690,7 +688,6 @@ void SolarSystem::loadPlanets()
 	}
 
 	// special case: load earth shadow texture
-	StelApp::getInstance().getTextureManager().setDefaultParams();
 	Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture("earth-shadow.png");
 
 	qDebug() << "Loaded" << readOk << "/" << totalPlanets << "planet orbits";

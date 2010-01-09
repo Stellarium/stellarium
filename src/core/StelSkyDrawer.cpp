@@ -144,7 +144,6 @@ void StelSkyDrawer::init()
 {
 	StelApp::makeMainGLContextCurrent();
 
-	StelApp::getInstance().getTextureManager().setDefaultParams();
 	// Load star texture no mipmap:
 	texHalo = StelApp::getInstance().getTextureManager().createTexture("star16x16.png");
 	texBigHalo = StelApp::getInstance().getTextureManager().createTexture("haloLune.png");

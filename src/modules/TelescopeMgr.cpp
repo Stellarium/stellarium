@@ -209,8 +209,6 @@ void TelescopeMgr::init()
 	Q_ASSERT(conf);
 
 	setFontSize(12.f);
-	StelApp::getInstance().getTextureManager().setDefaultParams();
-	StelApp::getInstance().getTextureManager().setMinFilter(GL_LINEAR);
 	telescopeTexture = StelApp::getInstance().getTextureManager().createTexture("telescope.png");
 
 	deleteAllTelescopes();

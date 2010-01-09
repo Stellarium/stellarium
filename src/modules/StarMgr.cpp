@@ -192,9 +192,6 @@ void StarMgr::init()
 	setLabelsAmount(conf->value("stars/labels_amount",3).toDouble());
 
 	objectMgr->registerStelObjectMgr(this);
-
-	StelApp::getInstance().getTextureManager().setDefaultParams();
-	StelApp::getInstance().getTextureManager().setMinFilter(GL_LINEAR);
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   // Load pointer texture
 
 	StelApp::getInstance().getCore()->getGeodesicGrid(maxGeodesicGridLevel)->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);

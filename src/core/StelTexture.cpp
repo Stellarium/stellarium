@@ -24,6 +24,7 @@
 #include "StelFileMgr.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
+#include "StelMainGraphicsView.hpp"
 
 #include <QThread>
 #include <QMutexLocker>
@@ -43,9 +44,8 @@
 // Initialize statics
 QSemaphore* StelTexture::maxLoadThreadSemaphore = new QSemaphore(5);
 
-/*************************************************************************
-  Class used to load an image and set the texture parameters in a thread
- *************************************************************************/
+
+//  Class used to load an image and set the texture parameters in a thread
 class ImageLoadThread : public QThread
 {
 	public:
@@ -62,19 +62,10 @@ void ImageLoadThread::run()
 	StelTexture::maxLoadThreadSemaphore->release(1);
 }
 
-/*************************************************************************
-  Constructor
- *************************************************************************/
 StelTexture::StelTexture() : httpReply(NULL), loadThread(NULL), downloaded(false), isLoadingImage(false),
-				   errorOccured(false), id(0), avgLuminance(-1.f), texels(NULL), type(GL_UNSIGNED_BYTE)
+				   errorOccured(false), id(0), avgLuminance(-1.f)
 {
 	mutex = new QMutex();
-	
-	texCoordinates[0].set(1., 0.);
-	texCoordinates[1].set(0., 0.);
-	texCoordinates[2].set(1., 1.);
-	texCoordinates[3].set(0., 1.);
-	
 	width = -1;
 	height = -1;
 }
@@ -101,9 +92,6 @@ StelTexture::~StelTexture()
 		loadThread->wait(500);
 	}
 	
-	if (texels)
-		TexMalloc::free(texels);
-	texels = NULL;
 	if (id!=0)
 	{
 		if (glIsTexture(id)==GL_FALSE)
@@ -112,8 +100,7 @@ StelTexture::~StelTexture()
 		}
 		else
 		{
-			StelApp::makeMainGLContextCurrent();
-			glDeleteTextures(1, &id);
+			StelMainGraphicsView::getInstance().getOpenGLWin()->deleteTexture(id);
 		}
 		id = 0;
 	}
@@ -191,8 +178,6 @@ void StelTexture::downloadFinished()
 	}
 	httpReply->deleteLater();
 	httpReply=NULL;
-	// Call bind to activate data loading
-	//bind();
 }
 
 /*************************************************************************
@@ -226,123 +211,65 @@ bool StelTexture::getDimensions(int &awidth, int &aheight)
 	return true;
 }
 
-/*************************************************************************
- Load the image data
- *************************************************************************/
+// Load the image data
 bool StelTexture::imageLoad()
 {
-	bool res=true;
 	if (downloadedData.isEmpty())
 	{
 		// Load the data from the file
 		QMutexLocker lock(mutex);
-		res = StelApp::getInstance().getTextureManager().loadImage(this);
+		qImage = QImage(fullPath);
 	}
 	else
 	{
-		// Load the image from the buffer, not from a file
-		if (fullPath.endsWith(".jpg", Qt::CaseInsensitive) || fullPath.endsWith(".jpeg", Qt::CaseInsensitive))
-		{
-			// Special case optimized for loading jpeg
-			// Could be even more optimized by re-using the texels buffers instead of allocating one for each textures
-			ImageLoader::TexInfo texInfo;
-			res = JpgLoader::loadFromMemory(downloadedData, texInfo);
-			if (!res)
-				return false;
-
-			{
-				QMutexLocker lock(mutex);
-				format = texInfo.format;
-				width = texInfo.width;
-				height = texInfo.height;
-				type = GL_UNSIGNED_BYTE;
-				internalFormat = texInfo.internalFormat;
-				texels = texInfo.texels;
-			}
-		}
-		else
-		{
-			// Use Qt QImage which is slower but works for many formats
-			// This is quite slow because Qt allocates twice the memory and needs to swap from ARGB to RGBA
-			qImage = QGLWidget::convertToGLFormat(QImage::fromData(downloadedData));
-			
-			// Update texture parameters from loaded image
-			{
-				QMutexLocker lock(mutex);
-				format = GL_RGBA;
-				width = qImage.width();
-				height = qImage.height();
-				type = GL_UNSIGNED_BYTE;
-				internalFormat = 4;
-			}
-		}
+		qImage = QImage::fromData(downloadedData);
 		// Release the memory
 		downloadedData = QByteArray();
 	}
-	return res;
+	return !qImage.isNull();
 }
 
-/*************************************************************************
- Actually load the texture already in the RAM to openGL memory
-*************************************************************************/
+// Actually load the texture to openGL memory
 bool StelTexture::glLoad()
 {
-	if (qImage.isNull() && !texels)
+	if (qImage.isNull())
 	{
 		errorOccured = true;
 		reportError("Unknown error");
 		return false;
 	}
 
-	StelApp::makeMainGLContextCurrent();
-	
-	// generate texture
-	glGenTextures (1, &id);
 #ifdef USE_OPENGL_ES2
 	glActiveTexture(GL_TEXTURE0);
 #endif
-	glBindTexture (GL_TEXTURE_2D, id);
 
-	// setup some parameters for texture filters and mipmapping
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode);
-	
-	if (!qImage.isNull())
+	QGLContext::BindOptions opt = QGLContext::InvertedYBindOption;
+	if (loadParams.filtering==GL_LINEAR)
+		opt |= QGLContext::LinearFilteringBindOption;
+	if (loadParams.generateMipmaps==true)
+		opt |= QGLContext::MipmapBindOption;
+
+	GLint glformat;
+	switch (qImage.format())
 	{
-		// Load from qImage
-		if (mipmapsMode==true)
-			gluesBuild2DMipmaps(GL_TEXTURE_2D, internalFormat, width, height, format, type, qImage.bits());
-		else
-			glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, type, qImage.bits());
-		
-		// Release shared memory
-		qImage = QImage();
+		case QImage::Format_Indexed8:
+		case QImage::Format_RGB32:
+			 glformat = GL_RGB;
+			 break;
+		default:
+			 glformat = GL_RGBA;
 	}
-	else
-	{
-		// Fixed the bug which caused shifted loading for LUMINANCE images with non multiple of 4 widths!
-		int val;
-		glGetIntegerv(GL_UNPACK_ALIGNMENT, &val);
-		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-		
-		// Load from texels buffer
-		if (mipmapsMode==true)
-			gluesBuild2DMipmaps(GL_TEXTURE_2D, internalFormat, width, height, format, type, texels);
-		else
-			glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, type, texels);
-		
-		// Restore previous value
-		glPixelStorei(GL_UNPACK_ALIGNMENT, val);
-				
-		// OpenGL has its own copy of texture data
-		TexMalloc::free (texels);
-		texels = NULL;
-	}
-	
+
+	id = StelMainGraphicsView::getInstance().getOpenGLWin()->bindTexture(qImage, GL_TEXTURE_2D, glformat, opt);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, loadParams.wrapMode);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, loadParams.wrapMode);
+
+	StelApp::makeMainGLContextCurrent();
+
+	// Release shared memory
+	qImage = QImage();
+
 	// Report success of texture loading
 	emit(loadingProcessFinished(false));
-	
 	return true;
 }
