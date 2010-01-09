@@ -43,7 +43,6 @@ StelLoadingBar::StelLoadingBar(float fontSize, const QString&  splashTex,
 	splashy = sPainter->getProjector()->getViewportPosY() + (screenh - height)/2;
 	barx = sPainter->getProjector()->getViewportPosX() + (screenw - barwidth)/2;
 	bary = splashy + 34;
-	StelApp::getInstance().getTextureManager().setDefaultParams();
 	if (!splashTex.isEmpty())
 		splash = StelApp::getInstance().getTextureManager().createTexture(splashTex);
 	extraTextPos.set(extraTextPosx, extraTextPosy);

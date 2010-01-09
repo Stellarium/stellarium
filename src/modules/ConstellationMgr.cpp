@@ -348,8 +348,6 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	currentLineNumber = 0;	// line in file
 	readOk = 0;		// count of records processed OK
 
-	StelApp::getInstance().getTextureManager().setDefaultParams();
-	//StelLoadingBar& lb = *StelApp::getInstance().getStelLoadingBar();
 	while (!fic.atEnd())
 	{
 		++currentLineNumber;
@@ -380,7 +378,6 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		}
 		else
 		{
-			StelApp::getInstance().getTextureManager().setDefaultParams();
 			QString texturePath(texfile);
 			try
 			{
