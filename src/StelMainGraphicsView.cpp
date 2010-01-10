@@ -69,7 +69,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setFocusPolicy(Qt::StrongFocus);
 	// Allows for precise FPS control
-	//setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
+	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
 	connect(this, SIGNAL(screenshotRequested()), this, SLOT(doScreenshot()));
 
 	qtime = new QTime();
