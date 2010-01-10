@@ -78,14 +78,6 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	Q_ASSERT(qPainter);
 	qPainter->beginNativePainting();
 
-	// Ensure that the current GL content is the one of our main GL window
-//	QGLWidget* w = dynamic_cast<QGLWidget*>(qPainter->device());
-//	if (w!=0)
-//	{
-//		Q_ASSERT(w->isValid());
-//		w->makeCurrent();
-//	}
-
 #ifndef STELPAINTER_GL2
 	// Save openGL projection state
 	glMatrixMode(GL_TEXTURE);
@@ -189,85 +181,6 @@ QFontMetrics StelPainter::getFontMetrics() const
 {
 	Q_ASSERT(qPainter);
 	return qPainter->fontMetrics();
-}
-
-void StelPainter::initSystemGLInfo()
-{
-#ifdef STELPAINTER_GL2
-	QGLShader *vshader1 = new QGLShader(QGLShader::Vertex);
-	const char *vsrc1 =
-		"attribute highp vec3 vertex;\n"
-		"attribute mediump vec4 color;\n"
-		"uniform mediump mat4 projectionMatrix;\n"
-		"varying mediump vec4 outColor;\n"
-		"void main(void)\n"
-		"{\n"
-		"    outColor = color;\n"
-		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
-		"}\n";
-	vshader1->compileSourceCode(vsrc1);
-
-	QGLShader *fshader1 = new QGLShader(QGLShader::Fragment);
-	const char *fsrc1 =
-		"varying mediump vec4 outColor;\n"
-		"void main(void)\n"
-		"{\n"
-		"    gl_FragColor = outColor;\n"
-		"}\n";
-	fshader1->compileSourceCode(fsrc1);
-
-	colorShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
-	colorShaderProgram->addShader(vshader1);
-	colorShaderProgram->addShader(fshader1);
-	colorShaderProgram->link();
-
-	QGLShader *vshader2 = new QGLShader(QGLShader::Vertex);
-	const char *vsrc2 =
-		"attribute highp vec3 vertex;\n"
-		"attribute mediump vec2 texCoord;\n"
-		"uniform mediump mat4 projectionMatrix;\n"
-		"varying mediump vec2 texc;\n"
-		"void main(void)\n"
-		"{\n"
-		"    gl_Position = projectionMatrix * vec4(vertex, 1.);\n"
-		"    texc = texCoord;\n"
-		"}\n";
-	vshader2->compileSourceCode(vsrc2);
-
-	QGLShader *fshader2 = new QGLShader(QGLShader::Fragment);
-	const char *fsrc2 =
-		"varying mediump vec2 texc;\n"
-		"uniform sampler2D tex;\n"
-		"uniform mediump vec4 texColor;\n"
-		"void main(void)\n"
-		"{\n"
-		"    gl_FragColor = texture2D(tex, texc)*texColor;\n"
-		"}\n";
-	fshader2->compileSourceCode(fsrc2);
-
-	texturesShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
-	texturesShaderProgram->addShader(vshader2);
-	texturesShaderProgram->addShader(fshader2);
-	texturesShaderProgram->link();
-
-	QGLShader *vshader3 = new QGLShader(QGLShader::Vertex);
-	const char *vsrc3 =
-		"attribute mediump vec3 vertex;\n"
-		"uniform mediump vec4 color;\n"
-		"uniform mediump mat4 projectionMatrix;\n"
-		"varying mediump vec4 outColor;\n"
-		"void main(void)\n"
-		"{\n"
-		"    outColor = color;\n"
-		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
-		"}\n";
-	vshader3->compileSourceCode(vsrc3);
-
-	basicShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
-	basicShaderProgram->addShader(vshader3);
-	basicShaderProgram->addShader(fshader1);
-	basicShaderProgram->link();
-#endif
 }
 
 
@@ -1327,7 +1240,7 @@ public:
 		painter->setTexCoordPointer(2, GL_FLOAT, vertexArray.texCoords.constData());
 		painter->enableClientStates(true, textured);
 		StelPainter::DrawingMode mode = (StelPainter::DrawingMode)vertexArray.primitiveType;
-		painter->drawFromArray(mode, outIndices->constData(), 0, outIndices->size());
+		painter->drawFromArray(mode, outIndices->size(), 0, true, outIndices->constData());
 		painter->enableClientStates(false);
 	}
 
@@ -1742,6 +1655,85 @@ void StelPainter::enableTexture2d(bool b)
 #endif
 }
 
+void StelPainter::initSystemGLInfo()
+{
+#ifdef STELPAINTER_GL2
+	QGLShader *vshader1 = new QGLShader(QGLShader::Vertex);
+	const char *vsrc1 =
+		"attribute highp vec3 vertex;\n"
+		"attribute mediump vec4 color;\n"
+		"uniform mediump mat4 projectionMatrix;\n"
+		"varying mediump vec4 outColor;\n"
+		"void main(void)\n"
+		"{\n"
+		"    outColor = color;\n"
+		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
+		"}\n";
+	vshader1->compileSourceCode(vsrc1);
+
+	QGLShader *fshader1 = new QGLShader(QGLShader::Fragment);
+	const char *fsrc1 =
+		"varying mediump vec4 outColor;\n"
+		"void main(void)\n"
+		"{\n"
+		"    gl_FragColor = outColor;\n"
+		"}\n";
+	fshader1->compileSourceCode(fsrc1);
+
+	colorShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
+	colorShaderProgram->addShader(vshader1);
+	colorShaderProgram->addShader(fshader1);
+	colorShaderProgram->link();
+
+	QGLShader *vshader2 = new QGLShader(QGLShader::Vertex);
+	const char *vsrc2 =
+		"attribute highp vec3 vertex;\n"
+		"attribute mediump vec2 texCoord;\n"
+		"uniform mediump mat4 projectionMatrix;\n"
+		"varying mediump vec2 texc;\n"
+		"void main(void)\n"
+		"{\n"
+		"    gl_Position = projectionMatrix * vec4(vertex, 1.);\n"
+		"    texc = texCoord;\n"
+		"}\n";
+	vshader2->compileSourceCode(vsrc2);
+
+	QGLShader *fshader2 = new QGLShader(QGLShader::Fragment);
+	const char *fsrc2 =
+		"varying mediump vec2 texc;\n"
+		"uniform sampler2D tex;\n"
+		"uniform mediump vec4 texColor;\n"
+		"void main(void)\n"
+		"{\n"
+		"    gl_FragColor = texture2D(tex, texc)*texColor;\n"
+		"}\n";
+	fshader2->compileSourceCode(fsrc2);
+
+	texturesShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
+	texturesShaderProgram->addShader(vshader2);
+	texturesShaderProgram->addShader(fshader2);
+	texturesShaderProgram->link();
+
+	QGLShader *vshader3 = new QGLShader(QGLShader::Vertex);
+	const char *vsrc3 =
+		"attribute mediump vec3 vertex;\n"
+		"uniform mediump vec4 color;\n"
+		"uniform mediump mat4 projectionMatrix;\n"
+		"varying mediump vec4 outColor;\n"
+		"void main(void)\n"
+		"{\n"
+		"    outColor = color;\n"
+		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
+		"}\n";
+	vshader3->compileSourceCode(vsrc3);
+
+	basicShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
+	basicShaderProgram->addShader(vshader3);
+	basicShaderProgram->addShader(fshader1);
+	basicShaderProgram->link();
+#endif
+}
+
 void StelPainter::setArrays(const Vec3d* vertice, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray)
 {
 	enableClientStates(vertice, texCoords, colorArray, normalArray);
@@ -1757,20 +1749,6 @@ void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool
 	texCoordArray.enabled = texture;
 	colorArray.enabled = color;
 	normalArray.enabled = normal;
-}
-
-void StelPainter::prepareDrawFromArray(int count, int index, const unsigned int* indices, bool doProj)
-{
-	// Project the vertex array using current projection
-	ArrayDesc vertexArray = (doProj)? projectArray(this->vertexArray, index, count, indices) : this->vertexArray;
-#ifndef STELPAINTER_GL2
-	// Enable the client state and set the opengl array for each array
-	prepareArray(vertexArray, GL_VERTEX_ARRAY);
-	prepareArray(texCoordArray, GL_TEXTURE_COORD_ARRAY);
-	prepareArray(normalArray, GL_NORMAL_ARRAY);
-	prepareArray(colorArray, GL_COLOR_ARRAY);
-#else
-#endif
 }
 
 void StelPainter::prepareArray(const ArrayDesc& array, int cap)
@@ -1804,10 +1782,25 @@ void StelPainter::prepareArray(const ArrayDesc& array, int cap)
 #endif
 }
 
-void StelPainter::drawFromArray(DrawingMode mode, int count, int index, bool doProj)
+void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned int* indices)
 {
-	prepareDrawFromArray(count, index, NULL, doProj);
-#ifdef STELPAINTER_GL2
+	ArrayDesc projectedVertexArray = vertexArray;
+	if (doProj)
+	{
+		// Project the vertex array using current projection
+		if (indices)
+			projectedVertexArray = projectArray(vertexArray, 0, count, indices + offset);
+		else
+			projectedVertexArray = projectArray(vertexArray, offset, count, NULL);
+	}
+
+#ifndef STELPAINTER_GL2
+	// Enable the client state and set the opengl array for each array
+	prepareArray(projectedVertexArray, GL_VERTEX_ARRAY);
+	prepareArray(texCoordArray, GL_TEXTURE_COORD_ARRAY);
+	prepareArray(normalArray, GL_NORMAL_ARRAY);
+	prepareArray(colorArray, GL_COLOR_ARRAY);
+#else
 	Q_ASSERT(vertexArray.enabled);
 	QGLShaderProgram* pr=NULL;
 	if (!texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
@@ -1835,9 +1828,11 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int index, bool doP
 		pr->setAttributeArray("texCoord", (const GLfloat*)texCoordArray.pointer, 2);
 		pr->enableAttributeArray("texCoord");
 	}
-
 #endif
-	glDrawArrays(mode, index, count);
+	if (indices)
+		glDrawElements(mode, count, GL_UNSIGNED_INT, indices + offset);
+	else
+		glDrawArrays(mode, offset, count);
 #ifdef STELPAINTER_GL2
 	if (pr==texturesShaderProgram)
 	{
@@ -1845,15 +1840,6 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int index, bool doP
 	}
 	pr->disableAttributeArray("vertex");
 	pr->release();
-#endif
-}
-
-void StelPainter::drawFromArray(DrawingMode mode, const unsigned int* indices, int offset, int count, bool doProj)
-{
-	prepareDrawFromArray(count, 0, indices + offset, doProj);
-#ifdef STELPAINTER_GL2
-#else
-	glDrawElements(mode, count, GL_UNSIGNED_INT, indices + offset);
 #endif
 }
 

@@ -313,15 +313,12 @@ public:
 	//! It is equivalent to calling enableClientState and set the array pointer for each arrays.
 	void setArrays(const Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL);
 
-	//! Draws primitives using count vertices from the arrays specified by setVertexArray().
-	//! The type of primitive to draw is specified by mode.
-	//! This operation will consume count values from the enabled arrays, starting at index.
-	void drawFromArray(DrawingMode mode, int count, int index=0, bool doProj=true);
 	//! Draws primitives using vertices from the arrays specified by setVertexArray().
 	//! The type of primitive to draw is specified by mode.
-	//! This operation will consume count elements of indices, starting at offset, which are used to index into the
+	//! If indices is NULL, this operation will consume count values from the enabled arrays, starting at offset.
+	//! Else it will consume count elements of indices, starting at offset, which are used to index into the
 	//! enabled arrays.
-	void drawFromArray(DrawingMode mode, const unsigned int* indices, int offset, int count, bool doProj=true);
+	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned int* indices=NULL);
 
 private:
 	//! Struct describing one opengl array
@@ -337,9 +334,6 @@ private:
 	//! @param array the descriptor of the array.
 	//! @param cap Specifies the opengl capability associated to the array.
 	void prepareArray(const ArrayDesc& array, int cap);
-
-	//! Common code for each flavor of drawFromArray.
-	void prepareDrawFromArray(int count, int index=0, const unsigned int* indices=NULL, bool doProj=true);
 
 	//! Project an array using the current projection.
 	//! @return a descriptor of the new array

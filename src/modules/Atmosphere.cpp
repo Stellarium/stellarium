@@ -391,7 +391,7 @@ void Atmosphere::draw(StelCore* core)
 		GLuint* shift=indices;
 		for (int y=0;y<skyResolutionY;++y)
 		{
-			sPainter.drawFromArray(StelPainter::TriangleStrip, shift, 0, (skyResolutionX+1)*2);
+			sPainter.drawFromArray(StelPainter::TriangleStrip, (skyResolutionX+1)*2, 0, false, shift);
 			shift += (skyResolutionX+1)*2;
 		}
 		sPainter.setShadeModel(StelPainter::ShadeModelFlat);

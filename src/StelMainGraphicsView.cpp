@@ -82,6 +82,8 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	//glFormat.setSampleBuffers(true);
 	//glFormat.setDirectRendering(false);
 	glWidget = new QGLWidget(glFormat, this);
+	//glWidget->setAttribute(Qt::WA_PaintOnScreen);
+	//glWidget->setAttribute(Qt::WA_NoSystemBackground);
 
 	if (!glWidget->format().stencil())
 		qWarning("Could not get stencil buffer; results will be suboptimal");
