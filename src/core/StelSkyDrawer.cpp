@@ -19,6 +19,12 @@
 
 #ifdef USE_OPENGL_ES2
  #include "GLES2/gl2.h"
+ #ifndef GL_POINT_SPRITE
+  #define GL_POINT_SPRITE 0x8861
+ #endif
+ #ifndef GL_VERTEX_PROGRAM_POINT_SIZE
+  #define GL_VERTEX_PROGRAM_POINT_SIZE 0x8642
+ #endif
 #endif
 
 #include <QGLShaderProgram>
@@ -43,13 +49,6 @@
 // The 0.025 corresponds to the maximum eye resolution in degree
 #define EYE_RESOLUTION (0.25)
 #define MAX_LINEAR_RADIUS 8.f
-
-#ifndef GL_POINT_SPRITE
- #define GL_POINT_SPRITE 0x8861
-#endif
-#ifndef GL_VERTEX_PROGRAM_POINT_SIZE
- #define GL_VERTEX_PROGRAM_POINT_SIZE 0x8642
-#endif
 
 StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), starsShaderProgram(NULL)
 {
