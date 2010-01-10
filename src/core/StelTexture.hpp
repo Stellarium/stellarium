@@ -30,6 +30,10 @@ class QMutex;
 class QSemaphore;
 class QFile;
 
+#ifndef GL_CLAMP_TO_EDGE
+#define GL_CLAMP_TO_EDGE 0x812F
+#endif
+
 //! @class StelTexture
 //! Base texture class. For creating an instance, use StelTextureMgr::createTexture() and StelTextureMgr::createTextureThread()
 //! @sa StelTextureSP

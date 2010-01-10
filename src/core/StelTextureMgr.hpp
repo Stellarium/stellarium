@@ -26,11 +26,6 @@
 #include "StelTexture.hpp"
 #include <QObject>
 
-#ifndef GL_CLAMP_TO_EDGE
-#define GL_CLAMP_TO_EDGE 0x812F
-#endif
-
-
 //! @class StelTextureMgr
 //! Manage textures loading.
 //! It provides method for loading images in a separate thread.
