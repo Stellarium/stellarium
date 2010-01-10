@@ -193,7 +193,6 @@ void StelTexture::fileLoadFinished()
 *************************************************************************/
 bool StelTexture::getDimensions(int &awidth, int &aheight)
 {
-	QMutexLocker lock(mutex);
 	if (width<0 || height<0)
 	{
 		// Try to get the size from the file without loading data
@@ -250,21 +249,16 @@ bool StelTexture::glLoad()
 		opt |= QGLContext::MipmapBindOption;
 
 	GLint glformat;
-	switch (qImage.format())
+	if (qImage.isGrayscale())
 	{
-		case QImage::Format_Indexed8:
-			if (qImage.isGrayscale())
-				glformat = GL_LUMINANCE;
-			else
-				glformat = GL_RGB;
-				break;
-		case QImage::Format_RGB32:
-			 glformat = GL_RGB;
-			 break;
-		default:
-			 glformat = GL_RGBA;
+		glformat = qImage.hasAlphaChannel() ? GL_LUMINANCE_ALPHA : GL_LUMINANCE;
 	}
-
+	else if (qImage.hasAlphaChannel())
+	{
+		glformat = GL_RGBA;
+	}
+	else
+		glformat = GL_RGB;
 	id = StelMainGraphicsView::getInstance().getOpenGLWin()->bindTexture(qImage, GL_TEXTURE_2D, glformat, opt);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, loadParams.wrapMode);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, loadParams.wrapMode);

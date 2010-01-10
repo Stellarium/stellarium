@@ -343,7 +343,7 @@ void LandscapeOldStyle::drawDecor(StelCore* core) const
 				ty0 += d_ty;
 			}
 			StelVertexArray array(vertexArray, StelVertexArray::TriangleStrip, texCoordsArray);
-			sPainter.drawSphericalTriangles(array, true, false, false);
+			sPainter.drawSphericalTriangles(array, true, NULL, false);
 			y0 = y1;
 			x0 = x1;
 			tx0 = tx1;
