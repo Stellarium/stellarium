@@ -157,7 +157,7 @@ void StelSkyDrawer::init()
 						"uniform mediump mat4 projectionMatrix;\n"
 						"attribute mediump vec2 skyVertex;\n"
 						"attribute mediump vec3 starColor;\n"
-						"attribute lowp vec2 starSize;\n"
+						"attribute mediump vec2 starSize;\n"
 						"varying mediump vec4 outColor;\n"
 						"void main()\n"
 						"{	gl_Position = projectionMatrix*vec4(skyVertex[0], skyVertex[1], 0., 1.);\n"
