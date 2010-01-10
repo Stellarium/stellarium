@@ -122,7 +122,9 @@ int main(int argc, char **argv)
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
 
+#ifndef USE_OPENGL_ES2
 	QApplication::setStyle(new QPlastiqueStyle());
+#endif
 
 	// Used for getting system date formatting
 	setlocale(LC_TIME, "");
