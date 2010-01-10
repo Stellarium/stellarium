@@ -178,7 +178,7 @@ void StelSkyDrawer::init()
 		if (!fShader->compileSourceCode(
 				"uniform sampler2D tex;\n"
 				"varying mediump vec4 outColor;\n"
-				"void main(){gl_FragColor = texture2D(tex,gl_PointCoord.st)*outColor;}"))
+				"void main(){gl_FragColor = texture2D(tex,gl_PointCoord)*outColor;}"))
 		{
 			qWarning() << "Error while compiling fragment shader: " << fShader->log();
 			useShader = false;
@@ -400,8 +400,10 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 	if (useShader)
 	{
 		Q_ASSERT(starsShaderProgram);
+#ifndef USE_OPENGL_ES2
 		glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
 		glEnable(GL_POINT_SPRITE);
+#endif
 		starsShaderProgram->bind();
 		const Mat4f& m = sPainter->getProjector()->getProjectionMatrix();
 		starsShaderProgram->setUniformValue("projectionMatrix",
@@ -417,8 +419,10 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 		starsShaderProgram->disableAttributeArray("starColor");
 		starsShaderProgram->disableAttributeArray("starSize");
 		starsShaderProgram->release();
+#ifndef USE_OPENGL_ES2
 		glDisable(GL_POINT_SPRITE);
 		glDisable(GL_VERTEX_PROGRAM_POINT_SIZE);
+#endif
 	}
 	else
 	{
