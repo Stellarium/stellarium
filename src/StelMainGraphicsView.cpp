@@ -69,7 +69,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setFocusPolicy(Qt::StrongFocus);
 	// Allows for precise FPS control
-	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
+	//setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
 	connect(this, SIGNAL(screenshotRequested()), this, SLOT(doScreenshot()));
 
 	qtime = new QTime();
@@ -77,7 +77,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	lastEventTimeSec = 0;
 
 	// Create an openGL viewport
-	QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer | QGL::AlphaChannel);
+	QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer);
 	//glFormat.setSamples(16);
 	//glFormat.setSampleBuffers(true);
 	//glFormat.setDirectRendering(false);
@@ -87,16 +87,11 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 
 	if (!glWidget->format().stencil())
 		qWarning("Could not get stencil buffer; results will be suboptimal");
-	if (!glWidget->format().alpha())
-		qWarning("Could not get alpha channel; results will be suboptimal");
 	if (!glWidget->format().depth())
 		qWarning("Could not get depth buffer; results will be suboptimal");
 
 	setViewport(glWidget);
 
-	// Antialiasing works only with SampleBuffer, but it's much slower
-	//setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::HighQualityAntialiasing);
-	//setRenderHint(QPainter::TextAntialiasing, false);
 	//setOptimizationFlags(QGraphicsView::DontClipPainter|QGraphicsView::DontSavePainterState|QGraphicsView::DontAdjustForAntialiasing);
 	setScene(new QGraphicsScene());
 
