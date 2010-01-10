@@ -1781,7 +1781,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	prepareArray(normalArray, GL_NORMAL_ARRAY);
 	prepareArray(colorArray, GL_COLOR_ARRAY);
 #else
-	Q_ASSERT(vertexArray.enabled);
+	Q_ASSERT(projectedVertexArray.enabled);
 	QGLShaderProgram* pr=NULL;
 	if (!texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
@@ -1797,7 +1797,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		return;
 	}
 	pr->bind();
-	pr->setAttributeArray("vertex", (const GLfloat*)vertexArray.pointer, vertexArray.size);
+	pr->setAttributeArray("vertex", (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
 	pr->enableAttributeArray("vertex");
 	const Mat4f& m = getProjector()->getProjectionMatrix();
 	pr->setUniformValue("projectionMatrix", QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]));
