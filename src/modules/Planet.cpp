@@ -678,12 +678,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 			double n,f;
 			core->getClippingPlanes(&n,&f); // Save clipping planes
 			core->setClippingPlanes(z_near,z_far);
-//			StelProjectorP saveProj = sPainter->getProjector();
-//			sPainter->setProjector(core->getProjection(mat * Mat4d::zrotation(M_PI/180*(axisRotation + 90.))));
 			glDepthMask(GL_TRUE);
-//			glDepthFunc(GL_LESS);
-//			glDepthRange(0,1);
-//			glClearDepth(1);
 			glClear(GL_DEPTH_BUFFER_BIT);
 			glEnable(GL_DEPTH_TEST);
 			drawSphere(sPainter, screenSz);
@@ -693,7 +688,6 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 			sPainter->getLight().enable();
 			glDisable(GL_DEPTH_TEST);
 			core->setClippingPlanes(n,f);  // Restore old clipping planes
-			//sPainter->setProjector(saveProj);
 		}
 		else
 		{

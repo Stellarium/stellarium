@@ -1564,61 +1564,40 @@ void StelPainter::sSphere(double radius, double oneMinusOblateness, int slices, 
 }
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
-void StelPainter::sCylinder(double radius, double height, int slices, int stacks, int orientInside)
+void StelPainter::sCylinder(double radius, double height, int slices, int orientInside)
 {
-		double da, r, dz;
-	GLfloat z, nsign;
-	GLint i, j;
-
-	nsign = 1.0;
 	if (orientInside)
 		glCullFace(GL_FRONT);
-	//nsign = -1.0;
-	//else nsign = 1.0;
 
-	da = 2.0 * M_PI / slices;
-	dz = height / stacks;
+	const double da = 2.0 * M_PI / slices;
 
 	GLfloat ds = 1.0 / slices;
-	GLfloat dt = 1.0 / stacks;
-	GLfloat t = 0.0;
-	z = 0.0;
-	r = radius;
-	QVector<float> normalArray;
 	QVector<float> texCoordArray;
 	QVector<double> vertexArray;
-	for (j = 0; j < stacks; j++)
+	texCoordArray.resize(0);
+	vertexArray.resize(0);
+	GLfloat s = 0.0;
+	GLfloat x, y;
+	for (int i = 0; i <= slices; i++)
 	{
-		normalArray.resize(0);
-		texCoordArray.resize(0);
-		vertexArray.resize(0);
-		GLfloat s = 0.0;
-		for (i = 0; i <= slices; i++)
+		if (i == slices)
 		{
-			GLfloat x, y;
-			if (i == slices)
-			{
-				x = 0.f;
-				y = 1.f;
-			}
-			else
-			{
-				x = std::sin(i * da);
-				y = std::cos(i * da);
-			}
-			normalArray << x * nsign << y * nsign << 0.f;
-			texCoordArray << s << t;
-			vertexArray << x*r << y*r << z;
-			normalArray << x * nsign << y * nsign << 0.f;
-			texCoordArray << s << t + dt;
-			vertexArray << x*r << y*r << z+dz;
-			s += ds;
-		} // for slices
-		setArrays((Vec3d*)vertexArray.constData(), (Vec2f*)texCoordArray.constData(), NULL,  (Vec3f*)normalArray.constData());
-		drawFromArray(TriangleStrip, vertexArray.size()/3);
-		t += dt;
-		z += dz;
-	}				/* for stacks */
+			x = 0.f;
+			y = 1.f;
+		}
+		else
+		{
+			x = std::sin(da*i);
+			y = std::cos(da*i);
+		}
+		texCoordArray << s << 0.;
+		vertexArray << x*radius << y*radius << 0.;
+		texCoordArray << s << 1.;
+		vertexArray << x*radius << y*radius << height;
+		s += ds;
+	}
+	setArrays((Vec3d*)vertexArray.constData(), (Vec2f*)texCoordArray.constData());
+	drawFromArray(TriangleStrip, vertexArray.size()/3);
 
 	if (orientInside)
 		glCullFace(GL_BACK);
@@ -1670,7 +1649,6 @@ void StelPainter::initSystemGLInfo()
 		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
 		"}\n";
 	vshader1->compileSourceCode(vsrc1);
-
 	QGLShader *fshader1 = new QGLShader(QGLShader::Fragment);
 	const char *fsrc1 =
 		"varying mediump vec4 outColor;\n"
@@ -1679,11 +1657,11 @@ void StelPainter::initSystemGLInfo()
 		"    gl_FragColor = outColor;\n"
 		"}\n";
 	fshader1->compileSourceCode(fsrc1);
-
 	colorShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
 	colorShaderProgram->addShader(vshader1);
 	colorShaderProgram->addShader(fshader1);
 	colorShaderProgram->link();
+
 
 	QGLShader *vshader2 = new QGLShader(QGLShader::Vertex);
 	const char *vsrc2 =
@@ -1697,7 +1675,6 @@ void StelPainter::initSystemGLInfo()
 		"    texc = texCoord;\n"
 		"}\n";
 	vshader2->compileSourceCode(vsrc2);
-
 	QGLShader *fshader2 = new QGLShader(QGLShader::Fragment);
 	const char *fsrc2 =
 		"varying mediump vec2 texc;\n"
@@ -1708,7 +1685,6 @@ void StelPainter::initSystemGLInfo()
 		"    gl_FragColor = texture2D(tex, texc)*texColor;\n"
 		"}\n";
 	fshader2->compileSourceCode(fsrc2);
-
 	texturesShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
 	texturesShaderProgram->addShader(vshader2);
 	texturesShaderProgram->addShader(fshader2);
@@ -1717,19 +1693,23 @@ void StelPainter::initSystemGLInfo()
 	QGLShader *vshader3 = new QGLShader(QGLShader::Vertex);
 	const char *vsrc3 =
 		"attribute mediump vec3 vertex;\n"
-		"uniform mediump vec4 color;\n"
 		"uniform mediump mat4 projectionMatrix;\n"
-		"varying mediump vec4 outColor;\n"
 		"void main(void)\n"
 		"{\n"
-		"    outColor = color;\n"
 		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
 		"}\n";
 	vshader3->compileSourceCode(vsrc3);
-
+	QGLShader *fshader3 = new QGLShader(QGLShader::Fragment);
+	const char *fsrc3 =
+		"uniform mediump vec4 color;\n"
+		"void main(void)\n"
+		"{\n"
+		"    gl_FragColor = color;\n"
+		"}\n";
+	fshader3->compileSourceCode(fsrc3);
 	basicShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
 	basicShaderProgram->addShader(vshader3);
-	basicShaderProgram->addShader(fshader1);
+	basicShaderProgram->addShader(fshader3);
 	basicShaderProgram->link();
 #endif
 }
@@ -1810,8 +1790,10 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	else if (texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
 		pr = texturesShaderProgram;
-	} else
+	}
+	else
 	{
+		qDebug() << "Unhandled parameters.";
 		return;
 	}
 	pr->bind();
@@ -1822,7 +1804,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 
 	if (pr==basicShaderProgram)
 		pr->setUniformValue("color", currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
-	if (pr==texturesShaderProgram)
+	else if (pr==texturesShaderProgram)
 	{
 		pr->setUniformValue("texColor", currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
 		pr->setAttributeArray("texCoord", (const GLfloat*)texCoordArray.pointer, 2);

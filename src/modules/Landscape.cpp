@@ -287,7 +287,7 @@ void LandscapeOldStyle::drawFog(StelCore* core) const
 	fogTex->bind();
 	
 	const double height = tanMode ? radius*std::tan(fogAltAngle*M_PI/180.) : radius*std::sin(fogAltAngle*M_PI/180.);
-	sPainter.sCylinder(radius, height, 128, 1, 1);
+	sPainter.sCylinder(radius, height, 128, 1);
 	
 	glDisable(GL_CULL_FACE);
 }
