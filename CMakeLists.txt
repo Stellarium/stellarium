@@ -54,7 +54,6 @@ CHECK_INCLUDE_FILES(byteswap.h HAVE_BYTESWAP_H)
 
 ########### Check functions ###########
 INCLUDE(CheckFunctionExists)
-#toupper strcasecmp strdup putenv setlocale tzset strchr pow10 timegm
 CHECK_FUNCTION_EXISTS(tzset HAVE_TZSET)
 CHECK_FUNCTION_EXISTS(pow10 HAVE_POW10)
 CHECK_FUNCTION_EXISTS(setlocale HAVE_SETLOCALE)
@@ -194,6 +193,8 @@ SET(OPENGL_MODE Desktop CACHE STRING "Choose the type of openGL to use, options 
 IF (GUI_MODE STREQUAL "External")
 	SET(EXTERNAL_GUI_PLUGIN_PATH "/path/to/libMyGui.a" CACHE PATH "The absolute path to the .a static library containing the static GUI plugin")
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${EXTERNAL_GUI_PLUGIN_PATH})
+	SET(EXTERNAL_GUI_PLUGIN_EXTRALIBS CACHE STRING "Additionnal link options needed for the GUI plugin")
+	SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} ${EXTERNAL_GUI_PLUGIN_EXTRALIBS})
 ENDIF()
 
 # On WIN32 we need to split the main binary into a small binary and a dll
