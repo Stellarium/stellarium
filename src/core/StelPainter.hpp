@@ -228,7 +228,7 @@ public:
 	void sSphere(double radius, double oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
 
 	//! Re-implementation of gluCylinder : glu is overridden for non-standard projection.
-	void sCylinder(double radius, double height, int slices, int stacks, int orientInside = 0);
+	void sCylinder(double radius, double height, int slices, int orientInside = 0);
 
 	//! Draw a disk with a special texturing mode having texture center at center of disk.
 	//! The disk is made up of concentric circles with increasing refinement.
