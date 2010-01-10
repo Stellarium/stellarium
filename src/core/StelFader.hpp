@@ -20,9 +20,6 @@
 #ifndef _STELFADER_HPP_
 #define _STELFADER_HPP_
 
-#include <cstdio>
-#include <cfloat>
-
 //! @class StelFader
 //! Manages a (usually smooth) transition between two states (typically ON/OFF) in function of a counter
 //! It used for various purpose like smooth transitions between 
@@ -235,39 +232,5 @@ protected:
 	int counter;
 	float interstate;
 };
-
-
-/* better idea but not working...
-class ParabolicFader : public LinearFader
-{
-public:
-	ParabolicFader(int _duration=1000, float minimumValue=0.f, float maximumValue=1.f, bool initialState=false) 
-		: LinearFader(_duration, minimumValue, maximumValue, initialState)
-		{
-		}
-	
-	// Increments the internal counter of deltaTime ticks
-	void update(int deltaTicks)
-	{
-
-		printf("Counter %d  interstate %f\n", counter, interstate);
-		if (!isTransiting) return; // We are not in transition
-		counter+=deltaTicks;
-		if (counter>=duration)
-		{
-			// Transition is over
-			isTransiting = false;
-			interstate = targetValue;
-		}
-		else
-		{
-			interstate = startValue + (targetValue - startValue) * counter/duration;
-			interstate *= interstate;
-		}
-
-		printf("Counter %d  interstate %f\n", counter, interstate);
-	}
-};
-*/
 
 #endif // _STELFADER_HPP_
