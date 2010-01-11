@@ -41,7 +41,6 @@ class StelStyle;
 class QTime;
 class StelLocationMgr;
 class StelSkyLayerMgr;
-class StelDownloadMgr;
 class StelAudioMgr;
 class QNetworkReply;
 class StelGuiBase;
@@ -117,9 +116,6 @@ public:
 	//! Get the audio manager
 	StelAudioMgr* getStelAudioMgr() {return audioMgr;}
 
-	//! Get the download manager
-	StelDownloadMgr& getDownloadMgr() {return *downloadMgr;}
-
 	//! Get the core of the program.
 	//! It is the one which provide the projection, navigation and tone converter.
 	//! @return the StelCore instance of the program
@@ -194,9 +190,6 @@ public slots:
 	//! Connect this slot to QNetworkAccessManager::finished() slot to obtain statistics at the end of the program.
 	void reportFileDownloadFinished(QNetworkReply* reply);
 
-	//! close the program
-	void quitStellarium();
-
 private:
 	static void initStatic();
 
@@ -248,9 +241,6 @@ private:
 
 	// Currently used StelStyle
 	StelStyle* currentStelStyle;
-
-	// Download manager that uses networkAccessManager
-	StelDownloadMgr* downloadMgr;
 
 	StelSkyLayerMgr* skyImageMgr;
 

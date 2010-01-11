@@ -82,11 +82,9 @@ void ZoneArray::initTriangle(int index, const Vec3d &c0, const Vec3d &c1,
 	if (star_position_scale < h) star_position_scale = h;
 }
 
-static inline
-int ReadInt(QFile& file, unsigned int &x)
+static inline int ReadInt(QFile& file, unsigned int &x)
 {
-	const int rval = (4 == file.read((char*)&x, 4))
-			 ? 0 : -1;
+	const int rval = (4 == file.read((char*)&x, 4)) ? 0 : -1;
 	return rval;
 }
 
@@ -94,27 +92,16 @@ int ReadInt(QFile& file, unsigned int &x)
 #warning Star catalogue loading has only been tested with gcc
 #endif
 
-ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
-							 StelLoadingBar &lb)
+ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap, StelLoadingBar* lb)
 {
-	QString fname(extended_file_name);
 	QString dbStr; // for debugging output.
-	try
+	QFile* file = new QFile(catalogFilePath);
+	if (!file->open(QIODevice::ReadOnly))
 	{
-		fname = StelFileMgr::findFile(fname);
-	}
-	catch (std::runtime_error &e)
-	{
-		qDebug() << "Loading" << extended_file_name << e.what();
+		qWarning() << "Error while loading " << catalogFilePath << ": failed to open file.";
 		return 0;
 	}
-	QFile* file = new QFile(fname);
-	if(!file->open(QIODevice::ReadOnly))
-	{
-		qDebug() << "Loading" << extended_file_name << "failed to open file.";
-		return 0;
-	}
-	dbStr = "Loading \"" + extended_file_name + "\": ";
+	dbStr = "Loading \"" + catalogFilePath + "\": ";
 	unsigned int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
 	if (ReadInt(*file,magic) < 0 ||
 			ReadInt(*file,type) < 0 ||
@@ -178,10 +165,7 @@ ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
 		return 0;
 	}
 	ZoneArray *rval = 0;
-	dbStr += QString("%1_%2v%3_%4; ").arg(level)
-			 .arg(type)
-			 .arg(major)
-			 .arg(minor);
+	dbStr += QString("%1_%2v%3_%4; ").arg(level).arg(type).arg(major).arg(minor);
 
 	switch (type)
 	{
@@ -253,7 +237,7 @@ ZoneArray *ZoneArray::create(const QString& extended_file_name, bool use_mmap,
 	if (rval && rval->isInitialized())
 	{
 		dbStr += QString("%1").arg(rval->getNrOfStars());
-		qDebug() << qPrintable(dbStr);
+		qDebug() << dbStr;
 	}
 	else
 	{
@@ -278,8 +262,7 @@ ZoneArray::ZoneArray(const QString& fname, QFile* file, int level, int mag_min,
 	nr_of_stars = 0;
 }
 
-bool ZoneArray::readFileWithStelLoadingBar(QFile& file, void *data, qint64 size,
-		StelLoadingBar &lb)
+bool ZoneArray::readFileWithStelLoadingBar(QFile& file, void *data, qint64 size, StelLoadingBar*lb)
 {
 	int parts = 256;
 	int part_size = (size + (parts>>1)) / parts;
@@ -289,7 +272,8 @@ bool ZoneArray::readFileWithStelLoadingBar(QFile& file, void *data, qint64 size,
 		parts = (size + (part_size>>1)) / part_size;
 	}
 	float i = 0.f;
-	lb.Draw(i / parts);
+	if (lb)
+		lb->Draw(i / parts);
 	i += 1.f;
 	while (size > 0)
 	{
@@ -298,7 +282,8 @@ bool ZoneArray::readFileWithStelLoadingBar(QFile& file, void *data, qint64 size,
 		if (read_rc != to_read) return false;
 		size -= read_rc;
 		data = ((char*)data) + read_rc;
-		lb.Draw(i / parts);
+		if (lb)
+			lb->Draw(i / parts);
 		i += 1.f;
 	}
 	return true;
@@ -339,14 +324,15 @@ void SpecialZoneArray<Star>::scaleAxis(void)
 
 template<class Star>
 SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mmap,
-					 StelLoadingBar &lb, int level, int mag_min,
+					 StelLoadingBar*lb, int level, int mag_min,
 					 int mag_range, int mag_steps)
 		: ZoneArray(file->fileName(), file, level, mag_min, mag_range, mag_steps),
 		  stars(0), mmap_start(0)
 {
 	if (nr_of_zones > 0)
 	{
-		lb.Draw(0.f);
+		if (lb)
+			lb->Draw(0.f);
 		zones = new SpecialZoneData<Star>[nr_of_zones];
 		if (zones == 0)
 		{
@@ -474,7 +460,8 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 				file->close();
 			}
 		}
-		lb.Draw(1.f);
+		if (lb)
+			lb->Draw(1.f);
 	}
 }
 

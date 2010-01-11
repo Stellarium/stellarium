@@ -128,6 +128,6 @@ void StelMainWindow::setFullScreen(bool b)
 void StelMainWindow::closeEvent(QCloseEvent* event)
 {
 	event->ignore();
-	StelApp::getInstance().quitStellarium();
+	QCoreApplication::exit();
 }
 

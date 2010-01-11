@@ -23,6 +23,7 @@
 #include <QFont>
 #include <vector>
 #include <map>
+#include <QVariantMap>
 #include "StelFader.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
@@ -157,8 +158,6 @@ public slots:
 	static void setFlagSciNames(bool f) {flagSciNames = f;}
 	static bool getFlagSciNames(void) {return flagSciNames;}
 
-	QSettings* getStarSettings(void) {return starSettings;}
-
 public:
 	///////////////////////////////////////////////////////////////////////////
 	// Other methods
@@ -179,7 +178,18 @@ public:
 	static QString convertToSpectralType(int index);
 	static QString convertToComponentIds(int index);
 
+	QVariantList getCatalogsDescription() const {return catalogsDescription;}
+
+	//! Try to load the given catalog, even if it is marched as unchecked.
+	//! Mark it as checked if checksum is correct.
+	//! @return false in case of failure.
+	bool checkAndLoadCatalog(const QVariantMap& m, StelLoadingBar* lb=NULL);
+
 private:
+
+	void setCheckFlag(const QString& catalogId, bool b);
+
+	void copyDefaultConfigFile();
 
 	//! Loads common names for stars from a file.
 	//! Called when the SkyCulture is updated.
@@ -196,10 +206,7 @@ private:
 	int getMaxSearchLevel() const;
 
 	//! Load all the stars from the files.
-	void loadData();
-
-	//! Load config data from star.ini
-	void loadStarSettings(void);
+	void loadData(QVariantMap starsConfigFile);
 
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(StelPainter& sPainter, const StelNavigator * nav);
@@ -210,6 +217,8 @@ private:
 	bool flagStarName;
 	float labelsAmount;
 	bool gravityLabel;
+
+	qint64 mmapThresholdBytes;
 
 	int maxGeodesicGridLevel;
 	int lastMaxSearchLevel;
@@ -245,8 +254,11 @@ private:
 
 	StelTextureSP texPointer;		// The selection pointer texture
 
-	QSettings* starSettings;
 	class StelObjectMgr* objectMgr;
+
+	QString starConfigFileFullPath;
+	QVariantMap starSettings;
+	QVariantList catalogsDescription;
 };
 
 

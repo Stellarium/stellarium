@@ -186,7 +186,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
-	connect(getGuiActions("actionQuit_Global"), SIGNAL(triggered()), &StelApp::getInstance(), SLOT(quitStellarium()));
+	connect(getGuiActions("actionQuit_Global"), SIGNAL(triggered()), qApp, SLOT(quit()));
 
 	// Debug
 	connect(getGuiActions("action_Reload_Style"), SIGNAL(triggered()), this, SLOT(reloadStyle()));

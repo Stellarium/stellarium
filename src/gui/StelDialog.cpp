@@ -98,6 +98,7 @@ void StelDialog::setVisible(bool v)
 			return;
 		}
 		dialog = new QDialog(NULL);
+		//dialog->setAttribute(Qt::WA_OpaquePaintEvent, true);
 		connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
 		createDialogContent();
 
