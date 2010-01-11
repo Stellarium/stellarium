@@ -39,7 +39,6 @@
 #include "StelIniParser.hpp"
 #include "StelProjector.hpp"
 #include "StelLocationMgr.hpp"
-#include "StelDownloadMgr.hpp"
 
 #include "StelModuleMgr.hpp"
 #include "StelLocaleMgr.hpp"
@@ -70,6 +69,7 @@
 #include <QNetworkProxy>
 #include <QMessageBox>
 #include <QNetworkDiskCache>
+#include <QNetworkReply>
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -185,8 +185,6 @@ void StelApp::init(QSettings* conf)
 #else
 	loadingBar = new StelLoadingBar(12., "logo24bits.png", PACKAGE_VERSION, 45, 320, 121);
 #endif // SVN_RELEASE
-
-	downloadMgr = new StelDownloadMgr();
 
 	localeMgr->init();
 	skyCultureMgr->init();
@@ -553,19 +551,3 @@ void StelApp::makeMainGLContextCurrent()
 	StelMainGraphicsView::getInstance().makeGLContextCurrent();
 }
 
-void StelApp::quitStellarium()
-{
-	if (getDownloadMgr().blockQuit())
-	{
-		QMessageBox::StandardButtons b = QMessageBox::question(0, q_("Download in progress"), q_("Stellarium is still downloading the file %1. Would you like to cancel the download and quit Stellarium?").arg(getDownloadMgr().name()), QMessageBox::Yes|QMessageBox::No, QMessageBox::No);
-		if (b==QMessageBox::Yes)
-		{
-			getDownloadMgr().abort();
-		}
-		else
-		{
-			return;	// Cancel quit
-		}
-	}
-	QCoreApplication::exit();
-}
