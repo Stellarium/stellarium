@@ -116,9 +116,13 @@ char* getlogin();
 
 int fsync (int fd);
 
+/*
+//BM: Both of these functions cause a previous declaration error
+//when building on Windows/MinGW.
 void usleep(unsigned int usec);
 
 void sleep(unsigned int sec);
+*/
 
 int setreuid(uid_t ruid, uid_t euid);
 
