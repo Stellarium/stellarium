@@ -52,7 +52,7 @@
 #include "StelIniParser.hpp"
 #include "StelStyle.hpp"
 #include "StelPainter.hpp"
-
+#include "StelJsonParser.hpp"
 #include "ZoneArray.hpp"
 
 #include <list>
@@ -148,8 +148,6 @@ double StarMgr::getCallOrder(StelModuleActionName actionName) const
 
 StarMgr::~StarMgr(void)
 {
-	delete starSettings;
-	starSettings=NULL;
 	ZoneArrayMap::iterator it(zoneArrays.end());
 	while (it!=zoneArrays.begin())
 	{
@@ -178,18 +176,58 @@ QString StarMgr::getSciName(int hip)
 	return QString();
 }
 
+void StarMgr::copyDefaultConfigFile()
+{
+	try
+	{
+		starConfigFileFullPath = StelFileMgr::findFile("stars/default/starsConfig.json", StelFileMgr::New);
+		QFile::copy(StelFileMgr::findFile("stars/default/defaultStarsConfig.json"), StelFileMgr::getUserDir()+"/stars/default/starsConfig.json");
+	}
+	catch (std::runtime_error& e)
+	{
+		qFatal("Could not create configuration file stars/default/starsConfig.json");
+	}
+}
+
 void StarMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	loadStarSettings();
-	loadData();
+	try
+	{
+		starConfigFileFullPath = StelFileMgr::findFile("stars/default/starsConfig.json", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "Could not find the starsConfig.json file: will copy the default one.";
+		copyDefaultConfigFile();
+	}
+
+	QFile fic(starConfigFileFullPath);
+	fic.open(QIODevice::ReadOnly);
+	starSettings = StelJsonParser::parse(fic).toMap();
+	fic.close();
+
+	// Increment the 1 each time any star catalog file change
+	if (starSettings.value("version").toInt()!=1)
+	{
+		qWarning() << "Found an old starsConfig.json file, upgrade..";
+		fic.remove();
+		copyDefaultConfigFile();
+		QFile fic2(starConfigFileFullPath);
+		fic2.open(QIODevice::ReadOnly);
+		starSettings = StelJsonParser::parse(fic2).toMap();
+		fic2.close();
+	}
+
+	loadData(starSettings);
 	starFont.setPixelSize(13);
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
 	setLabelsAmount(conf->value("stars/labels_amount",3).toDouble());
+	mmapThresholdBytes = conf->value("stars/max_memory", 1).toULongLong() * 1024*1024;
 
 	objectMgr->registerStelObjectMgr(this);
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   // Load pointer texture
@@ -234,95 +272,120 @@ void StarMgr::setStelStyle(const StelStyle& style)
 	setLabelColor(StelUtils::strToVec3f(conf->value(section+"/star_label_color", defaultColor).toString()));
 }
 
-void StarMgr::loadStarSettings()
+bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc, StelLoadingBar* lb)
 {
-	QString iniFile;
+	const bool checked = catDesc.value("checked").toBool();
+	QString catalogFileName = catDesc.value("fileName").toString();
+
+	// See if it is an absolute path, else prepend default path
+	if (!(StelFileMgr::isAbsolute(catalogFileName)))
+		catalogFileName = "stars/default/"+catalogFileName;
+
+	QString catalogFilePath;
 	try
 	{
-		iniFile = StelFileMgr::findFile("stars/default/stars.ini");
+		catalogFilePath = StelFileMgr::findFile(catalogFileName);
 	}
-	catch (std::runtime_error& e)
+	catch (std::runtime_error e)
 	{
-		qWarning() << "ERROR - could not find stars/default/stars.ini : " << e.what() << iniFile;
-		return;
+		// The file is supposed to be checked, but we can't find it
+		if (checked)
+		{
+			qWarning() << QString("Warning: could not find star catalog %1").arg(catalogFileName);
+			setCheckFlag(catDesc.value("id").toString(), false);
+		}
+		return false;
+	}
+	// Possibly fixes crash on Vista
+	if (!StelFileMgr::isReadable(catalogFilePath))
+	{
+		qWarning() << QString("Warning: User does not have permissions to read catalog %1").arg(catalogFilePath);
+		return false;
 	}
 
-	starSettings = new QSettings(iniFile, StelIniFormat);
-	if (starSettings->status() != QSettings::NoError)
+	if (!checked)
 	{
-		qWarning() << "ERROR while parsing " << iniFile;
-		return;
+		// The file is not checked but we found it, maybe from a previous download/version
+		qWarning() << "Found file " << catalogFilePath << ", checking checksum..";
+
+		QFile fic(catalogFilePath);
+		fic.open(QIODevice::ReadOnly);
+		const QByteArray& ar = fic.readAll();
+		// qDebug() << "File size " << ar.size();
+		// TODO use QFile.map() in case of very large files
+		quint16 fileChecksum = qChecksum(ar.constData(), ar.size());
+		fic.close();
+		if (fileChecksum!=catDesc.value("checksum").toInt())
+		{
+			qWarning() << "Error checking file" << catalogFileName << ": file is corrupted.";
+			fic.remove();
+			return false;
+		}
+
+		setCheckFlag(catDesc.value("id").toString(), true);
 	}
-	starSettings->beginGroup("stars");
+
+	ZoneArray* const z = ZoneArray::create(catalogFilePath, StelFileMgr::size(catalogFilePath) > mmapThresholdBytes, lb);
+	if (z)
+	{
+		if (maxGeodesicGridLevel < z->level)
+		{
+			maxGeodesicGridLevel = z->level;
+		}
+		ZoneArray *&pos(zoneArrays[z->level]);
+		if (pos)
+		{
+			qWarning() << catalogFileName << ", " << z->level << ": duplicate level";
+			delete z;
+		}
+		else
+		{
+			pos = z;
+		}
+	}
+	return true;
 }
 
-/***************************************************************************
- Load star catalogue data from files.
- If a file is not found, it will be skipped.
-***************************************************************************/
-void StarMgr::loadData()
+void StarMgr::setCheckFlag(const QString& catId, bool b)
 {
-	StelLoadingBar& lb = *StelApp::getInstance().getStelLoadingBar();
+	// Update the starConfigFileFullPath file to take into account that we now have a new catalog
+	int idx=0;
+	foreach (const QVariant& catV, catalogsDescription)
+	{
+		++idx;
+		QVariantMap m = catV.toMap();
+		if (m.value("id").toString()!=catId)
+			continue;
+		const bool checked = m.value("checked").toBool();
+		if (checked==b)
+			return;
+		m["checked"]=b;
+		catalogsDescription[idx-1]=m;
+		starSettings["catalogs"]=catalogsDescription;
+		QFile tmp(starConfigFileFullPath);
+		tmp.open(QIODevice::WriteOnly);
+		StelJsonParser::write(starSettings, tmp);
+		tmp.close();
+	}
+}
+
+void StarMgr::loadData(QVariantMap starsConfig)
+{
+	StelLoadingBar* lb = StelApp::getInstance().getStelLoadingBar();
 
 	// Please do not init twice:
 	Q_ASSERT(maxGeodesicGridLevel < 0);
 
 	qDebug() << "Loading star data ...";
 
-	qulonglong memoryUsed = 0;
-	const qulonglong maxMemory = StelApp::getInstance().getSettings()->value("stars/max_memory", 128).toULongLong() * 1024*1024;
-
-	QStringList cats = starSettings->childGroups();
-	QListIterator<QString> it(cats);
-	while(it.hasNext())
+	catalogsDescription = starsConfig.value("catalogs").toList();
+	foreach (const QVariant& catV, catalogsDescription)
 	{
-		QString cat = it.next();
-		QString cat_file_name = starSettings->value(cat+"/path").toString();
-		QString cat_file_path;
-
-		/* See if it is an absolute path, else prepend default path.  */
-		if (!(StelFileMgr::isAbsolute(cat_file_name)))
-		{
-			/* relative path */
-			cat_file_name = "stars/default/"+cat_file_name;
-		}
-
-		try
-		{
-			cat_file_path = StelFileMgr::findFile(cat_file_name);
-		}
-		catch(std::runtime_error e)
-		{
-			qDebug() << qPrintable(QString("Error: Could not find catalog %1").arg(cat_file_name));
-			continue;
-		}
-		// possibly fixes crash on Vista
-		if(!StelFileMgr::isReadable(cat_file_path))
-		{
-			qDebug() << qPrintable(QString("Error: User does not have permissions to read catalog %1").arg(cat_file_name));
-			continue;
-		}
-
-		lb.SetMessage(q_("Loading catalog %1 from file %2").arg(cat, cat_file_name));
-		memoryUsed += StelFileMgr::size(cat_file_path);
-		ZoneArray *const z = ZoneArray::create(cat_file_name, memoryUsed > maxMemory, lb);
-		if (z)
-		{
-			if (maxGeodesicGridLevel < z->level)
-			{
-				maxGeodesicGridLevel = z->level;
-			}
-			ZoneArray *&pos(zoneArrays[z->level]);
-			if (pos)
-			{
-				qDebug() << cat_file_name << ", " << z->level << ": duplicate level";
-				delete z;
-			}
-			else
-			{
-				pos = z;
-			}
-		}
+		const QVariantMap& m = catV.toMap();
+		const QString& catalogId = m.value("id").toString();
+		const QString& catalogFileName = m.value("fileName").toString();
+		lb->SetMessage(q_("Loading catalog %1 from file %2").arg(catalogId, catalogFileName));
+		checkAndLoadCatalog(m, lb);
 	}
 
 	for (int i=0; i<=NR_OF_HIP; i++)
@@ -336,7 +399,7 @@ void StarMgr::loadData()
 		it->second->updateHipIndex(hipIndex);
 	}
 
-	const QString cat_hip_sp_file_name = starSettings->value("cat_hip_sp_file_name","").toString();
+	const QString cat_hip_sp_file_name = starsConfig.value("hipSpectralFile").toString();
 	if (cat_hip_sp_file_name.isEmpty())
 	{
 		qWarning() << "ERROR: stars:cat_hip_sp_file_name not found";
@@ -355,7 +418,7 @@ void StarMgr::loadData()
 		}
 	}
 
-	const QString cat_hip_cids_file_name = starSettings->value("cat_hip_cids_file_name","").toString();
+	const QString cat_hip_cids_file_name = starsConfig.value("hipComponentsIdsFile").toString();
 	if (cat_hip_cids_file_name.isEmpty())
 	{
 		qWarning() << "ERROR: stars:cat_hip_cids_file_name not found";

@@ -102,7 +102,7 @@ void copyDefaultConfigFile(const QString& newPath)
 	}
 	catch (std::runtime_error& e)
 	{
-		qFatal("ERROR copyDefaultConfigFile failed to locate data/default_config.ini.  Please check your installation.");
+		qFatal("ERROR copyDefaultConfigFile failed to locate data/default_config.ini. Please check your installation.");
 	}
 	QFile::copy(defaultConfigFilePath, newPath);
 	if (!StelFileMgr::exists(newPath))

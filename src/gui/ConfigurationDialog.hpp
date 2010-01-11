@@ -30,7 +30,6 @@ class Ui_configurationDialogForm;
 class QSettings;
 class QDataStream;
 class QNetworkAccessManager;
-class StelDownloadMgr;
 class QListWidgetItem;
 class StelGui;
 
@@ -44,26 +43,18 @@ public:
 	//! Notify that the application style changed
 	void styleChanged();
 protected:
-	enum UpdatesState { ShowAvailable, Checking, NoUpdates, Downloading,
-				Finished, Verifying, UpdatesError, MoveError,
-				DownloadError, ChecksumError };
-
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
-
-	//! Set the content of the "Star catalog updates" box
-	void setUpdatesState(ConfigurationDialog::UpdatesState);
-	void checkUpdates(void);
-
 	Ui_configurationDialogForm* ui;
-	QSettings* starSettings;
-	QSettings* updatesData;
-	StelDownloadMgr* downloadMgr;
-	QString downloadName;
-	QString updatesFileName;
-	QStringList newCatalogs;
-	QString starsDir;
-	int downloaded;
+
+private:
+	//! Contains the parsed content of the starsConfig.json file
+	QVariantMap nextStarCatalogToDownload;
+	//! Set the content of the "Star catalog updates" box
+	void refreshStarCatalogButton();
+	QNetworkReply* starCatalogDownloadReply;
+	QFile* currentDownloadFile;
+	QProgressBar* progressBar;
 
 private slots:
 	void setNoSelectedInfo(void);
@@ -76,15 +67,11 @@ private slots:
 	void cursorTimeOutChanged();
 	void cursorTimeOutChanged(double d) {cursorTimeOutChanged();}
 
-	void downloadStars(void);
-	void cancelDownload(void);
-	void retryDownload(void);
-	void badChecksum(void);
-	void downloadFinished(void);
-	void downloadVerifying(void);
-	void downloadError(QNetworkReply::NetworkError, QString);
-	void updatesDownloadFinished(void);
-	void updatesDownloadError(QNetworkReply::NetworkError, QString);
+	void newStarCatalogData();
+	void downloadStars();
+	void cancelDownload();
+	void downloadFinished();
+	void downloadError(QNetworkReply::NetworkError);
 
 	//! Update the labels displaying the current default state
 	void updateConfigLabels();
@@ -125,9 +112,9 @@ private slots:
 	void setFixedDateTimeToCurrent(void);
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
-	
+
 private:
-	StelGui* gui;	
+	StelGui* gui;
 };
 
 #endif // _CONFIGURATIONDIALOG_HPP_

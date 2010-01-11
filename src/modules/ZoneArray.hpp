@@ -27,10 +27,6 @@
 #include <QFile>
 #include <QDebug>
 
-#ifdef WIN32
- #include <windows.h>
-#endif
-
 #include "ZoneData.hpp"
 #include "Star.hpp"
 
@@ -88,7 +84,7 @@ public:
 	//! @return an instance of SpecialZoneArray or HipZoneArray
 	static ZoneArray *create(const QString &extended_file_name,
 							 bool use_mmap,
-							 StelLoadingBar &lb);
+							 StelLoadingBar* lb);
 	virtual ~ZoneArray(void)
 	{
 		nr_of_zones = 0;
@@ -140,7 +136,7 @@ protected:
 	//! Load a catalog and display its progress on the splash screen.
 	//! @return @c true if successful, or @c false if an error occurred
 	static bool readFileWithStelLoadingBar(QFile& file, void *data,
-						   qint64 size,StelLoadingBar &lb);
+						   qint64 size,StelLoadingBar* lb);
 
 	//! Protected constructor. Initializes fields and does not load anything.
 	ZoneArray(const QString& fname, QFile* file, int level, int mag_min,
@@ -170,7 +166,7 @@ public:
 	//! @param mag_range range of magnitudes
 	//! @param mag_steps number of steps used to describe values in range
 	SpecialZoneArray(QFile* file,bool byte_swap,bool use_mmap,
-					 StelLoadingBar &lb,int level,int mag_min,
+					 StelLoadingBar*lb,int level,int mag_min,
 			 int mag_range,int mag_steps);
 	~SpecialZoneArray(void);
 protected:
@@ -199,9 +195,6 @@ protected:
 	Star *stars;
 private:
 	uchar *mmap_start;
-#ifdef WIN32
-	HANDLE mapping_handle;
-#endif
 };
 
 //! @class HipZoneArray
@@ -210,7 +203,7 @@ private:
 class HipZoneArray : public SpecialZoneArray<Star1>
 {
 public:
-	HipZoneArray(QFile* file,bool byte_swap,bool use_mmap,StelLoadingBar &lb,
+	HipZoneArray(QFile* file,bool byte_swap,bool use_mmap,StelLoadingBar* lb,
 		   int level,int mag_min,int mag_range,int mag_steps)
 			: SpecialZoneArray<Star1>(file,byte_swap,use_mmap,lb,level,
 									  mag_min,mag_range,mag_steps) {}
