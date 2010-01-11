@@ -31,6 +31,8 @@
 
 #include <QFile>
 
+#include <ctime>
+
 QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
 
 StelLocaleMgr::StelLocaleMgr() : skyTranslator(PACKAGE_NAME, INSTALL_LOCALEDIR, ""), GMTShift(0)
