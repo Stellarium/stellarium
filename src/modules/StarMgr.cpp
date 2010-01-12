@@ -311,18 +311,18 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc, StelLoadingBar* lb
 	if (!checked)
 	{
 		// The file is not checked but we found it, maybe from a previous download/version
-		qWarning() << "Found file " << catalogFilePath << ", checking checksum..";
+		qWarning() << "Found file " << catalogFilePath << ", checking md5sum..";
 
 		QFile fic(catalogFilePath);
 		fic.open(QIODevice::ReadOnly);
-		const QByteArray& ar = fic.readAll();
-		// qDebug() << "File size " << ar.size();
-		// TODO use QFile.map() in case of very large files
-		QByteArray fileChecksum = QCryptographicHash::hash(ar,QCryptographicHash::Md5).toHex();
+		// Compute the MD5 sum
+		QCryptographicHash md5Hash(QCryptographicHash::Md5);
+		while (!fic.atEnd())
+			md5Hash.addData(fic.read(1024*1024*2));
 		fic.close();
-		if (fileChecksum!=catDesc.value("checksum").toByteArray())
+		if (md5Hash.result().toHex()!=catDesc.value("checksum").toByteArray())
 		{
-			qWarning() << "Error checking file" << catalogFileName << ": file is corrupted.";
+			qWarning() << "Error checking file" << catalogFileName << ": file is corrupted (md5 sums don't match).";
 			fic.remove();
 			return false;
 		}
