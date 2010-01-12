@@ -65,6 +65,11 @@ using namespace BigStarCatalogExtension;
 static QStringList spectral_array;
 static QStringList component_array;
 
+// This number must be incremented each time the content or file format of the stars catalogs change
+// It can also be incremented when the defaultStarsConfig.json file change.
+// It should always matchs the version field of the defaultStarsConfig.json file
+static const int StarCatalogFormatVersion = 2;
+
 // Initialise statics
 bool StarMgr::flagSciNames = true;
 std::map<int,QString> StarMgr::commonNamesMap;
@@ -210,7 +215,7 @@ void StarMgr::init()
 	fic.close();
 
 	// Increment the 1 each time any star catalog file change
-	if (starSettings.value("version").toInt()!=1)
+	if (starSettings.value("version").toInt()!=StarCatalogFormatVersion)
 	{
 		qWarning() << "Found an old starsConfig.json file, upgrade..";
 		fic.remove();
@@ -313,9 +318,9 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc, StelLoadingBar* lb
 		const QByteArray& ar = fic.readAll();
 		// qDebug() << "File size " << ar.size();
 		// TODO use QFile.map() in case of very large files
-		quint16 fileChecksum = qChecksum(ar.constData(), ar.size());
+		QByteArray fileChecksum = QCryptographicHash::hash(ar,QCryptographicHash::Md5).toHex();
 		fic.close();
-		if (fileChecksum!=catDesc.value("checksum").toInt())
+		if (fileChecksum!=catDesc.value("checksum").toByteArray())
 		{
 			qWarning() << "Error checking file" << catalogFileName << ": file is corrupted.";
 			fic.remove();
