@@ -148,6 +148,27 @@ void StelApp::init(QSettings* conf)
 {
 	confSettings = conf;
 
+	core = new StelCore();
+	if (saveProjW!=-1 && saveProjH!=-1)
+		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
+
+	useGLShaders = confSettings->value("main/use_glshaders", true).toBool();
+	useGLShaders = useGLShaders && QGLShaderProgram::hasOpenGLShaderPrograms();
+
+	StelPainter::initSystemGLInfo();
+
+	// Initialize AFTER creation of openGL context
+	textureMgr = new StelTextureMgr();
+	textureMgr->init();
+
+#ifdef SVN_REVISION
+	loadingBar = new StelLoadingBar(12., "logo24bits.png", QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
+#else
+	loadingBar = new StelLoadingBar(12., "logo24bits.png", PACKAGE_VERSION, 45, 320, 121);
+#endif // SVN_RELEASE
+	loadingBar->SetMessage("Initialize");
+	loadingBar->Draw(0);
+
 	networkAccessManager = new QNetworkAccessManager(this);
 	// Activate http cache if Qt version >= 4.5
 	QNetworkDiskCache* cache = new QNetworkDiskCache(networkAccessManager);
@@ -163,28 +184,9 @@ void StelApp::init(QSettings* conf)
 	stelObjectMgr->init();
 	getModuleMgr().registerModule(stelObjectMgr);
 
-	core = new StelCore();
-	if (saveProjW!=-1 && saveProjH!=-1)
-		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
-
-	useGLShaders = confSettings->value("main/use_glshaders", true).toBool();
-	useGLShaders = useGLShaders && QGLShaderProgram::hasOpenGLShaderPrograms();
-
-	StelPainter::initSystemGLInfo();
-
-	// Initialize AFTER creation of openGL context
-	textureMgr = new StelTextureMgr();
-	textureMgr->init();
-
 	localeMgr = new StelLocaleMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
 	planetLocationMgr = new StelLocationMgr();
-
-#ifdef SVN_REVISION
-	loadingBar = new StelLoadingBar(12., "logo24bits.png", QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
-#else
-	loadingBar = new StelLoadingBar(12., "logo24bits.png", PACKAGE_VERSION, 45, 320, 121);
-#endif // SVN_RELEASE
 
 	localeMgr->init();
 	skyCultureMgr->init();
