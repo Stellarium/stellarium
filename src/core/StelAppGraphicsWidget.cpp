@@ -52,7 +52,6 @@ StelAppGraphicsWidget::~StelAppGraphicsWidget()
 
 void StelAppGraphicsWidget::init(QSettings* conf)
 {
-
 	useBuffers = conf->value("video/use_buffers", false).toBool();
 	if (useBuffers && !QGLFramebufferObject::hasOpenGLFramebufferObjects())
 	{

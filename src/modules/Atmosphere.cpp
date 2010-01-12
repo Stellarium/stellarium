@@ -58,9 +58,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 		}
 		qDebug() << "Use vertex shader for atmosphere rendering: " << filePath;
 		QGLShader* vShader = new QGLShader(QGLShader::Vertex);
-		vShader->compileSourceFile(filePath);
-		atmoShaderProgram = new QGLShaderProgram();
-		if (!vShader->isCompiled())
+		if (!vShader->compileSourceFile(filePath))
 		{
 			qWarning() << "Error while compiling shader: " << vShader->log();
 			useShader = false;
@@ -84,6 +82,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 		{
 			qWarning() << "Warnings while compiling fragment shader: " << vShader->log();
 		}
+		atmoShaderProgram = new QGLShaderProgram();
 		atmoShaderProgram->addShader(vShader);
 		atmoShaderProgram->addShader(fShader);
 		if (!atmoShaderProgram->link())
