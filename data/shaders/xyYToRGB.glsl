@@ -1,4 +1,3 @@
-
 const mediump float pi = 3.1415926535897931;
 const mediump float ln10 = 2.3025850929940459;
 
@@ -38,7 +37,7 @@ void main()
 	{
 		float cosDistSunq = sunPos[0]*color[0] + sunPos[1]*color[1] + sunPos[2]*color[2];
 		float distSun=acos(cosDistSunq);
-		float oneOverCosZenithAngle = (color[2]==0.) ? 1e30 : 1. / color[2];
+		float oneOverCosZenithAngle = (color[2]==0.) ? 99999999. : 1. / color[2];
 
 		cosDistSunq*=cosDistSunq;
 		color[0] = term_x * (1. + Ax * exp(Bx*oneOverCosZenithAngle))* (1. + Cx * exp(Dx*distSun) + Ex * cosDistSunq);
@@ -74,29 +73,32 @@ void main()
 		color[1] = 0.9898434*color[2];
 		color[2] *= 1.9256125;
 		resultSkyColor = color*brightnessScale;
-		return;
 	}
-
-	if (color[2]<3.9810717055349722)
+	else
 	{
-		// Compute s, ratio between scotopic and photopic vision
-		float op = (log(color[2])/ln10 + 2.)/2.6;
-		float s = op * op *(3. - 2. * op);
-		// Do the blue shift for scotopic vision simulation (night vision) [3]
-		// The "night blue" is x,y(0.25, 0.25)
-		color[0] = (1. - s) * 0.25 + s * color[0];	// Add scotopic + photopic components
-		color[1] = (1. - s) * 0.25 + s * color[1];	// Add scotopic + photopic components
-		// Take into account the scotopic luminance approximated by V [3] [4]
-		float V = color[2] * (1.33 * (1. + color[1] / color[0] + color[0] * (1. - color[0] - color[1])) - 1.68);
-		color[2] = 0.4468 * (1. - s) * V + s * color[2];
+		if (color[2]<3.9810717055349722)
+		{
+			// Compute s, ratio between scotopic and photopic vision
+			float op = (log(color[2])/ln10 + 2.)/2.6;
+			float s = op * op *(3. - 2. * op);
+			// Do the blue shift for scotopic vision simulation (night vision) [3]
+			// The "night blue" is x,y(0.25, 0.25)
+			color[0] = (1. - s) * 0.25 + s * color[0];	// Add scotopic + photopic components
+			color[1] = (1. - s) * 0.25 + s * color[1];	// Add scotopic + photopic components
+			// Take into account the scotopic luminance approximated by V [3] [4]
+			float V = color[2] * (1.33 * (1. + color[1] / color[0] + color[0] * (1. - color[0] - color[1])) - 1.68);
+			color[2] = 0.4468 * (1. - s) * V + s * color[2];
+		}
+	
+		// 2. Adapt the luminance value and scale it to fit in the RGB range [2]
+		// color[2] = std::pow(adaptLuminanceScaled(color[2]), oneOverGamma);
+		color[2] = pow(color[2]*pi*0.0001, alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
+	
+		// Convert from xyY to XZY
+		// Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white
+		const mat4 adobeRGB = mat4(2.04148, -0.969258, 0.0134455, 0., -0.564977, 1.87599, -0.118373, 0., -0.344713, 0.0415557, 1.01527, 0., 
+0., 0., 0., 1.);
+		resultSkyColor = (adobeRGB*vec4(color[0] * color[2] / color[1], color[2], (1. - color[0] - color[1]) * color[2] / color[1], 1.)) * 
+brightnessScale;
 	}
-
-	// 2. Adapt the luminance value and scale it to fit in the RGB range [2]
-	// color[2] = std::pow(adaptLuminanceScaled(color[2]), oneOverGamma);
-	color[2] = pow(color[2]*pi*0.0001, alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
-
-	// Convert from xyY to XZY
-	// Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white
-	const mat4 adobeRGB = mat4(2.04148, -0.969258, 0.0134455, 0., -0.564977, 1.87599, -0.118373, 0., -0.344713, 0.0415557, 1.01527, 0., 0., 0., 0., 1.);
-	resultSkyColor = (adobeRGB*vec4(color[0] * color[2] / color[1], color[2], (1. - color[0] - color[1]) * color[2] / color[1], 1.)) * brightnessScale;
 }
