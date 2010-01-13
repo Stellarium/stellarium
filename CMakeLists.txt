@@ -30,9 +30,6 @@ ELSE()
  SET(CMAKE_EXE_LINKER_FLAGS "-Wsign-promo -fexceptions -fident -mthreads -mwindows --large-address-aware")
 ENDIF()
 
-# SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -ffast-math -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
-# SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ffast-math -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
-
 SET(OPTIMIZE_INTEL_ATOM 0 CACHE BOOL "Activate optimizations for atom processor.")
 IF(OPTIMIZE_INTEL_ATOM)
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
@@ -43,7 +40,7 @@ ENDIF()
 IF(APPLE)
  SET(CMAKE_INCLUDE_PATH "/usr/X11/include:/usr/X11/include/freetype2:/Developer/SDKs/MacOSX10.5.sdk/usr/X11/include:/Developer/SDKs/MacOSX10.5.sdk/usr/X11/include/freetype2:/sw/include:${CMAKE_INCLUDE_PATH}")
  SET(CMAKE_LIBRARY_PATH "/Developer/SDKs/MacOSX10.5.sdk/usr/X11/lib:/sw/lib:${CMAKE_LIBRARY_PATH}")
- SET(CMAKE_C_FLAGS "-fno-common -Wall -Wextra -Wno-unused-parameter -DMACOSX -I/Developer/SDKs/MacOSX10.5.sdk/usr/X11/include -I/Developer/SDKs/MacOSX10.5.sdk/usr/X11/include/freetype2")
+ SET(CMAKE_C_FLAGS "-fno-common -Wall -Wextra -Wno-unused-parameter -DMACOSX -I/Developer/SDKs/MacOSX10.5.sdk/usr/X11/include -I/usr/X11R6/include  -I/sw/include -L/usr/X11R6/lib -L/sw/lib")
  SET(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS}")
  SET(CMAKE_EXE_LINKER_FLAGS "-dylib_file /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib")
 ENDIF()
@@ -59,128 +56,10 @@ CHECK_FUNCTION_EXISTS(pow10 HAVE_POW10)
 CHECK_FUNCTION_EXISTS(setlocale HAVE_SETLOCALE)
 CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
 
-########### Static compilation of plugins ###########
-# VirGO
-SET(USE_STATIC_PLUGIN_VIRGO 0 CACHE BOOL "Define whether the VirGO plugin should be statically linked.")
-SET(STATIC_PLUGIN_VIRGO_PATH "$ENV{STELROOT}/../extmodules/VirGO/builds/unix/src/libVirGO.a" CACHE PATH "The location of the libVirGO.a static library")
-IF (USE_STATIC_PLUGIN_VIRGO)
-## Special non-standard packages
-FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
-	/usr/include
-	/usr/local/include
-	/scisoft/include
-	DOC "Should point to the directory where the include files for libcfitsio are installed")
-FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
-	PATHS
-	/usr/lib/
-	/usr/local/lib
-	/scisoft/lib
-	/opt/local/lib
-	DOC "cfitsio link options")
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_VIRGO_PATH} ${CFITSIO_LIBRARIES})
-  SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
-  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_VIRGO)
-ENDIF()
-
-# SVMT
-SET(USE_STATIC_PLUGIN_SVMT 0 CACHE BOOL "Define whether the SVMT plugin should be statically linked.")
-SET(STATIC_PLUGIN_SVMT_PATH "$ENV{STELROOT}/../extmodules/svmt/builds/unix/src/libSvmt.a" CACHE PATH "The location of the libSvmt.a static library")
-IF (USE_STATIC_PLUGIN_SVMT)
-## Special non-standard packages
-FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
-	/usr/include
-	/usr/local/include
-	/scisoft/include
-	DOC "Should point to the directory where the include files for libcfitsio are installed")
-FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
-	PATHS
-	/usr/lib/
-	/usr/local/lib
-	/scisoft/lib
-	/opt/local/lib
-	DOC "cfitsio link options")
-## Tokyo Cabinet
-FIND_PATH(TOKYOC_INCLUDE_DIR tcadb.h
-	/usr/include
-	/usr/local/include
-	/scisoft/include
-	DOC "Should point to the directory where the include files for tokyo cabinet are installed")
-FIND_LIBRARY(TOKYOC_LIBRARIES tokyocabinet
-	PATHS
-	/usr/lib/
-	/usr/local/lib
-	/scisoft/lib
-	/opt/local/lib
-	DOC "tokyo cabinet link options")
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_SVMT_PATH} ${CFITSIO_LIBRARIES} ${TOKYOC_LIBRARIES} "/usr/local/Trolltech/Qt-4.6.0/lib/libQtDeclarative.so")
-  SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
-  SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
-
-  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SVMT)
-ENDIF()
-
-# HelloStelModule
-SET(USE_STATIC_PLUGIN_HELLOSTELMODULE 0 CACHE BOOL "Define whether the HelloStelModule plugin should be statically linked.")
-SET(STATIC_PLUGIN_HELLOSTELMODULE_PATH "$ENV{STELROOT}/../extmodules/HelloStelModule/builds/unix/src/libHelloStelModule.a" CACHE PATH "The location of the libHelloStelModule.a static library")
-IF (USE_STATIC_PLUGIN_HELLOSTELMODULE)
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_HELLOSTELMODULE_PATH})
-  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_HELLOSTELMODULE)
-ENDIF()
-
-# AngleMeasure
-SET(USE_STATIC_PLUGIN_ANGLEMEASURE 0 CACHE BOOL "Define whether the AngleMeasure plugin should be statically linked.")
-SET(STATIC_PLUGIN_ANGLEMEASURE_PATH "$ENV{STELROOT}/../extmodules/AngleMeasure/builds/unix/src/libAngleMeasure.a" CACHE PATH "The location of the libAngleMeasure.a static library")
-IF (USE_STATIC_PLUGIN_ANGLEMEASURE)
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_ANGLEMEASURE_PATH})
-  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_ANGLEMEASURE)
-ENDIF()
-
-# CompassMarks
-SET(USE_STATIC_PLUGIN_COMPASSMARKS 0 CACHE BOOL "Define whether the CompassMarks plugin should be statically linked.")
-SET(STATIC_PLUGIN_COMPASSMARKS_PATH "$ENV{STELROOT}/../extmodules/CompassMarks/builds/unix/src/libCompassMarks.a" CACHE PATH "The location of the libCompassMarks.a static library")
-IF (USE_STATIC_PLUGIN_COMPASSMARKS)
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_COMPASSMARKS_PATH})
-  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_COMPASSMARKS)
-ENDIF()
-
-# Satellites
-SET(USE_STATIC_PLUGIN_SATELLITES 0 CACHE BOOL "Define whether the Satellites plugin should be statically linked.")
-SET(STATIC_PLUGIN_SATELLITES_PATH "$ENV{STELROOT}/../extmodules/Satellites/builds/unix/src/libSatellites.a" CACHE PATH "The location of the libSatellites.a static library")
-IF (USE_STATIC_PLUGIN_SATELLITES)
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_SATELLITES_PATH})
-  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SATELLITES)
-ENDIF()
-
-# TextUserInterface
-SET(USE_STATIC_PLUGIN_TEXTUSERINTERFACE 0 CACHE BOOL "Define whether the TextUserInterface plugin should be statically linked.")
-SET(STATIC_PLUGIN_TEXTUSERINTERFACE_PATH "$ENV{STELROOT}/../extmodules/TextUserInterface/builds/unix/src/libTextUserInterface.a" CACHE PATH "The location of the libTextUserInterface.a static library")
-IF (USE_STATIC_PLUGIN_TEXTUSERINTERFACE)
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_TEXTUSERINTERFACE_PATH})
-  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TEXTUSERINTERFACE)
-ENDIF()
-
-# Oculars
-SET(USE_STATIC_PLUGIN_OCULARS 0 CACHE BOOL "Define whether the Oculars plugin should be statically linked.")
-SET(STATIC_PLUGIN_OCULARS_PATH "$ENV{STELROOT}/../extmodules/Ocular/builds/unix/src/libOculars.a" CACHE PATH "The location of the libOculars.a static library")
-IF (USE_STATIC_PLUGIN_OCULARS)
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_OCULARS_PATH})
-  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_OCULARS)
-ENDIF()
-
-# TelescopeControl
-SET(USE_STATIC_PLUGIN_TELESCOPECONTROL 0 CACHE BOOL "Define whether the TelescopeControl plug-in should be statically linked.")
-SET(STATIC_PLUGIN_TELESCOPECONTROL_PATH "$ENV{STELROOT}/../extmodules/TelescopeControl/builds/unix/src/libTelescopeControl.a" CACHE PATH "The location of the libTelescopeControl.a static library")
-IF (USE_STATIC_PLUGIN_TELESCOPECONTROL)
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_TELESCOPECONTROL_PATH})
-  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TELESCOPECONTROL)
-ENDIF()
-
 ########### Others ###########
 # Activate translation with gettext
 SET(RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release, 1 or 0.")
 SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be supported, option are: 1 or 0.")
-# Generate python wrappers
-SET(GENERATE_PYTHON_WRAPPERS 0 CACHE BOOL "Define whether python wrapper should be build using SIP, options are: 1 or 0.")
 # Create a dynamic library libstelMain
 SET(GENERATE_STELMAINLIB 0)
 # Activate sound support
@@ -199,7 +78,7 @@ ENDIF()
 
 # On WIN32 we need to split the main binary into a small binary and a dll
 # This is for allowing to link plug-ins afterward
-IF (WIN32 OR GENERATE_PYTHON_WRAPPERS)
+IF(WIN32)
   SET(GENERATE_STELMAINLIB 1)
 ENDIF()
 
@@ -292,8 +171,6 @@ ENDIF()
 ########### Generate a config.h ###########
 SET(PACKAGE_VERSION ${VERSION})
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake ${CMAKE_BINARY_DIR}/config.h)
-
-########### Add macros ###########
 ADD_DEFINITIONS(-DHAVE_CONFIG_H)
 
 IF(CMAKE_BUILD_TYPE STREQUAL "Release" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
@@ -329,11 +206,155 @@ SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
 SET(CPACK_SOURCE_IGNORE_FILES "/CVS/" "/.svn/" "/.git/" "builds/" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "~$" "\\\\.swp$" "\\\\.#" "/#")
 INCLUDE(CPack)
 
+
+########### Macosx Bundling ###############
+IF(APPLE)
+ADD_CUSTOM_TARGET(macosx_bundle bash util/macosx_bundle.sh ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} DEPENDS install WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "making the macosx bundle." VERBATIM)
+ENDIF()
+
+
 ########### Generate doxygen doc ###############
 ADD_CUSTOM_TARGET(apidoc doxygen Doxyfile WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "Generate the doxygen documentation into the builds/doc directory.")
 
 ########### enable testing ###########
 ENABLE_TESTING()
+
+########### Top level include directories ###########
+# This will be used for all compilations in sub-directories
+INCLUDE_DIRECTORIES(
+	${CMAKE_BINARY_DIR}
+	${CMAKE_SOURCE_DIR}/src
+	${CMAKE_SOURCE_DIR}/src/core
+	${CMAKE_SOURCE_DIR}/src/gui
+	${CMAKE_SOURCE_DIR}/src/modules
+	${CMAKE_SOURCE_DIR}/src/planetsephems
+	${CMAKE_SOURCE_DIR}/src/external
+	${CMAKE_SOURCE_DIR}/src/scripting
+	${CMAKE_SOURCE_DIR}/src/external/kfilter
+	${CMAKE_SOURCE_DIR}/src/external/glues_stel/source/
+	${CMAKE_SOURCE_DIR}/src/external/glues_stel/source/libtess
+	${OPENGL_INCLUDE_DIR}
+	${ICONV_INCLUDE_DIR}
+	${INTL_INCLUDE_DIR}
+	${QT_INCLUDE_DIR}/QtScript
+	${QT_QTSCRIPT_INCLUDE_DIR}
+	${CMAKE_BINARY_DIR}/src
+	${QT_QTTEST_INCLUDE_DIR}
+)
+
+###########
+SET(BUILD_STATIC_PLUGINS 1 CACHE BOOL "Define whether plugins should be compiled statically and linked to the main program")
+SET(BUILD_DYNAMIC_PLUGINS 0 CACHE BOOL "Define whether plugins should be compiled dynamically")
+
+SET(USE_PLUGIN_HELLOSTELMODULE 1 CACHE BOOL "Define whether the HelloStelModule plugin should be compiled.")
+
+########### Static compilation of plugins ###########
+# VirGO
+SET(USE_STATIC_PLUGIN_VIRGO 0 CACHE BOOL "Define whether the VirGO plugin should be statically linked.")
+SET(STATIC_PLUGIN_VIRGO_PATH "$ENV{STELROOT}/../extmodules/VirGO/builds/unix/src/libVirGO.a" CACHE PATH "The location of the libVirGO.a static library")
+IF (USE_STATIC_PLUGIN_VIRGO)
+## Special non-standard packages
+FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
+	/usr/include
+	/usr/local/include
+	/scisoft/include
+	DOC "Should point to the directory where the include files for libcfitsio are installed")
+FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
+	PATHS
+	/usr/lib/
+	/usr/local/lib
+	/scisoft/lib
+	/opt/local/lib
+	DOC "cfitsio link options")
+  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_VIRGO_PATH} ${CFITSIO_LIBRARIES})
+  SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
+  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_VIRGO)
+ENDIF()
+
+# SVMT
+SET(USE_STATIC_PLUGIN_SVMT 0 CACHE BOOL "Define whether the SVMT plugin should be statically linked.")
+SET(STATIC_PLUGIN_SVMT_PATH "$ENV{STELROOT}/../extmodules/svmt/builds/unix/src/libSvmt.a" CACHE PATH "The location of the libSvmt.a static library")
+IF (USE_STATIC_PLUGIN_SVMT)
+## Special non-standard packages
+FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
+	/usr/include
+	/usr/local/include
+	/scisoft/include
+	DOC "Should point to the directory where the include files for libcfitsio are installed")
+FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
+	PATHS
+	/usr/lib/
+	/usr/local/lib
+	/scisoft/lib
+	/opt/local/lib
+	DOC "cfitsio link options")
+## Tokyo Cabinet
+FIND_PATH(TOKYOC_INCLUDE_DIR tcadb.h
+	/usr/include
+	/usr/local/include
+	/scisoft/include
+	DOC "Should point to the directory where the include files for tokyo cabinet are installed")
+FIND_LIBRARY(TOKYOC_LIBRARIES tokyocabinet
+	PATHS
+	/usr/lib/
+	/usr/local/lib
+	/scisoft/lib
+	/opt/local/lib
+	DOC "tokyo cabinet link options")
+  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_SVMT_PATH} ${CFITSIO_LIBRARIES} ${TOKYOC_LIBRARIES} "/usr/local/Trolltech/Qt-4.6.0/lib/libQtDeclarative.so")
+  SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
+  SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
+
+  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SVMT)
+ENDIF()
+
+# AngleMeasure
+SET(USE_STATIC_PLUGIN_ANGLEMEASURE 0 CACHE BOOL "Define whether the AngleMeasure plugin should be statically linked.")
+SET(STATIC_PLUGIN_ANGLEMEASURE_PATH "$ENV{STELROOT}/../extmodules/AngleMeasure/builds/unix/src/libAngleMeasure.a" CACHE PATH "The location of the libAngleMeasure.a static library")
+IF (USE_STATIC_PLUGIN_ANGLEMEASURE)
+  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_ANGLEMEASURE_PATH})
+  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_ANGLEMEASURE)
+ENDIF()
+
+# CompassMarks
+SET(USE_STATIC_PLUGIN_COMPASSMARKS 0 CACHE BOOL "Define whether the CompassMarks plugin should be statically linked.")
+SET(STATIC_PLUGIN_COMPASSMARKS_PATH "$ENV{STELROOT}/../extmodules/CompassMarks/builds/unix/src/libCompassMarks.a" CACHE PATH "The location of the libCompassMarks.a static library")
+IF (USE_STATIC_PLUGIN_COMPASSMARKS)
+  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_COMPASSMARKS_PATH})
+  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_COMPASSMARKS)
+ENDIF()
+
+# Satellites
+SET(USE_STATIC_PLUGIN_SATELLITES 0 CACHE BOOL "Define whether the Satellites plugin should be statically linked.")
+SET(STATIC_PLUGIN_SATELLITES_PATH "$ENV{STELROOT}/../extmodules/Satellites/builds/unix/src/libSatellites.a" CACHE PATH "The location of the libSatellites.a static library")
+IF (USE_STATIC_PLUGIN_SATELLITES)
+  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_SATELLITES_PATH})
+  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SATELLITES)
+ENDIF()
+
+# TextUserInterface
+SET(USE_STATIC_PLUGIN_TEXTUSERINTERFACE 0 CACHE BOOL "Define whether the TextUserInterface plugin should be statically linked.")
+SET(STATIC_PLUGIN_TEXTUSERINTERFACE_PATH "$ENV{STELROOT}/../extmodules/TextUserInterface/builds/unix/src/libTextUserInterface.a" CACHE PATH "The location of the libTextUserInterface.a static library")
+IF (USE_STATIC_PLUGIN_TEXTUSERINTERFACE)
+  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_TEXTUSERINTERFACE_PATH})
+  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TEXTUSERINTERFACE)
+ENDIF()
+
+# Oculars
+SET(USE_STATIC_PLUGIN_OCULARS 0 CACHE BOOL "Define whether the Oculars plugin should be statically linked.")
+SET(STATIC_PLUGIN_OCULARS_PATH "$ENV{STELROOT}/../extmodules/Ocular/builds/unix/src/libOculars.a" CACHE PATH "The location of the libOculars.a static library")
+IF (USE_STATIC_PLUGIN_OCULARS)
+  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_OCULARS_PATH})
+  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_OCULARS)
+ENDIF()
+
+# TelescopeControl
+SET(USE_STATIC_PLUGIN_TELESCOPECONTROL 0 CACHE BOOL "Define whether the TelescopeControl plug-in should be statically linked.")
+SET(STATIC_PLUGIN_TELESCOPECONTROL_PATH "$ENV{STELROOT}/../extmodules/TelescopeControl/builds/unix/src/libTelescopeControl.a" CACHE PATH "The location of the libTelescopeControl.a static library")
+IF (USE_STATIC_PLUGIN_TELESCOPECONTROL)
+  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_TELESCOPECONTROL_PATH})
+  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TELESCOPECONTROL)
+ENDIF()
 
 ########### Subdirectories ###############
 ADD_SUBDIRECTORY( data )
@@ -348,9 +369,13 @@ ADD_SUBDIRECTORY( skycultures )
 ADD_SUBDIRECTORY( nebulae )
 ADD_SUBDIRECTORY( scripts )
 ADD_SUBDIRECTORY( stars )
+ADD_SUBDIRECTORY( plugins )
 
-########### Macosx Bundling ###############
-IF(APPLE)
-ADD_CUSTOM_TARGET(macosx_bundle bash util/macosx_bundle.sh ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} DEPENDS install WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "making the macosx bundle." VERBATIM)
+#### Add inter-dependencies between targets #######
+# It is important that static plugins are compiled before stellarium main executable
+IF (BUILD_STATIC_PLUGINS)
+  IF (USE_PLUGIN_HELLOSTELMODULE)
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} HelloStelModule-static)
+	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_HELLOSTELMODULE)
+  ENDIF()
 ENDIF()
-
