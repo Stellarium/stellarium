@@ -112,7 +112,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\include\glew;&quot;..\..\SDL_image-1.2.6&quot;;&quot;..\..\lib3ds-1.3.0&quot;;..\..\include;&quot;..\..\stellarium-0.8.2&quot;;..\..\libiconv\src;&quot;..\..\stellarium-0.8.2\src&quot;;&quot;..\..\stellarium-0.8.2\src\stellastro&quot;;&quot;..\..\stellarium-0.8.2\src\glpng&quot;;&quot;..\..\stellarium-0.8.2\src\iniparser&quot;;&quot;..\..\stellarium-0.8.2\src\stellplanet&quot;;..\..\lpng1212;..\..\ZLib;&quot;..\..\freetype-2.1.10\include&quot;;&quot;..\..\SDL-1.2.11\include&quot;;..\..\gettext\src"
+				AdditionalIncludeDirectories="..\..\include\glew;&quot;..\..\SDL_image-1.2.6&quot;;&quot;..\..\lib3ds-1.3.0&quot;;..\..\include;&quot;..\..\stellarium-0.8.2&quot;;..\..\libiconv\src;&quot;..\..\stellarium-0.8.2\src&quot;;&quot;..\..\stellarium-0.8.2\src\stellastro&quot;;&quot;..\..\stellarium-0.8.2\src\glpng&quot;;&quot;..\..\stellarium-0.8.2\src\iniparser&quot;;&quot;..\..\stellarium-0.8.2\src\stellplanet&quot;;..\..\lpng1212;..\..\ZLib;&quot;..\..\freetype-2.1.10\include&quot;;&quot;..\..\SDL-1.2.11\include&quot;;..\..\gettext\src;..\..\include\openCV"
 				PreprocessorDefinitions="WIN32;_NDEBUG;_WINDOWS;__MSVC__;_WIN32_WINNT=0x0400;_USE_MATH_DEFINES"
 				RuntimeLibrary="0"
 				DisableSpecificWarnings="4996"
@@ -129,7 +129,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="SDL_image.lib glaux.lib lib3ds-1_3.lib glew32.lib glut32.lib libpng.lib freetype2110MT.lib Opengl32.lib Ws2_32.lib Glu32.lib highgui.lib cxcore.lib cv.lib gettext.lib libcharset.lib libiconv.lib shell32.lib user32.lib"
-				AdditionalLibraryDirectories="..\..\Build\lib3ds_release;..\..\Build\SDL_image_release;..\..\lib\release;..\..\Build\freetype_release;..\..\Build\lpng_release;..\..\Build\zlib_release;..\..\Build\SDL_release;..\..\Build\Release\gettext;..\..\Build\Release\libcharset;..\..\Build\Release\libiconv"
+				AdditionalLibraryDirectories="..\..\Build\lib3ds_release;..\..\Build\SDL_image_release;..\..\lib\release;..\..\Build\freetype_release;..\..\Build\lpng_release;..\..\Build\zlib_release;..\..\Build\SDL_release;..\..\Build\Release\gettext;..\..\Build\Release\libcharset;..\..\Build\Release\libiconv;..\..\lib"
 				SubSystem="2"
 			/>
 			<Tool
