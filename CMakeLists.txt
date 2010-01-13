@@ -246,7 +246,10 @@ INCLUDE_DIRECTORIES(
 SET(BUILD_STATIC_PLUGINS 1 CACHE BOOL "Define whether plugins should be compiled statically and linked to the main program")
 SET(BUILD_DYNAMIC_PLUGINS 0 CACHE BOOL "Define whether plugins should be compiled dynamically")
 
-SET(USE_PLUGIN_HELLOSTELMODULE 1 CACHE BOOL "Define whether the HelloStelModule plugin should be compiled.")
+SET(USE_PLUGIN_HELLOSTELMODULE 0 CACHE BOOL "Define whether the HelloStelModule plugin should be created.")
+SET(USE_PLUGIN_ANGLEMEASURE 1 CACHE BOOL "Define whether the AngleMeasure plugin should be created.")
+SET(USE_PLUGIN_COMPASSMARKS 1 CACHE BOOL "Define whether the CompassMarks plugin should be created.")
+
 
 ########### Static compilation of plugins ###########
 # VirGO
@@ -308,21 +311,6 @@ FIND_LIBRARY(TOKYOC_LIBRARIES tokyocabinet
   ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SVMT)
 ENDIF()
 
-# AngleMeasure
-SET(USE_STATIC_PLUGIN_ANGLEMEASURE 0 CACHE BOOL "Define whether the AngleMeasure plugin should be statically linked.")
-SET(STATIC_PLUGIN_ANGLEMEASURE_PATH "$ENV{STELROOT}/../extmodules/AngleMeasure/builds/unix/src/libAngleMeasure.a" CACHE PATH "The location of the libAngleMeasure.a static library")
-IF (USE_STATIC_PLUGIN_ANGLEMEASURE)
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_ANGLEMEASURE_PATH})
-  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_ANGLEMEASURE)
-ENDIF()
-
-# CompassMarks
-SET(USE_STATIC_PLUGIN_COMPASSMARKS 0 CACHE BOOL "Define whether the CompassMarks plugin should be statically linked.")
-SET(STATIC_PLUGIN_COMPASSMARKS_PATH "$ENV{STELROOT}/../extmodules/CompassMarks/builds/unix/src/libCompassMarks.a" CACHE PATH "The location of the libCompassMarks.a static library")
-IF (USE_STATIC_PLUGIN_COMPASSMARKS)
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_COMPASSMARKS_PATH})
-  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_COMPASSMARKS)
-ENDIF()
 
 # Satellites
 SET(USE_STATIC_PLUGIN_SATELLITES 0 CACHE BOOL "Define whether the Satellites plugin should be statically linked.")
@@ -356,6 +344,9 @@ IF (USE_STATIC_PLUGIN_TELESCOPECONTROL)
   ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TELESCOPECONTROL)
 ENDIF()
 
+# Used to manage depdencies of stellarium -> Static plugin
+ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
+
 ########### Subdirectories ###############
 ADD_SUBDIRECTORY( data )
 ADD_SUBDIRECTORY( src )
@@ -375,7 +366,15 @@ ADD_SUBDIRECTORY( plugins )
 # It is important that static plugins are compiled before stellarium main executable
 IF (BUILD_STATIC_PLUGINS)
   IF (USE_PLUGIN_HELLOSTELMODULE)
-	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} HelloStelModule-static)
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/HelloStelModule/src/libHelloStelModule.a")
 	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_HELLOSTELMODULE)
+  ENDIF()
+  IF (USE_PLUGIN_ANGLEMEASURE)
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/AngleMeasure/src/libAngleMeasure.a")
+	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_ANGLEMEASURE)
+  ENDIF()
+  IF (USE_PLUGIN_COMPASSMARKS)
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/AngleMeasure/src/libCompassMarks.a")
+	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_COMPASSMARKS)
   ENDIF()
 ENDIF()
