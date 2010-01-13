@@ -29,6 +29,7 @@
 #include <QString>
 #include <QRegExp>
 #include <QDebug>
+#include <QFileInfo>
 
 #include "StelProjector.hpp"
 #include "StarMgr.hpp"
@@ -183,6 +184,21 @@ QString StarMgr::getSciName(int hip)
 
 void StarMgr::copyDefaultConfigFile()
 {
+	// Check that the stars/default directory exists
+	QFileInfo uDir(StelFileMgr::getUserDir()+"/stars/default");
+	if (!uDir.exists())
+	{
+		// The stars/ directory doesn't exist, lets create it.
+		if (!QDir("/").mkpath(uDir.filePath()))
+		{
+			qFatal("Could not create directory: %s",qPrintable(uDir.filePath()));
+		}
+	}
+	if (!uDir.isWritable())
+	{
+		qFatal("%s directory is not writable", qPrintable(uDir.filePath()));
+	}
+
 	try
 	{
 		starConfigFileFullPath = StelFileMgr::findFile("stars/default/starsConfig.json", StelFileMgr::New);
