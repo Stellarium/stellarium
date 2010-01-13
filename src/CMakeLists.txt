@@ -1,26 +1,5 @@
 
 
-INCLUDE_DIRECTORIES(
-	${CMAKE_BINARY_DIR}
-	${CMAKE_SOURCE_DIR}/src
-	${CMAKE_SOURCE_DIR}/src/core
-	${CMAKE_SOURCE_DIR}/src/gui
-	${CMAKE_SOURCE_DIR}/src/modules
-	${CMAKE_SOURCE_DIR}/src/planetsephems
-	${CMAKE_SOURCE_DIR}/src/external
-	${CMAKE_SOURCE_DIR}/src/scripting
-	${CMAKE_SOURCE_DIR}/src/external/kfilter
-	${CMAKE_SOURCE_DIR}/src/external/glues_stel/source/
-	${CMAKE_SOURCE_DIR}/src/external/glues_stel/source/libtess
-	${OPENGL_INCLUDE_DIR}
-	${ICONV_INCLUDE_DIR}
-	${INTL_INCLUDE_DIR}
-	${QT_INCLUDE_DIR}/QtScript
-	${QT_QTSCRIPT_INCLUDE_DIR}
-	${CMAKE_BINARY_DIR}/src
-	${QT_QTTEST_INCLUDE_DIR}
-)
-
 ########### next target ###############
 
 SET(glues_lib_SRCS
