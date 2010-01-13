@@ -511,6 +511,8 @@ ELSE()
  ENDIF()
 ENDIF()
 
+ADD_DEPENDENCIES(stellarium AllStaticPlugins)
+
 INSTALL(TARGETS stellarium DESTINATION bin)
 
 

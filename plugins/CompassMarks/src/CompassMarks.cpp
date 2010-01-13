@@ -40,7 +40,7 @@
 #include <QtNetwork>
 #include <cmath>
 
-//! This method is the one called automatically by the StelModuleMgr just 
+//! This method is the one called automatically by the StelModuleMgr just
 //! after loading the dynamic library
 StelModule* CompassMarksStelPluginInterface::getStelModule() const
 {
@@ -87,7 +87,7 @@ CompassMarks::~CompassMarks()
 	// TODO (requires work in core API)
 	// 1. Remove button from toolbar
 	// 2. Remove action from GUI
-	// 3. Delete GUI objects.  I'll leave this commented right now because 
+	// 3. Delete GUI objects.  I'll leave this commented right now because
 	// unloading (when implemented) might cause problems if we do it before we
 	// can do parts 1 and 2.
 	//if (pxmapGlow!=NULL)
@@ -143,11 +143,11 @@ void CompassMarks::draw(StelCore* core)
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 	StelPainter painter(prj);
 	painter.setFont(font);
-	
+
 	glColor4f(markColor[0],markColor[1],markColor[2], markFader.getInterstate());
 	glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);     
+	glEnable(GL_BLEND);
 	glEnable(GL_LINE_SMOOTH);
 	for(int i=0; i<360; i++)
 	{
@@ -190,7 +190,7 @@ void CompassMarks::setCompassMarks(bool b)
 	else
 	{
 	}
-	
+
 	if(cardinalPointsState)
 	{
 		// Using QActions instead of directly calling
