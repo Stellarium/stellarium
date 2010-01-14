@@ -526,7 +526,7 @@ SET(tests_testDates_SRCS
 	core/StelUtils.hpp
 	tests/testDates.cpp)
 QT4_WRAP_CPP(testDates_MOC_SRCS tests/testDates.hpp)
-ADD_EXECUTABLE(testDates ${tests_testDates_SRCS} ${testDates_MOC_SRCS})
+ADD_EXECUTABLE(testDates EXCLUDE_FROM_ALL ${tests_testDates_SRCS} ${testDates_MOC_SRCS})
 TARGET_LINK_LIBRARIES(testDates ${extLinkerOption} ${QT_QTTEST_LIBRARY})
 ADD_TEST(test_testDates ${EXECUTABLE_OUTPUT_PATH}/testDates)
 
@@ -535,7 +535,7 @@ SET(tests_testStelFileMgr_SRCS
 	core/StelFileMgr.hpp
 	tests/testStelFileMgr.cpp)
 QT4_WRAP_CPP(testStelFileMgr_MOC_SRCS tests/testStelFileMgr.hpp)
-ADD_EXECUTABLE(testStelFileMgr ${tests_testStelFileMgr_SRCS} ${testStelFileMgr_MOC_SRCS})
+ADD_EXECUTABLE(testStelFileMgr EXCLUDE_FROM_ALL ${tests_testStelFileMgr_SRCS} ${testStelFileMgr_MOC_SRCS})
 TARGET_LINK_LIBRARIES(testStelFileMgr ${extLinkerOption} ${QT_QTTEST_LIBRARY})
 ADD_TEST(test_testStelFileMgr ${EXECUTABLE_OUTPUT_PATH}/testStelFileMgr)
 
@@ -552,7 +552,7 @@ SET(tests_testStelSphereGeometry_SRCS
 	core/StelUtils.hpp
 	${glues_lib_SRCS})
 QT4_WRAP_CPP(testStelSphereGeometry_MOC_SRCS tests/testStelSphereGeometry.hpp)
-ADD_EXECUTABLE(testStelSphereGeometry ${tests_testStelSphereGeometry_SRCS} ${testStelSphereGeometry_MOC_SRCS})
+ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS} ${testStelSphereGeometry_MOC_SRCS})
 TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOption} ${QT_QTTEST_LIBRARY})
 ADD_TEST(test_testStelSphereGeometry ${EXECUTABLE_OUTPUT_PATH}/testStelSphereGeometry)
 
@@ -571,7 +571,7 @@ SET(tests_testStelSphericalIndex_SRCS
 	core/StelUtils.hpp
 	${glues_lib_SRCS})
 QT4_WRAP_CPP(tests_testStelSphericalIndex_MOC_SRCS tests/testStelSphericalIndex.hpp)
-ADD_EXECUTABLE(testStelSphericalIndex ${tests_testStelSphericalIndex_SRCS} ${tests_testStelSphericalIndex_MOC_SRCS})
+ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS} ${tests_testStelSphericalIndex_MOC_SRCS})
 TARGET_LINK_LIBRARIES(testStelSphericalIndex ${extLinkerOption} ${QT_QTTEST_LIBRARY})
 ADD_TEST(test_testStelSphericalIndex ${EXECUTABLE_OUTPUT_PATH}/testStelSphericalIndex)
 
@@ -581,7 +581,7 @@ SET(tests_testStelJsonParser_SRCS
 	core/StelJsonParser.hpp
 	core/StelJsonParser.cpp)
 QT4_WRAP_CPP(tests_testStelJsonParser_MOC_SRCS tests/testStelJsonParser.hpp)
-ADD_EXECUTABLE(testStelJsonParser ${tests_testStelJsonParser_SRCS} ${tests_testStelJsonParser_MOC_SRCS})
+ADD_EXECUTABLE(testStelJsonParser EXCLUDE_FROM_ALL ${tests_testStelJsonParser_SRCS} ${tests_testStelJsonParser_MOC_SRCS})
 TARGET_LINK_LIBRARIES(testStelJsonParser ${extLinkerOption} ${QT_QTTEST_LIBRARY})
 ADD_TEST(test_testStelJsonParser ${EXECUTABLE_OUTPUT_PATH}/testStelJsonParser)
 
@@ -590,6 +590,6 @@ SET(tests_testStelVertexArray_SRCS
   tests/testStelVertexArray.cpp
   core/StelVertexArray.hpp)
 QT4_WRAP_CPP(tests_testStelVertexArray_MOC_SRCS tests/testStelVertexArray.hpp)
-ADD_EXECUTABLE(testStelVertexArray ${tests_testStelVertexArray_SRCS} ${tests_testStelVertexArray_MOC_SRCS})
+ADD_EXECUTABLE(testStelVertexArray EXCLUDE_FROM_ALL ${tests_testStelVertexArray_SRCS} ${tests_testStelVertexArray_MOC_SRCS})
 TARGET_LINK_LIBRARIES(testStelVertexArray ${extLinkerOption} ${QT_QTTEST_LIBRARY})
 ADD_TEST(test_testSteVertexArray ${EXECUTABLE_OUTPUT_PATH}/testStelVertexArray)
