@@ -55,16 +55,16 @@ StelModule* SatellitesStelPluginInterface::getStelModule() const
 
 StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 {
-        // Allow to load the resources when used as a static plugin
-        Q_INIT_RESOURCE(Satellites);
+		// Allow to load the resources when used as a static plugin
+		Q_INIT_RESOURCE(Satellites);
 
-        StelPluginInfo info;
-        info.id = "Satellites";
-        info.displayedName = "Satellites";
-        info.authors = "Matthew Gates";
-        info.contact = "http://stellarium.org/";
-        info.description = "Prediction of artificial satellite positions in Earth orbit based on NORAD TLE data";
-        return info;
+		StelPluginInfo info;
+		info.id = "Satellites";
+		info.displayedName = "Satellites";
+		info.authors = "Matthew Gates";
+		info.contact = "http://stellarium.org/";
+		info.description = "Prediction of artificial satellite positions in Earth orbit based on NORAD TLE data";
+		return info;
 }
 
 Q_EXPORT_PLUGIN2(Satellites, SatellitesStelPluginInterface)
@@ -125,7 +125,7 @@ void Satellites::init()
 		pxmapOnIcon = new QPixmap(":/satellites/bt_satellites_on.png");
 		pxmapOffIcon = new QPixmap(":/satellites/bt_satellites_off.png");
 		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiActions("actionShow_Satellite_Hints"));
-		gui->getButtonBar()->addButton(toolbarButton);
+		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 
 
 		connect(gui->getGuiActions("actionShow_Satellite_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
@@ -322,7 +322,7 @@ void Satellites::restoreDefaultJsonFile(void)
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(satellitesJsonPath);
-		dest.setPermissions(dest.permissions() | QFile::WriteOwner); 
+		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
 
 		// Make sure that in the case where an online update has previously been done, but
 		// the json file has been manually removed, that an update is schreduled in a timely
@@ -475,7 +475,7 @@ void Satellites::setTleSources(QStringList tleSources)
 	{
 		conf->setValue(QString("tle_url%1").arg(i++), url);
 	}
-	
+
 	conf->endGroup();
 }
 
