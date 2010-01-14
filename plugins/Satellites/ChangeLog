@@ -1,0 +1,20 @@
+0.5.2 [2010-01-12]
+
+Fix sub-pixel dialog position.
+Make visible checkbox work properly.
+Mask incomplete features in preparation for release.
+Updated default satellites.json file.
+
+0.5.0 [2009-10-03]
+
+Added GUI config for general update/display options, satellite groups/lists, sources, about
+Removed translation to fix win32 build :(
+Fixed win32 installer generator
+
+0.4.0 [2009-09-12]
+
+Changed getPluginInfo to work with modified core
+Put json file and icons into QT resource built into library file
+Added Hint font size config option
+
+
