@@ -121,7 +121,7 @@ void CompassMarks::init()
 		gui->addGuiActions("actionShow_Compass_Marks", N_("Compass marks"), "Ctrl+C", "Plugin Key Bindings", true, false);
 		gui->getGuiActions("actionShow_Compass_Marks")->setChecked(markFader);
 		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiActions("actionShow_Compass_Marks"));
-		gui->getButtonBar()->addButton(toolbarButton);
+		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		connect(gui->getGuiActions("actionShow_Compass_Marks"), SIGNAL(toggled(bool)), this, SLOT(setCompassMarks(bool)));
 		connect(gui->getGuiActions("actionShow_Cardinal_Points"), SIGNAL(toggled(bool)), this, SLOT(cardinalPointsChanged(bool)));
 		cardinalPointsState = false;

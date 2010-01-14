@@ -56,7 +56,7 @@
 /* ********************************************************************* */
 #pragma mark StelModuleMgr Methods
 /* ********************************************************************* */
-//! This method is the one called automatically by the StelModuleMgr just 
+//! This method is the one called automatically by the StelModuleMgr just
 //! after loading the dynamic library
 StelModule* OcularsStelPluginInterface::getStelModule() const
 {
@@ -84,7 +84,7 @@ Q_EXPORT_PLUGIN2(Oculars, OcularsStelPluginInterface)
 #pragma mark Instance Methods
 /* ********************************************************************* */
 Oculars::Oculars() : selectedOcularIndex(-1), flagShowOculars(false), usageMessageLabelID(-1),
-                   pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL)
+				   pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL)
 {
 	flagShowOculars = false;
 	flagShowCrosshairs = false;
@@ -105,7 +105,7 @@ Oculars::~Oculars()
 	QSqlDatabase db = QSqlDatabase::database("oculars");
 	db.close();
 	QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection);
-	
+
 	delete ocularsTableModel;
 	ocularsTableModel = NULL;
 	delete telescopesTableModel;
@@ -123,19 +123,19 @@ void Oculars::draw(StelCore* core)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 	StelPainter painter(prj);
 	painter.setFont(font);
-	
+
 	// Insure there is a selected ocular & telescope
 	if (selectedOcularIndex > oculars.count()) {
-		qWarning() << "Oculars: the selected ocular index of " << selectedOcularIndex << " is greate that the ocular count of " 
+		qWarning() << "Oculars: the selected ocular index of " << selectedOcularIndex << " is greate that the ocular count of "
 		<< oculars.count() << ". Module disable.";
 		ready = false;
 	}
 	if (selectedTelescopeIndex > telescopes.count()) {
-		qWarning() << "Oculars: the selected telescope index of " << selectedTelescopeIndex << " is greate that the telescope count of " 
+		qWarning() << "Oculars: the selected telescope index of " << selectedTelescopeIndex << " is greate that the telescope count of "
 		<< telescopes.count() << ". Module disable.";
 		ready = false;
 	}
-	
+
 	if (ready && flagShowOculars) {
 		paintMask();
 		if (flagShowCrosshairs)  {
@@ -158,18 +158,18 @@ void Oculars::draw(StelCore* core)
 		QString string7 = "FOV: " + QVariant(((int)(ocular->getAcutalFOV(telescope) * 10000.00)) / 10000.0).toString() + QChar(0x00B0);
 
 		float insetFromRHS = painter.getFontMetrics().width(widthString);
-		
+
 		StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
 		int xPosition = projectorParams.viewportXywh[2];
 		xPosition -= insetFromRHS;
 		int yPosition = projectorParams.viewportXywh[3];
 		yPosition -= 40;
-		
+
 		painter.setColor(0.8, 0.48, 0.0, 1);
 		glDisable(GL_TEXTURE_2D);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
-		
+
 		const int lineHeight = painter.getFontMetrics().height();
 		painter.drawText(xPosition, yPosition, string1);
 		yPosition-=lineHeight;
@@ -200,7 +200,7 @@ double Oculars::getCallOrder(StelModuleActionName actionName) const
 	{
 		order = GETSTELMODULE(LabelMgr)->getCallOrder(actionName) + 100.0;
 	}
-	
+
 	return order;
 }
 
@@ -210,23 +210,23 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 	StelMovementMgr::StelMovementMgr *movementManager = core->getMovementMgr();
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected()){
 		LabelMgr *labelManager = GETSTELMODULE(LabelMgr);
-		
-		if (flagShowOculars) 
+
+		if (flagShowOculars)
 		{
 			// center the selected object in the ocular, and track.
 			movementManager->setFlagTracking(true);
 		}
-		else 
+		else
 		{
 			// remove the usage label if it is being displayed.
-			if (usageMessageLabelID > -1) 
+			if (usageMessageLabelID > -1)
 			{
 				labelManager->setLabelShow(usageMessageLabelID, false);
 				labelManager->deleteLabel(usageMessageLabelID);
 				usageMessageLabelID = -1;
 			}
 		}
-	} 
+	}
 	else if(flagShowOculars)
 	{
 		// The ocular is displayed, but no object is selected.  So don't track the stars.
@@ -235,7 +235,7 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 	event->setAccepted(false);
 }
 
-bool Oculars::handleMouseMoves(int x, int y, Qt::MouseButtons b) 
+bool Oculars::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 {
 	// Allow it to go up the stack
 	return false;
@@ -270,7 +270,7 @@ void Oculars::setStelStyle(const StelStyle& style)
 		dialog->setStyleSheet(telescopeManager->getModuleStyleSheet(style.confSectionName));
 	}
 	 */
-	
+
 	//Change the styles of all children, too
 	ocularDialog->setStelStyle(style);
 }
@@ -284,7 +284,7 @@ void Oculars::determineMaxImageCircle()
 		QListIterator<Ocular *> ocularIterator(oculars);
 		while (ocularIterator.hasNext()) {
 			Ocular *ocular = ocularIterator.next();
-			
+
 			QListIterator<Telescope *> telescopeIterator(telescopes);
 			while (telescopeIterator.hasNext()) {
 				Telescope *telescope = telescopeIterator.next();
@@ -318,7 +318,7 @@ void Oculars::loadOculars()
 		ready = false;
 		qWarning() << "WARNING: no oculars found.  Feature will be disabled.";
 	}
-	
+
 }
 
 void Oculars::loadTelescopes()
@@ -332,7 +332,7 @@ void Oculars::loadTelescopes()
 		ready = false;
 		qWarning() << "WARNING: no telescopes found.  Feature will be disabled.";
 	}
-	
+
 }
 
 void Oculars::setScaleImageCircle(bool state)
@@ -352,11 +352,11 @@ void Oculars::enableOcular(bool b)
 		qDebug() << "The Oculars module has been disabled.";
 		return;
 	}
-	
+
 	if (b) {
 		loadDatabaseObjects();
 	}
-	
+
 	StelCore::StelCore *core = StelApp::getInstance().getCore();
 	LabelMgr* labelManager = GETSTELMODULE(LabelMgr);
 	// Toggle the plugin on & off.  To toggle on, we want to ensure there is a selected object.
@@ -435,18 +435,18 @@ void Oculars::toggleCrosshair()
 /* ********************************************************************* */
 void Oculars::drawCrosshairs()
 {
-	const StelProjectorP projector = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);	
+	const StelProjectorP projector = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 	StelCore::StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	// Center of screen
-	Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2, 
+	Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
 					   projector->getViewportPosY()+projector->getViewportHeight()/2);
 	GLdouble length = 0.5 * params.viewportFovDiameter;
 	// See if we need to scale the length
 	if (useMaxImageCircle && oculars[selectedOcularIndex]->getExitCircle(telescopes[selectedTelescopeIndex]) > 0.0) {
 		length = oculars[selectedOcularIndex]->getExitCircle(telescopes[selectedTelescopeIndex]) * length / maxImageCircle;
 	}
-	
+
 	// Draw the lines
 	StelPainter painter(projector);
 	painter.setColor(0.77, 0.14, 0.16, 1);
@@ -461,22 +461,22 @@ void Oculars::initializeActions()
 	QString group = "Oculars Plugin";
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
-	
+
 	gui->addGuiActions("actionShow_Ocular", "Enable ocular mode", "Ctrl+O", group, true);
 	gui->getGuiActions("actionShow_Ocular")->setChecked(flagShowOculars);
 	gui->addGuiActions("actionShow_Ocular_Crosshair", "Toggle Crosshair", "ALT+C", group, true);
 	gui->addGuiActions("actionShow_Ocular_Window", "Configuration Window", "ALT+O", group, true);
-	
+
 	gui->addGuiActions("actionShow_Ocular_increment", "Select ocular 1", "Ctrl+]", group, false);
 	gui->addGuiActions("actionShow_Ocular_decrement", "Select ocular 2", "Ctrl+[", group, false);
 	gui->addGuiActions("actionShow_Telescope_increment", "Select ocular 3", "Shift+]", group, false);
 	gui->addGuiActions("actionShow_Telescope_decrement", "Select ocular 4", "Shift+[", group, false);
-	
+
 	connect(gui->getGuiActions("actionShow_Ocular"), SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
-	connect(gui->getGuiActions("actionShow_Ocular_Crosshair"), SIGNAL(toggled(bool)), this, SLOT(toggleCrosshair()));	
+	connect(gui->getGuiActions("actionShow_Ocular_Crosshair"), SIGNAL(toggled(bool)), this, SLOT(toggleCrosshair()));
 	connect(gui->getGuiActions("actionShow_Ocular_Window"), SIGNAL(toggled(bool)), ocularDialog, SLOT(setVisible(bool)));
 	connect(ocularDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Ocular_Window"), SLOT(setChecked(bool)));
-	
+
 	connect(gui->getGuiActions("actionShow_Ocular_increment"), SIGNAL(triggered()), this, SLOT(incrementOcularIndex()));
 	connect(gui->getGuiActions("actionShow_Ocular_decrement"), SIGNAL(triggered()), this, SLOT(decrementOcularIndex()));
 	connect(gui->getGuiActions("actionShow_Telescope_increment"), SIGNAL(triggered()), this, SLOT(incrementTelescopeIndex()));
@@ -489,24 +489,24 @@ void Oculars::initializeActions()
 	connect(this, SIGNAL(selectedOcularChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedTelescopeChanged()), this, SLOT(instrumentChanged()));
 	connect(ocularDialog, SIGNAL(scaleImageCircleChanged(bool)), this, SLOT(setScaleImageCircle(bool)));
-	
-	
+
+
 	// Make a toolbar button
 	try {
 		pxmapGlow = new QPixmap(":/graphicGui/gui/glow32x32.png");
 		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");
 		pxmapOffIcon = new QPixmap(":/ocular/bt_ocular_off.png");
-		
-		toolbarButton = new StelButton(NULL, 
-									   *pxmapOnIcon, 
-									   *pxmapOffIcon, 
-									   *pxmapGlow, 
+
+		toolbarButton = new StelButton(NULL,
+									   *pxmapOnIcon,
+									   *pxmapOffIcon,
+									   *pxmapGlow,
 									   gui->getGuiActions("actionShow_Ocular"));
-		gui->getButtonBar()->addButton(toolbarButton);
+		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable create toolbar button for Oculars plugin: " << e.what();
 	}
-	
+
 }
 
 bool Oculars::initializeDB()
@@ -528,7 +528,7 @@ bool Oculars::initializeDB()
 			query.exec("INSERT INTO oculars (name, afov, efl, fieldStop) VALUES ('three', 52, 10.5, 0)");
 			query.exec("INSERT INTO oculars (name, afov, efl, fieldStop) VALUES ('four', 52, 26, 0)");
 			query.exec("INSERT INTO oculars (name, afov, efl, fieldStop) VALUES ('five', 82, 20, 0)");
-			
+
 		}
 		if (!tableList.contains("telescopes")) {
 			QSqlQuery query = QSqlQuery(db);
@@ -536,7 +536,7 @@ bool Oculars::initializeDB()
 			query.exec("INSERT INTO telescopes (name, focalLength, diameter, vFlip, hFlip) VALUES ('C1400', 3190, 355.6, 'false', 'true')");
 			query.exec("INSERT INTO telescopes (name, focalLength, diameter, vFlip, hFlip) VALUES ('80EDF', 500, 80, 'false', 'false')");
 		}
-		
+
 		// Set the table models
 		ocularsTableModel = new QSqlTableModel(0, db);
 		ocularsTableModel->setTable("oculars");
@@ -544,7 +544,7 @@ bool Oculars::initializeDB()
 		telescopesTableModel = new QSqlTableModel(0, db);
 		telescopesTableModel->setTable("telescopes");
 		telescopesTableModel->select();
-		
+
 		result = true;
 	} else {
 		qDebug() << "Oculars could not open its databse; disableing module.";
@@ -557,10 +557,10 @@ void Oculars::interceptMovementKey(QKeyEvent* event)
 {
 	// We onle care about the arrow keys.  This flag tracks that.
 	bool consumeEvent = false;
-	
+
 	StelCore::StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr::StelMovementMgr *movementManager = core->getMovementMgr();
-	
+
 	if (event->type() == QEvent::KeyPress)
 	{
 		// Direction and zoom deplacements
@@ -571,7 +571,7 @@ void Oculars::interceptMovementKey(QKeyEvent* event)
 				consumeEvent = true;
 				break;
 			case Qt::Key_Right:
-				movementManager->turnRight(true); 
+				movementManager->turnRight(true);
 				consumeEvent = true;
 				break;
 			case Qt::Key_Up:
@@ -582,7 +582,7 @@ void Oculars::interceptMovementKey(QKeyEvent* event)
 				consumeEvent = true;
 				break;
 			case Qt::Key_Down:
-				if (!event->modifiers().testFlag(Qt::ControlModifier)) 
+				if (!event->modifiers().testFlag(Qt::ControlModifier))
 				{
 					movementManager->turnDown(true);
 				}
@@ -608,11 +608,11 @@ void Oculars::interceptMovementKey(QKeyEvent* event)
 		switch (event->key())
 		{
 			case Qt::Key_Left:
-				movementManager->turnLeft(false); 
+				movementManager->turnLeft(false);
 				consumeEvent = true;
 				break;
 			case Qt::Key_Right:
-				movementManager->turnRight(false); 
+				movementManager->turnRight(false);
 				consumeEvent = true;
 				break;
 			case Qt::Key_Up:
@@ -624,25 +624,25 @@ void Oculars::interceptMovementKey(QKeyEvent* event)
 				consumeEvent = true;
 				break;
 			case Qt::Key_PageUp:
-				movementManager->zoomIn(false); 
+				movementManager->zoomIn(false);
 				consumeEvent = true;
 				break;
 			case Qt::Key_PageDown:
-				movementManager->zoomOut(false); 
+				movementManager->zoomOut(false);
 				consumeEvent = true;
 				break;
 			case Qt::Key_Shift:
-				movementManager->moveSlow(false); 
+				movementManager->moveSlow(false);
 				consumeEvent = true;
 				break;
 		}
-		if (consumeEvent) 
+		if (consumeEvent)
 		{
 			// We don't want to re-center the object; just hold the current position.
 			movementManager->setFlagLockEquPos(true);
 		}
 	}
-	if (consumeEvent) 
+	if (consumeEvent)
 	{
 		event->accept();
 	}
@@ -671,14 +671,14 @@ void Oculars::paintMask()
 	glPushMatrix();
 	glTranslated(params.viewportCenter[0], params.viewportCenter[1], 0.0);
 	GLUquadricObj *quadric = gluNewQuadric();
-	
+
 	GLdouble inner = 0.5 * params.viewportFovDiameter;
 
 	// See if we need to scale the mask
 	if (useMaxImageCircle && oculars[selectedOcularIndex]->getExitCircle(telescopes[selectedTelescopeIndex]) > 0.0) {
 		inner = oculars[selectedOcularIndex]->getExitCircle(telescopes[selectedTelescopeIndex]) * inner / maxImageCircle;
 	}
-	
+
 	GLdouble outer = params.viewportXywh[2] + params.viewportXywh[3];
 	// Draw the mask
 	gluDisk(quadric, inner, outer, 256, 1);
@@ -693,7 +693,7 @@ void Oculars::validateIniFile()
 {
 	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
 	QString ocularIniPath = StelFileMgr::findFile("modules/Oculars/", flags) + "ocular.ini";
-	
+
 	// If the ini file does not already exist, create it from the resource in the QT resource
 	if(!QFileInfo(ocularIniPath).exists()) {
 		QFile src(":/ocular/default_ocular.ini");
@@ -711,14 +711,14 @@ void Oculars::validateIniFile()
 		QSettings settings(ocularIniPath, QSettings::IniFormat);
 		double ocularsVersion = settings.value("oculars_version", "0.0").toDouble();
 		qWarning() << "Oculars::validateIniFile found existing ini file version " << ocularsVersion;
-		
+
 		if (ocularsVersion < MIN_OCULARS_INI_VERSION) {
-			qWarning() << "Oculars::validateIniFile existing ini file version " << ocularsVersion 
+			qWarning() << "Oculars::validateIniFile existing ini file version " << ocularsVersion
 						<< " to old to use; required version is " << MIN_OCULARS_INI_VERSION << ". Coping over new one.";
 			// delete last "old" file, if it exists
 			QFile deleteFile(ocularIniPath + ".old");
 			deleteFile.remove();
-			
+
 			// Rename the old one, and copy over a new one
 			QFile oldFile(ocularIniPath);
 			if (!oldFile.rename(ocularIniPath + ".old")) {
@@ -745,7 +745,7 @@ void Oculars::unzoomOcular()
 	StelCore::StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr::StelMovementMgr *movementManager = core->getMovementMgr();
 	GridLinesMgr::GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
-	
+
 	gridManager->setFlagAzimuthalGrid(flagAzimuthalGrid);
 	gridManager->setFlagEquatorGrid(flagEquatorGrid);
 	gridManager->setFlagEquatorJ2000Grid(flagEquatorJ2000Grid);
@@ -755,18 +755,18 @@ void Oculars::unzoomOcular()
 	movementManager->setFlagTracking(false);
 	movementManager->setFlagEnableZoomKeys(true);
 	movementManager->setFlagEnableMouseNavigation(true);
-	
+
 	// Set the screen display
 	// core->setMaskType(StelProjector::MaskNone);
 	core->setFlipHorz(false);
 	core->setFlipVert(false);
-	
+
 	movementManager->zoomTo(movementManager->getInitFov());
 }
 
 void Oculars::zoom(bool rezoom)
 {
-	
+
 	if (flagShowOculars)  {
 		if (!rezoom)  {
 			GridLinesMgr::GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
@@ -778,7 +778,7 @@ void Oculars::zoom(bool rezoom)
 			flagEclipticLine = gridManager->getFlagEclipticLine();
 			flagMeridianLine = gridManager->getFlagMeridianLine();
 		}
-		
+
 		// set new state
 		zoomOcular();
 	} else {
@@ -791,9 +791,9 @@ void Oculars::zoomOcular()
 {
 	StelCore::StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr::StelMovementMgr *movementManager = core->getMovementMgr();
-	GridLinesMgr::GridLinesMgr *gridManager = 
+	GridLinesMgr::GridLinesMgr *gridManager =
 		(GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
-	
+
 	gridManager->setFlagAzimuthalGrid(false);
 	gridManager->setFlagEquatorGrid(false);
 	gridManager->setFlagEquatorJ2000Grid(false);
@@ -806,18 +806,18 @@ void Oculars::zoomOcular()
 	// We won't always have a selected object
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected()) {
 		movementManager->
-			moveToJ2000(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()), 
-						0.5, 
+			moveToJ2000(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()),
+						0.5,
 						1);
 	}
-	
+
 	// Set the screen display
 	// core->setMaskType(StelProjector::MaskDisk);
 	Ocular *ocular = oculars[selectedOcularIndex];
 	Telescope *telescope = telescopes[selectedTelescopeIndex];
 	core->setFlipHorz(telescope->isHFlipped());
 	core->setFlipVert(telescope->isVFlipped());
-	
+
 	double actualFOV = ocular->getAcutalFOV(telescope);
 	// See if the mask was scaled
 	if (maxImageCircle > 0.0 && ocular->getExitCircle(telescope) > 0.0) {

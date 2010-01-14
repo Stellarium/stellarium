@@ -130,7 +130,7 @@ void AngleMeasure::init()
 		pxmapOnIcon = new QPixmap(":/angleMeasure/bt_anglemeasure_on.png");
 		pxmapOffIcon = new QPixmap(":/angleMeasure/bt_anglemeasure_off.png");
 		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiActions("actionShow_Angle_Measure"));
-		gui->getButtonBar()->addButton(toolbarButton, "060-othersGroup");
+		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
 	catch (std::runtime_error& e)
 	{
