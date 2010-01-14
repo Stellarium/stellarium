@@ -1,22 +1,6 @@
+INCLUDE_DIRECTORIES(. sgp4sdp4 gui ${CMAKE_BINARY_DIR}/plugins/Satellites/src ${CMAKE_BINARY_DIR}/plugins/Satellites/src/gui)
 
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src 
-  ${CMAKE_SOURCE_DIR}/src/sgp4sdp4
-  ${STELLARIUM_BUILD_DIR}
-  ${STELLARIUM_SOURCE_DIR}
-  ${STELLARIUM_SOURCE_DIR}/core
-  ${STELLARIUM_SOURCE_DIR}/gui
-  ${STELLARIUM_SOURCE_DIR}/modules
-  ${STELLARIUM_SOURCE_DIR}/stelutils
-  ${STELLARIUM_SOURCE_DIR}/external
-  ${STELLARIUM_SOURCE_DIR}/scripting
-  ${CMAKE_BINARY_DIR}
-  ${CMAKE_BINARY_DIR}/src
-  ${CMAKE_SOURCE_DIR}/src 
-  ${CMAKE_SOURCE_DIR}/src/gui
-  ${OPENGL_INCLUDE_DIR}
-  ${Boost_INCLUDE_DIRS})
-
-LINK_DIRECTORIES(${STELLARIUM_BUILD_DIR}/src)
+LINK_DIRECTORIES(/src)
 
 SET(Satellites_SRCS
   sgp4sdp4/sgp4sdp4.c
@@ -41,8 +25,7 @@ SET(SatellitesDialog_UIS
 )
 QT4_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
 
-SET(Satellites_RES
-  ${CMAKE_SOURCE_DIR}/Satellites.qrc)
+SET(Satellites_RES ../Satellites.qrc)
 QT4_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
 
 # Add here all the files which require moc compilation
@@ -52,36 +35,48 @@ SET(Satellites_MOC_HDRS
   gui/StelDialogPlugin.hpp
   gui/SatellitesDialog.hpp
 )
- 
+
 # After this call, Satellites_MOC_SRCS = moc_Satellites.cxx
 QT4_WRAP_CPP(Satellites_MOC_SRCS ${Satellites_MOC_HDRS})
 
 # Dummy target to trigger ui compilations
-ADD_CUSTOM_TARGET(GenerateUiHeaders ALL DEPENDS ${SatellitesDialog_UIS_H})
+ADD_CUSTOM_TARGET(SatellitesGenerateUiHeaders ALL DEPENDS ${SatellitesDialog_UIS_H})
 
-ADD_LIBRARY(Satellites MODULE ${Satellites_SRCS} ${Satellites_MOC_SRCS} ${Satellites_RES_CXX})
-ADD_LIBRARY(Satellites-static STATIC ${Satellites_SRCS} ${Satellites_MOC_SRCS} ${Satellites_RES_CXX})
-# The library target "Satellites-static" has a default OUTPUT_NAME of "Satellites-static", so change it.
-SET_TARGET_PROPERTIES(Satellites-static PROPERTIES OUTPUT_NAME "Satellites-static")
+SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
 
-IF(APPLE)
-  FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
-  MARK_AS_ADVANCED(OPENGL_LIBRARY)
-  SET_TARGET_PROPERTIES(Satellites PROPERTIES LINK_FLAGS "-undefined dynamic_lookup" SUFFIX ".dylib")
-ENDIF(APPLE)
+############### For building the dynamic library ######################
+IF(BUILD_DYNAMIC_PLUGINS)
+	ADD_LIBRARY(Satellites MODULE ${Satellites_SRCS} ${Satellites_MOC_SRCS} ${Satellites_RES_CXX})
+	IF(APPLE)
+		FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
+		MARK_AS_ADVANCED(OPENGL_LIBRARY)
+		SET_TARGET_PROPERTIES(Satellites PROPERTIES LINK_FLAGS "-undefined dynamic_lookup" SUFFIX ".dylib")
+	ENDIF()
 
-IF(WIN32)
-  SET_TARGET_PROPERTIES(Satellites PROPERTIES LINK_FLAGS "-enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition" )
-  SET(StelMain stelMain)
-ELSE(WIN32)
-  SET(StelMain )
-ENDIF(WIN32)
+	IF(WIN32)
+		SET_TARGET_PROPERTIES(Satellites PROPERTIES LINK_FLAGS "-enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition" )
+		SET(StelMain stelMain)
+	ELSE(WIN32)
+		SET(StelMain )
+	ENDIF(WIN32)
 
-SET(extLinkerOption ${QT_LIBRARIES} ${FreeType2_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
+	TARGET_LINK_LIBRARIES(Satellites ${StelMain} ${extLinkerOption})
+	INSTALL(TARGETS Satellites DESTINATION "modules/Satellites")
+ENDIF()
 
-TARGET_LINK_LIBRARIES(Satellites ${StelMain} ${extLinkerOption})
-TARGET_LINK_LIBRARIES(Satellites-static ${StelMain} ${extLinkerOption})
-SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
+############### For building the static library ######################
+IF(BUILD_STATIC_PLUGINS)
+	ADD_LIBRARY(Satellites-static STATIC ${Satellites_SRCS} ${Satellites_MOC_SRCS} ${Satellites_RES_CXX})
+	# The library target "Satellites-static" has a default OUTPUT_NAME of "Satellites-static", so change it.
+	SET_TARGET_PROPERTIES(Satellites-static PROPERTIES OUTPUT_NAME "Satellites")
+	TARGET_LINK_LIBRARIES(Satellites-static ${StelMain} ${extLinkerOption})
+	SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
+	ADD_DEPENDENCIES(AllStaticPlugins Satellites-static)
+ENDIF()
 
-INSTALL(TARGETS Satellites DESTINATION "modules/${PACKAGE}")
+
+
+
+
+
 

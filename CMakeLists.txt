@@ -3,6 +3,10 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 # Avoid repeating the IF statement in the ENDIF and ELSE
 SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 
+IF(COMMAND cmake_policy)
+  CMAKE_POLICY(SET CMP0003 NEW)
+ENDIF()
+
 ########### Project name ###########
 PROJECT(Stellarium)
 SET(STELLARIUM_MAJOR "0")
@@ -29,7 +33,7 @@ IF(UNIX AND NOT WIN32)
 ELSE()
  SET(CMAKE_C_FLAGS "-Wall -fexceptions -fident -mthreads")
  SET(CMAKE_CXX_FLAGS "-Wall -Wsign-promo -fexceptions -fident -mthreads")
- SET(CMAKE_EXE_LINKER_FLAGS "-Wsign-promo -fexceptions -fident -mthreads -mwindows --large-address-aware")
+ SET(CMAKE_EXE_LINKER_FLAGS "-Wsign-promo -fexceptions -fident -mthreads -mwindows --large-address-aware")  # --enable-runtime-pseudo-reloc
 ENDIF()
 
 SET(OPTIMIZE_INTEL_ATOM 0 CACHE BOOL "Activate optimizations for atom processor.")
@@ -97,10 +101,6 @@ ELSE()
   ADD_DEFINITIONS(-DDEFAULT_GRAPHICS_SYSTEM="raster")
 ENDIF()
 
-IF(COMMAND cmake_policy)
-  CMAKE_POLICY(SET CMP0003 NEW)
-ENDIF()
-
 ########### Plugin setup #############
 SET(BUILD_STATIC_PLUGINS 1 CACHE BOOL "Define whether plugins should be compiled statically and linked to the main program")
 SET(BUILD_DYNAMIC_PLUGINS 0 CACHE BOOL "Define whether plugins should be compiled dynamically")
@@ -108,6 +108,7 @@ SET(BUILD_DYNAMIC_PLUGINS 0 CACHE BOOL "Define whether plugins should be compile
 SET(USE_PLUGIN_HELLOSTELMODULE 0 CACHE BOOL "Define whether the HelloStelModule plugin should be created.")
 SET(USE_PLUGIN_ANGLEMEASURE 1 CACHE BOOL "Define whether the AngleMeasure plugin should be created.")
 SET(USE_PLUGIN_COMPASSMARKS 1 CACHE BOOL "Define whether the CompassMarks plugin should be created.")
+SET(USE_PLUGIN_SATELLITES 1 CACHE BOOL "Define whether the Satellites plugin should be created.")
 SET(USE_PLUGIN_SVMT 0 CACHE BOOL "Define whether the SVMT plugin should be created.")
 
 ########### Static compilation of plugins ###########
@@ -131,14 +132,6 @@ FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
   SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_VIRGO_PATH} ${CFITSIO_LIBRARIES})
   SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
   ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_VIRGO)
-ENDIF()
-
-# Satellites
-SET(USE_STATIC_PLUGIN_SATELLITES 0 CACHE BOOL "Define whether the Satellites plugin should be statically linked.")
-SET(STATIC_PLUGIN_SATELLITES_PATH "$ENV{STELROOT}/../extmodules/Satellites/builds/unix/src/libSatellites.a" CACHE PATH "The location of the libSatellites.a static library")
-IF (USE_STATIC_PLUGIN_SATELLITES)
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_SATELLITES_PATH})
-  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SATELLITES)
 ENDIF()
 
 # TextUserInterface
@@ -166,7 +159,8 @@ IF (USE_STATIC_PLUGIN_TELESCOPECONTROL)
 ENDIF()
 
 
-########## Static plugins need to define includes and libraries for the compilation of Stellaium itself #########
+########## Static plugins need to define includes and libraries
+########## for the compilation of Stellarium itself
 IF (BUILD_STATIC_PLUGINS)
   IF (USE_PLUGIN_HELLOSTELMODULE)
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/HelloStelModule/src/libHelloStelModule.a")
@@ -181,6 +175,11 @@ IF (BUILD_STATIC_PLUGINS)
   IF (USE_PLUGIN_COMPASSMARKS)
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/CompassMarks/src/libCompassMarks.a")
 	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_COMPASSMARKS)
+  ENDIF()
+
+  IF (USE_PLUGIN_SATELLITES)
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Satellites/src/libSatellites.a")
+	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SATELLITES)
   ENDIF()
 
   IF (USE_PLUGIN_SVMT)
