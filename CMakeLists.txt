@@ -110,6 +110,7 @@ SET(USE_PLUGIN_ANGLEMEASURE 1 CACHE BOOL "Define whether the AngleMeasure plugin
 SET(USE_PLUGIN_COMPASSMARKS 1 CACHE BOOL "Define whether the CompassMarks plugin should be created.")
 SET(USE_PLUGIN_SATELLITES 1 CACHE BOOL "Define whether the Satellites plugin should be created.")
 SET(USE_PLUGIN_SVMT 0 CACHE BOOL "Define whether the SVMT plugin should be created.")
+SET(USE_PLUGIN_TELESCOPECONTROL 0 CACHE BOOL "Define whether the TelescopeControl plug-in should be created.")
 
 ########### Static compilation of plugins ###########
 # VirGO
@@ -150,14 +151,6 @@ IF (USE_STATIC_PLUGIN_OCULARS)
   ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_OCULARS)
 ENDIF()
 
-# TelescopeControl
-SET(USE_STATIC_PLUGIN_TELESCOPECONTROL 0 CACHE BOOL "Define whether the TelescopeControl plug-in should be statically linked.")
-SET(STATIC_PLUGIN_TELESCOPECONTROL_PATH "$ENV{STELROOT}/../extmodules/TelescopeControl/builds/unix/src/libTelescopeControl.a" CACHE PATH "The location of the libTelescopeControl.a static library")
-IF (USE_STATIC_PLUGIN_TELESCOPECONTROL)
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_TELESCOPECONTROL_PATH})
-  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TELESCOPECONTROL)
-ENDIF()
-
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
@@ -181,6 +174,11 @@ IF (BUILD_STATIC_PLUGINS)
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Satellites/src/libSatellites.a")
 	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SATELLITES)
   ENDIF()
+
+IF (USE_PLUGIN_TELESCOPECONTROL)
+  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/TelescopeControl/src/libTelescopeControl.a")
+  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TELESCOPECONTROL)
+ENDIF()
 
   IF (USE_PLUGIN_SVMT)
 	## Tokyo Cabinet

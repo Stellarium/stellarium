@@ -39,14 +39,11 @@ SET(Satellites_MOC_HDRS
 # After this call, Satellites_MOC_SRCS = moc_Satellites.cxx
 QT4_WRAP_CPP(Satellites_MOC_SRCS ${Satellites_MOC_HDRS})
 
-# Dummy target to trigger ui compilations
-ADD_CUSTOM_TARGET(SatellitesGenerateUiHeaders ALL DEPENDS ${SatellitesDialog_UIS_H})
-
 SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)
-	ADD_LIBRARY(Satellites MODULE ${Satellites_SRCS} ${Satellites_MOC_SRCS} ${Satellites_RES_CXX})
+	ADD_LIBRARY(Satellites MODULE ${Satellites_SRCS} ${Satellites_MOC_SRCS} ${Satellites_RES_CXX} ${SatellitesDialog_UIS_H})
 	IF(APPLE)
 		FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
 		MARK_AS_ADVANCED(OPENGL_LIBRARY)
@@ -66,7 +63,7 @@ ENDIF()
 
 ############### For building the static library ######################
 IF(BUILD_STATIC_PLUGINS)
-	ADD_LIBRARY(Satellites-static STATIC ${Satellites_SRCS} ${Satellites_MOC_SRCS} ${Satellites_RES_CXX})
+	ADD_LIBRARY(Satellites-static STATIC ${Satellites_SRCS} ${Satellites_MOC_SRCS} ${Satellites_RES_CXX} ${SatellitesDialog_UIS_H})
 	# The library target "Satellites-static" has a default OUTPUT_NAME of "Satellites-static", so change it.
 	SET_TARGET_PROPERTIES(Satellites-static PROPERTIES OUTPUT_NAME "Satellites")
 	TARGET_LINK_LIBRARIES(Satellites-static ${StelMain} ${extLinkerOption})
