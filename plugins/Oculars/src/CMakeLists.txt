@@ -1,4 +1,4 @@
-INCLUDE_DIRECTORIES(. gui ${CMAKE_BINARY_DIR}/plugins/Ocular/src ${CMAKE_BINARY_DIR}/plugins/Ocular/src/gui)
+INCLUDE_DIRECTORIES(. gui ${CMAKE_BINARY_DIR}/plugins/Oculars/src ${CMAKE_BINARY_DIR}/plugins/Oculars/src/gui)
 
 LINK_DIRECTORIES(/src)
 
