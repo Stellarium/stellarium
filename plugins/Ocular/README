@@ -1,0 +1,62 @@
+Ocular plugin for Stellarium
+============================
+
+Simulates various eyepieces.
+
+TODO
+====
+
+
+BUILDING THE PLUGIN
+===================
+
+Please note, these instructions are only directly applicable to Linux.
+Windows and OSX targets will probably require modification of the
+CMakeLists.txt file.
+
+0.  Install and build the SVN version of Stellarium as per the 
+instructions on the Stellarium wiki:
+
+  http://stellarium.org/wiki/index.php/Compilation_on_Linux
+
+1.  Set the environment variable STELROOT to the root of the Stellarium
+source tree.  The Stellarium build directory is expected to be:
+
+  $STELROOT/builds/unix   (Linux)
+  or
+  $STELROOT/builds/macosx (Mac)
+  or
+  $STELROOT/builds/msys   (Windows)
+
+2.  Create a sub-directory builds/unix, builds/msys or builds/macosx and 
+change into that directory.
+
+3. UNIX's:
+ Run: 
+
+  cmake ../.. 
+  make
+  make install
+
+If all goes well, the relevant files should be built and copied to your 
+~/.stellarium/modules directory.
+
+4. Windows:
+   Run:
+   CD "External modules ROOT directory"/builds/msys
+   cmake -G "MSYS Makefiles" ../..
+   make && echo "BUILD WORKED" || echo "BUILD FAILED"  
+   This will generate the dynamic module ocular.dll and the static binary 
+   ocular_static.a in the "External modules ROOT directory"/builds/msys/src
+   The static module binary ocular_static.a will need to be shortened to 
+   ocular.a to agree with the Stellarium call.
+
+If all goes well, the relevant files should be built in their respective folders: 
+   Dynamic module: the ocular.dll must be copied to your $STELROOT\modules\oculars folder  
+   along with the button icons and Module.ini
+   Static module: The Stellarium source will need to be re-compiled with the
+   respective USE_STATIC_PLUGIN_OCULAR:BOOL=1
+   The button icons and module.ini will need to be copied into your $STELROOT\modules\oculars folder  
+   
+
+
