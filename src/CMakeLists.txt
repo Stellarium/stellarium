@@ -1,7 +1,4 @@
 
-
-########### next target ###############
-
 SET(glues_lib_SRCS
 	external/glues_stel/source/glues_error.c
 	external/glues_stel/source/glues_error.h
