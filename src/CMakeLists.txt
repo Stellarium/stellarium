@@ -457,8 +457,6 @@ IF (GUI_MODE STREQUAL "Standard")
 	ENDIF(ENABLE_SCRIPT_CONSOLE)
 
 	QT4_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
-	# Dummy target depending on ${stellarium_UIS_H} to trigger ui compilations
-	ADD_CUSTOM_TARGET(GenerateUiHeaders ALL DEPENDS ${stellarium_UIS_H})
 
 	# After this call, stellarium_gui_MOC_SRCS = moc_stellarium_gui.cxx
 	QT4_WRAP_CPP(stellarium_gui_MOC_SRCS ${stellarium_gui_MOC_HDRS})
@@ -466,7 +464,7 @@ IF (GUI_MODE STREQUAL "Standard")
 	SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} )
 
 	# Compile the static library
-	ADD_LIBRARY(StelGuiLib STATIC ${stellarium_gui_SRCS} ${stellarium_gui_MOC_SRCS})
+	ADD_LIBRARY(StelGuiLib STATIC ${stellarium_gui_SRCS} ${stellarium_gui_MOC_SRCS} ${stellarium_UIS_H})
 	TARGET_LINK_LIBRARIES(StelGuiLib ${StelMain} ${extLinkerOption})
 	SET_TARGET_PROPERTIES(StelGuiLib PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/src/libStelGuiLib.a)

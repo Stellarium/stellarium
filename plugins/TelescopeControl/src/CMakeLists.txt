@@ -1,22 +1,11 @@
 
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src
-  ${STELLARIUM_BUILD_DIR}
-  ${STELLARIUM_SOURCE_DIR}
-  ${STELLARIUM_SOURCE_DIR}/core
-  ${STELLARIUM_SOURCE_DIR}/gui
-  ${STELLARIUM_SOURCE_DIR}/modules
-  ${STELLARIUM_SOURCE_DIR}/stelutils
-  ${STELLARIUM_SOURCE_DIR}/external
-  ${STELLARIUM_SOURCE_DIR}/scripting
+INCLUDE_DIRECTORIES(
   ${TELESCOPE_SERVERS_SOURCE_DIR}
   ${CMAKE_BINARY_DIR}
-  ${CMAKE_BINARY_DIR}/src
-  ${CMAKE_SOURCE_DIR}/src
-  ${CMAKE_SOURCE_DIR}/src/gui
-  ${CMAKE_SOURCE_DIR}/src/clients
-  ${OPENGL_INCLUDE_DIR})
+  ${CMAKE_BINARY_DIR}/plugins/TelescopeControl/src ${CMAKE_BINARY_DIR}/plugins/TelescopeControl/src/gui
+  . gui clients)
 
-LINK_DIRECTORIES(${STELLARIUM_BUILD_DIR}/src)
+LINK_DIRECTORIES(/src)
 
 SET(TelescopeControl_SRCS
   TelescopeControlGlobals.hpp
@@ -63,13 +52,12 @@ SET(TelescopeControl_SRCS
 # Add here all the .ui files
 SET(TelescopeControl_UIS
   gui/telescopeDialog.ui
-  gui/telescopeConfigurationDialog.ui
-  )
+  gui/telescopeConfigurationDialog.ui)
+
 QT4_WRAP_UI(TelescopeControl_UIS_H ${TelescopeControl_UIS})
 
 # Compile the resource files
-SET(TelescopeControl_RES
-  ${CMAKE_SOURCE_DIR}/TelescopeControl.qrc)
+SET(TelescopeControl_RES ../TelescopeControl.qrc)
 QT4_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
 
 # Add here all the files which require moc compilation
@@ -87,14 +75,11 @@ SET(TelescopeControl_MOC_HDRS
 # After this call, TelescopeControl_MOC_SRCS = moc_TelescopeControl.cxx
 QT4_WRAP_CPP(TelescopeControl_MOC_SRCS ${TelescopeControl_MOC_HDRS})
 
-# Dummy target depending on ${TelescopeControl_UIS_H} to trigger ui compilations
-ADD_CUSTOM_TARGET(GenerateUiHeaders ALL DEPENDS ${TelescopeControl_UIS_H})
-
-SET(extLinkerOption ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
+SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
 
 ############### For building the dynamic library ######################
-IF(BUILD_DYNAMIC_LIB)
- ADD_LIBRARY(TelescopeControl MODULE ${TelescopeControl_SRCS} ${TelescopeControl_MOC_SRCS} ${TelescopeControl_RES_CXX})
+IF(BUILD_DYNAMIC_PLUGINS)
+ ADD_LIBRARY(TelescopeControl MODULE ${TelescopeControl_SRCS} ${TelescopeControl_MOC_SRCS} ${TelescopeControl_RES_CXX} ${TelescopeControl_UIS_H})
 
  IF(APPLE)
   FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
@@ -111,13 +96,14 @@ IF(BUILD_DYNAMIC_LIB)
 
  TARGET_LINK_LIBRARIES(TelescopeControl ${StelMain} ${extLinkerOption})
 
- INSTALL(TARGETS TelescopeControl DESTINATION "modules/${PACKAGE}")
-ENDIF(BUILD_DYNAMIC_LIB)
+ INSTALL(TARGETS TelescopeControl DESTINATION "modules/TelescopeControl")
+ENDIF()
 
 ############### For building the static library ######################
-IF(BUILD_STATIC_LIB)
- ADD_LIBRARY(TelescopeControl-static STATIC ${TelescopeControl_SRCS} ${TelescopeControl_MOC_SRCS} ${TelescopeControl_RES_CXX})
+IF(BUILD_STATIC_PLUGINS)
+ ADD_LIBRARY(TelescopeControl-static STATIC ${TelescopeControl_SRCS} ${TelescopeControl_MOC_SRCS} ${TelescopeControl_RES_CXX} ${TelescopeControl_UIS_H})
  SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES OUTPUT_NAME "TelescopeControl")
- TARGET_LINK_LIBRARIES(TelescopeControl-static ${StelMain} ${extLinkerOption})
+ TARGET_LINK_LIBRARIES(TelescopeControl-static ${extLinkerOption})
  SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
-ENDIF(BUILD_STATIC_LIB)
+ ADD_DEPENDENCIES(AllStaticPlugins TelescopeControl-static)
+ENDIF()
