@@ -109,8 +109,9 @@ SET(USE_PLUGIN_HELLOSTELMODULE 0 CACHE BOOL "Define whether the HelloStelModule 
 SET(USE_PLUGIN_ANGLEMEASURE 1 CACHE BOOL "Define whether the AngleMeasure plugin should be created.")
 SET(USE_PLUGIN_COMPASSMARKS 1 CACHE BOOL "Define whether the CompassMarks plugin should be created.")
 SET(USE_PLUGIN_SATELLITES 1 CACHE BOOL "Define whether the Satellites plugin should be created.")
-SET(USE_PLUGIN_SVMT 0 CACHE BOOL "Define whether the SVMT plugin should be created.")
 SET(USE_PLUGIN_TELESCOPECONTROL 0 CACHE BOOL "Define whether the TelescopeControl plug-in should be created.")
+SET(USE_PLUGIN_OCULARS 1 CACHE BOOL "Define whether the Oculars plugin should be created.")
+SET(USE_PLUGIN_SVMT 0 CACHE BOOL "Define whether the SVMT plugin should be created.")
 
 ########### Static compilation of plugins ###########
 # VirGO
@@ -143,14 +144,6 @@ IF (USE_STATIC_PLUGIN_TEXTUSERINTERFACE)
   ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TEXTUSERINTERFACE)
 ENDIF()
 
-# Oculars
-SET(USE_STATIC_PLUGIN_OCULARS 0 CACHE BOOL "Define whether the Oculars plugin should be statically linked.")
-SET(STATIC_PLUGIN_OCULARS_PATH "$ENV{STELROOT}/../extmodules/Ocular/builds/unix/src/libOculars.a" CACHE PATH "The location of the libOculars.a static library")
-IF (USE_STATIC_PLUGIN_OCULARS)
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_OCULARS_PATH})
-  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_OCULARS)
-ENDIF()
-
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
@@ -175,10 +168,16 @@ IF (BUILD_STATIC_PLUGINS)
 	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SATELLITES)
   ENDIF()
 
-IF (USE_PLUGIN_TELESCOPECONTROL)
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/TelescopeControl/src/libTelescopeControl.a")
-  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TELESCOPECONTROL)
-ENDIF()
+  IF (USE_PLUGIN_TELESCOPECONTROL)
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/TelescopeControl/src/libTelescopeControl.a")
+	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TELESCOPECONTROL)
+  ENDIF()
+
+  IF (USE_PLUGIN_OCULARS)
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Ocular/src/libOculars.a")
+	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_OCULARS)
+	SET(QT_USE_QTSQL TRUE)
+  ENDIF()
 
   IF (USE_PLUGIN_SVMT)
 	## Tokyo Cabinet
@@ -223,14 +222,18 @@ INCLUDE(${QT_USE_FILE})
 IF(ENABLE_NLS)
   FIND_PACKAGE(Iconv REQUIRED)
   FIND_PATH(INTL_INCLUDE_DIR libintl.h
+	PATHS
 	/usr/include
+	/sw/include
 	/usr/local/include)
   FIND_LIBRARY(INTL_LIBRARIES intl c
 	PATHS
 	/usr/lib/
-	/usr/local/lib)
+	/sw/lib
+	/usr/local/lib) # NO_DEFAULT_PATH
   FIND_PACKAGE(Gettext REQUIRED)
 ENDIF()
+
 
 IF (OPENGL_MODE STREQUAL "Desktop")
   FIND_PACKAGE(OpenGL REQUIRED)
