@@ -1,0 +1,199 @@
+Telescope Control Plug-in for Stellarium
+========================================
+(Version 0.1.7; Bogdan Marinov <bogdan.marinov84@gmail.com>)
+
+1. INTRODUCTION
+===============
+
+This plug-in allows Stellarium to be used as a software interface for
+controlling a telescope on a computerized mount (a "GoTo telescope"). Up to nine
+connections to separate telescopes can be maintained simultaneously.
+
+Unlike the previous version of the same feature that used to be integrated in
+Stellarium, this plug-in offers a more user-friendly graphical interface
+for setting up and configuring a telescope connection.
+
+You can directly control a telescope connected to your computer, or set up
+a connection over a network/the Internet to a telescope connected to another
+computer running the appropriate software. As of version 0.1.7, the plug-in
+supports only the simple Stellarium telescope "drivers" and
+any third party software compatible with Stellarium's telescope protocol
+(e.g. StellariumScope). Support for INDI and/or ASCOM is planned for future
+versions.
+
+
+2. ACKNOWLEDGEMENTS
+===================
+
+Stellarium's telescope control feature was created in 2006 by Johannes Gajdosik
+who created the client/server model and its implementation: Stellarium's
+Telescope and TelescopeMgr classes, and some stand-alone executables
+to communicate directly with a telescope and act as "telescope servers".
+This feature was an integral part of Stellarium from version 0.8.1 to 0.10.2.
+
+This plug-in is based on Johannes' TelescopeMgr class and a lot of the original
+code is still in use. In version 0.1.7 was added support for direct telescope
+control by reusing the telescope servers code. The base code and the Lx200
+example server were written by Johannes Gajdosik. The NexStar server,
+based on the Lx200, was contributed by Michael Heinz.
+
+At the moment I don't know who created the telescope_reticle.png texture,
+but it must have been someone from the Stellarium team. :)
+
+
+3. REQUIREMENTS
+===============
+
+As of version 0.1.7, this plug-in IS NOT compatible with Stellarium
+versions 0.10.2 and earlier.
+
+As of version 0.1.7, this plug-in uses embedded telescope servers, which means
+that it no longer needs external telescope server executables. Nevertheless,
+they can be used to override the embedded code.
+
+You can set the path to the servers directory. The default path is:
+
+<user data directory>/servers/
+
+If you want the latest versions, you can check out the source code and build the
+binaries yourself:
+
+https://stellarium.svn.sourceforge.net/svnroot/stellarium/trunk/telescope_server
+
+
+4. USING THE PLUG-IN
+====================
+
+Some minimal instructions:
+
+Pressing [Alt+0] opens the main Telescope Control window. It allows you to
+Add, Configure, Start and Stop (Connect and Disconnect) a telescope connection.
+
+Pressing Configure for a running connection will cause it to stop. After
+finishing with the configuration, you will have to restart the connection by
+pressing Start/Connect.
+
+Pointing a telescope to a given object, a star for example, is done by selecting
+that object and pressing [Ctrl+the number of that telescope] (Ctrl+1 to Ctrl+9).
+
+You can edit the "Serial port" drop-down list to add serial ports that are not
+included in the list. For now, this list is empty in the Mac OS X version, so
+the names of serial devices always have to be entered manually.
+
+5. THINGS TO DO AND KNOWN ISSUES
+================================
+
+Next minor versions targets:
++ Test on Windows and add a script for generating an installer
+
+Wishlist/ideas:
++ Keyboard shortcut to toggle telescope markers?
++ Add telescope circles presets (editable QComboBox? defined in the .ini file?)
++ Colour picker window for the marker and circles colour? Dynamic night colour?
++ Communication with the Ocular plug-in :)
+
+Future version targets:
++ Track fast objects, e.g. satellites
++ Serial/USB port auto-detection
++ Rewrite the GUI: wizard for adding telescopes/servers, as a prelude to:
++ INDI and ASCOM client support
+  - INDI server support for the Linux (and Mac OS X?) version of the plug-in
+  - ASCOM server support for the Windows version of the plug-in
+
+
+6. BUILDING THE PLUG-IN
+=======================
+
+6.1. DEPENDENCIES
+=================
+
+Unlike the current versions of some other Stellarium plug-ins, this one
+requires Qt version 4.5. Check the Stellarium Wiki for instructions on how
+to install it and set up the appropriate environmental variables.
+
+As of version 0.1.7, this plug-in reuses code from the Stellarium telescope
+servers. It expects to find this directory tree:
+
+../
+	/stellarium
+	/telescope_server
+		/src
+
+If your source tree doesn't look like this, you have to initialize the
+TELESCOPE_SERVERS_SOURCE_DIR variable with the path to the /telescope_server
+directory. You can do this either by modifiying /CMakeLists.txt,
+or by passing it as an argument to cmake in step 3 bellow:
+
+-DTELESCOPE_SERVERS_SOURCE_DIR=/your/path/here
+
+
+6.2 BUILDING INSTRUCTIONS FOR LINUX
+===================================
+
+0.  Check out and build the SVN version of Stellarium as per the 
+instructions on the Stellarium Wiki:
+
+  http://stellarium.org/wiki/index.php/Compilation_on_Linux
+
+1.  Set the environment variable STELROOT to the root of the Stellarium
+source tree:
+
+	export STELROOT=/path/to/the/root/directory/of/stellarium
+
+The path to Stellarium's build directory is expected to be $STELROOT/builds/unix
+
+2.  Create a sub-directory builds/unix in the plug-in's main directory
+and change into that sub-directory.
+
+3.  To build the regular version of the plugin, run:
+	cmake ../..
+
+4.  Then run:
+	make
+	make install
+
+If all goes well, the relevant files should be built and copied to your 
+~/.stellarium/modules directory.
+
+6.2 BUILDING INSTRUCTIONS FOR MICROSOFT WINDOWS
+===============================================
+
+Instructions for building the plug-in on Windows with MSYS/MinGW32
+(the same method is used by Stellarium itself).
+
+0.  Checkout and build the develompent version of Stellarium according to the
+instructions on the Stellarium Wiki:
+
+http://www.stellarium.org/wiki/index.php/Windows_Build_Instructions#Building_with_MinGW32
+
+1.  Set the environment variable STELROOT to the root of the Stellarium
+source tree:
+
+	export STELROOT=/path/to/the/root/directory/of/stellarium
+
+The path to Stellarium's build directory is expected to be $STELROOT/builds/msys
+
+2.  Create a sub-directory /builds/msys in the plug-in's main directory
+and change into that sub-directory:
+	
+	mkdir -p builds/msys
+	cd builds/msys
+
+3.  Create a makefile by running CMake with the appropriate parameters. You need
+to use the same build type for the plug-in as the build type you used to
+build Stellarium. By default, Stellarium is built in "Release" mode, so you need
+to run:
+
+	cmake -G "MSYS Makefiles" -DCMAKE_BUILD_TYPE=Release ../..
+
+4.  Build the plug-in by running make:
+
+	make
+
+5.  If everything goes well, there should be a "libTelescopeControl.dll" file
+in /builds/msys/src. Create a "TelescopeControl" folder for the plug-in in
+the "modules" folder in your user data directory and copy the file there.
+On Windows XP, the path should be something like this:
+
+C:\Documents and Settings\YourUserName\Application Data\Stellarium\modules\TelescopeControl
+

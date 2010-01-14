@@ -1,0 +1,117 @@
+[0.1.8] (2010-01-12) (revision 5640)
+Fixed bug with selection marker. (revision 5407)
+Added content to the "About" tab and renamed it to "Help". (revision 5603)
+Propagated changes in texture creation from the main code. (revision 5613)
+
+[0.1.7] (2009-11-10)
+Interface changes:
+- tabbed dialog;
+- added Options tab;
+- added About tab;
+- added an option to enable/disable external telescope server executables;
+- added an option to set the telescope server executables directory.
+Added experimental support for embedded telescope servers for the Dummy,
+Meade LX200 and Celestron NexStar devices.
+
+[0.1.6] (2009-10-05)
+Moved the custom stylesheets to files embedded as Qt resources. (rev. 5093-5094)
+Modified the plug-in to conform to the Stellarium's new GUI paradigm. (r 5093)
+Fixed a forgotten tooltip in TelescopeConfigurationDialog. (r 5109)
+
+[0.1.5] (2009-09-30)
+The telescope list alternate-background style is night mode compatible now.
+Changed the layout of TelescopeConfigurationDialog, using a QToolBox to
+contains most of the controls.
+Reduced the number of use cases to two: an internally launched server and
+a connection to external software or a remote computer.
+Replaced the Serial Port QSpinBox with an editable QComboBox to allow greater
+flexibility on Linux and to enable Mac users to use the plug-in. :)
+The telescopes.json file of this version is not compatible with the previous
+one, so clean your /modules/TelescopeControl directory.
+This version hasn't been tested on Windows.
+
+[0.1.4] (2009-09-29)
+Fixed a crash when the telescope servers directory is missing.
+Migrated to shared pointers: this fixes a crash when re-selecting
+a telescope reticle in the Debug build. (Works OK in Release, that's why I
+thought it had fixed itself.)
+Found and fixed an old bug in TelescopeClient: non-polymorphic method made it
+possible to initialize a client with an invalid host address.
+The plug-in now unloads Stellarium's internal TelescopeMgr module.
+Found and fixed a TelescopeClient bug on systems that use IPv6.
+The size of TelescopeDialog is no longer fixed, it can be resized now.
+Added a label to TelescopeDialog used to display warnings and tips.
+Changed some text and tooltips in TelescopeConfigurationDialog.
+Changed the layout and some of the behaviour of TelescopeConfigurationDialog:
+device-specific controls are hidden instead of disabled.
+Added a Doxyfile for generating documentation.
+
+[0.1.3] (2009-09-23)
+Minor interface tweaks.
+Telescope labels' font size is now set in the configuration file.
+Updated StelDialogTelescopeControl to revision 5047 of StelDialog.
+Finished the basic abstraction layer and fixed the bug introduced in the
+previous version. Now the device model name is used internally instead of the
+telescope server name.
+Renamed the BACKPORT mode to COMPATIBILITY_001003. (Yeah, I know.)
+
+[0.1.2] (2009-09-22)
+Finalized the renaming of the Telescope class to TelescopeClient.
+TelescopeControl::listTelescopeServerExecutables() has been improved:
+it returns only executables with names beginning with "TelescopeServer".
+Fixed a bug leaving the "Configure" button disabled when a new telescope is
+is added for the first time.
+Added a rudimentary abstraction layer: The user now selects a device model
+instead of directly selecting the telescope server. TODO: Use internally
+the device model name instead of the server name. This will fix the behaviour of
+the Configuration dialog for existing telescopes.
+
+[0.1.1] (2009-09-21)
+Minor interface tweaks. A tooltip explaining the "Delay" field has been added.
+Cleaned up the code a little bit.
+Added a few warnings and a bit more validation of the JSON data.
+The behaviour of the "Configure" button is more intuitive now.
+Fixed a crash caused by removing a telescope while it is selected
+(as a Stellarium object, not as a row in the table).
+
+[0.1.0] (2009-09-19)
+Cleaned up the logic (and the code, but...)
+Migrated active telescope settings to JSON format.
+(And cluttered up the code in the process.)
+Added an option to choose if a telescope should start/connect at startup.
+(Before, all telescopes tried to connect at startup.)
+Fixed a bug that caused new telescopes to be created at an already occupied slot
+if there was no client created at that slot.
+
+[0.0.7] (2009-09-16)
+Fixed missing module folder crash.
+Added platform-specific way of terminating a server process.
+Workaround for the Windows Qt font rendering bug.
+QFont::setPixelSize() accepts only integers.
+The BACKPORT version is built by default now to avoid confusion.
+Fixed the Windows dynamic loading issue ("Invalid access to memory location")
+by copying the StelDialog class from Stellarium's main code, as advised
+by Fabien Chereau.
+
+[0.0.6] (2009-09-14)
+Added code for static building. (Still trying to fix the Windows issue.)
+Removed some leftover FreeType stuff.
+Removed module configuration file module.ini from installation:
+- module configuration is saved in the main configuration file;
+- an empty module.ini file is created at runtime to store telescope data.
+Modifications to telescope configuration dialog.
+Fixed a telescope circles persistence bug.
+
+[0.0.5] (2009-09-11)
+Apple (Mac OS X) stuff copied from the AngleMeasure plug-in /CMakeLists.txt.
+Code updated to conform to the new plug-in architecture in Stellarium 0.10.3.
+Graphics files are now embedded in the binary.
+
+[0.0.4]
+Code handling communications over TCP was rewritten to use Qt classes instead
+of system calls.
+The Telescope class has been renamed (temporarily, I hope) to TelescopeClient
+in order to resolve a conflict with the identically named class in Stellarium's
+main code.
+
+[0.0.3] (and before)

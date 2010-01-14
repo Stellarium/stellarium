@@ -1,0 +1,21 @@
+AUTHORS of the TELESCOPE CONTROL PLUG-IN
+========================================
+
+Plug-in and GUI programming: Bogdan Marinov (bogdan.marinov84 (at) gmail.com)
+
+This plug-in is based on and reuses a lot of code under the GNU GPL and LGPL:
+ - the Telescope, TelescopeDummy, TelescopeTcp and TelescopeMgr classes
+   in Stellarium's code (the client side of Stellarium's original
+   telescope control feature);
+ - the telescope server core code (licensed under the LGPL);
+ - the TelescopeServerLx200 stand-alone telescope server (licensed under
+   the GPL); author of all of the above - the client, the server core,
+   and the LX200 server, along with the Stellarium telescope control
+   network protocol (over TCP/IP), is Johannes Gajdosik.
+ - the TelescopeServerNexStar stand-alone telescope server (licensed under
+   the GPL, based on TelescopeServerLx200) by Michael Heinz.
+
+See also the AUTHORS files of Stellarium and the Stellarium telescope servers.
+
+The "telescope reticle" texture is the one used by Stellarium. Its author is
+unknown, but it probably was someone form Stellarium's team.
