@@ -109,9 +109,10 @@ SET(USE_PLUGIN_HELLOSTELMODULE 0 CACHE BOOL "Define whether the HelloStelModule 
 SET(USE_PLUGIN_ANGLEMEASURE 1 CACHE BOOL "Define whether the AngleMeasure plugin should be created.")
 SET(USE_PLUGIN_COMPASSMARKS 1 CACHE BOOL "Define whether the CompassMarks plugin should be created.")
 SET(USE_PLUGIN_SATELLITES 1 CACHE BOOL "Define whether the Satellites plugin should be created.")
-SET(USE_PLUGIN_TELESCOPECONTROL 0 CACHE BOOL "Define whether the TelescopeControl plug-in should be created.")
+SET(USE_PLUGIN_TELESCOPECONTROL 1 CACHE BOOL "Define whether the TelescopeControl plug-in should be created.")
 SET(USE_PLUGIN_OCULARS 1 CACHE BOOL "Define whether the Oculars plugin should be created.")
 SET(USE_PLUGIN_SVMT 0 CACHE BOOL "Define whether the SVMT plugin should be created.")
+SET(USE_PLUGIN_TEXTUSERINTERFACE 0 CACHE BOOL "Define whether the TextUserInterface plugin should be created.")
 
 ########### Static compilation of plugins ###########
 # VirGO
@@ -134,14 +135,6 @@ FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
   SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_VIRGO_PATH} ${CFITSIO_LIBRARIES})
   SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
   ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_VIRGO)
-ENDIF()
-
-# TextUserInterface
-SET(USE_STATIC_PLUGIN_TEXTUSERINTERFACE 0 CACHE BOOL "Define whether the TextUserInterface plugin should be statically linked.")
-SET(STATIC_PLUGIN_TEXTUSERINTERFACE_PATH "$ENV{STELROOT}/../extmodules/TextUserInterface/builds/unix/src/libTextUserInterface.a" CACHE PATH "The location of the libTextUserInterface.a static library")
-IF (USE_STATIC_PLUGIN_TEXTUSERINTERFACE)
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_TEXTUSERINTERFACE_PATH})
-  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TEXTUSERINTERFACE)
 ENDIF()
 
 
@@ -177,6 +170,11 @@ IF (BUILD_STATIC_PLUGINS)
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Oculars/src/libOculars.a")
 	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_OCULARS)
 	SET(QT_USE_QTSQL TRUE)
+  ENDIF()
+
+  IF (USE_PLUGIN_TEXTUSERINTERFACE)
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/TextUserInterface/src/libTextUserInterface.a")
+	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TEXTUSERINTERFACE)
   ENDIF()
 
   IF (USE_PLUGIN_SVMT)
