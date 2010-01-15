@@ -1,0 +1,55 @@
+TextUserInterface Plugin for Stellarium
+=======================================
+
+This plugin is an attempt to re-implement the 0.9.x (and earlier) TUI 
+function.  The code's not pretty, so beware!
+
+Please note, these instructions are only directly applicable to Linux.
+Windows and OSX targets will probably require modification of the
+CMakeLists.txt file.
+
+
+TODO
+====
+
++ i18n strings / change language function.
++ handle -ve typed values better
++ bold text for value being edited
++ non-UTC dates
++ automatic node linking via some menu object
+
+
+KNOWN ISSUES
+============
+
+The DummyDialog which is used to grab the focus and prevent global GUI
+actions from grabbing the key events away from the TUI is a little 
+buggy...  specifically, if the user clicks somewhere, the DummyDialog 
+loses focus and those global key bindings get in the way.
+
+
+BUILDING THE PLUGIN
+===================
+
+0.  Install and build the SVN version of Stellarium as per the 
+instructions on the Stellarium wiki:
+
+  http://stellarium.org/wiki/index.php/Compilation_on_Linux
+
+1.  Set the environment variable STELROOT to the root of the Stellarium
+source tree.  The Stellarium build directory is expected to be:
+
+  $STELROOT/builds/unix 
+
+2.  Create a sub-directory builds/unix and change into that directory.
+
+3.  Run:
+
+  cmake ../.. 
+  make
+  make install
+
+If all goes well, the relevant files should be built and copied to your 
+~/.stellarium/modules directory.
+
+
