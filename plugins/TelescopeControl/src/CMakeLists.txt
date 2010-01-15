@@ -1,9 +1,8 @@
 
 INCLUDE_DIRECTORIES(
-  ${TELESCOPE_SERVERS_SOURCE_DIR}
   ${CMAKE_BINARY_DIR}
-  ${CMAKE_BINARY_DIR}/plugins/TelescopeControl/src ${CMAKE_BINARY_DIR}/plugins/TelescopeControl/src/gui
-  . gui clients)
+  ${CMAKE_BINARY_DIR}/plugins/TelescopeControl/src ${CMAKE_BINARY_DIR}/plugins/TelescopeControl/src/gui ${CMAKE_BINARY_DIR}/plugins/TelescopeControl/src/servers
+  . gui clients servers)
 
 LINK_DIRECTORIES(/src)
 
@@ -23,30 +22,30 @@ SET(TelescopeControl_SRCS
   gui/TelescopeConfigurationDialog.cpp
   gui/StelDialogTelescopeControl.hpp
   gui/StelDialogTelescopeControl.cpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/LogFile.hpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/LogFile.cpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/Socket.hpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/Socket.cpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/Server.hpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/Server.cpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/Connection.hpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/Connection.cpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/Listener.hpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/Listener.cpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/SerialPort.hpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/SerialPort.cpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/ServerLx200.hpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/ServerLx200.cpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/Lx200Connection.hpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/Lx200Connection.cpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/Lx200Command.hpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/Lx200Command.cpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/ServerNexStar.hpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/ServerNexStar.cpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/NexStarConnection.hpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/NexStarConnection.cpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/NexStarCommand.hpp
-  ${TELESCOPE_SERVERS_SOURCE_DIR}/NexStarCommand.cpp
+  servers/LogFile.hpp
+  servers/LogFile.cpp
+  servers/Socket.hpp
+  servers/Socket.cpp
+  servers/Server.hpp
+  servers/Server.cpp
+  servers/Connection.hpp
+  servers/Connection.cpp
+  servers/Listener.hpp
+  servers/Listener.cpp
+  servers/SerialPort.hpp
+  servers/SerialPort.cpp
+  servers/ServerLx200.hpp
+  servers/ServerLx200.cpp
+  servers/Lx200Connection.hpp
+  servers/Lx200Connection.cpp
+  servers/Lx200Command.hpp
+  servers/Lx200Command.cpp
+  servers/ServerNexStar.hpp
+  servers/ServerNexStar.cpp
+  servers/NexStarConnection.hpp
+  servers/NexStarConnection.cpp
+  servers/NexStarCommand.hpp
+  servers/NexStarCommand.cpp
   )
 
 # Add here all the .ui files

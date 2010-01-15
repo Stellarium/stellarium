@@ -18,8 +18,8 @@ ElSE(APPLE)
 	SET(CMAKE_INSTALL_PREFIX $ENV{HOME}/.stellarium)
 ENDIF(APPLE)
 
-SET(TELESCOPE_SERVERS_SOURCE_DIR "$ENV{STELROOT}/../telescope_server/src"
-	CACHE PATH "Should point to the /src/ directory where the stellarium telescope servers source tree is located")
+#SET(TELESCOPE_SERVERS_SOURCE_DIR "$ENV{STELROOT}/../telescope_server/src"
+#	CACHE PATH "Should point to the /src/ directory where the stellarium telescope servers source tree is located")
 
 IF(COMPATIBILITY_001003)
  ADD_DEFINITIONS(-DCOMPATIBILITY_001003)
