@@ -113,30 +113,7 @@ SET(USE_PLUGIN_TELESCOPECONTROL 1 CACHE BOOL "Define whether the TelescopeContro
 SET(USE_PLUGIN_OCULARS 1 CACHE BOOL "Define whether the Oculars plugin should be created.")
 SET(USE_PLUGIN_SVMT 0 CACHE BOOL "Define whether the SVMT plugin should be created.")
 SET(USE_PLUGIN_TEXTUSERINTERFACE 0 CACHE BOOL "Define whether the TextUserInterface plugin should be created.")
-
-########### Static compilation of plugins ###########
-# VirGO
-SET(USE_STATIC_PLUGIN_VIRGO 0 CACHE BOOL "Define whether the VirGO plugin should be statically linked.")
-SET(STATIC_PLUGIN_VIRGO_PATH "$ENV{STELROOT}/../extmodules/VirGO/builds/unix/src/libVirGO.a" CACHE PATH "The location of the libVirGO.a static library")
-IF (USE_STATIC_PLUGIN_VIRGO)
-## Special non-standard packages
-FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
-	/usr/include
-	/usr/local/include
-	/scisoft/include
-	DOC "Should point to the directory where the include files for libcfitsio are installed")
-FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
-	PATHS
-	/usr/lib/
-	/usr/local/lib
-	/scisoft/lib
-	/opt/local/lib
-	DOC "cfitsio link options")
-  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STATIC_PLUGIN_VIRGO_PATH} ${CFITSIO_LIBRARIES})
-  SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
-  ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_VIRGO)
-ENDIF()
-
+SET(USE_PLUGIN_VIRGO 0 CACHE BOOL "Define whether the VirGO plugin should be created.")
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
@@ -192,6 +169,26 @@ IF (BUILD_STATIC_PLUGINS)
 	SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
 	SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
 	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SVMT)
+  ENDIF()
+
+  SET(STATIC_PLUGIN_VIRGO_PATH "$ENV{STELROOT}/../extmodules/VirGO/builds/unix/src/libVirGO.a" CACHE PATH "The location of the libVirGO.a static library")
+  IF (USE_STATIC_PLUGIN_VIRGO)
+  ## Library for loading FITS image files
+  FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
+	  /usr/include
+	  /usr/local/include
+	  /scisoft/include
+	  DOC "Should point to the directory where the include files for libcfitsio are installed")
+  FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
+	  PATHS
+	  /usr/lib/
+	  /usr/local/lib
+	  /scisoft/lib
+	  /opt/local/lib
+	  DOC "cfitsio link options")
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/plugins/VirGO/src/libVirGO.a ${CFITSIO_LIBRARIES})
+	SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
+	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_VIRGO)
   ENDIF()
 ENDIF()
 

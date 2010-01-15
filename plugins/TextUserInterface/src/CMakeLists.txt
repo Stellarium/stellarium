@@ -28,8 +28,7 @@ SET(TextUserInterface_SRCS
 	TextUserInterface.hpp
 	TextUserInterface.cpp)
 
-SET(TextUserInterface_RES
-  ${CMAKE_SOURCE_DIR}/TextUserInterface.qrc)
+SET(TextUserInterface_RES ../TextUserInterface.qrc)
 QT4_ADD_RESOURCES(TextUserInterface_RES_CXX ${TextUserInterface_RES})
 
 # Add here all the files which require moc compilation
@@ -67,7 +66,7 @@ IF(BUILD_DYNAMIC_PLUGINS)
 		SET(StelMain )
 	ENDIF(WIN32)
 	TARGET_LINK_LIBRARIES(TextUserInterface ${StelMain} ${extLinkerOption})
-	INSTALL(TARGETS TextUserInterface DESTINATION "modules/${PACKAGE}")
+	INSTALL(TARGETS TextUserInterface DESTINATION "modules/TextUserInterface")
 ENDIF()
 
 ############### For building the static library ######################
