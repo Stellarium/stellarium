@@ -1,0 +1,128 @@
+/*
+ * Copyright (C) 2009 Matthew Gates
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
+#include "TuiNodeColor.hpp"
+#include <QKeyEvent>
+
+TuiNodeColor::TuiNodeColor(const QString& text, QObject* receiver, const char* method, Vec3f defValue, TuiNode* parent, TuiNode* prev)
+	: TuiNodeEditable(text, parent, prev), value(defValue), editingPart(0)
+{
+	this->connect(this, SIGNAL(setValue(Vec3f)), receiver, method);
+}
+
+TuiNodeResponse TuiNodeColor::handleEditingKey(int key)
+{
+	TuiNodeResponse response;
+	response.accepted = false;
+	response.newNode = this;
+	if (key==Qt::Key_Left)
+	{
+		if (editingPart==0)
+		{
+			editing = false;
+		}
+		else
+		{
+			editingPart--;
+		}
+		response.accepted = true;
+		response.newNode = this;
+		if (!editing) 
+		{
+			emit(setValue(value));
+		}
+		return response;
+	}
+	if (key==Qt::Key_Return)
+	{
+		editing = false;
+		editingPart = 0;
+		response.accepted = true;
+		response.newNode = this;
+		emit(setValue(value));
+		return response;
+	}
+	if (key==Qt::Key_Right)
+	{
+		if (editingPart<3)
+		{
+			editingPart++;
+		}
+		response.accepted = true;
+		response.newNode = this;
+		return response;
+	}
+	if (key==Qt::Key_Up)
+	{
+		incPart(editingPart, true);
+		response.accepted = true;
+		response.newNode = this;
+		emit(setValue(value));
+		return response;
+	}
+	if (key==Qt::Key_Down)
+	{
+		incPart(editingPart, false);
+		response.accepted = true;
+		response.newNode = this;
+		emit(setValue(value));
+		return response;
+	}
+	return response;
+}
+
+QString TuiNodeColor::getDisplayText() 
+{
+	if (!editing)
+	{
+		return displayText + QString(":  RGB %1,%2,%3").arg(value[0], 2, 'f', 2).arg(value[1], 2, 'f', 2).arg(value[2], 2, 'f', 2);
+	}
+	else
+	{
+		if (editingPart==0)
+			return displayText + QString(":  RGB >%1<,%2,%3").arg(value[0], 2, 'f', 2).arg(value[1], 2, 'f', 2).arg(value[2], 2, 'f', 2);
+		else if (editingPart==1)
+			return displayText + QString(":  RGB %1,>%2<,%3").arg(value[0], 2, 'f', 2).arg(value[1], 2, 'f', 2).arg(value[2], 2, 'f', 2);
+		else if (editingPart==2)
+			return displayText + QString(":  RGB %1,%2,>%3<").arg(value[0], 2, 'f', 2).arg(value[1], 2, 'f', 2).arg(value[2], 2, 'f', 2);
+		else
+			return QString("error, unknown color part \"%1\"").arg(editingPart);
+	}
+}
+
+void TuiNodeColor::incPart(int part, bool add)
+{
+	float diff = 0.01;
+
+	if (add)
+	{
+		if (value[part]+diff > 1.0)
+			value[part] = 1.0;
+		else
+			value[part]+=diff;
+	}
+	else
+	{
+		if (value[part]-diff < 0.)
+			value[part] = 0.;
+		else
+			value[part]-=diff;
+
+	}
+}
+
