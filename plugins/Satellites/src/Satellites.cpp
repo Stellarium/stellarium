@@ -654,7 +654,7 @@ void Satellites::updateFromFiles(void)
 	// which this module is managing, see if it exists with an updated element, and update it if so...
 	int numUpdated = 0;
 	QVariantList defCol;
-	defCol << defaultHintColor[0] << defaultHintColor[1] << defaultHintColor[2];
+	defCol << (double)defaultHintColor[0] << (double)defaultHintColor[1] << (double)defaultHintColor[2];
 	map["creator"] = "Satellites plugin (update)";
 	map["hintColor"] = defCol;
 	map["shortName"] = "satellite orbital data";

@@ -103,7 +103,7 @@ QVariantMap Satellite::getMap(void)
 	map["tle1"] = QString(elements[1]);
 	map["tle2"] = QString(elements[2]);
 	QVariantList col;
-	col << hintColor[0] << hintColor[1] << hintColor[2];
+	col << (double)hintColor[0] << (double)hintColor[1] << (double)hintColor[2];
 	map["hintColor"] = col;
 	QVariantList commList;
 	foreach(commLink c, comms)
