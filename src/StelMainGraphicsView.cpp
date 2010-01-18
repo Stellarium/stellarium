@@ -43,8 +43,6 @@
 #include <QGraphicsGridLayout>
 #include <QGraphicsProxyWidget>
 
-Q_IMPORT_PLUGIN(StelGui)
-
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
