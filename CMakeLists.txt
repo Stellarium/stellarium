@@ -27,6 +27,7 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   SET(APPLE 1)
 ENDIF()
 
+
 IF(UNIX AND NOT WIN32)
  SET(CMAKE_C_FLAGS "-Wall -Wextra -Wno-unused-parameter")       # additional C compile flags
  SET(CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter")     # additional CPP compile flags
@@ -118,40 +119,8 @@ SET(USE_PLUGIN_VIRGO 0 CACHE BOOL "Define whether the VirGO plugin should be cre
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
 IF (BUILD_STATIC_PLUGINS)
-  IF (USE_PLUGIN_HELLOSTELMODULE)
-	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/HelloStelModule/src/libHelloStelModule.a")
-	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_HELLOSTELMODULE)
-  ENDIF()
-
-  IF (USE_PLUGIN_ANGLEMEASURE)
-	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/AngleMeasure/src/libAngleMeasure.a")
-	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_ANGLEMEASURE)
-  ENDIF()
-
-  IF (USE_PLUGIN_COMPASSMARKS)
-	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/CompassMarks/src/libCompassMarks.a")
-	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_COMPASSMARKS)
-  ENDIF()
-
-  IF (USE_PLUGIN_SATELLITES)
-	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Satellites/src/libSatellites.a")
-	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SATELLITES)
-  ENDIF()
-
-  IF (USE_PLUGIN_TELESCOPECONTROL)
-	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/TelescopeControl/src/libTelescopeControl.a")
-	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TELESCOPECONTROL)
-  ENDIF()
-
   IF (USE_PLUGIN_OCULARS)
-	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Oculars/src/libOculars.a")
-	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_OCULARS)
 	SET(QT_USE_QTSQL TRUE)
-  ENDIF()
-
-  IF (USE_PLUGIN_TEXTUSERINTERFACE)
-	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/TextUserInterface/src/libTextUserInterface.a")
-	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TEXTUSERINTERFACE)
   ENDIF()
 
   IF (USE_PLUGIN_SVMT)
@@ -165,37 +134,29 @@ IF (BUILD_STATIC_PLUGINS)
 	  /usr/lib/
 	  /usr/local/lib
 	  DOC "tokyo cabinet link options")
-	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/plugins/svmt/src/libSVMT.a ${TOKYOC_LIBRARIES} "/usr/local/Trolltech/Qt-4.6.0/lib/libQtDeclarative.so")
 	SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
 	SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
-	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SVMT)
   ENDIF()
 
-  SET(STATIC_PLUGIN_VIRGO_PATH "$ENV{STELROOT}/../extmodules/VirGO/builds/unix/src/libVirGO.a" CACHE PATH "The location of the libVirGO.a static library")
-  IF (USE_STATIC_PLUGIN_VIRGO)
-  ## Library for loading FITS image files
-  FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
+  IF (USE_PLUGIN_VIRGO)
+	## Library for loading FITS image files
+	FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
 	  /usr/include
 	  /usr/local/include
-	  /scisoft/include
 	  DOC "Should point to the directory where the include files for libcfitsio are installed")
-  FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
+	FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
 	  PATHS
 	  /usr/lib/
 	  /usr/local/lib
-	  /scisoft/lib
 	  /opt/local/lib
 	  DOC "cfitsio link options")
-	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/plugins/VirGO/src/libVirGO.a ${CFITSIO_LIBRARIES})
 	SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
-	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_VIRGO)
   ENDIF()
 ENDIF()
 
 # Custom target used to manage dependencies of stellarium -> Static plugins
 # It is important that static plugins are compiled before stellarium main executable is linked
 ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
-
 
 ########### Find packages ###########
 SET(QT_MIN_VERSION "4.6.0")
