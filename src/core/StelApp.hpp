@@ -165,6 +165,8 @@ public:
 	//! Make sure that the GL context of the main window is current and valid.
 	static void makeMainGLContextCurrent();
 
+	static void initStatic();
+
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
@@ -191,7 +193,6 @@ public slots:
 	void reportFileDownloadFinished(QNetworkReply* reply);
 
 private:
-	static void initStatic();
 
 	//! Handle mouse clics.
 	void handleClick(class QMouseEvent* event);

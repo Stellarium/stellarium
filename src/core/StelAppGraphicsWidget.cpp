@@ -35,7 +35,6 @@
 StelAppGraphicsWidget::StelAppGraphicsWidget()
 	: paintState(0), useBuffers(false), backgroundBuffer(0), foregroundBuffer(0)
 {
-	StelApp::initStatic();
 	previousPaintTime = StelApp::getTotalRunTime();
 	setFocusPolicy(Qt::StrongFocus);
 	stelApp = new StelApp();
