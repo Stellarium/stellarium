@@ -67,11 +67,20 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar
 	
 	//end_of_timeout = -0x8000000000000000LL;
 	
+		//Fix for the stupid serial device name bug on Windows
+	//The URL format doesn't allow parameters that contain a ':'
+	#ifdef WIN32
+	if(serialDeviceName.right(serialDeviceName.size() - 3).toInt() > 9)
+		serialDeviceName = "\\\\.\\" + serialDeviceName + ":";//"\\.\COMxx", not sure if it will work
+	else
+		serialDeviceName = serialDeviceName + ":";
+	#endif //WIN32
+	
 	//Try to establish a connection to the telescope
 	nexstar = new NexStarConnection(*this, qPrintable(serialDeviceName));
 	if (nexstar->isClosed())
 	{
-		qWarning() << "ERROR creating TelescopeClientDirectNexStar: cannot open serial device " << serialDeviceName;
+		qWarning() << "ERROR creating TelescopeClientDirectNexStar: cannot open serial device" << serialDeviceName;
 		return;
 	}
 	
