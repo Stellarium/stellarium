@@ -54,6 +54,8 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	  screenShotDir(""),
 	  cursorTimeout(-1.f), flagCursorTimeout(false), distorter(NULL), minFpsTimer(NULL), maxfps(10000.f)
 {
+	StelApp::initStatic();
+
 	// Can't create 2 StelMainGraphicsView instances
 	Q_ASSERT(!singleton);
 	singleton = this;
