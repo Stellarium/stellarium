@@ -1125,7 +1125,7 @@ static QVarLengthArray<Vec2f, 4096> polygonTextureCoordArray;
 // XXX: We should change the type to unsigned int
 static QVarLengthArray<unsigned int, 4096> indexArray;
 
-void StelPainter::drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap)
+void StelPainter::drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap, bool doSubDivise)
 {
 	Q_ASSERT(va.vertex.size()!=1);
 	switch (va.primitiveType)
@@ -1299,18 +1299,18 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 }
 
 // Draw the given SphericalPolygon.
-void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap)
+void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap, bool doSubDivise)
 {
 	switch (drawMode)
 	{
 		case SphericalPolygonDrawModeBoundary:
-			drawGreatCircleArcs(poly->getOutlineVertexArray(), clippingCap);
+			drawGreatCircleArcs(poly->getOutlineVertexArray(), clippingCap, doSubDivise);
 			break;
 		case SphericalPolygonDrawModeFill:
 		case SphericalPolygonDrawModeTextureFill:
 			glEnable(GL_CULL_FACE);
 			// Assumes the polygon is already tesselated as triangles
-			drawSphericalTriangles(poly->getFillVertexArray(), drawMode==SphericalPolygonDrawModeTextureFill, clippingCap);
+			drawSphericalTriangles(poly->getFillVertexArray(), drawMode==SphericalPolygonDrawModeTextureFill, clippingCap, doSubDivise);
 			glDisable(GL_CULL_FACE);
 			break;
 		default:
