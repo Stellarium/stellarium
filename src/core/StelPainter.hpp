@@ -163,9 +163,9 @@ public:
 	//! @param boundaryColor use this color for drawing the boundary only if the drawMode is SphericalPolygonDrawModeFillAndBoundary.
 	//! @param clippingCap if not set to NULL, tells the painter to try to clip part of the region outside the cap.
 	//! Typically set that to false if you think that the region is fully contained in the viewport.
-	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const SphericalCap* clippingCap=NULL);
+	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const SphericalCap* clippingCap=NULL, bool doSubDivise=true);
 
-	void drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap=NULL);
+	void drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap=NULL, bool doSubDivide=true);
 
 	void drawSphericalTriangles(const StelVertexArray& va, bool textured, const SphericalCap* clippingCap=NULL, bool doSubDivide=true);
 

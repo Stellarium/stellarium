@@ -296,7 +296,8 @@ void StelJsonParser::write(const QVariant& v, QIODevice& output, int indentLevel
 			break;
 		}
 		default:
-			qWarning() << "Cannot serialize QVariant of type " << v.typeName() << " in JSON";
+			output.write("null");
+			//qWarning() << "Cannot serialize QVariant of type " << v.typeName() << " in JSON";
 			break;
 	}
 }
