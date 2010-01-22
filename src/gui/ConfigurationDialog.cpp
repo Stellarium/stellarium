@@ -22,6 +22,7 @@
 #include "StelMainGraphicsView.hpp"
 #include "StelMainWindow.hpp"
 #include "ui_configurationDialog.h"
+#include "StelAppGraphicsWidget.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
@@ -150,7 +151,7 @@ void ConfigurationDialog::createDialogContent()
 	// Tools tab
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 	Q_ASSERT(cmgr);
-	ui->sphericMirrorCheckbox->setChecked(StelMainGraphicsView::getInstance().getViewPortDistorterType() == "fisheye_to_spheric_mirror");
+	ui->sphericMirrorCheckbox->setChecked(StelMainGraphicsView::getInstance().getStelAppGraphicsWidget()->getViewportEffect() == "sphericMirrorDistorter");
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
 	ui->gravityLabelCheckbox->setChecked(proj->getFlagGravityLabels());
 	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlagGravityLabels(bool)));
@@ -241,10 +242,18 @@ void ConfigurationDialog::setDiskViewport(bool b)
 
 void ConfigurationDialog::setSphericMirror(bool b)
 {
+	StelCore* core = StelApp::getInstance().getCore();
 	if (b)
-		StelMainGraphicsView::getInstance().setViewPortDistorterType("fisheye_to_spheric_mirror");
+	{
+		savedProjectionType = core->getCurrentProjectionType();
+		core->setCurrentProjectionType(StelCore::ProjectionFisheye);
+		StelMainGraphicsView::getInstance().getStelAppGraphicsWidget()->setViewportEffect("sphericMirrorDistorter");
+	}
 	else
-		StelMainGraphicsView::getInstance().setViewPortDistorterType("none");
+	{
+		core->setCurrentProjectionType((StelCore::ProjectionType)savedProjectionType);
+		StelMainGraphicsView::getInstance().getStelAppGraphicsWidget()->setViewportEffect("none");
+	}
 }
 
 void ConfigurationDialog::setNoSelectedInfo(void)
@@ -410,7 +419,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 
 	// configuration dialog / tools tab
 	conf->setValue("gui/flag_show_flip_buttons", gui->getFlagShowFlipButtons());
-	conf->setValue("video/distorter", StelMainGraphicsView::getInstance().getViewPortDistorterType());
+	conf->setValue("video/viewport_effect", StelMainGraphicsView::getInstance().getStelAppGraphicsWidget()->getViewportEffect());
 	conf->setValue("projection/viewport", StelProjector::maskTypeToString(proj->getMaskType()));
 	conf->setValue("viewing/flag_gravity_labels", proj->getFlagGravityLabels());
 	conf->setValue("navigation/auto_zoom_out_resets_direction", mvmgr->getFlagAutoZoomOutResetsDirection());

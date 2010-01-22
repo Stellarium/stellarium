@@ -25,7 +25,6 @@
 #include "StelProjector.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelScriptMgr.hpp"
-#include "StelViewportDistorter.hpp"
 #include "StelPainter.hpp"
 #include "StelGuiBase.hpp"
 #include "StelMainScriptAPIProxy.hpp"
@@ -52,7 +51,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	  flagInvertScreenShotColors(false),
 	  screenShotPrefix("stellarium-"),
 	  screenShotDir(""),
-	  cursorTimeout(-1.f), flagCursorTimeout(false), distorter(NULL), minFpsTimer(NULL), maxfps(10000.f)
+	  cursorTimeout(-1.f), flagCursorTimeout(false), minFpsTimer(NULL), maxfps(10000.f)
 {
 	StelApp::initStatic();
 
@@ -101,11 +100,6 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 
 StelMainGraphicsView::~StelMainGraphicsView()
 {
-	if (distorter)
-	{
-		delete distorter;
-		distorter=NULL;
-	}
 }
 
 void StelMainGraphicsView::swapBuffer()
@@ -144,8 +138,6 @@ void StelMainGraphicsView::init(QSettings* conf)
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.).toDouble());
 	maxfps = conf->value("video/maximum_fps",10000.).toDouble();
 	minfps = conf->value("video/minimum_fps",10000.).toDouble();
-	setViewPortDistorterType(conf->value("video/distorter","none").toString());
-	//distorter = StelViewportDistorter::create("none",800,600,StelProjectorP());
 
 	QPainter qPainter(glWidget);
 	StelPainter::setQPainter(&qPainter);
@@ -196,13 +188,6 @@ void StelMainGraphicsView::drawBackground(QPainter* painter, const QRectF& rect)
 		return;
 	}
 
-	if (distorter)
-	{
-		StelPainter::setQPainter(painter);
-		distorter->prepare();
-		StelPainter::setQPainter(NULL);
-	}
-
 	const double now = ((double)qtime->elapsed())/1000.;
 
 	// Determines when the next display will need to be triggered
@@ -231,12 +216,6 @@ void StelMainGraphicsView::drawBackground(QPainter* painter, const QRectF& rect)
 void StelMainGraphicsView::drawForeground(QPainter* painter, const QRectF &rect)
 {
 	//QGraphicsView::drawForeground(painter, rect);
-	if (distorter)
-	{
-		StelPainter::setQPainter(painter);
-		distorter->distort();
-		StelPainter::setQPainter(NULL);
-	}
 }
 
 void StelMainGraphicsView::startMainLoop()
@@ -269,54 +248,26 @@ void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
 void StelMainGraphicsView::mouseMoveEvent(QMouseEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-
-	// Apply distortion on the mouse position.
-	QPoint pos = event->pos();
-	distortPos(&pos);
-	QPoint globalPos = event->globalPos();
-	distortPos(&globalPos);
-	QMouseEvent newEvent(event->type(), pos, globalPos, event->button(), event->buttons(), event->modifiers());
-	QGraphicsView::mouseMoveEvent(&newEvent);
+	QGraphicsView::mouseMoveEvent(event);
 }
 
 
 void StelMainGraphicsView::mousePressEvent(QMouseEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-
-	// Apply distortion on the mouse position.
-	QPoint pos = event->pos();
-	distortPos(&pos);
-	QPoint globalPos = event->globalPos();
-	distortPos(&globalPos);
-	QMouseEvent newEvent(event->type(), pos, globalPos, event->button(), event->buttons(), event->modifiers());
-	QGraphicsView::mousePressEvent(&newEvent);
+	QGraphicsView::mousePressEvent(event);
 }
 
 void StelMainGraphicsView::mouseReleaseEvent(QMouseEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-
-	// Apply distortion on the mouse position.
-	QPoint pos = event->pos();
-	distortPos(&pos);
-	QPoint globalPos = event->globalPos();
-	distortPos(&globalPos);
-	QMouseEvent newEvent(event->type(), pos, globalPos, event->button(), event->buttons(), event->modifiers());
-	QGraphicsView::mouseReleaseEvent(&newEvent);
+	QGraphicsView::mouseReleaseEvent(event);
 }
 
 void StelMainGraphicsView::wheelEvent(QWheelEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-
-	// Apply distortion on the mouse position.
-	QPoint pos = event->pos();
-	distortPos(&pos);
-	QPoint globalPos = event->globalPos();
-	distortPos(&globalPos);
-	QWheelEvent newEvent(pos, globalPos, event->delta(), event->buttons(), event->modifiers(), event->orientation());
-	QGraphicsView::wheelEvent(&newEvent);
+	QGraphicsView::wheelEvent(event);
 }
 
 void StelMainGraphicsView::keyPressEvent(QKeyEvent* event)
@@ -329,47 +280,6 @@ void StelMainGraphicsView::keyReleaseEvent(QKeyEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
 	QGraphicsView::keyReleaseEvent(event);
-}
-
-void StelMainGraphicsView::setViewPortDistorterType(const QString &type)
-{
-	if (type != getViewPortDistorterType())
-	{
-		if (type == "none")
-		{
-			glWidget->setMaximumSize(10000,10000);
-		}
-		else
-		{
-			glWidget->setFixedSize(width(), height());
-		}
-	}
-	if (distorter)
-	{
-		delete distorter;
-		distorter = NULL;
-	}
-	if (type!="none")
-		distorter = StelViewportDistorter::create(type,width(),height(),StelApp::getInstance().getCore()->getProjection2d());
-}
-
-QString StelMainGraphicsView::getViewPortDistorterType() const
-{
-	if (distorter)
-		return distorter->getType();
-	return "none";
-}
-
-void StelMainGraphicsView::distortPos(QPoint* pos)
-{
-	if (!distorter)
-		return;
-	int x = pos->x();
-	int y = pos->y();
-	y = height() - 1 - y;
-	distorter->distortXY(x,y);
-	pos->setX(x);
-	pos->setY(height() - 1 - y);
 }
 
 //! Delete openGL textures (to call before the GLContext disappears)

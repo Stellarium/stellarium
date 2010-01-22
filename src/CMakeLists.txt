@@ -103,8 +103,6 @@ SET(stellarium_lib_SRCS
 	core/StelTextureTypes.hpp
 	core/StelToneReproducer.cpp
 	core/StelToneReproducer.hpp
-	core/StelViewportDistorter.cpp
-	core/StelViewportDistorter.hpp
 	core/StelStyle.hpp
 	core/StelSkyLayerMgr.cpp
 	core/StelSkyLayerMgr.hpp
@@ -131,6 +129,8 @@ SET(stellarium_lib_SRCS
 	core/StelVertexArray.hpp
 	core/StelGuiBase.hpp
 	core/StelGuiBase.cpp
+	core/StelViewportEffect.hpp
+	core/StelViewportEffect.cpp
 
 	${gl_lib_SRCS}
 	external/fixx11h.h

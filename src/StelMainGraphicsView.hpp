@@ -65,12 +65,6 @@ public:
 	//! Use its layout if you want to add widget on the side of the main sky view.
 	QGraphicsWidget* getTopLevelGraphicsWidget() {return backItem;}
 
-	//! Define the type of viewport distorter to use
-	//! @param type can be only 'fisheye_to_spheric_mirror' or anything else for no distorter
-	void setViewPortDistorterType(const QString& type);
-	//! Get the type of viewport distorter currently used
-	QString getViewPortDistorterType() const;
-
 	//! Get the script API proxy (for signal handling)
 	StelMainScriptAPIProxy* getMainScriptAPIProxy() {return scriptAPIProxy;}
 	//! Get the script manager
@@ -176,13 +170,7 @@ private:
 	//! FPS should be maximized for a couple of seconds.
 	void thereWasAnEvent();
 
-	//! Apply viewport distortions.
-	void distortPos(QPoint* pos);
-
 	double lastEventTimeSec;
-
-	// The distorter currently activated
-	class StelViewportDistorter *distorter;
 
 	QTime* qtime;
 	QTimer* minFpsTimer;
