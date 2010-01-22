@@ -56,7 +56,10 @@
 
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark StelModule Interface Methods
+#endif
 /* ********************************************************************* */
 /*************************************************************************
  This method is the one called automatically by the StelModuleMgr just
@@ -85,7 +88,10 @@ Q_EXPORT_PLUGIN2(LogBook, LogBookStelPluginInterface)
 
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Instance Methods
+#endif
 /* ********************************************************************* */
 LogBook::LogBook()
 {
@@ -97,7 +103,10 @@ LogBook::~LogBook()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark StelModule Methods
+#endif
 /* ********************************************************************* */
 double LogBook::getCallOrder(StelModuleActionName actionName) const
 {
@@ -135,7 +144,10 @@ void LogBook::setStelStyle(const StelStyle& style)
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Slots Methods
+#endif
 /* ********************************************************************* */
 void LogBook::enableLogBook(bool b)
 {
@@ -194,7 +206,10 @@ void LogBook::setTargetsDialogVisible(bool b)
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Private Methods
+#endif
 /* ********************************************************************* */
 
 void LogBook::initializeActions()

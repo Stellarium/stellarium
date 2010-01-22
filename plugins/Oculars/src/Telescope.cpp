@@ -36,7 +36,10 @@ Telescope::~Telescope()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Accessors & Mutators
+#endif
 /* ********************************************************************* */
 const QString Telescope::getName()
 {

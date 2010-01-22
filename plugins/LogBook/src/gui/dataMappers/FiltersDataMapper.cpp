@@ -50,7 +50,10 @@ FiltersDataMapper::~FiltersDataMapper()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark protected slots
+#endif
 /* ********************************************************************* */
 void FiltersDataMapper::colorChanged()
 {
@@ -150,7 +153,10 @@ void FiltersDataMapper::vendorChanged()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark protected methods
+#endif
 /* ********************************************************************* */
 QSqlRecord FiltersDataMapper::currentRecord()
 { 
