@@ -45,11 +45,8 @@ ENDIF()
 
 # best way to get to APPLE?
 IF(APPLE)
- SET(CMAKE_INCLUDE_PATH "/usr/X11/include:/usr/X11/include/freetype2:/Developer/SDKs/MacOSX10.5.sdk/usr/X11/include:/Developer/SDKs/MacOSX10.5.sdk/usr/X11/include/freetype2:/sw/include:${CMAKE_INCLUDE_PATH}")
- SET(CMAKE_LIBRARY_PATH "/Developer/SDKs/MacOSX10.5.sdk/usr/X11/lib:/sw/lib:${CMAKE_LIBRARY_PATH}")
  SET(CMAKE_C_FLAGS "-fno-common -Wall -Wextra -Wno-unused-parameter -DMACOSX")
  SET(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS}")
- SET(CMAKE_EXE_LINKER_FLAGS "-dylib_file /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib")
 ENDIF()
 
 ########### Check headers ###########
@@ -95,8 +92,9 @@ ENDIF()
 
 # For Windows, the default back end for the graphics system should be "native", as "raster"
 # causes problems for many ATI users.  However, for other platforms we should use raster
-# as the default as it is faster and on OSX it fixes a lot of rendering glitches.
-IF(WIN32)
+# as the default as it is faster.
+# Mac 10.6 requires native as well.
+IF(WIN32 OR APPLE)
   ADD_DEFINITIONS(-DDEFAULT_GRAPHICS_SYSTEM="native")
 ELSE()
   ADD_DEFINITIONS(-DDEFAULT_GRAPHICS_SYSTEM="raster")
@@ -111,6 +109,7 @@ SET(USE_PLUGIN_ANGLEMEASURE 1 CACHE BOOL "Define whether the AngleMeasure plugin
 SET(USE_PLUGIN_COMPASSMARKS 1 CACHE BOOL "Define whether the CompassMarks plugin should be created.")
 SET(USE_PLUGIN_SATELLITES 1 CACHE BOOL "Define whether the Satellites plugin should be created.")
 SET(USE_PLUGIN_TELESCOPECONTROL 1 CACHE BOOL "Define whether the TelescopeControl plug-in should be created.")
+SET(USE_PLUGIN_LOGBOOK 1 CACHE BOOL "Define whether the LogBook plugin should be created.")
 SET(USE_PLUGIN_OCULARS 1 CACHE BOOL "Define whether the Oculars plugin should be created.")
 SET(USE_PLUGIN_SVMT 0 CACHE BOOL "Define whether the SVMT plugin should be created.")
 SET(USE_PLUGIN_TEXTUSERINTERFACE 0 CACHE BOOL "Define whether the TextUserInterface plugin should be created.")
