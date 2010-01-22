@@ -68,6 +68,10 @@ Q_IMPORT_PLUGIN(Satellites)
 Q_IMPORT_PLUGIN(TextUserInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_LOGBOOK
+Q_IMPORT_PLUGIN(LogBook)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_OCULARS
 Q_IMPORT_PLUGIN(Oculars)
 #endif
