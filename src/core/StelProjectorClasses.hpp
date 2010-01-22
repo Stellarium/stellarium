@@ -185,21 +185,11 @@ public:
 			StelProjectorHammer::forward(v);
 			out[i][0] = viewportCenter[0] + flipHorz * pixelPerRad * v[0];
 			out[i][1] = viewportCenter[1] + flipVert * pixelPerRad * v[1];
+			out[i][2] = (v[2] - zNear) * oneOverZNearMinusZFar;
 		}
 	}
 	bool forward(Vec3d &v) const
 	{
-		// RealAitoff
-// 		const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
-// 		const double alpha = std::atan2(v[0],-v[2]);
-// 		const double cosDelta = std::sqrt(1.-v[1]*v[1]/(r*r));
-// 		double z = std::acos(cosDelta*std::cos(alpha/2.));
-// 		z = std::sin(z)/z;
-// 		v[0] = 2.*cosDelta*std::sin(alpha/2.)/z;
-// 		v[1] = v[1]/r/z;
-// 		v[2] = r;
-// 		return true;
-
 		// Hammer Aitoff
 		const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 		const double alpha = std::atan2(v[0],-v[2]);
