@@ -30,8 +30,6 @@ SET(TelescopeControl_SRCS
   servers/Server.cpp
   servers/Connection.hpp
   servers/Connection.cpp
-  servers/Listener.hpp
-  servers/Listener.cpp
   servers/SerialPort.hpp
   servers/SerialPort.cpp
   servers/ServerLx200.hpp

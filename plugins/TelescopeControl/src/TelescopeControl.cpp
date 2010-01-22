@@ -27,6 +27,7 @@
 
 #include "TelescopeControl.hpp"
 #include "TelescopeClient.hpp"
+#include "LogFile.hpp"
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -457,12 +458,15 @@ void TelescopeControl::communicate(void)
 {
 	if (!telescopeClients.empty())
 	{
-		foreach (const TelescopeClientP& telescope, telescopeClients)
+		QMap<int, TelescopeClientP>::const_iterator telescope = telescopeClients.constBegin();
+		while (telescope != telescopeClients.end())
 		{
-			if(telescope->prepareCommunication())
+			logAtSlot(telescope.key());//If there's no log, it will be ignored
+			if(telescope.value()->prepareCommunication())
 			{
-				telescope->performCommunication();
+				telescope.value()->performCommunication();
 			}
+			telescope++;
 		}
 	}
 }
@@ -620,7 +624,7 @@ void TelescopeControl::saveTelescopes()
 		//Open/create the JSON file
 		QString telescopesJsonPath = StelFileMgr::findFile("modules/TelescopeControl", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/telescopes.json";
 		QFile telescopesJsonFile(telescopesJsonPath);
-		if(!telescopesJsonFile.open(QIODevice::WriteOnly|QIODevice::Text))
+		if(!telescopesJsonFile.open(QFile::WriteOnly|QFile::Text))
 		{
 			qWarning() << "TelescopeControl: Telescopes can not be saved. A file can not be open for writing:" << telescopesJsonPath;
 			return;
@@ -656,7 +660,7 @@ void TelescopeControl::loadTelescopes()
 		
 		QVariantMap map;
 		
-		if(!telescopesJsonFile.open(QIODevice::ReadOnly))
+		if(!telescopesJsonFile.open(QFile::ReadOnly))
 		{
 			qWarning() << "TelescopeControl: No telescopes loaded. Can't open for reading" << telescopesJsonPath;
 			telescopeDescriptions = result;
@@ -848,6 +852,8 @@ void TelescopeControl::loadTelescopes()
 					}
 					else
 					{
+						if (addLogAtSlot(slot))
+							logAtSlot(slot);
 						if(!startClientAtSlot(slot, name, QString(), 0, delay, internalCircles, deviceModelName, portSerial))
 						{
 							qDebug() << "TelescopeControl: Unable to create a telescope client at slot" << slot;
@@ -1015,6 +1021,8 @@ bool TelescopeControl::startTelescopeAtSlot(int slot)
 		}
 		else
 		{
+			if (addLogAtSlot(slot))
+				logAtSlot(slot);
 			if (startClientAtSlot(slot, name, QString(), 0, delay, circles, deviceModelName, portSerial))
 			{
 				return true;
@@ -1221,7 +1229,7 @@ void TelescopeControl::loadDeviceModels()
 	//Open the file and parse it
 	QVariantList deviceModelsList;
 	QFile deviceModelsJsonFile(deviceModelsJsonPath);
-	if(!deviceModelsJsonFile.open(QIODevice::ReadOnly))
+	if(!deviceModelsJsonFile.open(QFile::ReadOnly))
 	{
 		qWarning() << "TelescopeControl: No device models loaded. Can't open for reading" << deviceModelsJsonPath;
 		return;
@@ -1332,3 +1340,28 @@ void TelescopeControl::setFlagUseServerExecutables(bool useExecutables)
 	loadDeviceModels();
 }
 
+bool TelescopeControl::addLogAtSlot(int slot)
+{
+	if(!telescopeServerLogFiles.contains(slot)) // || !telescopeServerLogFiles.value(slot)->isOpen()
+	{
+		QString filePath = StelFileMgr::getUserDir() + "/log_TelescopeServer" + QString::number(slot) + ".txt";
+		QFile* logFile = new QFile(filePath);
+		if (!logFile->open(QFile::WriteOnly|QFile::Text|QFile::Truncate|QFile::Unbuffered))
+		{
+			qWarning() << "TelescopeControl: Unable to create a log file for slot"
+			           << slot << ":" << filePath;
+			return false;
+		}
+		
+		telescopeServerLogFiles.insert(slot, logFile);
+		QTextStream * logStream = new QTextStream(logFile);
+		telescopeServerLogStreams.insert(slot, logStream);
+	}
+	return true;
+}
+
+void TelescopeControl::logAtSlot(int slot)
+{
+	if(telescopeServerLogStreams.contains(slot))
+		log_file = telescopeServerLogStreams.value(slot);
+}

@@ -31,7 +31,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 ServerNexStar::ServerNexStar(int port, const char *serial_device) : Server(port), nexstar(0)
 {
-	nexstar = new NexStarConnection(*this,serial_device);
+	nexstar = new NexStarConnection(*this, serial_device);
 	if (nexstar->isClosed())
 	{
 		exit(125);

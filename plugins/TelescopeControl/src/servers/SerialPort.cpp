@@ -31,7 +31,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include <string.h> // memset
 
-#include <iostream>
 using namespace std;
 
 SerialPort::SerialPort(Server &server, const char *serial_device) : Connection(server, INVALID_SOCKET)
