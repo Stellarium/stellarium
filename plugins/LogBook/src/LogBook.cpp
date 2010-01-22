@@ -59,7 +59,7 @@
 #pragma mark StelModule Interface Methods
 /* ********************************************************************* */
 /*************************************************************************
- This method is the one called automatically by the StelModuleMgr just 
+ This method is the one called automatically by the StelModuleMgr just
  after loading the dynamic library
 *************************************************************************/
 StelModule* LogBookStelPluginInterface::getStelModule() const
@@ -129,7 +129,7 @@ void LogBook::setStelStyle(const StelStyle& style)
 	 dialog->setStyleSheet(telescopeManager->getModuleStyleSheet(style.confSectionName));
 	 }
 	 */
-	
+
 	//Change the styles of all children, too
 //	ocularDialog->setStelStyle(style);
 }
@@ -202,7 +202,7 @@ void LogBook::initializeActions()
 	QString group = "LogBook";
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
-	
+
 	gui->addGuiActions("actionShow_LogBook", "Enable LogBook mode", "Ctrl+L", group, true);
 	gui->getGuiActions("actionShow_LogBook")->setChecked(flagShowLogBook);
 	gui->addGuiActions("actionShow_LogBookConfigDialog", "Show data config dialog", "ALT+L", group, true);
@@ -217,11 +217,11 @@ void LogBook::initializeActions()
 		pxmapGlow = new QPixmap(":/graphicGui/gui/glow32x32.png");
 		pxmapOnIcon = new QPixmap(":/logbook/bt_logbook_on.png");
 		pxmapOffIcon = new QPixmap(":/logbook/bt_logbook_off.png");
-		
-		toolbarButton = new StelButton(NULL, 
-									   *pxmapOnIcon, 
-									   *pxmapOffIcon, 
-									   *pxmapGlow, 
+
+		toolbarButton = new StelButton(NULL,
+									   *pxmapOnIcon,
+									   *pxmapOffIcon,
+									   *pxmapGlow,
 									   gui->getGuiActions("actionShow_LogBook"));
 		gui->getButtonBar()->addButton(toolbarButton);
 	} catch (std::runtime_error& e) {
@@ -231,6 +231,13 @@ void LogBook::initializeActions()
 
 bool LogBook::initializeDatabase()
 {
+	// Insure the module directory exists
+	if(!StelFileMgr::exists(StelFileMgr::getUsersDataDirectoryName().append( "/modules/LogBook/"))) {
+		StelFileMgr::mkDir(StelFileMgr::getUsersDataDirectoryName().append( "/modules/LogBook/"));
+		qDebug() << "LogBook::initializeDatabase created module directory at "
+				 << StelFileMgr::getUsersDataDirectoryName().append( "/modules/LogBook/");
+	}
+
 	bool result = false;
 	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
 	QString dbPath = StelFileMgr::findFile("modules/LogBook/", flags);
@@ -241,38 +248,38 @@ bool LogBook::initializeDatabase()
 		// See if the tables alreadt exist.
 		QStringList tableList = db.tables();
 		createDatabaseStructures();
-		
+
 		// Set the table models
 		tableModels[BARLOWS] = new QSqlTableModel(this, db);
 		tableModels[BARLOWS]->setTable(BARLOWS);
 		tableModels[BARLOWS]->setObjectName("Barlows Table Model");
 		tableModels[BARLOWS]->setEditStrategy(QSqlTableModel::OnFieldChange);
 		tableModels[BARLOWS]->select();
-		
+
 		tableModels[FILTERS] = new QSqlTableModel(this, db);
 		tableModels[FILTERS]->setTable(FILTERS);
 		tableModels[FILTERS]->setObjectName("Filters Table Model");
 		tableModels[FILTERS]->setEditStrategy(QSqlTableModel::OnFieldChange);
 		tableModels[FILTERS]->select();
-		
+
 		tableModels[IMAGERS] = new QSqlTableModel(this, db);
 		tableModels[IMAGERS]->setTable(IMAGERS);
 		tableModels[IMAGERS]->setObjectName("Imagers Table Model");
 		tableModels[IMAGERS]->setEditStrategy(QSqlTableModel::OnFieldChange);
 		tableModels[IMAGERS]->select();
-		
+
 		tableModels[OBSERVATIONS] = new QSqlTableModel(this, db);
 		tableModels[OBSERVATIONS]->setTable(OBSERVATIONS);
 		tableModels[OBSERVATIONS]->setObjectName("Observers Table Model");
 		tableModels[OBSERVATIONS]->setEditStrategy(QSqlTableModel::OnFieldChange);
 		tableModels[OBSERVATIONS]->select();
-		
+
 		tableModels[OBSERVERS] = new QSqlTableModel(this, db);
 		tableModels[OBSERVERS]->setTable(OBSERVERS);
 		tableModels[OBSERVERS]->setObjectName("Observers Table Model");
 		tableModels[OBSERVERS]->setEditStrategy(QSqlTableModel::OnFieldChange);
 		tableModels[OBSERVERS]->select();
-		
+
 		tableModels[OCULARS] = new QSqlTableModel(this, db);
 		tableModels[OCULARS]->setTable(OCULARS);
 		tableModels[OCULARS]->setObjectName("Oculars Table Model");
@@ -284,37 +291,37 @@ bool LogBook::initializeDatabase()
 		tableModels[OPTICS]->setObjectName("Optics Table Model");
 		tableModels[OPTICS]->setEditStrategy(QSqlTableModel::OnFieldChange);
 		tableModels[OPTICS]->select();
-		
+
 		tableModels[OPTICS_TYPE] = new QSqlTableModel(this, db);
 		tableModels[OPTICS_TYPE]->setTable(OPTICS_TYPE);
 		tableModels[OPTICS_TYPE]->setObjectName("Optics Type Table Model");
 		tableModels[OPTICS_TYPE]->setEditStrategy(QSqlTableModel::OnFieldChange);
 		tableModels[OPTICS_TYPE]->select();
-		
+
 		tableModels[SESSIONS] = new QSqlTableModel(this, db);
 		tableModels[SESSIONS]->setTable(SESSIONS);
 		tableModels[SESSIONS]->setObjectName("Sites Table Model");
 		tableModels[SESSIONS]->setEditStrategy(QSqlTableModel::OnFieldChange);
 		tableModels[SESSIONS]->select();
-		
+
 		tableModels[SITES] = new QSqlTableModel(this, db);
 		tableModels[SITES]->setTable(SITES);
 		tableModels[SITES]->setObjectName("Sites Table Model");
 		tableModels[SITES]->setEditStrategy(QSqlTableModel::OnFieldChange);
 		tableModels[SITES]->select();
-		
+
 		tableModels[TARGETS] = new QSqlTableModel(this, db);
 		tableModels[TARGETS]->setTable(TARGETS);
 		tableModels[TARGETS]->setObjectName("Targets Table Model");
 		tableModels[TARGETS]->setEditStrategy(QSqlTableModel::OnFieldChange);
 		tableModels[TARGETS]->select();
-		
+
 		tableModels[TARGET_TYPES] = new QSqlTableModel(this, db);
 		tableModels[TARGET_TYPES]->setTable(TARGET_TYPES);
 		tableModels[TARGET_TYPES]->setObjectName("Target Types Table Model");
 		tableModels[TARGET_TYPES]->setEditStrategy(QSqlTableModel::OnFieldChange);
 		tableModels[TARGET_TYPES]->select();
-		
+
 		result = true;
 	} else {
 		qDebug() << "Oculars could not open its databse; disableing module.";
@@ -331,7 +338,7 @@ bool LogBook::createDatabaseStructures()
 	// See if the tables alreadt exist.
 	QStringList tableList = db.tables();
 	bool systemTableExists = tableList.contains("logbook_system");
-	
+
 	// Get the last record, if it exists
 	QSqlQuery query(db);
 	if (!systemTableExists || query.exec("SELECT last_script_run FROM logbook_system")) {
@@ -341,7 +348,7 @@ bool LogBook::createDatabaseStructures()
 				lastFile = query.value(0).toInt();
 			}
 		}
-		
+
 		QString path = ":/logbook/";
 		QDir dir(path);
 		QStringList entries = dir.entryList(QDir::Files, QDir::Name);
@@ -370,7 +377,7 @@ bool LogBook::createDatabaseStructures()
 							qDebug() << "LogBook: Error reading system table 1.  Error is: " << query.lastError();
 						}
 					}
-					
+
 					// update the record
 					updateQuery.bindValue(":new", currentFile);
 					updateQuery.bindValue(":old", lastFile);
@@ -380,8 +387,8 @@ bool LogBook::createDatabaseStructures()
 						lastFile = currentFile;
 					} else {
 						result = false;
-						qDebug() << "LogBook: Error updateing system table; bind values are (" 
-								 << updateQuery.boundValues() << ").  \n\tError is: " << query.lastError() 
+						qDebug() << "LogBook: Error updateing system table; bind values are ("
+								 << updateQuery.boundValues() << ").  \n\tError is: " << query.lastError()
 								 << "\n\tThe query was: " << query.lastQuery() ;
 					}
 				}
@@ -392,7 +399,7 @@ bool LogBook::createDatabaseStructures()
 		qDebug() << "LogBook: Error reading system table 2.  Error is: " << query.lastError();
 	}
 
-	
+
 	return result;
 }
 
