@@ -70,10 +70,12 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200
 	//Fix for the stupid serial device name bug on Windows
 	//The URL format doesn't allow parameters that contain a ':'
 	#ifdef WIN32
+	/*
 	if(serialDeviceName.right(serialDeviceName.size() - 3).toInt() > 9)
 		serialDeviceName = "\\\\.\\" + serialDeviceName + ":";//"\\.\COMxx", not sure if it will work
 	else
 		serialDeviceName = serialDeviceName + ":";
+	*/
 	#endif //WIN32
 	
 	//Try to establish a connection to the telescope

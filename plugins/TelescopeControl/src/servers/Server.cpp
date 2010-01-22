@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "Server.hpp"
 #include "Socket.hpp"
-#include "Listener.hpp"
+//#include "Listener.hpp"
 
 void Server::SocketList::clear(void)
 {
@@ -37,8 +37,8 @@ void Server::SocketList::clear(void)
 
 Server::Server(int port)
 {
-	Socket *listener = new Listener(*this, port);
-	socket_list.push_back(listener);
+	//Socket *listener = new Listener(*this, port);
+	//socket_list.push_back(listener);
 }
 
 void Server::sendPosition(unsigned int ra_int, int dec_int, int status)

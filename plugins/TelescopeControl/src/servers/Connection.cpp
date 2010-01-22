@@ -26,13 +26,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include "Server.hpp"
 #include "LogFile.hpp"
 
-#include <iostream>
-#include <iomanip>
 using namespace std;
 
 #include <math.h>
 
 #ifdef DEBUG5
+#include <QTextStream>
+
 struct PrintRaDec
 {
 	PrintRaDec(const unsigned int ra_int, const int dec_int) : ra_int(ra_int), dec_int(dec_int) {}
@@ -40,7 +40,7 @@ struct PrintRaDec
 	const int dec_int;
 };
 
-static ostream &operator<<(ostream &o,const PrintRaDec &x)
+static QTextStream &operator<<(QTextStream &o, const PrintRaDec &x)
 {
 	unsigned int h = x.ra_int;
 	int d = (int)floor(0.5+x.dec_int*(360*3600*1000/4294967296.0));
@@ -73,16 +73,16 @@ static ostream &operator<<(ostream &o,const PrintRaDec &x)
 	const int dec_s = d % 60; d /= 60;
 	const int dec_m = d % 60; d /= 60;
 	o << "ra = "
-	  << setfill(' ') << setw(2) << h << 'h'
-	  << setfill('0') << setw(2) << ra_m << 'm'
-	  << setfill('0') << setw(2) << ra_s << '.'
-	  << setfill('0') << setw(4) << ra_ms
+	  << qSetPadChar(' ') << qSetFieldWidth(2) << h << 'h'
+	  << qSetPadChar('0') << qSetFieldWidth(2) << ra_m << 'm'
+	  << qSetPadChar('0') << qSetFieldWidth(2) << ra_s << '.'
+	  << qSetPadChar('0') << qSetFieldWidth(4) << ra_ms
 	  << " dec = "
 	  << ((d<10)?" ":"") << dec_sign << d << 'd'
-	  << setfill('0') << setw(2) << dec_m << 'm'
-	  << setfill('0') << setw(2) << dec_s << '.'
-	  << setfill('0') << setw(3) << dec_ms
-	  << setfill(' ');
+	  << qSetPadChar('0') << qSetFieldWidth(2) << dec_m << 'm'
+	  << qSetPadChar('0') << qSetFieldWidth(2) << dec_s << '.'
+	  << qSetPadChar('0') << qSetFieldWidth(3) << dec_ms
+	  << qSetPadChar(' ') << qSetFieldWidth(0);
 	return o;
 }
 #endif
