@@ -54,7 +54,10 @@
 
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark StelModuleMgr Methods
+#endif
 /* ********************************************************************* */
 //! This method is the one called automatically by the StelModuleMgr just
 //! after loading the dynamic library
@@ -81,7 +84,10 @@ Q_EXPORT_PLUGIN2(Oculars, OcularsStelPluginInterface)
 
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Instance Methods
+#endif
 /* ********************************************************************* */
 Oculars::Oculars() : selectedOcularIndex(-1), flagShowOculars(false), usageMessageLabelID(-1),
 				   pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL)
@@ -115,7 +121,10 @@ Oculars::~Oculars()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark StelModule Methods
+#endif
 /* ********************************************************************* */
 //! Draw any parts on the screen which are for our module
 void Oculars::draw(StelCore* core)
@@ -276,7 +285,10 @@ void Oculars::setStelStyle(const StelStyle& style)
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Private slots Methods
+#endif
 /* ********************************************************************* */
 void Oculars::determineMaxImageCircle()
 {
@@ -344,7 +356,10 @@ void Oculars::setScaleImageCircle(bool state)
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Slots Methods
+#endif
 /* ********************************************************************* */
 void Oculars::enableOcular(bool b)
 {
@@ -431,7 +446,10 @@ void Oculars::toggleCrosshair()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Private Methods
+#endif
 /* ********************************************************************* */
 void Oculars::drawCrosshairs()
 {

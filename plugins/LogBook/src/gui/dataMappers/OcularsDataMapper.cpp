@@ -52,7 +52,10 @@ OcularsDataMapper::~OcularsDataMapper()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark protected slots
+#endif
 /* ********************************************************************* */
 void OcularsDataMapper::apparentFOVChanged()
 {
@@ -153,7 +156,10 @@ void OcularsDataMapper::vendorChanged()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark protected methods
+#endif
 /* ********************************************************************* */
 QSqlRecord OcularsDataMapper::currentRecord()
 { 

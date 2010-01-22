@@ -55,7 +55,10 @@ TargetsDialog::~TargetsDialog()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark StelModule Methods
+#endif
 /* ********************************************************************* */
 void TargetsDialog::languageChanged()
 {
@@ -77,7 +80,10 @@ void TargetsDialog::styleChanged()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Slot Methods
+#endif
 /* ********************************************************************* */
 void TargetsDialog::aliasChanged()
 {
@@ -334,7 +340,10 @@ void TargetsDialog::updateRTValues()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Protected Methods
+#endif
 /* ********************************************************************* */
 void TargetsDialog::createDialogContent()
 {

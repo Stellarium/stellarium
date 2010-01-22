@@ -50,7 +50,10 @@ BarlowsDataMapper::~BarlowsDataMapper()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark protected slots
+#endif
 /* ********************************************************************* */
 void BarlowsDataMapper::barlowSelected(const QModelIndex &index)
 {
@@ -135,7 +138,10 @@ void BarlowsDataMapper::vendorChanged()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark protected methods
+#endif
 /* ********************************************************************* */
 QSqlRecord BarlowsDataMapper::currentRecord()
 { 

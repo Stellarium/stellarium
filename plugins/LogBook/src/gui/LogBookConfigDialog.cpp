@@ -78,7 +78,10 @@ LogBookConfigDialog::~LogBookConfigDialog()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark StelModule Methods
+#endif
 /* ********************************************************************* */
 void LogBookConfigDialog::languageChanged()
 {
@@ -100,7 +103,10 @@ void LogBookConfigDialog::styleChanged()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Public Slot Methods
+#endif
 /* ********************************************************************* */
 void LogBookConfigDialog::closeWindow()
 {
@@ -109,7 +115,10 @@ void LogBookConfigDialog::closeWindow()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Protected Methods
+#endif
 /* ********************************************************************* */
 void LogBookConfigDialog::createDialogContent()
 {

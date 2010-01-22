@@ -78,7 +78,10 @@ OcularDialog::~OcularDialog()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark StelModule Methods
+#endif
 /* ********************************************************************* */
 void OcularDialog::languageChanged()
 {
@@ -100,7 +103,10 @@ void OcularDialog::styleChanged()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Slot Methods
+#endif
 /* ********************************************************************* */
 void OcularDialog::closeWindow()
 {
@@ -218,7 +224,10 @@ void OcularDialog::updateTelescope()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Private Slot Methods
+#endif
 /* ********************************************************************* */
 void OcularDialog::scaleImageCircleStateChanged(int state)
 {
@@ -234,7 +243,10 @@ void OcularDialog::scaleImageCircleStateChanged(int state)
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Protected Methods
+#endif
 /* ********************************************************************* */
 void OcularDialog::createDialogContent()
 {

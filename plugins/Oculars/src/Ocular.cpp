@@ -36,7 +36,10 @@ Ocular::~Ocular()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Instance Methods
+#endif
 /* ********************************************************************* */
 double Ocular::getAcutalFOV(Telescope *telescope)
 {
@@ -61,7 +64,10 @@ double Ocular::getExitCircle(Telescope *telescope)
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Accessors & Mutators
+#endif
 /* ********************************************************************* */
 const QString Ocular::getName()
 {

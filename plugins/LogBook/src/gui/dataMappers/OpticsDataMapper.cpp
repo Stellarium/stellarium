@@ -30,7 +30,10 @@
 #include <QVariant>
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Creation & Destruction
+#endif
 /* ********************************************************************* */
 OpticsDataMapper::OpticsDataMapper(Ui_OpticsWidget *aWidget, QMap<QString, QSqlTableModel *> tableModels, QObject *parent) : QObject(parent)
 {
@@ -57,7 +60,10 @@ OpticsDataMapper::~OpticsDataMapper()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark pretiected slots
+#endif
 /* ********************************************************************* */
 void OpticsDataMapper::apertureChanged()
 {
@@ -232,7 +238,10 @@ void OpticsDataMapper::vFlipChanged(int state)
 
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark protected methods
+#endif
 /* ********************************************************************* */
 QSqlRecord OpticsDataMapper::currentRecord()
 { 
