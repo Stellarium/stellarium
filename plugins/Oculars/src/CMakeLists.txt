@@ -2,7 +2,6 @@ INCLUDE_DIRECTORIES(
 	. 
 	gui 
 	${CMAKE_BINARY_DIR}/plugins/Oculars/src 
-	${CMAKE_BINARY_DIR}/plugins/Oculars/src/gui
 )
 
 LINK_DIRECTORIES(/src)
@@ -20,7 +19,7 @@ SET(Oculars_SRCS
   gui/StelDialogOculars.cpp
 )
 
-SET(Oculars_RES ../../resources/Oculars.qrc)
+SET(Oculars_RES ../resources/Oculars.qrc)
 QT4_ADD_RESOURCES(Oculars_RES_CXX ${Oculars_RES})
 
 ################# compiles .ui files ############
