@@ -36,7 +36,10 @@
 #include <QSqlTableModel>
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Creation & Destruction
+#endif
 /* ********************************************************************* */
 LogBookDialog::LogBookDialog(QMap<QString, QSqlTableModel *> theTableModels)
 {
@@ -51,7 +54,10 @@ LogBookDialog::~LogBookDialog()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark StelModule Methods
+#endif
 /* ********************************************************************* */
 void LogBookDialog::languageChanged()
 {
@@ -73,7 +79,10 @@ void LogBookDialog::styleChanged()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Slot Methods
+#endif
 /* ********************************************************************* */
 void LogBookDialog::accessoriesTextChanged()
 {
@@ -455,7 +464,10 @@ void LogBookDialog::weatherTextChanged()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Protected Methods
+#endif
 /* ********************************************************************* */
 void LogBookDialog::createDialogContent()
 {

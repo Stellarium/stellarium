@@ -49,7 +49,10 @@ ImagersDataMapper::~ImagersDataMapper()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark protected slots
+#endif
 /* ********************************************************************* */
 void ImagersDataMapper::deleteSelectedImager()
 {
@@ -117,7 +120,10 @@ void ImagersDataMapper::vendorChanged()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark protected methods
+#endif
 /* ********************************************************************* */
 QSqlRecord ImagersDataMapper::currentRecord()
 { 

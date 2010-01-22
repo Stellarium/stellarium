@@ -50,7 +50,10 @@ ObserversDataMapper::~ObserversDataMapper()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark protected slots
+#endif
 /* ********************************************************************* */
 void ObserversDataMapper::deleteSelectedObserver()
 {
@@ -117,7 +120,10 @@ void ObserversDataMapper::observerSelected(const QModelIndex &index)
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark protected methods
+#endif
 /* ********************************************************************* */
 QSqlRecord ObserversDataMapper::currentRecord()
 { 

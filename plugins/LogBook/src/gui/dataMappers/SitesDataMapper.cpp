@@ -57,7 +57,10 @@ SitesDataMapper::~SitesDataMapper()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark protected slots
+#endif
 /* ********************************************************************* */
 void SitesDataMapper::addSiteForCurrentLocation()
 {
@@ -202,7 +205,10 @@ void SitesDataMapper::timezoneOffsetChanged()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark protected methods
+#endif
 /* ********************************************************************* */
 QSqlRecord SitesDataMapper::currentRecord()
 { 

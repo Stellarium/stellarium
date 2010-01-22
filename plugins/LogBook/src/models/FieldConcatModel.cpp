@@ -25,7 +25,10 @@
 #include <QVariant>
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark Creation & Destruction
+#endif
 /* ********************************************************************* */
 FieldConcatModel::FieldConcatModel(QSqlTableModel *backingModel, QStringList fieldNames, QString seperationString, QObject *parent) 
 	: QAbstractTableModel(parent)
@@ -57,7 +60,10 @@ FieldConcatModel::~FieldConcatModel()
 }
 
 /* ********************************************************************* */
+#if 0
+#pragma mark -
 #pragma mark QAbstractTableModel subclass methods
+#endif
 /* ********************************************************************* */
 int FieldConcatModel::columnCount(const QModelIndex & parent) const
 {
