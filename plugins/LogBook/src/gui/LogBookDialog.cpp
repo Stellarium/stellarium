@@ -331,9 +331,6 @@ void LogBookDialog::observationSelected(const QModelIndex &index)
 		ui->tabWidget->setCurrentIndex(1);
 		ui->observationTabWidget->setCurrentIndex(0);
 		populateFormWithObservationIndex(index);
-		
-		// TODO: Why the hell is this needed?	
-		ui->observationObserverComboBox->setFocus();
 	}
 }
 
@@ -414,8 +411,6 @@ void LogBookDialog::sessionSelected(const QModelIndex &index)
 		//Switch the to session tab
 		ui->tabWidget->setCurrentIndex(0);
 		populateFormWithSessionIndex(index);
-		// TODO: Why the hell is this needed?	
-		ui->beginSessionDateTimeEdit->setFocus();
 	}
 }
 
