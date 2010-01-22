@@ -147,6 +147,7 @@ public:
 public slots:
 	//! Set the current ProjectionType to use
 	void setCurrentProjectionType(ProjectionType type) {currentProjectionType=type;}
+	ProjectionType getCurrentProjectionType() const {return currentProjectionType;}
 
 	//! Get the current Mapping used by the Projection
 	QString getCurrentProjectionTypeKey(void) const;

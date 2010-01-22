@@ -115,6 +115,8 @@ private slots:
 
 private:
 	StelGui* gui;
+
+	int savedProjectionType;
 };
 
 #endif // _CONFIGURATIONDIALOG_HPP_
