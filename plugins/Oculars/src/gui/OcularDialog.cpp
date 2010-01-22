@@ -184,12 +184,6 @@ void OcularDialog::insertNewTelescope()
 
 void OcularDialog::ocularSelected(const QModelIndex &index)
 {
-	// TODO: Why the hell is this needed?	
-	/*
-	ui->ocularFL->setFocus();
-	ui->ocularAFov->setFocus();
-	 */
-	ui->ocularName->setFocus();
 }
 
 void OcularDialog::telescopeSelected(const QModelIndex &index)

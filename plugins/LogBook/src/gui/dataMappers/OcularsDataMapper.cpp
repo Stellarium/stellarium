@@ -135,9 +135,6 @@ void OcularsDataMapper::ocularSelected(const QModelIndex &index)
 	if (index.row() != -1) {
 		lastRowNumberSelected = index.row();
 		populateFormWithIndex(index);
-
-		// TODO: Why the hell is this needed?	
-		widget->modelLineEdit->setFocus();
 	}
 }
 
