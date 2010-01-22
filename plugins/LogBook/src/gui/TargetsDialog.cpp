@@ -298,8 +298,6 @@ void TargetsDialog::targetSelected(const QModelIndex &index)
 	if (index.row() != -1) {
 		lastRowNumberSelected = index.row();
 		populateFormWithIndex(index);
-		// TODO: Why the hell is this needed?	
-		ui->nameLineEdit->setFocus();
 	}
 }
 
