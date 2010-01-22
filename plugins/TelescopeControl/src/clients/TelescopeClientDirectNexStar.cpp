@@ -47,8 +47,8 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar
 	if (paramRx.exactMatch(parameters))
 	{
 		// This QRegExp only matches valid integers
-		serialDeviceName	= paramRx.capturedTexts().at(1).trimmed();
-		time_delay		= paramRx.capturedTexts().at(2).toInt();
+		serialDeviceName = paramRx.capturedTexts().at(1).trimmed();
+		time_delay       = paramRx.capturedTexts().at(2).toInt();
 	}
 	else
 	{
@@ -67,13 +67,15 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar
 	
 	//end_of_timeout = -0x8000000000000000LL;
 	
-		//Fix for the stupid serial device name bug on Windows
+	//Fix for the stupid serial device name bug on Windows
 	//The URL format doesn't allow parameters that contain a ':'
 	#ifdef WIN32
+	/*
 	if(serialDeviceName.right(serialDeviceName.size() - 3).toInt() > 9)
 		serialDeviceName = "\\\\.\\" + serialDeviceName + ":";//"\\.\COMxx", not sure if it will work
 	else
 		serialDeviceName = serialDeviceName + ":";
+	*/
 	#endif //WIN32
 	
 	//Try to establish a connection to the telescope

@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef _NEXSTAR_COMMAND_HPP_
 #define _NEXSTAR_COMMAND_HPP_
 
-#include <iostream>
+#include <QTextStream>
 using namespace std;
 
 class Server;
@@ -40,7 +40,7 @@ public:
 	bool hasBeenWrittenToBuffer(void) const { return has_been_written_to_buffer; }
 	virtual int readAnswerFromBuffer(const char *&buff, const char *end) const = 0;
 	virtual bool needsNoAnswer(void) const { return false; }
-	virtual void print(ostream &o) const = 0;
+	virtual void print(QTextStream &o) const = 0;
 	// returns true when reading is finished
 	
 protected:
@@ -49,7 +49,7 @@ protected:
 	bool has_been_written_to_buffer;
 };
 
-inline ostream &operator<<(ostream &o,const NexStarCommand &c)
+inline QTextStream &operator<<(QTextStream &o, const NexStarCommand &c)
 {
 	c.print(o);
 	return o;
@@ -62,7 +62,7 @@ public:
 	NexStarCommandGotoPosition(Server &server, unsigned int ra_int, int dec_int);
 	bool writeCommandToBuffer(char *&buff, char *end);
 	int readAnswerFromBuffer(const char *&buff, const char *end) const;
-	void print(ostream &o) const;
+	void print(QTextStream &o) const;
 	
 private:
 	int ra, dec;
@@ -75,7 +75,7 @@ public:
 	NexStarCommandGetRaDec(Server &server) : NexStarCommand(server) {}
 	bool writeCommandToBuffer(char *&buff, char *end);
 	int readAnswerFromBuffer(const char *&buff, const char *end) const;
-	void print(ostream &o) const;
+	void print(QTextStream &o) const;
 };
 
 #endif

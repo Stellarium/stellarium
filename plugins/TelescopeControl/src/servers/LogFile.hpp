@@ -25,22 +25,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef _LOG_FILE_H_
 #define _LOG_FILE_H_
 
-#include <fstream>
-
-using namespace std;
+#include <QTextStream>
 
 long long int GetNow(void);
 
-class Now {
+class Now
+{
 public:
-  Now(void) : time(GetNow()) {}
-  const long long int time;
+	Now(void) : time(GetNow()) {}
+	const long long int time;
 };
 
-ostream &operator<<(ostream &o,const Now &now);
+QTextStream &operator<<(QTextStream &o, const Now &now);
 
-extern ostream *log_file;
-
-void SetLogFile(const char *name);
+extern QTextStream *log_file;
 
 #endif

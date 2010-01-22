@@ -38,6 +38,7 @@
 #include "TelescopeDialog.hpp"
 #include "VecMath.hpp"
 
+#include <QFile>
 #include <QFont>
 #include <QHash>
 #include <QMap>
@@ -45,6 +46,7 @@
 #include <QSettings>
 #include <QString>
 #include <QStringList>
+#include <QTextStream>
 #include <QVariant>
 
 class StelNavigator;
@@ -215,6 +217,13 @@ private:
 	QVariantMap telescopeDescriptions;
 	QHash<QString, DeviceModel> deviceModels;
 	QHash<QString, QString> moduleStyleSheet;
+	
+	//Hack to fix the logging problem
+	QHash<int, QFile*> telescopeServerLogFiles;
+	QHash<int, QTextStream*> telescopeServerLogStreams;
+	static QTextStream* globalServerLog;
+	bool addLogAtSlot(int slot);
+	void logAtSlot(int slot);
 	
 	//GUI
 	TelescopeDialog* telescopeDialog;

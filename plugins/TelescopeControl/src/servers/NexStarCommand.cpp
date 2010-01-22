@@ -28,7 +28,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include <math.h>
 
-#include <iostream>
 using namespace std;
 
 NexStarCommand::NexStarCommand(Server &server) : server(*static_cast<ServerNexStar*>(&server)), has_been_written_to_buffer(false)
@@ -110,7 +109,7 @@ int NexStarCommandGotoPosition::readAnswerFromBuffer(const char *&buff, const ch
 	return 1;
 }
 
-void NexStarCommandGotoPosition::print(ostream &o) const
+void NexStarCommandGotoPosition::print(QTextStream &o) const
 {
 	o << "NexStarCommandGotoPosition("
 	  << ra << "," << dec <<')';
@@ -187,7 +186,7 @@ int NexStarCommandGetRaDec::readAnswerFromBuffer(const char *&buff, const char *
 	return 1;
 }
 
-void NexStarCommandGetRaDec::print(ostream &o) const
+void NexStarCommandGetRaDec::print(QTextStream &o) const
 {
 	o << "NexStarCommandGetRaDec";
 }

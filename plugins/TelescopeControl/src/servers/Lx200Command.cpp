@@ -29,8 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include <math.h>
 #include <stdlib.h> // abs
 
-#include <iostream>
-#include <iomanip>
+#include <QByteArray>
 
 using namespace std;
 
@@ -53,7 +52,7 @@ bool Lx200CommandToggleFormat::writeCommandToBuffer(char *&p, char *end)
 	return true;
 }
 
-void Lx200CommandToggleFormat::print(ostream &o) const
+void Lx200CommandToggleFormat::print(QTextStream &o) const
 {
 	o << "Lx200CommandToggleFormat";
 }
@@ -71,7 +70,7 @@ bool Lx200CommandStopSlew::writeCommandToBuffer(char *&p, char *end)
 	return true;
 }
 
-void Lx200CommandStopSlew::print(ostream &o) const {
+void Lx200CommandStopSlew::print(QTextStream &o) const {
 	o << "Lx200CommandStopSlew";
 }
 
@@ -143,7 +142,7 @@ int Lx200CommandSetSelectedRa::readAnswerFromBuffer(const char *&buff,
 	return 1;
 }
 
-void Lx200CommandSetSelectedRa::print(ostream &o) const
+void Lx200CommandSetSelectedRa::print(QTextStream &o) const
 {
 	o << "Lx200CommandSetSelectedRa("
 	  << (ra/3600) << ':' << ((ra/60)%60) << ':' << (ra%60) << ')';
@@ -228,7 +227,7 @@ int Lx200CommandSetSelectedDec::readAnswerFromBuffer(const char *&buff,
 	return 1;
 }
 
-void Lx200CommandSetSelectedDec::print(ostream &o) const
+void Lx200CommandSetSelectedDec::print(QTextStream &o) const
 {
 	const int d = abs(dec);
 	o << "Lx200CommandSetSelectedDec("
@@ -313,7 +312,7 @@ int Lx200CommandGotoSelected::readAnswerFromBuffer(const char *&buff,
 			   "slew failed ("
 			<< ((char)first_byte)
 			<< "): '"
-			<< string(buff + 1, p - buff - 1)
+			<< QByteArray(buff + 1, p - buff - 1)
 			<< '\''
 			<< endl;
 			#endif
@@ -334,7 +333,7 @@ int Lx200CommandGotoSelected::readAnswerFromBuffer(const char *&buff,
 	return -1;
 }
 
-void Lx200CommandGotoSelected::print(ostream &o) const
+void Lx200CommandGotoSelected::print(QTextStream &o) const
 {
 	o << "Lx200CommandGotoSelected";
 }
@@ -420,9 +419,9 @@ int Lx200CommandGetRa::readAnswerFromBuffer(const char *&buff,
 	#ifdef DEBUG4
 	*log_file << Now()
 	          << "Lx200CommandGetRa::readAnswerFromBuffer: "
-	         "ra = " << setw(2) << setfill('0') << (ra/3600)
-	          << ':' << setw(2) << setfill('0') << ((ra/60)%60)
-	          << ':' << setw(2) << setfill('0') << (ra%60)
+	         "ra = " << qSetFieldWidth(2) << qSetPadChar('0') << (ra/3600)
+	          << ':' << qSetFieldWidth(2) << qSetPadChar('0') << ((ra/60)%60)
+	          << ':' << qSetFieldWidth(2) << qSetPadChar('0') << (ra%60)
 	          << endl;
 	#endif
 	
@@ -432,7 +431,7 @@ int Lx200CommandGetRa::readAnswerFromBuffer(const char *&buff,
 	return 1;
 }
 
-void Lx200CommandGetRa::print(ostream &o) const
+void Lx200CommandGetRa::print(QTextStream &o) const
 {
 	o << "Lx200CommandGetRa";
 }
@@ -532,12 +531,12 @@ int Lx200CommandGetDec::readAnswerFromBuffer(const char *&buff,
 	*log_file << Now()
 	          << "Lx200CommandGetDec::readAnswerFromBuffer: "
 	          << "dec = " << (sign_dec?'-':'+')
-	          << setw(2) << setfill('0') << (dec/3600)
+	          << qSetFieldWidth(2) << qSetPadChar('0') << (dec/3600)
 	          << ':'
-	          << setw(2) << setfill('0') << ((dec/60)%60)
+	          << qSetFieldWidth(2) << qSetPadChar('0') << ((dec/60)%60)
 	          << ':'
-	          << setw(2) << setfill('0') << (dec%60)
-	          << setfill(' ')
+	          << qSetFieldWidth(2) << qSetPadChar('0') << (dec%60)
+	          << qSetPadChar(' ')
 	          << endl;
 	#endif
 	
@@ -549,7 +548,7 @@ int Lx200CommandGetDec::readAnswerFromBuffer(const char *&buff,
 	return 1;
 }
 
-void Lx200CommandGetDec::print(ostream &o) const
+void Lx200CommandGetDec::print(QTextStream &o) const
 {
 	o << "Lx200CommandGetDec";
 }

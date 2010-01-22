@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef _LX200_COMMAND_HPP_
 #define _LX200_COMMAND_HPP_
 
-#include <iostream>
+#include <QTextStream>
 using namespace std;
 
 class Server;
@@ -40,7 +40,7 @@ public:
 	bool hasBeenWrittenToBuffer(void) const {return has_been_written_to_buffer;}
 	virtual int readAnswerFromBuffer(const char *&buff, const char *end) = 0;
 	virtual bool needsNoAnswer(void) const {return false;}
-	virtual void print(ostream &o) const = 0;
+	virtual void print(QTextStream &o) const = 0;
 	virtual bool isCommandGotoSelected(void) const {return false;}
 	virtual bool shortAnswerReceived(void) const {return false;}
 	//returns true when reading is finished
@@ -51,7 +51,7 @@ protected:
 	bool has_been_written_to_buffer;
 };
 
-inline ostream &operator<<(ostream &o, const Lx200Command &c)
+inline QTextStream &operator<<(QTextStream &o, const Lx200Command &c)
 {
 	c.print(o);
 	return o;
@@ -68,7 +68,7 @@ private:
 	bool writeCommandToBuffer(char *&buff, char *end);
 	int readAnswerFromBuffer(const char*&, const char*) {return 1;}
 	bool needsNoAnswer(void) const {return true;}
-	void print(ostream &o) const;
+	void print(QTextStream &o) const;
 };
 
 //! Meade LX200 command: Stop the current slew.
@@ -82,7 +82,7 @@ private:
 	bool writeCommandToBuffer(char *&buff, char *end);
 	int readAnswerFromBuffer(const char*&, const char*) {return 1;}
 	bool needsNoAnswer(void) const {return true;}
-	void print(ostream &o) const;
+	void print(QTextStream &o) const;
 };
 
 //! Meade LX200 command: Set right ascension.
@@ -93,7 +93,7 @@ public:
 	                         : Lx200Command(server), ra(ra) {}
 	bool writeCommandToBuffer(char *&buff, char *end);
 	int readAnswerFromBuffer(const char *&buff, const char *end);
-	void print(ostream &o) const;
+	void print(QTextStream &o) const;
 	
 private:
 	const int ra;
@@ -107,7 +107,7 @@ public:
 	                          : Lx200Command(server), dec(dec) {}
 	bool writeCommandToBuffer(char *&buff, char *end);
 	int readAnswerFromBuffer(const char *&buff, const char *end);
-	void print(ostream &o) const;
+	void print(QTextStream &o) const;
 	
 private:
 	const int dec;
@@ -121,7 +121,7 @@ public:
 	                        : Lx200Command(server), first_byte(256) {}
 	bool writeCommandToBuffer(char *&buff, char *end);
 	int readAnswerFromBuffer(const char *&buff, const char *end);
-	void print(ostream &o) const;
+	void print(QTextStream &o) const;
 	bool isCommandGotoSelected(void) const {return true;}
 	bool shortAnswerReceived(void) const {return (first_byte != 256);}
 	
@@ -136,7 +136,7 @@ public:
 	Lx200CommandGetRa(Server &server) : Lx200Command(server) {}
 	bool writeCommandToBuffer(char *&buff, char *end);
 	int readAnswerFromBuffer(const char *&buff, const char *end);
-	void print(ostream &o) const;
+	void print(QTextStream &o) const;
 };
 
 //! Meade LX200 command: Get the current declination.
@@ -146,7 +146,7 @@ public:
 	Lx200CommandGetDec(Server &server) : Lx200Command(server) {}
 	bool writeCommandToBuffer(char *&buff, char *end);
 	int readAnswerFromBuffer(const char *&buff, const char *end);
-	void print(ostream &o) const;
+	void print(QTextStream &o) const;
 };
 
 #endif //_LX200_COMMAND_HPP_

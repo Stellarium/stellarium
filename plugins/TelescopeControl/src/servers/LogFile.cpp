@@ -19,36 +19,22 @@
 
 #include "LogFile.hpp"
 
-#include <iostream>
-#include <iomanip>
+#include <QTextStream>
 
-ostream *log_file = &cout;
-
-static ofstream log_stream;
-
-void SetLogFile(const char *name) {
-  if (log_file == &log_stream) {
-    log_stream.close();
-  }
-  if (name && name[0]) {
-    log_file = &log_stream;
-    log_stream.open(name,ios::out|ios::trunc);
-  } else {
-    log_file = &cout;
-  }
+QTextStream &operator<<(QTextStream &o, const Now &now)
+{
+	long long int x = now.time;
+	const int micros = x % 1000000; x /= 1000000;
+	const int secs = x % 60; x /= 60;
+	const int mins = x % 60; x /= 60;
+	const int hours = x % 24; x /= 24;
+	o << x
+	  << ',' << qSetFieldWidth(2) << qSetPadChar('0') << hours
+	  << ':' << qSetFieldWidth(2) << qSetPadChar('0') << mins
+	  << ':' << qSetFieldWidth(2) << qSetPadChar('0') << secs
+	  << '.' << qSetFieldWidth(6) << qSetPadChar('0') << micros
+	  << qSetFieldWidth(0) << qSetPadChar(' ') << ": ";
+	return o;
 }
 
-ostream &operator<<(ostream &o,const Now &now) {
-  long long int x = now.time;
-  const int micros = x % 1000000; x /= 1000000;
-  const int secs = x % 60; x /= 60;
-  const int mins = x % 60; x /= 60;
-  const int hours = x % 24; x /= 24;
-  o << x
-    << ',' << setw(2) << setfill('0') << hours
-    << ':' << setw(2) << setfill('0') << mins
-    << ':' << setw(2) << setfill('0') << secs
-    << '.' << setw(6) << setfill('0') << micros
-    << setfill(' ') << ": ";
-  return o;
-}
+QTextStream * log_file = NULL;
