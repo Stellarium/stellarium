@@ -1,13 +1,12 @@
-
 INCLUDE_DIRECTORIES(
 	.
 	gui
+	gui/dataMappers
+	gui/validators
+	gui/widgets
+	models
+	${CMAKE_BINARY_DIR}
 	${CMAKE_BINARY_DIR}/plugins/LogBook/src 
-	${CMAKE_BINARY_DIR}/plugins/LogBook/src/gui
-	${CMAKE_BINARY_DIR}/plugins/LogBook/src/gui/dataMappers
-	${CMAKE_BINARY_DIR}/plugins/LogBook/src/gui/validators
-	${CMAKE_BINARY_DIR}/plugins/LogBook/src/gui/widgets
-	${CMAKE_BINARY_DIR}/plugins/LogBook/src/models
 )
 
 LINK_DIRECTORIES(/src)
