@@ -24,6 +24,7 @@
 #include "StelAppGraphicsWidget.hpp"
 #include "StelPainter.hpp"
 #include "StelGuiBase.hpp"
+#include "StelViewportEffect.hpp"
 
 #include <QPainter>
 #include <QPaintEngine>
@@ -33,7 +34,7 @@
 #include <QSettings>
 
 StelAppGraphicsWidget::StelAppGraphicsWidget()
-	: paintState(0), useBuffers(false), backgroundBuffer(0), foregroundBuffer(0)
+	: paintState(0), useBuffers(false), backgroundBuffer(0), foregroundBuffer(0), viewportEffect(NULL)
 {
 	previousPaintTime = StelApp::getTotalRunTime();
 	setFocusPolicy(Qt::StrongFocus);
@@ -47,21 +48,73 @@ StelAppGraphicsWidget::~StelAppGraphicsWidget()
 		delete backgroundBuffer;
 	if (foregroundBuffer)
 		delete foregroundBuffer;
+	if (viewportEffect)
+		delete viewportEffect;
 }
 
 void StelAppGraphicsWidget::init(QSettings* conf)
 {
-	useBuffers = conf->value("video/use_buffers", false).toBool();
-	if (useBuffers && !QGLFramebufferObject::hasOpenGLFramebufferObjects())
-	{
-		qDebug() << "Don't support OpenGL framebuffer objects";
-		useBuffers = false;
-	}
-#ifndef NDEBUG
-	if (useBuffers)
-		qDebug() << "Use OpenGL framebuffer objects";
-#endif
+	Q_ASSERT(viewportEffect==NULL);
+	setViewportEffect(conf->value("video/viewport_effect", "none").toString());
 	stelApp->init(conf);
+}
+
+
+void StelAppGraphicsWidget::setViewportEffect(const QString& name)
+{
+	if (viewportEffect)
+	{
+		if (viewportEffect->getName()==name)
+			return;
+		delete viewportEffect;
+		viewportEffect=NULL;
+	}
+	if (name=="none")
+	{
+		useBuffers = false;
+		return;
+	}
+	if (!QGLFramebufferObject::hasOpenGLFramebufferObjects())
+	{
+		qWarning() << "Don't support OpenGL framebuffer objects, can't use Viewport effect: " << name;
+		useBuffers = false;
+		return;
+	}
+
+	qDebug() << "Use OpenGL framebuffer objects for viewport effect: " << name;
+	useBuffers = true;
+	if (name == "framebufferOnly")
+	{
+		viewportEffect = new StelViewportEffect();
+	}
+	else if (name == "sphericMirrorDistorter")
+	{
+		viewportEffect = new StelViewportDistorterFisheyeToSphericMirror(size().width(), size().height());
+	}
+	else
+	{
+		qWarning() << "Unknown viewport effect name: " << name;
+		useBuffers=false;
+	}
+}
+
+QString StelAppGraphicsWidget::getViewportEffect() const
+{
+	if (viewportEffect)
+		return viewportEffect->getName();
+	return "none";
+}
+
+void StelAppGraphicsWidget::distortPos(QPointF* pos)
+{
+	if (!viewportEffect)
+		return;
+	float x = pos->x();
+	float y = pos->y();
+	y = size().height() - 1 - y;
+	viewportEffect->distortXY(x,y);
+	pos->setX(x);
+	pos->setY(size().height() - 1 - y);
 }
 
 //! Iterate through the drawing sequence.
@@ -94,7 +147,6 @@ bool StelAppGraphicsWidget::paintPartial()
 	return false;
 }
 
-#include "StelUtils.hpp"
 void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	// Don't even try to draw if we don't have a core yet (fix a bug during splash screen)
@@ -142,34 +194,11 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 		Q_ASSERT(!foregroundBuffer->isBound());
 		// Paint the last completed painted buffer
 		StelPainter::setQPainter(painter);
-		paintBuffer();
+		viewportEffect->paintViewportBuffer(foregroundBuffer);
 	}
 	else
 	{
 		while (paintPartial()) {;}
-
-#if 0
-		QVector<QVector<Vec3d> > contours;
-		QVector<Vec3d> c1(4);
-		StelUtils::spheToRect(-0.5, -0.5, c1[3]);
-		StelUtils::spheToRect(0.5, -0.5, c1[2]);
-		StelUtils::spheToRect(0.5, 0.5, c1[1]);
-		StelUtils::spheToRect(-0.5, 0.5, c1[0]);
-		contours.append(c1);
-		QVector<Vec3d> c2(4);
-		StelUtils::spheToRect(-0.2, 0.2, c2[3]);
-		StelUtils::spheToRect(0.2, 0.2, c2[2]);
-		StelUtils::spheToRect(0.2, -0.2, c2[1]);
-		StelUtils::spheToRect(-0.2, -0.2, c2[0]);
-		contours.append(c2);
-		SphericalPolygon holySquare;
-		holySquare.setContours(contours);
-		StelPainter sPainter(stelApp->getCore()->getProjection(StelCore::FrameJ2000));
-		sPainter.setColor(0,0,1);
-		sPainter.drawSphericalRegion(&holySquare);
-		sPainter.setColor(1,1,0);
-		sPainter.drawSphericalRegion(&holySquare, StelPainter::SphericalPolygonDrawModeBoundary);
-#endif
 	}
 	StelPainter::setQPainter(NULL);
 	previousPaintFrameTime = StelApp::getTotalRunTime();
@@ -183,19 +212,6 @@ void StelAppGraphicsWidget::swapBuffers()
 	QGLFramebufferObject* tmp = backgroundBuffer;
 	backgroundBuffer = foregroundBuffer;
 	foregroundBuffer = tmp;
-}
-
-//! Paint the foreground buffer.
-void StelAppGraphicsWidget::paintBuffer()
-{
-	Q_ASSERT(useBuffers);
-	Q_ASSERT(foregroundBuffer);
-	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
-	sPainter.setColor(1,1,1);
-	sPainter.enableTexture2d(true);
-	glBindTexture(GL_TEXTURE_2D, foregroundBuffer->texture());
-	sPainter.drawRect2d(0, 0, foregroundBuffer->size().width(), foregroundBuffer->size().height());
-	sPainter.enableTexture2d(false);
 }
 
 //! Initialize the opengl buffer objects.
@@ -214,36 +230,40 @@ void StelAppGraphicsWidget::initBuffers()
 
 void StelAppGraphicsWidget::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-	int x = (int)event->scenePos().x();
-	int y = (int)event->scenePos().y();
-	y = scene()->height() - 1 - y;
-	stelApp->handleMove(x, y, event->buttons());
+	// Apply distortion on the mouse position.
+	QPointF pos = event->scenePos();
+	distortPos(&pos);
+	pos.setY(scene()->height() - 1 - pos.y());
+	stelApp->handleMove(pos.x(), pos.y(), event->buttons());
 }
 
 void StelAppGraphicsWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
-	int x = (int)event->scenePos().x();
-	int y = (int)event->scenePos().y();
-	y = scene()->height() - 1 - y;
-	QMouseEvent newEvent(QEvent::MouseButtonPress, QPoint(x,y), event->button(), event->buttons(), event->modifiers());
+	// Apply distortion on the mouse position.
+	QPointF pos = event->scenePos();
+	distortPos(&pos);
+	pos.setY(scene()->height() - 1 - pos.y());
+	QMouseEvent newEvent(QEvent::MouseButtonPress, QPoint(pos.x(),pos.y()), event->button(), event->buttons(), event->modifiers());
 	stelApp->handleClick(&newEvent);
 }
 
 void StelAppGraphicsWidget::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
-	int x = (int)event->scenePos().x();
-	int y = (int)event->scenePos().y();
-	y = scene()->height() - 1 - y;
-	QMouseEvent newEvent(QEvent::MouseButtonRelease, QPoint(x,y), event->button(), event->buttons(), event->modifiers());
+	// Apply distortion on the mouse position.
+	QPointF pos = event->scenePos();
+	distortPos(&pos);
+	pos.setY(scene()->height() - 1 - pos.y());
+	QMouseEvent newEvent(QEvent::MouseButtonRelease, QPoint(pos.x(),pos.y()), event->button(), event->buttons(), event->modifiers());
 	stelApp->handleClick(&newEvent);
 }
 
 void StelAppGraphicsWidget::wheelEvent(QGraphicsSceneWheelEvent* event)
 {
-	int x = (int)event->scenePos().x();
-	int y = (int)event->scenePos().y();
-	y = scene()->height() - 1 - y;
-	QWheelEvent newEvent(QPoint(x,y), event->delta(), event->buttons(), event->modifiers(), event->orientation());
+	// Apply distortion on the mouse position.
+	QPointF pos = event->scenePos();
+	distortPos(&pos);
+	pos.setY(scene()->height() - 1 - pos.y());
+	QWheelEvent newEvent(QPoint(pos.x(),pos.y()), event->delta(), event->buttons(), event->modifiers(), event->orientation());
 	stelApp->handleWheel(&newEvent);
 }
 
