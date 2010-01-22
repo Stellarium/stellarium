@@ -1,0 +1,75 @@
+/*
+ * Stellarium
+ * Copyright (C) 2010 Fabien Chereau
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
+#ifndef _STELVIEWPORTEFFECT_HPP_
+#define _STELVIEWPORTEFFECT_HPP_
+
+#include "VecMath.hpp"
+#include "StelProjector.hpp"
+
+class QGLFramebufferObject;
+
+//! @class StelViewportEffect
+//! Allow to apply visual effects on the whole Stellarium viewport.
+class StelViewportEffect
+{
+public:
+	StelViewportEffect() {;}
+	virtual ~StelViewportEffect() {;}
+	virtual QString getName() {return "framebufferOnly";}
+	//! Alter the GL frame buffer, this method must not display anything.
+	//! The default implementation does nothing.
+	virtual void alterBuffer(QGLFramebufferObject* buf) const {;}
+	//! Draw the viewport on the screen.
+	//! @param buf the GL frame buffer containing the Stellarium viewport alreay drawn.
+	//! The default implementation paints the buffer on the fullscreen.
+	virtual void paintViewportBuffer(const QGLFramebufferObject* buf) const;
+	//! Distort an x,y position according to the distortion.
+	//! The default implementation does nothing.
+	virtual void distortXY(float& x, float& y) const {;}
+};
+
+
+class StelViewportDistorterFisheyeToSphericMirror : public StelViewportEffect
+{
+public:
+	StelViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h);
+	~StelViewportDistorterFisheyeToSphericMirror();
+	virtual QString getName() {return "sphericMirrorDistorter";}
+	virtual void paintViewportBuffer(const QGLFramebufferObject* buf) const;
+	virtual void distortXY(float& x, float& y) const;
+private:
+	const int screen_w;
+	const int screen_h;
+	const StelProjector::StelProjectorParams originalProjectorParams;
+	StelProjector::StelProjectorParams newProjectorParams;
+	int viewport_texture_offset[2];
+	int texture_wh;
+
+	Vec2f *texture_point_array;
+	int max_x,max_y;
+	double step_x,step_y;
+
+	QVector<Vec2f> displayVertexList;
+	QVector<Vec4f> displayColorList;
+	QVector<Vec2f> displayTexCoordList;
+};
+
+#endif // _STELVIEWPORTEFFECT_HPP_
+
