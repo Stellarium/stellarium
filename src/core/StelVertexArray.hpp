@@ -134,7 +134,7 @@ Func StelVertexArray::specForeachTriangle(Func func) const
 		{
 			for (int i = 2; i < vertex.size(); ++i)
 			{
-				if (i % 2 != 0)
+				if (i % 2 == 0)
 					func(specVertexAt<I>(i-2), specVertexAt<I>(i-1), specVertexAt<I>(i),
 						 specTexCoordAt<T, I>(i-2), specTexCoordAt<T, I>(i-1), specTexCoordAt<T, I>(i),
 						 specIndiceAt<I>(i-2), specIndiceAt<I>(i-1), specIndiceAt<I>(i));
