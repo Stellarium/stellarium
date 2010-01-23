@@ -95,6 +95,10 @@ public:
 	//! @param paths is a vector of strings which will become the new search paths
 	static void setSearchPaths(const QStringList& paths);
 		
+	//! Make sure the passed directory path exist and is writable.
+	//! If it doesn't exist creates it. If it's not possible throws an error.
+	static void makeSureDirExistsAndIsWritable(const QString& dirFullPath);
+
 	//! Check if a path exists.  Note it might be a file or a directory.
 	//! @param path to check
 	static bool exists(const QString& path);

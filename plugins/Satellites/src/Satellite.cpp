@@ -248,27 +248,20 @@ double Satellite::getDoppler(double freq) const
 
 void Satellite::draw(const StelCore* core, StelPainter& painter, float maxMagLabel)
 {
-	Vec3f pos;
-	Vec3d xy;
-	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
-
 	float a = (azimuth-90)*M_PI/180;
-	pos.set(sin(a),cos(a), tan(elevation * M_PI / 180.));
+	Vec3f pos(sin(a),cos(a), tan(elevation * M_PI / 180.));
 	XYZ = core->getNavigator()->j2000ToEquinoxEqu(core->getNavigator()->altAzToEquinoxEqu(pos));
 	StelApp::getInstance().getVisionModeNight() ? glColor4f(0.6,0.0,0.0,1.0) : glColor4f(hintColor[0],hintColor[1],hintColor[2], Satellite::hintBrightness);
 
-	prj = core->getProjection(StelCore::FrameJ2000);
+	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	Vec3d xy;
 	if (prj->project(XYZ,xy))
 	{
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);
 		if (Satellite::showLabels)
 		{
-			glDisable(GL_TEXTURE_2D);
 			painter.drawText(xy[0], xy[1], designation, 0, 10, 10, false);
+			Satellite::hintTexture->bind();
 		}
-		glEnable(GL_TEXTURE_2D);
-		Satellite::hintTexture->bind();
 		painter.drawSprite2dMode(xy[0], xy[1], 11);
 	}
 }
