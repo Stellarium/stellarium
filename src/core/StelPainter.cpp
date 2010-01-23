@@ -1839,7 +1839,6 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 	Q_ASSERT(array.size == 3);
 	Q_ASSERT(array.type == GL_DOUBLE);
 	Vec3d* vecArray = (Vec3d*)array.pointer;
-	Vec3d win;
 
 	// We have two different cases :
 	// 1) We are not using an indice array.  In that case the size of the array is known
@@ -1857,11 +1856,7 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 			max = std::max(max, indices[i]);
 		}
 		polygonVertexArray.resize(max+1);
-		for (int i = 0; i < count; ++i)
-		{
-			prj->project(vecArray[indices[i]], win);
-			polygonVertexArray[indices[i]].set(win[0], win[1], win[2]);
-		}
+		prj->project(max + 1, vecArray, polygonVertexArray.data());
 	}
 
 	ArrayDesc ret;
