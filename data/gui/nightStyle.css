@@ -147,6 +147,16 @@ QLineEdit {
 	font-size: 12px;
 }
 
+QTextEdit {
+	border: 1px solid rgb(0, 0, 0);
+	border-radius: 0px;
+	padding: 0 8px;
+	background: rgb(21, 0, 0);
+	selection-background-color: rgb(153, 0, 0);
+	color: rgb(120, 0, 0);
+	font-size: 12px;
+}
+
 /***************************************************SearchDialog********************************************************/
 
 QFrame#horizontalSearchLayout {
