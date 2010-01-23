@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include "Server.hpp"
 #include "Socket.hpp"
 //#include "Listener.hpp"
+#include "LogFile.hpp"
 
 void Server::SocketList::clear(void)
 {
@@ -53,6 +54,8 @@ void Server::sendPosition(unsigned int ra_int, int dec_int, int status)
 
 void Server::step(long long int timeout_micros)
 {
+	//BM: TODO: Remove debug:
+	*log_file << "Server::step()";
 	fd_set read_fds, write_fds;
 	FD_ZERO(&read_fds);
 	FD_ZERO(&write_fds);
@@ -62,6 +65,8 @@ void Server::step(long long int timeout_micros)
 	     it != socket_list.end();
 	     it++)
 	{
+		//BM: TODO: Remove debug:
+		*log_file << "Server::step(): Calling prepareSelectFds() for a socket";
 		(*it)->prepareSelectFds(read_fds, write_fds, fd_max);
 	}
 	
@@ -73,12 +78,18 @@ void Server::step(long long int timeout_micros)
 	const int select_rc = select(fd_max+1, &read_fds, &write_fds, 0, &tv);
 	if (select_rc > 0)
 	{
+		//BM: TODO: Remove debug:
+		*log_file << "Server::step(): select_rc returned a positive value.";
 		SocketList::iterator it(socket_list.begin());
 		while (it != socket_list.end())
 		{
+			//BM: TODO: Remove debug:
+			*log_file << "Server::step(): Calling handleSelectFds() for a socket";
 			(*it)->handleSelectFds(read_fds, write_fds);
 			if ((*it)->isClosed())
 			{
+				//BM: TODO: Remove debug:
+				*log_file << "Server::step(): Socket is closed, remove it from list";
 				SocketList::iterator tmp(it);
 				it++;
 				delete (*tmp);

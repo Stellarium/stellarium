@@ -6,8 +6,8 @@
 		"default_delay" : 500000
 	},
 	{
-		"name" : "Meade AutoStar® Compatible",
-		"description" : "A telescope compatible with Meade's AutoStar® controller.",
+		"name" : "Meade AutoStar Compatible",
+		"description" : "A telescope compatible with Meade's AutoStar controller.",
 		"server" : "TelescopeServerLx200",
 		"default_delay" : 500000
 	},
@@ -18,8 +18,20 @@
 		"default_delay" : 500000
 	},
 	{
+		"name" : "Meade ETX70 (#494 Autostar, #506 CCS)",
+		"description" : "Meade ETX70 wtih the #494 Autostar controller and the #506 Connector Cable Set.",
+		"server" : "TelescopeServerLx200",
+		"default_delay" : 1500000
+	},
+	{
 		"name" : "Losmandy G-11",
 		"description" : "Losmandy's G-11 telescope mount.",
+		"server" : "TelescopeServerLx200",
+		"default_delay" : 500000
+	},
+	{
+		"name" : "Wildcard Innovations Argo Navis (Meade mode)",
+		"description" : "Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode.",
 		"server" : "TelescopeServerLx200",
 		"default_delay" : 500000
 	},

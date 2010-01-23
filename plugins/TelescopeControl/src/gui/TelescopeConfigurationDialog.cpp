@@ -74,6 +74,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	
 	//Inherited connect
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(buttonDiscardPressed()));
+	connect(dialog, SIGNAL(rejected()), this, SLOT(buttonDiscardPressed()));
 	
 	//Connect: sender, signal, receiver, member
 	connect(ui->checkBoxCircles, SIGNAL(stateChanged(int)), this, SLOT(toggleCircles(int)));

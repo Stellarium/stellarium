@@ -190,6 +190,8 @@ void SerialPort::prepareSelectFds(fd_set &read_fds,
                                   int &fd_max)
 {
 #ifdef WIN32
+	//BM: TODO: Remove debug:
+	*log_file << "SerialPort::prepareSelectFds()";
 	// handle all IO here
 	if (write_buff_end > write_buff)
 		performWriting();

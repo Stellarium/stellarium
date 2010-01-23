@@ -111,13 +111,8 @@ void StelDialogTelescopeControl::setVisible(bool v)
 		StelMainGraphicsView::getInstance().scene()->addItem(proxy);
 		proxy->setWindowFrameMargins(2,0,2,2);
 
-		// The caching is buggy on all plateforms with Qt 4.5.2
-
-#if QT_VERSION==0x040501 || QT_VERSION==0x040502
-		proxy->setCacheMode(QGraphicsItem::NoCache);
-#else
+		// The caching is buggy on all platforms with Qt 4.5.2
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-#endif
 
 		proxy->setZValue(100);
 		StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
