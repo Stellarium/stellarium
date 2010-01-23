@@ -31,6 +31,7 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelMainWindow.hpp"
+#include "StelTranslator.hpp"
 
 #include <QAction>
 #include <QKeyEvent>
@@ -126,6 +127,17 @@ Oculars::~Oculars()
 #pragma mark StelModule Methods
 #endif
 /* ********************************************************************* */
+bool Oculars::configureGui(bool show)
+{
+	if (show)
+	{
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		gui->getGuiActions("actionShow_Ocular_Window")->setChecked(true);
+	}
+	
+	return true;
+}
+
 //! Draw any parts on the screen which are for our module
 void Oculars::draw(StelCore* core)
 {
@@ -480,15 +492,15 @@ void Oculars::initializeActions()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 
-	gui->addGuiActions("actionShow_Ocular", "Enable ocular mode", "Ctrl+O", group, true);
+	gui->addGuiActions("actionShow_Ocular", N_("Enable ocular"), "Ctrl+O", "Plugin Key Bindings", true);
 	gui->getGuiActions("actionShow_Ocular")->setChecked(flagShowOculars);
-	gui->addGuiActions("actionShow_Ocular_Crosshair", "Toggle Crosshair", "ALT+C", group, true);
-	gui->addGuiActions("actionShow_Ocular_Window", "Configuration Window", "ALT+O", group, true);
+	gui->addGuiActions("actionShow_Ocular_Crosshair", N_("Toggle Crosshair"), "ALT+C", group, true);
+	gui->addGuiActions("actionShow_Ocular_Window", N_("Configuration Window"), "ALT+O", group, true);
 
-	gui->addGuiActions("actionShow_Ocular_increment", "Select ocular 1", "Ctrl+]", group, false);
-	gui->addGuiActions("actionShow_Ocular_decrement", "Select ocular 2", "Ctrl+[", group, false);
-	gui->addGuiActions("actionShow_Telescope_increment", "Select ocular 3", "Shift+]", group, false);
-	gui->addGuiActions("actionShow_Telescope_decrement", "Select ocular 4", "Shift+[", group, false);
+	gui->addGuiActions("actionShow_Ocular_increment", N_("Select next ocular"), "Ctrl+]", group, false);
+	gui->addGuiActions("actionShow_Ocular_decrement", N_("Select previous ocular"), "Ctrl+[", group, false);
+	gui->addGuiActions("actionShow_Telescope_increment", N_("Select next telescope"), "Shift+]", group, false);
+	gui->addGuiActions("actionShow_Telescope_decrement", N_("Select previous telescope"), "Shift+[", group, false);
 
 	connect(gui->getGuiActions("actionShow_Ocular"), SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
 	connect(gui->getGuiActions("actionShow_Ocular_Crosshair"), SIGNAL(toggled(bool)), this, SLOT(toggleCrosshair()));

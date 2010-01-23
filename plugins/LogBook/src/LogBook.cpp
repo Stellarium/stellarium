@@ -34,6 +34,7 @@
 #include "StelObjectType.hpp"
 #include "StelProjector.hpp"
 #include "StelPainter.hpp"
+#include "StelTranslator.hpp"
 
 #include <QAction>
 #include <QDebug>
@@ -108,6 +109,17 @@ LogBook::~LogBook()
 #pragma mark StelModule Methods
 #endif
 /* ********************************************************************* */
+bool LogBook::configureGui(bool show)
+{
+	if (show)
+	{
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		gui->getGuiActions("actionShow_LogBookConfigDialog")->setChecked(true);
+	}
+	
+	return true;
+}
+
 double LogBook::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw) {
@@ -218,10 +230,10 @@ void LogBook::initializeActions()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 
-	gui->addGuiActions("actionShow_LogBook", "Enable LogBook mode", "Ctrl+L", group, true);
+	gui->addGuiActions("actionShow_LogBook", N_("Open LogBook"), "Ctrl+L", "Plugin Key Bindings", true);
 	gui->getGuiActions("actionShow_LogBook")->setChecked(flagShowLogBook);
-	gui->addGuiActions("actionShow_LogBookConfigDialog", "Show data config dialog", "ALT+L", group, true);
-	gui->addGuiActions("actionShow_TargetsDialog", "Show Targets config dialog", "ALT+T", group, true);
+	gui->addGuiActions("actionShow_LogBookConfigDialog", N_("Show data config dialog"), "ALT+L", group, true);
+	gui->addGuiActions("actionShow_TargetsDialog", N_("Show Targets config dialog"), "ALT+T", group, true);
 
 	connect(gui->getGuiActions("actionShow_LogBook"), SIGNAL(toggled(bool)), this, SLOT(enableLogBook(bool)));
 	connect(gui->getGuiActions("actionShow_LogBookConfigDialog"), SIGNAL(toggled(bool)), this, SLOT(setConfigDialogVisible(bool)));
