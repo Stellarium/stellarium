@@ -218,13 +218,17 @@ void LandscapeMgr::update(double deltaTime)
 	float landscapeBrightness = 0;
 	sunPos.normalize();
 	moonPos.normalize();
-	if(sunPos[2] < -0.1/1.5 )
+
+	// We define the brigthness zero when the sun is 8 degrees below the horizon.
+	float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPos[2])+8.*M_PI/180.));
+
+	if(sinSunAngleRad < -0.1/1.5 )
 		landscapeBrightness = 0.01;
 	else
-		landscapeBrightness = (0.01 + 1.5*(sunPos[2]+0.1/1.5));
+		landscapeBrightness = (0.01 + 1.5*(sinSunAngleRad+0.1/1.5));
 	if (moonPos[2] > -0.1/1.5)
 		landscapeBrightness += qMax(0.2/-12.*ssystem->getMoon()->getVMagnitude(nav),0.)*moonPos[2];
-//
+
 	// TODO make this more generic for non-atmosphere planets
 	if(atmosphere->getFadeIntensity() == 1)
 	{
