@@ -322,7 +322,6 @@ void StelPainter::sFanDisk(double radius, int innerFanSlices, int level)
 	static QVector<double> vertexArr;
 	static QVector<float> texCoordArr;
 	double x,y;
-
 	for (i=level;i>0;--i,slices_step<<=1)
 	{
 		for (j=0,cos_sin_theta_p=cos_sin_theta; j<slices; j+=slices_step,cos_sin_theta_p+=2*slices_step)
