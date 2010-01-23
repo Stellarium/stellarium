@@ -184,30 +184,16 @@ QString StarMgr::getSciName(int hip)
 
 void StarMgr::copyDefaultConfigFile()
 {
-	// Check that the stars/default directory exists
-	QFileInfo uDir(StelFileMgr::getUserDir()+"/stars/default");
-	if (!uDir.exists())
-	{
-		// The stars/ directory doesn't exist, lets create it.
-		qDebug() << "Creates directory " << uDir.filePath();
-		if (!QDir("/").mkpath(uDir.filePath()))
-		{
-			qFatal("Could not create directory: %s",qPrintable(uDir.filePath()));
-		}
-	}
-	if (!uDir.isWritable())
-	{
-		qFatal("%s directory is not writable", qPrintable(uDir.filePath()));
-	}
-
 	try
 	{
+		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/stars/default");
 		starConfigFileFullPath = StelFileMgr::getUserDir()+"/stars/default/starsConfig.json";
 		qDebug() << "Creates file " << starConfigFileFullPath;
 		QFile::copy(StelFileMgr::findFile("stars/default/defaultStarsConfig.json"), starConfigFileFullPath);
 	}
 	catch (std::runtime_error& e)
 	{
+		qWarning() << e.what();
 		qFatal("Could not create configuration file stars/default/starsConfig.json");
 	}
 }

@@ -534,3 +534,21 @@ QString StelFileMgr::getWin32SpecialDirPath(int csidlId)
 
 #endif
 
+void StelFileMgr::makeSureDirExistsAndIsWritable(const QString& dirFullPath)
+{
+	// Check that the dirFullPath directory exists
+	QFileInfo uDir(dirFullPath);
+	if (!uDir.exists())
+	{
+		// The modules directory doesn't exist, lets create it.
+		qDebug() << "Creates directory " << uDir.filePath();
+		if (!QDir("/").mkpath(uDir.filePath()))
+		{
+			throw std::runtime_error(QString("Could not create directory: " +uDir.filePath()).toStdString());
+		}
+	}
+	if (!uDir.isWritable())
+	{
+		throw std::runtime_error(QString("Directory is not writable: " +uDir.filePath()).toStdString());
+	}
+}

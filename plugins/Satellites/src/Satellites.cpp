@@ -91,21 +91,22 @@ Satellites::~Satellites()
 
 void Satellites::init()
 {
-	QString satelliteIconPath;
 	QSettings* conf = StelApp::getInstance().getSettings();
-
-	// If no settings in the main config file, create with defaults
-	if (!conf->childGroups().contains("Satellites"))
-	{
-		qDebug() << "Stellites::init no Satellites section exists in main config file - creating with defaults";
-		restoreDefaultConfigIni();
-	}
-
-	// populate settings from main config file.
-	readSettingsFromConfig();
 
 	try
 	{
+		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Satellites");
+
+		// If no settings in the main config file, create with defaults
+		if (!conf->childGroups().contains("Satellites"))
+		{
+			qDebug() << "Stellites::init no Satellites section exists in main config file - creating with defaults";
+			restoreDefaultConfigIni();
+		}
+
+		// populate settings from main config file.
+		readSettingsFromConfig();
+
 		satellitesJsonPath = StelFileMgr::findFile("modules/Satellites", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/satellites.json";
 
 		// Load and find resources used in the plugin
@@ -126,7 +127,6 @@ void Satellites::init()
 		pxmapOffIcon = new QPixmap(":/satellites/bt_satellites_off.png");
 		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiActions("actionShow_Satellite_Hints"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-
 
 		connect(gui->getGuiActions("actionShow_Satellite_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
 		connect(gui->getGuiActions("actionShow_Satellite_Hints"), SIGNAL(toggled(bool)), this, SLOT(setFlagHints(bool)));
@@ -729,7 +729,7 @@ void Satellites::update(double deltaTime)
 
 void Satellites::draw(StelCore* core)
 {
-	if (StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().planetName != earth->getEnglishName() || (!hintFader && hintFader.getInterstate() <= 0.))
+	if (core->getNavigator()->getCurrentLocation().planetName != earth->getEnglishName() || (!hintFader && hintFader.getInterstate() <= 0.))
 		return;
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
@@ -737,11 +737,14 @@ void Satellites::draw(StelCore* core)
 	painter.setFont(labelFont);
 	Satellite::hintBrightness = hintFader.getInterstate();
 
-	foreach(const SatelliteP& sat, satellites)
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	glEnable(GL_TEXTURE_2D);
+	Satellite::hintTexture->bind();
+	foreach (const SatelliteP& sat, satellites)
 	{
-		if (sat)
-			if (sat->initialized && sat->visible)
-				sat->draw(core, painter, 1.0);
+		if (sat && sat->initialized && sat->visible)
+			sat->draw(core, painter, 1.0);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
