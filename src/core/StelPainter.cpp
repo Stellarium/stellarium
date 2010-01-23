@@ -1213,13 +1213,13 @@ public:
 								 QVarLengthArray<unsigned int, 4096>* aoutIndices, bool isTextured)
 		: vertexArray(ar), painter(apainter), outIndices(aoutIndices), textured(isTextured)
 	{
+		prj = painter->getProjector().data();
 	}
 
 	inline void operator()(const Vec3d* v0, const Vec3d* v1, const Vec3d* v2,
 						   const Vec2f* t0, const Vec2f* t1, const Vec2f* t2,
 						   unsigned int i0, unsigned int i1, unsigned i2)
 	{
-		StelProjector* prj = painter->getProjector().data();
 		if (prj->intersectViewportDiscontinuity(*v0, *v1) ||
 			prj->intersectViewportDiscontinuity(*v1, *v2) ||
 			prj->intersectViewportDiscontinuity(*v2, *v0))
@@ -1238,14 +1238,14 @@ public:
 		painter->setVertexPointer(3, GL_DOUBLE, vertexArray.vertex.constData());
 		painter->setTexCoordPointer(2, GL_FLOAT, vertexArray.texCoords.constData());
 		painter->enableClientStates(true, textured);
-		StelPainter::DrawingMode mode = (StelPainter::DrawingMode)vertexArray.primitiveType;
-		painter->drawFromArray(mode, outIndices->size(), 0, true, outIndices->constData());
+		painter->drawFromArray(StelPainter::Triangles, outIndices->size(), 0, true, outIndices->constData());
 		painter->enableClientStates(false);
 	}
 
 private:
 	const StelVertexArray& vertexArray;
 	StelPainter* painter;
+	StelProjector* prj;
 	QVarLengthArray<unsigned int, 4096>* outIndices;
 	QList<unsigned int> remainingTriangles;
 	bool textured;
