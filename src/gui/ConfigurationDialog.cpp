@@ -628,6 +628,7 @@ void ConfigurationDialog::changePage(QListWidgetItem *current, QListWidgetItem *
 void ConfigurationDialog::refreshStarCatalogButton()
 {
 	const QVariantList& catalogConfig = GETSTELMODULE(StarMgr)->getCatalogsDescription();
+	nextStarCatalogToDownload.clear();
 	int idx=0;
 	foreach (const QVariant& catV, catalogConfig)
 	{
@@ -642,6 +643,14 @@ void ConfigurationDialog::refreshStarCatalogButton()
 
 	ui->downloadCancelButton->setVisible(false);
 	ui->downloadRetryButton->setVisible(false);
+
+	if (idx==catalogConfig.size())
+	{
+		ui->getStarsButton->setVisible(false);
+		ui->downloadLabel->setText(q_("Finished downloading all star catalogs!"));
+		return;
+	}
+
 	ui->getStarsButton->setEnabled(true);
 	if (!nextStarCatalogToDownload.isEmpty())
 	{
