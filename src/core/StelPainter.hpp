@@ -337,7 +337,7 @@ private:
 
 	//! Project an array using the current projection.
 	//! @return a descriptor of the new array
-	ArrayDesc projectArray(const ArrayDesc& array, int index, int count, const unsigned int* indices=NULL);
+	ArrayDesc projectArray(const ArrayDesc& array, int count, const unsigned int* indices=NULL);
 
 	//! Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 	//! by splitting it into subtriangles. The resulting vertex arrays are appended to the passed out* ones.
