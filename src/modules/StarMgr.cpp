@@ -189,6 +189,7 @@ void StarMgr::copyDefaultConfigFile()
 	if (!uDir.exists())
 	{
 		// The stars/ directory doesn't exist, lets create it.
+		qDebug() << "Creates directory " << uDir.filePath();
 		if (!QDir("/").mkpath(uDir.filePath()))
 		{
 			qFatal("Could not create directory: %s",qPrintable(uDir.filePath()));
@@ -201,8 +202,9 @@ void StarMgr::copyDefaultConfigFile()
 
 	try
 	{
-		starConfigFileFullPath = StelFileMgr::findFile("stars/default/starsConfig.json", StelFileMgr::New);
-		QFile::copy(StelFileMgr::findFile("stars/default/defaultStarsConfig.json"), StelFileMgr::getUserDir()+"/stars/default/starsConfig.json");
+		starConfigFileFullPath = StelFileMgr::getUserDir()+"/stars/default/starsConfig.json";
+		qDebug() << "Creates file " << starConfigFileFullPath;
+		QFile::copy(StelFileMgr::findFile("stars/default/defaultStarsConfig.json"), starConfigFileFullPath);
 	}
 	catch (std::runtime_error& e)
 	{
