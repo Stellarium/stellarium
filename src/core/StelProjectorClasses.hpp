@@ -175,7 +175,7 @@ public:
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual double getMaxFov() const {return 360.;}
-	virtual void project(int n, const Vec3d* in, Vec2f* out)
+	virtual void project(int n, const Vec3d* in, Vec3f* out)
 	{
 		Vec3d v;
 		for (int i = 0; i < n; ++i)
