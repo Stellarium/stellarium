@@ -1764,14 +1764,17 @@ void StelPainter::prepareArray(const ArrayDesc& array, int cap)
 
 void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned int* indices)
 {
+	// FIXME: We actually never use the offset argument, we should maybe discard it.
+	Q_ASSERT(offset == 0);
+
 	ArrayDesc projectedVertexArray = vertexArray;
 	if (doProj)
 	{
 		// Project the vertex array using current projection
 		if (indices)
-			projectedVertexArray = projectArray(vertexArray, 0, count, indices + offset);
+			projectedVertexArray = projectArray(vertexArray, count, indices);
 		else
-			projectedVertexArray = projectArray(vertexArray, offset, count, NULL);
+			projectedVertexArray = projectArray(vertexArray, count, NULL);
 	}
 
 #ifndef STELPAINTER_GL2
@@ -1812,9 +1815,9 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	}
 #endif
 	if (indices)
-		glDrawElements(mode, count, GL_UNSIGNED_INT, indices + offset);
+		glDrawElements(mode, count, GL_UNSIGNED_INT, indices);
 	else
-		glDrawArrays(mode, offset, count);
+		glDrawArrays(mode, 0, count);
 #ifdef STELPAINTER_GL2
 	if (pr==texturesShaderProgram)
 	{
@@ -1825,7 +1828,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 #endif
 }
 
-StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& array, int index, int count, const unsigned int* indices)
+StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& array, int count, const unsigned int* indices)
 {
 	// XXX: we should use a more generic way to test whether or not to do the projection.
 	if (dynamic_cast<StelProjector2d*>(prj.data()))
@@ -1843,18 +1846,18 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 	// 2) We are using an indice array.  In that case we have to find the max value by iterating through the indices.
 	if (!indices)
 	{
-		polygonVertexArray.resize(index + count);
-		prj->project(count, vecArray + index, polygonVertexArray.data() + index);
+		polygonVertexArray.resize(count);
+		prj->project(count, vecArray, polygonVertexArray.data());
 	} else
 	{
 		// we need to find the max value of the indices !
 		unsigned int max = 0;
-		for (int i = index; i < index + count; ++i)
+		for (int i = 0; i < count; ++i)
 		{
 			max = std::max(max, indices[i]);
 		}
 		polygonVertexArray.resize(max+1);
-		for (int i=index; i< index + count; ++i)
+		for (int i = 0; i < count; ++i)
 		{
 			prj->project(vecArray[indices[i]], win);
 			polygonVertexArray[indices[i]].set(win[0], win[1], win[2]);
