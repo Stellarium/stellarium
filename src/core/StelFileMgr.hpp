@@ -202,10 +202,7 @@ public:
 	static QString getLocaleDir();
 
 private:
-	//! Check if the user directory exists and is a writable directory.
-	//! Creates it if it does not exist. Exits the program if any of this process fails.
-	static void checkUserDir();
-	
+
 	//! Check if a (complete) path matches a set of flags
 	//! @param path a complete path
 	//! @param flags a set of StelFileMgr::Flags to test against path

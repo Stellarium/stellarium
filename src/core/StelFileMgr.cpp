@@ -264,38 +264,6 @@ QString StelFileMgr::baseName(const QString& path)
 	return QFileInfo(path).baseName();
 }
 
-void StelFileMgr::checkUserDir()
-{
-	try {
-		QFileInfo uDir(getUserDir());
-		if (uDir.exists())
-		{
-			if (uDir.isDir() && uDir.isWritable())
-			{
-				// everything checks out fine.
-				return;
-			}
-			else
-			{
-				qCritical() << "ERROR: User directory is not a writable directory: " << uDir.filePath() ;
-			}
-		}
-		else
-		{
-			// The user directory doesn't exist, lets create it.
-			if (!QDir("/").mkpath(uDir.filePath()))
-			{
-				qCritical() << "ERROR: Could not create user directory: " << uDir.filePath();
-			}
-		}
-	}
-	catch(std::runtime_error& e)
-	{
-		// This should never happen  ;)
-		qCritical() << "ERROR: cannot work out the user directory: " << e.what();
-	}	
-}
-
 bool StelFileMgr::fileFlagsCheck(const QString& path, const Flags& flags)
 {
 	if ( ! (flags & Hidden) )
