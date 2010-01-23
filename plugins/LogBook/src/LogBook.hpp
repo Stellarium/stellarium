@@ -45,11 +45,12 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init();
-	virtual void update(double deltaTime) {;}
+	virtual bool configureGui(bool show=true);
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual void init();
 	virtual void setStelStyle(const StelStyle& style);
+	virtual void update(double deltaTime) {;}
 
 public slots:
 	//! This method is called with we detect that our hot key is pressed.  It handles
