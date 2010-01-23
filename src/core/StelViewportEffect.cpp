@@ -337,18 +337,14 @@ void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QGLF
 	glBindTexture(GL_TEXTURE_2D, buf->texture());
 	glDisable(GL_BLEND);
 
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_COLOR_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glColorPointer(4, GL_FLOAT, 0, displayColorList.constData());
-	glVertexPointer(2, GL_FLOAT, 0, displayVertexList.constData());
-	glTexCoordPointer(2, GL_FLOAT, 0, displayTexCoordList.constData());
+	sPainter.enableClientStates(true, true, true);
+	sPainter.setColorPointer(4, GL_FLOAT, displayColorList.constData());
+	sPainter.setVertexPointer(2, GL_FLOAT, displayVertexList.constData());
+	sPainter.setTexCoordPointer(2, GL_FLOAT, displayTexCoordList.constData());
 	for (int j=0;j<max_y;j++)
 	{
-		glDrawArrays(GL_TRIANGLE_STRIP, j*(max_x+1)*2, (max_x+1)*2);
+		sPainter.drawFromArray(StelPainter::TriangleStrip, (max_x+1)*2, j*(max_x+1)*2, false);
 	}
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_COLOR_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	sPainter.enableClientStates(false);
 }
 
