@@ -258,54 +258,51 @@ void LandscapeOldStyle::create(bool _fullpath, QMap<QString, QString> param)
 
 void LandscapeOldStyle::draw(StelCore* core)
 {
-	if(!validLandscape) return;
-	if (drawGroundFirst) drawGround(core);
-	drawDecor(core);
-	if (!drawGroundFirst) drawGround(core);
-	drawFog(core);
+	StelPainter painter(core->getProjection(StelCore::FrameAltAz));
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	painter.enableTexture2d(true);
+	glEnable(GL_CULL_FACE);
+
+	if (!validLandscape)
+		return;
+	if (drawGroundFirst)
+		drawGround(core, painter);
+	drawDecor(core, painter);
+	if (!drawGroundFirst)
+		drawGround(core, painter);
+	drawFog(core, painter);
 }
 
 
 // Draw the horizon fog
-void LandscapeOldStyle::drawFog(StelCore* core) const
+void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 {
 	if (!fogFader.getInterstate())
 		return;
 	
 	const double vpos = tanMode ? radius*std::tan(fogAngleShift*M_PI/180.) : radius*std::sin(fogAngleShift*M_PI/180.);
-	const StelProjectorP prj = core->getProjection(core->getNavigator()->getAltAzModelViewMat() * Mat4d::translation(Vec3d(0.,0.,vpos)));
-	StelPainter sPainter(prj);
-	
+	sPainter.setProjector(core->getProjection(core->getNavigator()->getAltAzModelViewMat() * Mat4d::translation(Vec3d(0.,0.,vpos))));
 	glBlendFunc(GL_ONE, GL_ONE);
-	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
+	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
 	sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
 	          fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter, 
 			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter);
-	sPainter.enableTexture2d(true);
-	glEnable(GL_BLEND);
-	glEnable(GL_CULL_FACE);
 	fogTex->bind();
-	
 	const double height = tanMode ? radius*std::tan(fogAltAngle*M_PI/180.) : radius*std::sin(fogAltAngle*M_PI/180.);
 	sPainter.sCylinder(radius, height, 128, 1);
-	
-	glDisable(GL_CULL_FACE);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 // Draw the mountains with a few pieces of texture
-void LandscapeOldStyle::drawDecor(StelCore* core) const
+void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
-	StelPainter sPainter(prj);
+	sPainter.setProjector(core->getProjection(StelCore::FrameAltAz));
 	
-	if (!landFader.getInterstate()) return;
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	sPainter.enableTexture2d(true);
-	glEnable(GL_BLEND);
-	glEnable(GL_CULL_FACE);
-	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
+	if (!landFader.getInterstate())
+		return;
+	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
 	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
-
 	static const int stacks = 8;
 	  // make slices_per_side=(3<<K) so that the innermost polygon of the
 	  // fandisk becomes a triangle:
@@ -349,29 +346,20 @@ void LandscapeOldStyle::drawDecor(StelCore* core) const
 			tx0 = tx1;
 		}
 	}
-	glDisable(GL_CULL_FACE);
 }
 
 
 // Draw the ground
-void LandscapeOldStyle::drawGround(StelCore* core) const
+void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 {
+	if (!landFader.getInterstate())
+		return;
 	const StelNavigator* nav = core->getNavigator();
-	
-	if (!landFader.getInterstate()) return;
-	
 	const double vshift = tanMode ? radius*std::tan(groundAngleShift*M_PI/180.) : radius*std::sin(groundAngleShift*M_PI/180.);
 	Mat4d mat = nav->getAltAzModelViewMat() * Mat4d::zrotation((groundAngleRotateZ-angleRotateZOffset)*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift));
-	const StelProjectorP prj = core->getProjection(mat);
-	StelPainter sPainter(prj);
-	
+	sPainter.setProjector(core->getProjection(mat));
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
 	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
-
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_CULL_FACE);
-	sPainter.enableTexture2d(true);
-	glEnable(GL_BLEND);
 	groundTex->bind();
 	  // make slices_per_side=(3<<K) so that the innermost polygon of the
 	  // fandisk becomes a triangle:
@@ -389,8 +377,6 @@ void LandscapeOldStyle::drawGround(StelCore* core) const
 		slices_inside>>=1;
 	}
 	sPainter.sFanDisk(radius,slices_inside,level);
-
-	glDisable(GL_CULL_FACE);
 }
 
 LandscapeFisheye::LandscapeFisheye(float _radius) : Landscape(_radius)

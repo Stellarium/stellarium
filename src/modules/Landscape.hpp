@@ -33,6 +33,7 @@
 class QSettings;
 class StelLocation;
 class StelCore;
+class StelPainter;
 
 //! @class Landscape
 //! Store and manages the displaying of the Landscape.
@@ -115,9 +116,9 @@ public:
 	virtual void draw(StelCore* core);
 	void create(bool _fullpath, QMap<QString, QString> param);
 private:
-	void drawFog(StelCore* core) const;
-	void drawDecor(StelCore* core) const;
-	void drawGround(StelCore* core) const;
+	void drawFog(StelCore* core, StelPainter&) const;
+	void drawDecor(StelCore* core, StelPainter&) const;
+	void drawGround(StelCore* core, StelPainter&) const;
 	StelTextureSP* sideTexs;
 	int nbSideTexs;
 	int nbSide;
