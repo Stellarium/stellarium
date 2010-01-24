@@ -8,6 +8,9 @@ caused the main plug-in window to remain in a disabled state. (revision 5739)
 Fixed a bug: Enabling/disabling telescope server executables after a telescope
 had been started caused unpredicted behaviour. Now toggling the flag or
 selecting a new directory stops all telescopes. (revision 5747)
+Fixed a bug: Embedded telescope servers sent no commands. (revision 5747)
+More validation: The user-specified telescope server executables directory
+should contain executables starting with "TelescopeServer". (revision 5748)
 
 [0.1.8] (2010-01-12) (revision 5640)
 Fixed bug with selection marker. (revision 5407)

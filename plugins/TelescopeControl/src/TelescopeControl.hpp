@@ -228,6 +228,7 @@ private:
 	static QTextStream* globalServerLog;
 	bool addLogAtSlot(int slot);
 	void logAtSlot(int slot);
+	void removeLogAtSlot(int slot);
 	
 	//GUI
 	TelescopeDialog* telescopeDialog;
