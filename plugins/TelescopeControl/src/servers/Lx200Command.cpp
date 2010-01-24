@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "Lx200Command.hpp"
-#include "ServerLx200.hpp"
+#include "TelescopeClientDirectLx200.hpp"
 #include "LogFile.hpp"
 
 #include <math.h>
@@ -34,7 +34,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 using namespace std;
 
 Lx200Command::Lx200Command(Server &server)
-             : server(*static_cast<ServerLx200*>(&server)),
+             : server(*dynamic_cast<TelescopeClientDirectLx200*>(&server)),
                has_been_written_to_buffer(false)
 {
 }

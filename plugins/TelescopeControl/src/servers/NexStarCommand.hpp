@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 using namespace std;
 
 class Server;
-class ServerNexStar;
+class TelescopeClientDirectNexStar;
 
 //! Abstract base class for Celestron NexStar (and compatible) commands.
 class NexStarCommand
@@ -45,7 +45,7 @@ public:
 	
 protected:
 	NexStarCommand(Server &server);
-	ServerNexStar &server;
+	TelescopeClientDirectNexStar &server;
 	bool has_been_written_to_buffer;
 };
 

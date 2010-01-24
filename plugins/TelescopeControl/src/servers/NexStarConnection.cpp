@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "NexStarConnection.hpp"
 #include "NexStarCommand.hpp"
-#include "ServerNexStar.hpp"
+#include "TelescopeClientDirectNexStar.hpp"
 #include "LogFile.hpp"
 
 #include <iostream>
@@ -67,7 +67,7 @@ void NexStarConnection::dataReceived(const char *&p,const char *read_buff_end)
 		                      "error: command_list is empty" << endl;
 		#endif
 		resetCommunication();
-		static_cast<ServerNexStar*>(&server)->communicationResetReceived();
+		dynamic_cast<TelescopeClientDirectNexStar*>(&server)->communicationResetReceived();
 	}
 	else if (command_list.front()->needsNoAnswer())
 	{
@@ -88,7 +88,7 @@ void NexStarConnection::dataReceived(const char *&p,const char *read_buff_end)
 				if (rc < 0)
 				{
 					resetCommunication();
-					static_cast<ServerNexStar*>(&server)->communicationResetReceived();
+					dynamic_cast<TelescopeClientDirectNexStar*>(&server)->communicationResetReceived();
 				}
 				break;
 			}
