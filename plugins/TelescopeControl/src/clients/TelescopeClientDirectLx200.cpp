@@ -141,12 +141,8 @@ void TelescopeClientDirectLx200::gotoReceived(unsigned int ra_int, int dec_int)
 //! telescope positions:
 Vec3d TelescopeClientDirectLx200::getJ2000EquatorialPos(const StelNavigator*) const
 {
-	//BM: TODO: Remove debug:
-	*log_file << "getJ2000EquatorialPos()" << endl;
 	if (position_pointer->client_micros == 0x7FFFFFFFFFFFFFFFLL)
 	{
-		//BM: TODO: Remove debug:
-		*log_file << "getJ2000EquatorialPos(): This is bad." << endl;
 		return Vec3d(0,0,0);
 	}
 	const qint64 now = getNow() - time_delay;
@@ -157,11 +153,6 @@ Vec3d TelescopeClientDirectLx200::getJ2000EquatorialPos(const StelNavigator*) co
 		if (pp == positions) pp = end_position;
 		pp--;
 		if (pp->client_micros == 0x7FFFFFFFFFFFFFFFLL) break;
-		//BM: TODO: Remove debug:
-		*log_file << "getJ2000EquatorialPos():: now: " << now
-		          << " pp->client_micros: " << pp->client_micros
-		          << " p->client_micros: " << p->client_micros
-		          << endl;
 		if (pp->client_micros <= now && now <= p->client_micros)
 		{
 			if (pp->client_micros != p->client_micros)
