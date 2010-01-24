@@ -68,9 +68,14 @@ StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjecto
 			if (i % 2 == 0)
 				ret.indices << i-2 << i-1 << i;
 			else
-				ret.indices << i-1 << i-2 << i;
+				ret.indices << i-2 << i << i-1;
 		}
 	}
+	// Just in case we don't have any triangles, we also remove all the vertex.
+	// This is because we can't specify an empty indexed VertexArray.
+	// FIXME: we should use an attribute for indexed array.
+	if (ret.indices.isEmpty())
+		ret.vertex.clear();
 	ret.primitiveType = Triangles;
 
 	return ret;

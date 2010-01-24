@@ -1224,7 +1224,7 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 	if (doClip && !doSubDivide)
 	{
 		StelVertexArray cleanVa = va.removeDiscontinuousTriangles(this->getProjector().data());
-		va.draw(this);
+		cleanVa.draw(this);
 		return;
 	}
 
