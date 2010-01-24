@@ -128,6 +128,8 @@ public:
 	bool startTelescopeAtSlot(int slot);
 	//! Stops the telescope at the given slot. Destroys the TelescopeClient object and terminates the server process if necessary.
 	bool stopTelescopeAtSlot(int slot);
+	//! Stops all telescopes, but without removing them like deleteAllTelescopes().
+	bool stopAllTelescopes();
 	
 	//! Checks if there's a TelescopeClient object at a given slot, i.e. if there's an active telescope at that slot.
 	bool isExistingClientAtSlot(int slot);
@@ -138,8 +140,10 @@ public:
 	const QString& getModuleStyleSheet(const QString& styleModeName);
 	
 	bool getFlagUseServerExecutables() {return useServerExecutables;}
+	//! Forces a call of loadDeviceModels(). Stops all active telescopes.
 	void setFlagUseServerExecutables(bool b);
 	const QString& getServerExecutablesDirectoryPath();
+	//! Forces a call of loadDeviceModels(). Stops all active telescopes.
 	bool setServerExecutablesDirectoryPath(const QString& newPath);
 
 public slots:
