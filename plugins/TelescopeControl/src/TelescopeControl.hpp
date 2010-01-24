@@ -145,6 +145,8 @@ public:
 	const QString& getServerExecutablesDirectoryPath();
 	//! Forces a call of loadDeviceModels(). Stops all active telescopes.
 	bool setServerExecutablesDirectoryPath(const QString& newPath);
+	
+	bool getFlagUseTelescopeServerLogs () {return useTelescopeServerLogs;}
 
 public slots:
 	//! Set display flag for telescope markers and circles
@@ -174,6 +176,9 @@ public slots:
 	//! chosen according to the action which triggered the slot to be
 	//! triggered.
 	void moveTelescopeToSelected(void);
+	
+	//! Used in the GUI
+	void setFlagUseTelescopeServerLogs (bool b) {useTelescopeServerLogs = b;}
 	
 private:
 	//! Draw a nice animated pointer around the object if it's selected
@@ -222,13 +227,12 @@ private:
 	QHash<QString, DeviceModel> deviceModels;
 	QHash<QString, QString> moduleStyleSheet;
 	
-	//Hack to fix the logging problem
+	bool useTelescopeServerLogs;
 	QHash<int, QFile*> telescopeServerLogFiles;
 	QHash<int, QTextStream*> telescopeServerLogStreams;
-	static QTextStream* globalServerLog;
-	bool addLogAtSlot(int slot);
-	void logAtSlot(int slot);
-	void removeLogAtSlot(int slot);
+	
+	bool useServerExecutables;
+	QString serverExecutablesDirectoryPath;
 	
 	//GUI
 	TelescopeDialog* telescopeDialog;
@@ -256,8 +260,13 @@ private:
 	//! Loads the list of supported telescope models. Calls loadTelescopeServerExecutables() internally.
 	void loadDeviceModels();
 	
-	bool useServerExecutables;
-	QString serverExecutablesDirectoryPath;
+	//! Copies the default device_models.json to the given destination
+	//! @returns true if the file has been copied successfully
+	bool restoreDeviceModelsListTo(QString deviceModelsListPath);
+	
+	void addLogAtSlot(int slot);
+	void logAtSlot(int slot);
+	void removeLogAtSlot(int slot);
 };
 
 

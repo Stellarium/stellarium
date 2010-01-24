@@ -491,6 +491,19 @@
            <number>0</number>
           </property>
           <item>
+           <widget class="QCheckBox" name="checkBoxEnableLogs">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Log telescope driver messages to files</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="checkBoxUseExecutables">
             <property name="enabled">
              <bool>true</bool>
@@ -502,7 +515,7 @@
              </size>
             </property>
             <property name="text">
-             <string>Use telescope server executables</string>
+             <string>Use telescope server executables (override built-in drivers)</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -544,19 +557,6 @@
               </widget>
              </item>
             </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButtonRestoreDeviceModelList">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>24</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Restore the default device model list</string>
-            </property>
            </widget>
           </item>
          </layout>
