@@ -128,15 +128,6 @@ QToolTip {
 	background: rgb(143, 143, 143);
 }
 
-QTextBrowser {
-	background: rgba(0, 0, 0, 0%);
-	color: rgb(3, 3, 3);
-}
-
-QTextBrowser#helpBrowser,QTextBrowser#aboutBrowser {
-	margin-left:11px;
-}
-
 QLineEdit {
 	border: 1px solid rgb(0, 0, 0);
 	border-radius: 0px;
@@ -155,6 +146,16 @@ QTextEdit {
 	selection-background-color: rgb(253, 216, 134);
 	color: rgb(170, 173, 164);
 	font-size: 12px;
+}
+
+QTextBrowser {
+	border: 0px solid rgb(0, 0, 0);
+	background: rgba(0, 0, 0, 0%);
+	color: rgb(3, 3, 3);
+}
+
+QTextBrowser#helpBrowser,QTextBrowser#aboutBrowser {
+	margin-left:11px;
 }
 
 /***************************************************SearchDialog********************************************************/
