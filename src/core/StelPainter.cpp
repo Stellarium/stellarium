@@ -1199,59 +1199,6 @@ private:
 };
 
 
-// The function object that can be used by the StelVertexArray::foreachTriangle method.  It removes all the triangles
-// that are intersecting a discontinuity of the projection.
-//
-// Since we don't modify the vertex (no projection is done), we only put the indices of the 'safe' triangle into the
-// outIndice array.
-//
-// We also store the remaining triangles so that we can eventually draw them afterward.
-class RemoveDiscontinuousTriangles
-{
-public:
-	RemoveDiscontinuousTriangles(const StelVertexArray& ar, StelPainter* apainter,
-								 QVarLengthArray<unsigned int, 4096>* aoutIndices, bool isTextured)
-		: vertexArray(ar), painter(apainter), outIndices(aoutIndices), textured(isTextured)
-	{
-		prj = painter->getProjector().data();
-	}
-
-	inline void operator()(const Vec3d* v0, const Vec3d* v1, const Vec3d* v2,
-						   const Vec2f* t0, const Vec2f* t1, const Vec2f* t2,
-						   unsigned int i0, unsigned int i1, unsigned i2)
-	{
-		if (prj->intersectViewportDiscontinuity(*v0, *v1) ||
-			prj->intersectViewportDiscontinuity(*v1, *v2) ||
-			prj->intersectViewportDiscontinuity(*v2, *v0))
-		{
-			remainingTriangles << i0 << i1 << i2;
-			return;
-		}
-
-		outIndices->append(i0);
-		outIndices->append(i1);
-		outIndices->append(i2);
-	}
-
-	void drawResult()
-	{
-		painter->setVertexPointer(3, GL_DOUBLE, vertexArray.vertex.constData());
-		painter->setTexCoordPointer(2, GL_FLOAT, vertexArray.texCoords.constData());
-		painter->enableClientStates(true, textured);
-		painter->drawFromArray(StelPainter::Triangles, outIndices->size(), 0, true, outIndices->constData());
-		painter->enableClientStates(false);
-	}
-
-private:
-	const StelVertexArray& vertexArray;
-	StelPainter* painter;
-	StelProjector* prj;
-	QVarLengthArray<unsigned int, 4096>* outIndices;
-	QList<unsigned int> remainingTriangles;
-	bool textured;
-};
-
-
 void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool textured, const SphericalCap* clippingCap, bool doSubDivide)
 {
 	if (va.vertex.isEmpty())
@@ -1271,20 +1218,13 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 	// The simplest case, we don't need to iterate through the triangles at all.
 	if (!doClip && !doSubDivide)
 	{
-		Q_ASSERT_X(va.indices.isEmpty(), Q_FUNC_INFO, "indexed vertex array not done yet");
-
-		setVertexPointer(3, GL_DOUBLE, va.vertex.constData());
-		setTexCoordPointer(2, GL_FLOAT, va.texCoords.constData());
-
-		enableClientStates(true, textured);
-		drawFromArray((DrawingMode)va.primitiveType, va.vertex.size());
-		enableClientStates(false);
+		va.draw(this);
 		return;
 	}
 	if (doClip && !doSubDivide)
 	{
-		RemoveDiscontinuousTriangles result = va.foreachTriangle(RemoveDiscontinuousTriangles(va, this, &indexArray, textured));
-		result.drawResult();
+		StelVertexArray cleanVa = va.removeDiscontinuousTriangles(this->getProjector().data());
+		va.draw(this);
 		return;
 	}
 

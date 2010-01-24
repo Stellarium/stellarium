@@ -127,6 +127,7 @@ SET(stellarium_lib_SRCS
 	core/StelSphericalIndex.hpp
 	core/StelSphericalIndex.cpp
 	core/StelVertexArray.hpp
+	core/StelVertexArray.cpp
 	core/StelGuiBase.hpp
 	core/StelGuiBase.cpp
 	core/StelViewportEffect.hpp
