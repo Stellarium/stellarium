@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 using namespace std;
 
 class Server;
-class ServerLx200;
+class TelescopeClientDirectLx200;
 
 //! Abstract base class for Meade LX200 (and compatible) commands.
 class Lx200Command
@@ -47,7 +47,7 @@ public:
 	
 protected:
 	Lx200Command(Server &server);
-	ServerLx200 &server;
+	TelescopeClientDirectLx200 &server;
 	bool has_been_written_to_buffer;
 };
 
