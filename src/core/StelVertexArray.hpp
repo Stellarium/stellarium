@@ -53,12 +53,21 @@ struct StelVertexArray
 
 	StelPrimitiveType primitiveType;
 
+	bool isIndexed() const {return !indices.isEmpty();}
+
+	bool isTextured() const {return !texCoords.isEmpty();}
+
 	//! call a function for each triangle of the array.
 	//! func should define the following method :
 	//!     void operator() (const Vec3d* vertex[3], const Vec2f* tex[3], unsigned int indices[3])
 	//! The method takes arrays of *pointers* as arguments because we can't assume the values are contiguous
 	template<class Func>
 	inline Func foreachTriangle(Func func) const;
+
+	//! Create a copy of the array with all the triangles intersecting the projector discontinuty removed.
+	StelVertexArray removeDiscontinuousTriangles(const class StelProjector* prj) const;
+
+	void draw(class StelPainter* painter) const;
 
 private:
 	// Below we define a few methods that are templated to be optimized according to different types of VertexArray :
@@ -88,8 +97,8 @@ template<class Func>
 Func StelVertexArray::foreachTriangle(Func func) const
 {
 	// Here we just dispach the method into one of the 4 possible cases
-	bool textured = !texCoords.isEmpty();
-	bool useIndice = !indices.isEmpty();
+	bool textured = isTextured();
+	bool useIndice = isIndexed();
 
 	if (textured)
 		if (useIndice)
