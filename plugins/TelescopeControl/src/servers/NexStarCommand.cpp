@@ -30,7 +30,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 using namespace std;
 
-NexStarCommand::NexStarCommand(Server &server) : server(*dynamic_cast<TelescopeClientDirectNexStar*>(&server)), has_been_written_to_buffer(false)
+NexStarCommand::NexStarCommand(Server &server) : server(*static_cast<TelescopeClientDirectNexStar*>(&server)), has_been_written_to_buffer(false)
 {
 }
 

@@ -67,7 +67,7 @@ void NexStarConnection::dataReceived(const char *&p,const char *read_buff_end)
 		                      "error: command_list is empty" << endl;
 		#endif
 		resetCommunication();
-		dynamic_cast<TelescopeClientDirectNexStar*>(&server)->communicationResetReceived();
+		static_cast<TelescopeClientDirectNexStar*>(&server)->communicationResetReceived();
 	}
 	else if (command_list.front()->needsNoAnswer())
 	{
@@ -88,7 +88,7 @@ void NexStarConnection::dataReceived(const char *&p,const char *read_buff_end)
 				if (rc < 0)
 				{
 					resetCommunication();
-					dynamic_cast<TelescopeClientDirectNexStar*>(&server)->communicationResetReceived();
+					static_cast<TelescopeClientDirectNexStar*>(&server)->communicationResetReceived();
 				}
 				break;
 			}

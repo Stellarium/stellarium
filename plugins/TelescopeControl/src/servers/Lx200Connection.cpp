@@ -61,7 +61,7 @@ void Lx200Connection::resetCommunication(void)
 	next_send_time = GetNow() + 10000000;
 	read_timeout_endtime = 0x7FFFFFFFFFFFFFFFLL;
 	goto_commands_queued = 0;
-	dynamic_cast<TelescopeClientDirectLx200&>(server).communicationResetReceived();
+	static_cast<TelescopeClientDirectLx200&>(server).communicationResetReceived();
 }
 
 //! Commands the telescope to slew to the given right ascension and declination.

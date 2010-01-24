@@ -34,7 +34,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 using namespace std;
 
 Lx200Command::Lx200Command(Server &server)
-             : server(*dynamic_cast<TelescopeClientDirectLx200*>(&server)),
+             : server(*static_cast<TelescopeClientDirectLx200*>(&server)),
                has_been_written_to_buffer(false)
 {
 }
