@@ -41,7 +41,7 @@ class Lx200Connection;
 
 //! Telescope client that connects directly to a Meade LX200 through a serial port.
 //! This class has been created by merging the code of TelescopeTCP and ServerLx200.
-class TelescopeClientDirectLx200 : public TelescopeClient, Server
+class TelescopeClientDirectLx200 : public TelescopeClient, public Server
 {
 	Q_OBJECT
 public:

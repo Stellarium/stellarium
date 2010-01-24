@@ -41,7 +41,7 @@ class NexStarConnection;
 
 //! Telescope client that connects directly to a Celestron NexStar through a serial port.
 //! This class has been created by merging the code of TelescopeTCP and ServerNexStar.
-class TelescopeClientDirectNexStar : public TelescopeClient, Server
+class TelescopeClientDirectNexStar : public TelescopeClient, public Server
 {
 	Q_OBJECT
 public:
