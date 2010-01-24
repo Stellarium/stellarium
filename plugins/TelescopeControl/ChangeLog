@@ -2,7 +2,6 @@ Branched telescope server code to simplify building. (revision 5671)
 Enabled logging for embedded telescope servers. (revision 5721)
 Added two devices to device_models.json: the Argo Navis digital setting circle
 and the Meade ETX70 with the slow Autostar controller. (revision 5739)
-(TODO: A way to update that list automatically on plug-in update.)
 Fixed a bug: Closing the Telescope Configuration window with the Esc key
 caused the main plug-in window to remain in a disabled state. (revision 5739)
 Fixed a bug: Enabling/disabling telescope server executables after a telescope
@@ -11,6 +10,9 @@ selecting a new directory stops all telescopes. (revision 5747)
 Fixed a bug: Embedded telescope servers sent no commands. (revision 5747)
 More validation: The user-specified telescope server executables directory
 should contain executables starting with "TelescopeServer". (revision 5748)
+Added an option to toggle on/off telescope server logging. (revision 5752)
+Added a mechanism to replace automatically the device models list
+with the default version if the current copy is outdated. (revision 5752)
 
 [0.1.8] (2010-01-12) (revision 5640)
 Fixed bug with selection marker. (revision 5407)

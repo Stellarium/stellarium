@@ -84,9 +84,7 @@ void TelescopeDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	
 	//Connect: sender, signal, receiver, method
-	connect(ui->checkBoxMarkers, SIGNAL(stateChanged(int)), this, SLOT(togglePointers(int)));
-	connect(ui->checkBoxLabels, SIGNAL(stateChanged(int)), this, SLOT(toggleNames(int)));
-	
+	//Page: Telescopes
 	connect(ui->pushButtonChangeStatus, SIGNAL(clicked()), this, SLOT(buttonChangeStatusPressed()));
 	connect(ui->pushButtonConfigure, SIGNAL(clicked()), this, SLOT(buttonConfigurePressed()));
 	connect(ui->pushButtonAdd, SIGNAL(clicked()), this, SLOT(buttonAddPressed()));
@@ -95,8 +93,11 @@ void TelescopeDialog::createDialogContent()
 	connect(ui->telescopeTreeView, SIGNAL(clicked (const QModelIndex &)), this, SLOT(selectTelecope(const QModelIndex &)));
 	//connect(ui->telescopeTreeView, SIGNAL(activated (const QModelIndex &)), this, SLOT(configureTelescope(const QModelIndex &)));
 	
-	connect(&configurationDialog, SIGNAL(discardChanges()), this, SLOT(discardChanges()));
-	connect(&configurationDialog, SIGNAL(saveChanges(QString, TelescopeConnection)), this, SLOT(saveChanges(QString, TelescopeConnection)));
+	//Page: Options:
+	connect(ui->checkBoxMarkers, SIGNAL(stateChanged(int)), this, SLOT(togglePointers(int)));
+	connect(ui->checkBoxLabels, SIGNAL(stateChanged(int)), this, SLOT(toggleNames(int)));
+	
+	connect(ui->checkBoxEnableLogs, SIGNAL(toggled(bool)), telescopeManager, SLOT(setFlagUseTelescopeServerLogs(bool)));
 	
 	connect(ui->checkBoxUseExecutables, SIGNAL(toggled(bool)), ui->labelExecutablesDirectory, SLOT(setEnabled(bool)));
 	connect(ui->checkBoxUseExecutables, SIGNAL(toggled(bool)), ui->lineEditExecutablesDirectory, SLOT(setEnabled(bool)));
@@ -104,6 +105,10 @@ void TelescopeDialog::createDialogContent()
 	connect(ui->checkBoxUseExecutables, SIGNAL(toggled(bool)), this, SLOT(checkBoxUseExecutablesToggled(bool)));
 	
 	connect(ui->pushButtonPickExecutablesDirectory, SIGNAL(clicked()), this, SLOT(buttonBrowseServerDirectoryPressed()));
+	
+	//In other dialogs:
+	connect(&configurationDialog, SIGNAL(discardChanges()), this, SLOT(discardChanges()));
+	connect(&configurationDialog, SIGNAL(saveChanges(QString, TelescopeConnection)), this, SLOT(saveChanges(QString, TelescopeConnection)));
 	
 	//Initialize the style
 	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
@@ -245,6 +250,7 @@ void TelescopeDialog::createDialogContent()
 	//Checkboxes
 	ui->checkBoxMarkers->setChecked(telescopeManager->getFlagTelescopes());
 	ui->checkBoxLabels->setChecked(telescopeManager->getFlagTelescopeName());
+	ui->checkBoxEnableLogs->setChecked(telescopeManager->getFlagUseTelescopeServerLogs());
 	
 	//Telescope server directory
 	ui->checkBoxUseExecutables->setChecked(telescopeManager->getFlagUseServerExecutables());

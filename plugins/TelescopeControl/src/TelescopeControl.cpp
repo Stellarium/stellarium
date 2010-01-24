@@ -45,6 +45,7 @@
 #include "StelTextureMgr.hpp"
 
 #include <QAction>
+#include <QDateTime>
 #include <QDir>
 #include <QFileInfo>
 #include <QMapIterator>
@@ -559,7 +560,7 @@ void TelescopeControl::loadConfiguration()
 	labelNightColor = StelUtils::strToVec3f(settings->value("night_color_telescope_labels", "0.5,0,0").toString());
 	
 	//Load server executables flag and directory
-	useServerExecutables = settings->value("use_server_executables", false).toBool();
+	useServerExecutables = settings->value("flag_use_server_executables", false).toBool();
 	serverExecutablesDirectoryPath = settings->value("server_executables_path").toString();
 	
 	//If no directory is specified in the configuration file, try to find the default one
@@ -583,6 +584,9 @@ void TelescopeControl::loadConfiguration()
 		}
 	}
 	
+	//Load logging flag
+	useTelescopeServerLogs = settings->value("flag_enable_telescope_logs", false).toBool();
+	
 	settings->endGroup();
 }
 
@@ -604,7 +608,7 @@ void TelescopeControl::saveConfiguration()
 	settings->setValue("night_color_telescope_labels", QString("%1,%2,%3").arg(labelNightColor[0], 0, 'f', 2).arg(labelNightColor[1], 0, 'f', 2).arg(labelNightColor[2], 0, 'f', 2));
 	
 	//Save telescope server executables flag and directory
-	settings->setValue("use_server_executables", useServerExecutables);
+	settings->setValue("flag_use_server_executables", useServerExecutables);
 	if(useServerExecutables)
 	{
 		settings->setValue("server_executables_path", serverExecutablesDirectoryPath);
@@ -613,6 +617,9 @@ void TelescopeControl::saveConfiguration()
 	{
 		settings->remove("server_executables_path");
 	}
+	
+	//Save logging flag
+	settings->setValue("flag_enable_telescope_logs", useTelescopeServerLogs);
 	
 	settings->endGroup();
 }
@@ -852,8 +859,8 @@ void TelescopeControl::loadTelescopes()
 					}
 					else
 					{
-						if (addLogAtSlot(slot))
-							logAtSlot(slot);
+						addLogAtSlot(slot);
+						logAtSlot(slot);
 						if(!startClientAtSlot(slot, name, QString(), 0, delay, internalCircles, deviceModelName, portSerial))
 						{
 							qDebug() << "TelescopeControl: Unable to create a telescope client at slot" << slot;
@@ -1021,8 +1028,8 @@ bool TelescopeControl::startTelescopeAtSlot(int slot)
 		}
 		else
 		{
-			if (addLogAtSlot(slot))
-				logAtSlot(slot);
+			addLogAtSlot(slot);
+			logAtSlot(slot);
 			if (startClientAtSlot(slot, name, QString(), 0, delay, circles, deviceModelName, portSerial))
 			{
 				return true;
@@ -1122,7 +1129,8 @@ bool TelescopeControl::startServerAtSlot(int slotNumber, QString deviceModelName
 		#endif //WIN32
 		QStringList serverArguments;
 		serverArguments << QString::number(tcpPort) << serialPortName;
-		serverArguments << QString(StelFileMgr::getUserDir() + "/log_TelescopeServer" + slotName + ".txt");
+		if(useTelescopeServerLogs)
+			serverArguments << QString(StelFileMgr::getUserDir() + "/log_TelescopeServer" + slotName + ".txt");
 		
 		qDebug() << "TelescopeControl: Starting tellescope server at slot" << slotName << "with path" << serverExecutablePath << "and arguments" << serverArguments.join(" ");
 		
@@ -1220,6 +1228,9 @@ bool TelescopeControl::stopClientAtSlot(int slotNumber)
 	}
 	telescopeClients.remove(slotNumber);
 	
+	//This is not needed by every client
+	removeLogAtSlot(slotNumber);
+	
 	return true;
 }
 
@@ -1228,33 +1239,70 @@ void TelescopeControl::loadDeviceModels()
 	qDebug() << "TelescopeControl: Loading device model descriptions...";
 	
 	//Make sure that the device models file exists
+	bool useDefaultList = false;
 	QString deviceModelsJsonPath = StelFileMgr::findFile("modules/TelescopeControl", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/device_models.json";
 	if(!QFileInfo(deviceModelsJsonPath).exists())
 	{
-		QFile defaultFile(":/telescopeControl/device_models.json");
-		if (!defaultFile.copy(deviceModelsJsonPath))
+		if(!restoreDeviceModelsListTo(deviceModelsJsonPath))
 		{
-			qWarning() << "TelescopeControl: Unable to copy the default device models file to" << deviceModelsJsonPath;
-			return;
+			qWarning() << "TelescopeControl: Unable to find" << deviceModelsJsonPath;
+			useDefaultList = true;
 		}
-		else
-		{
-			qDebug() << "TelescopeControl: The default device models file has been restored to" << deviceModelsJsonPath;
-		}
-	}
-	
-	//Open the file and parse it
-	QVariantList deviceModelsList;
-	QFile deviceModelsJsonFile(deviceModelsJsonPath);
-	if(!deviceModelsJsonFile.open(QFile::ReadOnly))
-	{
-		qWarning() << "TelescopeControl: No device models loaded. Can't open for reading" << deviceModelsJsonPath;
-		return;
 	}
 	else
 	{
-		deviceModelsList = StelJsonParser::parse(deviceModelsJsonFile).toList();
+		QFile deviceModelsJsonFile(deviceModelsJsonPath);
+		if(!deviceModelsJsonFile.open(QFile::ReadOnly))
+		{
+			qWarning() << "TelescopeControl: Can't open for reading" << deviceModelsJsonPath;
+			useDefaultList = true;
+		}
+		else
+		{
+			//Check the version and move the old file if necessary
+			QVariantMap deviceModelsJsonMap;
+			deviceModelsJsonMap = StelJsonParser::parse(deviceModelsJsonFile).toMap();
+			QString version = deviceModelsJsonMap.value("version", "0.0.0").toString();
+			if(version < QString(PLUGIN_VERSION))
+			{
+				deviceModelsJsonFile.close();
+				QString newName = deviceModelsJsonPath + ".backup." + QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
+				if(deviceModelsJsonFile.rename(newName))
+				{
+					qWarning() << "TelescopeControl: The existing version of device_models.json is obsolete. Backing it up as" << newName;
+					if(!restoreDeviceModelsListTo(deviceModelsJsonPath))
+					{
+						useDefaultList = true;
+					}
+				}
+				else
+				{
+					qWarning() << "TelescopeControl: The existing version of device_models.json is obsolete. Unable to rename.";
+					useDefaultList = true;
+				}
+			}
+			else
+				deviceModelsJsonFile.close();
+		}
+	}
+	
+	if (useDefaultList)
+	{
+		qWarning() << "TelescopeControl: Using embedded device models list.";
+		deviceModelsJsonPath = ":/telescopeControl/device_models.json";
+	}
+	
+	//Open the file and parse the device list
+	QVariantList deviceModelsList;
+	QFile deviceModelsJsonFile(deviceModelsJsonPath);
+	if(deviceModelsJsonFile.open(QFile::ReadOnly))
+	{
+		deviceModelsList = (StelJsonParser::parse(deviceModelsJsonFile).toMap()).value("list").toList();
 		deviceModelsJsonFile.close();
+	}
+	else
+	{
+		return;
 	}
 	
 	//Compile a list of the available telescope server executables
@@ -1328,6 +1376,21 @@ const QHash<QString, DeviceModel>& TelescopeControl::getDeviceModels()
 	return deviceModels;
 }
 
+bool TelescopeControl::restoreDeviceModelsListTo(QString deviceModelsListPath)
+{
+	QFile defaultFile(":/telescopeControl/device_models.json");
+	if (!defaultFile.copy(deviceModelsListPath))
+	{
+		qWarning() << "TelescopeControl: Unable to copy the default device models list to" << deviceModelsListPath;
+		return false;
+	}
+	QFile newCopy(deviceModelsListPath);
+	newCopy.setPermissions(newCopy.permissions() | QFile::WriteOwner);
+	
+	qDebug() << "TelescopeControl: The default device models list has been copied to" << deviceModelsListPath;
+	return true;
+}
+
 const QString& TelescopeControl::getModuleStyleSheet(const QString& styleModeName)
 {
 	return moduleStyleSheet[styleModeName];
@@ -1374,24 +1437,32 @@ void TelescopeControl::setFlagUseServerExecutables(bool useExecutables)
 	loadDeviceModels();
 }
 
-bool TelescopeControl::addLogAtSlot(int slot)
+void TelescopeControl::addLogAtSlot(int slot)
 {
 	if(!telescopeServerLogFiles.contains(slot)) // || !telescopeServerLogFiles.value(slot)->isOpen()
 	{
+		//If logging is off, use an empty stream to avoid segmentation fault
+		if(!useTelescopeServerLogs)
+		{
+			telescopeServerLogFiles.insert(slot, new QFile());
+			telescopeServerLogStreams.insert(slot, new QTextStream(telescopeServerLogFiles.value(slot)));
+			return;
+		}
+		
 		QString filePath = StelFileMgr::getUserDir() + "/log_TelescopeServer" + QString::number(slot) + ".txt";
 		QFile* logFile = new QFile(filePath);
 		if (!logFile->open(QFile::WriteOnly|QFile::Text|QFile::Truncate|QFile::Unbuffered))
 		{
 			qWarning() << "TelescopeControl: Unable to create a log file for slot"
 			           << slot << ":" << filePath;
-			return false;
+			telescopeServerLogFiles.insert(slot, logFile);
+			telescopeServerLogStreams.insert(slot, new QTextStream(new QFile()));
 		}
 		
 		telescopeServerLogFiles.insert(slot, logFile);
 		QTextStream * logStream = new QTextStream(logFile);
 		telescopeServerLogStreams.insert(slot, logStream);
 	}
-	return true;
 }
 
 void TelescopeControl::removeLogAtSlot(int slot)
