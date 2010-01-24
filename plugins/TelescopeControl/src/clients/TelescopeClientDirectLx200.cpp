@@ -179,7 +179,7 @@ Vec3d TelescopeClientDirectLx200::getJ2000EquatorialPos(const StelNavigator*) co
 bool TelescopeClientDirectLx200::prepareCommunication()
 {
 	//TODO: Nothing to prepare?
-	return false;
+	return true;
 }
 
 void TelescopeClientDirectLx200::performCommunication()

@@ -5,6 +5,9 @@ and the Meade ETX70 with the slow Autostar controller. (revision 5739)
 (TODO: A way to update that list automatically on plug-in update.)
 Fixed a bug: Closing the Telescope Configuration window with the Esc key
 caused the main plug-in window to remain in a disabled state. (revision 5739)
+Fixed a bug: Enabling/disabling telescope server executables after a telescope
+had been started caused unpredicted behaviour. Now toggling the flag or
+selecting a new directory stops all telescopes. (revision 5747)
 
 [0.1.8] (2010-01-12) (revision 5640)
 Fixed bug with selection marker. (revision 5407)
