@@ -177,7 +177,7 @@ Vec3d TelescopeClientDirectNexStar::getJ2000EquatorialPos(const StelNavigator*) 
 bool TelescopeClientDirectNexStar::prepareCommunication()
 {
 	//TODO: Nothing to prepare?
-	return false;
+	return true;
 }
 
 void TelescopeClientDirectNexStar::performCommunication()

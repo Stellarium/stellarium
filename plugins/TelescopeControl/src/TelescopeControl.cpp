@@ -1059,6 +1059,23 @@ bool TelescopeControl::stopTelescopeAtSlot(int slot)
 	return stopClientAtSlot(slot);
 }
 
+bool TelescopeControl::stopAllTelescopes()
+{
+	bool allStoppedSuccessfully = true;
+	
+	if (!telescopeClients.empty())
+	{
+		QMap<int, TelescopeClientP>::const_iterator telescope = telescopeClients.constBegin();
+		while (telescope != telescopeClients.end())
+		{
+			allStoppedSuccessfully = allStoppedSuccessfully && stopTelescopeAtSlot(telescope.key());
+			telescope++;
+		}
+	}
+	
+	return allStoppedSuccessfully;
+}
+
 bool TelescopeControl::isValidSlotNumber(int slot)
 {
 	return ((slot < MIN_SLOT_NUMBER || slot >  MAX_SLOT_NUMBER) ? false : true);
@@ -1325,7 +1342,9 @@ bool TelescopeControl::setServerExecutablesDirectoryPath(const QString& newPath)
 {
 	//TODO: Add some kind of validation - check if this path exists or even if it contains suitable executables
 	serverExecutablesDirectoryPath = newPath;
+	
 	//TODO: Reload telescope server executables? Reload device models?
+	stopAllTelescopes();
 	loadDeviceModels();
 	return true;
 }
@@ -1337,6 +1356,7 @@ void TelescopeControl::setFlagUseServerExecutables(bool useExecutables)
 		return;
 	
 	useServerExecutables = useExecutables;
+	stopAllTelescopes();
 	loadDeviceModels();
 }
 
