@@ -67,15 +67,11 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200
 	
 	//end_of_timeout = -0x8000000000000000LL;
 	
-	//Fix for the stupid serial device name bug on Windows
-	//The URL format doesn't allow parameters that contain a ':'
 	#ifdef WIN32
-	/*
 	if(serialDeviceName.right(serialDeviceName.size() - 3).toInt() > 9)
 		serialDeviceName = "\\\\.\\" + serialDeviceName + ":";//"\\.\COMxx", not sure if it will work
 	else
 		serialDeviceName = serialDeviceName + ":";
-	*/
 	#endif //WIN32
 	
 	//Try to establish a connection to the telescope
@@ -145,8 +141,12 @@ void TelescopeClientDirectLx200::gotoReceived(unsigned int ra_int, int dec_int)
 //! telescope positions:
 Vec3d TelescopeClientDirectLx200::getJ2000EquatorialPos(const StelNavigator*) const
 {
+	//BM: TODO: Remove debug:
+	*log_file << "getJ2000EquatorialPos()" << endl;
 	if (position_pointer->client_micros == 0x7FFFFFFFFFFFFFFFLL)
 	{
+		//BM: TODO: Remove debug:
+		*log_file << "getJ2000EquatorialPos(): This is bad." << endl;
 		return Vec3d(0,0,0);
 	}
 	const qint64 now = getNow() - time_delay;
@@ -157,6 +157,11 @@ Vec3d TelescopeClientDirectLx200::getJ2000EquatorialPos(const StelNavigator*) co
 		if (pp == positions) pp = end_position;
 		pp--;
 		if (pp->client_micros == 0x7FFFFFFFFFFFFFFFLL) break;
+		//BM: TODO: Remove debug:
+		*log_file << "getJ2000EquatorialPos():: now: " << now
+		          << " pp->client_micros: " << pp->client_micros
+		          << " p->client_micros: " << p->client_micros
+		          << endl;
 		if (pp->client_micros <= now && now <= p->client_micros)
 		{
 			if (pp->client_micros != p->client_micros)
@@ -172,7 +177,7 @@ Vec3d TelescopeClientDirectLx200::getJ2000EquatorialPos(const StelNavigator*) co
 		}
 		p = pp;
 	}
-	while (p != position_pointer);//BM: WTF?
+	while (p != position_pointer);
 	return p->pos;
 }
 
@@ -265,7 +270,7 @@ bool TelescopeClientDirectLx200::isInitialized(void) const
 void TelescopeClientDirectLx200::sendPosition(unsigned int ra_int, int dec_int, int status)
 {
 	//Server time is "now", because this class is the server
-	const qint64 server_micros = (qint64) GetNow();
+	const qint64 server_micros = (qint64) getNow();
 	
 	// remember the time and received position so that later we
 	// will know where the telescope is pointing to:

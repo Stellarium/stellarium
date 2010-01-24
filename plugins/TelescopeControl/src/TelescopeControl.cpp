@@ -1340,10 +1340,24 @@ const QString& TelescopeControl::getServerExecutablesDirectoryPath()
 
 bool TelescopeControl::setServerExecutablesDirectoryPath(const QString& newPath)
 {
-	//TODO: Add some kind of validation - check if this path exists or even if it contains suitable executables
+	//TODO: Reuse code.
+	QDir newServerDirectory(newPath);
+	if(!newServerDirectory.exists())
+	{
+		qWarning() << "TelescopeControl: Can't find such a directory:" << newPath;
+		return false;
+	}
+	QList<QFileInfo> telescopeServerExecutables = newServerDirectory.entryInfoList(QStringList("TelescopeServer*"), (QDir::Files|QDir::Executable|QDir::CaseSensitive), QDir::Name);
+	if(telescopeServerExecutables.isEmpty())
+	{
+		qWarning() << "TelescopeControl: No telescope server executables found in"
+		           << serverExecutablesDirectoryPath;
+		return false;
+	}
+	
+	//If everything is fine...
 	serverExecutablesDirectoryPath = newPath;
 	
-	//TODO: Reload telescope server executables? Reload device models?
 	stopAllTelescopes();
 	loadDeviceModels();
 	return true;
@@ -1378,6 +1392,16 @@ bool TelescopeControl::addLogAtSlot(int slot)
 		telescopeServerLogStreams.insert(slot, logStream);
 	}
 	return true;
+}
+
+void TelescopeControl::removeLogAtSlot(int slot)
+{
+	if(telescopeServerLogFiles.contains(slot))
+	{
+		telescopeServerLogFiles.value(slot)->close();
+		telescopeServerLogStreams.remove(slot);
+		telescopeServerLogFiles.remove(slot);
+	}
 }
 
 void TelescopeControl::logAtSlot(int slot)

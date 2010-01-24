@@ -485,7 +485,7 @@ Vec3d TelescopeTCP::getJ2000EquatorialPos(const StelNavigator*) const
 		}
 		p = pp;
 	}
-	while (p != position_pointer);//BM: WTF?
+	while (p != position_pointer);
 	return p->pos;
 }
 

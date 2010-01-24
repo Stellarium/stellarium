@@ -67,15 +67,11 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar
 	
 	//end_of_timeout = -0x8000000000000000LL;
 	
-	//Fix for the stupid serial device name bug on Windows
-	//The URL format doesn't allow parameters that contain a ':'
 	#ifdef WIN32
-	/*
 	if(serialDeviceName.right(serialDeviceName.size() - 3).toInt() > 9)
 		serialDeviceName = "\\\\.\\" + serialDeviceName + ":";//"\\.\COMxx", not sure if it will work
 	else
 		serialDeviceName = serialDeviceName + ":";
-	*/
 	#endif //WIN32
 	
 	//Try to establish a connection to the telescope
@@ -170,7 +166,7 @@ Vec3d TelescopeClientDirectNexStar::getJ2000EquatorialPos(const StelNavigator*) 
 		}
 		p = pp;
 	}
-	while (p != position_pointer);//BM: WTF?
+	while (p != position_pointer);
 	return p->pos;
 }
 

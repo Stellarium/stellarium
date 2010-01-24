@@ -485,7 +485,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">
           <property name="spacing">
-           <number>0</number>
+           <number>4</number>
           </property>
           <property name="margin">
            <number>0</number>
@@ -498,7 +498,7 @@
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>26</height>
+              <height>24</height>
              </size>
             </property>
             <property name="text">
@@ -510,7 +510,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QFrame" name="">
+           <widget class="QFrame" name="frame">
             <layout class="QHBoxLayout" name="horizontalLayoutExecutablesDirectory">
              <property name="margin">
               <number>0</number>
@@ -538,12 +538,25 @@
                 </sizepolicy>
                </property>
                <property name="icon">
-                <iconset resource="../../../../stellarium/data/mainRes.qrc">
+                <iconset resource="../../../../data/mainRes.qrc">
                  <normaloff>:/graphicGui/gui/folder.png</normaloff>:/graphicGui/gui/folder.png</iconset>
                </property>
               </widget>
              </item>
             </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonRestoreDeviceModelList">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Restore the default device model list</string>
+            </property>
            </widget>
           </item>
          </layout>
@@ -587,7 +600,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../../stellarium/data/mainRes.qrc"/>
+  <include location="../../../../data/mainRes.qrc"/>
  </resources>
  <connections/>
 </ui>
