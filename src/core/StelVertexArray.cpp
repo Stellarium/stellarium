@@ -50,7 +50,7 @@ StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjecto
 	Q_ASSERT(!isIndexed());
 
 	StelVertexArray ret = *this;
-	
+
 	// Create a 'Triangles' vertex array from this array.
 	// We have different algorithms for different original mode
 	switch (primitiveType)
@@ -81,9 +81,9 @@ StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjecto
 
 		for (int i = 0; i < vertex.size(); i += 3)
 		{
-			if (prj->intersectViewportDiscontinuity(vertex[i], vertex[i+1]) ||
-				prj->intersectViewportDiscontinuity(vertex[i+1], vertex[i+2]) ||
-				prj->intersectViewportDiscontinuity(vertex[i+2], vertex[i]))
+			if (prj->intersectViewportDiscontinuity(vertex.at(i), vertex.at(i+1)) ||
+				prj->intersectViewportDiscontinuity(vertex.at(i+1), vertex.at(i+2)) ||
+				prj->intersectViewportDiscontinuity(vertex.at(i+2), vertex.at(i)))
 			{
 				// We have a discontinuity.
 			}
