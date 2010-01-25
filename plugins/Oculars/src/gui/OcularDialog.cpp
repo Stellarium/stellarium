@@ -18,12 +18,13 @@
 
 #include "Ocular.hpp"
 #include "OcularDialog.hpp"
-#include "StelFileMgr.hpp"
-#include "StelMainGraphicsView.hpp"
 #include "ui_ocularDialog.h"
 
 #include "StelApp.hpp"
 #include "StelGui.hpp"
+#include "StelFileMgr.hpp"
+#include "StelMainGraphicsView.hpp"
+#include "StelTranslator.hpp"
 
 #include <QDataWidgetMapper>
 #include <QDebug>
@@ -188,12 +189,6 @@ void OcularDialog::ocularSelected(const QModelIndex &index)
 
 void OcularDialog::telescopeSelected(const QModelIndex &index)
 {
-	// TODO: Why the hell is this needed?
-	/*
-	ui->telescopeDiameter->setFocus();
-	ui->telescopeFL->setFocus();
-	 */
-	ui->telescopeName->setFocus();
 }
 
 void OcularDialog::updateOcular()
@@ -246,6 +241,7 @@ void OcularDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 
+	//Now the rest of the actions.
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->updateOcularButton, SIGNAL(clicked()), this, SLOT(updateOcular()));
 	connect(ui->updateTelescopeButton, SIGNAL(clicked()), this, SLOT(updateTelescope()));
