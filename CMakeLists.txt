@@ -278,9 +278,6 @@ ENDIF()
 ########### Generate doxygen doc ###############
 ADD_CUSTOM_TARGET(apidoc doxygen Doxyfile WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "Generate the doxygen documentation into the builds/doc directory.")
 
-########### enable testing ###########
-ENABLE_TESTING()
-
 
 ########### Top level include directories ###########
 # This will be used for all compilations in sub-directories
