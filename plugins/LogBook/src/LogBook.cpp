@@ -111,11 +111,9 @@ LogBook::~LogBook()
 /* ********************************************************************* */
 bool LogBook::configureGui(bool show)
 {
-	if (show)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiActions("actionShow_LogBookConfigDialog")->setChecked(true);
-	}
+//	if (show) {
+//		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+//	}
 	
 	return true;
 }
@@ -130,11 +128,12 @@ double LogBook::getCallOrder(StelModuleActionName actionName) const
 
 void LogBook::init()
 {
-	qDebug() << "Ocular plugin - press Command-L to toggle Log Book view mode. Press ALT-L for configuration.";
+	qDebug() << "LogBook plugin - press Command-L to toggle Log Book view mode. Press ALT-L for configuration.";
 	initializeDatabase();
 	mainDialog = new LogBookDialog(tableModels);
 	configDialog = new LogBookConfigDialog(tableModels);
 	targetsDialog = new TargetsDialog(tableModels);
+	flagShowLogBook = false;
 	initializeActions();
 }
 
@@ -163,27 +162,9 @@ void LogBook::setStelStyle(const StelStyle& style)
 /* ********************************************************************* */
 void LogBook::enableLogBook(bool b)
 {
-	mainDialog->setVisible(true);
-//	StelCore::StelCore *core = StelApp::getInstance().getCore();
-//	LabelMgr* labelManager = GETSTELMODULE(LabelMgr);
+	mainDialog->setVisible(b);
 	// Toggle the plugin on & off.  To toggle on, we want to ensure there is a selected object.
 	if (!StelApp::getInstance().getStelObjectMgr().getWasSelected()) {
-		/*
-		if (usageMessageLabelID == -1) {
-			QFontMetrics metrics(font);
-			QString labelText = "Please select an object before enabling Ocular.";
-			StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
-			int xPosition = projectorParams.viewportCenter[0];
-			xPosition = xPosition - 0.5 * (metrics.width(labelText));
-			int yPosition = projectorParams.viewportCenter[1];
-			yPosition = yPosition - 0.5 * (metrics.height());
-			usageMessageLabelID = labelManager->labelScreen(labelText, xPosition, yPosition, true, font.pixelSize(), "#99FF99");
-		}
-		// we didn't accept the new status - make sure the toolbar button reflects this
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		Q_ASSERT(gui);
-		gui->getGuiActions("actionShow_Ocular")->setChecked(false);
-		 */
 		qDebug() << "====> Nothing selected.";
 	} else {
 		QList<StelObjectP> selectedObjects = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
@@ -192,29 +173,17 @@ void LogBook::enableLogBook(bool b)
 			StelObjectP stelObject = objectIterator.next();
 			qDebug() << "====> Name: "<< stelObject->getNameI18n();
 		}
-			/*
-		if (selectedOcularIndex != -1) {
-			// remove the usage label if it is being displayed.
-			if (usageMessageLabelID > -1) {
-				labelManager->setLabelShow(usageMessageLabelID, false);
-				labelManager->deleteLabel(usageMessageLabelID);
-				usageMessageLabelID = -1;
-			}
-			flagShowOculars = b;
-			zoom(false);
-		}
-		 */
 	}
 }
 
 void LogBook::setConfigDialogVisible(bool b)
 {
-	configDialog->setVisible(true);
+	configDialog->setVisible(b);
 }
 
 void LogBook::setTargetsDialogVisible(bool b)
 {
-	targetsDialog->setVisible(true);
+	targetsDialog->setVisible(b);
 }
 
 /* ********************************************************************* */
@@ -242,15 +211,15 @@ void LogBook::initializeActions()
 	// Make a toolbar button
 	try {
 		pxmapGlow = new QPixmap(":/graphicGui/gui/glow32x32.png");
-		pxmapOnIcon = new QPixmap(":/logbook/bt_logbook_on.png");
-		pxmapOffIcon = new QPixmap(":/logbook/bt_logbook_off.png");
+		pxmapOnIcon = new QPixmap(":/logbook/bt_Logbook_on.png");
+		pxmapOffIcon = new QPixmap(":/logbook/bt_Logbook_off.png");
 
 		toolbarButton = new StelButton(NULL,
-									   *pxmapOnIcon,
 									   *pxmapOffIcon,
+									   *pxmapOnIcon,
 									   *pxmapGlow,
 									   gui->getGuiActions("actionShow_LogBook"));
-		gui->getButtonBar()->addButton(toolbarButton);
+		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable create toolbar button for LogBook plugin: "<< e.what();
 	}
@@ -259,11 +228,7 @@ void LogBook::initializeActions()
 bool LogBook::initializeDatabase()
 {
 	// Insure the module directory exists
-	if(!StelFileMgr::exists(StelFileMgr::getUsersDataDirectoryName().append( "/modules/LogBook/"))) {
-		StelFileMgr::mkDir(StelFileMgr::getUsersDataDirectoryName().append( "/modules/LogBook/"));
-		qDebug() << "LogBook::initializeDatabase created module directory at "
-				 << StelFileMgr::getUsersDataDirectoryName().append( "/modules/LogBook/");
-	}
+	StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/LogBook");
 
 	bool result = false;
 	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);

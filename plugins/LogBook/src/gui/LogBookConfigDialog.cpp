@@ -34,6 +34,7 @@
 #include <QDebug>
 #include <QDoubleValidator>
 #include <QDataWidgetMapper>
+#include <QFile>
 #include <QMessageBox>
 #include <QSqlError>
 #include <QSqlField>
@@ -54,7 +55,6 @@ LogBookConfigDialog::LogBookConfigDialog(QMap<QString, QSqlTableModel *> theTabl
 	ocularsWidget = new Ui_OcularsWidget();
 	opticsWidget = new Ui_OpticsWidget();
 	sitesWidget = new Ui_SitesWidget();
-	
 }
 
 LogBookConfigDialog::~LogBookConfigDialog()
