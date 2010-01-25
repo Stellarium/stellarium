@@ -36,7 +36,7 @@ public:
 	//! Sets up JsonListIterator to read an array. Swallows all whitespace
 	//! up to a beginning '[' character. If '[' is not the first non-whitespace
 	//! character encountered, reset() is called and an exception is thrown.
-	JsonListIterator(QIODevice& input);
+	JsonListIterator(QIODevice* input);
 
 	//! Reads and parses the next object from input. Advances QIODevice to
 	//! just after the object.
@@ -64,7 +64,7 @@ public:
 	void toFront();
 
 private:
-	QIODevice& input;
+	QIODevice* input;
 	qint64 startPos;
 };
 
@@ -86,14 +86,14 @@ class StelJsonParser
 {
 public:
 	//! Create a JsonListIterator from the given input device.
-	static JsonListIterator initListIterator(QIODevice& in) {return JsonListIterator(in);}
+	static JsonListIterator initListIterator(QIODevice* in) {return JsonListIterator(in);}
 
 	//! Parse the given input stream.
-	static QVariant parse(QIODevice& input);
+	static QVariant parse(QIODevice* input);
 	static QVariant parse(const QByteArray& input);
 
 	//! Serialize the passed QVariant as JSON into the output QIODevice.
-	static void write(const QVariant& jsonObject, QIODevice& output, int indentLevel=0);
+	static void write(const QVariant& jsonObject, QIODevice* output, int indentLevel=0);
 
 	//! Serialize the passed QVariant as JSON in a QByteArray.
 	static QByteArray write(const QVariant& jsonObject, int indentLevel=0);

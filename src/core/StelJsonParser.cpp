@@ -21,11 +21,11 @@
 #include <QBuffer>
 #include <stdexcept>
 
-void skipJson(QIODevice& input)
+inline void skipJson(QIODevice* input)
 {
 	// There is a weakness in this code -- it will cause any standalone '/' to be absorbed.
 	char c;
-	while (input.getChar(&c))
+	while (input->getChar(&c))
 	{
 		switch (c)
 		{
@@ -36,11 +36,11 @@ void skipJson(QIODevice& input)
 				break;
 			case '/':
 				{
-					if (!input.getChar(&c))
+					if (!input->getChar(&c))
 						return;
 
 					if (c=='/')
-						input.readLine();
+						input->readLine();
 					else
 					{
 						// We have a problem, we removed a '/'.. This should never happen with properly formatted JSON though
@@ -49,39 +49,73 @@ void skipJson(QIODevice& input)
 				}
 				break;
 			default:
-				input.ungetChar(c);
+				input->ungetChar(c);
 				return;
 		}
 	}
 }
 
-bool tryReadChar(QIODevice& input, char c)
+inline bool tryReadChar(QIODevice* input, char c)
 {
 	char r;
-	if (!input.getChar(&r))
+	if (!input->getChar(&r))
 		return false;
 
 	if (r == c)
 		return true;
 
-	input.ungetChar(r);
+	input->ungetChar(r);
 	return false;
 }
 
-QByteArray readString(QIODevice& input)
+inline bool skipAndConsumeChar(QIODevice* input, char r)
+{
+	char c;
+	while (input->getChar(&c))
+	{
+		switch (c)
+		{
+			case ' ':
+			case '\t':
+			case '\n':
+			case '\r':
+				break;
+			case '/':
+				{
+					if (!input->getChar(&c))
+						throw std::runtime_error(qPrintable(QString("Unexpected '/%1' in the JSON content").arg(c)));
+
+					if (c=='/')
+						input->readLine();
+					else
+					{
+						// We have a problem, we removed a '/'.. This should never happen with properly formatted JSON though
+						throw std::runtime_error(qPrintable(QString("Unexpected '/%1' in the JSON content").arg(c)));
+					}
+				}
+				break;
+			default:
+				if (r==c)
+					return true;
+				input->ungetChar(c);
+				return false;
+		}
+	}
+	return false;
+}
+
+// Read a string without the initial "
+QByteArray readString(QIODevice* input)
 {
 	QByteArray name;
 	char c;
-	input.getChar(&c);
-	if (c!='\"')
-		throw std::runtime_error(qPrintable(QString("Expected '\"' at beginning of string, found: '%1' (ASCII %2)").arg(c).arg((int)(c))));
-	while (input.getChar(&c))
+	while (input->getChar(&c))
 	{
 		switch (c)
 		{
 			case '\\':
 			{
-				input.getChar(&c);
+				input->getChar(&c);
 				// 	case '\"': break;
 				// 	case '\\': break;
 				// 	case '/': break;
@@ -99,21 +133,21 @@ QByteArray readString(QIODevice& input)
 				name+=c;
 		}
 	}
-	if (input.atEnd())
+	if (input->atEnd())
 		throw std::runtime_error(qPrintable(QString("End of file before end of string: "+name)));
 	throw std::runtime_error(qPrintable(QString("Read error before end of string: "+name)));
 	return "";
 }
 
-QVariant readOther(QIODevice& input)
+QVariant readOther(QIODevice* input)
 {
 	QByteArray str;
 	char c;
-	while (input.getChar(&c))
+	while (input->getChar(&c))
 	{
 		if (c==' ' || c==',' || c=='\n' || c=='\r' || c==']' || c=='\t' || c=='}')
 		{
-			input.ungetChar(c);
+			input->ungetChar(c);
 			break;
 		}
 		str+=c;
@@ -135,12 +169,12 @@ QVariant readOther(QIODevice& input)
 }
 
 // Parse the given input stream
-QVariant StelJsonParser::parse(QIODevice& input)
+QVariant StelJsonParser::parse(QIODevice* input)
 {
 	skipJson(input);
 
 	char r;
-	if (!input.getChar(&r))
+	if (!input->getChar(&r))
 		return QVariant();
 
 	switch (r)
@@ -149,29 +183,27 @@ QVariant StelJsonParser::parse(QIODevice& input)
 		{
 			// We've got an object (a tuple)
 			QVariantMap map;
-			skipJson(input);
-			if (tryReadChar(input, '}'))
+			if (skipAndConsumeChar(input, '}'))
 				return map;
 			for (;;)
 			{
-				skipJson(input);
+				if (!skipAndConsumeChar(input, '\"'))
+				{
+					char cc;
+					input->getChar(&cc);
+					throw std::runtime_error(qPrintable(QString("Expected '\"' at beginning of string, found: '%1' (ASCII %2)").arg(cc).arg((int)(cc))));
+				}
 				const QByteArray& ar = readString(input);
 				const QString& key = QString::fromUtf8(ar.constData(), ar.size());
-				skipJson(input);
-				if (!tryReadChar(input, ':'))
+				if (!skipAndConsumeChar(input, ':'))
 					throw std::runtime_error(qPrintable(QString("Expected ':' after a member name: ")+key));
 
 				skipJson(input);
 				map.insert(key, parse(input));
-				skipJson(input);
-
-				if (!tryReadChar(input, ','))
+				if (!skipAndConsumeChar(input, ','))
 					break;
 			}
-
-			skipJson(input);
-
-			if (!tryReadChar(input, '}'))
+			if (!skipAndConsumeChar(input, '}'))
 				throw std::runtime_error("Expected '}' to close an object");
 			return map;
 		}
@@ -179,21 +211,17 @@ QVariant StelJsonParser::parse(QIODevice& input)
 		{
 			// We've got an array (a vector)
 			QVariantList list;
-			skipJson(input);
-			if (tryReadChar(input, ']'))
+			if (skipAndConsumeChar(input, ']'))
 				return list;
 
 			for (;;)
 			{
 				list.append(parse(input));
-				skipJson(input);
-				if (!tryReadChar(input, ','))
+				if (!skipAndConsumeChar(input, ','))
 					break;
 			}
 
-			skipJson(input);
-
-			if (!tryReadChar(input, ']'))
+			if (!skipAndConsumeChar(input, ']'))
 				throw std::runtime_error("Expected ']' to close an array");
 
 			return list;
@@ -201,28 +229,27 @@ QVariant StelJsonParser::parse(QIODevice& input)
 		case '\"':
 		{
 			// We've got a string
-			input.ungetChar('\"');
 			const QByteArray& ar = readString(input);
 			return QString::fromUtf8(ar.constData(), ar.size());
 		}
 		default:
 		{
-			input.ungetChar(r);
+			input->ungetChar(r);
 			return readOther(input);
 		}
 	}
 }
 
 // Serialize the passed QVariant as JSON into the output QIODevice
-void StelJsonParser::write(const QVariant& v, QIODevice& output, int indentLevel)
+void StelJsonParser::write(const QVariant& v, QIODevice* output, int indentLevel)
 {
 	switch (v.type())
 	{
 		case QVariant::Bool:
-			output.write(v.toBool()==true ? "true" : "false");
+			output->write(v.toBool()==true ? "true" : "false");
 			break;
 		case QVariant::Invalid:
-			output.write("null");
+			output->write("null");
 			break;
 		case QVariant::ByteArray:
 		{
@@ -233,7 +260,7 @@ void StelJsonParser::write(const QVariant& v, QIODevice& output, int indentLevel
 			s.replace('\f', "\\f");
 			s.replace('\r', "\\r");
 			s.replace('\t', "\\t");
-			output.write("\"" + s + "\"");
+			output->write("\"" + s + "\"");
 			break;
 		}
 		case QVariant::String:
@@ -245,58 +272,58 @@ void StelJsonParser::write(const QVariant& v, QIODevice& output, int indentLevel
 			s.replace('\f', "\\f");
 			s.replace('\r', "\\r");
 			s.replace('\t', "\\t");
-			output.write(QString("\"%1\"").arg(s).toUtf8());
+			output->write(QString("\"%1\"").arg(s).toUtf8());
 			break;
 		}
 		case QVariant::Int:
 		case QVariant::Double:
-			output.write(v.toString().toUtf8());
+			output->write(v.toString().toUtf8());
 			break;
 		case QVariant::List:
 		{
-			output.putChar('[');
+			output->putChar('[');
 			const QVariantList& l = v.toList();
 			for (int i=0;i<l.size();++i)
 			{
 				// Break line if we start an JSON Object for nice looking
 				if (l.at(i).type()==QVariant::Map)
-					output.putChar('\n');
+					output->putChar('\n');
 				write(l.at(i), output, indentLevel);
 				if (i!=l.size()-1)
-					output.write(", ");
+					output->write(", ");
 			}
-			output.putChar(']');
+			output->putChar(']');
 			break;
 		}
 		case QVariant::Map:
 		{
 			const QByteArray prepend(indentLevel, '\t');
-			output.write(prepend);
-			output.write("{\n");
+			output->write(prepend);
+			output->write("{\n");
 			++indentLevel;
 			const QVariantMap& m = v.toMap();
 			int j =0;
 			for (QVariantMap::ConstIterator i=m.begin();i!=m.end();++i)
 			{
-				output.write(prepend);
-				output.write("\t\"");
-				output.write(i.key().toUtf8());
-				output.write("\": ");
+				output->write(prepend);
+				output->write("\t\"");
+				output->write(i.key().toUtf8());
+				output->write("\": ");
 				// Break line if we start an JSON Object for nice looking
 				if (i.value().type()==QVariant::Map)
-					output.putChar('\n');
+					output->putChar('\n');
 				write(i.value(), output, indentLevel);
 				if (++j!=m.size())
-					output.putChar(',');
-				output.putChar('\n');
+					output->putChar(',');
+				output->putChar('\n');
 			}
-			output.write(prepend);
-			output.write("}");
+			output->write(prepend);
+			output->write("}");
 			--indentLevel;
 			break;
 		}
 		default:
-			output.write("null");
+			output->write("null");
 			//qWarning() << "Cannot serialize QVariant of type " << v.typeName() << " in JSON";
 			break;
 	}
@@ -307,7 +334,7 @@ QByteArray StelJsonParser::write(const QVariant& jsonObject, int indentLevel)
 	QByteArray ar;
 	QBuffer buf(&ar);
 	buf.open(QIODevice::WriteOnly);
-	StelJsonParser::write(jsonObject, buf, indentLevel);
+	StelJsonParser::write(jsonObject, &buf, indentLevel);
 	buf.close();
 	return ar;
 }
@@ -317,46 +344,41 @@ QVariant StelJsonParser::parse(const QByteArray& aar)
 	QByteArray ar = aar;
 	QBuffer buf(&ar);
 	buf.open(QIODevice::ReadOnly);
-	QVariant v = StelJsonParser::parse(buf);
+	QVariant v = StelJsonParser::parse(&buf);
 	buf.close();
 	return v;
 }
 
-JsonListIterator::JsonListIterator(QIODevice& input) : input(input), startPos(input.pos())
+JsonListIterator::JsonListIterator(QIODevice* input) : input(input), startPos(input->pos())
 {
-	skipJson(input);
-	if (!tryReadChar(input, '['))
+	if (!skipAndConsumeChar(input, '['))
 	{
-		reset();
 		throw std::runtime_error("Expected '[' to start a list iterator");
 	}
 }
 
 QVariant JsonListIterator::next() const
 {
-	skipJson(input);
-	tryReadChar(input, ',');
-	QVariant ret = StelJsonParser::parse(input);
-	return ret;
+	skipAndConsumeChar(input, ',');
+	return StelJsonParser::parse(input);
 }
 
 bool JsonListIterator::hasNext()
 {
-	skipJson(input);
-	return !tryReadChar(input, ']');
+	return !skipAndConsumeChar(input, ']');
 }
 
 QVariant JsonListIterator::peekNext() const
 {
-	qint64 pos = input.pos();
+	qint64 pos = input->pos();
 	QVariant ret = next();
-	input.seek(pos);
+	input->seek(pos);
 	return ret;
 }
 
 bool JsonListIterator::reset()
 {
-	return input.seek(startPos);
+	return input->seek(startPos);
 }
 
 void JsonListIterator::toBack()
@@ -364,7 +386,7 @@ void JsonListIterator::toBack()
 	while(hasNext())
 		next();
 	char c;
-	input.getChar(&c);
+	input->getChar(&c);
 }
 void JsonListIterator::toFront()
 {
@@ -372,5 +394,5 @@ void JsonListIterator::toFront()
 	if(!tryReadChar(input, '['))
 		throw std::runtime_error("Expected '[' to start a list iterator");
 	char c;
-	input.getChar(&c);
+	input->getChar(&c);
 }

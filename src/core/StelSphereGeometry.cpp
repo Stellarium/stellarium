@@ -82,7 +82,7 @@ QByteArray SphericalRegion::toJSON() const
 	QByteArray res;
 	QBuffer buf1(&res);
 	buf1.open(QIODevice::WriteOnly);
-	StelJsonParser::write(toQVariant(), buf1);
+	StelJsonParser::write(toQVariant(), &buf1);
 	buf1.close();
 	return res;
 }
@@ -1044,7 +1044,7 @@ Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& n2,
 SphericalRegionP SphericalRegionP::loadFromJson(QIODevice* in)
 {
 	StelJsonParser parser;
-	return loadFromQVariant(parser.parse(*in).toMap());
+	return loadFromQVariant(parser.parse(in).toMap());
 }
 
 SphericalRegionP SphericalRegionP::loadFromJson(const QByteArray& a)
