@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2006 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -76,7 +76,7 @@ StelTexture::~StelTexture()
 	{
 		reportError("Aborted (texture deleted)");
 	}
-	
+
 	if (httpReply)
 	{
 		// HTTP is still doing something for this texture. We abort it.
@@ -84,14 +84,14 @@ StelTexture::~StelTexture()
 		delete httpReply;
 		httpReply = NULL;
 	}
-		
+
 	if (loadThread && loadThread->isRunning())
 	{
 		// The thread is currently running, it needs to be properly stopped
 		loadThread->terminate();
 		loadThread->wait(500);
 	}
-	
+
 	if (id!=0)
 	{
 		if (glIsTexture(id)==GL_FALSE)
@@ -149,7 +149,7 @@ bool StelTexture::bind()
 		connect(httpReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 		return false;
 	}
-	
+
 	// From this point we assume that fullPath is valid
 	// Start loading the image in a thread and return imediately
 	if (!isLoadingImage && downloaded==true)
@@ -245,8 +245,12 @@ bool StelTexture::glLoad()
 	QGLContext::BindOptions opt = QGLContext::InvertedYBindOption;
 	if (loadParams.filtering==GL_LINEAR)
 		opt |= QGLContext::LinearFilteringBindOption;
+
+	// Mipmap seems to be pretty buggy on windows..
+#ifndef WIN32
 	if (loadParams.generateMipmaps==true)
 		opt |= QGLContext::MipmapBindOption;
+#endif
 
 	GLint glformat;
 	if (qImage.isGrayscale())
