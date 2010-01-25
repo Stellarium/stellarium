@@ -46,31 +46,58 @@ void StelVertexArray::draw(StelPainter* painter) const
 
 StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjector* prj) const
 {
-	// We only support TriangleStrip mode for the moment.
-	Q_ASSERT(primitiveType == TriangleStrip);
-	// Also only support not indexed arrays.
+	// Only support not indexed arrays.
 	Q_ASSERT(!isIndexed());
 
 	StelVertexArray ret = *this;
-	ret.indices.reserve(vertex.size() * 3);
-
-	// Create a 'Triangles' vertex array from this 'TriangleStrip' array.
-	for (int i = 2; i < vertex.size(); ++i)
+	
+	// Create a 'Triangles' vertex array from this array.
+	// We have different algorithms for different original mode
+	switch (primitiveType)
 	{
-		if (prj->intersectViewportDiscontinuity(vertex[i], vertex[i-1]) ||
-			prj->intersectViewportDiscontinuity(vertex[i-1], vertex[i-2]) ||
-			prj->intersectViewportDiscontinuity(vertex[i-2], vertex[i]))
+	case TriangleStrip:
+		ret.indices.reserve(vertex.size() * 3);
+
+		for (int i = 2; i < vertex.size(); ++i)
 		{
-			// We have a discontinuity.
-		}
-		else
-		{
-			if (i % 2 == 0)
-				ret.indices << i-2 << i-1 << i;
+			if (prj->intersectViewportDiscontinuity(vertex[i], vertex[i-1]) ||
+				prj->intersectViewportDiscontinuity(vertex[i-1], vertex[i-2]) ||
+				prj->intersectViewportDiscontinuity(vertex[i-2], vertex[i]))
+			{
+				// We have a discontinuity.
+			}
 			else
-				ret.indices << i-2 << i << i-1;
+			{
+				if (i % 2 == 0)
+					ret.indices << i-2 << i-1 << i;
+				else
+					ret.indices << i-2 << i << i-1;
+			}
 		}
+		break;
+
+	case Triangles:
+		ret.indices.reserve(vertex.size());
+
+		for (int i = 0; i < vertex.size(); i += 3)
+		{
+			if (prj->intersectViewportDiscontinuity(vertex[i], vertex[i+1]) ||
+				prj->intersectViewportDiscontinuity(vertex[i+1], vertex[i+2]) ||
+				prj->intersectViewportDiscontinuity(vertex[i+2], vertex[i]))
+			{
+				// We have a discontinuity.
+			}
+			else
+			{
+				ret.indices << i << i+1 << i+2;
+			}
+		}
+		break;
+
+	default:
+		Q_ASSERT(false);
 	}
+
 	// Just in case we don't have any triangles, we also remove all the vertex.
 	// This is because we can't specify an empty indexed VertexArray.
 	// FIXME: we should use an attribute for indexed array.
