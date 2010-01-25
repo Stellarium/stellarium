@@ -30,12 +30,6 @@ double get_mean_sidereal_time (double JD);
 /* Calculate apparent sidereal time from date.*/
 double get_apparent_sidereal_time (double JD);
 
-/* Calculate Earth globe centre distance. */
-void get_earth_centre_dist (float height, double latitude, double * p_sin_o, double * p_cos_o);
-
-/* Calculate the adjustment in altitude of a body due to atmospheric refraction. */
-double get_refraction_adj (double altitude, double atm_pres, double temp);
-
 #ifdef __cplusplus
 }
 #endif
