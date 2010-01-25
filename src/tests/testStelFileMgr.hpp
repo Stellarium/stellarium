@@ -55,7 +55,6 @@ private:
 	QString partialPath2;
 	QStringList testDirs;
 	QStringList testFiles;
-	StelFileMgr* fileMgr;
 };
 
 #endif // _TESTSTELFILEMGR_HPP_
