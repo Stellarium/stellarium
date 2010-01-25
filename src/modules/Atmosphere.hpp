@@ -99,6 +99,18 @@ private:
 
 	//! Vertex shader used for xyYToRGB computation
 	class QGLShaderProgram* atmoShaderProgram;
+	struct {
+		int alphaWaOverAlphaDa;
+		int oneOverGamma;
+		int term2TimesOneOverMaxdLpOneOverGamma;
+		int brightnessScale;
+		int sunPos;
+		int term_x, Ax, Bx, Cx, Dx, Ex;
+		int term_y, Ay, By, Cy, Dy, Ey;
+		int projectionMatrix;
+		int skyVertex;
+		int skyColor;
+	} shaderAttribLocations;
 };
 
 #endif // _ATMOSTPHERE_HPP_
