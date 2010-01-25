@@ -722,11 +722,7 @@ void Oculars::paintMask()
 void Oculars::validateIniFile()
 {
 	// Insure the module directory exists
-	if(!StelFileMgr::exists(StelFileMgr::getUsersDataDirectoryName().append( "/modules/Oculars/"))) {
-		StelFileMgr::mkDir(StelFileMgr::getUsersDataDirectoryName().append( "/modules/Oculars/"));
-		qDebug() << "Oculars::validateIniFile created module directory at "
-				 << StelFileMgr::getUsersDataDirectoryName().append( "/modules/Oculars/");
-	}
+	StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Oculars");
 
 	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
 	QString ocularIniPath = StelFileMgr::findFile("modules/Oculars/", flags) + "ocular.ini";
