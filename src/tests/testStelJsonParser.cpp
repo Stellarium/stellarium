@@ -92,7 +92,7 @@ void TestStelJsonParser::testIterator()
 	try
 	{
 		int tot = 0;
-		JsonListIterator iter = StelJsonParser::initListIterator(buf);
+		JsonListIterator iter = StelJsonParser::initListIterator(&buf);
 		while (iter.hasNext())
 		{
 			QVariant v = iter.next();
@@ -136,6 +136,6 @@ void TestStelJsonParser::benchmarkParse()
 	buf.open(QIODevice::ReadOnly);
 	QVariant result;
 	QBENCHMARK {
-		result = StelJsonParser::parse(buf);
+		result = StelJsonParser::parse(&buf);
 	}
 }

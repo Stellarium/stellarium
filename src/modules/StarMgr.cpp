@@ -215,7 +215,7 @@ void StarMgr::init()
 
 	QFile fic(starConfigFileFullPath);
 	fic.open(QIODevice::ReadOnly);
-	starSettings = StelJsonParser::parse(fic).toMap();
+	starSettings = StelJsonParser::parse(&fic).toMap();
 	fic.close();
 
 	// Increment the 1 each time any star catalog file change
@@ -226,7 +226,7 @@ void StarMgr::init()
 		copyDefaultConfigFile();
 		QFile fic2(starConfigFileFullPath);
 		fic2.open(QIODevice::ReadOnly);
-		starSettings = StelJsonParser::parse(fic2).toMap();
+		starSettings = StelJsonParser::parse(&fic2).toMap();
 		fic2.close();
 	}
 
@@ -373,7 +373,7 @@ void StarMgr::setCheckFlag(const QString& catId, bool b)
 		starSettings["catalogs"]=catalogsDescription;
 		QFile tmp(starConfigFileFullPath);
 		tmp.open(QIODevice::WriteOnly);
-		StelJsonParser::write(starSettings, tmp);
+		StelJsonParser::write(starSettings, &tmp);
 		tmp.close();
 	}
 }

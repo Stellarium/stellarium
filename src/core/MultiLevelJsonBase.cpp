@@ -269,20 +269,20 @@ QVariantMap MultiLevelJsonBase::loadFromJSON(QIODevice& input, bool qZcompressed
 		input.close();
 		QBuffer buf(&ar);
 		buf.open(QIODevice::ReadOnly);
-		map = parser.parse(buf).toMap();
+		map = parser.parse(&buf).toMap();
 		buf.close();
 	}
 	else if (gzCompressed)
 	{
 		QIODevice* d = KFilterDev::device(&input, "application/x-gzip", false);
 		d->open(QIODevice::ReadOnly);
-		map = parser.parse(*d).toMap();
+		map = parser.parse(d).toMap();
 		d->close();
 		delete d;
 	}
 	else
 	{
-		map = parser.parse(input).toMap();
+		map = parser.parse(&input).toMap();
 	}
 
 	if (map.isEmpty())

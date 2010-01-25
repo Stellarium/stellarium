@@ -375,9 +375,8 @@ int Satellites::readJsonFile(void)
 	}
 
 	int numReadOk = 0;
-	StelJsonParser parser;
 	QVariantMap map;
-	map = parser.parse(satelliteJsonFile).toMap();
+	map = StelJsonParser::parse(&satelliteJsonFile).toMap();
 	QVariantList defaultHintColorMap;
 	defaultHintColorMap << defaultHintColor[0] << defaultHintColor[1] << defaultHintColor[2];
 	if (map.contains("hintColor"))
@@ -647,7 +646,7 @@ void Satellites::updateFromFiles(void)
 	}
 	else
 	{
-		map = parser.parse(satelliteJsonFile).toMap();
+		map = parser.parse(&satelliteJsonFile).toMap();
 		satelliteJsonFile.close();
 	}
 	// Right, we should now have a map of all the elements we downloaded.  For each satellite
@@ -695,7 +694,7 @@ void Satellites::updateFromFiles(void)
 		else
 		{
 			qDebug() << "Satellites::updateFromFiles Writing updated JSON file";
-			parser.write(map, satelliteJsonFile);
+			parser.write(map, &satelliteJsonFile);
 			satelliteJsonFile.close();
 		}
 	}
