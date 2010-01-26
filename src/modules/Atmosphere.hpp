@@ -90,7 +90,7 @@ private:
 
 	//! The average luminance of the atmosphere in cd/m2
 	float averageLuminance;
-	double eclipseFactor;
+	float eclipseFactor;
 	ParabolicFader fader;
 	float lightPollutionLuminance;
 
