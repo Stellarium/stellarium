@@ -167,6 +167,9 @@ public:
 
 	static void initStatic();
 
+	//! Get flag for using opengl shaders
+	bool getUseGLShaders() const {return useGLShaders;}
+
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
@@ -175,11 +178,6 @@ public slots:
 	void setVisionModeNight(bool);
 	//! Get flag for activating night vision mode.
 	bool getVisionModeNight() const {return flagNightVision;}
-
-	//! Set flag for using opengl shaders
-	void setUseGLShaders(bool value) {useGLShaders = value;}
-	//! Get flag for using opengl shaders
-	bool getUseGLShaders() {return useGLShaders;}
 
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second

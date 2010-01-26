@@ -158,7 +158,7 @@ int main(int argc, char **argv)
 	StelFileMgr::init();
 
 	// Start logging.
-	StelLogger::init(StelFileMgr::getUsersDataDirectoryName()+"/log.txt");
+	StelLogger::init(StelFileMgr::getUserDir()+"/log.txt");
 
 	// Log command line arguments
 	QString argStr;
