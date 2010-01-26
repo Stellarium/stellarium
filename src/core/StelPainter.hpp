@@ -370,8 +370,19 @@ private:
 	Vec4f currentColor;
 	bool texture2dEnabled;
 	static QGLShaderProgram* basicShaderProgram;
+	struct {
+		int projectionMatrix;
+		int color;
+		int vertex;
+	} basicShaderVars;
 	static QGLShaderProgram* colorShaderProgram;
 	static QGLShaderProgram* texturesShaderProgram;
+	struct {
+		int projectionMatrix;
+		int texCoord;
+		int vertex;
+		int texColor;
+	} texturesShaderVars;
 #endif
 
 	//! The descriptor for the current opengl vertex array
