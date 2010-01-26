@@ -24,7 +24,11 @@
 class StelJsonParserInstance
 {
 public:
-	StelJsonParserInstance(QIODevice* ain) : input(ain), hasNextChar(false), bufferSize(0), bufferPos(0) {;}
+	StelJsonParserInstance(QIODevice* ain) : input(ain), hasNextChar(false)
+	{
+		cur = buffer;
+		last = cur;
+	}
 	inline void skipJson();
 	inline bool tryReadChar(char c);
 	inline bool skipAndConsumeChar(char r);
@@ -39,26 +43,27 @@ private:
 
 #define BUFSIZESTATIC 65536
 	char buffer[BUFSIZESTATIC];
-	int bufferSize;
-	int bufferPos;
+	char* last;
+	char* cur;
 
 	inline bool getNextFromBuffer(char *c)
 	{
-		if (bufferPos==bufferSize)
+		if (cur==last)
 		{
-			if (bufferPos==-1) // End of file
+			if (cur==buffer-1) // End of file
 				return false;
 
-			bufferSize = input->read(buffer, BUFSIZESTATIC);
-			if (bufferSize==0)
+			last = buffer + input->read(buffer, BUFSIZESTATIC);
+			if (last==buffer)
 			{
-				bufferPos=-1;
-				bufferSize=-1;
+				cur = buffer-1;
+				last = cur;
 				return false;
 			}
-			bufferPos=0;
+			cur = buffer;
 		}
-		*c = buffer[bufferPos++];
+		*c = *cur;
+		++cur;
 		return true;
 	}
 
@@ -94,7 +99,7 @@ private:
 
 	inline bool atEnd()
 	{
-		return bufferPos==-1;
+		return cur==buffer-1;
 	}
 };
 
