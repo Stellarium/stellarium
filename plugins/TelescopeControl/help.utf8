@@ -6,6 +6,9 @@
 <h4>Telescope server executables</h4>
 <p>This plug-in can use Stellarium's stand-alone telescope servers/drivers to override the built-in telescope control code.</p>
 <p>Telescope server executable files should be placed in a directory called <em>servers</em> in Stellarium's installation directory, its user data directory, or in the directory specified in the Options tab.</p>
+<h4>How to access the original telescope control feature</h4>
+<p>This plug-in disables Stellarium's original telescope control feature in order to avoid conflicts.</p>
+<p>If you want to set up Stellarium to control a telescope in the old way (by edtiting Stellarium's configuration file) or to use a third-party telescope control software that relies on it (such as <strong>StellariumScope</strong>), you have to disable this plug-in by unmarking <em>Load at startup</em> in the <em>Plugins</em> tab in the <em>Configuration</em> window.</p>
 <h3>Authors</h3>
 <p>Plug-in and GUI programming: <strong>Bogdan Marinov</strong> (bogdan.marinov84 (at) gmail.com)</p>
 <p>This plug-in is based on and reuses a lot of code under the GNU GPL and LGPL:<ul>
