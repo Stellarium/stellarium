@@ -37,35 +37,18 @@ public:
 	//! up to a beginning '[' character. If '[' is not the first non-whitespace
 	//! character encountered, reset() is called and an exception is thrown.
 	JsonListIterator(QIODevice* input);
+	~JsonListIterator();
 
 	//! Reads and parses the next object from input. Advances QIODevice to
 	//! just after the object.
 	//! @return the next object from the array
 	QVariant next() const;
 
-	//! Reads and parses the next object from input. Does not advance QIODevice.
-	//! @return the next object from the array
-	QVariant peekNext() const;
-
 	//! Returns true if the next non-whitespace character is not a ']' character.
 	bool hasNext();
 
-	//! Seeks QIODevice to the position it was at when the JsonListIterator
-	//! constructor was called.
-	//! @return QIODevice::seek()'s return value
-	bool reset();
-
-	//! Seeks QIODevice to just after the beginning '[' character of the array.
-	void toBack();
-
-	//! Seeks QIODevice to just after the terminating ']' character of the
-	//! array. If a ']' character is not encountered, something bad will
-	//! probably happen.
-	void toFront();
-
 private:
-	QIODevice* input;
-	qint64 startPos;
+	class StelJsonParserInstance* parser;
 };
 
 //! @class StelJsonParser
