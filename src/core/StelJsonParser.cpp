@@ -37,7 +37,7 @@ private:
 	char nextChar;
 	bool hasNextChar;
 
-	bool getChar(char* c)
+	inline bool getChar(char* c)
 	{
 		if (hasNextChar)
 		{
@@ -48,13 +48,13 @@ private:
 		return input->getChar(c);
 	}
 
-	void ungetChar(char c)
+	inline void ungetChar(char c)
 	{
 		nextChar=c;
 		hasNextChar=true;
 	}
 
-	void skipLine()
+	inline void skipLine()
 	{
 		if (hasNextChar && nextChar=='\n')
 		{
@@ -65,7 +65,7 @@ private:
 		input->readLine();
 	}
 
-	bool atEnd()
+	inline bool atEnd()
 	{
 		return input->atEnd();
 	}
@@ -164,6 +164,8 @@ QByteArray StelJsonParserInstance::readString()
 	{
 		switch (c)
 		{
+			case '\"':
+				return name;
 			case '\\':
 			{
 				getChar(&c);
@@ -178,8 +180,6 @@ QByteArray StelJsonParserInstance::readString()
 				if (c=='u') {qWarning() << "don't support \\uxxxx char"; continue;}
 				break;
 			}
-			case '\"':
-				return name;
 			default:
 				name+=c;
 		}
