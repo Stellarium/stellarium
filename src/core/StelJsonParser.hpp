@@ -42,12 +42,13 @@ public:
 	//! Reads and parses the next object from input. Advances QIODevice to
 	//! just after the object.
 	//! @return the next object from the array
-	QVariant next() const;
+	QVariant next();
 
 	//! Returns true if the next non-whitespace character is not a ']' character.
-	bool hasNext();
+	bool hasNext() const {return ahasNext;}
 
 private:
+	bool ahasNext;
 	class StelJsonParserInstance* parser;
 };
 
