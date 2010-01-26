@@ -21,11 +21,61 @@
 #include <QBuffer>
 #include <stdexcept>
 
-inline void skipJson(QIODevice* input)
+class StelJsonParserInstance
+{
+public:
+	StelJsonParserInstance(QIODevice* ain) : input(ain), hasNextChar(false){;}
+	inline void skipJson();
+	inline bool tryReadChar(char c);
+	inline bool skipAndConsumeChar(char r);
+	QByteArray readString();
+	QVariant readOther();
+	QVariant parse();
+
+private:
+	QIODevice* input;
+	char nextChar;
+	bool hasNextChar;
+
+	bool getChar(char* c)
+	{
+		if (hasNextChar)
+		{
+			hasNextChar=false;
+			*c = nextChar;
+			return true;
+		}
+		return input->getChar(c);
+	}
+
+	void ungetChar(char c)
+	{
+		nextChar=c;
+		hasNextChar=true;
+	}
+
+	void skipLine()
+	{
+		if (hasNextChar && nextChar=='\n')
+		{
+			hasNextChar=false;
+			return;
+		}
+		hasNextChar=false;
+		input->readLine();
+	}
+
+	bool atEnd()
+	{
+		return input->atEnd();
+	}
+};
+
+void StelJsonParserInstance::skipJson()
 {
 	// There is a weakness in this code -- it will cause any standalone '/' to be absorbed.
 	char c;
-	while (input->getChar(&c))
+	while (getChar(&c))
 	{
 		switch (c)
 		{
@@ -36,11 +86,11 @@ inline void skipJson(QIODevice* input)
 				break;
 			case '/':
 				{
-					if (!input->getChar(&c))
+					if (!getChar(&c))
 						return;
 
 					if (c=='/')
-						input->readLine();
+						skipLine();
 					else
 					{
 						// We have a problem, we removed a '/'.. This should never happen with properly formatted JSON though
@@ -49,29 +99,30 @@ inline void skipJson(QIODevice* input)
 				}
 				break;
 			default:
-				input->ungetChar(c);
+				ungetChar(c);
 				return;
 		}
 	}
 }
 
-inline bool tryReadChar(QIODevice* input, char c)
+
+bool StelJsonParserInstance::tryReadChar(char c)
 {
 	char r;
-	if (!input->getChar(&r))
+	if (!getChar(&r))
 		return false;
 
 	if (r == c)
 		return true;
 
-	input->ungetChar(r);
+	ungetChar(r);
 	return false;
 }
 
-inline bool skipAndConsumeChar(QIODevice* input, char r)
+bool StelJsonParserInstance::skipAndConsumeChar(char r)
 {
 	char c;
-	while (input->getChar(&c))
+	while (getChar(&c))
 	{
 		switch (c)
 		{
@@ -82,11 +133,11 @@ inline bool skipAndConsumeChar(QIODevice* input, char r)
 				break;
 			case '/':
 				{
-					if (!input->getChar(&c))
+					if (!getChar(&c))
 						throw std::runtime_error(qPrintable(QString("Unexpected '/%1' in the JSON content").arg(c)));
 
 					if (c=='/')
-						input->readLine();
+						skipLine();
 					else
 					{
 						// We have a problem, we removed a '/'.. This should never happen with properly formatted JSON though
@@ -97,7 +148,7 @@ inline bool skipAndConsumeChar(QIODevice* input, char r)
 			default:
 				if (r==c)
 					return true;
-				input->ungetChar(c);
+				ungetChar(c);
 				return false;
 		}
 	}
@@ -105,17 +156,17 @@ inline bool skipAndConsumeChar(QIODevice* input, char r)
 }
 
 // Read a string without the initial "
-QByteArray readString(QIODevice* input)
+QByteArray StelJsonParserInstance::readString()
 {
 	QByteArray name;
 	char c;
-	while (input->getChar(&c))
+	while (getChar(&c))
 	{
 		switch (c)
 		{
 			case '\\':
 			{
-				input->getChar(&c);
+				getChar(&c);
 				// 	case '\"': break;
 				// 	case '\\': break;
 				// 	case '/': break;
@@ -133,21 +184,21 @@ QByteArray readString(QIODevice* input)
 				name+=c;
 		}
 	}
-	if (input->atEnd())
+	if (atEnd())
 		throw std::runtime_error(qPrintable(QString("End of file before end of string: "+name)));
 	throw std::runtime_error(qPrintable(QString("Read error before end of string: "+name)));
 	return "";
 }
 
-QVariant readOther(QIODevice* input)
+QVariant StelJsonParserInstance::readOther()
 {
 	QByteArray str;
 	char c;
-	while (input->getChar(&c))
+	while (getChar(&c))
 	{
 		if (c==' ' || c==',' || c=='\n' || c=='\r' || c==']' || c=='\t' || c=='}')
 		{
-			input->ungetChar(c);
+			ungetChar(c);
 			break;
 		}
 		str+=c;
@@ -169,12 +220,12 @@ QVariant readOther(QIODevice* input)
 }
 
 // Parse the given input stream
-QVariant StelJsonParser::parse(QIODevice* input)
+QVariant StelJsonParserInstance::parse()
 {
-	skipJson(input);
+	skipJson();
 
 	char r;
-	if (!input->getChar(&r))
+	if (!getChar(&r))
 		return QVariant();
 
 	switch (r)
@@ -183,27 +234,27 @@ QVariant StelJsonParser::parse(QIODevice* input)
 		{
 			// We've got an object (a tuple)
 			QVariantMap map;
-			if (skipAndConsumeChar(input, '}'))
+			if (skipAndConsumeChar('}'))
 				return map;
 			for (;;)
 			{
-				if (!skipAndConsumeChar(input, '\"'))
+				if (!skipAndConsumeChar('\"'))
 				{
 					char cc;
-					input->getChar(&cc);
+					getChar(&cc);
 					throw std::runtime_error(qPrintable(QString("Expected '\"' at beginning of string, found: '%1' (ASCII %2)").arg(cc).arg((int)(cc))));
 				}
-				const QByteArray& ar = readString(input);
+				const QByteArray& ar = readString();
 				const QString& key = QString::fromUtf8(ar.constData(), ar.size());
-				if (!skipAndConsumeChar(input, ':'))
+				if (!skipAndConsumeChar(':'))
 					throw std::runtime_error(qPrintable(QString("Expected ':' after a member name: ")+key));
 
-				skipJson(input);
-				map.insert(key, parse(input));
-				if (!skipAndConsumeChar(input, ','))
+				skipJson();
+				map.insert(key, parse());
+				if (!skipAndConsumeChar(','))
 					break;
 			}
-			if (!skipAndConsumeChar(input, '}'))
+			if (!skipAndConsumeChar('}'))
 				throw std::runtime_error("Expected '}' to close an object");
 			return map;
 		}
@@ -211,17 +262,17 @@ QVariant StelJsonParser::parse(QIODevice* input)
 		{
 			// We've got an array (a vector)
 			QVariantList list;
-			if (skipAndConsumeChar(input, ']'))
+			if (skipAndConsumeChar(']'))
 				return list;
 
 			for (;;)
 			{
-				list.append(parse(input));
-				if (!skipAndConsumeChar(input, ','))
+				list.append(parse());
+				if (!skipAndConsumeChar(','))
 					break;
 			}
 
-			if (!skipAndConsumeChar(input, ']'))
+			if (!skipAndConsumeChar(']'))
 				throw std::runtime_error("Expected ']' to close an array");
 
 			return list;
@@ -229,13 +280,13 @@ QVariant StelJsonParser::parse(QIODevice* input)
 		case '\"':
 		{
 			// We've got a string
-			const QByteArray& ar = readString(input);
+			const QByteArray& ar = readString();
 			return QString::fromUtf8(ar.constData(), ar.size());
 		}
 		default:
 		{
-			input->ungetChar(r);
-			return readOther(input);
+			ungetChar(r);
+			return readOther();
 		}
 	}
 }
@@ -339,6 +390,12 @@ QByteArray StelJsonParser::write(const QVariant& jsonObject, int indentLevel)
 	return ar;
 }
 
+QVariant StelJsonParser::parse(QIODevice* input)
+{
+	StelJsonParserInstance parser(input);
+	return parser.parse();
+}
+
 QVariant StelJsonParser::parse(const QByteArray& aar)
 {
 	QByteArray ar = aar;
@@ -349,50 +406,29 @@ QVariant StelJsonParser::parse(const QByteArray& aar)
 	return v;
 }
 
-JsonListIterator::JsonListIterator(QIODevice* input) : input(input), startPos(input->pos())
+JsonListIterator::JsonListIterator(QIODevice* input)
 {
-	if (!skipAndConsumeChar(input, '['))
+	parser = new StelJsonParserInstance(input);
+	if (!parser->skipAndConsumeChar('['))
 	{
 		throw std::runtime_error("Expected '[' to start a list iterator");
 	}
 }
 
+JsonListIterator::~JsonListIterator()
+{
+	Q_ASSERT(parser);
+	delete parser;
+	parser=NULL;
+}
+
 QVariant JsonListIterator::next() const
 {
-	skipAndConsumeChar(input, ',');
-	return StelJsonParser::parse(input);
+	parser->skipAndConsumeChar(',');
+	return parser->parse();
 }
 
 bool JsonListIterator::hasNext()
 {
-	return !skipAndConsumeChar(input, ']');
-}
-
-QVariant JsonListIterator::peekNext() const
-{
-	qint64 pos = input->pos();
-	QVariant ret = next();
-	input->seek(pos);
-	return ret;
-}
-
-bool JsonListIterator::reset()
-{
-	return input->seek(startPos);
-}
-
-void JsonListIterator::toBack()
-{
-	while(hasNext())
-		next();
-	char c;
-	input->getChar(&c);
-}
-void JsonListIterator::toFront()
-{
-	reset();
-	if(!tryReadChar(input, '['))
-		throw std::runtime_error("Expected '[' to start a list iterator");
-	char c;
-	input->getChar(&c);
+	return !parser->skipAndConsumeChar(']');
 }
