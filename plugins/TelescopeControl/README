@@ -1,6 +1,6 @@
 Telescope Control Plug-in for Stellarium
 ========================================
-(Version 0.1.8; Bogdan Marinov <bogdan.marinov84@gmail.com>)
+(Version 0.1.9; Bogdan Marinov <bogdan.marinov84@gmail.com>)
 
 1. INTRODUCTION
 ===============
@@ -9,45 +9,25 @@ This plug-in allows Stellarium to be used as a software interface for
 controlling a telescope on a computerized mount (a "GoTo telescope"). Up to nine
 connections to separate telescopes can be maintained simultaneously.
 
-Unlike the previous version of the same feature that used to be integrated in
+Unlike the previous version of the same feature that still is integrated in
 Stellarium, this plug-in offers a more user-friendly graphical interface
 for setting up and configuring a telescope connection.
 
 You can directly control a telescope connected to your computer, or set up
 a connection over a network/the Internet to a telescope connected to another
-computer running the appropriate software. As of version 0.1.8, the plug-in
+computer running the appropriate software. As of version 0.1.9, the plug-in
 supports only the simple Stellarium telescope "drivers" and
 any third party software compatible with Stellarium's telescope protocol
 (e.g. StellariumScope). Support for INDI and/or ASCOM is planned for future
 versions.
 
-
-2. ACKNOWLEDGEMENTS
-===================
-
-Stellarium's telescope control feature was created in 2006 by Johannes Gajdosik
-who created the client/server model and its implementation: Stellarium's
-Telescope and TelescopeMgr classes, and some stand-alone executables
-to communicate directly with a telescope and act as "telescope servers".
-This feature was an integral part of Stellarium from version 0.8.1 to 0.10.2.
-
-This plug-in is based on Johannes' TelescopeMgr class and a lot of the original
-code is still in use. In version 0.1.8 was added support for direct telescope
-control by reusing the telescope servers code. The base code and the Lx200
-example server were written by Johannes Gajdosik. The NexStar server,
-based on the Lx200, was contributed by Michael Heinz.
-
-At the moment I don't know who created the telescope_reticle.png texture,
-but it must have been someone from the Stellarium team. :)
-
-
-3. REQUIREMENTS
+2. REQUIREMENTS
 ===============
 
-As of version 0.1.8, this plug-in IS NOT compatible with Stellarium
+As of version 0.1.9, this plug-in IS NOT compatible with Stellarium
 versions 0.10.2 and earlier.
 
-As of version 0.1.8, this plug-in uses embedded telescope servers, which means
+As of version 0.1.9, this plug-in uses embedded telescope servers, which means
 that it no longer needs external telescope server executables. Nevertheless,
 they can be used to override the embedded code.
 
@@ -61,13 +41,15 @@ binaries yourself:
 https://stellarium.svn.sourceforge.net/svnroot/stellarium/trunk/telescope_server
 
 
-4. USING THE PLUG-IN
+3. USING THE PLUG-IN
 ====================
 
 Some minimal instructions:
 
-Pressing [Alt+0] opens the main Telescope Control window. It allows you to
-Add, Configure, Start and Stop (Connect and Disconnect) a telescope connection.
+The main Telescope Control window is opened by pressing the "Configure" button
+for the Telescope Control plug-in in the "Plugins" tab of the "Configuration"
+window. It allows you to Add, Configure, Start and Stop (Connect and Disconnect)
+a telescope connection.
 
 Pressing Configure for a running connection will cause it to stop. After
 finishing with the configuration, you will have to restart the connection by
@@ -79,24 +61,4 @@ that object and pressing [Ctrl+the number of that telescope] (Ctrl+1 to Ctrl+9).
 You can edit the "Serial port" drop-down list to add serial ports that are not
 included in the list. For now, this list is empty in the Mac OS X version, so
 the names of serial devices always have to be entered manually.
-
-5. BUILDING THE PLUG-IN
-=======================
-
-5.1. DEPENDENCIES
-=================
-
-This plug-in requires Qt version 4.5 or later.
-Check the Stellarium Wiki for instructions on how to install it and
-set up the appropriate environmental variables.
-
-5.2 BUILDING INSTRUCTIONS FOR LINUX
-===================================
-
-TODO.
-
-5.2 BUILDING INSTRUCTIONS FOR MICROSOFT WINDOWS
-===============================================
-
-TODO.
 
