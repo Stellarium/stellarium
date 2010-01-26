@@ -413,6 +413,7 @@ JsonListIterator::JsonListIterator(QIODevice* input)
 	{
 		throw std::runtime_error("Expected '[' to start a list iterator");
 	}
+	ahasNext = !parser->skipAndConsumeChar(']');
 }
 
 JsonListIterator::~JsonListIterator()
@@ -422,13 +423,14 @@ JsonListIterator::~JsonListIterator()
 	parser=NULL;
 }
 
-QVariant JsonListIterator::next() const
+QVariant JsonListIterator::next()
 {
-	parser->skipAndConsumeChar(',');
-	return parser->parse();
-}
-
-bool JsonListIterator::hasNext()
-{
-	return !parser->skipAndConsumeChar(']');
+	QVariant ret = parser->parse();
+	ahasNext = parser->skipAndConsumeChar(',');
+	if (!ahasNext)
+	{
+		if (!parser->skipAndConsumeChar(']'))
+			throw std::runtime_error("Expected ']' to end a list iterator");
+	}
+	return ret;
 }
