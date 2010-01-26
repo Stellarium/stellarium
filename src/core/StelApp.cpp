@@ -154,6 +154,7 @@ void StelApp::init(QSettings* conf)
 
 	useGLShaders = confSettings->value("main/use_glshaders", true).toBool();
 	useGLShaders = useGLShaders && QGLShaderProgram::hasOpenGLShaderPrograms();
+	useGLShaders = useGLShaders && (QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0));
 
 	StelPainter::initSystemGLInfo();
 

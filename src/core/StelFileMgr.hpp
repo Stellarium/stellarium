@@ -171,10 +171,6 @@ public:
 	//! @exception NOT_FOUND if the directory could not be found
 	static QString getInstallationDir();
 
-	//! Returns the path to the users data directory
-	//! @return the path to the users data directory
-	static QString getUsersDataDirectoryName();
-
 	//! Returns the path to the cache directory. Note that subdirectories may need to be created for specific caches.
 	static QString getCacheDir();
 
@@ -217,8 +213,6 @@ private:
 
 	//! Used to store the user data directory
 	static QString userDir;
-
-	static QString usersDataDirectoryName;
 
 	//! Used to store the screenshot directory
 	static QString screenshotDir;

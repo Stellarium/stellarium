@@ -14,7 +14,7 @@
 # ifndef _SHOBJ_H
 # include <shlobj.h>
 # include <QLibrary>
-# endif 
+# endif
 #endif
 
 #ifdef MACOSX
@@ -26,54 +26,41 @@
 // Initialize static members.
 QStringList StelFileMgr::fileLocations;
 QString StelFileMgr::userDir;
-QString StelFileMgr::usersDataDirectoryName;
 QString StelFileMgr::screenshotDir;
 
 void StelFileMgr::init()
 {
 	// Set the userDir member.
-	QFileInfo userDirFI;
 #if defined(WIN32)
 	QString winApiPath = getWin32SpecialDirPath(CSIDL_APPDATA);
-	if (!winApiPath.isEmpty()) 
+	if (!winApiPath.isEmpty())
 	{
-		userDirFI = QFileInfo(winApiPath + "\\Stellarium");
+		userDir = winApiPath + "\\Stellarium";
 	}
-	usersDataDirectoryName = userDirFI.filePath();
 #elif defined(MACOSX)
-	userDirFI.setFile(QDir::homePath() + "/Library/Preferences/Stellarium");
-	usersDataDirectoryName = QDir::homePath() + "/Library/Application Support/Stellarium";
-	QDir dataDirectory(usersDataDirectoryName);
-	if (!dataDirectory.exists())
-	{
-		bool success = dataDirectory.mkdir(usersDataDirectoryName);
-		if (!success) {
-			qFatal("ERROR StelFileMgr::StelFileMgr could not create users data directory at %s", 
-				   qPrintable(usersDataDirectoryName));
-		}
-	}
-	fileLocations.append(usersDataDirectoryName);
-#else 
-	userDirFI.setFile(QDir::homePath() + "/.stellarium");
-	usersDataDirectoryName = userDirFI.filePath();
+	userDir = QDir::homePath() + "/Library/Application Support/Stellarium";
+#else
+	userDir = QDir::homePath() + "/.stellarium";
 #endif
-	if (!userDirFI.exists() || !userDirFI.isDir())
-	{
-		qWarning() << "WARNING StelFileMgr::StelFileMgr user dir does not exist: "
-			<< userDirFI.filePath();
-	}
-	else if (!userDirFI.isWritable())
-	{
-		qWarning() << "WARNING StelFileMgr::StelFileMgr user dir is not writable: "
-			<< userDirFI.filePath();
-	}
-	userDir = userDirFI.filePath();
 
-	// OK, now we have the userDir set, we will add it and the installation 
-	// dir to the search path.  The user directory is first.
+	if (!QFile(userDir).exists())
+	{
+		qWarning() << "User config directory does not exist: " << userDir;
+	}
+	try
+	{
+		makeSureDirExistsAndIsWritable(userDir);
+	}
+	catch (std::runtime_error &e)
+	{
+		qFatal("Error: cannot create user config directory: %s", e.what());
+	}
+
+
+	// OK, now we have the userDir set, add it to the search path
 	fileLocations.append(userDir);
-	
-	// then the installation directory
+
+	// Then add the installation directory to the search path
 	try
 	{
 		fileLocations.append(getInstallationDir());
@@ -88,13 +75,6 @@ void StelFileMgr::init()
 #else
 	screenshotDir = QDir::homePath();
 #endif
-
-	QDir userDirTmp(StelFileMgr::getUserDir());
-	if (!userDirTmp.exists())
-	{
-		// Try to create it
-		StelFileMgr::mkDir(StelFileMgr::getUserDir());
-	}
 }
 
 
@@ -105,7 +85,7 @@ QString StelFileMgr::findFile(const QString& path, const Flags& flags)
 	// explicitly specified relative paths
 	if (path[0] == '.')
 	{
-		if (fileFlagsCheck(path, flags)) 
+		if (fileFlagsCheck(path, flags))
 			return path;
 		else
 			throw (std::runtime_error(QString("file does not match flags: %1").arg(path).toLocal8Bit().constData()));
@@ -114,7 +94,7 @@ QString StelFileMgr::findFile(const QString& path, const Flags& flags)
 	// Qt resource files
 	if (path.startsWith(":/"))
 		return path;
-		
+
 	// explicitly specified absolute paths
 	if ( isAbsolute(path) )
 	{
@@ -123,13 +103,13 @@ QString StelFileMgr::findFile(const QString& path, const Flags& flags)
 		else
 			throw (std::runtime_error(QString("file does not match flags: %1").arg(path).toLocal8Bit().constData()));
 	}
-	
+
 	foreach (QString i, fileLocations)
 	{
 		if (fileFlagsCheck(i + "/" + path, flags))
 			return i + "/" + path;
 	}
-	
+
 	throw(std::runtime_error(QString("file not found: %1").arg(path).toLocal8Bit().constData()));
 }
 
@@ -153,14 +133,14 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 		}
 		return result;
 	}
-			
+
 	// If path is "complete" (a full path), we just look in there, else
 	// we append relative paths to the search paths maintained by this class.
 	if (QFileInfo(path).isAbsolute())
 		listPaths.append("");
 	else
 		listPaths = fileLocations;
-	
+
 	foreach (QString li, listPaths)
 	{
 		QFileInfo thisPath;
@@ -168,10 +148,10 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 			thisPath.setFile(path);
 		else
 			thisPath.setFile(li+"/"+path);
-		
-		if (thisPath.isDir()) 
+
+		if (thisPath.isDir())
 		{
-  			QDir thisDir(thisPath.absoluteFilePath());
+			QDir thisDir(thisPath.absoluteFilePath());
 			QStringList lsOut = thisDir.entryList();
 			for (QStringList::const_iterator fileIt = lsOut.constBegin(); fileIt != lsOut.constEnd(); ++fileIt)
 			{
@@ -182,25 +162,25 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 						fullPath.setFile(path+"/"+*fileIt);
 					else
 						fullPath.setFile(li+"/"+path+"/"+*fileIt);
-					
+
 					// default is to return all objects in this directory
 					bool returnThisOne = true;
-				
+
 					// but if we have flags set, that will filter the result
 					if ((flags & Writable) && !fullPath.isWritable())
 						returnThisOne = false;
-				
+
 					if ((flags & Directory) && !fullPath.isDir())
 						returnThisOne = false;
-					
+
 					if ((flags & File) && !fullPath.isFile())
 						returnThisOne = false;
-					
+
 					// we only want to return "hidden" results if the Hidden flag is set
 					if (!(flags & Hidden))
-						if ((*fileIt)[0] == '.') 
+						if ((*fileIt)[0] == '.')
 							returnThisOne = false;
-				
+
 					// OK, add the ones we want to the result
 					if (returnThisOne)
 					{
@@ -268,7 +248,7 @@ bool StelFileMgr::fileFlagsCheck(const QString& path, const Flags& flags)
 {
 	if ( ! (flags & Hidden) )
 	{
-		// Files are considered Hidden on POSIX systems if the file name begins with 
+		// Files are considered Hidden on POSIX systems if the file name begins with
 		// a "." character.  Unless we have the Hidden flag set, reject and path
 		// where the basename starts with a .
 		if (baseName(path)[0] == '.')
@@ -276,7 +256,7 @@ bool StelFileMgr::fileFlagsCheck(const QString& path, const Flags& flags)
 			return(false);
 		}
 	}
-	
+
 	QFileInfo thePath(path);
 	QDir parentDir = thePath.dir();
 
@@ -284,9 +264,9 @@ bool StelFileMgr::fileFlagsCheck(const QString& path, const Flags& flags)
 	{
 		// if the file already exists, it is not a new file
 		if (thePath.exists())
-			return false;				
+			return false;
 
-		// To be able to create a new file, we need to have a 
+		// To be able to create a new file, we need to have a
 		// parent directory which is writable.
 		QFileInfo pInfo(parentDir.absolutePath());
 		if (!pInfo.exists() || !pInfo.isWritable())
@@ -298,19 +278,19 @@ bool StelFileMgr::fileFlagsCheck(const QString& path, const Flags& flags)
 	{
 		if ((flags & Writable) && !thePath.isWritable())
 			return(false);
-			
+
 		if ((flags & Directory) && !thePath.isDir())
 			return(false);
-			
+
 		if ((flags & File) && !thePath.isFile())
-			return(false); 
+			return(false);
 	}
 	else
 	{
 		// doesn't exist and New flag wasn't requested
 		return(false);
 	}
-		
+
 	return(true);
 }
 
@@ -367,11 +347,6 @@ void StelFileMgr::setUserDir(const QString& newDir)
 	}
 }
 
-QString StelFileMgr::getUsersDataDirectoryName()
-{
-	return usersDataDirectoryName;
-}
-
 QString StelFileMgr::getInstallationDir()
 {
 	// If we are running from the build tree, we use the files from there...
@@ -402,7 +377,7 @@ QString StelFileMgr::getInstallationDir()
 		throw (std::runtime_error("NOT FOUND"));
 	}
 }
-	
+
 QString StelFileMgr::getScreenshotDir()
 {
 	return screenshotDir;
@@ -413,15 +388,13 @@ void StelFileMgr::setScreenshotDir(const QString& newDir)
 	QFileInfo userDirFI(newDir);
 	if (!userDirFI.exists() || !userDirFI.isDir())
 	{
-		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir does not exist: "
-		           << userDirFI.filePath();
-		throw (std::runtime_error("NOT_VALID"));
+		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir does not exist: " << userDirFI.filePath();
+		throw std::runtime_error("NOT_VALID");
 	}
 	else if (!userDirFI.isWritable())
 	{
-		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir is not writable: "
-		           << userDirFI.filePath();
-		throw (std::runtime_error("NOT_VALID"));
+		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir is not writable: " << userDirFI.filePath();
+		throw std::runtime_error("NOT_VALID");
 	}
 	screenshotDir = userDirFI.filePath();
 }
@@ -435,7 +408,7 @@ QString StelFileMgr::getLocaleDir()
 	localePath = QFileInfo(getInstallationDir() + "/locale");
 #else
 	// Linux, BSD etc, the locale dir is set in the config.h
-	// but first, if we are in the development tree, don't rely on an 
+	// but first, if we are in the development tree, don't rely on an
 	// install having been done.
 	if (getInstallationDir() == ".")
 	{
@@ -446,7 +419,7 @@ QString StelFileMgr::getLocaleDir()
 	else
 		localePath = QFileInfo(QFile::decodeName(INSTALL_LOCALEDIR));
 
-	
+
 #endif
 	if (localePath.exists())
 	{
@@ -465,7 +438,7 @@ QString StelFileMgr::getCacheDir()
 	const QString& cachePath = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
 	if (cachePath.isEmpty())
 	{
-		return getUsersDataDirectoryName()+"/cache";
+		return getUserDir()+"/cache";
 	}
 	return cachePath;
 }

@@ -576,7 +576,7 @@ void TelescopeControl::loadConfiguration()
 		{
 			qDebug() << "TelescopeControl: No telescope servers directory detected.";
 			useServerExecutables = false;
-			serverDirectoryPath = StelFileMgr::getUsersDataDirectoryName() + "/servers";
+			serverDirectoryPath = StelFileMgr::getUserDir() + "/servers";
 		}
 		if(!serverDirectoryPath.isEmpty())
 		{
