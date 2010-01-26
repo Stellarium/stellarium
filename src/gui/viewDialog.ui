@@ -341,7 +341,7 @@
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>4</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout">
@@ -1467,13 +1467,6 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QCheckBox" name="starloreLanguageCheckBox">
-               <property name="text">
-                <string>Use associated language for sky labeling</string>
-               </property>
-              </widget>
-             </item>
-             <item>
               <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox">
                <property name="text">
                 <string>Use this sky culture as default</string>
@@ -1585,8 +1578,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../../data/mainRes.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
