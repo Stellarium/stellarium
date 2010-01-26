@@ -1,6 +1,6 @@
-0.10.3 [release date to be decided]
-Based on Qt 4.6.
-Bundling of plugins: Satellites, Ocular, AngleMeasure, CompassMarks.
+0.10.3 [2010-01-27]
+Based on Qt 4.6.x
+Bundling of plugins: Satellites, Oculars, AngleMeasure, CompassMarks, TelescopeControl.
 New script engine improvements including variable script running speed.
 Made tabs in GUI smaller by moving titles under the icons.
 Allowed to compile and link plugins statically.
@@ -22,6 +22,13 @@ Updated the plugin API, allowing easier distribution of static plugins.
 Fixed magnitude computation for most of the planets.
 Use GL Shader for stars rendering if available.
 Re-organized the startup by moving log and command line processing to main.cpp.
+Implemented partial support of OpenGLES 2.0.
+Moved official plugins code into plugins/ and changed the cmake config so that they are automatically compiled in static.
+Re-coded the texture engine based on Qt loading features (Got rid of explicit libjpeg and libpng dependencies!).
+Allowed to first render the sky in a frame buffer.
+Moved the code related to viewport distortions into a new class StelViewportEffect based on frame buffer object.
+Added working cmake targets for compilig and runing unit tests.
+Added a delay before making Simbad name lookup queries to avoid sending too many requests.
 
 0.10.2 [2009-03-09]
 Based on Qt 4.5.
@@ -165,7 +172,7 @@ Automatically get locale codes on win32 (works sometimes)
 Many bugs fixes, thanks to bug reporters on sf.net!
 
 0.8.0 [2006-04-30]
-BaseFont selectable in config 
+BaseFont selectable in config
 Constellation select from script fixed
 TUI editing of some colors
 Added constellation boundaries
@@ -237,7 +244,7 @@ Added loading bars for nebulae and stars loading.
 Corrected Sun rotational period.
 Added missing hipparcos stars to database.
 Added splash screen, new icons and improved pointers by Johan.
-Improved Milky Way tone conversion. 
+Improved Milky Way tone conversion.
 Added more star names.
 Sky labels now default to user locale language if possible.
 Added fader on nebula hints (hints can now draw even when atmosphere is on).
@@ -259,7 +266,7 @@ Added some accented characters to courrierfont.
 Updated windows installer.
 
 0.6.2 [2004-11-18]
-Fixed time display bug (1 hour ahead of actual sky time during standard time if your timezone has daylight savings).  
+Fixed time display bug (1 hour ahead of actual sky time during standard time if your timezone has daylight savings).
 NOTE: Time is only displayed as standard time (no daylight savings effects).
 Fixed Milky Way drawing incorrectly (inside out) in desktop mode.
 Fixed Milky Way always on regardless of config setting.
@@ -281,7 +288,7 @@ Added meteor showers (key 9)
 Added deep space object image credits
 Added manual (really semi-auto) zoom option (centers for you when you start zooming, zooms in increments with key presses)
 Brightened star labels for readability
-	
+
 0.6.0 [31-05-2004]
 Fixed atmosphere flash bug.
 Fixed disk viewport windows version bug.
@@ -379,7 +386,7 @@ Fixed a configure.in problem for MACOSX portability.
 0.4.9 [17/10/2002]
 Fixed the binary file bug under win32 (just forget a "b" in the file open mode....)
 Use the Hipparcos catalog : there are now 120 000 stars (10 000 before).
-Added a grid class for spherical star data optimisation. 
+Added a grid class for spherical star data optimisation.
 Modified star names files and constellation files structures.
 MACOSX version now compile and execute with the autoconf script.
 
@@ -446,7 +453,7 @@ Globaly cleaned the code source.
 Continued the gui.
 Handle the Keyboard on the top of Glut.
 Changed the drawing of the stars : 2D drawing is a lot faster and really only draw those which are in the field of view. The program is 20% faster!!
-We now can't switch between resolution mode or fullscreen/windowed mode during the execution. This will prevent the program from crashs and hardware dependent bugs. Everything is statically configurable in config.txt. 
+We now can't switch between resolution mode or fullscreen/windowed mode during the execution. This will prevent the program from crashs and hardware dependent bugs. Everything is statically configurable in config.txt.
 Fixed hundred of minor bugs (and probably added others...).
 I now have written about 4300 lines of real code for this project!
 
@@ -465,7 +472,7 @@ Started to change the structure of the program.
 
 0.4.0 [06/01/2002]
 Started to write my own Graphic User Interface starting from the embryon of the one made by Chris Laurel in "Celestia" because MUI (given with the glut package isn't beautiful enought...). This gui will be independent of stellarium and very re-usable.
-Did an attempt to use a tcl parser to manage a real config file but it was to heavy-> so i changed my mind and stop that... 
+Did an attempt to use a tcl parser to manage a real config file but it was to heavy-> so i changed my mind and stop that...
 
 0.3.9 [04/01/2002]
 Create my own font manager : faster and more beautiful than before (I used bitmap font before).
@@ -482,24 +489,24 @@ Add a button and a functionality to show where are the nebulaes with a dot.
 Added some messier nebulaes.
 
 0.3.7 [27/12/2001]
-One more day of work : 
+One more day of work :
 Added SUPER moving pointers for each type of object.
 Planets and moon now have shading which works correctly!! I had a lot of problems with that. But it's OK now...
 Improve planet drawing perfomance.
 Added some messier nebulaes.
 Fixed minor bugs and visuals.
 
-0.3.6 [26/12/2001] : 
+0.3.6 [26/12/2001] :
 Add a class LesNebuleuses to manage Nebulaes and add some nebulaes -> very beautiful and realistic!
 We can now select with the mouse planets and nebulaes.
 Fixed a texture bug when changing resolution.
 Translate the help in english.
 Fixed minor bugs and visuals.
 
-0.3.4 [17/06/2001] : 
+0.3.4 [17/06/2001] :
 Fixed the bug for the selection, improve global perfomance, and continue to comment the code.
 
-0.3.3 [Before] : 
-I succed to compile my program in linux and windows with the same sources files ! 
-I decided to share my source code in GPL. 
+0.3.3 [Before] :
+I succed to compile my program in linux and windows with the same sources files !
+I decided to share my source code in GPL.
 My code was yet free but not very "readable" so i will try to comment it in english, and to make a version file (this file) etc... I now have to read docs to produce a "standard GNU code"...
