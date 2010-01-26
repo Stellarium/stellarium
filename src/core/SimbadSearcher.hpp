@@ -24,6 +24,7 @@
 #include <QMap>
 
 class QNetworkReply;
+class QNetworkAccessManager;
 
 //! @class SimbadLookupReply
 //! Contains all the information about a current simbad lookup query.
@@ -32,52 +33,56 @@ class SimbadLookupReply : public QObject
 {
 	Q_OBJECT
 	Q_ENUMS(SimbadLookupStatus);
-	
+
 public:
 	friend class SimbadSearcher;
-	
+
 	//! Possible status for a simbad query.
 	enum SimbadLookupStatus
 	{
 		SimbadLookupQuerying,		//!< Simbad is still being queried.
-  		SimbadLookupErrorOccured,	//!< An error occured while looking up Simbad. Call getErrorString() for a description of the error.
+		SimbadLookupErrorOccured,	//!< An error occured while looking up Simbad. Call getErrorString() for a description of the error.
 		SimbadLookupFinished		//!< The query is over. The reply can be deleted.
 	};
 
 	~SimbadLookupReply();
-	
+
 	//! Get the result list of matching objectName/position.
 	QMap<QString, Vec3d> getResults() const {return resultPositions;}
-	
+
 	//! Get the current status.
 	SimbadLookupStatus getCurrentStatus() const {return currentStatus;}
-	
+
 	//! Get a I18n string describing the current status. It can be used e.g for reporting in widgets.
 	QString getCurrentStatusString() const;
-	
+
 	//! Get the error descrition string. Return empty string if no error occured.
 	QString getErrorString() const {return errorString;}
-	
+
 signals:
 	//! Triggered when the lookup status change.
 	void statusChanged();
-	
+
 private slots:
 	void httpQueryFinished();
-	
+	void delayTimerCompleted();
+
 private:
 	//! Private constructor can be called by SimbadSearcher only.
-	SimbadLookupReply(QNetworkReply* r);
-	
+	SimbadLookupReply(const QString& url, QNetworkAccessManager* mgr, int delayMs=500);
+
+	QString url;
+
 	//! The reply used internally.
 	QNetworkReply* reply;
-	
+	QNetworkAccessManager* netMgr;
+
 	//! The list of resulting objectNames/Position in ICRS.
 	QMap<QString, Vec3d> resultPositions;
-	
+
 	//! Current lookup status.
 	SimbadLookupStatus currentStatus;
-	
+
 	//! The error description. Empty if no errors occured.
 	QString errorString;
 };
@@ -97,11 +102,11 @@ public:
 	//! @param objectName the possibly truncated object name.
 	//! @param maxNbResult the maximum number of returned result.
 	//! @return a new SimbadLookupReply which is owned by the caller.
-	SimbadLookupReply* lookup(const QString& objectName, int maxNbResult=1);
-		
-private:	
+	SimbadLookupReply* lookup(const QString& objectName, int maxNbResult=1, int delayMs=500);
+
+private:
 	//! The network manager used query simbad
-	class QNetworkAccessManager* networkMgr;
+	QNetworkAccessManager* networkMgr;
 };
 
 #endif /*SIMBADSEARCHER_HPP_*/
