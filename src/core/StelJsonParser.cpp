@@ -24,7 +24,7 @@
 class StelJsonParserInstance
 {
 public:
-	StelJsonParserInstance(QIODevice* ain) : input(ain), hasNextChar(false){;}
+	StelJsonParserInstance(QIODevice* ain) : input(ain), hasNextChar(false), bufferSize(0), bufferPos(0) {;}
 	inline void skipJson();
 	inline bool tryReadChar(char c);
 	inline bool skipAndConsumeChar(char r);
@@ -37,6 +37,31 @@ private:
 	char nextChar;
 	bool hasNextChar;
 
+#define BUFSIZESTATIC 65536
+	char buffer[BUFSIZESTATIC];
+	int bufferSize;
+	int bufferPos;
+
+	inline bool getNextFromBuffer(char *c)
+	{
+		if (bufferPos==bufferSize)
+		{
+			if (bufferPos==-1) // End of file
+				return false;
+
+			bufferSize = input->read(buffer, BUFSIZESTATIC);
+			if (bufferSize==0)
+			{
+				bufferPos=-1;
+				bufferSize=-1;
+				return false;
+			}
+			bufferPos=0;
+		}
+		*c = buffer[bufferPos++];
+		return true;
+	}
+
 	inline bool getChar(char* c)
 	{
 		if (hasNextChar)
@@ -45,7 +70,7 @@ private:
 			*c = nextChar;
 			return true;
 		}
-		return input->getChar(c);
+		return getNextFromBuffer(c);
 	}
 
 	inline void ungetChar(char c)
@@ -62,12 +87,14 @@ private:
 			return;
 		}
 		hasNextChar=false;
-		input->readLine();
+		char c;
+		while (getNextFromBuffer(&c) && c!='\n')
+		{}
 	}
 
 	inline bool atEnd()
 	{
-		return input->atEnd();
+		return bufferPos==-1;
 	}
 };
 
@@ -203,12 +230,6 @@ QVariant StelJsonParserInstance::readOther()
 		}
 		str+=c;
 	}
-	if (str=="true")
-		return QVariant(true);
-	if (str=="false")
-		return QVariant(false);
-	if (str=="null")
-		return QVariant();
 	bool ok;
 	const int i = str.toInt(&ok);
 	if (ok)
@@ -216,6 +237,12 @@ QVariant StelJsonParserInstance::readOther()
 	const double d = str.toDouble(&ok);
 	if (ok)
 		return d;
+	if (str=="true")
+		return QVariant(true);
+	if (str=="false")
+		return QVariant(false);
+	if (str=="null")
+		return QVariant();
 	throw std::runtime_error(qPrintable(QString("Invalid JSON value: \"")+str+"\""));
 }
 
@@ -240,7 +267,7 @@ QVariant StelJsonParserInstance::parse()
 			{
 				if (!skipAndConsumeChar('\"'))
 				{
-					char cc;
+					char cc=0;
 					getChar(&cc);
 					throw std::runtime_error(qPrintable(QString("Expected '\"' at beginning of string, found: '%1' (ASCII %2)").arg(cc).arg((int)(cc))));
 				}
