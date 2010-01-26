@@ -41,7 +41,7 @@ inline bool myisnan(double value)
 }
 
 Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL), colorGrid(NULL), indices(NULL),
-					   averageLuminance(0.f), eclipseFactor(1.), lightPollutionLuminance(0)
+					   averageLuminance(0.f), eclipseFactor(1.f), lightPollutionLuminance(0)
 {
 	setFadeDuration(3.f);
 	useShader = StelApp::getInstance().getUseGLShaders();
@@ -197,50 +197,48 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 
 	// Update the eclipse intensity factor to apply on atmosphere model
 	// these are for radii
-	const double sun_angular_size = atan(696000./AU/_sunPos.length());
-	const double moon_angular_size = atan(1738./AU/moonPos.length());
-	const double touch_angle = sun_angular_size + moon_angular_size;
+	const float sun_angular_size = atan(696000.f/AU/_sunPos.length());
+	const float moon_angular_size = atan(1738.f/AU/moonPos.length());
+	const float touch_angle = sun_angular_size + moon_angular_size;
 
 	// determine luminance falloff during solar eclipses
 	_sunPos.normalize();
 	moonPos.normalize();
-	double separation_angle = std::acos(_sunPos.dot(moonPos));  // angle between them
+	float separation_angle = std::acos(_sunPos.dot(moonPos));  // angle between them
 	// qDebug("touch at %f\tnow at %f (%f)\n", touch_angle, separation_angle, separation_angle/touch_angle);
 	// bright stars should be visible at total eclipse
 	// TODO: correct for atmospheric diffusion
 	// TODO: use better coverage function (non-linear)
 	// because of above issues, this algorithm darkens more quickly than reality
-	if( separation_angle < touch_angle)
+	if (separation_angle < touch_angle)
 	{
-		double dark_angle = moon_angular_size - sun_angular_size;
-		float min;
-		if(dark_angle < 0)
+		float dark_angle = moon_angular_size - sun_angular_size;
+		float min = 0.0001f;  // so bright stars show up at total eclipse
+		if (dark_angle < 0.f)
 		{
 			// annular eclipse
 			float asun = sun_angular_size*sun_angular_size;
 			min = (asun - moon_angular_size*moon_angular_size)/asun;  // minimum proportion of sun uncovered
 			dark_angle *= -1;
 		}
-		else min = 0.0001;  // so bright stars show up at total eclipse
 
 		if (separation_angle < dark_angle)
 			eclipseFactor = min;
 		else
-			eclipseFactor = min + (1.-min)*(separation_angle-dark_angle)/(touch_angle-dark_angle);
+			eclipseFactor = min + (1.f-min)*(separation_angle-dark_angle)/(touch_angle-dark_angle);
 	}
 	else
-		eclipseFactor = 1.;
+		eclipseFactor = 1.f;
 
 
 	// No need to calculate if not visible
 	if (!fader.getInterstate())
 	{
-		averageLuminance = 0.001 + lightPollutionLuminance;
+		averageLuminance = 0.001f + lightPollutionLuminance;
 		return;
 	}
 
 	// Calculate the atmosphere RGB for each point of the grid
-
 	float sunPos[3];
 	sunPos[0] = _sunPos[0];
 	sunPos[1] = _sunPos[1];
@@ -271,7 +269,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	// Compute the sky color for every point above the ground
 	for (int i=0; i<(1+skyResolutionX)*(1+skyResolutionY); ++i)
 	{
-		Vec2f &v(posGrid[i]);
+		const Vec2f &v(posGrid[i]);
 		prj->unProject(v[0],v[1],point);
 
 		Q_ASSERT(fabs(point.lengthSquared()-1.0) < 1e-10);
