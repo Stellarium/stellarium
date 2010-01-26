@@ -48,6 +48,8 @@ QPainter* StelPainter::qPainter = NULL;
  QGLShaderProgram* StelPainter::colorShaderProgram=NULL;
  QGLShaderProgram* StelPainter::texturesShaderProgram=NULL;
  QGLShaderProgram* StelPainter::basicShaderProgram=NULL;
+ StelPainter::BasicShaderVars StelPainter::basicShaderVars;
+ StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
 #endif
 
 void StelPainter::setQPainter(QPainter* p)
@@ -1629,10 +1631,10 @@ void StelPainter::initSystemGLInfo()
 	texturesShaderProgram->addShader(fshader2);
 	texturesShaderProgram->link();
 
-	texturesShaderProgram.projectionMatrix = basicShaderProgram->uniformLocation("projectionMatrix");
-	texturesShaderProgram.color = basicShaderProgram->attributeLocation("texCoord");
-	texturesShaderProgram.vertex = basicShaderProgram->attributeLocation("vertex");
-	texturesShaderProgram.vertex = basicShaderProgram->uniformLocation("texColor");
+	texturesShaderVars.projectionMatrix = texturesShaderProgram->uniformLocation("projectionMatrix");
+	texturesShaderVars.texCoord = texturesShaderProgram->attributeLocation("texCoord");
+	texturesShaderVars.vertex = texturesShaderProgram->attributeLocation("vertex");
+	texturesShaderVars.texColor = texturesShaderProgram->uniformLocation("texColor");
 
 	QGLShader *vshader3 = new QGLShader(QGLShader::Vertex);
 	const char *vsrc3 =
@@ -1733,7 +1735,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	QGLShaderProgram* pr=NULL;
 
 	const Mat4f& m = getProjector()->getProjectionMatrix();
-	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]));
+	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
 
 	if (!texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
