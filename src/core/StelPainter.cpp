@@ -1629,6 +1629,11 @@ void StelPainter::initSystemGLInfo()
 	texturesShaderProgram->addShader(fshader2);
 	texturesShaderProgram->link();
 
+	texturesShaderProgram.projectionMatrix = basicShaderProgram->uniformLocation("projectionMatrix");
+	texturesShaderProgram.color = basicShaderProgram->attributeLocation("texCoord");
+	texturesShaderProgram.vertex = basicShaderProgram->attributeLocation("vertex");
+	texturesShaderProgram.vertex = basicShaderProgram->uniformLocation("texColor");
+
 	QGLShader *vshader3 = new QGLShader(QGLShader::Vertex);
 	const char *vsrc3 =
 		"attribute mediump vec3 vertex;\n"
@@ -1650,6 +1655,10 @@ void StelPainter::initSystemGLInfo()
 	basicShaderProgram->addShader(vshader3);
 	basicShaderProgram->addShader(fshader3);
 	basicShaderProgram->link();
+
+	basicShaderVars.projectionMatrix = basicShaderProgram->uniformLocation("projectionMatrix");
+	basicShaderVars.color = basicShaderProgram->uniformLocation("color");
+	basicShaderVars.vertex = basicShaderProgram->attributeLocation("vertex");
 #endif
 }
 
@@ -1722,32 +1731,34 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 #else
 	Q_ASSERT(projectedVertexArray.enabled);
 	QGLShaderProgram* pr=NULL;
+
+	const Mat4f& m = getProjector()->getProjectionMatrix();
+	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]));
+
 	if (!texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
 		pr = basicShaderProgram;
+		pr->bind();
+		pr->setAttributeArray(basicShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
+		pr->enableAttributeArray(basicShaderVars.vertex);
+		pr->setUniformValue(basicShaderVars.projectionMatrix, qMat);
+		pr->setUniformValue(basicShaderVars.color, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
 	}
 	else if (texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
 		pr = texturesShaderProgram;
+		pr->bind();
+		pr->setAttributeArray(texturesShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
+		pr->enableAttributeArray(texturesShaderVars.vertex);
+		pr->setUniformValue(texturesShaderVars.projectionMatrix, qMat);
+		pr->setUniformValue(texturesShaderVars.texColor, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
+		pr->setAttributeArray(texturesShaderVars.texCoord, (const GLfloat*)texCoordArray.pointer, 2);
+		pr->enableAttributeArray(texturesShaderVars.texCoord);
 	}
 	else
 	{
 		qDebug() << "Unhandled parameters.";
 		return;
-	}
-	pr->bind();
-	pr->setAttributeArray("vertex", (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
-	pr->enableAttributeArray("vertex");
-	const Mat4f& m = getProjector()->getProjectionMatrix();
-	pr->setUniformValue("projectionMatrix", QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]));
-
-	if (pr==basicShaderProgram)
-		pr->setUniformValue("color", currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
-	else if (pr==texturesShaderProgram)
-	{
-		pr->setUniformValue("texColor", currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
-		pr->setAttributeArray("texCoord", (const GLfloat*)texCoordArray.pointer, 2);
-		pr->enableAttributeArray("texCoord");
 	}
 #endif
 	if (indices)
@@ -1757,9 +1768,13 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 #ifdef STELPAINTER_GL2
 	if (pr==texturesShaderProgram)
 	{
-		pr->disableAttributeArray("texCoord");
+		pr->disableAttributeArray(texturesShaderVars.texCoord);
+		pr->disableAttributeArray(texturesShaderVars.vertex);
 	}
-	pr->disableAttributeArray("vertex");
+	else if (pr == texturesShaderProgram)
+	{
+		pr->disableAttributeArray(basicShaderVars.vertex);
+	}
 	pr->release();
 #endif
 }
