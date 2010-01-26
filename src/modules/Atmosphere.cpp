@@ -95,6 +95,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 			qWarning() << "Warnings while linking shader: " << atmoShaderProgram->log();
 		}
 
+		atmoShaderProgram->bind();
 		shaderAttribLocations.alphaWaOverAlphaDa = atmoShaderProgram->attributeLocation("alphaWaOverAlphaDa");
 		shaderAttribLocations.oneOverGamma = atmoShaderProgram->attributeLocation("oneOverGamma");
 		shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma = atmoShaderProgram->attributeLocation("term2TimesOneOverMaxdLpOneOverGamma");
@@ -115,6 +116,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL
 		shaderAttribLocations.projectionMatrix = atmoShaderProgram->attributeLocation("projectionMatrix");
 		shaderAttribLocations.skyVertex = atmoShaderProgram->attributeLocation("skyVertex");
 		shaderAttribLocations.skyColor = atmoShaderProgram->attributeLocation("skyColor");
+		atmoShaderProgram->release();
 	}
 }
 
