@@ -149,7 +149,7 @@ void StelSkyDrawer::init()
 	texBigHalo = StelApp::getInstance().getTextureManager().createTexture("haloLune.png");
 	texSunHalo = StelApp::getInstance().getTextureManager().createTexture("halo.png");
 
-	useShader = StelApp::getInstance().getUseGLShaders();
+	useShader = StelApp::getInstance().getUseGLShaders() && (QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_1) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0));
 	if (useShader)
 	{
 		qDebug() << "Use vertex shader for stars rendering";
