@@ -22,18 +22,29 @@
 #include <QNetworkReply>
 #include <QNetworkAccessManager>
 #include <QDebug>
+#include <QTimer>
 
-SimbadLookupReply::SimbadLookupReply(QNetworkReply* r) : reply(r), currentStatus(SimbadLookupQuerying)
+SimbadLookupReply::SimbadLookupReply(const QString& aurl, QNetworkAccessManager* anetMgr, int delayMs) : url(aurl), reply(NULL), netMgr(anetMgr), currentStatus(SimbadLookupQuerying)
 {
-	connect(r, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
+	// First wait before starting query. This avoids sending a query for each autocompletion letter.
+	QTimer::singleShot(delayMs, this, SLOT(delayTimerCompleted()));
 }
 
 SimbadLookupReply::~SimbadLookupReply()
 {
-	disconnect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
-	reply->abort();
-	reply->deleteLater();
-	reply = NULL;
+	if (reply)
+	{
+		disconnect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
+		reply->abort();
+		reply->deleteLater();
+		reply = NULL;
+	}
+}
+
+void SimbadLookupReply::delayTimerCompleted()
+{
+	reply = netMgr->get(QNetworkRequest(url));
+	connect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
 }
 
 void SimbadLookupReply::httpQueryFinished()
@@ -45,7 +56,7 @@ void SimbadLookupReply::httpQueryFinished()
 		emit statusChanged();
 		return;
 	}
-	
+
 	// No error, try to parse the Simbad result
 	QByteArray line;
 	bool found = false;
@@ -62,7 +73,7 @@ void SimbadLookupReply::httpQueryFinished()
 		}
 	}
 	if (found)
-	{	
+	{
 		line = reply->readLine();
 		line.chop(1); // Remove a line break at the end
 		while (!line.isEmpty())
@@ -105,7 +116,7 @@ void SimbadLookupReply::httpQueryFinished()
 			line.chop(1); // Remove a line break at the end
 		}
 	}
-	
+
 	currentStatus = SimbadLookupFinished;
 	emit statusChanged();
 }
@@ -131,13 +142,11 @@ SimbadSearcher::SimbadSearcher(QObject* parent) : QObject(parent)
 }
 
 // Lookup in Simbad for the passed object name.
-SimbadLookupReply* SimbadSearcher::lookup(const QString& objectName, int maxNbResult)
+SimbadLookupReply* SimbadSearcher::lookup(const QString& objectName, int maxNbResult, int delayMs)
 {
 	// Create the Simbad query
 	QString url("http://simbad.u-strasbg.fr/simbad/sim-script?script=format object \"%COO(d;A D)\\n%IDLIST(1)\"\n");
 	url += QString("set epoch J2000\nset limit %1\n query id ").arg(maxNbResult);
 	url += objectName;
-	QNetworkReply* netReply = networkMgr->get(QNetworkRequest(url));
-	SimbadLookupReply* r = new SimbadLookupReply(netReply);
-	return r;
+	return new SimbadLookupReply(url, networkMgr, delayMs);
 }
