@@ -96,12 +96,13 @@ void StelModuleMgr::unloadModule(const QString& moduleID, bool alsoDelete)
 /*************************************************************************
  Get the corresponding module or NULL if can't find it.
 *************************************************************************/
-StelModule* StelModuleMgr::getModule(const QString& moduleID)
+StelModule* StelModuleMgr::getModule(const QString& moduleID, bool noWarning)
 {
 	QMap<QString, StelModule*>::const_iterator iter = modules.find(moduleID);
 	if (iter==modules.end())
 	{
-		qWarning() << "Warning can't find module called " << moduleID << ".";
+		if (noWarning==false)
+			qWarning() << "Warning can't find module called " << moduleID << ".";
 		return NULL;
 	}
 	return iter.value();

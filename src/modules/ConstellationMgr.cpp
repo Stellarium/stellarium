@@ -123,7 +123,7 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: no constellationsart.fab file found for sky culture " << skyCultureDir;
+		qDebug() << "No constellationsart.fab file found for sky culture " << skyCultureDir;
 	}
 
 	try
@@ -315,12 +315,14 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	setFlagLabels(flagNames);
 	setFlagBoundaries(flagBoundaries);
 
+	// It's possible to have no art - just constellations
+	if (artfileName.isNull() || artfileName.isEmpty())
+		return;
 	QFile fic(artfileName);
 	if (!fic.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
 		qWarning() << "Can't open constellation art file" << fileName  << "for culture" << cultureName;
-		return; // possible to have no art - just constellations
-		Q_ASSERT(0);
+		return;
 	}
 
 	totalRecords=0;
