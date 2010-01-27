@@ -62,13 +62,12 @@ CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
 
 ########### Others ###########
 # Activate translation with gettext
-SET(RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release, 1 or 0.")
-SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be supported, option are: 1 or 0.")
-# Create a dynamic library libstelMain
-SET(GENERATE_STELMAINLIB 0)
+SET(RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release.")
+SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be supported.")
+
 # Activate sound support
-SET(ENABLE_SOUND 0 CACHE BOOL "Define whether sound support should be activated, options are: 1 or 0.")
-SET(ENABLE_SCRIPT_CONSOLE 0 CACHE BOOL "Define whether to build the script console feature, options are: 1 or 0.")
+SET(ENABLE_SOUND 0 CACHE BOOL "Define whether sound support should be activated, options are.")
+SET(ENABLE_SCRIPT_CONSOLE 1 CACHE BOOL "Define whether to build the script console feature, options are.")
 SET(ENABLE_STRATOSCRIPT_COMPAT 0 CACHE BOOL "Set to 1 or true if you want to build the Stratoscript compatibility mode")
 SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
 SET(OPENGL_MODE Desktop CACHE STRING "Choose the type of openGL to use, options are: Desktop, ES2")
@@ -84,6 +83,8 @@ ENDIF()
 # This is for allowing to link dynamic plug-ins afterward
 IF(WIN32)
   SET(GENERATE_STELMAINLIB 1)
+ELSE()
+  SET(GENERATE_STELMAINLIB 0)
 ENDIF()
 
 IF(WIN32)
