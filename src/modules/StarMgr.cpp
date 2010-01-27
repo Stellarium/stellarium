@@ -933,8 +933,7 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 	}
 	catch(std::runtime_error& e)
 	{
-		qWarning() << "WARNING: could not load star_names.fab for sky culture "
-				   << skyCultureDir << ": " << e.what();
+		qDebug() << "Could not load star_names.fab for sky culture " << skyCultureDir << ": " << e.what();
 	}
 
 	try

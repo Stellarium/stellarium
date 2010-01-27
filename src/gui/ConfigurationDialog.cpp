@@ -497,7 +497,7 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 			html += "</body></html>";
 			ui->pluginsInfoBrowser->setHtml(html);
 			ui->pluginLoadAtStartupCheckBox->setChecked(desc.loadAtStartup);
-			StelModule* pmod = StelApp::getInstance().getModuleMgr().getModule(desc.info.id);
+			StelModule* pmod = StelApp::getInstance().getModuleMgr().getModule(desc.info.id, true);
 			if (pmod != NULL)
 				ui->pluginConfigureButton->setEnabled(pmod->configureGui(false));
 			else

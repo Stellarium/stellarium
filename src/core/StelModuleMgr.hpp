@@ -68,7 +68,7 @@ public:
 
 	//! Get the corresponding module or NULL if can't find it.
 	//! @param moduleID the QObject name of the module instance, by convention it is equal to the class name
-	StelModule* getModule(const QString& moduleID);
+	StelModule* getModule(const QString& moduleID, bool noWarning=false);
 
 	//! Get the list of all the currently registered modules
 	QList<StelModule*> getAllModules() {return modules.values();}
