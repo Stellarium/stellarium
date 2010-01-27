@@ -188,7 +188,7 @@ QString HelpDialog::getFooterText(void)
 
 	footer += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	footer += Qt::escape(q_("{Bug reporting and feature request system} - if something doesn't work properly or is missing and is not listed in the tracker, you can open bug reports here.")).replace(a_rx, "<a href=\"http://bugs.launchpad.net/stellarium/+filebug\">\\1</a>");
+	footer += Qt::escape(q_("{Bug reporting and feature request system} - if something doesn't work properly or is missing and is not listed in the tracker, you can open bug reports here.")).replace(a_rx, "<a href=\"http://bugs.launchpad.net/stellarium/\">\\1</a>");
 	footer += "</p>\n";
 
 	footer += "<p>";
@@ -271,7 +271,7 @@ void HelpDialog::updateText(void)
 	// populate About tab
 	newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
 	// Note: this legal notice is not suitable for traslation
-	newHtml += "<h3>Copyright &copy; 2000-2009 Stellarium Developers</h3>";
+	newHtml += "<h3>Copyright &copy; 2000-2010 Stellarium Developers</h3>";
 	newHtml += "<p>This program is free software; you can redistribute it and/or ";
 	newHtml += "modify it under the terms of the GNU General Public License ";
 	newHtml += "as published by the Free Software Foundation; either version 2 ";
