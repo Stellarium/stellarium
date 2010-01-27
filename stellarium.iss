@@ -15,24 +15,28 @@ LicenseFile=COPYING
 Compression=zip/9
 
 [Files]
-Source: "builds\msys\src\stellarium.exe"; DestDir: "{app}"
-Source: "builds\msys\src\libstelmain.dll"; DestDir: "{app}"
+Source: "C:\Program Files\Stellarium\bin\stellarium.exe"; DestDir: "{app}"
+Source: "C:\Program Files\Stellarium\lib\libstelMain.dll"; DestDir: "{app}"
 Source: "README"; DestDir: "{app}"; Flags: isreadme; DestName: "README.rtf"
 Source: "INSTALL"; DestDir: "{app}"; DestName: "INSTALL.rtf"
 Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.rtf"
 Source: "AUTHORS"; DestDir: "{app}"; DestName: "AUTHORS.rtf"
 Source: "ChangeLog"; DestDir: "{app}";
-Source: "libpng13.dll"; DestDir: "{app}";
-Source: "mingwm10.dll"; DestDir: "{app}";
-Source: "mingwm10.dll"; DestDir: "{app}";
+Source: "libgcc_s_dw2-1.dll"; DestDir: "{app}";
+Source: "libiconv2.dll"; DestDir: "{app}";
+Source: "libintl3.dll"; DestDir: "{app}";
+Source: "QtConcurrent.dll"; DestDir: "{app}";
+Source: "QtSql4.dll"; DestDir: "{app}";
+Source: "QtSvg4.dll"; DestDir: "{app}";
 Source: "QtCore4.dll"; DestDir: "{app}";
 Source: "QtGui4.dll"; DestDir: "{app}";
 Source: "QtOpenGL4.dll"; DestDir: "{app}";
 Source: "QtNetwork4.dll"; DestDir: "{app}";
 Source: "QtScript4.dll"; DestDir: "{app}";
-Source: "builds\msys\_CPack_Packages\win32\TGZ\Stellarium-0.10.3-win32\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
+Source: "QtXml4.dll"; DestDir: "{app}";
+Source: "C:\Program Files\Stellarium\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
 ; Locales
-Source: "builds\msys\_CPack_Packages\win32\TGZ\Stellarium-0.10.3-win32\share\locale\*"; DestDir: "{app}\locale\"; Flags: recursesubdirs
+Source: "C:\Program Files\Stellarium\share\locale\*"; DestDir: "{app}\locale\"; Flags: recursesubdirs
 
 [UninstallDelete]
 
