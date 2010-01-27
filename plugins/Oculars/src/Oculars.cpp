@@ -174,7 +174,7 @@ void Oculars::draw(StelCore* core)
 		if (telescope->getName() != QString(""))  {
 			string4.append(" : ").append(telescope->getName());
 		}
-		QString string5 = "Magnifacation: " + QVariant(((int)(ocular->getMagnification(telescope) * 10.0)) / 10.0).toString() + "x";
+		QString string5 = "Magnification: " + QVariant(((int)(ocular->getMagnification(telescope) * 10.0)) / 10.0).toString() + "x";
 		QString string6 = "Image Circle: " + QVariant(((int)(ocular->getExitCircle(telescope) * 10.0)) / 10.0).toString() + "mm";
 		QString string7 = "FOV: " + QVariant(((int)(ocular->getAcutalFOV(telescope) * 10000.00)) / 10000.0).toString() + QChar(0x00B0);
 
