@@ -6,7 +6,7 @@ SET(TELESCOPE_CONTROL_VERSION "${TELESCOPE_CONTROL_MAJOR}.${TELESCOPE_CONTROL_MI
 #Don't forget to increment the version in device_models.json too,
 #otherwise the local copy will be overwritten each time Stellarium is started.
 
-SET(USE_TOGGLEABLE_TELESCOPE_WINDOW 0 CACHE BOOL "The telescopes dialog window can be toggled with a keyboard shortcut and/or a toolbar button.")
+SET(USE_TOGGLEABLE_TELESCOPE_WINDOW 1 CACHE BOOL "The telescopes dialog window can be toggled with a keyboard shortcut and/or a toolbar button.")
 SET(USE_TOOLBAR_BUTTON 1 CACHE BOOL "Add a button to the bottom toolbar to toggle the telescopes dialog window.")
 SET(COMPATIBILITY_001003 1 CACHE BOOL "Make the plug-in compatible with Stellarium version 0.10.3.")
 

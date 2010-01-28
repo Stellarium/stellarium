@@ -194,7 +194,7 @@ void TelescopeControl::init()
 		pixmapOnIcon = new QPixmap(":/telescopeControl/bt_TelescopeControl_on.png");
 		pixmapOffIcon = new QPixmap(":/telescopeControl/bt_TelescopeControl_off.png");
 		toolbarButton = new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, gui->getGuiActions("actionShow_Telescopes_Window"));
-		gui->getButtonBar()->addButton(toolbarButton);
+		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		#endif //USE_TOOLBAR_BUTTON
 
 		#endif //USE_TOGGLEABLE_TELESCOPE_WINDOW
