@@ -236,7 +236,6 @@ void StarMgr::init()
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
 	setLabelsAmount(conf->value("stars/labels_amount",3).toDouble());
-	mmapThresholdBytes = conf->value("stars/max_memory", 1).toULongLong() * 1024*1024;
 
 	objectMgr->registerStelObjectMgr(this);
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   // Load pointer texture
@@ -281,7 +280,7 @@ void StarMgr::setStelStyle(const StelStyle& style)
 	setLabelColor(StelUtils::strToVec3f(conf->value(section+"/star_label_color", defaultColor).toString()));
 }
 
-bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc, StelLoadingBar* lb)
+bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc, StelLoadingBar* lb)
 {
 	const bool checked = catDesc.value("checked").toBool();
 	QString catalogFileName = catDesc.value("fileName").toString();
@@ -321,20 +320,26 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc, StelLoadingBar* lb
 		fic.open(QIODevice::ReadOnly);
 		// Compute the MD5 sum
 		QCryptographicHash md5Hash(QCryptographicHash::Md5);
+		static const qint64 maxStarBufMd5 = 1024*1024*8;
+		char* mmd5buf = (char*)malloc(maxStarBufMd5);
 		while (!fic.atEnd())
-			md5Hash.addData(fic.read(1024*1024*2));
+		{
+			qint64 sz = fic.read(mmd5buf, maxStarBufMd5);
+			md5Hash.addData(mmd5buf, sz);
+		}
+		free(mmd5buf);
 		fic.close();
 		if (md5Hash.result().toHex()!=catDesc.value("checksum").toByteArray())
 		{
-			qWarning() << "Error checking file" << catalogFileName << ": file is corrupted (md5 sums don't match).";
+			qWarning() << "Error checking file" << catalogFileName << ": file is corrupted. MD5 sums don't match: found " << md5Hash.result().toHex() << " expected " << catDesc.value("checksum").toByteArray();
 			fic.remove();
 			return false;
 		}
-
+		qWarning() << "MD5 sum correct!";
 		setCheckFlag(catDesc.value("id").toString(), true);
 	}
 
-	ZoneArray* const z = ZoneArray::create(catalogFilePath, StelFileMgr::size(catalogFilePath) > mmapThresholdBytes, lb);
+	ZoneArray* const z = ZoneArray::create(catalogFilePath, true, lb);
 	if (z)
 	{
 		if (maxGeodesicGridLevel < z->level)
@@ -381,7 +386,7 @@ void StarMgr::setCheckFlag(const QString& catId, bool b)
 void StarMgr::loadData(QVariantMap starsConfig)
 {
 	StelLoadingBar* lb = StelApp::getInstance().getStelLoadingBar();
-
+	Q_ASSERT(lb);
 	// Please do not init twice:
 	Q_ASSERT(maxGeodesicGridLevel < 0);
 
@@ -390,7 +395,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	catalogsDescription = starsConfig.value("catalogs").toList();
 	foreach (const QVariant& catV, catalogsDescription)
 	{
-		const QVariantMap& m = catV.toMap();
+		QVariantMap m = catV.toMap();
 		const QString& catalogId = m.value("id").toString();
 		const QString& catalogFileName = m.value("fileName").toString();
 		lb->SetMessage(q_("Loading catalog %1 from file %2").arg(catalogId, catalogFileName));

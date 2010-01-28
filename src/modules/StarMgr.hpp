@@ -183,7 +183,7 @@ public:
 	//! Try to load the given catalog, even if it is marched as unchecked.
 	//! Mark it as checked if checksum is correct.
 	//! @return false in case of failure.
-	bool checkAndLoadCatalog(const QVariantMap& m, StelLoadingBar* lb=NULL);
+	bool checkAndLoadCatalog(QVariantMap m, StelLoadingBar* lb=NULL);
 
 private:
 
@@ -217,8 +217,6 @@ private:
 	bool flagStarName;
 	float labelsAmount;
 	bool gravityLabel;
-
-	qint64 mmapThresholdBytes;
 
 	int maxGeodesicGridLevel;
 	int lastMaxSearchLevel;
