@@ -121,6 +121,7 @@ StelModule* StelModuleMgr::loadPlugin(const QString& moduleID)
 			Q_ASSERT(desc.pluginInterface);
 			StelModule* sMod = desc.pluginInterface->getStelModule();
 			qDebug() << "Loaded plugin " << moduleID << ".";
+			pluginDescriptorList[moduleID].loaded=true;
 			return sMod;
 		}
 	}
@@ -145,7 +146,7 @@ void StelModuleMgr::unloadAllPlugins()
 	while (i.hasPrevious())
 	{
 		const PluginDescriptor& d = i.previous();
-		if (d.loadAtStartup==false)
+		if (d.loaded==false)
 			continue;
 		unloadModule(d.info.id, true);
 		qDebug() << "Unloaded plugin " << d.info.id << ".";
@@ -206,7 +207,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 			pluginDescriptorList.insert(mDesc.info.id, mDesc);
 		}
 	}
-	
+
 	// Then list dynamic libraries from the modules/ directory
 	QSet<QString> moduleDirs;
 	try
@@ -254,7 +255,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 			qWarning() << "Plugin " << dir << " will not be open.";
 			continue;
 		}
-		
+
 		StelPluginInterface* pluginInterface = qobject_cast<StelPluginInterface *>(obj);
 		if (pluginInterface)
 		{
@@ -273,7 +274,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 			conf->setValue("plugins_load_at_startup/"+iter.key(), false);
 		iter->loadAtStartup = conf->value("plugins_load_at_startup/"+iter.key()).toBool();
 	}
-	
+
 	pluginDescriptorListLoaded = true;
 	return pluginDescriptorList.values();
 }
