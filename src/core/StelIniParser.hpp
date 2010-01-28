@@ -27,8 +27,6 @@
 // ourselves.
 #if defined(WIN32)
 	static const QString stelEndl="\r\n";
-#elif defined(MACOSX)
-	static const QString stelEndl="\r";
 #else
 	static const QString stelEndl="\n";
 #endif
