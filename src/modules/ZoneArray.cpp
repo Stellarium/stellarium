@@ -127,7 +127,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap, Stel
 			dbStr += "to native format ";
 #endif
 			dbStr += "before mmap loading";
-			qDebug() << dbStr;
+			qWarning() << dbStr;
 			return 0;
 		}
 		dbStr += "byteswap ";
