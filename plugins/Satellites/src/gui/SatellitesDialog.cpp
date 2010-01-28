@@ -1,18 +1,18 @@
 /*
  * Stellarium Satellites plugin config dialog
- * 
+ *
  * Copyright (C) 2009 Matthew Gates
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -38,16 +38,19 @@
 //#include "StelTranslator.hpp"
 #define q_ QString
 
-SatellitesDialog::SatellitesDialog()
+SatellitesDialog::SatellitesDialog() : updateTimer(NULL)
 {
 	ui = new Ui_satellitesDialog;
 }
 
 SatellitesDialog::~SatellitesDialog()
-{	
-	updateTimer->stop(); 
-	delete updateTimer; 
-	updateTimer = NULL;
+{
+	if (updateTimer)
+	{
+		updateTimer->stop();
+		delete updateTimer;
+		updateTimer = NULL;
+	}
 	delete ui;
 }
 
@@ -73,10 +76,10 @@ void SatellitesDialog::createDialogContent()
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
-        updateTimer->start(7000);
+		updateTimer->start(7000);
 
 	// Settings tab / General settings group
-	connect(ui->showLabelsCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getGui()->getGuiActions("actionShow_Satellite_Labels"), SLOT(setChecked(bool))); 
+	connect(ui->showLabelsCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getGui()->getGuiActions("actionShow_Satellite_Labels"), SLOT(setChecked(bool)));
 	connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)), GETSTELMODULE(Satellites), SLOT(setLabelFontSize(int)));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
@@ -120,7 +123,7 @@ void SatellitesDialog::groupFilterChanged(int index)
 	else
 		ui->satellitesList->insertItems(0,GETSTELMODULE(Satellites)->getSatellites(ui->groupsCombo->currentText()));
 
-	// If the previously selected item is still in the list after the update, select it, 
+	// If the previously selected item is still in the list after the update, select it,
 	// else selected the first item in the list.
 	QList<QListWidgetItem*> foundItems = ui->satellitesList->findItems(prevSelection, Qt::MatchExactly);
 	if (foundItems.count() > 0 && !prevSelection.isEmpty())
