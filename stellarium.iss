@@ -25,6 +25,8 @@ Source: "ChangeLog"; DestDir: "{app}";
 Source: "libgcc_s_dw2-1.dll"; DestDir: "{app}";
 Source: "libiconv2.dll"; DestDir: "{app}";
 Source: "libintl3.dll"; DestDir: "{app}";
+Source: "mingwm10.dll"; DestDir: "{app}";
+Source: "phonon4.dll"; DestDir: "{app}";
 Source: "QtConcurrent.dll"; DestDir: "{app}";
 Source: "QtSql4.dll"; DestDir: "{app}";
 Source: "QtSvg4.dll"; DestDir: "{app}";
@@ -34,6 +36,7 @@ Source: "QtOpenGL4.dll"; DestDir: "{app}";
 Source: "QtNetwork4.dll"; DestDir: "{app}";
 Source: "QtScript4.dll"; DestDir: "{app}";
 Source: "QtXml4.dll"; DestDir: "{app}";
+Source: "sqldrivers\qsqlite4.dll"; DestDir: "{app}\sqldrivers\";
 Source: "C:\Program Files\Stellarium\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
 ; Locales
 Source: "C:\Program Files\Stellarium\share\locale\*"; DestDir: "{app}\locale\"; Flags: recursesubdirs
