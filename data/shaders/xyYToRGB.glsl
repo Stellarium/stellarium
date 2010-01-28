@@ -33,7 +33,7 @@ void main()
 	// First compute the xy color component
 	// color contains the unprojected vertex position in r,g,b
 	// + the Y (luminance) component of the color in the alpha channel
-	if (color[3]>0.01) 
+	if (color[3]>0.01)
 	{
 		float cosDistSunq = sunPos[0]*color[0] + sunPos[1]*color[1] + sunPos[2]*color[2];
 		float distSun=acos(cosDistSunq);
@@ -89,16 +89,15 @@ void main()
 			float V = color[2] * (1.33 * (1. + color[1] / color[0] + color[0] * (1. - color[0] - color[1])) - 1.68);
 			color[2] = 0.4468 * (1. - s) * V + s * color[2];
 		}
-	
+
 		// 2. Adapt the luminance value and scale it to fit in the RGB range [2]
 		// color[2] = std::pow(adaptLuminanceScaled(color[2]), oneOverGamma);
 		color[2] = pow(color[2]*pi*0.0001, alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
-	
+
 		// Convert from xyY to XZY
 		// Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white
-		const mat4 adobeRGB = mat4(2.04148, -0.969258, 0.0134455, 0., -0.564977, 1.87599, -0.118373, 0., -0.344713, 0.0415557, 1.01527, 0., 
-0., 0., 0., 1.);
-		resultSkyColor = (adobeRGB*vec4(color[0] * color[2] / color[1], color[2], (1. - color[0] - color[1]) * color[2] / color[1], 1.)) * 
-brightnessScale;
+		vec3 mediump tmp = vec3(color[0] * color[2] / color[1], color[2], (1. - color[0] - color[1]) * color[2] / color[1]);
+		resultSkyColor = vec4(2.04148*tmp.x-0.564977*tmp.y-0.344713*tmp.z, -0.969258*tmp.x+1.87599*tmp.y+0.0415557*tmp.z, 0.0134455*tmp.x-0.118373*tmp.y+1.01527*tmp.z, 1.);
+		resultSkyColor*=brightnessScale;
 	}
 }
