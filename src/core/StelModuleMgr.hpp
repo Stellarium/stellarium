@@ -82,14 +82,17 @@ public:
 	//! Contains the information read from the module.ini file
 	struct PluginDescriptor
 	{
+		PluginDescriptor() : loadAtStartup(false), loaded(false) {;}
 		//! The static info for the plugin.
 		StelPluginInfo info;
 		//! If true, the module is automatically loaded at startup
 		bool loadAtStartup;
-		
-		private:
-			friend class StelModuleMgr;
-			StelPluginInterface* pluginInterface;
+		//! True if the plugin is currently loaded.
+		bool loaded;
+
+	private:
+		friend class StelModuleMgr;
+		StelPluginInterface* pluginInterface;
 	};
 
 	//! Return the list of all the external module found in the modules directories
@@ -108,7 +111,7 @@ private:
 
 	//! True if modules were removed, and therefore the calling list need to be regenerated
 	bool callingListsToRegenerate;
-	
+
 	QMap<QString, StelModuleMgr::PluginDescriptor> pluginDescriptorList;
 	bool pluginDescriptorListLoaded;
 };
