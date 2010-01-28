@@ -7,261 +7,264 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-09 18:31+0100\n"
-"PO-Revision-Date: 2009-02-27 13:41+0000\n"
-"Last-Translator: Skymoon <Unknown>\n"
+"POT-Creation-Date: 2010-01-28 17:53+0100\n"
+"PO-Revision-Date: 2010-01-19 02:12+0000\n"
+"Last-Translator: timdream <timdream@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-03-06 13:56+0000\n"
+"X-Launchpad-Export-Date: 2010-01-28 13:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/modules/ConstellationMgr.cpp:377
-#, qt-format
-msgid "Loading Constellation Art: %1/%2"
-msgstr "載入星座圖繪: %1/%2"
+#: src/ui_locationDialogGui.h:408
+msgid " m"
+msgstr " m"
 
-#: src/modules/StarMgr.cpp:291
-#, qt-format
-msgid "Loading catalog %1 from file %2"
-msgstr "從檔案 %2 載入星表 %1"
+#: src/gui/StelGuiItems.cpp:548
+#, no-c-format, qt-format
+msgid "%1m"
+msgstr "%1m"
 
-#: src/modules/LandscapeMgr.cpp:418
-msgid "Author: "
-msgstr "作者: "
-
-#: src/modules/LandscapeMgr.cpp:421
-msgid "Location: "
-msgstr "位置: "
-
-#: src/modules/LandscapeMgr.cpp:426
+#: src/modules/LandscapeMgr.cpp:433
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/modules/LandscapeMgr.cpp:429
-msgid "Planet: "
-msgstr "行星: "
+#: src/ui_dateTimeDialogGui.h:297 src/ui_dateTimeDialogGui.h:298
+msgid "/"
+msgstr "/"
 
-#: src/modules/Nebula.cpp:94
-#, qt-format
-msgid "Type: <b>%1</b>"
-msgstr "類型: <b>%1</b>"
+#: src/ui_viewDialog.h:1018
+msgid "0"
+msgstr "0"
 
-#: src/modules/Nebula.cpp:97 src/modules/Planet.cpp:135
-#, qt-format
-msgid "Magnitude: <b>%1</b>"
-msgstr "視星等: <b>%1</b>"
+#: src/ui_viewDialog.h:1019
+msgid "10"
+msgstr "10"
 
-#: src/modules/Nebula.cpp:102
-#, qt-format
-msgid "Size: %1"
-msgstr "大小: %1"
+#: src/ui_viewDialog.h:1021
+msgid "10000"
+msgstr "10000"
 
-#: src/modules/Nebula.cpp:238
-msgid "Galaxy"
-msgstr "星系"
+#: src/ui_viewDialog.h:1022
+msgid "144000"
+msgstr "144000"
 
-#: src/modules/Nebula.cpp:241
-msgid "Open cluster"
-msgstr "疏散星團"
+#: src/ui_viewDialog.h:1020
+msgid "80"
+msgstr "80"
 
-#: src/modules/Nebula.cpp:244
-msgid "Globular cluster"
-msgstr "球狀星團"
+#: src/ui_dateTimeDialogGui.h:299 src/ui_dateTimeDialogGui.h:300
+msgid ":"
+msgstr ":"
 
-#: src/modules/Nebula.cpp:247
-msgid "Nebula"
-msgstr "星雲"
+#: src/ui_helpDialogGui.h:268
+msgid "About"
+msgstr "關於"
 
-#: src/modules/Nebula.cpp:250
-msgid "Planetary nebula"
-msgstr "行星狀星雲"
-
-#: src/modules/Nebula.cpp:253
-msgid "Cluster associated with nebulosity"
-msgstr "瀰漫星雲"
-
-#: src/modules/Nebula.cpp:256
-msgid "Unknown"
-msgstr "未知的"
-
-#: src/modules/Nebula.cpp:259
-msgid "Undocumented type"
-msgstr "未記錄的類型"
-
-#: src/modules/NebulaMgr.cpp:376
-#, qt-format
-msgid "Loading NGC catalog: %1/%2"
-msgstr "正在載入 NGC 星表: %1/%2"
-
-#: src/modules/Planet.cpp:138 src/modules/StarWrapper.cpp:113
+#: src/modules/Planet.cpp:133 src/modules/StarWrapper.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "絕對星等: %1"
 
-#: src/modules/Planet.cpp:145
-#, no-c-format, qt-format
-msgid "Distance: %1AU"
-msgstr "距離: %1AU (天文單位)"
-
-#: src/modules/Planet.cpp:149
-#, qt-format
-msgid "Apparent diameter: %1"
-msgstr "視直徑: %1"
-
-#: src/modules/StarWrapper.cpp:52 src/modules/StarWrapper.cpp:109
-#, qt-format
-msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr "視星等: <b>%1</b> (B-V: %2)"
-
-#: src/modules/StarWrapper.cpp:119
-#, qt-format
-msgid "Spectral Type: %1"
-msgstr "光譜型: %1"
-
-#: src/modules/StarWrapper.cpp:123
-#, qt-format
-msgid "Distance: %1 Light Years"
-msgstr "距離: %1 光年"
-
-#: src/modules/StarWrapper.cpp:126
-#, qt-format
-msgid "Parallax: %1\""
-msgstr "視差: %1\""
-
-#: src/modules/TextUI.cpp:63
-msgid "Set Location "
-msgstr "位置設定 "
-
-#: src/modules/TextUI.cpp:64
-msgid "Set Time "
-msgstr "時間設定 "
-
-#: src/modules/TextUI.cpp:65
-msgid "General "
-msgstr "一般設定 "
-
-#: src/modules/TextUI.cpp:66
-msgid "Stars "
-msgstr "恆星設定 "
-
-#: src/modules/TextUI.cpp:67
-msgid "Colors "
-msgstr "色彩設定 "
-
-#: src/modules/TextUI.cpp:68
-msgid "Effects "
-msgstr "效果設定 "
-
-#: src/modules/TextUI.cpp:69
-msgid "Scripts "
-msgstr "劇本設定 "
-
-#: src/modules/TextUI.cpp:70
-msgid "Administration "
-msgstr "管理設定 "
-
-#: src/modules/TextUI.cpp:73
-msgid "Latitude: "
-msgstr "緯度: "
-
-#: src/modules/TextUI.cpp:74
-msgid "Longitude: "
-msgstr "經度: "
-
-#: src/modules/TextUI.cpp:75
-msgid "Altitude (m): "
-msgstr "海拔 (公尺): "
-
-#: src/modules/TextUI.cpp:76
-msgid "Solar System Body: "
-msgstr "觀測者所處太陽系天體: "
-
-#: src/modules/TextUI.cpp:79
-msgid "Sky Time: "
-msgstr "星空時間: "
-
-#: src/modules/TextUI.cpp:80
-msgid "Set Time Zone: "
-msgstr "時區設定: "
-
-#: src/modules/TextUI.cpp:81
-msgid "Day keys: "
-msgstr "時間定義: "
-
-#: src/modules/TextUI.cpp:82
-msgid "Calendar"
-msgstr "太陽日"
-
-#: src/modules/TextUI.cpp:83
-msgid "Sidereal"
-msgstr "恆星日"
-
-#: src/modules/TextUI.cpp:84
-msgid "Preset Sky Time: "
-msgstr "預設星空時間: "
-
-#: src/modules/TextUI.cpp:85
-msgid "Sky Time At Start-up: "
-msgstr "程式啟動時之星空時間: "
+#: src/ui_viewDialog.h:996
+msgid "Absolute scale:"
+msgstr "絕對大小:"
 
 #: src/modules/TextUI.cpp:86
 msgid "Actual Time"
 msgstr "實際時間"
 
-#: src/modules/TextUI.cpp:87
-msgid "Preset Time"
-msgstr "預設時間"
+#: src/gui/StelGui.cpp:152
+msgid "Add 1 sidereal day"
+msgstr "增加 1 恆星日"
 
-#: src/modules/TextUI.cpp:88
-msgid "Time Display Format: "
-msgstr "時間顯示格式: "
+#: src/gui/StelGui.cpp:154
+msgid "Add 1 sidereal week"
+msgstr "增加 1 恆星週"
 
-#: src/modules/TextUI.cpp:89
-msgid "Date Display Format: "
-msgstr "日期顯示格式: "
+#: src/gui/StelGui.cpp:148
+msgid "Add 1 solar day"
+msgstr "增加 1 太陽日"
 
-#: src/modules/TextUI.cpp:92
-msgid "Sky Culture: "
-msgstr "星空文化: "
+#: src/gui/StelGui.cpp:146
+msgid "Add 1 solar hour"
+msgstr "增加 1 太陽時"
 
-#: src/modules/TextUI.cpp:93
-msgid "Sky Language: "
-msgstr "星空述語: "
+#: src/gui/StelGui.cpp:150
+msgid "Add 1 solar week"
+msgstr "增加 1 太陽週"
 
-#: src/modules/TextUI.cpp:96
-msgid "Show: "
-msgstr "顯示: "
+#: src/ui_locationDialogGui.h:395
+msgid "Add to list"
+msgstr "加入列表"
 
-#: src/modules/TextUI.cpp:97
-msgid "Star Value Multiplier: "
-msgstr "星等顯示加成: "
+#: src/modules/TextUI.cpp:70
+msgid "Administration "
+msgstr "管理設定 "
 
-#: src/modules/TextUI.cpp:98
-msgid "Magnitude Sizing Multiplier: "
-msgstr "星等成像加成: "
+#: src/ui_configurationDialog.h:819
+msgid "Align labels with the horizon"
+msgstr "星空名稱文字保持水平"
 
-#: src/modules/TextUI.cpp:99
-msgid "Maximum Magnitude to Label: "
-msgstr "亮度超過此星等時顯示星名: "
+#: src/ui_configurationDialog.h:754
+msgid "All available"
+msgstr "完整顯示"
 
-#: src/modules/TextUI.cpp:100
-msgid "Twinkling: "
-msgstr "星光閃爍程度: "
+#: src/ui_configurationDialog.h:783
+msgid "Allow keyboard to pan and zoom"
+msgstr "使用鍵盤移動與縮放畫面"
 
-#: src/modules/TextUI.cpp:101
-msgid "Limiting Magnitude: "
-msgstr "顯示星等極限: "
+#: src/ui_configurationDialog.h:787
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr "使用滑鼠移動與縮放畫面 (拖曳或捲動滾輪)"
 
-#: src/modules/TextUI.cpp:104
-msgid "Constellation Lines"
-msgstr "星座連線"
+#: src/modules/TextUI.cpp:75
+msgid "Altitude (m): "
+msgstr "海拔 (公尺): "
 
-#: src/modules/TextUI.cpp:105
-msgid "Constellation Names"
-msgstr "星座名稱"
+#: src/ui_locationDialogGui.h:404
+msgid "Altitude:"
+msgstr "海拔:"
+
+#: src/modules/Planet.cpp:144
+#, qt-format
+msgid "Apparent diameter: %1"
+msgstr "視直徑: %1"
+
+#: src/modules/TextUI.cpp:136
+msgid "Arrow down to load list."
+msgstr "按下方向鍵以載入劇本"
+
+#: src/gui/HelpDialog.cpp:52
+msgid "Arrow keys & left mouse drag"
+msgstr "方向鍵及滑鼠左鍵拖曳"
+
+#: src/ui_viewDialog.h:1037
+msgid "Art brightness: "
+msgstr "圖繪亮度: "
+
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1009
+msgid "Atmosphere"
+msgstr "大氣"
+
+#: src/gui/ConfigurationDialog.cpp:568
+msgid "Author"
+msgstr "作者"
+
+#: src/modules/LandscapeMgr.cpp:425
+msgid "Author: "
+msgstr "作者: "
+
+#: src/gui/ConfigurationDialog.cpp:492
+msgid "Authors"
+msgstr "作者群"
+
+#: src/gui/StelGui.cpp:182
+msgid "Auto hide horizontal button bar"
+msgstr "自動隱藏水平工具列"
+
+#: src/gui/StelGui.cpp:183
+msgid "Auto hide vertical button bar"
+msgstr "自動隱藏垂直工具列"
+
+#: src/ui_configurationDialog.h:825
+msgid "Auto zoom out returns to initial direction of view"
+msgstr "自動縮小時回到原本的觀看方向"
+
+#: src/core/StelObject.cpp:91
+#, qt-format
+msgid "Az/Alt: %1/%2"
+msgstr "方位角/高度角: %1/%2"
+
+#: src/modules/TextUI.cpp:113
+msgid "Azimuthal Grid"
+msgstr "地平座標系統"
+
+#: src/gui/StelGui.cpp:100 src/ui_viewDialog.h:1027
+msgid "Azimuthal grid"
+msgstr "地平座標"
+
+#: src/translations.h:69
+msgid "Aztec"
+msgstr ""
+
+#: src/modules/TextUI.cpp:134
+msgid "CD/DVD Script: "
+msgstr "CD/DVD 劇本: "
+
+#: src/gui/HelpDialog.cpp:57
+msgid "CTRL + Left click"
+msgstr "CTRL + 滑鼠左鍵"
+
+#: src/gui/HelpDialog.cpp:54
+msgid "CTRL + Up/Down"
+msgstr "CTRL + 上/下方向鍵"
+
+#: src/modules/TextUI.cpp:82
+msgid "Calendar"
+msgstr "太陽日"
+
+#: src/translations.h:45
+msgid "Callisto"
+msgstr "木衛四 (卡利斯托)"
+
+#: src/ui_configurationDialog.h:852
+msgid "Cancel"
+msgstr "取消"
+
+#: src/modules/TextUI.cpp:108
+msgid "Cardinal Points"
+msgstr "方位基點"
+
+#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1031
+msgid "Cardinal points"
+msgstr "基點"
+
+#: src/ui_viewDialog.h:1024
+msgid "Celestial Sphere"
+msgstr "天球"
+
+#: src/gui/StelGui.cpp:158
+msgid "Center on selected object"
+msgstr "將選擇天體移至畫面中央"
+
+#: src/translations.h:59
+msgid "Charon"
+msgstr "冥衛一 (夏龍)"
+
+#: src/translations.h:70
+msgid "Chinese"
+msgstr "中國"
+
+#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
+msgid "Clear selection"
+msgstr "清除選取"
+
+#: src/ui_configurationDialog.h:840
+msgid "Click here to start downloading"
+msgstr "點選這以開始下載"
+
+#: src/ui_configurationDialog.h:855
+msgid "Close window when script runs"
+msgstr "Script 執行時關閉視窗"
+
+#: src/modules/Nebula.cpp:284
+msgid "Cluster associated with nebulosity"
+msgstr "瀰漫星雲"
+
+#: src/modules/TextUI.cpp:67
+msgid "Colors "
+msgstr "色彩設定 "
+
+#: src/ui_configurationDialog.h:747
+msgid "Configuration"
+msgstr "設定"
+
+#: src/gui/StelGui.cpp:126
+msgid "Configuration window"
+msgstr "設定"
 
 #: src/modules/TextUI.cpp:106
 msgid "Constellation Art Intensity"
@@ -271,9 +274,808 @@ msgstr "星座圖繪不透明度"
 msgid "Constellation Boundaries"
 msgstr "星座界線"
 
-#: src/modules/TextUI.cpp:108
-msgid "Cardinal Points"
-msgstr "方位基點"
+#: src/modules/TextUI.cpp:104
+msgid "Constellation Lines"
+msgstr "星座連線"
+
+#: src/modules/TextUI.cpp:105
+msgid "Constellation Names"
+msgstr "星座名稱"
+
+#: src/gui/StelGui.cpp:96
+msgid "Constellation art"
+msgstr "星座圖繪"
+
+#: src/gui/StelGui.cpp:98
+msgid "Constellation boundaries"
+msgstr "星座界線"
+
+#: src/gui/StelGui.cpp:97
+msgid "Constellation labels"
+msgstr "星座名稱"
+
+#: src/gui/StelGui.cpp:95
+msgid "Constellation lines"
+msgstr "星座連線"
+
+#: src/ui_viewDialog.h:1032
+msgid "Constellations"
+msgstr "星座"
+
+#: src/gui/ConfigurationDialog.cpp:496 src/gui/ViewDialog.cpp:336
+msgid "Contact"
+msgstr "聯絡"
+
+#: src/ui_configurationDialog.h:781
+msgid "Control"
+msgstr "控制"
+
+#: src/modules/TextUI.cpp:130
+msgid "Correct for light travel time: "
+msgstr "考慮光行進時間: "
+
+#: src/ui_locationDialogGui.h:410
+msgid "Country:"
+msgstr "國家/地區:"
+
+#: src/ui_locationDialogGui.h:392
+msgid "Current location information"
+msgstr "目前位置資訊"
+
+#: src/modules/TextUI.cpp:129
+msgid "Cursor Timeout: "
+msgstr "滑鼠指標自動隱藏: "
+
+#: src/core/StelProjectorClasses.cpp:230
+msgid "Cylinder"
+msgstr "圓柱體"
+
+#: src/modules/TextUI.cpp:89
+msgid "Date Display Format: "
+msgstr "日期顯示格式: "
+
+#: src/gui/StelGui.cpp:135 src/ui_dateTimeDialogGui.h:295
+msgid "Date and Time"
+msgstr "日期與時間"
+
+#: src/gui/StelGui.cpp:129
+msgid "Date/time window"
+msgstr "日期/時間"
+
+#: src/modules/TextUI.cpp:81
+msgid "Day keys: "
+msgstr "時間定義: "
+
+#: src/gui/StelGui.cpp:139
+msgid "Decrease time speed"
+msgstr "減慢時間速度"
+
+#: src/gui/StelGui.cpp:142
+msgid "Decrease time speed (a little)"
+msgstr "減慢時間速度 (微調)"
+
+#: src/ui_configurationDialog.h:763
+msgid "Default options"
+msgstr "預設選項"
+
+#: src/translations.h:39
+msgid "Deimos"
+msgstr "火衛二 (戴摩斯)"
+
+#: src/ui_locationDialogGui.h:394
+msgid "Delete"
+msgstr "刪除"
+
+#: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:295
+#: src/gui/HelpDialog.cpp:297 src/gui/HelpDialog.cpp:298
+#, qt-format
+msgid "Developer: %1"
+msgstr "開發: %1"
+
+#: src/gui/HelpDialog.cpp:290
+msgid "Developers"
+msgstr "開發團隊"
+
+#: src/ui_viewDialog.h:1000
+msgid "Dim faint stars when a very bright object is visible"
+msgstr "將極亮星體週遭的恆星亮度降低"
+
+#: src/translations.h:50
+msgid "Dione"
+msgstr "土衛四 (戴奧妮)"
+
+#: src/ui_configurationDialog.h:829
+msgid "Disc viewport"
+msgstr "圓形視角"
+
+#: src/gui/StelGui.cpp:94
+msgid "Display Options"
+msgstr "顯示選項"
+
+#: src/ui_configurationDialog.h:752
+msgid "Display all information available"
+msgstr "顯示所有可用的資訊"
+
+#: src/ui_configurationDialog.h:756
+msgid "Display less information"
+msgstr "顯示較少的資訊"
+
+#: src/ui_configurationDialog.h:760
+msgid "Display no information"
+msgstr "不顯示資訊"
+
+#: src/modules/StarWrapper.cpp:123
+#, qt-format
+msgid "Distance: %1 Light Years"
+msgstr "距離: %1 光年"
+
+#: src/modules/Planet.cpp:140
+#, no-c-format, qt-format
+msgid "Distance: %1AU"
+msgstr "距離: %1AU (天文單位)"
+
+#: src/gui/HelpDialog.cpp:292
+#, qt-format
+msgid "Doc author/developer: %1"
+msgstr "說明文件撰寫: %1"
+
+#: src/gui/ConfigurationDialog.cpp:659
+#, fuzzy, qt-format
+msgid ""
+"Download size: %1MB\n"
+"Star count: %2 Million\n"
+"Magnitude range: %3 - %4"
+msgstr ""
+"檔案大小: %1MB\n"
+"恆星數量: %2\n"
+"亮度範圍: %3 - %4"
+
+#: src/ui_configurationDialog.h:843
+msgid "Download this file to view even more stars"
+msgstr "下載此檔案以顯示更多恆星"
+
+#: src/gui/ConfigurationDialog.cpp:711
+#, qt-format
+msgid ""
+"Downloading %1...\n"
+"(You can close this window.)"
+msgstr ""
+"正在下載 %1...\n"
+"(您可以關閉此視窗)"
+
+#: src/ui_viewDialog.h:1002
+msgid "Dynamic eye adaptation"
+msgstr "人眼動態視覺調適"
+
+#: src/translations.h:65
+msgid "E"
+msgstr "東"
+
+#: src/translations.h:36
+msgid "Earth"
+msgstr "地球"
+
+#: src/modules/TextUI.cpp:116
+msgid "Ecliptic Line"
+msgstr "黃道"
+
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1030
+msgid "Ecliptic line"
+msgstr "黃道"
+
+#: src/modules/TextUI.cpp:68
+msgid "Effects "
+msgstr "效果設定 "
+
+#: src/translations.h:71
+msgid "Egyptian"
+msgstr "古埃及"
+
+#: src/ui_configurationDialog.h:785
+msgid "Enable keyboard navigation"
+msgstr "啟動鍵盤導覽"
+
+#: src/ui_configurationDialog.h:789
+msgid "Enable mouse navigation"
+msgstr "啟用滑鼠導覽"
+
+#: src/translations.h:48
+msgid "Enceladus"
+msgstr "土衛二 (恩瑟阿達斯)"
+
+#: src/ui_locationDialogGui.h:406
+msgid "Enter the altitude in meter"
+msgstr "輸入海拔高度 (以公尺為單位)"
+
+#: src/core/StelProjectorClasses.cpp:63
+msgid "Equal Area"
+msgstr "等面積"
+
+#: src/modules/TextUI.cpp:115
+msgid "Equator Line"
+msgstr "赤道"
+
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1028
+msgid "Equator line"
+msgstr "赤道"
+
+#: src/modules/TextUI.cpp:114
+msgid "Equatorial Grid"
+msgstr "赤道座標系統"
+
+#: src/gui/StelGui.cpp:102 src/ui_viewDialog.h:1026
+msgid "Equatorial J2000 grid"
+msgstr "赤道座標 (J2000)"
+
+#: src/gui/StelGui.cpp:101 src/ui_viewDialog.h:1025
+msgid "Equatorial grid"
+msgstr "赤道座標"
+
+#: src/gui/ConfigurationDialog.cpp:706 src/gui/ConfigurationDialog.cpp:740
+#, qt-format
+msgid ""
+"Error downloading %1:\n"
+"%2"
+msgstr ""
+"下載 %1 時發生錯誤:\n"
+"%2"
+
+#: src/gui/ConfigurationDialog.cpp:795
+#, qt-format
+msgid ""
+"Error downloading %1:\n"
+"File is corrupted."
+msgstr ""
+"下載 %1 時發生錯誤:\n"
+"檔案損毀。"
+
+#: src/translations.h:43
+msgid "Europa"
+msgstr "木衛二 (歐羅巴)"
+
+#: src/gui/ViewDialog.cpp:453
+msgid "Exceptional Leonid rate"
+msgstr "超量獅子座流星雨"
+
+#: src/ui_searchDialogGui.h:230 src/ui_searchDialogGui.h:231
+msgid "Find Object"
+msgstr "尋找天體"
+
+#: src/gui/ConfigurationDialog.cpp:650
+#, fuzzy
+msgid "Finished downloading all star catalogs!"
+msgstr ""
+"新的星表下載完成！\n"
+"請重新啟動 Stellarium 以顯示新的星表。"
+
+#: src/gui/ConfigurationDialog.cpp:668
+msgid ""
+"Finished downloading new star catalogs!\n"
+"Restart Stellarium to display them."
+msgstr ""
+"新的星表下載完成！\n"
+"請重新啟動 Stellarium 以顯示新的星表。"
+
+#: src/core/StelProjectorClasses.cpp:150
+msgid "Fish-eye"
+msgstr "魚眼"
+
+#: src/gui/StelGui.cpp:121
+msgid "Flip scene horizontally"
+msgstr "水平翻轉"
+
+#: src/gui/StelGui.cpp:122
+msgid "Flip scene vertically"
+msgstr "垂直翻轉"
+
+#: src/gui/StelGui.cpp:111
+msgid "Fog"
+msgstr "霧"
+
+#: src/ui_dateTimeDialogGui.h:294 src/ui_helpDialogGui.h:259
+#: src/ui_locationDialogGui.h:387 src/ui_viewDialog.h:979
+#: src/ui_configurationDialog.h:746
+msgid "Form"
+msgstr "格式"
+
+#: src/gui/StelGui.cpp:120
+msgid "Full-screen mode"
+msgstr "全螢幕模式"
+
+#: src/gui/HelpDialog.cpp:170
+msgid "Further Reading"
+msgstr "了解更多"
+
+#: src/gui/StelGui.cpp:103
+msgid "Galactic grid"
+msgstr ""
+
+#: src/modules/Nebula.cpp:269
+msgid "Galaxy"
+msgstr "星系"
+
+#: src/translations.h:44
+msgid "Ganymede"
+msgstr "木衛三 (加尼美德)"
+
+#: src/modules/TextUI.cpp:65
+msgid "General "
+msgstr "一般設定 "
+
+#: src/gui/ConfigurationDialog.cpp:657
+#, qt-format
+msgid "Get catalog %1 of %2"
+msgstr "取得星表 %1/%2"
+
+#: src/ui_configurationDialog.h:842
+msgid "Get catalog x of y"
+msgstr "取得星表x、y座標"
+
+#: src/modules/Nebula.cpp:275
+msgid "Globular cluster"
+msgstr "球狀星團"
+
+#: src/gui/HelpDialog.cpp:293
+#, qt-format
+msgid "Graphic/other designer: %1"
+msgstr "視覺與其他設計: %1"
+
+#: src/ui_configurationDialog.h:821
+msgid "Gravity labels"
+msgstr "重力名稱文字"
+
+#: src/gui/StelGui.cpp:109
+msgid "Ground"
+msgstr "地面"
+
+#: src/core/StelProjectorClasses.cpp:189
+msgid "Hammer-Aitoff"
+msgstr "Hammer-Aitoff"
+
+#: src/ui_helpDialogGui.h:260 src/ui_helpDialogGui.h:266
+msgid "Help"
+msgstr "說明"
+
+#: src/gui/StelGui.cpp:125
+msgid "Help window"
+msgstr "說明"
+
+#: src/ui_configurationDialog.h:831
+msgid "Hide other constellations when you click one"
+msgstr "點選其中一個星座時隱藏其它星座"
+
+#: src/ui_configurationDialog.h:806
+msgid "Hides the mouse cursor when inactive"
+msgstr "靜止時隱藏滑鼠指標"
+
+#: src/gui/ViewDialog.cpp:456
+msgid "Highest rate ever (1966 Leonids)"
+msgstr "至今最高頻率 (1966 獅子座流星雨)"
+
+#: src/core/StelObject.cpp:80
+#, qt-format
+msgid "Hour angle/DE: %1/%2"
+msgstr "時角/赤緯: %1/%2"
+
+#: src/ui_viewDialog.h:1017
+msgid "Hourly zenith rate:"
+msgstr "流星天頂小時率:"
+
+#: src/translations.h:53
+msgid "Hyperion"
+msgstr "土衛七 (海帕里翁)"
+
+#: src/translations.h:54
+msgid "Iapetus"
+msgstr "土衛八 (艾佩特斯)"
+
+#: src/core/StelProjectorClasses.cpp:155
+msgid ""
+"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
+"lines become curves when they appear a large angular distance from the "
+"centre of the field of view (like the distortions seen with very wide angle "
+"camera lenses)."
+msgstr ""
+"魚眼投影法或稱為<i>等距方位投影法</i>，當直線距離中心的角度很大時會變成曲線 "
+"(像是從廣角鏡頭看出去所見到的變形)。"
+
+#: src/gui/StelGui.cpp:140
+msgid "Increase time speed"
+msgstr "加快時間速度"
+
+#: src/gui/StelGui.cpp:143
+msgid "Increase time speed (a little)"
+msgstr "加快時間速度 (微調)"
+
+#: src/translations.h:72
+msgid "Inuit"
+msgstr "因努伊特 (北極)"
+
+#: src/ui_configurationDialog.h:837
+msgid "Invert colors"
+msgstr "反向彩色"
+
+#: src/translations.h:42
+msgid "Io"
+msgstr "木衛一 (伊奧)"
+
+#: src/translations.h:41
+msgid "Jupiter"
+msgstr "木星"
+
+#: src/gui/HelpDialog.cpp:162
+msgid "Keys"
+msgstr "快速鍵"
+
+#: src/translations.h:73
+msgid "Korean"
+msgstr "古朝鮮"
+
+#: src/ui_viewDialog.h:1012
+msgid "Labels and Markers"
+msgstr "名稱與標記"
+
+#: src/translations.h:74
+msgid "Lakota"
+msgstr "拉科塔 (美西)"
+
+#: src/ui_viewDialog.h:990
+msgid "Landscape"
+msgstr "地景"
+
+#: src/modules/TextUI.cpp:122
+msgid "Landscape: "
+msgstr "地景: "
+
+#: src/ui_locationDialogGui.h:396
+msgid "Latitude:"
+msgstr "緯度:"
+
+#: src/modules/TextUI.cpp:73
+msgid "Latitude: "
+msgstr "緯度: "
+
+#: src/gui/HelpDialog.cpp:55
+msgid "Left click"
+msgstr "滑鼠左鍵"
+
+#: src/gui/ConfigurationDialog.cpp:569
+msgid "License"
+msgstr "授權條款"
+
+#: src/modules/TextUI.cpp:121
+msgid "Light Pollution Luminance: "
+msgstr "光害程度: "
+
+#: src/ui_viewDialog.h:1011
+msgid "Light pollution: "
+msgstr "光害程度: "
+
+#: src/modules/TextUI.cpp:101
+msgid "Limiting Magnitude: "
+msgstr "顯示星等極限: "
+
+#: src/modules/TextUI.cpp:140
+msgid "Load Default Configuration: "
+msgstr "載入預設值: "
+
+#: src/ui_configurationDialog.h:865
+msgid "Load at startup"
+msgstr "啟動時載入"
+
+#: src/modules/NebulaMgr.cpp:379
+#, fuzzy
+msgid "Loading NGC catalog"
+msgstr "正在載入 NGC 星表: %1/%2"
+
+#: src/modules/NebulaMgr.cpp:346
+#, qt-format
+msgid "Loading NGC catalog: %1/%2"
+msgstr "正在載入 NGC 星表: %1/%2"
+
+#: src/modules/StarMgr.cpp:396
+#, qt-format
+msgid "Loading catalog %1 from file %2"
+msgstr "從檔案 %2 載入星表 %1"
+
+#: src/modules/TextUI.cpp:133
+msgid "Local Script: "
+msgstr "本地端劇本: "
+
+#: src/ui_locationDialogGui.h:388
+msgid "Location"
+msgstr "位置"
+
+#: src/gui/StelGui.cpp:130
+msgid "Location window"
+msgstr "位置"
+
+#: src/modules/LandscapeMgr.cpp:428
+msgid "Location: "
+msgstr "位置: "
+
+#: src/ui_helpDialogGui.h:270
+msgid "Log"
+msgstr "紀錄"
+
+#: src/ui_locationDialogGui.h:400
+msgid "Longitude:"
+msgstr "經度:"
+
+#: src/modules/TextUI.cpp:74
+msgid "Longitude: "
+msgstr "經度: "
+
+#: src/modules/TextUI.cpp:125
+msgid "Magnitude Scaling Multiplier: "
+msgstr "星等成像加成: "
+
+#: src/modules/TextUI.cpp:98
+msgid "Magnitude Sizing Multiplier: "
+msgstr "星等成像加成: "
+
+#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:130
+#, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr "視星等: <b>%1</b>"
+
+#: src/modules/StarWrapper.cpp:52 src/modules/StarWrapper.cpp:109
+#, qt-format
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr "視星等: <b>%1</b> (B-V: %2)"
+
+#: src/ui_configurationDialog.h:871
+msgid "Main"
+msgstr "一般設定"
+
+#: src/modules/TextUI.cpp:123
+msgid "Manual zoom: "
+msgstr "分級縮放: "
+
+#: src/translations.h:75
+msgid "Maori"
+msgstr "毛利"
+
+#: src/ui_viewDialog.h:988
+msgid "Markings"
+msgstr "標示"
+
+#: src/translations.h:38
+msgid "Mars"
+msgstr "火星"
+
+#: src/ui_configurationDialog.h:827
+msgid "Mask out everything outside a central circle in the main view"
+msgstr "遮去不在中間圓形範圍內的星空"
+
+#: src/core/StelProjector.cpp:61
+msgid "Maximum FOV: "
+msgstr "最大視野 "
+
+#: src/modules/TextUI.cpp:99
+msgid "Maximum Magnitude to Label: "
+msgstr "顯示高於該星等之星名 "
+
+#: src/modules/TextUI.cpp:127
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "顯示高於該星等之星雲: "
+
+#: src/core/StelProjectorClasses.cpp:277
+msgid "Mercator"
+msgstr "麥卡托投影"
+
+#: src/translations.h:34
+msgid "Mercury"
+msgstr "水星"
+
+#: src/modules/TextUI.cpp:112
+msgid "Meridian Line"
+msgstr "子午線"
+
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1029
+msgid "Meridian line"
+msgstr "經線"
+
+#: src/modules/TextUI.cpp:126
+msgid "Milky Way intensity: "
+msgstr "銀河密度: "
+
+#: src/translations.h:47
+msgid "Mimas"
+msgstr "土衛一 (邁馬斯)"
+
+#: src/gui/HelpDialog.cpp:232 src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:324 src/gui/StelGui.cpp:176
+msgid "Miscellaneous"
+msgstr "其他"
+
+#: src/translations.h:37
+msgid "Moon"
+msgstr "月球"
+
+#: src/ui_configurationDialog.h:808
+msgid "Mouse cursor timeout (seconds):"
+msgstr "指定時間後隱藏滑鼠指標 (秒):"
+
+#: src/gui/StelGui.cpp:165
+msgid "Move telescope #0 to selected object"
+msgstr "移動望遠鏡 #0 到選擇的目標"
+
+#: src/gui/StelGui.cpp:166
+msgid "Move telescope #1 to selected object"
+msgstr "移動望遠鏡 #1 到選擇的目標"
+
+#: src/gui/StelGui.cpp:167
+msgid "Move telescope #2 to selected object"
+msgstr "移動望遠鏡 #2 到選擇的目標"
+
+#: src/gui/StelGui.cpp:168
+msgid "Move telescope #3 to selected object"
+msgstr "移動望遠鏡 #3 到選擇的目標"
+
+#: src/gui/StelGui.cpp:169
+msgid "Move telescope #4 to selected object"
+msgstr "移動望遠鏡 #4 到選擇的目標"
+
+#: src/gui/StelGui.cpp:170
+msgid "Move telescope #5 to selected object"
+msgstr "移動望遠鏡 #5 到選擇的目標"
+
+#: src/gui/StelGui.cpp:171
+msgid "Move telescope #6 to selected object"
+msgstr "移動望遠鏡 #6 到選擇的目標"
+
+#: src/gui/StelGui.cpp:172
+msgid "Move telescope #7 to selected object"
+msgstr "移動望遠鏡 #7 到選擇的目標"
+
+#: src/gui/StelGui.cpp:173
+msgid "Move telescope #8 to selected object"
+msgstr "移動望遠鏡 #8 到選擇的目標"
+
+#: src/gui/StelGui.cpp:174
+msgid "Move telescope #9 to selected object"
+msgstr "移動望遠鏡 #9 到選擇的目標"
+
+#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:157
+msgid "Movement and Selection"
+msgstr "移動與選擇"
+
+#: src/translations.h:63
+msgid "N"
+msgstr "北"
+
+#: src/ui_locationDialogGui.h:409
+msgid "Name/City:"
+msgstr "地名/城市名稱:"
+
+#: src/translations.h:76
+msgid "Navajo"
+msgstr "納瓦伙 (北美)"
+
+#: src/ui_configurationDialog.h:873
+msgid "Navigation"
+msgstr "導覽"
+
+#: src/modules/Nebula.cpp:278
+msgid "Nebula"
+msgstr "星雲"
+
+#: src/modules/TextUI.cpp:118
+msgid "Nebula Circles"
+msgstr "星雲標示"
+
+#: src/modules/TextUI.cpp:117
+msgid "Nebula Names"
+msgstr "星雲名稱"
+
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1014
+msgid "Nebulas"
+msgstr "星雲"
+
+#: src/gui/StelGui.cpp:114
+msgid "Nebulas background images"
+msgstr "星雲背景影像"
+
+#: src/translations.h:56
+msgid "Neptune"
+msgstr "海王星"
+
+#: src/gui/LocationDialog.cpp:340
+msgid "New Location"
+msgstr "新位置"
+
+#: src/gui/StelGui.cpp:119
+msgid "Night mode"
+msgstr "夜間模式"
+
+#: src/gui/ViewDialog.cpp:388
+msgid "No description"
+msgstr "沒有描述"
+
+#: src/gui/ViewDialog.cpp:444
+msgid "No shooting stars"
+msgstr "無流星"
+
+#: src/ui_configurationDialog.h:762
+msgid "None"
+msgstr "不顯示"
+
+#: src/gui/ViewDialog.cpp:447
+msgid "Normal rate"
+msgstr "日常頻率"
+
+#: src/translations.h:77
+msgid "Norse"
+msgstr "北歐"
+
+#: src/gui/HelpDialog.cpp:296
+#, qt-format
+msgid "OSX Developer: %1"
+msgstr "OSX 開發: %1"
+
+#: src/modules/TextUI.cpp:124
+msgid "Object Sizing Rule: "
+msgstr "天體成像大小: "
+
+#: src/modules/Nebula.cpp:272
+msgid "Open cluster"
+msgstr "疏散星團"
+
+#: src/ui_viewDialog.h:1039 src/ui_viewDialog.h:1044 src/ui_viewDialog.h:1046
+#: src/ui_configurationDialog.h:853 src/ui_configurationDialog.h:864
+msgid "Options"
+msgstr "選項"
+
+#: src/core/StelProjectorClasses.cpp:329
+msgid "Orthographic"
+msgstr "正射"
+
+#: src/core/StelProjectorClasses.cpp:334
+msgid ""
+"Orthographic projection is related to perspective projection, but the point "
+"of perspective is set to an infinite distance."
+msgstr "正射投影類似透視投影，但是投影點位在無限遠的距離。"
+
+#: src/ui_configurationDialog.h:804
+msgid "Other"
+msgstr "其他"
+
+#: src/ui_configurationDialog.h:802
+msgid "Other:"
+msgstr "其他:"
+
+#: src/gui/HelpDialog.cpp:53
+msgid "Page Up/Down"
+msgstr "Page Up/Page Down鍵"
+
+#: src/gui/HelpDialog.cpp:61
+msgid "Pan view around the sky"
+msgstr "移動畫面"
+
+#: src/modules/StarWrapper.cpp:126
+#, qt-format
+msgid "Parallax: %1\""
+msgstr "視差: %1\""
+
+#: src/core/StelProjectorClasses.cpp:25
+msgid "Perspective"
+msgstr "透視法"
+
+#: src/core/StelProjectorClasses.cpp:30
+msgid ""
+"Perspective projection keeps the horizon a straight line. The mathematical "
+"name for this projection method is <i>gnomonic projection</i>."
+msgstr ""
+"維持地平線為平直線的透視投影。這種透視方法的數學學名為<i>磬折形投影法</i>."
+
+#: src/translations.h:40
+msgid "Phobos"
+msgstr "火衛一 (弗伯斯)"
+
+#: src/translations.h:55
+msgid "Phoebe"
+msgstr "土衛九 (菲碧)"
 
 #: src/modules/TextUI.cpp:109
 msgid "Planet Names"
@@ -287,133 +1089,445 @@ msgstr "行星軌道"
 msgid "Planet Trails"
 msgstr "行星軌跡"
 
-#: src/modules/TextUI.cpp:112
-msgid "Meridian Line"
-msgstr "子午線"
+#: src/gui/StelGui.cpp:117
+#, fuzzy
+msgid "Planet orbits"
+msgstr "行星軌道"
 
-#: src/modules/TextUI.cpp:113
-msgid "Azimuthal Grid"
-msgstr "地平座標系統"
+#: src/ui_locationDialogGui.h:411
+msgid "Planet:"
+msgstr "行星:"
 
-#: src/modules/TextUI.cpp:114
-msgid "Equatorial Grid"
-msgstr "赤道座標系統"
+#: src/modules/LandscapeMgr.cpp:436
+msgid "Planet: "
+msgstr "行星: "
 
-#: src/modules/TextUI.cpp:115
-msgid "Equator Line"
-msgstr "赤道"
+#: src/ui_configurationDialog.h:813
+msgid "Planetarium options"
+msgstr "星象館選項"
 
-#: src/modules/TextUI.cpp:116
-msgid "Ecliptic Line"
-msgstr "黃道"
+#: src/modules/Nebula.cpp:281
+msgid "Planetary nebula"
+msgstr "行星狀星雲"
 
-#: src/modules/TextUI.cpp:117
-msgid "Nebula Names"
-msgstr "星雲名稱"
+#: src/ui_viewDialog.h:1015
+msgid "Planets"
+msgstr "行星"
 
-#: src/modules/TextUI.cpp:118
-msgid "Nebula Circles"
-msgstr "星雲標示"
+#: src/ui_viewDialog.h:1003
+msgid "Planets and satellites"
+msgstr "行星與衛星"
 
-#: src/modules/TextUI.cpp:121
-msgid "Light Pollution Luminance: "
-msgstr "光害程度: "
+#: src/gui/StelGui.cpp:116
+msgid "Planets labels"
+msgstr "行星標示"
 
-#: src/modules/TextUI.cpp:122
-msgid "Landscape: "
-msgstr "地景: "
+#: src/ui_configurationDialog.h:879
+msgid "Plugins"
+msgstr "外掛程式"
 
-#: src/modules/TextUI.cpp:123
-msgid "Manual zoom: "
-msgstr "分級縮放: "
+#: src/translations.h:58
+msgid "Pluto"
+msgstr "冥王星"
 
-#: src/modules/TextUI.cpp:124
-msgid "Object Sizing Rule: "
-msgstr "天體成像大小: "
+#: src/translations.h:78
+msgid "Polynesian"
+msgstr "玻里尼西亞"
 
-#: src/modules/TextUI.cpp:125
-msgid "Magnitude Scaling Multiplier: "
-msgstr "星等成像加成: "
+#: src/modules/TextUI.cpp:84
+msgid "Preset Sky Time: "
+msgstr "預設星空時間: "
 
-#: src/modules/TextUI.cpp:126
-msgid "Milky Way intensity: "
-msgstr "銀河密度: "
+#: src/modules/TextUI.cpp:87
+msgid "Preset Time"
+msgstr "預設時間"
 
-#: src/modules/TextUI.cpp:127
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "顯示高於該星等之星雲: "
+#: src/ui_configurationDialog.h:749
+msgid "Program language"
+msgstr "程式介面語言"
 
-#: src/modules/TextUI.cpp:128
-msgid "Zoom Duration: "
-msgstr "縮放動作時間: "
+#: src/gui/HelpDialog.cpp:291
+#, qt-format
+msgid "Project coordinator & lead developer: %1"
+msgstr "計畫協調 & 開發經理: %1"
 
-#: src/modules/TextUI.cpp:129
-msgid "Cursor Timeout: "
-msgstr "滑鼠指標自動隱藏: "
+#: src/ui_viewDialog.h:1038
+msgid "Projection"
+msgstr "投影方式"
 
-#: src/modules/TextUI.cpp:130
-msgid "Correct for light travel time: "
-msgstr "考慮光行進時間: "
+#: src/gui/StelGui.cpp:178
+msgid "Quit"
+msgstr "結束"
 
-#: src/modules/TextUI.cpp:133
-msgid "Local Script: "
-msgstr "本地端劇本: "
+#: src/core/StelObject.cpp:65
+#, qt-format
+msgid "RA/DE (J2000): %1/%2"
+msgstr "赤經/赤緯 (J2000): %1/%2"
 
-#: src/modules/TextUI.cpp:134
-msgid "CD/DVD Script: "
-msgstr "CD/DVD 劇本: "
+#: src/core/StelObject.cpp:72
+#, qt-format
+msgid "RA/DE (of date): %1/%2"
+msgstr "赤經/赤緯 (日期): %1/%2"
 
-#: src/modules/TextUI.cpp:135
-msgid "USB Script: "
-msgstr "USB 劇本: "
+#: src/ui_searchDialogGui.h:236
+msgid "RA/Dec (J2000):"
+msgstr "赤經/赤緯 (J2000):"
 
-#: src/modules/TextUI.cpp:136
-msgid "Arrow down to load list."
-msgstr "按下方向鍵以載入劇本"
+#: src/ui_helpDialogGui.h:273
+msgid "Refresh"
+msgstr "重新整理"
 
-#: src/modules/TextUI.cpp:137
-msgid "Select and exit to run."
-msgstr "選取後退出選單以執行劇本。"
+#: src/ui_viewDialog.h:997
+msgid "Relative scale:"
+msgstr "相對大小:"
 
-#: src/modules/TextUI.cpp:140
-msgid "Load Default Configuration: "
-msgstr "載入預設值: "
+#: src/ui_configurationDialog.h:846
+msgid "Restart the download"
+msgstr "重新啟動下載"
+
+#: src/ui_configurationDialog.h:771
+msgid "Restore defaults"
+msgstr "還原預設值"
+
+#: src/ui_configurationDialog.h:769
+msgid "Restore the default settings that came with Stellarium"
+msgstr "還原至Stellarium預設值設定"
+
+#: src/ui_configurationDialog.h:772
+msgid ""
+"Restoring default settings requires a restart of Stellarium. Saving all the "
+"current options includes the current FOV and direction of view for use at "
+"next startup."
+msgstr ""
+"回復原本的設定需要重新啟動 Stellarium。儲存包含目前視野大小、觀看方向等所有設"
+"定以用於下次啟動。"
+
+#: src/ui_configurationDialog.h:848
+msgid "Retry"
+msgstr "重試"
+
+#: src/translations.h:51
+msgid "Rhea"
+msgstr "土衛五 (麗雅)"
+
+#: src/gui/HelpDialog.cpp:56
+msgid "Right click"
+msgstr "滑鼠右鍵"
+
+#: src/ui_configurationDialog.h:857
+msgid "Run the selected script"
+msgstr "執行選擇的 Script"
+
+#: src/gui/ConfigurationDialog.cpp:600
+msgid "Running script: "
+msgstr "執行 Script: "
+
+#: src/gui/ConfigurationDialog.cpp:607
+msgid "Running script: [none]"
+msgstr "執行 Script: [無]"
+
+#: src/translations.h:64
+msgid "S"
+msgstr "南"
+
+#: src/translations.h:46
+msgid "Saturn"
+msgstr "土星"
 
 #: src/modules/TextUI.cpp:141
 msgid "Save Current Configuration as Default: "
 msgstr "儲存現有設定為預設值: "
 
-#: src/modules/TextUI.cpp:142
-msgid "Shut Down: "
-msgstr "關閉: "
+#: src/gui/StelGui.cpp:179
+msgid "Save screenshot"
+msgstr "儲存螢幕擷取圖片"
 
-#: src/modules/TextUI.cpp:143
-msgid "Update me via Internet: "
-msgstr "透過網路進行更新: "
+#: src/ui_configurationDialog.h:767
+msgid "Save settings"
+msgstr "儲存設定"
+
+#: src/ui_configurationDialog.h:765
+msgid ""
+"Save the settings you've changed this session to be the same the next time "
+"you start Stellarium"
+msgstr "儲存目前的設定，下次啟動時自動套用。"
+
+#: src/ui_viewDialog.h:1008
+msgid "Scale Moon"
+msgstr "月球尺寸"
+
+#: src/ui_configurationDialog.h:835
+msgid "Screenshot Directory"
+msgstr "畫面擷取存檔目錄"
+
+#: src/ui_configurationDialog.h:834
+msgid "Screenshots"
+msgstr "螢幕抓圖"
+
+#: src/gui/StelGui.cpp:132
+msgid "Script console window"
+msgstr "Script 主控台視窗"
+
+#: src/ui_configurationDialog.h:877
+msgid "Scripts"
+msgstr "Script"
+
+#: src/modules/TextUI.cpp:69
+msgid "Scripts "
+msgstr "劇本設定 "
+
+#: src/gui/StelGui.cpp:127
+msgid "Search window"
+msgstr "搜尋"
+
+#: src/modules/TextUI.cpp:137
+msgid "Select and exit to run."
+msgstr "選取後退出選單以執行劇本。"
+
+#: src/gui/HelpDialog.cpp:64
+msgid "Select object"
+msgstr "選取物件"
+
+#: src/gui/ConfigurationDialog.cpp:283
+msgid "Select screenshot directory"
+msgstr "選擇畫面擷取圖片的存檔目錄"
+
+#: src/ui_configurationDialog.h:833
+msgid "Select single constellation"
+msgstr "選擇單一星座"
+
+#: src/ui_configurationDialog.h:750
+msgid "Selected object information"
+msgstr "選擇天體的資訊"
+
+#: src/modules/TextUI.cpp:63
+msgid "Set Location "
+msgstr "位置設定 "
+
+#: src/modules/TextUI.cpp:64
+msgid "Set Time "
+msgstr "時間設定 "
+
+#: src/modules/TextUI.cpp:80
+msgid "Set Time Zone: "
+msgstr "時區設定: "
 
 #: src/modules/TextUI.cpp:144
 msgid "Set UI Locale: "
 msgstr "程式界面語言: "
 
-#: src/core/StelProjectorClasses.cpp:25
-msgid "Perspective"
-msgstr "透視法"
+#: src/gui/StelGui.cpp:162
+msgid "Set home planet to selected planet"
+msgstr "將選擇的行星設為目前位置"
 
-#: src/core/StelProjectorClasses.cpp:30
+#: src/gui/StelGui.cpp:141
+msgid "Set normal time rate"
+msgstr "正常時間速度"
+
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:138
+msgid "Set the normal script execution rate"
+msgstr "正常 Script 執行速度"
+
+#: src/gui/StelGui.cpp:144
+msgid "Set time rate to zero"
+msgstr "調整時間速率至零"
+
+#: src/gui/StelGui.cpp:145
+msgid "Set time to now"
+msgstr "跳至目前時刻"
+
+#: src/ui_configurationDialog.h:796
 msgid ""
-"Perspective projection keeps the horizon a straight line. The mathematical "
-"name for this projection method is <i>gnomonic projection</i>."
-msgstr "維持地平線為平直線的透視投影。這種透視方法的數學學名為<i>磬折形投影法</i>."
+"Sets the simulation time to the next instance of this time of day when "
+"Stellarium starts"
+msgstr "以此時刻下次發生的日期 (今天或明天) 啟動"
 
-#: src/core/StelProjectorClasses.cpp:63
-msgid "Equal Area"
-msgstr "等面積"
+#: src/ui_viewDialog.h:1016
+msgid "Shooting Stars"
+msgstr "流星"
 
-#: src/core/StelProjectorClasses.cpp:68
+#: src/ui_configurationDialog.h:758
+msgid "Short"
+msgstr "簡短顯示"
+
+#: src/ui_viewDialog.h:1036
+msgid "Show art"
+msgstr "顯示星座圖繪"
+
+#: src/ui_viewDialog.h:1010
+msgid "Show atmosphere"
+msgstr "顯示大氣層"
+
+#: src/ui_viewDialog.h:1035
+msgid "Show boundaries"
+msgstr "顯示星座界線"
+
+#: src/ui_configurationDialog.h:812
+msgid "Show flip buttons"
+msgstr "顯示翻轉按鈕"
+
+#: src/ui_viewDialog.h:1041
+msgid "Show fog"
+msgstr "顯示霧氣"
+
+#: src/ui_viewDialog.h:1040
+msgid "Show ground"
+msgstr "顯示地面"
+
+#: src/ui_viewDialog.h:1034
+msgid "Show labels"
+msgstr "顯示星座名稱"
+
+#: src/ui_viewDialog.h:1033
+msgid "Show lines"
+msgstr "顯示星座連線"
+
+#: src/ui_viewDialog.h:1005
+msgid "Show planet markers"
+msgstr "顯示行星標記"
+
+#: src/ui_viewDialog.h:1006
+msgid "Show planet orbits"
+msgstr "顯示行星軌道"
+
+#: src/ui_viewDialog.h:1004
+msgid "Show planets"
+msgstr "顯示行星"
+
+#: src/modules/TextUI.cpp:96
+msgid "Show: "
+msgstr "顯示: "
+
+#: src/modules/TextUI.cpp:142
+msgid "Shut Down: "
+msgstr "關閉: "
+
+#: src/modules/TextUI.cpp:83
+msgid "Sidereal"
+msgstr "恆星日"
+
+#: src/ui_viewDialog.h:1007
+msgid "Simulate light speed"
+msgstr "模擬光速"
+
+#: src/modules/Nebula.cpp:100
+#, qt-format
+msgid "Size: %1"
+msgstr "大小: %1"
+
+#: src/ui_viewDialog.h:986
+msgid "Sky"
+msgstr "星空"
+
+#: src/modules/TextUI.cpp:92
+msgid "Sky Culture: "
+msgstr "星空文化: "
+
+#: src/modules/TextUI.cpp:93
+msgid "Sky Language: "
+msgstr "星空述語: "
+
+#: src/modules/TextUI.cpp:85
+msgid "Sky Time At Start-up: "
+msgstr "程式啟動時之星空時間: "
+
+#: src/modules/TextUI.cpp:79
+msgid "Sky Time: "
+msgstr "星空時間: "
+
+#: src/gui/StelGui.cpp:128
+msgid "Sky and viewing options window"
+msgstr "星空與顯示"
+
+#: src/gui/HelpDialog.cpp:71 src/gui/StelGui.cpp:136
+msgid "Slow down the script execution rate"
+msgstr "減慢 Script 執行速度"
+
+#: src/modules/TextUI.cpp:76
+msgid "Solar System Body: "
+msgstr "觀測者所處太陽系天體: "
+
+#: src/translations.h:60
+msgid "Solar System Observer"
+msgstr "太陽系全覽點"
+
+#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:286
+#: src/gui/StelGuiItems.cpp:647
+msgid "Space"
+msgstr "空白鍵"
+
+#: src/modules/StarWrapper.cpp:119
+#, qt-format
+msgid "Spectral Type: %1"
+msgstr "光譜型: %1"
+
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:137
+msgid "Speed up the script execution rate"
+msgstr "加快 Script 執行速度"
+
+#: src/ui_configurationDialog.h:817
+msgid "Spheric mirror distortion"
+msgstr "球面鏡扭曲"
+
+#: src/ui_configurationDialog.h:815
 msgid ""
-"The full name of this projection method is, <i>Lambert azimuthal equal-area "
-"projection</i>. It preserves the area but not the angle."
-msgstr "這種投影法的全名是 <i>Lambert 等面積方位投影法</i>. 這種投影法是維持面積而非角度。"
+"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
+"mirror for low-cost planetarium systems."
+msgstr "球面鏡扭曲 (使用 Stellarium 做為低成本星象投影系統的場合)"
+
+#: src/gui/ViewDialog.cpp:450
+msgid "Standard Perseids rate"
+msgstr "標準英仙座流星雨頻率"
+
+#: src/modules/TextUI.cpp:97
+msgid "Star Value Multiplier: "
+msgstr "星等顯示加成: "
+
+#: src/ui_configurationDialog.h:838
+msgid "Star catalog updates"
+msgstr "星表更新"
+
+#: src/ui_viewDialog.h:992
+msgid "Starlore"
+msgstr "星空述語"
+
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:995 src/ui_viewDialog.h:1013
+msgid "Stars"
+msgstr "恆星"
+
+#: src/modules/TextUI.cpp:66
+msgid "Stars "
+msgstr "恆星設定 "
+
+#: src/ui_configurationDialog.h:792
+msgid "Starts Stellarium at system clock date and time"
+msgstr "以系統設定的時間啟動"
+
+#: src/gui/ConfigurationDialog.cpp:448
+#, qt-format
+msgid "Startup FOV: %1%2"
+msgstr "啟動時的視野大小: %1%2"
+
+#: src/ui_configurationDialog.h:776
+msgid "Startup FOV: XX"
+msgstr "啟動時的視角: XX"
+
+#: src/ui_configurationDialog.h:790
+msgid "Startup date and time"
+msgstr "啟動時的日期與時間"
+
+#: src/gui/ConfigurationDialog.cpp:456
+#, qt-format
+msgid "Startup direction of view Az/Alt: %1/%2"
+msgstr "啟動時的地平坐標方位角/高度角: %1/%2"
+
+#: src/ui_configurationDialog.h:780
+msgid "Startup direction of view: xxxx"
+msgstr "啟動時的觀看方向: xxxx"
+
+#: src/gui/HelpDialog.cpp:161
+msgid "Stellarium Help"
+msgstr "Stellarium 說明"
 
 #: src/core/StelProjectorClasses.cpp:111
 msgid "Stereographic"
@@ -424,2227 +1538,344 @@ msgid ""
 "Stereographic projection is known since the antiquity and was originally "
 "known as the planisphere projection. It preserves the angles at which curves "
 "cross each other but it does not preserve area."
-msgstr "立體繪圖法原稱為星座盤投影法。他保留曲線交會的角度而不是面積的大小。（另譯為赤平投影法）"
-
-#: src/core/StelProjectorClasses.cpp:150
-msgid "Fish-eye"
-msgstr "魚眼"
-
-#: src/core/StelProjectorClasses.cpp:155
-msgid ""
-"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
-"lines become curves when they appear a large angular distance from the "
-"centre of the field of view (like the distortions seen with very wide angle "
-"camera lenses)."
-msgstr "魚眼投影法或稱為<i>等距方位投影法</i>，當直線距離中心的角度很大時會變成曲線 (像是從廣角鏡頭看出去所見到的變形)。"
-
-#: src/core/StelProjectorClasses.cpp:189
-msgid "Cylinder"
-msgstr "圓柱體"
-
-#: src/core/StelProjectorClasses.cpp:194
-msgid ""
-"The full name of this projection mode is <i>cylindrical equidistant "
-"projection</i>. With this projection all parallels are equally spaced."
-msgstr "這個投影法的全名是<i>等距圓柱投影</i>。 所有經緯線的投影都是相同距離。"
-
-#: src/core/StelProjectorClasses.cpp:238
-msgid "Mercator"
-msgstr "麥卡托投影"
-
-#: src/core/StelProjectorClasses.cpp:243
-msgid ""
-"The mercator projection is one of the most used world map projection. It "
-"preserves direction and shapes but distorts size, in an increasing degree "
-"away from the equator."
-msgstr "麥卡托投影是世界上最常用的投影之一。它維持方向和形狀但扭曲大小，離赤道愈遠的緯線間隔愈大。"
-
-#: src/core/StelProjectorClasses.cpp:291
-msgid "Orthographic"
-msgstr "正射"
-
-#: src/core/StelProjectorClasses.cpp:296
-msgid ""
-"Orthographic projection is related to perspective projection, but the point "
-"of perspective is set to an infinite distance."
-msgstr "正射投影類似透視投影，但是投影點位在無限遠的距離。"
-
-#: src/core/StelObject.cpp:74
-#, qt-format
-msgid "RA/DE (J2000): %1/%2"
-msgstr "赤經/赤緯 (J2000): %1/%2"
-
-#: src/core/StelObject.cpp:81
-#, qt-format
-msgid "RA/DE (of date): %1/%2"
-msgstr "赤經/赤緯 (日期): %1/%2"
-
-#: src/core/StelObject.cpp:89
-#, qt-format
-msgid "Hour angle/DE: %1/%2"
-msgstr "時角/赤緯: %1/%2"
-
-#: src/core/StelObject.cpp:100
-#, qt-format
-msgid "Az/Alt: %1/%2"
-msgstr "方位角/高度角: %1/%2"
-
-#: src/gui/ConfigurationDialog.cpp:284
-msgid "Select screenshot directory"
-msgstr "選擇畫面擷取圖片的存檔目錄"
-
-#: src/gui/ConfigurationDialog.cpp:450
-#, qt-format
-msgid "Startup FOV: %1%2"
-msgstr "啟動時的視野大小: %1%2"
-
-#: src/gui/ConfigurationDialog.cpp:458
-#, qt-format
-msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr "啟動時的地平坐標方位角/高度角: %1/%2"
-
-#: src/gui/ConfigurationDialog.cpp:493
-msgid "Author"
-msgstr "作者"
-
-#: src/gui/ConfigurationDialog.cpp:494
-msgid "License"
-msgstr "授權條款"
-
-#: src/gui/ConfigurationDialog.cpp:523
-msgid "Running script: "
-msgstr "執行 Script: "
-
-#: src/gui/ConfigurationDialog.cpp:530
-msgid "Running script: [none]"
-msgstr "執行 Script: [無]"
-
-#: src/gui/ConfigurationDialog.cpp:551
-#, qt-format
-msgid "Get catalog %1 of %2"
-msgstr "取得星表 %1/%2"
-
-#: src/gui/ConfigurationDialog.cpp:552
-#, qt-format
-msgid ""
-"Download size: %1MB\n"
-"Star count: %2\n"
-"Magnitude range: %3 - %4"
 msgstr ""
-"檔案大小: %1MB\n"
-"恆星數量: %2\n"
-"亮度範圍: %3 - %4"
+"立體繪圖法原稱為星座盤投影法。他保留曲線交會的角度而不是面積的大小。（另譯為"
+"赤平投影法）"
 
-#: src/gui/ConfigurationDialog.cpp:562
-msgid "Checking for new star catalogs..."
-msgstr "正在檢查是否有新的星表..."
+#: src/ui_configurationDialog.h:861
+msgid "Stop a running script"
+msgstr "停止正在執行的 Script"
 
-#: src/gui/ConfigurationDialog.cpp:566
-msgid "All star catalogs are up to date."
-msgstr "所有星表都已更新。"
-
-#: src/gui/ConfigurationDialog.cpp:570
-#, qt-format
-msgid ""
-"Downloading %1...\n"
-"(You can close this window.)"
-msgstr ""
-"正在下載 %1...\n"
-"(您可以關閉此視窗)"
-
-#: src/gui/ConfigurationDialog.cpp:575
-msgid ""
-"Finished downloading new star catalogs!\n"
-"Restart Stellarium to display them."
-msgstr ""
-"新的星表下載完成！\n"
-"請重新啟動 Stellarium 以顯示新的星表。"
-
-#: src/gui/ConfigurationDialog.cpp:579
-msgid "Verifying file integrity..."
-msgstr "檢查檔案完整性..."
-
-#: src/gui/ConfigurationDialog.cpp:583
-#, qt-format
-msgid ""
-"Error checking updates:\n"
-"%1"
-msgstr ""
-"尋找更新時發生錯誤:\n"
-"%1"
-
-#: src/gui/ConfigurationDialog.cpp:588
-#, c-format, qt-format
-msgid ""
-"Could not finalize download:\n"
-"Error moving temporary file %1.tmp to %1.cat"
-msgstr ""
-"無法完成下載:\n"
-"移動暫時檔案 %1.tmp 至 %1.cat 時發生錯誤"
-
-#: src/gui/ConfigurationDialog.cpp:592
-#, qt-format
-msgid ""
-"Error downloading %1:\n"
-"%2"
-msgstr ""
-"下載 %1 時發生錯誤:\n"
-"%2"
-
-#: src/gui/ConfigurationDialog.cpp:597
-#, qt-format
-msgid ""
-"Error downloading %1:\n"
-"File is corrupted."
-msgstr ""
-"下載 %1 時發生錯誤:\n"
-"檔案損毀。"
-
-#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:209
-#: src/gui/StelGuiItems.cpp:532
-msgid "Space"
-msgstr "空白鍵"
-
-#: src/gui/HelpDialog.cpp:52
-msgid "Arrow keys & left mouse drag"
-msgstr "方向鍵及滑鼠左鍵拖曳"
-
-#: src/gui/HelpDialog.cpp:53
-msgid "Page Up/Down"
-msgstr "Page Up/Page Down鍵"
-
-#: src/gui/HelpDialog.cpp:54
-msgid "CTRL + Up/Down"
-msgstr "CTRL + 上/下方向鍵"
-
-#: src/gui/HelpDialog.cpp:55
-msgid "Left click"
-msgstr "滑鼠左鍵"
-
-#: src/gui/HelpDialog.cpp:56
-msgid "Right click"
-msgstr "滑鼠右鍵"
-
-#: src/gui/HelpDialog.cpp:57
-msgid "CTRL + Left click"
-msgstr "CTRL + 滑鼠左鍵"
-
-#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:203
-msgid "Movement and Selection"
-msgstr "移動與選擇"
-
-#: src/gui/HelpDialog.cpp:61
-msgid "Pan view around the sky"
-msgstr "移動畫面"
-
-#: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
-msgid "Zoom in/out"
-msgstr "放大/縮小"
-
-#: src/gui/HelpDialog.cpp:64
-msgid "Select object"
-msgstr "選取物件"
-
-#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
-msgid "Clear selection"
-msgstr "清除選取"
-
-#: src/gui/HelpDialog.cpp:153
-msgid "Stellarium Help"
-msgstr "Stellarium 說明"
-
-#: src/gui/HelpDialog.cpp:154
-msgid "Keys"
-msgstr "快速鍵"
-
-#: src/gui/HelpDialog.cpp:162
-msgid "Further Reading"
-msgstr "了解更多"
-
-#: src/gui/HelpDialog.cpp:163
-msgid ""
-"The following links are external web links, and will launch your web "
-"browser:\n"
-msgstr "下列為網站連結，會開啟您的網路瀏覽器:\n"
-
-#: src/gui/HelpDialog.cpp:164
-msgid "The Stellarium User Guide"
-msgstr "Stellarium 用戶指南"
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:168
-msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr "{FAQ} - 關於 Stellarium 的常見問答"
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:173
-msgid ""
-"{The Stellarium Wiki} - General information.  You can also find user-"
-"contributed landscapes and scripts here."
-msgstr "{Stellarium Wiki} - 一般資訊。您也可以在此處找到其他使用者製作的地景與腳本。"
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:178
-msgid ""
-"{Support ticket system} - if you need help using Stellarium, post a support "
-"request here and we'll try to help."
-msgstr "{技術支援要求系統} - 若您在使用 Stellarium 時需要幫忙，請至該處提出要求，我們會盡量幫忙。"
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:183
-msgid ""
-"{Bug reporting system} - if something doesn't work properly and is not "
-"listed in the FAQ list, you can open bug reports here."
-msgstr "{程式臭蟲回報系統} - 若發現某些功能有問題，且沒有列在 FAQ，請至該處提出臭蟲回報。"
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:188
-msgid ""
-"{Feature request system} - if you have an idea for a new feature, send it to "
-"us. We can't promise to implement every idea, but we appreciate the feedback "
-"and review the list when we are planning future features."
-msgstr "{功能需求系統} - 若您有任何新功能想法，請告訴我們。我們不能承諾滿足大家的需求，但我們感激您的意見回饋並在規劃未來版本時考慮。"
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:193
-msgid "{Forums} - discuss Stellarium with other users."
-msgstr "{討論區} - 在此處和其他愛好者討論 Stellarium。"
-
-#: src/gui/HelpDialog.cpp:229 src/gui/HelpDialog.cpp:319
-#: src/gui/HelpDialog.cpp:321 src/gui/StelGui.cpp:222
-msgid "Miscellaneous"
-msgstr "其他"
-
-#: src/gui/HelpDialog.cpp:287
-msgid "Developers"
-msgstr "開發團隊"
-
-#: src/gui/HelpDialog.cpp:288
-#, qt-format
-msgid "Project coordinator & lead developer: %1"
-msgstr "計畫協調 & 開發經理: %1"
-
-#: src/gui/HelpDialog.cpp:289
-#, qt-format
-msgid "Doc author/developer: %1"
-msgstr "說明文件撰寫: %1"
-
-#: src/gui/HelpDialog.cpp:290
-#, qt-format
-msgid "Graphic/other designer: %1"
-msgstr "視覺與其他設計: %1"
-
-#: src/gui/HelpDialog.cpp:291 src/gui/HelpDialog.cpp:292
-#: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:295
-#, qt-format
-msgid "Developer: %1"
-msgstr "開發: %1"
-
-#: src/gui/HelpDialog.cpp:293
-#, qt-format
-msgid "OSX Developer: %1"
-msgstr "OSX  開發: %1"
-
-#: src/gui/StelGui.cpp:150
-msgid "Display Options"
-msgstr "顯示選項"
-
-#: src/gui/StelGui.cpp:151
-msgid "Constellation lines"
-msgstr "星座連線"
-
-#: src/gui/StelGui.cpp:152
-msgid "Constellation art"
-msgstr "星座圖繪"
+#: src/ui_configurationDialog.h:850
+msgid "Stop the download. You can always restart it later"
+msgstr "終止下載，你可以隨時重新啟動下載"
 
 #: src/gui/StelGui.cpp:153
-msgid "Constellation labels"
-msgstr "星座名稱"
-
-#: src/gui/StelGui.cpp:154
-msgid "Constellation boundaries"
-msgstr "星座界線"
-
-#: src/gui/StelGui.cpp:156 src/ui_viewDialog.h:1056
-msgid "Azimuthal grid"
-msgstr "地平座標"
-
-#: src/gui/StelGui.cpp:157 src/ui_viewDialog.h:1054
-msgid "Equatorial grid"
-msgstr "赤道座標"
-
-#: src/gui/StelGui.cpp:158 src/ui_viewDialog.h:1055
-msgid "Equatorial J2000 grid"
-msgstr "赤道座標 (J2000)"
-
-#: src/gui/StelGui.cpp:159 src/ui_viewDialog.h:1059
-msgid "Ecliptic line"
-msgstr "黃道"
-
-#: src/gui/StelGui.cpp:160 src/ui_viewDialog.h:1057
-msgid "Equator line"
-msgstr "赤道"
-
-#: src/gui/StelGui.cpp:161 src/ui_viewDialog.h:1058
-msgid "Meridian line"
-msgstr "經線"
-
-#: src/gui/StelGui.cpp:162 src/ui_viewDialog.h:1060
-msgid "Cardinal points"
-msgstr "基點"
-
-#: src/gui/StelGui.cpp:164
-msgid "Ground"
-msgstr "地面"
-
-#: src/gui/StelGui.cpp:165 src/ui_viewDialog.h:1037
-msgid "Atmosphere"
-msgstr "大氣"
-
-#: src/gui/StelGui.cpp:166
-msgid "Fog"
-msgstr "霧"
-
-#: src/gui/StelGui.cpp:168 src/ui_viewDialog.h:1042
-msgid "Nebulas"
-msgstr "星雲"
-
-#: src/gui/StelGui.cpp:169
-msgid "Nebulas background images"
-msgstr "星雲背景影像"
-
-#: src/gui/StelGui.cpp:170 src/ui_viewDialog.h:1027 src/ui_viewDialog.h:1041
-msgid "Stars"
-msgstr "恆星"
-
-#: src/gui/StelGui.cpp:171
-msgid "Planets labels"
-msgstr "行星標示"
-
-#: src/gui/StelGui.cpp:173
-msgid "Night mode"
-msgstr "夜間模式"
-
-#: src/gui/StelGui.cpp:174
-msgid "Full-screen mode"
-msgstr "全螢幕模式"
-
-#: src/gui/StelGui.cpp:175
-msgid "Flip scene horizontally"
-msgstr "水平翻轉"
-
-#: src/gui/StelGui.cpp:176
-msgid "Flip scene vertically"
-msgstr "垂直翻轉"
-
-#: src/gui/StelGui.cpp:178
-msgid "Windows"
-msgstr "視窗"
-
-#: src/gui/StelGui.cpp:179
-msgid "Help window"
-msgstr "說明"
-
-#: src/gui/StelGui.cpp:180
-msgid "Configuration window"
-msgstr "設定"
-
-#: src/gui/StelGui.cpp:181
-msgid "Search window"
-msgstr "搜尋"
-
-#: src/gui/StelGui.cpp:182
-msgid "Sky and viewing options window"
-msgstr "星空與顯示"
-
-#: src/gui/StelGui.cpp:183
-msgid "Date/time window"
-msgstr "日期/時間"
-
-#: src/gui/StelGui.cpp:184
-msgid "Location window"
-msgstr "位置"
-
-#: src/gui/StelGui.cpp:186 src/ui_dateTimeDialogGui.h:294
-msgid "Date and Time"
-msgstr "日期與時間"
-
-#: src/gui/StelGui.cpp:187
-msgid "Decrease time speed"
-msgstr "減慢時間速度"
-
-#: src/gui/StelGui.cpp:188
-msgid "Increase time speed"
-msgstr "加快時間速度"
-
-#: src/gui/StelGui.cpp:189
-msgid "Set normal time rate"
-msgstr "正常時間速度"
-
-#: src/gui/StelGui.cpp:190
-msgid "Set time rate to zero"
-msgstr "調整時間速率至零"
-
-#: src/gui/StelGui.cpp:191
-msgid "Set time to now"
-msgstr "跳至目前時刻"
-
-#: src/gui/StelGui.cpp:192
-msgid "Add 1 solar hour"
-msgstr "增加 1 太陽時"
-
-#: src/gui/StelGui.cpp:193
-msgid "Subtract 1 solar hour"
-msgstr "減少 1 太陽時"
-
-#: src/gui/StelGui.cpp:194
-msgid "Add 1 solar day"
-msgstr "增加 1 太陽日"
-
-#: src/gui/StelGui.cpp:195
-msgid "Subtract 1 solar day"
-msgstr "減少 1 太陽日"
-
-#: src/gui/StelGui.cpp:196
-msgid "Add 1 solar week"
-msgstr "增加 1 太陽週"
-
-#: src/gui/StelGui.cpp:197
-msgid "Subtract 1 solar week"
-msgstr "減少 1 太陽週"
-
-#: src/gui/StelGui.cpp:198
-msgid "Add 1 sidereal day"
-msgstr "增加 1 恆星日"
-
-#: src/gui/StelGui.cpp:199
 msgid "Subtract 1 sidereal day"
 msgstr "減少 1 恆星日"
 
-#: src/gui/StelGui.cpp:200
-msgid "Add 1 sidereal week"
-msgstr "增加 1 恆星週"
-
-#: src/gui/StelGui.cpp:201
+#: src/gui/StelGui.cpp:155
 msgid "Subtract 1 sidereal week"
 msgstr "減少 1 恆星週"
 
-#: src/gui/StelGui.cpp:204
-msgid "Center on selected object"
-msgstr "將選擇天體移至畫面中央"
+#: src/gui/StelGui.cpp:149
+msgid "Subtract 1 solar day"
+msgstr "減少 1 太陽日"
 
-#: src/gui/StelGui.cpp:205
-msgid "Track object"
-msgstr "追蹤"
+#: src/gui/StelGui.cpp:147
+msgid "Subtract 1 solar hour"
+msgstr "減少 1 太陽時"
 
-#: src/gui/StelGui.cpp:206
-msgid "Zoom in on selected object"
-msgstr "放大已選擇的物體"
-
-#: src/gui/StelGui.cpp:207
-msgid "Zoom out"
-msgstr "縮小"
-
-#: src/gui/StelGui.cpp:208
-msgid "Set home planet to selected planet"
-msgstr "將選擇的行星設為目前位置"
-
-#: src/gui/StelGui.cpp:210
-msgid "Telescope Control"
-msgstr "望遠鏡控制"
-
-#: src/gui/StelGui.cpp:211
-msgid "Move telescope #0 to selected object"
-msgstr "移動望遠鏡 #0 到選擇的目標"
-
-#: src/gui/StelGui.cpp:212
-msgid "Move telescope #1 to selected object"
-msgstr "移動望遠鏡 #1 到選擇的目標"
-
-#: src/gui/StelGui.cpp:213
-msgid "Move telescope #2 to selected object"
-msgstr "移動望遠鏡 #2 到選擇的目標"
-
-#: src/gui/StelGui.cpp:214
-msgid "Move telescope #3 to selected object"
-msgstr "移動望遠鏡 #3 到選擇的目標"
-
-#: src/gui/StelGui.cpp:215
-msgid "Move telescope #4 to selected object"
-msgstr "移動望遠鏡 #4 到選擇的目標"
-
-#: src/gui/StelGui.cpp:216
-msgid "Move telescope #5 to selected object"
-msgstr "移動望遠鏡 #5 到選擇的目標"
-
-#: src/gui/StelGui.cpp:217
-msgid "Move telescope #6 to selected object"
-msgstr "移動望遠鏡 #6 到選擇的目標"
-
-#: src/gui/StelGui.cpp:218
-msgid "Move telescope #7 to selected object"
-msgstr "移動望遠鏡 #7 到選擇的目標"
-
-#: src/gui/StelGui.cpp:219
-msgid "Move telescope #8 to selected object"
-msgstr "移動望遠鏡 #8 到選擇的目標"
-
-#: src/gui/StelGui.cpp:220
-msgid "Move telescope #9 to selected object"
-msgstr "移動望遠鏡 #9 到選擇的目標"
-
-#: src/gui/StelGui.cpp:223
-msgid "Switch between equatorial and azimuthal mount"
-msgstr "在赤道座標與地平座標系統之間切換"
-
-#: src/gui/StelGui.cpp:224
-msgid "Quit"
-msgstr "結束"
-
-#: src/gui/StelGui.cpp:225
-msgid "Save screenshot"
-msgstr "儲存螢幕擷取圖片"
-
-#: src/gui/StelGui.cpp:228
-msgid "Auto hide horizontal button bar"
-msgstr "自動隱藏水平工具列"
-
-#: src/gui/StelGui.cpp:229
-msgid "Auto hide vertical button bar"
-msgstr "自動隱藏垂直工具列"
-
-#: src/gui/StelGui.cpp:230
-msgid "Toggle visibility of toolbars"
-msgstr "切換工具列顯示"
-
-#: src/gui/StelGui.cpp:835
-msgid "Stellarium"
-msgstr "Stellarium"
-
-#: src/gui/StelGuiItems.cpp:433
-#, no-c-format, qt-format
-msgid "%1m"
-msgstr "%1m"
-
-#: src/gui/ViewDialog.cpp:340
-msgid "No description"
-msgstr "沒有描述"
-
-#: src/gui/ViewDialog.cpp:396
-msgid "No shooting stars"
-msgstr "無流星"
-
-#: src/gui/ViewDialog.cpp:399
-msgid "Normal rate"
-msgstr "日常頻率"
-
-#: src/gui/ViewDialog.cpp:402
-msgid "Standard Perseids rate"
-msgstr "標準英仙座流星雨頻率"
-
-#: src/gui/ViewDialog.cpp:405
-msgid "Exceptional Leonid rate"
-msgstr "超量獅子座流星雨"
-
-#: src/gui/ViewDialog.cpp:408
-msgid "Highest rate ever (1966 Leonids)"
-msgstr "至今最高頻率 (1966 獅子座流星雨)"
-
-#: src/gui/LocationDialog.cpp:339
-msgid "New Location"
-msgstr ""
-
-#: src/main.cpp:62
-msgid "This system does not support OpenGL."
-msgstr "系統不支援 OpenGL"
+#: src/gui/StelGui.cpp:151
+msgid "Subtract 1 solar week"
+msgstr "減少 1 太陽週"
 
 #: src/translations.h:33
 msgid "Sun"
 msgstr "太陽"
 
-#: src/translations.h:34
-msgid "Mercury"
-msgstr "水星"
+#: src/gui/StelGui.cpp:177
+msgid "Switch between equatorial and azimuthal mount"
+msgstr "在赤道座標與地平座標系統之間切換"
 
-#: src/translations.h:35
-msgid "Venus"
-msgstr "金星"
+#: src/ui_configurationDialog.h:794
+msgid "System date and time"
+msgstr "系統日期與時間"
 
-#: src/translations.h:36
-msgid "Earth"
-msgstr "地球"
+#: src/ui_configurationDialog.h:798
+msgid "System date at:"
+msgstr "系統日期，在時間:"
 
-#: src/translations.h:37
-msgid "Moon"
-msgstr "月球"
-
-#: src/translations.h:38
-msgid "Mars"
-msgstr "火星"
-
-#: src/translations.h:39
-msgid "Deimos"
-msgstr "火衛二 (戴摩斯)"
-
-#: src/translations.h:40
-msgid "Phobos"
-msgstr "火衛一 (弗伯斯)"
-
-#: src/translations.h:41
-msgid "Jupiter"
-msgstr "木星"
-
-#: src/translations.h:42
-msgid "Io"
-msgstr "木衛一 (伊奧)"
-
-#: src/translations.h:43
-msgid "Europa"
-msgstr "木衛二 (歐羅巴)"
-
-#: src/translations.h:44
-msgid "Ganymede"
-msgstr "木衛三 (加尼美德)"
-
-#: src/translations.h:45
-msgid "Callisto"
-msgstr "木衛四 (卡利斯托)"
-
-#: src/translations.h:46
-msgid "Saturn"
-msgstr "土星"
-
-#: src/translations.h:47
-msgid "Mimas"
-msgstr "土衛一 (邁馬斯)"
-
-#: src/translations.h:48
-msgid "Enceladus"
-msgstr "土衛二 (恩瑟阿達斯)"
+#: src/gui/StelGui.cpp:164
+msgid "Telescope Control"
+msgstr "望遠鏡控制"
 
 #: src/translations.h:49
 msgid "Tethys"
 msgstr "土衛三 (蒂西斯)"
 
-#: src/translations.h:50
-msgid "Dione"
-msgstr "土衛四 (戴奧妮)"
+#: src/core/StelProjectorClasses.cpp:194
+msgid ""
+"The Hammer projection is an equal-area map projection, described by Ernst "
+"Hammer in 1892 and directly inspired by the Aitoff projection."
+msgstr ""
+"Hammer 投影法事等面積投影法，1892 年由 Ernst Hammer 基於 Aitoff 投影法發明。"
 
-#: src/translations.h:51
-msgid "Rhea"
-msgstr "土衛五 (麗雅)"
+#: src/gui/HelpDialog.cpp:172
+msgid "The Stellarium User Guide"
+msgstr "Stellarium 使用者指南"
+
+#: src/ui_configurationDialog.h:778
+msgid "The direction you're looking when Stellarium starts"
+msgstr "Stellarium 啟動時應使用的視角"
+
+#: src/gui/HelpDialog.cpp:171
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr "下列為網站連結，會開啟您的網路瀏覽器:\n"
+
+#: src/core/StelProjectorClasses.cpp:68
+msgid ""
+"The full name of this projection method is, <i>Lambert azimuthal equal-area "
+"projection</i>. It preserves the area but not the angle."
+msgstr ""
+"這種投影法的全名是 <i>Lambert 等面積方位投影法</i>. 這種投影法是維持面積而非"
+"角度。"
+
+#: src/core/StelProjectorClasses.cpp:235
+msgid ""
+"The full name of this projection mode is <i>cylindrical equidistant "
+"projection</i>. With this projection all parallels are equally spaced."
+msgstr "這個投影法的全名是<i>等距圓柱投影</i>。 所有經緯線的投影都是相同距離。"
+
+#: src/core/StelProjectorClasses.cpp:282
+msgid ""
+"The mercator projection is one of the most used world map projection. It "
+"preserves direction and shapes but distorts size, in an increasing degree "
+"away from the equator."
+msgstr ""
+"麥卡托投影是世界上最常用的投影之一。它維持方向和形狀但扭曲大小，離赤道愈遠的"
+"緯線間隔愈大。"
+
+#: src/ui_configurationDialog.h:774
+msgid "The width of your view when Stellarium starts"
+msgstr "Stellarium 啟動時應使用的視窗寬度"
+
+#: src/main.cpp:308
+msgid "This system does not support OpenGL."
+msgstr "系統不支援 OpenGL。"
+
+#: src/modules/TextUI.cpp:88
+msgid "Time Display Format: "
+msgstr "時間顯示格式: "
 
 #: src/translations.h:52
 msgid "Titan"
 msgstr "土衛六 (泰坦)"
 
-#: src/translations.h:53
-msgid "Hyperion"
-msgstr "土衛七 (海帕里翁)"
+#: src/ui_configurationDialog.h:810
+msgid "Toggle vertical and horizontal image flip buttons."
+msgstr "切換是否要顯示水平與垂直翻轉按鈕"
 
-#: src/translations.h:54
-msgid "Iapetus"
-msgstr "土衛八 (艾佩特斯)"
+#: src/gui/StelGui.cpp:184
+#, fuzzy
+msgid "Toggle visibility of GUI"
+msgstr "切換工具列顯示"
 
-#: src/translations.h:55
-msgid "Phoebe"
-msgstr "土衛九 (菲碧)"
+#: src/ui_configurationDialog.h:875
+msgid "Tools"
+msgstr "工具"
 
-#: src/translations.h:56
-msgid "Neptune"
-msgstr "海王星"
+#: src/gui/StelGui.cpp:159
+msgid "Track object"
+msgstr "追蹤"
+
+#: src/translations.h:80
+msgid "Tupi-Guarani"
+msgstr "圖皮-瓜拉尼諸 (南美)"
+
+#: src/ui_viewDialog.h:998
+msgid "Twinkle:"
+msgstr "閃爍:"
+
+#: src/modules/TextUI.cpp:100
+msgid "Twinkling: "
+msgstr "星光閃爍程度: "
+
+#: src/modules/Nebula.cpp:92
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr "類型: <b>%1</b>"
+
+#: src/modules/TextUI.cpp:135
+msgid "USB Script: "
+msgstr "USB 劇本: "
+
+#: src/modules/Nebula.cpp:290
+msgid "Undocumented type"
+msgstr "未記錄的類型"
+
+#: src/modules/Nebula.cpp:287
+msgid "Unknown"
+msgstr "未知的"
+
+#: src/modules/TextUI.cpp:143
+msgid "Update me via Internet: "
+msgstr "透過網路進行更新: "
 
 #: src/translations.h:57
 msgid "Uranus"
 msgstr "天王星"
 
-#: src/translations.h:58
-msgid "Pluto"
-msgstr "冥王星"
+#: src/ui_configurationDialog.h:800
+msgid "Use a specific date and time when Stellarium starts up"
+msgstr "以特定的時間與日期啟動 Stellarium"
 
-#: src/translations.h:59
-msgid "Charon"
-msgstr "冥衛一 (夏龍)"
+#: src/ui_locationDialogGui.h:393
+msgid "Use as default"
+msgstr "設為預設值"
 
-#: src/translations.h:60
-msgid "Solar System Observer"
-msgstr "太陽系全覽點"
+#: src/ui_viewDialog.h:1042
+msgid "Use associated planet and position"
+msgstr "使用與此地景關聯的位置與行星"
 
-#: src/translations.h:63
-msgid "N"
-msgstr "北"
+#: src/ui_viewDialog.h:1043
+msgid "Use this landscape as default"
+msgstr "將此地景設為預設值"
 
-#: src/translations.h:64
-msgid "S"
-msgstr "南"
+#: src/ui_viewDialog.h:1045
+msgid "Use this sky culture as default"
+msgstr "將此星空述語設為預設值"
 
-#: src/translations.h:65
-msgid "E"
-msgstr "東"
+#: src/translations.h:35
+msgid "Venus"
+msgstr "金星"
+
+#: src/gui/ConfigurationDialog.cpp:791
+msgid "Verifying file integrity..."
+msgstr "檢查檔案完整性..."
+
+#: src/ui_viewDialog.h:980
+msgid "View"
+msgstr "檢視"
+
+#: src/ui_viewDialog.h:1047
+msgid "Visible"
+msgstr "顯示"
 
 #: src/translations.h:66
 msgid "W"
 msgstr "西"
 
-#: src/translations.h:69
-msgid "Chinese"
-msgstr "中國"
-
-#: src/translations.h:70
-msgid "Egyptian"
-msgstr "古埃及"
-
-#: src/translations.h:71
-msgid "Inuit"
-msgstr "因努伊特 (北極)"
-
-#: src/translations.h:72
-msgid "Korean"
-msgstr "古朝鮮"
-
-#: src/translations.h:73
-msgid "Lakota"
-msgstr "拉科塔 (美西)"
-
-#: src/translations.h:74
-msgid "Navajo"
-msgstr "納瓦伙 (北美)"
-
-#: src/translations.h:75
-msgid "Norse"
-msgstr "北歐"
-
-#: src/translations.h:76
-msgid "Polynesian"
-msgstr "玻里尼西亞"
-
-#: src/translations.h:77
+#: src/translations.h:79
 msgid "Western"
 msgstr "西洋"
 
-#: src/translations.h:78
-msgid "Tupi-Guarani"
-msgstr "圖皮-瓜拉尼諸 (南美)"
-
-#: src/ui_dateTimeDialogGui.h:293 src/ui_helpDialogGui.h:266
-#: src/ui_locationDialogGui.h:384 src/ui_viewDialog.h:1018
-#: src/ui_configurationDialog.h:670
-msgid "Form"
-msgstr "格式"
-
-#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
-msgid "/"
-msgstr "/"
-
-#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
-msgid ":"
-msgstr ":"
-
-#: src/ui_helpDialogGui.h:267 src/ui_helpDialogGui.h:269
-msgid "Help"
-msgstr "說明"
-
-#: src/ui_helpDialogGui.h:270
-msgid "About"
-msgstr "關於"
-
-#: src/ui_helpDialogGui.h:271
-msgid "Refresh"
-msgstr "重新整理"
-
-#: src/ui_helpDialogGui.h:272
-msgid "Log"
-msgstr "紀錄"
-
-#: src/ui_locationDialogGui.h:385
-msgid "Location"
-msgstr "位置"
-
-#: src/ui_locationDialogGui.h:389
-msgid "Current location information"
-msgstr "目前位置資訊"
-
-#: src/ui_locationDialogGui.h:390
-msgid "Use as default"
-msgstr "設為預設值"
-
-#: src/ui_locationDialogGui.h:391
-msgid "Delete"
-msgstr "刪除"
-
-#: src/ui_locationDialogGui.h:392
-msgid "Add to list"
-msgstr "加入列表"
-
-#: src/ui_locationDialogGui.h:393
-msgid "Latitude:"
-msgstr "緯度:"
-
-#: src/ui_locationDialogGui.h:396 src/ui_locationDialogGui.h:402
-msgid ""
-"You can enter values in decimal degrees, or using dms format, for example: "
-"+1d 12m 8s"
-msgstr "您可以輸入十進位度數，或是使用 dms 格式，例如: +1d 12m 8s"
-
-#: src/ui_locationDialogGui.h:399
-msgid "Longitude:"
-msgstr "經度:"
-
-#: src/ui_locationDialogGui.h:405
-msgid "Altitude:"
-msgstr "海拔:"
-
-#: src/ui_locationDialogGui.h:408
-msgid "Enter the altitude in meter"
-msgstr "輸入海拔高度 (以公尺為單位)"
-
-#: src/ui_locationDialogGui.h:411
-msgid " m"
-msgstr " m"
-
-#: src/ui_locationDialogGui.h:412
-msgid "Name/City:"
-msgstr "地名/城市名稱:"
-
-#: src/ui_locationDialogGui.h:413
-msgid "Country:"
-msgstr "國家/地區:"
-
-#: src/ui_locationDialogGui.h:414
-msgid "Planet:"
-msgstr "行星:"
-
-#: src/ui_searchDialogGui.h:229 src/ui_searchDialogGui.h:230
-msgid "Find Object"
-msgstr "尋找天體"
-
-#: src/ui_searchDialogGui.h:235
-msgid "RA/Dec (J2000):"
-msgstr "赤經/赤緯 (J2000):"
-
-#: src/ui_viewDialog.h:1019
-msgid "View"
-msgstr "檢視"
-
-#: src/ui_viewDialog.h:1021
-msgid "Planets and satellites"
-msgstr "行星與衛星"
-
-#: src/ui_viewDialog.h:1022
-msgid "Show planets"
-msgstr "顯示行星"
-
-#: src/ui_viewDialog.h:1023
-msgid "Show planet markers"
-msgstr "顯示行星標記"
-
-#: src/ui_viewDialog.h:1024
-msgid "Show planet orbits"
-msgstr "顯示行星軌道"
-
-#: src/ui_viewDialog.h:1025
-msgid "Simulate light speed"
-msgstr "模擬光速"
-
-#: src/ui_viewDialog.h:1026
-msgid "Scale Moon"
-msgstr "月球尺寸"
-
-#: src/ui_viewDialog.h:1028
-msgid "Absolute scale:"
-msgstr "絕對大小:"
-
-#: src/ui_viewDialog.h:1029
-msgid "Relative scale:"
-msgstr "相對大小:"
-
-#: src/ui_viewDialog.h:1030
-msgid "Twinkle:"
-msgstr "閃爍:"
-
-#: src/ui_viewDialog.h:1033
-msgid "Dim faint stars when a very bright object is visible"
-msgstr "將極亮星體週遭的恆星亮度降低"
-
-#: src/ui_viewDialog.h:1036
-msgid "Dynamic eye adaptation"
-msgstr "人眼動態視覺調適"
-
-#: src/ui_viewDialog.h:1038
-msgid "Show atmosphere"
-msgstr "顯示大氣層"
-
-#: src/ui_viewDialog.h:1039
-msgid "Light pollution: "
-msgstr "光害程度: "
-
-#: src/ui_viewDialog.h:1040
-msgid "Labels and Markers"
-msgstr "名稱與標記"
-
-#: src/ui_viewDialog.h:1043
-msgid "Planets"
-msgstr "行星"
-
-#: src/ui_viewDialog.h:1044
-msgid "Shooting Stars"
-msgstr "流星"
-
-#: src/ui_viewDialog.h:1045
-msgid "Hourly zenith rate:"
-msgstr "流星天頂小時率:"
-
-#: src/ui_viewDialog.h:1046
-msgid "0"
-msgstr "0"
-
-#: src/ui_viewDialog.h:1047
-msgid "10"
-msgstr "10"
-
-#: src/ui_viewDialog.h:1048
-msgid "80"
-msgstr "80"
-
-#: src/ui_viewDialog.h:1049
-msgid "10000"
-msgstr "10000"
-
-#: src/ui_viewDialog.h:1050
-msgid "144000"
-msgstr "144000"
-
-#: src/ui_viewDialog.h:1052
-msgid "Sky"
-msgstr "星空"
-
-#: src/ui_viewDialog.h:1053
-msgid "Celestial Sphere"
-msgstr "天球"
-
-#: src/ui_viewDialog.h:1061
-msgid "Constellations"
-msgstr "星座"
-
-#: src/ui_viewDialog.h:1062
-msgid "Show lines"
-msgstr "顯示星座連線"
-
-#: src/ui_viewDialog.h:1063
-msgid "Show labels"
-msgstr "顯示星座名稱"
-
-#: src/ui_viewDialog.h:1064
-msgid "Show boundaries"
-msgstr "顯示星座界線"
-
-#: src/ui_viewDialog.h:1065
-msgid "Show art"
-msgstr "顯示星座圖繪"
-
-#: src/ui_viewDialog.h:1066
-msgid "Art brightness: "
-msgstr "圖繪亮度: "
-
-#: src/ui_viewDialog.h:1067
-msgid "Projection"
-msgstr "投影方式"
-
-#: src/ui_viewDialog.h:1068
-msgid "Markings"
-msgstr "標示"
-
-#: src/ui_viewDialog.h:1069 src/ui_viewDialog.h:1075
-#: src/ui_configurationDialog.h:834
-msgid "Options"
-msgstr "選項"
-
-#: src/ui_viewDialog.h:1070
-msgid "Show ground"
-msgstr "顯示地面"
-
-#: src/ui_viewDialog.h:1071
-msgid "Show fog"
-msgstr "顯示霧氣"
-
-#: src/ui_viewDialog.h:1072
-msgid "Use associated planet and position"
-msgstr "使用與此地景關聯的位置與行星"
-
-#: src/ui_viewDialog.h:1073
-msgid "Use this landscape as default"
-msgstr "將此地景設為預設值"
-
-#: src/ui_viewDialog.h:1074
-msgid "Landscape"
-msgstr "地景"
-
-#: src/ui_viewDialog.h:1076
-msgid "Use associated language for sky labeling"
-msgstr "使用此文化的語言標示星空"
-
-#: src/ui_viewDialog.h:1077
-msgid "Use this sky culture as default"
-msgstr "將此星空述語設為預設值"
-
-#: src/ui_viewDialog.h:1078
-msgid "Starlore"
-msgstr "星空述語"
-
-#: src/ui_viewDialog.h:1079
-msgid "1"
-msgstr ""
-
-#: src/ui_viewDialog.h:1080
-msgid "Add"
-msgstr "新增"
-
-#: src/ui_viewDialog.h:1081
-msgid "Images"
-msgstr "影像"
-
-#: src/ui_configurationDialog.h:671
-msgid "Configuration"
-msgstr "設定"
-
-#: src/ui_configurationDialog.h:683
-msgid "Program language"
-msgstr "程式介面語言"
-
-#: src/ui_configurationDialog.h:684
-msgid "Selected object information"
-msgstr "選擇天體的資訊"
-
-#: src/ui_configurationDialog.h:687
-msgid "Display all information available"
-msgstr "顯示所有可用的資訊"
-
-#: src/ui_configurationDialog.h:690
-msgid "All available"
-msgstr "完整顯示"
-
-#: src/ui_configurationDialog.h:693
-msgid "Display less information"
-msgstr "顯示較少的資訊"
-
-#: src/ui_configurationDialog.h:696
-msgid "Short"
-msgstr "簡短顯示"
-
-#: src/ui_configurationDialog.h:699
-msgid "Display no information"
-msgstr "不顯示資訊"
-
-#: src/ui_configurationDialog.h:702
-msgid "None"
-msgstr "不顯示"
-
-#: src/ui_configurationDialog.h:703
-msgid "Default options"
-msgstr "預設選項"
-
-#: src/ui_configurationDialog.h:706
-msgid ""
-"Save the settings you've changed this session to be the same the next time "
-"you start Stellarium"
-msgstr ""
-
-#: src/ui_configurationDialog.h:709
-msgid "Save settings"
-msgstr "儲存設定"
-
-#: src/ui_configurationDialog.h:712
-msgid "Restore the default settings that came with Stellarium"
-msgstr "還原至Stellarium預設值設定"
-
-#: src/ui_configurationDialog.h:715
-msgid "Restore defaults"
-msgstr "還原預設值"
-
-#: src/ui_configurationDialog.h:716
-msgid ""
-"Restoring default settings requires a restart of Stellarium. Saving all the "
-"current options includes the current FOV and direction of view for use at "
-"next startup."
-msgstr "回復原本的設定需要重新啟動 Stellarium。儲存包含目前視野大小、觀看方向等所有設定以用於下次啟動。"
-
-#: src/ui_configurationDialog.h:719
-msgid "The width of your view when Stellarium starts"
-msgstr ""
-
-#: src/ui_configurationDialog.h:722
-msgid "Startup FOV: XX"
-msgstr "啟動時的視角: XX"
-
-#: src/ui_configurationDialog.h:725
-msgid "The direction you're looking when Stellarium starts"
-msgstr ""
-
-#: src/ui_configurationDialog.h:728
-msgid "Startup direction of view: xxxx"
-msgstr "啟動時的觀看方向: xxxx"
-
-#: src/ui_configurationDialog.h:729
-msgid "Main"
-msgstr "一般設定"
-
-#: src/ui_configurationDialog.h:730
-msgid "Control"
-msgstr "控制"
-
-#: src/ui_configurationDialog.h:733
-msgid "Allow keyboard to pan and zoom"
-msgstr "使用鍵盤移動與縮放畫面"
-
-#: src/ui_configurationDialog.h:736
-msgid "Enable keyboard navigation"
-msgstr "啟動鍵盤導覽"
-
-#: src/ui_configurationDialog.h:739
-msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr "使用滑鼠移動與縮放畫面 (拖曳或捲動滾輪)"
-
-#: src/ui_configurationDialog.h:742
-msgid "Enable mouse navigation"
-msgstr "啟用滑鼠導覽"
-
-#: src/ui_configurationDialog.h:743
-msgid "Startup date and time"
-msgstr "啟動時的日期與時間"
-
-#: src/ui_configurationDialog.h:746
-msgid "Starts Stellarium at system clock date and time"
-msgstr "以系統設定的時間啟動"
-
-#: src/ui_configurationDialog.h:749
-msgid "System date and time"
-msgstr "系統日期與時間"
-
-#: src/ui_configurationDialog.h:752
-msgid ""
-"Sets the simulation time to the next instance of this time of day when "
-"Stellarium starts"
-msgstr "以此時刻下次發生的日期 (今天或明天) 啟動"
-
-#: src/ui_configurationDialog.h:755
-msgid "System date at:"
-msgstr "系統日期，在時間:"
-
-#: src/ui_configurationDialog.h:758
-msgid "Use a specific date and time when Stellarium starts up"
-msgstr "以特定的時間與日期啟動 Stellarium"
-
-#: src/ui_configurationDialog.h:761
-msgid "Other:"
-msgstr "其他:"
-
-#: src/ui_configurationDialog.h:762
-msgid "use current"
-msgstr "使用現有的"
-
-#: src/ui_configurationDialog.h:763
-msgid "Other"
-msgstr "其他"
-
-#: src/ui_configurationDialog.h:766
-msgid "Hides the mouse cursor when inactive"
-msgstr "靜止時隱藏滑鼠指標"
-
-#: src/ui_configurationDialog.h:769
-msgid "Mouse cursor timeout (seconds):"
-msgstr "指定時間後隱藏滑鼠指標 (秒):"
-
-#: src/ui_configurationDialog.h:772
-msgid "Toggle vertical and horizontal image flip buttons."
-msgstr "切換是否要顯示水平與垂直翻轉按鈕"
-
-#: src/ui_configurationDialog.h:775
-msgid "Show flip buttons"
-msgstr "顯示翻轉按鈕"
-
-#: src/ui_configurationDialog.h:776
-msgid "Navigation"
-msgstr "導覽"
-
-#: src/ui_configurationDialog.h:777
-msgid "Planetarium options"
-msgstr "星象館選項"
-
-#: src/ui_configurationDialog.h:780
-msgid ""
-"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
-"mirror for low-cost planetarium systems."
-msgstr "球面鏡扭曲 (使用 Stellarium 做為低成本星象投影系統的場合)"
-
-#: src/ui_configurationDialog.h:783
-msgid "Spheric mirror distortion"
-msgstr "球面鏡扭曲"
-
-#: src/ui_configurationDialog.h:786
-msgid "Align labels with the horizon"
-msgstr "星空名稱文字保持水平"
-
-#: src/ui_configurationDialog.h:789
-msgid "Gravity labels"
-msgstr "重力名稱文字"
-
-#: src/ui_configurationDialog.h:792
+#: src/gui/HelpDialog.cpp:70
+msgid "When a Script is Running"
+msgstr "當 Script 執行時"
+
+#: src/ui_configurationDialog.h:823
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr "若啟用此功能時，「自動縮小」按鈕會在縮小時轉回原本的觀看方向"
 
-#: src/ui_configurationDialog.h:795
-msgid "Auto zoom out returns to initial direction of view"
-msgstr "自動縮小時回到原本的觀看方向"
+#: src/gui/StelGui.cpp:124
+msgid "Windows"
+msgstr "視窗"
 
-#: src/ui_configurationDialog.h:798
-msgid "Mask out everything outside a central circle in the main view"
-msgstr "遮去不在中間圓形範圍內的星空"
+#: src/ui_locationDialogGui.h:398 src/ui_locationDialogGui.h:402
+msgid ""
+"You can enter values in decimal degrees, or using dms format, for example: "
+"+1d 12m 8s"
+msgstr "您可以輸入十進位度數，或是使用 dms 格式，例如: +1d 12m 8s"
 
-#: src/ui_configurationDialog.h:801
-msgid "Disc viewport"
-msgstr "圓形視角"
+#: src/modules/TextUI.cpp:128
+msgid "Zoom Duration: "
+msgstr "縮放動作時間: "
 
-#: src/ui_configurationDialog.h:804
-msgid "Hide other constellations when you click one"
-msgstr "點選其中一個星座時隱藏其它星座"
+#: src/gui/StelGui.cpp:160
+msgid "Zoom in on selected object"
+msgstr "放大已選擇的物體"
 
-#: src/ui_configurationDialog.h:807
-msgid "Select single constellation"
-msgstr "選擇單一星座"
+#: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
+msgid "Zoom in/out"
+msgstr "放大/縮小"
 
-#: src/ui_configurationDialog.h:808
-msgid "Screenshots"
-msgstr "螢幕抓圖"
+#: src/gui/StelGui.cpp:161
+msgid "Zoom out"
+msgstr "縮小"
 
-#: src/ui_configurationDialog.h:809
-msgid "Screenshot Directory"
-msgstr "畫面擷取存檔目錄"
+#: src/ui_configurationDialog.h:866
+#, fuzzy
+msgid "configure"
+msgstr "設定"
 
-#: src/ui_configurationDialog.h:811
-msgid "Invert colors"
-msgstr "反向彩色"
+#: src/ui_configurationDialog.h:803
+msgid "use current"
+msgstr "使用現有的"
 
-#: src/ui_configurationDialog.h:812
-msgid "Star catalog updates"
-msgstr "星表更新"
-
-#: src/ui_configurationDialog.h:815
-msgid "Click here to start downloading"
-msgstr "點選這以開始下載"
-
-#: src/ui_configurationDialog.h:818
-msgid "Get catalog x of y"
-msgstr "取得星表x、y座標"
-
-#: src/ui_configurationDialog.h:819
-msgid "Download this file to view even more stars"
-msgstr "下載此檔案以顯示更多恆星"
-
-#: src/ui_configurationDialog.h:820
+#: src/ui_configurationDialog.h:844
 msgid "xxx"
+msgstr "xxx"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:191
+#, fuzzy
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
 msgstr ""
+"{程式臭蟲回報系統} - 若發現某些功能有問題，且沒有列在 FAQ，請至該處提出臭蟲回"
+"報。"
 
-#: src/ui_configurationDialog.h:823
-msgid "Restart the download"
-msgstr "重新啟動下載"
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:196
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{討論區} - 在此處和其他愛好者討論 Stellarium。"
 
-#: src/ui_configurationDialog.h:826
-msgid "Retry"
-msgstr "重試"
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:176
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{FAQ} - 關於 Stellarium 的常見問答"
 
-#: src/ui_configurationDialog.h:829
-msgid "Stop the download. You can always restart it later"
-msgstr "終止下載，你可以隨時重新啟動下載"
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:186
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{技術支援要求系統} - 若您在使用 Stellarium 時需要幫忙，請至該處提出要求，我們"
+"會盡量幫忙。"
 
-#: src/ui_configurationDialog.h:832
-msgid "Cancel"
-msgstr "取消"
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:181
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Stellarium Wiki} - 一般資訊。您也可以在此處找到其他使用者製作的地景與 "
+"Script。"
 
-#: src/ui_configurationDialog.h:833
-msgid "Tools"
-msgstr "工具"
+#~ msgid "Add"
+#~ msgstr "新增"
 
-#: src/ui_configurationDialog.h:836
-msgid "Close window when script runs"
-msgstr "Script 執行時關閉視窗"
+#~ msgid "All star catalogs are up to date."
+#~ msgstr "所有星表都已更新。"
 
-#: src/ui_configurationDialog.h:839
-msgid "Run the selected script"
-msgstr "執行選擇的 Script"
-
-#: src/ui_configurationDialog.h:845
-msgid "Stop a running script"
-msgstr "停止正在執行的 Script"
-
-#: src/ui_configurationDialog.h:849
-msgid "Scripts"
-msgstr "Script"
-
-#~ msgid "m"
-#~ msgstr "公尺"
-
-#~ msgid ""
-#~ "   Please check for newer versions and send bug reports\n"
-#~ "    and comments to us at: http://www.stellarium.org\n"
-#~ "\n"
-#~ msgstr ""
-#~ "   如需檢查最新版本、回報程式錯誤或是給予我們意見，請至\n"
-#~ "    http://www.stellarium.org\n"
-#~ "\n"
-
-#~ msgid " (Variable)"
-#~ msgstr " (變星)"
-
-#~ msgid "%s: Bad command line argument(s)\n"
-#~ msgstr "%s: 命令語法不正確\n"
-
-#~ msgid "AU"
-#~ msgstr "天文單位"
-
-#~ msgid "Also display Nebulas without textures"
-#~ msgstr "顯示無插圖之星雲"
-
-#~ msgid "Andromeda"
-#~ msgstr "仙女座"
-
-#~ msgid "Antlia"
-#~ msgstr "唧筒座"
-
-#~ msgid "Apus"
-#~ msgstr "天燕座"
-
-#~ msgid "Aquarius"
-#~ msgstr "寶瓶座"
-
-#~ msgid "Aquila"
-#~ msgstr "天鷹座"
-
-#~ msgid "Ara"
-#~ msgstr "天壇座"
-
-#~ msgid "Aries"
-#~ msgstr "白羊座"
-
-#~ msgid "Atmosphere [A]"
-#~ msgstr "大氣 [A]"
-
-#~ msgid "Auriga"
-#~ msgstr "御夫座"
-
-#~ msgid "Azimuthal Grid [Z]"
-#~ msgstr "地平座標系統 [Z]"
-
-#~ msgid "Bird"
-#~ msgstr "Bird"
-
-#~ msgid "Boat"
-#~ msgstr "Boat"
-
-#~ msgid "Bootes"
-#~ msgstr "牧夫座"
-
-#~ msgid "Bow and Arrow"
-#~ msgstr "弧矢"
-
-#~ msgid "CMD + Q  : Quit\n"
-#~ msgstr "CMD + Q : 結束\n"
-
-#~ msgid "Caelum"
-#~ msgstr "雕具座"
-
-#~ msgid "Camelopardalis"
-#~ msgstr "鹿豹座"
-
-#~ msgid "Cancer"
-#~ msgstr "巨蟹座"
-
-#~ msgid "Canes Venatici"
-#~ msgstr "獵犬座"
-
-#~ msgid "Canis Major"
-#~ msgstr "大犬座"
-
-#~ msgid "Canis Minor"
-#~ msgstr "小犬座"
-
-#~ msgid "Capricornus"
-#~ msgstr "摩羯座"
-
-#~ msgid "Cardinal Points [Q]"
-#~ msgstr "方位基點 [Q]"
-
-#~ msgid "Cassiopeia"
-#~ msgstr "仙后座"
-
-#~ msgid "Centaurus"
-#~ msgstr "半人馬座"
-
-#~ msgid "Cepheus"
-#~ msgstr "仙王座"
-
-#~ msgid "Cetus"
-#~ msgstr "鯨魚座"
-
-#~ msgid "Chamaeleon"
-#~ msgstr "蝘蜓座"
-
-#~ msgid "Circinus"
-#~ msgstr "圓規座"
-
-#~ msgid "Columba"
-#~ msgstr "天鴿座"
-
-#~ msgid "Coma Berenices"
-#~ msgstr "后髮座"
-
-#~ msgid "Command recording stopped."
-#~ msgstr "指令碼記錄已停止"
-
-#~ msgid "Configuration window [1]"
-#~ msgstr "設定視窗 [1]"
-
-#~ msgid "Constellations Art [R]"
-#~ msgstr "星座圖繪 [R]"
-
-#~ msgid "Constellations Boundaries"
-#~ msgstr "星座界線"
-
-#~ msgid "Constellations Lines"
-#~ msgstr "星座連線"
-
-#~ msgid "Constellations Names"
-#~ msgstr "星座名稱"
-
-#~ msgid "Corona Australis"
-#~ msgstr "南冕座"
-
-#~ msgid "Corona Borealis"
-#~ msgstr "北冕座"
-
-#~ msgid "Corvus"
-#~ msgstr "烏鴉座"
-
-#~ msgid "Crater"
-#~ msgstr "巨爵座"
-
-#~ msgid "Crux"
-#~ msgstr "南十字座"
-
-#~ msgid "Current Time Speed is x"
-#~ msgstr "目前時間流速為x"
-
-#~ msgid "Cygnus"
-#~ msgstr "天鵝座"
-
-#~ msgid "Day"
-#~ msgstr "日"
-
-#~ msgid "Delphinus"
-#~ msgstr "海豚座"
+#~ msgid "Checking for new star catalogs..."
+#~ msgstr "正在檢查是否有新的星表..."
 
 #~ msgid ""
-#~ "Dialogs & other controls:\n"
-#~ "H   : Help                      I   : About Stellarium\n"
-#~ "M   : Text menu                 1 (one)  : Configuration\n"
-#~ "CTRL + S : Take a screenshot\n"
-#~ "CTRL + R : Toggle script recording\n"
-#~ "CTRL + F : Toggle object finder\n"
-#~ "\n"
+#~ "Could not finalize download:\n"
+#~ "Error moving temporary file %1.tmp to %1.cat"
 #~ msgstr ""
-#~ "對話及其他控制:\n"
-#~ "H : 說明 I : 關於Stellarium\n"
-#~ "M : 文字選單 1 (數字) : 設定\n"
-#~ "CTRL + S : 螢幕截圖\n"
-#~ "CTRL + R : 劇本記錄器\n"
-#~ "CTRL + F : 天體搜尋器\n"
-#~ "\n"
-
-#~ msgid "Disk Viewport"
-#~ msgstr "望遠鏡視野"
+#~ "無法完成下載:\n"
+#~ "移動暫時檔案 %1.tmp 至 %1.cat 時發生錯誤"
 
 #~ msgid ""
-#~ "Display options:\n"
-#~ "ENTER : Equatorial/altazimuthal mount\n"
-#~ "F1  : Toggle fullscreen if possible.\n"
-#~ "C   : Constellation lines       V   : Constellation labels\n"
-#~ "R   : Constellation art         E   : Equatorial grid\n"
-#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
-#~ "P   : Planet labels             G   : Ground\n"
-#~ "A   : Atmosphere                F   : Fog\n"
-#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
-#~ "T   : Object tracking           S   : Stars\n"
-#~ "4 , : Ecliptic line             5 . : Equator line\n"
-#~ "\n"
+#~ "Error checking updates:\n"
+#~ "%1"
 #~ msgstr ""
-#~ "顯示設定:\n"
-#~ "ENTER : 赤道儀/地平經緯儀\n"
-#~ "F1 : 全螢幕\n"
-#~ "C : 星座連線 V : 星座名稱\n"
-#~ "R : 星座圖繪 E : 赤道座標系統\n"
-#~ "Z : 地平座標系統 N : 星雲名稱\n"
-#~ "P : 行星名稱 G : 地面\n"
-#~ "A : 大氣 F : 霧\n"
-#~ "Q : 方位基點 O : 月球縮放\n"
-#~ "T : 追蹤天體 S : 恆星\n"
-#~ "4 , : 黃道 5 . : 赤道\n"
-#~ "\n"
+#~ "尋找更新時發生錯誤:\n"
+#~ "%1"
 
-#~ msgid "Dog"
-#~ msgstr "天狗"
+#~ msgid "Images"
+#~ msgstr "影像"
 
-#~ msgid "Dolphin"
-#~ msgstr "鰭豚"
+#~ msgid "Remove"
+#~ msgstr "删除"
 
-#~ msgid "Dorado"
-#~ msgstr "劍魚座"
-
-#~ msgid "Draco"
-#~ msgstr "天龍座"
-
-#~ msgid "Drawing of the Constellations [C]"
-#~ msgstr "星座連線 [C]"
-
-#~ msgid "Drum"
-#~ msgstr "河鼓"
-
-#~ msgid "Drumstick"
-#~ msgstr "天桴"
-
-#~ msgid "Enter observatory name"
-#~ msgstr "輸入觀測站名稱"
-
-#~ msgid "Equatorial Grid [E]"
-#~ msgstr "赤道座標系統 [E]"
-
-#~ msgid "Equatorial/Altazimuthal Mount [ENTER]"
-#~ msgstr "赤道儀/地平經緯儀 [ENTER]"
-
-#~ msgid "Equuleus"
-#~ msgstr "小馬座"
-
-#~ msgid "Eridanus"
-#~ msgstr "波江座"
-
-#~ msgid "Flip horizontally [CTRL + SHIFT + H]"
-#~ msgstr "水平翻轉 [CTRL + SHIFT + H]"
-
-#~ msgid "Flip vertically [CTRL + SHIFT + V]"
-#~ msgstr "垂直翻轉 [CTRL + SHIFT + V]"
-
-#~ msgid "Fornax"
-#~ msgstr "天爐座"
-
-#~ msgid "Four Channels"
-#~ msgstr "四瀆"
-
-#~ msgid "GO"
-#~ msgstr "前往"
-
-#~ msgid "Gemini"
-#~ msgstr "雙子座"
-
-#~ msgid "Girl"
-#~ msgstr "女宿"
-
-#~ msgid "Ground [G]"
-#~ msgstr "地面 [G]"
-
-#~ msgid "Grus"
-#~ msgstr "天鶴座"
-
-#~ msgid "Heart"
-#~ msgstr "心宿"
-
-#~ msgid "Help [H]"
-#~ msgstr "說明 [H]"
-
-#~ msgid "Hercules"
-#~ msgstr "武仙座"
-
-#~ msgid "Hit CTRL-R again to stop.\n"
-#~ msgstr "再按CTRL + R以停止記錄\n"
-
-#~ msgid "Hook"
-#~ msgstr "天鉤"
-
-#~ msgid "Horn"
-#~ msgstr "角宿"
-
-#~ msgid "Horologium"
-#~ msgstr "時鐘座"
-
-#~ msgid "Hour"
-#~ msgstr "時"
-
-#~ msgid "Hydra"
-#~ msgstr "長蛇座"
-
-#~ msgid "Hydrus"
-#~ msgstr "水蛇座"
-
-#~ msgid "Indus"
-#~ msgstr "印第安座"
-
-#~ msgid "Information"
-#~ msgstr "軟體資訊"
-
-#~ msgid "Invalid Script command"
-#~ msgstr "無效的指令碼"
-
-#~ msgid "Lacerta"
-#~ msgstr "蝎虎座"
-
-#~ msgid "Language"
-#~ msgstr "語言"
-
-#~ msgid "Legs"
-#~ msgstr "奎宿"
-
-#~ msgid "Leo"
-#~ msgstr "獅子座"
-
-#~ msgid "Leo Minor"
-#~ msgstr "小獅座"
-
-#~ msgid "Lepus"
-#~ msgstr "天兔座"
-
-#~ msgid "Libra"
-#~ msgstr "天秤座"
-
-#~ msgid "Loading Hipparcos catalog:"
-#~ msgstr "載入Hipparcos星表:"
-
-#~ msgid "Lupus"
-#~ msgstr "豺狼座"
-
-#~ msgid "Lynx"
-#~ msgstr "天貓座"
-
-#~ msgid "Lyra"
-#~ msgstr "天琴座"
-
-#~ msgid "Magnitude"
-#~ msgstr "依星等"
-
-#~ msgid "Market"
-#~ msgstr "天市垣"
-
-#~ msgid "Meadows"
-#~ msgstr "天苑"
-
-#~ msgid "Mensa"
-#~ msgstr "山案座"
-
-#~ msgid "Meteor Rate per minute"
-#~ msgstr "流星每分鐘發生率"
-
-#~ msgid "Microscopium"
-#~ msgstr "顯微鏡座"
-
-#~ msgid "Minutes"
-#~ msgstr "分"
+#~ msgid "Use associated language for sky labeling"
+#~ msgstr "使用此文化的語言標示星空"
 
 #~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
+#~ "{Feature request system} - if you have an idea for a new feature, send it "
+#~ "to us. We can't promise to implement every idea, but we appreciate the "
+#~ "feedback and review the list when we are planning future features."
 #~ msgstr ""
-#~ "雜項:\n"
-#~ "9 : 流星發生率\n"
-
-#~ msgid "Monoceros"
-#~ msgstr "麒麟座"
-
-#~ msgid "Month"
-#~ msgstr "月"
-
-#~ msgid "Musca"
-#~ msgstr "蒼蠅座"
-
-#~ msgid "Names of the Constellations [V]"
-#~ msgstr "星座名稱 [V]"
-
-#~ msgid "Net"
-#~ msgstr "Net"
-
-#~ msgid "Night (red) mode"
-#~ msgstr "夜視模式"
-
-#~ msgid "No"
-#~ msgstr "否"
-
-#~ msgid "OK"
-#~ msgstr "確定"
-
-#~ msgid "Object Search"
-#~ msgstr "搜尋天體"
-
-#~ msgid "Octans"
-#~ msgstr "南極座"
-
-#~ msgid "Ophiuchus"
-#~ msgstr "蛇夫座"
-
-#~ msgid "Ox"
-#~ msgstr "牛宿"
-
-#~ msgid "Pavo"
-#~ msgstr "孔雀座"
-
-#~ msgid "Pegasus"
-#~ msgstr "飛馬座"
-
-#~ msgid "Perseus"
-#~ msgstr "英仙座"
-
-#~ msgid "Phoenix"
-#~ msgstr "鳳凰座"
-
-#~ msgid "Pictor"
-#~ msgstr "繪架座"
-
-#~ msgid "Pisces"
-#~ msgstr "雙魚座"
-
-#~ msgid "Piscis Austrinus"
-#~ msgstr "南魚座"
-
-#~ msgid "Point"
-#~ msgstr "點"
-
-#~ msgid "Puppis"
-#~ msgstr "船尾座"
-
-#~ msgid "Pyxis"
-#~ msgstr "羅盤座"
-
-#~ msgid "Quit [CMD + Q]"
-#~ msgstr "結束 [CMD + Q]"
-
-#~ msgid "Quit [CTRL + Q]"
-#~ msgstr "結束 [CTRL + Q]"
-
-#~ msgid "Real Time Speed [K]"
-#~ msgstr "正常時間流速 [K]"
-
-#~ msgid "Rendering"
-#~ msgstr "顯示"
-
-#~ msgid "Restart program for"
-#~ msgstr "重新啟動程式以使"
-
-#~ msgid "Reticulum"
-#~ msgstr "網罟座"
-
-#~ msgid "Return to Current Time"
-#~ msgstr "回到目前時間"
-
-#~ msgid "Root"
-#~ msgstr "氐宿"
-
-#~ msgid "Sagitta"
-#~ msgstr "天箭座"
-
-#~ msgid "Sagittarius"
-#~ msgstr "人馬座"
-
-#~ msgid "Save as default"
-#~ msgstr "儲存為預設值"
-
-#~ msgid "Scorpius"
-#~ msgstr "天蠍座"
-
-#~ msgid "Script commander"
-#~ msgstr "指令碼控制器"
-
-#~ msgid "Sculptor"
-#~ msgstr "玉夫座"
-
-#~ msgid "Scutum"
-#~ msgstr "盾牌座"
-
-#~ msgid "Search for object [CTRL + F]"
-#~ msgstr "搜尋天體 [CTRL + F]"
-
-#~ msgid "Seconds"
-#~ msgstr "秒"
-
-#~ msgid "Selected Constellation Only"
-#~ msgstr "僅顯示選取星座"
-
-#~ msgid "Serpens"
-#~ msgstr "巨蛇座"
-
-#~ msgid "Sextans"
-#~ msgstr "六分儀座"
-
-#~ msgid "Star Magnitude Multiplier: "
-#~ msgstr "星等顯示加成: "
-
-#~ msgid "Tail"
-#~ msgstr "尾宿"
-
-#~ msgid "Taurus"
-#~ msgstr "金牛座"
-
-#~ msgid "Telescopium"
-#~ msgstr "望遠鏡座"
-
-#~ msgid "Three Steps"
-#~ msgstr "三台"
-
-#~ msgid "Thunder and Lightning"
-#~ msgstr "雷電"
-
-#~ msgid ""
-#~ "Time & Date:\n"
-#~ "6   : Time rate pause           7   : Time rate 0\n"
-#~ "8   : Set current time          J   : Decrease time rate\n"
-#~ "K   : Normal time rate          L   : Increase time rate\n"
-#~ "-   : Back 24 hours             =   : Forward 24 hours\n"
-#~ "[   : Back 7 days               ]   : Forward 7 days\n"
-#~ "\n"
-#~ msgstr ""
-#~ "時間及日期:\n"
-#~ "6 : 暫停時間流動 7 : 停止時間流動\n"
-#~ "8 : 回到目前時間 J : 減少時間流速\n"
-#~ "K : 正常時間流速 L : 增加時間流速\n"
-#~ "- : 回溯24小時 = : 推進24小時\n"
-#~ "[ : 回溯7日 ] : 推進7日\n"
-#~ "\n"
-
-#~ msgid "Triangulum"
-#~ msgstr "三角座"
-
-#~ msgid "Triangulum Australe"
-#~ msgstr "南三角座"
-
-#~ msgid "Try `%s --help' for more information.\n"
-#~ msgstr "請按 `%s --help' 以獲得更多資訊\n"
-
-#~ msgid "Tucana"
-#~ msgstr "杜鵑座"
-
-#~ msgid "Two Jaws"
-#~ msgstr "Two Jaws"
-
-#~ msgid "Two Poles"
-#~ msgstr "Two Poles"
-
-#~ msgid "Two Sunbeams"
-#~ msgstr "Two Sunbeams"
-
-#~ msgid "Ursa Major"
-#~ msgstr "大熊座"
-
-#~ msgid "Ursa Minor"
-#~ msgstr "小熊座"
-
-#~ msgid ""
-#~ "Usage: %s [OPTION] ...\n"
-#~ " -v, --version          Output version information and exit.\n"
-#~ " -h, --help             Display this help and exit.\n"
-#~ msgstr ""
-#~ "Usage: %s [OPTION] ...\n"
-#~ " -v, --version 顯示版本資訊並離開\n"
-#~ " -h, --help 顯示說明並離開\n"
-
-#~ msgid ""
-#~ "Use key J and L to decrease and increase\n"
-#~ "   time speed.\n"
-#~ "Use key K to return to real time speed."
-#~ msgstr ""
-#~ "以L鍵和J鍵增減時間流速\n"
-#~ "以K鍵回復正常時間流速"
-
-#~ msgid "Using System Default Time Zone"
-#~ msgstr "使用系統預設的時區"
-
-#~ msgid "Vela"
-#~ msgstr "船帆座"
-
-#~ msgid "Virgo"
-#~ msgstr "室女座"
-
-#~ msgid "Volans"
-#~ msgstr "飛魚座"
-
-#~ msgid "Vulpecula"
-#~ msgstr "狐狸座"
-
-#~ msgid "Wall"
-#~ msgstr "壁宿"
-
-#~ msgid "Year"
-#~ msgstr "年"
-
-#~ msgid "Yes"
-#~ msgstr "是"
-
-#~ msgid "change to apply."
-#~ msgstr "解析度調整值生效"
-
-#~ msgid "Are you sure ?"
-#~ msgstr "確定？"
-
-#~ msgid "Arsenal"
-#~ msgstr "庫樓"
-
-#~ msgid "Bailer"
-#~ msgstr "馬卡力之瓢"
-
-#~ msgid "Banner of Three Stars"
-#~ msgstr "參旗"
-
-#~ msgid "Bond"
-#~ msgstr "婁宿"
-
-#~ msgid "Cared for by Moon"
-#~ msgstr "月眷之佑"
-
-#~ msgid "Cat's Cradle"
-#~ msgstr "童兒花繩"
-
-#~ msgid "Chariot"
-#~ msgstr "軫宿"
-
-#~ msgid "Chariot Yard"
-#~ msgstr "車府"
-
-#~ msgid "Circular Granary"
-#~ msgstr "天囷"
-
-#~ msgid "Coiled Thong"
-#~ msgstr "貫索"
-
-#~ msgid "Curved Array"
-#~ msgstr "勾陳"
-
-#~ msgid "Dipper"
-#~ msgstr "斗宿"
-
-#~ msgid "Do"
-#~ msgstr "執行"
-
-#~ msgid "Done"
-#~ msgstr "完成"
-
-#~ msgid "Earth God's Temple"
-#~ msgstr "天社"
-
-#~ msgid "Eastern Door"
-#~ msgstr "東咸"
-
-#~ msgid "Emptiness"
-#~ msgstr "虛宿"
-
-#~ msgid "Encampment"
-#~ msgstr "室宿"
-
-#~ msgid "Establishment"
-#~ msgstr "建"
-
-#~ msgid "Extended Net"
-#~ msgstr "張宿"
-
-#~ msgid "Five Chariots"
-#~ msgstr "五車"
-
-#~ msgid "Flail"
-#~ msgstr "天棓"
-
-#~ msgid "Flying Corridor"
-#~ msgstr "閣道"
-
-#~ msgid "Frigate Bird"
-#~ msgstr "艨鵜"
-
-#~ msgid "Ghosts"
-#~ msgstr "鬼宿"
-
-#~ msgid "Good Gourd"
-#~ msgstr "瓠瓜"
-
-#~ msgid "Great General"
-#~ msgstr "天大將軍"
-
-#~ msgid "Imperial Guards"
-#~ msgstr "常陳"
-
-#~ msgid "Imperial Passageway"
-#~ msgstr "輦道"
-
-#~ msgid "Jade Well"
-#~ msgstr "玉井"
-
-#~ msgid "Kitchen"
-#~ msgstr "天廚"
-
-#~ msgid "Kite of Kawelo"
-#~ msgstr "卡威羅之鳶"
-
-#~ msgid "Market Officer"
-#~ msgstr "天弁"
-
-#~ msgid "Maui's Fishhook"
-#~ msgstr "茂伊之鉤"
-
-#~ msgid "Mausoleum"
-#~ msgstr "大陵"
-
-#~ msgid "Mortar"
-#~ msgstr "臼"
-
-#~ msgid "Navigator's Triangle"
-#~ msgstr "引航三角"
-
-#~ msgid "Neck"
-#~ msgstr "亢宿"
-
-#~ msgid "Norma"
-#~ msgstr "矩尺座"
-
-#~ msgid "North River"
-#~ msgstr "北河"
-
-#~ msgid "Northern Dipper"
-#~ msgstr "北斗"
-
-#~ msgid "Orchard"
-#~ msgstr "天園"
-
-#~ msgid "Outer Fence"
-#~ msgstr "外屏"
-
-#~ msgid "Palace Gate"
-#~ msgstr "闕丘"
-
-#~ msgid "Purple Palace"
-#~ msgstr "紫微垣"
-
-#~ msgid "Ramparts"
-#~ msgstr "壘壁陣"
-
-#~ msgid "Return to Current Time [8]"
-#~ msgstr "返回目前時間 [8]"
-
-#~ msgid "River Turtle"
-#~ msgstr "鱉"
-
-#~ msgid "Rolled Tongue"
-#~ msgstr "卷舌"
-
-#~ msgid "Rooftop"
-#~ msgstr "危宿"
-
-#~ msgid "Room"
-#~ msgstr "房宿"
-
-#~ msgid "Rotten Gourd"
-#~ msgstr "敗瓜"
-
-#~ msgid "Sah"
-#~ msgstr "Sah"
-
-#~ msgid "Saving settings will save current full screen status"
-#~ msgstr "若儲存為預設值則將保存以上設定"
-
-#~ msgid "Screen"
-#~ msgstr "屏"
-
-#~ msgid "Setting landscape updates the location"
-#~ msgstr "使用背景預設之經緯度"
-
-#~ msgid "Seven Excellencies"
-#~ msgstr "七公"
-
-#~ msgid "Soldiers Market"
-#~ msgstr "軍市"
-
-#~ msgid "South River"
-#~ msgstr "南河"
-
-#~ msgid "Spear"
-#~ msgstr "天槍"
-
-#~ msgid "Spring"
-#~ msgstr "天淵"
-
-#~ msgid "Square Granary"
-#~ msgstr "天倉"
-
-#~ msgid "Stomach"
-#~ msgstr "胃宿"
-
-#~ msgid "Supreme Palace"
-#~ msgstr "太微垣"
-
-#~ msgid "The Seven"
-#~ msgstr "七者"
-
-#~ msgid "Thunderbolt"
-#~ msgstr "霹靂"
-
-#~ msgid "Toilet"
-#~ msgstr "廁"
-
-#~ msgid "Tripod"
-#~ msgstr "周鼎"
-
-#~ msgid "Viewport Distorter"
-#~ msgstr "扭曲視野"
-
-#~ msgid "Voice of Joy"
-#~ msgstr "樂聲"
-
-#~ msgid "Weaving Girl"
-#~ msgstr "織女"
-
-#~ msgid "Well"
-#~ msgstr "井宿"
-
-#~ msgid "Western Door"
-#~ msgstr "西咸"
-
-#~ msgid "Willow"
-#~ msgstr "柳宿"
-
-#~ msgid "Wings"
-#~ msgstr "翼宿"
-
-#~ msgid "Winnowing Basket"
-#~ msgstr "箕宿"
-
-#~ msgid "Woman's Bed"
-#~ msgstr "女床"
-
-#~ msgid "Xuanyuan"
-#~ msgstr "軒轅"
-
-#~ msgid "Zaofu"
-#~ msgstr "造父"
-
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ "CTRL + 0,..,9 : execute GOTO command for telescope 0,..,9\n"
-#~ "CTRL + SHIFT + H: toggle horizontal image flipping\n"
-#~ "CTRL + SHIFT + V: toggle vertical image flipping\n"
-#~ "CTRL + Q : Quit\n"
-#~ "CMD + Q  : Quit\n"
-#~ msgstr ""
-#~ "雜項:\n"
-#~ "\n"
-#~ "9 : 流星發生率\n"
-#~ "\n"
-#~ "CTRL + 0,..,9 : 將望遠鏡0,..,9對準選取天體\n"
-#~ "\n"
-#~ "CTRL + SHIFT + H: 水平反轉影像\n"
-#~ "\n"
-#~ "CTRL + SHIFT + V: 垂直反轉影像\n"
-#~ "\n"
-#~ "CTRL + Q : 結束\n"
-#~ "\n"
-#~ "CMD + Q : 結束\n"
+#~ "{功能需求系統} - 若您有任何新功能想法，請告訴我們。我們不能承諾滿足大家的"
+#~ "需求，但我們感激您的意見回饋並在規劃未來版本時考慮。"
