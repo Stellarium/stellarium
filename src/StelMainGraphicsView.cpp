@@ -160,8 +160,8 @@ void StelMainGraphicsView::init(QSettings* conf)
 	}
 	Q_ASSERT(gui);	// There was no GUI plugin found
 
-	gui->init(backItem, mainSkyItem);
 	StelApp::getInstance().setGui(gui);
+	gui->init(backItem, mainSkyItem);
 	StelApp::getInstance().initPlugIns();
 
 	// Force refreshing of button bars if plugins modified the GUI, e.g. added buttons.
