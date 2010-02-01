@@ -443,10 +443,19 @@ QVector<SubContour> OctahedronPolygon::tesselateOneSideLineLoop(GLUEStesselator*
 	return data.resultList;
 }
 
+// Define the square of the angular distance from which we merge 2 points.
+inline bool tooClose(const Vec3d& e1, const Vec3d& e2)
+{
+	return (e1[0]-e2[0])*(e1[0]-e2[0])+(e1[1]-e2[1])*(e1[1]-e2[1])<0.000000002;
+}
+
 void vertexLineLoopCallback(EdgeVertex* vertexData, OctTessLineLoopCallbackData* userData)
 {
 	Q_ASSERT(vertexData->vertex[2]<0.0000001);
-	userData->result.append(*vertexData);
+	if (userData->result.isEmpty() || !tooClose(userData->result.last().vertex, vertexData->vertex))
+		userData->result.append(*vertexData);
+	else
+		userData->result.last().edgeFlag = userData->result.last().edgeFlag && vertexData->edgeFlag;
 }
 
 void combineLineLoopCallback(double coords[3], EdgeVertex* vertex_data[4], GLfloat weight[4], EdgeVertex** outData, OctTessLineLoopCallbackData* userData)
@@ -475,7 +484,8 @@ void checkBeginLineLoopCallback(GLenum type)
 void endLineLoopCallback(OctTessLineLoopCallbackData* data)
 {
 	// Store the finished contour and prepare for the next one
-	data->resultList.append(data->result);
+	if (data->result.size()>2)
+		data->resultList.append(data->result);
 	data->result.clear();
 }
 
