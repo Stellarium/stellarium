@@ -618,6 +618,7 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 			{
 				// There was a problem, probably the 2 vertices are too close, just keep them like that
 				// since they are each at a different side of the plan.
+				currentSubContour << currentVertex;
 			}
 			else
 			{
@@ -646,11 +647,11 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 			{
 				// There was a problem, probably the 2 vertices are too close, just keep them like that
 				// since they are each at a different side of the plan.
-				currentSubContour.last().edgeFlag = false;
+				currentSubContour.last().edgeFlag = true;
 				result[previousQuadrant] << currentSubContour;
 				currentSubContour.clear();
 				currentSubContour << currentVertex;
-				currentSubContour.last().edgeFlag = false;
+				currentSubContour.last().edgeFlag = true;
 			}
 			else
 			{
@@ -679,7 +680,7 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 		{
 			// There was a problem, probably the 2 vertices are too close, just keep them like that
 			// since they are each at a different side of the plan.
-			currentSubContour.last().edgeFlag = false;
+			currentSubContour.last().edgeFlag = true;
 			result[previousQuadrant] << currentSubContour;
 			currentSubContour.clear();
 		}
