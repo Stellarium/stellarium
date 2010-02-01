@@ -488,6 +488,19 @@ IF (GUI_MODE STREQUAL "None")
 ENDIF()
 
 
+#############################################################################################
+############################# External GUI plugin compilation ###############################
+#############################################################################################
+IF (GUI_MODE STREQUAL "External")
+	SET(EXTERNAL_GUI_SRC_PATH "../../MyGui/" CACHE PATH "The location of the plugin main directory i.e. the one containing the top level CMakeLists.txt")
+	ADD_SUBDIRECTORY( ${EXTERNAL_GUI_SRC_PATH} externalGui )
+	SET(EXTERNAL_GUI_PLUGIN_PATH "/path/to/libMyGui.a" CACHE PATH "The absolute path to the .a static library containing the static GUI plugin")
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/src/externalGui/src/libExternalGui.a)
+	SET(EXTERNAL_GUI_PLUGIN_EXTRALIBS CACHE STRING "Additionnal link options needed for the GUI plugin")
+	SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} ${EXTERNAL_GUI_PLUGIN_EXTRALIBS})
+ENDIF()
+
+
 ###############################################################################################
 ################## Static plugins need to be known by the file main.cpp at compilation time
 ################## so add the definitions to the compilation.
