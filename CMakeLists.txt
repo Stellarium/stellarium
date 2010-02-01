@@ -72,13 +72,6 @@ SET(ENABLE_STRATOSCRIPT_COMPAT 0 CACHE BOOL "Set to 1 or true if you want to bui
 SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
 SET(OPENGL_MODE Desktop CACHE STRING "Choose the type of openGL to use, options are: Desktop, ES2")
 
-IF (GUI_MODE STREQUAL "External")
-	SET(EXTERNAL_GUI_PLUGIN_PATH "/path/to/libMyGui.a" CACHE PATH "The absolute path to the .a static library containing the static GUI plugin")
-	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${EXTERNAL_GUI_PLUGIN_PATH})
-	SET(EXTERNAL_GUI_PLUGIN_EXTRALIBS CACHE STRING "Additionnal link options needed for the GUI plugin")
-	SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} ${EXTERNAL_GUI_PLUGIN_EXTRALIBS})
-ENDIF()
-
 # On WIN32 we need to split the main binary into a small binary and a dll
 # This is for allowing to link dynamic plug-ins afterward
 IF(WIN32)
