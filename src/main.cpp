@@ -136,18 +136,22 @@ int main(int argc, char **argv)
 	setlocale(LC_NUMERIC, "C");
 
 	// Handle command line options for alternative Qt graphics system types.
-	// DEFAULT_GRAPHICS_SYSTEM is defined per plateform in the main CMakeLists.txt file.
+	// DEFAULT_GRAPHICS_SYSTEM is defined per platform in the main CMakeLists.txt file.
 	// Avoid overriding if the user already specified the mode on the CLI.
 	bool doSetDefaultGraphicsSystem=true;
-	for (int i=1; i<argc; ++i)
+	for (int i = 1; i < argc; ++i)
 	{
-		if (QString(argv[i]).startsWith("--graphics-system"))
-			doSetDefaultGraphicsSystem=false;
+		//QApplication accepts -graphicssystem only if
+		//its value is a separate argument (the next value in argv)
+		if (QString(argv[i]) == "-graphicssystem")
+		{
+			doSetDefaultGraphicsSystem = false;
+		}
 	}
 	// If the user didn't set the graphics-system on the command line, use the one provided at compile time.
 	if (doSetDefaultGraphicsSystem)
 	{
-		qDebug() << "Use compilation-provided default graphics system: " << DEFAULT_GRAPHICS_SYSTEM;
+		qDebug() << "Using default graphics system specified at build time: " << DEFAULT_GRAPHICS_SYSTEM;
 		QApplication::setGraphicsSystem(DEFAULT_GRAPHICS_SYSTEM);
 	}
 
