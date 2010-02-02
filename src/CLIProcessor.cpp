@@ -51,9 +51,6 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			 << "--user-dir (or -u)      : Use an alternative user data directory\n"
 			 << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
 			 << "                          the full screen setting in the config file\n"
-			 << "--graphics-system       : With argument \"native\", \"raster\", or\n"
-			 << "                          \"opengl\"; choose graphics backend \n"
-			 << "                          default is " DEFAULT_GRAPHICS_SYSTEM "\n"
 			 << "--screenshot-dir        : Specify directory to save screenshots\n"
 			 << "--startup-script        : Specify name of startup script\n"
 			 << "--home-planet           : Specify observer planet (English name)\n"
@@ -68,8 +65,13 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			 << "--fov                   : Specify the field of view (degrees)\n"
 			 << "--projection-type       : Specify projection type, e.g. stereographic\n"
 			 << "--restore-defaults      : Delete existing config.ini and use defaults\n"
-			 << "--multires-image        : With filename / URL argument,specify a\n"
-				 << "                          multi-resolution image to load\n";
+			 << "--multires-image        : With filename / URL argument, specify a\n"
+			 << "                          multi-resolution image to load\n";
+			 //Removed, as it is Qt argument, not Stellarium argument, and does not follow the format
+			 //It accepts only "-graphicssystem value" instead of "--graphicssystem=value"
+			 //<< "-graphicssystem         : (one dash only!) Choose Qt graphics backend:\n"
+			 //<< "                          it can be \"native\", \"raster\", or \"opengl\"\n"
+			 //<< "                          the default setting is \"" DEFAULT_GRAPHICS_SYSTEM "\"\n";
 		exit(0);
 	}
 

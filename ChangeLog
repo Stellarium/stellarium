@@ -1,6 +1,7 @@
 0.10.4 [2010-02-03]
 Fix release.
 Disable OpenGL shaders by default. User activate it by setting use_glshaders = true in the [main] section of the config.ini
+Fixed the handling of the Qt -graphicssystem parameter. Now it is ignored if it is not used properly.
 
 0.10.3 [2010-01-28]
 Based on Qt 4.6.x
