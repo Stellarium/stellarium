@@ -1,3 +1,7 @@
+0.10.4 [2010-02-03]
+Fix release.
+Disable OpenGL shaders by default. User activate it by setting use_glshaders = true in the [main] section of the config.ini
+
 0.10.3 [2010-01-28]
 Based on Qt 4.6.x
 Bundling of plugins: Satellites, Oculars, AngleMeasure, CompassMarks, TelescopeControl, TextUserInterface.
