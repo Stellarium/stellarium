@@ -120,9 +120,6 @@ void copyDefaultConfigFile(const QString& newPath)
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
-#ifdef WIN32
-	QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
-#endif
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
@@ -153,8 +150,6 @@ int main(int argc, char **argv)
 		qDebug() << "Use compilation-provided default graphics system: " << DEFAULT_GRAPHICS_SYSTEM;
 		QApplication::setGraphicsSystem(DEFAULT_GRAPHICS_SYSTEM);
 	}
-
-	QApplication app(argc, argv);
 
 	// Init the file manager
 	StelFileMgr::init();
@@ -291,6 +286,24 @@ int main(int argc, char **argv)
 #ifdef MACOSX
 	StelMacosxDirs::addApplicationPluginDirectory();
 #endif
+
+	if (confSettings->value("main/use_glshaders", false).toBool())
+	{
+		// The user explicitely wants to use GL shaders
+		// Default Qt behaviour is alreay to use them if available (although it unstable),
+		// so nothing to be done.
+	}
+	else
+	{
+		// The default behaviour on windows to is to use the OpenGL1 paint engine
+		// since the second one caused crashes.
+		// On other plateforms
+#ifdef WIN32
+		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
+#endif
+	}
+
+	QApplication app(argc, argv);
 
 	// Initialize translator feature
 	try
