@@ -170,7 +170,7 @@ void Oculars::draw(StelCore* core)
 			string1.append(" : ").append(ocular->getName());
 		}
 		QString string2 = "Ocular aFOV: " + QVariant(ocular->getAppearentFOV()).toString() + QChar(0x00B0);
-		QString string4 = "Telescope #" + QVariant(selectedOcularIndex).toString();
+		QString string4 = "Telescope #" + QVariant(selectedTelescopeIndex).toString();
 		if (telescope->getName() != QString(""))  {
 			string4.append(" : ").append(telescope->getName());
 		}
