@@ -155,6 +155,9 @@ int main(int argc, char **argv)
 		QApplication::setGraphicsSystem(DEFAULT_GRAPHICS_SYSTEM);
 	}
 
+	// The QApplication MUST be created before the StelFileMgr is initialized.
+	QApplication app(argc, argv);
+	
 	// Init the file manager
 	StelFileMgr::init();
 
@@ -306,8 +309,6 @@ int main(int argc, char **argv)
 		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
 #endif
 	}
-
-	QApplication app(argc, argv);
 
 	// Initialize translator feature
 	try
