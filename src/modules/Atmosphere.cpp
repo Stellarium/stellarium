@@ -176,12 +176,12 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		}
 
 		// Generate the indices used to draw the quads
-		indices = new GLuint[(skyResolutionX+1)*skyResolutionY*2];
+		indices = new unsigned int[(skyResolutionX+1)*skyResolutionY*2];
 		int i=0;
 		for (int y2=0; y2<skyResolutionY; ++y2)
 		{
-			GLuint g0 = y2*(1+skyResolutionX);
-			GLuint g1 = (y2+1)*(1+skyResolutionX);
+			unsigned int g0 = y2*(1+skyResolutionX);
+			unsigned int g1 = (y2+1)*(1+skyResolutionX);
 			for (int x2=0; x2<=skyResolutionX; ++x2)
 			{
 				indices[i++]=g0++;
