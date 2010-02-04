@@ -34,7 +34,7 @@ class StelGuiBase
 {
 public:
 	StelGuiBase();
-	~StelGuiBase() {;}
+	virtual ~StelGuiBase() {;}
 
 	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraphicsWidget* stelAppGraphicsWidget);
 
