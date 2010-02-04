@@ -86,7 +86,7 @@ private:
 
 	Vec2f* posGrid;
 	Vec4f* colorGrid;
-	GLuint* indices;
+	unsigned int* indices;
 
 	//! The average luminance of the atmosphere in cd/m2
 	float averageLuminance;
