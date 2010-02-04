@@ -382,7 +382,7 @@ void Atmosphere::draw(StelCore* core)
 		atmoShaderProgram->setAttributeArray(shaderAttribLocations.skyColor, (const GLfloat*)colorGrid, 4, 0);
 
 		// And draw everything at once
-		GLuint* shift=indices;
+		unsigned int* shift=indices;
 		for (int y=0;y<skyResolutionY;++y)
 		{
 			glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_INT, shift);
@@ -408,7 +408,7 @@ void Atmosphere::draw(StelCore* core)
 		sPainter.setVertexPointer(2, GL_FLOAT, posGrid);
 
 		// And draw everything at once
-		GLuint* shift=indices;
+		unsigned int* shift=indices;
 		for (int y=0;y<skyResolutionY;++y)
 		{
 			sPainter.drawFromArray(StelPainter::TriangleStrip, (skyResolutionX+1)*2, 0, false, shift);
