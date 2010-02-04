@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2009 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -34,24 +34,25 @@ class StelGuiBase
 {
 public:
 	StelGuiBase();
-	
+	~StelGuiBase() {;}
+
 	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraphicsWidget* stelAppGraphicsWidget);
-	
+
 	//! Translate all texts to the new Locale.
 	virtual void updateI18n();
-	
+
 	//! Load color scheme from the given ini file and section name.
 	virtual void setStelStyle(const StelStyle& style) =0;
-	
+
 	//! Get a pointer on the info panel used to display selected object info
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) =0;
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const =0;
-	
+
 	//! Add a new progress bar in the lower right corner of the screen.
 	//! When the progress bar is deleted  the layout is automatically rearranged.
 	//! @return a pointer to the progress bar.
 	virtual class QProgressBar* addProgressBar() =0;
-	
+
 	//! Add a new action managed by the GUI. This method should be used to add new shortcuts to the program
 	//! @param actionName qt object name. Used as a reference for later uses
 	//! @param text the text to display when hovering, or in the help window
@@ -60,14 +61,14 @@ public:
 	//! @param checkable whether the action should be checkable
 	//! @param autoRepeat whether the action should be autorepeated
 	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false);
-	
+
 	//! Get a pointer on an action managed by the GUI
 	//! @param actionName qt object name for this action
 	//! @return a pointer on the QAction object or NULL if don't exist
 	virtual QAction* getGuiActions(const QString& actionName);
-	
+
 	virtual void forceRefreshGui() {;}
-	
+
 	//! Show whether the GUI is visible.
 	//! @param b when true, GUI will be shown, else it will be hidden.
 	virtual void setVisible(bool b) =0;
@@ -77,7 +78,7 @@ public:
 	//! This can then be used to optimize the rendering to increase reactivity.
 	virtual bool isCurrentlyUsed() const =0;
 
-	
+
 protected:
 	class StelAppGraphicsWidget* stelAppGraphicsWidget;
 };
@@ -89,9 +90,9 @@ class StelGuiPluginInterface
 {
 public:
 	virtual ~StelGuiPluginInterface() {}
-	
+
 	//! Get the instance of StelGuiBase implmenting the GUI.
-	virtual class StelGuiBase* getStelGuiBase() const = 0;	
+	virtual class StelGuiBase* getStelGuiBase() const = 0;
 };
 Q_DECLARE_INTERFACE(StelGuiPluginInterface, "stellarium.StelGuiPluginInterface/1.0");
 
