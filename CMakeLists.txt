@@ -1,3 +1,4 @@
+
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 # Avoid repeating the IF statement in the ENDIF and ELSE
@@ -45,8 +46,10 @@ ENDIF()
 
 # best way to get to APPLE?
 IF(APPLE)
- SET(CMAKE_C_FLAGS "-fno-common -Wall -Wextra -Wno-unused-parameter -DMACOSX")
+ SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -isysroot /Developer/SDKs/MacOSX10.5.sdk -mmacosx-version-min=10.5 -fno-common -Wall -Wextra -Wno-unused-parameter -DMACOSX")
  SET(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS}")
+ SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.5.sdk/")
+ SET(CMAKE_OSX_ARCHITECTURES "i386")
 ENDIF()
 
 ########### Check headers ###########
@@ -122,6 +125,7 @@ IF (BUILD_STATIC_PLUGINS)
 	  /usr/include
 	  /usr/local/include
 	  DOC "Should point to the directory where the include files for tokyo cabinet are installed")
+
 	FIND_LIBRARY(TOKYOC_LIBRARIES tokyocabinet
 	  PATHS
 	  /usr/lib/
@@ -129,6 +133,7 @@ IF (BUILD_STATIC_PLUGINS)
 	  DOC "tokyo cabinet link options")
 	SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
 	SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
+
   ENDIF()
 
   IF (USE_PLUGIN_VIRGO)
@@ -199,16 +204,13 @@ ENDIF()
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
 IF(APPLE)
-  SET(CMAKE_INSTALL_PREFIX "/Users/Shared/stellarium/Stellarium.app/Contents")
+  SET(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/Stellarium.app/Contents")
   SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/Resources/data")
   SET(INSTALL_LOCALEDIR "${CMAKE_INSTALL_PREFIX}/Resources/locale")
-ELSE(APPLE)
-  SET(INSTALL_DATADIR ${CMAKE_INSTALL_PREFIX}/share/stellarium)
-  SET(INSTALL_LOCALEDIR ${CMAKE_INSTALL_PREFIX}/share/locale)
-ENDIF(APPLE)
 ELSE()
   SET(INSTALL_DATADIR .)
   SET(INSTALL_LOCALEDIR ./locale)
+ENDIF()
 ENDIF()
 
 ########### Get SVN revision for non-release builds ###########
@@ -295,6 +297,7 @@ INCLUDE_DIRECTORIES(
 	${QT_QTSCRIPT_INCLUDE_DIR}
 	${CMAKE_BINARY_DIR}/src
 	${QT_QTTEST_INCLUDE_DIR}
+	${QT_DECLARATIVE_INCLUDE_DIR}
 )
 
 ########### Subdirectories ###############
