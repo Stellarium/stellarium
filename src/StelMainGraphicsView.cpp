@@ -84,6 +84,11 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	//glWidget->setAttribute(Qt::WA_PaintOnScreen);
 	//glWidget->setAttribute(Qt::WA_NoSystemBackground);
 
+	glClearColor(0,0,0,0);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glWidget->swapBuffers();
+	glClear(GL_COLOR_BUFFER_BIT);
+
 	if (!glWidget->format().stencil())
 		qWarning("Could not get stencil buffer; results will be suboptimal");
 	if (!glWidget->format().depth())
