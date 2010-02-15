@@ -84,6 +84,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	//glWidget->setAttribute(Qt::WA_PaintOnScreen);
 	//glWidget->setAttribute(Qt::WA_NoSystemBackground);
 
+	glWidget->makeCurrent();
 	glClearColor(0,0,0,0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glWidget->swapBuffers();
