@@ -48,8 +48,10 @@ QPainter* StelPainter::qPainter = NULL;
  QGLShaderProgram* StelPainter::colorShaderProgram=NULL;
  QGLShaderProgram* StelPainter::texturesShaderProgram=NULL;
  QGLShaderProgram* StelPainter::basicShaderProgram=NULL;
+ QGLShaderProgram* StelPainter::texturesColorShaderProgram=NULL;
  StelPainter::BasicShaderVars StelPainter::basicShaderVars;
  StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
+ StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
 #endif
 
 void StelPainter::setQPainter(QPainter* p)
@@ -98,7 +100,7 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 #endif
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
-	// Fix some problem when using OpenGL2 engine
+	// Fix some problem when using Qt OpenGL2 engine
 	glStencilMask(0x11111111);
 	// Deactivate drawing in depth buffer by default
 	glDepthMask(GL_FALSE);
@@ -430,8 +432,6 @@ void StelPainter::sSphereMap(double radius, int slices, int stacks, double textu
 {
 	double rho,x,y,z;
 	int i, j;
-	const double nsign = orientInside?-1:1;
-
 	double drho = M_PI / stacks;
 	Q_ASSERT(stacks<=MAX_STACKS);
 	ComputeCosSinRho(drho,stacks);
@@ -453,7 +453,6 @@ void StelPainter::sSphereMap(double radius, int slices, int stacks, double textu
 
 	static QVector<double> vertexArr;
 	static QVector<float> texCoordArr;
-	static QVector<float> normalArr;
 
 	// draw intermediate stacks as quad strips
 	if (!orientInside) // nsign==1
@@ -462,24 +461,21 @@ void StelPainter::sSphereMap(double radius, int slices, int stacks, double textu
 		{
 			vertexArr.resize(0);
 			texCoordArr.resize(0);
-			normalArr.resize(0);
 			for (j=0,cos_sin_theta_p=cos_sin_theta;j<=slices;++j,cos_sin_theta_p+=2)
 			{
 				x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
 				y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
 				z = cos_sin_rho_p[0];
-				normalArr << x*nsign <<  y*nsign << z*nsign;
 				sSphereMapTexCoordFast(rho, cos_sin_theta_p[0], cos_sin_theta_p[1], texCoordArr);
 				vertexArr << x*radius << y*radius << z*radius;
 
 				x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
 				y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
 				z = cos_sin_rho_p[2];
-				normalArr << x*nsign <<  y*nsign << z*nsign;
 				sSphereMapTexCoordFast(rho + drho, cos_sin_theta_p[0], cos_sin_theta_p[1], texCoordArr);
 				vertexArr << x*radius << y*radius << z*radius;
 			}
-			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), NULL, (Vec3f*)normalArr.constData());
+			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
 			drawFromArray(TriangleStrip, vertexArr.size()/3);
 		}
 	}
@@ -489,24 +485,21 @@ void StelPainter::sSphereMap(double radius, int slices, int stacks, double textu
 		{
 			vertexArr.resize(0);
 			texCoordArr.resize(0);
-			normalArr.resize(0);
 			for (j=0,cos_sin_theta_p=cos_sin_theta;j<=slices;++j,cos_sin_theta_p+=2)
 			{
 				x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
 				y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
 				z = cos_sin_rho_p[2];
-				normalArr << x*nsign <<  y*nsign << z*nsign;
 				sSphereMapTexCoordFast(rho + drho, cos_sin_theta_p[0], -cos_sin_theta_p[1], texCoordArr);
 				vertexArr << x*radius << y*radius << z*radius;
 
 				x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
 				y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
 				z = cos_sin_rho_p[0];
-				normalArr << x*nsign <<  y*nsign << z*nsign;
 				sSphereMapTexCoordFast(rho, cos_sin_theta_p[0], -cos_sin_theta_p[1], texCoordArr);
 				vertexArr << x*radius << y*radius << z*radius;
 			}
-			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), NULL, (Vec3f*)normalArr.constData());
+			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
 			drawFromArray(TriangleStrip, vertexArr.size()/3);
 		}
 	}
@@ -1578,6 +1571,34 @@ void StelPainter::enableTexture2d(bool b)
 void StelPainter::initSystemGLInfo()
 {
 #ifdef STELPAINTER_GL2
+	// Basic shader: just vertex filled with plain color
+	QGLShader *vshader3 = new QGLShader(QGLShader::Vertex);
+	const char *vsrc3 =
+		"attribute mediump vec3 vertex;\n"
+		"uniform mediump mat4 projectionMatrix;\n"
+		"void main(void)\n"
+		"{\n"
+		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
+		"}\n";
+	vshader3->compileSourceCode(vsrc3);
+	QGLShader *fshader3 = new QGLShader(QGLShader::Fragment);
+	const char *fsrc3 =
+		"uniform mediump vec4 color;\n"
+		"void main(void)\n"
+		"{\n"
+		"    gl_FragColor = color;\n"
+		"}\n";
+	fshader3->compileSourceCode(fsrc3);
+	basicShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
+	basicShaderProgram->addShader(vshader3);
+	basicShaderProgram->addShader(fshader3);
+	basicShaderProgram->link();
+
+	basicShaderVars.projectionMatrix = basicShaderProgram->uniformLocation("projectionMatrix");
+	basicShaderVars.color = basicShaderProgram->uniformLocation("color");
+	basicShaderVars.vertex = basicShaderProgram->attributeLocation("vertex");
+
+	// Color shader program: color specified per vertex
 	QGLShader *vshader1 = new QGLShader(QGLShader::Vertex);
 	const char *vsrc1 =
 		"attribute highp vec3 vertex;\n"
@@ -1603,7 +1624,7 @@ void StelPainter::initSystemGLInfo()
 	colorShaderProgram->addShader(fshader1);
 	colorShaderProgram->link();
 
-
+	// Basic texture shader program
 	QGLShader *vshader2 = new QGLShader(QGLShader::Vertex);
 	const char *vsrc2 =
 		"attribute highp vec3 vertex;\n"
@@ -1636,31 +1657,40 @@ void StelPainter::initSystemGLInfo()
 	texturesShaderVars.vertex = texturesShaderProgram->attributeLocation("vertex");
 	texturesShaderVars.texColor = texturesShaderProgram->uniformLocation("texColor");
 
-	QGLShader *vshader3 = new QGLShader(QGLShader::Vertex);
-	const char *vsrc3 =
-		"attribute mediump vec3 vertex;\n"
+	// Texture shader program + interpolated color per vertex
+	QGLShader *vshader4 = new QGLShader(QGLShader::Vertex);
+	const char *vsrc4 =
+		"attribute highp vec3 vertex;\n"
+		"attribute mediump vec2 texCoord;\n"
+		"attribute mediump vec4 color;\n"
 		"uniform mediump mat4 projectionMatrix;\n"
+		"varying mediump vec2 texc;\n"
+		"varying mediump vec4 outColor;\n"
 		"void main(void)\n"
 		"{\n"
-		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
+		"    gl_Position = projectionMatrix * vec4(vertex, 1.);\n"
+		"    texc = texCoord;\n"
+		"    outColor = color;\n"
 		"}\n";
-	vshader3->compileSourceCode(vsrc3);
-	QGLShader *fshader3 = new QGLShader(QGLShader::Fragment);
-	const char *fsrc3 =
-		"uniform mediump vec4 color;\n"
+	vshader2->compileSourceCode(vsrc4);
+	QGLShader *fshader4 = new QGLShader(QGLShader::Fragment);
+	const char *fsrc4 =
+		"varying mediump vec2 texc;\n"
+		"varying mediump vec4 outColor;\n"
+		"uniform sampler2D tex;\n"
 		"void main(void)\n"
 		"{\n"
-		"    gl_FragColor = color;\n"
+		"    gl_FragColor = texture2D(tex, texc)*outColor;\n"
 		"}\n";
-	fshader3->compileSourceCode(fsrc3);
-	basicShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
-	basicShaderProgram->addShader(vshader3);
-	basicShaderProgram->addShader(fshader3);
-	basicShaderProgram->link();
-
-	basicShaderVars.projectionMatrix = basicShaderProgram->uniformLocation("projectionMatrix");
-	basicShaderVars.color = basicShaderProgram->uniformLocation("color");
-	basicShaderVars.vertex = basicShaderProgram->attributeLocation("vertex");
+	fshader4->compileSourceCode(fsrc4);
+	texturesColorShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
+	texturesColorShaderProgram->addShader(vshader4);
+	texturesColorShaderProgram->addShader(fshader4);
+	texturesColorShaderProgram->link();
+	texturesColorShaderVars.projectionMatrix = texturesColorShaderProgram->uniformLocation("projectionMatrix");
+	texturesColorShaderVars.texCoord = texturesColorShaderProgram->attributeLocation("texCoord");
+	texturesColorShaderVars.vertex = texturesColorShaderProgram->attributeLocation("vertex");
+	texturesColorShaderVars.color = texturesColorShaderProgram->uniformLocation("color");
 #endif
 }
 
@@ -1757,9 +1787,22 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setAttributeArray(texturesShaderVars.texCoord, (const GLfloat*)texCoordArray.pointer, 2);
 		pr->enableAttributeArray(texturesShaderVars.texCoord);
 	}
+	else if (texCoordArray.enabled && colorArray.enabled && !normalArray.enabled)
+	{
+		pr = texturesColorShaderProgram;
+		pr->bind();
+		pr->setAttributeArray(texturesColorShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
+		pr->enableAttributeArray(texturesColorShaderVars.vertex);
+		pr->setUniformValue(texturesColorShaderVars.projectionMatrix, qMat);
+		pr->setAttributeArray(texturesColorShaderVars.texCoord, (const GLfloat*)texCoordArray.pointer, 2);
+		pr->enableAttributeArray(texturesColorShaderVars.texCoord);
+		pr->setAttributeArray(texturesColorShaderVars.color, (const GLfloat*)colorArray.pointer, colorArray.size);
+		pr->enableAttributeArray(texturesColorShaderVars.color);
+	}
 	else
 	{
-		qDebug() << "Unhandled parameters.";
+		qDebug() << "Unhandled parameters." << texCoordArray.enabled << colorArray.enabled << normalArray.enabled;
+		qDebug() << "Light: " << light.isEnabled();
 		return;
 	}
 #endif
@@ -1768,7 +1811,13 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	else
 		glDrawArrays(mode, offset, count);
 #ifdef STELPAINTER_GL2
-	if (pr==texturesShaderProgram)
+	if (pr==texturesColorShaderProgram)
+	{
+		pr->disableAttributeArray(texturesColorShaderVars.texCoord);
+		pr->disableAttributeArray(texturesColorShaderVars.vertex);
+		pr->disableAttributeArray(texturesColorShaderVars.color);
+	}
+	else if (pr==texturesShaderProgram)
 	{
 		pr->disableAttributeArray(texturesShaderVars.texCoord);
 		pr->disableAttributeArray(texturesShaderVars.vertex);
@@ -1777,7 +1826,8 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	{
 		pr->disableAttributeArray(basicShaderVars.vertex);
 	}
-	pr->release();
+	if (pr)
+		pr->release();
 #endif
 }
 
