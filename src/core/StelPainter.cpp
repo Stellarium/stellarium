@@ -1390,7 +1390,6 @@ void StelPainter::drawLine2d(double x1, double y1, double x2, double y2)
 
 ///////////////////////////////////////////////////////////////////////////
 // Drawing methods for general (non-linear) mode
-
 void StelPainter::sSphere(double radius, double oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
 {
 	// It is really good for performance to have Vec4f,Vec3f objects
@@ -1593,7 +1592,6 @@ void StelPainter::initSystemGLInfo()
 	basicShaderProgram->addShader(vshader3);
 	basicShaderProgram->addShader(fshader3);
 	basicShaderProgram->link();
-
 	basicShaderVars.projectionMatrix = basicShaderProgram->uniformLocation("projectionMatrix");
 	basicShaderVars.color = basicShaderProgram->uniformLocation("color");
 	basicShaderVars.vertex = basicShaderProgram->attributeLocation("vertex");
@@ -1651,7 +1649,6 @@ void StelPainter::initSystemGLInfo()
 	texturesShaderProgram->addShader(vshader2);
 	texturesShaderProgram->addShader(fshader2);
 	texturesShaderProgram->link();
-
 	texturesShaderVars.projectionMatrix = texturesShaderProgram->uniformLocation("projectionMatrix");
 	texturesShaderVars.texCoord = texturesShaderProgram->attributeLocation("texCoord");
 	texturesShaderVars.vertex = texturesShaderProgram->attributeLocation("vertex");
@@ -1672,7 +1669,7 @@ void StelPainter::initSystemGLInfo()
 		"    texc = texCoord;\n"
 		"    outColor = color;\n"
 		"}\n";
-	vshader2->compileSourceCode(vsrc4);
+	vshader4->compileSourceCode(vsrc4);
 	QGLShader *fshader4 = new QGLShader(QGLShader::Fragment);
 	const char *fsrc4 =
 		"varying mediump vec2 texc;\n"
@@ -1690,7 +1687,7 @@ void StelPainter::initSystemGLInfo()
 	texturesColorShaderVars.projectionMatrix = texturesColorShaderProgram->uniformLocation("projectionMatrix");
 	texturesColorShaderVars.texCoord = texturesColorShaderProgram->attributeLocation("texCoord");
 	texturesColorShaderVars.vertex = texturesColorShaderProgram->attributeLocation("vertex");
-	texturesColorShaderVars.color = texturesColorShaderProgram->uniformLocation("color");
+	texturesColorShaderVars.color = texturesColorShaderProgram->attributeLocation("color");
 #endif
 }
 
