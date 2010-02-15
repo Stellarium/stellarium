@@ -385,6 +385,14 @@ private:
 		int texColor;
 	};
 	static TexturesShaderVars texturesShaderVars;
+	static QGLShaderProgram* texturesColorShaderProgram;
+	struct TexturesColorShaderVars {
+		int projectionMatrix;
+		int texCoord;
+		int vertex;
+		int color;
+	};
+	static TexturesColorShaderVars texturesColorShaderVars;
 #endif
 
 	//! The descriptor for the current opengl vertex array
@@ -399,7 +407,7 @@ private:
 	//! the single light used by the painter
 	StelPainterLight light;
 
-	//! The material used bye the painter
+	//! The material used by the painter
 	StelPainterMaterial material;
 };
 
