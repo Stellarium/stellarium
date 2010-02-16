@@ -1,7 +1,10 @@
-0.10.4 [2010-02-03]
-Fix release.
-Disable OpenGL shaders by default. User activate it by setting use_glshaders = true in the [main] section of the config.ini
+0.10.4 [2010-02-17]
+Bug fix release.
+Fixed unpredictable openGL related crashes on win32.
+Fixed run on MacOSX Tiger/Leopard/Snow Leopard.
+Disable OpenGL shaders by default for stars and atmosphere. User activate it by setting use_glshaders = true in the [main] section of the config.ini
 Fixed the handling of the Qt -graphicssystem parameter. Now it is ignored if it is not used properly.
+Improved OpenGLES2 support (not done yet).
 
 0.10.3 [2010-01-28]
 Based on Qt 4.6.x
