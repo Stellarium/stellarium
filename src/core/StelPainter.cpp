@@ -1502,15 +1502,13 @@ void StelPainter::sCylinder(double radius, double height, int slices, int orient
 	if (orientInside)
 		glCullFace(GL_FRONT);
 
-	const double da = 2.0 * M_PI / slices;
+	const float da = 2.0 * M_PI / slices;
 
-	GLfloat ds = 1.0 / slices;
-	QVector<float> texCoordArray;
-	QVector<double> vertexArray;
-	texCoordArray.resize(0);
-	vertexArray.resize(0);
-	GLfloat s = 0.0;
-	GLfloat x, y;
+	float ds = 1.0 / slices;
+	QVarLengthArray<Vec2f, 128> texCoordArray;
+	QVarLengthArray<Vec3d, 128> vertexArray;
+	float s = 0.f;
+	float x, y;
 	for (int i = 0; i <= slices; i++)
 	{
 		if (i == slices)
@@ -1523,14 +1521,14 @@ void StelPainter::sCylinder(double radius, double height, int slices, int orient
 			x = std::sin(da*i);
 			y = std::cos(da*i);
 		}
-		texCoordArray << s << 0.;
-		vertexArray << x*radius << y*radius << 0.;
-		texCoordArray << s << 1.;
-		vertexArray << x*radius << y*radius << height;
+		texCoordArray.append(Vec2f(s, 0.f));
+		vertexArray.append(Vec3d(x*radius, y*radius, 0.));
+		texCoordArray.append(Vec2f(s, 1.f));
+		vertexArray.append(Vec3d(x*radius, y*radius, height));
 		s += ds;
 	}
-	setArrays((Vec3d*)vertexArray.constData(), (Vec2f*)texCoordArray.constData());
-	drawFromArray(TriangleStrip, vertexArray.size()/3);
+	setArrays(vertexArray.constData(), texCoordArray.constData());
+	drawFromArray(TriangleStrip, vertexArray.size());
 
 	if (orientInside)
 		glCullFace(GL_BACK);
@@ -1708,37 +1706,6 @@ void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool
 	normalArray.enabled = normal;
 }
 
-void StelPainter::prepareArray(const ArrayDesc& array, int cap)
-{
-#ifndef STELPAINTER_GL2
-	if (!array.enabled)
-	{
-		glDisableClientState(cap);
-		return;
-	}
-	glEnableClientState(cap);
-	switch (cap)
-	{
-	case GL_VERTEX_ARRAY:
-		glVertexPointer(array.size, array.type, 0, array.pointer);
-		break;
-	case GL_TEXTURE_COORD_ARRAY:
-		glTexCoordPointer(array.size, array.type, 0, array.pointer);
-		break;
-	case GL_NORMAL_ARRAY:
-		glNormalPointer(array.type, 0, array.pointer);
-		break;
-	case GL_COLOR_ARRAY:
-		glColorPointer(array.size, array.type, 0, array.pointer);
-		break;
-	default:
-		Q_ASSERT(0);
-	}
-#else
-	Q_ASSERT(0);
-#endif
-}
-
 void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned int* indices)
 {
 	ArrayDesc projectedVertexArray = vertexArray;
@@ -1753,12 +1720,29 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 
 #ifndef STELPAINTER_GL2
 	// Enable the client state and set the opengl array for each array
-	prepareArray(projectedVertexArray, GL_VERTEX_ARRAY);
-	prepareArray(texCoordArray, GL_TEXTURE_COORD_ARRAY);
-	prepareArray(normalArray, GL_NORMAL_ARRAY);
-	prepareArray(colorArray, GL_COLOR_ARRAY);
-#else
 	Q_ASSERT(projectedVertexArray.enabled);
+	Q_ASSERT(projectedVertexArray.pointer);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(projectedVertexArray.size, projectedVertexArray.type, 0, projectedVertexArray.pointer);
+	if (texCoordArray.enabled)
+	{
+		Q_ASSERT(texCoordArray.pointer);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glTexCoordPointer(texCoordArray.size, texCoordArray.type, 0, texCoordArray.pointer);
+	}
+	if (normalArray.enabled)
+	{
+		Q_ASSERT(normalArray.pointer);
+		glEnableClientState(GL_NORMAL_ARRAY);
+		glNormalPointer(normalArray.type, 0, normalArray.pointer);
+	}
+	if (colorArray.enabled)
+	{
+		Q_ASSERT(colorArray.pointer);
+		glEnableClientState(GL_COLOR_ARRAY);
+		glColorPointer(colorArray.size, colorArray.type, 0, colorArray.pointer);
+	}
+#else
 	QGLShaderProgram* pr=NULL;
 
 	const Mat4f& m = getProjector()->getProjectionMatrix();
@@ -1807,7 +1791,15 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		glDrawElements(mode, count, GL_UNSIGNED_INT, indices + offset);
 	else
 		glDrawArrays(mode, offset, count);
-#ifdef STELPAINTER_GL2
+#ifndef STELPAINTER_GL2
+	glDisableClientState(GL_VERTEX_ARRAY);
+	if (texCoordArray.enabled)
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	if (normalArray.enabled)
+		glDisableClientState(GL_NORMAL_ARRAY);
+	if (colorArray.enabled)
+		glDisableClientState(GL_COLOR_ARRAY);
+#else
 	if (pr==texturesColorShaderProgram)
 	{
 		pr->disableAttributeArray(texturesColorShaderVars.texCoord);
