@@ -128,7 +128,9 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap, Stel
 #endif
 			dbStr += "before mmap loading";
 			qWarning() << dbStr;
-			return 0;
+			use_mmap = false;
+			qWarning() << "Revert to not using mmmap";
+			//return 0;
 		}
 		dbStr += "byteswap ";
 		type = bswap_32(type);
