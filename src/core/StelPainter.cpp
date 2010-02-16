@@ -1865,7 +1865,7 @@ void StelPainterLight::setPosition(const Vec4f& v)
 {
 	position = v;
 #ifndef STELPAINTER_GL2
-	glLightfv(light, GL_POSITION, v);
+	glLightfv(GL_LIGHT0 + light, GL_POSITION, v);
 #endif
 }
 
@@ -1873,7 +1873,7 @@ void StelPainterLight::setDiffuse(const Vec4f& v)
 {
 	diffuse = v;
 #ifndef STELPAINTER_GL2
-	glLightfv(light, GL_DIFFUSE, v);
+	glLightfv(GL_LIGHT0 + light, GL_DIFFUSE, v);
 #endif
 }
 
@@ -1881,7 +1881,7 @@ void StelPainterLight::setSpecular(const Vec4f& v)
 {
 	specular = v;
 #ifndef STELPAINTER_GL2
-	glLightfv(light, GL_SPECULAR, v);
+	glLightfv(GL_LIGHT0 + light, GL_SPECULAR, v);
 #endif
 }
 
@@ -1889,7 +1889,7 @@ void StelPainterLight::setAmbient(const Vec4f& v)
 {
 	ambient = v;
 #ifndef STELPAINTER_GL2
-	glLightfv(light, GL_AMBIENT, v);
+	glLightfv(GL_LIGHT0 + light, GL_AMBIENT, v);
 #endif
 }
 
