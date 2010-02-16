@@ -652,7 +652,7 @@ template<class T> Vector4<T>::Vector4(T x, T y, T z)
 	v[0]=x; v[1]=y; v[2]=z; v[3]=1;
 }
 
-template<class T> Vector4<T>::Vector4(T x, T y, T z, T a = 1)
+template<class T> Vector4<T>::Vector4(T x, T y, T z, T a)
 {
 	v[0]=x; v[1]=y; v[2]=z; v[3]=a;
 }

@@ -84,7 +84,7 @@ private:
 	}
 
 	template<bool I>
-	unsigned int specIndiceAt(int i) const {
+	unsigned int specIndiceAt(unsigned int i) const {
 		return I ? indices.at(i) : i;
 	}
 

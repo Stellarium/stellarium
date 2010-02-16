@@ -77,11 +77,13 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 
 	// Create an openGL viewport
 	QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer);
-	if(QSysInfo::MacintoshVersion == QSysInfo::MV_SNOWLEOPARD)
+	#ifdef Q_WS_MAC
+	if (QSysInfo::MacintoshVersion == QSysInfo::MV_SNOWLEOPARD)
 	{
 		glFormat.setSamples(16);
 		glFormat.setSampleBuffers(true);
 	}
+	#endif
 	//glFormat.setDirectRendering(false);
 	glWidget = new QGLWidget(glFormat, this);
 	//glWidget->setAttribute(Qt::WA_PaintOnScreen);

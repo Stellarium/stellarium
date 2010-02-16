@@ -157,7 +157,7 @@ int main(int argc, char **argv)
 
 	// The QApplication MUST be created before the StelFileMgr is initialized.
 	QApplication app(argc, argv);
-	
+
 	// Init the file manager
 	StelFileMgr::init();
 
@@ -302,15 +302,15 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		// The default behaviour on windows to is to use the OpenGL1 paint engine
-		// since the second one caused crashes.
-		// On other plateforms
+		// The default behaviour on windows to is to use the OpenGL1 Qt paint engine because the OpenGL2 one causes slowdown.
 #ifdef WIN32
 		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
 #else
-		if ((QSysInfo::MacintoshVersion == QSysInfo::MV_LEOPARD) && (QSysInfo::ByteOrder == QSysInfo::BigEndian)) // Leopard (10.5) + ppc architecture
+# ifdef Q_WS_MAC
+		// On Leopard (10.5) + ppc architecture, text display is buggy if OpenGL2 Qt paint engine is used.
+		if ((QSysInfo::MacintoshVersion == QSysInfo::MV_LEOPARD) && (QSysInfo::ByteOrder == QSysInfo::BigEndian))
 			QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
-
+# endif
 #endif
 	}
 
