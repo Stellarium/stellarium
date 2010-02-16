@@ -307,6 +307,10 @@ int main(int argc, char **argv)
 		// On other plateforms
 #ifdef WIN32
 		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
+#else
+		if ((QSysInfo::MacintoshVersion == QSysInfo::MV_LEOPARD) && (QSysInfo::ByteOrder == QSysInfo::BigEndian)) // Leopard (10.5) + ppc architecture
+			QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
+
 #endif
 	}
 
