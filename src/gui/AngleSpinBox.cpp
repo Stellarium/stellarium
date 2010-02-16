@@ -433,7 +433,7 @@ void AngleSpinBox::formatText(void)
 		}
 		default:
 		{
-			qWarning() << "AngleSpinBox::formatText - WARNING - unknown format" << angleSpinBoxFormat;
+			qWarning() << "AngleSpinBox::formatText - WARNING - unknown format" << (int)(angleSpinBoxFormat);
 			break;
 		}
 	}
