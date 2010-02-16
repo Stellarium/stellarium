@@ -294,7 +294,7 @@ int main(int argc, char **argv)
 	StelMacosxDirs::addApplicationPluginDirectory();
 #endif
 
-	if (confSettings->value("main/use_glshaders", false).toBool())
+	if (confSettings->value("main/use_glshaders", true).toBool())
 	{
 		// The user explicitely wants to use GL shaders
 		// Default Qt behaviour is alreay to use them if available (although it unstable),
@@ -302,7 +302,8 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		// The default behaviour on windows to is to use the OpenGL1 Qt paint engine because the OpenGL2 one causes slowdown.
+		// The default behaviour on windows to is to use the OpenGL1 Qt paint engine because
+		// the OpenGL2 one causes slowdown on older hardware.
 #ifdef WIN32
 		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
 #else
