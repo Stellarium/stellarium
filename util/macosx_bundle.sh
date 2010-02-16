@@ -35,3 +35,4 @@ done
 
 cp -pr $PROJECT_SOURCE_DIR/data/Icon.icns $CMAKE_INSTALL_PREFIX/Resources
 cp -pr $PROJECT_SOURCE_DIR/data/{PkgInfo,Info.plist} $CMAKE_INSTALL_PREFIX
+cp -pr $PROJECT_SOURCE_DIR/util/qt.conf $CMAKE_INSTALL_PREFIX/Resources
