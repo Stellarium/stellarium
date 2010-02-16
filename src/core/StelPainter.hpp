@@ -330,11 +330,6 @@ private:
 		bool enabled;			// Define whether the array is enabled or not.
 	} ArrayDesc;
 
-	//! Prepare an opengl array to be drawn by drawFromArray.
-	//! @param array the descriptor of the array.
-	//! @param cap Specifies the opengl capability associated to the array.
-	void prepareArray(const ArrayDesc& array, int cap);
-
 	//! Project an array using the current projection.
 	//! @return a descriptor of the new array
 	ArrayDesc projectArray(const ArrayDesc& array, int offset, int count, const unsigned int* indices=NULL);

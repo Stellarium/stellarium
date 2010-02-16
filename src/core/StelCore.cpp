@@ -155,7 +155,7 @@ StelProjectorP StelCore::getProjection(const Mat4d& modelViewMat, ProjectionType
 			prj = StelProjectorP(new StelProjectorOrthographic(modelViewMat));
 			break;
 		default:
-			qWarning() << "Unknown projection type: " << projType << "using ProjectionStereographic instead";
+			qWarning() << "Unknown projection type: " << (int)(projType) << "using ProjectionStereographic instead";
 			prj = StelProjectorP(new StelProjectorStereographic(modelViewMat));
 			Q_ASSERT(0);
 	}
