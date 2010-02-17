@@ -94,5 +94,6 @@ void StelLoadingBar::Draw(float val)
 	sPainter->drawText(splashx + extraTextPos[0], splashy + extraTextPos[1]-sPainter->getFontMetrics().height()-1, extraText);
 	
 	StelMainGraphicsView::getInstance().swapBuffer();	// And swap the buffers
+	glClearColor(0,0,0,0);
 	glClear(GL_COLOR_BUFFER_BIT);
 }

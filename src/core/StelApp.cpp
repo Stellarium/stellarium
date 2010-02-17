@@ -484,9 +484,6 @@ void StelApp::setColorScheme(const QString& section)
 	htmlStyleFile.open(QIODevice::ReadOnly);
 	currentStelStyle->htmlStyleSheet = htmlStyleFile.readAll();
 
-	if(stelGui)
-		stelGui->setStelStyle(*currentStelStyle);
-
 	// Send the event to every StelModule
 	foreach (StelModule* iter, moduleMgr->getAllModules())
 	{
