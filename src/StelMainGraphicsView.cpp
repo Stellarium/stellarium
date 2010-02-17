@@ -50,6 +50,11 @@ class StelQGLWidget : public QGLWidget
 public:
 	StelQGLWidget(const QGLFormat& format, QWidget* parent) : QGLWidget(format, parent)
 	{}
+	void mySetAutoBufferSwap(bool b)
+	{
+		setAutoBufferSwap(b);
+	}
+
 protected:
 	virtual void initializeGL()
 	{
@@ -180,8 +185,11 @@ void StelMainGraphicsView::init(QSettings* conf)
 	QPainter qPainter(glWidget);
 	StelPainter::setQPainter(&qPainter);
 
+	glWidget->mySetAutoBufferSwap(false);
 	// Initialize the core, including the StelApp instance.
 	mainSkyItem->init(conf);
+
+	glWidget->mySetAutoBufferSwap(true);
 
 	scriptAPIProxy = new StelMainScriptAPIProxy(this);
 	scriptMgr = new StelScriptMgr(this);

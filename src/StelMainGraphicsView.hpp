@@ -27,6 +27,7 @@ class QResizeEvent;
 class StelGuiBase;
 class StelMainScriptAPIProxy;
 class StelScriptMgr;
+class StelQGLWidget;
 
 //! @class StelMainGraphicsView
 //! Reimplement a QGraphicsView for Stellarium.
@@ -46,7 +47,7 @@ public:
 
 	//! Get the main QGLWidget
 	//! @deprecated don't use that.
-	QGLWidget* getOpenGLWin() {return glWidget;}
+	QGLWidget* getOpenGLWin() {return (QGLWidget*)glWidget;}
 
 	//! Swap openGL buffer.
 	//! @deprecated don't use that.
@@ -145,7 +146,7 @@ private:
 	class StelAppGraphicsWidget* mainSkyItem;
 
 	//! The openGL window
-	QGLWidget* glWidget;
+	StelQGLWidget* glWidget;
 
 	StelGuiBase* gui;
 
