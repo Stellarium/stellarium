@@ -45,6 +45,8 @@ StelMainWindow::StelMainWindow() : QMainWindow(NULL)
 	Q_ASSERT(!singleton);
 	singleton = this;
 
+	setAttribute(Qt::WA_NoSystemBackground);
+
 	setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
 	initTitleI18n();
 
