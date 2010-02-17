@@ -297,7 +297,7 @@ int main(int argc, char **argv)
 	if (confSettings->value("main/use_glshaders", true).toBool())
 	{
 		// The user explicitely wants to use GL shaders
-		// Default Qt behaviour is alreay to use them if available (although it unstable),
+		// Default Qt behaviour is already to use them if available (although it unstable),
 		// so nothing to be done.
 	}
 	else

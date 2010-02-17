@@ -45,6 +45,37 @@
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
+class StelQGLWidget : public QGLWidget
+{
+public:
+	StelQGLWidget(const QGLFormat& format, QWidget* parent) : QGLWidget(format, parent)
+	{}
+protected:
+	virtual void initializeGL()
+	{
+		QGLWidget::initializeGL();
+
+		if (!format().stencil())
+			qWarning("Could not get stencil buffer; results will be suboptimal");
+		if (!format().depth())
+			qWarning("Could not get depth buffer; results will be suboptimal");
+
+		QString paintEngineStr;
+		switch (paintEngine()->type())
+		{
+		case QPaintEngine::OpenGL:
+			paintEngineStr = "OpenGL";
+			break;
+		case QPaintEngine::OpenGL2:
+			paintEngineStr = "OpenGL2";
+			break;
+		default:
+			paintEngineStr = "Other";
+		}
+		qDebug() << "Qt GL paint engine is: " << paintEngineStr;
+	}
+};
+
 StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	: QGraphicsView(parent), backItem(NULL), gui(NULL), scriptAPIProxy(NULL), scriptMgr(NULL),
 	  wasDeinit(false),
@@ -62,13 +93,18 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	setObjectName("Mainview");
 
 	// Avoid white background at init
-	setStyleSheet(QString("QGraphicsView {background: #000;}"));
+	//setAttribute(Qt::WA_PaintOnScreen);
+	//setAttribute(Qt::WA_NoSystemBackground);
+	//setAutoFillBackground (true);
+	setBackgroundRole(QPalette::Window);
+	QPalette pal;
+	pal.setColor(QPalette::Window, Qt::black);
+	setPalette(pal);
+
 	setFrameShape(QFrame::NoFrame);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setFocusPolicy(Qt::StrongFocus);
-	// Allows for precise FPS control
-	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
 	connect(this, SIGNAL(screenshotRequested()), this, SLOT(doScreenshot()));
 
 	qtime = new QTime();
@@ -85,20 +121,8 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	}
 	#endif
 	//glFormat.setDirectRendering(false);
-	glWidget = new QGLWidget(glFormat, this);
-	//glWidget->setAttribute(Qt::WA_PaintOnScreen);
-	//glWidget->setAttribute(Qt::WA_NoSystemBackground);
-
-	glWidget->makeCurrent();
-	glClearColor(0,0,0,0);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glWidget->swapBuffers();
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	if (!glWidget->format().stencil())
-		qWarning("Could not get stencil buffer; results will be suboptimal");
-	if (!glWidget->format().depth())
-		qWarning("Could not get depth buffer; results will be suboptimal");
+	glWidget = new StelQGLWidget(glFormat, this);
+	glWidget->updateGL();
 
 	setViewport(glWidget);
 
@@ -107,6 +131,9 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 
 	backItem = new QGraphicsWidget();
 	backItem->setFocusPolicy(Qt::NoFocus);
+
+	// Allows for precise FPS control
+	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
 }
 
 StelMainGraphicsView::~StelMainGraphicsView()
