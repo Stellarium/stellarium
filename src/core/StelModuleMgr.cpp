@@ -222,7 +222,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 	foreach (QString dir, moduleDirs)
 	{
 		QString moduleFullPath = QString("modules/") + dir + "/lib" + dir;
-#ifdef WIN32
+#ifdef Q_OS_WIN
 		moduleFullPath += ".dll";
 #else
 #ifdef Q_OS_MAC

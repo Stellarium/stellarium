@@ -37,7 +37,7 @@
 #include <limits.h>    /* UINT_MAX */
 #include <math.h>
 
-#ifdef WIN32
+#ifdef Q_OS_WIN
 #include "GLee.h"
 #endif
 

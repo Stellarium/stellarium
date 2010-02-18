@@ -217,7 +217,7 @@ private:
 	//! Used to store the screenshot directory
 	static QString screenshotDir;
 
-#if defined(WIN32)
+#ifdef Q_OS_WIN
 	//! For internal use - retreives windows special named directories.
 	//! @param csidlId identifier for directoy, e.g. CSIDL_APPDATA
 	static QString getWin32SpecialDirPath(int csidlId);
