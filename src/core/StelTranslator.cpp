@@ -32,6 +32,7 @@
 
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
+#include "StelFileMgr.hpp"
 
 // Init static members
 StelTranslator* StelTranslator::lastUsed = NULL;
@@ -39,12 +40,7 @@ QMap<QString, QString> StelTranslator::iso639codes;
 QString StelTranslator::systemLangName;
 
 // Use system locale language by default
-#ifdef Q_OS_MAC
-#include "StelMacosxDirs.hpp"
-StelTranslator StelTranslator::globalTranslator = StelTranslator("stellarium", StelMacosxDirs::getApplicationResourcesDirectory().append( "/locale" ), "system");
-#else
-StelTranslator StelTranslator::globalTranslator = StelTranslator("stellarium", INSTALL_LOCALEDIR, "system");
-#endif
+StelTranslator StelTranslator::globalTranslator = StelTranslator("stellarium", StelFileMgr::getLocaleDir(), "system");
 
 #ifdef Q_OS_WIN
 # include <windows.h>
