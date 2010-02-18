@@ -225,7 +225,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 #ifdef WIN32
 		moduleFullPath += ".dll";
 #else
-#ifdef MACOSX
+#ifdef Q_OS_MAC
 		moduleFullPath += ".dylib";
 #else
 		moduleFullPath += ".so";

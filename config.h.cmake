@@ -10,8 +10,6 @@
 #cmakedefine WINVER 0x500
 #endif
 
-#define PACKAGE_NAME "stellarium"
-
 #cmakedefine INSTALL_DATADIR "${INSTALL_DATADIR}"
 #cmakedefine INSTALL_LOCALEDIR "${INSTALL_LOCALEDIR}"
 #cmakedefine PACKAGE_VERSION "${PACKAGE_VERSION}"

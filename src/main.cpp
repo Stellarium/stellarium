@@ -34,7 +34,7 @@
 #include <QFileInfo>
 #include <QtPlugin>
 
-#ifdef MACOSX
+#ifdef Q_OS_MAC
 #include "StelMacosxDirs.hpp"
 #endif
 
@@ -290,7 +290,7 @@ int main(int argc, char **argv)
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
-#ifdef MACOSX
+#ifdef Q_OS_MAC
 	StelMacosxDirs::addApplicationPluginDirectory();
 #endif
 
@@ -306,14 +306,14 @@ int main(int argc, char **argv)
 		// the OpenGL2 one causes slowdown on older hardware.
 #ifdef WIN32
 		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
-#else
-# ifdef Q_WS_MAC
-		// On Leopard (10.5) + ppc architecture, text display is buggy if OpenGL2 Qt paint engine is used.
-		if ((QSysInfo::MacintoshVersion == QSysInfo::MV_LEOPARD) && (QSysInfo::ByteOrder == QSysInfo::BigEndian))
-			QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
-# endif
 #endif
 	}
+
+#ifdef Q_OS_MAC
+	// On Leopard (10.5) + ppc architecture, text display is buggy if OpenGL2 Qt paint engine is used.
+	if ((QSysInfo::MacintoshVersion == QSysInfo::MV_LEOPARD) && (QSysInfo::ByteOrder == QSysInfo::BigEndian))
+		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
+#endif
 
 	// Initialize translator feature
 	try

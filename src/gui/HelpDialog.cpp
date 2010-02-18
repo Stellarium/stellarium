@@ -63,7 +63,7 @@ HelpDialog::HelpDialog()
 	setKey(group, "", "!03-ctrl+up/down", N_("Zoom in/out"));
 	setKey(group, "", "!04-left-click", N_("Select object"));
 	setKey(group, "", "!05-right-click", N_("Clear selection"));
-#ifdef MACOSX
+#ifdef Q_OS_MAC
 	setKey(group, "", "!06-ctrl+left-click", N_("Clear selection"));
 #endif
 
