@@ -173,6 +173,11 @@ IF(ENABLE_SOUND)
 ENDIF()
 INCLUDE(${QT_USE_FILE})
 
+# Get rid of the QtTest dependency for the main binary. It is re-added manually when compiling tests.
+STRING(REPLACE "${QT_QTTEST_LIBRARY}" "" QT_LIBRARIES "${QT_LIBRARIES}")
+# Get rid of the GLU dependency, it's not needed in stellarium.
+STRING(REPLACE "-lGLU " "" QT_LIBRARIES "${QT_LIBRARIES}")
+
 FIND_PACKAGE(ZLIB)
 
 IF(ENABLE_NLS)
@@ -197,7 +202,6 @@ ENDIF()
 IF(OPENGL_MODE STREQUAL "ES2")
   ADD_DEFINITIONS(-DUSE_OPENGL_ES2 -DQT_OPENGL_LIB -D_REENTRANT -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED)
   # Make sure that no desktop OpenGL libraries are linked when OpenGLES is used
-  STRING(REPLACE "-lGLU " "" QT_LIBRARIES "${QT_LIBRARIES}")
   STRING(REPLACE "-lGL" "-lGLESv2" QT_LIBRARIES "${QT_LIBRARIES}")
 ENDIF()
 

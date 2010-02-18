@@ -160,9 +160,9 @@ void StelLogger::init(const QString& logFilePath)
 	QProcess lspci;
 	lspci.start("lspci -v", QIODevice::ReadOnly);
 	lspci.waitForFinished(200);
-	QString pciData(lspci.readAll());
+	const QString pciData(lspci.readAll());
 	QStringList pciLines = pciData.split('\n', QString::SkipEmptyParts);
-	for(int i = 0; i < pciLines.size(); i++)
+	for (int i = 0; i<pciLines.size(); i++)
 	{
 		if(pciLines.at(i).contains("VGA compatible controller"))
 		{
