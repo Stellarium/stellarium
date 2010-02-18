@@ -75,6 +75,10 @@ void StelFileMgr::init()
 #else
 	screenshotDir = QDir::homePath();
 #endif
+
+#ifdef Q_OS_MAC
+	StelMacosxDirs::addApplicationPluginDirectory();
+#endif
 	}
 
 
