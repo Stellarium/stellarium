@@ -378,11 +378,9 @@ void StelFileMgr::setScreenshotDir(const QString& newDir)
 QString StelFileMgr::getLocaleDir()
 {
 	QFileInfo localePath;
-#if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32)
+#if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
 	// Windows and MacOS X have the locale dir in the installation folder
 	localePath = QFileInfo(getInstallationDir() + "/locale");
-#elif defined(MACOSX)
-	localePath = QFileInfo(getInstallationDir() + "/Contents/Resources/locale");
 #else
 	// Linux, BSD etc, the locale dir is set in the config.h
 	// but first, if we are in the development tree, don't rely on an
