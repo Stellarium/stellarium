@@ -34,10 +34,6 @@
 #include <QFileInfo>
 #include <QtPlugin>
 
-#ifdef Q_OS_MAC
-#include "StelMacosxDirs.hpp"
-#endif
-
 Q_IMPORT_PLUGIN(StelGui)
 
 #ifdef USE_STATIC_PLUGIN_VIRGO
@@ -289,10 +285,6 @@ int main(int argc, char **argv)
 
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
-
-#ifdef Q_OS_MAC
-	StelMacosxDirs::addApplicationPluginDirectory();
-#endif
 
 	if (confSettings->value("main/use_glshaders", true).toBool())
 	{
