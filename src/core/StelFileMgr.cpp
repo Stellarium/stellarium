@@ -393,8 +393,6 @@ QString StelFileMgr::getLocaleDir()
 	}
 	else
 		localePath = QFileInfo(QFile::decodeName(INSTALL_LOCALEDIR));
-
-
 #endif
 	if (localePath.exists())
 	{
