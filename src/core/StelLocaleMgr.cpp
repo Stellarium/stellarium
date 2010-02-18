@@ -35,7 +35,7 @@
 
 QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
 
-StelLocaleMgr::StelLocaleMgr() : skyTranslator("stellarium", INSTALL_LOCALEDIR, ""), GMTShift(0)
+StelLocaleMgr::StelLocaleMgr() : skyTranslator("stellarium", StelFileMgr::getLocaleDir(), ""), GMTShift(0)
 {
 	//generateCountryList();
 
