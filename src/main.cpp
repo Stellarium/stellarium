@@ -304,7 +304,7 @@ int main(int argc, char **argv)
 	{
 		// The default behaviour on windows to is to use the OpenGL1 Qt paint engine because
 		// the OpenGL2 one causes slowdown on older hardware.
-#ifdef WIN32
+#ifdef Q_OS_WIN
 		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
 #endif
 	}

@@ -6,10 +6,6 @@
 #cmakedefine HAVE_POW10
 #cmakedefine HAVE_BYTESWAP_H
 
-#ifdef WIN32
-#cmakedefine WINVER 0x500
-#endif
-
 #cmakedefine INSTALL_DATADIR "${INSTALL_DATADIR}"
 #cmakedefine INSTALL_LOCALEDIR "${INSTALL_LOCALEDIR}"
 #cmakedefine PACKAGE_VERSION "${PACKAGE_VERSION}"

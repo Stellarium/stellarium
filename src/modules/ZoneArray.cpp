@@ -21,7 +21,7 @@
 
 #include <QDebug>
 #include <QFile>
-#ifdef WIN32
+#ifdef Q_OS_WIN
 #include <io.h>
 #include <windows.h>
 #endif
