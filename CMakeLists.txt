@@ -207,7 +207,7 @@ ENDIF()
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
 IF(APPLE)
-  SET(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/Stellarium.app/Contents")
+  SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
   SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/Resources/data")
   SET(INSTALL_LOCALEDIR "${CMAKE_INSTALL_PREFIX}/Resources/locale")
 ELSE(APPLE)
