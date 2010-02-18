@@ -103,6 +103,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	QPalette pal;
 	pal.setColor(QPalette::Window, Qt::black);
 	setPalette(pal);
+	// setStyleSheet(QString("QGraphicsView {background: #000;}"));
 
 	setFrameShape(QFrame::NoFrame);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
