@@ -247,7 +247,7 @@ bool StelTexture::glLoad()
 		opt |= QGLContext::LinearFilteringBindOption;
 
 	// Mipmap seems to be pretty buggy on windows..
-#ifndef WIN32
+#ifndef Q_OS_WIN
 	if (loadParams.generateMipmaps==true)
 		opt |= QGLContext::MipmapBindOption;
 #endif

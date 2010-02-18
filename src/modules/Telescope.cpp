@@ -32,7 +32,7 @@
 #include <QTcpSocket>
 #include <QTextStream>
 
-#ifdef WIN32
+#ifdef Q_OS_WIN
 	#include <windows.h> // GetSystemTimeAsFileTime()
 #else
 	#include <sys/time.h>
@@ -157,7 +157,7 @@ qint64 getNow(void)
 {
 // At the moment this can't be done in a platform-independent way with Qt
 // (QDateTime and QTime don't support microsecond precision)
-#ifdef WIN32
+#ifdef Q_OS_WIN
 	FILETIME file_time;
 	GetSystemTimeAsFileTime(&file_time);
 	return (*((__int64*)(&file_time))/10) - 86400000000LL*134774;
@@ -172,7 +172,7 @@ TelescopeTcp::TelescopeTcp(const QString &name,const QString &params) : Telescop
 		end_position(positions+(sizeof(positions)/sizeof(positions[0])))
 {
 	hangup();
-	
+
 	// Example params:
 	// localhost:10000:500000
 	// split into:
@@ -204,14 +204,14 @@ TelescopeTcp::TelescopeTcp(const QString &name,const QString &params) : Telescop
 		qWarning() << "ERROR creating TelescopeTcp - port not valid (should be less than 32767)";
 		return;
 	}
-	
-	
+
+
 	if (time_delay <= 0 || time_delay > 10000000)
 	{
 		qWarning() << "ERROR creating TelescopeTcp - time_delay not valid (should be less than 10000000)";
 		return;
 	}
-	
+
 	//BM: TODO: This may cause some delay when there are more telescopes
 	QHostInfo info = QHostInfo::fromName(host);
 	if (info.error())
@@ -221,11 +221,11 @@ TelescopeTcp::TelescopeTcp(const QString &name,const QString &params) : Telescop
 	}
 	//BM: is info.addresses().isEmpty() if there's no error?
 	address = info.addresses().first();
-	
+
 	end_of_timeout = -0x8000000000000000LL;
-	
+
 	resetPositions();
-	
+
 	connect(tcpSocket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(socketFailed(QAbstractSocket::SocketError)));
 }
 
@@ -235,11 +235,11 @@ void TelescopeTcp::hangup(void)
 	{
 		tcpSocket->abort();// Or maybe tcpSocket->close()?
 	}
-	
+
 	readBufferEnd = readBuffer;
 	writeBufferEnd = writeBuffer;
 	wait_for_connection_establishment = false;
-	
+
 	resetPositions();
 }
 
@@ -411,14 +411,14 @@ void TelescopeTcp::performReading(void)
 						(((unsigned int)(unsigned char)(p[15])) << 24);
 					const int dec_int =
 						(int)(((unsigned int)(unsigned char)(p[16])) |
-						     (((unsigned int)(unsigned char)(p[17])) <<  8) |
-						     (((unsigned int)(unsigned char)(p[18])) << 16) |
-						     (((unsigned int)(unsigned char)(p[19])) << 24));
+							 (((unsigned int)(unsigned char)(p[17])) <<  8) |
+							 (((unsigned int)(unsigned char)(p[18])) << 16) |
+							 (((unsigned int)(unsigned char)(p[19])) << 24));
 					const int status =
 						(int)(((unsigned int)(unsigned char)(p[20])) |
-						     (((unsigned int)(unsigned char)(p[21])) <<  8) |
-						     (((unsigned int)(unsigned char)(p[22])) << 16) |
-						     (((unsigned int)(unsigned char)(p[23])) << 24));
+							 (((unsigned int)(unsigned char)(p[21])) <<  8) |
+							 (((unsigned int)(unsigned char)(p[22])) << 16) |
+							 (((unsigned int)(unsigned char)(p[23])) << 24));
 
 					// remember the time and received position so that later we
 					// will know where the telescope is pointing to:
@@ -517,7 +517,7 @@ bool TelescopeTcp::prepareCommunication()
 	else
 	{
 		const qint64 now = getNow();
-		if (now < end_of_timeout) 
+		if (now < end_of_timeout)
 			return false; //Don't try to reconnect for some time
 		end_of_timeout = now + 5000000;
 		tcpSocket->connectToHost(address, port);
@@ -531,7 +531,7 @@ void TelescopeTcp::performCommunication()
 	if (tcpSocket->state() == QAbstractSocket::ConnectedState)
 	{
 		performWriting();
-		
+
 		if (tcpSocket->bytesAvailable() > 0)
 		{
 			//If performReading() is called when there are no bytes to read,

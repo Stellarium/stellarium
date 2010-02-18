@@ -39,14 +39,14 @@ QMap<QString, QString> StelTranslator::iso639codes;
 QString StelTranslator::systemLangName;
 
 // Use system locale language by default
-#if defined(Q_OS_MAC)
+#ifdef Q_OS_MAC
 #include "StelMacosxDirs.hpp"
 StelTranslator StelTranslator::globalTranslator = StelTranslator("stellarium", StelMacosxDirs::getApplicationResourcesDirectory().append( "/locale" ), "system");
 #else
 StelTranslator StelTranslator::globalTranslator = StelTranslator("stellarium", INSTALL_LOCALEDIR, "system");
 #endif
 
-#ifdef WIN32
+#ifdef Q_OS_WIN
 # include <windows.h>
 # include <winnls.h>
 #define putenv(x) _putenv((x))
@@ -71,7 +71,7 @@ void StelTranslator::initSystemLanguage(void)
 		if (lang) systemLangName = lang;
 		else
 		{
-#ifdef WIN32
+#ifdef Q_OS_WIN
 			char cc[3];
 			if (GetLocaleInfo(LOCALE_USER_DEFAULT, LOCALE_SISO639LANGNAME, cc, 3))
 			{
