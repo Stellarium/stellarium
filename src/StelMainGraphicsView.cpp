@@ -50,10 +50,6 @@ class StelQGLWidget : public QGLWidget
 public:
 	StelQGLWidget(const QGLFormat& format, QWidget* parent) : QGLWidget(format, parent)
 	{}
-	void mySetAutoBufferSwap(bool b)
-	{
-		setAutoBufferSwap(b);
-	}
 
 protected:
 	virtual void initializeGL()
@@ -64,6 +60,8 @@ protected:
 			qWarning("Could not get stencil buffer; results will be suboptimal");
 		if (!format().depth())
 			qWarning("Could not get depth buffer; results will be suboptimal");
+		if (!format().doubleBuffer())
+			qWarning("Could not get double buffer; results will be suboptimal");
 
 		QString paintEngineStr;
 		switch (paintEngine()->type())
@@ -185,11 +183,8 @@ void StelMainGraphicsView::init(QSettings* conf)
 	QPainter qPainter(glWidget);
 	StelPainter::setQPainter(&qPainter);
 
-	glWidget->mySetAutoBufferSwap(false);
 	// Initialize the core, including the StelApp instance.
 	mainSkyItem->init(conf);
-
-	glWidget->mySetAutoBufferSwap(true);
 
 	scriptAPIProxy = new StelMainScriptAPIProxy(this);
 	scriptMgr = new StelScriptMgr(this);
