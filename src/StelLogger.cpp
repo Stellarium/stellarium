@@ -22,7 +22,7 @@
 #include <config.h>
 #include <QDateTime>
 #include <QProcess>
-#ifdef WIN32
+#ifdef Q_OS_WIN
  #include <windows.h>
 #endif
 
@@ -41,7 +41,7 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("%1").arg(QDateTime::currentDateTime().toString(Qt::ISODate)));
 
 	// write OS version
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
 	switch(QSysInfo::WindowsVersion)
 	{
 		case QSysInfo::WV_95:
@@ -74,7 +74,7 @@ void StelLogger::init(const QString& logFilePath)
 	}
 
 	// somebody writing something useful for Macs would be great here
-#elif defined Q_WS_MAC
+#elif defined Q_OS_MAC
 	switch(QSysInfo::MacintoshVersion)
 	{
 		case QSysInfo::MV_10_3:
@@ -136,14 +136,14 @@ void StelLogger::init(const QString& logFilePath)
 		{
 			QString line = infoFile.readLine();
 			line.chop(1);
-			if(line.startsWith("Mem") || line.startsWith("SwapTotal"))
+			if (line.startsWith("Mem") || line.startsWith("SwapTotal"))
 				writeLog(line);
 		}
 		infoFile.close();
 	}
 
 	infoFile.setFileName("/proc/cpuinfo");
-	if(!infoFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	if (!infoFile.open(QIODevice::ReadOnly | QIODevice::Text))
 		writeLog("Could not get CPU info.");
 	else
 	{
@@ -180,10 +180,10 @@ void StelLogger::init(const QString& logFilePath)
 	}
 
 	// Aargh Windows API
-#elif defined Q_WS_WIN
+#elif defined Q_OS_WIN
 	// Hopefully doesn't throw a linker error on earlier systems. Not like
 	// I'm gonna test it or anything.
-	if(QSysInfo::WindowsVersion >= QSysInfo::WV_2000)
+	if (QSysInfo::WindowsVersion >= QSysInfo::WV_2000)
 	{
 #ifdef __LP64__
 		MEMORYSTATUSEX statex;
@@ -230,9 +230,9 @@ void StelLogger::init(const QString& logFilePath)
 		char nameStr[512];
 		DWORD nameSize = sizeof(nameStr);
 
-		if(lRet == ERROR_SUCCESS)
+		if (lRet == ERROR_SUCCESS)
 		{
-			if(RegQueryValueEx(hKey, "ProcessorNameString", NULL, &dwType, (LPBYTE)&nameStr, &nameSize) == ERROR_SUCCESS)
+			if (RegQueryValueEx(hKey, "ProcessorNameString", NULL, &dwType, (LPBYTE)&nameStr, &nameSize) == ERROR_SUCCESS)
 				writeLog(QString("Processor name: %1").arg(nameStr));
 			else
 				writeLog("Could not get processor name.");
@@ -243,7 +243,7 @@ void StelLogger::init(const QString& logFilePath)
 	if(i == 0)
 		writeLog("Could not get processor info.");
 
-#elif defined Q_WS_MAC
+#elif defined Q_OS_MAC
 	writeLog("You look like a Mac user. How would you like to write some system info code here? That would help a lot.");
 
 #endif

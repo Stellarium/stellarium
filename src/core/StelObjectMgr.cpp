@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -55,7 +55,7 @@ void StelObjectMgr::handleMouseClicks(QMouseEvent* event)
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	if (event->button()==Qt::LeftButton && event->type()==QEvent::MouseButtonRelease && !mvmgr->getHasDragged())
 	{
-#ifdef MACOSX
+#ifdef Q_OS_MAC
 		// CTRL + left clic = right clic for 1 button mouse
 		if (event->modifiers().testFlag(Qt::ControlModifier))
 		{
@@ -79,7 +79,7 @@ void StelObjectMgr::handleMouseClicks(QMouseEvent* event)
 	}
 	return;
 }
-	
+
 /*************************************************************************
  Add a new StelObject manager into the list of supported modules.
 *************************************************************************/
@@ -163,7 +163,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	QList<StelObjectP> candidates;
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	
+
 	// Field of view for a 30 pixel diameter circle on screen
 	float fov_around = core->getMovementMgr()->getCurrentFov()/qMin(prj->getViewportWidth(), prj->getViewportHeight()) * 30.f;
 
@@ -172,7 +172,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	{
 		candidates += (*iteromgr)->searchAround(v, fov_around, core);
 	}
-	
+
 	// Now select the object minimizing the function y = distance(in pixel) + magnitude
 	Vec3d winpos;
 	prj->project(v, winpos);
@@ -215,7 +215,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 void StelObjectMgr::unSelect(void)
 {
 	lastSelectedObjects.clear();
-	
+
 	// Send the event to every StelModule
 	foreach (StelModule* iter, StelApp::getInstance().getModuleMgr().getAllModules())
 	{
@@ -233,7 +233,7 @@ bool StelObjectMgr::setSelectedObject(const StelObjectP obj, StelModule::StelMod
 		unSelect();
 		return false;
 	}
-	
+
 	// An object has been found
 	QList<StelObjectP> objs;
 	objs.push_back(obj);
@@ -269,10 +269,10 @@ QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
 	}
 	return result;
 }
-	
+
 
 /*************************************************************************
- Find and return the list of at most maxNbItem objects auto-completing 
+ Find and return the list of at most maxNbItem objects auto-completing
  passed object I18 name
 *************************************************************************/
 QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem) const

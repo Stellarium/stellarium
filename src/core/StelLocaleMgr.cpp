@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2006 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -35,10 +35,10 @@
 
 QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
 
-StelLocaleMgr::StelLocaleMgr() : skyTranslator(PACKAGE_NAME, INSTALL_LOCALEDIR, ""), GMTShift(0)
+StelLocaleMgr::StelLocaleMgr() : skyTranslator("stellarium", INSTALL_LOCALEDIR, ""), GMTShift(0)
 {
 	//generateCountryList();
-			
+
 	// Load from file
 	QString path;
 	try
@@ -50,7 +50,7 @@ StelLocaleMgr::StelLocaleMgr() : skyTranslator(PACKAGE_NAME, INSTALL_LOCALEDIR, 
 		qWarning() << "ERROR - could not find country code data file." << e.what();
 		return;
 	}
-	
+
 	QFile file(path);
 	file.open(QIODevice::ReadOnly);
 	QDataStream in(&file);	// read the data serialized from the file
@@ -78,7 +78,7 @@ void StelLocaleMgr::generateCountryList()
 		countryCodeToStringMap.insert(line.section(QChar('\t'), 0, 0), line.section(QChar('\t'), 1, 1));
 	}
 	textFile.close();
-	
+
 	// Save to binary file
 	QFile binaryFile("data/countryCodes.dat");
 	binaryFile.open(QIODevice::WriteOnly);
@@ -95,7 +95,7 @@ void StelLocaleMgr::init()
 
 	setSkyLanguage(conf->value("localization/sky_locale", "system").toString());
 	setAppLanguage(conf->value("localization/app_locale", "system").toString());
-	
+
 	timeFormat = stringToSTimeFormat(conf->value("localization/time_display_format", "system_default").toString());
 	dateFormat = stringToSDateFormat(conf->value("localization/date_display_format", "system_default").toString());
 	// time_zone used to be in init_location section of config,
@@ -129,7 +129,7 @@ void StelLocaleMgr::init()
 void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName)
 {
 	// Update the translator with new locale name
-	StelTranslator::globalTranslator = StelTranslator(PACKAGE_NAME, StelFileMgr::getLocaleDir(), newAppLanguageName);
+	StelTranslator::globalTranslator = StelTranslator("stellarium", StelFileMgr::getLocaleDir(), newAppLanguageName);
 	qDebug() << "Application language is " << StelTranslator::globalTranslator.getTrueLocaleName();
 	StelApp::getInstance().updateI18n();
 }
@@ -140,7 +140,7 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName)
 void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName)
 {
 	// Update the translator with new locale name
-	skyTranslator = StelTranslator(PACKAGE_NAME, StelFileMgr::getLocaleDir(), newSkyLanguageName);
+	skyTranslator = StelTranslator("stellarium", StelFileMgr::getLocaleDir(), newSkyLanguageName);
 	qDebug() << "Sky language is " << skyTranslator.getTrueLocaleName();
 	StelApp::getInstance().updateI18n();
 }
@@ -202,7 +202,7 @@ double StelLocaleMgr::getJdFromISO8601TimeLocal(const QString& t) const
 			jd -= GMTShift;
 		else
 			jd -= StelUtils::getGMTShiftFromQT(jd)*0.041666666666;
-	
+
 		return jd;
 	}
 	else
@@ -211,7 +211,7 @@ double StelLocaleMgr::getJdFromISO8601TimeLocal(const QString& t) const
 		return 0.0;
 	}
 }
-	
+
 
 // Return a string with the local date formated according to the dateFormat variable
 QString StelLocaleMgr::getPrintableDateLocal(double JD) const
@@ -265,7 +265,7 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 		shift = StelUtils::getGMTShiftFromQT(JD)*0.041666666666;
 	}
 	StelUtils::getTimeFromJulianDay(JD+shift, &hour, &minute, &second);
-	
+
 	QTime t(hour, minute, second);
 
 	switch (timeFormat)
@@ -326,7 +326,7 @@ void StelLocaleMgr::setCustomTzName(const QString& tzname)
 {
 	customTzName = tzname;
 	timeZoneMode = STzCustom;
-	
+
 	if( customTzName != "")
 	{
 		// set the TZ environement variable and update c locale stuff
