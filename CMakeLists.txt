@@ -92,10 +92,6 @@ ELSE()
   SET(GENERATE_STELMAINLIB 0)
 ENDIF()
 
-IF(WIN32)
-  LINK_LIBRARIES(wsock32)
-ENDIF()
-
 # For Windows, the default back end for the graphics system should be "native", as "raster"
 # causes problems for many ATI users.  However, for other platforms we should use raster
 # as the default as it is faster.

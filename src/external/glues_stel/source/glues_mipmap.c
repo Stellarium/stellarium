@@ -36,6 +36,7 @@
 #include <string.h>
 #include <limits.h>    /* UINT_MAX */
 #include <math.h>
+#include <QtGlobal>
 
 #ifdef Q_OS_WIN
 #include "GLee.h"
