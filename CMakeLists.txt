@@ -46,7 +46,7 @@ ENDIF()
 
 # best way to get to APPLE?
 IF(APPLE)
- SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter -DMACOSX")
+ SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
  SET(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -mmacosx-version-min=10.4")
  SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.4")
  SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.4u.sdk/")
@@ -73,7 +73,13 @@ SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be suppor
 
 # Activate sound support
 SET(ENABLE_SOUND 0 CACHE BOOL "Define whether sound support should be activated, options are.")
+
+# (De-)Activate the script edit console
 SET(ENABLE_SCRIPT_CONSOLE 1 CACHE BOOL "Define whether to build the script console feature, options are.")
+IF(ENABLE_SCRIPT_CONSOLE)
+  ADD_DEFINITIONS(-DENABLE_SCRIPT_CONSOLE)
+ENDIF()
+
 SET(ENABLE_STRATOSCRIPT_COMPAT 0 CACHE BOOL "Set to 1 or true if you want to build the Stratoscript compatibility mode")
 SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
 SET(OPENGL_MODE Desktop CACHE STRING "Choose the type of openGL to use, options are: Desktop, ES2")
@@ -128,7 +134,6 @@ IF (BUILD_STATIC_PLUGINS)
 	  /usr/include
 	  /usr/local/include
 	  DOC "Should point to the directory where the include files for tokyo cabinet are installed")
-
 	FIND_LIBRARY(TOKYOC_LIBRARIES tokyocabinet
 	  PATHS
 	  /usr/lib/
@@ -136,7 +141,6 @@ IF (BUILD_STATIC_PLUGINS)
 	  DOC "tokyo cabinet link options")
 	SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
 	SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
-
   ENDIF()
 
   IF (USE_PLUGIN_VIRGO)
@@ -171,9 +175,6 @@ IF(ENABLE_SOUND)
   ADD_DEFINITIONS(-DHAVE_QT_PHONON)
   SET(QT_USE_PHONON TRUE)
 ENDIF()
-IF(ENABLE_SCRIPT_CONSOLE)
-  ADD_DEFINITIONS(-DENABLE_SCRIPT_CONSOLE)
-ENDIF()
 INCLUDE(${QT_USE_FILE})
 
 FIND_PACKAGE(ZLIB)
@@ -198,7 +199,7 @@ IF (OPENGL_MODE STREQUAL "Desktop")
   FIND_PACKAGE(OpenGL REQUIRED)
 ENDIF()
 IF(OPENGL_MODE STREQUAL "ES2")
-  ADD_DEFINITIONS(-DUSE_OPENGL_ES2 -DQT_GL_NO_SCISSOR_TEST -DQT_OPENGL_LIB -D_REENTRANT -DQT_GL_NO_SCISSOR_TEST -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED)
+  ADD_DEFINITIONS(-DUSE_OPENGL_ES2 -DQT_OPENGL_LIB -D_REENTRANT -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED)
   # Make sure that no desktop OpenGL libraries are linked when OpenGLES is used
   STRING(REPLACE "-lGLU " "" QT_LIBRARIES "${QT_LIBRARIES}")
   STRING(REPLACE "-lGL" "-lGLESv2" QT_LIBRARIES "${QT_LIBRARIES}")

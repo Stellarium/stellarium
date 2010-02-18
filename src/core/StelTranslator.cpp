@@ -6,12 +6,12 @@
 * modify it under the terms of the GNU General Public License
 * as published by the Free Software Foundation; either version 2
 * of the License, or (at your option) any later version.
-* 
+*
 * This program is distributed in the hope that it will be useful,
 * but WITHOUT ANY WARRANTY; without even the implied warranty of
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 * GNU General Public License for more details.
-* 
+*
 * You should have received a copy of the GNU General Public License
 * along with this program; if not, write to the Free Software
 * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -39,11 +39,11 @@ QMap<QString, QString> StelTranslator::iso639codes;
 QString StelTranslator::systemLangName;
 
 // Use system locale language by default
-#if defined(MACOSX)
+#if defined(Q_OS_MAC)
 #include "StelMacosxDirs.hpp"
-StelTranslator StelTranslator::globalTranslator = StelTranslator(PACKAGE_NAME, StelMacosxDirs::getApplicationResourcesDirectory().append( "/locale" ), "system");
+StelTranslator StelTranslator::globalTranslator = StelTranslator("stellarium", StelMacosxDirs::getApplicationResourcesDirectory().append( "/locale" ), "system");
 #else
-StelTranslator StelTranslator::globalTranslator = StelTranslator(PACKAGE_NAME, INSTALL_LOCALEDIR, "system");
+StelTranslator StelTranslator::globalTranslator = StelTranslator("stellarium", INSTALL_LOCALEDIR, "system");
 #endif
 
 #ifdef WIN32
@@ -59,7 +59,7 @@ void StelTranslator::init(const QString& fileName)
 	StelTranslator::initSystemLanguage();
 	StelTranslator::initIso639_1LanguageCodes(fileName);
 }
-		  
+
 //! Try to determine system language from system configuration
 void StelTranslator::initSystemLanguage(void)
 {
@@ -99,16 +99,16 @@ void StelTranslator::reload()
 {
 	if (StelTranslator::lastUsed == this)
 		return;
-	
+
 	// Find out what the system language is if not defined yet
 	if (systemLangName.isEmpty())
 		initSystemLanguage();
-	
+
 	// Apply that
 	// This needs to be static as it is used a each gettext call... It tooks me quite a while before I got that :(
 	static char envstr[25];
 	if (langName=="system" || langName=="system_default")
-#if defined (MACOSX)	// MACOSX
+#ifdef Q_OS_MAC
 	{
 		snprintf(envstr, 25, "LANG=%s", StelTranslator::systemLangName.toUtf8().constData());
 	}
@@ -116,7 +116,7 @@ void StelTranslator::reload()
 	{
 		snprintf(envstr, 25, "LANG=%s", langName.toUtf8().constData());
 	}
-#elif defined (_MSC_VER) //MSCVER
+#elif defined (Q_OS_WIN) //MSCVER
 	{
 		_snprintf(envstr, 25, "LANGUAGE=%s", StelTranslator::systemLangName.toUtf8().constData());
 	}
@@ -135,7 +135,7 @@ void StelTranslator::reload()
 #endif
 
 	putenv(envstr);
-#if !defined (WIN32)
+#ifndef Q_OS_WIN
 	setlocale(LC_MESSAGES, "");
 #else
 	setlocale(LC_CTYPE,"");
@@ -163,12 +163,12 @@ QString StelTranslator::iso639_1CodeToNativeName(const QString& languageCode)
 		// For codes which return the locale C, use the language code to do the lookup
 		if (iso639codes.contains(languageCode))
 			return iso639codes[languageCode];
-		
+
 		// qWarning() << "WARNING: Cannot determine name of language for code" << languageCode;
 		return languageCode;
 }
 
-//! Convert from native language name to ISO639-1 2(+3) letters langage code 
+//! Convert from native language name to ISO639-1 2(+3) letters langage code
 QString StelTranslator::nativeNameToIso639_1Code(const QString& languageName)
 {
 	QMap<QString, QString>::iterator iter;
@@ -222,10 +222,10 @@ QStringList StelTranslator::getAvailableIso639_1Codes(const QString& localeDir) 
 		}
 	}
 	closedir(dp);
-	
+
 	// Sort the language names by alphabetic order
 	result.sort();
-	
+
 	return result;
 }
 
@@ -239,10 +239,10 @@ void StelTranslator::initIso639_1LanguageCodes(const QString& fileName)
 		qWarning() << "Can't open ISO639 codes file " << fileName;
 		Q_ASSERT(0);
 	}
-	
+
 	if (!iso639codes.empty())
 		iso639codes.clear();
-	
+
 	while (!inf.atEnd())
 	{
 		QString record = QString::fromUtf8(inf.readLine());

@@ -619,7 +619,7 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 
 void ConstellationMgr::updateI18n()
 {
-	StelTranslator trans(PACKAGE_NAME "-skycultures", StelFileMgr::getLocaleDir(), StelApp::getInstance().getLocaleMgr().getSkyTranslator().getTrueLocaleName());
+	StelTranslator trans("stellarium-skycultures", StelFileMgr::getLocaleDir(), StelApp::getInstance().getLocaleMgr().getSkyTranslator().getTrueLocaleName());
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{

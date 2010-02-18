@@ -17,7 +17,7 @@
 # endif
 #endif
 
-#ifdef MACOSX
+#ifdef Q_OS_MAC
 #include "StelMacosxDirs.hpp"
 #endif
 
@@ -31,13 +31,13 @@ QString StelFileMgr::screenshotDir;
 void StelFileMgr::init()
 {
 	// Set the userDir member.
-#if defined(WIN32)
+#ifdef Q_OS_WIN
 	QString winApiPath = getWin32SpecialDirPath(CSIDL_APPDATA);
 	if (!winApiPath.isEmpty())
 	{
 		userDir = winApiPath + "\\Stellarium";
 	}
-#elif defined(MACOSX)
+#elif defined(Q_OS_MAC)
 	userDir = QDir::homePath() + "/Library/Application Support/Stellarium";
 #else
 	userDir = QDir::homePath() + "/.stellarium";
@@ -70,7 +70,7 @@ void StelFileMgr::init()
 		qWarning() << "WARNING: could not locate installation directory";
 	}
 
-#if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
+#if defined(Q_OS_WIN) || defined(Q_OS_MAC)
 	screenshotDir = getDesktopDir();
 #else
 	screenshotDir = QDir::homePath();
@@ -329,7 +329,7 @@ QString StelFileMgr::getInstallationDir()
 	if (QFileInfo(CHECK_FILE).exists())
 		return ".";
 
-#if defined(MACOSX)
+#ifdef Q_OS_MAC
 	QFileInfo MacOSdir(QCoreApplication::applicationDirPath());
 	QDir ResourcesDir = MacOSdir.dir();
 	ResourcesDir.cd(QString("Resources"));
@@ -378,7 +378,7 @@ void StelFileMgr::setScreenshotDir(const QString& newDir)
 QString StelFileMgr::getLocaleDir()
 {
 	QFileInfo localePath;
-#if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
+#if defined(Q_OS_WIN) || defined(Q_OS_MAC)
 	// Windows and MacOS X have the locale dir in the installation folder
 	localePath = QFileInfo(getInstallationDir() + "/locale");
 #else
