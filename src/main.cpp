@@ -286,19 +286,15 @@ int main(int argc, char **argv)
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
-	if (confSettings->value("main/use_glshaders", true).toBool())
+	if (confSettings->value("main/use_qpaintenginegl2", true).toBool())
 	{
-		// The user explicitely wants to use GL shaders
-		// Default Qt behaviour is already to use them if available (although it unstable),
-		// so nothing to be done.
+		// The default is to let Qt choose which paint engine fits the best between OpenGL and OpenGL2.
+		// However it causes troubles on some older hardware, so add an option.
 	}
 	else
 	{
-		// The default behaviour on windows to is to use the OpenGL1 Qt paint engine because
-		// the OpenGL2 one causes slowdown on older hardware.
-#ifdef Q_OS_WIN
+		// The user explicitely request to use the older paint engine.
 		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
-#endif
 	}
 
 #ifdef Q_OS_MAC
