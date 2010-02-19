@@ -152,6 +152,7 @@ void StelApp::init(QSettings* conf)
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
 
+	// Avoid using GL Shaders by default since it causes so many problems with broken drivers.
 	useGLShaders = confSettings->value("main/use_glshaders", false).toBool();
 	useGLShaders = useGLShaders && QGLShaderProgram::hasOpenGLShaderPrograms();
 	useGLShaders = useGLShaders && (QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0));
