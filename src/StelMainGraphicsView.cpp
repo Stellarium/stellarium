@@ -49,7 +49,13 @@ class StelQGLWidget : public QGLWidget
 {
 public:
 	StelQGLWidget(const QGLFormat& format, QWidget* parent) : QGLWidget(format, parent)
-	{}
+        {
+            setAttribute(Qt::WA_PaintOnScreen);
+            setAttribute(Qt::WA_NoSystemBackground);
+            setAttribute(Qt::WA_OpaquePaintEvent);
+            //setAutoFillBackground (false);
+            setBackgroundRole(QPalette::Window);
+        }
 
 protected:
 	virtual void initializeGL()
@@ -96,14 +102,17 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	setObjectName("Mainview");
 
 	// Avoid white background at init
-	//setAttribute(Qt::WA_PaintOnScreen);
-	//setAttribute(Qt::WA_NoSystemBackground);
-	//setAutoFillBackground (true);
+        setAttribute(Qt::WA_PaintOnScreen);
+        setAttribute(Qt::WA_NoSystemBackground);
+        setAttribute(Qt::WA_OpaquePaintEvent);
+        setAutoFillBackground (true);
 	setBackgroundRole(QPalette::Window);
 	QPalette pal;
 	pal.setColor(QPalette::Window, Qt::black);
-	setPalette(pal);
-	// setStyleSheet(QString("QGraphicsView {background: #000;}"));
+        setPalette(pal);
+
+        // Allows for precise FPS control
+        setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
 
 	setFrameShape(QFrame::NoFrame);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -116,18 +125,9 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	lastEventTimeSec = 0;
 
 	// Create an openGL viewport
-	QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer);
-#ifdef Q_OS_MAC
-	if (QSysInfo::MacintoshVersion == QSysInfo::MV_SNOWLEOPARD)
-	{
-		glFormat.setSamples(16);
-		glFormat.setSampleBuffers(true);
-	}
-#endif
-	//glFormat.setDirectRendering(false);
+        QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer | QGL::DoubleBuffer);
 	glWidget = new StelQGLWidget(glFormat, this);
 	glWidget->updateGL();
-
 	setViewport(glWidget);
 
 	//setOptimizationFlags(QGraphicsView::DontClipPainter|QGraphicsView::DontSavePainterState|QGraphicsView::DontAdjustForAntialiasing);
@@ -135,9 +135,6 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 
 	backItem = new QGraphicsWidget();
 	backItem->setFocusPolicy(Qt::NoFocus);
-
-	// Allows for precise FPS control
-	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
 }
 
 StelMainGraphicsView::~StelMainGraphicsView()
@@ -187,6 +184,8 @@ void StelMainGraphicsView::init(QSettings* conf)
 	// Initialize the core, including the StelApp instance.
 	mainSkyItem->init(conf);
 
+        // Prevent flickering on mac Leopard/Snow Leopard
+        glWidget->setAutoFillBackground (false);
 	scriptAPIProxy = new StelMainScriptAPIProxy(this);
 	scriptMgr = new StelScriptMgr(this);
 
