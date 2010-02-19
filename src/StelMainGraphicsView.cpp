@@ -49,13 +49,13 @@ class StelQGLWidget : public QGLWidget
 {
 public:
 	StelQGLWidget(const QGLFormat& format, QWidget* parent) : QGLWidget(format, parent)
-        {
-            setAttribute(Qt::WA_PaintOnScreen);
-            setAttribute(Qt::WA_NoSystemBackground);
-            setAttribute(Qt::WA_OpaquePaintEvent);
-            //setAutoFillBackground (false);
-            setBackgroundRole(QPalette::Window);
-        }
+	{
+		setAttribute(Qt::WA_PaintOnScreen);
+		setAttribute(Qt::WA_NoSystemBackground);
+		setAttribute(Qt::WA_OpaquePaintEvent);
+		//setAutoFillBackground (false);
+		setBackgroundRole(QPalette::Window);
+	}
 
 protected:
 	virtual void initializeGL()
@@ -102,17 +102,17 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	setObjectName("Mainview");
 
 	// Avoid white background at init
-        setAttribute(Qt::WA_PaintOnScreen);
-        setAttribute(Qt::WA_NoSystemBackground);
-        setAttribute(Qt::WA_OpaquePaintEvent);
-        setAutoFillBackground (true);
+	setAttribute(Qt::WA_PaintOnScreen);
+	setAttribute(Qt::WA_NoSystemBackground);
+	setAttribute(Qt::WA_OpaquePaintEvent);
+	setAutoFillBackground (true);
 	setBackgroundRole(QPalette::Window);
 	QPalette pal;
 	pal.setColor(QPalette::Window, Qt::black);
-        setPalette(pal);
+	setPalette(pal);
 
-        // Allows for precise FPS control
-        setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
+	// Allows for precise FPS control
+	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
 
 	setFrameShape(QFrame::NoFrame);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -125,7 +125,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	lastEventTimeSec = 0;
 
 	// Create an openGL viewport
-        QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer | QGL::DoubleBuffer);
+	QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer | QGL::DoubleBuffer);
 	glWidget = new StelQGLWidget(glFormat, this);
 	glWidget->updateGL();
 	setViewport(glWidget);
@@ -184,8 +184,9 @@ void StelMainGraphicsView::init(QSettings* conf)
 	// Initialize the core, including the StelApp instance.
 	mainSkyItem->init(conf);
 
-        // Prevent flickering on mac Leopard/Snow Leopard
-        glWidget->setAutoFillBackground (false);
+	// Prevent flickering on mac Leopard/Snow Leopard
+	glWidget->setAutoFillBackground (false);
+
 	scriptAPIProxy = new StelMainScriptAPIProxy(this);
 	scriptMgr = new StelScriptMgr(this);
 
