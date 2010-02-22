@@ -73,7 +73,7 @@ public:
 	const StelLocation& getLocation() const {return location;}
 
 	//! Set the z-axis rotation (offset from original value when rotated
-	void setZRotation(double d) {angleRotateZOffset = d;}
+	void setZRotation(float d) {angleRotateZOffset = d;}
 
 protected:
 	//! Load attributes common to all landscapes
