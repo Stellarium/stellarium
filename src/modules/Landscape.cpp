@@ -172,13 +172,13 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	fogTexCoord.texCoords[2] = c;
 	fogTexCoord.texCoords[3] = d;
 
-	fogAltAngle        = landscapeIni.value("landscape/fog_alt_angle", 0.).toDouble();
-	fogAngleShift      = landscapeIni.value("landscape/fog_angle_shift", 0.).toDouble();
-	decorAltAngle      = landscapeIni.value("landscape/decor_alt_angle", 0.).toDouble();
-	decorAngleShift    = landscapeIni.value("landscape/decor_angle_shift", 0.).toDouble();
-	angleRotateZ       = landscapeIni.value("landscape/decor_angle_rotatez", 0.).toDouble();
-	groundAngleShift   = landscapeIni.value("landscape/ground_angle_shift", 0.).toDouble();
-	groundAngleRotateZ = landscapeIni.value("landscape/ground_angle_rotatez", 0.).toDouble();
+	fogAltAngle        = landscapeIni.value("landscape/fog_alt_angle", 0.).toFloat();
+	fogAngleShift      = landscapeIni.value("landscape/fog_angle_shift", 0.).toFloat();
+	decorAltAngle      = landscapeIni.value("landscape/decor_alt_angle", 0.).toFloat();
+	decorAngleShift    = landscapeIni.value("landscape/decor_angle_shift", 0.).toFloat();
+	angleRotateZ       = landscapeIni.value("landscape/decor_angle_rotatez", 0.).toFloat();
+	groundAngleShift   = landscapeIni.value("landscape/ground_angle_shift", 0.).toFloat();
+	groundAngleRotateZ = landscapeIni.value("landscape/ground_angle_rotatez", 0.).toFloat();
 	drawGroundFirst    = landscapeIni.value("landscape/draw_ground_first", 0).toInt();
 	tanMode            = landscapeIni.value("landscape/tan_mode", false).toBool();
 }
@@ -281,15 +281,15 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 	if (!fogFader.getInterstate())
 		return;
 	
-	const double vpos = tanMode ? radius*std::tan(fogAngleShift*M_PI/180.) : radius*std::sin(fogAngleShift*M_PI/180.);
+	const float vpos = tanMode ? radius*std::tan(fogAngleShift*M_PI/180.) : radius*std::sin(fogAngleShift*M_PI/180.);
 	sPainter.setProjector(core->getProjection(core->getNavigator()->getAltAzModelViewMat() * Mat4d::translation(Vec3d(0.,0.,vpos))));
 	glBlendFunc(GL_ONE, GL_ONE);
-	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
+	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
 	sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
 	          fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter, 
 			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter);
 	fogTex->bind();
-	const double height = tanMode ? radius*std::tan(fogAltAngle*M_PI/180.) : radius*std::sin(fogAltAngle*M_PI/180.);
+	const float height = tanMode ? radius*std::tan(fogAltAngle*M_PI/180.) : radius*std::sin(fogAltAngle*M_PI/180.);
 	sPainter.sCylinder(radius, height, 128, 1);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
@@ -301,35 +301,35 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
 	
 	if (!landFader.getInterstate())
 		return;
-	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
+	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
 	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 	static const int stacks = 8;
 	  // make slices_per_side=(3<<K) so that the innermost polygon of the
 	  // fandisk becomes a triangle:
 	int slices_per_side = 3*64/(nbDecorRepeat*nbSide);
 	if (slices_per_side<=0) slices_per_side = 1;
-	const double z0 = tanMode ? radius * std::tan(decorAngleShift*M_PI/180.0) : 
+	const float z0 = tanMode ? radius * std::tan(decorAngleShift*M_PI/180.0) :
 		radius * std::sin(decorAngleShift*M_PI/180.0);
-	const double d_z = tanMode ? radius * std::tan(decorAltAngle*M_PI/180.0) / stacks : 
+	const float d_z = tanMode ? radius * std::tan(decorAltAngle*M_PI/180.0) / stacks :
 		radius * std::sin(decorAltAngle*M_PI/180.0) / stacks;
-	const double alpha = 2.0*M_PI/(nbDecorRepeat*nbSide*slices_per_side);
-	const double ca = cos(alpha);
-	const double sa = sin(alpha);
-	double y0 = radius*cos((angleRotateZ+angleRotateZOffset)*M_PI/180.0);
-	double x0 = radius*sin((angleRotateZ+angleRotateZOffset)*M_PI/180.0);
+	const float alpha = 2.f*M_PI/(nbDecorRepeat*nbSide*slices_per_side);
+	const float ca = std::cos(alpha);
+	const float sa = std::sin(alpha);
+	float y0 = radius*std::cos((angleRotateZ+angleRotateZOffset)*M_PI/180.0);
+	float x0 = radius*std::sin((angleRotateZ+angleRotateZOffset)*M_PI/180.0);
 	
 	QVector<Vec2f> texCoordsArray(stacks*2+2);
 	QVector<Vec3d> vertexArray(stacks*2+2);
 	for (int n=0;n<nbDecorRepeat;n++) for (int i=0;i<nbSide;i++) {
 		sides[i].tex->bind();
-		double tx0 = sides[i].texCoords[0];
+		float tx0 = sides[i].texCoords[0];
 		const float d_tx0 = (sides[i].texCoords[2]-sides[i].texCoords[0]) / slices_per_side;
 		const float d_ty = (sides[i].texCoords[3]-sides[i].texCoords[1]) / stacks;
 		for (int j=0;j<slices_per_side;j++) {
-			const double y1 = y0*ca - x0*sa;
-			const double x1 = y0*sa + x0*ca;
+			const float y1 = y0*ca - x0*sa;
+			const float x1 = y0*sa + x0*ca;
 			const float tx1 = tx0 + d_tx0;
-			double z = z0;
+			float z = z0;
 			float ty0 = sides[i].texCoords[1];
 			for (int k=0;k<=stacks*2;k+=2) {
 				texCoordsArray[k].set(tx0, ty0);
@@ -355,10 +355,10 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 	if (!landFader.getInterstate())
 		return;
 	const StelNavigator* nav = core->getNavigator();
-	const double vshift = tanMode ? radius*std::tan(groundAngleShift*M_PI/180.) : radius*std::sin(groundAngleShift*M_PI/180.);
+	const float vshift = tanMode ? radius*std::tan(groundAngleShift*M_PI/180.) : radius*std::sin(groundAngleShift*M_PI/180.);
 	Mat4d mat = nav->getAltAzModelViewMat() * Mat4d::zrotation((groundAngleRotateZ-angleRotateZOffset)*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift));
 	sPainter.setProjector(core->getProjection(mat));
-	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
+	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
 	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 	groundTex->bind();
 	  // make slices_per_side=(3<<K) so that the innermost polygon of the
@@ -398,8 +398,8 @@ void LandscapeFisheye::load(const QSettings& landscapeIni, const QString& landsc
 		return;
 	}
 	create(name, 0, getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
-		landscapeIni.value("landscape/texturefov", 360).toDouble(),
-		landscapeIni.value("landscape/angle_rotatez", 0.).toDouble());
+		landscapeIni.value("landscape/texturefov", 360).toFloat(),
+		landscapeIni.value("landscape/angle_rotatez", 0.).toFloat());
 }
 
 
@@ -464,7 +464,7 @@ void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& land
 	}
 
 	create(name, 0, getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
-		landscapeIni.value("landscape/angle_rotatez", 0.).toDouble());
+		landscapeIni.value("landscape/angle_rotatez", 0.).toFloat());
 }
 
 

@@ -255,62 +255,64 @@ void StelPainter::drawViewportShape(void)
 }
 
 #define MAX_STACKS 4096
-static double cos_sin_rho[2*(MAX_STACKS+1)];
+static float cos_sin_rho[2*(MAX_STACKS+1)];
 #define MAX_SLICES 4096
-static double cos_sin_theta[2*(MAX_SLICES+1)];
+static float cos_sin_theta[2*(MAX_SLICES+1)];
 
-static
-void ComputeCosSinTheta(double phi,int segments) {
-  double *cos_sin = cos_sin_theta;
-  double *cos_sin_rev = cos_sin + 2*(segments+1);
-  const double c = cos(phi);
-  const double s = sin(phi);
-  *cos_sin++ = 1.0;
-  *cos_sin++ = 0.0;
-  *--cos_sin_rev = -cos_sin[-1];
-  *--cos_sin_rev =  cos_sin[-2];
-  *cos_sin++ = c;
-  *cos_sin++ = s;
-  *--cos_sin_rev = -cos_sin[-1];
-  *--cos_sin_rev =  cos_sin[-2];
-  while (cos_sin < cos_sin_rev) {
-	cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
-	cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
-	cos_sin += 2;
+static void ComputeCosSinTheta(float phi,int segments)
+{
+	float *cos_sin = cos_sin_theta;
+	float *cos_sin_rev = cos_sin + 2*(segments+1);
+	const float c = std::cos(phi);
+	const float s = std::sin(phi);
+	*cos_sin++ = 1.0;
+	*cos_sin++ = 0.0;
 	*--cos_sin_rev = -cos_sin[-1];
 	*--cos_sin_rev =  cos_sin[-2];
-  }
+	*cos_sin++ = c;
+	*cos_sin++ = s;
+	*--cos_sin_rev = -cos_sin[-1];
+	*--cos_sin_rev =  cos_sin[-2];
+	while (cos_sin < cos_sin_rev)
+	{
+		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
+		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
+		cos_sin += 2;
+		*--cos_sin_rev = -cos_sin[-1];
+		*--cos_sin_rev =  cos_sin[-2];
+	}
 }
 
-static
-void ComputeCosSinRho(double phi,int segments) {
-  double *cos_sin = cos_sin_rho;
-  double *cos_sin_rev = cos_sin + 2*(segments+1);
-  const double c = cos(phi);
-  const double s = sin(phi);
-  *cos_sin++ = 1.0;
-  *cos_sin++ = 0.0;
-  *--cos_sin_rev =  cos_sin[-1];
-  *--cos_sin_rev = -cos_sin[-2];
-  *cos_sin++ = c;
-  *cos_sin++ = s;
-  *--cos_sin_rev =  cos_sin[-1];
-  *--cos_sin_rev = -cos_sin[-2];
-  while (cos_sin < cos_sin_rev) {
-	cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
-	cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
-	cos_sin += 2;
+static void ComputeCosSinRho(float phi, int segments)
+{
+	float *cos_sin = cos_sin_rho;
+	float *cos_sin_rev = cos_sin + 2*(segments+1);
+	const float c = cos(phi);
+	const float s = sin(phi);
+	*cos_sin++ = 1.0;
+	*cos_sin++ = 0.0;
 	*--cos_sin_rev =  cos_sin[-1];
 	*--cos_sin_rev = -cos_sin[-2];
-	segments--;
-  }
+	*cos_sin++ = c;
+	*cos_sin++ = s;
+	*--cos_sin_rev =  cos_sin[-1];
+	*--cos_sin_rev = -cos_sin[-2];
+	while (cos_sin < cos_sin_rev)
+	{
+		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
+		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
+		cos_sin += 2;
+		*--cos_sin_rev =  cos_sin[-1];
+		*--cos_sin_rev = -cos_sin[-2];
+		segments--;
+	}
 }
 
 
-void StelPainter::sFanDisk(double radius, int innerFanSlices, int level)
+void StelPainter::sFanDisk(float radius, int innerFanSlices, int level)
 {
 	Q_ASSERT(level<64);
-	double rad[64];
+	float rad[64];
 	int i,j;
 	rad[level] = radius;
 	for (i=level-1;i>=0;--i)
@@ -318,14 +320,14 @@ void StelPainter::sFanDisk(double radius, int innerFanSlices, int level)
 		rad[i] = rad[i+1]*(1.0-M_PI/(innerFanSlices<<(i+1)))*2.0/3.0;
 	}
 	int slices = innerFanSlices<<level;
-	const double dtheta = 2.0 * M_PI / slices;
+	const float dtheta = 2.0 * M_PI / slices;
 	Q_ASSERT(slices<=MAX_SLICES);
 	ComputeCosSinTheta(dtheta,slices);
-	double *cos_sin_theta_p;
+	float* cos_sin_theta_p;
 	int slices_step = 2;
 	static QVector<double> vertexArr;
 	static QVector<float> texCoordArr;
-	double x,y;
+	float x,y;
 	for (i=level;i>0;--i,slices_step<<=1)
 	{
 		for (j=0,cos_sin_theta_p=cos_sin_theta; j<slices; j+=slices_step,cos_sin_theta_p+=2*slices_step)
@@ -334,27 +336,27 @@ void StelPainter::sFanDisk(double radius, int innerFanSlices, int level)
 			texCoordArr.resize(0);
 			x = rad[i]*cos_sin_theta_p[slices_step];
 			y = rad[i]*cos_sin_theta_p[slices_step+1];
-			texCoordArr << 0.5*(1.0+x/radius) << 0.5*(1.0+y/radius);
+			texCoordArr << 0.5f*(1.f+x/radius) << 0.5f*(1.f+y/radius);
 			vertexArr << x << y << 0;
 
 			x = rad[i]*cos_sin_theta_p[2*slices_step];
 			y = rad[i]*cos_sin_theta_p[2*slices_step+1];
-			texCoordArr << 0.5*(1.0+x/radius) << 0.5*(1.0+y/radius);
+			texCoordArr << 0.5f*(1.f+x/radius) << 0.5f*(1.f+y/radius);
 			vertexArr << x << y << 0;
 
 			x = rad[i-1]*cos_sin_theta_p[2*slices_step];
 			y = rad[i-1]*cos_sin_theta_p[2*slices_step+1];
-			texCoordArr << 0.5*(1.0+x/radius) << 0.5*(1.0+y/radius);
+			texCoordArr << 0.5f*(1.f+x/radius) << 0.5f*(1.f+y/radius);
 			vertexArr << x << y << 0;
 
 			x = rad[i-1]*cos_sin_theta_p[0];
 			y = rad[i-1]*cos_sin_theta_p[1];
-			texCoordArr << 0.5*(1.0+x/radius) << 0.5*(1.0+y/radius);
+			texCoordArr << 0.5f*(1.f+x/radius) << 0.5f*(1.f+y/radius);
 			vertexArr << x << y << 0;
 
 			x = rad[i]*cos_sin_theta_p[0];
 			y = rad[i]*cos_sin_theta_p[1];
-			texCoordArr << 0.5*(1.0+x/radius) << 0.5*(1.0+y/radius);
+			texCoordArr << 0.5f*(1.f+x/radius) << 0.5f*(1.f+y/radius);
 			vertexArr << x << y << 0;
 			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
 			drawFromArray(TriangleFan, vertexArr.size()/3);
@@ -364,42 +366,42 @@ void StelPainter::sFanDisk(double radius, int innerFanSlices, int level)
 	slices_step>>=1;
 	vertexArr.resize(0);
 	texCoordArr.resize(0);
-	texCoordArr << 0.5 << 0.5;
+	texCoordArr << 0.5f << 0.5f;
 	vertexArr << 0 << 0 << 0;
 	for (j=0,cos_sin_theta_p=cos_sin_theta;	j<=slices; j+=slices_step,cos_sin_theta_p+=2*slices_step)
 	{
 		x = rad[0]*cos_sin_theta_p[0];
 		y = rad[0]*cos_sin_theta_p[1];
-		texCoordArr << 0.5*(1.0+x/radius) << 0.5*(1.0+y/radius);
+		texCoordArr << 0.5f*(1.f+x/radius) << 0.5f*(1.f+y/radius);
 		vertexArr << x << y << 0;
 	}
 	setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
 	drawFromArray(TriangleFan, vertexArr.size()/3);
 }
 
-void StelPainter::sRing(double rMin, double rMax, int slices, int stacks, int orientInside)
+void StelPainter::sRing(float rMin, float rMax, int slices, int stacks, int orientInside)
 {
-	double x,y;
+	float x,y;
 	int j;
 
-	const double nsign = (orientInside)?-1.0:1.0;
+	const float nsign = (orientInside)?-1.0:1.0;
 
-	const double dr = (rMax-rMin) / stacks;
-	const double dtheta = 2.0 * M_PI / slices;
+	const float dr = (rMax-rMin) / stacks;
+	const float dtheta = 2.f * M_PI / slices;
 	if (slices < 0) slices = -slices;
 	Q_ASSERT(slices<=MAX_SLICES);
 	ComputeCosSinTheta(dtheta,slices);
-	double *cos_sin_theta_p;
+	float *cos_sin_theta_p;
 
 	static QVector<double> vertexArr;
 	static QVector<float> texCoordArr;
 	static QVector<float> normalArr;
 
 	// draw intermediate stacks as quad strips
-	for (double r = rMin; r < rMax; r+=dr)
+	for (float r = rMin; r < rMax; r+=dr)
 	{
-		const double tex_r0 = (r-rMin)/(rMax-rMin);
-		const double tex_r1 = (r+dr-rMin)/(rMax-rMin);
+		const float tex_r0 = (r-rMin)/(rMax-rMin);
+		const float tex_r1 = (r+dr-rMin)/(rMax-rMin);
 		vertexArr.resize(0);
 		texCoordArr.resize(0);
 		normalArr.resize(0);
@@ -421,27 +423,27 @@ void StelPainter::sRing(double rMin, double rMax, int slices, int stacks, int or
 	}
 }
 
-static void sSphereMapTexCoordFast(double rho_div_fov, double costheta, double sintheta, QVector<float>& out)
+static void sSphereMapTexCoordFast(float rho_div_fov, float costheta, float sintheta, QVector<float>& out)
 {
-	if (rho_div_fov>0.5)
-		rho_div_fov=0.5;
-	out << 0.5 + rho_div_fov * costheta << 0.5 + rho_div_fov * sintheta;
+	if (rho_div_fov>0.5f)
+		rho_div_fov=0.5f;
+	out << 0.5f + rho_div_fov * costheta << 0.5f + rho_div_fov * sintheta;
 }
 
-void StelPainter::sSphereMap(double radius, int slices, int stacks, double textureFov, int orientInside)
+void StelPainter::sSphereMap(float radius, int slices, int stacks, float textureFov, int orientInside)
 {
-	double rho,x,y,z;
+	float rho,x,y,z;
 	int i, j;
-	double drho = M_PI / stacks;
+	float drho = M_PI / stacks;
 	Q_ASSERT(stacks<=MAX_STACKS);
 	ComputeCosSinRho(drho,stacks);
-	double *cos_sin_rho_p;
+	float* cos_sin_rho_p;
 
-	const double dtheta = 2.0 * M_PI / slices;
+	const float dtheta = 2.f * M_PI / slices;
 	Q_ASSERT(slices<=MAX_SLICES);
 
 	ComputeCosSinTheta(dtheta,slices);
-	double *cos_sin_theta_p;
+	float* cos_sin_theta_p;
 
 	drho/=textureFov;
 
@@ -1390,7 +1392,7 @@ void StelPainter::drawLine2d(double x1, double y1, double x2, double y2)
 
 ///////////////////////////////////////////////////////////////////////////
 // Drawing methods for general (non-linear) mode
-void StelPainter::sSphere(double radius, double oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
+void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
 {
 	// It is really good for performance to have Vec4f,Vec3f objects
 	// static rather than on the stack. But why?
@@ -1430,15 +1432,15 @@ void StelPainter::sSphere(double radius, double oneMinusOblateness, int slices, 
 		t=1.0;
 	}
 
-	const double drho = M_PI / stacks;
+	const float drho = M_PI / stacks;
 	Q_ASSERT(stacks<=MAX_STACKS);
 	ComputeCosSinRho(drho,stacks);
-	double *cos_sin_rho_p;
+	float* cos_sin_rho_p;
 
-	const double dtheta = 2.0 * M_PI / slices;
+	const float dtheta = 2.f * M_PI / slices;
 	Q_ASSERT(slices<=MAX_SLICES);
 	ComputeCosSinTheta(dtheta,slices);
-	const double *cos_sin_theta_p;
+	const float *cos_sin_theta_p;
 
 	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
 	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
@@ -1497,7 +1499,7 @@ void StelPainter::sSphere(double radius, double oneMinusOblateness, int slices, 
 }
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
-void StelPainter::sCylinder(double radius, double height, int slices, int orientInside)
+void StelPainter::sCylinder(float radius, float height, int slices, int orientInside)
 {
 	if (orientInside)
 		glCullFace(GL_FRONT);
