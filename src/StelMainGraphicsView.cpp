@@ -183,7 +183,6 @@ void StelMainGraphicsView::init(QSettings* conf)
 
 	// Initialize the core, including the StelApp instance.
 	mainSkyItem->init(conf);
-
 	// Prevent flickering on mac Leopard/Snow Leopard
 	glWidget->setAutoFillBackground (false);
 

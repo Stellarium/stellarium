@@ -66,7 +66,7 @@ QString StelProjector::getHtmlSummary() const
  Return a convex polygon on the sphere which includes the viewport in the 
  current frame
 *************************************************************************/
-SphericalRegionP StelProjector::getViewportConvexPolygon(double marginX, double marginY) const
+SphericalRegionP StelProjector::getViewportConvexPolygon(float marginX, float marginY) const
 {
 	Vec3d e0, e1, e2, e3;
 	const Vec4i& vp = viewportXywh;

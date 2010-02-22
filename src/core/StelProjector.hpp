@@ -51,12 +51,12 @@ public:
 	{
 		StelProjectorParams() : viewportXywh(0), fov(60.), gravityLabels(false), maskType(MaskNone), viewportCenter(0., 0.), flipHorz(false), flipVert(false) {;}
 		Vector4<int> viewportXywh;     //! posX, posY, width, height
-		double fov;                    //! FOV in degrees
+		float fov;                    //! FOV in degrees
 		bool gravityLabels;            //! the flag to use gravity labels or not
 		StelProjectorMaskType maskType;    //! The current projector mask
-		double zNear, zFar;            //! Near and far clipping planes
-		Vec2d viewportCenter;          //! Viewport center in screen pixel
-		double viewportFovDiameter;    //! diameter of the FOV disk in pixel
+		float zNear, zFar;            //! Near and far clipping planes
+		Vec2f viewportCenter;          //! Viewport center in screen pixel
+		float viewportFovDiameter;    //! diameter of the FOV disk in pixel
 		bool flipHorz, flipVert;       //! Whether to flip in horizontal or vertical directions
 	};
 
@@ -106,41 +106,41 @@ public:
 	bool getFlagGravityLabels() const { return gravityLabels; }
 
 	//! Get the lower left corner of the viewport and the width, height.
-	const Vec4i& getViewport(void) const {return viewportXywh;}
+	const Vec4i& getViewport() const {return viewportXywh;}
 
 	//! Get the center of the viewport relative to the lower left corner of the screen.
-	Vec2d getViewportCenter(void) const
+	Vec2f getViewportCenter() const
 	{
-		return Vec2d(viewportCenter[0]-viewportXywh[0],viewportCenter[1]-viewportXywh[1]);
+		return Vec2f(viewportCenter[0]-viewportXywh[0],viewportCenter[1]-viewportXywh[1]);
 	}
 
 	//! Get the horizontal viewport offset in pixels.
-	int getViewportPosX(void) const {return viewportXywh[0];}
+	int getViewportPosX() const {return viewportXywh[0];}
 	//! Get the vertical viewport offset in pixels.
-	int getViewportPosY(void) const {return viewportXywh[1];}
+	int getViewportPosY() const {return viewportXywh[1];}
 	//! Get the viewport width in pixels.
-	int getViewportWidth(void) const {return viewportXywh[2];}
+	int getViewportWidth() const {return viewportXywh[2];}
 	//! Get the viewport height in pixels.
-	int getViewportHeight(void) const {return viewportXywh[3];}
+	int getViewportHeight() const {return viewportXywh[3];}
 
 	//! Return a convex polygon on the sphere which includes the viewport in the current frame.
 	//! @param marginX an extra margin in pixel which extends the polygon size in the X direction.
 	//! @param marginY an extra margin in pixel which extends the polygon size in the Y direction.
 	//! @return a SphericalConvexPolygon or the special fullSky region if the viewport cannot be
 	//! represented by a convex polygon (e.g. if aperture > 180 deg).
-	SphericalRegionP getViewportConvexPolygon(double marginX=0., double marginY=0.) const;
+	SphericalRegionP getViewportConvexPolygon(float marginX=0., float marginY=0.) const;
 
 	//! Return a Halfspace containing the whole viewport
 	SphericalCap getBoundingSphericalCap() const;
 
 	//! Get size of a radian in pixels at the center of the viewport disk
-	double getPixelPerRadAtCenter(void) const {return pixelPerRad;}
+	float getPixelPerRadAtCenter() const {return pixelPerRad;}
 
 	//! Get the current FOV diameter in degree
-	double getFov() const {return 360./M_PI*viewScalingFactorToFov(0.5*viewportFovDiameter/pixelPerRad);}
+	float getFov() const {return 360.f/M_PI*viewScalingFactorToFov(0.5f*viewportFovDiameter/pixelPerRad);}
 
 	//! Get whether front faces need to be oriented in the clockwise direction
-	bool needGlFrontFaceCW(void) const {return (flipHorz*flipVert < 0.0);}
+	bool needGlFrontFaceCW() const {return (flipHorz*flipVert < 0.f);}
 
 	///////////////////////////////////////////////////////////////////////////
 	// Full projection methods
@@ -237,7 +237,7 @@ public:
 	const Mat4d& getModelViewMatrix() const {return modelViewMatrix;}
 
 	//! Get the current projection matrix.
-	Mat4f getProjectionMatrix() const {return Mat4f(2./viewportXywh[2], 0, 0, 0, 0, 2./viewportXywh[3], 0, 0, 0, 0, -1., 0., -(2.f*viewportXywh[0] + viewportXywh[2])/viewportXywh[2], -(2.f*viewportXywh[1] + viewportXywh[3])/viewportXywh[3], 0, 1);}
+	Mat4f getProjectionMatrix() const {return Mat4f(2.f/viewportXywh[2], 0, 0, 0, 0, 2.f/viewportXywh[3], 0, 0, 0, 0, -1., 0., -(2.f*viewportXywh[0] + viewportXywh[2])/viewportXywh[2], -(2.f*viewportXywh[1] + viewportXywh[3])/viewportXywh[3], 0, 1);}
 
 	///////////////////////////////////////////////////////////////////////////
 	//! Get a string description of a StelProjectorMaskType.
@@ -250,7 +250,11 @@ public:
 
 protected:
 	//! Private constructor. Only StelCore can create instances of StelProjector.
-	StelProjector(const Mat4d& modelViewMat) : modelViewMatrix(modelViewMat) {;}
+	StelProjector(const Mat4d& modelViewMat) : modelViewMatrix(modelViewMat),
+		modelViewMatrixf(modelViewMat[0], modelViewMat[1], modelViewMat[2], modelViewMat[3],
+						 modelViewMat[4], modelViewMat[5], modelViewMat[6], modelViewMat[7],
+						 modelViewMat[8], modelViewMat[9], modelViewMat[10], modelViewMat[11],
+						 modelViewMat[12], modelViewMat[13], modelViewMat[14], modelViewMat[15]) {;}
 	//! Return whether the projection presents discontinuities. Used for optimization.
 	virtual bool hasDiscontinuity() const =0;
 	//! Determine whether a great circle connection p1 and p2 intersects with a projection discontinuity.
@@ -259,13 +263,14 @@ protected:
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const = 0;
 
 	Mat4d modelViewMatrix;         // openGL MODELVIEW Matrix
-	double flipHorz,flipVert;      // Whether to flip in horizontal or vertical directions
-	double pixelPerRad;            // pixel per rad at the center of the viewport disk
+	Mat4f modelViewMatrixf;         // openGL MODELVIEW Matrix
+	float flipHorz,flipVert;      // Whether to flip in horizontal or vertical directions
+	float pixelPerRad;            // pixel per rad at the center of the viewport disk
 	StelProjectorMaskType maskType;    // The current projector mask
-	double zNear, oneOverZNearMinusZFar;  // Near and far clipping planes
+	float zNear, oneOverZNearMinusZFar;  // Near and far clipping planes
 	Vec4i viewportXywh;     // Viewport parameters
-	Vec2d viewportCenter;          // Viewport center in screen pixel
-	double viewportFovDiameter;    // diameter of the FOV disk in pixel
+	Vec2f viewportCenter;          // Viewport center in screen pixel
+	float viewportFovDiameter;    // diameter of the FOV disk in pixel
 	bool gravityLabels;            // should label text align with the horizon?
 
 private:
