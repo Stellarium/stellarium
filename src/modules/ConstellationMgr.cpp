@@ -498,10 +498,7 @@ void ConstellationMgr::drawNames(StelPainter& sPainter) const
 {
 	glEnable(GL_BLEND);
 	sPainter.enableTexture2d(true);
-
-	glBlendFunc(GL_ONE, GL_ONE);
-	// if (draw_mode == DM_NORMAL) glBlendFunc(GL_ONE, GL_ONE);
-	// else glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // charting
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
 	{
