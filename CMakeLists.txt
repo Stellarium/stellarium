@@ -58,7 +58,7 @@ IF(APPLE)
  SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.4u.sdk/")
  # Universal binary
  #SET(CMAKE_OSX_ARCHITECTURES "i386;ppc")
- SET(CMAKE_OSX_ARCHITECTURES "i386")
+ SET(CMAKE_OSX_ARCHITECTURES "i386;ppc")
 ENDIF()
 
 ########### Check headers ###########

@@ -17,10 +17,6 @@
 # endif
 #endif
 
-#ifdef Q_OS_MAC
-#include "StelMacosxDirs.hpp"
-#endif
-
 #include "StelFileMgr.hpp"
 
 // Initialize static members.
@@ -77,9 +73,9 @@ void StelFileMgr::init()
 #endif
 
 #ifdef Q_OS_MAC
-	StelMacosxDirs::addApplicationPluginDirectory();
+	QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath());
 #endif
-	}
+}
 
 
 QString StelFileMgr::findFile(const QString& path, const Flags& flags)

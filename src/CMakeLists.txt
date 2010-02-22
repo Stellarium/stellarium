@@ -329,9 +329,7 @@ ENDIF(WIN32)
 
 IF(APPLE)
   SET(stellarium_lib_SRCS
-	${stellarium_lib_SRCS}
-	core/StelMacosxDirs.cpp
-	core/StelMacosxDirs.hpp)
+	${stellarium_lib_SRCS})
 ENDIF(APPLE)
 
 SET(stellarium_exe_SRCS
