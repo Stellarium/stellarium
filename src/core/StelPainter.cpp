@@ -459,7 +459,7 @@ void StelPainter::sSphereMap(float radius, int slices, int stacks, float texture
 	// draw intermediate stacks as quad strips
 	if (!orientInside) // nsign==1
 	{
-		for (i = 0,cos_sin_rho_p=cos_sin_rho,rho=0.0; i < imax; ++i,cos_sin_rho_p+=2,rho+=drho)
+		for (i = 0,cos_sin_rho_p=cos_sin_rho,rho=0.f; i < imax; ++i,cos_sin_rho_p+=2,rho+=drho)
 		{
 			vertexArr.resize(0);
 			texCoordArr.resize(0);
@@ -483,7 +483,7 @@ void StelPainter::sSphereMap(float radius, int slices, int stacks, float texture
 	}
 	else
 	{
-		for (i = 0,cos_sin_rho_p=cos_sin_rho,rho=0.0; i < imax; ++i,cos_sin_rho_p+=2,rho+=drho)
+		for (i = 0,cos_sin_rho_p=cos_sin_rho,rho=0.f; i < imax; ++i,cos_sin_rho_p+=2,rho+=drho)
 		{
 			vertexArr.resize(0);
 			texCoordArr.resize(0);
@@ -638,14 +638,14 @@ inline void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, V
 	Vec3d win3(newVertex[0]+center[0], newVertex[1]+center[1], newVertex[2]+center[2]);
 	const bool isValidVertex = prj->projectInPlace(win3);
 
-	const double v10=win1[0]-win3[0];
-	const double v11=win1[1]-win3[1];
-	const double v20=win2[0]-win3[0];
-	const double v21=win2[1]-win3[1];
+	const float v10=win1[0]-win3[0];
+	const float v11=win1[1]-win3[1];
+	const float v20=win2[0]-win3[0];
+	const float v21=win2[1]-win3[1];
 
-	const double dist = std::sqrt((v10*v10+v11*v11)*(v20*v20+v21*v21));
-	const double cosAngle = (v10*v20+v11*v21)/dist;
-	if ((cosAngle>-0.999 || dist>50*50 || crossDiscontinuity) && nbI<10)
+	const float dist = std::sqrt((v10*v10+v11*v11)*(v20*v20+v21*v21));
+	const float cosAngle = (v10*v20+v11*v21)/dist;
+	if ((cosAngle>-0.999f || dist>50*50 || crossDiscontinuity) && nbI<10)
 	{
 		// Use the 3rd component of the vector to store whether the vertex is valid
 		win3[2]= isValidVertex ? 1.0 : -1.;
@@ -1258,22 +1258,22 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 /*************************************************************************
  draw a simple circle, 2d viewport coordinates in pixel
 *************************************************************************/
-void StelPainter::drawCircle(double x,double y,double r)
+void StelPainter::drawCircle(float x, float y, float r)
 {
 	if (r <= 1.0)
 		return;
-	const Vec2d center(x,y);
-	const Vec2d v_center(0.5*prj->viewportXywh[2],0.5*prj->viewportXywh[3]);
-	const double R = v_center.length();
-	const double d = (v_center-center).length();
+	const Vec2f center(x,y);
+	const Vec2f v_center(0.5f*prj->viewportXywh[2],0.5f*prj->viewportXywh[3]);
+	const float R = v_center.length();
+	const float d = (v_center-center).length();
 	if (d > r+R || d < r-R)
 		return;
 	const int segments = 180;
-	const double phi = 2.0*M_PI/segments;
-	const double cp = cos(phi);
-	const double sp = sin(phi);
-	double dx = r;
-	double dy = 0;
+	const float phi = 2.0*M_PI/segments;
+	const float cp = std::cos(phi);
+	const float sp = std::sin(phi);
+	float dx = r;
+	float dy = 0;
 	static QVarLengthArray<Vec3f, 180> circleVertexArray(180);
 
 	for (int i=0;i<segments;i++)
@@ -1290,7 +1290,7 @@ void StelPainter::drawCircle(double x,double y,double r)
 }
 
 
-void StelPainter::drawSprite2dMode(double x, double y, float radius)
+void StelPainter::drawSprite2dMode(float x, float y, float radius)
 {
 	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};
 	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
@@ -1312,7 +1312,7 @@ void StelPainter::drawSprite2dMode(const Vec3d& v, float radius)
 	drawSprite2dMode(win[0], win[1], radius);
 }
 
-void StelPainter::drawSprite2dMode(double x, double y, float radius, float rotation)
+void StelPainter::drawSprite2dMode(float x, float y, float radius, float rotation)
 {
 	static float vertexData[8];
 	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
@@ -1360,7 +1360,7 @@ void StelPainter::drawRect2d(float x, float y, float width, float height, bool t
 /*************************************************************************
  Draw a GL_POINT at the given position
 *************************************************************************/
-void StelPainter::drawPoint2d(double x, double y)
+void StelPainter::drawPoint2d(float x, float y)
 {
 	static float vertexData[] = {0.,0.};
 	vertexData[0]=x;
@@ -1376,7 +1376,7 @@ void StelPainter::drawPoint2d(double x, double y)
 /*************************************************************************
  Draw a line between the 2 points.
 *************************************************************************/
-void StelPainter::drawLine2d(double x1, double y1, double x2, double y2)
+void StelPainter::drawLine2d(float x1, float y1, float x2, float y2)
 {
 	static float vertexData[] = {0.,0.,0.,0.};
 	vertexData[0]=x1;
