@@ -330,11 +330,12 @@ void StelFileMgr::setUserDir(const QString& newDir)
 QString StelFileMgr::getInstallationDir()
 {
 	// If we are running from the build tree, we use the files from there...
-	if (QFileInfo(CHECK_FILE).exists())
+	if (QFileInfo(CHECK_FILE).exists()){
 		return ".";
+	}
 
 #ifdef Q_OS_MAC
-	QFileInfo MacOSdir(QCoreApplication::applicationDirPath());
+	QFileInfo MacOSdir(QCoreApplication::applicationDirPath() + "/../Resources");
 	QDir ResourcesDir = MacOSdir.dir();
 	ResourcesDir.cd(QString("Resources"));
 	QFileInfo installLocation(ResourcesDir.absolutePath());
