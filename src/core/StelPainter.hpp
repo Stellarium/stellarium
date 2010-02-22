@@ -186,14 +186,14 @@ public:
 	void drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, const SphericalCap* clippingCap=NULL, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=NULL, void* userData=NULL);
 
 	//! Draw a simple circle, 2d viewport coordinates in pixel
-	void drawCircle(double x,double y,double r);
+	void drawCircle(float x, float y, float r);
 
 	//! Draw a square using the current texture at the given projected 2d position.
 	//! This method is not thread safe.
 	//! @param x x position in the viewport in pixel.
 	//! @param y y position in the viewport in pixel.
 	//! @param radius the half size of a square side in pixel.
-	void drawSprite2dMode(double x, double y, float radius);
+	void drawSprite2dMode(float x, float y, float radius);
 	void drawSprite2dMode(const Vec3d& v, float radius);
 
 	//! Draw a rotated square using the current texture at the given projected 2d position.
@@ -202,19 +202,19 @@ public:
 	//! @param y y position in the viewport in pixel.
 	//! @param radius the half size of a square side in pixel.
 	//! @param rotation rotation angle in degree.
-	void drawSprite2dMode(double x, double y, float radius, float rotation);
+	void drawSprite2dMode(float x, float y, float radius, float rotation);
 
 	//! Draw a GL_POINT at the given position.
 	//! @param x x position in the viewport in pixels.
 	//! @param y y position in the viewport in pixels.
-	void drawPoint2d(double x, double y);
+	void drawPoint2d(float x, float y);
 
 	//! Draw a line between the 2 points.
 	//! @param x1 x position of point 1 in the viewport in pixels.
 	//! @param y1 y position of point 1 in the viewport in pixels.
 	//! @param x2 x position of point 2 in the viewport in pixels.
 	//! @param y2 y position of point 2 in the viewport in pixels.
-	void drawLine2d(double x1, double y1, double x2, double y2);
+	void drawLine2d(float x1, float y1, float x2, float y2);
 
 	//! Draw a rectangle using the current texture at the given projected 2d position.
 	//! This method is not thread safe.
@@ -236,7 +236,7 @@ public:
 	//! @param radius the radius of the disk.
 	//! @param innerFanSlices the number of slices.
 	//! @param level the numbe of concentric circles.
-	void sFanDisk(float radius,int innerFanSlices,int level);
+	void sFanDisk(float radius, int innerFanSlices, int level);
 
 	//! Draw a ring with a radial texturing.
 	void sRing(float rMin, float rMax, int slices, int stacks, int orientInside);

@@ -39,22 +39,22 @@ bool StelProjectorPerspective::backward(Vec3d &v) const
 	return true;
 }
 
-double StelProjectorPerspective::fovToViewScalingFactor(double fov) const
+float StelProjectorPerspective::fovToViewScalingFactor(float fov) const
 {
 	return std::tan(fov);
 }
 
-double StelProjectorPerspective::viewScalingFactorToFov(double vsf) const
+float StelProjectorPerspective::viewScalingFactorToFov(float vsf) const
 {
 	return std::atan(vsf);
 }
 
-double StelProjectorPerspective::deltaZoom(double fov) const
+float StelProjectorPerspective::deltaZoom(float fov) const
 {
-    const double vsf = fovToViewScalingFactor(fov);
+	const float vsf = fovToViewScalingFactor(fov);
 // deriv_viewScalingFactorToFov(vsf) = 1.0 / (1.0+vsf*vsf)
 // return vsf*deriv_viewScalingFactorToFov(vsf))
-	return vsf / (1.0+vsf*vsf);
+	return vsf / (1.f+vsf*vsf);
 }
 
 
@@ -88,21 +88,18 @@ bool StelProjectorEqualArea::backward(Vec3d &v) const
 	return true;
 }
 
-double StelProjectorEqualArea::fovToViewScalingFactor(double fov) const
+float StelProjectorEqualArea::fovToViewScalingFactor(float fov) const
 {
-	return 2.0 * std::sin(0.5 * fov);
+	return 2.f * std::sin(0.5f * fov);
 }
 
-double StelProjectorEqualArea::viewScalingFactorToFov(double vsf) const
+float StelProjectorEqualArea::viewScalingFactorToFov(float vsf) const
 {
-	return 2.0 * std::asin(0.5 * vsf);
+	return 2.f * std::asin(0.5f * vsf);
 }
 
-double StelProjectorEqualArea::deltaZoom(double fov) const
+float StelProjectorEqualArea::deltaZoom(float fov) const
 {
-// deriv_viewScalingFactorToFov(vsf) = 2.0 / sqrt(4.0-vsf*vsf);
-// const double vsf = fovToViewScalingFactor(fov);
-// return vsf*deriv_viewScalingFactorToFov(vsf)) = 2.0*vsf / sqrt(4.0-vsf*vsf);
     return fov;
 }
 
@@ -124,22 +121,20 @@ bool StelProjectorStereographic::backward(Vec3d &v) const
   return true;
 }
 
-double StelProjectorStereographic::fovToViewScalingFactor(double fov) const
+float StelProjectorStereographic::fovToViewScalingFactor(float fov) const
 {
-	return 2.0 * std::tan(0.5 * fov);
+	return 2.f * std::tan(0.5f * fov);
 }
 
-double StelProjectorStereographic::viewScalingFactorToFov(double vsf) const
+float StelProjectorStereographic::viewScalingFactorToFov(float vsf) const
 {
-	return 2.0 * std::atan(0.5 * vsf);
+	return 2.f * std::atan(0.5f * vsf);
 }
 
-double StelProjectorStereographic::deltaZoom(double fov) const
+float StelProjectorStereographic::deltaZoom(float fov) const
 {
-    const double vsf = fovToViewScalingFactor(fov);
-// deriv_viewScalingFactorToFov(vsf) = 4.0 / (4.0+vsf*vsf)
-// return vsf*deriv_viewScalingFactorToFov(vsf))
-	return 4.0*vsf / (4.0+vsf*vsf);
+	const float vsf = fovToViewScalingFactor(fov);
+	return 4.f*vsf / (4.f+vsf*vsf);
 }
 
 
@@ -165,22 +160,20 @@ bool StelProjectorFisheye::backward(Vec3d &v) const
 	return (a < M_PI);
 }
 
-double StelProjectorFisheye::fovToViewScalingFactor(double fov) const
+float StelProjectorFisheye::fovToViewScalingFactor(float fov) const
 {
 	return fov;
 }
 
-double StelProjectorFisheye::viewScalingFactorToFov(double vsf) const
+float StelProjectorFisheye::viewScalingFactorToFov(float vsf) const
 {
 	return vsf;
 }
 
-double StelProjectorFisheye::deltaZoom(double fov) const
+float StelProjectorFisheye::deltaZoom(float fov) const
 {
 	return fov;
 }
-
-
 
 
 
@@ -208,17 +201,17 @@ bool StelProjectorHammer::backward(Vec3d &v) const
 	return ret;
 }
 
-double StelProjectorHammer::fovToViewScalingFactor(double fov) const
+float StelProjectorHammer::fovToViewScalingFactor(float fov) const
 {
 	return fov;
 }
 
-double StelProjectorHammer::viewScalingFactorToFov(double vsf) const
+float StelProjectorHammer::viewScalingFactorToFov(float vsf) const
 {
 	return vsf;
 }
 
-double StelProjectorHammer::deltaZoom(double fov) const
+float StelProjectorHammer::deltaZoom(float fov) const
 {
 	return fov;
 }
@@ -257,17 +250,17 @@ bool StelProjectorCylinder::backward(Vec3d &v) const
 	return rval;
 }
 
-double StelProjectorCylinder::fovToViewScalingFactor(double fov) const
+float StelProjectorCylinder::fovToViewScalingFactor(float fov) const
 {
 	return fov;
 }
 
-double StelProjectorCylinder::viewScalingFactorToFov(double vsf) const
+float StelProjectorCylinder::viewScalingFactorToFov(float vsf) const
 {
 	return vsf;
 }
 
-double StelProjectorCylinder::deltaZoom(double fov) const
+float StelProjectorCylinder::deltaZoom(float fov) const
 {
 	return fov;
 }
@@ -308,17 +301,17 @@ bool StelProjectorMercator::backward(Vec3d &v) const
 	return rval;
 }
 
-double StelProjectorMercator::fovToViewScalingFactor(double fov) const
+float StelProjectorMercator::fovToViewScalingFactor(float fov) const
 {
 	return fov;
 }
 
-double StelProjectorMercator::viewScalingFactorToFov(double vsf) const
+float StelProjectorMercator::viewScalingFactorToFov(float vsf) const
 {
 	return vsf;
 }
 
-double StelProjectorMercator::deltaZoom(double fov) const
+float StelProjectorMercator::deltaZoom(float fov) const
 {
 	return fov;
 }
@@ -360,17 +353,17 @@ bool StelProjectorOrthographic::backward(Vec3d &v) const
 	return true;
 }
 
-double StelProjectorOrthographic::fovToViewScalingFactor(double fov) const
+float StelProjectorOrthographic::fovToViewScalingFactor(float fov) const
 {
 	return std::sin(fov);
 }
 
-double StelProjectorOrthographic::viewScalingFactorToFov(double vsf) const
+float StelProjectorOrthographic::viewScalingFactorToFov(float vsf) const
 {
 	return std::asin(vsf);
 }
 
-double StelProjectorOrthographic::deltaZoom(double fov) const
+float StelProjectorOrthographic::deltaZoom(float fov) const
 {
 	return fov;
 }
@@ -399,17 +392,17 @@ bool StelProjector2d::backward(Vec3d &v) const
 	return false;
 }
 
-double StelProjector2d::fovToViewScalingFactor(double fov) const
+float StelProjector2d::fovToViewScalingFactor(float fov) const
 {
-	return 1.;
+	return 1.f;
 }
 
-double StelProjector2d::viewScalingFactorToFov(double vsf) const
+float StelProjector2d::viewScalingFactorToFov(float vsf) const
 {
-	return 1.;
+	return 1.f;
 }
 
-double StelProjector2d::deltaZoom(double fov) const
+float StelProjector2d::deltaZoom(float fov) const
 {
 	Q_ASSERT(0);
 	return fov;
