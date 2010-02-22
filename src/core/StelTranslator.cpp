@@ -40,7 +40,7 @@ QMap<QString, QString> StelTranslator::iso639codes;
 QString StelTranslator::systemLangName;
 
 // Use system locale language by default
-StelTranslator StelTranslator::globalTranslator = StelTranslator("stellarium", StelFileMgr::getLocaleDir(), "system");
+StelTranslator StelTranslator::globalTranslator = StelTranslator("stellarium", "./locale/", "system");
 
 #ifdef Q_OS_WIN
 # include <windows.h>

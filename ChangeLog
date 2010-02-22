@@ -4,7 +4,8 @@ Fixed unpredictable openGL related crashes on win32.
 Fixed run on MacOSX Tiger/Leopard/Snow Leopard.
 Disable OpenGL shaders by default for stars and atmosphere. User activate it by setting use_glshaders = true in the [main] section of the config.ini
 Fixed the handling of the Qt -graphicssystem parameter. Now it is ignored if it is not used properly.
-Improved OpenGLES2 support (not done yet).
+Improved OpenGLES2 support (not finished yet).
+Added Qt widgets flags on the main windows to avoid filling background (this boosted the program a lot on linux).
 
 0.10.3 [2010-01-28]
 Based on Qt 4.6.x
