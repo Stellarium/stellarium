@@ -48,14 +48,14 @@
 #include <QtGlobal>
 
 // The 0.025 corresponds to the maximum eye resolution in degree
-#define EYE_RESOLUTION (0.25)
+#define EYE_RESOLUTION (0.25f)
 #define MAX_LINEAR_RADIUS 8.f
 
 StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), starsShaderProgram(NULL)
 {
 	eye = core->getToneReproducer();
 
-	inScale = 1.;
+	inScale = 1.f;
 	bortleScaleIndex = 3;
 	limitMagnitude = -100.f;
 	limitLuminance = 0;
@@ -71,11 +71,11 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), starsShaderProgram(
 	QSettings* conf = StelApp::getInstance().getSettings();
 	initColorTableFromConfigFile(conf);
 
-	setTwinkleAmount(conf->value("stars/star_twinkle_amount",0.3).toDouble());
+	setTwinkleAmount(conf->value("stars/star_twinkle_amount",0.3).toFloat());
 	setFlagTwinkle(conf->value("stars/flag_star_twinkle",true).toBool());
 	setFlagPointStar(conf->value("stars/flag_point_star",false).toBool());
-	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toDouble());
-	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toDouble());
+	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
+	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
 
 	bool ok=true;
@@ -88,7 +88,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), starsShaderProgram(
 		ok = true;
 	}
 
-	setRelativeStarScale(conf->value("stars/relative_scale",1.0).toDouble(&ok));
+	setRelativeStarScale(conf->value("stars/relative_scale",1.0).toFloat(&ok));
 	if (!ok)
 	{
 		conf->setValue("stars/relative_scale",1.0);
@@ -96,7 +96,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), starsShaderProgram(
 		ok = true;
 	}
 
-	setAbsoluteStarScale(conf->value("stars/absolute_scale",1.0).toDouble(&ok));
+	setAbsoluteStarScale(conf->value("stars/absolute_scale",1.0).toFloat(&ok));
 	if (!ok)
 	{
 		conf->setValue("stars/absolute_scale",1.0);
@@ -220,12 +220,12 @@ void StelSkyDrawer::update(double deltaTime)
 	// This factor is fully arbitrary. It corresponds to the collecting area x exposure time of the instrument
 	// It is based on a power law, so that it varies progressively with the FOV to smoothly switch from human
 	// vision to binocculares/telescope. Use a max of 0.7 because after that the atmosphere starts to glow too much!
-	float powFactor = std::pow(60./qMax(0.7f,fov), 0.8);
+	float powFactor = std::pow(60.f/qMax(0.7f,fov), 0.8f);
 	eye->setInputScale(inScale*powFactor);
 
 	// Set the fov factor for point source luminance computation
 	// the division by powFactor should in principle not be here, but it doesn't look nice if removed
-	lnfovFactor = std::log(1./50.*2025000.f* 60.f*60.f / (fov*fov) / (EYE_RESOLUTION*EYE_RESOLUTION)/powFactor/1.4);
+	lnfovFactor = std::log(1.f/50.f*2025000.f* 60.f*60.f / (fov*fov) / (EYE_RESOLUTION*EYE_RESOLUTION)/powFactor/1.4f);
 
 	// Precompute
 	starLinearScale = std::pow(35.f*2.0f*starAbsoluteScaleF, 1.40f/2.f*starRelativeScale);
@@ -461,14 +461,14 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
 		return false;
 
-	const double radius = rcMag[0];
+	const float radius = rcMag[0];
 	// Random coef for star twinkling
-	const float tw = flagStarTwinkle ? (1.f-twinkleAmount*rand()/RAND_MAX)*rcMag[1] : 1.f*rcMag[1];
+	const float tw = flagStarTwinkle ? (1.f-twinkleAmount*rand()/RAND_MAX)*rcMag[1] : rcMag[1];
 
 	// If the rmag is big, draw a big halo
 	if (radius>MAX_LINEAR_RADIUS+5.f)
 	{
-		float cmag = qMin(rcMag[1],(float)(radius-(MAX_LINEAR_RADIUS+5.))/30.f);
+		float cmag = qMin(rcMag[1],(float)(radius-(MAX_LINEAR_RADIUS+5.f))/30.f);
 		float rmag = 150.f;
 		if (cmag>1.f)
 			cmag = 1.f;
@@ -481,13 +481,15 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 		sPainter->drawSprite2dMode(win[0], win[1], rmag);
 	}
 
+#ifndef USE_OPENGL_ES2
 	if (useShader)
 	{
+#endif
 		// Use point based rendering
 		verticesGrid[nbPointSources].set(win[0], win[1]);
-		colorGrid[nbPointSources]=color;
-		colorGrid[nbPointSources]*=tw;
+		colorGrid[nbPointSources].set(color[0]*tw, color[1]*tw, color[2]*tw);
 		textureGrid[nbPointSources][0]=radius;
+#ifndef USE_OPENGL_ES2
 	}
 	else
 	{
@@ -519,6 +521,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 			*cv = win; ++cv;
 		}
 	}
+#endif
 
 	++nbPointSources;
 	if (nbPointSources>=maxPointSources)
@@ -531,7 +534,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 
 
 // Terminate drawing of a 3D model, draw the halo
-void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, double illuminatedArea, float mag, const Vec3f& color)
+void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color)
 {
 	const float pixPerRad = painter->getProjector()->getPixelPerRadAtCenter();
 	// Assume a disk shape
@@ -594,8 +597,8 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, dou
 		float wl = findWorldLumForMag(mag, rcm[0]);
 		if (wl>0)
 		{
-			const double f = core->getMovementMgr()->getCurrentFov();
-			reportLuminanceInFov(qMin(700., qMin((double)wl/50, (60.*60.)/(f*f)*6.)));
+			const float f = core->getMovementMgr()->getCurrentFov();
+			reportLuminanceInFov(qMin(700.f, qMin(wl/50, (60.f*60.f)/(f*f)*6.f)));
 		}
 	}
 
@@ -656,7 +659,7 @@ float StelSkyDrawer::findWorldLumForMag(float mag, float targetRadius)
 }
 
 // Report that an object of luminance lum is currently displayed
-void StelSkyDrawer::reportLuminanceInFov(double lum, bool fastAdaptation)
+void StelSkyDrawer::reportLuminanceInFov(float lum, bool fastAdaptation)
 {
 	if (lum > maxLum)
 	{
@@ -841,12 +844,12 @@ Vec3f StelSkyDrawer::colorTable[128] = {
 	Vec3f(1.000000,0.772549,0.647059),
 };
 
-static double Gamma(double gamma,double x)
+static float Gamma(float gamma, float x)
 {
-	return ((x<=0.0) ? 0.0 : exp(gamma*log(x)));
+	return ((x<=0.f) ? 0.f : std::exp(gamma*std::log(x)));
 }
 
-static Vec3f Gamma(double gamma,const Vec3f &x)
+static Vec3f Gamma(float gamma,const Vec3f &x)
 {
 	return Vec3f(Gamma(gamma,x[0]),Gamma(gamma,x[1]),Gamma(gamma,x[2]));
 }
