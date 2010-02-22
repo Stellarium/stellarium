@@ -72,7 +72,7 @@ public:
 	//! @param mag the source integrated magnitude
 	//! @param p the StelPainter instance to use for this drawing operation
 	//! @param color the object halo RGB color
-	void postDrawSky3dModel(StelPainter* sPainter, const Vec3d& v, double illuminatedArea, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f));
+	void postDrawSky3dModel(StelPainter* sPainter, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f));
 
 	//! Compute RMag and CMag from magnitude.
 	//! @param mag the object integrated V magnitude
@@ -85,7 +85,7 @@ public:
 	//! This method should be called during the update operations of the main loop
 	//! @param lum luminance in cd/m^2
 	//! @param fastAdaptation adapt the eye quickly if true, other wise use a smooth adaptation
-	void reportLuminanceInFov(double lum, bool fastAdaptation=false);
+	void reportLuminanceInFov(float lum, bool fastAdaptation=false);
 
 	//! To be called before the drawing stage starts
 	void preDraw();
@@ -113,29 +113,29 @@ public:
 
 public slots:
 	//! Set the way brighter stars will look bigger as the fainter ones
-	void setRelativeStarScale(double b=1.0) {starRelativeScale=b;}
+	void setRelativeStarScale(float b=1.0) {starRelativeScale=b;}
 	//! Get the way brighter stars will look bigger as the fainter ones
-	double getRelativeStarScale(void) const {return starRelativeScale;}
+	float getRelativeStarScale() const {return starRelativeScale;}
 
 	//! Set the absolute star brightness scale
-	void setAbsoluteStarScale(double b=1.0) {starAbsoluteScaleF=b;}
+	void setAbsoluteStarScale(float b=1.0) {starAbsoluteScaleF=b;}
 	//! Get the absolute star brightness scale
-	double getAbsoluteStarScale(void) const {return starAbsoluteScaleF;}
+	float getAbsoluteStarScale() const {return starAbsoluteScaleF;}
 
 	//! Set source twinkle amount.
-	void setTwinkleAmount(double b) {twinkleAmount=b;}
+	void setTwinkleAmount(float b) {twinkleAmount=b;}
 	//! Get source twinkle amount.
-	double getTwinkleAmount(void) const {return twinkleAmount;}
+	float getTwinkleAmount() const {return twinkleAmount;}
 
 	//! Set flag for source twinkling.
 	void setFlagTwinkle(bool b) {flagStarTwinkle=b;}
 	//! Get flag for source twinkling.
-	bool getFlagTwinkle(void) const {return flagStarTwinkle;}
+	bool getFlagTwinkle() const {return flagStarTwinkle;}
 
 	//! Set flag for displaying point sources as GLpoints (faster on some hardware but not so nice).
 	void setFlagPointStar(bool b) {flagPointStar=b;}
 	//! Get flag for displaying point sources as GLpoints (faster on some hardware but not so nice).
-	bool getFlagPointStar(void) const {return flagPointStar;}
+	bool getFlagPointStar() const {return flagPointStar;}
 
 	//! Set the parameters so that the stars disapear at about the limit given by the bortle scale
 	//! The limit is valid only at a given zoom level (around 60 deg)
@@ -186,7 +186,7 @@ private:
 	void setMinAdaptFov(float fov) {minAdaptFov = (fov > 60.f) ? 60.f : fov;}
 
 	//! Set the scaling applied to input luminance before they are converted by the StelToneReproducer
-	void setInputScale(double in) {inScale = in;}
+	void setInputScale(float in) {inScale = in;}
 	//! Get the scaling applied to input luminance before they are converted by the StelToneReproducer
 	float getInputScale() const {return inScale;}
 
@@ -241,7 +241,7 @@ private:
 	int bortleScaleIndex;
 
 	//! The scaling applied to input luminance before they are converted by the StelToneReproducer
-	double inScale;
+	float inScale;
 
 	// Variables used for GL optimization when displaying point sources
 	//! Buffer for storing the vertex array data
