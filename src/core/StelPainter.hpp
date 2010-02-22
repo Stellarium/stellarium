@@ -225,10 +225,10 @@ public:
 	void drawRect2d(float x, float y, float width, float height, bool textured=true);
 
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
-	void sSphere(double radius, double oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
+	void sSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
 
 	//! Re-implementation of gluCylinder : glu is overridden for non-standard projection.
-	void sCylinder(double radius, double height, int slices, int orientInside = 0);
+	void sCylinder(float radius, float height, int slices, int orientInside = 0);
 
 	//! Draw a disk with a special texturing mode having texture center at center of disk.
 	//! The disk is made up of concentric circles with increasing refinement.
@@ -236,13 +236,13 @@ public:
 	//! @param radius the radius of the disk.
 	//! @param innerFanSlices the number of slices.
 	//! @param level the numbe of concentric circles.
-	void sFanDisk(double radius,int innerFanSlices,int level);
+	void sFanDisk(float radius,int innerFanSlices,int level);
 
 	//! Draw a ring with a radial texturing.
-	void sRing(double rMin, double rMax, int slices, int stacks, int orientInside);
+	void sRing(float rMin, float rMax, int slices, int stacks, int orientInside);
 
 	//! Draw a fisheye texture in a sphere.
-	void sSphereMap(double radius, int slices, int stacks, double textureFov = 2.*M_PI, int orientInside = 0);
+	void sSphereMap(float radius, int slices, int stacks, float textureFov = 2.f*M_PI, int orientInside = 0);
 
 	//! Set the font to use for subsequent text drawing.
 	void setFont(const QFont& font);

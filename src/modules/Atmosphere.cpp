@@ -40,7 +40,7 @@ inline bool myisnan(double value)
 	return value != value;
 }
 
-Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL), colorGrid(NULL), indices(NULL),
+Atmosphere::Atmosphere(void) :viewport(0,0,0,0), posGrid(NULL), colorGrid(NULL), indices(NULL),
 					   averageLuminance(0.f), eclipseFactor(1.f), lightPollutionLuminance(0)
 {
 	setFadeDuration(3.f);
@@ -157,6 +157,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 			delete[] colorGrid;
 		if (indices)
 			delete[] indices;
+		skyResolutionY = StelApp::getInstance().getSettings()->value("landscape/atmosphereybin", 44).toInt();
 		skyResolutionX = (int)floor(0.5+skyResolutionY*(0.5*sqrt(3.0))*prj->getViewportWidth()/prj->getViewportHeight());
 		posGrid = new Vec2f[(1+skyResolutionX)*(1+skyResolutionY)];
 		colorGrid = new Vec4f[(1+skyResolutionX)*(1+skyResolutionY)];
