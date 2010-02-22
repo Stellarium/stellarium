@@ -44,6 +44,12 @@ IF(OPTIMIZE_INTEL_ATOM)
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
 ENDIF()
 
+SET(OPTIMIZE_N900 0 CACHE BOOL "Activate optimizations for ARM Cortex-A8 with NEON SIMD Compiler Options.")
+IF(OPTIMIZE_N900)
+ SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mtune=cortex-a8 -march=armv7-a -ftree-vectorize -mfpu=neon -mfloat-abi=softfp -ffast-math -fomit-frame-pointer -funroll-loops")
+ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mtune=cortex-a8 -march=armv7-a -ftree-vectorize -mfpu=neon -mfloat-abi=softfp -ffast-math -fomit-frame-pointer -funroll-loops")
+ENDIF()
+
 # best way to get to APPLE?
 IF(APPLE)
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
