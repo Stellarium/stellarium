@@ -28,7 +28,7 @@ public:
 	StelProjectorPerspective(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
-	virtual double getMaxFov() const {return 120.;}
+	virtual float getMaxFov() const {return 120.f;}
 	bool forward(Vec3d &v) const
 	{
 		const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
@@ -50,9 +50,9 @@ public:
 		return false;
 	}
 	bool backward(Vec3d &v) const;
-	double fovToViewScalingFactor(double fov) const;
-	double viewScalingFactorToFov(double vsf) const;
-	double deltaZoom(double fov) const;
+	float fovToViewScalingFactor(float fov) const;
+	float viewScalingFactorToFov(float vsf) const;
+	float deltaZoom(float fov) const;
 protected:
 	virtual bool hasDiscontinuity() const {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
@@ -64,7 +64,7 @@ public:
 	StelProjectorEqualArea(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
-	virtual double getMaxFov() const {return 360.;}
+	virtual float getMaxFov() const {return 360.f;}
 	bool forward(Vec3d &v) const
 	{
 		const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
@@ -75,9 +75,9 @@ public:
 		return true;
 	}
 	bool backward(Vec3d &v) const;
-	double fovToViewScalingFactor(double fov) const;
-	double viewScalingFactorToFov(double vsf) const;
-	double deltaZoom(double fov) const;
+	float fovToViewScalingFactor(float fov) const;
+	float viewScalingFactorToFov(float vsf) const;
+	float deltaZoom(float fov) const;
 protected:
 	virtual bool hasDiscontinuity() const {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
@@ -89,7 +89,7 @@ public:
 	StelProjectorStereographic(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
-	virtual double getMaxFov() const {return 235.;}
+	virtual float getMaxFov() const {return 235.;}
 	bool forward(Vec3d &v) const
 	{
 		const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
@@ -122,9 +122,9 @@ public:
 	}
 
 	bool backward(Vec3d &v) const;
-	double fovToViewScalingFactor(double fov) const;
-	double viewScalingFactorToFov(double vsf) const;
-	double deltaZoom(double fov) const;
+	float fovToViewScalingFactor(float fov) const;
+	float viewScalingFactorToFov(float vsf) const;
+	float deltaZoom(float fov) const;
 protected:
 	virtual bool hasDiscontinuity() const {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
@@ -136,7 +136,7 @@ public:
 	StelProjectorFisheye(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
-	virtual double getMaxFov() const {return 180.00001;}
+	virtual float getMaxFov() const {return 180.00001;}
 	bool forward(Vec3d &v) const
 	{
 		const double rq1 = v[0]*v[0] + v[1]*v[1];
@@ -160,9 +160,9 @@ public:
 		return false;
 	}
 	bool backward(Vec3d &v) const;
-	double fovToViewScalingFactor(double fov) const;
-	double viewScalingFactorToFov(double vsf) const;
-	double deltaZoom(double fov) const;
+	float fovToViewScalingFactor(float fov) const;
+	float viewScalingFactorToFov(float vsf) const;
+	float deltaZoom(float fov) const;
 protected:
 	virtual bool hasDiscontinuity() const {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
@@ -174,7 +174,7 @@ public:
 	StelProjectorHammer(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
-	virtual double getMaxFov() const {return 360.;}
+	virtual float getMaxFov() const {return 360.;}
 	virtual void project(int n, const Vec3d* in, Vec3f* out)
 	{
 		Vec3d v;
@@ -201,9 +201,9 @@ public:
 		return true;
 	}
 	bool backward(Vec3d &v) const;
-	double fovToViewScalingFactor(double fov) const;
-	double viewScalingFactorToFov(double vsf) const;
-	double deltaZoom(double fov) const;
+	float fovToViewScalingFactor(float fov) const;
+	float viewScalingFactorToFov(float vsf) const;
+	float deltaZoom(float fov) const;
 protected:
 	virtual bool hasDiscontinuity() const {return true;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return p1[0]*p2[0]<0 && !(p1[2]<0 && p2[2]<0);}
@@ -215,12 +215,12 @@ public:
 	StelProjectorCylinder(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
-	virtual double getMaxFov() const {return 175. * 4./3.;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
+	virtual float getMaxFov() const {return 175. * 4./3.;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
-	double fovToViewScalingFactor(double fov) const;
-	double viewScalingFactorToFov(double vsf) const;
-	double deltaZoom(double fov) const;
+	float fovToViewScalingFactor(float fov) const;
+	float viewScalingFactorToFov(float vsf) const;
+	float deltaZoom(float fov) const;
 protected:
 	virtual bool hasDiscontinuity() const {return true;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const
@@ -235,12 +235,12 @@ public:
 	StelProjectorMercator(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
-	virtual double getMaxFov() const {return 175. * 4./3.;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
+	virtual float getMaxFov() const {return 175. * 4./3.;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
-	double fovToViewScalingFactor(double fov) const;
-	double viewScalingFactorToFov(double vsf) const;
-	double deltaZoom(double fov) const;
+	float fovToViewScalingFactor(float fov) const;
+	float viewScalingFactorToFov(float vsf) const;
+	float deltaZoom(float fov) const;
 protected:
 	virtual bool hasDiscontinuity() const {return true;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const
@@ -255,12 +255,12 @@ public:
 	StelProjectorOrthographic(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
-	virtual double getMaxFov() const {return 179.9999;}
+	virtual float getMaxFov() const {return 179.9999;}
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
-	double fovToViewScalingFactor(double fov) const;
-	double viewScalingFactorToFov(double vsf) const;
-	double deltaZoom(double fov) const;
+	float fovToViewScalingFactor(float fov) const;
+	float viewScalingFactorToFov(float vsf) const;
+	float deltaZoom(float fov) const;
 protected:
 	virtual bool hasDiscontinuity() const {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
@@ -272,12 +272,12 @@ public:
 	StelProjector2d() : StelProjector(Mat4d::identity()) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
-	virtual double getMaxFov() const {return 360.;}
+	virtual float getMaxFov() const {return 360.;}
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
-	double fovToViewScalingFactor(double fov) const;
-	double viewScalingFactorToFov(double vsf) const;
-	double deltaZoom(double fov) const;
+	float fovToViewScalingFactor(float fov) const;
+	float viewScalingFactorToFov(float vsf) const;
+	float deltaZoom(float fov) const;
 protected:
 	virtual bool hasDiscontinuity() const {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {Q_ASSERT(0); return false;}

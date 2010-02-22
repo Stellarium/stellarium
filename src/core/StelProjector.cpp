@@ -45,15 +45,14 @@ void StelProjector::init(const StelProjectorParams& params)
 {
 	maskType = (StelProjectorMaskType)params.maskType;
 	zNear = params.zNear;
-	oneOverZNearMinusZFar = 1./(zNear-params.zFar);
+	oneOverZNearMinusZFar = 1.f/(zNear-params.zFar);
 	viewportXywh = params.viewportXywh;
 	viewportCenter = params.viewportCenter;
 	gravityLabels = params.gravityLabels;
-	flipHorz = params.flipHorz ? -1. : 1.;
-	flipVert = params.flipVert ? -1. : 1.;
+	flipHorz = params.flipHorz ? -1.f : 1.f;
+	flipVert = params.flipVert ? -1.f : 1.f;
 	viewportFovDiameter = params.viewportFovDiameter;
-	pixelPerRad = 0.5 * viewportFovDiameter / fovToViewScalingFactor(params.fov*(M_PI/360.0));
-	//Q_ASSERT(params.fov<=getMaxFov());
+	pixelPerRad = 0.5f * viewportFovDiameter / fovToViewScalingFactor(params.fov*(M_PI/360.f));
 }
 
 QString StelProjector::getHtmlSummary() const

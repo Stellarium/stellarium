@@ -72,7 +72,7 @@ public:
 	//! Get a HTML version of the short description for this projection type
 	QString getHtmlSummary() const;
 	//! Get the maximum FOV apperture in degree
-	virtual double getMaxFov() const = 0;
+	virtual float getMaxFov() const = 0;
 	//! Apply the transformation in the forward direction in place.
 	//! After transformation v[2] will always contain the length of the original v: sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2])
 	//! regardless of the projection type. This makes it possible to implement depth buffer testing in a way independent of the
@@ -83,7 +83,7 @@ public:
 	//! Apply the transformation in the backward projection in place.
 	virtual bool backward(Vec3d &v) const = 0;
 	//! Return the small zoom increment to use at the given FOV for nice movements
-	virtual double deltaZoom(double fov) const = 0;
+	virtual float deltaZoom(float fov) const = 0;
 
 	//! Determine whether a great circle connection p1 and p2 intersects with a projection discontinuity.
 	//! For many projections without discontinuity, this should return always false, but for other like
@@ -96,9 +96,9 @@ public:
 	}
 
 	//! Convert a Field Of View radius value in radians in ViewScalingFactor (used internally)
-	virtual double fovToViewScalingFactor(double fov) const = 0;
+	virtual float fovToViewScalingFactor(float fov) const = 0;
 	//! Convert a ViewScalingFactor value (used internally) in Field Of View radius in radians
-	virtual double viewScalingFactorToFov(double vsf) const = 0;
+	virtual float viewScalingFactorToFov(float vsf) const = 0;
 
 	//! Get the current state of the flag which decides whether to
 	//! arrage labels so that they are aligned with the bottom of a 2d
