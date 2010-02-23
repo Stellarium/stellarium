@@ -109,7 +109,7 @@ struct DrawNebulaFuncObject
 {
 	DrawNebulaFuncObject(float amaxMagHints, float amaxMagLabels, StelPainter* p, bool acheckMaxMagHints) : maxMagHints(amaxMagHints), maxMagLabels(amaxMagLabels), sPainter(p), checkMaxMagHints(acheckMaxMagHints)
 	{
-		angularSizeLimit = 5./sPainter->getProjector()->getPixelPerRadAtCenter()*180./M_PI;
+		angularSizeLimit = 5.f/sPainter->getProjector()->getPixelPerRadAtCenter()*180.f/M_PI;
 	}
 	void operator()(StelRegionObjectP obj)
 	{
@@ -147,8 +147,8 @@ void NebulaMgr::draw(StelCore* core)
 	const SphericalRegionP& p = prj->getViewportConvexPolygon(margin, margin);
 
 	// Print all the nebulae of all the selected zones
-	float maxMagHints = skyDrawer->getLimitMagnitude()*1.2-2.+(hintsAmount*1.2f)-2.f;
-	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.+(labelsAmount*1.2f)-2.f;
+	float maxMagHints = skyDrawer->getLimitMagnitude()*1.2f-2.f+(hintsAmount*1.2f)-2.f;
+	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.f+(labelsAmount*1.2f)-2.f;
 	sPainter.setFont(nebulaFont);
 	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, hintsFader.getInterstate()>0.0001);
 	nebGrid.processIntersectingRegions(p, func);
