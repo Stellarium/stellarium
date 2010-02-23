@@ -1435,13 +1435,13 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 
 	if (orientInside)
 	{
-		nsign = -1.0;
-		t=0.0; // from inside texture is reversed
+		nsign = -1.f;
+		t=0.f; // from inside texture is reversed
 	}
 	else
 	{
-		nsign = 1.0;
-		t=1.0;
+		nsign = 1.f;
+		t=1.f;
 	}
 
 	const float drho = M_PI / stacks;
@@ -1458,20 +1458,22 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
 	// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
 	// If the texture is flipped, we iterate the coordinates backward.
-	const GLfloat ds = ((flipTexture) ? -1 : 1) * 1.0 / slices;
+	const GLfloat ds = (flipTexture ? -1.f : 1.f) / slices;
 	const GLfloat dt = nsign / stacks; // from inside texture is reversed
 
 	// draw intermediate  as quad strips
 	static QVector<double> vertexArr;
 	static QVector<float> texCoordArr;
 	static QVector<float> colorArr;
+	//static QVector<unsigned int> indiceArr;
 	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
 	{
 		texCoordArr.resize(0);
 		vertexArr.resize(0);
 		colorArr.resize(0);
-		s = (!flipTexture) ? 0.0 : 1.0;
-		for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;++j,cos_sin_theta_p+=2)
+		//indiceArr.resize(0);
+		s = !flipTexture ? 0.f : 1.f;
+		for (j = 0,cos_sin_theta_p = cos_sin_theta; j<=slices;++j,cos_sin_theta_p+=2)
 		{
 			x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
 			y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
@@ -1516,9 +1518,9 @@ void StelPainter::sCylinder(float radius, float height, int slices, int orientIn
 	if (orientInside)
 		glCullFace(GL_FRONT);
 
-	const float da = 2.0 * M_PI / slices;
+	const float da = 2.f * M_PI / slices;
 
-	float ds = 1.0 / slices;
+	float ds = 1.f / slices;
 	QVarLengthArray<Vec2f, 128> texCoordArray;
 	QVarLengthArray<Vec3d, 128> vertexArray;
 	float s = 0.f;
