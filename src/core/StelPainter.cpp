@@ -317,51 +317,63 @@ void StelPainter::sFanDisk(float radius, int innerFanSlices, int level)
 	rad[level] = radius;
 	for (i=level-1;i>=0;--i)
 	{
-		rad[i] = rad[i+1]*(1.0-M_PI/(innerFanSlices<<(i+1)))*2.0/3.0;
+		rad[i] = rad[i+1]*(1.f-M_PI/(innerFanSlices<<(i+1)))*2.f/3.f;
 	}
 	int slices = innerFanSlices<<level;
-	const float dtheta = 2.0 * M_PI / slices;
+	const float dtheta = 2.f * M_PI / slices;
 	Q_ASSERT(slices<=MAX_SLICES);
 	ComputeCosSinTheta(dtheta,slices);
 	float* cos_sin_theta_p;
 	int slices_step = 2;
 	static QVector<double> vertexArr;
 	static QVector<float> texCoordArr;
-	float x,y;
+	float x,y,xa,ya;
+	radius*=2.f;
+	vertexArr.resize(0);
+	texCoordArr.resize(0);
 	for (i=level;i>0;--i,slices_step<<=1)
 	{
 		for (j=0,cos_sin_theta_p=cos_sin_theta; j<slices; j+=slices_step,cos_sin_theta_p+=2*slices_step)
 		{
-			vertexArr.resize(0);
-			texCoordArr.resize(0);
-			x = rad[i]*cos_sin_theta_p[slices_step];
-			y = rad[i]*cos_sin_theta_p[slices_step+1];
-			texCoordArr << 0.5f*(1.f+x/radius) << 0.5f*(1.f+y/radius);
-			vertexArr << x << y << 0;
+			xa = rad[i]*cos_sin_theta_p[slices_step];
+			ya = rad[i]*cos_sin_theta_p[slices_step+1];
+			texCoordArr << 0.5f+xa/radius << 0.5f+ya/radius;
+			vertexArr << xa << ya << 0;
 
 			x = rad[i]*cos_sin_theta_p[2*slices_step];
 			y = rad[i]*cos_sin_theta_p[2*slices_step+1];
-			texCoordArr << 0.5f*(1.f+x/radius) << 0.5f*(1.f+y/radius);
+			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
 			vertexArr << x << y << 0;
 
 			x = rad[i-1]*cos_sin_theta_p[2*slices_step];
 			y = rad[i-1]*cos_sin_theta_p[2*slices_step+1];
-			texCoordArr << 0.5f*(1.f+x/radius) << 0.5f*(1.f+y/radius);
+			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+			vertexArr << x << y << 0;
+
+			texCoordArr << 0.5f+xa/radius << 0.5f+ya/radius;
+			vertexArr << xa << ya << 0;
+			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
 			vertexArr << x << y << 0;
 
 			x = rad[i-1]*cos_sin_theta_p[0];
 			y = rad[i-1]*cos_sin_theta_p[1];
-			texCoordArr << 0.5f*(1.f+x/radius) << 0.5f*(1.f+y/radius);
+			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+			vertexArr << x << y << 0;
+
+			texCoordArr << 0.5f+xa/radius << 0.5f+ya/radius;
+			vertexArr << xa << ya << 0;
+			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
 			vertexArr << x << y << 0;
 
 			x = rad[i]*cos_sin_theta_p[0];
 			y = rad[i]*cos_sin_theta_p[1];
-			texCoordArr << 0.5f*(1.f+x/radius) << 0.5f*(1.f+y/radius);
+			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
 			vertexArr << x << y << 0;
-			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
-			drawFromArray(TriangleFan, vertexArr.size()/3);
 		}
 	}
+	setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
+	drawFromArray(Triangles, vertexArr.size()/3);
+
 	// draw the inner polygon
 	slices_step>>=1;
 	vertexArr.resize(0);
@@ -372,7 +384,7 @@ void StelPainter::sFanDisk(float radius, int innerFanSlices, int level)
 	{
 		x = rad[0]*cos_sin_theta_p[0];
 		y = rad[0]*cos_sin_theta_p[1];
-		texCoordArr << 0.5f*(1.f+x/radius) << 0.5f*(1.f+y/radius);
+		texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
 		vertexArr << x << y << 0;
 	}
 	setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
