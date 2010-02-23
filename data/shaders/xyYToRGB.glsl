@@ -1,5 +1,5 @@
-const mediump float pi = 3.1415926535897931;
-const mediump float ln10 = 2.3025850929940459;
+const highp float pi = 3.1415926535897931;
+const highp float ln10 = 2.3025850929940459;
 
 // Variable for the xyYTo RGB conversion
 uniform mediump float alphaWaOverAlphaDa;
@@ -13,10 +13,10 @@ uniform mediump float term_x, Ax, Bx, Cx, Dx, Ex;
 uniform mediump float term_y, Ay, By, Cy, Dy, Ey;
 
 // The current projection matrix
-uniform mediump mat4 projectionMatrix;
+uniform highp mat4 projectionMatrix;
 
 // Contains the 2d position of the point on the screen (before multiplication by the projection matrix)
-attribute mediump vec2 skyVertex;
+attribute highp vec2 skyVertex;
 
 // Contains the r,g,b,Y (luminosity) components.
 attribute highp vec4 skyColor;
@@ -26,7 +26,7 @@ varying mediump vec4 resultSkyColor;
 
 void main()
 {
-	gl_Position = projectionMatrix*vec4(skyVertex, 0., 1);
+	gl_Position = projectionMatrix*vec4(skyVertex, 0., 1.);
 	vec4 color = skyColor;
 
 	///////////////////////////////////////////////////////////////////////////
