@@ -1465,13 +1465,13 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	static QVector<double> vertexArr;
 	static QVector<float> texCoordArr;
 	static QVector<float> colorArr;
-	//static QVector<unsigned int> indiceArr;
+	static QVector<unsigned int> indiceArr;
+	texCoordArr.resize(0);
+	vertexArr.resize(0);
+	colorArr.resize(0);
+	indiceArr.resize(0);
 	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
 	{
-		texCoordArr.resize(0);
-		vertexArr.resize(0);
-		colorArr.resize(0);
-		//indiceArr.resize(0);
 		s = !flipTexture ? 0.f : 1.f;
 		for (j = 0,cos_sin_theta_p = cos_sin_theta; j<=slices;++j,cos_sin_theta_p+=2)
 		{
@@ -1499,14 +1499,22 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 			vertexArr << x * radius << y * radius << z * oneMinusOblateness * radius;
 			s += ds;
 		}
-		// Draw the array now
-		if (isLightOn)
-			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData());
-		else
-			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
-		drawFromArray(TriangleStrip, vertexArr.size()/3);
+		unsigned int offset = i*(slices+1)*2;
+		Q_ASSERT(offset==vertexArr.size()/3*i);
+		for (j = 2;j<slices*2+2;j+=2)
+		{
+			indiceArr << offset+j-2 << offset+j-1 << offset+j;
+			indiceArr << offset+j << offset+j-1 << offset+j+1;
+		}
 		t -= dt;
 	}
+
+	// Draw the array now
+	if (isLightOn)
+		setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData());
+	else
+		setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
+	drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
 
 	if (isLightOn)
 		light.enable();
