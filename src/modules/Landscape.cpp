@@ -6,7 +6,7 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -57,7 +57,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	{
 		validLandscape = 1;
 	}
-	
+
 	// Optional data
 	if (landscapeIni.contains("location/planet"))
 		location.planetName = landscapeIni.value("location/planet").toString();
@@ -65,15 +65,15 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		location.planetName = "Earth";
 	if (landscapeIni.contains("location/altitude"))
 		location.altitude = landscapeIni.value("location/altitude").toInt();
-	if (landscapeIni.contains("location/latitude")) 
+	if (landscapeIni.contains("location/latitude"))
 		location.latitude = StelUtils::getDecAngle(landscapeIni.value("location/latitude").toString())*180./M_PI;
-	if (landscapeIni.contains("location/longitude")) 
+	if (landscapeIni.contains("location/longitude"))
 		location.longitude = StelUtils::getDecAngle(landscapeIni.value("location/longitude").toString())*180./M_PI;
-	if (landscapeIni.contains("location/country")) 
+	if (landscapeIni.contains("location/country"))
 		location.country = landscapeIni.value("location/country").toString();
-	if (landscapeIni.contains("location/state")) 
+	if (landscapeIni.contains("location/state"))
 		location.state = landscapeIni.value("location/state").toString();
-	if (landscapeIni.contains("location/name")) 
+	if (landscapeIni.contains("location/name"))
 		location.name = landscapeIni.value("location/name").toString();
 	else
 		location.name = name;
@@ -118,8 +118,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	QString type = landscapeIni.value("landscape/type").toString();
 	if(type != "old_style")
 	{
-		qWarning() << "Landscape type mismatch for landscape " << landscapeId 
-		           << ", expected old_style, found " << type << ".  No landscape in use.";
+		qWarning() << "Landscape type mismatch for landscape " << landscapeId
+				   << ", expected old_style, found " << type << ".  No landscape in use.";
 		validLandscape = 0;
 		return;
 	}
@@ -193,7 +193,7 @@ void LandscapeOldStyle::create(bool _fullpath, QMap<QString, QString> param)
 	// Load sides textures
 	nbSideTexs = param["nbsidetex"].toInt();
 	sideTexs = new StelTextureSP[nbSideTexs];
-	
+
 	char tmp[255];
 	//StelApp::getInstance().getTextureManager().setMipmapsMode(true);
 	//StelApp::getInstance().getTextureManager().setMagFilter(GL_NEAREST);
@@ -224,7 +224,7 @@ void LandscapeOldStyle::create(bool _fullpath, QMap<QString, QString> param)
 
 	bool ok;
 	nbDecorRepeat = param["nb_decor_repeat"].toInt(&ok);
-	
+
 	if (!ok)
 		nbDecorRepeat = 1;
 
@@ -280,13 +280,13 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 {
 	if (!fogFader.getInterstate())
 		return;
-	
+
 	const float vpos = tanMode ? radius*std::tan(fogAngleShift*M_PI/180.) : radius*std::sin(fogAngleShift*M_PI/180.);
 	sPainter.setProjector(core->getProjection(core->getNavigator()->getAltAzModelViewMat() * Mat4d::translation(Vec3d(0.,0.,vpos))));
 	glBlendFunc(GL_ONE, GL_ONE);
 	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
 	sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
-	          fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter, 
+			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter,
 			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter);
 	fogTex->bind();
 	const float height = tanMode ? radius*std::tan(fogAltAngle*M_PI/180.) : radius*std::sin(fogAltAngle*M_PI/180.);
@@ -298,7 +298,7 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
 {
 	sPainter.setProjector(core->getProjection(StelCore::FrameAltAz));
-	
+
 	if (!landFader.getInterstate())
 		return;
 	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
@@ -317,7 +317,7 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
 	const float sa = std::sin(alpha);
 	float y0 = radius*std::cos((angleRotateZ+angleRotateZOffset)*M_PI/180.0);
 	float x0 = radius*std::sin((angleRotateZ+angleRotateZOffset)*M_PI/180.0);
-	
+
 	QVector<Vec2f> texCoordsArray(stacks*2+2);
 	QVector<Vec3d> vertexArray(stacks*2+2);
 	for (int n=0;n<nbDecorRepeat;n++) for (int i=0;i<nbSide;i++) {
@@ -389,7 +389,7 @@ LandscapeFisheye::~LandscapeFisheye()
 void LandscapeFisheye::load(const QSettings& landscapeIni, const QString& landscapeId)
 {
 	loadCommon(landscapeIni, landscapeId);
-	
+
 	QString type = landscapeIni.value("landscape/type").toString();
 	if(type != "fisheye")
 	{
@@ -405,7 +405,7 @@ void LandscapeFisheye::load(const QSettings& landscapeIni, const QString& landsc
 
 // create a fisheye landscape from basic parameters (no ini file needed)
 void LandscapeFisheye::create(const QString _name, bool _fullpath, const QString& _maptex,
-	                          double _texturefov, double _angleRotateZ)
+							  double _texturefov, double _angleRotateZ)
 {
 	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	validLandscape = 1;  // assume ok...
@@ -424,7 +424,7 @@ void LandscapeFisheye::draw(StelCore* core)
 	StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(nav->getAltAzModelViewMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
 	StelPainter sPainter(prj);
-	
+
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
@@ -452,12 +452,12 @@ LandscapeSpherical::~LandscapeSpherical()
 void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& landscapeId)
 {
 	loadCommon(landscapeIni, landscapeId);
-	
+
 	QString type = landscapeIni.value("landscape/type").toString();
 	if (type != "spherical")
 	{
-		qWarning() << "Landscape type mismatch for landscape "<< landscapeId 
-			<< ", expected spherical, found " << type 
+		qWarning() << "Landscape type mismatch for landscape "<< landscapeId
+			<< ", expected spherical, found " << type
 			<< ".  No landscape in use.\n";
 		validLandscape = 0;
 		return;
@@ -470,7 +470,7 @@ void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& land
 
 // create a spherical landscape from basic parameters (no ini file needed)
 void LandscapeSpherical::create(const QString _name, bool _fullpath, const QString& _maptex,
-	                            double _angleRotateZ)
+								double _angleRotateZ)
 {
 	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	validLandscape = 1;  // assume ok...
