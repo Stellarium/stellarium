@@ -239,7 +239,7 @@ void LeftStelBar::addButton(StelButton* button)
 	}
 	button->setParentItem(this);
 	button->prepareGeometryChange(); // could possibly be removed when qt 4.6 become stable
-	button->setPos(0.5, posY+10.5);
+	button->setPos(0., round(posY+10.5));
 
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
 }
@@ -287,7 +287,7 @@ void LeftStelBar::buttonHoverChanged(bool b)
 				tip += "  [" + shortcut + "]";
 			}
 			helpLabel->setText(tip);
-			helpLabel->setPos(boundingRectNoHelpLabel().width()+15.5,button->pos().y()+button->pixmap().size().height()/2-8);
+			helpLabel->setPos(round(boundingRectNoHelpLabel().width()+15.5),round(button->pos().y()+button->pixmap().size().height()/2-8));
 		}
 	}
 	else
