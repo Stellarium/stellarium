@@ -113,17 +113,17 @@ public:
 
 public slots:
 	//! Set the way brighter stars will look bigger as the fainter ones
-	void setRelativeStarScale(float b=1.0) {starRelativeScale=b;}
+	void setRelativeStarScale(double b=1.0) {starRelativeScale=b;}
 	//! Get the way brighter stars will look bigger as the fainter ones
 	float getRelativeStarScale() const {return starRelativeScale;}
 
 	//! Set the absolute star brightness scale
-	void setAbsoluteStarScale(float b=1.0) {starAbsoluteScaleF=b;}
+	void setAbsoluteStarScale(double b=1.0) {starAbsoluteScaleF=b;}
 	//! Get the absolute star brightness scale
 	float getAbsoluteStarScale() const {return starAbsoluteScaleF;}
 
 	//! Set source twinkle amount.
-	void setTwinkleAmount(float b) {twinkleAmount=b;}
+	void setTwinkleAmount(double b) {twinkleAmount=b;}
 	//! Get source twinkle amount.
 	float getTwinkleAmount() const {return twinkleAmount;}
 
