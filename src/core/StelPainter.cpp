@@ -1500,7 +1500,6 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 			s += ds;
 		}
 		unsigned int offset = i*(slices+1)*2;
-		Q_ASSERT(offset==vertexArr.size()/3*i);
 		for (j = 2;j<slices*2+2;j+=2)
 		{
 			indiceArr << offset+j-2 << offset+j-1 << offset+j;
