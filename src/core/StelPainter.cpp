@@ -265,8 +265,8 @@ static void ComputeCosSinTheta(float phi,int segments)
 	float *cos_sin_rev = cos_sin + 2*(segments+1);
 	const float c = std::cos(phi);
 	const float s = std::sin(phi);
-	*cos_sin++ = 1.0;
-	*cos_sin++ = 0.0;
+	*cos_sin++ = 1.f;
+	*cos_sin++ = 0.f;
 	*--cos_sin_rev = -cos_sin[-1];
 	*--cos_sin_rev =  cos_sin[-2];
 	*cos_sin++ = c;
@@ -289,8 +289,8 @@ static void ComputeCosSinRho(float phi, int segments)
 	float *cos_sin_rev = cos_sin + 2*(segments+1);
 	const float c = cos(phi);
 	const float s = sin(phi);
-	*cos_sin++ = 1.0;
-	*cos_sin++ = 0.0;
+	*cos_sin++ = 1.f;
+	*cos_sin++ = 0.f;
 	*--cos_sin_rev =  cos_sin[-1];
 	*--cos_sin_rev = -cos_sin[-2];
 	*cos_sin++ = c;
