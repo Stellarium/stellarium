@@ -318,32 +318,46 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
 	float y0 = radius*std::cos((angleRotateZ+angleRotateZOffset)*M_PI/180.0);
 	float x0 = radius*std::sin((angleRotateZ+angleRotateZOffset)*M_PI/180.0);
 
-	QVector<Vec2f> texCoordsArray(stacks*2+2);
-	QVector<Vec3d> vertexArray(stacks*2+2);
-	for (int n=0;n<nbDecorRepeat;n++) for (int i=0;i<nbSide;i++) {
-		sides[i].tex->bind();
-		float tx0 = sides[i].texCoords[0];
-		const float d_tx0 = (sides[i].texCoords[2]-sides[i].texCoords[0]) / slices_per_side;
-		const float d_ty = (sides[i].texCoords[3]-sides[i].texCoords[1]) / stacks;
-		for (int j=0;j<slices_per_side;j++) {
-			const float y1 = y0*ca - x0*sa;
-			const float x1 = y0*sa + x0*ca;
-			const float tx1 = tx0 + d_tx0;
-			float z = z0;
-			float ty0 = sides[i].texCoords[1];
-			for (int k=0;k<=stacks*2;k+=2) {
-				texCoordsArray[k].set(tx0, ty0);
-				texCoordsArray[k+1].set(tx1, ty0);
-				vertexArray[k].set(x0, y0, z);
-				vertexArray[k+1].set(x1, y1, z);
-				z += d_z;
-				ty0 += d_ty;
+	static QVector<Vec2f> texCoordsArray;
+	static QVector<Vec3d> vertexArray;
+	static QVector<unsigned int> indiceArray;
+	for (int n=0;n<nbDecorRepeat;n++)
+	{
+		for (int i=0;i<nbSide;i++)
+		{
+			texCoordsArray.resize(0);
+			vertexArray.resize(0);
+			indiceArray.resize(0);
+			sides[i].tex->bind();
+			float tx0 = sides[i].texCoords[0];
+			const float d_tx0 = (sides[i].texCoords[2]-sides[i].texCoords[0]) / slices_per_side;
+			const float d_ty = (sides[i].texCoords[3]-sides[i].texCoords[1]) / stacks;
+			for (int j=0;j<slices_per_side;j++)
+			{
+				const float y1 = y0*ca - x0*sa;
+				const float x1 = y0*sa + x0*ca;
+				const float tx1 = tx0 + d_tx0;
+				float z = z0;
+				float ty0 = sides[i].texCoords[1];
+				for (int k=0;k<=stacks*2;k+=2)
+				{
+					texCoordsArray << Vec2f(tx0, ty0) << Vec2f(tx1, ty0);
+					vertexArray << Vec3d(x0, y0, z) << Vec3d(x1, y1, z);
+					z += d_z;
+					ty0 += d_ty;
+				}
+				unsigned int offset = j*(stacks+1)*2;
+				for (int k = 2;k<stacks*2+2;k+=2)
+				{
+					indiceArray << offset+k-2 << offset+k-1 << offset+k;
+					indiceArray << offset+k << offset+k-1 << offset+k+1;
+				}
+				y0 = y1;
+				x0 = x1;
+				tx0 = tx1;
 			}
-			StelVertexArray array(vertexArray, StelVertexArray::TriangleStrip, texCoordsArray);
+			StelVertexArray array(vertexArray, StelVertexArray::Triangles, texCoordsArray, indiceArray);
 			sPainter.drawSphericalTriangles(array, true, NULL, false);
-			y0 = y1;
-			x0 = x1;
-			tx0 = tx1;
 		}
 	}
 }
