@@ -1525,25 +1525,18 @@ void StelPainter::sCylinder(float radius, float height, int slices, int orientIn
 	if (orientInside)
 		glCullFace(GL_FRONT);
 
-	const float da = 2.f * M_PI / slices;
-
-	float ds = 1.f / slices;
-	QVarLengthArray<Vec2f, 128> texCoordArray;
-	QVarLengthArray<Vec3d, 128> vertexArray;
+	static QVarLengthArray<Vec2f, 512> texCoordArray;
+	static QVarLengthArray<Vec3d, 512> vertexArray;
+	texCoordArray.clear();
+	vertexArray.clear();
 	float s = 0.f;
 	float x, y;
-	for (int i = 0; i <= slices; i++)
+	const float ds = 1.f / slices;
+	const float da = 2.f * M_PI / slices;
+	for (int i = 0; i <= slices; ++i)
 	{
-		if (i == slices)
-		{
-			x = 0.f;
-			y = 1.f;
-		}
-		else
-		{
-			x = std::sin(da*i);
-			y = std::cos(da*i);
-		}
+		x = std::sin(da*i);
+		y = std::cos(da*i);
 		texCoordArray.append(Vec2f(s, 0.f));
 		vertexArray.append(Vec3d(x*radius, y*radius, 0.));
 		texCoordArray.append(Vec2f(s, 1.f));
