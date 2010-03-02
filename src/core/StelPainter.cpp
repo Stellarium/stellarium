@@ -396,7 +396,22 @@ void StelPainter::sRing(float rMin, float rMax, int slices, int stacks, int orie
 	float x,y;
 	int j;
 
-	const float nsign = (orientInside)?-1.0:1.0;
+	static Vec3f lightPos3;
+	static Vec4f ambientLight;
+	static Vec4f diffuseLight;
+	float c;
+	const bool isLightOn = light.isEnabled();
+	if (isLightOn)
+	{
+		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
+		lightPos3 -= prj->modelViewMatrix * Vec3d(0.,0.,0.); // -posCenterEye
+		lightPos3 = prj->modelViewMatrix.transpose().multiplyWithoutTranslation(lightPos3);
+		lightPos3.normalize();
+		ambientLight = light.getAmbient();
+		diffuseLight = light.getDiffuse();
+	}
+
+	const float nsign = orientInside?-1.f:1.f;
 
 	const float dr = (rMax-rMin) / stacks;
 	const float dtheta = 2.f * M_PI / slices;
@@ -407,7 +422,7 @@ void StelPainter::sRing(float rMin, float rMax, int slices, int stacks, int orie
 
 	static QVector<double> vertexArr;
 	static QVector<float> texCoordArr;
-	static QVector<float> normalArr;
+	static QVector<float> colorArr;
 
 	// draw intermediate stacks as quad strips
 	for (float r = rMin; r < rMax; r+=dr)
@@ -416,21 +431,35 @@ void StelPainter::sRing(float rMin, float rMax, int slices, int stacks, int orie
 		const float tex_r1 = (r+dr-rMin)/(rMax-rMin);
 		vertexArr.resize(0);
 		texCoordArr.resize(0);
-		normalArr.resize(0);
+		colorArr.resize(0);
 		for (j=0,cos_sin_theta_p=cos_sin_theta; j<=slices; ++j,cos_sin_theta_p+=2)
 		{
 			x = r*cos_sin_theta_p[0];
 			y = r*cos_sin_theta_p[1];
-			normalArr << 0 << 0 << nsign;
-			texCoordArr << tex_r0 << 0.5;
-			vertexArr << x << y << 0;
+			if (isLightOn)
+			{
+				c = nsign * (lightPos3[0]*x + lightPos3[1]*y);
+				if (c<0) {c=0;}
+				colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
+			}
+			texCoordArr << tex_r0 << 0.5f;
+			vertexArr << x << y << 0.f;
 			x = (r+dr)*cos_sin_theta_p[0];
 			y = (r+dr)*cos_sin_theta_p[1];
-			normalArr << 0 << 0 << nsign;
-			texCoordArr << tex_r1 << 0.5;
-			vertexArr << x << y << 0;
+			if (isLightOn)
+			{
+				c = nsign * (lightPos3[0]*x + lightPos3[1]*y);
+				if (c<0) {c=0;}
+				colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
+			}
+			texCoordArr << tex_r1 << 0.5f;
+			vertexArr << x << y << 0.f;
 		}
-		setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), NULL, (Vec3f*)normalArr.constData());
+
+		if (isLightOn)
+			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData());
+		else
+			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
 		drawFromArray(TriangleStrip, vertexArr.size()/3);
 	}
 }
@@ -1410,22 +1439,18 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	// static rather than on the stack. But why?
 	// Is the constructor/destructor so expensive?
 	static Vec3f lightPos3;
-	float c;
-
 	static Vec4f ambientLight;
 	static Vec4f diffuseLight;
-
-	bool isLightOn = light.isEnabled();
-
+	float c;
+	const bool isLightOn = light.isEnabled();
 	if (isLightOn)
 	{
 		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
-		lightPos3 -= prj->modelViewMatrix * Vec3d(0.,0.,0.); // -posCenterEye
+		lightPos3 -= prj->modelViewMatrix * Vec3d(0.,0.,0.);
 		lightPos3 = prj->modelViewMatrix.transpose().multiplyWithoutTranslation(lightPos3);
 		lightPos3.normalize();
 		ambientLight = light.getAmbient();
 		diffuseLight = light.getDiffuse();
-		light.disable();
 	}
 
 	GLfloat x, y, z;
@@ -1514,9 +1539,6 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	else
 		setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
 	drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
-
-	if (isLightOn)
-		light.enable();
 }
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
@@ -1880,33 +1902,21 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 void StelPainterLight::setPosition(const Vec4f& v)
 {
 	position = v;
-#ifndef STELPAINTER_GL2
-	glLightfv(GL_LIGHT0 + light, GL_POSITION, v);
-#endif
 }
 
 void StelPainterLight::setDiffuse(const Vec4f& v)
 {
 	diffuse = v;
-#ifndef STELPAINTER_GL2
-	glLightfv(GL_LIGHT0 + light, GL_DIFFUSE, v);
-#endif
 }
 
 void StelPainterLight::setSpecular(const Vec4f& v)
 {
 	specular = v;
-#ifndef STELPAINTER_GL2
-	glLightfv(GL_LIGHT0 + light, GL_SPECULAR, v);
-#endif
 }
 
 void StelPainterLight::setAmbient(const Vec4f& v)
 {
 	ambient = v;
-#ifndef STELPAINTER_GL2
-	glLightfv(GL_LIGHT0 + light, GL_AMBIENT, v);
-#endif
 }
 
 void StelPainterLight::setEnable(bool v)
@@ -1920,17 +1930,11 @@ void StelPainterLight::setEnable(bool v)
 void StelPainterLight::enable()
 {
 	enabled = true;
-#ifndef STELPAINTER_GL2
-	glEnable(GL_LIGHTING);
-#endif
 }
 
 void StelPainterLight::disable()
 {
 	enabled = false;
-#ifndef STELPAINTER_GL2
-	glDisable(GL_LIGHTING);
-#endif
 }
 
 
@@ -1943,31 +1947,19 @@ StelPainterMaterial::StelPainterMaterial()
 void StelPainterMaterial::setSpecular(const Vec4f& v)
 {
 	specular = v;
-#ifndef STELPAINTER_GL2
-	glMaterialfv(GL_FRONT, GL_SPECULAR, v);
-#endif
 }
 
 void StelPainterMaterial::setAmbient(const Vec4f& v)
 {
 	ambient = v;
-#ifndef STELPAINTER_GL2
-	glMaterialfv(GL_FRONT, GL_AMBIENT, v);
-#endif
 }
 
 void StelPainterMaterial::setEmission(const Vec4f& v)
 {
 	emission = v;
-#ifndef STELPAINTER_GL2
-	glMaterialfv(GL_FRONT, GL_EMISSION, v);
-#endif
 }
 
 void StelPainterMaterial::setShininess(float v)
 {
 	shininess = v;
-#ifndef STELPAINTER_GL2
-	glMaterialfv(GL_FRONT, GL_SHININESS, &v);
-#endif
 }
