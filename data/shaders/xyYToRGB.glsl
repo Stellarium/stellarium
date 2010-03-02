@@ -13,10 +13,10 @@ uniform mediump float term_x, Ax, Bx, Cx, Dx, Ex;
 uniform mediump float term_y, Ay, By, Cy, Dy, Ey;
 
 // The current projection matrix
-uniform highp mat4 projectionMatrix;
+uniform mediump mat4 projectionMatrix;
 
 // Contains the 2d position of the point on the screen (before multiplication by the projection matrix)
-attribute highp vec2 skyVertex;
+attribute mediump vec2 skyVertex;
 
 // Contains the r,g,b,Y (luminosity) components.
 attribute highp vec4 skyColor;
@@ -27,7 +27,7 @@ varying mediump vec4 resultSkyColor;
 void main()
 {
 	gl_Position = projectionMatrix*vec4(skyVertex, 0., 1.);
-	vec4 color = skyColor;
+	highp vec4 color = skyColor;
 
 	///////////////////////////////////////////////////////////////////////////
 	// First compute the xy color component
@@ -35,9 +35,9 @@ void main()
 	// + the Y (luminance) component of the color in the alpha channel
 	if (color[3]>0.01)
 	{
-		float cosDistSunq = sunPos[0]*color[0] + sunPos[1]*color[1] + sunPos[2]*color[2];
-		float distSun=acos(cosDistSunq);
-		float oneOverCosZenithAngle = (color[2]==0.) ? 99999999. : 1. / color[2];
+		highp float cosDistSunq = sunPos[0]*color[0] + sunPos[1]*color[1] + sunPos[2]*color[2];
+		highp float distSun=acos(cosDistSunq);
+		highp float oneOverCosZenithAngle = (color[2]==0.) ? 9999999999999. : 1. / color[2];
 
 		cosDistSunq*=cosDistSunq;
 		color[0] = term_x * (1. + Ax * exp(Bx*oneOverCosZenithAngle))* (1. + Cx * exp(Dx*distSun) + Ex * cosDistSunq);
