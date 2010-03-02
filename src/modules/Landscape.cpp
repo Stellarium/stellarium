@@ -290,7 +290,7 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter);
 	fogTex->bind();
 	const float height = tanMode ? radius*std::tan(fogAltAngle*M_PI/180.) : radius*std::sin(fogAltAngle*M_PI/180.);
-	sPainter.sCylinder(radius, height, 128, 1);
+	sPainter.sCylinder(radius, height, 64, 1);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
