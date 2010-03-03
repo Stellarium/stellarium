@@ -194,6 +194,10 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 				zoomOut(true); break;
 			case Qt::Key_Shift:
 				moveSlow(true); break;
+			case Qt::Key_Space:
+				if (event->modifiers().testFlag(Qt::ControlModifier))
+					setDragTimeMode(true);
+				break;
 			default:
 				return;
 		}
@@ -221,6 +225,9 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 				zoomOut(false); break;
 			case Qt::Key_Shift:
 				moveSlow(false); break;
+			case Qt::Key_Control:
+				setDragTimeMode(false);
+				break;
 			default:
 				return;
 		}
