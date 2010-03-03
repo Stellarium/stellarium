@@ -194,6 +194,9 @@ public slots:
 	//! Get current mount type defining the reference frame in which head movements occur.
 	MountMode getMountMode(void) const {return mountMode;}
 
+	void setDragTimeMode(bool b) {dragTimeMode=b;}
+	bool getDragTimeMode() const {return dragTimeMode;}
+
 private:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
 	Vec3d mountFrameToJ2000(const Vec3d& v) const;
@@ -265,6 +268,11 @@ private:
 	// Mouse control options
 	bool isDragging, hasDragged;
 	int previousX, previousY;
+
+	// Time mouse control
+	bool dragTimeMode;
+	double startDragT;
+	double startDragJDay;
 
 	//! @internal
 	//! Store data for auto-zoom.
