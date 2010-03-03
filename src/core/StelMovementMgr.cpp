@@ -44,6 +44,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore) : core(acore),
 	deltaFov(0.),
 	deltaAlt(0.),
 	deltaAz(0.),
+	dragTimeMode(false),
 	flagAutoZoom(0),
 	flagAutoZoomOutResetsDirection(0)
 {
@@ -250,6 +251,8 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 				hasDragged = false;
 				previousX = event->x();
 				previousY = event->y();
+				startDragT = StelApp::getInstance().getTotalRunTime();
+				startDragJDay = core->getNavigator()->getJDay();
 				event->accept();
 				return;
 			}
@@ -261,6 +264,10 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 					if (hasDragged)
 					{
 						event->accept();
+						if (dragTimeMode)
+						{
+							core->getNavigator()->setTimeRate((core->getNavigator()->getJDay()-startDragJDay)/(StelApp::getInstance().getTotalRunTime()-startDragT));
+						}
 						return;
 					}
 					else
@@ -719,14 +726,30 @@ void StelMovementMgr::panView(double deltaAz, double deltaAlt)
 //! Make the first screen position correspond to the second (useful for mouse dragging)
 void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 {
-	Vec3d tempvec1, tempvec2;
-	double az1, alt1, az2, alt2;
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	prj->unProject(x2,y2, tempvec2);
-	prj->unProject(x1,y1, tempvec1);
-	StelUtils::rectToSphe(&az1, &alt1, j2000ToMountFrame(tempvec1));
-	StelUtils::rectToSphe(&az2, &alt2, j2000ToMountFrame(tempvec2));
-	panView(az2-az1, alt1-alt2);
+	if (dragTimeMode)
+	{
+		core->getNavigator()->setTimeRate(0);
+		Vec3d v1, v2;
+		const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
+		prj->unProject(x2,y2, v2);
+		prj->unProject(x1,y1, v1);
+		v1[2]=0; v1.normalize();
+		v2[2]=0; v2.normalize();
+		double angle = (v2^v1)[2];
+		double deltaDay = angle/(2.*M_PI)*core->getNavigator()->getLocalSideralDayLength();
+		core->getNavigator()->setJDay(core->getNavigator()->getJDay()+deltaDay);
+	}
+	else
+	{
+		Vec3d tempvec1, tempvec2;
+		const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+		prj->unProject(x2,y2, tempvec2);
+		prj->unProject(x1,y1, tempvec1);
+		double az1, alt1, az2, alt2;
+		StelUtils::rectToSphe(&az1, &alt1, j2000ToMountFrame(tempvec1));
+		StelUtils::rectToSphe(&az2, &alt2, j2000ToMountFrame(tempvec2));
+		panView(az2-az1, alt1-alt2);
+	}
 	setFlagTracking(false);
 	setFlagLockEquPos(false);
 }
