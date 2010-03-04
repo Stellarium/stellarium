@@ -41,6 +41,11 @@ Source: "C:\Program Files\Stellarium\share\stellarium\*"; DestDir: "{app}\"; Fla
 ; Locales
 Source: "C:\Program Files\Stellarium\share\locale\*"; DestDir: "{app}\locale\"; Flags: recursesubdirs
 
+[Tasks]
+Name: desktopicon; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
+Name: desktopicon\common; Description: "For all users"; GroupDescription: "Additional icons:"; Flags: exclusive
+Name: desktopicon\user; Description: "For the current user only"; GroupDescription: "Additional icons:"; Flags: exclusive unchecked
+
 [UninstallDelete]
 
 [Icons]
@@ -48,4 +53,5 @@ Name: "{group}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}
 Name: "{group}\Uninstall Stellarium"; Filename: "{uninstallexe}"
 Name: "{group}\config.ini"; Filename: "{userappdata}\Stellarium\config.ini"
 Name: "{group}\Last run log"; Filename: "{userappdata}\Stellarium\log.txt"
-
+Name: "{commondesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\common
+Name: "{userdesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\user
