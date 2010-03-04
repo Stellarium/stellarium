@@ -90,6 +90,8 @@ SET(ENABLE_STRATOSCRIPT_COMPAT 0 CACHE BOOL "Set to 1 or true if you want to bui
 SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
 SET(OPENGL_MODE Desktop CACHE STRING "Choose the type of openGL to use, options are: Desktop, ES2")
 
+SET(GENERATE_PACKAGE_TARGET 1 CACHE BOOL "Set to 1 or true if you want to have make package target")
+
 # On WIN32 we need to split the main binary into a small binary and a dll
 # This is for allowing to link dynamic plug-ins afterward
 IF(WIN32)
@@ -257,24 +259,25 @@ ADD_CUSTOM_TARGET(uninstall
   "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
 ########### Packaging info for CPack ###########
-INCLUDE(InstallRequiredSystemLibraries)
 
-SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Stellarium is a free open source planetarium for your computer. It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.")
-SET(CPACK_PACKAGE_VENDOR "Stellarium's team")
-SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
-SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
-SET(CPACK_PACKAGE_VERSION_MAJOR ${STELLARIUM_MAJOR})
-SET(CPACK_PACKAGE_VERSION_MINOR ${STELLARIUM_MINOR})
-SET(CPACK_PACKAGE_VERSION_PATCH ${STELLARIUM_PATCH})
-SET(CPACK_PACKAGE_INSTALL_DIRECTORY "stellarium")
-SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${VERSION}")
-SET(CPACK_SOURCE_GENERATOR "TGZ")
-SET(CPACK_GENERATOR "TGZ")
-SET(CPACK_STRIP_FILES "bin/stellarium")
-SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
-SET(CPACK_SOURCE_IGNORE_FILES "/CVS/" "/.svn/" "/.git/" "builds/" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "~$" "\\\\.swp$" "\\\\.#" "/#")
-INCLUDE(CPack)
-
+IF(GENERATE_PACKAGE_TARGET)
+  INCLUDE(InstallRequiredSystemLibraries)
+  SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Stellarium is a free open source planetarium for your computer. It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.")
+  SET(CPACK_PACKAGE_VENDOR "Stellarium's team")
+  SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
+  SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
+  SET(CPACK_PACKAGE_VERSION_MAJOR ${STELLARIUM_MAJOR})
+  SET(CPACK_PACKAGE_VERSION_MINOR ${STELLARIUM_MINOR})
+  SET(CPACK_PACKAGE_VERSION_PATCH ${STELLARIUM_PATCH})
+  SET(CPACK_PACKAGE_INSTALL_DIRECTORY "stellarium")
+  SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${VERSION}")
+  SET(CPACK_SOURCE_GENERATOR "TGZ")
+  SET(CPACK_GENERATOR "TGZ")
+  SET(CPACK_STRIP_FILES "bin/stellarium")
+  SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
+  SET(CPACK_SOURCE_IGNORE_FILES "/CVS/" "/.svn/" "/.git/" "builds/" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "~$" "\\\\.swp$" "\\\\.#" "/#")
+  INCLUDE(CPack)
+ENDIF()
 
 ########### Macosx Bundling ###############
 IF(APPLE)
