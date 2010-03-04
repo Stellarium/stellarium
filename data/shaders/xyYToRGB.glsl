@@ -2,13 +2,13 @@ const highp float pi = 3.1415926535897931;
 const highp float ln10 = 2.3025850929940459;
 
 // Variable for the xyYTo RGB conversion
-uniform mediump float alphaWaOverAlphaDa;
-uniform mediump float oneOverGamma;
-uniform mediump float term2TimesOneOverMaxdLpOneOverGamma;
-uniform mediump float brightnessScale;
+uniform highp float alphaWaOverAlphaDa;
+uniform highp float oneOverGamma;
+uniform highp float term2TimesOneOverMaxdLpOneOverGamma;
+uniform highp float brightnessScale;
 
 // Variables for the color computation
-uniform mediump vec3 sunPos;
+uniform highp vec3 sunPos;
 uniform mediump float term_x, Ax, Bx, Cx, Dx, Ex;
 uniform mediump float term_y, Ay, By, Cy, Dy, Ey;
 
