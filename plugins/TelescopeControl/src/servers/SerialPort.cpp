@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include "SerialPort.hpp"
 #include "LogFile.hpp"
 
-#ifndef WIN32
+#ifndef Q_OS_WIN32
 #include <unistd.h>
 #endif
 
@@ -35,7 +35,7 @@ using namespace std;
 
 SerialPort::SerialPort(Server &server, const char *serial_device) : Connection(server, INVALID_SOCKET)
 {
-#ifdef WIN32
+#ifdef Q_OS_WIN32
 	handle = CreateFile(serial_device, GENERIC_READ|GENERIC_WRITE, 0, 0, OPEN_EXISTING, 0, 0);
 	if (handle == INVALID_HANDLE_VALUE)
 	{
@@ -138,12 +138,12 @@ SerialPort::SerialPort(Server &server, const char *serial_device) : Connection(s
 		close(fd);
 		fd = -1;
 	}
-#endif //WIN32
+#endif //Q_OS_WIN32
 }
 
 SerialPort::~SerialPort(void)
 {
-#ifdef WIN32
+#ifdef Q_OS_WIN32
 	if (handle == INVALID_HANDLE_VALUE)
 	{
 		// restore original settings
@@ -161,7 +161,7 @@ SerialPort::~SerialPort(void)
 }
 
 
-#ifdef WIN32
+#ifdef Q_OS_WIN32
 
 int SerialPort::readNonblocking(char *buf, int count)
 {
@@ -189,12 +189,12 @@ void SerialPort::prepareSelectFds(fd_set &read_fds,
                                   fd_set &write_fds,
                                   int &fd_max)
 {
-#ifdef WIN32
+#ifdef Q_OS_WIN32
 	// handle all IO here
 	if (write_buff_end > write_buff)
 		performWriting();
 	performReading();
 #else
 	Connection::prepareSelectFds(read_fds, write_fds, fd_max);
-#endif //WIN32
+#endif //Q_OS_WIN32
 }
