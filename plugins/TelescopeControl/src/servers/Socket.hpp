@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef _SOCKET_HPP_
 #define _SOCKET_HPP_
 
-#ifdef WIN32
+#ifdef Q_OS_WIN32
 
 #include <winsock2.h>
 #include <fcntl.h>
@@ -66,7 +66,7 @@ static inline int SetNonblocking(int s)
 #define INVALID_SOCKET (-1)
 #define STRERROR(x) strerror(x)
 
-#endif //WIN32
+#endif //Q_OS_WIN32
 
 long long int GetNow(void);
 
@@ -90,7 +90,7 @@ protected:
 	Socket(Server &server, SOCKET fd) : server(server), fd(fd) {}
 	Server & server;
 	
-#ifdef WIN32
+#ifdef Q_OS_WIN32
 	virtual int readNonblocking(char *buf, int count)
 	{
 		return recv(fd, buf, count, 0);

@@ -33,7 +33,7 @@ namespace TelescopeControlGlobals {
 	
 	const int MAX_CIRCLE_COUNT = 10;
 	
-	#ifdef WIN32
+	#ifdef Q_OS_WIN32
 	const QString TELESCOPE_SERVER_PATH = QString("/%1.exe");
 	const QString SERIAL_PORT_PREFIX = QString("COM");
 	#else
@@ -69,9 +69,9 @@ namespace TelescopeControlGlobals {
 	
 	const QString TOOL_TIP_CONTROL = QString("Select an object, then press <strong>Ctrl+%1</strong> to slew this telescope.");
 	
-	#ifdef WIN32
+	#ifdef Q_OS_WIN32
 	const QStringList SERIAL_PORT_NAMES = QString("COM1 COM2 COM3 COM4").split(' ', QString::SkipEmptyParts);
-	#elif defined(MACOSX)
+	#elif defined(Q_OS_MAC)
 	const QStringList SERIAL_PORT_NAMES = QStringList();
 	#else
 	const QStringList SERIAL_PORT_NAMES = QString("/dev/ttyS0 /dev/ttyS1 /dev/ttyS2 /dev/ttyS3 /dev/ttyUSB0 /dev/ttyUSB1 /dev/ttyUSB2 /dev/ttyUSB3").split(' ', QString::SkipEmptyParts);
