@@ -134,7 +134,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		return;
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
-	float lum = 1.;//qMin(1,4.f/getOnScreenSize(core))*0.8;
+	float lum = 1.f;//qMin(1,4.f/getOnScreenSize(core))*0.8;
 	sPainter.setColor(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness, 1);
 	Nebula::texCircle->bind();
 	sPainter.drawSprite2dMode(XY[0], XY[1], 4);
