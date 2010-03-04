@@ -44,7 +44,7 @@ TelescopeConfigurationDialog::TelescopeConfigurationDialog()
 	telescopeNameValidator = new QRegExpValidator (QRegExp("[^:\"]+"), this);//Test the update for JSON
 	hostNameValidator = new QRegExpValidator (QRegExp("[a-zA-Z0-9\\-\\.]+"), this);//TODO: Write a proper host/IP regexp?
 	circleListValidator = new QRegExpValidator (QRegExp("[0-9,\\.\\s]+"), this);
-	#ifdef WIN32
+	#ifdef Q_OS_WIN32
 	serialPortValidator = new QRegExpValidator (QRegExp("COM[0-9]+"), this);
 	#else
 	serialPortValidator = new QRegExpValidator (QRegExp("/dev/*"), this);

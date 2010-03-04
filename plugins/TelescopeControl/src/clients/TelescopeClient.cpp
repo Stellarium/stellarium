@@ -40,7 +40,7 @@
 #include <QTcpSocket>
 #include <QTextStream>
 
-#ifdef WIN32
+#ifdef Q_OS_WIN32
 	#include <windows.h> // GetSystemTimeAsFileTime()
 #else
 	#include <sys/time.h>
@@ -138,7 +138,7 @@ qint64 getNow(void)
 {
 // At the moment this can't be done in a platform-independent way with Qt
 // (QDateTime and QTime don't support microsecond precision)
-#ifdef WIN32
+#ifdef Q_OS_WIN32
 	FILETIME file_time;
 	GetSystemTimeAsFileTime(&file_time);
 	return (*((__int64*)(&file_time))/10) - 86400000000LL*134774;

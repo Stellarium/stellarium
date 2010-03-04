@@ -67,12 +67,12 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200
 	
 	//end_of_timeout = -0x8000000000000000LL;
 	
-	#ifdef WIN32
+	#ifdef Q_OS_WIN32
 	if(serialDeviceName.right(serialDeviceName.size() - 3).toInt() > 9)
 		serialDeviceName = "\\\\.\\" + serialDeviceName + ":";//"\\.\COMxx", not sure if it will work
 	else
 		serialDeviceName = serialDeviceName + ":";
-	#endif //WIN32
+	#endif //Q_OS_WIN32
 	
 	//Try to establish a connection to the telescope
 	lx200 = new Lx200Connection(*this, qPrintable(serialDeviceName));

@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "Socket.hpp"
 
-#ifdef WIN32
+#ifdef Q_OS_WIN32
   #include <windows.h> // GetSystemTimeAsFileTime
 #else
   #include <sys/time.h>
@@ -32,7 +32,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 long long int GetNow(void)
 {
-#ifdef WIN32
+#ifdef Q_OS_WIN32
 	union
 	{
 		FILETIME file_time;

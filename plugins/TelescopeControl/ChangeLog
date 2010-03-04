@@ -1,3 +1,5 @@
+Fixed OS defines (WIN32 -> Q_OS_WIN32, MACOSX -> Q_OS_MAC).
+
 [0.1.9] (2010-01-26) (revision 5769)
 Branched telescope server code to simplify building. (revision 5671)
 Enabled logging for embedded telescope servers. (revision 5721)
