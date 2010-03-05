@@ -25,6 +25,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef _SOCKET_HPP_
 #define _SOCKET_HPP_
 
+#include <QtGlobal>
+
 #ifdef Q_OS_WIN32
 
 #include <winsock2.h>
