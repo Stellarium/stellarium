@@ -65,16 +65,36 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 		return StelTextureSP();
 	}
 
-	tex->qImage = QImage(tex->fullPath);
-	if (tex->qImage.isNull())
-		return StelTextureSP();
-	tex->loadParams = params;
-	tex->downloaded = true;
+	if (tex->fullPath.endsWith(".pvr"))
+	{
+		tex->loadParams = params;
+		tex->downloaded = true;
+#ifdef USE_OPENGL_ES2
+		glActiveTexture(GL_TEXTURE0);
+#endif
 
-	if (tex->glLoad())
+		tex->id = StelMainGraphicsView::getInstance().getOpenGLWin()->bindTexture(tex->fullPath);
+		glBindTexture(GL_TEXTURE_2D, tex->id);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, tex->loadParams.wrapMode);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, tex->loadParams.wrapMode);
+		qDebug() << tex->id << tex->fullPath;
 		return tex;
+	}
 	else
-		return StelTextureSP();
+	{
+		tex->qImage = QImage(tex->fullPath);
+		if (tex->qImage.isNull())
+			return StelTextureSP();
+		tex->loadParams = params;
+		tex->downloaded = true;
+
+		if (tex->glLoad())
+			return tex;
+		else
+			return StelTextureSP();
+	}
 }
 
 
