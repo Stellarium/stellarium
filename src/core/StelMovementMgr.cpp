@@ -51,6 +51,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore) : core(acore),
 	setObjectName("StelMovementMgr");
 	isDragging = false;
 	mountMode = MountAltAzimuthal;  // default
+	upVectorMountFrame.set(0,0,1);
 }
 
 StelMovementMgr::~StelMovementMgr()
@@ -110,9 +111,14 @@ void StelMovementMgr::setFlagLockEquPos(bool b)
 	flagLockEquPos=b;
 }
 
+void StelMovementMgr::setViewUpVectorJ2000(Vec3f& up)
+{
+	upVectorMountFrame = j2000ToMountFrame(up);
+}
+
 Vec3d StelMovementMgr::getViewUpVectorJ2000() const
 {
-	return mountFrameToJ2000(Vec3d(0,0,1));
+	return mountFrameToJ2000(upVectorMountFrame);
 }
 
 bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons b)

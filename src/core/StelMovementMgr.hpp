@@ -80,6 +80,7 @@ public:
 
 	//! Return the current up view vector.
 	Vec3d getViewUpVectorJ2000() const;
+	void setViewUpVectorJ2000(Vec3f& up);
 
 	void setMovementSpeedFactor(float s) {movementsSpeedFactor=s;}
 	float getMovementSpeedFactor() const {return movementsSpeedFactor;}
@@ -298,6 +299,8 @@ private:
 	Vec3d viewDirectionJ2000;
 	// Viewing direction in the mount reference frame.
 	Vec3d viewDirectionMountFrame;
+
+	Vec3d upVectorMountFrame;
 };
 
 #endif // _STELMOVEMENTMGR_HPP_
