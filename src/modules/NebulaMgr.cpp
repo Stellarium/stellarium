@@ -90,8 +90,8 @@ void NebulaMgr::init()
 	Q_ASSERT(conf);
 
 	nebulaFont.setPixelSize(13);
-	Nebula::texCircle = StelApp::getInstance().getTextureManager().createTexture("neb.png");   // Load circle texture
-	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur5.png");   // Load pointer texture
+	Nebula::texCircle = StelApp::getInstance().getTextureManager().createTexture("textures/neb.png");   // Load circle texture
+	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur5.png");   // Load pointer texture
 
 	setFlagShow(conf->value("astro/flag_nebula",true).toBool());
 	setFlagHints(conf->value("astro/flag_nebula_name",false).toBool());
