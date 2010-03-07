@@ -77,10 +77,6 @@ public slots:
 	bool getFlagShow(void) const;
 	
 private:
-	//! Set the texture to use for the Milky Way.
-	//! @param texFile the path to a texture file to be loaded.
-	void setTexture(const QString& texFile);
-	
 	float radius;
 	StelTextureSP tex;
 	Vec3f color;

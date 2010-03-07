@@ -58,18 +58,11 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 	{
 		tex->fullPath = StelFileMgr::findFile(afilename);
 	}
-	catch (std::runtime_error e)
+	catch (std::runtime_error er)
 	{
-		try
-		{
-			tex->fullPath = StelFileMgr::findFile("textures/" + afilename);
-		}
-		catch (std::runtime_error er)
-		{
-			qWarning() << "WARNING : Can't find texture file " << afilename << ": " << er.what() << endl;
-			tex->errorOccured = true;
-			return StelTextureSP();
-		}
+		qWarning() << "WARNING : Can't find texture file " << afilename << ": " << er.what() << endl;
+		tex->errorOccured = true;
+		return StelTextureSP();
 	}
 
 	tex->qImage = QImage(tex->fullPath);

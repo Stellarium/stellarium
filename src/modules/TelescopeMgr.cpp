@@ -209,7 +209,7 @@ void TelescopeMgr::init()
 	Q_ASSERT(conf);
 
 	setFontSize(12.f);
-	telescopeTexture = StelApp::getInstance().getTextureManager().createTexture("telescope.png");
+	telescopeTexture = StelApp::getInstance().getTextureManager().createTexture("textures/telescope.png");
 
 	deleteAllTelescopes();
 	for (int i=0;i<9;i++) 
@@ -241,7 +241,7 @@ void TelescopeMgr::init()
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	// Load pointer texture
-	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   
+	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
 }
 
 
