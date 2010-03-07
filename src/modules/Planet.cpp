@@ -81,7 +81,7 @@ Planet::Planet(const QString& englishName,
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
-	texMap = StelApp::getInstance().getTextureManager().createTexture(texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	texMap = StelApp::getInstance().getTextureManager().createTexture("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	// 60 day trails
 	DeltaTrail = 1;
@@ -879,7 +879,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 Ring::Ring(double radiusMin,double radiusMax,const QString &texname)
 	 :radiusMin(radiusMin),radiusMax(radiusMax)
 {
-	tex = StelApp::getInstance().getTextureManager().createTexture(texname);
+	tex = StelApp::getInstance().getTextureManager().createTexture("textures/"+texname);
 }
 
 Ring::~Ring(void)

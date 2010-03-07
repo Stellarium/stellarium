@@ -145,9 +145,9 @@ void StelSkyDrawer::init()
 	StelApp::makeMainGLContextCurrent();
 
 	// Load star texture no mipmap:
-	texHalo = StelApp::getInstance().getTextureManager().createTexture("star16x16.png");
-	texBigHalo = StelApp::getInstance().getTextureManager().createTexture("haloLune.png");
-	texSunHalo = StelApp::getInstance().getTextureManager().createTexture("halo.png");
+	texHalo = StelApp::getInstance().getTextureManager().createTexture("textures/star16x16.png");
+	texBigHalo = StelApp::getInstance().getTextureManager().createTexture("textures/haloLune.png");
+	texSunHalo = StelApp::getInstance().getTextureManager().createTexture("textures/halo.png");
 
 	useShader = StelApp::getInstance().getUseGLShaders() && (QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_1) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0));
 	if (useShader)

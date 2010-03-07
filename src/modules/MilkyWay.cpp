@@ -51,20 +51,16 @@ void MilkyWay::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	setTexture("milkyway.png");
+	tex = StelApp::getInstance().getTextureManager().createTexture("textures/milkyway.png");
 	setFlagShow(conf->value("astro/flag_milky_way").toBool());
 	setIntensity(conf->value("astro/milky_way_intensity",1.).toDouble());
 }
 
-void MilkyWay::setTexture(const QString& texFile)
-{
-	tex = StelApp::getInstance().getTextureManager().createTexture(texFile);
-}
 
 void MilkyWay::update(double deltaTime) {fader->update((int)(deltaTime*1000));}
 
 void MilkyWay::setFlagShow(bool b){*fader = b;}
-bool MilkyWay::getFlagShow(void) const {return *fader;}
+bool MilkyWay::getFlagShow() const {return *fader;}
 
 void MilkyWay::draw(StelCore* core)
 {
