@@ -65,12 +65,14 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 		return StelTextureSP();
 	}
 
+#ifdef USE_OPENGL_ES2
 	// Allow to replace the texures by compressed .pvr versions using GPU decompression.
 	// This saves memory and increases rendering speed.
 	QString pvrVersion = tex->fullPath;
 	pvrVersion.replace(".png", ".pvr");
 	if (StelFileMgr::exists(pvrVersion))
 		tex->fullPath = pvrVersion;
+#endif
 
 	if (tex->fullPath.endsWith(".pvr"))
 	{
