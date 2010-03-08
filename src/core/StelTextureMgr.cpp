@@ -65,21 +65,25 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 		return StelTextureSP();
 	}
 
+	// Allow to replace the texures by compressed .pvr versions using GPU decompression.
+	// This saves memory and increases rendering speed.
+	QString pvrVersion = tex->fullPath;
+	pvrVersion.replace(".png", ".pvr");
+	if (StelFileMgr::exists(pvrVersion))
+		tex->fullPath = pvrVersion;
+
 	if (tex->fullPath.endsWith(".pvr"))
 	{
+		// Load compressed textures using Qt wrapper.
 		tex->loadParams = params;
 		tex->downloaded = true;
-#ifdef USE_OPENGL_ES2
-		glActiveTexture(GL_TEXTURE0);
-#endif
 
 		tex->id = StelMainGraphicsView::getInstance().getOpenGLWin()->bindTexture(tex->fullPath);
-		glBindTexture(GL_TEXTURE_2D, tex->id);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		// For some reasons only LINEAR seems to work
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, tex->loadParams.wrapMode);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, tex->loadParams.wrapMode);
-		qDebug() << tex->id << tex->fullPath;
 		return tex;
 	}
 	else

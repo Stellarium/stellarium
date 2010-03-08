@@ -378,6 +378,7 @@ private:
 		int texCoord;
 		int vertex;
 		int texColor;
+		int texture;
 	};
 	static TexturesShaderVars texturesShaderVars;
 	static QGLShaderProgram* texturesColorShaderProgram;
@@ -386,6 +387,7 @@ private:
 		int texCoord;
 		int vertex;
 		int color;
+		int texture;
 	};
 	static TexturesColorShaderVars texturesColorShaderVars;
 #endif
