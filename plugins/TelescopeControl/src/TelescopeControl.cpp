@@ -127,7 +127,7 @@ void TelescopeControl::init()
 
 		//Load OpenGL textures
 		reticleTexture = StelApp::getInstance().getTextureManager().createTexture(":/telescopeControl/telescope_reticle.png");
-		selectionTexture = StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");
+		selectionTexture = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
 
 		//Load the module's custom style sheets
 		QFile styleSheetFile;
