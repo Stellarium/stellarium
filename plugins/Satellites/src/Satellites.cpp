@@ -110,7 +110,7 @@ void Satellites::init()
 		satellitesJsonPath = StelFileMgr::findFile("modules/Satellites", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/satellites.json";
 
 		// Load and find resources used in the plugin
-		texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur5.png");
+		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur5.png");
 		Satellite::hintTexture = StelApp::getInstance().getTextureManager().createTexture(":/satellites/satellite_hint.png");
 
 		// key bindings and other actions
