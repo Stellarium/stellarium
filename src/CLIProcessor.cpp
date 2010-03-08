@@ -31,7 +31,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 {
 	if (argsGetOption(argList, "-v", "--version"))
 	{
-		std::cout << qPrintable(StelUtils::getApplicationName());
+		std::cout << qPrintable(StelUtils::getApplicationName()) << std::endl;
 		exit(0);
 	}
 
@@ -85,7 +85,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 				// finding the file will throw an exception if it is not found
 				// in that case we won't output the landscape ID as it cannot work
 				StelFileMgr::findFile("landscapes/" + i + "/landscape.ini");
-				std::cout << qPrintable(i);
+				std::cout << qPrintable(i) << std::endl;
 			}
 			catch (std::runtime_error& e){}
 		}
