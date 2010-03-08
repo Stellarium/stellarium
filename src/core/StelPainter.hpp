@@ -28,9 +28,9 @@
 #include <QVarLengthArray>
 #include <QFontMetrics>
 
-//#ifdef USE_OPENGL_ES2
+#ifdef USE_OPENGL_ES2
  #define STELPAINTER_GL2 1
-//#endif
+#endif
 
 #ifdef STELPAINTER_GL2
 class QGLShaderProgram;
