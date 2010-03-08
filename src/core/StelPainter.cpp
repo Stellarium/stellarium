@@ -1689,6 +1689,7 @@ void StelPainter::initSystemGLInfo()
 	texturesShaderVars.texCoord = texturesShaderProgram->attributeLocation("texCoord");
 	texturesShaderVars.vertex = texturesShaderProgram->attributeLocation("vertex");
 	texturesShaderVars.texColor = texturesShaderProgram->uniformLocation("texColor");
+	texturesShaderVars.texture = texturesShaderProgram->uniformLocation("tex");
 
 	// Texture shader program + interpolated color per vertex
 	QGLShader *vshader4 = new QGLShader(QGLShader::Vertex);
@@ -1724,6 +1725,7 @@ void StelPainter::initSystemGLInfo()
 	texturesColorShaderVars.texCoord = texturesColorShaderProgram->attributeLocation("texCoord");
 	texturesColorShaderVars.vertex = texturesColorShaderProgram->attributeLocation("vertex");
 	texturesColorShaderVars.color = texturesColorShaderProgram->attributeLocation("color");
+	texturesColorShaderVars.texture = texturesColorShaderProgram->uniformLocation("tex");
 #endif
 }
 
@@ -1805,6 +1807,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setUniformValue(texturesShaderVars.texColor, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
 		pr->setAttributeArray(texturesShaderVars.texCoord, (const GLfloat*)texCoordArray.pointer, 2);
 		pr->enableAttributeArray(texturesShaderVars.texCoord);
+		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
 	}
 	else if (texCoordArray.enabled && colorArray.enabled && !normalArray.enabled)
 	{
@@ -1817,6 +1820,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->enableAttributeArray(texturesColorShaderVars.texCoord);
 		pr->setAttributeArray(texturesColorShaderVars.color, (const GLfloat*)colorArray.pointer, colorArray.size);
 		pr->enableAttributeArray(texturesColorShaderVars.color);
+		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
 	}
 	else
 	{
