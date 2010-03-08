@@ -125,6 +125,9 @@ int main(int argc, char **argv)
 	QApplication::setStyle(new QPlastiqueStyle());
 #endif
 
+	// This may be needed to make the others LC_TIME/LC_NUMERIC taken into account
+	//setlocale(LC_ALL, "");
+
 	// Used for getting system date formatting
 	setlocale(LC_TIME, "");
 	// We need scanf()/printf() and friends to always work in the C locale,
