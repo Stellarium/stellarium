@@ -6,12 +6,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -87,17 +87,17 @@ void Cardinals::draw(const StelCore* core, double latitude, bool gravityON) cons
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 	StelPainter sPainter(prj);
 	sPainter.setFont(font);
-	
+
 	if (!fader.getInterstate()) return;
 
 	// direction text
 	QString d[4];
-	
+
 	d[0] = sNorth;
 	d[1] = sSouth;
 	d[2] = sEast;
 	d[3] = sWest;
-	
+
 	// fun polar special cases
 	if (latitude ==  90.0 ) d[0] = d[1] = d[2] = d[3] = sSouth;
 	if (latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = sNorth;
@@ -138,7 +138,7 @@ void Cardinals::updateI18n()
 	sNorth = trans.qtranslate("N");
 	sSouth = trans.qtranslate("S");
 	sEast = trans.qtranslate("E");
-	sWest = trans.qtranslate("W");	
+	sWest = trans.qtranslate("W");
 }
 
 
@@ -172,12 +172,12 @@ void LandscapeMgr::update(double deltaTime)
 	atmosphere->update(deltaTime);
 	landscape->update(deltaTime);
 	cardinalsPoints->update(deltaTime);
-	
+
 	// Compute the atmosphere color and intensity
 	// Compute the sun position in local coordinate
 	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	
+
 	Vec3d sunPos = ssystem->getSun()->getAltAzPos(nav);
 	// Compute the moon position in local coordinate
 	Vec3d moonPos = ssystem->getMoon()->getAltAzPos(nav);
@@ -185,9 +185,9 @@ void LandscapeMgr::update(double deltaTime)
 		ssystem->getMoon()->getPhase(ssystem->getEarth()->getHeliocentricEclipticPos()),
 		StelApp::getInstance().getCore(), nav->getCurrentLocation().latitude, nav->getCurrentLocation().altitude,
 		15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
-	
+
 	StelApp::getInstance().getCore()->getSkyDrawer()->reportLuminanceInFov(3.75+atmosphere->getAverageLuminance()*3.5, true);
-	
+
 	// Compute the ground luminance based on every planets around
 //	float groundLuminance = 0;
 //	const vector<Planet*>& allPlanets = ssystem->getAllPlanets();
@@ -213,7 +213,7 @@ void LandscapeMgr::update(double deltaTime)
 //	groundLuminance=atmosphere->getAverageLuminance()/50;
 //	qDebug() << "Atmosphere lum=" << atmosphere->getAverageLuminance() << " ground lum=" <<  groundLuminance;
 //	qDebug() << "Adapted Atmosphere lum=" << eye->adaptLuminance(atmosphere->getAverageLuminance()) << " Adapted ground lum=" << eye->adaptLuminance(groundLuminance);
-	
+
 	// compute global ground brightness in a simplistic way, directly in RGB
 	float landscapeBrightness = 0;
 	sunPos.normalize();
@@ -270,7 +270,7 @@ void LandscapeMgr::init()
 	cardinalsPoints = new Cardinals();
 	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
-	
+
 	bool ok =true;
 	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
 	if (!ok)
@@ -288,7 +288,7 @@ void LandscapeMgr::setStelStyle(const StelStyle& style)
 	// Load colors from config file
 	QSettings* conf = StelApp::getInstance().getSettings();
 	QString section = style.confSectionName;
-	
+
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setColorCardinalPoints(StelUtils::strToVec3f(conf->value(section+"/cardinal_color", defaultColor).toString()));
 }
@@ -363,22 +363,22 @@ void LandscapeMgr::updateI18n()
 	if (cardinalsPoints) cardinalsPoints->updateI18n();
 }
 
-void LandscapeMgr::setFlagLandscape(bool b) 
+void LandscapeMgr::setFlagLandscape(bool b)
 {
 	landscape->setFlagShow(b);
 }
-	
-bool LandscapeMgr::getFlagLandscape(void) const 
+
+bool LandscapeMgr::getFlagLandscape(void) const
 {
 	return landscape->getFlagShow();
 }
 
-void LandscapeMgr::setFlagFog(bool b) 
+void LandscapeMgr::setFlagFog(bool b)
 {
 	landscape->setFlagShowFog(b);
 }
-	
-bool LandscapeMgr::getFlagFog(void) const 
+
+bool LandscapeMgr::getFlagFog(void) const
 {
 	return landscape->getFlagShowFog();
 }
@@ -390,7 +390,7 @@ QStringList LandscapeMgr::getAllLandscapeNames() const
 {
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
 	QStringList result;
-	
+
 	// We just look over the map of names to IDs and extract the keys
 	foreach (QString i, nameToDirMap.keys())
 	{
@@ -403,7 +403,7 @@ QStringList LandscapeMgr::getAllLandscapeIDs() const
 {
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
 	QStringList result;
-	
+
 	// We just look over the map of names to IDs and extract the keys
 	foreach (QString i, nameToDirMap.values())
 	{
@@ -416,7 +416,7 @@ QString LandscapeMgr::getCurrentLandscapeName() const
 {
 	return landscape->getName();
 }
-   
+
 QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 {
 	QString desc = QString("<h3>%1</h3>").arg(landscape->getName());
@@ -441,63 +441,63 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 }
 
 //! Set flag for displaying Cardinals Points
-void LandscapeMgr::setFlagCardinalsPoints(bool b) 
+void LandscapeMgr::setFlagCardinalsPoints(bool b)
 {
 	cardinalsPoints->setFlagShow(b);
 }
 
 //! Get flag for displaying Cardinals Points
-bool LandscapeMgr::getFlagCardinalsPoints(void) const 
+bool LandscapeMgr::getFlagCardinalsPoints(void) const
 {
 	return cardinalsPoints->getFlagShow();
 }
 
 //! Set Cardinals Points color
-void LandscapeMgr::setColorCardinalPoints(const Vec3f& v) 
+void LandscapeMgr::setColorCardinalPoints(const Vec3f& v)
 {
-	cardinalsPoints->setColor(v); 
+	cardinalsPoints->setColor(v);
 }
 
 //! Get Cardinals Points color
-Vec3f LandscapeMgr::getColorCardinalPoints(void) const 
+Vec3f LandscapeMgr::getColorCardinalPoints(void) const
 {
 	return cardinalsPoints->get_color();
 }
-	
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // Atmosphere
 //! Set flag for displaying Atmosphere
-void LandscapeMgr::setFlagAtmosphere(bool b) 
+void LandscapeMgr::setFlagAtmosphere(bool b)
 {
 	atmosphere->setFlagShow(b);
 }
 
 //! Get flag for displaying Atmosphere
-bool LandscapeMgr::getFlagAtmosphere(void) const 
+bool LandscapeMgr::getFlagAtmosphere(void) const
 {
 	return atmosphere->getFlagShow();
 }
 
 //! Set atmosphere fade duration in s
-void LandscapeMgr::setAtmosphereFadeDuration(float f) 
+void LandscapeMgr::setAtmosphereFadeDuration(float f)
 {
 	atmosphere->setFadeDuration(f);
 }
 
 //! Get atmosphere fade duration in s
-float LandscapeMgr::getAtmosphereFadeDuration(void) const 
+float LandscapeMgr::getAtmosphereFadeDuration(void) const
 {
 	return atmosphere->getFadeDuration();
 }
 
 //! Set light pollution luminance level
-void LandscapeMgr::setAtmosphereLightPollutionLuminance(double f) 
+void LandscapeMgr::setAtmosphereLightPollutionLuminance(double f)
 {
 	atmosphere->setLightPollutionLuminance(f);
 }
 
 //! Get light pollution luminance level
-double LandscapeMgr::getAtmosphereLightPollutionLuminance(void) const 
+double LandscapeMgr::getAtmosphereLightPollutionLuminance(void) const
 {
 	return atmosphere->getLightPollutionLuminance();
 }
@@ -521,7 +521,7 @@ void LandscapeMgr::setZRotation(double d)
 		landscape->setZRotation(d);
 }
 
-float LandscapeMgr::getLuminance(void) 
+float LandscapeMgr::getLuminance(void)
 {
 	return atmosphere->getRealDisplayIntensityFactor();
 }
@@ -553,7 +553,7 @@ Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QStr
 		// if this fails, it just won't draw
 		ldscp = new LandscapeFisheye();
 	}
-	
+
 	ldscp->load(landscapeIni, landscapeId);
 	return ldscp;
 }
@@ -577,8 +577,8 @@ Landscape* LandscapeMgr::createFromHash(QMap<QString, QString>& param)
 	{   //	if (s=="fisheye")
 		LandscapeFisheye* ldscp = new LandscapeFisheye();
 		ldscp->create(param["name"], 1, param["path"] + param["maptex"],
-		              param["texturefov"].toDouble(),
-                      param["angleRotateZ"].toDouble());
+					  param["texturefov"].toDouble(),
+					  param["angleRotateZ"].toDouble());
 		return ldscp;
 	}
 }
@@ -586,10 +586,10 @@ Landscape* LandscapeMgr::createFromHash(QMap<QString, QString>& param)
 QString LandscapeMgr::nameToID(const QString& name)
 {
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
-	
+
 	if (nameToDirMap.find(name)!=nameToDirMap.end())
 	{
- 		Q_ASSERT(0);
+		Q_ASSERT(0);
 		return "error";
 	}
 	else
@@ -613,7 +613,7 @@ QMap<QString,QString> LandscapeMgr::getNameToDirMap(void) const
 	{
 		qDebug() << "ERROR while trying list landscapes:" << e.what();
 	}
-	
+
 	foreach (const QString& dir, landscapeDirs)
 	{
 		try
@@ -627,27 +627,27 @@ QMap<QString,QString> LandscapeMgr::getNameToDirMap(void) const
 			//qDebug << "WARNING: unable to successfully read landscape.ini file from landscape " << dir;
 		}
 	}
-	return result;	
+	return result;
 }
 
-bool LandscapeMgr::doSetCurrentLandscapeID(const QString& id)
+bool LandscapeMgr::doSetCurrentLandscapeID(QString id)
 {
 	if (id.isEmpty())
 	{
 		emit(requestCompleteSetCurrentLandscapeID(false));
 		return false;
 	}
-	
+
 	// We want to lookup the landscape ID (dir) from the name.
 	Landscape* newLandscape = NULL;
-	
+
 	try
 	{
 		newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "ERROR while loading landscape " << "landscapes/" + id + "/landscape.ini" << ", (" << e.what() << ")" << endl;
+		qWarning() << "ERROR while loading default landscape " << "landscapes/" + id + "/landscape.ini" << ", (" << e.what() << ")";
 	}
 
 	if (!newLandscape)
@@ -665,7 +665,7 @@ bool LandscapeMgr::doSetCurrentLandscapeID(const QString& id)
 		landscape = newLandscape;
 	}
 	currentLandscapeID = id;
-	
+
 	if (getFlagLandscapeSetsLocation())
 	{
 		StelApp::getInstance().getCore()->getNavigator()->moveObserverTo(landscape->getLocation());
@@ -682,7 +682,7 @@ bool LandscapeMgr::doSetCurrentLandscapeName(const QString& name)
 		emit(requestCompleteSetCurrentLandscapeName(false));
 		return false;
 	}
-	
+
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
 	if (nameToDirMap.find(name)!=nameToDirMap.end())
 	{
