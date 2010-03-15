@@ -125,15 +125,6 @@ int main(int argc, char **argv)
 	QApplication::setStyle(new QPlastiqueStyle());
 #endif
 
-	// This may be needed to make the others LC_TIME/LC_NUMERIC taken into account
-	//setlocale(LC_ALL, "");
-
-	// Used for getting system date formatting
-	setlocale(LC_TIME, "");
-	// We need scanf()/printf() and friends to always work in the C locale,
-	// otherwise configuration/INI file parsing will be erroneous.
-	setlocale(LC_NUMERIC, "C");
-
 	// Handle command line options for alternative Qt graphics system types.
 	// DEFAULT_GRAPHICS_SYSTEM is defined per platform in the main CMakeLists.txt file.
 	// Avoid overriding if the user already specified the mode on the CLI.
@@ -156,6 +147,11 @@ int main(int argc, char **argv)
 
 	// The QApplication MUST be created before the StelFileMgr is initialized.
 	QApplication app(argc, argv);
+
+	// QApplication sets current locale, but
+	// we need scanf()/printf() and friends to always work in the C locale,
+	// otherwise configuration/INI file parsing will be erroneous.
+	setlocale(LC_NUMERIC, "C");
 
 	// Init the file manager
 	StelFileMgr::init();
