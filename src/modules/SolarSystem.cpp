@@ -115,17 +115,25 @@ void SolarSystem::init()
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
 	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", false).toBool());
 
-	// Create a trail group containing all the planets orbiting the sun (not including satellites)
-	allTrails = new TrailGroup(365.f);
-	foreach (const PlanetP& p, getSun()->satellites)
-	{
-		allTrails->addObject((QSharedPointer<StelObject>)p);
-	}
+	recreateTrails();
+
 	setFlagTrails(conf->value("astro/flag_object_trails", false).toBool());
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur4.png");
 	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture("textures/planet-indicator.png");
+}
+
+void SolarSystem::recreateTrails()
+{
+	// Create a trail group containing all the planets orbiting the sun (not including satellites)
+	if (allTrails!=NULL)
+		delete allTrails;
+	allTrails = new TrailGroup(365.f);
+	foreach (const PlanetP& p, getSun()->satellites)
+	{
+		allTrails->addObject((QSharedPointer<StelObject>)p, &trailColor);
+	}
 }
 
 void SolarSystem::drawPointer(const StelCore* core)
@@ -808,6 +816,10 @@ void SolarSystem::setStelStyle(const StelStyle& style)
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/planet_names_color", defaultColor).toString()));
 	setOrbitsColor(StelUtils::strToVec3f(conf->value(section+"/planet_orbits_color", defaultColor).toString()));
+	setTrailsColor(StelUtils::strToVec3f(conf->value(section+"/object_trails_color", defaultColor).toString()));
+
+	// Recreate the trails to apply new colors
+	recreateTrails();
 }
 
 PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
