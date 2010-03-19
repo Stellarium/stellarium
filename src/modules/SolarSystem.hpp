@@ -168,6 +168,11 @@ public slots:
 	//! Get the current color used to draw planet orbit lines.
 	Vec3f getOrbitsColor(void) const;
 
+	//! Set the color used to draw planet trails lines.
+	void setTrailsColor(const Vec3f& c) {trailColor=c;}
+	//! Get the current color used to draw planet trails lines.
+	Vec3f getTrailsColor() const {return trailColor;}
+
 	//! Set flag which determines if Earth's moon is scaled or not.
 	void setFlagMoonScale(bool b);
 	//! Get the current value of the flag which determines if Earth's moon is scaled or not.
@@ -235,6 +240,8 @@ private:
 	//! Load planet data from a file.
 	void loadPlanets();
 
+	void recreateTrails();
+
 	PlanetP sun;
 	PlanetP moon;
 	PlanetP earth;
@@ -272,6 +279,7 @@ private:
 
 	class TrailGroup* allTrails;
 	LinearFader trailFader;
+	Vec3f trailColor;
 
 	//////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED

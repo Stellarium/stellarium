@@ -39,8 +39,7 @@ public:
 	// Set the matrix to use to post process J2000 positions before storing in the trail
 	void setJ2000ToTrailNative(const Mat4d& m);
 
-	void addObject(const StelObjectP&);
-	void removeObject(const StelObjectP&);
+	void addObject(const StelObjectP&, const Vec3f* col=NULL);
 
 	void setOpacity(float op) {opacity=op;}
 
@@ -51,13 +50,14 @@ private:
 	class Trail
 	{
 	public:
-		Trail(const StelObjectP& obj) : stelObject(obj) {;}
+		Trail(const StelObjectP& obj, const Vec3f& col) : stelObject(obj), color(col) {;}
 		StelObjectP stelObject;
 		// All previous positions
 		QList<Vec3d> posHistory;
+		Vec3f color;
 	};
 
-	QMap<StelObjectP, Trail> allTrails;
+	QList<Trail> allTrails;
 
 	// Maximum time extent in days
 	float timeExtent;

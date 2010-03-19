@@ -39,9 +39,9 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	float currentTime = core->getNavigator()->getJDay();
 	sPainter->setProjector(core->getProjection(core->getNavigator()->getJ2000ModelViewMat()*j2000ToTrailNativeInverted));
-	for (QMap<StelObjectP, Trail>::Iterator iter = allTrails.begin();iter!=allTrails.end();++iter)
+	foreach (const Trail& trail, allTrails)
 	{
-		Planet* hpl = dynamic_cast<Planet*>(iter.key().data());
+		Planet* hpl = dynamic_cast<Planet*>(trail.stelObject.data());
 		if (hpl!=NULL)
 		{
 			// Avoid drawing the trails if the object is the home planet
@@ -49,14 +49,13 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 			if (homePlanetName==StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().planetName)
 				continue;
 		}
-		const QList<Vec3d>& posHistory = iter.value().posHistory;
+		const QList<Vec3d>& posHistory = trail.posHistory;
 		vertexArray.resize(posHistory.size());
 		colorArray.resize(posHistory.size());
-		const Vec3f& color = iter.key()->getInfoColor();
 		for (int i=0;i<posHistory.size();++i)
 		{
 			float colorRatio = 1.f-(currentTime-times.at(i))/timeExtent;
-			colorArray[i].set(color[0], color[1], color[2], colorRatio*opacity);
+			colorArray[i].set(trail.color[0], trail.color[1], trail.color[2], colorRatio*opacity);
 			vertexArray[i]=posHistory.at(i);
 		}
 		sPainter->setVertexPointer(3, GL_DOUBLE, vertexArray.constData());
@@ -72,16 +71,16 @@ void TrailGroup::update()
 {
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	times.append(nav->getJDay());
-	for (QMap<StelObjectP, Trail>::Iterator iter = allTrails.begin();iter!=allTrails.end();++iter)
+	for (QList<Trail>::Iterator iter=allTrails.begin();iter!=allTrails.end();++iter)
 	{
-		iter.value().posHistory.append(j2000ToTrailNative*iter.key()->getJ2000EquatorialPos(nav));
+		iter->posHistory.append(j2000ToTrailNative*iter->stelObject->getJ2000EquatorialPos(nav));
 	}
 	if (nav->getJDay()-times.at(0)>timeExtent)
 	{
 		times.pop_front();
-		for (QMap<StelObjectP, Trail>::Iterator iter = allTrails.begin();iter!=allTrails.end();++iter)
+		for (QList<Trail>::Iterator iter=allTrails.begin();iter!=allTrails.end();++iter)
 		{
-			iter.value().posHistory.pop_front();
+			iter->posHistory.pop_front();
 		}
 	}
 }
@@ -93,21 +92,16 @@ void TrailGroup::setJ2000ToTrailNative(const Mat4d& m)
 	j2000ToTrailNativeInverted=m.inverse();
 }
 
-void TrailGroup::addObject(const StelObjectP& obj)
+void TrailGroup::addObject(const StelObjectP& obj, const Vec3f* col)
 {
-	allTrails.insert(obj,TrailGroup::Trail(obj));
-}
-
-void TrailGroup::removeObject(const StelObjectP& obj)
-{
-	allTrails.remove(obj);
+	allTrails.append(TrailGroup::Trail(obj, col==NULL ? obj->getInfoColor() : *col));
 }
 
 void TrailGroup::reset()
 {
 	times.clear();
-	for (QMap<StelObjectP, Trail>::Iterator iter = allTrails.begin();iter!=allTrails.end();++iter)
+	for (QList<Trail>::Iterator iter=allTrails.begin();iter!=allTrails.end();++iter)
 	{
-		iter.value().posHistory.clear();
+		iter->posHistory.clear();
 	}
 }
