@@ -31,6 +31,8 @@ TrailGroup::TrailGroup(float te) : timeExtent(te), opacity(1.f)
 	j2000ToTrailNativeInverted=Mat4d::identity();
 }
 
+static QVector<Vec3d> vertexArray;
+static QVector<Vec4f> colorArray;
 void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 {
 	glEnable(GL_BLEND);
@@ -48,14 +50,20 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 				continue;
 		}
 		const QList<Vec3d>& posHistory = iter.value().posHistory;
-		Vec3f color;
-		for (int i=0;i<posHistory.size()-1;++i)
+		vertexArray.resize(posHistory.size());
+		colorArray.resize(posHistory.size());
+		const Vec3f& color = iter.key()->getInfoColor();
+		for (int i=0;i<posHistory.size();++i)
 		{
 			float colorRatio = 1.f-(currentTime-times.at(i))/timeExtent;
-			color = iter.key()->getInfoColor();
-			sPainter->setColor(color[0], color[1], color[2], colorRatio*opacity);
-			sPainter->drawGreatCircleArc(posHistory.at(i), posHistory.at(i+1));
+			colorArray[i].set(color[0], color[1], color[2], colorRatio*opacity);
+			vertexArray[i]=posHistory.at(i);
 		}
+		sPainter->setVertexPointer(3, GL_DOUBLE, vertexArray.constData());
+		sPainter->setColorPointer(4, GL_FLOAT, colorArray.constData());
+		sPainter->enableClientStates(true, false, true);
+		sPainter->drawFromArray(StelPainter::LineStrip, vertexArray.size(), 0, true);
+		sPainter->enableClientStates(false);
 	}
 }
 
@@ -64,25 +72,16 @@ void TrailGroup::update()
 {
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	times.append(nav->getJDay());
-	QMap<StelObjectP, Trail>::Iterator iter = allTrails.begin();
 	for (QMap<StelObjectP, Trail>::Iterator iter = allTrails.begin();iter!=allTrails.end();++iter)
 	{
 		iter.value().posHistory.append(j2000ToTrailNative*iter.key()->getJ2000EquatorialPos(nav));
 	}
-	float ct = nav->getJDay();
-	int i;
-	for (i=times.size()-1;i>=0;--i)
+	if (nav->getJDay()-times.at(0)>timeExtent)
 	{
-		if (ct-times.at(i)>timeExtent)
-			break;
-	}
-	if (i>=0)
-	{
-		// Remove too old points
-		times.erase(times.begin(),times.begin()+i);
+		times.pop_front();
 		for (QMap<StelObjectP, Trail>::Iterator iter = allTrails.begin();iter!=allTrails.end();++iter)
 		{
-			iter.value().posHistory.erase(iter.value().posHistory.begin(),iter.value().posHistory.begin()+i);
+			iter.value().posHistory.pop_front();
 		}
 	}
 }
