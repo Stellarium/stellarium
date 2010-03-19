@@ -47,7 +47,7 @@ signals:
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
-	
+
 private slots:
 	//! year slider or dial changed
 	void yearChanged(int ny);
@@ -61,7 +61,7 @@ private slots:
 	void minuteChanged(int nm);
 	//! year slider or dial changed
 	void secondChanged(int ns);
-	
+
 private:
 	Ui_dateTimeDialogForm* ui;
 	int year;

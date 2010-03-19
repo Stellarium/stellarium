@@ -74,6 +74,11 @@ void StelDialog::close()
 	((QGraphicsWidget*)StelMainGraphicsView::getInstance().getStelAppGraphicsWidget())->setFocus(Qt::OtherFocusReason);
 }
 
+bool StelDialog::visible() const
+{
+	return dialog!=NULL && dialog->isVisible();
+}
+
 void StelDialog::setVisible(bool v)
 {
 	if (v)
