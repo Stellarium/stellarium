@@ -110,7 +110,7 @@ public:
 	virtual float getSelectPriority(const StelNavigator *nav) const {return 99;}
 
 	//! Get a color used to display info about the object
-	virtual Vec3f getInfoColor(void) const {return Vec3f(1,1,1);}
+	virtual Vec3f getInfoColor() const {return Vec3f(1,1,1);}
 
 	//! Return the best FOV in degree to use for a close view of the object
 	virtual double getCloseViewFov(const StelNavigator *nav) const {return 10.;}
