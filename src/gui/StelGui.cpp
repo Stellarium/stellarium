@@ -587,6 +587,9 @@ void StelGui::update()
 		savedProgressBarSize=skyGui->progressBarMgr->boundingRect().size();
 		skyGui->updateBarsPos();
 	}
+
+	if (dateTimeDialog.visible())
+		dateTimeDialog.setDateTime(nav->getJDay());
 }
 
 // Add a new progress bar in the lower right corner of the screen.
