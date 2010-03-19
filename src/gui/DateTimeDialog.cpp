@@ -29,7 +29,7 @@
 #include <QFrame>
 #include <QLineEdit>
 
-DateTimeDialog::DateTimeDialog() : 
+DateTimeDialog::DateTimeDialog() :
   year(0),
   month(0),
   day(0),
@@ -69,7 +69,7 @@ void DateTimeDialog::createDialogContent()
 bool DateTimeDialog::valid(int y, int m, int d, int h, int min, int s)
 {
 	int dy, dm, dd, dh, dmin, ds;
-	
+
 	if ( ! StelUtils::changeDateTimeForRollover(y, m, d, h, min, s, &dy, &dm, &dd, &dh, &dmin, &ds) )
 	{
 		dy = y;
@@ -79,7 +79,7 @@ bool DateTimeDialog::valid(int y, int m, int d, int h, int min, int s)
 		dmin = min;
 		ds = s;
 	}
-	
+
 	year = dy;
 	month = dm;
 	day = dd;
@@ -109,37 +109,37 @@ void DateTimeDialog::styleChanged()
 void DateTimeDialog::yearChanged(int newyear)
 {
   if ( year != newyear ) {
-    valid( newyear, month, day, hour, minute, second );
+	valid( newyear, month, day, hour, minute, second );
   }
 }
 void DateTimeDialog::monthChanged(int newmonth)
 {
   if ( month != newmonth ) {
-    valid( year, newmonth, day, hour, minute, second );
+	valid( year, newmonth, day, hour, minute, second );
   }
 }
 void DateTimeDialog::dayChanged(int newday)
 {
   if ( day != newday ) {
-    valid( year, month, newday, hour, minute, second );
+	valid( year, month, newday, hour, minute, second );
   }
 }
 void DateTimeDialog::hourChanged(int newhour)
 {
   if ( hour != newhour ) {
-    valid( year, month, day, newhour, minute, second );
+	valid( year, month, day, newhour, minute, second );
   }
 }
 void DateTimeDialog::minuteChanged(int newminute)
 {
   if ( minute != newminute ) {
-    valid( year, month, day, hour, newminute, second );
+	valid( year, month, day, hour, newminute, second );
   }
 }
 void DateTimeDialog::secondChanged(int newsecond)
 {
   if ( second != newsecond ) {
-    valid( year, month, day, hour, minute, newsecond );
+	valid( year, month, day, hour, minute, newsecond );
   }
 }
 
@@ -166,8 +166,9 @@ Send newJd to spinner_*
  ************************************************************************/
 void DateTimeDialog::setDateTime(double newJd)
 {
-  StelUtils::getDateFromJulianDay(newJd, &year, &month, &day);
-  StelUtils::getTimeFromJulianDay(newJd, &hour, &minute, &second);
-  pushToWidgets();
+	newJd += (StelApp::getInstance().getLocaleMgr().getGMTShift(newJd)/24.0); // UTC -> local tz
+	StelUtils::getDateFromJulianDay(newJd, &year, &month, &day);
+	StelUtils::getTimeFromJulianDay(newJd, &hour, &minute, &second);
+	pushToWidgets();
 }
 
