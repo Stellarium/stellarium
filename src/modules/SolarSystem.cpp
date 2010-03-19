@@ -38,6 +38,7 @@
 #include "StelStyle.hpp"
 #include "StelUtils.hpp"
 #include "StelPainter.hpp"
+#include "TrailGroup.hpp"
 
 #include <functional>
 #include <algorithm>
@@ -52,7 +53,7 @@
 #include <QMapIterator>
 #include <QDebug>
 
-SolarSystem::SolarSystem() : moonScale(1.),	flagOrbits(false), flagLightTravelTime(false), lastHomePlanet(NULL)
+SolarSystem::SolarSystem() : moonScale(1.),	flagOrbits(false), flagLightTravelTime(false), allTrails(NULL)
 {
 	planetNameFont.setPixelSize(14.);
 	setObjectName("SolarSystem");
@@ -77,6 +78,9 @@ SolarSystem::~SolarSystem()
 	earth.clear();
 	Planet::hintCircleTex.clear();
 	Planet::texEarthShadow.clear();
+
+	delete allTrails;
+	allTrails = NULL;
 }
 
 /*************************************************************************
@@ -100,6 +104,7 @@ void SolarSystem::init()
 	// Compute position and matrix of sun and all the satellites (ie planets)
 	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)
 	computePositions(StelUtils::getJDFromSystem());
+
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
 	setMoonScale(conf->value("viewing/moon_scale", 5.0).toDouble());
@@ -109,8 +114,14 @@ void SolarSystem::init()
 	setLabelsAmount(conf->value("astro/labels_amount", 3.).toDouble());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
 	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", false).toBool());
+
+	// Create a trail group containing all the planets orbiting the sun (not including satellites)
+	allTrails = new TrailGroup(365.f);
+	foreach (const PlanetP& p, getSun()->satellites)
+	{
+		allTrails->addObject((QSharedPointer<StelObject>)p);
+	}
 	setFlagTrails(conf->value("astro/flag_object_trails", false).toBool());
-	startTrails(conf->value("astro/flag_object_trails", false).toBool());
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur4.png");
@@ -144,7 +155,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 		sPainter.enableTexture2d(true);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-		
+
 		size*=0.5;
 		const float angleBase = StelApp::getInstance().getTotalRunTime() * 10;
 		// We draw 4 instances of the sprite at the corners of the pointer
@@ -626,7 +637,7 @@ void SolarSystem::loadPlanets()
 					pd.value(secname+"/tex_map").toString(),
 					pd.value(secname+"/tex_halo").toString(),
 					posfunc,
-	 			    userDataPtr,
+					userDataPtr,
 					osculatingFunc,
 					closeOrbit,
 					pd.value(secname+"/hidden", 0).toBool(),
@@ -769,6 +780,14 @@ void SolarSystem::draw(StelCore* core)
 	// And sort them from the furthest to the closest
 	sort(systemPlanets.begin(),systemPlanets.end(),biggerDistance());
 
+	if (trailFader.getInterstate()>0.0000001)
+	{
+		StelPainter* sPainter = new StelPainter(core->getProjection2d());
+		allTrails->setOpacity(trailFader.getInterstate());
+		allTrails->draw(core, sPainter);
+		delete sPainter;
+	}
+
 	// Draw the elements
 	float maxMagLabel=core->getSkyDrawer()->getLimitMagnitude()*0.80+(labelsAmount*1.2f)-2.f;
 	foreach (const PlanetP& p, systemPlanets)
@@ -789,7 +808,6 @@ void SolarSystem::setStelStyle(const StelStyle& style)
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/planet_names_color", defaultColor).toString()));
 	setOrbitsColor(StelUtils::strToVec3f(conf->value(section+"/planet_orbits_color", defaultColor).toString()));
-	setTrailsColor(StelUtils::strToVec3f(conf->value(section+"/object_trails_color", defaultColor).toString()));
 }
 
 PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
@@ -898,26 +916,17 @@ QString SolarSystem::getPlanetHashString(void)
 	return str;
 }
 
-void SolarSystem::startTrails(bool b)
-{
-	foreach (PlanetP p, systemPlanets)
-		p->startTrail(b);
-}
-
 void SolarSystem::setFlagTrails(bool b)
 {
-	foreach (PlanetP p, systemPlanets)
-		p->setFlagTrail(b);
+	qDebug() << "setFlagTrails " << b;
+	trailFader = b;
+	if (b)
+		allTrails->reset();
 }
 
-bool SolarSystem::getFlagTrails(void) const
+bool SolarSystem::getFlagTrails() const
 {
-	foreach (const PlanetP& p, systemPlanets)
-	{
-		if (p->getFlagTrail())
-			return true;
-	}
-	return false;
+	return (bool)trailFader;
 }
 
 void SolarSystem::setFlagHints(bool b)
@@ -987,29 +996,19 @@ void SolarSystem::setSelected(PlanetP obj)
 	// Undraw other objects hints, orbit, trails etc..
 	setFlagHints(getFlagHints());
 	setFlagOrbits(getFlagOrbits());
-	setFlagTrails(getFlagTrails());
 }
 
 
 void SolarSystem::update(double deltaTime)
 {
-	bool restartTrails = false;
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-
-	// Determine if home planet has changed, and restart planet trails
-	// since the data is no longer useful
-	if (lastHomePlanet && nav->getCurrentLocation().planetName != lastHomePlanet->getEnglishName())
+	trailFader.update(deltaTime*1000);
+	if (trailFader.getInterstate()>0.f)
 	{
-		lastHomePlanet = searchByEnglishName(nav->getCurrentLocation().planetName);
-		Q_ASSERT(!lastHomePlanet.isNull());
-		restartTrails = true;
+		allTrails->update();
 	}
 
 	foreach (PlanetP p, systemPlanets)
 	{
-		if (restartTrails)
-			p->startTrail(true);
-		p->updateTrail(nav);
 		p->update((int)(deltaTime*1000));
 	}
 }
@@ -1081,10 +1080,6 @@ const Vec3f& SolarSystem::getLabelsColor(void) const {return Planet::getLabelCol
 // Set/Get orbits lines color
 void SolarSystem::setOrbitsColor(const Vec3f& c) {Planet::setOrbitColor(c);}
 Vec3f SolarSystem::getOrbitsColor(void) const {return Planet::getOrbitColor();}
-
-// Set/Get planets trails color
-void SolarSystem::setTrailsColor(const Vec3f& c)  {Planet::setTrailColor(c);}
-Vec3f SolarSystem::getTrailsColor(void) const {return Planet::getTrailColor();}
 
 // Set/Get if Moon display is scaled
 void SolarSystem::setFlagMoonScale(bool b)

@@ -91,7 +91,7 @@ public:
 		   const QString& texMapName,
 		   const QString& texHaloName,
 		   posFuncType _coordFunc,
-	 	   void* userDataPtr,
+		   void* userDataPtr,
 		   OsulatingFunctType *osculatingFunc,
 		   bool closeOrbit,
 		   bool hidden,
@@ -200,26 +200,6 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
-
-	///// Trail related code
-	// Should move to a TrailPath class which works on a StelObject, not on a Planet
-	void updateTrail(const StelNavigator* nav);
-	void drawTrail(const StelCore* core);
-	//! Start/stop accumulating new trail data (clear old data)
-	void startTrail(bool b);
-	void setFlagTrail(bool b){if(b == trailFader) return; trailFader = b; startTrail(b);}
-	bool getFlagTrail(void) const {return trailFader;}
-	static void setTrailColor(const Vec3f& c) { trailColor = c; }
-	static const Vec3f& getTrailColor() { return trailColor; }
-	static Vec3f trailColor;
-	std::list<TrailPoint>trail;
-	bool trailOn;                  // accumulate trail data if true
-	double DeltaTrail;
-	int MaxTrail;
-	double lastTrailJD;
-	bool firstPoint;               // if need to take first point of trail still
-	LinearFader trailFader;
-
 	///// Orbit related code
 	// Should move to an OrbitPath class which works on a SolarSystemObject, not a Planet
 	void setFlagOrbits(bool b){orbitFader = b;}
@@ -282,7 +262,7 @@ protected:
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
 	posFuncType coordFunc;
 	void* userDataPtr;
-	
+
 	OsulatingFunctType *const osculatingFunc;
 	QSharedPointer<Planet> parent;           // Planet parent i.e. sun for earth
 	QList<QSharedPointer<Planet> > satellites;      // satellites of the Planet
