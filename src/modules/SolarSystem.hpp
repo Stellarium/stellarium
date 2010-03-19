@@ -168,11 +168,6 @@ public slots:
 	//! Get the current color used to draw planet orbit lines.
 	Vec3f getOrbitsColor(void) const;
 
-	//! Set the color used to draw planet trails.
-	void setTrailsColor(const Vec3f& c);
-	//! Get the current color used to draw planet trails.
-	Vec3f getTrailsColor(void) const;
-
 	//! Set flag which determines if Earth's moon is scaled or not.
 	void setFlagMoonScale(bool b);
 	//! Get the current value of the flag which determines if Earth's moon is scaled or not.
@@ -192,13 +187,13 @@ public:
 	PlanetP searchByEnglishName(QString planetEnglishName) const;
 
 	//! Get the Planet object pointer for the Sun.
-	PlanetP getSun(void) const {return sun;}
+	PlanetP getSun() const {return sun;}
 
 	//! Get the Planet object pointer for the Earth.
-	PlanetP getEarth(void) const {return earth;}
+	PlanetP getEarth() const {return earth;}
 
 	//! Get the Planet object pointer for Earth's moon.
-	PlanetP getMoon(void) const {return moon;}
+	PlanetP getMoon() const {return moon;}
 
 	//! Determine if a lunar eclipse is close at hand?
 	bool nearLunarEclipse();
@@ -229,12 +224,6 @@ private:
 	//! @param core the StelCore object.
 	//! @return a pointer to a StelObject if found, else NULL
 	StelObjectP search(Vec3d v, const StelCore* core) const;
-
-	//! Update the planet motion trails.
-	// void updateTrails(const StelNavigator* nav);
-
-	//! Start/stop accumulating new trail data (clear old data).
-	void startTrails(bool b);
 
 	//! Compute the transformation matrix for every elements of the solar system.
 	//! observerPos is needed for light travel time computation.
@@ -281,10 +270,12 @@ private:
 
 	bool flagShow;
 
+	class TrailGroup* allTrails;
+	LinearFader trailFader;
+
 	//////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
 	//////////////////////////////////////////////////////////////////////////////////
-	PlanetP lastHomePlanet;    // for tracking home planet changes for trails
 	QList<Orbit*> orbits;           // Pointers on created elliptical orbits
 };
 

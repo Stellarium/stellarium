@@ -42,7 +42,6 @@
 
 Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
-Vec3f Planet::trailColor = Vec3f(1,0.7,0.7);
 StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
 
@@ -82,15 +81,6 @@ Planet::Planet(const QString& englishName,
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance().getTextureManager().createTexture("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
-
-	// 60 day trails
-	DeltaTrail = 1;
-	// small increment like 0.125 would allow observation of latitude related wobble of moon
-	// if decide to show moon trail
-	MaxTrail = 60;
-	lastTrailJD = 0; // for now
-	trailOn = 0;
-	firstPoint = 1;
 
 	nameI18 = englishName;
 	if (englishName!="Pluto")
@@ -614,7 +604,6 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 
 		// by putting here, only draw orbit if Planet is visible for clarity
 		drawOrbit(core);  // TODO - fade in here also...
-		drawTrail(core);
 
 		if (flagLabels && ang_dist>0.25 && maxMagLabels>getVMagnitude(nav))
 		{
@@ -964,119 +953,9 @@ void Planet::drawOrbit(const StelCore* core)
 	sPainter.enableClientStates(false);
 }
 
-
-// draw trail of Planet as seen from earth
-void Planet::drawTrail(const StelCore* core)
-{
-	if (!trailFader.getInterstate())
-		return;
-
-	const StelNavigator* nav = core->getNavigator();
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-
-	Vec3d onscreen1;
-	Vec3d onscreen2;
-
-	StelPainter sPainter(prj);
-	glEnable(GL_BLEND);
-
-	sPainter.setColor(trailColor[0]*trailFader.getInterstate(), trailColor[1]*trailFader.getInterstate(), trailColor[2]*trailFader.getInterstate(), 1.);
-
-	std::list<TrailPoint>::iterator iter;
-	std::list<TrailPoint>::iterator nextiter;
-	std::list<TrailPoint>::iterator begin = trail.begin();
-	//  begin++;
-
-	if (trail.begin() != trail.end())
-	{
-		nextiter = trail.end();
-		nextiter--;
-
-		for (iter=nextiter; iter != begin; --iter)
-		{
-			nextiter--;
-			if (prj->projectLineCheck( (*iter).point, onscreen1, (*(nextiter)).point, onscreen2))
-				sPainter.drawLine2d(onscreen1[0], onscreen1[1], onscreen2[0], onscreen2[1]);
-		}
-	}
-
-	// draw final segment to finish at current Planet position
-	if (!firstPoint && prj->projectLineCheck( (*trail.begin()).point, onscreen1, getEquinoxEquatorialPos(nav), onscreen2))
-		sPainter.drawLine2d(onscreen1[0], onscreen1[1], onscreen2[0], onscreen2[1]);
-}
-
-// update trail points as needed
-void Planet::updateTrail(const StelNavigator* nav)
-{
-	if (!trailOn)
-		return;
-
-	double date = nav->getJDay();
-
-	int dt=0;
-	if(firstPoint || (dt=abs(int((date-lastTrailJD)/DeltaTrail))) > MaxTrail)
-	{
-		dt=1;
-		// clear old trail
-		trail.clear();
-		firstPoint = 0;
-	}
-
-	// Note that when jump by a week or day at a time, loose detail on trails
-	// particularly for moon (if decide to show moon trail)
-
-	// add only one point at a time, using current position only
-	if(dt)
-	{
-		lastTrailJD = date;
-		TrailPoint tp;
-		tp.point = getJ2000EquatorialPos(nav);
-		tp.date = date;
-		trail.push_front( tp );
-
-		//      if( trail.size() > (unsigned int)MaxTrail ) {
-		if( trail.size() > (unsigned int)MaxTrail )
-		{
-			trail.pop_back();
-		}
-	}
-
-	// because sampling depends on speed and frame rate, need to clear out
-	// points if trail gets longer than desired
-
-	std::list<TrailPoint>::iterator iter;
-	std::list<TrailPoint>::iterator end = trail.end();
-
-	for( iter=trail.begin(); iter != end; iter++)
-	{
-		if( fabs((*iter).date - date)/DeltaTrail > MaxTrail )
-		{
-			trail.erase(iter, end);
-			break;
-		}
-	}
-}
-
-// Start/stop accumulating new trail data (clear old data)
-void Planet::startTrail(bool b)
-{
-	if (b)
-	{
-		firstPoint = 1;
-		//  qDebug("trail for %s: %f\n", name.c_str(), re.siderealPeriod);
-		// only interested in trails for planets
-		if(re.siderealPeriod > 0) trailOn = 1;
-	}
-	else
-	{
-		trailOn = 0;
-	}
-}
-
 void Planet::update(int deltaTime)
 {
 	hintFader.update(deltaTime);
 	labelsFader.update(deltaTime);
 	orbitFader.update(deltaTime);
-	trailFader.update(deltaTime);
 }

@@ -132,6 +132,8 @@ SET(stellarium_lib_SRCS
 	core/StelGuiBase.cpp
 	core/StelViewportEffect.hpp
 	core/StelViewportEffect.cpp
+	core/TrailGroup.hpp
+	core/TrailGroup.cpp
 
 	${gl_lib_SRCS}
 	external/fixx11h.h
@@ -550,7 +552,7 @@ IF (BUILD_STATIC_PLUGINS)
 	IF(APPLE)
 	  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "-framework QtDeclarative")
 	ELSE()
-	  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "/usr/local/Trolltech/Qt-4.6.0/lib/libQtDeclarative.so")
+	  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "/usr/local/Trolltech/Qt-4.7.0/lib/libQtDeclarative.so")
 	ENDIF()
 	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SVMT)
   ENDIF()

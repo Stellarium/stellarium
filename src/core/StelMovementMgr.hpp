@@ -269,6 +269,8 @@ private:
 	// Mouse control options
 	bool isDragging, hasDragged;
 	int previousX, previousY;
+	// Contains the last N JD times associated with the last N mouse move events
+	QList<double> mouseDragTimeHistory;
 
 	// Time mouse control
 	bool dragTimeMode;
