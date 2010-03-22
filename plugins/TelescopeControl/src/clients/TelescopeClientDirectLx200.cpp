@@ -116,7 +116,9 @@ void TelescopeClientDirectLx200::telescopeGoto(const Vec3d &j2000Pos)
 	{
 		//if (writeBufferEnd - writeBuffer + 20 < (int)sizeof(writeBuffer))
 		{
-			const double ra = atan2(j2000Pos[1], j2000Pos[0]);
+			const double ra_signed = atan2(j2000Pos[1], j2000Pos[0]);
+			//Workaround for the discrepancy in precision between Windows/Linux/PPC Macs and Intel Macs:
+			const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2.0 * M_PI);
 			const double dec = atan2(j2000Pos[2], sqrt(j2000Pos[0]*j2000Pos[0]+j2000Pos[1]*j2000Pos[1]));
 			unsigned int ra_int = (unsigned int)floor(0.5 + ra*(((unsigned int)0x80000000)/M_PI));
 			int dec_int = (int)floor(0.5 + dec*(((unsigned int)0x80000000)/M_PI));
