@@ -73,6 +73,9 @@ public:
 	float airmass(float cosZ, bool apparent_z=true);
 
 private:
+	//! Update precomputed variables.
+	void updatePrecomputed();
+
 	//! Actually, these 3 Atmosphere parameters should be controlled by GUI.
 	//! Pressure[mbar] (1013)
 	float pressure;

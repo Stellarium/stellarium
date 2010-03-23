@@ -24,6 +24,13 @@
 
 RefractionExtinction::RefractionExtinction() : pressure(1013.f), temperature(10.f), ext_coeff(0.20f)
 {
+	updatePrecomputed();
+}
+
+void RefractionExtinction::updatePrecomputed()
+{
+	press_temp_corr_Bennett=pressure/1010.f * 283.f/(273.f+temperature) / 60.f;
+	press_temp_corr_Saemundson=1.02f*press_temp_corr_Bennett;
 }
 
 void RefractionExtinction::forward(Vec3d* altAzPos, float* mag, int size)
@@ -91,15 +98,13 @@ float RefractionExtinction::airmass(float cosZ, bool apparent_z)
 void RefractionExtinction::setPressure(float p)
 {
 	pressure=p;
-	press_temp_corr_Bennett=pressure/1010.0 * 283.0/(273.0+temperature) / 60.0;
-	press_temp_corr_Saemundson=1.02*press_temp_corr_Bennett;
+	updatePrecomputed();
 }
 
 void RefractionExtinction::setTemperature(float t)
 {
 	temperature=t;
-	press_temp_corr_Bennett=pressure/1010.0 * 283.0/(273.0+temperature) / 60.0;
-	press_temp_corr_Saemundson=1.02*press_temp_corr_Bennett;
+	updatePrecomputed();
 }
 
 void RefractionExtinction::setExtinctionCoefficient(float k)
