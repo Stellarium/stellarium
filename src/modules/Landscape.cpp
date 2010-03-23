@@ -59,6 +59,15 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	}
 
 	// Optional data
+	// Patch GZ:
+	if (landscapeIni.contains("landscape/tesselate_rows"))
+		rows = landscapeIni.value("landscape/tesselate_rows").toInt();
+	else rows=20;
+	if (landscapeIni.contains("landscape/tesselate_cols"))
+		cols = landscapeIni.value("landscape/tesselate_cols").toInt();
+	else cols=40;
+
+
 	if (landscapeIni.contains("location/planet"))
 		location.planetName = landscapeIni.value("location/planet").toString();
 	else
@@ -96,7 +105,7 @@ const QString Landscape::getTexturePath(const QString& basename, const QString& 
 	}
 }
 
-LandscapeOldStyle::LandscapeOldStyle(float _radius) : Landscape(_radius), sideTexs(NULL), sides(NULL), tanMode(false)
+LandscapeOldStyle::LandscapeOldStyle(float _radius) : Landscape(_radius), sideTexs(NULL), sides(NULL), tanMode(false), calibrated(false)
 {}
 
 LandscapeOldStyle::~LandscapeOldStyle()
@@ -114,6 +123,13 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 {
 	// TODO: put values into hash and call create method to consolidate code
 	loadCommon(landscapeIni, landscapeId);
+	// Patch GZ:
+	if (landscapeIni.contains("landscape/tesselate_rows"))
+		rows = landscapeIni.value("landscape/tesselate_rows").toInt();
+	else rows=8;
+	if (landscapeIni.contains("landscape/tesselate_cols"))
+		cols = landscapeIni.value("landscape/tesselate_cols").toInt();
+	else cols=16;
 
 	QString type = landscapeIni.value("landscape/type").toString();
 	if(type != "old_style")
@@ -181,6 +197,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	groundAngleRotateZ = landscapeIni.value("landscape/ground_angle_rotatez", 0.).toFloat();
 	drawGroundFirst    = landscapeIni.value("landscape/draw_ground_first", 0).toInt();
 	tanMode            = landscapeIni.value("landscape/tan_mode", false).toBool();
+	calibrated         = landscapeIni.value("landscape/calibrated", false).toBool();
 }
 
 
@@ -281,7 +298,7 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 	if (!fogFader.getInterstate())
 		return;
 
-	const float vpos = tanMode ? radius*std::tan(fogAngleShift*M_PI/180.) : radius*std::sin(fogAngleShift*M_PI/180.);
+	const float vpos = (tanMode||calibrated) ? radius*std::tan(fogAngleShift*M_PI/180.) : radius*std::sin(fogAngleShift*M_PI/180.);
 	sPainter.setProjector(core->getProjection(core->getNavigator()->getAltAzModelViewMat() * Mat4d::translation(Vec3d(0.,0.,vpos))));
 	glBlendFunc(GL_ONE, GL_ONE);
 	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
@@ -289,7 +306,7 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter,
 			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter);
 	fogTex->bind();
-	const float height = tanMode ? radius*std::tan(fogAltAngle*M_PI/180.) : radius*std::sin(fogAltAngle*M_PI/180.);
+	const float height = (tanMode||calibrated) ? radius*std::tan(fogAltAngle*M_PI/180.) : radius*std::sin(fogAltAngle*M_PI/180.);
 	sPainter.sCylinder(radius, height, 64, 1);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
@@ -297,21 +314,38 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 // Draw the mountains with a few pieces of texture
 void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
 {
+
+	// Patched by Georg Zotti: I located an undocumented switch tan_mode, maybe tan_mode=true means cylindrical panorama projection.
+	// anyway, the old code makes unfortunately no sense.
+	// I added a switch "calibrated" for the ini file. If true, it works as this landscape apparently was originally intended.
+	// So I corrected the texture coordinates so that decorAltAngle is the total angle, decorAngleShift the lower angle,
+	// and the texture in between is correctly stretched.
+	// TODO: (1) Replace fog cylinder by similar texture, which could be painted as image layer in Photoshop/Gimp.
+	//       (2) Implement calibrated && tan_mode
 	sPainter.setProjector(core->getProjection(StelCore::FrameAltAz));
 
 	if (!landFader.getInterstate())
 		return;
 	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
 	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
-	static const int stacks = 8;
+	static const int stacks = (calibrated ? 16 : 8); // GZ: 8->16, I need better precision.
 	  // make slices_per_side=(3<<K) so that the innermost polygon of the
 	  // fandisk becomes a triangle:
 	int slices_per_side = 3*64/(nbDecorRepeat*nbSide);
 	if (slices_per_side<=0) slices_per_side = 1;
-	const float z0 = tanMode ? radius * std::tan(decorAngleShift*M_PI/180.0) :
-		radius * std::sin(decorAngleShift*M_PI/180.0);
-	const float d_z = tanMode ? radius * std::tan(decorAltAngle*M_PI/180.0) / stacks :
-		radius * std::sin(decorAltAngle*M_PI/180.0) / stacks;
+	const double z0 =
+	  calibrated ?
+	  // GZ: For calibrated, we use z=decorAngleShift...(decorAltAngle-decorAngleShift), but we must compute the tan in the loop.
+	  decorAngleShift :
+	  (tanMode ?
+	   radius * std::tan(decorAngleShift*M_PI/180.0) :
+	   radius * std::sin(decorAngleShift*M_PI/180.0));
+	// GZ: The old formula is completely meaningless for photos with opening angle >90,
+	// and most likely also not what was intended for other images.
+	// Note that GZ fills this value with a different meaning!
+	const double d_z = calibrated ? decorAltAngle/stacks : (tanMode ? radius*std::tan(decorAltAngle*M_PI/180.0)/stacks : radius*std::sin(decorAltAngle*M_PI/180.0)/stacks);
+
+	// N.B. GZ had doubles for the next 5, but floats may well be enough.
 	const float alpha = 2.f*M_PI/(nbDecorRepeat*nbSide*slices_per_side);
 	const float ca = std::cos(alpha);
 	const float sa = std::sin(alpha);
@@ -342,7 +376,12 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
 				for (int k=0;k<=stacks*2;k+=2)
 				{
 					texCoordsArray << Vec2f(tx0, ty0) << Vec2f(tx1, ty0);
-					vertexArray << Vec3d(x0, y0, z) << Vec3d(x1, y1, z);
+					if (calibrated){
+					  double tanZ=radius * std::tan(z*M_PI/180.0);
+					  vertexArray << Vec3d(x0, y0, tanZ) << Vec3d(x1, y1, tanZ);
+					}else{
+					  vertexArray << Vec3d(x0, y0, z) << Vec3d(x1, y1, z);
+					}
 					z += d_z;
 					ty0 += d_ty;
 				}
@@ -369,7 +408,9 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 	if (!landFader.getInterstate())
 		return;
 	const StelNavigator* nav = core->getNavigator();
-	const float vshift = tanMode ? radius*std::tan(groundAngleShift*M_PI/180.) : radius*std::sin(groundAngleShift*M_PI/180.);
+	const float vshift = (tanMode || calibrated) ?
+	  radius*std::tan(groundAngleShift*M_PI/180.) :
+	  radius*std::sin(groundAngleShift*M_PI/180.);
 	Mat4d mat = nav->getAltAzModelViewMat() * Mat4d::zrotation((groundAngleRotateZ-angleRotateZOffset)*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift));
 	sPainter.setProjector(core->getProjection(mat));
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
@@ -448,7 +489,8 @@ void LandscapeFisheye::draw(StelCore* core)
 	sPainter.enableTexture2d(true);
 	glEnable(GL_BLEND);
 	mapTex->bind();
-	sPainter.sSphereMap(radius,40,20,texFov,1);
+	// Patch GZ: (40,20)->(cols,rows)
+	sPainter.sSphereMap(radius,cols,rows,texFov,1);
 
 	glDisable(GL_CULL_FACE);
 }
@@ -515,8 +557,9 @@ void LandscapeSpherical::draw(StelCore* core)
 
 	// TODO: verify that this works correctly for custom projections
 	// seam is at East
-	sPainter.sSphere(radius, 1.0, 40, 20, 1, true);
+	//sPainter.sSphere(radius, 1.0, 40, 20, 1, true);
+	// GZ: Want better angle resolution, optional!
+	sPainter.sSphere(radius, 1.0, cols, rows, 1, true);
 
 	glDisable(GL_CULL_FACE);
 }
-
