@@ -82,13 +82,13 @@ float RefractionExtinction::airmass(float cosZ, bool apparent_z)
 	if (apparent_z)
 	{
 		// Rozenberg 1966, reported by Schaefer (1993-2000).
-		X=1.0f/(cosZ+0.025*std::exp(-11.0*cosZ));
+		X=1.0f/(cosZ+0.025f*std::exp(-11.f*cosZ));
 	}
 	else
 	{
 		//Young 1994
-		float nom=(1.002432*cosZ+0.148386)*cosZ+0.0096467;
-		float denum=((cosZ+0.149864)*cosZ+0.0102963)*cosZ+0.000303978;
+		float nom=(1.002432f*cosZ+0.148386f)*cosZ+0.0096467f;
+		float denum=((cosZ+0.149864f)*cosZ+0.0102963f)*cosZ+0.000303978f;
 		X=nom/denum;
 	}
 	return X;
