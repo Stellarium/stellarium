@@ -134,7 +134,8 @@ SET(stellarium_lib_SRCS
 	core/StelViewportEffect.cpp
 	core/TrailGroup.hpp
 	core/TrailGroup.cpp
-
+	core/RefractionExtinction.hpp
+	core/RefractionExtinction.cpp
 	${gl_lib_SRCS}
 	external/fixx11h.h
 	external/gettext.h
