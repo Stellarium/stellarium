@@ -94,6 +94,9 @@ protected:
 	LinearFader fogFader;
 	QString author;
 	QString description;
+	// GZ patched, these can now be set in landscape.ini:
+	int rows; // horizontal rows
+	int cols; // vertical columns
 
 	typedef struct
 	{
@@ -135,7 +138,8 @@ private:
 	float groundAngleShift;
 	float groundAngleRotateZ;
 	int drawGroundFirst;
-	bool tanMode;	// Whether the angles should be converted using tan instead of sin
+	bool tanMode;		// Whether the angles should be converted using tan instead of sin
+	bool calibrated;	// if true, the documented altitudes are inded correct (the original code is buggy!)
 };
 
 class LandscapeFisheye : public Landscape
