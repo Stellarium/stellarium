@@ -1,6 +1,7 @@
 Fixed OS defines (WIN32 -> Q_OS_WIN32, MACOSX -> Q_OS_MAC). (revison 5985, 5989)
 Fixed a bug: telescope control sends RA=0 for objects with RA between
 (12 and 24?) on Intel Macs. (revision 6025, fix proposed by David Hulse)
+Changed tabs style to a more compact, more rounded look.
 
 [0.1.9] (2010-01-26) (revision 5769)
 Branched telescope server code to simplify building. (revision 5671)
