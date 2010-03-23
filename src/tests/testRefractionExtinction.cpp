@@ -33,10 +33,27 @@ void TestRefractionExtinction::initTestCase()
 void TestRefractionExtinction::testBase()
 {
 	RefractionExtinction refExt;
-	Vec3d v(1,0,0);
+	Vec3d v(1.,0.,0.);
 	float mag=4.f;
 	refExt.forward(&v, &mag, 1);
 	QVERIFY(mag>=4.);
+	QVERIFY(v[2]>=0);
+
+
+	Vec3d vert(0.,0.,1.);
+	mag=2.0f;
+	refExt.setExtinctionCoefficient(0.25);
+	refExt.setTemperature(15.0);
+	refExt.setPressure(1000.0);
+	refExt.forward(&vert, &mag, 1);
+	QVERIFY(mag==2.25);
+	QVERIFY(vert[2]==1.0);
+
+	Vec3d neg(std::sqrt(2.0),0.,std::sqrt(2.0));
+	mag=2.0f;
+	refExt.forward(&neg, &mag, 1);
+	QVERIFY(mag==2.0);
+	QVERIFY(neg[2]==std::sqrt(2.0));
 }
 
 void TestRefractionExtinction::benchmark()
