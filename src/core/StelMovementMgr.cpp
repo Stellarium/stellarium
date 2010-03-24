@@ -296,9 +296,13 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 							{
 								const double deltaT = timeDragHistory.last().first-timeDragHistory.first().first;
 								const double deltaJd = timeDragHistory.last().second-timeDragHistory.first().second;
+								const double newTimeRate = deltaJd/deltaT;
 								if (deltaT>0.00000001)
 								{
-									core->getNavigator()->setTimeRate(qMax(deltaJd/deltaT, JD_SECOND));
+									if (newTimeRate>=0)
+										core->getNavigator()->setTimeRate(qMax(newTimeRate, JD_SECOND));
+									else
+										core->getNavigator()->setTimeRate(qMin(newTimeRate, -JD_SECOND));
 								}
 								else
 									core->getNavigator()->setTimeRate(beforeTimeDragTimeRate);
