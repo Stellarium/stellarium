@@ -50,7 +50,7 @@ SET(TelescopeControl_UIS
 QT4_WRAP_UI(TelescopeControl_UIS_H ${TelescopeControl_UIS})
 
 # Compile the resource files
-SET(TelescopeControl_RES ../TelescopeControl.qrc)
+SET(TelescopeControl_RES ../resources/TelescopeControl.qrc)
 QT4_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
 
 # Add here all the files which require moc compilation
