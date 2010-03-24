@@ -494,6 +494,8 @@ void StelApp::setColorScheme(const QString& section)
 	{
 		iter->setStelStyle(*currentStelStyle);
 	}
+	if (getGui())
+		getGui()->setStelStyle(*currentStelStyle);
 }
 
 //! Set flag for activating night vision mode
