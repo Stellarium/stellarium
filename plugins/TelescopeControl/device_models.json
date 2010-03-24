@@ -1,5 +1,5 @@
 {
-	"version": "0.1.9",
+	"version": "0.2.0",
 	"list" :
 	[
 		{
@@ -10,19 +10,19 @@
 		},
 		{
 			"name" : "Meade AutoStar Compatible",
-			"description" : "A telescope compatible with Meade's AutoStar controller.",
+			"description" : "Any telescope or telescope mount compatible with Meade's AutoStar controller.",
 			"server" : "TelescopeServerLx200",
 			"default_delay" : 500000
 		},
 		{
 			"name" : "Meade LX200 (compatible)",
-			"description" : "Meade LX200 or a compatible telescope.",
+			"description" : "Any telescope or telescope mount compatible with Meade LX200.",
 			"server" : "TelescopeServerLx200",
 			"default_delay" : 500000
 		},
 		{
 			"name" : "Meade ETX70 (#494 Autostar, #506 CCS)",
-			"description" : "Meade ETX70 wtih the #494 Autostar controller and the #506 Connector Cable Set.",
+			"description" : "Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable Set.",
 			"server" : "TelescopeServerLx200",
 			"default_delay" : 1500000
 		},
@@ -40,7 +40,19 @@
 		},
 		{
 			"name" : "Celestron NexStar (compatible)",
-			"description" : "Celestron NexStar or a compatible telescope.",
+			"description" : "Any telescope or telescope mount compatible with Celestron NexStar.",
+			"server" : "TelescopeServerNexStar",
+			"default_delay" : 500000
+		},
+		{
+			"name" : "Sky-Watcher SynScan (version 3 or later)",
+			"description" : "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand controller.",
+			"server" : "TelescopeServerNexStar",
+			"default_delay" : 500000
+		},
+		{
+			"name" : "Sky-Watcher SynScan AZ GOTO",
+			"description" : "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models.",
 			"server" : "TelescopeServerNexStar",
 			"default_delay" : 500000
 		}
