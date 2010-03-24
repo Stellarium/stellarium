@@ -252,6 +252,13 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 	event->accept();
 }
 
+void StelMovementMgr::addTimeDragPoint()
+{
+	timeDragHistory.append(QPair<double, double>(StelApp::getInstance().getTotalRunTime(), core->getNavigator()->getJDay()));
+	if (timeDragHistory.size()>3)
+		timeDragHistory.removeFirst();
+}
+
 void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 {
 	switch (event->button())
@@ -264,8 +271,13 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 				hasDragged = false;
 				previousX = event->x();
 				previousY = event->y();
-				startDragT = StelApp::getInstance().getTotalRunTime();
-				startDragJDay = core->getNavigator()->getJDay();
+				beforeTimeDragTimeRate=core->getNavigator()->getTimeRate();
+				if (dragTimeMode)
+				{
+					timeDragHistory.clear();
+					core->getNavigator()->setTimeRate(0);
+					addTimeDragPoint();
+				}
 				event->accept();
 				return;
 			}
@@ -279,7 +291,20 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 						event->accept();
 						if (dragTimeMode)
 						{
-							core->getNavigator()->setTimeRate((core->getNavigator()->getJDay()-startDragJDay)/(StelApp::getInstance().getTotalRunTime()-startDragT));
+							addTimeDragPoint();
+							if (timeDragHistory.size()>=3)
+							{
+								const double deltaT = timeDragHistory.last().first-timeDragHistory.first().first;
+								const double deltaJd = timeDragHistory.last().second-timeDragHistory.first().second;
+								if (deltaT>0.00000001)
+								{
+									core->getNavigator()->setTimeRate(qMax(deltaJd/deltaT, JD_SECOND));
+								}
+								else
+									core->getNavigator()->setTimeRate(beforeTimeDragTimeRate);
+							}
+							else
+								core->getNavigator()->setTimeRate(beforeTimeDragTimeRate);
 						}
 						return;
 					}
@@ -741,7 +766,6 @@ void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 {
 	if (dragTimeMode)
 	{
-		core->getNavigator()->setTimeRate(0);
 		Vec3d v1, v2;
 		const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
 		prj->unProject(x2,y2, v2);
@@ -751,6 +775,7 @@ void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 		double angle = (v2^v1)[2];
 		double deltaDay = angle/(2.*M_PI)*core->getNavigator()->getLocalSideralDayLength();
 		core->getNavigator()->setJDay(core->getNavigator()->getJDay()+deltaDay);
+		addTimeDragPoint();
 	}
 	else
 	{
