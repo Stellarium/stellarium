@@ -115,6 +115,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionShow_Stars", N_("Stars"), "S", group, true, false);
 	addGuiActions("actionShow_Planets_Labels", N_("Planets labels"), "P", group, true, false);
 	addGuiActions("actionShow_Planets_Orbits", N_("Planet orbits"), "O", group, true, false);
+	addGuiActions("actionShow_Planets_Trails", N_("Planet trails"), "Shift+T", group, true, false);
 
 	addGuiActions("actionShow_Night_Mode", N_("Night mode"), "", group, true, false);
 	addGuiActions("actionSet_Full_Screen_Global", N_("Full-screen mode"), "F11", group, true, false);
@@ -319,6 +320,12 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	connect(getGuiActions("actionShow_Planets_Labels"), SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLabels(bool)));
 	getGuiActions("actionShow_Planets_Labels")->setChecked(ssmgr->getFlagLabels());
+
+	connect(getGuiActions("actionShow_Planets_Orbits"), SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagOrbits(bool)));
+	getGuiActions("actionShow_Planets_Orbits")->setChecked(ssmgr->getFlagOrbits());
+
+	connect(getGuiActions("actionShow_Planets_Trails"), SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagTrails(bool)));
+	getGuiActions("actionShow_Planets_Trails")->setChecked(ssmgr->getFlagTrails());
 
 	connect(getGuiActions("actionShow_Meridian_Line"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagMeridianLine(bool)));
 	getGuiActions("actionShow_Meridian_Line")->setChecked(gmgr->getFlagMeridianLine());
