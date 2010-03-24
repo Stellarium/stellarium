@@ -269,13 +269,14 @@ private:
 	// Mouse control options
 	bool isDragging, hasDragged;
 	int previousX, previousY;
-	// Contains the last N JD times associated with the last N mouse move events
-	QList<double> mouseDragTimeHistory;
+
+	// Contains the last N real time / JD times pairs associated with the last N mouse move events
+	QList<QPair<double, double> > timeDragHistory;
+	void addTimeDragPoint();
+	float beforeTimeDragTimeRate;
 
 	// Time mouse control
 	bool dragTimeMode;
-	double startDragT;
-	double startDragJDay;
 
 	//! @internal
 	//! Store data for auto-zoom.
