@@ -30,7 +30,7 @@
 #include <QDebug>
 #include <QStringList>
 
-StelObjectMgr::StelObjectMgr()
+StelObjectMgr::StelObjectMgr() : searchRadiusPixel(30.f)
 {
 	setObjectName("StelObjectMgr");
 	objectPointerVisibility = true;
@@ -164,8 +164,8 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
-	// Field of view for a 30 pixel diameter circle on screen
-	float fov_around = core->getMovementMgr()->getCurrentFov()/qMin(prj->getViewportWidth(), prj->getViewportHeight()) * 30.f;
+	// Field of view for a searchRadiusPixel pixel diameter circle on screen
+	float fov_around = core->getMovementMgr()->getCurrentFov()/qMin(prj->getViewportWidth(), prj->getViewportHeight()) * searchRadiusPixel;
 
 	// Collect the objects inside the range
 	for (QList<StelObjectModule*>::const_iterator iteromgr=objectsModule.begin();iteromgr!=objectsModule.end();++iteromgr)
