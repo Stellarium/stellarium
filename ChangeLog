@@ -1,5 +1,6 @@
 Fixed a bug: telescope control sends RA=0 for objects with RA between 
 (12 and 24?) on Intel Macs. (revision 6025, fix proposed by David Hulse)
+Fixed a bug: the GUI was not affected by night vision mode. (LP #539665)
 
 0.10.4 [2010-02-22]
 Bug fix release.
