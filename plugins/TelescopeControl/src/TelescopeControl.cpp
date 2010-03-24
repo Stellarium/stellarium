@@ -515,7 +515,7 @@ void TelescopeControl::loadTelescopeServerExecutables(void)
 	QDir serverDirectory(serverExecutablesDirectoryPath);
 	if(!serverDirectory.exists())
 	{
-		qWarning() << "TelescopeControl: Can't load telescope server executables: Can't find telescope server directory.";
+		qWarning() << "TelescopeControl: No telescope server directory has been found.";
 		return;
 	}
 	QList<QFileInfo> telescopeServerExecutables = serverDirectory.entryInfoList(QStringList("TelescopeServer*"), (QDir::Files|QDir::Executable|QDir::CaseSensitive), QDir::Name);
@@ -574,7 +574,7 @@ void TelescopeControl::loadConfiguration()
 		}
 		catch(std::runtime_error &e)
 		{
-			qDebug() << "TelescopeControl: No telescope servers directory detected.";
+			//qDebug() << "TelescopeControl: No telescope servers directory detected.";
 			useServerExecutables = false;
 			serverDirectoryPath = StelFileMgr::getUserDir() + "/servers";
 		}
@@ -1236,8 +1236,8 @@ bool TelescopeControl::stopClientAtSlot(int slotNumber)
 
 void TelescopeControl::loadDeviceModels()
 {
-	qDebug() << "TelescopeControl: Loading device model descriptions...";
-
+	//qDebug() << "TelescopeControl: Loading device model descriptions...";
+	
 	//Make sure that the device models file exists
 	bool useDefaultList = false;
 	QString deviceModelsJsonPath = StelFileMgr::findFile("modules/TelescopeControl", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/device_models.json";
@@ -1311,7 +1311,7 @@ void TelescopeControl::loadDeviceModels()
 	{
 		//deviceModels = QHash<QString, DeviceModel>();
 		//return;
-		qWarning() << "TelescopeControl: No external telescope servers found, trying to use embedded servers...";
+		qWarning() << "TelescopeControl: Only embedded telescope servers are available.";
 	}
 
 	//Clear the list of device models - it may not be empty.
@@ -1340,34 +1340,50 @@ void TelescopeControl::loadDeviceModels()
 
 		//Telescope server
 		QString server = model.value("server").toString();
-		bool useExecutable = true;
+		//The default behaviour is to use embedded servers:
+		bool useExecutable = false;
 		if(server.isEmpty())
 		{
-			//TODO: Add warning
+			qWarning() << "TelescopeControl: Skipping device model: No server specified for" << name;
 			continue;
 		}
-		if(!telescopeServers.contains(server) || !useServerExecutables)
+		if(useServerExecutables)
 		{
-			if(EMBEDDED_TELESCOPE_SERVERS.contains(server))
+			if(telescopeServers.contains(server))
 			{
-				qDebug() << "TelescopeControl: Using embedded telescope server for" << name;
+				qDebug() << "TelescopeControl: Using telescope server executable for" << name;
+				useExecutable = true;
+			}
+			else if(EMBEDDED_TELESCOPE_SERVERS.contains(server))
+			{
+				qWarning() << "TelescopeControl: No external telescope server executable found for" << name;
+				qWarning() << "TelescopeControl: Using embedded telescope server" << server << "for" << name;
 				useExecutable = false;
 			}
 			else
 			{
-				qWarning() << "TelescopeControl: Skipping device model: No server found:" << server;
+				qWarning() << "TelescopeControl: Skipping device model: No server" << server << "found for" << name;
 				continue;
 			}
 		}
-
+		else
+		{
+			if(!EMBEDDED_TELESCOPE_SERVERS.contains(server))
+			{
+				qWarning() << "TelescopeControl: Skipping device model: No server" << server << "found for" << name;
+				continue;
+			}
+			//else: everything is OK, using embedded server
+		}
+		
 		//Description and default connection delay
 		QString description = model.value("description", "No description is available.").toString();
 		int delay = model.value("default_delay", DEFAULT_DELAY).toInt();
-
+		
 		//Add this to the main list
 		DeviceModel newDeviceModel = {name, description, server, delay, useExecutable};
 		deviceModels.insert(name, newDeviceModel);
-		qDebug() << "TelescopeControl: Adding device model:" << name << description << server << delay;
+		//qDebug() << "TelescopeControl: Adding device model:" << name << description << server << delay;
 	}
 }
 
