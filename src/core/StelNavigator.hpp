@@ -112,11 +112,6 @@ public:
 	//! Get the modelview matrix for observer-centric Galactic equatorial drawing
 	const Mat4d getGalacticModelViewMat() const {return getJ2000ModelViewMat()*matGalacticToJ2000;}
 
-	//! Return the preset sky time in JD
-	double getPresetSkyTime() const {return presetSkyTime;}
-	//! Set the preset sky time from a JD
-	void setPresetSkyTime(double d) {presetSkyTime=d;}
-
 	//! Return the startup mode, can be preset|Preset or anything else
 	QString getStartupTimeMode() {return startupTimeMode;}
 	void setStartupTimeMode(const QString& s);
@@ -135,6 +130,11 @@ public slots:
 	void setJDay(double JD) {JDay=JD;}
 	//! Get the current date in Julian Day
 	double getJDay() const {return JDay;}
+
+	//! Return the preset sky time in JD
+	double getPresetSkyTime() const {return presetSkyTime;}
+	//! Set the preset sky time from a JD
+	void setPresetSkyTime(double d) {presetSkyTime=d;}
 
 	//! Set time speed in JDay/sec
 	void setTimeRate(double ts) {timeSpeed=ts; emit timeRateChanged(timeSpeed);}
