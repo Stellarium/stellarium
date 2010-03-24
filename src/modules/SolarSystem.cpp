@@ -930,7 +930,6 @@ QString SolarSystem::getPlanetHashString(void)
 
 void SolarSystem::setFlagTrails(bool b)
 {
-	qDebug() << "setFlagTrails " << b;
 	trailFader = b;
 	if (b)
 		allTrails->reset();
