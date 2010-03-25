@@ -405,8 +405,8 @@ QTabBar::tab {
 	font: bold;
 	background: rgba(0, 0, 0, 0%);
 	border: 1px solid rgba(0, 0, 0, 0%);
-	border-bottom: 0px;
-	border-top: 0px;
+	border-top: none;
+	border-bottom: none;
 	min-width: 10ex;
 	min-height: 56px;
 	padding: 6px 0px 0px 0px;
@@ -504,7 +504,7 @@ QListView::item:selected#stackListWidget {
 QListView::item#stackListWidget {
 	margin: 0px;
 	padding-top: 0px;
-	padding-bottom: 3px;
+	padding-bottom: 5px;
 	padding-left: 8px;
 	padding-right: 8px;
 }
