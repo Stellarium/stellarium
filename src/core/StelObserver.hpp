@@ -60,6 +60,9 @@ public:
 	//! provided by the getNextObserver() method
 	virtual bool isObserverLifeOver() const {return false;}
 
+	//! Get whether the location is a moving one.
+	virtual bool isTraveling() const {return false;}
+
 	//! Get the next observer to use once the life of this one is over
 	virtual StelObserver* getNextObserver() const {return new StelObserver(currentLocation);}
 
@@ -80,8 +83,9 @@ public:
 	virtual void update(double deltaTime);
 	virtual const QSharedPointer<Planet> getHomePlanet() const;
 	virtual bool isObserverLifeOver() const {return timeToGo <= 0.;}
+	virtual bool isTraveling() const {return !isObserverLifeOver();}
 	virtual StelObserver* getNextObserver() const {return new StelObserver(moveTargetLocation);}
-	
+
 private:
 	StelLocation moveStartLocation;
 	StelLocation moveTargetLocation;

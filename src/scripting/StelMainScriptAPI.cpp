@@ -178,16 +178,13 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 	Q_ASSERT(ssmgr);
 
 	StelLocation loc = nav->getCurrentLocation();
-	if (longitude < 180 || longitude > 180)
-		loc.longitude = longitude;
-	if (latitude < 180 || latitude > 180)
-		loc.latitude = latitude;
-	if (altitude < -1000)
+	loc.longitude = longitude;
+	loc.latitude = latitude;
+	if (altitude > -1000)
 		loc.altitude = altitude;
 	if (ssmgr->searchByName(planet))
 		loc.planetName = planet;
 	loc.name = name;
-
 	nav->moveObserverTo(loc, duration);
 }
 
