@@ -1,0 +1,86 @@
+/*
+Custom stylesheet for the Telescope Control plug-in,
+based on Stellarium's main stylesheet.
+
+Styles for the night-vision-friendly "night mode".
+*/
+
+QTreeView {
+	alternate-background-color: rgba(150, 0, 0, 20%)
+}
+
+QToolBox {
+	margin-right: 10px;
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-color: transparent;
+	font-weight: bold;
+}
+
+QToolBox > QWidget {
+	background-color: rgba(105, 0, 0, 20%);
+}
+
+QToolBox::tab {
+	padding-left: 10px;
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(32, 0, 0), stop:1 rgb(23, 0, 0));
+}
+
+QToolBox::tab:first {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+QToolBox::tab:middle {
+	/*border-radius: 10px;*/
+}
+
+QToolBox::tab:last {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+QToolBox::tab:selected {
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+QToolBox::tab::title {
+	image: none;
+	subcontrol-position: top left;
+	subcontrol-origin: margin;
+	color: rgb(122, 0, 0);
+}
+
+QTabBar {
+	border: none;
+	margin: 0px;
+	padding: 0px;
+	font-weight: bold;
+	color: rgb(120, 0, 0);
+	background-color: rgb(22, 0, 0);
+}
+
+QTabBar::tab {
+	border: none;
+	margin: 0px;
+	padding: 4px;
+	min-height: 24px;
+	min-width: 0px;
+	font-size: 14px;
+}
+
+QTabBar::tab:selected {
+	border: none;
+	margin: 0px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	color: rgb(220, 0, 0);
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 0, 0), stop: 1 rgb(86, 0, 0));
+}
+
+QTabWidget::pane {
+	margin-top: 0px;
+	border-top: none;
+}

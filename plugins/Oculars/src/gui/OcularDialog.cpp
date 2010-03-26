@@ -93,8 +93,25 @@ void OcularDialog::languageChanged()
 
 void OcularDialog::setStelStyle(const StelStyle& style)
 {
+	//Load the module's custom style sheets
+	StelStyle pluginStyle(style);
+	QFile styleSheetFile;
+	if (style.confSectionName == "color")
+	{
+		styleSheetFile.setFileName(":/ocular/normalStyle.css");
+	}
+	else
+	{
+		styleSheetFile.setFileName(":/ocular/nightStyle.css");
+	}
+	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
+	{
+		pluginStyle.qtStyleSheet.append(styleSheetFile.readAll());
+	}
+	styleSheetFile.close();
+	
 	if(dialog) {
-		dialog->setStyleSheet(style.qtStyleSheet);
+		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
 	}
 }
 
