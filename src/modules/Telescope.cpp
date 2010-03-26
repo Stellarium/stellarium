@@ -38,6 +38,8 @@
 	#include <sys/time.h>
 #endif
 
+namespace Stel {
+
 //! Example Telescope class. A physical telescope does not exist.
 //! This can be used as a starting point for implementing a derived
 //! Telescope class.
@@ -152,6 +154,8 @@ QString Telescope::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	return str;
 }
 
+}//namespace Stel
+
 //! returns the current system time in microseconds since the Epoch
 qint64 getNow(void)
 {
@@ -167,6 +171,8 @@ qint64 getNow(void)
 	return tv.tv_sec * 1000000LL + tv.tv_usec;
 #endif
 }
+
+namespace Stel {
 
 TelescopeTcp::TelescopeTcp(const QString &name,const QString &params) : Telescope(name), tcpSocket(new QTcpSocket()),
 		end_position(positions+(sizeof(positions)/sizeof(positions[0])))
@@ -548,3 +554,5 @@ void TelescopeTcp::socketFailed(QAbstractSocket::SocketError socketError)
 {
 	qDebug() << "TelescopeTcp(" << name << "): TCP socket error:\n" << tcpSocket->errorString();
 }
+
+} //namespace Stel

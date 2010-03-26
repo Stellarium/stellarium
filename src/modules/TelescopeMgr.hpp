@@ -34,7 +34,7 @@
 class StelProjector;
 class StelNavigator;
 class StelObject;
-class Telescope;
+namespace Stel { class Telescope; }
 class StelPainter;
 
 //! This class manages the controlling of one or more telescopes by one
@@ -120,7 +120,7 @@ private:
 	QFont telescope_font;
 	StelTextureSP telescopeTexture;
 
-	QMap<int, Telescope*> telescope_map;
+	QMap<int, Stel::Telescope*> telescope_map;
 	
 	// The selection pointer texture
 	StelTextureSP texPointer;
