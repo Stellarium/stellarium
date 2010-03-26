@@ -201,7 +201,9 @@ void StelApp::init(QSettings* conf)
 	// Avoid using GL Shaders by default since it causes so many problems with broken drivers.
 	useGLShaders = confSettings->value("main/use_glshaders", false).toBool();
 	useGLShaders = useGLShaders && QGLShaderProgram::hasOpenGLShaderPrograms();
-	useGLShaders = useGLShaders && (QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0));
+
+	// We use OpenGL 2.1 features in our shaders
+	useGLShaders = useGLShaders && (QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_1) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0));
 #else
 	useGLShaders = true;
 #endif
