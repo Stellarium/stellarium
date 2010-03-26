@@ -32,6 +32,8 @@
 
 qint64 getNow(void);
 
+namespace Stel {
+
 class Telescope : public QObject, public StelObject
 {
 	Q_OBJECT
@@ -136,5 +138,7 @@ private:
 private slots:
 	void socketFailed(QAbstractSocket::SocketError socketError);
 };
+
+}//namespace Stel
 
 #endif // _TELESCOPE_HPP_
