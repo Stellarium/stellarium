@@ -37,7 +37,7 @@
 
 void TelescopeMgr::deleteAllTelescopes()
 {
-	foreach (Telescope* t, telescope_map)
+	foreach (Stel::Telescope* t, telescope_map)
 		delete t;
 	telescope_map.clear();
 }
@@ -71,7 +71,7 @@ void TelescopeMgr::draw(StelCore* core)
 	glEnable(GL_BLEND);
 	telescopeTexture->bind();
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-	foreach (Telescope* tel, telescope_map)
+	foreach (Stel::Telescope* tel, telescope_map)
 	{
 		if (tel->isConnected() && tel->hasKnownPosition())
 		{
@@ -128,7 +128,7 @@ QList<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, 
 	Vec3d v(vv);
 	v.normalize();
 	double cosLimFov = cos(limitFov * M_PI/180.);
-	foreach (Telescope* tel, telescope_map)
+	foreach (Stel::Telescope* tel, telescope_map)
 	{
 		if (tel->getJ2000EquatorialPos(core->getNavigator()).dot(v) >= cosLimFov)
 		{
@@ -140,7 +140,7 @@ QList<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, 
 
 StelObjectP TelescopeMgr::searchByNameI18n(const QString &nameI18n) const
 {
-	foreach (Telescope* tel, telescope_map)
+	foreach (Stel::Telescope* tel, telescope_map)
 	{
 		if (tel->getNameI18n() == nameI18n)
 			return tel;
@@ -150,7 +150,7 @@ StelObjectP TelescopeMgr::searchByNameI18n(const QString &nameI18n) const
 
 StelObjectP TelescopeMgr::searchByName(const QString &name) const
 {
-	foreach (Telescope* tel, telescope_map)
+	foreach (Stel::Telescope* tel, telescope_map)
 	{
 		if (tel->getEnglishName() == name)
 		return tel;
@@ -164,7 +164,7 @@ QStringList TelescopeMgr::listMatchingObjectsI18n(const QString& objPrefix, int 
 	if (maxNbItem==0) return result;
 
 	QString objw = objPrefix.toUpper();
-	foreach (const Telescope* tel, telescope_map)
+	foreach (const Stel::Telescope* tel, telescope_map)
 	{
 		QString constw = tel->getNameI18n().mid(0, objw.size()).toUpper();
 		if (constw==objw)
@@ -221,7 +221,7 @@ void TelescopeMgr::init()
 		if (!url.isEmpty()) 
 		{
 			qWarning() << url;
-			Telescope *t = Telescope::create(url);
+			Stel::Telescope *t = Stel::Telescope::create(url);
 			if (t) 
 			{
 				for (int j=0;j<9;j++) 
@@ -268,7 +268,7 @@ void TelescopeMgr::drawPointer(const StelProjectorP& prj, const StelNavigator * 
 
 void TelescopeMgr::telescopeGoto(int telescope_nr,const Vec3d &j2000Pos)
 {
-	QMap<int, Telescope*>::ConstIterator it(telescope_map.find(telescope_nr));
+	QMap<int, Stel::Telescope*>::ConstIterator it(telescope_map.find(telescope_nr));
 	if (it != telescope_map.end())
 	{
 		it.value()->telescopeGoto(j2000Pos);
@@ -279,7 +279,7 @@ void TelescopeMgr::communicate(void)
 {
 	if (!telescope_map.empty())
 	{
-		foreach (Telescope* tel, telescope_map)
+		foreach (Stel::Telescope* tel, telescope_map)
 		{
 			if(tel->prepareCommunication())
 				tel->performCommunication();
