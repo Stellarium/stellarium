@@ -36,6 +36,7 @@ public:
 	SatellitesDialog();
 	virtual ~SatellitesDialog();
 	virtual void languageChanged();
+	virtual void setStelStyle(const StelStyle& style);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
