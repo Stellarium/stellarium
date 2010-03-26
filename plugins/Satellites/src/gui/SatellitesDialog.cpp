@@ -60,6 +60,12 @@ void SatellitesDialog::languageChanged()
 		ui->retranslateUi(dialog);
 }
 
+void SatellitesDialog::setStelStyle(const StelStyle& style)
+{
+	if(dialog)
+		dialog->setStyleSheet(GETSTELMODULE(Satellites)->getModuleStyleSheet(style.confSectionName).qtStyleSheet);
+}
+
 // Initialize the dialog widgets and connect the signals/slots
 void SatellitesDialog::createDialogContent()
 {
@@ -105,6 +111,8 @@ void SatellitesDialog::createDialogContent()
 
 	updateGuiFromSettings();
 
+	//Initialize the style
+	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
 }
 
 void SatellitesDialog::groupFilterChanged(int index)

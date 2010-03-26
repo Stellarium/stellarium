@@ -77,6 +77,7 @@ public:
 	virtual void update(double deltaTime);
 	virtual void draw(StelCore* core);
 	virtual void drawPointer(StelCore* core, StelPainter& painter);
+	virtual void setStelStyle(const StelStyle& style);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -155,6 +156,9 @@ public:
 
 	//! Set the list of URLs which are sources of TLE data.
 	void setTleSources(QStringList tleSources);
+	
+	//! Returns the module-specific style sheet for the given mode ("color" or "night_color", as used in StelStyle).
+	const StelStyle& getModuleStyleSheet(const QString& styleModeName);
 
 signals:
 	//! emitted when the update status changes, e.g. when 
@@ -228,6 +232,8 @@ private:
 
 	// GUI
 	SatellitesDialog* configDialog;
+	StelStyle * normalStyle;
+	StelStyle * nightStyle;
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer
