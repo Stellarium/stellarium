@@ -32,49 +32,6 @@
 #include <QGLFormat>
 #include <QPlastiqueStyle>
 #include <QFileInfo>
-#include <QtPlugin>
-
-Q_IMPORT_PLUGIN(StelGui)
-
-#ifdef USE_STATIC_PLUGIN_VIRGO
-Q_IMPORT_PLUGIN(VirGO)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_SVMT
-Q_IMPORT_PLUGIN(SVMT)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_HELLOSTELMODULE
-Q_IMPORT_PLUGIN(HelloStelModule)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_ANGLEMEASURE
-Q_IMPORT_PLUGIN(AngleMeasure)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_COMPASSMARKS
-Q_IMPORT_PLUGIN(CompassMarks)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_SATELLITES
-Q_IMPORT_PLUGIN(Satellites)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_TEXTUSERINTERFACE
-Q_IMPORT_PLUGIN(TextUserInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_LOGBOOK
-Q_IMPORT_PLUGIN(LogBook)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_OCULARS
-Q_IMPORT_PLUGIN(Oculars)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_TELESCOPECONTROL
-Q_IMPORT_PLUGIN(TelescopeControl)
-#endif
 
 //! @class GettextStelTranslator
 //! Provides i18n support through gettext.
