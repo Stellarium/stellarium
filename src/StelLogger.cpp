@@ -251,6 +251,7 @@ void StelLogger::init(const QString& logFilePath)
 
 void StelLogger::deinit()
 {
+	qInstallMsgHandler(0);
 	logFile.close();
 }
 
