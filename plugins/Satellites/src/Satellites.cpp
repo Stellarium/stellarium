@@ -169,40 +169,38 @@ void Satellites::init()
 	connect(StelApp::getInstance().getCore()->getNavigator(), SIGNAL(locationChanged(StelLocation)), this, SLOT(observerLocationChanged(StelLocation)));
 	
 	//Load the module's custom style sheets
-	const StelStyle * style = StelApp::getInstance().getCurrentStelStyle();
-	normalStyle = new StelStyle(*style);
-	nightStyle = new StelStyle(*style);
 	QFile styleSheetFile;
 	styleSheetFile.setFileName(":/satellites/normalStyle.css");
 	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
 	{
-		normalStyle->qtStyleSheet.append(styleSheetFile.readAll());
+		normalStyleSheet = new QByteArray(styleSheetFile.readAll());
 	}
 	styleSheetFile.close();
 	styleSheetFile.setFileName(":/satellites/nightStyle.css");
 	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
 	{
-		nightStyle->qtStyleSheet.append(styleSheetFile.readAll());
+		nightStyleSheet = new QByteArray(styleSheetFile.readAll());
 	}
 	styleSheetFile.close();
-	Satellites::setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
 }
 
 void Satellites::setStelStyle(const StelStyle& style)
 {
+	configDialog->setStelStyle(style);
+}
+
+const StelStyle Satellites::getModuleStyleSheet(const StelStyle& style)
+{
+	StelStyle pluginStyle(style);
 	if (style.confSectionName == "color")
 	{
-		configDialog->setStelStyle(*normalStyle);
+		pluginStyle.qtStyleSheet.append(*normalStyleSheet);
 	}
 	else
 	{
-		configDialog->setStelStyle(*nightStyle);
+		pluginStyle.qtStyleSheet.append(*nightStyleSheet);
 	}
-}
-
-const StelStyle & Satellites::getModuleStyleSheet(const QString& styleModeName)
-{
-	return ((styleModeName == "color") ? (*normalStyle) : (*nightStyle));
+	return pluginStyle;
 }
 
 double Satellites::getCallOrder(StelModuleActionName actionName) const

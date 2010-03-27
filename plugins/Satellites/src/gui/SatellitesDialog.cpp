@@ -60,10 +60,14 @@ void SatellitesDialog::languageChanged()
 		ui->retranslateUi(dialog);
 }
 
-void SatellitesDialog::setStelStyle(const StelStyle& style)
+void SatellitesDialog::setStelStyle(const StelStyle & style)
 {
 	if(dialog)
-		dialog->setStyleSheet(GETSTELMODULE(Satellites)->getModuleStyleSheet(style.confSectionName).qtStyleSheet);
+	{
+		const StelStyle pluginStyle = GETSTELMODULE(Satellites)->getModuleStyleSheet(style);
+		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
+	}
 }
 
 // Initialize the dialog widgets and connect the signals/slots
