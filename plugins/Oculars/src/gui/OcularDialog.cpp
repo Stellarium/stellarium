@@ -17,12 +17,14 @@
  */
 
 #include "Ocular.hpp"
+#include "Oculars.hpp"
 #include "OcularDialog.hpp"
 #include "ui_ocularDialog.h"
 
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelFileMgr.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelTranslator.hpp"
 
@@ -93,25 +95,10 @@ void OcularDialog::languageChanged()
 
 void OcularDialog::setStelStyle(const StelStyle& style)
 {
-	//Load the module's custom style sheets
-	StelStyle pluginStyle(style);
-	QFile styleSheetFile;
-	if (style.confSectionName == "color")
-	{
-		styleSheetFile.setFileName(":/ocular/normalStyle.css");
-	}
-	else
-	{
-		styleSheetFile.setFileName(":/ocular/nightStyle.css");
-	}
-	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
-	{
-		pluginStyle.qtStyleSheet.append(styleSheetFile.readAll());
-	}
-	styleSheetFile.close();
-	
 	if(dialog) {
+		const StelStyle pluginStyle = GETSTELMODULE(Oculars)->getModuleStyleSheet(style);
 		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
+		ui->textBrowser->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
 	}
 }
 

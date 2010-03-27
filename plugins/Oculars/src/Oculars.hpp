@@ -59,6 +59,10 @@ public:
 	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
 	virtual void setStelStyle(const StelStyle& style);
 	virtual void update(double deltaTime) {;}
+	
+	//! Returns the module-specific style sheet.
+	//! The main StelStyle instance should be passed.
+	const StelStyle getModuleStyleSheet(const StelStyle& style);
 
 public slots:
 	//! This method is called with we detect that our hot key is pressed.  It handles
@@ -155,7 +159,10 @@ private:
 	
 	QSqlTableModel *ocularsTableModel;
 	QSqlTableModel *telescopesTableModel;
-
+	
+	//Styles
+	QByteArray * normalStyleSheet;
+	QByteArray * nightStyleSheet;
 };
 
 
