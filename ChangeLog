@@ -1,6 +1,25 @@
-Fixed a bug: telescope control sends RA=0 for objects with RA between 
-(12 and 24?) on Intel Macs. (revision 6025, fix proposed by David Hulse)
-Fixed a bug: the GUI was not affected by night vision mode. (LP #539665)
+0.10.5 (in development)
+Bug fix release.
+Fixed:
+- various problems with OpenGL shaders. If you experience problems with unreadable fonts, try adding the line "use_qpaintenginegl2 = false" in the [main] section of the configuration file (config.ini).
+- distorted menu icons on Windows. (LP: #512060)
+- old_style landscapes not being displayed on some systems. (LP: #518809, fix proposed by Hleb Valoshka)
+- planet orbits not being toggled by pressing 'O'. (LP: #536684)
+- setting landscape altitude (patch by Georg Zotti).
+- making a series of location changes in a script. (LP: #500192)
+- telescope control sending RA=0 for objects with RA between (12 and 24?) on Intel Macs. (LP: #544250, fix proposed by David Hulse)
+- windows and toolbars not being affected by night vision mode. (LP: #539665)
+
+Changed:
+- The Date/Time window now is synchronised with the date/time displayed in the toolbar, instead of showing the last date/time that has been entered.
+- the visual style of some plug-ins. 
+
+Added:
+- option to create a desktop shortcut in the Windows installer.
+- time dragging: Hold down Ctrl+Space and drag the mouse across the sky to change time speed.
+- re-added the "planet trails" feature. Toggle with Shift+T.
+- some Sky-Watcher mounts to the list of devices supported by the Telescope Control plug-in.
+
 
 0.10.4 [2010-02-22]
 Bug fix release.
