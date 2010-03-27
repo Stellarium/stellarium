@@ -157,8 +157,9 @@ public:
 	//! Set the list of URLs which are sources of TLE data.
 	void setTleSources(QStringList tleSources);
 	
-	//! Returns the module-specific style sheet for the given mode ("color" or "night_color", as used in StelStyle).
-	const StelStyle& getModuleStyleSheet(const QString& styleModeName);
+	//! Returns the module-specific style sheet.
+	//! The main StelStyle instance should be passed.
+	const StelStyle getModuleStyleSheet(const StelStyle& style);
 
 signals:
 	//! emitted when the update status changes, e.g. when 
@@ -232,8 +233,8 @@ private:
 
 	// GUI
 	SatellitesDialog* configDialog;
-	StelStyle * normalStyle;
-	StelStyle * nightStyle;
+	QByteArray * normalStyleSheet;
+	QByteArray * nightStyleSheet;
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer

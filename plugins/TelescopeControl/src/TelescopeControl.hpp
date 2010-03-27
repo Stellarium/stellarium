@@ -136,8 +136,9 @@ public:
 	//! Checks if the TelescopeClient object at a given slot is connected to a server.
 	bool isConnectedClientAtSlot(int slot);
 	
-	//! Returns the module-specific style sheet for the given mode ("color" or "night_color", as used in StelStyle).
-	const QString& getModuleStyleSheet(const QString& styleModeName);
+	//! Returns the module-specific style sheet.
+	//! The main StelStyle instance should be passed.
+	const StelStyle getModuleStyleSheet(const StelStyle& style);
 	
 	bool getFlagUseServerExecutables() {return useServerExecutables;}
 	//! Forces a call of loadDeviceModels(). Stops all active telescopes.
@@ -225,7 +226,6 @@ private:
 	QStringList telescopeServers;
 	QVariantMap telescopeDescriptions;
 	QHash<QString, DeviceModel> deviceModels;
-	QHash<QString, QString> moduleStyleSheet;
 	
 	bool useTelescopeServerLogs;
 	QHash<int, QFile*> telescopeServerLogFiles;
@@ -236,6 +236,10 @@ private:
 	
 	//GUI
 	TelescopeDialog* telescopeDialog;
+	
+	//Styles
+	QByteArray * normalStyleSheet;
+	QByteArray * nightStyleSheet;
 	
 	//! Used internally. Checks if the argument is a valid slot number.
 	bool isValidSlotNumber(int slot);

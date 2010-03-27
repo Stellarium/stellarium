@@ -104,48 +104,48 @@ void TelescopeControl::init()
 		loadConfiguration();
 		//Make sure that such a section is created, if it doesn't exist
 		saveConfiguration();
-
+		
 		//Make sure that the module directory exists
 		QString moduleDirectoryPath = StelFileMgr::getUserDir() + "/modules/TelescopeControl";
 		if(!StelFileMgr::exists(moduleDirectoryPath))
 			StelFileMgr::mkDir(moduleDirectoryPath);
-
+		
 		//Load the device models
 		loadDeviceModels();
 		if(deviceModels.isEmpty())
 		{
 			qWarning() << "TelescopeControl: No device model descriptions have been loaded. Stellarium will not be able to control a telescope on its own, but it is still possible to do it through an external application or to connect to a remote host.";
 		}
-
+		
 		//Unload Stellarium's internal telescope control module
 		StelApp::getInstance().getModuleMgr().unloadModule("TelescopeMgr", false);//If the alsoDelete parameter is set to true, Stellarium crashes with a segmentation fault when an object is selected. TODO: Find out why.
 		//unloadModule() didn't work prior to revision 5058: the module unloaded OK, but Stellarium crashed later with a segmentation fault,
 		//because LandscapeMgr::getCallOrder() depended on the module's existence to return a value.
-
+		
 		//Load and start all telescope clients
 		loadTelescopes();
-
+		
 		//Load OpenGL textures
 		reticleTexture = StelApp::getInstance().getTextureManager().createTexture(":/telescopeControl/telescope_reticle.png");
 		selectionTexture = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
-
+		
 		//Load the module's custom style sheets
 		QFile styleSheetFile;
 		styleSheetFile.setFileName(":/telescopeControl/normalStyle.css");
 		if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
 		{
-			moduleStyleSheet.insert("color", QString(styleSheetFile.readAll()));
+			normalStyleSheet = new QByteArray(styleSheetFile.readAll());
 		}
 		styleSheetFile.close();
 		styleSheetFile.setFileName(":/telescopeControl/nightStyle.css");
 		if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
 		{
-			moduleStyleSheet.insert("night_color", QString(styleSheetFile.readAll()));
+			nightStyleSheet = new QByteArray(styleSheetFile.readAll());
 		}
 		styleSheetFile.close();
-
+		
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-
+		
 		//Create telescope key bindings
 		QString group = N_("Telescope Control");
 		#ifdef COMPATIBILITY_001003
@@ -163,7 +163,7 @@ void TelescopeControl::init()
 		gui->addGuiActions("actionMove_Telescope_To_Selection_8", N_("Move telescope #8 to selected object"), "Ctrl+8", group, false, false);
 		gui->addGuiActions("actionMove_Telescope_To_Selection_9", N_("Move telescope #9 to selected object"), "Ctrl+9", group, false, false);
 		#endif //COMPATIBILITY_001003
-
+		
 		//connect(gui->getGuiActions("actionMove_Telescope_To_Selection_0"), SIGNAL(triggered()), this, SLOT(moveTelescopeToSelected()));
 		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_1"), SIGNAL(triggered()), this, SLOT(moveTelescopeToSelected()));
 		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_2"), SIGNAL(triggered()), this, SLOT(moveTelescopeToSelected()));
@@ -174,10 +174,10 @@ void TelescopeControl::init()
 		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_7"), SIGNAL(triggered()), this, SLOT(moveTelescopeToSelected()));
 		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_8"), SIGNAL(triggered()), this, SLOT(moveTelescopeToSelected()));
 		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_9"), SIGNAL(triggered()), this, SLOT(moveTelescopeToSelected()));
-
+		
 		//Create and initialize the telescope management window
 		telescopeDialog = new TelescopeDialog();
-
+		
 		#ifdef USE_TOGGLEABLE_TELESCOPE_WINDOW
 		//TODO: Think of a better keyboard shortcut
 		#ifdef COMPATIBILITY_001003
@@ -187,7 +187,7 @@ void TelescopeControl::init()
 		#endif //COMPATIBILITY_001003
 		connect(gui->getGuiActions("actionShow_Telescopes_Window"), SIGNAL(toggled(bool)), telescopeDialog, SLOT(setVisible(bool)));
 		connect(telescopeDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Telescopes_Window"), SLOT(setChecked(bool)));
-
+		
 		#ifdef USE_TOOLBAR_BUTTON
 		//Create toolbar button
 		pixmapHover = new QPixmap(":/graphicGui/gui/glow32x32.png");
@@ -196,7 +196,7 @@ void TelescopeControl::init()
 		toolbarButton = new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, gui->getGuiActions("actionShow_Telescopes_Window"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		#endif //USE_TOOLBAR_BUTTON
-
+		
 		#endif //USE_TOGGLEABLE_TELESCOPE_WINDOW
 	}
 	catch (std::runtime_error &e)
@@ -204,11 +204,8 @@ void TelescopeControl::init()
 		qWarning() << "TelescopeControl::init() error: " << e.what();
 		return;
 	}
-
+	
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
-
-	//Initialize style, as it is not called at startup:
-	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
 }
 
 void TelescopeControl::deinit()
@@ -1407,9 +1404,18 @@ bool TelescopeControl::restoreDeviceModelsListTo(QString deviceModelsListPath)
 	return true;
 }
 
-const QString& TelescopeControl::getModuleStyleSheet(const QString& styleModeName)
+const StelStyle TelescopeControl::getModuleStyleSheet(const StelStyle& style)
 {
-	return moduleStyleSheet[styleModeName];
+	StelStyle pluginStyle(style);
+	if (style.confSectionName == "color")
+	{
+		pluginStyle.qtStyleSheet.append(*normalStyleSheet);
+	}
+	else
+	{
+		pluginStyle.qtStyleSheet.append(*nightStyleSheet);
+	}
+	return pluginStyle;
 }
 
 const QString& TelescopeControl::getServerExecutablesDirectoryPath()

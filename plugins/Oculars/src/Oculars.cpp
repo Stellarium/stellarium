@@ -282,18 +282,40 @@ void Oculars::init()
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 	}
+	
+	//Load the module's custom style sheets
+	QFile styleSheetFile;
+	styleSheetFile.setFileName(":/ocular/normalStyle.css");
+	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
+	{
+		normalStyleSheet = new QByteArray(styleSheetFile.readAll());
+	}
+	styleSheetFile.close();
+	styleSheetFile.setFileName(":/ocular/nightStyle.css");
+	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
+	{
+		nightStyleSheet = new QByteArray(styleSheetFile.readAll());
+	}
+	styleSheetFile.close();
 }
 
 void Oculars::setStelStyle(const StelStyle& style)
 {
-	/*
-	if(dialog) {
-		dialog->setStyleSheet(telescopeManager->getModuleStyleSheet(style.confSectionName));
-	}
-	 */
-
-	//Change the styles of all children, too
 	ocularDialog->setStelStyle(style);
+}
+
+const StelStyle Oculars::getModuleStyleSheet(const StelStyle& style)
+{
+	StelStyle pluginStyle(style);
+	if (style.confSectionName == "color")
+	{
+		pluginStyle.qtStyleSheet.append(*normalStyleSheet);
+	}
+	else
+	{
+		pluginStyle.qtStyleSheet.append(*nightStyleSheet);
+	}
+	return pluginStyle;
 }
 
 /* ********************************************************************* */

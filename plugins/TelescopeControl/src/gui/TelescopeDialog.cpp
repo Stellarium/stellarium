@@ -684,8 +684,12 @@ void TelescopeDialog::setStatusButtonToDisconnect()
 void TelescopeDialog::setStelStyle(const StelStyle& style)
 {
 	if(dialog)
-		dialog->setStyleSheet(telescopeManager->getModuleStyleSheet(style.confSectionName));
-
+	{
+		const StelStyle pluginStyle = telescopeManager->getModuleStyleSheet(style);
+		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
+		ui->textBrowserAbout->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
+	}
+	
 	//Change the styles of all children, too
 	configurationDialog.setStelStyle(style);
 }

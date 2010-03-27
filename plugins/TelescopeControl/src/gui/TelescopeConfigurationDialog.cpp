@@ -378,5 +378,5 @@ void TelescopeConfigurationDialog::deviceModelSelected(const QString& deviceMode
 void TelescopeConfigurationDialog::setStelStyle(const StelStyle& style)
 {
 	if(dialog)
-		dialog->setStyleSheet(telescopeManager->getModuleStyleSheet(style.confSectionName));
+		dialog->setStyleSheet(telescopeManager->getModuleStyleSheet(style).qtStyleSheet);
 }
