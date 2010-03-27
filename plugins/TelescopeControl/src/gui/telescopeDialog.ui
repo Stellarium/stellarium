@@ -580,7 +580,11 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
-        <widget class="QTextBrowser" name="textBrowserAbout"/>
+        <widget class="QTextBrowser" name="textBrowserAbout">
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

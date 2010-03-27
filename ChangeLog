@@ -3,12 +3,13 @@ Bug fix release.
 Fixed:
 - various problems with OpenGL shaders. If you experience problems with unreadable fonts, try adding the line "use_qpaintenginegl2 = false" in the [main] section of the configuration file (config.ini).
 - distorted menu icons on Windows. (LP: #512060)
-- old_style landscapes not being displayed on some systems. (LP: #518809, fix proposed by Hleb Valoshka)
+- LC_NUMERIC locale not being set properly, causing problems on some systems with old_style landscapes (LP: #518809) and the Satellites plug-in (LP: #522520). (fix proposed by Hleb Valoshka and others)
 - planet orbits not being toggled by pressing 'O'. (LP: #536684)
 - setting landscape altitude (patch by Georg Zotti).
 - making a series of location changes in a script. (LP: #500192)
 - telescope control sending RA=0 for objects with RA between (12 and 24?) on Intel Macs. (LP: #544250, fix proposed by David Hulse)
 - windows and toolbars not being affected by night vision mode. (LP: #539665)
+- a crash on Windows when exiting Stellarium after a search. (LP: #534674)
 
 Changed:
 - The Date/Time window now is synchronised with the date/time displayed in the toolbar, instead of showing the last date/time that has been entered.
