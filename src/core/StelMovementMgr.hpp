@@ -85,6 +85,8 @@ public:
 	void setMovementSpeedFactor(float s) {movementsSpeedFactor=s;}
 	float getMovementSpeedFactor() const {return movementsSpeedFactor;}
 
+	void setDragTriggerDistance(float d) {dragTriggerDistance=d;}
+
 public slots:
 	//! Toggle current mount mode between equatorial and altazimuthal
 	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquinoxEquatorial); else setMountMode(MountAltAzimuthal);}
@@ -304,6 +306,8 @@ private:
 	Vec3d viewDirectionMountFrame;
 
 	Vec3d upVectorMountFrame;
+
+	float dragTriggerDistance;
 };
 
 #endif // _STELMOVEMENTMGR_HPP_
