@@ -46,7 +46,8 @@ StelMovementMgr::StelMovementMgr(StelCore* acore) : core(acore),
 	deltaAz(0.),
 	dragTimeMode(false),
 	flagAutoZoom(0),
-	flagAutoZoomOutResetsDirection(0)
+	flagAutoZoomOutResetsDirection(0),
+	dragTriggerDistance(4.f)
 {
 	setObjectName("StelMovementMgr");
 	isDragging = false;
@@ -161,7 +162,7 @@ bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 
 	if (isDragging && flagEnableMouseNavigation)
 	{
-		if (hasDragged || (std::sqrt((double)((x-previousX)*(x-previousX) +(y-previousY)*(y-previousY)))>4.))
+		if (hasDragged || (std::sqrt((float)((x-previousX)*(x-previousX) +(y-previousY)*(y-previousY)))>dragTriggerDistance))
 		{
 			hasDragged = true;
 			setFlagTracking(false);
