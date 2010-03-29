@@ -28,6 +28,7 @@
 #include "StelPainter.hpp"
 #include "StelGuiBase.hpp"
 #include "StelMainScriptAPIProxy.hpp"
+#include "StelMainWindow.hpp"
 
 #include <QGLFormat>
 #include <QPaintEngine>
@@ -321,6 +322,22 @@ void StelMainGraphicsView::keyReleaseEvent(QKeyEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
 	QGraphicsView::keyReleaseEvent(event);
+}
+
+void StelMainGraphicsView::focusOutEvent(QFocusEvent* event)
+{
+	if (StelMainWindow::getInstance().isFullScreen())
+		StelMainWindow::getInstance().showMinimized();
+	QCoreApplication::processEvents();
+	QGraphicsView::focusOutEvent(event);
+}
+
+void StelMainGraphicsView::focusInEvent(QFocusEvent* event)
+{
+	//TODO: Test if this is really necessary
+	StelMainWindow::getInstance().activateWindow();
+	QCoreApplication::processEvents();
+	QGraphicsView::focusInEvent(event);
 }
 
 //! Delete openGL textures (to call before the GLContext disappears)
