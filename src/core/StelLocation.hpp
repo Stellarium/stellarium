@@ -28,7 +28,7 @@ class StelLocation
 	friend class StelLocationMgr;
 	
 public:
-	StelLocation() : longitude(0.), latitude(0.), altitude(0), bortleScaleIndex(2.), isUserLocation(true) {;}
+	StelLocation() : longitude(0.f), latitude(0.f), altitude(0), bortleScaleIndex(2.f), isUserLocation(true) {;}
 	
 	//! Return a short string which can be used in a list view
 	QString getID() const
@@ -48,9 +48,9 @@ public:
 	//! English planet name
 	QString planetName;
 	//! Longitude in degree
-	double longitude;
+	float longitude;
 	//! Latitude in degree
-	double latitude;
+	float latitude;
 	//! Altitude in meter
 	int altitude;
 	//! Light pollution index following Bortle scale

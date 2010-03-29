@@ -86,6 +86,9 @@ void StelLogger::init(const QString& logFilePath)
 		case QSysInfo::MV_10_5:
 			writeLog("Mac OS X 10.5");
 			break;
+		case QSysInfo::MV_10_6:
+			writeLog("Mac OS X 10.6");
+			break;
 		default:
 			writeLog("Unsupported Mac version");
 			break;
@@ -127,6 +130,8 @@ void StelLogger::init(const QString& logFilePath)
 
 	// write memory and CPU info
 #ifdef Q_OS_LINUX
+
+#ifndef USE_OPENGL_ES2
 	QFile infoFile("/proc/meminfo");
 	if(!infoFile.open(QIODevice::ReadOnly | QIODevice::Text))
 		writeLog("Could not get memory info.");
@@ -178,6 +183,7 @@ void StelLogger::init(const QString& logFilePath)
 			}
 		}
 	}
+#endif // USE_OPENGL_ES2
 
 	// Aargh Windows API
 #elif defined Q_OS_WIN
