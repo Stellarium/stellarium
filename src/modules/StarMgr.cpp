@@ -119,9 +119,9 @@ QString StarMgr::convertToComponentIds(int index)
 
 
 void StarMgr::initTriangle(int lev,int index,
-						   const Vec3d &c0,
-						   const Vec3d &c1,
-						   const Vec3d &c2) {
+						   const Vec3f &c0,
+						   const Vec3f &c1,
+						   const Vec3f &c2) {
   ZoneArrayMap::const_iterator it(zoneArrays.find(lev));
   if (it!=zoneArrays.end()) it->second->initTriangle(index,c0,c1,c2);
 }
