@@ -44,9 +44,9 @@ struct ZoneData
 	{
 		return size;
 	}
-	Vec3d center;
-	Vec3d axis0;
-	Vec3d axis1;
+	Vec3f center;
+	Vec3f axis0;
+	Vec3f axis1;
 	int size;
 	void *stars;
 };

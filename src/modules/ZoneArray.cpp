@@ -47,8 +47,8 @@ namespace BigStarCatalogExtension
 
 static const Vec3d north(0,0,1);
 
-void ZoneArray::initTriangle(int index, const Vec3d &c0, const Vec3d &c1,
-							 const Vec3d &c2)
+void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1,
+							 const Vec3f &c2)
 {
 	// initialize center,axis0,axis1:
 	ZoneData &z(zones[index]);
@@ -499,6 +499,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_insi
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 	SpecialZoneData<Star> *const z = getZones() + index;
 	Vec3d v;
+	Vec3f vf;
 	const Star *const end = z->getStars() + z->size;
 	static const double d2000 = 2451545.0;
 	const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getNavigator()->getJDay()-d2000)/365.25) / star_position_scale;
@@ -506,13 +507,14 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_insi
 	for (const Star *s=z->getStars();s<end;++s)
 	{
 		tmpRcmag = rcmag_table+2*s->mag;
-		if (*tmpRcmag<=0.)
+		if (*tmpRcmag<=0.f)
 			break;
-		s->getJ2000Pos(z,movementFactor, v);
+		s->getJ2000Pos(z,movementFactor, vf);
+		v.set(vf[0], vf[1], vf[2]);
 		if (drawer->drawPointSource(sPainter, v,tmpRcmag,s->bV, !is_inside) && s->hasName() && s->mag < maxMagStarName)
 		{
-			const float offset = *tmpRcmag*0.7;
-			const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.2, 0.2) : StelSkyDrawer::indexToColor(s->bV))*0.75;
+			const float offset = *tmpRcmag*0.7f;
+			const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.2f, 0.2f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;
 			sPainter->setColor(colorr[0], colorr[1], colorr[2],names_brightness);
 			sPainter->drawText(v, s->getNameI18n(), 0, offset, offset, false);
 		}
@@ -526,12 +528,13 @@ void SpecialZoneArray<Star>::searchAround(const StelNavigator* nav, int index, c
 	static const double d2000 = 2451545.0;
 	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * ((nav->getJDay()-d2000)/365.25)/ star_position_scale;
 	const SpecialZoneData<Star> *const z = getZones()+index;
-	Vec3d tmp;
+	Vec3f tmp;
+	Vec3f vf(v[0], v[1], v[2]);
 	for (const Star* s=z->getStars();s<z->getStars()+z->size;++s)
 	{
 		s->getJ2000Pos(z,movementFactor, tmp);
 		tmp.normalize();
-		if (tmp*v >= cosLimFov)
+		if (tmp*vf >= cosLimFov)
 		{
 			// TODO: do not select stars that are too faint to display
 			result.push_back(s->createStelObject(this,z));

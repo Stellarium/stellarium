@@ -66,10 +66,10 @@ struct Star1 { // 28 byte
   enum {MaxPosVal=0x7FFFFFFF};
   StelObjectP createStelObject(const SpecialZoneArray<Star1> *a,
 					 const SpecialZoneData<Star1> *z) const;
-  void getJ2000Pos(const ZoneData *z,double movementFactor, Vec3d& pos) const {
+  void getJ2000Pos(const ZoneData *z,float movementFactor, Vec3f& pos) const {
 	  pos = z->axis0;
-	  pos*=((double)(x0)+movementFactor*dx0);
-	  pos+=((double)(x1)+movementFactor*dx1)*z->axis1;
+	  pos*=((float)(x0)+movementFactor*dx0);
+	  pos+=((float)(x1)+movementFactor*dx1)*z->axis1;
 	  pos+=z->center;
   }
   float getBV(void) const {return IndexToBV(bV);}
@@ -100,10 +100,10 @@ struct Star2 {  // 10 byte
   enum {MaxPosVal=((1<<19)-1)};
   StelObjectP createStelObject(const SpecialZoneArray<Star2> *a,
 					 const SpecialZoneData<Star2> *z) const;
-  void getJ2000Pos(const ZoneData *z,double movementFactor, Vec3d& pos) const {
+  void getJ2000Pos(const ZoneData *z,float movementFactor, Vec3f& pos) const {
 	  pos = z->axis0;
-	  pos*=((double)(x0)+movementFactor*dx0);
-	  pos+=((double)(x1)+movementFactor*dx1)*z->axis1;
+	  pos*=((float)(x0)+movementFactor*dx0);
+	  pos+=((float)(x1)+movementFactor*dx1)*z->axis1;
 	  pos+=z->center;
   }
   float getBV(void) const {return IndexToBV(bV);}
@@ -132,11 +132,11 @@ struct Star3 {  // 6 byte
   enum {MaxPosVal=((1<<17)-1)};
   StelObjectP createStelObject(const SpecialZoneArray<Star3> *a,
 					 const SpecialZoneData<Star3> *z) const;
-  void getJ2000Pos(const ZoneData *z,double, Vec3d& pos) const {
+  void getJ2000Pos(const ZoneData *z,float, Vec3f& pos) const {
 	  pos = z->axis0;
-	  pos*=(double)(x0);
+	  pos*=(float)(x0);
 	  pos+=z->center;
-	  pos+=(double)(x1)*z->axis1;
+	  pos+=(float)(x1)*z->axis1;
   }
   float getBV(void) const {return IndexToBV(bV);}
   QString getNameI18n(void) const {return QString();}

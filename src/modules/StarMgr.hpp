@@ -223,18 +223,18 @@ private:
 	typedef std::map<int,BigStarCatalogExtension::ZoneArray*> ZoneArrayMap;
 	ZoneArrayMap zoneArrays; // index is the grid level
 	static void initTriangleFunc(int lev, int index,
-								 const Vec3d &c0,
-								 const Vec3d &c1,
-								 const Vec3d &c2,
+								 const Vec3f &c0,
+								 const Vec3f &c1,
+								 const Vec3f &c2,
 								 void *context)
 	{
 		reinterpret_cast<StarMgr*>(context)->initTriangle(lev, index, c0, c1, c2);
 	}
 
 	void initTriangle(int lev, int index,
-					  const Vec3d &c0,
-					  const Vec3d &c1,
-					  const Vec3d &c2);
+					  const Vec3f &c0,
+					  const Vec3f &c1,
+					  const Vec3f &c2);
 
 	BigStarCatalogExtension::HipIndexStruct *hipIndex; // array of hiparcos stars
 
