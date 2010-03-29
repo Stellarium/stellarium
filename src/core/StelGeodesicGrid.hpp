@@ -7,7 +7,7 @@ Author and Copyright: Johannes Gajdosik, 2006
  
 This library requires a simple Vector library,
 which may have different copyright and license,
-for example Vec3d from VecMath.hpp.
+for example Vec3f from VecMath.hpp.
  
 In the moment I choose to distribute the library under the GPL,
 later I may choose to additionally distribute it under a more
@@ -57,9 +57,9 @@ public:
 	int getNrOfZones(void) const {return nrOfZones(maxLevel);}
 	
 	typedef void (VisitFunc)(int lev,int index,
-	                         const Vec3d &c0,
-	                         const Vec3d &c1,
-	                         const Vec3d &c2,
+							 const Vec3f &c0,
+							 const Vec3f &c1,
+							 const Vec3f &c2,
 	                         void *context);
 	void visitTriangles(int maxVisitLevel, VisitFunc *func,void *context) const;
 
@@ -68,10 +68,10 @@ public:
 	//! When the point lies on the border of two or more zones,
 	//! one such zone is returned (always the same one,
 	//! because the algorithm is deterministic).
-	int getZoneNumberForPoint(const Vec3d &v,int searchLevel) const;
+	int getZoneNumberForPoint(const Vec3f &v,int searchLevel) const;
 
 	//! Return the position of the 3 corners for the triangle at the given level and index
-	void getTriangleCorners(int lev, int index, Vec3d& c0, Vec3d& c1, Vec3d& c2) const;
+	void getTriangleCorners(int lev, int index, Vec3f& c0, Vec3f& c1, Vec3f& c2) const;
 	
 	//! Return the index of the partner triangle with which to form a parallelogram
 	int getPartnerTriangle(int lev, int index) const;
@@ -102,15 +102,15 @@ private:
 	void searchZones(const QVector<SphericalCap>& convex,
 					 int **inside,int **border,int maxSearchLevel) const;
 	
-	const Vec3d& getTriangleCorner(int lev, int index, int cornerNumber) const;
+	const Vec3f& getTriangleCorner(int lev, int index, int cornerNumber) const;
 	void initTriangle(int lev,int index,
-	                  const Vec3d &c0,
-	                  const Vec3d &c1,
-	                  const Vec3d &c2);
+					  const Vec3f &c0,
+					  const Vec3f &c1,
+					  const Vec3f &c2);
 	void visitTriangles(int lev,int index,
-	                    const Vec3d &c0,
-	                    const Vec3d &c1,
-	                    const Vec3d &c2,
+						const Vec3f &c0,
+						const Vec3f &c1,
+						const Vec3f &c2,
 	                    int maxVisitLevel,
 	                    VisitFunc *func,
 	                    void *context) const;
@@ -126,7 +126,7 @@ private:
 	const int maxLevel;
 	struct Triangle
 	{
-		Vec3d e0,e1,e2;   // Seitenmittelpunkte
+		Vec3f e0,e1,e2;   // Seitenmittelpunkte
 	};
 	Triangle **triangles;
 	// 20*(4^0+4^1+...+4^n)=20*(4*(4^n)-1)/3 triangles total

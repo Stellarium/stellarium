@@ -85,13 +85,13 @@ public:
 	static ZoneArray *create(const QString &extended_file_name,
 							 bool use_mmap,
 							 StelLoadingBar* lb);
-	virtual ~ZoneArray(void)
+	virtual ~ZoneArray()
 	{
 		nr_of_zones = 0;
 	}
 
 	//! Get the total number of stars in this catalog.
-	unsigned int getNrOfStars(void) const { return nr_of_stars; }
+	unsigned int getNrOfStars() const { return nr_of_stars; }
 
 	//! Dummy method that does nothing. See subclass implementation.
 	virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {}
@@ -111,9 +111,9 @@ public:
 
 	//! Initialize the ZoneData struct at the given index.
 	void initTriangle(int index,
-					  const Vec3d &c0,
-					  const Vec3d &c1,
-					  const Vec3d &c2);
+					  const Vec3f &c0,
+					  const Vec3f &c1,
+					  const Vec3f &c2);
 	virtual void scaleAxis(void) = 0;
 
 	//! File path of the catalog.
@@ -131,7 +131,7 @@ public:
 	//! Number of steps used to describe values in @em mag_range.
 	const int mag_steps;
 
-	double star_position_scale;
+	float star_position_scale;
 protected:
 	//! Load a catalog and display its progress on the splash screen.
 	//! @return @c true if successful, or @c false if an error occurred

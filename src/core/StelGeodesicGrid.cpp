@@ -7,7 +7,7 @@ Author and Copyright: Johannes Gajdosik, 2006
  
 This library requires a simple Vector library,
 which may have different copyright and license,
-for example Vec3d from VecMath.hpp.
+for example Vec3f from VecMath.hpp.
  
 In the moment I choose to distribute the library under the GPL,
 later I may choose to additionally distribute it under a more
@@ -38,24 +38,24 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <cmath>
 #include <cstdlib>
 
-static const double icosahedron_G = 0.5*(1.0+sqrt(5.0));
-static const double icosahedron_b = 1.0/sqrt(1.0+icosahedron_G*icosahedron_G);
-static const double icosahedron_a = icosahedron_b*icosahedron_G;
+static const float icosahedron_G = 0.5*(1.0+sqrt(5.0));
+static const float icosahedron_b = 1.0/sqrt(1.0+icosahedron_G*icosahedron_G);
+static const float icosahedron_a = icosahedron_b*icosahedron_G;
 
-static const Vec3d icosahedron_corners[12] =
+static const Vec3f icosahedron_corners[12] =
     {
-        Vec3d( icosahedron_a, -icosahedron_b,            0.0),
-        Vec3d( icosahedron_a,  icosahedron_b,            0.0),
-        Vec3d(-icosahedron_a,  icosahedron_b,            0.0),
-        Vec3d(-icosahedron_a, -icosahedron_b,            0.0),
-        Vec3d(           0.0,  icosahedron_a, -icosahedron_b),
-        Vec3d(           0.0,  icosahedron_a,  icosahedron_b),
-        Vec3d(           0.0, -icosahedron_a,  icosahedron_b),
-        Vec3d(           0.0, -icosahedron_a, -icosahedron_b),
-        Vec3d(-icosahedron_b,            0.0,  icosahedron_a),
-        Vec3d( icosahedron_b,            0.0,  icosahedron_a),
-        Vec3d( icosahedron_b,            0.0, -icosahedron_a),
-        Vec3d(-icosahedron_b,            0.0, -icosahedron_a)
+		Vec3f( icosahedron_a, -icosahedron_b,            0.0),
+		Vec3f( icosahedron_a,  icosahedron_b,            0.0),
+		Vec3f(-icosahedron_a,  icosahedron_b,            0.0),
+		Vec3f(-icosahedron_a, -icosahedron_b,            0.0),
+		Vec3f(           0.0,  icosahedron_a, -icosahedron_b),
+		Vec3f(           0.0,  icosahedron_a,  icosahedron_b),
+		Vec3f(           0.0, -icosahedron_a,  icosahedron_b),
+		Vec3f(           0.0, -icosahedron_a, -icosahedron_b),
+		Vec3f(-icosahedron_b,            0.0,  icosahedron_a),
+		Vec3f( icosahedron_b,            0.0,  icosahedron_a),
+		Vec3f( icosahedron_b,            0.0, -icosahedron_a),
+		Vec3f(-icosahedron_b,            0.0, -icosahedron_a)
     };
 
 struct TopLevelTriangle
@@ -127,9 +127,9 @@ StelGeodesicGrid::~StelGeodesicGrid(void)
 }
 
 void StelGeodesicGrid::getTriangleCorners(int lev,int index,
-                                      Vec3d &h0,
-                                      Vec3d &h1,
-                                      Vec3d &h2) const
+									  Vec3f &h0,
+									  Vec3f &h1,
+									  Vec3f &h2) const
 {
 	if (lev <= 0)
 	{
@@ -147,7 +147,7 @@ void StelGeodesicGrid::getTriangleCorners(int lev,int index,
 		{
 		case 0:
 				{
-				    Vec3d c0,c1,c2;
+					Vec3f c0,c1,c2;
 				    getTriangleCorners(lev,i,c0,c1,c2);
 				    h0 = c0;
 				    h1 = t.e2;
@@ -156,7 +156,7 @@ void StelGeodesicGrid::getTriangleCorners(int lev,int index,
 				break;
 		case 1:
 			{
-				Vec3d c0,c1,c2;
+				Vec3f c0,c1,c2;
 				getTriangleCorners(lev,i,c0,c1,c2);
 				h0 = t.e2;
 				h1 = c1;
@@ -165,7 +165,7 @@ void StelGeodesicGrid::getTriangleCorners(int lev,int index,
 			break;
 		case 2:
 			{
-				Vec3d c0,c1,c2;
+				Vec3f c0,c1,c2;
 				getTriangleCorners(lev,i,c0,c1,c2);
 				h0 = t.e1;
 				h1 = t.e0;
@@ -211,9 +211,9 @@ int StelGeodesicGrid::getPartnerTriangle(int lev, int index) const
 }
 
 void StelGeodesicGrid::initTriangle(int lev,int index,
-                                const Vec3d &c0,
-                                const Vec3d &c1,
-                                const Vec3d &c2)
+								const Vec3f &c0,
+								const Vec3f &c1,
+								const Vec3f &c2)
 {
 	Q_ASSERT((c0^c1)*c2 >= 0.0);
 	Triangle &t(triangles[lev][index]);
@@ -255,9 +255,9 @@ void StelGeodesicGrid::visitTriangles(int maxVisitLevel,
 }
 
 void StelGeodesicGrid::visitTriangles(int lev,int index,
-                                  const Vec3d &c0,
-                                  const Vec3d &c1,
-                                  const Vec3d &c2,
+								  const Vec3f &c0,
+								  const Vec3f &c1,
+								  const Vec3f &c2,
                                   int maxVisitLevel,
                                   VisitFunc *func,
                                   void *context) const
@@ -276,14 +276,14 @@ void StelGeodesicGrid::visitTriangles(int lev,int index,
 }
 
 
-int StelGeodesicGrid::getZoneNumberForPoint(const Vec3d &v,int searchLevel) const
+int StelGeodesicGrid::getZoneNumberForPoint(const Vec3f &v,int searchLevel) const
 {
 	for (int i=0;i<20;i++)
 	{
 		const int *const corners = icosahedron_triangles[i].corners;
-		const Vec3d &c0(icosahedron_corners[corners[0]]);
-		const Vec3d &c1(icosahedron_corners[corners[1]]);
-		const Vec3d &c2(icosahedron_corners[corners[2]]);
+		const Vec3f &c0(icosahedron_corners[corners[0]]);
+		const Vec3f &c1(icosahedron_corners[corners[1]]);
+		const Vec3f &c2(icosahedron_corners[corners[2]]);
 		if (((c0^c1)*v >= 0.0) && ((c1^c2)*v >= 0.0) && ((c2^c0)*v >= 0.0))
 		{
 			// v lies inside this icosahedron triangle
