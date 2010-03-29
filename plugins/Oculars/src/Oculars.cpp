@@ -109,16 +109,14 @@ Oculars::Oculars() : selectedOcularIndex(-1), flagShowOculars(false), usageMessa
 
 Oculars::~Oculars()
 {
-	QSqlDatabase db = QSqlDatabase::database("oculars");
-	db.close();
-	QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection);
-
 	delete ocularsTableModel;
 	ocularsTableModel = NULL;
 	delete telescopesTableModel;
 	telescopesTableModel = NULL;
 	delete ocularDialog;
 	ocularDialog = NULL;
+	delete normalStyleSheet;
+	delete nightStyleSheet;
 }
 
 /* ********************************************************************* */
@@ -297,6 +295,13 @@ void Oculars::init()
 		nightStyleSheet = new QByteArray(styleSheetFile.readAll());
 	}
 	styleSheetFile.close();
+}
+
+void Oculars::deinit()
+{
+	QSqlDatabase db = QSqlDatabase::database("oculars");
+	db.close();
+	QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection);
 }
 
 void Oculars::setStelStyle(const StelStyle& style)
