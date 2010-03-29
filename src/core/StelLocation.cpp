@@ -43,36 +43,36 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 {
 	StelLocation loc;
 	const QStringList& splitline = rawline.split("\t");
-	loc.name    = splitline[0];
-	loc.state   = splitline[1];
-	loc.country = StelLocaleMgr::countryCodeToString(splitline[2]);
+	loc.name    = splitline.at(0);
+	loc.state   = splitline.at(1);
+	loc.country = StelLocaleMgr::countryCodeToString(splitline.at(2));
 	if (loc.country.isEmpty())
-		loc.country = splitline[2];
+		loc.country = splitline.at(2);
 					
-	loc.role    = splitline[3].at(0);
-	loc.population = (int) ( 1000 * splitline[4].toFloat() );
+	loc.role    = splitline.at(3).at(0);
+	loc.population = (int) (splitline.at(4).toFloat()*1000);
 
-	const QString& latstring = splitline[5];
-	loc.latitude = latstring.left(latstring.size() - 1).toDouble();
-	if (latstring.contains("S"))
+	const QString& latstring = splitline.at(5);
+	loc.latitude = latstring.left(latstring.size() - 1).toFloat();
+	if (latstring.endsWith('S'))
 		loc.latitude=-loc.latitude;
 	
-	const QString& lngstring = splitline[6];
-	loc.longitude = lngstring.left(lngstring.size() - 1).toDouble();
-	if (lngstring.contains("W"))
+	const QString& lngstring = splitline.at(6);
+	loc.longitude = lngstring.left(lngstring.size() - 1).toFloat();
+	if (lngstring.endsWith('W'))
 		loc.longitude=-loc.longitude;
 	
-	loc.altitude = (int)(splitline[7]).toFloat();
+	loc.altitude = (int)splitline.at(7).toFloat();
 	
 	if (splitline.size()>8)
 	{
 		bool ok;
-		loc.bortleScaleIndex = (splitline[8]).toInt(&ok);
+		loc.bortleScaleIndex = splitline.at(8).toInt(&ok);
 		if (ok==false)
-			loc.bortleScaleIndex = 2;
+			loc.bortleScaleIndex = 2.f;
 	}
 	else
-		loc.bortleScaleIndex = 2;
+		loc.bortleScaleIndex = 2.f;
 	
 	// Reserve for TimeZone
 	// if (splitline.size()>9) {}
@@ -80,7 +80,7 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	if (splitline.size()>10)
 	{
 		// Parse planet name
-		loc.planetName = splitline[10];
+		loc.planetName = splitline.at(10);
 	}
 	else
 	{
@@ -91,7 +91,7 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	if (splitline.size()>11)
 	{
 		// Parse optional associated landscape key
-		loc.landscapeKey = splitline[11];
+		loc.landscapeKey = splitline.at(11);
 	}
 	return loc;
 }
