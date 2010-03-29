@@ -55,19 +55,24 @@ OcularDialog::OcularDialog(QSqlTableModel *ocularsTableModel, QSqlTableModel *te
 
 OcularDialog::~OcularDialog()
 {
+	//These exist only if the window has been shown once:
+	if (dialog)
+	{
+		ui->ocularAFov->setValidator(0);
+		ui->ocularFL->setValidator(0);
+		ui->telescopeFL->setValidator(0);
+		ui->telescopeDiameter->setValidator(0);
+		ui->ocularName->setValidator(0);
+		ui->telescopeName->setValidator(0);
+		delete ocularMapper;
+		ocularMapper = NULL;
+		delete telescopeMapper;
+		telescopeMapper = NULL;
+	}
+	
 	delete ui;
 	ui = NULL;
-
-	ui->ocularAFov->setValidator(0);
-	ui->ocularFL->setValidator(0);
-	ui->telescopeFL->setValidator(0);
-	ui->telescopeDiameter->setValidator(0);
-	ui->ocularName->setValidator(0);
-	ui->telescopeName->setValidator(0);
-	delete ocularMapper;
-	ocularMapper = NULL;
-	delete telescopeMapper;
-	telescopeMapper = NULL;
+	
 	delete validatorOcularAFOV;
 	validatorOcularAFOV = NULL;
 	delete validatorOcularEFL;
