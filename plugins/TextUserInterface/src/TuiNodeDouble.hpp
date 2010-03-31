@@ -55,6 +55,11 @@ signals:
 
 private:
 	double value;
+	//! persistent copy of the value in string format.
+	//! This is necessary, because if the string is re-created from double
+	//! on every digit entered, it is impossible to enter numbers with 0
+	//! in any position after the decimal sign.
+	QString stringValue;
 	double minimum;
 	double maximum;
 	double increment;
