@@ -38,6 +38,18 @@ QString StelLocation::serializeToLine() const
 			.arg(landscapeKey);
 }
 
+QDataStream& operator<<(QDataStream& out, const StelLocation& loc)
+{
+	out << loc.name << loc.state << loc.country << loc.role << loc.population << loc.latitude << loc.longitude << loc.altitude << loc.bortleScaleIndex << loc.planetName << loc.landscapeKey << loc.isUserLocation;
+	return out;
+}
+
+QDataStream& operator>>(QDataStream& in, StelLocation& loc)
+{
+	in >> loc.name >> loc.state >> loc.country >> loc.role >> loc.population >> loc.latitude >> loc.longitude >> loc.altitude >> loc.bortleScaleIndex >> loc.planetName >> loc.landscapeKey >> loc.isUserLocation;
+	return in;
+}
+
 // Parse a location from a line serialization
 StelLocation StelLocation::createFromLine(const QString& rawline)
 {
@@ -48,7 +60,7 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	loc.country = StelLocaleMgr::countryCodeToString(splitline.at(2));
 	if (loc.country.isEmpty())
 		loc.country = splitline.at(2);
-					
+
 	loc.role    = splitline.at(3).at(0);
 	loc.population = (int) (splitline.at(4).toFloat()*1000);
 
@@ -56,14 +68,14 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	loc.latitude = latstring.left(latstring.size() - 1).toFloat();
 	if (latstring.endsWith('S'))
 		loc.latitude=-loc.latitude;
-	
+
 	const QString& lngstring = splitline.at(6);
 	loc.longitude = lngstring.left(lngstring.size() - 1).toFloat();
 	if (lngstring.endsWith('W'))
 		loc.longitude=-loc.longitude;
-	
+
 	loc.altitude = (int)splitline.at(7).toFloat();
-	
+
 	if (splitline.size()>8)
 	{
 		bool ok;
@@ -73,10 +85,10 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	}
 	else
 		loc.bortleScaleIndex = 2.f;
-	
+
 	// Reserve for TimeZone
 	// if (splitline.size()>9) {}
-		
+
 	if (splitline.size()>10)
 	{
 		// Parse planet name
@@ -87,7 +99,7 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 		// Earth by default
 		loc.planetName = "Earth";
 	}
-		
+
 	if (splitline.size()>11)
 	{
 		// Parse optional associated landscape key
