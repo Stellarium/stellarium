@@ -25,20 +25,18 @@
 //! Store the informations for a location on a planet
 class StelLocation
 {
-	friend class StelLocationMgr;
-	
 public:
 	StelLocation() : longitude(0.f), latitude(0.f), altitude(0), bortleScaleIndex(2.f), isUserLocation(true) {;}
-	
+
 	//! Return a short string which can be used in a list view
 	QString getID() const
 	{
 		return name + ", " +country;
 	}
-	
+
 	//! Output the location as a string ready to be stored in the user_location file
 	QString serializeToLine() const;
-	
+
 	//! Location/city name
 	QString name;
 	//! English country name or empty string
@@ -62,13 +60,17 @@ public:
 	//! Location role code
 	//! C/B=Capital, R=Regional capital, N=Normal city, O=Observatory, L=lander, I=spacecraft impact, A=spacecraft crash
 	QChar role;
-	
+
 	//! Parse a location from a line serialization
 	static StelLocation createFromLine(const QString& line);
-	
-private:
+
 	//! Used privately by the StelLocationMgr
 	bool isUserLocation;
 };
+
+//! Serialize the passed StelLocation into a binary blob.
+QDataStream& operator<<(QDataStream& out, const StelLocation& loc);
+//! Load the StelLocation from a binary blob.
+QDataStream& operator>>(QDataStream& in, StelLocation& loc);
 
 #endif // _STELLOCATION_HPP_
