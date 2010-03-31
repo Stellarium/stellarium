@@ -24,6 +24,7 @@ TuiNodeDouble::TuiNodeDouble(const QString& text, QObject* receiver, const char*
 	: TuiNodeEditable(text, parent, prev), value(defValue), minimum(min), maximum(max), increment(inc), typing(false), typedDecimal(false)
 {
 	this->connect(this, SIGNAL(setValue(double)), receiver, method);
+	stringValue.setNum(value,'g',-1);
 }
 
 TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
@@ -38,6 +39,7 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 		editing = false;
 		response.accepted = true;
 		response.newNode = this;
+		stringValue.setNum(value,'g',-1);
 		emit(setValue(value));
 		return response;
 	}
@@ -50,6 +52,7 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 			value = maximum;
 		response.accepted = true;
 		response.newNode = this;
+		stringValue.setNum(value,'g',-1);
 		emit(setValue(value));
 		return response;
 	}
@@ -62,24 +65,24 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 			value = minimum;
 		response.accepted = true;
 		response.newNode = this;
+		stringValue.setNum(value,'g',-1);
 		emit(setValue(value));
 		return response;
 	}
 	else if (key==Qt::Key_Period)
 	{
-		QString s;
 		if (!typing)
 		{
 			value = 0;
+			stringValue.clear();
 			typedDecimal = true;
 		}
 		else
 		{
 			// first check if there already a decimal point
-			s = QString("%1").arg(value);
-			if (!s.contains("."))
+			if (!stringValue.contains('.'))
 			{
-				s = QString("%1%2").arg(value).arg(key - Qt::Key_0);
+				stringValue.setNum(value,'g',-1).append('.');
 				typedDecimal = true;
 			}
 		}
@@ -88,24 +91,13 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 	}
 	else if (key>=Qt::Key_0 && key<=Qt::Key_9)
 	{
-		QString s;
 		if (!typing)
-		{
 			typing = true;
-			if (typedDecimal)
-				s = QString("0.%1").arg(key - Qt::Key_0);
-			else
-				s = QString("%1").arg(key - Qt::Key_0);
-		}
-		else
-		{
-			if (typedDecimal)
-				s = QString("%1.%2").arg(value).arg(key - Qt::Key_0);
-			else
-				s = QString("%1%2").arg(value).arg(key - Qt::Key_0);
-		}
+		
+		stringValue.append(QString::number(key - Qt::Key_0));
+		
 		bool ok;
-		double d = s.toDouble(&ok);
+		double d = stringValue.toDouble(&ok);
 		if (ok && d>=minimum && d<=maximum)
 		{
 			value = d;
@@ -120,16 +112,16 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 	{
 		typing = true;
 		typedDecimal = false;
-		QString s = QString("%1").arg(value);
-		if (s.length()==1)
+		if (stringValue.length() == 1)
 		{
 			value = 0;
+			stringValue.clear();
 		}
 		else
 		{
-			s = s.left(s.length()-1);
+			stringValue.chop(1);
 			bool ok;
-			double d = s.toDouble(&ok);
+			double d = stringValue.toDouble(&ok);
 			if (ok && d>=minimum && d<=maximum)
 			{
 				value = d;
@@ -143,9 +135,10 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 	else if (key==Qt::Key_Minus)
 	{
 		typing = true;
-		int i = value *= -1;
+		int i = value *= -1; //BM: Is this deliberate?
 		if (i>=minimum && i<=maximum)
 			value = i;
+		stringValue.setNum(value,'g',-1);;
 		response.accepted = true;
 		response.newNode = this;
 		emit(setValue(value));
@@ -162,10 +155,7 @@ QString TuiNodeDouble::getDisplayText()
 	}
 	else
 	{
-		if (typedDecimal)
-			return displayText + QString(": >%1.<").arg(value);
-		else
-			return displayText + QString(": >%1<").arg(value);
+		return displayText + QString(": >%1<").arg(stringValue);
 	}
 }
 
