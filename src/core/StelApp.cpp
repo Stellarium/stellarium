@@ -219,7 +219,6 @@ void StelApp::init(QSettings* conf)
 #else
 	loadingBar = new StelLoadingBar(12., "textures/logo24bits.png", PACKAGE_VERSION, 45, 320, 121);
 #endif // SVN_RELEASE
-	loadingBar->SetMessage("Initialize");
 	loadingBar->Draw(0);
 
 	networkAccessManager = new QNetworkAccessManager(this);

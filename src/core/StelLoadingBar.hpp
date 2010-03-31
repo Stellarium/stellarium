@@ -54,10 +54,6 @@ public:
 
 	virtual ~StelLoadingBar();
 	
-	//! Set the message for the loading bar.
-	//! @param m a QString message to display under the loading bar
-	void SetMessage(QString m) {message=m;}
-	
 	//! Draw the StelLoadingBar, setting the value.
 	//! @param val the value which the progress bar should display. This is a 
 	//! float which should take a value between 0.0 and 1.0.
@@ -65,8 +61,7 @@ public:
 
 private:
 	QString message;
-	int splashx, splashy, barx, bary, width, height, barwidth, barheight;
-	QFont barfont;
+	int splashx, splashy, width, height;
 	QFont extraTextFont;
 	StelTextureSP splash;
 	QString extraText;

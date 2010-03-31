@@ -34,7 +34,6 @@
 #include "StelNavigator.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelTranslator.hpp"
-#include "StelLoadingBar.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
@@ -370,14 +369,11 @@ bool NebulaMgr::loadNGCOld(const QString& catNGC)
 
 bool NebulaMgr::loadNGC(const QString& catNGC)
 {
-	StelLoadingBar& lb = *StelApp::getInstance().getStelLoadingBar();
 	QFile in(catNGC);
 	if (!in.open(QIODevice::ReadOnly))
 		return false;
 	QDataStream ins(&in);
 	ins.setVersion(QDataStream::Qt_4_5);
-	lb.SetMessage(q_("Loading NGC catalog"));
-	lb.Draw(0);
 	
 	int totalRecords=0;
 	while (!ins.atEnd())
