@@ -14,265 +14,245 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-01-28 13:37+0000\n"
+"X-Launchpad-Export-Date: 2010-03-31 16:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/ui_locationDialogGui.h:408
-msgid " m"
-msgstr " m"
+#: src/modules/StarMgr.cpp:396
+#, qt-format
+msgid "Loading catalog %1 from file %2"
+msgstr "Duke ngarkuar katalogun %1 nga skedari %2"
 
-#: src/gui/StelGuiItems.cpp:548
-#, no-c-format, qt-format
-msgid "%1m"
-msgstr "%1m"
+#: src/modules/LandscapeMgr.cpp:425
+msgid "Author: "
+msgstr "Autori: "
+
+#: src/modules/LandscapeMgr.cpp:428
+msgid "Location: "
+msgstr "Vendndodhja: "
 
 #: src/modules/LandscapeMgr.cpp:433
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/ui_dateTimeDialogGui.h:297 src/ui_dateTimeDialogGui.h:298
-msgid "/"
-msgstr "/"
+#: src/modules/LandscapeMgr.cpp:436
+msgid "Planet: "
+msgstr "Planeti: "
 
-#: src/ui_viewDialog.h:1018
-msgid "0"
-msgstr "0"
+#: src/modules/Nebula.cpp:92
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr "Lloji: <b>%1</b>"
 
-#: src/ui_viewDialog.h:1019
-msgid "10"
-msgstr "10"
+#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:130
+#, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr "Magnituda: <b>%1</b>"
 
-#: src/ui_viewDialog.h:1021
-msgid "10000"
-msgstr "10000"
+#: src/modules/Nebula.cpp:100
+#, qt-format
+msgid "Size: %1"
+msgstr "Masa: %1"
 
-#: src/ui_viewDialog.h:1022
-msgid "144000"
-msgstr "144000"
+#: src/modules/Nebula.cpp:269
+msgid "Galaxy"
+msgstr "Galaktikë"
 
-#: src/ui_viewDialog.h:1020
-msgid "80"
-msgstr "80"
+#: src/modules/Nebula.cpp:272
+msgid "Open cluster"
+msgstr "Grumbull i hapur"
 
-#: src/ui_dateTimeDialogGui.h:299 src/ui_dateTimeDialogGui.h:300
-msgid ":"
-msgstr ":"
+#: src/modules/Nebula.cpp:275
+msgid "Globular cluster"
+msgstr "Grumbull globular"
 
-#: src/ui_helpDialogGui.h:268
-msgid "About"
-msgstr "Rreth"
+#: src/modules/Nebula.cpp:278
+msgid "Nebula"
+msgstr "Nebulozë"
+
+#: src/modules/Nebula.cpp:281
+msgid "Planetary nebula"
+msgstr "Nebulozë planetare"
+
+#: src/modules/Nebula.cpp:284
+msgid "Cluster associated with nebulosity"
+msgstr "Grumbull i lidhur me nebulozë"
+
+#: src/modules/Nebula.cpp:287
+msgid "Unknown"
+msgstr "E panjohur"
+
+#: src/modules/Nebula.cpp:290
+msgid "Undocumented type"
+msgstr "Lloj i padokumentuar"
+
+#: src/modules/NebulaMgr.cpp:346
+#, qt-format
+msgid "Loading NGC catalog: %1/%2"
+msgstr "Duke ngarkuar katalogun NGC: %1/%2"
+
+#: src/modules/NebulaMgr.cpp:379
+msgid "Loading NGC catalog"
+msgstr ""
 
 #: src/modules/Planet.cpp:133 src/modules/StarWrapper.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Magnituda Absolute: %1"
 
-#: src/ui_viewDialog.h:996
-msgid "Absolute scale:"
-msgstr "Shkalla absolute:"
-
-#: src/modules/TextUI.cpp:86
-msgid "Actual Time"
-msgstr "Ora e Tanishme"
-
-#: src/gui/StelGui.cpp:152
-msgid "Add 1 sidereal day"
-msgstr "Shto 1 ditë siderale"
-
-#: src/gui/StelGui.cpp:154
-msgid "Add 1 sidereal week"
-msgstr "Shto 1 javë siderale"
-
-#: src/gui/StelGui.cpp:148
-msgid "Add 1 solar day"
-msgstr "Shto 1 ditë diellore"
-
-#: src/gui/StelGui.cpp:146
-msgid "Add 1 solar hour"
-msgstr "Shto 1 orë diellore"
-
-#: src/gui/StelGui.cpp:150
-msgid "Add 1 solar week"
-msgstr "Shto 1 javë diellore"
-
-#: src/ui_locationDialogGui.h:395
-msgid "Add to list"
-msgstr "Shto në listë"
-
-#: src/modules/TextUI.cpp:70
-msgid "Administration "
-msgstr "Administrim "
-
-#: src/ui_configurationDialog.h:819
-msgid "Align labels with the horizon"
-msgstr "Etiketa paralele me horizontin"
-
-#: src/ui_configurationDialog.h:754
-msgid "All available"
-msgstr "Gjithë të mundshme"
-
-#: src/ui_configurationDialog.h:783
-msgid "Allow keyboard to pan and zoom"
-msgstr "Lejo tastierën të piketojë dhe të zmadhojë"
-
-#: src/ui_configurationDialog.h:787
-msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr "Lejo miun të piketojë (tërheqje) dhe të zmadhojë (rrota e miut)"
-
-#: src/modules/TextUI.cpp:75
-msgid "Altitude (m): "
-msgstr "Lartësia (m): "
-
-#: src/ui_locationDialogGui.h:404
-msgid "Altitude:"
-msgstr "Lartësia:"
+#: src/modules/Planet.cpp:140
+#, no-c-format, qt-format
+msgid "Distance: %1AU"
+msgstr "Largësia: %1AU"
 
 #: src/modules/Planet.cpp:144
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Diametri i dukshëm: %1"
 
-#: src/modules/TextUI.cpp:136
-msgid "Arrow down to load list."
-msgstr "Shigjeta poshtë për ngarkim liste."
-
-#: src/gui/HelpDialog.cpp:52
-msgid "Arrow keys & left mouse drag"
-msgstr "Tastat shigjetë & zvarrit duke klikuar me të majtën"
-
-#: src/ui_viewDialog.h:1037
-msgid "Art brightness: "
-msgstr "Ndriçimi i artit "
-
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1009
-msgid "Atmosphere"
-msgstr "Atmosferë"
-
-#: src/gui/ConfigurationDialog.cpp:568
-msgid "Author"
-msgstr "Autor"
-
-#: src/modules/LandscapeMgr.cpp:425
-msgid "Author: "
-msgstr "Autori: "
-
-#: src/gui/ConfigurationDialog.cpp:492
-msgid "Authors"
-msgstr "Autorët"
-
-#: src/gui/StelGui.cpp:182
-msgid "Auto hide horizontal button bar"
-msgstr "Fshih automatikisht butonat horizontalë"
-
-#: src/gui/StelGui.cpp:183
-msgid "Auto hide vertical button bar"
-msgstr "Fshih automatikisht butonat vertikale"
-
-#: src/ui_configurationDialog.h:825
-msgid "Auto zoom out returns to initial direction of view"
-msgstr "Zvogëlimi automatik të kthen në drejtimin fillestar të pamjes"
-
-#: src/core/StelObject.cpp:91
+#: src/modules/StarWrapper.cpp:52 src/modules/StarWrapper.cpp:109
 #, qt-format
-msgid "Az/Alt: %1/%2"
-msgstr "Az/Alt: %1/%2"
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr "Magnituda: <b>%1</b> (B-V: %2)"
 
-#: src/modules/TextUI.cpp:113
-msgid "Azimuthal Grid"
-msgstr "Rrjetë Azimutale"
+#: src/modules/StarWrapper.cpp:119
+#, qt-format
+msgid "Spectral Type: %1"
+msgstr "Lloji Spektral: %1"
 
-#: src/gui/StelGui.cpp:100 src/ui_viewDialog.h:1027
-msgid "Azimuthal grid"
-msgstr "Rrjetë Azimutale"
+#: src/modules/StarWrapper.cpp:123
+#, qt-format
+msgid "Distance: %1 Light Years"
+msgstr "Largësia: %1 Vite Dritë"
 
-#: src/translations.h:69
-msgid "Aztec"
-msgstr ""
+#: src/modules/StarWrapper.cpp:126
+#, qt-format
+msgid "Parallax: %1\""
+msgstr "Paralaksi: %1\""
 
-#: src/modules/TextUI.cpp:134
-msgid "CD/DVD Script: "
-msgstr "Skript CD/DVD: "
+#: src/modules/TextUI.cpp:63
+msgid "Set Location "
+msgstr "Cakto Vendndodhjen "
 
-#: src/gui/HelpDialog.cpp:57
-msgid "CTRL + Left click"
-msgstr "CTRL + Klik majtas"
+#: src/modules/TextUI.cpp:64
+msgid "Set Time "
+msgstr "Cakto Orën "
 
-#: src/gui/HelpDialog.cpp:54
-msgid "CTRL + Up/Down"
-msgstr "CTRL + Up/Down"
+#: src/modules/TextUI.cpp:65
+msgid "General "
+msgstr "Të Përgjithshme "
 
-#: src/modules/TextUI.cpp:82
-msgid "Calendar"
-msgstr "Kalendari"
-
-#: src/translations.h:45
-msgid "Callisto"
-msgstr "Kalisto"
-
-#: src/ui_configurationDialog.h:852
-msgid "Cancel"
-msgstr "Anuloje"
-
-#: src/modules/TextUI.cpp:108
-msgid "Cardinal Points"
-msgstr "Pika Referimi"
-
-#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1031
-msgid "Cardinal points"
-msgstr "Pika referimi"
-
-#: src/ui_viewDialog.h:1024
-msgid "Celestial Sphere"
-msgstr "Sfera Qiellore"
-
-#: src/gui/StelGui.cpp:158
-msgid "Center on selected object"
-msgstr "Qendërzo objektin e zgjedhur"
-
-#: src/translations.h:59
-msgid "Charon"
-msgstr "Karont"
-
-#: src/translations.h:70
-msgid "Chinese"
-msgstr "Kinez"
-
-#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
-msgid "Clear selection"
-msgstr "Pastro zgjedhjen"
-
-#: src/ui_configurationDialog.h:840
-msgid "Click here to start downloading"
-msgstr "Kliko këtu për të filluar shkarkimin"
-
-#: src/ui_configurationDialog.h:855
-msgid "Close window when script runs"
-msgstr "Mbyll dritaren kur xhiron skripti"
-
-#: src/modules/Nebula.cpp:284
-msgid "Cluster associated with nebulosity"
-msgstr "Grumbull i lidhur me nebulozë"
+#: src/modules/TextUI.cpp:66
+msgid "Stars "
+msgstr "Yje "
 
 #: src/modules/TextUI.cpp:67
 msgid "Colors "
 msgstr "Ngjyra "
 
-#: src/ui_configurationDialog.h:747
-msgid "Configuration"
-msgstr "Konfigurimi"
+#: src/modules/TextUI.cpp:68
+msgid "Effects "
+msgstr "Efekte "
 
-#: src/gui/StelGui.cpp:126
-msgid "Configuration window"
-msgstr "Konfiguro"
+#: src/modules/TextUI.cpp:69
+msgid "Scripts "
+msgstr "Skripte "
 
-#: src/modules/TextUI.cpp:106
-msgid "Constellation Art Intensity"
-msgstr "Intensitet Arti Yjësish"
+#: src/modules/TextUI.cpp:70
+msgid "Administration "
+msgstr "Administrim "
 
-#: src/modules/TextUI.cpp:107
-msgid "Constellation Boundaries"
-msgstr "Kufinj Yjësie"
+#: src/modules/TextUI.cpp:73
+msgid "Latitude: "
+msgstr "Gjerësia: "
+
+#: src/modules/TextUI.cpp:74
+msgid "Longitude: "
+msgstr "Gjatësia: "
+
+#: src/modules/TextUI.cpp:75
+msgid "Altitude (m): "
+msgstr "Lartësia (m): "
+
+#: src/modules/TextUI.cpp:76
+msgid "Solar System Body: "
+msgstr "Trup Sistemi Diellor: "
+
+#: src/modules/TextUI.cpp:79
+msgid "Sky Time: "
+msgstr "Ora Qiellore: "
+
+#: src/modules/TextUI.cpp:80
+msgid "Set Time Zone: "
+msgstr "Cakto Zonën Kohore: "
+
+#: src/modules/TextUI.cpp:81
+msgid "Day keys: "
+msgstr "Tasta Dite: "
+
+#: src/modules/TextUI.cpp:82
+msgid "Calendar"
+msgstr "Kalendari"
+
+#: src/modules/TextUI.cpp:83
+msgid "Sidereal"
+msgstr "Sidereal"
+
+#: src/modules/TextUI.cpp:84
+msgid "Preset Sky Time: "
+msgstr "Ora Qiellore e Paracaktuar: "
+
+#: src/modules/TextUI.cpp:85
+msgid "Sky Time At Start-up: "
+msgstr "Ora Qiellore Në Nisje: "
+
+#: src/modules/TextUI.cpp:86
+msgid "Actual Time"
+msgstr "Ora e Tanishme"
+
+#: src/modules/TextUI.cpp:87
+msgid "Preset Time"
+msgstr "Ora e Paracaktuar"
+
+#: src/modules/TextUI.cpp:88
+msgid "Time Display Format: "
+msgstr "Formati i Shfaqjes së Orës: "
+
+#: src/modules/TextUI.cpp:89
+msgid "Date Display Format: "
+msgstr "Formati i Shfaqjes së Datës: "
+
+#: src/modules/TextUI.cpp:92
+msgid "Sky Culture: "
+msgstr "Kultura Qiellore: "
+
+#: src/modules/TextUI.cpp:93
+msgid "Sky Language: "
+msgstr "Gjuha e Qiellit: "
+
+#: src/modules/TextUI.cpp:96
+msgid "Show: "
+msgstr "Shfaq: "
+
+#: src/modules/TextUI.cpp:97
+msgid "Star Value Multiplier: "
+msgstr "Shumëzues Vlere Yjesh: "
+
+#: src/modules/TextUI.cpp:98
+msgid "Magnitude Sizing Multiplier: "
+msgstr "Shumëzues Madhësie Magnitude: "
+
+#: src/modules/TextUI.cpp:99
+msgid "Maximum Magnitude to Label: "
+msgstr "Magnitudë Maksimale për Etiketim: "
+
+#: src/modules/TextUI.cpp:100
+msgid "Twinkling: "
+msgstr "Vezullitje: "
+
+#: src/modules/TextUI.cpp:101
+msgid "Limiting Magnitude: "
+msgstr "Magnituda Kufitare: "
 
 #: src/modules/TextUI.cpp:104
 msgid "Constellation Lines"
@@ -282,392 +262,183 @@ msgstr "Vija Yjësie"
 msgid "Constellation Names"
 msgstr "Emra Yjësie"
 
-#: src/gui/StelGui.cpp:96
-msgid "Constellation art"
-msgstr "Art yjësie"
+#: src/modules/TextUI.cpp:106
+msgid "Constellation Art Intensity"
+msgstr "Intensitet Arti Yjësish"
 
-#: src/gui/StelGui.cpp:98
-msgid "Constellation boundaries"
-msgstr "Kufij yjësie"
+#: src/modules/TextUI.cpp:107
+msgid "Constellation Boundaries"
+msgstr "Kufinj Yjësie"
 
-#: src/gui/StelGui.cpp:97
-msgid "Constellation labels"
-msgstr "Etiketa yjësie"
+#: src/modules/TextUI.cpp:108
+msgid "Cardinal Points"
+msgstr "Pika Referimi"
 
-#: src/gui/StelGui.cpp:95
-msgid "Constellation lines"
-msgstr "Vija yjësie"
+#: src/modules/TextUI.cpp:109
+msgid "Planet Names"
+msgstr "Emra Planeti"
 
-#: src/ui_viewDialog.h:1032
-msgid "Constellations"
-msgstr "Yjësitë"
+#: src/modules/TextUI.cpp:110
+msgid "Planet Orbits"
+msgstr "Orbita Planeti"
 
-#: src/gui/ConfigurationDialog.cpp:496 src/gui/ViewDialog.cpp:336
-msgid "Contact"
-msgstr "Kontakti"
+#: src/modules/TextUI.cpp:111
+msgid "Planet Trails"
+msgstr "Gjurmë Planeti"
 
-#: src/ui_configurationDialog.h:781
-msgid "Control"
-msgstr "Kontrolli"
+#: src/modules/TextUI.cpp:112
+msgid "Meridian Line"
+msgstr "Vijë Meridiani"
 
-#: src/modules/TextUI.cpp:130
-msgid "Correct for light travel time: "
-msgstr "Korrigjim udhëtimi me shpejtësi drite: "
-
-#: src/ui_locationDialogGui.h:410
-msgid "Country:"
-msgstr "Shteti:"
-
-#: src/ui_locationDialogGui.h:392
-msgid "Current location information"
-msgstr "Të dhënat e vendndodhjes së tanishme"
-
-#: src/modules/TextUI.cpp:129
-msgid "Cursor Timeout: "
-msgstr "Kohëzhdukje Shënjuesi: "
-
-#: src/core/StelProjectorClasses.cpp:230
-msgid "Cylinder"
-msgstr "Cilindër"
-
-#: src/modules/TextUI.cpp:89
-msgid "Date Display Format: "
-msgstr "Formati i Shfaqjes së Datës: "
-
-#: src/gui/StelGui.cpp:135 src/ui_dateTimeDialogGui.h:295
-msgid "Date and Time"
-msgstr "Data dhe Ora"
-
-#: src/gui/StelGui.cpp:129
-msgid "Date/time window"
-msgstr "Data/Ora"
-
-#: src/modules/TextUI.cpp:81
-msgid "Day keys: "
-msgstr "Tasta Dite: "
-
-#: src/gui/StelGui.cpp:139
-msgid "Decrease time speed"
-msgstr "Zvogëlo shpejtësinë e kohës"
-
-#: src/gui/StelGui.cpp:142
-msgid "Decrease time speed (a little)"
-msgstr "Ule shpejtësinë e kohës (pak)"
-
-#: src/ui_configurationDialog.h:763
-msgid "Default options"
-msgstr "Mundësitë e përzgjedhura"
-
-#: src/translations.h:39
-msgid "Deimos"
-msgstr "Deimos"
-
-#: src/ui_locationDialogGui.h:394
-msgid "Delete"
-msgstr "Fshi"
-
-#: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:295
-#: src/gui/HelpDialog.cpp:297 src/gui/HelpDialog.cpp:298
-#, qt-format
-msgid "Developer: %1"
-msgstr "Zhvillues: %1"
-
-#: src/gui/HelpDialog.cpp:290
-msgid "Developers"
-msgstr "Zhvilluesit"
-
-#: src/ui_viewDialog.h:1000
-msgid "Dim faint stars when a very bright object is visible"
-msgstr "Zbeh yjet kur shfaqet një objekt shumë i shndritshëm"
-
-#: src/translations.h:50
-msgid "Dione"
-msgstr "Dion"
-
-#: src/ui_configurationDialog.h:829
-msgid "Disc viewport"
-msgstr "Pamje disku"
-
-#: src/gui/StelGui.cpp:94
-msgid "Display Options"
-msgstr "Mundësi Pamjeje"
-
-#: src/ui_configurationDialog.h:752
-msgid "Display all information available"
-msgstr "Shfaq të gjitha të dhënat e gatshme"
-
-#: src/ui_configurationDialog.h:756
-msgid "Display less information"
-msgstr "Shfaq më pak të dhëna"
-
-#: src/ui_configurationDialog.h:760
-msgid "Display no information"
-msgstr "Mos shfaq të dhëna"
-
-#: src/modules/StarWrapper.cpp:123
-#, qt-format
-msgid "Distance: %1 Light Years"
-msgstr "Largësia: %1 Vite Dritë"
-
-#: src/modules/Planet.cpp:140
-#, no-c-format, qt-format
-msgid "Distance: %1AU"
-msgstr "Largësia: %1AU"
-
-#: src/gui/HelpDialog.cpp:292
-#, qt-format
-msgid "Doc author/developer: %1"
-msgstr "Dokumentues/zhvillues: %1"
-
-#: src/gui/ConfigurationDialog.cpp:659
-#, fuzzy, qt-format
-msgid ""
-"Download size: %1MB\n"
-"Star count: %2 Million\n"
-"Magnitude range: %3 - %4"
-msgstr ""
-"Madhësi shkarkimi: %1MB\n"
-"Numër yjesh: %2\n"
-"Kufi magnitude: %3 - %4"
-
-#: src/ui_configurationDialog.h:843
-msgid "Download this file to view even more stars"
-msgstr "Shkarko këtë skedar për të parë më shumë yjex"
-
-#: src/gui/ConfigurationDialog.cpp:711
-#, qt-format
-msgid ""
-"Downloading %1...\n"
-"(You can close this window.)"
-msgstr ""
-"Duke shkarkuar %1...\n"
-"(Mund ta mbyllësh këtë dritare.)"
-
-#: src/ui_viewDialog.h:1002
-msgid "Dynamic eye adaptation"
-msgstr "Përshtatje dinamike syu"
-
-#: src/translations.h:65
-msgid "E"
-msgstr "L"
-
-#: src/translations.h:36
-msgid "Earth"
-msgstr "Tokë"
-
-#: src/modules/TextUI.cpp:116
-msgid "Ecliptic Line"
-msgstr "Vijë Ekliptike"
-
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1030
-msgid "Ecliptic line"
-msgstr "Vijë ekliptike"
-
-#: src/modules/TextUI.cpp:68
-msgid "Effects "
-msgstr "Efekte "
-
-#: src/translations.h:71
-msgid "Egyptian"
-msgstr "Egjiptian"
-
-#: src/ui_configurationDialog.h:785
-msgid "Enable keyboard navigation"
-msgstr "Aktivizo eksplorimin me tastierë"
-
-#: src/ui_configurationDialog.h:789
-msgid "Enable mouse navigation"
-msgstr "Aktivizo eksplorimin me mi"
-
-#: src/translations.h:48
-msgid "Enceladus"
-msgstr "Enkeladus"
-
-#: src/ui_locationDialogGui.h:406
-msgid "Enter the altitude in meter"
-msgstr "Fusni lartësinë në metra"
-
-#: src/core/StelProjectorClasses.cpp:63
-msgid "Equal Area"
-msgstr "Sipërfaqe e Barabartë"
-
-#: src/modules/TextUI.cpp:115
-msgid "Equator Line"
-msgstr "Vijë Ekuatori"
-
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1028
-msgid "Equator line"
-msgstr "Vijë ekuatoriale"
+#: src/modules/TextUI.cpp:113
+msgid "Azimuthal Grid"
+msgstr "Rrjetë Azimutale"
 
 #: src/modules/TextUI.cpp:114
 msgid "Equatorial Grid"
 msgstr "Rrjetë Ekuatoriale"
 
-#: src/gui/StelGui.cpp:102 src/ui_viewDialog.h:1026
-msgid "Equatorial J2000 grid"
-msgstr "Rrjetë Ekuatoriale J2000"
+#: src/modules/TextUI.cpp:115
+msgid "Equator Line"
+msgstr "Vijë Ekuatori"
 
-#: src/gui/StelGui.cpp:101 src/ui_viewDialog.h:1025
-msgid "Equatorial grid"
-msgstr "Rrjetë Ekuatoriale"
+#: src/modules/TextUI.cpp:116
+msgid "Ecliptic Line"
+msgstr "Vijë Ekliptike"
 
-#: src/gui/ConfigurationDialog.cpp:706 src/gui/ConfigurationDialog.cpp:740
-#, qt-format
+#: src/modules/TextUI.cpp:117
+msgid "Nebula Names"
+msgstr "Emra Nebuloze"
+
+#: src/modules/TextUI.cpp:118
+msgid "Nebula Circles"
+msgstr "Rrathë Nebuloze"
+
+#: src/modules/TextUI.cpp:121
+msgid "Light Pollution Luminance: "
+msgstr "Ndriçim Ndotjeje Drite: "
+
+#: src/modules/TextUI.cpp:122
+msgid "Landscape: "
+msgstr "Panorama: "
+
+#: src/modules/TextUI.cpp:123
+msgid "Manual zoom: "
+msgstr "Zmadhim manual: "
+
+#: src/modules/TextUI.cpp:124
+msgid "Object Sizing Rule: "
+msgstr "Vizore Madhësie Objekti: "
+
+#: src/modules/TextUI.cpp:125
+msgid "Magnitude Scaling Multiplier: "
+msgstr "Shumëzues Shkallëzimi Magnitude: "
+
+#: src/modules/TextUI.cpp:126
+msgid "Milky Way intensity: "
+msgstr "Intensiteti i Rrugës së Qumështit: "
+
+#: src/modules/TextUI.cpp:127
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "Magnitudë Maksimale Nebuloze për Etiketim: "
+
+#: src/modules/TextUI.cpp:128
+msgid "Zoom Duration: "
+msgstr "Kohëzgjatje Zmadhimi: "
+
+#: src/modules/TextUI.cpp:129
+msgid "Cursor Timeout: "
+msgstr "Kohëzhdukje Shënjuesi: "
+
+#: src/modules/TextUI.cpp:130
+msgid "Correct for light travel time: "
+msgstr "Korrigjim udhëtimi me shpejtësi drite: "
+
+#: src/modules/TextUI.cpp:133
+msgid "Local Script: "
+msgstr "Skript Lokal: "
+
+#: src/modules/TextUI.cpp:134
+msgid "CD/DVD Script: "
+msgstr "Skript CD/DVD: "
+
+#: src/modules/TextUI.cpp:135
+msgid "USB Script: "
+msgstr "Skript USB: "
+
+#: src/modules/TextUI.cpp:136
+msgid "Arrow down to load list."
+msgstr "Shigjeta poshtë për ngarkim liste."
+
+#: src/modules/TextUI.cpp:137
+msgid "Select and exit to run."
+msgstr "Zgjidh dhe dil për të xhiruar."
+
+#: src/modules/TextUI.cpp:140
+msgid "Load Default Configuration: "
+msgstr "Ngarko Konfigurimin e Përzgjedhur: "
+
+#: src/modules/TextUI.cpp:141
+msgid "Save Current Configuration as Default: "
+msgstr "Ruaj Konfigurimin e Tanishëm si të Përzgjedhur: "
+
+#: src/modules/TextUI.cpp:142
+msgid "Shut Down: "
+msgstr "Mbyll: "
+
+#: src/modules/TextUI.cpp:143
+msgid "Update me via Internet: "
+msgstr "Më përditëso me anë të Internetit: "
+
+#: src/modules/TextUI.cpp:144
+msgid "Set UI Locale: "
+msgstr "Cakto gjuhën e ndërfaqes: "
+
+#: src/core/StelProjector.cpp:61
+msgid "Maximum FOV: "
+msgstr "Maksimum FOV: "
+
+#: src/core/StelProjectorClasses.cpp:25
+msgid "Perspective"
+msgstr "Perspektivë"
+
+#: src/core/StelProjectorClasses.cpp:30
 msgid ""
-"Error downloading %1:\n"
-"%2"
+"Perspective projection keeps the horizon a straight line. The mathematical "
+"name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
-"Gabim shkarkimi i %1:\n"
-"%2"
+"Projeksioni perspektivë e ruan horizontin sipas një vije të drejtë. Emri "
+"matematikor për këtë mënyrë projeksioni është <i>projeksion gnomonic</i>."
 
-#: src/gui/ConfigurationDialog.cpp:795
-#, qt-format
+#: src/core/StelProjectorClasses.cpp:63
+msgid "Equal Area"
+msgstr "Sipërfaqe e Barabartë"
+
+#: src/core/StelProjectorClasses.cpp:68
 msgid ""
-"Error downloading %1:\n"
-"File is corrupted."
+"The full name of this projection method is, <i>Lambert azimuthal equal-area "
+"projection</i>. It preserves the area but not the angle."
 msgstr ""
-"Gabim shkarkimi i %1:\n"
-"Skedari është i prishur."
+"Emri i plotë i kësaj mënyre projektimi është, <i>Projeksion Lambertian "
+"azimutal me sipërfaqe të barabarta</i>. Ai ruan sipërfaqen por jo këndin."
 
-#: src/translations.h:43
-msgid "Europa"
-msgstr "Europa"
+#: src/core/StelProjectorClasses.cpp:111
+msgid "Stereographic"
+msgstr "Stereografik"
 
-#: src/gui/ViewDialog.cpp:453
-msgid "Exceptional Leonid rate"
-msgstr "Sasi e veçantë Leonidësh"
-
-#: src/ui_searchDialogGui.h:230 src/ui_searchDialogGui.h:231
-msgid "Find Object"
-msgstr "Gjej Objektin"
-
-#: src/gui/ConfigurationDialog.cpp:650
-#, fuzzy
-msgid "Finished downloading all star catalogs!"
-msgstr ""
-"Katalogët e rinj u shkarkuan!\n"
-"Rinis Stellarium për t'i shfaqur."
-
-#: src/gui/ConfigurationDialog.cpp:668
+#: src/core/StelProjectorClasses.cpp:116
 msgid ""
-"Finished downloading new star catalogs!\n"
-"Restart Stellarium to display them."
+"Stereographic projection is known since the antiquity and was originally "
+"known as the planisphere projection. It preserves the angles at which curves "
+"cross each other but it does not preserve area."
 msgstr ""
-"Katalogët e rinj u shkarkuan!\n"
-"Rinis Stellarium për t'i shfaqur."
+"Projeksioni stereografik njihet që në lashtësi dhe fillimisht është njohur "
+"si projeksioni planisferik. Ai ruan këndet ku kurbat kryqëzohen por nuk ruan "
+"sipërfaqen."
 
 #: src/core/StelProjectorClasses.cpp:150
 msgid "Fish-eye"
 msgstr "Sy-peshku"
-
-#: src/gui/StelGui.cpp:121
-msgid "Flip scene horizontally"
-msgstr "Rrotullo skenën horizontalisht"
-
-#: src/gui/StelGui.cpp:122
-msgid "Flip scene vertically"
-msgstr "Rrotullo skenën vertikalisht"
-
-#: src/gui/StelGui.cpp:111
-msgid "Fog"
-msgstr "Mjegull"
-
-#: src/ui_dateTimeDialogGui.h:294 src/ui_helpDialogGui.h:259
-#: src/ui_locationDialogGui.h:387 src/ui_viewDialog.h:979
-#: src/ui_configurationDialog.h:746
-msgid "Form"
-msgstr "Forma"
-
-#: src/gui/StelGui.cpp:120
-msgid "Full-screen mode"
-msgstr "Ekran i plotë"
-
-#: src/gui/HelpDialog.cpp:170
-msgid "Further Reading"
-msgstr "Lexim i Mëtejshëm"
-
-#: src/gui/StelGui.cpp:103
-msgid "Galactic grid"
-msgstr ""
-
-#: src/modules/Nebula.cpp:269
-msgid "Galaxy"
-msgstr "Galaktikë"
-
-#: src/translations.h:44
-msgid "Ganymede"
-msgstr "Ganimed"
-
-#: src/modules/TextUI.cpp:65
-msgid "General "
-msgstr "Të Përgjithshme "
-
-#: src/gui/ConfigurationDialog.cpp:657
-#, qt-format
-msgid "Get catalog %1 of %2"
-msgstr "Merr katalogun %1 nga %2"
-
-#: src/ui_configurationDialog.h:842
-msgid "Get catalog x of y"
-msgstr "Merr katalogun x nga y"
-
-#: src/modules/Nebula.cpp:275
-msgid "Globular cluster"
-msgstr "Grumbull globular"
-
-#: src/gui/HelpDialog.cpp:293
-#, qt-format
-msgid "Graphic/other designer: %1"
-msgstr "Dizenjues grafike/i përgjithshëm: %1"
-
-#: src/ui_configurationDialog.h:821
-msgid "Gravity labels"
-msgstr "Etiketa gravitacionale"
-
-#: src/gui/StelGui.cpp:109
-msgid "Ground"
-msgstr "Truall"
-
-#: src/core/StelProjectorClasses.cpp:189
-msgid "Hammer-Aitoff"
-msgstr "Hammer-Aitoff"
-
-#: src/ui_helpDialogGui.h:260 src/ui_helpDialogGui.h:266
-msgid "Help"
-msgstr "Ndihmë"
-
-#: src/gui/StelGui.cpp:125
-msgid "Help window"
-msgstr "Ndihmë"
-
-#: src/ui_configurationDialog.h:831
-msgid "Hide other constellations when you click one"
-msgstr "Fshih konstelacionet e tjera kur klikon një"
-
-#: src/ui_configurationDialog.h:806
-msgid "Hides the mouse cursor when inactive"
-msgstr "Fsheh shënjuesin e miut kur është i plogësht"
-
-#: src/gui/ViewDialog.cpp:456
-msgid "Highest rate ever (1966 Leonids)"
-msgstr "Sasia më e madhe ndonjëherë (Leonidët, 1966)"
-
-#: src/core/StelObject.cpp:80
-#, qt-format
-msgid "Hour angle/DE: %1/%2"
-msgstr "Këndi kohor/DE: %1/%2"
-
-#: src/ui_viewDialog.h:1017
-msgid "Hourly zenith rate:"
-msgstr "Sasia në zenit për orë:"
-
-#: src/translations.h:53
-msgid "Hyperion"
-msgstr "Hiperion"
-
-#: src/translations.h:54
-msgid "Iapetus"
-msgstr "Iapetus"
 
 #: src/core/StelProjectorClasses.cpp:155
 msgid ""
@@ -681,223 +452,559 @@ msgstr ""
 "këndore nga qendra e pikëvështrimit (si shtrembërimi i parë me thjerra shumë "
 "kendgjëra)."
 
-#: src/gui/StelGui.cpp:140
-msgid "Increase time speed"
-msgstr "Zmadho shpejtësinë e kohës"
+#: src/core/StelProjectorClasses.cpp:189
+msgid "Hammer-Aitoff"
+msgstr "Hammer-Aitoff"
 
-#: src/gui/StelGui.cpp:143
-msgid "Increase time speed (a little)"
-msgstr "Rrite shpejtësinë e kohës (pak)"
+#: src/core/StelProjectorClasses.cpp:194
+msgid ""
+"The Hammer projection is an equal-area map projection, described by Ernst "
+"Hammer in 1892 and directly inspired by the Aitoff projection."
+msgstr ""
+"Projeksioni Hammer është një projeksion harte me zona të barabarta, i "
+"përshkruar nga Erns Hammer në 1892 dhe i frymëzuar drejtpërdrejt nga "
+"projeksioni Aitoff."
 
-#: src/translations.h:72
-msgid "Inuit"
-msgstr "Inuit"
+#: src/core/StelProjectorClasses.cpp:230
+msgid "Cylinder"
+msgstr "Cilindër"
 
-#: src/ui_configurationDialog.h:837
-msgid "Invert colors"
-msgstr "Kthe ngjyrat"
-
-#: src/translations.h:42
-msgid "Io"
-msgstr "Io"
-
-#: src/translations.h:41
-msgid "Jupiter"
-msgstr "Jupiter"
-
-#: src/gui/HelpDialog.cpp:162
-msgid "Keys"
-msgstr "Tastat"
-
-#: src/translations.h:73
-msgid "Korean"
-msgstr "Korean"
-
-#: src/ui_viewDialog.h:1012
-msgid "Labels and Markers"
-msgstr "Etiketa dhe Shënjues"
-
-#: src/translations.h:74
-msgid "Lakota"
-msgstr "Lakota"
-
-#: src/ui_viewDialog.h:990
-msgid "Landscape"
-msgstr "Panorama"
-
-#: src/modules/TextUI.cpp:122
-msgid "Landscape: "
-msgstr "Panorama: "
-
-#: src/ui_locationDialogGui.h:396
-msgid "Latitude:"
-msgstr "Gjerësia:"
-
-#: src/modules/TextUI.cpp:73
-msgid "Latitude: "
-msgstr "Gjerësia: "
-
-#: src/gui/HelpDialog.cpp:55
-msgid "Left click"
-msgstr "Klik majtas"
-
-#: src/gui/ConfigurationDialog.cpp:569
-msgid "License"
-msgstr "Liçensë"
-
-#: src/modules/TextUI.cpp:121
-msgid "Light Pollution Luminance: "
-msgstr "Ndriçim Ndotjeje Drite: "
-
-#: src/ui_viewDialog.h:1011
-msgid "Light pollution: "
-msgstr "Ndotje drite: "
-
-#: src/modules/TextUI.cpp:101
-msgid "Limiting Magnitude: "
-msgstr "Magnituda Kufitare: "
-
-#: src/modules/TextUI.cpp:140
-msgid "Load Default Configuration: "
-msgstr "Ngarko Konfigurimin e Përzgjedhur: "
-
-#: src/ui_configurationDialog.h:865
-msgid "Load at startup"
-msgstr "Ngarkoje në nisje"
-
-#: src/modules/NebulaMgr.cpp:379
-#, fuzzy
-msgid "Loading NGC catalog"
-msgstr "Duke ngarkuar katalogun NGC: %1/%2"
-
-#: src/modules/NebulaMgr.cpp:346
-#, qt-format
-msgid "Loading NGC catalog: %1/%2"
-msgstr "Duke ngarkuar katalogun NGC: %1/%2"
-
-#: src/modules/StarMgr.cpp:396
-#, qt-format
-msgid "Loading catalog %1 from file %2"
-msgstr "Duke ngarkuar katalogun %1 nga skedari %2"
-
-#: src/modules/TextUI.cpp:133
-msgid "Local Script: "
-msgstr "Skript Lokal: "
-
-#: src/ui_locationDialogGui.h:388
-msgid "Location"
-msgstr "Vendndodhja"
-
-#: src/gui/StelGui.cpp:130
-msgid "Location window"
-msgstr "Cakto vendndodhjen"
-
-#: src/modules/LandscapeMgr.cpp:428
-msgid "Location: "
-msgstr "Vendndodhja: "
-
-#: src/ui_helpDialogGui.h:270
-msgid "Log"
-msgstr "Regjistri"
-
-#: src/ui_locationDialogGui.h:400
-msgid "Longitude:"
-msgstr "Gjatësia:"
-
-#: src/modules/TextUI.cpp:74
-msgid "Longitude: "
-msgstr "Gjatësia: "
-
-#: src/modules/TextUI.cpp:125
-msgid "Magnitude Scaling Multiplier: "
-msgstr "Shumëzues Shkallëzimi Magnitude: "
-
-#: src/modules/TextUI.cpp:98
-msgid "Magnitude Sizing Multiplier: "
-msgstr "Shumëzues Madhësie Magnitude: "
-
-#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:130
-#, qt-format
-msgid "Magnitude: <b>%1</b>"
-msgstr "Magnituda: <b>%1</b>"
-
-#: src/modules/StarWrapper.cpp:52 src/modules/StarWrapper.cpp:109
-#, qt-format
-msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr "Magnituda: <b>%1</b> (B-V: %2)"
-
-#: src/ui_configurationDialog.h:871
-msgid "Main"
-msgstr "Kreu"
-
-#: src/modules/TextUI.cpp:123
-msgid "Manual zoom: "
-msgstr "Zmadhim manual: "
-
-#: src/translations.h:75
-msgid "Maori"
-msgstr "Maori"
-
-#: src/ui_viewDialog.h:988
-msgid "Markings"
-msgstr "Shënjimet"
-
-#: src/translations.h:38
-msgid "Mars"
-msgstr "Mars"
-
-#: src/ui_configurationDialog.h:827
-msgid "Mask out everything outside a central circle in the main view"
-msgstr "Fshih gjithçka jashtë një rrethi qëndror në pamjen kryesore"
-
-#: src/core/StelProjector.cpp:61
-msgid "Maximum FOV: "
-msgstr "Maksimum FOV: "
-
-#: src/modules/TextUI.cpp:99
-msgid "Maximum Magnitude to Label: "
-msgstr "Magnitudë Maksimale për Etiketim: "
-
-#: src/modules/TextUI.cpp:127
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Magnitudë Maksimale Nebuloze për Etiketim: "
+#: src/core/StelProjectorClasses.cpp:235
+msgid ""
+"The full name of this projection mode is <i>cylindrical equidistant "
+"projection</i>. With this projection all parallels are equally spaced."
+msgstr ""
+"Emri i plotë i kësaj mënyre projektimi është <i>projeksion i barazlarguar "
+"cilindrik</i>. Në këtë projeksion të gjitha paralelet janë të barazlarguara."
 
 #: src/core/StelProjectorClasses.cpp:277
 msgid "Mercator"
 msgstr "Merkator"
 
-#: src/translations.h:34
-msgid "Mercury"
-msgstr "Mërkur"
+#: src/core/StelProjectorClasses.cpp:282
+msgid ""
+"The mercator projection is one of the most used world map projection. It "
+"preserves direction and shapes but distorts size, in an increasing degree "
+"away from the equator."
+msgstr ""
+"Projeksioni merkator është një nga më të përdorurit në projeksionet e "
+"hartave. Ai ruan drejtimin dhe format por shformon madhësinë, duke e "
+"zmadhuar atë larg ekuatorit."
 
-#: src/modules/TextUI.cpp:112
-msgid "Meridian Line"
-msgstr "Vijë Meridiani"
+#: src/core/StelProjectorClasses.cpp:329
+msgid "Orthographic"
+msgstr "Ortografik"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1029
-msgid "Meridian line"
-msgstr "Vijë meridiani"
+#: src/core/StelProjectorClasses.cpp:334
+msgid ""
+"Orthographic projection is related to perspective projection, but the point "
+"of perspective is set to an infinite distance."
+msgstr ""
+"Projeksioni ortografik lidhet me projeksionin në perspektivë, por pika e "
+"perspektivës caktohet në një largësi infinit."
 
-#: src/modules/TextUI.cpp:126
-msgid "Milky Way intensity: "
-msgstr "Intensiteti i Rrugës së Qumështit: "
+#: src/core/StelObject.cpp:65
+#, qt-format
+msgid "RA/DE (J2000): %1/%2"
+msgstr "RA/DE (J2000): %1/%2"
 
-#: src/translations.h:47
-msgid "Mimas"
-msgstr "Mimas"
+#: src/core/StelObject.cpp:72
+#, qt-format
+msgid "RA/DE (of date): %1/%2"
+msgstr "RA/DE (e datës): %1/%2"
+
+#: src/core/StelObject.cpp:80
+#, qt-format
+msgid "Hour angle/DE: %1/%2"
+msgstr "Këndi kohor/DE: %1/%2"
+
+#: src/core/StelObject.cpp:91
+#, qt-format
+msgid "Az/Alt: %1/%2"
+msgstr "Az/Alt: %1/%2"
+
+#: src/gui/ConfigurationDialog.cpp:283
+msgid "Select screenshot directory"
+msgstr "Cakto dosje pamjesh ekrani"
+
+#: src/gui/ConfigurationDialog.cpp:448
+#, qt-format
+msgid "Startup FOV: %1%2"
+msgstr "FEP në Nisje: %1%2"
+
+#: src/gui/ConfigurationDialog.cpp:456
+#, qt-format
+msgid "Startup direction of view Az/Alt: %1/%2"
+msgstr "Drejtimi i pamjes në nisje Az/Alt: %1/%2"
+
+#: src/gui/ConfigurationDialog.cpp:492
+msgid "Authors"
+msgstr "Autorët"
+
+#: src/gui/ConfigurationDialog.cpp:496 src/gui/ViewDialog.cpp:336
+msgid "Contact"
+msgstr "Kontakti"
+
+#: src/gui/ConfigurationDialog.cpp:568
+msgid "Author"
+msgstr "Autor"
+
+#: src/gui/ConfigurationDialog.cpp:569
+msgid "License"
+msgstr "Liçensë"
+
+#: src/gui/ConfigurationDialog.cpp:600
+msgid "Running script: "
+msgstr "Duke xhiruar skriptin: "
+
+#: src/gui/ConfigurationDialog.cpp:607
+msgid "Running script: [none]"
+msgstr "Duke xhiruar skriptin: [asnjë]"
+
+#: src/gui/ConfigurationDialog.cpp:650
+msgid "Finished downloading all star catalogs!"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:657
+#, qt-format
+msgid "Get catalog %1 of %2"
+msgstr "Merr katalogun %1 nga %2"
+
+#: src/gui/ConfigurationDialog.cpp:659
+#, qt-format
+msgid ""
+"Download size: %1MB\n"
+"Star count: %2 Million\n"
+"Magnitude range: %3 - %4"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:668
+msgid ""
+"Finished downloading new star catalogs!\n"
+"Restart Stellarium to display them."
+msgstr ""
+"Katalogët e rinj u shkarkuan!\n"
+"Rinis Stellarium për t'i shfaqur."
+
+#: src/gui/ConfigurationDialog.cpp:706 src/gui/ConfigurationDialog.cpp:740
+#, qt-format
+msgid ""
+"Error downloading %1:\n"
+"%2"
+msgstr ""
+"Gabim shkarkimi i %1:\n"
+"%2"
+
+#: src/gui/ConfigurationDialog.cpp:711
+#, qt-format
+msgid ""
+"Downloading %1...\n"
+"(You can close this window.)"
+msgstr ""
+"Duke shkarkuar %1...\n"
+"(Mund ta mbyllësh këtë dritare.)"
+
+#: src/gui/ConfigurationDialog.cpp:791
+msgid "Verifying file integrity..."
+msgstr "Kontroll tërësie skedari..."
+
+#: src/gui/ConfigurationDialog.cpp:795
+#, qt-format
+msgid ""
+"Error downloading %1:\n"
+"File is corrupted."
+msgstr ""
+"Gabim shkarkimi i %1:\n"
+"Skedari është i prishur."
+
+#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:286
+#: src/gui/StelGuiItems.cpp:647
+msgid "Space"
+msgstr "Space"
+
+#: src/gui/HelpDialog.cpp:52
+msgid "Arrow keys & left mouse drag"
+msgstr "Tastat shigjetë & zvarrit duke klikuar me të majtën"
+
+#: src/gui/HelpDialog.cpp:53
+msgid "Page Up/Down"
+msgstr "Page Up/Down"
+
+#: src/gui/HelpDialog.cpp:54
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Up/Down"
+
+#: src/gui/HelpDialog.cpp:55
+msgid "Left click"
+msgstr "Klik majtas"
+
+#: src/gui/HelpDialog.cpp:56
+msgid "Right click"
+msgstr "Klik djathtas"
+
+#: src/gui/HelpDialog.cpp:57
+msgid "CTRL + Left click"
+msgstr "CTRL + Klik majtas"
+
+#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:157
+msgid "Movement and Selection"
+msgstr "Zhvendosja dhe Zgjedhja"
+
+#: src/gui/HelpDialog.cpp:61
+msgid "Pan view around the sky"
+msgstr "Pamja nëpër qiell"
+
+#: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
+msgid "Zoom in/out"
+msgstr "Zmadho/Zvogëlo"
+
+#: src/gui/HelpDialog.cpp:64
+msgid "Select object"
+msgstr "Zgjidh objektin"
+
+#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
+msgid "Clear selection"
+msgstr "Pastro zgjedhjen"
+
+#: src/gui/HelpDialog.cpp:70
+msgid "When a Script is Running"
+msgstr "Kur është në punë një skript"
+
+#: src/gui/HelpDialog.cpp:71 src/gui/StelGui.cpp:136
+msgid "Slow down the script execution rate"
+msgstr "Ngadalëso shkallën e ekzekutimit të skriptit"
+
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:137
+msgid "Speed up the script execution rate"
+msgstr "Shpejto shkallën e ekzekutimit të skriptit"
+
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:138
+msgid "Set the normal script execution rate"
+msgstr "Vendos shkallën e ekzekutimit të skriptit tek normalja"
+
+#: src/gui/HelpDialog.cpp:161
+msgid "Stellarium Help"
+msgstr "Ndihma në Stellarium"
+
+#: src/gui/HelpDialog.cpp:162
+msgid "Keys"
+msgstr "Tastat"
+
+#: src/gui/HelpDialog.cpp:170
+msgid "Further Reading"
+msgstr "Lexim i Mëtejshëm"
+
+#: src/gui/HelpDialog.cpp:171
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"Lidhjet e mëposhtme janë lidhje faqesh web, dhe do të nisin shfletuesin tënd "
+"web:\n"
+
+#: src/gui/HelpDialog.cpp:172
+msgid "The Stellarium User Guide"
+msgstr "Udhëzuesi i Përdoruesit Stellarium"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:176
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Pyetje të Bëra Shpesh} rreth Stellariumit.  Edhe përgjigje."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:181
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Wiki i Stellariumit} - Të dhëna të përgjithshme.  Gjithashtu mund të gjeni "
+"panorama dhe skripte përdoruesish."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:186
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Sistem ndihme me bileta} - nëse ke nevojë për ndihmë për të përdorur "
+"Stellarium, posto një kërkesë ndihme këtu dhe ne do të përpiqemi t'ju "
+"ndihmojmë."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:191
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:196
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Forume} - diskutoni Stellarium me përdorues të tjerë."
 
 #: src/gui/HelpDialog.cpp:232 src/gui/HelpDialog.cpp:322
 #: src/gui/HelpDialog.cpp:324 src/gui/StelGui.cpp:176
 msgid "Miscellaneous"
 msgstr "Të Ndryshme"
 
-#: src/translations.h:37
-msgid "Moon"
-msgstr "Hënë"
+#: src/gui/HelpDialog.cpp:290
+msgid "Developers"
+msgstr "Zhvilluesit"
 
-#: src/ui_configurationDialog.h:808
-msgid "Mouse cursor timeout (seconds):"
-msgstr "Koha kur miu quhet i plogësht (sekonda):"
+#: src/gui/HelpDialog.cpp:291
+#, qt-format
+msgid "Project coordinator & lead developer: %1"
+msgstr "Koordinator projekti & zhvillues kryesor: %1"
+
+#: src/gui/HelpDialog.cpp:292
+#, qt-format
+msgid "Doc author/developer: %1"
+msgstr "Dokumentues/zhvillues: %1"
+
+#: src/gui/HelpDialog.cpp:293
+#, qt-format
+msgid "Graphic/other designer: %1"
+msgstr "Dizenjues grafike/i përgjithshëm: %1"
+
+#: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:295
+#: src/gui/HelpDialog.cpp:297 src/gui/HelpDialog.cpp:298
+#, qt-format
+msgid "Developer: %1"
+msgstr "Zhvillues: %1"
+
+#: src/gui/HelpDialog.cpp:296
+#, qt-format
+msgid "OSX Developer: %1"
+msgstr "Zhvillues OSX: %1"
+
+#: src/gui/StelGui.cpp:94
+msgid "Display Options"
+msgstr "Mundësi Pamjeje"
+
+#: src/gui/StelGui.cpp:95
+msgid "Constellation lines"
+msgstr "Vija yjësie"
+
+#: src/gui/StelGui.cpp:96
+msgid "Constellation art"
+msgstr "Art yjësie"
+
+#: src/gui/StelGui.cpp:97
+msgid "Constellation labels"
+msgstr "Etiketa yjësie"
+
+#: src/gui/StelGui.cpp:98
+msgid "Constellation boundaries"
+msgstr "Kufij yjësie"
+
+#: src/gui/StelGui.cpp:100 src/ui_viewDialog.h:1027
+msgid "Azimuthal grid"
+msgstr "Rrjetë Azimutale"
+
+#: src/gui/StelGui.cpp:101 src/ui_viewDialog.h:1025
+msgid "Equatorial grid"
+msgstr "Rrjetë Ekuatoriale"
+
+#: src/gui/StelGui.cpp:102 src/ui_viewDialog.h:1026
+msgid "Equatorial J2000 grid"
+msgstr "Rrjetë Ekuatoriale J2000"
+
+#: src/gui/StelGui.cpp:103
+msgid "Galactic grid"
+msgstr ""
+
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1030
+msgid "Ecliptic line"
+msgstr "Vijë ekliptike"
+
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1028
+msgid "Equator line"
+msgstr "Vijë ekuatoriale"
+
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1029
+msgid "Meridian line"
+msgstr "Vijë meridiani"
+
+#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1031
+msgid "Cardinal points"
+msgstr "Pika referimi"
+
+#: src/gui/StelGui.cpp:109
+msgid "Ground"
+msgstr "Truall"
+
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1009
+msgid "Atmosphere"
+msgstr "Atmosferë"
+
+#: src/gui/StelGui.cpp:111
+msgid "Fog"
+msgstr "Mjegull"
+
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1014
+msgid "Nebulas"
+msgstr "Nebuloza"
+
+#: src/gui/StelGui.cpp:114
+msgid "Nebulas background images"
+msgstr "Imazhe sfondi nebulozash"
+
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:995 src/ui_viewDialog.h:1013
+msgid "Stars"
+msgstr "Yje"
+
+#: src/gui/StelGui.cpp:116
+msgid "Planets labels"
+msgstr "Etiketa planetësh"
+
+#: src/gui/StelGui.cpp:117
+msgid "Planet orbits"
+msgstr ""
+
+#: src/gui/StelGui.cpp:119
+msgid "Night mode"
+msgstr "Pamje nate"
+
+#: src/gui/StelGui.cpp:120
+msgid "Full-screen mode"
+msgstr "Ekran i plotë"
+
+#: src/gui/StelGui.cpp:121
+msgid "Flip scene horizontally"
+msgstr "Rrotullo skenën horizontalisht"
+
+#: src/gui/StelGui.cpp:122
+msgid "Flip scene vertically"
+msgstr "Rrotullo skenën vertikalisht"
+
+#: src/gui/StelGui.cpp:124
+msgid "Windows"
+msgstr "Dritare"
+
+#: src/gui/StelGui.cpp:125
+msgid "Help window"
+msgstr "Ndihmë"
+
+#: src/gui/StelGui.cpp:126
+msgid "Configuration window"
+msgstr "Konfiguro"
+
+#: src/gui/StelGui.cpp:127
+msgid "Search window"
+msgstr "Kërko"
+
+#: src/gui/StelGui.cpp:128
+msgid "Sky and viewing options window"
+msgstr "Qielli dhe Mundësi Pamjeje"
+
+#: src/gui/StelGui.cpp:129
+msgid "Date/time window"
+msgstr "Data/Ora"
+
+#: src/gui/StelGui.cpp:130
+msgid "Location window"
+msgstr "Cakto vendndodhjen"
+
+#: src/gui/StelGui.cpp:132
+msgid "Script console window"
+msgstr "Dritarja e konsolës së skriptit"
+
+#: src/gui/StelGui.cpp:135 src/ui_dateTimeDialogGui.h:295
+msgid "Date and Time"
+msgstr "Data dhe Ora"
+
+#: src/gui/StelGui.cpp:139
+msgid "Decrease time speed"
+msgstr "Zvogëlo shpejtësinë e kohës"
+
+#: src/gui/StelGui.cpp:140
+msgid "Increase time speed"
+msgstr "Zmadho shpejtësinë e kohës"
+
+#: src/gui/StelGui.cpp:141
+msgid "Set normal time rate"
+msgstr "Shpejtësi normale e kohës"
+
+#: src/gui/StelGui.cpp:142
+msgid "Decrease time speed (a little)"
+msgstr "Ule shpejtësinë e kohës (pak)"
+
+#: src/gui/StelGui.cpp:143
+msgid "Increase time speed (a little)"
+msgstr "Rrite shpejtësinë e kohës (pak)"
+
+#: src/gui/StelGui.cpp:144
+msgid "Set time rate to zero"
+msgstr "Ritmi i kohës në zero"
+
+#: src/gui/StelGui.cpp:145
+msgid "Set time to now"
+msgstr "Vendos orën e tanishme"
+
+#: src/gui/StelGui.cpp:146
+msgid "Add 1 solar hour"
+msgstr "Shto 1 orë diellore"
+
+#: src/gui/StelGui.cpp:147
+msgid "Subtract 1 solar hour"
+msgstr "Hiq 1 orë diellore"
+
+#: src/gui/StelGui.cpp:148
+msgid "Add 1 solar day"
+msgstr "Shto 1 ditë diellore"
+
+#: src/gui/StelGui.cpp:149
+msgid "Subtract 1 solar day"
+msgstr "Hiq 1 ditë diellore"
+
+#: src/gui/StelGui.cpp:150
+msgid "Add 1 solar week"
+msgstr "Shto 1 javë diellore"
+
+#: src/gui/StelGui.cpp:151
+msgid "Subtract 1 solar week"
+msgstr "Hiq 1 javë diellore"
+
+#: src/gui/StelGui.cpp:152
+msgid "Add 1 sidereal day"
+msgstr "Shto 1 ditë siderale"
+
+#: src/gui/StelGui.cpp:153
+msgid "Subtract 1 sidereal day"
+msgstr "Hiq 1 ditë siderale"
+
+#: src/gui/StelGui.cpp:154
+msgid "Add 1 sidereal week"
+msgstr "Shto 1 javë siderale"
+
+#: src/gui/StelGui.cpp:155
+msgid "Subtract 1 sidereal week"
+msgstr "Hiq 1 javë siderale"
+
+#: src/gui/StelGui.cpp:158
+msgid "Center on selected object"
+msgstr "Qendërzo objektin e zgjedhur"
+
+#: src/gui/StelGui.cpp:159
+msgid "Track object"
+msgstr "Ndiq objektin"
+
+#: src/gui/StelGui.cpp:160
+msgid "Zoom in on selected object"
+msgstr "Zmadho objektin e zgjedhur"
+
+#: src/gui/StelGui.cpp:161
+msgid "Zoom out"
+msgstr "Zvogëlo"
+
+#: src/gui/StelGui.cpp:162
+msgid "Set home planet to selected planet"
+msgstr "Cakto shtëpinë në planetin e caktuar"
+
+#: src/gui/StelGui.cpp:164
+msgid "Telescope Control"
+msgstr "Kontroll Teleskopi"
 
 #: src/gui/StelGui.cpp:165
 msgid "Move telescope #0 to selected object"
@@ -939,57 +1046,34 @@ msgstr "Lëviz teleskopin #8 në objektin e zgjedhur"
 msgid "Move telescope #9 to selected object"
 msgstr "Lëviz teleskopin #9 në objektin e zgjedhur"
 
-#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:157
-msgid "Movement and Selection"
-msgstr "Zhvendosja dhe Zgjedhja"
+#: src/gui/StelGui.cpp:177
+msgid "Switch between equatorial and azimuthal mount"
+msgstr "Zgjidh midis ekuatoriales dhe azimutales"
 
-#: src/translations.h:63
-msgid "N"
-msgstr "V"
+#: src/gui/StelGui.cpp:178
+msgid "Quit"
+msgstr "Dil"
 
-#: src/ui_locationDialogGui.h:409
-msgid "Name/City:"
-msgstr "Emri/Qyteti:"
+#: src/gui/StelGui.cpp:179
+msgid "Save screenshot"
+msgstr "Ruaj pamje ekrani"
 
-#: src/translations.h:76
-msgid "Navajo"
-msgstr "Navajo"
+#: src/gui/StelGui.cpp:182
+msgid "Auto hide horizontal button bar"
+msgstr "Fshih automatikisht butonat horizontalë"
 
-#: src/ui_configurationDialog.h:873
-msgid "Navigation"
-msgstr "Eksplorimi"
+#: src/gui/StelGui.cpp:183
+msgid "Auto hide vertical button bar"
+msgstr "Fshih automatikisht butonat vertikale"
 
-#: src/modules/Nebula.cpp:278
-msgid "Nebula"
-msgstr "Nebulozë"
+#: src/gui/StelGui.cpp:184
+msgid "Toggle visibility of GUI"
+msgstr ""
 
-#: src/modules/TextUI.cpp:118
-msgid "Nebula Circles"
-msgstr "Rrathë Nebuloze"
-
-#: src/modules/TextUI.cpp:117
-msgid "Nebula Names"
-msgstr "Emra Nebuloze"
-
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1014
-msgid "Nebulas"
-msgstr "Nebuloza"
-
-#: src/gui/StelGui.cpp:114
-msgid "Nebulas background images"
-msgstr "Imazhe sfondi nebulozash"
-
-#: src/translations.h:56
-msgid "Neptune"
-msgstr "Neptun"
-
-#: src/gui/LocationDialog.cpp:340
-msgid "New Location"
-msgstr "Vendndodhje e Re"
-
-#: src/gui/StelGui.cpp:119
-msgid "Night mode"
-msgstr "Pamje nate"
+#: src/gui/StelGuiItems.cpp:548
+#, no-c-format, qt-format
+msgid "%1m"
+msgstr "%1m"
 
 #: src/gui/ViewDialog.cpp:388
 msgid "No description"
@@ -999,396 +1083,351 @@ msgstr "Pa përshkrim"
 msgid "No shooting stars"
 msgstr "Pa yje që bien"
 
-#: src/ui_configurationDialog.h:762
-msgid "None"
-msgstr "Asgjë"
-
 #: src/gui/ViewDialog.cpp:447
 msgid "Normal rate"
 msgstr "Sasi normale"
 
-#: src/translations.h:77
-msgid "Norse"
-msgstr "Norvegjez"
+#: src/gui/ViewDialog.cpp:450
+msgid "Standard Perseids rate"
+msgstr "Sasi standarde Perseidësh"
 
-#: src/gui/HelpDialog.cpp:296
-#, qt-format
-msgid "OSX Developer: %1"
-msgstr "Zhvillues OSX: %1"
+#: src/gui/ViewDialog.cpp:453
+msgid "Exceptional Leonid rate"
+msgstr "Sasi e veçantë Leonidësh"
 
-#: src/modules/TextUI.cpp:124
-msgid "Object Sizing Rule: "
-msgstr "Vizore Madhësie Objekti: "
+#: src/gui/ViewDialog.cpp:456
+msgid "Highest rate ever (1966 Leonids)"
+msgstr "Sasia më e madhe ndonjëherë (Leonidët, 1966)"
 
-#: src/modules/Nebula.cpp:272
-msgid "Open cluster"
-msgstr "Grumbull i hapur"
+#: src/gui/LocationDialog.cpp:340
+msgid "New Location"
+msgstr "Vendndodhje e Re"
 
-#: src/ui_viewDialog.h:1039 src/ui_viewDialog.h:1044 src/ui_viewDialog.h:1046
-#: src/ui_configurationDialog.h:853 src/ui_configurationDialog.h:864
-msgid "Options"
-msgstr "Mundësitë"
+#: src/main.cpp:308
+msgid "This system does not support OpenGL."
+msgstr "Ky sistem nuk përdor OpenGL."
 
-#: src/core/StelProjectorClasses.cpp:329
-msgid "Orthographic"
-msgstr "Ortografik"
+#: src/translations.h:33
+msgid "Sun"
+msgstr "Diell"
 
-#: src/core/StelProjectorClasses.cpp:334
-msgid ""
-"Orthographic projection is related to perspective projection, but the point "
-"of perspective is set to an infinite distance."
-msgstr ""
-"Projeksioni ortografik lidhet me projeksionin në perspektivë, por pika e "
-"perspektivës caktohet në një largësi infinit."
+#: src/translations.h:34
+msgid "Mercury"
+msgstr "Mërkur"
 
-#: src/ui_configurationDialog.h:804
-msgid "Other"
-msgstr "Tjetër"
+#: src/translations.h:35
+msgid "Venus"
+msgstr "Venus"
 
-#: src/ui_configurationDialog.h:802
-msgid "Other:"
-msgstr "Tjetër:"
+#: src/translations.h:36
+msgid "Earth"
+msgstr "Tokë"
 
-#: src/gui/HelpDialog.cpp:53
-msgid "Page Up/Down"
-msgstr "Page Up/Down"
+#: src/translations.h:37
+msgid "Moon"
+msgstr "Hënë"
 
-#: src/gui/HelpDialog.cpp:61
-msgid "Pan view around the sky"
-msgstr "Pamja nëpër qiell"
+#: src/translations.h:38
+msgid "Mars"
+msgstr "Mars"
 
-#: src/modules/StarWrapper.cpp:126
-#, qt-format
-msgid "Parallax: %1\""
-msgstr "Paralaksi: %1\""
-
-#: src/core/StelProjectorClasses.cpp:25
-msgid "Perspective"
-msgstr "Perspektivë"
-
-#: src/core/StelProjectorClasses.cpp:30
-msgid ""
-"Perspective projection keeps the horizon a straight line. The mathematical "
-"name for this projection method is <i>gnomonic projection</i>."
-msgstr ""
-"Projeksioni perspektivë e ruan horizontin sipas një vije të drejtë. Emri "
-"matematikor për këtë mënyrë projeksioni është <i>projeksion gnomonic</i>."
+#: src/translations.h:39
+msgid "Deimos"
+msgstr "Deimos"
 
 #: src/translations.h:40
 msgid "Phobos"
 msgstr "Fobos"
 
-#: src/translations.h:55
-msgid "Phoebe"
-msgstr "Fëbe"
+#: src/translations.h:41
+msgid "Jupiter"
+msgstr "Jupiter"
 
-#: src/modules/TextUI.cpp:109
-msgid "Planet Names"
-msgstr "Emra Planeti"
+#: src/translations.h:42
+msgid "Io"
+msgstr "Io"
 
-#: src/modules/TextUI.cpp:110
-msgid "Planet Orbits"
-msgstr "Orbita Planeti"
+#: src/translations.h:43
+msgid "Europa"
+msgstr "Europa"
 
-#: src/modules/TextUI.cpp:111
-msgid "Planet Trails"
-msgstr "Gjurmë Planeti"
+#: src/translations.h:44
+msgid "Ganymede"
+msgstr "Ganimed"
 
-#: src/gui/StelGui.cpp:117
-#, fuzzy
-msgid "Planet orbits"
-msgstr "Orbita Planeti"
-
-#: src/ui_locationDialogGui.h:411
-msgid "Planet:"
-msgstr "Planeti:"
-
-#: src/modules/LandscapeMgr.cpp:436
-msgid "Planet: "
-msgstr "Planeti: "
-
-#: src/ui_configurationDialog.h:813
-msgid "Planetarium options"
-msgstr "Mundësitë e Planetarium"
-
-#: src/modules/Nebula.cpp:281
-msgid "Planetary nebula"
-msgstr "Nebulozë planetare"
-
-#: src/ui_viewDialog.h:1015
-msgid "Planets"
-msgstr "Planete"
-
-#: src/ui_viewDialog.h:1003
-msgid "Planets and satellites"
-msgstr "Planetë dhe satelitë"
-
-#: src/gui/StelGui.cpp:116
-msgid "Planets labels"
-msgstr "Etiketa planetësh"
-
-#: src/ui_configurationDialog.h:879
-msgid "Plugins"
-msgstr "Pluginat"
-
-#: src/translations.h:58
-msgid "Pluto"
-msgstr "Pluton"
-
-#: src/translations.h:78
-msgid "Polynesian"
-msgstr "Polinezian"
-
-#: src/modules/TextUI.cpp:84
-msgid "Preset Sky Time: "
-msgstr "Ora Qiellore e Paracaktuar: "
-
-#: src/modules/TextUI.cpp:87
-msgid "Preset Time"
-msgstr "Ora e Paracaktuar"
-
-#: src/ui_configurationDialog.h:749
-msgid "Program language"
-msgstr "Gjuha e programit"
-
-#: src/gui/HelpDialog.cpp:291
-#, qt-format
-msgid "Project coordinator & lead developer: %1"
-msgstr "Koordinator projekti & zhvillues kryesor: %1"
-
-#: src/ui_viewDialog.h:1038
-msgid "Projection"
-msgstr "Projeksioni"
-
-#: src/gui/StelGui.cpp:178
-msgid "Quit"
-msgstr "Dil"
-
-#: src/core/StelObject.cpp:65
-#, qt-format
-msgid "RA/DE (J2000): %1/%2"
-msgstr "RA/DE (J2000): %1/%2"
-
-#: src/core/StelObject.cpp:72
-#, qt-format
-msgid "RA/DE (of date): %1/%2"
-msgstr "RA/DE (e datës): %1/%2"
-
-#: src/ui_searchDialogGui.h:236
-msgid "RA/Dec (J2000):"
-msgstr "RA/Dec (J2000):"
-
-#: src/ui_helpDialogGui.h:273
-msgid "Refresh"
-msgstr "Rifresko"
-
-#: src/ui_viewDialog.h:997
-msgid "Relative scale:"
-msgstr "Shkalla relative:"
-
-#: src/ui_configurationDialog.h:846
-msgid "Restart the download"
-msgstr "Rinis shkarkimin"
-
-#: src/ui_configurationDialog.h:771
-msgid "Restore defaults"
-msgstr "Rikthe të përzgjedhurat"
-
-#: src/ui_configurationDialog.h:769
-msgid "Restore the default settings that came with Stellarium"
-msgstr "Rikthe rregullimet e parazgjedhura që erdhën me Stellarium"
-
-#: src/ui_configurationDialog.h:772
-msgid ""
-"Restoring default settings requires a restart of Stellarium. Saving all the "
-"current options includes the current FOV and direction of view for use at "
-"next startup."
-msgstr ""
-"Për të rikthyer të pëzgjedhurat kërkohet rinisja e Stellarium. Kur ruan të "
-"gjitha mundësitë e tanishme, përfshihet dhe FOV e çastit dhe drejtimi i "
-"pamjes për nisjen e rradhës."
-
-#: src/ui_configurationDialog.h:848
-msgid "Retry"
-msgstr "Riprovo"
-
-#: src/translations.h:51
-msgid "Rhea"
-msgstr "Rea"
-
-#: src/gui/HelpDialog.cpp:56
-msgid "Right click"
-msgstr "Klik djathtas"
-
-#: src/ui_configurationDialog.h:857
-msgid "Run the selected script"
-msgstr "Xhiro skriptin e zgjedhur"
-
-#: src/gui/ConfigurationDialog.cpp:600
-msgid "Running script: "
-msgstr "Duke xhiruar skriptin: "
-
-#: src/gui/ConfigurationDialog.cpp:607
-msgid "Running script: [none]"
-msgstr "Duke xhiruar skriptin: [asnjë]"
-
-#: src/translations.h:64
-msgid "S"
-msgstr "J"
+#: src/translations.h:45
+msgid "Callisto"
+msgstr "Kalisto"
 
 #: src/translations.h:46
 msgid "Saturn"
 msgstr "Saturn"
 
-#: src/modules/TextUI.cpp:141
-msgid "Save Current Configuration as Default: "
-msgstr "Ruaj Konfigurimin e Tanishëm si të Përzgjedhur: "
+#: src/translations.h:47
+msgid "Mimas"
+msgstr "Mimas"
 
-#: src/gui/StelGui.cpp:179
-msgid "Save screenshot"
-msgstr "Ruaj pamje ekrani"
+#: src/translations.h:48
+msgid "Enceladus"
+msgstr "Enkeladus"
 
-#: src/ui_configurationDialog.h:767
-msgid "Save settings"
-msgstr "Ruaj të dhënat"
+#: src/translations.h:49
+msgid "Tethys"
+msgstr "Tetis"
 
-#: src/ui_configurationDialog.h:765
-msgid ""
-"Save the settings you've changed this session to be the same the next time "
-"you start Stellarium"
+#: src/translations.h:50
+msgid "Dione"
+msgstr "Dion"
+
+#: src/translations.h:51
+msgid "Rhea"
+msgstr "Rea"
+
+#: src/translations.h:52
+msgid "Titan"
+msgstr "Titan"
+
+#: src/translations.h:53
+msgid "Hyperion"
+msgstr "Hiperion"
+
+#: src/translations.h:54
+msgid "Iapetus"
+msgstr "Iapetus"
+
+#: src/translations.h:55
+msgid "Phoebe"
+msgstr "Fëbe"
+
+#: src/translations.h:56
+msgid "Neptune"
+msgstr "Neptun"
+
+#: src/translations.h:57
+msgid "Uranus"
+msgstr "Uran"
+
+#: src/translations.h:58
+msgid "Pluto"
+msgstr "Pluton"
+
+#: src/translations.h:59
+msgid "Charon"
+msgstr "Karont"
+
+#: src/translations.h:60
+msgid "Solar System Observer"
+msgstr "Vëzhgues Sistemi Diellor"
+
+#: src/translations.h:63
+msgid "N"
+msgstr "V"
+
+#: src/translations.h:64
+msgid "S"
+msgstr "J"
+
+#: src/translations.h:65
+msgid "E"
+msgstr "L"
+
+#: src/translations.h:66
+msgid "W"
+msgstr "P"
+
+#: src/translations.h:69
+msgid "Aztec"
 msgstr ""
-"Ruaj rregullimet e ndryshuara për këtë sesion që të jenë të njëjta herën "
-"tjetër kur nis Stellarium"
 
-#: src/ui_viewDialog.h:1008
-msgid "Scale Moon"
-msgstr "Përshkallëzo Hënën"
+#: src/translations.h:70
+msgid "Chinese"
+msgstr "Kinez"
 
-#: src/ui_configurationDialog.h:835
-msgid "Screenshot Directory"
-msgstr "Dosja e pamjeve të ekranit"
+#: src/translations.h:71
+msgid "Egyptian"
+msgstr "Egjiptian"
 
-#: src/ui_configurationDialog.h:834
-msgid "Screenshots"
-msgstr "Foto ekrani"
+#: src/translations.h:72
+msgid "Inuit"
+msgstr "Inuit"
 
-#: src/gui/StelGui.cpp:132
-msgid "Script console window"
-msgstr "Dritarja e konsolës së skriptit"
+#: src/translations.h:73
+msgid "Korean"
+msgstr "Korean"
 
-#: src/ui_configurationDialog.h:877
-msgid "Scripts"
-msgstr "Skripte"
+#: src/translations.h:74
+msgid "Lakota"
+msgstr "Lakota"
 
-#: src/modules/TextUI.cpp:69
-msgid "Scripts "
-msgstr "Skripte "
+#: src/translations.h:75
+msgid "Maori"
+msgstr "Maori"
 
-#: src/gui/StelGui.cpp:127
-msgid "Search window"
-msgstr "Kërko"
+#: src/translations.h:76
+msgid "Navajo"
+msgstr "Navajo"
 
-#: src/modules/TextUI.cpp:137
-msgid "Select and exit to run."
-msgstr "Zgjidh dhe dil për të xhiruar."
+#: src/translations.h:77
+msgid "Norse"
+msgstr "Norvegjez"
 
-#: src/gui/HelpDialog.cpp:64
-msgid "Select object"
-msgstr "Zgjidh objektin"
+#: src/translations.h:78
+msgid "Polynesian"
+msgstr "Polinezian"
 
-#: src/gui/ConfigurationDialog.cpp:283
-msgid "Select screenshot directory"
-msgstr "Cakto dosje pamjesh ekrani"
+#: src/translations.h:79
+msgid "Western"
+msgstr "Perëndimor"
 
-#: src/ui_configurationDialog.h:833
-msgid "Select single constellation"
-msgstr "Zgjidh konstelacion më vete"
+#: src/translations.h:80
+msgid "Tupi-Guarani"
+msgstr "Tupi-Guarani"
 
-#: src/ui_configurationDialog.h:750
-msgid "Selected object information"
-msgstr "Të dhënat e objektit të zgjedhur"
+#: src/ui_dateTimeDialogGui.h:294 src/ui_helpDialogGui.h:259
+#: src/ui_locationDialogGui.h:387 src/ui_viewDialog.h:979
+#: src/ui_configurationDialog.h:746
+msgid "Form"
+msgstr "Forma"
 
-#: src/modules/TextUI.cpp:63
-msgid "Set Location "
-msgstr "Cakto Vendndodhjen "
+#: src/ui_dateTimeDialogGui.h:297 src/ui_dateTimeDialogGui.h:298
+msgid "/"
+msgstr "/"
 
-#: src/modules/TextUI.cpp:64
-msgid "Set Time "
-msgstr "Cakto Orën "
+#: src/ui_dateTimeDialogGui.h:299 src/ui_dateTimeDialogGui.h:300
+msgid ":"
+msgstr ":"
 
-#: src/modules/TextUI.cpp:80
-msgid "Set Time Zone: "
-msgstr "Cakto Zonën Kohore: "
+#: src/ui_helpDialogGui.h:260 src/ui_helpDialogGui.h:266
+msgid "Help"
+msgstr "Ndihmë"
 
-#: src/modules/TextUI.cpp:144
-msgid "Set UI Locale: "
-msgstr "Cakto gjuhën e ndërfaqes: "
+#: src/ui_helpDialogGui.h:268
+msgid "About"
+msgstr "Rreth"
 
-#: src/gui/StelGui.cpp:162
-msgid "Set home planet to selected planet"
-msgstr "Cakto shtëpinë në planetin e caktuar"
+#: src/ui_helpDialogGui.h:270
+msgid "Log"
+msgstr "Regjistri"
 
-#: src/gui/StelGui.cpp:141
-msgid "Set normal time rate"
-msgstr "Shpejtësi normale e kohës"
+#: src/ui_helpDialogGui.h:273
+msgid "Refresh"
+msgstr "Rifresko"
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:138
-msgid "Set the normal script execution rate"
-msgstr "Vendos shkallën e ekzekutimit të skriptit tek normalja"
+#: src/ui_locationDialogGui.h:388
+msgid "Location"
+msgstr "Vendndodhja"
 
-#: src/gui/StelGui.cpp:144
-msgid "Set time rate to zero"
-msgstr "Ritmi i kohës në zero"
+#: src/ui_locationDialogGui.h:392
+msgid "Current location information"
+msgstr "Të dhënat e vendndodhjes së tanishme"
 
-#: src/gui/StelGui.cpp:145
-msgid "Set time to now"
-msgstr "Vendos orën e tanishme"
+#: src/ui_locationDialogGui.h:393
+msgid "Use as default"
+msgstr "Përdor si të përzgjedhur"
 
-#: src/ui_configurationDialog.h:796
+#: src/ui_locationDialogGui.h:394
+msgid "Delete"
+msgstr "Fshi"
+
+#: src/ui_locationDialogGui.h:395
+msgid "Add to list"
+msgstr "Shto në listë"
+
+#: src/ui_locationDialogGui.h:396
+msgid "Latitude:"
+msgstr "Gjerësia:"
+
+#: src/ui_locationDialogGui.h:398 src/ui_locationDialogGui.h:402
 msgid ""
-"Sets the simulation time to the next instance of this time of day when "
-"Stellarium starts"
-msgstr "Cakton orën e simulimit për ditën që vjen kur nis Stellarium"
+"You can enter values in decimal degrees, or using dms format, for example: "
+"+1d 12m 8s"
+msgstr ""
+"Mund të fusni vlera me presje dhjetore, ose duke përdorur formatin dms, "
+"p.sh.: +1d 12m 8s"
 
-#: src/ui_viewDialog.h:1016
-msgid "Shooting Stars"
-msgstr "Meteorë"
+#: src/ui_locationDialogGui.h:400
+msgid "Longitude:"
+msgstr "Gjatësia:"
 
-#: src/ui_configurationDialog.h:758
-msgid "Short"
-msgstr "Shkurt"
+#: src/ui_locationDialogGui.h:404
+msgid "Altitude:"
+msgstr "Lartësia:"
 
-#: src/ui_viewDialog.h:1036
-msgid "Show art"
-msgstr "Shfaq artin"
+#: src/ui_locationDialogGui.h:406
+msgid "Enter the altitude in meter"
+msgstr "Fusni lartësinë në metra"
 
-#: src/ui_viewDialog.h:1010
-msgid "Show atmosphere"
-msgstr "Shfaq atmosferën"
+#: src/ui_locationDialogGui.h:408
+msgid " m"
+msgstr " m"
 
-#: src/ui_viewDialog.h:1035
-msgid "Show boundaries"
-msgstr "Shfaq kufinjtë"
+#: src/ui_locationDialogGui.h:409
+msgid "Name/City:"
+msgstr "Emri/Qyteti:"
 
-#: src/ui_configurationDialog.h:812
-msgid "Show flip buttons"
-msgstr "Shfaq butonat e zhvendosjes"
+#: src/ui_locationDialogGui.h:410
+msgid "Country:"
+msgstr "Shteti:"
 
-#: src/ui_viewDialog.h:1041
-msgid "Show fog"
-msgstr "Shfaq mjegullën"
+#: src/ui_locationDialogGui.h:411
+msgid "Planet:"
+msgstr "Planeti:"
 
-#: src/ui_viewDialog.h:1040
-msgid "Show ground"
-msgstr "Shfaq truallin"
+#: src/ui_searchDialogGui.h:230 src/ui_searchDialogGui.h:231
+msgid "Find Object"
+msgstr "Gjej Objektin"
 
-#: src/ui_viewDialog.h:1034
-msgid "Show labels"
-msgstr "Shfaq etiketat"
+#: src/ui_searchDialogGui.h:236
+msgid "RA/Dec (J2000):"
+msgstr "RA/Dec (J2000):"
 
-#: src/ui_viewDialog.h:1033
-msgid "Show lines"
-msgstr "Shfaq vijat"
+#: src/ui_viewDialog.h:980
+msgid "View"
+msgstr "Pamja"
+
+#: src/ui_viewDialog.h:986
+msgid "Sky"
+msgstr "Qielli"
+
+#: src/ui_viewDialog.h:988
+msgid "Markings"
+msgstr "Shënjimet"
+
+#: src/ui_viewDialog.h:990
+msgid "Landscape"
+msgstr "Panorama"
+
+#: src/ui_viewDialog.h:992
+msgid "Starlore"
+msgstr "Kultura Yjore"
+
+#: src/ui_viewDialog.h:996
+msgid "Absolute scale:"
+msgstr "Shkalla absolute:"
+
+#: src/ui_viewDialog.h:997
+msgid "Relative scale:"
+msgstr "Shkalla relative:"
+
+#: src/ui_viewDialog.h:998
+msgid "Twinkle:"
+msgstr "Vezullit:"
+
+#: src/ui_viewDialog.h:1000
+msgid "Dim faint stars when a very bright object is visible"
+msgstr "Zbeh yjet kur shfaqet një objekt shumë i shndritshëm"
+
+#: src/ui_viewDialog.h:1002
+msgid "Dynamic eye adaptation"
+msgstr "Përshtatje dinamike syu"
+
+#: src/ui_viewDialog.h:1003
+msgid "Planets and satellites"
+msgstr "Planetë dhe satelitë"
+
+#: src/ui_viewDialog.h:1004
+msgid "Show planets"
+msgstr "Shfaq planetët"
 
 #: src/ui_viewDialog.h:1005
 msgid "Show planet markers"
@@ -1398,341 +1437,102 @@ msgstr "Shfaq shënjues planetësh"
 msgid "Show planet orbits"
 msgstr "Shfaq orbita planeti"
 
-#: src/ui_viewDialog.h:1004
-msgid "Show planets"
-msgstr "Shfaq planetët"
-
-#: src/modules/TextUI.cpp:96
-msgid "Show: "
-msgstr "Shfaq: "
-
-#: src/modules/TextUI.cpp:142
-msgid "Shut Down: "
-msgstr "Mbyll: "
-
-#: src/modules/TextUI.cpp:83
-msgid "Sidereal"
-msgstr "Sidereal"
-
 #: src/ui_viewDialog.h:1007
 msgid "Simulate light speed"
 msgstr "Simulo shpejtësinë e dritës"
 
-#: src/modules/Nebula.cpp:100
-#, qt-format
-msgid "Size: %1"
-msgstr "Masa: %1"
-
-#: src/ui_viewDialog.h:986
-msgid "Sky"
-msgstr "Qielli"
-
-#: src/modules/TextUI.cpp:92
-msgid "Sky Culture: "
-msgstr "Kultura Qiellore: "
-
-#: src/modules/TextUI.cpp:93
-msgid "Sky Language: "
-msgstr "Gjuha e Qiellit: "
-
-#: src/modules/TextUI.cpp:85
-msgid "Sky Time At Start-up: "
-msgstr "Ora Qiellore Në Nisje: "
-
-#: src/modules/TextUI.cpp:79
-msgid "Sky Time: "
-msgstr "Ora Qiellore: "
-
-#: src/gui/StelGui.cpp:128
-msgid "Sky and viewing options window"
-msgstr "Qielli dhe Mundësi Pamjeje"
-
-#: src/gui/HelpDialog.cpp:71 src/gui/StelGui.cpp:136
-msgid "Slow down the script execution rate"
-msgstr "Ngadalëso shkallën e ekzekutimit të skriptit"
-
-#: src/modules/TextUI.cpp:76
-msgid "Solar System Body: "
-msgstr "Trup Sistemi Diellor: "
-
-#: src/translations.h:60
-msgid "Solar System Observer"
-msgstr "Vëzhgues Sistemi Diellor"
-
-#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:286
-#: src/gui/StelGuiItems.cpp:647
-msgid "Space"
-msgstr "Space"
-
-#: src/modules/StarWrapper.cpp:119
-#, qt-format
-msgid "Spectral Type: %1"
-msgstr "Lloji Spektral: %1"
-
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:137
-msgid "Speed up the script execution rate"
-msgstr "Shpejto shkallën e ekzekutimit të skriptit"
-
-#: src/ui_configurationDialog.h:817
-msgid "Spheric mirror distortion"
-msgstr "Shformim pasqyre sferike"
-
-#: src/ui_configurationDialog.h:815
-msgid ""
-"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
-"mirror for low-cost planetarium systems."
-msgstr ""
-"Shformimi i pasqyrës sferike përdoret kur projektohet Stellarium mbi një "
-"pasqyrë sferike për sisteme planetariumesh me kosto të ulët."
-
-#: src/gui/ViewDialog.cpp:450
-msgid "Standard Perseids rate"
-msgstr "Sasi standarde Perseidësh"
-
-#: src/modules/TextUI.cpp:97
-msgid "Star Value Multiplier: "
-msgstr "Shumëzues Vlere Yjesh: "
-
-#: src/ui_configurationDialog.h:838
-msgid "Star catalog updates"
-msgstr "Përditësime katalogu yjesh"
-
-#: src/ui_viewDialog.h:992
-msgid "Starlore"
-msgstr "Kultura Yjore"
-
-#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:995 src/ui_viewDialog.h:1013
-msgid "Stars"
-msgstr "Yje"
-
-#: src/modules/TextUI.cpp:66
-msgid "Stars "
-msgstr "Yje "
-
-#: src/ui_configurationDialog.h:792
-msgid "Starts Stellarium at system clock date and time"
-msgstr "Nis Stellarium sipas datës dhe orës së sistemit"
-
-#: src/gui/ConfigurationDialog.cpp:448
-#, qt-format
-msgid "Startup FOV: %1%2"
-msgstr "FEP në Nisje: %1%2"
-
-#: src/ui_configurationDialog.h:776
-msgid "Startup FOV: XX"
-msgstr "FOV e nisjes: XX"
-
-#: src/ui_configurationDialog.h:790
-msgid "Startup date and time"
-msgstr "Data dhe ora në nisje"
-
-#: src/gui/ConfigurationDialog.cpp:456
-#, qt-format
-msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr "Drejtimi i pamjes në nisje Az/Alt: %1/%2"
-
-#: src/ui_configurationDialog.h:780
-msgid "Startup direction of view: xxxx"
-msgstr "Drejtimi i pamjes së nisjes: xxxx"
-
-#: src/gui/HelpDialog.cpp:161
-msgid "Stellarium Help"
-msgstr "Ndihma në Stellarium"
-
-#: src/core/StelProjectorClasses.cpp:111
-msgid "Stereographic"
-msgstr "Stereografik"
-
-#: src/core/StelProjectorClasses.cpp:116
-msgid ""
-"Stereographic projection is known since the antiquity and was originally "
-"known as the planisphere projection. It preserves the angles at which curves "
-"cross each other but it does not preserve area."
-msgstr ""
-"Projeksioni stereografik njihet që në lashtësi dhe fillimisht është njohur "
-"si projeksioni planisferik. Ai ruan këndet ku kurbat kryqëzohen por nuk ruan "
-"sipërfaqen."
-
-#: src/ui_configurationDialog.h:861
-msgid "Stop a running script"
-msgstr "Ndalo një skript që xhiron"
-
-#: src/ui_configurationDialog.h:850
-msgid "Stop the download. You can always restart it later"
-msgstr "Ndal shkarkimin. Mund ta rinisësh më vonë"
-
-#: src/gui/StelGui.cpp:153
-msgid "Subtract 1 sidereal day"
-msgstr "Hiq 1 ditë siderale"
-
-#: src/gui/StelGui.cpp:155
-msgid "Subtract 1 sidereal week"
-msgstr "Hiq 1 javë siderale"
-
-#: src/gui/StelGui.cpp:149
-msgid "Subtract 1 solar day"
-msgstr "Hiq 1 ditë diellore"
-
-#: src/gui/StelGui.cpp:147
-msgid "Subtract 1 solar hour"
-msgstr "Hiq 1 orë diellore"
-
-#: src/gui/StelGui.cpp:151
-msgid "Subtract 1 solar week"
-msgstr "Hiq 1 javë diellore"
-
-#: src/translations.h:33
-msgid "Sun"
-msgstr "Diell"
-
-#: src/gui/StelGui.cpp:177
-msgid "Switch between equatorial and azimuthal mount"
-msgstr "Zgjidh midis ekuatoriales dhe azimutales"
-
-#: src/ui_configurationDialog.h:794
-msgid "System date and time"
-msgstr "Data dhe ora e sistemit"
-
-#: src/ui_configurationDialog.h:798
-msgid "System date at:"
-msgstr "Data e sistemit më:"
-
-#: src/gui/StelGui.cpp:164
-msgid "Telescope Control"
-msgstr "Kontroll Teleskopi"
-
-#: src/translations.h:49
-msgid "Tethys"
-msgstr "Tetis"
-
-#: src/core/StelProjectorClasses.cpp:194
-msgid ""
-"The Hammer projection is an equal-area map projection, described by Ernst "
-"Hammer in 1892 and directly inspired by the Aitoff projection."
-msgstr ""
-"Projeksioni Hammer është një projeksion harte me zona të barabarta, i "
-"përshkruar nga Erns Hammer në 1892 dhe i frymëzuar drejtpërdrejt nga "
-"projeksioni Aitoff."
-
-#: src/gui/HelpDialog.cpp:172
-msgid "The Stellarium User Guide"
-msgstr "Udhëzuesi i Përdoruesit Stellarium"
-
-#: src/ui_configurationDialog.h:778
-msgid "The direction you're looking when Stellarium starts"
-msgstr "Drejtimi i pamjes kur nis Stellarium"
-
-#: src/gui/HelpDialog.cpp:171
-msgid ""
-"The following links are external web links, and will launch your web "
-"browser:\n"
-msgstr ""
-"Lidhjet e mëposhtme janë lidhje faqesh web, dhe do të nisin shfletuesin tënd "
-"web:\n"
-
-#: src/core/StelProjectorClasses.cpp:68
-msgid ""
-"The full name of this projection method is, <i>Lambert azimuthal equal-area "
-"projection</i>. It preserves the area but not the angle."
-msgstr ""
-"Emri i plotë i kësaj mënyre projektimi është, <i>Projeksion Lambertian "
-"azimutal me sipërfaqe të barabarta</i>. Ai ruan sipërfaqen por jo këndin."
-
-#: src/core/StelProjectorClasses.cpp:235
-msgid ""
-"The full name of this projection mode is <i>cylindrical equidistant "
-"projection</i>. With this projection all parallels are equally spaced."
-msgstr ""
-"Emri i plotë i kësaj mënyre projektimi është <i>projeksion i barazlarguar "
-"cilindrik</i>. Në këtë projeksion të gjitha paralelet janë të barazlarguara."
-
-#: src/core/StelProjectorClasses.cpp:282
-msgid ""
-"The mercator projection is one of the most used world map projection. It "
-"preserves direction and shapes but distorts size, in an increasing degree "
-"away from the equator."
-msgstr ""
-"Projeksioni merkator është një nga më të përdorurit në projeksionet e "
-"hartave. Ai ruan drejtimin dhe format por shformon madhësinë, duke e "
-"zmadhuar atë larg ekuatorit."
-
-#: src/ui_configurationDialog.h:774
-msgid "The width of your view when Stellarium starts"
-msgstr "Gjerësia e pamjes kur nis Stellarium"
-
-#: src/main.cpp:308
-msgid "This system does not support OpenGL."
-msgstr "Ky sistem nuk përdor OpenGL."
-
-#: src/modules/TextUI.cpp:88
-msgid "Time Display Format: "
-msgstr "Formati i Shfaqjes së Orës: "
-
-#: src/translations.h:52
-msgid "Titan"
-msgstr "Titan"
-
-#: src/ui_configurationDialog.h:810
-msgid "Toggle vertical and horizontal image flip buttons."
-msgstr "Aktivizo butonat e rrotullimit vertikal dhe horizontal për imazhet."
-
-#: src/gui/StelGui.cpp:184
-#, fuzzy
-msgid "Toggle visibility of GUI"
-msgstr "Shfaq shiritin e veglave"
-
-#: src/ui_configurationDialog.h:875
-msgid "Tools"
-msgstr "Vegla"
-
-#: src/gui/StelGui.cpp:159
-msgid "Track object"
-msgstr "Ndiq objektin"
-
-#: src/translations.h:80
-msgid "Tupi-Guarani"
-msgstr "Tupi-Guarani"
-
-#: src/ui_viewDialog.h:998
-msgid "Twinkle:"
-msgstr "Vezullit:"
-
-#: src/modules/TextUI.cpp:100
-msgid "Twinkling: "
-msgstr "Vezullitje: "
-
-#: src/modules/Nebula.cpp:92
-#, qt-format
-msgid "Type: <b>%1</b>"
-msgstr "Lloji: <b>%1</b>"
-
-#: src/modules/TextUI.cpp:135
-msgid "USB Script: "
-msgstr "Skript USB: "
-
-#: src/modules/Nebula.cpp:290
-msgid "Undocumented type"
-msgstr "Lloj i padokumentuar"
-
-#: src/modules/Nebula.cpp:287
-msgid "Unknown"
-msgstr "E panjohur"
-
-#: src/modules/TextUI.cpp:143
-msgid "Update me via Internet: "
-msgstr "Më përditëso me anë të Internetit: "
-
-#: src/translations.h:57
-msgid "Uranus"
-msgstr "Uran"
-
-#: src/ui_configurationDialog.h:800
-msgid "Use a specific date and time when Stellarium starts up"
-msgstr "Përdor një datë dhe orë specifike kur nis Stellarium"
-
-#: src/ui_locationDialogGui.h:393
-msgid "Use as default"
-msgstr "Përdor si të përzgjedhur"
+#: src/ui_viewDialog.h:1008
+msgid "Scale Moon"
+msgstr "Përshkallëzo Hënën"
+
+#: src/ui_viewDialog.h:1010
+msgid "Show atmosphere"
+msgstr "Shfaq atmosferën"
+
+#: src/ui_viewDialog.h:1011
+msgid "Light pollution: "
+msgstr "Ndotje drite: "
+
+#: src/ui_viewDialog.h:1012
+msgid "Labels and Markers"
+msgstr "Etiketa dhe Shënjues"
+
+#: src/ui_viewDialog.h:1015
+msgid "Planets"
+msgstr "Planete"
+
+#: src/ui_viewDialog.h:1016
+msgid "Shooting Stars"
+msgstr "Meteorë"
+
+#: src/ui_viewDialog.h:1017
+msgid "Hourly zenith rate:"
+msgstr "Sasia në zenit për orë:"
+
+#: src/ui_viewDialog.h:1018
+msgid "0"
+msgstr "0"
+
+#: src/ui_viewDialog.h:1019
+msgid "10"
+msgstr "10"
+
+#: src/ui_viewDialog.h:1020
+msgid "80"
+msgstr "80"
+
+#: src/ui_viewDialog.h:1021
+msgid "10000"
+msgstr "10000"
+
+#: src/ui_viewDialog.h:1022
+msgid "144000"
+msgstr "144000"
+
+#: src/ui_viewDialog.h:1024
+msgid "Celestial Sphere"
+msgstr "Sfera Qiellore"
+
+#: src/ui_viewDialog.h:1032
+msgid "Constellations"
+msgstr "Yjësitë"
+
+#: src/ui_viewDialog.h:1033
+msgid "Show lines"
+msgstr "Shfaq vijat"
+
+#: src/ui_viewDialog.h:1034
+msgid "Show labels"
+msgstr "Shfaq etiketat"
+
+#: src/ui_viewDialog.h:1035
+msgid "Show boundaries"
+msgstr "Shfaq kufinjtë"
+
+#: src/ui_viewDialog.h:1036
+msgid "Show art"
+msgstr "Shfaq artin"
+
+#: src/ui_viewDialog.h:1037
+msgid "Art brightness: "
+msgstr "Ndriçimi i artit "
+
+#: src/ui_viewDialog.h:1038
+msgid "Projection"
+msgstr "Projeksioni"
+
+#: src/ui_viewDialog.h:1039 src/ui_viewDialog.h:1044 src/ui_viewDialog.h:1046
+#: src/ui_configurationDialog.h:853 src/ui_configurationDialog.h:864
+msgid "Options"
+msgstr "Mundësitë"
+
+#: src/ui_viewDialog.h:1040
+msgid "Show ground"
+msgstr "Shfaq truallin"
+
+#: src/ui_viewDialog.h:1041
+msgid "Show fog"
+msgstr "Shfaq mjegullën"
 
 #: src/ui_viewDialog.h:1042
 msgid "Use associated planet and position"
@@ -1746,33 +1546,193 @@ msgstr "Përdor këtë pamje si të përzgjedhur"
 msgid "Use this sky culture as default"
 msgstr "Përdor këtë kulturë qielli si të përzgjedhur"
 
-#: src/translations.h:35
-msgid "Venus"
-msgstr "Venus"
-
-#: src/gui/ConfigurationDialog.cpp:791
-msgid "Verifying file integrity..."
-msgstr "Kontroll tërësie skedari..."
-
-#: src/ui_viewDialog.h:980
-msgid "View"
-msgstr "Pamja"
-
 #: src/ui_viewDialog.h:1047
 msgid "Visible"
 msgstr "I dukshëm"
 
-#: src/translations.h:66
-msgid "W"
-msgstr "P"
+#: src/ui_configurationDialog.h:747
+msgid "Configuration"
+msgstr "Konfigurimi"
 
-#: src/translations.h:79
-msgid "Western"
-msgstr "Perëndimor"
+#: src/ui_configurationDialog.h:749
+msgid "Program language"
+msgstr "Gjuha e programit"
 
-#: src/gui/HelpDialog.cpp:70
-msgid "When a Script is Running"
-msgstr "Kur është në punë një skript"
+#: src/ui_configurationDialog.h:750
+msgid "Selected object information"
+msgstr "Të dhënat e objektit të zgjedhur"
+
+#: src/ui_configurationDialog.h:752
+msgid "Display all information available"
+msgstr "Shfaq të gjitha të dhënat e gatshme"
+
+#: src/ui_configurationDialog.h:754
+msgid "All available"
+msgstr "Gjithë të mundshme"
+
+#: src/ui_configurationDialog.h:756
+msgid "Display less information"
+msgstr "Shfaq më pak të dhëna"
+
+#: src/ui_configurationDialog.h:758
+msgid "Short"
+msgstr "Shkurt"
+
+#: src/ui_configurationDialog.h:760
+msgid "Display no information"
+msgstr "Mos shfaq të dhëna"
+
+#: src/ui_configurationDialog.h:762
+msgid "None"
+msgstr "Asgjë"
+
+#: src/ui_configurationDialog.h:763
+msgid "Default options"
+msgstr "Mundësitë e përzgjedhura"
+
+#: src/ui_configurationDialog.h:765
+msgid ""
+"Save the settings you've changed this session to be the same the next time "
+"you start Stellarium"
+msgstr ""
+"Ruaj rregullimet e ndryshuara për këtë sesion që të jenë të njëjta herën "
+"tjetër kur nis Stellarium"
+
+#: src/ui_configurationDialog.h:767
+msgid "Save settings"
+msgstr "Ruaj të dhënat"
+
+#: src/ui_configurationDialog.h:769
+msgid "Restore the default settings that came with Stellarium"
+msgstr "Rikthe rregullimet e parazgjedhura që erdhën me Stellarium"
+
+#: src/ui_configurationDialog.h:771
+msgid "Restore defaults"
+msgstr "Rikthe të përzgjedhurat"
+
+#: src/ui_configurationDialog.h:772
+msgid ""
+"Restoring default settings requires a restart of Stellarium. Saving all the "
+"current options includes the current FOV and direction of view for use at "
+"next startup."
+msgstr ""
+"Për të rikthyer të pëzgjedhurat kërkohet rinisja e Stellarium. Kur ruan të "
+"gjitha mundësitë e tanishme, përfshihet dhe FOV e çastit dhe drejtimi i "
+"pamjes për nisjen e rradhës."
+
+#: src/ui_configurationDialog.h:774
+msgid "The width of your view when Stellarium starts"
+msgstr "Gjerësia e pamjes kur nis Stellarium"
+
+#: src/ui_configurationDialog.h:776
+msgid "Startup FOV: XX"
+msgstr "FOV e nisjes: XX"
+
+#: src/ui_configurationDialog.h:778
+msgid "The direction you're looking when Stellarium starts"
+msgstr "Drejtimi i pamjes kur nis Stellarium"
+
+#: src/ui_configurationDialog.h:780
+msgid "Startup direction of view: xxxx"
+msgstr "Drejtimi i pamjes së nisjes: xxxx"
+
+#: src/ui_configurationDialog.h:781
+msgid "Control"
+msgstr "Kontrolli"
+
+#: src/ui_configurationDialog.h:783
+msgid "Allow keyboard to pan and zoom"
+msgstr "Lejo tastierën të piketojë dhe të zmadhojë"
+
+#: src/ui_configurationDialog.h:785
+msgid "Enable keyboard navigation"
+msgstr "Aktivizo eksplorimin me tastierë"
+
+#: src/ui_configurationDialog.h:787
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr "Lejo miun të piketojë (tërheqje) dhe të zmadhojë (rrota e miut)"
+
+#: src/ui_configurationDialog.h:789
+msgid "Enable mouse navigation"
+msgstr "Aktivizo eksplorimin me mi"
+
+#: src/ui_configurationDialog.h:790
+msgid "Startup date and time"
+msgstr "Data dhe ora në nisje"
+
+#: src/ui_configurationDialog.h:792
+msgid "Starts Stellarium at system clock date and time"
+msgstr "Nis Stellarium sipas datës dhe orës së sistemit"
+
+#: src/ui_configurationDialog.h:794
+msgid "System date and time"
+msgstr "Data dhe ora e sistemit"
+
+#: src/ui_configurationDialog.h:796
+msgid ""
+"Sets the simulation time to the next instance of this time of day when "
+"Stellarium starts"
+msgstr "Cakton orën e simulimit për ditën që vjen kur nis Stellarium"
+
+#: src/ui_configurationDialog.h:798
+msgid "System date at:"
+msgstr "Data e sistemit më:"
+
+#: src/ui_configurationDialog.h:800
+msgid "Use a specific date and time when Stellarium starts up"
+msgstr "Përdor një datë dhe orë specifike kur nis Stellarium"
+
+#: src/ui_configurationDialog.h:802
+msgid "Other:"
+msgstr "Tjetër:"
+
+#: src/ui_configurationDialog.h:803
+msgid "use current"
+msgstr "përdor të tanishmen"
+
+#: src/ui_configurationDialog.h:804
+msgid "Other"
+msgstr "Tjetër"
+
+#: src/ui_configurationDialog.h:806
+msgid "Hides the mouse cursor when inactive"
+msgstr "Fsheh shënjuesin e miut kur është i plogësht"
+
+#: src/ui_configurationDialog.h:808
+msgid "Mouse cursor timeout (seconds):"
+msgstr "Koha kur miu quhet i plogësht (sekonda):"
+
+#: src/ui_configurationDialog.h:810
+msgid "Toggle vertical and horizontal image flip buttons."
+msgstr "Aktivizo butonat e rrotullimit vertikal dhe horizontal për imazhet."
+
+#: src/ui_configurationDialog.h:812
+msgid "Show flip buttons"
+msgstr "Shfaq butonat e zhvendosjes"
+
+#: src/ui_configurationDialog.h:813
+msgid "Planetarium options"
+msgstr "Mundësitë e Planetarium"
+
+#: src/ui_configurationDialog.h:815
+msgid ""
+"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
+"mirror for low-cost planetarium systems."
+msgstr ""
+"Shformimi i pasqyrës sferike përdoret kur projektohet Stellarium mbi një "
+"pasqyrë sferike për sisteme planetariumesh me kosto të ulët."
+
+#: src/ui_configurationDialog.h:817
+msgid "Spheric mirror distortion"
+msgstr "Shformim pasqyre sferike"
+
+#: src/ui_configurationDialog.h:819
+msgid "Align labels with the horizon"
+msgstr "Etiketa paralele me horizontin"
+
+#: src/ui_configurationDialog.h:821
+msgid "Gravity labels"
+msgstr "Etiketa gravitacionale"
 
 #: src/ui_configurationDialog.h:823
 msgid ""
@@ -1782,130 +1742,136 @@ msgstr ""
 "Kur aktivizohet, tasti \"auto zvogëlim\" do të caktojë drejtimin fillestar "
 "të pamjes gjithashtu"
 
-#: src/gui/StelGui.cpp:124
-msgid "Windows"
-msgstr "Dritare"
+#: src/ui_configurationDialog.h:825
+msgid "Auto zoom out returns to initial direction of view"
+msgstr "Zvogëlimi automatik të kthen në drejtimin fillestar të pamjes"
 
-#: src/ui_locationDialogGui.h:398 src/ui_locationDialogGui.h:402
-msgid ""
-"You can enter values in decimal degrees, or using dms format, for example: "
-"+1d 12m 8s"
-msgstr ""
-"Mund të fusni vlera me presje dhjetore, ose duke përdorur formatin dms, p."
-"sh.: +1d 12m 8s"
+#: src/ui_configurationDialog.h:827
+msgid "Mask out everything outside a central circle in the main view"
+msgstr "Fshih gjithçka jashtë një rrethi qëndror në pamjen kryesore"
 
-#: src/modules/TextUI.cpp:128
-msgid "Zoom Duration: "
-msgstr "Kohëzgjatje Zmadhimi: "
+#: src/ui_configurationDialog.h:829
+msgid "Disc viewport"
+msgstr "Pamje disku"
 
-#: src/gui/StelGui.cpp:160
-msgid "Zoom in on selected object"
-msgstr "Zmadho objektin e zgjedhur"
+#: src/ui_configurationDialog.h:831
+msgid "Hide other constellations when you click one"
+msgstr "Fshih konstelacionet e tjera kur klikon një"
 
-#: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
-msgid "Zoom in/out"
-msgstr "Zmadho/Zvogëlo"
+#: src/ui_configurationDialog.h:833
+msgid "Select single constellation"
+msgstr "Zgjidh konstelacion më vete"
 
-#: src/gui/StelGui.cpp:161
-msgid "Zoom out"
-msgstr "Zvogëlo"
+#: src/ui_configurationDialog.h:834
+msgid "Screenshots"
+msgstr "Foto ekrani"
 
-#: src/ui_configurationDialog.h:866
-#, fuzzy
-msgid "configure"
-msgstr "Konfigurimi"
+#: src/ui_configurationDialog.h:835
+msgid "Screenshot Directory"
+msgstr "Dosja e pamjeve të ekranit"
 
-#: src/ui_configurationDialog.h:803
-msgid "use current"
-msgstr "përdor të tanishmen"
+#: src/ui_configurationDialog.h:837
+msgid "Invert colors"
+msgstr "Kthe ngjyrat"
+
+#: src/ui_configurationDialog.h:838
+msgid "Star catalog updates"
+msgstr "Përditësime katalogu yjesh"
+
+#: src/ui_configurationDialog.h:840
+msgid "Click here to start downloading"
+msgstr "Kliko këtu për të filluar shkarkimin"
+
+#: src/ui_configurationDialog.h:842
+msgid "Get catalog x of y"
+msgstr "Merr katalogun x nga y"
+
+#: src/ui_configurationDialog.h:843
+msgid "Download this file to view even more stars"
+msgstr "Shkarko këtë skedar për të parë më shumë yjex"
 
 #: src/ui_configurationDialog.h:844
 msgid "xxx"
 msgstr "xxx"
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:191
-#, fuzzy
-msgid ""
-"{Bug reporting and feature request system} - if something doesn't work "
-"properly or is missing and is not listed in the tracker, you can open bug "
-"reports here."
+#: src/ui_configurationDialog.h:846
+msgid "Restart the download"
+msgstr "Rinis shkarkimin"
+
+#: src/ui_configurationDialog.h:848
+msgid "Retry"
+msgstr "Riprovo"
+
+#: src/ui_configurationDialog.h:850
+msgid "Stop the download. You can always restart it later"
+msgstr "Ndal shkarkimin. Mund ta rinisësh më vonë"
+
+#: src/ui_configurationDialog.h:852
+msgid "Cancel"
+msgstr "Anuloje"
+
+#: src/ui_configurationDialog.h:855
+msgid "Close window when script runs"
+msgstr "Mbyll dritaren kur xhiron skripti"
+
+#: src/ui_configurationDialog.h:857
+msgid "Run the selected script"
+msgstr "Xhiro skriptin e zgjedhur"
+
+#: src/ui_configurationDialog.h:861
+msgid "Stop a running script"
+msgstr "Ndalo një skript që xhiron"
+
+#: src/ui_configurationDialog.h:865
+msgid "Load at startup"
+msgstr "Ngarkoje në nisje"
+
+#: src/ui_configurationDialog.h:866
+msgid "configure"
 msgstr ""
-"{Sistem raportimi gabimesh} - nëse diçka nuk punon siç duhet dhe nuk është "
-"në listën e Pyetjeve Bërë Shpesh, mund të raportoni një gabim këtu."
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:196
-msgid "{Forums} - discuss Stellarium with other users."
-msgstr "{Forume} - diskutoni Stellarium me përdorues të tjerë."
+#: src/ui_configurationDialog.h:871
+msgid "Main"
+msgstr "Kreu"
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:176
-msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr "{Pyetje të Bëra Shpesh} rreth Stellariumit.  Edhe përgjigje."
+#: src/ui_configurationDialog.h:873
+msgid "Navigation"
+msgstr "Eksplorimi"
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:186
-msgid ""
-"{Support ticket system} - if you need help using Stellarium, post a support "
-"request here and we'll try to help."
-msgstr ""
-"{Sistem ndihme me bileta} - nëse ke nevojë për ndihmë për të përdorur "
-"Stellarium, posto një kërkesë ndihme këtu dhe ne do të përpiqemi t'ju "
-"ndihmojmë."
+#: src/ui_configurationDialog.h:875
+msgid "Tools"
+msgstr "Vegla"
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:181
-msgid ""
-"{The Stellarium Wiki} - General information.  You can also find user-"
-"contributed landscapes and scripts here."
-msgstr ""
-"{Wiki i Stellariumit} - Të dhëna të përgjithshme.  Gjithashtu mund të gjeni "
-"panorama dhe skripte përdoruesish."
+#: src/ui_configurationDialog.h:877
+msgid "Scripts"
+msgstr "Skripte"
 
-#~ msgid "Add"
-#~ msgstr "Shto"
+#: src/ui_configurationDialog.h:879
+msgid "Plugins"
+msgstr "Pluginat"
 
-#~ msgid "All star catalogs are up to date."
-#~ msgstr "Nuk ka katalogë të rinj."
-
-#~ msgid "Checking for new star catalogs..."
-#~ msgstr "Kontroll për katalogë të rinj yjesh..."
-
-#~ msgid ""
-#~ "Could not finalize download:\n"
-#~ "Error moving temporary file %1.tmp to %1.cat"
-#~ msgstr ""
-#~ "Shkarkimi nuk përfundoi:\n"
-#~ "Gabim në emërtimin e skedarit %1.tmp në %1.cat"
-
-#~ msgid ""
-#~ "Error checking updates:\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Gabim kontrolli përditësimesh:\n"
-#~ "%1"
-
-#~ msgid "Images"
-#~ msgstr "Imazhe"
-
+#, qt-format
 #~ msgid "Loading Constellation Art: %1/%2"
 #~ msgstr "Duke ngarkuar Artin e Yjësive: %1/%2"
 
-#~ msgid "Remove"
-#~ msgstr "Hiqe"
+#~ msgid ""
+#~ "{Bug reporting system} - if something doesn't work properly and is not "
+#~ "listed in the FAQ list, you can open bug reports here."
+#~ msgstr ""
+#~ "{Sistem raportimi gabimesh} - nëse diçka nuk punon siç duhet dhe nuk është "
+#~ "në listën e Pyetjeve Bërë Shpesh, mund të raportoni një gabim këtu."
+
+#~ msgid ""
+#~ "{Feature request system} - if you have an idea for a new feature, send it to "
+#~ "us. We can't promise to implement every idea, but we appreciate the feedback "
+#~ "and review the list when we are planning future features."
+#~ msgstr ""
+#~ "{Sistem kërkesash përmbajtjeje} - nëse keni ide për risi, na e dërgoni. Ne "
+#~ "nuk mund t'ju premtojmë që do përfshijmë çdo ide, por e vlerësojmë atë dhe "
+#~ "rishikojmë listën kur planifikojmë veçori të reja."
 
 #~ msgid "Stellarium"
 #~ msgstr "Stellarium"
 
 #~ msgid "Use associated language for sky labeling"
 #~ msgstr "Përdor gjuhën e zgjedhur për emërtimet në qiell"
-
-#~ msgid ""
-#~ "{Feature request system} - if you have an idea for a new feature, send it "
-#~ "to us. We can't promise to implement every idea, but we appreciate the "
-#~ "feedback and review the list when we are planning future features."
-#~ msgstr ""
-#~ "{Sistem kërkesash përmbajtjeje} - nëse keni ide për risi, na e dërgoni. "
-#~ "Ne nuk mund t'ju premtojmë që do përfshijmë çdo ide, por e vlerësojmë atë "
-#~ "dhe rishikojmë listën kur planifikojmë veçori të reja."

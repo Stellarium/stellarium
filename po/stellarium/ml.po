@@ -14,53 +14,153 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-01-28 13:36+0000\n"
+"X-Launchpad-Export-Date: 2010-03-31 16:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/ui_locationDialogGui.h:408
-msgid " m"
-msgstr " മീ"
+#: src/modules/TextUI.cpp:73
+msgid "Latitude: "
+msgstr "അക്ഷാംശം: "
 
-#: src/gui/StelGuiItems.cpp:548
-#, no-c-format, qt-format
-msgid "%1m"
-msgstr "%1m"
+#: src/modules/TextUI.cpp:74
+msgid "Longitude: "
+msgstr "രേഖാംശം: "
+
+#: src/modules/TextUI.cpp:75
+msgid "Altitude (m): "
+msgstr "സമുദ്രനിരപ്പില്‍ നിന്നുള്ള ഉയരം (മീറ്ററില്‍) : "
+
+#: src/modules/TextUI.cpp:76
+msgid "Solar System Body: "
+msgstr "സൗരയൂഥ വസ്തു: "
+
+#: src/modules/TextUI.cpp:79
+msgid "Sky Time: "
+msgstr "ആകാശ സമയം: "
+
+#: src/modules/TextUI.cpp:84
+msgid "Preset Sky Time: "
+msgstr "ആകാശ സമയം മുന്‍‌കൂട്ടി സെറ്റ് ചെയ്യുക: "
+
+#: src/modules/TextUI.cpp:85
+msgid "Sky Time At Start-up: "
+msgstr "ആരംഭത്തില്‍ ആകാശ സമയം "
+
+#: src/modules/TextUI.cpp:86
+msgid "Actual Time"
+msgstr "ശരിയായ സമയം"
+
+#: src/modules/TextUI.cpp:89
+msgid "Date Display Format: "
+msgstr "തിയ്യതി കാണിക്കേണ്ട വിധം: "
+
+#: src/modules/TextUI.cpp:92
+msgid "Sky Culture: "
+msgstr "ആകാശ സംസ്കാരം: "
+
+#: src/modules/TextUI.cpp:93
+msgid "Sky Language: "
+msgstr "ആകാശത്തില്‍ ഉപയോഗിക്കേണ്ട ഭാഷ: "
+
+#: src/modules/TextUI.cpp:98
+msgid "Magnitude Sizing Multiplier: "
+msgstr "കാന്തിമാന വലിപ്പ വര്‍ദ്ധിനി: "
+
+#: src/modules/TextUI.cpp:117
+msgid "Nebula Names"
+msgstr "നീഹാരിക നാമങ്ങള്‍"
+
+#: src/modules/TextUI.cpp:118
+msgid "Nebula Circles"
+msgstr "നീഹാരിക വൃത്തങ്ങള്‍"
+
+#: src/modules/TextUI.cpp:124
+msgid "Object Sizing Rule: "
+msgstr "വസ്തുവിന്റെ വലിപ്പം മാറ്റുന്നതിനുള്ള നിയമം: "
+
+#: src/gui/StelGui.cpp:109
+msgid "Ground"
+msgstr "ഭൗമോപരിതലം"
+
+#: src/gui/StelGui.cpp:126
+msgid "Configuration window"
+msgstr "ക്രമീകരണ ജാലകം"
+
+#: src/modules/StarMgr.cpp:396
+#, qt-format
+msgid "Loading catalog %1 from file %2"
+msgstr "കാറ്റലോഗ് %1 പ്രമാണം %2 ല്‍ നിന്നും ലോഡ് ചെയ്തുകൊണ്ടിരിക്കുന്നു"
+
+#: src/modules/LandscapeMgr.cpp:425
+msgid "Author: "
+msgstr "ലേഖകന്‍ "
+
+#: src/modules/LandscapeMgr.cpp:428
+msgid "Location: "
+msgstr "സ്ഥാനം: "
 
 #: src/modules/LandscapeMgr.cpp:433
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/ui_dateTimeDialogGui.h:297 src/ui_dateTimeDialogGui.h:298
-msgid "/"
-msgstr "/"
+#: src/modules/LandscapeMgr.cpp:436
+msgid "Planet: "
+msgstr "ഗ്രഹം: "
 
-#: src/ui_viewDialog.h:1018
-msgid "0"
-msgstr "0"
+#: src/modules/Nebula.cpp:92
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr "തരം: <b>%1</b>"
 
-#: src/ui_viewDialog.h:1019
-msgid "10"
-msgstr "10"
+#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:130
+#, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr "കാന്തിമാനം: <b>%1</b>"
 
-#: src/ui_viewDialog.h:1021
-msgid "10000"
-msgstr "10000"
+#: src/modules/Nebula.cpp:100
+#, qt-format
+msgid "Size: %1"
+msgstr "വലിപ്പം: %1"
 
-#: src/ui_viewDialog.h:1022
-msgid "144000"
-msgstr "144000"
+#: src/modules/Nebula.cpp:269
+msgid "Galaxy"
+msgstr "താരാപഥം"
 
-#: src/ui_viewDialog.h:1020
-msgid "80"
-msgstr "80"
+#: src/modules/Nebula.cpp:272
+msgid "Open cluster"
+msgstr "ഓപ്പണ്‍ ക്ലസ്റ്റര്‍"
 
-#: src/ui_dateTimeDialogGui.h:299 src/ui_dateTimeDialogGui.h:300
-msgid ":"
-msgstr ":"
+#: src/modules/Nebula.cpp:275
+msgid "Globular cluster"
+msgstr "ഗോളിയ ക്ലസ്റ്റര്‍"
 
-#: src/ui_helpDialogGui.h:268
-msgid "About"
+#: src/modules/Nebula.cpp:278
+msgid "Nebula"
+msgstr "നീഹാരിക"
+
+#: src/modules/Nebula.cpp:281
+msgid "Planetary nebula"
+msgstr "ഗ്രഹ നീഹാരിക"
+
+#: src/modules/Nebula.cpp:284
+msgid "Cluster associated with nebulosity"
+msgstr "നീഹാരികയുമായി ചേര്‍ന്ന നക്ഷത്രക്കൂട്ടം"
+
+#: src/modules/Nebula.cpp:287
+msgid "Unknown"
+msgstr "അജ്ഞാതം"
+
+#: src/modules/Nebula.cpp:290
+msgid "Undocumented type"
+msgstr "രേഖപ്പെടുത്താത്ത തരം"
+
+#: src/modules/NebulaMgr.cpp:346
+#, qt-format
+msgid "Loading NGC catalog: %1/%2"
+msgstr "NGC കാറ്റലോഗ് ലോഡ് ചെയ്തുകൊണ്ടിരിക്കുന്നു: %1/%2"
+
+#: src/modules/NebulaMgr.cpp:379
+msgid "Loading NGC catalog"
 msgstr ""
 
 #: src/modules/Planet.cpp:133 src/modules/StarWrapper.cpp:113
@@ -68,211 +168,111 @@ msgstr ""
 msgid "Absolute Magnitude: %1"
 msgstr "കേവല കാന്തിമാനം: %1"
 
-#: src/ui_viewDialog.h:996
-msgid "Absolute scale:"
-msgstr "കേവല അനുപാതം:"
-
-#: src/modules/TextUI.cpp:86
-msgid "Actual Time"
-msgstr "ശരിയായ സമയം"
-
-#: src/gui/StelGui.cpp:152
-msgid "Add 1 sidereal day"
-msgstr "1 സൈഡീരിയല്‍ ദിവസം കൂട്ടുക"
-
-#: src/gui/StelGui.cpp:154
-msgid "Add 1 sidereal week"
-msgstr "1 സൈഡീരിയല്‍ ആഴ്ച കൂട്ടുക"
-
-#: src/gui/StelGui.cpp:148
-msgid "Add 1 solar day"
-msgstr "1 സൗരദിനം കൂട്ടുക"
-
-#: src/gui/StelGui.cpp:146
-msgid "Add 1 solar hour"
-msgstr "1 സൗരമണിക്കൂര്‍ കൂട്ടുക"
-
-#: src/gui/StelGui.cpp:150
-msgid "Add 1 solar week"
-msgstr "1 സൗരആഴ്ച കൂട്ടുക"
-
-#: src/ui_locationDialogGui.h:395
-msgid "Add to list"
-msgstr "പട്ടികയിലേക്ക് ചേര്‍ക്കുക"
-
-#: src/modules/TextUI.cpp:70
-msgid "Administration "
-msgstr "മേല്‍നോട്ടം "
-
-#: src/ui_configurationDialog.h:819
-msgid "Align labels with the horizon"
-msgstr ""
-
-#: src/ui_configurationDialog.h:754
-msgid "All available"
-msgstr "ലഭ്യമായ എല്ലാം"
-
-#: src/ui_configurationDialog.h:783
-msgid "Allow keyboard to pan and zoom"
-msgstr "കീബോര്‍ഡുകൊണ്ട് നീക്കാനും വലുതാക്കാനും അനുവദിക്കുക"
-
-#: src/ui_configurationDialog.h:787
-msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr "മൌസുപയോഗിച്ച് നീക്കാനും (ഇഴയ്ക്കുക) വലുതാക്കാനും (മൌസ്‌വീല്‍) അനുവദിക്കുക"
-
-#: src/modules/TextUI.cpp:75
-msgid "Altitude (m): "
-msgstr "സമുദ്രനിരപ്പില്‍ നിന്നുള്ള ഉയരം (മീറ്ററില്‍) : "
-
-#: src/ui_locationDialogGui.h:404
-msgid "Altitude:"
-msgstr "സമുദ്രനിരപ്പില്‍ നിന്നുള്ള ഉയരം:"
+#: src/modules/Planet.cpp:140
+#, no-c-format, qt-format
+msgid "Distance: %1AU"
+msgstr "ദൂരം: %1AU"
 
 #: src/modules/Planet.cpp:144
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "ദൃശ്യ വ്യാസം: %1"
 
-#: src/modules/TextUI.cpp:136
-msgid "Arrow down to load list."
-msgstr "പട്ടിക ലോഡ് ചെയ്യാന്‍ കീഴ് ദിശാ കട്ട അമര്‍ത്തുക."
-
-#: src/gui/HelpDialog.cpp:52
-msgid "Arrow keys & left mouse drag"
-msgstr "ദിശാ കീകളും മൌസിന്റെ ഇടതു ബട്ടണ്‍ ഇഴയ്ക്കലും"
-
-#: src/ui_viewDialog.h:1037
-msgid "Art brightness: "
-msgstr "കാലാരൂപത്തിന്റെ തീവ്രത: "
-
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1009
-msgid "Atmosphere"
-msgstr "അന്തരീക്ഷം"
-
-#: src/gui/ConfigurationDialog.cpp:568
-msgid "Author"
-msgstr "രചയിതാവ്"
-
-#: src/modules/LandscapeMgr.cpp:425
-msgid "Author: "
-msgstr "ലേഖകന്‍ "
-
-#: src/gui/ConfigurationDialog.cpp:492
-msgid "Authors"
-msgstr ""
-
-#: src/gui/StelGui.cpp:182
-msgid "Auto hide horizontal button bar"
-msgstr "വിലങ്ങനെയുള്ള ബട്ടണ്‍ ബാര്‍ തനിയെ മറയ്ക്കുക"
-
-#: src/gui/StelGui.cpp:183
-msgid "Auto hide vertical button bar"
-msgstr "കുത്തനെയുള്ള ബട്ടണ്‍ ബാര്‍ തനിയെ മറയ്ക്കുക"
-
-#: src/ui_configurationDialog.h:825
-msgid "Auto zoom out returns to initial direction of view"
-msgstr ""
-
-#: src/core/StelObject.cpp:91
+#: src/modules/StarWrapper.cpp:52 src/modules/StarWrapper.cpp:109
 #, qt-format
-msgid "Az/Alt: %1/%2"
-msgstr "Az/Alt: %1/%2"
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr "കാന്തിമാനം: <b>%1</b> (B-V: %2)"
 
-#: src/modules/TextUI.cpp:113
-msgid "Azimuthal Grid"
-msgstr "അഗ്രകോടി ചട്ടക്കൂട്"
+#: src/modules/StarWrapper.cpp:119
+#, qt-format
+msgid "Spectral Type: %1"
+msgstr "വര്‍ണ്ണരാജി ഗണം: %1"
 
-#: src/gui/StelGui.cpp:100 src/ui_viewDialog.h:1027
-msgid "Azimuthal grid"
-msgstr ""
+#: src/modules/StarWrapper.cpp:123
+#, qt-format
+msgid "Distance: %1 Light Years"
+msgstr "ദൂരം: %1 പ്രകാശ വര്‍ഷങ്ങള്‍"
 
-#: src/translations.h:69
-msgid "Aztec"
-msgstr ""
+#: src/modules/StarWrapper.cpp:126
+#, qt-format
+msgid "Parallax: %1\""
+msgstr "ദൃഗ്‌ഭ്രംശം: %1"
 
-#: src/modules/TextUI.cpp:134
-msgid "CD/DVD Script: "
-msgstr "CD/DVD സ്ക്രിപ്റ്റ്: "
+#: src/modules/TextUI.cpp:63
+msgid "Set Location "
+msgstr "സ്ഥാനം ഉറപ്പിക്കുക "
 
-#: src/gui/HelpDialog.cpp:57
-msgid "CTRL + Left click"
-msgstr "CTRL + Left click"
+#: src/modules/TextUI.cpp:64
+msgid "Set Time "
+msgstr "സമയം ഉറപ്പിക്കുക "
 
-#: src/gui/HelpDialog.cpp:54
-msgid "CTRL + Up/Down"
-msgstr "CTRL + Up/Down"
+#: src/modules/TextUI.cpp:65
+msgid "General "
+msgstr "പൊതുവായത് "
 
-#: src/modules/TextUI.cpp:82
-msgid "Calendar"
-msgstr "കലണ്ടര്‍"
-
-#: src/translations.h:45
-msgid "Callisto"
-msgstr "കാലിസ്‌റ്റോ"
-
-#: src/ui_configurationDialog.h:852
-msgid "Cancel"
-msgstr "വേണ്ട"
-
-#: src/modules/TextUI.cpp:108
-msgid "Cardinal Points"
-msgstr "ദിശാ ബിന്ദുക്കള്‍"
-
-#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1031
-msgid "Cardinal points"
-msgstr ""
-
-#: src/ui_viewDialog.h:1024
-msgid "Celestial Sphere"
-msgstr "ഖഗോളം"
-
-#: src/gui/StelGui.cpp:158
-msgid "Center on selected object"
-msgstr "തിരഞ്ഞെടുത്ത വസ്തുവിനെ മധ്യത്തിലാക്കി പ്രദര്‍ശിപ്പുക്കുക"
-
-#: src/translations.h:59
-msgid "Charon"
-msgstr "ഷാരോണ്‍"
-
-#: src/translations.h:70
-msgid "Chinese"
-msgstr "ചൈനീസ്‌"
-
-#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
-msgid "Clear selection"
-msgstr "തെരഞ്ഞെടുപ്പു് ഒഴിവാക്കുക"
-
-#: src/ui_configurationDialog.h:840
-msgid "Click here to start downloading"
-msgstr ""
-
-#: src/ui_configurationDialog.h:855
-msgid "Close window when script runs"
-msgstr ""
-
-#: src/modules/Nebula.cpp:284
-msgid "Cluster associated with nebulosity"
-msgstr "നീഹാരികയുമായി ചേര്‍ന്ന നക്ഷത്രക്കൂട്ടം"
+#: src/modules/TextUI.cpp:66
+msgid "Stars "
+msgstr "നക്ഷത്രങ്ങള്‍ "
 
 #: src/modules/TextUI.cpp:67
 msgid "Colors "
 msgstr "നിറങ്ങള്‍ "
 
-#: src/ui_configurationDialog.h:747
-msgid "Configuration"
-msgstr "ക്രമീകരണം"
+#: src/modules/TextUI.cpp:68
+msgid "Effects "
+msgstr "ഫലങ്ങള്‍ "
 
-#: src/gui/StelGui.cpp:126
-msgid "Configuration window"
-msgstr "ക്രമീകരണ ജാലകം"
+#: src/modules/TextUI.cpp:69
+msgid "Scripts "
+msgstr "സ്ക്രിപ്റ്റുകള്‍ "
 
-#: src/modules/TextUI.cpp:106
-msgid "Constellation Art Intensity"
-msgstr "നക്ഷത്രരാശിയുടെ കലാരൂപത്തിന്റെ തീവ്രത"
+#: src/modules/TextUI.cpp:70
+msgid "Administration "
+msgstr "മേല്‍നോട്ടം "
 
-#: src/modules/TextUI.cpp:107
-msgid "Constellation Boundaries"
-msgstr "നക്ഷത്രരാശിയുടെ അതിരുകള്‍"
+#: src/modules/TextUI.cpp:80
+msgid "Set Time Zone: "
+msgstr "സമയ മേഖല ഉറപ്പിക്കുക: "
+
+#: src/modules/TextUI.cpp:81
+msgid "Day keys: "
+msgstr "ദിവസ സൂചികകള്‍: "
+
+#: src/modules/TextUI.cpp:82
+msgid "Calendar"
+msgstr "കലണ്ടര്‍"
+
+#: src/modules/TextUI.cpp:83
+msgid "Sidereal"
+msgstr "സൂര്യനുമായി ബന്ധപ്പെട്ടത്"
+
+#: src/modules/TextUI.cpp:87
+msgid "Preset Time"
+msgstr "മുന്‍ കൂട്ടിയുള്ള സമയം"
+
+#: src/modules/TextUI.cpp:88
+msgid "Time Display Format: "
+msgstr "സമയം കാണിക്കേണ്ട വിധം: "
+
+#: src/modules/TextUI.cpp:96
+msgid "Show: "
+msgstr "കാണിക്കുക: "
+
+#: src/modules/TextUI.cpp:97
+msgid "Star Value Multiplier: "
+msgstr "നക്ഷത്രമൂല്യ വര്‍ദ്ധനി: "
+
+#: src/modules/TextUI.cpp:99
+msgid "Maximum Magnitude to Label: "
+msgstr "എത്ര കാന്തിമാനം വരെയുള്ളതിനു പേര് കാണിക്കണം: "
+
+#: src/modules/TextUI.cpp:100
+msgid "Twinkling: "
+msgstr "മിന്നുന്നു: "
+
+#: src/modules/TextUI.cpp:101
+msgid "Limiting Magnitude: "
+msgstr "മിതപ്പെടുത്തേണ്ട കാന്തിമാനം: "
 
 #: src/modules/TextUI.cpp:104
 msgid "Constellation Lines"
@@ -282,234 +282,300 @@ msgstr "നക്ഷത്രരാശിയുടെ വരകള്‍"
 msgid "Constellation Names"
 msgstr "നക്ഷത്രരാശിയുടെ നാമങ്ങള്‍"
 
-#: src/gui/StelGui.cpp:96
-msgid "Constellation art"
-msgstr "നക്ഷത്രരാശിയുടെ കലാരൂപം"
+#: src/modules/TextUI.cpp:106
+msgid "Constellation Art Intensity"
+msgstr "നക്ഷത്രരാശിയുടെ കലാരൂപത്തിന്റെ തീവ്രത"
 
-#: src/gui/StelGui.cpp:98
-msgid "Constellation boundaries"
+#: src/modules/TextUI.cpp:107
+msgid "Constellation Boundaries"
 msgstr "നക്ഷത്രരാശിയുടെ അതിരുകള്‍"
 
-#: src/gui/StelGui.cpp:97
-msgid "Constellation labels"
-msgstr "നക്ഷത്രരാശിയുടെ ലേബല്‍"
+#: src/modules/TextUI.cpp:108
+msgid "Cardinal Points"
+msgstr "ദിശാ ബിന്ദുക്കള്‍"
 
-#: src/gui/StelGui.cpp:95
-msgid "Constellation lines"
-msgstr "നക്ഷത്രരാശിയുടെ രേഖകള്‍"
+#: src/modules/TextUI.cpp:109
+msgid "Planet Names"
+msgstr "ഗ്രഹങ്ങളുടെ പേരുകള്‍"
 
-#: src/ui_viewDialog.h:1032
-msgid "Constellations"
-msgstr "നക്ഷത്രരാശികള്‍"
+#: src/modules/TextUI.cpp:110
+msgid "Planet Orbits"
+msgstr "ഗ്രഹ പ്രദക്ഷിണ പഥങ്ങള്‍"
 
-#: src/gui/ConfigurationDialog.cpp:496 src/gui/ViewDialog.cpp:336
-msgid "Contact"
-msgstr ""
+#: src/modules/TextUI.cpp:111
+msgid "Planet Trails"
+msgstr "ഗ്രഹത്തിന്റെ നിഴല്‍പ്പാടുകള്‍"
 
-#: src/ui_configurationDialog.h:781
-msgid "Control"
-msgstr "നിയന്ത്രണം"
+#: src/modules/TextUI.cpp:112
+msgid "Meridian Line"
+msgstr "മദ്ധ്യാഹ്നികരേഖ"
 
-#: src/modules/TextUI.cpp:130
-msgid "Correct for light travel time: "
-msgstr "പ്രകാശ സഞ്ചാരസമയത്തിന് വെണ്ടി കൃത്യമാക്കുക: "
-
-#: src/ui_locationDialogGui.h:410
-msgid "Country:"
-msgstr "രാജ്യം:"
-
-#: src/ui_locationDialogGui.h:392
-msgid "Current location information"
-msgstr "നിലവിലെ സ്ഥാനത്തെപ്പറ്റിയുള്ള വിവരം"
-
-#: src/modules/TextUI.cpp:129
-msgid "Cursor Timeout: "
-msgstr "സൂചിനി ടൈം ഔട്ട് "
-
-#: src/core/StelProjectorClasses.cpp:230
-msgid "Cylinder"
-msgstr "ഗോളസ്തംഭം"
-
-#: src/modules/TextUI.cpp:89
-msgid "Date Display Format: "
-msgstr "തിയ്യതി കാണിക്കേണ്ട വിധം: "
-
-#: src/gui/StelGui.cpp:135 src/ui_dateTimeDialogGui.h:295
-msgid "Date and Time"
-msgstr "തീയ്യതിയും സമയവും"
-
-#: src/gui/StelGui.cpp:129
-msgid "Date/time window"
-msgstr "തീയതി/സമയ ജാലകം"
-
-#: src/modules/TextUI.cpp:81
-msgid "Day keys: "
-msgstr "ദിവസ സൂചികകള്‍: "
-
-#: src/gui/StelGui.cpp:139
-msgid "Decrease time speed"
-msgstr "സമയവേഗത കുറയ്ക്കുക"
-
-#: src/gui/StelGui.cpp:142
-msgid "Decrease time speed (a little)"
-msgstr ""
-
-#: src/ui_configurationDialog.h:763
-msgid "Default options"
-msgstr "സ്വതവേയുള്ള ഐച്ഛീകങ്ങള്‍"
-
-#: src/translations.h:39
-msgid "Deimos"
-msgstr "ഡെയ് മോസ്"
-
-#: src/ui_locationDialogGui.h:394
-msgid "Delete"
-msgstr "മായ്ക്കുക"
-
-#: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:295
-#: src/gui/HelpDialog.cpp:297 src/gui/HelpDialog.cpp:298
-#, qt-format
-msgid "Developer: %1"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:290
-msgid "Developers"
-msgstr ""
-
-#: src/ui_viewDialog.h:1000
-msgid "Dim faint stars when a very bright object is visible"
-msgstr "തീവ്രതയുള്ള വസ്തുക്കള്‍ ദൃശ്യമാകുമ്പോള്‍ ദ്യോതി കുറഞ്ഞ നക്ഷത്രങ്ങളെ മങ്ങിപ്പിക്കുക"
-
-#: src/translations.h:50
-msgid "Dione"
-msgstr "ഡയോണ്‍"
-
-#: src/ui_configurationDialog.h:829
-msgid "Disc viewport"
-msgstr ""
-
-#: src/gui/StelGui.cpp:94
-msgid "Display Options"
-msgstr "പ്രദര്‍ശ്ന ഐച്ഛീകങ്ങള്‍"
-
-#: src/ui_configurationDialog.h:752
-msgid "Display all information available"
-msgstr "ലഭ്യമായ എല്ലാ വിവരങ്ങളും പ്രദര്‍ശിപ്പിക്കുക"
-
-#: src/ui_configurationDialog.h:756
-msgid "Display less information"
-msgstr "കുറഞ്ഞ വിവരങ്ങള്‍ പ്രദര്‍ശിപ്പിക്കുക"
-
-#: src/ui_configurationDialog.h:760
-msgid "Display no information"
-msgstr "വിവരങ്ങളൊന്നും പ്രദര്‍ശിപ്പിക്കേണ്ട"
-
-#: src/modules/StarWrapper.cpp:123
-#, qt-format
-msgid "Distance: %1 Light Years"
-msgstr "ദൂരം: %1 പ്രകാശ വര്‍ഷങ്ങള്‍"
-
-#: src/modules/Planet.cpp:140
-#, no-c-format, qt-format
-msgid "Distance: %1AU"
-msgstr "ദൂരം: %1AU"
-
-#: src/gui/HelpDialog.cpp:292
-#, qt-format
-msgid "Doc author/developer: %1"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:659
-#, fuzzy, qt-format
-msgid ""
-"Download size: %1MB\n"
-"Star count: %2 Million\n"
-"Magnitude range: %3 - %4"
-msgstr ""
-"ഡൌണ്‍ലോഡ് വലിപ്പം: %1MB\n"
-"നക്ഷത്ര എണ്ണം: %2MB\n"
-"കാന്തിമാന പരിധി: %3 - %4"
-
-#: src/ui_configurationDialog.h:843
-msgid "Download this file to view even more stars"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:711
-#, qt-format
-msgid ""
-"Downloading %1...\n"
-"(You can close this window.)"
-msgstr ""
-"%1 ഡൌണ്‍ലോഡ് ചെയ്തുകൊണ്ടിരിക്കുന്നു...\n"
-"(ഈ ജാലകം അടക്കുന്നതിന് കുഴപ്പമില്ല.)"
-
-#: src/ui_viewDialog.h:1002
-msgid "Dynamic eye adaptation"
-msgstr "കണ്ണിന്റെ സ്വഭാവത്തിന്റെ അനുരൂപീകരണം"
-
-#: src/translations.h:65
-msgid "E"
-msgstr "E"
-
-#: src/translations.h:36
-msgid "Earth"
-msgstr "ഭൂമി"
-
-#: src/modules/TextUI.cpp:116
-msgid "Ecliptic Line"
-msgstr "ക്രാന്തിവൃത്ത രേഖ"
-
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1030
-msgid "Ecliptic line"
-msgstr "ക്രാന്തിവൃത്ത രേഖ"
-
-#: src/modules/TextUI.cpp:68
-msgid "Effects "
-msgstr "ഫലങ്ങള്‍ "
-
-#: src/translations.h:71
-msgid "Egyptian"
-msgstr "ഈജിപ്റ്റ്"
-
-#: src/ui_configurationDialog.h:785
-msgid "Enable keyboard navigation"
-msgstr "കീബോര്‍ഡുപയോഗിച്ചുള്ള ദര്‍ശന നിയന്ത്രണം സാധ്യമാക്കുക"
-
-#: src/ui_configurationDialog.h:789
-msgid "Enable mouse navigation"
-msgstr "മൌസുപയോഗിച്ചുള്ള ദര്‍ശന നിയന്ത്രണം സാധ്യമാക്കുക"
-
-#: src/translations.h:48
-msgid "Enceladus"
-msgstr "എന്‍സിലാഡസ്"
-
-#: src/ui_locationDialogGui.h:406
-msgid "Enter the altitude in meter"
-msgstr "സമുദ്രനിരപ്പില്‍ നിന്നുള്ള ഉയരം മീറ്ററില്‍ നല്‍കുക:"
-
-#: src/core/StelProjectorClasses.cpp:63
-msgid "Equal Area"
-msgstr "തുല്യ വിസ്താരം"
-
-#: src/modules/TextUI.cpp:115
-msgid "Equator Line"
-msgstr "ഭൂമദ്ധ്യരേഖ"
-
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1028
-msgid "Equator line"
-msgstr ""
+#: src/modules/TextUI.cpp:113
+msgid "Azimuthal Grid"
+msgstr "അഗ്രകോടി ചട്ടക്കൂട്"
 
 #: src/modules/TextUI.cpp:114
 msgid "Equatorial Grid"
 msgstr "ഭൂമദ്ധ്യരേഖാ ചട്ടക്കൂട്"
 
-#: src/gui/StelGui.cpp:102 src/ui_viewDialog.h:1026
-msgid "Equatorial J2000 grid"
+#: src/modules/TextUI.cpp:115
+msgid "Equator Line"
+msgstr "ഭൂമദ്ധ്യരേഖ"
+
+#: src/modules/TextUI.cpp:116
+msgid "Ecliptic Line"
+msgstr "ക്രാന്തിവൃത്ത രേഖ"
+
+#: src/modules/TextUI.cpp:121
+msgid "Light Pollution Luminance: "
+msgstr "പ്രകാശ മലിനീകരണ തീവ്രത "
+
+#: src/modules/TextUI.cpp:122
+msgid "Landscape: "
+msgstr "പ്രകൃതി ദൃശ്യം "
+
+#: src/modules/TextUI.cpp:123
+msgid "Manual zoom: "
+msgstr "മാനുഷിക പര്‍വ്വതീകരണം: "
+
+#: src/modules/TextUI.cpp:125
+msgid "Magnitude Scaling Multiplier: "
+msgstr "കാന്തിമാന വലിപ്പ വര്‍ദ്ധിനി: "
+
+#: src/modules/TextUI.cpp:126
+msgid "Milky Way intensity: "
+msgstr "ആകാശ ഗംഗയുടെ തീവ്രത: "
+
+#: src/modules/TextUI.cpp:127
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "എത്ര കാന്തിമാനം വരെയുള്ള നെബുലയുടെ പേര് കാണിക്കണം: "
+
+#: src/modules/TextUI.cpp:128
+msgid "Zoom Duration: "
+msgstr "പര്‍വ്വതീകരണ ഇടവേള: "
+
+#: src/modules/TextUI.cpp:129
+msgid "Cursor Timeout: "
+msgstr "സൂചിനി ടൈം ഔട്ട് "
+
+#: src/modules/TextUI.cpp:130
+msgid "Correct for light travel time: "
+msgstr "പ്രകാശ സഞ്ചാരസമയത്തിന് വെണ്ടി കൃത്യമാക്കുക: "
+
+#: src/modules/TextUI.cpp:133
+msgid "Local Script: "
+msgstr "ലോക്കല്‍ സ്ക്രിപ്റ്റ്: "
+
+#: src/modules/TextUI.cpp:134
+msgid "CD/DVD Script: "
+msgstr "CD/DVD സ്ക്രിപ്റ്റ്: "
+
+#: src/modules/TextUI.cpp:135
+msgid "USB Script: "
+msgstr "യു.എസ്.ബി. സ്ക്രിപ്റ്റ്: "
+
+#: src/modules/TextUI.cpp:136
+msgid "Arrow down to load list."
+msgstr "പട്ടിക ലോഡ് ചെയ്യാന്‍ കീഴ് ദിശാ കട്ട അമര്‍ത്തുക."
+
+#: src/modules/TextUI.cpp:137
+msgid "Select and exit to run."
+msgstr "തുടങ്ങാന്‍ തിരഞ്ഞെടുത്ത് പുറത്ത് കടക്കുക."
+
+#: src/modules/TextUI.cpp:140
+msgid "Load Default Configuration: "
+msgstr "തനത് ക്രമീകരണം ലോഡ് ചെയ്യുക: "
+
+#: src/modules/TextUI.cpp:141
+msgid "Save Current Configuration as Default: "
+msgstr "ഇപ്പോഴത്തെ ക്രമീകരണം തനത് ക്രമീകരണം ആക്കുക: "
+
+#: src/modules/TextUI.cpp:142
+msgid "Shut Down: "
+msgstr "നിര്‍ത്തുക: "
+
+#: src/modules/TextUI.cpp:143
+msgid "Update me via Internet: "
+msgstr "പുതിയ വിവരങ്ങള്‍ എന്നെ ഇന്റര്‍നെറ്റില്‍ കൂടി അറിയിക്കുക "
+
+#: src/modules/TextUI.cpp:144
+msgid "Set UI Locale: "
+msgstr "സെറ്റ് UI ലോക്കലെ (Set UI Locale): "
+
+#: src/core/StelProjector.cpp:61
+msgid "Maximum FOV: "
 msgstr ""
 
-#: src/gui/StelGui.cpp:101 src/ui_viewDialog.h:1025
-msgid "Equatorial grid"
+#: src/core/StelProjectorClasses.cpp:25
+msgid "Perspective"
 msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:30
+msgid ""
+"Perspective projection keeps the horizon a straight line. The mathematical "
+"name for this projection method is <i>gnomonic projection</i>."
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:63
+msgid "Equal Area"
+msgstr "തുല്യ വിസ്താരം"
+
+#: src/core/StelProjectorClasses.cpp:68
+msgid ""
+"The full name of this projection method is, <i>Lambert azimuthal equal-area "
+"projection</i>. It preserves the area but not the angle."
+msgstr ""
+"ഈ പ്രൊജക്ഷന്‍ രീതിയുടെ പൂര്‍ണ്ണനാമം <i>Lambert azimuthal equal-area "
+"projection</i> എന്നാണു. ഈ രീതി സ്ഥലം കാത്തുസൂക്ഷിക്കുന്നു, പക്ഷെ കോണളവ് "
+"കാക്കുന്നില്ല."
+
+#: src/core/StelProjectorClasses.cpp:111
+msgid "Stereographic"
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:116
+msgid ""
+"Stereographic projection is known since the antiquity and was originally "
+"known as the planisphere projection. It preserves the angles at which curves "
+"cross each other but it does not preserve area."
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:150
+msgid "Fish-eye"
+msgstr "മീന്‍‌കണ്‍ ദൃശ്യം"
+
+#: src/core/StelProjectorClasses.cpp:155
+msgid ""
+"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
+"lines become curves when they appear a large angular distance from the "
+"centre of the field of view (like the distortions seen with very wide angle "
+"camera lenses)."
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:189
+msgid "Hammer-Aitoff"
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:194
+msgid ""
+"The Hammer projection is an equal-area map projection, described by Ernst "
+"Hammer in 1892 and directly inspired by the Aitoff projection."
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:230
+msgid "Cylinder"
+msgstr "ഗോളസ്തംഭം"
+
+#: src/core/StelProjectorClasses.cpp:235
+msgid ""
+"The full name of this projection mode is <i>cylindrical equidistant "
+"projection</i>. With this projection all parallels are equally spaced."
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:277
+msgid "Mercator"
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:282
+msgid ""
+"The mercator projection is one of the most used world map projection. It "
+"preserves direction and shapes but distorts size, in an increasing degree "
+"away from the equator."
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:329
+msgid "Orthographic"
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:334
+msgid ""
+"Orthographic projection is related to perspective projection, but the point "
+"of perspective is set to an infinite distance."
+msgstr ""
+
+#: src/core/StelObject.cpp:65
+#, qt-format
+msgid "RA/DE (J2000): %1/%2"
+msgstr "RA/DE (J2000): %1/%2"
+
+#: src/core/StelObject.cpp:72
+#, qt-format
+msgid "RA/DE (of date): %1/%2"
+msgstr "RA/DE (തീയതിയില്‍): %1/%2"
+
+#: src/core/StelObject.cpp:80
+#, qt-format
+msgid "Hour angle/DE: %1/%2"
+msgstr ""
+
+#: src/core/StelObject.cpp:91
+#, qt-format
+msgid "Az/Alt: %1/%2"
+msgstr "Az/Alt: %1/%2"
+
+#: src/gui/ConfigurationDialog.cpp:283
+msgid "Select screenshot directory"
+msgstr "സ്ക്രീന്‍ഷോട്ടിനുള്ള ഡയറക്ടറി തിരഞ്ഞെടുക്കുക"
+
+#: src/gui/ConfigurationDialog.cpp:448
+#, qt-format
+msgid "Startup FOV: %1%2"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:456
+#, qt-format
+msgid "Startup direction of view Az/Alt: %1/%2"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:492
+msgid "Authors"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:496 src/gui/ViewDialog.cpp:336
+msgid "Contact"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:568
+msgid "Author"
+msgstr "രചയിതാവ്"
+
+#: src/gui/ConfigurationDialog.cpp:569
+msgid "License"
+msgstr "അനുമതിപത്രം"
+
+#: src/gui/ConfigurationDialog.cpp:600
+msgid "Running script: "
+msgstr "പ്രവര്‍ത്തിച്ചുകൊണ്ടിരിക്കുന്ന സ്ക്രിപ്റ്റ്: "
+
+#: src/gui/ConfigurationDialog.cpp:607
+msgid "Running script: [none]"
+msgstr "പ്രവര്‍ത്തിച്ചുകൊണ്ടിരിക്കുന്ന സ്ക്രിപ്റ്റ്: [ശൂന്യം]"
+
+#: src/gui/ConfigurationDialog.cpp:650
+msgid "Finished downloading all star catalogs!"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:657
+#, qt-format
+msgid "Get catalog %1 of %2"
+msgstr "%2 ലെ %1 കാറ്റലോഗ്ഗ് എടുക്കുക"
+
+#: src/gui/ConfigurationDialog.cpp:659
+#, qt-format
+msgid ""
+"Download size: %1MB\n"
+"Star count: %2 Million\n"
+"Magnitude range: %3 - %4"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:668
+msgid ""
+"Finished downloading new star catalogs!\n"
+"Restart Stellarium to display them."
+msgstr ""
+"പുതിയ നക്ഷത്ര കാറ്റലോഗുകള്‍ ഡൌണ്‍ലോഡ് ചെയ്യുന്നത് "
+"പൂര്‍ത്തീകരിച്ചിരിക്കുന്നു!\n"
+"അവ പ്രദര്‍ശിപ്പിക്കുവാന്‍ സ്റ്റെല്ലേറിയം റീസ്റ്റാര്‍ട്ട് ചെയ്യുക."
 
 #: src/gui/ConfigurationDialog.cpp:706 src/gui/ConfigurationDialog.cpp:740
 #, qt-format
@@ -520,6 +586,19 @@ msgstr ""
 "%1 ഡൌണ്‍ലോഡ് ചെയ്യുന്നതില്‍ പിഴവ്:\n"
 "%2"
 
+#: src/gui/ConfigurationDialog.cpp:711
+#, qt-format
+msgid ""
+"Downloading %1...\n"
+"(You can close this window.)"
+msgstr ""
+"%1 ഡൌണ്‍ലോഡ് ചെയ്തുകൊണ്ടിരിക്കുന്നു...\n"
+"(ഈ ജാലകം അടക്കുന്നതിന് കുഴപ്പമില്ല.)"
+
+#: src/gui/ConfigurationDialog.cpp:791
+msgid "Verifying file integrity..."
+msgstr "പ്രമാണത്തിന്റെ സാധുത പരിശോധിച്ചുകൊണ്ടിരിക്കുന്നു"
+
 #: src/gui/ConfigurationDialog.cpp:795
 #, qt-format
 msgid ""
@@ -529,36 +608,252 @@ msgstr ""
 "%1 ഡൌണ്‍ലോഡ് ചെയ്യുന്നതില്‍ പിഴവ്:\n"
 "പ്രമാണം ദുഷിച്ചിരിക്കുന്നു."
 
-#: src/translations.h:43
-msgid "Europa"
-msgstr "യൂറോപ്പ"
-
-#: src/gui/ViewDialog.cpp:453
-msgid "Exceptional Leonid rate"
+#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:286
+#: src/gui/StelGuiItems.cpp:647
+msgid "Space"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:230 src/ui_searchDialogGui.h:231
-msgid "Find Object"
-msgstr "വസ്തുവിനെ തെരയുക"
+#: src/gui/HelpDialog.cpp:52
+msgid "Arrow keys & left mouse drag"
+msgstr "ദിശാ കീകളും മൌസിന്റെ ഇടതു ബട്ടണ്‍ ഇഴയ്ക്കലും"
 
-#: src/gui/ConfigurationDialog.cpp:650
-#, fuzzy
-msgid "Finished downloading all star catalogs!"
+#: src/gui/HelpDialog.cpp:53
+msgid "Page Up/Down"
+msgstr "Page Up/Down"
+
+#: src/gui/HelpDialog.cpp:54
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Up/Down"
+
+#: src/gui/HelpDialog.cpp:55
+msgid "Left click"
+msgstr "ഇടതു ഞെക്കല്‍"
+
+#: src/gui/HelpDialog.cpp:56
+msgid "Right click"
+msgstr "വലത് ഞെക്കല്‍"
+
+#: src/gui/HelpDialog.cpp:57
+msgid "CTRL + Left click"
+msgstr "CTRL + Left click"
+
+#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:157
+msgid "Movement and Selection"
+msgstr "ചലനവും തെരഞ്ഞെടുപ്പും"
+
+#: src/gui/HelpDialog.cpp:61
+msgid "Pan view around the sky"
+msgstr "ആകാശത്തിനു കുറുകെ നീക്കുക"
+
+#: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
+msgid "Zoom in/out"
+msgstr "വലിപ്പം കൂട്ടുക/കുറക്കുക"
+
+#: src/gui/HelpDialog.cpp:64
+msgid "Select object"
+msgstr "വസ്തു തിരഞ്ഞെടുക്കുക"
+
+#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
+msgid "Clear selection"
+msgstr "തെരഞ്ഞെടുപ്പു് ഒഴിവാക്കുക"
+
+#: src/gui/HelpDialog.cpp:70
+msgid "When a Script is Running"
 msgstr ""
-"പുതിയ നക്ഷത്ര കാറ്റലോഗുകള്‍ ഡൌണ്‍ലോഡ് ചെയ്യുന്നത് പൂര്‍ത്തീകരിച്ചിരിക്കുന്നു!\n"
-"അവ പ്രദര്‍ശിപ്പിക്കുവാന്‍ സ്റ്റെല്ലേറിയം റീസ്റ്റാര്‍ട്ട് ചെയ്യുക."
 
-#: src/gui/ConfigurationDialog.cpp:668
+#: src/gui/HelpDialog.cpp:71 src/gui/StelGui.cpp:136
+msgid "Slow down the script execution rate"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:137
+msgid "Speed up the script execution rate"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:138
+msgid "Set the normal script execution rate"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:161
+msgid "Stellarium Help"
+msgstr "സ്റ്റെല്ലേറിയത്തിന്റെ സഹായം"
+
+#: src/gui/HelpDialog.cpp:162
+msgid "Keys"
+msgstr "കീകള്‍"
+
+#: src/gui/HelpDialog.cpp:170
+msgid "Further Reading"
+msgstr "കൂടുതല്‍ വായനയ്ക്ക്"
+
+#: src/gui/HelpDialog.cpp:171
 msgid ""
-"Finished downloading new star catalogs!\n"
-"Restart Stellarium to display them."
+"The following links are external web links, and will launch your web "
+"browser:\n"
 msgstr ""
-"പുതിയ നക്ഷത്ര കാറ്റലോഗുകള്‍ ഡൌണ്‍ലോഡ് ചെയ്യുന്നത് പൂര്‍ത്തീകരിച്ചിരിക്കുന്നു!\n"
-"അവ പ്രദര്‍ശിപ്പിക്കുവാന്‍ സ്റ്റെല്ലേറിയം റീസ്റ്റാര്‍ട്ട് ചെയ്യുക."
+"താഴെ കൊടുത്തിരിക്കുന്നവ പുറം കണ്ണികളാണു. നിങ്ങളുടെ വെബ്ബ് ബ്രൌസറില്‍ ഇവ "
+"തുറക്കപ്പെടും:\n"
 
-#: src/core/StelProjectorClasses.cpp:150
-msgid "Fish-eye"
-msgstr "മീന്‍‌കണ്‍ ദൃശ്യം"
+#: src/gui/HelpDialog.cpp:172
+msgid "The Stellarium User Guide"
+msgstr "സ്റ്റെല്ലേറിയ ഉപയോഗ സഹായി"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:176
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "സ്റ്റെല്ലേറിയത്തെക്കുറിച്ചുള്ള {പതിവു ചോദ്യങ്ങള്‍}. ഉത്തരങ്ങളും."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:181
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{സ്റ്റെല്ലേറിയം വിക്കി} - പൊതു വിവരങ്ങള്‍. ഉപയോക്താക്കാള്‍ സംഭാവന ചെയ്ത "
+"ലാന്‍ഡ് സ്കേപ്പുകളും സ്ക്രിപ്റ്റുകളും താങ്കള്‍ക്കു ഇവിടെ കാണാവുന്നതാണു."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:186
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:191
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:196
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr ""
+"{Forums} - സ്റ്റെല്ലേറിയത്തെക്കുറിച്ച് മറ്റുപയോക്താക്കളുമായി സംവദിക്കുക."
+
+#: src/gui/HelpDialog.cpp:232 src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:324 src/gui/StelGui.cpp:176
+msgid "Miscellaneous"
+msgstr "മറ്റുള്ളവ"
+
+#: src/gui/HelpDialog.cpp:290
+msgid "Developers"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:291
+#, qt-format
+msgid "Project coordinator & lead developer: %1"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:292
+#, qt-format
+msgid "Doc author/developer: %1"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:293
+#, qt-format
+msgid "Graphic/other designer: %1"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:295
+#: src/gui/HelpDialog.cpp:297 src/gui/HelpDialog.cpp:298
+#, qt-format
+msgid "Developer: %1"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:296
+#, qt-format
+msgid "OSX Developer: %1"
+msgstr ""
+
+#: src/gui/StelGui.cpp:94
+msgid "Display Options"
+msgstr "പ്രദര്‍ശ്ന ഐച്ഛീകങ്ങള്‍"
+
+#: src/gui/StelGui.cpp:95
+msgid "Constellation lines"
+msgstr "നക്ഷത്രരാശിയുടെ രേഖകള്‍"
+
+#: src/gui/StelGui.cpp:96
+msgid "Constellation art"
+msgstr "നക്ഷത്രരാശിയുടെ കലാരൂപം"
+
+#: src/gui/StelGui.cpp:97
+msgid "Constellation labels"
+msgstr "നക്ഷത്രരാശിയുടെ ലേബല്‍"
+
+#: src/gui/StelGui.cpp:98
+msgid "Constellation boundaries"
+msgstr "നക്ഷത്രരാശിയുടെ അതിരുകള്‍"
+
+#: src/gui/StelGui.cpp:100 src/ui_viewDialog.h:1027
+msgid "Azimuthal grid"
+msgstr ""
+
+#: src/gui/StelGui.cpp:101 src/ui_viewDialog.h:1025
+msgid "Equatorial grid"
+msgstr ""
+
+#: src/gui/StelGui.cpp:102 src/ui_viewDialog.h:1026
+msgid "Equatorial J2000 grid"
+msgstr ""
+
+#: src/gui/StelGui.cpp:103
+msgid "Galactic grid"
+msgstr ""
+
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1030
+msgid "Ecliptic line"
+msgstr "ക്രാന്തിവൃത്ത രേഖ"
+
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1028
+msgid "Equator line"
+msgstr ""
+
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1029
+msgid "Meridian line"
+msgstr ""
+
+#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1031
+msgid "Cardinal points"
+msgstr ""
+
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1009
+msgid "Atmosphere"
+msgstr "അന്തരീക്ഷം"
+
+#: src/gui/StelGui.cpp:111
+msgid "Fog"
+msgstr "മൂടല്‍ മഞ്ഞ്"
+
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1014
+msgid "Nebulas"
+msgstr ""
+
+#: src/gui/StelGui.cpp:114
+msgid "Nebulas background images"
+msgstr ""
+
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:995 src/ui_viewDialog.h:1013
+msgid "Stars"
+msgstr "നക്ഷത്രങ്ങള്‍"
+
+#: src/gui/StelGui.cpp:116
+msgid "Planets labels"
+msgstr "ഗ്രഹങ്ങളുടെ പേരുകള്‍"
+
+#: src/gui/StelGui.cpp:117
+msgid "Planet orbits"
+msgstr ""
+
+#: src/gui/StelGui.cpp:119
+msgid "Night mode"
+msgstr "രാത്രിദൃശ്യം"
+
+#: src/gui/StelGui.cpp:120
+msgid "Full-screen mode"
+msgstr "ഫുള്‍-സ്ക്രീന്‍ മോഡ്"
 
 #: src/gui/StelGui.cpp:121
 msgid "Flip scene horizontally"
@@ -568,332 +863,129 @@ msgstr "തിരശ്ശീല തിരശ്ചീനദിശയില്�
 msgid "Flip scene vertically"
 msgstr "തിരശ്ശീല നെടുകെ വിപരീതമാക്കുക"
 
-#: src/gui/StelGui.cpp:111
-msgid "Fog"
-msgstr "മൂടല്‍ മഞ്ഞ്"
-
-#: src/ui_dateTimeDialogGui.h:294 src/ui_helpDialogGui.h:259
-#: src/ui_locationDialogGui.h:387 src/ui_viewDialog.h:979
-#: src/ui_configurationDialog.h:746
-msgid "Form"
-msgstr "സാധാരണ"
-
-#: src/gui/StelGui.cpp:120
-msgid "Full-screen mode"
-msgstr "ഫുള്‍-സ്ക്രീന്‍ മോഡ്"
-
-#: src/gui/HelpDialog.cpp:170
-msgid "Further Reading"
-msgstr "കൂടുതല്‍ വായനയ്ക്ക്"
-
-#: src/gui/StelGui.cpp:103
-msgid "Galactic grid"
-msgstr ""
-
-#: src/modules/Nebula.cpp:269
-msgid "Galaxy"
-msgstr "താരാപഥം"
-
-#: src/translations.h:44
-msgid "Ganymede"
-msgstr "ഗാനിമീഡ്"
-
-#: src/modules/TextUI.cpp:65
-msgid "General "
-msgstr "പൊതുവായത് "
-
-#: src/gui/ConfigurationDialog.cpp:657
-#, qt-format
-msgid "Get catalog %1 of %2"
-msgstr "%2 ലെ %1 കാറ്റലോഗ്ഗ് എടുക്കുക"
-
-#: src/ui_configurationDialog.h:842
-msgid "Get catalog x of y"
-msgstr ""
-
-#: src/modules/Nebula.cpp:275
-msgid "Globular cluster"
-msgstr "ഗോളിയ ക്ലസ്റ്റര്‍"
-
-#: src/gui/HelpDialog.cpp:293
-#, qt-format
-msgid "Graphic/other designer: %1"
-msgstr ""
-
-#: src/ui_configurationDialog.h:821
-msgid "Gravity labels"
-msgstr ""
-
-#: src/gui/StelGui.cpp:109
-msgid "Ground"
-msgstr "ഭൗമോപരിതലം"
-
-#: src/core/StelProjectorClasses.cpp:189
-msgid "Hammer-Aitoff"
-msgstr ""
-
-#: src/ui_helpDialogGui.h:260 src/ui_helpDialogGui.h:266
-msgid "Help"
-msgstr "സഹായം"
+#: src/gui/StelGui.cpp:124
+msgid "Windows"
+msgstr "ജാലകങ്ങള്‍"
 
 #: src/gui/StelGui.cpp:125
 msgid "Help window"
 msgstr "സഹായ ജാലകം"
 
-#: src/ui_configurationDialog.h:831
-msgid "Hide other constellations when you click one"
-msgstr ""
+#: src/gui/StelGui.cpp:127
+msgid "Search window"
+msgstr "തെരച്ചില്‍ ജാലകം"
 
-#: src/ui_configurationDialog.h:806
-msgid "Hides the mouse cursor when inactive"
-msgstr "നിര്‍ജ്ജീവമായിരിക്കുമ്പോള്‍ മൗസ് കര്‍സര്‍ മറയ്ക്കുന്നു"
+#: src/gui/StelGui.cpp:128
+msgid "Sky and viewing options window"
+msgstr "തിരശ്ശീല നെടുക വിപരീതമാക്കുക"
 
-#: src/gui/ViewDialog.cpp:456
-msgid "Highest rate ever (1966 Leonids)"
-msgstr ""
-
-#: src/core/StelObject.cpp:80
-#, qt-format
-msgid "Hour angle/DE: %1/%2"
-msgstr ""
-
-#: src/ui_viewDialog.h:1017
-msgid "Hourly zenith rate:"
-msgstr ""
-
-#: src/translations.h:53
-msgid "Hyperion"
-msgstr "ഹൈപ്പറിയോണ്‍"
-
-#: src/translations.h:54
-msgid "Iapetus"
-msgstr "ലാപെട്ടസ്"
-
-#: src/core/StelProjectorClasses.cpp:155
-msgid ""
-"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
-"lines become curves when they appear a large angular distance from the "
-"centre of the field of view (like the distortions seen with very wide angle "
-"camera lenses)."
-msgstr ""
-
-#: src/gui/StelGui.cpp:140
-msgid "Increase time speed"
-msgstr "സമയവേഗത കൂട്ടുക"
-
-#: src/gui/StelGui.cpp:143
-msgid "Increase time speed (a little)"
-msgstr ""
-
-#: src/translations.h:72
-msgid "Inuit"
-msgstr "ധ്രുവ്വപ്രദേശ ഭാഷ"
-
-#: src/ui_configurationDialog.h:837
-msgid "Invert colors"
-msgstr ""
-
-#: src/translations.h:42
-msgid "Io"
-msgstr "ഇയോ"
-
-#: src/translations.h:41
-msgid "Jupiter"
-msgstr "വ്യാഴം"
-
-#: src/gui/HelpDialog.cpp:162
-msgid "Keys"
-msgstr "കീകള്‍"
-
-#: src/translations.h:73
-msgid "Korean"
-msgstr "കൊറിയന്‍"
-
-#: src/ui_viewDialog.h:1012
-msgid "Labels and Markers"
-msgstr "പേരുകുറികളും രേഖപ്പെടുത്തലുകളും"
-
-#: src/translations.h:74
-msgid "Lakota"
-msgstr "ലക്കോട്ട"
-
-#: src/ui_viewDialog.h:990
-msgid "Landscape"
-msgstr "പ്രകൃതിദൃശ്യം"
-
-#: src/modules/TextUI.cpp:122
-msgid "Landscape: "
-msgstr "പ്രകൃതി ദൃശ്യം "
-
-#: src/ui_locationDialogGui.h:396
-msgid "Latitude:"
-msgstr "അക്ഷാംശം:"
-
-#: src/modules/TextUI.cpp:73
-msgid "Latitude: "
-msgstr "അക്ഷാംശം: "
-
-#: src/gui/HelpDialog.cpp:55
-msgid "Left click"
-msgstr "ഇടതു ഞെക്കല്‍"
-
-#: src/gui/ConfigurationDialog.cpp:569
-msgid "License"
-msgstr "അനുമതിപത്രം"
-
-#: src/modules/TextUI.cpp:121
-msgid "Light Pollution Luminance: "
-msgstr "പ്രകാശ മലിനീകരണ തീവ്രത "
-
-#: src/ui_viewDialog.h:1011
-msgid "Light pollution: "
-msgstr "പ്രകാശ മലിനീകരണം: "
-
-#: src/modules/TextUI.cpp:101
-msgid "Limiting Magnitude: "
-msgstr "മിതപ്പെടുത്തേണ്ട കാന്തിമാനം: "
-
-#: src/modules/TextUI.cpp:140
-msgid "Load Default Configuration: "
-msgstr "തനത് ക്രമീകരണം ലോഡ് ചെയ്യുക: "
-
-#: src/ui_configurationDialog.h:865
-msgid "Load at startup"
-msgstr ""
-
-#: src/modules/NebulaMgr.cpp:379
-#, fuzzy
-msgid "Loading NGC catalog"
-msgstr "NGC കാറ്റലോഗ് ലോഡ് ചെയ്തുകൊണ്ടിരിക്കുന്നു: %1/%2"
-
-#: src/modules/NebulaMgr.cpp:346
-#, qt-format
-msgid "Loading NGC catalog: %1/%2"
-msgstr "NGC കാറ്റലോഗ് ലോഡ് ചെയ്തുകൊണ്ടിരിക്കുന്നു: %1/%2"
-
-#: src/modules/StarMgr.cpp:396
-#, qt-format
-msgid "Loading catalog %1 from file %2"
-msgstr "കാറ്റലോഗ് %1 പ്രമാണം %2 ല്‍ നിന്നും ലോഡ് ചെയ്തുകൊണ്ടിരിക്കുന്നു"
-
-#: src/modules/TextUI.cpp:133
-msgid "Local Script: "
-msgstr "ലോക്കല്‍ സ്ക്രിപ്റ്റ്: "
-
-#: src/ui_locationDialogGui.h:388
-msgid "Location"
-msgstr "ഭാഷ"
+#: src/gui/StelGui.cpp:129
+msgid "Date/time window"
+msgstr "തീയതി/സമയ ജാലകം"
 
 #: src/gui/StelGui.cpp:130
 msgid "Location window"
 msgstr "സ്ഥാന ജാലകം"
 
-#: src/modules/LandscapeMgr.cpp:428
-msgid "Location: "
-msgstr "സ്ഥാനം: "
-
-#: src/ui_helpDialogGui.h:270
-msgid "Log"
-msgstr "സംഭവരേഖ"
-
-#: src/ui_locationDialogGui.h:400
-msgid "Longitude:"
-msgstr "രേഖാംശം:"
-
-#: src/modules/TextUI.cpp:74
-msgid "Longitude: "
-msgstr "രേഖാംശം: "
-
-#: src/modules/TextUI.cpp:125
-msgid "Magnitude Scaling Multiplier: "
-msgstr "കാന്തിമാന വലിപ്പ വര്‍ദ്ധിനി: "
-
-#: src/modules/TextUI.cpp:98
-msgid "Magnitude Sizing Multiplier: "
-msgstr "കാന്തിമാന വലിപ്പ വര്‍ദ്ധിനി: "
-
-#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:130
-#, qt-format
-msgid "Magnitude: <b>%1</b>"
-msgstr "കാന്തിമാനം: <b>%1</b>"
-
-#: src/modules/StarWrapper.cpp:52 src/modules/StarWrapper.cpp:109
-#, qt-format
-msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr "കാന്തിമാനം: <b>%1</b> (B-V: %2)"
-
-#: src/ui_configurationDialog.h:871
-msgid "Main"
+#: src/gui/StelGui.cpp:132
+msgid "Script console window"
 msgstr ""
 
-#: src/modules/TextUI.cpp:123
-msgid "Manual zoom: "
-msgstr "മാനുഷിക പര്‍വ്വതീകരണം: "
+#: src/gui/StelGui.cpp:135 src/ui_dateTimeDialogGui.h:295
+msgid "Date and Time"
+msgstr "തീയ്യതിയും സമയവും"
 
-#: src/translations.h:75
-msgid "Maori"
+#: src/gui/StelGui.cpp:139
+msgid "Decrease time speed"
+msgstr "സമയവേഗത കുറയ്ക്കുക"
+
+#: src/gui/StelGui.cpp:140
+msgid "Increase time speed"
+msgstr "സമയവേഗത കൂട്ടുക"
+
+#: src/gui/StelGui.cpp:141
+msgid "Set normal time rate"
+msgstr "സമയവേഗത സാധാരണ നിലയിലാക്കുക"
+
+#: src/gui/StelGui.cpp:142
+msgid "Decrease time speed (a little)"
 msgstr ""
 
-#: src/ui_viewDialog.h:988
-msgid "Markings"
-msgstr "രേഖപ്പെടുത്തലുകള്‍"
-
-#: src/translations.h:38
-msgid "Mars"
-msgstr "ചൊവ്വ"
-
-#: src/ui_configurationDialog.h:827
-msgid "Mask out everything outside a central circle in the main view"
+#: src/gui/StelGui.cpp:143
+msgid "Increase time speed (a little)"
 msgstr ""
 
-#: src/core/StelProjector.cpp:61
-msgid "Maximum FOV: "
-msgstr ""
+#: src/gui/StelGui.cpp:144
+msgid "Set time rate to zero"
+msgstr "സമയവേഗതയിലെ നിരക്ക് പൂജ്യമാക്കുക"
 
-#: src/modules/TextUI.cpp:99
-msgid "Maximum Magnitude to Label: "
-msgstr "എത്ര കാന്തിമാനം വരെയുള്ളതിനു പേര് കാണിക്കണം: "
+#: src/gui/StelGui.cpp:145
+msgid "Set time to now"
+msgstr "സമയം നിലവിലെ സമയമാക്കുക"
 
-#: src/modules/TextUI.cpp:127
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "എത്ര കാന്തിമാനം വരെയുള്ള നെബുലയുടെ പേര് കാണിക്കണം: "
+#: src/gui/StelGui.cpp:146
+msgid "Add 1 solar hour"
+msgstr "1 സൗരമണിക്കൂര്‍ കൂട്ടുക"
 
-#: src/core/StelProjectorClasses.cpp:277
-msgid "Mercator"
-msgstr ""
+#: src/gui/StelGui.cpp:147
+msgid "Subtract 1 solar hour"
+msgstr "1 സൗരമണിക്കൂര്‍ കുറയ്ക്കുക"
 
-#: src/translations.h:34
-msgid "Mercury"
-msgstr "മെര്‍ക്കുറി"
+#: src/gui/StelGui.cpp:148
+msgid "Add 1 solar day"
+msgstr "1 സൗരദിനം കൂട്ടുക"
 
-#: src/modules/TextUI.cpp:112
-msgid "Meridian Line"
-msgstr "മദ്ധ്യാഹ്നികരേഖ"
+#: src/gui/StelGui.cpp:149
+msgid "Subtract 1 solar day"
+msgstr "1 സൗരദിനം കുറയ്ക്കുക"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1029
-msgid "Meridian line"
-msgstr ""
+#: src/gui/StelGui.cpp:150
+msgid "Add 1 solar week"
+msgstr "1 സൗരആഴ്ച കൂട്ടുക"
 
-#: src/modules/TextUI.cpp:126
-msgid "Milky Way intensity: "
-msgstr "ആകാശ ഗംഗയുടെ തീവ്രത: "
+#: src/gui/StelGui.cpp:151
+msgid "Subtract 1 solar week"
+msgstr "1 സൗരആഴ്ച കുറയ്ക്കുക"
 
-#: src/translations.h:47
-msgid "Mimas"
-msgstr "മിമാസ്"
+#: src/gui/StelGui.cpp:152
+msgid "Add 1 sidereal day"
+msgstr "1 സൈഡീരിയല്‍ ദിവസം കൂട്ടുക"
 
-#: src/gui/HelpDialog.cpp:232 src/gui/HelpDialog.cpp:322
-#: src/gui/HelpDialog.cpp:324 src/gui/StelGui.cpp:176
-msgid "Miscellaneous"
-msgstr "മറ്റുള്ളവ"
+#: src/gui/StelGui.cpp:153
+msgid "Subtract 1 sidereal day"
+msgstr "1 സൈഡീരിയല്‍ ദിവസം കുറയ്ക്കുക"
 
-#: src/translations.h:37
-msgid "Moon"
-msgstr "ചന്ദ്രന്‍"
+#: src/gui/StelGui.cpp:154
+msgid "Add 1 sidereal week"
+msgstr "1 സൈഡീരിയല്‍ ആഴ്ച കൂട്ടുക"
 
-#: src/ui_configurationDialog.h:808
-msgid "Mouse cursor timeout (seconds):"
-msgstr "മൗസ് കര്‍സര്‍ നിര്‍ജ്ജിവമാകാനുള്ള സമയപരിധി (സെക്കന്റില്‍):"
+#: src/gui/StelGui.cpp:155
+msgid "Subtract 1 sidereal week"
+msgstr "1 സൈഡീരിയല്‍ ആഴ്ച കുറയ്ക്കുക"
+
+#: src/gui/StelGui.cpp:158
+msgid "Center on selected object"
+msgstr "തിരഞ്ഞെടുത്ത വസ്തുവിനെ മധ്യത്തിലാക്കി പ്രദര്‍ശിപ്പുക്കുക"
+
+#: src/gui/StelGui.cpp:159
+msgid "Track object"
+msgstr "വസ്തുവിനെ പിന്തുടരുക"
+
+#: src/gui/StelGui.cpp:160
+msgid "Zoom in on selected object"
+msgstr "തിരഞ്ഞെടുത്ത വസ്തുവിനെ കേന്ദ്രീകരിച്ചു വലുതാക്കി കാണിക്കുക"
+
+#: src/gui/StelGui.cpp:161
+msgid "Zoom out"
+msgstr "വലുതാക്കുക"
+
+#: src/gui/StelGui.cpp:162
+msgid "Set home planet to selected planet"
+msgstr "തെരഞ്ഞെടുത്ത ഗ്രഹത്തെ സ്വഗ്രഹമായി ക്രമീകരിക്കുക"
+
+#: src/gui/StelGui.cpp:164
+msgid "Telescope Control"
+msgstr "ദൂരദര്‍ശിനി നിയന്ത്രണം"
 
 #: src/gui/StelGui.cpp:165
 msgid "Move telescope #0 to selected object"
@@ -935,57 +1027,34 @@ msgstr "ദൂരദര്‍ശിനി #8 തിരഞ്ഞെടുത്�
 msgid "Move telescope #9 to selected object"
 msgstr "ദൂരദര്‍ശിനി #9 തിരഞ്ഞെടുത്ത വസ്തുവിലേക്ക് നീക്കുക"
 
-#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:157
-msgid "Movement and Selection"
-msgstr "ചലനവും തെരഞ്ഞെടുപ്പും"
-
-#: src/translations.h:63
-msgid "N"
-msgstr "N"
-
-#: src/ui_locationDialogGui.h:409
-msgid "Name/City:"
-msgstr "പേര്/നഗരം:"
-
-#: src/translations.h:76
-msgid "Navajo"
-msgstr "നവാജോ"
-
-#: src/ui_configurationDialog.h:873
-msgid "Navigation"
-msgstr "നാവിഗേഷന്‍"
-
-#: src/modules/Nebula.cpp:278
-msgid "Nebula"
-msgstr "നീഹാരിക"
-
-#: src/modules/TextUI.cpp:118
-msgid "Nebula Circles"
-msgstr "നീഹാരിക വൃത്തങ്ങള്‍"
-
-#: src/modules/TextUI.cpp:117
-msgid "Nebula Names"
-msgstr "നീഹാരിക നാമങ്ങള്‍"
-
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1014
-msgid "Nebulas"
+#: src/gui/StelGui.cpp:177
+msgid "Switch between equatorial and azimuthal mount"
 msgstr ""
 
-#: src/gui/StelGui.cpp:114
-msgid "Nebulas background images"
+#: src/gui/StelGui.cpp:178
+msgid "Quit"
+msgstr "പുറത്ത് കടക്കുക"
+
+#: src/gui/StelGui.cpp:179
+msgid "Save screenshot"
+msgstr "സ്ക്രീന്‍ ഷോട്ട് സംരക്ഷിക്കുക"
+
+#: src/gui/StelGui.cpp:182
+msgid "Auto hide horizontal button bar"
+msgstr "വിലങ്ങനെയുള്ള ബട്ടണ്‍ ബാര്‍ തനിയെ മറയ്ക്കുക"
+
+#: src/gui/StelGui.cpp:183
+msgid "Auto hide vertical button bar"
+msgstr "കുത്തനെയുള്ള ബട്ടണ്‍ ബാര്‍ തനിയെ മറയ്ക്കുക"
+
+#: src/gui/StelGui.cpp:184
+msgid "Toggle visibility of GUI"
 msgstr ""
 
-#: src/translations.h:56
-msgid "Neptune"
-msgstr "നെപ്റ്റ്യൂണ്‍"
-
-#: src/gui/LocationDialog.cpp:340
-msgid "New Location"
-msgstr "പുതിയ സ്ഥാനം"
-
-#: src/gui/StelGui.cpp:119
-msgid "Night mode"
-msgstr "രാത്രിദൃശ്യം"
+#: src/gui/StelGuiItems.cpp:548
+#, no-c-format, qt-format
+msgid "%1m"
+msgstr "%1m"
 
 #: src/gui/ViewDialog.cpp:388
 msgid "No description"
@@ -995,394 +1064,353 @@ msgstr "വിശദീകരണം ലഭ്യമല്ല"
 msgid "No shooting stars"
 msgstr "കൊള്ളിമീനുകള്‍ ഇല്ല"
 
-#: src/ui_configurationDialog.h:762
-msgid "None"
-msgstr "ഒന്നുമില്ല"
-
 #: src/gui/ViewDialog.cpp:447
 msgid "Normal rate"
 msgstr "സാധാരണ നിരക്ക്"
 
-#: src/translations.h:77
-msgid "Norse"
-msgstr "നോഴ്സ്"
-
-#: src/gui/HelpDialog.cpp:296
-#, qt-format
-msgid "OSX Developer: %1"
+#: src/gui/ViewDialog.cpp:450
+msgid "Standard Perseids rate"
 msgstr ""
 
-#: src/modules/TextUI.cpp:124
-msgid "Object Sizing Rule: "
-msgstr "വസ്തുവിന്റെ വലിപ്പം മാറ്റുന്നതിനുള്ള നിയമം: "
-
-#: src/modules/Nebula.cpp:272
-msgid "Open cluster"
-msgstr "ഓപ്പണ്‍ ക്ലസ്റ്റര്‍"
-
-#: src/ui_viewDialog.h:1039 src/ui_viewDialog.h:1044 src/ui_viewDialog.h:1046
-#: src/ui_configurationDialog.h:853 src/ui_configurationDialog.h:864
-msgid "Options"
-msgstr "ഐച്ഛികങ്ങള്‍"
-
-#: src/core/StelProjectorClasses.cpp:329
-msgid "Orthographic"
+#: src/gui/ViewDialog.cpp:453
+msgid "Exceptional Leonid rate"
 msgstr ""
 
-#: src/core/StelProjectorClasses.cpp:334
-msgid ""
-"Orthographic projection is related to perspective projection, but the point "
-"of perspective is set to an infinite distance."
+#: src/gui/ViewDialog.cpp:456
+msgid "Highest rate ever (1966 Leonids)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:804
-msgid "Other"
-msgstr "മറ്റുള്ളവ"
+#: src/gui/LocationDialog.cpp:340
+msgid "New Location"
+msgstr "പുതിയ സ്ഥാനം"
 
-#: src/ui_configurationDialog.h:802
-msgid "Other:"
-msgstr "മറ്റുള്ളവ:"
+#: src/main.cpp:308
+msgid "This system does not support OpenGL."
+msgstr "ഈ സിസ്റ്റം OpenGL പിന്താങ്ങുന്നില്ല"
 
-#: src/gui/HelpDialog.cpp:53
-msgid "Page Up/Down"
-msgstr "Page Up/Down"
+#: src/translations.h:33
+msgid "Sun"
+msgstr "സൂര്യന്‍"
 
-#: src/gui/HelpDialog.cpp:61
-msgid "Pan view around the sky"
-msgstr "ആകാശത്തിനു കുറുകെ നീക്കുക"
+#: src/translations.h:34
+msgid "Mercury"
+msgstr "മെര്‍ക്കുറി"
 
-#: src/modules/StarWrapper.cpp:126
-#, qt-format
-msgid "Parallax: %1\""
-msgstr "ദൃഗ്‌ഭ്രംശം: %1"
+#: src/translations.h:35
+msgid "Venus"
+msgstr "ശുക്രന്‍"
 
-#: src/core/StelProjectorClasses.cpp:25
-msgid "Perspective"
-msgstr ""
+#: src/translations.h:36
+msgid "Earth"
+msgstr "ഭൂമി"
 
-#: src/core/StelProjectorClasses.cpp:30
-msgid ""
-"Perspective projection keeps the horizon a straight line. The mathematical "
-"name for this projection method is <i>gnomonic projection</i>."
-msgstr ""
+#: src/translations.h:37
+msgid "Moon"
+msgstr "ചന്ദ്രന്‍"
+
+#: src/translations.h:38
+msgid "Mars"
+msgstr "ചൊവ്വ"
+
+#: src/translations.h:39
+msgid "Deimos"
+msgstr "ഡെയ് മോസ്"
 
 #: src/translations.h:40
 msgid "Phobos"
 msgstr "ഫോബോസ്"
 
-#: src/translations.h:55
-msgid "Phoebe"
-msgstr "ഫോബെ"
+#: src/translations.h:41
+msgid "Jupiter"
+msgstr "വ്യാഴം"
 
-#: src/modules/TextUI.cpp:109
-msgid "Planet Names"
-msgstr "ഗ്രഹങ്ങളുടെ പേരുകള്‍"
+#: src/translations.h:42
+msgid "Io"
+msgstr "ഇയോ"
 
-#: src/modules/TextUI.cpp:110
-msgid "Planet Orbits"
-msgstr "ഗ്രഹ പ്രദക്ഷിണ പഥങ്ങള്‍"
+#: src/translations.h:43
+msgid "Europa"
+msgstr "യൂറോപ്പ"
 
-#: src/modules/TextUI.cpp:111
-msgid "Planet Trails"
-msgstr "ഗ്രഹത്തിന്റെ നിഴല്‍പ്പാടുകള്‍"
+#: src/translations.h:44
+msgid "Ganymede"
+msgstr "ഗാനിമീഡ്"
 
-#: src/gui/StelGui.cpp:117
-#, fuzzy
-msgid "Planet orbits"
-msgstr "ഗ്രഹ പ്രദക്ഷിണ പഥങ്ങള്‍"
-
-#: src/ui_locationDialogGui.h:411
-msgid "Planet:"
-msgstr "ഗ്രഹം:"
-
-#: src/modules/LandscapeMgr.cpp:436
-msgid "Planet: "
-msgstr "ഗ്രഹം: "
-
-#: src/ui_configurationDialog.h:813
-msgid "Planetarium options"
-msgstr "പ്ലാനെറ്റേറിയം ഐച്ഛീകങ്ങള്‍"
-
-#: src/modules/Nebula.cpp:281
-msgid "Planetary nebula"
-msgstr "ഗ്രഹ നീഹാരിക"
-
-#: src/ui_viewDialog.h:1015
-msgid "Planets"
-msgstr "ഗ്രഹങ്ങള്‍"
-
-#: src/ui_viewDialog.h:1003
-msgid "Planets and satellites"
-msgstr "ഗ്രഹങ്ങളും ഉപഗ്രഹങ്ങളും"
-
-#: src/gui/StelGui.cpp:116
-msgid "Planets labels"
-msgstr "ഗ്രഹങ്ങളുടെ പേരുകള്‍"
-
-#: src/ui_configurationDialog.h:879
-msgid "Plugins"
-msgstr ""
-
-#: src/translations.h:58
-msgid "Pluto"
-msgstr "പ്ലൂട്ടോ"
-
-#: src/translations.h:78
-msgid "Polynesian"
-msgstr "പോളിനേഷ്യന്‍"
-
-#: src/modules/TextUI.cpp:84
-msgid "Preset Sky Time: "
-msgstr "ആകാശ സമയം മുന്‍‌കൂട്ടി സെറ്റ് ചെയ്യുക: "
-
-#: src/modules/TextUI.cpp:87
-msgid "Preset Time"
-msgstr "മുന്‍ കൂട്ടിയുള്ള സമയം"
-
-#: src/ui_configurationDialog.h:749
-msgid "Program language"
-msgstr "പ്രോഗ്രാമിന്റെ ഭാഷ"
-
-#: src/gui/HelpDialog.cpp:291
-#, qt-format
-msgid "Project coordinator & lead developer: %1"
-msgstr ""
-
-#: src/ui_viewDialog.h:1038
-msgid "Projection"
-msgstr ""
-
-#: src/gui/StelGui.cpp:178
-msgid "Quit"
-msgstr "പുറത്ത് കടക്കുക"
-
-#: src/core/StelObject.cpp:65
-#, qt-format
-msgid "RA/DE (J2000): %1/%2"
-msgstr "RA/DE (J2000): %1/%2"
-
-#: src/core/StelObject.cpp:72
-#, qt-format
-msgid "RA/DE (of date): %1/%2"
-msgstr "RA/DE (തീയതിയില്‍): %1/%2"
-
-#: src/ui_searchDialogGui.h:236
-msgid "RA/Dec (J2000):"
-msgstr ""
-
-#: src/ui_helpDialogGui.h:273
-msgid "Refresh"
-msgstr "പുനര്‍വിന്യസിക്കുക"
-
-#: src/ui_viewDialog.h:997
-msgid "Relative scale:"
-msgstr "താരതമ്യ അനുപാതം:"
-
-#: src/ui_configurationDialog.h:846
-msgid "Restart the download"
-msgstr ""
-
-#: src/ui_configurationDialog.h:771
-msgid "Restore defaults"
-msgstr "സ്വതവേകള്‍ പൂര്‍വ്വസ്ഥിതിയിലാക്കുക"
-
-#: src/ui_configurationDialog.h:769
-msgid "Restore the default settings that came with Stellarium"
-msgstr "സ്റ്റെല്ലേറിയത്തിന്റെ കൂടെ വന്ന സ്വതവേയുള്ള ക്രമീകരണങ്ങള്‍ പൂര്‍വ്വസ്ഥിതിയിലാക്കുക"
-
-#: src/ui_configurationDialog.h:772
-msgid ""
-"Restoring default settings requires a restart of Stellarium. Saving all the "
-"current options includes the current FOV and direction of view for use at "
-"next startup."
-msgstr ""
-"സ്വതവേയുള്ള ക്രമീകരണങ്ങള്‍ പൂര്‍വ്വസ്ഥിതിയിലാക്കാന്‍ സ്റ്റെല്ലേറിയം പുനരാരംഭിക്കേണ്ടതുണ്ട്. നിലവിലെ "
-"എല്ല ഐച്ഛീകങ്ങളും സംരക്ഷിക്കുന്നതില്‍ നിലവിലെ FOV ഉം അടുത്ത ആരംഭത്തില്‍ ഉപയോഗിക്കേണ്ട കാഴ്ചയുടെ "
-"ദിശയും ഉള്‍പ്പെടുന്നു."
-
-#: src/ui_configurationDialog.h:848
-msgid "Retry"
-msgstr ""
-
-#: src/translations.h:51
-msgid "Rhea"
-msgstr "റിയ"
-
-#: src/gui/HelpDialog.cpp:56
-msgid "Right click"
-msgstr "വലത് ഞെക്കല്‍"
-
-#: src/ui_configurationDialog.h:857
-msgid "Run the selected script"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:600
-msgid "Running script: "
-msgstr "പ്രവര്‍ത്തിച്ചുകൊണ്ടിരിക്കുന്ന സ്ക്രിപ്റ്റ്: "
-
-#: src/gui/ConfigurationDialog.cpp:607
-msgid "Running script: [none]"
-msgstr "പ്രവര്‍ത്തിച്ചുകൊണ്ടിരിക്കുന്ന സ്ക്രിപ്റ്റ്: [ശൂന്യം]"
-
-#: src/translations.h:64
-msgid "S"
-msgstr "S"
+#: src/translations.h:45
+msgid "Callisto"
+msgstr "കാലിസ്‌റ്റോ"
 
 #: src/translations.h:46
 msgid "Saturn"
 msgstr "ശനി"
 
-#: src/modules/TextUI.cpp:141
-msgid "Save Current Configuration as Default: "
-msgstr "ഇപ്പോഴത്തെ ക്രമീകരണം തനത് ക്രമീകരണം ആക്കുക: "
+#: src/translations.h:47
+msgid "Mimas"
+msgstr "മിമാസ്"
 
-#: src/gui/StelGui.cpp:179
-msgid "Save screenshot"
-msgstr "സ്ക്രീന്‍ ഷോട്ട് സംരക്ഷിക്കുക"
+#: src/translations.h:48
+msgid "Enceladus"
+msgstr "എന്‍സിലാഡസ്"
 
-#: src/ui_configurationDialog.h:767
-msgid "Save settings"
-msgstr "ക്രമീകരണങ്ങള്‍ സംരക്ഷിക്കുക"
+#: src/translations.h:49
+msgid "Tethys"
+msgstr "ടെത്തീസ്"
 
-#: src/ui_configurationDialog.h:765
+#: src/translations.h:50
+msgid "Dione"
+msgstr "ഡയോണ്‍"
+
+#: src/translations.h:51
+msgid "Rhea"
+msgstr "റിയ"
+
+#: src/translations.h:52
+msgid "Titan"
+msgstr "ടൈറ്റന്‍"
+
+#: src/translations.h:53
+msgid "Hyperion"
+msgstr "ഹൈപ്പറിയോണ്‍"
+
+#: src/translations.h:54
+msgid "Iapetus"
+msgstr "ലാപെട്ടസ്"
+
+#: src/translations.h:55
+msgid "Phoebe"
+msgstr "ഫോബെ"
+
+#: src/translations.h:56
+msgid "Neptune"
+msgstr "നെപ്റ്റ്യൂണ്‍"
+
+#: src/translations.h:57
+msgid "Uranus"
+msgstr "യുറാനസ്"
+
+#: src/translations.h:58
+msgid "Pluto"
+msgstr "പ്ലൂട്ടോ"
+
+#: src/translations.h:59
+msgid "Charon"
+msgstr "ഷാരോണ്‍"
+
+#: src/translations.h:60
+msgid "Solar System Observer"
+msgstr "സൌരയൂഥ നിരീക്ഷകന്‍"
+
+#: src/translations.h:63
+msgid "N"
+msgstr "N"
+
+#: src/translations.h:64
+msgid "S"
+msgstr "S"
+
+#: src/translations.h:65
+msgid "E"
+msgstr "E"
+
+#: src/translations.h:66
+msgid "W"
+msgstr "W"
+
+#: src/translations.h:69
+msgid "Aztec"
+msgstr ""
+
+#: src/translations.h:70
+msgid "Chinese"
+msgstr "ചൈനീസ്‌"
+
+#: src/translations.h:71
+msgid "Egyptian"
+msgstr "ഈജിപ്റ്റ്"
+
+#: src/translations.h:72
+msgid "Inuit"
+msgstr "ധ്രുവ്വപ്രദേശ ഭാഷ"
+
+#: src/translations.h:73
+msgid "Korean"
+msgstr "കൊറിയന്‍"
+
+#: src/translations.h:74
+msgid "Lakota"
+msgstr "ലക്കോട്ട"
+
+#: src/translations.h:75
+msgid "Maori"
+msgstr ""
+
+#: src/translations.h:76
+msgid "Navajo"
+msgstr "നവാജോ"
+
+#: src/translations.h:77
+msgid "Norse"
+msgstr "നോഴ്സ്"
+
+#: src/translations.h:78
+msgid "Polynesian"
+msgstr "പോളിനേഷ്യന്‍"
+
+#: src/translations.h:79
+msgid "Western"
+msgstr "പാശ്ചാത്യം"
+
+#: src/translations.h:80
+msgid "Tupi-Guarani"
+msgstr "തുപി-ഗ്വറാനി"
+
+#: src/ui_dateTimeDialogGui.h:294 src/ui_helpDialogGui.h:259
+#: src/ui_locationDialogGui.h:387 src/ui_viewDialog.h:979
+#: src/ui_configurationDialog.h:746
+msgid "Form"
+msgstr "സാധാരണ"
+
+#: src/ui_dateTimeDialogGui.h:297 src/ui_dateTimeDialogGui.h:298
+msgid "/"
+msgstr "/"
+
+#: src/ui_dateTimeDialogGui.h:299 src/ui_dateTimeDialogGui.h:300
+msgid ":"
+msgstr ":"
+
+#: src/ui_helpDialogGui.h:260 src/ui_helpDialogGui.h:266
+msgid "Help"
+msgstr "സഹായം"
+
+#: src/ui_helpDialogGui.h:268
+msgid "About"
+msgstr ""
+
+#: src/ui_helpDialogGui.h:270
+msgid "Log"
+msgstr "സംഭവരേഖ"
+
+#: src/ui_helpDialogGui.h:273
+msgid "Refresh"
+msgstr "പുനര്‍വിന്യസിക്കുക"
+
+#: src/ui_locationDialogGui.h:388
+msgid "Location"
+msgstr "ഭാഷ"
+
+#: src/ui_locationDialogGui.h:392
+msgid "Current location information"
+msgstr "നിലവിലെ സ്ഥാനത്തെപ്പറ്റിയുള്ള വിവരം"
+
+#: src/ui_locationDialogGui.h:393
+msgid "Use as default"
+msgstr "സ്വതവേയായി ഉപയോഗിക്കുക"
+
+#: src/ui_locationDialogGui.h:394
+msgid "Delete"
+msgstr "മായ്ക്കുക"
+
+#: src/ui_locationDialogGui.h:395
+msgid "Add to list"
+msgstr "പട്ടികയിലേക്ക് ചേര്‍ക്കുക"
+
+#: src/ui_locationDialogGui.h:396
+msgid "Latitude:"
+msgstr "അക്ഷാംശം:"
+
+#: src/ui_locationDialogGui.h:398 src/ui_locationDialogGui.h:402
 msgid ""
-"Save the settings you've changed this session to be the same the next time "
-"you start Stellarium"
+"You can enter values in decimal degrees, or using dms format, for example: "
+"+1d 12m 8s"
 msgstr ""
-"ഈ സെഷനില്‍ താങ്കള്‍ വരുത്തിയ മാറ്റങ്ങള്‍ അടുത്ത തവണ സ്റ്റെല്ലേറിയം ആരംഭിക്കുമ്പോള്‍ തുടരുന്നതിനായി "
-"സംരക്ഷിക്കുക"
+"വിലകള്‍ നിങ്ങള്‍ക്ക് ദശാംശ ഡിഗ്രികളായോ dms രൂപത്തിലോ (ഉദാഹരണത്തിന്: +1d 12m "
+"8s) നല്‍കാവുന്നതാണ്"
 
-#: src/ui_viewDialog.h:1008
-msgid "Scale Moon"
-msgstr "ചന്ദ്രനെ അനുപാതത്തിലാക്കുക"
+#: src/ui_locationDialogGui.h:400
+msgid "Longitude:"
+msgstr "രേഖാംശം:"
 
-#: src/ui_configurationDialog.h:835
-msgid "Screenshot Directory"
-msgstr ""
+#: src/ui_locationDialogGui.h:404
+msgid "Altitude:"
+msgstr "സമുദ്രനിരപ്പില്‍ നിന്നുള്ള ഉയരം:"
 
-#: src/ui_configurationDialog.h:834
-msgid "Screenshots"
-msgstr ""
+#: src/ui_locationDialogGui.h:406
+msgid "Enter the altitude in meter"
+msgstr "സമുദ്രനിരപ്പില്‍ നിന്നുള്ള ഉയരം മീറ്ററില്‍ നല്‍കുക:"
 
-#: src/gui/StelGui.cpp:132
-msgid "Script console window"
-msgstr ""
+#: src/ui_locationDialogGui.h:408
+msgid " m"
+msgstr " മീ"
 
-#: src/ui_configurationDialog.h:877
-msgid "Scripts"
-msgstr ""
+#: src/ui_locationDialogGui.h:409
+msgid "Name/City:"
+msgstr "പേര്/നഗരം:"
 
-#: src/modules/TextUI.cpp:69
-msgid "Scripts "
-msgstr "സ്ക്രിപ്റ്റുകള്‍ "
+#: src/ui_locationDialogGui.h:410
+msgid "Country:"
+msgstr "രാജ്യം:"
 
-#: src/gui/StelGui.cpp:127
-msgid "Search window"
-msgstr "തെരച്ചില്‍ ജാലകം"
+#: src/ui_locationDialogGui.h:411
+msgid "Planet:"
+msgstr "ഗ്രഹം:"
 
-#: src/modules/TextUI.cpp:137
-msgid "Select and exit to run."
-msgstr "തുടങ്ങാന്‍ തിരഞ്ഞെടുത്ത് പുറത്ത് കടക്കുക."
+#: src/ui_searchDialogGui.h:230 src/ui_searchDialogGui.h:231
+msgid "Find Object"
+msgstr "വസ്തുവിനെ തെരയുക"
 
-#: src/gui/HelpDialog.cpp:64
-msgid "Select object"
-msgstr "വസ്തു തിരഞ്ഞെടുക്കുക"
-
-#: src/gui/ConfigurationDialog.cpp:283
-msgid "Select screenshot directory"
-msgstr "സ്ക്രീന്‍ഷോട്ടിനുള്ള ഡയറക്ടറി തിരഞ്ഞെടുക്കുക"
-
-#: src/ui_configurationDialog.h:833
-msgid "Select single constellation"
+#: src/ui_searchDialogGui.h:236
+msgid "RA/Dec (J2000):"
 msgstr ""
 
-#: src/ui_configurationDialog.h:750
-msgid "Selected object information"
-msgstr "തിരഞ്ഞെടുത്ത വസ്തുവിന്റെ വിവരങ്ങള്‍"
+#: src/ui_viewDialog.h:980
+msgid "View"
+msgstr "ദൃശ്യം"
 
-#: src/modules/TextUI.cpp:63
-msgid "Set Location "
-msgstr "സ്ഥാനം ഉറപ്പിക്കുക "
+#: src/ui_viewDialog.h:986
+msgid "Sky"
+msgstr "ആകാശം"
 
-#: src/modules/TextUI.cpp:64
-msgid "Set Time "
-msgstr "സമയം ഉറപ്പിക്കുക "
+#: src/ui_viewDialog.h:988
+msgid "Markings"
+msgstr "രേഖപ്പെടുത്തലുകള്‍"
 
-#: src/modules/TextUI.cpp:80
-msgid "Set Time Zone: "
-msgstr "സമയ മേഖല ഉറപ്പിക്കുക: "
+#: src/ui_viewDialog.h:990
+msgid "Landscape"
+msgstr "പ്രകൃതിദൃശ്യം"
 
-#: src/modules/TextUI.cpp:144
-msgid "Set UI Locale: "
-msgstr "സെറ്റ് UI ലോക്കലെ (Set UI Locale): "
-
-#: src/gui/StelGui.cpp:162
-msgid "Set home planet to selected planet"
-msgstr "തെരഞ്ഞെടുത്ത ഗ്രഹത്തെ സ്വഗ്രഹമായി ക്രമീകരിക്കുക"
-
-#: src/gui/StelGui.cpp:141
-msgid "Set normal time rate"
-msgstr "സമയവേഗത സാധാരണ നിലയിലാക്കുക"
-
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:138
-msgid "Set the normal script execution rate"
+#: src/ui_viewDialog.h:992
+msgid "Starlore"
 msgstr ""
 
-#: src/gui/StelGui.cpp:144
-msgid "Set time rate to zero"
-msgstr "സമയവേഗതയിലെ നിരക്ക് പൂജ്യമാക്കുക"
+#: src/ui_viewDialog.h:996
+msgid "Absolute scale:"
+msgstr "കേവല അനുപാതം:"
 
-#: src/gui/StelGui.cpp:145
-msgid "Set time to now"
-msgstr "സമയം നിലവിലെ സമയമാക്കുക"
+#: src/ui_viewDialog.h:997
+msgid "Relative scale:"
+msgstr "താരതമ്യ അനുപാതം:"
 
-#: src/ui_configurationDialog.h:796
-msgid ""
-"Sets the simulation time to the next instance of this time of day when "
-"Stellarium starts"
+#: src/ui_viewDialog.h:998
+msgid "Twinkle:"
+msgstr "മിന്നിതിളങ്ങുക:"
+
+#: src/ui_viewDialog.h:1000
+msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
-"അനുകരണത്തിന്റെ സമയം സ്റ്റെല്ലേറിയം ആരംഭിക്കുമ്പോഴുള്ള ദിവസത്തിലെ സമയത്തോട് തൊട്ടടുത്ത "
-"നിലയിലാക്കുന്നു"
+"തീവ്രതയുള്ള വസ്തുക്കള്‍ ദൃശ്യമാകുമ്പോള്‍ ദ്യോതി കുറഞ്ഞ നക്ഷത്രങ്ങളെ "
+"മങ്ങിപ്പിക്കുക"
 
-#: src/ui_viewDialog.h:1016
-msgid "Shooting Stars"
-msgstr "കൊള്ളിമീന്‍"
+#: src/ui_viewDialog.h:1002
+msgid "Dynamic eye adaptation"
+msgstr "കണ്ണിന്റെ സ്വഭാവത്തിന്റെ അനുരൂപീകരണം"
 
-#: src/ui_configurationDialog.h:758
-msgid "Short"
-msgstr "നീളം കുറഞ്ഞ"
+#: src/ui_viewDialog.h:1003
+msgid "Planets and satellites"
+msgstr "ഗ്രഹങ്ങളും ഉപഗ്രഹങ്ങളും"
 
-#: src/ui_viewDialog.h:1036
-msgid "Show art"
-msgstr "കലാരൂപങ്ങള്‍ കാണിക്കുക"
-
-#: src/ui_viewDialog.h:1010
-msgid "Show atmosphere"
-msgstr "അന്തരീക്ഷം കാണിക്കുക"
-
-#: src/ui_viewDialog.h:1035
-msgid "Show boundaries"
-msgstr "അതിരുകള്‍ കാട്ടുക"
-
-#: src/ui_configurationDialog.h:812
-msgid "Show flip buttons"
-msgstr ""
-
-#: src/ui_viewDialog.h:1041
-msgid "Show fog"
-msgstr "ഫോഗ് കാണിക്കുക"
-
-#: src/ui_viewDialog.h:1040
-msgid "Show ground"
-msgstr "ഭൗമോപരിതലം കാട്ടുക"
-
-#: src/ui_viewDialog.h:1034
-msgid "Show labels"
-msgstr "കുറിമാനം കാട്ടുക"
-
-#: src/ui_viewDialog.h:1033
-msgid "Show lines"
-msgstr "വരകള്‍ കാണിക്കുക"
+#: src/ui_viewDialog.h:1004
+msgid "Show planets"
+msgstr "ഗ്രഹങ്ങളെ കാണിക്കുക"
 
 #: src/ui_viewDialog.h:1005
 msgid "Show planet markers"
@@ -1392,326 +1420,102 @@ msgstr "ഗ്രഹങ്ങളുടെ അടയാളങ്ങള്‍ ക�
 msgid "Show planet orbits"
 msgstr "ഗ്രഹങ്ങളുടെ പ്രദക്ഷിണപഥം കാണിക്കുക"
 
-#: src/ui_viewDialog.h:1004
-msgid "Show planets"
-msgstr "ഗ്രഹങ്ങളെ കാണിക്കുക"
-
-#: src/modules/TextUI.cpp:96
-msgid "Show: "
-msgstr "കാണിക്കുക: "
-
-#: src/modules/TextUI.cpp:142
-msgid "Shut Down: "
-msgstr "നിര്‍ത്തുക: "
-
-#: src/modules/TextUI.cpp:83
-msgid "Sidereal"
-msgstr "സൂര്യനുമായി ബന്ധപ്പെട്ടത്"
-
 #: src/ui_viewDialog.h:1007
 msgid "Simulate light speed"
 msgstr "പ്രകാശവേഗതയെ അനുകരിക്കുക"
 
-#: src/modules/Nebula.cpp:100
-#, qt-format
-msgid "Size: %1"
-msgstr "വലിപ്പം: %1"
+#: src/ui_viewDialog.h:1008
+msgid "Scale Moon"
+msgstr "ചന്ദ്രനെ അനുപാതത്തിലാക്കുക"
 
-#: src/ui_viewDialog.h:986
-msgid "Sky"
-msgstr "ആകാശം"
+#: src/ui_viewDialog.h:1010
+msgid "Show atmosphere"
+msgstr "അന്തരീക്ഷം കാണിക്കുക"
 
-#: src/modules/TextUI.cpp:92
-msgid "Sky Culture: "
-msgstr "ആകാശ സംസ്കാരം: "
+#: src/ui_viewDialog.h:1011
+msgid "Light pollution: "
+msgstr "പ്രകാശ മലിനീകരണം: "
 
-#: src/modules/TextUI.cpp:93
-msgid "Sky Language: "
-msgstr "ആകാശത്തില്‍ ഉപയോഗിക്കേണ്ട ഭാഷ: "
+#: src/ui_viewDialog.h:1012
+msgid "Labels and Markers"
+msgstr "പേരുകുറികളും രേഖപ്പെടുത്തലുകളും"
 
-#: src/modules/TextUI.cpp:85
-msgid "Sky Time At Start-up: "
-msgstr "ആരംഭത്തില്‍ ആകാശ സമയം "
+#: src/ui_viewDialog.h:1015
+msgid "Planets"
+msgstr "ഗ്രഹങ്ങള്‍"
 
-#: src/modules/TextUI.cpp:79
-msgid "Sky Time: "
-msgstr "ആകാശ സമയം: "
+#: src/ui_viewDialog.h:1016
+msgid "Shooting Stars"
+msgstr "കൊള്ളിമീന്‍"
 
-#: src/gui/StelGui.cpp:128
-msgid "Sky and viewing options window"
-msgstr "തിരശ്ശീല നെടുക വിപരീതമാക്കുക"
-
-#: src/gui/HelpDialog.cpp:71 src/gui/StelGui.cpp:136
-msgid "Slow down the script execution rate"
+#: src/ui_viewDialog.h:1017
+msgid "Hourly zenith rate:"
 msgstr ""
 
-#: src/modules/TextUI.cpp:76
-msgid "Solar System Body: "
-msgstr "സൗരയൂഥ വസ്തു: "
+#: src/ui_viewDialog.h:1018
+msgid "0"
+msgstr "0"
 
-#: src/translations.h:60
-msgid "Solar System Observer"
-msgstr "സൌരയൂഥ നിരീക്ഷകന്‍"
+#: src/ui_viewDialog.h:1019
+msgid "10"
+msgstr "10"
 
-#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:286
-#: src/gui/StelGuiItems.cpp:647
-msgid "Space"
+#: src/ui_viewDialog.h:1020
+msgid "80"
+msgstr "80"
+
+#: src/ui_viewDialog.h:1021
+msgid "10000"
+msgstr "10000"
+
+#: src/ui_viewDialog.h:1022
+msgid "144000"
+msgstr "144000"
+
+#: src/ui_viewDialog.h:1024
+msgid "Celestial Sphere"
+msgstr "ഖഗോളം"
+
+#: src/ui_viewDialog.h:1032
+msgid "Constellations"
+msgstr "നക്ഷത്രരാശികള്‍"
+
+#: src/ui_viewDialog.h:1033
+msgid "Show lines"
+msgstr "വരകള്‍ കാണിക്കുക"
+
+#: src/ui_viewDialog.h:1034
+msgid "Show labels"
+msgstr "കുറിമാനം കാട്ടുക"
+
+#: src/ui_viewDialog.h:1035
+msgid "Show boundaries"
+msgstr "അതിരുകള്‍ കാട്ടുക"
+
+#: src/ui_viewDialog.h:1036
+msgid "Show art"
+msgstr "കലാരൂപങ്ങള്‍ കാണിക്കുക"
+
+#: src/ui_viewDialog.h:1037
+msgid "Art brightness: "
+msgstr "കാലാരൂപത്തിന്റെ തീവ്രത: "
+
+#: src/ui_viewDialog.h:1038
+msgid "Projection"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:119
-#, qt-format
-msgid "Spectral Type: %1"
-msgstr "വര്‍ണ്ണരാജി ഗണം: %1"
+#: src/ui_viewDialog.h:1039 src/ui_viewDialog.h:1044 src/ui_viewDialog.h:1046
+#: src/ui_configurationDialog.h:853 src/ui_configurationDialog.h:864
+msgid "Options"
+msgstr "ഐച്ഛികങ്ങള്‍"
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:137
-msgid "Speed up the script execution rate"
-msgstr ""
+#: src/ui_viewDialog.h:1040
+msgid "Show ground"
+msgstr "ഭൗമോപരിതലം കാട്ടുക"
 
-#: src/ui_configurationDialog.h:817
-msgid "Spheric mirror distortion"
-msgstr ""
-
-#: src/ui_configurationDialog.h:815
-msgid ""
-"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
-"mirror for low-cost planetarium systems."
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:450
-msgid "Standard Perseids rate"
-msgstr ""
-
-#: src/modules/TextUI.cpp:97
-msgid "Star Value Multiplier: "
-msgstr "നക്ഷത്രമൂല്യ വര്‍ദ്ധനി: "
-
-#: src/ui_configurationDialog.h:838
-msgid "Star catalog updates"
-msgstr ""
-
-#: src/ui_viewDialog.h:992
-msgid "Starlore"
-msgstr ""
-
-#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:995 src/ui_viewDialog.h:1013
-msgid "Stars"
-msgstr "നക്ഷത്രങ്ങള്‍"
-
-#: src/modules/TextUI.cpp:66
-msgid "Stars "
-msgstr "നക്ഷത്രങ്ങള്‍ "
-
-#: src/ui_configurationDialog.h:792
-msgid "Starts Stellarium at system clock date and time"
-msgstr "സിസ്റ്റം തീയതിയിലും സമയത്തിലും സ്റ്റെല്ലേറിയം തുടങ്ങുക"
-
-#: src/gui/ConfigurationDialog.cpp:448
-#, qt-format
-msgid "Startup FOV: %1%2"
-msgstr ""
-
-#: src/ui_configurationDialog.h:776
-msgid "Startup FOV: XX"
-msgstr ""
-
-#: src/ui_configurationDialog.h:790
-msgid "Startup date and time"
-msgstr "ആരംഭ തിയ്യതിയും സമയവും"
-
-#: src/gui/ConfigurationDialog.cpp:456
-#, qt-format
-msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr ""
-
-#: src/ui_configurationDialog.h:780
-msgid "Startup direction of view: xxxx"
-msgstr "ദര്‍ശനത്തിന്റെ ആരംഭദിശ: xxxx"
-
-#: src/gui/HelpDialog.cpp:161
-msgid "Stellarium Help"
-msgstr "സ്റ്റെല്ലേറിയത്തിന്റെ സഹായം"
-
-#: src/core/StelProjectorClasses.cpp:111
-msgid "Stereographic"
-msgstr ""
-
-#: src/core/StelProjectorClasses.cpp:116
-msgid ""
-"Stereographic projection is known since the antiquity and was originally "
-"known as the planisphere projection. It preserves the angles at which curves "
-"cross each other but it does not preserve area."
-msgstr ""
-
-#: src/ui_configurationDialog.h:861
-msgid "Stop a running script"
-msgstr ""
-
-#: src/ui_configurationDialog.h:850
-msgid "Stop the download. You can always restart it later"
-msgstr ""
-
-#: src/gui/StelGui.cpp:153
-msgid "Subtract 1 sidereal day"
-msgstr "1 സൈഡീരിയല്‍ ദിവസം കുറയ്ക്കുക"
-
-#: src/gui/StelGui.cpp:155
-msgid "Subtract 1 sidereal week"
-msgstr "1 സൈഡീരിയല്‍ ആഴ്ച കുറയ്ക്കുക"
-
-#: src/gui/StelGui.cpp:149
-msgid "Subtract 1 solar day"
-msgstr "1 സൗരദിനം കുറയ്ക്കുക"
-
-#: src/gui/StelGui.cpp:147
-msgid "Subtract 1 solar hour"
-msgstr "1 സൗരമണിക്കൂര്‍ കുറയ്ക്കുക"
-
-#: src/gui/StelGui.cpp:151
-msgid "Subtract 1 solar week"
-msgstr "1 സൗരആഴ്ച കുറയ്ക്കുക"
-
-#: src/translations.h:33
-msgid "Sun"
-msgstr "സൂര്യന്‍"
-
-#: src/gui/StelGui.cpp:177
-msgid "Switch between equatorial and azimuthal mount"
-msgstr ""
-
-#: src/ui_configurationDialog.h:794
-msgid "System date and time"
-msgstr "സിസ്റ്റം തീയതിയും സമയവും"
-
-#: src/ui_configurationDialog.h:798
-msgid "System date at:"
-msgstr ""
-
-#: src/gui/StelGui.cpp:164
-msgid "Telescope Control"
-msgstr "ദൂരദര്‍ശിനി നിയന്ത്രണം"
-
-#: src/translations.h:49
-msgid "Tethys"
-msgstr "ടെത്തീസ്"
-
-#: src/core/StelProjectorClasses.cpp:194
-msgid ""
-"The Hammer projection is an equal-area map projection, described by Ernst "
-"Hammer in 1892 and directly inspired by the Aitoff projection."
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:172
-msgid "The Stellarium User Guide"
-msgstr "സ്റ്റെല്ലേറിയ ഉപയോഗ സഹായി"
-
-#: src/ui_configurationDialog.h:778
-msgid "The direction you're looking when Stellarium starts"
-msgstr "സ്റ്റെല്ലേറിയ ആരംഭിക്കുമ്പോള്‍ നിങ്ങള്‍ നോക്കുന്ന ദിശ"
-
-#: src/gui/HelpDialog.cpp:171
-msgid ""
-"The following links are external web links, and will launch your web "
-"browser:\n"
-msgstr "താഴെ കൊടുത്തിരിക്കുന്നവ പുറം കണ്ണികളാണു. നിങ്ങളുടെ വെബ്ബ് ബ്രൌസറില്‍ ഇവ തുറക്കപ്പെടും:\n"
-
-#: src/core/StelProjectorClasses.cpp:68
-msgid ""
-"The full name of this projection method is, <i>Lambert azimuthal equal-area "
-"projection</i>. It preserves the area but not the angle."
-msgstr ""
-"ഈ പ്രൊജക്ഷന്‍ രീതിയുടെ പൂര്‍ണ്ണനാമം <i>Lambert azimuthal equal-area projection</i> "
-"എന്നാണു. ഈ രീതി സ്ഥലം കാത്തുസൂക്ഷിക്കുന്നു, പക്ഷെ കോണളവ് കാക്കുന്നില്ല."
-
-#: src/core/StelProjectorClasses.cpp:235
-msgid ""
-"The full name of this projection mode is <i>cylindrical equidistant "
-"projection</i>. With this projection all parallels are equally spaced."
-msgstr ""
-
-#: src/core/StelProjectorClasses.cpp:282
-msgid ""
-"The mercator projection is one of the most used world map projection. It "
-"preserves direction and shapes but distorts size, in an increasing degree "
-"away from the equator."
-msgstr ""
-
-#: src/ui_configurationDialog.h:774
-msgid "The width of your view when Stellarium starts"
-msgstr "സ്റ്റെല്ലേറിയം ആരംഭികുമ്പോഴുള്ള ദര്‍ശനത്തിന്റെ വീതി"
-
-#: src/main.cpp:308
-msgid "This system does not support OpenGL."
-msgstr "ഈ സിസ്റ്റം OpenGL പിന്താങ്ങുന്നില്ല"
-
-#: src/modules/TextUI.cpp:88
-msgid "Time Display Format: "
-msgstr "സമയം കാണിക്കേണ്ട വിധം: "
-
-#: src/translations.h:52
-msgid "Titan"
-msgstr "ടൈറ്റന്‍"
-
-#: src/ui_configurationDialog.h:810
-msgid "Toggle vertical and horizontal image flip buttons."
-msgstr ""
-
-#: src/gui/StelGui.cpp:184
-#, fuzzy
-msgid "Toggle visibility of GUI"
-msgstr "ടൂള്‍ബാറുകളുടെ ദൃശ്യാവസ്ഥ വിപരീതമാക്കുക"
-
-#: src/ui_configurationDialog.h:875
-msgid "Tools"
-msgstr "ഉപകരണങ്ങള്‍"
-
-#: src/gui/StelGui.cpp:159
-msgid "Track object"
-msgstr "വസ്തുവിനെ പിന്തുടരുക"
-
-#: src/translations.h:80
-msgid "Tupi-Guarani"
-msgstr "തുപി-ഗ്വറാനി"
-
-#: src/ui_viewDialog.h:998
-msgid "Twinkle:"
-msgstr "മിന്നിതിളങ്ങുക:"
-
-#: src/modules/TextUI.cpp:100
-msgid "Twinkling: "
-msgstr "മിന്നുന്നു: "
-
-#: src/modules/Nebula.cpp:92
-#, qt-format
-msgid "Type: <b>%1</b>"
-msgstr "തരം: <b>%1</b>"
-
-#: src/modules/TextUI.cpp:135
-msgid "USB Script: "
-msgstr "യു.എസ്.ബി. സ്ക്രിപ്റ്റ്: "
-
-#: src/modules/Nebula.cpp:290
-msgid "Undocumented type"
-msgstr "രേഖപ്പെടുത്താത്ത തരം"
-
-#: src/modules/Nebula.cpp:287
-msgid "Unknown"
-msgstr "അജ്ഞാതം"
-
-#: src/modules/TextUI.cpp:143
-msgid "Update me via Internet: "
-msgstr "പുതിയ വിവരങ്ങള്‍ എന്നെ ഇന്റര്‍നെറ്റില്‍ കൂടി അറിയിക്കുക "
-
-#: src/translations.h:57
-msgid "Uranus"
-msgstr "യുറാനസ്"
-
-#: src/ui_configurationDialog.h:800
-msgid "Use a specific date and time when Stellarium starts up"
-msgstr "സ്റ്റെല്ലേറിയം ആരംഭിക്കുമ്പോല്‍ ഒരു പ്രതേക തിയ്യതിയും സമയവും ഉപയോഗിക്കുക"
-
-#: src/ui_locationDialogGui.h:393
-msgid "Use as default"
-msgstr "സ്വതവേയായി ഉപയോഗിക്കുക"
+#: src/ui_viewDialog.h:1041
+msgid "Show fog"
+msgstr "ഫോഗ് കാണിക്കുക"
 
 #: src/ui_viewDialog.h:1042
 msgid "Use associated planet and position"
@@ -1725,32 +1529,197 @@ msgstr "ഈ പ്രകൃതിദൃശ്യം സ്വതവേയായ�
 msgid "Use this sky culture as default"
 msgstr "ഈ ആകാശസംസ്കാരം സ്വതവേയായി ഉപയോഗിക്കുക"
 
-#: src/translations.h:35
-msgid "Venus"
-msgstr "ശുക്രന്‍"
-
-#: src/gui/ConfigurationDialog.cpp:791
-msgid "Verifying file integrity..."
-msgstr "പ്രമാണത്തിന്റെ സാധുത പരിശോധിച്ചുകൊണ്ടിരിക്കുന്നു"
-
-#: src/ui_viewDialog.h:980
-msgid "View"
-msgstr "ദൃശ്യം"
-
 #: src/ui_viewDialog.h:1047
 msgid "Visible"
 msgstr ""
 
-#: src/translations.h:66
-msgid "W"
-msgstr "W"
+#: src/ui_configurationDialog.h:747
+msgid "Configuration"
+msgstr "ക്രമീകരണം"
 
-#: src/translations.h:79
-msgid "Western"
-msgstr "പാശ്ചാത്യം"
+#: src/ui_configurationDialog.h:749
+msgid "Program language"
+msgstr "പ്രോഗ്രാമിന്റെ ഭാഷ"
 
-#: src/gui/HelpDialog.cpp:70
-msgid "When a Script is Running"
+#: src/ui_configurationDialog.h:750
+msgid "Selected object information"
+msgstr "തിരഞ്ഞെടുത്ത വസ്തുവിന്റെ വിവരങ്ങള്‍"
+
+#: src/ui_configurationDialog.h:752
+msgid "Display all information available"
+msgstr "ലഭ്യമായ എല്ലാ വിവരങ്ങളും പ്രദര്‍ശിപ്പിക്കുക"
+
+#: src/ui_configurationDialog.h:754
+msgid "All available"
+msgstr "ലഭ്യമായ എല്ലാം"
+
+#: src/ui_configurationDialog.h:756
+msgid "Display less information"
+msgstr "കുറഞ്ഞ വിവരങ്ങള്‍ പ്രദര്‍ശിപ്പിക്കുക"
+
+#: src/ui_configurationDialog.h:758
+msgid "Short"
+msgstr "നീളം കുറഞ്ഞ"
+
+#: src/ui_configurationDialog.h:760
+msgid "Display no information"
+msgstr "വിവരങ്ങളൊന്നും പ്രദര്‍ശിപ്പിക്കേണ്ട"
+
+#: src/ui_configurationDialog.h:762
+msgid "None"
+msgstr "ഒന്നുമില്ല"
+
+#: src/ui_configurationDialog.h:763
+msgid "Default options"
+msgstr "സ്വതവേയുള്ള ഐച്ഛീകങ്ങള്‍"
+
+#: src/ui_configurationDialog.h:765
+msgid ""
+"Save the settings you've changed this session to be the same the next time "
+"you start Stellarium"
+msgstr ""
+"ഈ സെഷനില്‍ താങ്കള്‍ വരുത്തിയ മാറ്റങ്ങള്‍ അടുത്ത തവണ സ്റ്റെല്ലേറിയം "
+"ആരംഭിക്കുമ്പോള്‍ തുടരുന്നതിനായി സംരക്ഷിക്കുക"
+
+#: src/ui_configurationDialog.h:767
+msgid "Save settings"
+msgstr "ക്രമീകരണങ്ങള്‍ സംരക്ഷിക്കുക"
+
+#: src/ui_configurationDialog.h:769
+msgid "Restore the default settings that came with Stellarium"
+msgstr ""
+"സ്റ്റെല്ലേറിയത്തിന്റെ കൂടെ വന്ന സ്വതവേയുള്ള ക്രമീകരണങ്ങള്‍ "
+"പൂര്‍വ്വസ്ഥിതിയിലാക്കുക"
+
+#: src/ui_configurationDialog.h:771
+msgid "Restore defaults"
+msgstr "സ്വതവേകള്‍ പൂര്‍വ്വസ്ഥിതിയിലാക്കുക"
+
+#: src/ui_configurationDialog.h:772
+msgid ""
+"Restoring default settings requires a restart of Stellarium. Saving all the "
+"current options includes the current FOV and direction of view for use at "
+"next startup."
+msgstr ""
+"സ്വതവേയുള്ള ക്രമീകരണങ്ങള്‍ പൂര്‍വ്വസ്ഥിതിയിലാക്കാന്‍ സ്റ്റെല്ലേറിയം "
+"പുനരാരംഭിക്കേണ്ടതുണ്ട്. നിലവിലെ എല്ല ഐച്ഛീകങ്ങളും സംരക്ഷിക്കുന്നതില്‍ "
+"നിലവിലെ FOV ഉം അടുത്ത ആരംഭത്തില്‍ ഉപയോഗിക്കേണ്ട കാഴ്ചയുടെ ദിശയും "
+"ഉള്‍പ്പെടുന്നു."
+
+#: src/ui_configurationDialog.h:774
+msgid "The width of your view when Stellarium starts"
+msgstr "സ്റ്റെല്ലേറിയം ആരംഭികുമ്പോഴുള്ള ദര്‍ശനത്തിന്റെ വീതി"
+
+#: src/ui_configurationDialog.h:776
+msgid "Startup FOV: XX"
+msgstr ""
+
+#: src/ui_configurationDialog.h:778
+msgid "The direction you're looking when Stellarium starts"
+msgstr "സ്റ്റെല്ലേറിയ ആരംഭിക്കുമ്പോള്‍ നിങ്ങള്‍ നോക്കുന്ന ദിശ"
+
+#: src/ui_configurationDialog.h:780
+msgid "Startup direction of view: xxxx"
+msgstr "ദര്‍ശനത്തിന്റെ ആരംഭദിശ: xxxx"
+
+#: src/ui_configurationDialog.h:781
+msgid "Control"
+msgstr "നിയന്ത്രണം"
+
+#: src/ui_configurationDialog.h:783
+msgid "Allow keyboard to pan and zoom"
+msgstr "കീബോര്‍ഡുകൊണ്ട് നീക്കാനും വലുതാക്കാനും അനുവദിക്കുക"
+
+#: src/ui_configurationDialog.h:785
+msgid "Enable keyboard navigation"
+msgstr "കീബോര്‍ഡുപയോഗിച്ചുള്ള ദര്‍ശന നിയന്ത്രണം സാധ്യമാക്കുക"
+
+#: src/ui_configurationDialog.h:787
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr ""
+"മൌസുപയോഗിച്ച് നീക്കാനും (ഇഴയ്ക്കുക) വലുതാക്കാനും (മൌസ്‌വീല്‍) അനുവദിക്കുക"
+
+#: src/ui_configurationDialog.h:789
+msgid "Enable mouse navigation"
+msgstr "മൌസുപയോഗിച്ചുള്ള ദര്‍ശന നിയന്ത്രണം സാധ്യമാക്കുക"
+
+#: src/ui_configurationDialog.h:790
+msgid "Startup date and time"
+msgstr "ആരംഭ തിയ്യതിയും സമയവും"
+
+#: src/ui_configurationDialog.h:792
+msgid "Starts Stellarium at system clock date and time"
+msgstr "സിസ്റ്റം തീയതിയിലും സമയത്തിലും സ്റ്റെല്ലേറിയം തുടങ്ങുക"
+
+#: src/ui_configurationDialog.h:794
+msgid "System date and time"
+msgstr "സിസ്റ്റം തീയതിയും സമയവും"
+
+#: src/ui_configurationDialog.h:796
+msgid ""
+"Sets the simulation time to the next instance of this time of day when "
+"Stellarium starts"
+msgstr ""
+"അനുകരണത്തിന്റെ സമയം സ്റ്റെല്ലേറിയം ആരംഭിക്കുമ്പോഴുള്ള ദിവസത്തിലെ സമയത്തോട് "
+"തൊട്ടടുത്ത നിലയിലാക്കുന്നു"
+
+#: src/ui_configurationDialog.h:798
+msgid "System date at:"
+msgstr ""
+
+#: src/ui_configurationDialog.h:800
+msgid "Use a specific date and time when Stellarium starts up"
+msgstr ""
+"സ്റ്റെല്ലേറിയം ആരംഭിക്കുമ്പോല്‍ ഒരു പ്രതേക തിയ്യതിയും സമയവും ഉപയോഗിക്കുക"
+
+#: src/ui_configurationDialog.h:802
+msgid "Other:"
+msgstr "മറ്റുള്ളവ:"
+
+#: src/ui_configurationDialog.h:803
+msgid "use current"
+msgstr "നിലവിലുള്ളത് ഉപയോഗിക്കുക"
+
+#: src/ui_configurationDialog.h:804
+msgid "Other"
+msgstr "മറ്റുള്ളവ"
+
+#: src/ui_configurationDialog.h:806
+msgid "Hides the mouse cursor when inactive"
+msgstr "നിര്‍ജ്ജീവമായിരിക്കുമ്പോള്‍ മൗസ് കര്‍സര്‍ മറയ്ക്കുന്നു"
+
+#: src/ui_configurationDialog.h:808
+msgid "Mouse cursor timeout (seconds):"
+msgstr "മൗസ് കര്‍സര്‍ നിര്‍ജ്ജിവമാകാനുള്ള സമയപരിധി (സെക്കന്റില്‍):"
+
+#: src/ui_configurationDialog.h:810
+msgid "Toggle vertical and horizontal image flip buttons."
+msgstr ""
+
+#: src/ui_configurationDialog.h:812
+msgid "Show flip buttons"
+msgstr ""
+
+#: src/ui_configurationDialog.h:813
+msgid "Planetarium options"
+msgstr "പ്ലാനെറ്റേറിയം ഐച്ഛീകങ്ങള്‍"
+
+#: src/ui_configurationDialog.h:815
+msgid ""
+"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
+"mirror for low-cost planetarium systems."
+msgstr ""
+
+#: src/ui_configurationDialog.h:817
+msgid "Spheric mirror distortion"
+msgstr ""
+
+#: src/ui_configurationDialog.h:819
+msgid "Align labels with the horizon"
+msgstr ""
+
+#: src/ui_configurationDialog.h:821
+msgid "Gravity labels"
 msgstr ""
 
 #: src/ui_configurationDialog.h:823
@@ -1759,106 +1728,110 @@ msgid ""
 "direction"
 msgstr ""
 
-#: src/gui/StelGui.cpp:124
-msgid "Windows"
-msgstr "ജാലകങ്ങള്‍"
-
-#: src/ui_locationDialogGui.h:398 src/ui_locationDialogGui.h:402
-msgid ""
-"You can enter values in decimal degrees, or using dms format, for example: "
-"+1d 12m 8s"
+#: src/ui_configurationDialog.h:825
+msgid "Auto zoom out returns to initial direction of view"
 msgstr ""
-"വിലകള്‍ നിങ്ങള്‍ക്ക് ദശാംശ ഡിഗ്രികളായോ dms രൂപത്തിലോ (ഉദാഹരണത്തിന്: +1d 12m 8s) "
-"നല്‍കാവുന്നതാണ്"
 
-#: src/modules/TextUI.cpp:128
-msgid "Zoom Duration: "
-msgstr "പര്‍വ്വതീകരണ ഇടവേള: "
+#: src/ui_configurationDialog.h:827
+msgid "Mask out everything outside a central circle in the main view"
+msgstr ""
 
-#: src/gui/StelGui.cpp:160
-msgid "Zoom in on selected object"
-msgstr "തിരഞ്ഞെടുത്ത വസ്തുവിനെ കേന്ദ്രീകരിച്ചു വലുതാക്കി കാണിക്കുക"
+#: src/ui_configurationDialog.h:829
+msgid "Disc viewport"
+msgstr ""
 
-#: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
-msgid "Zoom in/out"
-msgstr "വലിപ്പം കൂട്ടുക/കുറക്കുക"
+#: src/ui_configurationDialog.h:831
+msgid "Hide other constellations when you click one"
+msgstr ""
 
-#: src/gui/StelGui.cpp:161
-msgid "Zoom out"
-msgstr "വലുതാക്കുക"
+#: src/ui_configurationDialog.h:833
+msgid "Select single constellation"
+msgstr ""
 
-#: src/ui_configurationDialog.h:866
-#, fuzzy
-msgid "configure"
-msgstr "ക്രമീകരണം"
+#: src/ui_configurationDialog.h:834
+msgid "Screenshots"
+msgstr ""
 
-#: src/ui_configurationDialog.h:803
-msgid "use current"
-msgstr "നിലവിലുള്ളത് ഉപയോഗിക്കുക"
+#: src/ui_configurationDialog.h:835
+msgid "Screenshot Directory"
+msgstr ""
+
+#: src/ui_configurationDialog.h:837
+msgid "Invert colors"
+msgstr ""
+
+#: src/ui_configurationDialog.h:838
+msgid "Star catalog updates"
+msgstr ""
+
+#: src/ui_configurationDialog.h:840
+msgid "Click here to start downloading"
+msgstr ""
+
+#: src/ui_configurationDialog.h:842
+msgid "Get catalog x of y"
+msgstr ""
+
+#: src/ui_configurationDialog.h:843
+msgid "Download this file to view even more stars"
+msgstr ""
 
 #: src/ui_configurationDialog.h:844
 msgid "xxx"
 msgstr ""
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:191
-msgid ""
-"{Bug reporting and feature request system} - if something doesn't work "
-"properly or is missing and is not listed in the tracker, you can open bug "
-"reports here."
+#: src/ui_configurationDialog.h:846
+msgid "Restart the download"
 msgstr ""
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:196
-msgid "{Forums} - discuss Stellarium with other users."
-msgstr "{Forums} - സ്റ്റെല്ലേറിയത്തെക്കുറിച്ച് മറ്റുപയോക്താക്കളുമായി സംവദിക്കുക."
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:176
-msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr "സ്റ്റെല്ലേറിയത്തെക്കുറിച്ചുള്ള {പതിവു ചോദ്യങ്ങള്‍}. ഉത്തരങ്ങളും."
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:186
-msgid ""
-"{Support ticket system} - if you need help using Stellarium, post a support "
-"request here and we'll try to help."
+#: src/ui_configurationDialog.h:848
+msgid "Retry"
 msgstr ""
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:181
-msgid ""
-"{The Stellarium Wiki} - General information.  You can also find user-"
-"contributed landscapes and scripts here."
+#: src/ui_configurationDialog.h:850
+msgid "Stop the download. You can always restart it later"
 msgstr ""
-"{സ്റ്റെല്ലേറിയം വിക്കി} - പൊതു വിവരങ്ങള്‍. ഉപയോക്താക്കാള്‍ സംഭാവന ചെയ്ത ലാന്‍ഡ് സ്കേപ്പുകളും "
-"സ്ക്രിപ്റ്റുകളും താങ്കള്‍ക്കു ഇവിടെ കാണാവുന്നതാണു."
 
-#~ msgid "Add"
-#~ msgstr "ചേര്‍ക്കുക"
+#: src/ui_configurationDialog.h:852
+msgid "Cancel"
+msgstr "വേണ്ട"
 
-#~ msgid "All star catalogs are up to date."
-#~ msgstr "എല്ലാ നക്ഷത്ര കാറ്റലോഗുകളും അപ്റ്റു ഡേറ്റ് ആണ്."
+#: src/ui_configurationDialog.h:855
+msgid "Close window when script runs"
+msgstr ""
 
-#~ msgid "Checking for new star catalogs..."
-#~ msgstr "പുതിയ നക്ഷത്ര കാറ്റലോഗുകള്‍ക്ക് വേണ്ടി തിരഞ്ഞു കൊണ്ടിരിക്കുന്നു..."
+#: src/ui_configurationDialog.h:857
+msgid "Run the selected script"
+msgstr ""
 
-#~ msgid ""
-#~ "Could not finalize download:\n"
-#~ "Error moving temporary file %1.tmp to %1.cat"
-#~ msgstr ""
-#~ "ഡൌണ്‍ലോഡ് പൂര്‍ത്തീകരിക്കുവാന്‍ സാധിച്ചില്ല:\n"
-#~ "താല്‍ക്കാലിക പ്രമാണം %1.tmp %1.cat ലേക്ക് നീക്കുന്നതില്‍ പിഴവ് സംഭവിച്ചിരിക്കുന്നു"
+#: src/ui_configurationDialog.h:861
+msgid "Stop a running script"
+msgstr ""
 
-#~ msgid ""
-#~ "Error checking updates:\n"
-#~ "%1"
-#~ msgstr ""
-#~ "അപ്ഡേറ്റുകള്‍ അന്വേഷിക്കുന്നതില്‍ പിഴവ്:\n"
-#~ "%1"
+#: src/ui_configurationDialog.h:865
+msgid "Load at startup"
+msgstr ""
 
-#~ msgid "Images"
-#~ msgstr "ചിത്രങ്ങള്‍"
+#: src/ui_configurationDialog.h:866
+msgid "configure"
+msgstr ""
 
-#~ msgid "Use associated language for sky labeling"
-#~ msgstr "ബന്ധപ്പെട്ട ഭാഷയും ആകാശകുറിമാനവും ഉപയോഗിക്കുക"
+#: src/ui_configurationDialog.h:871
+msgid "Main"
+msgstr ""
+
+#: src/ui_configurationDialog.h:873
+msgid "Navigation"
+msgstr "നാവിഗേഷന്‍"
+
+#: src/ui_configurationDialog.h:875
+msgid "Tools"
+msgstr "ഉപകരണങ്ങള്‍"
+
+#: src/ui_configurationDialog.h:877
+msgid "Scripts"
+msgstr ""
+
+#: src/ui_configurationDialog.h:879
+msgid "Plugins"
+msgstr ""

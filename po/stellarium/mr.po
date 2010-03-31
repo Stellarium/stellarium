@@ -7,86 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-09-07 17:46+0200\n"
-"PO-Revision-Date: 2009-08-02 15:00+0000\n"
-"Last-Translator: Shekhar Phatak <shekhar.phatak@gmail.com>\n"
+"POT-Creation-Date: 2010-01-28 17:53+0100\n"
+"PO-Revision-Date: 2010-02-23 03:43+0000\n"
+"Last-Translator: nyogi <nyogi2004@gmail.com>\n"
 "Language-Team: Marathi <mr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-01-28 13:36+0000\n"
+"X-Launchpad-Export-Date: 2010-03-31 16:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/modules/StarMgr.cpp:312
-#, qt-format
-msgid "Loading catalog %1 from file %2"
-msgstr "%2 या संचिकेतून सूची %1 (कॅटलॉग) भरली जात आहे."
-
-#: src/modules/LandscapeMgr.cpp:415
-msgid "Author: "
-msgstr "लेखक: "
-
-#: src/modules/LandscapeMgr.cpp:418
-msgid "Location: "
-msgstr "स्थान: "
-
-#: src/modules/LandscapeMgr.cpp:423
-#, qt-format
-msgid ", %1 m"
-msgstr ", %1 m"
-
-#: src/modules/LandscapeMgr.cpp:426
-msgid "Planet: "
-msgstr "ग्रह: "
-
-#: src/modules/Nebula.cpp:91
-#, qt-format
-msgid "Type: <b>%1</b>"
-msgstr "प्रकार: <b>%1</b>"
-
-#: src/modules/Nebula.cpp:94 src/modules/Planet.cpp:130
-#, qt-format
-msgid "Magnitude: <b>%1</b>"
-msgstr "प्रत: <b>%1</b>"
-
-#: src/modules/Nebula.cpp:99
-#, qt-format
-msgid "Size: %1"
-msgstr "आकार: %1"
-
-#: src/modules/Nebula.cpp:235
-msgid "Galaxy"
-msgstr "दीर्घिका"
-
-#: src/modules/Nebula.cpp:238
-msgid "Open cluster"
-msgstr "खुला तारकागुच्छ"
-
-#: src/modules/Nebula.cpp:241
-msgid "Globular cluster"
-msgstr "बंदिस्त तारकागुच्छ"
-
-#: src/modules/Nebula.cpp:244
-msgid "Nebula"
-msgstr "तेजोमेघ"
-
-#: src/modules/Nebula.cpp:247
-msgid "Planetary nebula"
-msgstr "ग्रहानुवर्ती तेजोमेघ"
-
-#: src/modules/Nebula.cpp:250
-msgid "Cluster associated with nebulosity"
-msgstr "तेजोमेघाशी संबधित तारकागुच्छ"
-
-#: src/modules/Nebula.cpp:253
-msgid "Unknown"
-msgstr "अज्ञात"
-
-#: src/modules/Nebula.cpp:256
-msgid "Undocumented type"
-msgstr "नोंद न झालेला प्रकार"
-
-#: src/modules/NebulaMgr.cpp:350
+#: src/modules/NebulaMgr.cpp:346
 #, qt-format
 msgid "Loading NGC catalog: %1/%2"
 msgstr "एन् जी सी (NGC) सूची %1/%2 भरली जात आहे"
@@ -114,7 +45,7 @@ msgstr "प्रत: <b>%1</b> (B-V: %2)"
 #: src/modules/StarWrapper.cpp:119
 #, qt-format
 msgid "Spectral Type: %1"
-msgstr "दृष्य प्रकार: %1"
+msgstr "वर्णपटाचा प्रकार: %1"
 
 #: src/modules/StarWrapper.cpp:123
 #, qt-format
@@ -125,6 +56,79 @@ msgstr "अंतर: %1 प्रकाश वर्षे"
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "पराशय: %1\""
+
+#: src/modules/StarMgr.cpp:396
+#, qt-format
+msgid "Loading catalog %1 from file %2"
+msgstr "%2 या संचिकेतून सूची %1 (कॅटलॉग) भरली जात आहे."
+
+#: src/modules/LandscapeMgr.cpp:425
+msgid "Author: "
+msgstr "लेखक: "
+
+#: src/modules/LandscapeMgr.cpp:428
+msgid "Location: "
+msgstr "स्थान: "
+
+#: src/modules/LandscapeMgr.cpp:433
+#, qt-format
+msgid ", %1 m"
+msgstr ", %1 m"
+
+#: src/modules/LandscapeMgr.cpp:436
+msgid "Planet: "
+msgstr "ग्रह: "
+
+#: src/modules/Nebula.cpp:92
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr "प्रकार: <b>%1</b>"
+
+#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:130
+#, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr "प्रत: <b>%1</b>"
+
+#: src/modules/Nebula.cpp:100
+#, qt-format
+msgid "Size: %1"
+msgstr "आकार: %1"
+
+#: src/modules/Nebula.cpp:269
+msgid "Galaxy"
+msgstr "दीर्घिका"
+
+#: src/modules/Nebula.cpp:272
+msgid "Open cluster"
+msgstr "खुला तारकागुच्छ"
+
+#: src/modules/Nebula.cpp:275
+msgid "Globular cluster"
+msgstr "बंदिस्त तारकागुच्छ"
+
+#: src/modules/Nebula.cpp:278
+msgid "Nebula"
+msgstr "तेजोमेघ"
+
+#: src/modules/Nebula.cpp:281
+msgid "Planetary nebula"
+msgstr "ग्रहानुवर्ती तेजोमेघ"
+
+#: src/modules/Nebula.cpp:284
+msgid "Cluster associated with nebulosity"
+msgstr "तेजोमेघाशी संबधित तारकागुच्छ"
+
+#: src/modules/Nebula.cpp:287
+msgid "Unknown"
+msgstr "अज्ञात"
+
+#: src/modules/Nebula.cpp:290
+msgid "Undocumented type"
+msgstr "नोंद न झालेला प्रकार"
+
+#: src/modules/NebulaMgr.cpp:379
+msgid "Loading NGC catalog"
+msgstr "एन जी सी यादी भरली जात आहे"
 
 #: src/modules/TextUI.cpp:63
 msgid "Set Location "
@@ -516,78 +520,62 @@ msgstr "तास कोन/डीइ: %1/%2"
 msgid "Az/Alt: %1/%2"
 msgstr "दिगंश/उन्न्तांश: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:293
+#: src/gui/ConfigurationDialog.cpp:283
 msgid "Select screenshot directory"
 msgstr "पटलचित्र संचिका निवडा"
 
-#: src/gui/ConfigurationDialog.cpp:460
+#: src/gui/ConfigurationDialog.cpp:448
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "सुरु होतांनाचे दृष्टीक्षेत्र: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:468
+#: src/gui/ConfigurationDialog.cpp:456
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "सुरु होतांनाच्या दिगंश/उन्न्तांशची दिशा: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:507
+#: src/gui/ConfigurationDialog.cpp:492
 msgid "Authors"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:511 src/gui/ViewDialog.cpp:335
+#: src/gui/ConfigurationDialog.cpp:496 src/gui/ViewDialog.cpp:336
 msgid "Contact"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:555
+#: src/gui/ConfigurationDialog.cpp:568
 msgid "Author"
 msgstr "लेखक"
 
-#: src/gui/ConfigurationDialog.cpp:556
+#: src/gui/ConfigurationDialog.cpp:569
 msgid "License"
 msgstr "परवाना"
 
-#: src/gui/ConfigurationDialog.cpp:587
+#: src/gui/ConfigurationDialog.cpp:600
 msgid "Running script: "
 msgstr "आज्ञावली सुरू: "
 
-#: src/gui/ConfigurationDialog.cpp:594
+#: src/gui/ConfigurationDialog.cpp:607
 msgid "Running script: [none]"
 msgstr "आज्ञावली सुरु: [none]"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:650
+msgid "Finished downloading all star catalogs!"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:657
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%1 च्या %2 ची सुची मिळवा"
 
-#: src/gui/ConfigurationDialog.cpp:616
+#: src/gui/ConfigurationDialog.cpp:659
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
-"Star count: %2\n"
+"Star count: %2 Million\n"
 "Magnitude range: %3 - %4"
 msgstr ""
-"उतरवून घेण्याचे आकारमान: %1एमबी\n"
-"तारका संख्या: %2\n"
-"प्रत आवाका:: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:626
-msgid "Checking for new star catalogs..."
-msgstr "नविन तारकासुची शोधली जात आहे...."
-
-#: src/gui/ConfigurationDialog.cpp:630
-msgid "All star catalogs are up to date."
-msgstr "सर्व तारकासूची आद्ययावत केल्या आहेत."
-
-#: src/gui/ConfigurationDialog.cpp:634
-#, qt-format
-msgid ""
-"Downloading %1...\n"
-"(You can close this window.)"
-msgstr ""
-"%1... उतरवून घेतले जात आहेत\n"
-"(तुम्ही ही खिडकी बंद करू शकता.)"
-
-#: src/gui/ConfigurationDialog.cpp:639
+#: src/gui/ConfigurationDialog.cpp:668
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -595,29 +583,7 @@ msgstr ""
 "नविन तारकसूची !\n"
 " उतरवून घेण्याचे काम पुर्ण झाले आहेती पाहण्यासाठी स्टेलेरीअम पुन्हा सुरु करा."
 
-#: src/gui/ConfigurationDialog.cpp:643
-msgid "Verifying file integrity..."
-msgstr "फाइलची एकात्मता तपासली जात आहे...."
-
-#: src/gui/ConfigurationDialog.cpp:647
-#, qt-format
-msgid ""
-"Error checking updates:\n"
-"%1"
-msgstr ""
-"आद्यवततेमधील तृटीची तपासणी:\n"
-"%1"
-
-#: src/gui/ConfigurationDialog.cpp:652
-#, c-format, qt-format
-msgid ""
-"Could not finalize download:\n"
-"Error moving temporary file %1.tmp to %1.cat"
-msgstr ""
-"उतरवून घेण्याचे काम पुर्ण होउ शकले नाही:\n"
-"तात्पूरती फाइल %1.tmp ही %1.cat येथे हलवतांना तृटी"
-
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:706 src/gui/ConfigurationDialog.cpp:740
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -626,7 +592,20 @@ msgstr ""
 "%1:\n"
 " उतरवून घेण्यात तृटी%2"
 
-#: src/gui/ConfigurationDialog.cpp:661
+#: src/gui/ConfigurationDialog.cpp:711
+#, qt-format
+msgid ""
+"Downloading %1...\n"
+"(You can close this window.)"
+msgstr ""
+"%1... उतरवून घेतले जात आहेत\n"
+"(तुम्ही ही खिडकी बंद करू शकता.)"
+
+#: src/gui/ConfigurationDialog.cpp:791
+msgid "Verifying file integrity..."
+msgstr "फाइलची एकात्मता तपासली जात आहे...."
+
+#: src/gui/ConfigurationDialog.cpp:795
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -635,8 +614,8 @@ msgstr ""
 "%1:\n"
 " उतरवून घेण्यात तृटीफाइल खराब आहे."
 
-#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:216
-#: src/gui/StelGuiItems.cpp:577
+#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:286
+#: src/gui/StelGuiItems.cpp:647
 msgid "Space"
 msgstr "स्पेस"
 
@@ -664,7 +643,7 @@ msgstr "उजवी क्लिक"
 msgid "CTRL + Left click"
 msgstr "CTRL + डावी क्लिक"
 
-#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:200
+#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:157
 msgid "Movement and Selection"
 msgstr "हालचाल आणि निवड"
 
@@ -688,15 +667,15 @@ msgstr "निवड रद्द करा"
 msgid "When a Script is Running"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:71 src/gui/StelGui.cpp:179
+#: src/gui/HelpDialog.cpp:71 src/gui/StelGui.cpp:136
 msgid "Slow down the script execution rate"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:180
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:137
 msgid "Speed up the script execution rate"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:181
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:138
 msgid "Set the normal script execution rate"
 msgstr ""
 
@@ -750,383 +729,377 @@ msgstr ""
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:191
 msgid ""
-"{Bug reporting system} - if something doesn't work properly and is not "
-"listed in the FAQ list, you can open bug reports here."
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
 msgstr ""
-"{Bug reporting system} -जर एखादी गोष्ट योग्य तऱ्हेने कार्य करत नसेल "
-"आणि'नेहमी विचारल्या जाणाऱ्या प्रश्नां'मध्येही त्याचा उल्लेख नसेल तर त्या "
-"तृटीची नोंद येथे करा."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:196
-msgid ""
-"{Feature request system} - if you have an idea for a new feature, send it to "
-"us. We can't promise to implement every idea, but we appreciate the feedback "
-"and review the list when we are planning future features."
-msgstr ""
-"{Feature request system} - तुम्हाला एखादी नवीन कल्पना सुचल्यास, ती आम्हाला "
-"पाठवा.प्रत्येक कल्पना आमलात येइल याची आम्ही ग्वाही देत नाही परंतू तुमच्या "
-"प्रोत्साहनाचे आम्हाला कौतूक आहे व भविष्यात सुधारणा करतांना तुमची सुचनेची "
-"जरूर दखल घेउ."
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:201
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forums} स्टेलारीअम बाबत इतरांशी चर्चा करा."
 
-#: src/gui/HelpDialog.cpp:237 src/gui/HelpDialog.cpp:327
-#: src/gui/HelpDialog.cpp:329 src/gui/StelGui.cpp:219
+#: src/gui/HelpDialog.cpp:232 src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:324 src/gui/StelGui.cpp:176
 msgid "Miscellaneous"
 msgstr "इतर"
 
-#: src/gui/HelpDialog.cpp:295
+#: src/gui/HelpDialog.cpp:290
 msgid "Developers"
 msgstr "विकासक"
 
-#: src/gui/HelpDialog.cpp:296
+#: src/gui/HelpDialog.cpp:291
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "प्रकल्प संयोजक आणि पुढाकार विकासक: %1"
 
-#: src/gui/HelpDialog.cpp:297
+#: src/gui/HelpDialog.cpp:292
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "दस्त लेखक / विकासक: %1"
 
-#: src/gui/HelpDialog.cpp:298
+#: src/gui/HelpDialog.cpp:293
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "रेखाचित्र/ इतर रचनाकार: %1"
 
-#: src/gui/HelpDialog.cpp:299 src/gui/HelpDialog.cpp:300
-#: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:295
+#: src/gui/HelpDialog.cpp:297 src/gui/HelpDialog.cpp:298
 #, qt-format
 msgid "Developer: %1"
 msgstr "विकासक: %1"
 
-#: src/gui/HelpDialog.cpp:301
+#: src/gui/HelpDialog.cpp:296
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "ओ एस् एक्स् विकासक: %1"
 
-#: src/gui/StelGui.cpp:139
+#: src/gui/StelGui.cpp:94
 msgid "Display Options"
 msgstr "पटल पर्याय"
 
-#: src/gui/StelGui.cpp:140
+#: src/gui/StelGui.cpp:95
 msgid "Constellation lines"
 msgstr "तारकापुंजाची आकृती"
 
-#: src/gui/StelGui.cpp:141
+#: src/gui/StelGui.cpp:96
 msgid "Constellation art"
 msgstr "तारकापुंजाचे चित्र"
 
-#: src/gui/StelGui.cpp:142
+#: src/gui/StelGui.cpp:97
 msgid "Constellation labels"
 msgstr "तारकापुंज नावे"
 
-#: src/gui/StelGui.cpp:143
+#: src/gui/StelGui.cpp:98
 msgid "Constellation boundaries"
 msgstr "तारकापुंज सीमा"
 
-#: src/gui/StelGui.cpp:145 src/ui_viewDialog.h:1058
+#: src/gui/StelGui.cpp:100 src/ui_viewDialog.h:1027
 msgid "Azimuthal grid"
 msgstr "दिगंश"
 
-#: src/gui/StelGui.cpp:146 src/ui_viewDialog.h:1056
+#: src/gui/StelGui.cpp:101 src/ui_viewDialog.h:1025
 msgid "Equatorial grid"
 msgstr "विषुवांश"
 
-#: src/gui/StelGui.cpp:147 src/ui_viewDialog.h:1057
+#: src/gui/StelGui.cpp:102 src/ui_viewDialog.h:1026
 msgid "Equatorial J2000 grid"
 msgstr "विषुवांश J2000 जाळी"
 
-#: src/gui/StelGui.cpp:148 src/ui_viewDialog.h:1061
+#: src/gui/StelGui.cpp:103
+msgid "Galactic grid"
+msgstr ""
+
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1030
 msgid "Ecliptic line"
 msgstr "अयनवृत्त"
 
-#: src/gui/StelGui.cpp:149 src/ui_viewDialog.h:1059
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1028
 msgid "Equator line"
 msgstr "विषुवृत्त रेषा"
 
-#: src/gui/StelGui.cpp:150 src/ui_viewDialog.h:1060
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1029
 msgid "Meridian line"
 msgstr "मध्यानवृत्त रेषा"
 
-#: src/gui/StelGui.cpp:151 src/ui_viewDialog.h:1062
+#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1031
 msgid "Cardinal points"
 msgstr "प्रमाणक बिंदू"
 
-#: src/gui/StelGui.cpp:153
+#: src/gui/StelGui.cpp:109
 msgid "Ground"
 msgstr "जमीन"
 
-#: src/gui/StelGui.cpp:154 src/ui_viewDialog.h:1040
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1009
 msgid "Atmosphere"
 msgstr "वातावरण"
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:111
 msgid "Fog"
 msgstr "धुके"
 
-#: src/gui/StelGui.cpp:157 src/ui_viewDialog.h:1045
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1014
 msgid "Nebulas"
 msgstr "तेजोमेघ"
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:114
 msgid "Nebulas background images"
 msgstr "तेजोमेघ पार्श्वचित्रे"
 
-#: src/gui/StelGui.cpp:159 src/ui_viewDialog.h:1026 src/ui_viewDialog.h:1044
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:995 src/ui_viewDialog.h:1013
 msgid "Stars"
 msgstr "तारे"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:116
 msgid "Planets labels"
 msgstr "ग्रहांची नावे"
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:117
+msgid "Planet orbits"
+msgstr ""
+
+#: src/gui/StelGui.cpp:119
 msgid "Night mode"
 msgstr "रात्र स्थिती"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:120
 msgid "Full-screen mode"
 msgstr "पुर्ण पटल स्थिती"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:121
 msgid "Flip scene horizontally"
 msgstr "देखाव्याची आडवी बाजू पालट"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:122
 msgid "Flip scene vertically"
 msgstr "देखाव्याची उभी बाजू पालट"
 
-#: src/gui/StelGui.cpp:167
+#: src/gui/StelGui.cpp:124
 msgid "Windows"
 msgstr "खिडकी"
 
-#: src/gui/StelGui.cpp:168
+#: src/gui/StelGui.cpp:125
 msgid "Help window"
 msgstr "सहाय्य खिडकी"
 
-#: src/gui/StelGui.cpp:169
+#: src/gui/StelGui.cpp:126
 msgid "Configuration window"
 msgstr "संरचना खिडकी"
 
-#: src/gui/StelGui.cpp:170
+#: src/gui/StelGui.cpp:127
 msgid "Search window"
 msgstr "शोध खिडकी"
 
-#: src/gui/StelGui.cpp:171
+#: src/gui/StelGui.cpp:128
 msgid "Sky and viewing options window"
 msgstr "आकाश आणि निरिक्षण पर्याय खिडकी"
 
-#: src/gui/StelGui.cpp:172
+#: src/gui/StelGui.cpp:129
 msgid "Date/time window"
 msgstr "दिनांक/वेळ खिडकी"
 
-#: src/gui/StelGui.cpp:173
+#: src/gui/StelGui.cpp:130
 msgid "Location window"
 msgstr "स्थान खिडकी"
 
-#: src/gui/StelGui.cpp:175
+#: src/gui/StelGui.cpp:132
 msgid "Script console window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:178 src/ui_dateTimeDialogGui.h:295
+#: src/gui/StelGui.cpp:135 src/ui_dateTimeDialogGui.h:295
 msgid "Date and Time"
 msgstr "दिनांक आणि वेळ"
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:139
 msgid "Decrease time speed"
 msgstr "वेळेचा वेग कमी करा"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:140
 msgid "Increase time speed"
 msgstr "वेळेचा वेग जास्त करा"
 
-#: src/gui/StelGui.cpp:184
+#: src/gui/StelGui.cpp:141
 msgid "Set normal time rate"
 msgstr "वेळेचा वेग सामान्य ठेवा"
 
-#: src/gui/StelGui.cpp:185
+#: src/gui/StelGui.cpp:142
 msgid "Decrease time speed (a little)"
 msgstr ""
 
-#: src/gui/StelGui.cpp:186
+#: src/gui/StelGui.cpp:143
 msgid "Increase time speed (a little)"
 msgstr ""
 
-#: src/gui/StelGui.cpp:187
+#: src/gui/StelGui.cpp:144
 msgid "Set time rate to zero"
 msgstr "वेळेचा वेग शुन्य करा"
 
-#: src/gui/StelGui.cpp:188
+#: src/gui/StelGui.cpp:145
 msgid "Set time to now"
 msgstr "सध्याच्या वेळेशी सुसंगत करा"
 
-#: src/gui/StelGui.cpp:189
+#: src/gui/StelGui.cpp:146
 msgid "Add 1 solar hour"
 msgstr "१ सौरतास वाढवा"
 
-#: src/gui/StelGui.cpp:190
+#: src/gui/StelGui.cpp:147
 msgid "Subtract 1 solar hour"
 msgstr "१ सौरतास कमी करा"
 
-#: src/gui/StelGui.cpp:191
+#: src/gui/StelGui.cpp:148
 msgid "Add 1 solar day"
 msgstr "१ सौर दिवस वाढवा"
 
-#: src/gui/StelGui.cpp:192
+#: src/gui/StelGui.cpp:149
 msgid "Subtract 1 solar day"
 msgstr "१ सौर दिवस कमी करा"
 
-#: src/gui/StelGui.cpp:193
+#: src/gui/StelGui.cpp:150
 msgid "Add 1 solar week"
 msgstr "१ सौर आठवडा वाढवा"
 
-#: src/gui/StelGui.cpp:194
+#: src/gui/StelGui.cpp:151
 msgid "Subtract 1 solar week"
 msgstr "१ सौर आठवडा कमी करा"
 
-#: src/gui/StelGui.cpp:195
+#: src/gui/StelGui.cpp:152
 msgid "Add 1 sidereal day"
 msgstr "१ नक्षत्र दिवस वाढवा"
 
-#: src/gui/StelGui.cpp:196
+#: src/gui/StelGui.cpp:153
 msgid "Subtract 1 sidereal day"
 msgstr "१ नक्षत्र दिवस कमी करा"
 
-#: src/gui/StelGui.cpp:197
+#: src/gui/StelGui.cpp:154
 msgid "Add 1 sidereal week"
 msgstr "१ नक्षत्र आठवडा वाढवा"
 
-#: src/gui/StelGui.cpp:198
+#: src/gui/StelGui.cpp:155
 msgid "Subtract 1 sidereal week"
 msgstr "१ नक्षत्र आठवडा कमी करा"
 
-#: src/gui/StelGui.cpp:201
+#: src/gui/StelGui.cpp:158
 msgid "Center on selected object"
 msgstr "निवडलेले लक्ष्य मधोमध आणा"
 
-#: src/gui/StelGui.cpp:202
+#: src/gui/StelGui.cpp:159
 msgid "Track object"
 msgstr "लक्ष्याचा मागोवा घ्या"
 
-#: src/gui/StelGui.cpp:203
+#: src/gui/StelGui.cpp:160
 msgid "Zoom in on selected object"
 msgstr "निवडलेले लक्षाचा आकार मोठा करा( निकटन)"
 
-#: src/gui/StelGui.cpp:204
+#: src/gui/StelGui.cpp:161
 msgid "Zoom out"
 msgstr "आकार छोटा करा(दुरावलोकन)"
 
-#: src/gui/StelGui.cpp:205
+#: src/gui/StelGui.cpp:162
 msgid "Set home planet to selected planet"
 msgstr "निवडलेला ग्रह गृह म्हणून निश्चित करा"
 
-#: src/gui/StelGui.cpp:207
+#: src/gui/StelGui.cpp:164
 msgid "Telescope Control"
 msgstr "दुरदर्शी नियंत्रक"
 
-#: src/gui/StelGui.cpp:208
+#: src/gui/StelGui.cpp:165
 msgid "Move telescope #0 to selected object"
 msgstr "दुरदर्शी #0 निवडलेल्या लक्षाकडे वळवा"
 
-#: src/gui/StelGui.cpp:209
+#: src/gui/StelGui.cpp:166
 msgid "Move telescope #1 to selected object"
 msgstr "दुरदर्शी #1 निवडलेल्या लक्षाकडे वळवा"
 
-#: src/gui/StelGui.cpp:210
+#: src/gui/StelGui.cpp:167
 msgid "Move telescope #2 to selected object"
 msgstr "दुरदर्शी #2 निवडलेल्या लक्षाकडे वळवा"
 
-#: src/gui/StelGui.cpp:211
+#: src/gui/StelGui.cpp:168
 msgid "Move telescope #3 to selected object"
 msgstr "दुरदर्शी #3 निवडलेल्या लक्षाकडे वळवा"
 
-#: src/gui/StelGui.cpp:212
+#: src/gui/StelGui.cpp:169
 msgid "Move telescope #4 to selected object"
 msgstr "दुरदर्शी #4 निवडलेल्या लक्षाकडे वळवा"
 
-#: src/gui/StelGui.cpp:213
+#: src/gui/StelGui.cpp:170
 msgid "Move telescope #5 to selected object"
 msgstr "दुरदर्शी #5 निवडलेल्या लक्षाकडे वळवा"
 
-#: src/gui/StelGui.cpp:214
+#: src/gui/StelGui.cpp:171
 msgid "Move telescope #6 to selected object"
 msgstr "दुरदर्शी #6 निवडलेल्या लक्षाकडे वळवा"
 
-#: src/gui/StelGui.cpp:215
+#: src/gui/StelGui.cpp:172
 msgid "Move telescope #7 to selected object"
 msgstr "दुरदर्शी #7 निवडलेल्या लक्षाकडे वळवा"
 
-#: src/gui/StelGui.cpp:216
+#: src/gui/StelGui.cpp:173
 msgid "Move telescope #8 to selected object"
 msgstr "दुरदर्शी #8 निवडलेल्या लक्षाकडे वळवा"
 
-#: src/gui/StelGui.cpp:217
+#: src/gui/StelGui.cpp:174
 msgid "Move telescope #9 to selected object"
 msgstr "दुरदर्शी #9 निवडलेल्या लक्षाकडे वळवा"
 
-#: src/gui/StelGui.cpp:220
+#: src/gui/StelGui.cpp:177
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "विषुवांश व दिगंश आरोपण यात बदल करा"
 
-#: src/gui/StelGui.cpp:221
+#: src/gui/StelGui.cpp:178
 msgid "Quit"
 msgstr "बाहेर पडा"
 
-#: src/gui/StelGui.cpp:222
+#: src/gui/StelGui.cpp:179
 msgid "Save screenshot"
 msgstr "पटलचित्र साठवून ठेवा"
 
-#: src/gui/StelGui.cpp:225
+#: src/gui/StelGui.cpp:182
 msgid "Auto hide horizontal button bar"
 msgstr "आडवी कळ पट्टी स्वत:हून लपवा"
 
-#: src/gui/StelGui.cpp:226
+#: src/gui/StelGui.cpp:183
 msgid "Auto hide vertical button bar"
 msgstr "उभी कळ पट्टी स्वत:हून लपवा"
 
-#: src/gui/StelGui.cpp:227
-msgid "Toggle visibility of toolbars"
-msgstr "दृश्यता साहित्यपट्टी  चालू/बंद करा"
+#: src/gui/StelGui.cpp:184
+msgid "Toggle visibility of GUI"
+msgstr ""
 
-#: src/gui/StelGuiItems.cpp:478
+#: src/gui/StelGuiItems.cpp:548
 #, no-c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:380
+#: src/gui/ViewDialog.cpp:388
 msgid "No description"
 msgstr "टिपणी नाही"
 
-#: src/gui/ViewDialog.cpp:436
+#: src/gui/ViewDialog.cpp:444
 msgid "No shooting stars"
 msgstr "उल्कावर्षाव नाही"
 
-#: src/gui/ViewDialog.cpp:439
+#: src/gui/ViewDialog.cpp:447
 msgid "Normal rate"
 msgstr "सामान्य वेग"
 
-#: src/gui/ViewDialog.cpp:442
+#: src/gui/ViewDialog.cpp:450
 msgid "Standard Perseids rate"
 msgstr "ययाती तारकासमूहातून होणाऱ्या उल्कावर्षावाचा वेग"
 
-#: src/gui/ViewDialog.cpp:445
+#: src/gui/ViewDialog.cpp:453
 msgid "Exceptional Leonid rate"
 msgstr "सिंह तारकासमूहातून होणाऱ्या असाधारण उल्कावर्षावाचा वेग"
 
-#: src/gui/ViewDialog.cpp:448
+#: src/gui/ViewDialog.cpp:456
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "उच्चतम वेग (1966 सिंह तारकासमुह)"
 
-#: src/gui/LocationDialog.cpp:339
+#: src/gui/LocationDialog.cpp:340
 msgid "New Location"
 msgstr "नविन स्थान"
 
-#: src/main.cpp:105
+#: src/main.cpp:308
 msgid "This system does not support OpenGL."
 msgstr "हा संगणक ओपनजीएल कार्यप्रणालीशी सुसंगत नाही."
 
@@ -1259,52 +1232,56 @@ msgid "W"
 msgstr "प"
 
 #: src/translations.h:69
+msgid "Aztec"
+msgstr ""
+
+#: src/translations.h:70
 msgid "Chinese"
 msgstr "चायनीज"
 
-#: src/translations.h:70
+#: src/translations.h:71
 msgid "Egyptian"
 msgstr "इजिप्शिअन"
 
-#: src/translations.h:71
+#: src/translations.h:72
 msgid "Inuit"
 msgstr "इन्युट"
 
-#: src/translations.h:72
+#: src/translations.h:73
 msgid "Korean"
 msgstr "कोरियन"
 
-#: src/translations.h:73
+#: src/translations.h:74
 msgid "Lakota"
 msgstr "लॅकोटा"
 
-#: src/translations.h:74
+#: src/translations.h:75
 msgid "Maori"
 msgstr ""
 
-#: src/translations.h:75
+#: src/translations.h:76
 msgid "Navajo"
 msgstr "नवाजो"
 
-#: src/translations.h:76
+#: src/translations.h:77
 msgid "Norse"
 msgstr "नॉर्स"
 
-#: src/translations.h:77
+#: src/translations.h:78
 msgid "Polynesian"
 msgstr "पॉलीनेशिअन"
 
-#: src/translations.h:78
+#: src/translations.h:79
 msgid "Western"
 msgstr "पाश्चिमात्य"
 
-#: src/translations.h:79
+#: src/translations.h:80
 msgid "Tupi-Guarani"
 msgstr "टुपी-गौरानी"
 
 #: src/ui_dateTimeDialogGui.h:294 src/ui_helpDialogGui.h:259
-#: src/ui_locationDialogGui.h:387 src/ui_viewDialog.h:1008
-#: src/ui_configurationDialog.h:739
+#: src/ui_locationDialogGui.h:387 src/ui_viewDialog.h:979
+#: src/ui_configurationDialog.h:746
 msgid "Form"
 msgstr "प्रकार"
 
@@ -1400,232 +1377,216 @@ msgstr "आकाशस्थ वस्तूचा शोध"
 msgid "RA/Dec (J2000):"
 msgstr "RA/Dec (J2000)"
 
-#: src/ui_viewDialog.h:1009
+#: src/ui_viewDialog.h:980
 msgid "View"
 msgstr "दृष्य"
 
-#: src/ui_viewDialog.h:1015
+#: src/ui_viewDialog.h:986
 msgid "Sky"
 msgstr "आकाश"
 
-#: src/ui_viewDialog.h:1017
+#: src/ui_viewDialog.h:988
 msgid "Markings"
 msgstr "आरेखन"
 
-#: src/ui_viewDialog.h:1019
+#: src/ui_viewDialog.h:990
 msgid "Landscape"
 msgstr "देखावा"
 
-#: src/ui_viewDialog.h:1021
+#: src/ui_viewDialog.h:992
 msgid "Starlore"
 msgstr "स्टॅलोर"
 
-#: src/ui_viewDialog.h:1023
-msgid "Images"
-msgstr "चित्रे"
-
-#: src/ui_viewDialog.h:1027
+#: src/ui_viewDialog.h:996
 msgid "Absolute scale:"
 msgstr "निरपेक्ष माप:"
 
-#: src/ui_viewDialog.h:1028
+#: src/ui_viewDialog.h:997
 msgid "Relative scale:"
 msgstr "सापेक्ष माप:"
 
-#: src/ui_viewDialog.h:1029
+#: src/ui_viewDialog.h:998
 msgid "Twinkle:"
 msgstr "लुकलुक:"
 
-#: src/ui_viewDialog.h:1031
+#: src/ui_viewDialog.h:1000
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "आकाशस्थ वस्तू प्रखर असतांना पुसट तारे मंद करा"
 
-#: src/ui_viewDialog.h:1033
+#: src/ui_viewDialog.h:1002
 msgid "Dynamic eye adaptation"
 msgstr "नेत्र अनुकुलन"
 
-#: src/ui_viewDialog.h:1034
+#: src/ui_viewDialog.h:1003
 msgid "Planets and satellites"
 msgstr "ग्रह व उपग्रह"
 
-#: src/ui_viewDialog.h:1035
+#: src/ui_viewDialog.h:1004
 msgid "Show planets"
 msgstr "ग्रह दर्शवा"
 
-#: src/ui_viewDialog.h:1036
+#: src/ui_viewDialog.h:1005
 msgid "Show planet markers"
 msgstr "ग्रह दर्शक दाखवा"
 
-#: src/ui_viewDialog.h:1037
+#: src/ui_viewDialog.h:1006
 msgid "Show planet orbits"
 msgstr "ग्रहकक्षा दर्शवा"
 
-#: src/ui_viewDialog.h:1038
+#: src/ui_viewDialog.h:1007
 msgid "Simulate light speed"
 msgstr "प्रकाशिय गतीचे सादृशीकरण"
 
-#: src/ui_viewDialog.h:1039
+#: src/ui_viewDialog.h:1008
 msgid "Scale Moon"
 msgstr "चंद्र मापन"
 
-#: src/ui_viewDialog.h:1041
+#: src/ui_viewDialog.h:1010
 msgid "Show atmosphere"
 msgstr "वातावरण दर्शवा"
 
-#: src/ui_viewDialog.h:1042
+#: src/ui_viewDialog.h:1011
 msgid "Light pollution: "
 msgstr "प्रकाश प्रदुषण: "
 
-#: src/ui_viewDialog.h:1043
+#: src/ui_viewDialog.h:1012
 msgid "Labels and Markers"
 msgstr "नावे आणि दर्शक"
 
-#: src/ui_viewDialog.h:1046
+#: src/ui_viewDialog.h:1015
 msgid "Planets"
 msgstr "ग्रह"
 
-#: src/ui_viewDialog.h:1047
+#: src/ui_viewDialog.h:1016
 msgid "Shooting Stars"
 msgstr "उल्का"
 
-#: src/ui_viewDialog.h:1048
+#: src/ui_viewDialog.h:1017
 msgid "Hourly zenith rate:"
 msgstr "क्षितिज तास दर:"
 
-#: src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1018
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:1050
+#: src/ui_viewDialog.h:1019
 msgid "10"
 msgstr "१०"
 
-#: src/ui_viewDialog.h:1051
+#: src/ui_viewDialog.h:1020
 msgid "80"
 msgstr "८०"
 
-#: src/ui_viewDialog.h:1052
+#: src/ui_viewDialog.h:1021
 msgid "10000"
 msgstr "१००००"
 
-#: src/ui_viewDialog.h:1053
+#: src/ui_viewDialog.h:1022
 msgid "144000"
 msgstr "१४४०००"
 
-#: src/ui_viewDialog.h:1055
+#: src/ui_viewDialog.h:1024
 msgid "Celestial Sphere"
 msgstr "खगोल"
 
-#: src/ui_viewDialog.h:1063
+#: src/ui_viewDialog.h:1032
 msgid "Constellations"
 msgstr "तारकापुंज"
 
-#: src/ui_viewDialog.h:1064
+#: src/ui_viewDialog.h:1033
 msgid "Show lines"
 msgstr "आकृती दाखवा"
 
-#: src/ui_viewDialog.h:1065
+#: src/ui_viewDialog.h:1034
 msgid "Show labels"
 msgstr "नावे दाखवा"
 
-#: src/ui_viewDialog.h:1066
+#: src/ui_viewDialog.h:1035
 msgid "Show boundaries"
 msgstr "सीमा दर्शवा"
 
-#: src/ui_viewDialog.h:1067
+#: src/ui_viewDialog.h:1036
 msgid "Show art"
 msgstr "चित्र दर्शवा"
 
-#: src/ui_viewDialog.h:1068
+#: src/ui_viewDialog.h:1037
 msgid "Art brightness: "
 msgstr "चित्र तिव्रता: "
 
-#: src/ui_viewDialog.h:1069
+#: src/ui_viewDialog.h:1038
 msgid "Projection"
 msgstr "प्रक्षेप"
 
-#: src/ui_viewDialog.h:1070 src/ui_viewDialog.h:1075 src/ui_viewDialog.h:1080
-#: src/ui_configurationDialog.h:846 src/ui_configurationDialog.h:857
+#: src/ui_viewDialog.h:1039 src/ui_viewDialog.h:1044 src/ui_viewDialog.h:1046
+#: src/ui_configurationDialog.h:853 src/ui_configurationDialog.h:864
 msgid "Options"
 msgstr "पर्याय"
 
-#: src/ui_viewDialog.h:1071
+#: src/ui_viewDialog.h:1040
 msgid "Show ground"
 msgstr "जमीन दर्शवा"
 
-#: src/ui_viewDialog.h:1072
+#: src/ui_viewDialog.h:1041
 msgid "Show fog"
 msgstr "धुके दाखवा"
 
-#: src/ui_viewDialog.h:1073
+#: src/ui_viewDialog.h:1042
 msgid "Use associated planet and position"
 msgstr "संबंधीत ग्रह व स्थाने वापरा"
 
-#: src/ui_viewDialog.h:1074
+#: src/ui_viewDialog.h:1043
 msgid "Use this landscape as default"
 msgstr "हा देखावा मुळ देखावा म्हणून वापरा"
 
-#: src/ui_viewDialog.h:1076
-msgid "Use associated language for sky labeling"
-msgstr "आकाशातील नावे दर्शवतांना त्या संबधीत भाषेचा वापर करा"
-
-#: src/ui_viewDialog.h:1077
+#: src/ui_viewDialog.h:1045
 msgid "Use this sky culture as default"
 msgstr "ही अवकाशपद्धत मूळ म्हणून वापरा"
 
-#: src/ui_viewDialog.h:1078
-msgid "Add"
-msgstr "वाढवा"
-
-#: src/ui_viewDialog.h:1079
-msgid "Remove"
-msgstr ""
-
-#: src/ui_viewDialog.h:1081
+#: src/ui_viewDialog.h:1047
 msgid "Visible"
 msgstr ""
 
-#: src/ui_configurationDialog.h:740
+#: src/ui_configurationDialog.h:747
 msgid "Configuration"
 msgstr "संरचना"
 
-#: src/ui_configurationDialog.h:742
+#: src/ui_configurationDialog.h:749
 msgid "Program language"
 msgstr "आज्ञावलीची भाषा"
 
-#: src/ui_configurationDialog.h:743
+#: src/ui_configurationDialog.h:750
 msgid "Selected object information"
 msgstr "निवडलेल्या वस्तूची माहिती"
 
-#: src/ui_configurationDialog.h:745
+#: src/ui_configurationDialog.h:752
 msgid "Display all information available"
 msgstr "उपलब्ध असलेली सर्व माहिती"
 
-#: src/ui_configurationDialog.h:747
+#: src/ui_configurationDialog.h:754
 msgid "All available"
 msgstr "सर्व माहिती"
 
-#: src/ui_configurationDialog.h:749
+#: src/ui_configurationDialog.h:756
 msgid "Display less information"
 msgstr "फक्त संक्षिप्त माहिती"
 
-#: src/ui_configurationDialog.h:751
+#: src/ui_configurationDialog.h:758
 msgid "Short"
 msgstr "संक्षिप्त"
 
-#: src/ui_configurationDialog.h:753
+#: src/ui_configurationDialog.h:760
 msgid "Display no information"
 msgstr "माहिती दर्शवू नका"
 
-#: src/ui_configurationDialog.h:755
+#: src/ui_configurationDialog.h:762
 msgid "None"
 msgstr "माहिती नाही"
 
-#: src/ui_configurationDialog.h:756
+#: src/ui_configurationDialog.h:763
 msgid "Default options"
 msgstr "मूळ पर्याय"
 
-#: src/ui_configurationDialog.h:758
+#: src/ui_configurationDialog.h:765
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -1633,19 +1594,19 @@ msgstr ""
 "केलेल्या बदलांसह पुढच्यावेळी स्टेलारिअम सुरू होण्यासाठी पर्याय साठवून ठेवले "
 "जातील"
 
-#: src/ui_configurationDialog.h:760
+#: src/ui_configurationDialog.h:767
 msgid "Save settings"
 msgstr "पर्याय साठवा"
 
-#: src/ui_configurationDialog.h:762
+#: src/ui_configurationDialog.h:769
 msgid "Restore the default settings that came with Stellarium"
 msgstr "स्टेलारीअमचे मुळ पर्याय परत स्थापित करा"
 
-#: src/ui_configurationDialog.h:764
+#: src/ui_configurationDialog.h:771
 msgid "Restore defaults"
 msgstr "मूळ पर्याय परत मिळवा"
 
-#: src/ui_configurationDialog.h:765
+#: src/ui_configurationDialog.h:772
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -1655,57 +1616,57 @@ msgstr ""
 "करावे.सध्याचे दृष्टीक्षेत्र व बघण्याची दिशा हे सध्याचे साठवलेले पर्यायसुद्धा "
 "स्टेलारीअम परत चालू झाल्यावर वापरात येतील."
 
-#: src/ui_configurationDialog.h:767
+#: src/ui_configurationDialog.h:774
 msgid "The width of your view when Stellarium starts"
 msgstr "स्टेलारिअम सुरु होतांनाची तुमच्या दृष्टीची रुंदी"
 
-#: src/ui_configurationDialog.h:769
+#: src/ui_configurationDialog.h:776
 msgid "Startup FOV: XX"
 msgstr "सुरुवातीचे दृष्टीक्षेत्र: XX"
 
-#: src/ui_configurationDialog.h:771
+#: src/ui_configurationDialog.h:778
 msgid "The direction you're looking when Stellarium starts"
 msgstr "स्टेलारिअम सुरु होतांनाची तुमच्या बघण्याची दिशा"
 
-#: src/ui_configurationDialog.h:773
+#: src/ui_configurationDialog.h:780
 msgid "Startup direction of view: xxxx"
 msgstr "सुरु होतांनाची बघण्याची दिशा: xxxx"
 
-#: src/ui_configurationDialog.h:774
+#: src/ui_configurationDialog.h:781
 msgid "Control"
 msgstr "नियंत्रण"
 
-#: src/ui_configurationDialog.h:776
+#: src/ui_configurationDialog.h:783
 msgid "Allow keyboard to pan and zoom"
 msgstr "कळफलकाच्या सहाय्याने चित्र सरकवणे किंवा मोठे करण्याची परवानगी"
 
-#: src/ui_configurationDialog.h:778
+#: src/ui_configurationDialog.h:785
 msgid "Enable keyboard navigation"
 msgstr "कळफलकाच्या सहाय्याने सुत्रसंचालानास परवानगी"
 
-#: src/ui_configurationDialog.h:780
+#: src/ui_configurationDialog.h:787
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "माउसच्या सहाय्याने चित्र सरकवले(क्लिक दाबून खेचा) किंवा लहान/मोठे "
 "केले(माउसव्हील) जाईल"
 
-#: src/ui_configurationDialog.h:782
+#: src/ui_configurationDialog.h:789
 msgid "Enable mouse navigation"
 msgstr "माउसच्या सहाय्याने सुत्रसंचालानास परवानगी"
 
-#: src/ui_configurationDialog.h:783
+#: src/ui_configurationDialog.h:790
 msgid "Startup date and time"
 msgstr "सूरु होतांनाचा दिनांक व वेळ"
 
-#: src/ui_configurationDialog.h:785
+#: src/ui_configurationDialog.h:792
 msgid "Starts Stellarium at system clock date and time"
 msgstr "स्टेलरीअम सुरु करतांना संगणकाची दिनांक व वेळ वापरा"
 
-#: src/ui_configurationDialog.h:787
+#: src/ui_configurationDialog.h:794
 msgid "System date and time"
 msgstr "संगणकाची दिनांक व वेळ"
 
-#: src/ui_configurationDialog.h:789
+#: src/ui_configurationDialog.h:796
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -1713,47 +1674,47 @@ msgstr ""
 "पुढील वेळेस स्टेलारीअम चालू होतांना या दिवसाच्या याच वेळेचा "
 "वापरसादृशीकरणासाठी केला जाइल"
 
-#: src/ui_configurationDialog.h:791
+#: src/ui_configurationDialog.h:798
 msgid "System date at:"
 msgstr "संगणकाचा दिनांक:"
 
-#: src/ui_configurationDialog.h:793
+#: src/ui_configurationDialog.h:800
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "स्टेलारीअम सुरु होतांना विशिष्ट दिनांक व वेळ वापरा"
 
-#: src/ui_configurationDialog.h:795
+#: src/ui_configurationDialog.h:802
 msgid "Other:"
 msgstr "इतर:"
 
-#: src/ui_configurationDialog.h:796
+#: src/ui_configurationDialog.h:803
 msgid "use current"
 msgstr "सध्याची वापरा"
 
-#: src/ui_configurationDialog.h:797
+#: src/ui_configurationDialog.h:804
 msgid "Other"
 msgstr "इतर"
 
-#: src/ui_configurationDialog.h:799
+#: src/ui_configurationDialog.h:806
 msgid "Hides the mouse cursor when inactive"
 msgstr "वापरात नसेल तेव्हा माउसचा निदर्शक लपवला जाईल"
 
-#: src/ui_configurationDialog.h:801
+#: src/ui_configurationDialog.h:808
 msgid "Mouse cursor timeout (seconds):"
 msgstr "माउस निदर्शक कालमर्यादा(सेकंद)"
 
-#: src/ui_configurationDialog.h:803
+#: src/ui_configurationDialog.h:810
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "चित्राची उभी किंवा आडवी पलट कळ"
 
-#: src/ui_configurationDialog.h:805
+#: src/ui_configurationDialog.h:812
 msgid "Show flip buttons"
 msgstr "पलट कळ दर्शवा"
 
-#: src/ui_configurationDialog.h:806
+#: src/ui_configurationDialog.h:813
 msgid "Planetarium options"
 msgstr "तारांगण पर्याय"
 
-#: src/ui_configurationDialog.h:808
+#: src/ui_configurationDialog.h:815
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -1761,125 +1722,129 @@ msgstr ""
 "कमी खर्चाच्या वक्र आरशावरील तारांगणा पद्धतीत स्टेलारीअमच्या "
 "प्रक्षेपणासाठीवक्र आरसा विचरण वापरले जाते."
 
-#: src/ui_configurationDialog.h:810
+#: src/ui_configurationDialog.h:817
 msgid "Spheric mirror distortion"
 msgstr "वक्र आरसा विचरण"
 
-#: src/ui_configurationDialog.h:812
+#: src/ui_configurationDialog.h:819
 msgid "Align labels with the horizon"
 msgstr "नावे क्षितिज पातळीशी जुळवून घ्या"
 
-#: src/ui_configurationDialog.h:814
+#: src/ui_configurationDialog.h:821
 msgid "Gravity labels"
 msgstr "गुरुत्वीय नावे"
 
-#: src/ui_configurationDialog.h:816
+#: src/ui_configurationDialog.h:823
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
 "सक्रिय असेल तेव्हा \"auto zoom out\" कळ, प्रारंभीक दृष्टी दिशापणनिश्चित करेल"
 
-#: src/ui_configurationDialog.h:818
+#: src/ui_configurationDialog.h:825
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "स्वचालीत दुरावलोकन दृश्याच्या मुळ दिशेला परत येइल"
 
-#: src/ui_configurationDialog.h:820
+#: src/ui_configurationDialog.h:827
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "मुख्य दृष्यामध्ये मध्य वर्तूळाबाहेरील सर्व झाकले जाईल"
 
-#: src/ui_configurationDialog.h:822
+#: src/ui_configurationDialog.h:829
 msgid "Disc viewport"
 msgstr "वर्तूळ दृष्यपद्धत"
 
-#: src/ui_configurationDialog.h:824
+#: src/ui_configurationDialog.h:831
 msgid "Hide other constellations when you click one"
 msgstr "एकावर क्लिक केल्यावर इतर तारकापुंज लपवा"
 
-#: src/ui_configurationDialog.h:826
+#: src/ui_configurationDialog.h:833
 msgid "Select single constellation"
 msgstr "एकच तारकापुंज निवडा"
 
-#: src/ui_configurationDialog.h:827
+#: src/ui_configurationDialog.h:834
 msgid "Screenshots"
 msgstr "पटलचित्र"
 
-#: src/ui_configurationDialog.h:828
+#: src/ui_configurationDialog.h:835
 msgid "Screenshot Directory"
 msgstr "पटलचित्र संचिका"
 
-#: src/ui_configurationDialog.h:830
+#: src/ui_configurationDialog.h:837
 msgid "Invert colors"
 msgstr "रंग पालट"
 
-#: src/ui_configurationDialog.h:831
+#: src/ui_configurationDialog.h:838
 msgid "Star catalog updates"
 msgstr "तारकासूची आद्ययावत"
 
-#: src/ui_configurationDialog.h:833
+#: src/ui_configurationDialog.h:840
 msgid "Click here to start downloading"
 msgstr "उतरवून घेण्यासाठी येथे क्लिक करा"
 
-#: src/ui_configurationDialog.h:835
+#: src/ui_configurationDialog.h:842
 msgid "Get catalog x of y"
 msgstr "x ची y सुची मिळवा"
 
-#: src/ui_configurationDialog.h:836
+#: src/ui_configurationDialog.h:843
 msgid "Download this file to view even more stars"
 msgstr "आणखी जास्त तारे पाहण्यासाठी ही संचिका उतरवून घ्या"
 
-#: src/ui_configurationDialog.h:837
+#: src/ui_configurationDialog.h:844
 msgid "xxx"
 msgstr "xxx"
 
-#: src/ui_configurationDialog.h:839
+#: src/ui_configurationDialog.h:846
 msgid "Restart the download"
 msgstr "उतरवून घेण्याचे कार्य पुन्हा सुरु करा"
 
-#: src/ui_configurationDialog.h:841
+#: src/ui_configurationDialog.h:848
 msgid "Retry"
 msgstr "पुन्हा प्रयत्न करा"
 
-#: src/ui_configurationDialog.h:843
+#: src/ui_configurationDialog.h:850
 msgid "Stop the download. You can always restart it later"
 msgstr "उतरवून घेण्याचे कार्य थांबवा, तुम्ही ते नंतर ते कधीही करू शकता"
 
-#: src/ui_configurationDialog.h:845
+#: src/ui_configurationDialog.h:852
 msgid "Cancel"
 msgstr "रद्द"
 
-#: src/ui_configurationDialog.h:848
+#: src/ui_configurationDialog.h:855
 msgid "Close window when script runs"
 msgstr "आज्ञावली सुरु असतांना खिडकी बंद करा"
 
-#: src/ui_configurationDialog.h:850
+#: src/ui_configurationDialog.h:857
 msgid "Run the selected script"
 msgstr "निवडलेली आज्ञावली चालू करा"
 
-#: src/ui_configurationDialog.h:854
+#: src/ui_configurationDialog.h:861
 msgid "Stop a running script"
 msgstr "चालू असलेली आज्ञावली थांबवा"
 
-#: src/ui_configurationDialog.h:858
+#: src/ui_configurationDialog.h:865
 msgid "Load at startup"
 msgstr ""
 
-#: src/ui_configurationDialog.h:863
+#: src/ui_configurationDialog.h:866
+msgid "configure"
+msgstr ""
+
+#: src/ui_configurationDialog.h:871
 msgid "Main"
 msgstr "मुख्य"
 
-#: src/ui_configurationDialog.h:865
+#: src/ui_configurationDialog.h:873
 msgid "Navigation"
 msgstr "निर्देशन"
 
-#: src/ui_configurationDialog.h:867
+#: src/ui_configurationDialog.h:875
 msgid "Tools"
 msgstr "साधने"
 
-#: src/ui_configurationDialog.h:869
+#: src/ui_configurationDialog.h:877
 msgid "Scripts"
 msgstr "आज्ञावली"
 
-#: src/ui_configurationDialog.h:871
+#: src/ui_configurationDialog.h:879
 msgid "Plugins"
 msgstr ""
