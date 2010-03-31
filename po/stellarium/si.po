@@ -7,91 +7,95 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-09-07 17:46+0200\n"
-"PO-Revision-Date: 2009-11-22 19:26+0000\n"
-"Last-Translator: අනුරාධ Jayathilaka <astroanu2004@yahoo.co.uk>\n"
+"POT-Creation-Date: 2010-01-28 17:53+0100\n"
+"PO-Revision-Date: 2010-02-08 14:50+0000\n"
+"Last-Translator: R.H. Sameera Madusanka (සමීර මධුසංක) <Unknown>\n"
 "Language-Team: Sinhalese <si@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-01-28 13:36+0000\n"
+"X-Launchpad-Export-Date: 2010-03-31 16:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SRI LANKA\n"
 "X-Poedit-Language: Estonian\n"
 
-#: src/modules/StarMgr.cpp:312
+#: src/modules/StarMgr.cpp:396
 #, qt-format
 msgid "Loading catalog %1 from file %2"
 msgstr "සූචිය විවෘත වෙමින් පවතී %1/%2"
 
-#: src/modules/LandscapeMgr.cpp:415
+#: src/modules/LandscapeMgr.cpp:425
 msgid "Author: "
 msgstr "කර්තෘ: "
 
-#: src/modules/LandscapeMgr.cpp:418
+#: src/modules/LandscapeMgr.cpp:428
 msgid "Location: "
 msgstr "ස්ථානය: "
 
-#: src/modules/LandscapeMgr.cpp:423
+#: src/modules/LandscapeMgr.cpp:433
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/modules/LandscapeMgr.cpp:426
+#: src/modules/LandscapeMgr.cpp:436
 msgid "Planet: "
 msgstr "ග්‍රහලොව: "
 
-#: src/modules/Nebula.cpp:91
+#: src/modules/Nebula.cpp:92
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "වර්ගය: <b>%1</b>"
 
-#: src/modules/Nebula.cpp:94 src/modules/Planet.cpp:130
+#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:130
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "දීප්තතාවය: <b>%1</b>"
 
-#: src/modules/Nebula.cpp:99
+#: src/modules/Nebula.cpp:100
 #, qt-format
 msgid "Size: %1"
 msgstr "ප්‍රමාණය: %1"
 
-#: src/modules/Nebula.cpp:235
+#: src/modules/Nebula.cpp:269
 msgid "Galaxy"
 msgstr "චක්‍රාවාටය"
 
-#: src/modules/Nebula.cpp:238
+#: src/modules/Nebula.cpp:272
 msgid "Open cluster"
 msgstr "විවෘත තරු පොකුර"
 
-#: src/modules/Nebula.cpp:241
+#: src/modules/Nebula.cpp:275
 msgid "Globular cluster"
 msgstr "ගෝලීය තරු පොකුර"
 
-#: src/modules/Nebula.cpp:244
+#: src/modules/Nebula.cpp:278
 msgid "Nebula"
 msgstr "නිහාරිකාව"
 
-#: src/modules/Nebula.cpp:247
+#: src/modules/Nebula.cpp:281
 msgid "Planetary nebula"
 msgstr "ග්‍රහලෝකමය නිහාරිකාව"
 
-#: src/modules/Nebula.cpp:250
+#: src/modules/Nebula.cpp:284
 msgid "Cluster associated with nebulosity"
 msgstr "තරු පොකුර නිසා නිහාරිකාව ආලෝකමත් වේ"
 
-#: src/modules/Nebula.cpp:253
+#: src/modules/Nebula.cpp:287
 msgid "Unknown"
-msgstr "නොදත්"
+msgstr "නොදන්නා"
 
-#: src/modules/Nebula.cpp:256
+#: src/modules/Nebula.cpp:290
 msgid "Undocumented type"
 msgstr "සොයාගෙන නොමැත"
 
-#: src/modules/NebulaMgr.cpp:350
+#: src/modules/NebulaMgr.cpp:346
 #, qt-format
 msgid "Loading NGC catalog: %1/%2"
 msgstr "NGC නාමාවලිය  ලබාගනිමින් පවතී: %1/%2"
+
+#: src/modules/NebulaMgr.cpp:379
+msgid "Loading NGC catalog"
+msgstr "NGC නාමාවලිය පූරණය වෙමින් පවතී"
 
 #: src/modules/Planet.cpp:133 src/modules/StarWrapper.cpp:113
 #, qt-format
@@ -121,7 +125,7 @@ msgstr "වර්ණාවලික වර්ගය: %1"
 #: src/modules/StarWrapper.cpp:123
 #, qt-format
 msgid "Distance: %1 Light Years"
-msgstr "දුර: ආලෝක වර්ශ %1"
+msgstr "දුර: ආලෝක වර්ෂ %1"
 
 #: src/modules/StarWrapper.cpp:126
 #, qt-format
@@ -134,7 +138,7 @@ msgstr "ස්ථානය තෝරන්න "
 
 #: src/modules/TextUI.cpp:64
 msgid "Set Time "
-msgstr "වෙලාව තෝරන්න "
+msgstr "වේලාව තෝරන්න "
 
 #: src/modules/TextUI.cpp:65
 msgid "General "
@@ -182,7 +186,7 @@ msgstr "අහස් වේලාව "
 
 #: src/modules/TextUI.cpp:80
 msgid "Set Time Zone: "
-msgstr "වෙලා කලාපය තෝරන්න: "
+msgstr "වේලා කලාපය තෝරන්න: "
 
 #: src/modules/TextUI.cpp:81
 msgid "Day keys: "
@@ -190,7 +194,7 @@ msgstr "දින යතුරු "
 
 #: src/modules/TextUI.cpp:82
 msgid "Calendar"
-msgstr "දින දර්ශණය"
+msgstr "දිනදසුන"
 
 #: src/modules/TextUI.cpp:83
 msgid "Sidereal"
@@ -222,7 +226,7 @@ msgstr "දින සහ කාල ක්‍රමය "
 
 #: src/modules/TextUI.cpp:92
 msgid "Sky Culture: "
-msgstr "ස්කයි කල්චර් "
+msgstr "අහස් සංස්කෘතිය "
 
 #: src/modules/TextUI.cpp:93
 msgid "Sky Language: "
@@ -326,7 +330,7 @@ msgstr "මැනුවල් සූම් "
 
 #: src/modules/TextUI.cpp:124
 msgid "Object Sizing Rule: "
-msgstr "වසතු ප්‍රමාණ රූල "
+msgstr "වස්තු ප්‍රමාණ රූල "
 
 #: src/modules/TextUI.cpp:125
 msgid "Magnitude Scaling Multiplier: "
@@ -350,7 +354,7 @@ msgstr "කර්සරය හැංගෙන වෙලාව "
 
 #: src/modules/TextUI.cpp:130
 msgid "Correct for light travel time: "
-msgstr "ආලෝකයෙ වේගන නිවැරදි කිරීම "
+msgstr "ආලෝකයෙ වේගය නිවැරදි කිරීම "
 
 #: src/modules/TextUI.cpp:133
 msgid "Local Script: "
@@ -366,7 +370,7 @@ msgstr "USB සික්‍රිප්ට් "
 
 #: src/modules/TextUI.cpp:136
 msgid "Arrow down to load list."
-msgstr "ලැයිස්තුව ලබා ගැනීමට ඊ තලය පහතට දමන්න"
+msgstr "ලැයිස්තුව ලබා ගැනීමට පහළ ඊ තලය බොත්තම ඇතුලු කරන්න"
 
 #: src/modules/TextUI.cpp:137
 msgid "Select and exit to run."
@@ -374,11 +378,11 @@ msgstr "ක්‍රියාත්මක කිරීමට තෝරා ඉව
 
 #: src/modules/TextUI.cpp:140
 msgid "Load Default Configuration: "
-msgstr "සුපුරුදු සැකසුම් "
+msgstr "පෙරසැකසූ සැකසුම් "
 
 #: src/modules/TextUI.cpp:141
 msgid "Save Current Configuration as Default: "
-msgstr "වර්තමාන සැකසුම් සුපුරුදු සැකසුම් කරන්න: "
+msgstr "වර්තමාන සැකසුම් පෙරසැකසුම් කරන්න: "
 
 #: src/modules/TextUI.cpp:142
 msgid "Shut Down: "
@@ -394,7 +398,7 @@ msgstr "UI හි භාෂාව තෝරන්න "
 
 #: src/core/StelProjector.cpp:61
 msgid "Maximum FOV: "
-msgstr ""
+msgstr "උපරිම දර්ශණ පථය "
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
@@ -417,8 +421,8 @@ msgid ""
 "The full name of this projection method is, <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
-"මෙම ප්‍රක්ෂේපණ ක්‍රමයේ සම්පූර්ණ නාමය වන්නේ <i>ලැම්බට්ගේ සමක්ෂේත්‍ර "
-"ප්‍රක්ෂේපණ</i>."
+"මෙම ප්‍රක්ෂේපණ ක්‍රමයේ සම්පූර්ණ නාමය වන්නේ <i>ලැම්බට්ගේ සමක්ෂේත්‍ර "
+"ප්‍රක්ෂේපණය</i> යි."
 
 #: src/core/StelProjectorClasses.cpp:111
 msgid "Stereographic"
@@ -446,13 +450,13 @@ msgstr "මත්ස්‍ය ඇස් ප්‍රක්ෂේපණය හෙ
 
 #: src/core/StelProjectorClasses.cpp:189
 msgid "Hammer-Aitoff"
-msgstr ""
+msgstr "හැමර් ප්‍රක්ෂේපණය"
 
 #: src/core/StelProjectorClasses.cpp:194
 msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
-msgstr ""
+msgstr "හැමර් ප්‍රක්ෂේපණය යනු සමාන 1892දී අර්නස්ට් හැමර් විසින් සකසන ලද්දකි."
 
 #: src/core/StelProjectorClasses.cpp:230
 msgid "Cylinder"
@@ -463,8 +467,8 @@ msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
 msgstr ""
-"මෙම ප්‍රක්ෂේපණ ක්‍රම‍යේ සම්පූර්ණ නම වන්නේ සිිලින්ඩරාකාර සම වර්ගඑල "
-"ප්‍රක්ෂේපණය යි."
+"මෙම ප්‍රක්ෂේපණ ක්‍රම‍යේ සම්පූර්ණ නම වන්නේ සිලින්ඩරාකාර සම වර්ගඑල ප්‍රක්ෂේපණය "
+"යි."
 
 #: src/core/StelProjectorClasses.cpp:277
 msgid "Mercator"
@@ -495,7 +499,7 @@ msgstr "RA/DE (J2000): %1/%2"
 #: src/core/StelObject.cpp:72
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr "RA/DE (of date): %1/%2"
+msgstr "RA/DE (වන දින): %1/%2"
 
 #: src/core/StelObject.cpp:80
 #, qt-format
@@ -507,78 +511,65 @@ msgstr "පැය කෝණය/DE: %1/%2"
 msgid "Az/Alt: %1/%2"
 msgstr "උද්දිගංශය: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:293
+#: src/gui/ConfigurationDialog.cpp:283
 msgid "Select screenshot directory"
 msgstr "ස්ක්‍රීන්ෂොට් දැමිය යුතු ස්ථානය"
 
-#: src/gui/ConfigurationDialog.cpp:460
+#: src/gui/ConfigurationDialog.cpp:448
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "ආරම්භයේදී FOV: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:468
+#: src/gui/ConfigurationDialog.cpp:456
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "ආරම්භයේදී උද්දිගංශය: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:507
+#: src/gui/ConfigurationDialog.cpp:492
 msgid "Authors"
-msgstr "කතෘ"
+msgstr "කතෘවරුන්"
 
-#: src/gui/ConfigurationDialog.cpp:511 src/gui/ViewDialog.cpp:335
+#: src/gui/ConfigurationDialog.cpp:496 src/gui/ViewDialog.cpp:336
 msgid "Contact"
-msgstr "අමතන්න"
+msgstr "සම්බන්ධවීමට"
 
-#: src/gui/ConfigurationDialog.cpp:555
+#: src/gui/ConfigurationDialog.cpp:568
 msgid "Author"
 msgstr "කර්තෘ"
 
-#: src/gui/ConfigurationDialog.cpp:556
+#: src/gui/ConfigurationDialog.cpp:569
 msgid "License"
 msgstr "බලපත්‍රය"
 
-#: src/gui/ConfigurationDialog.cpp:587
+#: src/gui/ConfigurationDialog.cpp:600
 msgid "Running script: "
 msgstr "සික්‍රිප්ට් ක්‍රියාත්මක කිරීම "
 
-#: src/gui/ConfigurationDialog.cpp:594
+#: src/gui/ConfigurationDialog.cpp:607
 msgid "Running script: [none]"
 msgstr "කිසිදු සික්‍රිප්ට්ටුවක් ක්‍රියාත්මක නොවේ"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:650
+msgid "Finished downloading all star catalogs!"
+msgstr "සියලු තාරකා නාමාවලීන් බාගත වී අවසන්ය"
+
+#: src/gui/ConfigurationDialog.cpp:657
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "සූචිය %1 of %2 ලබා ගනිමින්"
 
-#: src/gui/ConfigurationDialog.cpp:616
+#: src/gui/ConfigurationDialog.cpp:659
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
-"Star count: %2\n"
+"Star count: %2 Million\n"
 "Magnitude range: %3 - %4"
 msgstr ""
-"භාගත කරන ගොනුවේ ප්‍රමාණය : %1MB\n"
-"තරු ගණන: %2\n"
+"ගොනුවේ විශාලත්වය: %1MB\n"
+"තරු ගණන: %2 Million\n"
 "දීප්තතාවය: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:626
-msgid "Checking for new star catalogs..."
-msgstr "නව තරු සූචියක් පිළිබදව සොයමින්..."
-
-#: src/gui/ConfigurationDialog.cpp:630
-msgid "All star catalogs are up to date."
-msgstr "සියළුම තරු සූචියන් යාවත්කාලය"
-
-#: src/gui/ConfigurationDialog.cpp:634
-#, qt-format
-msgid ""
-"Downloading %1...\n"
-"(You can close this window.)"
-msgstr ""
-"බාගතකරමින් %1...\n"
-"(You can close this window.)"
-
-#: src/gui/ConfigurationDialog.cpp:639
+#: src/gui/ConfigurationDialog.cpp:668
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -586,29 +577,7 @@ msgstr ""
 "තරු සූචි බාගත කොට අවසන්!\n"
 "ඒවා බලාගැනීම සදහා Stellarium ප්‍රතිපණගන්වන්න."
 
-#: src/gui/ConfigurationDialog.cpp:643
-msgid "Verifying file integrity..."
-msgstr "ගොනුව පරීක්ෂා කරමින්..."
-
-#: src/gui/ConfigurationDialog.cpp:647
-#, qt-format
-msgid ""
-"Error checking updates:\n"
-"%1"
-msgstr ""
-"යාවත්කාලීන කිරීමේ ගැටළුවක් පැමිණ ඇත:\n"
-"%1"
-
-#: src/gui/ConfigurationDialog.cpp:652
-#, c-format, qt-format
-msgid ""
-"Could not finalize download:\n"
-"Error moving temporary file %1.tmp to %1.cat"
-msgstr ""
-"බාගතකිරීම සම්පූර්ණ කල නොහැක:\n"
-"%1.tmp තාවකාලික ගොනුව %1.cat වෙත ගෙනයාමේ ගැටළුවක් පැමිණ ඇත."
-
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:706 src/gui/ConfigurationDialog.cpp:740
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -617,7 +586,20 @@ msgstr ""
 "බාගතකිරීමේ ගැටළුවක් %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:661
+#: src/gui/ConfigurationDialog.cpp:711
+#, qt-format
+msgid ""
+"Downloading %1...\n"
+"(You can close this window.)"
+msgstr ""
+"බාගතකරමින් %1...\n"
+"(ඔබට මෙම කවුළුව වසා දැමිය හැකි ය.)"
+
+#: src/gui/ConfigurationDialog.cpp:791
+msgid "Verifying file integrity..."
+msgstr "ගොනුව පරීක්ෂා කරමින්..."
+
+#: src/gui/ConfigurationDialog.cpp:795
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -626,8 +608,8 @@ msgstr ""
 "බාගතකිරීමේ ගැටළුවක් %1:\n"
 "ගොනුව විකෘති වී ඇත"
 
-#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:216
-#: src/gui/StelGuiItems.cpp:577
+#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:286
+#: src/gui/StelGuiItems.cpp:647
 msgid "Space"
 msgstr "ස්පේස් බොත්තම"
 
@@ -637,11 +619,11 @@ msgstr "ඊ තල බොත්තම් සහ වම් මූසික බො
 
 #: src/gui/HelpDialog.cpp:53
 msgid "Page Up/Down"
-msgstr "Page Up/Down"
+msgstr "පිටු ඉහල/පහල බොත්තම්"
 
 #: src/gui/HelpDialog.cpp:54
 msgid "CTRL + Up/Down"
-msgstr "CTRL + Up/Down"
+msgstr "CTRL + ඉහල/පහල බොත්තම්"
 
 #: src/gui/HelpDialog.cpp:55
 msgid "Left click"
@@ -655,7 +637,7 @@ msgstr "දකුණු පස - ක්ලික්"
 msgid "CTRL + Left click"
 msgstr "CTRL + වම් පස - ක්ලික්"
 
-#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:200
+#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:157
 msgid "Movement and Selection"
 msgstr "එහා මෙහා කිරීම සහ තේරීම"
 
@@ -665,7 +647,7 @@ msgstr "එහා මෙහා කිරීම"
 
 #: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
 msgid "Zoom in/out"
-msgstr "ලං කිරීම සහ ඈත් කිරීම"
+msgstr "සූම් කිරීම"
 
 #: src/gui/HelpDialog.cpp:64
 msgid "Select object"
@@ -677,19 +659,19 @@ msgstr "සියළු තේරීම් වලින් ඉවත් වන�
 
 #: src/gui/HelpDialog.cpp:70
 msgid "When a Script is Running"
-msgstr ""
+msgstr "ස්ක්‍රිප්ටුවක් ක්‍රියාකරන විට"
 
-#: src/gui/HelpDialog.cpp:71 src/gui/StelGui.cpp:179
+#: src/gui/HelpDialog.cpp:71 src/gui/StelGui.cpp:136
 msgid "Slow down the script execution rate"
-msgstr ""
+msgstr "ස්ක්‍රිප්ටුව ක්‍රියා කරන වේගය අඩු කරන්න"
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:180
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:137
 msgid "Speed up the script execution rate"
-msgstr ""
+msgstr "ස්ක්‍රිප්ටුව ක්‍රියා කරන වේගය වැඩි කරන්න"
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:181
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:138
 msgid "Set the normal script execution rate"
-msgstr ""
+msgstr "ස්ක්‍රිප්ටුව ක්‍රියා කරන වේගය සාමාන්‍ය වේගය කරන්න"
 
 #: src/gui/HelpDialog.cpp:161
 msgid "Stellarium Help"
@@ -711,7 +693,7 @@ msgstr "පහත සබැදුම් ක්ලික් කල විට ඔ�
 
 #: src/gui/HelpDialog.cpp:172
 msgid "The Stellarium User Guide"
-msgstr "Stellarium උපකාරක ගොණුව"
+msgstr "Stellarium උපකාරක ගොනුව"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:176
@@ -737,379 +719,379 @@ msgstr "{Support ticket system} - උදව් ටිකට්පත් පද�
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:191
 msgid ""
-"{Bug reporting system} - if something doesn't work properly and is not "
-"listed in the FAQ list, you can open bug reports here."
-msgstr "{Bug reporting system} - කාර්මික දෝෂ ‍රපෝර්තු කිරීම."
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Bug reporting and feature request system} - ඇතැම් කොටස් ක්‍රියා නොකරයි නම් "
+"ඒ පිළිබඳව වාර්තා කිරීමට මෙහි පිවිසෙන්න."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:196
-msgid ""
-"{Feature request system} - if you have an idea for a new feature, send it to "
-"us. We can't promise to implement every idea, but we appreciate the feedback "
-"and review the list when we are planning future features."
-msgstr ""
-"{Feature request system} - if you have an idea for a new feature, send it to "
-"us. We can't promise to implement every idea, but we appreciate the feedback "
-"and review the list when we are planning future features."
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:201
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forums} - ෆෝරමය"
 
-#: src/gui/HelpDialog.cpp:237 src/gui/HelpDialog.cpp:327
-#: src/gui/HelpDialog.cpp:329 src/gui/StelGui.cpp:219
+#: src/gui/HelpDialog.cpp:232 src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:324 src/gui/StelGui.cpp:176
 msgid "Miscellaneous"
 msgstr "වෙනත්"
 
-#: src/gui/HelpDialog.cpp:295
+#: src/gui/HelpDialog.cpp:290
 msgid "Developers"
 msgstr "නිර්මාණකරුවෝ"
 
-#: src/gui/HelpDialog.cpp:296
+#: src/gui/HelpDialog.cpp:291
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "ව්‍යාපෘති පරිපලක සහ ප්‍රධාන නිර්මාණකරු : %1"
 
-#: src/gui/HelpDialog.cpp:297
+#: src/gui/HelpDialog.cpp:292
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "ලිපි කර්තෘ/නිර්මාණකරු: %1"
 
-#: src/gui/HelpDialog.cpp:298
+#: src/gui/HelpDialog.cpp:293
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "ග්‍රැෆික්/වෙනත් නිර්මාණකරු: %1"
 
-#: src/gui/HelpDialog.cpp:299 src/gui/HelpDialog.cpp:300
-#: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:295
+#: src/gui/HelpDialog.cpp:297 src/gui/HelpDialog.cpp:298
 #, qt-format
 msgid "Developer: %1"
 msgstr "නිර්මාණකරු %1"
 
-#: src/gui/HelpDialog.cpp:301
+#: src/gui/HelpDialog.cpp:296
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX නිර්මාණකරු: %1"
 
-#: src/gui/StelGui.cpp:139
+#: src/gui/StelGui.cpp:94
 msgid "Display Options"
 msgstr "ඩිස්ප්ලේ ඔප්ෂන්ස්"
 
-#: src/gui/StelGui.cpp:140
+#: src/gui/StelGui.cpp:95
 msgid "Constellation lines"
 msgstr "රාශි රේඛා"
 
-#: src/gui/StelGui.cpp:141
+#: src/gui/StelGui.cpp:96
 msgid "Constellation art"
 msgstr "රාශි රූප"
 
-#: src/gui/StelGui.cpp:142
+#: src/gui/StelGui.cpp:97
 msgid "Constellation labels"
 msgstr "රාශි ලේබල"
 
-#: src/gui/StelGui.cpp:143
+#: src/gui/StelGui.cpp:98
 msgid "Constellation boundaries"
 msgstr "රාශි මායිම්"
 
-#: src/gui/StelGui.cpp:145 src/ui_viewDialog.h:1058
+#: src/gui/StelGui.cpp:100 src/ui_viewDialog.h:1027
 msgid "Azimuthal grid"
 msgstr "උද්දිගංශ දැල"
 
-#: src/gui/StelGui.cpp:146 src/ui_viewDialog.h:1056
+#: src/gui/StelGui.cpp:101 src/ui_viewDialog.h:1025
 msgid "Equatorial grid"
 msgstr "සමක දැල"
 
-#: src/gui/StelGui.cpp:147 src/ui_viewDialog.h:1057
+#: src/gui/StelGui.cpp:102 src/ui_viewDialog.h:1026
 msgid "Equatorial J2000 grid"
 msgstr "සමක J2000 දැල"
 
-#: src/gui/StelGui.cpp:148 src/ui_viewDialog.h:1061
+#: src/gui/StelGui.cpp:103
+msgid "Galactic grid"
+msgstr "මණ්දාකිණි දැල"
+
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1030
 msgid "Ecliptic line"
 msgstr "ක්‍රාන්තිය"
 
-#: src/gui/StelGui.cpp:149 src/ui_viewDialog.h:1059
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1028
 msgid "Equator line"
-msgstr "සමකිය"
+msgstr "සමකය"
 
-#: src/gui/StelGui.cpp:150 src/ui_viewDialog.h:1060
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1029
 msgid "Meridian line"
 msgstr "මධ්‍යාන රේඛාව"
 
-#: src/gui/StelGui.cpp:151 src/ui_viewDialog.h:1062
+#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1031
 msgid "Cardinal points"
 msgstr "දිග්භාග"
 
-#: src/gui/StelGui.cpp:153
+#: src/gui/StelGui.cpp:109
 msgid "Ground"
 msgstr "පොළොව"
 
-#: src/gui/StelGui.cpp:154 src/ui_viewDialog.h:1040
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1009
 msgid "Atmosphere"
 msgstr "වායුගෝලය"
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:111
 msgid "Fog"
 msgstr "මීදුම"
 
-#: src/gui/StelGui.cpp:157 src/ui_viewDialog.h:1045
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1014
 msgid "Nebulas"
 msgstr "නිහාරිකා"
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:114
 msgid "Nebulas background images"
 msgstr "නිහාරිකා පසුබිම් ඡායාරූප"
 
-#: src/gui/StelGui.cpp:159 src/ui_viewDialog.h:1026 src/ui_viewDialog.h:1044
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:995 src/ui_viewDialog.h:1013
 msgid "Stars"
 msgstr "තරු"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:116
 msgid "Planets labels"
 msgstr "ග්‍රහලෝක ලේබල"
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:117
+msgid "Planet orbits"
+msgstr "ග්‍රහවස්තුවේ කක්ෂය"
+
+#: src/gui/StelGui.cpp:119
 msgid "Night mode"
-msgstr "රාත්‍රී මාදිරිය"
+msgstr "රාත්‍රී මාදිලිය"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:120
 msgid "Full-screen mode"
-msgstr "සම්පූර්ණ තිර මාදිරිය"
+msgstr "සම්පූර්ණ තිර මාදිලිය"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:121
 msgid "Flip scene horizontally"
 msgstr "හරස් අතට හරවන්න"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:122
 msgid "Flip scene vertically"
 msgstr "දික් අතට හරවන්න"
 
-#: src/gui/StelGui.cpp:167
+#: src/gui/StelGui.cpp:124
 msgid "Windows"
 msgstr "කවුළු"
 
-#: src/gui/StelGui.cpp:168
+#: src/gui/StelGui.cpp:125
 msgid "Help window"
 msgstr "උදව් කවුළුව"
 
-#: src/gui/StelGui.cpp:169
+#: src/gui/StelGui.cpp:126
 msgid "Configuration window"
 msgstr "සැකසුම් කවුළුව"
 
-#: src/gui/StelGui.cpp:170
+#: src/gui/StelGui.cpp:127
 msgid "Search window"
 msgstr "සෙවුම් කවුළුව"
 
-#: src/gui/StelGui.cpp:171
+#: src/gui/StelGui.cpp:128
 msgid "Sky and viewing options window"
 msgstr "අහස සහ දර්ශණ සැකසුම් කවුළුව"
 
-#: src/gui/StelGui.cpp:172
+#: src/gui/StelGui.cpp:129
 msgid "Date/time window"
 msgstr "දිනය/වේලාව කවුළුව"
 
-#: src/gui/StelGui.cpp:173
+#: src/gui/StelGui.cpp:130
 msgid "Location window"
 msgstr "ස්ථානය කවුළුව"
 
-#: src/gui/StelGui.cpp:175
+#: src/gui/StelGui.cpp:132
 msgid "Script console window"
-msgstr ""
+msgstr "ස්ක්‍රිප්ටුවේ ප්‍රතිචාර කවුලුව"
 
-#: src/gui/StelGui.cpp:178 src/ui_dateTimeDialogGui.h:295
+#: src/gui/StelGui.cpp:135 src/ui_dateTimeDialogGui.h:295
 msgid "Date and Time"
 msgstr "දිනය සහ වේලාව"
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:139
 msgid "Decrease time speed"
 msgstr "කාල වේගය අඩු කරන්න"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:140
 msgid "Increase time speed"
 msgstr "කාල වේගය වැඩි කරන්න"
 
-#: src/gui/StelGui.cpp:184
+#: src/gui/StelGui.cpp:141
 msgid "Set normal time rate"
 msgstr "සාමාන්‍ය කාල වේගය"
 
-#: src/gui/StelGui.cpp:185
+#: src/gui/StelGui.cpp:142
 msgid "Decrease time speed (a little)"
-msgstr ""
+msgstr "කාල වේගය අඩු කරන්න (මදක්)"
 
-#: src/gui/StelGui.cpp:186
+#: src/gui/StelGui.cpp:143
 msgid "Increase time speed (a little)"
-msgstr ""
+msgstr "කාල වේගය වැඩි කරන්න (මදක්)"
 
-#: src/gui/StelGui.cpp:187
+#: src/gui/StelGui.cpp:144
 msgid "Set time rate to zero"
 msgstr "කාලවේග අගය බින්දුව කරන්න"
 
-#: src/gui/StelGui.cpp:188
+#: src/gui/StelGui.cpp:145
 msgid "Set time to now"
 msgstr "කාලය දැන් වේලාව කරන්න"
 
-#: src/gui/StelGui.cpp:189
+#: src/gui/StelGui.cpp:146
 msgid "Add 1 solar hour"
 msgstr "එක් සූර්ය පැයක් එක් කරන්න"
 
-#: src/gui/StelGui.cpp:190
+#: src/gui/StelGui.cpp:147
 msgid "Subtract 1 solar hour"
 msgstr "එක් සූර්ය පැයක් අඩු කරන්න"
 
-#: src/gui/StelGui.cpp:191
+#: src/gui/StelGui.cpp:148
 msgid "Add 1 solar day"
 msgstr "එක් සූර්ය දිනයක් එක් කරන්න"
 
-#: src/gui/StelGui.cpp:192
+#: src/gui/StelGui.cpp:149
 msgid "Subtract 1 solar day"
 msgstr "එක් සූර්ය දිනයක් අඩු කරන්න"
 
-#: src/gui/StelGui.cpp:193
+#: src/gui/StelGui.cpp:150
 msgid "Add 1 solar week"
 msgstr "එක් සූර්ය සතියක් එක් කරන්න"
 
-#: src/gui/StelGui.cpp:194
+#: src/gui/StelGui.cpp:151
 msgid "Subtract 1 solar week"
 msgstr "එක් සූර්ය සතියක් අඩු කරන්න"
 
-#: src/gui/StelGui.cpp:195
+#: src/gui/StelGui.cpp:152
 msgid "Add 1 sidereal day"
 msgstr "එක් ආවර්ත දිනයක් එක් කරන්න"
 
-#: src/gui/StelGui.cpp:196
+#: src/gui/StelGui.cpp:153
 msgid "Subtract 1 sidereal day"
 msgstr "එක් ආවර්ත දිනයක් අඩු කරන්න"
 
-#: src/gui/StelGui.cpp:197
+#: src/gui/StelGui.cpp:154
 msgid "Add 1 sidereal week"
 msgstr "එක් ආවර්ත සතියක් එක් කරන්න"
 
-#: src/gui/StelGui.cpp:198
+#: src/gui/StelGui.cpp:155
 msgid "Subtract 1 sidereal week"
 msgstr "එක් ආවර්ත සතියක් අඩු කරන්න"
 
-#: src/gui/StelGui.cpp:201
+#: src/gui/StelGui.cpp:158
 msgid "Center on selected object"
 msgstr "තේරූ වස්තුව තිරය මැදට කරන්න"
 
-#: src/gui/StelGui.cpp:202
+#: src/gui/StelGui.cpp:159
 msgid "Track object"
 msgstr "වස්තුව හඹා යන්න"
 
-#: src/gui/StelGui.cpp:203
+#: src/gui/StelGui.cpp:160
 msgid "Zoom in on selected object"
 msgstr "තෝරාගත් වස්තුව මත සූම් කරන්න"
 
-#: src/gui/StelGui.cpp:204
+#: src/gui/StelGui.cpp:161
 msgid "Zoom out"
 msgstr "තෝරාගත් වස්තුව මත සූම් අවුට් කරන්න"
 
-#: src/gui/StelGui.cpp:205
+#: src/gui/StelGui.cpp:162
 msgid "Set home planet to selected planet"
 msgstr "තෝරාගත් ග්‍රහලෝකය මව් ග්‍රහලොව කරන්න"
 
-#: src/gui/StelGui.cpp:207
+#: src/gui/StelGui.cpp:164
 msgid "Telescope Control"
 msgstr "දුරේක්ෂ පාලකය"
 
-#: src/gui/StelGui.cpp:208
+#: src/gui/StelGui.cpp:165
 msgid "Move telescope #0 to selected object"
 msgstr "තෝරාගත් වස්තුව වෙත #0 දුරේක්ෂය යොමු කරන්න"
 
-#: src/gui/StelGui.cpp:209
+#: src/gui/StelGui.cpp:166
 msgid "Move telescope #1 to selected object"
 msgstr "නො-1 දුරේක්ෂය තෝරාගත් වස්තුව වෙත යොමු කරන්න"
 
-#: src/gui/StelGui.cpp:210
+#: src/gui/StelGui.cpp:167
 msgid "Move telescope #2 to selected object"
 msgstr "නො-2 දුරේක්ෂය තෝරාගත් වස්තුව වෙත යොමු කරන්න"
 
-#: src/gui/StelGui.cpp:211
+#: src/gui/StelGui.cpp:168
 msgid "Move telescope #3 to selected object"
 msgstr "නො-3 දුරේක්ෂය තෝරාගත් වස්තුව වෙත යොමු කරන්න"
 
-#: src/gui/StelGui.cpp:212
+#: src/gui/StelGui.cpp:169
 msgid "Move telescope #4 to selected object"
 msgstr "නො-4 දුරේක්ෂය තෝරාගත් වස්තුව වෙත යොමු කරන්න"
 
-#: src/gui/StelGui.cpp:213
+#: src/gui/StelGui.cpp:170
 msgid "Move telescope #5 to selected object"
 msgstr "නො-5 දුරේක්ෂය තෝරාගත් වස්තුව වෙත යොමු කරන්න"
 
-#: src/gui/StelGui.cpp:214
+#: src/gui/StelGui.cpp:171
 msgid "Move telescope #6 to selected object"
 msgstr "නො-6 දුරේක්ෂය තෝරාගත් වස්තුව වෙත යොමු කරන්න"
 
-#: src/gui/StelGui.cpp:215
+#: src/gui/StelGui.cpp:172
 msgid "Move telescope #7 to selected object"
 msgstr "නො-7 දුරේක්ෂය තෝරාගත් වස්තුව වෙත යොමු කරන්න"
 
-#: src/gui/StelGui.cpp:216
+#: src/gui/StelGui.cpp:173
 msgid "Move telescope #8 to selected object"
 msgstr "නො-8 දුරේක්ෂය තෝරාගත් වස්තුව වෙත යොමු කරන්න"
 
-#: src/gui/StelGui.cpp:217
+#: src/gui/StelGui.cpp:174
 msgid "Move telescope #9 to selected object"
 msgstr "නො-9 දුරේක්ෂය තෝරාගත් වස්තුව වෙත යොමු කරන්න"
 
-#: src/gui/StelGui.cpp:220
+#: src/gui/StelGui.cpp:177
 msgid "Switch between equatorial and azimuthal mount"
-msgstr "නීරක්ෂීය හා ඇසිමුත් පිහිටුවීම් අතර මාරු වෙන්න"
+msgstr "සමක හා උද්දිගංශ රැඳවුම් අතර මාරු වෙන්න"
 
-#: src/gui/StelGui.cpp:221
+#: src/gui/StelGui.cpp:178
 msgid "Quit"
-msgstr "නවත්වන්න"
+msgstr "පිටවීම"
 
-#: src/gui/StelGui.cpp:222
+#: src/gui/StelGui.cpp:179
 msgid "Save screenshot"
-msgstr "තිරපිටපත සුරකින්න"
+msgstr "ස්ක්‍රීන්ෂොට් ගොනුව සුරකින්න"
 
-#: src/gui/StelGui.cpp:225
+#: src/gui/StelGui.cpp:182
 msgid "Auto hide horizontal button bar"
 msgstr "තිරස් බොත්තම් පෙල ස්වයංක්‍රීයව හංගන්න"
 
-#: src/gui/StelGui.cpp:226
+#: src/gui/StelGui.cpp:183
 msgid "Auto hide vertical button bar"
 msgstr "සිරස් බොත්තම් පෙල ස්වයංක්‍රීයව හංගන්න"
 
-#: src/gui/StelGui.cpp:227
-msgid "Toggle visibility of toolbars"
-msgstr "Toggle visibility of toolbars"
+#: src/gui/StelGui.cpp:184
+msgid "Toggle visibility of GUI"
+msgstr "අතුරු මුහුණත සඟවන්න"
 
-#: src/gui/StelGuiItems.cpp:478
+#: src/gui/StelGuiItems.cpp:548
 #, no-c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:380
+#: src/gui/ViewDialog.cpp:388
 msgid "No description"
 msgstr "විස්තරයක් නොමැත"
 
-#: src/gui/ViewDialog.cpp:436
+#: src/gui/ViewDialog.cpp:444
 msgid "No shooting stars"
-msgstr "කඩාවැටෙන තරු නොමැත"
+msgstr "උල්කාපාත නොමැත"
 
-#: src/gui/ViewDialog.cpp:439
+#: src/gui/ViewDialog.cpp:447
 msgid "Normal rate"
-msgstr "සාමාන්‍යය තරම"
+msgstr "සාමාන්‍යය වේගය"
 
-#: src/gui/ViewDialog.cpp:442
+#: src/gui/ViewDialog.cpp:450
 msgid "Standard Perseids rate"
-msgstr "සම්මත Perseids අගය"
+msgstr "සම්මත පර්සීඩ්ස් අගය"
 
-#: src/gui/ViewDialog.cpp:445
+#: src/gui/ViewDialog.cpp:453
 msgid "Exceptional Leonid rate"
-msgstr "විකල්ප Leonid අගය"
+msgstr "විකල්ප ලියොනීඩ්ස් අගය"
 
-#: src/gui/ViewDialog.cpp:448
+#: src/gui/ViewDialog.cpp:456
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "වාර්තාගත වැඩිම අගය (1966 ලියොනිඩ්ස්)"
 
-#: src/gui/LocationDialog.cpp:339
+#: src/gui/LocationDialog.cpp:340
 msgid "New Location"
-msgstr "නව ස්තානයක්"
+msgstr "නව ස්ථානයක්"
 
-#: src/main.cpp:105
+#: src/main.cpp:308
 msgid "This system does not support OpenGL."
 msgstr "මෙම පද්ධතිය OpenGL සදහා සහය නොදක්වයි."
 
@@ -1151,7 +1133,7 @@ msgstr "බ්‍රහස්පති"
 
 #: src/translations.h:42
 msgid "Io"
-msgstr "ආයෝ"
+msgstr "අයෝ"
 
 #: src/translations.h:43
 msgid "Europa"
@@ -1171,11 +1153,11 @@ msgstr "සෙනසුරු"
 
 #: src/translations.h:47
 msgid "Mimas"
-msgstr "මයිමාස්"
+msgstr "මයිමස්"
 
 #: src/translations.h:48
 msgid "Enceladus"
-msgstr "එන්සලේඩස්"
+msgstr "එන්සෙලඩස්"
 
 #: src/translations.h:49
 msgid "Tethys"
@@ -1183,7 +1165,7 @@ msgstr "ටෙතිස්"
 
 #: src/translations.h:50
 msgid "Dione"
-msgstr "ඩිඔනී"
+msgstr "ඩයෝන්"
 
 #: src/translations.h:51
 msgid "Rhea"
@@ -1191,7 +1173,7 @@ msgstr "රියා"
 
 #: src/translations.h:52
 msgid "Titan"
-msgstr "ටයිටෑන්"
+msgstr "ටයිටන්"
 
 #: src/translations.h:53
 msgid "Hyperion"
@@ -1199,7 +1181,7 @@ msgstr "හයිපරියන්"
 
 #: src/translations.h:54
 msgid "Iapetus"
-msgstr "ලෙප්ටස්"
+msgstr "අයෙපටස්"
 
 #: src/translations.h:55
 msgid "Phoebe"
@@ -1207,7 +1189,7 @@ msgstr "ෆෝබී"
 
 #: src/translations.h:56
 msgid "Neptune"
-msgstr "නෙප්චූන්"
+msgstr "නෙප්ටූන්"
 
 #: src/translations.h:57
 msgid "Uranus"
@@ -1242,52 +1224,56 @@ msgid "W"
 msgstr "බ"
 
 #: src/translations.h:69
+msgid "Aztec"
+msgstr "ඇස්ටෙක්"
+
+#: src/translations.h:70
 msgid "Chinese"
 msgstr "චීන"
 
-#: src/translations.h:70
-msgid "Egyptian"
-msgstr "ඊජිප්තියානු"
-
 #: src/translations.h:71
-msgid "Inuit"
-msgstr "Inuit"
+msgid "Egyptian"
+msgstr "ඊජිප්තු"
 
 #: src/translations.h:72
+msgid "Inuit"
+msgstr "එස්කිමෝ"
+
+#: src/translations.h:73
 msgid "Korean"
 msgstr "කොරියානු"
 
-#: src/translations.h:73
-msgid "Lakota"
-msgstr "Lakota"
-
 #: src/translations.h:74
-msgid "Maori"
-msgstr ""
+msgid "Lakota"
+msgstr "ලකෝටා"
 
 #: src/translations.h:75
-msgid "Navajo"
-msgstr "Navajo"
+msgid "Maori"
+msgstr "මඕරි"
 
 #: src/translations.h:76
-msgid "Norse"
-msgstr "Norse"
+msgid "Navajo"
+msgstr "නවාජෝ"
 
 #: src/translations.h:77
-msgid "Polynesian"
-msgstr "Polynesian"
+msgid "Norse"
+msgstr "නෝර්ස්"
 
 #: src/translations.h:78
-msgid "Western"
-msgstr "බටහිර"
+msgid "Polynesian"
+msgstr "පොලිනීසියානු"
 
 #: src/translations.h:79
+msgid "Western"
+msgstr "අපරදිග"
+
+#: src/translations.h:80
 msgid "Tupi-Guarani"
-msgstr "Tupi-Guarani"
+msgstr "ටුපි ගුවාරනි"
 
 #: src/ui_dateTimeDialogGui.h:294 src/ui_helpDialogGui.h:259
-#: src/ui_locationDialogGui.h:387 src/ui_viewDialog.h:1008
-#: src/ui_configurationDialog.h:739
+#: src/ui_locationDialogGui.h:387 src/ui_viewDialog.h:979
+#: src/ui_configurationDialog.h:746
 msgid "Form"
 msgstr "පෝරමය"
 
@@ -1301,7 +1287,7 @@ msgstr ":"
 
 #: src/ui_helpDialogGui.h:260 src/ui_helpDialogGui.h:266
 msgid "Help"
-msgstr "සහාය"
+msgstr "උදව්"
 
 #: src/ui_helpDialogGui.h:268
 msgid "About"
@@ -1309,11 +1295,11 @@ msgstr "මේ ගැන"
 
 #: src/ui_helpDialogGui.h:270
 msgid "Log"
-msgstr "Log"
+msgstr "ලොගය"
 
 #: src/ui_helpDialogGui.h:273
 msgid "Refresh"
-msgstr "ප්‍රතිපූර්ණය කරන්න"
+msgstr "රීෆ්‍රෙෂ්"
 
 #: src/ui_locationDialogGui.h:388
 msgid "Location"
@@ -1321,7 +1307,7 @@ msgstr "ස්ථානය"
 
 #: src/ui_locationDialogGui.h:392
 msgid "Current location information"
-msgstr "දැනට පවතින ස්තානයේ තොරතුරු"
+msgstr "දැනට පවතින ස්ථානයේ තොරතුරු"
 
 #: src/ui_locationDialogGui.h:393
 msgid "Use as default"
@@ -1329,7 +1315,7 @@ msgstr "සාමාන්‍යය භාවිතයට යොදාගන්�
 
 #: src/ui_locationDialogGui.h:394
 msgid "Delete"
-msgstr "ඉවත් කරන්න"
+msgstr "මකන්න"
 
 #: src/ui_locationDialogGui.h:395
 msgid "Add to list"
@@ -1360,7 +1346,7 @@ msgstr "උස මීටර වලින් ඇතුලත් කරන්න"
 
 #: src/ui_locationDialogGui.h:408
 msgid " m"
-msgstr " මීටර"
+msgstr " මී"
 
 #: src/ui_locationDialogGui.h:409
 msgid "Name/City:"
@@ -1376,360 +1362,346 @@ msgstr "ග්‍රහලොව"
 
 #: src/ui_searchDialogGui.h:230 src/ui_searchDialogGui.h:231
 msgid "Find Object"
-msgstr "ආකාශ වස්තුව සොයනු"
+msgstr "සොයන්න"
 
 #: src/ui_searchDialogGui.h:236
 msgid "RA/Dec (J2000):"
-msgstr "පැය වටයන්/ක්‍රාන්ති රේඛා (J2000):"
+msgstr "RA/Dec (J2000):"
 
-#: src/ui_viewDialog.h:1009
+#: src/ui_viewDialog.h:980
 msgid "View"
 msgstr "දසුන"
 
-#: src/ui_viewDialog.h:1015
+#: src/ui_viewDialog.h:986
 msgid "Sky"
 msgstr "අහස"
 
-#: src/ui_viewDialog.h:1017
+#: src/ui_viewDialog.h:988
 msgid "Markings"
 msgstr "සලකුණු කිරීම්"
 
-#: src/ui_viewDialog.h:1019
+#: src/ui_viewDialog.h:990
 msgid "Landscape"
 msgstr "භූතලය"
 
-#: src/ui_viewDialog.h:1021
+#: src/ui_viewDialog.h:992
 msgid "Starlore"
 msgstr "තරුකතා"
 
-#: src/ui_viewDialog.h:1023
-msgid "Images"
-msgstr "දර්ශණ"
-
-#: src/ui_viewDialog.h:1027
+#: src/ui_viewDialog.h:996
 msgid "Absolute scale:"
 msgstr "නිරපේක්ෂ මිනුම:"
 
-#: src/ui_viewDialog.h:1028
+#: src/ui_viewDialog.h:997
 msgid "Relative scale:"
 msgstr "සාපේක්ෂ  මිනුම"
 
-#: src/ui_viewDialog.h:1029
+#: src/ui_viewDialog.h:998
 msgid "Twinkle:"
 msgstr "බැබලීම:"
 
-#: src/ui_viewDialog.h:1031
+#: src/ui_viewDialog.h:1000
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "දීප්ත වස්තූන් මතුවන විට අදීප්ත වස්තු අදුරු කරන්න"
 
-#: src/ui_viewDialog.h:1033
+#: src/ui_viewDialog.h:1002
 msgid "Dynamic eye adaptation"
-msgstr "අeස අදුරට හුරු වූ සාමාන්‍යය මට්ටම"
+msgstr "ඇස අඳුරට හුරු කරන්න"
 
-#: src/ui_viewDialog.h:1034
+#: src/ui_viewDialog.h:1003
 msgid "Planets and satellites"
 msgstr "ග්‍රහයින් සහ උපග්‍රහයින්"
 
-#: src/ui_viewDialog.h:1035
+#: src/ui_viewDialog.h:1004
 msgid "Show planets"
 msgstr "ග්‍රහලෝක පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1036
+#: src/ui_viewDialog.h:1005
 msgid "Show planet markers"
 msgstr "ග්‍රහලෝක සලකුණු පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1037
+#: src/ui_viewDialog.h:1006
 msgid "Show planet orbits"
 msgstr "ග්‍රහලෝක කක්ෂයන් පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1038
+#: src/ui_viewDialog.h:1007
 msgid "Simulate light speed"
-msgstr "ආලෝකයේ වේගය පුතිනිර්මිමාණය කරන්න"
+msgstr "ආලෝකයේ වේගය ප්‍රතිනිර්මාණය කරන්න"
 
-#: src/ui_viewDialog.h:1039
+#: src/ui_viewDialog.h:1008
 msgid "Scale Moon"
-msgstr "චන්ද්‍රයා ප්‍රමානීකරණය කරන්න"
+msgstr "චන්ද්‍රයා පරිමාණකරණය කරන්න"
 
-#: src/ui_viewDialog.h:1041
+#: src/ui_viewDialog.h:1010
 msgid "Show atmosphere"
 msgstr "වායුගෝලය පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1042
+#: src/ui_viewDialog.h:1011
 msgid "Light pollution: "
-msgstr "ආලෝක බාධාව: "
+msgstr "ආලෝක දූෂණය: "
 
-#: src/ui_viewDialog.h:1043
+#: src/ui_viewDialog.h:1012
 msgid "Labels and Markers"
 msgstr "ලේබල් හා සලකුණු"
 
-#: src/ui_viewDialog.h:1046
+#: src/ui_viewDialog.h:1015
 msgid "Planets"
 msgstr "ග්‍රහලෝක"
 
-#: src/ui_viewDialog.h:1047
+#: src/ui_viewDialog.h:1016
 msgid "Shooting Stars"
-msgstr "කඩාවැටෙන තරු"
+msgstr "උල්කාපාත"
 
-#: src/ui_viewDialog.h:1048
+#: src/ui_viewDialog.h:1017
 msgid "Hourly zenith rate:"
-msgstr "අහස් මුදුනේ පැයකට දර්ශණය වන ප්‍රමාණය"
+msgstr "අහස් මුදුනේ පැයකට දර්ශණය වන ප්‍රමාණය (ZHR)"
 
-#: src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1018
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:1050
+#: src/ui_viewDialog.h:1019
 msgid "10"
 msgstr "10"
 
-#: src/ui_viewDialog.h:1051
+#: src/ui_viewDialog.h:1020
 msgid "80"
 msgstr "80"
 
-#: src/ui_viewDialog.h:1052
+#: src/ui_viewDialog.h:1021
 msgid "10000"
 msgstr "10000"
 
-#: src/ui_viewDialog.h:1053
+#: src/ui_viewDialog.h:1022
 msgid "144000"
 msgstr "144000"
 
-#: src/ui_viewDialog.h:1055
+#: src/ui_viewDialog.h:1024
 msgid "Celestial Sphere"
 msgstr "ඛගෝලය"
 
-#: src/ui_viewDialog.h:1063
+#: src/ui_viewDialog.h:1032
 msgid "Constellations"
 msgstr "තරුරටා"
 
-#: src/ui_viewDialog.h:1064
+#: src/ui_viewDialog.h:1033
 msgid "Show lines"
 msgstr "රේඛා පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1065
+#: src/ui_viewDialog.h:1034
 msgid "Show labels"
 msgstr "ලේබල පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1066
+#: src/ui_viewDialog.h:1035
 msgid "Show boundaries"
 msgstr "සීමාවන් පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1067
+#: src/ui_viewDialog.h:1036
 msgid "Show art"
-msgstr "තාරකාරාශි පෙන්වන්න"
+msgstr "රාශිරූප පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1068
+#: src/ui_viewDialog.h:1037
 msgid "Art brightness: "
-msgstr "තාරකාරාශි දීප්තතාවය: "
+msgstr "රාශි රූප දර්ශණ ප්‍රබලතාවය: "
 
-#: src/ui_viewDialog.h:1069
+#: src/ui_viewDialog.h:1038
 msgid "Projection"
 msgstr "ප්‍රක්ශේපණය"
 
-#: src/ui_viewDialog.h:1070 src/ui_viewDialog.h:1075 src/ui_viewDialog.h:1080
-#: src/ui_configurationDialog.h:846 src/ui_configurationDialog.h:857
+#: src/ui_viewDialog.h:1039 src/ui_viewDialog.h:1044 src/ui_viewDialog.h:1046
+#: src/ui_configurationDialog.h:853 src/ui_configurationDialog.h:864
 msgid "Options"
 msgstr "විකල්ප"
 
-#: src/ui_viewDialog.h:1071
+#: src/ui_viewDialog.h:1040
 msgid "Show ground"
-msgstr "පොලොව පෙන්වන්න"
+msgstr "පොළව පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1072
+#: src/ui_viewDialog.h:1041
 msgid "Show fog"
 msgstr "මීදුම පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1073
+#: src/ui_viewDialog.h:1042
 msgid "Use associated planet and position"
 msgstr "සම්බන්ධිත ග්‍රහලෝක හා ස්ථාන භාවිතා කරන්න"
 
-#: src/ui_viewDialog.h:1074
+#: src/ui_viewDialog.h:1043
 msgid "Use this landscape as default"
-msgstr "සුපුරුදු භාවිතය සදහා මේ භූතලය යොදාගන්න"
+msgstr "සාමාන්‍ය භාවිතය සදහා මේ භූතලය යොදාගන්න"
 
-#: src/ui_viewDialog.h:1076
-msgid "Use associated language for sky labeling"
-msgstr "අහස ලේබල් කිරීම සදහා මෙහි සම්බන්ධව ඇති භාෂාව භාවිතා කරන්න"
-
-#: src/ui_viewDialog.h:1077
+#: src/ui_viewDialog.h:1045
 msgid "Use this sky culture as default"
-msgstr "මෙම අහස් ආකාරය සුපුරුදු ආකාරය ලෙස භාවිතා කරන්න"
+msgstr "මෙම අහස් කතා සාමාන්‍ය සැකසුම ලෙස භාවිතා කරන්න"
 
-#: src/ui_viewDialog.h:1078
-msgid "Add"
-msgstr "එක්කරන්න"
-
-#: src/ui_viewDialog.h:1079
-msgid "Remove"
-msgstr ""
-
-#: src/ui_viewDialog.h:1081
+#: src/ui_viewDialog.h:1047
 msgid "Visible"
-msgstr ""
+msgstr "දෘශ්‍යමාන"
 
-#: src/ui_configurationDialog.h:740
+#: src/ui_configurationDialog.h:747
 msgid "Configuration"
-msgstr "හැඩගැස්වීම"
+msgstr "සැකසුම්"
 
-#: src/ui_configurationDialog.h:742
+#: src/ui_configurationDialog.h:749
 msgid "Program language"
 msgstr "වැඩසටහන් භාෂාව"
 
-#: src/ui_configurationDialog.h:743
+#: src/ui_configurationDialog.h:750
 msgid "Selected object information"
 msgstr "තෝරාගත් වස්තුවේ තොරතුරු"
 
-#: src/ui_configurationDialog.h:745
+#: src/ui_configurationDialog.h:752
 msgid "Display all information available"
 msgstr "පවතින සියලු තොරතුරු පෙන්වන්න"
 
-#: src/ui_configurationDialog.h:747
+#: src/ui_configurationDialog.h:754
 msgid "All available"
-msgstr "පවතින සියලු"
+msgstr "පවතින සියල්ල"
 
-#: src/ui_configurationDialog.h:749
+#: src/ui_configurationDialog.h:756
 msgid "Display less information"
-msgstr "තොරතුරු සුලු ප්‍රමාණයක් පෙන්වන්න"
+msgstr "තොරතුරු සුළු ප්‍රමාණයක් පෙන්වන්න"
 
-#: src/ui_configurationDialog.h:751
+#: src/ui_configurationDialog.h:758
 msgid "Short"
 msgstr "කෙටි"
 
-#: src/ui_configurationDialog.h:753
+#: src/ui_configurationDialog.h:760
 msgid "Display no information"
-msgstr "තොරතුරු කිසිවක් පෙන්වන්න එපා"
+msgstr "තොරතුරු සඟවන්න"
 
-#: src/ui_configurationDialog.h:755
+#: src/ui_configurationDialog.h:762
 msgid "None"
 msgstr "කිසිවක් එපා"
 
-#: src/ui_configurationDialog.h:756
+#: src/ui_configurationDialog.h:763
 msgid "Default options"
-msgstr "සුපුරුදු විකල්ප"
+msgstr "සුපුරුදු සැකසුම්"
 
-#: src/ui_configurationDialog.h:758
+#: src/ui_configurationDialog.h:765
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr ""
-"ඔබ මෙහිදී වෙනස් කල සකසුම් තාරකාගාරය නවත විවතවන විටද පවතීම සදහා ඒවා සුරකින්න"
+"ඔබ මෙහිදී වෙනස් කල සැකසුම් Stellarium නැවත විවෘත වන විටද පවතීම සඳහා ඒවා "
+"සුරකින්න"
 
-#: src/ui_configurationDialog.h:760
+#: src/ui_configurationDialog.h:767
 msgid "Save settings"
 msgstr "සැකසුම් සුරකින්න"
 
-#: src/ui_configurationDialog.h:762
+#: src/ui_configurationDialog.h:769
 msgid "Restore the default settings that came with Stellarium"
-msgstr "තාරකාගාරය සමග පැමිණි සුපුරුදු සැකසුම් ප්‍රතිස්තාපනය කරන්න"
+msgstr "Stellarium සමග පැමිණි සාමාන්‍ය සැකසුම් ප්‍රතිස්තාපනය කරන්න"
 
-#: src/ui_configurationDialog.h:764
+#: src/ui_configurationDialog.h:771
 msgid "Restore defaults"
-msgstr "සුපුරුදු සැකසුම් ප්‍රතිස්තාපනය කරන්න"
+msgstr "සාමාන්‍ය සැකසුම් ප්‍රතිස්තාපනය කරන්න"
 
-#: src/ui_configurationDialog.h:765
+#: src/ui_configurationDialog.h:772
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr ""
-"සුපුරුදු සකසුම් ප්‍රතිස්ථාපනය සදහා නවත පණගන්විමක් අවශය වෙනවා. ඊලග "
-"පණගැන්වීමේදී භාවිතය සදහා වර්තමාන FOV සහ බලන දිශාව ඇතුලු සැකසුම් සුරකින්නග"
-
-#: src/ui_configurationDialog.h:767
-msgid "The width of your view when Stellarium starts"
-msgstr "තාරකාගාරය විවෟත වන විට ඔබේ දර්ශණපථයේ පළල"
-
-#: src/ui_configurationDialog.h:769
-msgid "Startup FOV: XX"
-msgstr "FOV ක්‍රියාත්මක වීම: XX"
-
-#: src/ui_configurationDialog.h:771
-msgid "The direction you're looking when Stellarium starts"
-msgstr "තාරකාගාරය විවෟත වන විට ඔබ බලන දිශාව"
-
-#: src/ui_configurationDialog.h:773
-msgid "Startup direction of view: xxxx"
-msgstr "විවෟත වන විට දකින දිශාව"
+"සුපුරුදු සැකසුම් ප්‍රතිස්ථාපනය සදහා නැවත පණගන්විමක් අවශ්‍ය ය. ඊළඟ "
+"පණගැන්වීමේදී භාවිතය සදහා වර්තමාන පෙනෙන ප්‍රදේශය සහ දිශාව ඇතුළු සැකසුම් "
+"සුරකින්න."
 
 #: src/ui_configurationDialog.h:774
-msgid "Control"
-msgstr "පාලනය"
+msgid "The width of your view when Stellarium starts"
+msgstr "Stellarium විවෘත වන විට ඔබේ දර්ශණ පථයේ පළල"
 
 #: src/ui_configurationDialog.h:776
-msgid "Allow keyboard to pan and zoom"
-msgstr "යතුරු පුවරුවෙන් හැරවීමට හා ලන් කිරීමට ඉඩ දෙන්න"
+msgid "Startup FOV: XX"
+msgstr "ආරම්භයේදී පෙනෙන ප්‍රදේශය : XX"
 
 #: src/ui_configurationDialog.h:778
+msgid "The direction you're looking when Stellarium starts"
+msgstr "Stellarium විවෟත වන විට ඔබ බලන දිශාව"
+
+#: src/ui_configurationDialog.h:780
+msgid "Startup direction of view: xxxx"
+msgstr "විවෘත වන විට පෙනෙන දිශාව"
+
+#: src/ui_configurationDialog.h:781
+msgid "Control"
+msgstr "පාලකය"
+
+#: src/ui_configurationDialog.h:783
+msgid "Allow keyboard to pan and zoom"
+msgstr "යතුරු පුවරුවෙන් එහා මෙහා කිරීමට සහ සූම් කිරීමට ඉඩ දෙන්න"
+
+#: src/ui_configurationDialog.h:785
 msgid "Enable keyboard navigation"
 msgstr "යතුරු පුවරුවෙන් හැසිරවීමට ඉඩ දෙන්න"
 
-#: src/ui_configurationDialog.h:780
-msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr "මවුසයෙන් හැරවීමට හා ලන් කිරීමට ඉඩ දෙන්න"
-
-#: src/ui_configurationDialog.h:782
-msgid "Enable mouse navigation"
-msgstr "මවුසයෙන් හැසිරවීමට ඉඩ දෙන්න"
-
-#: src/ui_configurationDialog.h:783
-msgid "Startup date and time"
-msgstr "විවෟත වන දවස හා වේලාව"
-
-#: src/ui_configurationDialog.h:785
-msgid "Starts Stellarium at system clock date and time"
-msgstr "තාරකාගාරය පරිගණකයේ දිනය හා වේලාවෙන් විවෟත කරන්න"
-
 #: src/ui_configurationDialog.h:787
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr "මූසිකයෙන් එහා මෙහා කිරීමට සහ සූම් කිරීමට ඉඩ දෙන්න"
+
+#: src/ui_configurationDialog.h:789
+msgid "Enable mouse navigation"
+msgstr "මූසිකයෙන් හැසිරවීමට ඉඩ දෙන්න"
+
+#: src/ui_configurationDialog.h:790
+msgid "Startup date and time"
+msgstr "විවෘත වන විට දවස හා වේලාව"
+
+#: src/ui_configurationDialog.h:792
+msgid "Starts Stellarium at system clock date and time"
+msgstr "Stellarium පරිගණකයේ දිනය හා වේලාවෙන් විවෘත කරන්න"
+
+#: src/ui_configurationDialog.h:794
 msgid "System date and time"
 msgstr "පරිගණකයේ දිනය හා වේලාව"
 
-#: src/ui_configurationDialog.h:789
+#: src/ui_configurationDialog.h:796
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "නැවත පණගැන්වෙන විට Stellarium හි වේලාව ඊළඟ දිනය සකසයි"
 
-#: src/ui_configurationDialog.h:791
+#: src/ui_configurationDialog.h:798
 msgid "System date at:"
 msgstr "පරිගණකයේ වේලාව:"
 
-#: src/ui_configurationDialog.h:793
+#: src/ui_configurationDialog.h:800
 msgid "Use a specific date and time when Stellarium starts up"
-msgstr "තාරකාගාරය විවෟත වන විට විශේෂ වූ දවසක් හා වේලාවක් භාවිතා කරන්න"
+msgstr "Stellarium විවෘත වන විට විශේෂ දවසක් හා වේලාවක් භාවිතා කරන්න"
 
-#: src/ui_configurationDialog.h:795
+#: src/ui_configurationDialog.h:802
 msgid "Other:"
-msgstr "අනෙක්:"
+msgstr "වෙනත්:"
 
-#: src/ui_configurationDialog.h:796
+#: src/ui_configurationDialog.h:803
 msgid "use current"
 msgstr "දැන් පවත්නා දේ භාවිතා කරන්න"
 
-#: src/ui_configurationDialog.h:797
+#: src/ui_configurationDialog.h:804
 msgid "Other"
 msgstr "වෙනත්"
 
-#: src/ui_configurationDialog.h:799
+#: src/ui_configurationDialog.h:806
 msgid "Hides the mouse cursor when inactive"
-msgstr "භාවිතා නොවන අවස්තාවලදී මවුසයේ යොමුව නොපෙන්වන්න"
+msgstr "භාවිතා නොවන අවස්තාවලදී මවුසයේ ඊ හිස සඟවන්න"
 
-#: src/ui_configurationDialog.h:801
+#: src/ui_configurationDialog.h:808
 msgid "Mouse cursor timeout (seconds):"
 msgstr "මේ වේලාවට පසු මවුස් පොයින්ටරය නැති වී යයි (තත්පර):"
 
-#: src/ui_configurationDialog.h:803
+#: src/ui_configurationDialog.h:810
 msgid "Toggle vertical and horizontal image flip buttons."
-msgstr "Toggle vertical and horizontal image flip buttons."
+msgstr "සිරස් සහ තිරසි රූප අනෙක් පස ගැන්වුම"
 
-#: src/ui_configurationDialog.h:805
+#: src/ui_configurationDialog.h:812
 msgid "Show flip buttons"
-msgstr "දර්ශණපථය වෙනස් කරන බොත්තම් පෙන්වන්න"
+msgstr "අනෙක් පස හරවන බොත්තම්"
 
-#: src/ui_configurationDialog.h:806
+#: src/ui_configurationDialog.h:813
 msgid "Planetarium options"
 msgstr "ග්‍රහලෝකාගාර සැකසුම්"
 
-#: src/ui_configurationDialog.h:808
+#: src/ui_configurationDialog.h:815
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -1737,19 +1709,19 @@ msgstr ""
 "කුඩා ප්‍රමාණයේ ග්‍රහලෝකාගාර සදහා Stellarium ගෝලාකාර තිරයකට ප්‍රක්ශේපණය "
 "කිරීමට Spheric mirror distortion භාවිතා කරයි."
 
-#: src/ui_configurationDialog.h:810
+#: src/ui_configurationDialog.h:817
 msgid "Spheric mirror distortion"
 msgstr "ගෝලයක් ආකාරයෙන් දිස්වනවාක් මෙන් සකසන්න"
 
-#: src/ui_configurationDialog.h:812
+#: src/ui_configurationDialog.h:819
 msgid "Align labels with the horizon"
 msgstr "ලේබල පොළොවට සමාන්තරව සකසන්න"
 
-#: src/ui_configurationDialog.h:814
+#: src/ui_configurationDialog.h:821
 msgid "Gravity labels"
 msgstr "ලේබල ගුරුත්වාකර්ෂණයට අනුව සකසන්න"
 
-#: src/ui_configurationDialog.h:816
+#: src/ui_configurationDialog.h:823
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -1757,106 +1729,110 @@ msgstr ""
 "\"ස්වයංක්‍රීය ඈත් වීම\" යතුර ක්‍රියාත්මකව පවතින විට එය ප්‍රාරම්භක බලන දිශාවද "
 "වෙනස් කරයි"
 
-#: src/ui_configurationDialog.h:818
+#: src/ui_configurationDialog.h:825
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "ස්වයංක්‍රීය ඈත්වීම නැවත ප්‍රාරම්භක බලන දිශාවට පැමිණේ"
 
-#: src/ui_configurationDialog.h:820
+#: src/ui_configurationDialog.h:827
 msgid "Mask out everything outside a central circle in the main view"
-msgstr "Mask out everything outside a central circle in the main view"
+msgstr "මධ්‍යයේ වෘතයෙන් පිටත සියල්ල සඟවන්න"
 
-#: src/ui_configurationDialog.h:822
+#: src/ui_configurationDialog.h:829
 msgid "Disc viewport"
 msgstr "වෘතාකාර කවුලුවක් තුලින් පෙන්වන්න"
 
-#: src/ui_configurationDialog.h:824
+#: src/ui_configurationDialog.h:831
 msgid "Hide other constellations when you click one"
 msgstr "එකක් තෝරන විට අනෙක් තාරකා රාශි නොපෙන්වන්න"
 
-#: src/ui_configurationDialog.h:826
-msgid "Select single constellation"
-msgstr "තනි තාරකා රාශියක් තෝරන්න"
-
-#: src/ui_configurationDialog.h:827
-msgid "Screenshots"
-msgstr "තිරපිටපත්"
-
-#: src/ui_configurationDialog.h:828
-msgid "Screenshot Directory"
-msgstr "තිරපිටපත්"
-
-#: src/ui_configurationDialog.h:830
-msgid "Invert colors"
-msgstr "ලැයිස්තුව"
-
-#: src/ui_configurationDialog.h:831
-msgid "Star catalog updates"
-msgstr "තාරකා නාමාවලියේ යාවත්කාල වූ ඒවා"
-
 #: src/ui_configurationDialog.h:833
-msgid "Click here to start downloading"
-msgstr "බාගැනීම පටන් ගැනීමට මෙතනට කොටන්න"
+msgid "Select single constellation"
+msgstr "එක් තාරකා රාශියක් තෝරන්න"
+
+#: src/ui_configurationDialog.h:834
+msgid "Screenshots"
+msgstr "ස්ක්‍රීන්ෂොට්"
 
 #: src/ui_configurationDialog.h:835
+msgid "Screenshot Directory"
+msgstr "ස්ක්‍රීන්ෂොට් බහලුම"
+
+#: src/ui_configurationDialog.h:837
+msgid "Invert colors"
+msgstr "වර්ණ ඉන්වර්ට් කිරීම"
+
+#: src/ui_configurationDialog.h:838
+msgid "Star catalog updates"
+msgstr "යාවත්කාල කරන ලද තාරකා සූචි"
+
+#: src/ui_configurationDialog.h:840
+msgid "Click here to start downloading"
+msgstr "බාගත කිරීම් ආරම්භ කිරීමට මෙය ක්ලික් කරන්න"
+
+#: src/ui_configurationDialog.h:842
 msgid "Get catalog x of y"
 msgstr "y වලට අදාල x සූචිය ලබාගන්න"
 
-#: src/ui_configurationDialog.h:836
+#: src/ui_configurationDialog.h:843
 msgid "Download this file to view even more stars"
-msgstr "තව තරු බලන්න මේ ලිපිය බාගන්න"
+msgstr "තව තරු දකින්නට මෙම ගොනුව බාගතකරන්න"
 
-#: src/ui_configurationDialog.h:837
+#: src/ui_configurationDialog.h:844
 msgid "xxx"
 msgstr "xxx"
 
-#: src/ui_configurationDialog.h:839
+#: src/ui_configurationDialog.h:846
 msgid "Restart the download"
-msgstr "බාගන්න එක තව වරක් පණගන්වන්න"
-
-#: src/ui_configurationDialog.h:841
-msgid "Retry"
-msgstr "තව වරක් උත්සහ කරන්න"
-
-#: src/ui_configurationDialog.h:843
-msgid "Stop the download. You can always restart it later"
-msgstr "බාගන්න එක නවත්වන්න. ඔබට ඕනෑම වෙලාවක එය නවත පණගන්වන්න පුලුවන්"
-
-#: src/ui_configurationDialog.h:845
-msgid "Cancel"
-msgstr "එපා"
+msgstr "නැවතත් බාගතකරන්න"
 
 #: src/ui_configurationDialog.h:848
-msgid "Close window when script runs"
-msgstr "පිටපත ක්‍රියාත්මක වෙන වෙලාවට ජනේලය වහන්න"
+msgid "Retry"
+msgstr "නැවත උත්සහ කරන්න"
 
 #: src/ui_configurationDialog.h:850
+msgid "Stop the download. You can always restart it later"
+msgstr "බාගතකිරීම නවත්වන්න. ඔබට පසුව එය පණගැන්විය හැකි ය."
+
+#: src/ui_configurationDialog.h:852
+msgid "Cancel"
+msgstr "අවලංගු කරන්න"
+
+#: src/ui_configurationDialog.h:855
+msgid "Close window when script runs"
+msgstr "ස්ක්‍රිප්ටුව ක්‍රියාත්මක වන අවස්ථාවේදී කවුළුව වසන්න"
+
+#: src/ui_configurationDialog.h:857
 msgid "Run the selected script"
-msgstr "තෝරාගත් පිටපත ක්‍රියාත්මක කරන්න"
+msgstr "තෝරාගත් ස්ක්‍රිප්ටුව ක්‍රියාත්මක කරන්න"
 
-#: src/ui_configurationDialog.h:854
+#: src/ui_configurationDialog.h:861
 msgid "Stop a running script"
-msgstr "පිටපත ක්‍රියාත්මක වීම නවත්වන්න"
+msgstr "ස්ක්‍රිප්ටුව ක්‍රියාත්මක වීම නවත්වන්න"
 
-#: src/ui_configurationDialog.h:858
+#: src/ui_configurationDialog.h:865
 msgid "Load at startup"
-msgstr ""
+msgstr "ආරම්භයේදී පණගන්වන්න"
 
-#: src/ui_configurationDialog.h:863
+#: src/ui_configurationDialog.h:866
+msgid "configure"
+msgstr "සැකසුම්"
+
+#: src/ui_configurationDialog.h:871
 msgid "Main"
 msgstr "ප්‍රධාන"
 
-#: src/ui_configurationDialog.h:865
+#: src/ui_configurationDialog.h:873
 msgid "Navigation"
 msgstr "හැසිරවීම"
 
-#: src/ui_configurationDialog.h:867
+#: src/ui_configurationDialog.h:875
 msgid "Tools"
 msgstr "මෙවලම්"
 
-#: src/ui_configurationDialog.h:869
+#: src/ui_configurationDialog.h:877
 msgid "Scripts"
-msgstr "පිටපත්"
+msgstr "ස්ක්‍රිප්ට්"
 
-#: src/ui_configurationDialog.h:871
+#: src/ui_configurationDialog.h:879
 msgid "Plugins"
-msgstr ""
+msgstr "ප්ලගින"

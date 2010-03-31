@@ -8,271 +8,287 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-01-28 17:53+0100\n"
-"PO-Revision-Date: 2009-11-14 12:36+0000\n"
+"PO-Revision-Date: 2010-02-28 14:31+0000\n"
 "Last-Translator: Joshas <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-01-28 13:36+0000\n"
+"X-Launchpad-Export-Date: 2010-03-31 16:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/ui_locationDialogGui.h:408
-msgid " m"
-msgstr " m"
+#: src/modules/TextUI.cpp:92
+msgid "Sky Culture: "
+msgstr "Dangaus kūnų pavadinimai pagal: "
 
-#: src/gui/StelGuiItems.cpp:548
-#, no-c-format, qt-format
-msgid "%1m"
-msgstr "%1m"
+#: src/modules/TextUI.cpp:98
+msgid "Magnitude Sizing Multiplier: "
+msgstr "Ryškio dydžio daugiklis: "
+
+#: src/modules/TextUI.cpp:115
+msgid "Equator Line"
+msgstr "Pusiaujo liniją"
+
+#: src/modules/TextUI.cpp:116
+msgid "Ecliptic Line"
+msgstr "Ekliptikos liniją"
+
+#: src/gui/StelGui.cpp:109
+msgid "Ground"
+msgstr "Žemė"
+
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1009
+msgid "Atmosphere"
+msgstr "Atmosfera"
+
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:995 src/ui_viewDialog.h:1013
+msgid "Stars"
+msgstr "Žvaigždės"
+
+#: src/gui/StelGui.cpp:126
+msgid "Configuration window"
+msgstr "Nustatymų langas"
+
+#: src/ui_helpDialogGui.h:260 src/ui_helpDialogGui.h:266
+msgid "Help"
+msgstr "Pagalba"
+
+#: src/ui_viewDialog.h:1015
+msgid "Planets"
+msgstr "Planetos"
+
+#: src/ui_configurationDialog.h:747
+msgid "Configuration"
+msgstr "Nustatymai"
+
+#: src/modules/StarMgr.cpp:396
+#, qt-format
+msgid "Loading catalog %1 from file %2"
+msgstr "Įkeliamas katalogas %1 iš failo %2"
+
+#: src/modules/LandscapeMgr.cpp:425
+msgid "Author: "
+msgstr "Autorius: "
+
+#: src/modules/LandscapeMgr.cpp:428
+msgid "Location: "
+msgstr "Vieta: "
 
 #: src/modules/LandscapeMgr.cpp:433
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/ui_dateTimeDialogGui.h:297 src/ui_dateTimeDialogGui.h:298
-msgid "/"
-msgstr "/"
+#: src/modules/LandscapeMgr.cpp:436
+msgid "Planet: "
+msgstr "Planeta: "
 
-#: src/ui_viewDialog.h:1018
-msgid "0"
-msgstr "0"
+#: src/modules/Nebula.cpp:92
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr "Tipas: <b>%1</b>"
 
-#: src/ui_viewDialog.h:1019
-msgid "10"
-msgstr "10"
+#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:130
+#, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr "Ryškis: <b>%1</b>"
 
-#: src/ui_viewDialog.h:1021
-msgid "10000"
-msgstr "10000"
+#: src/modules/Nebula.cpp:100
+#, qt-format
+msgid "Size: %1"
+msgstr "Dydis: %1"
 
-#: src/ui_viewDialog.h:1022
-msgid "144000"
-msgstr "144000"
+#: src/modules/Nebula.cpp:269
+msgid "Galaxy"
+msgstr "Galaktika"
 
-#: src/ui_viewDialog.h:1020
-msgid "80"
-msgstr "80"
+#: src/modules/Nebula.cpp:272
+msgid "Open cluster"
+msgstr "Atviras spiečius"
 
-#: src/ui_dateTimeDialogGui.h:299 src/ui_dateTimeDialogGui.h:300
-msgid ":"
-msgstr ":"
+#: src/modules/Nebula.cpp:275
+msgid "Globular cluster"
+msgstr "Kamuolinis spiečius"
 
-#: src/ui_helpDialogGui.h:268
-msgid "About"
-msgstr "Apie"
+#: src/modules/Nebula.cpp:278
+msgid "Nebula"
+msgstr "Ūkas"
+
+#: src/modules/Nebula.cpp:281
+msgid "Planetary nebula"
+msgstr "Planetiškasis ūkas"
+
+#: src/modules/Nebula.cpp:284
+msgid "Cluster associated with nebulosity"
+msgstr "Spiečius susietas su ūku"
+
+#: src/modules/Nebula.cpp:287
+msgid "Unknown"
+msgstr "Nežinomas"
+
+#: src/modules/Nebula.cpp:290
+msgid "Undocumented type"
+msgstr "Neaprašytas tipas"
+
+#: src/modules/NebulaMgr.cpp:346
+#, qt-format
+msgid "Loading NGC catalog: %1/%2"
+msgstr "Įkeliamas NGC katalogas: %1/%2"
+
+#: src/modules/NebulaMgr.cpp:379
+msgid "Loading NGC catalog"
+msgstr "Įkeliamas NGC katalogas"
 
 #: src/modules/Planet.cpp:133 src/modules/StarWrapper.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Absoliutinis ryškis: %1"
 
-#: src/ui_viewDialog.h:996
-msgid "Absolute scale:"
-msgstr "Absoliutinis mastelis:"
-
-#: src/modules/TextUI.cpp:86
-msgid "Actual Time"
-msgstr "Dabartinis laikas"
-
-#: src/gui/StelGui.cpp:152
-msgid "Add 1 sidereal day"
-msgstr "Pridėti 1 žvaigždinę dieną"
-
-#: src/gui/StelGui.cpp:154
-msgid "Add 1 sidereal week"
-msgstr "Pridėti 1 žvaigždinę savaitę"
-
-#: src/gui/StelGui.cpp:148
-msgid "Add 1 solar day"
-msgstr "Pridėti 1 saulinę dieną"
-
-#: src/gui/StelGui.cpp:146
-msgid "Add 1 solar hour"
-msgstr "Pridėti 1 saulinę valandą"
-
-#: src/gui/StelGui.cpp:150
-msgid "Add 1 solar week"
-msgstr "Pridėti 1 saulinę savaitę"
-
-#: src/ui_locationDialogGui.h:395
-msgid "Add to list"
-msgstr "Pridėti į sąrašą"
-
-#: src/modules/TextUI.cpp:70
-msgid "Administration "
-msgstr "Valdymas "
-
-#: src/ui_configurationDialog.h:819
-msgid "Align labels with the horizon"
-msgstr "Lygiuoti užrašus su horizontu"
-
-#: src/ui_configurationDialog.h:754
-msgid "All available"
-msgstr "Viskas"
-
-#: src/ui_configurationDialog.h:783
-msgid "Allow keyboard to pan and zoom"
-msgstr "Leisti slinkti ir keisti mastelį klaviatūra"
-
-#: src/ui_configurationDialog.h:787
-msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr "Įjungti slinkimą ir mastelio keitima pele"
-
-#: src/modules/TextUI.cpp:75
-msgid "Altitude (m): "
-msgstr "Aukštis (m): "
-
-#: src/ui_locationDialogGui.h:404
-msgid "Altitude:"
-msgstr "Aukštis:"
+#: src/modules/Planet.cpp:140
+#, no-c-format, qt-format
+msgid "Distance: %1AU"
+msgstr "Nuotolis: %1AU"
 
 #: src/modules/Planet.cpp:144
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Regimasis skersmuo: %1"
 
-#: src/modules/TextUI.cpp:136
-msgid "Arrow down to load list."
-msgstr "Rodyklė žemyn įkels sarašą."
-
-#: src/gui/HelpDialog.cpp:52
-msgid "Arrow keys & left mouse drag"
-msgstr "Rodyklių klavišai ir slinkimas kairiu pelės klavišu"
-
-#: src/ui_viewDialog.h:1037
-msgid "Art brightness: "
-msgstr "Piešinių ryškumas: "
-
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1009
-msgid "Atmosphere"
-msgstr "Atmosfera"
-
-#: src/gui/ConfigurationDialog.cpp:568
-msgid "Author"
-msgstr "Autorius"
-
-#: src/modules/LandscapeMgr.cpp:425
-msgid "Author: "
-msgstr "Autorius: "
-
-#: src/gui/ConfigurationDialog.cpp:492
-msgid "Authors"
-msgstr "Autoriai"
-
-#: src/gui/StelGui.cpp:182
-msgid "Auto hide horizontal button bar"
-msgstr "Automatiškai slėpti horizontalią mygtukų juostą"
-
-#: src/gui/StelGui.cpp:183
-msgid "Auto hide vertical button bar"
-msgstr "Automatiškai slėpti vertikalią mygtukų juostą"
-
-#: src/ui_configurationDialog.h:825
-msgid "Auto zoom out returns to initial direction of view"
-msgstr "Automatinis atitolinimas gražins pradinę vaizdo kryptį"
-
-#: src/core/StelObject.cpp:91
+#: src/modules/StarWrapper.cpp:52 src/modules/StarWrapper.cpp:109
 #, qt-format
-msgid "Az/Alt: %1/%2"
-msgstr "Az/Alt: %1/%2"
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr "Ryškis: <b>%1</b> (B-V: %2)"
 
-#: src/modules/TextUI.cpp:113
-msgid "Azimuthal Grid"
-msgstr "Azimutinį tinklelį"
+#: src/modules/StarWrapper.cpp:119
+#, qt-format
+msgid "Spectral Type: %1"
+msgstr "Spektrinė klasė: %1"
 
-#: src/gui/StelGui.cpp:100 src/ui_viewDialog.h:1027
-msgid "Azimuthal grid"
-msgstr "Azimutinis tinklelis"
+#: src/modules/StarWrapper.cpp:123
+#, qt-format
+msgid "Distance: %1 Light Years"
+msgstr "Nuotolis: %1 šviesmečiai"
 
-#: src/translations.h:69
-msgid "Aztec"
-msgstr ""
+#: src/modules/StarWrapper.cpp:126
+#, qt-format
+msgid "Parallax: %1\""
+msgstr "Paralaksas: %1\""
 
-#: src/modules/TextUI.cpp:134
-msgid "CD/DVD Script: "
-msgstr "CD/DVD scenarijus: "
+#: src/modules/TextUI.cpp:63
+msgid "Set Location "
+msgstr "Nurodyti vietovę "
 
-#: src/gui/HelpDialog.cpp:57
-msgid "CTRL + Left click"
-msgstr "Vald + kairiojo pelės klavišo spustelėjimas"
+#: src/modules/TextUI.cpp:64
+msgid "Set Time "
+msgstr "Nurodyti laiką "
 
-#: src/gui/HelpDialog.cpp:54
-msgid "CTRL + Up/Down"
-msgstr "Vald + aukštyn/žemyn"
+#: src/modules/TextUI.cpp:65
+msgid "General "
+msgstr "Bendri "
 
-#: src/modules/TextUI.cpp:82
-msgid "Calendar"
-msgstr "Kalendorius"
-
-#: src/translations.h:45
-msgid "Callisto"
-msgstr "Kalista"
-
-#: src/ui_configurationDialog.h:852
-msgid "Cancel"
-msgstr "Atšaukti"
-
-#: src/modules/TextUI.cpp:108
-msgid "Cardinal Points"
-msgstr "Pasaulio kryptis"
-
-#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1031
-msgid "Cardinal points"
-msgstr "Pasaulio kryptys"
-
-#: src/ui_viewDialog.h:1024
-msgid "Celestial Sphere"
-msgstr "Dangaus sfera"
-
-#: src/gui/StelGui.cpp:158
-msgid "Center on selected object"
-msgstr "Centruoti pažymėtą objektą"
-
-#: src/translations.h:59
-msgid "Charon"
-msgstr "Charonas"
-
-#: src/translations.h:70
-msgid "Chinese"
-msgstr "kiniečių"
-
-#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
-msgid "Clear selection"
-msgstr "Išvalyti parinkimą"
-
-#: src/ui_configurationDialog.h:840
-msgid "Click here to start downloading"
-msgstr "Spragtelėkite norėdami pradėti siuntimą"
-
-#: src/ui_configurationDialog.h:855
-msgid "Close window when script runs"
-msgstr "Veikiant scenarijui užverti langą"
-
-#: src/modules/Nebula.cpp:284
-msgid "Cluster associated with nebulosity"
-msgstr "Spiečius susietas su ūku"
+#: src/modules/TextUI.cpp:66
+msgid "Stars "
+msgstr "Žvaigždės "
 
 #: src/modules/TextUI.cpp:67
 msgid "Colors "
 msgstr "Spalvos "
 
-#: src/ui_configurationDialog.h:747
-msgid "Configuration"
-msgstr "Nustatymai"
+#: src/modules/TextUI.cpp:68
+msgid "Effects "
+msgstr "Efektai "
 
-#: src/gui/StelGui.cpp:126
-msgid "Configuration window"
-msgstr "Nustatymų langas"
+#: src/modules/TextUI.cpp:69
+msgid "Scripts "
+msgstr "Scenarijai "
 
-#: src/modules/TextUI.cpp:106
-msgid "Constellation Art Intensity"
-msgstr "Žvaigždynų paveikslų ryškumas"
+#: src/modules/TextUI.cpp:70
+msgid "Administration "
+msgstr "Valdymas "
 
-#: src/modules/TextUI.cpp:107
-msgid "Constellation Boundaries"
-msgstr "Žvaigždynų ribos"
+#: src/modules/TextUI.cpp:73
+msgid "Latitude: "
+msgstr "Platuma: "
+
+#: src/modules/TextUI.cpp:74
+msgid "Longitude: "
+msgstr "Ilguma: "
+
+#: src/modules/TextUI.cpp:75
+msgid "Altitude (m): "
+msgstr "Aukštis (m): "
+
+#: src/modules/TextUI.cpp:76
+msgid "Solar System Body: "
+msgstr "Saulės sistemos kūnas: "
+
+#: src/modules/TextUI.cpp:79
+msgid "Sky Time: "
+msgstr "Dangaus laikas: "
+
+#: src/modules/TextUI.cpp:80
+msgid "Set Time Zone: "
+msgstr "Nurodyti laiko juostą: "
+
+#: src/modules/TextUI.cpp:81
+msgid "Day keys: "
+msgstr "Mygtukai dienoms: "
+
+#: src/modules/TextUI.cpp:82
+msgid "Calendar"
+msgstr "Kalendorius"
+
+#: src/modules/TextUI.cpp:83
+msgid "Sidereal"
+msgstr "Žvaigždinis"
+
+#: src/modules/TextUI.cpp:84
+msgid "Preset Sky Time: "
+msgstr "Numatytas dangaus laikas: "
+
+#: src/modules/TextUI.cpp:85
+msgid "Sky Time At Start-up: "
+msgstr "Pradinis dangaus laikas: "
+
+#: src/modules/TextUI.cpp:86
+msgid "Actual Time"
+msgstr "Dabartinis laikas"
+
+#: src/modules/TextUI.cpp:87
+msgid "Preset Time"
+msgstr "Numatytas laikas"
+
+#: src/modules/TextUI.cpp:88
+msgid "Time Display Format: "
+msgstr "Laiko formatas: "
+
+#: src/modules/TextUI.cpp:89
+msgid "Date Display Format: "
+msgstr "Datos formatas: "
+
+#: src/modules/TextUI.cpp:93
+msgid "Sky Language: "
+msgstr "Dangaus kūnų pavadinimai: "
+
+#: src/modules/TextUI.cpp:96
+msgid "Show: "
+msgstr "Rodyti: "
+
+#: src/modules/TextUI.cpp:97
+msgid "Star Value Multiplier: "
+msgstr "Žvaigždžių kiekio reikšmė "
+
+#: src/modules/TextUI.cpp:99
+msgid "Maximum Magnitude to Label: "
+msgstr "Maksimalus pavadinimo dydis: "
+
+#: src/modules/TextUI.cpp:100
+msgid "Twinkling: "
+msgstr "Mirgėjimas: "
+
+#: src/modules/TextUI.cpp:101
+msgid "Limiting Magnitude: "
+msgstr "Ribojantis ryškis: "
 
 #: src/modules/TextUI.cpp:104
 msgid "Constellation Lines"
@@ -282,392 +298,175 @@ msgstr "Žvaigždynų kontūrai"
 msgid "Constellation Names"
 msgstr "Žvaigždynų pavadinimai"
 
-#: src/gui/StelGui.cpp:96
-msgid "Constellation art"
-msgstr "Žvaigždynų piešiniai"
+#: src/modules/TextUI.cpp:106
+msgid "Constellation Art Intensity"
+msgstr "Žvaigždynų paveikslų ryškumas"
 
-#: src/gui/StelGui.cpp:98
-msgid "Constellation boundaries"
+#: src/modules/TextUI.cpp:107
+msgid "Constellation Boundaries"
 msgstr "Žvaigždynų ribos"
 
-#: src/gui/StelGui.cpp:97
-msgid "Constellation labels"
-msgstr "Žvaigždynų pavadinimai"
+#: src/modules/TextUI.cpp:108
+msgid "Cardinal Points"
+msgstr "Pasaulio kryptis"
 
-#: src/gui/StelGui.cpp:95
-msgid "Constellation lines"
-msgstr "Žvaigždynų kontūrai"
+#: src/modules/TextUI.cpp:109
+msgid "Planet Names"
+msgstr "Planetų pavadinimai"
 
-#: src/ui_viewDialog.h:1032
-msgid "Constellations"
-msgstr "Žvaigždynai"
+#: src/modules/TextUI.cpp:110
+msgid "Planet Orbits"
+msgstr "Planetų orbitos"
 
-#: src/gui/ConfigurationDialog.cpp:496 src/gui/ViewDialog.cpp:336
-msgid "Contact"
-msgstr "Susisiekite"
+#: src/modules/TextUI.cpp:111
+msgid "Planet Trails"
+msgstr "Planetų pėdsakai"
 
-#: src/ui_configurationDialog.h:781
-msgid "Control"
-msgstr "Valdymas"
+#: src/modules/TextUI.cpp:112
+msgid "Meridian Line"
+msgstr "Dienovidinio linija"
 
-#: src/modules/TextUI.cpp:130
-msgid "Correct for light travel time: "
-msgstr "Kelionės šviesos greičiu pataisa: "
-
-#: src/ui_locationDialogGui.h:410
-msgid "Country:"
-msgstr "Šalis:"
-
-#: src/ui_locationDialogGui.h:392
-msgid "Current location information"
-msgstr "Informacija apie šią vietovę"
-
-#: src/modules/TextUI.cpp:129
-msgid "Cursor Timeout: "
-msgstr "Slėpti kursorių po: "
-
-#: src/core/StelProjectorClasses.cpp:230
-msgid "Cylinder"
-msgstr "Cilindrinė"
-
-#: src/modules/TextUI.cpp:89
-msgid "Date Display Format: "
-msgstr "Datos formatas: "
-
-#: src/gui/StelGui.cpp:135 src/ui_dateTimeDialogGui.h:295
-msgid "Date and Time"
-msgstr "Data ir laikas"
-
-#: src/gui/StelGui.cpp:129
-msgid "Date/time window"
-msgstr "Datos/laiko langas"
-
-#: src/modules/TextUI.cpp:81
-msgid "Day keys: "
-msgstr "Mygtukai dienoms: "
-
-#: src/gui/StelGui.cpp:139
-msgid "Decrease time speed"
-msgstr "Sulėtinti laiko tėkmės greitį"
-
-#: src/gui/StelGui.cpp:142
-msgid "Decrease time speed (a little)"
-msgstr "Sumažinti laiko greitį (šiek tiek)"
-
-#: src/ui_configurationDialog.h:763
-msgid "Default options"
-msgstr "Numatytosios nuostatos"
-
-#: src/translations.h:39
-msgid "Deimos"
-msgstr "Deimas"
-
-#: src/ui_locationDialogGui.h:394
-msgid "Delete"
-msgstr "Pašalinti"
-
-#: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:295
-#: src/gui/HelpDialog.cpp:297 src/gui/HelpDialog.cpp:298
-#, qt-format
-msgid "Developer: %1"
-msgstr "Programuotojas: %1"
-
-#: src/gui/HelpDialog.cpp:290
-msgid "Developers"
-msgstr "Programuotojai"
-
-#: src/ui_viewDialog.h:1000
-msgid "Dim faint stars when a very bright object is visible"
-msgstr "Pritemdyti neryškias žvaigždes, kai matomas labai ryškus objektas."
-
-#: src/translations.h:50
-msgid "Dione"
-msgstr "Dione"
-
-#: src/ui_configurationDialog.h:829
-msgid "Disc viewport"
-msgstr "Diskinis vaizdas"
-
-#: src/gui/StelGui.cpp:94
-msgid "Display Options"
-msgstr "Vaizdo nustatymai"
-
-#: src/ui_configurationDialog.h:752
-msgid "Display all information available"
-msgstr "Rodyti visą informaciją"
-
-#: src/ui_configurationDialog.h:756
-msgid "Display less information"
-msgstr "Rodyti mažiau informacijos"
-
-#: src/ui_configurationDialog.h:760
-msgid "Display no information"
-msgstr "Informacijos nerodyti"
-
-#: src/modules/StarWrapper.cpp:123
-#, qt-format
-msgid "Distance: %1 Light Years"
-msgstr "Nuotolis: %1 šviesmečiai"
-
-#: src/modules/Planet.cpp:140
-#, no-c-format, qt-format
-msgid "Distance: %1AU"
-msgstr "Nuotolis: %1AU"
-
-#: src/gui/HelpDialog.cpp:292
-#, qt-format
-msgid "Doc author/developer: %1"
-msgstr "Žinyno autorius/programuotojas: %1"
-
-#: src/gui/ConfigurationDialog.cpp:659
-#, fuzzy, qt-format
-msgid ""
-"Download size: %1MB\n"
-"Star count: %2 Million\n"
-"Magnitude range: %3 - %4"
-msgstr ""
-"Parsisiuntimo dydis: %1MB\n"
-"Žvaigždžių skaičius: %2\n"
-"Ryškio intervalas: %3 - %4"
-
-#: src/ui_configurationDialog.h:843
-msgid "Download this file to view even more stars"
-msgstr "Norėdami matyti dar daugiau žvaigždžių atsisiųskite šį failą"
-
-#: src/gui/ConfigurationDialog.cpp:711
-#, qt-format
-msgid ""
-"Downloading %1...\n"
-"(You can close this window.)"
-msgstr ""
-"Siunčiama %1...\n"
-"(Jūs galite uždaryti šį langą.)"
-
-#: src/ui_viewDialog.h:1002
-msgid "Dynamic eye adaptation"
-msgstr "Dinamiškas akių prisitaikymas"
-
-#: src/translations.h:65
-msgid "E"
-msgstr "R"
-
-#: src/translations.h:36
-msgid "Earth"
-msgstr "Žemė"
-
-#: src/modules/TextUI.cpp:116
-msgid "Ecliptic Line"
-msgstr "Ekliptikos liniją"
-
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1030
-msgid "Ecliptic line"
-msgstr "Ekliptikos linija"
-
-#: src/modules/TextUI.cpp:68
-msgid "Effects "
-msgstr "Efektai "
-
-#: src/translations.h:71
-msgid "Egyptian"
-msgstr "egiptiečių"
-
-#: src/ui_configurationDialog.h:785
-msgid "Enable keyboard navigation"
-msgstr "Įjungti navigaciją klaviatūra"
-
-#: src/ui_configurationDialog.h:789
-msgid "Enable mouse navigation"
-msgstr "Įjungti navigaciją pele"
-
-#: src/translations.h:48
-msgid "Enceladus"
-msgstr "Enceladas"
-
-#: src/ui_locationDialogGui.h:406
-msgid "Enter the altitude in meter"
-msgstr "Įveskite aukštį metrais"
-
-#: src/core/StelProjectorClasses.cpp:63
-msgid "Equal Area"
-msgstr "Vienodas plotas"
-
-#: src/modules/TextUI.cpp:115
-msgid "Equator Line"
-msgstr "Pusiaujo liniją"
-
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1028
-msgid "Equator line"
-msgstr "Pusiaujo linija"
+#: src/modules/TextUI.cpp:113
+msgid "Azimuthal Grid"
+msgstr "Azimutinį tinklelį"
 
 #: src/modules/TextUI.cpp:114
 msgid "Equatorial Grid"
 msgstr "Ekvatorinį tinklelį"
 
-#: src/gui/StelGui.cpp:102 src/ui_viewDialog.h:1026
-msgid "Equatorial J2000 grid"
-msgstr "Ekvatorinis J2000 tinklelis"
+#: src/modules/TextUI.cpp:117
+msgid "Nebula Names"
+msgstr "Ūkų pavadinimai"
 
-#: src/gui/StelGui.cpp:101 src/ui_viewDialog.h:1025
-msgid "Equatorial grid"
-msgstr "Ekvatorinis tinklelis"
+#: src/modules/TextUI.cpp:118
+msgid "Nebula Circles"
+msgstr "Ūkų orbitos"
 
-#: src/gui/ConfigurationDialog.cpp:706 src/gui/ConfigurationDialog.cpp:740
-#, qt-format
+#: src/modules/TextUI.cpp:121
+msgid "Light Pollution Luminance: "
+msgstr "Šviesos taršos skaistis: "
+
+#: src/modules/TextUI.cpp:122
+msgid "Landscape: "
+msgstr "Kraštovaizdis: "
+
+#: src/modules/TextUI.cpp:123
+msgid "Manual zoom: "
+msgstr "Rankinis mastelis: "
+
+#: src/modules/TextUI.cpp:124
+msgid "Object Sizing Rule: "
+msgstr "Objektų dydžio keitimo taisyklė: "
+
+#: src/modules/TextUI.cpp:125
+msgid "Magnitude Scaling Multiplier: "
+msgstr "Dydžio pagal ryškį reikšmė: "
+
+#: src/modules/TextUI.cpp:126
+msgid "Milky Way intensity: "
+msgstr "Paukščių tako ryškumas: "
+
+#: src/modules/TextUI.cpp:127
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "Maksimalus ūko pavadinimo dydis: "
+
+#: src/modules/TextUI.cpp:128
+msgid "Zoom Duration: "
+msgstr "Priartinimo trukmė: "
+
+#: src/modules/TextUI.cpp:129
+msgid "Cursor Timeout: "
+msgstr "Slėpti kursorių po: "
+
+#: src/modules/TextUI.cpp:130
+msgid "Correct for light travel time: "
+msgstr "Kelionės šviesos greičiu pataisa: "
+
+#: src/modules/TextUI.cpp:133
+msgid "Local Script: "
+msgstr "Vietinis scenarijus: "
+
+#: src/modules/TextUI.cpp:134
+msgid "CD/DVD Script: "
+msgstr "CD/DVD scenarijus: "
+
+#: src/modules/TextUI.cpp:135
+msgid "USB Script: "
+msgstr "USB Scenarijus: "
+
+#: src/modules/TextUI.cpp:136
+msgid "Arrow down to load list."
+msgstr "Rodyklė žemyn įkels sarašą."
+
+#: src/modules/TextUI.cpp:137
+msgid "Select and exit to run."
+msgstr "Pasirinkite ir baikite darbą norėdami paleisti."
+
+#: src/modules/TextUI.cpp:140
+msgid "Load Default Configuration: "
+msgstr "Įkelti numatytąsias nuostatas: "
+
+#: src/modules/TextUI.cpp:141
+msgid "Save Current Configuration as Default: "
+msgstr "Išsaugoti nuostatas kaip numatytąsias: "
+
+#: src/modules/TextUI.cpp:142
+msgid "Shut Down: "
+msgstr "Išjungti kompiuterį: "
+
+#: src/modules/TextUI.cpp:143
+msgid "Update me via Internet: "
+msgstr "Atnaujinti internetu: "
+
+#: src/modules/TextUI.cpp:144
+msgid "Set UI Locale: "
+msgstr "Nustatyti VI lokalę: "
+
+#: src/core/StelProjector.cpp:61
+msgid "Maximum FOV: "
+msgstr "Didžiausias apžvalgos laukas "
+
+#: src/core/StelProjectorClasses.cpp:25
+msgid "Perspective"
+msgstr "Perspektyva"
+
+#: src/core/StelProjectorClasses.cpp:30
 msgid ""
-"Error downloading %1:\n"
-"%2"
+"Perspective projection keeps the horizon a straight line. The mathematical "
+"name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
-"Klaida siunčiant %1:\n"
-"%2"
+"Perspektyvinė projekcija laiko horizontą tiesia linija. Matematinis šios "
+"projekcijos pavadinimas yra <i>gnomoninė projekcija</i>."
 
-#: src/gui/ConfigurationDialog.cpp:795
-#, qt-format
+#: src/core/StelProjectorClasses.cpp:63
+msgid "Equal Area"
+msgstr "Vienodas plotas"
+
+#: src/core/StelProjectorClasses.cpp:68
 msgid ""
-"Error downloading %1:\n"
-"File is corrupted."
+"The full name of this projection method is, <i>Lambert azimuthal equal-area "
+"projection</i>. It preserves the area but not the angle."
 msgstr ""
-"Klaida siunčiant %1:\n"
-"Failas sugadintas."
+"Pilnas šios projekcijos pavadinimas - <i>Lambero azimutinė vienodo-ploto "
+"projekcija</i>. Ji išlaiko plotą, bet ne kampą."
 
-#: src/translations.h:43
-msgid "Europa"
-msgstr "Europa"
+#: src/core/StelProjectorClasses.cpp:111
+msgid "Stereographic"
+msgstr "Stereografinė"
 
-#: src/gui/ViewDialog.cpp:453
-msgid "Exceptional Leonid rate"
-msgstr "Nepaprastas Leonido"
-
-#: src/ui_searchDialogGui.h:230 src/ui_searchDialogGui.h:231
-msgid "Find Object"
-msgstr "Objekto paieška"
-
-#: src/gui/ConfigurationDialog.cpp:650
-#, fuzzy
-msgid "Finished downloading all star catalogs!"
-msgstr ""
-"Naujų žvaigždžių katalogų siuntimas baigtas.\n"
-"Norėdami juos pamatyti, paleiskite Stellarium iš naujo."
-
-#: src/gui/ConfigurationDialog.cpp:668
+#: src/core/StelProjectorClasses.cpp:116
 msgid ""
-"Finished downloading new star catalogs!\n"
-"Restart Stellarium to display them."
+"Stereographic projection is known since the antiquity and was originally "
+"known as the planisphere projection. It preserves the angles at which curves "
+"cross each other but it does not preserve area."
 msgstr ""
-"Naujų žvaigždžių katalogų siuntimas baigtas.\n"
-"Norėdami juos pamatyti, paleiskite Stellarium iš naujo."
+"Stereografinė projekcija yra žinoma nuo senovės ir buvo vadinama "
+"planisferine projekcija. Ji išlaiko kampus, kuriais kertasi kreivės, bet "
+"neišlaiko ploto."
 
 #: src/core/StelProjectorClasses.cpp:150
 msgid "Fish-eye"
 msgstr "Žuvies akis"
-
-#: src/gui/StelGui.cpp:121
-msgid "Flip scene horizontally"
-msgstr "Horizontalusis atspindys"
-
-#: src/gui/StelGui.cpp:122
-msgid "Flip scene vertically"
-msgstr "Vertikalusis atspindys"
-
-#: src/gui/StelGui.cpp:111
-msgid "Fog"
-msgstr "Rūką"
-
-#: src/ui_dateTimeDialogGui.h:294 src/ui_helpDialogGui.h:259
-#: src/ui_locationDialogGui.h:387 src/ui_viewDialog.h:979
-#: src/ui_configurationDialog.h:746
-msgid "Form"
-msgstr "Forma"
-
-#: src/gui/StelGui.cpp:120
-msgid "Full-screen mode"
-msgstr "Viso ekrano režimas"
-
-#: src/gui/HelpDialog.cpp:170
-msgid "Further Reading"
-msgstr "Tolesniam skaitymui"
-
-#: src/gui/StelGui.cpp:103
-msgid "Galactic grid"
-msgstr ""
-
-#: src/modules/Nebula.cpp:269
-msgid "Galaxy"
-msgstr "Galaktika"
-
-#: src/translations.h:44
-msgid "Ganymede"
-msgstr "Ganimedas"
-
-#: src/modules/TextUI.cpp:65
-msgid "General "
-msgstr "Bendri "
-
-#: src/gui/ConfigurationDialog.cpp:657
-#, qt-format
-msgid "Get catalog %1 of %2"
-msgstr "Parsiųsti katalogą %1 iš %2"
-
-#: src/ui_configurationDialog.h:842
-msgid "Get catalog x of y"
-msgstr "Parsiųsti katalogą x iš y"
-
-#: src/modules/Nebula.cpp:275
-msgid "Globular cluster"
-msgstr "Kamuolinis spiečius"
-
-#: src/gui/HelpDialog.cpp:293
-#, qt-format
-msgid "Graphic/other designer: %1"
-msgstr "Grafikos/kt. dizaineris: %1"
-
-#: src/ui_configurationDialog.h:821
-msgid "Gravity labels"
-msgstr "Lygiuoti antraštes pagal horizontą"
-
-#: src/gui/StelGui.cpp:109
-msgid "Ground"
-msgstr "Žemė"
-
-#: src/core/StelProjectorClasses.cpp:189
-msgid "Hammer-Aitoff"
-msgstr "Hamerio-Aitofo"
-
-#: src/ui_helpDialogGui.h:260 src/ui_helpDialogGui.h:266
-msgid "Help"
-msgstr "Pagalba"
-
-#: src/gui/StelGui.cpp:125
-msgid "Help window"
-msgstr "Žinyno langas"
-
-#: src/ui_configurationDialog.h:831
-msgid "Hide other constellations when you click one"
-msgstr "Pažymėjus žvaigždyną paslėpti kitus"
-
-#: src/ui_configurationDialog.h:806
-msgid "Hides the mouse cursor when inactive"
-msgstr "Slėpti pelės žymeklį, kai jis nejuda"
-
-#: src/gui/ViewDialog.cpp:456
-msgid "Highest rate ever (1966 Leonids)"
-msgstr "Didžiausias dažnis (1966 Leonido)"
-
-#: src/core/StelObject.cpp:80
-#, qt-format
-msgid "Hour angle/DE: %1/%2"
-msgstr "Valandinis kampas/DE: %1/%2"
-
-#: src/ui_viewDialog.h:1017
-msgid "Hourly zenith rate:"
-msgstr "Valandinis zenitinis dažnis:"
-
-#: src/translations.h:53
-msgid "Hyperion"
-msgstr "Hiperionas"
-
-#: src/translations.h:54
-msgid "Iapetus"
-msgstr "Japetas"
 
 #: src/core/StelProjectorClasses.cpp:155
 msgid ""
@@ -681,223 +480,548 @@ msgstr ""
 "kampiniu atstumu nuo lauko vaizdo centro (panašiai, kaip iškraipymai labai "
 "plataus vaizdo fotoaparatų objektyvuose)."
 
-#: src/gui/StelGui.cpp:140
-msgid "Increase time speed"
-msgstr "Padidinti laiko tėkmės greitį"
+#: src/core/StelProjectorClasses.cpp:189
+msgid "Hammer-Aitoff"
+msgstr "Hamerio-Aitofo"
 
-#: src/gui/StelGui.cpp:143
-msgid "Increase time speed (a little)"
-msgstr "Padidinti laiko greitį (šiek tiek)"
+#: src/core/StelProjectorClasses.cpp:194
+msgid ""
+"The Hammer projection is an equal-area map projection, described by Ernst "
+"Hammer in 1892 and directly inspired by the Aitoff projection."
+msgstr ""
+"Hamerio projekcija tai vienodo ploto žemėlapio projekcija, aprašyta Ernst "
+"Hammer 1892 m., tiesiogiai įkvėpta Aitofo projekcijos."
 
-#: src/translations.h:72
-msgid "Inuit"
-msgstr "inuitų"
+#: src/core/StelProjectorClasses.cpp:230
+msgid "Cylinder"
+msgstr "Cilindrinė"
 
-#: src/ui_configurationDialog.h:837
-msgid "Invert colors"
-msgstr "Invertuoti spalvas"
-
-#: src/translations.h:42
-msgid "Io"
-msgstr "Ija"
-
-#: src/translations.h:41
-msgid "Jupiter"
-msgstr "Jupiteris"
-
-#: src/gui/HelpDialog.cpp:162
-msgid "Keys"
-msgstr "Klavišai"
-
-#: src/translations.h:73
-msgid "Korean"
-msgstr "korėjiečių"
-
-#: src/ui_viewDialog.h:1012
-msgid "Labels and Markers"
-msgstr "Pavadinimai ir žymekliai"
-
-#: src/translations.h:74
-msgid "Lakota"
-msgstr "lakotų"
-
-#: src/ui_viewDialog.h:990
-msgid "Landscape"
-msgstr "Kraštovaizdis"
-
-#: src/modules/TextUI.cpp:122
-msgid "Landscape: "
-msgstr "Kraštovaizdis: "
-
-#: src/ui_locationDialogGui.h:396
-msgid "Latitude:"
-msgstr "Platuma:"
-
-#: src/modules/TextUI.cpp:73
-msgid "Latitude: "
-msgstr "Platuma: "
-
-#: src/gui/HelpDialog.cpp:55
-msgid "Left click"
-msgstr "Spragtelėti kairiu pelės klavišu"
-
-#: src/gui/ConfigurationDialog.cpp:569
-msgid "License"
-msgstr "Licencija"
-
-#: src/modules/TextUI.cpp:121
-msgid "Light Pollution Luminance: "
-msgstr "Šviesos taršos skaistis: "
-
-#: src/ui_viewDialog.h:1011
-msgid "Light pollution: "
-msgstr "Šviesos tarša: "
-
-#: src/modules/TextUI.cpp:101
-msgid "Limiting Magnitude: "
-msgstr "Ribojantis ryškis: "
-
-#: src/modules/TextUI.cpp:140
-msgid "Load Default Configuration: "
-msgstr "Įkelti numatytąsias nuostatas: "
-
-#: src/ui_configurationDialog.h:865
-msgid "Load at startup"
-msgstr "Įkelti paleidimo metu"
-
-#: src/modules/NebulaMgr.cpp:379
-#, fuzzy
-msgid "Loading NGC catalog"
-msgstr "Įkeliamas NGC katalogas: %1/%2"
-
-#: src/modules/NebulaMgr.cpp:346
-#, qt-format
-msgid "Loading NGC catalog: %1/%2"
-msgstr "Įkeliamas NGC katalogas: %1/%2"
-
-#: src/modules/StarMgr.cpp:396
-#, qt-format
-msgid "Loading catalog %1 from file %2"
-msgstr "Įkeliamas katalogas %1 iš failo %2"
-
-#: src/modules/TextUI.cpp:133
-msgid "Local Script: "
-msgstr "Vietinis scenarijus: "
-
-#: src/ui_locationDialogGui.h:388
-msgid "Location"
-msgstr "Vietovė"
-
-#: src/gui/StelGui.cpp:130
-msgid "Location window"
-msgstr "Vietovės langas"
-
-#: src/modules/LandscapeMgr.cpp:428
-msgid "Location: "
-msgstr "Vieta: "
-
-#: src/ui_helpDialogGui.h:270
-msgid "Log"
-msgstr "Žurnalas"
-
-#: src/ui_locationDialogGui.h:400
-msgid "Longitude:"
-msgstr "Ilguma:"
-
-#: src/modules/TextUI.cpp:74
-msgid "Longitude: "
-msgstr "Ilguma: "
-
-#: src/modules/TextUI.cpp:125
-msgid "Magnitude Scaling Multiplier: "
-msgstr "Dydžio pagal ryškį reikšmė: "
-
-#: src/modules/TextUI.cpp:98
-msgid "Magnitude Sizing Multiplier: "
-msgstr "Ryškio dydžio daugiklis: "
-
-#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:130
-#, qt-format
-msgid "Magnitude: <b>%1</b>"
-msgstr "Ryškis: <b>%1</b>"
-
-#: src/modules/StarWrapper.cpp:52 src/modules/StarWrapper.cpp:109
-#, qt-format
-msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr "Ryškis: <b>%1</b> (B-V: %2)"
-
-#: src/ui_configurationDialog.h:871
-msgid "Main"
-msgstr "Pagrindinis"
-
-#: src/modules/TextUI.cpp:123
-msgid "Manual zoom: "
-msgstr "Rankinis mastelis: "
-
-#: src/translations.h:75
-msgid "Maori"
-msgstr "Maorių"
-
-#: src/ui_viewDialog.h:988
-msgid "Markings"
-msgstr "Žymės"
-
-#: src/translations.h:38
-msgid "Mars"
-msgstr "Marsas"
-
-#: src/ui_configurationDialog.h:827
-msgid "Mask out everything outside a central circle in the main view"
-msgstr "Pagrindiniame vaizde paslėpti viską už centrinio apskritimo ribų"
-
-#: src/core/StelProjector.cpp:61
-msgid "Maximum FOV: "
-msgstr "Didžiausias apžvalgos laukas "
-
-#: src/modules/TextUI.cpp:99
-msgid "Maximum Magnitude to Label: "
-msgstr "Maksimalus pavadinimo dydis: "
-
-#: src/modules/TextUI.cpp:127
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Maksimalus ūko pavadinimo dydis: "
+#: src/core/StelProjectorClasses.cpp:235
+msgid ""
+"The full name of this projection mode is <i>cylindrical equidistant "
+"projection</i>. With this projection all parallels are equally spaced."
+msgstr ""
+"Pilnas šios projekcijos pavadinimas - <i>cilindrinė vienodai nutolusi "
+"projekcija</i>. Su šia projekcija, visos paralelės yra nutolusios viena nuo "
+"kitos vienodu atstumu."
 
 #: src/core/StelProjectorClasses.cpp:277
 msgid "Mercator"
 msgstr "Merkatoriaus"
 
-#: src/translations.h:34
-msgid "Mercury"
-msgstr "Merkurijus"
+#: src/core/StelProjectorClasses.cpp:282
+msgid ""
+"The mercator projection is one of the most used world map projection. It "
+"preserves direction and shapes but distorts size, in an increasing degree "
+"away from the equator."
+msgstr ""
+"Merkatoriaus projekcija yra daugiausiai naudojama pasaulio žemėlapių "
+"projekcija. Ji išlaiko kryptį ir formas, bet tolstant nuo pusiaujo iškreipia "
+"dydį."
 
-#: src/modules/TextUI.cpp:112
-msgid "Meridian Line"
-msgstr "Dienovidinio linija"
+#: src/core/StelProjectorClasses.cpp:329
+msgid "Orthographic"
+msgstr "Ortografinė"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1029
-msgid "Meridian line"
-msgstr "Dienovidinio linija"
+#: src/core/StelProjectorClasses.cpp:334
+msgid ""
+"Orthographic projection is related to perspective projection, but the point "
+"of perspective is set to an infinite distance."
+msgstr ""
+"Ortografinė projekcija yra gimininga perspektyvinei projekcijai, bet "
+"perspektyvos taškas yra begalybė."
 
-#: src/modules/TextUI.cpp:126
-msgid "Milky Way intensity: "
-msgstr "Paukščių tako ryškumas: "
+#: src/core/StelObject.cpp:65
+#, qt-format
+msgid "RA/DE (J2000): %1/%2"
+msgstr "RA/DE (J2000): %1/%2"
 
-#: src/translations.h:47
-msgid "Mimas"
-msgstr "Mimas"
+#: src/core/StelObject.cpp:72
+#, qt-format
+msgid "RA/DE (of date): %1/%2"
+msgstr "RA/DE (datos): %1/%2"
+
+#: src/core/StelObject.cpp:80
+#, qt-format
+msgid "Hour angle/DE: %1/%2"
+msgstr "Valandinis kampas/DE: %1/%2"
+
+#: src/core/StelObject.cpp:91
+#, qt-format
+msgid "Az/Alt: %1/%2"
+msgstr "Az/Alt: %1/%2"
+
+#: src/gui/ConfigurationDialog.cpp:283
+msgid "Select screenshot directory"
+msgstr "Nurodykite katalogą ekrano nuotraukoms"
+
+#: src/gui/ConfigurationDialog.cpp:448
+#, qt-format
+msgid "Startup FOV: %1%2"
+msgstr "Pradinis apžvalgos laukas: %1 %2"
+
+#: src/gui/ConfigurationDialog.cpp:456
+#, qt-format
+msgid "Startup direction of view Az/Alt: %1/%2"
+msgstr "Pradinė Az/Alt vaizdo kryptis: %1/%2"
+
+#: src/gui/ConfigurationDialog.cpp:492
+msgid "Authors"
+msgstr "Autoriai"
+
+#: src/gui/ConfigurationDialog.cpp:496 src/gui/ViewDialog.cpp:336
+msgid "Contact"
+msgstr "Susisiekite"
+
+#: src/gui/ConfigurationDialog.cpp:568
+msgid "Author"
+msgstr "Autorius"
+
+#: src/gui/ConfigurationDialog.cpp:569
+msgid "License"
+msgstr "Licencija"
+
+#: src/gui/ConfigurationDialog.cpp:600
+msgid "Running script: "
+msgstr "Vykdomas scenarijus: "
+
+#: src/gui/ConfigurationDialog.cpp:607
+msgid "Running script: [none]"
+msgstr "Vykdomas scenarijus: [nėra]"
+
+#: src/gui/ConfigurationDialog.cpp:650
+msgid "Finished downloading all star catalogs!"
+msgstr "Visi žvaigždžių katalogai parsiųsti"
+
+#: src/gui/ConfigurationDialog.cpp:657
+#, qt-format
+msgid "Get catalog %1 of %2"
+msgstr "Parsiųsti katalogą %1 iš %2"
+
+#: src/gui/ConfigurationDialog.cpp:659
+#, qt-format
+msgid ""
+"Download size: %1MB\n"
+"Star count: %2 Million\n"
+"Magnitude range: %3 - %4"
+msgstr ""
+"Siuntinio dydis: %1MB\n"
+"Žvaigždžių skaičius: %2 milijonai\n"
+"Ryškio intervalas: %3 - %4"
+
+#: src/gui/ConfigurationDialog.cpp:668
+msgid ""
+"Finished downloading new star catalogs!\n"
+"Restart Stellarium to display them."
+msgstr ""
+"Naujų žvaigždžių katalogų siuntimas baigtas.\n"
+"Norėdami juos pamatyti, paleiskite Stellarium iš naujo."
+
+#: src/gui/ConfigurationDialog.cpp:706 src/gui/ConfigurationDialog.cpp:740
+#, qt-format
+msgid ""
+"Error downloading %1:\n"
+"%2"
+msgstr ""
+"Klaida siunčiant %1:\n"
+"%2"
+
+#: src/gui/ConfigurationDialog.cpp:711
+#, qt-format
+msgid ""
+"Downloading %1...\n"
+"(You can close this window.)"
+msgstr ""
+"Siunčiama %1...\n"
+"(Jūs galite uždaryti šį langą.)"
+
+#: src/gui/ConfigurationDialog.cpp:791
+msgid "Verifying file integrity..."
+msgstr "Tikrinamas failų vientisumas..."
+
+#: src/gui/ConfigurationDialog.cpp:795
+#, qt-format
+msgid ""
+"Error downloading %1:\n"
+"File is corrupted."
+msgstr ""
+"Klaida siunčiant %1:\n"
+"Failas sugadintas."
+
+#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:286
+#: src/gui/StelGuiItems.cpp:647
+msgid "Space"
+msgstr "Kosmosas"
+
+#: src/gui/HelpDialog.cpp:52
+msgid "Arrow keys & left mouse drag"
+msgstr "Rodyklių klavišai ir slinkimas kairiu pelės klavišu"
+
+#: src/gui/HelpDialog.cpp:53
+msgid "Page Up/Down"
+msgstr "Ankstesnio/tolesnio puslapio klavišas"
+
+#: src/gui/HelpDialog.cpp:54
+msgid "CTRL + Up/Down"
+msgstr "Vald + aukštyn/žemyn"
+
+#: src/gui/HelpDialog.cpp:55
+msgid "Left click"
+msgstr "Spragtelėti kairiu pelės klavišu"
+
+#: src/gui/HelpDialog.cpp:56
+msgid "Right click"
+msgstr "Spragtelėti dešiniu pelės klavišu"
+
+#: src/gui/HelpDialog.cpp:57
+msgid "CTRL + Left click"
+msgstr "Vald + kairiojo pelės klavišo spustelėjimas"
+
+#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:157
+msgid "Movement and Selection"
+msgstr "Slinkimas ir parinkimas"
+
+#: src/gui/HelpDialog.cpp:61
+msgid "Pan view around the sky"
+msgstr "Slinkti vaizdą aplink dangų"
+
+#: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
+msgid "Zoom in/out"
+msgstr "Keisti mastelį"
+
+#: src/gui/HelpDialog.cpp:64
+msgid "Select object"
+msgstr "Parinkti objektą"
+
+#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
+msgid "Clear selection"
+msgstr "Išvalyti parinkimą"
+
+#: src/gui/HelpDialog.cpp:70
+msgid "When a Script is Running"
+msgstr "Kai vykdomas scenarijus"
+
+#: src/gui/HelpDialog.cpp:71 src/gui/StelGui.cpp:136
+msgid "Slow down the script execution rate"
+msgstr "Sulėtinti scenarijaus vykdymą"
+
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:137
+msgid "Speed up the script execution rate"
+msgstr "Pagreitinti scenarijaus vykdymą"
+
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:138
+msgid "Set the normal script execution rate"
+msgstr "Nustatyti normalų scenarijaus vykdymo greitį"
+
+#: src/gui/HelpDialog.cpp:161
+msgid "Stellarium Help"
+msgstr "Stellarium žinynas"
+
+#: src/gui/HelpDialog.cpp:162
+msgid "Keys"
+msgstr "Klavišai"
+
+#: src/gui/HelpDialog.cpp:170
+msgid "Further Reading"
+msgstr "Tolesniam skaitymui"
+
+#: src/gui/HelpDialog.cpp:171
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"Šios nuorodos veda į interneto svetaines ir bus atidarytos interneto "
+"naršyklėje:\n"
+
+#: src/gui/HelpDialog.cpp:172
+msgid "The Stellarium User Guide"
+msgstr "Stellarium vartotojo žinynas"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:176
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Dažniausiai užduodami klausimai} apie Stellarium.  Su atsakymais."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:181
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{The Stellarium Wiki} - Bendra informacija. Čia galite rasti ir vartotojų "
+"sukurtas vietoves bei scenarijus."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:186
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Support ticket system} - jei Jums reikalinga pagalba naudojantis "
+"Stellarium, parašykite pagalbos prašymą čia ir mes pabandysime padėti."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:191
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Pranešimų apie klaidas ir naujų funkcijų pageidavimo sistema} - jei kažkas "
+"veikia klaidingai ar kažko trūksta ir tai nepridėta klaidų sąraše, apie tai "
+"galite pranešti čia."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:196
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Forumai} - aptarkite Stellarium su kitais vartotojais."
 
 #: src/gui/HelpDialog.cpp:232 src/gui/HelpDialog.cpp:322
 #: src/gui/HelpDialog.cpp:324 src/gui/StelGui.cpp:176
 msgid "Miscellaneous"
 msgstr "Įvairūs"
 
-#: src/translations.h:37
-msgid "Moon"
-msgstr "Mėnulis"
+#: src/gui/HelpDialog.cpp:290
+msgid "Developers"
+msgstr "Programuotojai"
 
-#: src/ui_configurationDialog.h:808
-msgid "Mouse cursor timeout (seconds):"
-msgstr "Slėpti pelės žymeklį po (sekundžių):"
+#: src/gui/HelpDialog.cpp:291
+#, qt-format
+msgid "Project coordinator & lead developer: %1"
+msgstr "Projekto koordinatorius ir pagrindinis programuotojas: %1"
+
+#: src/gui/HelpDialog.cpp:292
+#, qt-format
+msgid "Doc author/developer: %1"
+msgstr "Žinyno autorius/programuotojas: %1"
+
+#: src/gui/HelpDialog.cpp:293
+#, qt-format
+msgid "Graphic/other designer: %1"
+msgstr "Grafikos/kt. dizaineris: %1"
+
+#: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:295
+#: src/gui/HelpDialog.cpp:297 src/gui/HelpDialog.cpp:298
+#, qt-format
+msgid "Developer: %1"
+msgstr "Programuotojas: %1"
+
+#: src/gui/HelpDialog.cpp:296
+#, qt-format
+msgid "OSX Developer: %1"
+msgstr "OSX programuotojas: %1"
+
+#: src/gui/StelGui.cpp:94
+msgid "Display Options"
+msgstr "Vaizdo nustatymai"
+
+#: src/gui/StelGui.cpp:95
+msgid "Constellation lines"
+msgstr "Žvaigždynų kontūrai"
+
+#: src/gui/StelGui.cpp:96
+msgid "Constellation art"
+msgstr "Žvaigždynų piešiniai"
+
+#: src/gui/StelGui.cpp:97
+msgid "Constellation labels"
+msgstr "Žvaigždynų pavadinimai"
+
+#: src/gui/StelGui.cpp:98
+msgid "Constellation boundaries"
+msgstr "Žvaigždynų ribos"
+
+#: src/gui/StelGui.cpp:100 src/ui_viewDialog.h:1027
+msgid "Azimuthal grid"
+msgstr "Azimutinis tinklelis"
+
+#: src/gui/StelGui.cpp:101 src/ui_viewDialog.h:1025
+msgid "Equatorial grid"
+msgstr "Ekvatorinis tinklelis"
+
+#: src/gui/StelGui.cpp:102 src/ui_viewDialog.h:1026
+msgid "Equatorial J2000 grid"
+msgstr "Ekvatorinis J2000 tinklelis"
+
+#: src/gui/StelGui.cpp:103
+msgid "Galactic grid"
+msgstr "Galaktikos tinklelis"
+
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1030
+msgid "Ecliptic line"
+msgstr "Ekliptikos linija"
+
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1028
+msgid "Equator line"
+msgstr "Pusiaujo linija"
+
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1029
+msgid "Meridian line"
+msgstr "Dienovidinio linija"
+
+#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1031
+msgid "Cardinal points"
+msgstr "Pasaulio kryptys"
+
+#: src/gui/StelGui.cpp:111
+msgid "Fog"
+msgstr "Rūką"
+
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1014
+msgid "Nebulas"
+msgstr "Ūkai"
+
+#: src/gui/StelGui.cpp:114
+msgid "Nebulas background images"
+msgstr "Ūkų fono paveikslai"
+
+#: src/gui/StelGui.cpp:116
+msgid "Planets labels"
+msgstr "Planetų antraštės"
+
+#: src/gui/StelGui.cpp:117
+msgid "Planet orbits"
+msgstr "Planetų orbitos"
+
+#: src/gui/StelGui.cpp:119
+msgid "Night mode"
+msgstr "Nakties režimas"
+
+#: src/gui/StelGui.cpp:120
+msgid "Full-screen mode"
+msgstr "Viso ekrano režimas"
+
+#: src/gui/StelGui.cpp:121
+msgid "Flip scene horizontally"
+msgstr "Horizontalusis atspindys"
+
+#: src/gui/StelGui.cpp:122
+msgid "Flip scene vertically"
+msgstr "Vertikalusis atspindys"
+
+#: src/gui/StelGui.cpp:124
+msgid "Windows"
+msgstr "Langai"
+
+#: src/gui/StelGui.cpp:125
+msgid "Help window"
+msgstr "Žinyno langas"
+
+#: src/gui/StelGui.cpp:127
+msgid "Search window"
+msgstr "Paieškos langas"
+
+#: src/gui/StelGui.cpp:128
+msgid "Sky and viewing options window"
+msgstr "Dangaus ir peržiūros nustatymų langas"
+
+#: src/gui/StelGui.cpp:129
+msgid "Date/time window"
+msgstr "Datos/laiko langas"
+
+#: src/gui/StelGui.cpp:130
+msgid "Location window"
+msgstr "Vietovės langas"
+
+#: src/gui/StelGui.cpp:132
+msgid "Script console window"
+msgstr "Scenarijaus pulto langas"
+
+#: src/gui/StelGui.cpp:135 src/ui_dateTimeDialogGui.h:295
+msgid "Date and Time"
+msgstr "Data ir laikas"
+
+#: src/gui/StelGui.cpp:139
+msgid "Decrease time speed"
+msgstr "Sulėtinti laiko tėkmės greitį"
+
+#: src/gui/StelGui.cpp:140
+msgid "Increase time speed"
+msgstr "Padidinti laiko tėkmės greitį"
+
+#: src/gui/StelGui.cpp:141
+msgid "Set normal time rate"
+msgstr "Nustatyti normalų laiko tėkmės greitį"
+
+#: src/gui/StelGui.cpp:142
+msgid "Decrease time speed (a little)"
+msgstr "Sumažinti laiko greitį (šiek tiek)"
+
+#: src/gui/StelGui.cpp:143
+msgid "Increase time speed (a little)"
+msgstr "Padidinti laiko greitį (šiek tiek)"
+
+#: src/gui/StelGui.cpp:144
+msgid "Set time rate to zero"
+msgstr "Nustatyti laiko tėkmę lygią nuliui"
+
+#: src/gui/StelGui.cpp:145
+msgid "Set time to now"
+msgstr "Naudoti šio momento laiką"
+
+#: src/gui/StelGui.cpp:146
+msgid "Add 1 solar hour"
+msgstr "Pridėti 1 saulinę valandą"
+
+#: src/gui/StelGui.cpp:147
+msgid "Subtract 1 solar hour"
+msgstr "Atimti 1 saulinę valandą"
+
+#: src/gui/StelGui.cpp:148
+msgid "Add 1 solar day"
+msgstr "Pridėti 1 saulinę dieną"
+
+#: src/gui/StelGui.cpp:149
+msgid "Subtract 1 solar day"
+msgstr "Atimti 1 saulinę dieną"
+
+#: src/gui/StelGui.cpp:150
+msgid "Add 1 solar week"
+msgstr "Pridėti 1 saulinę savaitę"
+
+#: src/gui/StelGui.cpp:151
+msgid "Subtract 1 solar week"
+msgstr "Atimti 1 saulinę savaitę"
+
+#: src/gui/StelGui.cpp:152
+msgid "Add 1 sidereal day"
+msgstr "Pridėti 1 žvaigždinę dieną"
+
+#: src/gui/StelGui.cpp:153
+msgid "Subtract 1 sidereal day"
+msgstr "Atimti 1 žvaigždinę dieną"
+
+#: src/gui/StelGui.cpp:154
+msgid "Add 1 sidereal week"
+msgstr "Pridėti 1 žvaigždinę savaitę"
+
+#: src/gui/StelGui.cpp:155
+msgid "Subtract 1 sidereal week"
+msgstr "Atimti 1 žvaigždinę savaitę"
+
+#: src/gui/StelGui.cpp:158
+msgid "Center on selected object"
+msgstr "Centruoti pažymėtą objektą"
+
+#: src/gui/StelGui.cpp:159
+msgid "Track object"
+msgstr "Sekti objektą"
+
+#: src/gui/StelGui.cpp:160
+msgid "Zoom in on selected object"
+msgstr "Priartinti pažymėtą objektą"
+
+#: src/gui/StelGui.cpp:161
+msgid "Zoom out"
+msgstr "Atitraukti"
+
+#: src/gui/StelGui.cpp:162
+msgid "Set home planet to selected planet"
+msgstr "Parinktą planetą nustatyti namų planeta"
+
+#: src/gui/StelGui.cpp:164
+msgid "Telescope Control"
+msgstr "Teleskopo valdymas"
 
 #: src/gui/StelGui.cpp:165
 msgid "Move telescope #0 to selected object"
@@ -939,57 +1063,34 @@ msgstr "Perkelti teleskopą #8 į pažymėtą objektą"
 msgid "Move telescope #9 to selected object"
 msgstr "Perkelti teleskopą #9 į pažymėtą objektą"
 
-#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:157
-msgid "Movement and Selection"
-msgstr "Slinkimas ir parinkimas"
+#: src/gui/StelGui.cpp:177
+msgid "Switch between equatorial and azimuthal mount"
+msgstr "Persijungti tarp ekvatorinio ir azimutinio pririšimo"
 
-#: src/translations.h:63
-msgid "N"
-msgstr "Š"
+#: src/gui/StelGui.cpp:178
+msgid "Quit"
+msgstr "Išeiti"
 
-#: src/ui_locationDialogGui.h:409
-msgid "Name/City:"
-msgstr "Pavadinimas/Miestas:"
+#: src/gui/StelGui.cpp:179
+msgid "Save screenshot"
+msgstr "Išsaugoti ekrano nuotrauką"
 
-#: src/translations.h:76
-msgid "Navajo"
-msgstr "navajų"
+#: src/gui/StelGui.cpp:182
+msgid "Auto hide horizontal button bar"
+msgstr "Automatiškai slėpti horizontalią mygtukų juostą"
 
-#: src/ui_configurationDialog.h:873
-msgid "Navigation"
-msgstr "Navigacija"
+#: src/gui/StelGui.cpp:183
+msgid "Auto hide vertical button bar"
+msgstr "Automatiškai slėpti vertikalią mygtukų juostą"
 
-#: src/modules/Nebula.cpp:278
-msgid "Nebula"
-msgstr "Ūkas"
+#: src/gui/StelGui.cpp:184
+msgid "Toggle visibility of GUI"
+msgstr "Perjungti vartotojo sąsajos matomumą"
 
-#: src/modules/TextUI.cpp:118
-msgid "Nebula Circles"
-msgstr "Ūkų orbitos"
-
-#: src/modules/TextUI.cpp:117
-msgid "Nebula Names"
-msgstr "Ūkų pavadinimai"
-
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1014
-msgid "Nebulas"
-msgstr "Ūkai"
-
-#: src/gui/StelGui.cpp:114
-msgid "Nebulas background images"
-msgstr "Ūkų fono paveikslai"
-
-#: src/translations.h:56
-msgid "Neptune"
-msgstr "Neptūnas"
-
-#: src/gui/LocationDialog.cpp:340
-msgid "New Location"
-msgstr "Nauja vietovė"
-
-#: src/gui/StelGui.cpp:119
-msgid "Night mode"
-msgstr "Nakties režimas"
+#: src/gui/StelGuiItems.cpp:548
+#, no-c-format, qt-format
+msgid "%1m"
+msgstr "%1m"
 
 #: src/gui/ViewDialog.cpp:388
 msgid "No description"
@@ -999,398 +1100,347 @@ msgstr "Be aprašymo"
 msgid "No shooting stars"
 msgstr "Nėra krintančių žvaigždžių"
 
-#: src/ui_configurationDialog.h:762
-msgid "None"
-msgstr "Nieko"
-
 #: src/gui/ViewDialog.cpp:447
 msgid "Normal rate"
 msgstr "Normalus dažnis"
 
-#: src/translations.h:77
-msgid "Norse"
-msgstr "Norvegijos"
+#: src/gui/ViewDialog.cpp:450
+msgid "Standard Perseids rate"
+msgstr "Standartinis Perseido"
 
-#: src/gui/HelpDialog.cpp:296
-#, qt-format
-msgid "OSX Developer: %1"
-msgstr "OSX programuotojas: %1"
+#: src/gui/ViewDialog.cpp:453
+msgid "Exceptional Leonid rate"
+msgstr "Nepaprastas Leonido"
 
-#: src/modules/TextUI.cpp:124
-msgid "Object Sizing Rule: "
-msgstr "Objektų dydžio keitimo taisyklė: "
+#: src/gui/ViewDialog.cpp:456
+msgid "Highest rate ever (1966 Leonids)"
+msgstr "Didžiausias dažnis (1966 Leonido)"
 
-#: src/modules/Nebula.cpp:272
-msgid "Open cluster"
-msgstr "Atviras spiečius"
+#: src/gui/LocationDialog.cpp:340
+msgid "New Location"
+msgstr "Nauja vietovė"
 
-#: src/ui_viewDialog.h:1039 src/ui_viewDialog.h:1044 src/ui_viewDialog.h:1046
-#: src/ui_configurationDialog.h:853 src/ui_configurationDialog.h:864
-msgid "Options"
-msgstr "Nustatymai"
+#: src/main.cpp:308
+msgid "This system does not support OpenGL."
+msgstr "Ši sistema nepalaiko OpenGL."
 
-#: src/core/StelProjectorClasses.cpp:329
-msgid "Orthographic"
-msgstr "Ortografinė"
+#: src/translations.h:33
+msgid "Sun"
+msgstr "Saulė"
 
-#: src/core/StelProjectorClasses.cpp:334
-msgid ""
-"Orthographic projection is related to perspective projection, but the point "
-"of perspective is set to an infinite distance."
-msgstr ""
-"Ortografinė projekcija yra gimininga perspektyvinei projekcijai, bet "
-"perspektyvos taškas yra begalybė."
+#: src/translations.h:34
+msgid "Mercury"
+msgstr "Merkurijus"
 
-#: src/ui_configurationDialog.h:804
-msgid "Other"
-msgstr "Kita"
+#: src/translations.h:35
+msgid "Venus"
+msgstr "Venera"
 
-#: src/ui_configurationDialog.h:802
-msgid "Other:"
-msgstr "Kita:"
+#: src/translations.h:36
+msgid "Earth"
+msgstr "Žemė"
 
-#: src/gui/HelpDialog.cpp:53
-msgid "Page Up/Down"
-msgstr "Ankstesnio/tolesnio puslapio klavišas"
+#: src/translations.h:37
+msgid "Moon"
+msgstr "Mėnulis"
 
-#: src/gui/HelpDialog.cpp:61
-msgid "Pan view around the sky"
-msgstr "Slinkti vaizdą aplink dangų"
+#: src/translations.h:38
+msgid "Mars"
+msgstr "Marsas"
 
-#: src/modules/StarWrapper.cpp:126
-#, qt-format
-msgid "Parallax: %1\""
-msgstr "Paralaksas: %1\""
-
-#: src/core/StelProjectorClasses.cpp:25
-msgid "Perspective"
-msgstr "Perspektyva"
-
-#: src/core/StelProjectorClasses.cpp:30
-msgid ""
-"Perspective projection keeps the horizon a straight line. The mathematical "
-"name for this projection method is <i>gnomonic projection</i>."
-msgstr ""
-"Perspektyvinė projekcija laiko horizontą tiesia linija. Matematinis šios "
-"projekcijos pavadinimas yra <i>gnomoninė projekcija</i>."
+#: src/translations.h:39
+msgid "Deimos"
+msgstr "Deimas"
 
 #: src/translations.h:40
 msgid "Phobos"
 msgstr "Fobas"
 
-#: src/translations.h:55
-msgid "Phoebe"
-msgstr "Febė"
+#: src/translations.h:41
+msgid "Jupiter"
+msgstr "Jupiteris"
 
-#: src/modules/TextUI.cpp:109
-msgid "Planet Names"
-msgstr "Planetų pavadinimai"
+#: src/translations.h:42
+msgid "Io"
+msgstr "Ija"
 
-#: src/modules/TextUI.cpp:110
-msgid "Planet Orbits"
-msgstr "Planetų orbitos"
+#: src/translations.h:43
+msgid "Europa"
+msgstr "Europa"
 
-#: src/modules/TextUI.cpp:111
-msgid "Planet Trails"
-msgstr "Planetų pėdsakai"
+#: src/translations.h:44
+msgid "Ganymede"
+msgstr "Ganimedas"
 
-#: src/gui/StelGui.cpp:117
-#, fuzzy
-msgid "Planet orbits"
-msgstr "Planetų orbitos"
-
-#: src/ui_locationDialogGui.h:411
-msgid "Planet:"
-msgstr "Planeta:"
-
-#: src/modules/LandscapeMgr.cpp:436
-msgid "Planet: "
-msgstr "Planeta: "
-
-#: src/ui_configurationDialog.h:813
-msgid "Planetarium options"
-msgstr "Planetariumo parinktys"
-
-#: src/modules/Nebula.cpp:281
-msgid "Planetary nebula"
-msgstr "Planetiškasis ūkas"
-
-#: src/ui_viewDialog.h:1015
-msgid "Planets"
-msgstr "Planetos"
-
-#: src/ui_viewDialog.h:1003
-msgid "Planets and satellites"
-msgstr "Planetos ir palydovai"
-
-#: src/gui/StelGui.cpp:116
-msgid "Planets labels"
-msgstr "Planetų antraštės"
-
-#: src/ui_configurationDialog.h:879
-msgid "Plugins"
-msgstr "Papildiniai"
-
-#: src/translations.h:58
-msgid "Pluto"
-msgstr "Plutonas"
-
-#: src/translations.h:78
-msgid "Polynesian"
-msgstr "polineziečių"
-
-#: src/modules/TextUI.cpp:84
-msgid "Preset Sky Time: "
-msgstr "Numatytas dangaus laikas: "
-
-#: src/modules/TextUI.cpp:87
-msgid "Preset Time"
-msgstr "Numatytas laikas"
-
-#: src/ui_configurationDialog.h:749
-msgid "Program language"
-msgstr "Programos kalba"
-
-#: src/gui/HelpDialog.cpp:291
-#, qt-format
-msgid "Project coordinator & lead developer: %1"
-msgstr "Projekto koordinatorius ir pagrindinis programuotojas: %1"
-
-#: src/ui_viewDialog.h:1038
-msgid "Projection"
-msgstr "Projekcija"
-
-#: src/gui/StelGui.cpp:178
-msgid "Quit"
-msgstr "Išeiti"
-
-#: src/core/StelObject.cpp:65
-#, qt-format
-msgid "RA/DE (J2000): %1/%2"
-msgstr "RA/DE (J2000): %1/%2"
-
-#: src/core/StelObject.cpp:72
-#, qt-format
-msgid "RA/DE (of date): %1/%2"
-msgstr "RA/DE (datos): %1/%2"
-
-#: src/ui_searchDialogGui.h:236
-msgid "RA/Dec (J2000):"
-msgstr "RA/Dec (J2000):"
-
-#: src/ui_helpDialogGui.h:273
-msgid "Refresh"
-msgstr "Atnaujinti"
-
-#: src/ui_viewDialog.h:997
-msgid "Relative scale:"
-msgstr "Santykinis mastelis:"
-
-#: src/ui_configurationDialog.h:846
-msgid "Restart the download"
-msgstr "Siųsti iš naujo"
-
-#: src/ui_configurationDialog.h:771
-msgid "Restore defaults"
-msgstr "Atstatyti numatytuosius nustatymus"
-
-#: src/ui_configurationDialog.h:769
-msgid "Restore the default settings that came with Stellarium"
-msgstr "Atstatyti numatytuosius nustatymus"
-
-#: src/ui_configurationDialog.h:772
-msgid ""
-"Restoring default settings requires a restart of Stellarium. Saving all the "
-"current options includes the current FOV and direction of view for use at "
-"next startup."
-msgstr ""
-"Norint atstatyti numatytuosius nustatymus, būtina paleisti Stellarium iš "
-"naujo. Visų nustatymų išsaugojimas taip pat išsaugos ir dabartinį apžvalgos "
-"lauką bei vaizdo kryptį."
-
-#: src/ui_configurationDialog.h:848
-msgid "Retry"
-msgstr "Bandyti vėl"
-
-#: src/translations.h:51
-msgid "Rhea"
-msgstr "Rėja"
-
-#: src/gui/HelpDialog.cpp:56
-msgid "Right click"
-msgstr "Spragtelėti dešiniu pelės klavišu"
-
-#: src/ui_configurationDialog.h:857
-msgid "Run the selected script"
-msgstr "Vykdyti pasirinktą scenarijų"
-
-#: src/gui/ConfigurationDialog.cpp:600
-msgid "Running script: "
-msgstr "Vykdomas scenarijus: "
-
-#: src/gui/ConfigurationDialog.cpp:607
-msgid "Running script: [none]"
-msgstr "Vykdomas scenarijus: [nėra]"
-
-#: src/translations.h:64
-msgid "S"
-msgstr "P"
+#: src/translations.h:45
+msgid "Callisto"
+msgstr "Kalista"
 
 #: src/translations.h:46
 msgid "Saturn"
 msgstr "Saturnas"
 
-#: src/modules/TextUI.cpp:141
-msgid "Save Current Configuration as Default: "
-msgstr "Išsaugoti nuostatas kaip numatytąsias: "
+#: src/translations.h:47
+msgid "Mimas"
+msgstr "Mimas"
 
-#: src/gui/StelGui.cpp:179
-msgid "Save screenshot"
-msgstr "Išsaugoti ekrano nuotrauką"
+#: src/translations.h:48
+msgid "Enceladus"
+msgstr "Enceladas"
 
-#: src/ui_configurationDialog.h:767
-msgid "Save settings"
-msgstr "Išsaugoti nustatymus"
+#: src/translations.h:49
+msgid "Tethys"
+msgstr "Tetija"
 
-#: src/ui_configurationDialog.h:765
+#: src/translations.h:50
+msgid "Dione"
+msgstr "Dione"
+
+#: src/translations.h:51
+msgid "Rhea"
+msgstr "Rėja"
+
+#: src/translations.h:52
+msgid "Titan"
+msgstr "Titanas"
+
+#: src/translations.h:53
+msgid "Hyperion"
+msgstr "Hiperionas"
+
+#: src/translations.h:54
+msgid "Iapetus"
+msgstr "Japetas"
+
+#: src/translations.h:55
+msgid "Phoebe"
+msgstr "Febė"
+
+#: src/translations.h:56
+msgid "Neptune"
+msgstr "Neptūnas"
+
+#: src/translations.h:57
+msgid "Uranus"
+msgstr "Uranas"
+
+#: src/translations.h:58
+msgid "Pluto"
+msgstr "Plutonas"
+
+#: src/translations.h:59
+msgid "Charon"
+msgstr "Charonas"
+
+#: src/translations.h:60
+msgid "Solar System Observer"
+msgstr "Saulės sistemos stebėtojas"
+
+#: src/translations.h:63
+msgid "N"
+msgstr "Š"
+
+#: src/translations.h:64
+msgid "S"
+msgstr "P"
+
+#: src/translations.h:65
+msgid "E"
+msgstr "R"
+
+#: src/translations.h:66
+msgid "W"
+msgstr "V"
+
+#: src/translations.h:69
+msgid "Aztec"
+msgstr "Actekų"
+
+#: src/translations.h:70
+msgid "Chinese"
+msgstr "kiniečių"
+
+#: src/translations.h:71
+msgid "Egyptian"
+msgstr "egiptiečių"
+
+#: src/translations.h:72
+msgid "Inuit"
+msgstr "inuitų"
+
+#: src/translations.h:73
+msgid "Korean"
+msgstr "korėjiečių"
+
+#: src/translations.h:74
+msgid "Lakota"
+msgstr "lakotų"
+
+#: src/translations.h:75
+msgid "Maori"
+msgstr "Maorių"
+
+#: src/translations.h:76
+msgid "Navajo"
+msgstr "navajų"
+
+#: src/translations.h:77
+msgid "Norse"
+msgstr "Norvegijos"
+
+#: src/translations.h:78
+msgid "Polynesian"
+msgstr "polineziečių"
+
+#: src/translations.h:79
+msgid "Western"
+msgstr "vakariečių"
+
+#: src/translations.h:80
+msgid "Tupi-Guarani"
+msgstr "Tupi-Guarani"
+
+#: src/ui_dateTimeDialogGui.h:294 src/ui_helpDialogGui.h:259
+#: src/ui_locationDialogGui.h:387 src/ui_viewDialog.h:979
+#: src/ui_configurationDialog.h:746
+msgid "Form"
+msgstr "Forma"
+
+#: src/ui_dateTimeDialogGui.h:297 src/ui_dateTimeDialogGui.h:298
+msgid "/"
+msgstr "/"
+
+#: src/ui_dateTimeDialogGui.h:299 src/ui_dateTimeDialogGui.h:300
+msgid ":"
+msgstr ":"
+
+#: src/ui_helpDialogGui.h:268
+msgid "About"
+msgstr "Apie"
+
+#: src/ui_helpDialogGui.h:270
+msgid "Log"
+msgstr "Žurnalas"
+
+#: src/ui_helpDialogGui.h:273
+msgid "Refresh"
+msgstr "Atnaujinti"
+
+#: src/ui_locationDialogGui.h:388
+msgid "Location"
+msgstr "Vietovė"
+
+#: src/ui_locationDialogGui.h:392
+msgid "Current location information"
+msgstr "Informacija apie šią vietovę"
+
+#: src/ui_locationDialogGui.h:393
+msgid "Use as default"
+msgstr "Naudoti kaip numatytąjį"
+
+#: src/ui_locationDialogGui.h:394
+msgid "Delete"
+msgstr "Pašalinti"
+
+#: src/ui_locationDialogGui.h:395
+msgid "Add to list"
+msgstr "Pridėti į sąrašą"
+
+#: src/ui_locationDialogGui.h:396
+msgid "Latitude:"
+msgstr "Platuma:"
+
+#: src/ui_locationDialogGui.h:398 src/ui_locationDialogGui.h:402
 msgid ""
-"Save the settings you've changed this session to be the same the next time "
-"you start Stellarium"
+"You can enter values in decimal degrees, or using dms format, for example: "
+"+1d 12m 8s"
 msgstr ""
-"Išsaugokite nustatymus, kuriuos pakeitėte šio seanso metu. Jie išliks kitą "
-"kartą paleidus programą"
+"Reikšmes galima įvesti dešimtainiais laipsniais arba dms formatu, pvz.: +1d "
+"12m 8s"
 
-#: src/ui_viewDialog.h:1008
-msgid "Scale Moon"
-msgstr "Mėnulio mastelis"
+#: src/ui_locationDialogGui.h:400
+msgid "Longitude:"
+msgstr "Ilguma:"
 
-#: src/ui_configurationDialog.h:835
-msgid "Screenshot Directory"
-msgstr "Ekrano nuotraukų katalogas"
+#: src/ui_locationDialogGui.h:404
+msgid "Altitude:"
+msgstr "Aukštis:"
 
-#: src/ui_configurationDialog.h:834
-msgid "Screenshots"
-msgstr "Ekrano nuotraukos"
+#: src/ui_locationDialogGui.h:406
+msgid "Enter the altitude in meter"
+msgstr "Įveskite aukštį metrais"
 
-#: src/gui/StelGui.cpp:132
-msgid "Script console window"
-msgstr "Scenarijaus pulto langas"
+#: src/ui_locationDialogGui.h:408
+msgid " m"
+msgstr " m"
 
-#: src/ui_configurationDialog.h:877
-msgid "Scripts"
-msgstr "Scenarijai"
+#: src/ui_locationDialogGui.h:409
+msgid "Name/City:"
+msgstr "Pavadinimas/Miestas:"
 
-#: src/modules/TextUI.cpp:69
-msgid "Scripts "
-msgstr "Scenarijai "
+#: src/ui_locationDialogGui.h:410
+msgid "Country:"
+msgstr "Šalis:"
 
-#: src/gui/StelGui.cpp:127
-msgid "Search window"
-msgstr "Paieškos langas"
+#: src/ui_locationDialogGui.h:411
+msgid "Planet:"
+msgstr "Planeta:"
 
-#: src/modules/TextUI.cpp:137
-msgid "Select and exit to run."
-msgstr "Pasirinkite ir baikite darbą norėdami paleisti."
+#: src/ui_searchDialogGui.h:230 src/ui_searchDialogGui.h:231
+msgid "Find Object"
+msgstr "Objekto paieška"
 
-#: src/gui/HelpDialog.cpp:64
-msgid "Select object"
-msgstr "Parinkti objektą"
+#: src/ui_searchDialogGui.h:236
+msgid "RA/Dec (J2000):"
+msgstr "RA/Dec (J2000):"
 
-#: src/gui/ConfigurationDialog.cpp:283
-msgid "Select screenshot directory"
-msgstr "Nurodykite katalogą ekrano nuotraukoms"
+#: src/ui_viewDialog.h:980
+msgid "View"
+msgstr "Vaizdas"
 
-#: src/ui_configurationDialog.h:833
-msgid "Select single constellation"
-msgstr "Parinkti vieną žvaigždyną"
+#: src/ui_viewDialog.h:986
+msgid "Sky"
+msgstr "Dangus"
 
-#: src/ui_configurationDialog.h:750
-msgid "Selected object information"
-msgstr "Informacija apie parinktą objektą"
+#: src/ui_viewDialog.h:988
+msgid "Markings"
+msgstr "Žymės"
 
-#: src/modules/TextUI.cpp:63
-msgid "Set Location "
-msgstr "Nurodyti vietovę "
+#: src/ui_viewDialog.h:990
+msgid "Landscape"
+msgstr "Kraštovaizdis"
 
-#: src/modules/TextUI.cpp:64
-msgid "Set Time "
-msgstr "Nurodyti laiką "
+#: src/ui_viewDialog.h:992
+msgid "Starlore"
+msgstr "Žvaigždynų folkloras"
 
-#: src/modules/TextUI.cpp:80
-msgid "Set Time Zone: "
-msgstr "Nurodyti laiko juostą: "
+#: src/ui_viewDialog.h:996
+msgid "Absolute scale:"
+msgstr "Absoliutinis mastelis:"
 
-#: src/modules/TextUI.cpp:144
-msgid "Set UI Locale: "
-msgstr "Nustatyti VI lokalę: "
+#: src/ui_viewDialog.h:997
+msgid "Relative scale:"
+msgstr "Santykinis mastelis:"
 
-#: src/gui/StelGui.cpp:162
-msgid "Set home planet to selected planet"
-msgstr "Parinktą planetą nustatyti namų planeta"
+#: src/ui_viewDialog.h:998
+msgid "Twinkle:"
+msgstr "Mirgėjimas:"
 
-#: src/gui/StelGui.cpp:141
-msgid "Set normal time rate"
-msgstr "Nustatyti normalų laiko tėkmės greitį"
+#: src/ui_viewDialog.h:1000
+msgid "Dim faint stars when a very bright object is visible"
+msgstr "Pritemdyti neryškias žvaigždes, kai matomas labai ryškus objektas."
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:138
-msgid "Set the normal script execution rate"
-msgstr "Nustatyti normalų scenarijaus vykdymo greitį"
+#: src/ui_viewDialog.h:1002
+msgid "Dynamic eye adaptation"
+msgstr "Dinamiškas akių prisitaikymas"
 
-#: src/gui/StelGui.cpp:144
-msgid "Set time rate to zero"
-msgstr "Nustatyti laiko tėkmę lygią nuliui"
+#: src/ui_viewDialog.h:1003
+msgid "Planets and satellites"
+msgstr "Planetos ir palydovai"
 
-#: src/gui/StelGui.cpp:145
-msgid "Set time to now"
-msgstr "Naudoti šio momento laiką"
-
-#: src/ui_configurationDialog.h:796
-msgid ""
-"Sets the simulation time to the next instance of this time of day when "
-"Stellarium starts"
-msgstr ""
-"Paleidžiant Stellarium simuliacijos laikas nustatomas į kitą šios dienos "
-"laiką."
-
-#: src/ui_viewDialog.h:1016
-msgid "Shooting Stars"
-msgstr "Krintančios žvaigždės"
-
-#: src/ui_configurationDialog.h:758
-msgid "Short"
-msgstr "Trumpa"
-
-#: src/ui_viewDialog.h:1036
-msgid "Show art"
-msgstr "Rodyti piešinius"
-
-#: src/ui_viewDialog.h:1010
-msgid "Show atmosphere"
-msgstr "Rodyti atmosferą"
-
-#: src/ui_viewDialog.h:1035
-msgid "Show boundaries"
-msgstr "Rodyti ribas"
-
-#: src/ui_configurationDialog.h:812
-msgid "Show flip buttons"
-msgstr "Rodyti atspindžio keitimo mygtukus"
-
-#: src/ui_viewDialog.h:1041
-msgid "Show fog"
-msgstr "Rodyti rūką"
-
-#: src/ui_viewDialog.h:1040
-msgid "Show ground"
-msgstr "Rodyti žemę"
-
-#: src/ui_viewDialog.h:1034
-msgid "Show labels"
-msgstr "Rodyti pavadinimus"
-
-#: src/ui_viewDialog.h:1033
-msgid "Show lines"
-msgstr "Rodyti kontūrus"
+#: src/ui_viewDialog.h:1004
+msgid "Show planets"
+msgstr "Rodyti planetas"
 
 #: src/ui_viewDialog.h:1005
 msgid "Show planet markers"
@@ -1400,341 +1450,98 @@ msgstr "Rodyti planetų užuominas"
 msgid "Show planet orbits"
 msgstr "Rodyti planetų orbitas"
 
-#: src/ui_viewDialog.h:1004
-msgid "Show planets"
-msgstr "Rodyti planetas"
-
-#: src/modules/TextUI.cpp:96
-msgid "Show: "
-msgstr "Rodyti: "
-
-#: src/modules/TextUI.cpp:142
-msgid "Shut Down: "
-msgstr "Išjungti kompiuterį: "
-
-#: src/modules/TextUI.cpp:83
-msgid "Sidereal"
-msgstr "Žvaigždinis"
-
 #: src/ui_viewDialog.h:1007
 msgid "Simulate light speed"
 msgstr "Imituoti šviesos greitį"
 
-#: src/modules/Nebula.cpp:100
-#, qt-format
-msgid "Size: %1"
-msgstr "Dydis: %1"
-
-#: src/ui_viewDialog.h:986
-msgid "Sky"
-msgstr "Dangus"
-
-#: src/modules/TextUI.cpp:92
-msgid "Sky Culture: "
-msgstr "Dangaus kūnų pavadinimai pagal: "
-
-#: src/modules/TextUI.cpp:93
-msgid "Sky Language: "
-msgstr "Dangaus kūnų pavadinimai: "
-
-#: src/modules/TextUI.cpp:85
-msgid "Sky Time At Start-up: "
-msgstr "Pradinis dangaus laikas: "
-
-#: src/modules/TextUI.cpp:79
-msgid "Sky Time: "
-msgstr "Dangaus laikas: "
-
-#: src/gui/StelGui.cpp:128
-msgid "Sky and viewing options window"
-msgstr "Dangaus ir peržiūros nustatymų langas"
-
-#: src/gui/HelpDialog.cpp:71 src/gui/StelGui.cpp:136
-msgid "Slow down the script execution rate"
-msgstr "Sulėtinti scenarijaus vykdymą"
-
-#: src/modules/TextUI.cpp:76
-msgid "Solar System Body: "
-msgstr "Saulės sistemos kūnas: "
-
-#: src/translations.h:60
-msgid "Solar System Observer"
-msgstr "Saulės sistemos stebėtojas"
-
-#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:286
-#: src/gui/StelGuiItems.cpp:647
-msgid "Space"
-msgstr "Kosmosas"
-
-#: src/modules/StarWrapper.cpp:119
-#, qt-format
-msgid "Spectral Type: %1"
-msgstr "Spektrinė klasė: %1"
-
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:137
-msgid "Speed up the script execution rate"
-msgstr "Pagreitinti scenarijaus vykdymą"
-
-#: src/ui_configurationDialog.h:817
-msgid "Spheric mirror distortion"
-msgstr "Sferinio veidrodžio iškreipimas"
-
-#: src/ui_configurationDialog.h:815
-msgid ""
-"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
-"mirror for low-cost planetarium systems."
-msgstr ""
-"Sferinio veidrodžio iškreipimas naudojamas projektuojant Stellarium vaizdą "
-"ant sferinio veidrodžio pigiose planetariumų sistemose."
-
-#: src/gui/ViewDialog.cpp:450
-msgid "Standard Perseids rate"
-msgstr "Standartinis Perseido"
-
-#: src/modules/TextUI.cpp:97
-msgid "Star Value Multiplier: "
-msgstr "Žvaigždžių kiekio reikšmė "
-
-#: src/ui_configurationDialog.h:838
-msgid "Star catalog updates"
-msgstr "Žvaigždžių katalogo atnaujinimai"
-
-#: src/ui_viewDialog.h:992
-msgid "Starlore"
-msgstr "Žvaigždynų folkloras"
-
-#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:995 src/ui_viewDialog.h:1013
-msgid "Stars"
-msgstr "Žvaigždės"
-
-#: src/modules/TextUI.cpp:66
-msgid "Stars "
-msgstr "Žvaigždės "
-
-#: src/ui_configurationDialog.h:792
-msgid "Starts Stellarium at system clock date and time"
-msgstr "Paleidžia Stellarium pagal sistemos laikrodžio datą ir laiką"
-
-#: src/gui/ConfigurationDialog.cpp:448
-#, qt-format
-msgid "Startup FOV: %1%2"
-msgstr "Pradinis apžvalgos laukas: %1 %2"
-
-#: src/ui_configurationDialog.h:776
-msgid "Startup FOV: XX"
-msgstr "Pradinis apžvalgos laukas: XX"
-
-#: src/ui_configurationDialog.h:790
-msgid "Startup date and time"
-msgstr "Data ir laikas paleidus programą"
-
-#: src/gui/ConfigurationDialog.cpp:456
-#, qt-format
-msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr "Pradinė Az/Alt vaizdo kryptis: %1/%2"
-
-#: src/ui_configurationDialog.h:780
-msgid "Startup direction of view: xxxx"
-msgstr "Pradinė vaizdo kryptis: xxxx"
-
-#: src/gui/HelpDialog.cpp:161
-msgid "Stellarium Help"
-msgstr "Stellarium žinynas"
-
-#: src/core/StelProjectorClasses.cpp:111
-msgid "Stereographic"
-msgstr "Stereografinė"
-
-#: src/core/StelProjectorClasses.cpp:116
-msgid ""
-"Stereographic projection is known since the antiquity and was originally "
-"known as the planisphere projection. It preserves the angles at which curves "
-"cross each other but it does not preserve area."
-msgstr ""
-"Stereografinė projekcija yra žinoma nuo senovės ir buvo vadinama "
-"planisferine projekcija. Ji išlaiko kampus, kuriais kertasi kreivės, bet "
-"neišlaiko ploto."
-
-#: src/ui_configurationDialog.h:861
-msgid "Stop a running script"
-msgstr "Sustabdyti vykdomą scenarijų"
-
-#: src/ui_configurationDialog.h:850
-msgid "Stop the download. You can always restart it later"
-msgstr "Sustabdyti siuntimą. Jį galėsite pakartoti vėliau"
-
-#: src/gui/StelGui.cpp:153
-msgid "Subtract 1 sidereal day"
-msgstr "Atimti 1 žvaigždinę dieną"
-
-#: src/gui/StelGui.cpp:155
-msgid "Subtract 1 sidereal week"
-msgstr "Atimti 1 žvaigždinę savaitę"
-
-#: src/gui/StelGui.cpp:149
-msgid "Subtract 1 solar day"
-msgstr "Atimti 1 saulinę dieną"
-
-#: src/gui/StelGui.cpp:147
-msgid "Subtract 1 solar hour"
-msgstr "Atimti 1 saulinę valandą"
-
-#: src/gui/StelGui.cpp:151
-msgid "Subtract 1 solar week"
-msgstr "Atimti 1 saulinę savaitę"
-
-#: src/translations.h:33
-msgid "Sun"
-msgstr "Saulė"
-
-#: src/gui/StelGui.cpp:177
-msgid "Switch between equatorial and azimuthal mount"
-msgstr "Persijungti tarp ekvatorinio ir azimutinio pririšimo"
-
-#: src/ui_configurationDialog.h:794
-msgid "System date and time"
-msgstr "Sistemos data ir laikas"
-
-#: src/ui_configurationDialog.h:798
-msgid "System date at:"
-msgstr "Sistemos laikas nuo:"
-
-#: src/gui/StelGui.cpp:164
-msgid "Telescope Control"
-msgstr "Teleskopo valdymas"
-
-#: src/translations.h:49
-msgid "Tethys"
-msgstr "Tetija"
-
-#: src/core/StelProjectorClasses.cpp:194
-msgid ""
-"The Hammer projection is an equal-area map projection, described by Ernst "
-"Hammer in 1892 and directly inspired by the Aitoff projection."
-msgstr ""
-"Hamerio projekcija tai vienodo ploto žemėlapio projekcija, aprašyta Ernst "
-"Hammer 1892 m., tiesiogiai įkvėpta Aitofo projekcijos."
-
-#: src/gui/HelpDialog.cpp:172
-msgid "The Stellarium User Guide"
-msgstr "Stellarium vartotojo žinynas"
-
-#: src/ui_configurationDialog.h:778
-msgid "The direction you're looking when Stellarium starts"
-msgstr "Kryptis, kuria žiūrite paleidę programą"
-
-#: src/gui/HelpDialog.cpp:171
-msgid ""
-"The following links are external web links, and will launch your web "
-"browser:\n"
-msgstr ""
-"Šios nuorodos veda į interneto svetaines ir bus atidarytos interneto "
-"naršyklėje:\n"
-
-#: src/core/StelProjectorClasses.cpp:68
-msgid ""
-"The full name of this projection method is, <i>Lambert azimuthal equal-area "
-"projection</i>. It preserves the area but not the angle."
-msgstr ""
-"Pilnas šios projekcijos pavadinimas - <i>Lambero azimutinė vienodo-ploto "
-"projekcija</i>. Ji išlaiko plotą, bet ne kampą."
-
-#: src/core/StelProjectorClasses.cpp:235
-msgid ""
-"The full name of this projection mode is <i>cylindrical equidistant "
-"projection</i>. With this projection all parallels are equally spaced."
-msgstr ""
-"Pilnas šios projekcijos pavadinimas - <i>cilindrinė vienodai nutolusi "
-"projekcija</i>. Su šia projekcija, visos paralelės yra nutolusios viena nuo "
-"kitos vienodu atstumu."
-
-#: src/core/StelProjectorClasses.cpp:282
-msgid ""
-"The mercator projection is one of the most used world map projection. It "
-"preserves direction and shapes but distorts size, in an increasing degree "
-"away from the equator."
-msgstr ""
-"Merkatoriaus projekcija yra daugiausiai naudojama pasaulio žemėlapių "
-"projekcija. Ji išlaiko kryptį ir formas, bet tolstant nuo pusiaujo iškreipia "
-"dydį."
-
-#: src/ui_configurationDialog.h:774
-msgid "The width of your view when Stellarium starts"
-msgstr "Jūsų regos lauko plotis, paleidus programą"
-
-#: src/main.cpp:308
-msgid "This system does not support OpenGL."
-msgstr "Ši sistema nepalaiko OpenGL."
-
-#: src/modules/TextUI.cpp:88
-msgid "Time Display Format: "
-msgstr "Laiko formatas: "
-
-#: src/translations.h:52
-msgid "Titan"
-msgstr "Titanas"
-
-#: src/ui_configurationDialog.h:810
-msgid "Toggle vertical and horizontal image flip buttons."
-msgstr "Apkeisti vertikalaus ir horizontalaus atspindžio mygtukus."
-
-#: src/gui/StelGui.cpp:184
-#, fuzzy
-msgid "Toggle visibility of GUI"
-msgstr "Perjungti mygtukų juostos matomumą"
-
-#: src/ui_configurationDialog.h:875
-msgid "Tools"
-msgstr "Priemonės"
-
-#: src/gui/StelGui.cpp:159
-msgid "Track object"
-msgstr "Sekti objektą"
-
-#: src/translations.h:80
-msgid "Tupi-Guarani"
-msgstr "Tupi-Guarani"
-
-#: src/ui_viewDialog.h:998
-msgid "Twinkle:"
-msgstr "Mirgėjimas:"
-
-#: src/modules/TextUI.cpp:100
-msgid "Twinkling: "
-msgstr "Mirgėjimas: "
-
-#: src/modules/Nebula.cpp:92
-#, qt-format
-msgid "Type: <b>%1</b>"
-msgstr "Tipas: <b>%1</b>"
-
-#: src/modules/TextUI.cpp:135
-msgid "USB Script: "
-msgstr "USB Scenarijus: "
-
-#: src/modules/Nebula.cpp:290
-msgid "Undocumented type"
-msgstr "Neaprašytas tipas"
-
-#: src/modules/Nebula.cpp:287
-msgid "Unknown"
-msgstr "Nežinomas"
-
-#: src/modules/TextUI.cpp:143
-msgid "Update me via Internet: "
-msgstr "Atnaujinti internetu: "
-
-#: src/translations.h:57
-msgid "Uranus"
-msgstr "Uranas"
-
-#: src/ui_configurationDialog.h:800
-msgid "Use a specific date and time when Stellarium starts up"
-msgstr "Paleidžiant Stellarium nustatyti nurodytą datą ir laiką."
-
-#: src/ui_locationDialogGui.h:393
-msgid "Use as default"
-msgstr "Naudoti kaip numatytąjį"
+#: src/ui_viewDialog.h:1008
+msgid "Scale Moon"
+msgstr "Mėnulio mastelis"
+
+#: src/ui_viewDialog.h:1010
+msgid "Show atmosphere"
+msgstr "Rodyti atmosferą"
+
+#: src/ui_viewDialog.h:1011
+msgid "Light pollution: "
+msgstr "Šviesos tarša: "
+
+#: src/ui_viewDialog.h:1012
+msgid "Labels and Markers"
+msgstr "Pavadinimai ir žymekliai"
+
+#: src/ui_viewDialog.h:1016
+msgid "Shooting Stars"
+msgstr "Krintančios žvaigždės"
+
+#: src/ui_viewDialog.h:1017
+msgid "Hourly zenith rate:"
+msgstr "Valandinis zenitinis dažnis:"
+
+#: src/ui_viewDialog.h:1018
+msgid "0"
+msgstr "0"
+
+#: src/ui_viewDialog.h:1019
+msgid "10"
+msgstr "10"
+
+#: src/ui_viewDialog.h:1020
+msgid "80"
+msgstr "80"
+
+#: src/ui_viewDialog.h:1021
+msgid "10000"
+msgstr "10000"
+
+#: src/ui_viewDialog.h:1022
+msgid "144000"
+msgstr "144000"
+
+#: src/ui_viewDialog.h:1024
+msgid "Celestial Sphere"
+msgstr "Dangaus sfera"
+
+#: src/ui_viewDialog.h:1032
+msgid "Constellations"
+msgstr "Žvaigždynai"
+
+#: src/ui_viewDialog.h:1033
+msgid "Show lines"
+msgstr "Rodyti kontūrus"
+
+#: src/ui_viewDialog.h:1034
+msgid "Show labels"
+msgstr "Rodyti pavadinimus"
+
+#: src/ui_viewDialog.h:1035
+msgid "Show boundaries"
+msgstr "Rodyti ribas"
+
+#: src/ui_viewDialog.h:1036
+msgid "Show art"
+msgstr "Rodyti piešinius"
+
+#: src/ui_viewDialog.h:1037
+msgid "Art brightness: "
+msgstr "Piešinių ryškumas: "
+
+#: src/ui_viewDialog.h:1038
+msgid "Projection"
+msgstr "Projekcija"
+
+#: src/ui_viewDialog.h:1039 src/ui_viewDialog.h:1044 src/ui_viewDialog.h:1046
+#: src/ui_configurationDialog.h:853 src/ui_configurationDialog.h:864
+msgid "Options"
+msgstr "Nustatymai"
+
+#: src/ui_viewDialog.h:1040
+msgid "Show ground"
+msgstr "Rodyti žemę"
+
+#: src/ui_viewDialog.h:1041
+msgid "Show fog"
+msgstr "Rodyti rūką"
 
 #: src/ui_viewDialog.h:1042
 msgid "Use associated planet and position"
@@ -1748,33 +1555,191 @@ msgstr "Naudoti šį kraštovaizdį kaip numatytąjį"
 msgid "Use this sky culture as default"
 msgstr "Naudoti šią dangaus kultūrą kaip numatytąją"
 
-#: src/translations.h:35
-msgid "Venus"
-msgstr "Venera"
-
-#: src/gui/ConfigurationDialog.cpp:791
-msgid "Verifying file integrity..."
-msgstr "Tikrinamas failų vientisumas..."
-
-#: src/ui_viewDialog.h:980
-msgid "View"
-msgstr "Vaizdas"
-
 #: src/ui_viewDialog.h:1047
 msgid "Visible"
 msgstr "Matomas"
 
-#: src/translations.h:66
-msgid "W"
-msgstr "V"
+#: src/ui_configurationDialog.h:749
+msgid "Program language"
+msgstr "Programos kalba"
 
-#: src/translations.h:79
-msgid "Western"
-msgstr "vakariečių"
+#: src/ui_configurationDialog.h:750
+msgid "Selected object information"
+msgstr "Informacija apie parinktą objektą"
 
-#: src/gui/HelpDialog.cpp:70
-msgid "When a Script is Running"
-msgstr "Kai vykdomas scenarijus"
+#: src/ui_configurationDialog.h:752
+msgid "Display all information available"
+msgstr "Rodyti visą informaciją"
+
+#: src/ui_configurationDialog.h:754
+msgid "All available"
+msgstr "Viskas"
+
+#: src/ui_configurationDialog.h:756
+msgid "Display less information"
+msgstr "Rodyti mažiau informacijos"
+
+#: src/ui_configurationDialog.h:758
+msgid "Short"
+msgstr "Trumpa"
+
+#: src/ui_configurationDialog.h:760
+msgid "Display no information"
+msgstr "Informacijos nerodyti"
+
+#: src/ui_configurationDialog.h:762
+msgid "None"
+msgstr "Nieko"
+
+#: src/ui_configurationDialog.h:763
+msgid "Default options"
+msgstr "Numatytosios nuostatos"
+
+#: src/ui_configurationDialog.h:765
+msgid ""
+"Save the settings you've changed this session to be the same the next time "
+"you start Stellarium"
+msgstr ""
+"Išsaugokite nustatymus, kuriuos pakeitėte šio seanso metu. Jie išliks kitą "
+"kartą paleidus programą"
+
+#: src/ui_configurationDialog.h:767
+msgid "Save settings"
+msgstr "Išsaugoti nustatymus"
+
+#: src/ui_configurationDialog.h:769
+msgid "Restore the default settings that came with Stellarium"
+msgstr "Atstatyti numatytuosius nustatymus"
+
+#: src/ui_configurationDialog.h:771
+msgid "Restore defaults"
+msgstr "Atstatyti numatytuosius nustatymus"
+
+#: src/ui_configurationDialog.h:772
+msgid ""
+"Restoring default settings requires a restart of Stellarium. Saving all the "
+"current options includes the current FOV and direction of view for use at "
+"next startup."
+msgstr ""
+"Norint atstatyti numatytuosius nustatymus, būtina paleisti Stellarium iš "
+"naujo. Visų nustatymų išsaugojimas taip pat išsaugos ir dabartinį apžvalgos "
+"lauką bei vaizdo kryptį."
+
+#: src/ui_configurationDialog.h:774
+msgid "The width of your view when Stellarium starts"
+msgstr "Jūsų regos lauko plotis, paleidus programą"
+
+#: src/ui_configurationDialog.h:776
+msgid "Startup FOV: XX"
+msgstr "Pradinis apžvalgos laukas: XX"
+
+#: src/ui_configurationDialog.h:778
+msgid "The direction you're looking when Stellarium starts"
+msgstr "Kryptis, kuria žiūrite paleidę programą"
+
+#: src/ui_configurationDialog.h:780
+msgid "Startup direction of view: xxxx"
+msgstr "Pradinė vaizdo kryptis: xxxx"
+
+#: src/ui_configurationDialog.h:781
+msgid "Control"
+msgstr "Valdymas"
+
+#: src/ui_configurationDialog.h:783
+msgid "Allow keyboard to pan and zoom"
+msgstr "Leisti slinkti ir keisti mastelį klaviatūra"
+
+#: src/ui_configurationDialog.h:785
+msgid "Enable keyboard navigation"
+msgstr "Įjungti navigaciją klaviatūra"
+
+#: src/ui_configurationDialog.h:787
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr "Įjungti slinkimą ir mastelio keitima pele"
+
+#: src/ui_configurationDialog.h:789
+msgid "Enable mouse navigation"
+msgstr "Įjungti navigaciją pele"
+
+#: src/ui_configurationDialog.h:790
+msgid "Startup date and time"
+msgstr "Data ir laikas paleidus programą"
+
+#: src/ui_configurationDialog.h:792
+msgid "Starts Stellarium at system clock date and time"
+msgstr "Paleidžia Stellarium pagal sistemos laikrodžio datą ir laiką"
+
+#: src/ui_configurationDialog.h:794
+msgid "System date and time"
+msgstr "Sistemos data ir laikas"
+
+#: src/ui_configurationDialog.h:796
+msgid ""
+"Sets the simulation time to the next instance of this time of day when "
+"Stellarium starts"
+msgstr ""
+"Paleidžiant Stellarium simuliacijos laikas nustatomas į kitą šios dienos "
+"laiką."
+
+#: src/ui_configurationDialog.h:798
+msgid "System date at:"
+msgstr "Sistemos laikas nuo:"
+
+#: src/ui_configurationDialog.h:800
+msgid "Use a specific date and time when Stellarium starts up"
+msgstr "Paleidžiant Stellarium nustatyti nurodytą datą ir laiką."
+
+#: src/ui_configurationDialog.h:802
+msgid "Other:"
+msgstr "Kita:"
+
+#: src/ui_configurationDialog.h:803
+msgid "use current"
+msgstr "naudoti dabartinį"
+
+#: src/ui_configurationDialog.h:804
+msgid "Other"
+msgstr "Kita"
+
+#: src/ui_configurationDialog.h:806
+msgid "Hides the mouse cursor when inactive"
+msgstr "Slėpti pelės žymeklį, kai jis nejuda"
+
+#: src/ui_configurationDialog.h:808
+msgid "Mouse cursor timeout (seconds):"
+msgstr "Slėpti pelės žymeklį po (sekundžių):"
+
+#: src/ui_configurationDialog.h:810
+msgid "Toggle vertical and horizontal image flip buttons."
+msgstr "Apkeisti vertikalaus ir horizontalaus atspindžio mygtukus."
+
+#: src/ui_configurationDialog.h:812
+msgid "Show flip buttons"
+msgstr "Rodyti atspindžio keitimo mygtukus"
+
+#: src/ui_configurationDialog.h:813
+msgid "Planetarium options"
+msgstr "Planetariumo parinktys"
+
+#: src/ui_configurationDialog.h:815
+msgid ""
+"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
+"mirror for low-cost planetarium systems."
+msgstr ""
+"Sferinio veidrodžio iškreipimas naudojamas projektuojant Stellarium vaizdą "
+"ant sferinio veidrodžio pigiose planetariumų sistemose."
+
+#: src/ui_configurationDialog.h:817
+msgid "Spheric mirror distortion"
+msgstr "Sferinio veidrodžio iškreipimas"
+
+#: src/ui_configurationDialog.h:819
+msgid "Align labels with the horizon"
+msgstr "Lygiuoti užrašus su horizontu"
+
+#: src/ui_configurationDialog.h:821
+msgid "Gravity labels"
+msgstr "Lygiuoti antraštes pagal horizontą"
 
 #: src/ui_configurationDialog.h:823
 msgid ""
@@ -1784,124 +1749,110 @@ msgstr ""
 "Kai įjungta, \"automatinio atitolinimo\" klavišas kartu nustatys ir pradinę "
 "vaizdo kryptį"
 
-#: src/gui/StelGui.cpp:124
-msgid "Windows"
-msgstr "Langai"
+#: src/ui_configurationDialog.h:825
+msgid "Auto zoom out returns to initial direction of view"
+msgstr "Automatinis atitolinimas gražins pradinę vaizdo kryptį"
 
-#: src/ui_locationDialogGui.h:398 src/ui_locationDialogGui.h:402
-msgid ""
-"You can enter values in decimal degrees, or using dms format, for example: "
-"+1d 12m 8s"
-msgstr ""
-"Reikšmes galima įvesti dešimtainiais laipsniais arba dms formatu, pvz.: +1d "
-"12m 8s"
+#: src/ui_configurationDialog.h:827
+msgid "Mask out everything outside a central circle in the main view"
+msgstr "Pagrindiniame vaizde paslėpti viską už centrinio apskritimo ribų"
 
-#: src/modules/TextUI.cpp:128
-msgid "Zoom Duration: "
-msgstr "Priartinimo trukmė: "
+#: src/ui_configurationDialog.h:829
+msgid "Disc viewport"
+msgstr "Diskinis vaizdas"
 
-#: src/gui/StelGui.cpp:160
-msgid "Zoom in on selected object"
-msgstr "Priartinti pažymėtą objektą"
+#: src/ui_configurationDialog.h:831
+msgid "Hide other constellations when you click one"
+msgstr "Pažymėjus žvaigždyną paslėpti kitus"
 
-#: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
-msgid "Zoom in/out"
-msgstr "Keisti mastelį"
+#: src/ui_configurationDialog.h:833
+msgid "Select single constellation"
+msgstr "Parinkti vieną žvaigždyną"
 
-#: src/gui/StelGui.cpp:161
-msgid "Zoom out"
-msgstr "Atitraukti"
+#: src/ui_configurationDialog.h:834
+msgid "Screenshots"
+msgstr "Ekrano nuotraukos"
 
-#: src/ui_configurationDialog.h:866
-#, fuzzy
-msgid "configure"
-msgstr "Nustatymai"
+#: src/ui_configurationDialog.h:835
+msgid "Screenshot Directory"
+msgstr "Ekrano nuotraukų katalogas"
 
-#: src/ui_configurationDialog.h:803
-msgid "use current"
-msgstr "naudoti dabartinį"
+#: src/ui_configurationDialog.h:837
+msgid "Invert colors"
+msgstr "Invertuoti spalvas"
+
+#: src/ui_configurationDialog.h:838
+msgid "Star catalog updates"
+msgstr "Žvaigždžių katalogo atnaujinimai"
+
+#: src/ui_configurationDialog.h:840
+msgid "Click here to start downloading"
+msgstr "Spragtelėkite norėdami pradėti siuntimą"
+
+#: src/ui_configurationDialog.h:842
+msgid "Get catalog x of y"
+msgstr "Parsiųsti katalogą x iš y"
+
+#: src/ui_configurationDialog.h:843
+msgid "Download this file to view even more stars"
+msgstr "Norėdami matyti dar daugiau žvaigždžių atsisiųskite šį failą"
 
 #: src/ui_configurationDialog.h:844
 msgid "xxx"
 msgstr "xxx"
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:191
-#, fuzzy
-msgid ""
-"{Bug reporting and feature request system} - if something doesn't work "
-"properly or is missing and is not listed in the tracker, you can open bug "
-"reports here."
-msgstr ""
-"{Pranešimai apie klaidas} - čia Jūs galite pranešti apie klaidą, jei kažkas "
-"veikia neteisingai ir dar nėra įtraukta į DUK sąrašą."
+#: src/ui_configurationDialog.h:846
+msgid "Restart the download"
+msgstr "Siųsti iš naujo"
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:196
-msgid "{Forums} - discuss Stellarium with other users."
-msgstr "{Forumai} - aptarkite Stellarium su kitais vartotojais."
+#: src/ui_configurationDialog.h:848
+msgid "Retry"
+msgstr "Bandyti vėl"
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:176
-msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr "{Dažniausiai užduodami klausimai} apie Stellarium.  Su atsakymais."
+#: src/ui_configurationDialog.h:850
+msgid "Stop the download. You can always restart it later"
+msgstr "Sustabdyti siuntimą. Jį galėsite pakartoti vėliau"
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:186
-msgid ""
-"{Support ticket system} - if you need help using Stellarium, post a support "
-"request here and we'll try to help."
-msgstr ""
-"{Support ticket system} - jei Jums reikalinga pagalba naudojantis "
-"Stellarium, parašykite pagalbos prašymą čia ir mes pabandysime padėti."
+#: src/ui_configurationDialog.h:852
+msgid "Cancel"
+msgstr "Atšaukti"
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:181
-msgid ""
-"{The Stellarium Wiki} - General information.  You can also find user-"
-"contributed landscapes and scripts here."
-msgstr ""
-"{The Stellarium Wiki} - Bendra informacija. Čia galite rasti ir vartotojų "
-"sukurtas vietoves bei scenarijus."
+#: src/ui_configurationDialog.h:855
+msgid "Close window when script runs"
+msgstr "Veikiant scenarijui užverti langą"
 
-#~ msgid "Add"
-#~ msgstr "Pridėti"
+#: src/ui_configurationDialog.h:857
+msgid "Run the selected script"
+msgstr "Vykdyti pasirinktą scenarijų"
 
-#~ msgid "All star catalogs are up to date."
-#~ msgstr "Visi žvaigždžių katalogai atnaujinti."
+#: src/ui_configurationDialog.h:861
+msgid "Stop a running script"
+msgstr "Sustabdyti vykdomą scenarijų"
 
-#~ msgid "Checking for new star catalogs..."
-#~ msgstr "Ieškome naujų žvaigždžių katalogų..."
+#: src/ui_configurationDialog.h:865
+msgid "Load at startup"
+msgstr "Įkelti paleidimo metu"
 
-#~ msgid ""
-#~ "Could not finalize download:\n"
-#~ "Error moving temporary file %1.tmp to %1.cat"
-#~ msgstr ""
-#~ "Nepavyko pabaigti siuntimo:\n"
-#~ "Klaida perkeliant laikiną failą %1.tmp į %1.cat"
+#: src/ui_configurationDialog.h:866
+msgid "configure"
+msgstr "konfigūruoti"
 
-#~ msgid ""
-#~ "Error checking updates:\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Ieškant naujinimų įvyko klaida:\n"
-#~ "%1"
+#: src/ui_configurationDialog.h:871
+msgid "Main"
+msgstr "Pagrindinis"
 
-#~ msgid "Images"
-#~ msgstr "Piešiniai"
+#: src/ui_configurationDialog.h:873
+msgid "Navigation"
+msgstr "Navigacija"
 
-#~ msgid "Remove"
-#~ msgstr "Pašalinti"
+#: src/ui_configurationDialog.h:875
+msgid "Tools"
+msgstr "Priemonės"
 
-#~ msgid "Use associated language for sky labeling"
-#~ msgstr "Dangaus kūnų pavadinimams naudoti parinktą kalbą"
+#: src/ui_configurationDialog.h:877
+msgid "Scripts"
+msgstr "Scenarijai"
 
-#~ msgid ""
-#~ "{Feature request system} - if you have an idea for a new feature, send it "
-#~ "to us. We can't promise to implement every idea, but we appreciate the "
-#~ "feedback and review the list when we are planning future features."
-#~ msgstr ""
-#~ "{Feature request system} - jei turite pasiūlymų naujoms programos "
-#~ "funkcijoms, atsiųskite jas mums. Negalime pažadėti, kad visi pasiūlymai "
-#~ "bus įgyvendinti, bet mums svarbūs Jūsų atsiliepimai ir jų sąrašą "
-#~ "peržvelgsime planuodami tolesnes programos versijas."
+#: src/ui_configurationDialog.h:879
+msgid "Plugins"
+msgstr "Papildiniai"

@@ -14,265 +14,245 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-01-28 13:37+0000\n"
+"X-Launchpad-Export-Date: 2010-03-31 16:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/ui_locationDialogGui.h:408
-msgid " m"
-msgstr " m"
+#: src/modules/StarMgr.cpp:396
+#, qt-format
+msgid "Loading catalog %1 from file %2"
+msgstr "Memuatkan katalog %1 dari fail %2"
 
-#: src/gui/StelGuiItems.cpp:548
-#, no-c-format, qt-format
-msgid "%1m"
-msgstr "%1m"
+#: src/modules/LandscapeMgr.cpp:425
+msgid "Author: "
+msgstr "Pengarang: "
+
+#: src/modules/LandscapeMgr.cpp:428
+msgid "Location: "
+msgstr "Lokasi: "
 
 #: src/modules/LandscapeMgr.cpp:433
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/ui_dateTimeDialogGui.h:297 src/ui_dateTimeDialogGui.h:298
-msgid "/"
-msgstr "/"
+#: src/modules/LandscapeMgr.cpp:436
+msgid "Planet: "
+msgstr "Planet "
 
-#: src/ui_viewDialog.h:1018
-msgid "0"
-msgstr "0"
+#: src/modules/Nebula.cpp:92
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr "Jenis: <b>%1</b>"
 
-#: src/ui_viewDialog.h:1019
-msgid "10"
-msgstr "10"
+#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:130
+#, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr "Magnitud: <b>%1</b>"
 
-#: src/ui_viewDialog.h:1021
-msgid "10000"
-msgstr "10000"
+#: src/modules/Nebula.cpp:100
+#, qt-format
+msgid "Size: %1"
+msgstr "Saiz: %1"
 
-#: src/ui_viewDialog.h:1022
-msgid "144000"
-msgstr "144000"
+#: src/modules/Nebula.cpp:269
+msgid "Galaxy"
+msgstr "Galaksi"
 
-#: src/ui_viewDialog.h:1020
-msgid "80"
-msgstr "80"
+#: src/modules/Nebula.cpp:272
+msgid "Open cluster"
+msgstr "Kluster Terbuka"
 
-#: src/ui_dateTimeDialogGui.h:299 src/ui_dateTimeDialogGui.h:300
-msgid ":"
-msgstr ":"
+#: src/modules/Nebula.cpp:275
+msgid "Globular cluster"
+msgstr "Kluster Globular"
 
-#: src/ui_helpDialogGui.h:268
-msgid "About"
-msgstr "Perihal"
+#: src/modules/Nebula.cpp:278
+msgid "Nebula"
+msgstr "Nebula"
+
+#: src/modules/Nebula.cpp:281
+msgid "Planetary nebula"
+msgstr ""
+
+#: src/modules/Nebula.cpp:284
+msgid "Cluster associated with nebulosity"
+msgstr "Kluster berkaitan dengan kenebulaan"
+
+#: src/modules/Nebula.cpp:287
+msgid "Unknown"
+msgstr "Tidak diketahui"
+
+#: src/modules/Nebula.cpp:290
+msgid "Undocumented type"
+msgstr "Jenis yang tidak didokumentasi"
+
+#: src/modules/NebulaMgr.cpp:346
+#, qt-format
+msgid "Loading NGC catalog: %1/%2"
+msgstr "memuatkan katalog NGC: %1/%2"
+
+#: src/modules/NebulaMgr.cpp:379
+msgid "Loading NGC catalog"
+msgstr ""
 
 #: src/modules/Planet.cpp:133 src/modules/StarWrapper.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Magnitud Mutlak: %1"
 
-#: src/ui_viewDialog.h:996
-msgid "Absolute scale:"
-msgstr "Skala Mutlak:"
-
-#: src/modules/TextUI.cpp:86
-msgid "Actual Time"
-msgstr "Masa Sebenar"
-
-#: src/gui/StelGui.cpp:152
-msgid "Add 1 sidereal day"
-msgstr ""
-
-#: src/gui/StelGui.cpp:154
-msgid "Add 1 sidereal week"
-msgstr ""
-
-#: src/gui/StelGui.cpp:148
-msgid "Add 1 solar day"
-msgstr "Tambah 1 hari solar"
-
-#: src/gui/StelGui.cpp:146
-msgid "Add 1 solar hour"
-msgstr "Tambah 1 jam solar"
-
-#: src/gui/StelGui.cpp:150
-msgid "Add 1 solar week"
-msgstr "Tambah 1 minggu solar"
-
-#: src/ui_locationDialogGui.h:395
-msgid "Add to list"
-msgstr "Tambah dalam senarai"
-
-#: src/modules/TextUI.cpp:70
-msgid "Administration "
-msgstr "Pentadbiran "
-
-#: src/ui_configurationDialog.h:819
-msgid "Align labels with the horizon"
-msgstr "jajar label dengan ufuk"
-
-#: src/ui_configurationDialog.h:754
-msgid "All available"
-msgstr "Kesemuannya ada"
-
-#: src/ui_configurationDialog.h:783
-msgid "Allow keyboard to pan and zoom"
-msgstr ""
-
-#: src/ui_configurationDialog.h:787
-msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr ""
-
-#: src/modules/TextUI.cpp:75
-msgid "Altitude (m): "
-msgstr "Altitud (m): "
-
-#: src/ui_locationDialogGui.h:404
-msgid "Altitude:"
-msgstr "Altitud:"
+#: src/modules/Planet.cpp:140
+#, no-c-format, qt-format
+msgid "Distance: %1AU"
+msgstr "Jarak: %1AU"
 
 #: src/modules/Planet.cpp:144
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Diameter tampak: %1"
 
-#: src/modules/TextUI.cpp:136
-msgid "Arrow down to load list."
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:52
-msgid "Arrow keys & left mouse drag"
-msgstr "kekunci Arah & leretan kiri tetikus"
-
-#: src/ui_viewDialog.h:1037
-msgid "Art brightness: "
-msgstr ""
-
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1009
-msgid "Atmosphere"
-msgstr "Atmosfera"
-
-#: src/gui/ConfigurationDialog.cpp:568
-msgid "Author"
-msgstr "Pengarang"
-
-#: src/modules/LandscapeMgr.cpp:425
-msgid "Author: "
-msgstr "Pengarang: "
-
-#: src/gui/ConfigurationDialog.cpp:492
-msgid "Authors"
-msgstr ""
-
-#: src/gui/StelGui.cpp:182
-msgid "Auto hide horizontal button bar"
-msgstr "Sembunyi secara automatik butang bar melintang"
-
-#: src/gui/StelGui.cpp:183
-msgid "Auto hide vertical button bar"
-msgstr "Sembunyi secara automatik butang bar menengak"
-
-#: src/ui_configurationDialog.h:825
-msgid "Auto zoom out returns to initial direction of view"
-msgstr ""
-
-#: src/core/StelObject.cpp:91
+#: src/modules/StarWrapper.cpp:52 src/modules/StarWrapper.cpp:109
 #, qt-format
-msgid "Az/Alt: %1/%2"
-msgstr "Az/Alt: %1/%2"
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr "Magnitud: <b>%1</b> (B-V: %2)"
 
-#: src/modules/TextUI.cpp:113
-msgid "Azimuthal Grid"
-msgstr "Grid Azimut"
+#: src/modules/StarWrapper.cpp:119
+#, qt-format
+msgid "Spectral Type: %1"
+msgstr "Jenis Spectral: %1"
 
-#: src/gui/StelGui.cpp:100 src/ui_viewDialog.h:1027
-msgid "Azimuthal grid"
-msgstr "Grid azimut"
+#: src/modules/StarWrapper.cpp:123
+#, qt-format
+msgid "Distance: %1 Light Years"
+msgstr "Jarak: %1 Tahun Cahaya"
 
-#: src/translations.h:69
-msgid "Aztec"
-msgstr ""
+#: src/modules/StarWrapper.cpp:126
+#, qt-format
+msgid "Parallax: %1\""
+msgstr "Paralaks: %1\""
 
-#: src/modules/TextUI.cpp:134
-msgid "CD/DVD Script: "
-msgstr "Skrip CD/DVD: "
+#: src/modules/TextUI.cpp:63
+msgid "Set Location "
+msgstr "Tentukan Lokasi "
 
-#: src/gui/HelpDialog.cpp:57
-msgid "CTRL + Left click"
-msgstr "CTRL + Klik Kiri"
+#: src/modules/TextUI.cpp:64
+msgid "Set Time "
+msgstr "Tentukan Masa "
 
-#: src/gui/HelpDialog.cpp:54
-msgid "CTRL + Up/Down"
-msgstr "CTRL + Up/Down"
+#: src/modules/TextUI.cpp:65
+msgid "General "
+msgstr "Am "
 
-#: src/modules/TextUI.cpp:82
-msgid "Calendar"
-msgstr "Takwim"
-
-#: src/translations.h:45
-msgid "Callisto"
-msgstr "Callisto"
-
-#: src/ui_configurationDialog.h:852
-msgid "Cancel"
-msgstr "Batal"
-
-#: src/modules/TextUI.cpp:108
-msgid "Cardinal Points"
-msgstr "Titik Kardinal"
-
-#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1031
-msgid "Cardinal points"
-msgstr "Titil Kardinal"
-
-#: src/ui_viewDialog.h:1024
-msgid "Celestial Sphere"
-msgstr ""
-
-#: src/gui/StelGui.cpp:158
-msgid "Center on selected object"
-msgstr ""
-
-#: src/translations.h:59
-msgid "Charon"
-msgstr "Charon"
-
-#: src/translations.h:70
-msgid "Chinese"
-msgstr "Cina"
-
-#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
-msgid "Clear selection"
-msgstr "Kosongkan pilihan"
-
-#: src/ui_configurationDialog.h:840
-msgid "Click here to start downloading"
-msgstr "Klik disini untuk memulakan muat turun"
-
-#: src/ui_configurationDialog.h:855
-msgid "Close window when script runs"
-msgstr "tutup tetingkap ini bila skrip berjalan"
-
-#: src/modules/Nebula.cpp:284
-msgid "Cluster associated with nebulosity"
-msgstr "Kluster berkaitan dengan kenebulaan"
+#: src/modules/TextUI.cpp:66
+msgid "Stars "
+msgstr "Bintang "
 
 #: src/modules/TextUI.cpp:67
 msgid "Colors "
 msgstr "Warna "
 
-#: src/ui_configurationDialog.h:747
-msgid "Configuration"
-msgstr "Konfigurasi"
+#: src/modules/TextUI.cpp:68
+msgid "Effects "
+msgstr "Kesan "
 
-#: src/gui/StelGui.cpp:126
-msgid "Configuration window"
-msgstr "Tetingkap Konfigurasi"
+#: src/modules/TextUI.cpp:69
+msgid "Scripts "
+msgstr "Skrip "
 
-#: src/modules/TextUI.cpp:106
-msgid "Constellation Art Intensity"
+#: src/modules/TextUI.cpp:70
+msgid "Administration "
+msgstr "Pentadbiran "
+
+#: src/modules/TextUI.cpp:73
+msgid "Latitude: "
+msgstr "Latitud: "
+
+#: src/modules/TextUI.cpp:74
+msgid "Longitude: "
+msgstr "Longtitud: "
+
+#: src/modules/TextUI.cpp:75
+msgid "Altitude (m): "
+msgstr "Altitud (m): "
+
+#: src/modules/TextUI.cpp:76
+msgid "Solar System Body: "
+msgstr "Jasad Sistem Solar "
+
+#: src/modules/TextUI.cpp:79
+msgid "Sky Time: "
+msgstr "Masa Samawi: "
+
+#: src/modules/TextUI.cpp:80
+msgid "Set Time Zone: "
+msgstr "Tetapkan Zon Masa: "
+
+#: src/modules/TextUI.cpp:81
+msgid "Day keys: "
+msgstr "Kekunci hari "
+
+#: src/modules/TextUI.cpp:82
+msgid "Calendar"
+msgstr "Takwim"
+
+#: src/modules/TextUI.cpp:83
+msgid "Sidereal"
 msgstr ""
 
-#: src/modules/TextUI.cpp:107
-msgid "Constellation Boundaries"
-msgstr "Sempadan Gugusan Bintang"
+#: src/modules/TextUI.cpp:84
+msgid "Preset Sky Time: "
+msgstr ""
+
+#: src/modules/TextUI.cpp:85
+msgid "Sky Time At Start-up: "
+msgstr ""
+
+#: src/modules/TextUI.cpp:86
+msgid "Actual Time"
+msgstr "Masa Sebenar"
+
+#: src/modules/TextUI.cpp:87
+msgid "Preset Time"
+msgstr ""
+
+#: src/modules/TextUI.cpp:88
+msgid "Time Display Format: "
+msgstr "Format Paparan Masa: "
+
+#: src/modules/TextUI.cpp:89
+msgid "Date Display Format: "
+msgstr "Format Paparan Tarikh: "
+
+#: src/modules/TextUI.cpp:92
+msgid "Sky Culture: "
+msgstr "Budaya Samawi "
+
+#: src/modules/TextUI.cpp:93
+msgid "Sky Language: "
+msgstr "Bahasa Langit "
+
+#: src/modules/TextUI.cpp:96
+msgid "Show: "
+msgstr "Papar: "
+
+#: src/modules/TextUI.cpp:97
+msgid "Star Value Multiplier: "
+msgstr "Gandaan Nilai Bintang: "
+
+#: src/modules/TextUI.cpp:98
+msgid "Magnitude Sizing Multiplier: "
+msgstr ""
+
+#: src/modules/TextUI.cpp:99
+msgid "Maximum Magnitude to Label: "
+msgstr ""
+
+#: src/modules/TextUI.cpp:100
+msgid "Twinkling: "
+msgstr "Kerlipan "
+
+#: src/modules/TextUI.cpp:101
+msgid "Limiting Magnitude: "
+msgstr "Magnitude Pengehad "
 
 #: src/modules/TextUI.cpp:104
 msgid "Constellation Lines"
@@ -282,234 +262,317 @@ msgstr "Garis Gugusan Bintang"
 msgid "Constellation Names"
 msgstr "Nama Gugusan Bintang"
 
-#: src/gui/StelGui.cpp:96
-msgid "Constellation art"
-msgstr "Seni Gugusan Bintang"
-
-#: src/gui/StelGui.cpp:98
-msgid "Constellation boundaries"
-msgstr "Sempadan Gugusan Bintang"
-
-#: src/gui/StelGui.cpp:97
-msgid "Constellation labels"
-msgstr "Label Gugusan Bintang"
-
-#: src/gui/StelGui.cpp:95
-msgid "Constellation lines"
-msgstr "Garis Gugusan Bintang"
-
-#: src/ui_viewDialog.h:1032
-msgid "Constellations"
-msgstr "Gugusan bintang"
-
-#: src/gui/ConfigurationDialog.cpp:496 src/gui/ViewDialog.cpp:336
-msgid "Contact"
+#: src/modules/TextUI.cpp:106
+msgid "Constellation Art Intensity"
 msgstr ""
 
-#: src/ui_configurationDialog.h:781
-msgid "Control"
-msgstr "Kawalan"
+#: src/modules/TextUI.cpp:107
+msgid "Constellation Boundaries"
+msgstr "Sempadan Gugusan Bintang"
+
+#: src/modules/TextUI.cpp:108
+msgid "Cardinal Points"
+msgstr "Titik Kardinal"
+
+#: src/modules/TextUI.cpp:109
+msgid "Planet Names"
+msgstr "Nama Planet"
+
+#: src/modules/TextUI.cpp:110
+msgid "Planet Orbits"
+msgstr "Orbit Planet"
+
+#: src/modules/TextUI.cpp:111
+msgid "Planet Trails"
+msgstr "Laluan Planet"
+
+#: src/modules/TextUI.cpp:112
+msgid "Meridian Line"
+msgstr "Garis Meridian"
+
+#: src/modules/TextUI.cpp:113
+msgid "Azimuthal Grid"
+msgstr "Grid Azimut"
+
+#: src/modules/TextUI.cpp:114
+msgid "Equatorial Grid"
+msgstr "Grid Khatulistiwa"
+
+#: src/modules/TextUI.cpp:115
+msgid "Equator Line"
+msgstr "Garis Khatulistiwa"
+
+#: src/modules/TextUI.cpp:116
+msgid "Ecliptic Line"
+msgstr ""
+
+#: src/modules/TextUI.cpp:117
+msgid "Nebula Names"
+msgstr "Nama Nebula"
+
+#: src/modules/TextUI.cpp:118
+msgid "Nebula Circles"
+msgstr "Kumpulan Nebula"
+
+#: src/modules/TextUI.cpp:121
+msgid "Light Pollution Luminance: "
+msgstr "Keamatan Pencemaran Cahaya: "
+
+#: src/modules/TextUI.cpp:122
+msgid "Landscape: "
+msgstr "Lanskap: "
+
+#: src/modules/TextUI.cpp:123
+msgid "Manual zoom: "
+msgstr "Zoom Manual "
+
+#: src/modules/TextUI.cpp:124
+msgid "Object Sizing Rule: "
+msgstr ""
+
+#: src/modules/TextUI.cpp:125
+msgid "Magnitude Scaling Multiplier: "
+msgstr "Penggandaan Skala Magnitud: "
+
+#: src/modules/TextUI.cpp:126
+msgid "Milky Way intensity: "
+msgstr "Keamatan Milky Way "
+
+#: src/modules/TextUI.cpp:127
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr ""
+
+#: src/modules/TextUI.cpp:128
+msgid "Zoom Duration: "
+msgstr "Tempoh Zoom: "
+
+#: src/modules/TextUI.cpp:129
+msgid "Cursor Timeout: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:130
 msgid "Correct for light travel time: "
 msgstr ""
 
-#: src/ui_locationDialogGui.h:410
-msgid "Country:"
-msgstr "Negara:"
+#: src/modules/TextUI.cpp:133
+msgid "Local Script: "
+msgstr "Skrip Setempat: "
 
-#: src/ui_locationDialogGui.h:392
-msgid "Current location information"
-msgstr "Maklumat lokasi semasa"
+#: src/modules/TextUI.cpp:134
+msgid "CD/DVD Script: "
+msgstr "Skrip CD/DVD: "
 
-#: src/modules/TextUI.cpp:129
-msgid "Cursor Timeout: "
+#: src/modules/TextUI.cpp:135
+msgid "USB Script: "
+msgstr "Skrip USB: "
+
+#: src/modules/TextUI.cpp:136
+msgid "Arrow down to load list."
+msgstr ""
+
+#: src/modules/TextUI.cpp:137
+msgid "Select and exit to run."
+msgstr "Pilih dan keluar untuk laksanakannya"
+
+#: src/modules/TextUI.cpp:140
+msgid "Load Default Configuration: "
+msgstr "Muat Konfigurasi Lalai: "
+
+#: src/modules/TextUI.cpp:141
+msgid "Save Current Configuration as Default: "
+msgstr "Simpan Konfigurasi Semasa sebagai Lalai: "
+
+#: src/modules/TextUI.cpp:142
+msgid "Shut Down: "
+msgstr "Tutup "
+
+#: src/modules/TextUI.cpp:143
+msgid "Update me via Internet: "
+msgstr "Kemaskini saya melalui Internet: "
+
+#: src/modules/TextUI.cpp:144
+msgid "Set UI Locale: "
+msgstr ""
+
+#: src/core/StelProjector.cpp:61
+msgid "Maximum FOV: "
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:25
+msgid "Perspective"
+msgstr "Perspektif"
+
+#: src/core/StelProjectorClasses.cpp:30
+msgid ""
+"Perspective projection keeps the horizon a straight line. The mathematical "
+"name for this projection method is <i>gnomonic projection</i>."
+msgstr ""
+"Unjuran perspektif memastikan ufuk dalam bentuk garisan lurus. Nama "
+"matematik bagi kaedah unjuran ini ialah <i>unjuran gnomorik</i>"
+
+#: src/core/StelProjectorClasses.cpp:63
+msgid "Equal Area"
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:68
+msgid ""
+"The full name of this projection method is, <i>Lambert azimuthal equal-area "
+"projection</i>. It preserves the area but not the angle."
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:111
+msgid "Stereographic"
+msgstr "Steregrafik"
+
+#: src/core/StelProjectorClasses.cpp:116
+msgid ""
+"Stereographic projection is known since the antiquity and was originally "
+"known as the planisphere projection. It preserves the angles at which curves "
+"cross each other but it does not preserve area."
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:150
+msgid "Fish-eye"
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:155
+msgid ""
+"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
+"lines become curves when they appear a large angular distance from the "
+"centre of the field of view (like the distortions seen with very wide angle "
+"camera lenses)."
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:189
+msgid "Hammer-Aitoff"
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:194
+msgid ""
+"The Hammer projection is an equal-area map projection, described by Ernst "
+"Hammer in 1892 and directly inspired by the Aitoff projection."
 msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:230
 msgid "Cylinder"
 msgstr "Silinder"
 
-#: src/modules/TextUI.cpp:89
-msgid "Date Display Format: "
-msgstr "Format Paparan Tarikh: "
+#: src/core/StelProjectorClasses.cpp:235
+msgid ""
+"The full name of this projection mode is <i>cylindrical equidistant "
+"projection</i>. With this projection all parallels are equally spaced."
+msgstr ""
+"Nama penuh bagi mod unjuruan ini ialah <i>unjuran selinder sama jarak</i>. "
+"Melalui unjuran ini  semua selarian mempunyai jarak yang sama."
 
-#: src/gui/StelGui.cpp:135 src/ui_dateTimeDialogGui.h:295
-msgid "Date and Time"
-msgstr "Tarikh dan Masa"
+#: src/core/StelProjectorClasses.cpp:277
+msgid "Mercator"
+msgstr "Merkator"
 
-#: src/gui/StelGui.cpp:129
-msgid "Date/time window"
-msgstr "tetingkap tarikh/masa"
+#: src/core/StelProjectorClasses.cpp:282
+msgid ""
+"The mercator projection is one of the most used world map projection. It "
+"preserves direction and shapes but distorts size, in an increasing degree "
+"away from the equator."
+msgstr ""
+"Unjuran Merkator ialah salah satu unjuran peta dunia yang paling banyak "
+"digunakan. Ia mengekalkan arah dan bentuk tetapi menherot-benyotkan saiz, "
+"iaitu penambahan darjah yang semakin berjauhan dari khatulistiwa."
 
-#: src/modules/TextUI.cpp:81
-msgid "Day keys: "
-msgstr "Kekunci hari "
+#: src/core/StelProjectorClasses.cpp:329
+msgid "Orthographic"
+msgstr "Ortografik"
 
-#: src/gui/StelGui.cpp:139
-msgid "Decrease time speed"
-msgstr "Kurangkan kelajuan masa"
+#: src/core/StelProjectorClasses.cpp:334
+msgid ""
+"Orthographic projection is related to perspective projection, but the point "
+"of perspective is set to an infinite distance."
+msgstr ""
+"Unjuran ortografik berkaitan dengan unjuran perspektif, tetapi titik "
+"perspektif ditetapkan pada jarak yang infinit."
 
-#: src/gui/StelGui.cpp:142
-msgid "Decrease time speed (a little)"
+#: src/core/StelObject.cpp:65
+#, qt-format
+msgid "RA/DE (J2000): %1/%2"
+msgstr "RA/DE (J2000): %1/%2"
+
+#: src/core/StelObject.cpp:72
+#, qt-format
+msgid "RA/DE (of date): %1/%2"
+msgstr "RA/DE (dari tarikh): %1/%2"
+
+#: src/core/StelObject.cpp:80
+#, qt-format
+msgid "Hour angle/DE: %1/%2"
+msgstr "Sudut Jam/DE: %1/%2"
+
+#: src/core/StelObject.cpp:91
+#, qt-format
+msgid "Az/Alt: %1/%2"
+msgstr "Az/Alt: %1/%2"
+
+#: src/gui/ConfigurationDialog.cpp:283
+msgid "Select screenshot directory"
+msgstr "Pilih direktori cekupan skrin"
+
+#: src/gui/ConfigurationDialog.cpp:448
+#, qt-format
+msgid "Startup FOV: %1%2"
 msgstr ""
 
-#: src/ui_configurationDialog.h:763
-msgid "Default options"
-msgstr "Pilihan lalai"
-
-#: src/translations.h:39
-msgid "Deimos"
-msgstr "Deimos"
-
-#: src/ui_locationDialogGui.h:394
-msgid "Delete"
-msgstr "Padam"
-
-#: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:295
-#: src/gui/HelpDialog.cpp:297 src/gui/HelpDialog.cpp:298
+#: src/gui/ConfigurationDialog.cpp:456
 #, qt-format
-msgid "Developer: %1"
-msgstr "Pembangun: %1"
-
-#: src/gui/HelpDialog.cpp:290
-msgid "Developers"
-msgstr "Pembangun"
-
-#: src/ui_viewDialog.h:1000
-msgid "Dim faint stars when a very bright object is visible"
+msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr ""
 
-#: src/translations.h:50
-msgid "Dione"
-msgstr "Dione"
-
-#: src/ui_configurationDialog.h:829
-msgid "Disc viewport"
+#: src/gui/ConfigurationDialog.cpp:492
+msgid "Authors"
 msgstr ""
 
-#: src/gui/StelGui.cpp:94
-msgid "Display Options"
-msgstr "Pilihan Paparan"
+#: src/gui/ConfigurationDialog.cpp:496 src/gui/ViewDialog.cpp:336
+msgid "Contact"
+msgstr ""
 
-#: src/ui_configurationDialog.h:752
-msgid "Display all information available"
-msgstr "Papar semua maklumat yang ada"
+#: src/gui/ConfigurationDialog.cpp:568
+msgid "Author"
+msgstr "Pengarang"
 
-#: src/ui_configurationDialog.h:756
-msgid "Display less information"
-msgstr "Papar kurang maklumat"
+#: src/gui/ConfigurationDialog.cpp:569
+msgid "License"
+msgstr "Lesen"
 
-#: src/ui_configurationDialog.h:760
-msgid "Display no information"
-msgstr "Jangan paparkan maklumat"
+#: src/gui/ConfigurationDialog.cpp:600
+msgid "Running script: "
+msgstr ""
 
-#: src/modules/StarWrapper.cpp:123
+#: src/gui/ConfigurationDialog.cpp:607
+msgid "Running script: [none]"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:650
+msgid "Finished downloading all star catalogs!"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:657
 #, qt-format
-msgid "Distance: %1 Light Years"
-msgstr "Jarak: %1 Tahun Cahaya"
-
-#: src/modules/Planet.cpp:140
-#, no-c-format, qt-format
-msgid "Distance: %1AU"
-msgstr "Jarak: %1AU"
-
-#: src/gui/HelpDialog.cpp:292
-#, qt-format
-msgid "Doc author/developer: %1"
-msgstr "Doc pengarang/pembangun: %1"
+msgid "Get catalog %1 of %2"
+msgstr "Dapatkan katalog %1 dari %2"
 
 #: src/gui/ConfigurationDialog.cpp:659
-#, fuzzy, qt-format
+#, qt-format
 msgid ""
 "Download size: %1MB\n"
 "Star count: %2 Million\n"
 "Magnitude range: %3 - %4"
 msgstr ""
-"Saiz muat turun: %1MB/n\n"
-"Kiraan bintang: %2/n\n"
-"Jarak magnitud: %3-%4"
 
-#: src/ui_configurationDialog.h:843
-msgid "Download this file to view even more stars"
-msgstr "Muat turun fail ini untuk paparkan lebih banyak bintang"
-
-#: src/gui/ConfigurationDialog.cpp:711
-#, qt-format
+#: src/gui/ConfigurationDialog.cpp:668
 msgid ""
-"Downloading %1...\n"
-"(You can close this window.)"
+"Finished downloading new star catalogs!\n"
+"Restart Stellarium to display them."
 msgstr ""
-"Memuat turun %1.../n\n"
-"(Anda boleh tutup tetingkap ini.)"
-
-#: src/ui_viewDialog.h:1002
-msgid "Dynamic eye adaptation"
-msgstr ""
-
-#: src/translations.h:65
-msgid "E"
-msgstr "E"
-
-#: src/translations.h:36
-msgid "Earth"
-msgstr "Bumi"
-
-#: src/modules/TextUI.cpp:116
-msgid "Ecliptic Line"
-msgstr ""
-
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1030
-msgid "Ecliptic line"
-msgstr ""
-
-#: src/modules/TextUI.cpp:68
-msgid "Effects "
-msgstr "Kesan "
-
-#: src/translations.h:71
-msgid "Egyptian"
-msgstr "Mesir"
-
-#: src/ui_configurationDialog.h:785
-msgid "Enable keyboard navigation"
-msgstr ""
-
-#: src/ui_configurationDialog.h:789
-msgid "Enable mouse navigation"
-msgstr ""
-
-#: src/translations.h:48
-msgid "Enceladus"
-msgstr "Enceladus"
-
-#: src/ui_locationDialogGui.h:406
-msgid "Enter the altitude in meter"
-msgstr "Masukkan altitud dalam meter"
-
-#: src/core/StelProjectorClasses.cpp:63
-msgid "Equal Area"
-msgstr ""
-
-#: src/modules/TextUI.cpp:115
-msgid "Equator Line"
-msgstr "Garis Khatulistiwa"
-
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1028
-msgid "Equator line"
-msgstr "Garis khatulistiwa"
-
-#: src/modules/TextUI.cpp:114
-msgid "Equatorial Grid"
-msgstr "Grid Khatulistiwa"
-
-#: src/gui/StelGui.cpp:102 src/ui_viewDialog.h:1026
-msgid "Equatorial J2000 grid"
-msgstr "Grid khatulistiwa J2000"
-
-#: src/gui/StelGui.cpp:101 src/ui_viewDialog.h:1025
-msgid "Equatorial grid"
-msgstr "Grid Khatulistiwa"
+"Katalog bintang baru sudah selesai dimuat turun!/n\n"
+"Mulakan semula Stellarium untuk paparkannya."
 
 #: src/gui/ConfigurationDialog.cpp:706 src/gui/ConfigurationDialog.cpp:740
 #, qt-format
@@ -520,6 +583,19 @@ msgstr ""
 "Ralat memuat turun %1:/n\n"
 "%2"
 
+#: src/gui/ConfigurationDialog.cpp:711
+#, qt-format
+msgid ""
+"Downloading %1...\n"
+"(You can close this window.)"
+msgstr ""
+"Memuat turun %1.../n\n"
+"(Anda boleh tutup tetingkap ini.)"
+
+#: src/gui/ConfigurationDialog.cpp:791
+msgid "Verifying file integrity..."
+msgstr "Mengesahkan Integriti fail..."
+
 #: src/gui/ConfigurationDialog.cpp:795
 #, qt-format
 msgid ""
@@ -529,36 +605,257 @@ msgstr ""
 "Ralat memuat turun %1:/n\n"
 "fail telah rosak."
 
-#: src/translations.h:43
-msgid "Europa"
-msgstr "Europa"
+#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:286
+#: src/gui/StelGuiItems.cpp:647
+msgid "Space"
+msgstr "Space"
 
-#: src/gui/ViewDialog.cpp:453
-msgid "Exceptional Leonid rate"
+#: src/gui/HelpDialog.cpp:52
+msgid "Arrow keys & left mouse drag"
+msgstr "kekunci Arah & leretan kiri tetikus"
+
+#: src/gui/HelpDialog.cpp:53
+msgid "Page Up/Down"
+msgstr "Page Up/Down"
+
+#: src/gui/HelpDialog.cpp:54
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Up/Down"
+
+#: src/gui/HelpDialog.cpp:55
+msgid "Left click"
+msgstr "Klik kiri"
+
+#: src/gui/HelpDialog.cpp:56
+msgid "Right click"
+msgstr "Klik kanan"
+
+#: src/gui/HelpDialog.cpp:57
+msgid "CTRL + Left click"
+msgstr "CTRL + Klik Kiri"
+
+#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:157
+msgid "Movement and Selection"
+msgstr "Pergerakan dan Pilihan"
+
+#: src/gui/HelpDialog.cpp:61
+msgid "Pan view around the sky"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:230 src/ui_searchDialogGui.h:231
-msgid "Find Object"
-msgstr "Cari Objek"
+#: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
+msgid "Zoom in/out"
+msgstr "Zoom masuk/keluar"
 
-#: src/gui/ConfigurationDialog.cpp:650
-#, fuzzy
-msgid "Finished downloading all star catalogs!"
+#: src/gui/HelpDialog.cpp:64
+msgid "Select object"
+msgstr "Pilih objek"
+
+#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
+msgid "Clear selection"
+msgstr "Kosongkan pilihan"
+
+#: src/gui/HelpDialog.cpp:70
+msgid "When a Script is Running"
 msgstr ""
-"Katalog bintang baru sudah selesai dimuat turun!/n\n"
-"Mulakan semula Stellarium untuk paparkannya."
 
-#: src/gui/ConfigurationDialog.cpp:668
+#: src/gui/HelpDialog.cpp:71 src/gui/StelGui.cpp:136
+msgid "Slow down the script execution rate"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:137
+msgid "Speed up the script execution rate"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:138
+msgid "Set the normal script execution rate"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:161
+msgid "Stellarium Help"
+msgstr "Bantuan Stellarium"
+
+#: src/gui/HelpDialog.cpp:162
+msgid "Keys"
+msgstr "Kekunci"
+
+#: src/gui/HelpDialog.cpp:170
+msgid "Further Reading"
+msgstr "Bacaan Lanjutan"
+
+#: src/gui/HelpDialog.cpp:171
 msgid ""
-"Finished downloading new star catalogs!\n"
-"Restart Stellarium to display them."
+"The following links are external web links, and will launch your web "
+"browser:\n"
 msgstr ""
-"Katalog bintang baru sudah selesai dimuat turun!/n\n"
-"Mulakan semula Stellarium untuk paparkannya."
+"Pautan dibawah adalah pautan luar, dan akan memulakan pelayar internet "
+"anda:/n\n"
 
-#: src/core/StelProjectorClasses.cpp:150
-msgid "Fish-eye"
+#: src/gui/HelpDialog.cpp:172
+msgid "The Stellarium User Guide"
+msgstr "Panduan Pengguna Stellarium"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:176
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Soalan Pertanyaan Lazim} mengenai Stellarium. Jawapan disertakan."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:181
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
 msgstr ""
+"{Wiki Stellarium} - Maklumat Am. Anda juga boleh mendapatkan lanskap & skrip "
+"dari pengguna disini."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:186
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Sistem tiket sokongan} - Jika anda perlukan bantuan mengenai penggunaan "
+"Stellarium, poskan permintaan sokongan disini & kami akan cuba membantu."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:191
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:196
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Forum} - Bincang mengenai Stellariun dengan pengguna lain."
+
+#: src/gui/HelpDialog.cpp:232 src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:324 src/gui/StelGui.cpp:176
+msgid "Miscellaneous"
+msgstr "Pelbagai"
+
+#: src/gui/HelpDialog.cpp:290
+msgid "Developers"
+msgstr "Pembangun"
+
+#: src/gui/HelpDialog.cpp:291
+#, qt-format
+msgid "Project coordinator & lead developer: %1"
+msgstr "Koordinator Projek & pembangun utama: %1"
+
+#: src/gui/HelpDialog.cpp:292
+#, qt-format
+msgid "Doc author/developer: %1"
+msgstr "Doc pengarang/pembangun: %1"
+
+#: src/gui/HelpDialog.cpp:293
+#, qt-format
+msgid "Graphic/other designer: %1"
+msgstr "grafik/pereka bentuk: %1"
+
+#: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:295
+#: src/gui/HelpDialog.cpp:297 src/gui/HelpDialog.cpp:298
+#, qt-format
+msgid "Developer: %1"
+msgstr "Pembangun: %1"
+
+#: src/gui/HelpDialog.cpp:296
+#, qt-format
+msgid "OSX Developer: %1"
+msgstr "Pembangun OSX: %1"
+
+#: src/gui/StelGui.cpp:94
+msgid "Display Options"
+msgstr "Pilihan Paparan"
+
+#: src/gui/StelGui.cpp:95
+msgid "Constellation lines"
+msgstr "Garis Gugusan Bintang"
+
+#: src/gui/StelGui.cpp:96
+msgid "Constellation art"
+msgstr "Seni Gugusan Bintang"
+
+#: src/gui/StelGui.cpp:97
+msgid "Constellation labels"
+msgstr "Label Gugusan Bintang"
+
+#: src/gui/StelGui.cpp:98
+msgid "Constellation boundaries"
+msgstr "Sempadan Gugusan Bintang"
+
+#: src/gui/StelGui.cpp:100 src/ui_viewDialog.h:1027
+msgid "Azimuthal grid"
+msgstr "Grid azimut"
+
+#: src/gui/StelGui.cpp:101 src/ui_viewDialog.h:1025
+msgid "Equatorial grid"
+msgstr "Grid Khatulistiwa"
+
+#: src/gui/StelGui.cpp:102 src/ui_viewDialog.h:1026
+msgid "Equatorial J2000 grid"
+msgstr "Grid khatulistiwa J2000"
+
+#: src/gui/StelGui.cpp:103
+msgid "Galactic grid"
+msgstr ""
+
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1030
+msgid "Ecliptic line"
+msgstr ""
+
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1028
+msgid "Equator line"
+msgstr "Garis khatulistiwa"
+
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1029
+msgid "Meridian line"
+msgstr "Garis Meridian"
+
+#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1031
+msgid "Cardinal points"
+msgstr "Titil Kardinal"
+
+#: src/gui/StelGui.cpp:109
+msgid "Ground"
+msgstr "Tanah"
+
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1009
+msgid "Atmosphere"
+msgstr "Atmosfera"
+
+#: src/gui/StelGui.cpp:111
+msgid "Fog"
+msgstr "Kabus"
+
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1014
+msgid "Nebulas"
+msgstr "Nebula"
+
+#: src/gui/StelGui.cpp:114
+msgid "Nebulas background images"
+msgstr "Imej latar belakang nebula"
+
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:995 src/ui_viewDialog.h:1013
+msgid "Stars"
+msgstr "Bintang"
+
+#: src/gui/StelGui.cpp:116
+msgid "Planets labels"
+msgstr "Label planet"
+
+#: src/gui/StelGui.cpp:117
+msgid "Planet orbits"
+msgstr ""
+
+#: src/gui/StelGui.cpp:119
+msgid "Night mode"
+msgstr "Mod Malam"
+
+#: src/gui/StelGui.cpp:120
+msgid "Full-screen mode"
+msgstr "Mod Skrin penuh"
 
 #: src/gui/StelGui.cpp:121
 msgid "Flip scene horizontally"
@@ -568,332 +865,133 @@ msgstr "Kalih pandangan secara mendatar"
 msgid "Flip scene vertically"
 msgstr "Kalih pandangan secara menegak"
 
-#: src/gui/StelGui.cpp:111
-msgid "Fog"
-msgstr "Kabus"
-
-#: src/ui_dateTimeDialogGui.h:294 src/ui_helpDialogGui.h:259
-#: src/ui_locationDialogGui.h:387 src/ui_viewDialog.h:979
-#: src/ui_configurationDialog.h:746
-msgid "Form"
-msgstr "Bentuk"
-
-#: src/gui/StelGui.cpp:120
-msgid "Full-screen mode"
-msgstr "Mod Skrin penuh"
-
-#: src/gui/HelpDialog.cpp:170
-msgid "Further Reading"
-msgstr "Bacaan Lanjutan"
-
-#: src/gui/StelGui.cpp:103
-msgid "Galactic grid"
-msgstr ""
-
-#: src/modules/Nebula.cpp:269
-msgid "Galaxy"
-msgstr "Galaksi"
-
-#: src/translations.h:44
-msgid "Ganymede"
-msgstr "Ganymede"
-
-#: src/modules/TextUI.cpp:65
-msgid "General "
-msgstr "Am "
-
-#: src/gui/ConfigurationDialog.cpp:657
-#, qt-format
-msgid "Get catalog %1 of %2"
-msgstr "Dapatkan katalog %1 dari %2"
-
-#: src/ui_configurationDialog.h:842
-msgid "Get catalog x of y"
-msgstr "Dapatkan katalog x dari y"
-
-#: src/modules/Nebula.cpp:275
-msgid "Globular cluster"
-msgstr "Kluster Globular"
-
-#: src/gui/HelpDialog.cpp:293
-#, qt-format
-msgid "Graphic/other designer: %1"
-msgstr "grafik/pereka bentuk: %1"
-
-#: src/ui_configurationDialog.h:821
-msgid "Gravity labels"
-msgstr "Label graviti"
-
-#: src/gui/StelGui.cpp:109
-msgid "Ground"
-msgstr "Tanah"
-
-#: src/core/StelProjectorClasses.cpp:189
-msgid "Hammer-Aitoff"
-msgstr ""
-
-#: src/ui_helpDialogGui.h:260 src/ui_helpDialogGui.h:266
-msgid "Help"
-msgstr "Bantuan"
+#: src/gui/StelGui.cpp:124
+msgid "Windows"
+msgstr "Tetingkap"
 
 #: src/gui/StelGui.cpp:125
 msgid "Help window"
 msgstr "Tetingkap Bantuan"
 
-#: src/ui_configurationDialog.h:831
-msgid "Hide other constellations when you click one"
-msgstr ""
+#: src/gui/StelGui.cpp:126
+msgid "Configuration window"
+msgstr "Tetingkap Konfigurasi"
 
-#: src/ui_configurationDialog.h:806
-msgid "Hides the mouse cursor when inactive"
-msgstr "Sembunyikan kursor tetikus apabila tidak aktif"
+#: src/gui/StelGui.cpp:127
+msgid "Search window"
+msgstr "Tetingkap Carian"
 
-#: src/gui/ViewDialog.cpp:456
-msgid "Highest rate ever (1966 Leonids)"
-msgstr ""
+#: src/gui/StelGui.cpp:128
+msgid "Sky and viewing options window"
+msgstr "Tetingkap pilihan pandangan dan langit"
 
-#: src/core/StelObject.cpp:80
-#, qt-format
-msgid "Hour angle/DE: %1/%2"
-msgstr "Sudut Jam/DE: %1/%2"
-
-#: src/ui_viewDialog.h:1017
-msgid "Hourly zenith rate:"
-msgstr "Kadar zenit mengikut jam:"
-
-#: src/translations.h:53
-msgid "Hyperion"
-msgstr "Hyperion"
-
-#: src/translations.h:54
-msgid "Iapetus"
-msgstr "Iapetus"
-
-#: src/core/StelProjectorClasses.cpp:155
-msgid ""
-"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
-"lines become curves when they appear a large angular distance from the "
-"centre of the field of view (like the distortions seen with very wide angle "
-"camera lenses)."
-msgstr ""
-
-#: src/gui/StelGui.cpp:140
-msgid "Increase time speed"
-msgstr "Cepatkan kelajuan masa"
-
-#: src/gui/StelGui.cpp:143
-msgid "Increase time speed (a little)"
-msgstr ""
-
-#: src/translations.h:72
-msgid "Inuit"
-msgstr "Inuit"
-
-#: src/ui_configurationDialog.h:837
-msgid "Invert colors"
-msgstr ""
-
-#: src/translations.h:42
-msgid "Io"
-msgstr "Io"
-
-#: src/translations.h:41
-msgid "Jupiter"
-msgstr "Mustari"
-
-#: src/gui/HelpDialog.cpp:162
-msgid "Keys"
-msgstr "Kekunci"
-
-#: src/translations.h:73
-msgid "Korean"
-msgstr "Korea"
-
-#: src/ui_viewDialog.h:1012
-msgid "Labels and Markers"
-msgstr "Label dan Penanda"
-
-#: src/translations.h:74
-msgid "Lakota"
-msgstr "Lakota"
-
-#: src/ui_viewDialog.h:990
-msgid "Landscape"
-msgstr "Landskap"
-
-#: src/modules/TextUI.cpp:122
-msgid "Landscape: "
-msgstr "Lanskap: "
-
-#: src/ui_locationDialogGui.h:396
-msgid "Latitude:"
-msgstr "Latitud:"
-
-#: src/modules/TextUI.cpp:73
-msgid "Latitude: "
-msgstr "Latitud: "
-
-#: src/gui/HelpDialog.cpp:55
-msgid "Left click"
-msgstr "Klik kiri"
-
-#: src/gui/ConfigurationDialog.cpp:569
-msgid "License"
-msgstr "Lesen"
-
-#: src/modules/TextUI.cpp:121
-msgid "Light Pollution Luminance: "
-msgstr "Keamatan Pencemaran Cahaya: "
-
-#: src/ui_viewDialog.h:1011
-msgid "Light pollution: "
-msgstr "Pencemaran cahaya: "
-
-#: src/modules/TextUI.cpp:101
-msgid "Limiting Magnitude: "
-msgstr "Magnitude Pengehad "
-
-#: src/modules/TextUI.cpp:140
-msgid "Load Default Configuration: "
-msgstr "Muat Konfigurasi Lalai: "
-
-#: src/ui_configurationDialog.h:865
-msgid "Load at startup"
-msgstr ""
-
-#: src/modules/NebulaMgr.cpp:379
-#, fuzzy
-msgid "Loading NGC catalog"
-msgstr "memuatkan katalog NGC: %1/%2"
-
-#: src/modules/NebulaMgr.cpp:346
-#, qt-format
-msgid "Loading NGC catalog: %1/%2"
-msgstr "memuatkan katalog NGC: %1/%2"
-
-#: src/modules/StarMgr.cpp:396
-#, qt-format
-msgid "Loading catalog %1 from file %2"
-msgstr "Memuatkan katalog %1 dari fail %2"
-
-#: src/modules/TextUI.cpp:133
-msgid "Local Script: "
-msgstr "Skrip Setempat: "
-
-#: src/ui_locationDialogGui.h:388
-msgid "Location"
-msgstr "Lokasi"
+#: src/gui/StelGui.cpp:129
+msgid "Date/time window"
+msgstr "tetingkap tarikh/masa"
 
 #: src/gui/StelGui.cpp:130
 msgid "Location window"
 msgstr "Tetingkap lokasi"
 
-#: src/modules/LandscapeMgr.cpp:428
-msgid "Location: "
-msgstr "Lokasi: "
-
-#: src/ui_helpDialogGui.h:270
-msgid "Log"
-msgstr "Log"
-
-#: src/ui_locationDialogGui.h:400
-msgid "Longitude:"
-msgstr "Longitud:"
-
-#: src/modules/TextUI.cpp:74
-msgid "Longitude: "
-msgstr "Longtitud: "
-
-#: src/modules/TextUI.cpp:125
-msgid "Magnitude Scaling Multiplier: "
-msgstr "Penggandaan Skala Magnitud: "
-
-#: src/modules/TextUI.cpp:98
-msgid "Magnitude Sizing Multiplier: "
+#: src/gui/StelGui.cpp:132
+msgid "Script console window"
 msgstr ""
 
-#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:130
-#, qt-format
-msgid "Magnitude: <b>%1</b>"
-msgstr "Magnitud: <b>%1</b>"
+#: src/gui/StelGui.cpp:135 src/ui_dateTimeDialogGui.h:295
+msgid "Date and Time"
+msgstr "Tarikh dan Masa"
 
-#: src/modules/StarWrapper.cpp:52 src/modules/StarWrapper.cpp:109
-#, qt-format
-msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr "Magnitud: <b>%1</b> (B-V: %2)"
+#: src/gui/StelGui.cpp:139
+msgid "Decrease time speed"
+msgstr "Kurangkan kelajuan masa"
 
-#: src/ui_configurationDialog.h:871
-msgid "Main"
-msgstr "Utama"
+#: src/gui/StelGui.cpp:140
+msgid "Increase time speed"
+msgstr "Cepatkan kelajuan masa"
 
-#: src/modules/TextUI.cpp:123
-msgid "Manual zoom: "
-msgstr "Zoom Manual "
+#: src/gui/StelGui.cpp:141
+msgid "Set normal time rate"
+msgstr "Tetapkan kadar normal masa"
 
-#: src/translations.h:75
-msgid "Maori"
+#: src/gui/StelGui.cpp:142
+msgid "Decrease time speed (a little)"
 msgstr ""
 
-#: src/ui_viewDialog.h:988
-msgid "Markings"
+#: src/gui/StelGui.cpp:143
+msgid "Increase time speed (a little)"
 msgstr ""
 
-#: src/translations.h:38
-msgid "Mars"
-msgstr "Marikh"
+#: src/gui/StelGui.cpp:144
+msgid "Set time rate to zero"
+msgstr "Tetapkan kadar masa kepada kosong"
 
-#: src/ui_configurationDialog.h:827
-msgid "Mask out everything outside a central circle in the main view"
+#: src/gui/StelGui.cpp:145
+msgid "Set time to now"
+msgstr "tetapkan masa sekarang"
+
+#: src/gui/StelGui.cpp:146
+msgid "Add 1 solar hour"
+msgstr "Tambah 1 jam solar"
+
+#: src/gui/StelGui.cpp:147
+msgid "Subtract 1 solar hour"
+msgstr "Tolak 1 jam solar"
+
+#: src/gui/StelGui.cpp:148
+msgid "Add 1 solar day"
+msgstr "Tambah 1 hari solar"
+
+#: src/gui/StelGui.cpp:149
+msgid "Subtract 1 solar day"
+msgstr "Tolak 1 hari solar"
+
+#: src/gui/StelGui.cpp:150
+msgid "Add 1 solar week"
+msgstr "Tambah 1 minggu solar"
+
+#: src/gui/StelGui.cpp:151
+msgid "Subtract 1 solar week"
+msgstr "Tolah 1 minggu solar"
+
+#: src/gui/StelGui.cpp:152
+msgid "Add 1 sidereal day"
 msgstr ""
 
-#: src/core/StelProjector.cpp:61
-msgid "Maximum FOV: "
+#: src/gui/StelGui.cpp:153
+msgid "Subtract 1 sidereal day"
 msgstr ""
 
-#: src/modules/TextUI.cpp:99
-msgid "Maximum Magnitude to Label: "
+#: src/gui/StelGui.cpp:154
+msgid "Add 1 sidereal week"
 msgstr ""
 
-#: src/modules/TextUI.cpp:127
-msgid "Maximum Nebula Magnitude to Label: "
+#: src/gui/StelGui.cpp:155
+msgid "Subtract 1 sidereal week"
 msgstr ""
 
-#: src/core/StelProjectorClasses.cpp:277
-msgid "Mercator"
-msgstr "Merkator"
-
-#: src/translations.h:34
-msgid "Mercury"
-msgstr "Mekuri"
-
-#: src/modules/TextUI.cpp:112
-msgid "Meridian Line"
-msgstr "Garis Meridian"
-
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1029
-msgid "Meridian line"
-msgstr "Garis Meridian"
-
-#: src/modules/TextUI.cpp:126
-msgid "Milky Way intensity: "
-msgstr "Keamatan Milky Way "
-
-#: src/translations.h:47
-msgid "Mimas"
-msgstr "Mimas"
-
-#: src/gui/HelpDialog.cpp:232 src/gui/HelpDialog.cpp:322
-#: src/gui/HelpDialog.cpp:324 src/gui/StelGui.cpp:176
-msgid "Miscellaneous"
-msgstr "Pelbagai"
-
-#: src/translations.h:37
-msgid "Moon"
-msgstr "Bulan"
-
-#: src/ui_configurationDialog.h:808
-msgid "Mouse cursor timeout (seconds):"
+#: src/gui/StelGui.cpp:158
+msgid "Center on selected object"
 msgstr ""
+
+#: src/gui/StelGui.cpp:159
+msgid "Track object"
+msgstr "Jejak objek"
+
+#: src/gui/StelGui.cpp:160
+msgid "Zoom in on selected object"
+msgstr "Zoom ke dalam objek yang dipilih"
+
+#: src/gui/StelGui.cpp:161
+msgid "Zoom out"
+msgstr "Zoom ke luar"
+
+#: src/gui/StelGui.cpp:162
+msgid "Set home planet to selected planet"
+msgstr "Tetapkan pelanet rumah kepada planet pilihan"
+
+#: src/gui/StelGui.cpp:164
+msgid "Telescope Control"
+msgstr "Kawal Teleskop"
 
 #: src/gui/StelGui.cpp:165
 msgid "Move telescope #0 to selected object"
@@ -935,57 +1033,34 @@ msgstr "Gerak teleskop #8 ke objek pilihan"
 msgid "Move telescope #9 to selected object"
 msgstr "Gerak teleskop #9 ke objek pilihan"
 
-#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:157
-msgid "Movement and Selection"
-msgstr "Pergerakan dan Pilihan"
+#: src/gui/StelGui.cpp:177
+msgid "Switch between equatorial and azimuthal mount"
+msgstr ""
 
-#: src/translations.h:63
-msgid "N"
-msgstr "N"
+#: src/gui/StelGui.cpp:178
+msgid "Quit"
+msgstr "Keluar"
 
-#: src/ui_locationDialogGui.h:409
-msgid "Name/City:"
-msgstr "nama/Bandar:"
+#: src/gui/StelGui.cpp:179
+msgid "Save screenshot"
+msgstr "Simpan cekupanskrin"
 
-#: src/translations.h:76
-msgid "Navajo"
-msgstr "Navajo"
+#: src/gui/StelGui.cpp:182
+msgid "Auto hide horizontal button bar"
+msgstr "Sembunyi secara automatik butang bar melintang"
 
-#: src/ui_configurationDialog.h:873
-msgid "Navigation"
-msgstr "Navigasi"
+#: src/gui/StelGui.cpp:183
+msgid "Auto hide vertical button bar"
+msgstr "Sembunyi secara automatik butang bar menengak"
 
-#: src/modules/Nebula.cpp:278
-msgid "Nebula"
-msgstr "Nebula"
+#: src/gui/StelGui.cpp:184
+msgid "Toggle visibility of GUI"
+msgstr ""
 
-#: src/modules/TextUI.cpp:118
-msgid "Nebula Circles"
-msgstr "Kumpulan Nebula"
-
-#: src/modules/TextUI.cpp:117
-msgid "Nebula Names"
-msgstr "Nama Nebula"
-
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1014
-msgid "Nebulas"
-msgstr "Nebula"
-
-#: src/gui/StelGui.cpp:114
-msgid "Nebulas background images"
-msgstr "Imej latar belakang nebula"
-
-#: src/translations.h:56
-msgid "Neptune"
-msgstr "Neptun"
-
-#: src/gui/LocationDialog.cpp:340
-msgid "New Location"
-msgstr "Lokasi Baru"
-
-#: src/gui/StelGui.cpp:119
-msgid "Night mode"
-msgstr "Mod Malam"
+#: src/gui/StelGuiItems.cpp:548
+#, no-c-format, qt-format
+msgid "%1m"
+msgstr "%1m"
 
 #: src/gui/ViewDialog.cpp:388
 msgid "No description"
@@ -995,396 +1070,351 @@ msgstr "Tiada huraian"
 msgid "No shooting stars"
 msgstr ""
 
-#: src/ui_configurationDialog.h:762
-msgid "None"
-msgstr "Tiada"
-
 #: src/gui/ViewDialog.cpp:447
 msgid "Normal rate"
 msgstr "Kadar Normal"
 
-#: src/translations.h:77
-msgid "Norse"
-msgstr "Norse"
+#: src/gui/ViewDialog.cpp:450
+msgid "Standard Perseids rate"
+msgstr "Kadar Perseids Piawai"
 
-#: src/gui/HelpDialog.cpp:296
-#, qt-format
-msgid "OSX Developer: %1"
-msgstr "Pembangun OSX: %1"
-
-#: src/modules/TextUI.cpp:124
-msgid "Object Sizing Rule: "
+#: src/gui/ViewDialog.cpp:453
+msgid "Exceptional Leonid rate"
 msgstr ""
 
-#: src/modules/Nebula.cpp:272
-msgid "Open cluster"
-msgstr "Kluster Terbuka"
-
-#: src/ui_viewDialog.h:1039 src/ui_viewDialog.h:1044 src/ui_viewDialog.h:1046
-#: src/ui_configurationDialog.h:853 src/ui_configurationDialog.h:864
-msgid "Options"
-msgstr "Pilihan"
-
-#: src/core/StelProjectorClasses.cpp:329
-msgid "Orthographic"
-msgstr "Ortografik"
-
-#: src/core/StelProjectorClasses.cpp:334
-msgid ""
-"Orthographic projection is related to perspective projection, but the point "
-"of perspective is set to an infinite distance."
-msgstr ""
-"Unjuran ortografik berkaitan dengan unjuran perspektif, tetapi titik "
-"perspektif ditetapkan pada jarak yang infinit."
-
-#: src/ui_configurationDialog.h:804
-msgid "Other"
-msgstr "Lain-lain"
-
-#: src/ui_configurationDialog.h:802
-msgid "Other:"
-msgstr "Lain-lain:"
-
-#: src/gui/HelpDialog.cpp:53
-msgid "Page Up/Down"
-msgstr "Page Up/Down"
-
-#: src/gui/HelpDialog.cpp:61
-msgid "Pan view around the sky"
+#: src/gui/ViewDialog.cpp:456
+msgid "Highest rate ever (1966 Leonids)"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:126
-#, qt-format
-msgid "Parallax: %1\""
-msgstr "Paralaks: %1\""
+#: src/gui/LocationDialog.cpp:340
+msgid "New Location"
+msgstr "Lokasi Baru"
 
-#: src/core/StelProjectorClasses.cpp:25
-msgid "Perspective"
-msgstr "Perspektif"
+#: src/main.cpp:308
+msgid "This system does not support OpenGL."
+msgstr "Sistem ini tidak menyokong OpenGL."
 
-#: src/core/StelProjectorClasses.cpp:30
-msgid ""
-"Perspective projection keeps the horizon a straight line. The mathematical "
-"name for this projection method is <i>gnomonic projection</i>."
-msgstr ""
-"Unjuran perspektif memastikan ufuk dalam bentuk garisan lurus. Nama "
-"matematik bagi kaedah unjuran ini ialah <i>unjuran gnomorik</i>"
+#: src/translations.h:33
+msgid "Sun"
+msgstr "Matahari"
+
+#: src/translations.h:34
+msgid "Mercury"
+msgstr "Mekuri"
+
+#: src/translations.h:35
+msgid "Venus"
+msgstr "Zurah"
+
+#: src/translations.h:36
+msgid "Earth"
+msgstr "Bumi"
+
+#: src/translations.h:37
+msgid "Moon"
+msgstr "Bulan"
+
+#: src/translations.h:38
+msgid "Mars"
+msgstr "Marikh"
+
+#: src/translations.h:39
+msgid "Deimos"
+msgstr "Deimos"
 
 #: src/translations.h:40
 msgid "Phobos"
 msgstr ""
 
-#: src/translations.h:55
-msgid "Phoebe"
-msgstr "Phoebe"
+#: src/translations.h:41
+msgid "Jupiter"
+msgstr "Mustari"
 
-#: src/modules/TextUI.cpp:109
-msgid "Planet Names"
-msgstr "Nama Planet"
+#: src/translations.h:42
+msgid "Io"
+msgstr "Io"
 
-#: src/modules/TextUI.cpp:110
-msgid "Planet Orbits"
-msgstr "Orbit Planet"
+#: src/translations.h:43
+msgid "Europa"
+msgstr "Europa"
 
-#: src/modules/TextUI.cpp:111
-msgid "Planet Trails"
-msgstr "Laluan Planet"
+#: src/translations.h:44
+msgid "Ganymede"
+msgstr "Ganymede"
 
-#: src/gui/StelGui.cpp:117
-#, fuzzy
-msgid "Planet orbits"
-msgstr "Orbit Planet"
-
-#: src/ui_locationDialogGui.h:411
-msgid "Planet:"
-msgstr "Planet:"
-
-#: src/modules/LandscapeMgr.cpp:436
-msgid "Planet: "
-msgstr "Planet "
-
-#: src/ui_configurationDialog.h:813
-msgid "Planetarium options"
-msgstr "Pilihan Planetarium"
-
-#: src/modules/Nebula.cpp:281
-msgid "Planetary nebula"
-msgstr ""
-
-#: src/ui_viewDialog.h:1015
-msgid "Planets"
-msgstr "Planet"
-
-#: src/ui_viewDialog.h:1003
-msgid "Planets and satellites"
-msgstr "Planet dan satelit"
-
-#: src/gui/StelGui.cpp:116
-msgid "Planets labels"
-msgstr "Label planet"
-
-#: src/ui_configurationDialog.h:879
-msgid "Plugins"
-msgstr ""
-
-#: src/translations.h:58
-msgid "Pluto"
-msgstr "Pluto"
-
-#: src/translations.h:78
-msgid "Polynesian"
-msgstr "Polinesia"
-
-#: src/modules/TextUI.cpp:84
-msgid "Preset Sky Time: "
-msgstr ""
-
-#: src/modules/TextUI.cpp:87
-msgid "Preset Time"
-msgstr ""
-
-#: src/ui_configurationDialog.h:749
-msgid "Program language"
-msgstr "Bahasa Program"
-
-#: src/gui/HelpDialog.cpp:291
-#, qt-format
-msgid "Project coordinator & lead developer: %1"
-msgstr "Koordinator Projek & pembangun utama: %1"
-
-#: src/ui_viewDialog.h:1038
-msgid "Projection"
-msgstr "Unjuran"
-
-#: src/gui/StelGui.cpp:178
-msgid "Quit"
-msgstr "Keluar"
-
-#: src/core/StelObject.cpp:65
-#, qt-format
-msgid "RA/DE (J2000): %1/%2"
-msgstr "RA/DE (J2000): %1/%2"
-
-#: src/core/StelObject.cpp:72
-#, qt-format
-msgid "RA/DE (of date): %1/%2"
-msgstr "RA/DE (dari tarikh): %1/%2"
-
-#: src/ui_searchDialogGui.h:236
-msgid "RA/Dec (J2000):"
-msgstr "RA/Dec (J2000):"
-
-#: src/ui_helpDialogGui.h:273
-msgid "Refresh"
-msgstr "Segarkan"
-
-#: src/ui_viewDialog.h:997
-msgid "Relative scale:"
-msgstr "Skala Relatif:"
-
-#: src/ui_configurationDialog.h:846
-msgid "Restart the download"
-msgstr "Mula semula muat turun"
-
-#: src/ui_configurationDialog.h:771
-msgid "Restore defaults"
-msgstr "Pulih lalai"
-
-#: src/ui_configurationDialog.h:769
-msgid "Restore the default settings that came with Stellarium"
-msgstr "Pulih tetapan lalai yang sedia ada pada Stellarium"
-
-#: src/ui_configurationDialog.h:772
-msgid ""
-"Restoring default settings requires a restart of Stellarium. Saving all the "
-"current options includes the current FOV and direction of view for use at "
-"next startup."
-msgstr ""
-"Pemulihan tetapan lalai memerlukan ulang hidup Stellarium. Simpan semua "
-"pilihan semasa termasuklah FOV semasa dan arahan papar yang akan digunakan "
-"pada startup seterusnya."
-
-#: src/ui_configurationDialog.h:848
-msgid "Retry"
-msgstr "Ulangi"
-
-#: src/translations.h:51
-msgid "Rhea"
-msgstr "Rhea"
-
-#: src/gui/HelpDialog.cpp:56
-msgid "Right click"
-msgstr "Klik kanan"
-
-#: src/ui_configurationDialog.h:857
-msgid "Run the selected script"
-msgstr "Jalankan skrip yang dipilih"
-
-#: src/gui/ConfigurationDialog.cpp:600
-msgid "Running script: "
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:607
-msgid "Running script: [none]"
-msgstr ""
-
-#: src/translations.h:64
-msgid "S"
-msgstr ""
+#: src/translations.h:45
+msgid "Callisto"
+msgstr "Callisto"
 
 #: src/translations.h:46
 msgid "Saturn"
 msgstr "Saturn"
 
-#: src/modules/TextUI.cpp:141
-msgid "Save Current Configuration as Default: "
-msgstr "Simpan Konfigurasi Semasa sebagai Lalai: "
+#: src/translations.h:47
+msgid "Mimas"
+msgstr "Mimas"
 
-#: src/gui/StelGui.cpp:179
-msgid "Save screenshot"
-msgstr "Simpan cekupanskrin"
+#: src/translations.h:48
+msgid "Enceladus"
+msgstr "Enceladus"
 
-#: src/ui_configurationDialog.h:767
-msgid "Save settings"
-msgstr "Simpan tetapan"
+#: src/translations.h:49
+msgid "Tethys"
+msgstr "Tethys"
 
-#: src/ui_configurationDialog.h:765
+#: src/translations.h:50
+msgid "Dione"
+msgstr "Dione"
+
+#: src/translations.h:51
+msgid "Rhea"
+msgstr "Rhea"
+
+#: src/translations.h:52
+msgid "Titan"
+msgstr "Titan"
+
+#: src/translations.h:53
+msgid "Hyperion"
+msgstr "Hyperion"
+
+#: src/translations.h:54
+msgid "Iapetus"
+msgstr "Iapetus"
+
+#: src/translations.h:55
+msgid "Phoebe"
+msgstr "Phoebe"
+
+#: src/translations.h:56
+msgid "Neptune"
+msgstr "Neptun"
+
+#: src/translations.h:57
+msgid "Uranus"
+msgstr "Uranus"
+
+#: src/translations.h:58
+msgid "Pluto"
+msgstr "Pluto"
+
+#: src/translations.h:59
+msgid "Charon"
+msgstr "Charon"
+
+#: src/translations.h:60
+msgid "Solar System Observer"
+msgstr "Pemerhati Sistem Solar"
+
+#: src/translations.h:63
+msgid "N"
+msgstr "N"
+
+#: src/translations.h:64
+msgid "S"
+msgstr ""
+
+#: src/translations.h:65
+msgid "E"
+msgstr "E"
+
+#: src/translations.h:66
+msgid "W"
+msgstr "W"
+
+#: src/translations.h:69
+msgid "Aztec"
+msgstr ""
+
+#: src/translations.h:70
+msgid "Chinese"
+msgstr "Cina"
+
+#: src/translations.h:71
+msgid "Egyptian"
+msgstr "Mesir"
+
+#: src/translations.h:72
+msgid "Inuit"
+msgstr "Inuit"
+
+#: src/translations.h:73
+msgid "Korean"
+msgstr "Korea"
+
+#: src/translations.h:74
+msgid "Lakota"
+msgstr "Lakota"
+
+#: src/translations.h:75
+msgid "Maori"
+msgstr ""
+
+#: src/translations.h:76
+msgid "Navajo"
+msgstr "Navajo"
+
+#: src/translations.h:77
+msgid "Norse"
+msgstr "Norse"
+
+#: src/translations.h:78
+msgid "Polynesian"
+msgstr "Polinesia"
+
+#: src/translations.h:79
+msgid "Western"
+msgstr "Barat"
+
+#: src/translations.h:80
+msgid "Tupi-Guarani"
+msgstr "Tupi-Guarani"
+
+#: src/ui_dateTimeDialogGui.h:294 src/ui_helpDialogGui.h:259
+#: src/ui_locationDialogGui.h:387 src/ui_viewDialog.h:979
+#: src/ui_configurationDialog.h:746
+msgid "Form"
+msgstr "Bentuk"
+
+#: src/ui_dateTimeDialogGui.h:297 src/ui_dateTimeDialogGui.h:298
+msgid "/"
+msgstr "/"
+
+#: src/ui_dateTimeDialogGui.h:299 src/ui_dateTimeDialogGui.h:300
+msgid ":"
+msgstr ":"
+
+#: src/ui_helpDialogGui.h:260 src/ui_helpDialogGui.h:266
+msgid "Help"
+msgstr "Bantuan"
+
+#: src/ui_helpDialogGui.h:268
+msgid "About"
+msgstr "Perihal"
+
+#: src/ui_helpDialogGui.h:270
+msgid "Log"
+msgstr "Log"
+
+#: src/ui_helpDialogGui.h:273
+msgid "Refresh"
+msgstr "Segarkan"
+
+#: src/ui_locationDialogGui.h:388
+msgid "Location"
+msgstr "Lokasi"
+
+#: src/ui_locationDialogGui.h:392
+msgid "Current location information"
+msgstr "Maklumat lokasi semasa"
+
+#: src/ui_locationDialogGui.h:393
+msgid "Use as default"
+msgstr "Guna sebagai lalai"
+
+#: src/ui_locationDialogGui.h:394
+msgid "Delete"
+msgstr "Padam"
+
+#: src/ui_locationDialogGui.h:395
+msgid "Add to list"
+msgstr "Tambah dalam senarai"
+
+#: src/ui_locationDialogGui.h:396
+msgid "Latitude:"
+msgstr "Latitud:"
+
+#: src/ui_locationDialogGui.h:398 src/ui_locationDialogGui.h:402
 msgid ""
-"Save the settings you've changed this session to be the same the next time "
-"you start Stellarium"
+"You can enter values in decimal degrees, or using dms format, for example: "
+"+1d 12m 8s"
 msgstr ""
-"Simpan tetapan yang anda ubah dari sesi ini supaya tetap sama bila anda "
-"mulakan Stellarium dilain masa."
+"Anda boleh masukkan nilai dalam darjah perpuluhan, atau gunakan format, "
+"contoh: +1d 12m 8s"
 
-#: src/ui_viewDialog.h:1008
-msgid "Scale Moon"
-msgstr "Skalakan Bulan"
+#: src/ui_locationDialogGui.h:400
+msgid "Longitude:"
+msgstr "Longitud:"
 
-#: src/ui_configurationDialog.h:835
-msgid "Screenshot Directory"
-msgstr "Direktori Cekupan skrin"
+#: src/ui_locationDialogGui.h:404
+msgid "Altitude:"
+msgstr "Altitud:"
 
-#: src/ui_configurationDialog.h:834
-msgid "Screenshots"
-msgstr "Cekupan skrin"
+#: src/ui_locationDialogGui.h:406
+msgid "Enter the altitude in meter"
+msgstr "Masukkan altitud dalam meter"
 
-#: src/gui/StelGui.cpp:132
-msgid "Script console window"
-msgstr ""
+#: src/ui_locationDialogGui.h:408
+msgid " m"
+msgstr " m"
 
-#: src/ui_configurationDialog.h:877
-msgid "Scripts"
-msgstr "Skrip"
+#: src/ui_locationDialogGui.h:409
+msgid "Name/City:"
+msgstr "nama/Bandar:"
 
-#: src/modules/TextUI.cpp:69
-msgid "Scripts "
-msgstr "Skrip "
+#: src/ui_locationDialogGui.h:410
+msgid "Country:"
+msgstr "Negara:"
 
-#: src/gui/StelGui.cpp:127
-msgid "Search window"
-msgstr "Tetingkap Carian"
+#: src/ui_locationDialogGui.h:411
+msgid "Planet:"
+msgstr "Planet:"
 
-#: src/modules/TextUI.cpp:137
-msgid "Select and exit to run."
-msgstr "Pilih dan keluar untuk laksanakannya"
+#: src/ui_searchDialogGui.h:230 src/ui_searchDialogGui.h:231
+msgid "Find Object"
+msgstr "Cari Objek"
 
-#: src/gui/HelpDialog.cpp:64
-msgid "Select object"
-msgstr "Pilih objek"
+#: src/ui_searchDialogGui.h:236
+msgid "RA/Dec (J2000):"
+msgstr "RA/Dec (J2000):"
 
-#: src/gui/ConfigurationDialog.cpp:283
-msgid "Select screenshot directory"
-msgstr "Pilih direktori cekupan skrin"
+#: src/ui_viewDialog.h:980
+msgid "View"
+msgstr "Papar"
 
-#: src/ui_configurationDialog.h:833
-msgid "Select single constellation"
-msgstr "Pilih satu gugusan bintang"
+#: src/ui_viewDialog.h:986
+msgid "Sky"
+msgstr "Langit"
 
-#: src/ui_configurationDialog.h:750
-msgid "Selected object information"
-msgstr "Maklumat objek yang dipilih"
-
-#: src/modules/TextUI.cpp:63
-msgid "Set Location "
-msgstr "Tentukan Lokasi "
-
-#: src/modules/TextUI.cpp:64
-msgid "Set Time "
-msgstr "Tentukan Masa "
-
-#: src/modules/TextUI.cpp:80
-msgid "Set Time Zone: "
-msgstr "Tetapkan Zon Masa: "
-
-#: src/modules/TextUI.cpp:144
-msgid "Set UI Locale: "
+#: src/ui_viewDialog.h:988
+msgid "Markings"
 msgstr ""
 
-#: src/gui/StelGui.cpp:162
-msgid "Set home planet to selected planet"
-msgstr "Tetapkan pelanet rumah kepada planet pilihan"
+#: src/ui_viewDialog.h:990
+msgid "Landscape"
+msgstr "Landskap"
 
-#: src/gui/StelGui.cpp:141
-msgid "Set normal time rate"
-msgstr "Tetapkan kadar normal masa"
-
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:138
-msgid "Set the normal script execution rate"
+#: src/ui_viewDialog.h:992
+msgid "Starlore"
 msgstr ""
 
-#: src/gui/StelGui.cpp:144
-msgid "Set time rate to zero"
-msgstr "Tetapkan kadar masa kepada kosong"
+#: src/ui_viewDialog.h:996
+msgid "Absolute scale:"
+msgstr "Skala Mutlak:"
 
-#: src/gui/StelGui.cpp:145
-msgid "Set time to now"
-msgstr "tetapkan masa sekarang"
+#: src/ui_viewDialog.h:997
+msgid "Relative scale:"
+msgstr "Skala Relatif:"
 
-#: src/ui_configurationDialog.h:796
-msgid ""
-"Sets the simulation time to the next instance of this time of day when "
-"Stellarium starts"
+#: src/ui_viewDialog.h:998
+msgid "Twinkle:"
+msgstr "Kerlipan:"
+
+#: src/ui_viewDialog.h:1000
+msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
 
-#: src/ui_viewDialog.h:1016
-msgid "Shooting Stars"
+#: src/ui_viewDialog.h:1002
+msgid "Dynamic eye adaptation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:758
-msgid "Short"
-msgstr "Pendek"
+#: src/ui_viewDialog.h:1003
+msgid "Planets and satellites"
+msgstr "Planet dan satelit"
 
-#: src/ui_viewDialog.h:1036
-msgid "Show art"
-msgstr ""
-
-#: src/ui_viewDialog.h:1010
-msgid "Show atmosphere"
-msgstr "Paparkan atmsofera"
-
-#: src/ui_viewDialog.h:1035
-msgid "Show boundaries"
-msgstr "Papar sempadan"
-
-#: src/ui_configurationDialog.h:812
-msgid "Show flip buttons"
-msgstr "Papar butang kalih"
-
-#: src/ui_viewDialog.h:1041
-msgid "Show fog"
-msgstr "Papar kabus"
-
-#: src/ui_viewDialog.h:1040
-msgid "Show ground"
-msgstr "Papar Tanah"
-
-#: src/ui_viewDialog.h:1034
-msgid "Show labels"
-msgstr "Papar label"
-
-#: src/ui_viewDialog.h:1033
-msgid "Show lines"
-msgstr "Papar garisan"
+#: src/ui_viewDialog.h:1004
+msgid "Show planets"
+msgstr "papar planet"
 
 #: src/ui_viewDialog.h:1005
 msgid "Show planet markers"
@@ -1394,332 +1424,102 @@ msgstr "Papar penunjuk planet"
 msgid "Show planet orbits"
 msgstr "Papar orbit planet"
 
-#: src/ui_viewDialog.h:1004
-msgid "Show planets"
-msgstr "papar planet"
-
-#: src/modules/TextUI.cpp:96
-msgid "Show: "
-msgstr "Papar: "
-
-#: src/modules/TextUI.cpp:142
-msgid "Shut Down: "
-msgstr "Tutup "
-
-#: src/modules/TextUI.cpp:83
-msgid "Sidereal"
-msgstr ""
-
 #: src/ui_viewDialog.h:1007
 msgid "Simulate light speed"
 msgstr "Simulasikan kelajuan cahaya"
 
-#: src/modules/Nebula.cpp:100
-#, qt-format
-msgid "Size: %1"
-msgstr "Saiz: %1"
+#: src/ui_viewDialog.h:1008
+msgid "Scale Moon"
+msgstr "Skalakan Bulan"
 
-#: src/ui_viewDialog.h:986
-msgid "Sky"
-msgstr "Langit"
+#: src/ui_viewDialog.h:1010
+msgid "Show atmosphere"
+msgstr "Paparkan atmsofera"
 
-#: src/modules/TextUI.cpp:92
-msgid "Sky Culture: "
-msgstr "Budaya Samawi "
+#: src/ui_viewDialog.h:1011
+msgid "Light pollution: "
+msgstr "Pencemaran cahaya: "
 
-#: src/modules/TextUI.cpp:93
-msgid "Sky Language: "
-msgstr "Bahasa Langit "
+#: src/ui_viewDialog.h:1012
+msgid "Labels and Markers"
+msgstr "Label dan Penanda"
 
-#: src/modules/TextUI.cpp:85
-msgid "Sky Time At Start-up: "
+#: src/ui_viewDialog.h:1015
+msgid "Planets"
+msgstr "Planet"
+
+#: src/ui_viewDialog.h:1016
+msgid "Shooting Stars"
 msgstr ""
 
-#: src/modules/TextUI.cpp:79
-msgid "Sky Time: "
-msgstr "Masa Samawi: "
+#: src/ui_viewDialog.h:1017
+msgid "Hourly zenith rate:"
+msgstr "Kadar zenit mengikut jam:"
 
-#: src/gui/StelGui.cpp:128
-msgid "Sky and viewing options window"
-msgstr "Tetingkap pilihan pandangan dan langit"
+#: src/ui_viewDialog.h:1018
+msgid "0"
+msgstr "0"
 
-#: src/gui/HelpDialog.cpp:71 src/gui/StelGui.cpp:136
-msgid "Slow down the script execution rate"
+#: src/ui_viewDialog.h:1019
+msgid "10"
+msgstr "10"
+
+#: src/ui_viewDialog.h:1020
+msgid "80"
+msgstr "80"
+
+#: src/ui_viewDialog.h:1021
+msgid "10000"
+msgstr "10000"
+
+#: src/ui_viewDialog.h:1022
+msgid "144000"
+msgstr "144000"
+
+#: src/ui_viewDialog.h:1024
+msgid "Celestial Sphere"
 msgstr ""
 
-#: src/modules/TextUI.cpp:76
-msgid "Solar System Body: "
-msgstr "Jasad Sistem Solar "
+#: src/ui_viewDialog.h:1032
+msgid "Constellations"
+msgstr "Gugusan bintang"
 
-#: src/translations.h:60
-msgid "Solar System Observer"
-msgstr "Pemerhati Sistem Solar"
+#: src/ui_viewDialog.h:1033
+msgid "Show lines"
+msgstr "Papar garisan"
 
-#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:286
-#: src/gui/StelGuiItems.cpp:647
-msgid "Space"
-msgstr "Space"
+#: src/ui_viewDialog.h:1034
+msgid "Show labels"
+msgstr "Papar label"
 
-#: src/modules/StarWrapper.cpp:119
-#, qt-format
-msgid "Spectral Type: %1"
-msgstr "Jenis Spectral: %1"
+#: src/ui_viewDialog.h:1035
+msgid "Show boundaries"
+msgstr "Papar sempadan"
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:137
-msgid "Speed up the script execution rate"
+#: src/ui_viewDialog.h:1036
+msgid "Show art"
 msgstr ""
 
-#: src/ui_configurationDialog.h:817
-msgid "Spheric mirror distortion"
-msgstr "Herotan cermin bersfera"
-
-#: src/ui_configurationDialog.h:815
-msgid ""
-"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
-"mirror for low-cost planetarium systems."
-msgstr ""
-"Herotan cermin bersfera digunakan apabila Stellarium diunjurkan kepada "
-"cermin bersfera untuk sistem planetarium berkos rendah."
-
-#: src/gui/ViewDialog.cpp:450
-msgid "Standard Perseids rate"
-msgstr "Kadar Perseids Piawai"
-
-#: src/modules/TextUI.cpp:97
-msgid "Star Value Multiplier: "
-msgstr "Gandaan Nilai Bintang: "
-
-#: src/ui_configurationDialog.h:838
-msgid "Star catalog updates"
-msgstr "Kemaskini katalog bintang"
-
-#: src/ui_viewDialog.h:992
-msgid "Starlore"
+#: src/ui_viewDialog.h:1037
+msgid "Art brightness: "
 msgstr ""
 
-#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:995 src/ui_viewDialog.h:1013
-msgid "Stars"
-msgstr "Bintang"
+#: src/ui_viewDialog.h:1038
+msgid "Projection"
+msgstr "Unjuran"
 
-#: src/modules/TextUI.cpp:66
-msgid "Stars "
-msgstr "Bintang "
+#: src/ui_viewDialog.h:1039 src/ui_viewDialog.h:1044 src/ui_viewDialog.h:1046
+#: src/ui_configurationDialog.h:853 src/ui_configurationDialog.h:864
+msgid "Options"
+msgstr "Pilihan"
 
-#: src/ui_configurationDialog.h:792
-msgid "Starts Stellarium at system clock date and time"
-msgstr "Mulakan Stellarium menggunakan tarikh dan masa sistem"
+#: src/ui_viewDialog.h:1040
+msgid "Show ground"
+msgstr "Papar Tanah"
 
-#: src/gui/ConfigurationDialog.cpp:448
-#, qt-format
-msgid "Startup FOV: %1%2"
-msgstr ""
-
-#: src/ui_configurationDialog.h:776
-msgid "Startup FOV: XX"
-msgstr ""
-
-#: src/ui_configurationDialog.h:790
-msgid "Startup date and time"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:456
-#, qt-format
-msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr ""
-
-#: src/ui_configurationDialog.h:780
-msgid "Startup direction of view: xxxx"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:161
-msgid "Stellarium Help"
-msgstr "Bantuan Stellarium"
-
-#: src/core/StelProjectorClasses.cpp:111
-msgid "Stereographic"
-msgstr "Steregrafik"
-
-#: src/core/StelProjectorClasses.cpp:116
-msgid ""
-"Stereographic projection is known since the antiquity and was originally "
-"known as the planisphere projection. It preserves the angles at which curves "
-"cross each other but it does not preserve area."
-msgstr ""
-
-#: src/ui_configurationDialog.h:861
-msgid "Stop a running script"
-msgstr ""
-
-#: src/ui_configurationDialog.h:850
-msgid "Stop the download. You can always restart it later"
-msgstr "Henti muat turun. anda boleh mula semula kemudiannya"
-
-#: src/gui/StelGui.cpp:153
-msgid "Subtract 1 sidereal day"
-msgstr ""
-
-#: src/gui/StelGui.cpp:155
-msgid "Subtract 1 sidereal week"
-msgstr ""
-
-#: src/gui/StelGui.cpp:149
-msgid "Subtract 1 solar day"
-msgstr "Tolak 1 hari solar"
-
-#: src/gui/StelGui.cpp:147
-msgid "Subtract 1 solar hour"
-msgstr "Tolak 1 jam solar"
-
-#: src/gui/StelGui.cpp:151
-msgid "Subtract 1 solar week"
-msgstr "Tolah 1 minggu solar"
-
-#: src/translations.h:33
-msgid "Sun"
-msgstr "Matahari"
-
-#: src/gui/StelGui.cpp:177
-msgid "Switch between equatorial and azimuthal mount"
-msgstr ""
-
-#: src/ui_configurationDialog.h:794
-msgid "System date and time"
-msgstr "Tarikh dan masa sistem"
-
-#: src/ui_configurationDialog.h:798
-msgid "System date at:"
-msgstr "Tarikh sistem pada:"
-
-#: src/gui/StelGui.cpp:164
-msgid "Telescope Control"
-msgstr "Kawal Teleskop"
-
-#: src/translations.h:49
-msgid "Tethys"
-msgstr "Tethys"
-
-#: src/core/StelProjectorClasses.cpp:194
-msgid ""
-"The Hammer projection is an equal-area map projection, described by Ernst "
-"Hammer in 1892 and directly inspired by the Aitoff projection."
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:172
-msgid "The Stellarium User Guide"
-msgstr "Panduan Pengguna Stellarium"
-
-#: src/ui_configurationDialog.h:778
-msgid "The direction you're looking when Stellarium starts"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:171
-msgid ""
-"The following links are external web links, and will launch your web "
-"browser:\n"
-msgstr ""
-"Pautan dibawah adalah pautan luar, dan akan memulakan pelayar internet anda:/"
-"n\n"
-
-#: src/core/StelProjectorClasses.cpp:68
-msgid ""
-"The full name of this projection method is, <i>Lambert azimuthal equal-area "
-"projection</i>. It preserves the area but not the angle."
-msgstr ""
-
-#: src/core/StelProjectorClasses.cpp:235
-msgid ""
-"The full name of this projection mode is <i>cylindrical equidistant "
-"projection</i>. With this projection all parallels are equally spaced."
-msgstr ""
-"Nama penuh bagi mod unjuruan ini ialah <i>unjuran selinder sama jarak</i>. "
-"Melalui unjuran ini  semua selarian mempunyai jarak yang sama."
-
-#: src/core/StelProjectorClasses.cpp:282
-msgid ""
-"The mercator projection is one of the most used world map projection. It "
-"preserves direction and shapes but distorts size, in an increasing degree "
-"away from the equator."
-msgstr ""
-"Unjuran Merkator ialah salah satu unjuran peta dunia yang paling banyak "
-"digunakan. Ia mengekalkan arah dan bentuk tetapi menherot-benyotkan saiz, "
-"iaitu penambahan darjah yang semakin berjauhan dari khatulistiwa."
-
-#: src/ui_configurationDialog.h:774
-msgid "The width of your view when Stellarium starts"
-msgstr ""
-
-#: src/main.cpp:308
-msgid "This system does not support OpenGL."
-msgstr "Sistem ini tidak menyokong OpenGL."
-
-#: src/modules/TextUI.cpp:88
-msgid "Time Display Format: "
-msgstr "Format Paparan Masa: "
-
-#: src/translations.h:52
-msgid "Titan"
-msgstr "Titan"
-
-#: src/ui_configurationDialog.h:810
-msgid "Toggle vertical and horizontal image flip buttons."
-msgstr ""
-
-#: src/gui/StelGui.cpp:184
-msgid "Toggle visibility of GUI"
-msgstr ""
-
-#: src/ui_configurationDialog.h:875
-msgid "Tools"
-msgstr "Alatan"
-
-#: src/gui/StelGui.cpp:159
-msgid "Track object"
-msgstr "Jejak objek"
-
-#: src/translations.h:80
-msgid "Tupi-Guarani"
-msgstr "Tupi-Guarani"
-
-#: src/ui_viewDialog.h:998
-msgid "Twinkle:"
-msgstr "Kerlipan:"
-
-#: src/modules/TextUI.cpp:100
-msgid "Twinkling: "
-msgstr "Kerlipan "
-
-#: src/modules/Nebula.cpp:92
-#, qt-format
-msgid "Type: <b>%1</b>"
-msgstr "Jenis: <b>%1</b>"
-
-#: src/modules/TextUI.cpp:135
-msgid "USB Script: "
-msgstr "Skrip USB: "
-
-#: src/modules/Nebula.cpp:290
-msgid "Undocumented type"
-msgstr "Jenis yang tidak didokumentasi"
-
-#: src/modules/Nebula.cpp:287
-msgid "Unknown"
-msgstr "Tidak diketahui"
-
-#: src/modules/TextUI.cpp:143
-msgid "Update me via Internet: "
-msgstr "Kemaskini saya melalui Internet: "
-
-#: src/translations.h:57
-msgid "Uranus"
-msgstr "Uranus"
-
-#: src/ui_configurationDialog.h:800
-msgid "Use a specific date and time when Stellarium starts up"
-msgstr "Guna tarikh dan masa spesifik bila Stellarium bermula"
-
-#: src/ui_locationDialogGui.h:393
-msgid "Use as default"
-msgstr "Guna sebagai lalai"
+#: src/ui_viewDialog.h:1041
+msgid "Show fog"
+msgstr "Papar kabus"
 
 #: src/ui_viewDialog.h:1042
 msgid "Use associated planet and position"
@@ -1733,33 +1533,193 @@ msgstr "Guna lanskap ini sebagai lalai"
 msgid "Use this sky culture as default"
 msgstr ""
 
-#: src/translations.h:35
-msgid "Venus"
-msgstr "Zurah"
-
-#: src/gui/ConfigurationDialog.cpp:791
-msgid "Verifying file integrity..."
-msgstr "Mengesahkan Integriti fail..."
-
-#: src/ui_viewDialog.h:980
-msgid "View"
-msgstr "Papar"
-
 #: src/ui_viewDialog.h:1047
 msgid "Visible"
 msgstr ""
 
-#: src/translations.h:66
-msgid "W"
-msgstr "W"
+#: src/ui_configurationDialog.h:747
+msgid "Configuration"
+msgstr "Konfigurasi"
 
-#: src/translations.h:79
-msgid "Western"
-msgstr "Barat"
+#: src/ui_configurationDialog.h:749
+msgid "Program language"
+msgstr "Bahasa Program"
 
-#: src/gui/HelpDialog.cpp:70
-msgid "When a Script is Running"
+#: src/ui_configurationDialog.h:750
+msgid "Selected object information"
+msgstr "Maklumat objek yang dipilih"
+
+#: src/ui_configurationDialog.h:752
+msgid "Display all information available"
+msgstr "Papar semua maklumat yang ada"
+
+#: src/ui_configurationDialog.h:754
+msgid "All available"
+msgstr "Kesemuannya ada"
+
+#: src/ui_configurationDialog.h:756
+msgid "Display less information"
+msgstr "Papar kurang maklumat"
+
+#: src/ui_configurationDialog.h:758
+msgid "Short"
+msgstr "Pendek"
+
+#: src/ui_configurationDialog.h:760
+msgid "Display no information"
+msgstr "Jangan paparkan maklumat"
+
+#: src/ui_configurationDialog.h:762
+msgid "None"
+msgstr "Tiada"
+
+#: src/ui_configurationDialog.h:763
+msgid "Default options"
+msgstr "Pilihan lalai"
+
+#: src/ui_configurationDialog.h:765
+msgid ""
+"Save the settings you've changed this session to be the same the next time "
+"you start Stellarium"
 msgstr ""
+"Simpan tetapan yang anda ubah dari sesi ini supaya tetap sama bila anda "
+"mulakan Stellarium dilain masa."
+
+#: src/ui_configurationDialog.h:767
+msgid "Save settings"
+msgstr "Simpan tetapan"
+
+#: src/ui_configurationDialog.h:769
+msgid "Restore the default settings that came with Stellarium"
+msgstr "Pulih tetapan lalai yang sedia ada pada Stellarium"
+
+#: src/ui_configurationDialog.h:771
+msgid "Restore defaults"
+msgstr "Pulih lalai"
+
+#: src/ui_configurationDialog.h:772
+msgid ""
+"Restoring default settings requires a restart of Stellarium. Saving all the "
+"current options includes the current FOV and direction of view for use at "
+"next startup."
+msgstr ""
+"Pemulihan tetapan lalai memerlukan ulang hidup Stellarium. Simpan semua "
+"pilihan semasa termasuklah FOV semasa dan arahan papar yang akan digunakan "
+"pada startup seterusnya."
+
+#: src/ui_configurationDialog.h:774
+msgid "The width of your view when Stellarium starts"
+msgstr ""
+
+#: src/ui_configurationDialog.h:776
+msgid "Startup FOV: XX"
+msgstr ""
+
+#: src/ui_configurationDialog.h:778
+msgid "The direction you're looking when Stellarium starts"
+msgstr ""
+
+#: src/ui_configurationDialog.h:780
+msgid "Startup direction of view: xxxx"
+msgstr ""
+
+#: src/ui_configurationDialog.h:781
+msgid "Control"
+msgstr "Kawalan"
+
+#: src/ui_configurationDialog.h:783
+msgid "Allow keyboard to pan and zoom"
+msgstr ""
+
+#: src/ui_configurationDialog.h:785
+msgid "Enable keyboard navigation"
+msgstr ""
+
+#: src/ui_configurationDialog.h:787
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:789
+msgid "Enable mouse navigation"
+msgstr ""
+
+#: src/ui_configurationDialog.h:790
+msgid "Startup date and time"
+msgstr ""
+
+#: src/ui_configurationDialog.h:792
+msgid "Starts Stellarium at system clock date and time"
+msgstr "Mulakan Stellarium menggunakan tarikh dan masa sistem"
+
+#: src/ui_configurationDialog.h:794
+msgid "System date and time"
+msgstr "Tarikh dan masa sistem"
+
+#: src/ui_configurationDialog.h:796
+msgid ""
+"Sets the simulation time to the next instance of this time of day when "
+"Stellarium starts"
+msgstr ""
+
+#: src/ui_configurationDialog.h:798
+msgid "System date at:"
+msgstr "Tarikh sistem pada:"
+
+#: src/ui_configurationDialog.h:800
+msgid "Use a specific date and time when Stellarium starts up"
+msgstr "Guna tarikh dan masa spesifik bila Stellarium bermula"
+
+#: src/ui_configurationDialog.h:802
+msgid "Other:"
+msgstr "Lain-lain:"
+
+#: src/ui_configurationDialog.h:803
+msgid "use current"
+msgstr "guna yang semasa"
+
+#: src/ui_configurationDialog.h:804
+msgid "Other"
+msgstr "Lain-lain"
+
+#: src/ui_configurationDialog.h:806
+msgid "Hides the mouse cursor when inactive"
+msgstr "Sembunyikan kursor tetikus apabila tidak aktif"
+
+#: src/ui_configurationDialog.h:808
+msgid "Mouse cursor timeout (seconds):"
+msgstr ""
+
+#: src/ui_configurationDialog.h:810
+msgid "Toggle vertical and horizontal image flip buttons."
+msgstr ""
+
+#: src/ui_configurationDialog.h:812
+msgid "Show flip buttons"
+msgstr "Papar butang kalih"
+
+#: src/ui_configurationDialog.h:813
+msgid "Planetarium options"
+msgstr "Pilihan Planetarium"
+
+#: src/ui_configurationDialog.h:815
+msgid ""
+"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
+"mirror for low-cost planetarium systems."
+msgstr ""
+"Herotan cermin bersfera digunakan apabila Stellarium diunjurkan kepada "
+"cermin bersfera untuk sistem planetarium berkos rendah."
+
+#: src/ui_configurationDialog.h:817
+msgid "Spheric mirror distortion"
+msgstr "Herotan cermin bersfera"
+
+#: src/ui_configurationDialog.h:819
+msgid "Align labels with the horizon"
+msgstr "jajar label dengan ufuk"
+
+#: src/ui_configurationDialog.h:821
+msgid "Gravity labels"
+msgstr "Label graviti"
 
 #: src/ui_configurationDialog.h:823
 msgid ""
@@ -1767,112 +1727,110 @@ msgid ""
 "direction"
 msgstr ""
 
-#: src/gui/StelGui.cpp:124
-msgid "Windows"
-msgstr "Tetingkap"
-
-#: src/ui_locationDialogGui.h:398 src/ui_locationDialogGui.h:402
-msgid ""
-"You can enter values in decimal degrees, or using dms format, for example: "
-"+1d 12m 8s"
+#: src/ui_configurationDialog.h:825
+msgid "Auto zoom out returns to initial direction of view"
 msgstr ""
-"Anda boleh masukkan nilai dalam darjah perpuluhan, atau gunakan format, "
-"contoh: +1d 12m 8s"
 
-#: src/modules/TextUI.cpp:128
-msgid "Zoom Duration: "
-msgstr "Tempoh Zoom: "
+#: src/ui_configurationDialog.h:827
+msgid "Mask out everything outside a central circle in the main view"
+msgstr ""
 
-#: src/gui/StelGui.cpp:160
-msgid "Zoom in on selected object"
-msgstr "Zoom ke dalam objek yang dipilih"
+#: src/ui_configurationDialog.h:829
+msgid "Disc viewport"
+msgstr ""
 
-#: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
-msgid "Zoom in/out"
-msgstr "Zoom masuk/keluar"
+#: src/ui_configurationDialog.h:831
+msgid "Hide other constellations when you click one"
+msgstr ""
 
-#: src/gui/StelGui.cpp:161
-msgid "Zoom out"
-msgstr "Zoom ke luar"
+#: src/ui_configurationDialog.h:833
+msgid "Select single constellation"
+msgstr "Pilih satu gugusan bintang"
 
-#: src/ui_configurationDialog.h:866
-#, fuzzy
-msgid "configure"
-msgstr "Konfigurasi"
+#: src/ui_configurationDialog.h:834
+msgid "Screenshots"
+msgstr "Cekupan skrin"
 
-#: src/ui_configurationDialog.h:803
-msgid "use current"
-msgstr "guna yang semasa"
+#: src/ui_configurationDialog.h:835
+msgid "Screenshot Directory"
+msgstr "Direktori Cekupan skrin"
+
+#: src/ui_configurationDialog.h:837
+msgid "Invert colors"
+msgstr ""
+
+#: src/ui_configurationDialog.h:838
+msgid "Star catalog updates"
+msgstr "Kemaskini katalog bintang"
+
+#: src/ui_configurationDialog.h:840
+msgid "Click here to start downloading"
+msgstr "Klik disini untuk memulakan muat turun"
+
+#: src/ui_configurationDialog.h:842
+msgid "Get catalog x of y"
+msgstr "Dapatkan katalog x dari y"
+
+#: src/ui_configurationDialog.h:843
+msgid "Download this file to view even more stars"
+msgstr "Muat turun fail ini untuk paparkan lebih banyak bintang"
 
 #: src/ui_configurationDialog.h:844
 msgid "xxx"
 msgstr "xxx"
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:191
-#, fuzzy
-msgid ""
-"{Bug reporting and feature request system} - if something doesn't work "
-"properly or is missing and is not listed in the tracker, you can open bug "
-"reports here."
+#: src/ui_configurationDialog.h:846
+msgid "Restart the download"
+msgstr "Mula semula muat turun"
+
+#: src/ui_configurationDialog.h:848
+msgid "Retry"
+msgstr "Ulangi"
+
+#: src/ui_configurationDialog.h:850
+msgid "Stop the download. You can always restart it later"
+msgstr "Henti muat turun. anda boleh mula semula kemudiannya"
+
+#: src/ui_configurationDialog.h:852
+msgid "Cancel"
+msgstr "Batal"
+
+#: src/ui_configurationDialog.h:855
+msgid "Close window when script runs"
+msgstr "tutup tetingkap ini bila skrip berjalan"
+
+#: src/ui_configurationDialog.h:857
+msgid "Run the selected script"
+msgstr "Jalankan skrip yang dipilih"
+
+#: src/ui_configurationDialog.h:861
+msgid "Stop a running script"
 msgstr ""
-"{Sistem pelaporan pepijat} - Jika ada sesuatu yang tidak berfungsi seperti "
-"yang dikehendaki dan tidak disenaraikan dalan senarai FAQ, anda boleh buat "
-"laporan pepijat disini."
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:196
-msgid "{Forums} - discuss Stellarium with other users."
-msgstr "{Forum} - Bincang mengenai Stellariun dengan pengguna lain."
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:176
-msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr "{Soalan Pertanyaan Lazim} mengenai Stellarium. Jawapan disertakan."
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:186
-msgid ""
-"{Support ticket system} - if you need help using Stellarium, post a support "
-"request here and we'll try to help."
+#: src/ui_configurationDialog.h:865
+msgid "Load at startup"
 msgstr ""
-"{Sistem tiket sokongan} - Jika anda perlukan bantuan mengenai penggunaan "
-"Stellarium, poskan permintaan sokongan disini & kami akan cuba membantu."
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:181
-msgid ""
-"{The Stellarium Wiki} - General information.  You can also find user-"
-"contributed landscapes and scripts here."
+#: src/ui_configurationDialog.h:866
+msgid "configure"
 msgstr ""
-"{Wiki Stellarium} - Maklumat Am. Anda juga boleh mendapatkan lanskap & skrip "
-"dari pengguna disini."
 
-#~ msgid "Add"
-#~ msgstr "Tambah"
+#: src/ui_configurationDialog.h:871
+msgid "Main"
+msgstr "Utama"
 
-#~ msgid "All star catalogs are up to date."
-#~ msgstr "Semua katalog bintang sudah dikemaskini."
+#: src/ui_configurationDialog.h:873
+msgid "Navigation"
+msgstr "Navigasi"
 
-#~ msgid "Checking for new star catalogs..."
-#~ msgstr "Memeriksa katalog bintang baru..."
+#: src/ui_configurationDialog.h:875
+msgid "Tools"
+msgstr "Alatan"
 
-#~ msgid ""
-#~ "Could not finalize download:\n"
-#~ "Error moving temporary file %1.tmp to %1.cat"
-#~ msgstr ""
-#~ "Tidak dapat meghabiskan muat turun:/n\n"
-#~ "Ralat memindahkan fail sementara %1.tmp ke %1.cat"
+#: src/ui_configurationDialog.h:877
+msgid "Scripts"
+msgstr "Skrip"
 
-#~ msgid "Images"
-#~ msgstr "Imej"
-
-#~ msgid ""
-#~ "{Feature request system} - if you have an idea for a new feature, send it "
-#~ "to us. We can't promise to implement every idea, but we appreciate the "
-#~ "feedback and review the list when we are planning future features."
-#~ msgstr ""
-#~ "{Sistem permintaan feature} - Jika anda ada ide untuk feature baru, "
-#~ "hantarkan kepada kami. Kami tidak berjanji akan melaksanakan kesemua ide "
-#~ "tersebut, tetapi kami menghargai maklumbalas dan akan kaji semula senarai "
-#~ "tersebut bila kami  merancang feature yang akan datang."
+#: src/ui_configurationDialog.h:879
+msgid "Plugins"
+msgstr ""
