@@ -385,8 +385,6 @@ void StarMgr::setCheckFlag(const QString& catId, bool b)
 
 void StarMgr::loadData(QVariantMap starsConfig)
 {
-	StelLoadingBar* lb = StelApp::getInstance().getStelLoadingBar();
-	Q_ASSERT(lb);
 	// Please do not init twice:
 	Q_ASSERT(maxGeodesicGridLevel < 0);
 
@@ -396,10 +394,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	foreach (const QVariant& catV, catalogsDescription)
 	{
 		QVariantMap m = catV.toMap();
-		const QString& catalogId = m.value("id").toString();
-		const QString& catalogFileName = m.value("fileName").toString();
-		lb->SetMessage(q_("Loading catalog %1 from file %2").arg(catalogId, catalogFileName));
-		checkAndLoadCatalog(m, lb);
+		checkAndLoadCatalog(m, NULL);
 	}
 
 	for (int i=0; i<=NR_OF_HIP; i++)
