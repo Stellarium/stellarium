@@ -1,4 +1,7 @@
+0.13.1
 Added custom stylesheets.
+Fixed the "QSqlDatabasePrivate::removeDatabase: connection 'oculars' is still
+in use, all queries will cease to work." warning on exiting Stellarium.
 
 ﻿0.11.0 [2009-12-09]
 * Updated to build correctly with new core & ui.
