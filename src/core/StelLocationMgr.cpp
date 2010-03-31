@@ -19,6 +19,7 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelLocationMgr.hpp"
+#include "kfilterdev.h"
 
 #include <QStringListModel>
 #include <QDebug>
@@ -26,16 +27,71 @@
 
 StelLocationMgr::StelLocationMgr()
 {
-	loadCities("data/base_locations.txt", false);
-	loadCities("data/user_locations.txt", true);
+	// The line below allows to re-generate the location file, you still need to gunzip manually it afterward.
+	// generateBinaryLocationFile("data/base_locations.txt", false, "data/base_locations.bin");
+
+	locations = loadCitiesBin("data/base_locations.bin.gz");
+	locations.unite(loadCities("data/user_locations.txt", true));
 
 	modelAllLocation = new QStringListModel(this);
 	modelAllLocation->setStringList(locations.keys());
 }
 
-void StelLocationMgr::loadCities(const QString& fileName, bool isUserLocation)
+void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool isUserLocation, const QString& binFilePath) const
+{
+	const QMap<QString, StelLocation>& cities = loadCities(fileName, isUserLocation);
+	QFile binfile(binFilePath);
+	binfile.open(QIODevice::WriteOnly);
+	QDataStream out(&binfile);
+	out.setVersion(QDataStream::Qt_4_6);
+	out << cities;
+	binfile.close();
+}
+
+QMap<QString, StelLocation> StelLocationMgr::loadCitiesBin(const QString& fileName) const
+{
+	QMap<QString, StelLocation> res;
+	QString cityDataPath;
+	try
+	{
+		cityDataPath = StelFileMgr::findFile(fileName);
+	}
+	catch (std::runtime_error& e)
+	{
+		return res;
+	}
+
+	QFile sourcefile(cityDataPath);
+	if (!sourcefile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "ERROR: Could not open location data file: " << cityDataPath;
+		return res;
+	}
+
+	if (fileName.endsWith(".gz"))
+	{
+		QIODevice* d = KFilterDev::device(&sourcefile, "application/x-gzip", false);
+		d->open(QIODevice::ReadOnly);
+		QDataStream in(d);
+		in.setVersion(QDataStream::Qt_4_6);
+		in >> res;
+		d->close();
+		delete d;
+		return res;
+	}
+	else
+	{
+		QDataStream in(&sourcefile);
+		in.setVersion(QDataStream::Qt_4_6);
+		in >> res;
+		return res;
+	}
+}
+
+QMap<QString, StelLocation> StelLocationMgr::loadCities(const QString& fileName, bool isUserLocation) const
 {
 	// Load the cities from data file
+	QMap<QString, StelLocation> res;
 	QString cityDataPath;
 	try
 	{
@@ -46,15 +102,14 @@ void StelLocationMgr::loadCities(const QString& fileName, bool isUserLocation)
 		// Note it is quite normal to nor have a user locations file (e.g. first run)
 		if (!isUserLocation)
 			qWarning() << "WARNING: Failed to locate location data file: " << fileName << e.what();
-
-		return;
+		return res;
 	}
 
 	QFile sourcefile(cityDataPath);
 	if (!sourcefile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
 		qWarning() << "ERROR: Could not open location data file: " << cityDataPath;
-		return;
+		return res;
 	}
 
 	// Read the data serialized from the file.
@@ -71,26 +126,27 @@ void StelLocationMgr::loadCities(const QString& fileName, bool isUserLocation)
 		loc.isUserLocation = isUserLocation;
 		const QString& locId = loc.getID();
 
-		if (locations.contains(locId))
+		if (res.contains(locId))
 		{
 			// Add the state in the name of the existing one and the new one to differentiate
-			StelLocation loc2 = locations[locId];
+			StelLocation loc2 = res[locId];
 			if (!loc2.state.isEmpty())
 				loc2.name += " ("+loc2.state+")";
 			// remove and re-add the fixed version
-			locations.remove(locId);
-			locations[loc2.getID()] = loc2;
+			res.remove(locId);
+			res[loc2.getID()] = loc2;
 
 			if (!loc.state.isEmpty())
 				loc.name += " ("+loc.state+")";
-			locations[locId] = loc;
+			res[locId] = loc;
 		}
 		else
 		{
-			locations.insert(locId, loc);
+			res.insert(locId, loc);
 		}
 	}
 	sourcefile.close();
+	return res;
 }
 
 StelLocationMgr::~StelLocationMgr()
