@@ -274,8 +274,6 @@ bool ZoneArray::readFileWithStelLoadingBar(QFile& file, void *data, qint64 size,
 		parts = (size + (part_size>>1)) / part_size;
 	}
 	float i = 0.f;
-	if (lb)
-		lb->Draw(i / parts);
 	i += 1.f;
 	while (size > 0)
 	{
@@ -284,8 +282,6 @@ bool ZoneArray::readFileWithStelLoadingBar(QFile& file, void *data, qint64 size,
 		if (read_rc != to_read) return false;
 		size -= read_rc;
 		data = ((char*)data) + read_rc;
-		if (lb)
-			lb->Draw(i / parts);
 		i += 1.f;
 	}
 	return true;
