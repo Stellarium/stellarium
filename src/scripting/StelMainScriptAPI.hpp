@@ -37,13 +37,13 @@ class StelMainScriptAPI : public QObject
 	Q_OBJECT
 	Q_PROPERTY(double JDay READ getJDay WRITE setJDay)
 	Q_PROPERTY(double timeSpeed READ getTimeRate WRITE setTimeRate)
-					
+
 public:
 	StelMainScriptAPI(QObject *parent = 0);
 	~StelMainScriptAPI();
 
 	ScriptSleeper& getScriptSleeper(void);
-	
+
 // These functions will be available in scripts
 public slots:
 	//! Set the current date in Julian Day
@@ -62,23 +62,23 @@ public slots:
 	//!   You may also append " sidereal" to use sidereal days and so on.
 	//!   You can also use "now" at the start.  For example:
 	//!   "now + 3 hours sidereal"
-	//!   Note: you must use the plural all the time, even when the number 
+	//!   Note: you must use the plural all the time, even when the number
 	//!   of the unit is 1.  i.e. use "+ 1 days" not "+1 day".
 	//! Note: when sidereal time is used, the length of time for
 	//! each unit is dependent on the current planet.  By contrast
 	//! when sidereal timeis not specified (i.e. solar time is used)
 	//! the value is conventional - i.e. 1 day means 1 Earth Solar day.
-	//! @param spec "local" or "utc" - only has an effect when 
+	//! @param spec "local" or "utc" - only has an effect when
 	//! the ISO date type is used.
 	void setDate(const QString& dt, const QString& spec="utc");
 
-	//! get the simulation date and time as a string in ISO format, 
+	//! get the simulation date and time as a string in ISO format,
 	//! e.g. "2008-03-24T13:21:01"
 	//! @param spec if "utc", the returned string's timezone is UTC,
 	//! else it is local time.
 	//! @return the current simulation time.
 	QString getDate(const QString& spec="utc");
-		
+
 	//! Set time speed in JDay/sec
 	//! @param ts the new rate of passage of time as a multiple of real time.
 	//! For example if ts is 1, time will pass at the normal rate.  If ts == 10
@@ -90,27 +90,27 @@ public slots:
 	double getTimeRate(void) const;
 
 	//! Get the simulation time and rate state - is it "real time"
-	//! @return true if the time rate is normal, and the simulation time 
+	//! @return true if the time rate is normal, and the simulation time
 	//! is real time, else return false
 	bool isRealTime();
-	
+
 	//! Set the simulation time to the current system time, and the time rate to 1
 	void setRealTime();
-	
+
 	//! Pauses the script for t seconds
 	//! @param t the number of seconds to wait
 	void wait(double t);
 
 	//! Waits until a specified simulation date/time.  This function
 	//! will take into account the rate (and direction) in which simulation
-	//! time is passing. e.g. if a future date is specified and the 
+	//! time is passing. e.g. if a future date is specified and the
 	//! time is moving backwards, the function will return immediately.
-	//! If the time rate is 0, the function will not wait.  This is to 
+	//! If the time rate is 0, the function will not wait.  This is to
 	//! prevent infinite wait time.
 	//! @param dt the date string to use
 	//! @param spec "local" or "utc"
 	void waitFor(const QString& dt, const QString& spec="utc");
-	
+
 	//! Select an object by name
 	//! @param name the name of the object to select (english)
 	//! If the name is "", any currently selected objects will be
@@ -119,7 +119,7 @@ public slots:
 	void selectObjectByName(const QString& name, bool pointer=false);
 
 	//! Fetch a map with data about an object's position, magnitude and so on
-	//! @param name is the English name of the object for which data will be 
+	//! @param name is the English name of the object for which data will be
 	//! returned.
 	//! @return a map of object data.  Keys:
 	//! - altitude : altitude angle in decimal degrees
@@ -132,7 +132,7 @@ public slots:
 
 	//! Clear the display options, setting a "standard" view.
 	//! Preset states:
-	//! - natural : azimuthal mount, atmosphere, landscape, 
+	//! - natural : azimuthal mount, atmosphere, landscape,
 	//!   no lines, labels or markers
 	//! - starchart : equatorial mount, constellation lines,
 	//!   no landscape, atmoshere etc.  labels & markers on.
@@ -189,16 +189,16 @@ public slots:
 	void moveToRaDecJ2000(const QString& ra, const QString& dec, float duration=1.);
 
 	//! Set the observer location
-	//! @param longitude the longitude in degrees. E is +ve.  
+	//! @param longitude the longitude in degrees. E is +ve.
 	//!        values out of the range -180 .. 180 mean that
 	//!        the longitude will not be set
-	//! @param latitude the longitude in degrees. N is +ve.  
+	//! @param latitude the longitude in degrees. N is +ve.
 	//!        values out of the range -180 .. 180 mean that
 	//!        the latitude will not be set
 	//! @param altitude the new altitude in meters.
 	//!        values less than -1000 mean the altitude will not
 	//!        be set.
-	//! @param duration the time for the transition from the 
+	//! @param duration the time for the transition from the
 	//!        old to the new location.
 	//! @param name A name for the location (which will appear
 	//!        in the status bar.
@@ -225,29 +225,29 @@ public slots:
 	//! @param invert whether colors have to be inverted in the output image
 	void screenshot(const QString& prefix, bool invert=false, const QString& dir="");
 
-	//! Show or hide the GUI (toolbars).  Note this only applies to GUI plugins which 
+	//! Show or hide the GUI (toolbars).  Note this only applies to GUI plugins which
 	//! provide the public slot "setGuiVisible(bool)".
 	//! @param b if true, show the GUI, if false, hide the GUI.
 	void setGuiVisible(bool b);
 
-        //! Set the minimum frames per second.  Usually this minimum will
-        //! be switched to after there are no user events for some seconds
-        //! to save power.  However, if can be useful to set this to a high
-        //! value to improve playing smoothness in scripts.
-        //! @param m the new minimum fps setting.
-        void setMinFps(float m);
+	//! Set the minimum frames per second.  Usually this minimum will
+	//! be switched to after there are no user events for some seconds
+	//! to save power.  However, if can be useful to set this to a high
+	//! value to improve playing smoothness in scripts.
+	//! @param m the new minimum fps setting.
+	void setMinFps(float m);
 
-        //! Get the current minimum frames per second.
-        //! @return The current minimum frames per secon setting.
-        float getMinFps();
+	//! Get the current minimum frames per second.
+	//! @return The current minimum frames per secon setting.
+	float getMinFps();
 
-        //! Set the maximum frames per second.
-        //! @param m the new maximum fps setting.
-        void setMaxFps(float m);
+	//! Set the maximum frames per second.
+	//! @param m the new maximum fps setting.
+	void setMaxFps(float m);
 
-        //! Get the current maximum frames per second.
-        //! @return The current maximum frames per secon setting.
-        float getMaxFps();
+	//! Get the current maximum frames per second.
+	//! @return The current maximum frames per secon setting.
+	float getMaxFps();
 
 	//! Get the mount mode as a string
 	//! @return "equatorial" or "azimuthal"
@@ -269,12 +269,12 @@ public slots:
 	//! @return the string which identifies the current projection mode.
 	//! For a list of possibl results, see setProjectionMode();
 	QString getProjectionMode();
-	
+
 	//! Set the current projection mode
 	//! @param id the name of the projection mode to use, e.g. "Perspective" and so on.
-	//! valid values of id are: 
-	//! - ProjectionPerspective 
-	//! - ProjectionEqualArea 
+	//! valid values of id are:
+	//! - ProjectionPerspective
+	//! - ProjectionEqualArea
 	//! - ProjectionStereographic
 	//! - ProjectionFisheye
 	//! - ProjectionHammer
@@ -299,7 +299,7 @@ public slots:
 	//! @return the ID of the current sky culture (i.e. the name of the directory in
 	//! which the curret sky cultures files are found, e.g. "western")
 	QString getSkyCulture();
-	
+
 	//! Set the current sky culture
 	//! @param id the ID of the sky culture to set, e.g. western or inuit etc.
 	void setSkyCulture(const QString& id);
@@ -331,21 +331,21 @@ public slots:
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
 	void loadSkyImage(const QString& id, const QString& filename,
-	                  double ra0, double dec0,
-	                  double ra1, double dec1,
-	                  double ra2, double dec2,
-	                  double ra3, double dec3,
-	                  double minRes=2.5, double maxBright=14, bool visible=true);
+					  double ra0, double dec0,
+					  double ra1, double dec1,
+					  double ra2, double dec2,
+					  double ra3, double dec3,
+					  double minRes=2.5, double maxBright=14, bool visible=true);
 
 	//! Convenience function which allows the user to provide RA and DEC angles
 	//! as strings (e.g. "12d 14m 8s" or "5h 26m 8s" - formats accepted by
 	//! StelUtils::getDecAngle()).
 	void loadSkyImage(const QString& id, const QString& filename,
-	                  const QString& ra0, const QString& dec0,
-	                  const QString& ra1, const QString& dec1,
-	                  const QString& ra2, const QString& dec2,
-	                  const QString& ra3, const QString& dec3,
-	                  double minRes=2.5, double maxBright=14, bool visible=true);
+					  const QString& ra0, const QString& dec0,
+					  const QString& ra1, const QString& dec1,
+					  const QString& ra2, const QString& dec2,
+					  const QString& ra3, const QString& dec3,
+					  double minRes=2.5, double maxBright=14, bool visible=true);
 
 	//! Convenience function which allows loading of a sky image based on a
 	//! central coordinate, angular size and rotation.
@@ -362,16 +362,16 @@ public slots:
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
 	void loadSkyImage(const QString& id, const QString& filename,
-	                  double ra, double dec, double angSize, double rotation,
-	                  double minRes=2.5, double maxBright=14, bool visible=true);
+					  double ra, double dec, double angSize, double rotation,
+					  double minRes=2.5, double maxBright=14, bool visible=true);
 
 	//! Convenience function which allows loading of a sky image based on a
 	//! central coordinate, angular size and rotation.  Parameters are the same
 	//! as the version of this function which takes double values for the
 	//! ra and dec, except here text expressions of angles may be used.
 	void loadSkyImage(const QString& id, const QString& filename,
-	                  const QString& ra, const QString& dec, double angSize, double rotation,
-	                  double minRes=2.5, double maxBright=14, bool visible=true);
+					  const QString& ra, const QString& dec, double angSize, double rotation,
+					  double minRes=2.5, double maxBright=14, bool visible=true);
 
 	//! Remove a SkyImage.
 	//! @param id the ID of the image to remove.
@@ -392,7 +392,7 @@ public slots:
 	//! @param id the identifier used when loadSound was called
 	void pauseSound(const QString& id);
 
-	//! Stop a sound from playing.  This resets the position in the 
+	//! Stop a sound from playing.  This resets the position in the
 	//! sound to the start so that subsequent playSound calls will
 	//! start from the beginning.
 	//! @param id the identifier used when loadSound was called
@@ -403,10 +403,10 @@ public slots:
 	//! @param id the identifier used when loadSound was called
 	void dropSound(const QString& id);
 
-	//! Get the screen width in pixels. 
+	//! Get the screen width in pixels.
 	//! @return The screen width in pixels
 	int getScreenWidth(void);
-	//! Get the screen height in pixels. 
+	//! Get the screen height in pixels.
 	//! @return The screen height in pixels
 	int getScreenHeight(void);
 
@@ -435,11 +435,11 @@ public slots:
 
 signals:
 	void requestLoadSkyImage(const QString& id, const QString& filename,
-	                         double c1, double c2,
-	                         double c3, double c4,
-	                         double c5, double c6,
-	                         double c7, double c8,
-	                         double minRes, double maxBright, bool visible);
+							 double c1, double c2,
+							 double c3, double c4,
+							 double c5, double c6,
+							 double c7, double c8,
+							 double minRes, double maxBright, bool visible);
 
 	void requestRemoveSkyImage(const QString& id);
 

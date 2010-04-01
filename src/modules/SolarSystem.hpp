@@ -30,7 +30,6 @@
 #include "Planet.hpp"
 
 class Orbit;
-class StelLoadingBar;
 class StelTranslator;
 class StelObject;
 class StelCore;

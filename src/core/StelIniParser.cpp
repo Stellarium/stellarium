@@ -29,15 +29,15 @@
 bool readStelIniFile(QIODevice &device, QSettings::SettingsMap &map)
 {
 	// Is this the right conversion?
-	QString data = QString::fromUtf8(device.readAll().data());
+	const QString& data = QString::fromUtf8(device.readAll().data());
 
 	// Split by a RE which should match any platform's line breaking rules
-	QStringList lines = data.split(QRegExp("[\\n\\r]+"), QString::SkipEmptyParts);
+	QRegExp matchLbr("[\\n\\r]+");
+	const QStringList& lines = data.split(matchLbr, QString::SkipEmptyParts);
 
 	QString currentSection = "";
 	QRegExp sectionRe("^\\[(.+)\\]$");
 	QRegExp keyRe("^([^=]+)\\s*=\\s*(.+)$");
-
 	QRegExp cleanComment("#.*$");
 	QRegExp cleanWhiteSpaces("^\\s+");
 	QRegExp reg1("\\s+$");

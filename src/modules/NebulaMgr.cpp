@@ -151,7 +151,7 @@ void NebulaMgr::draw(StelCore* core)
 	sPainter.setFont(nebulaFont);
 	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, hintsFader.getInterstate()>0.0001);
 	nebGrid.processIntersectingRegions(p, func);
-	
+
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, sPainter);
 }
@@ -213,7 +213,7 @@ NebulaP NebulaMgr::search(const QString& name)
 	}
 
 	// If no match found, try search by catalog reference
-	QRegExp catNumRx("^(M|NGC|IC)\\s*(\\d+)$");
+	static QRegExp catNumRx("^(M|NGC|IC)\\s*(\\d+)$");
 	if (catNumRx.exactMatch(uname))
 	{
 		QString cat = catNumRx.capturedTexts().at(1);
@@ -310,7 +310,6 @@ NebulaP NebulaMgr::searchIC(unsigned int IC)
 // read from stream
 bool NebulaMgr::loadNGCOld(const QString& catNGC)
 {
-	StelLoadingBar& lb = *StelApp::getInstance().getStelLoadingBar();
 	QFile in(catNGC);
 	if (!in.open(QIODevice::ReadOnly | QIODevice::Text))
 		return false;
@@ -338,13 +337,6 @@ bool NebulaMgr::loadNGCOld(const QString& catNGC)
 		if (record.startsWith("//") || record.startsWith("#"))
 			continue;
 		++currentRecordNumber;
-
-		// Update the status bar every 200 record
-		if (!(currentRecordNumber%200) || (currentRecordNumber == totalRecords))
-		{
-			lb.SetMessage(q_("Loading NGC catalog: %1/%2").arg(currentRecordNumber).arg(totalRecords));
-			lb.Draw((float)currentRecordNumber/totalRecords);
-		}
 
 		// Create a new Nebula record
 		NebulaP e = NebulaP(new Nebula);
@@ -374,14 +366,14 @@ bool NebulaMgr::loadNGC(const QString& catNGC)
 		return false;
 	QDataStream ins(&in);
 	ins.setVersion(QDataStream::Qt_4_5);
-	
+
 	int totalRecords=0;
 	while (!ins.atEnd())
 	{
 		// Create a new Nebula record
 		NebulaP e = NebulaP(new Nebula);
 		e->readNGC(ins);
-		
+
 		nebArray.append(e);
 		nebGrid.insert(qSharedPointerCast<StelRegionObject>(e));
 		if (e->NGC_nb!=0)
