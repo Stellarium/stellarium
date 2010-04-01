@@ -52,6 +52,8 @@ private:
 	QVariantMap nextStarCatalogToDownload;
 	//! Set the content of the "Star catalog updates" box
 	void refreshStarCatalogButton();
+	//! True when at least one star catalog has been downloaded successfully this session
+	bool hasDownloadedStarCatalog;
 	QNetworkReply* starCatalogDownloadReply;
 	QFile* currentDownloadFile;
 	QProgressBar* progressBar;
