@@ -32,6 +32,7 @@
 #include <QGLFormat>
 #include <QPlastiqueStyle>
 #include <QFileInfo>
+#include <QFontDatabase>
 
 //! @class GettextStelTranslator
 //! Provides i18n support through gettext.
@@ -258,6 +259,21 @@ int main(int argc, char **argv)
 	if ((QSysInfo::MacintoshVersion == QSysInfo::MV_LEOPARD) && (QSysInfo::ByteOrder == QSysInfo::BigEndian))
 		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
 #endif
+
+	// Add the DejaVu font that we use everywhere in the program
+	try
+	{
+		const QString& fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
+		if (!fName.isEmpty())
+			QFontDatabase::addApplicationFont(fName);
+	}
+	catch (std::runtime_error& e)
+	{
+		// Removed this warning practically allowing to package the program without the font file.
+		// This is useful for distribution having already a package for DejaVu font.
+		// qWarning() << "ERROR while loading font DejaVuSans : " << e.what();
+	}
+	//QApplication::setFont(QFont("DejaVuSans"));
 
 	// Initialize translator feature
 	try
