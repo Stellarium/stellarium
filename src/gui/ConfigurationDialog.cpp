@@ -58,6 +58,7 @@
 ConfigurationDialog::ConfigurationDialog(StelGui* agui) : starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
 {
 	ui = new Ui_configurationDialogForm;
+	hasDownloadedStarCatalog = false;
 }
 
 ConfigurationDialog::~ConfigurationDialog()
@@ -644,10 +645,12 @@ void ConfigurationDialog::refreshStarCatalogButton()
 	ui->downloadCancelButton->setVisible(false);
 	ui->downloadRetryButton->setVisible(false);
 
-	if (idx==catalogConfig.size())
+	if (idx == catalogConfig.size() && !hasDownloadedStarCatalog)//The size is 9; for "stars8", idx is 9
 	{
 		ui->getStarsButton->setVisible(false);
 		ui->downloadLabel->setText(q_("Finished downloading all star catalogs!"));
+		//BM: Doesn't this message duplicate the one below?
+		//This one should be something like "All available star catalogs are installed."
 		return;
 	}
 
@@ -795,6 +798,10 @@ void ConfigurationDialog::downloadFinished()
 		ui->downloadLabel->setText(q_("Error downloading %1:\nFile is corrupted.").arg(nextStarCatalogToDownload.value("id").toString()));
 		ui->downloadCancelButton->setVisible(false);
 		ui->downloadRetryButton->setVisible(true);
+	}
+	else
+	{
+		hasDownloadedStarCatalog = true;
 	}
 
 	refreshStarCatalogButton();
