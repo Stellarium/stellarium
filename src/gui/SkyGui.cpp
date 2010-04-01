@@ -44,10 +44,6 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 		qWarning() << "config.ini option gui/selected_object_info is invalid, using \"all\"";
 		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
 	}
-
-	QFont font("DejaVuSans");
-	font.setPixelSize(13);
-	setFont(font);
 }
 
 void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
