@@ -80,7 +80,7 @@ Planet::Planet(const QString& englishName,
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
-	texMap = StelApp::getInstance().getTextureManager().createTexture("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	nameI18 = englishName;
 	if (englishName!="Pluto")
@@ -721,12 +721,16 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 
 void Planet::drawSphere(StelPainter* painter, float screenSz)
 {
+	if (texMap)
+	{
+		// For lazy loading, return if texture not yet loaded
+		if (!texMap->bind())
+			return;
+	}
+
 	painter->enableTexture2d(true);
 	glDisable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
-
-	if (texMap)
-		texMap->bind();
 
 	// Draw the spheroid itself
 	// Adapt the number of facets according with the size of the sphere for optimization

@@ -30,7 +30,7 @@
 #include <QtOpenGL>
 
 StelLoadingBar::StelLoadingBar(float fontSize, const QString&  splashTex,
-	const QString& extraTextString, float extraTextSize, 
+	const QString& extraTextString, float extraTextSize,
 	float extraTextPosx, float extraTextPosy) :
 	width(512), height(512), extraText(extraTextString), sPainter(NULL)
 {
