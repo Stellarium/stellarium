@@ -55,7 +55,7 @@
 
 SolarSystem::SolarSystem() : moonScale(1.),	flagOrbits(false), flagLightTravelTime(false), allTrails(NULL)
 {
-	planetNameFont.setPixelSize(14.);
+	planetNameFont.setPixelSize(13);
 	setObjectName("SolarSystem");
 }
 
