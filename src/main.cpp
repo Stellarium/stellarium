@@ -273,7 +273,12 @@ int main(int argc, char **argv)
 		// This is useful for distribution having already a package for DejaVu font.
 		// qWarning() << "ERROR while loading font DejaVuSans : " << e.what();
 	}
-	//QApplication::setFont(QFont("DejaVuSans"));
+
+	// Set the default application font and font size.
+	// Note that style sheet will possibly override this setting.
+	QFont tmpFont("DejaVuSans");
+	tmpFont.setPixelSize(13);
+	QApplication::setFont(tmpFont);
 
 	// Initialize translator feature
 	try
