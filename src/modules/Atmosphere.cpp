@@ -43,7 +43,7 @@ inline bool myisnan(double value)
 Atmosphere::Atmosphere(void) :viewport(0,0,0,0), posGrid(NULL), colorGrid(NULL), indices(NULL),
 					   averageLuminance(0.f), eclipseFactor(1.f), lightPollutionLuminance(0)
 {
-	setFadeDuration(3.f);
+	setFadeDuration(1.5f);
 	useShader = StelApp::getInstance().getUseGLShaders();
 	if (useShader)
 	{
