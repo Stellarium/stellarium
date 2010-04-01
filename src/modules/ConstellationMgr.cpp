@@ -36,7 +36,6 @@
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelProjector.hpp"
-#include "StelLoadingBar.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"

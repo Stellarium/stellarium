@@ -40,7 +40,6 @@
 #include "StelToneReproducer.hpp"
 #include "StelTranslator.hpp"
 #include "StelGeodesicGrid.hpp"
-#include "StelLoadingBar.hpp"
 #include "StelTranslator.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
@@ -280,7 +279,7 @@ void StarMgr::setStelStyle(const StelStyle& style)
 	setLabelColor(StelUtils::strToVec3f(conf->value(section+"/star_label_color", defaultColor).toString()));
 }
 
-bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc, StelLoadingBar* lb)
+bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc)
 {
 	const bool checked = catDesc.value("checked").toBool();
 	QString catalogFileName = catDesc.value("fileName").toString();
@@ -339,7 +338,7 @@ bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc, StelLoadingBar* lb)
 		setCheckFlag(catDesc.value("id").toString(), true);
 	}
 
-	ZoneArray* const z = ZoneArray::create(catalogFilePath, true, lb);
+	ZoneArray* const z = ZoneArray::create(catalogFilePath, true);
 	if (z)
 	{
 		if (maxGeodesicGridLevel < z->level)
@@ -394,7 +393,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	foreach (const QVariant& catV, catalogsDescription)
 	{
 		QVariantMap m = catV.toMap();
-		checkAndLoadCatalog(m, NULL);
+		checkAndLoadCatalog(m);
 	}
 
 	for (int i=0; i<=NR_OF_HIP; i++)

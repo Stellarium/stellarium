@@ -36,7 +36,6 @@
 
 class StelObserver;
 class StelObject;
-class StelLoadingBar;
 
 //! @class StelNavigator
 //! Manages a navigation context.  This includes:

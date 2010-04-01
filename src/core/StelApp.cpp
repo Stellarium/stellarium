@@ -60,7 +60,6 @@
 #include <QString>
 #include <QFile>
 #include <QFileInfo>
-#include <QRegExp>
 #include <QTextStream>
 #include <QMouseEvent>
 #include <QDebug>
