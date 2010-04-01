@@ -54,7 +54,7 @@ public:
 		setAttribute(Qt::WA_PaintOnScreen);
 		setAttribute(Qt::WA_NoSystemBackground);
 		setAttribute(Qt::WA_OpaquePaintEvent);
-		//setAutoFillBackground (false);
+		//setAutoFillBackground(false);
 		setBackgroundRole(QPalette::Window);
 	}
 
@@ -106,7 +106,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	setAttribute(Qt::WA_PaintOnScreen);
 	setAttribute(Qt::WA_NoSystemBackground);
 	setAttribute(Qt::WA_OpaquePaintEvent);
-	setAutoFillBackground (true);
+	setAutoFillBackground(true);
 	setBackgroundRole(QPalette::Window);
 	QPalette pal;
 	pal.setColor(QPalette::Window, Qt::black);
@@ -114,7 +114,6 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 
 	// Allows for precise FPS control
 	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
-
 	setFrameShape(QFrame::NoFrame);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
