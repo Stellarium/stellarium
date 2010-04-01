@@ -55,8 +55,6 @@
 #include "StelJsonParser.hpp"
 #include "ZoneArray.hpp"
 
-#include <list>
-
 #include <errno.h>
 #include <unistd.h>
 
@@ -72,12 +70,11 @@ static const int StarCatalogFormatVersion = 2;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
-std::map<int,QString> StarMgr::commonNamesMap;
-std::map<int,QString> StarMgr::commonNamesMapI18n;
-std::map<QString,int> StarMgr::commonNamesIndex;
-std::map<QString,int> StarMgr::commonNamesIndexI18n;
-std::map<int,QString> StarMgr::sciNamesMapI18n;
-std::map<QString,int> StarMgr::sciNamesIndexI18n;
+QHash<int,QString> StarMgr::commonNamesMap;
+QHash<int,QString> StarMgr::commonNamesMapI18n;
+QMap<QString,int> StarMgr::commonNamesIndexI18n;
+QHash<int,QString> StarMgr::sciNamesMapI18n;
+QMap<QString,int> StarMgr::sciNamesIndexI18n;
 
 QStringList initStringListFromFile(const QString& file_name)
 {
@@ -122,7 +119,7 @@ void StarMgr::initTriangle(int lev,int index,
 						   const Vec3f &c1,
 						   const Vec3f &c2) {
   ZoneArrayMap::const_iterator it(zoneArrays.find(lev));
-  if (it!=zoneArrays.end()) it->second->initTriangle(index,c0,c1,c2);
+  if (it!=zoneArrays.end()) it.value()->initTriangle(index,c0,c1,c2);
 }
 
 
@@ -157,8 +154,8 @@ StarMgr::~StarMgr(void)
 	while (it!=zoneArrays.begin())
 	{
 		--it;
-		delete it->second;
-		it->second = NULL;
+		delete it.value();
+		it.value() = NULL;
 	}
 	zoneArrays.clear();
 	if (hipIndex)
@@ -167,17 +164,17 @@ StarMgr::~StarMgr(void)
 
 QString StarMgr::getCommonName(int hip)
 {
-	std::map<int,QString>::const_iterator it(commonNamesMapI18n.find(hip));
+	QHash<int,QString>::const_iterator it(commonNamesMapI18n.find(hip));
 	if (it!=commonNamesMapI18n.end())
-		return it->second;
+		return it.value();
 	return QString();
 }
 
 QString StarMgr::getSciName(int hip)
 {
-	std::map<int,QString>::const_iterator it(sciNamesMapI18n.find(hip));
+	QHash<int,QString>::const_iterator it(sciNamesMapI18n.find(hip));
 	if (it!=sciNamesMapI18n.end())
-		return it->second;
+		return it.value();
 	return QString();
 }
 
@@ -242,7 +239,7 @@ void StarMgr::init()
 	StelApp::getInstance().getCore()->getGeodesicGrid(maxGeodesicGridLevel)->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
 	for (ZoneArrayMap::const_iterator it(zoneArrays.begin()); it!=zoneArrays.end();it++)
 	{
-		it->second->scaleAxis();
+		it.value()->scaleAxis();
 	}
 }
 
@@ -404,7 +401,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	}
 	for (ZoneArrayMap::const_iterator it(zoneArrays.begin()); it != zoneArrays.end();it++)
 	{
-		it->second->updateHipIndex(hipIndex);
+		it.value()->updateHipIndex(hipIndex);
 	}
 
 	const QString cat_hip_sp_file_name = starsConfig.value("hipSpectralFile").toString();
@@ -453,7 +450,6 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 {
 	commonNamesMap.clear();
 	commonNamesMapI18n.clear();
-	commonNamesIndex.clear();
 	commonNamesIndexI18n.clear();
 
 	qDebug() << "Loading star names from" << commonNameFile;
@@ -514,7 +510,6 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 			QString commonNameI18n_cap = commonNameI18n.toUpper();
 
 			commonNamesMap[hip] = englishCommonName;
-			commonNamesIndex[englishCommonName] = hip;
 			commonNamesMapI18n[hip] = commonNameI18n;
 			commonNamesIndexI18n[commonNameI18n_cap] = hip;
 			readOk++;
@@ -540,28 +535,24 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 		qWarning() << "WARNING - could not open" << sciNameFile;
 		return;
 	}
+	const QStringList& allRecords = QString::fromUtf8(snFile.readAll()).split('\n');
+	snFile.close();
 
 	int readOk=0;
 	int totalRecords=0;
 	int lineNumber=0;
-	QString record;
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
-	// record structure is delimited with a | character.  We will
-	// use a QRegExp to extract the fields. with whitespace padding permitted
-	// (i.e. it will be stripped automatically) Example record strings:
+	// record structure is delimited with a | character. Example record strings:
 	// " 10819|c_And"
 	// "113726|1_And"
-	QRegExp recordRx("^\\s*(\\d+)\\s*\\|(.*)\\n");
-
-	while(!snFile.atEnd())
+	foreach(const QString& record, allRecords)
 	{
-		record = QString::fromUtf8(snFile.readLine());
-		lineNumber++;
-		if (commentRx.exactMatch(record))
+		++lineNumber;
+		if (record.isEmpty())
 			continue;
 
-		totalRecords++;
-		if (!recordRx.exactMatch(record))
+		++totalRecords;
+		const QStringList& fields = record.split('|');
+		if (fields.size()!=2)
 		{
 			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << sciNameFile
 				   << " - record does not match record pattern";
@@ -571,23 +562,19 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 		{
 			// The record is the right format.  Extract the fields
 			bool ok;
-			unsigned int hip = recordRx.capturedTexts().at(1).toUInt(&ok);
+			unsigned int hip = fields.at(0).toUInt(&ok);
 			if (!ok)
 			{
 				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << sciNameFile
-					   << " - failed to convert " << recordRx.capturedTexts().at(1) << "to a number";
+					   << " - failed to convert " << fields.at(0) << "to a number";
 				continue;
 			}
 
 			// Don't set the sci name if it's already set
 			if (sciNamesMapI18n.find(hip)!=sciNamesMapI18n.end())
-			{
-				//qWarning() << "WARNING - duplicate name for HP" << hip << "at line"
-				//           << lineNumber << "in" << sciNameFile << "SKIPPING";
 				continue;
-			}
 
-			QString sci_name_i18n = recordRx.capturedTexts().at(2).trimmed();
+			QString sci_name_i18n = fields.at(1).trimmed();
 			if (sci_name_i18n.isEmpty())
 			{
 				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << sciNameFile
@@ -596,13 +583,12 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 			}
 
 			sci_name_i18n.replace('_',' ');
-			QString sci_name_i18n_cap = sci_name_i18n.toUpper();
 			sciNamesMapI18n[hip] = sci_name_i18n;
-			sciNamesIndexI18n[sci_name_i18n_cap] = hip;
-			readOk++;
+			sciNamesIndexI18n[sci_name_i18n.toUpper()] = hip;
+			++readOk;
 		}
 	}
-	snFile.close();
+
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "scientific star names";
 }
 
@@ -612,11 +598,11 @@ int StarMgr::getMaxSearchLevel() const
 	int rval = -1;
 	for (ZoneArrayMap::const_iterator it(zoneArrays.begin());it!=zoneArrays.end();++it)
 	{
-		const float mag_min = 0.001f*it->second->mag_min;
+		const float mag_min = 0.001f*it.value()->mag_min;
 		float rcmag[2];
 		if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(mag_min,rcmag)==false)
 			break;
-		rval = it->first;
+		rval = it.key();
 	}
 	return rval;
 }
@@ -649,9 +635,9 @@ void StarMgr::draw(StelCore* core)
 
 	for (ZoneArrayMap::const_iterator it(zoneArrays.begin()); it!=zoneArrays.end();++it)
 	{
-		const float mag_min = 0.001f*it->second->mag_min;
-		const float k = (0.001f*it->second->mag_range)/it->second->mag_steps;
-		for (int i=it->second->mag_steps-1;i>=0;--i)
+		const float mag_min = 0.001f*it.value()->mag_min;
+		const float k = (0.001f*it.value()->mag_range)/it.value()->mag_steps;
+		for (int i=it.value()->mag_steps-1;i>=0;--i)
 		{
 			const float mag = mag_min+k*i;
 			if (skyDrawer->computeRCMag(mag,rcmag_table + 2*i)==false)
@@ -667,7 +653,7 @@ void StarMgr::draw(StelCore* core)
 				rcmag_table[2*i] *= starsFader.getInterstate();
 			}
 		}
-		lastMaxSearchLevel = it->first;
+		lastMaxSearchLevel = it.key();
 
 		unsigned int maxMagStarName = 0;
 		if (labelsFader.getInterstate()>0.f)
@@ -679,10 +665,10 @@ void StarMgr::draw(StelCore* core)
 				maxMagStarName = x;
 		}
 		int zone;
-		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it->first);(zone = it1.next()) >= 0;)
-			it->second->draw(&sPainter, zone, true, rcmag_table, core, maxMagStarName, names_brightness);
-		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it->first);(zone = it1.next()) >= 0;)
-			it->second->draw(&sPainter, zone, false, rcmag_table, core, maxMagStarName,names_brightness);
+		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it.key());(zone = it1.next()) >= 0;)
+			it.value()->draw(&sPainter, zone, true, rcmag_table, core, maxMagStarName, names_brightness);
+		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it.key());(zone = it1.next()) >= 0;)
+			it.value()->draw(&sPainter, zone, false, rcmag_table, core, maxMagStarName,names_brightness);
 	}
 	exit_loop:
 	// Finish drawing many stars
@@ -751,15 +737,15 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 	{
 		//qDebug() << "search inside(" << it->first << "):";
 		int zone;
-		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it->first);(zone = it1.next()) >= 0;)
+		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it.key());(zone = it1.next()) >= 0;)
 		{
-			it->second->searchAround(core->getNavigator(), zone,v,f,result);
+			it.value()->searchAround(core->getNavigator(), zone,v,f,result);
 			//qDebug() << " " << zone;
 		}
 		//qDebug() << endl << "search border(" << it->first << "):";
-		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it->first); (zone = it1.next()) >= 0;)
+		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it.key()); (zone = it1.next()) >= 0;)
 		{
-			it->second->searchAround(core->getNavigator(), zone,v,f,result);
+			it.value()->searchAround(core->getNavigator(), zone,v,f,result);
 			//qDebug() << " " << zone;
 		}
 	}
@@ -774,10 +760,10 @@ void StarMgr::updateI18n()
 	StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	commonNamesMapI18n.clear();
 	commonNamesIndexI18n.clear();
-	for (std::map<int,QString>::iterator it(commonNamesMap.begin());it!=commonNamesMap.end();it++)
+	for (QHash<int,QString>::iterator it(commonNamesMap.begin());it!=commonNamesMap.end();it++)
 	{
-		const int i = it->first;
-		const QString t(trans.qtranslate(it->second));
+		const int i = it.key();
+		const QString t(trans.qtranslate(it.value()));
 		commonNamesMapI18n[i] = t;
 		commonNamesIndexI18n[t.toUpper()] = i;
 	}
@@ -811,17 +797,17 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 
 	// Search by I18n common name
-	std::map<QString,int>::const_iterator it(commonNamesIndexI18n.find(objw));
+	QMap<QString,int>::const_iterator it(commonNamesIndexI18n.find(objw));
 	if (it!=commonNamesIndexI18n.end())
 	{
-		return searchHP(it->second);
+		return searchHP(it.value());
 	}
 
 	// Search by sci name
-	it = sciNamesIndexI18n.find(objw);
-	if (it!=sciNamesIndexI18n.end())
+	QMap<QString,int>::const_iterator it2 = sciNamesIndexI18n.find(objw);
+	if (it2!=sciNamesIndexI18n.end())
 	{
-		return searchHP(it->second);
+		return searchHP(it2.value());
 	}
 
 	return StelObjectP();
@@ -840,10 +826,10 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	}
 
 	// Search by sci name
-	std::map<QString,int>::const_iterator it = sciNamesIndexI18n.find(objw);
+	QMap<QString,int>::const_iterator it = sciNamesIndexI18n.find(objw);
 	if (it!=sciNamesIndexI18n.end())
 	{
-		return searchHP(it->second);
+		return searchHP(it.value());
 	}
 
 	return StelObjectP();
@@ -859,13 +845,13 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	QString objw = objPrefix.toUpper();
 
 	// Search for common names
-	for (std::map<QString,int>::const_iterator it(commonNamesIndexI18n.lower_bound(objw)); it!=commonNamesIndexI18n.end(); ++it)
+	for (QMap<QString,int>::const_iterator it(commonNamesIndexI18n.lowerBound(objw)); it!=commonNamesIndexI18n.end(); ++it)
 	{
-		if (it->first.startsWith(objw))
+		if (it.key().startsWith(objw))
 		{
 			if (maxNbItem==0)
 				break;
-			result << getCommonName(it->second);
+			result << getCommonName(it.value());
 			--maxNbItem;
 		}
 		else
@@ -881,16 +867,16 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	if (objw.at(0).unicode() >= 0x0391 && objw.at(0).unicode() <= 0x03A9)
 		bayerRegEx.setPattern(bayerPattern.insert(1,"\\d?"));
 
-	for (std::map<QString,int>::const_iterator it(sciNamesIndexI18n.lower_bound(objw)); it!=sciNamesIndexI18n.end(); ++it)
+	for (QMap<QString,int>::const_iterator it(sciNamesIndexI18n.lowerBound(objw)); it!=sciNamesIndexI18n.end(); ++it)
 	{
-		if (it->first.indexOf(bayerRegEx)==0)
+		if (it.key().indexOf(bayerRegEx)==0)
 		{
 			if (maxNbItem==0)
 				break;
-			result << getSciName(it->second);
+			result << getSciName(it.value());
 			--maxNbItem;
 		}
-		else if (it->first.at(0) != objw.at(0))
+		else if (it.key().at(0) != objw.at(0))
 			break;
 	}
 
