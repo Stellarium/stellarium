@@ -240,7 +240,6 @@ void StelApp::init(QSettings* conf)
 	planetLocationMgr = new StelLocationMgr();
 
 	localeMgr->init();
-	skyCultureMgr->init();
 
 	// Init the solar system first
 	SolarSystem* ssystem = new SolarSystem();
@@ -306,8 +305,6 @@ void StelApp::init(QSettings* conf)
 	scriptImages->init();
 	getModuleMgr().registerModule(scriptImages);
 
-	// ugly fix by Johannes: call skyCultureMgr->init twice so that
-	// star names are loaded again
 	skyCultureMgr->init();
 
 	// Initialisation of the color scheme
