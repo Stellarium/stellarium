@@ -319,7 +319,7 @@ bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc)
 		fic.open(QIODevice::ReadOnly);
 		// Compute the MD5 sum
 		QCryptographicHash md5Hash(QCryptographicHash::Md5);
-		static const qint64 maxStarBufMd5 = 1024*1024*8;
+		static const qint64 maxStarBufMd5 = 1024*1024*64;
 		char* mmd5buf = (char*)malloc(maxStarBufMd5);
 		while (!fic.atEnd())
 		{
