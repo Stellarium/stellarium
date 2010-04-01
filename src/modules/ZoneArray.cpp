@@ -92,7 +92,7 @@ static inline int ReadInt(QFile& file, unsigned int &x)
 #warning Star catalogue loading has only been tested with gcc
 #endif
 
-ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap, StelLoadingBar* lb)
+ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 {
 	QString dbStr; // for debugging output.
 	QFile* file = new QFile(catalogFilePath);
@@ -183,7 +183,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap, Stel
 			// Because your compiler does not pack the data,
 			// which is crucial for this application.
 			Q_ASSERT(sizeof(Star1) == 28);
-			rval = new HipZoneArray(file, byte_swap, use_mmap, lb, level, mag_min, mag_range, mag_steps);
+			rval = new HipZoneArray(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
 			if (rval == 0)
 			{
 				dbStr += "error - no memory ";
@@ -202,9 +202,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap, Stel
 			// Because your compiler does not pack the data,
 			// which is crucial for this application.
 			Q_ASSERT(sizeof(Star2) == 10);
-			rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap,
-							   lb, level, mag_min,
-							   mag_range, mag_steps);
+			rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
 			if (rval == 0)
 			{
 				dbStr += "error - no memory ";
@@ -223,9 +221,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap, Stel
 			// Because your compiler does not pack the data,
 			// which is crucial for this application.
 			Q_ASSERT(sizeof(Star3) == 6);
-			rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap,
-							   lb, level, mag_min,
-							   mag_range, mag_steps);
+			rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
 			if (rval == 0)
 			{
 				dbStr += "error - no memory ";
@@ -264,7 +260,7 @@ ZoneArray::ZoneArray(const QString& fname, QFile* file, int level, int mag_min,
 	nr_of_stars = 0;
 }
 
-bool ZoneArray::readFileWithStelLoadingBar(QFile& file, void *data, qint64 size, StelLoadingBar*lb)
+bool ZoneArray::readFileWithStelLoadingBar(QFile& file, void *data, qint64 size)
 {
 	int parts = 256;
 	int part_size = (size + (parts>>1)) / parts;
@@ -322,15 +318,12 @@ void SpecialZoneArray<Star>::scaleAxis(void)
 
 template<class Star>
 SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mmap,
-					 StelLoadingBar*lb, int level, int mag_min,
-					 int mag_range, int mag_steps)
+					 int level, int mag_min, int mag_range, int mag_steps)
 		: ZoneArray(file->fileName(), file, level, mag_min, mag_range, mag_steps),
 		  stars(0), mmap_start(0)
 {
 	if (nr_of_zones > 0)
 	{
-		if (lb)
-			lb->Draw(0.f);
 		zones = new SpecialZoneData<Star>[nr_of_zones];
 		if (zones == 0)
 		{
@@ -415,7 +408,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 						 << ")::SpecialZoneArray: no memory (3)";
 					exit(1);
 				}
-				if (!readFileWithStelLoadingBar(*file,stars,sizeof(Star)*nr_of_stars,lb))
+				if (!readFileWithStelLoadingBar(*file,stars,sizeof(Star)*nr_of_stars))
 				{
 					delete[] stars;
 					stars = 0;
@@ -458,8 +451,6 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 				file->close();
 			}
 		}
-		if (lb)
-			lb->Draw(1.f);
 	}
 }
 

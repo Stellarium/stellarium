@@ -243,7 +243,7 @@ void StelTranslator::initIso639_1LanguageCodes(const QString& fileName)
 	{
 		QString record = QString::fromUtf8(inf.readLine());
 		record.remove(QRegExp("[\\n\\r]*$")); // chomp new lines
-		QStringList fields = record.split("\t", QString::SkipEmptyParts);
+		const QStringList& fields = record.split("\t", QString::SkipEmptyParts);
 		iso639codes.insert(fields.at(0), fields.at(2));
 	}
 }

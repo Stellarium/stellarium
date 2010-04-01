@@ -29,7 +29,6 @@
 #include "StelNavigator.hpp"
 #include "StelTranslator.hpp"
 #include "StelProjector.hpp"
-#include "StelLoadingBar.hpp"
 #include "StelFader.hpp"
 #include "Planet.hpp"
 #include "StelLocaleMgr.hpp"

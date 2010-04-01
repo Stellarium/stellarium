@@ -674,12 +674,12 @@ float getGMTShiftFromQT(double JD)
 		// Assumes the GMT shift was always the same before year -4710
 		current = QDateTime(QDate(-4710, month, day), QTime(hour, minute, second));
 	}
-	
+
 	//Both timezones should be set to UTC because secsTo() converts both
 	//times to UTC if their zones have different daylight saving time rules.
 	QDateTime local = current; local.setTimeSpec(Qt::UTC);
 	QDateTime universal = current.toUTC();
-	
+
 	int shiftInSeconds = universal.secsTo(local);
 	float shiftInHours = shiftInSeconds / 3600.0f;
 	return shiftInHours;
@@ -910,7 +910,7 @@ void debugQVariantMap(const QVariant& m, const QString& indent, const QString& k
 QList<int> getIntsFromISO8601String(const QString & dt)
 {
 	// Represents a valid, complete date string.
-	static QRegExp finalRe("(-0*[1-9][0-9]{0,5}|0+|0*[1-9][0-9]{0,5})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[10])[T ]([01][0-9]|2[0123]):([012345][0-9]):([012345][0-9])");
+	QRegExp finalRe("(-0*[1-9][0-9]{0,5}|0+|0*[1-9][0-9]{0,5})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[10])[T ]([01][0-9]|2[0123]):([012345][0-9]):([012345][0-9])");
 
 	QList<int> retval;
 	if (finalRe.exactMatch(dt))

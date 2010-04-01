@@ -33,7 +33,6 @@ class StelObject;
 class StelToneReproducer;
 class StelProjector;
 class StelNavigator;
-class StelLoadingBar;
 class StelPainter;
 class QSettings;
 
@@ -183,7 +182,7 @@ public:
 	//! Try to load the given catalog, even if it is marched as unchecked.
 	//! Mark it as checked if checksum is correct.
 	//! @return false in case of failure.
-	bool checkAndLoadCatalog(QVariantMap m, StelLoadingBar* lb=NULL);
+	bool checkAndLoadCatalog(QVariantMap m);
 
 private:
 
