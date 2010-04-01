@@ -33,7 +33,6 @@
 #include <QCoreApplication>
 #include <QApplication>
 #include <QHBoxLayout>
-#include <QFontDatabase>
 #include <QGLWidget>
 
 // Initialize static variables
@@ -49,20 +48,6 @@ StelMainWindow::StelMainWindow() : QMainWindow(NULL)
 
 	setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
 	initTitleI18n();
-
-	// Add the DejaVu font that we use everywhere in the program
-	try
-	{
-		const QString& fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
-		if (!fName.isEmpty())
-			QFontDatabase::addApplicationFont(fName);
-	}
-	catch (std::runtime_error& e)
-	{
-		// Removed this warning practically allowing to package the program without the font file.
-		// This is useful for distribution having already a package for DejaVu font.
-		// qWarning() << "ERROR while loading font DejaVuSans : " << e.what();
-	}
 
 	mainGraphicsView = new StelMainGraphicsView(this);
 	setCentralWidget(mainGraphicsView);
