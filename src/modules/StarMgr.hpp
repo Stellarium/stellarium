@@ -21,8 +21,6 @@
 #define _STARMGR_HPP_
 
 #include <QFont>
-#include <vector>
-#include <map>
 #include <QVariantMap>
 #include "StelFader.hpp"
 #include "StelObjectModule.hpp"
@@ -106,7 +104,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
-	//! Return a stl vector containing the stars located inside the limFov circle around position v
+	//! Return a list containing the stars located inside the limFov circle around position v
 	virtual QList<StelObjectP > searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
 	//! Return the matching Stars object's pointer if exists or NULL
@@ -219,7 +217,7 @@ private:
 
 	int maxGeodesicGridLevel;
 	int lastMaxSearchLevel;
-	typedef std::map<int,BigStarCatalogExtension::ZoneArray*> ZoneArrayMap;
+	typedef QHash<int,BigStarCatalogExtension::ZoneArray*> ZoneArrayMap;
 	ZoneArrayMap zoneArrays; // index is the grid level
 	static void initTriangleFunc(int lev, int index,
 								 const Vec3f &c0,
@@ -237,13 +235,12 @@ private:
 
 	BigStarCatalogExtension::HipIndexStruct *hipIndex; // array of hiparcos stars
 
-	static std::map<int, QString> commonNamesMap;
-	static std::map<int, QString> commonNamesMapI18n;
-	static std::map<QString, int> commonNamesIndex;
-	static std::map<QString, int> commonNamesIndexI18n;
+	static QHash<int, QString> commonNamesMap;
+	static QHash<int, QString> commonNamesMapI18n;
+	static QMap<QString, int> commonNamesIndexI18n;
 
-	static std::map<int, QString> sciNamesMapI18n;
-	static std::map<QString, int> sciNamesIndexI18n;
+	static QHash<int, QString> sciNamesMapI18n;
+	static QMap<QString, int> sciNamesIndexI18n;
 
 	QFont starFont;
 	static bool flagSciNames;
