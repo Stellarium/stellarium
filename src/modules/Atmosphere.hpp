@@ -53,7 +53,7 @@ public:
 	//! Set fade in/out duration in seconds
 	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
 	//! Get fade in/out duration in seconds
-	float getFadeDuration() {return fader.getDuration()/1000.f;}
+	float getFadeDuration() {return (float)fader.getDuration()/1000.f;}
 
 	//! Define whether to display atmosphere
 	void setFlagShow(bool b){fader = b;}
@@ -91,7 +91,7 @@ private:
 	//! The average luminance of the atmosphere in cd/m2
 	float averageLuminance;
 	float eclipseFactor;
-	ParabolicFader fader;
+	LinearFader fader;
 	float lightPollutionLuminance;
 
 	//! Whether vertex shader should be used
