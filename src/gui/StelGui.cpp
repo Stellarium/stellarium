@@ -526,6 +526,7 @@ void StelGui::setStelStyle(const StelStyle& style)
 	configurationDialog->styleChanged();
 	searchDialog.styleChanged();
 	viewDialog.styleChanged();
+	scriptConsole.styleChanged();
 }
 
 
