@@ -37,7 +37,7 @@
 #include <QSyntaxHighlighter>
 #include <QTextDocumentFragment>
 
-ScriptConsole::ScriptConsole()
+ScriptConsole::ScriptConsole() : highlighter(NULL)
 {
 	ui = new Ui_scriptConsoleForm;
 }
@@ -55,7 +55,11 @@ void ScriptConsole::languageChanged()
 
 void ScriptConsole::styleChanged()
 {
-	// Nothing for now
+	if (highlighter)
+	{ 
+		highlighter->setFormats();
+		highlighter->rehighlight();
+	}
 }
 
 void ScriptConsole::createDialogContent()
