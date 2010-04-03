@@ -34,6 +34,7 @@ class StelScriptSyntaxHighlighter : public QSyntaxHighlighter
 
 public:
 	StelScriptSyntaxHighlighter(QTextDocument*  parent=0);
+	void setFormats(void);
 
 protected:
 	void highlightBlock(const QString &text);
@@ -42,14 +43,14 @@ private:
 	struct HighlightingRule
 	{
 		QRegExp pattern;
-		QTextCharFormat format;
+		QTextCharFormat* format;
 	};
 	QVector<HighlightingRule> highlightingRules;
 
 	QTextCharFormat keywordFormat;
 	QTextCharFormat moduleFormat;
-	QTextCharFormat singleLineCommentFormat;
-	QTextCharFormat quotationFormat;
+	QTextCharFormat commentFormat;
+	QTextCharFormat constantFormat;
 	QTextCharFormat functionFormat;
 };
 

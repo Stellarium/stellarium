@@ -22,17 +22,26 @@
 #include "StelScriptSyntaxHighlighter.hpp"
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelUtils.hpp"
 
 #include <QtGui>
+#include <QString>
+#include <QColor>
+#include <QSettings>
 
 StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 	: QSyntaxHighlighter(parent)
 {
 	HighlightingRule rule;
 
+	setFormats();
+
+	// comments
+	rule.pattern = QRegExp("//[^\n]*");
+	rule.format = &commentFormat;
+	highlightingRules.append(rule);
+
 	// ECMAscript reserved words
-	//keywordFormat.setForeground(Qt::darkBlue);
-	keywordFormat.setFontWeight(QFont::Bold);
 	QStringList keywordPatterns;
 	keywordPatterns << "\\bbreak\\b"
 	                << "\\bcase\\b"
@@ -84,13 +93,11 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 	foreach(const QString &pattern, keywordPatterns)
 	{
 		rule.pattern = QRegExp(pattern);
-		rule.format = keywordFormat;
+		rule.format = &keywordFormat;
 		highlightingRules.append(rule);
 	}
 
 	// highlight object names which can be used in scripting
-	moduleFormat.setFontWeight(QFont::Bold);
-	moduleFormat.setForeground(QColor(0,40,0));
 	QStringList moduleNames;
         StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
         foreach (StelModule* m, mmgr->getAllModules())
@@ -101,29 +108,63 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 	foreach(const QString &pattern, moduleNames)
 	{
 		rule.pattern = QRegExp(pattern);
-		rule.format = moduleFormat;
+		rule.format = &moduleFormat;
 		highlightingRules.append(rule);
 	}
 
-	// comments
-	singleLineCommentFormat.setForeground(Qt::darkBlue);
-	rule.pattern = QRegExp("//[^\n]*");
-	rule.format = singleLineCommentFormat;
+	// quoted strings
+	rule.pattern = QRegExp("\".*\"");
+	rule.format = &constantFormat;
 	highlightingRules.append(rule);
 
-	// quotes
-	quotationFormat.setFontWeight(QFont::Bold);
-	quotationFormat.setForeground(Qt::darkRed);
-	rule.pattern = QRegExp("\".*\"");
-	rule.format = quotationFormat;
+	// decimal numeric constants
+	rule.pattern = QRegExp("\\b\\d+(\\.\\d+)?\\b");
+	rule.format = &constantFormat;
 	highlightingRules.append(rule);
 
 	// function calls
-	functionFormat.setFontItalic(true);
-	//functionFormat.setForeground(Qt::darkBlue);
 	rule.pattern = QRegExp("\\b[A-Za-z0-9_]+(?=\\()");
-	rule.format = functionFormat;
+	rule.format = &functionFormat;
 	highlightingRules.append(rule);
+
+}
+
+void StelScriptSyntaxHighlighter::setFormats(void)
+{
+	Vec3f col;
+	QString defaultColor = "0.8,0.8,0.8";
+	QSettings* conf = StelApp::getInstance().getSettings();
+	QString section;
+
+	if (StelApp::getInstance().getVisionModeNight())
+		section = "night_color";
+	else
+		section = "color";
+
+	// comments
+	col = StelUtils::strToVec3f(conf->value(section + "/script_console_comment_color", defaultColor).toString());
+	commentFormat.setForeground(QColor(col[0]*255, col[1]*255, col[2]*255));
+
+	// ECMAscript reserved words
+	col = StelUtils::strToVec3f(conf->value(section + "/script_console_keyword_color", defaultColor).toString());
+	keywordFormat.setForeground(QColor(col[0]*255, col[1]*255, col[2]*255));
+	keywordFormat.setFontWeight(QFont::Bold);
+
+	// highlight object names which can be used in scripting
+	moduleFormat.setFontWeight(QFont::Bold);
+	col = StelUtils::strToVec3f(conf->value(section + "/script_console_module_color", defaultColor).toString());
+	moduleFormat.setForeground(QColor(col[0]*255, col[1]*255, col[2]*255));
+
+	// constants
+	constantFormat.setFontWeight(QFont::Bold);
+	col = StelUtils::strToVec3f(conf->value(section + "/script_console_constant_color", defaultColor).toString());
+	constantFormat.setForeground(QColor(col[0]*255, col[1]*255, col[2]*255));
+
+	// function calls
+	functionFormat.setFontItalic(true);
+	col = StelUtils::strToVec3f(conf->value(section + "/script_console_function_color", defaultColor).toString());
+	functionFormat.setForeground(QColor(col[0]*255, col[1]*255, col[2]*255));
+
 }
 
 void StelScriptSyntaxHighlighter::highlightBlock(const QString &text)
@@ -135,7 +176,7 @@ void StelScriptSyntaxHighlighter::highlightBlock(const QString &text)
 		while (index >= 0)
 		{
 			int length = expression.matchedLength();
-			setFormat(index, length, rule.format);
+			setFormat(index, length, *(rule.format));
 			index = expression.indexIn(text, index + length);
 		}
 	}
