@@ -110,5 +110,6 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 	else
 	{
 		str.prepend(QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor())));
+		str.append(QString("</font>"));
 	}
 }
