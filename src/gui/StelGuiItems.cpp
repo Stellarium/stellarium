@@ -328,12 +328,10 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft, cons
 	QColor color = QColor::fromRgbF(1,1,1,1);
 	setColor(color);
 
-	QFont font;
-	font.setPixelSize(12);
-	datetime->setFont(font);
-	location->setFont(font);
-	fov->setFont(font);
-	fps->setFont(font);
+	datetime->font().setPixelSize(12);
+	location->font().setPixelSize(12);
+	fov->font().setPixelSize(12);
+	fps->font().setPixelSize(12);
 
 	flagShowTime = true;
 	flagShowLocation = true;
