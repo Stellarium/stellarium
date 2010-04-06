@@ -94,7 +94,7 @@ private:
 };
 
 // rms added color as parameter
-SkyGrid::SkyGrid(StelCore::FrameType frame) : color(0.2,0.2,0.2), frameType(frame)
+SkyGrid::SkyGrid(StelCore::FrameType frame) : color(0.2,0.2,0.2), frameType(frame), font("DejaVuSans")
 {
 	font.setPixelSize(12);
 }
