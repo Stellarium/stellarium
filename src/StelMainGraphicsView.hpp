@@ -175,7 +175,6 @@ private:
 
 	double lastEventTimeSec;
 
-	QTime* qtime;
 	QTimer* minFpsTimer;
 	//! The minimum desired frame rate in frame per second.
 	float minfps;
