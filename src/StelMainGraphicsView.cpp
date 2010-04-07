@@ -120,8 +120,6 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	setFocusPolicy(Qt::StrongFocus);
 	connect(this, SIGNAL(screenshotRequested()), this, SLOT(doScreenshot()));
 
-	qtime = new QTime();
-	qtime->start();
 	lastEventTimeSec = 0;
 
 	// Create an openGL viewport
@@ -229,7 +227,7 @@ void StelMainGraphicsView::drawBackground(QPainter* painter, const QRectF& rect)
 		return;
 	}
 
-	const double now = ((double)qtime->elapsed())/1000.;
+	const double now = StelApp::getTotalRunTime();
 
 	// Determines when the next display will need to be triggered
 	// The current policy is that after an event, the FPS is maximum for 2.5 seconds
