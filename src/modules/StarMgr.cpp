@@ -313,18 +313,20 @@ bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc)
 		qWarning() << "Found file " << catalogFilePath << ", checking md5sum..";
 
 		QFile fic(catalogFilePath);
-		fic.open(QIODevice::ReadOnly);
+		fic.open(QIODevice::ReadOnly | QIODevice::Unbuffered);
 		// Compute the MD5 sum
 		QCryptographicHash md5Hash(QCryptographicHash::Md5);
-		static const qint64 maxStarBufMd5 = 1024*1024*64;
-		char* mmd5buf = (char*)malloc(maxStarBufMd5);
-		while (!fic.atEnd())
-		{
-			qint64 sz = fic.read(mmd5buf, maxStarBufMd5);
-			md5Hash.addData(mmd5buf, sz);
-		}
-		free(mmd5buf);
+		const qint64 cat_sz = fic.size();
+		qint64 maxStarBufMd5 = qMin(cat_sz, 9223372036854775807LL);
+		uchar *cat = maxStarBufMd5 ? fic.map(0, maxStarBufMd5) : NULL;
 		fic.close();
+		if (!cat)
+		{
+			qWarning() << "Error: Unable to checksum file " << catalogFileName;
+			return false;
+		}
+		md5Hash.addData((const char*)cat, cat_sz);
+		fic.unmap(cat);
 		if (md5Hash.result().toHex()!=catDesc.value("checksum").toByteArray())
 		{
 			qWarning() << "Error checking file" << catalogFileName << ": file is corrupted. MD5 sums don't match: found " << md5Hash.result().toHex() << " expected " << catDesc.value("checksum").toByteArray();
