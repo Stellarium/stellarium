@@ -33,6 +33,9 @@
 #include <QPlastiqueStyle>
 #include <QFileInfo>
 #include <QFontDatabase>
+#ifdef Q_OS_WIN
+#include <windows.h>
+#endif //Q_OS_WIN
 
 //! @class GettextStelTranslator
 //! Provides i18n support through gettext.
@@ -74,6 +77,19 @@ void copyDefaultConfigFile(const QString& newPath)
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
+	#ifdef Q_OS_WIN
+	//Fix for the speeding system clock bug on systems that use ACPI
+	//See http://support.microsoft.com/kb/821893
+	UINT timerGrain = 1;
+	if(timeBeginPeriod(timerGrain) == TIMERR_NOCANDO)
+	{
+		//If this is too fine a grain, try the lowest value used by a timer
+		timerGrain = 5;
+		if(timeBeginPeriod(timerGrain) == TIMERR_NOCANDO)
+			timerGrain = 0;
+	}
+	#endif //Q_OS_WIN
+	
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
@@ -305,6 +321,12 @@ int main(int argc, char **argv)
 
 	delete confSettings;
 	StelLogger::deinit();
+	
+	#ifdef Q_OS_WIN
+	if(timerGrain)
+		timeEndPeriod(timerGrain);
+	#endif //Q_OS_WIN
+	
 	return 0;
 }
 
