@@ -329,7 +329,7 @@ bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc)
 		fic.unmap(cat);
 		if (md5Hash.result().toHex()!=catDesc.value("checksum").toByteArray())
 		{
-			qWarning() << "Error checking file" << catalogFileName << ": file is corrupted. MD5 sums don't match: found " << md5Hash.result().toHex() << " expected " << catDesc.value("checksum").toByteArray();
+			qWarning() << "Error: File " << catalogFileName << " is corrupt, MD5 mismatch! Found " << md5Hash.result().toHex() << " expected " << catDesc.value("checksum").toByteArray();
 			fic.remove();
 			return false;
 		}
