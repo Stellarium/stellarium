@@ -620,7 +620,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	qPainter->save();
 	qPainter->resetTransform();
 	qPainter->resetMatrix();
-	qPainter->setRenderHints(QPainter::TextAntialiasing | QPainter::HighQualityAntialiasing);	//
+	qPainter->setRenderHints(QPainter::TextAntialiasing | QPainter::HighQualityAntialiasing);
 	const QColor qCol=QColor::fromRgbF(qMax(qMin(1.f,color[0]),0.f), qMax(qMin(1.f,color[1]),0.f), qMax(qMin(1.f,color[2]),0.f), qMax(qMin(1.f,color[3]),0.f));
 	qPainter->setPen(qCol);
 
@@ -635,13 +635,15 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		// This sounds like a Qt bug
 		if (qPainter->paintEngine()->type()==QPaintEngine::OpenGL2)
 		{
-			qPainter->translate(x+xshift, prj->viewportXywh[3]-y-yshift);
+			qPainter->translate(x, prj->viewportXywh[3]-y);
 		}
 		else
 		{
-			qPainter->translate(round(x+xshift), round(y+yshift));
+			qPainter->translate(round(x), round(y));
 			qPainter->scale(1, -1);
 		}
+		qPainter->rotate(-angleDeg);
+		qPainter->translate(xshift, -yshift);
 		qPainter->drawText(0, 0, str);
 	}
 	qPainter->restore();
