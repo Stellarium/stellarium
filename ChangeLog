@@ -13,6 +13,7 @@ Fixed:
 - problems when switching tasks (Alt+Tab) when in fullscreen mode. (LP: #550337)
 - the Oculars plug-in not closing its SQL database on exit.
 - the last star catalog not being offered for download. (LP: #538291)
+- system clock running fast on some Windows systems using ACPI power managment (LP: #514184)
 
 Changed:
 - The Date/Time window now is synchronised with the date/time displayed in the toolbar, instead of showing the last date/time that has been entered.
