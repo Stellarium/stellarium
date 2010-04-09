@@ -612,8 +612,6 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	color[2]=currentColor[2];
 	color[3]=currentColor[3];
 #endif
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	qPainter->endNativePainting();
 
