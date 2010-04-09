@@ -12,7 +12,7 @@
 <li><a href="#telescope_properties">Telescope properties</a></li>
 <li><a href="#device_settings">Device settings</a></li>
 <li><a href="#connection_settings">Connection settings</a></li>
-<li><a href="#fovcircles">Field of view circles</a></li>
+<li><a href="#fovcircles">Field of view indicators</a></li>
 </ul>
 <li><a href="#commands">Sending commands</a></li>
 <li><a href="#devices">Supported devices</a></li>
@@ -95,10 +95,10 @@
 <p>For INDIRECT connections, modifying the default host name value makes sense only if you are attempting a remote connection over a network. In this case, it should be the name or IP address of the computer that runs a program that runs the telescope.</p>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
-<h4><a name="fovcircles"/>Field of view circles</h4>
+<h4><a name="fovcircles"/>Field of view indicators</h4>
 <p>A series of circles representing different fields of view can be added around the telescope marker. This is a relic from the times before the <strong>Oculars</strong> plug-in existed.</p>
-<p>In the telescope configuration window, click on "User Interface Settings". Mark the "Show FOV circles" option, then enter a list of values separated with comas in the field below. The values are interpreted as degrees of arc.</p>
-<p>This can be used in combination with the <a href="#Stellarium_Virtual_Telescope">Stellarium Virtual Telescope</a> to display a moving marker with the Telrad circles. In this case, the list of FOV values should be "0.5, 2, 4".</p>
+<p>In the telescope configuration window, click on "User Interface Settings". Mark the "Use field of view indicators" option, then enter a list of values separated with comas in the field below. The values are interpreted as degrees of arc.</p>
+<p>This can be used in combination with the <a href="#Stellarium_Virtual_Telescope">Stellarium Virtual Telescope</a> to display a moving reticle with the Telrad circles. In this case, the list of FOV values should be "0.5, 2, 4".</p>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
 <h3><a name="commands"/>Sending commands</h3>
@@ -126,7 +126,7 @@
 
 <h3><a name="Stellarium_Virtual_Telescope"/>Stellarium Virtual Telescope</h3>
 <p>If you want to test this plug-in without an actual device connected to the computer, choose <strong>Stellarium Virtual Telescope</strong> from the "Device model" list. It will show a telescope reticle that will react in the same way as the reticle of a real telescope controlled by the plug-in. In this case, the value of "Serial port" is ignored.</p>
-<p>See the section above about <a href="#fovcircles">Field of view circles</a> for a possible practical application (emulating "Telrad" circles).</p>
+<p>See the section above about <a href="#fovcircles">field of view indicators</a> for a possible practical application (emulating "Telrad" circles).</p>
 <p>This feature is equivalent to the "Dummy" type of telescope supported by <a href="http://stellarium.org/wiki/index.php/Telescope_Control_%28client-server%29" title="Stellarium Wiki: Telescope Control (client-server)">Stellarium's original telescope control feature</a>.</p>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 

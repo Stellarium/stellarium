@@ -150,25 +150,35 @@ public:
 	bool getFlagUseTelescopeServerLogs () {return useTelescopeServerLogs;}
 
 public slots:
-	//! Set display flag for telescope markers and circles
-	void setFlagTelescopes(bool b) {reticleFader = b;}
-	//! Get display flag for telescope markers and circles
-	bool getFlagTelescopes() const {return (bool)reticleFader;}  
+	//! Set display flag for telescope reticles
+	void setFlagTelescopeReticles(bool b) {reticleFader = b;}
+	//! Get display flag for telescope reticles
+	bool getFlagTelescopeReticles() const {return (bool)reticleFader;}
 	
 	//! Set display flag for telescope name labels
-	void setFlagTelescopeName(bool b) {labelFader = b;}
+	void setFlagTelescopeLabels(bool b) {labelFader = b;}
 	//! Get display flag for telescope name labels
-	bool getFlagTelescopeName() const {return labelFader==true;}
+	bool getFlagTelescopeLabels() const {return labelFader==true;}
+
+	//! Set display flag for telescope field of view circles
+	void setFlagTelescopeCircles(bool b) {circleFader = b;}
+	//! Get display flag for telescope field of view circles
+	bool getFlagTelescopeCircles() const {return circleFader==true;}
 	
-	//! Set the telescope circle color
-	void setCircleColor(const Vec3f &c) {circleColor = c;}
-	//! Get the telescope circle color
-	const Vec3f& getCircleColor() const {return circleColor;}
+	//! Set the telescope reticle color
+	void setReticleColor(const Vec3f &c) {reticleColor = c;}
+	//! Get the telescope reticle color
+	const Vec3f& getReticleColor() const {return reticleColor;}
 	
 	//! Get the telescope labels color
 	const Vec3f& getLabelColor() const {return labelColor;}
 	//! Set the telescope labels color
 	void setLabelColor(const Vec3f &c) {labelColor = c;}
+
+	//! Set the field of view circles color
+	void setCircleColor(const Vec3f &c) {circleColor = c;}
+	//! Get the field of view circles color
+	const Vec3f& getCircleColor() const {return circleColor;}
 	
 	//! Define font size to use for telescope names display
 	void setFontSize(int fontSize);
@@ -190,18 +200,25 @@ private:
 	
 	LinearFader labelFader;
 	LinearFader reticleFader;
-	//! Colour currently used to draw telescope circles
-	Vec3f circleColor;
+	LinearFader circleFader;
+	//! Colour currently used to draw telescope reticles
+	Vec3f reticleColor;
 	//! Colour currently used to draw telescope text labels
 	Vec3f labelColor;
-	//! Colour used to draw telescope circles in normal mode, as set in the configuration file
-	Vec3f circleNormalColor;
-	//! Colour used to draw telescope circles in night mode, as set in the configuration file
-	Vec3f circleNightColor;
+	//! Colour currently used to draw field of view circles
+	Vec3f circleColor;
+	//! Colour used to draw telescope reticles in normal mode, as set in the configuration file
+	Vec3f reticleNormalColor;
+	//! Colour used to draw telescope reticles in night mode, as set in the configuration file
+	Vec3f reticleNightColor;
 	//! Colour used to draw telescope labels in normal mode, as set in the configuration file
 	Vec3f labelNormalColor;
 	//! Colour used to draw telescope labels in night mode, as set in the configuration file
 	Vec3f labelNightColor;
+	//! Colour used to draw field of view circles in normal mode, as set in the configuration file
+	Vec3f circleNormalColor;
+	//! Colour used to draw field of view circles in night mode, as set in the configuration file
+	Vec3f circleNightColor;
 	
 	//! Font used to draw telescope text labels
 	QFont labelFont;

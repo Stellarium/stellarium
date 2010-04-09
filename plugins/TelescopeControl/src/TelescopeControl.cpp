@@ -206,6 +206,10 @@ void TelescopeControl::init()
 	}
 	
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
+	
+	//Initialize style, as it is not called at startup:
+	//(necessary to initialize the reticle/label/circle colors)
+	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
 }
 
 void TelescopeControl::deinit()
@@ -238,6 +242,7 @@ void TelescopeControl::update(double deltaTime)
 {
 	labelFader.update((int)(deltaTime*1000));
 	reticleFader.update((int)(deltaTime*1000));
+	circleFader.update((int)(deltaTime*1000));
 	// communicate with the telescopes:
 	communicate();
 }
@@ -260,15 +265,19 @@ void TelescopeControl::draw(StelCore* core)
 			if (prj->projectCheck(telescope->getJ2000EquatorialPos(nav), XY))
 			{
 				//Telescope circles appear synchronously with markers
-				if (reticleFader.getInterstate() >= 0)
+				if (circleFader.getInterstate() >= 0)
 				{
-					glColor4f(circleColor[0], circleColor[1], circleColor[2], reticleFader.getInterstate());
+					glColor4f(circleColor[0], circleColor[1], circleColor[2], circleFader.getInterstate());
 					glDisable(GL_TEXTURE_2D);
 					foreach (double circle, telescope->getOculars())
 					{
 						sPainter.drawCircle(XY[0], XY[1], 0.5 * prj->getPixelPerRadAtCenter() * (M_PI/180) * (circle));
 					}
 					glEnable(GL_TEXTURE_2D);
+				}
+				if (reticleFader.getInterstate() >= 0)
+				{
+					glColor4f(reticleColor[0], reticleColor[1], reticleColor[2], reticleFader.getInterstate());
 					sPainter.drawSprite2dMode(XY[0],XY[1],15.f);
 				}
 				if (labelFader.getInterstate() >= 0)
@@ -294,11 +303,13 @@ void TelescopeControl::setStelStyle(const StelStyle& style)
 	if(style.confSectionName == "night_color")
 	{
 		setLabelColor(labelNightColor);
+		setReticleColor(reticleNightColor);
 		setCircleColor(circleNightColor);
 	}
 	else
 	{
 		setLabelColor(labelNormalColor);
+		setReticleColor(reticleNormalColor);
 		setCircleColor(circleNormalColor);
 	}
 
@@ -320,7 +331,7 @@ double TelescopeControl::getCallOrder(StelModuleActionName actionName) const
 QList<StelObjectP> TelescopeControl::searchAround(const Vec3d& vv, double limitFov, const StelCore* core) const
 {
 	QList<StelObjectP> result;
-	if (!getFlagTelescopes())
+	if (!getFlagTelescopeReticles())
 		return result;
 	Vec3d v(vv);
 	v.normalize();
@@ -540,8 +551,9 @@ void TelescopeControl::loadConfiguration()
 	settings->beginGroup("TelescopeControl");
 
 	//Load display flags
-	setFlagTelescopes(settings->value("flag_telescope_circles", true).toBool());
-	setFlagTelescopeName(settings->value("flag_telescope_labels", true).toBool());
+	setFlagTelescopeReticles(settings->value("flag_telescope_reticles", true).toBool());
+	setFlagTelescopeLabels(settings->value("flag_telescope_labels", true).toBool());
+	setFlagTelescopeCircles(settings->value("flag_telescope_circles", true).toBool());
 
 	//Load font size
 	#ifdef Q_OS_WIN32
@@ -551,10 +563,12 @@ void TelescopeControl::loadConfiguration()
 	#endif
 
 	//Load colours
-	circleNormalColor = StelUtils::strToVec3f(settings->value("color_telescope_circles", "0.6,0.4,0").toString());
-	circleNightColor = StelUtils::strToVec3f(settings->value("night_color_telescope_circles", "0.5,0,0").toString());;
+	reticleNormalColor = StelUtils::strToVec3f(settings->value("color_telescope_reticles", "0.6,0.4,0").toString());
+	reticleNightColor = StelUtils::strToVec3f(settings->value("night_color_telescope_reticles", "0.5,0,0").toString());
 	labelNormalColor = StelUtils::strToVec3f(settings->value("color_telescope_labels", "0.6,0.4,0").toString());
 	labelNightColor = StelUtils::strToVec3f(settings->value("night_color_telescope_labels", "0.5,0,0").toString());
+	circleNormalColor = StelUtils::strToVec3f(settings->value("color_telescope_circles", "0.6,0.4,0").toString());
+	circleNightColor = StelUtils::strToVec3f(settings->value("night_color_telescope_circles", "0.5,0,0").toString());
 
 	//Load server executables flag and directory
 	useServerExecutables = settings->value("flag_use_server_executables", false).toBool();
@@ -595,14 +609,17 @@ void TelescopeControl::saveConfiguration()
 	settings->beginGroup("TelescopeControl");
 
 	//Save display flags
-	settings->setValue("flag_telescope_circles", getFlagTelescopes());
-	settings->setValue("flag_telescope_labels", getFlagTelescopeName());
+	settings->setValue("flag_telescope_reticles", getFlagTelescopeReticles());
+	settings->setValue("flag_telescope_labels", getFlagTelescopeLabels());
+	settings->setValue("flag_telescope_circles", getFlagTelescopeCircles());
 
 	//Save colours
-	settings->setValue("color_telescope_circles", QString("%1,%2,%3").arg(circleNormalColor[0], 0, 'f', 2).arg(circleNormalColor[1], 0, 'f', 2).arg(circleNormalColor[2], 0, 'f', 2));
-	settings->setValue("night_color_telescope_circles", QString("%1,%2,%3").arg(circleNightColor[0], 0, 'f', 2).arg(circleNightColor[1], 0, 'f', 2).arg(circleNightColor[2], 0, 'f', 2));
+	settings->setValue("color_telescope_reticles", QString("%1,%2,%3").arg(reticleNormalColor[0], 0, 'f', 2).arg(reticleNormalColor[1], 0, 'f', 2).arg(reticleNormalColor[2], 0, 'f', 2));
+	settings->setValue("night_color_telescope_reticles", QString("%1,%2,%3").arg(reticleNightColor[0], 0, 'f', 2).arg(reticleNightColor[1], 0, 'f', 2).arg(reticleNightColor[2], 0, 'f', 2));
 	settings->setValue("color_telescope_labels", QString("%1,%2,%3").arg(labelNormalColor[0], 0, 'f', 2).arg(labelNormalColor[1], 0, 'f', 2).arg(labelNormalColor[2], 0, 'f', 2));
 	settings->setValue("night_color_telescope_labels", QString("%1,%2,%3").arg(labelNightColor[0], 0, 'f', 2).arg(labelNightColor[1], 0, 'f', 2).arg(labelNightColor[2], 0, 'f', 2));
+	settings->setValue("color_telescope_circles", QString("%1,%2,%3").arg(circleNormalColor[0], 0, 'f', 2).arg(circleNormalColor[1], 0, 'f', 2).arg(circleNormalColor[2], 0, 'f', 2));
+	settings->setValue("night_color_telescope_circles", QString("%1,%2,%3").arg(circleNightColor[0], 0, 'f', 2).arg(circleNightColor[1], 0, 'f', 2).arg(circleNightColor[2], 0, 'f', 2));
 
 	//Save telescope server executables flag and directory
 	settings->setValue("flag_use_server_executables", useServerExecutables);
