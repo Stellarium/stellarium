@@ -94,8 +94,9 @@ void TelescopeDialog::createDialogContent()
 	//connect(ui->telescopeTreeView, SIGNAL(activated (const QModelIndex &)), this, SLOT(configureTelescope(const QModelIndex &)));
 	
 	//Page: Options:
-	connect(ui->checkBoxMarkers, SIGNAL(stateChanged(int)), this, SLOT(togglePointers(int)));
-	connect(ui->checkBoxLabels, SIGNAL(stateChanged(int)), this, SLOT(toggleNames(int)));
+	connect(ui->checkBoxReticles, SIGNAL(stateChanged(int)), this, SLOT(toggleReticles(int)));
+	connect(ui->checkBoxLabels, SIGNAL(stateChanged(int)), this, SLOT(toggleLabels(int)));
+	connect(ui->checkBoxCircles, SIGNAL(stateChanged(int)), this, SLOT(toggleCircles(int)));
 	
 	connect(ui->checkBoxEnableLogs, SIGNAL(toggled(bool)), telescopeManager, SLOT(setFlagUseTelescopeServerLogs(bool)));
 	
@@ -248,8 +249,9 @@ void TelescopeDialog::createDialogContent()
 		ui->pushButtonAdd->setEnabled(false);
 	
 	//Checkboxes
-	ui->checkBoxMarkers->setChecked(telescopeManager->getFlagTelescopes());
-	ui->checkBoxLabels->setChecked(telescopeManager->getFlagTelescopeName());
+	ui->checkBoxReticles->setChecked(telescopeManager->getFlagTelescopeReticles());
+	ui->checkBoxLabels->setChecked(telescopeManager->getFlagTelescopeLabels());
+	ui->checkBoxCircles->setChecked(telescopeManager->getFlagTelescopeCircles());
 	ui->checkBoxEnableLogs->setChecked(telescopeManager->getFlagUseTelescopeServerLogs());
 	
 	//Telescope server directory
@@ -276,34 +278,40 @@ void TelescopeDialog::createDialogContent()
 	updateTimer->start(200);
 }
 
-void TelescopeDialog::togglePointers(int state)
+void TelescopeDialog::toggleReticles(int state)
 {
 	if(state == Qt::Checked)
 	{
-		telescopeManager->setFlagTelescopes(true);
+		telescopeManager->setFlagTelescopeReticles(true);
 	}
 	else
 	{
-		telescopeManager->setFlagTelescopes(false);
+		telescopeManager->setFlagTelescopeReticles(false);
 	}
-	
-	//TODO: Decide if this should be done here (if saveSettings() should be public)
-	//telescopeManager->saveFlagTelescopeCircles();
 }
 
-void TelescopeDialog::toggleNames(int state)
+void TelescopeDialog::toggleLabels(int state)
 {
 	if(state == Qt::Checked)
 	{
-		telescopeManager->setFlagTelescopeName(true);
+		telescopeManager->setFlagTelescopeLabels(true);
 	}
 	else
 	{
-		telescopeManager->setFlagTelescopeName(false);
+		telescopeManager->setFlagTelescopeLabels(false);
 	}
-	
-	//TODO: Decide if this should be done here (if saveSettings() should be public)
-	//telescopeManager->saveFlagTelescopeLabels();
+}
+
+void TelescopeDialog::toggleCircles(int state)
+{
+	if(state == Qt::Checked)
+	{
+		telescopeManager->setFlagTelescopeCircles(true);
+	}
+	else
+	{
+		telescopeManager->setFlagTelescopeCircles(false);
+	}
 }
 
 void TelescopeDialog::selectTelecope(const QModelIndex & index)
