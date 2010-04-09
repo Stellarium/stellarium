@@ -636,11 +636,15 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		if (qPainter->paintEngine()->type()==QPaintEngine::OpenGL2)
 		{
 			qPainter->translate(x, prj->viewportXywh[3]-y);
+			qPainter->rotate(-angleDeg);
+			qPainter->translate(xshift, -yshift);
 		}
 		else
 		{
 			qPainter->translate(round(x), round(y));
 			qPainter->scale(1, -1);
+			qPainter->rotate(-angleDeg);
+			qPainter->translate(round(xshift), round(-yshift));
 		}
 		qPainter->rotate(-angleDeg);
 		qPainter->translate(xshift, -yshift);
