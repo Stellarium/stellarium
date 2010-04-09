@@ -75,8 +75,9 @@ private slots:
 	//! Slot for receiving information from TelescopeConfigurationDialog
 	void discardChanges(void);
 	
-	void togglePointers(int);
-	void toggleNames(int);
+	void toggleReticles(int);
+	void toggleLabels(int);
+	void toggleCircles(int);
 	void selectTelecope(const QModelIndex &);
 	void configureTelescope(const QModelIndex &);
 	
