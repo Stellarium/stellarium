@@ -644,8 +644,6 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			qPainter->rotate(-angleDeg);
 			qPainter->translate(round(xshift), round(-yshift));
 		}
-		qPainter->rotate(-angleDeg);
-		qPainter->translate(xshift, -yshift);
 		qPainter->drawText(0, 0, str);
 	}
 	qPainter->restore();
