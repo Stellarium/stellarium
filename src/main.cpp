@@ -292,7 +292,7 @@ int main(int argc, char **argv)
 
 	// Set the default application font and font size.
 	// Note that style sheet will possibly override this setting.
-	QFont tmpFont("DejaVuSans");
+	QFont tmpFont("DejaVu Sans");
 	tmpFont.setPixelSize(13);
 	QApplication::setFont(tmpFont);
 
