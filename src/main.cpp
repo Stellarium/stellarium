@@ -77,25 +77,25 @@ void copyDefaultConfigFile(const QString& newPath)
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
-	#ifdef Q_OS_WIN
-	//Fix for the speeding system clock bug on systems that use ACPI
-	//See http://support.microsoft.com/kb/821893
+#ifdef Q_OS_WIN
+	// Fix for the speeding system clock bug on systems that use ACPI
+	// See http://support.microsoft.com/kb/821893
 	UINT timerGrain = 1;
-	if(timeBeginPeriod(timerGrain) == TIMERR_NOCANDO)
+	if (timeBeginPeriod(timerGrain) == TIMERR_NOCANDO)
 	{
-		//If this is too fine a grain, try the lowest value used by a timer
+		// If this is too fine a grain, try the lowest value used by a timer
 		timerGrain = 5;
-		if(timeBeginPeriod(timerGrain) == TIMERR_NOCANDO)
+		if (timeBeginPeriod(timerGrain) == TIMERR_NOCANDO)
 			timerGrain = 0;
 	}
-	#endif //Q_OS_WIN
+#endif
 	
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
 
-#ifndef USE_OPENGL_ES2
+#ifndef BUILD_FOR_MAEMO
 	QApplication::setStyle(new QPlastiqueStyle());
 #endif
 
@@ -276,6 +276,8 @@ int main(int argc, char **argv)
 		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
 #endif
 
+// On maemo we'll use the standard OS font
+#ifndef BUILD_FOR_MAEMO
 	// Add the DejaVu font that we use everywhere in the program
 	try
 	{
@@ -295,6 +297,7 @@ int main(int argc, char **argv)
 	QFont tmpFont("DejaVu Sans");
 	tmpFont.setPixelSize(13);
 	QApplication::setFont(tmpFont);
+#endif
 
 	// Initialize translator feature
 	try
