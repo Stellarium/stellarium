@@ -72,10 +72,8 @@ template<class T> class Vector2
 {
 public:
 	inline Vector2();
-	inline Vector2(const Vector2<T>&);
 	inline Vector2(T, T);
 
-	inline Vector2& operator=(const Vector2<T>&);
 	inline Vector2& operator=(const T*);
 	inline void set(T, T);
 
@@ -119,12 +117,12 @@ template<class T> class Vector3
 {
 public:
 	inline Vector3();
-	inline Vector3(const Vector3&);
+	//inline Vector3(const Vector3&);
 	template <class T2> inline Vector3(const Vector3<T2>&);
 	inline Vector3(T, T, T);
 	inline Vector3(T);
 
-	inline Vector3& operator=(const Vector3&);
+	//inline Vector3& operator=(const Vector3&);
 	inline Vector3& operator=(const T*);
 	template <class T2> inline Vector3& operator=(const Vector3<T2>&);
 	inline void set(T, T, T);
@@ -185,12 +183,10 @@ template<class T> class Vector4
 {
 public:
 	inline Vector4();
-	inline Vector4(const Vector4<T>&);
 	inline Vector4(const Vector3<T>&);
 	inline Vector4(T, T, T);
 	inline Vector4(T, T, T, T);
 
-	inline Vector4& operator=(const Vector4<T>&);
 	inline Vector4& operator=(const Vector3<T>&);
 	inline Vector4& operator=(const T*);
 	inline void set(T, T, T, T);
@@ -236,13 +232,11 @@ template<class T> class Matrix4
 {
  public:
 	Matrix4();
-	Matrix4(const Matrix4<T>& m);
 	Matrix4(T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T);
 	Matrix4(const T*);
 	Matrix4(const Vector4<T>&, const Vector4<T>&,
 			const Vector4<T>&, const Vector4<T>&);
 
-	inline Matrix4& operator=(const Matrix4<T>&);
 	inline Matrix4& operator=(const T*);
 	inline void set(T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T);
 
@@ -294,21 +288,11 @@ template<class T> QDataStream& operator>>(QDataStream& in, Matrix4<T>& m) {in >>
 
 template<class T> Vector2<T>::Vector2() {}
 
-template<class T> Vector2<T>::Vector2(const Vector2<T>& a)
-{
-	v[0]=a.v[0]; v[1]=a.v[1];
-}
-
 template<class T> Vector2<T>::Vector2(T x, T y)
 {
 	v[0]=x; v[1]=y;
 }
 
-template<class T> Vector2<T>& Vector2<T>::operator=(const Vector2<T>& a)
-{
-	v[0]=a.v[0]; v[1]=a.v[1];
-	return *this;
-}
 
 template<class T> Vector2<T>& Vector2<T>::operator=(const T* a)
 {
@@ -434,10 +418,10 @@ template<class T> void Vector2<T>::normalize()
 
 template<class T> Vector3<T>::Vector3() {}
 
-template<class T> Vector3<T>::Vector3(const Vector3& a)
-{
-	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
-}
+//template<class T> Vector3<T>::Vector3(const Vector3& a)
+//{
+//	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
+//}
 
 template<class T> template<class T2> Vector3<T>::Vector3(const Vector3<T2>& a)
 {
@@ -454,11 +438,11 @@ template<class T> Vector3<T>::Vector3(T x, T y, T z)
 	v[0]=x; v[1]=y; v[2]=z;
 }
 
-template<class T> Vector3<T>& Vector3<T>::operator=(const Vector3& a)
-{
-	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
-	return *this;
-}
+//template<class T> Vector3<T>& Vector3<T>::operator=(const Vector3& a)
+//{
+//	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
+//	return *this;
+//}
 
 template<class T> template <class T2> Vector3<T>& Vector3<T>::operator=(const Vector3<T2>& a)
 {
@@ -637,11 +621,6 @@ template<class T> T Vector3<T>::longitude() const
 
 template<class T> Vector4<T>::Vector4() {}
 
-template<class T> Vector4<T>::Vector4(const Vector4<T>& a)
-{
-	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2]; v[3]=a.v[3];
-}
-
 template<class T> Vector4<T>::Vector4(const Vector3<T>& a)
 {
 	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2]; v[3]=1;
@@ -655,12 +634,6 @@ template<class T> Vector4<T>::Vector4(T x, T y, T z)
 template<class T> Vector4<T>::Vector4(T x, T y, T z, T a)
 {
 	v[0]=x; v[1]=y; v[2]=z; v[3]=a;
-}
-
-template<class T> Vector4<T>& Vector4<T>::operator=(const Vector4<T>& a)
-{
-	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2]; v[3]=a.v[3];
-	return *this;
 }
 
 template<class T> Vector4<T>& Vector4<T>::operator=(const Vector3<T>& a)
@@ -797,20 +770,9 @@ std::ostream& operator<<(std::ostream &o,const Vector4<T> &v) {
 
 template<class T> Matrix4<T>::Matrix4() {}
 
-template<class T> Matrix4<T>::Matrix4(const Matrix4<T>& m)
-{
-	memcpy(r,m.r,sizeof(T)*16);
-}
-
 template<class T> Matrix4<T>::Matrix4(const T* m)
 {
 	memcpy(r,m,sizeof(T)*16);
-}
-
-template<class T> Matrix4<T>& Matrix4<T>::operator=(const Matrix4<T>& m)
-{
-	memcpy(r,m.r,sizeof(T)*16);
-	return (*this);
 }
 
 template<class T> Matrix4<T>::Matrix4(const Vector4<T>& v0,
@@ -1236,5 +1198,15 @@ Vector4<T> operator*(T s,const Vector4<T>&v) {
   return Vector4<T>(s*v[0],s*v[1],s*v[2],s*v[3]);
 }
 
+Q_DECLARE_TYPEINFO(Vec2d, Q_PRIMITIVE_TYPE);
+Q_DECLARE_TYPEINFO(Vec2f, Q_PRIMITIVE_TYPE);
+Q_DECLARE_TYPEINFO(Vec2i, Q_PRIMITIVE_TYPE);
+Q_DECLARE_TYPEINFO(Vec3d, Q_PRIMITIVE_TYPE);
+Q_DECLARE_TYPEINFO(Vec3f, Q_PRIMITIVE_TYPE);
+Q_DECLARE_TYPEINFO(Vec4d, Q_PRIMITIVE_TYPE);
+Q_DECLARE_TYPEINFO(Vec4f, Q_PRIMITIVE_TYPE);
+Q_DECLARE_TYPEINFO(Vec4i, Q_PRIMITIVE_TYPE);
+Q_DECLARE_TYPEINFO(Mat4d, Q_PRIMITIVE_TYPE);
+Q_DECLARE_TYPEINFO(Mat4f, Q_PRIMITIVE_TYPE);
 
 #endif // _VECMATH_H_
