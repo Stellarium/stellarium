@@ -1238,6 +1238,25 @@ private:
 	QVarLengthArray<Vec2f, 4096>* outTexturePos;
 };
 
+void StelPainter::drawStelVertexArray(const StelVertexArray& arr)
+{
+	setVertexPointer(3, GL_DOUBLE, arr.vertex.constData());
+	if (arr.isTextured())
+	{
+		setTexCoordPointer(2, GL_FLOAT, arr.texCoords.constData());
+		enableClientStates(true, true);
+	}
+	else
+	{
+		enableClientStates(true, false);
+	}
+	if (arr.isIndexed())
+		drawFromArray((StelPainter::DrawingMode)arr.primitiveType, arr.indices.size(), 0, true, arr.indices.constData());
+	else
+		drawFromArray((StelPainter::DrawingMode)arr.primitiveType, arr.vertex.size());
+
+	enableClientStates(false);
+}
 
 void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool textured, const SphericalCap* clippingCap, bool doSubDivide)
 {
@@ -1258,13 +1277,13 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 	// The simplest case, we don't need to iterate through the triangles at all.
 	if (!doClip && !doSubDivide)
 	{
-		va.draw(this);
+		drawStelVertexArray(va);
 		return;
 	}
 	if (doClip && !doSubDivide)
 	{
 		StelVertexArray cleanVa = va.removeDiscontinuousTriangles(this->getProjector().data());
-		cleanVa.draw(this);
+		drawStelVertexArray(cleanVa);
 		return;
 	}
 
