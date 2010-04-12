@@ -93,6 +93,10 @@ private:
 
 };
 
+// Serialization routines
+QDataStream& operator<<(QDataStream& out, const StelVertexArray&);
+QDataStream& operator>>(QDataStream& in, StelVertexArray&);
+
 template<class Func>
 Func StelVertexArray::foreachTriangle(Func func) const
 {

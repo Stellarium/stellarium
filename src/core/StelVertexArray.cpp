@@ -134,3 +134,23 @@ StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjecto
 
 	return ret;
 }
+
+QDataStream& operator<<(QDataStream& out, const StelVertexArray& p)
+{
+	out << p.vertex;
+	out << p.texCoords;
+	out << p.indices;
+	out << (unsigned int)p.primitiveType;
+	return out;
+}
+
+QDataStream& operator>>(QDataStream& in, StelVertexArray& p)
+{
+	in >> p.vertex;
+	in >> p.texCoords;
+	in >> p.indices;
+	unsigned int t;
+	in >> t;
+	p.primitiveType=(StelVertexArray::StelPrimitiveType)t;
+	return in;
+}

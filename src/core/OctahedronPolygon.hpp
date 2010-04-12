@@ -35,6 +35,8 @@ struct EdgeVertex
 	bool edgeFlag;
 };
 
+Q_DECLARE_TYPEINFO(EdgeVertex, Q_PRIMITIVE_TYPE);
+
 QDataStream& operator<<(QDataStream& out, const EdgeVertex&);
 QDataStream& operator>>(QDataStream& in, EdgeVertex&);
 
