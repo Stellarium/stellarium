@@ -763,6 +763,8 @@ private:
 };
 
 
+Q_DECLARE_TYPEINFO(SphericalTexturedPolygon::TextureVertex, Q_PRIMITIVE_TYPE);
+
 //! @class SphericalTexturedConvexPolygon
 //! Extension of SphericalConvexPolygon for textured polygon.
 class SphericalTexturedConvexPolygon : public SphericalConvexPolygon

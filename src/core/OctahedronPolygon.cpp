@@ -803,6 +803,11 @@ QDataStream& operator<<(QDataStream& out, const OctahedronPolygon& p)
 	{
 		out << p.sides[i];
 	}
+	out << p.fillCachedVertexArray;
+	out << p.outlineCachedVertexArray;
+	out << p.capN;
+	out << p.capD;
+
 	return out;
 }
 
@@ -812,8 +817,9 @@ QDataStream& operator>>(QDataStream& in, OctahedronPolygon& p)
 	{
 		in >> p.sides[i];
 	}
-	//p.tesselate(OctahedronPolygon::WindingPositive);
-	p.updateVertexArray();
-	//Q_ASSERT(p.checkAllTrianglesPositive());
+	in >> p.fillCachedVertexArray;
+	in >> p.outlineCachedVertexArray;
+	in >> p.capN;
+	in >> p.capD;
 	return in;
 }
