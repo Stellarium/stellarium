@@ -19,30 +19,6 @@
 
 #include "StelVertexArray.hpp"
 #include "StelProjector.hpp"
-#include "StelPainter.hpp"
-
-#include <QtOpenGL>
-
-void StelVertexArray::draw(StelPainter* painter) const
-{
-	painter->setVertexPointer(3, GL_DOUBLE, vertex.constData());
-	if (isTextured())
-	{
-		painter->setTexCoordPointer(2, GL_FLOAT, texCoords.constData());
-		painter->enableClientStates(true, true);
-	}
-	else
-	{
-		painter->enableClientStates(true, false);
-	}
-	if (isIndexed())
-		painter->drawFromArray((StelPainter::DrawingMode)primitiveType, indices.size(), 0, true, indices.constData());
-	else
-		painter->drawFromArray((StelPainter::DrawingMode)primitiveType, vertex.size());
-
-	painter->enableClientStates(false);
-}
-
 
 StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjector* prj) const
 {

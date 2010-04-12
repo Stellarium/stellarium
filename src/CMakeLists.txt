@@ -626,6 +626,8 @@ SET(tests_testStelSphereGeometry_SRCS
 	tests/testStelSphereGeometry.cpp
 	core/StelSphereGeometry.hpp
 	core/StelSphereGeometry.cpp
+	core/StelVertexArray.hpp
+	core/StelVertexArray.cpp
 	core/OctahedronPolygon.hpp
 	core/OctahedronPolygon.cpp
 	core/StelJsonParser.hpp
@@ -645,6 +647,8 @@ SET(tests_testStelSphericalIndex_SRCS
 	core/StelSphericalIndex.cpp
 	core/StelSphereGeometry.hpp
 	core/StelSphereGeometry.cpp
+	core/StelVertexArray.hpp
+	core/StelVertexArray.cpp
 	core/OctahedronPolygon.hpp
 	core/OctahedronPolygon.cpp
 	core/StelJsonParser.hpp

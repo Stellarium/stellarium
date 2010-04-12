@@ -67,8 +67,6 @@ struct StelVertexArray
 	//! Create a copy of the array with all the triangles intersecting the projector discontinuty removed.
 	StelVertexArray removeDiscontinuousTriangles(const class StelProjector* prj) const;
 
-	void draw(class StelPainter* painter) const;
-
 private:
 	// Below we define a few methods that are templated to be optimized according to different types of VertexArray :
 	// The template parameter <bool T> defines whether the array has a texture.

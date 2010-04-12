@@ -344,6 +344,8 @@ private:
 			const Vec2f* texturePos=NULL, QVarLengthArray<Vec2f, 4096>* outTexturePos=NULL,int nbI=0,
 			bool checkDisc1=true, bool checkDisc2=true, bool checkDisc3=true) const;
 
+	void drawStelVertexArray(const StelVertexArray& arr);
+
 	void drawTextGravity180(float x, float y, const QString& str, float xshift = 0, float yshift = 0) const;
 
 	// Used by the method below
