@@ -21,6 +21,7 @@
 #include "StelMainScriptAPI.hpp"
 #include "StelMainScriptAPIProxy.hpp"
 #include "StelScriptMgr.hpp"
+#include "StelLocaleMgr.hpp"
 
 #include "ConstellationMgr.hpp"
 #include "GridLinesMgr.hpp"
@@ -791,5 +792,25 @@ void StelMainScriptAPI::moveToRaDecJ2000(const QString& ra, const QString& dec, 
 	StelUtils::spheToRect(dRa,dDec,aimJ2000);
 	aimEquofDate = StelApp::getInstance().getCore()->getNavigator()->j2000ToEquinoxEqu(aimJ2000);
 	mvmgr->moveToJ2000(aimEquofDate, duration);
+}
+
+QString StelMainScriptAPI::getAppLanguage(void)
+{
+	return StelApp::getInstance().getLocaleMgr().getAppLanguage();
+}
+
+void StelMainScriptAPI::setAppLanguage(QString langCode)
+{
+	StelApp::getInstance().getLocaleMgr().setAppLanguage(langCode);
+}
+
+QString StelMainScriptAPI::getSkyLanguage(void)
+{
+	return StelApp::getInstance().getLocaleMgr().getSkyLanguage();
+}
+
+void StelMainScriptAPI::setSkyLanguage(QString langCode)
+{
+	StelApp::getInstance().getLocaleMgr().setSkyLanguage(langCode);
 }
 
