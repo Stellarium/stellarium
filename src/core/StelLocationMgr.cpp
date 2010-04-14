@@ -278,7 +278,7 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 	QTextStream outstream(&sourcefile);
 	outstream.setCodec("UTF-8");
 
-	for (QMap<QString, StelLocation>::const_iterator iter=locations.begin();iter!=locations.end();++iter)
+	for (QMap<QString, StelLocation>::ConstIterator iter=locations.constBegin();iter!=locations.constEnd();++iter)
 	{
 		if (iter.value().isUserLocation)
 		{

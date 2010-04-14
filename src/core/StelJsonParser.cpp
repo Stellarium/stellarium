@@ -386,7 +386,7 @@ void StelJsonParser::write(const QVariant& v, QIODevice* output, int indentLevel
 			++indentLevel;
 			const QVariantMap& m = v.toMap();
 			int j =0;
-			for (QVariantMap::ConstIterator i=m.begin();i!=m.end();++i)
+			for (QVariantMap::ConstIterator i=m.constBegin();i!=m.constEnd();++i)
 			{
 				output->write(prepend);
 				output->write("\t\"");

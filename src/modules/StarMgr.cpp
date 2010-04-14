@@ -114,12 +114,11 @@ QString StarMgr::convertToComponentIds(int index)
 }
 
 
-void StarMgr::initTriangle(int lev,int index,
-						   const Vec3f &c0,
-						   const Vec3f &c1,
-						   const Vec3f &c2) {
-  ZoneArrayMap::const_iterator it(zoneArrays.find(lev));
-  if (it!=zoneArrays.end()) it.value()->initTriangle(index,c0,c1,c2);
+void StarMgr::initTriangle(int lev,int index, const Vec3f &c0, const Vec3f &c1, const Vec3f &c2)
+{
+	ZoneArrayMap::const_iterator it(zoneArrays.find(lev));
+	if (it!=zoneArrays.constEnd())
+		it.value()->initTriangle(index,c0,c1,c2);
 }
 
 
@@ -401,7 +400,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 		hipIndex[i].z = 0;
 		hipIndex[i].s = 0;
 	}
-	for (ZoneArrayMap::const_iterator it(zoneArrays.begin()); it != zoneArrays.end();it++)
+	for (ZoneArrayMap::const_iterator it(zoneArrays.constBegin()); it != zoneArrays.constEnd();++it)
 	{
 		it.value()->updateHipIndex(hipIndex);
 	}
@@ -598,7 +597,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 int StarMgr::getMaxSearchLevel() const
 {
 	int rval = -1;
-	for (ZoneArrayMap::const_iterator it(zoneArrays.begin());it!=zoneArrays.end();++it)
+	for (ZoneArrayMap::const_iterator it(zoneArrays.constBegin());it!=zoneArrays.constEnd();++it)
 	{
 		const float mag_min = 0.001f*it.value()->mag_min;
 		float rcmag[2];
@@ -635,7 +634,7 @@ void StarMgr::draw(StelCore* core)
 	// draw all the stars of all the selected zones
 	float rcmag_table[2*256];
 
-	for (ZoneArrayMap::const_iterator it(zoneArrays.begin()); it!=zoneArrays.end();++it)
+	for (ZoneArrayMap::const_iterator it(zoneArrays.constBegin()); it!=zoneArrays.constEnd();++it)
 	{
 		const float mag_min = 0.001f*it.value()->mag_min;
 		const float k = (0.001f*it.value()->mag_range)/it.value()->mag_steps;
@@ -735,7 +734,7 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 
 	// Iterate over the stars inside the triangles
 	f = cos(limFov * M_PI/180.);
-	for (ZoneArrayMap::const_iterator it(zoneArrays.begin());it!=zoneArrays.end();it++)
+	for (ZoneArrayMap::const_iterator it(zoneArrays.constBegin());it!=zoneArrays.constEnd();it++)
 	{
 		//qDebug() << "search inside(" << it->first << "):";
 		int zone;
@@ -762,7 +761,7 @@ void StarMgr::updateI18n()
 	StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	commonNamesMapI18n.clear();
 	commonNamesIndexI18n.clear();
-	for (QHash<int,QString>::iterator it(commonNamesMap.begin());it!=commonNamesMap.end();it++)
+	for (QHash<int,QString>::ConstIterator it(commonNamesMap.constBegin());it!=commonNamesMap.constEnd();it++)
 	{
 		const int i = it.key();
 		const QString t(trans.qtranslate(it.value()));

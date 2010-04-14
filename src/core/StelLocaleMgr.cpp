@@ -345,14 +345,14 @@ float StelLocaleMgr::getGMTShift(double JD) const
 QString StelLocaleMgr::countryCodeToString(const QString& countryCode)
 {
 	QMap<QString, QString>::ConstIterator i = countryCodeToStringMap.find(countryCode);
-	return (i!=countryCodeToStringMap.end()) ? i.value() : QString();
+	return (i!=countryCodeToStringMap.constEnd()) ? i.value() : QString();
 }
 
 // Return a list of all the known country names
 QStringList StelLocaleMgr::getAllCountryNames()
 {
 	QStringList res;
-	for (QMap<QString, QString>::ConstIterator i = countryCodeToStringMap.begin();i!=countryCodeToStringMap.end();++i)
+	for (QMap<QString, QString>::ConstIterator i = countryCodeToStringMap.constBegin();i!=countryCodeToStringMap.constEnd();++i)
 		res.append(i.value());
 	res.sort();
 	return res;
