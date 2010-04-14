@@ -80,6 +80,9 @@ function saveState(stateName)
 	savedStates[stateName]["RaAngle"] = core.getViewRaAngle();
 	savedStates[stateName]["DecAngle"] = core.getViewDecAngle();
 
+	savedStates[stateName]["AppLanguage"] = core.getAppLanguage();
+	savedStates[stateName]["SkyLanguage"] = core.getSkyLanguage();
+
 	core.debug("saveState() - state saved with ID: " + stateName);
 }
 
@@ -168,6 +171,8 @@ function restoreState(stateName, options)
 	core.setFlagGravityLabels(savedStates[stateName]["FlagGravityLabels"]);
 	core.setDiskViewport(savedStates[stateName]["DiskViewport"]);
 	core.setObserverLocation(savedStates[stateName]["ObserverLocation"]);
+	core.setAppLanguage(savedStates[stateName]["AppLanguage"]);
+	core.setSkyLanguage(savedStates[stateName]["SkyLanguage"]);
 
 	// optional restoration options...
 	if (!options["time"])
