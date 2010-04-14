@@ -22,7 +22,7 @@
 
 //! @class StelFader
 //! Manages a (usually smooth) transition between two states (typically ON/OFF) in function of a counter
-//! It used for various purpose like smooth transitions between 
+//! It used for various purpose like smooth transitions between
 class StelFader
 {
 public:
@@ -32,18 +32,18 @@ public:
 	// Increments the internal counter of deltaTime ticks
 	virtual void update(int deltaTicks) = 0;
 	// Gets current switch state
-	virtual float getInterstate(void) const = 0;
-	virtual float getInterstatePercentage(void) const = 0;
+	virtual float getInterstate() const = 0;
+	virtual float getInterstatePercentage() const = 0;
 	// Switchors can be used just as bools
 	virtual StelFader& operator=(bool s) = 0;
 	bool operator==(bool s) const {return state==s;}
 	operator bool() const {return state;}
 	virtual void setDuration(int _duration) {;}
-	virtual float getDuration(void) = 0;
+	virtual float getDuration() = 0;
 	virtual void setMinValue(float _min) {minValue = _min;}
 	virtual void setMaxValue(float _max) {maxValue = _max;}
-	float getMinValue(void) {return minValue;}
-	float getMaxValue(void) {return maxValue;}
+	float getMinValue() {return minValue;}
+	float getMaxValue() {return maxValue;}
 protected:
 	bool state;
 	float minValue, maxValue;
@@ -60,11 +60,11 @@ public:
 	// Increments the internal counter of deltaTime ticks
 	void update(int deltaTicks) {;}
 	// Gets current switch state
-	float getInterstate(void) const {return state ? maxValue : minValue;}
-	float getInterstatePercentage(void) const {return state ? 100.f : 0.f;}
+	float getInterstate() const {return state ? maxValue : minValue;}
+	float getInterstatePercentage() const {return state ? 100.f : 0.f;}
 	// Switchors can be used just as bools
 	StelFader& operator=(bool s) {state=s; return *this;}
-	virtual float getDuration(void) {return 0.f;}
+	virtual float getDuration() {return 0.f;}
 protected:
 };
 
@@ -76,16 +76,16 @@ class LinearFader : public StelFader
 {
 public:
 	// Create and initialise to default
-	LinearFader(int _duration=1000, float minimumValue=0.f, float maximumValue=1.f, bool initialState=false) 
+	LinearFader(int _duration=1000, float minimumValue=0.f, float maximumValue=1.f, bool initialState=false)
 		: StelFader(initialState, minimumValue, maximumValue)
 	{
 		isTransiting = false;
 		duration = _duration;
 		interstate = state ? maxValue : minValue;
 	}
-	
+
 	~LinearFader() {;}
-	
+
 	// Increments the internal counter of deltaTime ticks
 	void update(int deltaTicks)
 	{
@@ -103,11 +103,11 @@ public:
 			interstate = startValue + (targetValue - startValue) * counter/duration;
 		}
 	}
-	
+
 	// Get current switch state
-	float getInterstate(void) const { return interstate;}
-	float getInterstatePercentage(void) const {return 100.f * (interstate-minValue)/(maxValue-minValue);}
-	
+	float getInterstate() const { return interstate;}
+	float getInterstatePercentage() const {return 100.f * (interstate-minValue)/(maxValue-minValue);}
+
 	// StelFaders can be used just as bools
 	StelFader& operator=(bool s)
 	{
@@ -115,14 +115,14 @@ public:
 		if(isTransiting) {
 			// if same end state, no changes
 			if(s == state) return *this;
-			
+
 			// otherwise need to reverse course
 			state = s;
 			counter = duration - counter;
 			float temp = startValue;
 			startValue = targetValue;
 			targetValue = temp;
-			
+
 		} else {
 
 			if(state == s) return *this;  // no change
@@ -136,9 +136,9 @@ public:
 		}
 		return *this;
 	}
-	
+
 	void setDuration(int _duration) {duration = _duration;}
-	virtual float getDuration(void) {return duration;}
+	virtual float getDuration() {return duration;}
 	void setMaxValue(float _max) {
 		if(interstate >=  maxValue) interstate =_max;
 		maxValue = _max;
@@ -159,16 +159,16 @@ class ParabolicFader : public StelFader
 {
 public:
 	// Create and initialise to default
-	ParabolicFader(int _duration=1000, float minimumValue=0.f, float maximumValue=1.f, bool initialState=false) 
+	ParabolicFader(int _duration=1000, float minimumValue=0.f, float maximumValue=1.f, bool initialState=false)
 		: StelFader(initialState, minimumValue, maximumValue)
 	{
 		isTransiting = false;
 		duration = _duration;
 		interstate = state ? maxValue : minValue;
 	}
-	
+
 	~ParabolicFader() {;}
-	
+
 	// Increments the internal counter of deltaTime ticks
 	void update(int deltaTicks)
 	{
@@ -189,11 +189,11 @@ public:
 
 		// printf("Counter %d  interstate %f\n", counter, interstate);
 	}
-	
+
 	// Get current switch state
 	float getInterstate(void) const { return interstate;}
 	float getInterstatePercentage(void) const {return 100.f * (interstate-minValue)/(maxValue-minValue);}
-	
+
 	// StelFaders can be used just as bools
 	StelFader& operator=(bool s)
 	{
@@ -201,14 +201,14 @@ public:
 		if(isTransiting) {
 			// if same end state, no changes
 			if(s == state) return *this;
-			
+
 			// otherwise need to reverse course
 			state = s;
 			counter = duration - counter;
 			float temp = startValue;
 			startValue = targetValue;
 			targetValue = temp;
-			
+
 		} else {
 
 			if(state == s) return *this;  // no change
@@ -222,7 +222,7 @@ public:
 		}
 		return *this;
 	}
-	
+
 	void setDuration(int _duration) {duration = _duration;}
 	virtual float getDuration(void) {return duration;}
 protected:

@@ -60,12 +60,12 @@ private:
 
 	//! Get the module/object type string.
 	//! @return "Constellation"
-	virtual QString getType(void) const {return "Constellation";}
+	virtual QString getType() const {return "Constellation";}
 
 	//! observer centered J2000 coordinates.
 	virtual Vec3d getJ2000EquatorialPos(const StelNavigator *nav) const {return XYZname;}
 
-	virtual double getAngularSize(const StelCore* core) const {Q_ASSERT(0); return 0;}; // TODO
+	virtual double getAngularSize(const StelCore* core) const {Q_ASSERT(0); return 0;} // TODO
 
 	//! @param record string containing the following whitespace
 	//! separated fields: abbreviation - a three character abbreviation
@@ -97,11 +97,11 @@ private:
 	StelObjectP getBrightestStarInConstellation(void) const;
 
 	//! Get the translated name for the Constellation.
-	QString getNameI18n(void) const {return nameI18;}
+	QString getNameI18n() const {return nameI18;}
 	//! Get the English name for the Constellation (returns the abbreviation).
-	QString getEnglishName(void) const {return abbreviation;}
+	QString getEnglishName() const {return abbreviation;}
 	//! Get the short name for the Constellation (returns the abbreviation).
-	QString getShortName(void) const {return abbreviation;}
+	QString getShortName() const {return abbreviation;}
 	//! Draw the lines for the Constellation.
 	//! This method uses the coords of the stars (optimized for use thru
 	//! the class ConstellationMgr only).
@@ -124,16 +124,16 @@ private:
 	void setFlagArt(bool b) {artFader=b;}
 	//! Get the current state of Constellation line rendering.
 	//! @return true if Constellation line rendering it turned on, else false.
-	bool getFlagLines(void) const {return lineFader;}
+	bool getFlagLines() const {return lineFader;}
 	//! Get the current state of Constellation boundary rendering.
 	//! @return true if Constellation boundary rendering it turned on, else false.
-	bool getFlagBoundaries(void) const {return boundaryFader;}
+	bool getFlagBoundaries() const {return boundaryFader;}
 	//! Get the current state of Constellation name label rendering.
 	//! @return true if Constellation name label rendering it turned on, else false.
-	bool getFlagName(void) const {return nameFader;}
+	bool getFlagName() const {return nameFader;}
 	//! Get the current state of Constellation art rendering.
 	//! @return true if Constellation art rendering it turned on, else false.
-	bool getFlagArt(void) const {return artFader;}
+	bool getFlagArt() const {return artFader;}
 
 	//! International name (translated using gettext)
 	QString nameI18;

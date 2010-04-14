@@ -92,10 +92,9 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* mgr)
 StelObjectP StelObjectMgr::searchByNameI18n(const QString &name) const
 {
 	StelObjectP rval;
-	QList<StelObjectModule*>::const_iterator iter;
-	for (iter=objectsModule.begin();iter!=objectsModule.end();++iter)
+	foreach (const StelObjectModule* m, objectsModule)
 	{
-		rval = (*iter)->searchByNameI18n(name);
+		rval = m->searchByNameI18n(name);
 		if (rval)
 			return rval;
 	}
@@ -106,10 +105,9 @@ StelObjectP StelObjectMgr::searchByNameI18n(const QString &name) const
 StelObjectP StelObjectMgr::searchByName(const QString &name) const
 {
 	StelObjectP rval;
-	QList<StelObjectModule*>::const_iterator iter;
-	for (iter=objectsModule.begin();iter!=objectsModule.end();++iter)
+	foreach (const StelObjectModule* m, objectsModule)
 	{
-		rval = (*iter)->searchByName(name);
+		rval = m->searchByName(name);
 		if (rval)
 			return rval;
 	}
@@ -168,10 +166,8 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	float fov_around = core->getMovementMgr()->getCurrentFov()/qMin(prj->getViewportWidth(), prj->getViewportHeight()) * searchRadiusPixel;
 
 	// Collect the objects inside the range
-	for (QList<StelObjectModule*>::const_iterator iteromgr=objectsModule.begin();iteromgr!=objectsModule.end();++iteromgr)
-	{
-		candidates += (*iteromgr)->searchAround(v, fov_around, core);
-	}
+	foreach (const StelObjectModule* m, objectsModule)
+		candidates += m->searchAround(v, fov_around, core);
 
 	// Now select the object minimizing the function y = distance(in pixel) + magnitude
 	Vec3d winpos;
@@ -181,19 +177,17 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 
 	float best_object_value;
 	best_object_value = 100000.f;
-	QList<StelObjectP>::iterator iter = candidates.begin();
-	while (iter != candidates.end())
+	foreach (const StelObjectP& obj, candidates)
 	{
-		prj->project((*iter)->getJ2000EquatorialPos(core->getNavigator()), winpos);
+		prj->project(obj->getJ2000EquatorialPos(core->getNavigator()), winpos);
 		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
-		float priority =  (*iter)->getSelectPriority(core->getNavigator());
+		float priority =  obj->getSelectPriority(core->getNavigator());
 		// qDebug() << (*iter).getShortInfoString(core->getNavigator()) << ": " << priority << " " << distance;
 		if (distance + priority < best_object_value)
 		{
 			best_object_value = distance + priority;
-			sobj = *iter;
+			sobj = obj;
 		}
-		++iter;
 	}
 
 	return sobj;
@@ -280,11 +274,10 @@ QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, uns
 	QStringList result;
 
 	// For all StelObjectmodules..
-	QList<StelObjectModule*>::const_iterator iteromgr;
-	for (iteromgr=objectsModule.begin();iteromgr!=objectsModule.end();++iteromgr)
+	foreach (const StelObjectModule* m, objectsModule)
 	{
 		// Get matching object for this module
-		QStringList matchingObj = (*iteromgr)->listMatchingObjectsI18n(objPrefix, maxNbItem);
+		QStringList matchingObj = m->listMatchingObjectsI18n(objPrefix, maxNbItem);
 		result += matchingObj;
 		maxNbItem-=matchingObj.size();
 	}
@@ -292,4 +285,3 @@ QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, uns
 	result.sort();
 	return result;
 }
-
