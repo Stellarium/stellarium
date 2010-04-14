@@ -316,9 +316,9 @@ bool StelSkyLayerMgr::getShowLayer(const QString& id) const
 QMap<QString, StelSkyLayerP> StelSkyLayerMgr::getAllSkyLayers() const
 {
 	QMap<QString, StelSkyLayerP> res;
-	for (QMap<QString, StelSkyLayerMgr::SkyLayerElem*>::const_iterator iter=allSkyLayers.begin();iter!=allSkyLayers.end();++iter)
+	for (QMap<QString, StelSkyLayerMgr::SkyLayerElem*>::ConstIterator iter=allSkyLayers.constBegin();iter!=allSkyLayers.constEnd();++iter)
 	{
-		qDebug() << iter.key() << iter.value()->layer->getShortName();
+		//qDebug() << iter.key() << iter.value()->layer->getShortName();
 		res.insert(iter.key(), iter.value()->layer);
 	}
 	return res;

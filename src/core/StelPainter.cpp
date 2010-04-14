@@ -760,8 +760,8 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 	}
 
 	// And draw.
-	QLinkedList<Vec3d>::ConstIterator i = tessArc.begin();
-	while (i+1 != tessArc.end())
+	QLinkedList<Vec3d>::ConstIterator i = tessArc.constBegin();
+	while (i+1 != tessArc.constEnd())
 	{
 		const Vec3d& p1 = *i;
 		const Vec3d& p2 = *(++i);
@@ -770,7 +770,7 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 		if ((p1[2]>0 && p1InViewport) || (p2[2]>0 && p2InViewport))
 		{
 			smallCircleVertexArray.append(Vec2f(p1[0], p1[1]));
-			if (i+1==tessArc.end())
+			if (i+1==tessArc.constEnd())
 			{
 				smallCircleVertexArray.append(Vec2f(p2[0], p2[1]));
 				drawSmallCircleVertexArray();

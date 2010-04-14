@@ -184,7 +184,7 @@ private:
 						const QVector<NodeElem> nodeElems = node.elements;
 						node.elements.clear();
 						// Re-insert the elements
-						for (QVector<NodeElem>::ConstIterator iter = nodeElems.begin();iter != nodeElems.end(); ++iter)
+						for (QVector<NodeElem>::ConstIterator iter = nodeElems.constBegin();iter != nodeElems.constEnd(); ++iter)
 						{
 							insert(node, *iter, level);
 						}

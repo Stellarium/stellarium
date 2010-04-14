@@ -242,12 +242,12 @@ Vec3f ConstellationMgr::getLabelsColor() const
 	return Constellation::labelColor;
 }
 
-void ConstellationMgr::setFontSize(double newFontSize)
+void ConstellationMgr::setFontSize(float newFontSize)
 {
 	asterFont.setPixelSize(newFontSize);
 }
 
-double ConstellationMgr::getFontSize() const
+float ConstellationMgr::getFontSize() const
 {
 	return asterFont.pixelSize();
 }
@@ -627,14 +627,15 @@ void ConstellationMgr::updateI18n()
 void ConstellationMgr::update(double deltaTime)
 {
 	vector < Constellation * >::const_iterator iter;
+	const int delta = (int)(deltaTime*1000);
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->update((int)(deltaTime*1000));
+		(*iter)->update(delta);
 	}
 }
 
 
-void ConstellationMgr::setArtIntensity(double _max)
+void ConstellationMgr::setArtIntensity(float _max)
 {
 	artMaxIntensity = _max;
 	vector < Constellation * >::const_iterator iter;
