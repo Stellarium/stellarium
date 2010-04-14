@@ -1,0 +1,26 @@
+//
+// Name:        Example of translations
+// License:     Public Domain
+// Author:      Matthew Gates
+// Description: Illustration of using translation.inc
+//
+
+include ("../translation.inc");
+
+setTr("de", "Hello world", "Hallo Welt");
+setTr("de", "Knife", "das Messer");
+
+dumpTr();
+
+messages = new Array("Hello world", "Bananas are marsupials", "Knife", "Pra-Bob");
+
+originalLanguage = core.getAppLanguage();
+
+core.setAppLanguage("de");
+for(i=0; i<messages.length; i++)
+{
+	core.debug("\"" + messages[i] + "\" in " + core.getAppLanguage() + " is \"" + tr(messages[i]) + "\"");
+}
+
+core.setAppLanguage(originalLanguage);
+
