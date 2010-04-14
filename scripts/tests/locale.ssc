@@ -1,0 +1,8 @@
+core.debug("app language is: " + core.getAppLanguage());
+core.wait(1);
+core.debug("setting app language to de");
+core.setAppLanguage("de");
+core.debug("app language is: " + core.getAppLanguage());
+core.wait(1);
+core.debug("sky language is: " + core.getSkyLanguage());
+

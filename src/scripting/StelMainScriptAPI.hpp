@@ -433,6 +433,22 @@ public slots:
 	//! @param s the message to be displayed on the console.
 	void debug(const QString& s);
 
+	//! Get the current application language.
+	//! @return two letter language code, e.g. "en", or "de" and so on.
+	QString getAppLanguage(void);
+
+	//! Set the current application language.
+	//! @param langCode two letter language code, e.g. "en", or "de".
+	void setAppLanguage(QString langCode);
+
+	//! Get the current sky language.
+	//! @return two letter language code, e.g. "en", or "de" and so on.
+	QString getSkyLanguage(void);
+
+	//! Set the current sky language.
+	//! @param langCode two letter language code, e.g. "en", or "de".
+	void setSkyLanguage(QString langCode);
+
 signals:
 	void requestLoadSkyImage(const QString& id, const QString& filename,
 							 double c1, double c2,
