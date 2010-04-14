@@ -206,7 +206,12 @@ void StelMainGraphicsView::init(QSettings* conf)
 	// Force refreshing of button bars if plugins modified the GUI, e.g. added buttons.
 	gui->forceRefreshGui();
 
-	const QString& startupScript = conf->value("scripts/startup_script", "startup.ssc").toString();
+	QString startupScript;
+	if (qApp->property("onetime_startup_script").isValid())
+		qApp->property("onetime_startup_script").toString();
+	else
+		startupScript = conf->value("scripts/startup_script", "startup.ssc").toString();
+
 	scriptMgr->runScript(startupScript);
 
 	QThread::currentThread()->setPriority(QThread::HighestPriority);

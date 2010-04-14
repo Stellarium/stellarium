@@ -27,6 +27,8 @@
 #include <QDebug>
 #include <iostream>
 
+#include <QApplication>
+
 void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 {
 	if (argsGetOption(argList, "-v", "--version"))
@@ -128,7 +130,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 		projectionType = argsGetOptionWithArg(argList, "", "--projection-type", "").toString();
 		screenshotDir = argsGetOptionWithArg(argList, "", "--screenshot-dir", "").toString();
 		multiresImage = argsGetOptionWithArg(argList, "", "--multires-image", "").toString();
-		startupScript = CLIProcessor::argsGetOptionWithArg(argList, "", "--startup-script", "").toString();
+		startupScript = argsGetOptionWithArg(argList, "", "--startup-script", "").toString();
 	}
 	catch (std::runtime_error& e)
 	{
@@ -207,7 +209,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 
 	if (!startupScript.isEmpty())
 	{
-		confSettings->setValue("scripts/startup_script", startupScript);
+		qApp->setProperty("onetime_startup_script", startupScript);
 	}
 
 	if (fov>0.0) confSettings->setValue("navigation/init_fov", fov);
