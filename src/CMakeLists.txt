@@ -1,41 +1,41 @@
 
 SET(glues_lib_SRCS
-	external/glues_stel/source/glues_error.c
-	external/glues_stel/source/glues_error.h
-	external/glues_stel/source/glues.h
-	external/glues_stel/source/glues_mipmap.c
-	external/glues_stel/source/glues_mipmap.h
-	external/glues_stel/source/libtess/dict.h
-	external/glues_stel/source/libtess/dict.c
-	external/glues_stel/source/libtess/dict-list.h
-	external/glues_stel/source/libtess/geom.c
-	external/glues_stel/source/libtess/geom.h
-	external/glues_stel/source/libtess/memalloc.c
-	external/glues_stel/source/libtess/memalloc.h
-	external/glues_stel/source/libtess/mesh.c
-	external/glues_stel/source/libtess/mesh.h
-	external/glues_stel/source/libtess/normal.c
-	external/glues_stel/source/libtess/normal.h
-	external/glues_stel/source/libtess/priorityq.c
-	external/glues_stel/source/libtess/priorityq.h
-	external/glues_stel/source/libtess/priorityq-heap.h
-	external/glues_stel/source/libtess/priorityq-heap.i
-	external/glues_stel/source/libtess/priorityq-sort.h
-	external/glues_stel/source/libtess/render.c
-	external/glues_stel/source/libtess/render.h
-	external/glues_stel/source/libtess/sweep.c
-	external/glues_stel/source/libtess/sweep.h
-	external/glues_stel/source/libtess/tess.c
-	external/glues_stel/source/libtess/tess.h
-	external/glues_stel/source/libtess/tessmono.c
-	external/glues_stel/source/libtess/tessmono.h
+	core/external/glues_stel/source/glues_error.c
+	core/external/glues_stel/source/glues_error.h
+	core/external/glues_stel/source/glues.h
+	core/external/glues_stel/source/glues_mipmap.c
+	core/external/glues_stel/source/glues_mipmap.h
+	core/external/glues_stel/source/libtess/dict.h
+	core/external/glues_stel/source/libtess/dict.c
+	core/external/glues_stel/source/libtess/dict-list.h
+	core/external/glues_stel/source/libtess/geom.c
+	core/external/glues_stel/source/libtess/geom.h
+	core/external/glues_stel/source/libtess/memalloc.c
+	core/external/glues_stel/source/libtess/memalloc.h
+	core/external/glues_stel/source/libtess/mesh.c
+	core/external/glues_stel/source/libtess/mesh.h
+	core/external/glues_stel/source/libtess/normal.c
+	core/external/glues_stel/source/libtess/normal.h
+	core/external/glues_stel/source/libtess/priorityq.c
+	core/external/glues_stel/source/libtess/priorityq.h
+	core/external/glues_stel/source/libtess/priorityq-heap.h
+	core/external/glues_stel/source/libtess/priorityq-heap.i
+	core/external/glues_stel/source/libtess/priorityq-sort.h
+	core/external/glues_stel/source/libtess/render.c
+	core/external/glues_stel/source/libtess/render.h
+	core/external/glues_stel/source/libtess/sweep.c
+	core/external/glues_stel/source/libtess/sweep.h
+	core/external/glues_stel/source/libtess/tess.c
+	core/external/glues_stel/source/libtess/tess.h
+	core/external/glues_stel/source/libtess/tessmono.c
+	core/external/glues_stel/source/libtess/tessmono.h
 	)
 
 IF (OPENGL_MODE STREQUAL "Desktop")
-  SET(gl_lib_SRCS external/GLee.c external/GLee.h)
+  SET(gl_lib_SRCS core/external/GLee.c core/external/GLee.h)
 ENDIF()
 IF(OPENGL_MODE STREQUAL "ES2")
-  SET(gl_lib_SRCS external/GLee.h)
+  SET(gl_lib_SRCS core/external/GLee.h)
 ENDIF()
 
 SET(stellarium_lib_SRCS
@@ -43,8 +43,6 @@ SET(stellarium_lib_SRCS
 	core/StelAudioMgr.cpp
 	core/StelGeodesicGrid.cpp
 	core/StelGeodesicGrid.hpp
-	core/StelLoadingBar.cpp
-	core/StelLoadingBar.hpp
 	core/StelMovementMgr.cpp
 	core/StelMovementMgr.hpp
 	core/StelNavigator.cpp
@@ -137,99 +135,99 @@ SET(stellarium_lib_SRCS
 	core/RefractionExtinction.hpp
 	core/RefractionExtinction.cpp
 	${gl_lib_SRCS}
-	external/fixx11h.h
-	external/gettext.h
+	core/external/fixx11h.h
+	core/external/gettext.h
 
-	external/kfilter/kfilterdev.h
-	external/kfilter/kfilterdev.cpp
-	external/kfilter/kfilterbase.h
-	external/kfilter/kfilterbase.cpp
-	external/kfilter/kgzipfilter.h
-	external/kfilter/kgzipfilter.cpp
-	external/kfilter/kzip.h
-	external/kfilter/kzip.cpp
-	external/kfilter/klimitediodevice.h
-	external/kfilter/klimitediodevice.cpp
-	external/kfilter/karchive.h
-	external/kfilter/karchive.cpp
+	core/external/kfilter/kfilterdev.h
+	core/external/kfilter/kfilterdev.cpp
+	core/external/kfilter/kfilterbase.h
+	core/external/kfilter/kfilterbase.cpp
+	core/external/kfilter/kgzipfilter.h
+	core/external/kfilter/kgzipfilter.cpp
+	core/external/kfilter/kzip.h
+	core/external/kfilter/kzip.cpp
+	core/external/kfilter/klimitediodevice.h
+	core/external/kfilter/klimitediodevice.cpp
+	core/external/kfilter/karchive.h
+	core/external/kfilter/karchive.cpp
 
 	${glues_lib_SRCS}
 
-	planetsephems/calc_interpolated_elements.c
-	planetsephems/calc_interpolated_elements.h
-	planetsephems/elliptic_to_rectangular.c
-	planetsephems/elliptic_to_rectangular.h
-	planetsephems/elp82b.c
-	planetsephems/elp82b.h
-	planetsephems/gust86.c
-	planetsephems/gust86.h
-	planetsephems/l1.c
-	planetsephems/l1.h
-	planetsephems/marssat.c
-	planetsephems/marssat.h
-	planetsephems/misc_stellplanet.c
-	planetsephems/misc_stellplanet.h
-	planetsephems/pluto.c
-	planetsephems/pluto.h
-	planetsephems/sideral_time.c
-	planetsephems/sideral_time.h
-	planetsephems/stellplanet.c
-	planetsephems/stellplanet.h
-	planetsephems/tass17.c
-	planetsephems/tass17.h
-	planetsephems/vsop87.c
-	planetsephems/vsop87.h
+	core/planetsephems/calc_interpolated_elements.c
+	core/planetsephems/calc_interpolated_elements.h
+	core/planetsephems/elliptic_to_rectangular.c
+	core/planetsephems/elliptic_to_rectangular.h
+	core/planetsephems/elp82b.c
+	core/planetsephems/elp82b.h
+	core/planetsephems/gust86.c
+	core/planetsephems/gust86.h
+	core/planetsephems/l1.c
+	core/planetsephems/l1.h
+	core/planetsephems/marssat.c
+	core/planetsephems/marssat.h
+	core/planetsephems/misc_stellplanet.c
+	core/planetsephems/misc_stellplanet.h
+	core/planetsephems/pluto.c
+	core/planetsephems/pluto.h
+	core/planetsephems/sideral_time.c
+	core/planetsephems/sideral_time.h
+	core/planetsephems/stellplanet.c
+	core/planetsephems/stellplanet.h
+	core/planetsephems/tass17.c
+	core/planetsephems/tass17.h
+	core/planetsephems/vsop87.c
+	core/planetsephems/vsop87.h
 
-	modules/Atmosphere.cpp
-	modules/Atmosphere.hpp
-	modules/Constellation.cpp
-	modules/Constellation.hpp
-	modules/ConstellationMgr.cpp
-	modules/ConstellationMgr.hpp
-	modules/GridLinesMgr.cpp
-	modules/GridLinesMgr.hpp
-	modules/LabelMgr.hpp
-	modules/LabelMgr.cpp
-	modules/Landscape.cpp
-	modules/Landscape.hpp
-	modules/LandscapeMgr.cpp
-	modules/LandscapeMgr.hpp
-	modules/Meteor.cpp
-	modules/Meteor.hpp
-	modules/MeteorMgr.cpp
-	modules/MeteorMgr.hpp
-	modules/MilkyWay.cpp
-	modules/MilkyWay.hpp
-	modules/Nebula.cpp
-	modules/Nebula.hpp
-	modules/NebulaMgr.cpp
-	modules/NebulaMgr.hpp
-	modules/Orbit.cpp
-	modules/Orbit.hpp
-	modules/Planet.cpp
-	modules/Planet.hpp
-	modules/ScreenImageMgr.hpp
-	modules/ScreenImageMgr.cpp
-	modules/Skybright.cpp
-	modules/Skybright.hpp
-	modules/Skylight.cpp
-	modules/Skylight.hpp
-	modules/SolarSystem.cpp
-	modules/SolarSystem.hpp
-	modules/Solve.hpp
-	modules/Star.cpp
-	modules/Star.hpp
-	modules/StarMgr.cpp
-	modules/StarMgr.hpp
-	modules/StarWrapper.cpp
-	modules/StarWrapper.hpp
-	modules/Telescope.cpp
-	modules/Telescope.hpp
-	modules/TelescopeMgr.cpp
-	modules/TelescopeMgr.hpp
-	modules/ZoneArray.cpp
-	modules/ZoneArray.hpp
-	modules/ZoneData.hpp
+	core/modules/Atmosphere.cpp
+	core/modules/Atmosphere.hpp
+	core/modules/Constellation.cpp
+	core/modules/Constellation.hpp
+	core/modules/ConstellationMgr.cpp
+	core/modules/ConstellationMgr.hpp
+	core/modules/GridLinesMgr.cpp
+	core/modules/GridLinesMgr.hpp
+	core/modules/LabelMgr.hpp
+	core/modules/LabelMgr.cpp
+	core/modules/Landscape.cpp
+	core/modules/Landscape.hpp
+	core/modules/LandscapeMgr.cpp
+	core/modules/LandscapeMgr.hpp
+	core/modules/Meteor.cpp
+	core/modules/Meteor.hpp
+	core/modules/MeteorMgr.cpp
+	core/modules/MeteorMgr.hpp
+	core/modules/MilkyWay.cpp
+	core/modules/MilkyWay.hpp
+	core/modules/Nebula.cpp
+	core/modules/Nebula.hpp
+	core/modules/NebulaMgr.cpp
+	core/modules/NebulaMgr.hpp
+	core/modules/Orbit.cpp
+	core/modules/Orbit.hpp
+	core/modules/Planet.cpp
+	core/modules/Planet.hpp
+	core/modules/ScreenImageMgr.hpp
+	core/modules/ScreenImageMgr.cpp
+	core/modules/Skybright.cpp
+	core/modules/Skybright.hpp
+	core/modules/Skylight.cpp
+	core/modules/Skylight.hpp
+	core/modules/SolarSystem.cpp
+	core/modules/SolarSystem.hpp
+	core/modules/Solve.hpp
+	core/modules/Star.cpp
+	core/modules/Star.hpp
+	core/modules/StarMgr.cpp
+	core/modules/StarMgr.hpp
+	core/modules/StarWrapper.cpp
+	core/modules/StarWrapper.hpp
+	core/modules/Telescope.cpp
+	core/modules/Telescope.hpp
+	core/modules/TelescopeMgr.cpp
+	core/modules/TelescopeMgr.hpp
+	core/modules/ZoneArray.cpp
+	core/modules/ZoneArray.hpp
+	core/modules/ZoneData.hpp
 
 	scripting/StelScriptMgr.cpp
 	scripting/StratoscriptPreprocessor.cpp
@@ -241,6 +239,8 @@ SET(stellarium_lib_SRCS
 	scripting/StelMainScriptAPIProxy.cpp
 	scripting/StelMainScriptAPIProxy.hpp
 
+	StelLoadingBar.cpp
+	StelLoadingBar.hpp
 	StelMainGraphicsView.hpp
 	StelMainGraphicsView.cpp
 	StelMainWindow.hpp
@@ -254,79 +254,79 @@ SET(stellarium_lib_SRCS
 
 IF(WIN32)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
-		external/kdewin32/basetyps.h
-		external/kdewin32/byteswap.h
-		external/kdewin32/comcat.h
-		external/kdewin32/dirent.h
-		external/kdewin32/docobj.h
-		external/kdewin32/errno.h
-		external/kdewin32/fcntl.h
-		external/kdewin32/grp.h
-		external/kdewin32/ifaddrs.h
-		external/kdewin32/langinfo.h
-		external/kdewin32/mshtml.h
-		external/kdewin32/netdb.h
-		external/kdewin32/nl_types.h
-		external/kdewin32/oaidl.h
-		external/kdewin32/objfwd.h
-		external/kdewin32/objidl.h
-		external/kdewin32/ocidl.h
-		external/kdewin32/olectl.h
-		external/kdewin32/oleidl.h
-		external/kdewin32/pwd.h
-		external/kdewin32/signal.h
-		external/kdewin32/stdio.h
-		external/kdewin32/stdlib.h
-		external/kdewin32/string.h
-		external/kdewin32/strings.h
-		external/kdewin32/syslog.h
-		external/kdewin32/time.h
-		external/kdewin32/unistd.h
-		external/kdewin32/unknwn.h
-		external/kdewin32/wchar.h
-		external/kdewin32/arpa/inet.h
-		external/kdewin32/asm/byteorder.h
-		external/kdewin32/net/if.h
-		external/kdewin32/netinet/in.h
-		external/kdewin32/netinet/tcp.h
-		external/kdewin32/sys/ioctl.h
-		external/kdewin32/sys/mman.h
-		external/kdewin32/sys/resource.h
-		external/kdewin32/sys/select.h
-		external/kdewin32/sys/signal.h
-		external/kdewin32/sys/socket.h
-		external/kdewin32/sys/stat.h
-		external/kdewin32/sys/time.h
-		external/kdewin32/sys/times.h
-		external/kdewin32/sys/types.h
-		external/kdewin32/sys/uio.h
-		external/kdewin32/sys/un.h
-		external/kdewin32/sys/unistd.h
-		external/kdewin32/sys/utsname.h
-		external/kdewin32/sys/wait.h
+		core/external/kdewin32/basetyps.h
+		core/external/kdewin32/byteswap.h
+		core/external/kdewin32/comcat.h
+		core/external/kdewin32/dirent.h
+		core/external/kdewin32/docobj.h
+		core/external/kdewin32/errno.h
+		core/external/kdewin32/fcntl.h
+		core/external/kdewin32/grp.h
+		core/external/kdewin32/ifaddrs.h
+		core/external/kdewin32/langinfo.h
+		core/external/kdewin32/mshtml.h
+		core/external/kdewin32/netdb.h
+		core/external/kdewin32/nl_types.h
+		core/external/kdewin32/oaidl.h
+		core/external/kdewin32/objfwd.h
+		core/external/kdewin32/objidl.h
+		core/external/kdewin32/ocidl.h
+		core/external/kdewin32/olectl.h
+		core/external/kdewin32/oleidl.h
+		core/external/kdewin32/pwd.h
+		core/external/kdewin32/signal.h
+		core/external/kdewin32/stdio.h
+		core/external/kdewin32/stdlib.h
+		core/external/kdewin32/string.h
+		core/external/kdewin32/strings.h
+		core/external/kdewin32/syslog.h
+		core/external/kdewin32/time.h
+		core/external/kdewin32/unistd.h
+		core/external/kdewin32/unknwn.h
+		core/external/kdewin32/wchar.h
+		core/external/kdewin32/arpa/inet.h
+		core/external/kdewin32/asm/byteorder.h
+		core/external/kdewin32/net/if.h
+		core/external/kdewin32/netinet/in.h
+		core/external/kdewin32/netinet/tcp.h
+		core/external/kdewin32/sys/ioctl.h
+		core/external/kdewin32/sys/mman.h
+		core/external/kdewin32/sys/resource.h
+		core/external/kdewin32/sys/select.h
+		core/external/kdewin32/sys/signal.h
+		core/external/kdewin32/sys/socket.h
+		core/external/kdewin32/sys/stat.h
+		core/external/kdewin32/sys/time.h
+		core/external/kdewin32/sys/times.h
+		core/external/kdewin32/sys/types.h
+		core/external/kdewin32/sys/uio.h
+		core/external/kdewin32/sys/un.h
+		core/external/kdewin32/sys/unistd.h
+		core/external/kdewin32/sys/utsname.h
+		core/external/kdewin32/sys/wait.h
 
-		external/kdewin32/bind/inet_ntop.c
-		external/kdewin32/bind/inet_pton.c
-		external/kdewin32/dirent.c
-		external/kdewin32/errno.c
-		external/kdewin32/fsync.c
-		external/kdewin32/getenv.c
-		external/kdewin32/grp.c
-		external/kdewin32/inet.c
-		external/kdewin32/mmap.c
-		external/kdewin32/nl_langinfo.c
-		external/kdewin32/net.c
-		external/kdewin32/pwd.c
-		external/kdewin32/realpath.c
-		external/kdewin32/resource.c
-		external/kdewin32/signal.c
-		external/kdewin32/stdlib.c
-		external/kdewin32/string.c
-		external/kdewin32/strptime.c
-		external/kdewin32/syslog.c
-		external/kdewin32/time.c
-		external/kdewin32/uname.c
-		external/kdewin32/unistd.c
+		core/external/kdewin32/bind/inet_ntop.c
+		core/external/kdewin32/bind/inet_pton.c
+		core/external/kdewin32/dirent.c
+		core/external/kdewin32/errno.c
+		core/external/kdewin32/fsync.c
+		core/external/kdewin32/getenv.c
+		core/external/kdewin32/grp.c
+		core/external/kdewin32/inet.c
+		core/external/kdewin32/mmap.c
+		core/external/kdewin32/nl_langinfo.c
+		core/external/kdewin32/net.c
+		core/external/kdewin32/pwd.c
+		core/external/kdewin32/realpath.c
+		core/external/kdewin32/resource.c
+		core/external/kdewin32/signal.c
+		core/external/kdewin32/stdlib.c
+		core/external/kdewin32/string.c
+		core/external/kdewin32/strptime.c
+		core/external/kdewin32/syslog.c
+		core/external/kdewin32/time.c
+		core/external/kdewin32/uname.c
+		core/external/kdewin32/unistd.c
 	)
 ENDIF(WIN32)
 
@@ -366,18 +366,18 @@ SET(stellarium_MOC_HDRS
 	core/StelSkyLayer.hpp
 	core/StelSkyCultureMgr.hpp
 	core/SimbadSearcher.hpp
-	modules/ConstellationMgr.hpp
-	modules/GridLinesMgr.hpp
-	modules/LabelMgr.hpp
-	modules/LandscapeMgr.hpp
-	modules/MeteorMgr.hpp
-	modules/MilkyWay.hpp
-	modules/NebulaMgr.hpp
-	modules/ScreenImageMgr.hpp
-	modules/SolarSystem.hpp
-	modules/StarMgr.hpp
-	modules/Telescope.hpp
-	modules/TelescopeMgr.hpp
+	core/modules/ConstellationMgr.hpp
+	core/modules/GridLinesMgr.hpp
+	core/modules/LabelMgr.hpp
+	core/modules/LandscapeMgr.hpp
+	core/modules/MeteorMgr.hpp
+	core/modules/MilkyWay.hpp
+	core/modules/NebulaMgr.hpp
+	core/modules/ScreenImageMgr.hpp
+	core/modules/SolarSystem.hpp
+	core/modules/StarMgr.hpp
+	core/modules/Telescope.hpp
+	core/modules/TelescopeMgr.hpp
 	scripting/StelScriptMgr.hpp
 	scripting/StelMainScriptAPI.hpp
 	scripting/StelMainScriptAPIProxy.hpp
