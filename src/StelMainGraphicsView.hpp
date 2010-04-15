@@ -45,15 +45,9 @@ public:
 	//! Get the StelMainGraphicsView singleton instance.
 	static StelMainGraphicsView& getInstance() {Q_ASSERT(singleton); return *singleton;}
 
-	//! Get the main QGLWidget
-	//! @deprecated don't use that.
-	QGLWidget* getOpenGLWin() {return (QGLWidget*)glWidget;}
-
 	//! Swap openGL buffer.
 	//! @deprecated don't use that.
 	void swapBuffer();
-
-	void makeGLContextCurrent();
 
 	//! Delete openGL textures (to call before the GLContext disappears)
 	void deinitGL();
@@ -149,6 +143,7 @@ private:
 
 	//! The openGL window
 	StelQGLWidget* glWidget;
+	class QGLContext* glContext;
 
 	StelGuiBase* gui;
 

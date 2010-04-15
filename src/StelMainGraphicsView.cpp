@@ -49,7 +49,7 @@ StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 class StelQGLWidget : public QGLWidget
 {
 public:
-	StelQGLWidget(const QGLFormat& format, QWidget* parent) : QGLWidget(format, parent)
+	StelQGLWidget(QGLContext* ctx, QWidget* parent) : QGLWidget(ctx, parent)
 	{
 		setAttribute(Qt::WA_PaintOnScreen);
 		setAttribute(Qt::WA_NoSystemBackground);
@@ -124,7 +124,8 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 
 	// Create an openGL viewport
 	QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer | QGL::DoubleBuffer);
-	glWidget = new StelQGLWidget(glFormat, this);
+	glContext = new QGLContext(glFormat);
+	glWidget = new StelQGLWidget(glContext, this);
 	glWidget->updateGL();
 	setViewport(glWidget);
 
@@ -142,13 +143,6 @@ StelMainGraphicsView::~StelMainGraphicsView()
 void StelMainGraphicsView::swapBuffer()
 {
 	glWidget->swapBuffers();
-}
-
-void StelMainGraphicsView::makeGLContextCurrent()
-{
-	Q_ASSERT(glWidget!=NULL);
-	Q_ASSERT(glWidget->isValid());
-	glWidget->makeCurrent();
 }
 
 void StelMainGraphicsView::init(QSettings* conf)
@@ -175,6 +169,8 @@ void StelMainGraphicsView::init(QSettings* conf)
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.).toDouble());
 	maxfps = conf->value("video/maximum_fps",10000.).toDouble();
 	minfps = conf->value("video/minimum_fps",10000.).toDouble();
+
+	StelPainter::initSystemGLInfo(glContext);
 
 	QPainter qPainter(glWidget);
 	StelPainter::setQPainter(&qPainter);
@@ -226,12 +222,6 @@ void StelMainGraphicsView::thereWasAnEvent()
 
 void StelMainGraphicsView::drawBackground(QPainter* painter, const QRectF& rect)
 {
-	if (painter->paintEngine()->type()!=QPaintEngine::OpenGL && painter->paintEngine()->type()!=QPaintEngine::OpenGL2)
-	{
-		qWarning("StelMainGraphicsView: drawBackground needs a QGLWidget to be set as viewport on the graphics view");
-		return;
-	}
-
 	const double now = StelApp::getTotalRunTime();
 
 	// Determines when the next display will need to be triggered

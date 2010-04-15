@@ -43,6 +43,7 @@ QMutex* StelPainter::globalMutex = new QMutex();
 #endif
 
 QPainter* StelPainter::qPainter = NULL;
+QGLContext* StelPainter::glContext = NULL;
 
 #ifdef STELPAINTER_GL2
  QGLShaderProgram* StelPainter::colorShaderProgram=NULL;
@@ -57,7 +58,29 @@ QPainter* StelPainter::qPainter = NULL;
 void StelPainter::setQPainter(QPainter* p)
 {
 	qPainter=p;
+	if (p==NULL)
+		return;
+
+	if (p->paintEngine()->type() != QPaintEngine::OpenGL && p->paintEngine()->type() != QPaintEngine::OpenGL2)
+	{
+		qCritical("StelPainter::setQPainter(): StelPainter needs a QGLWidget to be set as viewport on the graphics view");
+		return;
+	}
+	QGLWidget* glwidget = dynamic_cast<QGLWidget*>(p->device());
+	if (glwidget && glwidget->context()!=glContext)
+	{
+		qCritical("StelPainter::setQPainter(): StelPainter needs to paint on a GLWidget with the same GL context as the one used for initialization.");
+		return;
+	}
 }
+
+void StelPainter::makeMainGLContextCurrent()
+{
+	Q_ASSERT(glContext!=NULL);
+	Q_ASSERT(glContext->isValid());
+	glContext->makeCurrent();
+}
+
 
 StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 {
@@ -1624,8 +1647,11 @@ void StelPainter::enableTexture2d(bool b)
 #endif
 }
 
-void StelPainter::initSystemGLInfo()
+void StelPainter::initSystemGLInfo(QGLContext* ctx)
 {
+	Q_ASSERT(glContext=NULL);
+	glContext = ctx;
+
 #ifdef STELPAINTER_GL2
 	// Basic shader: just vertex filled with plain color
 	QGLShader *vshader3 = new QGLShader(QGLShader::Vertex);
