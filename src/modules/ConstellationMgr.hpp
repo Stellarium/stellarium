@@ -114,9 +114,9 @@ public slots:
 	float getArtFadeDuration() const {return artFadeDuration;}
 
 	//! Set constellation maximum art intensity (between 0 and 1)
-	void setArtIntensity(float d);
+	void setArtIntensity(double d);
 	//! Set constellation maximum art intensity (between 0 and 1)
-	float getArtIntensity() const {return artMaxIntensity;}
+	double getArtIntensity() const {return artMaxIntensity;}
 
 	//! Set whether constellation art will be displayed
 	void setFlagArt(bool b);
