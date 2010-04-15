@@ -1649,7 +1649,7 @@ void StelPainter::enableTexture2d(bool b)
 
 void StelPainter::initSystemGLInfo(QGLContext* ctx)
 {
-	Q_ASSERT(glContext=NULL);
+	Q_ASSERT(glContext==NULL);
 	glContext = ctx;
 
 #ifdef STELPAINTER_GL2
