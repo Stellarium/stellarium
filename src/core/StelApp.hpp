@@ -121,10 +121,6 @@ public:
 	//! @return the StelCore instance of the program
 	StelCore* getCore() {return core;}
 
-	//! Get the main loading bar used by modules for displaying loading informations.
-	//! @return the main StelLoadingBar instance of the program.
-	StelLoadingBar* getStelLoadingBar() {return loadingBar;}
-
 	//! Get the common instance of QNetworkAccessManager used in stellarium
 	QNetworkAccessManager* getNetworkAccessManager() {return networkAccessManager;}
 
@@ -161,9 +157,6 @@ public:
 	//! Tell the StelApp instance which GUI si currently being used.
 	//! The caller is responsible for destroying the GUI.
 	void setGui(StelGuiBase* b) {stelGui=b;}
-
-	//! Make sure that the GL context of the main window is current and valid.
-	static void makeMainGLContextCurrent();
 
 	static void initStatic();
 

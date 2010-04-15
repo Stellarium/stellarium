@@ -37,6 +37,7 @@ class QGLShaderProgram;
 #endif
 
 class QPainter;
+class QGLContext;
 
 class StelPainterLight
 {
@@ -262,12 +263,15 @@ public:
 	//! Get the font metrics for the current font.
 	QFontMetrics getFontMetrics() const;
 
-	//! Get some informations about the OS openGL capacities.
+	//! Get some informations about the OS openGL capacities and set the GLContext which will be used by Stellarium.
 	//! This method needs to be called once at init.
-	static void initSystemGLInfo();
+	static void initSystemGLInfo(QGLContext* ctx);
 
 	//! Set the QPainter to use for performing some drawing operations.
 	static void setQPainter(QPainter* qPainter);
+
+	//! Make sure that our GL context is current and valid.
+	static void makeMainGLContextCurrent();
 
 	// The following methods try to reflect the API of the incoming QGLPainter class
 
@@ -321,6 +325,9 @@ public:
 	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned int* indices=NULL);
 
 private:
+
+	friend class StelTextureMgr;
+	friend class StelTexture;
 	//! Struct describing one opengl array
 	typedef struct
 	{
@@ -362,6 +369,9 @@ private:
 
 	//! The QPainter to use for some drawing operations.
 	static QPainter* qPainter;
+
+	//! The main GL Context used by Stellarium.
+	static QGLContext* glContext;
 
 #ifdef STELPAINTER_GL2
 	Vec4f currentColor;

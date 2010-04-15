@@ -19,9 +19,8 @@
 
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "StelApp.hpp"
-#include "StelMainGraphicsView.hpp"
 #include "StelUtils.hpp"
+#include "StelPainter.hpp"
 
 #include <QHttp>
 #include <QFileInfo>
@@ -43,7 +42,7 @@ StelTextureMgr::~StelTextureMgr()
 
 void StelTextureMgr::init()
 {
-	StelApp::getInstance().makeMainGLContextCurrent();
+	StelPainter::makeMainGLContextCurrent();
 	isNoPowerOfTwoAllowed = QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0);
 }
 
@@ -74,13 +73,14 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 		tex->fullPath = pvrVersion;
 #endif
 
+	StelPainter::makeMainGLContextCurrent();
 	if (tex->fullPath.endsWith(".pvr"))
 	{
 		// Load compressed textures using Qt wrapper.
 		tex->loadParams = params;
 		tex->downloaded = true;
 
-		tex->id = StelMainGraphicsView::getInstance().getOpenGLWin()->bindTexture(tex->fullPath);
+		tex->id = StelPainter::glContext->bindTexture(tex->fullPath);
 		// For some reasons only LINEAR seems to work
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -146,6 +146,9 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 	if (!fileExtension.isEmpty())
 		tex->fileExtension = fileExtension;
 	if (!lazyLoading)
+	{
+		StelPainter::makeMainGLContextCurrent();
 		tex->bind();
+	}
 	return tex;
 }

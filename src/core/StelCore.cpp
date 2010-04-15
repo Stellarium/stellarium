@@ -51,8 +51,8 @@ StelCore::StelCore() : navigation(NULL), movementMgr(NULL), geodesicGrid(NULL), 
 	const int viewport_y = conf->value("projection/viewport_y", 0).toInt();
 	currentProjectorParams.viewportXywh.set(viewport_x,viewport_y,viewport_width,viewport_height);
 
-	const double viewportCenterX = conf->value("projection/viewport_center_x",0.5*viewport_width).toDouble();
-	const double viewportCenterY = conf->value("projection/viewport_center_y",0.5*viewport_height).toDouble();
+	const float viewportCenterX = conf->value("projection/viewport_center_x",0.5f*viewport_width).toDouble();
+	const float viewportCenterY = conf->value("projection/viewport_center_y",0.5f*viewport_height).toDouble();
 	currentProjectorParams.viewportCenter.set(viewportCenterX, viewportCenterY);
 	currentProjectorParams.viewportFovDiameter = conf->value("projection/viewport_fov_diameter", qMin(viewport_width,viewport_height)).toDouble();
 	currentProjectorParams.flipHorz = conf->value("projection/flip_horz",false).toBool();

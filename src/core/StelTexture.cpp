@@ -24,7 +24,7 @@
 #include "StelFileMgr.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelPainter.hpp"
 
 #include <QThread>
 #include <QMutexLocker>
@@ -94,13 +94,14 @@ StelTexture::~StelTexture()
 
 	if (id!=0)
 	{
+		StelPainter::makeMainGLContextCurrent();
 		if (glIsTexture(id)==GL_FALSE)
 		{
 			qDebug() << "WARNING: in StelTexture::~StelTexture() tried to delete invalid texture with ID=" << id << " Current GL ERROR status is " << glGetError();
 		}
 		else
 		{
-			StelMainGraphicsView::getInstance().getOpenGLWin()->deleteTexture(id);
+			StelPainter::glContext->deleteTexture(id);
 		}
 		id = 0;
 	}
@@ -127,7 +128,6 @@ bool StelTexture::bind()
 	if (id!=0)
 	{
 		// The texture is already fully loaded, just bind and return true;
-		StelApp::makeMainGLContextCurrent();
 #ifdef USE_OPENGL_ES2
 		glActiveTexture(GL_TEXTURE0);
 #endif
@@ -238,10 +238,6 @@ bool StelTexture::glLoad()
 		return false;
 	}
 
-#ifdef USE_OPENGL_ES2
-	glActiveTexture(GL_TEXTURE0);
-#endif
-
 	QGLContext::BindOptions opt = QGLContext::InvertedYBindOption;
 	if (loadParams.filtering==GL_LINEAR)
 		opt |= QGLContext::LinearFilteringBindOption;
@@ -263,11 +259,14 @@ bool StelTexture::glLoad()
 	}
 	else
 		glformat = GL_RGB;
-	id = StelMainGraphicsView::getInstance().getOpenGLWin()->bindTexture(qImage, GL_TEXTURE_2D, glformat, opt);
+
+	Q_ASSERT(StelPainter::glContext==QGLContext::currentContext());
+#ifdef USE_OPENGL_ES2
+	glActiveTexture(GL_TEXTURE0);
+#endif
+	id = StelPainter::glContext->bindTexture(qImage, GL_TEXTURE_2D, glformat, opt);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, loadParams.wrapMode);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, loadParams.wrapMode);
-
-	StelApp::makeMainGLContextCurrent();
 
 	// Release shared memory
 	qImage = QImage();
