@@ -153,17 +153,11 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 	if (!stelApp || !stelApp->getCore())
 		return;
 
-	if (painter->paintEngine()->type() != QPaintEngine::OpenGL && painter->paintEngine()->type() != QPaintEngine::OpenGL2)
-	{
-		qWarning("StelAppGraphicsWidget: paint needs a QGLWidget to be set as viewport on the graphics view");
-		return;
-	}
-
 	StelPainter::setQPainter(painter);
 
 	if (useBuffers)
 	{
-		stelApp->makeMainGLContextCurrent();
+		StelPainter::makeMainGLContextCurrent();
 		initBuffers();
 		backgroundBuffer->bind();
 		QPainter* pa = new QPainter(backgroundBuffer);

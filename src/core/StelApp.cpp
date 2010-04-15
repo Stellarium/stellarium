@@ -51,7 +51,6 @@
 #include "StelSkyLayerMgr.hpp"
 #include "StelAudioMgr.hpp"
 #include "StelStyle.hpp"
-#include "StelMainGraphicsView.hpp"
 #include "StelGuiBase.hpp"
 #include "StelPainter.hpp"
 
@@ -206,8 +205,6 @@ void StelApp::init(QSettings* conf)
 #else
 	useGLShaders = true;
 #endif
-
-	StelPainter::initSystemGLInfo();
 
 	// Initialize AFTER creation of openGL context
 	textureMgr = new StelTextureMgr();
@@ -594,9 +591,3 @@ void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
 		totalDownloadedSize+=reply->bytesAvailable();
 	}
 }
-
-void StelApp::makeMainGLContextCurrent()
-{
-	StelMainGraphicsView::getInstance().makeGLContextCurrent();
-}
-

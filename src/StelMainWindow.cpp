@@ -79,7 +79,7 @@ void StelMainWindow::init(QSettings* conf)
 
 void StelMainWindow::deinit()
 {
-	StelMainGraphicsView::getInstance().deinitGL();
+	mainGraphicsView->deinitGL();
 }
 
 // Alternate fullscreen mode/windowed mode if possible
