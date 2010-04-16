@@ -2,7 +2,7 @@
  * Stellarium Telescope Control Plug-in
  *
  * Copyright (C) 2006 Johannes Gajdosik
- * Copyright (C) 2009 Bogdan Marinov
+ * Copyright (C) 2009-2010 Bogdan Marinov
  *
  * This module was originally written by Johannes Gajdosik in 2006
  * as a core module of Stellarium. In 2009 it was significantly extended with
@@ -37,6 +37,7 @@
 #include "StelIniParser.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelPainter.hpp"
@@ -153,6 +154,7 @@ void TelescopeControl::init()
 		gui->getGuiActions("actionMove_Telescope_To_Selection_0")->setVisible(false);
 		#else
 		//gui->addGuiActions("actionMove_Telescope_To_Selection_0", N_("Move telescope #0 to selected object"), "Ctrl+0", group, false, false);
+		// "Slew to object" commands
 		gui->addGuiActions("actionMove_Telescope_To_Selection_1", N_("Move telescope #1 to selected object"), "Ctrl+1", group, false, false);
 		gui->addGuiActions("actionMove_Telescope_To_Selection_2", N_("Move telescope #2 to selected object"), "Ctrl+2", group, false, false);
 		gui->addGuiActions("actionMove_Telescope_To_Selection_3", N_("Move telescope #3 to selected object"), "Ctrl+3", group, false, false);
@@ -163,17 +165,38 @@ void TelescopeControl::init()
 		gui->addGuiActions("actionMove_Telescope_To_Selection_8", N_("Move telescope #8 to selected object"), "Ctrl+8", group, false, false);
 		gui->addGuiActions("actionMove_Telescope_To_Selection_9", N_("Move telescope #9 to selected object"), "Ctrl+9", group, false, false);
 		#endif //COMPATIBILITY_001003
+
+		// "Slew to the center of the screen" commands
+		gui->addGuiActions("actionSlew_Telescope_To_Direction_1", N_("Move telescope #1 to the point currently in the center of the screen"), "Alt+1", group, false, false);
+		gui->addGuiActions("actionSlew_Telescope_To_Direction_2", N_("Move telescope #2 to the point currently in the center of the screen"), "Alt+2", group, false, false);
+		gui->addGuiActions("actionSlew_Telescope_To_Direction_3", N_("Move telescope #3 to the point currently in the center of the screen"), "Alt+3", group, false, false);
+		gui->addGuiActions("actionSlew_Telescope_To_Direction_4", N_("Move telescope #4 to the point currently in the center of the screen"), "Alt+4", group, false, false);
+		gui->addGuiActions("actionSlew_Telescope_To_Direction_5", N_("Move telescope #5 to the point currently in the center of the screen"), "Alt+5", group, false, false);
+		gui->addGuiActions("actionSlew_Telescope_To_Direction_6", N_("Move telescope #6 to the point currently in the center of the screen"), "Alt+6", group, false, false);
+		gui->addGuiActions("actionSlew_Telescope_To_Direction_7", N_("Move telescope #7 to the point currently in the center of the screen"), "Alt+7", group, false, false);
+		gui->addGuiActions("actionSlew_Telescope_To_Direction_8", N_("Move telescope #8 to the point currently in the center of the screen"), "Alt+8", group, false, false);
+		gui->addGuiActions("actionSlew_Telescope_To_Direction_9", N_("Move telescope #9 to the point currently in the center of the screen"), "Alt+9", group, false, false);
 		
 		//connect(gui->getGuiActions("actionMove_Telescope_To_Selection_0"), SIGNAL(triggered()), this, SLOT(moveTelescopeToSelected()));
-		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_1"), SIGNAL(triggered()), this, SLOT(moveTelescopeToSelected()));
-		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_2"), SIGNAL(triggered()), this, SLOT(moveTelescopeToSelected()));
-		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_3"), SIGNAL(triggered()), this, SLOT(moveTelescopeToSelected()));
-		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_4"), SIGNAL(triggered()), this, SLOT(moveTelescopeToSelected()));
-		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_5"), SIGNAL(triggered()), this, SLOT(moveTelescopeToSelected()));
-		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_6"), SIGNAL(triggered()), this, SLOT(moveTelescopeToSelected()));
-		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_7"), SIGNAL(triggered()), this, SLOT(moveTelescopeToSelected()));
-		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_8"), SIGNAL(triggered()), this, SLOT(moveTelescopeToSelected()));
-		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_9"), SIGNAL(triggered()), this, SLOT(moveTelescopeToSelected()));
+		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_1"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
+		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_2"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
+		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_3"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
+		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_4"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
+		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_5"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
+		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_6"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
+		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_7"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
+		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_8"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
+		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_9"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
+
+		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_1"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
+		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_2"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
+		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_3"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
+		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_4"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
+		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_5"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
+		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_6"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
+		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_7"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
+		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_8"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
+		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_9"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
 		
 		//Create and initialize the telescope management window
 		telescopeDialog = new TelescopeDialog();
@@ -411,22 +434,38 @@ void TelescopeControl::setFontSize(int fontSize)
 	 labelFont.setPixelSize(fontSize);
 }
 
-void TelescopeControl::moveTelescopeToSelected(void)
+void TelescopeControl::slewTelescopeToSelectedObject()
 {
+	// Find out for which telescope is the command
+	if (sender() == NULL)
+		return;
+	int slotNumber = sender()->objectName().right(1).toInt();
+
+	// Find out the coordinates of the target
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	if (omgr->getSelectedObject().isEmpty())
-		return;
-
-	if (sender() == NULL)
 		return;
 
 	StelObjectP selectObject = omgr->getSelectedObject().at(0);
 	if (!selectObject)  // should never happen
 		return;
 
-	Vec3d objectPos = selectObject->getJ2000EquatorialPos(StelApp::getInstance().getCore()->getNavigator());
-	int telNum = sender()->objectName().right(1).toInt();
-	telescopeGoto(telNum, objectPos);
+	Vec3d objectPosition = selectObject->getJ2000EquatorialPos(StelApp::getInstance().getCore()->getNavigator());
+
+	telescopeGoto(slotNumber, objectPosition);
+}
+
+void TelescopeControl::slewTelescopeToViewDirection()
+{
+	// Find out for which telescope is the command
+	if (sender() == NULL)
+		return;
+	int slotNumber = sender()->objectName().right(1).toInt();
+
+	// Find out the coordinates of the target
+	Vec3d centerPosition = GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000();
+
+	telescopeGoto(slotNumber, centerPosition);
 }
 
 void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelNavigator * nav, StelPainter& sPainter)
