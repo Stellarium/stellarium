@@ -129,8 +129,10 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	glWidget->updateGL();
 	setViewport(glWidget);
 
-	//setOptimizationFlags(QGraphicsView::DontClipPainter|QGraphicsView::DontSavePainterState|QGraphicsView::DontAdjustForAntialiasing);
+	setOptimizationFlags(QGraphicsView::DontSavePainterState);
+
 	setScene(new QGraphicsScene());
+	scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
 
 	backItem = new QGraphicsWidget();
 	backItem->setFocusPolicy(Qt::NoFocus);
