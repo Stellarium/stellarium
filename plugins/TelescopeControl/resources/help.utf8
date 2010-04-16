@@ -103,7 +103,9 @@
 
 <h3><a name="commands"/>Sending commands</h3>
 <p>Once a telescope is successfully started/connected, Stellarium displays a telescope reticle labelled with the telescope's name on its current position in the sky. The reticle is an object like every other in Stellarium - it can be selected with the mouse, it can be tracked and it appears as an object in the "Search" window.</p>
-<p>To send a "slew" command to the telescope, select an object (e.g. a star) and press the number of the telescope while holding down the Ctrl key. (For example, Ctrl+1 for telescope #1.)</p>
+<p>Available commands are:</p>
+<dl><dt><b>slew to an object</b></dt><dd>Select an object (e.g. a star) and press the number of the telescope while holding down the <b>Ctrl</b> key. (For example, Ctrl+1 for telescope #1.) This will slew the telescope to the selected object.</dd>
+<dt><b>slew to the center of the view</b></dt><dd>Press the number of the telescope while holding down the <b>Alt</b> key. (For example, Alt+1 for telescope #1.) This will slew the telescope to the point in the center of the current view. (If you move the view after issuing the command, the target won't change unless you issue another command.)</dd></dl>
 <p>As of version 0.2.0/Stellarium 0.10.5, there is no way to slew to a specific set of coordinates.</p>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
@@ -136,16 +138,38 @@
 <li>A bug that made the plug-in send RA=0 for objects with RA between (12 and 24?) on Intel Macs has been fixed. (fix proposed by David Hulse)</li>
 <li>The style of the interface has been changed slightly.</li>
 <li>Two entries for Sky-Watcher telescope mounts have been added to the device models list.</li>
-<li>Log messages and telescope server loading logic have been cleaned.</li></ul>
+<li>Log messages and telescope server loading logic have been cleaned.</li>
+<li>An option to toggle the FOV indicators separately from the reticles has been added.</li>
+<li>A new command has been added: slew to the center of the current view.</li></ul>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
 <h3><a name="authors"/>Authors</h3>
 <p>Plug-in and GUI programming: <strong>Bogdan Marinov</strong> (bogdan.marinov84 (at) gmail.com)</p>
-<p>This plug-in is based on and reuses a lot of code under the GNU General Public License and Lesser General Public License from:<ul>
+<p>This plug-in is based on and reuses a lot of code under the GNU General Public License and version Lesser General Public License from:<ul>
 <li>the Telescope, TelescopeDummy, TelescopeTcp and TelescopeMgr classes in Stellarium's code (the client side of Stellarium's original telescope control feature);</li>
 <li>the telescope server core code (licensed under the LGPL)</li>
-<li>the TelescopeServerLx200 telescope server core code (licensed under the LGPL); author of all of the above - the client, the server core, and the LX200 server, along with the Stellarium telescope control network protocol (over TCP/IP), is <strong>Johannes Gajdosik</strong>.</li>
-<li>the TelescopeServerNexStar telescope server core code (licensed under the LGPL, based on TelescopeServerLx200) by <strong>Michael Heinz</strong>.</li>
+<li>the TelescopeServerLx200 telescope server core code (originally licensed under the LGPL); author of all of the above - the client, the server core, and the LX200 server, along with the Stellarium telescope control network protocol (over TCP/IP), is <strong>Johannes Gajdosik</strong>.</li>
+<li>the TelescopeServerNexStar telescope server core code (originally licensed under the LGPL, based on TelescopeServerLx200) by <strong>Michael Heinz</strong>.</li>
 </ul></p>
 <li>See also the AUTHORS files of Stellarium and the Stellarium telescope servers.</li>
+<p><a href="#top"><small>[Back to top]</small></a><br/></p>
+
+<h3><a name="copyright"/>Copyright</h3>
+<p>Telescope Control, a plug-in for Stellarium</p>
+<p>Copyright &copy; 2006 Johannes Gajdosik, Michael Heinz</p>
+<p>Copyright &copy; 2009-2010 Bogdan Marinov</p>
+<p>This plug-in is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with this program; if not, write to:</p>
+<address>Free Software Foundation, Inc.
+51 Franklin Street, Fifth Floor
+Boston, MA  02110-1301, USA.</address>
+<a href="http://www.fsf.org">http://www.fsf.org/</a>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>

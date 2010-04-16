@@ -2,7 +2,7 @@
  * Stellarium Telescope Control Plug-in
  * 
  * Copyright (C) 2006 Johannes Gajdosik
- * Copyright (C) 2009 Bogdan Marinov
+ * Copyright (C) 2009-2010 Bogdan Marinov
  * 
  * This module was originally written by Johannes Gajdosik in 2006
  * as a core module of Stellarium. In 2009 it was significantly extended with
@@ -183,10 +183,16 @@ public slots:
 	//! Define font size to use for telescope names display
 	void setFontSize(int fontSize);
 	
+	//! slews a telescope to the selected object.
 	//! For use from the GUI. The telescope number will be
-	//! chosen according to the action which triggered the slot to be
-	//! triggered.
-	void moveTelescopeToSelected(void);
+	//! deduced from the name of the QAction which triggered the slot.
+	void slewTelescopeToSelectedObject();
+
+	//! slews a telescope to the point of the celestial sphere currently
+	//! in the center of the screen.
+	//! For use from the GUI. The telescope number will be
+	//! deduced from the name of the QAction which triggered the slot.
+	void slewTelescopeToViewDirection();
 	
 	//! Used in the GUI
 	void setFlagUseTelescopeServerLogs (bool b) {useTelescopeServerLogs = b;}
