@@ -1,7 +1,7 @@
 /*
  * Stellarium Telescope Control Plug-in
  * 
- * Copyright (C) 2009 Bogdan Marinov (this file)
+ * Copyright (C) 2009-2010 Bogdan Marinov (this file)
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -345,7 +345,7 @@ void TelescopeDialog::configureTelescope(const QModelIndex & currentIndex)
 	//Update the status in the list
 	telescopeListModel->setData(telescopeListModel->index(ui->telescopeTreeView->currentIndex().row(), ColumnStatus), statusString[telescopeStatus[configuredSlot]], Qt::DisplayRole);
 	
-	dialog->setEnabled(false);
+	setVisible(false);
 	configurationDialog.setVisible(true); //This should be called first to actually create the dialog content
 	
 	configurationDialog.initExistingTelescopeConfiguration(configuredSlot);
@@ -424,7 +424,7 @@ void TelescopeDialog::buttonAddPressed()
 			break;
 	}
 	
-	dialog->setEnabled(false);
+	setVisible(false);
 	configurationDialog.setVisible(true); //This should be called first to actually create the dialog content
 	configurationDialog.initNewTelescopeConfiguration(configuredSlot);
 }
@@ -568,14 +568,12 @@ void TelescopeDialog::saveChanges(QString name, TelescopeConnection type)
 	
 	configuredTelescopeIsNew = false;
 	configurationDialog.setVisible(false);
-	dialog->setEnabled(true);
 	setVisible(true);//Brings the current window to the foreground
 }
 
 void TelescopeDialog::discardChanges()
 {
 	configurationDialog.setVisible(false);
-	dialog->setEnabled(true);
 	setVisible(true);//Brings the current window to the foreground
 	
 	if (telescopeCount >= SLOT_COUNT)

@@ -7,26 +7,28 @@
 <li><a href="#usingthisplugin">Using this plug-in</a></li>
 <li><a href="#mainwindow">Main window ("Telescopes")</a></li>
 <li><a href="#configwindow">Telescope configuration window</a></li>
-<ul>
+<li><ul>
 <li><a href="#connection_type">Connection type</a></li>
 <li><a href="#telescope_properties">Telescope properties</a></li>
 <li><a href="#device_settings">Device settings</a></li>
 <li><a href="#connection_settings">Connection settings</a></li>
 <li><a href="#fovcircles">Field of view indicators</a></li>
-</ul>
-<li><a href="#commands">Sending commands</a></li>
+</ul></li>
+<li><a href="#slew_to">"Slew telescope to" window</a></li>
+<li><a href="#commands">Telescope commands</a></li>
 <li><a href="#devices">Supported devices</a></li>
 <li><a href="#Stellarium_Virtual_Telescope">Stellarium Virtual Telescope</a></li>
 <li><a href="#changelog">Changes since the last version</a></li>
 <li><a href="#authors">Authors</a></li>
+<li><a href="#copyright">Copyright</a></li>
 </ul>
 
 <h3><a name="Abilities_and_limitations"/>Abilities and limitations</h3>
 <p>This plug-in allows Stellarium to send only "<b>slew</b>" ("go to") commands to the device and to receive its current position. It cannot issue any other commands, so users should be aware of the possibility for mount collisions and similar situations. (To abort a slew, you can start another one to an object in a safe position.)</p>
 <p>As of the current version, this plug-in doesn't allow satellite tracking, and is not very suitable for Moon or planetary observations.</p>
 <p><span style="color: red; font-weight: bolder;">WARNING: Stellarium CANNOT prevent your telescope from being pointed at the Sun.</span></p>
-<ul><li> Never point your telescope at the Sun without a proper solar filter installed. The powerful light amplified by the telescope WILL cause irreversible damage to your eyes and/or your equipment.
-</li><li> Even if you don't do it deliberately, a slew during daylight hours may cause your telescope to point at the sun on its way to the given destination, so it is strongly recommended to avoid using the telescope control feature before sunset without appropriate protection.</li></ul>
+<ul><li>Never point your telescope at the Sun without a proper solar filter installed. The powerful light amplified by the telescope WILL cause irreversible damage to your eyes and/or your equipment.</li>
+<li>Even if you don't do it deliberately, a slew during daylight hours may cause your telescope to point at the sun on its way to the given destination, so it is strongly recommended to avoid using the telescope control feature before sunset without appropriate protection.</li></ul>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
 <h3><a name="originalfeature"/>Accessing the original telescope control feature</h3>
@@ -38,14 +40,16 @@
 <p>here are two general ways to control a device with this plug-in, depending on the situation:</p>
 <ul><li><b>DIRECT CONNECTION</b>: A <a href="#devices">device supported by the plug-in</a> is connected with a cable to the computer running Stellarium;</li>
 <li><b>INDIRECT CONNECTION</b>:</li>
-<ul><li> a device is connected to the same computer but it is driven by a <a href="http://stellarium.org/wiki/index.php/Telescope_Control_%28client-server%29" title="Stellarium Wiki: Telescope Control (client-server)">stand-alone telescope server program</a> or a <a href="http://stellarium.org/wiki/index.php/Telescope_Control#Third_party_applications" title="Stellarium Wiki: Third party applications for telescope control">third-party application</a> <b>that can "talk" to Stellarium</b>;</li>
-<li> a device is connected to a remote computer and the software that drives it can "talk" to Stellarium <i>over the network</i>; this software can be either one of Stellarium's stand-alone telescope servers, or a third party application.</li></ul></ul>
+<li><ul><li>a device is connected to the same computer but it is driven by a <a href="http://stellarium.org/wiki/index.php/Telescope_Control_%28client-server%29" title="Stellarium Wiki: Telescope Control (client-server)">stand-alone telescope server program</a> or a <a href="http://stellarium.org/wiki/index.php/Telescope_Control#Third_party_applications" title="Stellarium Wiki: Third party applications for telescope control">third-party application</a> <b>that can "talk" to Stellarium</b>;</li>
+<li>a device is connected to a remote computer and the software that drives it can "talk" to Stellarium <i>over the network</i>; this software can be either one of Stellarium's stand-alone telescope servers, or a third party application.</li></ul></li></ul>
 <p>Most older telescopes use cables that connect to a <a href="http://meta.wikimedia.org/wiki/wikipedia:en:serial_port" title="Wikipedia - Serial port">serial port</a> (RS-232), the newer ones use <a href="http://meta.wikimedia.org/wiki/wikipedia:en:Universal_Serial_Bus" title="Wikipedia - Universal Serial Bus">USB</a> (Universal Serial Bus). On Linux and Max OS X both cases are handled identically by the plug-in. On Windows, a USB connection may require a "virtual serial port" software, if it is not supplied with the cable or the telescope. Such a software creates a virtual ("fake") COM port that corresponds to the real USB port so it can be used by the plug-in. On all three platforms, if the computer has no "classic" serial ports and the telescope can connect only to a serial port, a serial-to-USB (RS-232-to-USB) adapter may be necessary.</p>
 <p>Telescope set-up (setting geographical coordinates, performing alignment, etc.) should be done before connecting the telescope to Stellarium.</p>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
 <h3><a name="mainwindow"/>Main window ("Telescopes")</h3>
-<p>The plug-in's main window can be opened by pressing <b>Alt+0</b> or the "Telescopes window" button on the bottom toolbar.</p>
+<p>The plug-in's main window can be opened:</p>
+<ul><li>by pressing the "configure" button for the plug-in in the "Plugins" tab of Stellarium's Configuration window (opened by pressing <b>F2</b> or the respective button in the left toolbar).</li>
+<li>by pressing the "Configure telescopes..." button in the <a href="#slew_to">"Slew to" window</a> (opened by pressing <b>Alt+0</b> or the respective button on the bottom toolbar).</li></ul>
 <p>The <b>Telescopes</b> tab displays a list of the telescope connections that have been set up:</p>
 <ul><li>the number (<b>#</b>) column shows the number used to control this telescope. For example, for telescope #2, the shortcut is Ctrl+2.</li>
 <li>the <b>Status</b> column indicates if this connection is currently active or not. Unfortunately, there are some cases in which "Connected" is displayed when no working connection exists.</li>
@@ -82,7 +86,7 @@
 <li>on Mac OS X, the list is empty as it names its ports in a peculiar way.</li></ul>
 <p>On all three platforms <b>the list can be edited and new values can be added</b>. (If you are using a USB cable, the default serial port of your telescope most probably is not in the list.)</p>
 <p>To list all valid serial port names in Mac OS X, open a terminal and type:</p>
-<p><pre>ls /dev/*</pre></p>
+<pre>ls /dev/*</pre>
 <p>This will list all devices, the full name of your serial port should be somewhere in the list (for example, "/dev/cu.usbserial-FTDFZVMK").</p>
 <p><b>Device model</b>: see <a href="#devices">Supported devices</a> below.</p>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
@@ -101,12 +105,19 @@
 <p>This can be used in combination with the <a href="#Stellarium_Virtual_Telescope">Stellarium Virtual Telescope</a> to display a moving reticle with the Telrad circles. In this case, the list of FOV values should be "0.5, 2, 4".</p>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
+<h3><a name="slew_to"/>"Slew telescope to" window</h3>
+<p>The "Slew telescope to" window can be opened by pressing <b>Alt+0</b> or the respective button in the bottom toolbar.</p>
+<p>It contains two fields for entering celestial coordinates, selectors for the preferred format (Hours-Minutes-Seconds, Degrees-Minutes-Seconds, or Decimal degrees), a drop-down list and two buttons.</p>
+<p>The drop-down list contains the names of the currently connected devices. If no devices are connected, it will remain empty, and the "Slew" button will be disabled.</p>
+<p>Pressing the <b>Slew</b> button slews the selected device to the selected set of coordinates. See the section about <a href="#commands">keyboard commands</a> below for other ways of controlling the device.</p>
+<p>Pressing the <b>Configure telescopes...</b> button opens the <a href="#mainwindow">main window</a> of the plug-in.</p>
+<p><a href="#top"><small>[Back to top]</small></a><br/></p>
+
 <h3><a name="commands"/>Sending commands</h3>
 <p>Once a telescope is successfully started/connected, Stellarium displays a telescope reticle labelled with the telescope's name on its current position in the sky. The reticle is an object like every other in Stellarium - it can be selected with the mouse, it can be tracked and it appears as an object in the "Search" window.</p>
-<p>Available commands are:</p>
-<dl><dt><b>slew to an object</b></dt><dd>Select an object (e.g. a star) and press the number of the telescope while holding down the <b>Ctrl</b> key. (For example, Ctrl+1 for telescope #1.) This will slew the telescope to the selected object.</dd>
-<dt><b>slew to the center of the view</b></dt><dd>Press the number of the telescope while holding down the <b>Alt</b> key. (For example, Alt+1 for telescope #1.) This will slew the telescope to the point in the center of the current view. (If you move the view after issuing the command, the target won't change unless you issue another command.)</dd></dl>
-<p>As of version 0.2.0/Stellarium 0.10.5, there is no way to slew to a specific set of coordinates.</p>
+<p><b>To point a device to an object:</b> Select an object (e.g. a star) and press the number of the device while holding down the <b>Ctrl</b> key. (For example, Ctrl+1 for telescope #1.) This will move the telescope to the selected object.</p>
+<p><b>To point a device to the center of the view:</b> Press the number of the device while holding down the <b>Alt</b> key. (For example, Alt+1 for telescope #1.) This will slew the device to the point in the center of the current view. (If you move the view after issuing the command, the target won't change unless you issue another command.)</p>
+<p><b>To point a device to a given set of coordinates:</b> Use the <a href="#slew_to">"Slew to" window</a> (press <b>Alt+0</b>).</p>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
 <h3><a name="devices"/>Supported devices</h3>
@@ -117,8 +128,7 @@
 <dt><b>Losmandy G-11</b></dt><dd>A computerized telescope mount made by Losmandy. (Meade LX-200/Autostar interface)</dd>
 <dt><b>Meade Autostar Compatible</b></dt><dd>Any device using the LX-200/Autostar interface.</dd>
 <dt><b>Meade ETX-70 (#494 Autostar, #506 CCS)</b></dt><dd>The Meade ETX-70 telescope with the #494 Autostar controller and the #506 Connector Cable Set. According to the tester, it is a bit slow, so its default setting of <a href="#telescope_properties">"Connection delay"</a> is 1.5 seconds instead of 0.5 seconds.</dd>
-<dt><b>Meade LX200 (compatible)</b></dt><dd>Any device using the LX-200/Autostar interface.
-</dd>
+<dt><b>Meade LX200 (compatible)</b></dt><dd>Any device using the LX-200/Autostar interface.</dd>
 <dt><b><a href="#Stellarium_Virtual_Telescope">Stellarium Virtual Telescope</a></b></dt><dd> A fake telescope.&nbsp;:)</dd>
 <dt><b>Sky-Watcher SynScan AZ mount</b></dt><dd>The Sky-Watcher SynScan AZ GoTo mount is used in a number of telescopes.</dd>
 <dt><b>Sky-Watcher SynScan (version 3 or later)</b></dt><dd><b>SynScan</b> is also the name of the hand controller used in other Sky-Watcher GoTo mounts, and it seems that any mount that uses a SynScan controller version 3.0 or greater is supported by the plug-in, as it uses the NexStar protocol.</dd>
@@ -140,36 +150,32 @@
 <li>Two entries for Sky-Watcher telescope mounts have been added to the device models list.</li>
 <li>Log messages and telescope server loading logic have been cleaned.</li>
 <li>An option to toggle the FOV indicators separately from the reticles has been added.</li>
-<li>A new command has been added: slew to the center of the current view.</li></ul>
+<li>Two new ways of controlling a device have been added: slewing to the center of the current view and slewing to a given set of celestial coordinates.</li>
+</ul>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
 <h3><a name="authors"/>Authors</h3>
 <p>Plug-in and GUI programming: <strong>Bogdan Marinov</strong> (bogdan.marinov84 (at) gmail.com)</p>
-<p>This plug-in is based on and reuses a lot of code under the GNU General Public License and version Lesser General Public License from:<ul>
+<p>This plug-in is based on and reuses a lot of code under the GNU General Public License and version Lesser General Public License from:</p>
+<ul>
 <li>the Telescope, TelescopeDummy, TelescopeTcp and TelescopeMgr classes in Stellarium's code (the client side of Stellarium's original telescope control feature);</li>
 <li>the telescope server core code (licensed under the LGPL)</li>
-<li>the TelescopeServerLx200 telescope server core code (originally licensed under the LGPL); author of all of the above - the client, the server core, and the LX200 server, along with the Stellarium telescope control network protocol (over TCP/IP), is <strong>Johannes Gajdosik</strong>.</li>
-<li>the TelescopeServerNexStar telescope server core code (originally licensed under the LGPL, based on TelescopeServerLx200) by <strong>Michael Heinz</strong>.</li>
-</ul></p>
-<li>See also the AUTHORS files of Stellarium and the Stellarium telescope servers.</li>
+<li>the TelescopeServerLx200 telescope server core code (originally licensed under the LGPL); author of all of the above - the client, the server core, and the LX200 server, along with the Stellarium telescope control network protocol (over TCP/IP), is <b>Johannes Gajdosik</b>.</li>
+<li>the TelescopeServerNexStar telescope server core code (originally licensed under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>.</li>
+</ul>
+<p>See also the AUTHORS files of Stellarium and the Stellarium telescope servers.</p>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
 <h3><a name="copyright"/>Copyright</h3>
 <p>Telescope Control, a plug-in for Stellarium</p>
 <p>Copyright &copy; 2006 Johannes Gajdosik, Michael Heinz</p>
 <p>Copyright &copy; 2009-2010 Bogdan Marinov</p>
-<p>This plug-in is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.</p>
-<p>This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.</p>
-<p>You should have received a copy of the GNU General Public License
-along with this program; if not, write to:</p>
-<address>Free Software Foundation, Inc.
-51 Franklin Street, Fifth Floor
-Boston, MA  02110-1301, USA.</address>
-<a href="http://www.fsf.org">http://www.fsf.org/</a>
+<p>This plug-in is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License along with this program; if not, write to:</p>
+<address>Free Software Foundation, Inc.<br/>
+51 Franklin Street, Fifth Floor<br/>
+Boston, MA  02110-1301, USA</address>
+<p><a href="http://www.fsf.org">http://www.fsf.org/</a></p>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
+

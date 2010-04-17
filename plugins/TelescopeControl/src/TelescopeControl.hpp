@@ -35,7 +35,6 @@
 #include "StelProjectorType.hpp"
 #include "StelTextureTypes.hpp"
 #include "TelescopeControlGlobals.hpp"
-#include "TelescopeDialog.hpp"
 #include "VecMath.hpp"
 
 #include <QFile>
@@ -55,6 +54,7 @@ class StelPainter;
 class StelProjector;
 class TelescopeClient;
 class TelescopeDialog;
+class SlewDialog;
 
 using namespace TelescopeControlGlobals;
 
@@ -135,6 +135,9 @@ public:
 	bool isExistingClientAtSlot(int slot);
 	//! Checks if the TelescopeClient object at a given slot is connected to a server.
 	bool isConnectedClientAtSlot(int slot);
+
+	//! Returns a list of the currently connected clients
+	QHash<int, QString> getConnectedClientsNames();
 	
 	//! Returns the module-specific style sheet.
 	//! The main StelStyle instance should be passed.
@@ -196,6 +199,10 @@ public slots:
 	
 	//! Used in the GUI
 	void setFlagUseTelescopeServerLogs (bool b) {useTelescopeServerLogs = b;}
+
+signals:
+	void clientConnected(int slot, QString name);
+	void clientDisconnected(int slot);
 	
 private:
 	//! Draw a nice animated pointer around the object if it's selected
@@ -229,13 +236,11 @@ private:
 	//! Font used to draw telescope text labels
 	QFont labelFont;
 	
-	#ifdef USE_TOOLBAR_BUTTON
-	//Toolbar button stuff
+	//Toolbar button to toggle the Slew window
 	QPixmap* pixmapHover;
 	QPixmap* pixmapOnIcon;
 	QPixmap* pixmapOffIcon;
 	StelButton* toolbarButton;
-	#endif //USE_TOOLBAR_BUTTON
 	
 	//! Telescope reticle texture
 	StelTextureSP reticleTexture;
@@ -258,7 +263,8 @@ private:
 	QString serverExecutablesDirectoryPath;
 	
 	//GUI
-	TelescopeDialog* telescopeDialog;
+	TelescopeDialog * telescopeDialog;
+	SlewDialog * slewDialog;
 	
 	//Styles
 	QByteArray * normalStyleSheet;
