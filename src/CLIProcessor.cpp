@@ -44,37 +44,39 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		binName.remove(QRegExp("^.*[/\\\\]"));
 
 		std::cout << "Usage:\n"
-			 << "  "
-			 << qPrintable(binName) << " [options]\n\n"
-			 << "Options:\n"
-			 << "--version (or -v)       : Print program name and version and exit.\n"
-			 << "--help (or -h)          : This cruft.\n"
-			 << "--config-file (or -c)   : Use an alternative name for the config file\n"
-			 << "--user-dir (or -u)      : Use an alternative user data directory\n"
-			 << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
-			 << "                          the full screen setting in the config file\n"
-			 << "--screenshot-dir        : Specify directory to save screenshots\n"
-			 << "--startup-script        : Specify name of startup script\n"
-			 << "--home-planet           : Specify observer planet (English name)\n"
-			 << "--altitude              : Specify observer altitude in meters\n"
-			 << "--longitude             : Specify longitude, e.g. +53d58\\'16.65\\\"\n"
-			 << "--latitude              : Specify latitude, e.g. -1d4\\'27.48\\\"\n"
-			 << "--list-landscapes       : Print a list of value landscape IDs\n"
-			 << "--landscape             : Start using landscape whose ID (dir name)\n"
-			 << "                          is passed as parameter to option\n"
-			 << "--sky-date              : Specify sky date in format yyyymmdd\n"
-			 << "--sky-time              : Specify sky time in format hh:mm:ss\n"
-			 << "--fov                   : Specify the field of view (degrees)\n"
-			 << "--projection-type       : Specify projection type, e.g. stereographic\n"
-			 << "--restore-defaults      : Delete existing config.ini and use defaults\n"
-			 << "--multires-image        : With filename / URL argument, specify a\n"
-			 << "                          multi-resolution image to load\n";
-			 //Removed, as it is Qt argument, not Stellarium argument, and does not follow the format
-			 //It accepts only "-graphicssystem value" instead of "--graphicssystem=value"
-			 //<< "-graphicssystem         : (one dash only!) Choose Qt graphics backend:\n"
-			 //<< "                          it can be \"native\", \"raster\", or \"opengl\"\n"
-			 //<< "                          the default setting is \"" DEFAULT_GRAPHICS_SYSTEM "\"\n";
+		          << "  "
+		          << qPrintable(binName) << " [options]\n\n"
+		          << "Options:\n"
+		          << "--version (or -v)       : Print program name and version and exit.\n"
+		          << "--help (or -h)          : This cruft.\n"
+		          << "--config-file (or -c)   : Use an alternative name for the config file\n"
+		          << "--user-dir (or -u)      : Use an alternative user data directory\n"
+		          << "--safe-mode (or -s)     : Disable GL shaders and use older GL engine\n"
+		          << "                          Try this is you have graphics problems\n"
+		          << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
+		          << "                          the full screen setting in the config file\n"
+		          << "--screenshot-dir        : Specify directory to save screenshots\n"
+		          << "--startup-script        : Specify name of startup script\n"
+		          << "--home-planet           : Specify observer planet (English name)\n"
+		          << "--altitude              : Specify observer altitude in meters\n"
+		          << "--longitude             : Specify longitude, e.g. +53d58\\'16.65\\\"\n"
+		          << "--latitude              : Specify latitude, e.g. -1d4\\'27.48\\\"\n"
+		          << "--list-landscapes       : Print a list of value landscape IDs\n"
+		          << "--landscape             : Start using landscape whose ID (dir name)\n"
+		          << "                          is passed as parameter to option\n"
+		          << "--sky-date              : Specify sky date in format yyyymmdd\n"
+		          << "--sky-time              : Specify sky time in format hh:mm:ss\n"
+		          << "--fov                   : Specify the field of view (degrees)\n"
+		          << "--projection-type       : Specify projection type, e.g. stereographic\n"
+		          << "--restore-defaults      : Delete existing config.ini and use defaults\n"
+		          << "--multires-image        : With filename / URL argument, specify a\n"
+		          << "                          multi-resolution image to load\n";
 		exit(0);
+	}
+
+	if (argsGetOption(argList, "-s", "--safe-mode"))
+	{
+		qApp->setProperty("onetime_safe_mode", true);
 	}
 
 	if (argsGetOption(argList, "", "--list-landscapes"))

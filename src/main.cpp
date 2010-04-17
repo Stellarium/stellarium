@@ -259,7 +259,7 @@ int main(int argc, char **argv)
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
-	if (confSettings->value("main/use_qpaintenginegl2", true).toBool())
+	if (confSettings->value("main/use_qpaintenginegl2", true).toBool() && !qApp->property("onetime_safe_mode").isValid())
 	{
 		// The default is to let Qt choose which paint engine fits the best between OpenGL and OpenGL2.
 		// However it causes troubles on some older hardware, so add an option.
