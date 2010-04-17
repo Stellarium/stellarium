@@ -16,6 +16,8 @@ SET(TelescopeControl_SRCS
   clients/TelescopeClientDirectNexStar.cpp
   TelescopeControl.hpp
   TelescopeControl.cpp
+  gui/SlewDialog.hpp
+  gui/SlewDialog.cpp
   gui/TelescopeDialog.hpp
   gui/TelescopeDialog.cpp
   gui/TelescopeConfigurationDialog.hpp
@@ -44,6 +46,7 @@ SET(TelescopeControl_SRCS
 
 # Add here all the .ui files
 SET(TelescopeControl_UIS
+  gui/slewDialog.ui
   gui/telescopeDialog.ui
   gui/telescopeConfigurationDialog.ui)
 
@@ -59,6 +62,7 @@ SET(TelescopeControl_MOC_HDRS
   gui/StelDialogTelescopeControl.hpp
   gui/TelescopeConfigurationDialog.hpp
   gui/TelescopeDialog.hpp
+  gui/SlewDialog.hpp
   TelescopeControl.hpp
   clients/TelescopeClient.hpp
   clients/TelescopeClientDirectLx200.hpp

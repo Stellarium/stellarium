@@ -1,7 +1,7 @@
 /*
  * Stellarium TelescopeControl Plug-in
  * 
- * Copyright (C) 2009 Bogdan Marinov (this file)
+ * Copyright (C) 2009-2010 Bogdan Marinov (this file)
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,9 @@
 
 #ifndef _TELESCOPE_CONTROL_GLOBALS_
 #define _TELESCOPE_CONTROL_GLOBALS_
+
+#include <QString>
+#include <QStringList>
 
 namespace TelescopeControlGlobals {
 	const int MIN_SLOT_NUMBER = 1;
