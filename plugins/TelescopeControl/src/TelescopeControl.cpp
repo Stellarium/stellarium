@@ -27,6 +27,8 @@
 
 #include "TelescopeControl.hpp"
 #include "TelescopeClient.hpp"
+#include "TelescopeDialog.hpp"
+#include "SlewDialog.hpp"
 #include "LogFile.hpp"
 
 #include "StelApp.hpp"
@@ -151,7 +153,7 @@ void TelescopeControl::init()
 		QString group = N_("Telescope Control");
 		#ifdef COMPATIBILITY_001003
 		//QAction-s with these key bindings already exist in Stellarium
-		gui->getGuiActions("actionMove_Telescope_To_Selection_0")->setVisible(false);
+		//gui->getGuiActions("actionMove_Telescope_To_Selection_0")->setVisible(false);
 		#else
 		//gui->addGuiActions("actionMove_Telescope_To_Selection_0", N_("Move telescope #0 to selected object"), "Ctrl+0", group, false, false);
 		// "Slew to object" commands
@@ -198,29 +200,25 @@ void TelescopeControl::init()
 		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_8"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
 		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_9"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
 		
-		//Create and initialize the telescope management window
+		//Create and initialize dialog windows
 		telescopeDialog = new TelescopeDialog();
+		slewDialog = new SlewDialog();
 		
-		#ifdef USE_TOGGLEABLE_TELESCOPE_WINDOW
 		//TODO: Think of a better keyboard shortcut
 		#ifdef COMPATIBILITY_001003
-		gui->addGuiActions("actionShow_Telescopes_Window", N_("Telescopes window"), "Alt+0", group, true, false);
+		gui->addGuiActions("actionShow_Slew_Window", N_("Move a telescope to a given set of coordinates"), "Alt+0", group, true, false);
 		#else
-		gui->addGuiActions("actionShow_Telescopes_Window", N_("Telescopes window"), "Ctrl+0", group, true, false);
+		gui->addGuiActions("actionShow_Slew_Window", N_("Move a telescope to a given set of coordinates"), "Ctrl+0", group, true, false);
 		#endif //COMPATIBILITY_001003
-		connect(gui->getGuiActions("actionShow_Telescopes_Window"), SIGNAL(toggled(bool)), telescopeDialog, SLOT(setVisible(bool)));
-		connect(telescopeDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Telescopes_Window"), SLOT(setChecked(bool)));
+		connect(gui->getGuiActions("actionShow_Slew_Window"), SIGNAL(toggled(bool)), slewDialog, SLOT(setVisible(bool)));
+		connect(slewDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Slew_Window"), SLOT(setChecked(bool)));
 		
-		#ifdef USE_TOOLBAR_BUTTON
 		//Create toolbar button
-		pixmapHover = new QPixmap(":/graphicGui/gui/glow32x32.png");
-		pixmapOnIcon = new QPixmap(":/telescopeControl/bt_TelescopeControl_on.png");
-		pixmapOffIcon = new QPixmap(":/telescopeControl/bt_TelescopeControl_off.png");
-		toolbarButton = new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, gui->getGuiActions("actionShow_Telescopes_Window"));
+		pixmapHover =	new QPixmap(":/graphicGui/gui/glow32x32.png");
+		pixmapOnIcon =	new QPixmap(":/telescopeControl/button_Slew_Dialog_on.png");
+		pixmapOffIcon =	new QPixmap(":/telescopeControl/button_Slew_Dialog_off.png");
+		toolbarButton =	new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, gui->getGuiActions("actionShow_Slew_Window"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-		#endif //USE_TOOLBAR_BUTTON
-		
-		#endif //USE_TOGGLEABLE_TELESCOPE_WINDOW
 	}
 	catch (std::runtime_error &e)
 	{
@@ -337,6 +335,7 @@ void TelescopeControl::setStelStyle(const StelStyle& style)
 	}
 
 	telescopeDialog->setStelStyle(style);
+	slewDialog->setStelStyle(style);
 }
 
 double TelescopeControl::getCallOrder(StelModuleActionName actionName) const
@@ -415,12 +414,7 @@ bool TelescopeControl::configureGui(bool show)
 {
 	if(show)
 	{
-		#ifdef USE_TOGGLEABLE_TELESCOPE_WINDOW
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiActions("actionShow_Telescopes_Window")->setChecked(true);
-		#else
 		telescopeDialog->setVisible(true);
-		#endif //USE_TOGGLEABLE_TELESCOPE_WINDOW
 	}
 
 	return true;
@@ -1076,6 +1070,7 @@ bool TelescopeControl::startTelescopeAtSlot(int slot)
 					return false;
 				}
 
+				emit clientConnected(slot, name);
 				return true;
 			}
 		}
@@ -1085,6 +1080,7 @@ bool TelescopeControl::startTelescopeAtSlot(int slot)
 			logAtSlot(slot);
 			if (startClientAtSlot(slot, name, QString(), 0, delay, circles, deviceModelName, portSerial))
 			{
+				emit clientConnected(slot, name);
 				return true;
 			}
 		}
@@ -1093,6 +1089,7 @@ bool TelescopeControl::startTelescopeAtSlot(int slot)
 	{
 		if (startClientAtSlot(slot, name, host, portTCP, delay, circles))
 		{
+			emit clientConnected(slot, name);
 			return true;
 		}
 	}
@@ -1284,6 +1281,7 @@ bool TelescopeControl::stopClientAtSlot(int slotNumber)
 	//This is not needed by every client
 	removeLogAtSlot(slotNumber);
 
+	emit clientDisconnected(slotNumber);
 	return true;
 }
 
@@ -1443,6 +1441,21 @@ void TelescopeControl::loadDeviceModels()
 const QHash<QString, DeviceModel>& TelescopeControl::getDeviceModels()
 {
 	return deviceModels;
+}
+
+QHash<int, QString> TelescopeControl::getConnectedClientsNames()
+{
+	QHash<int, QString> connectedClientsNames;
+	if (telescopeClients.isEmpty())
+		return connectedClientsNames;
+
+	foreach (const int slotNumber, telescopeClients.keys())
+	{
+		if (telescopeClients.value(slotNumber)->isConnected())
+			connectedClientsNames.insert(slotNumber, telescopeClients.value(slotNumber)->getNameI18n());
+	}
+
+	return connectedClientsNames;
 }
 
 bool TelescopeControl::restoreDeviceModelsListTo(QString deviceModelsListPath)
