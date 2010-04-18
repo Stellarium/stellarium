@@ -129,10 +129,11 @@ public:
 	const int mag_steps;
 
 	float star_position_scale;
+
 protected:
 	//! Load a catalog and display its progress on the splash screen.
 	//! @return @c true if successful, or @c false if an error occurred
-	static bool readFileWithStelLoadingBar(QFile& file, void *data, qint64 size);
+	static bool readFile(QFile& file, void *data, qint64 size);
 
 	//! Protected constructor. Initializes fields and does not load anything.
 	ZoneArray(const QString& fname, QFile* file, int level, int mag_min, int mag_range, int mag_steps);

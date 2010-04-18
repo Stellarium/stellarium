@@ -57,7 +57,7 @@ public:
 	//! Draw the StelLoadingBar, setting the value.
 	//! @param val the value which the progress bar should display. This is a 
 	//! float which should take a value between 0.0 and 1.0.
-	void Draw(float val);
+	void draw();
 
 private:
 	QString message;
@@ -66,7 +66,6 @@ private:
 	StelTextureSP splash;
 	QString extraText;
 	Vec2f extraTextPos;
-	double timeCounter;
 
 	class StelPainter* sPainter;
 };

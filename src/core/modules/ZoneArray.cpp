@@ -260,7 +260,7 @@ ZoneArray::ZoneArray(const QString& fname, QFile* file, int level, int mag_min,
 	nr_of_stars = 0;
 }
 
-bool ZoneArray::readFileWithStelLoadingBar(QFile& file, void *data, qint64 size)
+bool ZoneArray::readFile(QFile& file, void *data, qint64 size)
 {
 	int parts = 256;
 	int part_size = (size + (parts>>1)) / parts;
@@ -408,7 +408,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 						 << ")::SpecialZoneArray: no memory (3)";
 					exit(1);
 				}
-				if (!readFileWithStelLoadingBar(*file,stars,sizeof(Star)*nr_of_stars))
+				if (!readFile(*file,stars,sizeof(Star)*nr_of_stars))
 				{
 					delete[] stars;
 					stars = 0;

@@ -43,7 +43,6 @@ StelLoadingBar::StelLoadingBar(float fontSize, const QString&  splashTex,
 	if (!splashTex.isEmpty())
 		splash = StelApp::getInstance().getTextureManager().createTexture(splashTex);
 	extraTextPos.set(extraTextPosx, extraTextPosy);
-	timeCounter = StelApp::getInstance().getTotalRunTime();
 }
 
 StelLoadingBar::~StelLoadingBar()
@@ -51,7 +50,7 @@ StelLoadingBar::~StelLoadingBar()
 	delete sPainter;
 }
 
-void StelLoadingBar::Draw(float val)
+void StelLoadingBar::draw()
 {
 	sPainter->setColor(1.f, 1.f, 1.f);
 	sPainter->enableTexture2d(true);

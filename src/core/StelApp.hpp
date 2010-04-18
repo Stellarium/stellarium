@@ -228,9 +228,6 @@ private:
 	// The audio manager.  Must execute in the main thread.
 	StelAudioMgr* audioMgr;
 
-	// The main loading bar
-	StelLoadingBar* loadingBar;
-
 	// Currently used StelStyle
 	StelStyle* currentStelStyle;
 
