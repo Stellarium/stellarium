@@ -23,7 +23,6 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelNavigator.hpp"
-#include "StelScriptMgr.hpp"
 #include "StelUtils.hpp"
 
 #include <QString>
