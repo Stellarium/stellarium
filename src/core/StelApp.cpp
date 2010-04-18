@@ -145,7 +145,6 @@ StelApp::StelApp(QObject* parent)
 	stelObjectMgr=NULL;
 	textureMgr=NULL;
 	moduleMgr=NULL;
-	loadingBar=NULL;
 	networkAccessManager=NULL;
 
 	// Can't create 2 StelApp instances
@@ -211,11 +210,11 @@ void StelApp::init(QSettings* conf)
 	textureMgr->init();
 
 #ifdef SVN_REVISION
-	loadingBar = new StelLoadingBar(12., "textures/logo24bits.png", QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
+	StelLoadingBar loadingBar(12., "textures/logo24bits.png", QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
 #else
-	loadingBar = new StelLoadingBar(12., "textures/logo24bits.png", PACKAGE_VERSION, 45, 320, 121);
+	StelLoadingBar loadingBar(12., "textures/logo24bits.png", PACKAGE_VERSION, 45, 320, 121);
 #endif // SVN_RELEASE
-	loadingBar->Draw(0);
+	loadingBar.draw();
 
 	networkAccessManager = new QNetworkAccessManager(this);
 	// Activate http cache if Qt version >= 4.5
@@ -330,8 +329,6 @@ void StelApp::init(QSettings* conf)
 	updateI18n();
 
 	initialized = true;
-	delete loadingBar;
-	loadingBar=NULL;
 }
 
 // Load and initialize external modules (plugins)
