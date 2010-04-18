@@ -114,6 +114,7 @@ protected:
 	virtual void wheelEvent(QWheelEvent* wheelEvent);
 	virtual void focusOutEvent(QFocusEvent* event);
 	virtual void focusInEvent(QFocusEvent* event);
+	virtual bool event(QEvent *event);
 
 	//! Update the mouse pointer state and schedule next redraw.
 	//! This method is called automatically by Qt.
