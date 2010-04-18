@@ -214,7 +214,7 @@ void TelescopeControl::init()
 		connect(slewDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Slew_Window"), SLOT(setChecked(bool)));
 		
 		//Create toolbar button
-		pixmapHover =	new QPixmap(":/graphicGui/gui/glow32x32.png");
+		pixmapHover =	new QPixmap(":/graphicGui/glow32x32.png");
 		pixmapOnIcon =	new QPixmap(":/telescopeControl/button_Slew_Dialog_on.png");
 		pixmapOffIcon =	new QPixmap(":/telescopeControl/button_Slew_Dialog_off.png");
 		toolbarButton =	new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, gui->getGuiActions("actionShow_Slew_Window"));

@@ -126,7 +126,7 @@ void AngleMeasure::init()
 	// Add a toolbar button
 	try
 	{
-		pxmapGlow = new QPixmap(":/graphicGui/gui/glow32x32.png");
+		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
 		pxmapOnIcon = new QPixmap(":/angleMeasure/bt_anglemeasure_on.png");
 		pxmapOffIcon = new QPixmap(":/angleMeasure/bt_anglemeasure_off.png");
 		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiActions("actionShow_Angle_Measure"));

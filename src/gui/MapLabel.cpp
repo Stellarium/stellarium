@@ -24,7 +24,7 @@
 MapLabel::MapLabel(QWidget *parent) : QLabel(parent)
 {
 	cursor = new QLabel(this);
-	cursor->setPixmap(QPixmap(":/graphicGui/gui/map-pointeur.png"));
+	cursor->setPixmap(QPixmap(":/graphicGui/map-pointeur.png"));
 	cursor->resize(cursor->pixmap()->size());
 	cursor->show();
 }

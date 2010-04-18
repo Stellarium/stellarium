@@ -114,7 +114,7 @@ void CompassMarks::init()
 	try
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		pxmapGlow = new QPixmap(":/graphicGui/gui/glow32x32.png");
+		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
 		pxmapOnIcon = new QPixmap(":/compassMarks/bt_compass_on.png");
 		pxmapOffIcon = new QPixmap(":/compassMarks/bt_compass_off.png");
 
