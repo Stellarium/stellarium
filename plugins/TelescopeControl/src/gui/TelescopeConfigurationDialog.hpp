@@ -42,7 +42,7 @@ public:
 	TelescopeConfigurationDialog();
 	virtual ~TelescopeConfigurationDialog();
 	void languageChanged();
-	virtual void setStelStyle(const StelStyle& style);
+	void updateStyle();
 	
 	void initExistingTelescopeConfiguration(int slot);
 	void initNewTelescopeConfiguration(int slot);

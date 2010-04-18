@@ -173,20 +173,20 @@ void Satellites::init()
 	styleSheetFile.setFileName(":/satellites/normalStyle.css");
 	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
 	{
-		normalStyleSheet = new QByteArray(styleSheetFile.readAll());
+		normalStyleSheet = styleSheetFile.readAll();
 	}
 	styleSheetFile.close();
 	styleSheetFile.setFileName(":/satellites/nightStyle.css");
 	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
 	{
-		nightStyleSheet = new QByteArray(styleSheetFile.readAll());
+		nightStyleSheet = styleSheetFile.readAll();
 	}
 	styleSheetFile.close();
 }
 
-void Satellites::setStelStyle(const StelStyle& style)
+void Satellites::setStelStyle(const QString& section)
 {
-	configDialog->setStelStyle(style);
+	configDialog->updateStyle();
 }
 
 const StelStyle Satellites::getModuleStyleSheet(const StelStyle& style)
@@ -194,11 +194,11 @@ const StelStyle Satellites::getModuleStyleSheet(const StelStyle& style)
 	StelStyle pluginStyle(style);
 	if (style.confSectionName == "color")
 	{
-		pluginStyle.qtStyleSheet.append(*normalStyleSheet);
+		pluginStyle.qtStyleSheet.append(normalStyleSheet);
 	}
 	else
 	{
-		pluginStyle.qtStyleSheet.append(*nightStyleSheet);
+		pluginStyle.qtStyleSheet.append(nightStyleSheet);
 	}
 	return pluginStyle;
 }

@@ -67,13 +67,6 @@ void TargetsDialog::languageChanged()
 	}
 }
 
-void TargetsDialog::setStelStyle(const StelStyle& style)
-{
-	if(dialog) {
-		dialog->setStyleSheet(style.qtStyleSheet);
-	}
-}
-
 void TargetsDialog::styleChanged()
 {
 	// Nothing for now
@@ -350,9 +343,6 @@ void TargetsDialog::createDialogContent()
 	ui->targetsListView->setModelColumn(1);
 	ui->typeComboBox->setModel(typeTableModel);
 	ui->typeComboBox->setModelColumn(typeTableModel->fieldIndex("type"));
-
-	//Initialize the style
-	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
 	
 	setupConnections();
 	ui->targetsListView->setCurrentIndex(tableModel->index(0, 1));	

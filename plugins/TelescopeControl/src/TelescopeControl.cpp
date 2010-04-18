@@ -230,7 +230,7 @@ void TelescopeControl::init()
 	
 	//Initialize style, as it is not called at startup:
 	//(necessary to initialize the reticle/label/circle colors)
-	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
+	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
 }
 
 void TelescopeControl::deinit()
@@ -319,9 +319,9 @@ void TelescopeControl::draw(StelCore* core)
 		drawPointer(prj, nav, sPainter);
 }
 
-void TelescopeControl::setStelStyle(const StelStyle& style)
+void TelescopeControl::setStelStyle(const QString& section)
 {
-	if(style.confSectionName == "night_color")
+	if (section == "night_color")
 	{
 		setLabelColor(labelNightColor);
 		setReticleColor(reticleNightColor);
@@ -334,8 +334,8 @@ void TelescopeControl::setStelStyle(const StelStyle& style)
 		setCircleColor(circleNormalColor);
 	}
 
-	telescopeDialog->setStelStyle(style);
-	slewDialog->setStelStyle(style);
+	telescopeDialog->updateStyle();
+	slewDialog->updateStyle();
 }
 
 double TelescopeControl::getCallOrder(StelModuleActionName actionName) const

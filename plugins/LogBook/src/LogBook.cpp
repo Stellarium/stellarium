@@ -142,11 +142,11 @@ void LogBook::draw(StelCore* core)
 	StelPainter painter(core->getProjection2d());
 }
 
-void LogBook::setStelStyle(const StelStyle& style)
+void LogBook::setStelStyle(const QString& section)
 {
 	/*
 	 if(dialog) {
-	 dialog->setStyleSheet(telescopeManager->getModuleStyleSheet(style.confSectionName));
+	 dialog->setStyleSheet(telescopeManager->getModuleStyleSheet(section));
 	 }
 	 */
 

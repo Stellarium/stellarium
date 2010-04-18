@@ -29,7 +29,7 @@
 #include "TelescopeConfigurationDialog.hpp"
 #include "TelescopeDialog.hpp"
 #include "ui_telescopeDialog.h"
-
+#include "StelGui.hpp"
 #include <QDebug>
 #include <QFrame>
 #include <QTimer>
@@ -112,7 +112,7 @@ void TelescopeDialog::createDialogContent()
 	connect(&configurationDialog, SIGNAL(saveChanges(QString, TelescopeConnection)), this, SLOT(saveChanges(QString, TelescopeConnection)));
 	
 	//Initialize the style
-	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
+	updateStyle();
 	
 	//Initializing the list of telescopes
 	telescopeListModel->setColumnCount(ColumnCount);
@@ -269,7 +269,9 @@ void TelescopeDialog::createDialogContent()
 	helpFile.close();
 	htmlPage += "</body></html>";
 	ui->textBrowserAbout->setHtml(htmlPage);
-	ui->textBrowserAbout->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	Q_ASSERT(gui);
+	ui->textBrowserAbout->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	
 	//Everything must be initialized by now, start the updateTimer
 	//TODO: Find if it's possible to run it only when the dialog is visible
@@ -687,17 +689,19 @@ void TelescopeDialog::setStatusButtonToDisconnect()
 	ui->pushButtonChangeStatus->setToolTip("Disconnect from the selected telescope");
 }
 
-void TelescopeDialog::setStelStyle(const StelStyle& style)
+void TelescopeDialog::updateStyle()
 {
-	if(dialog)
+	if (dialog)
 	{
-		const StelStyle pluginStyle = telescopeManager->getModuleStyleSheet(style);
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
+		const StelStyle pluginStyle = telescopeManager->getModuleStyleSheet(gui->getStelStyle());
 		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
 		ui->textBrowserAbout->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
 	}
 	
 	//Change the styles of all children, too
-	configurationDialog.setStelStyle(style);
+	configurationDialog.updateStyle();
 }
 
 void TelescopeDialog::checkBoxUseExecutablesToggled(bool useExecutables)

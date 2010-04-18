@@ -39,7 +39,6 @@ public:
 	LogBookDialog(QMap<QString, QSqlTableModel *> theTableModels);
 	virtual ~LogBookDialog();
 	void languageChanged();
-	virtual void setStelStyle(const StelStyle& style);
 	
 	//! Notify that the application style changed
 	void styleChanged();

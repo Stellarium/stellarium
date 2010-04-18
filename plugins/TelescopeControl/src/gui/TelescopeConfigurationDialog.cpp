@@ -96,7 +96,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	ui->comboBoxSerialPort->completer()->setModelSorting(QCompleter::CaseSensitivelySortedModel);
 	
 	//Initialize the style
-	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
+	updateStyle();
 }
 
 //Set the configuration panel in a predictable state
@@ -375,8 +375,12 @@ void TelescopeConfigurationDialog::deviceModelSelected(const QString& deviceMode
 	ui->doubleSpinBoxTelescopeDelay->setValue(SECONDS_FROM_MICROSECONDS(telescopeManager->getDeviceModels().value(deviceModelName).defaultDelay));
 }
 
-void TelescopeConfigurationDialog::setStelStyle(const StelStyle& style)
+void TelescopeConfigurationDialog::updateStyle()
 {
-	if(dialog)
-		dialog->setStyleSheet(telescopeManager->getModuleStyleSheet(style).qtStyleSheet);
+	if (dialog)
+	{
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
+		dialog->setStyleSheet(telescopeManager->getModuleStyleSheet(gui->getStelStyle()).qtStyleSheet);
+	}
 }
