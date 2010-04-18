@@ -78,7 +78,7 @@ public:
 
 	//! Sets the colors of the Nebula labels and markers according to the
 	//! values in a configuration object
-	virtual void setStelStyle(const StelStyle& style);
+	virtual void setStelStyle(const QString& section);
 
 	//! Determines the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;

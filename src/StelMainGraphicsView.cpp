@@ -352,6 +352,8 @@ void StelMainGraphicsView::deinitGL()
 		scriptMgr->stopScript();
 	StelApp::getInstance().getModuleMgr().unloadAllPlugins();
 	QCoreApplication::processEvents();
+	delete gui;
+	QCoreApplication::processEvents();
 	delete mainSkyItem;
 }
 

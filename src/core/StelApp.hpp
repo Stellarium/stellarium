@@ -37,7 +37,6 @@ class QStringList;
 class StelLoadingBar;
 class QSettings;
 class QNetworkAccessManager;
-class StelStyle;
 class QTime;
 class StelLocationMgr;
 class StelSkyLayerMgr;
@@ -134,7 +133,7 @@ public:
 	QSettings* getSettings() {return confSettings;}
 
 	//! Return the currently used style
-	const StelStyle* getCurrentStelStyle() {return currentStelStyle;}
+	QString getCurrentStelStyle() {return flagNightVision ? "night_color" : "color";}
 
 	//! Update all object according to the deltaTime in seconds.
 	void update(double deltaTime);
@@ -227,9 +226,6 @@ private:
 
 	// The audio manager.  Must execute in the main thread.
 	StelAudioMgr* audioMgr;
-
-	// Currently used StelStyle
-	StelStyle* currentStelStyle;
 
 	StelSkyLayerMgr* skyImageMgr;
 

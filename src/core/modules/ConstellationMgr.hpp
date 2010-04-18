@@ -80,7 +80,7 @@ public:
 	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action = StelModule::ReplaceSelection);
 
 	//! Load a color scheme
-	virtual void setStelStyle(const StelStyle& style);
+	virtual void setStelStyle(const QString& section);
 
 	//! Return the value defining the order of call for the given action
 	//! @param actionName the name of the action for which we want the call order

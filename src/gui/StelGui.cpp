@@ -78,6 +78,8 @@ StelGui::StelGui() : topLevelGraphicsWidget(NULL), configurationDialog(NULL), in
 
 StelGui::~StelGui()
 {
+	delete skyGui;
+	skyGui = NULL;
 }
 
 void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidget* astelAppGraphicsWidget)
@@ -504,7 +506,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	skyGui->setGeometry(stelAppGraphicsWidget->geometry());
 	skyGui->updateBarsPos();
 
-	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
+	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
 
 	initDone = true;
 }
@@ -512,15 +514,61 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 //! Reload the current Qt Style Sheet (Debug only)
 void StelGui::reloadStyle()
 {
-	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
+	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
 }
 
 //! Load color scheme from the given ini file and section name
-void StelGui::setStelStyle(const StelStyle& style)
+void StelGui::setStelStyle(const QString& section)
 {
-	qApp->setStyleSheet(style.qtStyleSheet);
+	if (currentStelStyle.confSectionName!=section)
+	{
+		// Load the style sheets
+		currentStelStyle.confSectionName = section;
 
-	skyGui->setStelStyle(style);
+		QString qtStyleFileName;
+		QString htmlStyleFileName;
+
+		if (section=="night_color")
+		{
+			qtStyleFileName = "data/gui/nightStyle.css";
+			htmlStyleFileName = "data/gui/nightHtml.css";
+		}
+		else if (section=="color")
+		{
+			qtStyleFileName = "data/gui/normalStyle.css";
+			htmlStyleFileName = "data/gui/normalHtml.css";
+		}
+
+		// Load Qt style sheet
+		QString styleFilePath;
+		try
+		{
+			styleFilePath = StelFileMgr::findFile(qtStyleFileName);
+		}
+		catch (std::runtime_error& e)
+		{
+			qWarning() << "WARNING: can't find Qt style sheet:" << qtStyleFileName;
+		}
+		QFile styleFile(styleFilePath);
+		styleFile.open(QIODevice::ReadOnly);
+		currentStelStyle.qtStyleSheet = styleFile.readAll();
+
+		// Load HTML style sheet
+		try
+		{
+			styleFilePath = StelFileMgr::findFile(htmlStyleFileName);
+		}
+		catch (std::runtime_error& e)
+		{
+			qWarning() << "WARNING: can't find css:" << htmlStyleFileName;
+		}
+		QFile htmlStyleFile(styleFilePath);
+		htmlStyleFile.open(QIODevice::ReadOnly);
+		currentStelStyle.htmlStyleSheet = htmlStyleFile.readAll();
+	}
+	qApp->setStyleSheet(currentStelStyle.qtStyleSheet);
+
+	skyGui->setStelStyle(currentStelStyle);
 	locationDialog.styleChanged();
 	dateTimeDialog.styleChanged();
 	configurationDialog->styleChanged();

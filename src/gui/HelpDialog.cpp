@@ -40,6 +40,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelLogger.hpp"
+#include "StelGui.hpp"
 
 HelpDialog::HelpDialog()
 {
@@ -264,7 +265,9 @@ void HelpDialog::updateText(void)
 	newHtml += "</table>";
 	newHtml += getFooterText();
 	ui->helpBrowser->clear();
-	ui->helpBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	Q_ASSERT(gui);
+	ui->helpBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->helpBrowser->insertHtml(newHtml);
 	ui->helpBrowser->scrollToAnchor("top");
 
@@ -297,7 +300,7 @@ void HelpDialog::updateText(void)
 	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Andr%1s Mohari").arg(QChar(0x00E1)))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Mike Storm"))) + "</li><ul><p>";
 	ui->aboutBrowser->clear();
-	ui->aboutBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
+	ui->aboutBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->aboutBrowser->insertHtml(newHtml);
 	ui->aboutBrowser->scrollToAnchor("top");
 }

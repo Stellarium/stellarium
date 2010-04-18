@@ -97,7 +97,7 @@ public:
 	virtual void updateSkyCulture(const QString& skyCultureDir);
 
 	//! Load a color scheme
-	virtual void setStelStyle(const StelStyle& style);
+	virtual void setStelStyle(const QString& section);
 
 	//! Used to determine the order in which the various StelModules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;

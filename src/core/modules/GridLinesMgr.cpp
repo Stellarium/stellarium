@@ -34,7 +34,6 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
-#include "StelStyle.hpp"
 #include "StelPainter.hpp"
 
 //! @class SkyGrid
@@ -650,10 +649,9 @@ void GridLinesMgr::draw(StelCore* core)
 	meridianLine->draw(core);
 }
 
-void GridLinesMgr::setStelStyle(const StelStyle& style)
+void GridLinesMgr::setStelStyle(const QString& section)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	QString section = style.confSectionName;
 
 	// Load colors from config file
 	QString defaultColor = conf->value(section+"/default_color").toString();

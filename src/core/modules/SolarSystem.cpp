@@ -35,7 +35,6 @@
 #include "Planet.hpp"
 #include "StelNavigator.hpp"
 #include "StelSkyDrawer.hpp"
-#include "StelStyle.hpp"
 #include "StelUtils.hpp"
 #include "StelPainter.hpp"
 #include "TrailGroup.hpp"
@@ -807,12 +806,10 @@ void SolarSystem::draw(StelCore* core)
 		drawPointer(core);
 }
 
-void SolarSystem::setStelStyle(const StelStyle& style)
+void SolarSystem::setStelStyle(const QString& section)
 {
 	// Load colors from config file
 	QSettings* conf = StelApp::getInstance().getSettings();
-	QString section = style.confSectionName;
-
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/planet_names_color", defaultColor).toString()));
 	setOrbitsColor(StelUtils::strToVec3f(conf->value(section+"/planet_orbits_color", defaultColor).toString()));
