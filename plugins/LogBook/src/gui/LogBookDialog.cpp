@@ -66,12 +66,6 @@ void LogBookDialog::languageChanged()
 	}
 }
 
-void LogBookDialog::setStelStyle(const StelStyle& style)
-{
-	if(dialog) {
-		dialog->setStyleSheet(style.qtStyleSheet);
-	}
-}
 
 void LogBookDialog::styleChanged()
 {
@@ -470,9 +464,6 @@ void LogBookDialog::createDialogContent()
 
 	// All of the table models
 	setupModels();
-
-	//Initialize the style
-	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
 	
 	setupConnections();
 	ui->sessionsListView->setCurrentIndex(fieldModels[SESSIONS]->index(0, 1));	

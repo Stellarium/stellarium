@@ -90,12 +90,6 @@ void LogBookConfigDialog::languageChanged()
 	}
 }
 
-void LogBookConfigDialog::setStelStyle(const StelStyle& style)
-{
-	if(dialog) {
-		dialog->setStyleSheet(style.qtStyleSheet);
-	}
-}
 
 void LogBookConfigDialog::styleChanged()
 {
@@ -126,9 +120,6 @@ void LogBookConfigDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	setupWidgets();
 	setupListViews();
-	
-	//Initialize the style
-	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
 }
 
 void LogBookConfigDialog::setupListViews()

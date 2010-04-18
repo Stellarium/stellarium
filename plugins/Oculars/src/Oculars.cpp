@@ -115,8 +115,6 @@ Oculars::~Oculars()
 	telescopesTableModel = NULL;
 	delete ocularDialog;
 	ocularDialog = NULL;
-	delete normalStyleSheet;
-	delete nightStyleSheet;
 }
 
 /* ********************************************************************* */
@@ -286,13 +284,13 @@ void Oculars::init()
 	styleSheetFile.setFileName(":/ocular/normalStyle.css");
 	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
 	{
-		normalStyleSheet = new QByteArray(styleSheetFile.readAll());
+		normalStyleSheet = styleSheetFile.readAll();
 	}
 	styleSheetFile.close();
 	styleSheetFile.setFileName(":/ocular/nightStyle.css");
 	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
 	{
-		nightStyleSheet = new QByteArray(styleSheetFile.readAll());
+		nightStyleSheet = styleSheetFile.readAll();
 	}
 	styleSheetFile.close();
 }
@@ -304,9 +302,9 @@ void Oculars::deinit()
 	QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection);
 }
 
-void Oculars::setStelStyle(const StelStyle& style)
+void Oculars::setStelStyle(const QString& section)
 {
-	ocularDialog->setStelStyle(style);
+	ocularDialog->updateStyle();
 }
 
 const StelStyle Oculars::getModuleStyleSheet(const StelStyle& style)
@@ -314,11 +312,11 @@ const StelStyle Oculars::getModuleStyleSheet(const StelStyle& style)
 	StelStyle pluginStyle(style);
 	if (style.confSectionName == "color")
 	{
-		pluginStyle.qtStyleSheet.append(*normalStyleSheet);
+		pluginStyle.qtStyleSheet.append(normalStyleSheet);
 	}
 	else
 	{
-		pluginStyle.qtStyleSheet.append(*nightStyleSheet);
+		pluginStyle.qtStyleSheet.append(nightStyleSheet);
 	}
 	return pluginStyle;
 }

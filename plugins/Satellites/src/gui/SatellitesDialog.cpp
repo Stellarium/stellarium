@@ -32,6 +32,7 @@
 #include "StelObjectMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelStyle.hpp"
+#include "StelGui.hpp"
 
 // When i18n is implemented, uncomment the StelTranslator.hpp include
 // and remove the definition of q_
@@ -60,11 +61,13 @@ void SatellitesDialog::languageChanged()
 		ui->retranslateUi(dialog);
 }
 
-void SatellitesDialog::setStelStyle(const StelStyle & style)
+void SatellitesDialog::updateStyle()
 {
-	if(dialog)
+	if (dialog)
 	{
-		const StelStyle pluginStyle = GETSTELMODULE(Satellites)->getModuleStyleSheet(style);
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
+		const StelStyle pluginStyle = GETSTELMODULE(Satellites)->getModuleStyleSheet(gui->getStelStyle());
 		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
 	}
@@ -111,12 +114,14 @@ void SatellitesDialog::createDialogContent()
 
 	// About tab
 	setAboutHtml();
-	ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	Q_ASSERT(gui);
+	ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	updateGuiFromSettings();
 
 	//Initialize the style
-	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
+	updateStyle();
 }
 
 void SatellitesDialog::groupFilterChanged(int index)

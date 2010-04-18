@@ -78,14 +78,16 @@ void SlewDialog::createDialogContent()
 	updateTelescopeList();
 	
 	//Initialize the style
-	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
+	updateStyle();
 }
 
-void SlewDialog::setStelStyle(const StelStyle& style)
+void SlewDialog::updateStyle()
 {
 	if(dialog)
 	{
-		const StelStyle pluginStyle = telescopeManager->getModuleStyleSheet(style);
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
+		const StelStyle pluginStyle = telescopeManager->getModuleStyleSheet(gui->getStelStyle());
 		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
 	}
 }

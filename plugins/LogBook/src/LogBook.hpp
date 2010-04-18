@@ -49,7 +49,7 @@ public:
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	virtual void init();
-	virtual void setStelStyle(const StelStyle& style);
+	virtual void setStelStyle(const QString& section);
 	virtual void update(double deltaTime) {;}
 
 public slots:
