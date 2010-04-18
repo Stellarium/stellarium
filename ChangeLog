@@ -23,6 +23,7 @@ Changed:
 - optimized loading of planet textures (lazy loading).
 - restructured src/ subdirectories to match code dependencies. Directories modules/, external/ and planetsephems/ are now under core/.
 - Stars positions and grid are now coded in float instead of double, to avoid huge memory consomption when loading all 9 star catalogs.
+- Improved management of OpenGL context in StelPainter.
 - StelStyle class was moved from core to GUI library.
 - GUI related resources are now compiled as part of GUI library.
 
