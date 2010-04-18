@@ -31,7 +31,7 @@ public:
 	~StelNoGui() {;}
 	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraphicsWidget* stelAppGraphicsWidget) {;}
 	virtual void updateI18n() {;}
-	virtual void setStelStyle(const StelStyle& style) {;}
+	virtual void setStelStyle(const QString& section) {;}
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {dummyInfoTextFilter=aflags;}
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const {return dummyInfoTextFilter;}
 	virtual class QProgressBar* addProgressBar();
