@@ -129,7 +129,8 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	glWidget->updateGL();
 	setViewport(glWidget);
 
-	setOptimizationFlags(QGraphicsView::DontSavePainterState);
+	// This line seems to cause font aliasing troubles on win32
+	// setOptimizationFlags(QGraphicsView::DontSavePainterState);
 
 	setScene(new QGraphicsScene());
 	scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
