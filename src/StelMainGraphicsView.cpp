@@ -320,18 +320,24 @@ void StelMainGraphicsView::keyReleaseEvent(QKeyEvent* event)
 
 void StelMainGraphicsView::focusOutEvent(QFocusEvent* event)
 {
-	if (StelMainWindow::getInstance().isFullScreen())
-		StelMainWindow::getInstance().showMinimized();
 	QCoreApplication::processEvents();
 	QGraphicsView::focusOutEvent(event);
 }
 
 void StelMainGraphicsView::focusInEvent(QFocusEvent* event)
 {
-	//TODO: Test if this is really necessary
-	StelMainWindow::getInstance().activateWindow();
 	QCoreApplication::processEvents();
 	QGraphicsView::focusInEvent(event);
+}
+
+bool StelMainGraphicsView::event(QEvent *event)
+{
+	if (event->type() == QEvent::WindowDeactivate)
+	{
+		if (StelMainWindow::getInstance().isFullScreen())
+			StelMainWindow::getInstance().showMinimized();
+	}
+	return QGraphicsView::event(event);
 }
 
 //! Delete openGL textures (to call before the GLContext disappears)
