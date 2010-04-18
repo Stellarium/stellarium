@@ -122,7 +122,7 @@ void Satellites::init()
 		gui->getGuiActions("actionShow_Satellite_Labels")->setChecked(Satellite::showLabels);
 
 		// Gui toolbar button
-		pxmapGlow = new QPixmap(":/graphicGui/gui/glow32x32.png");
+		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
 		pxmapOnIcon = new QPixmap(":/satellites/bt_satellites_on.png");
 		pxmapOffIcon = new QPixmap(":/satellites/bt_satellites_off.png");
 		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiActions("actionShow_Satellite_Hints"));

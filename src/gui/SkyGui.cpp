@@ -68,8 +68,8 @@ SkyGui::SkyGui(): QGraphicsWidget(), stelGui(NULL)
 	// Construct the Windows buttons bar
 	winBar = new LeftStelBar(NULL);
 	// Construct the bottom buttons bar
-	buttonBar = new BottomStelBar(NULL, QPixmap(":/graphicGui/gui/btbg-left.png"), QPixmap(":/graphicGui/gui/btbg-right.png"),
-								  QPixmap(":/graphicGui/gui/btbg-middle.png"), QPixmap(":/graphicGui/gui/btbg-single.png"));
+	buttonBar = new BottomStelBar(NULL, QPixmap(":/graphicGui/btbg-left.png"), QPixmap(":/graphicGui/btbg-right.png"),
+								  QPixmap(":/graphicGui/btbg-middle.png"), QPixmap(":/graphicGui/btbg-single.png"));
 	infoPanel = new InfoPanel(NULL);
 
 	// Used to display some progress bar in the lower right corner, e.g. when loading a file
@@ -107,12 +107,12 @@ void SkyGui::init(StelGui* astelGui)
 
 	// Create the 2 auto hide buttons in the bottom left corner
 	autoHidebts = new CornerButtons();
-	QPixmap pxmapOn = QPixmap(":/graphicGui/gui/HorizontalAutoHideOn.png");
-	QPixmap pxmapOff = QPixmap(":/graphicGui/gui/HorizontalAutoHideOff.png");
+	QPixmap pxmapOn = QPixmap(":/graphicGui/HorizontalAutoHideOn.png");
+	QPixmap pxmapOff = QPixmap(":/graphicGui/HorizontalAutoHideOff.png");
 	btHorizAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), stelGui->getGuiActions("actionAutoHideHorizontalButtonBar"), true);
 	btHorizAutoHide->setChecked(autoHideHorizontalButtonBar);
-	pxmapOn = QPixmap(":/graphicGui/gui/VerticalAutoHideOn.png");
-	pxmapOff = QPixmap(":/graphicGui/gui/VerticalAutoHideOff.png");
+	pxmapOn = QPixmap(":/graphicGui/VerticalAutoHideOn.png");
+	pxmapOff = QPixmap(":/graphicGui/VerticalAutoHideOff.png");
 	btVertAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), stelGui->getGuiActions("actionAutoHideVerticalButtonBar"), true);
 	btVertAutoHide->setChecked(autoHideVerticalButtonBar);
 

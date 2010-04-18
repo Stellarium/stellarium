@@ -210,7 +210,7 @@ void LogBook::initializeActions()
 
 	// Make a toolbar button
 	try {
-		pxmapGlow = new QPixmap(":/graphicGui/gui/glow32x32.png");
+		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
 		pxmapOnIcon = new QPixmap(":/logbook/bt_Logbook_on.png");
 		pxmapOffIcon = new QPixmap(":/logbook/bt_Logbook_off.png");
 

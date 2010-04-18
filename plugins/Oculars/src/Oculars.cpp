@@ -548,7 +548,7 @@ void Oculars::initializeActions()
 
 	// Make a toolbar button
 	try {
-		pxmapGlow = new QPixmap(":/graphicGui/gui/glow32x32.png");
+		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
 		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");
 		pxmapOffIcon = new QPixmap(":/ocular/bt_ocular_off.png");
 

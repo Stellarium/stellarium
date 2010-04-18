@@ -747,7 +747,7 @@
                  </property>
                  <property name="icon">
                   <iconset resource="../../data/mainRes.qrc">
-                   <normaloff>:/graphicGui/gui/folder.png</normaloff>:/graphicGui/gui/folder.png</iconset>
+				   <normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -788,7 +788,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../../data/mainRes.qrc">
-                 <normaloff>:/graphicGui/gui/btTimeRealtime-off.png</normaloff>:/graphicGui/gui/btTimeRealtime-off.png</iconset>
+				 <normaloff>:/graphicGui/btTimeRealtime-off.png</normaloff>:/graphicGui/btTimeRealtime-off.png</iconset>
                </property>
                <property name="description">
                 <string>Download this file to view even more stars</string>
@@ -910,8 +910,8 @@
                    </property>
                    <property name="icon">
                     <iconset resource="../../data/mainRes.qrc">
-                     <normaloff>:/graphicGui/gui/btScriptRun-on.png</normaloff>
-                     <disabledoff>:/graphicGui/gui/btScriptRun-off.png</disabledoff>:/graphicGui/gui/btScriptRun-on.png</iconset>
+					 <normaloff>:/graphicGui/btScriptRun-on.png</normaloff>
+					 <disabledoff>:/graphicGui/btScriptRun-off.png</disabledoff>:/graphicGui/btScriptRun-on.png</iconset>
                    </property>
                   </widget>
                  </item>
@@ -928,8 +928,8 @@
                    </property>
                    <property name="icon">
                     <iconset resource="../../data/mainRes.qrc">
-                     <normaloff>:/graphicGui/gui/btScriptStop-on.png</normaloff>
-                     <disabledoff>:/graphicGui/gui/btScriptStop-off.png</disabledoff>:/graphicGui/gui/btScriptStop-on.png</iconset>
+					 <normaloff>:/graphicGui/btScriptStop-on.png</normaloff>
+					 <disabledoff>:/graphicGui/btScriptStop-off.png</disabledoff>:/graphicGui/btScriptStop-on.png</iconset>
                    </property>
                   </widget>
                  </item>
@@ -1080,7 +1080,7 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/gui/tabicon-main.png</normalon>
+		   <normalon>:/graphicGui/tabicon-main.png</normalon>
           </iconset>
          </property>
         </item>
@@ -1090,7 +1090,7 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/gui/tabicon-navigation.png</normalon>
+		   <normalon>:/graphicGui/tabicon-navigation.png</normalon>
           </iconset>
          </property>
         </item>
@@ -1100,7 +1100,7 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/gui/tabicon-tools.png</normalon>
+		   <normalon>:/graphicGui/tabicon-tools.png</normalon>
           </iconset>
          </property>
         </item>
@@ -1110,7 +1110,7 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/gui/tabicon-scripts.png</normalon>
+		   <normalon>:/graphicGui/tabicon-scripts.png</normalon>
           </iconset>
          </property>
         </item>
@@ -1120,7 +1120,7 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/gui/tabicon-tools.png</normalon>
+		   <normalon>:/graphicGui/tabicon-tools.png</normalon>
           </iconset>
          </property>
         </item>
