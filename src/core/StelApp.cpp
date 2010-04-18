@@ -314,12 +314,13 @@ void StelApp::init(QSettings* conf)
 	QString proxyPassword = confSettings->value("proxy/password").toString();
 	QVariant proxyPort = confSettings->value("proxy/port");
 
-	if (proxyName!="" && !proxyPort.isNull()){
-
+	if (proxyName!="" && !proxyPort.isNull())
+	{
 		QNetworkProxy proxy(QNetworkProxy::HttpProxy);
 		proxy.setHostName(proxyName);
 		proxy.setPort(proxyPort.toUInt());
-		if(proxyUser!="" && proxyPassword!="") {
+		if(proxyUser!="" && proxyPassword!="")
+		{
 			proxy.setUser(proxyUser);
 			proxy.setPassword(proxyPassword);
 		}
@@ -482,48 +483,52 @@ void StelApp::setColorScheme(const QString& section)
 	if (!currentStelStyle)
 		currentStelStyle = new StelStyle;
 
-	currentStelStyle->confSectionName = section;
+	if (currentStelStyle->confSectionName!=section)
+	{
+		// Load the style sheets
+		currentStelStyle->confSectionName = section;
 
-	QString qtStyleFileName;
-	QString htmlStyleFileName;
+		QString qtStyleFileName;
+		QString htmlStyleFileName;
 
-	if (section=="night_color")
-	{
-		qtStyleFileName = "data/gui/nightStyle.css";
-		htmlStyleFileName = "data/gui/nightHtml.css";
-	}
-	else if (section=="color")
-	{
-		qtStyleFileName = "data/gui/normalStyle.css";
-		htmlStyleFileName = "data/gui/normalHtml.css";
-	}
+		if (section=="night_color")
+		{
+			qtStyleFileName = "data/gui/nightStyle.css";
+			htmlStyleFileName = "data/gui/nightHtml.css";
+		}
+		else if (section=="color")
+		{
+			qtStyleFileName = "data/gui/normalStyle.css";
+			htmlStyleFileName = "data/gui/normalHtml.css";
+		}
 
-	// Load Qt style sheet
-	QString styleFilePath;
-	try
-	{
-		styleFilePath = StelFileMgr::findFile(qtStyleFileName);
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "WARNING: can't find Qt style sheet:" << qtStyleFileName;
-	}
-	QFile styleFile(styleFilePath);
-	styleFile.open(QIODevice::ReadOnly);
-	currentStelStyle->qtStyleSheet = styleFile.readAll();
+		// Load Qt style sheet
+		QString styleFilePath;
+		try
+		{
+			styleFilePath = StelFileMgr::findFile(qtStyleFileName);
+		}
+		catch (std::runtime_error& e)
+		{
+			qWarning() << "WARNING: can't find Qt style sheet:" << qtStyleFileName;
+		}
+		QFile styleFile(styleFilePath);
+		styleFile.open(QIODevice::ReadOnly);
+		currentStelStyle->qtStyleSheet = styleFile.readAll();
 
-	// Load HTML style sheet
-	try
-	{
-		styleFilePath = StelFileMgr::findFile(htmlStyleFileName);
+		// Load HTML style sheet
+		try
+		{
+			styleFilePath = StelFileMgr::findFile(htmlStyleFileName);
+		}
+		catch (std::runtime_error& e)
+		{
+			qWarning() << "WARNING: can't find css:" << htmlStyleFileName;
+		}
+		QFile htmlStyleFile(styleFilePath);
+		htmlStyleFile.open(QIODevice::ReadOnly);
+		currentStelStyle->htmlStyleSheet = htmlStyleFile.readAll();
 	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "WARNING: can't find css:" << htmlStyleFileName;
-	}
-	QFile htmlStyleFile(styleFilePath);
-	htmlStyleFile.open(QIODevice::ReadOnly);
-	currentStelStyle->htmlStyleSheet = htmlStyleFile.readAll();
 
 	// Send the event to every StelModule
 	foreach (StelModule* iter, moduleMgr->getAllModules())
