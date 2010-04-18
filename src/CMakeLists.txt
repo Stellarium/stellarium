@@ -396,7 +396,7 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/StelGui.cpp
 		gui/SkyGui.hpp
 		gui/SkyGui.cpp
-		core/StelStyle.hpp
+		gui/StelStyle.hpp
 		gui/StelGuiItems.hpp
 		gui/StelGuiItems.cpp
 		gui/HelpDialog.hpp
