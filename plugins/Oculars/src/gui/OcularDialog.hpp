@@ -47,7 +47,7 @@ public:
 	OcularDialog(QSqlTableModel *ocularsTableModel, QSqlTableModel *telescopesTableModel);
 	virtual ~OcularDialog();
 	void languageChanged();
-	virtual void setStelStyle(const StelStyle& style);
+	void updateStyle();
 
 	//! Notify that the application style changed
 	void styleChanged();

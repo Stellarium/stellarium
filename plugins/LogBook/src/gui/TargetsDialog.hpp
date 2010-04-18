@@ -37,7 +37,6 @@ public:
 	TargetsDialog(QMap<QString, QSqlTableModel *> theTableModels);
 	virtual ~TargetsDialog();
 	void languageChanged();
-	virtual void setStelStyle(const StelStyle& style);
 	
 	//! Notify that the application style changed
 	void styleChanged();

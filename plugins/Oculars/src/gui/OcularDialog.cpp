@@ -98,10 +98,12 @@ void OcularDialog::languageChanged()
 	}
 }
 
-void OcularDialog::setStelStyle(const StelStyle& style)
+void OcularDialog::updateStyle()
 {
 	if(dialog) {
-		const StelStyle pluginStyle = GETSTELMODULE(Oculars)->getModuleStyleSheet(style);
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
+		const StelStyle pluginStyle = GETSTELMODULE(Oculars)->getModuleStyleSheet(gui->getStelStyle());
 		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
 		ui->textBrowser->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
 	}
@@ -320,6 +322,6 @@ void OcularDialog::createDialogContent()
 	}
 	
 	//Initialize the style
-	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
+	updateStyle();
 }
 

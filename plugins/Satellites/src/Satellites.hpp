@@ -77,7 +77,7 @@ public:
 	virtual void update(double deltaTime);
 	virtual void draw(StelCore* core);
 	virtual void drawPointer(StelCore* core, StelPainter& painter);
-	virtual void setStelStyle(const StelStyle& style);
+	virtual void setStelStyle(const QString& section);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -233,8 +233,8 @@ private:
 
 	// GUI
 	SatellitesDialog* configDialog;
-	QByteArray * normalStyleSheet;
-	QByteArray * nightStyleSheet;
+	QByteArray normalStyleSheet;
+	QByteArray nightStyleSheet;
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer

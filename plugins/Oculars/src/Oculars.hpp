@@ -58,7 +58,7 @@ public:
 //	virtual void handleKeys(class QKeyEvent* event);
 	virtual void handleMouseClicks(class QMouseEvent* event);
 	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
-	virtual void setStelStyle(const StelStyle& style);
+	virtual void setStelStyle(const QString& style);
 	virtual void update(double deltaTime) {;}
 	
 	//! Returns the module-specific style sheet.
@@ -162,8 +162,8 @@ private:
 	QSqlTableModel *telescopesTableModel;
 	
 	//Styles
-	QByteArray * normalStyleSheet;
-	QByteArray * nightStyleSheet;
+	QByteArray normalStyleSheet;
+	QByteArray nightStyleSheet;
 };
 
 
