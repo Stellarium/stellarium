@@ -61,7 +61,7 @@ public:
 	//! Sets the colors of the grids and great circles.
 	//! Sets the colors of the Equatorial Grid, Azimuthal Grid,
 	//! Meridian Line, Equator Line and Ecliptic Line.
-	virtual void setStelStyle(const StelStyle& style);
+	virtual void setStelStyle(const QString& section);
 
 	//! Used to determine the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;

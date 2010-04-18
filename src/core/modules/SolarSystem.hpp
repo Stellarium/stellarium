@@ -76,7 +76,7 @@ public:
 	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	//! Load a color scheme
-	virtual void setStelStyle(const StelStyle& style);
+	virtual void setStelStyle(const QString& section);
 
 	//! Used to determine what order to draw the various StelModules.
 	virtual double getCallOrder(StelModuleActionName actionName) const;

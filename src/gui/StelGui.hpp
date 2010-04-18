@@ -32,6 +32,7 @@
 #include "ScriptConsole.hpp"
 #endif
 #include "StelGuiBase.hpp"
+#include "StelStyle.hpp"
 
 #include <QGraphicsTextItem>
 
@@ -62,7 +63,8 @@ public:
 	virtual void updateI18n();
 
 	//! Load color scheme from the given ini file and section name
-	virtual void setStelStyle(const StelStyle& style);
+	virtual void setStelStyle(const QString& section);
+	StelStyle getStelStyle() const {return currentStelStyle;}
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to the StelGui class
@@ -179,6 +181,9 @@ private:
 	bool guiHidden;
 	
 	QSizeF savedProgressBarSize;
+
+	// Currently used StelStyle
+	StelStyle currentStelStyle;
 };
 
 //! Allow to load the GUI as a static plugin

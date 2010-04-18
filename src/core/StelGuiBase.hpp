@@ -21,7 +21,6 @@
 #define _STELGUIBASE_HPP_
 
 #include "StelObject.hpp"
-#include "StelStyle.hpp"
 
 #include <QtPlugin>
 
@@ -41,8 +40,8 @@ public:
 	//! Translate all texts to the new Locale.
 	virtual void updateI18n();
 
-	//! Load color scheme from the given ini file and section name.
-	virtual void setStelStyle(const StelStyle& style) =0;
+	//! Load color scheme matchin the section name.
+	virtual void setStelStyle(const QString& section) =0;
 
 	//! Get a pointer on the info panel used to display selected object info
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) =0;

@@ -42,7 +42,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
-#include "StelStyle.hpp"
 #include "StelPainter.hpp"
 
 using namespace std;
@@ -160,15 +159,15 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	lastLoadedSkyCulture = skyCultureDir;
 }
 
-void ConstellationMgr::setStelStyle(const StelStyle& style)
+void ConstellationMgr::setStelStyle(const QString& section)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
 	// Load colors from config file
-	QString defaultColor = conf->value(style.confSectionName+"/default_color").toString();
-	setLinesColor(StelUtils::strToVec3f(conf->value(style.confSectionName+"/const_lines_color",    defaultColor).toString()));
-	setBoundariesColor(StelUtils::strToVec3f(conf->value(style.confSectionName+"/const_boundary_color", "0.8,0.3,0.3").toString()));
-	setLabelsColor(StelUtils::strToVec3f(conf->value(style.confSectionName+"/const_names_color",    defaultColor).toString()));
+	QString defaultColor = conf->value(section+"/default_color").toString();
+	setLinesColor(StelUtils::strToVec3f(conf->value(section+"/const_lines_color", defaultColor).toString()));
+	setBoundariesColor(StelUtils::strToVec3f(conf->value(section+"/const_boundary_color", "0.8,0.3,0.3").toString()));
+	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/const_names_color", defaultColor).toString()));
 }
 
 void ConstellationMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)

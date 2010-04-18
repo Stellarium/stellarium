@@ -50,7 +50,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelIniParser.hpp"
-#include "StelStyle.hpp"
 #include "StelPainter.hpp"
 #include "StelJsonParser.hpp"
 #include "ZoneArray.hpp"
@@ -265,11 +264,10 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelNavigator * nav)
 	}
 }
 
-void StarMgr::setStelStyle(const StelStyle& style)
+void StarMgr::setStelStyle(const QString& section)
 {
 	// Load colors from config file
 	QSettings* conf = StelApp::getInstance().getSettings();
-	QString section = style.confSectionName;
 
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setLabelColor(StelUtils::strToVec3f(conf->value(section+"/star_label_color", defaultColor).toString()));

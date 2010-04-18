@@ -39,7 +39,6 @@
 #include "Planet.hpp"
 #include "StelIniParser.hpp"
 #include "StelSkyDrawer.hpp"
-#include "StelStyle.hpp"
 #include "StelPainter.hpp"
 
 // Class which manages the cardinal points displaying
@@ -283,11 +282,10 @@ void LandscapeMgr::init()
 	connect(this, SIGNAL(requestSetCurrentLandscapeName(const QString&)), this, SLOT(doSetCurrentLandscapeName(const QString&)));
 }
 
-void LandscapeMgr::setStelStyle(const StelStyle& style)
+void LandscapeMgr::setStelStyle(const QString& section)
 {
 	// Load colors from config file
 	QSettings* conf = StelApp::getInstance().getSettings();
-	QString section = style.confSectionName;
 
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setColorCardinalPoints(StelUtils::strToVec3f(conf->value(section+"/cardinal_color", defaultColor).toString()));

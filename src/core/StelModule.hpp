@@ -26,7 +26,6 @@
 // Predeclaration
 class StelCore;
 class QSettings;
-class StelStyle;
 
 //! This is the common base class for all the main components of stellarium.
 //! Standard StelModules are the one displaying the stars, the constellations, the planets etc..
@@ -119,7 +118,7 @@ public:
 
 	//! Load the given color style
 	//! @param style the style object containing all necessary information on how to style widgets and text
-	virtual void setStelStyle(const StelStyle& style) {;}
+	virtual void setStelStyle(const QString& section) {;}
 
 	//! Define the possible action for which an order is defined
 	enum StelModuleActionName

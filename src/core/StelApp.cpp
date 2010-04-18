@@ -50,7 +50,6 @@
 #include "StelJsonParser.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelAudioMgr.hpp"
-#include "StelStyle.hpp"
 #include "StelGuiBase.hpp"
 #include "StelPainter.hpp"
 
@@ -152,10 +151,6 @@ StelApp::StelApp(QObject* parent)
 	singleton = this;
 
 	moduleMgr = new StelModuleMgr();
-
-	// Init a default StelStyle, before loading modules, it will be overrided
-	currentStelStyle = NULL;
-	setColorScheme("color");
 }
 
 /*************************************************************************
@@ -179,7 +174,6 @@ StelApp::~StelApp()
 	delete textureMgr; textureMgr=NULL;
 	delete planetLocationMgr; planetLocationMgr=NULL;
 	delete moduleMgr; moduleMgr=NULL; // Delete the secondary instance
-	delete currentStelStyle;
 
 	Q_ASSERT(singleton);
 	singleton = NULL;
@@ -480,63 +474,13 @@ void StelApp::handleKeys(QKeyEvent* event)
 // Set the colorscheme for all the modules
 void StelApp::setColorScheme(const QString& section)
 {
-	if (!currentStelStyle)
-		currentStelStyle = new StelStyle;
-
-	if (currentStelStyle->confSectionName!=section)
-	{
-		// Load the style sheets
-		currentStelStyle->confSectionName = section;
-
-		QString qtStyleFileName;
-		QString htmlStyleFileName;
-
-		if (section=="night_color")
-		{
-			qtStyleFileName = "data/gui/nightStyle.css";
-			htmlStyleFileName = "data/gui/nightHtml.css";
-		}
-		else if (section=="color")
-		{
-			qtStyleFileName = "data/gui/normalStyle.css";
-			htmlStyleFileName = "data/gui/normalHtml.css";
-		}
-
-		// Load Qt style sheet
-		QString styleFilePath;
-		try
-		{
-			styleFilePath = StelFileMgr::findFile(qtStyleFileName);
-		}
-		catch (std::runtime_error& e)
-		{
-			qWarning() << "WARNING: can't find Qt style sheet:" << qtStyleFileName;
-		}
-		QFile styleFile(styleFilePath);
-		styleFile.open(QIODevice::ReadOnly);
-		currentStelStyle->qtStyleSheet = styleFile.readAll();
-
-		// Load HTML style sheet
-		try
-		{
-			styleFilePath = StelFileMgr::findFile(htmlStyleFileName);
-		}
-		catch (std::runtime_error& e)
-		{
-			qWarning() << "WARNING: can't find css:" << htmlStyleFileName;
-		}
-		QFile htmlStyleFile(styleFilePath);
-		htmlStyleFile.open(QIODevice::ReadOnly);
-		currentStelStyle->htmlStyleSheet = htmlStyleFile.readAll();
-	}
-
 	// Send the event to every StelModule
 	foreach (StelModule* iter, moduleMgr->getAllModules())
 	{
-		iter->setStelStyle(*currentStelStyle);
+		iter->setStelStyle(section);
 	}
 	if (getGui())
-		getGui()->setStelStyle(*currentStelStyle);
+		getGui()->setStelStyle(section);
 }
 
 //! Set flag for activating night vision mode
