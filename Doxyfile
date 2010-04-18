@@ -5,7 +5,7 @@
 #---------------------------------------------------------------------------
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = Stellarium
-PROJECT_NUMBER         = 0.10.1
+PROJECT_NUMBER         = 0.10.5
 OUTPUT_DIRECTORY       = ./builds/doc
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
@@ -101,7 +101,7 @@ FILE_PATTERNS          = *.h \
                          *.hpp \
                          *.doxygen
 RECURSIVE              = YES
-EXCLUDE                = ./src/external
+EXCLUDE                = ./src/core/external
 EXCLUDE_SYMLINKS       = NO
 EXCLUDE_PATTERNS       = */.svn/*
 EXCLUDE_SYMBOLS        = 
