@@ -57,7 +57,7 @@ public:
 	virtual void init();
 	virtual void draw(StelCore *core);
 	virtual void update(double deltaTime);
-	virtual void setStelStyle(const StelStyle& style);
+	virtual void setStelStyle(const QString& section);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
 	///////////////////////////////////////////////////////////////////////////

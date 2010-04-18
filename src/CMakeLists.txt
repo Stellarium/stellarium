@@ -101,7 +101,6 @@ SET(stellarium_lib_SRCS
 	core/StelTextureTypes.hpp
 	core/StelToneReproducer.cpp
 	core/StelToneReproducer.hpp
-	core/StelStyle.hpp
 	core/StelSkyLayerMgr.cpp
 	core/StelSkyLayerMgr.hpp
 	core/StelSkyLayer.hpp
@@ -397,6 +396,7 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/StelGui.cpp
 		gui/SkyGui.hpp
 		gui/SkyGui.cpp
+		core/StelStyle.hpp
 		gui/StelGuiItems.hpp
 		gui/StelGuiItems.cpp
 		gui/HelpDialog.hpp
