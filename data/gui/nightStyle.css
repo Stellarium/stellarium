@@ -90,7 +90,7 @@ QFrame#LocationBar, QFrame#DateTimeBar, QFrame#SearchBar, QFrame#TimeBar, QFrame
 }
 
 #dateTimeDialogForm QSpinBox::up-arrow {
-	image: url(:/graphicGui/gui/nv_spinup.png);
+	image: url(:/graphicGui/nv_spinup.png);
 	subcontrol-origin: border;
 	subcontrol-position: bottom center;
 	padding-bottom: 20px;
@@ -107,7 +107,7 @@ QFrame#LocationBar, QFrame#DateTimeBar, QFrame#SearchBar, QFrame#TimeBar, QFrame
 }
 
 #dateTimeDialogForm QSpinBox::down-arrow {
-	image: url(:/graphicGui/gui/nv_spindown.png);
+	image: url(:/graphicGui/nv_spindown.png);
 	subcontrol-origin: border;
 	subcontrol-position: top center;
 	padding-top: 20px;
@@ -213,11 +213,11 @@ QPushButton:flat {
 QPushButton#closeStelWindow {
 	border: 0px;
 	background: none;
-	background-image: url(:/graphicGui/gui/closeButton.png);
+	background-image: url(:/graphicGui/closeButton.png);
 }
 
 QPushButton:hover#closeStelWindow {
-	background-image: url(:/graphicGui/gui/closeButton-hover.png);
+	background-image: url(:/graphicGui/closeButton-hover.png);
 }
 
 /**********************************************LocationDialog*******************************************************/
@@ -226,7 +226,7 @@ QLineEdit#citySearchLineEdit {
 	margin: 0px 0px 4px 0px;
 	padding: 4px;
 	padding-left: 32px;
-	background-image: url(:/graphicGui/gui/searchBoxBackground.png);
+	background-image: url(:/graphicGui/searchBoxBackground.png);
 	background-repeat: none;
 	background-position: center left;
 	border: none;
@@ -270,7 +270,7 @@ QScrollBar::up-arrow {
 	subcontrol-position: top; /* position at the top right corner */
 	width: 16px;
 	height: 20px;
-	image: url(:/graphicGui/gui/nv_spinup.png);
+	image: url(:/graphicGui/nv_spinup.png);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(38, 0, 0), stop: 1 rgb(24, 0, 0));
 }
 
@@ -279,7 +279,7 @@ QScrollBar::down-arrow {
 	subcontrol-position: bottom; /* position at the bottom right corner */
 	width: 16px;
 	height: 20px;
-	image: url(:/graphicGui/gui/nv_spindown.png);
+	image: url(:/graphicGui/nv_spindown.png);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(38, 0, 0), stop: 1 rgb(24, 0, 0));
 }
 
@@ -321,7 +321,7 @@ QScrollBar::right-arrow {
 	subcontrol-position: left; /* position at the top right corner */
 	height: 16px;
 	width: 20px;
-	image: url(:/graphicGui/gui/nv_spinleft.png);
+	image: url(:/graphicGui/nv_spinleft.png);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(38, 0, 0), stop: 1 rgb(24, 0, 0));
 }
 
@@ -330,7 +330,7 @@ QScrollBar::left-arrow {
 	subcontrol-position: right; /* position at the bottom right corner */
 	height: 16px;
 	width: 20px;
-	image: url(:/graphicGui/gui/nv_spinright.png);
+	image: url(:/graphicGui/nv_spinright.png);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(38, 0, 0), stop: 1 rgb(24, 0, 0));
 }
 
@@ -522,11 +522,11 @@ QCheckBox::indicator {
 }
 
 QCheckBox::indicator:checked {
-	image: url(:/graphicGui/gui/nv_checkbox-checked.png);
+	image: url(:/graphicGui/nv_checkbox-checked.png);
 }
 
 QCheckBox::indicator:unchecked {
-	image: url(:/graphicGui/gui/nv_checkbox-unchecked.png);
+	image: url(:/graphicGui/nv_checkbox-unchecked.png);
 }
 
 /*QCheckBox:disabled {
@@ -546,11 +546,11 @@ QRadioButton::indicator {
 }
 
 QRadioButton::indicator:checked {
-	image: url(:/graphicGui/gui/nv_radio-checked.png);
+	image: url(:/graphicGui/nv_radio-checked.png);
 }
 
 QRadioButton::indicator:unchecked {
-	image: url(:/graphicGui/gui/nv_radio-unchecked.png);
+	image: url(:/graphicGui/nv_radio-unchecked.png);
 }
 
 /*AngleSpinBox {
@@ -570,7 +570,7 @@ AngleSpinBox::up-button {
 	border: solid 1px;
 	border-right-color: rgb(0, 0, 0);
 	border-top-color: rgb(0, 0, 0);
-	image: url(:/graphicGui/gui/nv_spinup.png);
+	image: url(:/graphicGui/nv_spinup.png);
 	border-width: 1px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 0, 0), stop: 1 rgb(52, 0, 0));
 }
@@ -582,7 +582,7 @@ AngleSpinBox::down-button {
 	border: solid 1px;
 	border-right-color: rgb(0, 0, 0);
 	border-bottom-color: rgb(0, 0, 0);
-	image: url(:/graphicGui/gui/nv_spindown.png);
+	image: url(:/graphicGui/nv_spindown.png);
 	border-width: 1px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(48, 0, 0), stop: 1 rgb(28, 0, 0));
 }*/
@@ -602,7 +602,7 @@ QSpinBox::up-button, QTimeEdit::up-button, QDoubleSpinBox::up-button, AngleSpinB
 	border: 1px solid rgba(0, 0, 0, 0%);
 	border-top: 1px solid rgb(0, 0, 0);
 	border-right: 1px solid rgb(0, 0, 0);
-	image: url(:/graphicGui/gui/nv_spinup.png);
+	image: url(:/graphicGui/nv_spinup.png);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 0, 0), stop: 1 rgb(52, 0, 0));
 }
 
@@ -613,16 +613,16 @@ QSpinBox::down-button, QTimeEdit::down-button, QDoubleSpinBox::down-button, Angl
 	border: 1px solid rgba(0, 0, 0, 0%);
 	border-right: 1px solid rgb(0, 0, 0);
 	border-bottom: 1px solid rgb(0, 0, 0);
-	image: url(:/graphicGui/gui/nv_spindown.png);
+	image: url(:/graphicGui/nv_spindown.png);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(48, 0, 0), stop: 1 rgb(28, 0, 0));
 }
 
 QSpinBox::down-button:pressed, QTimeEdit::down-button:pressed, QDoubleSpinBox::down-button:pressed, AngleSpinBox::down-button:pressed {
-	image: url(:/graphicGui/gui/spindown-pressed.png);
+	image: url(:/graphicGui/spindown-pressed.png);
 }
 
 QSpinBox::up-button:pressed, QTimeEdit::up-button:pressed, QDoubleSpinBox::up-button:pressed, AngleSpinBox::up-button:pressed {
-	image: url(:/graphicGui/gui/spinup-pressed.png);
+	image: url(:/graphicGui/spinup-pressed.png);
 }
 
 QComboBox::drop-down, .QDateTimeEdit::drop-down {
@@ -635,12 +635,12 @@ QComboBox::drop-down, .QDateTimeEdit::drop-down {
 QComboBox::down-arrow, .QDateTimeEdit::down-arrow {
 	width: 20px;
 	height: 22px;
-	image: url(:/graphicGui/gui/nv_spindown.png);
+	image: url(:/graphicGui/nv_spindown.png);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 0, 0), stop: 1 rgb(28, 0, 0));
 }
 
 QComboBox::down-arrow:on, .QDateTimeEdit::down-arrow:pressed {
-	image: url(:/graphicGui/gui/spindown-pressed.png);
+	image: url(:/graphicGui/spindown-pressed.png);
 }
 
 QComboBox QAbstractItemView {
@@ -727,7 +727,7 @@ QDateEdit::up-button {
 	subcontrol-position: top right; /* position at the top right corner */
 	width: 20px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
 	border: solid 1px rgb(0, 0, 0);
-	image: url(:/graphicGui/gui/nv_spinup.png);
+	image: url(:/graphicGui/nv_spinup.png);
 	border-width: 1px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 0, 0), stop: 1 rgb(52, 0, 0));
 }
@@ -737,7 +737,7 @@ QDateEdit::down-button {
 	subcontrol-position: bottom right; /* position at the bottom right corner */
 	width: 20px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
 	border: solid 1px rgb(0, 0, 0);
-	image: url(:/graphicGui/gui/nv_spindown.png);
+	image: url(:/graphicGui/nv_spindown.png);
 	border-width: 1px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(48, 0, 0), stop: 1 rgb(28, 0, 0));
 }
