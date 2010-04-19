@@ -1,7 +1,7 @@
 /*
  * Stellarium TelescopeControl Plug-in
  * 
- * Copyright (C) 2009 Bogdan Marinov (this file)
+ * Copyright (C) 2009-2010 Bogdan Marinov (this file)
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@
 
 using namespace TelescopeControlGlobals;
 
-class Ui_telescopeConfigurationDialogForm;
+class Ui_telescopeConfigurationDialog;
 class TelescopeControl;
 struct StelStyle;
 
@@ -50,28 +50,28 @@ public:
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
-	Ui_telescopeConfigurationDialogForm* ui;
+	Ui_telescopeConfigurationDialog* ui;
 	
 private:
 	void initConfigurationDialog();
 	
 private slots:
-	void buttonSavePressed(void);
-	void buttonDiscardPressed(void);
+	void buttonSavePressed();
+	void buttonDiscardPressed();
 	
-	void toggleTypeServer(bool);
+	void toggleTypeLocal(bool);
 	void toggleTypeConnection(bool);
-	void toggleCircles(int);
+	void toggleTypeVirtual(bool);
 	
 	void deviceModelSelected(const QString&);
+
 signals:
-	void saveChanges(QString name, TelescopeConnection type);
-	void discardChanges(void);
+	void changesSaved(QString name, ConnectionType type);
+	void changesDiscarded();
 	
 private:
 	QStringList deviceModelNames;
 	
-	QIntValidator * tcpPortValidator;
 	QRegExpValidator * telescopeNameValidator;
 	QRegExpValidator * hostNameValidator;
 	QRegExpValidator * circleListValidator;

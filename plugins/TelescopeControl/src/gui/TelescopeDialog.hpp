@@ -1,7 +1,7 @@
 /*
  * Stellarium Telescope Control Plug-in
  * 
- * Copyright (C) 2009 Bogdan Marinov (this file)
+ * Copyright (C) 2009-2010 Bogdan Marinov (this file)
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,7 +71,7 @@ private slots:
 	void buttonBrowseServerDirectoryPressed(void);
 	
 	//! Slot for receiving information from TelescopeConfigurationDialog
-	void saveChanges(QString name, TelescopeConnection type);
+	void saveChanges(QString name, ConnectionType type);
 	//! Slot for receiving information from TelescopeConfigurationDialog
 	void discardChanges(void);
 	
@@ -113,7 +113,7 @@ private:
 	TelescopeControl * telescopeManager;
 	
 	int telescopeStatus[SLOT_NUMBER_LIMIT];
-	TelescopeConnection telescopeType[SLOT_NUMBER_LIMIT];
+	ConnectionType telescopeType[SLOT_NUMBER_LIMIT];
 	
 	int telescopeCount;
 	int configuredSlot;

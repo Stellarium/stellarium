@@ -1,15 +1,9 @@
 {
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"list" :
 	[
 		{
-			"name" : "Stellarium Virtual Telescope",
-			"description" : "A virtual telescope that allows testing the feature without an installed telescope.",
-			"server" : "TelescopeServerDummy",
-			"default_delay" : 500000
-		},
-		{
-			"name" : "Meade AutoStar Compatible",
+			"name" : "Meade AutoStar compatible",
 			"description" : "Any telescope or telescope mount compatible with Meade's AutoStar controller.",
 			"server" : "TelescopeServerLx200",
 			"default_delay" : 500000

@@ -1,7 +1,7 @@
 /*
  * Stellarium TelescopeControl Plug-in
  * 
- * Copyright (C) 2009 Bogdan Marinov (this file)
+ * Copyright (C) 2009-2010 Bogdan Marinov (this file)
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,11 +36,10 @@
 
 TelescopeConfigurationDialog::TelescopeConfigurationDialog()
 {
-	ui = new Ui_telescopeConfigurationDialogForm;
+	ui = new Ui_telescopeConfigurationDialog;
 	
 	telescopeManager = GETSTELMODULE(TelescopeControl);
 
-	tcpPortValidator = new QIntValidator(0, 65535, this);//AFAIK, this is the port number range
 	telescopeNameValidator = new QRegExpValidator (QRegExp("[^:\"]+"), this);//Test the update for JSON
 	hostNameValidator = new QRegExpValidator (QRegExp("[a-zA-Z0-9\\-\\.]+"), this);//TODO: Write a proper host/IP regexp?
 	circleListValidator = new QRegExpValidator (QRegExp("[0-9,\\.\\s]+"), this);
@@ -55,10 +54,10 @@ TelescopeConfigurationDialog::~TelescopeConfigurationDialog()
 {	
 	delete ui;
 	
-	delete tcpPortValidator;
 	delete telescopeNameValidator;
 	delete hostNameValidator;
 	delete circleListValidator;
+	delete serialPortValidator;
 }
 
 void TelescopeConfigurationDialog::languageChanged()
@@ -77,10 +76,9 @@ void TelescopeConfigurationDialog::createDialogContent()
 	connect(dialog, SIGNAL(rejected()), this, SLOT(buttonDiscardPressed()));
 	
 	//Connect: sender, signal, receiver, member
-	connect(ui->checkBoxCircles, SIGNAL(stateChanged(int)), this, SLOT(toggleCircles(int)));
-	
-	connect(ui->radioButtonTelescopeLocal, SIGNAL(toggled(bool)), this, SLOT(toggleTypeServer(bool)));
+	connect(ui->radioButtonTelescopeLocal, SIGNAL(toggled(bool)), this, SLOT(toggleTypeLocal(bool)));
 	connect(ui->radioButtonTelescopeConnection, SIGNAL(toggled(bool)), this, SLOT(toggleTypeConnection(bool)));
+	connect(ui->radioButtonTelescopeVirtual, SIGNAL(toggled(bool)), this, SLOT(toggleTypeVirtual(bool)));
 	
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(buttonSavePressed()));
 	connect(ui->pushButtonDiscard, SIGNAL(clicked()), this, SLOT(buttonDiscardPressed()));
@@ -88,26 +86,16 @@ void TelescopeConfigurationDialog::createDialogContent()
 	connect(ui->comboBoxDeviceModel, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(deviceModelSelected(const QString&)));
 	
 	//Setting validators
-	ui->lineEditTCPPort->setValidator(tcpPortValidator);
 	ui->lineEditTelescopeName->setValidator(telescopeNameValidator);
 	ui->lineEditHostName->setValidator(hostNameValidator);
 	ui->lineEditCircleList->setValidator(circleListValidator);
-	
-	ui->comboBoxSerialPort->completer()->setModelSorting(QCompleter::CaseSensitivelySortedModel);
+	ui->lineEditSerialPort->setValidator(serialPortValidator);
 	
 	//Initialize the style
 	updateStyle();
 }
 
 //Set the configuration panel in a predictable state
-//TODO: Rewrite this and/or put it somewhere else
-// - All the "Type" radio buttons are enabled (none is selected)
-// - The "Name" field is empty
-// - The "Serial port" should be visible
-// - The "Device Type" combo box should list the available servers
-// - The "Host" field should be disabled but empty
-// - The "FOV circles" checkbox should be unchecked
-// - and the list of circles should be empty and disabled
 void TelescopeConfigurationDialog::initConfigurationDialog()
 {
 	//Reusing code used in both methods that call this one
@@ -115,19 +103,19 @@ void TelescopeConfigurationDialog::initConfigurationDialog()
 	
 	//Type
 	ui->radioButtonTelescopeLocal->setEnabled(true);
-	ui->radioButtonTelescopeConnection->setEnabled(true);
 	
 	//Name
 	ui->lineEditTelescopeName->clear();
+
+	//Connect at startup
+	ui->checkBoxConnectAtStartup->setChecked(false);
 	
 	//Serial port
-	ui->comboBoxSerialPort->clear();
-	ui->comboBoxSerialPort->addItems(SERIAL_PORT_NAMES);
+	ui->lineEditSerialPort->clear();
+	ui->lineEditSerialPort->setCompleter(new QCompleter(SERIAL_PORT_NAMES, this));
+	ui->lineEditSerialPort->setText(SERIAL_PORT_NAMES.value(0));
 	
-	//Populating the list of available servers
-	ui->labelDeviceModel->setVisible(true);
-	ui->labelDeviceModelDescription->setVisible(true);
-	ui->comboBoxDeviceModel->setVisible(true);
+	//Populating the list of available devices
 	ui->comboBoxDeviceModel->clear();
 	if (!deviceModelNames.isEmpty())
 	{
@@ -136,17 +124,8 @@ void TelescopeConfigurationDialog::initConfigurationDialog()
 	}
 	ui->comboBoxDeviceModel->setCurrentIndex(0);
 	
-	//Host
-	ui->lineEditHostName->setEnabled(false);
-	ui->lineEditHostName->clear();
-	
-	//TCP port (is this necessary?)
-	ui->lineEditTCPPort->clear();
-	
 	//FOV circles
 	ui->checkBoxCircles->setChecked(false);
-	ui->labelCircles->setEnabled(false);
-	ui->lineEditCircleList->setEnabled(false);
 	ui->lineEditCircleList->clear();
 }
 
@@ -161,13 +140,13 @@ void TelescopeConfigurationDialog::initNewTelescopeConfiguration(int slot)
 	{
 		ui->radioButtonTelescopeLocal->setEnabled(false);
 		ui->radioButtonTelescopeConnection->setChecked(true);
-		toggleTypeConnection(true);//Reusing code, may cause problems
+		toggleTypeConnection(true);//Not called if the button is already checked
 	}
 	else
 	{
 		ui->radioButtonTelescopeLocal->setEnabled(true);
 		ui->radioButtonTelescopeLocal->setChecked(true);
-		toggleTypeServer(true);//Reusing code, may cause problems
+		toggleTypeLocal(true);//Not called if the button is already checked
 	}
 	
 	ui->doubleSpinBoxTelescopeDelay->setValue(SECONDS_FROM_MICROSECONDS(DEFAULT_DELAY));
@@ -181,6 +160,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	
 	//Read the telescope properties
 	QString name;
+	ConnectionType connectionType;
 	QString host;
 	int portTCP;
 	int delay;
@@ -188,7 +168,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	QList<double> circles;
 	QString deviceModelName;
 	QString serialPortName;
-	if(!telescopeManager->getTelescopeAtSlot(slot, name, host, portTCP, delay, connectAtStartup, circles, deviceModelName, serialPortName))
+	if(!telescopeManager->getTelescopeAtSlot(slot, connectionType, name, host, portTCP, delay, connectAtStartup, circles, deviceModelName, serialPortName))
 	{
 		//TODO: Add debug
 		return;
@@ -199,7 +179,6 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	if(!deviceModelName.isEmpty())
 	{
 		ui->radioButtonTelescopeLocal->setChecked(true);
-		//ui->radioButtonTelescopeConnection->setEnabled(false);
 		
 		ui->lineEditHostName->setText("localhost");//TODO: Remove magic word!
 		
@@ -208,7 +187,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		if(index < 0)
 		{
 			qDebug() << "TelescopeConfigurationDialog: Current device model is not in the list?";
-			emit discardChanges();
+			emit changesDiscarded();
 			return;
 		}
 		else
@@ -216,35 +195,19 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 			ui->comboBoxDeviceModel->setCurrentIndex(index);
 		}
 		//Initialize the serial port value
-		index = ui->comboBoxSerialPort->findText(serialPortName);
-		if(index < 0)
-		{
-			//If the serial port's name is not in the list, add it and make it selected
-			ui->comboBoxSerialPort->insertItem(0, serialPortName);
-			ui->comboBoxSerialPort->setCurrentIndex(0);
-			qDebug() << "TelescopeConfigurationDialog: Adding to serial port list:" << serialPortName;
-		}
-		else
-			ui->comboBoxSerialPort->setCurrentIndex(index);
+		ui->lineEditSerialPort->setText(serialPortName);
 	}
 	else //Local or remote connection
 	{
-		//ui->radioButtonTelescopeLocal->setEnabled(false);
-		//ui->radioButtonTelescopeConnection->setEnabled(false);
-		ui->radioButtonTelescopeConnection->setChecked(true);
-		
-		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageDeviceSettings), false);
-		ui->labelHost->setEnabled(true);
-		ui->lineEditHostName->setText(host);
-		ui->lineEditHostName->setEnabled(true);
+		ui->radioButtonTelescopeConnection->setChecked(true);//Calls toggleTypeConnection(true)
+		if (connectionType == ConnectionRemote)
+			ui->lineEditHostName->setText(host);
 	}
 	
 	//Circles
 	if(!circles.isEmpty())
 	{
 		ui->checkBoxCircles->setChecked(true);
-		ui->labelCircles->setEnabled(true);
-		ui->lineEditCircleList->setEnabled(true);
 		
 		QStringList circleList;
 		for(int i = 0; i < circles.size(); i++)
@@ -253,7 +216,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	}
 	
 	//TCP port
-	ui->lineEditTCPPort->setText(QString::number(portTCP));
+	ui->spinBoxTCPPort->setValue(portTCP);
 	
 	//Delay
 	ui->doubleSpinBoxTelescopeDelay->setValue(SECONDS_FROM_MICROSECONDS(delay));//Microseconds to seconds
@@ -262,17 +225,26 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	ui->checkBoxConnectAtStartup->setChecked(connectAtStartup);
 }
 
-void TelescopeConfigurationDialog::toggleTypeServer(bool isChecked)
+void TelescopeConfigurationDialog::toggleTypeLocal(bool isChecked)
 {
 	if(isChecked)
 	{
+		//Re-initialize values that may have been changed
+		ui->comboBoxDeviceModel->setCurrentIndex(0);
+		ui->lineEditSerialPort->setText(SERIAL_PORT_NAMES.value(0));
+		ui->lineEditHostName->setText("localhost");
+		ui->spinBoxTCPPort->setValue(DEFAULT_TCP_PORT_FOR_SLOT(configuredSlot));
+
+		//Enable/disable controls
 		ui->labelHost->setEnabled(false);
 		ui->lineEditHostName->setEnabled(false);
-		ui->lineEditHostName->setText("localhost");
-		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageDeviceSettings), true);
-		ui->toolBoxSettings->setCurrentIndex(ui->toolBoxSettings->indexOf(ui->pageDeviceSettings));
-		ui->comboBoxDeviceModel->setCurrentIndex(0);//Topmost device
-		ui->lineEditTCPPort->setText(QString::number(DEFAULT_TCP_PORT_FOR_SLOT(configuredSlot)));
+
+		ui->toolBoxSettings->setCurrentIndex(ui->toolBoxSettings->indexOf(ui->pageTelescopeProperties));
+	}
+	else
+	{
+		ui->labelHost->setEnabled(true);
+		ui->lineEditHostName->setEnabled(true);
 	}
 }
 
@@ -280,27 +252,33 @@ void TelescopeConfigurationDialog::toggleTypeConnection(bool isChecked)
 {
 	if(isChecked)
 	{
-		ui->labelHost->setEnabled(true);
-		ui->lineEditHostName->setEnabled(true);
+		//Re-initialize values that may have been changed
 		ui->lineEditHostName->setText("localhost");
-		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageDeviceSettings), false);
-		ui->lineEditTCPPort->setText(QString::number(DEFAULT_TCP_PORT_FOR_SLOT(configuredSlot)));
-	}
-}
+		ui->spinBoxTCPPort->setValue(DEFAULT_TCP_PORT_FOR_SLOT(configuredSlot));
 
-void TelescopeConfigurationDialog::toggleCircles(int state)
-{
-	if(state == Qt::Checked)
-	{
-		ui->labelCircles->setEnabled(true);
-		ui->lineEditCircleList->setEnabled(true);
-		ui->lineEditCircleList->setFocus();
+		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageDeviceSettings), false);
+
+		ui->toolBoxSettings->setCurrentIndex(ui->toolBoxSettings->indexOf(ui->pageTelescopeProperties));
 	}
 	else
 	{
-		ui->labelCircles->setEnabled(false);
-		ui->lineEditCircleList->clear();
-		ui->lineEditCircleList->setEnabled(false);
+		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageDeviceSettings), true);
+	}
+}
+
+void TelescopeConfigurationDialog::toggleTypeVirtual(bool isChecked)
+{
+	if(isChecked)
+	{
+		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageDeviceSettings), false);
+		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageConnectionSettings), false);
+
+		ui->toolBoxSettings->setCurrentIndex(ui->toolBoxSettings->indexOf(ui->pageTelescopeProperties));
+	}
+	else
+	{
+		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageDeviceSettings), true);
+		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageConnectionSettings), true);
 	}
 }
 
@@ -315,7 +293,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 		return;
 	
 	int delay = MICROSECONDS_FROM_SECONDS(ui->doubleSpinBoxTelescopeDelay->value());
-	int portTCP = ui->lineEditTCPPort->text().toInt();
+	int portTCP = ui->spinBoxTCPPort->value();
 	bool connectAtStartup = ui->checkBoxConnectAtStartup->isChecked();
 	
 	//Circles
@@ -341,32 +319,37 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	
 	//Type and server properties
 	//TODO: When adding, check for success!
-	TelescopeConnection type = ConnectionNA;
+	ConnectionType type = ConnectionNA;
 	if(ui->radioButtonTelescopeLocal->isChecked())
 	{
 		//Read the serial port
-		QString serialPortName = ui->comboBoxSerialPort->currentText();
+		QString serialPortName = ui->lineEditSerialPort->text();
 		if(!serialPortName.startsWith(SERIAL_PORT_PREFIX))
 			return;//TODO: Add more validation!
 		
-		type = ConnectionLocalInternal;
-		telescopeManager->addTelescopeAtSlot(configuredSlot, name, host, portTCP, delay, connectAtStartup, circles, ui->comboBoxDeviceModel->currentText(), serialPortName);
+		type = ConnectionInternal;
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, host, portTCP, delay, connectAtStartup, circles, ui->comboBoxDeviceModel->currentText(), serialPortName);
 	}
 	else if (ui->radioButtonTelescopeConnection->isChecked())
 	{
 		if(host == "localhost")
-			type = ConnectionLocalExternal;
+			type = ConnectionLocal;
 		else
 			type = ConnectionRemote;
-		telescopeManager->addTelescopeAtSlot(configuredSlot, name, host, portTCP, delay, connectAtStartup, circles);
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, host, portTCP, delay, connectAtStartup, circles);
+	}
+	else if (ui->radioButtonTelescopeVirtual->isChecked())
+	{
+		type = ConnectionVirtual;
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, QString(), portTCP, delay, connectAtStartup, circles);
 	}
 	
-	emit saveChanges(name, type);
+	emit changesSaved(name, type);
 }
 
 void TelescopeConfigurationDialog::buttonDiscardPressed()
 {
-	emit discardChanges();
+	emit changesDiscarded();
 }
 
 void TelescopeConfigurationDialog::deviceModelSelected(const QString& deviceModelName)
