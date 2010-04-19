@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>telescopeConfigurationDialogForm</class>
- <widget class="QWidget" name="telescopeConfigurationDialogForm">
+ <class>telescopeConfigurationDialog</class>
+ <widget class="QWidget" name="telescopeConfigurationDialog">
   <property name="windowModality">
    <enum>Qt::WindowModal</enum>
   </property>
@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>380</width>
-    <height>590</height>
+    <height>480</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,13 +22,7 @@
   <property name="minimumSize">
    <size>
     <width>380</width>
-    <height>590</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>380</width>
-    <height>590</height>
+    <height>480</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -203,29 +197,8 @@
         </property>
        </widget>
       </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="groupBoxTelescopeProperties">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="title">
-      <string>Telescope Properties</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <property name="spacing">
-       <number>6</number>
-      </property>
-      <property name="margin">
-       <number>0</number>
-      </property>
       <item>
-       <widget class="QLabel" name="labelTelescopeName">
+       <widget class="QRadioButton" name="radioButtonTelescopeVirtual">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -238,104 +211,8 @@
           <height>24</height>
          </size>
         </property>
-        <property name="baseSize">
-         <size>
-          <width>110</width>
-          <height>24</height>
-         </size>
-        </property>
         <property name="text">
-         <string>Name:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEditTelescopeName">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="maxLength">
-         <number>50</number>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QLabel" name="labelConnectionDelay">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>24</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Connection delay:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QDoubleSpinBox" name="doubleSpinBoxTelescopeDelay">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>50</width>
-            <height>24</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string>The approximate time it takes for the signals from the telescope to reach Stellarium.
-Increase this value if the reticle is skipping.</string>
-          </property>
-          <property name="suffix">
-           <string comment="seconds">s</string>
-          </property>
-          <property name="decimals">
-           <number>2</number>
-          </property>
-          <property name="minimum">
-           <double>0.100000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>10.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.100000000000000</double>
-          </property>
-          <property name="value">
-           <double>0.500000000000000</double>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="checkBoxConnectAtStartup">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>Automatically attempt to start the telescope or establish connection when Stellarium starts</string>
-        </property>
-        <property name="text">
-         <string>Start/connect at startup</string>
+         <string>Nothing, just simulate one (a moving reticle)</string>
         </property>
        </widget>
       </item>
@@ -356,13 +233,160 @@ Increase this value if the reticle is skipping.</string>
      <property name="tabSpacing">
       <number>0</number>
      </property>
+     <widget class="QWidget" name="pageTelescopeProperties">
+      <attribute name="label">
+       <string>Telescope properties</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <property name="leftMargin">
+        <number>10</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="labelTelescopeName">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="baseSize">
+          <size>
+           <width>110</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Name:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditTelescopeName">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maxLength">
+          <number>50</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayoutDelay">
+         <item>
+          <widget class="QLabel" name="labelConnectionDelay">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Connection delay:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="doubleSpinBoxTelescopeDelay">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>The approximate time it takes for the signals from the telescope to reach Stellarium.
+Increase this value if the reticle is skipping.</string>
+           </property>
+           <property name="suffix">
+            <string comment="seconds">s</string>
+           </property>
+           <property name="decimals">
+            <number>2</number>
+           </property>
+           <property name="minimum">
+            <double>0.100000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>10.000000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>0.100000000000000</double>
+           </property>
+           <property name="value">
+            <double>0.500000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBoxConnectAtStartup">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Automatically attempt to start the telescope or establish connection when Stellarium starts</string>
+         </property>
+         <property name="text">
+          <string>Start/connect at startup</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="pageDeviceSettings">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
         <width>380</width>
-        <height>264</height>
+        <height>215</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -372,7 +396,7 @@ Increase this value if the reticle is skipping.</string>
        </sizepolicy>
       </property>
       <attribute name="label">
-       <string>Device Settings</string>
+       <string>Device settings</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <property name="spacing">
@@ -425,27 +449,12 @@ Increase this value if the reticle is skipping.</string>
           </spacer>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBoxSerialPort">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
+          <widget class="QLineEdit" name="lineEditSerialPort">
            <property name="minimumSize">
             <size>
              <width>0</width>
              <height>24</height>
             </size>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-           <property name="maxCount">
-            <number>20</number>
-           </property>
-           <property name="insertPolicy">
-            <enum>QComboBox::InsertAlphabetically</enum>
            </property>
           </widget>
          </item>
@@ -528,7 +537,7 @@ Increase this value if the reticle is skipping.</string>
         <x>0</x>
         <y>0</y>
         <width>380</width>
-        <height>272</height>
+        <height>215</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -538,21 +547,8 @@ Increase this value if the reticle is skipping.</string>
        </sizepolicy>
       </property>
       <attribute name="label">
-       <string>Connection Settings</string>
+       <string>Connection settings</string>
       </attribute>
-      <widget class="QLineEdit" name="lineEditTCPPort">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>240</x>
-         <y>40</y>
-         <width>80</width>
-         <height>24</height>
-        </rect>
-       </property>
-      </widget>
       <widget class="QLabel" name="labelTCPPort">
        <property name="enabled">
         <bool>true</bool>
@@ -607,7 +603,7 @@ Increase this value if the reticle is skipping.</string>
         <number>255</number>
        </property>
       </widget>
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="labelColon">
        <property name="geometry">
         <rect>
          <x>230</x>
@@ -620,6 +616,28 @@ Increase this value if the reticle is skipping.</string>
         <string notr="true">:</string>
        </property>
       </widget>
+      <widget class="QSpinBox" name="spinBoxTCPPort">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>40</y>
+         <width>80</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimum">
+        <number>1024</number>
+       </property>
+       <property name="maximum">
+        <number>65535</number>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="pageInterfaceSettings">
       <property name="geometry">
@@ -627,7 +645,7 @@ Increase this value if the reticle is skipping.</string>
         <x>0</x>
         <y>0</y>
         <width>380</width>
-        <height>272</height>
+        <height>215</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -637,7 +655,7 @@ Increase this value if the reticle is skipping.</string>
        </sizepolicy>
       </property>
       <attribute name="label">
-       <string>User Interface Settings</string>
+       <string>User interface settings</string>
       </attribute>
       <widget class="QLineEdit" name="lineEditCircleList">
        <property name="enabled">
@@ -762,6 +780,55 @@ Increase this value if the reticle is skipping.</string>
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>radioButtonTelescopeLocal</tabstop>
+  <tabstop>radioButtonTelescopeConnection</tabstop>
+  <tabstop>radioButtonTelescopeVirtual</tabstop>
+  <tabstop>lineEditTelescopeName</tabstop>
+  <tabstop>doubleSpinBoxTelescopeDelay</tabstop>
+  <tabstop>checkBoxConnectAtStartup</tabstop>
+  <tabstop>lineEditSerialPort</tabstop>
+  <tabstop>comboBoxDeviceModel</tabstop>
+  <tabstop>lineEditHostName</tabstop>
+  <tabstop>spinBoxTCPPort</tabstop>
+  <tabstop>checkBoxCircles</tabstop>
+  <tabstop>lineEditCircleList</tabstop>
+  <tabstop>pushButtonDiscard</tabstop>
+  <tabstop>pushButtonSave</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>checkBoxCircles</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>labelCircles</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>217</x>
+     <y>255</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>212</x>
+     <y>270</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxCircles</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>lineEditCircleList</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>303</x>
+     <y>244</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>309</x>
+     <y>303</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

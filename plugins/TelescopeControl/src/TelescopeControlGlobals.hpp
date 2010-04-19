@@ -48,10 +48,11 @@ namespace TelescopeControlGlobals {
 	#define MICROSECONDS_FROM_SECONDS(X) (X * 1000000)
 	#define SECONDS_FROM_MICROSECONDS(X) ((double) X / 1000000)
 	
-	enum TelescopeConnection {
+	enum ConnectionType {
 		ConnectionNA = 0,
-		ConnectionLocalInternal,
-		ConnectionLocalExternal,
+		ConnectionVirtual,
+		ConnectionInternal,
+		ConnectionLocal,
 		ConnectionRemote,
 		ConnectionCount
 	};
@@ -75,7 +76,7 @@ namespace TelescopeControlGlobals {
 	#ifdef Q_OS_WIN32
 	const QStringList SERIAL_PORT_NAMES = QString("COM1 COM2 COM3 COM4").split(' ', QString::SkipEmptyParts);
 	#elif defined(Q_OS_MAC)
-	const QStringList SERIAL_PORT_NAMES = QStringList();
+	const QStringList SERIAL_PORT_NAMES = QString("/dev/ ").split(' ', QString::SkipEmptyParts);
 	#else
 	const QStringList SERIAL_PORT_NAMES = QString("/dev/ttyS0 /dev/ttyS1 /dev/ttyS2 /dev/ttyS3 /dev/ttyUSB0 /dev/ttyUSB1 /dev/ttyUSB2 /dev/ttyUSB3").split(' ', QString::SkipEmptyParts);
 	#endif
