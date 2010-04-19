@@ -17,15 +17,15 @@
 <li><a href="#slew_to">"Slew telescope to" window</a></li>
 <li><a href="#commands">Telescope commands</a></li>
 <li><a href="#devices">Supported devices</a></li>
-<li><a href="#Stellarium_Virtual_Telescope">Stellarium Virtual Telescope</a></li>
-<li><a href="#changelog">Changes since the last version</a></li>
+<li><a href="#virtual_telescope">Virtual telescope</a></li>
+<li><a href="#changelog">Changes since version 0.1.9</a></li>
 <li><a href="#authors">Authors</a></li>
 <li><a href="#copyright">Copyright</a></li>
 </ul>
 
 <h3><a name="Abilities_and_limitations"/>Abilities and limitations</h3>
-<p>This plug-in allows Stellarium to send only "<b>slew</b>" ("go to") commands to the device and to receive its current position. It cannot issue any other commands, so users should be aware of the possibility for mount collisions and similar situations. (To abort a slew, you can start another one to an object in a safe position.)</p>
-<p>As of the current version, this plug-in doesn't allow satellite tracking, and is not very suitable for Moon or planetary observations.</p>
+<p>This plug-in allows Stellarium to send only "<b>slew</b>" ("go to") commands to the device and to receive its current position. It cannot issue any other commands, so users should be aware of the possibility for mount collisions and similar situations. (To abort a slew, you can start another one to a safe position.)</p>
+<p>As of the current version, this plug-in doesn't allow satellite tracking, and is not very suitable for lunar or planetary observations.</p>
 <p><span style="color: red; font-weight: bolder;">WARNING: Stellarium CANNOT prevent your telescope from being pointed at the Sun.</span></p>
 <ul><li>Never point your telescope at the Sun without a proper solar filter installed. The powerful light amplified by the telescope WILL cause irreversible damage to your eyes and/or your equipment.</li>
 <li>Even if you don't do it deliberately, a slew during daylight hours may cause your telescope to point at the sun on its way to the given destination, so it is strongly recommended to avoid using the telescope control feature before sunset without appropriate protection.</li></ul>
@@ -54,7 +54,8 @@
 <ul><li>the number (<b>#</b>) column shows the number used to control this telescope. For example, for telescope #2, the shortcut is Ctrl+2.</li>
 <li>the <b>Status</b> column indicates if this connection is currently active or not. Unfortunately, there are some cases in which "Connected" is displayed when no working connection exists.</li>
 <li>the <b>Type</b> field indicates what kind of connection is this:
-<ul><li><b>local, Stellarium</b> means a DIRECT connection to the telescope (see <a href="#usingthisplugin">above</a>);</li>
+<ul><li><b>virtual</b> means a <a href="#virtual_telescope">virtual telescope</a>;</li>
+<li><b>local, Stellarium</b> means a DIRECT connection to the telescope (see <a href="#usingthisplugin">above</a>);</li>
 <li><b>local, external</b> means an INDIRECT connection to a program running on the same computer;</li>
 <li><b>remote, unknown</b> means an INDIRECT connection over a network to a remote machine.</li></ul>
 </li></ul>
@@ -64,10 +65,12 @@
 <h3><a name="configwindow"/>Telescope configuration window</h3>
 
 <h4><a name="connection_type"/>Connection type</h4>
-<p>The topmost field represents the choice between the two types of connections:(see <a href="#usingthisplugin">above</a>):</p>
+<p>The topmost field represents the choice between the two types of connections (see <a href="#usingthisplugin">above</a>):</p>
 <b>Telescope controlled by:</b><ul>
 <li><b>Stellarium, directly through a serial port</b> is the DIRECT case</li>
-<li><b>External software or a remote computer</b> is the INDIRECT case</li></ul>
+<li><b>External software or a remote computer</b> is the INDIRECT case</li>
+<li><b>Nothing, just simulate one (a moving reticle)</b> is a <a href="#virtual_telescope">virtual telescope</a> (no connection)</li>
+</ul>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
 <h4><a name="telescope_properties"/>Telescope properties</h4>
@@ -80,11 +83,11 @@
 <p>This section is active only for DIRECT connections (see <a href="#usingthisplugin">above</a>).</p>
 
 <p><b>Serial port</b> sets the serial port used by the telescope.</p>
-<p>The list contains some default values:</p>
+<p>There is a pop-up box that suggests some default values:</p>
 <ul><li>on Windows, serial ports COM1 to COM4;</li>
 <li>on Linux, serial ports /dev/ttyS0 to /dev/ttyS3 and USB ports /dev/ttyUSB0 to /dev/ttyUSB3;</li>
 <li>on Mac OS X, the list is empty as it names its ports in a peculiar way.</li></ul>
-<p>On all three platforms <b>the list can be edited and new values can be added</b>. (If you are using a USB cable, the default serial port of your telescope most probably is not in the list.)</p>
+<p>If you are using an USB cable, the default serial port of your telescope most probably is not in the list of suggestions.</p>
 <p>To list all valid serial port names in Mac OS X, open a terminal and type:</p>
 <pre>ls /dev/*</pre>
 <p>This will list all devices, the full name of your serial port should be somewhere in the list (for example, "/dev/cu.usbserial-FTDFZVMK").</p>
@@ -102,7 +105,7 @@
 <h4><a name="fovcircles"/>Field of view indicators</h4>
 <p>A series of circles representing different fields of view can be added around the telescope marker. This is a relic from the times before the <strong>Oculars</strong> plug-in existed.</p>
 <p>In the telescope configuration window, click on "User Interface Settings". Mark the "Use field of view indicators" option, then enter a list of values separated with comas in the field below. The values are interpreted as degrees of arc.</p>
-<p>This can be used in combination with the <a href="#Stellarium_Virtual_Telescope">Stellarium Virtual Telescope</a> to display a moving reticle with the Telrad circles. In this case, the list of FOV values should be "0.5, 2, 4".</p>
+<p>This can be used in combination with a <a href="#virtual_telescope">virtual telescope</a> to display a moving reticle with the Telrad circles. In this case, the list of FOV values should be "0.5, 2, 4".</p>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
 <h3><a name="slew_to"/>"Slew telescope to" window</h3>
@@ -121,32 +124,32 @@
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
 <h3><a name="devices"/>Supported devices</h3>
-<p>All devices (except <a href="#Stellarium_Virtual_Telescope">one</a>) listed in the <a href="#device_settings">"Device model" list</a> are convenience definitions using one of the two built-in interfaces: the Meade LX200 (the Meade Autostar controller) interface and the Celestron NexStar interface.
+<p>All devices listed in the <a href="#device_settings">"Device model" list</a> are convenience definitions using one of the two built-in interfaces: the Meade LX200 (the Meade Autostar controller) interface and the Celestron NexStar interface.
 </p><p>The device list contains the following:</p>
 <dl>
 <dt><b>Celestron NexStar (compatible)</b></dt><dd>Any device using the NexStar interface.</dd>
 <dt><b>Losmandy G-11</b></dt><dd>A computerized telescope mount made by Losmandy. (Meade LX-200/Autostar interface)</dd>
-<dt><b>Meade Autostar Compatible</b></dt><dd>Any device using the LX-200/Autostar interface.</dd>
+<dt><b>Meade Autostar compatible</b></dt><dd>Any device using the LX-200/Autostar interface.</dd>
 <dt><b>Meade ETX-70 (#494 Autostar, #506 CCS)</b></dt><dd>The Meade ETX-70 telescope with the #494 Autostar controller and the #506 Connector Cable Set. According to the tester, it is a bit slow, so its default setting of <a href="#telescope_properties">"Connection delay"</a> is 1.5 seconds instead of 0.5 seconds.</dd>
 <dt><b>Meade LX200 (compatible)</b></dt><dd>Any device using the LX-200/Autostar interface.</dd>
-<dt><b><a href="#Stellarium_Virtual_Telescope">Stellarium Virtual Telescope</a></b></dt><dd> A fake telescope.&nbsp;:)</dd>
 <dt><b>Sky-Watcher SynScan AZ mount</b></dt><dd>The Sky-Watcher SynScan AZ GoTo mount is used in a number of telescopes.</dd>
 <dt><b>Sky-Watcher SynScan (version 3 or later)</b></dt><dd><b>SynScan</b> is also the name of the hand controller used in other Sky-Watcher GoTo mounts, and it seems that any mount that uses a SynScan controller version 3.0 or greater is supported by the plug-in, as it uses the NexStar protocol.</dd>
 <dt><b>Wildcard Innovations Argo Navis (Meade mode)</b></dt><dd>Argo Navis is a "Digital Telescope Computer" by Wildcard Innovations. It is an advanced digital setting circle that turns an ordinary telescope (for example, a dobsonian) into a "Push To" telescope (a telescope that uses a computer to find targets and human power to move the telescope itself). Just don't forget to set it to Meade compatibility mode and set the baud rate to 9600B.<sup><a href="http://www.iceinspace.com.au/forum/showpost.php?p=554948&amp;postcount=18" title="Ice in Space forums - Argo Navis and Stellarium">[1]</a></sup></dd>
 </dl>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
-<h3><a name="Stellarium_Virtual_Telescope"/>Stellarium Virtual Telescope</h3>
-<p>If you want to test this plug-in without an actual device connected to the computer, choose <strong>Stellarium Virtual Telescope</strong> from the "Device model" list. It will show a telescope reticle that will react in the same way as the reticle of a real telescope controlled by the plug-in. In this case, the value of "Serial port" is ignored.</p>
+<h3><a name="virtual_telescope"/>Virtual telescope</h3>
+<p>If you want to test this plug-in without an actual device connected to the computer, choose <b>Nothing, just simulate one (a moving reticle)</b> in the <b>Telescope controlled by:</b> field. It will show a telescope reticle that will react in the same way as the reticle of a real telescope controlled by the plug-in.</p>
 <p>See the section above about <a href="#fovcircles">field of view indicators</a> for a possible practical application (emulating "Telrad" circles).</p>
 <p>This feature is equivalent to the "Dummy" type of telescope supported by <a href="http://stellarium.org/wiki/index.php/Telescope_Control_%28client-server%29" title="Stellarium Wiki: Telescope Control (client-server)">Stellarium's original telescope control feature</a>.</p>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
-<h3><a name="changelog"/>Changes since the last version</h3>
+<h3><a name="changelog"/>Changes since version 0.1.9</h3>
 <ul>
 <li>The Help section has been significantly expanded.</li>
 <li>A bug that made the plug-in send RA=0 for objects with RA between (12 and 24?) on Intel Macs has been fixed. (fix proposed by David Hulse)</li>
-<li>The style of the interface has been changed slightly.</li>
+<li>The style of the interface has been changed slightly; the telescope configuration dialog has been redesigned.</li>
+<li>The virtual telescope option has been moved to a more prominent place.</li>
 <li>Two entries for Sky-Watcher telescope mounts have been added to the device models list.</li>
 <li>Log messages and telescope server loading logic have been cleaned.</li>
 <li>An option to toggle the FOV indicators separately from the reticles has been added.</li>

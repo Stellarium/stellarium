@@ -108,8 +108,8 @@ void TelescopeDialog::createDialogContent()
 	connect(ui->pushButtonPickExecutablesDirectory, SIGNAL(clicked()), this, SLOT(buttonBrowseServerDirectoryPressed()));
 	
 	//In other dialogs:
-	connect(&configurationDialog, SIGNAL(discardChanges()), this, SLOT(discardChanges()));
-	connect(&configurationDialog, SIGNAL(saveChanges(QString, TelescopeConnection)), this, SLOT(saveChanges(QString, TelescopeConnection)));
+	connect(&configurationDialog, SIGNAL(changesDiscarded()), this, SLOT(discardChanges()));
+	connect(&configurationDialog, SIGNAL(changesSaved(QString, ConnectionType)), this, SLOT(saveChanges(QString, ConnectionType)));
 	
 	//Initialize the style
 	updateStyle();
@@ -144,6 +144,7 @@ void TelescopeDialog::createDialogContent()
 		
 		//Read the telescope properties
 		QString name;
+		ConnectionType connectionType;
 		QString host;
 		int portTCP;
 		int delay;
@@ -151,29 +152,28 @@ void TelescopeDialog::createDialogContent()
 		QList<double> circles;
 		QString serverName;
 		QString portSerial;
-		if(!telescopeManager->getTelescopeAtSlot(slotNumber, name, host, portTCP, delay, connectAtStartup, circles, serverName, portSerial))
+		if(!telescopeManager->getTelescopeAtSlot(slotNumber, connectionType, name, host, portTCP, delay, connectAtStartup, circles, serverName, portSerial))
 			continue;
 		
 		//Determine the server type
-		QString serverType;
-		if (host != "localhost")
+		QString connectionTypeLabel;
+		switch (connectionType)
 		{
-			telescopeType[slotNumber] = ConnectionRemote;
-			serverType = "remote, unknown";
+			case ConnectionInternal:
+				connectionTypeLabel = "local, Stellarium";
+				break;
+			case ConnectionLocal:
+				connectionTypeLabel = "local, external";
+				break;
+			case ConnectionRemote:
+				connectionTypeLabel = "remote, unknown";
+				break;
+			case ConnectionVirtual:
+			default:
+				connectionTypeLabel = "virtual";
+				break;
 		}
-		else
-		{
-			if(!serverName.isEmpty())
-			{
-				telescopeType[slotNumber] = ConnectionLocalInternal;
-				serverType = "local, Stellarium";
-			}
-			else
-			{
-				telescopeType[slotNumber] = ConnectionLocalExternal;
-				serverType = "local, external";
-			}
-		}
+		telescopeType[slotNumber] = connectionType;
 		
 		//Determine the telescope's status
 		if (telescopeManager->isConnectedClientAtSlot(slotNumber))
@@ -207,7 +207,7 @@ void TelescopeDialog::createDialogContent()
 		telescopeListModel->setItem(lastRow, ColumnStatus, tempItem);
 		
 		//New column on a new row in the list: Telescope type
-		tempItem = new QStandardItem(serverType);
+		tempItem = new QStandardItem(connectionTypeLabel);
 		tempItem->setEditable(false);
 		telescopeListModel->setItem(lastRow, ColumnType, tempItem);
 		
@@ -332,7 +332,7 @@ void TelescopeDialog::configureTelescope(const QModelIndex & currentIndex)
 	configuredSlot = telescopeListModel->data( telescopeListModel->index(currentIndex.row(), ColumnSlot) ).toInt();
 	
 	//Stop the telescope first if necessary
-	if(telescopeType[configuredSlot] != ConnectionLocalInternal && telescopeStatus[configuredSlot] != StatusDisconnected)
+	if(telescopeType[configuredSlot] != ConnectionInternal && telescopeStatus[configuredSlot] != StatusDisconnected)
 	{
 		if(telescopeManager->stopTelescopeAtSlot(configuredSlot)) //Act as "Disconnect"
 				telescopeStatus[configuredSlot] = StatusDisconnected;
@@ -363,7 +363,7 @@ void TelescopeDialog::buttonChangeStatusPressed()
 	
 	//TODO: As most of these are asynchronous actions, it looks like that there should be a queue...
 	
-	if(telescopeType[selectedSlot] != ConnectionLocalInternal) 
+	if(telescopeType[selectedSlot] != ConnectionInternal) 
 	{
 		//Can't be launched by Stellarium -> can't be stopped by Stellarium
 		//Can be only connected/disconnected
@@ -495,7 +495,7 @@ void TelescopeDialog::buttonRemovePressed()
 	}
 }
 
-void TelescopeDialog::saveChanges(QString name, TelescopeConnection type)
+void TelescopeDialog::saveChanges(QString name, ConnectionType type)
 {
 	//Save the changes to file
 	telescopeManager->saveTelescopes();
@@ -503,21 +503,28 @@ void TelescopeDialog::saveChanges(QString name, TelescopeConnection type)
 	//Type and server properties
 	telescopeType[configuredSlot] = type;
 	QString typeString;
-	if(type == ConnectionLocalInternal)
+	switch (type)
 	{
-		if(configuredTelescopeIsNew)
-			telescopeStatus[configuredSlot] = StatusStopped;//TODO: Is there a point? Isn't it better to force the status update method?
-		typeString = "local, Stellarium";
-	}
-	else if(type == ConnectionLocalExternal)
-	{
-		telescopeStatus[configuredSlot] = StatusDisconnected;
-		typeString = "local, external";
-	}
-	else
-	{
-		telescopeStatus[configuredSlot] = StatusDisconnected;
-		typeString = "remote, unknown";
+		case ConnectionVirtual:
+			telescopeStatus[configuredSlot] = StatusStopped;
+			typeString = "virtual";
+			break;
+
+		case ConnectionInternal:
+			if(configuredTelescopeIsNew)
+				telescopeStatus[configuredSlot] = StatusStopped;//TODO: Is there a point? Isn't it better to force the status update method?
+			typeString = "local, Stellarium";
+			break;
+
+		case ConnectionLocal:
+			telescopeStatus[configuredSlot] = StatusDisconnected;
+			typeString = "local, external";
+			break;
+
+		case ConnectionRemote:
+		default:
+			telescopeStatus[configuredSlot] = StatusDisconnected;
+			typeString = "remote, unknown";
 	}
 	
 	//Update the model/list
@@ -606,7 +613,7 @@ void TelescopeDialog::updateTelescopeStates()
 		}
 		else
 		{
-			if(telescopeType[slotNumber] == ConnectionLocalInternal)
+			if(telescopeType[slotNumber] == ConnectionInternal)
 				telescopeStatus[slotNumber] = StatusStopped;
 			else
 				telescopeStatus[slotNumber] = StatusDisconnected;
@@ -626,7 +633,7 @@ void TelescopeDialog::updateTelescopeStates()
 
 void TelescopeDialog::updateStatusButtonForSlot(int selectedSlot)
 {
-	if(telescopeType[selectedSlot] != ConnectionLocalInternal)
+	if(telescopeType[selectedSlot] != ConnectionInternal)
 	{
 		//Can't be launched by Stellarium => can't be stopped by Stellarium
 		//Can be only connected/disconnected
