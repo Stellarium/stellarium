@@ -316,14 +316,24 @@ bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc)
 		const qint64 cat_sz = fic.size();
 		qint64 maxStarBufMd5 = qMin(cat_sz, 9223372036854775807LL);
 		uchar *cat = maxStarBufMd5 ? fic.map(0, maxStarBufMd5) : NULL;
-		fic.close();
 		if (!cat)
 		{
-			qWarning() << "Error: Unable to checksum file " << catalogFileName;
-			return false;
+			// The OS was not able to map the file, revert to slower not mmap based method
+			static const qint64 maxStarBufMd5 = 1024*1024*8;
+			char* mmd5buf = (char*)malloc(maxStarBufMd5);
+			while (!fic.atEnd())
+			{
+				qint64 sz = fic.read(mmd5buf, maxStarBufMd5);
+				md5Hash.addData(mmd5buf, sz);
+			}
+			free(mmd5buf);
 		}
-		md5Hash.addData((const char*)cat, cat_sz);
-		fic.unmap(cat);
+		else
+		{
+			md5Hash.addData((const char*)cat, cat_sz);
+			fic.unmap(cat);
+		}
+		fic.close();
 		if (md5Hash.result().toHex()!=catDesc.value("checksum").toByteArray())
 		{
 			qWarning() << "Error: File " << catalogFileName << " is corrupt, MD5 mismatch! Found " << md5Hash.result().toHex() << " expected " << catDesc.value("checksum").toByteArray();
