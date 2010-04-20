@@ -321,24 +321,9 @@ void StelMainGraphicsView::keyReleaseEvent(QKeyEvent* event)
 
 void StelMainGraphicsView::focusOutEvent(QFocusEvent* event)
 {
+	//Calls the destructors of plug-in modules on exit
 	QCoreApplication::processEvents();
 	QGraphicsView::focusOutEvent(event);
-}
-
-void StelMainGraphicsView::focusInEvent(QFocusEvent* event)
-{
-	QCoreApplication::processEvents();
-	QGraphicsView::focusInEvent(event);
-}
-
-bool StelMainGraphicsView::event(QEvent *event)
-{
-	if (event->type() == QEvent::WindowDeactivate)
-	{
-		if (StelMainWindow::getInstance().isFullScreen())
-			StelMainWindow::getInstance().showMinimized();
-	}
-	return QGraphicsView::event(event);
 }
 
 //! Delete openGL textures (to call before the GLContext disappears)
