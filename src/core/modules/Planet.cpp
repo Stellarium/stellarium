@@ -803,7 +803,7 @@ void Planet::drawEarthShadow(StelCore* core, StelPainter* sPainter)
 	// Draw umbra first
 	QVarLengthArray<Vec2f, 210> texCoordArray(210);
 	QVarLengthArray<Vec3d, 210> vertexArray(210);
-	texCoordArray[0].set(0.f, 0.5);
+	texCoordArray[0].set(0.f, 0.5f);
 	// johannes: work-around for nasty ATI rendering bug: use y-texture coordinate of 0.5 instead of 0.0
 	vertexArray[0]=shadow;
 
@@ -812,7 +812,7 @@ void Planet::drawEarthShadow(StelCore* core, StelPainter* sPainter)
 	for (int i=1; i<=101; ++i)
 	{
 		// position in texture of umbra edge
-		texCoordArray[i].set(0.6, 0.5);
+		texCoordArray[i].set(0.6f, 0.5f);
 		r.transfo4d(rotMat);
 		vertexArray[i] = shadow + r;
 	}
@@ -827,8 +827,8 @@ void Planet::drawEarthShadow(StelCore* core, StelPainter* sPainter)
 	{
 		r.transfo4d(rotMat);
 		u.transfo4d(rotMat);
-		texCoordArray[i].set(0.6, 0.5);
-		texCoordArray[i+1].set(1., 0.5); // position in texture of umbra edge
+		texCoordArray[i].set(0.6f, 0.5f);
+		texCoordArray[i+1].set(1.f, 0.5f); // position in texture of umbra edge
 		vertexArray[i] = shadow + u;
 		vertexArray[i+1] = shadow + r;
 	}
@@ -850,7 +850,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 	StelPainter sPainter(prj);
 	sPainter.setFont(planetNameFont);
 	// Draw nameI18 + scaling if it's not == 1.
-	float tmp = 10.f + getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()/1.44; // Shift for nameI18 printing
+	float tmp = 10.f + getAngularSize(core)*M_PI/180.f*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
 	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate());
 	sPainter.drawText(screenPos[0],screenPos[1], getSkyLabel(nav), 0, tmp, tmp, false);
 
@@ -859,7 +859,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 		return;
 	tmp -= 10.f;
 	if (tmp<1) tmp=1;
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate()*hintFader.getInterstate()/tmp*0.7);
+	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate()*hintFader.getInterstate()/tmp*0.7f);
 
 	// Draw the 2D small circle
 	glEnable(GL_BLEND);
