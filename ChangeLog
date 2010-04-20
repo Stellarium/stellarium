@@ -10,7 +10,6 @@ Fixed:
 - telescope control sending RA=0 for objects with RA between (12 and 24?) on Intel Macs. (LP: #544250, fix proposed by David Hulse)
 - windows and toolbars not being affected by night vision mode. (LP: #539665)
 - a crash on Windows when exiting Stellarium after a search. (LP: #534674)
-- problems when switching tasks (Alt+Tab) when in fullscreen mode. (LP: #550337)
 - the Oculars plug-in not closing its SQL database on exit.
 - the last star catalog not being offered for download. (LP: #538291)
 - system clock running fast on some Windows systems using ACPI power managment (LP: #514184)
