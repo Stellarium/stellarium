@@ -89,7 +89,7 @@ int main(int argc, char **argv)
 			timerGrain = 0;
 	}
 #endif
-	
+
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
@@ -130,9 +130,6 @@ int main(int argc, char **argv)
 	// Init the file manager
 	StelFileMgr::init();
 
-	// Start logging.
-	StelLogger::init(StelFileMgr::getUserDir()+"/log.txt");
-
 	// Log command line arguments
 	QString argStr;
 	QStringList argList;
@@ -141,11 +138,13 @@ int main(int argc, char **argv)
 		argList << argv[i];
 		argStr += QString("%1 ").arg(argv[i]);
 	}
-	StelLogger::writeLog(argStr);
-
 	// Parse for first set of CLI arguments - stuff we want to process before other
 	// output, such as --help and --version
 	CLIProcessor::parseCLIArgsPreConfig(argList);
+
+	// Start logging.
+	StelLogger::init(StelFileMgr::getUserDir()+"/log.txt");
+	StelLogger::writeLog(argStr);
 
 	// OK we start the full program.
 	// Print the console splash and get on with loading the program
@@ -324,12 +323,12 @@ int main(int argc, char **argv)
 
 	delete confSettings;
 	StelLogger::deinit();
-	
+
 	#ifdef Q_OS_WIN
 	if(timerGrain)
 		timeEndPeriod(timerGrain);
 	#endif //Q_OS_WIN
-	
+
 	return 0;
 }
 
