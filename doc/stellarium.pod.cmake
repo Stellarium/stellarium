@@ -1,11 +1,10 @@
-
 =head1 NAME
 
 stellarium - A real-time realistic planetarium
 
 =head1 SYNOPSIS
 
-stellarium [options]
+stellarium [B<OPTIONS>]
 
 =head1 DESCRIPTION
 
@@ -18,27 +17,27 @@ binoculars or a small telescope.
 
 =over
 
-=item B<--version> (or B<-v>)
+=item B<-v, --version>
 
 Print program name and version and exit.
 
-=item B<--help> (or B<-h>)
+=item B<-h, --help>
 
 Print a brief synopsis of program options and exit.
 
-=item B<--config-file> I<name> (or B<-c> I<name>)
+=item B<-c, --config-file> I<file>
 
-Use an I<name> for the config filename instead of "config.ini".
+Use I<file> for the config filename instead of the default F<config.ini>.
 
-=item B<--user-dir> I<dir> (or B<-u> I<dir>)
+=item B<-u, --user-dir> I<dir>
 
-Instead of using the default user data directory ($HOME/.stellarium 
-on *nix operating systems), use I<dir>.
+Use I<dir> instead of the default user data directory (F<$HOME/.stellarium/>
+on *nix operating systems).
 
-=item B<--full-screen> I<yes|no> (or B<-f> I<yes|no>)
+=item B<-f, --full-screen> I<yes|no>
 
 With argument I<yes> or I<no> over-rides the full screen setting in the 
-config file.  From version 0.10.0 the specified setting will become the
+config file.  The setting is saved in the config-file and as such will be the
 default for subsequent invocations of Stellarium.
 
 =item B<--screenshot-dir> I<dir>
@@ -48,8 +47,8 @@ instead of the default (which is $HOME on *nix operating systems).
 
 =item B<--home-planet> I<planet-name>
 
-Specify observer planet (I<planet-name> is an English name, and should 
-refer to an object defined in the F<ssystem.ini> file).
+Specify observer planet. I<planet-name> is an English name, and should 
+refer to an object defined in the F<ssystem.ini> file.
 
 =item B<--altitude> I<alt>
 
@@ -61,23 +60,23 @@ meters.
 Specify the initial observer longitude, where I<lon> is the longitude.
 The format is illustrated by this example: +4d16'12" which refers
 to 4 degrees, 16 minutes and 12 arc seconds East.  Westerly longitudes 
-should be prefixed with "-".
+should be prefixed with C<->.
 
 =item B<--latitude> I<lat>
 
 Specify the initial observer latitude, where I<lat> is the latitude.
 The format is illustrated by this example: +53d58'16.65" which refers
 to 53 degrees, 58 minutes and 16.65 arc seconds North.  Southerly 
-latitudes should be prefixed with "-".
+latitudes should be prefixed with C<->.
 
 =item B<--list-landscapes>
 
-Print a list of value landscape IDs and exit.
+Print a list of landscape names and exit.
 
-=item B<--landscape> I<id>
+=item B<--landscape> I<name>
 
-Start using landscape whose ID (dir name), as seen in the output of 
-B<--list-landscapes>.
+Start Stellarium using landscape I<name>.
+Refer to B<--list-landscapes> for possible names.
 
 =item B<--sky-date> I<date>
 
@@ -106,7 +105,7 @@ stereographic, fisheye, cylinder, mercator, perspective, and orthographic.
 
 Completed successfully.
 
-=item [other]
+=item not 0
 
 Some sort of error.
 
@@ -120,21 +119,26 @@ as information on how to customise the Stellarium data files.
 
 =over
 
+=item F<${INSTALL_DATADIR}/>
+
+This is the Installation Data Directory set at compile-time.
+
 =item F<$HOME/.stellarium/>
 
 This is the User Data Directory, which may be over-ridden using command line 
-options.  It contains the user's settings, extra landscapes, scripts, and can 
+option B<-u>.  It contains the user's settings, extra landscapes, scripts, and can 
 also be used to over-ride data files which are provided with the default 
 install.
 
-=item B<[install prefix]/share/stellarium/>
+=item F<$HOME/.stellarium/config.ini>
 
-This is the Installation Data Directory. F<[install prefix]> is defined at 
-compile time and will typically be something like F</usr> or F</usr/local>.
+The default main configuration file is F<config.ini>. Refer to B<-c> above to
+use a different filename and to B<-u> to use a different User Data Directory.
 
-=item F<[user data directory]/config.ini>
+=item F<$HOME/>
 
-The main configuration file.
+The default screenshot directory. Refer to B<--screenshot-dir> to use a
+different path.
 
 =back
 
@@ -180,15 +184,5 @@ Johannes Gajdosik, Nigel Kerr, Andras Mohari.
 
 x14817
 
-=head1 HISTORY
-
-=over
-
-=item on: 2008-08-28, Initial version of this document.
-
-=back
-
 =cut
-
-
 
