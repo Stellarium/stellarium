@@ -330,17 +330,13 @@ IF(WIN32)
 ENDIF(WIN32)
 
 IF(APPLE)
-  SET(stellarium_lib_SRCS
-	${stellarium_lib_SRCS})
+  SET(stellarium_lib_SRCS ${stellarium_lib_SRCS})
 ENDIF(APPLE)
 
-SET(stellarium_exe_SRCS
-	main.cpp
-)
+SET(stellarium_exe_SRCS main.cpp)
 
 ################# compiles resources files ############
-SET(stellarium_RES
-  ${CMAKE_SOURCE_DIR}/data/mainRes.qrc)
+SET(stellarium_RES ${CMAKE_SOURCE_DIR}/data/mainRes.qrc)
 QT4_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 
 ################# compiles moc files ############
@@ -478,7 +474,7 @@ IF (GUI_MODE STREQUAL "Standard")
 ENDIF()
 
 #############################################################################################
-############################ Standard NO GUI plugin compilation #############################
+################################ No GUI plugin compilation ##################################
 #############################################################################################
 IF (GUI_MODE STREQUAL "None")
 	SET(stellarium_nogui_SRCS
