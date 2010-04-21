@@ -6,11 +6,15 @@ IF(UNIX AND NOT WIN32)
 
 ADD_CUSTOM_TARGET(ManPages ALL)
 
+CONFIGURE_FILE(
+  ${CMAKE_CURRENT_SOURCE_DIR}/stellarium.pod.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/stellarium.pod
+)
 ADD_CUSTOM_COMMAND(
-  TARGET ManPages 
-  SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/stellarium.pod 
-  COMMAND pod2man 
-  ARGS -s 1 -r ${VERSION} -center=" " ${CMAKE_CURRENT_SOURCE_DIR}/stellarium.pod ${CMAKE_CURRENT_BINARY_DIR}/stellarium.1 
+  TARGET ManPages
+  SOURCE ${CMAKE_CURRENT_BINARY_DIR}/stellarium.pod
+  COMMAND pod2man
+  ARGS -s 1 -r ${VERSION} -center=" " ${CMAKE_CURRENT_BINARY_DIR}/stellarium.pod ${CMAKE_CURRENT_BINARY_DIR}/stellarium.1
   OUTPUTS ${CMAKE_CURRENT_BINARY_DIR}/stellarium.1
 )
 

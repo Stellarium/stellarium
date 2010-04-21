@@ -223,8 +223,8 @@ double Oculars::getCallOrder(StelModuleActionName actionName) const
 
 void Oculars::handleMouseClicks(class QMouseEvent* event)
 {
-	StelCore::StelCore *core = StelApp::getInstance().getCore();
-	StelMovementMgr::StelMovementMgr *movementManager = core->getMovementMgr();
+	StelCore *core = StelApp::getInstance().getCore();
+	StelMovementMgr *movementManager = core->getMovementMgr();
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected()){
 		LabelMgr *labelManager = GETSTELMODULE(LabelMgr);
 
@@ -409,7 +409,7 @@ void Oculars::enableOcular(bool b)
 		loadDatabaseObjects();
 	}
 
-	StelCore::StelCore *core = StelApp::getInstance().getCore();
+	StelCore *core = StelApp::getInstance().getCore();
 	LabelMgr* labelManager = GETSTELMODULE(LabelMgr);
 	// Toggle the plugin on & off.  To toggle on, we want to ensure there is a selected object.
 	if (!flagShowOculars && !StelApp::getInstance().getStelObjectMgr().getWasSelected()) {
@@ -491,7 +491,7 @@ void Oculars::toggleCrosshair()
 void Oculars::drawCrosshairs()
 {
 	const StelProjectorP projector = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
-	StelCore::StelCore *core = StelApp::getInstance().getCore();
+	StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	// Center of screen
 	Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
@@ -613,8 +613,8 @@ void Oculars::interceptMovementKey(QKeyEvent* event)
 	// We onle care about the arrow keys.  This flag tracks that.
 	bool consumeEvent = false;
 
-	StelCore::StelCore *core = StelApp::getInstance().getCore();
-	StelMovementMgr::StelMovementMgr *movementManager = core->getMovementMgr();
+	StelCore *core = StelApp::getInstance().getCore();
+	StelMovementMgr *movementManager = core->getMovementMgr();
 
 	if (event->type() == QEvent::KeyPress)
 	{
@@ -718,7 +718,7 @@ void Oculars::loadDatabaseObjects()
 
 void Oculars::paintMask()
 {
-	StelCore::StelCore *core = StelApp::getInstance().getCore();
+	StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 
 	glDisable(GL_BLEND);
@@ -799,9 +799,9 @@ void Oculars::validateIniFile()
 
 void Oculars::unzoomOcular()
 {
-	StelCore::StelCore *core = StelApp::getInstance().getCore();
-	StelMovementMgr::StelMovementMgr *movementManager = core->getMovementMgr();
-	GridLinesMgr::GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+	StelCore *core = StelApp::getInstance().getCore();
+	StelMovementMgr *movementManager = core->getMovementMgr();
+	GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
 
 	gridManager->setFlagAzimuthalGrid(flagAzimuthalGrid);
 	gridManager->setFlagEquatorGrid(flagEquatorGrid);
@@ -826,7 +826,7 @@ void Oculars::zoom(bool rezoom)
 
 	if (flagShowOculars)  {
 		if (!rezoom)  {
-			GridLinesMgr::GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+			GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
 			// Current state
 			flagAzimuthalGrid = gridManager->getFlagAzimuthalGrid();
 			flagEquatorGrid = gridManager->getFlagEquatorGrid();
@@ -846,9 +846,9 @@ void Oculars::zoom(bool rezoom)
 
 void Oculars::zoomOcular()
 {
-	StelCore::StelCore *core = StelApp::getInstance().getCore();
-	StelMovementMgr::StelMovementMgr *movementManager = core->getMovementMgr();
-	GridLinesMgr::GridLinesMgr *gridManager =
+	StelCore *core = StelApp::getInstance().getCore();
+	StelMovementMgr *movementManager = core->getMovementMgr();
+	GridLinesMgr *gridManager =
 		(GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
 
 	gridManager->setFlagAzimuthalGrid(false);
