@@ -60,7 +60,6 @@ StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjecto
 		{
 		case TriangleStrip:
 			ret.indices.reserve(vertex.size() * 3);
-
 			for (int i = 2; i < vertex.size(); ++i)
 			{
 				if (prj->intersectViewportDiscontinuity(vertex[i], vertex[i-1]) ||
@@ -81,7 +80,6 @@ StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjecto
 
 		case Triangles:
 			ret.indices.reserve(vertex.size());
-
 			for (int i = 0; i < vertex.size(); i += 3)
 			{
 				if (prj->intersectViewportDiscontinuity(vertex.at(i), vertex.at(i+1)) ||
