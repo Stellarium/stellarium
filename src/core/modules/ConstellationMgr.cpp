@@ -483,7 +483,7 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelNavigator* nav
 	sPainter.enableTexture2d(false);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	const SphericalCap viewportHalfspace = sPainter.getProjector()->getBoundingSphericalCap();
+	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{

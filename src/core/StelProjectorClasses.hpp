@@ -56,6 +56,7 @@ public:
 protected:
 	virtual bool hasDiscontinuity() const {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const {return false;}
 };
 
 class StelProjectorEqualArea : public StelProjector
@@ -81,6 +82,7 @@ public:
 protected:
 	virtual bool hasDiscontinuity() const {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const {return false;}
 };
 
 class StelProjectorStereographic : public StelProjector
@@ -128,6 +130,7 @@ public:
 protected:
 	virtual bool hasDiscontinuity() const {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const {return false;}
 };
 
 class StelProjectorFisheye : public StelProjector
@@ -166,6 +169,7 @@ public:
 protected:
 	virtual bool hasDiscontinuity() const {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const {return false;}
 };
 
 class StelProjectorHammer : public StelProjector
@@ -207,6 +211,14 @@ public:
 protected:
 	virtual bool hasDiscontinuity() const {return true;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return p1[0]*p2[0]<0 && !(p1[2]<0 && p2[2]<0);}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const
+	{
+		static const SphericalCap cap1(1,0,0);
+		static const SphericalCap cap2(-1,0,0);
+		static const SphericalCap cap3(0,0,-1);
+		SphericalCap cap(capN, capD);
+		return cap.intersects(cap1) && cap.intersects(cap2) && cap.intersects(cap2);
+	}
 };
 
 class StelProjectorCylinder : public StelProjector
@@ -226,6 +238,14 @@ protected:
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const
 	{
 		return p1[0]*p2[0]<0 && !(p1[2]<0 && p2[2]<0);
+	}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const
+	{
+		static const SphericalCap cap1(1,0,0);
+		static const SphericalCap cap2(-1,0,0);
+		static const SphericalCap cap3(0,0,-1);
+		SphericalCap cap(capN, capD);
+		return cap.intersects(cap1) && cap.intersects(cap2) && cap.intersects(cap2);
 	}
 };
 
@@ -247,6 +267,14 @@ protected:
 	{
 		return p1[0]*p2[0]<0 && !(p1[2]<0 && p2[2]<0);
 	}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const
+	{
+		static const SphericalCap cap1(1,0,0);
+		static const SphericalCap cap2(-1,0,0);
+		static const SphericalCap cap3(0,0,-1);
+		SphericalCap cap(capN, capD);
+		return cap.intersects(cap1) && cap.intersects(cap2) && cap.intersects(cap2);
+	}
 };
 
 class StelProjectorOrthographic : public StelProjector
@@ -264,6 +292,7 @@ public:
 protected:
 	virtual bool hasDiscontinuity() const {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const {return false;}
 };
 
 class StelProjector2d : public StelProjector
@@ -281,6 +310,8 @@ public:
 protected:
 	virtual bool hasDiscontinuity() const {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {Q_ASSERT(0); return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const {Q_ASSERT(0); return false;}
+	virtual void computeBoundingCap() {;}
 };
 
 #endif // _STELPROJECTIONS_HPP_

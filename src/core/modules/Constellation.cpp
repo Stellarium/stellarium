@@ -190,7 +190,7 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
 	if (singleSelected) size = isolatedBoundarySegments.size();
 	else size = sharedBoundarySegments.size();
 
-	const SphericalCap viewportHalfspace = sPainter.getProjector()->getBoundingSphericalCap();
+	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
 
 	for (i=0;i<size;i++)
 	{
