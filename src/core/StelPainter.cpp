@@ -1186,7 +1186,7 @@ static QVarLengthArray<Vec3f, 4096> polygonVertexArray;
 static QVarLengthArray<Vec2f, 4096> polygonTextureCoordArray;
 static QVarLengthArray<unsigned int, 4096> indexArray;
 
-void StelPainter::drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap, bool doSubDivise)
+void StelPainter::drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap)
 {
 	Q_ASSERT(va.vertex.size()!=1);
 	Q_ASSERT(!va.isIndexed());	// Indexed unsupported yet
@@ -1327,16 +1327,14 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 	{
 		case SphericalPolygonDrawModeBoundary:
 			if (doSubDivise || prj->intersectViewportDiscontinuity(poly->getBoundingCap()))
-				drawGreatCircleArcs(poly->getOutlineVertexArray(), clippingCap, doSubDivise);
+				drawGreatCircleArcs(poly->getOutlineVertexArray(), clippingCap);
 			else
 				drawStelVertexArray(poly->getOutlineVertexArray());
 			break;
 		case SphericalPolygonDrawModeFill:
 		case SphericalPolygonDrawModeTextureFill:
-			glEnable(GL_CULL_FACE);
 			// Assumes the polygon is already tesselated as triangles
 			drawSphericalTriangles(poly->getFillVertexArray(), drawMode==SphericalPolygonDrawModeTextureFill, clippingCap, doSubDivise);
-			glDisable(GL_CULL_FACE);
 			break;
 		default:
 			Q_ASSERT(0);

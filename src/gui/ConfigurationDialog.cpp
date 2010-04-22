@@ -79,7 +79,7 @@ void ConfigurationDialog::styleChanged()
 
 void ConfigurationDialog::createDialogContent()
 {
-	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(Mat4d());
+	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000);
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 
@@ -332,7 +332,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	Q_ASSERT(mvmgr);
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	Q_ASSERT(nav);
-	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(Mat4d());
+	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000);
 	Q_ASSERT(proj);
 
 	// view dialog / sky tab settings

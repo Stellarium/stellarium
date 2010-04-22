@@ -294,7 +294,7 @@ void StelMainScriptAPI::setSkyCulture(const QString& id)
 
 bool StelMainScriptAPI::getFlagGravityLabels()
 {
-	return StelApp::getInstance().getCore()->getProjection(Mat4d())->getFlagGravityLabels();
+	return StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000)->getFlagGravityLabels();
 }
 
 void StelMainScriptAPI::setFlagGravityLabels(bool b)
@@ -304,7 +304,7 @@ void StelMainScriptAPI::setFlagGravityLabels(bool b)
 
 bool StelMainScriptAPI::getDiskViewport()
 {
-	return StelApp::getInstance().getCore()->getProjection(Mat4d())->getMaskType() == StelProjector::MaskDisk;
+	return StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk;
 }
 
 void StelMainScriptAPI::setDiskViewport(bool b)

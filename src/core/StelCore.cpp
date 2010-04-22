@@ -280,7 +280,7 @@ QStringList StelCore::getAllProjectionTypeKeys() const
 QString StelCore::projectionTypeKeyToNameI18n(const QString& key) const
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType"));
-	QString s(getProjection(Mat4d(), (ProjectionType)en.keysToValue(key.toAscii()))->getNameI18());
+	QString s(getProjection(StelCore::FrameJ2000, (ProjectionType)en.keysToValue(key.toAscii()))->getNameI18());
 	return s;
 }
 
@@ -290,7 +290,7 @@ QString StelCore::projectionNameI18nToTypeKey(const QString& nameI18n) const
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType"));
 	for (int i=0;i<en.keyCount();++i)
 	{
-		if (getProjection(Mat4d(), (ProjectionType)i)->getNameI18()==nameI18n)
+		if (getProjection(StelCore::FrameJ2000, (ProjectionType)i)->getNameI18()==nameI18n)
 			return en.valueToKey(i);
 	}
 	// Unknown translated name
