@@ -1333,8 +1333,10 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 			break;
 		case SphericalPolygonDrawModeFill:
 		case SphericalPolygonDrawModeTextureFill:
+			glEnable(GL_CULL_FACE);
 			// Assumes the polygon is already tesselated as triangles
 			drawSphericalTriangles(poly->getFillVertexArray(), drawMode==SphericalPolygonDrawModeTextureFill, clippingCap, doSubDivise);
+			glDisable(GL_CULL_FACE);
 			break;
 		default:
 			Q_ASSERT(0);
