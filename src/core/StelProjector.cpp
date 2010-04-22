@@ -53,6 +53,7 @@ void StelProjector::init(const StelProjectorParams& params)
 	flipVert = params.flipVert ? -1.f : 1.f;
 	viewportFovDiameter = params.viewportFovDiameter;
 	pixelPerRad = 0.5f * viewportFovDiameter / fovToViewScalingFactor(params.fov*(M_PI/360.f));
+	computeBoundingCap();
 }
 
 QString StelProjector::getHtmlSummary() const
@@ -62,7 +63,7 @@ QString StelProjector::getHtmlSummary() const
 
 
 /*************************************************************************
- Return a convex polygon on the sphere which includes the viewport in the 
+ Return a convex polygon on the sphere which includes the viewport in the
  current frame
 *************************************************************************/
 SphericalRegionP StelProjector::getViewportConvexPolygon(float marginX, float marginY) const
@@ -104,20 +105,17 @@ SphericalRegionP StelProjector::getViewportConvexPolygon(float marginX, float ma
 		delete res;
 	}
 	//return SphericalRegionP((SphericalRegion*)(new AllSkySphericalRegion()));
-	const SphericalCap& hp = getBoundingSphericalCap();
+	const SphericalCap& hp = getBoundingCap();
 	return SphericalRegionP(new SphericalCap(hp));
 }
 
 
-// Return a Halfspace containing the whole viewport
-SphericalCap StelProjector::getBoundingSphericalCap() const
+void StelProjector::computeBoundingCap()
 {
-	SphericalCap result;
-	
-	bool ok = unProject(viewportXywh[0]+0.5*viewportXywh[2], viewportXywh[1]+0.5*viewportXywh[3], result.n);
+	bool ok = unProject(viewportXywh[0]+0.5*viewportXywh[2], viewportXywh[1]+0.5*viewportXywh[3], boundingCap.n);
 	Q_ASSERT(ok);	// The central point should be at a valid position by definition
-	Q_ASSERT(fabs(result.n.lengthSquared()-1.)<0.000001);
-	
+	Q_ASSERT(fabs(boundingCap.n.lengthSquared()-1.)<0.000001);
+
 	// Now need to determine the aperture
 	Vec3d e0,e1,e2,e3,e4,e5;
 	const Vec4i& vp = viewportXywh;
@@ -130,30 +128,29 @@ SphericalCap StelProjector::getBoundingSphericalCap() const
 	if (!ok)
 	{
 		// Some points were in invalid positions, use full sky.
-		result.d = -1.;
-		return result;
+		boundingCap.d = -1.;
+		return;
 	}
-	result.d = result.n*e0;
-	double h = result.n*e1;
-	if (result.d > h)
-		result.d=h;
-	h = result.n*e2;
-	if (result.d > h)
-		result.d=h;
-	h = result.n*e3;
-	if (result.d > h)
-		result.d=h;
-	h = result.n*e4;
-	if (result.d > h)
-		result.d=h;
-	h = result.n*e5;
-	if (result.d > h)
-		result.d=h;
-	return result;
+	boundingCap.d = boundingCap.n*e0;
+	double h = boundingCap.n*e1;
+	if (boundingCap.d > h)
+		boundingCap.d=h;
+	h = boundingCap.n*e2;
+	if (boundingCap.d > h)
+		boundingCap.d=h;
+	h = boundingCap.n*e3;
+	if (boundingCap.d > h)
+		boundingCap.d=h;
+	h = boundingCap.n*e4;
+	if (boundingCap.d > h)
+		boundingCap.d=h;
+	h = boundingCap.n*e5;
+	if (boundingCap.d > h)
+		boundingCap.d=h;
 }
 
 /*************************************************************************
- Project the vector v from the viewport frame into the current frame 
+ Project the vector v from the viewport frame into the current frame
 *************************************************************************/
 bool StelProjector::unProject(double x, double y, Vec3d &v) const
 {

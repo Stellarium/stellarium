@@ -255,7 +255,7 @@ void StelCore::setCurrentProjectionTypeKey(QString key)
 	}
 	const double savedFov = currentProjectorParams.fov;
 	currentProjectorParams.fov = 0.0001;	// Avoid crash
-	double newMaxFov = getProjection(Mat4d())->getMaxFov();
+	double newMaxFov = getProjection(Mat4d::identity())->getMaxFov();
 	movementMgr->setMaxFov(newMaxFov);
 	currentProjectorParams.fov = qMin(newMaxFov, savedFov);
 }

@@ -256,7 +256,7 @@ void SkyGrid::draw(const StelCore* core) const
 	}
 
 	// Get the bounding halfspace
-	const SphericalCap viewPortSphericalCap = prj->getBoundingSphericalCap();
+	const SphericalCap& viewPortSphericalCap = prj->getBoundingCap();
 
 	// Compute the first grid starting point. This point is close to the center of the screen
 	// and lays at the intersection of a meridien and a parallel
@@ -517,7 +517,7 @@ void SkyLine::draw(StelCore *core) const
 	StelProjectorP prj = core->getProjection(frameType);
 
 	// Get the bounding halfspace
-	const SphericalCap viewPortSphericalCap = prj->getBoundingSphericalCap();
+	const SphericalCap& viewPortSphericalCap = prj->getBoundingCap();
 
 	// Initialize a painter and set openGL state
 	StelPainter sPainter(prj);
