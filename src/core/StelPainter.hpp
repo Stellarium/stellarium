@@ -166,7 +166,7 @@ public:
 	//! Typically set that to false if you think that the region is fully contained in the viewport.
 	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const SphericalCap* clippingCap=NULL, bool doSubDivise=true);
 
-	void drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap=NULL, bool doSubDivide=true);
+	void drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap=NULL);
 
 	void drawSphericalTriangles(const StelVertexArray& va, bool textured, const SphericalCap* clippingCap=NULL, bool doSubDivide=true);
 
