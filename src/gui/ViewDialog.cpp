@@ -302,7 +302,7 @@ void ViewDialog::populateLists()
 	}
 	l->setCurrentItem(l->findItems(core->projectionTypeKeyToNameI18n(core->getCurrentProjectionTypeKey()), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
-	ui->projectionTextBrowser->setHtml(core->getProjection(Mat4d())->getHtmlSummary());
+	ui->projectionTextBrowser->setHtml(core->getProjection(StelCore::FrameJ2000)->getHtmlSummary());
 
 	// Fill the landscape list
 	l = ui->landscapesListWidget;
@@ -405,7 +405,7 @@ void ViewDialog::projectionChanged(const QString& projectionNameI18n)
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 	ui->projectionTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-	ui->projectionTextBrowser->setHtml(core->getProjection(Mat4d())->getHtmlSummary());
+	ui->projectionTextBrowser->setHtml(core->getProjection(StelCore::FrameJ2000)->getHtmlSummary());
 }
 
 void ViewDialog::landscapeChanged(QListWidgetItem* item)
