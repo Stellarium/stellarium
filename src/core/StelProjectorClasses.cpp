@@ -100,7 +100,7 @@ float StelProjectorEqualArea::viewScalingFactorToFov(float vsf) const
 
 float StelProjectorEqualArea::deltaZoom(float fov) const
 {
-    return fov;
+	return fov;
 }
 
 QString StelProjectorStereographic::getNameI18() const
@@ -407,3 +407,4 @@ float StelProjector2d::deltaZoom(float fov) const
 	Q_ASSERT(0);
 	return fov;
 }
+

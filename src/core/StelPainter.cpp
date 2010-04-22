@@ -1184,12 +1184,12 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 
 static QVarLengthArray<Vec3f, 4096> polygonVertexArray;
 static QVarLengthArray<Vec2f, 4096> polygonTextureCoordArray;
-// XXX: We should change the type to unsigned int
 static QVarLengthArray<unsigned int, 4096> indexArray;
 
 void StelPainter::drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap, bool doSubDivise)
 {
 	Q_ASSERT(va.vertex.size()!=1);
+	Q_ASSERT(!va.isIndexed());	// Indexed unsupported yet
 	switch (va.primitiveType)
 	{
 		case StelVertexArray::Lines:
@@ -1286,9 +1286,6 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 	if (va.vertex.isEmpty())
 		return;
 
-	// Never need to do clipping if the projection doesn't have a discontinuity
-	const bool doClip = prj->hasDiscontinuity();
-
 	Q_ASSERT(va.vertex.size()>2);
 #ifndef STELPAINTER_GL2
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -1297,16 +1294,20 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 	polygonTextureCoordArray.clear();
 	indexArray.clear();
 
-	// The simplest case, we don't need to iterate through the triangles at all.
-	if (!doClip && !doSubDivide)
+	if (!doSubDivide)
 	{
-		drawStelVertexArray(va);
-		return;
-	}
-	if (doClip && !doSubDivide)
-	{
-		StelVertexArray cleanVa = va.removeDiscontinuousTriangles(this->getProjector().data());
-		drawStelVertexArray(cleanVa);
+		if (prj->hasDiscontinuity())
+		{
+			// We don't want to subdivise the triangles, but the projection has discontinuities,
+			// so we need to make sure that no triangle is crossing them.
+			const StelVertexArray& cleanVa = va.removeDiscontinuousTriangles(this->getProjector().data());
+			drawStelVertexArray(cleanVa);
+		}
+		else
+		{
+			// The simplest case, we don't need to iterate through the triangles at all.
+			drawStelVertexArray(va);
+		}
 		return;
 	}
 
@@ -1325,7 +1326,10 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 	switch (drawMode)
 	{
 		case SphericalPolygonDrawModeBoundary:
-			drawGreatCircleArcs(poly->getOutlineVertexArray(), clippingCap, doSubDivise);
+			if (doSubDivise || prj->intersectViewportDiscontinuity(poly->getBoundingCap()))
+				drawGreatCircleArcs(poly->getOutlineVertexArray(), clippingCap, doSubDivise);
+			else
+				drawStelVertexArray(poly->getOutlineVertexArray());
 			break;
 		case SphericalPolygonDrawModeFill:
 		case SphericalPolygonDrawModeTextureFill:

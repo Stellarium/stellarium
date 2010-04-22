@@ -49,15 +49,15 @@ public:
 	//! Contains all the param needed to initialize a StelProjector
 	struct StelProjectorParams
 	{
-		StelProjectorParams() : viewportXywh(0), fov(60.), gravityLabels(false), maskType(MaskNone), viewportCenter(0., 0.), flipHorz(false), flipVert(false) {;}
-		Vector4<int> viewportXywh;     //! posX, posY, width, height
-		float fov;                    //! FOV in degrees
-		bool gravityLabels;            //! the flag to use gravity labels or not
-		StelProjectorMaskType maskType;    //! The current projector mask
-		float zNear, zFar;            //! Near and far clipping planes
-		Vec2f viewportCenter;          //! Viewport center in screen pixel
-		float viewportFovDiameter;    //! diameter of the FOV disk in pixel
-		bool flipHorz, flipVert;       //! Whether to flip in horizontal or vertical directions
+		StelProjectorParams() : viewportXywh(0, 0, 256, 256), fov(60.f), gravityLabels(false), maskType(MaskNone), viewportCenter(128.f, 128.f), flipHorz(false), flipVert(false) {;}
+		Vector4<int> viewportXywh;      //! posX, posY, width, height
+		float fov;                      //! FOV in degrees
+		bool gravityLabels;             //! the flag to use gravity labels or not
+		StelProjectorMaskType maskType; //! The current projector mask
+		float zNear, zFar;              //! Near and far clipping planes
+		Vec2f viewportCenter;           //! Viewport center in screen pixel
+		float viewportFovDiameter;      //! diameter of the FOV disk in pixel
+		bool flipHorz, flipVert;        //! Whether to flip in horizontal or vertical directions
 	};
 
 	//! Destructor
@@ -90,9 +90,12 @@ public:
 	//! cylindrical projection it will return true if the line cuts the wrap-around line (i.e. at lon=180 if the observer look at lon=0).
 	bool intersectViewportDiscontinuity(const Vec3d& p1, const Vec3d& p2) const
 	{
-		if (hasDiscontinuity()==false)
-			return false;
-		return intersectViewportDiscontinuityInternal(modelViewMatrix*p1, modelViewMatrix*p2);
+		return hasDiscontinuity() && intersectViewportDiscontinuityInternal(modelViewMatrix*p1, modelViewMatrix*p2);
+	}
+
+	bool intersectViewportDiscontinuity(const SphericalCap& cap) const
+	{
+		return hasDiscontinuity() && intersectViewportDiscontinuityInternal(modelViewMatrix*cap.n, cap.d);
 	}
 
 	//! Convert a Field Of View radius value in radians in ViewScalingFactor (used internally)
@@ -130,8 +133,8 @@ public:
 	//! represented by a convex polygon (e.g. if aperture > 180 deg).
 	SphericalRegionP getViewportConvexPolygon(float marginX=0., float marginY=0.) const;
 
-	//! Return a Halfspace containing the whole viewport
-	SphericalCap getBoundingSphericalCap() const;
+	//! Return a SphericalCap containing the whole viewport
+	const SphericalCap& getBoundingCap() const {return boundingCap;}
 
 	//! Get size of a radian in pixels at the center of the viewport disk
 	float getPixelPerRadAtCenter() const {return pixelPerRad;}
@@ -210,7 +213,7 @@ public:
 		v[2] = (v[2] - zNear) * oneOverZNearMinusZFar;
 		return rval;
 	}
-	
+
 	//! Project the vector v from the current frame into the viewport.
 	//! @param v the direction vector in the current frame. Does not need to be normalized.
 	//! @param win the projected vector in the viewport 2D frame. win[0] and win[1] are in screen pixels, win[2] is unused.
@@ -262,19 +265,26 @@ protected:
 	//! cylindrical projection it will return true if the line cuts the wrap-around line (i.e. at lon=180 if the observer look at lon=0).
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const = 0;
 
-	Mat4d modelViewMatrix;         // openGL MODELVIEW Matrix
-	Mat4f modelViewMatrixf;         // openGL MODELVIEW Matrix
-	float flipHorz,flipVert;      // Whether to flip in horizontal or vertical directions
-	float pixelPerRad;            // pixel per rad at the center of the viewport disk
-	StelProjectorMaskType maskType;    // The current projector mask
-	float zNear, oneOverZNearMinusZFar;  // Near and far clipping planes
-	Vec4i viewportXywh;     // Viewport parameters
-	Vec2f viewportCenter;          // Viewport center in screen pixel
-	float viewportFovDiameter;    // diameter of the FOV disk in pixel
-	bool gravityLabels;            // should label text align with the horizon?
+	//! Determine whether a cap intersects with a projection discontinuity.
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const = 0;
+
+	//! Initialize the bounding cap.
+	virtual void computeBoundingCap();
+
+	Mat4d modelViewMatrix;			    // openGL MODELVIEW Matrix
+	Mat4f modelViewMatrixf;             // openGL MODELVIEW Matrix
+	float flipHorz,flipVert;            // Whether to flip in horizontal or vertical directions
+	float pixelPerRad;                  // pixel per rad at the center of the viewport disk
+	StelProjectorMaskType maskType;     // The current projector mask
+	float zNear, oneOverZNearMinusZFar; // Near and far clipping planes
+	Vec4i viewportXywh;                 // Viewport parameters
+	Vec2f viewportCenter;               // Viewport center in screen pixel
+	float viewportFovDiameter;          // diameter of the FOV disk in pixel
+	bool gravityLabels;                 // should label text align with the horizon?
+	SphericalCap boundingCap;           // Bounding cap of the whole viewport
 
 private:
-	//! Initialise the StelProjector from a param instance
+	//! Initialise the StelProjector from a param instance.
 	void init(const StelProjectorParams& param);
 };
 
