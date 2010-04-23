@@ -72,17 +72,19 @@ static QTextStream &operator<<(QTextStream &o, const PrintRaDec &x)
 	const int dec_ms = d % 1000; d /= 1000;
 	const int dec_s = d % 60; d /= 60;
 	const int dec_m = d % 60; d /= 60;
-	o << "ra = "
-	  << qSetPadChar(' ') << qSetFieldWidth(2) << h << 'h'
-	  << qSetPadChar('0') << qSetFieldWidth(2) << ra_m << 'm'
-	  << qSetPadChar('0') << qSetFieldWidth(2) << ra_s << '.'
-	  << qSetPadChar('0') << qSetFieldWidth(4) << ra_ms
-	  << " dec = "
+	o << "RA = "
+	  << qSetPadChar(' ')
+	  << qSetFieldWidth(2) << h     << qSetFieldWidth(0) << 'h'
+	  << qSetPadChar('0')
+	  << qSetFieldWidth(2) << ra_m  << qSetFieldWidth(0) << 'm'
+	  << qSetFieldWidth(2) << ra_s  << qSetFieldWidth(0) << '.'
+	  << qSetFieldWidth(4) << ra_ms << qSetFieldWidth(0)
+	  << " Dec = "
 	  << ((d<10)?" ":"") << dec_sign << d << 'd'
-	  << qSetPadChar('0') << qSetFieldWidth(2) << dec_m << 'm'
-	  << qSetPadChar('0') << qSetFieldWidth(2) << dec_s << '.'
-	  << qSetPadChar('0') << qSetFieldWidth(3) << dec_ms
-	  << qSetPadChar(' ') << qSetFieldWidth(0);
+	  << qSetFieldWidth(2) << dec_m  << qSetFieldWidth(0) << 'm'
+	  << qSetFieldWidth(2) << dec_s  << qSetFieldWidth(0) << '.'
+	  << qSetFieldWidth(3) << dec_ms << qSetFieldWidth(0)
+	  << qSetPadChar(' ');
 	return o;
 }
 #endif
@@ -281,7 +283,7 @@ void Connection::dataReceived(const char *&p, const char *read_buff_end)
 				                 (((unsigned int)(unsigned char)(p[19])) << 24) );
 				#ifdef DEBUG5
 				*log_file << Now() << "Connection::dataReceived: "
-				                   << PrintRaDec(ra_int,dec_int)
+				                   << PrintRaDec(ra_int, dec_int)
 				                   << endl;
 				#endif
 				
