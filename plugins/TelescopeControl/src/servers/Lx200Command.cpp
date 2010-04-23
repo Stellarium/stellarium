@@ -419,9 +419,14 @@ int Lx200CommandGetRa::readAnswerFromBuffer(const char *&buff,
 	#ifdef DEBUG4
 	*log_file << Now()
 	          << "Lx200CommandGetRa::readAnswerFromBuffer: "
-	         "ra = " << qSetFieldWidth(2) << qSetPadChar('0') << (ra/3600)
-	          << ':' << qSetFieldWidth(2) << qSetPadChar('0') << ((ra/60)%60)
-	          << ':' << qSetFieldWidth(2) << qSetPadChar('0') << (ra%60)
+	          << "RA = "
+	          << qSetPadChar('0')
+	          << qSetFieldWidth(2)  << (ra/3600)
+	          << qSetFieldWidth(0) << ':'
+	          << qSetFieldWidth(2) << ((ra/60)%60)
+	          << qSetFieldWidth(0) << ':'
+	          << qSetFieldWidth(2) << (ra%60)
+	          << qSetFieldWidth(0) << qSetPadChar(' ')
 	          << endl;
 	#endif
 	
@@ -530,13 +535,14 @@ int Lx200CommandGetDec::readAnswerFromBuffer(const char *&buff,
 	#ifdef DEBUG4
 	*log_file << Now()
 	          << "Lx200CommandGetDec::readAnswerFromBuffer: "
-	          << "dec = " << (sign_dec?'-':'+')
-	          << qSetFieldWidth(2) << qSetPadChar('0') << (dec/3600)
-	          << ':'
-	          << qSetFieldWidth(2) << qSetPadChar('0') << ((dec/60)%60)
-	          << ':'
-	          << qSetFieldWidth(2) << qSetPadChar('0') << (dec%60)
-	          << qSetPadChar(' ')
+	          << "Dec = " << (sign_dec?'-':'+')
+	          << qSetPadChar('0')
+	          << qSetFieldWidth(2) << (dec/3600)
+	          << qSetFieldWidth(0) << ':'
+	          << qSetFieldWidth(2) << ((dec/60)%60)
+	          << qSetFieldWidth(0) << ':'
+	          << qSetFieldWidth(2) << (dec%60)
+	          << qSetFieldWidth(0) << qSetPadChar(' ')
 	          << endl;
 	#endif
 	
