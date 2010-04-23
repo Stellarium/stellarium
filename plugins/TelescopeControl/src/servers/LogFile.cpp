@@ -23,17 +23,19 @@
 
 QTextStream &operator<<(QTextStream &o, const Now &now)
 {
-	long long int x = now.time;
+	qlonglong x = now.time;
 	const int micros = x % 1000000; x /= 1000000;
 	const int secs = x % 60; x /= 60;
 	const int mins = x % 60; x /= 60;
 	const int hours = x % 24; x /= 24;
-	o << x
-	  << ',' << qSetFieldWidth(2) << qSetPadChar('0') << hours
-	  << ':' << qSetFieldWidth(2) << qSetPadChar('0') << mins
-	  << ':' << qSetFieldWidth(2) << qSetPadChar('0') << secs
-	  << '.' << qSetFieldWidth(6) << qSetPadChar('0') << micros
-	  << qSetFieldWidth(0) << qSetPadChar(' ') << ": ";
+	o << qSetPadChar('0')
+	  << x << ", " //Days since the Unix epoch (1970-01-01)
+	  //ISO 8601 UTC time with decimal seconds:
+	  << qSetFieldWidth(2) << hours  << qSetFieldWidth(0) << ':'
+	  << qSetFieldWidth(2) << mins   << qSetFieldWidth(0) << ':'
+	  << qSetFieldWidth(2) << secs   << qSetFieldWidth(0) << '.'
+	  << qSetFieldWidth(6) << micros << qSetFieldWidth(0)
+	  << qSetPadChar(' ') << "Z: ";//'Z' is for UTC
 	return o;
 }
 
