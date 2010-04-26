@@ -106,11 +106,11 @@ void SolarSystem::init()
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
-	setMoonScale(conf->value("viewing/moon_scale", 5.0).toDouble());
+	setMoonScale(conf->value("viewing/moon_scale", 5.0).toFloat());
 	setFlagPlanets(conf->value("astro/flag_planets").toBool());
 	setFlagHints(conf->value("astro/flag_planets_hints").toBool());
 	setFlagLabels(conf->value("astro/flag_planets_labels", true).toBool());
-	setLabelsAmount(conf->value("astro/labels_amount", 3.).toDouble());
+	setLabelsAmount(conf->value("astro/labels_amount", 3.).toFloat());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
 	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", false).toBool());
 
@@ -640,7 +640,7 @@ void SolarSystem::loadPlanets()
 					pd.value(secname+"/radius").toDouble()/AU,
 					pd.value(secname+"/oblateness", 0.0).toDouble(),
 					StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
-					pd.value(secname+"/albedo").toDouble(),
+					pd.value(secname+"/albedo").toFloat(),
 					pd.value(secname+"/tex_map").toString(),
 					pd.value(secname+"/tex_halo").toString(),
 					posfunc,

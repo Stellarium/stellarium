@@ -53,7 +53,7 @@ void MilkyWay::init()
 
 	tex = StelApp::getInstance().getTextureManager().createTexture("textures/milkyway.png");
 	setFlagShow(conf->value("astro/flag_milky_way").toBool());
-	setIntensity(conf->value("astro/milky_way_intensity",1.).toDouble());
+	setIntensity(conf->value("astro/milky_way_intensity",1.f).toFloat());
 }
 
 
@@ -77,9 +77,9 @@ void MilkyWay::draw(StelCore* core)
 	// since milky way is always seen white RGB value in the texture (1.0,1.0,1.0)
 	Vec3f c;
 	if (StelApp::getInstance().getVisionModeNight())
-		c = Vec3f(0.34165, 0, 0);
+		c = Vec3f(0.34165f, 0.f, 0.f);
 	else
-		c = Vec3f(0.34165, 0.429666, 0.63586);
+		c = Vec3f(0.34165f, 0.429666f, 0.63586f);
 
 	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(13.5);
 
@@ -87,7 +87,7 @@ void MilkyWay::draw(StelCore* core)
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
 
 	// Bound a maximum luminance
-	aLum = qMin(0.38, aLum*2.);
+	aLum = qMin(0.38f, aLum*2.f);
 
 	// intensity of 1.0 is "proper", but allow boost for dim screens
 	c*=aLum*intensity;
@@ -102,6 +102,6 @@ void MilkyWay::draw(StelCore* core)
 	sPainter.enableTexture2d(true);
 	glDisable(GL_BLEND);
 	tex->bind();
-	sPainter.sSphere(1.,1.0,20,20,1);
+	sPainter.sSphere(1.f,1.f,20,20,1);
 	glDisable(GL_CULL_FACE);
 }

@@ -263,13 +263,13 @@ void LandscapeOldStyle::create(bool _fullpath, QMap<QString, QString> param)
 	fogTexCoord.texCoords[2] = c;
 	fogTexCoord.texCoords[3] = d;
 
-	fogAltAngle        = param["fog_alt_angle"].toDouble();
-	fogAngleShift      = param["fog_angle_shift"].toDouble();
-	decorAltAngle      = param["decor_alt_angle"].toDouble();
-	decorAngleShift    = param["decor_angle_shift"].toDouble();
-	angleRotateZ       = param["decor_angle_rotatez"].toDouble();
-	groundAngleShift   = param["ground_angle_shift"].toDouble();
-	groundAngleRotateZ = param["ground_angle_rotatez"].toDouble();
+	fogAltAngle        = param["fog_alt_angle"].toFloat();
+	fogAngleShift      = param["fog_angle_shift"].toFloat();
+	decorAltAngle      = param["decor_alt_angle"].toFloat();
+	decorAngleShift    = param["decor_angle_shift"].toFloat();
+	angleRotateZ       = param["decor_angle_rotatez"].toFloat();
+	groundAngleShift   = param["ground_angle_shift"].toFloat();
+	groundAngleRotateZ = param["ground_angle_rotatez"].toFloat();
 	drawGroundFirst    = param["draw_ground_first"].toInt();
 }
 

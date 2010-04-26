@@ -55,11 +55,11 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	// initialize viewport parameters and texture size:
 
 	// maximum FOV value of the not yet distorted image
-	double distorter_max_fov = conf.value("spheric_mirror/distorter_max_fov",175.0).toDouble();
-	if (distorter_max_fov > 240.0)
-		distorter_max_fov = 240.0;
-	else if (distorter_max_fov < 120.0)
-		distorter_max_fov = 120.0;
+	double distorter_max_fov = conf.value("spheric_mirror/distorter_max_fov",175.f).toFloat();
+	if (distorter_max_fov > 240.f)
+		distorter_max_fov = 240.f;
+	else if (distorter_max_fov < 120.f)
+		distorter_max_fov = 120.f;
 	if (distorter_max_fov > core->getMovementMgr()->getMaxFov())
 		distorter_max_fov = core->getMovementMgr()->getMaxFov();
 
@@ -89,11 +89,11 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	}
 
 	// center of the FOV-disk in the not yet distorted image
-	newProjectorParams.viewportCenter[0] = conf.value("spheric_mirror/viewportCenterX", 0.5*newProjectorParams.viewportXywh[2]).toDouble();
-	newProjectorParams.viewportCenter[1] = conf.value("spheric_mirror/viewportCenterY", 0.5*newProjectorParams.viewportXywh[3]).toDouble();
+	newProjectorParams.viewportCenter[0] = conf.value("spheric_mirror/viewportCenterX", 0.5*newProjectorParams.viewportXywh[2]).toFloat();
+	newProjectorParams.viewportCenter[1] = conf.value("spheric_mirror/viewportCenterY", 0.5*newProjectorParams.viewportXywh[3]).toFloat();
 
 	// diameter of the FOV-disk in pixels
-	newProjectorParams.viewportFovDiameter = conf.value("spheric_mirror/viewport_fov_diameter", qMin(newProjectorParams.viewportXywh[2],newProjectorParams.viewportXywh[3])).toDouble();
+	newProjectorParams.viewportFovDiameter = conf.value("spheric_mirror/viewport_fov_diameter", qMin(newProjectorParams.viewportXywh[2],newProjectorParams.viewportXywh[3])).toFloat();
 
 	texture_wh = 1;
 	while (texture_wh < newProjectorParams.viewportXywh[2] || texture_wh < newProjectorParams.viewportXywh[3])
@@ -111,11 +111,11 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	const QString custom_distortion_file = conf.value("spheric_mirror/custom_distortion_file","").toString();
 	if (custom_distortion_file.isEmpty())
 	{
-		double texture_triangle_base_length = conf.value("spheric_mirror/texture_triangle_base_length",16.0).toDouble();
-		if (texture_triangle_base_length > 256.0)
-			texture_triangle_base_length = 256.0;
-		else if (texture_triangle_base_length < 2.0)
-			texture_triangle_base_length = 2.0;
+		float texture_triangle_base_length = conf.value("spheric_mirror/texture_triangle_base_length",16.f).toFloat();
+		if (texture_triangle_base_length > 256.f)
+			texture_triangle_base_length = 256.f;
+		else if (texture_triangle_base_length < 2.f)
+			texture_triangle_base_length = 2.f;
 		max_x = (int)trunc(0.5 + screen_w/texture_triangle_base_length);
 		step_x = screen_w / (double)(max_x-0.5);
 		max_y = (int)trunc(screen_h/(texture_triangle_base_length*0.5*sqrt(3.0)));

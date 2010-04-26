@@ -348,8 +348,8 @@ double getDecAngle(const QString& str)
 	if (re1.exactMatch(str))
 	{
 		bool neg = (re1.capturedTexts().at(1) == "-");
-		double d = re1.capturedTexts().at(2).toDouble();
-		double m = re1.capturedTexts().at(4).toDouble();
+		float d = re1.capturedTexts().at(2).toFloat();
+		float m = re1.capturedTexts().at(4).toFloat();
 		double s = re1.capturedTexts().at(5).toDouble();
 		if (re1.capturedTexts().at(3).toUpper() == "H")
 		{
