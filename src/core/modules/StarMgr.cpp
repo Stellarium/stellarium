@@ -229,7 +229,7 @@ void StarMgr::init()
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
-	setLabelsAmount(conf->value("stars/labels_amount",3).toDouble());
+	setLabelsAmount(conf->value("stars/labels_amount",3.f).toFloat());
 
 	objectMgr->registerStelObjectMgr(this);
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");   // Load pointer texture

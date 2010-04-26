@@ -215,9 +215,9 @@ void StelMainGraphicsView::init(QSettings* conf)
 
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
 	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
-	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.).toDouble());
-	maxfps = conf->value("video/maximum_fps",10000.).toDouble();
-	minfps = conf->value("video/minimum_fps",10000.).toDouble();
+	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toFloat());
+	maxfps = conf->value("video/maximum_fps",10000.f).toFloat();
+	minfps = conf->value("video/minimum_fps",10000.f).toFloat();
 
 	StelPainter::initSystemGLInfo(glContext);
 

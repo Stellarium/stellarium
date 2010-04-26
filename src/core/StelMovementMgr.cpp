@@ -70,16 +70,16 @@ void StelMovementMgr::init()
 	mouseZoomSpeed = conf->value("navigation/mouse_zoom",30).toInt();
 	flagEnableZoomKeys = conf->value("navigation/flag_enable_zoom_keys").toBool();
 	flagEnableMoveKeys = conf->value("navigation/flag_enable_move_keys").toBool();
-	keyMoveSpeed = conf->value("navigation/move_speed",0.0004).toDouble();
-	keyZoomSpeed = conf->value("navigation/zoom_speed", 0.0004).toDouble();
-	autoMoveDuration = conf->value ("navigation/auto_move_duration",1.5).toDouble();
+	keyMoveSpeed = conf->value("navigation/move_speed",0.0004f).toFloat();
+	keyZoomSpeed = conf->value("navigation/zoom_speed", 0.0004f).toFloat();
+	autoMoveDuration = conf->value ("navigation/auto_move_duration",1.5f).toFloat();
 	flagManualZoom = conf->value("navigation/flag_manual_zoom").toBool();
 	flagAutoZoomOutResetsDirection = conf->value("navigation/auto_zoom_out_resets_direction", true).toBool();
 	flagEnableMouseNavigation = conf->value("navigation/flag_enable_mouse_navigation",true).toBool();
 
 	minFov = 0.0001;
 	maxFov = 100.;
-	initFov = conf->value("navigation/init_fov",60.).toDouble();
+	initFov = conf->value("navigation/init_fov",60.f).toFloat();
 	currentFov = initFov;
 
 	initViewPos = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());

@@ -93,9 +93,9 @@ void NebulaMgr::init()
 
 	setFlagShow(conf->value("astro/flag_nebula",true).toBool());
 	setFlagHints(conf->value("astro/flag_nebula_name",false).toBool());
-	setHintsAmount(conf->value("astro/nebula_hints_amount", 3).toDouble());
-	setLabelsAmount(conf->value("astro/nebula_labels_amount", 3).toDouble());
-	setCircleScale(conf->value("astro/nebula_scale",1.0f).toDouble());
+	setHintsAmount(conf->value("astro/nebula_hints_amount", 3).toFloat());
+	setLabelsAmount(conf->value("astro/nebula_labels_amount", 3).toFloat());
+	setCircleScale(conf->value("astro/nebula_scale",1.0f).toFloat());
 	setFlagDisplayNoTexture(conf->value("astro/flag_nebula_display_no_texture", false).toBool());
 
 	updateI18n();
