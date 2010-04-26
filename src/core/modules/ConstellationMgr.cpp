@@ -83,12 +83,12 @@ void ConstellationMgr::init()
 	Q_ASSERT(conf);
 
 	lastLoadedSkyCulture = "dummy";
-	asterFont.setPixelSize(conf->value("viewing/constellation_font_size",16).toInt());
+	asterFont.setPixelSize(conf->value("viewing/constellation_font_size",13).toInt());
 	setFlagLines(conf->value("viewing/flag_constellation_drawing").toBool());
 	setFlagLabels(conf->value("viewing/flag_constellation_name").toBool());
 	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries",false).toBool());
-	setArtIntensity(conf->value("viewing/constellation_art_intensity", 0.5).toDouble());
-	setArtFadeDuration(conf->value("viewing/constellation_art_fade_duration",2.).toDouble());
+	setArtIntensity(conf->value("viewing/constellation_art_intensity", 0.5f).toFloat());
+	setArtFadeDuration(conf->value("viewing/constellation_art_fade_duration",2.f).toFloat());
 	setFlagArt(conf->value("viewing/flag_constellation_art").toBool());
 	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected",
 						   conf->value("viewing/flag_constellation_pick", false).toBool() ).toBool());

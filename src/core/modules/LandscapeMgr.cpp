@@ -568,15 +568,15 @@ Landscape* LandscapeMgr::createFromHash(QMap<QString, QString>& param)
 	else if (param["type"]=="spherical")
 	{
 		LandscapeSpherical* ldscp = new LandscapeSpherical();
-		ldscp->create(param["name"], 1, param["path"] + param["maptex"],param["angleRotateZ"].toDouble());
+		ldscp->create(param["name"], 1, param["path"] + param["maptex"],param["angleRotateZ"].toFloat());
 		return ldscp;
 	}
 	else
 	{   //	if (s=="fisheye")
 		LandscapeFisheye* ldscp = new LandscapeFisheye();
 		ldscp->create(param["name"], 1, param["path"] + param["maptex"],
-					  param["texturefov"].toDouble(),
-					  param["angleRotateZ"].toDouble());
+					  param["texturefov"].toFloat(),
+					  param["angleRotateZ"].toFloat());
 		return ldscp;
 	}
 }

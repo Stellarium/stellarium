@@ -128,7 +128,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 		latitude = argsGetOptionWithArg(argList, "", "--latitude", "").toString();
 		skyDate = argsGetOptionWithArg(argList, "", "--sky-date", "").toString();
 		skyTime = argsGetOptionWithArg(argList, "", "--sky-time", "").toString();
-		fov = argsGetOptionWithArg(argList, "", "--fov", -1.0).toDouble();
+		fov = argsGetOptionWithArg(argList, "", "--fov", -1.f).toFloat();
 		projectionType = argsGetOptionWithArg(argList, "", "--projection-type", "").toString();
 		screenshotDir = argsGetOptionWithArg(argList, "", "--screenshot-dir", "").toString();
 		multiresImage = argsGetOptionWithArg(argList, "", "--multires-image", "").toString();

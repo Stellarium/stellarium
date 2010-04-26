@@ -196,7 +196,7 @@ void StelSkyPolygon::loadFromQVariantMap(const QVariantMap& map)
 
 	shortName = map.value("shortName").toString();
 	bool ok=false;
-	minResolution = map.value("minResolution").toDouble(&ok);
+	minResolution = map.value("minResolution").toFloat(&ok);
 	if (!ok)
 		throw std::runtime_error(qPrintable(QString("minResolution expect a double value, found: %1").arg(map.value("minResolution").toString())));
 
@@ -209,7 +209,7 @@ void StelSkyPolygon::loadFromQVariantMap(const QVariantMap& map)
 		{
 			const QVariantList vl = vRaDec.toList();
 			Vec3d v;
-			StelUtils::spheToRect(vl.at(0).toDouble(&ok)*M_PI/180., vl.at(1).toDouble(&ok)*M_PI/180., v);
+			StelUtils::spheToRect(vl.at(0).toFloat(&ok)*M_PI/180.f, vl.at(1).toFloat(&ok)*M_PI/180.f, v);
 			if (!ok)
 				throw std::runtime_error("wrong Ra and Dec, expect a double value");
 			vertices.append(v);

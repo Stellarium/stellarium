@@ -334,7 +334,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	bool ok=false;
 	if (!map.contains("minResolution"))
 		throw std::runtime_error(qPrintable(QString("minResolution is mandatory")));
-	minResolution = map.value("minResolution").toDouble(&ok);
+	minResolution = map.value("minResolution").toFloat(&ok);
 	if (!ok)
 	{
 		throw std::runtime_error(qPrintable(QString("minResolution expect a double value, found: \"%1\"").arg(map.value("minResolution").toString())));
@@ -342,7 +342,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 
 	if (map.contains("luminance"))
 	{
-		luminance = map.value("luminance").toDouble(&ok);
+		luminance = map.value("luminance").toFloat(&ok);
 		if (!ok)
 			throw std::runtime_error("luminance expect a float value");
 		qWarning() << "luminance in preview JSON files is deprecated. Replace with maxBrightness.";
@@ -350,7 +350,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 
 	if (map.contains("maxBrightness"))
 	{
-		luminance = map.value("maxBrightness").toDouble(&ok);
+		luminance = map.value("maxBrightness").toFloat(&ok);
 		if (!ok)
 			throw std::runtime_error("maxBrightness expect a float value");
 		luminance = StelApp::getInstance().getCore()->getSkyDrawer()->surfacebrightnessToLuminance(luminance);
@@ -381,7 +381,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		{
 			const QVariantList vl = vRaDec.toList();
 			Vec3d v;
-			StelUtils::spheToRect(vl.at(0).toDouble(&ok)*M_PI/180., vl.at(1).toDouble(&ok)*M_PI/180., v);
+			StelUtils::spheToRect(vl.at(0).toFloat(&ok)*M_PI/180.f, vl.at(1).toFloat(&ok)*M_PI/180.f, v);
 			if (!ok)
 				throw std::runtime_error("wrong Ra and Dec, expect a double value");
 			vertices.append(v);
@@ -395,7 +395,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 			foreach (const QVariant& vXY, polyXY.toList())
 			{
 				const QVariantList vl = vXY.toList();
-				texCoords.append(Vec2f(vl.at(0).toDouble(&ok), vl.at(1).toDouble(&ok)));
+				texCoords.append(Vec2f(vl.at(0).toFloat(&ok), vl.at(1).toFloat(&ok)));
 				if (!ok)
 					throw std::runtime_error("wrong X and Y, expect a double value");
 			}
