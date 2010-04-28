@@ -224,6 +224,9 @@ private:
 	// Main network manager used for the program
 	QNetworkAccessManager* networkAccessManager;
 
+	//! Get proxy settings from config file... if not set use http_proxy env var
+	void setupHttpProxy();
+
 	// The audio manager.  Must execute in the main thread.
 	StelAudioMgr* audioMgr;
 

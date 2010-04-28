@@ -65,6 +65,7 @@
 #include <QMessageBox>
 #include <QNetworkDiskCache>
 #include <QNetworkReply>
+#include <cstdlib>
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -132,6 +133,66 @@ StelApp::~StelApp()
 	singleton = NULL;
 }
 
+void StelApp::setupHttpProxy()
+{
+	QString proxyHost = confSettings->value("proxy/host_name").toString();
+	QString proxyPort = confSettings->value("proxy/port").toString();
+	QString proxyUser = confSettings->value("proxy/user").toString();
+	QString proxyPass = confSettings->value("proxy/password").toString();
+
+	// If proxy settings not found in config, use environment variable
+	// if it is defined.  (Config file over-rides environment).
+	if (proxyHost.isEmpty() && proxyUser.isEmpty() && proxyPass.isEmpty() && proxyPort.isEmpty())
+	{
+		char *httpProxyEnv;
+		httpProxyEnv = std::getenv("http_proxy");
+		if (!httpProxyEnv)
+		{
+			httpProxyEnv = std::getenv("HTTP_PROXY");
+		}
+		if (httpProxyEnv)
+		{
+			QString proxyString = QString(httpProxyEnv);
+			if (!proxyString.isEmpty())
+			{
+				// Regular expressions with multiple optional sub-expressions are so unreadable  --MNG
+				QRegExp pre("^http://((([^:]+):([^@]+))@)?([^:]+)(:(\\d+))?");
+				if (pre.exactMatch(proxyString))
+				{
+					proxyUser = pre.capturedTexts().at(3);
+					proxyPass = pre.capturedTexts().at(4);
+					proxyHost = pre.capturedTexts().at(5);
+					proxyPort = pre.capturedTexts().at(7);
+				}
+				else
+				{
+					qDebug() << "indecipherable environment variable http_proxy:" << proxyString;
+					return;
+				}
+			}
+		}
+	}
+
+	if (!proxyHost.isEmpty())
+	{
+		QNetworkProxy proxy;
+		proxy.setType(QNetworkProxy::HttpProxy);
+		proxy.setHostName(proxyHost);
+		if (!proxyPort.isEmpty())
+			proxy.setPort(proxyPort.toUShort());
+
+		if (!proxyUser.isEmpty())
+			proxy.setUser(proxyUser);
+
+		if (!proxyPass.isEmpty())
+			proxy.setPassword(proxyPass);
+
+		QString ppDisp = proxyPass;
+		ppDisp.replace(QRegExp("."), "x");
+		qDebug() << "Using HTTP proxy:" << proxyUser << ppDisp << proxyHost << proxyPort;
+		QNetworkProxy::setApplicationProxy(proxy);
+	}
+}
 
 void StelApp::init(QSettings* conf)
 {
@@ -256,24 +317,7 @@ void StelApp::init(QSettings* conf)
 	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
 
 	// Proxy Initialisation
-	QString proxyName = confSettings->value("proxy/host_name").toString();
-	QString proxyUser = confSettings->value("proxy/user").toString();
-	QString proxyPassword = confSettings->value("proxy/password").toString();
-	QVariant proxyPort = confSettings->value("proxy/port");
-
-	if (proxyName!="" && !proxyPort.isNull())
-	{
-		QNetworkProxy proxy(QNetworkProxy::HttpProxy);
-		proxy.setHostName(proxyName);
-		proxy.setPort(proxyPort.toUInt());
-		if(proxyUser!="" && proxyPassword!="")
-		{
-			proxy.setUser(proxyUser);
-			proxy.setPassword(proxyPassword);
-		}
-		QNetworkProxy::setApplicationProxy(proxy);
-	}
-
+	setupHttpProxy();
 	updateI18n();
 
 	initialized = true;
