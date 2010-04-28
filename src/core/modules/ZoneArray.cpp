@@ -33,14 +33,10 @@
 #include "StelObject.hpp"
 #include "StelNavigator.hpp"
 
-#ifdef HAVE_BYTESWAP_H
-#include <byteswap.h>
-#else
-static unsigned int bswap_32(unsigned int val) {
+static unsigned int stel_bswap_32(unsigned int val) {
   return (((val) & 0xff000000) >> 24) | (((val) & 0x00ff0000) >>  8) |
 	(((val) & 0x0000ff00) <<  8) | (((val) & 0x000000ff) << 24);
 }
-#endif
 
 namespace BigStarCatalogExtension
 {
@@ -133,13 +129,13 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			//return 0;
 		}
 		dbStr += "byteswap ";
-		type = bswap_32(type);
-		major = bswap_32(major);
-		minor = bswap_32(minor);
-		level = bswap_32(level);
-		mag_min = bswap_32(mag_min);
-		mag_range = bswap_32(mag_range);
-		mag_steps = bswap_32(mag_steps);
+		type = stel_bswap_32(type);
+		major = stel_bswap_32(major);
+		minor = stel_bswap_32(minor);
+		level = stel_bswap_32(level);
+		mag_min = stel_bswap_32(mag_min);
+		mag_range = stel_bswap_32(mag_range);
+		mag_steps = stel_bswap_32(mag_steps);
 	}
 	else if (magic == FILE_MAGIC)
 	{
@@ -352,7 +348,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 			const unsigned int *tmp = zone_size;
 			for (unsigned int z=0;z<nr_of_zones;z++,tmp++)
 			{
-				const unsigned int tmp_spu_int32 = byte_swap?bswap_32(*tmp):*tmp;
+				const unsigned int tmp_spu_int32 = byte_swap?stel_bswap_32(*tmp):*tmp;
 				nr_of_stars += tmp_spu_int32;
 				getZones()[z].size = tmp_spu_int32;
 			}
