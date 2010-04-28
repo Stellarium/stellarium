@@ -76,7 +76,8 @@ class Translations
 		N_("Navajo");
 		N_("Norse");
 		N_("Polynesian");
-		N_("Western");
+		N_("Sami");
 		N_("Tupi-Guarani");
+		N_("Western");
 	}
 };
