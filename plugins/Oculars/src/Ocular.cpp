@@ -41,7 +41,7 @@ Ocular::~Ocular()
 #pragma mark Instance Methods
 #endif
 /* ********************************************************************* */
-double Ocular::getAcutalFOV(Telescope *telescope)
+double Ocular::getActualFOV(Telescope *telescope)
 {
 	double actualFOV = 0.0;
 	if (fieldStop > 0.0) {

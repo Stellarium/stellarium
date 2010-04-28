@@ -35,7 +35,6 @@ public:
 	const QString getName();
 	bool isHFlipped();
 	bool isVFlipped();
-	
 private:
 	int telescopeID;
 	QString name;

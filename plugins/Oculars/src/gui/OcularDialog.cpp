@@ -69,10 +69,8 @@ OcularDialog::~OcularDialog()
 		delete telescopeMapper;
 		telescopeMapper = NULL;
 	}
-	
 	delete ui;
 	ui = NULL;
-	
 	delete validatorOcularAFOV;
 	validatorOcularAFOV = NULL;
 	delete validatorOcularEFL;
@@ -146,10 +144,10 @@ void OcularDialog::deleteSelectedTelescope()
 
 void OcularDialog::insertNewOcular()
 {
-    QSqlField field1("name", QVariant::String);
-    QSqlField field2("afov", QVariant::Double);
-    QSqlField field3("efl", QVariant::Double);
-    QSqlField field4("fieldStop", QVariant::Double);
+	QSqlField field1("name", QVariant::String);
+	QSqlField field2("afov", QVariant::Double);
+	QSqlField field3("efl", QVariant::Double);
+	QSqlField field4("fieldStop", QVariant::Double);
 	field1.setValue(QVariant("New Ocular"));
 	field2.setValue(QVariant(82));
 	field3.setValue(QVariant(32));
@@ -169,17 +167,16 @@ void OcularDialog::insertNewOcular()
 
 void OcularDialog::insertNewTelescope()
 {
-    QSqlField field1("name", QVariant::String);
-    QSqlField field2("focalLength", QVariant::Double);
-    QSqlField field3("diameter", QVariant::Double);
-    QSqlField field4("vFlip", QVariant::String);
-    QSqlField field5("hFlip", QVariant::String);
+	QSqlField field1("name", QVariant::String);
+	QSqlField field2("focalLength", QVariant::Double);
+	QSqlField field3("diameter", QVariant::Double);
+	QSqlField field4("vFlip", QVariant::String);
+	QSqlField field5("hFlip", QVariant::String);
 	field1.setValue(QVariant("New Telescope"));
 	field2.setValue(QVariant(500));
 	field3.setValue(QVariant(80));
 	field4.setValue(QVariant("false"));
 	field5.setValue(QVariant("false"));
-	
 	QSqlRecord newRecord = QSqlRecord();
 	newRecord.append(field1);
 	newRecord.append(field2);
@@ -262,17 +259,16 @@ void OcularDialog::createDialogContent()
 	connect(ui->deleteOcular, SIGNAL(clicked()), this, SLOT(deleteSelectedOcular()));
 	connect(ui->addTelescope, SIGNAL(clicked()), this, SLOT(insertNewTelescope()));
 	connect(ui->deleteTelescope, SIGNAL(clicked()), this, SLOT(deleteSelectedTelescope()));
-	
-	
+
 	// Oculars model
 	ui->ocularListView->setModel(ocularsTableModel);
 	ui->ocularListView->setModelColumn(1);
 	connect(ui->ocularListView, SIGNAL(clicked(const QModelIndex &)), this, SLOT(ocularSelected(const QModelIndex &)));
-	
+
 	ui->telescopeListView->setModel(telescopesTableModel);
 	ui->telescopeListView->setModelColumn(1);
 	connect(ui->telescopeListView, SIGNAL(clicked(const QModelIndex &)), this, SLOT(telescopeSelected(const QModelIndex &)));
-	
+
 	// Validators
 	ui->ocularAFov->setValidator(validatorOcularAFOV);
 	ui->ocularFL->setValidator(validatorOcularEFL);
@@ -320,7 +316,7 @@ void OcularDialog::createDialogContent()
 	if (useMaxImageCircle) {
 		ui->scaleImageCircleCheckBox->setCheckState(Qt::Checked);
 	}
-	
+
 	//Initialize the style
 	updateStyle();
 }
