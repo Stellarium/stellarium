@@ -102,31 +102,31 @@ void StelTranslator::reload()
 
 	// Apply that
 	// This needs to be static as it is used a each gettext call... It tooks me quite a while before I got that :(
-	static char envstr[25];
+	static char envstr[128];
 	if (langName=="system" || langName=="system_default")
 #ifdef Q_OS_MAC
 	{
-		snprintf(envstr, 25, "LANG=%s", StelTranslator::systemLangName.toUtf8().constData());
+		qsnprintf(envstr, 128, "LANG=%s", StelTranslator::systemLangName.toUtf8().constData());
 	}
 	else
 	{
-		snprintf(envstr, 25, "LANG=%s", langName.toUtf8().constData());
+		qsnprintf(envstr, 128, "LANG=%s", langName.toUtf8().constData());
 	}
 #elif defined (Q_OS_WIN) //MSCVER
 	{
-		_snprintf(envstr, 25, "LANGUAGE=%s", StelTranslator::systemLangName.toUtf8().constData());
+		qsnprintf(envstr, 128, "LANGUAGE=%s", StelTranslator::systemLangName.toUtf8().constData());
 	}
 	else
 	{
-		_snprintf(envstr, 25, "LANGUAGE=%s", langName.toUtf8().constData());
+		qsnprintf(envstr, 128, "LANGUAGE=%s", langName.toUtf8().constData());
 	}
 #else // UNIX
 	{
-		snprintf(envstr, 25, "LANGUAGE=%s", StelTranslator::systemLangName.toUtf8().constData());
+		qsnprintf(envstr, 128, "LANGUAGE=%s", StelTranslator::systemLangName.toUtf8().constData());
 	}
 	else
 	{
-		snprintf(envstr, 25, "LANGUAGE=%s", langName.toUtf8().constData());
+		qsnprintf(envstr, 128, "LANGUAGE=%s", langName.toUtf8().constData());
 	}
 #endif
 
@@ -149,19 +149,19 @@ QString StelTranslator::iso639_1CodeToNativeName(const QString& languageCode)
 {
 	QLocale loc(languageCode);
 	QString l = loc.name();
-		// There is a QLocale for this code.  This should be the case for most
-		// language codes, but there are a few without QLocales, e.g. Interlingua
-		if (l.contains('_'))
-			l.truncate(l.indexOf('_'));
-		if (iso639codes.find(l)!=iso639codes.end())
-			return iso639codes[l]+ (languageCode.size()==2 ? "" : QString(" (")+QLocale::countryToString(loc.country())+")");
+	// There is a QLocale for this code.  This should be the case for most
+	// language codes, but there are a few without QLocales, e.g. Interlingua
+	if (l.contains('_'))
+		l.truncate(l.indexOf('_'));
+	if (iso639codes.find(l)!=iso639codes.end())
+		return iso639codes[l]+ (languageCode.size()==2 ? "" : QString(" (")+QLocale::countryToString(loc.country())+")");
 
-		// For codes which return the locale C, use the language code to do the lookup
-		if (iso639codes.contains(languageCode))
-			return iso639codes[languageCode];
+	// For codes which return the locale C, use the language code to do the lookup
+	if (iso639codes.contains(languageCode))
+		return iso639codes[languageCode];
 
-		// qWarning() << "WARNING: Cannot determine name of language for code" << languageCode;
-		return languageCode;
+	// qWarning() << "WARNING: Cannot determine name of language for code" << languageCode;
+	return languageCode;
 }
 
 //! Convert from native language name to ISO639-1 2(+3) letters langage code

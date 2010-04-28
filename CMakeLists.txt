@@ -58,30 +58,22 @@ IF(APPLE)
  SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.4")
  SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.4u.sdk/")
  # Universal binary
- #SET(CMAKE_OSX_ARCHITECTURES "i386;ppc")
  SET(CMAKE_OSX_ARCHITECTURES "i386;ppc")
 ENDIF()
 
-########### Check headers ###########
-INCLUDE(CheckIncludeFiles)
-CHECK_INCLUDE_FILES(byteswap.h HAVE_BYTESWAP_H)
-
 ########### Check functions ###########
 INCLUDE(CheckFunctionExists)
-CHECK_FUNCTION_EXISTS(tzset HAVE_TZSET)
 SET(CMAKE_REQUIRED_LIBRARIES "-lm")
 CHECK_FUNCTION_EXISTS(pow10 HAVE_POW10)
 SET(CMAKE_REQUIRED_LIBRARIES)
-CHECK_FUNCTION_EXISTS(setlocale HAVE_SETLOCALE)
-CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
 
 ########### Others ###########
 # Activate translation with gettext
-SET(RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release.")
 SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be supported.")
+SET(RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release.")
 
 # Activate sound support
-SET(ENABLE_SOUND 0 CACHE BOOL "Define whether sound support should be activated, options are.")
+SET(ENABLE_SOUND 0 CACHE BOOL "Define whether sound support should be activated.")
 
 # (De-)Activate the script edit console
 SET(ENABLE_SCRIPT_CONSOLE 1 CACHE BOOL "Define whether to build the script console feature, options are.")
@@ -176,7 +168,6 @@ FIND_PACKAGE(Qt4 REQUIRED)
 SET(QT_USE_QTOPENGL TRUE)
 SET(QT_USE_QTSCRIPT TRUE)
 SET(QT_USE_QTNETWORK TRUE)
-SET(QT_USE_QTSVG TRUE)
 SET(QT_USE_QTTEST TRUE)
 IF(ENABLE_SOUND)
   ADD_DEFINITIONS(-DHAVE_QT_PHONON)
