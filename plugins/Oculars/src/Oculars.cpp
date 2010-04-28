@@ -130,7 +130,7 @@ bool Oculars::configureGui(bool show)
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		gui->getGuiActions("actionShow_Ocular_Window")->setChecked(true);
 	}
-	
+
 	return true;
 }
 
@@ -143,13 +143,13 @@ void Oculars::draw(StelCore* core)
 
 	// Insure there is a selected ocular & telescope
 	if (selectedOcularIndex > oculars.count()) {
-		qWarning() << "Oculars: the selected ocular index of " << selectedOcularIndex << " is greate that the ocular count of "
-		<< oculars.count() << ". Module disable.";
+		qWarning() << "Oculars: the selected ocular index of " << selectedOcularIndex << " is greater than the ocular count of "
+		<< oculars.count() << ". Module disabled!";
 		ready = false;
 	}
 	if (selectedTelescopeIndex > telescopes.count()) {
-		qWarning() << "Oculars: the selected telescope index of " << selectedTelescopeIndex << " is greate that the telescope count of "
-		<< telescopes.count() << ". Module disable.";
+		qWarning() << "Oculars: the selected telescope index of " << selectedTelescopeIndex << " is greater than the telescope count of "
+		<< telescopes.count() << ". Module disabled!";
 		ready = false;
 	}
 
@@ -172,7 +172,7 @@ void Oculars::draw(StelCore* core)
 		}
 		QString string5 = "Magnification: " + QVariant(((int)(ocular->getMagnification(telescope) * 10.0)) / 10.0).toString() + "x";
 		QString string6 = "Image Circle: " + QVariant(((int)(ocular->getExitCircle(telescope) * 10.0)) / 10.0).toString() + "mm";
-		QString string7 = "FOV: " + QVariant(((int)(ocular->getAcutalFOV(telescope) * 10000.00)) / 10000.0).toString() + QChar(0x00B0);
+		QString string7 = "FOV: " + QVariant(((int)(ocular->getActualFOV(telescope) * 10000.00)) / 10000.0).toString() + QChar(0x00B0);
 
 		float insetFromRHS = painter.getFontMetrics().width(widthString);
 
@@ -200,7 +200,7 @@ void Oculars::draw(StelCore* core)
 		yPosition-=lineHeight;
 		painter.drawText(xPosition, yPosition, string7);
 	}
-	newIntrument = false; // Now that it's been drawn once
+	newInstrument = false; // Now that it's been drawn once
 }
 
 //! Determine which "layer" the plagin's drawing will happen on.
@@ -278,7 +278,7 @@ void Oculars::init()
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 	}
-	
+
 	//Load the module's custom style sheets
 	QFile styleSheetFile;
 	styleSheetFile.setFileName(":/ocular/normalStyle.css");
@@ -352,7 +352,7 @@ void Oculars::determineMaxImageCircle()
 
 void Oculars::instrumentChanged()
 {
-	newIntrument = true;
+	newInstrument = true;
 	zoom(true);
 }
 
@@ -602,7 +602,7 @@ bool Oculars::initializeDB()
 
 		result = true;
 	} else {
-		qDebug() << "Oculars could not open its databse; disableing module.";
+		qDebug() << "Oculars could not open its database; disabling module.";
 		result = false;
 	}
 	return result;
@@ -771,7 +771,7 @@ void Oculars::validateIniFile()
 
 		if (ocularsVersion < MIN_OCULARS_INI_VERSION) {
 			qWarning() << "Oculars::validateIniFile existing ini file version " << ocularsVersion
-						<< " to old to use; required version is " << MIN_OCULARS_INI_VERSION << ". Coping over new one.";
+						<< " too old to use; required version is " << MIN_OCULARS_INI_VERSION << ". Copying over new one.";
 			// delete last "old" file, if it exists
 			QFile deleteFile(ocularIniPath + ".old");
 			deleteFile.remove();
@@ -875,7 +875,7 @@ void Oculars::zoomOcular()
 	core->setFlipHorz(telescope->isHFlipped());
 	core->setFlipVert(telescope->isVFlipped());
 
-	double actualFOV = ocular->getAcutalFOV(telescope);
+	double actualFOV = ocular->getActualFOV(telescope);
 	// See if the mask was scaled
 	if (maxImageCircle > 0.0 && ocular->getExitCircle(telescope) > 0.0) {
 		actualFOV = maxImageCircle * actualFOV / ocular->getExitCircle(telescope);

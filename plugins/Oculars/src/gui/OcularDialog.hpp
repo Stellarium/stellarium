@@ -66,7 +66,6 @@ public slots:
 
 signals:
 	void scaleImageCircleChanged(bool state);
-	
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();

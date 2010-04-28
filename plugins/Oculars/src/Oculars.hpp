@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
- 
+
 #ifndef _OCULARS_HPP_
 #define _OCULARS_HPP_
 
@@ -47,7 +47,7 @@ class Oculars : public StelModule
 public:
 	Oculars();
 	virtual ~Oculars();
-	
+
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init();
@@ -60,7 +60,7 @@ public:
 	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
 	virtual void setStelStyle(const QString& style);
 	virtual void update(double deltaTime) {;}
-	
+
 	//! Returns the module-specific style sheet.
 	//! The main StelStyle instance should be passed.
 	const StelStyle getModuleStyleSheet(const StelStyle& style);
@@ -86,14 +86,14 @@ private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
 	void instrumentChanged();
 	void determineMaxImageCircle();
-	void loadOculars(); 
+	void loadOculars();
 	void loadTelescopes();
 	void setScaleImageCircle(bool state);
 
 private:
 	//! Renders crosshairs into the viewport.
 	void drawCrosshairs();
-	
+
 	bool initializeDB();
 	void initializeActions();
 
@@ -101,15 +101,15 @@ private:
 	//! Because we want the ocular view to track, we must intercept & process ourselves.  Only called
 	//! while flagShowOculars == true.
 	void interceptMovementKey(class QKeyEvent* event);
-	
+
 	void loadDatabaseObjects();
-	
+
 	//! Paint the mask into the viewport.
 	void paintMask();
-	
+
 	//! This method is called by the zoom() method, when this plugin is toggled off; it resets to the default view.
 	void unzoomOcular();
-	
+
 	//! This method is responsible for insuring a valid ini file for the plugin exists.  It first checks to see
 	//! if one exists in the expected location.  If it does not, a default one is copied into place, and the process
 	//! ends.  However, if one does exist, it opens it, and looks for the oculars_version key.  The value (or even
@@ -119,10 +119,10 @@ private:
 
 	//! Prepairs the values needed to zoom, and sets them into the syste,  Also recordd the state of
 	//! the views beforehand, so that it can be reet afterwords.
-	//! @param rezoom if true, this zoom operation is starting from an already zoomed state.  
+	//! @param rezoom if true, this zoom operation is starting from an already zoomed state.
 	//!		False for the original state.
 	void zoom(bool rezoom);
-	
+
 	//! This method is called by the zoom() method, when this plugin is toggled on; it resets the zoomed view.
 	void zoomOcular();
 
@@ -131,7 +131,7 @@ private:
 	QList<Telescope *> telescopes;
 	int selectedOcularIndex;
 	int selectedTelescopeIndex;
-	
+
 	QFont font;					//!< The font used for drawing labels.
 	bool flagShowOculars;		//<! flag used to trak if we are in ocular mode.
 	bool flagShowCrosshairs;	//<! flag used to track in crosshairs should be rendered in the ocular view.
@@ -143,7 +143,7 @@ private:
 	bool flagEquatorLine;		//!< Flag to track if EquatorLine was displayed at activation.
 	bool flagEclipticLine;		//!< Flag to track if EclipticLine was displayed at activation.
 	bool flagMeridianLine;		//!< Flag to track if MeridianLine was displayed at activation.
-	
+
 	double maxImageCircle;		//<! The maximum image circle for all eyepieces.  Used to scale the mask.
 	bool useMaxImageCircle;		//!< Read from the ini file, whether to scale the mask based on exit circle size.
 
@@ -156,7 +156,7 @@ private:
 	OcularDialog *ocularDialog;
 	bool visible;
 	bool ready; //<! A flag that determines that this module is usable.  If false, we won't open.
-	bool newIntrument; //<! true the first time draw is called for a new ocular or telescope, false otherwise.
+	bool newInstrument; //<! true the first time draw is called for a new ocular or telescope, false otherwise.
 	
 	QSqlTableModel *ocularsTableModel;
 	QSqlTableModel *telescopesTableModel;

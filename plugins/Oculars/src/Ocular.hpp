@@ -36,11 +36,11 @@ public:
 	double getAppearentFOV();
 	double getEffectiveFocalLength();
 	double getFieldStop();
-	
-	double getAcutalFOV(Telescope *telescope);
+
+	double getActualFOV(Telescope *telescope);
 	double getMagnification(Telescope *telescope);
 	double getExitCircle(Telescope *telescope);
-		
+
 private:
 	int ocularID;
 	QString name;
@@ -48,4 +48,4 @@ private:
 	double effectiveFocalLength;
 	double fieldStop;
 };
-#endif /*OCULAR_HPP_*/
+#endif /* OCULAR_HPP_ */

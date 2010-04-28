@@ -402,7 +402,7 @@ QString StelFileMgr::getLocaleDir()
 	}
 	else
 	{
-		qWarning() << "WARNING in StelFileMgr::getLocaleDir() - could not determine locale directory, returning \"\"";
+		qWarning() << "WARNING StelFileMgr::getLocaleDir() - could not determine locale directory, returning \"\"";
 		return "";
 	}
 }
@@ -426,7 +426,7 @@ void StelFileMgr::makeSureDirExistsAndIsWritable(const QString& dirFullPath)
 	if (!uDir.exists())
 	{
 		// The modules directory doesn't exist, lets create it.
-		qDebug() << "Creates directory " << uDir.filePath();
+		qDebug() << "Creating directory " << uDir.filePath();
 		if (!QDir("/").mkpath(uDir.filePath()))
 		{
 			throw std::runtime_error(QString("Could not create directory: " +uDir.filePath()).toStdString());

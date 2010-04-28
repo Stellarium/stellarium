@@ -316,7 +316,7 @@ bool LogBook::initializeDatabase()
 
 		result = true;
 	} else {
-		qDebug() << "Oculars could not open its databse; disableing module.";
+		qDebug() << "Oculars could not open its database; disabling module.";
 		result = false;
 	}
 	return result;
