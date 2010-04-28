@@ -1,7 +1,7 @@
 INCLUDE_DIRECTORIES(
-	. 
-	gui 
-	${CMAKE_BINARY_DIR}/plugins/Oculars/src 
+	.
+	gui
+	${CMAKE_BINARY_DIR}/plugins/Oculars/src
 )
 
 LINK_DIRECTORIES(/src)
@@ -48,21 +48,21 @@ SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INT
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)
-	ADD_LIBRARY(Oculars 
+	ADD_LIBRARY(Oculars
 		MODULE ${Oculars_SRCS} ${Oculars_MOC_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H}
 	)
 
 	IF(APPLE)
 		FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
 		MARK_AS_ADVANCED(OPENGL_LIBRARY)
-		SET_TARGET_PROPERTIES(Oculars 
+		SET_TARGET_PROPERTIES(Oculars
 			PROPERTIES LINK_FLAGS "-undefined dynamic_lookup" SUFFIX ".dylib"
 		)
 	ENDIF(APPLE)
 
 	IF(WIN32)
-		SET_TARGET_PROPERTIES(Oculars 
-			PROPERTIES LINK_FLAGS "-enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition" 
+		SET_TARGET_PROPERTIES(Oculars
+			PROPERTIES LINK_FLAGS "-enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition"
 		)
 		SET(StelMain stelMain)
 	ELSE(WIN32)
@@ -75,7 +75,7 @@ ENDIF()
 
 ############### For building the static library ######################
 IF(BUILD_STATIC_PLUGINS)
-	ADD_LIBRARY(Oculars-static 
+	ADD_LIBRARY(Oculars-static
 		STATIC ${Oculars_SRCS} ${Oculars_MOC_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H}
 	)
 	SET_TARGET_PROPERTIES(Oculars-static PROPERTIES OUTPUT_NAME "Oculars")
