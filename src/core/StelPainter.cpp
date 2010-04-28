@@ -1323,6 +1323,9 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 // Draw the given SphericalPolygon.
 void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap, bool doSubDivise)
 {
+	if (!prj->getBoundingCap().intersects(poly->getBoundingCap()))
+		return;
+
 	switch (drawMode)
 	{
 		case SphericalPolygonDrawModeBoundary:
@@ -1334,8 +1337,12 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 		case SphericalPolygonDrawModeFill:
 		case SphericalPolygonDrawModeTextureFill:
 			glEnable(GL_CULL_FACE);
-			// Assumes the polygon is already tesselated as triangles
-			drawSphericalTriangles(poly->getFillVertexArray(), drawMode==SphericalPolygonDrawModeTextureFill, clippingCap, doSubDivise);
+			// The polygon is already tesselated as triangles
+			if (doSubDivise || prj->intersectViewportDiscontinuity(poly->getBoundingCap()))
+				drawSphericalTriangles(poly->getFillVertexArray(), drawMode==SphericalPolygonDrawModeTextureFill, clippingCap, doSubDivise);
+			else
+				drawStelVertexArray(poly->getFillVertexArray());
+
 			glDisable(GL_CULL_FACE);
 			break;
 		default:
