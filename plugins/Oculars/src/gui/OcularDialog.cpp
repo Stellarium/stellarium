@@ -288,9 +288,9 @@ void OcularDialog::createDialogContent()
 	ocularMapper->addMapping(ui->ocularFL, ocularsTableModel->fieldIndex("efl"));
 	ocularMapper->addMapping(ui->ocularFieldStop, ocularsTableModel->fieldIndex("fieldStop"));
 	ocularMapper->toFirst();
-	ui->ocularListView->setCurrentIndex(ocularsTableModel->index(0, 1));
 	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)), 
 			ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+	ui->ocularListView->setCurrentIndex(ocularsTableModel->index(0, 1));
 
 	
 	// The telescope mapper
@@ -304,9 +304,9 @@ void OcularDialog::createDialogContent()
 	telescopeMapper->addMapping(ui->telescopeVFlip, telescopesTableModel->fieldIndex("vFlip"), "checked");
 	telescopeMapper->addMapping(ui->telescopeHFlip, telescopesTableModel->fieldIndex("hFlip"), "checked");
 	ocularMapper->toFirst();
-	ui->telescopeListView->setCurrentIndex(telescopesTableModel->index(0, 1));
 	connect(ui->telescopeListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)), 
 			telescopeMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+	ui->telescopeListView->setCurrentIndex(telescopesTableModel->index(0, 1));
 
 	// set the initial state
 	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
