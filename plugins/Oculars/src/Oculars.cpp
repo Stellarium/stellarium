@@ -98,13 +98,16 @@ Oculars::Oculars() : selectedOcularIndex(-1), flagShowOculars(false), usageMessa
 	font.setPixelSize(14);
 	maxImageCircle = 0.0;
 	oculars = QList<Ocular *>();
-	ready = true;
+	ready = false;
 	selectedOcularIndex = 0;
 	selectedTelescopeIndex = 0;
 	setObjectName("Oculars");
 	telescopes = QList<Telescope *>();
 	useMaxImageCircle = true;
 	visible = false;
+	ocularsTableModel = NULL;
+	telescopesTableModel = NULL;
+	ocularDialog = NULL;
 }
 
 Oculars::~Oculars()
@@ -128,32 +131,33 @@ bool Oculars::configureGui(bool show)
 	if (show)
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
 		gui->getGuiActions("actionShow_Ocular_Window")->setChecked(true);
 	}
 
-	return true;
+	return ready;
 }
 
 //! Draw any parts on the screen which are for our module
 void Oculars::draw(StelCore* core)
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
-	StelPainter painter(prj);
-	painter.setFont(font);
-
 	// Insure there is a selected ocular & telescope
 	if (selectedOcularIndex > oculars.count()) {
 		qWarning() << "Oculars: the selected ocular index of " << selectedOcularIndex << " is greater than the ocular count of "
 		<< oculars.count() << ". Module disabled!";
 		ready = false;
 	}
-	if (selectedTelescopeIndex > telescopes.count()) {
+	else if (selectedTelescopeIndex > telescopes.count()) {
 		qWarning() << "Oculars: the selected telescope index of " << selectedTelescopeIndex << " is greater than the telescope count of "
 		<< telescopes.count() << ". Module disabled!";
 		ready = false;
 	}
 
 	if (ready && flagShowOculars) {
+		const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
+		StelPainter painter(prj);
+
+		painter.setFont(font);
 		paintMask();
 		if (flagShowCrosshairs)  {
 			drawCrosshairs();
@@ -265,6 +269,7 @@ void Oculars::init()
 	// Load settings from ocular.ini
 	validateIniFile();
 	if (initializeDB()) {
+		// assume all is well
 		ready = true;
 		ocularDialog = new OcularDialog(ocularsTableModel, telescopesTableModel);
 		initializeActions();
@@ -365,9 +370,9 @@ void Oculars::loadOculars()
 	}
 	if (oculars.size() == 0) {
 		ready = false;
-		qWarning() << "WARNING: no oculars found.  Feature will be disabled.";
-	}
-
+		qWarning() << "WARNING: no oculars found.  Ocular will be disabled.";
+	} else
+		ready = true;
 }
 
 void Oculars::loadTelescopes()
@@ -379,9 +384,9 @@ void Oculars::loadTelescopes()
 	}
 	if (telescopes.size() == 0) {
 		ready = false;
-		qWarning() << "WARNING: no telescopes found.  Feature will be disabled.";
-	}
-
+		qWarning() << "WARNING: no telescopes found.  Ocular will be disabled.";
+	} else
+		ready = true;
 }
 
 void Oculars::setScaleImageCircle(bool state)
@@ -406,7 +411,12 @@ void Oculars::enableOcular(bool b)
 	}
 
 	if (b) {
+		// load data and determine if we're ready (if we have all required data)
 		loadDatabaseObjects();
+	}
+	if (!ready) {
+		// no, some data was missing. We already warned, done.
+		return;
 	}
 
 	StelCore *core = StelApp::getInstance().getCore();
@@ -564,48 +574,49 @@ void Oculars::initializeActions()
 
 }
 
+// Return true if we're ready (could read all required data), false otherwise
 bool Oculars::initializeDB()
 {
-	bool result = false;
 	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
 	QString dbPath = StelFileMgr::findFile("modules/Oculars/", flags);
 	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "oculars");
 	db.setDatabaseName(dbPath + "oculars.sqlite");
 	if (db.open()) {
+#define EXEC(sql) if (!query.exec(sql)) { qDebug() << query.lastError(); return false;}
 		qDebug() << "Oculars opened the DB successfully.";
 		// See if the tables alreadt exist.
 		QStringList tableList = db.tables();
 		if (!tableList.contains("oculars")) {
 			QSqlQuery query = QSqlQuery(db);
-			query.exec("create table oculars (id INTEGER PRIMARY KEY, name VARCHAR, afov FLOAT, efl FLOAT, fieldStop FLOAT)");
-			query.exec("INSERT INTO oculars (name, afov, efl, fieldStop) VALUES ('one', 43, 40, 0)");
-			query.exec("INSERT INTO oculars (name, afov, efl, fieldStop) VALUES ('two', 82, 31, 0)");
-			query.exec("INSERT INTO oculars (name, afov, efl, fieldStop) VALUES ('three', 52, 10.5, 0)");
-			query.exec("INSERT INTO oculars (name, afov, efl, fieldStop) VALUES ('four', 52, 26, 0)");
-			query.exec("INSERT INTO oculars (name, afov, efl, fieldStop) VALUES ('five', 82, 20, 0)");
-
+			EXEC("create table oculars (id INTEGER PRIMARY KEY, name VARCHAR, afov FLOAT, efl FLOAT, fieldStop FLOAT)");
+			EXEC("INSERT INTO oculars (name, afov, efl, fieldStop) VALUES ('one', 43, 40, 0)");
+			EXEC("INSERT INTO oculars (name, afov, efl, fieldStop) VALUES ('two', 82, 31, 0)");
+			EXEC("INSERT INTO oculars (name, afov, efl, fieldStop) VALUES ('three', 52, 10.5, 0)");
+			EXEC("INSERT INTO oculars (name, afov, efl, fieldStop) VALUES ('four', 52, 26, 0)");
+			EXEC("INSERT INTO oculars (name, afov, efl, fieldStop) VALUES ('five', 82, 20, 0)");
 		}
 		if (!tableList.contains("telescopes")) {
 			QSqlQuery query = QSqlQuery(db);
-			query.exec("create table telescopes (id INTEGER PRIMARY KEY, name VARCHAR, focalLength FLOAT, diameter FLOAT, vFlip VARCHAR, hFlip VARCHAR)");
-			query.exec("INSERT INTO telescopes (name, focalLength, diameter, vFlip, hFlip) VALUES ('C1400', 3190, 355.6, 'false', 'true')");
-			query.exec("INSERT INTO telescopes (name, focalLength, diameter, vFlip, hFlip) VALUES ('80EDF', 500, 80, 'false', 'false')");
+			EXEC("create table telescopes (id INTEGER PRIMARY KEY, name VARCHAR, focalLength FLOAT, diameter FLOAT, vFlip VARCHAR, hFlip VARCHAR)");
+			EXEC("INSERT INTO telescopes (name, focalLength, diameter, vFlip, hFlip) VALUES ('C1400', 3190, 355.6, 'false', 'true')");
+			EXEC("INSERT INTO telescopes (name, focalLength, diameter, vFlip, hFlip) VALUES ('80EDF', 500, 80, 'false', 'false')");
 		}
 
 		// Set the table models
 		ocularsTableModel = new QSqlTableModel(0, db);
 		ocularsTableModel->setTable("oculars");
-		ocularsTableModel->select();
+		if (!ocularsTableModel->select())
+			return false;
 		telescopesTableModel = new QSqlTableModel(0, db);
 		telescopesTableModel->setTable("telescopes");
-		telescopesTableModel->select();
-
-		result = true;
+		if (!telescopesTableModel->select())
+			return false;
+#undef EXEC
+		return true;
 	} else {
 		qDebug() << "Oculars could not open its database; disabling module.";
-		result = false;
 	}
-	return result;
+	return false;
 }
 
 void Oculars::interceptMovementKey(QKeyEvent* event)
