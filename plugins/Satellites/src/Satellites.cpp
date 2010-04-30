@@ -115,7 +115,7 @@ void Satellites::init()
 
 		// key bindings and other actions
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->addGuiActions("actionShow_Satellite_ConfigDialog", "Satellite Config Dialog", "Shift+Ctrl+Z", "Plugin Key Bindings", true, false);
+		gui->addGuiActions("actionShow_Satellite_ConfigDialog", "Satellite Config Dialog", "Alt+Z", "Plugin Key Bindings", true, false);
 		gui->addGuiActions("actionShow_Satellite_Hints", "Satellite Hints", "Ctrl+Z", "Plugin Key Bindings", true, false);
 		gui->getGuiActions("actionShow_Satellite_Hints")->setChecked(hintFader);
 		gui->addGuiActions("actionShow_Satellite_Labels", "Satellite Labels", "Shift+Z", "Plugin Key Bindings", true, false);
