@@ -28,6 +28,7 @@
 #include <QString>
 #include <QColor>
 #include <QSettings>
+#include <QMetaMethod>
 
 StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 	: QSyntaxHighlighter(parent)
@@ -103,6 +104,16 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
         foreach (StelModule* m, mmgr->getAllModules())
         {
                 moduleNames << "\\b" + m->objectName() + "\\b";
+
+		// for each one dump known public slots
+		const QMetaObject* metaObject = m->metaObject();
+		for(int i = metaObject->methodOffset(); i < metaObject->methodCount(); ++i)
+		{
+			if (metaObject->method(i).methodType() == QMetaMethod::Slot)
+			{
+				qDebug() << "got a slot for " << m->objectName() << " : " << metaObject->method(i).signature();
+			}
+		}
         }
 	moduleNames << "\\bStelSkyImageMgr\\b" << "\\bStelSkyDrawer\\b" << "\\bcore\\b";
 	foreach(const QString &pattern, moduleNames)
