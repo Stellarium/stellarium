@@ -574,7 +574,9 @@ void StelGui::setStelStyle(const QString& section)
 	configurationDialog->styleChanged();
 	searchDialog.styleChanged();
 	viewDialog.styleChanged();
+#ifdef ENABLE_SCRIPT_CONSOLE
 	scriptConsole.styleChanged();
+#endif // ENABLE_SCRIPT_CONSOLE
 }
 
 
