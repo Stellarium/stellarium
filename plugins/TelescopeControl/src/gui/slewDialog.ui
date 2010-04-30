@@ -148,6 +148,25 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
+       <widget class="QLabel" name="labelNoTelescopes">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>There are no active devices.</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="textInteractionFlags">
+         <set>Qt::NoTextInteraction</set>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QFrame" name="frameCoordinates">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
@@ -168,7 +187,10 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Right Ascension</string>
+            <string>&amp;Right Ascension</string>
+           </property>
+           <property name="buddy">
+            <cstring>spinBoxRA</cstring>
            </property>
           </widget>
          </item>
@@ -194,7 +216,10 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Declination</string>
+            <string>De&amp;clination</string>
+           </property>
+           <property name="buddy">
+            <cstring>spinBoxDec</cstring>
            </property>
           </widget>
          </item>
@@ -261,7 +286,7 @@
             <string>Hours-minutes-seconds format</string>
            </property>
            <property name="text">
-            <string>HMS</string>
+            <string>&amp;HMS</string>
            </property>
           </widget>
          </item>
@@ -271,7 +296,7 @@
             <string>Degrees-minutes-seconds format</string>
            </property>
            <property name="text">
-            <string>DMS</string>
+            <string>&amp;DMS</string>
            </property>
           </widget>
          </item>
@@ -281,7 +306,7 @@
             <string>Decimal degrees</string>
            </property>
            <property name="text">
-            <string>Decimal</string>
+            <string>D&amp;ecimal</string>
            </property>
           </widget>
          </item>
@@ -325,7 +350,7 @@
             </size>
            </property>
            <property name="text">
-            <string>Slew</string>
+            <string>&amp;Slew</string>
            </property>
            <property name="default">
             <bool>true</bool>
@@ -350,7 +375,7 @@
          </size>
         </property>
         <property name="text">
-         <string>Configure telescopes...</string>
+         <string>Configure &amp;telescopes...</string>
         </property>
        </widget>
       </item>
