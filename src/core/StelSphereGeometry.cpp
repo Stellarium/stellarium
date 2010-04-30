@@ -185,7 +185,7 @@ SphericalRegionP SphericalRegion::getIntersection(const SphericalRegion* r) cons
 		case SphericalRegion::AllSky:
 			return getIntersection(*static_cast<const AllSkySphericalRegion*>(r));
 		case SphericalRegion::Empty:
-			return false;
+			return EmptySphericalRegion::staticInstance;
 		default:
 			return getIntersectionDefault(r);
 	}
@@ -214,7 +214,7 @@ SphericalRegionP SphericalRegion::getUnion(const SphericalRegion* r) const
 		case SphericalRegion::AllSky:
 			return getUnion(*static_cast<const AllSkySphericalRegion*>(r));
 		case SphericalRegion::Empty:
-			return false;
+			return getUnion(*static_cast<const EmptySphericalRegion*>(r));
 		default:
 			return getUnionDefault(r);
 	}
@@ -244,7 +244,7 @@ SphericalRegionP SphericalRegion::getSubtraction(const SphericalRegion* r) const
 		case SphericalRegion::AllSky:
 			return getSubtraction(*static_cast<const AllSkySphericalRegion*>(r));
 		case SphericalRegion::Empty:
-			return false;
+			return getSubtraction(*static_cast<const EmptySphericalRegion*>(r));
 		default:
 			return getSubtractionDefault(r);
 	}
