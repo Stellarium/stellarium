@@ -49,6 +49,7 @@
 #include "ScreenImageMgr.hpp"
 #include "SkyGui.hpp"
 #include "StelJsonParser.hpp"
+#include "StelTranslator.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -490,11 +491,11 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 		if (s==desc.info.displayedName)
 		{
 			QString html = "<html><head></head><body>";
-			html += "<h2>" + desc.info.displayedName + "</h2>";
+			html += "<h2>" + q_(desc.info.displayedName) + "</h2>";
 			html += "<h3>" + q_("Authors") + ": " + desc.info.authors + "</h3>";
 			QString d = desc.info.description;
 			d.replace("\n", "<br />");
-			html += "<p>" + d + "</p>";
+			html += "<p>" + q_(d) + "</p>";
 			html += "<h3>" + q_("Contact") + ": " + desc.info.contact + "</h3>";
 			html += "</body></html>";
 			ui->pluginsInfoBrowser->setHtml(html);
@@ -566,12 +567,12 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + scriptMgr.getName(s) + "</h2>";
+	html += "<h2>" + q_(scriptMgr.getName(s)) + "</h2>";
 	html += "<h3>" + q_("Author") + ": " + scriptMgr.getAuthor(s) + "</h3>";
 	html += "<h3>" + q_("License") + ": " + scriptMgr.getLicense(s) + "</h3>";
 	QString d = scriptMgr.getDescription(s);
 	d.replace("\n", "<br />");
-	html += "<p>" + d + "</p>";
+	html += "<p>" + q_(d) + "</p>";
 	html += "</body></html>";
 	ui->scriptInfoBrowser->setHtml(html);
 }
