@@ -34,7 +34,7 @@
 #include <QSettings>
 
 StelAppGraphicsWidget::StelAppGraphicsWidget()
-	: paintState(0), useBuffers(false), backgroundBuffer(0), foregroundBuffer(0), viewportEffect(NULL)
+	: paintState(0), useBuffers(false), backgroundBuffer(NULL), foregroundBuffer(NULL), viewportEffect(NULL)
 {
 	previousPaintTime = StelApp::getTotalRunTime();
 	setFocusPolicy(Qt::StrongFocus);
@@ -44,12 +44,13 @@ StelAppGraphicsWidget::StelAppGraphicsWidget()
 StelAppGraphicsWidget::~StelAppGraphicsWidget()
 {
 	delete stelApp;
-	if (backgroundBuffer)
-		delete backgroundBuffer;
-	if (foregroundBuffer)
-		delete foregroundBuffer;
-	if (viewportEffect)
-		delete viewportEffect;
+	stelApp = NULL;
+	if (backgroundBuffer) delete backgroundBuffer;
+	backgroundBuffer = NULL;
+	if (foregroundBuffer) delete foregroundBuffer;
+	foregroundBuffer = NULL;
+	if (viewportEffect) delete viewportEffect;
+	viewportEffect = NULL;
 }
 
 void StelAppGraphicsWidget::init(QSettings* conf)
