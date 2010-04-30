@@ -199,6 +199,26 @@ void OcularDialog::telescopeSelected(const QModelIndex &index)
 {
 }
 
+void OcularDialog::updateOcular()
+{
+	int selectionIndex = ui->ocularListView->currentIndex().row();
+	if (ocularMapper->submit()) {
+		ui->ocularListView->setCurrentIndex(ocularsTableModel->index(selectionIndex, 1));
+	} else {
+		qWarning() << "Oculars: error saving modified ocular.  Error is: " << ocularsTableModel->lastError();
+	}
+}
+
+void OcularDialog::updateTelescope()
+{
+	int selectionIndex = ui->telescopeListView->currentIndex().row();
+	if (telescopeMapper->submit()) {
+		ui->telescopeListView->setCurrentIndex(telescopesTableModel->index(selectionIndex, 1));
+	} else {
+		qWarning() << "Oculars: error saving modified telescope.  Error is: " << telescopesTableModel->lastError();
+	}
+
+}
 
 /* ********************************************************************* */
 #if 0
@@ -231,6 +251,8 @@ void OcularDialog::createDialogContent()
 
 	//Now the rest of the actions.
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->updateOcularButton, SIGNAL(clicked()), this, SLOT(updateOcular()));
+	connect(ui->updateTelescopeButton, SIGNAL(clicked()), this, SLOT(updateTelescope()));
 	connect(ui->scaleImageCircleCheckBox, SIGNAL(stateChanged(int)), this, SLOT(scaleImageCircleStateChanged(int)));
 	// The add & delete buttons
 	connect(ui->addOcular, SIGNAL(clicked()), this, SLOT(insertNewOcular()));

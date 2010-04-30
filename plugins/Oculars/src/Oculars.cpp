@@ -605,12 +605,10 @@ bool Oculars::initializeDB()
 		// Set the table models
 		ocularsTableModel = new QSqlTableModel(0, db);
 		ocularsTableModel->setTable("oculars");
-		ocularsTableModel->setEditStrategy(QSqlTableModel::OnFieldChange);
 		if (!ocularsTableModel->select())
 			return false;
 		telescopesTableModel = new QSqlTableModel(0, db);
 		telescopesTableModel->setTable("telescopes");
-		telescopesTableModel->setEditStrategy(QSqlTableModel::OnFieldChange);
 		if (!telescopesTableModel->select())
 			return false;
 #undef EXEC
