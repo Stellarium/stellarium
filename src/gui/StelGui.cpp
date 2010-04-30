@@ -216,6 +216,12 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	getGuiActions("actionShow_Ecliptic_Line")->setChecked(gmgr->getFlagEclipticLine());
 	connect(getGuiActions("actionShow_Equator_Line"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagEquatorLine(bool)));
 	getGuiActions("actionShow_Equator_Line")->setChecked(gmgr->getFlagEquatorLine());
+	connect(getGuiActions("actionShow_Meridian_Line"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagMeridianLine(bool)));
+	getGuiActions("actionShow_Meridian_Line")->setChecked(gmgr->getFlagMeridianLine());
+	connect(getGuiActions("actionShow_Equatorial_J2000_Grid"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagEquatorJ2000Grid(bool)));
+	getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(gmgr->getFlagEquatorJ2000Grid());
+	connect(getGuiActions("actionShow_Galactic_Grid"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagGalacticGrid(bool)));
+	getGuiActions("actionShow_Galactic_Grid")->setChecked(gmgr->getFlagGalacticGrid());
 
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	connect(getGuiActions("actionShow_Ground"), SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscape(bool)));
@@ -331,15 +337,6 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 
 	connect(getGuiActions("actionShow_Planets_Trails"), SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagTrails(bool)));
 	getGuiActions("actionShow_Planets_Trails")->setChecked(ssmgr->getFlagTrails());
-
-	connect(getGuiActions("actionShow_Meridian_Line"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagMeridianLine(bool)));
-	getGuiActions("actionShow_Meridian_Line")->setChecked(gmgr->getFlagMeridianLine());
-
-	connect(getGuiActions("actionShow_Equatorial_J2000_Grid"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagEquatorJ2000Grid(bool)));
-	getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(gmgr->getFlagEquatorJ2000Grid());
-
-	connect(getGuiActions("actionShow_Galactic_Grid"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagGalacticGrid(bool)));
-	getGuiActions("actionShow_Galactic_Grid")->setChecked(gmgr->getFlagGalacticGrid());
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -634,9 +631,86 @@ void StelGui::update()
 	if (buttonGotoSelectedObject->isChecked()!=b)
 		buttonGotoSelectedObject->setChecked(b);
 
-	StarMgr* smgr = GETSTELMODULE(StarMgr);
-	if (getGuiActions("actionShow_Stars")->isChecked()!=smgr->getFlagStars())
-		getGuiActions("actionShow_Stars")->setChecked(smgr->getFlagStars());
+	bool flag = GETSTELMODULE(StarMgr)->getFlagStars();
+	if (getGuiActions("actionShow_Stars")->isChecked() != flag)
+		getGuiActions("actionShow_Stars")->setChecked(flag);
+	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
+	flag = cmgr->getFlagLines();
+	if (getGuiActions("actionShow_Constellation_Lines")->isChecked() != flag)
+		getGuiActions("actionShow_Constellation_Lines")->setChecked(flag);
+	flag = cmgr->getFlagArt();
+	if (getGuiActions("actionShow_Constellation_Art")->isChecked() != flag)
+		getGuiActions("actionShow_Constellation_Art")->setChecked(flag);
+	flag = cmgr->getFlagLabels();
+	if (getGuiActions("actionShow_Constellation_Labels")->isChecked() != flag)
+		getGuiActions("actionShow_Constellation_Labels")->setChecked(flag);
+	flag = cmgr->getFlagBoundaries();
+	if (getGuiActions("actionShow_Constellation_Boundaries")->isChecked() != flag)
+		getGuiActions("actionShow_Constellation_Boundaries")->setChecked(flag);
+	GridLinesMgr* gmgr = GETSTELMODULE(GridLinesMgr);
+	flag = gmgr->getFlagEquatorGrid();
+	if (getGuiActions("actionShow_Equatorial_Grid")->isChecked() != flag)
+		getGuiActions("actionShow_Equatorial_Grid")->setChecked(flag);
+	flag = gmgr->getFlagAzimuthalGrid();
+	if (getGuiActions("actionShow_Azimuthal_Grid")->isChecked() != flag)
+		getGuiActions("actionShow_Azimuthal_Grid")->setChecked(flag);
+	flag = gmgr->getFlagEclipticLine();
+	if (getGuiActions("actionShow_Ecliptic_Line")->isChecked() != flag)
+		getGuiActions("actionShow_Ecliptic_Line")->setChecked(flag);
+	flag = gmgr->getFlagEquatorLine();
+	if (getGuiActions("actionShow_Equator_Line")->isChecked() != flag)
+		getGuiActions("actionShow_Equator_Line")->setChecked(flag);
+	flag = gmgr->getFlagMeridianLine();
+	if (getGuiActions("actionShow_Meridian_Line")->isChecked() != flag)
+		getGuiActions("actionShow_Meridian_Line")->setChecked(flag);
+	flag = gmgr->getFlagEquatorJ2000Grid();
+	if (getGuiActions("actionShow_Equatorial_J2000_Grid")->isChecked() != flag)
+		getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(flag);
+	flag = gmgr->getFlagGalacticGrid();
+	if (getGuiActions("actionShow_Galactic_Grid")->isChecked() != flag)
+		getGuiActions("actionShow_Galactic_Grid")->setChecked(flag);
+	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+	flag = lmgr->getFlagLandscape();
+	if (getGuiActions("actionShow_Ground")->isChecked() != flag)
+		getGuiActions("actionShow_Ground")->setChecked(flag);
+	flag = lmgr->getFlagCardinalsPoints();
+	if (getGuiActions("actionShow_Cardinal_Points")->isChecked() != flag)
+		getGuiActions("actionShow_Cardinal_Points")->setChecked(flag);
+	flag = lmgr->getFlagAtmosphere();
+	if (getGuiActions("actionShow_Atmosphere")->isChecked() != flag)
+		getGuiActions("actionShow_Atmosphere")->setChecked(flag);
+	flag = lmgr->getFlagFog();
+	if (getGuiActions("actionShow_Fog")->isChecked() != flag)
+		getGuiActions("actionShow_Fog")->setChecked(flag);
+	flag = GETSTELMODULE(NebulaMgr)->getFlagHints();
+	if (getGuiActions("actionShow_Nebulas")->isChecked() != flag)
+		getGuiActions("actionShow_Nebulas")->setChecked(flag);
+	flag = GETSTELMODULE(StelSkyLayerMgr)->getFlagShow();
+	if (getGuiActions("actionShow_DSS")->isChecked() != flag)
+		getGuiActions("actionShow_DSS")->setChecked(flag);
+	//StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
+	flag = mmgr->getMountMode() != StelMovementMgr::MountAltAzimuthal;
+	if (getGuiActions("actionSwitch_Equatorial_Mount")->isChecked() != flag)
+		getGuiActions("actionSwitch_Equatorial_Mount")->setChecked(flag);
+	flag = mmgr->getFlagTracking();
+	if (getGuiActions("actionSet_Tracking")->isChecked() != flag)
+		getGuiActions("actionSet_Tracking")->setChecked(flag);
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+	flag = ssmgr->getFlagLabels();
+	if (getGuiActions("actionShow_Planets_Labels")->isChecked() != flag)
+		getGuiActions("actionShow_Planets_Labels")->setChecked(flag);
+	flag = ssmgr->getFlagOrbits();
+	if (getGuiActions("actionShow_Planets_Orbits")->isChecked() != flag)
+		getGuiActions("actionShow_Planets_Orbits")->setChecked(flag);
+	flag = ssmgr->getFlagTrails();
+	if (getGuiActions("actionShow_Planets_Trails")->isChecked() != flag)
+		getGuiActions("actionShow_Planets_Trails")->setChecked(flag);
+	flag = StelApp::getInstance().getVisionModeNight();
+	if (getGuiActions("actionShow_Night_Mode")->isChecked() != flag)
+		getGuiActions("actionShow_Night_Mode")->setChecked(flag);
+	flag = StelMainWindow::getInstance().isFullScreen();
+	if (getGuiActions("actionSet_Full_Screen_Global")->isChecked() != flag)
+		getGuiActions("actionSet_Full_Screen_Global")->setChecked(flag);
 
 	skyGui->infoPanel->setTextFromObjects(GETSTELMODULE(StelObjectMgr)->getSelectedObject());
 
