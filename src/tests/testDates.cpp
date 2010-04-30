@@ -1,4 +1,3 @@
-#include <config.h>
 
 #include <QString>
 #include <QDateTime>

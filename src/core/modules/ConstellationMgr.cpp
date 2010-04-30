@@ -17,10 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-// Class used to manage group of constellation
-
-#include <config.h>
-
 #include <vector>
 #include <QDebug>
 #include <QFile>

@@ -22,8 +22,6 @@
 #include "karchive.h"
 #include "klimitediodevice.h"
 
-#include <config.h>
-
 #include <QStack>
 #include <QtCore/QMap>
 #include <QtCore/QDir>

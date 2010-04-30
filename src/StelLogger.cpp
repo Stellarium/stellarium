@@ -19,7 +19,6 @@
 
 #include "StelLogger.hpp"
 
-#include <config.h>
 #include <QDateTime>
 #include <QProcess>
 #ifdef Q_OS_WIN

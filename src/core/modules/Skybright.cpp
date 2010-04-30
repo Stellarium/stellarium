@@ -20,7 +20,6 @@
 #include <QDebug>
 #include "StelUtils.hpp"
 
-#include <config.h>
 #ifndef HAVE_POW10
 # define HAVE_POW10 1
 # include <math.h>

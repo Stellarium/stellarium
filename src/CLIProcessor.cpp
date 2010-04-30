@@ -21,7 +21,6 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 
-#include <config.h>
 #include <QSettings>
 #include <QDateTime>
 #include <QDebug>

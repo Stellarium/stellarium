@@ -20,8 +20,6 @@
 #ifndef _STELTEXTUREMGR_HPP_
 #define _STELTEXTUREMGR_HPP_
 
-#include <config.h>
-
 #include <QtOpenGL>
 #include "StelTexture.hpp"
 #include <QObject>
