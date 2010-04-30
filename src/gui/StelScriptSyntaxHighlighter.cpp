@@ -100,6 +100,7 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 
 	// highlight object names which can be used in scripting
 	QStringList moduleNames;
+	QStringList knownFunctionNames;
         StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
         foreach (StelModule* m, mmgr->getAllModules())
         {
@@ -109,14 +110,24 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 		const QMetaObject* metaObject = m->metaObject();
 		for(int i = metaObject->methodOffset(); i < metaObject->methodCount(); ++i)
 		{
-			if (metaObject->method(i).methodType() == QMetaMethod::Slot)
+			if (metaObject->method(i).methodType() == QMetaMethod::Slot && metaObject->method(i).access() == QMetaMethod::Public)
 			{
-				qDebug() << "got a slot for " << m->objectName() << " : " << metaObject->method(i).signature();
+				QString fn = metaObject->method(i).signature();
+				fn.replace(QRegExp("\\(.*$"), ""); 
+				fn = m->objectName() + "\\." + fn;
+				knownFunctionNames << fn;
 			}
 		}
         }
 	moduleNames << "\\bStelSkyImageMgr\\b" << "\\bStelSkyDrawer\\b" << "\\bcore\\b";
 	foreach(const QString &pattern, moduleNames)
+	{
+		rule.pattern = QRegExp(pattern);
+		rule.format = &moduleFormat;
+		highlightingRules.append(rule);
+	}
+
+	foreach(const QString &pattern, knownFunctionNames)
 	{
 		rule.pattern = QRegExp(pattern);
 		rule.format = &moduleFormat;
