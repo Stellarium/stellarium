@@ -128,16 +128,6 @@ IF (BUILD_STATIC_PLUGINS)
   ENDIF()
 
   IF (USE_PLUGIN_SVMT)
-	## Tokyo Cabinet
-	FIND_PATH(TOKYOC_INCLUDE_DIR tcadb.h
-	  /usr/include
-	  /usr/local/include
-	  DOC "Should point to the directory where the include files for tokyo cabinet are installed")
-	FIND_LIBRARY(TOKYOC_LIBRARIES tokyocabinet
-	  PATHS
-	  /usr/lib/
-	  /usr/local/lib
-	  DOC "tokyo cabinet link options")
 	SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
 	SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
   ENDIF()
