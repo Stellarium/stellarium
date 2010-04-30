@@ -19,8 +19,6 @@
 #ifndef _LIBGETTEXT_H
 #define _LIBGETTEXT_H 1
 
-#include <config.h>
-
 /* NLS can be disabled through the configure --disable-nls option.  */
 #ifdef ENABLE_NLS
 

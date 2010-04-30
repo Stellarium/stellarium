@@ -17,7 +17,6 @@
  */
 
 #include <cmath>
-# include <config.h>
 #ifndef HAVE_POW10
 # define HAVE_POW10 1
 //# define pow10(x) pow(10,(x))

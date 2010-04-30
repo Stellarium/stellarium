@@ -20,9 +20,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-// class used to manage groups of Stars
-
-#include <config.h>
 #include <QTextStream>
 #include <QFile>
 #include <QSettings>
