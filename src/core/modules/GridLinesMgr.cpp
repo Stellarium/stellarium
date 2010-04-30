@@ -168,41 +168,68 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 		d->sPainter->getProjector()->unProject(screenPos, tmpV);
 		double lon, lat;
 		StelUtils::rectToSphe(&lon, &lat, tmpV);
-		if (d->frameType==StelCore::FrameAltAz)
+		switch (d->frameType)
 		{
-			double raAngle = M_PI-d->raAngle;
-			lon = M_PI-lon;
-			if (raAngle<0)
-				raAngle=+2.*M_PI;
-			if (lon<0)
-				lon=+2.*M_PI;
+			case StelCore::FrameAltAz:
+			{
+				double raAngle = M_PI-d->raAngle;
+				lon = M_PI-lon;
+				if (raAngle<0)
+					raAngle=+2.*M_PI;
+				if (lon<0)
+					lon=+2.*M_PI;
 
-			if (std::fabs(2.*M_PI-lon)<0.01)
-			{
-				// We are at meridian 0
-				lon = 0.;
+				if (std::fabs(2.*M_PI-lon)<0.01)
+				{
+					// We are at meridian 0
+					lon = 0.;
+				}
+				if (std::fabs(lon-raAngle) < 0.01)
+					text = StelUtils::radToDmsStrAdapt(raAngle);
+				else
+				{
+					const double delta = raAngle<M_PI ? M_PI : -M_PI;
+					text = StelUtils::radToDmsStrAdapt(raAngle+delta);
+				}
+				break;
 			}
-			if (std::fabs(lon-raAngle) < 0.01)
-				text = StelUtils::radToDmsStrAdapt(raAngle);
-			else
+			case StelCore::FrameGalactic:
 			{
-				const double delta = raAngle<M_PI ? M_PI : -M_PI;
-				text = StelUtils::radToDmsStrAdapt(raAngle+delta);
+				double raAngle = M_PI-d->raAngle;
+				lon = M_PI-lon;
+				if (raAngle<0)
+					raAngle=+2.*M_PI;
+				if (lon<0)
+					lon=+2.*M_PI;
+
+				if (std::fabs(2.*M_PI-lon)<0.01)
+				{
+					// We are at meridian 0
+					lon = 0.;
+				}
+				if (std::fabs(lon-raAngle) < 0.01)
+					text = StelUtils::radToDmsStrAdapt(raAngle-M_PI);
+				else
+				{
+					const double delta = raAngle<M_PI ? M_PI : -M_PI;
+					text = StelUtils::radToDmsStrAdapt(raAngle+delta-M_PI);
+				}
+				break;
 			}
-		}
-		else
-		{
-			if (std::fabs(2.*M_PI-lon)<0.01)
+			default:
 			{
-				// We are at meridian 0
-				lon = 0.;
-			}
-			if (std::fabs(lon-d->raAngle) < 0.01)
-				text = StelUtils::radToHmsStrAdapt(d->raAngle);
-			else
-			{
-				const double delta = d->raAngle<M_PI ? M_PI : -M_PI;
-				text = StelUtils::radToHmsStrAdapt(d->raAngle+delta);
+				if (std::fabs(2.*M_PI-lon)<0.01)
+				{
+					// We are at meridian 0
+					lon = 0.;
+				}
+				if (std::fabs(lon-d->raAngle) < 0.01)
+					text = StelUtils::radToHmsStrAdapt(d->raAngle);
+				else
+				{
+					const double delta = d->raAngle<M_PI ? M_PI : -M_PI;
+					text = StelUtils::radToHmsStrAdapt(d->raAngle+delta);
+				}
 			}
 		}
 	}
@@ -248,10 +275,10 @@ void SkyGrid::draw(const StelCore* core) const
 	const double gridStepParallelRad = M_PI/180.*getClosestResolutionDMS(prj->getPixelPerRadAtCenter());
 	double gridStepMeridianRad;
 	if (northPoleInViewport || southPoleInViewport)
-		gridStepMeridianRad = (frameType==StelCore::FrameAltAz) ? M_PI/180.* 10. : M_PI/180.* 15.;
+		gridStepMeridianRad = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic) ? M_PI/180.* 10. : M_PI/180.* 15.;
 	else
 	{
-		const double closetResLon = (frameType==StelCore::FrameAltAz) ? getClosestResolutionDMS(prj->getPixelPerRadAtCenter()*std::cos(lat2)) : getClosestResolutionHMS(prj->getPixelPerRadAtCenter()*std::cos(lat2));
+		const double closetResLon = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic) ? getClosestResolutionDMS(prj->getPixelPerRadAtCenter()*std::cos(lat2)) : getClosestResolutionHMS(prj->getPixelPerRadAtCenter()*std::cos(lat2));
 		gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : closetResLon);
 	}
 
