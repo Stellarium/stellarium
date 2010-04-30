@@ -312,9 +312,9 @@ void StelApp::init(QSettings* conf)
 	skyCultureMgr->init();
 
 	// Initialisation of the color scheme
-	flagNightVision=true;  // fool caching
-	setVisionModeNight(false);
-	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
+	bool tmp = confSettings->value("viewing/flag_night").toBool();
+	flagNightVision=!tmp;  // fool caching
+	setVisionModeNight(tmp);
 
 	// Proxy Initialisation
 	setupHttpProxy();
