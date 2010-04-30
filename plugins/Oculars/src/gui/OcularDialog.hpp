@@ -61,8 +61,6 @@ public slots:
 	void insertNewTelescope();
 	void ocularSelected(const QModelIndex &index);
 	void telescopeSelected(const QModelIndex &index);
-	void updateOcular();
-	void updateTelescope();
 
 signals:
 	void scaleImageCircleChanged(bool state);
