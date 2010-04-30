@@ -17,7 +17,6 @@
 */
 
 #include "kfilterbase.h"
-#include <config.h>
 
 #include <QDebug>
 #include <QtCore/QIODevice>
