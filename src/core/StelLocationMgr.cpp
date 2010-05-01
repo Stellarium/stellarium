@@ -91,7 +91,7 @@ QMap<QString, StelLocation> StelLocationMgr::loadCitiesBin(const QString& fileNa
 QMap<QString, StelLocation> StelLocationMgr::loadCities(const QString& fileName, bool isUserLocation) const
 {
 	// Load the cities from data file
-	QMap<QString, StelLocation> res;
+	QMap<QString, StelLocation> locations;
 	QString cityDataPath;
 	try
 	{
@@ -102,14 +102,14 @@ QMap<QString, StelLocation> StelLocationMgr::loadCities(const QString& fileName,
 		// Note it is quite normal to nor have a user locations file (e.g. first run)
 		if (!isUserLocation)
 			qWarning() << "WARNING: Failed to locate location data file: " << fileName << e.what();
-		return res;
+		return locations;
 	}
 
 	QFile sourcefile(cityDataPath);
 	if (!sourcefile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
 		qWarning() << "ERROR: Could not open location data file: " << cityDataPath;
-		return res;
+		return locations;
 	}
 
 	// Read the data serialized from the file.
@@ -126,27 +126,27 @@ QMap<QString, StelLocation> StelLocationMgr::loadCities(const QString& fileName,
 		loc.isUserLocation = isUserLocation;
 		const QString& locId = loc.getID();
 
-		if (res.contains(locId))
+		if (locations.contains(locId))
 		{
 			// Add the state in the name of the existing one and the new one to differentiate
-			StelLocation loc2 = res[locId];
+			StelLocation loc2 = locations[locId];
 			if (!loc2.state.isEmpty())
 				loc2.name += " ("+loc2.state+")";
 			// remove and re-add the fixed version
-			res.remove(locId);
-			res[loc2.getID()] = loc2;
+			locations.remove(locId);
+			locations.insert(loc2.getID(), loc2);
 
 			if (!loc.state.isEmpty())
 				loc.name += " ("+loc.state+")";
-			res[locId] = loc;
+			locations.insert(loc.getID(), loc);
 		}
 		else
 		{
-			res.insert(locId, loc);
+			locations.insert(locId, loc);
 		}
 	}
 	sourcefile.close();
-	return res;
+	return locations;
 }
 
 StelLocationMgr::~StelLocationMgr()
