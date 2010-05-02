@@ -4,6 +4,7 @@ Changed the layout of the telescope configuration window.
 Moved the "virtual telescope" option to a more prominent place.
 Added version check for telescopes.json.
 Fixed log file formatting.
+Fixed the serial port validator on Linux/Mac OS X. (revision 6256)
 
 [0.2.0]
 Fixed OS defines (WIN32 -> Q_OS_WIN32, MACOSX -> Q_OS_MAC). (revison 5985, 5989)
