@@ -46,7 +46,7 @@ TelescopeConfigurationDialog::TelescopeConfigurationDialog()
 	#ifdef Q_OS_WIN32
 	serialPortValidator = new QRegExpValidator (QRegExp("COM[0-9]+"), this);
 	#else
-	serialPortValidator = new QRegExpValidator (QRegExp("/dev/*"), this);
+	serialPortValidator = new QRegExpValidator (QRegExp("/dev/.*"), this);
 	#endif
 }
 
