@@ -1174,7 +1174,7 @@ bool TelescopeControl::isValidSlotNumber(int slot)
 bool TelescopeControl::isValidPort(uint port)
 {
 	//Check if the port number is in IANA's allowed range
-	return (port > 1023 && port < 65535);
+	return (port > 1023 && port <= 65535);
 }
 
 bool TelescopeControl::isValidDelay(int delay)
