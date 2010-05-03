@@ -54,6 +54,10 @@
 #include <errno.h>
 #include <unistd.h>
 
+#ifndef ARRAY_SIZE
+#define ARRAY_SIZE(x) ((unsigned)(sizeof(x) / sizeof((x)[0])))
+#endif
+
 using namespace BigStarCatalogExtension;
 
 static QStringList spectral_array;
@@ -209,7 +213,7 @@ void StarMgr::init()
 	starSettings = StelJsonParser::parse(&fic).toMap();
 	fic.close();
 
-	// Increment the 1 each time any star catalog file change
+	// Increment by 1 each time any star catalog file changes
 	if (starSettings.value("version").toInt()!=StarCatalogFormatVersion)
 	{
 		qWarning() << "Found an old starsConfig.json file, upgrade..";
@@ -399,12 +403,16 @@ void StarMgr::loadData(QVariantMap starsConfig)
 		checkAndLoadCatalog(m);
 	}
 
+#if 1
+	memset(&hipIndex, 0, ARRAY_SIZE(hipIndex) * NR_OF_HIP);
+#else
 	for (int i=0; i<=NR_OF_HIP; i++)
 	{
 		hipIndex[i].a = 0;
 		hipIndex[i].z = 0;
 		hipIndex[i].s = 0;
 	}
+#endif
 	for (ZoneArrayMap::const_iterator it(zoneArrays.constBegin()); it != zoneArrays.constEnd();++it)
 	{
 		it.value()->updateHipIndex(hipIndex);
@@ -939,4 +947,16 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 	// Turn on sci names/catalog names for western culture only
 	setFlagSciNames(skyCultureDir.startsWith("western"));
 	updateI18n();
+}
+
+
+QVariantMap StarMgr::getCatalogDescription(const QString id)
+{
+	foreach (const QVariant& catV, catalogsDescription)
+	{
+		QVariantMap m = catV.toMap();
+		if (m.value("id").toString() == id)
+			return m;
+	}
+	return QVariantMap();
 }
