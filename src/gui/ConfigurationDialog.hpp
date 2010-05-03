@@ -50,8 +50,6 @@ protected:
 private:
 	//! Contains the parsed content of the starsConfig.json file
 	QVariantMap nextStarCatalogToDownload;
-	//! Set the content of the "Star catalog updates" box
-	void refreshStarCatalogButton();
 	//! True when at least one star catalog has been downloaded successfully this session
 	bool hasDownloadedStarCatalog;
 	QNetworkReply* starCatalogDownloadReply;
@@ -59,9 +57,7 @@ private:
 	QProgressBar* progressBar;
 
 private slots:
-	void setNoSelectedInfo(void);
-	void setAllSelectedInfo(void);
-	void setBriefSelectedInfo(void);
+	void objectInfoDetailLevelChanged(int);
 	void languageChanged(const QString& languageCode);
 	void setStartupTimeMode(void);
 	void setDiskViewport(bool);
@@ -69,10 +65,20 @@ private slots:
 	void cursorTimeOutChanged();
 	void cursorTimeOutChanged(double d) {cursorTimeOutChanged();}
 
+	//! Populate the list of available Star Catalogs
+	void populateCatalogList(void);
+	//! The selection of the current catalog in the catalog list has changed.
+	//! Updates the catalog information panel
+	void catalogSelectionChanged(const QString& s);
+	//! Download the currently selected catalog from the catalog list
+	void startDownloadCatalogClicked(void);
+	//! Cancel download of the catalog that is currently downloaded
+	void stopDownloadCatalogClicked(void);
+	// QNetworkRequest callback for new data available
 	void newStarCatalogData();
-	void downloadStars();
-	void cancelDownload();
+	// QNetworkRequest callback for download complete
 	void downloadFinished();
+	// QNetworkRequest callback for download error
 	void downloadError(QNetworkReply::NetworkError);
 
 	//! Update the labels displaying the current default state
