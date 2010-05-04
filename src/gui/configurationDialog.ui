@@ -216,10 +216,7 @@
                   </size>
                  </property>
                  <property name="sizeAdjustPolicy">
-                  <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-                 </property>
-                 <property name="minimumContentsLength">
-                  <number>25</number>
+                  <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
                  </property>
                 </widget>
                </item>
