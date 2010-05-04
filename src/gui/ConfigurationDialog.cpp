@@ -70,7 +70,20 @@ ConfigurationDialog::~ConfigurationDialog()
 void ConfigurationDialog::languageChanged()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+
+		//Selected object information
+		int index = ui->objectInfoComboBox->currentIndex();
+		populateObjectInfoList();
+		ui->objectInfoComboBox->setCurrentIndex(index);
+
+		//Catalog information
+		//TODO
+
+		//Plug-in information
+		//TODO
+	}
 }
 
 void ConfigurationDialog::styleChanged()
@@ -118,17 +131,14 @@ void ConfigurationDialog::createDialogContent()
 	populateCatalogList();
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateCatalogList()));
 	// Selected object info
-	QComboBox* objInfoComboBox = ui->objectInfoComboBox;
-	objInfoComboBox->clear();
-	objInfoComboBox->addItem("None", (StelObject::InfoStringGroup)0);
-	objInfoComboBox->addItem("Brief", StelObject::InfoStringGroup(StelObject::ShortInfo));
-	objInfoComboBox->addItem("All", StelObject::InfoStringGroup(StelObject::AllInfo));
-	int objInfo = objInfoComboBox->findData(gui->getInfoTextFilters());
+	QComboBox* objectInfoComboBox = ui->objectInfoComboBox;
+	populateObjectInfoList();
+	int objInfo = objectInfoComboBox->findData(gui->getInfoTextFilters());
 	if (objInfo < 0)
-		objInfo = objInfoComboBox->findData(StelObject::InfoStringGroup(StelObject::AllInfo));
+		objInfo = objectInfoComboBox->findData(StelObject::InfoStringGroup(StelObject::AllInfo));
 	if (objInfo >= 0)
-		objInfoComboBox->setCurrentIndex(objInfo);
-	connect(objInfoComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(objectInfoDetailLevelChanged(int)));
+		objectInfoComboBox->setCurrentIndex(objInfo);
+	connect(objectInfoComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(objectInfoDetailLevelChanged(int)));
 
 	// Navigation tab
 	// Startup time
@@ -493,6 +503,10 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 	{
 		if (s==desc.info.displayedName)
 		{
+			//BM: Localization of plug-in name and description should be done
+			//in the plug-in, not here. This is acceptable only as a temporary
+			//solution if someone puts the necessary strings in translations.h
+			//so that they are included in the translation template.
 			QString html = "<html><head></head><body>";
 			html += "<h2>" + q_(desc.info.displayedName) + "</h2>";
 			html += "<h3>" + q_("Authors") + ": " + desc.info.authors + "</h3>";
@@ -807,3 +821,11 @@ void ConfigurationDialog::stopDownloadCatalogClicked()
 	starCatalogDownloadReply->abort();
 }
 
+void ConfigurationDialog::populateObjectInfoList()
+{
+	Q_ASSERT(ui);
+	ui->objectInfoComboBox->clear();
+	ui->objectInfoComboBox->addItem(q_("None"), (StelObject::InfoStringGroup)0);
+	ui->objectInfoComboBox->addItem(q_("Brief"), StelObject::InfoStringGroup(StelObject::ShortInfo));
+	ui->objectInfoComboBox->addItem(q_("All available"), StelObject::InfoStringGroup(StelObject::AllInfo));
+}
