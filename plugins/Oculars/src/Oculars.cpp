@@ -145,6 +145,8 @@ bool Oculars::configureGui(bool show)
 //! Draw any parts on the screen which are for our module
 void Oculars::draw(StelCore* core)
 {
+	if (!flagShowOculars)
+		return;
 	// Insure there is a selected ocular & telescope
 	if (selectedCCDIndex > CCDs.count()) {
 		qWarning() << "Oculars: the selected sensor index of " << selectedCCDIndex << " is greater than the sensor count of "
@@ -162,7 +164,7 @@ void Oculars::draw(StelCore* core)
 		ready = false;
 	}
 
-	if (ready && flagShowOculars) {
+	if (ready) {
 		const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 		StelPainter painter(prj);
 
@@ -278,12 +280,6 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 		movementManager->setFlagLockEquPos(false);
 	}
 	event->setAccepted(false);
-}
-
-bool Oculars::handleMouseMoves(int x, int y, Qt::MouseButtons b)
-{
-	// Allow it to go up the stack
-	return false;
 }
 
 void Oculars::init()
@@ -684,7 +680,7 @@ void Oculars::interceptMovementKey(QKeyEvent* event)
 
 	if (event->type() == QEvent::KeyPress)
 	{
-		// Direction and zoom deplacements
+		// Direction and zoom replacements
 		switch (event->key())
 		{
 			case Qt::Key_Left:
