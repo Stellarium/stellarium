@@ -412,9 +412,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	if (gui->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
 		conf->setValue("gui/selected_object_info", "none");
 	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
-		//FIXME: the gui correctly calls this "brief", not "short".
-		//rename this to "brief" !
-		conf->setValue("gui/selected_object_info", "short");
+		conf->setValue("gui/selected_object_info", "brief");
 	else
 		conf->setValue("gui/selected_object_info", "all");
 
