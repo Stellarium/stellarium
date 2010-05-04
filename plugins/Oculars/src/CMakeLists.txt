@@ -7,6 +7,8 @@ INCLUDE_DIRECTORIES(
 LINK_DIRECTORIES(/src)
 
 SET(Oculars_SRCS
+  CCD.hpp
+  CCD.cpp
   Ocular.hpp
   Ocular.cpp
   Oculars.hpp
@@ -31,6 +33,7 @@ QT4_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
 # Add here all the files which require moc compilation
 # that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
 SET(Oculars_MOC_HDRS
+  CCD.hpp
   Ocular.hpp
   Oculars.hpp
   Telescope.hpp
