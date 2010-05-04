@@ -79,10 +79,16 @@ void ConfigurationDialog::languageChanged()
 		ui->objectInfoComboBox->setCurrentIndex(index);
 
 		//Catalog information
-		//TODO
+		//(trigger re-displaying the description of the current item)
+		catalogSelectionChanged(ui->catalogListWidget->currentItem()->text());
+
+		//Script information
+		//(the same trick)
+		scriptSelectionChanged(ui->scriptListWidget->currentItem()->text());
 
 		//Plug-in information
-		//TODO
+		//(the same trick)
+		pluginsSelectionChanged(ui->pluginsListWidget->currentItem()->text());
 	}
 }
 
