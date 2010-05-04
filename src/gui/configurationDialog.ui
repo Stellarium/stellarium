@@ -161,7 +161,7 @@
              </size>
             </property>
             <property name="title">
-             <string>General Settings</string>
+             <string>General settings</string>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_2">
              <property name="margin">
@@ -183,39 +183,45 @@
                 </widget>
                </item>
                <item>
-                <widget class="QComboBox" name="programLanguageComboBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>220</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>220</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item>
                 <spacer name="horizontalSpacer_4">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
-                   <height>20</height>
+                   <width>0</width>
+                   <height>0</height>
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item>
+                <widget class="QComboBox" name="programLanguageComboBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="sizeAdjustPolicy">
+                  <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+                 </property>
+                 <property name="minimumContentsLength">
+                  <number>25</number>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -230,29 +236,7 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>Object information</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QComboBox" name="objectInfoComboBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>120</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>120</width>
-                   <height>24</height>
-                  </size>
+                  <string>Selected object information</string>
                  </property>
                 </widget>
                </item>
@@ -263,11 +247,36 @@
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
-                   <height>20</height>
+                   <width>0</width>
+                   <height>0</height>
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item>
+                <widget class="QComboBox" name="objectInfoComboBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="sizeAdjustPolicy">
+                  <enum>QComboBox::AdjustToContents</enum>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -949,8 +958,8 @@
                    </property>
                    <property name="icon">
                     <iconset resource="../../data/mainRes.qrc">
-					 <normaloff>:/graphicGui/btScriptRun-on.png</normaloff>
-					 <disabledoff>:/graphicGui/btScriptRun-off.png</disabledoff>:/graphicGui/btScriptRun-on.png</iconset>
+                     <normaloff>:/graphicGui/btScriptRun-on.png</normaloff>
+                     <disabledoff>:/graphicGui/btScriptRun-off.png</disabledoff>:/graphicGui/btScriptRun-on.png</iconset>
                    </property>
                   </widget>
                  </item>
@@ -967,8 +976,8 @@
                    </property>
                    <property name="icon">
                     <iconset resource="../../data/mainRes.qrc">
-					 <normaloff>:/graphicGui/btScriptStop-on.png</normaloff>
-					 <disabledoff>:/graphicGui/btScriptStop-off.png</disabledoff>:/graphicGui/btScriptStop-on.png</iconset>
+                     <normaloff>:/graphicGui/btScriptStop-on.png</normaloff>
+                     <disabledoff>:/graphicGui/btScriptStop-off.png</disabledoff>:/graphicGui/btScriptStop-on.png</iconset>
                    </property>
                   </widget>
                  </item>
@@ -1119,7 +1128,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-main.png</normalon>
+           <normalon>:/graphicGui/tabicon-main.png</normalon>
           </iconset>
          </property>
         </item>
@@ -1129,7 +1138,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-navigation.png</normalon>
+           <normalon>:/graphicGui/tabicon-navigation.png</normalon>
           </iconset>
          </property>
         </item>
@@ -1139,7 +1148,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-tools.png</normalon>
+           <normalon>:/graphicGui/tabicon-tools.png</normalon>
           </iconset>
          </property>
         </item>
@@ -1149,7 +1158,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-scripts.png</normalon>
+           <normalon>:/graphicGui/tabicon-scripts.png</normalon>
           </iconset>
          </property>
         </item>
@@ -1159,7 +1168,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-tools.png</normalon>
+           <normalon>:/graphicGui/tabicon-tools.png</normalon>
           </iconset>
          </property>
         </item>
