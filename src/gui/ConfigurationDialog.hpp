@@ -125,6 +125,8 @@ private:
 	StelGui* gui;
 
 	int savedProjectionType;
+
+	void populateObjectInfoList();
 };
 
 #endif // _CONFIGURATIONDIALOG_HPP_
