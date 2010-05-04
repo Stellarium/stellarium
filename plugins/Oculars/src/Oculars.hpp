@@ -22,6 +22,7 @@
 #include "VecMath.hpp"
 #include "StelModule.hpp"
 #include "OcularDialog.hpp"
+#include "CCD.hpp"
 #include "Ocular.hpp"
 #include "Telescope.hpp"
 
@@ -73,12 +74,15 @@ public slots:
 
 	void toggleCrosshair();
 
+	void decrementCCDIndex();
 	void decrementOcularIndex();
 	void decrementTelescopeIndex();
+	void incrementCCDIndex();
 	void incrementOcularIndex();
 	void incrementTelescopeIndex();
 
 signals:
+	void selectedCCDChanged();
 	void selectedOcularChanged();
 	void selectedTelescopeChanged();
 
@@ -86,6 +90,7 @@ private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
 	void instrumentChanged();
 	void determineMaxImageCircle();
+	void loadCCDs();
 	void loadOculars();
 	void loadTelescopes();
 	void setScaleImageCircle(bool state);
@@ -127,8 +132,10 @@ private:
 	void zoomOcular();
 
 	//! A list of all the oculars defined in the ini file.  Must have at least one, or module will not run.
+	QList<CCD *> CCDs;
 	QList<Ocular *> oculars;
 	QList<Telescope *> telescopes;
+	int selectedCCDIndex;
 	int selectedOcularIndex;
 	int selectedTelescopeIndex;
 
@@ -158,6 +165,7 @@ private:
 	bool ready; //<! A flag that determines that this module is usable.  If false, we won't open.
 	bool newInstrument; //<! true the first time draw is called for a new ocular or telescope, false otherwise.
 	
+	QSqlTableModel *CCDsTableModel;
 	QSqlTableModel *ocularsTableModel;
 	QSqlTableModel *telescopesTableModel;
 	

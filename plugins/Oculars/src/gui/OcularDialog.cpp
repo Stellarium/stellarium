@@ -38,13 +38,17 @@
 #include <QSqlDatabase>
 #include <QSqlRecord>
 #include <QSqlTableModel>
+#include <limits>
 
-OcularDialog::OcularDialog(QSqlTableModel *ocularsTableModel, QSqlTableModel *telescopesTableModel)
+OcularDialog::OcularDialog(QSqlTableModel *CCDsTableModel, QSqlTableModel *ocularsTableModel, QSqlTableModel *telescopesTableModel)
 {
 	ui = new Ui_ocularDialogForm;
+	this->CCDsTableModel = CCDsTableModel;
 	this->ocularsTableModel = ocularsTableModel;
 	this->telescopesTableModel = telescopesTableModel;
 
+	validatorPositiveInt = new QIntValidator(0, std::numeric_limits<int>::max(), this);
+	validatorPositiveDouble = new QDoubleValidator(.0, std::numeric_limits<double>::max(), 24, this);
 	validatorOcularAFOV = new QIntValidator(35, 100, this);
 	validatorOcularEFL = new QDoubleValidator(1.0, 60.0, 1, this);
 	validatorTelescopeDiameter = new QDoubleValidator(1.0, 1000.0, 1, this);
@@ -64,6 +68,16 @@ OcularDialog::~OcularDialog()
 		ui->telescopeDiameter->setValidator(0);
 		ui->ocularName->setValidator(0);
 		ui->telescopeName->setValidator(0);
+		ui->ocularName->setValidator(0);
+		ui->CCDName->setValidator(0);
+		ui->CCDResX->setValidator(0);
+		ui->CCDResY->setValidator(0);
+		ui->CCDChipX->setValidator(0);
+		ui->CCDChipY->setValidator(0);
+		ui->CCDPixelX->setValidator(0);
+		ui->CCDPixelX->setValidator(0);
+		delete CCDMapper;
+		CCDMapper = NULL;
 		delete ocularMapper;
 		ocularMapper = NULL;
 		delete telescopeMapper;
@@ -71,6 +85,10 @@ OcularDialog::~OcularDialog()
 	}
 	delete ui;
 	ui = NULL;
+	delete validatorPositiveInt;
+	validatorPositiveInt = NULL;
+	delete validatorPositiveDouble;
+	validatorPositiveDouble = NULL;
 	delete validatorOcularAFOV;
 	validatorOcularAFOV = NULL;
 	delete validatorOcularEFL;
@@ -124,6 +142,16 @@ void OcularDialog::closeWindow()
 	StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
 }
 
+void OcularDialog::deleteSelectedCCD()
+{
+	QModelIndex selection = ui->ccdListView->currentIndex();
+	if (selection.row() != -1 && CCDsTableModel->rowCount() > 1) {
+		CCDsTableModel->removeRows(selection.row(), 1);
+		ui->ccdListView->setCurrentIndex(CCDsTableModel->index(0, 1));
+	}
+}
+
+
 void OcularDialog::deleteSelectedOcular()
 {
 	QModelIndex selection = ui->ocularListView->currentIndex();
@@ -139,6 +167,38 @@ void OcularDialog::deleteSelectedTelescope()
 	if (selection.row() != -1 && telescopesTableModel->rowCount() > 1) {
 		telescopesTableModel->removeRows(selection.row(), 1);
 		ui->telescopeListView->setCurrentIndex(telescopesTableModel->index(0, 1));
+	}
+}
+
+void OcularDialog::insertNewCCD()
+{
+	QSqlField field1("name", QVariant::String);
+	QSqlField field2("resolution_x", QVariant::Int);
+	QSqlField field3("resolution_y", QVariant::Int);
+	QSqlField field4("chip_width", QVariant::Double);// FIXME: shouldn't this be QVariant::Float ?
+	QSqlField field5("chip_height", QVariant::Double);// FIXME: shouldn't this be QVariant::Float ?
+	QSqlField field6("pixel_width", QVariant::Double);// FIXME: shouldn't this be QVariant::Float ?
+	QSqlField field7("pixel_height", QVariant::Double);// FIXME: shouldn't this be QVariant::Float ?
+	field1.setValue(QVariant("New Sensor"));
+	field2.setValue(QVariant(4096));
+	field3.setValue(QVariant(4096));
+	field4.setValue(QVariant(36.8));
+	field5.setValue(QVariant(36.8));
+	field6.setValue(QVariant(9));
+	field7.setValue(QVariant(9));
+	QSqlRecord newRecord = QSqlRecord();
+	newRecord.append(field1);
+	newRecord.append(field2);
+	newRecord.append(field3);
+	newRecord.append(field4);
+	newRecord.append(field5);
+	newRecord.append(field6);
+	newRecord.append(field7);
+
+	if (CCDsTableModel->insertRecord(-1, newRecord)) {
+		ui->ccdListView->setCurrentIndex(CCDsTableModel->index(CCDsTableModel->rowCount() - 1, 1));
+	} else {
+		qWarning() << "Oculars: could not insert new sensor.  The error is: " << CCDsTableModel->lastError();
 	}
 }
 
@@ -191,12 +251,26 @@ void OcularDialog::insertNewTelescope()
 	}
 }
 
+void OcularDialog::CCDSelected(const QModelIndex &index)
+{
+}
+
 void OcularDialog::ocularSelected(const QModelIndex &index)
 {
 }
 
 void OcularDialog::telescopeSelected(const QModelIndex &index)
 {
+}
+
+void OcularDialog::updateCCD()
+{
+	int selectionIndex = ui->ccdListView->currentIndex().row();
+	if (CCDMapper->submit()) {
+		ui->ccdListView->setCurrentIndex(CCDsTableModel->index(selectionIndex, 1));
+	} else {
+		qWarning() << "Oculars: error saving modified sensor.  Error is: " << CCDsTableModel->lastError();
+	}
 }
 
 void OcularDialog::updateOcular()
@@ -251,16 +325,23 @@ void OcularDialog::createDialogContent()
 
 	//Now the rest of the actions.
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->updateCCDButton, SIGNAL(clicked()), this, SLOT(updateCCD()));
 	connect(ui->updateOcularButton, SIGNAL(clicked()), this, SLOT(updateOcular()));
 	connect(ui->updateTelescopeButton, SIGNAL(clicked()), this, SLOT(updateTelescope()));
 	connect(ui->scaleImageCircleCheckBox, SIGNAL(stateChanged(int)), this, SLOT(scaleImageCircleStateChanged(int)));
 	// The add & delete buttons
+	connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
+	connect(ui->deleteCCD, SIGNAL(clicked()), this, SLOT(deleteSelectedCCD()));
 	connect(ui->addOcular, SIGNAL(clicked()), this, SLOT(insertNewOcular()));
 	connect(ui->deleteOcular, SIGNAL(clicked()), this, SLOT(deleteSelectedOcular()));
 	connect(ui->addTelescope, SIGNAL(clicked()), this, SLOT(insertNewTelescope()));
 	connect(ui->deleteTelescope, SIGNAL(clicked()), this, SLOT(deleteSelectedTelescope()));
 
 	// Oculars model
+	ui->ccdListView->setModel(CCDsTableModel);
+	ui->ccdListView->setModelColumn(1);
+	connect(ui->ccdListView, SIGNAL(clicked(const QModelIndex &)), this, SLOT(CCDSelected(const QModelIndex &)));
+
 	ui->ocularListView->setModel(ocularsTableModel);
 	ui->ocularListView->setModelColumn(1);
 	connect(ui->ocularListView, SIGNAL(clicked(const QModelIndex &)), this, SLOT(ocularSelected(const QModelIndex &)));
@@ -270,6 +351,13 @@ void OcularDialog::createDialogContent()
 	connect(ui->telescopeListView, SIGNAL(clicked(const QModelIndex &)), this, SLOT(telescopeSelected(const QModelIndex &)));
 
 	// Validators
+	ui->CCDName->setValidator(validatorName);
+	ui->CCDResX->setValidator(validatorPositiveInt);
+	ui->CCDResY->setValidator(validatorPositiveInt);
+	ui->CCDChipX->setValidator(validatorPositiveDouble);
+	ui->CCDChipY->setValidator(validatorPositiveDouble);
+	ui->CCDPixelX->setValidator(validatorPositiveDouble);
+	ui->CCDPixelY->setValidator(validatorPositiveDouble);
 	ui->ocularAFov->setValidator(validatorOcularAFOV);
 	ui->ocularFL->setValidator(validatorOcularEFL);
 	ui->ocularFieldStop->setValidator(validatorOcularEFL);
@@ -277,6 +365,23 @@ void OcularDialog::createDialogContent()
 	ui->telescopeDiameter->setValidator(validatorTelescopeDiameter);
 	ui->ocularName->setValidator(validatorName);
 	ui->telescopeName->setValidator(validatorName);
+
+	// The CCD mapper
+	CCDMapper = new QDataWidgetMapper();
+	CCDMapper->setModel(CCDsTableModel);
+//	CCDMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
+	CCDMapper->addMapping(ui->CCDID, CCDsTableModel->fieldIndex("id"), "text");
+	CCDMapper->addMapping(ui->CCDName, CCDsTableModel->fieldIndex("name"));
+	CCDMapper->addMapping(ui->CCDResX, CCDsTableModel->fieldIndex("resolution_x"));
+	CCDMapper->addMapping(ui->CCDResY, CCDsTableModel->fieldIndex("resolution_y"));
+	CCDMapper->addMapping(ui->CCDChipX, CCDsTableModel->fieldIndex("chip_width"));
+	CCDMapper->addMapping(ui->CCDChipY, CCDsTableModel->fieldIndex("chip_height"));
+	CCDMapper->addMapping(ui->CCDPixelX, CCDsTableModel->fieldIndex("pixel_width"));
+	CCDMapper->addMapping(ui->CCDPixelY, CCDsTableModel->fieldIndex("pixel_height"));
+	CCDMapper->toFirst();
+	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
+			CCDMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+	ui->ccdListView->setCurrentIndex(CCDsTableModel->index(0, 1));
 
 	// The ocular mapper
 	ocularMapper = new QDataWidgetMapper();
