@@ -44,7 +44,7 @@ class OcularDialog : public StelDialogOculars
 	Q_OBJECT
 
 public:
-	OcularDialog(QSqlTableModel *ocularsTableModel, QSqlTableModel *telescopesTableModel);
+	OcularDialog(QSqlTableModel *CCDsTableModel, QSqlTableModel *ocularsTableModel, QSqlTableModel *telescopesTableModel);
 	virtual ~OcularDialog();
 	void languageChanged();
 	void updateStyle();
@@ -55,12 +55,16 @@ public:
 
 public slots:
 	void closeWindow();
+	void deleteSelectedCCD();
 	void deleteSelectedOcular();
 	void deleteSelectedTelescope();
+	void insertNewCCD();
 	void insertNewOcular();
 	void insertNewTelescope();
+	void CCDSelected(const QModelIndex &index);
 	void ocularSelected(const QModelIndex &index);
 	void telescopeSelected(const QModelIndex &index);
+	void updateCCD();
 	void updateOcular();
 	void updateTelescope();
 
@@ -75,6 +79,8 @@ private slots:
 	void scaleImageCircleStateChanged(int state);
 
 private:
+	QDataWidgetMapper *CCDMapper;
+	QSqlTableModel *CCDsTableModel;
 	QDataWidgetMapper *ocularMapper;
 	QSqlTableModel *ocularsTableModel;
 	QDataWidgetMapper *telescopeMapper;
@@ -84,7 +90,8 @@ private:
 	QDoubleValidator *validatorTelescopeDiameter;
 	QDoubleValidator *validatorTelescopeFL;
 	QRegExpValidator *validatorName;
-
+	QIntValidator *validatorPositiveInt;
+	QDoubleValidator *validatorPositiveDouble;
 };
 
 #endif // _OCULARDIALOG_HPP_

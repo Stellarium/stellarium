@@ -97,8 +97,10 @@ Oculars::Oculars() : selectedOcularIndex(-1), flagShowOculars(false), usageMessa
 	flagShowCrosshairs = false;
 	font.setPixelSize(14);
 	maxImageCircle = 0.0;
+	CCDs = QList<CCD *>();
 	oculars = QList<Ocular *>();
 	ready = false;
+	selectedCCDIndex = 0;
 	selectedOcularIndex = 0;
 	selectedTelescopeIndex = 0;
 	setObjectName("Oculars");
@@ -112,6 +114,8 @@ Oculars::Oculars() : selectedOcularIndex(-1), flagShowOculars(false), usageMessa
 
 Oculars::~Oculars()
 {
+	delete CCDsTableModel;
+	CCDsTableModel = NULL;
 	delete ocularsTableModel;
 	ocularsTableModel = NULL;
 	delete telescopesTableModel;
@@ -142,6 +146,11 @@ bool Oculars::configureGui(bool show)
 void Oculars::draw(StelCore* core)
 {
 	// Insure there is a selected ocular & telescope
+	if (selectedCCDIndex > CCDs.count()) {
+		qWarning() << "Oculars: the selected sensor index of " << selectedCCDIndex << " is greater than the sensor count of "
+		<< CCDs.count() << ". Module disabled!";
+		ready = false;
+	}
 	if (selectedOcularIndex > oculars.count()) {
 		qWarning() << "Oculars: the selected ocular index of " << selectedOcularIndex << " is greater than the ocular count of "
 		<< oculars.count() << ". Module disabled!";
@@ -162,9 +171,18 @@ void Oculars::draw(StelCore* core)
 		if (flagShowCrosshairs)  {
 			drawCrosshairs();
 		}
+		CCD *ccd = CCDs[selectedCCDIndex];
 		Ocular *ocular = oculars[selectedOcularIndex];
 		Telescope *telescope = telescopes[selectedTelescopeIndex];
 		QString widthString = "MMMMMMMMMMMMMMMMMMM";
+		QString string0, string0info;
+		if (ccd && ccd->getChipWidth() > .0 && ccd->getChipHeight() > .0) {
+			string0info = "Dimension : " + QVariant(ccd->getChipWidth()).toString() + "x" + QVariant(ccd->getChipHeight()).toString() + " mm";
+			if (ccd->getName() != QString("")) {
+				string0 = "Sensor #" + QVariant(selectedCCDIndex).toString();
+				string0.append(" : ").append(ccd->getName());
+			}
+		}
 		QString string1 = "Ocular #" + QVariant(selectedOcularIndex).toString();
 		if (ocular->getName() != QString(""))  {
 			string1.append(" : ").append(ocular->getName());
@@ -192,6 +210,12 @@ void Oculars::draw(StelCore* core)
 		glEnable(GL_BLEND);
 
 		const int lineHeight = painter.getFontMetrics().height();
+		if (string0 != QString("")) {
+			painter.drawText(xPosition, yPosition, string0);
+			yPosition-=lineHeight;
+			painter.drawText(xPosition, yPosition, string0info);
+			yPosition-=lineHeight;
+		}
 		painter.drawText(xPosition, yPosition, string1);
 		yPosition-=lineHeight;
 		painter.drawText(xPosition, yPosition, string2);
@@ -271,7 +295,7 @@ void Oculars::init()
 	if (initializeDB()) {
 		// assume all is well
 		ready = true;
-		ocularDialog = new OcularDialog(ocularsTableModel, telescopesTableModel);
+		ocularDialog = new OcularDialog(CCDsTableModel, ocularsTableModel, telescopesTableModel);
 		initializeActions();
 	}
 	try {
@@ -361,6 +385,15 @@ void Oculars::instrumentChanged()
 	zoom(true);
 }
 
+void Oculars::loadCCDs()
+{
+	CCDs.clear();
+	int rowCount = CCDsTableModel->rowCount();
+	for (int row = 0; row < rowCount; row++) {
+		CCDs.append(new CCD(CCDsTableModel->record(row)));
+	}
+}
+
 void Oculars::loadOculars()
 {
 	oculars.clear();
@@ -368,11 +401,6 @@ void Oculars::loadOculars()
 	for (int row = 0; row < rowCount; row++) {
 		oculars.append(new Ocular(ocularsTableModel->record(row)));
 	}
-	if (oculars.size() == 0) {
-		ready = false;
-		qWarning() << "WARNING: no oculars found.  Ocular will be disabled.";
-	} else
-		ready = true;
 }
 
 void Oculars::loadTelescopes()
@@ -382,11 +410,6 @@ void Oculars::loadTelescopes()
 	for (int row = 0; row < rowCount; row++) {
 		telescopes.append(new Telescope(telescopesTableModel->record(row)));
 	}
-	if (telescopes.size() == 0) {
-		ready = false;
-		qWarning() << "WARNING: no telescopes found.  Ocular will be disabled.";
-	} else
-		ready = true;
 }
 
 void Oculars::setScaleImageCircle(bool state)
@@ -451,6 +474,15 @@ void Oculars::enableOcular(bool b)
 	}
 }
 
+void Oculars::decrementCCDIndex()
+{
+	selectedCCDIndex--;
+	if (selectedCCDIndex == -1) {
+		selectedCCDIndex = CCDs.count() - 1;
+	}
+	emit(selectedCCDChanged());
+}
+
 void Oculars::decrementOcularIndex()
 {
 	selectedOcularIndex--;
@@ -467,6 +499,15 @@ void Oculars::decrementTelescopeIndex()
 		selectedTelescopeIndex = telescopes.count() - 1;
 	}
 	emit(selectedTelescopeChanged());
+}
+
+void Oculars::incrementCCDIndex()
+{
+	selectedCCDIndex++;
+	if (selectedCCDIndex == CCDs.count()) {
+		selectedCCDIndex = 0;
+	}
+	emit(selectedCCDChanged());
 }
 
 void Oculars::incrementOcularIndex()
@@ -532,6 +573,8 @@ void Oculars::initializeActions()
 	gui->addGuiActions("actionShow_Ocular_Crosshair", N_("Toggle Crosshair"), "ALT+C", group, true);
 	gui->addGuiActions("actionShow_Ocular_Window", N_("Configuration Window"), "ALT+O", group, true);
 
+	gui->addGuiActions("actionShow_CCD_increment", N_("Select next sensor"), "Shift+Ctrl+]", group, false);
+	gui->addGuiActions("actionShow_CCD_decrement", N_("Select previous sensor"), "Shift+Ctrl+[", group, false);
 	gui->addGuiActions("actionShow_Ocular_increment", N_("Select next ocular"), "Ctrl+]", group, false);
 	gui->addGuiActions("actionShow_Ocular_decrement", N_("Select previous ocular"), "Ctrl+[", group, false);
 	gui->addGuiActions("actionShow_Telescope_increment", N_("Select next telescope"), "Shift+]", group, false);
@@ -542,6 +585,8 @@ void Oculars::initializeActions()
 	connect(gui->getGuiActions("actionShow_Ocular_Window"), SIGNAL(toggled(bool)), ocularDialog, SLOT(setVisible(bool)));
 	connect(ocularDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Ocular_Window"), SLOT(setChecked(bool)));
 
+	connect(gui->getGuiActions("actionShow_CCD_increment"), SIGNAL(triggered()), this, SLOT(incrementCCDIndex()));
+	connect(gui->getGuiActions("actionShow_CCD_decrement"), SIGNAL(triggered()), this, SLOT(decrementCCDIndex()));
 	connect(gui->getGuiActions("actionShow_Ocular_increment"), SIGNAL(triggered()), this, SLOT(incrementOcularIndex()));
 	connect(gui->getGuiActions("actionShow_Ocular_decrement"), SIGNAL(triggered()), this, SLOT(decrementOcularIndex()));
 	connect(gui->getGuiActions("actionShow_Telescope_increment"), SIGNAL(triggered()), this, SLOT(incrementTelescopeIndex()));
@@ -551,6 +596,7 @@ void Oculars::initializeActions()
 	 connect(telescopesTableModel, SIGNAL(rowsInserted(const QModelIndex &, int, int)), this, SLOT(rowsInserted()));
 	 connect(telescopesTableModel, SIGNAL(rowsRemoved(const QModelIndex &, int, int)), this, SLOT(rowsRemoved()));
 	 */
+	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedOcularChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedTelescopeChanged()), this, SLOT(instrumentChanged()));
 	connect(ocularDialog, SIGNAL(scaleImageCircleChanged(bool)), this, SLOT(setScaleImageCircle(bool)));
@@ -601,8 +647,17 @@ bool Oculars::initializeDB()
 			EXEC("INSERT INTO telescopes (name, focalLength, diameter, vFlip, hFlip) VALUES ('C1400', 3190, 355.6, 'false', 'true')");
 			EXEC("INSERT INTO telescopes (name, focalLength, diameter, vFlip, hFlip) VALUES ('80EDF', 500, 80, 'false', 'false')");
 		}
+		if (!tableList.contains("ccd")) {
+			QSqlQuery query = QSqlQuery(db);
+			EXEC("create table ccd (id INTEGER PRIMARY KEY, name VARCHAR, resolution_x INTEGER, resolution_y INTEGER, chip_width FLOAT, chip_height FLOAT, pixel_width FLOAT, pixel_height FLOAT)");
+			EXEC("INSERT INTO ccd (name, resolution_x, resolution_y, chip_width, chip_height, pixel_width, pixel_height) VALUES ('None', 0, 0, 0, 0, 0, 0)");
+			EXEC("INSERT INTO ccd (name, resolution_x, resolution_y, chip_width, chip_height, pixel_width, pixel_height) VALUES ('EOS 450D', 4272, 2848, 22.2, 14.8, 5.2, 5.2)");
+		}
 
 		// Set the table models
+		CCDsTableModel = new QSqlTableModel(0, db);
+		CCDsTableModel->setTable("ccd");
+		CCDsTableModel->select();
 		ocularsTableModel = new QSqlTableModel(0, db);
 		ocularsTableModel->setTable("oculars");
 		if (!ocularsTableModel->select())
@@ -720,10 +775,25 @@ void Oculars::interceptMovementKey(QKeyEvent* event)
 
 void Oculars::loadDatabaseObjects()
 {
+	loadCCDs();
 	loadOculars();
 	loadTelescopes();
 	if (useMaxImageCircle) {
 		determineMaxImageCircle();
+	}
+	// A telescope and one of [CCD|Ocular] must be defined for the plugin to be usable.
+	if (telescopes.size() == 0) 
+	{
+		ready = false;
+		qWarning() << "WARNING: no telescopes found.  Ocular will be disabled.";
+	} 
+	else if (oculars.size() == 0 && CCDs.size() == 0) {
+		ready = false;
+		qWarning() << "WARNING: no oculars or CCDs found.  Ocular will be disabled.";
+	} 
+	else
+	{
+		ready = true;
 	}
 }
 
@@ -752,6 +822,21 @@ void Oculars::paintMask()
 	glColor3f(0.15f,0.15f,0.15f);
 	gluDisk(quadric, inner - 1.0, inner, 256, 1);
 	gluDeleteQuadric(quadric);
+	// draw sensor rectangle
+	CCD *ccd = CCDs[selectedCCDIndex];
+	if (ccd) {
+		Ocular *ocular = oculars[selectedOcularIndex];
+		float CCDx = ccd->getActualFOVx(ocular);
+		float CCDy = ccd->getActualFOVy(ocular);
+		if (CCDx > 0.0 && CCDy > 0.0) {
+			glBegin(GL_LINE_LOOP);
+			glVertex2f(-CCDx, CCDy);
+			glVertex2f(CCDx, CCDy);
+			glVertex2f(CCDx, -CCDy);
+			glVertex2f(-CCDx, -CCDy);
+			glEnd();
+		}
+	}
 	glPopMatrix();
 }
 
