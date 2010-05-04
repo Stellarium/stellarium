@@ -58,7 +58,6 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 //	virtual void handleKeys(class QKeyEvent* event);
 	virtual void handleMouseClicks(class QMouseEvent* event);
-	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
 	virtual void setStelStyle(const QString& style);
 	virtual void update(double deltaTime) {;}
 
