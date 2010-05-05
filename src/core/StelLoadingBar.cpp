@@ -22,7 +22,7 @@
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelLocaleMgr.hpp"
-#include "StelMainGraphicsView.hpp"
+//#include "StelMainGraphicsView.hpp"
 #include "StelPainter.hpp"
 #include "StelCore.hpp"
 
@@ -66,5 +66,5 @@ void StelLoadingBar::draw()
 
 	sPainter->setFont(extraTextFont);
 	sPainter->drawText(splashx + extraTextPos[0], splashy + extraTextPos[1]-sPainter->getFontMetrics().height()-1, extraText);
-	StelMainGraphicsView::getInstance().swapBuffer();	// And swap the buffers
+	StelPainter::swapBuffer();	// And swap the buffers
 }
