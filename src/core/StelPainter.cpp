@@ -81,6 +81,12 @@ void StelPainter::makeMainGLContextCurrent()
 	glContext->makeCurrent();
 }
 
+void StelPainter::swapBuffer()
+{
+	Q_ASSERT(glContext!=NULL);
+	Q_ASSERT(glContext->isValid());
+	glContext->swapBuffers();
+}
 
 StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 {

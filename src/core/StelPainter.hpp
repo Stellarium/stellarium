@@ -270,6 +270,9 @@ public:
 	//! Set the QPainter to use for performing some drawing operations.
 	static void setQPainter(QPainter* qPainter);
 
+	//! Swap the OpenGL buffers. You normally don't need to do that.
+	static void swapBuffer();
+
 	//! Make sure that our GL context is current and valid.
 	static void makeMainGLContextCurrent();
 
