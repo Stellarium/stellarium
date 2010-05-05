@@ -133,6 +133,9 @@ SET(stellarium_lib_SRCS
 	core/TrailGroup.cpp
 	core/RefractionExtinction.hpp
 	core/RefractionExtinction.cpp
+	core/StelLoadingBar.cpp
+	core/StelLoadingBar.hpp
+
 	${gl_lib_SRCS}
 	core/external/fixx11h.h
 	core/external/gettext.h
@@ -238,8 +241,6 @@ SET(stellarium_lib_SRCS
 	scripting/StelMainScriptAPIProxy.cpp
 	scripting/StelMainScriptAPIProxy.hpp
 
-	StelLoadingBar.cpp
-	StelLoadingBar.hpp
 	StelMainGraphicsView.hpp
 	StelMainGraphicsView.cpp
 	StelMainWindow.hpp
