@@ -411,10 +411,6 @@
                <family>Bitstream Vera Sans</family>
               </font>
              </property>
-             <property name="styleSheet">
-              <string>background-color: rgb(31, 31, 31);
-color: rgb(170, 173, 164);</string>
-             </property>
              <property name="readOnly">
               <bool>true</bool>
              </property>
@@ -449,11 +445,7 @@ color: rgb(170, 173, 164);</string>
               </font>
              </property>
              <property name="toolTip">
-              <string>comma separated list of groups</string>
-             </property>
-             <property name="styleSheet">
-              <string>background-color: rgb(31, 31, 31);
-color: rgb(170, 173, 164);</string>
+              <string>Comma separated list of groups</string>
              </property>
              <property name="readOnly">
               <bool>true</bool>
@@ -490,10 +482,6 @@ color: rgb(170, 173, 164);</string>
              </property>
              <property name="toolTip">
               <string>NORAD two line element orbit data</string>
-             </property>
-             <property name="styleSheet">
-              <string>background-color: rgb(31, 31, 31);
-color: rgb(170, 173, 164);</string>
              </property>
              <property name="horizontalScrollBarPolicy">
               <enum>Qt::ScrollBarAlwaysOn</enum>
@@ -666,7 +654,6 @@ color: rgb(170, 173, 164);</string>
  </customwidgets>
  <resources>
   <include location="../../Satellites.qrc"/>
-  <include location="../Satellites.qrc"/>
  </resources>
  <connections/>
 </ui>
