@@ -23,6 +23,7 @@
 #define MAX_INDEX_LEVEL 8
 
 #include "StelRegionObject.hpp"
+#include "StelSphericalIndex.hpp"
 
 //! @class StelSphericalIndexMultiRes
 //! Container allowing to store and query SphericalRegion.
