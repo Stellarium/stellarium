@@ -117,6 +117,10 @@ private:
 
 	//! Paint the mask into the viewport.
 	void paintMask();
+	
+	//! Paints the text about the current object selections to the upper right hand of the screen.
+	//! Should only be called from a 'ready' state; currently from the draw() method.
+	void paintText(const StelCore* core);
 
 	//! This method is called by the zoom() method, when this plugin is toggled off; it resets to the default view.
 	void unzoomOcular();
