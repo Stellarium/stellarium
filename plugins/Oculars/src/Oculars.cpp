@@ -165,70 +165,11 @@ void Oculars::draw(StelCore* core)
 	}
 
 	if (ready) {
-		const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
-		StelPainter painter(prj);
-
-		painter.setFont(font);
 		paintMask();
 		if (flagShowCrosshairs)  {
 			drawCrosshairs();
 		}
-		CCD *ccd = CCDs[selectedCCDIndex];
-		Ocular *ocular = oculars[selectedOcularIndex];
-		Telescope *telescope = telescopes[selectedTelescopeIndex];
-		QString widthString = "MMMMMMMMMMMMMMMMMMM";
-		QString string0, string0info;
-		if (ccd && ccd->getChipWidth() > .0 && ccd->getChipHeight() > .0) {
-			string0info = "Dimension : " + QVariant(ccd->getChipWidth()).toString() + "x" + QVariant(ccd->getChipHeight()).toString() + " mm";
-			if (ccd->getName() != QString("")) {
-				string0 = "Sensor #" + QVariant(selectedCCDIndex).toString();
-				string0.append(" : ").append(ccd->getName());
-			}
-		}
-		QString string1 = "Ocular #" + QVariant(selectedOcularIndex).toString();
-		if (ocular->getName() != QString(""))  {
-			string1.append(" : ").append(ocular->getName());
-		}
-		QString string2 = "Ocular aFOV: " + QVariant(ocular->getAppearentFOV()).toString() + QChar(0x00B0);
-		QString string4 = "Telescope #" + QVariant(selectedTelescopeIndex).toString();
-		if (telescope->getName() != QString(""))  {
-			string4.append(" : ").append(telescope->getName());
-		}
-		QString string5 = "Magnification: " + QVariant(((int)(ocular->getMagnification(telescope) * 10.0)) / 10.0).toString() + "x";
-		QString string6 = "Image Circle: " + QVariant(((int)(ocular->getExitCircle(telescope) * 10.0)) / 10.0).toString() + "mm";
-		QString string7 = "FOV: " + QVariant(((int)(ocular->getActualFOV(telescope) * 10000.00)) / 10000.0).toString() + QChar(0x00B0);
-
-		float insetFromRHS = painter.getFontMetrics().width(widthString);
-
-		StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
-		int xPosition = projectorParams.viewportXywh[2];
-		xPosition -= insetFromRHS;
-		int yPosition = projectorParams.viewportXywh[3];
-		yPosition -= 40;
-
-		painter.setColor(0.8, 0.48, 0.0, 1);
-		glDisable(GL_TEXTURE_2D);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);
-
-		const int lineHeight = painter.getFontMetrics().height();
-		if (string0 != QString("")) {
-			painter.drawText(xPosition, yPosition, string0);
-			yPosition-=lineHeight;
-			painter.drawText(xPosition, yPosition, string0info);
-			yPosition-=lineHeight;
-		}
-		painter.drawText(xPosition, yPosition, string1);
-		yPosition-=lineHeight;
-		painter.drawText(xPosition, yPosition, string2);
-		yPosition-=lineHeight;
-		painter.drawText(xPosition, yPosition, string4);
-		yPosition-=lineHeight;
-		painter.drawText(xPosition, yPosition, string5);
-		yPosition-=lineHeight;
-		painter.drawText(xPosition, yPosition, string6);
-		yPosition-=lineHeight;
-		painter.drawText(xPosition, yPosition, string7);
+		paintText(core);
 	}
 	newInstrument = false; // Now that it's been drawn once
 }
@@ -848,6 +789,87 @@ void Oculars::paintMask()
 		}
 	}
 	glPopMatrix();
+}
+
+
+void Oculars::paintText(const StelCore* core)
+{
+	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
+	StelPainter painter(prj);	
+
+	// Get the current instruments
+	CCD *ccd = CCDs[selectedCCDIndex];
+	Ocular *ocular = oculars[selectedOcularIndex];
+	Telescope *telescope = telescopes[selectedTelescopeIndex];
+
+	// set up the color and the GL state
+	painter.setColor(0.8, 0.48, 0.0, 1);
+	glDisable(GL_TEXTURE_2D);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+
+	// Get the X & Y positions, and the line height
+	painter.setFont(font);
+	QString widthString = "MMMMMMMMMMMMMMMMMMM";
+	float insetFromRHS = painter.getFontMetrics().width(widthString);
+	StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
+	int xPosition = projectorParams.viewportXywh[2];
+	xPosition -= insetFromRHS;
+	int yPosition = projectorParams.viewportXywh[3];
+	yPosition -= 40;
+	const int lineHeight = painter.getFontMetrics().height();
+	
+	// The CCD
+	QString ccdSensorLabel, ccdInfoLabel;
+	if (ccd && ccd->getChipWidth() > .0 && ccd->getChipHeight() > .0) {
+		ccdInfoLabel = "Dimension : " + QVariant(ccd->getChipWidth()).toString() + "x" + QVariant(ccd->getChipHeight()).toString() + " mm";
+		if (ccd->getName() != QString("")) {
+			ccdSensorLabel = "Sensor #" + QVariant(selectedCCDIndex).toString();
+			ccdSensorLabel.append(" : ").append(ccd->getName());
+		}
+	}
+	if (ccdSensorLabel != QString("")) {
+		painter.drawText(xPosition, yPosition, ccdSensorLabel);
+		yPosition-=lineHeight;
+		painter.drawText(xPosition, yPosition, ccdInfoLabel);
+		yPosition-=lineHeight;
+	}
+
+	// The Ocular
+	QString ocularNumberLabel = "Ocular #" + QVariant(selectedOcularIndex).toString();
+	if (ocular->getName() != QString(""))  {
+		ocularNumberLabel.append(" : ").append(ocular->getName());
+	}
+	painter.drawText(xPosition, yPosition, ocularNumberLabel);
+	yPosition-=lineHeight;
+
+	QString ocularFLLabel = "Ocular FL: " + QVariant(ocular->getEffectiveFocalLength()).toString() + QChar(0x00B0);
+	painter.drawText(xPosition, yPosition, ocularFLLabel);
+	yPosition-=lineHeight;
+
+	QString ocularFOVLabel = "Ocular aFOV: " + QVariant(ocular->getAppearentFOV()).toString() + QChar(0x00B0);
+	painter.drawText(xPosition, yPosition, ocularFOVLabel);
+	yPosition-=lineHeight;
+
+	// The telescope
+	QString telescopeNumberLabel = "Telescope #" + QVariant(selectedTelescopeIndex).toString();
+	if (telescope->getName() != QString(""))  {
+		telescopeNumberLabel.append(" : ").append(telescope->getName());
+	}
+	painter.drawText(xPosition, yPosition, telescopeNumberLabel);
+	yPosition-=lineHeight;
+
+	// General info
+	QString magnificationLabel = "Magnification: " + QVariant(((int)(ocular->getMagnification(telescope) * 10.0)) / 10.0).toString() + "x";
+	painter.drawText(xPosition, yPosition, magnificationLabel);
+	yPosition-=lineHeight;
+
+	QString imageCircleLabel = "Image Circle: " + QVariant(((int)(ocular->getExitCircle(telescope) * 10.0)) / 10.0).toString() + "mm";
+	painter.drawText(xPosition, yPosition, imageCircleLabel);
+	yPosition-=lineHeight;
+
+	QString fovLabel = "FOV: " + QVariant(((int)(ocular->getActualFOV(telescope) * 10000.00)) / 10000.0).toString() + QChar(0x00B0);
+	painter.drawText(xPosition, yPosition, fovLabel);
 }
 
 void Oculars::validateIniFile()
