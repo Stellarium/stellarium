@@ -292,7 +292,7 @@ void Oculars::init()
 		// assume all is well
 		ready = true;
 		ocularDialog = new OcularDialog(CCDsTableModel, ocularsTableModel, telescopesTableModel);
-		initializeActions();
+		initializeActivationActions();
 	}
 	try {
 		StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
@@ -468,6 +468,9 @@ void Oculars::enableOcular(bool b)
 			zoom(false);
 		}
 	}
+	if (flagShowOculars) {
+		initializeActions();
+	}
 }
 
 void Oculars::decrementCCDIndex()
@@ -558,7 +561,7 @@ void Oculars::drawCrosshairs()
 	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0] - length, centerScreen[1]);
 }
 
-void Oculars::initializeActions()
+void Oculars::initializeActivationActions()
 {
 	QString group = "Oculars Plugin";
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -566,37 +569,10 @@ void Oculars::initializeActions()
 
 	gui->addGuiActions("actionShow_Ocular", N_("Enable ocular"), "Ctrl+O", "Plugin Key Bindings", true);
 	gui->getGuiActions("actionShow_Ocular")->setChecked(flagShowOculars);
-	gui->addGuiActions("actionShow_Ocular_Crosshair", N_("Toggle Crosshair"), "ALT+C", group, true);
-	gui->addGuiActions("actionShow_Ocular_Window", N_("Configuration Window"), "ALT+O", group, true);
-
-	gui->addGuiActions("actionShow_CCD_increment", N_("Select next sensor"), "Shift+Ctrl+]", group, false);
-	gui->addGuiActions("actionShow_CCD_decrement", N_("Select previous sensor"), "Shift+Ctrl+[", group, false);
-	gui->addGuiActions("actionShow_Ocular_increment", N_("Select next ocular"), "Ctrl+]", group, false);
-	gui->addGuiActions("actionShow_Ocular_decrement", N_("Select previous ocular"), "Ctrl+[", group, false);
-	gui->addGuiActions("actionShow_Telescope_increment", N_("Select next telescope"), "Shift+]", group, false);
-	gui->addGuiActions("actionShow_Telescope_decrement", N_("Select previous telescope"), "Shift+[", group, false);
-
 	connect(gui->getGuiActions("actionShow_Ocular"), SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
-	connect(gui->getGuiActions("actionShow_Ocular_Crosshair"), SIGNAL(toggled(bool)), this, SLOT(toggleCrosshair()));
+	gui->addGuiActions("actionShow_Ocular_Window", N_("Configuration Window"), "ALT+O", group, true);
 	connect(gui->getGuiActions("actionShow_Ocular_Window"), SIGNAL(toggled(bool)), ocularDialog, SLOT(setVisible(bool)));
 	connect(ocularDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Ocular_Window"), SLOT(setChecked(bool)));
-
-	connect(gui->getGuiActions("actionShow_CCD_increment"), SIGNAL(triggered()), this, SLOT(incrementCCDIndex()));
-	connect(gui->getGuiActions("actionShow_CCD_decrement"), SIGNAL(triggered()), this, SLOT(decrementCCDIndex()));
-	connect(gui->getGuiActions("actionShow_Ocular_increment"), SIGNAL(triggered()), this, SLOT(incrementOcularIndex()));
-	connect(gui->getGuiActions("actionShow_Ocular_decrement"), SIGNAL(triggered()), this, SLOT(decrementOcularIndex()));
-	connect(gui->getGuiActions("actionShow_Telescope_increment"), SIGNAL(triggered()), this, SLOT(incrementTelescopeIndex()));
-	connect(gui->getGuiActions("actionShow_Telescope_decrement"), SIGNAL(triggered()), this, SLOT(decrementTelescopeIndex()));
-	/*
-	 connect(telescopesTableModel, SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)), this, SLOT(dataChanged()));
-	 connect(telescopesTableModel, SIGNAL(rowsInserted(const QModelIndex &, int, int)), this, SLOT(rowsInserted()));
-	 connect(telescopesTableModel, SIGNAL(rowsRemoved(const QModelIndex &, int, int)), this, SLOT(rowsRemoved()));
-	 */
-	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(instrumentChanged()));
-	connect(this, SIGNAL(selectedOcularChanged()), this, SLOT(instrumentChanged()));
-	connect(this, SIGNAL(selectedTelescopeChanged()), this, SLOT(instrumentChanged()));
-	connect(ocularDialog, SIGNAL(scaleImageCircleChanged(bool)), this, SLOT(setScaleImageCircle(bool)));
-
 
 	// Make a toolbar button
 	try {
@@ -613,7 +589,45 @@ void Oculars::initializeActions()
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable create toolbar button for Oculars plugin: " << e.what();
 	}
+}
 
+void Oculars::initializeActions()
+{
+	static bool actions_initialized;
+	if (actions_initialized)
+		return;
+	actions_initialized = true;
+	QString group = "Oculars Plugin";
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+
+	Q_ASSERT(gui);
+	gui->addGuiActions("actionShow_Ocular_Crosshair", N_("Toggle Crosshair"), "ALT+C", group, true);
+
+	gui->addGuiActions("actionShow_CCD_increment", N_("Select next sensor"), "Shift+Ctrl+]", group, false);
+	gui->addGuiActions("actionShow_CCD_decrement", N_("Select previous sensor"), "Shift+Ctrl+[", group, false);
+	gui->addGuiActions("actionShow_Ocular_increment", N_("Select next ocular"), "Ctrl+]", group, false);
+	gui->addGuiActions("actionShow_Ocular_decrement", N_("Select previous ocular"), "Ctrl+[", group, false);
+	gui->addGuiActions("actionShow_Telescope_increment", N_("Select next telescope"), "Shift+]", group, false);
+	gui->addGuiActions("actionShow_Telescope_decrement", N_("Select previous telescope"), "Shift+[", group, false);
+
+	connect(gui->getGuiActions("actionShow_Ocular_Crosshair"), SIGNAL(toggled(bool)), this, SLOT(toggleCrosshair()));
+
+
+	connect(gui->getGuiActions("actionShow_CCD_increment"), SIGNAL(triggered()), this, SLOT(incrementCCDIndex()));
+	connect(gui->getGuiActions("actionShow_CCD_decrement"), SIGNAL(triggered()), this, SLOT(decrementCCDIndex()));
+	connect(gui->getGuiActions("actionShow_Ocular_increment"), SIGNAL(triggered()), this, SLOT(incrementOcularIndex()));
+	connect(gui->getGuiActions("actionShow_Ocular_decrement"), SIGNAL(triggered()), this, SLOT(decrementOcularIndex()));
+	connect(gui->getGuiActions("actionShow_Telescope_increment"), SIGNAL(triggered()), this, SLOT(incrementTelescopeIndex()));
+	connect(gui->getGuiActions("actionShow_Telescope_decrement"), SIGNAL(triggered()), this, SLOT(decrementTelescopeIndex()));
+	/*
+	 connect(telescopesTableModel, SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)), this, SLOT(dataChanged()));
+	 connect(telescopesTableModel, SIGNAL(rowsInserted(const QModelIndex &, int, int)), this, SLOT(rowsInserted()));
+	 connect(telescopesTableModel, SIGNAL(rowsRemoved(const QModelIndex &, int, int)), this, SLOT(rowsRemoved()));
+	 */
+	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(instrumentChanged()));
+	connect(this, SIGNAL(selectedOcularChanged()), this, SLOT(instrumentChanged()));
+	connect(this, SIGNAL(selectedTelescopeChanged()), this, SLOT(instrumentChanged()));
+	connect(ocularDialog, SIGNAL(scaleImageCircleChanged(bool)), this, SLOT(setScaleImageCircle(bool)));
 }
 
 // Return true if we're ready (could read all required data), false otherwise
@@ -778,15 +792,15 @@ void Oculars::loadDatabaseObjects()
 		determineMaxImageCircle();
 	}
 	// A telescope and one of [CCD|Ocular] must be defined for the plugin to be usable.
-	if (telescopes.size() == 0) 
+	if (telescopes.size() == 0)
 	{
 		ready = false;
 		qWarning() << "WARNING: no telescopes found.  Ocular will be disabled.";
-	} 
+	}
 	else if (oculars.size() == 0 && CCDs.size() == 0) {
 		ready = false;
 		qWarning() << "WARNING: no oculars or CCDs found.  Ocular will be disabled.";
-	} 
+	}
 	else
 	{
 		ready = true;
