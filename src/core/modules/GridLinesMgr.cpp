@@ -208,11 +208,11 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 					lon = 0.;
 				}
 				if (std::fabs(lon-raAngle) < 0.01)
-					text = StelUtils::radToDmsStrAdapt(raAngle-M_PI);
+					text = StelUtils::radToDmsStrAdapt(-raAngle+M_PI);
 				else
 				{
 					const double delta = raAngle<M_PI ? M_PI : -M_PI;
-					text = StelUtils::radToDmsStrAdapt(raAngle+delta-M_PI);
+					text = StelUtils::radToDmsStrAdapt(-raAngle-delta+M_PI);
 				}
 				break;
 			}
