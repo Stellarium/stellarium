@@ -98,7 +98,14 @@ private:
 	//! Renders crosshairs into the viewport.
 	void drawCrosshairs();
 
+	//! Insures that each required table exists in the database, as well as instantiate the table models.
+	//! @retrun true if the DB was correctly initialized, false if it was not.
 	bool initializeDB();
+	
+	//! Set up the Qt actions needed to activate the plugin.
+	void initializeActivationActions();
+	
+	//! Set up the Qt actions used while the plugin is active.
 	void initializeActions();
 
 	//! This method is needed because the MovementMgr classes handleKeys() method consumes the event.
@@ -158,16 +165,16 @@ private:
 	QPixmap* pxmapOnIcon;
 	QPixmap* pxmapOffIcon;
 	StelButton* toolbarButton;
-	
+
 	OcularDialog *ocularDialog;
 	bool visible;
 	bool ready; //<! A flag that determines that this module is usable.  If false, we won't open.
 	bool newInstrument; //<! true the first time draw is called for a new ocular or telescope, false otherwise.
-	
+
 	QSqlTableModel *CCDsTableModel;
 	QSqlTableModel *ocularsTableModel;
 	QSqlTableModel *telescopesTableModel;
-	
+
 	//Styles
 	QByteArray normalStyleSheet;
 	QByteArray nightStyleSheet;
