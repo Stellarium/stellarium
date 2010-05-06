@@ -31,7 +31,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayoutTelescopeDialog">
    <property name="spacing">
     <number>0</number>
    </property>
@@ -165,7 +165,7 @@
       <attribute name="title">
        <string>Telescopes</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="verticalLayoutTabTelescopes">
        <property name="spacing">
         <number>0</number>
        </property>
@@ -243,7 +243,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QFrame" name="frame">
+           <widget class="QFrame" name="frameButtons">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -542,7 +542,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QFrame" name="frame">
+           <widget class="QFrame" name="frameExecutablesDirectory">
             <layout class="QHBoxLayout" name="horizontalLayoutExecutablesDirectory">
              <property name="margin">
               <number>0</number>
@@ -570,8 +570,8 @@
                 </sizepolicy>
                </property>
                <property name="icon">
-                <iconset resource="../../../../data/mainRes.qrc">
-				 <normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
+                <iconset resource="../../../../data/gui/guiRes.qrc">
+                 <normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
                </property>
               </widget>
              </item>
@@ -623,7 +623,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../../data/mainRes.qrc"/>
+  <include location="../../../../data/gui/guiRes.qrc"/>
  </resources>
  <connections/>
 </ui>
