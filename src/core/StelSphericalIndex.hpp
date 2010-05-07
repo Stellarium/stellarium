@@ -51,12 +51,30 @@ public:
 		rootNode->processAll(func);
 	}
 
+	//! Remove all the elements in the container.
 	void clear()
 	{
 		rootNode->clear();
 	}
 
+	//! Return the total number of elements in the container.
+	unsigned int count()
+	{
+		CountFunc func;
+		processAll<CountFunc>(func);
+		return func.nb;
+	}
+
 private:
+	struct CountFunc
+	{
+		CountFunc() : nb(0) {;}
+		void operator()(const StelRegionObjectP&)
+		{
+			++nb;
+		}
+		unsigned int nb;
+	};
 
 	//! The elements stored in the container.
 	struct NodeElem
