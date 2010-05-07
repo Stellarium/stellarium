@@ -208,8 +208,6 @@ SET(stellarium_lib_SRCS
 	core/modules/Orbit.hpp
 	core/modules/Planet.cpp
 	core/modules/Planet.hpp
-	core/modules/ScreenImageMgr.hpp
-	core/modules/ScreenImageMgr.cpp
 	core/modules/Skybright.cpp
 	core/modules/Skybright.hpp
 	core/modules/Skylight.cpp
@@ -234,6 +232,8 @@ SET(stellarium_lib_SRCS
 	scripting/StelScriptMgr.cpp
 	scripting/StratoscriptPreprocessor.cpp
 	scripting/StelScriptMgr.hpp
+	scripting/ScreenImageMgr.hpp
+	scripting/ScreenImageMgr.cpp
 	scripting/ScriptSleeper.cpp
 	scripting/ScriptSleeper.hpp
 	scripting/StelMainScriptAPI.cpp
@@ -369,11 +369,11 @@ SET(stellarium_MOC_HDRS
 	core/modules/MeteorMgr.hpp
 	core/modules/MilkyWay.hpp
 	core/modules/NebulaMgr.hpp
-	core/modules/ScreenImageMgr.hpp
 	core/modules/SolarSystem.hpp
 	core/modules/StarMgr.hpp
 	core/modules/Telescope.hpp
 	core/modules/TelescopeMgr.hpp
+	scripting/ScreenImageMgr.hpp
 	scripting/StelScriptMgr.hpp
 	scripting/StelMainScriptAPI.hpp
 	scripting/StelMainScriptAPIProxy.hpp
