@@ -137,7 +137,8 @@ public:
 		AllSky = 2,
 		Polygon = 3,
 		ConvexPolygon = 4,
-		Empty = 5
+		Empty = 5,
+		Invalid = 6
 	};
 
 	virtual ~SphericalRegion() {;}

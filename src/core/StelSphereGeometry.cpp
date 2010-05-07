@@ -45,7 +45,7 @@ QDataStream& operator<<(QDataStream& out, const SphericalRegionP& region)
 
 QDataStream& operator>>(QDataStream& in, SphericalRegionP& region)
 {
-	quint8 regType;
+	quint8 regType = SphericalRegion::Invalid;
 	in >> regType;
 	switch (regType)
 	{
