@@ -42,6 +42,9 @@ public:
 	//! Return the model containing all the city
 	QStringListModel* getModelAll() {return modelAllLocation;}
 
+	//! Return the list of all loaded locations
+	QList<StelLocation> getAll() const {return locations.values();}
+
 	//! Return the StelLocation for the given row (match modelAllLocation index row)
 	const StelLocation locationForSmallString(const QString& s) const;
 
