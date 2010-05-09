@@ -758,6 +758,18 @@ QMenu::item:selected { /* when user selects item using mouse or keyboard */
 	background-color: rgb(65, 0, 0);
 }
 
+QMenu::item:disabled {
+	background-color: rgb(47, 0, 0); /* sets background of the menu */
+	color: rgb(65, 0, 0);
+	/* FIXME: how can we set the shadowcolor of disabled items?!
+	 * http://bugreports.qt.nokia.com/browse/QTBUG-10322
+	 */
+}
+
+QMenu::separator {
+	background-color: rgb(61, 0, 0);
+}
+
 QMainWindow > QDialog {
 	background: rgb(35, 0, 0);
 }
