@@ -1235,7 +1235,7 @@ public:
 	// Project a single triangle and add it into the output arrays
 	inline void operator()(const Vec3d* v0, const Vec3d* v1, const Vec3d* v2,
 						   const Vec2f* t0, const Vec2f* t1, const Vec2f* t2,
-						   unsigned int i0, unsigned int i1, unsigned i2)
+						   unsigned int, unsigned int, unsigned)
 	{
 		// XXX: we may optimize more by putting the declaration and the test outside of this method.
 		const Vec3d tmpVertex[3] = {*v0, *v1, *v2};

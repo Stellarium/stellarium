@@ -33,7 +33,7 @@ ENDIF()
 
 IF(UNIX AND NOT WIN32)
  SET(CMAKE_C_FLAGS "-Wall -Wextra -Wno-unused-parameter")       # additional C compile flags
- SET(CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter")     # additional CPP compile flags
+ SET(CMAKE_CXX_FLAGS "-Wall -Wextra")     # additional CPP compile flags
 ELSE()
  SET(CMAKE_C_FLAGS "-Wall -fexceptions -fident -mthreads")
  SET(CMAKE_CXX_FLAGS "-Wall -Wsign-promo -fexceptions -fident -mthreads")
@@ -55,8 +55,8 @@ ENDIF()
 
 # best way to get to APPLE?
 IF(APPLE)
+ SET(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -mmacosx-version-min=10.4")
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
- SET(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -mmacosx-version-min=10.4")
  SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.4")
  SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.4u.sdk/")
  # Universal binary

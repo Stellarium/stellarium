@@ -269,7 +269,7 @@ void StelMainGraphicsView::thereWasAnEvent()
 	lastEventTimeSec = StelApp::getTotalRunTime();
 }
 
-void StelMainGraphicsView::drawBackground(QPainter* painter, const QRectF& rect)
+void StelMainGraphicsView::drawBackground(QPainter*, const QRectF&)
 {
 	const double now = StelApp::getTotalRunTime();
 
@@ -293,12 +293,6 @@ void StelMainGraphicsView::drawBackground(QPainter* painter, const QRectF& rect)
 		if (QApplication::overrideCursor()!=0)
 			QApplication::restoreOverrideCursor();
 	}
-	//QGraphicsView::drawBackground(painter, rect);
-}
-
-void StelMainGraphicsView::drawForeground(QPainter* painter, const QRectF &rect)
-{
-	//QGraphicsView::drawForeground(painter, rect);
 }
 
 void StelMainGraphicsView::startMainLoop()

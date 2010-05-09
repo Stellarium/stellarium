@@ -56,7 +56,7 @@ public:
 
 	//! Execute all the drawing functions for this module.
 	//! @param core the core to use for the drawing
-	virtual void draw(StelCore* core) {};
+	virtual void draw(StelCore* core) {Q_UNUSED(core);}
 
 	//! Iterate through the drawing sequence.
 	//! This allow us to split the slow drawing operation into small parts,
@@ -75,7 +75,7 @@ public:
 
 	//! Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	virtual void updateSkyCulture(const QString& skyCultureDir) {;}
+	virtual void updateSkyCulture(const QString& skyCultureDir) {Q_UNUSED(skyCultureDir);}
 
 	//! Get the version of the module, default is stellarium main version
 	virtual QString getModuleVersion() const;
@@ -88,20 +88,20 @@ public:
 
 	//! Handle mouse clicks. Please note that most of the interactions will be done through the GUI module.
 	//! @return set the event as accepted if it was intercepted
-	virtual void handleMouseClicks(class QMouseEvent* e) {;}
+	virtual void handleMouseClicks(class QMouseEvent*) {;}
 
 	//! Handle mouse wheel. Please note that most of the interactions will be done through the GUI module.
 	//! @return set the event as accepted if it was intercepted
-	virtual void handleMouseWheel(class QWheelEvent* e) {;}
+	virtual void handleMouseWheel(class QWheelEvent*) {;}
 
 	//! Handle mouse moves. Please note that most of the interactions will be done through the GUI module.
 	//! @return true if the event was intercepted
-	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b) {return false;}
+	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b) {Q_UNUSED(x); Q_UNUSED(y); Q_UNUSED(b); return false;}
 
 	//! Handle key events. Please note that most of the interactions will be done through the GUI module.
 	//! @param e the Key event
 	//! @return set the event as accepted if it was intercepted
-	virtual void handleKeys(class QKeyEvent* e) {;}
+	virtual void handleKeys(class QKeyEvent* e) {Q_UNUSED(e);}
 
 	//! Enum used when selecting objects to define whether to add to, replace, or remove from the existing selection list.
 	enum StelModuleSelectAction
@@ -114,11 +114,11 @@ public:
 	//! Indicate that the user requested selection of StelObjects.
 	//! The StelModule should then manage by themself how they handle the event
 	//! @param action define if the user requested that the objects are added to the selection or just replace it
-	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=ReplaceSelection) {;}
+	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=ReplaceSelection) {Q_UNUSED(action);}
 
 	//! Load the given color style
 	//! @param style the style object containing all necessary information on how to style widgets and text
-	virtual void setStelStyle(const QString& section) {;}
+	virtual void setStelStyle(const QString& section) {Q_UNUSED(section);}
 
 	//! Define the possible action for which an order is defined
 	enum StelModuleActionName
@@ -135,13 +135,13 @@ public:
 	//! the stars module will be drawn before the constellations
 	//! @param actionName the name of the action for which we want the call order
 	//! @return the value defining the order. The closer to 0 the earlier the module's action will be called
-	virtual double getCallOrder(StelModuleActionName actionName) const {return 0;}
+	virtual double getCallOrder(StelModuleActionName actionName) const {Q_UNUSED(actionName); return 0;}
 
 	//! Detect or show the configuration GUI elements for the module.  This is to be used with
 	//! plugins to display a configuration dialog from the plugin list window.
 	//! @param show if true, make the configuration GUI visible.  If false, hide the config GUI if there is one.
 	//! @return true if the module has a configuration GUI, else false.
-	virtual bool configureGui(bool show=true) {return false;}
+	virtual bool configureGui(bool show=true) {Q_UNUSED(show); return false;}
 
 };
 

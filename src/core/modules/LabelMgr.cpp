@@ -316,7 +316,7 @@ ScreenLabel::~ScreenLabel()
 {
 }
 
-bool ScreenLabel::draw(StelCore* core, StelPainter& sPainter)
+bool ScreenLabel::draw(StelCore*, StelPainter& sPainter)
 {
 	if (labelFader.getInterstate() <= 0.0)
 		return false;

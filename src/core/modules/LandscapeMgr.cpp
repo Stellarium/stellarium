@@ -47,7 +47,7 @@ class Cardinals
 public:
 	Cardinals(float _radius = 1.);
 	virtual ~Cardinals();
-	void draw(const StelCore* core, double latitude, bool gravityON = false) const;
+	void draw(const StelCore* core, double latitude) const;
 	void setColor(const Vec3f& c) {color = c;}
 	Vec3f get_color() {return color;}
 	void updateI18n();
@@ -81,7 +81,7 @@ Cardinals::~Cardinals()
 
 // Draw the cardinals points : N S E W
 // handles special cases at poles
-void Cardinals::draw(const StelCore* core, double latitude, bool gravityON) const
+void Cardinals::draw(const StelCore* core, double latitude) const
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 	StelPainter sPainter(prj);
@@ -333,28 +333,6 @@ bool LandscapeMgr::setDefaultLandscapeID(const QString& id)
 	return true;
 }
 
-//! Load a landscape based on a hash of parameters mirroring the landscape.ini file
-//! and make it the current landscape
-bool LandscapeMgr::loadLandscape(QMap<QString, QString>& param)
-{
-	Landscape* newLandscape = createFromHash(param);
-	if (!newLandscape)
-		return false;
-
-	if (landscape)
-	{
-		// Copy parameters from previous landscape to new one
-		newLandscape->setFlagShow(landscape->getFlagShow());
-		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
-		delete landscape;
-		landscape = newLandscape;
-	}
-	currentLandscapeID = param["name"];
-	// probably not particularly useful, as not in landscape.ini file
-
-	return true;
-}
-
 void LandscapeMgr::updateI18n()
 {
 	// Translate all labels with the new language
@@ -556,30 +534,6 @@ Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QStr
 	return ldscp;
 }
 
-Landscape* LandscapeMgr::createFromHash(QMap<QString, QString>& param)
-{
-	// NOTE: textures should be full filename (and path)
-	if (param["type"]=="old_style")
-	{
-		LandscapeOldStyle* ldscp = new LandscapeOldStyle();
-		ldscp->create(1, param);
-		return ldscp;
-	}
-	else if (param["type"]=="spherical")
-	{
-		LandscapeSpherical* ldscp = new LandscapeSpherical();
-		ldscp->create(param["name"], 1, param["path"] + param["maptex"],param["angleRotateZ"].toFloat());
-		return ldscp;
-	}
-	else
-	{   //	if (s=="fisheye")
-		LandscapeFisheye* ldscp = new LandscapeFisheye();
-		ldscp->create(param["name"], 1, param["path"] + param["maptex"],
-					  param["texturefov"].toFloat(),
-					  param["angleRotateZ"].toFloat());
-		return ldscp;
-	}
-}
 
 QString LandscapeMgr::nameToID(const QString& name)
 {

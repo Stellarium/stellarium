@@ -66,10 +66,6 @@ public:
 	//! Translate labels to new language settings.
 	virtual void updateI18n();
 
-	//! Called for all registered modules if the sky culture changes.
-	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	virtual void updateSkyCulture(const QString& skyCultureDir) {;}
-
 	//! Load a color scheme from a configuration object
 	virtual void setStelStyle(const QString& section);
 
@@ -217,14 +213,6 @@ private:
 	//! This takes a name of the landscape, as described in the landscape:name item in the
 	//! landscape.ini, and returns the landscape ID which corresponds to that name.
 	QString nameToID(const QString& name);
-
-	//! Create landscape from parameters passed in a hash.
-	//! This is similar in function to createFromFile, except the landscape details
-	//! are passed in a hash rather than a ini parser object.
-	//! NOTE: maptex must be full path and filename
-	//! @param param an STL map of the keys and values which describe the landscape.
-	//! @return a pointer to the newly create landscape object.
-	Landscape* createFromHash(QMap<QString, QString>& param);
 
 	//! Return a map of landscape name to landscape ID (directory name).
 	QMap<QString,QString> getNameToDirMap(void) const;

@@ -59,21 +59,21 @@ private:
 private slots:
 	void objectInfoDetailLevelChanged(int);
 	void languageChanged(const QString& languageCode);
-	void setStartupTimeMode(void);
+	void setStartupTimeMode();
 	void setDiskViewport(bool);
 	void setSphericMirror(bool);
 	void cursorTimeOutChanged();
-	void cursorTimeOutChanged(double d) {cursorTimeOutChanged();}
+	void cursorTimeOutChanged(double) {cursorTimeOutChanged();}
 
 	//! Populate the list of available Star Catalogs
-	void populateCatalogList(void);
+	void populateCatalogList();
 	//! The selection of the current catalog in the catalog list has changed.
 	//! Updates the catalog information panel
 	void catalogSelectionChanged(const QString& s);
 	//! Download the currently selected catalog from the catalog list
-	void startDownloadCatalogClicked(void);
+	void startDownloadCatalogClicked();
 	//! Cancel download of the catalog that is currently downloaded
-	void stopDownloadCatalogClicked(void);
+	void stopDownloadCatalogClicked();
 	// QNetworkRequest callback for new data available
 	void newStarCatalogData();
 	// QNetworkRequest callback for download complete
@@ -99,9 +99,9 @@ private slots:
 	//! This basically replaces the config.ini by the default one
 	void setDefaultViewOptions();
 
-	void populatePluginsList(void);
+	void populatePluginsList();
 	void pluginsSelectionChanged(const QString&);
-	void pluginConfigureCurrentSelection(void);
+	void pluginConfigureCurrentSelection();
 	void loadAtStartupChanged(int);
 
 	//! The selection of script in the script list has changed
@@ -109,15 +109,15 @@ private slots:
 	void scriptSelectionChanged(const QString& s);
 
 	//! Run the currently selected script from the script list.
-	void runScriptClicked(void);
+	void runScriptClicked();
 	//! Stop the currently running script.
-	void stopScriptClicked(void);
+	void stopScriptClicked();
 
-	void aScriptIsRunning(void);
-	void aScriptHasStopped(void);
+	void aScriptIsRunning();
+	void aScriptHasStopped();
 
-	void populateScriptsList(void);
-	void setFixedDateTimeToCurrent(void);
+	void populateScriptsList();
+	void setFixedDateTimeToCurrent();
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 

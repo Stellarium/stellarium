@@ -87,12 +87,12 @@ ScreenImage::~ScreenImage()
 	delete moveTimer; moveTimer = NULL;
 }
 
-bool ScreenImage::draw(const StelCore* core)
+bool ScreenImage::draw(const StelCore*)
 {
 	return true;
 }
 
-void ScreenImage::update(double deltaTime)
+void ScreenImage::update(double)
 {
 }
 

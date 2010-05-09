@@ -35,14 +35,14 @@ public:
 	virtual QString getName() {return "framebufferOnly";}
 	//! Alter the GL frame buffer, this method must not display anything.
 	//! The default implementation does nothing.
-	virtual void alterBuffer(QGLFramebufferObject* buf) const {;}
+	virtual void alterBuffer(QGLFramebufferObject*) const {;}
 	//! Draw the viewport on the screen.
 	//! @param buf the GL frame buffer containing the Stellarium viewport alreay drawn.
 	//! The default implementation paints the buffer on the fullscreen.
 	virtual void paintViewportBuffer(const QGLFramebufferObject* buf) const;
 	//! Distort an x,y position according to the distortion.
 	//! The default implementation does nothing.
-	virtual void distortXY(float& x, float& y) const {;}
+	virtual void distortXY(float& x, float& y) const {Q_UNUSED(x); Q_UNUSED(y);}
 };
 
 

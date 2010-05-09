@@ -564,6 +564,7 @@ static void scale_internal_ubyte(GLint components, GLint widthin,
 
 static int checkMipmapArgs(GLenum internalFormat, GLenum format, GLenum type)
 {
+   Q_UNUSED(internalFormat);
    if (!legalFormat(format) || !legalType(type))
    {
 	  return GLUES_INVALID_ENUM;

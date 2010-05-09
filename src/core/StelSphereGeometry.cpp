@@ -146,7 +146,7 @@ bool SphericalRegion::intersects(const SphericalPolygon& r) const {return inters
 bool SphericalRegion::intersects(const SphericalConvexPolygon& r) const {return intersectsDefault(&r);}
 bool SphericalRegion::intersects(const SphericalCap& r) const {return intersectsDefault(&r);}
 bool SphericalRegion::intersects(const SphericalPoint& r) const {return contains(r.n);}
-bool SphericalRegion::intersects(const AllSkySphericalRegion& r) const {return getType()==SphericalRegion::Empty ? false : true;}
+bool SphericalRegion::intersects(const AllSkySphericalRegion&) const {return getType()==SphericalRegion::Empty ? false : true;}
 bool SphericalRegion::intersects(const SphericalRegion* r) const
 {
 	switch (r->getType())
@@ -197,7 +197,7 @@ SphericalRegionP SphericalRegion::getIntersection(const SphericalConvexPolygon& 
 SphericalRegionP SphericalRegion::getIntersection(const SphericalCap& r) const {return getIntersectionDefault(&r);}
 SphericalRegionP SphericalRegion::getIntersection(const SphericalPoint& r) const {return getIntersectionDefault(&r);}
 SphericalRegionP SphericalRegion::getIntersection(const AllSkySphericalRegion& r) const {return getIntersectionDefault(&r);}
-SphericalRegionP SphericalRegion::getIntersection(const EmptySphericalRegion& r) const {return SphericalRegionP(new EmptySphericalRegion());}
+SphericalRegionP SphericalRegion::getIntersection(const EmptySphericalRegion&) const {return SphericalRegionP(new EmptySphericalRegion());}
 
 SphericalRegionP SphericalRegion::getUnion(const SphericalRegion* r) const
 {
@@ -225,7 +225,7 @@ SphericalRegionP SphericalRegion::getUnion(const SphericalPolygon& r) const {ret
 SphericalRegionP SphericalRegion::getUnion(const SphericalConvexPolygon& r) const {return getUnionDefault(&r);}
 SphericalRegionP SphericalRegion::getUnion(const SphericalCap& r) const {return getUnionDefault(&r);}
 SphericalRegionP SphericalRegion::getUnion(const SphericalPoint& r) const {return getUnionDefault(&r);}
-SphericalRegionP SphericalRegion::getUnion(const AllSkySphericalRegion& r) const {return SphericalRegionP(new AllSkySphericalRegion());}
+SphericalRegionP SphericalRegion::getUnion(const AllSkySphericalRegion&) const {return SphericalRegionP(new AllSkySphericalRegion());}
 SphericalRegionP SphericalRegion::getUnion(const EmptySphericalRegion& r) const {return getUnionDefault(&r);}
 
 
@@ -255,7 +255,7 @@ SphericalRegionP SphericalRegion::getSubtraction(const SphericalPolygon& r) cons
 SphericalRegionP SphericalRegion::getSubtraction(const SphericalConvexPolygon& r) const {return getSubtractionDefault(&r);}
 SphericalRegionP SphericalRegion::getSubtraction(const SphericalCap& r) const {return getSubtractionDefault(&r);}
 SphericalRegionP SphericalRegion::getSubtraction(const SphericalPoint& r) const {return getSubtractionDefault(&r);}
-SphericalRegionP SphericalRegion::getSubtraction(const AllSkySphericalRegion& r) const {return SphericalRegionP(new EmptySphericalRegion());}
+SphericalRegionP SphericalRegion::getSubtraction(const AllSkySphericalRegion&) const {return SphericalRegionP(new EmptySphericalRegion());}
 SphericalRegionP SphericalRegion::getSubtraction(const EmptySphericalRegion& r) const {return getSubtractionDefault(&r);}
 
 // Returns whether another SphericalPolygon intersects with the SphericalPolygon.

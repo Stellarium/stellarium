@@ -48,15 +48,8 @@ public:
 	//! Milky way rendering is being changed from on to off or off to on.
 	virtual void update(double deltaTime);
 	
-	//! Does nothing in the MilkyWay module.
-	virtual void updateI18n() {;}
-	
-	//! Does nothing in the MilkyWay module.
-	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	virtual void updateSkyCulture(const QString& skyCultureDir) {;}
-	
 	//! Used to determine the order in which the various modules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const {return 1.;}
+	virtual double getCallOrder(StelModuleActionName actionName) const {Q_UNUSED(actionName); return 1.;}
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Setter and getters

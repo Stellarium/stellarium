@@ -90,10 +90,10 @@ void StelAudioMgr::loadSound(const QString& filename, const QString& id)
 	qWarning() << "This build of Stellarium does not support sound - cannot load audio" << filename << id;
 }
 StelAudioMgr::~StelAudioMgr() {;}
-void StelAudioMgr::playSound(const QString& id) {;}
-void StelAudioMgr::pauseSound(const QString& id) {;}
-void StelAudioMgr::stopSound(const QString& id) {;}
-void StelAudioMgr::dropSound(const QString& id) {;}
+void StelAudioMgr::playSound(const QString&) {;}
+void StelAudioMgr::pauseSound(const QString&) {;}
+void StelAudioMgr::stopSound(const QString&) {;}
+void StelAudioMgr::dropSound(const QString&) {;}
 #endif // HAVE_QT_PHONON
 
 

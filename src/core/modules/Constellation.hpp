@@ -52,7 +52,7 @@ private:
 	//! @param core the Stelore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString a description of the Planet.
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const
+	virtual QString getInfoString(const StelCore*, const InfoStringGroup& flags) const
 	{
 		if (flags&Name) return getNameI18n() + "(" + getShortName() + ")";
 		else return "";
@@ -63,9 +63,9 @@ private:
 	virtual QString getType() const {return "Constellation";}
 
 	//! observer centered J2000 coordinates.
-	virtual Vec3d getJ2000EquatorialPos(const StelNavigator *nav) const {return XYZname;}
+	virtual Vec3d getJ2000EquatorialPos(const StelNavigator*) const {return XYZname;}
 
-	virtual double getAngularSize(const StelCore* core) const {Q_ASSERT(0); return 0;} // TODO
+	virtual double getAngularSize(const StelCore*) const {Q_ASSERT(0); return 0;} // TODO
 
 	//! @param record string containing the following whitespace
 	//! separated fields: abbreviation - a three character abbreviation

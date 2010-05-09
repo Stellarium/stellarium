@@ -33,7 +33,6 @@
 #include "MilkyWay.hpp"
 #include "MeteorMgr.hpp"
 #include "LabelMgr.hpp"
-#include "ScreenImageMgr.hpp"
 #include "StarMgr.hpp"
 #include "SolarSystem.hpp"
 #include "StelIniParser.hpp"
@@ -218,9 +217,9 @@ void StelApp::init(QSettings* conf)
 	textureMgr->init();
 
 #ifdef SVN_REVISION
-	StelLoadingBar loadingBar(12., "textures/logo24bits.png", QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
+	StelLoadingBar loadingBar("textures/logo24bits.png", QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
 #else
-	StelLoadingBar loadingBar(12., "textures/logo24bits.png", PACKAGE_VERSION, 45, 320, 121);
+	StelLoadingBar loadingBar("textures/logo24bits.png", PACKAGE_VERSION, 45, 320, 121);
 #endif // SVN_RELEASE
 	loadingBar.draw();
 
@@ -303,11 +302,6 @@ void StelApp::init(QSettings* conf)
 	LabelMgr* skyLabels = new LabelMgr();
 	skyLabels->init();
 	getModuleMgr().registerModule(skyLabels);
-
-	// Scripting images
-	ScreenImageMgr* scriptImages = new ScreenImageMgr();
-	scriptImages->init();
-	getModuleMgr().registerModule(scriptImages);
 
 	skyCultureMgr->init();
 

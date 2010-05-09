@@ -200,79 +200,6 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	calibrated         = landscapeIni.value("landscape/calibrated", false).toBool();
 }
 
-
-// create from a hash of parameters (no ini file needed)
-void LandscapeOldStyle::create(bool _fullpath, QMap<QString, QString> param)
-{
-	name = param["name"];
-	validLandscape = 1;  // assume valid if got here
-
-	// Load sides textures
-	nbSideTexs = param["nbsidetex"].toInt();
-	sideTexs = new StelTextureSP[nbSideTexs];
-
-	char tmp[255];
-	//StelApp::getInstance().getTextureManager().setMipmapsMode(true);
-	//StelApp::getInstance().getTextureManager().setMagFilter(GL_NEAREST);
-	for (int i=0;i<nbSideTexs;++i)
-	{
-		sprintf(tmp,"tex%d",i);
-		sideTexs[i] = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param[tmp], StelTexture::StelTextureParams(true));
-	}
-
-	// Init sides parameters
-	nbSide = param["nbside"].toInt();
-	sides = new landscapeTexCoord[nbSide];
-	QString s;
-	int texnum;
-	float a,b,c,d;
-	for (int i=0;i<nbSide;++i)
-	{
-		sprintf(tmp,"side%d",i);
-		s = param[tmp];
-		sscanf(s.toUtf8().constData(),"tex%d:%f:%f:%f:%f",&texnum,&a,&b,&c,&d);
-		sides[i].tex = sideTexs[texnum];
-		sides[i].texCoords[0] = a;
-		sides[i].texCoords[1] = b;
-		sides[i].texCoords[2] = c;
-		sides[i].texCoords[3] = d;
-		//qDebug("%f %f %f %f\n",a,b,c,d);
-	}
-
-	bool ok;
-	nbDecorRepeat = param["nb_decor_repeat"].toInt(&ok);
-
-	if (!ok)
-		nbDecorRepeat = 1;
-
-	groundTex = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param["groundtex"], StelTexture::StelTextureParams(true));
-	s = param["ground"];
-	sscanf(s.toUtf8().constData(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
-	groundTexCoord.tex = groundTex;
-	groundTexCoord.texCoords[0] = a;
-	groundTexCoord.texCoords[1] = b;
-	groundTexCoord.texCoords[2] = c;
-	groundTexCoord.texCoords[3] = d;
-
-	fogTex = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param["fogtex"], StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
-	s = param["fog"];
-	sscanf(s.toUtf8().constData(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
-	fogTexCoord.tex = fogTex;
-	fogTexCoord.texCoords[0] = a;
-	fogTexCoord.texCoords[1] = b;
-	fogTexCoord.texCoords[2] = c;
-	fogTexCoord.texCoords[3] = d;
-
-	fogAltAngle        = param["fog_alt_angle"].toFloat();
-	fogAngleShift      = param["fog_angle_shift"].toFloat();
-	decorAltAngle      = param["decor_alt_angle"].toFloat();
-	decorAngleShift    = param["decor_angle_shift"].toFloat();
-	angleRotateZ       = param["decor_angle_rotatez"].toFloat();
-	groundAngleShift   = param["ground_angle_shift"].toFloat();
-	groundAngleRotateZ = param["ground_angle_rotatez"].toFloat();
-	drawGroundFirst    = param["draw_ground_first"].toInt();
-}
-
 void LandscapeOldStyle::draw(StelCore* core)
 {
 	StelPainter painter(core->getProjection(StelCore::FrameAltAz));
@@ -452,22 +379,21 @@ void LandscapeFisheye::load(const QSettings& landscapeIni, const QString& landsc
 		validLandscape = 0;
 		return;
 	}
-	create(name, 0, getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
+	create(name, getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
 		landscapeIni.value("landscape/texturefov", 360).toFloat(),
 		landscapeIni.value("landscape/angle_rotatez", 0.).toFloat());
 }
 
 
 // create a fisheye landscape from basic parameters (no ini file needed)
-void LandscapeFisheye::create(const QString _name, bool _fullpath, const QString& _maptex,
-							  double _texturefov, double _angleRotateZ)
+void LandscapeFisheye::create(const QString _name, const QString& _maptex, float atexturefov, float aangleRotateZ)
 {
 	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	validLandscape = 1;  // assume ok...
 	name = _name;
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
-	texFov = _texturefov*M_PI/180.;
-	angleRotateZ = _angleRotateZ*M_PI/180.;
+	texFov = atexturefov*M_PI/180.f;
+	angleRotateZ = aangleRotateZ*M_PI/180.f;
 }
 
 
@@ -482,7 +408,7 @@ void LandscapeFisheye::draw(StelCore* core)
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
+	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
 	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 
 	glEnable(GL_CULL_FACE);
@@ -519,20 +445,19 @@ void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& land
 		return;
 	}
 
-	create(name, 0, getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
-		landscapeIni.value("landscape/angle_rotatez", 0.).toFloat());
+	create(name, getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
+		landscapeIni.value("landscape/angle_rotatez", 0.f).toFloat());
 }
 
 
 // create a spherical landscape from basic parameters (no ini file needed)
-void LandscapeSpherical::create(const QString _name, bool _fullpath, const QString& _maptex,
-								double _angleRotateZ)
+void LandscapeSpherical::create(const QString _name, const QString& _maptex, float _angleRotateZ)
 {
 	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	validLandscape = 1;  // assume ok...
 	name = _name;
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
-	angleRotateZ = _angleRotateZ*M_PI/180.;
+	angleRotateZ = _angleRotateZ*M_PI/180.f;
 }
 
 

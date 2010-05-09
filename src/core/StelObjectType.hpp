@@ -29,9 +29,9 @@ template <class T> class QSharedPointerNoDelete : public QSharedPointer<T>
 public:
 	QSharedPointerNoDelete() {;}
 	QSharedPointerNoDelete(T *ptr) : QSharedPointer<T>(ptr, QSharedPointerNoDelete::noDelete) {;}
-	QSharedPointerNoDelete(T *ptr, bool own) : QSharedPointer<T>(ptr) {Q_ASSERT(own==true);}
+	QSharedPointerNoDelete(T *ptr, bool own) : QSharedPointer<T>(ptr) {Q_UNUSED(own); Q_ASSERT(own==true);}
 	QSharedPointerNoDelete(const QSharedPointer<T>& ptr) : QSharedPointer<T>(ptr) {;}
-	static void noDelete(T *ptr) {;}
+	static void noDelete(T *ptr) {Q_UNUSED(ptr);}
 	inline operator const QSharedPointer<T>&() const {return *(static_cast<QSharedPointer<T> >(this));}
 };
 

@@ -85,7 +85,7 @@ protected:
 	{
 		return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.2, 0.2) : StelSkyDrawer::indexToColor(s->bV);
 	}
-	float getVMagnitude(const StelNavigator *nav) const
+	float getVMagnitude(const StelNavigator*) const
 	{
 		return 0.001f*a->mag_min + s->mag*(0.001f*a->mag_range)/a->mag_steps;
 	}
@@ -93,7 +93,7 @@ protected:
 	float getBV(void) const {return s->getBV();}
 	QString getEnglishName(void) const {return QString();}
 	QString getNameI18n(void) const {return s->getNameI18n();}
-	virtual double getAngularSize(const StelCore* core) const {return 0.;}
+	virtual double getAngularSize(const StelCore*) const {return 0.;}
 protected:
 	const SpecialZoneArray<Star> *const a;
 	const SpecialZoneData<Star> *const z;
