@@ -86,7 +86,7 @@ private:
 	LogBookDialog *mainDialog;
 	TargetsDialog *targetsDialog;
 
-	//<! flag used to trak if we are in log book mode.
+	//! flag used to track if we are in log book mode.
 	bool flagShowLogBook;
 	QMap<QString, QSqlTableModel *> tableModels;
 
