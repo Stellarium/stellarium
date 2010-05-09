@@ -258,12 +258,12 @@ private:
 
 	//! Store the number of downloaded files for statistics.
 	int nbDownloadedFiles;
-	//! Store the the summed size of all downloaded files in bytes.
+	//! Store the summed size of all downloaded files in bytes.
 	qint64 totalDownloadedSize;
 
 	//! Store the number of downloaded files read from the cache for statistics.
 	int nbUsedCache;
-	//! Store the the summed size of all downloaded files read from the cache in bytes.
+	//! Store the summed size of all downloaded files read from the cache in bytes.
 	qint64 totalUsedCacheSize;
 
 	//! The state of the drawing sequence
