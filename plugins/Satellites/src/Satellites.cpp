@@ -184,7 +184,7 @@ void Satellites::init()
 	styleSheetFile.close();
 }
 
-void Satellites::setStelStyle(const QString& section)
+void Satellites::setStelStyle(const QString&)
 {
 	configDialog->updateStyle();
 }
@@ -210,7 +210,7 @@ double Satellites::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-QList<StelObjectP> Satellites::searchAround(const Vec3d& av, double limitFov, const StelCore* core) const
+QList<StelObjectP> Satellites::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
 {
 	QList<StelObjectP> result;
 	if (!hintFader || StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().planetName != earth->getEnglishName())
