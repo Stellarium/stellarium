@@ -183,7 +183,7 @@ public:
 	QRectF boundingRectNoHelpLabel() const;
 
 	//! Add a button in a group in the button bar. Group are displayed in alphabetic order.
-	//! @param b the button to add
+	//! @param button the button to add
 	//! @param groupName the name of the button group to which the button belongs to. If the group doesn't exist yet, a new one is created.
 	//! @param beforeActionName insert the button before the button associated to the given action. If the action doesn't exist, insert it at the end of the group.
 	void addButton(StelButton* button, const QString& groupName="defaultGroup", const QString& beforeActionName="");

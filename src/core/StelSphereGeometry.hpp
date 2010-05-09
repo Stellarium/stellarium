@@ -545,7 +545,7 @@ public:
 
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is
-	//! @code {"worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]]} @endcode
+	//! @code["worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]]]@endcode
 	//! worldCoords is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
 	virtual QVariantMap toQVariant() const;
 	virtual void serialize(QDataStream& out) const;
@@ -582,7 +582,7 @@ public:
 	void setContours(const QVector<QVector<Vec3d> >& contours) {octahedronPolygon = OctahedronPolygon(contours);}
 
 	//! Set a single contour defining the SphericalPolygon.
-	//! @param contours a contour defining the polygon area.
+	//! @param contour a contour defining the polygon area.
 	void setContour(const QVector<Vec3d>& contour) {octahedronPolygon = OctahedronPolygon(contour);}
 
 	//! Return the list of closed contours defining the polygon boundaries.
@@ -631,7 +631,7 @@ public:
 	QVector<SphericalCap> getBoundingSphericalCaps() const;
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is
-	//! @code {"type": "CVXPOLYGON", "worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]]} @endcode
+	//! @code{"type": "CVXPOLYGON", "worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]]}@endcode
 	//! worldCoords is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
 	virtual QVariantMap toQVariant() const;
 	virtual void serialize(QDataStream& out) const {out << contour;}
@@ -699,7 +699,7 @@ protected:
 	//! @param thisContour the vertices defining the contour.
 	//! @param nbThisContour nb of vertice of the contour.
 	//! @param points the points to test.
-	//! @param points the number of points to test.
+	//! @param nbPoints the number of points to test.
 	static bool areAllPointsOutsideOneSide(const Vec3d* thisContour, int nbThisContour, const Vec3d* points, int nbPoints);
 
 	//! Computes whether the passed points are all outside of at least one SphericalCap defining the polygon boundary.
@@ -736,8 +736,8 @@ public:
 	virtual StelVertexArray getFillVertexArray() const {Q_ASSERT(0); return StelVertexArray();}
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is:
-	//! @code {"worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]],
-	//! "textureCoords": [[[u,v],[u,v],[u,v],[u,v]], [[u,v],[u,v],[u,v]], [...]]}
+	//! @code{"worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]],
+	//! "textureCoords": [[[u,v],[u,v],[u,v],[u,v]], [[u,v],[u,v],[u,v]], [...]]
 	//! }@endcode
 	//! textureCoords is a list of texture coordinates in the u,v texture space (between 0 and 1).
 	//! worldCoords is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
@@ -795,8 +795,8 @@ public:
 
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is:
-	//! @code {"type": "CVXPOLYGON", "worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]],
-	//! "textureCoords": [[[u,v],[u,v],[u,v],[u,v]], [[u,v],[u,v],[u,v]], [...]]}
+	//! @code{"type": "CVXPOLYGON", "worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]],
+	//! "textureCoords": [[[u,v],[u,v],[u,v],[u,v]], [[u,v],[u,v],[u,v]], [...]]
 	//! }@endcode
 	//! textureCoords is a list of texture coordinates in the u,v texture space (between 0 and 1).
 	//! worldCoords is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
