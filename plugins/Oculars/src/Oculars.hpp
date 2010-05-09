@@ -59,7 +59,7 @@ public:
 //	virtual void handleKeys(class QKeyEvent* event);
 	virtual void handleMouseClicks(class QMouseEvent* event);
 	virtual void setStelStyle(const QString& style);
-	virtual void update(double deltaTime) {;}
+	virtual void update(double) {;}
 
 	//! Returns the module-specific style sheet.
 	//! The main StelStyle instance should be passed.

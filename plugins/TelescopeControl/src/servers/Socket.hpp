@@ -77,16 +77,16 @@ class Server;
 class Socket
 {
 public:
-	virtual ~Socket(void) { hangup(); }
-	void hangup(void);
+	virtual ~Socket() { hangup(); }
+	void hangup();
 	virtual void prepareSelectFds(fd_set &read_fds, fd_set &write_fds, int &fd_max) = 0;
 	virtual void handleSelectFds(const fd_set &read_fds, const fd_set &write_fds) = 0;
-	virtual bool isClosed(void) const
+	virtual bool isClosed() const
 	{
 		return IS_INVALID_SOCKET(fd);
 	}
-	virtual bool isTcpConnection(void) const { return false; }
-	virtual void sendPosition(unsigned int ra_int, int dec_int, int status) {}
+	virtual bool isTcpConnection() const { return false; }
+	virtual void sendPosition(unsigned int ra_int, int dec_int, int status) {Q_UNUSED(ra_int); Q_UNUSED(dec_int); Q_UNUSED(status);}
 	
 protected:
 	Socket(Server &server, SOCKET fd) : server(server), fd(fd) {}

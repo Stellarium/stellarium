@@ -50,7 +50,7 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	virtual void init();
 	virtual void setStelStyle(const QString& section);
-	virtual void update(double deltaTime) {;}
+	virtual void update(double) {;}
 
 public slots:
 	//! This method is called with we detect that our hot key is pressed.  It handles

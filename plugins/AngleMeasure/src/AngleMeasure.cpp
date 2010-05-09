@@ -239,7 +239,7 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	event->setAccepted(false);
 }
 
-bool AngleMeasure::handleMouseMoves(int x, int y, Qt::MouseButtons b)
+bool AngleMeasure::handleMouseMoves(int x, int y, Qt::MouseButtons)
 {
 	if (dragging)
 	{
