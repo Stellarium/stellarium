@@ -48,11 +48,12 @@ StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixm
 		const QPixmap& apixHover, QAction* aaction, bool noBackground) :
 			QGraphicsPixmapItem(apixOff, parent), pixOn(apixOn), pixOff(apixOff), pixHover(apixHover),
 			checked(ButtonStateOff), action(aaction), noBckground(noBackground), isTristate_(false),
-			opacity(1.), hoverOpacity(0.), redMode(false)
+			opacity(1.), hoverOpacity(0.)
 {
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());
 
+	redMode = StelApp::getInstance().getVisionModeNight();
 	pixOnRed = StelButton::makeRed(pixOn);
 	pixOffRed = StelButton::makeRed(pixOff);
 	if (!pixHover.isNull())
@@ -85,11 +86,12 @@ StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixm
 		const QPixmap& apixHover, QAction* aaction, bool noBackground, bool isTristate) :
 			QGraphicsPixmapItem(apixOff, parent), pixOn(apixOn), pixOff(apixOff), pixNoChange(apixNoChange), pixHover(apixHover),
 			checked(ButtonStateOff), action(aaction), noBckground(noBackground), isTristate_(isTristate),
-			opacity(1.), hoverOpacity(0.), redMode(false)
+			opacity(1.), hoverOpacity(0.)
 {
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());
 
+	redMode = StelApp::getInstance().getVisionModeNight();
 	pixOnRed = StelButton::makeRed(pixOn);
 	pixOffRed = StelButton::makeRed(pixOff);
 	if (isTristate_) {

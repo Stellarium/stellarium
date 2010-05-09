@@ -194,6 +194,7 @@ IF(ENABLE_NLS)
 	/sw/lib
 	/usr/local/lib) # NO_DEFAULT_PATH
   FIND_PACKAGE(Gettext REQUIRED)
+  FIND_PACKAGE(XGettext REQUIRED)
 ENDIF()
 
 
