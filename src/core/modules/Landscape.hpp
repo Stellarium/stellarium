@@ -41,7 +41,7 @@ class StelPainter;
 class Landscape
 {
 public:
-	Landscape(float _radius = 2.);
+	Landscape(float _radius = 2.f);
 	virtual ~Landscape();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) = 0;
 	virtual void draw(StelCore* core) = 0;
@@ -113,7 +113,7 @@ protected:
 class LandscapeOldStyle : public Landscape
 {
 public:
-	LandscapeOldStyle(float _radius = 2.);
+	LandscapeOldStyle(float radius = 2.f);
 	virtual ~LandscapeOldStyle();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(StelCore* core);
@@ -145,12 +145,11 @@ private:
 class LandscapeFisheye : public Landscape
 {
 public:
-	LandscapeFisheye(float _radius = 1.);
+	LandscapeFisheye(float radius = 1.f);
 	virtual ~LandscapeFisheye();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(StelCore* core);
-	void create(const QString _name, bool _fullpath, const QString& _maptex,
-				double _texturefov, double angleRotateZ);
+	void create(const QString name, const QString& maptex, float texturefov, float angleRotateZ);
 private:
 
 	StelTextureSP mapTex;
@@ -161,12 +160,11 @@ private:
 class LandscapeSpherical : public Landscape
 {
 public:
-	LandscapeSpherical(float _radius = 1.);
+	LandscapeSpherical(float radius = 1.f);
 	virtual ~LandscapeSpherical();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(StelCore* core);
-	void create(const QString _name, bool _fullpath,
-				const QString& _maptex, double angleRotateZ);
+	void create(const QString name, const QString& maptex, float angleRotateZ);
 private:
 
 	StelTextureSP mapTex;

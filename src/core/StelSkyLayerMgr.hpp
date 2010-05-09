@@ -48,7 +48,7 @@ public:
 	virtual void draw(StelCore* core);
 
 	//! Update state which is time dependent.
-	virtual void update(double deltaTime) {;}
+	virtual void update(double) {;}
 
 	//! Update i18
 	virtual void updateI18n() {;}

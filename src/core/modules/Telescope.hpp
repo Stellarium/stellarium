@@ -39,11 +39,11 @@ class Telescope : public QObject, public StelObject
 	Q_OBJECT
 public:
 	static Telescope *create(const QString &url);
-	virtual ~Telescope(void) {}
+	virtual ~Telescope() {}
 
 	// Method inherited from StelObject
-	QString getEnglishName(void) const {return name;}
-	QString getNameI18n(void) const {return nameI18n;}
+	QString getEnglishName() const {return name;}
+	QString getNameI18n() const {return nameI18n;}
 	//! Telescope supports the following InfoStringGroup flags:
 	//! - Name
 	//! - RaDecJ2000
@@ -53,8 +53,8 @@ public:
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Telescope.
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
-	QString getType(void) const {return "Telescope";}
-	virtual double getAngularSize(const StelCore* core) const {Q_ASSERT(0); return 0;}	// TODO
+	QString getType() const {return "Telescope";}
+	virtual double getAngularSize(const StelCore*) const {Q_ASSERT(0); return 0;}	// TODO
 
 	// Methods specific to telescope
 	virtual void telescopeGoto(const Vec3d &j2000Pos) = 0;
@@ -72,8 +72,8 @@ protected:
 	QString nameI18n;
 	const QString name;
 private:
-	bool isInitialized(void) const {return true;}
-	float getSelectPriority(const StelNavigator *nav) const {return -10.f;}
+	bool isInitialized() const {return true;}
+	float getSelectPriority(const StelNavigator*) const {return -10.f;}
 private:
 	QList<double> oculars; // fov of the oculars
 };
@@ -88,12 +88,12 @@ class TelescopeTcp : public Telescope
 	Q_OBJECT
 public:
 	TelescopeTcp(const QString &name,const QString &params);
-	~TelescopeTcp(void)
+	~TelescopeTcp()
 	{
 		hangup();
 	}
 private:
-	bool isConnected(void) const
+	bool isConnected() const
 	{
 		//return (tcpSocket->isValid() && !wait_for_connection_establishment);
 		return (tcpSocket->state() == QAbstractSocket::ConnectedState);
@@ -102,15 +102,15 @@ private:
 	bool prepareCommunication();
 	void performCommunication();
 	void telescopeGoto(const Vec3d &j2000Pos);
-	bool isInitialized(void) const
+	bool isInitialized() const
 	{
 		return (!address.isNull());
 	}
-	void performReading(void);
-	void performWriting(void);
+	void performReading();
+	void performWriting();
 private:
-	void hangup(void);
-	void resetPositions(void);
+	void hangup();
+	void resetPositions();
 	QHostAddress address;
 	unsigned int port;
 	QTcpSocket * tcpSocket;
@@ -131,7 +131,7 @@ private:
 	Position positions[16];
 	Position *position_pointer;
 	Position *const end_position;
-	virtual bool hasKnownPosition(void) const
+	virtual bool hasKnownPosition() const
 	{
 		return (position_pointer->client_micros != 0x7FFFFFFFFFFFFFFFLL);
 	}

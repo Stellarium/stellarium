@@ -260,7 +260,7 @@ void StelLogger::deinit()
 	logFile.close();
 }
 
-void StelLogger::debugLogHandler(QtMsgType type, const char* msg)
+void StelLogger::debugLogHandler(QtMsgType, const char* msg)
 {
 	fprintf(stderr, "%s\n", msg);
 	writeLog(QString(msg));

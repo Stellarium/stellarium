@@ -21,6 +21,7 @@
 
 #include "StelScriptMgr.hpp"
 #include "StelMainScriptAPI.hpp"
+#include "ScreenImageMgr.hpp"
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -101,6 +102,11 @@ StelScriptMgr::StelScriptMgr(QObject *parent)
 	: QObject(parent),
 	  thread(NULL)
 {
+	// Scripting images
+	ScreenImageMgr* scriptImages = new ScreenImageMgr();
+	scriptImages->init();
+	StelApp::getInstance().getModuleMgr().registerModule(scriptImages);
+
 	// Allow Vec3f managment in scripts
 	qScriptRegisterMetaType(&engine, vec3fToScriptValue, vec3fFromScriptValue);
 	// Constructor

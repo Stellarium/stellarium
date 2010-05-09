@@ -121,7 +121,7 @@ Vec3d StelMovementMgr::getViewUpVectorJ2000() const
 	return mountFrameToJ2000(upVectorMountFrame);
 }
 
-bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons b)
+bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons)
 {
 	// Turn if the mouse is at the edge of the screen unless config asks otherwise
 	if (flagEnableMoveAtScreenEdge)
@@ -342,7 +342,7 @@ void StelMovementMgr::setInitViewDirectionToCurrent()
 /*************************************************************************
  The selected objects changed, follow it it we were already following another one
 *************************************************************************/
-void StelMovementMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)
+void StelMovementMgr::selectedObjectChangeCallBack(StelModuleSelectAction)
 {
 	// If an object was selected keep the earth following
 	if (objectMgr->getWasSelected())

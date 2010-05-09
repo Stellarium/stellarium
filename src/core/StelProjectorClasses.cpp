@@ -380,24 +380,24 @@ QString StelProjector2d::getDescriptionI18() const
 	return "Simple 2d projection for internal use.";
 }
 
-bool StelProjector2d::forward(Vec3d &v) const
+bool StelProjector2d::forward(Vec3d &) const
 {
 	Q_ASSERT(0);
 	return false;
 }
 
-bool StelProjector2d::backward(Vec3d &v) const
+bool StelProjector2d::backward(Vec3d &) const
 {
 	Q_ASSERT(0);
 	return false;
 }
 
-float StelProjector2d::fovToViewScalingFactor(float fov) const
+float StelProjector2d::fovToViewScalingFactor(float) const
 {
 	return 1.f;
 }
 
-float StelProjector2d::viewScalingFactorToFov(float vsf) const
+float StelProjector2d::viewScalingFactorToFov(float) const
 {
 	return 1.f;
 }

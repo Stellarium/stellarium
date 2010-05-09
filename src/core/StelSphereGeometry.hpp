@@ -200,7 +200,7 @@ public:
 	virtual bool contains(const SphericalCap& r) const;
 	virtual bool contains(const SphericalPoint& r) const;
 	virtual bool contains(const AllSkySphericalRegion& r) const;
-	bool contains(const EmptySphericalRegion& r) const {return false;}
+	bool contains(const EmptySphericalRegion&) const {return false;}
 
 	//! Returns whether a SphericalRegion intersects with this region.
 	//! A default potentially very slow implementation is provided for each cases.
@@ -212,7 +212,7 @@ public:
 	virtual bool intersects(const SphericalCap& r) const;
 	virtual bool intersects(const SphericalPoint& r) const;
 	virtual bool intersects(const AllSkySphericalRegion& r) const;
-	bool intersects(const EmptySphericalRegion& r) const {return false;}
+	bool intersects(const EmptySphericalRegion&) const {return false;}
 
 	//! Return a new SphericalRegion consisting of the intersection of this and the given region.
 	//! A default potentially very slow implementation is provided for each cases.
@@ -300,7 +300,7 @@ public:
 		const double a = n*h.n-d*h.d;
 		return d<=h.d && ( a>=1. || (a>=0. && a*a >= (1.-d*d)*(1.-h.d*h.d)));
 	}
-	virtual bool contains(const AllSkySphericalRegion& r) const {return d<=-1;}
+	virtual bool contains(const AllSkySphericalRegion&) const {return d<=-1;}
 	virtual bool intersects(const SphericalPolygon& r) const;
 	virtual bool intersects(const SphericalConvexPolygon& r) const;
 	//! Returns whether a SphericalCap intersects with this one.
@@ -311,7 +311,7 @@ public:
 		const double a = d*h.d - n*h.n;
 		return d+h.d<=0. || a<=0. || (a<=1. && a*a <= (1.-d*d)*(1.-h.d*h.d));
 	}
-	virtual bool intersects(const AllSkySphericalRegion& poly) const {return d<=1.;}
+	virtual bool intersects(const AllSkySphericalRegion&) const {return d<=1.;}
 
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is {"type": "CAP", "center": [ra, dec], "radius": radius}, with ra dec in degree in ICRS frame
@@ -424,16 +424,16 @@ public:
 
 	// Contain and intersect
 	virtual bool contains(const Vec3d& p) const {return n==p;}
-	virtual bool contains(const SphericalPolygon& r) const {return false;}
-	virtual bool contains(const SphericalConvexPolygon& r) const {return false;}
-	virtual bool contains(const SphericalCap& c) const {return false;}
+	virtual bool contains(const SphericalPolygon&) const {return false;}
+	virtual bool contains(const SphericalConvexPolygon&) const {return false;}
+	virtual bool contains(const SphericalCap&) const {return false;}
 	virtual bool contains(const SphericalPoint& r) const {return n==r.n;}
-	virtual bool contains(const AllSkySphericalRegion& r) const {return false;}
-	virtual bool intersects(const SphericalPolygon& r) const;
-	virtual bool intersects(const SphericalConvexPolygon& r) const;
+	virtual bool contains(const AllSkySphericalRegion&) const {return false;}
+	virtual bool intersects(const SphericalPolygon&) const;
+	virtual bool intersects(const SphericalConvexPolygon&) const;
 	virtual bool intersects(const SphericalCap& r) const {return r.contains(n);}
 	virtual bool intersects(const SphericalPoint& r) const {return n==r.n;}
-	virtual bool intersects(const AllSkySphericalRegion& r) const {return true;}
+	virtual bool intersects(const AllSkySphericalRegion&) const {return true;}
 
 	//! Deserialize the region. This method must allow as fast as possible deserialization.
 	static SphericalRegionP deserialize(QDataStream& in);
@@ -458,20 +458,20 @@ public:
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is {"type": "ALLSKY"}
 	virtual QVariantMap toQVariant() const;
-	virtual void serialize(QDataStream& out) const {;}
+	virtual void serialize(QDataStream&) const {;}
 
 	// Contain and intersect
-	virtual bool contains(const Vec3d& p) const {return true;}
-	virtual bool contains(const SphericalPolygon& r) const {return true;}
-	virtual bool contains(const SphericalConvexPolygon& r) const {return true;}
-	virtual bool contains(const SphericalCap& r) const {return true;}
-	virtual bool contains(const SphericalPoint& r) const {return true;}
-	virtual bool contains(const AllSkySphericalRegion& r) const {return true;}
-	virtual bool intersects(const SphericalPolygon& r) const {return true;}
-	virtual bool intersects(const SphericalConvexPolygon& r) const {return true;}
-	virtual bool intersects(const SphericalCap& r) const {return true;}
-	virtual bool intersects(const SphericalPoint& r) const {return true;}
-	virtual bool intersects(const AllSkySphericalRegion& r) const {return true;}
+	virtual bool contains(const Vec3d&) const {return true;}
+	virtual bool contains(const SphericalPolygon&) const {return true;}
+	virtual bool contains(const SphericalConvexPolygon&) const {return true;}
+	virtual bool contains(const SphericalCap&) const {return true;}
+	virtual bool contains(const SphericalPoint&) const {return true;}
+	virtual bool contains(const AllSkySphericalRegion&) const {return true;}
+	virtual bool intersects(const SphericalPolygon&) const {return true;}
+	virtual bool intersects(const SphericalConvexPolygon&) const {return true;}
+	virtual bool intersects(const SphericalCap&) const {return true;}
+	virtual bool intersects(const SphericalPoint&) const {return true;}
+	virtual bool intersects(const AllSkySphericalRegion&) const {return true;}
 
 	static const SphericalRegionP staticInstance;
 };
@@ -500,20 +500,20 @@ public:
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is {"type": "EMPTY"}
 	virtual QVariantMap toQVariant() const;
-	virtual void serialize(QDataStream& out) const {;}
+	virtual void serialize(QDataStream&) const {;}
 
 	// Contain and intersect
-	virtual bool contains(const Vec3d& p) const {return false;}
-	virtual bool contains(const SphericalPolygon& r) const {return false;}
-	virtual bool contains(const SphericalConvexPolygon& r) const {return false;}
-	virtual bool contains(const SphericalCap& r) const {return false;}
-	virtual bool contains(const SphericalPoint& r) const {return false;}
-	virtual bool contains(const AllSkySphericalRegion& r) const {return false;}
-	virtual bool intersects(const SphericalPolygon& r) const {return false;}
-	virtual bool intersects(const SphericalConvexPolygon& r) const {return false;}
-	virtual bool intersects(const SphericalCap& r) const {return false;}
-	virtual bool intersects(const SphericalPoint& r) const {return false;}
-	virtual bool intersects(const AllSkySphericalRegion& r) const {return false;}
+	virtual bool contains(const Vec3d&) const {return false;}
+	virtual bool contains(const SphericalPolygon&) const {return false;}
+	virtual bool contains(const SphericalConvexPolygon&) const {return false;}
+	virtual bool contains(const SphericalCap&) const {return false;}
+	virtual bool contains(const SphericalPoint&) const {return false;}
+	virtual bool contains(const AllSkySphericalRegion&) const {return false;}
+	virtual bool intersects(const SphericalPolygon&) const {return false;}
+	virtual bool intersects(const SphericalConvexPolygon&) const {return false;}
+	virtual bool intersects(const SphericalCap&) const {return false;}
+	virtual bool intersects(const SphericalPoint&) const {return false;}
+	virtual bool intersects(const AllSkySphericalRegion&) const {return false;}
 
 	static const SphericalRegionP staticInstance;
 };
@@ -563,16 +563,16 @@ public:
 	virtual bool intersects(const SphericalConvexPolygon& r) const;
 	virtual bool intersects(const SphericalCap& r) const {return r.intersects(*this);}
 	virtual bool intersects(const SphericalPoint& r) const {return octahedronPolygon.contains(r.n);}
-	virtual bool intersects(const AllSkySphericalRegion& r) const {return !isEmpty();}
+	virtual bool intersects(const AllSkySphericalRegion&) const {return !isEmpty();}
 
 	virtual SphericalRegionP getIntersection(const SphericalPoint& r) const {return contains(r.n) ? SphericalRegionP(new SphericalPoint(r)) : EmptySphericalRegion::staticInstance;}
-	virtual SphericalRegionP getIntersection(const AllSkySphericalRegion& r) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
+	virtual SphericalRegionP getIntersection(const AllSkySphericalRegion& ) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
 
-	virtual SphericalRegionP getUnion(const SphericalPoint& r) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
-	virtual SphericalRegionP getUnion(const EmptySphericalRegion& r) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
+	virtual SphericalRegionP getUnion(const SphericalPoint&) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
+	virtual SphericalRegionP getUnion(const EmptySphericalRegion&) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
 
-	virtual SphericalRegionP getSubtraction(const SphericalPoint& r) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
-	virtual SphericalRegionP getSubtraction(const EmptySphericalRegion& r) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
+	virtual SphericalRegionP getSubtraction(const SphericalPoint&) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
+	virtual SphericalRegionP getSubtraction(const EmptySphericalRegion&) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
 
 	////////////////////////////////////////////////////////////////////
 	// Methods specific to SphericalPolygon
@@ -642,12 +642,12 @@ public:
 	virtual bool contains(const SphericalConvexPolygon& r) const;
 	virtual bool contains(const SphericalCap& r) const;
 	virtual bool contains(const SphericalPoint& r) const {return contains(r.n);}
-	virtual bool contains(const AllSkySphericalRegion& r) const {return false;}
+	virtual bool contains(const AllSkySphericalRegion&) const {return false;}
 	virtual bool intersects(const SphericalCap& r) const {if (!cachedBoundingCap.intersects(r)) return false; return r.intersects(*this);}
 	virtual bool intersects(const SphericalPolygon& r) const;
 	virtual bool intersects(const SphericalConvexPolygon& r) const;
 	virtual bool intersects(const SphericalPoint& r) const {return contains(r.n);}
-	virtual bool intersects(const AllSkySphericalRegion& r) const {return true;}
+	virtual bool intersects(const AllSkySphericalRegion&) const {return true;}
 
 	////////////////////////// TODO
 //	virtual SphericalRegionP getIntersection(const SphericalPolygon& r) const;
@@ -728,9 +728,9 @@ public:
 
 	SphericalTexturedPolygon() {;}
 	//! Constructor from a list of contours.
-	SphericalTexturedPolygon(const QVector<QVector<TextureVertex> >& contours) {Q_ASSERT(0);}
+	SphericalTexturedPolygon(const QVector<QVector<TextureVertex> >& contours) {Q_UNUSED(contours); Q_ASSERT(0);}
 	//! Constructor from one contour.
-	SphericalTexturedPolygon(const QVector<TextureVertex>& contour) {Q_ASSERT(0);}
+	SphericalTexturedPolygon(const QVector<TextureVertex>& contour) {Q_UNUSED(contour); Q_ASSERT(0);}
 
 	//! Return an openGL compatible array of texture coords to be used using vertex arrays.
 	virtual StelVertexArray getFillVertexArray() const {Q_ASSERT(0); return StelVertexArray();}
@@ -743,7 +743,7 @@ public:
 	//! worldCoords is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
 	//! There must be one texture coordinate for each vertex.
 	virtual QVariantMap toQVariant() const;
-	virtual void serialize(QDataStream& out) const {Q_ASSERT(0);}
+	virtual void serialize(QDataStream& out) const {Q_UNUSED(out); Q_ASSERT(0);}
 
 	////////////////////////////////////////////////////////////////////
 	// Methods specific to SphericalTexturedPolygon
@@ -751,11 +751,11 @@ public:
 	//! @param contours the list of contours defining the polygon area.
 	//! @param windingRule the winding rule to use. Default value is WindingPositive, meaning that the
 	//! polygon is the union of the positive contours minus the negative ones.
-	void setContours(const QVector<QVector<TextureVertex> >& contours) {Q_ASSERT(0);}
+	void setContours(const QVector<QVector<TextureVertex> >& contours) {Q_UNUSED(contours); Q_ASSERT(0);}
 
 	//! Set a single contour defining the SphericalPolygon.
 	//! @param contour a contour defining the polygon area.
-	void setContour(const QVector<TextureVertex>& contour) {Q_ASSERT(0);}
+	void setContour(const QVector<TextureVertex>& contour) {Q_UNUSED(contour); Q_ASSERT(0);}
 
 private:
 	//! A list of uv textures coordinates corresponding to the triangle vertices.

@@ -642,7 +642,6 @@ void SolarSystem::loadPlanets()
 					StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
 					pd.value(secname+"/albedo").toFloat(),
 					pd.value(secname+"/tex_map").toString(),
-					pd.value(secname+"/tex_halo").toString(),
 					posfunc,
 					userDataPtr,
 					osculatingFunc,
@@ -1066,7 +1065,7 @@ QStringList SolarSystem::listMatchingObjectsI18n(const QString& objPrefix, int m
 	return result;
 }
 
-void SolarSystem::selectedObjectChangeCallBack(StelModuleSelectAction action)
+void SolarSystem::selectedObjectChangeCallBack(StelModuleSelectAction)
 {
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Planet");
 	if (!newSelected.empty())

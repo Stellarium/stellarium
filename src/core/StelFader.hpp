@@ -20,6 +20,8 @@
 #ifndef _STELFADER_HPP_
 #define _STELFADER_HPP_
 
+#include <QtGlobal>
+
 //! @class StelFader
 //! Manages a (usually smooth) transition between two states (typically ON/OFF) in function of a counter
 //! It used for various purpose like smooth transitions between
@@ -38,7 +40,7 @@ public:
 	virtual StelFader& operator=(bool s) = 0;
 	bool operator==(bool s) const {return state==s;}
 	operator bool() const {return state;}
-	virtual void setDuration(int _duration) {;}
+	virtual void setDuration(int) {;}
 	virtual float getDuration() = 0;
 	virtual void setMinValue(float _min) {minValue = _min;}
 	virtual void setMaxValue(float _max) {maxValue = _max;}
@@ -58,7 +60,7 @@ public:
 	BooleanFader(bool initialState=false, float minimumValue=0.f, float maximumValue=1.f) : StelFader(initialState, minimumValue, maximumValue) {;}
 	~BooleanFader() {;}
 	// Increments the internal counter of deltaTime ticks
-	void update(int deltaTicks) {;}
+	void update(int deltaTicks) {Q_UNUSED(deltaTicks);}
 	// Gets current switch state
 	float getInterstate() const {return state ? maxValue : minValue;}
 	float getInterstatePercentage() const {return state ? 100.f : 0.f;}

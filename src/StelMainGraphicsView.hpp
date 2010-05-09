@@ -117,7 +117,6 @@ protected:
 	//! Update the mouse pointer state and schedule next redraw.
 	//! This method is called automatically by Qt.
 	virtual void drawBackground(QPainter* painter, const QRectF &rect);
-	virtual void drawForeground(QPainter* painter, const QRectF &rect);
 
 signals:
 	//! emitted when saveScreenShot is requested with saveScreenShot().

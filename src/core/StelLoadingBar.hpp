@@ -41,7 +41,6 @@ class StelLoadingBar
 {
 public:
 	//! Create and initialise the StelLoadingBar.
-	//! @param fontSize the size of the font to use in the StelLoadingBar
 	//! @param splashTex the file name of a texture to display with the StelLoadingBar
 	//! @param extraTextString extra text which does not change during the life
 	//! life of the StelLoadingBar. This is used for the application name and version
@@ -49,7 +48,7 @@ public:
 	//! @param extraTextSize the size of the font used for the exta text
 	//! @param extraTextPosx the x position of the extra text
 	//! @param extraTextPosy the y position of the extra text
-	StelLoadingBar(float fontSize, const QString&  splashTex, const QString& extraTextString="", 
+	StelLoadingBar(const QString&  splashTex, const QString& extraTextString="",
 	           float extraTextSize = 30.f, float extraTextPosx = 0.f, float extraTextPosy = 0.f);
 
 	virtual ~StelLoadingBar();

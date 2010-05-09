@@ -47,7 +47,7 @@ private:
 };
 
 ArtificialPlanet::ArtificialPlanet(const PlanetP& orig) :
-		Planet("", 0, 0, 0, Vec3f(0,0,0), 0, "", "",
+		Planet("", 0, 0, 0, Vec3f(0,0,0), 0, "",
 		NULL, NULL, 0, false, true, false), dest(0),
 		orig_name(orig->getEnglishName()), orig_name_i18n(orig->getNameI18n())
 {

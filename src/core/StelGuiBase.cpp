@@ -29,6 +29,7 @@ StelGuiBase::StelGuiBase() : stelAppGraphicsWidget(NULL)
 
 void StelGuiBase::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidget* astelAppGraphicsWidget)
 {
+	Q_UNUSED(atopLevelGraphicsWidget);
 	stelAppGraphicsWidget = astelAppGraphicsWidget;
 }
 
@@ -54,6 +55,7 @@ void StelGuiBase::updateI18n()
 // marked for translation using the N_() macro.
 QAction* StelGuiBase::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat)
 {
+	Q_UNUSED(helpGroup);
 	QAction* a;
 	a = new QAction(stelAppGraphicsWidget);
 	a->setObjectName(actionName);

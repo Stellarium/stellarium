@@ -46,7 +46,7 @@ namespace Stel {
 class TelescopeDummy : public Telescope
 {
 public:
-	TelescopeDummy(const QString &name,const QString &params) : Telescope(name)
+	TelescopeDummy(const QString &name,const QString&) : Telescope(name)
 	{
 		desired_pos[0] = XYZ[0] = 1.0;
 		desired_pos[1] = XYZ[1] = 0.0;
@@ -63,6 +63,7 @@ private:
 	}
 	Vec3d getJ2000EquatorialPos(const StelNavigator *nav=0) const
 	{
+		Q_UNUSED(nav);
 		return XYZ;
 	}
 	bool prepareCommunication()
@@ -550,7 +551,7 @@ void TelescopeTcp::performCommunication()
 }
 
 //TODO: More informative error messages?
-void TelescopeTcp::socketFailed(QAbstractSocket::SocketError socketError)
+void TelescopeTcp::socketFailed(QAbstractSocket::SocketError)
 {
 	qDebug() << "TelescopeTcp(" << name << "): TCP socket error:\n" << tcpSocket->errorString();
 }

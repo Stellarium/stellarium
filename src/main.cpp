@@ -45,6 +45,8 @@ public:
 
 	virtual QString translate(const char* context, const char* sourceText, const char* comment=0) const
 	{
+		Q_UNUSED(context);
+		Q_UNUSED(comment);
 		return q_(sourceText);
 	}
 };

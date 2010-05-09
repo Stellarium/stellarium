@@ -49,15 +49,15 @@ public:
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Nebula.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
-	virtual QString getType(void) const {return "Nebula";}
-	virtual Vec3d getJ2000EquatorialPos(const StelNavigator *nav) const {return XYZ;}
-	virtual double getCloseViewFov(const StelNavigator * nav = NULL) const;
-	virtual float getVMagnitude(const StelNavigator * nav = NULL) const {return mag;}
+	virtual QString getType() const {return "Nebula";}
+	virtual Vec3d getJ2000EquatorialPos(const StelNavigator*) const {return XYZ;}
+	virtual double getCloseViewFov(const StelNavigator* nav = NULL) const;
+	virtual float getVMagnitude(const StelNavigator* nav = NULL) const {Q_UNUSED(nav); return mag;}
 	virtual float getSelectPriority(const StelNavigator *nav) const;
-	virtual Vec3f getInfoColor(void) const;
-	virtual QString getNameI18n(void) const {return nameI18;}
-	virtual QString getEnglishName(void) const {return englishName;}
-	virtual double getAngularSize(const StelCore *core) const {return angularSize*0.5;}
+	virtual Vec3f getInfoColor() const;
+	virtual QString getNameI18n() const {return nameI18;}
+	virtual QString getEnglishName() const {return englishName;}
+	virtual double getAngularSize(const StelCore*) const {return angularSize*0.5;}
 	virtual SphericalRegionP getRegion() const {return pointRegion;}
 
 	// Methods specific to Nebula
@@ -66,7 +66,7 @@ public:
 
 	//! Get the printable nebula Type.
 	//! @return the nebula type code.
-	QString getTypeString(void) const;
+	QString getTypeString() const;
 
 private:
 	friend struct DrawNebulaFuncObject;

@@ -659,7 +659,7 @@ void ConfigurationDialog::newStarCatalogData()
 	currentDownloadFile->write(starCatalogDownloadReply->read(size));
 }
 
-void ConfigurationDialog::downloadError(QNetworkReply::NetworkError code)
+void ConfigurationDialog::downloadError(QNetworkReply::NetworkError)
 {
 	Q_ASSERT(currentDownloadFile);
 	Q_ASSERT(starCatalogDownloadReply);

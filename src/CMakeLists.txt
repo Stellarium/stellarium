@@ -3,8 +3,6 @@ SET(glues_lib_SRCS
 	core/external/glues_stel/source/glues_error.c
 	core/external/glues_stel/source/glues_error.h
 	core/external/glues_stel/source/glues.h
-	core/external/glues_stel/source/glues_mipmap.c
-	core/external/glues_stel/source/glues_mipmap.h
 	core/external/glues_stel/source/libtess/dict.h
 	core/external/glues_stel/source/libtess/dict.c
 	core/external/glues_stel/source/libtess/dict-list.h

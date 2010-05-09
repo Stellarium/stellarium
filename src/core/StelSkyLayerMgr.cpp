@@ -166,7 +166,7 @@ void StelSkyLayerMgr::draw(StelCore* core)
 	}
 }
 
-void noDelete(StelSkyLayer* o) {;}
+void noDelete(StelSkyLayer*) {;}
 
 // Called when loading of data started or stopped for one collection
 void StelSkyLayerMgr::loadingStateChanged(bool b)

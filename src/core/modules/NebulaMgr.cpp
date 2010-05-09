@@ -186,9 +186,6 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 	}
 }
 
-void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
-{;}
-
 void NebulaMgr::setStelStyle(const QString& section)
 {
 	// Load colors from config file
@@ -259,8 +256,8 @@ NebulaP NebulaMgr::search(const Vec3d& apos)
 	else return NebulaP();
 }
 
-// Return a stl vector containing the nebulas located inside the limFov circle around position v
-QList<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, const StelCore* core) const
+
+QList<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
 {
 	QList<StelObjectP> result;
 	if (!getFlagShow())

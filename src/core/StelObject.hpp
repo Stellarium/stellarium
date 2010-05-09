@@ -103,21 +103,21 @@ public:
 	Vec3d getAltAzPos(const StelNavigator* nav) const;
 
 	//! Return object's apparent V magnitude as seen from observer
-	virtual float getVMagnitude(const StelNavigator *nav) const {return 99;}
+	virtual float getVMagnitude(const StelNavigator*) const {return 99;}
 
 	//! Return a priority value which is used to discriminate objects by priority
 	//! As for magnitudes, the lower is the higher priority
-	virtual float getSelectPriority(const StelNavigator *nav) const {return 99;}
+	virtual float getSelectPriority(const StelNavigator*) const {return 99;}
 
 	//! Get a color used to display info about the object
 	virtual Vec3f getInfoColor() const {return Vec3f(1,1,1);}
 
 	//! Return the best FOV in degree to use for a close view of the object
-	virtual double getCloseViewFov(const StelNavigator *nav) const {return 10.;}
+	virtual double getCloseViewFov(const StelNavigator*) const {return 10.;}
 
 	//! Return the best FOV in degree to use for a global view of the object satellite system (if there are satellites)
-	virtual double getSatellitesFov(const StelNavigator *nav) const {return -1.;}
-	virtual double getParentSatellitesFov(const StelNavigator *nav) const {return -1.;}
+	virtual double getSatellitesFov(const StelNavigator*) const {return -1.;}
+	virtual double getParentSatellitesFov(const StelNavigator*) const {return -1.;}
 
 	//! Return the angular radius of a circle containing the object as seen from the observer
 	//! with the circle center assumed to be at getJ2000EquatorialPos().

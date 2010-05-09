@@ -294,7 +294,7 @@ void LocationDialog::setPositionFromMap(double longitude, double latitude)
 }
 
 // Called when the planet name is changed by hand
-void LocationDialog::comboBoxChanged(const QString& text)
+void LocationDialog::comboBoxChanged(const QString&)
 {
 	reportEdit();
 	StelLocation loc = locationFromFields();
@@ -303,7 +303,7 @@ void LocationDialog::comboBoxChanged(const QString& text)
 	StelApp::getInstance().getCore()->getNavigator()->moveObserverTo(loc, 0.);
 }
 
-void LocationDialog::spinBoxChanged(int i)
+void LocationDialog::spinBoxChanged(int )
 {
 	reportEdit();
 	StelLocation loc = locationFromFields();

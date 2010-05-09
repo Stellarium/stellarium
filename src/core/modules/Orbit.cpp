@@ -393,14 +393,12 @@ double EllipticalOrbit::getBoundingRadius() const
 }
 
 
-void EllipticalOrbit::sample(double start, double t, int nSamples,
-                             OrbitSampleProc& proc) const
+void EllipticalOrbit::sample(double, double, int nSamples, OrbitSampleProc& proc) const
 {
-    double dE = 2 * M_PI / (double) nSamples;
+	double dE = 2. * M_PI / (double) nSamples;
     for (int i = 0; i < nSamples; i++)
         proc.sample(positionAtE(dE * i));
 }
-
 
 
 Vec3d CachingOrbit::positionAtTime(double jd) const
