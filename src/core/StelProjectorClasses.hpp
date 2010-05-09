@@ -55,8 +55,8 @@ public:
 	float deltaZoom(float fov) const;
 protected:
 	virtual bool hasDiscontinuity() const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const {return false;}
 };
 
 class StelProjectorEqualArea : public StelProjector
@@ -81,8 +81,8 @@ public:
 	float deltaZoom(float fov) const;
 protected:
 	virtual bool hasDiscontinuity() const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const {return false;}
 };
 
 class StelProjectorStereographic : public StelProjector
@@ -129,8 +129,8 @@ public:
 	float deltaZoom(float fov) const;
 protected:
 	virtual bool hasDiscontinuity() const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const {return false;}
 };
 
 class StelProjectorFisheye : public StelProjector
@@ -168,8 +168,8 @@ public:
 	float deltaZoom(float fov) const;
 protected:
 	virtual bool hasDiscontinuity() const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const {return false;}
 };
 
 class StelProjectorHammer : public StelProjector
@@ -291,8 +291,8 @@ public:
 	float deltaZoom(float fov) const;
 protected:
 	virtual bool hasDiscontinuity() const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const {return false;}
 };
 
 class StelProjector2d : public StelProjector
@@ -309,8 +309,8 @@ public:
 	float deltaZoom(float fov) const;
 protected:
 	virtual bool hasDiscontinuity() const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {Q_ASSERT(0); return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const {Q_ASSERT(0); return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const {Q_ASSERT(0); return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const {Q_ASSERT(0); return false;}
 	virtual void computeBoundingCap() {;}
 };
 

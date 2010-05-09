@@ -43,8 +43,8 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init() {;}
-	virtual void draw(StelCore* core) {;}
-	virtual void update(double deltaTime) {;}
+	virtual void draw(StelCore*) {;}
+	virtual void update(double) {;}
 	//! Handle mouse click events.
 	virtual void handleMouseClicks(class QMouseEvent* event);
 

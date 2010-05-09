@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <functional>
 #include <QSettings>
 
 #include "StelProjector.hpp"
@@ -45,13 +44,13 @@ double TextUI::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-void TextUI::update(double deltaTime)
+void TextUI::update(double)
 {
 	return;
 }
 
 
-void TextUI::draw(StelCore* core)
+void TextUI::draw(StelCore*)
 {
 	return;
 }

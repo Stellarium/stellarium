@@ -204,7 +204,7 @@ void StelSkyDrawer::init()
 	update(0);
 }
 
-void StelSkyDrawer::update(double deltaTime)
+void StelSkyDrawer::update(double)
 {
 	float fov = core->getMovementMgr()->getCurrentFov();
 	if (fov > maxAdaptFov)

@@ -70,12 +70,6 @@ public:
 	//! in translations.h
 	virtual void updateI18n();
 
-	//! Called when the sky culture is updated, so that the module can respond
-	//! as appropriate.  Does nothing as there are no SkyCulture specific features
-	//! in the current nebula implementation.
-	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	virtual void updateSkyCulture(const QString& skyCultureDir);
-
 	//! Sets the colors of the Nebula labels and markers according to the
 	//! values in a configuration object
 	virtual void setStelStyle(const QString& section);

@@ -267,9 +267,9 @@ void vertexTrianglesCallback(Vec3d* vertexData, OctTessTrianglesCallbackData* us
 	userData->result.append(*vertexData);
 }
 
-void noOpCallback(GLboolean flag) {;}
+void noOpCallback(GLboolean) {;}
 
-void combineTrianglesCallback(double coords[3], Vec3d* vertex_data[4], GLfloat weight[4], Vec3d** outData, OctTessTrianglesCallbackData* userData)
+void combineTrianglesCallback(double coords[3], Vec3d*[4], GLfloat[4], Vec3d** outData, OctTessTrianglesCallbackData* userData)
 {
 	// Check that the new coordinate lay on the octahedron plane
 	Q_ASSERT(coords[2]<0.000001);
@@ -277,10 +277,12 @@ void combineTrianglesCallback(double coords[3], Vec3d* vertex_data[4], GLfloat w
 	*outData = &(userData->tempVertices.last());
 }
 
+#ifndef NDEBUG
 void checkBeginTrianglesCallback(GLenum type)
 {
 	Q_ASSERT(type==GL_TRIANGLES);
 }
+#endif
 
 QVector<Vec3d> OctahedronPolygon::tesselateOneSideTriangles(GLUEStesselator* tess, int sidenb) const
 {
@@ -458,7 +460,7 @@ void vertexLineLoopCallback(EdgeVertex* vertexData, OctTessLineLoopCallbackData*
 		userData->result.last().edgeFlag = userData->result.last().edgeFlag && vertexData->edgeFlag;
 }
 
-void combineLineLoopCallback(double coords[3], EdgeVertex* vertex_data[4], GLfloat weight[4], EdgeVertex** outData, OctTessLineLoopCallbackData* userData)
+void combineLineLoopCallback(double coords[3], EdgeVertex* vertex_data[4], GLfloat[4], EdgeVertex** outData, OctTessLineLoopCallbackData* userData)
 {
 	bool newFlag=false;
 	//qDebug() << "Combine data" << coords[0] << coords[1] << coords[2];
@@ -476,10 +478,12 @@ void combineLineLoopCallback(double coords[3], EdgeVertex* vertex_data[4], GLflo
 	*outData = &(userData->tempVertices.last());
 }
 
+#ifndef NDEBUG
 void checkBeginLineLoopCallback(GLenum type)
 {
 	Q_ASSERT(type==GL_LINE_LOOP);
 }
+#endif
 
 void endLineLoopCallback(OctTessLineLoopCallbackData* data)
 {

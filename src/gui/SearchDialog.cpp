@@ -339,7 +339,7 @@ void SearchDialog::gotoObject()
 	simbadResults.clear();
 }
 
-bool SearchDialog::eventFilter(QObject *object, QEvent *event)
+bool SearchDialog::eventFilter(QObject*, QEvent *event)
 {
 	if (event->type() == QEvent::KeyRelease)
 	{

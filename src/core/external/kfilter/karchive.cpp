@@ -206,7 +206,7 @@ const KArchiveDirectory* KArchive::directory() const
 }
 
 
-bool KArchive::addLocalFile( const QString& fileName, const QString& destName )
+bool KArchive::addLocalFile(const QString&, const QString&)
 {
 	Q_ASSERT(0);  // Disabled for Stellarium
 	return true;

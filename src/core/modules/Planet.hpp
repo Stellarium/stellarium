@@ -89,7 +89,6 @@ public:
 		   Vec3f color,
 		   float albedo,
 		   const QString& texMapName,
-		   const QString& texHaloName,
 		   posFuncType _coordFunc,
 		   void* userDataPtr,
 		   OsulatingFunctType *osculatingFunc,

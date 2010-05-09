@@ -140,7 +140,7 @@ void StelButton::mousePressEvent(QGraphicsSceneMouseEvent* event)
 	emit(triggered());
 }
 
-void StelButton::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
+void StelButton::hoverEnterEvent(QGraphicsSceneHoverEvent*)
 {
 	timeLine->setDirection(QTimeLine::Forward);
 	if (timeLine->state()!=QTimeLine::Running)
@@ -149,7 +149,7 @@ void StelButton::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
 	emit(hoverChanged(true));
 }
 
-void StelButton::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
+void StelButton::hoverLeaveEvent(QGraphicsSceneHoverEvent*)
 {
 	timeLine->setDirection(QTimeLine::Backward);
 	if (timeLine->state()!=QTimeLine::Running)
@@ -157,7 +157,7 @@ void StelButton::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
 	emit(hoverChanged(false));
 }
 
-void StelButton::mouseReleaseEvent(QGraphicsSceneMouseEvent * event)
+void StelButton::mouseReleaseEvent(QGraphicsSceneMouseEvent*)
 {
 	if (action!=NULL && !action->isCheckable())
 		setChecked(toggleChecked(checked));
@@ -241,7 +241,7 @@ void LeftStelBar::addButton(StelButton* button)
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
 }
 
-void LeftStelBar::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void LeftStelBar::paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*)
 {
 }
 
@@ -571,7 +571,7 @@ void BottomStelBar::updateText(bool updatePos)
 	}
 }
 
-void BottomStelBar::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void BottomStelBar::paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*)
 {
 	updateText();
 }
@@ -682,7 +682,7 @@ void StelBarsPath::setBackgroundOpacity(double opacity)
 	setBrush(QBrush(QColor::fromRgbF(0.22, 0.22, 0.23, opacity)));
 }
 
-StelProgressBarMgr::StelProgressBarMgr(QGraphicsItem* parent)
+StelProgressBarMgr::StelProgressBarMgr(QGraphicsItem*)
 {
 	setLayout(new QGraphicsLinearLayout(Qt::Vertical));
 }
@@ -710,11 +710,11 @@ QProgressBar* StelProgressBarMgr::addProgressBar()
 	return pb;
 }
 
-CornerButtons::CornerButtons(QGraphicsItem* parent) : lastOpacity(10)
+CornerButtons::CornerButtons(QGraphicsItem*) : lastOpacity(10)
 {
 }
 
-void CornerButtons::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void CornerButtons::paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*)
 {
 	// Do nothing. Just paint the child widgets
 }

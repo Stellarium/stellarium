@@ -531,7 +531,7 @@ Constellation* ConstellationMgr::findFromAbbreviation(const QString& abbreviatio
 }
 
 // Can't find constellation from a position because it's not well localized
-QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d& v, double limitFov, const StelCore* core) const
+QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d&, double, const StelCore*) const
 {
 	return QList<StelObjectP>();
 }

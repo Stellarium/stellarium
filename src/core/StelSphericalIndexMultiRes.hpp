@@ -113,7 +113,7 @@ private:
 	class RootNode : public Node
 	{
 		public:
-			RootNode(double amargin, int amaxObjectsPerNode, int amaxLevel) : maxObjectsPerNode(), maxLevel(amaxLevel), margin(amargin)
+			RootNode(double amargin, int amaxObjectsPerNode, int amaxLevel) : maxObjectsPerNode(amaxObjectsPerNode), maxLevel(amaxLevel), margin(amargin)
 			{
 			}
 		

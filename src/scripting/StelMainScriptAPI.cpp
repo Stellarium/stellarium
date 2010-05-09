@@ -111,7 +111,7 @@ void StelMainScriptAPI::setDate(const QString& dt, const QString& spec)
 	StelApp::getInstance().getCore()->getNavigator()->setJDay(jdFromDateString(dt, spec));
 }
 
-QString StelMainScriptAPI::getDate(const QString& spec)
+QString StelMainScriptAPI::getDate(const QString&)
 {
 	return StelUtils::jdToIsoString(getJDay());
 }

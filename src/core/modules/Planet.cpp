@@ -52,7 +52,6 @@ Planet::Planet(const QString& englishName,
 			   Vec3f color,
 			   float albedo,
 			   const QString& atexMapName,
-			   const QString& texHaloName,
 			   posFuncType coordFunc,
 			   void* auserDataPtr,
 			   OsulatingFunctType *osculatingFunc,
@@ -139,7 +138,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 }
 
 //! Get sky label (sky translation)
-QString Planet::getSkyLabel(const StelNavigator * nav) const
+QString Planet::getSkyLabel(const StelNavigator*) const
 {
 	QString str;
 	QTextStream oss(&str);
@@ -801,25 +800,29 @@ void Planet::drawEarthShadow(StelCore* core, StelPainter* sPainter)
 	Vec3d r;
 
 	// Draw umbra first
-	QVarLengthArray<Vec2f, 210> texCoordArray(210);
-	QVarLengthArray<Vec3d, 210> vertexArray(210);
-	texCoordArray[0].set(0.f, 0.5f);
+	QVector<Vec2f> texCoordArray;
+	QVector<Vec3d> vertexArray;
+	texCoordArray.reserve(210);
+	vertexArray.reserve(210);
+	texCoordArray << Vec2f(0.f, 0.5f);
 	// johannes: work-around for nasty ATI rendering bug: use y-texture coordinate of 0.5 instead of 0.0
-	vertexArray[0]=shadow;
+	vertexArray << shadow;
 
 	const Mat4d& rotMat = Mat4d::rotation(shadow, 2.*M_PI/100.);
 	r = upt;
 	for (int i=1; i<=101; ++i)
 	{
 		// position in texture of umbra edge
-		texCoordArray[i].set(0.6f, 0.5f);
+		texCoordArray << Vec2f(0.6f, 0.5f);
 		r.transfo4d(rotMat);
-		vertexArray[i] = shadow + r;
+		vertexArray << shadow + r;
 	}
 	sPainter->setArrays(vertexArray.constData(), texCoordArray.constData());
 	sPainter->drawFromArray(StelPainter::TriangleFan, 102);
 
 	// now penumbra
+	vertexArray.resize(0);
+	texCoordArray.resize(0);
 	Vec3d u;
 	r = rpt;
 	u = upt;
@@ -827,10 +830,8 @@ void Planet::drawEarthShadow(StelCore* core, StelPainter* sPainter)
 	{
 		r.transfo4d(rotMat);
 		u.transfo4d(rotMat);
-		texCoordArray[i].set(0.6f, 0.5f);
-		texCoordArray[i+1].set(1.f, 0.5f); // position in texture of umbra edge
-		vertexArray[i] = shadow + u;
-		vertexArray[i+1] = shadow + r;
+		texCoordArray << Vec2f(0.6f, 0.5f) << Vec2f(1.f, 0.5f); // position in texture of umbra edge
+		vertexArray <<  shadow + u << shadow + r;
 	}
 	sPainter->setArrays(vertexArray.constData(), texCoordArray.constData());
 	sPainter->drawFromArray(StelPainter::TriangleStrip, 202);

@@ -91,7 +91,7 @@ public:
 	unsigned int getNrOfStars() const { return nr_of_stars; }
 
 	//! Dummy method that does nothing. See subclass implementation.
-	virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {}
+	virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {Q_UNUSED(hipIndex);}
 
 	//! Pure virtual method. See subclass implementation.
 	virtual void searchAround(const StelNavigator* nav, int index,const Vec3d &v,double cosLimFov,

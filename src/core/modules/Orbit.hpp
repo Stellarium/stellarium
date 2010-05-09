@@ -23,10 +23,6 @@ class Orbit
 public:
     Orbit(void) {}
 	virtual ~Orbit(void) {}
-//    virtual Vec3d positionAtTime(double) const = 0;
-//    virtual double getPeriod() const = 0;
-//    virtual double getBoundingRadius() const = 0;
-//    virtual void sample(double, double, int, OrbitSampleProc&) const = 0;
 private:
   Orbit(const Orbit&);
   const Orbit &operator=(const Orbit&);
@@ -49,18 +45,14 @@ public:
 					double parentRotJ2000Longitude  // = 0.0
                     );
 
-    // Compute the orbit for a specified Julian date and return a "stellarium compliant" function
-//    void positionAtTime(double JD, double * X, double * Y, double * Z) const;
-//    void positionAtTimev(double JD, double* v);
-
-      // Compute position for a specified Julian date and return coordinates
-      // given in "dynamical equinox and ecliptic J2000"
-      // which is the reference frame for VSOP87
-      // In order to rotate to VSOP87
-      // parentRotObliquity and parentRotAscendingnode must be supplied.
+	// Compute position for a specified Julian date and return coordinates
+	// given in "dynamical equinox and ecliptic J2000"
+	// which is the reference frame for VSOP87
+	// In order to rotate to VSOP87
+	// parentRotObliquity and parentRotAscendingnode must be supplied.
     void positionAtTimevInVSOP87Coordinates(double JD, double* v) const;
 
-      // Original one
+	// Original one
     Vec3d positionAtTime(double) const;
     double getPeriod() const;
     double getBoundingRadius() const;

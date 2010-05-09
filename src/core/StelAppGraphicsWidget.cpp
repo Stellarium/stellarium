@@ -146,7 +146,7 @@ bool StelAppGraphicsWidget::paintPartial()
 	return false;
 }
 
-void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget*)
 {
 	// Don't even try to draw if we don't have a core yet (fix a bug during splash screen)
 	if (!stelApp || !stelApp->getCore())

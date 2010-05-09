@@ -42,7 +42,7 @@ public:
 	~StelObserver();
 
 	//! Update StelObserver info if needed. Default implementation does nothing.
-	virtual void update(double deltaTime) {;}
+	virtual void update(double) {;}
 
 	//! Get the position of the home planet center in the heliocentric VSOP87 frame in AU
 	Vec3d getCenterVsop87Pos(void) const;

@@ -27,7 +27,7 @@ void BarFrame::mousePressEvent(QMouseEvent *event)
 	moving = true;
 }
 
-void BarFrame::mouseReleaseEvent(QMouseEvent *event)
+void BarFrame::mouseReleaseEvent(QMouseEvent *)
 {
 	moving = false;
 }

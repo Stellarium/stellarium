@@ -44,7 +44,7 @@ SOFTWARE.
 #endif
 
 static void
-EllipticToRectangular(const double mu,const double a,const double n,
+EllipticToRectangular(const double a,const double n,
                       const double elem[6],const double dt,double xyz[]) {
   const double L = fmod(elem[1]+n*dt,2.0*M_PI);
     /* solve Keplers equation
@@ -113,13 +113,13 @@ void EllipticToRectangularN(double mu,const double elem[6],double dt,
 #else
   const double a = exp(log(mu/(n*n))/3.0);
 #endif
-  EllipticToRectangular(mu,a,n,elem,dt,xyz);
+  EllipticToRectangular(a,n,elem,dt,xyz);
 }
 
 void EllipticToRectangularA(double mu,const double elem[6],double dt,
                             double xyz[]) {
   const double a = elem[0];
   const double n = sqrt(mu/(a*a*a));
-  EllipticToRectangular(mu,a,n,elem,dt,xyz);
+  EllipticToRectangular(a,n,elem,dt,xyz);
 }
 
