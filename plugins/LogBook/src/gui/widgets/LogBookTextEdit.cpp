@@ -19,7 +19,7 @@
 #include "LogBookTextEdit.hpp"
 
 /* ********************************************************************* */
-#pragma mark Creation & Destruction
+// mark Creation & Destruction
 /* ********************************************************************* */
 LogBookTextEdit::LogBookTextEdit(QWidget *parent) : QTextEdit(parent)
 {
@@ -30,7 +30,7 @@ LogBookTextEdit::LogBookTextEdit( const QString &text, QWidget *parent) : QTextE
 }
 
 /* ********************************************************************* */
-#pragma mark QTextEdit over-rides
+// mark QTextEdit over-rides
 /* ********************************************************************* */
 void LogBookTextEdit::focusOutEvent(QFocusEvent *e)
 {

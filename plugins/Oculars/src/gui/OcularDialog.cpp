@@ -251,15 +251,15 @@ void OcularDialog::insertNewTelescope()
 	}
 }
 
-void OcularDialog::CCDSelected(const QModelIndex &index)
+void OcularDialog::CCDSelected(const QModelIndex &)
 {
 }
 
-void OcularDialog::ocularSelected(const QModelIndex &index)
+void OcularDialog::ocularSelected(const QModelIndex &)
 {
 }
 
-void OcularDialog::telescopeSelected(const QModelIndex &index)
+void OcularDialog::telescopeSelected(const QModelIndex &)
 {
 }
 

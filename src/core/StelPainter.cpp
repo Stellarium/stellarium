@@ -1639,7 +1639,7 @@ void StelPainter::setPointSize(qreal size)
 #ifndef STELPAINTER_GL2
 	glPointSize(size);
 #else
-#warning GL ES2 to be done
+	Q_UNUSED(size);
 #endif
 }
 
@@ -1648,7 +1648,7 @@ void StelPainter::setShadeModel(ShadeModel m)
 #ifndef STELPAINTER_GL2
 	glShadeModel(m);
 #else
-#warning GL ES2 to be done
+	Q_UNUSED(m);
 #endif
 }
 

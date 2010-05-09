@@ -118,7 +118,7 @@ QVariantMap Satellite::getMap(void)
 	return map;
 }
 
-float Satellite::getSelectPriority(const StelNavigator *nav) const
+float Satellite::getSelectPriority(const StelNavigator*) const
 {
 	return -10.;
 }
@@ -194,17 +194,17 @@ Vec3f Satellite::getInfoColor(void) const {
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : hintColor;
 }
 
-float Satellite::getVMagnitude(const StelNavigator* nav) const
+float Satellite::getVMagnitude(const StelNavigator*) const
 {
 	return 5.0;
 }
 
-double Satellite::getAngularSize(const StelCore *core) const
+double Satellite::getAngularSize(const StelCore*) const
 {
 	return 0.00001;
 }
 
-void Satellite::update(double deltaTime)
+void Satellite::update(double)
 {
 	ClearFlag(ALL_FLAGS);
 	Get_Next_Tle_Set(elements, &tle);
@@ -246,7 +246,7 @@ double Satellite::getDoppler(double freq) const
 	return result/1000000;
 }
 
-void Satellite::draw(const StelCore* core, StelPainter& painter, float maxMagLabel)
+void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 {
 	float a = (azimuth-90)*M_PI/180;
 	Vec3f pos(sin(a),cos(a), tan(elevation * M_PI / 180.));

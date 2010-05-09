@@ -109,12 +109,8 @@ LogBook::~LogBook()
 #pragma mark StelModule Methods
 #endif
 /* ********************************************************************* */
-bool LogBook::configureGui(bool show)
+bool LogBook::configureGui(bool)
 {
-//	if (show) {
-//		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-//	}
-	
 	return true;
 }
 
@@ -142,16 +138,8 @@ void LogBook::draw(StelCore* core)
 	StelPainter painter(core->getProjection2d());
 }
 
-void LogBook::setStelStyle(const QString& section)
+void LogBook::setStelStyle(const QString& )
 {
-	/*
-	 if(dialog) {
-	 dialog->setStyleSheet(telescopeManager->getModuleStyleSheet(section));
-	 }
-	 */
-
-	//Change the styles of all children, too
-//	ocularDialog->setStelStyle(style);
 }
 
 /* ********************************************************************* */

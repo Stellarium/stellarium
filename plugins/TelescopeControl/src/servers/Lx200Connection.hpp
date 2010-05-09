@@ -48,7 +48,7 @@ private:
 	//! Parses read buffer data received from the telescope.
 	void dataReceived(const char *&p, const char *read_buff_end);
 	//! Not implemented, as this is not a connection to a client.
-	void sendPosition(unsigned int ra_int, int dec_int, int status) {}
+	void sendPosition(unsigned int ra_int, int dec_int, int status) {Q_UNUSED(ra_int); Q_UNUSED(dec_int); Q_UNUSED(status);}
 	void resetCommunication(void);
 	void prepareSelectFds(fd_set &read_fds, fd_set &write_fds, int &fd_max);
 	bool writeFrontCommandToBuffer(void);

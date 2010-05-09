@@ -268,7 +268,7 @@ void Oculars::deinit()
 	QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection);
 }
 
-void Oculars::setStelStyle(const QString& section)
+void Oculars::setStelStyle(const QString&)
 {
 	ocularDialog->updateStyle();
 }

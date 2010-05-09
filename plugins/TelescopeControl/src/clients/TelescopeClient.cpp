@@ -543,7 +543,7 @@ void TelescopeTCP::performCommunication()
 }
 
 //TODO: More informative error messages?
-void TelescopeTCP::socketFailed(QAbstractSocket::SocketError socketError)
+void TelescopeTCP::socketFailed(QAbstractSocket::SocketError)
 {
 	qDebug() << "TelescopeTCP(" << name << "): TCP socket error:\n" << tcpSocket->errorString();
 }

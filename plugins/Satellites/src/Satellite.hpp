@@ -70,7 +70,7 @@ public:
 	//! - Extra2: Comms frequencies, modulation types and so on. 
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelNavigator *nav) const {return XYZ;}
+	virtual Vec3d getJ2000EquatorialPos(const StelNavigator *) const {return XYZ;}
 	virtual float getVMagnitude(const StelNavigator* nav=NULL) const;
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual QString getNameI18n(void) const {return designation;}

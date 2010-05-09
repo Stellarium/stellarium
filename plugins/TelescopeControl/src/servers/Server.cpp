@@ -36,7 +36,7 @@ void Server::SocketList::clear(void)
 	list<Socket*>::clear();
 }
 
-Server::Server(int port)
+Server::Server(int)
 {
 	//Socket *listener = new Listener(*this, port);
 	//socket_list.push_back(listener);
