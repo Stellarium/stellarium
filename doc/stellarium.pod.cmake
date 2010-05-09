@@ -114,7 +114,7 @@ Some sort of error.
 =head1 FILES
 
 Note: file locations on non-*nix operating systems (include OSX) may vary.  
-Please refer to the the Stellarium User Guide for more details, as well
+Please refer to the Stellarium User Guide for more details, as well
 as information on how to customise the Stellarium data files.
 
 =over
