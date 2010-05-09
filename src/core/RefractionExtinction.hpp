@@ -64,8 +64,8 @@ public:
 	void setExtinctionCoefficient(float k);
 
 	//! airmass computation for @param cosZ = cosine of zenith angle z (=sin(altitude)!).
-	//! The default (@param apparent_z=true) is computing airmass from observed altitude, following Rozenberg (1966) [X(90)~40].
-	//! if (@param apparent_z==false), we have geometrical altitude and compute airmass from that,
+	//! The default (@param apparent_z = true) is computing airmass from observed altitude, following Rozenberg (1966) [X(90)~40].
+	//! if (@param apparent_z = false), we have geometrical altitude and compute airmass from that,
 	//! following Young: Air mass and refraction. Applied Optics 33(6), pp.1108-1110, 1994. [X(90)~32].
 	//! A problem ist that refraction depends on air pressure and temperature, but Young's formula assumes T=15C, p=1013.25mbar.
 	//! So, it seems better to compute refraction first, and then use the Rozenberg formula here.

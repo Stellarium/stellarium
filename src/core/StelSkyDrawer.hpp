@@ -67,12 +67,12 @@ public:
 	bool drawPointSource(StelPainter* sPainter,const Vec3d& v, const float rcMag[2], const Vec3f& color, bool checkInScreen=false);
 
 	//! Terminate drawing of a 3D model, draw the halo
+	//! @param p the StelPainter instance to use for this drawing operation
 	//! @param v the 3d position of the source in J2000 reference frame
 	//! @param illuminatedArea the illuminated area in arcmin^2
 	//! @param mag the source integrated magnitude
-	//! @param p the StelPainter instance to use for this drawing operation
 	//! @param color the object halo RGB color
-	void postDrawSky3dModel(StelPainter* sPainter, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f));
+	void postDrawSky3dModel(StelPainter* p, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f));
 
 	//! Compute RMag and CMag from magnitude.
 	//! @param mag the object integrated V magnitude

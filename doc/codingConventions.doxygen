@@ -27,7 +27,8 @@ The increasing number of contributors require that we clearly define coding rule
 <ul>
  <li>Source code should use ASCII character set. Characters such as 'é' or 'ö' are not portable when hard-coded. Gettext translated strings should be used for such characters. 
  <li>Variable names and comments should be in English.
- <li>Class names are nouns, in mixed-case, with an initial upper-case letter and the ﬁrst letter of each subsequent word capitalized (e.g. CoreFactory).
+ <li>Class names are nouns, in mixed-case, with an initial upper-case
+letter and the first letter of each subsequent word capitalized (e.g. CoreFactory).
  <li>Method names are verbs or nouns in mixed-case, starting with a lower-case letter (e.g. update() or addElement()).
  <li>Methods that return a value should take the form getSize().
  <li>The names of local variables should be in mixed case, starting with a lower-case letter (e.g. packetSize). This also applies to the formal parameters of methods. Do not use names starting with underscore.
@@ -57,7 +58,7 @@ void MyClass::myMethod(int x)
  <ul>
   <li>1 between methods, before (block or single line) comment
   <li>1 between logical sections of a method
-  <li>2 between sections of a source ﬁle
+  <li>2 between sections of a source file
  </ul>
  <li>@em enums should follow the QT conventions.  i.e. CamelCase with First letter capitalization for both enum type and enum values. Document with doxygen. The <b>//!\< </b>tag can be used to add descriptions on the same line as an enum value, e.g.
 @verbatim
