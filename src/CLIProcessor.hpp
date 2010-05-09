@@ -28,7 +28,7 @@ class CLIProcessor
 {
 public:
 	//! Check if a QStringList has a CLI-style option in it (before the first --).
-	//! @param args a list of strings, think argv
+	//! @param argList a list of strings, think argv
 	//! @param shortOpt a short-form option string, e.g, "-h"
 	//! @param longOpt a long-form option string, e.g. "--help"
 	//! @return true if the option exists in args before any element which is "--"
@@ -49,7 +49,7 @@ public:
 	//! The argument list is only processed as far as the first value "--".
 	//! If an argument "--" is to be retrieved, it must be apecified using
 	//! the "--option=--" form.
-	//! @param args a list of strings, think argv.
+	//! @param argList a list of strings, think argv.
 	//! @param shortOpt the short form of the option, e.g. "-n".
 	//! @param longOpt the long form of the option, e.g. "--number".
 	//! @param defaultValue the default value to return if the option was
@@ -68,7 +68,7 @@ public:
 	//! e.g. option --use-foo can have parameter "yes" or "no"
 	//! It is also possible for the argument to take values, "1", "0";
 	//! "true", "false";
-	//! @param args a list of strings, think argv
+	//! @param argList a list of strings, think argv
 	//! @param shortOpt a short-form option string, e.g, "-h"
 	//! @param longOpt a long-form option string, e.g. "--help"
 	//! @param defaultValue the default value to return if the option was
