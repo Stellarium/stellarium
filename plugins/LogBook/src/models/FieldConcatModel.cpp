@@ -65,7 +65,7 @@ FieldConcatModel::~FieldConcatModel()
 #pragma mark QAbstractTableModel subclass methods
 #endif
 /* ********************************************************************* */
-int FieldConcatModel::columnCount(const QModelIndex & parent) const
+int FieldConcatModel::columnCount(const QModelIndex&) const
 {
 	return 2;
 }
@@ -106,7 +106,7 @@ QVariant FieldConcatModel::data(const QModelIndex & index, int role) const
 	return data;
 }
 
-int FieldConcatModel::idForDisplayString(QString displayString)
+int FieldConcatModel::idForDisplayString(QString)
 {
 	return 0;
 }

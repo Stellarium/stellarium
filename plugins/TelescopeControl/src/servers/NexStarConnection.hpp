@@ -43,7 +43,7 @@ public:
 	
 private:
 	void dataReceived(const char *&p, const char *read_buff_end);
-	void sendPosition(unsigned int ra_int, int dec_int, int status) {}
+	void sendPosition(unsigned int ra_int, int dec_int, int status) {Q_UNUSED(ra_int); Q_UNUSED(dec_int); Q_UNUSED(status);}
 	void resetCommunication(void);
 	
 private:

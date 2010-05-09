@@ -67,7 +67,7 @@ public:
 	//! @return a QString containing an HMTL encoded description of the Telescope.
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
 	QString getType(void) const {return "Telescope";}
-	virtual double getAngularSize(const StelCore* core) const {Q_ASSERT(0); return 0;}	// TODO
+	virtual double getAngularSize(const StelCore*) const {Q_ASSERT(0); return 0;}	// TODO
 		
 	// Methods specific to telescope
 	virtual void telescopeGoto(const Vec3d &j2000Pos) = 0;
@@ -85,7 +85,7 @@ protected:
 	const QString name;
 private:
 	virtual bool isInitialized(void) const {return true;}
-	float getSelectPriority(const StelNavigator *nav) const {return -10.f;}
+	float getSelectPriority(const StelNavigator*) const {return -10.f;}
 private:
 	QList<double> oculars; // fov of the oculars
 };
@@ -99,7 +99,7 @@ private:
 class TelescopeClientDummy : public TelescopeClient
 {
 public:
-	TelescopeClientDummy(const QString &name, const QString &params) : TelescopeClient(name)
+	TelescopeClientDummy(const QString &name, const QString &) : TelescopeClient(name)
 	{
 		desired_pos[0] = XYZ[0] = 1.0;
 		desired_pos[1] = XYZ[1] = 0.0;
@@ -129,7 +129,7 @@ public:
 	{
 		return true;
 	}
-	Vec3d getJ2000EquatorialPos(const StelNavigator *nav=0) const
+	Vec3d getJ2000EquatorialPos(const StelNavigator*) const
 	{
 		return XYZ;
 	}
