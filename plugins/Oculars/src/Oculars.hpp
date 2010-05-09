@@ -99,7 +99,7 @@ private:
 	void drawCrosshairs();
 
 	//! Insures that each required table exists in the database, as well as instantiate the table models.
-	//! @retrun true if the DB was correctly initialized, false if it was not.
+	//! @return true if the DB was correctly initialized, false if it was not.
 	bool initializeDB();
 	
 	//! Set up the Qt actions needed to activate the plugin.
@@ -150,8 +150,8 @@ private:
 	int selectedTelescopeIndex;
 
 	QFont font;					//!< The font used for drawing labels.
-	bool flagShowOculars;		//<! flag used to trak if we are in ocular mode.
-	bool flagShowCrosshairs;	//<! flag used to track in crosshairs should be rendered in the ocular view.
+	bool flagShowOculars;		//!< flag used to track if we are in ocular mode.
+	bool flagShowCrosshairs;	//!< flag used to track in crosshairs should be rendered in the ocular view.
 	int usageMessageLabelID;	//!< the id of the label showing the usage message. -1 means it's not displayed.
 
 	bool flagAzimuthalGrid;		//!< Flag to track if AzimuthalGrid was displayed at activation.
@@ -161,7 +161,7 @@ private:
 	bool flagEclipticLine;		//!< Flag to track if EclipticLine was displayed at activation.
 	bool flagMeridianLine;		//!< Flag to track if MeridianLine was displayed at activation.
 
-	double maxImageCircle;		//<! The maximum image circle for all eyepieces.  Used to scale the mask.
+	double maxImageCircle;		//!< The maximum image circle for all eyepieces.  Used to scale the mask.
 	bool useMaxImageCircle;		//!< Read from the ini file, whether to scale the mask based on exit circle size.
 
 	// for toolbar button
@@ -172,8 +172,8 @@ private:
 
 	OcularDialog *ocularDialog;
 	bool visible;
-	bool ready; //<! A flag that determines that this module is usable.  If false, we won't open.
-	bool newInstrument; //<! true the first time draw is called for a new ocular or telescope, false otherwise.
+	bool ready; //!< A flag that determines that this module is usable.  If false, we won't open.
+	bool newInstrument; //!< true the first time draw is called for a new ocular or telescope, false otherwise.
 
 	QSqlTableModel *CCDsTableModel;
 	QSqlTableModel *ocularsTableModel;
