@@ -35,13 +35,8 @@ class CustomProxy : public QGraphicsProxyWidget
 			setFocusPolicy(Qt::StrongFocus);
 		}
 		//! Reimplement this method to add windows decorations. Currently there are invisible 2 px decorations
-		void paintWindowFrame(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+		void paintWindowFrame(QPainter*, const QStyleOptionGraphicsItem*, QWidget*)
 		{
-/*			QStyleOptionTitleBar bar;
-			initStyleOption(&bar);
-			bar.subControls = QStyle::SC_TitleBarCloseButton;
-			qWarning() << style()->subControlRect(QStyle::CC_TitleBar, &bar, QStyle::SC_TitleBarCloseButton);
-			QGraphicsProxyWidget::paintWindowFrame(painter, option, widget);*/
 		}
 	protected:
 		
