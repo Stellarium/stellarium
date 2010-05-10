@@ -576,7 +576,7 @@ void Satellites::updateDownloadComplete(QNetworkReply* reply)
 	// check the download worked, and save the data to file if this is the case.
 	if (reply->error() != QNetworkReply::NoError)
 	{
-		qWarning() << "Satellites::updateDownloadComplete FAILED to download" << reply->url() << " Error: " << reply->error();
+		qWarning() << "Satellites::updateDownloadComplete FAILED to download" << reply->url() << " Error: " << reply->errorString();
 	}
 	else
 	{

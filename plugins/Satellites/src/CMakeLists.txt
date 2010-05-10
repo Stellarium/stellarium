@@ -67,7 +67,11 @@ IF(BUILD_STATIC_PLUGINS)
 	# The library target "Satellites-static" has a default OUTPUT_NAME of "Satellites-static", so change it.
 	SET_TARGET_PROPERTIES(Satellites-static PROPERTIES OUTPUT_NAME "Satellites")
 	TARGET_LINK_LIBRARIES(Satellites-static ${StelMain} ${extLinkerOption})
-	SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
+	IF(WIN32)
+		SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
+	ELSE()
+		SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
+	ENDIF()
 	ADD_DEPENDENCIES(AllStaticPlugins Satellites-static)
 ENDIF()
 
