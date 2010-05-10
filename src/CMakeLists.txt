@@ -503,7 +503,7 @@ ENDIF()
 
 
 ###############################################################################################
-################## Static plugins need to be known by the file main.cpp at compilation time
+################## Static plugins need to be known by the file StelMainGraphicsView.cpp at compilation time
 ################## so add the definitions to the compilation.
 ################## Also add the full path to the .a libraries at compilation time.
 IF (BUILD_STATIC_PLUGINS)
