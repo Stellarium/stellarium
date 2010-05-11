@@ -156,7 +156,7 @@ void TelescopeControl::init()
 		
 		//Create telescope key bindings
 		QString group = N_("Telescope Control");
-		#ifdef COMPATIBILITY_001003
+		#ifdef COMPATIBILITY_001003b
 		//QAction-s with these key bindings already exist in Stellarium
 		//gui->getGuiActions("actionMove_Telescope_To_Selection_0")->setVisible(false);
 		#else
@@ -171,7 +171,7 @@ void TelescopeControl::init()
 		gui->addGuiActions("actionMove_Telescope_To_Selection_7", N_("Move telescope #7 to selected object"), "Ctrl+7", group, false, false);
 		gui->addGuiActions("actionMove_Telescope_To_Selection_8", N_("Move telescope #8 to selected object"), "Ctrl+8", group, false, false);
 		gui->addGuiActions("actionMove_Telescope_To_Selection_9", N_("Move telescope #9 to selected object"), "Ctrl+9", group, false, false);
-		#endif //COMPATIBILITY_001003
+		#endif //COMPATIBILITY_001003b
 
 		// "Slew to the center of the screen" commands
 		gui->addGuiActions("actionSlew_Telescope_To_Direction_1", N_("Move telescope #1 to the point currently in the center of the screen"), "Alt+1", group, false, false);
@@ -210,11 +210,11 @@ void TelescopeControl::init()
 		slewDialog = new SlewDialog();
 		
 		//TODO: Think of a better keyboard shortcut
-		#ifdef COMPATIBILITY_001003
+		#ifdef COMPATIBILITY_001003b
 		gui->addGuiActions("actionShow_Slew_Window", N_("Move a telescope to a given set of coordinates"), "Alt+0", group, true, false);
 		#else
 		gui->addGuiActions("actionShow_Slew_Window", N_("Move a telescope to a given set of coordinates"), "Ctrl+0", group, true, false);
-		#endif //COMPATIBILITY_001003
+		#endif //COMPATIBILITY_001003b
 		connect(gui->getGuiActions("actionShow_Slew_Window"), SIGNAL(toggled(bool)), slewDialog, SLOT(setVisible(bool)));
 		connect(slewDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Slew_Window"), SLOT(setChecked(bool)));
 		

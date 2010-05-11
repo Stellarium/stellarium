@@ -131,7 +131,7 @@ QString TelescopeClient::getInfoString(const StelCore* core, const InfoStringGro
 	return str;
 }
 
-#ifndef COMPATIBILITY_001003 //Duplicate function definition causes errors during static linking
+#ifndef COMPATIBILITY_001003b //Duplicate function definition causes errors during static linking
 
 //! returns the current system time in microseconds since the Epoch
 qint64 getNow(void)
@@ -149,7 +149,7 @@ qint64 getNow(void)
 #endif
 }
 
-#endif //COMPATIBILITY_001003
+#endif //COMPATIBILITY_001003b
 
 TelescopeTCP::TelescopeTCP(const QString &name, const QString &params) :
                            TelescopeClient(name),
