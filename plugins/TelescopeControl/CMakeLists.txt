@@ -6,7 +6,7 @@ SET(TELESCOPE_CONTROL_VERSION "${TELESCOPE_CONTROL_MAJOR}.${TELESCOPE_CONTROL_MI
 #Don't forget to increment the version in device_models.json too,
 #otherwise the local copy will be overwritten each time Stellarium is started.
 
-SET(COMPATIBILITY_001003 0 CACHE BOOL "Make the plug-in compatible with Stellarium version 0.10.3.")
+SET(COMPATIBILITY_001003b 0 CACHE BOOL "Make the plug-in compatible with Stellarium version 0.10.3.")
 
 IF(APPLE)
 	SET(CMAKE_INSTALL_PREFIX $ENV{HOME}/Library/Application\ Support/Stellarium)
@@ -17,8 +17,8 @@ ENDIF(APPLE)
 #SET(TELESCOPE_SERVERS_SOURCE_DIR "$ENV{STELROOT}/../telescope_server/src"
 #	CACHE PATH "Should point to the /src/ directory where the stellarium telescope servers source tree is located")
 
-IF(COMPATIBILITY_001003)
- ADD_DEFINITIONS(-DCOMPATIBILITY_001003)
+IF(COMPATIBILITY_001003b)
+ ADD_DEFINITIONS(-DCOMPATIBILITY_001003b)
 ENDIF()
 ADD_DEFINITIONS(-DPLUGIN_VERSION="${TELESCOPE_CONTROL_VERSION}")
 
