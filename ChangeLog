@@ -16,15 +16,18 @@ Fixed:
 - the top labels of vertical grid lines not being displayed, and improper label rotation.
 
 Changed:
-- The Date/Time window now is synchronised with the date/time displayed in the toolbar, instead of showing the last date/time that has been entered.
+- the Date/Time window now is synchronised with the date/time displayed in the toolbar, instead of showing the last date/time that has been entered.
 - the visual style of some plug-ins.
 - optimized loading of cities.
 - optimized loading of planet textures (lazy loading).
 - restructured src/ subdirectories to match code dependencies. Directories modules/, external/ and planetsephems/ are now under core/.
-- Stars positions and grid are now coded in float instead of double, to avoid huge memory consomption when loading all 9 star catalogs.
-- Improved management of OpenGL context in StelPainter.
+- stars positions and grid are now coded in float instead of double, to avoid huge memory consomption when loading all 9 star catalogs.
+- improved management of OpenGL context in StelPainter.
 - StelStyle class was moved from core to GUI library.
 - GUI related resources are now compiled as part of GUI library.
+- don't use a generated config.h anymore (use simple compile definitions instead).
+- suppressed most compilation warnings with -Wextra even without the -Wno-unused-parameter flag.
+- suppressed all the TelescopeMgr/Telescope code within the core. It is replaced by the TelescopeControl plugin.
 
 Added:
 - option to create a desktop shortcut in the Windows installer.
