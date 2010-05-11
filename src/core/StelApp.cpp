@@ -24,8 +24,6 @@
 #include "StelTextureMgr.hpp"
 #include "StelLoadingBar.hpp"
 #include "StelObjectMgr.hpp"
-
-#include "TelescopeMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "LandscapeMgr.hpp"
@@ -273,11 +271,6 @@ void StelApp::init(QSettings* conf)
 
 	// Init audio manager
 	audioMgr = new StelAudioMgr();
-
-	// Telescope manager
-	TelescopeMgr* telescope_mgr = new TelescopeMgr();
-	telescope_mgr->init();
-	getModuleMgr().registerModule(telescope_mgr);
 
 	// Constellations
 	ConstellationMgr* asterisms = new ConstellationMgr(hip_stars);
