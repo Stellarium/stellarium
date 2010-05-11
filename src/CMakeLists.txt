@@ -219,10 +219,6 @@ SET(stellarium_lib_SRCS
 	core/modules/StarMgr.hpp
 	core/modules/StarWrapper.cpp
 	core/modules/StarWrapper.hpp
-	core/modules/Telescope.cpp
-	core/modules/Telescope.hpp
-	core/modules/TelescopeMgr.cpp
-	core/modules/TelescopeMgr.hpp
 	core/modules/ZoneArray.cpp
 	core/modules/ZoneArray.hpp
 	core/modules/ZoneData.hpp
@@ -369,8 +365,6 @@ SET(stellarium_MOC_HDRS
 	core/modules/NebulaMgr.hpp
 	core/modules/SolarSystem.hpp
 	core/modules/StarMgr.hpp
-	core/modules/Telescope.hpp
-	core/modules/TelescopeMgr.hpp
 	scripting/ScreenImageMgr.hpp
 	scripting/StelScriptMgr.hpp
 	scripting/StelMainScriptAPI.hpp
