@@ -74,9 +74,6 @@ StelModule* TextUserInterfaceStelPluginInterface::getStelModule() const
 
 StelPluginInfo TextUserInterfaceStelPluginInterface::getPluginInfo() const
 {
-	// Allow to load the resources when used as a static plugin
-	Q_INIT_RESOURCE(TextUserInterface);
-
 	StelPluginInfo info;
 	info.id = "TextUserInterface";
 	info.displayedName = "Text User Interface";

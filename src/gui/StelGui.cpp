@@ -30,7 +30,6 @@
 #include "StelMainWindow.hpp"
 #include "StelObjectMgr.hpp"
 #include "LandscapeMgr.hpp"
-#include "TelescopeMgr.hpp"
 #include "StarMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "GridLinesMgr.hpp"
@@ -266,18 +265,6 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiActions("actionSubtract_Sidereal_Day"), SIGNAL(triggered()), nav, SLOT(subtractSiderealDay()));
 	connect(getGuiActions("actionSubtract_Sidereal_Week"), SIGNAL(triggered()), nav, SLOT(subtractSiderealWeek()));
 	connect(getGuiActions("actionSet_Home_Planet_To_Selected"), SIGNAL(triggered()), nav, SLOT(moveObserverToSelected()));
-
-	TelescopeMgr* tmgr = GETSTELMODULE(TelescopeMgr);
-	connect(getGuiActions("actionMove_Telescope_To_Selection_0"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
-	connect(getGuiActions("actionMove_Telescope_To_Selection_1"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
-	connect(getGuiActions("actionMove_Telescope_To_Selection_2"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
-	connect(getGuiActions("actionMove_Telescope_To_Selection_3"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
-	connect(getGuiActions("actionMove_Telescope_To_Selection_4"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
-	connect(getGuiActions("actionMove_Telescope_To_Selection_5"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
-	connect(getGuiActions("actionMove_Telescope_To_Selection_6"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
-	connect(getGuiActions("actionMove_Telescope_To_Selection_7"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
-	connect(getGuiActions("actionMove_Telescope_To_Selection_8"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
-	connect(getGuiActions("actionMove_Telescope_To_Selection_9"), SIGNAL(triggered()), tmgr, SLOT(moveTelescopeToSelected()));
 
 	// connect the actor after setting the nightmode.
 	// StelApp::init() already set flagNightMode for us, don't do it twice!

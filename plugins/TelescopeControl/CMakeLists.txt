@@ -6,7 +6,7 @@ SET(TELESCOPE_CONTROL_VERSION "${TELESCOPE_CONTROL_MAJOR}.${TELESCOPE_CONTROL_MI
 #Don't forget to increment the version in device_models.json too,
 #otherwise the local copy will be overwritten each time Stellarium is started.
 
-SET(COMPATIBILITY_001003 1 CACHE BOOL "Make the plug-in compatible with Stellarium version 0.10.3.")
+SET(COMPATIBILITY_001003 0 CACHE BOOL "Make the plug-in compatible with Stellarium version 0.10.3.")
 
 IF(APPLE)
 	SET(CMAKE_INSTALL_PREFIX $ENV{HOME}/Library/Application\ Support/Stellarium)

@@ -136,6 +136,7 @@ QString TuiNodeDateTime::getDisplayText()
 
 void TuiNodeDateTime::incPart(int part, bool add)
 {
+	Q_UNUSED(part);
 	int diff = 1;
 	if (!add)
 		diff *= -1;

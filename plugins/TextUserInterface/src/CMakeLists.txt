@@ -28,9 +28,6 @@ SET(TextUserInterface_SRCS
 	TextUserInterface.hpp
 	TextUserInterface.cpp)
 
-SET(TextUserInterface_RES ../TextUserInterface.qrc)
-QT4_ADD_RESOURCES(TextUserInterface_RES_CXX ${TextUserInterface_RES})
-
 # Add here all the files which require moc compilation
 # that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
 SET(TextUserInterface_MOC_HDRS
@@ -53,7 +50,7 @@ SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INT
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)
-	ADD_LIBRARY(TextUserInterface MODULE ${TextUserInterface_SRCS} ${TextUserInterface_MOC_SRCS} ${TextUserInterface_RES_CXX})
+	ADD_LIBRARY(TextUserInterface MODULE ${TextUserInterface_SRCS} ${TextUserInterface_MOC_SRCS})
 	IF(APPLE)
 		FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
 		MARK_AS_ADVANCED(OPENGL_LIBRARY)
@@ -71,7 +68,7 @@ ENDIF()
 
 ############### For building the static library ######################
 IF(BUILD_STATIC_PLUGINS)
-	ADD_LIBRARY(TextUserInterface-static STATIC ${TextUserInterface_SRCS} ${TextUserInterface_MOC_SRCS} ${TextUserInterface_RES_CXX})
+	ADD_LIBRARY(TextUserInterface-static STATIC ${TextUserInterface_SRCS} ${TextUserInterface_MOC_SRCS})
 	# The library target "TextUserInterface-static" has a default OUTPUT_NAME of "TextUserInterface-static", so change it.
 	SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES OUTPUT_NAME "TextUserInterface")
 	TARGET_LINK_LIBRARIES(TextUserInterface-static ${extLinkerOption})
