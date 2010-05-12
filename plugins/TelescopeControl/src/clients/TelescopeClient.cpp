@@ -131,9 +131,10 @@ QString TelescopeClient::getInfoString(const StelCore* core, const InfoStringGro
 	return str;
 }
 
-#ifndef COMPATIBILITY_001003b //Duplicate function definition causes errors during static linking
-
 //! returns the current system time in microseconds since the Epoch
+//! Prior to revision 6308, it was necessary to put put this method in an
+//! #ifdef block, as duplicate function definition caused errors during static
+//! linking.
 qint64 getNow(void)
 {
 // At the moment this can't be done in a platform-independent way with Qt
@@ -148,8 +149,6 @@ qint64 getNow(void)
 	return tv.tv_sec * 1000000LL + tv.tv_usec;
 #endif
 }
-
-#endif //COMPATIBILITY_001003b
 
 TelescopeTCP::TelescopeTCP(const QString &name, const QString &params) :
                            TelescopeClient(name),
