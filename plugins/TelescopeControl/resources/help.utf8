@@ -3,7 +3,7 @@
 <h3>Contents</h3>
 <ul>
 <li><a href="#Abilities_and_limitations">Abilities and limitations</a></li>
-<li><a href="#originalfeature">Accessing the original telescope control feature</a></li>
+<li><a href="#originalfeature">The original telescope control feature</a></li>
 <li><a href="#usingthisplugin">Using this plug-in</a></li>
 <li><a href="#mainwindow">Main window ("Telescopes")</a></li>
 <li><a href="#configwindow">Telescope configuration window</a></li>
@@ -31,9 +31,8 @@
 <li>Even if you don't do it deliberately, a slew during daylight hours may cause your telescope to point at the sun on its way to the given destination, so it is strongly recommended to avoid using the telescope control feature before sunset without appropriate protection.</li></ul>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
-<h3><a name="originalfeature"/>Accessing the original telescope control feature</h3>
-<p>This plug-in disables Stellarium's original telescope control feature in order to avoid conflicts.</p>
-<p>If you want to set up Stellarium to control a telescope in the old way (by editing Stellarium's configuration file) or to use a third-party telescope control software that relies on it, you have to disable this plug-in by unmarking "Load at startup" in the "Plugins" tab in the "Configuration" window.</p>
+<h3><a name="originalfeature"/>The original telescope control feature</h3>
+<p>As of Stellarium 0.10.5, the original telescope control feature has been removed. There is no longer a way to control a telescope with Stellarium without this plug-in.</p>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
 <h3><a name="usingthisplugin"/>Using this plug-in</h3>
@@ -49,7 +48,7 @@
 <h3><a name="mainwindow"/>Main window ("Telescopes")</h3>
 <p>The plug-in's main window can be opened:</p>
 <ul><li>by pressing the "configure" button for the plug-in in the "Plugins" tab of Stellarium's Configuration window (opened by pressing <b>F2</b> or the respective button in the left toolbar).</li>
-<li>by pressing the "Configure telescopes..." button in the <a href="#slew_to">"Slew to" window</a> (opened by pressing <b>Alt+0</b> or the respective button on the bottom toolbar).</li></ul>
+<li>by pressing the "Configure telescopes..." button in the <a href="#slew_to">"Slew to" window</a> (opened by pressing <b>Ctrl+0</b> or the respective button on the bottom toolbar).</li></ul>
 <p>The <b>Telescopes</b> tab displays a list of the telescope connections that have been set up:</p>
 <ul><li>the number (<b>#</b>) column shows the number used to control this telescope. For example, for telescope #2, the shortcut is Ctrl+2.</li>
 <li>the <b>Status</b> column indicates if this connection is currently active or not. Unfortunately, there are some cases in which "Connected" is displayed when no working connection exists.</li>
@@ -109,7 +108,7 @@
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
 <h3><a name="slew_to"/>"Slew telescope to" window</h3>
-<p>The "Slew telescope to" window can be opened by pressing <b>Alt+0</b> or the respective button in the bottom toolbar.</p>
+<p>The "Slew telescope to" window can be opened by pressing <b>Ctrl+0</b> or the respective button in the bottom toolbar.</p>
 <p>It contains two fields for entering celestial coordinates, selectors for the preferred format (Hours-Minutes-Seconds, Degrees-Minutes-Seconds, or Decimal degrees), a drop-down list and two buttons.</p>
 <p>The drop-down list contains the names of the currently connected devices. If no devices are connected, it will remain empty, and the "Slew" button will be disabled.</p>
 <p>Pressing the <b>Slew</b> button slews the selected device to the selected set of coordinates. See the section about <a href="#commands">keyboard commands</a> below for other ways of controlling the device.</p>
@@ -120,7 +119,7 @@
 <p>Once a telescope is successfully started/connected, Stellarium displays a telescope reticle labelled with the telescope's name on its current position in the sky. The reticle is an object like every other in Stellarium - it can be selected with the mouse, it can be tracked and it appears as an object in the "Search" window.</p>
 <p><b>To point a device to an object:</b> Select an object (e.g. a star) and press the number of the device while holding down the <b>Ctrl</b> key. (For example, Ctrl+1 for telescope #1.) This will move the telescope to the selected object.</p>
 <p><b>To point a device to the center of the view:</b> Press the number of the device while holding down the <b>Alt</b> key. (For example, Alt+1 for telescope #1.) This will slew the device to the point in the center of the current view. (If you move the view after issuing the command, the target won't change unless you issue another command.)</p>
-<p><b>To point a device to a given set of coordinates:</b> Use the <a href="#slew_to">"Slew to" window</a> (press <b>Alt+0</b>).</p>
+<p><b>To point a device to a given set of coordinates:</b> Use the <a href="#slew_to">"Slew to" window</a> (press <b>Ctrl+0</b>).</p>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
 <h3><a name="devices"/>Supported devices</h3>
@@ -146,6 +145,7 @@
 
 <h3><a name="changelog"/>Changes since version 0.1.9</h3>
 <ul>
+<li>The original telescope control client feature has been removed from Stellarium.</li>
 <li>The Help section has been significantly expanded.</li>
 <li>A bug that made the plug-in send RA=0 for objects with RA between (12 and 24?) on Intel Macs has been fixed. (fix proposed by David Hulse)</li>
 <li>The style of the interface has been changed slightly; the telescope configuration dialog has been redesigned.</li>
