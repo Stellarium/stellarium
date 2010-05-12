@@ -126,9 +126,14 @@ void TelescopeControl::init()
 		}
 		
 		//Unload Stellarium's internal telescope control module
-		StelApp::getInstance().getModuleMgr().unloadModule("TelescopeMgr", false);//If the alsoDelete parameter is set to true, Stellarium crashes with a segmentation fault when an object is selected. TODO: Find out why.
-		//unloadModule() didn't work prior to revision 5058: the module unloaded OK, but Stellarium crashed later with a segmentation fault,
-		//because LandscapeMgr::getCallOrder() depended on the module's existence to return a value.
+		//(not necessary since revision 6308; remains as an example)
+		//StelApp::getInstance().getModuleMgr().unloadModule("TelescopeMgr", false);
+		/*If the alsoDelete parameter is set to true, Stellarium crashes with a
+		  segmentation fault when an object is selected. TODO: Find out why.
+		  unloadModule() didn't work prior to revision 5058: the module unloaded
+		  normally, but Stellarium crashed later with a segmentation fault,
+		  because LandscapeMgr::getCallOrder() depended on the module's
+		  existence to return a value.*/
 		
 		//Load and start all telescope clients
 		loadTelescopes();
@@ -155,12 +160,10 @@ void TelescopeControl::init()
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		
 		//Create telescope key bindings
+		 /* QAction-s with these key bindings existed in Stellarium prior to
+			revision 6311. Any future backports should account for that. */
 		QString group = N_("Telescope Control");
-		#ifdef COMPATIBILITY_001003b
-		//QAction-s with these key bindings already exist in Stellarium
-		//gui->getGuiActions("actionMove_Telescope_To_Selection_0")->setVisible(false);
-		#else
-		//gui->addGuiActions("actionMove_Telescope_To_Selection_0", N_("Move telescope #0 to selected object"), "Ctrl+0", group, false, false);
+
 		// "Slew to object" commands
 		gui->addGuiActions("actionMove_Telescope_To_Selection_1", N_("Move telescope #1 to selected object"), "Ctrl+1", group, false, false);
 		gui->addGuiActions("actionMove_Telescope_To_Selection_2", N_("Move telescope #2 to selected object"), "Ctrl+2", group, false, false);
@@ -171,7 +174,6 @@ void TelescopeControl::init()
 		gui->addGuiActions("actionMove_Telescope_To_Selection_7", N_("Move telescope #7 to selected object"), "Ctrl+7", group, false, false);
 		gui->addGuiActions("actionMove_Telescope_To_Selection_8", N_("Move telescope #8 to selected object"), "Ctrl+8", group, false, false);
 		gui->addGuiActions("actionMove_Telescope_To_Selection_9", N_("Move telescope #9 to selected object"), "Ctrl+9", group, false, false);
-		#endif //COMPATIBILITY_001003b
 
 		// "Slew to the center of the screen" commands
 		gui->addGuiActions("actionSlew_Telescope_To_Direction_1", N_("Move telescope #1 to the point currently in the center of the screen"), "Alt+1", group, false, false);
@@ -184,7 +186,6 @@ void TelescopeControl::init()
 		gui->addGuiActions("actionSlew_Telescope_To_Direction_8", N_("Move telescope #8 to the point currently in the center of the screen"), "Alt+8", group, false, false);
 		gui->addGuiActions("actionSlew_Telescope_To_Direction_9", N_("Move telescope #9 to the point currently in the center of the screen"), "Alt+9", group, false, false);
 		
-		//connect(gui->getGuiActions("actionMove_Telescope_To_Selection_0"), SIGNAL(triggered()), this, SLOT(moveTelescopeToSelected()));
 		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_1"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
 		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_2"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
 		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_3"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
@@ -210,11 +211,7 @@ void TelescopeControl::init()
 		slewDialog = new SlewDialog();
 		
 		//TODO: Think of a better keyboard shortcut
-		#ifdef COMPATIBILITY_001003b
-		gui->addGuiActions("actionShow_Slew_Window", N_("Move a telescope to a given set of coordinates"), "Alt+0", group, true, false);
-		#else
 		gui->addGuiActions("actionShow_Slew_Window", N_("Move a telescope to a given set of coordinates"), "Ctrl+0", group, true, false);
-		#endif //COMPATIBILITY_001003b
 		connect(gui->getGuiActions("actionShow_Slew_Window"), SIGNAL(toggled(bool)), slewDialog, SLOT(setVisible(bool)));
 		connect(slewDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Slew_Window"), SLOT(setChecked(bool)));
 		
