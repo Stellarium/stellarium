@@ -30,7 +30,7 @@
 #include <QDebug>
 #include <QStringList>
 
-StelObjectMgr::StelObjectMgr() : searchRadiusPixel(30.f)
+StelObjectMgr::StelObjectMgr() : searchRadiusPixel(30.f), distanceWeight(1.f)
 {
 	setObjectName("StelObjectMgr");
 	objectPointerVisibility = true;
@@ -180,7 +180,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	foreach (const StelObjectP& obj, candidates)
 	{
 		prj->project(obj->getJ2000EquatorialPos(core->getNavigator()), winpos);
-		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
+		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]))*distanceWeight;
 		float priority =  obj->getSelectPriority(core->getNavigator());
 		// qDebug() << (*iter).getShortInfoString(core->getNavigator()) << ": " << priority << " " << distance;
 		if (distance + priority < best_object_value)
