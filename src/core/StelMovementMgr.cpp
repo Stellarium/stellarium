@@ -111,7 +111,7 @@ void StelMovementMgr::setFlagLockEquPos(bool b)
 	flagLockEquPos=b;
 }
 
-void StelMovementMgr::setViewUpVectorJ2000(Vec3f& up)
+void StelMovementMgr::setViewUpVectorJ2000(const Vec3f& up)
 {
 	upVectorMountFrame = j2000ToMountFrame(up);
 }
