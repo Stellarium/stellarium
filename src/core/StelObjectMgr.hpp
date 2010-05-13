@@ -126,6 +126,10 @@ public:
 	//! Set the radius in pixel in which objects will be searched when clicking on a point in sky.
 	void setObjectSearchRadius(float radius) {searchRadiusPixel=radius;}
 
+	//! Set the weight of the distance factor when choosing the best object to select.
+	//! Default to 1.
+	void setDistanceWeight(float newDistanceWeight) {distanceWeight=newDistanceWeight;}
+
 private:
 	// The list of StelObjectModule that are referenced in Stellarium
 	QList<StelObjectModule*> objectsModule;
@@ -142,6 +146,9 @@ private:
 
 	// Radius in pixel in which objects will be searched when clicking on a point in sky.
 	float searchRadiusPixel;
+
+	// Weight of the distance factor when choosing the best object to select.
+	float distanceWeight;
 };
 
 #endif // _SELECTIONMGR_HPP_
