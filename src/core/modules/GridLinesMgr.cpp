@@ -24,7 +24,6 @@
 #include <QtOpenGL>
 
 #include "GridLinesMgr.hpp"
-#include "StelMovementMgr.hpp"
 #include "StelApp.hpp"
 #include "StelNavigator.hpp"
 #include "StelTranslator.hpp"
