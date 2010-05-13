@@ -145,22 +145,24 @@ bool Oculars::configureGui(bool show)
 //! Draw any parts on the screen which are for our module
 void Oculars::draw(StelCore* core)
 {
-	if (!flagShowOculars)
+	if (!flagShowOculars){
 		return;
+	}
+	
 	// Insure there is a selected ocular & telescope
 	if (selectedCCDIndex > CCDs.count()) {
 		qWarning() << "Oculars: the selected sensor index of " << selectedCCDIndex << " is greater than the sensor count of "
-		<< CCDs.count() << ". Module disabled!";
+				   << CCDs.count() << ". Module disabled!";
 		ready = false;
 	}
 	if (selectedOcularIndex > oculars.count()) {
 		qWarning() << "Oculars: the selected ocular index of " << selectedOcularIndex << " is greater than the ocular count of "
-		<< oculars.count() << ". Module disabled!";
+				   << oculars.count() << ". Module disabled!";
 		ready = false;
 	}
 	else if (selectedTelescopeIndex > telescopes.count()) {
 		qWarning() << "Oculars: the selected telescope index of " << selectedTelescopeIndex << " is greater than the telescope count of "
-		<< telescopes.count() << ". Module disabled!";
+				   << telescopes.count() << ". Module disabled!";
 		ready = false;
 	}
 
@@ -169,6 +171,7 @@ void Oculars::draw(StelCore* core)
 		if (flagShowCrosshairs)  {
 			drawCrosshairs();
 		}
+		// Paint the information in the upper-right hand corner
 		paintText(core);
 	}
 	newInstrument = false; // Now that it's been drawn once
@@ -951,7 +954,6 @@ void Oculars::unzoomOcular()
 
 void Oculars::zoom(bool rezoom)
 {
-
 	if (flagShowOculars)  {
 		if (!rezoom)  {
 			GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
@@ -985,14 +987,16 @@ void Oculars::zoomOcular()
 	gridManager->setFlagEquatorLine(false);
 	gridManager->setFlagEclipticLine(false);
 	gridManager->setFlagMeridianLine(false);
+	
 	movementManager->setFlagTracking(true);
 	movementManager->setFlagEnableZoomKeys(false);
 	movementManager->setFlagEnableMouseNavigation(false);
+	
 	// We won't always have a selected object
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected()) {
 		movementManager->
 			moveToJ2000(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()),
-						0.5,
+						0.0,
 						1);
 	}
 
@@ -1004,8 +1008,8 @@ void Oculars::zoomOcular()
 	core->setFlipVert(telescope->isVFlipped());
 
 	double actualFOV = ocular->getActualFOV(telescope);
-	// See if the mask was scaled
-	if (maxImageCircle > 0.0 && ocular->getExitCircle(telescope) > 0.0) {
+	// See if the mask was scaled; if so, correct the actualFOV.
+	if (useMaxImageCircle && ocular->getExitCircle(telescope) > 0.0) {
 		actualFOV = maxImageCircle * actualFOV / ocular->getExitCircle(telescope);
 	}
 	movementManager->zoomTo(actualFOV, 0.0);
