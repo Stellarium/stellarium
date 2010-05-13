@@ -132,8 +132,7 @@ private:
 	//! It does not ty to cope values over.
 	void validateIniFile();
 
-	//! Prepairs the values needed to zoom, and sets them into the syste,  Also recordd the state of
-	//! the views beforehand, so that it can be reet afterwords.
+	//! Recordd the state of the GridLinesMgr views beforehand, so that it can be reset afterwords.
 	//! @param rezoom if true, this zoom operation is starting from an already zoomed state.
 	//!		False for the original state.
 	void zoom(bool rezoom);
