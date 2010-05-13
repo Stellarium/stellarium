@@ -175,10 +175,10 @@ void OcularDialog::insertNewCCD()
 	QSqlField field1("name", QVariant::String);
 	QSqlField field2("resolution_x", QVariant::Int);
 	QSqlField field3("resolution_y", QVariant::Int);
-	QSqlField field4("chip_width", QVariant::Double);// FIXME: shouldn't this be QVariant::Float ?
-	QSqlField field5("chip_height", QVariant::Double);// FIXME: shouldn't this be QVariant::Float ?
-	QSqlField field6("pixel_width", QVariant::Double);// FIXME: shouldn't this be QVariant::Float ?
-	QSqlField field7("pixel_height", QVariant::Double);// FIXME: shouldn't this be QVariant::Float ?
+	QSqlField field4("chip_width", QVariant::Double);
+	QSqlField field5("chip_height", QVariant::Double);
+	QSqlField field6("pixel_width", QVariant::Double);
+	QSqlField field7("pixel_height", QVariant::Double);
 	field1.setValue(QVariant("New Sensor"));
 	field2.setValue(QVariant(4096));
 	field3.setValue(QVariant(4096));
