@@ -446,6 +446,7 @@ Vec3f LandscapeMgr::getColorCardinalPoints(void) const
 void LandscapeMgr::setFlagAtmosphere(bool b)
 {
 	atmosphere->setFlagShow(b);
+	StelApp::getInstance().getCore()->getSkyDrawer()->setFlagHasAtmosphere(b);
 }
 
 //! Get flag for displaying Atmosphere
