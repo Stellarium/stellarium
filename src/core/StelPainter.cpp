@@ -592,11 +592,22 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	if (psi>5)
 		psi = 5;
 
-	qPainter->translate(x, y);
-	if (prj->gravityLabels)
-		qPainter->rotate(-theta*180./M_PI);
-	qPainter->translate(xshift, yshift);
-	qPainter->scale(1, -1);
+	if (qPainter->paintEngine()->type()==QPaintEngine::OpenGL2)
+	{
+		qPainter->translate(x, prj->viewportXywh[3]-y);
+		if (prj->gravityLabels)
+			qPainter->rotate(theta*180./M_PI);
+		qPainter->translate(xshift, -yshift);
+	}
+	else
+	{
+		qPainter->translate(x, y);
+		if (prj->gravityLabels)
+			qPainter->rotate(-theta*180./M_PI);
+		qPainter->translate(xshift, yshift);
+		qPainter->scale(1, -1);
+	}
+
 	for (int i=0;i<ws.length();++i)
 	{
 		qPainter->drawText(0,0,ws[i]);
