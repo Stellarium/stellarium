@@ -159,6 +159,10 @@ public slots:
 	//! Get the current value of eye adaptation flag
 	bool getFlagLuminanceAdaptation(void) const {return flagLuminanceAdaptation;}
 
+	//! Informing the drawer whether atmosphere is displayed.
+	//! This is used to avoid twinkling/simulate extinction/refraction.
+	void setFlagHasAtmosphere(bool b) {flagHasAtmosphere=b;}
+
 private:
 	// Debug
 	float reverseComputeRCMag(float rmag) const;
@@ -216,6 +220,10 @@ private:
 	bool flagPointStar;
 	bool flagStarTwinkle;
 	float twinkleAmount;
+
+	//! Informing the drawer whether atmosphere is displayed.
+	//! This is used to avoid twinkling/simulate extinction/refraction.
+	bool flagHasAtmosphere;
 
 	float starRelativeScale;
 	float starAbsoluteScaleF;
