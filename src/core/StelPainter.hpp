@@ -237,7 +237,7 @@ public:
 	//! @param radius the radius of the disk.
 	//! @param innerFanSlices the number of slices.
 	//! @param level the numbe of concentric circles.
-	void sFanDisk(float radius, int innerFanSlices, int level);
+	static void computeFanDisk(float radius, int innerFanSlices, int level, QVector<double>& vertexArr, QVector<float>& texCoordArr);
 
 	//! Draw a ring with a radial texturing.
 	void sRing(float rMin, float rMax, int slices, int stacks, int orientInside);

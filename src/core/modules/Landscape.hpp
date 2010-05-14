@@ -122,6 +122,8 @@ private:
 	void drawFog(StelCore* core, StelPainter&) const;
 	void drawDecor(StelCore* core, StelPainter&) const;
 	void drawGround(StelCore* core, StelPainter&) const;
+	QVector<double> groundVertexArr;
+	QVector<float> groundTexCoordArr;
 	StelTextureSP* sideTexs;
 	int nbSideTexs;
 	int nbSide;

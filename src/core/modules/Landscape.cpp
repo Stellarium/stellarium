@@ -198,6 +198,24 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	drawGroundFirst    = landscapeIni.value("landscape/draw_ground_first", 0).toInt();
 	tanMode            = landscapeIni.value("landscape/tan_mode", false).toBool();
 	calibrated         = landscapeIni.value("landscape/calibrated", false).toBool();
+
+	// Precompute the vertex arrays for ground display
+
+	// Make slices_per_side=(3<<K) so that the innermost polygon of the fandisk becomes a triangle:
+	int slices_per_side = 3*64/(nbDecorRepeat*nbSide);
+	if (slices_per_side<=0)
+		slices_per_side = 1;
+	// draw a fan disk instead of a ordinary disk to that the inner slices
+	// are not so slender. When they are too slender, culling errors occur
+	// in cylinder projection mode.
+	int slices_inside = nbSide*slices_per_side*nbDecorRepeat;
+	int level = 0;
+	while ((slices_inside&1)==0 && slices_inside > 4)
+	{
+		++level;
+		slices_inside>>=1;
+	}
+	StelPainter::computeFanDisk(radius, slices_inside, level, groundVertexArr, groundTexCoordArr);
 }
 
 void LandscapeOldStyle::draw(StelCore* core)
@@ -343,22 +361,8 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
 	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 	groundTex->bind();
-	  // make slices_per_side=(3<<K) so that the innermost polygon of the
-	  // fandisk becomes a triangle:
-	int slices_per_side = 3*64/(nbDecorRepeat*nbSide);
-	if (slices_per_side<=0) slices_per_side = 1;
-
-	// draw a fan disk instead of a ordinary disk to that the inner slices
-	// are not so slender. When they are too slender, culling errors occur
-	// in cylinder projection mode.
-	int slices_inside = nbSide*slices_per_side*nbDecorRepeat;
-	int level = 0;
-	while ((slices_inside&1)==0 && slices_inside > 4)
-	{
-		++level;
-		slices_inside>>=1;
-	}
-	sPainter.sFanDisk(radius,slices_inside,level);
+	sPainter.setArrays((Vec3d*)groundVertexArr.constData(), (Vec2f*)groundTexCoordArr.constData());
+	sPainter.drawFromArray(StelPainter::Triangles, groundVertexArr.size()/3);
 }
 
 LandscapeFisheye::LandscapeFisheye(float _radius) : Landscape(_radius)
