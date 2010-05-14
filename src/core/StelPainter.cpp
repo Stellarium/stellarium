@@ -338,7 +338,7 @@ static void ComputeCosSinRho(float phi, int segments)
 }
 
 
-void StelPainter::sFanDisk(float radius, int innerFanSlices, int level)
+void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QVector<double>& vertexArr, QVector<float>& texCoordArr)
 {
 	Q_ASSERT(level<64);
 	float rad[64];
@@ -354,15 +354,13 @@ void StelPainter::sFanDisk(float radius, int innerFanSlices, int level)
 	ComputeCosSinTheta(dtheta,slices);
 	float* cos_sin_theta_p;
 	int slices_step = 2;
-	static QVector<double> vertexArr;
-	static QVector<float> texCoordArr;
 	float x,y,xa,ya;
 	radius*=2.f;
 	vertexArr.resize(0);
 	texCoordArr.resize(0);
 	for (i=level;i>0;--i,slices_step<<=1)
 	{
-		for (j=0,cos_sin_theta_p=cos_sin_theta; j<slices; j+=slices_step,cos_sin_theta_p+=2*slices_step)
+		for (j=0,cos_sin_theta_p=cos_sin_theta; j<slices-1; j+=slices_step,cos_sin_theta_p+=2*slices_step)
 		{
 			xa = rad[i]*cos_sin_theta_p[slices_step];
 			ya = rad[i]*cos_sin_theta_p[slices_step+1];
@@ -400,24 +398,25 @@ void StelPainter::sFanDisk(float radius, int innerFanSlices, int level)
 			vertexArr << x << y << 0;
 		}
 	}
-	setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
-	drawFromArray(Triangles, vertexArr.size()/3);
-
 	// draw the inner polygon
 	slices_step>>=1;
-	vertexArr.resize(0);
-	texCoordArr.resize(0);
-	texCoordArr << 0.5f << 0.5f;
-	vertexArr << 0 << 0 << 0;
-	for (j=0,cos_sin_theta_p=cos_sin_theta;	j<=slices; j+=slices_step,cos_sin_theta_p+=2*slices_step)
+	cos_sin_theta_p=cos_sin_theta;
+	j=0;
+	while (j<slices)
 	{
+		texCoordArr << 0.5f << 0.5f;
+		vertexArr << 0 << 0 << 0;
+		x = rad[0]*cos_sin_theta_p[0];
+		y = rad[0]*cos_sin_theta_p[1];
+		texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+		vertexArr << x << y << 0;
+		j+=slices_step;
+		cos_sin_theta_p+=2*slices_step;
 		x = rad[0]*cos_sin_theta_p[0];
 		y = rad[0]*cos_sin_theta_p[1];
 		texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
 		vertexArr << x << y << 0;
 	}
-	setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
-	drawFromArray(TriangleFan, vertexArr.size()/3);
 }
 
 void StelPainter::sRing(float rMin, float rMax, int slices, int stacks, int orientInside)
@@ -595,15 +594,13 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	if (qPainter->paintEngine()->type()==QPaintEngine::OpenGL2)
 	{
 		qPainter->translate(x, prj->viewportXywh[3]-y);
-		if (prj->gravityLabels)
-			qPainter->rotate(theta*180./M_PI);
+		qPainter->rotate(theta*180./M_PI);
 		qPainter->translate(xshift, -yshift);
 	}
 	else
 	{
 		qPainter->translate(x, y);
-		if (prj->gravityLabels)
-			qPainter->rotate(-theta*180./M_PI);
+		qPainter->rotate(-theta*180./M_PI);
 		qPainter->translate(xshift, yshift);
 		qPainter->scale(1, -1);
 	}
