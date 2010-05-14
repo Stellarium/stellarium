@@ -90,13 +90,12 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 				oss << (sciName=="" ? "" : sciName);
 				if (commonNameI18!="" && sciName!="")
 					oss << ")";
-
 			}
 		}
 		if ((flags&CatalogNumber) && (flags&Name) && (commonNameI18!="" || sciName!=""))
 			oss << " - ";
 
-		if (flags&CatalogNumber)
+		if (flags&CatalogNumber || ((flags&Name) && (commonNameI18.isEmpty() || sciName.isEmpty())))
 			oss << "HIP " << s->hip;
 		if (s->componentIds)
 			oss << " " << StarMgr::convertToComponentIds(s->componentIds);
