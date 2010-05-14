@@ -80,6 +80,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		const QString commonNameI18 = StarMgr::getCommonName(s->hip);
 		const QString sciName = StarMgr::getSciName(s->hip);
 
+		bool nameWasEmpty=true;
 		if (flags&Name)
 		{
 			if (commonNameI18!="" || sciName!="")
@@ -90,12 +91,13 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 				oss << (sciName=="" ? "" : sciName);
 				if (commonNameI18!="" && sciName!="")
 					oss << ")";
+				nameWasEmpty=false;
 			}
 		}
-		if ((flags&CatalogNumber) && (flags&Name) && (commonNameI18!="" || sciName!=""))
+		if ((flags&CatalogNumber) && (flags&Name) && !nameWasEmpty)
 			oss << " - ";
 
-		if (flags&CatalogNumber || ((flags&Name) && (commonNameI18.isEmpty() || sciName.isEmpty())))
+		if (flags&CatalogNumber || (nameWasEmpty && (flags&Name)))
 			oss << "HIP " << s->hip;
 		if (s->componentIds)
 			oss << " " << StarMgr::convertToComponentIds(s->componentIds);
