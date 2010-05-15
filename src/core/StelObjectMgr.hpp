@@ -45,11 +45,8 @@ public:
 	virtual void init() {;}
 	virtual void draw(StelCore*) {;}
 	virtual void update(double) {;}
-	//! Handle mouse click events.
-	virtual void handleMouseClicks(class QMouseEvent* event);
 
 	///////////////////////////////////////////////////////////////////////////
-
 	//! Add a new StelObject manager into the list of supported modules.
 	//! Registered modules can have selected objects
 	void registerStelObjectMgr(StelObjectModule* mgr);
