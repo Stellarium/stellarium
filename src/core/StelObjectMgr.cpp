@@ -41,46 +41,6 @@ StelObjectMgr::~StelObjectMgr()
 }
 
 /*************************************************************************
- Handle mouse click events.
-*************************************************************************/
-void StelObjectMgr::handleMouseClicks(QMouseEvent* event)
-{
-	// Deselect the selected object
-	if (event->button()==Qt::RightButton && event->type()==QEvent::MouseButtonRelease)
-	{
-		unSelect();
-		event->accept();
-		return;
-	}
-	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-	if (event->button()==Qt::LeftButton && event->type()==QEvent::MouseButtonRelease && !mvmgr->getHasDragged())
-	{
-#ifdef Q_OS_MAC
-		// CTRL + left clic = right clic for 1 button mouse
-		if (event->modifiers().testFlag(Qt::ControlModifier))
-		{
-			unSelect();
-			event->accept();
-			return;
-		}
-
-		// Try to select object at that position
-		findAndSelect(StelApp::getInstance().getCore(), event->x(), event->y(),
-			event->modifiers().testFlag(Qt::MetaModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
-#else
-		findAndSelect(StelApp::getInstance().getCore(), event->x(), event->y(),
-			event->modifiers().testFlag(Qt::ControlModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
-#endif
-		// If an object was selected update informations
-		if (getWasSelected())
-		{
-			mvmgr->setFlagTracking(false);
-		}
-	}
-	return;
-}
-
-/*************************************************************************
  Add a new StelObject manager into the list of supported modules.
 *************************************************************************/
 void StelObjectMgr::registerStelObjectMgr(StelObjectModule* mgr)

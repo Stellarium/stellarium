@@ -263,7 +263,17 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 {
 	switch (event->button())
 	{
-		case Qt::RightButton : break;
+		case Qt::RightButton:
+		{
+			if (event->type()==QEvent::MouseButtonRelease)
+			{
+				// Deselect the selected object
+				StelApp::getInstance().getStelObjectMgr().unSelect();
+				event->accept();
+				return;
+			}
+			break;
+		}
 		case Qt::LeftButton :
 			if (event->type()==QEvent::MouseButtonPress)
 			{
@@ -275,7 +285,6 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 				if (dragTimeMode)
 				{
 					timeDragHistory.clear();
-					core->getNavigator()->setTimeRate(0);
 					addTimeDragPoint();
 				}
 				event->accept();
@@ -283,37 +292,58 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 			}
 			else
 			{
-				if (isDragging)
+				isDragging = false;
+				if (hasDragged)
 				{
-					isDragging = false;
-					if (hasDragged)
+					event->accept();
+					if (dragTimeMode)
 					{
-						event->accept();
-						if (dragTimeMode)
+						addTimeDragPoint();
+						if (timeDragHistory.size()>=3)
 						{
-							addTimeDragPoint();
-							if (timeDragHistory.size()>=3)
+							const double deltaT = timeDragHistory.last().first-timeDragHistory.first().first;
+							const double deltaJd = timeDragHistory.last().second-timeDragHistory.first().second;
+							const double newTimeRate = deltaJd/deltaT;
+							if (deltaT>0.00000001)
 							{
-								const double deltaT = timeDragHistory.last().first-timeDragHistory.first().first;
-								const double deltaJd = timeDragHistory.last().second-timeDragHistory.first().second;
-								const double newTimeRate = deltaJd/deltaT;
-								if (deltaT>0.00000001)
-								{
-									if (newTimeRate>=0)
-										core->getNavigator()->setTimeRate(qMax(newTimeRate, JD_SECOND));
-									else
-										core->getNavigator()->setTimeRate(qMin(newTimeRate, -JD_SECOND));
-								}
+								if (newTimeRate>=0)
+									core->getNavigator()->setTimeRate(qMax(newTimeRate, JD_SECOND));
 								else
-									core->getNavigator()->setTimeRate(beforeTimeDragTimeRate);
+									core->getNavigator()->setTimeRate(qMin(newTimeRate, -JD_SECOND));
 							}
 							else
 								core->getNavigator()->setTimeRate(beforeTimeDragTimeRate);
 						}
+						else
+							core->getNavigator()->setTimeRate(beforeTimeDragTimeRate);
+					}
+					return;
+				}
+				else
+				{
+					// It's a normal click release
+			#ifdef Q_OS_MAC
+					// CTRL + left clic = right clic for 1 button mouse
+					if (event->modifiers().testFlag(Qt::ControlModifier))
+					{
+						StelApp::getInstance().getStelObjectMgr().unSelect();
+						event->accept();
 						return;
 					}
-					else
-						return;
+
+					// Try to select object at that position
+					StelApp::getInstance().getStelObjectMgr().findAndSelect(StelApp::getInstance().getCore(), event->x(), event->y(),
+						event->modifiers().testFlag(Qt::MetaModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
+			#else
+					StelApp::getInstance().getStelObjectMgr().findAndSelect(StelApp::getInstance().getCore(), event->x(), event->y(),
+						event->modifiers().testFlag(Qt::ControlModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
+			#endif
+					if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
+					{
+						setFlagTracking(false);
+					}
+					event->accept();
+					return;
 				}
 			}
 			break;
@@ -770,6 +800,7 @@ void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 {
 	if (dragTimeMode)
 	{
+		core->getNavigator()->setTimeRate(0);
 		Vec3d v1, v2;
 		const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
 		prj->unProject(x2,y2, v2);
