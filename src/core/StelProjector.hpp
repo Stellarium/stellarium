@@ -155,6 +155,14 @@ public:
 			pos[1]<=(viewportXywh[1] + viewportXywh[3]) && pos[0]<=(viewportXywh[0] + viewportXywh[2]));
 	}
 
+	//! Check to see if a 2d position is inside the viewport.
+	//! TODO Optimize by storing viewportXywh[1] + viewportXywh[3] and viewportXywh[0] + viewportXywh[2] already computed
+	bool checkInViewport(const Vec3f& pos) const
+	{
+		return (pos[1]>=viewportXywh[1] && pos[0]>=viewportXywh[0] &&
+			pos[1]<=(viewportXywh[1] + viewportXywh[3]) && pos[0]<=(viewportXywh[0] + viewportXywh[2]));
+	}
+
 	//! Return the position where the 2 2D point p1 and p2 cross the viewport edge
 	//! P1 must be inside the viewport and P2 outside (check with checkInViewport() before calling this method)
 	Vec3d viewPortIntersect(const Vec3d& p1, const Vec3d& p2) const
@@ -183,18 +191,41 @@ public:
 		return projectInPlace(win);
 	}
 
+	//! Project the vector v from the current frame into the viewport.
+	//! @param v the vector in the current frame.
+	//! @param win the projected vector in the viewport 2D frame.
+	//! @return true if the projected coordinate is valid.
+	inline bool project(const Vec3f& v, Vec3f& win) const
+	{
+		win = v;
+		return projectInPlace(win);
+	}
+
 	virtual void project(int n, const Vec3d* in, Vec3f* out)
 	{
 		Vec3d v;
-		for (int i = 0; i < n; ++i)
+		for (int i = 0; i < n; ++i, ++out)
 		{
 			v = in[i];
 			v.transfo4d(modelViewMatrix);
-			out[i].set(v[0], v[1], v[2]);
-			forward(out[i]);
-			out[i][0] = viewportCenter[0] + flipHorz * pixelPerRad * out[i][0];
-			out[i][1] = viewportCenter[1] + flipVert * pixelPerRad * out[i][1];
-			out[i][2] = (out[i][2] - zNear) * oneOverZNearMinusZFar;
+			out->set(v[0], v[1], v[2]);
+			forward(*out);
+			out->set(viewportCenter[0] + flipHorz * pixelPerRad * (*out)[0],
+				viewportCenter[1] + flipVert * pixelPerRad * (*out)[1],
+				((*out)[2] - zNear) * oneOverZNearMinusZFar);
+		}
+	}
+
+	virtual void project(int n, const Vec3f* in, Vec3f* out)
+	{
+		for (int i = 0; i < n; ++i, ++out)
+		{
+			*out=in[i];
+			out->transfo4d(modelViewMatrixf);
+			forward(*out);
+			out->set(viewportCenter[0] + flipHorz * pixelPerRad * (*out)[0],
+				viewportCenter[1] + flipVert * pixelPerRad * (*out)[1],
+				((*out)[2] - zNear) * oneOverZNearMinusZFar);
 		}
 	}
 
@@ -218,10 +249,33 @@ public:
 	}
 
 	//! Project the vector v from the current frame into the viewport.
+	//! @param v the vector in the current frame.
+	//! @return true if the projected coordinate is valid.
+	inline bool projectInPlace(Vec3f& v) const
+	{
+		v.transfo4d(modelViewMatrixf);
+		const bool rval = forward(v);
+		// very important: even when the projected point comes from an
+		// invisible region of the sky (rval=false), we must finish
+		// reprojecting, so that OpenGl can successfully eliminate
+		// polygons by culling.
+		v[0] = viewportCenter[0] + flipHorz * pixelPerRad * v[0];
+		v[1] = viewportCenter[1] + flipVert * pixelPerRad * v[1];
+		v[2] = (v[2] - zNear) * oneOverZNearMinusZFar;
+		return rval;
+	}
+
+	//! Project the vector v from the current frame into the viewport.
 	//! @param v the direction vector in the current frame. Does not need to be normalized.
 	//! @param win the projected vector in the viewport 2D frame. win[0] and win[1] are in screen pixels, win[2] is unused.
 	//! @return true if the projected point is inside the viewport.
 	bool projectCheck(const Vec3d& v, Vec3d& win) const {return (project(v, win) && checkInViewport(win));}
+
+	//! Project the vector v from the current frame into the viewport.
+	//! @param v the direction vector in the current frame. Does not need to be normalized.
+	//! @param win the projected vector in the viewport 2D frame. win[0] and win[1] are in screen pixels, win[2] is unused.
+	//! @return true if the projected point is inside the viewport.
+	bool projectCheck(const Vec3f& v, Vec3f& win) const {return (project(v, win) && checkInViewport(win));}
 
 	//! Project the vector v from the viewport frame into the current frame.
 	//! @param win the vector in the viewport 2D frame. win[0] and win[1] are in screen pixels, win[2] is unused.

@@ -449,9 +449,9 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 	nbPointSources = 0;
 }
 
-static Vec3d win;
+static Vec3f win;
 // Draw a point source halo.
-bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const float rcMag[2], const Vec3f& color, bool checkInScreen)
+bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const float rcMag[2], const Vec3f& color, bool checkInScreen)
 {
 	Q_ASSERT(sPainter);
 
