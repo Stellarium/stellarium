@@ -54,6 +54,8 @@ void MilkyWay::init()
 	tex = StelApp::getInstance().getTextureManager().createTexture("textures/milkyway.png");
 	setFlagShow(conf->value("astro/flag_milky_way").toBool());
 	setIntensity(conf->value("astro/milky_way_intensity",1.f).toFloat());
+
+	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.f,1.f,20,20,1));
 }
 
 
@@ -81,7 +83,7 @@ void MilkyWay::draw(StelCore* core)
 	else
 		c = Vec3f(0.34165f, 0.429666f, 0.63586f);
 
-	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(13.5);
+	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(13.5f);
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
@@ -102,6 +104,6 @@ void MilkyWay::draw(StelCore* core)
 	sPainter.enableTexture2d(true);
 	glDisable(GL_BLEND);
 	tex->bind();
-	sPainter.sSphere(1.f,1.f,20,20,1);
+	sPainter.drawStelVertexArray(*vertexArray);
 	glDisable(GL_CULL_FACE);
 }
