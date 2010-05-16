@@ -138,7 +138,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 				Vec2f &texture_point(texture_point_array[(j*(max_x+1)+i)]);
 				vertex_point.ver_xy[0] = ((i == 0) ? 0.f : (i == max_x) ? screen_w : (i-0.5f*(j&1))*step_x);
 				vertex_point.ver_xy[1] = j*step_y;
-				Vec3d v,vX,vY;
+				Vec3f v,vX,vY;
 				bool rc = calc.retransform(
 							  (vertex_point.ver_xy[0]-0.5f*screen_w) / screen_h,
 							  (vertex_point.ver_xy[1]-0.5f*screen_h) / screen_h, v,vX,vY);
