@@ -146,6 +146,9 @@ void StelTranslator::reload()
 //! Convert from ISO639-1 2 letters langage code to native language name
 QString StelTranslator::iso639_1CodeToNativeName(const QString& languageCode)
 {
+	if (languageCode=="C")
+		return "English";
+
 	QLocale loc(languageCode);
 	QString l = loc.name();
 	// There is a QLocale for this code.  This should be the case for most
