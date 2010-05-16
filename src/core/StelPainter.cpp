@@ -1609,6 +1609,72 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
 }
 
+StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
+{
+	StelVertexArray result(StelVertexArray::Triangles);
+	GLfloat x, y, z;
+	GLfloat s=0.f, t=0.f;
+	GLint i, j;
+	GLfloat nsign;
+	if (orientInside)
+	{
+		nsign = -1.f;
+		t=0.f; // from inside texture is reversed
+	}
+	else
+	{
+		nsign = 1.f;
+		t=1.f;
+	}
+
+	const float drho = M_PI / stacks;
+	Q_ASSERT(stacks<=MAX_STACKS);
+	ComputeCosSinRho(drho,stacks);
+	float* cos_sin_rho_p;
+
+	const float dtheta = 2.f * M_PI / slices;
+	Q_ASSERT(slices<=MAX_SLICES);
+	ComputeCosSinTheta(dtheta,slices);
+	const float *cos_sin_theta_p;
+
+	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
+	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
+	// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
+	// If the texture is flipped, we iterate the coordinates backward.
+	const GLfloat ds = (flipTexture ? -1.f : 1.f) / slices;
+	const GLfloat dt = nsign / stacks; // from inside texture is reversed
+
+	// draw intermediate  as quad strips
+	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
+	{
+		s = !flipTexture ? 0.f : 1.f;
+		for (j = 0,cos_sin_theta_p = cos_sin_theta; j<=slices;++j,cos_sin_theta_p+=2)
+		{
+			x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
+			y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
+			z = nsign * cos_sin_rho_p[0];
+			result.texCoords << Vec2f(s,t);
+			result.vertex << Vec3d(x*radius, y*radius, z*oneMinusOblateness*radius);
+			x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
+			y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
+			z = nsign * cos_sin_rho_p[2];
+			result.texCoords << Vec2f(s, t-dt);
+			result.vertex << Vec3d(x*radius, y*radius, z*oneMinusOblateness*radius);
+			s += ds;
+		}
+		unsigned int offset = i*(slices+1)*2;
+		for (j = 2;j<slices*2+2;j+=2)
+		{
+			result.indices << offset+j-2 << offset+j-1 << offset+j;
+			result.indices << offset+j << offset+j-1 << offset+j+1;
+		}
+		t -= dt;
+	}
+	return result;
+	//setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
+	//drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
+}
+
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
 void StelPainter::sCylinder(float radius, float height, int slices, int orientInside)
 {
