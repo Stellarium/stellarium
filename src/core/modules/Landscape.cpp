@@ -200,7 +200,6 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	calibrated         = landscapeIni.value("landscape/calibrated", false).toBool();
 
 	// Precompute the vertex arrays for ground display
-
 	// Make slices_per_side=(3<<K) so that the innermost polygon of the fandisk becomes a triangle:
 	int slices_per_side = 3*64/(nbDecorRepeat*nbSide);
 	if (slices_per_side<=0)
@@ -216,6 +215,74 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		slices_inside>>=1;
 	}
 	StelPainter::computeFanDisk(radius, slices_inside, level, groundVertexArr, groundTexCoordArr);
+
+
+	// Precompute the vertex arrays for side display
+	static const int stacks = (calibrated ? 16 : 8); // GZ: 8->16, I need better precision.
+	// make slices_per_side=(3<<K) so that the innermost polygon of the
+	// fandisk becomes a triangle:
+	const double z0 = calibrated ?
+	// GZ: For calibrated, we use z=decorAngleShift...(decorAltAngle-decorAngleShift), but we must compute the tan in the loop.
+	decorAngleShift : (tanMode ? radius * std::tan(decorAngleShift*M_PI/180.f) : radius * std::sin(decorAngleShift*M_PI/180.f));
+	// GZ: The old formula is completely meaningless for photos with opening angle >90,
+	// and most likely also not what was intended for other images.
+	// Note that GZ fills this value with a different meaning!
+	const double d_z = calibrated ? decorAltAngle/stacks : (tanMode ? radius*std::tan(decorAltAngle*M_PI/180.f)/stacks : radius*std::sin(decorAltAngle*M_PI/180.0)/stacks);
+
+	const float alpha = 2.f*M_PI/(nbDecorRepeat*nbSide*slices_per_side);
+	const float ca = std::cos(alpha);
+	const float sa = std::sin(alpha);
+	float y0 = radius*std::cos((angleRotateZ+angleRotateZOffset)*M_PI/180.f);
+	float x0 = radius*std::sin((angleRotateZ+angleRotateZOffset)*M_PI/180.f);
+
+	LOSSide precompSide;
+	precompSide.arr.primitiveType=StelVertexArray::Triangles;
+	for (int n=0;n<nbDecorRepeat;n++)
+	{
+		for (int i=0;i<nbSide;i++)
+		{
+			precompSide.arr.vertex.resize(0);
+			precompSide.arr.texCoords.resize(0);
+			precompSide.arr.indices.resize(0);
+			precompSide.tex=sideTexs[i];
+
+			float tx0 = sides[i].texCoords[0];
+			const float d_tx0 = (sides[i].texCoords[2]-sides[i].texCoords[0]) / slices_per_side;
+			const float d_ty = (sides[i].texCoords[3]-sides[i].texCoords[1]) / stacks;
+			for (int j=0;j<slices_per_side;j++)
+			{
+				const float y1 = y0*ca - x0*sa;
+				const float x1 = y0*sa + x0*ca;
+				const float tx1 = tx0 + d_tx0;
+				float z = z0;
+				float ty0 = sides[i].texCoords[1];
+				for (int k=0;k<=stacks*2;k+=2)
+				{
+					precompSide.arr.texCoords << Vec2f(tx0, ty0) << Vec2f(tx1, ty0);
+					if (calibrated)
+					{
+						float tanZ=radius * std::tan(z*M_PI/180.f);
+						precompSide.arr.vertex << Vec3d(x0, y0, tanZ) << Vec3d(x1, y1, tanZ);
+					} else
+					{
+						precompSide.arr.vertex << Vec3d(x0, y0, z) << Vec3d(x1, y1, z);
+					}
+					z += d_z;
+					ty0 += d_ty;
+				}
+				unsigned int offset = j*(stacks+1)*2;
+				for (int k = 2;k<stacks*2+2;k+=2)
+				{
+					precompSide.arr.indices << offset+k-2 << offset+k-1 << offset+k;
+					precompSide.arr.indices << offset+k << offset+k-1 << offset+k+1;
+				}
+				y0 = y1;
+				x0 = x1;
+				tx0 = tx1;
+			}
+			precomputedSides.append(precompSide);
+		}
+	}
 }
 
 void LandscapeOldStyle::draw(StelCore* core)
@@ -273,76 +340,11 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
 		return;
 	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
 	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
-	static const int stacks = (calibrated ? 16 : 8); // GZ: 8->16, I need better precision.
-	  // make slices_per_side=(3<<K) so that the innermost polygon of the
-	  // fandisk becomes a triangle:
-	int slices_per_side = 3*64/(nbDecorRepeat*nbSide);
-	if (slices_per_side<=0) slices_per_side = 1;
-	const double z0 =
-	  calibrated ?
-	  // GZ: For calibrated, we use z=decorAngleShift...(decorAltAngle-decorAngleShift), but we must compute the tan in the loop.
-	  decorAngleShift :
-	  (tanMode ?
-	   radius * std::tan(decorAngleShift*M_PI/180.0) :
-	   radius * std::sin(decorAngleShift*M_PI/180.0));
-	// GZ: The old formula is completely meaningless for photos with opening angle >90,
-	// and most likely also not what was intended for other images.
-	// Note that GZ fills this value with a different meaning!
-	const double d_z = calibrated ? decorAltAngle/stacks : (tanMode ? radius*std::tan(decorAltAngle*M_PI/180.0)/stacks : radius*std::sin(decorAltAngle*M_PI/180.0)/stacks);
 
-	// N.B. GZ had doubles for the next 5, but floats may well be enough.
-	const float alpha = 2.f*M_PI/(nbDecorRepeat*nbSide*slices_per_side);
-	const float ca = std::cos(alpha);
-	const float sa = std::sin(alpha);
-	float y0 = radius*std::cos((angleRotateZ+angleRotateZOffset)*M_PI/180.0);
-	float x0 = radius*std::sin((angleRotateZ+angleRotateZOffset)*M_PI/180.0);
-
-	static QVector<Vec2f> texCoordsArray;
-	static QVector<Vec3d> vertexArray;
-	static QVector<unsigned int> indiceArray;
-	for (int n=0;n<nbDecorRepeat;n++)
+	foreach (const LOSSide& side, precomputedSides)
 	{
-		for (int i=0;i<nbSide;i++)
-		{
-			texCoordsArray.resize(0);
-			vertexArray.resize(0);
-			indiceArray.resize(0);
-			sides[i].tex->bind();
-			float tx0 = sides[i].texCoords[0];
-			const float d_tx0 = (sides[i].texCoords[2]-sides[i].texCoords[0]) / slices_per_side;
-			const float d_ty = (sides[i].texCoords[3]-sides[i].texCoords[1]) / stacks;
-			for (int j=0;j<slices_per_side;j++)
-			{
-				const float y1 = y0*ca - x0*sa;
-				const float x1 = y0*sa + x0*ca;
-				const float tx1 = tx0 + d_tx0;
-				float z = z0;
-				float ty0 = sides[i].texCoords[1];
-				for (int k=0;k<=stacks*2;k+=2)
-				{
-					texCoordsArray << Vec2f(tx0, ty0) << Vec2f(tx1, ty0);
-					if (calibrated){
-					  double tanZ=radius * std::tan(z*M_PI/180.0);
-					  vertexArray << Vec3d(x0, y0, tanZ) << Vec3d(x1, y1, tanZ);
-					}else{
-					  vertexArray << Vec3d(x0, y0, z) << Vec3d(x1, y1, z);
-					}
-					z += d_z;
-					ty0 += d_ty;
-				}
-				unsigned int offset = j*(stacks+1)*2;
-				for (int k = 2;k<stacks*2+2;k+=2)
-				{
-					indiceArray << offset+k-2 << offset+k-1 << offset+k;
-					indiceArray << offset+k << offset+k-1 << offset+k+1;
-				}
-				y0 = y1;
-				x0 = x1;
-				tx0 = tx1;
-			}
-			StelVertexArray array(vertexArray, StelVertexArray::Triangles, texCoordsArray, indiceArray);
-			sPainter.drawSphericalTriangles(array, true, NULL, false);
-		}
+		side.tex->bind();
+		sPainter.drawSphericalTriangles(side.arr, true, NULL, false);
 	}
 }
 
