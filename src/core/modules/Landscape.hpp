@@ -142,6 +142,13 @@ private:
 	int drawGroundFirst;
 	bool tanMode;		// Whether the angles should be converted using tan instead of sin
 	bool calibrated;	// if true, the documented altitudes are inded correct (the original code is buggy!)
+	struct LOSSide
+	{
+		StelVertexArray arr;
+		StelTextureSP tex;
+	};
+
+	QList<LOSSide> precomputedSides;
 };
 
 class LandscapeFisheye : public Landscape
