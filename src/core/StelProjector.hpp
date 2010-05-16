@@ -79,9 +79,9 @@ public:
 	//! projection type. I would like to return the squared length instead of the length because of performance reasons.
 	//! But then far away objects are not textured any more, perhaps because of a depth buffer overflow although
 	//! the depth test is disabled?
-	virtual bool forward(Vec3d &v) const = 0;
+	virtual bool forward(Vec3f& v) const = 0;
 	//! Apply the transformation in the backward projection in place.
-	virtual bool backward(Vec3d &v) const = 0;
+	virtual bool backward(Vec3d& v) const = 0;
 	//! Return the small zoom increment to use at the given FOV for nice movements
 	virtual float deltaZoom(float fov) const = 0;
 
@@ -190,19 +190,21 @@ public:
 		{
 			v = in[i];
 			v.transfo4d(modelViewMatrix);
-			forward(v);
-			out[i][0] = viewportCenter[0] + flipHorz * pixelPerRad * v[0];
-			out[i][1] = viewportCenter[1] + flipVert * pixelPerRad * v[1];
-			out[i][2] = (v[2] - zNear) * oneOverZNearMinusZFar;
+			out[i].set(v[0], v[1], v[2]);
+			forward(out[i]);
+			out[i][0] = viewportCenter[0] + flipHorz * pixelPerRad * out[i][0];
+			out[i][1] = viewportCenter[1] + flipVert * pixelPerRad * out[i][1];
+			out[i][2] = (out[i][2] - zNear) * oneOverZNearMinusZFar;
 		}
 	}
 
 	//! Project the vector v from the current frame into the viewport.
 	//! @param v the vector in the current frame.
 	//! @return true if the projected coordinate is valid.
-	inline bool projectInPlace(Vec3d& v) const
+	inline bool projectInPlace(Vec3d& vd) const
 	{
-		v.transfo4d(modelViewMatrix);
+		vd.transfo4d(modelViewMatrix);
+		Vec3f v(vd[0], vd[1], vd[2]);
 		const bool rval = forward(v);
 		// very important: even when the projected point comes from an
 		// invisible region of the sky (rval=false), we must finish
@@ -211,6 +213,7 @@ public:
 		v[0] = viewportCenter[0] + flipHorz * pixelPerRad * v[0];
 		v[1] = viewportCenter[1] + flipVert * pixelPerRad * v[1];
 		v[2] = (v[2] - zNear) * oneOverZNearMinusZFar;
+		vd.set(v[0], v[1], v[2]);
 		return rval;
 	}
 
