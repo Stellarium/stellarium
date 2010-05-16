@@ -591,7 +591,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	float screenSz = getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
-	if (prj->project(Vec3f(0,0,0), screenPos) &&
+	if (prj->project(Vec3d(0), screenPos) &&
 			screenPos[1]>viewport_bottom - screenSz && screenPos[1]<viewport_bottom + prj->getViewportHeight()+screenSz &&
 			screenPos[0]>viewport_left - screenSz && screenPos[0]<viewport_left + prj->getViewportWidth() + screenSz)
 	{

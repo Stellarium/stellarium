@@ -260,10 +260,10 @@ void SkyGrid::draw(const StelCore* core) const
 	// Check whether the pole are in the viewport
 	bool northPoleInViewport = false;
 	bool southPoleInViewport = false;
-	Vec3d win;
-	if (prj->project(Vec3d(0,0,1), win) && prj->checkInViewport(win))
+	Vec3f win;
+	if (prj->project(Vec3f(0,0,1), win) && prj->checkInViewport(win))
 		northPoleInViewport = true;
-	if (prj->project(Vec3d(0,0,-1), win) && prj->checkInViewport(win))
+	if (prj->project(Vec3f(0,0,-1), win) && prj->checkInViewport(win))
 		southPoleInViewport = true;
 	// Get the longitude and latitude resolution at the center of the viewport
 	Vec3d centerV;
