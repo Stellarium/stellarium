@@ -33,7 +33,7 @@ public:
   bool transform(const Vec3d &v,double &x,double &y) const;
   bool retransform(double x,double y,Vec3d &v) const;
     // for calculating partial derivatives:
-  bool retransform(double x,double y,Vec3d &v,Vec3d &vX,Vec3d &vY) const;
+  bool retransform(double x,double y, Vec3f& v, Vec3f& vX, Vec3f& vY) const;
 private:
   void initRotMatrix(double alpha,double delta,double phi);
 private:

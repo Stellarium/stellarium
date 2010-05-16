@@ -169,7 +169,7 @@ bool SphericMirrorCalculator::transform(const Vec3d &v,
 }
 
 
-bool SphericMirrorCalculator::retransform(double x,double y,Vec3d &v) const {
+bool SphericMirrorCalculator::retransform(double x,double y, Vec3d &v) const {
   x /= horzZoomFactor;
   y /= vertZoomFactor;
   v[0] = alphaDeltaPhi[0]*x + alphaDeltaPhi[1] + alphaDeltaPhi[2]*y;
@@ -193,8 +193,8 @@ bool SphericMirrorCalculator::retransform(double x,double y,Vec3d &v) const {
 }
 
 bool SphericMirrorCalculator::retransform(double x,double y,
-                                          Vec3d &v,
-                                          Vec3d &vX,Vec3d &vY) const {
+										  Vec3f &v,
+										  Vec3f &vX,Vec3f &vY) const {
   x /= horzZoomFactor;
   const double dx = 1.0/horzZoomFactor;
   y /= vertZoomFactor;

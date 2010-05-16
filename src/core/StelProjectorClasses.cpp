@@ -228,12 +228,12 @@ QString StelProjectorCylinder::getDescriptionI18() const
 	return q_("The full name of this projection mode is <i>cylindrical equidistant projection</i>. With this projection all parallels are equally spaced.");
 }
 
-bool StelProjectorCylinder::forward(Vec3d &v) const
+bool StelProjectorCylinder::forward(Vec3f &v) const
 {
-	const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const bool rval = (-r < v[1] && v[1] < r);
-	const double alpha = std::atan2(v[0],-v[2]);
-	const double delta = std::asin(v[1]/r);
+	const float alpha = std::atan2(v[0],-v[2]);
+	const float delta = std::asin(v[1]/r);
 	v[0] = alpha;
 	v[1] = delta;
 	v[2] = r;
@@ -275,13 +275,13 @@ QString StelProjectorMercator::getDescriptionI18() const
 	return q_("The mercator projection is one of the most used world map projection. It preserves direction and shapes but distorts size, in an increasing degree away from the equator.");
 }
 
-bool StelProjectorMercator::forward(Vec3d &v) const
+bool StelProjectorMercator::forward(Vec3f &v) const
 {
-	const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const bool rval = (-r < v[1] && v[1] < r);
-	const double sin_delta = v[1]/r;
+	const float sin_delta = v[1]/r;
 	v[0] = std::atan2(v[0],-v[2]);
-	v[1] = 0.5*std::log((1.0+sin_delta)/(1.0-sin_delta));
+	v[1] = 0.5f*std::log((1.f+sin_delta)/(1.f-sin_delta));
 	v[2] = r;
 	return rval;
 }
@@ -327,13 +327,13 @@ QString StelProjectorOrthographic::getDescriptionI18() const
 	return q_("Orthographic projection is related to perspective projection, but the point of perspective is set to an infinite distance.");
 }
 
-bool StelProjectorOrthographic::forward(Vec3d &v) const
+bool StelProjectorOrthographic::forward(Vec3f &v) const
 {
-	const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
-	const double h = 1.0/r;
+	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+	const float h = 1.f/r;
 	v[0] *= h;
 	v[1] *= h;
-	const bool rval = (v[2] <= 0.0);
+	const bool rval = (v[2] <= 0.f);
 	v[2] = r;
 	return rval;
 }
@@ -380,7 +380,7 @@ QString StelProjector2d::getDescriptionI18() const
 	return "Simple 2d projection for internal use.";
 }
 
-bool StelProjector2d::forward(Vec3d &) const
+bool StelProjector2d::forward(Vec3f &) const
 {
 	Q_ASSERT(0);
 	return false;

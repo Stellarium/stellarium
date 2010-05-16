@@ -20,6 +20,7 @@
 #ifndef _STELPROJECTIONS_HPP_
 #define _STELPROJECTIONS_HPP_
 
+#include <limits>
 #include "StelProjector.hpp"
 
 class StelProjectorPerspective : public StelProjector
@@ -29,9 +30,9 @@ public:
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 120.f;}
-	bool forward(Vec3d &v) const
+	bool forward(Vec3f &v) const
 	{
-		const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+		const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 		if (v[2] < 0) {
 			v[0] /= (-v[2]);
 			v[1] /= (-v[2]);
@@ -44,8 +45,8 @@ public:
 			v[2] = r;
 			return false;
 		}
-		v[0] *= 1e99;
-		v[1] *= 1e99;
+		v[0] = std::numeric_limits<float>::max();
+		v[1] = std::numeric_limits<float>::max();
 		v[2] = r;
 		return false;
 	}
@@ -66,10 +67,10 @@ public:
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 360.f;}
-	bool forward(Vec3d &v) const
+	bool forward(Vec3f &v) const
 	{
-		const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
-		const double f = std::sqrt(2.0/(r*(r-v[2])));
+		const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+		const float f = std::sqrt(2.f/(r*(r-v[2])));
 		v[0] *= f;
 		v[1] *= f;
 		v[2] = r;
@@ -91,18 +92,18 @@ public:
 	StelProjectorStereographic(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
-	virtual float getMaxFov() const {return 235.;}
-	bool forward(Vec3d &v) const
+	virtual float getMaxFov() const {return 235.f;}
+	bool forward(Vec3f &v) const
 	{
-		const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
-		const double h = 0.5*(r-v[2]);
-		if (h <= 0.0) {
-			v[0] = 1e99;
-			v[1] = 1e99;
-			v[2] = -1e99;
+		const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+		const float h = 0.5f*(r-v[2]);
+		if (h <= 0.f) {
+			v[0] = std::numeric_limits<float>::max();
+			v[1] = std::numeric_limits<float>::max();
+			v[2] = -std::numeric_limits<float>::min();
 			return false;
 		}
-		const double f = 1.0 / h;
+		const float f = 1.f / h;
 		v[0] *= f;
 		v[1] *= f;
 		v[2] = r;
@@ -112,14 +113,15 @@ public:
 	virtual void project(int n, const Vec3d* in, Vec3f* out)
 	{
 		Vec3d v;
-		for (int i = 0; i < n; ++i)
+		for (int i = 0; i < n; ++i, ++out)
 		{
 			v = in[i];
 			v.transfo4d(modelViewMatrix);
-			StelProjectorStereographic::forward(v);
-			out[i][0] = viewportCenter[0] + flipHorz * pixelPerRad * v[0];
-			out[i][1] = viewportCenter[1] + flipVert * pixelPerRad * v[1];
-			out[i][2] = (v[2] - zNear) * oneOverZNearMinusZFar;
+			out->set(v[0], v[1], v[2]);
+			StelProjectorStereographic::forward(*out);
+			out->set(viewportCenter[0] + flipHorz * pixelPerRad * (*out)[0],
+				viewportCenter[1] + flipVert * pixelPerRad * (*out)[1],
+				((*out)[2] - zNear) * oneOverZNearMinusZFar);
 		}
 	}
 
@@ -139,27 +141,27 @@ public:
 	StelProjectorFisheye(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
-	virtual float getMaxFov() const {return 180.00001;}
-	bool forward(Vec3d &v) const
+	virtual float getMaxFov() const {return 180.00001f;}
+	bool forward(Vec3f &v) const
 	{
-		const double rq1 = v[0]*v[0] + v[1]*v[1];
-		if (rq1 > 0.0) {
-			const double h = std::sqrt(rq1);
-			const double f = std::atan2(h,-v[2]) / h;
+		const float rq1 = v[0]*v[0] + v[1]*v[1];
+		if (rq1 > 0.f) {
+			const float h = std::sqrt(rq1);
+			const float f = std::atan2(h,-v[2]) / h;
 			v[0] *= f;
 			v[1] *= f;
 			v[2] = std::sqrt(rq1 + v[2]*v[2]);
 			return true;
 		}
-		if (v[2] < 0.0) {
-			v[0] = 0.0;
-			v[1] = 0.0;
-			v[2] = 1.0;
+		if (v[2] < 0.f) {
+			v[0] = 0.f;
+			v[1] = 0.f;
+			v[2] = 1.f;
 			return true;
 		}
-		v[0] = 1e99;
-		v[1] = 1e99;
-		v[2] = -1e99;
+		v[0] = std::numeric_limits<float>::max();
+		v[1] = std::numeric_limits<float>::max();
+		v[2] = std::numeric_limits<float>::min();
 		return false;
 	}
 	bool backward(Vec3d &v) const;
@@ -178,7 +180,7 @@ public:
 	StelProjectorHammer(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
-	virtual float getMaxFov() const {return 360.;}
+	virtual float getMaxFov() const {return 360.f;}
 	virtual void project(int n, const Vec3d* in, Vec3f* out)
 	{
 		Vec3d v;
@@ -186,20 +188,21 @@ public:
 		{
 			v = in[i];
 			v.transfo4d(modelViewMatrix);
-			StelProjectorHammer::forward(v);
-			out[i][0] = viewportCenter[0] + flipHorz * pixelPerRad * v[0];
-			out[i][1] = viewportCenter[1] + flipVert * pixelPerRad * v[1];
-			out[i][2] = (v[2] - zNear) * oneOverZNearMinusZFar;
+			out[i].set(v[0], v[1], v[2]);
+			StelProjectorHammer::forward(out[i]);
+			out[i][0] = viewportCenter[0] + flipHorz * pixelPerRad * out[i][0];
+			out[i][1] = viewportCenter[1] + flipVert * pixelPerRad * out[i][1];
+			out[i][2] = (out[i][2] - zNear) * oneOverZNearMinusZFar;
 		}
 	}
-	bool forward(Vec3d &v) const
+	bool forward(Vec3f &v) const
 	{
 		// Hammer Aitoff
-		const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
-		const double alpha = std::atan2(v[0],-v[2]);
-		const double cosDelta = std::sqrt(1.-v[1]*v[1]/(r*r));
-		double z = std::sqrt(1.+cosDelta*std::cos(alpha/2.));
-		v[0] = 2.*M_SQRT2*cosDelta*std::sin(alpha/2.)/z;
+		const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+		const float alpha = std::atan2(v[0],-v[2]);
+		const float cosDelta = std::sqrt(1.f-v[1]*v[1]/(r*r));
+		float z = std::sqrt(1.+cosDelta*std::cos(alpha/2.f));
+		v[0] = 2.f*M_SQRT2*cosDelta*std::sin(alpha/2.f)/z;
 		v[1] = M_SQRT2*v[1]/r/z;
 		v[2] = r;
 		return true;
@@ -227,8 +230,8 @@ public:
 	StelProjectorCylinder(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
-	virtual float getMaxFov() const {return 175. * 4./3.;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
-	bool forward(Vec3d &win) const;
+	virtual float getMaxFov() const {return 175.f * 4.f/3.f;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
+	bool forward(Vec3f &win) const;
 	bool backward(Vec3d &v) const;
 	float fovToViewScalingFactor(float fov) const;
 	float viewScalingFactorToFov(float vsf) const;
@@ -255,8 +258,8 @@ public:
 	StelProjectorMercator(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
-	virtual float getMaxFov() const {return 175. * 4./3.;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
-	bool forward(Vec3d &win) const;
+	virtual float getMaxFov() const {return 175.f * 4.f/3.f;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
+	bool forward(Vec3f &win) const;
 	bool backward(Vec3d &v) const;
 	float fovToViewScalingFactor(float fov) const;
 	float viewScalingFactorToFov(float vsf) const;
@@ -283,8 +286,8 @@ public:
 	StelProjectorOrthographic(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
-	virtual float getMaxFov() const {return 179.9999;}
-	bool forward(Vec3d &win) const;
+	virtual float getMaxFov() const {return 179.9999f;}
+	bool forward(Vec3f &win) const;
 	bool backward(Vec3d &v) const;
 	float fovToViewScalingFactor(float fov) const;
 	float viewScalingFactorToFov(float vsf) const;
@@ -301,8 +304,8 @@ public:
 	StelProjector2d() : StelProjector(Mat4d::identity()) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
-	virtual float getMaxFov() const {return 360.;}
-	bool forward(Vec3d &win) const;
+	virtual float getMaxFov() const {return 360.f;}
+	bool forward(Vec3f &win) const;
 	bool backward(Vec3d &v) const;
 	float fovToViewScalingFactor(float fov) const;
 	float viewScalingFactorToFov(float vsf) const;
