@@ -228,6 +228,9 @@ public:
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
 	void sSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
 
+	//! Generate a StelVertexArray for a sphere.
+	static StelVertexArray computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
+
 	//! Re-implementation of gluCylinder : glu is overridden for non-standard projection.
 	void sCylinder(float radius, float height, int slices, int orientInside = 0);
 
@@ -327,6 +330,9 @@ public:
 	//! enabled arrays.
 	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned int* indices=NULL);
 
+	//! Draws the primitives defined in the StelVertexArray.
+	void drawStelVertexArray(const StelVertexArray& arr);
+
 private:
 
 	friend class StelTextureMgr;
@@ -353,8 +359,6 @@ private:
 	void projectSphericalTriangle(const SphericalCap* clippingCap, const Vec3d* vertices, QVarLengthArray<Vec3f, 4096>* outVertices,
 			const Vec2f* texturePos=NULL, QVarLengthArray<Vec2f, 4096>* outTexturePos=NULL,int nbI=0,
 			bool checkDisc1=true, bool checkDisc2=true, bool checkDisc3=true) const;
-
-	void drawStelVertexArray(const StelVertexArray& arr);
 
 	void drawTextGravity180(float x, float y, const QString& str, float xshift = 0, float yshift = 0) const;
 

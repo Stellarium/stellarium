@@ -75,6 +75,8 @@ private:
 	Vec3f color;
 	float intensity;
 	class LinearFader* fader;
+
+	class StelVertexArray* vertexArray;
 };
 
 #endif // _MILKYWAY_HPP_
