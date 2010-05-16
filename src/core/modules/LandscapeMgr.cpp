@@ -108,7 +108,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	Vec3f pos;
-	Vec3d xy;
+	Vec3f xy;
 
 	float shift = sPainter.getFontMetrics().width(sNorth)/2;
 

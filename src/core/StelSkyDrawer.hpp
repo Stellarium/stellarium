@@ -61,10 +61,10 @@ public:
 	//! @param rcMag the radius and luminance of the source as computed by computeRCMag()
 	//! @param bV the source B-V index
 	//! @return true if the source was actually visible and drawn
-	bool drawPointSource(StelPainter* sPainter, const Vec3d& v, const float rcMag[2], unsigned int bV, bool checkInScreen=false)
+	bool drawPointSource(StelPainter* sPainter, const Vec3f& v, const float rcMag[2], unsigned int bV, bool checkInScreen=false)
 		{return drawPointSource(sPainter, v, rcMag, colorTable[bV], checkInScreen);}
 
-	bool drawPointSource(StelPainter* sPainter,const Vec3d& v, const float rcMag[2], const Vec3f& color, bool checkInScreen=false);
+	bool drawPointSource(StelPainter* sPainter,const Vec3f& v, const float rcMag[2], const Vec3f& color, bool checkInScreen=false);
 
 	//! Terminate drawing of a 3D model, draw the halo
 	//! @param p the StelPainter instance to use for this drawing operation
