@@ -343,10 +343,10 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 									 double minRes, double maxBright, bool visible)
 {
 	Vec3f XYZ;
-	const double RADIUS_NEB = 1.;
+	static const float RADIUS_NEB = 1.;
 	StelUtils::spheToRect(ra*M_PI/180., dec*M_PI/180., XYZ);
 	XYZ*=RADIUS_NEB;
-	double texSize = RADIUS_NEB * sin(angSize/2/60*M_PI/180);
+	float texSize = RADIUS_NEB * sin(angSize/2/60*M_PI/180);
 	Mat4f matPrecomp = Mat4f::translation(XYZ) *
 					   Mat4f::zrotation(ra*M_PI/180.) *
 					   Mat4f::yrotation(-dec*M_PI/180.) *
