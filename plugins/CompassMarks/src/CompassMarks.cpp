@@ -138,8 +138,8 @@ void CompassMarks::draw(StelCore* core)
 	if (markFader.getInterstate() <= 0.0) { return; }
 
 	Vec3f pos;
-	Vec3d xy;
-	Vec3d xy2;
+	Vec3f xy;
+	Vec3f xy2;
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 	StelPainter painter(prj);
 	painter.setFont(font);

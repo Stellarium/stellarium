@@ -405,24 +405,24 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			}
 
 			const StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-			Vec3f s1 = hipStarMgr->searchHP(hp1)->getJ2000EquatorialPos(nav);
-			Vec3f s2 = hipStarMgr->searchHP(hp2)->getJ2000EquatorialPos(nav);
-			Vec3f s3 = hipStarMgr->searchHP(hp3)->getJ2000EquatorialPos(nav);
+			Vec3d s1 = hipStarMgr->searchHP(hp1)->getJ2000EquatorialPos(nav);
+			Vec3d s2 = hipStarMgr->searchHP(hp2)->getJ2000EquatorialPos(nav);
+			Vec3d s3 = hipStarMgr->searchHP(hp3)->getJ2000EquatorialPos(nav);
 
 			// To transform from texture coordinate to 2d coordinate we need to find X with XA = B
 			// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate
 			// We need 3 stars and the 4th point is deduced from the other to get an normal base
 			// X = B inv(A)
-			Vec3f s4 = s1 + ((s2 - s1) ^ (s3 - s1));
-			Mat4f B(s1[0], s1[1], s1[2], 1, s2[0], s2[1], s2[2], 1, s3[0], s3[1], s3[2], 1, s4[0], s4[1], s4[2], 1);
-			Mat4f A(x1, texSizeY - y1, 0.f, 1.f, x2, texSizeY - y2, 0.f, 1.f, x3, texSizeY - y3, 0.f, 1.f, x1, texSizeY - y1, texSizeX, 1.f);
-			Mat4f X = B * A.inverse();
+			Vec3d s4 = s1 + ((s2 - s1) ^ (s3 - s1));
+			Mat4d B(s1[0], s1[1], s1[2], 1, s2[0], s2[1], s2[2], 1, s3[0], s3[1], s3[2], 1, s4[0], s4[1], s4[2], 1);
+			Mat4d A(x1, texSizeY - y1, 0.f, 1.f, x2, texSizeY - y2, 0.f, 1.f, x3, texSizeY - y3, 0.f, 1.f, x1, texSizeY - y1, texSizeX, 1.f);
+			Mat4d X = B * A.inverse();
 
 			QVector<Vec3d> contour(4);
-			contour[0] = X * Vec3f(0., 0., 0.);
-			contour[1] = X * Vec3f(texSizeX, 0., 0.);
-			contour[2] = X * Vec3f(texSizeX, texSizeY, 0.);
-			contour[3] = X * Vec3f(0, texSizeY, 0.);
+			contour[0] = X * Vec3d(0., 0., 0.);
+			contour[1] = X * Vec3d(texSizeX, 0., 0.);
+			contour[2] = X * Vec3d(texSizeX, texSizeY, 0.);
+			contour[3] = X * Vec3d(0, texSizeY, 0.);
 			contour[0].normalize();
 			contour[1].normalize();
 			contour[2].normalize();

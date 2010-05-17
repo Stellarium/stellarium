@@ -255,7 +255,7 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelNavigator * nav)
 		if (!sPainter.getProjector()->project(pos, screenpos))
 			return;
 
-		const Vec3d& c(obj->getInfoColor());
+		const Vec3f& c(obj->getInfoColor());
 		sPainter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
 		sPainter.enableTexture2d(true);

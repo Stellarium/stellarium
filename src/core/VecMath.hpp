@@ -118,13 +118,13 @@ template<class T> class Vector3
 public:
 	inline Vector3();
 	//inline Vector3(const Vector3&);
-	template <class T2> inline Vector3(const Vector3<T2>&);
+	//template <class T2> inline Vector3(const Vector3<T2>&);
 	inline Vector3(T, T, T);
 	inline Vector3(T);
 
 	//inline Vector3& operator=(const Vector3&);
 	inline Vector3& operator=(const T*);
-	template <class T2> inline Vector3& operator=(const Vector3<T2>&);
+	//template <class T2> inline Vector3& operator=(const Vector3<T2>&);
 	inline void set(T, T, T);
 
 	inline bool operator==(const Vector3<T>&) const;
@@ -423,10 +423,10 @@ template<class T> Vector3<T>::Vector3() {}
 //	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
 //}
 
-template<class T> template<class T2> Vector3<T>::Vector3(const Vector3<T2>& a)
-{
-	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
-}
+//template<class T> template<class T2> Vector3<T>::Vector3(const Vector3<T2>& a)
+//{
+//	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
+//}
 
 template<class T> Vector3<T>::Vector3(T x)
 {
@@ -444,11 +444,11 @@ template<class T> Vector3<T>::Vector3(T x, T y, T z)
 //	return *this;
 //}
 
-template<class T> template <class T2> Vector3<T>& Vector3<T>::operator=(const Vector3<T2>& a)
-{
-	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
-	return *this;
-}
+//template<class T> template <class T2> Vector3<T>& Vector3<T>::operator=(const Vector3<T2>& a)
+//{
+//	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
+//	return *this;
+//}
 
 template<class T> Vector3<T>& Vector3<T>::operator=(const T* a)
 {
@@ -846,7 +846,7 @@ template<class T> Matrix4<T> Matrix4<T>::translation(const Vector3<T>& a)
 
 template<class T> Matrix4<T> Matrix4<T>::rotation(const Vector3<T>& axis, T angle)
 {
-	Vec3d a(axis);
+	Vector3<T> a(axis);
 	a.normalize();
 	const T c = (T) cos(angle);
 	const T s = (T) sin(angle);

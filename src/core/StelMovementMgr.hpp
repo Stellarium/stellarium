@@ -80,7 +80,7 @@ public:
 
 	//! Return the current up view vector.
 	Vec3d getViewUpVectorJ2000() const;
-	void setViewUpVectorJ2000(const Vec3f& up);
+	void setViewUpVectorJ2000(const Vec3d& up);
 
 	void setMovementSpeedFactor(float s) {movementsSpeedFactor=s;}
 	float getMovementSpeedFactor() const {return movementsSpeedFactor;}

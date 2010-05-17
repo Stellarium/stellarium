@@ -144,7 +144,7 @@ private:
 	//! Abbreviation (of the latin name for western constellations)
 	QString abbreviation;
 	//! Direction vector pointing on constellation name drawing position
-	Vec3f XYZname;
+	Vec3d XYZname;
 	Vec3d XYname;
 	//! Number of segments in the lines
 	unsigned int numberOfSegments;
