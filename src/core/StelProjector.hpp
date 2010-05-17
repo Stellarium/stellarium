@@ -241,10 +241,9 @@ public:
 		// invisible region of the sky (rval=false), we must finish
 		// reprojecting, so that OpenGl can successfully eliminate
 		// polygons by culling.
-		v[0] = viewportCenter[0] + flipHorz * pixelPerRad * v[0];
-		v[1] = viewportCenter[1] + flipVert * pixelPerRad * v[1];
-		v[2] = (v[2] - zNear) * oneOverZNearMinusZFar;
-		vd.set(v[0], v[1], v[2]);
+		vd[0] = viewportCenter[0] + flipHorz * pixelPerRad * v[0];
+		vd[1] = viewportCenter[1] + flipVert * pixelPerRad * v[1];
+		vd[2] = (v[2] - zNear) * oneOverZNearMinusZFar;
 		return rval;
 	}
 
