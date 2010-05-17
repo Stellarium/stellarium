@@ -480,7 +480,7 @@ void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelNavigato
 		if (!prj->project(pos, screenpos))
 			return;
 
-		const Vec3d& c(obj->getInfoColor());
+		const Vec3f& c(obj->getInfoColor());
 		sPainter.setColor(c[0], c[1], c[2]);
 		selectionTexture->bind();
 		glEnable(GL_TEXTURE_2D);

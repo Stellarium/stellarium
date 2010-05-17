@@ -342,7 +342,7 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 									 double ra, double dec, double angSize, double rotation,
 									 double minRes, double maxBright, bool visible)
 {
-	Vec3d XYZ;
+	Vec3f XYZ;
 	const double RADIUS_NEB = 1.;
 	StelUtils::spheToRect(ra*M_PI/180., dec*M_PI/180., XYZ);
 	XYZ*=RADIUS_NEB;
@@ -352,14 +352,14 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 					   Mat4f::yrotation(-dec*M_PI/180.) *
 					   Mat4f::xrotation(rotation*M_PI/180.);
 
-	Vec3d corners[4];
-		corners[0] = matPrecomp * Vec3d(0.,-texSize,-texSize);
-		corners[1] = matPrecomp * Vec3d(0., texSize,-texSize);
-		corners[2] = matPrecomp * Vec3d(0.,-texSize, texSize);
-		corners[3] = matPrecomp * Vec3d(0., texSize, texSize);
+	Vec3f corners[4];
+		corners[0] = matPrecomp * Vec3f(0.f,-texSize,-texSize);
+		corners[1] = matPrecomp * Vec3f(0.f, texSize,-texSize);
+		corners[2] = matPrecomp * Vec3f(0.f,-texSize, texSize);
+		corners[3] = matPrecomp * Vec3f(0.f, texSize, texSize);
 
 	// convert back to ra/dec (radians)
-	Vec3d cornersRaDec[4];
+	Vec3f cornersRaDec[4];
 	for(int i=0; i<4; i++)
 		StelUtils::rectToSphe(&cornersRaDec[i][0], &cornersRaDec[i][1], corners[i]);
 

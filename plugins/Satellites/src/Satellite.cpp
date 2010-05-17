@@ -249,7 +249,7 @@ double Satellite::getDoppler(double freq) const
 void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 {
 	float a = (azimuth-90)*M_PI/180;
-	Vec3f pos(sin(a),cos(a), tan(elevation * M_PI / 180.));
+	Vec3d pos(sin(a),cos(a), tan(elevation * M_PI / 180.));
 	XYZ = core->getNavigator()->j2000ToEquinoxEqu(core->getNavigator()->altAzToEquinoxEqu(pos));
 	StelApp::getInstance().getVisionModeNight() ? glColor4f(0.6,0.0,0.0,1.0) : glColor4f(hintColor[0],hintColor[1],hintColor[2], Satellite::hintBrightness);
 

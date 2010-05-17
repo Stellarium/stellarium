@@ -133,6 +133,12 @@ namespace StelUtils
 	//! @param v the input 3D vector
 	void rectToSphe(float *lng, float *lat, const Vec3d& v);
 
+	//! Convert from spherical coordinates to Rectangular direction.
+	//! @param lng float* to store longitude in radian
+	//! @param lat float* to store latitude in radian
+	//! @param v the input 3D vector
+	void rectToSphe(float *lng, float *lat, const Vec3f& v);
+
 	//! Convert a string longitude, latitude, RA or Declination angle
 	//! to radians.
 	//! @param str the angle in format something like these:

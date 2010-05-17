@@ -326,7 +326,7 @@ void rectToSphe(float *lng, float *lat, const Vec3d& v)
 
 void rectToSphe(float *lng, float *lat, const Vec3f& v)
 {
-	double r = v.length();
+	float r = v.length();
 	*lat = asin(v[2]/r);
 	*lng = atan2(v[1],v[0]);
 }

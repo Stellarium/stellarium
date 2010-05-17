@@ -184,7 +184,8 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
 	sPainter.setColor(boundaryColor[0], boundaryColor[1], boundaryColor[2], boundaryFader.getInterstate());
 
 	unsigned int i, j, size;
-	Vec3d pt1, pt2;
+	Vec3f pt1, pt2;
+	Vec3d ptd1, ptd2;
 	std::vector<Vec3f> *points;
 
 	if (singleSelected) size = isolatedBoundarySegments.size();
@@ -201,9 +202,11 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
 		{
 			pt1 = points->at(j);
 			pt2 = points->at(j+1);
-			if (pt1*pt2>0.9999999)
+			if (pt1*pt2>0.9999999f)
 				continue;
-			sPainter.drawGreatCircleArc(pt1, pt2, &viewportHalfspace);
+			ptd1.set(pt1[0], pt1[1], pt1[2]);
+			ptd2.set(pt2[0], pt2[1], pt2[2]);
+			sPainter.drawGreatCircleArc(ptd1, ptd2, &viewportHalfspace);
 		}
 	}
 }
