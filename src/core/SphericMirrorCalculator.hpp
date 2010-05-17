@@ -28,24 +28,24 @@ class QSettings;
 class SphericMirrorCalculator {
 public:
   SphericMirrorCalculator(const QSettings& conf);
-  double getHorzZoomFactor(void) const {return horzZoomFactor;}
-  double getVertZoomFactor(void) const {return vertZoomFactor;}
-  bool transform(const Vec3d &v,double &x,double &y) const;
-  bool retransform(double x,double y,Vec3d &v) const;
+  float getHorzZoomFactor() const {return horzZoomFactor;}
+  float getVertZoomFactor() const {return vertZoomFactor;}
+  bool transform(const Vec3f &v,float &x,float &y) const;
+  bool retransform(float x,float y,Vec3f &v) const;
     // for calculating partial derivatives:
-  bool retransform(double x,double y, Vec3f& v, Vec3f& vX, Vec3f& vY) const;
+  bool retransform(float x,float y, Vec3f& v, Vec3f& vX, Vec3f& vY) const;
 private:
-  void initRotMatrix(double alpha,double delta,double phi);
+  void initRotMatrix(float alpha,float delta,float phi);
 private:
-  Vec3d P;          // projector
-  Vec3d DomeCenter;
-  double DomeRadius;
-  double PP;
-  double lP;
-  Vec3d p;
-  double horzZoomFactor;
-  double vertZoomFactor;
-  double alphaDeltaPhi[9];
+  Vec3f P;          // projector
+  Vec3f DomeCenter;
+  float DomeRadius;
+  float PP;
+  float lP;
+  Vec3f p;
+  float horzZoomFactor;
+  float vertZoomFactor;
+  float alphaDeltaPhi[9];
 };
 
 #endif // _SPHERICMIRRORCALCULATOR_HPP_

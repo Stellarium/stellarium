@@ -39,7 +39,7 @@ static unsigned int stel_bswap_32(unsigned int val) {
 namespace BigStarCatalogExtension
 {
 
-static const Vec3d north(0,0,1);
+static const Vec3f north(0,0,1);
 
 void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1,
 							 const Vec3f &c2)
@@ -495,7 +495,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_insi
 			const float offset = *tmpRcmag*0.7f;
 			const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.2f, 0.2f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;
 			sPainter->setColor(colorr[0], colorr[1], colorr[2],names_brightness);
-			sPainter->drawText(vf, s->getNameI18n(), 0, offset, offset, false);
+			sPainter->drawText(Vec3d(vf[0], vf[1], vf[2]), s->getNameI18n(), 0, offset, offset, false);
 		}
 	}
 }

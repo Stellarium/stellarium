@@ -714,7 +714,8 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI; // the total illuminated area in arcmin^2
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, getJ2000EquatorialPos(nav), surfArcMin2, getVMagnitude(core->getNavigator()), color);
+	Vec3d tmp = getJ2000EquatorialPos(nav);
+	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitude(core->getNavigator()), color);
 }
 
 

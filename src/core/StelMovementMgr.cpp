@@ -82,7 +82,8 @@ void StelMovementMgr::init()
 	initFov = conf->value("navigation/init_fov",60.f).toFloat();
 	currentFov = initFov;
 
-	initViewPos = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
+	Vec3f tmp = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
+	initViewPos.set(tmp[0], tmp[1], tmp[2]);
 	viewDirectionJ2000 = core->getNavigator()->altAzToJ2000(initViewPos);
 
 	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
@@ -111,7 +112,7 @@ void StelMovementMgr::setFlagLockEquPos(bool b)
 	flagLockEquPos=b;
 }
 
-void StelMovementMgr::setViewUpVectorJ2000(const Vec3f& up)
+void StelMovementMgr::setViewUpVectorJ2000(const Vec3d& up)
 {
 	upVectorMountFrame = j2000ToMountFrame(up);
 }

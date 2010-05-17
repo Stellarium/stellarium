@@ -87,7 +87,7 @@ private:
 	bool visible;
 	QString designation;               // The ID of the satllite
 	QString description;               // longer description of spacecraft
-	Vec3f XYZ;                         // holds J2000 position
+	Vec3d XYZ;                         // holds J2000 position
 	char elements[3][80];              // TLE elements as char* for passing to sgp lib
 	tle_t tle, localtle;
 	double height, velocity, azimuth, elevation, range, rangeRate;
