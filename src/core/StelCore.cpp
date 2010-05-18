@@ -243,21 +243,27 @@ void StelCore::postDraw()
 	sPainter.drawViewportShape();
 }
 
-//! Set the current projection type to use
-void StelCore::setCurrentProjectionTypeKey(QString key)
+void StelCore::setCurrentProjectionType(ProjectionType type)
 {
-	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType"));
-	currentProjectionType = (ProjectionType)en.keyToValue(key.toAscii().data());
-	if (currentProjectionType<0)
-	{
-		qWarning() << "Unknown projection type: " << key << "setting \"ProjectionStereographic\" instead";
-		currentProjectionType = ProjectionStereographic;
-	}
+	currentProjectionType=type;
 	const double savedFov = currentProjectorParams.fov;
 	currentProjectorParams.fov = 0.0001;	// Avoid crash
 	double newMaxFov = getProjection(Mat4d::identity())->getMaxFov();
 	movementMgr->setMaxFov(newMaxFov);
 	currentProjectorParams.fov = qMin(newMaxFov, savedFov);
+}
+
+//! Set the current projection type to use
+void StelCore::setCurrentProjectionTypeKey(QString key)
+{
+	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType"));
+	ProjectionType newType = (ProjectionType)en.keyToValue(key.toAscii().data());
+	if (newType<0)
+	{
+		qWarning() << "Unknown projection type: " << key << "setting \"ProjectionStereographic\" instead";
+		newType = ProjectionStereographic;
+	}
+	setCurrentProjectionType(newType);
 }
 
 //! Get the current Mapping used by the Projection
