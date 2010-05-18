@@ -146,7 +146,7 @@ public:
 
 public slots:
 	//! Set the current ProjectionType to use
-	void setCurrentProjectionType(ProjectionType type) {currentProjectionType=type;}
+	void setCurrentProjectionType(ProjectionType type);
 	ProjectionType getCurrentProjectionType() const {return currentProjectionType;}
 
 	//! Get the current Mapping used by the Projection
