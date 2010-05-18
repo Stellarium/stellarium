@@ -365,13 +365,6 @@ void StelMainGraphicsView::keyReleaseEvent(QKeyEvent* event)
 	QGraphicsView::keyReleaseEvent(event);
 }
 
-void StelMainGraphicsView::focusOutEvent(QFocusEvent* event)
-{
-	//Calls the destructors of plug-in modules on exit
-	QCoreApplication::processEvents();
-	QGraphicsView::focusOutEvent(event);
-}
-
 //! Delete openGL textures (to call before the GLContext disappears)
 void StelMainGraphicsView::deinitGL()
 {
@@ -385,7 +378,6 @@ void StelMainGraphicsView::deinitGL()
 	StelApp::getInstance().getModuleMgr().unloadAllPlugins();
 	QCoreApplication::processEvents();
 	delete gui;
-	//QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 	delete mainSkyItem;
 }
 
