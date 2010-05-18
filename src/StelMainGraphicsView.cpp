@@ -284,6 +284,8 @@ void StelMainGraphicsView::drawBackground(QPainter*, const QRectF&)
 		QTimer::singleShot(dur<5 ? 5 : dur, scene(), SLOT(update()));
 	}
 	#ifdef QT_MAC_USE_COCOA
+		// This call solves the problems with the qt event dispatcher in Cocoa. The stack grew huge and many events were discarded
+		// http://bugreports.qt.nokia.com/browse/QTBUG-7502
 		QCoreApplication::processEvents(QEventLoop::AllEvents);
 	#endif
 	// Manage cursor timeout
