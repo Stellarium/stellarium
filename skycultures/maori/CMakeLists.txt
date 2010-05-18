@@ -1,14 +1,6 @@
 
 ########### install files ###############
 
-INSTALL(
-    FILES
-        constellation_names.eng.fab
-        constellationship.fab
-        info.ini
-        references.txt
-        star_names.fab
-		description.en.utf8
-		description.it.utf8
+INSTALL(FILES constellation_names.eng.fab constellationship.fab info.ini references.txt star_names.fab description.ar.utf8 description.en.utf8 description.it.utf8
     DESTINATION share/${PACKAGE}/skycultures/maori
 )
