@@ -42,6 +42,7 @@
 #include <QFileInfo>
 #include <QGraphicsGridLayout>
 #include <QGraphicsProxyWidget>
+#include <QEventLoop>
 
 #include <QtPlugin>
 
@@ -282,6 +283,9 @@ void StelMainGraphicsView::drawBackground(QPainter*, const QRectF&)
 		int dur = (int)(duration*1000);
 		QTimer::singleShot(dur<5 ? 5 : dur, scene(), SLOT(update()));
 	}
+	#ifdef QT_MAC_USE_COCOA
+		QCoreApplication::processEvents(QEventLoop::AllEvents);
+	#endif
 	// Manage cursor timeout
 	if (cursorTimeout>0.f && (now-lastEventTimeSec>cursorTimeout) && flagCursorTimeout)
 	{
@@ -375,10 +379,11 @@ void StelMainGraphicsView::deinitGL()
 	wasDeinit = true;
 	if (scriptMgr->scriptIsRunning())
 		scriptMgr->stopScript();
+	QCoreApplication::processEvents();
 	StelApp::getInstance().getModuleMgr().unloadAllPlugins();
 	QCoreApplication::processEvents();
 	delete gui;
-	QCoreApplication::processEvents();
+	//QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 	delete mainSkyItem;
 }
 
