@@ -228,8 +228,6 @@ SET(stellarium_lib_SRCS
 	scripting/StelScriptMgr.hpp
 	scripting/ScreenImageMgr.hpp
 	scripting/ScreenImageMgr.cpp
-	scripting/ScriptSleeper.cpp
-	scripting/ScriptSleeper.hpp
 	scripting/StelMainScriptAPI.cpp
 	scripting/StelMainScriptAPI.hpp
 	scripting/StelMainScriptAPIProxy.cpp
