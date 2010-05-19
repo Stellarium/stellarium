@@ -171,11 +171,11 @@ private:
 #endif
 
 	bool flagShowFlipButtons;
-	class StelButton* flipVert;
-	class StelButton* flipHoriz;
+	StelButton* flipVert;
+	StelButton* flipHoriz;
 	
 	bool flagShowNebulaBackgroundButton;
-	class StelButton* btShowNebulaeBackground;
+	StelButton* btShowNebulaeBackground;
 
 	bool initDone;
 	bool guiHidden;
