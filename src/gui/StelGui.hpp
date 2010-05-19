@@ -147,6 +147,7 @@ private slots:
 	void reloadStyle();
 	void scriptStarted();
 	void scriptStopped();
+	void quit();
 	
 private:
 	QGraphicsWidget* topLevelGraphicsWidget;
