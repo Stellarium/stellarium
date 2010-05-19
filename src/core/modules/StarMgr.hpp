@@ -175,8 +175,7 @@ public:
 	static QString convertToSpectralType(int index);
 	static QString convertToComponentIds(int index);
 
-	QVariantList getCatalogData() const {return catalogsDescription;}
-	QVariantMap getCatalogDescription(const QString catalogName);
+	QVariantList getCatalogsDescription() const {return catalogsDescription;}
 
 	//! Try to load the given catalog, even if it is marched as unchecked.
 	//! Mark it as checked if checksum is correct.
@@ -184,6 +183,7 @@ public:
 	bool checkAndLoadCatalog(QVariantMap m);
 
 private:
+
 	void setCheckFlag(const QString& catalogId, bool b);
 
 	void copyDefaultConfigFile();

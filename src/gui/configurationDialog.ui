@@ -161,121 +161,88 @@
              </size>
             </property>
             <property name="title">
-             <string>General settings</string>
+             <string>Program language</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_2">
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
              <property name="margin">
               <number>0</number>
              </property>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_9">
-               <item>
-                <widget class="QLabel" name="programLanguage_lbl">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Program language</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_4">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>0</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QComboBox" name="programLanguageComboBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="sizeAdjustPolicy">
-                  <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+              <widget class="QComboBox" name="programLanguageComboBox">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>220</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>220</width>
+                 <height>24</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_4">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+              <kerning>true</kerning>
+             </font>
+            </property>
+            <property name="title">
+             <string>Selected object information</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QRadioButton" name="allSelectedInfoRadio">
+               <property name="toolTip">
+                <string>Display all information available</string>
+               </property>
+               <property name="text">
+                <string>All available</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_10">
-               <item>
-                <widget class="QLabel" name="objectInfo_lbl">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Selected object information</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_5">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>0</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QComboBox" name="objectInfoComboBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="sizeAdjustPolicy">
-                  <enum>QComboBox::AdjustToContents</enum>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+              <widget class="QRadioButton" name="briefSelectedInfoRadio">
+               <property name="toolTip">
+                <string>Display less information</string>
+               </property>
+               <property name="text">
+                <string>Short</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="noSelectedInfoRadio">
+               <property name="toolTip">
+                <string>Display no information</string>
+               </property>
+               <property name="text">
+                <string>None</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -395,56 +362,6 @@
                </property>
                <property name="textInteractionFlags">
                 <set>Qt::TextSelectableByMouse</set>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_3">
-            <property name="title">
-             <string>Screenshots</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_3">
-             <property name="margin">
-              <number>0</number>
-             </property>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_5">
-               <item>
-                <widget class="QLabel" name="label">
-                 <property name="text">
-                  <string>Screenshot Directory</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="screenshotDirEdit"/>
-               </item>
-               <item>
-                <widget class="QPushButton" name="screenshotBrowseButton">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                 <property name="icon">
-                  <iconset>
-                   <normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="invertScreenShotColorsCheckBox">
-               <property name="text">
-                <string>Invert colors</string>
                </property>
               </widget>
              </item>
@@ -724,19 +641,6 @@
             </layout>
            </widget>
           </item>
-          <item>
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
          </layout>
         </widget>
         <widget class="QWidget" name="page_3">
@@ -810,6 +714,56 @@
            </widget>
           </item>
           <item>
+           <widget class="QGroupBox" name="groupBox_3">
+            <property name="title">
+             <string>Screenshots</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_3">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <widget class="QLabel" name="label">
+                 <property name="text">
+                  <string>Screenshot Directory</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="screenshotDirEdit"/>
+               </item>
+               <item>
+                <widget class="QPushButton" name="screenshotBrowseButton">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../../data/mainRes.qrc">
+				   <normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="invertScreenShotColorsCheckBox">
+               <property name="text">
+                <string>Invert colors</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
            <widget class="QGroupBox" name="contentBox">
             <property name="title">
              <string>Star catalog updates</string>
@@ -819,66 +773,67 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QListWidget" name="catalogListWidget">
-               <property name="minimumSize">
-                <size>
-                 <width>190</width>
-                 <height>0</height>
-                </size>
+              <widget class="QCommandLinkButton" name="getStarsButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
                </property>
-               <property name="focusPolicy">
-                <enum>Qt::NoFocus</enum>
+               <property name="toolTip">
+                <string>Click here to start downloading</string>
                </property>
-               <property name="horizontalScrollBarPolicy">
-                <enum>Qt::ScrollBarAlwaysOff</enum>
+               <property name="text">
+                <string>Get catalog x of y</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../../data/mainRes.qrc">
+				 <normaloff>:/graphicGui/btTimeRealtime-off.png</normaloff>:/graphicGui/btTimeRealtime-off.png</iconset>
+               </property>
+               <property name="description">
+                <string>Download this file to view even more stars</string>
                </property>
               </widget>
              </item>
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout_cat" stretch="0,0,0,0,0">
-               <property name="margin">
-                <number>0</number>
+              <widget class="QLabel" name="downloadLabel">
+               <property name="text">
+                <string>xxx</string>
                </property>
-               <item>
-                <widget class="QTextBrowser" name="catalogInfoText"/>
-               </item>
-               <item>
-                <widget class="QPushButton" name="startDownloadCatalog">
-                 <property name="toolTip">
-                  <string>Click here to start downloading</string>
-                 </property>
-                 <property name="text">
-                  <string>Download</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="stopDownloadCatalog">
-                 <property name="toolTip">
-                  <string>Stop the download. You can always restart it later</string>
-                 </property>
-                 <property name="text">
-                  <string>Cancel</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QTextBrowser" name="downloadInfoText"/>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_cat_download">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_5">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="downloadRetryButton">
+               <property name="toolTip">
+                <string>Restart the download</string>
+               </property>
+               <property name="text">
+                <string>Retry</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="downloadCancelButton">
+               <property name="toolTip">
+                <string>Stop the download. You can always restart it later</string>
+               </property>
+               <property name="text">
+                <string>Cancel</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -955,8 +910,8 @@
                    </property>
                    <property name="icon">
                     <iconset resource="../../data/mainRes.qrc">
-                     <normaloff>:/graphicGui/btScriptRun-on.png</normaloff>
-                     <disabledoff>:/graphicGui/btScriptRun-off.png</disabledoff>:/graphicGui/btScriptRun-on.png</iconset>
+					 <normaloff>:/graphicGui/btScriptRun-on.png</normaloff>
+					 <disabledoff>:/graphicGui/btScriptRun-off.png</disabledoff>:/graphicGui/btScriptRun-on.png</iconset>
                    </property>
                   </widget>
                  </item>
@@ -973,8 +928,8 @@
                    </property>
                    <property name="icon">
                     <iconset resource="../../data/mainRes.qrc">
-                     <normaloff>:/graphicGui/btScriptStop-on.png</normaloff>
-                     <disabledoff>:/graphicGui/btScriptStop-off.png</disabledoff>:/graphicGui/btScriptStop-on.png</iconset>
+					 <normaloff>:/graphicGui/btScriptStop-on.png</normaloff>
+					 <disabledoff>:/graphicGui/btScriptStop-off.png</disabledoff>:/graphicGui/btScriptStop-on.png</iconset>
                    </property>
                   </widget>
                  </item>
@@ -1125,7 +1080,7 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-main.png</normalon>
+		   <normalon>:/graphicGui/tabicon-main.png</normalon>
           </iconset>
          </property>
         </item>
@@ -1135,7 +1090,7 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-navigation.png</normalon>
+		   <normalon>:/graphicGui/tabicon-navigation.png</normalon>
           </iconset>
          </property>
         </item>
@@ -1145,7 +1100,7 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-tools.png</normalon>
+		   <normalon>:/graphicGui/tabicon-tools.png</normalon>
           </iconset>
          </property>
         </item>
@@ -1155,7 +1110,7 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-scripts.png</normalon>
+		   <normalon>:/graphicGui/tabicon-scripts.png</normalon>
           </iconset>
          </property>
         </item>
@@ -1165,24 +1120,11 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-tools.png</normalon>
+		   <normalon>:/graphicGui/tabicon-tools.png</normalon>
           </iconset>
          </property>
         </item>
        </widget>
-      </item>
-      <item row="2" column="0">
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
       </item>
      </layout>
     </widget>
