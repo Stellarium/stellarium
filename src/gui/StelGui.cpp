@@ -667,13 +667,9 @@ void StelGui::update()
 	flag = GETSTELMODULE(StelSkyLayerMgr)->getFlagShow();
 	if (getGuiActions("actionShow_DSS")->isChecked() != flag)
 		getGuiActions("actionShow_DSS")->setChecked(flag);
-	//StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
 	flag = mmgr->getMountMode() != StelMovementMgr::MountAltAzimuthal;
 	if (getGuiActions("actionSwitch_Equatorial_Mount")->isChecked() != flag)
 		getGuiActions("actionSwitch_Equatorial_Mount")->setChecked(flag);
-	flag = mmgr->getFlagTracking();
-	if (getGuiActions("actionSet_Tracking")->isChecked() != flag)
-		getGuiActions("actionSet_Tracking")->setChecked(flag);
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	flag = ssmgr->getFlagLabels();
 	if (getGuiActions("actionShow_Planets_Labels")->isChecked() != flag)
