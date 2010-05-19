@@ -35,8 +35,7 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 	QString objectInfo = conf->value("gui/selected_object_info", "all").toString();
 	if (objectInfo == "all")
 		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
-	else if (objectInfo == "brief" || objectInfo == "short")
-		//Backwards compatibility with 0.10.4 and earlier (used to be "short")
+	else if (objectInfo == "short")
 		infoTextFilters = StelObject::InfoStringGroup(StelObject::ShortInfo);
 	else if (objectInfo == "none")
 		infoTextFilters = StelObject::InfoStringGroup(0);

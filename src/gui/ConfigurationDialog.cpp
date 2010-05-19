@@ -70,26 +70,7 @@ ConfigurationDialog::~ConfigurationDialog()
 void ConfigurationDialog::languageChanged()
 {
 	if (dialog)
-	{
 		ui->retranslateUi(dialog);
-
-		//Selected object information
-		int index = ui->objectInfoComboBox->currentIndex();
-		populateObjectInfoList();
-		ui->objectInfoComboBox->setCurrentIndex(index);
-
-		//Catalog information
-		//(trigger re-displaying the description of the current item)
-		catalogSelectionChanged(ui->catalogListWidget->currentItem()->text());
-
-		//Script information
-		//(the same trick)
-		scriptSelectionChanged(ui->scriptListWidget->currentItem()->text());
-
-		//Plug-in information
-		//(the same trick)
-		pluginsSelectionChanged(ui->pluginsListWidget->currentItem()->text());
-	}
 }
 
 void ConfigurationDialog::styleChanged()
@@ -129,22 +110,21 @@ void ConfigurationDialog::createDialogContent()
 		cb->setCurrentIndex(lt);
 	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
 
-	// catalog download controls
-	connect(ui->catalogListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(catalogSelectionChanged(const QString&)));
-	connect(ui->startDownloadCatalog, SIGNAL(clicked()), this, SLOT(startDownloadCatalogClicked()));
-	connect(ui->stopDownloadCatalog, SIGNAL(clicked()), this, SLOT(stopDownloadCatalogClicked()));
-	ui->catalogListWidget->setSortingEnabled(true);
-	populateCatalogList();
-	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateCatalogList()));
+	connect(ui->getStarsButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
+	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
+	connect(ui->downloadRetryButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
+	refreshStarCatalogButton();
+
 	// Selected object info
-	QComboBox* objectInfoComboBox = ui->objectInfoComboBox;
-	populateObjectInfoList();
-	int objInfo = objectInfoComboBox->findData(gui->getInfoTextFilters());
-	if (objInfo < 0)
-		objInfo = objectInfoComboBox->findData(StelObject::InfoStringGroup(StelObject::AllInfo));
-	if (objInfo >= 0)
-		objectInfoComboBox->setCurrentIndex(objInfo);
-	connect(objectInfoComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(objectInfoDetailLevelChanged(int)));
+	if (gui->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
+		ui->noSelectedInfoRadio->setChecked(true);
+	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
+		ui->briefSelectedInfoRadio->setChecked(true);
+	else
+		ui->allSelectedInfoRadio->setChecked(true);
+	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
+	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
+	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
 
 	// Navigation tab
 	// Startup time
@@ -278,16 +258,19 @@ void ConfigurationDialog::setSphericMirror(bool b)
 	}
 }
 
-void ConfigurationDialog::objectInfoDetailLevelChanged(int item)
+void ConfigurationDialog::setNoSelectedInfo(void)
 {
-	int level = ui->objectInfoComboBox->itemData(item).toInt();
-	StelObject::InfoStringGroup l = StelObject::InfoStringGroup(level);
-	if (l == StelObject::AllInfo)
-		gui->setInfoTextFilters(l);
-	else if (l == StelObject::ShortInfo)
-		gui->setInfoTextFilters(l);
-	else
-		gui->setInfoTextFilters(StelObject::InfoStringGroup(0));
+	gui->setInfoTextFilters(StelObject::InfoStringGroup(0));
+}
+
+void ConfigurationDialog::setAllSelectedInfo(void)
+{
+	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
+}
+
+void ConfigurationDialog::setBriefSelectedInfo(void)
+{
+	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
 }
 
 void ConfigurationDialog::cursorTimeOutChanged()
@@ -412,7 +395,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	if (gui->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
 		conf->setValue("gui/selected_object_info", "none");
 	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
-		conf->setValue("gui/selected_object_info", "brief");
+		conf->setValue("gui/selected_object_info", "short");
 	else
 		conf->setValue("gui/selected_object_info", "all");
 
@@ -507,10 +490,6 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 	{
 		if (s==desc.info.displayedName)
 		{
-			//BM: Localization of plug-in name and description should be done
-			//in the plug-in, not here. This is acceptable only as a temporary
-			//solution if someone puts the necessary strings in translations.h
-			//so that they are included in the translation template.
 			QString html = "<html><head></head><body>";
 			html += "<h2>" + q_(desc.info.displayedName) + "</h2>";
 			html += "<h3>" + q_("Authors") + ": " + desc.info.authors + "</h3>";
@@ -648,6 +627,62 @@ void ConfigurationDialog::changePage(QListWidgetItem *current, QListWidgetItem *
 	ui->configurationStackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
 }
 
+
+void ConfigurationDialog::refreshStarCatalogButton()
+{
+	const QVariantList& catalogConfig = GETSTELMODULE(StarMgr)->getCatalogsDescription();
+	nextStarCatalogToDownload.clear();
+	int idx=0;
+	foreach (const QVariant& catV, catalogConfig)
+	{
+		++idx;
+		const QVariantMap& m = catV.toMap();
+		const bool checked = m.value("checked").toBool();
+		if (checked)
+			continue;
+		nextStarCatalogToDownload=m;
+		break;
+	}
+
+	ui->downloadCancelButton->setVisible(false);
+	ui->downloadRetryButton->setVisible(false);
+
+	if (idx == catalogConfig.size() && !hasDownloadedStarCatalog)//The size is 9; for "stars8", idx is 9
+	{
+		ui->getStarsButton->setVisible(false);
+		ui->downloadLabel->setText(q_("Finished downloading all star catalogs!"));
+		//BM: Doesn't this message duplicate the one below?
+		//This one should be something like "All available star catalogs are installed."
+		return;
+	}
+
+	ui->getStarsButton->setEnabled(true);
+	if (!nextStarCatalogToDownload.isEmpty())
+	{
+		ui->getStarsButton->setText(q_("Get catalog %1 of %2").arg(idx).arg(catalogConfig.size()));
+		const QVariantList& magRange = nextStarCatalogToDownload.value("magRange").toList();
+		ui->downloadLabel->setText(q_("Download size: %1MB\nStar count: %2 Million\nMagnitude range: %3 - %4")
+			.arg(nextStarCatalogToDownload.value("sizeMb").toString())
+			.arg(nextStarCatalogToDownload.value("count").toString())
+			.arg(magRange.at(0).toString())
+			.arg(magRange.at(1).toString()));
+		ui->getStarsButton->setVisible(true);
+	}
+	else
+	{
+		ui->downloadLabel->setText(q_("Finished downloading new star catalogs!\nRestart Stellarium to display them."));
+		ui->getStarsButton->setVisible(false);
+	}
+}
+
+void ConfigurationDialog::cancelDownload(void)
+{
+	Q_ASSERT(currentDownloadFile);
+	Q_ASSERT(starCatalogDownloadReply);
+	qWarning() << "Aborting download";
+	starCatalogDownloadReply->abort();
+}
+
 void ConfigurationDialog::newStarCatalogData()
 {
 	Q_ASSERT(currentDownloadFile);
@@ -659,17 +694,59 @@ void ConfigurationDialog::newStarCatalogData()
 	currentDownloadFile->write(starCatalogDownloadReply->read(size));
 }
 
+void ConfigurationDialog::downloadStars()
+{
+	Q_ASSERT(!nextStarCatalogToDownload.isEmpty());
+	Q_ASSERT(starCatalogDownloadReply==NULL);
+	Q_ASSERT(currentDownloadFile==NULL);
+	Q_ASSERT(progressBar==NULL);
+
+	QString path = StelFileMgr::getUserDir()+QString("/stars/default/")+nextStarCatalogToDownload.value("fileName").toString();
+	currentDownloadFile = new QFile(path);
+	if (!currentDownloadFile->open(QIODevice::WriteOnly))
+	{
+		qWarning() << "Can't open a writable file for storing new star catalog: " << path;
+		currentDownloadFile->deleteLater();
+		currentDownloadFile = NULL;
+		ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString()).arg(QString("Can't open a writable file for storing new star catalog: %1").arg(path)));
+		ui->downloadRetryButton->setVisible(true);
+		return;
+	}
+
+	ui->downloadLabel->setText(q_("Downloading %1...\n(You can close this window.)").arg(nextStarCatalogToDownload.value("id").toString()));
+	ui->downloadCancelButton->setVisible(true);
+	ui->downloadRetryButton->setVisible(false);
+	ui->getStarsButton->setVisible(true);
+	ui->getStarsButton->setEnabled(false);
+
+	QNetworkRequest req(nextStarCatalogToDownload.value("url").toString());
+	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
+	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
+	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toAscii());
+	starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);
+	connect(starCatalogDownloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
+	connect(starCatalogDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
+	connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
+
+	progressBar = StelApp::getInstance().getGui()->addProgressBar();
+	progressBar->setValue(0);
+	progressBar->setMaximum(nextStarCatalogToDownload.value("sizeMb").toDouble()*1024);
+	progressBar->setVisible(true);
+	progressBar->setFormat(QString("%1: %p%").arg(nextStarCatalogToDownload.value("id").toString()));
+}
+
 void ConfigurationDialog::downloadError(QNetworkReply::NetworkError)
 {
 	Q_ASSERT(currentDownloadFile);
 	Q_ASSERT(starCatalogDownloadReply);
 
 	qWarning() << "Error downloading file" << starCatalogDownloadReply->url() << ": " << starCatalogDownloadReply->errorString();
-	ui->downloadInfoText->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString()).arg(starCatalogDownloadReply->errorString()));
-	ui->stopDownloadCatalog->setVisible(false);
-	ui->startDownloadCatalog->setEnabled(true);
-	ui->startDownloadCatalog->setVisible(true);
-
+	ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString()).arg(starCatalogDownloadReply->errorString()));
+	ui->downloadCancelButton->setVisible(false);
+	ui->downloadRetryButton->setVisible(true);
+	ui->getStarsButton->setVisible(false);
+	ui->getStarsButton->setEnabled(true);
 }
 
 void ConfigurationDialog::downloadFinished()
@@ -716,120 +793,18 @@ void ConfigurationDialog::downloadFinished()
 	progressBar->deleteLater();
 	progressBar=NULL;
 
-	ui->downloadInfoText->setText(q_("Verifying file integrity..."));
+	ui->downloadLabel->setText(q_("Verifying file integrity..."));
 	if (GETSTELMODULE(StarMgr)->checkAndLoadCatalog(nextStarCatalogToDownload)==false)
 	{
-		ui->downloadInfoText->setText(q_("Error downloading %1:\nFile is corrupted.").arg(nextStarCatalogToDownload.value("id").toString()));
-		ui->stopDownloadCatalog->setVisible(false);
-		ui->startDownloadCatalog->setVisible(true);
+		ui->getStarsButton->setVisible(false);
+		ui->downloadLabel->setText(q_("Error downloading %1:\nFile is corrupted.").arg(nextStarCatalogToDownload.value("id").toString()));
+		ui->downloadCancelButton->setVisible(false);
+		ui->downloadRetryButton->setVisible(true);
 	}
 	else
 	{
-		ui->downloadInfoText->setText(q_("Successfully loaded data from new file %1").arg(nextStarCatalogToDownload.value("id").toString()));
 		hasDownloadedStarCatalog = true;
 	}
 
-	catalogSelectionChanged(nextStarCatalogToDownload.value("id").toString());
-}
-
-void ConfigurationDialog::populateCatalogList()
-{
-
-	int prevSel = ui->catalogListWidget->currentRow();
-	QVariantList catList = GETSTELMODULE(StarMgr)->getCatalogData();
-	QStringList catNames;
-	foreach (const QVariant& catV, catList)
-	{
-		catNames << catV.toMap().value("id").toString();
-	}
-	ui->catalogListWidget->clear();
-	ui->catalogListWidget->addItems(catNames);
-	// If we had a valid previous selection (i.e. not first time we
-	// populate), restore it
-	if (prevSel >= 0 && prevSel < ui->catalogListWidget->count())
-		ui->catalogListWidget->setCurrentRow(prevSel);
-	else
-		ui->catalogListWidget->setCurrentRow(0);
-}
-
-void ConfigurationDialog::catalogSelectionChanged(const QString& s)
-{
-	const QVariantMap catM = GETSTELMODULE(StarMgr)->getCatalogDescription(s);
-	const bool downloadable = not catM.value("checked").toBool();
-	const bool downloadInProgress = currentDownloadFile != NULL;
-	const QVariantList& magRange = catM.value("magRange").toList();
-	// Extra precaution since catalog descriptions come from outside
-	// sources and may as such have incomplete information
-	const QString catMB = catM.value("sizeMb").isNull() ? "?" : catM.value("sizeMb").toString();
-	const QString catStars = catM.value("count").isNull() ? "?" : catM.value("count").toString();
-	const QString MRStart = magRange.empty() ? "?" : magRange.at(0).toString();
-	const QString MREnd = magRange.empty() ? "?" : magRange.at(1).toString();
-
-	ui->startDownloadCatalog->setEnabled(downloadable);
-	// FIXME: currently we can only download one file at a time
-	ui->startDownloadCatalog->setVisible(downloadable && !downloadInProgress);
-	ui->stopDownloadCatalog->setEnabled(downloadInProgress);
-	ui->stopDownloadCatalog->setVisible(downloadInProgress);
-	ui->catalogInfoText->setText(q_("File size: %1MB\nStar count: %2 Million\nMagnitude range: %3 - %4")
-				.arg(catMB)
-				.arg(catStars)
-				.arg(MRStart)
-				.arg(MREnd));
-}
-
-void ConfigurationDialog::startDownloadCatalogClicked()
-{
-	const QVariantMap catM = GETSTELMODULE(StarMgr)->getCatalogDescription(ui->catalogListWidget->currentItem()->text());
-	QString path = StelFileMgr::getUserDir()+QString("/stars/default/") +
-				catM.value("fileName").toString();
-	currentDownloadFile = new QFile(path);
-	if (!currentDownloadFile->open(QIODevice::WriteOnly))
-	{
-		qWarning() << "Can't open a writable file for storing new star catalog: " << path;
-		currentDownloadFile->deleteLater();
-		currentDownloadFile = NULL;
-		ui->downloadInfoText->setText(q_("Error downloading %1:\n%2")
-					.arg(catM.value("id").toString())
-					.arg(QString("Can't open a writable file for storing new star catalog: %1").arg(path)));
-		return;
-	}
-	ui->startDownloadCatalog->setVisible(false);
-	ui->downloadInfoText->setText(q_("Downloading %1...\n(You can close this window.)").arg(catM.value("id").toString()));
-	ui->stopDownloadCatalog->setEnabled(true);
-	ui->stopDownloadCatalog->setVisible(true);
-
-	nextStarCatalogToDownload = catM;
-
-	QNetworkRequest req(catM.value("url").toString());
-	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
-	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
-	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toAscii());
-	starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);
-	connect(starCatalogDownloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
-	connect(starCatalogDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
-	connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
-
-	progressBar = StelApp::getInstance().getGui()->addProgressBar();
-	progressBar->setValue(0);
-	progressBar->setMaximum(catM.value("sizeMb").toDouble()*1024);
-	progressBar->setVisible(true);
-	progressBar->setFormat(QString("%1: %p%").arg(catM.value("id").toString()));
-}
-
-void ConfigurationDialog::stopDownloadCatalogClicked()
-{
-	Q_ASSERT(currentDownloadFile);
-	Q_ASSERT(starCatalogDownloadReply);
-	qWarning() << "Aborting download";
-	starCatalogDownloadReply->abort();
-}
-
-void ConfigurationDialog::populateObjectInfoList()
-{
-	Q_ASSERT(ui);
-	ui->objectInfoComboBox->clear();
-	ui->objectInfoComboBox->addItem(q_("None"), (StelObject::InfoStringGroup)0);
-	ui->objectInfoComboBox->addItem(q_("Brief"), StelObject::InfoStringGroup(StelObject::ShortInfo));
-	ui->objectInfoComboBox->addItem(q_("All available"), StelObject::InfoStringGroup(StelObject::AllInfo));
+	refreshStarCatalogButton();
 }
