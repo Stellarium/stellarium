@@ -449,8 +449,13 @@ void StelFileMgr::makeSureDirExistsAndIsWritable(const QString& dirFullPath)
 		{
 			throw std::runtime_error(QString("Could not create directory: " +uDir.filePath()).toStdString());
 		}
+		QFileInfo uDir2(dirFullPath);
+		if (!uDir2.isWritable())
+		{
+			throw std::runtime_error(QString("Directory is not writable: " +uDir2.filePath()).toStdString());
+		}
 	}
-	if (!uDir.isWritable())
+	else if (!uDir.isWritable())
 	{
 		throw std::runtime_error(QString("Directory is not writable: " +uDir.filePath()).toStdString());
 	}
