@@ -71,6 +71,14 @@ void ConfigurationDialog::languageChanged()
 {
 	if (dialog)
 		ui->retranslateUi(dialog);
+
+	//Script information
+	//(trigger re-displaying the description of the current item)
+	scriptSelectionChanged(ui->scriptListWidget->currentItem()->text());
+
+	//Plug-in information
+	//(the same trick)
+	pluginsSelectionChanged(ui->pluginsListWidget->currentItem()->text());
 }
 
 void ConfigurationDialog::styleChanged()
@@ -488,6 +496,10 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
+		//BM: Localization of plug-in name and description should be done
+		//in the plug-in, not here. This is acceptable only as a temporary
+		//solution if someone puts the necessary strings in translations.h
+		//so that they are included in the translation template.
 		if (s==desc.info.displayedName)
 		{
 			QString html = "<html><head></head><body>";
