@@ -20,13 +20,12 @@
 #ifndef _STELSCRIPTMGR_HPP_
 #define _STELSCRIPTMGR_HPP_
 
-#include "VecMath.hpp"
-
 #include <QObject>
 #include <QtScript>
 #include <QStringList>
 #include <QFile>
 #include <QTime>
+#include <QTimer>
 
 class StelMainScriptAPI;
 
@@ -47,15 +46,15 @@ public:
 	StelScriptMgr(QObject *parent=0);
 	~StelScriptMgr();
 
-	QStringList getScriptList(void);
+	QStringList getScriptList();
 
 	//! Find out if a script is running
 	//! @return true if a script is running, else false
-	bool scriptIsRunning(void);
+	bool scriptIsRunning();
 	//! Get the ID (filename) of the currently running script
 	//! @return Empty string if no script is running, else the 
 	//! ID of the script which is running.
-	QString runningScriptId(void);
+	QString runningScriptId();
 	
 public slots:
 	//! Gets a single line name of the script. 
@@ -103,17 +102,25 @@ public slots:
 
 	//! Stops any running script.
 	//! @return false if no script was running, true otherwise.
-	bool stopScript(void);
+	bool stopScript();
 
+	//! Changes the rate at which the script executes as a multiple of real time.
+	//! Note that this is not the same as the rate at which simulation time passes
+	//! because the script running at normal rate might set the simulation time rate
+	//! to be non-real time.
+	//! @param r rate, e.g. 2.0 = script runs at twice the normal rate
 	void setScriptRate(double r);
-	double getScriptRate(void);
+	
+	//! Get the rate at which the script is running as a multiple of the normal
+	//! execution rate.
+	double getScriptRate();
 
 	//! cause the emission of the scriptDebug signal.  This is so that functions in
 	//! StelMainScriptAPI can explicitly send information to the ScriptConsole
 	void debug(const QString& msg);
 
 private slots:
-	//! Called at the end of the running thread
+	//! Called at the end of the running threa
 	void scriptEnded();
 
 signals:
@@ -145,8 +152,9 @@ private:
 	QScriptEngine engine;
 	
 	//! The thread in which scripts are run
-	class StelScriptThread* thread;
 	StelMainScriptAPI *mainAPI;
+
+	QString scriptFileName;
 };
 
 #endif // _STELSCRIPTMGR_HPP_

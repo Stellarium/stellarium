@@ -179,7 +179,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
-	connect(getGuiActions("actionQuit_Global"), SIGNAL(triggered()), qApp, SLOT(quit()));
+	connect(getGuiActions("actionQuit_Global"), SIGNAL(triggered()), this, SLOT(quit()));
 
 	// Debug
 	connect(getGuiActions("action_Reload_Style"), SIGNAL(triggered()), this, SLOT(reloadStyle()));
@@ -486,6 +486,12 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
 
 	initDone = true;
+}
+
+void StelGui::quit()
+{
+	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();
+	QCoreApplication::exit();
 }
 
 //! Reload the current Qt Style Sheet (Debug only)

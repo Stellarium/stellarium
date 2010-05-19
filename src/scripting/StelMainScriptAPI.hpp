@@ -20,11 +20,11 @@
 #ifndef _STELMAINSCRIPTAPI_HPP_
 #define _STELMAINSCRIPTAPI_HPP_
 
-#include "ScriptSleeper.hpp"
-
 #include <QObject>
 #include <QVariant>
 #include <QStringList>
+
+class QScriptEngine;
 
 //! Provide script API for Stellarium global functions.  Public slots in this class
 //! may be used in Stellarium scripts, and are accessed as member function to the
@@ -39,10 +39,8 @@ class StelMainScriptAPI : public QObject
 	Q_PROPERTY(double timeSpeed READ getTimeRate WRITE setTimeRate)
 
 public:
-	StelMainScriptAPI(QObject *parent = 0);
+        StelMainScriptAPI(QObject *parent = 0);
 	~StelMainScriptAPI();
-
-	ScriptSleeper& getScriptSleeper(void);
 
 // These functions will be available in scripts
 public slots:
@@ -96,10 +94,6 @@ public slots:
 
 	//! Set the simulation time to the current system time, and the time rate to 1
 	void setRealTime();
-
-	//! Pauses the script for t seconds
-	//! @param t the number of seconds to wait
-	void wait(double t);
 
 	//! Waits until a specified simulation date/time.  This function
 	//! will take into account the rate (and direction) in which simulation
@@ -475,7 +469,6 @@ private:
 	//! For parameter descriptions see setDate().
 	//! @returns Julian day.
 	double jdFromDateString(const QString& dt, const QString& spec);
-	ScriptSleeper scriptSleeper;
 };
 
 #endif // _STELMAINSCRIPTAPI_HPP_

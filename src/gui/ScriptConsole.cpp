@@ -206,6 +206,9 @@ void ScriptConsole::runScript()
 		return;
 	}
 
+	ui->runButton->setEnabled(false);
+	ui->stopButton->setEnabled(true);
+
 	appendLogLine(QString("Starting script at %1").arg(QDateTime::currentDateTime().toString()));
 	if (!StelMainGraphicsView::getInstance().getScriptMgr().runScript(fileName, ui->includeEdit->text()))
 	{
@@ -223,12 +226,11 @@ void ScriptConsole::runScript()
 		}
 		return;
 	}
-	ui->runButton->setEnabled(false);
-	ui->stopButton->setEnabled(true);
 }
 
 void ScriptConsole::scriptEnded()
 {
+	qDebug() << "ScriptConsole::scriptEnded";
 	QString html = ui->outputBrowser->toHtml();
 	appendLogLine(QString("Script finished at %1").arg(QDateTime::currentDateTime().toString()));
 	ui->runButton->setEnabled(true);
@@ -238,6 +240,7 @@ void ScriptConsole::scriptEnded()
 void ScriptConsole::appendLogLine(const QString& s)
 {
 	QString html = ui->outputBrowser->toHtml();
+	html.replace(QRegExp("^\\s+"), "");
 	// if (html!="")
 	// 	html += "<br />";
 
