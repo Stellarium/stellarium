@@ -48,31 +48,6 @@
 
 Q_DECLARE_METATYPE(Vec3f);
 
-class StelScriptThread : public QThread
-{
-	public:
-		StelScriptThread(const QString& ascriptCode, QScriptEngine* aengine, QString fileName) : scriptCode(ascriptCode), engine(aengine), fname(fileName) {;}
-		QString getFileName() {return fname;}
-
-	protected:
-		void run()
-		{
-			// seed the QT PRNG
-			qsrand(QDateTime::currentDateTime().toTime_t());
-
-			// For startup scripts, the gui object might not
-			// have completed init when we run. Wait for that.
-			Q_ASSERT(StelApp::getInstance().getGui());
-			engine->evaluate(scriptCode);
-		}
-
-	private:
-		QString scriptCode;
-		QScriptEngine* engine;
-		QString fname;
-};
-
-
 QScriptValue vec3fToScriptValue(QScriptEngine *engine, const Vec3f& c)
 {
 	QScriptValue obj = engine->newObject();
@@ -98,9 +73,7 @@ QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 	return vec3fToScriptValue(engine, c);
 }
 
-StelScriptMgr::StelScriptMgr(QObject *parent)
-	: QObject(parent),
-	  thread(NULL)
+StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 {
 	// Scripting images
 	ScreenImageMgr* scriptImages = new ScreenImageMgr();
@@ -118,6 +91,9 @@ StelScriptMgr::StelScriptMgr(QObject *parent)
 	QScriptValue objectValue = engine.newQObject(mainAPI);
 	engine.globalObject().setProperty("core", objectValue);
 
+	engine.evaluate("function mywait__(sleepDurationSec) {var date = new Date(); var curDate = null; do {curDate = new Date()} while(curDate-date < sleepDurationSec*1000*scriptRateReadOnly);}");
+	engine.evaluate("core['wait'] = mywait__;");
+	
 	// Add all the StelModules into the script engine
 	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
 	foreach (StelModule* m, mmgr->getAllModules())
@@ -133,6 +109,10 @@ StelScriptMgr::StelScriptMgr(QObject *parent)
 	// For accessing star scale, twinkle etc.
 	objectValue = engine.newQObject(StelApp::getInstance().getCore()->getSkyDrawer());
 	engine.globalObject().setProperty("StelSkyDrawer", objectValue);
+	
+	setScriptRate(1.0);
+	
+	engine.setProcessEventsInterval(10);
 }
 
 
@@ -168,13 +148,13 @@ QStringList StelScriptMgr::getScriptList(void)
 
 bool StelScriptMgr::scriptIsRunning(void)
 {
-	return (thread != NULL);
+	return engine.isEvaluating();
 }
 
 QString StelScriptMgr::runningScriptId(void)
 {
-	if (thread)
-		return thread->getFileName();
+	if (engine.isEvaluating())
+		return scriptFileName;
 	else
 		return QString();
 }
@@ -288,7 +268,7 @@ const QString StelScriptMgr::getDescription(const QString& s)
 // Run the script located at the given location
 bool StelScriptMgr::runScript(const QString& fileName, const QString& includePath)
 {
-	if (thread!=NULL)
+	if (engine.isEvaluating())
 	{
 		QString msg = QString("ERROR: there is already a script running, please wait that it's over.");
 		emit(scriptDebug(msg));
@@ -333,6 +313,8 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 		return false;
 	}
 
+	scriptFileName = fileName;
+
 	if (includePath!="" && !includePath.isEmpty())
 		scriptDir = includePath;
 
@@ -352,51 +334,66 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 	}
 
 	tmpFile.seek(0);
-	thread = new StelScriptThread(QTextStream(&tmpFile).readAll(), &engine, fileName);
+	QString scriptCode = QTextStream(&tmpFile).readAll();     // bite me
 	tmpFile.close();
 
-	connect(thread, SIGNAL(finished()), this, SLOT(scriptEnded()));
-	thread->start();
+	// seed the PRNG so that script random numbers aren't always the same sequence
+	qsrand(QDateTime::currentDateTime().toTime_t());
+
+	// For startup scripts, the gui object might not
+	// have completed init when we run. Wait for that.
+	Q_ASSERT(StelApp::getInstance().getGui());
+
+	engine.globalObject().setProperty("scriptRateReadOnly", 1.0);
+	
+	// run that script
 	emit(scriptRunning());
+	qDebug() << "############# Start eval script";
+	engine.evaluate(scriptCode);
+	qDebug() << "############# End eval script";
+	scriptEnded();
 	return true;
 }
 
-bool StelScriptMgr::stopScript(void)
+bool StelScriptMgr::stopScript()
 {
-	if (thread)
+	if (engine.isEvaluating())
 	{
 		QString msg = QString("INFO: asking running script to exit");
 		emit(scriptDebug(msg));
 		qDebug() << msg;
-		thread->terminate();
+		engine.abortEvaluation();
 		return true;
 	}
 	else
 	{
-		QString msg = QString("WARNING: no script is running");
-		emit(scriptDebug(msg));
-		qWarning() << msg;
 		return false;
 	}
 }
 
 void StelScriptMgr::setScriptRate(double r)
 {
+	qDebug() << "StelScriptMgr::setScriptRate(" << r << ")";
+	if (!engine.isEvaluating())
+	{
+		engine.globalObject().setProperty("scriptRateReadOnly", r);
+		return;
+	}
+	
+	double currentScriptRate = engine.globalObject().property("scriptRateReadOnly").toNumber();
 	// pre-calculate the new time rate in an effort to prevent there being much latency
 	// between setting the script rate and the time rate.
-	double factor = r / mainAPI->getScriptSleeper().getRate();
+	float factor = r / currentScriptRate;
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	double newTimeRate = nav->getTimeRate() * factor;
-
-	mainAPI->getScriptSleeper().setRate(r);
-	if (scriptIsRunning())
-		nav->setTimeRate(newTimeRate);
-	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(newTimeRate);
+	nav->setTimeRate(nav->getTimeRate() * factor);
+	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(nav->getTimeRate());
+	
+	engine.globalObject().setProperty("scriptRateReadOnly", r);
 }
 
-double StelScriptMgr::getScriptRate(void)
+double StelScriptMgr::getScriptRate()
 {
-	return mainAPI->getScriptSleeper().getRate();
+	return engine.globalObject().property("scriptRateReadOnly").toNumber();
 }
 
 void StelScriptMgr::debug(const QString& msg)
@@ -406,15 +403,17 @@ void StelScriptMgr::debug(const QString& msg)
 
 void StelScriptMgr::scriptEnded()
 {
-	mainAPI->getScriptSleeper().setRate(1);
-	thread->deleteLater();
-	thread=NULL;
 	if (engine.hasUncaughtException())
 	{
 		QString msg = QString("script error: \"%1\" @ line %2").arg(engine.uncaughtException().toString()).arg(engine.uncaughtExceptionLineNumber());
 		emit(scriptDebug(msg));
 		qWarning() << msg;
 	}
+
+	// reset time rate to non-scaped script rates... TODO
+	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
+	nav->setTimeRate(nav->getTimeRate() / getScriptRate());
+	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(1.0);
 	emit(scriptStopped());
 }
 

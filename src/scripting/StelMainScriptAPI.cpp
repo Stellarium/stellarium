@@ -87,11 +87,6 @@ StelMainScriptAPI::~StelMainScriptAPI()
 {
 }
 
-ScriptSleeper& StelMainScriptAPI::getScriptSleeper(void)
-{
-	return scriptSleeper;
-}
-
 //! Set the current date in Julian Day
 //! @param JD the Julian Date
 void StelMainScriptAPI::setJDay(double JD)
@@ -121,14 +116,14 @@ QString StelMainScriptAPI::getDate(const QString&)
 void StelMainScriptAPI::setTimeRate(double ts)
 {
 	// 1 second = .00001157407407407407 JDay
-	StelApp::getInstance().getCore()->getNavigator()->setTimeRate(ts * 0.00001157407407407407 * scriptSleeper.getRate());
+        StelApp::getInstance().getCore()->getNavigator()->setTimeRate(ts * 0.00001157407407407407 * StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate());
 }
 
 //! Get time speed in JDay/sec
 //! @return time speed in JDay/sec
 double StelMainScriptAPI::getTimeRate(void) const
 {
-	return StelApp::getInstance().getCore()->getNavigator()->getTimeRate() / (0.00001157407407407407 * scriptSleeper.getRate());
+        return StelApp::getInstance().getCore()->getNavigator()->getTimeRate() / (0.00001157407407407407 * StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate());
 }
 
 bool StelMainScriptAPI::isRealTime()
@@ -140,11 +135,6 @@ void StelMainScriptAPI::setRealTime()
 {
 	setTimeRate(1.0);
 	StelApp::getInstance().getCore()->getNavigator()->setTimeNow();
-}
-
-void StelMainScriptAPI::wait(double t)
-{
-	scriptSleeper.sleep(t*1000);
 }
 
 void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
@@ -161,13 +151,15 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 	}
 	else if (timeSpeed > 0)
 	{
-		while(nav->getJDay() < JD)
-			scriptSleeper.sleep(200);
+		Q_ASSERT(0);
+//		while (nav->getJDay() < JD)
+//			StelMainGraphicsView::getInstance().getScriptMgr().sleep(200);
 	}
 	else
 	{
-		while(nav->getJDay() > JD)
-			scriptSleeper.sleep(200);
+		Q_ASSERT(0);
+//		while(nav->getJDay() > JD)
+//			StelMainGraphicsView::getInstance().getScriptMgr().sleep(200);
 	}
 }
 
@@ -433,12 +425,12 @@ int StelMainScriptAPI::getScreenHeight(void)
 
 double StelMainScriptAPI::getScriptRate(void)
 {
-	return scriptSleeper.getRate();
+        return StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate();
 }
 
 void StelMainScriptAPI::setScriptRate(double r)
 {
-	return scriptSleeper.setRate(r);
+        return StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(r);
 }
 
 void StelMainScriptAPI::setSelectedObjectInfo(const QString& level)
