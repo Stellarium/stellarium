@@ -24,7 +24,7 @@
 @section intro_scripts Introduction
 
 Since version 0.10.1, Stellarium includes a scripting feature based on the 
-<a href="http://doc.trolltech.com/4.3/qtscript.html">QT Scripting Engine</a>.  
+<a href="http://doc.trolltech.com/4.6/qtscript.html">QT Scripting Engine</a>.  
 This makes it possible to write small programs within Stellarium to produce 
 presentations, set up custom configurations, and to automate repetitive 
 tasks.  Prior to version 0.10.0, Stellarium used a different scripting engine 
@@ -77,8 +77,9 @@ of instances of a group of Stellarium's core classes.
 
 @section script_console Script Console
 
-Note:  The Script Console is a build-time option.  To enable this feature, 
-Stellarium must be built using the ENABLE_SCRIPT_CONSOLE=1 option to cmake.
+Note:  The Script Console has been enabled by default since version 0.10.5.  
+It is a build-time option.  To enable or disable this feature, use the
+ENABLE_SCRIPT_CONSOLE=1 or =0 option to cmake.
 
 It is possible to open, edit run and save scripts using the script console window.  
 To toggle the script console, press F12.  The script console also provides an output
