@@ -106,9 +106,12 @@ void StelMainScriptAPI::setDate(const QString& dt, const QString& spec)
 	StelApp::getInstance().getCore()->getNavigator()->setJDay(jdFromDateString(dt, spec));
 }
 
-QString StelMainScriptAPI::getDate(const QString&)
+QString StelMainScriptAPI::getDate(const QString& spec)
 {
-	return StelUtils::jdToIsoString(getJDay());
+	if (spec=="utc")
+		return StelUtils::jdToIsoString(getJDay());
+	else
+		return StelUtils::jdToIsoString(getJDay()+StelUtils::getGMTShiftFromQT(getJDay())/24);
 }
 
 //! Set time speed in JDay/sec
