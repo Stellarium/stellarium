@@ -44,6 +44,9 @@ MilkyWay::~MilkyWay()
 {
 	delete fader;
 	fader = NULL;
+	
+	delete vertexArray;
+	vertexArray = NULL;
 }
 
 void MilkyWay::init()

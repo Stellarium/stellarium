@@ -73,6 +73,12 @@ void StelApp::initStatic()
 	StelApp::qtime->start();
 }
 
+void StelApp::deinitStatic()
+{
+	delete StelApp::qtime;
+	StelApp::qtime = NULL;
+}
+
 /*************************************************************************
  Create and initialize the main Stellarium application.
 *************************************************************************/
@@ -116,6 +122,7 @@ StelApp::~StelApp()
 	StelModuleMgr* tmp = moduleMgr;
 	moduleMgr = new StelModuleMgr(); // Create a secondary instance to avoid crashes at other deinit
 	delete tmp; tmp=NULL;
+	delete skyImageMgr; skyImageMgr=NULL;
 	delete core; core=NULL;
 	delete skyCultureMgr; skyCultureMgr=NULL;
 	delete localeMgr; localeMgr=NULL;

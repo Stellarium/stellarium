@@ -156,6 +156,7 @@ public:
 	void setGui(StelGuiBase* b) {stelGui=b;}
 
 	static void initStatic();
+	static void deinitStatic();
 
 	//! Get flag for using opengl shaders
 	bool getUseGLShaders() const {return useGLShaders;}

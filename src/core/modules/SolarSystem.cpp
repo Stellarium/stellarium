@@ -80,6 +80,12 @@ SolarSystem::~SolarSystem()
 
 	delete allTrails;
 	allTrails = NULL;
+	
+	// Get rid of circular reference between the shared pointers which prevent proper destruction of the Planet objects.
+	foreach (PlanetP p, systemPlanets)
+	{
+		p->satellites.clear();
+	}
 }
 
 /*************************************************************************

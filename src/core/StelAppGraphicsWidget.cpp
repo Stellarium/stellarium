@@ -49,6 +49,8 @@ StelAppGraphicsWidget::~StelAppGraphicsWidget()
 	foregroundBuffer = NULL;
 	if (viewportEffect) delete viewportEffect;
 	viewportEffect = NULL;
+	
+	StelApp::deinitStatic();
 }
 
 void StelAppGraphicsWidget::init(QSettings* conf)

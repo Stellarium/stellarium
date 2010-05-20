@@ -87,7 +87,7 @@ void StelModuleMgr::unloadModule(const QString& moduleID, bool alsoDelete)
 	if (alsoDelete)
 	{
 		m->deinit();
-		m->deleteLater();
+		delete m;
 	}
 }
 

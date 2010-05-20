@@ -58,7 +58,7 @@ class CustomProxy : public QGraphicsProxyWidget
 		}
 };
 
-StelDialog::StelDialog() : dialog(NULL)
+StelDialog::StelDialog(QObject* parent) : QObject(parent), dialog(NULL)
 {
 }
 

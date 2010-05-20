@@ -69,9 +69,6 @@ private:
 	Vec3f lineColor;
 	QString angleText;
 	bool flagUseDmsFormat;
-	QPixmap* pxmapGlow;
-	QPixmap* pxmapOnIcon;
-	QPixmap* pxmapOffIcon;
 	StelButton* toolbarButton;
 
 	void calculateEnds(void);
