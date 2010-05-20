@@ -114,7 +114,7 @@ void StelProjector::computeBoundingCap()
 {
 	bool ok = unProject(viewportXywh[0]+0.5f*viewportXywh[2], viewportXywh[1]+0.5f*viewportXywh[3], boundingCap.n);
 	Q_ASSERT(ok);	// The central point should be at a valid position by definition
-	const bool needNormalization = fabs(boundingCap.n.lengthSquared()-1.)>0.000001;
+	const bool needNormalization = fabs(boundingCap.n.lengthSquared()-1.)>0.00000001;
 
 	// Now need to determine the aperture
 	Vec3d e0,e1,e2,e3,e4,e5;
@@ -129,10 +129,11 @@ void StelProjector::computeBoundingCap()
 	{
 		// Some points were in invalid positions, use full sky.
 		boundingCap.d = -1.;
+		boundingCap.n.set(1,0,0);
 		return;
 	}
-	if (needNormalization)
-	{
+//	if (needNormalization)
+//	{
 		boundingCap.n.normalize();
 		e0.normalize();
 		e1.normalize();
@@ -140,7 +141,7 @@ void StelProjector::computeBoundingCap()
 		e3.normalize();
 		e4.normalize();
 		e5.normalize();
-	}
+//	}
 	boundingCap.d = boundingCap.n*e0;
 	double h = boundingCap.n*e1;
 	if (boundingCap.d > h)

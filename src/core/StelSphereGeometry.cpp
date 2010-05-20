@@ -387,6 +387,10 @@ bool SphericalCap::intersects(const SphericalPolygon& polyBase) const
 
 bool SphericalCap::clipGreatCircle(Vec3d& v1, Vec3d& v2) const
 {
+	if (v1==v2)
+	{
+		return contains(v1);
+	}
 	const bool b1 = contains(v1);
 	const bool b2 = contains(v2);
 	if (b1)
