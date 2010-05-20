@@ -56,7 +56,7 @@
 #include <QFile>
 #include <QFileDialog>
 
-ConfigurationDialog::ConfigurationDialog(StelGui* agui) : starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
+ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
 {
 	ui = new Ui_configurationDialogForm;
 	hasDownloadedStarCatalog = false;

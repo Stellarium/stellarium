@@ -90,7 +90,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 
 	StelGuiBase::init(atopLevelGraphicsWidget, astelAppGraphicsWidget);
 
-	skyGui = new SkyGui();
+	skyGui = new SkyGui(atopLevelGraphicsWidget);
 	configurationDialog = new ConfigurationDialog(this);
 
 	///////////////////////////////////////////////////////////////////////

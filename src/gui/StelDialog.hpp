@@ -28,7 +28,7 @@ class StelDialog : public QObject
 {
 	Q_OBJECT
 public:
-	StelDialog();
+	StelDialog(QObject* parent=NULL);
 	virtual ~StelDialog();
 	//! Retranslate the content of the dialog
 	virtual void languageChanged()=0;
