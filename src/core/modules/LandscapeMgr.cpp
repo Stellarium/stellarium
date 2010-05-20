@@ -54,7 +54,7 @@ public:
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
 	void set_fade_duration(float duration) {fader.setDuration((int)(duration*1000.f));}
 	void setFlagShow(bool b){fader = b;}
-	bool getFlagShow(void) const {return fader;}
+	bool getFlagShow() const {return fader;}
 private:
 	float radius;
 	QFont font;
@@ -260,7 +260,7 @@ void LandscapeMgr::init()
 	atmosphere = new Atmosphere();
 	landscape = new LandscapeOldStyle();
 	defaultLandscapeID = conf->value("init_location/landscape_name").toString();
-	setCurrentLandscapeID(defaultLandscapeID, true);
+	setCurrentLandscapeID(defaultLandscapeID);
 	setFlagLandscape(conf->value("landscape/flag_landscape", conf->value("landscape/flag_ground", true).toBool()).toBool());
 	setFlagFog(conf->value("landscape/flag_fog",true).toBool());
 	setFlagAtmosphere(conf->value("landscape/flag_atmosphere").toBool());
@@ -278,8 +278,6 @@ void LandscapeMgr::init()
 		setAtmosphereBortleLightPollution(3);
 		ok = true;
 	}
-	connect(this, SIGNAL(requestSetCurrentLandscapeID(const QString&)), this, SLOT(doSetCurrentLandscapeID(const QString&)));
-	connect(this, SIGNAL(requestSetCurrentLandscapeName(const QString&)), this, SLOT(doSetCurrentLandscapeName(const QString&)));
 }
 
 void LandscapeMgr::setStelStyle(const QString& section)
@@ -291,29 +289,51 @@ void LandscapeMgr::setStelStyle(const QString& section)
 	setColorCardinalPoints(StelUtils::strToVec3f(conf->value(section+"/cardinal_color", defaultColor).toString()));
 }
 
-bool LandscapeMgr::setCurrentLandscapeID(const QString& id, bool inThread)
+bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 {
-	if (inThread)
-		return doSetCurrentLandscapeID(id);
-	else
+	if (id.isEmpty())
+		return false;
+
+	// We want to lookup the landscape ID (dir) from the name.
+	Landscape* newLandscape = NULL;
+	try
 	{
-		emit(requestSetCurrentLandscapeID(id));
-		return true;
+		newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
 	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "ERROR while loading default landscape " << "landscapes/" + id + "/landscape.ini" << ", (" << e.what() << ")";
+	}
+
+	if (!newLandscape)
+		return false;
+
+	if (landscape)
+	{
+		// Copy display parameters from previous landscape to new one
+		newLandscape->setFlagShow(landscape->getFlagShow());
+		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
+		delete landscape;
+		landscape = newLandscape;
+	}
+	currentLandscapeID = id;
+
+	if (getFlagLandscapeSetsLocation())
+	{
+		StelApp::getInstance().getCore()->getNavigator()->moveObserverTo(landscape->getLocation());
+	}
+	return true;
 }
 
-bool LandscapeMgr::setCurrentLandscapeName(const QString& name, bool inThread)
+bool LandscapeMgr::setCurrentLandscapeName(const QString& name)
 {
+	if (name.isEmpty())
+		return false;
+	
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
 	if (nameToDirMap.find(name)!=nameToDirMap.end())
 	{
-		if (inThread)
-			return setCurrentLandscapeID(nameToDirMap[name], true);
-		else
-		{
-			emit(requestSetCurrentLandscapeName(name));
-			return true;
-		}
+		return setCurrentLandscapeID(nameToDirMap[name]);
 	}
 	else
 	{
@@ -344,7 +364,7 @@ void LandscapeMgr::setFlagLandscape(bool b)
 	landscape->setFlagShow(b);
 }
 
-bool LandscapeMgr::getFlagLandscape(void) const
+bool LandscapeMgr::getFlagLandscape() const
 {
 	return landscape->getFlagShow();
 }
@@ -354,7 +374,7 @@ void LandscapeMgr::setFlagFog(bool b)
 	landscape->setFlagShowFog(b);
 }
 
-bool LandscapeMgr::getFlagFog(void) const
+bool LandscapeMgr::getFlagFog() const
 {
 	return landscape->getFlagShowFog();
 }
@@ -423,7 +443,7 @@ void LandscapeMgr::setFlagCardinalsPoints(bool b)
 }
 
 //! Get flag for displaying Cardinals Points
-bool LandscapeMgr::getFlagCardinalsPoints(void) const
+bool LandscapeMgr::getFlagCardinalsPoints() const
 {
 	return cardinalsPoints->getFlagShow();
 }
@@ -435,7 +455,7 @@ void LandscapeMgr::setColorCardinalPoints(const Vec3f& v)
 }
 
 //! Get Cardinals Points color
-Vec3f LandscapeMgr::getColorCardinalPoints(void) const
+Vec3f LandscapeMgr::getColorCardinalPoints() const
 {
 	return cardinalsPoints->get_color();
 }
@@ -450,7 +470,7 @@ void LandscapeMgr::setFlagAtmosphere(bool b)
 }
 
 //! Get flag for displaying Atmosphere
-bool LandscapeMgr::getFlagAtmosphere(void) const
+bool LandscapeMgr::getFlagAtmosphere() const
 {
 	return atmosphere->getFlagShow();
 }
@@ -462,19 +482,19 @@ void LandscapeMgr::setAtmosphereFadeDuration(float f)
 }
 
 //! Get atmosphere fade duration in s
-float LandscapeMgr::getAtmosphereFadeDuration(void) const
+float LandscapeMgr::getAtmosphereFadeDuration() const
 {
 	return atmosphere->getFadeDuration();
 }
 
 //! Set light pollution luminance level
-void LandscapeMgr::setAtmosphereLightPollutionLuminance(double f)
+void LandscapeMgr::setAtmosphereLightPollutionLuminance(float f)
 {
 	atmosphere->setLightPollutionLuminance(f);
 }
 
 //! Get light pollution luminance level
-double LandscapeMgr::getAtmosphereLightPollutionLuminance(void) const
+float LandscapeMgr::getAtmosphereLightPollutionLuminance() const
 {
 	return atmosphere->getLightPollutionLuminance();
 }
@@ -487,18 +507,18 @@ void LandscapeMgr::setAtmosphereBortleLightPollution(int bIndex)
 }
 
 //! Get the light pollution following the Bortle Scale
-int LandscapeMgr::getAtmosphereBortleLightPollution(void)
+int LandscapeMgr::getAtmosphereBortleLightPollution()
 {
 	return (int)std::pow(getAtmosphereLightPollutionLuminance()/0.0020, 1./2.1) + 1;
 }
 
-void LandscapeMgr::setZRotation(double d)
+void LandscapeMgr::setZRotation(float d)
 {
 	if (landscape)
 		landscape->setZRotation(d);
 }
 
-float LandscapeMgr::getLuminance(void)
+float LandscapeMgr::getLuminance()
 {
 	return atmosphere->getRealDisplayIntensityFactor();
 }
@@ -554,7 +574,7 @@ QString LandscapeMgr::nameToID(const QString& name)
 /****************************************************************************
  get a map of landscape name (from landscape.ini name field) to ID (dir name)
  ****************************************************************************/
-QMap<QString,QString> LandscapeMgr::getNameToDirMap(void) const
+QMap<QString,QString> LandscapeMgr::getNameToDirMap() const
 {
 	QSet<QString> landscapeDirs;
 	QMap<QString,QString> result;
@@ -583,71 +603,4 @@ QMap<QString,QString> LandscapeMgr::getNameToDirMap(void) const
 	return result;
 }
 
-bool LandscapeMgr::doSetCurrentLandscapeID(QString id)
-{
-	if (id.isEmpty())
-	{
-		emit(requestCompleteSetCurrentLandscapeID(false));
-		return false;
-	}
-
-	// We want to lookup the landscape ID (dir) from the name.
-	Landscape* newLandscape = NULL;
-
-	try
-	{
-		newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR while loading default landscape " << "landscapes/" + id + "/landscape.ini" << ", (" << e.what() << ")";
-	}
-
-	if (!newLandscape)
-	{
-		emit(requestCompleteSetCurrentLandscapeID(false));
-		return false;
-	}
-
-	if (landscape)
-	{
-		// Copy display parameters from previous landscape to new one
-		newLandscape->setFlagShow(landscape->getFlagShow());
-		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
-		delete landscape;
-		landscape = newLandscape;
-	}
-	currentLandscapeID = id;
-
-	if (getFlagLandscapeSetsLocation())
-	{
-		StelApp::getInstance().getCore()->getNavigator()->moveObserverTo(landscape->getLocation());
-	}
-
-	emit(requestCompleteSetCurrentLandscapeID(true));
-	return true;
-}
-
-bool LandscapeMgr::doSetCurrentLandscapeName(const QString& name)
-{
-	if (name.isEmpty())
-	{
-		emit(requestCompleteSetCurrentLandscapeName(false));
-		return false;
-	}
-
-	QMap<QString,QString> nameToDirMap = getNameToDirMap();
-	if (nameToDirMap.find(name)!=nameToDirMap.end())
-	{
-		bool result = setCurrentLandscapeID(nameToDirMap[name], true);
-		emit(requestCompleteSetCurrentLandscapeName(result));
-		return result;
-	}
-	else
-	{
-		qWarning() << "Can't find a landscape with name=" << name << endl;
-		emit(requestCompleteSetCurrentLandscapeName(false));
-		return false;
-	}
-}
 
