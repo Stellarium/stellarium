@@ -132,8 +132,8 @@ void StelProjector::computeBoundingCap()
 		boundingCap.n.set(1,0,0);
 		return;
 	}
-//	if (needNormalization)
-//	{
+	if (needNormalization)
+	{
 		boundingCap.n.normalize();
 		e0.normalize();
 		e1.normalize();
@@ -141,7 +141,7 @@ void StelProjector::computeBoundingCap()
 		e3.normalize();
 		e4.normalize();
 		e5.normalize();
-//	}
+	}
 	boundingCap.d = boundingCap.n*e0;
 	double h = boundingCap.n*e1;
 	if (boundingCap.d > h)
