@@ -39,7 +39,7 @@ class StelMainScriptAPI : public QObject
 	Q_PROPERTY(double timeSpeed READ getTimeRate WRITE setTimeRate)
 
 public:
-        StelMainScriptAPI(QObject *parent = 0);
+	StelMainScriptAPI(QObject *parent = 0);
 	~StelMainScriptAPI();
 
 // These functions will be available in scripts
@@ -49,7 +49,7 @@ public slots:
 	void setJDay(double JD);
 	//! Get the current date in Julian Day
 	//! @return the Julian Date
-	double getJDay(void) const;
+	double getJDay() const;
 
 	//! set the date in ISO format, e.g. "2008-03-24T13:21:01"
 	//! @param dt the date string to use.  Formats:
@@ -85,7 +85,7 @@ public slots:
 	void setTimeRate(double ts);
 	//! Get simulation time rate.
 	//! @return time speed as a multiple of real time.
-	double getTimeRate(void) const;
+	double getTimeRate() const;
 
 	//! Get the simulation time and rate state - is it "real time"
 	//! @return true if the time rate is normal, and the simulation time
@@ -94,16 +94,6 @@ public slots:
 
 	//! Set the simulation time to the current system time, and the time rate to 1
 	void setRealTime();
-
-	//! Waits until a specified simulation date/time.  This function
-	//! will take into account the rate (and direction) in which simulation
-	//! time is passing. e.g. if a future date is specified and the
-	//! time is moving backwards, the function will return immediately.
-	//! If the time rate is 0, the function will not wait.  This is to
-	//! prevent infinite wait time.
-	//! @param dt the date string to use
-	//! @param spec "local" or "utc"
-	void waitFor(const QString& dt, const QString& spec="utc");
 
 	//! Select an object by name
 	//! @param name the name of the object to select (english)
@@ -206,7 +196,7 @@ public slots:
 	//! of locations - do a search in the Location window to see what
 	//! where is.  e.g. "York, UnitedKingdom".
 	//! @param duration the number of seconds to take to move location.
-	void setObserverLocation(const QString id, double duration=1.);
+	void setObserverLocation(const QString id, float duration=1.);
 
 	//! Get the ID of the current observer location.
 	//! @param duration the number of seconds to take to move location.
@@ -287,7 +277,7 @@ public slots:
 
 	//! Get a list of Sky Culture IDs
 	//! @return a list of valid sky culture IDs
-	QStringList getAllSkyCultureIDs(void);
+	QStringList getAllSkyCultureIDs();
 
 	//! Find out the current sky culture
 	//! @return the ID of the current sky culture (i.e. the name of the directory in
@@ -399,14 +389,14 @@ public slots:
 
 	//! Get the screen width in pixels.
 	//! @return The screen width in pixels
-	int getScreenWidth(void);
+	int getScreenWidth();
 	//! Get the screen height in pixels.
 	//! @return The screen height in pixels
-	int getScreenHeight(void);
+	int getScreenHeight();
 
 	//! Get the script execution rate as a multiple of normal execution speed
 	//! @return the current script execution rate.
-	double getScriptRate(void);
+	double getScriptRate();
 	//! Set the script execution rate as a multiple of normal execution speed
 	//! @param r the multiple of the normal script execution speed, i.e.
 	//! if 5 is passed the script will execute 5 times faster than it would
@@ -417,11 +407,11 @@ public slots:
 	//! @param level, can be "AllInfo", "ShortInfo", "None"
 	void setSelectedObjectInfo(const QString& level);
 
-	//! stop the script
-	void exit(void);
+	//! Stop the script
+	void exit();
 
 	//! Close Stellarium
-	void quitStellarium(void);
+	void quitStellarium();
 
 	//! print a debugging message to the console
 	//! @param s the message to be displayed on the console.
@@ -429,7 +419,7 @@ public slots:
 
 	//! Get the current application language.
 	//! @return two letter language code, e.g. "en", or "de" and so on.
-	QString getAppLanguage(void);
+	QString getAppLanguage();
 
 	//! Set the current application language.
 	//! @param langCode two letter language code, e.g. "en", or "de".
@@ -437,12 +427,17 @@ public slots:
 
 	//! Get the current sky language.
 	//! @return two letter language code, e.g. "en", or "de" and so on.
-	QString getSkyLanguage(void);
+	QString getSkyLanguage();
 
 	//! Set the current sky language.
 	//! @param langCode two letter language code, e.g. "en", or "de".
 	void setSkyLanguage(QString langCode);
 
+	//! For use in setDate and waitFor
+	//! For parameter descriptions see setDate().
+	//! @returns Julian day.
+	double jdFromDateString(const QString& dt, const QString& spec);
+	
 signals:
 	void requestLoadSkyImage(const QString& id, const QString& filename,
 							 double c1, double c2,
@@ -463,12 +458,6 @@ signals:
 	void requestSetSkyCulture(QString id);
 	void requestSetDiskViewport(bool b);
 	void requestExit();
-
-private:
-	//! For use in setDate and waitFor
-	//! For parameter descriptions see setDate().
-	//! @returns Julian day.
-	double jdFromDateString(const QString& dt, const QString& spec);
 };
 
 #endif // _STELMAINSCRIPTAPI_HPP_
