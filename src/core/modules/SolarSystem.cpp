@@ -786,7 +786,7 @@ void SolarSystem::draw(StelCore* core)
 	// And sort them from the furthest to the closest
 	sort(systemPlanets.begin(),systemPlanets.end(),biggerDistance());
 
-	if (trailFader.getInterstate()>0.0000001)
+	if (trailFader.getInterstate()>0.0000001f)
 	{
 		StelPainter* sPainter = new StelPainter(core->getProjection2d());
 		allTrails->setOpacity(trailFader.getInterstate());
@@ -795,7 +795,7 @@ void SolarSystem::draw(StelCore* core)
 	}
 
 	// Draw the elements
-	float maxMagLabel=core->getSkyDrawer()->getLimitMagnitude()*0.80+(labelsAmount*1.2f)-2.f;
+	float maxMagLabel=core->getSkyDrawer()->getLimitMagnitude()*0.80f+(labelsAmount*1.2f)-2.f;
 	foreach (const PlanetP& p, systemPlanets)
 	{
 		p->draw(core, maxMagLabel, planetNameFont);
