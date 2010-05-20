@@ -54,7 +54,7 @@ class SkyGui: public QGraphicsWidget
 public:
 	friend class StelGui;
 	
-	SkyGui();
+	SkyGui(QGraphicsItem * parent=NULL);
 	//! Add a new progress bar in the lower right corner of the screen.
 	//! When the progress bar is deleted with removeProgressBar() the layout is automatically rearranged.
 	//! @return a pointer to the progress bar

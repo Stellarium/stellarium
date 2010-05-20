@@ -48,7 +48,7 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 
 void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 {
-	if (selected.size() == 0)
+	if (selected.isEmpty())
 	{
 		if (!document()->isEmpty())
 			document()->clear();
@@ -61,22 +61,22 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 	}
 }
 
-SkyGui::SkyGui(): QGraphicsWidget(), stelGui(NULL)
+SkyGui::SkyGui(QGraphicsItem * parent): QGraphicsWidget(parent), stelGui(NULL)
 {
 	setObjectName("StelSkyGui");
 
 	// Construct the Windows buttons bar
-	winBar = new LeftStelBar(NULL);
+	winBar = new LeftStelBar(this);
 	// Construct the bottom buttons bar
-	buttonBar = new BottomStelBar(NULL, QPixmap(":/graphicGui/btbg-left.png"), QPixmap(":/graphicGui/btbg-right.png"),
+	buttonBar = new BottomStelBar(this, QPixmap(":/graphicGui/btbg-left.png"), QPixmap(":/graphicGui/btbg-right.png"),
 								  QPixmap(":/graphicGui/btbg-middle.png"), QPixmap(":/graphicGui/btbg-single.png"));
-	infoPanel = new InfoPanel(NULL);
+	infoPanel = new InfoPanel(this);
 
 	// Used to display some progress bar in the lower right corner, e.g. when loading a file
-	progressBarMgr = new StelProgressBarMgr(NULL);
+	progressBarMgr = new StelProgressBarMgr(this);
 
 	// The path drawn around the button bars
-	buttonBarPath = new StelBarsPath(NULL);
+	buttonBarPath = new StelBarsPath(this);
 
 	lastButtonbarWidth = 0;
 	autoHidebts = NULL;

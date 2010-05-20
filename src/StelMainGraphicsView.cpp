@@ -179,7 +179,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	// This line seems to cause font aliasing troubles on win32
 	// setOptimizationFlags(QGraphicsView::DontSavePainterState);
 
-	setScene(new QGraphicsScene());
+	setScene(new QGraphicsScene(this));
 	scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
 
 	backItem = new QGraphicsWidget();

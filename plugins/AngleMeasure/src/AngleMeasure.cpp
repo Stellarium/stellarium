@@ -66,8 +66,7 @@ Q_EXPORT_PLUGIN2(AngleMeasure, AngleMeasureStelPluginInterface)
 
 AngleMeasure::AngleMeasure()
 	: flagShowAngleMeasure(false), lineVisible(false), dragging(false),
-	  angleText(""), flagUseDmsFormat(false), pxmapGlow(NULL), pxmapOnIcon(NULL),
-	  pxmapOffIcon(NULL), toolbarButton(NULL)
+	  angleText(""), flagUseDmsFormat(false), toolbarButton(NULL)
 {
 	setObjectName("AngleMeasure");
 	font.setPixelSize(16);
@@ -126,10 +125,7 @@ void AngleMeasure::init()
 	// Add a toolbar button
 	try
 	{
-		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
-		pxmapOnIcon = new QPixmap(":/angleMeasure/bt_anglemeasure_on.png");
-		pxmapOffIcon = new QPixmap(":/angleMeasure/bt_anglemeasure_off.png");
-		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiActions("actionShow_Angle_Measure"));
+		toolbarButton = new StelButton(NULL, QPixmap(":/angleMeasure/bt_anglemeasure_on.png"), QPixmap(":/angleMeasure/bt_anglemeasure_off.png"), QPixmap(":/graphicGui/glow32x32.png"), gui->getGuiActions("actionShow_Angle_Measure"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
 	catch (std::runtime_error& e)
