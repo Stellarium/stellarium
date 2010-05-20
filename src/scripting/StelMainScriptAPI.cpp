@@ -96,7 +96,7 @@ void StelMainScriptAPI::setJDay(double JD)
 
 //! Get the current date in Julian Day
 //! @return the Julian Date
-double StelMainScriptAPI::getJDay(void) const
+double StelMainScriptAPI::getJDay() const
 {
 	return StelApp::getInstance().getCore()->getNavigator()->getJDay();
 }
@@ -116,14 +116,14 @@ QString StelMainScriptAPI::getDate(const QString&)
 void StelMainScriptAPI::setTimeRate(double ts)
 {
 	// 1 second = .00001157407407407407 JDay
-        StelApp::getInstance().getCore()->getNavigator()->setTimeRate(ts * 0.00001157407407407407 * StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate());
+	StelApp::getInstance().getCore()->getNavigator()->setTimeRate(ts * 0.00001157407407407407 * StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate());
 }
 
 //! Get time speed in JDay/sec
 //! @return time speed in JDay/sec
-double StelMainScriptAPI::getTimeRate(void) const
+double StelMainScriptAPI::getTimeRate() const
 {
-        return StelApp::getInstance().getCore()->getNavigator()->getTimeRate() / (0.00001157407407407407 * StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate());
+	return StelApp::getInstance().getCore()->getNavigator()->getTimeRate() / (0.00001157407407407407 * StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate());
 }
 
 bool StelMainScriptAPI::isRealTime()
@@ -135,32 +135,6 @@ void StelMainScriptAPI::setRealTime()
 {
 	setTimeRate(1.0);
 	StelApp::getInstance().getCore()->getNavigator()->setTimeNow();
-}
-
-void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
-{
-	double JD = jdFromDateString(dt, spec);
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	Q_ASSERT(nav);
-	double timeSpeed = nav->getTimeRate();
-
-	if (timeSpeed == 0.)
-	{
-		qWarning() << "waitFor called with no time passing - would be infinite. not waiting!";
-		return;
-	}
-	else if (timeSpeed > 0)
-	{
-		Q_ASSERT(0);
-//		while (nav->getJDay() < JD)
-//			StelMainGraphicsView::getInstance().getScriptMgr().sleep(200);
-	}
-	else
-	{
-		Q_ASSERT(0);
-//		while(nav->getJDay() > JD)
-//			StelMainGraphicsView::getInstance().getScriptMgr().sleep(200);
-	}
 }
 
 void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, double altitude, double duration, const QString& name, const QString& planet)
@@ -181,7 +155,7 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 	nav->moveObserverTo(loc, duration);
 }
 
-void StelMainScriptAPI::setObserverLocation(const QString id, double duration)
+void StelMainScriptAPI::setObserverLocation(const QString id, float duration)
 {
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	Q_ASSERT(nav);
@@ -269,7 +243,7 @@ void StelMainScriptAPI::setProjectionMode(const QString& id)
 	emit(requestSetProjectionMode(id));
 }
 
-QStringList StelMainScriptAPI::getAllSkyCultureIDs(void)
+QStringList StelMainScriptAPI::getAllSkyCultureIDs()
 {
 	return StelApp::getInstance().getSkyCultureMgr().getSkyCultureListIDs();
 }
@@ -413,17 +387,17 @@ void StelMainScriptAPI::dropSound(const QString& id)
 	emit(requestDropSound(id));
 }
 
-int StelMainScriptAPI::getScreenWidth(void)
+int StelMainScriptAPI::getScreenWidth()
 {
 	return StelMainGraphicsView::getInstance().size().width();
 }
 
-int StelMainScriptAPI::getScreenHeight(void)
+int StelMainScriptAPI::getScreenHeight()
 {
 	return StelMainGraphicsView::getInstance().size().height();
 }
 
-double StelMainScriptAPI::getScriptRate(void)
+double StelMainScriptAPI::getScriptRate()
 {
         return StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate();
 }
@@ -445,12 +419,12 @@ void StelMainScriptAPI::setSelectedObjectInfo(const QString& level)
 		qWarning() << "setSelectedObjectInfo unknown level string \"" << level << "\"";
 }
 
-void StelMainScriptAPI::exit(void)
+void StelMainScriptAPI::exit()
 {
 	emit(requestExit());
 }
 
-void StelMainScriptAPI::quitStellarium(void)
+void StelMainScriptAPI::quitStellarium()
 {
 	QCoreApplication::exit();
 }
@@ -786,7 +760,7 @@ void StelMainScriptAPI::moveToRaDecJ2000(const QString& ra, const QString& dec, 
 	mvmgr->moveToJ2000(aimEquofDate, duration);
 }
 
-QString StelMainScriptAPI::getAppLanguage(void)
+QString StelMainScriptAPI::getAppLanguage()
 {
 	return StelApp::getInstance().getLocaleMgr().getAppLanguage();
 }
@@ -796,7 +770,7 @@ void StelMainScriptAPI::setAppLanguage(QString langCode)
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(langCode);
 }
 
-QString StelMainScriptAPI::getSkyLanguage(void)
+QString StelMainScriptAPI::getSkyLanguage()
 {
 	return StelApp::getInstance().getLocaleMgr().getSkyLanguage();
 }

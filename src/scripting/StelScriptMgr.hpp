@@ -102,7 +102,7 @@ public slots:
 
 	//! Stops any running script.
 	//! @return false if no script was running, true otherwise.
-	bool stopScript();
+	void stopScript();
 
 	//! Changes the rate at which the script executes as a multiple of real time.
 	//! Note that this is not the same as the rate at which simulation time passes

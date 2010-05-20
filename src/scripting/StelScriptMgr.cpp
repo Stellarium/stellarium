@@ -91,8 +91,29 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	QScriptValue objectValue = engine.newQObject(mainAPI);
 	engine.globalObject().setProperty("core", objectValue);
 
-	engine.evaluate("function mywait__(sleepDurationSec) {var date = new Date(); var curDate = null; do {curDate = new Date()} while(curDate-date < sleepDurationSec*1000*scriptRateReadOnly);}");
+	engine.evaluate("function mywait__(sleepDurationSec) {"
+					"if (sleepDurationSec<0) return;"
+					"var date = new Date();"
+					"var curDate = null;"
+					"do {curDate = new Date()}"
+					"    while(curDate-date < sleepDurationSec*1000*scriptRateReadOnly);}");
 	engine.evaluate("core['wait'] = mywait__;");
+	
+	//! Waits until a specified simulation date/time.  This function
+	//! will take into account the rate (and direction) in which simulation
+	//! time is passing. e.g. if a future date is specified and the
+	//! time is moving backwards, the function will return immediately.
+	//! If the time rate is 0, the function will not wait.  This is to
+	//! prevent infinite wait time.
+	//! @param dt the date string to use
+	//! @param spec "local" or "utc"
+	engine.evaluate("function mywaitFor__(dt, spec) {if (!spec) spec=\"utc\";"
+	"	var JD = core.jdFromDateString(dt, spec);"
+	"	var timeSpeed = core.getTimeRate();"
+	"	if (timeSpeed == 0.) {core.debug(\"waitFor called with no time passing - would be infinite. not waiting!\"); return;}"
+	"	if (timeSpeed > 0) {core.wait((JD-core.getJDay())*timeSpeed);}"
+	"	else {core.wait((core.getJDay()-JD)*timeSpeed);}}");
+	engine.evaluate("core['waitFor'] = mywaitFor__;");
 	
 	// Add all the StelModules into the script engine
 	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
@@ -348,39 +369,32 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 	
 	// run that script
 	emit(scriptRunning());
-	qDebug() << "############# Start eval script";
 	engine.evaluate(scriptCode);
-	qDebug() << "############# End eval script";
 	scriptEnded();
 	return true;
 }
 
-bool StelScriptMgr::stopScript()
+void StelScriptMgr::stopScript()
 {
 	if (engine.isEvaluating())
 	{
 		QString msg = QString("INFO: asking running script to exit");
 		emit(scriptDebug(msg));
-		qDebug() << msg;
+		//qDebug() << msg;
 		engine.abortEvaluation();
-		return true;
-	}
-	else
-	{
-		return false;
 	}
 }
 
 void StelScriptMgr::setScriptRate(double r)
 {
-	qDebug() << "StelScriptMgr::setScriptRate(" << r << ")";
+	// qDebug() << "StelScriptMgr::setScriptRate(" << r << ")";
 	if (!engine.isEvaluating())
 	{
 		engine.globalObject().setProperty("scriptRateReadOnly", r);
 		return;
 	}
 	
-	double currentScriptRate = engine.globalObject().property("scriptRateReadOnly").toNumber();
+	float currentScriptRate = engine.globalObject().property("scriptRateReadOnly").toNumber();
 	// pre-calculate the new time rate in an effort to prevent there being much latency
 	// between setting the script rate and the time rate.
 	float factor = r / currentScriptRate;
