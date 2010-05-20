@@ -76,7 +76,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Method specific to the landscape manager
 	//! Return the global landscape luminance, for being used e.g for setting eye adaptation.
-	float getLuminance(void);
+	float getLuminance();
 
 	//! Load a landscape based on a hash of parameters mirroring the landscape.ini
 	//! file and make it the current landscape.
@@ -109,24 +109,14 @@ public slots:
 	const QString& getCurrentLandscapeID() const {return currentLandscapeID;}
 	//! Change the current landscape to the landscape with the ID specified.
 	//! @param id the ID of the new landscape
-	//! @param inThread should be false when this is called from a script or a thread outside the main
-	//! program thread.  Note that if inThread is false, the return value will always be true.  The
-	//! return value may be retrieved asynchronously  by connecting the
-	//! requestCompleteSetCurrentLandscapeID signal to the calling code.
 	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found).
-	//! True on success or if inThread == false.
-	bool setCurrentLandscapeID(const QString& id, bool inThread=false);
+	bool setCurrentLandscapeID(const QString& id);
+	
 	//! Get the current landscape name.
 	QString getCurrentLandscapeName() const;
 	//! Change the current landscape to the landscape with the name specified.
 	//! @param name the name of the new landscape, as found in the landscape:name key of the landscape.ini file.
-	//! @param inThread should be false when this is called from a script or a thread outside the main
-	//! program thread.  Note that if inThread is false, the return value will always be true.  The
-	//! return value may be retrieved asynchronously  by connecting the
-	//! requestCompleteSetCurrentLandscapeID signal to the calling code.
-	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found).
-	//! True on success or if inThread == false.
-	bool setCurrentLandscapeName(const QString& name, bool inThread=false);
+	bool setCurrentLandscapeName(const QString& name);
 
 	//! Get the default landscape ID.
 	const QString& getDefaultLandscapeID() const {return defaultLandscapeID;}
@@ -176,38 +166,19 @@ public slots:
 	//! Set the light pollution following the Bortle Scale
 	void setAtmosphereBortleLightPollution(int bIndex);
 	//! Get the light pollution following the Bortle Scale
-	int getAtmosphereBortleLightPollution(void);
+	int getAtmosphereBortleLightPollution();
 
 	//! Set the rotation of the landscape about the z-axis.
 	//! This is intended for special uses such as when the landscape consists of
 	//! a vehicle which might change orientation over time (e.g. a ship).
 	//! @param d the rotation angle in degrees as an offset from the originally loaded value.
-	void setZRotation(double d);
-
-signals:
-	// used for multi-threaded mode callbacks
-	void requestSetCurrentLandscapeID(const QString& id);
-	void requestCompleteSetCurrentLandscapeID(bool success);
-	void requestSetCurrentLandscapeName(const QString& name);
-	void requestCompleteSetCurrentLandscapeName(bool success);
-
-private slots:
-	// Callbacks for threaded mode landscape setting which use signals
-
-	//! Change the current landscape to the landscape with the ID specified.
-	//! @param id the ID of the new landscape
-	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found). True on success.
-	bool doSetCurrentLandscapeID(QString id);
-	//! Change the current landscape to the landscape with the name specified.
-	//! @param name the name of the new landscape, as found in the landscape:name key of the landscape.ini file.
-	//! @return false if the new landscape could not be set (e.g. no landscape of that name was found). True on success.
-	bool doSetCurrentLandscapeName(const QString& name);
+	void setZRotation(float d);
 
 private:
 	//! Get light pollution luminance level.
-	double getAtmosphereLightPollutionLuminance() const;
+	float getAtmosphereLightPollutionLuminance() const;
 	//! Set light pollution luminance level.
-	void setAtmosphereLightPollutionLuminance(double f);
+	void setAtmosphereLightPollutionLuminance(float f);
 
 	//! For a given landscape name, return the landscape ID.
 	//! This takes a name of the landscape, as described in the landscape:name item in the
@@ -215,7 +186,7 @@ private:
 	QString nameToID(const QString& name);
 
 	//! Return a map of landscape name to landscape ID (directory name).
-	QMap<QString,QString> getNameToDirMap(void) const;
+	QMap<QString,QString> getNameToDirMap() const;
 
 	Atmosphere* atmosphere;			// Atmosphere
 	Cardinals* cardinalsPoints;		// Cardinals points
