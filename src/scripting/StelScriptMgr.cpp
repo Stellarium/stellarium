@@ -95,8 +95,8 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 					"if (sleepDurationSec<0) return;"
 					"var date = new Date();"
 					"var curDate = null;"
-					"do {curDate = new Date()}"
-					"    while(curDate-date < sleepDurationSec*1000*scriptRateReadOnly);}");
+					"do {curDate = new Date();}"
+					"    while(curDate-date < sleepDurationSec*1000/scriptRateReadOnly);}");
 	engine.evaluate("core['wait'] = mywait__;");
 	
 	//! Waits until a specified simulation date/time.  This function
@@ -368,9 +368,9 @@ void StelScriptMgr::stopScript()
 	}
 }
 
-void StelScriptMgr::setScriptRate(double r)
+void StelScriptMgr::setScriptRate(float r)
 {
-	// qDebug() << "StelScriptMgr::setScriptRate(" << r << ")";
+	qDebug() << "StelScriptMgr::setScriptRate(" << r << ")";
 	if (!engine.isEvaluating())
 	{
 		engine.globalObject().setProperty("scriptRateReadOnly", r);
@@ -378,13 +378,14 @@ void StelScriptMgr::setScriptRate(double r)
 	}
 	
 	float currentScriptRate = engine.globalObject().property("scriptRateReadOnly").toNumber();
+	
 	// pre-calculate the new time rate in an effort to prevent there being much latency
 	// between setting the script rate and the time rate.
 	float factor = r / currentScriptRate;
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	nav->setTimeRate(nav->getTimeRate() * factor);
-	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(nav->getTimeRate());
 	
+	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(nav->getTimeRate());
 	engine.globalObject().setProperty("scriptRateReadOnly", r);
 }
 
