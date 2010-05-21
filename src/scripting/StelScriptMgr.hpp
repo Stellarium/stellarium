@@ -109,7 +109,7 @@ public slots:
 	//! because the script running at normal rate might set the simulation time rate
 	//! to be non-real time.
 	//! @param r rate, e.g. 2.0 = script runs at twice the normal rate
-	void setScriptRate(double r);
+	void setScriptRate(float r);
 	
 	//! Get the rate at which the script is running as a multiple of the normal
 	//! execution rate.
