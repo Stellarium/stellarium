@@ -32,7 +32,7 @@
 #include <QString>
 #include <QVariant>
 
-bool StelScriptMgr::preprocessStratoScript(QFile& input, QFile& output, const QString& scriptDir)
+bool StelScriptMgr::preprocessStratoScript(QFile& input, QString& output, const QString& scriptDir)
 {
 	int n=0;
 	qDebug() << "Translating stratoscript:";
@@ -306,7 +306,7 @@ bool StelScriptMgr::preprocessStratoScript(QFile& input, QFile& output, const QS
 		}
 		qDebug() << QString("%1: ").arg(++n, 4) + line;
 		line += "\n";
-		output.write(line.toUtf8());
+		output += line.toUtf8();
 	}
 	return true;
 }
