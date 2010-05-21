@@ -370,7 +370,7 @@ void StelScriptMgr::stopScript()
 
 void StelScriptMgr::setScriptRate(float r)
 {
-	qDebug() << "StelScriptMgr::setScriptRate(" << r << ")";
+	//qDebug() << "StelScriptMgr::setScriptRate(" << r << ")";
 	if (!engine.isEvaluating())
 	{
 		engine.globalObject().setProperty("scriptRateReadOnly", r);
