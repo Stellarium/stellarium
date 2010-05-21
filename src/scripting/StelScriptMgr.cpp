@@ -194,8 +194,9 @@ const QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, co
 		}
 
 		QRegExp nameExp("^\\s*//\\s*" + id + ":\\s*(.+)$");
-		while (!file.atEnd()) {
-			QString line(file.readLine());
+		while (!file.atEnd())
+		{
+			QString line = QString::fromUtf8(file.readLine());
 			if (nameExp.exactMatch(line))
 			{
 				file.close();
@@ -247,9 +248,9 @@ const QString StelScriptMgr::getDescription(const QString& s)
 		QRegExp descExp("^\\s*//\\s*Description:\\s*([^\\s].+)\\s*$");
 		QRegExp descNewlineExp("^\\s*//\\s*$");
 		QRegExp descContExp("^\\s*//\\s*([^\\s].*)\\s*$");
-		while (!file.atEnd()) {
-			QString line(file.readLine());
-
+		while (!file.atEnd())
+		{
+			QString line = QString::fromUtf8(file.readLine());
 			if (!inDesc && descExp.exactMatch(line))
 			{
 				inDesc = true;
@@ -314,49 +315,31 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 		qWarning() << msg;
 		return false;
 	}
-	// pre-process the script into a temporary file
-	QTemporaryFile tmpFile;
-	bool ok = false;
-	if (!tmpFile.open())
-	{
-		QString msg = QString("WARNING: cannot create temporary file for script pre-processing");
-		emit(scriptDebug(msg));
-		qWarning() << msg;
-		return false;
-	}
 	QFile fic(absPath);
 	if (!fic.open(QIODevice::ReadOnly))
 	{
 		QString msg = QString("WARNING: cannot open script: %1").arg(fileName);
 		emit(scriptDebug(msg));
 		qWarning() << msg;
-		tmpFile.close();
 		return false;
 	}
 
 	scriptFileName = fileName;
-
-	if (includePath!="" && !includePath.isEmpty())
+	if (!includePath.isEmpty())
 		scriptDir = includePath;
 
+	QString preprocessedScript;
+	bool ok=false;
 	if (fileName.right(4) == ".ssc")
-		ok = preprocessScript(fic, tmpFile, scriptDir);
+		ok = preprocessScript(fic, preprocessedScript, scriptDir);
 #ifdef ENABLE_STRATOSCRIPT_COMPAT
 	else if (fileName.right(4) == ".sts")
-		ok = preprocessStratoScript(fic, tmpFile, scriptDir);
+		ok = preprocessStratoScript(fic, preprocessedScript, scriptDir);
 #endif
-
-	fic.close();
-
 	if (ok==false)
 	{
-		tmpFile.close();
 		return false;
 	}
-
-	tmpFile.seek(0);
-	QString scriptCode = QTextStream(&tmpFile).readAll();     // bite me
-	tmpFile.close();
 
 	// seed the PRNG so that script random numbers aren't always the same sequence
 	qsrand(QDateTime::currentDateTime().toTime_t());
@@ -369,7 +352,7 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 	
 	// run that script
 	emit(scriptRunning());
-	engine.evaluate(scriptCode);
+	engine.evaluate(preprocessedScript);
 	scriptEnded();
 	return true;
 }
@@ -451,12 +434,12 @@ bool StelScriptMgr::strToBool(const QString& str)
 	return QVariant(str).toBool();
 }
 
-bool StelScriptMgr::preprocessScript(QFile& input, QFile& output, const QString& scriptDir)
+bool StelScriptMgr::preprocessScript(QFile& input, QString& output, const QString& scriptDir)
 {
+	QRegExp includeRe("^include\\s*\\(\\s*\"([^\"]+)\"\\s*\\)\\s*;\\s*(//.*)?$");
 	while (!input.atEnd())
 	{
 		QString line = QString::fromUtf8(input.readLine());
-		QRegExp includeRe("^include\\s*\\(\\s*\"([^\"]+)\"\\s*\\)\\s*;\\s*(//.*)?$");
 		if (includeRe.exactMatch(line))
 		{
 			QString fileName = includeRe.capturedTexts().at(1);
@@ -495,7 +478,8 @@ bool StelScriptMgr::preprocessScript(QFile& input, QFile& output, const QString&
 		}
 		else
 		{
-			output.write(line.toUtf8());
+			output += line;
+			output += '\n';
 		}
 	}
 	return true;

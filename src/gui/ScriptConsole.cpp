@@ -152,7 +152,7 @@ void ScriptConsole::preprocessScript()
 {
 	qDebug() << "ScriptConsole::preprocessScript";
 	QTemporaryFile src(QDir::tempPath() + "/stelscriptXXXXXX");
-	QTemporaryFile dest(QDir::tempPath() + "/stelscriptXXXXXX");
+	QString dest;
 	QString srcName;
 	if (src.open())
 	{
@@ -161,8 +161,7 @@ void ScriptConsole::preprocessScript()
 		srcName = src.fileName();
 		src.close();
 		src.open();
-		if (dest.open())
-		{
+
 			if (sender() == ui->preprocessSSCButton)
 			{
 				qDebug() << "Preprocessing with SSC proprocessor";
@@ -177,11 +176,8 @@ void ScriptConsole::preprocessScript()
 #endif
 			else
 				qWarning() << "WARNING: unknown preprocessor type";
-				
-			dest.seek(0);
-			ui->scriptEdit->setPlainText(dest.readAll());
-			dest.close();
-		}
+
+			ui->scriptEdit->setPlainText(dest);
 	}
 	ui->tabs->setCurrentIndex(0);
 }
