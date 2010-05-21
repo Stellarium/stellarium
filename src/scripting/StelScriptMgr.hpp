@@ -136,10 +136,10 @@ private:
 	QMap<QString, QString> mappify(const QStringList& args, bool lowerKey=false);
 	bool strToBool(const QString& str);
 	// Pre-processor functions
-	bool preprocessScript(QFile& input, QFile& output, const QString& scriptDir);
+	bool preprocessScript(QFile& input, QString& output, const QString& scriptDir);
 
 #ifdef ENABLE_STRATOSCRIPT_COMPAT
-	bool preprocessStratoScript(QFile& input, QFile& output, const QString& scriptDir);
+	bool preprocessStratoScript(QFile& input, QString& output, const QString& scriptDir);
 #endif
 
 	//! This function is for use with getName, getAuthor and getLicense.

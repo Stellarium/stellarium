@@ -1,5 +1,5 @@
 //
-// Name: Labels Demo
+// Name: Labels Demo.
 // License: Public Domain
 // Author: Matthew Gates
 // Description: Example script to show how to use LabelMgr
@@ -40,7 +40,7 @@ function commentary_at(text, x, y)
 	LabelMgr.deleteLabel(id);
 }
 
-commentary("This script is a test of LabelMgr");
+commentary("This script is a test of LabelMgr.");
 commentary("Labels can be fixed to screen x,y values...");
 commentary_at("0,0", 0, 0);
 commentary_at("100,100", 100, 100);
