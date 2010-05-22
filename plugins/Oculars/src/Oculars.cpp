@@ -95,6 +95,7 @@ Oculars::Oculars() : selectedOcularIndex(-1), flagShowOculars(false), usageMessa
 {
 	flagShowOculars = false;
 	flagShowCrosshairs = false;
+	flagShowTelrad = false;
 	font.setPixelSize(14);
 	maxImageCircle = 0.0;
 	CCDs = QList<CCD *>();
@@ -145,36 +146,38 @@ bool Oculars::configureGui(bool show)
 //! Draw any parts on the screen which are for our module
 void Oculars::draw(StelCore* core)
 {
-	if (!flagShowOculars){
-		return;
+	if (flagShowTelrad) {
+		drawTelrad();
+	}
+	if (flagShowOculars){
+		// Insure there is a selected ocular & telescope
+		if (selectedCCDIndex > CCDs.count()) {
+			qWarning() << "Oculars: the selected sensor index of " << selectedCCDIndex << " is greater than the sensor count of "
+			<< CCDs.count() << ". Module disabled!";
+			ready = false;
+		}
+		if (selectedOcularIndex > oculars.count()) {
+			qWarning() << "Oculars: the selected ocular index of " << selectedOcularIndex << " is greater than the ocular count of "
+			<< oculars.count() << ". Module disabled!";
+			ready = false;
+		}
+		else if (selectedTelescopeIndex > telescopes.count()) {
+			qWarning() << "Oculars: the selected telescope index of " << selectedTelescopeIndex << " is greater than the telescope count of "
+			<< telescopes.count() << ". Module disabled!";
+			ready = false;
+		}
+		
+		if (ready) {
+			paintMask();
+			if (flagShowCrosshairs)  {
+				drawCrosshairs();
+			}
+			// Paint the information in the upper-right hand corner
+			paintText(core);
+		}
+		newInstrument = false; // Now that it's been drawn once
 	}
 	
-	// Insure there is a selected ocular & telescope
-	if (selectedCCDIndex > CCDs.count()) {
-		qWarning() << "Oculars: the selected sensor index of " << selectedCCDIndex << " is greater than the sensor count of "
-				   << CCDs.count() << ". Module disabled!";
-		ready = false;
-	}
-	if (selectedOcularIndex > oculars.count()) {
-		qWarning() << "Oculars: the selected ocular index of " << selectedOcularIndex << " is greater than the ocular count of "
-				   << oculars.count() << ". Module disabled!";
-		ready = false;
-	}
-	else if (selectedTelescopeIndex > telescopes.count()) {
-		qWarning() << "Oculars: the selected telescope index of " << selectedTelescopeIndex << " is greater than the telescope count of "
-				   << telescopes.count() << ". Module disabled!";
-		ready = false;
-	}
-
-	if (ready) {
-		paintMask();
-		if (flagShowCrosshairs)  {
-			drawCrosshairs();
-		}
-		// Paint the information in the upper-right hand corner
-		paintText(core);
-	}
-	newInstrument = false; // Now that it's been drawn once
 }
 
 //! Determine which "layer" the plagin's drawing will happen on.
@@ -476,6 +479,11 @@ void Oculars::toggleCrosshair()
 	flagShowCrosshairs = !flagShowCrosshairs;
 }
 
+void Oculars::toggleTelrad()
+{
+	flagShowTelrad = !flagShowTelrad;
+}
+
 /* ********************************************************************* */
 #if 0
 #pragma mark -
@@ -505,6 +513,24 @@ void Oculars::drawCrosshairs()
 	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0] - length, centerScreen[1]);
 }
 
+void Oculars::drawTelrad()
+{
+	if (!flagShowOculars) {
+		const StelProjectorP projector = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
+
+		StelPainter painter(projector);
+		painter.setColor(0.77, 0.14, 0.16, 0.0);
+
+		StelCore *core = StelApp::getInstance().getCore();
+		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+		Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
+						   projector->getViewportPosY()+projector->getViewportHeight()/2);
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (0.5));
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (2.0));
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (4.0));
+	}
+}
+
 void Oculars::initializeActivationActions()
 {
 	QString group = "Oculars Plugin";
@@ -517,6 +543,9 @@ void Oculars::initializeActivationActions()
 	gui->addGuiActions("actionShow_Ocular_Window", N_("Configuration Window"), "ALT+O", group, true);
 	connect(gui->getGuiActions("actionShow_Ocular_Window"), SIGNAL(toggled(bool)), ocularDialog, SLOT(setVisible(bool)));
 	connect(ocularDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Ocular_Window"), SLOT(setChecked(bool)));
+	gui->addGuiActions("actionShow_Ocular_Telrad", N_("Display Telrad"), "Ctrl+B", group, true);
+	gui->getGuiActions("actionShow_Ocular_Telrad")->setChecked(flagShowTelrad);
+	connect(gui->getGuiActions("actionShow_Ocular_Telrad"), SIGNAL(toggled(bool)), this, SLOT(toggleTelrad()));
 
 	// Make a toolbar button
 	try {
