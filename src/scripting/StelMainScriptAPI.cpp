@@ -109,9 +109,9 @@ void StelMainScriptAPI::setDate(const QString& dt, const QString& spec)
 QString StelMainScriptAPI::getDate(const QString& spec)
 {
 	if (spec=="utc")
-		return StelUtils::jdToIsoString(getJDay());
+		return StelUtils::julianDayToISO8601String(getJDay());
 	else
-		return StelUtils::jdToIsoString(getJDay()+StelUtils::getGMTShiftFromQT(getJDay())/24);
+		return StelUtils::julianDayToISO8601String(getJDay()+StelUtils::getGMTShiftFromQT(getJDay())/24);
 }
 
 //! Set time speed in JDay/sec
@@ -440,36 +440,33 @@ void StelMainScriptAPI::debug(const QString& s)
 
 double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)
 {
-	QDateTime qdt;
-	double JD;
-
-	// 2008-03-24T13:21:01
-	QRegExp isoRe("^\\d{4}[:\\-]\\d\\d[:\\-]\\d\\dT\\d?\\d:\\d\\d:\\d\\d$");
-	QRegExp nowRe("^(now)?(\\s*([+\\-])\\s*(\\d+(\\.\\d+)?)\\s*(second|seconds|minute|minutes|hour|hours|day|days|week|weeks))(\\s+(sidereal)?)?");
-
 	if (dt == "now")
 		return StelUtils::getJDFromSystem();
-	else if (isoRe.exactMatch(dt))
+	
+	bool ok;
+	double jd;
+	if (spec=="local")
 	{
-		qdt = QDateTime::fromString(dt, Qt::ISODate);
-
-		if (spec=="local")
-			JD = StelUtils::qDateTimeToJd(qdt.toUTC());
-		else
-			JD = StelUtils::qDateTimeToJd(qdt);
-
-		return JD;
+		jd = StelApp::getInstance().getLocaleMgr().getJdFromISO8601TimeLocal(dt, &ok);
 	}
-	else if (nowRe.exactMatch(dt))
+	else
+	{
+		jd = StelUtils::getJulianDayFromISO8601String(dt, &ok);
+	}
+	if (ok)
+		return jd;
+	
+	QRegExp nowRe("^(now)?(\\s*([+\\-])\\s*(\\d+(\\.\\d+)?)\\s*(second|seconds|minute|minutes|hour|hours|day|days|week|weeks))(\\s+(sidereal)?)?");
+	if (nowRe.exactMatch(dt))
 	{
 		double delta;
 		double unit;
 		double dayLength = 1.0;
 
 		if (nowRe.capturedTexts().at(1)=="now")
-			JD = StelUtils::getJDFromSystem();
+			jd = StelUtils::getJDFromSystem();
 		else
-			JD = StelApp::getInstance().getCore()->getNavigator()->getJDay();
+			jd = StelApp::getInstance().getCore()->getNavigator()->getJDay();
 
 		if (nowRe.capturedTexts().at(8) == "sidereal")
 			dayLength = StelApp::getInstance().getCore()->getNavigator()->getLocalSideralDayLength();
@@ -494,17 +491,14 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 		delta = nowRe.capturedTexts().at(4).toDouble();
 
 		if (nowRe.capturedTexts().at(3) == "+")
-			JD += (unit * delta);
+			jd += (unit * delta);
 		else if (nowRe.capturedTexts().at(3) == "-")
-			JD -= (unit * delta);
-
-		return JD;
+			jd -= (unit * delta);
+		return jd;
 	}
-	else
-	{
-		qWarning() << "StelMainScriptAPI::jdFromDateString error - date string" << dt << "not recognised, returning \"now\"";
-		return StelUtils::getJDFromSystem();
-	}
+	
+	qWarning() << "StelMainScriptAPI::jdFromDateString error: date string" << dt << "not recognised, returning \"now\"";
+	return StelUtils::getJDFromSystem();
 }
 
 void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)

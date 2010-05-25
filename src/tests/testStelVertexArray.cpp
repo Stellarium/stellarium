@@ -43,9 +43,9 @@ void TestStelVertexArray::initTestCase()
 
 struct EmptyVisitor
 {
-	inline void operator()(const Vec3d* v0, const Vec3d* v1, const Vec3d* v2,
-						   const Vec2f* t0, const Vec2f* t1, const Vec2f* t2,
-						   unsigned int i0, unsigned int i1, unsigned int i2)
+	inline void operator()(const Vec3d* , const Vec3d* , const Vec3d* ,
+						   const Vec2f* , const Vec2f* , const Vec2f* ,
+						   unsigned int , unsigned int , unsigned int )
 	{
 
 	}
@@ -64,9 +64,9 @@ struct VerticesVisitor
 	VerticesVisitor(const VerticesVisitor& rst) : sum(rst.sum) {}
 
 	VerticesVisitor() : sum(0, 0, 0) {}
-	inline void operator()(const Vec3d* v0, const Vec3d* v1, const Vec3d* v2,
-						   const Vec2f* t0, const Vec2f* t1, const Vec2f* t2,
-						   unsigned int i0, unsigned int i1, unsigned int i2)
+	inline void operator()(const Vec3d* , const Vec3d* v1, const Vec3d* v2,
+						   const Vec2f* , const Vec2f* , const Vec2f* ,
+						   unsigned int , unsigned int , unsigned int )
 	{
 		sum += *v1 + *v2;
 	}
