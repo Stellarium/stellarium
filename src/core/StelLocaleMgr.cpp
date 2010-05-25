@@ -171,44 +171,26 @@ QString StelLocaleMgr::getISO8601TimeLocal(double JD) const
 	{
 		shift = StelUtils::getGMTShiftFromQT(JD)*0.041666666666;
 	}
-	return StelUtils::jdToIsoString(JD + shift);
+	return StelUtils::julianDayToISO8601String(JD + shift);
 }
 
 //! get the six ints from an ISO8601 date time, understood to be local time, make a jdate out
 //! of them.
-double StelLocaleMgr::getJdFromISO8601TimeLocal(const QString& t) const
+double StelLocaleMgr::getJdFromISO8601TimeLocal(const QString& t, bool* ok) const
 {
-	QList<int> numbers = StelUtils::getIntsFromISO8601String(t);
-	if (numbers.size() == 6)
+	double jd = StelUtils::getJulianDayFromISO8601String(t, ok);
+	if (!*ok)
 	{
-		int y = numbers[0];
-		int m = numbers[1];
-		int d = numbers[2];
-		int h = numbers[3];
-		int mn = numbers[4];
-		int s = numbers[5];
-
-		double jd;
-
-		if ( ! StelUtils::getJDFromDate(&jd, y, m, d, h, mn, s) )
-		{
-			qWarning() << "StelLocaleMgr::getJdFromISO8601TimeLocal: StelUtils::getJDFromDate failed!  returning beginning of epoch!";
-			return 0.0;
-		}
-
-		// modified by shift
-		if (timeZoneMode == STzGMTShift)
-			jd -= GMTShift;
-		else
-			jd -= StelUtils::getGMTShiftFromQT(jd)*0.041666666666;
-
-		return jd;
-	}
-	else
-	{
-		qWarning() << "StelLocaleMgr::getJdFromISO8601TimeLocal: did not get 6 ints back from TextEntryDateTimeValidator for input " << t << ", returning beginning of epoch!";
+		qWarning() << "StelLocaleMgr::getJdFromISO8601TimeLocal: invalid ISO8601 date. Returning JD=0";
 		return 0.0;
 	}
+	
+	// modified by shift
+	if (timeZoneMode == STzGMTShift)
+		jd -= GMTShift;
+	else
+		jd -= StelUtils::getGMTShiftFromQT(jd)*0.041666666666;
+	return jd;
 }
 
 

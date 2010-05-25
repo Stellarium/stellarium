@@ -469,32 +469,24 @@ void getTimeFromJulianDay(double julianDay, int *hour, int *minute, int *second)
 	*second = s % 60;
 }
 
-QString sixIntsToIsoString( int year, int month, int day, int hour, int minute, int second )
+QString julianDayToISO8601String(double jd)
 {
-	// formatting a negative doesnt work the way i expect
+	int year, month, day, hour, minute, second;
+	getDateFromJulianDay(jd, &year, &month, &day);
+	getTimeFromJulianDay(jd, &hour, &minute, &second);
 
-	QString dt = QString("%1-%2-%3T%4:%5:%6")
+	QString res = QString("%1-%2-%3T%4:%5:%6")
 				 .arg((year >= 0 ? year : -1* year),4,10,QLatin1Char('0'))
 				 .arg(month,2,10,QLatin1Char('0'))
 				 .arg(day,2,10,QLatin1Char('0'))
 				 .arg(hour,2,10,QLatin1Char('0'))
 				 .arg(minute,2,10,QLatin1Char('0'))
 				 .arg(second,2,10,QLatin1Char('0'));
-
 	if (year < 0)
 	{
-		dt.prepend("-");
+		res.prepend("-");
 	}
-	return dt;
-}
-
-QString jdToIsoString(double jd)
-{
-	int year, month, day, hour, minute, second;
-	getDateFromJulianDay(jd, &year, &month, &day);
-	getTimeFromJulianDay(jd, &hour, &minute, &second);
-
-	return sixIntsToIsoString(year, month, day, hour, minute, second);
+	return res;
 }
 
 // Format the date per the fmt.
@@ -636,7 +628,7 @@ QString localeDateString(int year, int month, int day, int dayOfWeek)
 //! use QDateTime to get a Julian Date from the system's current time.
 //! this is an acceptable use of QDateTime because the system's current
 //! time is more than likely always going to be expressible by QDateTime.
-double getJDFromSystem(void)
+double getJDFromSystem()
 {
 	return qDateTimeToJd(QDateTime::currentDateTime().toUTC());
 }
@@ -646,7 +638,7 @@ double qTimeToJDFraction(const QTime& time)
 	return (double)1./(24*60*60*1000)*QTime().msecsTo(time)-0.5;
 }
 
-QTime jdFractionToQTime(const double jd)
+QTime jdFractionToQTime(double jd)
 {
 	double decHours = std::fmod(jd+0.5, 1.0);
 	int hours = (int)(decHours/0.041666666666666666666);
@@ -904,41 +896,48 @@ void debugQVariantMap(const QVariant& m, const QString& indent, const QString& k
 		qDebug() << indent + key + " => " + m.toString();
 }
 
-
-QList<int> getIntsFromISO8601String(const QString & dt)
+double getJulianDayFromISO8601String(const QString& iso8601Date, bool* ok)
 {
-	// Represents a valid, complete date string.
-	QRegExp finalRe("(-0*[1-9][0-9]{0,5}|0+|0*[1-9][0-9]{0,5})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[10])[T ]([01][0-9]|2[0123]):([012345][0-9]):([012345][0-9])");
-
-	QList<int> retval;
-	if (finalRe.exactMatch(dt))
+	int y, m, d, h, min;
+	float s;
+	*ok = getDateTimeFromISO8601String(iso8601Date, &y, &m, &d, &h, &min, &s);
+	if (*ok)
 	{
-		QStringList number_strings = finalRe.capturedTexts();
-		bool ok;
-		int v;
-		for (int i = 1; i < number_strings.size(); i++)
+		double jd;
+		if (!StelUtils::getJDFromDate(&jd, y, m, d, h, min, s))
 		{
-			qWarning() << ":: at capture " << i << " got a " << number_strings[i];
-			ok = true;
-			v = number_strings[i].toInt(&ok, 10);
-			qWarning() << "  :: and it was a " << v << " " << ok;
-			if (ok)
-			{
-				retval.push_back(v);
-			}
-			else
-			{
-				retval.clear();
-				qWarning() << "StelUtils::getIntsFromISO8601String: input string failed to be an exact date at capture " << i << ", returning nothing: " << dt;
-				break;
-			}
+			*ok = false;
+			return 0.0;
 		}
+		return jd;
 	}
-	else
+	return 0.0;
+}
+
+bool getDateTimeFromISO8601String(const QString& iso8601Date, int* y, int* m, int* d, int* h, int* min, float* s)
+{
+	// Represents an ISO8601 complete date string.
+	QRegExp finalRe("^([+\\-]?\\d+)[:\\-](\\d\\d)[:\\-](\\d\\d)T(\\d?\\d):(\\d\\d):(\\d\\d(?:\\.\\d*)?)$");
+	if (finalRe.exactMatch(iso8601Date) && finalRe.captureCount()==6)
 	{
-		qWarning() << "StelUtils::getIntsFromISO8601String: input string failed to be an exact date, returning nothing: " << dt;
+		bool error = false;
+		bool ok;
+		*y = finalRe.capturedTexts().at(1).toInt(&ok);
+		error = error || !ok;
+		*m = finalRe.capturedTexts().at(2).toInt(&ok);
+		error = error || !ok;
+		*d = finalRe.capturedTexts().at(3).toInt(&ok);
+		error = error || !ok;
+		*h = finalRe.capturedTexts().at(4).toInt(&ok);
+		error = error || !ok;
+		*min = finalRe.capturedTexts().at(5).toInt(&ok);
+		error = error || !ok;
+		*s = finalRe.capturedTexts().at(6).toFloat(&ok);
+		error = error || !ok;
+		if (!error)
+			return true;
 	}
-	return retval;
+	return false;	
 }
 
 

@@ -156,7 +156,7 @@ public:
 	//! %Y-%m-%dT%H:%M:%S, but %Y can be a large number with sign, and
 	//! %Y can be zero.
 	//! @param str the local time in ISO 8601 format
-	double getJdFromISO8601TimeLocal(const QString& str) const;
+	double getJdFromISO8601TimeLocal(const QString& str, bool* ok) const;
 
 	//! Convert a 2 letter country code to string
 	static QString countryCodeToString(const QString& countryCode);

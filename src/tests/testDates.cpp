@@ -14,7 +14,7 @@ QTEST_MAIN(TestDates);
 
 void TestDates::dateRoundTrip()
 {
-	QMap <double, QString> map;
+	QMap<double, QString> map;
 	map[0.0] = "-4712-01-01T12:00:00";
 	map[-1.0] = "-4713-12-31T12:00:00";
 	map[2454466.0] = "2007-12-31T12:00:00";
@@ -50,44 +50,17 @@ void TestDates::dateRoundTrip()
 	map[-1420.0] = "-4716-02-01T12:00:00"; // 29 days
 	map[-1785.0] = "-4717-02-01T12:00:00"; // 28 days
 
-	// does jdToIsoString() of item in t1d match string in t1s?
-	QList<int> fromString;
-	int testNum=0;
-	int successForwardNum=0;
-	int successReverseNum=0;
-	int total = map.keys().size();
-	QList<double> jdList = map.keys();
-	qSort(jdList.begin(), jdList.end());
-	foreach(double jd, jdList)
+	bool ok;
+	for (QMap<double, QString>::ConstIterator i=map.constBegin();i!=map.constEnd();++i)
 	{
-		testNum++;
-		if (StelUtils::jdToIsoString(jd) == map[jd])
-		{
-			successForwardNum++;
-		}
+		QCOMPARE(StelUtils::julianDayToISO8601String(i.key()), i.value());
+		double tmp = StelUtils::getJulianDayFromISO8601String(i.value(), &ok);
+		QVERIFY(ok);
+		if (i.key()!=0.0)
+			qFuzzyCompare(i.key(), tmp);
 		else
-		{
-			qWarning() << QString("%1/%2: %3 => %4 != %5").arg(testNum).arg(total).arg(jd).
-					arg(StelUtils::jdToIsoString(jd)).arg(map[jd]);
-		}
-
-		QList<int> fromString = StelUtils::getIntsFromISO8601String(map[jd]);
-		double backJd;
-		double success = StelUtils::getJDFromDate(&backJd,fromString.at(0),fromString.at(1),fromString.at(2),
-					fromString.at(3), fromString.at(4), fromString.at(5));
-
-		if (jd == backJd && success)
-		{
-			successReverseNum++;
-		}
-		else
-		{
-			qWarning() << QString("reverse %1 => %2").arg(backJd).arg(jd);
-		}
+			qFuzzyCompare(i.key()+1.0, tmp+1.0);
 	}
-	QVERIFY2(total==successForwardNum && total==successReverseNum,
-			 qPrintable(QString("%1/%2 jd=>string, %3/%4 string=>jd").arg(successForwardNum).arg(total)
-			.arg(successReverseNum).arg(total)));
 }
 
 
@@ -122,11 +95,9 @@ void TestDates::formatting()
 
 	// test detection of offset from UTC.
 	double mar122008 = QDate(2008,3,12).toJulianDay();
-	QVERIFY2(-4.0 == StelUtils::getGMTShiftFromQT(mar122008),
-		qPrintable("gmt shift wrong: " + QString("%1").arg(StelUtils::getGMTShiftFromQT(mar122008))));
+	qFuzzyCompare(StelUtils::getGMTShiftFromQT(mar122008), -4.f);
 	double mar012008 = QDate(2008,3,1).toJulianDay();
-	QVERIFY2(-5.0 == StelUtils::getGMTShiftFromQT(mar012008),
-		qPrintable("gmt shift wrong: " + QString("%1").arg(StelUtils::getGMTShiftFromQT(mar012008))));
+	qFuzzyCompare(StelUtils::getGMTShiftFromQT(mar012008), -5.f);
 
 }
 

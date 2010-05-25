@@ -178,11 +178,18 @@ namespace StelUtils
 	//! Make from julianDay an hour, minute, second.
 	void getTimeFromJulianDay(double julianDay, int *hour, int *minute, int *second);
 
-	//! Utility for formatting to a simple iso 8601 string.
-	QString sixIntsToIsoString( int year, int month, int day, int hour, int minute, int second );
+	//! Parse an ISO8601 date string.
+	//! Also handles negative and distant years.
+	bool getDateTimeFromISO8601String(const QString& iso8601Date, int* y, int* m, int* d, int* h, int* min, float* s);
+	
+	//! Format the given Julian Day in (UTC) ISO8601 date string.
+	//! Also handles negative and distant years.
+	QString julianDayToISO8601String(double jd);
 
-	QString jdToIsoString(double jd);
-
+	//! Return the Julian Date matching the ISO8601 date string.
+	//! Also handles negative and distant years.
+	double getJulianDayFromISO8601String(const QString& iso8601Date, bool* ok);
+	
 	//! Format the date and day-of-week per the format in fmt (see QDateTime::toString()).
 	//! @return QString representing the formatted date
 	QString localeDateString(int year, int month, int day, int dayOfWeek, QString fmt);
@@ -193,7 +200,7 @@ namespace StelUtils
 
 	//! Get the current Julian Date from system time.
 	//! @return the current Julian Date
-	double getJDFromSystem(void);
+	double getJDFromSystem();
 
 	//! Convert a time of day to the fraction of a Julian Day.
 	//! Note that a Julian Day starts at 12:00, not 0:00, and
@@ -201,10 +208,10 @@ namespace StelUtils
 	double qTimeToJDFraction(const QTime& time);
 
 	//! Convert a fraction of a Julian Day to a QTime
-	QTime jdFractionToQTime(const double jd);
+	QTime jdFractionToQTime(double jd);
 
 	//! Return number of hours offset from GMT, using Qt functions.
-	float getGMTShiftFromQT(double JD);
+	float getGMTShiftFromQT(double jd);
 
 	//! Convert a QT QDateTime class to julian day.
 	//! @param dateTime the UTC QDateTime to convert
@@ -225,8 +232,6 @@ namespace StelUtils
 	//! Output a QVariantMap to qDebug().  Formats like a tree where there are nested objects.
 	void debugQVariantMap(const QVariant& m, const QString& indent="", const QString& key="");
 
-	//! Use RegExp for final to parse a QString to six ints, use in the event QDateTime cannot handle the date.
-	QList<int> getIntsFromISO8601String(const QString& iso8601Date);
 
 	/// Compute acos(x)
 	//! The taylor serie is not accurate around x=1 and x=-1

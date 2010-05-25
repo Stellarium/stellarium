@@ -330,16 +330,14 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 
 	QString preprocessedScript;
 	bool ok=false;
-	if (fileName.right(4) == ".ssc")
+	if (fileName.endsWith(".ssc"))
 		ok = preprocessScript(fic, preprocessedScript, scriptDir);
 #ifdef ENABLE_STRATOSCRIPT_COMPAT
-	else if (fileName.right(4) == ".sts")
+	else if (fileName.endsWith(".sts")
 		ok = preprocessStratoScript(fic, preprocessedScript, scriptDir);
 #endif
 	if (ok==false)
-	{
 		return false;
-	}
 
 	// seed the PRNG so that script random numbers aren't always the same sequence
 	qsrand(QDateTime::currentDateTime().toTime_t());
