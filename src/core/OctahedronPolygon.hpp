@@ -30,7 +30,7 @@ struct EdgeVertex
 {
 	EdgeVertex() : edgeFlag(false) {;}
 	EdgeVertex(bool b) : edgeFlag(b) {;}
-	EdgeVertex(Vec3d v, bool b) : vertex(v), edgeFlag(b) {;}
+	EdgeVertex(const Vec3d& v, bool b) : vertex(v), edgeFlag(b) {;}
 	Vec3d vertex;
 	bool edgeFlag;
 };
