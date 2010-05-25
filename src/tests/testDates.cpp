@@ -47,8 +47,8 @@ void TestDates::dateRoundTrip()
 	map[-365.0] = "-4713-01-01T12:00:00";
 	map[-699.0] = "-4714-02-01T12:00:00"; // 28 days
 	map[-1064.0] = "-4715-02-01T12:00:00"; // 28 days
-	map[-1420.0] = "-4716-02-01T12:00:00"; // 29 days
-	map[-1785.0] = "-4717-02-01T12:00:00"; // 28 days
+	map[-1430.0] = "-4716-02-01T12:00:00"; // 29 days
+	map[-1795.0] = "-4717-02-01T12:00:00"; // 28 days
 
 	bool ok;
 	for (QMap<double, QString>::ConstIterator i=map.constBegin();i!=map.constEnd();++i)
@@ -143,21 +143,4 @@ void TestDates::testRolloverAndValidity()
 	QVERIFY(12==dh);
 	QVERIFY(0==dmin);
 	QVERIFY(0==ds);
-}
-
-void TestDates::qdateRoundTrip()
-{
-	QDate tst = QDate::currentDate();
-	long jd = tst.toJulianDay();
-
-	while (tst.isValid())
-	{
-		jd--;
-		tst = tst.addDays(-1);
-
-		QDate comp = QDate::fromJulianDay(jd);
-		QVERIFY2(tst == comp, qPrintable("failed at jd " + QString("%1").arg(jd) + " " + tst.toString() + " vs " + comp.toString()));
-		if (tst!=comp)
-			break;
-	}
 }

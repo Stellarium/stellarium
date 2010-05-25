@@ -30,7 +30,6 @@ private slots:
 	void dateRoundTrip();
 	void formatting();
 	void testRolloverAndValidity();
-	void qdateRoundTrip();
 };
 
 #endif // _TESTDATES_HPP_
