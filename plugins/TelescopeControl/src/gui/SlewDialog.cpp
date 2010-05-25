@@ -138,9 +138,7 @@ void SlewDialog::updateTelescopeList()
 void SlewDialog::updateTelescopeControls()
 {
 	bool connectedTelescopeAvailable = !connectedSlotsByName.isEmpty();
-	ui->frameCoordinates->setVisible(connectedTelescopeAvailable);
-	ui->frameFormat->setVisible(connectedTelescopeAvailable);
-	ui->frameTelescope->setVisible(connectedTelescopeAvailable);
+	ui->groupBoxSlew->setVisible(connectedTelescopeAvailable);
 	ui->labelNoTelescopes->setVisible(!connectedTelescopeAvailable);
 	if (connectedTelescopeAvailable)
 		ui->comboBoxTelescope->setCurrentIndex(0);
