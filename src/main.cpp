@@ -259,6 +259,7 @@ int main(int argc, char **argv)
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
+	bool safeMode = false;
 	if (confSettings->value("main/use_qpaintenginegl2", true).toBool() && !qApp->property("onetime_safe_mode").isValid())
 	{
 		// The default is to let Qt choose which paint engine fits the best between OpenGL and OpenGL2.
@@ -268,6 +269,7 @@ int main(int argc, char **argv)
 	{
 		// The user explicitely request to use the older paint engine.
 		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
+		safeMode = true;
 	}
 
 #ifdef Q_OS_MAC
@@ -294,7 +296,13 @@ int main(int argc, char **argv)
 
 	// Set the default application font and font size.
 	// Note that style sheet will possibly override this setting.
+#ifdef Q_OS_WIN
+	// On windows use Verdana font, to avoid unresolved bug with OpenGL1 Qt paint engine.
+	// See Launchpad question #111823 for more info
+	QFont tmpFont(safeMode ? "Verdana" : "DejaVu Sans");
+#else
 	QFont tmpFont("DejaVu Sans");
+#endif
 	tmpFont.setPixelSize(13);
 	QApplication::setFont(tmpFont);
 #endif
