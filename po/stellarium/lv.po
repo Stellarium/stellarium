@@ -7,69 +7,69 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-28 17:53+0100\n"
+"POT-Creation-Date: 2010-05-19 15:26+0200\n"
 "PO-Revision-Date: 2008-09-29 20:10+0000\n"
 "Last-Translator: Delta <deltazzx@gmail.com>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-31 16:53+0000\n"
+"X-Launchpad-Export-Date: 2010-05-26 09:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/modules/TextUI.cpp:63
+#: src/translations.h:85
 msgid "Set Location "
 msgstr "Norādīt vietu "
 
-#: src/modules/TextUI.cpp:69
+#: src/translations.h:91
 msgid "Scripts "
 msgstr "Scenāriji "
 
-#: src/modules/TextUI.cpp:106
+#: src/translations.h:123
 msgid "Constellation Art Intensity"
 msgstr "Zvaigznāju mākslas intensitāte"
 
-#: src/modules/TextUI.cpp:107
+#: src/translations.h:124
 msgid "Constellation Boundaries"
 msgstr "Zvaigznāju robežas"
 
-#: src/modules/TextUI.cpp:109
+#: src/translations.h:126
 msgid "Planet Names"
 msgstr "Planētu nosaukumi"
 
-#: src/modules/TextUI.cpp:115
+#: src/translations.h:132
 msgid "Equator Line"
 msgstr "Ekvatora plakne"
 
-#: src/modules/TextUI.cpp:116
+#: src/translations.h:133
 msgid "Ecliptic Line"
 msgstr "Ekliptikas plakne"
 
-#: src/modules/TextUI.cpp:117
+#: src/translations.h:134
 msgid "Nebula Names"
 msgstr "Miglāju nosaukumi"
 
-#: src/modules/TextUI.cpp:118
+#: src/translations.h:135
 msgid "Nebula Circles"
 msgstr "Miglāju apļi"
 
-#: src/modules/TextUI.cpp:121
+#: src/translations.h:137
 msgid "Light Pollution Luminance: "
 msgstr "Gaismas piesārņojuma apjoms: "
 
-#: src/modules/TextUI.cpp:128
+#: src/translations.h:144
 msgid "Zoom Duration: "
 msgstr "Tuvināšanas ilgums: "
 
-#: src/modules/TextUI.cpp:133
+#: src/translations.h:148
 msgid "Local Script: "
 msgstr "Lokālais scenārijs: "
 
-#: src/modules/TextUI.cpp:134
+#: src/translations.h:149
 msgid "CD/DVD Script: "
 msgstr "CD/DVD scenārijs: "
 
-#: src/modules/TextUI.cpp:144
+#: src/translations.h:158
 msgid "Set UI Locale: "
 msgstr "Iestatīt interfeisa valodu: "
 
@@ -77,326 +77,104 @@ msgstr "Iestatīt interfeisa valodu: "
 msgid "Help"
 msgstr "Paskaidrojumi"
 
-#: src/modules/StarMgr.cpp:396
-#, qt-format
-msgid "Loading catalog %1 from file %2"
-msgstr ""
-
-#: src/modules/LandscapeMgr.cpp:425
+#: src/core/modules/LandscapeMgr.cpp:401
 msgid "Author: "
 msgstr "Autors: "
 
-#: src/modules/LandscapeMgr.cpp:428
+#: src/core/modules/LandscapeMgr.cpp:404
 msgid "Location: "
 msgstr "Atrašanās vieta: "
 
-#: src/modules/LandscapeMgr.cpp:433
+#: src/core/modules/LandscapeMgr.cpp:409
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/modules/LandscapeMgr.cpp:436
+#: src/core/modules/LandscapeMgr.cpp:412
 msgid "Planet: "
 msgstr "Planēta: "
 
-#: src/modules/Nebula.cpp:92
+#: src/core/modules/Nebula.cpp:92
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Tips: <b>%1</b>"
 
-#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:130
+#: src/core/modules/Nebula.cpp:95 src/core/modules/Planet.cpp:119
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Zvaigžņlielums: <b>%1</b>"
 
-#: src/modules/Nebula.cpp:100
+#: src/core/modules/Nebula.cpp:100
 #, qt-format
 msgid "Size: %1"
 msgstr "Izmērs: %1"
 
-#: src/modules/Nebula.cpp:269
+#: src/core/modules/Nebula.cpp:269
 msgid "Galaxy"
 msgstr "Galaktika"
 
-#: src/modules/Nebula.cpp:272
+#: src/core/modules/Nebula.cpp:272
 msgid "Open cluster"
 msgstr "Vaļēja kopa"
 
-#: src/modules/Nebula.cpp:275
+#: src/core/modules/Nebula.cpp:275
 msgid "Globular cluster"
 msgstr "Lodveida cluster"
 
-#: src/modules/Nebula.cpp:278
+#: src/core/modules/Nebula.cpp:278
 msgid "Nebula"
 msgstr "Miglājs"
 
-#: src/modules/Nebula.cpp:281
+#: src/core/modules/Nebula.cpp:281
 msgid "Planetary nebula"
 msgstr "Planetārais miglājs"
 
-#: src/modules/Nebula.cpp:284
+#: src/core/modules/Nebula.cpp:284
 msgid "Cluster associated with nebulosity"
 msgstr "Cluster associated with nebulosity"
 
-#: src/modules/Nebula.cpp:287
+#: src/core/modules/Nebula.cpp:287
 msgid "Unknown"
 msgstr "Nezināms"
 
-#: src/modules/Nebula.cpp:290
+#: src/core/modules/Nebula.cpp:290
 msgid "Undocumented type"
 msgstr "Nedokumentēts tips"
 
-#: src/modules/NebulaMgr.cpp:346
-#, qt-format
-msgid "Loading NGC catalog: %1/%2"
-msgstr "Ieādē NGC katalogu: %1/%2"
-
-#: src/modules/NebulaMgr.cpp:379
-msgid "Loading NGC catalog"
-msgstr ""
-
-#: src/modules/Planet.cpp:133 src/modules/StarWrapper.cpp:113
+#: src/core/modules/Planet.cpp:122 src/core/modules/StarWrapper.cpp:114
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Absolūtais zvaigžņlielums: %1"
 
-#: src/modules/Planet.cpp:140
+#: src/core/modules/Planet.cpp:129
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr "Attālums: %1AU"
 
-#: src/modules/Planet.cpp:144
+#: src/core/modules/Planet.cpp:133
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Redzamais diametrs: %1"
 
-#: src/modules/StarWrapper.cpp:52 src/modules/StarWrapper.cpp:109
+#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:110
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
 msgstr "Zvigžņlielums: <b>%1</b> (B-V: %2)"
 
-#: src/modules/StarWrapper.cpp:119
+#: src/core/modules/StarWrapper.cpp:120
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Spektra klase: %1"
 
-#: src/modules/StarWrapper.cpp:123
+#: src/core/modules/StarWrapper.cpp:124
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Attālums: %1 gaismas gadi"
 
-#: src/modules/StarWrapper.cpp:126
+#: src/core/modules/StarWrapper.cpp:127
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Paralakse: %1\""
-
-#: src/modules/TextUI.cpp:64
-msgid "Set Time "
-msgstr "Iestatīt laiku "
-
-#: src/modules/TextUI.cpp:65
-msgid "General "
-msgstr "Vispārīgi "
-
-#: src/modules/TextUI.cpp:66
-msgid "Stars "
-msgstr "Zvaigznes "
-
-#: src/modules/TextUI.cpp:67
-msgid "Colors "
-msgstr "Krāsas "
-
-#: src/modules/TextUI.cpp:68
-msgid "Effects "
-msgstr "Efekti "
-
-#: src/modules/TextUI.cpp:70
-msgid "Administration "
-msgstr "Administrācija "
-
-#: src/modules/TextUI.cpp:73
-msgid "Latitude: "
-msgstr "Ģeog.plat.: "
-
-#: src/modules/TextUI.cpp:74
-msgid "Longitude: "
-msgstr "Ģeog.gar.: "
-
-#: src/modules/TextUI.cpp:75
-msgid "Altitude (m): "
-msgstr "Augst.vjl.(m): "
-
-#: src/modules/TextUI.cpp:76
-msgid "Solar System Body: "
-msgstr "Saules sistēmas objekts: "
-
-#: src/modules/TextUI.cpp:79
-msgid "Sky Time: "
-msgstr "Debesu laiks: "
-
-#: src/modules/TextUI.cpp:80
-msgid "Set Time Zone: "
-msgstr "Iestatīt laika zonu: "
-
-#: src/modules/TextUI.cpp:81
-msgid "Day keys: "
-msgstr "Dienu atslēgtas: "
-
-#: src/modules/TextUI.cpp:82
-msgid "Calendar"
-msgstr "Kalendārs"
-
-#: src/modules/TextUI.cpp:83
-msgid "Sidereal"
-msgstr "Zvaigžņu laiks"
-
-#: src/modules/TextUI.cpp:84
-msgid "Preset Sky Time: "
-msgstr "Šobrīdējais debess laiks: "
-
-#: src/modules/TextUI.cpp:85
-msgid "Sky Time At Start-up: "
-msgstr "Debess laiks sākumā: "
-
-#: src/modules/TextUI.cpp:86
-msgid "Actual Time"
-msgstr "Reālais Laiks"
-
-#: src/modules/TextUI.cpp:87
-msgid "Preset Time"
-msgstr "Iestatītais Laiks"
-
-#: src/modules/TextUI.cpp:88
-msgid "Time Display Format: "
-msgstr "Laika formāts: "
-
-#: src/modules/TextUI.cpp:89
-msgid "Date Display Format: "
-msgstr "Datuma formāts: "
-
-#: src/modules/TextUI.cpp:92
-msgid "Sky Culture: "
-msgstr "Debesu kultūra: "
-
-#: src/modules/TextUI.cpp:93
-msgid "Sky Language: "
-msgstr "Debesu valoda: "
-
-#: src/modules/TextUI.cpp:96
-msgid "Show: "
-msgstr "Parādīt: "
-
-#: src/modules/TextUI.cpp:97
-msgid "Star Value Multiplier: "
-msgstr "Zvaigžņu vērtības reizinātājs: "
-
-#: src/modules/TextUI.cpp:98
-msgid "Magnitude Sizing Multiplier: "
-msgstr "Zvaigžņlieluma mērogošanas reizinātājs: "
-
-#: src/modules/TextUI.cpp:99
-msgid "Maximum Magnitude to Label: "
-msgstr "Nosaukumi līdz zvaigžņlielumam: "
-
-#: src/modules/TextUI.cpp:100
-msgid "Twinkling: "
-msgstr "Mirgošana: "
-
-#: src/modules/TextUI.cpp:101
-msgid "Limiting Magnitude: "
-msgstr "Limitējošais zvaigžņlielums: "
-
-#: src/modules/TextUI.cpp:104
-msgid "Constellation Lines"
-msgstr "Zvaigznāju līnijas"
-
-#: src/modules/TextUI.cpp:105
-msgid "Constellation Names"
-msgstr "Zvaigznāju nosaukumi"
-
-#: src/modules/TextUI.cpp:108
-msgid "Cardinal Points"
-msgstr "Debess puses"
-
-#: src/modules/TextUI.cpp:110
-msgid "Planet Orbits"
-msgstr "Planētu orbītas"
-
-#: src/modules/TextUI.cpp:111
-msgid "Planet Trails"
-msgstr "Planētu ceļi"
-
-#: src/modules/TextUI.cpp:112
-msgid "Meridian Line"
-msgstr "Meridiāna līnija"
-
-#: src/modules/TextUI.cpp:113
-msgid "Azimuthal Grid"
-msgstr "Azimutālais tīkls"
-
-#: src/modules/TextUI.cpp:114
-msgid "Equatorial Grid"
-msgstr "Ekvatoriālais tīkls"
-
-#: src/modules/TextUI.cpp:122
-msgid "Landscape: "
-msgstr "Ainava: "
-
-#: src/modules/TextUI.cpp:123
-msgid "Manual zoom: "
-msgstr "Manuālā tuvināšana: "
-
-#: src/modules/TextUI.cpp:124
-msgid "Object Sizing Rule: "
-msgstr "Objekta izmēri pēc: "
-
-#: src/modules/TextUI.cpp:125
-msgid "Magnitude Scaling Multiplier: "
-msgstr "Zvaigžņlieluma mērogošanas reizinātājs: "
-
-#: src/modules/TextUI.cpp:126
-msgid "Milky Way intensity: "
-msgstr "Piena Ceļa intensitāte: "
-
-#: src/modules/TextUI.cpp:127
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Nosaukt miglājus līdz zvaigžņliel.: "
-
-#: src/modules/TextUI.cpp:129
-msgid "Cursor Timeout: "
-msgstr "Kursora taimauts: "
-
-#: src/modules/TextUI.cpp:130
-msgid "Correct for light travel time: "
-msgstr "Koriģēt atbilstoši gaismas ceļošanas ilgumam: "
-
-#: src/modules/TextUI.cpp:135
-msgid "USB Script: "
-msgstr "USB scenārijs: "
-
-#: src/modules/TextUI.cpp:136
-msgid "Arrow down to load list."
-msgstr "Bultiņa uz leju ielādē sarakstu."
-
-#: src/modules/TextUI.cpp:137
-msgid "Select and exit to run."
-msgstr "Izvēlieties un izejiet lai palaistu."
-
-#: src/modules/TextUI.cpp:140
-msgid "Load Default Configuration: "
-msgstr "Ielādēt noklusējuma konfigurāciju: "
-
-#: src/modules/TextUI.cpp:141
-msgid "Save Current Configuration as Default: "
-msgstr "Saglabāt šo konfigurāciju kā noklusējuma: "
-
-#: src/modules/TextUI.cpp:142
-msgid "Shut Down: "
-msgstr "Izslēgt: "
-
-#: src/modules/TextUI.cpp:143
-msgid "Update me via Internet: "
-msgstr "Atjaunot no interneta: "
 
 #: src/core/StelProjector.cpp:61
 msgid "Maximum FOV: "
@@ -426,11 +204,11 @@ msgstr ""
 "Šīs projekcijas metodes pilns nosaukums ir <i>Lamberta azimutālā vienāda "
 "lauka projekcija</i>. Tajā saglabājas laukumu izmēri, bet ne lenķi."
 
-#: src/core/StelProjectorClasses.cpp:111
+#: src/core/StelProjectorClasses.cpp:108
 msgid "Stereographic"
 msgstr "Stereogrāfiskā"
 
-#: src/core/StelProjectorClasses.cpp:116
+#: src/core/StelProjectorClasses.cpp:113
 msgid ""
 "Stereographic projection is known since the antiquity and was originally "
 "known as the planisphere projection. It preserves the angles at which curves "
@@ -440,11 +218,11 @@ msgstr ""
 "projekciju. Tā saglabā lenķus kādos līnijas krusto viena otru, bet nesaglabā "
 "laukumu izmērus."
 
-#: src/core/StelProjectorClasses.cpp:150
+#: src/core/StelProjectorClasses.cpp:145
 msgid "Fish-eye"
 msgstr "Zivsacs"
 
-#: src/core/StelProjectorClasses.cpp:155
+#: src/core/StelProjectorClasses.cpp:150
 msgid ""
 "In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
 "lines become curves when they appear a large angular distance from the "
@@ -455,21 +233,21 @@ msgstr ""
 "kļūst izliektas jo tālāk tās atrodas no skata lauka centra - līdzīgi "
 "kropļojumiem kādi vērojami ļoti plata lenķa fotokameru objektīviem."
 
-#: src/core/StelProjectorClasses.cpp:189
+#: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
 msgstr ""
 
-#: src/core/StelProjectorClasses.cpp:194
+#: src/core/StelProjectorClasses.cpp:187
 msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
 msgstr ""
 
-#: src/core/StelProjectorClasses.cpp:230
+#: src/core/StelProjectorClasses.cpp:223
 msgid "Cylinder"
 msgstr "Cilindriskā"
 
-#: src/core/StelProjectorClasses.cpp:235
+#: src/core/StelProjectorClasses.cpp:228
 msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
@@ -477,11 +255,11 @@ msgstr ""
 "Šī ir <i>cilindriskā ekvidistantā projekcija</i>. Šajā projekcijā visas "
 "paralēles ir vienādā attālumā viena no otras."
 
-#: src/core/StelProjectorClasses.cpp:277
+#: src/core/StelProjectorClasses.cpp:270
 msgid "Mercator"
 msgstr "Merkatora"
 
-#: src/core/StelProjectorClasses.cpp:282
+#: src/core/StelProjectorClasses.cpp:275
 msgid ""
 "The mercator projection is one of the most used world map projection. It "
 "preserves direction and shapes but distorts size, in an increasing degree "
@@ -491,11 +269,11 @@ msgstr ""
 "Tā saglabā virzienu un formu, bet maina izmērus - jo tālāk no ekvatora jo "
 "vairāk."
 
-#: src/core/StelProjectorClasses.cpp:329
+#: src/core/StelProjectorClasses.cpp:322
 msgid "Orthographic"
 msgstr "Ortogrāfiska"
 
-#: src/core/StelProjectorClasses.cpp:334
+#: src/core/StelProjectorClasses.cpp:327
 msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
@@ -523,54 +301,54 @@ msgstr ""
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Augst: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:283
+#: src/gui/ConfigurationDialog.cpp:285
 msgid "Select screenshot directory"
 msgstr "Izvēlēties ekrāna attēlu direktoriju"
 
-#: src/gui/ConfigurationDialog.cpp:448
+#: src/gui/ConfigurationDialog.cpp:451
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Sākuma skata lauks (FOV): %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:456
+#: src/gui/ConfigurationDialog.cpp:459
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Sākuma skata virziens Az/Augst: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:492
+#: src/gui/ConfigurationDialog.cpp:495
 msgid "Authors"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:496 src/gui/ViewDialog.cpp:336
+#: src/gui/ConfigurationDialog.cpp:499 src/gui/ViewDialog.cpp:337
 msgid "Contact"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:568
+#: src/gui/ConfigurationDialog.cpp:571
 msgid "Author"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:569
+#: src/gui/ConfigurationDialog.cpp:572
 msgid "License"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:600
+#: src/gui/ConfigurationDialog.cpp:603
 msgid "Running script: "
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:607
+#: src/gui/ConfigurationDialog.cpp:610
 msgid "Running script: [none]"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:650
+#: src/gui/ConfigurationDialog.cpp:653
 msgid "Finished downloading all star catalogs!"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:657
+#: src/gui/ConfigurationDialog.cpp:662
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:659
+#: src/gui/ConfigurationDialog.cpp:664
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -578,145 +356,145 @@ msgid ""
 "Magnitude range: %3 - %4"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:668
+#: src/gui/ConfigurationDialog.cpp:673
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:706 src/gui/ConfigurationDialog.cpp:740
+#: src/gui/ConfigurationDialog.cpp:711 src/gui/ConfigurationDialog.cpp:745
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
 "%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:711
+#: src/gui/ConfigurationDialog.cpp:716
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:791
+#: src/gui/ConfigurationDialog.cpp:796
 msgid "Verifying file integrity..."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:795
+#: src/gui/ConfigurationDialog.cpp:800
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
 "File is corrupted."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:286
-#: src/gui/StelGuiItems.cpp:647
+#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:285
+#: src/gui/StelGuiItems.cpp:640
 msgid "Space"
 msgstr "Atstarpe"
 
-#: src/gui/HelpDialog.cpp:52
+#: src/gui/HelpDialog.cpp:53
 msgid "Arrow keys & left mouse drag"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:53
+#: src/gui/HelpDialog.cpp:54
 msgid "Page Up/Down"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:54
+#: src/gui/HelpDialog.cpp:55
 msgid "CTRL + Up/Down"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:55
+#: src/gui/HelpDialog.cpp:56
 msgid "Left click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:56
+#: src/gui/HelpDialog.cpp:57
 msgid "Right click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:57
+#: src/gui/HelpDialog.cpp:58
 msgid "CTRL + Left click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:157
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:162
 msgid "Movement and Selection"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:61
+#: src/gui/HelpDialog.cpp:62
 msgid "Pan view around the sky"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
+#: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
 msgid "Zoom in/out"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:64
+#: src/gui/HelpDialog.cpp:65
 msgid "Select object"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
+#: src/gui/HelpDialog.cpp:66 src/gui/HelpDialog.cpp:68
 msgid "Clear selection"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:70
+#: src/gui/HelpDialog.cpp:71
 msgid "When a Script is Running"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:71 src/gui/StelGui.cpp:136
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:141
 msgid "Slow down the script execution rate"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:137
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:142
 msgid "Speed up the script execution rate"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:138
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:143
 msgid "Set the normal script execution rate"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:162
 msgid "Stellarium Help"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:162
+#: src/gui/HelpDialog.cpp:163
 msgid "Keys"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:170
+#: src/gui/HelpDialog.cpp:171
 msgid "Further Reading"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:171
+#: src/gui/HelpDialog.cpp:172
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:172
+#: src/gui/HelpDialog.cpp:173
 msgid "The Stellarium User Guide"
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:176
+#: src/gui/HelpDialog.cpp:177
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:181
+#: src/gui/HelpDialog.cpp:182
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:186
+#: src/gui/HelpDialog.cpp:187
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:191
+#: src/gui/HelpDialog.cpp:192
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -724,363 +502,323 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:196
+#: src/gui/HelpDialog.cpp:197
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:232 src/gui/HelpDialog.cpp:322
-#: src/gui/HelpDialog.cpp:324 src/gui/StelGui.cpp:176
+#: src/gui/HelpDialog.cpp:233 src/gui/HelpDialog.cpp:325
+#: src/gui/HelpDialog.cpp:327 src/gui/StelGui.cpp:169
 msgid "Miscellaneous"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:290
+#: src/gui/HelpDialog.cpp:293
 msgid "Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:291
+#: src/gui/HelpDialog.cpp:294
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:292
+#: src/gui/HelpDialog.cpp:295
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:293
+#: src/gui/HelpDialog.cpp:296
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:295
 #: src/gui/HelpDialog.cpp:297 src/gui/HelpDialog.cpp:298
+#: src/gui/HelpDialog.cpp:300 src/gui/HelpDialog.cpp:301
 #, qt-format
 msgid "Developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:296
+#: src/gui/HelpDialog.cpp:299
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr ""
 
-#: src/gui/StelGui.cpp:94
+#: src/gui/StelGui.cpp:98
 msgid "Display Options"
 msgstr ""
 
-#: src/gui/StelGui.cpp:95
+#: src/gui/StelGui.cpp:99
 msgid "Constellation lines"
 msgstr "Zvaigznāju līnijas"
 
-#: src/gui/StelGui.cpp:96
+#: src/gui/StelGui.cpp:100
 msgid "Constellation art"
 msgstr "Zvaigznāju zīmējumi"
 
-#: src/gui/StelGui.cpp:97
+#: src/gui/StelGui.cpp:101
 msgid "Constellation labels"
 msgstr ""
 
-#: src/gui/StelGui.cpp:98
+#: src/gui/StelGui.cpp:102
 msgid "Constellation boundaries"
 msgstr ""
 
-#: src/gui/StelGui.cpp:100 src/ui_viewDialog.h:1027
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1027
 msgid "Azimuthal grid"
 msgstr ""
 
-#: src/gui/StelGui.cpp:101 src/ui_viewDialog.h:1025
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1025
 msgid "Equatorial grid"
 msgstr "Ekvatoriālais tīkls"
 
-#: src/gui/StelGui.cpp:102 src/ui_viewDialog.h:1026
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1026
 msgid "Equatorial J2000 grid"
 msgstr "Ekvatoriālais tīkls J2000"
 
-#: src/gui/StelGui.cpp:103
+#: src/gui/StelGui.cpp:107
 msgid "Galactic grid"
 msgstr ""
 
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1030
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1030
 msgid "Ecliptic line"
 msgstr "Ekliptikas plakne"
 
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1028
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1028
 msgid "Equator line"
 msgstr "Ekvatoriālā plakne"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1029
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1029
 msgid "Meridian line"
 msgstr ""
 
-#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1031
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1031
 msgid "Cardinal points"
 msgstr ""
 
-#: src/gui/StelGui.cpp:109
+#: src/gui/StelGui.cpp:113
 msgid "Ground"
 msgstr "Apvārsnis"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1009
+#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1009
 msgid "Atmosphere"
 msgstr "Atmosfēra"
 
-#: src/gui/StelGui.cpp:111
+#: src/gui/StelGui.cpp:115
 msgid "Fog"
 msgstr "Dūmaka"
 
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1014
+#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1014
 msgid "Nebulas"
 msgstr ""
 
-#: src/gui/StelGui.cpp:114
+#: src/gui/StelGui.cpp:118
 msgid "Nebulas background images"
 msgstr ""
 
-#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:995 src/ui_viewDialog.h:1013
+#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:995 src/ui_viewDialog.h:1013
 msgid "Stars"
 msgstr "Zvaigznes"
 
-#: src/gui/StelGui.cpp:116
+#: src/gui/StelGui.cpp:120
 msgid "Planets labels"
 msgstr ""
 
-#: src/gui/StelGui.cpp:117
+#: src/gui/StelGui.cpp:121
 msgid "Planet orbits"
 msgstr ""
 
-#: src/gui/StelGui.cpp:119
-msgid "Night mode"
-msgstr ""
-
-#: src/gui/StelGui.cpp:120
-msgid "Full-screen mode"
-msgstr ""
-
-#: src/gui/StelGui.cpp:121
-msgid "Flip scene horizontally"
-msgstr ""
-
 #: src/gui/StelGui.cpp:122
-msgid "Flip scene vertically"
+msgid "Planet trails"
 msgstr ""
 
 #: src/gui/StelGui.cpp:124
-msgid "Windows"
+msgid "Night mode"
 msgstr ""
 
 #: src/gui/StelGui.cpp:125
-msgid "Help window"
+msgid "Full-screen mode"
 msgstr ""
 
 #: src/gui/StelGui.cpp:126
-msgid "Configuration window"
-msgstr "Konfigurācijas logs"
-
-#: src/gui/StelGui.cpp:127
-msgid "Search window"
+msgid "Flip scene horizontally"
 msgstr ""
 
-#: src/gui/StelGui.cpp:128
-msgid "Sky and viewing options window"
+#: src/gui/StelGui.cpp:127
+msgid "Flip scene vertically"
 msgstr ""
 
 #: src/gui/StelGui.cpp:129
-msgid "Date/time window"
+msgid "Windows"
 msgstr ""
 
 #: src/gui/StelGui.cpp:130
+msgid "Help window"
+msgstr ""
+
+#: src/gui/StelGui.cpp:131
+msgid "Configuration window"
+msgstr "Konfigurācijas logs"
+
+#: src/gui/StelGui.cpp:132
+msgid "Search window"
+msgstr ""
+
+#: src/gui/StelGui.cpp:133
+msgid "Sky and viewing options window"
+msgstr ""
+
+#: src/gui/StelGui.cpp:134
+msgid "Date/time window"
+msgstr ""
+
+#: src/gui/StelGui.cpp:135
 msgid "Location window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:132
+#: src/gui/StelGui.cpp:137
 msgid "Script console window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:135 src/ui_dateTimeDialogGui.h:295
+#: src/gui/StelGui.cpp:140 src/ui_dateTimeDialogGui.h:295
 msgid "Date and Time"
 msgstr ""
 
-#: src/gui/StelGui.cpp:139
+#: src/gui/StelGui.cpp:144
 msgid "Decrease time speed"
 msgstr ""
 
-#: src/gui/StelGui.cpp:140
+#: src/gui/StelGui.cpp:145
 msgid "Increase time speed"
 msgstr ""
 
-#: src/gui/StelGui.cpp:141
+#: src/gui/StelGui.cpp:146
 msgid "Set normal time rate"
 msgstr ""
 
-#: src/gui/StelGui.cpp:142
+#: src/gui/StelGui.cpp:147
 msgid "Decrease time speed (a little)"
 msgstr ""
 
-#: src/gui/StelGui.cpp:143
+#: src/gui/StelGui.cpp:148
 msgid "Increase time speed (a little)"
 msgstr ""
 
-#: src/gui/StelGui.cpp:144
+#: src/gui/StelGui.cpp:149
 msgid "Set time rate to zero"
 msgstr ""
 
-#: src/gui/StelGui.cpp:145
+#: src/gui/StelGui.cpp:150
 msgid "Set time to now"
 msgstr ""
 
-#: src/gui/StelGui.cpp:146
+#: src/gui/StelGui.cpp:151
 msgid "Add 1 solar hour"
 msgstr ""
 
-#: src/gui/StelGui.cpp:147
+#: src/gui/StelGui.cpp:152
 msgid "Subtract 1 solar hour"
 msgstr ""
 
-#: src/gui/StelGui.cpp:148
+#: src/gui/StelGui.cpp:153
 msgid "Add 1 solar day"
 msgstr ""
 
-#: src/gui/StelGui.cpp:149
+#: src/gui/StelGui.cpp:154
 msgid "Subtract 1 solar day"
 msgstr ""
 
-#: src/gui/StelGui.cpp:150
+#: src/gui/StelGui.cpp:155
 msgid "Add 1 solar week"
 msgstr ""
 
-#: src/gui/StelGui.cpp:151
+#: src/gui/StelGui.cpp:156
 msgid "Subtract 1 solar week"
 msgstr ""
 
-#: src/gui/StelGui.cpp:152
+#: src/gui/StelGui.cpp:157
 msgid "Add 1 sidereal day"
 msgstr ""
 
-#: src/gui/StelGui.cpp:153
+#: src/gui/StelGui.cpp:158
 msgid "Subtract 1 sidereal day"
 msgstr ""
 
-#: src/gui/StelGui.cpp:154
+#: src/gui/StelGui.cpp:159
 msgid "Add 1 sidereal week"
 msgstr ""
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:160
 msgid "Subtract 1 sidereal week"
 msgstr ""
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:163
 msgid "Center on selected object"
 msgstr ""
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:164
 msgid "Track object"
 msgstr ""
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:165
 msgid "Zoom in on selected object"
 msgstr ""
 
-#: src/gui/StelGui.cpp:161
+#: src/gui/StelGui.cpp:166
 msgid "Zoom out"
 msgstr ""
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:167
 msgid "Set home planet to selected planet"
 msgstr ""
 
-#: src/gui/StelGui.cpp:164
-msgid "Telescope Control"
-msgstr ""
-
-#: src/gui/StelGui.cpp:165
-msgid "Move telescope #0 to selected object"
-msgstr ""
-
-#: src/gui/StelGui.cpp:166
-msgid "Move telescope #1 to selected object"
-msgstr ""
-
-#: src/gui/StelGui.cpp:167
-msgid "Move telescope #2 to selected object"
-msgstr ""
-
-#: src/gui/StelGui.cpp:168
-msgid "Move telescope #3 to selected object"
-msgstr ""
-
-#: src/gui/StelGui.cpp:169
-msgid "Move telescope #4 to selected object"
-msgstr ""
-
 #: src/gui/StelGui.cpp:170
-msgid "Move telescope #5 to selected object"
-msgstr ""
-
-#: src/gui/StelGui.cpp:171
-msgid "Move telescope #6 to selected object"
-msgstr ""
-
-#: src/gui/StelGui.cpp:172
-msgid "Move telescope #7 to selected object"
-msgstr ""
-
-#: src/gui/StelGui.cpp:173
-msgid "Move telescope #8 to selected object"
-msgstr ""
-
-#: src/gui/StelGui.cpp:174
-msgid "Move telescope #9 to selected object"
-msgstr ""
-
-#: src/gui/StelGui.cpp:177
 msgid "Switch between equatorial and azimuthal mount"
 msgstr ""
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:171
 msgid "Quit"
 msgstr ""
 
-#: src/gui/StelGui.cpp:179
+#: src/gui/StelGui.cpp:172
 msgid "Save screenshot"
 msgstr ""
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:175
 msgid "Auto hide horizontal button bar"
 msgstr ""
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:176
 msgid "Auto hide vertical button bar"
 msgstr ""
 
-#: src/gui/StelGui.cpp:184
+#: src/gui/StelGui.cpp:177
 msgid "Toggle visibility of GUI"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:548
+#: src/gui/StelGuiItems.cpp:541
 #, no-c-format, qt-format
 msgid "%1m"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:388
+#: src/gui/ViewDialog.cpp:391
 msgid "No description"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:444
+#: src/gui/ViewDialog.cpp:451
 msgid "No shooting stars"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:447
+#: src/gui/ViewDialog.cpp:454
 msgid "Normal rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:450
+#: src/gui/ViewDialog.cpp:457
 msgid "Standard Perseids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:453
+#: src/gui/ViewDialog.cpp:460
 msgid "Exceptional Leonid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:456
+#: src/gui/ViewDialog.cpp:463
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ""
 
@@ -1088,7 +826,7 @@ msgstr ""
 msgid "New Location"
 msgstr ""
 
-#: src/main.cpp:308
+#: src/main.cpp:317
 msgid "This system does not support OpenGL."
 msgstr ""
 
@@ -1261,12 +999,224 @@ msgid "Polynesian"
 msgstr "Polinēziešu"
 
 #: src/translations.h:79
-msgid "Western"
-msgstr "Rietumu"
+msgid "Sami"
+msgstr ""
 
 #: src/translations.h:80
 msgid "Tupi-Guarani"
 msgstr ""
+
+#: src/translations.h:81
+msgid "Western"
+msgstr "Rietumu"
+
+#: src/translations.h:86
+msgid "Set Time "
+msgstr "Iestatīt laiku "
+
+#: src/translations.h:87
+msgid "General "
+msgstr "Vispārīgi "
+
+#: src/translations.h:88
+msgid "Stars "
+msgstr "Zvaigznes "
+
+#: src/translations.h:89
+msgid "Colors "
+msgstr "Krāsas "
+
+#: src/translations.h:90
+msgid "Effects "
+msgstr "Efekti "
+
+#: src/translations.h:92
+msgid "Administration "
+msgstr "Administrācija "
+
+#: src/translations.h:94
+msgid "Latitude: "
+msgstr "Ģeog.plat.: "
+
+#: src/translations.h:95
+msgid "Longitude: "
+msgstr "Ģeog.gar.: "
+
+#: src/translations.h:96
+msgid "Altitude (m): "
+msgstr "Augst.vjl.(m): "
+
+#: src/translations.h:97
+msgid "Solar System Body: "
+msgstr "Saules sistēmas objekts: "
+
+#: src/translations.h:99
+msgid "Sky Time: "
+msgstr "Debesu laiks: "
+
+#: src/translations.h:100
+msgid "Set Time Zone: "
+msgstr "Iestatīt laika zonu: "
+
+#: src/translations.h:101
+msgid "Day keys: "
+msgstr "Dienu atslēgtas: "
+
+#: src/translations.h:102
+msgid "Calendar"
+msgstr "Kalendārs"
+
+#: src/translations.h:103
+msgid "Sidereal"
+msgstr "Zvaigžņu laiks"
+
+#: src/translations.h:104
+msgid "Preset Sky Time: "
+msgstr "Šobrīdējais debess laiks: "
+
+#: src/translations.h:105
+msgid "Sky Time At Start-up: "
+msgstr "Debess laiks sākumā: "
+
+#: src/translations.h:106
+msgid "Actual Time"
+msgstr "Reālais Laiks"
+
+#: src/translations.h:107
+msgid "Preset Time"
+msgstr "Iestatītais Laiks"
+
+#: src/translations.h:108
+msgid "Time Display Format: "
+msgstr "Laika formāts: "
+
+#: src/translations.h:109
+msgid "Date Display Format: "
+msgstr "Datuma formāts: "
+
+#: src/translations.h:111
+msgid "Sky Culture: "
+msgstr "Debesu kultūra: "
+
+#: src/translations.h:112
+msgid "Sky Language: "
+msgstr "Debesu valoda: "
+
+#: src/translations.h:114
+msgid "Show: "
+msgstr "Parādīt: "
+
+#: src/translations.h:115
+msgid "Star Value Multiplier: "
+msgstr "Zvaigžņu vērtības reizinātājs: "
+
+#: src/translations.h:116
+msgid "Magnitude Sizing Multiplier: "
+msgstr "Zvaigžņlieluma mērogošanas reizinātājs: "
+
+#: src/translations.h:117
+msgid "Maximum Magnitude to Label: "
+msgstr "Nosaukumi līdz zvaigžņlielumam: "
+
+#: src/translations.h:118
+msgid "Twinkling: "
+msgstr "Mirgošana: "
+
+#: src/translations.h:119
+msgid "Limiting Magnitude: "
+msgstr "Limitējošais zvaigžņlielums: "
+
+#: src/translations.h:121
+msgid "Constellation Lines"
+msgstr "Zvaigznāju līnijas"
+
+#: src/translations.h:122
+msgid "Constellation Names"
+msgstr "Zvaigznāju nosaukumi"
+
+#: src/translations.h:125
+msgid "Cardinal Points"
+msgstr "Debess puses"
+
+#: src/translations.h:127
+msgid "Planet Orbits"
+msgstr "Planētu orbītas"
+
+#: src/translations.h:128
+msgid "Planet Trails"
+msgstr "Planētu ceļi"
+
+#: src/translations.h:129
+msgid "Meridian Line"
+msgstr "Meridiāna līnija"
+
+#: src/translations.h:130
+msgid "Azimuthal Grid"
+msgstr "Azimutālais tīkls"
+
+#: src/translations.h:131
+msgid "Equatorial Grid"
+msgstr "Ekvatoriālais tīkls"
+
+#: src/translations.h:138
+msgid "Landscape: "
+msgstr "Ainava: "
+
+#: src/translations.h:139
+msgid "Manual zoom: "
+msgstr "Manuālā tuvināšana: "
+
+#: src/translations.h:140
+msgid "Object Sizing Rule: "
+msgstr "Objekta izmēri pēc: "
+
+#: src/translations.h:141
+msgid "Magnitude Scaling Multiplier: "
+msgstr "Zvaigžņlieluma mērogošanas reizinātājs: "
+
+#: src/translations.h:142
+msgid "Milky Way intensity: "
+msgstr "Piena Ceļa intensitāte: "
+
+#: src/translations.h:143
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "Nosaukt miglājus līdz zvaigžņliel.: "
+
+#: src/translations.h:145
+msgid "Cursor Timeout: "
+msgstr "Kursora taimauts: "
+
+#: src/translations.h:146
+msgid "Correct for light travel time: "
+msgstr "Koriģēt atbilstoši gaismas ceļošanas ilgumam: "
+
+#: src/translations.h:150
+msgid "USB Script: "
+msgstr "USB scenārijs: "
+
+#: src/translations.h:151
+msgid "Arrow down to load list."
+msgstr "Bultiņa uz leju ielādē sarakstu."
+
+#: src/translations.h:152
+msgid "Select and exit to run."
+msgstr "Izvēlieties un izejiet lai palaistu."
+
+#: src/translations.h:154
+msgid "Load Default Configuration: "
+msgstr "Ielādēt noklusējuma konfigurāciju: "
+
+#: src/translations.h:155
+msgid "Save Current Configuration as Default: "
+msgstr "Saglabāt šo konfigurāciju kā noklusējuma: "
+
+#: src/translations.h:156
+msgid "Shut Down: "
+msgstr "Izslēgt: "
+
+#: src/translations.h:157
+msgid "Update me via Internet: "
+msgstr "Atjaunot no interneta: "
 
 #: src/ui_dateTimeDialogGui.h:294 src/ui_helpDialogGui.h:259
 #: src/ui_locationDialogGui.h:387 src/ui_viewDialog.h:979
@@ -1819,3 +1769,7 @@ msgstr ""
 #: src/ui_configurationDialog.h:879
 msgid "Plugins"
 msgstr ""
+
+#, qt-format
+#~ msgid "Loading NGC catalog: %1/%2"
+#~ msgstr "Ieādē NGC katalogu: %1/%2"
