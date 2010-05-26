@@ -333,7 +333,7 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 	if (fileName.endsWith(".ssc"))
 		ok = preprocessScript(fic, preprocessedScript, scriptDir);
 #ifdef ENABLE_STRATOSCRIPT_COMPAT
-	else if (fileName.endsWith(".sts")
+	else if (fileName.endsWith(".sts"))
 		ok = preprocessStratoScript(fic, preprocessedScript, scriptDir);
 #endif
 	if (ok==false)
