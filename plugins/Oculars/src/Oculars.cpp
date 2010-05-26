@@ -523,31 +523,30 @@ void Oculars::drawTelrad()
 		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 
 		// StelPainter drawing
-//		StelPainter painter(projector);
-//		painter.setColor(0.77, 0.14, 0.16, 0.0);
-//		Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
-//						   projector->getViewportPosY()+projector->getViewportHeight()/2);
-//		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (0.5));
-//		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (2.0));
-//		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (4.0));
+		StelPainter painter(projector);
+		painter.setColor(0.77, 0.14, 0.16, 0.0);
+		Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
+						   projector->getViewportPosY()+projector->getViewportHeight()/2);
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (0.5));
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (2.0));
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (4.0));
 
-		// Direct drawing
-		glDisable(GL_BLEND);
-		glColor3f(0.f,0.f,0.f);
-		glPushMatrix();
-		glTranslated(params.viewportCenter[0], params.viewportCenter[1], 0.0);
-		GLUquadricObj *quadric = gluNewQuadric();
-		
-		// the gray circle
-		glColor4f(0.77, 0.14, 0.16, 0.5);
-		float radius = 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (0.5);
-		gluDisk(quadric, radius - 1.0, radius, 256, 1);
-		radius = 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (2.0);
-		gluDisk(quadric, radius - 1.0, radius, 256, 1);
-		radius = 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (4.0);
-		gluDisk(quadric, radius - 1.0, radius, 256, 1);
-		gluDeleteQuadric(quadric);
-		glPopMatrix();		
+//		// Direct drawing
+//		glDisable(GL_BLEND);
+//		glColor3f(0.f,0.f,0.f);
+//		glPushMatrix();
+//		glTranslated(params.viewportCenter[0], params.viewportCenter[1], 0.0);
+//		GLUquadricObj *quadric = gluNewQuadric();		
+//		// the gray circle
+//		glColor4f(0.77, 0.14, 0.16, 0.5);
+//		float radius = 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (0.5);
+//		gluDisk(quadric, radius - 1.0, radius, 256, 1);
+//		radius = 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (2.0);
+//		gluDisk(quadric, radius - 1.0, radius, 256, 1);
+//		radius = 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (4.0);
+//		gluDisk(quadric, radius - 1.0, radius, 256, 1);
+//		gluDeleteQuadric(quadric);
+//		glPopMatrix();		
 	}
 }
 
