@@ -19,7 +19,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #include <math.h>
 #include "pluto.h"
-#include "misc_stellplanet.h"
 
 #define PLUTO_COEFFS 43
 #define PI 3.14159265358979323846264338327950288419716939937510
@@ -209,6 +208,17 @@ static const struct pluto_radius radius[PLUTO_COEFFS] = {
 	{10, 2}
 };
 
+/* Transform spheric coordinate in rectangular */
+void sphe_to_rect(double lng, double lat, double r, double *x, double *y, double *z)
+{
+	double cosLat = cos(lat);
+    (*x) = cos(lng) * cosLat;
+    (*y) = sin(lng) * cosLat;
+	(*z) = sin(lat);
+	(*x)*=r;
+	(*y)*=r;
+	(*z)*=r;
+}
 
 /*
  Chap 37. Equ 37.1
@@ -262,5 +272,4 @@ void get_pluto_helio_coords (double JD, double * X, double * Y, double * Z)
 
 	/* convert to rectangular coord */
 	sphe_to_rect(L, B, R, X, Y, Z);
-
 }
