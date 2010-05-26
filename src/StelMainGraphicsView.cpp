@@ -24,10 +24,8 @@
 #include "StelFileMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelScriptMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelGuiBase.hpp"
-#include "StelMainScriptAPIProxy.hpp"
 #include "StelMainWindow.hpp"
 
 #include <QGLFormat>
@@ -43,8 +41,15 @@
 #include <QGraphicsGridLayout>
 #include <QGraphicsProxyWidget>
 #include <QEventLoop>
-
+#include <QPluginLoader>
 #include <QtPlugin>
+#include <QThread>
+#include <QTimer>
+
+#ifndef DISABLE_SCRIPTING
+ #include "StelScriptMgr.hpp"
+ #include "StelMainScriptAPIProxy.hpp"
+#endif
 
 // The static plugins need to be imported here so that they belong to the
 // libStelMain required on win32.
@@ -134,7 +139,10 @@ protected:
 };
 
 StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
-	: QGraphicsView(parent), backItem(NULL), gui(NULL), scriptAPIProxy(NULL), scriptMgr(NULL),
+	: QGraphicsView(parent), backItem(NULL), gui(NULL),
+#ifndef DISABLE_SCRIPTING
+	scriptAPIProxy(NULL), scriptMgr(NULL),
+#endif
 	  wasDeinit(false),
 	  flagInvertScreenShotColors(false),
 	  screenShotPrefix("stellarium-"),
@@ -230,8 +238,10 @@ void StelMainGraphicsView::init(QSettings* conf)
 	// Prevent flickering on mac Leopard/Snow Leopard
 	glWidget->setAutoFillBackground (false);
 
+#ifndef DISABLE_SCRIPTING
 	scriptAPIProxy = new StelMainScriptAPIProxy(this);
 	scriptMgr = new StelScriptMgr(this);
+#endif
 
 	// Look for a static GUI plugins.
 	foreach (QObject *plugin, QPluginLoader::staticInstances())
@@ -252,13 +262,14 @@ void StelMainGraphicsView::init(QSettings* conf)
 	// Force refreshing of button bars if plugins modified the GUI, e.g. added buttons.
 	gui->forceRefreshGui();
 
+#ifndef DISABLE_SCRIPTING
 	QString startupScript;
 	if (qApp->property("onetime_startup_script").isValid())
 		qApp->property("onetime_startup_script").toString();
 	else
 		startupScript = conf->value("scripts/startup_script", "startup.ssc").toString();
-
 	scriptMgr->runScript(startupScript);
+#endif
 
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
 	StelPainter::setQPainter(NULL);
@@ -372,8 +383,10 @@ void StelMainGraphicsView::deinitGL()
 	if (wasDeinit==true)
 		return;
 	wasDeinit = true;
+#ifndef DISABLE_SCRIPTING
 	if (scriptMgr->scriptIsRunning())
 		scriptMgr->stopScript();
+#endif
 	QCoreApplication::processEvents();
 	StelApp::getInstance().getModuleMgr().unloadAllPlugins();
 	QCoreApplication::processEvents();
