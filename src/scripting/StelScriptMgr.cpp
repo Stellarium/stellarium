@@ -141,7 +141,7 @@ StelScriptMgr::~StelScriptMgr()
 {
 }
 
-QStringList StelScriptMgr::getScriptList(void)
+QStringList StelScriptMgr::getScriptList()
 {
 	QStringList scriptFiles;
 	try
@@ -167,12 +167,12 @@ QStringList StelScriptMgr::getScriptList(void)
 	return scriptFiles;
 }
 
-bool StelScriptMgr::scriptIsRunning(void)
+bool StelScriptMgr::scriptIsRunning()
 {
 	return engine.isEvaluating();
 }
 
-QString StelScriptMgr::runningScriptId(void)
+QString StelScriptMgr::runningScriptId()
 {
 	if (engine.isEvaluating())
 		return scriptFileName;
@@ -328,6 +328,18 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 	if (!includePath.isEmpty())
 		scriptDir = includePath;
 
+	// Seed the PRNG so that script random numbers aren't always the same sequence
+	qsrand(QDateTime::currentDateTime().toTime_t());
+
+	// Make sure that the gui object have been completely initialized (there used to be problems with startup scripts).
+	Q_ASSERT(StelApp::getInstance().getGui());
+
+	savedTimeRate = StelApp::getInstance().getCore()->getNavigator()->getTimeRate();
+	engine.globalObject().setProperty("scriptRateReadOnly", 1.0);
+	
+	// Notify that the script starts here although we still have to preprocess it.
+	emit(scriptRunning());
+	
 	QString preprocessedScript;
 	bool ok=false;
 	if (fileName.endsWith(".ssc"))
@@ -336,20 +348,13 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 	else if (fileName.endsWith(".sts"))
 		ok = preprocessStratoScript(fic, preprocessedScript, scriptDir);
 #endif
-	if (ok==false)
+	if (!ok)
+	{
+		scriptEnded();
 		return false;
-
-	// seed the PRNG so that script random numbers aren't always the same sequence
-	qsrand(QDateTime::currentDateTime().toTime_t());
-
-	// For startup scripts, the gui object might not
-	// have completed init when we run. Wait for that.
-	Q_ASSERT(StelApp::getInstance().getGui());
-
-	engine.globalObject().setProperty("scriptRateReadOnly", 1.0);
+	}
 	
 	// run that script
-	emit(scriptRunning());
 	engine.evaluate(preprocessedScript);
 	scriptEnded();
 	return true;
@@ -364,6 +369,7 @@ void StelScriptMgr::stopScript()
 		//qDebug() << msg;
 		engine.abortEvaluation();
 	}
+	scriptEnded();
 }
 
 void StelScriptMgr::setScriptRate(float r)
@@ -408,7 +414,7 @@ void StelScriptMgr::scriptEnded()
 
 	// reset time rate to non-scaped script rates... TODO
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	nav->setTimeRate(nav->getTimeRate() / getScriptRate());
+	nav->setTimeRate(savedTimeRate);
 	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(1.0);
 	emit(scriptStopped());
 }

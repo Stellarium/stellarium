@@ -597,8 +597,6 @@ void ConfigurationDialog::runScriptClicked(void)
 	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
 	if (ui->scriptListWidget->currentItem())
 	{
-		ui->runScriptButton->setEnabled(false);
-		ui->stopScriptButton->setEnabled(true);
 		scriptMgr.runScript(ui->scriptListWidget->currentItem()->text());
 	}
 }
