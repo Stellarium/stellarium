@@ -63,10 +63,6 @@ for more details on the location of the user data directory for your OS.
 
 	++ Special thanks to ++
 
-	Rob Spearman (Digitalis Education Solutions, Inc.) for his help and
-	  financial support.  Have a look at http://digitaliseducation.com if
-	  you want to buy a planetarium projector running stellarium!
-
 	Johan Meuris for his stunning drawings of the constellations.
 	  (Johan is now an official member of the project)
 
@@ -83,6 +79,9 @@ for more details on the location of the user data directory for your OS.
 
 	Tony Furr for his work on the Graphical User Interface.
 
+	Rob Spearman (Digitalis Education Solutions, Inc.) for his help and
+	financial support.
+	
 	Valery Lainey for his L1 and MarsSat ephemeris and his prompt an kind
 	  help with any question concerning planetary/satellite ephemeris.
 
@@ -96,26 +95,23 @@ for more details on the location of the user data directory for your OS.
 
 	Axel Mellinger who gave me the authorisation to use his impressive
 	  milky way panorama.
-	Jesse Jones for his callback library.
 	The celestia project team from which I borrowed many code parts (GPL
 	  license).
-	The libnova team for their planet calculation algorithms (GPL license).
+	The libnova team for their planet calculation algorithms (LGPL license).
 	All the sourceforge team for hosting my project.
 	Cedric Delfosse for his precious help on debian port.
 	The GEPI team from the Observatoire Astronomique de Paris for
 	  the great Hipparcos catalog.
 	Brad Schaefer for his sky rendering algorithm.
-	Sylvain Ferey for his optimisation of the grids drawing.
 	Jean-Francois Tremblay for his porting on MacOSX.
 	Vincent Caron for his parser bugfix and Linux compatibility bugfixes.
 	Nick Porcino for his planet function.
 	Tangui Morlier for his help on Linux System.
 	Bill Gray (projectpluto.com) and Mark Huss (mark (at) mhuss.com) for all
 	  the astro libraries.
-	Chris Laurel (claurel (at) shatters.net) who makes Celestia.
 	Antje Buchholz for her translation help and logistic support :)
 
-	And... All the people who sent me mails and bug reports!
+	And... All the people who sent us mails and bug reports!
 
 
 --------------------------------------------------------------------------------
@@ -154,22 +150,20 @@ for more details on the location of the user data directory for your OS.
 		source code from Brad Schaefer's article on pages 57-60,  May
 		1998 _Sky & Telescope_,	"To the Visual Limits". The basic
 		sources are available on the Sky and Telescope web site.
-	1.4 Object luminance algorithm from GPL delphi program by Jan Hollan,
-		1999 (C) N.Copernicus Observatory and Planetarium in Brno.
-		See http://svetlo.astro.cz/compute/lum.php
+		(code "offered as-is and without support.")
 
 2. Included source code
-	2.1 The png and jpeg openGL texture loader are Copyright (c) 2005-2006
-		David HENRY (see 10.4)
-	2.2 The stellastro and stellplanet libraries are mainly subsets of the
-		libnova library (GPL) by Liam Girdwood (liam (at) nova-ioe.org)
-	2.3 The orbit.cpp/h and solve.h files are directly borrowed from
+	2.1 Some computation of the sideral time (sideral_time.h/c) and pluto
+        orbit contains code from the libnova library (LGPL) by Liam Girdwood.
+	2.2 The orbit.cpp/h and solve.h files are directly borrowed from
 		Celestia (Chris Laurel). (GPL license)
-	2.4 Other pieces of code and ideas are from Celestia too (GPL license).
-	2.5 Callback library by Jess Jones, see section 10.4 for full license.
-	2.6 Several implementations of IMCCE theories for planet and satellite
+	2.3 Other pieces of code and ideas are from Celestia too (GPL license).
+	2.4 Several implementations of IMCCE theories for planet and satellite
 		movement by Johannes Gajdosik (MIT-style license,
 		see the corresponding files for the license text)
+    2.5 The tesselation algorithms were originally extracted from the glues 
+        library version 1.4 Mike Gorchak <mike@malva.ua> (SGI FREE SOFTWARE
+        LICENSE B).
 
 3. Data
 	3.1 The Hipparcos star catalog
@@ -232,48 +226,45 @@ for more details on the location of the user data directory for your OS.
 		you do then please mention their origin in your work [..]"
 	4.5 All other planet maps from David Seal's site:
 		http://maps.jpl.nasa.gov/   see license in section 10.3
-	4.6 The snowy landscape textures are from the GPL game tuxracer.
-		"Copyright 1999, 2000, 2001 Jasmin F. Patry" available under GPL
-		license.
-	4.7 The fullsky milky way panorama is created by Axel Mellinger,
+	4.6 The fullsky milky way panorama is created by Axel Mellinger,
 		University of Potsdam, Germany. Further information and more
 		pictures available from
 		http://home.arcor-online.de/axel.mellinger/
 		License: permission given to "Modify and redistribute this image
 		if proper credit to the original image is given."
-	4.8 All messiers nebula pictures except those mentioned below from the
+	4.7 All messiers nebula pictures except those mentioned below from the
 		Grasslands Observatory : "Images courtesy of Tim Hunter and
 		James McGaha, Grasslands Observatory at http://www.3towers.com."
 		License: permission given to "use the image freely" (including
 		right to modify and redistribute) "as long as it is credited."
-	4.9 M31, and the Pleiades pictures come from Herm Perez :
+	4.8 M31, and the Pleiades pictures come from Herm Perez :
 		http://home.att.net/~hermperez/default.htm
 		License: "Feel free to use these images, if you use them in a
 		commercial setting please attribute the source."
-	4.10 Images of M8, M20, M33, NGC253, NGC1499, NGC2244, IC343 from
+	4.9 Images of M8, M20, M33, NGC253, NGC1499, NGC2244, IC343 from
 		Jean-Pierre Bousquet
-	4.11 Images of M1, M15, M16, M27, M42, M57, M97, NGC6946 from Stephane Dumont	
-	4.12 Images of M17, M44, NGC856, NGC884 from Maxime Spano
-	4.13 Constellation art, GUI buttons, logo created by Johan Meuris
+	4.10 Images of M1, M15, M16, M27, M42, M57, M97, NGC6946 from Stephane Dumont	
+	4.11 Images of M17, M44, NGC856, NGC884 from Maxime Spano
+	4.12 Constellation art, GUI buttons, logo created by Johan Meuris
 		(Jomejome) (jomejome at users.sourceforge.net)
 		http://users.pandora.be/jomejom/
 		License: released under the Free Art License
 		(http://artlibre.org/licence.php/lalgb.html)
-	4.14 The "earth-clouds" texture includes imagery owned by NASA.
+	4.13 The "earth-clouds" texture includes imagery owned by NASA.
 	See NASA's Visible Earth project at http://visibleearth.nasa.gov/
 	License: 1. The imagery is free of licensing fees
 		 2. NASA requires that they be provided a credit as the owners
 			of the imagery
 		The cloud texturing was taken from Celestia (GPL),
 		http://www.shatters.net/celestia/
-	4.15 The folder icon derived from the Tango Desktop Project, used under
+	4.14 The folder icon derived from the Tango Desktop Project, used under
 		the terms of the Creative Commons Attribution Share-Alike
 		license.
 
 --------------------------------------------------------------------------------
 9. LICENSE
 --------------------------------------------------------------------------------
-   Copyright (C) 2004-2009 Fabien Chereau et al.
+   Copyright (C) 2004-2010 Fabien Chereau et al.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -379,29 +370,3 @@ for more details on the location of the user data directory for your OS.
 	  parties other than JPL and NASA is noted in the caption material
 	  with each image.
 	---
-
-10.3 License for the callback library by Jesse Jones :
-	(C) Copyright Jesse Jones 2000. Permission to copy, use, modify, sell
-	and distribute this software is granted provided this copyright notice
-	appears in all copies. This software is provided "as is" without express
-	or implied warranty, and with no claim as to its suitability for any
-	purpose.
-
-10.4 License for the JPEG and PNG loading code from David HENRY
-	Copyright (c) 2005-2006 David HENRY
-	Permission is hereby granted, free of charge, to any person obtaining a
-	copy of this software and associated documentation files (the
-	"Software"), to deal in the Software without restriction, including
-	without limitation the rights to use, copy, modify, merge, publish,
-	distribute, sublicense, and/or sell copies of the Software, and to
-	permit persons to whom the Software is furnished to do so, subject to
-	the following conditions: The above copyright notice and this permission
-	notice shall be included in all copies or substantial portions of the
-	Software.  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
-	KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-	IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
-	ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
-	CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
