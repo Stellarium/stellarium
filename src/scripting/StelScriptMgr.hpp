@@ -155,6 +155,8 @@ private:
 	StelMainScriptAPI *mainAPI;
 
 	QString scriptFileName;
+	
+	float savedTimeRate;
 };
 
 #endif // _STELSCRIPTMGR_HPP_
