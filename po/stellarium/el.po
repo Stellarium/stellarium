@@ -7,41 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-28 17:53+0100\n"
-"PO-Revision-Date: 2010-02-24 14:45+0000\n"
+"POT-Creation-Date: 2010-05-19 15:26+0200\n"
+"PO-Revision-Date: 2010-05-07 21:50+0000\n"
 "Last-Translator: Christos Sotiropoulos <csot@otenet.gr>\n"
 "Language-Team: Greek, Modern (1453-) <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-31 16:53+0000\n"
+"X-Launchpad-Export-Date: 2010-05-26 09:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/modules/LandscapeMgr.cpp:425
+#: src/core/modules/LandscapeMgr.cpp:401
 msgid "Author: "
 msgstr "Συγγραφέας: "
 
-#: src/modules/TextUI.cpp:66
-msgid "Stars "
-msgstr "Αστέρες "
-
-#: src/modules/TextUI.cpp:99
-msgid "Maximum Magnitude to Label: "
-msgstr "Μέγιστη απόσταση παρουσίασης ετικετών: "
-
-#: src/modules/TextUI.cpp:123
-msgid "Manual zoom: "
-msgstr "Χειροκίνητη εστίαση: "
-
-#: src/modules/TextUI.cpp:124
-msgid "Object Sizing Rule: "
-msgstr "Κανόνας μεγέθους αντικειμένων: "
-
-#: src/modules/TextUI.cpp:127
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Μέγιστη φωτεινότητα νεφελωμάτων για εμφάνιση ετικέτας: "
-
-#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:995 src/ui_viewDialog.h:1013
+#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:995 src/ui_viewDialog.h:1013
 msgid "Stars"
 msgstr "Αστέρες"
 
@@ -65,358 +45,120 @@ msgstr "Ινδιάνοι Λακότα"
 msgid "Navajo"
 msgstr "Ινδιάνοι Ναβάχο"
 
-#: src/modules/StarMgr.cpp:396
-#, qt-format
-msgid "Loading catalog %1 from file %2"
-msgstr "Φόρτωση καταλόγου %1 από το αρχείο %2"
+#: src/translations.h:88
+msgid "Stars "
+msgstr "Αστέρες "
 
-#: src/modules/LandscapeMgr.cpp:428
+#: src/translations.h:117
+msgid "Maximum Magnitude to Label: "
+msgstr "Μέγιστη απόσταση παρουσίασης ετικετών: "
+
+#: src/translations.h:139
+msgid "Manual zoom: "
+msgstr "Χειροκίνητη εστίαση: "
+
+#: src/translations.h:140
+msgid "Object Sizing Rule: "
+msgstr "Κανόνας μεγέθους αντικειμένων: "
+
+#: src/translations.h:143
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "Μέγιστη φωτεινότητα νεφελωμάτων για εμφάνιση ετικέτας: "
+
+#: src/core/modules/LandscapeMgr.cpp:404
 msgid "Location: "
 msgstr "Τοποθεσία: "
 
-#: src/modules/LandscapeMgr.cpp:433
+#: src/core/modules/LandscapeMgr.cpp:409
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 μ"
 
-#: src/modules/LandscapeMgr.cpp:436
+#: src/core/modules/LandscapeMgr.cpp:412
 msgid "Planet: "
 msgstr "Πλανήτης: "
 
-#: src/modules/Nebula.cpp:92
+#: src/core/modules/Nebula.cpp:92
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Τύπος: <b>%1</b>"
 
-#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:130
+#: src/core/modules/Nebula.cpp:95 src/core/modules/Planet.cpp:119
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Μέγεθος: <b>%1</b>"
 
-#: src/modules/Nebula.cpp:100
+#: src/core/modules/Nebula.cpp:100
 #, qt-format
 msgid "Size: %1"
 msgstr "Μέγεθος: %1"
 
-#: src/modules/Nebula.cpp:269
+#: src/core/modules/Nebula.cpp:269
 msgid "Galaxy"
 msgstr "Γαλαξίας"
 
-#: src/modules/Nebula.cpp:272
+#: src/core/modules/Nebula.cpp:272
 msgid "Open cluster"
 msgstr "Ανοιχτό σμήνος"
 
-#: src/modules/Nebula.cpp:275
+#: src/core/modules/Nebula.cpp:275
 msgid "Globular cluster"
 msgstr "Σφαιρικό σμήνος"
 
-#: src/modules/Nebula.cpp:278
+#: src/core/modules/Nebula.cpp:278
 msgid "Nebula"
 msgstr "Νεφελώματα [Ν]"
 
-#: src/modules/Nebula.cpp:281
+#: src/core/modules/Nebula.cpp:281
 msgid "Planetary nebula"
 msgstr "Πλανητικό νεφέλωμα"
 
-#: src/modules/Nebula.cpp:284
+#: src/core/modules/Nebula.cpp:284
 msgid "Cluster associated with nebulosity"
 msgstr "Σμήνος που σχετίζεται με υφή νεφελώματος"
 
-#: src/modules/Nebula.cpp:287
+#: src/core/modules/Nebula.cpp:287
 msgid "Unknown"
 msgstr "Άγνωστο"
 
-#: src/modules/Nebula.cpp:290
+#: src/core/modules/Nebula.cpp:290
 msgid "Undocumented type"
 msgstr "Άγνωστος τύπος"
 
-#: src/modules/NebulaMgr.cpp:346
-#, qt-format
-msgid "Loading NGC catalog: %1/%2"
-msgstr "Φόρτωση καταλόγου NGC: %1/%2"
-
-#: src/modules/NebulaMgr.cpp:379
-msgid "Loading NGC catalog"
-msgstr "Φόρτωση καταλόγου NGC"
-
-#: src/modules/Planet.cpp:133 src/modules/StarWrapper.cpp:113
+#: src/core/modules/Planet.cpp:122 src/core/modules/StarWrapper.cpp:114
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Απόλυτο μέγεθος: %1"
 
-#: src/modules/Planet.cpp:140
+#: src/core/modules/Planet.cpp:129
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr "Απόσταση: %1ΑΜ"
 
-#: src/modules/Planet.cpp:144
+#: src/core/modules/Planet.cpp:133
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Φαινόμενη διάμετρος: %1"
 
-#: src/modules/StarWrapper.cpp:52 src/modules/StarWrapper.cpp:109
+#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:110
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
 msgstr "Μέγεθος: <b>%1</b> (B-V: %2)"
 
-#: src/modules/StarWrapper.cpp:119
+#: src/core/modules/StarWrapper.cpp:120
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Φασματικός Τύπος: %1"
 
-#: src/modules/StarWrapper.cpp:123
+#: src/core/modules/StarWrapper.cpp:124
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Απόσταση: %1 Έτη Φωτός"
 
-#: src/modules/StarWrapper.cpp:126
+#: src/core/modules/StarWrapper.cpp:127
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Παραλλαγή: %1\""
-
-#: src/modules/TextUI.cpp:63
-msgid "Set Location "
-msgstr "Καθορισμός τοποθεσίας: "
-
-#: src/modules/TextUI.cpp:64
-msgid "Set Time "
-msgstr "Καθορισμός ώρας "
-
-#: src/modules/TextUI.cpp:65
-msgid "General "
-msgstr "Γενικά "
-
-#: src/modules/TextUI.cpp:67
-msgid "Colors "
-msgstr "Χρώματα "
-
-#: src/modules/TextUI.cpp:68
-msgid "Effects "
-msgstr "Εφέ "
-
-#: src/modules/TextUI.cpp:69
-msgid "Scripts "
-msgstr "Σενάρια "
-
-#: src/modules/TextUI.cpp:70
-msgid "Administration "
-msgstr "Διαχείριση "
-
-#: src/modules/TextUI.cpp:73
-msgid "Latitude: "
-msgstr "Γεωγραφικό πλάτος: "
-
-#: src/modules/TextUI.cpp:74
-msgid "Longitude: "
-msgstr "Γεωγραφικό μήκος: "
-
-#: src/modules/TextUI.cpp:75
-msgid "Altitude (m): "
-msgstr "Ύψος (μ): "
-
-#: src/modules/TextUI.cpp:76
-msgid "Solar System Body: "
-msgstr "Σώμα Ηλιακού Συστήματος: "
-
-#: src/modules/TextUI.cpp:79
-msgid "Sky Time: "
-msgstr "Ώρα ουρανού: "
-
-#: src/modules/TextUI.cpp:80
-msgid "Set Time Zone: "
-msgstr "Καθορισμός ζώνης ώρας: "
-
-#: src/modules/TextUI.cpp:81
-msgid "Day keys: "
-msgstr "Πλήκτρα ημέρας: "
-
-#: src/modules/TextUI.cpp:82
-msgid "Calendar"
-msgstr "Ημερολόγιο"
-
-#: src/modules/TextUI.cpp:83
-msgid "Sidereal"
-msgstr "Συνοδικός"
-
-#: src/modules/TextUI.cpp:84
-msgid "Preset Sky Time: "
-msgstr "Προκαθορισμένος χρόνος ουρανού: "
-
-#: src/modules/TextUI.cpp:85
-msgid "Sky Time At Start-up: "
-msgstr "Ώρα ουρανού κατά την εκκίνηση: "
-
-#: src/modules/TextUI.cpp:86
-msgid "Actual Time"
-msgstr "Πραγματική ώρα"
-
-#: src/modules/TextUI.cpp:87
-msgid "Preset Time"
-msgstr "Προκαθορισμένη ώρα"
-
-#: src/modules/TextUI.cpp:88
-msgid "Time Display Format: "
-msgstr "Μορφή παρουσίασης ώρας: "
-
-#: src/modules/TextUI.cpp:89
-msgid "Date Display Format: "
-msgstr "Μορφή παρουσίασης ημερομηνίας: "
-
-#: src/modules/TextUI.cpp:92
-msgid "Sky Culture: "
-msgstr "Πολιτισμός παρουσίασης ουρανού: "
-
-#: src/modules/TextUI.cpp:93
-msgid "Sky Language: "
-msgstr "Γλώσσα παρουσίασης ουρανού: "
-
-#: src/modules/TextUI.cpp:96
-msgid "Show: "
-msgstr "Παρουσίαση: "
-
-#: src/modules/TextUI.cpp:97
-msgid "Star Value Multiplier: "
-msgstr "Πολλαπλασιαστής αριθμού αστέρων: "
-
-#: src/modules/TextUI.cpp:98
-msgid "Magnitude Sizing Multiplier: "
-msgstr "Πολλαπλασιαστής μεγέθους οπτικού μεγέθους αστέρα "
-
-#: src/modules/TextUI.cpp:100
-msgid "Twinkling: "
-msgstr "Αναλαμπές: "
-
-#: src/modules/TextUI.cpp:101
-msgid "Limiting Magnitude: "
-msgstr "Οριακό μέγεθος: "
-
-#: src/modules/TextUI.cpp:104
-msgid "Constellation Lines"
-msgstr "Γραμμές αστερισμών"
-
-#: src/modules/TextUI.cpp:105
-msgid "Constellation Names"
-msgstr "Ονόματα αστερισμών"
-
-#: src/modules/TextUI.cpp:106
-msgid "Constellation Art Intensity"
-msgstr "Ένταση εμφάνισης καλλιτεχνικής άποψης αστερισμών"
-
-#: src/modules/TextUI.cpp:107
-msgid "Constellation Boundaries"
-msgstr "Όρια αστερισμών"
-
-#: src/modules/TextUI.cpp:108
-msgid "Cardinal Points"
-msgstr "Σημεία ορίζοντα"
-
-#: src/modules/TextUI.cpp:109
-msgid "Planet Names"
-msgstr "Ονόματα πλανητών"
-
-#: src/modules/TextUI.cpp:110
-msgid "Planet Orbits"
-msgstr "Τροχιές πλανητών"
-
-#: src/modules/TextUI.cpp:111
-msgid "Planet Trails"
-msgstr "Ίχνη πλανητών"
-
-#: src/modules/TextUI.cpp:112
-msgid "Meridian Line"
-msgstr "Γραμμή Μεσημβρινού"
-
-#: src/modules/TextUI.cpp:113
-msgid "Azimuthal Grid"
-msgstr "Πλέγμα Αζιμούθιου"
-
-#: src/modules/TextUI.cpp:114
-msgid "Equatorial Grid"
-msgstr "Πλέγμα Ισημερινού"
-
-#: src/modules/TextUI.cpp:115
-msgid "Equator Line"
-msgstr "Γραμμή Ισημερινού"
-
-#: src/modules/TextUI.cpp:116
-msgid "Ecliptic Line"
-msgstr "Εκλειπτική γραμμή"
-
-#: src/modules/TextUI.cpp:117
-msgid "Nebula Names"
-msgstr "Ονόματα νεφελωμάτων"
-
-#: src/modules/TextUI.cpp:118
-msgid "Nebula Circles"
-msgstr "Κύκλοι νεφελωμάτων"
-
-#: src/modules/TextUI.cpp:121
-msgid "Light Pollution Luminance: "
-msgstr "Ένταση φωτορύπανσης: "
-
-#: src/modules/TextUI.cpp:122
-msgid "Landscape: "
-msgstr "Τοπίο: "
-
-#: src/modules/TextUI.cpp:125
-msgid "Magnitude Scaling Multiplier: "
-msgstr "Πολλαπλασιαστής κλίμακας μεγεθών "
-
-#: src/modules/TextUI.cpp:126
-msgid "Milky Way intensity: "
-msgstr "Φωτεινότητα Γαλαξία: "
-
-#: src/modules/TextUI.cpp:128
-msgid "Zoom Duration: "
-msgstr "Διάρκεια εστίασης: "
-
-#: src/modules/TextUI.cpp:129
-msgid "Cursor Timeout: "
-msgstr "Μέγιστο χρονικό όριο δείκτη ποντικιού: "
-
-#: src/modules/TextUI.cpp:130
-msgid "Correct for light travel time: "
-msgstr "Διόρθωση για χρόνο ταξιδιού φωτός: "
-
-#: src/modules/TextUI.cpp:133
-msgid "Local Script: "
-msgstr "Τοπικό Σενάριο: "
-
-#: src/modules/TextUI.cpp:134
-msgid "CD/DVD Script: "
-msgstr "Σενάριο CD/DVD "
-
-#: src/modules/TextUI.cpp:135
-msgid "USB Script: "
-msgstr "USB σενάριο: "
-
-#: src/modules/TextUI.cpp:136
-msgid "Arrow down to load list."
-msgstr "Βέλος προς τα κάτω για να φορτωθεί η λίστα."
-
-#: src/modules/TextUI.cpp:137
-msgid "Select and exit to run."
-msgstr "Επιλογή και έξοδος για εκτέλεση."
-
-#: src/modules/TextUI.cpp:140
-msgid "Load Default Configuration: "
-msgstr "Φόρτωση προεπιλεγμένων ρυθμίσεων: "
-
-#: src/modules/TextUI.cpp:141
-msgid "Save Current Configuration as Default: "
-msgstr "Αποθήκευση τρεχόντων ρυθμίσεων ως προεπιλεγμένες: "
-
-#: src/modules/TextUI.cpp:142
-msgid "Shut Down: "
-msgstr "Τερματισμός: "
-
-#: src/modules/TextUI.cpp:143
-msgid "Update me via Internet: "
-msgstr "Ενημέρωση μέσω Διαδικτύου: "
-
-#: src/modules/TextUI.cpp:144
-msgid "Set UI Locale: "
-msgstr "Γλώσσα περιβάλλοντος χρήστη: "
 
 #: src/core/StelProjector.cpp:61
 msgid "Maximum FOV: "
@@ -446,11 +188,11 @@ msgstr ""
 "Το πλήρες όνομα αυτής της προβολής είναι, <i>Αζημουθιακή προβολή ίσης "
 "περιοχής Lambert</i>. Διατηρεί την περιοχή αλλά όχι την γωνία."
 
-#: src/core/StelProjectorClasses.cpp:111
+#: src/core/StelProjectorClasses.cpp:108
 msgid "Stereographic"
 msgstr "Στερεογραφική"
 
-#: src/core/StelProjectorClasses.cpp:116
+#: src/core/StelProjectorClasses.cpp:113
 msgid ""
 "Stereographic projection is known since the antiquity and was originally "
 "known as the planisphere projection. It preserves the angles at which curves "
@@ -460,11 +202,11 @@ msgstr ""
 "γνωστή ως επιπεδόσφαιρη προβολή. Διατηρεί τις γωνίες στις οποίες οι καμπύλες "
 "διασχύζουν η μία την άλλη αλλά δεν διατηρεί την περιοχή"
 
-#: src/core/StelProjectorClasses.cpp:150
+#: src/core/StelProjectorClasses.cpp:145
 msgid "Fish-eye"
 msgstr "Υπερευρυγώνια"
 
-#: src/core/StelProjectorClasses.cpp:155
+#: src/core/StelProjectorClasses.cpp:150
 msgid ""
 "In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
 "lines become curves when they appear a large angular distance from the "
@@ -476,11 +218,11 @@ msgstr ""
 "το κέντρο του πεδίου θέασης (όπως οι παραμορφώσεις που φαίνονται με πολύ "
 "ευρυγώνιους φακούς φωτογραφικών μηχανών)"
 
-#: src/core/StelProjectorClasses.cpp:189
+#: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
 msgstr "Hammer-Aitoff"
 
-#: src/core/StelProjectorClasses.cpp:194
+#: src/core/StelProjectorClasses.cpp:187
 msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
@@ -488,11 +230,11 @@ msgstr ""
 "Η προβολή Hammer είναι μια προβολή ίσης έκτασης που περιγράφηκε το 1892 από "
 "τον Ernst Hammer εμπνευσμένος από την προβολή Aitoff."
 
-#: src/core/StelProjectorClasses.cpp:230
+#: src/core/StelProjectorClasses.cpp:223
 msgid "Cylinder"
 msgstr "Κυλινδρική"
 
-#: src/core/StelProjectorClasses.cpp:235
+#: src/core/StelProjectorClasses.cpp:228
 msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
@@ -500,11 +242,11 @@ msgstr ""
 "Το πλήρες όνομα αυτής της μεθόδου προβολής είναι <i>ισαπέχουσα κυλινδρική "
 "προβολή</i>. Με αυτή την προβολή όλλοι οι πράλληλοι έχουν ίση απόσταση"
 
-#: src/core/StelProjectorClasses.cpp:277
+#: src/core/StelProjectorClasses.cpp:270
 msgid "Mercator"
 msgstr "Κυλινδρική απεικόνιση"
 
-#: src/core/StelProjectorClasses.cpp:282
+#: src/core/StelProjectorClasses.cpp:275
 msgid ""
 "The mercator projection is one of the most used world map projection. It "
 "preserves direction and shapes but distorts size, in an increasing degree "
@@ -514,11 +256,11 @@ msgstr ""
 "παγκόσμιου χάρτη. Διατηρεί την κατεύθυνση και τα σχήματα αλλά παραμορφώνει "
 "το μέγεθος, σε αυξητικό βαθμό μακριά από τον Ισημερινό"
 
-#: src/core/StelProjectorClasses.cpp:329
+#: src/core/StelProjectorClasses.cpp:322
 msgid "Orthographic"
 msgstr "Ορθογραφική"
 
-#: src/core/StelProjectorClasses.cpp:334
+#: src/core/StelProjectorClasses.cpp:327
 msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
@@ -546,54 +288,54 @@ msgstr "Ωρική γωνία/απόκλιση: %1/%2"
 msgid "Az/Alt: %1/%2"
 msgstr "Αζ/Υψ: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:283
+#: src/gui/ConfigurationDialog.cpp:285
 msgid "Select screenshot directory"
 msgstr "Επιλέξτε κατάλογο για στιγμιότυπα"
 
-#: src/gui/ConfigurationDialog.cpp:448
+#: src/gui/ConfigurationDialog.cpp:451
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Εκκίνηση FOV: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:456
+#: src/gui/ConfigurationDialog.cpp:459
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Αρχική κατεύθυνση θέασης Αζ/Υψ: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:492
+#: src/gui/ConfigurationDialog.cpp:495
 msgid "Authors"
 msgstr "Δημιουργοί"
 
-#: src/gui/ConfigurationDialog.cpp:496 src/gui/ViewDialog.cpp:336
+#: src/gui/ConfigurationDialog.cpp:499 src/gui/ViewDialog.cpp:337
 msgid "Contact"
 msgstr "Επικοινωνία"
 
-#: src/gui/ConfigurationDialog.cpp:568
+#: src/gui/ConfigurationDialog.cpp:571
 msgid "Author"
 msgstr "Συγγραφέας"
 
-#: src/gui/ConfigurationDialog.cpp:569
+#: src/gui/ConfigurationDialog.cpp:572
 msgid "License"
 msgstr "Άδεια χρήσης"
 
-#: src/gui/ConfigurationDialog.cpp:600
+#: src/gui/ConfigurationDialog.cpp:603
 msgid "Running script: "
 msgstr "Σενάριο υπό εκτέλεση: "
 
-#: src/gui/ConfigurationDialog.cpp:607
+#: src/gui/ConfigurationDialog.cpp:610
 msgid "Running script: [none]"
 msgstr "Σενάριο υπό εκτέλεση: [Κανένα]"
 
-#: src/gui/ConfigurationDialog.cpp:650
+#: src/gui/ConfigurationDialog.cpp:653
 msgid "Finished downloading all star catalogs!"
 msgstr "Ολοκλήρωση κατεβάσματος όλων των αστρικών καταλόγων!"
 
-#: src/gui/ConfigurationDialog.cpp:657
+#: src/gui/ConfigurationDialog.cpp:662
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Λήψη καταλόγου %1 απο %2"
 
-#: src/gui/ConfigurationDialog.cpp:659
+#: src/gui/ConfigurationDialog.cpp:664
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -604,7 +346,7 @@ msgstr ""
 "Αριθμός άστρων: %2 εκατομμύρια\n"
 "Όρια Μεγεθών: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:668
+#: src/gui/ConfigurationDialog.cpp:673
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -612,7 +354,7 @@ msgstr ""
 "Ολοκλήρωση λήψης των νέων καταλόγων αστεριών!\n"
 "Επανεκκινήστε το Stellarium για να τα δείτε."
 
-#: src/gui/ConfigurationDialog.cpp:706 src/gui/ConfigurationDialog.cpp:740
+#: src/gui/ConfigurationDialog.cpp:711 src/gui/ConfigurationDialog.cpp:745
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -621,18 +363,18 @@ msgstr ""
 "Σφάλμα κατά τη λήψη του %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:711
+#: src/gui/ConfigurationDialog.cpp:716
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr "Λήψη %1..."
 
-#: src/gui/ConfigurationDialog.cpp:791
+#: src/gui/ConfigurationDialog.cpp:796
 msgid "Verifying file integrity..."
 msgstr "Έλεγχος ακεραιότητας αρχείων…"
 
-#: src/gui/ConfigurationDialog.cpp:795
+#: src/gui/ConfigurationDialog.cpp:800
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -641,84 +383,84 @@ msgstr ""
 "Σφάλμα κατά τη λήψη του %1:\n"
 "Το αρχείο είναι αλλοιωμένο."
 
-#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:286
-#: src/gui/StelGuiItems.cpp:647
+#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:285
+#: src/gui/StelGuiItems.cpp:640
 msgid "Space"
 msgstr "Διάστημα"
 
-#: src/gui/HelpDialog.cpp:52
+#: src/gui/HelpDialog.cpp:53
 msgid "Arrow keys & left mouse drag"
 msgstr "Βέλη κατεύθυνσης και τράβηγμα με αριστερό κουμπί του ποντικιού"
 
-#: src/gui/HelpDialog.cpp:53
+#: src/gui/HelpDialog.cpp:54
 msgid "Page Up/Down"
 msgstr "Σελίδα Πάνω/Κάτω"
 
-#: src/gui/HelpDialog.cpp:54
+#: src/gui/HelpDialog.cpp:55
 msgid "CTRL + Up/Down"
 msgstr "CTRL + Πάνω/Κάτω"
 
-#: src/gui/HelpDialog.cpp:55
+#: src/gui/HelpDialog.cpp:56
 msgid "Left click"
 msgstr "Αριστερό κλικ"
 
-#: src/gui/HelpDialog.cpp:56
+#: src/gui/HelpDialog.cpp:57
 msgid "Right click"
 msgstr "Δεξί κλικ"
 
-#: src/gui/HelpDialog.cpp:57
+#: src/gui/HelpDialog.cpp:58
 msgid "CTRL + Left click"
 msgstr "CTRL + Αριστερό κλίκ"
 
-#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:157
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:162
 msgid "Movement and Selection"
 msgstr "Κίνηση και Επιλογή"
 
-#: src/gui/HelpDialog.cpp:61
+#: src/gui/HelpDialog.cpp:62
 msgid "Pan view around the sky"
 msgstr "Πειρστροφή της θέας του ουρανού"
 
-#: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
+#: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
 msgid "Zoom in/out"
 msgstr "Εστιακή μεγέθυνση/σμύκρινση"
 
-#: src/gui/HelpDialog.cpp:64
+#: src/gui/HelpDialog.cpp:65
 msgid "Select object"
 msgstr "Επιλογή αντικειμένου"
 
-#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
+#: src/gui/HelpDialog.cpp:66 src/gui/HelpDialog.cpp:68
 msgid "Clear selection"
 msgstr "Καθαρισμός επιλογής"
 
-#: src/gui/HelpDialog.cpp:70
+#: src/gui/HelpDialog.cpp:71
 msgid "When a Script is Running"
 msgstr "Όταν τρέχει ένα σενάριο"
 
-#: src/gui/HelpDialog.cpp:71 src/gui/StelGui.cpp:136
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:141
 msgid "Slow down the script execution rate"
 msgstr "Επιβράδυνση του ρυθμού εκτέλεσης του σεναρίου"
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:137
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:142
 msgid "Speed up the script execution rate"
 msgstr "Επιβράδυνση του ρυθμού εκτέλεσης του σεναρίου"
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:138
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:143
 msgid "Set the normal script execution rate"
 msgstr "Κανονικός ρυθμός εκτέλεσης του σεναρίου"
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:162
 msgid "Stellarium Help"
 msgstr "Βοήθεια για το Stellarium"
 
-#: src/gui/HelpDialog.cpp:162
+#: src/gui/HelpDialog.cpp:163
 msgid "Keys"
 msgstr "Πλήκτρα"
 
-#: src/gui/HelpDialog.cpp:170
+#: src/gui/HelpDialog.cpp:171
 msgid "Further Reading"
 msgstr "Περισσότερες Πληροφορίες"
 
-#: src/gui/HelpDialog.cpp:171
+#: src/gui/HelpDialog.cpp:172
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -726,17 +468,17 @@ msgstr ""
 "Η παρακάτω σύνδεσμοι είναι εξωτερική σύνδεση στο διαδίκτυο, και θα ανοίξουν "
 "στον φυλλομετρητή σας:\n"
 
-#: src/gui/HelpDialog.cpp:172
+#: src/gui/HelpDialog.cpp:173
 msgid "The Stellarium User Guide"
 msgstr "Ο οδηγός χρήσης του Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:176
+#: src/gui/HelpDialog.cpp:177
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Πολύ Συχνές Ερωτήσεις} για το Stellarium. Και απαντήσεις."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:181
+#: src/gui/HelpDialog.cpp:182
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -745,7 +487,7 @@ msgstr ""
 "επίσης σενάρια και τοπία που έχουν κατασκευάσει άλλοι χρήστες."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:186
+#: src/gui/HelpDialog.cpp:187
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -755,7 +497,7 @@ msgstr ""
 "βοηθήσουμε."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:191
+#: src/gui/HelpDialog.cpp:192
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -766,359 +508,319 @@ msgstr ""
 "μία αναφορά λαθών εδώ"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:196
+#: src/gui/HelpDialog.cpp:197
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Φόρουμς} - συζητήστε για το Stellarium με άλλους χρήστες"
 
-#: src/gui/HelpDialog.cpp:232 src/gui/HelpDialog.cpp:322
-#: src/gui/HelpDialog.cpp:324 src/gui/StelGui.cpp:176
+#: src/gui/HelpDialog.cpp:233 src/gui/HelpDialog.cpp:325
+#: src/gui/HelpDialog.cpp:327 src/gui/StelGui.cpp:169
 msgid "Miscellaneous"
 msgstr "Διάφορα"
 
-#: src/gui/HelpDialog.cpp:290
+#: src/gui/HelpDialog.cpp:293
 msgid "Developers"
 msgstr "Προγραμματιστές"
 
-#: src/gui/HelpDialog.cpp:291
+#: src/gui/HelpDialog.cpp:294
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Συντονιστής έργου και υπεύθυνος ανάπτυξης: %1"
 
-#: src/gui/HelpDialog.cpp:292
+#: src/gui/HelpDialog.cpp:295
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Προγραμματιστής/Συγγραφέας Κειμένων: %1"
 
-#: src/gui/HelpDialog.cpp:293
+#: src/gui/HelpDialog.cpp:296
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Σχεδιαστής γραφικών: %1"
 
-#: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:295
 #: src/gui/HelpDialog.cpp:297 src/gui/HelpDialog.cpp:298
+#: src/gui/HelpDialog.cpp:300 src/gui/HelpDialog.cpp:301
 #, qt-format
 msgid "Developer: %1"
 msgstr "Προγραμματιστής: %1"
 
-#: src/gui/HelpDialog.cpp:296
+#: src/gui/HelpDialog.cpp:299
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Προγραμματιστής OSX: %1"
 
-#: src/gui/StelGui.cpp:94
+#: src/gui/StelGui.cpp:98
 msgid "Display Options"
 msgstr "Επιλογές εμφάνισης"
 
-#: src/gui/StelGui.cpp:95
+#: src/gui/StelGui.cpp:99
 msgid "Constellation lines"
 msgstr "Γραμμές αστερισμών"
 
-#: src/gui/StelGui.cpp:96
+#: src/gui/StelGui.cpp:100
 msgid "Constellation art"
 msgstr "Καλλιτεχνική απεικόνιση αστερισμών"
 
-#: src/gui/StelGui.cpp:97
+#: src/gui/StelGui.cpp:101
 msgid "Constellation labels"
 msgstr "Ετικέτες αστερισμών"
 
-#: src/gui/StelGui.cpp:98
+#: src/gui/StelGui.cpp:102
 msgid "Constellation boundaries"
 msgstr "Όρια αστερισμών"
 
-#: src/gui/StelGui.cpp:100 src/ui_viewDialog.h:1027
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1027
 msgid "Azimuthal grid"
 msgstr "Αζιμουθιακό πλέγμα"
 
-#: src/gui/StelGui.cpp:101 src/ui_viewDialog.h:1025
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1025
 msgid "Equatorial grid"
 msgstr "Πλέγμα Ισημερινού"
 
-#: src/gui/StelGui.cpp:102 src/ui_viewDialog.h:1026
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1026
 msgid "Equatorial J2000 grid"
 msgstr "Πλέγμα Ισημερινού J2000"
 
-#: src/gui/StelGui.cpp:103
+#: src/gui/StelGui.cpp:107
 msgid "Galactic grid"
 msgstr "Γαλαξιακό πλέγμα"
 
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1030
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1030
 msgid "Ecliptic line"
 msgstr "Γραμμή Εκλειπτικής"
 
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1028
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1028
 msgid "Equator line"
 msgstr "Γραμμή Ισημερινού"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1029
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1029
 msgid "Meridian line"
 msgstr "Γραμμή Μεσημβρινού"
 
-#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1031
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1031
 msgid "Cardinal points"
 msgstr "Σημεία του Ορίζοντα"
 
-#: src/gui/StelGui.cpp:109
+#: src/gui/StelGui.cpp:113
 msgid "Ground"
 msgstr "Έδαφος"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1009
+#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1009
 msgid "Atmosphere"
 msgstr "Ατμόσφαιρα"
 
-#: src/gui/StelGui.cpp:111
+#: src/gui/StelGui.cpp:115
 msgid "Fog"
 msgstr "Ομίχλη"
 
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1014
+#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1014
 msgid "Nebulas"
 msgstr "Νεφελώματα"
 
-#: src/gui/StelGui.cpp:114
+#: src/gui/StelGui.cpp:118
 msgid "Nebulas background images"
 msgstr "Φωτογραφίες υποβάθρου νεφελωμάτων"
 
-#: src/gui/StelGui.cpp:116
+#: src/gui/StelGui.cpp:120
 msgid "Planets labels"
 msgstr "Ετικέτες πλανητών"
 
-#: src/gui/StelGui.cpp:117
+#: src/gui/StelGui.cpp:121
 msgid "Planet orbits"
 msgstr "Τροχιές πλανητών"
 
-#: src/gui/StelGui.cpp:119
+#: src/gui/StelGui.cpp:122
+msgid "Planet trails"
+msgstr ""
+
+#: src/gui/StelGui.cpp:124
 msgid "Night mode"
 msgstr "Κατάσταση νύχτας"
 
-#: src/gui/StelGui.cpp:120
+#: src/gui/StelGui.cpp:125
 msgid "Full-screen mode"
 msgstr "Κατάσταση πλήρους-οθόνης"
 
-#: src/gui/StelGui.cpp:121
+#: src/gui/StelGui.cpp:126
 msgid "Flip scene horizontally"
 msgstr "Οριζόντια περιστροφή"
 
-#: src/gui/StelGui.cpp:122
+#: src/gui/StelGui.cpp:127
 msgid "Flip scene vertically"
 msgstr "Κάθετη περιστροφή"
 
-#: src/gui/StelGui.cpp:124
+#: src/gui/StelGui.cpp:129
 msgid "Windows"
 msgstr "Παράθυρα"
 
-#: src/gui/StelGui.cpp:125
+#: src/gui/StelGui.cpp:130
 msgid "Help window"
 msgstr "Παράθυρο βοήθειας"
 
-#: src/gui/StelGui.cpp:126
+#: src/gui/StelGui.cpp:131
 msgid "Configuration window"
 msgstr "Παράθυρο ρυθμίσεων"
 
-#: src/gui/StelGui.cpp:127
+#: src/gui/StelGui.cpp:132
 msgid "Search window"
 msgstr "Παράθυρο αναζήτησης"
 
-#: src/gui/StelGui.cpp:128
+#: src/gui/StelGui.cpp:133
 msgid "Sky and viewing options window"
 msgstr "Παραθυρο επιλογών ουρανού και θέασης"
 
-#: src/gui/StelGui.cpp:129
+#: src/gui/StelGui.cpp:134
 msgid "Date/time window"
 msgstr "Παράθυρο ημέρας/ώρας"
 
-#: src/gui/StelGui.cpp:130
+#: src/gui/StelGui.cpp:135
 msgid "Location window"
 msgstr "Παράθυρο τοποθεσίας"
 
-#: src/gui/StelGui.cpp:132
+#: src/gui/StelGui.cpp:137
 msgid "Script console window"
 msgstr "Κονσόλα σεναρίου"
 
-#: src/gui/StelGui.cpp:135 src/ui_dateTimeDialogGui.h:295
+#: src/gui/StelGui.cpp:140 src/ui_dateTimeDialogGui.h:295
 msgid "Date and Time"
 msgstr "Ημ/νία και ώρα"
 
-#: src/gui/StelGui.cpp:139
+#: src/gui/StelGui.cpp:144
 msgid "Decrease time speed"
 msgstr "Μείωση Ταχύτητας Χρόνου [J]"
 
-#: src/gui/StelGui.cpp:140
+#: src/gui/StelGui.cpp:145
 msgid "Increase time speed"
 msgstr "Άυξηση Ταχύτητας Χρόνου [L]"
 
-#: src/gui/StelGui.cpp:141
+#: src/gui/StelGui.cpp:146
 msgid "Set normal time rate"
 msgstr "Κανονικός ρυθμός χρόνου"
 
-#: src/gui/StelGui.cpp:142
+#: src/gui/StelGui.cpp:147
 msgid "Decrease time speed (a little)"
 msgstr "Μείωση ταχύτητας χρόνου (λίγο)"
 
-#: src/gui/StelGui.cpp:143
+#: src/gui/StelGui.cpp:148
 msgid "Increase time speed (a little)"
 msgstr "Αύξηση ταχύτητας χρόνου (λίγο)"
 
-#: src/gui/StelGui.cpp:144
+#: src/gui/StelGui.cpp:149
 msgid "Set time rate to zero"
 msgstr "Μηδενισμός ρυθμού χρόνου"
 
-#: src/gui/StelGui.cpp:145
+#: src/gui/StelGui.cpp:150
 msgid "Set time to now"
 msgstr "Τρέχουσα ώρα"
 
-#: src/gui/StelGui.cpp:146
+#: src/gui/StelGui.cpp:151
 msgid "Add 1 solar hour"
 msgstr "Προσθήκη 1 ηλιακής ώρας"
 
-#: src/gui/StelGui.cpp:147
+#: src/gui/StelGui.cpp:152
 msgid "Subtract 1 solar hour"
 msgstr "Αφαίρεση 1 ηλιακής ώρας"
 
-#: src/gui/StelGui.cpp:148
+#: src/gui/StelGui.cpp:153
 msgid "Add 1 solar day"
 msgstr "Προσθήκη 1 ηλιακής ημέρας"
 
-#: src/gui/StelGui.cpp:149
+#: src/gui/StelGui.cpp:154
 msgid "Subtract 1 solar day"
 msgstr "Αφαίρεση 1 ηλιακής ημέρας"
 
-#: src/gui/StelGui.cpp:150
+#: src/gui/StelGui.cpp:155
 msgid "Add 1 solar week"
 msgstr "Προσθήκη 1 ηλιακής εβδομάδας"
 
-#: src/gui/StelGui.cpp:151
+#: src/gui/StelGui.cpp:156
 msgid "Subtract 1 solar week"
 msgstr "Αφαίρεση 1 ηλιακής εβδομάδας"
 
-#: src/gui/StelGui.cpp:152
+#: src/gui/StelGui.cpp:157
 msgid "Add 1 sidereal day"
 msgstr "Προσθήκη 1 αστρικής ημέρας"
 
-#: src/gui/StelGui.cpp:153
+#: src/gui/StelGui.cpp:158
 msgid "Subtract 1 sidereal day"
 msgstr "Αφαίρεση 1 αστρικής ημέρας"
 
-#: src/gui/StelGui.cpp:154
+#: src/gui/StelGui.cpp:159
 msgid "Add 1 sidereal week"
 msgstr "Προσθήκη 1 αστρικής εβδομάδας"
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:160
 msgid "Subtract 1 sidereal week"
 msgstr "Αφαίρεση 1 αστρικής εβδομάδας"
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:163
 msgid "Center on selected object"
 msgstr "Το επιλεγμένο αντικείμενο στο κέντρο"
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:164
 msgid "Track object"
 msgstr "Παρακολούθηση αντικειμένου"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:165
 msgid "Zoom in on selected object"
 msgstr "Εστιακή μεγέθυνση επιλεγμένου αντικειμένου"
 
-#: src/gui/StelGui.cpp:161
+#: src/gui/StelGui.cpp:166
 msgid "Zoom out"
 msgstr "Εστιακή σμίκρυνση επιλεγμένου αντικειμένου"
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:167
 msgid "Set home planet to selected planet"
 msgstr "Ορισμός επιλεγμένου πλανήτη ως πλανήτη προέλευσης"
 
-#: src/gui/StelGui.cpp:164
-msgid "Telescope Control"
-msgstr "Χειρισμός Τηλεσκοπίου"
-
-#: src/gui/StelGui.cpp:165
-msgid "Move telescope #0 to selected object"
-msgstr "Μετακίνηση τηλεσκοπίου #0 στο επιλεγμένο αντικείμενο"
-
-#: src/gui/StelGui.cpp:166
-msgid "Move telescope #1 to selected object"
-msgstr "Μετακίνηση τηλεσκοπίου #1 στο επιλεγμένο αντικείμενο"
-
-#: src/gui/StelGui.cpp:167
-msgid "Move telescope #2 to selected object"
-msgstr "Μετακίνηση τηλεσκοπίου #2 στο επιλεγμένο αντικείμενο"
-
-#: src/gui/StelGui.cpp:168
-msgid "Move telescope #3 to selected object"
-msgstr "Μετακίνηση τηλεσκοπίου #3 στο επιλεγμένο αντικείμενο"
-
-#: src/gui/StelGui.cpp:169
-msgid "Move telescope #4 to selected object"
-msgstr "Μετακίνηση τηλεσκοπίου #4 στο επιλεγμένο αντικείμενο"
-
 #: src/gui/StelGui.cpp:170
-msgid "Move telescope #5 to selected object"
-msgstr "Μετακίνηση τηλεσκοπίου #5 στο επιλεγμένο αντικείμενο"
-
-#: src/gui/StelGui.cpp:171
-msgid "Move telescope #6 to selected object"
-msgstr "Μετακίνηση τηλεσκοπίου #6 στο επιλεγμένο αντικείμενο"
-
-#: src/gui/StelGui.cpp:172
-msgid "Move telescope #7 to selected object"
-msgstr "Μετακίνηση τηλεσκοπίου #7 στο επιλεγμένο αντικείμενο"
-
-#: src/gui/StelGui.cpp:173
-msgid "Move telescope #8 to selected object"
-msgstr "Μετακίνηση τηλεσκοπίου #8 στο επιλεγμένο αντικείμενο"
-
-#: src/gui/StelGui.cpp:174
-msgid "Move telescope #9 to selected object"
-msgstr "Μετακίνηση τηλεσκοπίου #9 στο επιλεγμένο αντικείμενο"
-
-#: src/gui/StelGui.cpp:177
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Αλλαγή ανάμεσα σε ισημερινή και αλταζιμουθιακή στήριξη"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:171
 msgid "Quit"
 msgstr "Έξοδος"
 
-#: src/gui/StelGui.cpp:179
+#: src/gui/StelGui.cpp:172
 msgid "Save screenshot"
 msgstr "Αποθήκευση στιγμιότυπου οθόνης"
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:175
 msgid "Auto hide horizontal button bar"
 msgstr "Αυτόματη απόκρυψη της οριζόντιας μπάρας κουμπιών"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:176
 msgid "Auto hide vertical button bar"
 msgstr "Αυτόματη απόκρυψη της κάθετης μπάρας κουμπιών"
 
-#: src/gui/StelGui.cpp:184
+#: src/gui/StelGui.cpp:177
 msgid "Toggle visibility of GUI"
 msgstr "Διακόπτης ορατότητας του GUI"
 
-#: src/gui/StelGuiItems.cpp:548
+#: src/gui/StelGuiItems.cpp:541
 #, no-c-format, qt-format
 msgid "%1m"
 msgstr "%1μ"
 
-#: src/gui/ViewDialog.cpp:388
+#: src/gui/ViewDialog.cpp:391
 msgid "No description"
 msgstr "Χωρίς περιγραφή"
 
-#: src/gui/ViewDialog.cpp:444
+#: src/gui/ViewDialog.cpp:451
 msgid "No shooting stars"
 msgstr "Χωρίς πεφταστέρια"
 
-#: src/gui/ViewDialog.cpp:447
+#: src/gui/ViewDialog.cpp:454
 msgid "Normal rate"
 msgstr "Κανονικός ρυθμός"
 
-#: src/gui/ViewDialog.cpp:450
+#: src/gui/ViewDialog.cpp:457
 msgid "Standard Perseids rate"
 msgstr "Κανονικός ρυθμός διαττόντων αστέρων Περσείδων"
 
-#: src/gui/ViewDialog.cpp:453
+#: src/gui/ViewDialog.cpp:460
 msgid "Exceptional Leonid rate"
 msgstr "Ασυνήθης ρυθμός διαττόντων αστέρων Λεοντίδων"
 
-#: src/gui/ViewDialog.cpp:456
+#: src/gui/ViewDialog.cpp:463
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Υψηλότερος ρυθμός στην ιστορία (1966 Λεοντίδες)"
 
@@ -1126,7 +828,7 @@ msgstr "Υψηλότερος ρυθμός στην ιστορία (1966 Λεον
 msgid "New Location"
 msgstr "Νέα τοποθεσία"
 
-#: src/main.cpp:308
+#: src/main.cpp:317
 msgid "This system does not support OpenGL."
 msgstr "Το σύστημά δεν υποστηρίζει OpenGL"
 
@@ -1279,12 +981,260 @@ msgid "Polynesian"
 msgstr "Πολυνήσιος"
 
 #: src/translations.h:79
-msgid "Western"
-msgstr "Δυτικός"
+msgid "Sami"
+msgstr "Sami"
 
 #: src/translations.h:80
 msgid "Tupi-Guarani"
 msgstr "Τούπι-Γκουαράνι"
+
+#: src/translations.h:81
+msgid "Western"
+msgstr "Δυτικός"
+
+#: src/translations.h:85
+msgid "Set Location "
+msgstr "Καθορισμός τοποθεσίας: "
+
+#: src/translations.h:86
+msgid "Set Time "
+msgstr "Καθορισμός ώρας "
+
+#: src/translations.h:87
+msgid "General "
+msgstr "Γενικά "
+
+#: src/translations.h:89
+msgid "Colors "
+msgstr "Χρώματα "
+
+#: src/translations.h:90
+msgid "Effects "
+msgstr "Εφέ "
+
+#: src/translations.h:91
+msgid "Scripts "
+msgstr "Σενάρια "
+
+#: src/translations.h:92
+msgid "Administration "
+msgstr "Διαχείριση "
+
+#: src/translations.h:94
+msgid "Latitude: "
+msgstr "Γεωγραφικό πλάτος: "
+
+#: src/translations.h:95
+msgid "Longitude: "
+msgstr "Γεωγραφικό μήκος: "
+
+#: src/translations.h:96
+msgid "Altitude (m): "
+msgstr "Ύψος (μ): "
+
+#: src/translations.h:97
+msgid "Solar System Body: "
+msgstr "Σώμα Ηλιακού Συστήματος: "
+
+#: src/translations.h:99
+msgid "Sky Time: "
+msgstr "Ώρα ουρανού: "
+
+#: src/translations.h:100
+msgid "Set Time Zone: "
+msgstr "Καθορισμός ζώνης ώρας: "
+
+#: src/translations.h:101
+msgid "Day keys: "
+msgstr "Πλήκτρα ημέρας: "
+
+#: src/translations.h:102
+msgid "Calendar"
+msgstr "Ημερολόγιο"
+
+#: src/translations.h:103
+msgid "Sidereal"
+msgstr "Συνοδικός"
+
+#: src/translations.h:104
+msgid "Preset Sky Time: "
+msgstr "Προκαθορισμένος χρόνος ουρανού: "
+
+#: src/translations.h:105
+msgid "Sky Time At Start-up: "
+msgstr "Ώρα ουρανού κατά την εκκίνηση: "
+
+#: src/translations.h:106
+msgid "Actual Time"
+msgstr "Πραγματική ώρα"
+
+#: src/translations.h:107
+msgid "Preset Time"
+msgstr "Προκαθορισμένη ώρα"
+
+#: src/translations.h:108
+msgid "Time Display Format: "
+msgstr "Μορφή παρουσίασης ώρας: "
+
+#: src/translations.h:109
+msgid "Date Display Format: "
+msgstr "Μορφή παρουσίασης ημερομηνίας: "
+
+#: src/translations.h:111
+msgid "Sky Culture: "
+msgstr "Πολιτισμός παρουσίασης ουρανού: "
+
+#: src/translations.h:112
+msgid "Sky Language: "
+msgstr "Γλώσσα παρουσίασης ουρανού: "
+
+#: src/translations.h:114
+msgid "Show: "
+msgstr "Παρουσίαση: "
+
+#: src/translations.h:115
+msgid "Star Value Multiplier: "
+msgstr "Πολλαπλασιαστής αριθμού αστέρων: "
+
+#: src/translations.h:116
+msgid "Magnitude Sizing Multiplier: "
+msgstr "Πολλαπλασιαστής μεγέθους οπτικού μεγέθους αστέρα "
+
+#: src/translations.h:118
+msgid "Twinkling: "
+msgstr "Αναλαμπές: "
+
+#: src/translations.h:119
+msgid "Limiting Magnitude: "
+msgstr "Οριακό μέγεθος: "
+
+#: src/translations.h:121
+msgid "Constellation Lines"
+msgstr "Γραμμές αστερισμών"
+
+#: src/translations.h:122
+msgid "Constellation Names"
+msgstr "Ονόματα αστερισμών"
+
+#: src/translations.h:123
+msgid "Constellation Art Intensity"
+msgstr "Ένταση εμφάνισης καλλιτεχνικής άποψης αστερισμών"
+
+#: src/translations.h:124
+msgid "Constellation Boundaries"
+msgstr "Όρια αστερισμών"
+
+#: src/translations.h:125
+msgid "Cardinal Points"
+msgstr "Σημεία ορίζοντα"
+
+#: src/translations.h:126
+msgid "Planet Names"
+msgstr "Ονόματα πλανητών"
+
+#: src/translations.h:127
+msgid "Planet Orbits"
+msgstr "Τροχιές πλανητών"
+
+#: src/translations.h:128
+msgid "Planet Trails"
+msgstr "Ίχνη πλανητών"
+
+#: src/translations.h:129
+msgid "Meridian Line"
+msgstr "Γραμμή Μεσημβρινού"
+
+#: src/translations.h:130
+msgid "Azimuthal Grid"
+msgstr "Πλέγμα Αζιμούθιου"
+
+#: src/translations.h:131
+msgid "Equatorial Grid"
+msgstr "Πλέγμα Ισημερινού"
+
+#: src/translations.h:132
+msgid "Equator Line"
+msgstr "Γραμμή Ισημερινού"
+
+#: src/translations.h:133
+msgid "Ecliptic Line"
+msgstr "Εκλειπτική γραμμή"
+
+#: src/translations.h:134
+msgid "Nebula Names"
+msgstr "Ονόματα νεφελωμάτων"
+
+#: src/translations.h:135
+msgid "Nebula Circles"
+msgstr "Κύκλοι νεφελωμάτων"
+
+#: src/translations.h:137
+msgid "Light Pollution Luminance: "
+msgstr "Ένταση φωτορύπανσης: "
+
+#: src/translations.h:138
+msgid "Landscape: "
+msgstr "Τοπίο: "
+
+#: src/translations.h:141
+msgid "Magnitude Scaling Multiplier: "
+msgstr "Πολλαπλασιαστής κλίμακας μεγεθών "
+
+#: src/translations.h:142
+msgid "Milky Way intensity: "
+msgstr "Φωτεινότητα Γαλαξία: "
+
+#: src/translations.h:144
+msgid "Zoom Duration: "
+msgstr "Διάρκεια εστίασης: "
+
+#: src/translations.h:145
+msgid "Cursor Timeout: "
+msgstr "Μέγιστο χρονικό όριο δείκτη ποντικιού: "
+
+#: src/translations.h:146
+msgid "Correct for light travel time: "
+msgstr "Διόρθωση για χρόνο ταξιδιού φωτός: "
+
+#: src/translations.h:148
+msgid "Local Script: "
+msgstr "Τοπικό Σενάριο: "
+
+#: src/translations.h:149
+msgid "CD/DVD Script: "
+msgstr "Σενάριο CD/DVD "
+
+#: src/translations.h:150
+msgid "USB Script: "
+msgstr "USB σενάριο: "
+
+#: src/translations.h:151
+msgid "Arrow down to load list."
+msgstr "Βέλος προς τα κάτω για να φορτωθεί η λίστα."
+
+#: src/translations.h:152
+msgid "Select and exit to run."
+msgstr "Επιλογή και έξοδος για εκτέλεση."
+
+#: src/translations.h:154
+msgid "Load Default Configuration: "
+msgstr "Φόρτωση προεπιλεγμένων ρυθμίσεων: "
+
+#: src/translations.h:155
+msgid "Save Current Configuration as Default: "
+msgstr "Αποθήκευση τρεχόντων ρυθμίσεων ως προεπιλεγμένες: "
+
+#: src/translations.h:156
+msgid "Shut Down: "
+msgstr "Τερματισμός: "
+
+#: src/translations.h:157
+msgid "Update me via Internet: "
+msgstr "Ενημέρωση μέσω Διαδικτύου: "
+
+#: src/translations.h:158
+msgid "Set UI Locale: "
+msgstr "Γλώσσα περιβάλλοντος χρήστη: "
 
 #: src/ui_dateTimeDialogGui.h:294 src/ui_helpDialogGui.h:259
 #: src/ui_locationDialogGui.h:387 src/ui_viewDialog.h:979
@@ -1859,3 +1809,47 @@ msgstr "Σενάρια"
 #: src/ui_configurationDialog.h:879
 msgid "Plugins"
 msgstr "Πρόσθετα"
+
+#, qt-format
+#~ msgid "Loading NGC catalog: %1/%2"
+#~ msgstr "Φόρτωση καταλόγου NGC: %1/%2"
+
+#~ msgid "Telescope Control"
+#~ msgstr "Χειρισμός Τηλεσκοπίου"
+
+#~ msgid "Move telescope #1 to selected object"
+#~ msgstr "Μετακίνηση τηλεσκοπίου #1 στο επιλεγμένο αντικείμενο"
+
+#~ msgid "Move telescope #9 to selected object"
+#~ msgstr "Μετακίνηση τηλεσκοπίου #9 στο επιλεγμένο αντικείμενο"
+
+#~ msgid "Move telescope #0 to selected object"
+#~ msgstr "Μετακίνηση τηλεσκοπίου #0 στο επιλεγμένο αντικείμενο"
+
+#~ msgid "Move telescope #2 to selected object"
+#~ msgstr "Μετακίνηση τηλεσκοπίου #2 στο επιλεγμένο αντικείμενο"
+
+#~ msgid "Move telescope #3 to selected object"
+#~ msgstr "Μετακίνηση τηλεσκοπίου #3 στο επιλεγμένο αντικείμενο"
+
+#~ msgid "Move telescope #6 to selected object"
+#~ msgstr "Μετακίνηση τηλεσκοπίου #6 στο επιλεγμένο αντικείμενο"
+
+#~ msgid "Move telescope #8 to selected object"
+#~ msgstr "Μετακίνηση τηλεσκοπίου #8 στο επιλεγμένο αντικείμενο"
+
+#~ msgid "Move telescope #5 to selected object"
+#~ msgstr "Μετακίνηση τηλεσκοπίου #5 στο επιλεγμένο αντικείμενο"
+
+#~ msgid "Move telescope #4 to selected object"
+#~ msgstr "Μετακίνηση τηλεσκοπίου #4 στο επιλεγμένο αντικείμενο"
+
+#~ msgid "Move telescope #7 to selected object"
+#~ msgstr "Μετακίνηση τηλεσκοπίου #7 στο επιλεγμένο αντικείμενο"
+
+#, qt-format
+#~ msgid "Loading catalog %1 from file %2"
+#~ msgstr "Φόρτωση καταλόγου %1 από το αρχείο %2"
+
+#~ msgid "Loading NGC catalog"
+#~ msgstr "Φόρτωση καταλόγου NGC"
