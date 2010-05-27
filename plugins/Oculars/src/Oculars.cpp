@@ -524,7 +524,7 @@ void Oculars::drawTelrad()
 
 		// StelPainter drawing
 		StelPainter painter(projector);
-		painter.setColor(0.77, 0.14, 0.16, 0.0);
+		painter.setColor(0.77, 0.14, 0.16, 1.0);
 		Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
 						   projector->getViewportPosY()+projector->getViewportHeight()/2);
 		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (0.5));
