@@ -396,6 +396,7 @@ void StelFileMgr::setScreenshotDir(const QString& newDir)
 
 QString StelFileMgr::getLocaleDir()
 {
+#ifdef ENABLE_NLS
 	QFileInfo localePath;
 #if defined(Q_OS_WIN) || defined(Q_OS_MAC)
 	// Windows and MacOS X have the locale dir in the installation folder
@@ -423,6 +424,9 @@ QString StelFileMgr::getLocaleDir()
 		qWarning() << "WARNING StelFileMgr::getLocaleDir() - could not determine locale directory, returning \"\"";
 		return "";
 	}
+#else
+	return QString();
+#endif
 }
 
 // Returns the path to the cache directory. Note that subdirectories may need to be created for specific caches.
