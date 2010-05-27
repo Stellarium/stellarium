@@ -486,6 +486,7 @@ void StelApp::setVisionModeNight(bool b)
 // Update translations and font for sky everywhere in the program
 void StelApp::updateI18n()
 {
+#ifdef ENABLE_NLS
 	// Send the event to every StelModule
 	foreach (StelModule* iter, moduleMgr->getAllModules())
 	{
@@ -493,6 +494,7 @@ void StelApp::updateI18n()
 	}
 	if (getGui())
 		getGui()->updateI18n();
+#endif
 }
 
 // Update and reload sky culture informations everywhere in the program
