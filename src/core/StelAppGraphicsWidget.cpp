@@ -58,6 +58,12 @@ void StelAppGraphicsWidget::init(QSettings* conf)
 	Q_ASSERT(viewportEffect==NULL);
 	setViewportEffect(conf->value("video/viewport_effect", "none").toString());
 	stelApp->init(conf);
+
+	//previousPaintTime needs to be updated after the time zone is set
+	//in StelLocaleMgr::init(), otherwise this causes an invalid value of
+	//deltaT the first time it is calculated in paintPartial(), which in
+	//turn causes Stellarium to start with a wrong time.
+	previousPaintTime = StelApp::getTotalRunTime();
 }
 
 
