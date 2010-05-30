@@ -62,9 +62,12 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 #ifdef USE_OPENGL_ES2
 		// Allow to replace the texures by compressed .pvr versions using GPU decompression.
 		// This saves memory and increases rendering speed.
-		QString pvrVersion = afilename;
-		pvrVersion.replace(".png", ".pvr");
-		return createTexture(pvrVersion, params);
+		if (!afilename.endsWith(".pvr"))
+		{
+			QString pvrVersion = afilename;
+			pvrVersion.replace(".png", ".pvr");
+			return createTexture(pvrVersion, params);
+		}
 #endif
 		qWarning() << "WARNING : Can't find texture file " << afilename << ": " << er.what() << endl;
 		tex->errorOccured = true;
