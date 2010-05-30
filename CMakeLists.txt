@@ -84,7 +84,7 @@ SET(RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release.")
 # Activate sound support
 SET(ENABLE_SOUND 0 CACHE BOOL "Define whether sound support should be activated.")
 
-SET(ENABLE_SCRIPTING 0 CACHE BOOL "Define whether scripting features should be activated.")
+SET(ENABLE_SCRIPTING 1 CACHE BOOL "Define whether scripting features should be activated.")
 IF(ENABLE_SCRIPTING)
   # (De-)Activate the script edit console
   SET(ENABLE_SCRIPT_CONSOLE 1 CACHE BOOL "Define whether to build the script console feature.")
@@ -171,7 +171,9 @@ ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 SET(QT_MIN_VERSION "4.6.0")
 FIND_PACKAGE(Qt4 REQUIRED)
 SET(QT_USE_QTOPENGL TRUE)
+IF (ENABLE_SCRIPTING)
 SET(QT_USE_QTSCRIPT TRUE)
+ENDIF()
 SET(QT_USE_QTNETWORK TRUE)
 SET(QT_USE_QTTEST TRUE)
 IF(ENABLE_SOUND)
