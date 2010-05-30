@@ -84,13 +84,19 @@ SET(RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release.")
 # Activate sound support
 SET(ENABLE_SOUND 0 CACHE BOOL "Define whether sound support should be activated.")
 
-# (De-)Activate the script edit console
-SET(ENABLE_SCRIPT_CONSOLE 1 CACHE BOOL "Define whether to build the script console feature, options are.")
-IF(ENABLE_SCRIPT_CONSOLE)
-  ADD_DEFINITIONS(-DENABLE_SCRIPT_CONSOLE)
+SET(ENABLE_SCRIPTING 0 CACHE BOOL "Define whether scripting features should be activated.")
+IF(ENABLE_SCRIPTING)
+  # (De-)Activate the script edit console
+  SET(ENABLE_SCRIPT_CONSOLE 1 CACHE BOOL "Define whether to build the script console feature.")
+  IF(ENABLE_SCRIPT_CONSOLE)
+	ADD_DEFINITIONS(-DENABLE_SCRIPT_CONSOLE)
+  ENDIF()
+  SET(ENABLE_STRATOSCRIPT_COMPAT 0 CACHE BOOL "Set to 1 or true if you want to build the Stratoscript compatibility mode")
+ELSE()
+  ADD_DEFINITIONS(-DDISABLE_SCRIPTING)
 ENDIF()
 
-SET(ENABLE_STRATOSCRIPT_COMPAT 0 CACHE BOOL "Set to 1 or true if you want to build the Stratoscript compatibility mode")
+
 SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
 SET(OPENGL_MODE Desktop CACHE STRING "Choose the type of openGL to use, options are: Desktop, ES2")
 
