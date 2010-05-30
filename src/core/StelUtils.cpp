@@ -39,11 +39,7 @@ namespace StelUtils
 //! Return the full name of stellarium, i.e. "stellarium 0.9.0"
 QString getApplicationName()
 {
-#ifdef SVN_REVISION
-	return QString("Stellarium")+" "+PACKAGE_VERSION+" (SVN r"+SVN_REVISION+")";
-#else
-	return QString("Stellarium")+" "+PACKAGE_VERSION;
-#endif
+	return QString("Stellarium")+" "+StelUtils::getApplicationVersion();
 }
 
 //! Return the version of stellarium, i.e. "0.9.0"

@@ -198,11 +198,6 @@ StelMainGraphicsView::~StelMainGraphicsView()
 {
 }
 
-void StelMainGraphicsView::swapBuffer()
-{
-	glWidget->swapBuffers();
-}
-
 void StelMainGraphicsView::init(QSettings* conf)
 {
 	Q_ASSERT(glWidget->isValid());
