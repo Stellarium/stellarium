@@ -45,10 +45,6 @@ public:
 	//! Get the StelMainGraphicsView singleton instance.
 	static StelMainGraphicsView& getInstance() {Q_ASSERT(singleton); return *singleton;}
 
-	//! Swap openGL buffer.
-	//! @deprecated don't use that.
-	void swapBuffer();
-
 	//! Delete openGL textures (to call before the GLContext disappears)
 	void deinitGL();
 

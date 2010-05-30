@@ -221,16 +221,6 @@ SET(stellarium_lib_SRCS
 	core/modules/ZoneArray.hpp
 	core/modules/ZoneData.hpp
 
-	scripting/StelScriptMgr.cpp
-	scripting/StratoscriptPreprocessor.cpp
-	scripting/StelScriptMgr.hpp
-	scripting/ScreenImageMgr.hpp
-	scripting/ScreenImageMgr.cpp
-	scripting/StelMainScriptAPI.cpp
-	scripting/StelMainScriptAPI.hpp
-	scripting/StelMainScriptAPIProxy.cpp
-	scripting/StelMainScriptAPIProxy.hpp
-
 	StelMainGraphicsView.hpp
 	StelMainGraphicsView.cpp
 	StelMainWindow.hpp
@@ -241,6 +231,19 @@ SET(stellarium_lib_SRCS
 	CLIProcessor.cpp
 	translations.h
 )
+IF(ENABLE_SCRIPTING)
+	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
+		scripting/StelScriptMgr.cpp
+		scripting/StratoscriptPreprocessor.cpp
+		scripting/StelScriptMgr.hpp
+		scripting/ScreenImageMgr.hpp
+		scripting/ScreenImageMgr.cpp
+		scripting/StelMainScriptAPI.cpp
+		scripting/StelMainScriptAPI.hpp
+		scripting/StelMainScriptAPIProxy.cpp
+		scripting/StelMainScriptAPIProxy.hpp
+	)
+ENDIF()
 
 IF(WIN32)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
@@ -320,10 +323,6 @@ IF(WIN32)
 	)
 ENDIF(WIN32)
 
-IF(APPLE)
-  SET(stellarium_lib_SRCS ${stellarium_lib_SRCS})
-ENDIF(APPLE)
-
 SET(stellarium_exe_SRCS main.cpp)
 
 ################# compiles resources files ############
@@ -361,13 +360,19 @@ SET(stellarium_MOC_HDRS
 	core/modules/NebulaMgr.hpp
 	core/modules/SolarSystem.hpp
 	core/modules/StarMgr.hpp
-	scripting/ScreenImageMgr.hpp
-	scripting/StelScriptMgr.hpp
-	scripting/StelMainScriptAPI.hpp
-	scripting/StelMainScriptAPIProxy.hpp
 	StelMainGraphicsView.hpp
 	StelMainWindow.hpp
 )
+
+IF(ENABLE_SCRIPTING)
+	SET(stellarium_MOC_HDRS ${stellarium_MOC_HDRS}
+		scripting/ScreenImageMgr.hpp
+		scripting/StelScriptMgr.hpp
+		scripting/StelMainScriptAPI.hpp
+		scripting/StelMainScriptAPIProxy.hpp
+	)
+ENDIF()
+
 # After this call, stellarium_MOC_SRCS = moc_stellarium.cxx
 QT4_WRAP_CPP(stellarium_MOC_SRCS ${stellarium_MOC_HDRS})
 
