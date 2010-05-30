@@ -49,7 +49,8 @@ public:
 	//! @param extraTextPosx the x position of the extra text
 	//! @param extraTextPosy the y position of the extra text
 	StelLoadingBar(const QString&  splashTex, const QString& extraTextString="",
-	           float extraTextSize = 30.f, float extraTextPosx = 0.f, float extraTextPosy = 0.f);
+			   float extraTextSize = 30.f, float extraTextPosx = 0.f, float extraTextPosy = 0.f,
+			   int width=512, int height=512);
 
 	virtual ~StelLoadingBar();
 	
