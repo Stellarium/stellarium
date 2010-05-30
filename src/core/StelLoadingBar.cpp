@@ -22,17 +22,16 @@
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelLocaleMgr.hpp"
-//#include "StelMainGraphicsView.hpp"
 #include "StelPainter.hpp"
 #include "StelCore.hpp"
 
 #include <QDebug>
 #include <QtOpenGL>
 
-StelLoadingBar::StelLoadingBar(const QString&  splashTex,
+StelLoadingBar::StelLoadingBar(const QString& splashTex,
 	const QString& extraTextString, float extraTextSize,
-	float extraTextPosx, float extraTextPosy) :
-	width(512), height(512), extraText(extraTextString), sPainter(NULL)
+	float extraTextPosx, float extraTextPosy, int aWidth, int aHeight) :
+	width(aWidth), height(aHeight), extraText(extraTextString), sPainter(NULL)
 {
 	extraTextFont.setPixelSize(extraTextSize);
 	sPainter = new StelPainter(StelApp::getInstance().getCore()->getProjection2d());
