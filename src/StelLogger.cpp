@@ -130,7 +130,7 @@ void StelLogger::init(const QString& logFilePath)
 	// write memory and CPU info
 #ifdef Q_OS_LINUX
 
-#ifndef USE_OPENGL_ES2
+#ifndef BUILD_FOR_MAEMO
 	QFile infoFile("/proc/meminfo");
 	if(!infoFile.open(QIODevice::ReadOnly | QIODevice::Text))
 		writeLog("Could not get memory info.");
@@ -182,7 +182,7 @@ void StelLogger::init(const QString& logFilePath)
 			}
 		}
 	}
-#endif // USE_OPENGL_ES2
+#endif
 
 	// Aargh Windows API
 #elif defined Q_OS_WIN
