@@ -59,19 +59,17 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 	}
 	catch (std::runtime_error er)
 	{
+#ifdef USE_OPENGL_ES2
+		// Allow to replace the texures by compressed .pvr versions using GPU decompression.
+		// This saves memory and increases rendering speed.
+		QString pvrVersion = afilename;
+		pvrVersion.replace(".png", ".pvr");
+		return createTexture(pvrVersion, params);
+#endif
 		qWarning() << "WARNING : Can't find texture file " << afilename << ": " << er.what() << endl;
 		tex->errorOccured = true;
 		return StelTextureSP();
 	}
-
-#ifdef USE_OPENGL_ES2
-	// Allow to replace the texures by compressed .pvr versions using GPU decompression.
-	// This saves memory and increases rendering speed.
-	QString pvrVersion = tex->fullPath;
-	pvrVersion.replace(".png", ".pvr");
-	if (StelFileMgr::exists(pvrVersion))
-		tex->fullPath = pvrVersion;
-#endif
 
 	StelPainter::makeMainGLContextCurrent();
 	if (tex->fullPath.endsWith(".pvr"))
