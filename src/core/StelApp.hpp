@@ -23,25 +23,21 @@
 #include <QString>
 #include <QVariant>
 #include <QObject>
-#include <QFile>
 
 // Predeclaration of some classes
 class StelCore;
-class SkyLocalizer;
 class StelTextureMgr;
 class StelObjectMgr;
 class StelLocaleMgr;
 class StelModuleMgr;
 class StelSkyCultureMgr;
-class QStringList;
-class StelLoadingBar;
 class QSettings;
 class QNetworkAccessManager;
+class QNetworkReply;
 class QTime;
 class StelLocationMgr;
 class StelSkyLayerMgr;
 class StelAudioMgr;
-class QNetworkReply;
 class StelGuiBase;
 
 //! @class StelApp

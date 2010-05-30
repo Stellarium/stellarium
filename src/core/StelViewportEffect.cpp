@@ -27,6 +27,7 @@
 
 #include <QGLFramebufferObject>
 #include <QSettings>
+#include <QFile>
 
 void StelViewportEffect::paintViewportBuffer(const QGLFramebufferObject* buf) const
 {
