@@ -15,7 +15,8 @@ Fixed:
 - system clock running fast on some Windows systems using ACPI power managment (LP: #514184)
 - the top labels of vertical grid lines not being displayed, and improper label rotation.
 - script engine was recoded thread-free, this fixes many script related bugs.
-- fixed handling of negative/large dates in scripts.
+- handling of negative/large dates in scripts.
+- wrong time at startup when a time zone different than "system_default" is set in the configuration file (LP: #487232)
 
 Changed:
 - the Date/Time window is now synchronised with the date/time displayed in the toolbar, instead of showing the last date/time that has been entered.
