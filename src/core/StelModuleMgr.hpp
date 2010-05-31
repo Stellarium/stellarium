@@ -64,10 +64,12 @@ public:
 
 	//! Define whether a plugin should be loaded at startup.
 	//! @param key the key of the plugin as in the PluginDescriptor class.
+	//! @param b the value to set.
 	void setPluginLoadAtStartup(const QString& key, bool b);
 
 	//! Get the corresponding module or NULL if can't find it.
-	//! @param moduleID the QObject name of the module instance, by convention it is equal to the class name
+	//! @param moduleID the QObject name of the module instance, by convention it is equal to the class name.
+	//! @param noWarning if true, don't display any warning if the module is not found.
 	StelModule* getModule(const QString& moduleID, bool noWarning=false);
 
 	//! Get the list of all the currently registered modules

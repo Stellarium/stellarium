@@ -749,9 +749,7 @@ public:
 	////////////////////////////////////////////////////////////////////
 	// Methods specific to SphericalTexturedPolygon
 	//! Set the contours defining the SphericalPolygon.
-	//! @param contours the list of contours defining the polygon area.
-	//! @param windingRule the winding rule to use. Default value is WindingPositive, meaning that the
-	//! polygon is the union of the positive contours minus the negative ones.
+	//! @param contours the list of contours defining the polygon area using the WindingPositive winding rule.
 	void setContours(const QVector<QVector<TextureVertex> >& contours) {Q_UNUSED(contours); Q_ASSERT(0);}
 
 	//! Set a single contour defining the SphericalPolygon.

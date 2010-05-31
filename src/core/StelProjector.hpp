@@ -230,7 +230,7 @@ public:
 	}
 
 	//! Project the vector v from the current frame into the viewport.
-	//! @param v the vector in the current frame.
+	//! @param vd the vector in the current frame.
 	//! @return true if the projected coordinate is valid.
 	inline bool projectInPlace(Vec3d& vd) const
 	{

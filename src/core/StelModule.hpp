@@ -117,7 +117,7 @@ public:
 	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=ReplaceSelection) {Q_UNUSED(action);}
 
 	//! Load the given color style
-	//! @param style the style object containing all necessary information on how to style widgets and text
+	//! @param section the name of the config section containing all necessary information on how to style widgets and text
 	virtual void setStelStyle(const QString& section) {Q_UNUSED(section);}
 
 	//! Define the possible action for which an order is defined
