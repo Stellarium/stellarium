@@ -299,7 +299,10 @@ int main(int argc, char **argv)
 #ifdef Q_OS_WIN
 	// On windows use Verdana font, to avoid unresolved bug with OpenGL1 Qt paint engine.
 	// See Launchpad question #111823 for more info
-	QFont tmpFont(safeMode ? "Verdana" : "DejaVu Sans");
+	//QFont tmpFont(safeMode ? "Verdana" : "DejaVu Sans");
+	
+	// Activate verdana by defaut for all win32 builds to see if it improves things.
+	QFont tmpFont("Verdana");
 #else
 	QFont tmpFont("DejaVu Sans");
 #endif
