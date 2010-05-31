@@ -101,6 +101,8 @@ public:
 	//! Lookup in Simbad for object which have a name starting with @em objectName.
 	//! @param objectName the possibly truncated object name.
 	//! @param maxNbResult the maximum number of returned result.
+	//! @param delayMs a delay in ms to wait for before actually triggering the lookup.
+	//! This used to group requests, e.g. send only one request when a used types a word insead of one per letter.
 	//! @return a new SimbadLookupReply which is owned by the caller.
 	SimbadLookupReply* lookup(const QString& objectName, int maxNbResult=1, int delayMs=500);
 

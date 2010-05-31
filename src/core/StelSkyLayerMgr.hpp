@@ -59,6 +59,8 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Other specific methods
 	//! Add a new layer.
+	//! @param l the layer to insert.
+	//! @param keyHint a hint on which key to use for later referencing the image.
 	//! @param show defined whether the layer should be shown by default
 	//! @return the reference key to use when accessing this layer later on.
 	QString insertSkyLayer(StelSkyLayerP l, const QString& keyHint=QString(), bool show=true);
@@ -121,9 +123,10 @@ public slots:
 	//! Add a new SkyImage from its URI (URL or local file name).
 	//! The image is owned by the manager and will be destroyed at the end of the program
 	//! or when removeSkyImage is called with the same URI
-	//! @param uri the local file or the URL where the JSON image description is located
-	//! @param show defined whether the image should be shown by default
-	//! @return the reference key to use when accessing this image later on
+	//! @param uri the local file or the URL where the JSON image description is located.
+	//! @param keyHint a hint on which key to use for later referencing the image.
+	//! @param show defined whether the image should be shown by default.
+	//! @return the reference key to use when accessing this image later on.
 	QString insertSkyImage(const QString& uri, const QString& keyHint=QString(), bool show=true);
 
 	//! Remove a sky layer from the list.

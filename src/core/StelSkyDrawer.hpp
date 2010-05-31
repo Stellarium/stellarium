@@ -57,9 +57,11 @@ public:
 	void postDrawPointSource(StelPainter* sPainter);
 
 	//! Draw a point source halo.
+	//! @param sPainter the StelPainter to use for drawing.
 	//! @param v the 3d position of the source in J2000 reference frame
 	//! @param rcMag the radius and luminance of the source as computed by computeRCMag()
 	//! @param bV the source B-V index
+	//! @param checkInScreen whether source in screen should be checked to avoid unnecessary drawing.
 	//! @return true if the source was actually visible and drawn
 	bool drawPointSource(StelPainter* sPainter, const Vec3f& v, const float rcMag[2], unsigned int bV, bool checkInScreen=false)
 		{return drawPointSource(sPainter, v, rcMag, colorTable[bV], checkInScreen);}

@@ -41,22 +41,22 @@ class StelLoadingBar
 {
 public:
 	//! Create and initialise the StelLoadingBar.
-	//! @param splashTex the file name of a texture to display with the StelLoadingBar
-	//! @param extraTextString extra text which does not change during the life
+	//! @param splashTex the file name of a texture to display with the StelLoadingBar.
+	//! @param extraTextString extra text which does not change during the life.
 	//! life of the StelLoadingBar. This is used for the application name and version
 	//! when the StelLoadingBar is used as a splash screen.
-	//! @param extraTextSize the size of the font used for the exta text
-	//! @param extraTextPosx the x position of the extra text
-	//! @param extraTextPosy the y position of the extra text
+	//! @param extraTextSize the size of the font used for the exta text.
+	//! @param extraTextPosx the x position of the extra text.
+	//! @param extraTextPosy the y position of the extra text.
+	//! @param width the width to use for the texture display.
+	//! @param height the height to use for the texture display.
 	StelLoadingBar(const QString&  splashTex, const QString& extraTextString="",
 			   float extraTextSize = 30.f, float extraTextPosx = 0.f, float extraTextPosy = 0.f,
 			   int width=512, int height=512);
 
 	virtual ~StelLoadingBar();
 	
-	//! Draw the StelLoadingBar, setting the value.
-	//! @param val the value which the progress bar should display. This is a 
-	//! float which should take a value between 0.0 and 1.0.
+	//! Draw the splashscreen.
 	void draw();
 
 private:

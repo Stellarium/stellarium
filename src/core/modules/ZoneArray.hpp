@@ -79,7 +79,6 @@ public:
 	//! loading.
 	//! @param extended_file_name path of the star catalog to load from
 	//! @param use_mmap whether or not to mmap the star catalog
-	//! @param lb the loading bar on the splash screen
 	//! @return an instance of SpecialZoneArray or HipZoneArray
 	static ZoneArray *create(const QString &extended_file_name, bool use_mmap);
 	virtual ~ZoneArray()
@@ -156,7 +155,6 @@ public:
 	//! @param file catalog to load from
 	//! @param byte_swap whether to switch endianness of catalog data
 	//! @param use_mmap whether or not to mmap the star catalog
-	//! @param lb the loading bar on the splash screen
 	//! @param level level in StelGeodesicGrid
 	//! @param mag_min lower bound of magnitudes
 	//! @param mag_range range of magnitudes
@@ -172,13 +170,13 @@ protected:
 	}
 
 	//! Draw stars and their names onto the viewport.
+	//! @param sPainter the painter to use 
 	//! @param index zone index to draw
 	//! @param is_inside whether the zone is inside the current viewport
 	//! @param rcmag_table table of magnitudes
 	//! @param core core to use for drawing
 	//! @param maxMagStarName magnitude limit of stars that display labels
 	//! @param names_brightness brightness of labels
-	//! @param starFont font of labels
 	void draw(StelPainter* sPainter, int index,bool is_inside,
 			  const float *rcmag_table, StelCore* core,
 			  unsigned int maxMagStarName,float names_brightness) const;
