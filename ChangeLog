@@ -1,4 +1,4 @@
-0.10.5 [2010-05-26]
+0.10.5 [2010-05-31]
 Bug fix release.
 Fixed:
 - various problems with OpenGL shaders. If you experience problems with unreadable fonts, try adding the line "use_qpaintenginegl2 = false" in the [main] section of the configuration file (config.ini).
@@ -31,6 +31,7 @@ Changed:
 - don't use a generated config.h anymore (use simple compile definitions instead).
 - suppressed most compilation warnings with -Wextra even without the -Wno-unused-parameter flag.
 - suppressed all the TelescopeMgr/Telescope code within the core. It is replaced by the TelescopeControl plugin.
+- suppressed many unused files from installation target.
 
 Added:
 - option to create a desktop shortcut in the Windows installer.
