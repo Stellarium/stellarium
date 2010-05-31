@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>250</height>
+    <height>291</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -321,7 +321,7 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <layout class="QVBoxLayout" name="verticalLayout_3">
          <property name="spacing">
           <number>6</number>
          </property>
@@ -346,7 +346,7 @@
            <property name="minimumSize">
             <size>
              <width>50</width>
-             <height>24</height>
+             <height>48</height>
             </size>
            </property>
            <property name="text">
@@ -410,6 +410,7 @@ margin-bottom:10px;</string>
   <tabstop>radioButtonDecimal</tabstop>
   <tabstop>comboBoxTelescope</tabstop>
   <tabstop>pushButtonSlew</tabstop>
+  <tabstop>pushButtonConfigure</tabstop>
  </tabstops>
  <resources/>
  <connections/>
