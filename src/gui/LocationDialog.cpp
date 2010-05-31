@@ -206,26 +206,17 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 		return;
 
 	QPixmap pixmap;
-	QString path;
 	// Try to set the proper planet map image
 	if (loc.planetName=="Earth")
 	{
 		// Special case for earth, we don't want to see the clouds
-		try
-		{
-			path = StelFileMgr::findFile("data/gui/world.png");
-		}
-		catch (std::runtime_error& e)
-		{
-			qWarning() << "ERROR - could not find planet map for " << loc.planetName << e.what();
-			return;
-		}
-		pixmap = QPixmap(path);
+		pixmap = QPixmap(":/graphicGui/world.png");
 	}
 	else
 	{
 		SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 		PlanetP p = ssm->searchByEnglishName(loc.planetName);
+		QString path;
 		if (p)
 		{
 			try

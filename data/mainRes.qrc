@@ -2,4 +2,7 @@
     <qresource prefix="/mainWindow">
         <file>icon.bmp</file>
     </qresource>
+    <qresource prefix="/">
+        <file>shaders/xyYToRGB.glsl</file>
+    </qresource>
 </RCC>
