@@ -513,39 +513,21 @@ void StelGui::setStelStyle(const QString& section)
 
 		if (section=="night_color")
 		{
-			qtStyleFileName = "data/gui/nightStyle.css";
-			htmlStyleFileName = "data/gui/nightHtml.css";
+			qtStyleFileName = ":/graphicGui/nightStyle.css";
+			htmlStyleFileName = ":/graphicGui/nightHtml.css";
 		}
 		else if (section=="color")
 		{
-			qtStyleFileName = "data/gui/normalStyle.css";
-			htmlStyleFileName = "data/gui/normalHtml.css";
+			qtStyleFileName = ":/graphicGui/normalStyle.css";
+			htmlStyleFileName = ":/graphicGui/normalHtml.css";
 		}
 
 		// Load Qt style sheet
-		QString styleFilePath;
-		try
-		{
-			styleFilePath = StelFileMgr::findFile(qtStyleFileName);
-		}
-		catch (std::runtime_error& e)
-		{
-			qWarning() << "WARNING: can't find Qt style sheet:" << qtStyleFileName;
-		}
-		QFile styleFile(styleFilePath);
+		QFile styleFile(qtStyleFileName);
 		styleFile.open(QIODevice::ReadOnly);
 		currentStelStyle.qtStyleSheet = styleFile.readAll();
 
-		// Load HTML style sheet
-		try
-		{
-			styleFilePath = StelFileMgr::findFile(htmlStyleFileName);
-		}
-		catch (std::runtime_error& e)
-		{
-			qWarning() << "WARNING: can't find css:" << htmlStyleFileName;
-		}
-		QFile htmlStyleFile(styleFilePath);
+		QFile htmlStyleFile(htmlStyleFileName);
 		htmlStyleFile.open(QIODevice::ReadOnly);
 		currentStelStyle.htmlStyleSheet = htmlStyleFile.readAll();
 	}
