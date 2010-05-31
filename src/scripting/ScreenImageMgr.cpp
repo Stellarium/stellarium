@@ -185,24 +185,6 @@ void ScreenImage::setOpacity(qreal alpha)
 ScreenImageMgr::ScreenImageMgr()
 {
 	setObjectName("ScreenImageMgr");
-	connect(this, SIGNAL(requestCreateScreenImage(const QString&, const QString&, float, float, float, bool, float, float)),
-	        this, SLOT(doCreateScreenImage(const QString&, const QString&, float, float, float, bool, float, float)));
-
-	connect(this, SIGNAL(requestSetImageShow(const QString&, bool)),
-	        this, SLOT(doSetImageShow(const QString&, bool)));
-
-	connect(this, SIGNAL(requestSetImageAlpha(const QString&, float)),
-	        this, SLOT(doSetImageAlpha(const QString&, float)));
-
-	connect(this, SIGNAL(requestSetImageXY(const QString&, float, float, float)),
-	        this, SLOT(doSetImageXY(const QString&, float, float, float)));
-
-	connect(this, SIGNAL(requestDeleteImage(const QString&)),
-	        this, SLOT(doDeleteImage(const QString&)));
-
-	connect(this, SIGNAL(requestDeleteAllImages()),
-	        this, SLOT(doDeleteAllImages()));
-
 }
  
 ScreenImageMgr::~ScreenImageMgr()
@@ -220,26 +202,45 @@ void ScreenImageMgr::draw(StelCore* core)
 			m->draw(core);
 }
 
-void ScreenImageMgr::createScreenImage(const QString& id,
-                                       const QString& filename,
-	                               float x,
-	                               float y,
-                                       float scale,
-	                               bool visible,
-	                               float alpha,
-                                       float fadeDuration)
+void ScreenImageMgr::createScreenImage(const QString& id, const QString& filename, float x, float y,
+	float scale, bool visible, float alpha, float fadeDuration)
 {
-	emit(requestCreateScreenImage(id, filename, x, y, scale, visible, alpha, fadeDuration));
+	// First check to see if there is already an image loaded with the
+	// specified ID, and drop it if necessary
+	if (allScreenImages.contains(id))
+		deleteImage(id);
+
+	ScreenImage* i = new ScreenImage(filename, x, y, visible, scale, alpha, fadeDuration);
+	if (i==NULL)
+		return;
+
+	allScreenImages[id] = i;
 }
 
 void ScreenImageMgr::deleteImage(const QString& id)
 {
-	emit(requestDeleteImage(id));
+	if (allScreenImages.contains(id))
+	{
+		if (allScreenImages[id]!=NULL)
+		{
+			delete allScreenImages[id];
+			allScreenImages[id] = NULL;
+		}
+		allScreenImages.remove(id);
+	}
 }
 	
 void ScreenImageMgr::deleteAllImages()
 {
-	emit(requestDeleteAllImages());
+	foreach(ScreenImage* m, allScreenImages)
+	{
+		if (m!=NULL)
+		{
+			delete m;
+			m = NULL;
+		}
+	}
+	allScreenImages.clear();
 }
 
 QStringList ScreenImageMgr::getAllImageIDs(void)
@@ -252,7 +253,6 @@ bool ScreenImageMgr::getShowImage(const QString& id)
 	if (allScreenImages.contains(id))
 		if (allScreenImages[id]!=NULL)
 			return allScreenImages[id]->getFlagShow();
-
 	return false;
 }
 
@@ -261,7 +261,6 @@ int ScreenImageMgr::getImageWidth(const QString& id)
 	if (allScreenImages.contains(id))
 		if (allScreenImages[id]!=NULL)
 			return allScreenImages[id]->imageWidth();
-
 	return 0;
 }
 	
@@ -270,25 +269,29 @@ int ScreenImageMgr::getImageHeight(const QString& id)
 	if (allScreenImages.contains(id))
 		if (allScreenImages[id]!=NULL)
 			return allScreenImages[id]->imageHeight();
-
 	return 0;
 }
 	
 void ScreenImageMgr::showImage(const QString& id, bool show)
 {
-	emit(requestSetImageShow(id, show));
+	if (allScreenImages.contains(id))
+		if (allScreenImages[id]!=NULL)
+			allScreenImages[id]->setFlagShow(show);
 }
 
 void ScreenImageMgr::setImageAlpha(const QString& id, float alpha)
 {
-	emit(requestSetImageAlpha(id, alpha));
+	if (allScreenImages.contains(id))
+		if (allScreenImages[id]!=NULL)
+			allScreenImages[id]->setAlpha(alpha);
 }
 
 void ScreenImageMgr::setImageXY(const QString& id, float x, float y, float duration)
 {
-	emit(requestSetImageXY(id, x, y, duration));
+	if (allScreenImages.contains(id))
+		if (allScreenImages[id]!=NULL)
+			allScreenImages[id]->setXY(x,y, duration);
 }
-
 
 void ScreenImageMgr::update(double deltaTime)
 {
@@ -303,74 +306,3 @@ double ScreenImageMgr::getCallOrder(StelModuleActionName actionName) const
 		return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName)+11;
         return 0;
 }
-
-void ScreenImageMgr::doCreateScreenImage(const QString& id,
-                                         const QString& filename,
-                                         float x,
-                                         float y,
-                                         float scale,
-                                         bool visible,
-                                         float alpha,
-                                         float fadeDuration)
-{
-	// First check to see if there is already an image loaded with the
-	// specified ID, and drop it if necessary
-	if (allScreenImages.contains(id))
-		doDeleteImage(id);
-
-	ScreenImage* i = new ScreenImage(filename, x, y, visible, scale, alpha, fadeDuration);
-	if (i==NULL)
-		return;
-
-	allScreenImages[id] = i;
-	return;
-}
-
-void ScreenImageMgr::doSetImageShow(const QString& id, bool show)
-{
-	if (allScreenImages.contains(id))
-		if (allScreenImages[id]!=NULL)
-			allScreenImages[id]->setFlagShow(show);
-}
-
-void ScreenImageMgr::doSetImageAlpha(const QString& id, float alpha)
-{
-	if (allScreenImages.contains(id))
-		if (allScreenImages[id]!=NULL)
-			allScreenImages[id]->setAlpha(alpha);
-}
-
-void ScreenImageMgr::doSetImageXY(const QString& id, float x, float y, float duration)
-{
-	if (allScreenImages.contains(id))
-		if (allScreenImages[id]!=NULL)
-			allScreenImages[id]->setXY(x,y, duration);
-}
-
-void ScreenImageMgr::doDeleteImage(const QString& id)
-{
-	if (allScreenImages.contains(id))
-	{
-		if (allScreenImages[id]!=NULL)
-		{
-			delete allScreenImages[id];
-			allScreenImages[id] = NULL;
-		}
-
-		allScreenImages.remove(id);
-	}
-}
-
-void ScreenImageMgr::doDeleteAllImages(void)
-{
-	foreach(ScreenImage* m, allScreenImages)
-	{
-		if (m!=NULL)
-		{
-			delete m;
-			m = NULL;
-		}
-	}
-	allScreenImages.clear();
-}
-

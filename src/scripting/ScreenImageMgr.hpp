@@ -165,47 +165,6 @@ public slots:
 	//! Get a list of currently loaded image IDs.
 	QStringList getAllImageIDs(void);
 
-signals:
-	void requestCreateScreenImage(const QString& id,
-                                      const QString& filename,
-	                              float x,
-	                              float y,
-	                              float scale,
-	                              bool visible,
-	                              float alpha,
-	                              float fadeDuration);
-
-	void requestSetImageShow(const QString& id, bool b);
-
-	void requestSetImageAlpha(const QString& id, float alpha);
-
-	void requestSetImageXY(const QString& id, float x, float y, float duration);
-
-	void requestDeleteImage(const QString& id);
-
-	void requestDeleteAllImages(void);
-
-private slots:
-	// Main thread implemention of functions which modify the state of the class.
-	void doCreateScreenImage(const QString& id,
-                                 const QString& filename,
-	                         float x,
-	                         float y,
-	                         float scale,
-	                         bool visible,
-	                         float alpha,
-	                         float fadeDuration);
-
-	void doSetImageShow(const QString& id, bool b);
-
-	void doSetImageAlpha(const QString& id, float alpha);
-
-	void doSetImageXY(const QString& id, float x, float y, float duration);
-
-	void doDeleteImage(const QString& id);
-
-	void doDeleteAllImages(void);
-
 private:
 	QMap<QString, ScreenImage*> allScreenImages;
 };
