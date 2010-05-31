@@ -199,7 +199,6 @@ public slots:
 	void setObserverLocation(const QString id, float duration=1.);
 
 	//! Get the ID of the current observer location.
-	//! @param duration the number of seconds to take to move location.
 	QString getObserverLocation();
 
 	//! Save a screenshot.
@@ -404,7 +403,7 @@ public slots:
 	void setScriptRate(double r);
 
 	//! Set the amount of selected object information to display
-	//! @param level, can be "AllInfo", "ShortInfo", "None"
+	//! @param level can be "AllInfo", "ShortInfo", "None"
 	void setSelectedObjectInfo(const QString& level);
 
 	//! Stop the script

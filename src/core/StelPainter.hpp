@@ -145,7 +145,6 @@ public:
 
 	//! Draw the string at the given position and angle with the given font.
 	//! If the gravity label flag is set, uses drawTextGravity180.
-	//! @param font the font to use for display
 	//! @param x horizontal position of the lower left corner of the first character of the text in pixel.
 	//! @param y horizontal position of the lower left corner of the first character of the text in pixel.
 	//! @param str the text to print.
@@ -161,8 +160,8 @@ public:
 	//! Draw the given SphericalRegion.
 	//! @param region The SphericalRegion to draw.
 	//! @param drawMode define whether to draw the outline or the fill or both.
-	//! @param boundaryColor use this color for drawing the boundary only if the drawMode is SphericalPolygonDrawModeFillAndBoundary.
 	//! @param clippingCap if not set to NULL, tells the painter to try to clip part of the region outside the cap.
+	//! @param doSubDivise if true tesselates the object to follow projection distortions.
 	//! Typically set that to false if you think that the region is fully contained in the viewport.
 	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const SphericalCap* clippingCap=NULL, bool doSubDivise=true);
 
@@ -223,6 +222,7 @@ public:
 	//! @param y y position of the tope left corner in the viewport in pixel.
 	//! @param width width in pixel.
 	//! @param height height in pixel.
+	//! @param textured whether the current texture should be used for painting.
 	void drawRect2d(float x, float y, float width, float height, bool textured=true);
 
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
@@ -240,6 +240,8 @@ public:
 	//! @param radius the radius of the disk.
 	//! @param innerFanSlices the number of slices.
 	//! @param level the numbe of concentric circles.
+	//! @param vertexArr the vertex array in which the resulting vertices are returned.
+	//! @param texCoordArr the vertex array in which the resulting texture coordinates are returned.
 	static void computeFanDisk(float radius, int innerFanSlices, int level, QVector<double>& vertexArr, QVector<float>& texCoordArr);
 
 	//! Draw a ring with a radial texturing.

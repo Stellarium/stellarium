@@ -155,7 +155,8 @@ public:
 	//! Return the JD time for a local time ISO 8601 format that is:
 	//! %Y-%m-%dT%H:%M:%S, but %Y can be a large number with sign, and
 	//! %Y can be zero.
-	//! @param str the local time in ISO 8601 format
+	//! @param str the local time in ISO 8601 format.
+	//! @param ok set to false if the string was an invalid date.
 	double getJdFromISO8601TimeLocal(const QString& str, bool* ok) const;
 
 	//! Convert a 2 letter country code to string
