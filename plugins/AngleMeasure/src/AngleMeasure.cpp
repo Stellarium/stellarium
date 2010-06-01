@@ -65,7 +65,7 @@ Q_EXPORT_PLUGIN2(AngleMeasure, AngleMeasureStelPluginInterface)
 
 
 AngleMeasure::AngleMeasure()
-	: flagShowAngleMeasure(false), lineVisible(false), dragging(false),
+	: flagShowAngleMeasure(false), dragging(false),
 	  angleText(""), flagUseDmsFormat(false), toolbarButton(NULL)
 {
 	setObjectName("AngleMeasure");
@@ -136,38 +136,39 @@ void AngleMeasure::init()
 
 void AngleMeasure::update(double deltaTime)
 {
-	if (!messageFader && messageFader.getInterstate() <= 0.)
-		return;
-
 	messageFader.update((int)(deltaTime*1000));
+	lineVisible.update((int)(deltaTime*1000));
 }
 
 //! Draw any parts on the screen which are for our module
 void AngleMeasure::draw(StelCore* core)
 {
+	if (lineVisible.getInterstate() < 0.000001f && messageFader.getInterstate() < 0.000001f)
+		return;
+	
 	const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
 	StelPainter painter(prj);
 	painter.setFont(font);
 
-	if (lineVisible || flagShowAngleMeasure)
+	if (lineVisible.getInterstate() > 0.000001f)
 	{
-		glDisable(GL_TEXTURE_2D);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
-		glEnable(GL_LINE_SMOOTH);
-	}
-
-	if (lineVisible)
-	{
+		glEnable(GL_TEXTURE_2D);
+		
 		Vec3d xy;
 		if (prj->project(perp1EndPoint,xy))
 		{
-			glColor3fv(textColor);
+			painter.setColor(textColor[0], textColor[1], textColor[2], lineVisible.getInterstate());
 			painter.drawText(xy[0], xy[1], angleText, 0, 15, 15);
 		}
 
+		glDisable(GL_TEXTURE_2D);
+		glEnable(GL_LINE_SMOOTH);
+		glEnable(GL_BLEND);
+		
 		// main line is a great circle
-		glColor3fv(lineColor);
+		painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
 		painter.drawGreatCircleArc(startPoint, endPoint, NULL);
 
 		// End lines
@@ -175,11 +176,9 @@ void AngleMeasure::draw(StelCore* core)
 		painter.drawGreatCircleArc(perp2StartPoint, perp2EndPoint, NULL);
 	}
 
-	if (messageFader.getInterstate() > 0.)
+	if (messageFader.getInterstate() > 0.000001f)
 	{
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glColor4f(textColor[0], textColor[1], textColor[2], messageFader.getInterstate());
+		painter.setColor(textColor[0], textColor[1], textColor[2], messageFader.getInterstate());
 		painter.drawText(83, 120, "Angle Tool Enabled - left drag to measure, left click to clear");
 		painter.drawText(83, 95,  "right click to change end point only");
 	}
@@ -277,6 +276,7 @@ void AngleMeasure::calculateEnds(void)
 void AngleMeasure::enableAngleMeasure(bool b)
 {
 	flagShowAngleMeasure = b;
+	lineVisible = b;
 	messageFader = b;
 	if (b)
 	{
