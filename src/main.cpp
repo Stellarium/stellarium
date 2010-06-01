@@ -305,7 +305,11 @@ int main(int argc, char **argv)
 	// -> this seems to bring crippled arabic fonts with OpenGL2 paint engine..
 	// QFont tmpFont("Verdana");
 #else
+#ifdef Q_OS_MAC
+	QFont tmpFont("Verdana");
+#else
 	QFont tmpFont("DejaVu Sans");
+#endif
 #endif
 	tmpFont.setPixelSize(13);
 	QApplication::setFont(tmpFont);
