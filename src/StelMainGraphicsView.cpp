@@ -34,13 +34,11 @@
 #include <QGLWidget>
 #include <QResizeEvent>
 #include <QSettings>
-#include <QCoreApplication>
 #include <QApplication>
 #include <QDebug>
 #include <QFileInfo>
 #include <QGraphicsGridLayout>
 #include <QGraphicsProxyWidget>
-#include <QEventLoop>
 #include <QPluginLoader>
 #include <QtPlugin>
 #include <QThread>
@@ -287,13 +285,9 @@ void StelMainGraphicsView::drawBackground(QPainter*, const QRectF&)
 	{
 		double duration = 1./getMaxFps();
 		int dur = (int)(duration*1000);
-		QTimer::singleShot(dur<5 ? 5 : dur, scene(), SLOT(update()));
+		QTimer::singleShot(dur<5 ? 5 : dur, this, SLOT(updateScene()));
 	}
-	#ifdef QT_MAC_USE_COCOA
-		// This call solves the problems with the qt event dispatcher in Cocoa. The stack grew huge and many events were discarded
-		// http://bugreports.qt.nokia.com/browse/QTBUG-7502
-		QCoreApplication::processEvents(QEventLoop::AllEvents);
-	#endif
+
 	// Manage cursor timeout
 	if (cursorTimeout>0.f && (now-lastEventTimeSec>cursorTimeout) && flagCursorTimeout)
 	{

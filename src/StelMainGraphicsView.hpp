@@ -21,6 +21,8 @@
 #define _STELMAINGRAPHICSVIEW_HPP_
 
 #include <QGraphicsView>
+#include <QCoreApplication>
+#include <QEventLoop>
 
 class QGLWidget;
 class QResizeEvent;
@@ -102,6 +104,17 @@ public slots:
 	//! Get the current maximum frames per second.
 	float getMaxFps() {return maxfps;}
 
+	//! Updates the scene and process all events
+	void updateScene() {
+
+		//#ifdef QT_MAC_USE_COCOA
+			// This call solves the problems with the qt event dispatche. The stack grew huge and many events were discarded
+			// http://bugreports.qt.nokia.com/browse/QTBUG-7502
+			QCoreApplication::processEvents(QEventLoop::AllEvents);
+		//#endif
+		scene()->update();
+	}
+
 protected:
 	virtual void resizeEvent(QResizeEvent* event);
 	virtual void mouseMoveEvent(QMouseEvent* event);
@@ -114,6 +127,7 @@ protected:
 	//! Update the mouse pointer state and schedule next redraw.
 	//! This method is called automatically by Qt.
 	virtual void drawBackground(QPainter* painter, const QRectF &rect);
+
 
 signals:
 	//! emitted when saveScreenShot is requested with saveScreenShot().
