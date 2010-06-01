@@ -110,7 +110,7 @@ public slots:
 		//#ifdef QT_MAC_USE_COCOA
 			// This call solves the problems with the qt event dispatche. The stack grew huge and many events were discarded
 			// http://bugreports.qt.nokia.com/browse/QTBUG-7502
-			QCoreApplication::processEvents(QEventLoop::AllEvents);
+		//	QCoreApplication::processEvents(QEventLoop::AllEvents);
 		//#endif
 		scene()->update();
 	}
