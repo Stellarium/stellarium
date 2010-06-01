@@ -55,7 +55,7 @@ private slots:
 private:
 	QFont font;
 	bool flagShowAngleMeasure;
-	bool lineVisible;
+	LinearFader lineVisible;
 	LinearFader messageFader;
 	QTimer* messageTimer;
 	bool dragging;
