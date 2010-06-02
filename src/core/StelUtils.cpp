@@ -241,7 +241,7 @@ QString radToDmsStr(double angle, bool decimal, bool useD)
 		width = 2;
 	}
 
-	os << qSetFieldWidth(width) << m << qSetFieldWidth(0) << '\''
+	os << qSetFieldWidth(width) << qSetPadChar('0') << m << qSetFieldWidth(0) << '\''
 		<< fixed << qSetFieldWidth(width) << qSetPadChar('0') << s
 		<< qSetFieldWidth(0) << '\"';
 
