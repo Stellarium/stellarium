@@ -45,6 +45,10 @@ public:
 	//! Return the list of all loaded locations
 	QList<StelLocation> getAll() const {return locations.values();}
 
+	//! Return the StelLocation for a given string
+	//! Can match location name, or coordinates
+	const StelLocation locationForString(const QString& s) const;
+
 	//! Return the StelLocation for the given row (match modelAllLocation index row)
 	const StelLocation locationForSmallString(const QString& s) const;
 

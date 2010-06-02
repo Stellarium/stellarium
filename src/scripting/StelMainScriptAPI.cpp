@@ -163,10 +163,7 @@ void StelMainScriptAPI::setObserverLocation(const QString id, float duration)
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	Q_ASSERT(nav);
 	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForSmallString(id);
-	// How best to test to see if the lookup of the name was a success?
-	// On failure, it returns Paris, but maybe we _want_ Paris.
-	// Ugly. -MNG
-	if (id!="Paris, France" && (loc.name=="Paris" && loc.country=="France"))
+	if (loc.name=="")
 		return;	// location find fail
 
 	nav->moveObserverTo(loc, duration);
