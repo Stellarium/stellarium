@@ -144,7 +144,7 @@ SerialPort::SerialPort(Server &server, const char *serial_device) : Connection(s
 SerialPort::~SerialPort(void)
 {
 #ifdef Q_OS_WIN32
-	if (handle == INVALID_HANDLE_VALUE)
+	if (handle != INVALID_HANDLE_VALUE)
 	{
 		// restore original settings
 		SetCommState(handle, &dcb_original);
