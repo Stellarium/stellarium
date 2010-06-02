@@ -248,6 +248,22 @@ QString radToDmsStr(double angle, bool decimal, bool useD)
 	return str;
 }
 
+
+// Convert a dms formatted string to an angle in radian
+double dmsStrToRad(const QString& s)
+{
+	QRegExp reg("([\\+\\-])(\\d+)d(\\d+)'(\\d+)\"");
+	if (!reg.exactMatch(s))
+		return 0;
+	QStringList list = reg.capturedTexts();
+	bool sign = (list[1] == "+");
+	int deg = list[2].toInt();
+	int min = list[3].toInt();
+	int sec = list[4].toInt();
+
+	return dmsToRad(sign ? deg : -deg, min, sec);
+}
+
 // Obtains a Vec3f from a string with the form x,y,z
 Vec3f strToVec3f(const QStringList& s)
 {
