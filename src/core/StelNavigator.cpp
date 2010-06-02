@@ -34,6 +34,7 @@
 #include <QStringList>
 #include <QDateTime>
 #include <QDebug>
+#include <QRegExp>
 
 // Init statics transfo matrices
 // See vsop87.doc:
@@ -59,7 +60,10 @@ void StelNavigator::init()
 	Q_ASSERT(conf);
 
 	defaultLocationID = conf->value("init_location/location","Paris, Paris, France").toString();
-	position = new StelObserver(StelApp::getInstance().getLocationMgr().locationForSmallString(defaultLocationID));
+	StelLocation location = StelApp::getInstance().getLocationMgr().locationForString(defaultLocationID);
+	if (location.name == "")
+		location = StelApp::getInstance().getLocationMgr().locationForSmallString("Paris, France");
+	position = new StelObserver(location);
 
 	setTimeNow();
 	// Compute transform matrices between coordinates systems

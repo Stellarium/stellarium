@@ -19,6 +19,7 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelLocationMgr.hpp"
+#include "StelUtils.hpp"
 #include "kfilterdev.h"
 
 #include <QStringListModel>
@@ -159,12 +160,32 @@ const StelLocation StelLocationMgr::locationForSmallString(const QString& s) con
 	if (iter==locations.end())
 	{
 		qWarning() << "Warning: location" << s << "is unknown";
-		return locations["Paris, France"];
+		StelLocation ret = locations["Paris, France"];
+		ret.name = "";
+		ret.country = "";
+		return ret;
 	}
 	else
 	{
 		return locations.value(s);
 	}
+}
+
+const StelLocation StelLocationMgr::locationForString(const QString& s) const
+{
+	StelLocation ret = locationForSmallString(s);
+	if (!ret.name.isEmpty())
+		return ret;
+	// Maybe it is a coordinate set ? (e.g. GPS +41d51'00" -51d00'00" )
+	QRegExp reg("(.*)([\\+\\-](?:\\d+)d(?:\\d+)'(?:\\d+)\") ([\\+\\-](?:\\d+)d(?:\\d+)'(?:\\d+)\")");
+	reg.setMinimal(true);
+	if (!reg.exactMatch(s))
+		return ret;
+	// We have a set of coordinates
+	ret.name = reg.capturedTexts()[1].trimmed();
+	ret.latitude = StelUtils::dmsStrToRad(reg.capturedTexts()[2]) * 180 / M_PI;
+	ret.longitude = StelUtils::dmsStrToRad(reg.capturedTexts()[3]) * 180 / M_PI;
+	return ret;
 }
 
 // Get whether a location can be permanently added to the list of user locations
