@@ -1,4 +1,4 @@
-0.10.5 [2010-05-31]
+0.10.5 [2010-06-02]
 Bug fix release.
 Fixed:
 - various problems with OpenGL shaders. If you experience problems with unreadable fonts, try adding the line "use_qpaintenginegl2 = false" in the [main] section of the configuration file (config.ini).
