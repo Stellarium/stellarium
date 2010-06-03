@@ -35,6 +35,10 @@
 #include <QHBoxLayout>
 #include <QGLWidget>
 
+#include <QtGui/QX11Info>
+#include <X11/Xlib.h>
+#include <X11/Xatom.h>
+
 // Initialize static variables
 StelMainWindow* StelMainWindow::singleton = NULL;
 
@@ -51,6 +55,25 @@ StelMainWindow::StelMainWindow() : QMainWindow(NULL)
 
 	mainGraphicsView = new StelMainGraphicsView(this);
 	setCentralWidget(mainGraphicsView);
+
+#ifdef BUILD_FOR_MAEMO
+	if (!winId())
+	{
+		qWarning("Can't grab keys unless we have a window id");
+		return;
+	}
+	unsigned long val = 1;
+	Atom atom = XInternAtom(QX11Info::display(), "_HILDON_ZOOM_KEY_ATOM", False);
+	if (!atom)
+	{
+		qWarning("Unable to obtain _HILDON_ZOOM_KEY_ATOM. This only works on a Maemo 5 device!");
+	}
+	else
+	{
+		XChangeProperty (QX11Info::display(), winId(), atom, XA_INTEGER, 32,
+			PropModeReplace, reinterpret_cast<unsigned char *>(&val), 1);
+	}
+#endif
 }
 
 // Update the translated title
