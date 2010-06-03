@@ -681,9 +681,11 @@ void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 
 	zoomTo(initFov, moveDuration);
 	if (flagAutoZoomOutResetsDirection)
+	{
 		moveToJ2000(core->getNavigator()->altAzToJ2000(getInitViewingDirection()), moveDuration, -1);
-	setFlagTracking(false);
-	setFlagLockEquPos(false);
+		setFlagTracking(false);
+		setFlagLockEquPos(false);
+	}
 }
 
 
