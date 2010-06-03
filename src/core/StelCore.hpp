@@ -163,6 +163,8 @@ public slots:
 	//! Set the flag with decides whether to arrage labels so that
 	//! they are aligned with the bottom of a 2d screen, or a 3d dome.
 	void setFlagGravityLabels(bool gravity) { currentProjectorParams.gravityLabels = gravity; }
+	//! Set the offset rotation angle in degree to apply to gravity text (only if gravityLabels is set to false).
+	void setDefautAngleForGravityText(float a) { currentProjectorParams.defautAngleForGravityText = a; }
 	//! Set the horizontal flip status.
 	//! @param flip The new value (true = flipped, false = unflipped).
 	void setFlipHorz(bool flip) {currentProjectorParams.flipHorz = flip;}
