@@ -49,6 +49,7 @@ void StelProjector::init(const StelProjectorParams& params)
 	viewportXywh = params.viewportXywh;
 	viewportCenter = params.viewportCenter;
 	gravityLabels = params.gravityLabels;
+	defautAngleForGravityText = params.defautAngleForGravityText;
 	flipHorz = params.flipHorz ? -1.f : 1.f;
 	flipVert = params.flipVert ? -1.f : 1.f;
 	viewportFovDiameter = params.viewportFovDiameter;

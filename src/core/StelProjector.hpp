@@ -49,10 +49,11 @@ public:
 	//! Contains all the param needed to initialize a StelProjector
 	struct StelProjectorParams
 	{
-		StelProjectorParams() : viewportXywh(0, 0, 256, 256), fov(60.f), gravityLabels(false), maskType(MaskNone), viewportCenter(128.f, 128.f), flipHorz(false), flipVert(false) {;}
+		StelProjectorParams() : viewportXywh(0, 0, 256, 256), fov(60.f), gravityLabels(false), defautAngleForGravityText(0.f), maskType(MaskNone), viewportCenter(128.f, 128.f), flipHorz(false), flipVert(false) {;}
 		Vector4<int> viewportXywh;      //! posX, posY, width, height
 		float fov;                      //! FOV in degrees
 		bool gravityLabels;             //! the flag to use gravity labels or not
+		float defautAngleForGravityText;//! a rotation angle to apply to gravity text (only if gravityLabels is set to false)
 		StelProjectorMaskType maskType; //! The current projector mask
 		float zNear, zFar;              //! Near and far clipping planes
 		Vec2f viewportCenter;           //! Viewport center in screen pixel
@@ -337,6 +338,7 @@ protected:
 	Vec2f viewportCenter;               // Viewport center in screen pixel
 	float viewportFovDiameter;          // diameter of the FOV disk in pixel
 	bool gravityLabels;                 // should label text align with the horizon?
+	float defautAngleForGravityText;    // a rotation angle to apply to gravity text (only if gravityLabels is set to false)
 	SphericalCap boundingCap;           // Bounding cap of the whole viewport
 
 private:
