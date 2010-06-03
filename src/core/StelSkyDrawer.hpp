@@ -165,6 +165,11 @@ public slots:
 	//! This is used to avoid twinkling/simulate extinction/refraction.
 	void setFlagHasAtmosphere(bool b) {flagHasAtmosphere=b;}
 
+	//! Get the radius of the big halo texture used when a 3d model is very bright.
+	float getBig3dModelHaloRadius() const {return big3dModelHaloRadius;}
+	//! Set the radius of the big halo texture used when a 3d model is very bright.
+	void setBig3dModelHaloRadius(float r) {big3dModelHaloRadius=r;}
+	
 private:
 	// Debug
 	float reverseComputeRCMag(float rmag) const;
@@ -278,6 +283,8 @@ private:
 
 	bool useShader;
 	class QGLShaderProgram* starsShaderProgram;
+	
+	float big3dModelHaloRadius;
 };
 
 #endif // _STELSKYDRAWER_HPP_

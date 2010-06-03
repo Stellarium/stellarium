@@ -68,6 +68,8 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), flagHasAtmosphere(t
 	starRelativeScale = 1.f;
 	starLinearScale = 19.569f;
 
+	big3dModelHaloRadius = 150.f;
+	
 	QSettings* conf = StelApp::getInstance().getSettings();
 	initColorTableFromConfigFile(conf);
 
@@ -550,7 +552,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_ONE, GL_ONE);
 		painter->enableTexture2d(true);
-		float rmag = 150.f*(mag+15.f)/-11.f;
+		float rmag = big3dModelHaloRadius*(mag+15.f)/-11.f;
 		float cmag = 1.f;
 		if (rmag<pixRadius*3.f+100.)
 			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
