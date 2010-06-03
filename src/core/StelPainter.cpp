@@ -664,6 +664,9 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	}
 	else
 	{
+		if (!noGravity)
+			angleDeg += prj->defautAngleForGravityText;
+		
 		// There are 2 version here depending on the OpenGL engine
 		// OpenGL 1 need to reverse the text vertically, not OpenGL 2...
 		// This sounds like a Qt bug
