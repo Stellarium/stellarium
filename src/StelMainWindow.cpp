@@ -35,9 +35,11 @@
 #include <QHBoxLayout>
 #include <QGLWidget>
 
+#ifdef BUILD_FOR_MAEMO
 #include <QtGui/QX11Info>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
+#endif
 
 // Initialize static variables
 StelMainWindow* StelMainWindow::singleton = NULL;
