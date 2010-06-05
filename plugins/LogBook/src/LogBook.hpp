@@ -23,7 +23,8 @@
 #include <QMap>
 
 class LogBookConfigDialog;
-class LogBookDialog;
+class ObservationsDialog;
+class SessionsDialog;
 class TargetsDialog;
 
 class QKeyEvent;
@@ -83,7 +84,8 @@ private:
 	bool processSqlFile(QString &fileName);
 
 	LogBookConfigDialog *configDialog;
-	LogBookDialog *mainDialog;
+	ObservationsDialog *observationsDialog;
+	SessionsDialog *sessionsDialog;
 	TargetsDialog *targetsDialog;
 
 	//! flag used to track if we are in log book mode.

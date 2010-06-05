@@ -28,6 +28,7 @@
 
 #include "StelApp.hpp"
 #include "StelMainGraphicsView.hpp"
+#include "StelTranslator.hpp"
 
 #include "ui_LogBookConfigDialog.h"
 
@@ -208,13 +209,13 @@ void LogBookConfigDialog::setupWidgets()
 	widgets[SITES] = sites;
 	
 	// Layout the ListWidget
-	ui->pagesListWidget->addItem(tr("Barlows"));
-	ui->pagesListWidget->addItem(tr("Filters"));
-	ui->pagesListWidget->addItem(tr("Imagers"));
-	ui->pagesListWidget->addItem(tr("Observers"));
-	ui->pagesListWidget->addItem(tr("Oculars"));
-	ui->pagesListWidget->addItem(tr("Optics"));
-	ui->pagesListWidget->addItem(tr("Sites"));
+	ui->pagesListWidget->addItem(N_("Barlows"));
+	ui->pagesListWidget->addItem(N_("Filters"));
+	ui->pagesListWidget->addItem(N_("Imagers"));
+	ui->pagesListWidget->addItem(N_("Observers"));
+	ui->pagesListWidget->addItem(N_("Oculars"));
+	ui->pagesListWidget->addItem(N_("Optics"));
+	ui->pagesListWidget->addItem(N_("Sites"));
 	ui->pagesListWidget->setCurrentRow(0);
 	
 	connect(ui->pagesListWidget, SIGNAL(currentRowChanged(int)), ui->stackedWidget, SLOT(setCurrentIndex(int)));
