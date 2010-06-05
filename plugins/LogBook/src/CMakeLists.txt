@@ -12,45 +12,49 @@ INCLUDE_DIRECTORIES(
 LINK_DIRECTORIES(/src)
 
 SET(LogBook_SRCS
-    LogBook.hpp
-    LogBook.cpp
-    LogBookCommon.hpp
-    gui/LogBookDialog.hpp
-    gui/LogBookDialog.cpp
-    gui/LogBookConfigDialog.hpp
-    gui/LogBookConfigDialog.cpp
-    gui/StelDialogLogBook.hpp
-    gui/StelDialogLogBook.cpp
-    gui/TargetsDialog.hpp
-    gui/TargetsDialog.cpp
-    gui/dataMappers/BarlowsDataMapper.hpp
-    gui/dataMappers/BarlowsDataMapper.cpp
-    gui/dataMappers/FiltersDataMapper.hpp
-    gui/dataMappers/FiltersDataMapper.cpp
-    gui/dataMappers/ImagersDataMapper.hpp
-    gui/dataMappers/ImagersDataMapper.cpp
-    gui/dataMappers/ObserversDataMapper.hpp
-    gui/dataMappers/ObserversDataMapper.cpp
-    gui/dataMappers/OcularsDataMapper.hpp
-    gui/dataMappers/OcularsDataMapper.cpp
-    gui/dataMappers/OpticsDataMapper.hpp
-    gui/dataMappers/OpticsDataMapper.cpp
-    gui/dataMappers/SitesDataMapper.hpp
-    gui/dataMappers/SitesDataMapper.cpp
-    gui/validators/LimitingDoubleValidator.hpp
-    gui/validators/LimitingDoubleValidator.cpp
-    gui/validators/LimitingIntValidator.hpp
-    gui/validators/LimitingIntValidator.cpp
-    gui/validators/NonEmptyStringValidator.hpp
-    gui/validators/NonEmptyStringValidator.cpp
-    gui/widgets/LogBookTextEdit.hpp
-    gui/widgets/LogBookTextEdit.cpp
-    models/FieldConcatModel.hpp
-    models/FieldConcatModel.cpp
+	LogBook.hpp
+	LogBook.cpp
+	LogBookCommon.hpp
+	gui/LogBookDialog.hpp
+	gui/LogBookDialog.cpp
+	gui/LogBookConfigDialog.hpp
+	gui/LogBookConfigDialog.cpp
+	gui/ObservationsDialog.hpp
+	gui/ObservationsDialog.cpp
+	gui/SessionsDialog.hpp
+	gui/SessionsDialog.cpp
+	gui/StelDialogLogBook.hpp
+	gui/StelDialogLogBook.cpp
+	gui/TargetsDialog.hpp
+	gui/TargetsDialog.cpp
+	gui/dataMappers/BarlowsDataMapper.hpp
+	gui/dataMappers/BarlowsDataMapper.cpp
+	gui/dataMappers/FiltersDataMapper.hpp
+	gui/dataMappers/FiltersDataMapper.cpp
+	gui/dataMappers/ImagersDataMapper.hpp
+	gui/dataMappers/ImagersDataMapper.cpp
+	gui/dataMappers/ObserversDataMapper.hpp
+	gui/dataMappers/ObserversDataMapper.cpp
+	gui/dataMappers/OcularsDataMapper.hpp
+	gui/dataMappers/OcularsDataMapper.cpp
+	gui/dataMappers/OpticsDataMapper.hpp
+	gui/dataMappers/OpticsDataMapper.cpp
+	gui/dataMappers/SitesDataMapper.hpp
+	gui/dataMappers/SitesDataMapper.cpp
+	gui/validators/LimitingDoubleValidator.hpp
+	gui/validators/LimitingDoubleValidator.cpp
+	gui/validators/LimitingIntValidator.hpp
+	gui/validators/LimitingIntValidator.cpp
+	gui/validators/NonEmptyStringValidator.hpp
+	gui/validators/NonEmptyStringValidator.cpp
+	gui/widgets/LogBookTextEdit.hpp
+	gui/widgets/LogBookTextEdit.cpp
+	models/FieldConcatModel.hpp
+	models/FieldConcatModel.cpp
 )
 
 ### These source groups are only needed for grouping files in an IDE
-SOURCE_GROUP(GUI FILES REGULAR_EXPRESSION .*Dialog*.+pp)
+SOURCE_GROUP(GUI FILES REGULAR_EXPRESSION .*Dialog*.+pp|ui$)
 SOURCE_GROUP(DataMappers FILES REGULAR_EXPRESSION .*DataMapper.+pp)
 SOURCE_GROUP(Models FILES REGULAR_EXPRESSION .*Model.+pp)
 SOURCE_GROUP(Validators FILES REGULAR_EXPRESSION .*Validator*.+pp)
@@ -62,16 +66,18 @@ QT4_ADD_RESOURCES(LogBook_RES_CXX ${LogBook_RES})
 
 ################# compiles .ui files ############
 SET(LogBook_UIS
-    gui/BarlowsWidget.ui
-    gui/FiltersWidget.ui
-    gui/ImagersWidget.ui
-    gui/LogBookDialog.ui
-    gui/LogBookConfigDialog.ui
-    gui/ObserversWidget.ui
-    gui/OcularsWidget.ui
-    gui/OpticsWidget.ui
-    gui/SitesWidget.ui
-    gui/TargetsDialog.ui
+	gui/BarlowsWidget.ui
+	gui/FiltersWidget.ui
+	gui/ImagersWidget.ui
+	gui/LogBookDialog.ui
+	gui/LogBookConfigDialog.ui
+	gui/ObservationsDialog.ui
+	gui/ObserversWidget.ui
+	gui/OcularsWidget.ui
+	gui/OpticsWidget.ui
+	gui/SitesWidget.ui
+	gui/SessionsDialog.ui
+	gui/TargetsDialog.ui
 )
 QT4_WRAP_UI(LogBook_UIS_H ${LogBook_UIS})
 
@@ -81,8 +87,10 @@ SET(LogBook_MOC_HDRS
 	LogBook.hpp
 	gui/LogBookDialog.hpp
 	gui/LogBookConfigDialog.hpp
+	gui/ObservationsDialog.hpp
+	gui/SessionsDialog.hpp
 	gui/StelDialogLogBook.hpp
-    gui/TargetsDialog.hpp
+	gui/TargetsDialog.hpp
 	gui/dataMappers/BarlowsDataMapper.hpp
 	gui/dataMappers/FiltersDataMapper.hpp
 	gui/dataMappers/ImagersDataMapper.hpp
@@ -93,8 +101,8 @@ SET(LogBook_MOC_HDRS
 	gui/validators/LimitingDoubleValidator.hpp
 	gui/validators/LimitingIntValidator.hpp
 	gui/validators/NonEmptyStringValidator.hpp
-    gui/widgets/LogBookTextEdit.hpp
-    models/FieldConcatModel.hpp
+	gui/widgets/LogBookTextEdit.hpp
+	models/FieldConcatModel.hpp
 )
 
 # After this call, LogBook_MOC_SRCS = moc_LogBook.cxx
