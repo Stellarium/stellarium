@@ -304,12 +304,11 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 					event->accept();
 					if (dragTimeMode)
 					{
-						addTimeDragPoint(event->pos().x(), event->pos().y());
 						if (timeDragHistory.size()>=3)
 						{
 							const double deltaT = timeDragHistory.last().runTime-timeDragHistory.first().runTime;
 							Vec2f d(timeDragHistory.last().x-timeDragHistory.first().x, timeDragHistory.last().y-timeDragHistory.first().y);
-							if (d.length()/deltaT<dragTriggerDistance/0.2)
+							if (d.length()/deltaT<dragTriggerDistance)
 							{
 								core->getNavigator()->setTimeRate(JD_SECOND);
 							}
