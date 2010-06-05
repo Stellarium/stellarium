@@ -273,8 +273,16 @@ private:
 	int previousX, previousY;
 
 	// Contains the last N real time / JD times pairs associated with the last N mouse move events
-	QList<QPair<double, double> > timeDragHistory;
-	void addTimeDragPoint();
+	struct DragHistoryEntry
+	{
+		double runTime;
+		double jd;
+		int x;
+		int y;
+	};
+
+	QList<DragHistoryEntry> timeDragHistory;
+	void addTimeDragPoint(int x, int y);
 	float beforeTimeDragTimeRate;
 
 	// Time mouse control
