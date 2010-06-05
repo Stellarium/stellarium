@@ -32,7 +32,7 @@
 #include <QSettings>
 
 StelAppGraphicsWidget::StelAppGraphicsWidget()
-	: paintState(0), useBuffers(false), backgroundBuffer(NULL), foregroundBuffer(NULL), viewportEffect(NULL)
+	: paintState(0), useBuffers(false), backgroundBuffer(NULL), foregroundBuffer(NULL), viewportEffect(NULL), doPaint(true)
 {
 	previousPaintTime = StelApp::getTotalRunTime();
 	setFocusPolicy(Qt::StrongFocus);
@@ -157,9 +157,9 @@ bool StelAppGraphicsWidget::paintPartial()
 void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget*)
 {
 	// Don't even try to draw if we don't have a core yet (fix a bug during splash screen)
-	if (!stelApp || !stelApp->getCore())
+	if (!stelApp || !stelApp->getCore() || !doPaint)
 		return;
-
+	
 	StelPainter::setQPainter(painter);
 
 	if (useBuffers)

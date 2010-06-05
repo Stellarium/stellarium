@@ -48,6 +48,9 @@ public:
 	//! Get the type of viewport effect currently used
 	QString getViewportEffect() const;
 
+	//! Set whether widget repaint are necessary.
+	void setDoPaint(bool b) {doPaint=b;}
+	
 protected:
 	virtual void keyPressEvent(QKeyEvent* event);
 	virtual void keyReleaseEvent(QKeyEvent* event);
@@ -85,6 +88,8 @@ private:
 
 	StelViewportEffect* viewportEffect;
 	void distortPos(QPointF* pos);
+	
+	bool doPaint;
 };
 
 #endif // _STELAPPGRAPHICSWIDGET_HPP_
