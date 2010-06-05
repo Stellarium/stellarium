@@ -253,9 +253,14 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 	event->accept();
 }
 
-void StelMovementMgr::addTimeDragPoint()
+void StelMovementMgr::addTimeDragPoint(int x, int y)
 {
-	timeDragHistory.append(QPair<double, double>(StelApp::getInstance().getTotalRunTime(), core->getNavigator()->getJDay()));
+	DragHistoryEntry e;
+	e.runTime=StelApp::getInstance().getTotalRunTime();
+	e.jd=core->getNavigator()->getJDay();
+	e.x=x;
+	e.y=y;
+	timeDragHistory.append(e);
 	if (timeDragHistory.size()>3)
 		timeDragHistory.removeFirst();
 }
@@ -286,7 +291,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 				if (dragTimeMode)
 				{
 					timeDragHistory.clear();
-					addTimeDragPoint();
+					addTimeDragPoint(event->pos().x(), event->pos().y());
 				}
 				event->accept();
 				return;
@@ -299,21 +304,29 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 					event->accept();
 					if (dragTimeMode)
 					{
-						addTimeDragPoint();
+						addTimeDragPoint(event->pos().x(), event->pos().y());
 						if (timeDragHistory.size()>=3)
 						{
-							const double deltaT = timeDragHistory.last().first-timeDragHistory.first().first;
-							const double deltaJd = timeDragHistory.last().second-timeDragHistory.first().second;
-							const double newTimeRate = deltaJd/deltaT;
-							if (deltaT>0.00000001)
+							const double deltaT = timeDragHistory.last().runTime-timeDragHistory.first().runTime;
+							Vec2f d(timeDragHistory.last().x-timeDragHistory.first().x, timeDragHistory.last().y-timeDragHistory.first().y);
+							if (d.length()/deltaT<dragTriggerDistance/0.2)
 							{
-								if (newTimeRate>=0)
-									core->getNavigator()->setTimeRate(qMax(newTimeRate, JD_SECOND));
-								else
-									core->getNavigator()->setTimeRate(qMin(newTimeRate, -JD_SECOND));
+								core->getNavigator()->setTimeRate(JD_SECOND);
 							}
 							else
-								core->getNavigator()->setTimeRate(beforeTimeDragTimeRate);
+							{
+								const double deltaJd = timeDragHistory.last().jd-timeDragHistory.first().jd;
+								const double newTimeRate = deltaJd/deltaT;
+								if (deltaT>0.00000001)
+								{
+									if (newTimeRate>=0)
+										core->getNavigator()->setTimeRate(qMax(newTimeRate, JD_SECOND));
+									else
+										core->getNavigator()->setTimeRate(qMin(newTimeRate, -JD_SECOND));
+								}
+								else
+									core->getNavigator()->setTimeRate(beforeTimeDragTimeRate);
+							}
 						}
 						else
 							core->getNavigator()->setTimeRate(beforeTimeDragTimeRate);
@@ -813,7 +826,7 @@ void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 		double angle = (v2^v1)[2];
 		double deltaDay = angle/(2.*M_PI)*core->getNavigator()->getLocalSideralDayLength();
 		core->getNavigator()->setJDay(core->getNavigator()->getJDay()+deltaDay);
-		addTimeDragPoint();
+		addTimeDragPoint(x2, y2);
 	}
 	else
 	{
