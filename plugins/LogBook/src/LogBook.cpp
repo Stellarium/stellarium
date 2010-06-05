@@ -19,7 +19,8 @@
 #include "LogBook.hpp"
 #include "LogBookCommon.hpp"
 #include "LogBookConfigDialog.hpp"
-#include "LogBookDialog.hpp"
+#include "ObservationsDialog.hpp"
+#include "SessionsDialog.hpp"
 #include "TargetsDialog.hpp"
 
 #include "stdexcept"
@@ -101,6 +102,10 @@ LogBook::LogBook()
 
 LogBook::~LogBook()
 {
+	delete configDialog;
+	delete observationsDialog;
+	delete sessionsDialog;
+	delete targetsDialog;
 }
 
 /* ********************************************************************* */
@@ -126,8 +131,9 @@ void LogBook::init()
 {
 	qDebug() << "LogBook plugin - press Command-L to toggle Log Book view mode. Press ALT-L for configuration.";
 	initializeDatabase();
-	mainDialog = new LogBookDialog(tableModels);
 	configDialog = new LogBookConfigDialog(tableModels);
+	observationsDialog = new ObservationsDialog(tableModels);
+	sessionsDialog = new SessionsDialog(tableModels);
 	targetsDialog = new TargetsDialog(tableModels);
 	flagShowLogBook = false;
 	initializeActions();
@@ -150,7 +156,7 @@ void LogBook::setStelStyle(const QString& )
 /* ********************************************************************* */
 void LogBook::enableLogBook(bool b)
 {
-	mainDialog->setVisible(b);
+	sessionsDialog->setVisible(b);
 	// Toggle the plugin on & off.  To toggle on, we want to ensure there is a selected object.
 	if (!StelApp::getInstance().getStelObjectMgr().getWasSelected()) {
 		qDebug() << "====> Nothing selected.";
