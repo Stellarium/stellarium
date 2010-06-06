@@ -36,7 +36,7 @@ class ObservationsDialog : public StelDialogLogBook {
 	Q_OBJECT
 	
 public:
-	ObservationsDialog(QMap<QString, QSqlTableModel *> theTableModels);
+	ObservationsDialog(QMap<QString, QSqlTableModel *> theTableModels, int sessionID);
 	virtual ~ObservationsDialog();
 	void languageChanged();
 	
@@ -46,14 +46,14 @@ public:
 protected slots:
 	void accessoriesTextChanged();
 	void barlowChanged(const QString &newValue);
+	void beginDateTimeChanged(const QDateTime &datetime);
 	void deleteSelectedObservation();
+	void endDateTimeChanged(const QDateTime &datetime);
 	void filterChanged(const QString &newValue);
 	void imagerChanged(const QString &newValue);
 	void insertNewObservation();
 	void limitingMagnitudeChanged(const QString &newValue);
 	void notesTextChanged();
-	void beginDateTimeChanged(const QDateTime &datetime);
-	void endDateTimeChanged(const QDateTime &datetime);
 	void observerChanged(const QString &newValue);
 	void observationSelected(const QModelIndex &index);
 	void ocularChanged(const QString &newValue);
@@ -71,12 +71,13 @@ protected:
 	void teardownConnections();
 	
 private:
-	int lastObservationRowNumberSelected;
-	QMap<QString, QSqlTableModel *> tableModels;
-	QMap<QString, FieldConcatModel *> fieldModels;
-	QSqlRelationalTableModel *observationsModel;
-	FieldConcatModel *observationsListModel;
-	Ui_ObservationsDialog* ui;
+	QMap<QString, FieldConcatModel *>	fieldModels;
+	int									lastObservationRowNumberSelected;
+	FieldConcatModel*					observationsListModel;
+	QSqlRelationalTableModel*			observationsModel;
+	int									sessionKey;
+	QMap<QString, QSqlTableModel *>		tableModels;
+	Ui_ObservationsDialog*				ui;
 };
 
 #endif // _OBSERVATIONSDIALOG_HPP_
