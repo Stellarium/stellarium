@@ -111,14 +111,16 @@ void SessionsDialog::insertNewSession()
 	field1.setValue(QVariant(dateTime.toString("yyyy/MM/dd HH:mm")));
 	dateTime = dateTime.addSecs(60*60);
 	field2.setValue(QVariant(dateTime.toString("yyyy/MM/dd HH:mm")));
+	field3.setValue(QVariant(1));
 	QSqlRecord newRecord = QSqlRecord();
 	newRecord.append(field1);
 	newRecord.append(field2);
+	newRecord.append(field3);
 	
-	if (tableModels[SESSIONS]->insertRecord(-1, newRecord)) {
-		ui->sessionsListView->setCurrentIndex(tableModels[SESSIONS]->index(tableModels[SESSIONS]->rowCount() - 1, 1));
+	if (sessionsModel->insertRecord(-1, newRecord)) {
+		ui->sessionsListView->setCurrentIndex(sessionsModel->index(sessionsModel->rowCount() - 1, 1));
 	} else {
-		qWarning() << "LogBook: could not insert new session.  The error is: " << tableModels[SESSIONS]->lastError();
+		qWarning() << "LogBook: could not insert new session.  The error is: " << sessionsModel->lastError();
 	}
 }
 
@@ -282,8 +284,17 @@ void SessionsDialog::setupConnections()
 
 void SessionsDialog::setupModels()
 {
+	QSqlDatabase db = QSqlDatabase::database("LogBook");
+	// We want the relational table model so we can join the target name with the date in the display string
+	sessionsModel = new QSqlRelationalTableModel(this, db);
+	sessionsModel->setTable(SESSIONS);
+	sessionsModel->setObjectName("Sessions Table Model");
+	sessionsModel->setRelation(3, QSqlRelation(SITES, "site_id", "name"));
+	sessionsModel->setEditStrategy(QSqlTableModel::OnFieldChange);
+	sessionsModel->select();
+
 	fieldModels[QString(OBSERVERS)] = new FieldConcatModel(tableModels[OBSERVERS], QStringList() << "surname" << "name", ", " , this);
-	fieldModels[SESSIONS] = new FieldConcatModel(tableModels[SESSIONS], QStringList() << "begin" << "end", " to " , this);
+	fieldModels[SESSIONS] = new FieldConcatModel(sessionsModel, QStringList() << "name" << "begin", " on " , this);
 
 	ui->siteComboBox->setModel(tableModels[SITES]);
 	ui->siteComboBox->setModelColumn(1);
@@ -293,6 +304,7 @@ void SessionsDialog::setupModels()
 
 	ui->sessionsListView->setModel(fieldModels[SESSIONS]);
 	ui->sessionsListView->setModelColumn(1);
+
 }
 
 void SessionsDialog::teardownConnections()
