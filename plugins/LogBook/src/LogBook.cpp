@@ -103,7 +103,6 @@ LogBook::LogBook()
 LogBook::~LogBook()
 {
 	delete configDialog;
-	delete observationsDialog;
 	delete sessionsDialog;
 	delete targetsDialog;
 }
@@ -132,7 +131,6 @@ void LogBook::init()
 	qDebug() << "LogBook plugin - press Command-L to toggle Log Book view mode. Press ALT-L for configuration.";
 	initializeDatabase();
 	configDialog = new LogBookConfigDialog(tableModels);
-	observationsDialog = new ObservationsDialog(tableModels);
 	sessionsDialog = new SessionsDialog(tableModels);
 	targetsDialog = new TargetsDialog(tableModels);
 	flagShowLogBook = false;
@@ -256,7 +254,7 @@ bool LogBook::initializeDatabase()
 
 		tableModels[OBSERVATIONS] = new QSqlTableModel(this, db);
 		tableModels[OBSERVATIONS]->setTable(OBSERVATIONS);
-		tableModels[OBSERVATIONS]->setObjectName("Observers Table Model");
+		tableModels[OBSERVATIONS]->setObjectName("Observations Table Model");
 		tableModels[OBSERVATIONS]->setEditStrategy(QSqlTableModel::OnFieldChange);
 		tableModels[OBSERVATIONS]->select();
 

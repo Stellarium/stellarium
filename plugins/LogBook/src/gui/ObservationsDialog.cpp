@@ -41,10 +41,11 @@
 #pragma mark Creation & Destruction
 #endif
 /* ********************************************************************* */
-ObservationsDialog::ObservationsDialog(QMap<QString, QSqlTableModel *> theTableModels)
+ObservationsDialog::ObservationsDialog(QMap<QString, QSqlTableModel *> theTableModels, int sessionID)
 {
 	ui = new Ui_ObservationsDialog;
 	tableModels = theTableModels;
+	sessionKey = sessionID;
 }
 
 ObservationsDialog::~ObservationsDialog()
@@ -156,7 +157,7 @@ void ObservationsDialog::insertNewObservation()
     QSqlField field6("optics_id", QVariant::Int);
 	
 	field1.setValue(QVariant(1));
-	field2.setValue(QVariant(1));
+	field2.setValue(QVariant(sessionKey));
 	field3.setValue(QVariant(1));
 	QDateTime dateTime = QDateTime::currentDateTime();
 	field4.setValue(QVariant(dateTime.toString("yyyy/MM/dd HH:mm")));
@@ -251,7 +252,7 @@ void ObservationsDialog::endDateTimeChanged(const QDateTime &datetime)
 void ObservationsDialog::observerChanged(const QString &newValue)
 {
 	QSqlRecord record = currentObservationRecord();
-	int newIndex = fieldModels[QString(OBSERVATIONS) + QString(OBSERVERS)]->idForDisplayString(newValue);
+	int newIndex = fieldModels[QString(OBSERVATIONS)]->idForDisplayString(newValue);
 	
 	if (!record.isEmpty() && record.value("observer_id").toInt() != newIndex) {
 		record.setValue("observer_id", newIndex);
@@ -327,9 +328,11 @@ void ObservationsDialog::createDialogContent()
 	
 	// All of the table models
 	setupModels();
-	
 	setupConnections();
-	ui->observationsListView->setCurrentIndex(fieldModels[OBSERVATIONS]->index(0, 1));	
+
+	lastObservationRowNumberSelected = 1;
+	// Now select the first one, which causes it to populate
+	ui->observationsListView->setCurrentIndex(observationsListModel->index(lastObservationRowNumberSelected, 1));
 }
 
 QSqlRecord ObservationsDialog::currentObservationRecord()
@@ -356,7 +359,7 @@ void ObservationsDialog::populateFormWithObservationIndex(const QModelIndex &ind
 			= tableModels[OBSERVERS]->match(tableModels[OBSERVERS]->index(0, 0), Qt::DisplayRole, record.value("observer_id"));
 		QSqlRecord typeRecord1 = tableModels[OBSERVERS]->record(list1[0].row());
 		ui->observerComboBox->setCurrentIndex(ui->observerComboBox->
-											  findText(fieldModels[QString(SESSIONS) + QString(OBSERVERS)]->
+											  findText(fieldModels[QString(OBSERVERS)]->
 													   displayStringForRecord(typeRecord1)));
 		
 		list1 = tableModels[OPTICS]->match(tableModels[OPTICS]->index(0, 0), Qt::DisplayRole, record.value("optics_id"));
@@ -392,11 +395,12 @@ void ObservationsDialog::populateFormWithObservationIndex(const QModelIndex &ind
 
 void ObservationsDialog::setupConnections()
 {
+	connect(ui->addObservationButton, SIGNAL(clicked()), this, SLOT(insertNewObservation()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->observationsListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)), 
 			this, SLOT(observationSelected(QModelIndex)));
 		
-	connect(ui->observerComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(observationObserverChanged(const QString&)));
+	connect(ui->observerComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(observerChanged(const QString&)));
 	connect(ui->opticComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(opticChanged(const QString&)));
 	connect(ui->ocularComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(ocularChanged(const QString&)));
 	connect(ui->barlowComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(barlowChanged(const QString&)));
@@ -413,41 +417,53 @@ void ObservationsDialog::setupConnections()
 
 void ObservationsDialog::setupModels()
 {
-	fieldModels[QString(OBSERVATIONS) + QString(OBSERVERS)] 
-		= new FieldConcatModel(tableModels[OBSERVERS], QStringList() << "surname" << "name", ", " , this);
+	fieldModels[QString(OBSERVERS)] = new FieldConcatModel(tableModels[OBSERVERS], QStringList() << "surname" << "name", ", " , this);
 	fieldModels[OPTICS] = new FieldConcatModel(tableModels[OPTICS], QStringList() << "model" << "vendor", " | " , this);
 	fieldModels[OCULARS] = new FieldConcatModel(tableModels[OCULARS], QStringList() << "model" << "vendor", " | " , this);
 	fieldModels[BARLOWS] = new FieldConcatModel(tableModels[BARLOWS], QStringList() << "model" << "vendor", " | " , this);
 	fieldModels[FILTERS] = new FieldConcatModel(tableModels[FILTERS], QStringList() << "type" << "vendor", " | " , this);
 	fieldModels[TARGETS] = new FieldConcatModel(tableModels[TARGETS], QStringList() << "name" << "alias", " | " , this);
 	fieldModels[IMAGERS] = new FieldConcatModel(tableModels[IMAGERS], QStringList() << "model" << "vendor", " | " , this);
-	fieldModels[SESSIONS] = new FieldConcatModel(tableModels[SESSIONS], QStringList() << "begin" << "end", " to " , this);
 	
-	ui->observerComboBox->setModel(fieldModels[QString(OBSERVATIONS) + QString(OBSERVERS)]);
+	ui->observerComboBox->setModel(fieldModels[QString(OBSERVERS)]);
 	ui->observerComboBox->setModelColumn(1);
-	
+	ui->observerComboBox->setCurrentIndex(-1);
+
 	ui->opticComboBox->setModel(fieldModels[OPTICS]);
 	ui->opticComboBox->setModelColumn(1);
+	ui->opticComboBox->setCurrentIndex(-1);
 	
 	ui->ocularComboBox->setModel(fieldModels[OCULARS]);
 	ui->ocularComboBox->setModelColumn(1);
+	ui->ocularComboBox->setCurrentIndex(-1);
 	
 	ui->barlowComboBox->setModel(fieldModels[BARLOWS]);
 	ui->barlowComboBox->setModelColumn(1);
+	ui->barlowComboBox->setCurrentIndex(-1);
 	
 	ui->filterComboBox->setModel(fieldModels[FILTERS]);
 	ui->filterComboBox->setModelColumn(1);
+	ui->filterComboBox->setCurrentIndex(-1);
 	
 	ui->targetComboBox->setModel(fieldModels[TARGETS]);
 	ui->targetComboBox->setModelColumn(1);
+	ui->targetComboBox->setCurrentIndex(-1);
 	
 	ui->imagerComboBox->setModel(fieldModels[IMAGERS]);
 	ui->imagerComboBox->setModelColumn(1);
-	
+	ui->imagerComboBox->setCurrentIndex(-1);
+
+
 	QSqlDatabase db = QSqlDatabase::database("LogBook");
+	// We want the relational table model so we can join the target name with the date in the display string
 	observationsModel = new QSqlRelationalTableModel(this, db);
 	observationsModel->setTable(OBSERVATIONS);
+	observationsModel->setObjectName("Observations Table Model");
 	observationsModel->setRelation(3, QSqlRelation(TARGETS, "target_id", "name"));
+	observationsModel->setEditStrategy(QSqlTableModel::OnFieldChange);
+	observationsModel->setFilter(QString("session_id = %1").arg(sessionKey));
+	observationsModel->select();
+
 	observationsListModel = new FieldConcatModel(observationsModel, QStringList() << "name" << "begin", " at " , this);
 	ui->observationsListView->setModel(observationsListModel);
 	ui->observationsListView->setModelColumn(1);
@@ -455,11 +471,12 @@ void ObservationsDialog::setupModels()
 
 void ObservationsDialog::teardownConnections()
 {
+	disconnect(ui->addObservationButton, SIGNAL(clicked()), this, SLOT(insertNewObservation()));
 	disconnect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	disconnect(ui->observationsListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)), 
 			   this, SLOT(observationSelected(QModelIndex)));
 		
-	disconnect(ui->observerComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(observationObserverChanged(const QString&)));
+	disconnect(ui->observerComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(observerChanged(const QString&)));
 	disconnect(ui->opticComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(opticChanged(const QString&)));
 	disconnect(ui->ocularComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(ocularChanged(const QString&)));
 	disconnect(ui->barlowComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(barlowChanged(const QString&)));
@@ -468,10 +485,8 @@ void ObservationsDialog::teardownConnections()
 	disconnect(ui->limitingMagComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(limitingMagnitudeChanged(const QString&)));
 	disconnect(ui->seeingComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(seeingChanged(const QString&)));
 	disconnect(ui->imagerComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(imagerChanged(const QString&)));
-	disconnect(ui->beginDateTimeEdit, SIGNAL(dateTimeChanged(const QDateTime&)), 
-			   this, SLOT(observationBeginDateTimeChanged(const QDateTime&)));
-	disconnect(ui->endDateTimeEdit, SIGNAL(dateTimeChanged(const QDateTime&)), 
-			   this, SLOT(observationEndDateTimeChanged(const QDateTime&)));
+	disconnect(ui->beginDateTimeEdit, SIGNAL(dateTimeChanged(const QDateTime&)), this, SLOT(beginDateTimeChanged(const QDateTime&)));
+	disconnect(ui->endDateTimeEdit, SIGNAL(dateTimeChanged(const QDateTime&)), this, SLOT(endDateTimeChanged(const QDateTime&)));
 	disconnect(ui->accessoriesTextEdit, SIGNAL(editingFinished()), this, SLOT(accessoriesTextChanged()));
 	disconnect(ui->observationNotesTextEdit, SIGNAL(editingFinished()), this, SLOT(notesTextChanged()));
 }
