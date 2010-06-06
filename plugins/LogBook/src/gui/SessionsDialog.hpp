@@ -45,12 +45,14 @@ public:
 	
 protected slots:
 	// session slots
+	void beginDateTimeChanged(const QDateTime &datetime);
 	void commentsTextChanged();
 	void deleteSelectedSession();
-	void insertNewSession();
-	void beginDateTimeChanged(const QDateTime &datetime);
 	void endDateTimeChanged(const QDateTime &datetime);
+	void insertNewSession();
+	void observationWindowClosed(StelDialogLogBook* theDialog);
 	void observerChanged(const QString &newValue);
+	void openObservations();
 	void sessionSelected(const QModelIndex &index);
 	void siteChanged(const QString &newValue);
 	void weatherTextChanged();
@@ -65,12 +67,11 @@ protected:
 	void teardownConnections();
 	
 private:
-	int lastSessionRowNumberSelected;
-	QMap<QString, QSqlTableModel *> tableModels;
-	QMap<QString, FieldConcatModel *> fieldModels;
-	QSqlRelationalTableModel *observationsModel;
-	FieldConcatModel *observationsListModel;
-	Ui_SessionsDialog* ui;
+	QMap<QString, FieldConcatModel *>	fieldModels;
+	int									lastSessionRowNumberSelected;
+	QSqlRelationalTableModel*			observationsModel;
+	QMap<QString, QSqlTableModel *>		tableModels;
+	Ui_SessionsDialog*					ui;
 };
 
 #endif // _SESSIONSDIALOG_HPP_

@@ -84,7 +84,6 @@ private:
 	bool processSqlFile(QString &fileName);
 
 	LogBookConfigDialog *configDialog;
-	ObservationsDialog *observationsDialog;
 	SessionsDialog *sessionsDialog;
 	TargetsDialog *targetsDialog;
 

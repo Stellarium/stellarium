@@ -68,6 +68,7 @@ void StelDialogLogBook::close()
 	setVisible(false);
 	StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
 	((QGraphicsWidget*)StelMainGraphicsView::getInstance().getStelAppGraphicsWidget())->setFocus(Qt::OtherFocusReason);
+	emit(dialogClosed(this));
 }
 
 void StelDialogLogBook::setVisible(bool v)

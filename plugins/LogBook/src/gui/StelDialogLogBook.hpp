@@ -39,6 +39,7 @@ public slots:
 	void close();
 signals:
 	void visibleChanged(bool);
+	void dialogClosed(StelDialogLogBook *);
 	
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots

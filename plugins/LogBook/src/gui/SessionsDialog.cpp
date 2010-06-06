@@ -20,6 +20,7 @@
 
 #include "FieldConcatModel.hpp"
 #include "LogBookCommon.hpp"
+#include "ObservationsDialog.hpp"
 #include "StelApp.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "ui_SessionsDialog.h"
@@ -87,8 +88,8 @@ void SessionsDialog::commentsTextChanged()
 		if (!tableModels[SESSIONS]->submit()) {
 			qWarning() << "LogBook: could not update session.  Error is: " << tableModels[SESSIONS]->lastError();
 		}
+		ui->sessionsListView->setCurrentIndex(tableModels[SESSIONS]->index(lastSessionRowNumberSelected, 1));
 	}
-	ui->sessionsListView->setCurrentIndex(tableModels[SESSIONS]->index(lastSessionRowNumberSelected, 1));
 }
 
 void SessionsDialog::deleteSelectedSession()
@@ -110,13 +111,9 @@ void SessionsDialog::insertNewSession()
 	field1.setValue(QVariant(dateTime.toString("yyyy/MM/dd HH:mm")));
 	dateTime = dateTime.addSecs(60*60);
 	field2.setValue(QVariant(dateTime.toString("yyyy/MM/dd HH:mm")));
-	//	field3.setValue(QVariant(1));
-	//	field4.setValue(QVariant(1));
 	QSqlRecord newRecord = QSqlRecord();
 	newRecord.append(field1);
 	newRecord.append(field2);
-	//	newRecord.append(field3);
-	//	newRecord.append(field4);
 	
 	if (tableModels[SESSIONS]->insertRecord(-1, newRecord)) {
 		ui->sessionsListView->setCurrentIndex(tableModels[SESSIONS]->index(tableModels[SESSIONS]->rowCount() - 1, 1));
@@ -151,10 +148,16 @@ void SessionsDialog::endDateTimeChanged(const QDateTime &datetime)
 	ui->sessionsListView->setCurrentIndex(tableModels[SESSIONS]->index(lastSessionRowNumberSelected, 1));
 }
 
+void SessionsDialog::observationWindowClosed(StelDialogLogBook* theDialog)
+{
+	disconnect(theDialog, SIGNAL(dialogClosed(StelDialogLogBook *)), this, SLOT(observationWindowClosed(StelDialogLogBook *)));
+	delete theDialog;
+}
+
 void SessionsDialog::observerChanged(const QString &newValue)
 {
 	QSqlRecord record = currentSessionRecord();
-	int newIndex = fieldModels[QString(SESSIONS) + QString(OBSERVERS)]->idForDisplayString(newValue);
+	int newIndex = fieldModels[QString(OBSERVERS)]->idForDisplayString(newValue);
 	
 	if (!record.isEmpty() && record.value("observer_id").toInt() != newIndex) {
 		record.setValue("observer_id", newIndex);
@@ -164,6 +167,14 @@ void SessionsDialog::observerChanged(const QString &newValue)
 		}
 	}
 	ui->sessionsListView->setCurrentIndex(tableModels[SESSIONS]->index(lastSessionRowNumberSelected, 1));
+}
+
+void SessionsDialog::openObservations()
+{
+	int sessionID = currentSessionRecord().value("session_id").toInt();
+	ObservationsDialog* observationsDialog = new ObservationsDialog(tableModels, sessionID);
+	connect(observationsDialog, SIGNAL(dialogClosed(StelDialogLogBook *)), this, SLOT(observationWindowClosed(StelDialogLogBook *)));
+	observationsDialog->setVisible(true);
 }
 
 void SessionsDialog::sessionSelected(const QModelIndex &index)
@@ -239,11 +250,11 @@ void SessionsDialog::populateFormWithSessionIndex(const QModelIndex &index)
 		ui->commentsTextEdit->setPlainText(record.value("comments").toString());
 		
 		QModelIndexList list1 
-		= tableModels[OBSERVERS]->match(tableModels[OBSERVERS]->index(0, 0), Qt::DisplayRole, record.value("observer_id"));
+			= tableModels[OBSERVERS]->match(tableModels[OBSERVERS]->index(0, 0), Qt::DisplayRole, record.value("observer_id"));
 		QSqlRecord typeRecord1 = tableModels[OBSERVERS]->record(list1[0].row());
 		ui->observerComboBox
-		->setCurrentIndex(ui->observerComboBox
-						  ->findText(fieldModels[QString(SESSIONS) + QString(OBSERVERS)]->displayStringForRecord(typeRecord1)));
+			->setCurrentIndex(ui->observerComboBox
+							  ->findText(fieldModels[QString(OBSERVERS)]->displayStringForRecord(typeRecord1)));
 		
 		list1 = tableModels[SITES]->match(tableModels[SITES]->index(0, 0), Qt::DisplayRole, record.value("site_id"));
 		typeRecord1 = tableModels[SITES]->record(list1[0].row());
@@ -257,54 +268,45 @@ void SessionsDialog::setupConnections()
 {
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->addSessionButton, SIGNAL(clicked()), this, SLOT(insertNewSession()));
-	connect(ui->sessionsListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)), 
-			this, SLOT(sessionSelected(QModelIndex)));
+	connect(ui->openSessionButton, SIGNAL(clicked()), this, SLOT(openObservations()));
+	connect(ui->sessionsListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),  this, 
+			SLOT(sessionSelected(QModelIndex)));
 	
-	connect(ui->beginDateTimeEdit, SIGNAL(dateTimeChanged(const QDateTime&)), 
-			this, SLOT(beginDateTimeChanged(const QDateTime&)));
+	connect(ui->beginDateTimeEdit, SIGNAL(dateTimeChanged(const QDateTime&)), this, SLOT(beginDateTimeChanged(const QDateTime&)));
 	connect(ui->endDateTimeEdit, SIGNAL(dateTimeChanged(const QDateTime&)), this, SLOT(endDateTimeChanged(const QDateTime&)));
 	connect(ui->observerComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(observerChanged(const QString&)));
 	connect(ui->siteComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(siteChanged(const QString&)));
 	connect(ui->weatherTextEdit, SIGNAL(editingFinished()), this, SLOT(weatherTextChanged()));
-	connect(ui->commentsTextEdit, SIGNAL(editingFinished()), this, SLOT(commentsTextChanged()));
-	
+	connect(ui->commentsTextEdit, SIGNAL(editingFinished()), this, SLOT(commentsTextChanged()));	
 }
 
 void SessionsDialog::setupModels()
 {
-	fieldModels[QString(SESSIONS) + QString(OBSERVERS)] 
-		= new FieldConcatModel(tableModels[OBSERVERS], QStringList() << "surname" << "name", ", " , this);
+	fieldModels[QString(OBSERVERS)] = new FieldConcatModel(tableModels[OBSERVERS], QStringList() << "surname" << "name", ", " , this);
 	fieldModels[SESSIONS] = new FieldConcatModel(tableModels[SESSIONS], QStringList() << "begin" << "end", " to " , this);
 
 	ui->siteComboBox->setModel(tableModels[SITES]);
 	ui->siteComboBox->setModelColumn(1);
-	
-	ui->observerComboBox->setModel(fieldModels[QString(SESSIONS) + QString(OBSERVERS)]);
+
+	ui->observerComboBox->setModel(fieldModels[QString(OBSERVERS)]);
 	ui->observerComboBox->setModelColumn(1);
-	
-	
+
 	ui->sessionsListView->setModel(fieldModels[SESSIONS]);
 	ui->sessionsListView->setModelColumn(1);
-	
-	QSqlDatabase db = QSqlDatabase::database("LogBook");
-	observationsModel = new QSqlRelationalTableModel(this, db);
-	observationsModel->setTable(OBSERVATIONS);
-	observationsModel->setRelation(3, QSqlRelation(TARGETS, "target_id", "name"));
-	observationsListModel = new FieldConcatModel(observationsModel, QStringList() << "name" << "begin", " at " , this);
 }
 
 void SessionsDialog::teardownConnections()
 {
 	disconnect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	disconnect(ui->addSessionButton, SIGNAL(clicked()), this, SLOT(insertNewSession()));
-	disconnect(ui->sessionsListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)), 
-			   this, SLOT(sessionSelected(QModelIndex)));
+	disconnect(ui->openSessionButton, SIGNAL(clicked()), this, SLOT(openObservations()));
+	disconnect(ui->sessionsListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)), this, 
+			   SLOT(sessionSelected(QModelIndex)));
 	
 	disconnect(ui->beginDateTimeEdit, SIGNAL(dateTimeChanged(const QDateTime&)), this, SLOT(beginDateTimeChanged(const QDateTime&)));
 	disconnect(ui->endDateTimeEdit, SIGNAL(dateTimeChanged(const QDateTime&)), this, SLOT(endDateTimeChanged(const QDateTime&)));
 	disconnect(ui->observerComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(observerChanged(const QString&)));
 	disconnect(ui->siteComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(siteChanged(const QString&)));
 	disconnect(ui->weatherTextEdit, SIGNAL(editingFinished()), this, SLOT(weatherTextChanged()));
-	disconnect(ui->commentsTextEdit, SIGNAL(editingFinished()), this, SLOT(commentsTextChanged()));
-	
+	disconnect(ui->commentsTextEdit, SIGNAL(editingFinished()), this, SLOT(commentsTextChanged()));	
 }
