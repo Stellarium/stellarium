@@ -69,7 +69,7 @@ protected:
 private:
 	QMap<QString, FieldConcatModel *>	fieldModels;
 	int									lastSessionRowNumberSelected;
-	QSqlRelationalTableModel*			observationsModel;
+	QSqlRelationalTableModel*			sessionsModel;
 	QMap<QString, QSqlTableModel *>		tableModels;
 	Ui_SessionsDialog*					ui;
 };

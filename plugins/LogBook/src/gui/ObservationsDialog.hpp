@@ -73,7 +73,6 @@ protected:
 private:
 	QMap<QString, FieldConcatModel *>	fieldModels;
 	int									lastObservationRowNumberSelected;
-	FieldConcatModel*					observationsListModel;
 	QSqlRelationalTableModel*			observationsModel;
 	int									sessionKey;
 	QMap<QString, QSqlTableModel *>		tableModels;

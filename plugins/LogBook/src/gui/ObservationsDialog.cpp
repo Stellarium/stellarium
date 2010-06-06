@@ -108,6 +108,19 @@ void ObservationsDialog::barlowChanged(const QString &newValue)
 	ui->observationsListView->setCurrentIndex(tableModels[OBSERVATIONS]->index(lastObservationRowNumberSelected, 1));
 }
 
+void ObservationsDialog::beginDateTimeChanged(const QDateTime &datetime)
+{
+	QSqlRecord record = currentObservationRecord();
+	if (!record.isEmpty() && record.value("begin") != datetime.toString("yyyy/MM/dd HH:mm")) {
+		record.setValue("begin", datetime.toString("yyyy/MM/dd HH:mm"));
+		tableModels[OBSERVATIONS]->setRecord(lastObservationRowNumberSelected, record);
+		if (!tableModels[OBSERVATIONS]->submit()) {
+			qWarning() << "LogBook: could not update observation.  Error is: " << tableModels[OBSERVATIONS]->lastError();
+		}
+	}
+	ui->observationsListView->setCurrentIndex(tableModels[OBSERVATIONS]->index(lastObservationRowNumberSelected, 1));
+}
+
 void ObservationsDialog::deleteSelectedObservation()
 {
 	QModelIndex selection = ui->observationsListView->currentIndex();
@@ -115,6 +128,19 @@ void ObservationsDialog::deleteSelectedObservation()
 		observationsModel->removeRows(selection.row(), 1);
 		ui->observationsListView->setCurrentIndex(observationsModel->index(0, 1));
 	}
+}
+
+void ObservationsDialog::endDateTimeChanged(const QDateTime &datetime)
+{
+	QSqlRecord record = currentObservationRecord();
+	if (!record.isEmpty() && record.value("end") != datetime.toString("yyyy/MM/dd HH:mm")) {
+		record.setValue("end", datetime.toString("yyyy/MM/dd HH:mm"));
+		tableModels[OBSERVATIONS]->setRecord(lastObservationRowNumberSelected, record);
+		if (!tableModels[OBSERVATIONS]->submit()) {
+			qWarning() << "LogBook: could not update observation.  Error is: " << tableModels[OBSERVATIONS]->lastError();
+		}
+	}
+	ui->observationsListView->setCurrentIndex(tableModels[OBSERVATIONS]->index(lastObservationRowNumberSelected, 1));
 }
 
 void ObservationsDialog::filterChanged(const QString &newValue)
@@ -223,32 +249,6 @@ void ObservationsDialog::ocularChanged(const QString &newValue)
 	ui->observationsListView->setCurrentIndex(tableModels[OBSERVATIONS]->index(lastObservationRowNumberSelected, 1));
 }
 
-void ObservationsDialog::beginDateTimeChanged(const QDateTime &datetime)
-{
-	QSqlRecord record = currentObservationRecord();
-	if (!record.isEmpty() && record.value("begin") != datetime.toString("yyyy/MM/dd HH:mm")) {
-		record.setValue("begin", datetime.toString("yyyy/MM/dd HH:mm"));
-		tableModels[OBSERVATIONS]->setRecord(lastObservationRowNumberSelected, record);
-		if (!tableModels[OBSERVATIONS]->submit()) {
-			qWarning() << "LogBook: could not update observation.  Error is: " << tableModels[OBSERVATIONS]->lastError();
-		}
-	}
-	ui->observationsListView->setCurrentIndex(tableModels[OBSERVATIONS]->index(lastObservationRowNumberSelected, 1));
-}
-
-void ObservationsDialog::endDateTimeChanged(const QDateTime &datetime)
-{
-	QSqlRecord record = currentObservationRecord();
-	if (!record.isEmpty() && record.value("end") != datetime.toString("yyyy/MM/dd HH:mm")) {
-		record.setValue("end", datetime.toString("yyyy/MM/dd HH:mm"));
-		tableModels[OBSERVATIONS]->setRecord(lastObservationRowNumberSelected, record);
-		if (!tableModels[OBSERVATIONS]->submit()) {
-			qWarning() << "LogBook: could not update observation.  Error is: " << tableModels[OBSERVATIONS]->lastError();
-		}
-	}
-	ui->observationsListView->setCurrentIndex(tableModels[OBSERVATIONS]->index(lastObservationRowNumberSelected, 1));
-}
-
 void ObservationsDialog::observerChanged(const QString &newValue)
 {
 	QSqlRecord record = currentObservationRecord();
@@ -330,9 +330,8 @@ void ObservationsDialog::createDialogContent()
 	setupModels();
 	setupConnections();
 
-	lastObservationRowNumberSelected = 1;
 	// Now select the first one, which causes it to populate
-	ui->observationsListView->setCurrentIndex(observationsListModel->index(lastObservationRowNumberSelected, 1));
+	ui->observationsListView->setCurrentIndex(fieldModels[OBSERVATIONS]->index(lastObservationRowNumberSelected, 1));
 }
 
 QSqlRecord ObservationsDialog::currentObservationRecord()
@@ -417,6 +416,16 @@ void ObservationsDialog::setupConnections()
 
 void ObservationsDialog::setupModels()
 {
+	QSqlDatabase db = QSqlDatabase::database("LogBook");
+	// We want the relational table model so we can join the target name with the date in the display string
+	observationsModel = new QSqlRelationalTableModel(this, db);
+	observationsModel->setTable(OBSERVATIONS);
+	observationsModel->setObjectName("Observations Table Model");
+	observationsModel->setRelation(3, QSqlRelation(TARGETS, "target_id", "name"));
+	observationsModel->setEditStrategy(QSqlTableModel::OnFieldChange);
+	observationsModel->setFilter(QString("session_id = %1").arg(sessionKey));
+	observationsModel->select();
+	
 	fieldModels[QString(OBSERVERS)] = new FieldConcatModel(tableModels[OBSERVERS], QStringList() << "surname" << "name", ", " , this);
 	fieldModels[OPTICS] = new FieldConcatModel(tableModels[OPTICS], QStringList() << "model" << "vendor", " | " , this);
 	fieldModels[OCULARS] = new FieldConcatModel(tableModels[OCULARS], QStringList() << "model" << "vendor", " | " , this);
@@ -424,6 +433,7 @@ void ObservationsDialog::setupModels()
 	fieldModels[FILTERS] = new FieldConcatModel(tableModels[FILTERS], QStringList() << "type" << "vendor", " | " , this);
 	fieldModels[TARGETS] = new FieldConcatModel(tableModels[TARGETS], QStringList() << "name" << "alias", " | " , this);
 	fieldModels[IMAGERS] = new FieldConcatModel(tableModels[IMAGERS], QStringList() << "model" << "vendor", " | " , this);
+	fieldModels[OBSERVATIONS] = new FieldConcatModel(observationsModel, QStringList() << "name" << "begin", " at " , this);
 	
 	ui->observerComboBox->setModel(fieldModels[QString(OBSERVERS)]);
 	ui->observerComboBox->setModelColumn(1);
@@ -453,19 +463,7 @@ void ObservationsDialog::setupModels()
 	ui->imagerComboBox->setModelColumn(1);
 	ui->imagerComboBox->setCurrentIndex(-1);
 
-
-	QSqlDatabase db = QSqlDatabase::database("LogBook");
-	// We want the relational table model so we can join the target name with the date in the display string
-	observationsModel = new QSqlRelationalTableModel(this, db);
-	observationsModel->setTable(OBSERVATIONS);
-	observationsModel->setObjectName("Observations Table Model");
-	observationsModel->setRelation(3, QSqlRelation(TARGETS, "target_id", "name"));
-	observationsModel->setEditStrategy(QSqlTableModel::OnFieldChange);
-	observationsModel->setFilter(QString("session_id = %1").arg(sessionKey));
-	observationsModel->select();
-
-	observationsListModel = new FieldConcatModel(observationsModel, QStringList() << "name" << "begin", " at " , this);
-	ui->observationsListView->setModel(observationsListModel);
+	ui->observationsListView->setModel(fieldModels[OBSERVATIONS]);
 	ui->observationsListView->setModelColumn(1);
 }
 
