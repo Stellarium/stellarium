@@ -36,6 +36,9 @@ StelLocationMgr::StelLocationMgr()
 
 	modelAllLocation = new QStringListModel(this);
 	modelAllLocation->setStringList(locations.keys());
+	
+	// Init to Paris France because it's the center of the world.
+	lastResortLocation = locationForSmallString("Paris, France");
 }
 
 void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool isUserLocation, const QString& binFilePath) const
@@ -154,37 +157,48 @@ StelLocationMgr::~StelLocationMgr()
 {
 }
 
-const StelLocation StelLocationMgr::locationForSmallString(const QString& s) const
+const StelLocation StelLocationMgr::locationForSmallString(const QString& s, bool* ok) const
 {
 	QMap<QString, StelLocation>::const_iterator iter = locations.find(s);
 	if (iter==locations.end())
 	{
-		qWarning() << "Warning: location" << s << "is unknown";
-		StelLocation ret = locations["Paris, France"];
-		ret.name = "";
-		ret.country = "";
-		return ret;
+		if (ok)
+			*ok=false;
+		return lastResortLocation;
 	}
 	else
 	{
+		if (ok)
+			*ok = true;
 		return locations.value(s);
 	}
 }
 
-const StelLocation StelLocationMgr::locationForString(const QString& s) const
+const StelLocation StelLocationMgr::locationForString(const QString& s, bool* ok) const
 {
-	StelLocation ret = locationForSmallString(s);
-	if (!ret.name.isEmpty())
+	bool myOk;
+	StelLocation ret = locationForSmallString(s, &myOk);
+	if (myOk)
+	{
+		if (ok)
+			*ok=true;
 		return ret;
+	}
 	// Maybe it is a coordinate set ? (e.g. GPS +41d51'00" -51d00'00" )
 	QRegExp reg("(.*)([\\+\\-](?:\\d+)d(?:\\d+)'(?:\\d+)\") ([\\+\\-](?:\\d+)d(?:\\d+)'(?:\\d+)\")");
 	reg.setMinimal(true);
 	if (!reg.exactMatch(s))
+	{
+		if (ok)
+			*ok=false;
 		return ret;
+	}
 	// We have a set of coordinates
 	ret.name = reg.capturedTexts()[1].trimmed();
 	ret.latitude = StelUtils::dmsStrToRad(reg.capturedTexts()[2]) * 180 / M_PI;
 	ret.longitude = StelUtils::dmsStrToRad(reg.capturedTexts()[3]) * 180 / M_PI;
+	if (ok)
+		*ok=true;
 	return ret;
 }
 

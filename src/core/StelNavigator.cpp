@@ -59,10 +59,13 @@ void StelNavigator::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	defaultLocationID = conf->value("init_location/location","Paris, Paris, France").toString();
-	StelLocation location = StelApp::getInstance().getLocationMgr().locationForString(defaultLocationID);
-	if (location.name == "")
-		location = StelApp::getInstance().getLocationMgr().locationForSmallString("Paris, France");
+	defaultLocationID = conf->value("init_location/location","error").toString();
+	bool ok;
+	StelLocation location = StelApp::getInstance().getLocationMgr().locationForString(defaultLocationID, &ok);
+	if (!ok)
+	{
+		qWarning() << "Warning: location" << defaultLocationID << "is unknown.";
+	}
 	position = new StelObserver(location);
 
 	setTimeNow();
@@ -71,7 +74,6 @@ void StelNavigator::init()
 
 	// we want to be able to handle the old style preset time, recorded as a double
 	// jday, or as a more human readable string...
-	bool ok;
 	QString presetTimeStr = conf->value("navigation/preset_sky_time",2451545.).toString();
 	presetSkyTime = presetTimeStr.toDouble(&ok);
 	if (ok)
