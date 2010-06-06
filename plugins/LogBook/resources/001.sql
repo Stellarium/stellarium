@@ -1,7 +1,7 @@
 create table logbook_system (last_script_run INT NOT NULL);
 create table observers (observer_id INTEGER PRIMARY KEY, name VARCHAR NOT NULL, surname VARCHAR NOT NULL);
 create table sites (site_id INTEGER PRIMARY KEY, name VARCHAR NOT NULL, longitude DOUBLE, latitude DOUBLE, elevation INT, timezone_offset FLOAT);
-create table sessions (session_id INTEGER PRIMARY KEY, begin VARCHAR, end VARCHAR, site_id INT REFERENCES sites(site_id), observer_id INT REFERENCES observers(observer_id), weather TEXT, comments TEXT);
+create table sessions (session_id INTEGER PRIMARY KEY, begin VARCHAR, end VARCHAR, site_id INT REFERENCES sites(site_id) NOT NULL, observer_id INT REFERENCES observers(observer_id), weather TEXT, comments TEXT);
 create table target_types (target_type_id INTEGER PRIMARY KEY, type VARCHAR NOT NULL);
 create table targets (target_id INTEGER PRIMARY KEY, name VARCHAR NOT NULL, alias VARCHAR, right_ascension DOUBLE NOT NULL, declination DOUBLE NOT NULL, constellation VARCHAR, target_type_id INT NOT NULL REFERENCES target_types(target_type_id), magnitude DOUBLE, size DOUBLE, distance DOUBLE, catalog_number VARCHAR, notes TEXT);
 create table optics (optic_id INTEGER PRIMARY KEY, model VARCHAR NOT NULL, vendor VARCHAR, type VARCHAR, focal_length FLOAT NOT NULL, aperture FLOAT NOT NULL, hFlip BOOLEAN, vFlip BOOLEAN, light_transmission FLOAT);
