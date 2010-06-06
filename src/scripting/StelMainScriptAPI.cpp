@@ -162,10 +162,10 @@ void StelMainScriptAPI::setObserverLocation(const QString id, float duration)
 {
 	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	Q_ASSERT(nav);
-	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForSmallString(id);
-	if (loc.name=="")
-		return;	// location find fail
-
+	bool ok;
+	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForSmallString(id, &ok);
+	if (!ok)
+		return;	// location find failed
 	nav->moveObserverTo(loc, duration);
 }
 

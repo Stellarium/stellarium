@@ -47,11 +47,14 @@ public:
 
 	//! Return the StelLocation for a given string
 	//! Can match location name, or coordinates
-	const StelLocation locationForString(const QString& s) const;
+	const StelLocation locationForString(const QString& s, bool* ok=NULL) const;
 
 	//! Return the StelLocation for the given row (match modelAllLocation index row)
-	const StelLocation locationForSmallString(const QString& s) const;
+	const StelLocation locationForSmallString(const QString& s, bool* ok=NULL) const;
 
+	//! Return a valid location when no valid one was found.
+	const StelLocation& getLastResortLocation() const {return lastResortLocation;}
+	
 	//! Get whether a location can be permanently added to the list of user locations
 	//! The main constraint is that the small string must be unique
 	bool canSaveUserLocation(const StelLocation& loc) const;
@@ -82,6 +85,8 @@ private:
 
 	//! The list of all loaded locations
 	QMap<QString, StelLocation> locations;
+	
+	StelLocation lastResortLocation;
 };
 
 #endif // _STELLOCATIONMGR_HPP_
