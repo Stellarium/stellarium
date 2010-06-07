@@ -827,6 +827,7 @@ void Oculars::paintMask()
 	// draw sensor rectangle
 	CCD *ccd = CCDs[selectedCCDIndex];
 	if (ccd) {
+		glColor4f(0.77, 0.14, 0.16, 0.5);
 		Ocular *ocular = oculars[selectedOcularIndex];
 		float CCDx = ccd->getActualFOVx(ocular);
 		float CCDy = ccd->getActualFOVy(ocular);
