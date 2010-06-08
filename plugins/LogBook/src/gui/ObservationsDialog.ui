@@ -502,13 +502,13 @@
         <attribute name="title">
          <string>Notes</string>
         </attribute>
-        <widget class="LogBookTextEdit" name="observationNotesTextEdit">
+        <widget class="LogBookTextEdit" name="notesTextEdit">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>0</y>
            <width>501</width>
-           <height>381</height>
+           <height>121</height>
           </rect>
          </property>
          <property name="maximumSize">

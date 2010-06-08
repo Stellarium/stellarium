@@ -35,6 +35,7 @@
 #include "StelObjectType.hpp"
 #include "StelProjector.hpp"
 #include "StelPainter.hpp"
+#include "StelStyle.hpp"
 #include "StelTranslator.hpp"
 
 #include <QAction>
@@ -118,6 +119,11 @@ bool LogBook::configureGui(bool)
 	return true;
 }
 
+void LogBook::draw(StelCore* core)
+{
+	StelPainter painter(core->getProjection2d());
+}
+
 double LogBook::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw) {
@@ -126,10 +132,34 @@ double LogBook::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
+const StelStyle LogBook::getModuleStyleSheet(const StelStyle& style)
+{
+	StelStyle pluginStyle(style);
+	if (style.confSectionName == "color") {
+		pluginStyle.qtStyleSheet.append(normalStyleSheet);
+	} else {
+		pluginStyle.qtStyleSheet.append(nightStyleSheet);
+	}
+	return pluginStyle;
+}
+
 void LogBook::init()
 {
 	qDebug() << "LogBook plugin - press Command-L to toggle Log Book view mode. Press ALT-L for configuration.";
 	initializeDatabase();
+	//Load the module's custom style sheets
+	QFile styleSheetFile;
+	styleSheetFile.setFileName(":/logbook/normalStyle.css");
+	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text)){
+		normalStyleSheet = styleSheetFile.readAll();
+	}
+	styleSheetFile.close();
+	styleSheetFile.setFileName(":/logbook/nightStyle.css");
+	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text)){
+		nightStyleSheet = styleSheetFile.readAll();
+	}
+	styleSheetFile.close();
+
 	configDialog = new LogBookConfigDialog(tableModels);
 	sessionsDialog = new SessionsDialog(tableModels);
 	targetsDialog = new TargetsDialog(tableModels);
@@ -137,13 +167,12 @@ void LogBook::init()
 	initializeActions();
 }
 
-void LogBook::draw(StelCore* core)
+void LogBook::setStelStyle(const QString&)
 {
-	StelPainter painter(core->getProjection2d());
-}
-
-void LogBook::setStelStyle(const QString& )
-{
+	qDebug() << "====> Here.";
+	configDialog->updateStyle();
+	sessionsDialog->updateStyle();
+	targetsDialog->updateStyle();
 }
 
 /* ********************************************************************* */

@@ -19,9 +19,15 @@
 #include "ObservationsDialog.hpp"
 
 #include "FieldConcatModel.hpp"
+#include "LogBook.hpp"
 #include "LogBookCommon.hpp"
+
 #include "StelApp.hpp"
+#include "StelGui.hpp"
 #include "StelMainGraphicsView.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelStyle.hpp"
+
 #include "ui_ObservationsDialog.h"
 
 #include <QDateTime>
@@ -71,6 +77,18 @@ void ObservationsDialog::languageChanged()
 void ObservationsDialog::styleChanged()
 {
 	// Nothing for now
+}
+
+void ObservationsDialog::updateStyle()
+{
+	if(dialog) {
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
+		const StelStyle pluginStyle = GETSTELMODULE(LogBook)->getModuleStyleSheet(gui->getStelStyle());
+		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
+		ui->accessoriesTextEdit->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
+		ui->notesTextEdit->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
+	}
 }
 
 /* ********************************************************************* */
@@ -332,6 +350,9 @@ void ObservationsDialog::createDialogContent()
 
 	// Now select the first one, which causes it to populate
 	ui->observationsListView->setCurrentIndex(fieldModels[OBSERVATIONS]->index(lastObservationRowNumberSelected, 1));
+
+	//Initialize the style
+	updateStyle();
 }
 
 QSqlRecord ObservationsDialog::currentObservationRecord()
@@ -352,7 +373,7 @@ void ObservationsDialog::populateFormWithObservationIndex(const QModelIndex &ind
 		ui->beginDateTimeEdit->setDateTime(QDateTime::fromString(record.value("begin").toString(), "yyyy/MM/dd HH:mm"));
 		ui->endDateTimeEdit->setDateTime(QDateTime::fromString(record.value("end").toString(), "yyyy/MM/dd HH:mm"));
 		ui->accessoriesTextEdit->setPlainText(record.value("accessories").toString());
-		ui->observationNotesTextEdit->setPlainText(record.value("notes").toString());
+		ui->notesTextEdit->setPlainText(record.value("notes").toString());
 		
 		QModelIndexList list1 
 			= tableModels[OBSERVERS]->match(tableModels[OBSERVERS]->index(0, 0), Qt::DisplayRole, record.value("observer_id"));
@@ -411,7 +432,7 @@ void ObservationsDialog::setupConnections()
 	connect(ui->beginDateTimeEdit, SIGNAL(dateTimeChanged(const QDateTime&)), this, SLOT(beginDateTimeChanged(const QDateTime&)));
 	connect(ui->endDateTimeEdit, SIGNAL(dateTimeChanged(const QDateTime&)), this, SLOT(endDateTimeChanged(const QDateTime&)));
 	connect(ui->accessoriesTextEdit, SIGNAL(editingFinished()), this, SLOT(accessoriesTextChanged()));
-	connect(ui->observationNotesTextEdit, SIGNAL(editingFinished()), this, SLOT(notesTextChanged()));
+	connect(ui->notesTextEdit, SIGNAL(editingFinished()), this, SLOT(notesTextChanged()));
 }
 
 void ObservationsDialog::setupModels()
@@ -486,5 +507,5 @@ void ObservationsDialog::teardownConnections()
 	disconnect(ui->beginDateTimeEdit, SIGNAL(dateTimeChanged(const QDateTime&)), this, SLOT(beginDateTimeChanged(const QDateTime&)));
 	disconnect(ui->endDateTimeEdit, SIGNAL(dateTimeChanged(const QDateTime&)), this, SLOT(endDateTimeChanged(const QDateTime&)));
 	disconnect(ui->accessoriesTextEdit, SIGNAL(editingFinished()), this, SLOT(accessoriesTextChanged()));
-	disconnect(ui->observationNotesTextEdit, SIGNAL(editingFinished()), this, SLOT(notesTextChanged()));
+	disconnect(ui->notesTextEdit, SIGNAL(editingFinished()), this, SLOT(notesTextChanged()));
 }

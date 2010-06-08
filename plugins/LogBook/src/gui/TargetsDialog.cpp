@@ -18,15 +18,19 @@
 
 #include "TargetsDialog.hpp"
 #include "LogBookCommon.hpp"
+#include "LogBook.hpp"
 #include "ui_TargetsDialog.h"
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelGui.hpp"
 #include "StelMainGraphicsView.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelObjectType.hpp"
 #include "StelMainScriptAPI.hpp"
-//#include "StelTranslator.hpp"
+#include "StelStyle.hpp"
+#include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 
 #include <QDebug>
@@ -70,6 +74,17 @@ void TargetsDialog::languageChanged()
 void TargetsDialog::styleChanged()
 {
 	// Nothing for now
+}
+
+void TargetsDialog::updateStyle()
+{
+	if(dialog) {
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
+		const StelStyle pluginStyle = GETSTELMODULE(LogBook)->getModuleStyleSheet(gui->getStelStyle());
+		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
+		ui->notesTextEdit->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
+	}
 }
 
 /* ********************************************************************* */
@@ -346,6 +361,9 @@ void TargetsDialog::createDialogContent()
 	
 	setupConnections();
 	ui->targetsListView->setCurrentIndex(tableModel->index(0, 1));	
+
+	//Initialize the style
+	updateStyle();
 }
 
 QSqlRecord TargetsDialog::currentRecord()
