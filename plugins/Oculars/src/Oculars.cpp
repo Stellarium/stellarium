@@ -143,6 +143,13 @@ bool Oculars::configureGui(bool show)
 	return ready;
 }
 
+void Oculars::deinit()
+{
+	QSqlDatabase db = QSqlDatabase::database("oculars");
+	db.close();
+	QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection);
+}
+
 //! Draw any parts on the screen which are for our module
 void Oculars::draw(StelCore* core)
 {
@@ -198,6 +205,17 @@ double Oculars::getCallOrder(StelModuleActionName actionName) const
 	return order;
 }
 
+const StelStyle Oculars::getModuleStyleSheet(const StelStyle& style)
+{
+	StelStyle pluginStyle(style);
+	if (style.confSectionName == "color") {
+		pluginStyle.qtStyleSheet.append(normalStyleSheet);
+	} else{
+		pluginStyle.qtStyleSheet.append(nightStyleSheet);
+	}
+	return pluginStyle;
+}
+
 void Oculars::handleMouseClicks(class QMouseEvent* event)
 {
 	StelCore *core = StelApp::getInstance().getCore();
@@ -231,7 +249,7 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 
 void Oculars::init()
 {
-	qDebug() << "Ocular plugin - press Command-o to toggle eyepiece view mode. Press ALT-o for configuration.";
+	qDebug() << "Ocular plugin - press Command-O to toggle eyepiece view mode. Press ALT-o for configuration.";
 
 	// Load settings from ocular.ini
 	validateIniFile();
@@ -267,30 +285,10 @@ void Oculars::init()
 	styleSheetFile.close();
 }
 
-void Oculars::deinit()
-{
-	QSqlDatabase db = QSqlDatabase::database("oculars");
-	db.close();
-	QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection);
-}
-
 void Oculars::setStelStyle(const QString&)
 {
+	qDebug() << "====> Oculars here.";
 	ocularDialog->updateStyle();
-}
-
-const StelStyle Oculars::getModuleStyleSheet(const StelStyle& style)
-{
-	StelStyle pluginStyle(style);
-	if (style.confSectionName == "color")
-	{
-		pluginStyle.qtStyleSheet.append(normalStyleSheet);
-	}
-	else
-	{
-		pluginStyle.qtStyleSheet.append(nightStyleSheet);
-	}
-	return pluginStyle;
 }
 
 /* ********************************************************************* */

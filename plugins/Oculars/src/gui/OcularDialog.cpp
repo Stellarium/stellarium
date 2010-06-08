@@ -114,6 +114,11 @@ void OcularDialog::languageChanged()
 	}
 }
 
+void OcularDialog::styleChanged()
+{
+	// Nothing for now
+}
+
 void OcularDialog::updateStyle()
 {
 	if(dialog) {
@@ -123,11 +128,6 @@ void OcularDialog::updateStyle()
 		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
 		ui->textBrowser->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
 	}
-}
-
-void OcularDialog::styleChanged()
-{
-	// Nothing for now
 }
 
 /* ********************************************************************* */
