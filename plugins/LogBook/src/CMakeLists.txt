@@ -15,8 +15,6 @@ SET(LogBook_SRCS
 	LogBook.hpp
 	LogBook.cpp
 	LogBookCommon.hpp
-	gui/LogBookDialog.hpp
-	gui/LogBookDialog.cpp
 	gui/LogBookConfigDialog.hpp
 	gui/LogBookConfigDialog.cpp
 	gui/ObservationsDialog.hpp
@@ -69,7 +67,6 @@ SET(LogBook_UIS
 	gui/BarlowsWidget.ui
 	gui/FiltersWidget.ui
 	gui/ImagersWidget.ui
-	gui/LogBookDialog.ui
 	gui/LogBookConfigDialog.ui
 	gui/ObservationsDialog.ui
 	gui/ObserversWidget.ui
@@ -85,7 +82,6 @@ QT4_WRAP_UI(LogBook_UIS_H ${LogBook_UIS})
 # that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
 SET(LogBook_MOC_HDRS
 	LogBook.hpp
-	gui/LogBookDialog.hpp
 	gui/LogBookConfigDialog.hpp
 	gui/ObservationsDialog.hpp
 	gui/SessionsDialog.hpp
