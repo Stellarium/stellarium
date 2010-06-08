@@ -35,6 +35,7 @@ class QSqlTableModel;
 class QSqlQuery;
 
 class StelButton;
+class StelStyle;
 
 //! This is an example of a plug-in which can be dynamically loaded into stellarium
 class LogBook : public StelModule
@@ -49,6 +50,9 @@ public:
 	virtual bool configureGui(bool show=true);
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
+	//! Returns the module-specific style sheet.
+	//! The main StelStyle instance should be passed.
+	const StelStyle getModuleStyleSheet(const StelStyle& style);
 	virtual void init();
 	virtual void setStelStyle(const QString& section);
 	virtual void update(double) {;}
@@ -78,6 +82,10 @@ private:
 	//! Insures that the database tables exist.  It not, calls createDatabaseStructures() to create them.
 	bool initializeDatabase();
 	
+	//Styles
+	QByteArray normalStyleSheet;
+	QByteArray nightStyleSheet;
+
 	//! reads a file line by line, and calls executeSql() with each line. Blank lines or SQL comments are ignored.
 	//! @param the file name that contains the SQL.
 	//! @return true if there was no error, false if there was an error.

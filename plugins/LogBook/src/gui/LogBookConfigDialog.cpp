@@ -16,8 +16,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "LogBookConfigDialog.hpp"
+#include "LogBook.hpp"
 #include "LogBookCommon.hpp"
+#include "LogBookConfigDialog.hpp"
 #include "dataMappers/BarlowsDataMapper.hpp"
 #include "dataMappers/FiltersDataMapper.hpp"
 #include "dataMappers/ImagersDataMapper.hpp"
@@ -27,7 +28,10 @@
 #include "dataMappers/SitesDataMapper.hpp"
 
 #include "StelApp.hpp"
+#include "StelGui.hpp"
 #include "StelMainGraphicsView.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelStyle.hpp"
 #include "StelTranslator.hpp"
 
 #include "ui_LogBookConfigDialog.h"
@@ -91,10 +95,19 @@ void LogBookConfigDialog::languageChanged()
 	}
 }
 
-
 void LogBookConfigDialog::styleChanged()
 {
 	// Nothing for now
+}
+
+void LogBookConfigDialog::updateStyle()
+{
+	if(dialog) {
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
+		const StelStyle pluginStyle = GETSTELMODULE(LogBook)->getModuleStyleSheet(gui->getStelStyle());
+		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
+	}
 }
 
 /* ********************************************************************* */
@@ -121,6 +134,9 @@ void LogBookConfigDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	setupWidgets();
 	setupListViews();
+
+	//Initialize the style
+	updateStyle();
 }
 
 void LogBookConfigDialog::setupListViews()

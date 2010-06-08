@@ -44,9 +44,9 @@ public:
 	LogBookConfigDialog(QMap<QString, QSqlTableModel *> theTableModels);
 	virtual ~LogBookConfigDialog();
 	void languageChanged();
-	
 	//! Notify that the application style changed
 	void styleChanged();
+	void updateStyle();
 	
 public slots:
 	void closeWindow();

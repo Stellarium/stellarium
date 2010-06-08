@@ -37,9 +37,9 @@ public:
 	TargetsDialog(QMap<QString, QSqlTableModel *> theTableModels);
 	virtual ~TargetsDialog();
 	void languageChanged();
-	
 	//! Notify that the application style changed
 	void styleChanged();
+	void updateStyle();
 	
 public slots:
 	void aliasChanged();

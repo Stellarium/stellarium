@@ -39,9 +39,9 @@ public:
 	SessionsDialog(QMap<QString, QSqlTableModel *> theTableModels);
 	virtual ~SessionsDialog();
 	void languageChanged();
-	
 	//! Notify that the application style changed
 	void styleChanged();
+	void updateStyle();
 	
 protected slots:
 	// session slots
