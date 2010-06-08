@@ -47,11 +47,10 @@ public:
 	OcularDialog(QSqlTableModel *CCDsTableModel, QSqlTableModel *ocularsTableModel, QSqlTableModel *telescopesTableModel);
 	virtual ~OcularDialog();
 	void languageChanged();
-	void updateStyle();
-
 	//! Notify that the application style changed
 	void styleChanged();
 	void setOculars(QList<Ocular*> theOculars);
+	void updateStyle();
 
 public slots:
 	void closeWindow();

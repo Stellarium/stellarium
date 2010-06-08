@@ -56,14 +56,13 @@ public:
 	virtual bool configureGui(bool show=true);
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
-//	virtual void handleKeys(class QKeyEvent* event);
+	//! Returns the module-specific style sheet.
+	//! The main StelStyle instance should be passed.
+	virtual const StelStyle getModuleStyleSheet(const StelStyle& style);
+	//	virtual void handleKeys(class QKeyEvent* event);
 	virtual void handleMouseClicks(class QMouseEvent* event);
 	virtual void setStelStyle(const QString& style);
 	virtual void update(double) {;}
-
-	//! Returns the module-specific style sheet.
-	//! The main StelStyle instance should be passed.
-	const StelStyle getModuleStyleSheet(const StelStyle& style);
 
 public slots:
 	//! This method is called with we detect that our hot key is pressed.  It handles
