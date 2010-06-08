@@ -39,9 +39,9 @@ public:
 	ObservationsDialog(QMap<QString, QSqlTableModel *> theTableModels, int sessionID);
 	virtual ~ObservationsDialog();
 	void languageChanged();
-	
 	//! Notify that the application style changed
 	void styleChanged();
+	void updateStyle();
 	
 protected slots:
 	void accessoriesTextChanged();

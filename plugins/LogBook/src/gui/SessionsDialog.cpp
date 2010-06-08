@@ -19,10 +19,16 @@
 #include "SessionsDialog.hpp"
 
 #include "FieldConcatModel.hpp"
+#include "LogBook.hpp"
 #include "LogBookCommon.hpp"
 #include "ObservationsDialog.hpp"
+
 #include "StelApp.hpp"
+#include "StelGui.hpp"
 #include "StelMainGraphicsView.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelStyle.hpp"
+
 #include "ui_SessionsDialog.h"
 
 #include <QDateTime>
@@ -70,6 +76,18 @@ void SessionsDialog::languageChanged()
 void SessionsDialog::styleChanged()
 {
 	// Nothing for now
+}
+
+void SessionsDialog::updateStyle()
+{
+	if(dialog) {
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
+		const StelStyle pluginStyle = GETSTELMODULE(LogBook)->getModuleStyleSheet(gui->getStelStyle());
+		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
+		ui->commentsTextEdit->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
+		ui->weatherTextEdit->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
+	}
 }
 
 /* ********************************************************************* */
@@ -176,6 +194,7 @@ void SessionsDialog::openObservations()
 	int sessionID = currentSessionRecord().value("session_id").toInt();
 	ObservationsDialog* observationsDialog = new ObservationsDialog(tableModels, sessionID);
 	connect(observationsDialog, SIGNAL(dialogClosed(StelDialogLogBook *)), this, SLOT(observationWindowClosed(StelDialogLogBook *)));
+	observationsDialog->updateStyle();
 	observationsDialog->setVisible(true);
 }
 
@@ -229,6 +248,9 @@ void SessionsDialog::createDialogContent()
 	setupModels();
 	setupConnections();
 	ui->sessionsListView->setCurrentIndex(fieldModels[SESSIONS]->index(0, 1));	
+
+	//Initialize the style
+	updateStyle();
 }
 
 QSqlRecord SessionsDialog::currentSessionRecord()

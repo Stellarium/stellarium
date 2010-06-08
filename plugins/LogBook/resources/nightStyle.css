@@ -1,0 +1,48 @@
+/*
+Custom stylesheet for the Oculars plug-in,
+based on Stellarium's main stylesheet.
+
+Styles for the night-vision-friendly "night mode".
+*/
+
+QTabBar {
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(23, 0, 0), stop: 1 rgb(0, 0, 0));
+}
+
+QTabBar::tab {
+	font: bold;
+	background: rgba(0, 0, 0, 0%);
+	border: 1px solid rgba(0, 0, 0, 0%);
+	border-top: none;
+	border-bottom: none;
+	min-width: 10ex;
+	min-height: 56px;
+	padding: 6px 0px 0px 0px;
+	color: rgb(122, 0, 0);
+	font-size: 12px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+QTabBar::tab:selected {
+	border: none;
+	margin: 0px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	color: rgb(220, 223, 214);
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(70, 0, 0, 50%), stop: 1 rgba(88, 0, 0, 100%));
+	padding: 1px 0px 1px 0px;
+}
+
+QTabBar::tab:first {
+	margin-left: 11;
+}
+
+QTabBar::tab:last {
+	margin-right: 0;
+}
+
+QTabWidget::pane {
+	margin-top: 0px;
+	border-top: none;
+}
