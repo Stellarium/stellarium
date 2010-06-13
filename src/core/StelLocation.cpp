@@ -29,8 +29,8 @@ QString StelLocation::serializeToLine() const
 			.arg(country)
 			.arg(role)
 			.arg(population/1000)
-			.arg(latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 3) : QString("%1N").arg(latitude, 0, 'f', 3))
-			.arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 3) : QString("%1E").arg(longitude, 0, 'f', 3))
+			.arg(latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6))
+			.arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6))
 			.arg(altitude)
 			.arg(bortleScaleIndex)
 			.arg("")		// Reserve for time zone
