@@ -72,9 +72,6 @@ public:
 	//! Translate names.
 	virtual void updateI18n();
 
-	//! Called when a new object is selected.
-	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::ReplaceSelection);
-
 	//! Load a color scheme
 	virtual void setStelStyle(const QString& section);
 
@@ -112,6 +109,9 @@ public:
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
 
 public slots:
+	//! Called when a new object is selected.
+	void selectedObjectChange(StelModuleSelectAction action);
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Method callable from script and GUI
 	// Properties setters and getters
