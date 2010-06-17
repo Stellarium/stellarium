@@ -36,6 +36,7 @@ class StelCore;
 //! Each module is then free to manage object selection as it wants.
 class StelObjectMgr : public StelModule
 {
+	Q_OBJECT
 public:
 	StelObjectMgr();
 	virtual ~StelObjectMgr();
@@ -126,6 +127,11 @@ public:
 	//! Set the weight of the distance factor when choosing the best object to select.
 	//! Default to 1.
 	void setDistanceWeight(float newDistanceWeight) {distanceWeight=newDistanceWeight;}
+
+signals:
+	//! Indicate that the selected StelObjects has changed.
+	//! @param action define if the user requested that the objects are added to the selection or just replace it
+	void selectedObjectChanged(StelModule::StelModuleSelectAction);
 
 private:
 	// The list of StelObjectModule that are referenced in Stellarium

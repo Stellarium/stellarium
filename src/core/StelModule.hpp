@@ -111,11 +111,6 @@ public:
 		RemoveFromSelection //!< Subtract the StelObject from the current list of selected ones.
 	};
 
-	//! Indicate that the user requested selection of StelObjects.
-	//! The StelModule should then manage by themself how they handle the event
-	//! @param action define if the user requested that the objects are added to the selection or just replace it
-	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=ReplaceSelection) {Q_UNUSED(action);}
-
 	//! Load the given color style
 	//! @param section the name of the config section containing all necessary information on how to style widgets and text
 	virtual void setStelStyle(const QString& section) {Q_UNUSED(section);}
@@ -143,6 +138,12 @@ public:
 	//! @return true if the module has a configuration GUI, else false.
 	virtual bool configureGui(bool show=true) {Q_UNUSED(show); return false;}
 
+	//! Create any QActions and buttons for the toolbar that this module uses.  No actions should be created
+	//! outside of this method, or they will not be handled correctly when it comes to managing key mappings.
+	//! This is typically where connections would be made as well.
+	//! If a particular action should only be allowed under certian circumstances, insure that the logic is surrounded
+	//! by a guard condition, instead of creating actions & connections in other methods.
+	virtual void setupGuiActions(){;};
 };
 
 #endif // _STELMODULE_HPP_
