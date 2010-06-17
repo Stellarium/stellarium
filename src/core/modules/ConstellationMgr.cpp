@@ -71,6 +71,9 @@ ConstellationMgr::~ConstellationMgr()
 		delete (*iter1);
 	}
 	allBoundarySegments.clear();
+
+	disconnect(GETSTELMODULE(StelObjectMgr), SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), 
+			   this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 }
 
 void ConstellationMgr::init()
@@ -89,7 +92,10 @@ void ConstellationMgr::init()
 	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected",
 						   conf->value("viewing/flag_constellation_pick", false).toBool() ).toBool());
 
-	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
+	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
+	objectManager->registerStelObjectMgr(this);
+	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), 
+			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 }
 
 /*************************************************************************
@@ -131,7 +137,7 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 		updateI18n();
 
 		// as constellations have changed, clear out any selection and retest for match!
-		selectedObjectChangeCallBack(StelModule::ReplaceSelection);
+		selectedObjectChange(StelModule::ReplaceSelection);
 	}
 	catch (std::runtime_error& e)
 	{
@@ -166,7 +172,7 @@ void ConstellationMgr::setStelStyle(const QString& section)
 	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/const_names_color", defaultColor).toString()));
 }
 
-void ConstellationMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)
+void ConstellationMgr::selectedObjectChange(StelModuleSelectAction action)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(omgr);

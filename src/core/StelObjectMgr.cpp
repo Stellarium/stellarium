@@ -169,12 +169,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 void StelObjectMgr::unSelect(void)
 {
 	lastSelectedObjects.clear();
-
-	// Send the event to every StelModule
-	foreach (StelModule* iter, StelApp::getInstance().getModuleMgr().getAllModules())
-	{
-		iter->selectedObjectChangeCallBack(StelModule::RemoveFromSelection);
-	}
+	emit(selectedObjectChanged(StelModule::RemoveFromSelection));
 }
 
 /*************************************************************************
@@ -200,12 +195,7 @@ bool StelObjectMgr::setSelectedObject(const StelObjectP obj, StelModule::StelMod
 bool StelObjectMgr::setSelectedObject(const QList<StelObjectP>& objs, StelModule::StelModuleSelectAction action)
 {
 	lastSelectedObjects=objs;
-
-	// Send the event to every StelModule
-	foreach (StelModule* iter, StelApp::getInstance().getModuleMgr().getAllModules())
-	{
-		iter->selectedObjectChangeCallBack(action);
-	}
+	emit(selectedObjectChanged(action));
 	return true;
 }
 
