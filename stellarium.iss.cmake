@@ -50,6 +50,10 @@ Name: desktopicon; Description: "Create a &desktop icon"; GroupDescription: "Add
 Name: desktopicon\common; Description: "For all users"; GroupDescription: "Additional icons:"; Flags: exclusive
 Name: desktopicon\user; Description: "For the current user only"; GroupDescription: "Additional icons:"; Flags: exclusive unchecked
 
+[Run]
+;An option to start Stellarium after setup has finished
+Filename: "{app}\stellarium.exe"; Description: "Start Stellarium"; Flags: postinstall nowait skipifsilent unchecked
+
 [UninstallDelete]
 
 [Icons]
