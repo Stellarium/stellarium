@@ -25,7 +25,6 @@
 
 #include "StelUtils.hpp"
 #include "VecMath.hpp"
-#include <QtOpenGL>
 #include <QString>
 #include <QStringList>
 #include <QTextStream>
