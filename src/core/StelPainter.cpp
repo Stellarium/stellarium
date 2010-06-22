@@ -649,45 +649,53 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	color[3]=currentColor[3];
 #endif
 
-	qPainter->endNativePainting();
 
-	qPainter->save();
-	qPainter->resetTransform();
-	qPainter->resetMatrix();
-	qPainter->setRenderHints(QPainter::TextAntialiasing | QPainter::HighQualityAntialiasing);
 	const QColor qCol=QColor::fromRgbF(qMax(qMin(1.f,color[0]),0.f), qMax(qMin(1.f,color[1]),0.f), qMax(qMin(1.f,color[2]),0.f), qMax(qMin(1.f,color[3]),0.f));
-	qPainter->setPen(qCol);
 
 	if (prj->gravityLabels && !noGravity)
 	{
-		drawTextGravity180(x, y, str, xshift, yshift);
+		drawTextGravity180(x, y, str, xshift, yshift);	// TODO: Need to modify this and anywhere else that uses QPainter::drawText with QGLWidget
 	}
 	else
 	{
+		// TODO: ONLY USE THIS CODE IN "SAFE MODE"?  HAVE A SEPARATE START-UP OPTION?
+		// TODO: MOVE RE-WORKED CODE OUT OF HERE SO IT CAN BE RE-USED ELSEWHERE (OOP and all that!)
+		// TODO: CACHE TEMP IMAGES?
+
+		// Create temp image and render text into it
+		QRect rect = getFontMetrics().boundingRect(str);
+		QImage tmp(rect.width()+3, rect.height(), QImage::Format_ARGB32);
+		tmp.fill(0x00000000);
+
+		QPainter painter(&tmp);
+		painter.setFont(qPainter->font());
+		painter.setRenderHints(QPainter::TextAntialiasing | QPainter::HighQualityAntialiasing);
+		painter.setPen(qCol);
+		painter.drawText(-rect.x(), -rect.y(), str);
+
+		// Translate/rotate
 		if (!noGravity)
 			angleDeg += prj->defautAngleForGravityText;
-		
-		// There are 2 version here depending on the OpenGL engine
-		// OpenGL 1 need to reverse the text vertically, not OpenGL 2...
-		// This sounds like a Qt bug
-		if (qPainter->paintEngine()->type()==QPaintEngine::OpenGL2)
-		{
-			qPainter->translate(x, prj->viewportXywh[3]-y);
-			qPainter->rotate(-angleDeg);
-			qPainter->translate(xshift, -yshift);
-		}
-		else
-		{
-			qPainter->translate(round(x), round(y));
-			qPainter->scale(1, -1);
-			qPainter->rotate(-angleDeg);
-			qPainter->translate(round(xshift), round(-yshift));
-		}
-		qPainter->drawText(0, 0, str);
-	}
-	qPainter->restore();
 
-	qPainter->beginNativePainting();
+		glTranslatef(x, y, 0.0);
+		glScalef(1.0, -1.0, 1.0);
+		glRotatef(-angleDeg, 0.0, 0.0, 1.0);  // TODO: raster text won't rotate
+		glTranslatef(xshift, -yshift, 0.0);
+
+		// Ensure GL_TEXTURE_2D is disabled (prevents fonts from drawing properly)
+		bool flagGlTexture2DWasEnabled;
+		if ((flagGlTexture2DWasEnabled = glIsEnabled(GL_TEXTURE_2D)) == true)	// TODO: Just disable and leave disabled regardless?
+			glDisable(GL_TEXTURE_2D);
+
+		// Draw using OpenGL directly
+		QImage glTmp = QGLWidget::convertToGLFormat(tmp);
+
+		glRasterPos2f(0.0, 0.0);
+		glDrawPixels(glTmp.width(), glTmp.height(), GL_RGBA, GL_UNSIGNED_BYTE, static_cast<GLubyte*>(glTmp.bits()));
+
+		if (flagGlTexture2DWasEnabled)	// TODO: Just disable and leave disabled regardless?
+			glDisable(GL_TEXTURE_2D);
+	}
 
 #ifndef STELPAINTER_GL2
 	glMatrixMode(GL_TEXTURE);
