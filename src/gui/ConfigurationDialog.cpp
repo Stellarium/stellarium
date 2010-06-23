@@ -60,6 +60,7 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), star
 {
 	ui = new Ui_configurationDialogForm;
 	hasDownloadedStarCatalog = false;
+	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();
 }
 
 ConfigurationDialog::~ConfigurationDialog()
