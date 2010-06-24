@@ -650,7 +650,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 #endif
 
 
-	const QColor qCol=QColor::fromRgbF(qMax(qMin(1.f,color[0]),0.f), qMax(qMin(1.f,color[1]),0.f), qMax(qMin(1.f,color[2]),0.f), qMax(qMin(1.f,color[3]),0.f));
+	const QColor strColor = QColor::fromRgbF(qMax(qMin(1.f,color[0]),0.f), qMax(qMin(1.f,color[1]),0.f), qMax(qMin(1.f,color[2]),0.f), qMax(qMin(1.f,color[3]),0.f));
 
 	if (prj->gravityLabels && !noGravity)
 	{
@@ -663,15 +663,15 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		// TODO: CACHE TEMP IMAGES?
 
 		// Create temp image and render text into it
-		QRect rect = getFontMetrics().boundingRect(str);
-		QImage tmp(rect.width()+3, rect.height(), QImage::Format_ARGB32);
-		tmp.fill(0x00000000);
+		QRect strRect = getFontMetrics().boundingRect(str);
+		QImage strImage(strRect.width()+3, strRect.height(), QImage::Format_ARGB32);
+		strImage.fill(0x00000000);
 
-		QPainter painter(&tmp);
+		QPainter painter(&strImage);
 		painter.setFont(qPainter->font());
 		painter.setRenderHints(QPainter::TextAntialiasing | QPainter::HighQualityAntialiasing);
-		painter.setPen(qCol);
-		painter.drawText(-rect.x(), -rect.y(), str);
+		painter.setPen(strColor);
+		painter.drawText(-strRect.x(), -strRect.y(), str);
 
 		// Translate/rotate
 		if (!noGravity)
@@ -688,10 +688,10 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			glDisable(GL_TEXTURE_2D);
 
 		// Draw using OpenGL directly
-		QImage glTmp = QGLWidget::convertToGLFormat(tmp);
+		QImage glStrImage = QGLWidget::convertToGLFormat(strImage);
 
 		glRasterPos2f(0.0, 0.0);
-		glDrawPixels(glTmp.width(), glTmp.height(), GL_RGBA, GL_UNSIGNED_BYTE, static_cast<GLubyte*>(glTmp.bits()));
+		glDrawPixels(glStrImage.width(), glStrImage.height(), GL_RGBA, GL_UNSIGNED_BYTE, static_cast<GLubyte*>(glStrImage.bits()));
 
 		if (flagGlTexture2DWasEnabled)	// TODO: Just disable and leave disabled regardless?
 			glDisable(GL_TEXTURE_2D);
