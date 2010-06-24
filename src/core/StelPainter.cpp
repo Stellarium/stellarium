@@ -663,37 +663,70 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		// TODO: CACHE TEMP IMAGES?
 
 		// Create temp image and render text into it
+		int border = 3;
 		QRect strRect = getFontMetrics().boundingRect(str);
-		QImage strImage(strRect.width()+3, strRect.height(), QImage::Format_ARGB32);
+		QImage strImage(strRect.width()+2*border, strRect.height()+2*border, QImage::Format_ARGB32);
 		strImage.fill(0x00000000);
 
 		QPainter painter(&strImage);
 		painter.setFont(qPainter->font());
 		painter.setRenderHints(QPainter::TextAntialiasing | QPainter::HighQualityAntialiasing);
 		painter.setPen(strColor);
-		painter.drawText(-strRect.x(), -strRect.y(), str);
+		painter.drawText(-strRect.x()+border, -strRect.y()+border, str);
 
 		// Translate/rotate
 		if (!noGravity)
 			angleDeg += prj->defautAngleForGravityText;
 
+#define USE_LINEAR_INTERP	// // GL_LINEAR needs rounding of translations to prevent 'pulsing' of labels
+#ifdef USE_LINEAR_INTERP
+		glTranslatef(qRound(x), qRound(y), 0.0);
+		glRotatef(angleDeg, 0.0, 0.0, 1.0);
+		glTranslatef(qRound(xshift), qRound(yshift), 0.0);
+#else
 		glTranslatef(x, y, 0.0);
-		glScalef(1.0, -1.0, 1.0);
-		glRotatef(-angleDeg, 0.0, 0.0, 1.0);  // TODO: raster text won't rotate
-		glTranslatef(xshift, -yshift, 0.0);
+		glRotatef(angleDeg, 0.0, 0.0, 1.0);
+		glTranslatef(xshift, yshift, 0.0);
+#endif
 
-		// Ensure GL_TEXTURE_2D is disabled (prevents fonts from drawing properly)
+		// Ensure GL_TEXTURE_2D is enabled (may cause problems if it's left enabled)
 		bool flagGlTexture2DWasEnabled;
-		if ((flagGlTexture2DWasEnabled = glIsEnabled(GL_TEXTURE_2D)) == true)	// TODO: Just disable and leave disabled regardless?
-			glDisable(GL_TEXTURE_2D);
+		if ((flagGlTexture2DWasEnabled = glIsEnabled(GL_TEXTURE_2D)) == false)	// TODO: Just enable and leave enabled regardless?
+			glEnable(GL_TEXTURE_2D);
 
 		// Draw using OpenGL directly
 		QImage glStrImage = QGLWidget::convertToGLFormat(strImage);
+		const int wTex = glStrImage.width();
+		const int hTex = glStrImage.height();
 
-		glRasterPos2f(0.0, 0.0);
-		glDrawPixels(glStrImage.width(), glStrImage.height(), GL_RGBA, GL_UNSIGNED_BYTE, static_cast<GLubyte*>(glStrImage.bits()));
+		static GLuint texture = 0;	// single texture to share
+		if (texture == 0)
+			glGenTextures(1, &texture);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		glTexImage2D(GL_TEXTURE_2D, 0, 4, wTex, hTex, 0, GL_RGBA, GL_UNSIGNED_BYTE, static_cast<GLubyte*>(glStrImage.bits()));
 
-		if (flagGlTexture2DWasEnabled)	// TODO: Just disable and leave disabled regardless?
+#ifdef USE_LINEAR_INTERP
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+#else
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+#endif
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
+
+		glBegin(GL_QUADS);
+			glTexCoord2f(0, 0);	glVertex3f(   0,    0, 0);
+			glTexCoord2f(1, 0);	glVertex3f(wTex,    0, 0);
+			glTexCoord2f(1, 1);	glVertex3f(wTex, hTex, 0);
+			glTexCoord2f(0, 1);	glVertex3f(   0, hTex, 0);
+		glEnd();
+
+		if (!flagGlTexture2DWasEnabled)	// TODO: Just disable and leave disabled regardless?
 			glDisable(GL_TEXTURE_2D);
 	}
 
