@@ -764,11 +764,16 @@ static unsigned int cacheNumLookups = 0;
 static unsigned int cacheNumHits = 0;
 cacheNumLookups++;
 
+// TODO: choose cache method and remove all references to other
+#define USE_QT_CACHE
+// TODO: choose texture creation method and remove all references to other
+#define USE_QT_TEXTURE
+// TODO: choose drawing method and remove all references to other
+#define USE_QT_DRAWING	// Qt drawing about 10% slower, why is native drawing dark?
+
 		static const int texLimit = 300;	// TODO: move elsewhere, optimise value
 
-// TODO: choose cache method and remove other
-#define USE_QCACHE
-#ifdef USE_QCACHE
+#ifdef USE_QT_CACHE
 		static QCache<QByteArray,StringTexture> texCache(texLimit);
 		static QCryptographicHash texHash(QCryptographicHash::Md5);
 
@@ -808,20 +813,25 @@ cacheNumLookups++;
 			painter.setPen(strColor);
 			painter.drawText(-strRect.x()+border, -strRect.y()+border, str);
 
-			// Create texture
+			// Create and bind texture
+			texWidth = strImage.width();
+			texHeight = strImage.height();
+#ifdef USE_QT_TEXTURE
+			texture = StelPainter::glContext->bindTexture(strImage);
+//			texture = StelPainter::glContext->bindTexture(strImage, GL_TEXTURE_2D, GL_RGBA, QGLContext::LinearFilteringBindOption|QGLContext::MipmapBindOption);
+#else
 			QImage glStrImage = QGLWidget::convertToGLFormat(strImage);
-			texWidth = glStrImage.width();
-			texHeight = glStrImage.height();
 
 			glGenTextures(1, &texture);
 			glBindTexture(GL_TEXTURE_2D, texture);
 			glTexImage2D(GL_TEXTURE_2D, 0, 4, texWidth, texHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, static_cast<GLubyte*>(glStrImage.bits()));
+#endif
 
 			// Add to list of cached textures
 			strTex->texture = texture;
 			strTex->width = texWidth;
 			strTex->height = texHeight;
-#ifdef USE_QCACHE
+#ifdef USE_QT_CACHE
 			texCache.insert(hash, strTex);
 #else
 			texCache.add(strTex);
@@ -846,6 +856,43 @@ if (cacheNumLookups % 1000 == 0)
 		if (!noGravity)
 			angleDeg += prj->defautAngleForGravityText;
 
+#ifdef USE_QT_DRAWING
+		qPainter->endNativePainting();
+			qPainter->save();
+			qPainter->resetTransform();
+			qPainter->resetMatrix();
+			if (qPainter->paintEngine()->type() == QPaintEngine::OpenGL2)
+			{
+				qPainter->translate(round(x), round(prj->viewportXywh[3]-y));
+				qPainter->rotate(-angleDeg);
+				qPainter->translate(round(xshift), round(yshift-texHeight));
+			}
+			else
+			{
+				qPainter->translate(round(x), round(y));
+				qPainter->scale(1.0, -1.0);
+				qPainter->rotate(-angleDeg);
+				qPainter->translate(round(xshift), round(yshift-texHeight));
+			}
+		qPainter->beginNativePainting();
+
+		// Config OpenGL
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+//		qPainter->setCompositionMode(QPainter::CompositionMode_SourceOver);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
+
+		StelPainter::glContext->drawTexture(QRectF(0.0,0.0,texWidth,texHeight), texture);
+
+		qPainter->endNativePainting();
+			qPainter->restore();
+		qPainter->beginNativePainting();
+#else
 		glTranslatef(qRound(x), qRound(y), 0.0);	//	GL_LINEAR needs rounding of translations to prevent 'pulsing' of labels
 		glRotatef(angleDeg, 0.0, 0.0, 1.0);
 		glTranslatef(qRound(xshift), qRound(yshift), 0.0);
@@ -854,8 +901,8 @@ if (cacheNumLookups % 1000 == 0)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
@@ -867,6 +914,7 @@ if (cacheNumLookups % 1000 == 0)
 			glTexCoord2f(1, 1);	glVertex3f(texWidth, texHeight, 0);
 			glTexCoord2f(0, 1);	glVertex3f(       0, texHeight, 0);
 		glEnd();
+#endif
 
 		if (!flagGlTexture2DWasEnabled)	// TODO: Just disable and leave disabled regardless?
 			glDisable(GL_TEXTURE_2D);
