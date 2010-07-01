@@ -645,23 +645,29 @@ struct StringTexture
 	{
 		return ((str == rhs->str) && (size == rhs->size) && (color == rhs->color));
 	}
+	~StringTexture()
+	{
+		if (texture != 0)
+			glDeleteTextures(1, &texture);
+	}
 };
 
 // TODO: move elsewhere
 // TODO: docs
-class StringTextureList
+class StringTextureCache
 {
 public:
-	StringTextureList(int maxCount) : maxNumTextures(maxCount), indexOfOldestTexture(0)  {  }
-	~StringTextureList()
+	StringTextureCache(int maxCount) : maxNumTextures(maxCount), indexOfOldestTexture(0), texSearchStartIndex(0)
+	{
+		;
+	}
+	~StringTextureCache()
 	{
 		for (int i = 0; i < texList.count(); i++)
 		{
 			StringTexture* strTex = texList[i];
 			if (strTex == NULL)
 				continue;
-			if (strTex->texture > 0)
-				glDeleteTextures(1, &(strTex->texture));
 			delete strTex;
 		}
 	}
@@ -670,10 +676,7 @@ public:
 	{
 		if (texList.count() == maxNumTextures)
 		{
-			StringTexture* oldTex = texList[indexOfOldestTexture];
-			glDeleteTextures(1, &(oldTex->texture));
-			delete oldTex;
-
+			delete texList[indexOfOldestTexture];
 			texList[indexOfOldestTexture] = strTex;
 		}
 		else
@@ -687,9 +690,23 @@ public:
 	const StringTexture* getTexture(const StringTexture* strTex) const
 	{
 		const int count = texList.count();
-		for (int i = 0; i < count; i++)
+
+		for (int i = texSearchStartIndex; i < count; i++)
+		{
 			if (*(texList.at(i)) == strTex)
+			{
+				*(const_cast<int*>(&texSearchStartIndex)) = i + 1;
 				return texList.at(i);
+			}
+		}
+		for (int i = 0; i < texSearchStartIndex; i++)
+		{
+			if (*(texList.at(i)) == strTex)
+			{
+				*(const_cast<int*>(&texSearchStartIndex)) = i + 1;
+				return texList.at(i);
+			}
+		}
 
 		return NULL;
 	}
@@ -697,6 +714,7 @@ public:
 private:
 	int maxNumTextures;
 	int indexOfOldestTexture;
+	int texSearchStartIndex;
 	QList<StringTexture*> texList;
 };
 
@@ -741,15 +759,21 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		if ((flagGlTexture2DWasEnabled = glIsEnabled(GL_TEXTURE_2D)) == false)	// TODO: Just enable and leave enabled regardless?
 			glEnable(GL_TEXTURE_2D);
 
+// TODO: remove
+static unsigned int cacheNumLookups = 0;
+static unsigned int cacheNumHits = 0;
+cacheNumLookups++;
+
 		static const int texLimit = 300;	// TODO: move elsewhere, optimise value
-		static StringTextureList texCache(texLimit);	// TODO: move elsewhere
+		static StringTextureCache texCache(texLimit);
+
+		StringTexture* strTex = new StringTexture(str, qPainter->font().pixelSize(), strColor.rgba());
+		const StringTexture* cachedTex = texCache.getTexture(strTex);
 
 		GLuint texture;
 		int texWidth;
 		int texHeight;
 
-		StringTexture* strTex = new StringTexture(str, qPainter->font().pixelSize(), strColor.rgba());
-		const StringTexture* cachedTex = texCache.getTexture(strTex);
 		if (cachedTex == NULL)	// need to create texture
 		{
 			// Create temp image and render text into it
@@ -781,6 +805,8 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		}
 		else	// already have texture
 		{
+			cacheNumHits++;	// TODO: remove
+
 			delete strTex;
 
 			texWidth = cachedTex->width;
@@ -788,6 +814,9 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			texture = cachedTex->texture;
 			glBindTexture(GL_TEXTURE_2D, texture);
 		}
+// TODO: remove
+if (cacheNumLookups % 1000 == 0)
+	qDebug() << "Cache hits: " << cacheNumHits << "/" << cacheNumLookups << "(" << (float)cacheNumHits/cacheNumLookups*100.0 << "%)";
 
 		// Translate/rotate
 		if (!noGravity)
