@@ -111,6 +111,8 @@ public:
 protected:
 	virtual void initializeGL()
 	{
+		qDebug() << "OpenGL supported version: " << QString((char*)glGetString(GL_VERSION));
+
 		QGLWidget::initializeGL();
 
 		if (!format().stencil())
