@@ -765,10 +765,30 @@ static unsigned int cacheNumHits = 0;
 cacheNumLookups++;
 
 		static const int texLimit = 300;	// TODO: move elsewhere, optimise value
+
+// TODO: choose cache method and remove other
+#define USE_QCACHE
+#ifdef USE_QCACHE
+		static QCache<QByteArray,StringTexture> texCache(texLimit);
+		static QCryptographicHash texHash(QCryptographicHash::Md5);
+
+		int pixelSize = qPainter->font().pixelSize();
+		QRgb rgba = strColor.rgba();
+		StringTexture* strTex = new StringTexture(str, pixelSize, rgba);
+
+		texHash.reset();
+		texHash.addData(str.toUtf8());
+		texHash.addData((char*)&pixelSize, sizeof(int));
+		texHash.addData((char*)&rgba, sizeof(QRgb));
+		QByteArray hash = texHash.result();
+
+		const StringTexture* cachedTex = texCache.object(hash);
+#else
 		static StringTextureCache texCache(texLimit);
 
 		StringTexture* strTex = new StringTexture(str, qPainter->font().pixelSize(), strColor.rgba());
 		const StringTexture* cachedTex = texCache.getTexture(strTex);
+#endif
 
 		GLuint texture;
 		int texWidth;
@@ -801,7 +821,11 @@ cacheNumLookups++;
 			strTex->texture = texture;
 			strTex->width = texWidth;
 			strTex->height = texHeight;
+#ifdef USE_QCACHE
+			texCache.insert(hash, strTex);
+#else
 			texCache.add(strTex);
+#endif
 		}
 		else	// already have texture
 		{
