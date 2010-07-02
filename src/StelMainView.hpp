@@ -127,6 +127,11 @@ public:
 	//! This is required for externally accessing Stellarium from other programs, do not delete!
 	QRectF setWindowSize(int width, int height);
 
+	//! Return the QGLWidget encapsulating the Stellarium main sky view.
+	//! Use its layout if you want to rendering OpenGL Graphics.
+	//! Added for PrintSky plugin.
+	StelGLWidget* getStelQGLWidget() {return glWidget;}
+
 public slots:
 
 	//! Set whether fullscreen is activated or not

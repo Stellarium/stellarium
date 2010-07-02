@@ -401,6 +401,11 @@ public:
 	const QList<StelObjectP>& getHipparcosCarbonStars() const { return carbonStars; }
 	const QList<StelObjectP>& getHipparcosBariumStars() const { return bariumStars; }
 
+	//! Get relations between magnitude stars and draw radius
+	//! @param core the instance of stellarium's core
+	//! @return a list of pairs magnitude-radius
+	QList< QPair<float, float> > getListMagnitudeRadius(StelCore *core);
+
 private slots:
 	//! Translate text.
 	void updateI18n();

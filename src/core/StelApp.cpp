@@ -198,6 +198,10 @@ Q_IMPORT_PLUGIN(PointerCoordinatesStelPluginInterface)
 Q_IMPORT_PLUGIN(ObservabilityStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_PRINTSKY
+Q_IMPORT_PLUGIN(PrintSky)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_SCENERY3D
 Q_IMPORT_PLUGIN(Scenery3dStelPluginInterface)
 #endif
