@@ -672,7 +672,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		// This sounds like a Qt bug
 		if (qPainter->paintEngine()->type()==QPaintEngine::OpenGL2)
 		{
-			qPainter->translate(x, prj->viewportXywh[3]-y);
+			qPainter->translate(x + prj->viewportXywh[0] , prj->viewportXywh[3] + prj->viewportXywh[1] - y);
 			qPainter->rotate(-angleDeg);
 			qPainter->translate(xshift, -yshift);
 		}
