@@ -58,11 +58,6 @@ double Ocular::getMagnification(Telescope *telescope)
 	return telescope->getFocalLength() / effectiveFocalLength;
 }
 
-double Ocular::getExitCircle(Telescope *telescope)
-{
-	return telescope->getDiameter() * effectiveFocalLength / telescope->getFocalLength();
-}
-
 /* ********************************************************************* */
 #if 0
 #pragma mark -

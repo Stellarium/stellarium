@@ -97,7 +97,7 @@ Oculars::Oculars() : selectedOcularIndex(-1), flagShowOculars(false), usageMessa
 	flagShowCrosshairs = false;
 	flagShowTelrad = false;
 	font.setPixelSize(14);
-	maxImageCircle = 0.0;
+	maxEyepieceAngle = 0.0;
 	CCDs = QList<CCD *>();
 	oculars = QList<Ocular *>();
 	ready = false;
@@ -106,7 +106,7 @@ Oculars::Oculars() : selectedOcularIndex(-1), flagShowOculars(false), usageMessa
 	selectedTelescopeIndex = 0;
 	setObjectName("Oculars");
 	telescopes = QList<Telescope *>();
-	useMaxImageCircle = true;
+	useMaxEyepieceAngle = true;
 	visible = false;
 	ocularsTableModel = NULL;
 	telescopesTableModel = NULL;
@@ -264,7 +264,7 @@ void Oculars::init()
 		QString ocularIniPath = StelFileMgr::findFile("modules/Oculars/", flags) + "ocular.ini";
 
 		QSettings settings(ocularIniPath, QSettings::IniFormat);
-		useMaxImageCircle = settings.value("use_max_exit_circle", 0.0).toBool();
+		useMaxEyepieceAngle = settings.value("use_max_exit_circle", 0.0).toBool();
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 	}
@@ -297,26 +297,21 @@ void Oculars::setStelStyle(const QString&)
 #pragma mark Private slots Methods
 #endif
 /* ********************************************************************* */
-void Oculars::determineMaxImageCircle()
+void Oculars::determineMaxEyepieceAngle()
 {
 	if (ready) {
 		QListIterator<Ocular *> ocularIterator(oculars);
 		while (ocularIterator.hasNext()) {
 			Ocular *ocular = ocularIterator.next();
 
-			QListIterator<Telescope *> telescopeIterator(telescopes);
-			while (telescopeIterator.hasNext()) {
-				Telescope *telescope = telescopeIterator.next();
-
-				if (ocular->getExitCircle(telescope) > maxImageCircle) {
-					maxImageCircle = ocular->getExitCircle(telescope);
-				}
+			if (ocular->getAppearentFOV() > maxEyepieceAngle) {
+				maxEyepieceAngle = ocular->getAppearentFOV();
 			}
 		}
 	}
 	// insure it is not zero
-	if (maxImageCircle == 0.0) {
-		maxImageCircle = 1.0;
+	if (maxEyepieceAngle == 0.0) {
+		maxEyepieceAngle = 1.0;
 	}
 }
 
@@ -356,9 +351,9 @@ void Oculars::loadTelescopes()
 void Oculars::setScaleImageCircle(bool state)
 {
 	if (state) {
-		determineMaxImageCircle();
+		determineMaxEyepieceAngle();
 	}
-	useMaxImageCircle = state;
+	useMaxEyepieceAngle = state;
 }
 
 /* ********************************************************************* */
@@ -498,8 +493,8 @@ void Oculars::drawCrosshairs()
 					   projector->getViewportPosY()+projector->getViewportHeight()/2);
 	GLdouble length = 0.5 * params.viewportFovDiameter;
 	// See if we need to scale the length
-	if (useMaxImageCircle && oculars[selectedOcularIndex]->getExitCircle(telescopes[selectedTelescopeIndex]) > 0.0) {
-		length = oculars[selectedOcularIndex]->getExitCircle(telescopes[selectedTelescopeIndex]) * length / maxImageCircle;
+	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->getAppearentFOV() > 0.0) {
+		length = oculars[selectedOcularIndex]->getAppearentFOV() * length / maxEyepieceAngle;
 	}
 
 	// Draw the lines
@@ -778,8 +773,8 @@ void Oculars::loadDatabaseObjects()
 	loadCCDs();
 	loadOculars();
 	loadTelescopes();
-	if (useMaxImageCircle) {
-		determineMaxImageCircle();
+	if (useMaxEyepieceAngle) {
+		determineMaxEyepieceAngle();
 	}
 	// A telescope and one of [CCD|Ocular] must be defined for the plugin to be usable.
 	if (telescopes.size() == 0)
@@ -811,8 +806,8 @@ void Oculars::paintMask()
 	GLdouble inner = 0.5 * params.viewportFovDiameter;
 
 	// See if we need to scale the mask
-	if (useMaxImageCircle && oculars[selectedOcularIndex]->getExitCircle(telescopes[selectedTelescopeIndex]) > 0.0) {
-		inner = oculars[selectedOcularIndex]->getExitCircle(telescopes[selectedTelescopeIndex]) * inner / maxImageCircle;
+	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->getAppearentFOV() > 0.0) {
+		inner = oculars[selectedOcularIndex]->getAppearentFOV() * inner / maxEyepieceAngle;
 	}
 
 	GLdouble outer = params.viewportXywh[2] + params.viewportXywh[3];
@@ -911,10 +906,6 @@ void Oculars::paintText(const StelCore* core)
 	// General info
 	QString magnificationLabel = "Magnification: " + QVariant(((int)(ocular->getMagnification(telescope) * 10.0)) / 10.0).toString() + "x";
 	painter.drawText(xPosition, yPosition, magnificationLabel);
-	yPosition-=lineHeight;
-
-	QString imageCircleLabel = "Image Circle: " + QVariant(((int)(ocular->getExitCircle(telescope) * 10.0)) / 10.0).toString() + "mm";
-	painter.drawText(xPosition, yPosition, imageCircleLabel);
 	yPosition-=lineHeight;
 
 	QString fovLabel = "FOV: " + QVariant(((int)(ocular->getActualFOV(telescope) * 10000.00)) / 10000.0).toString() + QChar(0x00B0);
@@ -1055,8 +1046,8 @@ void Oculars::zoomOcular()
 
 	double actualFOV = ocular->getActualFOV(telescope);
 	// See if the mask was scaled; if so, correct the actualFOV.
-	if (useMaxImageCircle && ocular->getExitCircle(telescope) > 0.0) {
-		actualFOV = maxImageCircle * actualFOV / ocular->getExitCircle(telescope);
+	if (useMaxEyepieceAngle && ocular->getAppearentFOV() > 0.0) {
+		actualFOV = maxEyepieceAngle * actualFOV / ocular->getAppearentFOV();
 	}
 	movementManager->zoomTo(actualFOV, 0.0);
 }
