@@ -1212,9 +1212,9 @@ bool TelescopeControl::startServerAtSlot(int slotNumber, QString deviceModelName
 		#ifdef Q_OS_WIN32
 		QString serialPortName;
 		if(portSerial.right(portSerial.size() - SERIAL_PORT_PREFIX.size()).toInt() > 9)
-			serialPortName = "\\\\.\\" + portSerial + ":";//"\\.\COMxx", not sure if it will work
+			serialPortName = "\\\\.\\" + portSerial;//"\\.\COMxx", not sure if it will work
 		else
-			serialPortName = portSerial + ":";
+			serialPortName = portSerial;
 		#else
 		QString serialPortName = portSerial;
 		#endif //Q_OS_WIN32
