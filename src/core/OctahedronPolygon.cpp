@@ -60,11 +60,12 @@ QDataStream& operator>>(QDataStream& in, EdgeVertex& v)
 QString SubContour::toJSON() const
 {
 	QString res("[");
-	double ra, dec;
+	//double ra, dec;
 	foreach (const EdgeVertex& v, *this)
 	{
-		StelUtils::rectToSphe(&ra, &dec, v.vertex);
-		res += QString("[") + QString::number(ra*180./M_PI, 'g', 12) + "," + QString::number(dec*180./M_PI, 'g', 12) + "," + (v.edgeFlag ? QString("true"): QString("false")) + "],";
+		res += QString("[") + v.vertex.toString() + "],";
+		//StelUtils::rectToSphe(&ra, &dec, v.vertex);
+		//res += QString("[") + QString::number(ra*180./M_PI, 'g', 12) + "," + QString::number(dec*180./M_PI, 'g', 12) + "," + (v.edgeFlag ? QString("true"): QString("false")) + "],";
 	}
 	res[res.size()-1]=']';
 	return res;
@@ -135,6 +136,7 @@ void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 			if (tmpSubContour.last().edgeFlag==true)
 				continue;
 			Vec3d v = tmpSubContour.first().vertex^tmpSubContour.last().vertex;
+			//qDebug() << v.toString();
 			if (v[2]>0.00000001)
 			{
 				// A south pole has to be added
@@ -293,11 +295,9 @@ QVector<Vec3d> OctahedronPolygon::tesselateOneSideTriangles(GLUEStesselator* tes
 	gluesTessBeginPolygon(tess, &data);
 	for (int c=0;c<contours.size();++c)
 	{
-		//qDebug() << contours.at(c).toJSON();
 		gluesTessBeginContour(tess);
 		for (int i=0;i<contours.at(c).size();++i)
 		{
-			//qDebug() << contours[c][i].vertex.toString();
 			gluesTessVertex(tess, const_cast<double*>((const double*)contours[c][i].vertex.data()), (void*)&(contours[c][i].vertex));
 		}
 		gluesTessEndContour(tess);
@@ -431,11 +431,9 @@ QVector<SubContour> OctahedronPolygon::tesselateOneSideLineLoop(GLUEStesselator*
 	gluesTessBeginPolygon(tess, &data);
 	for (int c=0;c<contours.size();++c)
 	{
-		//qDebug() << contours.at(c).toJSON();
 		gluesTessBeginContour(tess);
 		for (int i=0;i<contours.at(c).size();++i)
 		{
-			//qDebug() << contours[c][i].vertex.toString();
 			Q_ASSERT(contours[c][i].vertex[2]<0.000001);
 			gluesTessVertex(tess, const_cast<double*>((const double*)contours[c][i].vertex.data()), const_cast<void*>((const void*)&(contours[c][i])));
 		}
@@ -463,12 +461,10 @@ void vertexLineLoopCallback(EdgeVertex* vertexData, OctTessLineLoopCallbackData*
 void combineLineLoopCallback(double coords[3], EdgeVertex* vertex_data[4], GLfloat[4], EdgeVertex** outData, OctTessLineLoopCallbackData* userData)
 {
 	bool newFlag=false;
-	//qDebug() << "Combine data" << coords[0] << coords[1] << coords[2];
 	for (int i=0;i<4;++i)
 	{
 		if (vertex_data[i]==NULL)
 			break;
-		//qDebug() << "Vertex " << i << dd->vertex.toString() << weight[i];
 		newFlag = newFlag || vertex_data[i]->edgeFlag;
 	}
 	// Check that the new coordinate lay on the octahedron plane
@@ -710,6 +706,12 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 	// Append the last contour made from the last vertices + the previous unfinished ones
 	currentSubContour << unfinishedSubContour;
 	result[currentQuadrant] << currentSubContour;
+	
+//	qDebug() << onLine << inputContour.toJSON();
+//	if (!result[0].isEmpty())
+//		qDebug() << result[0].at(0).toJSON();
+//	if (!result[1].isEmpty())
+//		qDebug() << result[1].at(0).toJSON();
 }
 
 SubContour::SubContour(const QVector<Vec3d>& vertices, bool closed) : QVector<EdgeVertex>(vertices.size(), EdgeVertex(true))
@@ -821,6 +823,7 @@ QDataStream& operator>>(QDataStream& in, OctahedronPolygon& p)
 	{
 		in >> p.sides[i];
 	}
+//	p.updateVertexArray();
 	in >> p.fillCachedVertexArray;
 	in >> p.outlineCachedVertexArray;
 	in >> p.capN;
