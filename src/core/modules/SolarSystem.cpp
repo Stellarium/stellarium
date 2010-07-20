@@ -86,8 +86,6 @@ SolarSystem::~SolarSystem()
 	{
 		p->satellites.clear();
 	}
-	disconnect(GETSTELMODULE(StelObjectMgr), SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), 
-			   this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 }
 
 /*************************************************************************

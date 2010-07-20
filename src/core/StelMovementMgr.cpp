@@ -56,8 +56,6 @@ StelMovementMgr::StelMovementMgr(StelCore* acore) : core(acore),
 
 StelMovementMgr::~StelMovementMgr()
 {
-	disconnect(GETSTELMODULE(StelObjectMgr), SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), 
-			   this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 }
 
 void StelMovementMgr::init()
