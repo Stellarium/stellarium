@@ -44,7 +44,9 @@ QString getApplicationName()
 //! Return the version of stellarium, i.e. "0.9.0"
 QString getApplicationVersion()
 {
-#ifdef SVN_REVISION
+#ifdef BZR_REVISION
+	return QString(PACKAGE_VERSION)+" (BZR r"+BZR_REVISION+")";
+#elif SVN_REVISION
 	return QString(PACKAGE_VERSION)+" (SVN r"+SVN_REVISION+")";
 #else
 	return QString(PACKAGE_VERSION);
@@ -171,7 +173,7 @@ QString radToHmsStr(double angle, bool decimal)
 	if (h==24 && m==0 && s==0)
 		h=0;
 
-	return QString("%1h%2m%3s").arg(h, width).arg(m).arg(s, 0, 'f', precision);
+	return QString("%1h%2m%3s").arg(h, width).arg(m,2,10,QLatin1Char('0')).arg(s, 0, 'f', precision);
 }
 
 /*************************************************************************
@@ -227,8 +229,9 @@ QString radToDmsStr(double angle, bool decimal, bool useD)
 	QString str;
 	QTextStream os(&str);
 	os << (sign?'+':'-') << d << degsign;
-
-	int width = 2;
+	
+	os << qSetFieldWidth(2) << qSetPadChar('0') << m << qSetFieldWidth(0) << '\'';
+	int width;
 	if (decimal)
 	{
 		os << qSetRealNumberPrecision(1);
@@ -239,10 +242,7 @@ QString radToDmsStr(double angle, bool decimal, bool useD)
 		os << qSetRealNumberPrecision(0);
 		width = 2;
 	}
-
-	os << qSetFieldWidth(width) << qSetPadChar('0') << m << qSetFieldWidth(0) << '\''
-		<< fixed << qSetFieldWidth(width) << qSetPadChar('0') << s
-		<< qSetFieldWidth(0) << '\"';
+	os << fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
 
 	return str;
 }

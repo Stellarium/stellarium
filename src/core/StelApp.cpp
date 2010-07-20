@@ -223,7 +223,9 @@ void StelApp::init(QSettings* conf)
 #ifdef BUILD_FOR_MAEMO
 	StelLoadingBar loadingBar("textures/logo24bits.png", "", 25, 320, 101, 800, 400);
 #else
- #ifdef SVN_REVISION
+ #ifdef BZR_REVISION
+	StelLoadingBar loadingBar("textures/logo24bits.png", QString("BZR r%1").arg(BZR_REVISION), 25, 320, 101);
+ #elif SVN_REVISION
 	StelLoadingBar loadingBar("textures/logo24bits.png", QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
  #else
 	StelLoadingBar loadingBar("textures/logo24bits.png", PACKAGE_VERSION, 45, 320, 121);

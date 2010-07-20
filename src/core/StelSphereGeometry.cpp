@@ -601,16 +601,16 @@ OctahedronPolygon SphericalCap::getOctahedronPolygon() const
 	return OctahedronPolygon(getClosedOutlineContour());
 }
 
-QVariantMap SphericalCap::toQVariant() const
+QVariantList SphericalCap::toQVariant() const
 {
-	QVariantMap res;
-	res.insert("type", "CAP");
+	QVariantList res;
+	res << "CAP";
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, n);
 	QVariantList l;
 	l << ra*180./M_PI << dec*180./M_PI;
-	res.insert("center", l);
-	res.insert("radius", std::acos(d)*180./M_PI);
+	res << l;
+	res << std::acos(d)*180./M_PI;
 	return res;
 }
 
@@ -642,15 +642,15 @@ OctahedronPolygon SphericalPoint::getOctahedronPolygon() const
 	return OctahedronPolygon(contour);
 }
 
-QVariantMap SphericalPoint::toQVariant() const
+QVariantList SphericalPoint::toQVariant() const
 {
-	QVariantMap res;
-	res.insert("type", "POINT");
+	QVariantList res;
+	res << "POINT";
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, n);
 	QVariantList l;
 	l << ra*180./M_PI << dec*180./M_PI;
-	res.insert("pos", l);
+	res << l;
 	return res;
 }
 
@@ -666,10 +666,10 @@ SphericalRegionP SphericalPoint::deserialize(QDataStream& in)
 ////////////////////////////////////////////////////////////////////////////
 const SphericalRegionP AllSkySphericalRegion::staticInstance = SphericalRegionP(new AllSkySphericalRegion());
 
-QVariantMap AllSkySphericalRegion::toQVariant() const
+QVariantList AllSkySphericalRegion::toQVariant() const
 {
-	QVariantMap res;
-	res.insert("type", "ALLSKY");
+	QVariantList res;
+	res << "ALLSKY";
 	return res;
 }
 
@@ -679,10 +679,10 @@ QVariantMap AllSkySphericalRegion::toQVariant() const
 ////////////////////////////////////////////////////////////////////////////
 const SphericalRegionP EmptySphericalRegion::staticInstance = SphericalRegionP(new EmptySphericalRegion());
 
-QVariantMap EmptySphericalRegion::toQVariant() const
+QVariantList EmptySphericalRegion::toQVariant() const
 {
-	QVariantMap res;
-	res.insert("type", "EMPTY");
+	QVariantList res;
+	res << "EMPTY";
 	return res;
 }
 
@@ -696,26 +696,40 @@ SphericalCap SphericalPolygon::getBoundingCap() const
 	return res;
 }
 
-QVariantMap SphericalPolygon::toQVariant() const
+struct TriangleSerializer
 {
-	QVariantMap res;
-//	QVariantList worldCoordinates;
-//	double ra, dec;
-	Q_ASSERT(0);
-//	foreach (const QVector<Vec3d>& contour, getFillVertexArray().vertex)
-//	{
-//		QVariantList cv;
-//		foreach (const Vec3d& v, contour)
-//		{
-//			StelUtils::rectToSphe(&ra, &dec, v);
-//			QVariantList vv;
-//			vv << ra*180./M_PI << dec*180./M_PI;
-//			cv.append((QVariant)vv);
-//		}
-//		worldCoordinates.append((QVariant)cv);
-//	}
-//	res.insert("worldCoords", worldCoordinates);
-	return res;
+	TriangleSerializer(const TriangleSerializer& ts) : triangleList(ts.triangleList) {}
+
+	TriangleSerializer() {}
+	inline void operator()(const Vec3d* v1, const Vec3d* v2, const Vec3d* v3,
+						   const Vec2f* , const Vec2f* , const Vec2f* ,
+						   unsigned int , unsigned int , unsigned int )
+	{
+		QVariantList triangle;
+		double ra, dec;
+		QVariantList l;
+		StelUtils::rectToSphe(&ra, &dec, *v1);
+		l << ra*180./M_PI << dec*180./M_PI;
+		triangle << QVariant(l);
+		l.clear();
+		StelUtils::rectToSphe(&ra, &dec, *v2);
+		l << ra*180./M_PI << dec*180./M_PI;
+		triangle << QVariant(l);
+		l.clear();
+		StelUtils::rectToSphe(&ra, &dec, *v3);
+		l << ra*180./M_PI << dec*180./M_PI;
+		triangle << QVariant(l);
+		Q_ASSERT(triangle.size()==3);
+		triangleList << QVariant(triangle);
+	}
+
+	QVariantList triangleList;
+};
+
+QVariantList SphericalPolygon::toQVariant() const
+{
+	TriangleSerializer result = getFillVertexArray().foreachTriangle(TriangleSerializer());
+	return result.triangleList;
 }
 
 void SphericalPolygon::serialize(QDataStream& out) const
@@ -938,10 +952,10 @@ void SphericalConvexPolygon::updateBoundingCap()
 #endif
 }
 
-QVariantMap SphericalConvexPolygon::toQVariant() const
+QVariantList SphericalConvexPolygon::toQVariant() const
 {
-	QVariantMap res;
-	res.insert("type", "CVXPOLYGON");
+	QVariantList res;
+	res << "CONVEX_POLYGON";
 	QVariantList cv;
 	double ra, dec;
 	foreach (const Vec3d& v, contour)
@@ -951,7 +965,7 @@ QVariantMap SphericalConvexPolygon::toQVariant() const
 		vv << ra*180./M_PI << dec*180./M_PI;
 		cv.append((QVariant)vv);
 	}
-	res.insert("worldCoords", cv);
+	res << cv;
 	return res;
 }
 
@@ -965,9 +979,9 @@ SphericalRegionP SphericalConvexPolygon::deserialize(QDataStream& in)
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalTexturedConvexPolygon
 ///////////////////////////////////////////////////////////////////////////////
-QVariantMap SphericalTexturedConvexPolygon::toQVariant() const
+QVariantList SphericalTexturedConvexPolygon::toQVariant() const
 {
-	QVariantMap res = SphericalConvexPolygon::toQVariant();
+	QVariantList res = SphericalConvexPolygon::toQVariant();
 	QVariantList cv;
 	foreach (const Vec2f& v, textureCoords)
 	{
@@ -975,7 +989,7 @@ QVariantMap SphericalTexturedConvexPolygon::toQVariant() const
 		vv << v[0] << v[1];
 		cv.append((QVariant)vv);
 	}
-	res.insert("textureCoords", cv);
+	res << cv;
 	return res;
 }
 
@@ -983,11 +997,11 @@ QVariantMap SphericalTexturedConvexPolygon::toQVariant() const
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalTexturedPolygon
 ///////////////////////////////////////////////////////////////////////////////
-QVariantMap SphericalTexturedPolygon::toQVariant() const
+QVariantList SphericalTexturedPolygon::toQVariant() const
 {
 	Q_ASSERT(0);
 	// TODO store a tesselated polygon?, including edge flags?
-	return QVariantMap();
+	return QVariantList();
 }
 
 
@@ -1012,7 +1026,7 @@ Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& p3,
 
 Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& n2, bool& ok)
 {
-	if (p1*p2>1.-1E-10)
+	if (std::fabs(p1*p2)>1.-1E-10)
 	{
 		// p1 and p2 are too close to avoid floating point problems
 		ok=false;
@@ -1070,7 +1084,30 @@ inline void parseRaDec(const QVariant& vRaDec, Vec3d& v)
 		throw std::runtime_error(qPrintable(QString("invalid Ra,Dec pair: \"%1\" (expect 2 double values in degree)").arg(vRaDec.toString())));
 }
 
-QVector<QVector<Vec3d> > SphericalRegionP::loadContourFromQVariant(const QVariantList& contoursList)
+struct TriangleDumper
+{
+	TriangleDumper(const TriangleDumper& ts) : triangleList(ts.triangleList) {}
+
+	TriangleDumper() {}
+	inline void operator()(const Vec3d* v1, const Vec3d* v2, const Vec3d* v3,
+						   const Vec2f* , const Vec2f* , const Vec2f* ,
+						   unsigned int , unsigned int , unsigned int )
+	{
+		QVector<Vec3d> triangle;
+		triangle << *v1 << *v2 << *v3;
+		triangleList.append(triangle);
+	}
+
+	QVector<QVector<Vec3d > > triangleList;
+};
+
+QVector<QVector<Vec3d > > SphericalRegion::getSimplifiedContours() const
+{
+	TriangleDumper result = getFillVertexArray().foreachTriangle(TriangleDumper());
+	return result.triangleList;
+}
+
+SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& contoursList)
 {
 	QVector<QVector<Vec3d> > contours;
 	QVector<Vec3d> vertices;
@@ -1092,6 +1129,19 @@ QVector<QVector<Vec3d> > SphericalRegionP::loadContourFromQVariant(const QVarian
 				throw std::runtime_error(qPrintable(QString("invalid aperture angle: \"%1\" (expect a double value in degree)").arg(contourToList.at(2).toString())));
 			SphericalCap cap(v,std::cos(d));
 			contours.append(cap.getClosedOutlineContour());
+			continue;
+		}
+		if (contourToList.at(0).toString()=="INTERSECTION")
+		{
+			Q_ASSERT(contourToList.size()>2);
+			SphericalRegionP reg1 = loadFromQVariant(contourToList.at(1).toList());
+			for (int n=2;n<contourToList.size();++n)
+			{
+				SphericalRegionP reg2 = loadFromQVariant(contourToList.at(n).toList());
+				reg1 = reg1->getIntersection(reg2.data());
+			}
+			if (!reg1->isEmpty())
+				contours << reg1->getSimplifiedContours();
 			continue;
 		}
 		if (contourToList.at(0).toString()=="PATH")
@@ -1152,16 +1202,8 @@ QVector<QVector<Vec3d> > SphericalRegionP::loadContourFromQVariant(const QVarian
 		contours.append(vertices);
 		vertices.clear();
 	}
-	return contours;
-}
-
-SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& contoursList)
-{
-	// It can only be a pure shape definition, without texture coords
-	const QVector<QVector<Vec3d> >& contours = loadContourFromQVariant(contoursList);
 	return SphericalRegionP(new SphericalPolygon(contours));
 }
-
 
 SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantMap& map)
 {
@@ -1183,8 +1225,7 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantMap& map)
 	if (texCoordList.isEmpty())
 	{
 		// No texture coordinates
-		const QVector<QVector<Vec3d> >& contours = loadContourFromQVariant(contoursList);
-		return SphericalRegionP(new SphericalPolygon(contours));
+		return loadFromQVariant(contoursList);
 	}
 	else
 	{
@@ -1227,3 +1268,8 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantMap& map)
 	return SphericalRegionP(new SphericalCap());
 }
 
+void SphericalRegionP::serializeToJson(const QVariant& jsonObject, QIODevice* output, int indentLevel)
+{
+	const SphericalRegionP& reg = jsonObject.value<SphericalRegionP>();
+	StelJsonParser::write(reg->toQVariant(), output, indentLevel);
+}
