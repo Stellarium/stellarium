@@ -71,9 +71,6 @@ ConstellationMgr::~ConstellationMgr()
 		delete (*iter1);
 	}
 	allBoundarySegments.clear();
-
-	disconnect(GETSTELMODULE(StelObjectMgr), SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), 
-			   this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 }
 
 void ConstellationMgr::init()
