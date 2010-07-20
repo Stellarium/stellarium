@@ -1026,7 +1026,7 @@ Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& p3,
 
 Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& n2, bool& ok)
 {
-	if (std::fabs(p1*p2)>1.-1E-10)
+	if (p1*p2>1.-1E-10)
 	{
 		// p1 and p2 are too close to avoid floating point problems
 		ok=false;
