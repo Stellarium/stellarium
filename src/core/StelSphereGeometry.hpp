@@ -99,8 +99,12 @@ public:
 	//! Create a SphericalRegion from the given QVariantMap with a format matching the JSON file parsed in loadFromJson().
 	//! @param map a valid QVariantMap which can be created e.g. from parsing a JSON file with the StelJsonParser class.
 	static SphericalRegionP loadFromQVariant(const QVariantMap& map);
+	// It can only be a pure shape definition, without texture coords
 	static SphericalRegionP loadFromQVariant(const QVariantList& list);
 
+	//! Method registered to JSON serializer.
+	static void serializeToJson(const QVariant& jsonObject, QIODevice* output, int indentLevel=0);
+	
 	//! The QVariant type associated to a SphericalRegionP.
 	static const QVariant::Type qVariantType;
 
@@ -108,7 +112,6 @@ public:
 	static int metaTypeId;
 
 private:
-	static QVector<QVector<Vec3d> > loadContourFromQVariant(const QVariantList& contoursList);
 
 	//! Initialize stuff to allow SphericalRegionP to be used with Qt meta type system.
 	static int initialize();
@@ -180,8 +183,12 @@ public:
 	//! @return a list of vertex which taken 2 by 2 define the contours of the polygon.
 	virtual StelVertexArray getOutlineVertexArray() const {return getOctahedronPolygon().getOutlineVertexArray();}
 
-	//! Serialize the region into a QVariant map matching the JSON format.
-	virtual QVariantMap toQVariant() const = 0;
+	//! Get the contours defining the SphericalPolygon when combined using a positive winding rule.
+	//! The default implementation return a list of tesselated triangles derived from the OctahedronPolygon.
+	virtual QVector<QVector<Vec3d > > getSimplifiedContours() const;
+	
+	//! Serialize the region into a QVariant list matching the JSON format.
+	virtual QVariantList toQVariant() const = 0;
 
 	//! Serialize the region. This method must allow as fast as possible serialization and work with deserialize().
 	virtual void serialize(QDataStream& out) const = 0;
@@ -315,9 +322,9 @@ public:
 	virtual bool intersects(const AllSkySphericalRegion&) const {return d<=1.;}
 
 	//! Serialize the region into a QVariant map matching the JSON format.
-	//! The format is {"type": "CAP", "center": [ra, dec], "radius": radius}, with ra dec in degree in ICRS frame
+	//! The format is ["CAP", [ra, dec], radius], with ra dec in degree in ICRS frame
 	//! and radius in degree (between 0 and 180 deg)
-	virtual QVariantMap toQVariant() const;
+	virtual QVariantList toQVariant() const;
 
 	virtual void serialize(QDataStream& out) const {out << n << d;}
 
@@ -419,8 +426,8 @@ public:
 	virtual Vec3d getPointInside() const {return n;}
 	virtual SphericalCap getBoundingCap() const {return SphericalCap(n, 1);}
 	//! Serialize the region into a QVariant map matching the JSON format.
-	//! The format is {"type": "POINT", "pos": [ra, dec]}, with ra dec in degree in ICRS frame.
-	virtual QVariantMap toQVariant() const;
+	//! The format is ["POINT", [ra, dec]], with ra dec in degree in ICRS frame.
+	virtual QVariantList toQVariant() const;
 	virtual void serialize(QDataStream& out) const {out << n;}
 
 	// Contain and intersect
@@ -457,8 +464,8 @@ public:
 	virtual Vec3d getPointInside() const {return Vec3d(1,0,0);}
 	virtual SphericalCap getBoundingCap() const {return SphericalCap(Vec3d(1,0,0), -2);}
 	//! Serialize the region into a QVariant map matching the JSON format.
-	//! The format is {"type": "ALLSKY"}
-	virtual QVariantMap toQVariant() const;
+	//! The format is ["ALLSKY"]
+	virtual QVariantList toQVariant() const;
 	virtual void serialize(QDataStream&) const {;}
 
 	// Contain and intersect
@@ -499,8 +506,8 @@ public:
 	virtual Vec3d getPointInside() const {return Vec3d(1,0,0);}
 	virtual SphericalCap getBoundingCap() const {return SphericalCap(Vec3d(1,0,0), 2);}
 	//! Serialize the region into a QVariant map matching the JSON format.
-	//! The format is {"type": "EMPTY"}
-	virtual QVariantMap toQVariant() const;
+	//! The format is ["EMPTY"]
+	virtual QVariantList toQVariant() const;
 	virtual void serialize(QDataStream&) const {;}
 
 	// Contain and intersect
@@ -545,10 +552,10 @@ public:
 	virtual OctahedronPolygon getOctahedronPolygon() const {return octahedronPolygon;}
 
 	//! Serialize the region into a QVariant map matching the JSON format.
-	//! The format is
-	//! @code["worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]]]@endcode
-	//! worldCoords is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
-	virtual QVariantMap toQVariant() const;
+	//! The format is:
+	//! @code[[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]]@endcode
+	//! it is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
+	virtual QVariantList toQVariant() const;
 	virtual void serialize(QDataStream& out) const;
 
 	virtual SphericalCap getBoundingCap() const;
@@ -632,9 +639,9 @@ public:
 	QVector<SphericalCap> getBoundingSphericalCaps() const;
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is
-	//! @code{"type": "CVXPOLYGON", "worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]]}@endcode
-	//! worldCoords is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
-	virtual QVariantMap toQVariant() const;
+	//! @code["CONVEX_POLYGON", [[ra,dec], [ra,dec], [ra,dec], [ra,dec]]]@endcode
+	//! where the coords are a closed convex contour, with each points defined by ra dec in degree in the ICRS frame.
+	virtual QVariantList toQVariant() const;
 	virtual void serialize(QDataStream& out) const {out << contour;}
 
 	// Contain and intersect
@@ -713,6 +720,65 @@ protected:
 };
 
 
+//! @class SphericalConvexPolygonSet
+//! A special case of SphericalPolygon for which the polygon is composed of disjoint convex polygons.
+//class SphericalConvexPolygonSet : public SphericalRegion
+//{
+//public:
+//	// Avoid name hiding when overloading the virtual methods.
+//	using SphericalRegion::intersects;
+//	using SphericalRegion::contains;
+//
+//	//! Default constructor.
+//	SphericalConvexPolygonSet() {;}
+//
+//	//! Constructor from a list of contours.
+//	SphericalConvexPolygonSet(const QVector<QVector<Vec3d> >& contours);
+//
+//	virtual SphericalRegionType getType() const {return SphericalRegion::ConvexPolygonSet;}
+//	virtual OctahedronPolygon getOctahedronPolygon() const;
+//	virtual StelVertexArray getFillVertexArray() const;
+//	virtual StelVertexArray getOutlineVertexArray() const;
+//	virtual double getArea() const;
+//	virtual bool isEmpty() const;
+//	virtual Vec3d getPointInside() const;
+//	virtual SphericalCap getBoundingCap() const {return cachedBoundingCap;}
+//	QVector<SphericalCap> getBoundingSphericalCaps() const;
+//	//! Serialize the region into a QVariant map matching the JSON format.
+//	//! The format is
+//	//! @code["CONVEX_POLYGON_SET", [[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec], [ra,dec]]]@endcode
+//	//! where the coords from a list of closed convex contour, with each points defined by ra dec in degree in the ICRS frame.
+//	virtual QVariantList toQVariant() const;
+//	virtual void serialize(QDataStream& out) const;
+//
+//	// Contain and intersect
+//	virtual bool contains(const Vec3d& p) const;
+//	virtual bool contains(const SphericalPolygon& r) const;
+//	virtual bool contains(const SphericalConvexPolygon& r) const;
+//	virtual bool contains(const SphericalCap& r) const;
+//	virtual bool contains(const SphericalPoint& r) const {return contains(r.n);}
+//	virtual bool contains(const AllSkySphericalRegion&) const {return false;}
+//	virtual bool intersects(const SphericalCap& r) const {if (!cachedBoundingCap.intersects(r)) return false; return r.intersects(*this);}
+//	virtual bool intersects(const SphericalPolygon& r) const;
+//	virtual bool intersects(const SphericalConvexPolygon& r) const;
+//	virtual bool intersects(const SphericalPoint& r) const {return contains(r.n);}
+//	virtual bool intersects(const AllSkySphericalRegion&) const {return true;}
+//
+//	////////////////////////////////////////////////////////////////////
+//	// Methods specific to SphericalConvexPolygonSet
+//	////////////////////////////////////////////////////////////////////
+//	//! Deserialize the region. This method must allow as fast as possible deserialization.
+//	static SphericalRegionP deserialize(QDataStream& in);
+//
+//protected:
+//	QVector<SphericalConvexPolygon> contours;
+//
+//	//! Cache the bounding cap.
+//	SphericalCap cachedBoundingCap;
+//
+//	//! Update the bounding cap from the vertex list.
+//	void updateBoundingCap();
+//};
 
 //! @class SphericalTexturedPolygon
 //! An extension of SphericalPolygon with addition of texture coordinates.
@@ -737,13 +803,12 @@ public:
 	virtual StelVertexArray getFillVertexArray() const {Q_ASSERT(0); return StelVertexArray();}
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is:
-	//! @code{"worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]],
-	//! "textureCoords": [[[u,v],[u,v],[u,v],[u,v]], [[u,v],[u,v],[u,v]], [...]]
-	//! }@endcode
-	//! textureCoords is a list of texture coordinates in the u,v texture space (between 0 and 1).
-	//! worldCoords is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
+	//! @code["TEXTURED_POLYGON", [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]],
+	//! [[[u,v],[u,v],[u,v],[u,v]], [[u,v],[u,v],[u,v]], [...]]]@endcode
+	//! where the two lists are a list of closed contours, with each points defined by ra dec in degree in the ICRS frame 
+	//! followed by a list of texture coordinates in the u,v texture space (between 0 and 1).
 	//! There must be one texture coordinate for each vertex.
-	virtual QVariantMap toQVariant() const;
+	virtual QVariantList toQVariant() const;
 	virtual void serialize(QDataStream& out) const {Q_UNUSED(out); Q_ASSERT(0);}
 
 	////////////////////////////////////////////////////////////////////
@@ -794,13 +859,11 @@ public:
 
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is:
-	//! @code{"type": "CVXPOLYGON", "worldCoords": [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]],
-	//! "textureCoords": [[[u,v],[u,v],[u,v],[u,v]], [[u,v],[u,v],[u,v]], [...]]
-	//! }@endcode
-	//! textureCoords is a list of texture coordinates in the u,v texture space (between 0 and 1).
-	//! worldCoords is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
+	//! @code["TEXTURED_CONVEX_POLYGON", [[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[u,v],[u,v],[u,v],[u,v]]]@endcode
+	//! where the two lists are a closed convex contours, with each points defined by ra dec in degree in the ICRS frame 
+	//! followed by a list of texture coordinates in the u,v texture space (between 0 and 1).
 	//! There must be one texture coordinate for each vertex.
-	virtual QVariantMap toQVariant() const;
+	virtual QVariantList toQVariant() const;
 
 	virtual void serialize(QDataStream& out) const {out << contour << textureCoords;}
 

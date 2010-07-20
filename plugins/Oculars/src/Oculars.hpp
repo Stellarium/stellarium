@@ -88,7 +88,7 @@ signals:
 private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
 	void instrumentChanged();
-	void determineMaxImageCircle();
+	void determineMaxEyepieceAngle();
 	void loadCCDs();
 	void loadOculars();
 	void loadTelescopes();
@@ -164,8 +164,8 @@ private:
 	bool flagEclipticLine;		//!< Flag to track if EclipticLine was displayed at activation.
 	bool flagMeridianLine;		//!< Flag to track if MeridianLine was displayed at activation.
 
-	double maxImageCircle;		//!< The maximum image circle for all eyepieces.  Used to scale the mask.
-	bool useMaxImageCircle;		//!< Read from the ini file, whether to scale the mask based on exit circle size.
+	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
+	bool useMaxEyepieceAngle;	//!< Read from the ini file, whether to scale the mask based aFOV.
 
 
 	// for toolbar button
