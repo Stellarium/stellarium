@@ -137,13 +137,6 @@ public:
 	//! @param show if true, make the configuration GUI visible.  If false, hide the config GUI if there is one.
 	//! @return true if the module has a configuration GUI, else false.
 	virtual bool configureGui(bool show=true) {Q_UNUSED(show); return false;}
-
-	//! Create any QActions and buttons for the toolbar that this module uses.  No actions should be created
-	//! outside of this method, or they will not be handled correctly when it comes to managing key mappings.
-	//! This is typically where connections would be made as well.
-	//! If a particular action should only be allowed under certian circumstances, insure that the logic is surrounded
-	//! by a guard condition, instead of creating actions & connections in other methods.
-	virtual void setupGuiActions(){;};
 };
 
 #endif // _STELMODULE_HPP_
