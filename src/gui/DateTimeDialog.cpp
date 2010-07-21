@@ -102,6 +102,12 @@ void DateTimeDialog::styleChanged()
 	// Nothing for now
 }
 
+void DateTimeDialog::close()
+{
+	ui->dateTimeBox->setFocus();
+	StelDialog::close();
+}
+
 /************************************************************************
  year slider or dial changed
 ************************************************************************/
@@ -157,8 +163,10 @@ void DateTimeDialog::pushToWidgets()
   ui->spinner_month->setValue(month);
   ui->spinner_day->setValue(day);
   ui->spinner_hour->setValue(hour);
-  ui->spinner_minute->setValue(minute);
-  ui->spinner_second->setValue(second);
+  if (!ui->spinner_minute->hasFocus() || (ui->spinner_minute->value() == -1) || (ui->spinner_minute->value() == 60))
+    ui->spinner_minute->setValue(minute);
+  if (!ui->spinner_second->hasFocus() || (ui->spinner_second->value() == -1) || (ui->spinner_second->value() == 60))
+    ui->spinner_second->setValue(second);
 }
 
 /************************************************************************
