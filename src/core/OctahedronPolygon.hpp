@@ -26,12 +26,16 @@
 #include "VecMath.hpp"
 #include "StelVertexArray.hpp"
 
+//! @struct EdgeVertex
+//! Describe a vertex composing polygon contours, and whether it belong to an edge or not.
 struct EdgeVertex
 {
 	EdgeVertex() : edgeFlag(false) {;}
 	EdgeVertex(bool b) : edgeFlag(b) {;}
 	EdgeVertex(const Vec3d& v, bool b) : vertex(v), edgeFlag(b) {;}
+	//! The normalized vertex direction.
 	Vec3d vertex;
+	//! Set to true if the vertex is part of at least one edge segment, i.e. it lays on the boundary of the polygon.
 	bool edgeFlag;
 };
 

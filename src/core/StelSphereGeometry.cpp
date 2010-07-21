@@ -598,7 +598,16 @@ QVector<Vec3d> SphericalCap::getClosedOutlineContour() const
 
 OctahedronPolygon SphericalCap::getOctahedronPolygon() const
 {
-	return OctahedronPolygon(getClosedOutlineContour());
+	if (d>=0)
+		return OctahedronPolygon(getClosedOutlineContour());
+	else
+	{
+		SphericalCap cap(-n, -d);
+		AllSkySphericalRegion allSky;
+		OctahedronPolygon poly = allSky.getOctahedronPolygon();
+		poly.inPlaceSubtraction(cap.getOctahedronPolygon());
+		return poly;
+	}
 }
 
 QVariantList SphericalCap::toQVariant() const
@@ -1128,7 +1137,7 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& contours
 			if (!ok)
 				throw std::runtime_error(qPrintable(QString("invalid aperture angle: \"%1\" (expect a double value in degree)").arg(contourToList.at(2).toString())));
 			SphericalCap cap(v,std::cos(d));
-			contours.append(cap.getClosedOutlineContour());
+			contours << cap.getSimplifiedContours();
 			continue;
 		}
 		if (contourToList.at(0).toString()=="INTERSECTION")
