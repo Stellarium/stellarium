@@ -109,9 +109,6 @@ public:
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
 
 public slots:
-	//! Called when a new object is selected.
-	void selectedObjectChange(StelModuleSelectAction action);
-	
 	///////////////////////////////////////////////////////////////////////////
 	// Method callable from script and GUI
 	// Properties setters and getters
@@ -221,6 +218,10 @@ public:
 	//! Get the list of all the bodies of the solar system.
 	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}
 
+private slots:
+	//! Called when a new object is selected.
+	void selectedObjectChange(StelModuleSelectAction action);
+	
 private:
 	//! Search for SolarSystem objects which are close to the position given
 	//! in earth equatorial position.
