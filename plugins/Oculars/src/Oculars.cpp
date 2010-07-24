@@ -288,7 +288,8 @@ void Oculars::init()
 void Oculars::setStelStyle(const QString&)
 {
 	qDebug() << "====> Oculars here.";
-	ocularDialog->updateStyle();
+	if(ocularDialog)
+		ocularDialog->updateStyle();
 }
 
 /* ********************************************************************* */
