@@ -598,7 +598,16 @@ QVector<Vec3d> SphericalCap::getClosedOutlineContour() const
 
 OctahedronPolygon SphericalCap::getOctahedronPolygon() const
 {
-	return OctahedronPolygon(getClosedOutlineContour());
+	if (d>=0)
+		return OctahedronPolygon(getClosedOutlineContour());
+	else
+	{
+		SphericalCap cap(-n, -d);
+		AllSkySphericalRegion allSky;
+		OctahedronPolygon poly = allSky.getOctahedronPolygon();
+		poly.inPlaceSubtraction(cap.getOctahedronPolygon());
+		return poly;
+	}
 }
 
 QVariantList SphericalCap::toQVariant() const
@@ -1026,7 +1035,7 @@ Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& p3,
 
 Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& n2, bool& ok)
 {
-	if (std::fabs(p1*p2)>1.-1E-10)
+	if (p1*p2>1.-1E-10)
 	{
 		// p1 and p2 are too close to avoid floating point problems
 		ok=false;
@@ -1128,7 +1137,7 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& contours
 			if (!ok)
 				throw std::runtime_error(qPrintable(QString("invalid aperture angle: \"%1\" (expect a double value in degree)").arg(contourToList.at(2).toString())));
 			SphericalCap cap(v,std::cos(d));
-			contours.append(cap.getClosedOutlineContour());
+			contours << cap.getSimplifiedContours();
 			continue;
 		}
 		if (contourToList.at(0).toString()=="INTERSECTION")
