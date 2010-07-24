@@ -229,7 +229,7 @@ QString radToDmsStr(double angle, bool decimal, bool useD)
 	QString str;
 	QTextStream os(&str);
 	os << (sign?'+':'-') << d << degsign;
-	
+
 	os << qSetFieldWidth(2) << qSetPadChar('0') << m << qSetFieldWidth(0) << '\'';
 	int width;
 	if (decimal)
@@ -473,7 +473,7 @@ void getDateFromJulianDay(double jd, int *year, int *month, int *day)
 void getTimeFromJulianDay(double julianDay, int *hour, int *minute, int *second)
 {
 	double frac = julianDay - (floor(julianDay));
-	int s = (int)floor(frac * 24 * 60 * 60);
+	int s = (int)floor((frac * 24.0 * 60.0 * 60.0) + 0.0001);  // add constant to fix floating-point truncation error
 
 	*hour = ((s / (60 * 60))+12)%24;
 	*minute = (s/(60))%60;
@@ -948,7 +948,7 @@ bool getDateTimeFromISO8601String(const QString& iso8601Date, int* y, int* m, in
 		if (!error)
 			return true;
 	}
-	return false;	
+	return false;
 }
 
 

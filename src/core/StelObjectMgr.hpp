@@ -31,8 +31,6 @@ class StelCore;
 
 //! @class StelObjectMgr
 //! Manage the selection and queries on one or more StelObjects.
-//! When the user requests selection of an object, the selectedObjectChangeCallBack method
-//! of all the StelModule which are registered is called.
 //! Each module is then free to manage object selection as it wants.
 class StelObjectMgr : public StelModule
 {
