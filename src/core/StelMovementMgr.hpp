@@ -86,9 +86,6 @@ public:
 	void setDragTriggerDistance(float d) {dragTriggerDistance=d;}
 
 public slots:
-	//! Called when the selected object changes.
-	void selectedObjectChange(StelModuleSelectAction action);
-
 	//! Toggle current mount mode between equatorial and altazimuthal
 	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquinoxEquatorial); else setMountMode(MountAltAzimuthal);}
 	//! Define whether we should use equatorial mount or altazimuthal
@@ -201,6 +198,10 @@ public slots:
 	void setDragTimeMode(bool b) {dragTimeMode=b;}
 	bool getDragTimeMode() const {return dragTimeMode;}
 
+private slots:
+	//! Called when the selected object changes.
+	void selectedObjectChange(StelModuleSelectAction action);
+	
 private:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
 	Vec3d mountFrameToJ2000(const Vec3d& v) const;
