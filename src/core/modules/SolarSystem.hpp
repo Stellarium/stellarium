@@ -220,7 +220,7 @@ public:
 
 private slots:
 	//! Called when a new object is selected.
-	void selectedObjectChange(StelModuleSelectAction action);
+	void selectedObjectChange(StelModule::StelModuleSelectAction action);
 	
 private:
 	//! Search for SolarSystem objects which are close to the position given

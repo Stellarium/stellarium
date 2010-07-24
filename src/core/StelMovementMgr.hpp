@@ -200,7 +200,7 @@ public slots:
 
 private slots:
 	//! Called when the selected object changes.
-	void selectedObjectChange(StelModuleSelectAction action);
+	void selectedObjectChange(StelModule::StelModuleSelectAction action);
 	
 private:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
