@@ -162,7 +162,7 @@ private slots:
 	//! The selected objects changed, check if some stars are selected and display the
 	//! matching constellations if isolateSelected mode is activated.
 	//! @param action define whether to add to, replace, or remove from the existing selection
-	void selectedObjectChange(StelModuleSelectAction action);
+	void selectedObjectChange(StelModule::StelModuleSelectAction action);
 	
 private:
 	//! Read constellation names from the given file.

@@ -387,7 +387,7 @@ void StelMovementMgr::setInitViewDirectionToCurrent()
 /*************************************************************************
  The selected objects changed, follow it it we were already following another one
 *************************************************************************/
-void StelMovementMgr::selectedObjectChange(StelModuleSelectAction)
+void StelMovementMgr::selectedObjectChange(StelModule::StelModuleSelectAction)
 {
 	// If an object was selected keep the earth following
 	if (objectMgr->getWasSelected())
