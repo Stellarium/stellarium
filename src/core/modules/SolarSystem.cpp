@@ -1075,7 +1075,7 @@ QStringList SolarSystem::listMatchingObjectsI18n(const QString& objPrefix, int m
 	return result;
 }
 
-void SolarSystem::selectedObjectChange(StelModuleSelectAction)
+void SolarSystem::selectedObjectChange(StelModule::StelModuleSelectAction)
 {
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Planet");
 	if (!newSelected.empty())

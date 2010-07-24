@@ -169,7 +169,7 @@ void ConstellationMgr::setStelStyle(const QString& section)
 	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/const_names_color", defaultColor).toString()));
 }
 
-void ConstellationMgr::selectedObjectChange(StelModuleSelectAction action)
+void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction action)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(omgr);
