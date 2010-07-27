@@ -1153,6 +1153,17 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& contours
 				contours << reg1->getSimplifiedContours();
 			continue;
 		}
+		if (contourToList.at(0).toString()=="SUBTRACTION")
+		{
+			Q_ASSERT(contourToList.size()==3);
+			SphericalRegionP reg1 = loadFromQVariant(contourToList.at(1).toList());
+			SphericalRegionP reg2 = loadFromQVariant(contourToList.at(2).toList());
+			SphericalRegionP regIntersection = reg1->getIntersection(reg2.data());
+			reg1 = reg1->getSubtraction(regIntersection.data());
+			if (!reg1->isEmpty())
+				contours << reg1->getSimplifiedContours();
+			continue;
+		}
 		if (contourToList.at(0).toString()=="PATH")
 		{
 			// We now parse a path, the format is
@@ -1161,9 +1172,9 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& contours
 			Vec3d v;
 			parseRaDec(contourToList.at(1), v);
 			vertices.append(v);	// Starting point
-			foreach (const QVariant& elem, contourToList.at(2).toList())
+			for (int k=2;k<contourToList.size();++k)
 			{
-				const QVariantList& elemList = elem.toList();
+				const QVariantList& elemList = contourToList.at(k).toList();
 				if (elemList.size()<1)
 					throw std::runtime_error(qPrintable(QString("invalid PATH description: \"%1\" (expect a list of greatCircleTo or smallCircle").arg(contourToList.at(2).toString())));
 				if (elemList.at(0)=="greatCircleTo")
@@ -1179,7 +1190,7 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& contours
 					double angle = elemList.at(2).toDouble(&ok)*M_PI/180.;
 					if (!ok || std::fabs(angle)>2.*M_PI)
 						throw std::runtime_error(qPrintable(QString("invalid small circle rotation angle: \"%1\" (expect a double value in degree betwwen -2pi and 2pi)").arg(elemList.at(2).toString())));
-					int nbStep = 1+(int)(std::fabs(angle)/(2.*M_PI)*50);
+					int nbStep = 1+(int)(std::fabs(angle)/(2.*M_PI)*75);
 					Q_ASSERT(nbStep>0);
 					v = vertices.last();
 					const Mat4d& rotMat = Mat4d::rotation(axis, angle/nbStep);
