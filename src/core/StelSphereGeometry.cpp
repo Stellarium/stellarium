@@ -26,12 +26,10 @@
 #include "StelJsonParser.hpp"
 
 // Definition of static constants.
-const QVariant::Type SphericalRegionP::qVariantType = (QVariant::Type)(QVariant::UserType+1);
 int SphericalRegionP::metaTypeId = SphericalRegionP::initialize();
-
 int SphericalRegionP::initialize()
 {
-	int id = qRegisterMetaType<SphericalRegionP>();
+	int id = qRegisterMetaType<SphericalRegionP>("SphericalRegionP");
 	qRegisterMetaTypeStreamOperators<SphericalRegionP>("SphericalRegionP");
 	return id;
 }
@@ -618,7 +616,7 @@ QVariantList SphericalCap::toQVariant() const
 	StelUtils::rectToSphe(&ra, &dec, n);
 	QVariantList l;
 	l << ra*180./M_PI << dec*180./M_PI;
-	res << l;
+	res << QVariant(l);
 	res << std::acos(d)*180./M_PI;
 	return res;
 }
