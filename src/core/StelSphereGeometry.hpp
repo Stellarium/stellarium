@@ -104,9 +104,6 @@ public:
 
 	//! Method registered to JSON serializer.
 	static void serializeToJson(const QVariant& jsonObject, QIODevice* output, int indentLevel=0);
-	
-	//! The QVariant type associated to a SphericalRegionP.
-	static const QVariant::Type qVariantType;
 
 	//! The meta type ID associated to a SphericalRegionP.
 	static int metaTypeId;
