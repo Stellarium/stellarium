@@ -1114,8 +1114,29 @@ QVector<QVector<Vec3d > > SphericalRegion::getSimplifiedContours() const
 	return result.triangleList;
 }
 
+SphericalRegionP capFromQVariantList(const QVariantList& l)
+{
+	Q_ASSERT(l.at(0).toString()=="CAP");
+	// We now parse a cap, the format is "CAP",[ra, dec],aperture
+	if (l.size()!=3)
+		throw std::runtime_error(qPrintable(QString("invalid CAP description: %1 (expect \"CAP\",[ra, dec],aperture)").arg(QString::fromUtf8(StelJsonParser::write(l)))));
+	Vec3d v;
+	parseRaDec(l.at(1), v);
+	bool ok;
+	double d = l.at(2).toDouble(&ok)*M_PI/180.;
+	if (!ok)
+		throw std::runtime_error(qPrintable(QString("invalid aperture angle: \"%1\" (expect a double value in degree)").arg(l.at(2).toString())));
+	return SphericalRegionP(new SphericalCap(v,std::cos(d)));
+}
+
 SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& contoursList)
 {
+	if (contoursList.isEmpty())
+		return EmptySphericalRegion::staticInstance;
+	const QString& code=contoursList.at(0).toString();
+	if (code=="CAP")
+		return capFromQVariantList(contoursList);
+	
 	QVector<QVector<Vec3d> > contours;
 	QVector<Vec3d> vertices;
 	bool ok;
@@ -1126,16 +1147,9 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& contours
 			throw std::runtime_error(qPrintable(QString("invalid contour definition: %1").arg(contoursList.at(i).toString())));
 		if (contourToList.at(0).toString()=="CAP")
 		{
-			// We now parse a cap, the format is "CAP",[ra, dec],aperture
-			if (contourToList.size()!=3)
-				throw std::runtime_error(qPrintable(QString("invalid CAP description: %1 (expect \"CAP\",[ra, dec],aperture)").arg(contoursList.at(i).toString())));
-			Vec3d v;
-			parseRaDec(contourToList.at(1), v);
-			double d = contourToList.at(2).toDouble(&ok)*M_PI/180.;
-			if (!ok)
-				throw std::runtime_error(qPrintable(QString("invalid aperture angle: \"%1\" (expect a double value in degree)").arg(contourToList.at(2).toString())));
-			SphericalCap cap(v,std::cos(d));
-			contours << cap.getSimplifiedContours();
+			SphericalRegionP cap = capFromQVariantList(contourToList);
+			Q_ASSERT(cap->getType()==SphericalRegion::Cap);
+			contours << cap->getSimplifiedContours();
 			continue;
 		}
 		if (contourToList.at(0).toString()=="INTERSECTION")
