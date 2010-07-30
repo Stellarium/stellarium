@@ -37,7 +37,7 @@
 #include <QApplication>
 #include <QDebug>
 #include <QFileInfo>
-#include <QGraphicsGridLayout>
+#include <QGraphicsAnchorLayout>
 #include <QGraphicsProxyWidget>
 #include <QPluginLoader>
 #include <QtPlugin>
@@ -188,7 +188,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	setScene(new QGraphicsScene(this));
 	scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
 
-	backItem = new QGraphicsWidget();
+        backItem = new QGraphicsWidget();
 	backItem->setFocusPolicy(Qt::NoFocus);
 }
 
@@ -202,12 +202,16 @@ void StelMainGraphicsView::init(QSettings* conf)
 	glWidget->makeCurrent();
 
 	// Create the main widget for stellarium, which in turn creates the main StelApp instance.
-	mainSkyItem = new StelAppGraphicsWidget();
+        mainSkyItem = new StelAppGraphicsWidget();
 	mainSkyItem->setZValue(-10);
-	QGraphicsGridLayout* l = new QGraphicsGridLayout(backItem);
+        QGraphicsAnchorLayout *l = new QGraphicsAnchorLayout();
+        backItem->setLayout(l);
 	l->setContentsMargins(0,0,0,0);
-	l->setSpacing(0);
-	l->addItem(mainSkyItem, 0, 0);
+        l->setSpacing(5);
+        l->addAnchor(mainSkyItem, Qt::AnchorTop, l, Qt::AnchorTop);
+        l->addAnchor(mainSkyItem, Qt::AnchorLeft, l, Qt::AnchorLeft);
+        l->addAnchor(mainSkyItem, Qt::AnchorRight, l, Qt::AnchorRight);
+        l->addAnchor(mainSkyItem, Qt::AnchorBottom, l, Qt::AnchorBottom);
 	scene()->addItem(backItem);
 
 	// Activate the resizing caused by the layout
@@ -221,10 +225,10 @@ void StelMainGraphicsView::init(QSettings* conf)
 	maxfps = conf->value("video/maximum_fps",10000.f).toFloat();
 	minfps = conf->value("video/minimum_fps",10000.f).toFloat();
 
-	StelPainter::initSystemGLInfo(glContext);
+        StelPainter::initSystemGLInfo(glContext);
 
-	QPainter qPainter(glWidget);
-	StelPainter::setQPainter(&qPainter);
+        QPainter qPainter(glWidget);
+        StelPainter::setQPainter(&qPainter);
 
 	// Initialize the core, including the StelApp instance.
 	mainSkyItem->init(conf);
@@ -265,7 +269,7 @@ void StelMainGraphicsView::init(QSettings* conf)
 #endif
 
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
-	StelPainter::setQPainter(NULL);
+        StelPainter::setQPainter(NULL);
 	startMainLoop();
 }
 
