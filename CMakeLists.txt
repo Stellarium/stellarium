@@ -56,12 +56,12 @@ ENDIF()
 
 # best way to get to APPLE?
 IF(APPLE)
- SET(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -mmacosx-version-min=10.4")
+ SET(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra")
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
- SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.4")
- SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.4u.sdk/")
+# SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.5")
+# SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.5.sdk/")
  # Universal binary
- SET(CMAKE_OSX_ARCHITECTURES "i386;ppc")
+# SET(CMAKE_OSX_ARCHITECTURES "i386;ppc")
 ENDIF()
 
 ########### Check functions ###########
