@@ -207,7 +207,8 @@ void StelMainGraphicsView::init(QSettings* conf)
         QGraphicsAnchorLayout *l = new QGraphicsAnchorLayout();
         backItem->setLayout(l);
 	l->setContentsMargins(0,0,0,0);
-        l->setSpacing(5);
+        l->setSpacing(0);
+        mainSkyItem->setContentsMargins(0,0,0,0);
         l->addAnchor(mainSkyItem, Qt::AnchorTop, l, Qt::AnchorTop);
         l->addAnchor(mainSkyItem, Qt::AnchorLeft, l, Qt::AnchorLeft);
         l->addAnchor(mainSkyItem, Qt::AnchorRight, l, Qt::AnchorRight);
