@@ -331,6 +331,9 @@ void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
 	scene()->setSceneRect(QRect(QPoint(0, 0), event->size()));
 	backItem->setGeometry(0,0,event->size().width(),event->size().height());
 	QGraphicsView::resizeEvent(event);
+        // After resizing event we have to relocate the button bar
+        if (gui)
+            gui->forceRefreshGui();
 }
 
 void StelMainGraphicsView::mouseMoveEvent(QMouseEvent* event)
