@@ -57,12 +57,35 @@ QDataStream& operator>>(QDataStream& in, EdgeVertex& v)
 	return in;
 }
 
+SubContour::SubContour(const QVector<Vec3d>& vertices, bool closed) : QVector<EdgeVertex>(vertices.size(), EdgeVertex(true))
+{
+	// Create the contour list by adding the matching edge flags
+	for (int i=0;i<vertices.size();++i)
+		(*this)[i].vertex = vertices.at(i);
+	if (closed==false)
+	{
+		this->first().edgeFlag=false;
+		this->last().edgeFlag=false;
+	}
+}
+
+SubContour SubContour::reversed() const
+{
+	SubContour res;
+	QVectorIterator<EdgeVertex> iter(*this);
+	iter.toBack();
+	while (iter.hasPrevious())
+		res.append(iter.previous());
+	return res;
+}
+
 QString SubContour::toJSON() const
 {
 	QString res("[");
 	double ra, dec;
 	foreach (const EdgeVertex& v, *this)
 	{
+		//res += QString("[") + v.vertex.toString() + "],";
 		StelUtils::rectToSphe(&ra, &dec, v.vertex);
 		res += QString("[") + QString::number(ra*180./M_PI, 'g', 12) + "," + QString::number(dec*180./M_PI, 'g', 12) + "," + (v.edgeFlag ? QString("true"): QString("false")) + "],";
 	}
@@ -118,6 +141,44 @@ void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 	QVector<SubContour> splittedContour1[2];
 	// Split the contour on the plan Y=0
 	splitContourByPlan(1, inContour, splittedContour1);
+	
+//	for (int c=0;c<2;++c)
+//	{
+//		for (int i=0;i<splittedContour1[c].size();++i)
+//		{
+//			SubContour& tmpSubContour = splittedContour1[c][i];
+//			// If the contour was not splitted, don't try to connect
+//			if (tmpSubContour.last().edgeFlag==true)
+//				continue;
+//			const Vec3d& v1(tmpSubContour.first().vertex);
+//			const Vec3d& v2(tmpSubContour.last().vertex);
+//			Q_ASSERT(fabs(v1[1])<1e-50);
+//			Q_ASSERT(fabs(v2[1])<1e-50);
+//			Vec3d v = tmpSubContour.first().vertex^tmpSubContour.last().vertex;
+//			//qDebug() << v.toString();
+//			if (v1*v2<0.)
+//			{
+//				if (v1[0]<0)
+//				// A south pole has to be added
+//				tmpSubContour << EdgeVertex(Vec3d(0,0,-1), false);
+//			}
+//			// else the contour ends on the same longitude line as it starts
+			
+//			else if (v[2]<-0.0000001)
+//			{
+//				// A north pole has to be added
+//				tmpSubContour << EdgeVertex(Vec3d(0,0,1), false);
+//			}
+//			else
+//			{
+//				// else the contour ends on the same longitude line as it starts
+//				Q_ASSERT(std::fabs(v[0])<0.0000001 || std::fabs(v[1])<0.0000001);
+//			}
+//			tmpSubContour.closed=true;
+//		}
+//	}
+	
+	
 	// Re-split the contours on the plan X=0
 	QVector<SubContour> splittedVertices2[4];
 	foreach (const SubContour& subContour, splittedContour1[0])
@@ -135,6 +196,7 @@ void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 			if (tmpSubContour.last().edgeFlag==true)
 				continue;
 			Vec3d v = tmpSubContour.first().vertex^tmpSubContour.last().vertex;
+			//qDebug() << v.toString();
 			if (v[2]>0.00000001)
 			{
 				// A south pole has to be added
@@ -293,11 +355,9 @@ QVector<Vec3d> OctahedronPolygon::tesselateOneSideTriangles(GLUEStesselator* tes
 	gluesTessBeginPolygon(tess, &data);
 	for (int c=0;c<contours.size();++c)
 	{
-		//qDebug() << contours.at(c).toJSON();
 		gluesTessBeginContour(tess);
 		for (int i=0;i<contours.at(c).size();++i)
 		{
-			//qDebug() << contours[c][i].vertex.toString();
 			gluesTessVertex(tess, const_cast<double*>((const double*)contours[c][i].vertex.data()), (void*)&(contours[c][i].vertex));
 		}
 		gluesTessEndContour(tess);
@@ -431,11 +491,9 @@ QVector<SubContour> OctahedronPolygon::tesselateOneSideLineLoop(GLUEStesselator*
 	gluesTessBeginPolygon(tess, &data);
 	for (int c=0;c<contours.size();++c)
 	{
-		//qDebug() << contours.at(c).toJSON();
 		gluesTessBeginContour(tess);
 		for (int i=0;i<contours.at(c).size();++i)
 		{
-			//qDebug() << contours[c][i].vertex.toString();
 			Q_ASSERT(contours[c][i].vertex[2]<0.000001);
 			gluesTessVertex(tess, const_cast<double*>((const double*)contours[c][i].vertex.data()), const_cast<void*>((const void*)&(contours[c][i])));
 		}
@@ -463,12 +521,10 @@ void vertexLineLoopCallback(EdgeVertex* vertexData, OctTessLineLoopCallbackData*
 void combineLineLoopCallback(double coords[3], EdgeVertex* vertex_data[4], GLfloat[4], EdgeVertex** outData, OctTessLineLoopCallbackData* userData)
 {
 	bool newFlag=false;
-	//qDebug() << "Combine data" << coords[0] << coords[1] << coords[2];
 	for (int i=0;i<4;++i)
 	{
 		if (vertex_data[i]==NULL)
 			break;
-		//qDebug() << "Vertex " << i << dd->vertex.toString() << weight[i];
 		newFlag = newFlag || vertex_data[i]->edgeFlag;
 	}
 	// Check that the new coordinate lay on the octahedron plane
@@ -604,20 +660,23 @@ bool OctahedronPolygon::isEmpty() const
 
 void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputContour, QVector<SubContour> result[2])
 {
-	SubContour currentSubContour;
+ 	SubContour currentSubContour;
 	SubContour unfinishedSubContour;
 	int previousQuadrant=getSide(inputContour.first().vertex, onLine);
 	int currentQuadrant=0;
 	Vec3d tmpVertex;
 	EdgeVertex previousVertex=inputContour.first();
 	EdgeVertex currentVertex;
-	int i;
+	int i=0;
 	bool ok=true;
 	const Vec3d plan(onLine==0?1:0, onLine==1?1:0, onLine==2?1:0);
+
 	// Take care first of the unfinished contour
 	for (i=0;i<inputContour.size();++i)
 	{
 		currentVertex = inputContour.at(i);
+		if (currentVertex.vertex[onLine]==0)
+			currentVertex.vertex[onLine]=1e-98;
 		currentQuadrant = getSide(currentVertex.vertex, onLine);
 		if (currentQuadrant==previousQuadrant)
 		{
@@ -636,18 +695,30 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 			}
 			else
 			{
-				unfinishedSubContour << EdgeVertex(tmpVertex, false); // Last point of the contour, it's not an edge
-				currentSubContour << EdgeVertex(tmpVertex, false);
+				Vec3d tmpVertexSides[2];
+				tmpVertexSides[0]=tmpVertex;
+				tmpVertexSides[1]=tmpVertex;
+				tmpVertexSides[0][onLine]=1e-99;
+				tmpVertexSides[1][onLine]=-1e-99;
+				Q_ASSERT(getSide(tmpVertexSides[0], onLine)==0);
+				Q_ASSERT(getSide(tmpVertexSides[1], onLine)==1);
+				
+				unfinishedSubContour << EdgeVertex(tmpVertexSides[previousQuadrant], false); // Last point of the contour, it's not an edge
+				currentSubContour << EdgeVertex(tmpVertexSides[currentQuadrant], false);
 			}
 			previousQuadrant = currentQuadrant;
+			previousVertex=currentVertex;
 			break;
 		}
 		previousVertex=currentVertex;
 	}
+	
 	// Now handle the other ones
 	for (;i<inputContour.size();++i)
 	{
 		currentVertex = inputContour.at(i);
+		if (currentVertex.vertex[onLine]==0)
+			currentVertex.vertex[onLine]=1e-98;
 		currentQuadrant = getSide(currentVertex.vertex, onLine);
 		if (currentQuadrant==previousQuadrant)
 		{
@@ -669,10 +740,18 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 			}
 			else
 			{
-				currentSubContour << EdgeVertex(tmpVertex, false); // Last point of the contour, it's not an edge
+				Vec3d tmpVertexSides[2];
+				tmpVertexSides[0]=tmpVertex;
+				tmpVertexSides[1]=tmpVertex;
+				tmpVertexSides[0][onLine]=1e-99;
+				tmpVertexSides[1][onLine]=-1e-99;
+				Q_ASSERT(getSide(tmpVertexSides[0], onLine)==0);
+				Q_ASSERT(getSide(tmpVertexSides[1], onLine)==1);
+				
+				currentSubContour << EdgeVertex(tmpVertexSides[previousQuadrant], false); 
 				result[previousQuadrant] << currentSubContour;
 				currentSubContour.clear();
-				currentSubContour << EdgeVertex(tmpVertex, false);
+				currentSubContour << EdgeVertex(tmpVertexSides[currentQuadrant], false);
 				currentSubContour << currentVertex;
 			}
 			previousQuadrant = currentQuadrant;
@@ -680,6 +759,7 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 		previousVertex=currentVertex;
 	}
 
+	
 	// Handle the last line between the last and first point
 	previousQuadrant = currentQuadrant;
 	currentQuadrant = getSide(inputContour.first().vertex, onLine);
@@ -700,38 +780,31 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 		}
 		else
 		{
-			currentSubContour << EdgeVertex(tmpVertex, false);	// Last point of the contour, it's not an edge
+			Vec3d tmpVertexSides[2];
+			tmpVertexSides[0]=tmpVertex;
+			tmpVertexSides[1]=tmpVertex;
+			tmpVertexSides[0][onLine]=1e-99;
+			tmpVertexSides[1][onLine]=-1e-99;
+			Q_ASSERT(getSide(tmpVertexSides[0], onLine)==0);
+			Q_ASSERT(getSide(tmpVertexSides[1], onLine)==1);
+			
+			currentSubContour << EdgeVertex(tmpVertexSides[previousQuadrant], false);	// Last point of the contour, it's not an edge
 			result[previousQuadrant] << currentSubContour;
 			currentSubContour.clear();
-			currentSubContour << EdgeVertex(tmpVertex, false);
+			currentSubContour << EdgeVertex(tmpVertexSides[currentQuadrant], false);
 		}
 	}
 
 	// Append the last contour made from the last vertices + the previous unfinished ones
 	currentSubContour << unfinishedSubContour;
+	
 	result[currentQuadrant] << currentSubContour;
-}
-
-SubContour::SubContour(const QVector<Vec3d>& vertices, bool closed) : QVector<EdgeVertex>(vertices.size(), EdgeVertex(true))
-{
-	// Create the contour list by adding the matching edge flags
-	for (int i=0;i<vertices.size();++i)
-		(*this)[i].vertex = vertices.at(i);
-	if (closed==false)
-	{
-		this->first().edgeFlag=false;
-		this->last().edgeFlag=false;
-	}
-}
-
-SubContour SubContour::reversed() const
-{
-	SubContour res;
-	QVectorIterator<EdgeVertex> iter(*this);
-	iter.toBack();
-	while (iter.hasPrevious())
-		res.append(iter.previous());
-	return res;
+	
+//	qDebug() << onLine << inputContour.toJSON();
+//	if (!result[0].isEmpty())
+//		qDebug() << result[0].at(0).toJSON();
+//	if (!result[1].isEmpty())
+//		qDebug() << result[1].at(0).toJSON();
 }
 
 void OctahedronPolygon::computeBoundingCap()
@@ -791,6 +864,7 @@ OctahedronPolygon OctahedronPolygon::createAllSkyOctahedronPolygon()
 	}
 	projectOnOctahedron(poly.sides);
 	poly.updateVertexArray();
+	poly.capD = -2;
 	Q_ASSERT(std::fabs(poly.getArea()-4.*M_PI)<0.0000001);
 	return poly;
 }
@@ -821,6 +895,7 @@ QDataStream& operator>>(QDataStream& in, OctahedronPolygon& p)
 	{
 		in >> p.sides[i];
 	}
+//	p.updateVertexArray();
 	in >> p.fillCachedVertexArray;
 	in >> p.outlineCachedVertexArray;
 	in >> p.capN;

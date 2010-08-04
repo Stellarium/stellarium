@@ -40,6 +40,8 @@ public slots:
 	//! update the editing display with new JD.
 	void setDateTime(double newJd);
 
+	void close();
+
 signals:
 	//! signals that a new, valid JD is available.
 	void dateTimeChanged(double newJd);
