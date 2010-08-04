@@ -1174,39 +1174,56 @@ QVector<Vec3d> pathFromQVariantList(const QVariantList& l)
 	return vertices;
 }
 
+QVector<Vec3d> singleContourFromQVariantList(const QVariantList& l)
+{
+	if (l.size()<3)
+		throw std::runtime_error("a polygon contour must have at least 3 vertices");
+	QVector<Vec3d> vertices;
+	Vec3d v;
+	foreach (const QVariant& vRaDec, l)
+	{
+		parseRaDec(vRaDec, v);
+		vertices.append(v);
+	}
+	Q_ASSERT(vertices.size()>2);
+	return vertices;
+}
+
 SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& l)
 {
 	if (l.isEmpty())
 		return EmptySphericalRegion::staticInstance;
 	if (l.at(0).type()==QVariant::List)
 	{
-		// The region is composed of a list of regions, which are assumed to be combined using the positive winding rule.
+		// The region is composed of either:
+		// - a list of regions, which are assumed to be combined using the positive winding rule.
+		// - or a single contour
 		QVector<QVector<Vec3d> > contours;
-		for (int i=0;i<l.size();++i)
+		try {
+			Vec3d v;
+			parseRaDec(l.at(0), v);
+			// No exception was thrown, we are parsing a single contour
+			contours.append(singleContourFromQVariantList(l));
+		}
+		catch (std::runtime_error&)
 		{
-			const QVariantList& subL = l.at(i).toList();
-			if (subL.isEmpty())
-				throw std::runtime_error(qPrintable(QString("invalid region definition: %1").arg(l.at(i).toString())));
-			if (subL.at(0).type()==QVariant::List)
+			// We are parsing a list of regions.
+			for (int i=0;i<l.size();++i)
 			{
-				// Special optimization for basic contours (if no type is provided, assume a polygon)
-				if (subL.size()<3)
-					throw std::runtime_error("a polygon contour must have at least 3 vertices");
-				QVector<Vec3d> vertices;
-				Vec3d v;
-				foreach (const QVariant& vRaDec, subL)
+				const QVariantList& subL = l.at(i).toList();
+				if (subL.isEmpty())
+					throw std::runtime_error(qPrintable(QString("invalid region definition: %1").arg(l.at(i).toString())));
+				if (subL.at(0).type()==QVariant::List)
 				{
-					parseRaDec(vRaDec, v);
-					vertices.append(v);
+					// Special optimization for basic contours (if no type is provided, assume a polygon)
+					contours.append(singleContourFromQVariantList(subL));
+					continue;
 				}
-				Q_ASSERT(vertices.size()>2);
-				contours.append(vertices);
-				continue;
+				Q_ASSERT(subL.at(0).type()==QVariant::String || subL.at(0).type()==QVariant::ByteArray);
+				const SphericalRegionP& reg = loadFromQVariant(subL);
+				if (!reg->isEmpty())
+					contours << reg->getSimplifiedContours();
 			}
-			Q_ASSERT(subL.at(0).type()==QVariant::String || subL.at(0).type()==QVariant::ByteArray);
-			const SphericalRegionP& reg = loadFromQVariant(subL);
-			if (!reg->isEmpty())
-				contours << reg->getSimplifiedContours();
 		}
 		return SphericalRegionP(new SphericalPolygon(contours));
 	}
