@@ -461,30 +461,13 @@ void TestStelSphericalGeometry::testOctahedronPolygon()
 	QCOMPARE(northPoleSquareRead.getArea(), northPoleSquare.getArea());
 	QVERIFY(northPoleSquareRead.intersects(northPoleSquare.getOctahedronPolygon()));
 
-	// Test buggy cases
-//	OctahedronPolygon buggy1;
-//	OctahedronPolygon buggy2;
-//	QFile f("src/tests/buggyOctahedronPolygon-intersect1.dat");
-//	if (!f.open(QIODevice::ReadOnly))
-//		Q_ASSERT(0);
-//	QDataStream in1(&f);
-//	in1 >> buggy1;
-//	f.close();
-//	QVERIFY(!buggy1.isEmpty());
-//
-//	QFile f2("src/tests/buggyOctahedronPolygon-intersect2.dat");
-//	if (!f2.open(QIODevice::ReadOnly))
-//		Q_ASSERT(0);
-//	QDataStream in2(&f2);
-//	in2 >> buggy2;
-//	f2.close();
-//	QVERIFY(!buggy2.isEmpty());
-//
-//	qDebug() << buggy1.toJson();
-//	qDebug() << buggy2.toJson();
-//
-//	buggy2.inPlaceIntersection(buggy1);
-//	QVERIFY(buggy2.checkAllTrianglesPositive());
+	// Spherical cap with aperture > 90 deg
+	SphericalCap cap1(Vec3d(0,0,1), std::cos(95.*M_PI/180.));
+	qDebug() << "---------------------";
+	OctahedronPolygon northCapPoly = cap1.getOctahedronPolygon();
+	qDebug() << "---------------------";
+	qDebug() << northCapPoly.getArea() << OctahedronPolygon::getAllSkyOctahedronPolygon().getArea()/2;
+	QVERIFY(northCapPoly.getArea()>OctahedronPolygon::getAllSkyOctahedronPolygon().getArea()/2);
 }
 
 

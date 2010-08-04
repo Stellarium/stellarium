@@ -323,6 +323,8 @@ QVariant StelJsonParserInstance::parse()
 	}
 }
 
+QHash<int, void (*)(const QVariant&, QIODevice*, int)> StelJsonParser::otherSerializer;
+
 // Serialize the passed QVariant as JSON into the output QIODevice
 void StelJsonParser::write(const QVariant& v, QIODevice* output, int indentLevel)
 {
@@ -406,7 +408,14 @@ void StelJsonParser::write(const QVariant& v, QIODevice* output, int indentLevel
 			break;
 		}
 		default:
-			output->write("null");
+			QHash<int, void (*)(const QVariant&, QIODevice*, int)>::ConstIterator iter = otherSerializer.find(v.userType());
+			if (iter!=otherSerializer.constEnd())
+			{
+				iter.value()(v, output, indentLevel);
+			}
+			else
+				output->write("null");
+			//qDebug() << v.type() << v.userType() << v.typeName();
 			//qWarning() << "Cannot serialize QVariant of type " << v.typeName() << " in JSON";
 			break;
 	}

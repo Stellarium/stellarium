@@ -59,7 +59,6 @@
 #include <QFile>
 #include <QTextBrowser>
 #include <QGraphicsWidget>
-#include <QGraphicsGridLayout>
 
 StelGuiBase* StelStandardGuiPluginInterface::getStelGuiBase() const
 {
@@ -474,12 +473,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	///////////////////////////////////////////////////////////////////////
 	// Create the main base widget
 	skyGui->init(this);
-	QGraphicsGridLayout* l = new QGraphicsGridLayout();
-	l->setContentsMargins(0,0,0,0);
-	l->setSpacing(0);
-	l->addItem(skyGui, 0, 0);
 
-	stelAppGraphicsWidget->setLayout(l);
 	skyGui->setGeometry(stelAppGraphicsWidget->geometry());
 	skyGui->updateBarsPos();
 
@@ -837,7 +831,8 @@ void StelGui::setAutoHideVerticalButtonBar(bool b) {skyGui->autoHideVerticalButt
 
 void StelGui::forceRefreshGui()
 {
-	skyGui->updateBarsPos();
+  skyGui->setGeometry(stelAppGraphicsWidget->geometry());
+  skyGui->updateBarsPos();
 }
 
 void StelGui::scriptStarted()
