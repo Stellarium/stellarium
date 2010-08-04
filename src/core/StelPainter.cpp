@@ -656,32 +656,25 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	color[3]=currentColor[3];
 #endif
 
-
 	const QColor strColor = QColor::fromRgbF(qMax(qMin(1.f,color[0]),0.f), qMax(qMin(1.f,color[1]),0.f), qMax(qMin(1.f,color[2]),0.f), qMax(qMin(1.f,color[3]),0.f));
 
 	if (prj->gravityLabels && !noGravity)
 	{
-		drawTextGravity180(x, y, str, xshift, yshift);	// TODO: Need to modify this and anywhere else that uses QPainter::drawText with QGLWidget
+		drawTextGravity180(x, y, str, xshift, yshift);
 	}
 	else
 	{
 //		static unsigned int cacheNumLookups = 0;
 //		static unsigned int cacheNumHits = 0;
-//		cacheNumLookups++;
+//		++cacheNumLookups;
 
-		static const int texLimit = 300;	// TODO: move elsewhere, optimise value
+		// TODO: optimise value
+		static const int texLimit = 300;
 
 		static QCache<QByteArray,StringTexture> texCache(texLimit);
-		static QCryptographicHash texHash(QCryptographicHash::Md5);
-
 		int pixelSize = qPainter->font().pixelSize();
 		QRgb rgba = strColor.rgba();
-
-		texHash.reset();
-		texHash.addData(str.toUtf8());
-		texHash.addData((char*)&pixelSize, sizeof(int));
-		texHash.addData((char*)&rgba, sizeof(QRgb));
-		QByteArray hash = texHash.result();
+		QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize) + QByteArray::number(rgba);
 
 		const StringTexture* cachedTex = texCache.object(hash);
 		if (cachedTex == NULL)	// need to create texture
