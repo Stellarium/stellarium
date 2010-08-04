@@ -659,15 +659,6 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 
 	float color[4];
 #ifndef STELPAINTER_GL2
-	// Save openGL state
-	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	glMatrixMode(GL_TEXTURE);
-	glPushMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
 	glGetFloatv(GL_CURRENT_COLOR, color);
 #else
 	color[0]=currentColor[0];
@@ -685,10 +676,9 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	}
 	else
 	{
-		// TODO: remove
-		static unsigned int cacheNumLookups = 0;
-		static unsigned int cacheNumHits = 0;
-		cacheNumLookups++;
+//		static unsigned int cacheNumLookups = 0;
+//		static unsigned int cacheNumHits = 0;
+//		cacheNumLookups++;
 
 		static const int texLimit = 300;	// TODO: move elsewhere, optimise value
 
@@ -720,25 +710,25 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 
 			// Create and bind texture, and add it to the list of cached textures
 			StringTexture* newTex = new StringTexture(str, pixelSize, rgba);
-			newTex->texture = StelPainter::glContext->bindTexture(strImage, GL_TEXTURE_2D, GL_RGBA, QGLContext::InvertedYBindOption);
+			newTex->texture = StelPainter::glContext->bindTexture(strImage, GL_TEXTURE_2D, GL_RGBA, QGLContext::NoBindOption);
 			newTex->width = strImage.width();
 			newTex->height = strImage.height();
 			texCache.insert(hash, newTex);
 			cachedTex=newTex;
 		}
-		else	// already have texture
+		else
 		{
-			++cacheNumHits;	// TODO: remove
+			// The texture was found in the cache
+//			++cacheNumHits;
 			glBindTexture(GL_TEXTURE_2D, cachedTex->texture);
 		}
 		
-		// TODO: remove
-		if (cacheNumLookups % 1000 == 0)
-		{
-			qDebug() << "Cache hits: " << cacheNumHits << "/" << cacheNumLookups << "(" << (float)cacheNumHits/cacheNumLookups*100.0 << "%)";
-			cacheNumHits=0;
-			cacheNumLookups=0;
-		}
+//		if (cacheNumLookups % 1000 == 0)
+//		{
+//			qDebug() << "Cache hits: " << cacheNumHits << "/" << cacheNumLookups << "(" << (float)cacheNumHits/cacheNumLookups*100.0 << "%)";
+//			cacheNumHits=0;
+//			cacheNumLookups=0;
+//		}
 
 		// Translate/rotate
 		if (!noGravity)
@@ -753,7 +743,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		setColor(1,1,1);
 		
 		static float vertexData[8];
-		static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
+		static const float texCoordData[] = {0.,1., 1.,1., 0.,0., 1.,0.};
 		// compute the vertex coordinates applying the translation and the rotation
 		static const float vertexBase[] = {0., 0., 1., 0., 0., 1., 1., 1.};
 		if (std::fabs(angleDeg)>1.*M_PI/180.)
@@ -788,17 +778,6 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		// Restore previous color
 		setColor(color[0], color[1], color[2], color[3]);
 	}
-
-#ifndef STELPAINTER_GL2
-	glMatrixMode(GL_TEXTURE);
-	glPopMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
-	glPopClientAttrib();
-	glPopAttrib();
-#endif
 }
 
 // Recursive method cutting a small circle in small segments
