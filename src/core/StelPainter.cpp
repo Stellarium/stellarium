@@ -575,7 +575,7 @@ void StelPainter::sSphereMap(float radius, int slices, int stacks, float texture
 	}
 }
 
-void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float xshift, float yshift) const
+void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float xshift, float yshift)
 {
 	float dx, dy, d, theta, psi;
 	dx = x - prj->viewportCenter[0];
@@ -590,29 +590,18 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	if (psi>5)
 		psi = 5;
 
-	if (qPainter->paintEngine()->type()==QPaintEngine::OpenGL2)
-	{
-		qPainter->translate(x, prj->viewportXywh[3]-y);
-		qPainter->rotate(theta*180./M_PI);
-		qPainter->translate(xshift, -yshift);
-	}
-	else
-	{
-		qPainter->translate(x, y);
-		qPainter->rotate(-theta*180./M_PI);
-		qPainter->translate(xshift, yshift);
-		qPainter->scale(1, -1);
-	}
+	const float cosr = std::cos(-theta * M_PI/180.);
+	const float sinr = std::sin(-theta * M_PI/180.);
 
+	float initX = x + xshift*cosr - yshift*sinr;
+	float initY = y + yshift*sinr + yshift*cosr;
+	
 	for (int i=0;i<ws.length();++i)
 	{
-		qPainter->drawText(0,0,ws[i]);
-
-		// with typeface need to manually advance
-		// TODO, absolute rotation would be better than relative
-		// TODO: would look better with kerning information...
-		qPainter->translate((float)qPainter->fontMetrics().width(ws.mid(i,1)) * 1.05, 0);
-		qPainter->rotate(-psi);
+		drawText(initX, initY, ws[i], -theta*180./M_PI+psi*i, 0., 0.);
+		xshift = (float)qPainter->fontMetrics().width(ws.mid(i,1)) * 1.05;
+		initX+=xshift*std::cos(-theta+psi*i * M_PI/180.);
+		initY+=xshift*std::sin(-theta+psi*i * M_PI/180.);
 	}
 }
 
