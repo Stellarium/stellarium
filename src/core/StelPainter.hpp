@@ -153,9 +153,9 @@ public:
 	//! @param yshift shift in pixel in the rotated y direction.
 	//! @param noGravity don't take into account the fact that the text should be written with gravity.
 	void drawText(float x, float y, const QString& str, float angleDeg=0.f,
-			  float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
+			  float xshift=0.f, float yshift=0.f, bool noGravity=true);
 	void drawText(const Vec3d& v, const QString& str, float angleDeg=0.f,
-			  float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
+			  float xshift=0.f, float yshift=0.f, bool noGravity=true);
 
 	//! Draw the given SphericalRegion.
 	//! @param region The SphericalRegion to draw.
