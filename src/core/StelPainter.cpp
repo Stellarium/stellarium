@@ -616,7 +616,7 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	}
 }
 
-void StelPainter::drawText(const Vec3d& v, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity) const
+void StelPainter::drawText(const Vec3d& v, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
 {
 	Vec3d win;
 	prj->project(v, win);
@@ -653,7 +653,7 @@ struct StringTexture
 };
 
 
-void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity) const
+void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
 {
 	Q_ASSERT(qPainter);
 
@@ -685,11 +685,6 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	}
 	else
 	{
-		// Ensure GL_TEXTURE_2D is enabled (may cause problems if it's left enabled)
-		bool flagGlTexture2DWasEnabled;
-		if ((flagGlTexture2DWasEnabled = glIsEnabled(GL_TEXTURE_2D)) == false)	// TODO: Just enable and leave enabled regardless?
-			glEnable(GL_TEXTURE_2D);
-
 		// TODO: remove
 		static unsigned int cacheNumLookups = 0;
 		static unsigned int cacheNumHits = 0;
@@ -713,20 +708,19 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		if (cachedTex == NULL)	// need to create texture
 		{
 			// Create temp image and render text into it
-			int border = 0;	// TODO: What's best here?
 			QRect strRect = getFontMetrics().boundingRect(str);
-			QImage strImage(strRect.width()+2*border, strRect.height()+2*border, QImage::Format_ARGB32);
-			strImage.fill(0x00000000);
+			QPixmap strImage(strRect.width(), strRect.height());
+			strImage.fill(Qt::black);
 
 			QPainter painter(&strImage);
 			painter.setFont(qPainter->font());
 			painter.setRenderHints(QPainter::TextAntialiasing | QPainter::HighQualityAntialiasing);
 			painter.setPen(strColor);
-			painter.drawText(-strRect.x()+border, -strRect.y()+border, str);
+			painter.drawText(-strRect.x(), -strRect.y(), str);
 
 			// Create and bind texture, and add it to the list of cached textures
 			StringTexture* newTex = new StringTexture(str, pixelSize, rgba);
-			newTex->texture = StelPainter::glContext->bindTexture(strImage);
+			newTex->texture = StelPainter::glContext->bindTexture(strImage, GL_TEXTURE_2D, GL_RGBA, QGLContext::InvertedYBindOption);
 			newTex->width = strImage.width();
 			newTex->height = strImage.height();
 			texCache.insert(hash, newTex);
@@ -750,49 +744,49 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		if (!noGravity)
 			angleDeg += prj->defautAngleForGravityText;
 
-		qPainter->endNativePainting();
-		qPainter->save();
-		qPainter->resetTransform();
-		qPainter->resetMatrix();
+		glEnable(GL_TEXTURE_2D);
+		// Premultiplied alpha
+		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
+		glEnable(GL_BLEND);
 		
-		// There are 2 version here depending on the OpenGL engine
-		// OpenGL 1 need to reverse the text vertically, not OpenGL 2...
-		// This sounds like a Qt bug
-		if (qPainter->paintEngine()->type() == QPaintEngine::OpenGL2)
+		// The texture must be displayed with white color
+		setColor(1,1,1);
+		
+		static float vertexData[8];
+		static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
+		// compute the vertex coordinates applying the translation and the rotation
+		static const float vertexBase[] = {0., 0., 1., 0., 0., 1., 1., 1.};
+		if (std::fabs(angleDeg)>1.*M_PI/180.)
 		{
-			qPainter->translate(round(x), round(prj->viewportXywh[3]+ prj->viewportXywh[1]-y));
-			qPainter->rotate(-angleDeg);
-			qPainter->translate(round(xshift), round(yshift-cachedTex->height));
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			const float cosr = std::cos(angleDeg * M_PI/180.);
+			const float sinr = std::sin(angleDeg * M_PI/180.);
+			for (int i = 0; i < 8; i+=2)
+			{
+				vertexData[i] = x + (cachedTex->width*vertexBase[i]+xshift) * cosr - (cachedTex->height*vertexBase[i+1]+yshift) * sinr;
+				vertexData[i+1] = y  + (cachedTex->width*vertexBase[i]+xshift) * sinr + (cachedTex->height*vertexBase[i+1]+yshift) * cosr;
+			}
 		}
 		else
 		{
-			qPainter->translate(round(x), round(y));
-			qPainter->scale(1.0, -1.0);
-			qPainter->rotate(-angleDeg);
-			qPainter->translate(round(xshift), round(yshift-cachedTex->height));
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			for (int i = 0; i < 8; i+=2)
+			{
+				vertexData[i] = x + cachedTex->width*vertexBase[i]+xshift;
+				vertexData[i+1] = y  + cachedTex->height*vertexBase[i+1]+yshift;
+			}
 		}
-		qPainter->beginNativePainting();
-
-		// Config OpenGL
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-
-//		qPainter->setCompositionMode(QPainter::CompositionMode_SourceOver);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);
-
-		StelPainter::glContext->drawTexture(QRectF(0.0, 0.0, cachedTex->width, cachedTex->height), cachedTex->texture);
-
-		qPainter->endNativePainting();
-		qPainter->restore();
-		qPainter->beginNativePainting();
-
-
-		if (!flagGlTexture2DWasEnabled)	// TODO: Just disable and leave disabled regardless?
-			glDisable(GL_TEXTURE_2D);
+		
+		enableClientStates(true, true);
+		setVertexPointer(2, GL_FLOAT, vertexData);
+		setTexCoordPointer(2, GL_FLOAT, texCoordData);
+		drawFromArray(TriangleStrip, 4, 0, false);
+		enableClientStates(false);
+		
+		// Restore previous color
+		setColor(color[0], color[1], color[2], color[3]);
 	}
 
 #ifndef STELPAINTER_GL2
