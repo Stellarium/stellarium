@@ -69,9 +69,9 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200
 	
 	#ifdef Q_OS_WIN32
 	if(serialDeviceName.right(serialDeviceName.size() - 3).toInt() > 9)
-		serialDeviceName = "\\\\.\\" + serialDeviceName + ":";//"\\.\COMxx", not sure if it will work
+		serialDeviceName = "\\\\.\\" + serialDeviceName;//"\\.\COMxx", not sure if it will work
 	else
-		serialDeviceName = serialDeviceName + ":";
+		serialDeviceName = serialDeviceName;
 	#endif //Q_OS_WIN32
 	
 	//Try to establish a connection to the telescope

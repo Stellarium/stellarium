@@ -39,7 +39,6 @@ public:
 
 	double getActualFOV(Telescope *telescope);
 	double getMagnification(Telescope *telescope);
-	double getExitCircle(Telescope *telescope);
 
 private:
 	int ocularID;

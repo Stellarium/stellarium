@@ -652,71 +652,6 @@ struct StringTexture
 	}
 };
 
-// TODO: move elsewhere
-// TODO: docs
-class StringTextureCache
-{
-public:
-	StringTextureCache(int maxCount) : maxNumTextures(maxCount), indexOfOldestTexture(0), texSearchStartIndex(0)
-	{
-		;
-	}
-	~StringTextureCache()
-	{
-		for (int i = 0; i < texList.count(); i++)
-		{
-			StringTexture* strTex = texList[i];
-			if (strTex == NULL)
-				continue;
-			delete strTex;
-		}
-	}
-
-	void add(StringTexture* strTex)
-	{
-		if (texList.count() == maxNumTextures)
-		{
-			delete texList[indexOfOldestTexture];
-			texList[indexOfOldestTexture] = strTex;
-		}
-		else
-			texList.append(strTex);
-
-		indexOfOldestTexture++;
-		if (indexOfOldestTexture == texList.count())
-			indexOfOldestTexture = 0;
-	}
-
-	const StringTexture* getTexture(const StringTexture* strTex) const
-	{
-		const int count = texList.count();
-
-		for (int i = texSearchStartIndex; i < count; i++)
-		{
-			if (*(texList.at(i)) == strTex)
-			{
-				*(const_cast<int*>(&texSearchStartIndex)) = i + 1;
-				return texList.at(i);
-			}
-		}
-		for (int i = 0; i < texSearchStartIndex; i++)
-		{
-			if (*(texList.at(i)) == strTex)
-			{
-				*(const_cast<int*>(&texSearchStartIndex)) = i + 1;
-				return texList.at(i);
-			}
-		}
-
-		return NULL;
-	}
-
-private:
-	int maxNumTextures;
-	int indexOfOldestTexture;
-	int texSearchStartIndex;
-	QList<StringTexture*> texList;
-};
 
 void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity) const
 {
@@ -750,36 +685,23 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	}
 	else
 	{
-		// TODO: ONLY USE THIS CODE IN "SAFE MODE"?  HAVE A SEPARATE START-UP OPTION?
-		// TODO: MOVE RE-WORKED CODE OUT OF HERE SO IT CAN BE RE-USED ELSEWHERE (OOP and all that!)
-		// TODO: CACHE TEMP IMAGES?
-
 		// Ensure GL_TEXTURE_2D is enabled (may cause problems if it's left enabled)
 		bool flagGlTexture2DWasEnabled;
 		if ((flagGlTexture2DWasEnabled = glIsEnabled(GL_TEXTURE_2D)) == false)	// TODO: Just enable and leave enabled regardless?
 			glEnable(GL_TEXTURE_2D);
 
-// TODO: remove
-static unsigned int cacheNumLookups = 0;
-static unsigned int cacheNumHits = 0;
-cacheNumLookups++;
-
-// TODO: choose cache method and remove all references to other
-#define USE_QT_CACHE
-// TODO: choose texture creation method and remove all references to other
-#define USE_QT_TEXTURE
-// TODO: choose drawing method and remove all references to other
-#define USE_QT_DRAWING	// Qt drawing about 10% slower, why is native drawing dark?
+		// TODO: remove
+		static unsigned int cacheNumLookups = 0;
+		static unsigned int cacheNumHits = 0;
+		cacheNumLookups++;
 
 		static const int texLimit = 300;	// TODO: move elsewhere, optimise value
 
-#ifdef USE_QT_CACHE
 		static QCache<QByteArray,StringTexture> texCache(texLimit);
 		static QCryptographicHash texHash(QCryptographicHash::Md5);
 
 		int pixelSize = qPainter->font().pixelSize();
 		QRgb rgba = strColor.rgba();
-		StringTexture* strTex = new StringTexture(str, pixelSize, rgba);
 
 		texHash.reset();
 		texHash.addData(str.toUtf8());
@@ -788,21 +710,10 @@ cacheNumLookups++;
 		QByteArray hash = texHash.result();
 
 		const StringTexture* cachedTex = texCache.object(hash);
-#else
-		static StringTextureCache texCache(texLimit);
-
-		StringTexture* strTex = new StringTexture(str, qPainter->font().pixelSize(), strColor.rgba());
-		const StringTexture* cachedTex = texCache.getTexture(strTex);
-#endif
-
-		GLuint texture;
-		int texWidth;
-		int texHeight;
-
 		if (cachedTex == NULL)	// need to create texture
 		{
 			// Create temp image and render text into it
-			int border = 3;	// TODO: What's best here?
+			int border = 0;	// TODO: What's best here?
 			QRect strRect = getFontMetrics().boundingRect(str);
 			QImage strImage(strRect.width()+2*border, strRect.height()+2*border, QImage::Format_ARGB32);
 			strImage.fill(0x00000000);
@@ -813,67 +724,53 @@ cacheNumLookups++;
 			painter.setPen(strColor);
 			painter.drawText(-strRect.x()+border, -strRect.y()+border, str);
 
-			// Create and bind texture
-			texWidth = strImage.width();
-			texHeight = strImage.height();
-#ifdef USE_QT_TEXTURE
-			texture = StelPainter::glContext->bindTexture(strImage);
-//			texture = StelPainter::glContext->bindTexture(strImage, GL_TEXTURE_2D, GL_RGBA, QGLContext::LinearFilteringBindOption|QGLContext::MipmapBindOption);
-#else
-			QImage glStrImage = QGLWidget::convertToGLFormat(strImage);
-
-			glGenTextures(1, &texture);
-			glBindTexture(GL_TEXTURE_2D, texture);
-			glTexImage2D(GL_TEXTURE_2D, 0, 4, texWidth, texHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, static_cast<GLubyte*>(glStrImage.bits()));
-#endif
-
-			// Add to list of cached textures
-			strTex->texture = texture;
-			strTex->width = texWidth;
-			strTex->height = texHeight;
-#ifdef USE_QT_CACHE
-			texCache.insert(hash, strTex);
-#else
-			texCache.add(strTex);
-#endif
+			// Create and bind texture, and add it to the list of cached textures
+			StringTexture* newTex = new StringTexture(str, pixelSize, rgba);
+			newTex->texture = StelPainter::glContext->bindTexture(strImage);
+			newTex->width = strImage.width();
+			newTex->height = strImage.height();
+			texCache.insert(hash, newTex);
+			cachedTex=newTex;
 		}
 		else	// already have texture
 		{
-			cacheNumHits++;	// TODO: remove
-
-			delete strTex;
-
-			texWidth = cachedTex->width;
-			texHeight = cachedTex->height;
-			texture = cachedTex->texture;
-			glBindTexture(GL_TEXTURE_2D, texture);
+			++cacheNumHits;	// TODO: remove
+			glBindTexture(GL_TEXTURE_2D, cachedTex->texture);
 		}
-// TODO: remove
-if (cacheNumLookups % 1000 == 0)
-	qDebug() << "Cache hits: " << cacheNumHits << "/" << cacheNumLookups << "(" << (float)cacheNumHits/cacheNumLookups*100.0 << "%)";
+		
+		// TODO: remove
+		if (cacheNumLookups % 1000 == 0)
+		{
+			qDebug() << "Cache hits: " << cacheNumHits << "/" << cacheNumLookups << "(" << (float)cacheNumHits/cacheNumLookups*100.0 << "%)";
+			cacheNumHits=0;
+			cacheNumLookups=0;
+		}
 
 		// Translate/rotate
 		if (!noGravity)
 			angleDeg += prj->defautAngleForGravityText;
 
-#ifdef USE_QT_DRAWING
 		qPainter->endNativePainting();
-			qPainter->save();
-			qPainter->resetTransform();
-			qPainter->resetMatrix();
-			if (qPainter->paintEngine()->type() == QPaintEngine::OpenGL2)
-			{
-				qPainter->translate(round(x), round(prj->viewportXywh[3]-y));
-				qPainter->rotate(-angleDeg);
-				qPainter->translate(round(xshift), round(yshift-texHeight));
-			}
-			else
-			{
-				qPainter->translate(round(x), round(y));
-				qPainter->scale(1.0, -1.0);
-				qPainter->rotate(-angleDeg);
-				qPainter->translate(round(xshift), round(yshift-texHeight));
-			}
+		qPainter->save();
+		qPainter->resetTransform();
+		qPainter->resetMatrix();
+		
+		// There are 2 version here depending on the OpenGL engine
+		// OpenGL 1 need to reverse the text vertically, not OpenGL 2...
+		// This sounds like a Qt bug
+		if (qPainter->paintEngine()->type() == QPaintEngine::OpenGL2)
+		{
+			qPainter->translate(round(x), round(prj->viewportXywh[3]+ prj->viewportXywh[1]-y));
+			qPainter->rotate(-angleDeg);
+			qPainter->translate(round(xshift), round(yshift-cachedTex->height));
+		}
+		else
+		{
+			qPainter->translate(round(x), round(y));
+			qPainter->scale(1.0, -1.0);
+			qPainter->rotate(-angleDeg);
+			qPainter->translate(round(xshift), round(yshift-cachedTex->height));
+		}
 		qPainter->beginNativePainting();
 
 		// Config OpenGL
@@ -887,34 +784,12 @@ if (cacheNumLookups % 1000 == 0)
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
 
-		StelPainter::glContext->drawTexture(QRectF(0.0,0.0,texWidth,texHeight), texture);
+		StelPainter::glContext->drawTexture(QRectF(0.0, 0.0, cachedTex->width, cachedTex->height), cachedTex->texture);
 
 		qPainter->endNativePainting();
-			qPainter->restore();
+		qPainter->restore();
 		qPainter->beginNativePainting();
-#else
-		glTranslatef(qRound(x), qRound(y), 0.0);	//	GL_LINEAR needs rounding of translations to prevent 'pulsing' of labels
-		glRotatef(angleDeg, 0.0, 0.0, 1.0);
-		glTranslatef(qRound(xshift), qRound(yshift), 0.0);
 
-		// Config OpenGL
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);
-
-		// Draw
-		glBegin(GL_QUADS);
-			glTexCoord2f(0, 0);	glVertex3f(       0,         0, 0);
-			glTexCoord2f(1, 0);	glVertex3f(texWidth,         0, 0);
-			glTexCoord2f(1, 1);	glVertex3f(texWidth, texHeight, 0);
-			glTexCoord2f(0, 1);	glVertex3f(       0, texHeight, 0);
-		glEnd();
-#endif
 
 		if (!flagGlTexture2DWasEnabled)	// TODO: Just disable and leave disabled regardless?
 			glDisable(GL_TEXTURE_2D);

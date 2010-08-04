@@ -349,9 +349,16 @@ QString StelFileMgr::getInstallationDir()
 	}
 
 #ifdef Q_OS_MAC
-	QFileInfo MacOSdir(QCoreApplication::applicationDirPath() + "/../Resources");
+	QString relativePath = "/../Resources";
+	if (QCoreApplication::applicationDirPath().contains("src")) {
+		relativePath = "/../../../../..";
+	}
+	QFileInfo MacOSdir(QCoreApplication::applicationDirPath() + relativePath);
+	
 	QDir ResourcesDir = MacOSdir.dir();
-	ResourcesDir.cd(QString("Resources"));
+	if (!QCoreApplication::applicationDirPath().contains("src")) {
+		ResourcesDir.cd(QString("Resources"));
+	}
 	QFileInfo installLocation(ResourcesDir.absolutePath());
 	QFileInfo checkFile(installLocation.filePath() + QString("/") + QString(CHECK_FILE));
 #else
