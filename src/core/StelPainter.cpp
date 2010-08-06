@@ -656,7 +656,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			// Create temp image and render text into it
 			QRect strRect = getFontMetrics().boundingRect(str);
 			QPixmap strImage(strRect.width()+(int)(0.02f*strRect.width()), strRect.height());
-			strImage.fill(Qt::black);
+			strImage.fill(Qt::transparent);
 
 			QPainter painter(&strImage);
 			painter.setFont(qPainter->font());
@@ -666,7 +666,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 
 			// Create and bind texture, and add it to the list of cached textures
 			StringTexture* newTex = new StringTexture();
-			newTex->texture = StelPainter::glContext->bindTexture(strImage, GL_TEXTURE_2D, GL_RGB, QGLContext::NoBindOption);
+			newTex->texture = StelPainter::glContext->bindTexture(strImage, GL_TEXTURE_2D, GL_RGBA, QGLContext::NoBindOption);
 			newTex->width = strImage.width();
 			newTex->height = strImage.height();
 			texCache.insert(hash, newTex, 3*newTex->width*newTex->height);
@@ -690,7 +690,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		if (!noGravity)
 			angleDeg += prj->defautAngleForGravityText;
 
-		glEnable(GL_TEXTURE_2D);
+		enableTexture2d(true);
 		static float vertexData[8];
 		static const float texCoordData[] = {0.,1., 1.,1., 0.,0., 1.,0.};
 		// compute the vertex coordinates applying the translation and the rotation
@@ -718,7 +718,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			}
 		}
 
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);		
 		enableClientStates(true, true);
 		setVertexPointer(2, GL_FLOAT, vertexData);
