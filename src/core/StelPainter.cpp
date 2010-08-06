@@ -575,7 +575,7 @@ void StelPainter::sSphereMap(float radius, int slices, int stacks, float texture
 	}
 }
 
-void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float xshift, float yshift) const
+void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float xshift, float yshift)
 {
 	float dx, dy, d, theta, psi;
 	dx = x - prj->viewportCenter[0];
@@ -590,33 +590,22 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	if (psi>5)
 		psi = 5;
 
-	if (qPainter->paintEngine()->type()==QPaintEngine::OpenGL2)
-	{
-		qPainter->translate(x, prj->viewportXywh[3]-y);
-		qPainter->rotate(theta*180./M_PI);
-		qPainter->translate(xshift, -yshift);
-	}
-	else
-	{
-		qPainter->translate(x, y);
-		qPainter->rotate(-theta*180./M_PI);
-		qPainter->translate(xshift, yshift);
-		qPainter->scale(1, -1);
-	}
+	const float cosr = std::cos(-theta * M_PI/180.);
+	const float sinr = std::sin(-theta * M_PI/180.);
 
+	float initX = x + xshift*cosr - yshift*sinr;
+	float initY = y + yshift*sinr + yshift*cosr;
+	
 	for (int i=0;i<ws.length();++i)
 	{
-		qPainter->drawText(0,0,ws[i]);
-
-		// with typeface need to manually advance
-		// TODO, absolute rotation would be better than relative
-		// TODO: would look better with kerning information...
-		qPainter->translate((float)qPainter->fontMetrics().width(ws.mid(i,1)) * 1.05, 0);
-		qPainter->rotate(-psi);
+		drawText(initX, initY, ws[i], -theta*180./M_PI+psi*i, 0., 0.);
+		xshift = (float)qPainter->fontMetrics().width(ws.mid(i,1)) * 1.05;
+		initX+=xshift*std::cos(-theta+psi*i * M_PI/180.);
+		initY+=xshift*std::sin(-theta+psi*i * M_PI/180.);
 	}
 }
 
-void StelPainter::drawText(const Vec3d& v, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity) const
+void StelPainter::drawText(const Vec3d& v, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
 {
 	Vec3d win;
 	prj->project(v, win);
@@ -626,79 +615,117 @@ void StelPainter::drawText(const Vec3d& v, const QString& str, float angleDeg, f
 /*************************************************************************
  Draw the string at the given position and angle with the given font
 *************************************************************************/
-void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity) const
+
+// Container for one cached string texture
+struct StringTexture
+{
+	GLuint texture;
+	int width;
+	int height;
+
+	StringTexture() : texture(0) {;}
+	~StringTexture()
+	{
+		if (texture != 0)
+			glDeleteTextures(1, &texture);
+	}
+};
+
+
+void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
 {
 	Q_ASSERT(qPainter);
-
-	float color[4];
-#ifndef STELPAINTER_GL2
-	// Save openGL state
-	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	glMatrixMode(GL_TEXTURE);
-	glPushMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glGetFloatv(GL_CURRENT_COLOR, color);
-#else
-	color[0]=currentColor[0];
-	color[1]=currentColor[1];
-	color[2]=currentColor[2];
-	color[3]=currentColor[3];
-#endif
-
-	qPainter->endNativePainting();
-
-	qPainter->save();
-	qPainter->resetTransform();
-	qPainter->resetMatrix();
-	qPainter->setRenderHints(QPainter::TextAntialiasing | QPainter::HighQualityAntialiasing);
-	const QColor qCol=QColor::fromRgbF(qMax(qMin(1.f,color[0]),0.f), qMax(qMin(1.f,color[1]),0.f), qMax(qMin(1.f,color[2]),0.f), qMax(qMin(1.f,color[3]),0.f));
-	qPainter->setPen(qCol);
-
 	if (prj->gravityLabels && !noGravity)
 	{
 		drawTextGravity180(x, y, str, xshift, yshift);
 	}
 	else
 	{
-		if (!noGravity)
-			angleDeg += prj->defautAngleForGravityText;
-		
-		// There are 2 version here depending on the OpenGL engine
-		// OpenGL 1 need to reverse the text vertically, not OpenGL 2...
-		// This sounds like a Qt bug
-		if (qPainter->paintEngine()->type()==QPaintEngine::OpenGL2)
+//		static unsigned int cacheNumLookups = 0;
+//		static unsigned int cacheNumHits = 0;
+//		++cacheNumLookups;
+
+		static const int cacheLimitByte = 7000000;
+		static QCache<QByteArray,StringTexture> texCache(cacheLimitByte);
+		int pixelSize = qPainter->font().pixelSize();
+		QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);
+
+		const StringTexture* cachedTex = texCache.object(hash);
+		if (cachedTex == NULL)	// need to create texture
 		{
-			qPainter->translate(x + prj->viewportXywh[0] , prj->viewportXywh[3] + prj->viewportXywh[1] - y);
-			qPainter->rotate(-angleDeg);
-			qPainter->translate(xshift, -yshift);
+			// Create temp image and render text into it
+			QRect strRect = getFontMetrics().boundingRect(str);
+			QPixmap strImage(strRect.width()+(int)(0.02f*strRect.width()), strRect.height());
+			strImage.fill(Qt::transparent);
+
+			QPainter painter(&strImage);
+			painter.setFont(qPainter->font());
+			painter.setRenderHints(QPainter::TextAntialiasing);
+			painter.setPen(Qt::white);
+			painter.drawText(-strRect.x(), -strRect.y(), str);
+
+			// Create and bind texture, and add it to the list of cached textures
+			StringTexture* newTex = new StringTexture();
+			newTex->texture = StelPainter::glContext->bindTexture(strImage, GL_TEXTURE_2D, GL_RGBA, QGLContext::NoBindOption);
+			newTex->width = strImage.width();
+			newTex->height = strImage.height();
+			texCache.insert(hash, newTex, 3*newTex->width*newTex->height);
+			cachedTex=newTex;
 		}
 		else
 		{
-			qPainter->translate(round(x), round(y));
-			qPainter->scale(1, -1);
-			qPainter->rotate(-angleDeg);
-			qPainter->translate(round(xshift), round(-yshift));
+			// The texture was found in the cache
+//			++cacheNumHits;
+			glBindTexture(GL_TEXTURE_2D, cachedTex->texture);
 		}
-		qPainter->drawText(0, 0, str);
+		
+//		if (cacheNumLookups % 1000 == 0)
+//		{
+//			qDebug() << "Cache hits: " << cacheNumHits << "/" << cacheNumLookups << "(" << (float)cacheNumHits/cacheNumLookups*100.0 << "%)";
+//			cacheNumHits=0;
+//			cacheNumLookups=0;
+//		}
+
+		// Translate/rotate
+		if (!noGravity)
+			angleDeg += prj->defautAngleForGravityText;
+
+		enableTexture2d(true);
+		static float vertexData[8];
+		static const float texCoordData[] = {0.,1., 1.,1., 0.,0., 1.,0.};
+		// compute the vertex coordinates applying the translation and the rotation
+		static const float vertexBase[] = {0., 0., 1., 0., 0., 1., 1., 1.};
+		if (std::fabs(angleDeg)>1.f*M_PI/180.f)
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			const float cosr = std::cos(angleDeg * M_PI/180.);
+			const float sinr = std::sin(angleDeg * M_PI/180.);
+			for (int i = 0; i < 8; i+=2)
+			{
+				vertexData[i] = x + (cachedTex->width*vertexBase[i]+xshift) * cosr - (cachedTex->height*vertexBase[i+1]+yshift) * sinr;
+				vertexData[i+1] = y  + (cachedTex->width*vertexBase[i]+xshift) * sinr + (cachedTex->height*vertexBase[i+1]+yshift) * cosr;
+			}
+		}
+		else
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			for (int i = 0; i < 8; i+=2)
+			{
+				vertexData[i] = x + cachedTex->width*vertexBase[i]+xshift;
+				vertexData[i+1] = y  + cachedTex->height*vertexBase[i+1]+yshift;
+			}
+		}
+
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);		
+		enableClientStates(true, true);
+		setVertexPointer(2, GL_FLOAT, vertexData);
+		setTexCoordPointer(2, GL_FLOAT, texCoordData);
+		drawFromArray(TriangleStrip, 4, 0, false);
+		enableClientStates(false);
 	}
-	qPainter->restore();
-
-	qPainter->beginNativePainting();
-
-#ifndef STELPAINTER_GL2
-	glMatrixMode(GL_TEXTURE);
-	glPopMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
-	glPopClientAttrib();
-	glPopAttrib();
-#endif
 }
 
 // Recursive method cutting a small circle in small segments
