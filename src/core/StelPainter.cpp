@@ -616,22 +616,14 @@ void StelPainter::drawText(const Vec3d& v, const QString& str, float angleDeg, f
  Draw the string at the given position and angle with the given font
 *************************************************************************/
 
-// TODO: move elsewhere
-// TODO: docs
+// Container for one cached string texture
 struct StringTexture
 {
-	QString str;
-	int size;
 	GLuint texture;
 	int width;
 	int height;
 
-	StringTexture(const QString& astr, int asize) : str(astr), size(asize), texture(0)  {  }
-
-	bool operator ==(const StringTexture* rhs) const
-	{
-		return ((str == rhs->str) && (size == rhs->size));
-	}
+	StringTexture() : texture(0) {;}
 	~StringTexture()
 	{
 		if (texture != 0)
@@ -673,7 +665,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			painter.drawText(-strRect.x(), -strRect.y(), str);
 
 			// Create and bind texture, and add it to the list of cached textures
-			StringTexture* newTex = new StringTexture(str, pixelSize);
+			StringTexture* newTex = new StringTexture();
 			newTex->texture = StelPainter::glContext->bindTexture(strImage, GL_TEXTURE_2D, GL_RGB, QGLContext::NoBindOption);
 			newTex->width = strImage.width();
 			newTex->height = strImage.height();
