@@ -622,17 +622,15 @@ struct StringTexture
 {
 	QString str;
 	int size;
-	QRgb color;
-
 	GLuint texture;
 	int width;
 	int height;
 
-	StringTexture(const QString& astr, int asize, const QRgb& acolor) : str(astr), size(asize), color(acolor), texture(0)  {  }
+	StringTexture(const QString& astr, int asize) : str(astr), size(asize), texture(0)  {  }
 
 	bool operator ==(const StringTexture* rhs) const
 	{
-		return ((str == rhs->str) && (size == rhs->size) && (color == rhs->color));
+		return ((str == rhs->str) && (size == rhs->size));
 	}
 	~StringTexture()
 	{
@@ -645,19 +643,6 @@ struct StringTexture
 void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
 {
 	Q_ASSERT(qPainter);
-
-	float color[4];
-#ifndef STELPAINTER_GL2
-	glGetFloatv(GL_CURRENT_COLOR, color);
-#else
-	color[0]=currentColor[0];
-	color[1]=currentColor[1];
-	color[2]=currentColor[2];
-	color[3]=currentColor[3];
-#endif
-
-	const QColor strColor = QColor::fromRgbF(qMax(qMin(1.f,color[0]),0.f), qMax(qMin(1.f,color[1]),0.f), qMax(qMin(1.f,color[2]),0.f), qMax(qMin(1.f,color[3]),0.f));
-
 	if (prj->gravityLabels && !noGravity)
 	{
 		drawTextGravity180(x, y, str, xshift, yshift);
@@ -668,13 +653,10 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 //		static unsigned int cacheNumHits = 0;
 //		++cacheNumLookups;
 
-		// TODO: optimise value
-		static const int texLimit = 300;
-
-		static QCache<QByteArray,StringTexture> texCache(texLimit);
+		static const int cacheLimitByte = 5000000;
+		static QCache<QByteArray,StringTexture> texCache(cacheLimitByte);
 		int pixelSize = qPainter->font().pixelSize();
-		QRgb rgba = strColor.rgba();
-		QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize) + QByteArray::number(rgba);
+		QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);
 
 		const StringTexture* cachedTex = texCache.object(hash);
 		if (cachedTex == NULL)	// need to create texture
@@ -687,15 +669,15 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			QPainter painter(&strImage);
 			painter.setFont(qPainter->font());
 			painter.setRenderHints(QPainter::TextAntialiasing | QPainter::HighQualityAntialiasing);
-			painter.setPen(strColor);
+			painter.setPen(Qt::white);
 			painter.drawText(-strRect.x(), -strRect.y(), str);
 
 			// Create and bind texture, and add it to the list of cached textures
-			StringTexture* newTex = new StringTexture(str, pixelSize, rgba);
-			newTex->texture = StelPainter::glContext->bindTexture(strImage, GL_TEXTURE_2D, GL_RGBA, QGLContext::NoBindOption);
+			StringTexture* newTex = new StringTexture(str, pixelSize);
+			newTex->texture = StelPainter::glContext->bindTexture(strImage, GL_TEXTURE_2D, GL_RGB, QGLContext::NoBindOption);
 			newTex->width = strImage.width();
 			newTex->height = strImage.height();
-			texCache.insert(hash, newTex);
+			texCache.insert(hash, newTex, 3*newTex->width*newTex->height);
 			cachedTex=newTex;
 		}
 		else
@@ -717,18 +699,11 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			angleDeg += prj->defautAngleForGravityText;
 
 		glEnable(GL_TEXTURE_2D);
-		// Premultiplied alpha
-		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
-		glEnable(GL_BLEND);
-		
-		// The texture must be displayed with white color
-		setColor(1,1,1);
-		
 		static float vertexData[8];
 		static const float texCoordData[] = {0.,1., 1.,1., 0.,0., 1.,0.};
 		// compute the vertex coordinates applying the translation and the rotation
 		static const float vertexBase[] = {0., 0., 1., 0., 0., 1., 1., 1.};
-		if (std::fabs(angleDeg)>1.*M_PI/180.)
+		if (std::fabs(angleDeg)>1.f*M_PI/180.f)
 		{
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -750,15 +725,14 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 				vertexData[i+1] = y  + cachedTex->height*vertexBase[i+1]+yshift;
 			}
 		}
-		
+
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		glEnable(GL_BLEND);		
 		enableClientStates(true, true);
 		setVertexPointer(2, GL_FLOAT, vertexData);
 		setTexCoordPointer(2, GL_FLOAT, texCoordData);
 		drawFromArray(TriangleStrip, 4, 0, false);
 		enableClientStates(false);
-		
-		// Restore previous color
-		setColor(color[0], color[1], color[2], color[3]);
 	}
 }
 
