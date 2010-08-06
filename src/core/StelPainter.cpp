@@ -653,7 +653,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 //		static unsigned int cacheNumHits = 0;
 //		++cacheNumLookups;
 
-		static const int cacheLimitByte = 5000000;
+		static const int cacheLimitByte = 7000000;
 		static QCache<QByteArray,StringTexture> texCache(cacheLimitByte);
 		int pixelSize = qPainter->font().pixelSize();
 		QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);
@@ -663,12 +663,12 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		{
 			// Create temp image and render text into it
 			QRect strRect = getFontMetrics().boundingRect(str);
-			QPixmap strImage(strRect.width(), strRect.height());
+			QPixmap strImage(strRect.width()+(int)(0.02f*strRect.width()), strRect.height());
 			strImage.fill(Qt::black);
 
 			QPainter painter(&strImage);
 			painter.setFont(qPainter->font());
-			painter.setRenderHints(QPainter::TextAntialiasing | QPainter::HighQualityAntialiasing);
+			painter.setRenderHints(QPainter::TextAntialiasing);
 			painter.setPen(Qt::white);
 			painter.drawText(-strRect.x(), -strRect.y(), str);
 
