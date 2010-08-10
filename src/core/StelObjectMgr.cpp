@@ -199,7 +199,10 @@ bool StelObjectMgr::setSelectedObject(const StelObjectP obj, StelModule::StelMod
 *************************************************************************/
 bool StelObjectMgr::setSelectedObject(const QList<StelObjectP>& objs, StelModule::StelModuleSelectAction action)
 {
-	lastSelectedObjects=objs;
+	if (action==StelModule::AddToSelection)
+		lastSelectedObjects.append(objs);
+	else
+		lastSelectedObjects = objs;
 
 	// Send the event to every StelModule
 	foreach (StelModule* iter, StelApp::getInstance().getModuleMgr().getAllModules())
