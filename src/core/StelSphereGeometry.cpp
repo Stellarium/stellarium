@@ -754,12 +754,64 @@ SphericalRegionP SphericalPolygon::deserialize(QDataStream& in)
 bool SphericalPolygon::contains(const SphericalConvexPolygon& r) const {return octahedronPolygon.contains(r.getOctahedronPolygon());}
 bool SphericalPolygon::intersects(const SphericalConvexPolygon& r) const {return r.intersects(*this);}
 
-SphericalRegionP SphericalPolygon::multiUnion(const QList<SphericalRegionP>& regions)
+SphericalRegionP SphericalPolygon::multiUnion(const QList<SphericalRegionP>& regions, bool optimizeByPreGrouping)
 {
-	QList<OctahedronPolygon> l;
-	foreach (const SphericalRegionP& r, regions)
-		l.append(r->getOctahedronPolygon());
-	return SphericalRegionP(new SphericalPolygon(l));
+	if (optimizeByPreGrouping)
+	{
+		static const double minOverlap = 0.2;
+		// Try to first split the set of regions into groups of intersecting regions
+		QList<QList<SphericalRegionP> > res;
+		QList<SphericalCap> groupReferenceCap;
+		foreach (const SphericalRegionP& newReg, regions)
+		{
+			bool createNewGroup = true;
+			const SphericalCap& newRegBoundingCap = newReg->getBoundingCap();
+			for (int i=0;i<res.size();++i)
+			{
+				// Make sure not to group full sky regions because it is usually not what we want.
+				if (SphericalCap::relativeDiameterOverlap(newRegBoundingCap, groupReferenceCap.at(i))>minOverlap && newRegBoundingCap.d>-0.9)
+				{
+					// It intersects with the reference element of the group
+					res[i].append(newReg);
+					createNewGroup = false;
+					break;
+				}
+			}
+			if (createNewGroup)
+			{
+				QList<SphericalRegionP> newGroup;
+				newGroup.append(newReg);
+				res.append(newGroup);
+				// The reference element of the group is defined as the first element
+				groupReferenceCap.append(newRegBoundingCap);
+			}
+		}
+		// res now contains n list of regions to union together		
+		QList<SphericalRegionP> mappedRegions;
+		foreach (const QList<SphericalRegionP>& l, res)
+		{
+			mappedRegions.append(SphericalPolygon::multiUnion(l));
+		}
+		return SphericalPolygon::multiUnion(mappedRegions);
+	}
+	else
+	{
+		// Just add all contours to one polygon
+		QList<OctahedronPolygon> l;
+		foreach (const SphericalRegionP& r, regions)
+			l.append(r->getOctahedronPolygon());
+		return SphericalRegionP(new SphericalPolygon(l));
+	}
+}
+
+SphericalRegionP SphericalPolygon::multiIntersection(const QList<SphericalRegionP>& regions)
+{
+	if (regions.isEmpty())
+		return EmptySphericalRegion::staticInstance;
+	SphericalRegionP reg = regions.at(0);
+	for (int i=1;i<regions.size();++i)
+		reg = reg->getIntersection(regions.at(i));
+	return reg;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
