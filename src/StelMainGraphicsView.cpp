@@ -190,7 +190,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	setScene(new QGraphicsScene(this));
 	scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
 
-        backItem = new QGraphicsWidget();
+	backItem = new QGraphicsWidget();
 	backItem->setFocusPolicy(Qt::NoFocus);
 }
 
@@ -204,17 +204,17 @@ void StelMainGraphicsView::init(QSettings* conf)
 	glWidget->makeCurrent();
 
 	// Create the main widget for stellarium, which in turn creates the main StelApp instance.
-        mainSkyItem = new StelAppGraphicsWidget();
+	mainSkyItem = new StelAppGraphicsWidget();
 	mainSkyItem->setZValue(-10);
-        QGraphicsAnchorLayout *l = new QGraphicsAnchorLayout();
-        backItem->setLayout(l);
+	mainSkyItem->setContentsMargins(0,0,0,0);
+	QGraphicsAnchorLayout *l = new QGraphicsAnchorLayout();
 	l->setContentsMargins(0,0,0,0);
-        l->setSpacing(0);
-        mainSkyItem->setContentsMargins(0,0,0,0);
-        l->addAnchor(mainSkyItem, Qt::AnchorTop, l, Qt::AnchorTop);
-        l->addAnchor(mainSkyItem, Qt::AnchorLeft, l, Qt::AnchorLeft);
-        l->addAnchor(mainSkyItem, Qt::AnchorRight, l, Qt::AnchorRight);
-        l->addAnchor(mainSkyItem, Qt::AnchorBottom, l, Qt::AnchorBottom);
+	l->setSpacing(0);
+	l->addAnchor(mainSkyItem, Qt::AnchorTop, l, Qt::AnchorTop);
+	l->addAnchor(mainSkyItem, Qt::AnchorLeft, l, Qt::AnchorLeft);
+	l->addAnchor(mainSkyItem, Qt::AnchorRight, l, Qt::AnchorRight);
+	l->addAnchor(mainSkyItem, Qt::AnchorBottom, l, Qt::AnchorBottom);
+	backItem->setLayout(l);
 	scene()->addItem(backItem);
 
 	// Activate the resizing caused by the layout
