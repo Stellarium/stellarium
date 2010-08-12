@@ -228,10 +228,10 @@ void StelMainGraphicsView::init(QSettings* conf)
 	maxfps = conf->value("video/maximum_fps",10000.f).toFloat();
 	minfps = conf->value("video/minimum_fps",10000.f).toFloat();
 
-        StelPainter::initSystemGLInfo(glContext);
+	StelPainter::initSystemGLInfo(glContext);
 
-        QPainter qPainter(glWidget);
-        StelPainter::setQPainter(&qPainter);
+	QPainter qPainter(glWidget);
+	StelPainter::setQPainter(&qPainter);
 
 	// Initialize the core, including the StelApp instance.
 	mainSkyItem->init(conf);
