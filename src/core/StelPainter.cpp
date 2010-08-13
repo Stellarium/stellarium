@@ -655,7 +655,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		{
 			// Create temp image and render text into it
 			QRect strRect = getFontMetrics().boundingRect(str);
-			QPixmap strImage(strRect.width()+(int)(0.02f*strRect.width()), strRect.height());
+                        QPixmap strImage(strRect.width()+1+(int)(0.02f*strRect.width()), strRect.height());
 			strImage.fill(Qt::transparent);
 
 			QPainter painter(&strImage);
