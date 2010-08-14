@@ -195,15 +195,20 @@ bool StelTexture::getDimensions(int &awidth, int &aheight)
 {
 	if (width<0 || height<0)
 	{
-		// Try to get the size from the file without loading data
-		QImageReader im(fullPath);
-		if (!im.canRead())
-		{
-			return false;
+		if ( !qImage.isNull() ) {
+			width = qImage.width();
+			height = qImage.height();
+		} else {
+			// Try to get the size from the file without loading data
+			QImageReader im(fullPath);
+			if (!im.canRead())
+			{
+				return false;
+			}
+			QSize size = im.size();
+			width = size.width();
+			height = size.height();
 		}
-		QSize size = im.size();
-		width = size.width();
-		height = size.height();
 	}
 	awidth = width;
 	aheight = height;
