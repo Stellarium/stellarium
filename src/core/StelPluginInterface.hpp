@@ -27,6 +27,7 @@
 //! Contains information about a Stellarium plugin.
 struct StelPluginInfo
 {
+	StelPluginInfo() : startByDefault(false) {;}
 	//! The plugin ID. It MUST match the lib file name (case sensitive), e.g. "HelloStelModule", or "VirGO".
 	QString id;
 	//! The displayed name, e.g. "Artificial Satellites".
@@ -40,6 +41,8 @@ struct StelPluginInfo
 	//! Logo or preview image to display in the information dialog or an invalid image if not applicable.
 	//! The image size should be x by x pixels.
 	QImage image;
+	//! Whether the plugin should be started by default (if nothing specified in config.ini)
+	bool startByDefault;
 };
 
 //! @class StelPluginInterface
