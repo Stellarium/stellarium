@@ -119,30 +119,30 @@ SearchDialog::SearchDialog() : simbadReply(NULL)
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
 
-	greekLetters["alpha"] = QString(QChar(0x03B1));
-	greekLetters["beta"] = QString(QChar(0x03B2));
-	greekLetters["gamma"] = QString(QChar(0x03B3));
-	greekLetters["delta"] = QString(QChar(0x03B4));
-	greekLetters["epsilon"] = QString(QChar(0x03B5));
-	greekLetters["zeta"] = QString(QChar(0x03B6));
-	greekLetters["eta"] = QString(QChar(0x03B7));
-	greekLetters["theta"] = QString(QChar(0x03B8));
-	greekLetters["iota"] = QString(QChar(0x03B9));
-	greekLetters["kappa"] = QString(QChar(0x03BA));
-	greekLetters["lambda"] = QString(QChar(0x03BB));
-	greekLetters["mu"] = QString(QChar(0x03BC));
-	greekLetters["nu"] = QString(QChar(0x03BD));
-	greekLetters["xi"] = QString(QChar(0x03BE));
-	greekLetters["omicron"] = QString(QChar(0x03BF));
-	greekLetters["pi"] = QString(QChar(0x03C0));
-	greekLetters["rho"] = QString(QChar(0x03C1));
-	greekLetters["sigma"] = QString(QChar(0x03C3)); // second lower-case sigma shouldn't affect anything
-	greekLetters["tau"] = QString(QChar(0x03C4));
-	greekLetters["upsilon"] = QString(QChar(0x03C5));
-	greekLetters["phi"] = QString(QChar(0x03C6));
-	greekLetters["chi"] = QString(QChar(0x03C7));
-	greekLetters["psi"] = QString(QChar(0x03C8));
-	greekLetters["omega"] = QString(QChar(0x03C9));
+	greekLetters.insert("alpha", QString(QChar(0x03B1)));
+	greekLetters.insert("beta", QString(QChar(0x03B2)));
+	greekLetters.insert("gamma", QString(QChar(0x03B3)));
+	greekLetters.insert("delta", QString(QChar(0x03B4)));
+	greekLetters.insert("epsilon", QString(QChar(0x03B5)));
+	greekLetters.insert("zeta", QString(QChar(0x03B6)));
+	greekLetters.insert("eta", QString(QChar(0x03B7)));
+	greekLetters.insert("theta", QString(QChar(0x03B8)));
+	greekLetters.insert("iota", QString(QChar(0x03B9)));
+	greekLetters.insert("kappa", QString(QChar(0x03BA)));
+	greekLetters.insert("lambda", QString(QChar(0x03BB)));
+	greekLetters.insert("mu", QString(QChar(0x03BC)));
+	greekLetters.insert("nu", QString(QChar(0x03BD)));
+	greekLetters.insert("xi", QString(QChar(0x03BE)));
+	greekLetters.insert("omicron", QString(QChar(0x03BF)));
+	greekLetters.insert("pi", QString(QChar(0x03C0)));
+	greekLetters.insert("rho", QString(QChar(0x03C1)));
+	greekLetters.insert("sigma", QString(QChar(0x03C3))); // second lower-case sigma shouldn't affect anything
+	greekLetters.insert("tau", QString(QChar(0x03C4)));
+	greekLetters.insert("upsilon", QString(QChar(0x03C5)));
+	greekLetters.insert("phi", QString(QChar(0x03C6)));
+	greekLetters.insert("chi", QString(QChar(0x03C7)));
+	greekLetters.insert("psi", QString(QChar(0x03C8)));
+	greekLetters.insert("omega", QString(QChar(0x03C9)));
 }
 
 SearchDialog::~SearchDialog()
