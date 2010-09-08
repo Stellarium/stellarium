@@ -22,9 +22,6 @@
     <height>400</height>
    </size>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
@@ -144,30 +141,14 @@
       </sizepolicy>
      </property>
      <property name="title">
-      <string>Add</string>
+      <string>Add a new landscape</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <property name="margin">
        <number>0</number>
       </property>
-      <item row="0" column="0">
-       <widget class="QLabel" name="labelAdd">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Install a new landscape from an archive (a ZIP-compressed file).</string>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QPushButton" name="pushButtonAdd">
+      <item row="0" column="0" colspan="2">
+       <widget class="QPushButton" name="pushButtonBrowseForArchive">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -175,7 +156,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>&amp;Add...</string>
+         <string>Install a new landscape from a ZIP archive...</string>
         </property>
        </widget>
       </item>
@@ -188,7 +169,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>&amp;Switch to the new landscape after installation</string>
+         <string>Switch to the new landscape after installation</string>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -224,12 +205,25 @@
         <property name="text">
          <string/>
         </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QPushButton" name="pushButtonMessageOK">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
-         <string>OK</string>
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../../data/gui/guiRes.qrc">
+          <normaloff>:/graphicGui/closeButton-hover.png</normaloff>:/graphicGui/closeButton-hover.png</iconset>
         </property>
        </widget>
       </item>
@@ -258,7 +252,7 @@
       </sizepolicy>
      </property>
      <property name="title">
-      <string>Remove</string>
+      <string>Remove an installed landscape</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <property name="margin">
@@ -315,7 +309,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>&amp;Remove</string>
+            <string>Remove</string>
            </property>
           </widget>
          </item>
@@ -369,11 +363,13 @@
  </customwidgets>
  <tabstops>
   <tabstop>checkBoxUseLandscape</tabstop>
-  <tabstop>pushButtonAdd</tabstop>
+  <tabstop>pushButtonBrowseForArchive</tabstop>
   <tabstop>pushButtonMessageOK</tabstop>
   <tabstop>listWidgetUserLandscapes</tabstop>
   <tabstop>pushButtonRemove</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections/>
 </ui>
