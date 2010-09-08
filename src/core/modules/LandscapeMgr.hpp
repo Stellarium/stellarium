@@ -33,8 +33,8 @@ class Cardinals;
 class QSettings;
 
 //! @class LandscapeMgr
-//! Manages all the rendering a the level of the observer's surrounding.
-//! This includes landscape textures, fog, atmosphere and cardinal points
+//! Manages all the rendering at the level of the observer's surroundings.
+//! This includes landscape textures, fog, atmosphere and cardinal points.
 //! I decided to put all these elements together in a single class because they are
 //! inherently linked, especially when we start moving the observer in altitude.
 class LandscapeMgr : public StelModule
@@ -96,15 +96,20 @@ public:
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods callable from script and GUI
-	//! Retrieve list of the names of all the available landscape in the
-	//! file search path sub-directories of the landscape area
+	//! Retrieve a list of the names of all the available landscapes in
+	//! the file search path sub-directories of the landscape area
 	//! @return the names of the landscapes, which are the values of the name parameter in the landscape.ini files
 	QStringList getAllLandscapeNames() const;
 
-	//! Retrieve list of the names of all the available landscape in the
-	//! file search path sub-directories of the landscape area
-	//! @return the names of the landscapes, which are the values of the name parameter in the landscape.ini files
+	//! Retrieve a list of the identifiers of all the available landscapes in
+	//! the file search path sub-directories of the landscape area
+	//! @return the identifiers of the landscapes, which are the names of the directories containing the landscapes' files
 	QStringList getAllLandscapeIDs() const;
+
+	//! Retrieve a list of the identifiers of all user-installed landscapes.
+	//! Effectively, this returns the results of getAllLandscapeIDs() without
+	//! the landscapes specified in the #packagedLandscapeIDs list.
+	QStringList getUserLandscapeIDs() const;
 
 	//! Get the current landscape ID.
 	const QString& getCurrentLandscapeID() const {return currentLandscapeID;}
@@ -191,6 +196,9 @@ public slots:
 	//! on some Windows or *nix systems. (NOT IMPLEMENTED!)
 	//! @returns the installed landscape's identifier (the folder name), or
 	//! an empty string on failure.
+	//! @todo Allow landscape packages that do not contain a top-level directory
+	//! (use the name of the archive as an identifier).
+	//! @todo Find a better way to pass error messages.
 	QString installLandscapeFromArchive(QString pathToSourceArchive, bool display = false, bool forAllUsers = false);
 
 	//! Install a landscape from a directory.
@@ -214,9 +222,13 @@ public slots:
 
 	//! This function removes a landscape from the user data directory.
 	//! It tries to recursively delete all files in the landscape directory
-	//! and then remove it. If it encounters any file that can't be deleted
+	//! and then remove it from the list of available landscapes.
+	//! If the function encounters any file that can't be deleted
 	//! it aborts the operation (previously deleted files are not restored).
+	//! Landscapes that were packaged with Stellarium can't be removed,
+	//! thanks to the #packagedtLandscapeIDs list.
 	//! @param landscapeID an installed landscape's identifier (the folder name)
+	//! @todo Find a better way to pass error messages.
 	bool removeLandscape(QString landscapeID);
 
 	//! This function reads a landscape's name from its configuration file.
@@ -230,6 +242,10 @@ public slots:
 	//! that there are no sub-directories. (There shouldn't be any anyway.)
 	//! @param landscapeID an installed landscape's identifier (the folder name)
 	quint64 loadLandscapeSize(QString landscapeID);
+
+	//! Not elegant way of passing verbose error messages.
+	//! @todo FIX THIS!
+	QString getLastErrorMessage() {return errorMessage;};
 
 signals:
 	//! Emitted when a landscape has been installed or un-installed.
@@ -269,6 +285,15 @@ private:
 
 	// The ID of the default landscape
 	QString defaultLandscapeID;
+
+	//! List of the IDs of the landscapes packaged by default with Stellarium.
+	//! (So that they can't be removed.)
+	//! It is populated in LandscapeMgr() and has to be updated
+	//! manually on changes.
+	//! @todo Find a way to update it automatically.
+	QStringList packagedLandscapeIDs;
+
+	QString errorMessage;
 };
 
 #endif // _LANDSCAPEMGR_HPP_

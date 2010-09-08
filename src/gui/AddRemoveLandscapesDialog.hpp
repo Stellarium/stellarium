@@ -39,6 +39,10 @@ public:
 	void languageChanged();
 
 public slots:
+	//! This function overrides the non-virtual StelDialog::setVisible()
+	//! to allow the current landscape to be selected in the list of user
+	//! landscapes (if it is in the list) every time the dialog is displayed.
+	void setVisible(bool);
 	void populateLists();
 	
 protected:
@@ -47,9 +51,9 @@ protected:
 	Ui_addRemoveLandscapesDialogForm* ui;
 
 private slots:
-	void buttonAddClicked();
-	void buttonRemoveClicked();
-	void landscapeListCurrentRowChanged(int newRow);
+	void browseForArchiveClicked();
+	void removeClicked();
+	void updateSidePane(int newRow);
 
 	//! Hides the message group box and returns to the "Add" group box.
 	//! Usually called by clicking the "OK" button in the message box.
@@ -61,13 +65,6 @@ private:
 	//! Path to the directory last used by QFileDialog in buttonAddClicked().
 	//! Initialized with QDir::homePath() in Landscape(). (DOESN'T WORK!)
 	QString lastUsedDirectoryPath;
-
-	//! List of the IDs of the landscapes packaged by default with Stellarium.
-	//! (So that they can't be removed.)
-	//! It is populated in AddRemoveLandscapesDialog() and has to be updated
-	//! manually on changes.
-	//! @todo Find a way to populate it with CMake.
-	QStringList defaultLandscapeIDs;
 
 	//! Displays a message in place of the "Add" box.
 	//! Pressing the "OK" button in the message box calls messageAcknowledged().
