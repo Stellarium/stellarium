@@ -13,9 +13,6 @@
   <property name="font">
    <font/>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
   <property name="autoFillBackground">
    <bool>false</bool>
   </property>
@@ -292,7 +289,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-sky.png</normalon>
+           <normalon>:/graphicGui/tabicon-sky.png</normalon>
           </iconset>
          </property>
         </item>
@@ -302,7 +299,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-markings.png</normalon>
+           <normalon>:/graphicGui/tabicon-markings.png</normalon>
           </iconset>
          </property>
         </item>
@@ -312,7 +309,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-landscape.png</normalon>
+           <normalon>:/graphicGui/tabicon-landscape.png</normalon>
           </iconset>
          </property>
         </item>
@@ -322,7 +319,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-starlore.png</normalon>
+           <normalon>:/graphicGui/tabicon-starlore.png</normalon>
           </iconset>
          </property>
         </item>
@@ -1568,6 +1565,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections/>
 </ui>
