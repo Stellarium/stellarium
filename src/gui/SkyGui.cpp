@@ -143,7 +143,7 @@ void SkyGui::init(StelGui* astelGui)
 void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
 	QGraphicsWidget::resizeEvent(event);
-	updateBarsPos();
+		updateBarsPos();
 }
 
 void SkyGui::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
@@ -198,25 +198,23 @@ void SkyGui::updateBarsPos()
 		updatePath = true;
 	}
 
-        int barVerticalShift;
-        #ifdef Q_OS_MAC
-            barVerticalShift = 3;
-        #else
-            barVerticalShift = 7;
-        #endif
-        double rangeY = buttonBar->boundingRectNoHelpLabel().height()+0.5-barVerticalShift-buttonBarPath->getRoundSize();
-        const qreal newButtonBarX = winBar->boundingRectNoHelpLabel().right()+buttonBarPath->getRoundSize();
+	int barVerticalShift = 7;
+	#ifdef Q_OS_MAC
+		barVerticalShift = 3;
+	#endif
+	double rangeY = buttonBar->boundingRectNoHelpLabel().height()+0.5-7.-buttonBarPath->getRoundSize();
+	const qreal newButtonBarX = winBar->boundingRectNoHelpLabel().right()+buttonBarPath->getRoundSize();
 	const qreal newButtonBarY = hh-buttonBar->boundingRectNoHelpLabel().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY;
 	if (buttonBar->pos().x()!=newButtonBarX || buttonBar->pos().y()!=newButtonBarY)
 	{
 		buttonBar->setPos(round(newButtonBarX), round(newButtonBarY));
-		updatePath = true;
+				updatePath = true;
 	}
 
 	if (lastButtonbarWidth != buttonBar->boundingRectNoHelpLabel().width())
 	{
-		updatePath = true;
-		lastButtonbarWidth = (int)(buttonBar->boundingRectNoHelpLabel().width());
+				updatePath = true;
+				lastButtonbarWidth = (int)(buttonBar->boundingRectNoHelpLabel().width());
 	}
 
 	if (updatePath)
