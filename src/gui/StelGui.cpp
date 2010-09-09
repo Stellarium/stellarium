@@ -59,6 +59,7 @@
 #include <QFile>
 #include <QTextBrowser>
 #include <QGraphicsWidget>
+#include <QGraphicsGridLayout>
 
 StelGuiBase* StelStandardGuiPluginInterface::getStelGuiBase() const
 {
@@ -354,7 +355,6 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Search_Window_Global"));
 	skyGui->winBar->addButton(b);
 
-
 	pxmapOn = QPixmap(":/graphicGui/8-on-settings.png");
 	pxmapOff = QPixmap(":/graphicGui/8-off-settings.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Configuration_Window_Global"));
@@ -364,7 +364,6 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	pxmapOff = QPixmap(":/graphicGui/9-off-help.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Help_Window_Global"));
 	skyGui->winBar->addButton(b);
-
 
 	QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
 
@@ -473,11 +472,16 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	///////////////////////////////////////////////////////////////////////
 	// Create the main base widget
 	skyGui->init(this);
+	QGraphicsGridLayout* l = new QGraphicsGridLayout();
+	l->setContentsMargins(0,0,0,0);
+	l->setSpacing(0);
+	l->addItem(skyGui, 0, 0);
+	stelAppGraphicsWidget->setLayout(l);
+
+	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
 
 	skyGui->setGeometry(stelAppGraphicsWidget->geometry());
 	skyGui->updateBarsPos();
-
-	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
 
 	initDone = true;
 }
@@ -831,7 +835,6 @@ void StelGui::setAutoHideVerticalButtonBar(bool b) {skyGui->autoHideVerticalButt
 
 void StelGui::forceRefreshGui()
 {
-  skyGui->setGeometry(stelAppGraphicsWidget->geometry());
   skyGui->updateBarsPos();
 }
 
