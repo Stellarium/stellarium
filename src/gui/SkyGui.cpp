@@ -198,10 +198,6 @@ void SkyGui::updateBarsPos()
 		updatePath = true;
 	}
 
-	int barVerticalShift = 7;
-	#ifdef Q_OS_MAC
-		barVerticalShift = 3;
-	#endif
 	double rangeY = buttonBar->boundingRectNoHelpLabel().height()+0.5-7.-buttonBarPath->getRoundSize();
 	const qreal newButtonBarX = winBar->boundingRectNoHelpLabel().right()+buttonBarPath->getRoundSize();
 	const qreal newButtonBarY = hh-buttonBar->boundingRectNoHelpLabel().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY;
