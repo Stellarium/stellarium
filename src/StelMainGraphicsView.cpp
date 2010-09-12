@@ -209,6 +209,7 @@ void StelMainGraphicsView::init(QSettings* conf)
 	mainSkyItem->setContentsMargins(0,0,0,0);
 	QGraphicsGridLayout* l = new QGraphicsGridLayout(backItem);
 	l->setSpacing(0);
+	l->setContentsMargins(0,0,0,0);
 	l->addItem(mainSkyItem, 0, 0);
 	backItem->setLayout(l);
 	scene()->addItem(backItem);
