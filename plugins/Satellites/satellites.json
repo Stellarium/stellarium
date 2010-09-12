@@ -10,7 +10,7 @@
 			"tle2": "2 27846  98.7040  37.8826 0009038 197.3618 162.7248 14.21013016340989",
 			"visible": false
 		},
-		"AO-10": 
+		"PHASE 3B (AO-10)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -18,7 +18,7 @@
 			"tle2": "2 14129  25.9652 165.8235 5982871 207.6161 100.7646  2.05871463165845",
 			"visible": false
 		},
-		"AO-16": 
+		"PACSAT (AO-16)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -26,15 +26,7 @@
 			"tle2": "2 20439  98.2700  53.2702 0011918  71.1776 289.0705 14.31818920   653",
 			"visible": false
 		},
-		"AO-21": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 21087U 91006A   09081.14328975  .00000007  00000-0 -88872-5 0  2248",
-			"tle2": "2 21087  82.9394 110.5138 0035354 164.4014 195.8232 13.75041202910458",
-			"visible": false
-		},
-		"AO-24": 
+		"ARSENE (AO-24)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -42,7 +34,7 @@
 			"tle2": "2 22654   5.1398 339.1447 2877460 155.4874 221.3758  1.42205192 77846",
 			"visible": false
 		},
-		"AO-27": 
+		"EYESAT-1 (AO-27)": 
 		{
 			"comms": [
 			{
@@ -59,7 +51,7 @@
 			"tle2": "2 22825  98.4253  37.0634 0008629 156.2036 203.9551 14.29261103807439",
 			"visible": true
 		},
-		"AO-40": 
+		"PHASE 3D (AO-40)": 
 		{
 			"comms": [
 			{
@@ -72,15 +64,7 @@
 			"tle2": "2 26609   8.9892  27.3596 7956558 186.7198 145.1448  1.25584591 38523",
 			"visible": true
 		},
-		"AO-49": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 27605U 02058A   09080.65787984 -.00000079  00000-0  99843-5 0  8686",
-			"tle2": "2 27605  64.5583 278.4265 0075759 225.4252 134.0638 14.72390530336058",
-			"visible": false
-		},
-		"AO-5": 
+		"OSCAR 5 (AO-5)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -88,7 +72,7 @@
 			"tle2": "2 04321 102.1329  90.4257 0027646 145.0891 215.1997 12.52156131789847",
 			"visible": false
 		},
-		"AO-51": 
+		"ECHO (AO-51)": 
 		{
 			"comms": [
 			{
@@ -107,7 +91,7 @@
 			"tle2": "2 28375  98.0561  95.3557 0085140  31.1071 329.5121 14.40636066248352",
 			"visible": true
 		},
-		"AO-6": 
+		"OSCAR 6 (AO-6)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -115,7 +99,7 @@
 			"tle2": "2 06236 101.4018  97.8648 0004124  61.3429 298.8059 12.53076701666485",
 			"visible": false
 		},
-		"AO-7": 
+		"OSCAR 7 (AO-7)": 
 		{
 			"comms": [
 			{
@@ -156,20 +140,12 @@
 			"tle2": "2 07530 101.4356 108.9488 0012080  79.3798 280.8632 12.53575454571800",
 			"visible": true
 		},
-		"AO-8": 
+		"OSCAR 8 (AO-8)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
 			"tle1": "1 10703U 78026B   09081.15228109  .00000030  00000-0  50534-4 0  4427",
 			"tle2": "2 10703  98.8443 129.5050 0007638  50.2967 309.8869 13.98840358583855",
-			"visible": false
-		},
-		"BO-47 & BO-48": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 27422U 02021B   09080.89625340  .00000030  00000-0  29156-4 0    76",
-			"tle2": "2 27422  98.5267 162.1544 0013246 118.0880 242.1635 14.28485036356942",
 			"visible": false
 		},
 		"CANX-1": 
@@ -179,7 +155,7 @@
 			"tle2": "2 27847  98.7031  37.9503 0009184 196.2175 163.8706 14.20992557340943",
 			"visible": false
 		},
-		"CO-55": 
+		"CUTE-1 (CO-55)": 
 		{
 			"comms": [
 			{
@@ -193,26 +169,7 @@
 			"tle2": "2 27844  98.7159  90.9149 0010677  40.0025 320.1937 14.20627455296817",
 			"visible": true
 		},
-		"CO-56": 
-		{
-			"comms": [
-			{
-				"description": "uplink",
-				"frequency": 1268.5,
-				"modulation": "GMSK 9600 bps"
-			}, 
-			{
-				"description": "downlink",
-				"frequency": 437.505,
-				"modulation": "GMSK 9600 bps"
-			}],
-			"description": "Amateur satellite",
-			"groups": ["amateur"],
-			"tle1": "1 28941U 06005C   09081.06710192  .00060619  36453-5  27371-3 0  9204",
-			"tle2": "2 28941  98.1340 239.8519 0109605  99.4499 261.9125 15.75468265173492",
-			"visible": true
-		},
-		"CO-57": 
+		"CUBESAT XI-IV (CO-57)": 
 		{
 			"comms": [
 			{
@@ -226,7 +183,7 @@
 			"tle2": "2 27848  98.7176  90.0128 0010577  41.9374 318.2624 14.20430987296783",
 			"visible": true
 		},
-		"CO-58": 
+		"CUBESAT XI-V (CO-58)": 
 		{
 			"comms": [
 			{
@@ -240,7 +197,7 @@
 			"tle2": "2 28895  98.0694 333.7523 0016860 260.8704  99.0653 14.59751404180971",
 			"visible": true
 		},
-		"DO-17": 
+		"DOVE (DO-17)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -248,7 +205,7 @@
 			"tle2": "2 20440  98.2451  57.8863 0011973  67.7463 292.4996 14.32122011   741",
 			"visible": false
 		},
-		"DO-64": 
+		"DELFI-C3 (DO-64)": 
 		{
 			"comms": [
 			{
@@ -277,7 +234,7 @@
 			"tle2": "2 27386  98.5452  95.9023 0000953  91.1541  58.3024 14.32250764413494",
 			"visible": true
 		},
-		"FO-12": 
+		"JAS-1 (FO-12)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -285,7 +242,7 @@
 			"tle2": "2 16909  50.0155  70.0871 0010887 345.8622  14.1906 12.44452849 28116",
 			"visible": false
 		},
-		"FO-20": 
+		"JAS-1B (FO-20)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -293,7 +250,7 @@
 			"tle2": "2 20480  99.0681  17.7100 0540652   8.2393 352.7149 12.83361326895695",
 			"visible": false
 		},
-		"FO-29": 
+		"JAS-2 (FO-29)": 
 		{
 			"comms": [
 			{
@@ -326,7 +283,7 @@
 			"tle2": "2 31789  64.5062  33.4323 0047056 229.9947 129.7027 15.03172129141639",
 			"visible": true
 		},
-		"GO-32": 
+		"TECHSAT 1B (GO-32)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -350,15 +307,6 @@
 			"comms": [],
 			"tle1": "1 21552U 91047A   10025.66718609  .00000110  00000-0  10000-3 0  5494",
 			"tle2": "2 21552  54.4131 212.0423 0060008 330.5965  29.0936  2.00421155135956",
-			"visible": false
-		},
-		"GPS BIIA-12 (PRN 25)": 
-		{
-			"description": "GPS constellation",
-			"groups": ["gps", "navigation"],
-			"comms": [],
-			"tle1": "1 21890U 92009A   09128.90936473 -.00000097  00000-0  10000-3 0  2704",
-			"tle2": "2 21890  55.5450  34.2875 0117611 290.5064  68.2555  2.00565975126085",
 			"visible": false
 		},
 		"GPS BIIA-14 (PRN 26)": 
@@ -386,14 +334,6 @@
 			"comms": [],
 			"tle1": "1 22700U 93042A   10026.37752020 -.00000028  00000-0  10000-3 0  7177",
 			"tle2": "2 22700  56.1041  27.3683 0204220  87.4714 274.9050  2.00571182121456",
-			"visible": false
-		},
-		"GPS BIIA-22 (PRN 05)": 
-		{
-			"description": "GPS constellation",
-			"groups": ["gps", "navigation"],
-			"tle1": "1 22779U 93054A   09080.36773520  .00000042  00000-0  10000-3 0  9088",
-			"tle2": "2 22779  54.1728  96.1574 0092045  74.3146 286.7539  2.00570999113975",
 			"visible": false
 		},
 		"GPS BIIA-23 (PRN 04)": 
@@ -619,7 +559,7 @@
 			"tle2": "2 20580  28.4698  84.4511 0003518 138.5221 221.5624 15.00884058883444",
 			"visible": true
 		},
-		"IO-26": 
+		"ITAMSAT (IO-26)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1383,7 +1323,7 @@
 			"tle2": "2 25544  51.6437 236.2253 0010970 246.6942 306.4076 15.75413836641214",
 			"visible": true
 		},
-		"KO-23": 
+		"KITSAT 1 (KO-23)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1391,7 +1331,7 @@
 			"tle2": "2 22077  66.0847 149.9211 0013023 300.4010  59.5723 12.86447618780266",
 			"visible": false
 		},
-		"KO-25": 
+		"KITSAT 2 (KO-25)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1399,7 +1339,7 @@
 			"tle2": "2 22828  98.4126  37.7648 0010637 129.0987 231.1150 14.29813121775804",
 			"visible": false
 		},
-		"LO-19": 
+		"LUSAT (LO-19)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1407,7 +1347,7 @@
 			"tle2": "2 20442  98.2328  60.8676 0012920  67.8229 292.4325 14.32055802   813",
 			"visible": false
 		},
-		"MO-30": 
+		"UNAMSAT-2 (MO-30)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1415,7 +1355,7 @@
 			"tle2": "2 24305  82.9323  58.9099 0030942 136.0160 224.3468 13.73567811628634",
 			"visible": false
 		},
-		"MO-46": 
+		"TIUNGSAT-1 (MO-46)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1430,7 +1370,7 @@
 			"tle2": "2 28897  98.0325 275.5850 0017652  12.6585 347.5061 14.60021951218638",
 			"visible": false
 		},
-		"NO-44": 
+		"PCSAT (NO-44)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1438,7 +1378,7 @@
 			"tle2": "2 26931  67.0529 289.7584 0005178 260.4427  99.6072 14.29549665390074",
 			"visible": false
 		},
-		"NO-45": 
+		"SAPPHIRE (NO-45)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1488,7 +1428,7 @@
 			"tle2": "2 28654  98.8994  24.7197 0013458 248.9605 111.0150 14.11241530197625",
 			"visible": true
 		},
-		"OO-38": 
+		"OPAL (OO-38)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1496,7 +1436,7 @@
 			"tle2": "2 26063 100.1939 211.4200 0036983 147.0349 213.3150 14.35858482479406",
 			"visible": false
 		},
-		"OSCAR III": 
+		"OSCAR 3 (OSCAR III)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1504,14 +1444,14 @@
 			"tle2": "2 01293  70.0694 359.9998 0020227 281.6686  78.2153 14.04694421247559",
 			"visible": false
 		},
-		"PEHUENSAT 1": 
+		"PEHUENSAT 1 (PO-63)": 
 		{
 			"comms": [],
 			"tle1": "1 29712U 07001D   09129.76442331  .00000438  00000-0  63872-4 0  4664",
 			"tle2": "2 29712  97.8314 187.0851 0015285  43.5600 316.6810 14.80531783125782",
 			"visible": false
 		},
-		"PO-28": 
+		"POSAT (PO-28)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1519,7 +1459,7 @@
 			"tle2": "2 22829  98.4087  38.9001 0010531 125.5741 234.6455 14.30211190807812",
 			"visible": false
 		},
-		"PO-34": 
+		"PAN SAT (PO-34)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1527,7 +1467,7 @@
 			"tle2": "2 25520  28.4596 121.9419 0005186  71.4910 288.6250 15.17311364575324",
 			"visible": false
 		},
-		"RS-12 & RS-13": 
+		"COSMOS 2123 & RS-12/13": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1535,7 +1475,7 @@
 			"tle2": "2 21089  82.9245 331.2610 0028092 210.0328 149.9223 13.74485557909237",
 			"visible": false
 		},
-		"RS-15": 
+		"RADIO ROSTO (RS-15)": 
 		{
 			"comms": [
 			{
@@ -1562,7 +1502,7 @@
 			"tle2": "2 23439  64.8130  45.8464 0146514  68.4113 293.2342 11.27553256586281",
 			"visible": true
 		},
-		"RS-22": 
+		"MOZHAYETS 4 (RS-22)": 
 		{
 			"comms": [
 			{
@@ -1583,7 +1523,7 @@
 			"tle2": "2 10967 108.0187  68.4423 0003369 269.7135  90.3629 14.42178012657312",
 			"visible": true
 		},
-		"SO-33": 
+		"SEDSAT 1 (SO-33)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1591,7 +1531,7 @@
 			"tle2": "2 25509  31.4336 187.2850 0354956 293.3308  63.0343 14.28246349543312",
 			"visible": false
 		},
-		"SO-35": 
+		"SUNSAT (SO-35)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1599,7 +1539,7 @@
 			"tle2": "2 25636  96.4526 285.7652 0148832 138.9281 222.3233 14.43457619530468",
 			"visible": false
 		},
-		"SO-41": 
+		"SAUDISAT 1A (SO-41)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1607,7 +1547,7 @@
 			"tle2": "2 26545  64.5602  25.7522 0053775 291.6905  67.8477 14.80571352458315",
 			"visible": false
 		},
-		"SO-42": 
+		"SAUDISAT 1B (SO-42)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1615,7 +1555,7 @@
 			"tle2": "2 26549  64.5580  42.8624 0056981 296.2253  63.3012 14.79427179457945",
 			"visible": false
 		},
-		"SO-50": 
+		"SAUDISAT 1C (SO-50)": 
 		{
 			"comms": [
 			{
@@ -1634,7 +1574,7 @@
 			"tle2": "2 27607  64.5592 290.7496 0076162 224.5615 134.9353 14.71420878335808",
 			"visible": true
 		},
-		"TO-31": 
+		"TMSAT-1 (TO-31)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1649,7 +1589,7 @@
 			"tle2": "2 21701  56.9726 106.7271 0064679 246.0449 113.3827 15.57874309 13876",
 			"visible": true
 		},
-		"UO-11": 
+		"UOSAT 2 (UO-11)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1657,7 +1597,7 @@
 			"tle2": "2 14781  98.1180 124.2766 0008009 259.6956 100.3325 14.79700400344880",
 			"visible": false
 		},
-		"UO-14": 
+		"UOSAT 3 (UO-14)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1665,7 +1605,7 @@
 			"tle2": "2 20437  98.3297  42.5381 0011721  66.3877 293.8534 14.31539355   562",
 			"visible": false
 		},
-		"UO-15": 
+		"UOSAT 4 (UO-15)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1673,7 +1613,7 @@
 			"tle2": "2 20438  98.3890  35.1941 0010802  94.4649 265.7767 14.30441006999994",
 			"visible": false
 		},
-		"UO-22": 
+		"UOSAT 5 (UO-22)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1681,7 +1621,7 @@
 			"tle2": "2 21575  98.4357  31.0711 0006470 282.9876  77.0586 14.39667965928143",
 			"visible": false
 		},
-		"UO-36": 
+		"UOSAT 12 (UO-36)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1701,7 +1641,7 @@
 			"tle2": "2 28892  98.0307 274.1190 0017728  14.7761 345.3956 14.59812154226312",
 			"visible": false
 		},
-		"VO-52": 
+		"HAMSAT (VO-52)": 
 		{
 			"comms": [
 			{
@@ -1715,7 +1655,7 @@
 			"tle2": "2 28650  97.7510 145.1610 0026425 317.3448  42.5717 14.81561809209694",
 			"visible": true
 		},
-		"WO-18": 
+		"WEBERSAT (WO-18)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
@@ -1723,7 +1663,7 @@
 			"tle2": "2 20441  98.2526  56.8316 0012586  69.9267 290.3272 14.31886901   720",
 			"visible": false
 		},
-		"XO-53": 
+		"SSETI EXPRESS (XO-53)": 
 		{
 			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
