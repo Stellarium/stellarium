@@ -635,6 +635,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 	if (!QFile::exists(sourceFilePath))
 	{
 		qDebug() << "LandscapeMgr: File does not exist:" << sourceFilePath;
+		emit errorUnableToOpen(sourceFilePath);
 		return QString();
 	}
 
@@ -648,7 +649,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 		if (!parentDestinationDir.mkdir("landscapes"))
 		{
 			qWarning() << "LandscapeMgr: Unable to install landscape: Unable to create sub-directory 'landscapes' in" << parentDestinationDir.absolutePath();
-			errorMessage = QString(q_("Stellarium is unable to create sub-directory \"landscapes\" in %1")).arg(parentDestinationDir.absolutePath());
+			emit errorUnableToOpen(QDir::cleanPath(parentDestinationDir.filePath("landscapes")));//parentDestinationDir.absolutePath()
 			return QString();
 		}
 	}
@@ -657,8 +658,8 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 	KZip sourceArchive(sourceFilePath);
 	if(!sourceArchive.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "LandscapeMgr: Unable to open source archive file:" << sourceFilePath;
-		errorMessage = QString(q_("Stellarium is unable to open this file as an archive: %1")).arg(sourceFilePath);
+		qWarning() << "LandscapeMgr: Unable to open as a ZIP archive:" << sourceFilePath;
+		emit errorNotArchive();
 		return QString();
 	}
 
@@ -679,7 +680,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 	if (archiveTopDirectory == NULL)
 	{
 		qWarning() << "LandscapeMgr: Unable to install landscape. There is no directory that contains a 'landscape.ini' file in the source archive.";
-		errorMessage = q_("There is no directory that contains a \"landscape.ini\" file inside the archive file.");
+		emit errorNotArchive();
 		return QString();
 	}
 
@@ -702,7 +703,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 	if (getAllLandscapeIDs().contains(landscapeID))
 	{
 		qWarning() << "LandscapeMgr: Unable to install landscape. A landscape with the ID" << landscapeID << "already exists.";
-		errorMessage = QString(q_("A landscape with the same identifier (\"%1\") has been already installed.")).arg(landscapeID);
+		emit errorNotUnique(landscapeID);
 		return QString();
 	}
 
@@ -719,16 +720,21 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 		if (getAllLandscapeNames().contains(landscapeName))
 		{
 			qWarning() << "LandscapeMgr: Unable to install landscape. There is already a landscape named" << landscapeName;
-			errorMessage = QString(q_("A landscape with the same name (\"%1\") has been already installed.")).arg(landscapeName);
+			emit errorNotUnique(landscapeName);
 			return QString();
 		}
 	}
 
 	//Copy the landscape directory to the target
 	//sourceArchive.directory()->copyTo(destinationDir.absolutePath());
-	if(!destinationDir.mkdir(landscapeID))
+	if(destinationDir.exists(landscapeID))
+	{
+		qWarning() << "LandscapeMgr: A subdirectory" << landscapeID << "already exists in" << destinationDir.absolutePath() << "Its contents may be overwritten.";
+	}
+	else if(!destinationDir.mkdir(landscapeID))
 	{
 		qWarning() << "LandscapeMgr: Unable to install landscape. Unable to create" << landscapeID << "directory in" << destinationDir.absolutePath();
+		emit errorUnableToOpen(QDir::cleanPath(destinationDir.filePath(landscapeID)));
 		return QString();
 	}
 	destinationDir.cd(landscapeID);
@@ -769,7 +775,6 @@ bool LandscapeMgr::removeLandscape(QString landscapeID)
 	if (packagedLandscapeIDs.contains(landscapeID))
 	{
 		qWarning() << "LandscapeMgr: Landscapes that are part of the default installation cannot be removed.";
-		errorMessage = q_("Landscapes that are part of the default installation cannot be removed.");
 		return false;
 	}
 
@@ -780,21 +785,24 @@ bool LandscapeMgr::removeLandscape(QString landscapeID)
 		return false;
 
 	QDir landscapeDir(landscapePath);
-	QString manualDeleteMessage = q_("You can delete manually this landscape by deleting the following directory: %1").arg(landscapeDir.absolutePath());
 	foreach (QString fileName, landscapeDir.entryList(QDir::Files | QDir::NoDotAndDotDot))
 	{
 		if(!landscapeDir.remove(fileName))
 		{
-			qDebug() << "LandscapeMgr: Unable to remove" << fileName;
-			errorMessage = manualDeleteMessage;
+			qWarning() << "LandscapeMgr: Unable to remove" << fileName;
+			emit errorRemoveManually(landscapeDir.absolutePath());
 			return false;
 		}
 	}
 	landscapeDir.cdUp();
 	if(!landscapeDir.rmdir(landscapeID))
 	{
-		qWarning() << "LandscapeMgr: Error! Landscape" << landscapeID << "could not be removed. Some files were deleted, but not all.";
-		errorMessage = manualDeleteMessage;
+		qWarning() << "LandscapeMgr: Error! Landscape" << landscapeID
+				   << "could not be removed. "
+				   << "Some files were deleted, but not all."
+				   << endl
+				   << "LandscapeMgr: You can delete manually" << QDir::cleanPath(landscapeDir.filePath(landscapeID));
+		emit errorRemoveManually(QDir::cleanPath(landscapeDir.filePath(landscapeID)));
 		return false;
 	}
 

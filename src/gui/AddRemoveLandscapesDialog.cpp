@@ -64,6 +64,10 @@ void AddRemoveLandscapesDialog::createDialogContent()
 	connect(ui->pushButtonMessageOK, SIGNAL(clicked()), this, SLOT(messageAcknowledged()));
 
 	connect(landscapeManager, SIGNAL(landscapesChanged()), this, SLOT(populateLists()));
+	connect(landscapeManager, SIGNAL(errorUnableToOpen(QString)), this, SLOT(messageUnableToOpen(QString)));
+	connect(landscapeManager, SIGNAL(errorNotArchive()), this, SLOT(messageNotArchive()));
+	connect(landscapeManager, SIGNAL(errorNotUnique(QString)), this, SLOT(messageNotUnique(QString)));
+	connect(landscapeManager, SIGNAL(errorRemoveManually(QString)), this, SLOT(messageRemoveManually(QString)));
 
 	ui->groupBoxMessage->setVisible(false);
 
@@ -130,9 +134,14 @@ void AddRemoveLandscapesDialog::browseForArchiveClicked()
 		}
 		else
 		{
-			//Show an error message
-			QString failureMessage = q_("No landscape has been installed.") + " " + landscapeManager->getLastErrorMessage();
-			displayMessage(q_("Error!"), failureMessage);
+			//If no error message has been displayed by the signal/slot mechanism,
+			//display a generic message.
+			if (!ui->groupBoxMessage->isVisible())
+			{
+				//Show an error message
+				QString failureMessage = q_("No landscape was installed.");
+				displayMessage(q_("Error!"), failureMessage);
+			}
 		}
 	}
 }
@@ -148,9 +157,15 @@ void AddRemoveLandscapesDialog::removeClicked()
 	}
 	else
 	{
-		//Show an error message
-		QString failureMessage = q_("The landscape could not be (completely) removed.")  + " " + landscapeManager->getLastErrorMessage();
-		displayMessage(q_("Error!"), failureMessage);
+		//If no error message has been displayed by the signal/slot mechanism,
+		//display a generic message.
+		if (!ui->groupBoxMessage->isVisible())
+		{
+			//Show an error message
+			//NB! This string is used elsewhere. Modify both to avoid two nearly identical translations.
+			QString failureMessage = q_("The selected landscape could not be (completely) removed.");
+			displayMessage(q_("Error!"), failureMessage);
+		}
 	}
 
 }
@@ -162,7 +177,6 @@ void AddRemoveLandscapesDialog::updateSidePane(int newRow)
 	ui->labelLandscapeSize->setVisible(displaySidePane);
 	ui->pushButtonRemove->setEnabled(displaySidePane);
 	ui->labelWarning->setEnabled(displaySidePane);
-
 	if (!displaySidePane)
 		return;
 
@@ -191,4 +205,37 @@ void AddRemoveLandscapesDialog::displayMessage(QString title, QString message)
 	ui->groupBoxMessage->setVisible(true);
 	ui->groupBoxAdd->setVisible(false);
 	ui->groupBoxRemove->setVisible(false);
+}
+
+void AddRemoveLandscapesDialog::messageUnableToOpen(QString path)
+{
+	QString failureMessage = q_("No landscape was installed.");
+	failureMessage.append(" ");
+	// TRANSLATORS: The parameter is a file/directory path that may be quite long.
+	failureMessage.append(q_("Stellarium cannot open for reading or writing %1").arg(path));
+	displayMessage(q_("Error!"), failureMessage);
+}
+
+void AddRemoveLandscapesDialog::messageNotArchive()
+{
+	QString failureMessage = q_("No landscape was installed.") + " " + q_("The selected file is not a ZIP archive or does not contain a Stellarium landscape.");
+	displayMessage(q_("Error!"), failureMessage);
+}
+
+void AddRemoveLandscapesDialog::messageNotUnique(QString nameOrID)
+{
+	// TRANSLATORS: The parameter is the duplicate name or identifier.
+	QString nameMessage = q_("A landscape with the same name or identifier (%1) already exists.").arg(nameOrID);
+	QString failureMessage = q_("No landscape was installed.") + " " + nameMessage;
+	displayMessage(q_("Error!"), failureMessage);
+}
+
+void AddRemoveLandscapesDialog::messageRemoveManually(QString path)
+{
+	//NB! This string is used elsewhere. Modify both to avoid two nearly identical translations.
+	QString failureMessage = q_("The selected landscape could not be (completely) removed.");
+	failureMessage.append(" ");
+	// TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
+	failureMessage.append(q_("You can remove it manually by deleting the following directory: %1").arg(path));
+	displayMessage(q_("Error!"), failureMessage);
 }
