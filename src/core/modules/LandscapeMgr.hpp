@@ -181,12 +181,25 @@ public slots:
 	void setZRotation(float d);
 
 	//! Install a landscape from a ZIP archive.
-	//! Expected archive structure: the name of the topmost directory
-	//! that contains a landscape.ini file is assumed to be
-	//! the landscape ID and should be unique.
-	//! This directory and all files in it will be installed, but its
-	//! subdirectories will be skipped along with any other files or
-	//! directories in the archive.
+	//! This function searches for a file named "landscape.ini" in the root
+	//! directory of the archive. If it is not found there, the function
+	//! searches inside the topmost sub-directories (if any), but no deeper.
+	//! If a landscape configuration file is found:
+	//!  - if a "landscapes" directory does not exist in the user data
+	//! directory, it is created;
+	//!  - inside it, a sub-directory is created with the landscape identifier
+	//! for a name;
+	//!  - all files in the archive directory that contains the "landscape.ini"
+	//! file are extracted to the new sub-directory of "landscapes";
+	//!  - all sub-directories of that archive directory will be skipped along
+	//! with any other files or directories in the archive.
+	//!
+	//! The landscape identifier is either:
+	//!  - the name of the folder in the archive that contains "landscape.ini",
+	//!  - or the first 65 (or less) characters of the archive name, if the
+	//! "landscape.ini" file is in the nameless root directory of the archive.
+	//!
+	//! The landscape identifier must be unique.
 	//! @param pathToSourceArchive path to the source archive file.
 	//! @param display If true, the landscape will be set to be the current
 	//! landscape after installation.
@@ -194,10 +207,8 @@ public slots:
 	//! landscape in a way that meakes it is available to all users of this
 	//! computer. May require running Stellarium as an administrator (root)
 	//! on some Windows or *nix systems. (NOT IMPLEMENTED!)
-	//! @returns the installed landscape's identifier (the folder name), or
+	//! @returns the installed landscape's identifier, or
 	//! an empty string on failure.
-	//! @todo Allow landscape packages that do not contain a top-level directory
-	//! (use the name of the archive as an identifier).
 	//! @todo Find a better way to pass error messages.
 	QString installLandscapeFromArchive(QString pathToSourceArchive, bool display = false, bool forAllUsers = false);
 
