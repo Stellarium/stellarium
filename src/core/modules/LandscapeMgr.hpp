@@ -243,15 +243,31 @@ public slots:
 	//! @param landscapeID an installed landscape's identifier (the folder name)
 	quint64 loadLandscapeSize(QString landscapeID);
 
-	//! Not elegant way of passing verbose error messages.
-	//! @todo FIX THIS!
-	QString getLastErrorMessage() {return errorMessage;};
-
 signals:
 	//! Emitted when a landscape has been installed or un-installed.
 	//! For example, it is used to update the list of landscapes in
 	//! the Sky and viewing options window (the ViewDialog class)
 	void landscapesChanged();
+
+	//! Emitted when installLandscapeFromArchive() can't read from, write to or
+	//! create a file or a directory.
+	//! (A way of moving the need for translatable error messages to the GUI.)
+	//! \param path path to the file or directory
+	void errorUnableToOpen(QString path);
+	//! Emitted when the file passed to installLandscapeFromArchive() is not a
+	//! ZIP archive or does not contain a valid landscape.
+	//! (A way of moving the need for translatable error messages to the GUI.)
+	void errorNotArchive();
+	//! Emitted when installLandscapeFromArchive() tries to install a landscape
+	//! with the same name or identifier as an already installed one.
+	//! (A way of moving the need for translatable error messages to the GUI.)
+	//! \param nameOrID the name or the identifier of the landscape
+	void errorNotUnique(QString nameOrID);
+	//! Emitted when removeLandscape() is unable to remove all the files of
+	//! a landscape.
+	//! (A way of moving the need for translatable error messages to the GUI.)
+	//! \param path the path to the landscape's directory
+	void errorRemoveManually(QString path);
 
 private:
 	//! Get light pollution luminance level.
@@ -292,8 +308,6 @@ private:
 	//! manually on changes.
 	//! @todo Find a way to update it automatically.
 	QStringList packagedLandscapeIDs;
-
-	QString errorMessage;
 };
 
 #endif // _LANDSCAPEMGR_HPP_

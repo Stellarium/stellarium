@@ -59,6 +59,11 @@ private slots:
 	//! Usually called by clicking the "OK" button in the message box.
 	void messageAcknowledged();
 
+	void messageUnableToOpen(QString path);
+	void messageNotArchive();
+	void messageNotUnique(QString nameOrID);
+	void messageRemoveManually(QString path);
+
 private:
 	LandscapeMgr* landscapeManager;
 
