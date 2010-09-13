@@ -37,7 +37,7 @@
 #include <QApplication>
 #include <QDebug>
 #include <QFileInfo>
-#include <QGraphicsAnchorLayout>
+#include <QGraphicsGridLayout>
 #include <QGraphicsProxyWidget>
 #include <QPluginLoader>
 #include <QtPlugin>
@@ -207,13 +207,10 @@ void StelMainGraphicsView::init(QSettings* conf)
 	mainSkyItem = new StelAppGraphicsWidget();
 	mainSkyItem->setZValue(-10);
 	mainSkyItem->setContentsMargins(0,0,0,0);
-	QGraphicsAnchorLayout *l = new QGraphicsAnchorLayout();
-	l->setContentsMargins(0,0,0,0);
+	QGraphicsGridLayout* l = new QGraphicsGridLayout(backItem);
 	l->setSpacing(0);
-	l->addAnchor(mainSkyItem, Qt::AnchorTop, l, Qt::AnchorTop);
-	l->addAnchor(mainSkyItem, Qt::AnchorLeft, l, Qt::AnchorLeft);
-	l->addAnchor(mainSkyItem, Qt::AnchorRight, l, Qt::AnchorRight);
-	l->addAnchor(mainSkyItem, Qt::AnchorBottom, l, Qt::AnchorBottom);
+	l->setContentsMargins(0,0,0,0);
+	l->addItem(mainSkyItem, 0, 0);
 	backItem->setLayout(l);
 	scene()->addItem(backItem);
 
@@ -333,9 +330,7 @@ void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
 	scene()->setSceneRect(QRect(QPoint(0, 0), event->size()));
 	backItem->setGeometry(0,0,event->size().width(),event->size().height());
 	QGraphicsView::resizeEvent(event);
-        // After resizing event we have to relocate the button bar
-        if (gui)
-            gui->forceRefreshGui();
+
 }
 
 void StelMainGraphicsView::mouseMoveEvent(QMouseEvent* event)

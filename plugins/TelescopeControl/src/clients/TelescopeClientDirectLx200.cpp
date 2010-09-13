@@ -107,9 +107,7 @@ void TelescopeClientDirectLx200::resetPositions()
 	position_pointer = positions;
 }
 
-//! queues a GOTO command with the specified position to the write buffer.
-//! For the data format of the command see the
-//! "Stellarium telescope control protocol" text file
+//! queues a GOTO command
 void TelescopeClientDirectLx200::telescopeGoto(const Vec3d &j2000Pos)
 {
 	if (isConnected())//TODO: See the else clause, think how to do the same thing

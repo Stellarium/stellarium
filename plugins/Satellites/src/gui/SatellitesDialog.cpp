@@ -158,7 +158,7 @@ void SatellitesDialog::groupFilterChanged(int index)
 
 void SatellitesDialog::selectedSatelliteChanged(const QString& id)
 {
-	qDebug() << "SatellitesDialog::selectedSatelliteChanged for " << id;
+	//qDebug() << "SatellitesDialog::selectedSatelliteChanged for " << id;
 	if (id.isEmpty() || id=="")
 		return;
 
@@ -228,7 +228,7 @@ void SatellitesDialog::setUpdatesEnabled(bool b)
 
 void SatellitesDialog::updateStateReceiver(Satellites::UpdateState state)
 {
-	qDebug() << "SatellitesDialog::updateStateReceiver got a signal";
+	//qDebug() << "SatellitesDialog::updateStateReceiver got a signal";
 	if (state==Satellites::Updating)
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
 	else if (state==Satellites::DownloadError || state==Satellites::OtherError)
@@ -339,7 +339,7 @@ void SatellitesDialog::updateGuiFromSettings(void)
 
 void SatellitesDialog::saveSettings(void)
 {
-	qDebug() << "Satellites::saveSettings not implemented yet!";
+	//qDebug() << "Satellites::saveSettings not implemented yet!";
 }
 
 void SatellitesDialog::showSelectedSatellites(void)
