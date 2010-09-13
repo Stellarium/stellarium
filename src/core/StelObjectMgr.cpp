@@ -159,8 +159,9 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 {
 	Vec3d v;
-	core->getProjection(StelCore::FrameJ2000)->unProject(x,y,v);
-	return cleverFind(core, v);
+	if (core->getProjection(StelCore::FrameJ2000)->unProject(x,y,v))
+		return cleverFind(core, v);
+	return StelObjectP();
 }
 
 /*************************************************************************
