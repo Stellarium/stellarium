@@ -666,14 +666,23 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 	//Detect top directory
 	const KArchiveDirectory * archiveTopDirectory = NULL;
 	QStringList topLevelContents = sourceArchive.directory()->entries();
-	foreach (QString entryPath, topLevelContents)
+	if(topLevelContents.contains("landscape.ini"))
 	{
-		if (sourceArchive.directory()->entry(entryPath)->isDirectory())
+		//If the landscape archive has no top level directory...
+		//(test case is "tulipfield" from the Stellarium Wiki)
+		archiveTopDirectory = sourceArchive.directory();
+	}
+	else
+	{
+		foreach (QString entryPath, topLevelContents)
 		{
-			if((dynamic_cast<const KArchiveDirectory*>(sourceArchive.directory()->entry(entryPath)))->entries().contains("landscape.ini"))
+			if (sourceArchive.directory()->entry(entryPath)->isDirectory())
 			{
-				archiveTopDirectory = dynamic_cast<const KArchiveDirectory*>(sourceArchive.directory()->entry(entryPath));
-				break;
+				if((dynamic_cast<const KArchiveDirectory*>(sourceArchive.directory()->entry(entryPath)))->entries().contains("landscape.ini"))
+				{
+					archiveTopDirectory = dynamic_cast<const KArchiveDirectory*>(sourceArchive.directory()->entry(entryPath));
+					break;
+				}
 			}
 		}
 	}
@@ -699,7 +708,17 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 		return QString();
 	}
 	*/
+	//Determine the landscape's identifier
 	QString landscapeID = archiveTopDirectory->name();
+	if (landscapeID.length() < 2)
+	{
+		//If the archive has no top level directory (landscapeID is "/"),
+		//use the first 65 characters of its file name for an identifier
+		QFileInfo sourceFileInfo(sourceFilePath);
+		landscapeID = sourceFileInfo.baseName().left(65);
+	}
+
+	//Check for duplicate IDs
 	if (getAllLandscapeIDs().contains(landscapeID))
 	{
 		qWarning() << "LandscapeMgr: Unable to install landscape. A landscape with the ID" << landscapeID << "already exists.";
@@ -727,6 +746,8 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 
 	//Copy the landscape directory to the target
 	//sourceArchive.directory()->copyTo(destinationDir.absolutePath());
+
+	//This case already has been handled - and commented out - above. :)
 	if(destinationDir.exists(landscapeID))
 	{
 		qWarning() << "LandscapeMgr: A subdirectory" << landscapeID << "already exists in" << destinationDir.absolutePath() << "Its contents may be overwritten.";
