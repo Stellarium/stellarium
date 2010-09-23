@@ -60,6 +60,10 @@ public slots:
 private:
 	//Dialog window
 	//CAIMainWindow* mainWindow;
+
+	bool importMpcOneLineCometElements (QString oneLineElements);
+
+	bool cloneSolarSystemConfigurationFile();
 };
 
 
