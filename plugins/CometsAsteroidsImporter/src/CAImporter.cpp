@@ -117,13 +117,16 @@ bool CAImporter::configureGui(bool show)
 			//to see.
 			GETSTELMODULE(SolarSystem)->init();*/
 
-			//This code results in one entry for 2P/Encke and two - for
+			/*//This code results in one entry for 2P/Encke and two - for
 			//everything else. Progress!
 			//Memory leak?
 			StelApp::getInstance().getModuleMgr().unloadModule("SolarSystem", false);
 			SolarSystem* ssystem = new SolarSystem();
 			ssystem->init();
-			StelApp::getInstance().getModuleMgr().registerModule(ssystem);
+			StelApp::getInstance().getModuleMgr().registerModule(ssystem);*/
+
+			//This works partially, but explodes if it's called twice...
+			GETSTELMODULE(SolarSystem)->reloadPlanets();
 		}
 	}
 	return true;
@@ -222,7 +225,7 @@ bool CAImporter::importMpcOneLineCometElements(QString oneLineElements)
 	double absoluteMagnitude = mpcParser.cap(15).toDouble(&ok);
 	double radius = 5; //Fictitious
 	solarSystemFile.setValue("radius", radius);
-	qDebug() << 1329 * pow(10, (absoluteMagnitude/-5));
+	//qDebug() << 1329 * pow(10, (absoluteMagnitude/-5));
 	double albedo = pow(( (1329 * pow(10, (absoluteMagnitude/-5))) / (2 * radius)), 2);//from http://www.physics.sfasu.edu/astro/asteroids/sizemagnitude.html
 	solarSystemFile.setValue("albedo", albedo);
 

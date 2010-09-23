@@ -1125,3 +1125,33 @@ QStringList SolarSystem::getAllPlanetEnglishNames() const
 		res.append(p->englishName);
 	return res;
 }
+
+void SolarSystem::reloadPlanets()
+{
+	//Unload all Solar System objects
+	selected.clear();//Release the selected one
+	foreach (Orbit* orb, orbits)
+	{
+		delete orb;
+		orb = NULL;
+	}
+	sun.clear();
+	moon.clear();
+	earth.clear();
+	Planet::texEarthShadow.clear(); //Loaded in loadPlanets()
+	delete allTrails;
+	allTrails = NULL;
+	foreach (PlanetP p, systemPlanets)
+	{
+		p->satellites.clear();
+		p.clear();
+	}
+	systemPlanets.clear();
+	//Memory leak? What's the proper way of cleaning shared pointers?
+
+	//Re-load the ssystem.ini file
+	loadPlanets();
+	computePositions(StelUtils::getJDFromSystem());
+	setSelected("");
+	recreateTrails();
+}
