@@ -1135,12 +1135,16 @@ void SolarSystem::reloadPlanets()
 		delete orb;
 		orb = NULL;
 	}
+	orbits.clear();
+
 	sun.clear();
 	moon.clear();
 	earth.clear();
 	Planet::texEarthShadow.clear(); //Loaded in loadPlanets()
+
 	delete allTrails;
 	allTrails = NULL;
+
 	foreach (PlanetP p, systemPlanets)
 	{
 		p->satellites.clear();

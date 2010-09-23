@@ -71,7 +71,7 @@ void CAImporter::init()
 {
 	try
 	{
-		qDebug() << "Initialization.";//Do something
+		//Do something
 	}
 	catch (std::runtime_error &e)
 	{
@@ -125,7 +125,7 @@ bool CAImporter::configureGui(bool show)
 			ssystem->init();
 			StelApp::getInstance().getModuleMgr().registerModule(ssystem);*/
 
-			//This works partially, but explodes if it's called twice...
+			//This seems to work
 			GETSTELMODULE(SolarSystem)->reloadPlanets();
 		}
 	}
@@ -134,12 +134,14 @@ bool CAImporter::configureGui(bool show)
 
 bool CAImporter::cloneSolarSystemConfigurationFile()
 {
+	//TODO: Create/check if the "data" subdirectory exists first!
+
 	QString defaultFilePath	= StelFileMgr::getInstallationDir() + "/data/ssystem.ini";
 	QString userFilePath	= StelFileMgr::getUserDir() + "/data/ssystem.ini";
 
 	if (QFile::exists(userFilePath))
 	{
-		qDebug() << "CAI: A ssystem.ini file already exists in the user directory";
+		qDebug() << "Using the ssystem.ini file that already exists in the user directory...";
 		return true;
 	}
 
