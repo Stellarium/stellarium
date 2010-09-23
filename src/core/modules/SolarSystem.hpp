@@ -205,20 +205,27 @@ public:
 	//! Get the list of all the planet english names
 	QStringList getAllPlanetEnglishNames() const;
 
+	//! Reload the planets
+	void reloadPlanets();
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
 	///////////////////////////////////////////////////////////////////////////////////////
 	//! Get a hash of locale and ssystem.ini names for use with the TUI.
 	//! @return A newline delimited hash of localized:standard planet names.
 	//! Planet translated name is PARENT : NAME
+	//! \deprecated ???
 	QString getPlanetHashString();
 
 	//! Compute the position and transform matrix for every element of the solar system.
 	//! @param observerPos Position of the observer in heliocentric ecliptic frame (Required for light travel time computation).
 	//! @param date the date in JDay
+	//! \deprecated ??? In the "deprecated" section, but used in SolarSystem::init()
+	//! and StelNavigator::updateTime()
 	void computePositions(double date, const Vec3d& observerPos = Vec3d(0.));
 
 	//! Get the list of all the bodies of the solar system.
+	//! \deprecated Used in LandscapeMgr::update(), but commented out.
 	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}
 
 private:
