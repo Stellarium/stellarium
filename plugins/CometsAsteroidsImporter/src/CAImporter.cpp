@@ -117,9 +117,21 @@ bool CAImporter::configureGui(bool show)
 			importMpcOneLineCometElementsFromFile(StelFileMgr::getDesktopDir() + "/Soft00Cmt.txt");
 			//Results: the first lines are processed relatively fast (<1s)
 			//but the speed falls progressively and around 40 starts to be
-			//unbearably slow. Hypotheses:
-			// - regular expressions become too slow after some time (memleak?)
-			// - QSettings becomes too slow after a large number of entries
+			//unbearably slow.
+			//Commenting out all QSettings::setValue() calls confirms the
+			//hypothesis that most of the delay is caused by configuration
+			//file access. Well, I was going to rewrite it to write directly to
+			//file anyway.
+
+			//Also, some of the lines in the list are not parsed.
+			//TODO: See why:
+			/*
+			  "    CJ95O010  1997 03 31.4141  0.906507  0.994945  130.5321  282.6820   89.3193  20100723  -2.0  4.0  C/1995 O1 (Hale-Bopp)                                    MPC 61436"
+			  "    CK09K030  2011 01  9.266   3.90156   1.00000   251.413     0.032   146.680              8.5  4.0  C/2009 K3 (Beshore)                                      MPC 66205"
+			  "    CK10F040  2010 04  6.109   0.61383   1.00000   120.718   237.294    89.143             13.5  4.0  C/2010 F4 (Machholz)                                     MPC 69906"
+			  "    CK10M010  2012 02  7.840   2.29869   1.00000   265.318    82.150    78.373              9.0  4.0  C/2010 M1 (Gibbs)                                        MPC 70817"
+			  "    CK10R010  2011 11 28.457   6.66247   1.00000    96.009   345.949   157.437              6.0  4.0  C/2010 R1 (LINEAR)                                       MPEC 2010-R99"
+			*/
 
 			//This seems to work
 			GETSTELMODULE(SolarSystem)->reloadPlanets();
@@ -193,7 +205,7 @@ bool CAImporter::importMpcOneLineCometElements(QString oneLineElements)
 
 	if (match < 0)
 	{
-		qWarning() << "No match";
+		qWarning() << "No match:" << oneLineElements;
 		return false;
 	}
 
@@ -204,20 +216,22 @@ bool CAImporter::importMpcOneLineCometElements(QString oneLineElements)
 	sectionName.remove('#');
 	sectionName.remove(' ');
 	sectionName.remove('-');
-	solarSystemFile.beginGroup(sectionName);
 
 	if (mpcParser.cap(1).isEmpty() && mpcParser.cap(3).isEmpty())
 	{
 		qWarning() << "Comet is missing both comet number AND provisional designation.";
 		return false;
 	}
-	solarSystemFile.setValue("name", name);
-	solarSystemFile.setValue("parent", "Sun");
-	solarSystemFile.setValue("coord_func","comet_orbit");
 
-	solarSystemFile.setValue("lighting", false);
-	solarSystemFile.setValue("color", "1.0, 1.0, 1.0");//TODO
-	solarSystemFile.setValue("tex_map", "nomap.png");
+	//solarSystemFile.beginGroup(sectionName);
+
+	//solarSystemFile.setValue("name", name);
+	//solarSystemFile.setValue("parent", "Sun");
+	//solarSystemFile.setValue("coord_func","comet_orbit");
+
+	//solarSystemFile.setValue("lighting", false);
+	//solarSystemFile.setValue("color", "1.0, 1.0, 1.0");//TODO
+	//solarSystemFile.setValue("tex_map", "nomap.png");
 
 	bool ok = false;
 
@@ -234,33 +248,33 @@ bool CAImporter::importMpcOneLineCometElements(QString oneLineElements)
 	QTime timePerihelionPassage(hours, minutes, seconds, 0);
 	QDateTime dtPerihelionPassage(datePerihelionPassage, timePerihelionPassage, Qt::UTC);
 	double jdPerihelionPassage = StelUtils::qDateTimeToJd(dtPerihelionPassage);
-	solarSystemFile.setValue("orbit_TimeAtPericenter", jdPerihelionPassage);
+	//solarSystemFile.setValue("orbit_TimeAtPericenter", jdPerihelionPassage);
 
 	double perihelionDistance = mpcParser.cap(7).toDouble(&ok);//AU
-	solarSystemFile.setValue("orbit_PericenterDistance", perihelionDistance);
+	//solarSystemFile.setValue("orbit_PericenterDistance", perihelionDistance);
 
 	double eccentricity = mpcParser.cap(8).toDouble(&ok);//degrees
-	solarSystemFile.setValue("orbit_Eccentricity", eccentricity);
+	//solarSystemFile.setValue("orbit_Eccentricity", eccentricity);
 
 	double argumentOfPerihelion = mpcParser.cap(9).toDouble(&ok);//J2000.0, degrees
-	solarSystemFile.setValue("orbit_ArgOfPericenter", argumentOfPerihelion);
+	//solarSystemFile.setValue("orbit_ArgOfPericenter", argumentOfPerihelion);
 
 	double longitudeOfTheAscendingNode = mpcParser.cap(10).toDouble(&ok);//J2000.0, degrees
-	solarSystemFile.setValue("orbit_AscendingNode", longitudeOfTheAscendingNode);
+	//solarSystemFile.setValue("orbit_AscendingNode", longitudeOfTheAscendingNode);
 
 	double inclination = mpcParser.cap(11).toDouble(&ok);
-	solarSystemFile.setValue("orbit_Inclination", inclination);
+	//solarSystemFile.setValue("orbit_Inclination", inclination);
 
 	//Albedo doesn't work at all
 	//TODO: Make sure comets don't display magnitude
 	double absoluteMagnitude = mpcParser.cap(15).toDouble(&ok);
 	double radius = 5; //Fictitious
-	solarSystemFile.setValue("radius", radius);
+	//solarSystemFile.setValue("radius", radius);
 	//qDebug() << 1329 * pow(10, (absoluteMagnitude/-5));
 	double albedo = pow(( (1329 * pow(10, (absoluteMagnitude/-5))) / (2 * radius)), 2);//from http://www.physics.sfasu.edu/astro/asteroids/sizemagnitude.html
-	solarSystemFile.setValue("albedo", albedo);
+	//solarSystemFile.setValue("albedo", albedo);
 
-	solarSystemFile.endGroup();
+	//solarSystemFile.endGroup();
 
 	return true;
 }
