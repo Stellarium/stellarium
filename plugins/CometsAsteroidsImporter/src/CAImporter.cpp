@@ -110,7 +110,16 @@ bool CAImporter::configureGui(bool show)
 		if (cloneSolarSystemConfigurationFile())
 		{
 			//Import Encke for a start
-			importMpcOneLineCometElements("0002P         2010 08  6.5102  0.336152  0.848265  186.5242  334.5718   11.7843  20100104  11.5  6.0  2P/Encke                                                 MPC 59600");
+			//importMpcOneLineCometElements("0002P         2010 08  6.5102  0.336152  0.848265  186.5242  334.5718   11.7843  20100104  11.5  6.0  2P/Encke                                                 MPC 59600");
+
+			//Import a list of comets on the desktop. The file is from
+			//http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft00Cmt.txt
+			importMpcOneLineCometElementsFromFile(StelFileMgr::getDesktopDir() + "/Soft00Cmt.txt");
+			//Results: the first lines are processed relatively fast (<1s)
+			//but the speed falls progressively and around 40 starts to be
+			//unbearably slow. Hypotheses:
+			// - regular expressions become too slow after some time (memleak?)
+			// - QSettings becomes too slow after a large number of entries
 
 			//This seems to work
 			GETSTELMODULE(SolarSystem)->reloadPlanets();
@@ -126,7 +135,7 @@ bool CAImporter::cloneSolarSystemConfigurationFile()
 	{
 		return false;
 	}
-	if (!userDataDirectory.mkdir("data"))
+	if (!userDataDirectory.exists("data") && !userDataDirectory.mkdir("data"))
 	{
 		qDebug() << "Unable to create a \"data\" subdirectory in" << userDataDirectory.absolutePath();
 		return false;
@@ -193,6 +202,8 @@ bool CAImporter::importMpcOneLineCometElements(QString oneLineElements)
 	sectionName.remove('\\');
 	sectionName.remove('/');
 	sectionName.remove('#');
+	sectionName.remove(' ');
+	sectionName.remove('-');
 	solarSystemFile.beginGroup(sectionName);
 
 	if (mpcParser.cap(1).isEmpty() && mpcParser.cap(3).isEmpty())
@@ -252,4 +263,49 @@ bool CAImporter::importMpcOneLineCometElements(QString oneLineElements)
 	solarSystemFile.endGroup();
 
 	return true;
+}
+
+bool CAImporter::importMpcOneLineCometElementsFromFile(QString filePath)
+{
+	if (!QFile::exists(filePath))
+	{
+		qDebug() << "Can't find" << filePath;
+		return false;
+	}
+
+	QFile mpcElementsFile(filePath);
+	if (mpcElementsFile.open(QFile::ReadOnly | QFile::Text | QFile::Unbuffered))
+	{
+		bool atLeastOneRead = false;
+		int count = 0;
+
+		while(!mpcElementsFile.atEnd())
+		{
+			QString mpcOneLineElements = QString(mpcElementsFile.readLine(200));
+			if(mpcOneLineElements.endsWith('\n'))
+			{
+				mpcOneLineElements.chop(1);
+			}
+			if (mpcOneLineElements.isEmpty())
+			{
+				qDebug() << "Empty line?";
+				continue;
+			}
+
+			if(importMpcOneLineCometElements(mpcOneLineElements))
+			{
+				qDebug() << ++count;//TODO: Remove debug
+				atLeastOneRead = true;
+			}
+		}
+
+		mpcElementsFile.close();
+		return atLeastOneRead;
+	}
+	else
+	{
+		qDebug() << "Unable to open for reading" << filePath;
+		qDebug() << "File error:" << mpcElementsFile.errorString();
+		return false;
+	}
 }
