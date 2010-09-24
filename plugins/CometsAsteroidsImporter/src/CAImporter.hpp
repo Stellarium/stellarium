@@ -63,7 +63,11 @@ private:
 
 	bool importMpcOneLineCometElements (QString oneLineElements);
 
+	//! Creates a copy of the default ssystem.ini file in the user data directory.
+	//! @returns true if a file already exists or the copying has been successful
 	bool cloneSolarSystemConfigurationFile();
+	//! Removes the user copy of ssystem.ini, if any exists.
+	bool resetSolarSystemConfigurationFile();
 };
 
 

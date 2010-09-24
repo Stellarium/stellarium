@@ -30,6 +30,7 @@
 #include "SolarSystem.hpp"
 
 #include <QDebug>
+#include <QDir>
 #include <QFile>
 #include <QSettings>
 #include <QString>
@@ -111,20 +112,6 @@ bool CAImporter::configureGui(bool show)
 			//Import Encke for a start
 			importMpcOneLineCometElements("0002P         2010 08  6.5102  0.336152  0.848265  186.5242  334.5718   11.7843  20100104  11.5  6.0  2P/Encke                                                 MPC 59600");
 
-			/*//This doesn't cause a crash, but it causes two entries to appear in
-			//the search dialog for 2P/Encke and FOUR - for the other planets.
-			//It's possible that the planets are duplicated, too, but it's hard
-			//to see.
-			GETSTELMODULE(SolarSystem)->init();*/
-
-			/*//This code results in one entry for 2P/Encke and two - for
-			//everything else. Progress!
-			//Memory leak?
-			StelApp::getInstance().getModuleMgr().unloadModule("SolarSystem", false);
-			SolarSystem* ssystem = new SolarSystem();
-			ssystem->init();
-			StelApp::getInstance().getModuleMgr().registerModule(ssystem);*/
-
 			//This seems to work
 			GETSTELMODULE(SolarSystem)->reloadPlanets();
 		}
@@ -134,7 +121,16 @@ bool CAImporter::configureGui(bool show)
 
 bool CAImporter::cloneSolarSystemConfigurationFile()
 {
-	//TODO: Create/check if the "data" subdirectory exists first!
+	QDir userDataDirectory(StelFileMgr::getUserDir());
+	if (!userDataDirectory.exists())
+	{
+		return false;
+	}
+	if (!userDataDirectory.mkdir("data"))
+	{
+		qDebug() << "Unable to create a \"data\" subdirectory in" << userDataDirectory.absolutePath();
+		return false;
+	}
 
 	QString defaultFilePath	= StelFileMgr::getInstallationDir() + "/data/ssystem.ini";
 	QString userFilePath	= StelFileMgr::getUserDir() + "/data/ssystem.ini";
@@ -151,8 +147,30 @@ bool CAImporter::cloneSolarSystemConfigurationFile()
 	}
 	else
 	{
-		qDebug() << "CAI: This should be impossible.";
+		qDebug() << "This should be impossible.";
 		return false;
+	}
+}
+
+bool CAImporter::resetSolarSystemConfigurationFile()
+{
+	QString userFilePath	= StelFileMgr::getUserDir() + "/data/ssystem.ini";
+	if (QFile::exists(userFilePath))
+	{
+		if (QFile::remove((userFilePath)))
+		{
+			return true;
+		}
+		else
+		{
+			qWarning() << "Unable to delete" << userFilePath
+			         << endl << "Please remove the file manually.";
+			return false;
+		}
+	}
+	else
+	{
+		return true;
 	}
 }
 
