@@ -1128,6 +1128,14 @@ QStringList SolarSystem::getAllPlanetEnglishNames() const
 
 void SolarSystem::reloadPlanets()
 {
+	//Save flag states
+	bool flagScaleMoon = getFlagMoonScale();
+	float moonScale = getMoonScale();
+	bool flagPlanets = getFlagPlanets();
+	bool flagHints = getFlagHints();
+	bool flagLabels = getFlagLabels();
+	bool flagOrbits = getFlagOrbits();
+
 	//Unload all Solar System objects
 	selected.clear();//Release the selected one
 	foreach (Orbit* orb, orbits)
@@ -1158,4 +1166,12 @@ void SolarSystem::reloadPlanets()
 	computePositions(StelUtils::getJDFromSystem());
 	setSelected("");
 	recreateTrails();
+
+	//Restore flag states
+	setFlagMoonScale(flagScaleMoon);
+	setMoonScale(moonScale);
+	setFlagPlanets(flagPlanets);
+	setFlagHints(flagHints);
+	setFlagLabels(flagLabels);
+	setFlagOrbits(flagOrbits);
 }
