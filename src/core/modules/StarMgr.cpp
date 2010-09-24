@@ -917,14 +917,24 @@ void StarMgr::setFontSize(double newFontSize)
 
 void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 {
-	// Load culture star names in english
+	// Load culture star names in locale language
 	try
 	{
-		loadCommonNames(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/star_names.fab"));
+		loadCommonNames(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/star_names." + StelApp::getInstance().getLocaleMgr().getAppLanguage() + ".fab"));
 	}
 	catch(std::runtime_error& e)
 	{
-		qDebug() << "Could not load star_names.fab for sky culture " << skyCultureDir << ": " << e.what();
+		// Localize star names not found?
+		qDebug() << "Could not load star_names." << StelApp::getInstance().getLocaleMgr().getAppLanguage() << ".fab for sky culture " << skyCultureDir << ": " << e.what();
+		// Load culture star names in english
+		try
+		{
+			loadCommonNames(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/star_names.fab"));
+		}
+		catch(std::runtime_error& e)
+		{
+			qDebug() << "Could not load star_names.fab for sky culture " << skyCultureDir << ": " << e.what();
+		}
 	}
 
 	try
