@@ -28,6 +28,7 @@
 #include <QString>
 
 class CAIMainWindow;
+class QSettings;
 
 class CAImporter : public StelModule
 {
@@ -70,6 +71,8 @@ private:
 	bool cloneSolarSystemConfigurationFile();
 	//! Removes the user copy of ssystem.ini, if any exists.
 	bool resetSolarSystemConfigurationFile();
+
+	QSettings * solarSystemConfigurationFile;
 };
 
 
