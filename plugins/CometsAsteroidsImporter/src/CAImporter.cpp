@@ -61,11 +61,16 @@ Q_EXPORT_PLUGIN2(CAImporter, CAImporterStelPluginInterface)
 CAImporter::CAImporter()
 {
 	setObjectName("CAImporter");
+
+	solarSystemConfigurationFile = NULL;
 }
 
 CAImporter::~CAImporter()
 {
-
+	if (solarSystemConfigurationFile != NULL)
+	{
+		delete solarSystemConfigurationFile;
+	}
 }
 
 void CAImporter::init()
@@ -123,15 +128,19 @@ bool CAImporter::configureGui(bool show)
 			//file access. Well, I was going to rewrite it to write directly to
 			//file anyway.
 
+			//Factors increasing speed:
+			// - not having to create a QSettings object on every step;
+			// - using QSettings::IniFormat instead of StelIniFormat (greatly increases speed)
+
 			//Also, some of the lines in the list are not parsed.
-			//TODO: See why:
 			/*
-			  "    CJ95O010  1997 03 31.4141  0.906507  0.994945  130.5321  282.6820   89.3193  20100723  -2.0  4.0  C/1995 O1 (Hale-Bopp)                                    MPC 61436"
-			  "    CK09K030  2011 01  9.266   3.90156   1.00000   251.413     0.032   146.680              8.5  4.0  C/2009 K3 (Beshore)                                      MPC 66205"
-			  "    CK10F040  2010 04  6.109   0.61383   1.00000   120.718   237.294    89.143             13.5  4.0  C/2010 F4 (Machholz)                                     MPC 69906"
-			  "    CK10M010  2012 02  7.840   2.29869   1.00000   265.318    82.150    78.373              9.0  4.0  C/2010 M1 (Gibbs)                                        MPC 70817"
-			  "    CK10R010  2011 11 28.457   6.66247   1.00000    96.009   345.949   157.437              6.0  4.0  C/2010 R1 (LINEAR)                                       MPEC 2010-R99"
+			  "    CJ95O010  1997 03 31.4141  0.906507  0.994945  130.5321  282.6820   89.3193  20100723  -2.0  4.0  C/1995 O1 (Hale-Bopp)                                    MPC 61436" -> minus sign, fixed
+			  "    CK09K030  2011 01  9.266   3.90156   1.00000   251.413     0.032   146.680              8.5  4.0  C/2009 K3 (Beshore)                                      MPC 66205" -> lower precision than the spec, fixed
+			  "    CK10F040  2010 04  6.109   0.61383   1.00000   120.718   237.294    89.143             13.5  4.0  C/2010 F4 (Machholz)                                     MPC 69906" -> lower precision than the spec, fixed
+			  "    CK10M010  2012 02  7.840   2.29869   1.00000   265.318    82.150    78.373              9.0  4.0  C/2010 M1 (Gibbs)                                        MPC 70817" -> lower precision than the spec, fixed
+			  "    CK10R010  2011 11 28.457   6.66247   1.00000    96.009   345.949   157.437              6.0  4.0  C/2010 R1 (LINEAR)                                       MPEC 2010-R99" -> lower precision than the spec, fixed
 			*/
+			//It seems that some entries in the list don't match the described format
 
 			//This seems to work
 			GETSTELMODULE(SolarSystem)->reloadPlanets();
@@ -197,8 +206,12 @@ bool CAImporter::resetSolarSystemConfigurationFile()
 
 bool CAImporter::importMpcOneLineCometElements(QString oneLineElements)
 {
-	QSettings solarSystemFile(StelFileMgr::getUserDir() + "/data/ssystem.ini", StelIniFormat, this);
-	QRegExp mpcParser("^\\s*(\\d{4})?([A-Z])(\\w{7})?\\s+(\\d{4})\\s+(\\d{2})\\s+(\\d{1,2}\\.\\d{4})\\s+(\\d{1,2}\\.\\d{6})\\s+(\\d\\.\\d{6})\\s+(\\d{1,3}\\.\\d{4})\\s+(\\d{1,3}\\.\\d{4})\\s+(\\d{1,3}\\.\\d{4})\\s+((\\d{4})(?:\\d\\d)(\\d\\d))?\\s+(\\d{1,2}\\.\\d)\\s+(\\d{1,2}\\.\\d)\\s+(\\S.{55})\\s+(\\S.*)$");//
+	//TODO: Fix this!
+	if (solarSystemConfigurationFile == NULL)
+	{
+		solarSystemConfigurationFile = new QSettings(StelFileMgr::getUserDir() + "/data/ssystem.ini", QSettings::IniFormat, this);
+	}
+	QRegExp mpcParser("^\\s*(\\d{4})?([A-Z])(\\w{7})?\\s+(\\d{4})\\s+(\\d{2})\\s+(\\d{1,2}\\.\\d{3,4})\\s+(\\d{1,2}\\.\\d{5,6})\\s+(\\d\\.\\d{5,6})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(?:(\\d{4})(\\d\\d)(\\d\\d))?\\s+(\\-?\\d{1,2}\\.\\d)\\s+(\\d{1,2}\\.\\d)\\s+(\\S.{55})\\s+(\\S.*)$");//
 
 	int match = mpcParser.indexIn(oneLineElements);
 	//qDebug() << "RegExp captured:" << match << mpcParser.capturedTexts();
@@ -223,15 +236,15 @@ bool CAImporter::importMpcOneLineCometElements(QString oneLineElements)
 		return false;
 	}
 
-	//solarSystemFile.beginGroup(sectionName);
+	solarSystemConfigurationFile->beginGroup(sectionName);
 
-	//solarSystemFile.setValue("name", name);
-	//solarSystemFile.setValue("parent", "Sun");
-	//solarSystemFile.setValue("coord_func","comet_orbit");
+	solarSystemConfigurationFile->setValue("name", name);
+	solarSystemConfigurationFile->setValue("parent", "Sun");
+	solarSystemConfigurationFile->setValue("coord_func","comet_orbit");
 
-	//solarSystemFile.setValue("lighting", false);
-	//solarSystemFile.setValue("color", "1.0, 1.0, 1.0");//TODO
-	//solarSystemFile.setValue("tex_map", "nomap.png");
+	solarSystemConfigurationFile->setValue("lighting", false);
+	solarSystemConfigurationFile->setValue("color", "1.0");
+	solarSystemConfigurationFile->setValue("tex_map", "nomap.png");
 
 	bool ok = false;
 
@@ -248,33 +261,35 @@ bool CAImporter::importMpcOneLineCometElements(QString oneLineElements)
 	QTime timePerihelionPassage(hours, minutes, seconds, 0);
 	QDateTime dtPerihelionPassage(datePerihelionPassage, timePerihelionPassage, Qt::UTC);
 	double jdPerihelionPassage = StelUtils::qDateTimeToJd(dtPerihelionPassage);
-	//solarSystemFile.setValue("orbit_TimeAtPericenter", jdPerihelionPassage);
+	solarSystemConfigurationFile->setValue("orbit_TimeAtPericenter", jdPerihelionPassage);
 
 	double perihelionDistance = mpcParser.cap(7).toDouble(&ok);//AU
-	//solarSystemFile.setValue("orbit_PericenterDistance", perihelionDistance);
+	solarSystemConfigurationFile->setValue("orbit_PericenterDistance", perihelionDistance);
 
 	double eccentricity = mpcParser.cap(8).toDouble(&ok);//degrees
-	//solarSystemFile.setValue("orbit_Eccentricity", eccentricity);
+	solarSystemConfigurationFile->setValue("orbit_Eccentricity", eccentricity);
 
 	double argumentOfPerihelion = mpcParser.cap(9).toDouble(&ok);//J2000.0, degrees
-	//solarSystemFile.setValue("orbit_ArgOfPericenter", argumentOfPerihelion);
+	solarSystemConfigurationFile->setValue("orbit_ArgOfPericenter", argumentOfPerihelion);
 
 	double longitudeOfTheAscendingNode = mpcParser.cap(10).toDouble(&ok);//J2000.0, degrees
-	//solarSystemFile.setValue("orbit_AscendingNode", longitudeOfTheAscendingNode);
+	solarSystemConfigurationFile->setValue("orbit_AscendingNode", longitudeOfTheAscendingNode);
 
 	double inclination = mpcParser.cap(11).toDouble(&ok);
-	//solarSystemFile.setValue("orbit_Inclination", inclination);
+	solarSystemConfigurationFile->setValue("orbit_Inclination", inclination);
 
 	//Albedo doesn't work at all
 	//TODO: Make sure comets don't display magnitude
 	double absoluteMagnitude = mpcParser.cap(15).toDouble(&ok);
+	//qDebug() << "absoluteMagnitude:" << absoluteMagnitude;
 	double radius = 5; //Fictitious
-	//solarSystemFile.setValue("radius", radius);
+	solarSystemConfigurationFile->setValue("radius", radius);
 	//qDebug() << 1329 * pow(10, (absoluteMagnitude/-5));
-	double albedo = pow(( (1329 * pow(10, (absoluteMagnitude/-5))) / (2 * radius)), 2);//from http://www.physics.sfasu.edu/astro/asteroids/sizemagnitude.html
-	//solarSystemFile.setValue("albedo", albedo);
+	//double albedo = pow(( (1329 * pow(10, (absoluteMagnitude/-5))) / (2 * radius)), 2);//from http://www.physics.sfasu.edu/astro/asteroids/sizemagnitude.html
+	double albedo = 1;
+	solarSystemConfigurationFile->setValue("albedo", albedo);
 
-	//solarSystemFile.endGroup();
+	solarSystemConfigurationFile->endGroup();
 
 	return true;
 }
@@ -288,7 +303,7 @@ bool CAImporter::importMpcOneLineCometElementsFromFile(QString filePath)
 	}
 
 	QFile mpcElementsFile(filePath);
-	if (mpcElementsFile.open(QFile::ReadOnly | QFile::Text | QFile::Unbuffered))
+	if (mpcElementsFile.open(QFile::ReadOnly | QFile::Text ))//| QFile::Unbuffered
 	{
 		bool atLeastOneRead = false;
 		int count = 0;
@@ -308,10 +323,11 @@ bool CAImporter::importMpcOneLineCometElementsFromFile(QString filePath)
 
 			if(importMpcOneLineCometElements(mpcOneLineElements))
 			{
-				qDebug() << ++count;//TODO: Remove debug
+				//qDebug() << ++count;//TODO: Remove debug
 				atLeastOneRead = true;
 			}
 		}
+		solarSystemConfigurationFile->sync();
 
 		mpcElementsFile.close();
 		return atLeastOneRead;
