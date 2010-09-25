@@ -122,6 +122,9 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 
 	try
 	{
+		// first of all, remove constellations from the list of selected objects in StelObjectMgr, since we are going to delete them
+		deselectConstellations();
+
 		loadLinesAndArt(StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationship.fab"), conArtFile, skyCultureDir);
 
 		// load constellation names
@@ -129,9 +132,6 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 
 		// Translate constellation names for the new sky culture
 		updateI18n();
-
-		// as constellations have changed, clear out any selection and retest for match!
-		selectedObjectChangeCallBack(StelModule::ReplaceSelection);
 	}
 	catch (std::runtime_error& e)
 	{
@@ -207,6 +207,28 @@ void ConstellationMgr::selectedObjectChangeCallBack(StelModuleSelectAction actio
 	}
 }
 
+void ConstellationMgr::deselectConstellations(void)
+{
+	selected.clear();
+	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	Q_ASSERT(omgr);
+	const QList<StelObjectP> currSelection = omgr->getSelectedObject();
+	if (currSelection.empty())
+	{
+		return;
+	}
+
+	QList<StelObjectP> newSelection;
+	foreach(const StelObjectP& obj, currSelection)
+	{
+		if (obj->getType() != "Constellation")
+		{
+			newSelection.push_back(obj);
+		}
+	}
+	omgr->setSelectedObject(newSelection, StelModule::ReplaceSelection);
+}
+
 void ConstellationMgr::setLinesColor(const Vec3f& c)
 {
 	Constellation::lineColor = c;
@@ -274,7 +296,6 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		delete(*iter);
 
 	asterisms.clear();
-	selected.clear();
 	Constellation *cons = NULL;
 
 	// read the file, adding a record per non-comment line
