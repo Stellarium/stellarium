@@ -511,7 +511,8 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 				continue;
 			}
 
-			englishCommonName.replace('_', ' ');
+			// Fix for translate star names 
+			// englishCommonName.replace('_', ' ');
 			const QString commonNameI18n = q_(englishCommonName);
 			QString commonNameI18n_cap = commonNameI18n.toUpper();
 
@@ -763,13 +764,13 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 //! The translation is done using gettext with translated strings defined in translations.h
 void StarMgr::updateI18n()
 {
-	StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	StelTranslator trans("stellarium-skycultures", StelFileMgr::getLocaleDir(), StelApp::getInstance().getLocaleMgr().getSkyTranslator().getTrueLocaleName());
 	commonNamesMapI18n.clear();
 	commonNamesIndexI18n.clear();
 	for (QHash<int,QString>::ConstIterator it(commonNamesMap.constBegin());it!=commonNamesMap.constEnd();it++)
 	{
 		const int i = it.key();
-		const QString t(trans.qtranslate(it.value()));
+		const QString t = trans.qtranslate(it.value());
 		commonNamesMapI18n[i] = t;
 		commonNamesIndexI18n[t.toUpper()] = i;
 	}
@@ -917,24 +918,14 @@ void StarMgr::setFontSize(double newFontSize)
 
 void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 {
-	// Load culture star names in locale language
+	// Load culture star names in english
 	try
 	{
-		loadCommonNames(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/star_names." + StelApp::getInstance().getLocaleMgr().getAppLanguage() + ".fab"));
+		loadCommonNames(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/star_names.fab"));
 	}
 	catch(std::runtime_error& e)
 	{
-		// Localize star names not found?
-		qDebug() << "Could not load star_names." << StelApp::getInstance().getLocaleMgr().getAppLanguage() << ".fab for sky culture " << skyCultureDir << ": " << e.what();
-		// Load culture star names in english
-		try
-		{
-			loadCommonNames(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/star_names.fab"));
-		}
-		catch(std::runtime_error& e)
-		{
-			qDebug() << "Could not load star_names.fab for sky culture " << skyCultureDir << ": " << e.what();
-		}
+		qDebug() << "Could not load star_names.fab for sky culture " << skyCultureDir << ": " << e.what();
 	}
 
 	try
