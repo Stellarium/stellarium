@@ -300,49 +300,9 @@ bool CAImporter::appendToSolarSystemConfigurationFile(SsoElements object)
 		return false;
 	}
 
-	//Check if the configuration file exists
-	QString userFilePath = StelFileMgr::getUserDir() + "/data/ssystem.ini";
-	if (!QFile::exists(userFilePath))
-	{
-		qDebug() << "Can't append object data to ssystem.ini: Unable to find" << userFilePath;
-		return false;
-	}
-
-	//Remove duplicates
-	QSettings * solarSystemSettings = new QSettings(userFilePath, QSettings::IniFormat);
-	if (solarSystemSettings->status() != QSettings::NoError)
-	{
-		qDebug() << "Error opening ssystem.ini:" << userFilePath;
-		return false;
-	}
-	QString sectionName = object.value("section_name").toString();
-	object.remove("section_name");
-	solarSystemSettings->remove(sectionName);
-	//solarSystemSettings->sync();
-	delete solarSystemSettings;//This should call QSettings::sync()
-	solarSystemSettings = NULL;
-
-	//Write to file
-	//TODO: The usual validation
-	qDebug() << "Appending to file...";
-	QFile solarSystemConfigurationFile(userFilePath);
-	if(solarSystemConfigurationFile.open(QFile::WriteOnly | QFile::Append | QFile::Text))
-	{
-		QTextStream output (&solarSystemConfigurationFile);
-		output << endl << QString("[%1]").arg(sectionName) << endl;
-		foreach(QString key, object.keys())
-		{
-			output << QString("%1 = %2").arg(key).arg(object.value(key).toString()) << endl;
-		}
-		output.flush();
-		solarSystemConfigurationFile.close();
-		return true;
-	}
-	else
-	{
-		qDebug() << "Unable to open for writing" << userFilePath;
-		return false;
-	}
+	QList<SsoElements> list;
+	list << object;
+	return appendToSolarSystemConfigurationFile(list);
 }
 
 QList<CAImporter::SsoElements> CAImporter::readMpcOneLineCometElementsFromFile(QString filePath)
