@@ -25,11 +25,18 @@
 #include "StelModule.hpp"
 //#include "CAIMainWindow.hpp"
 
+#include <QHash>
+#include <QList>
 #include <QString>
+#include <QVariant>
 
 class CAIMainWindow;
 class QSettings;
-
+/*!
+ \class CAImporter
+ \brief Main class of the Comets and Asteroids Importer plug-in.
+ \author Bogdan Marinov
+*/
 class CAImporter : public StelModule
 {
 	Q_OBJECT
@@ -55,6 +62,19 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	//! called when the "configure" button in the "Plugins" tab is pressed
 	virtual bool configureGui(bool show);
+
+	//! Convenience type for storage of SSO properties in ssystem.ini format.
+	//! This is an easy way of storing data in the format used in Stellarium's
+	//! solar system configuration file.
+	//! What would be key/value pairs in a section in the ssystem.ini file
+	//! are key/value pairs in the hash. The section name is stored with key
+	//! "section_name".
+	//! As it is a hash, key names are not stored alphabetically. This allows
+	//! for rapid addition and look-up of values, unlike a real QSettings
+	//! object in StelIniFormat.
+	//! Also, using this way may allow scripts to define SSOs.
+	//! \todo Better name.
+	typedef QHash<QString, QVariant> SsoElements;
 	
 public slots:
 	
@@ -62,9 +82,50 @@ private:
 	//Dialog window
 	//CAIMainWindow* mainWindow;
 
-	bool importMpcOneLineCometElements (QString oneLineElements);
+	//! Reads a single comet's orbital elements from a string.
+	//! This function converts a line of comet orbital elements in MPC format
+	//! to a hash in Stellarium's ssystem.ini format.
+	//! MPC's one-line orbital elements format for comets is described on their
+	//! site: http://www.minorplanetcenter.org/iau/info/CometOrbitFormat.html
+	//! \returns an empty hash if there is an error or the source string is not
+	//! a valid line in MPC format.
+	SsoElements readMpcOneLineCometElements (QString oneLineElements);
 
-	bool importMpcOneLineCometElementsFromFile (QString filePath);
+	//! Reads a list of comet orbital elements from a file.
+	//! This function reads a list of comet orbital elements in MPC's one-line
+	//! format from a file (one comet per line) and converts it to a list of
+	//! hashes in Stellarium's ssystem.ini format.
+	//! Example source file is the list of observable comets on the MPC's site:
+	//! http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft00Cmt.txt
+	//! readMpcOneLineCometElements() is used internally to parse each line.
+	QList<SsoElements> readMpcOneLineCometElementsFromFile (QString filePath);
+
+	//! Adds a new entry at the end of the user solar system configuration file.
+	//! This function writes directly to the file. See the note on why QSettings
+	//! was not used in the description of
+	//! appendToSolarSystemConfigurationFile(QList<SsoElements>)
+	//! Duplicates are removed: If any section in the file matches the
+	//! "section_name" value of the inserted entry, it is removed.
+	bool appendToSolarSystemConfigurationFile(SsoElements object);
+
+	//! Adds new entries at the end of the user solar system configuration file.
+	//! This function writes directly to the file. QSettings was not used, as:
+	//!  - Using QSettings with QSettings::IniFormat causes the list in the
+	//! "color" field (e.g. "1.0, 1.0, 1.0") to be wrapped in double quotation
+	//! marks (Stellarium requires no quotation marks).
+	//!  - Using QSettings with StelIniFormat causes unaccepptable append times
+	//! when the file grows (>~40 entries). This most probably happens because
+	//! StelIniParser uses QMap internally for the entry list. QMap orders its
+	//! keys (in the case of strings - alphabetically) and it has to find
+	//! the appropriate place in the ordering for every new key, which takes
+	//! more and more time as the list grows.
+	//!
+	//! Duplicates are removed: If any section in the file matches the
+	//! "section_name" value of a new entry, it is removed.
+	//! Invalid entries in the list (that don't contain a value for
+	//! "section_name" or it is an empty string) are skipped and the processing
+	//! continues from the next entry.
+	bool appendToSolarSystemConfigurationFile(QList<SsoElements>);
 
 	//! Creates a copy of the default ssystem.ini file in the user data directory.
 	//! @returns true if a file already exists or the copying has been successful

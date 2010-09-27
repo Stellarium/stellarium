@@ -115,34 +115,19 @@ bool CAImporter::configureGui(bool show)
 		if (cloneSolarSystemConfigurationFile())
 		{
 			//Import Encke for a start
-			//importMpcOneLineCometElements("0002P         2010 08  6.5102  0.336152  0.848265  186.5242  334.5718   11.7843  20100104  11.5  6.0  2P/Encke                                                 MPC 59600");
+			/*SsoElements SSO = readMpcOneLineCometElements("0002P         2010 08  6.5102  0.336152  0.848265  186.5242  334.5718   11.7843  20100104  11.5  6.0  2P/Encke                                                 MPC 59600");
+			if (!appendToSolarSystemConfigurationFile(SSO))
+				return true;
+			*/
 
 			//Import a list of comets on the desktop. The file is from
 			//http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft00Cmt.txt
-			importMpcOneLineCometElementsFromFile(StelFileMgr::getDesktopDir() + "/Soft00Cmt.txt");
-			//Results: the first lines are processed relatively fast (<1s)
-			//but the speed falls progressively and around 40 starts to be
-			//unbearably slow.
-			//Commenting out all QSettings::setValue() calls confirms the
-			//hypothesis that most of the delay is caused by configuration
-			//file access. Well, I was going to rewrite it to write directly to
-			//file anyway.
-
-			//Factors increasing speed:
-			// - not having to create a QSettings object on every step;
-			// - using QSettings::IniFormat instead of StelIniFormat (greatly increases speed)
-
-			//Also, some of the lines in the list are not parsed.
-			/*
-			  "    CJ95O010  1997 03 31.4141  0.906507  0.994945  130.5321  282.6820   89.3193  20100723  -2.0  4.0  C/1995 O1 (Hale-Bopp)                                    MPC 61436" -> minus sign, fixed
-			  "    CK09K030  2011 01  9.266   3.90156   1.00000   251.413     0.032   146.680              8.5  4.0  C/2009 K3 (Beshore)                                      MPC 66205" -> lower precision than the spec, fixed
-			  "    CK10F040  2010 04  6.109   0.61383   1.00000   120.718   237.294    89.143             13.5  4.0  C/2010 F4 (Machholz)                                     MPC 69906" -> lower precision than the spec, fixed
-			  "    CK10M010  2012 02  7.840   2.29869   1.00000   265.318    82.150    78.373              9.0  4.0  C/2010 M1 (Gibbs)                                        MPC 70817" -> lower precision than the spec, fixed
-			  "    CK10R010  2011 11 28.457   6.66247   1.00000    96.009   345.949   157.437              6.0  4.0  C/2010 R1 (LINEAR)                                       MPEC 2010-R99" -> lower precision than the spec, fixed
-			*/
 			//It seems that some entries in the list don't match the described format
+			QList<SsoElements> objectList = readMpcOneLineCometElementsFromFile(StelFileMgr::getDesktopDir() + "/Soft00Cmt.txt");
+			if (!appendToSolarSystemConfigurationFile(objectList))
+				return true;
 
-			//This seems to work
+			//Destroy and re-create the Solal System
 			GETSTELMODULE(SolarSystem)->reloadPlanets();
 		}
 	}
@@ -154,6 +139,7 @@ bool CAImporter::cloneSolarSystemConfigurationFile()
 	QDir userDataDirectory(StelFileMgr::getUserDir());
 	if (!userDataDirectory.exists())
 	{
+		qDebug() << "Unable to find user data directory:" << userDataDirectory.absolutePath();
 		return false;
 	}
 	if (!userDataDirectory.exists("data") && !userDataDirectory.mkdir("data"))
@@ -162,7 +148,8 @@ bool CAImporter::cloneSolarSystemConfigurationFile()
 		return false;
 	}
 
-	QString defaultFilePath	= StelFileMgr::getInstallationDir() + "/data/ssystem.ini";
+	//TODO: Fix this!
+	QString defaultFilePath	= QDir::currentPath() + "/data/ssystem.ini";//StelFileMgr::getInstallationDir() + "/data/ssystem.ini";
 	QString userFilePath	= StelFileMgr::getUserDir() + "/data/ssystem.ini";
 
 	if (QFile::exists(userFilePath))
@@ -173,6 +160,7 @@ bool CAImporter::cloneSolarSystemConfigurationFile()
 
 	if (QFile::exists(defaultFilePath))
 	{
+		qDebug() << "Trying to copy ssystem.ini to" << userFilePath;
 		return QFile::copy(defaultFilePath, userFilePath);
 	}
 	else
@@ -204,13 +192,25 @@ bool CAImporter::resetSolarSystemConfigurationFile()
 	}
 }
 
-bool CAImporter::importMpcOneLineCometElements(QString oneLineElements)
+//Strings that have failed to be parsed. The usual source of discrepancies is
+//http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft00Cmt.txt
+//It seems that some entries in the list don't match the described format.
+/*
+  "    CJ95O010  1997 03 31.4141  0.906507  0.994945  130.5321  282.6820   89.3193  20100723  -2.0  4.0  C/1995 O1 (Hale-Bopp)                                    MPC 61436" -> minus sign, fixed
+  "    CK09K030  2011 01  9.266   3.90156   1.00000   251.413     0.032   146.680              8.5  4.0  C/2009 K3 (Beshore)                                      MPC 66205" -> lower precision than the spec, fixed
+  "    CK10F040  2010 04  6.109   0.61383   1.00000   120.718   237.294    89.143             13.5  4.0  C/2010 F4 (Machholz)                                     MPC 69906" -> lower precision than the spec, fixed
+  "    CK10M010  2012 02  7.840   2.29869   1.00000   265.318    82.150    78.373              9.0  4.0  C/2010 M1 (Gibbs)                                        MPC 70817" -> lower precision than the spec, fixed
+  "    CK10R010  2011 11 28.457   6.66247   1.00000    96.009   345.949   157.437              6.0  4.0  C/2010 R1 (LINEAR)                                       MPEC 2010-R99" -> lower precision than the spec, fixed
+  "0128P      b  2007 06 13.8064  3.062504  0.320891  210.3319  214.3583    4.3606  20100723   8.5  4.0  128P/Shoemaker-Holt                                      MPC 51822" -> fragment?
+  "0141P      d  2010 05 29.7106  0.757809  0.749215  149.3298  246.0849   12.8032  20100723  12.0 12.0  141P/Machholz                                            MPC 59599" -> fragment?
+*/
+//! \todo Handle better any unusual symbols in section names (URL encoding?)
+//! \todo Recognise the long form packed designations? (to handle fragments)
+//! \todo Use column cuts intead of a regular expression?
+CAImporter::SsoElements CAImporter::readMpcOneLineCometElements(QString oneLineElements)
 {
-	//TODO: Fix this!
-	if (solarSystemConfigurationFile == NULL)
-	{
-		solarSystemConfigurationFile = new QSettings(StelFileMgr::getUserDir() + "/data/ssystem.ini", QSettings::IniFormat, this);
-	}
+	SsoElements result;
+
 	QRegExp mpcParser("^\\s*(\\d{4})?([A-Z])(\\w{7})?\\s+(\\d{4})\\s+(\\d{2})\\s+(\\d{1,2}\\.\\d{3,4})\\s+(\\d{1,2}\\.\\d{5,6})\\s+(\\d\\.\\d{5,6})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(?:(\\d{4})(\\d\\d)(\\d\\d))?\\s+(\\-?\\d{1,2}\\.\\d)\\s+(\\d{1,2}\\.\\d)\\s+(\\S.{55})\\s+(\\S.*)$");//
 
 	int match = mpcParser.indexIn(oneLineElements);
@@ -218,8 +218,8 @@ bool CAImporter::importMpcOneLineCometElements(QString oneLineElements)
 
 	if (match < 0)
 	{
-		qWarning() << "No match:" << oneLineElements;
-		return false;
+		qWarning() << "No match for" << oneLineElements;
+		return result;
 	}
 
 	QString name = mpcParser.cap(17).trimmed();
@@ -233,20 +233,20 @@ bool CAImporter::importMpcOneLineCometElements(QString oneLineElements)
 	if (mpcParser.cap(1).isEmpty() && mpcParser.cap(3).isEmpty())
 	{
 		qWarning() << "Comet is missing both comet number AND provisional designation.";
-		return false;
+		return result;
 	}
 
-	solarSystemConfigurationFile->beginGroup(sectionName);
+	result.insert("section_name", sectionName);
+	result.insert("name", name);
+	result.insert("parent", "Sun");
+	result.insert("coord_func","comet_orbit");
 
-	solarSystemConfigurationFile->setValue("name", name);
-	solarSystemConfigurationFile->setValue("parent", "Sun");
-	solarSystemConfigurationFile->setValue("coord_func","comet_orbit");
-
-	solarSystemConfigurationFile->setValue("lighting", false);
-	solarSystemConfigurationFile->setValue("color", "1.0");
-	solarSystemConfigurationFile->setValue("tex_map", "nomap.png");
+	result.insert("lighting", false);
+	result.insert("color", "1.0, 1.0, 1.0");
+	result.insert("tex_map", "nomap.png");
 
 	bool ok = false;
+	//TODO: Use this for VALIDATION!
 
 	int year	= mpcParser.cap(4).toInt();
 	int month	= mpcParser.cap(5).toInt();
@@ -261,81 +261,208 @@ bool CAImporter::importMpcOneLineCometElements(QString oneLineElements)
 	QTime timePerihelionPassage(hours, minutes, seconds, 0);
 	QDateTime dtPerihelionPassage(datePerihelionPassage, timePerihelionPassage, Qt::UTC);
 	double jdPerihelionPassage = StelUtils::qDateTimeToJd(dtPerihelionPassage);
-	solarSystemConfigurationFile->setValue("orbit_TimeAtPericenter", jdPerihelionPassage);
+	result.insert("orbit_TimeAtPericenter", jdPerihelionPassage);
 
 	double perihelionDistance = mpcParser.cap(7).toDouble(&ok);//AU
-	solarSystemConfigurationFile->setValue("orbit_PericenterDistance", perihelionDistance);
+	result.insert("orbit_PericenterDistance", perihelionDistance);
 
 	double eccentricity = mpcParser.cap(8).toDouble(&ok);//degrees
-	solarSystemConfigurationFile->setValue("orbit_Eccentricity", eccentricity);
+	result.insert("orbit_Eccentricity", eccentricity);
 
 	double argumentOfPerihelion = mpcParser.cap(9).toDouble(&ok);//J2000.0, degrees
-	solarSystemConfigurationFile->setValue("orbit_ArgOfPericenter", argumentOfPerihelion);
+	result.insert("orbit_ArgOfPericenter", argumentOfPerihelion);
 
 	double longitudeOfTheAscendingNode = mpcParser.cap(10).toDouble(&ok);//J2000.0, degrees
-	solarSystemConfigurationFile->setValue("orbit_AscendingNode", longitudeOfTheAscendingNode);
+	result.insert("orbit_AscendingNode", longitudeOfTheAscendingNode);
 
 	double inclination = mpcParser.cap(11).toDouble(&ok);
-	solarSystemConfigurationFile->setValue("orbit_Inclination", inclination);
+	result.insert("orbit_Inclination", inclination);
 
 	//Albedo doesn't work at all
 	//TODO: Make sure comets don't display magnitude
 	double absoluteMagnitude = mpcParser.cap(15).toDouble(&ok);
 	//qDebug() << "absoluteMagnitude:" << absoluteMagnitude;
 	double radius = 5; //Fictitious
-	solarSystemConfigurationFile->setValue("radius", radius);
+	result.insert("radius", radius);
 	//qDebug() << 1329 * pow(10, (absoluteMagnitude/-5));
 	//double albedo = pow(( (1329 * pow(10, (absoluteMagnitude/-5))) / (2 * radius)), 2);//from http://www.physics.sfasu.edu/astro/asteroids/sizemagnitude.html
 	double albedo = 1;
-	solarSystemConfigurationFile->setValue("albedo", albedo);
+	result.insert("albedo", albedo);
 
-	solarSystemConfigurationFile->endGroup();
-
-	return true;
+	return result;
 }
 
-bool CAImporter::importMpcOneLineCometElementsFromFile(QString filePath)
+bool CAImporter::appendToSolarSystemConfigurationFile(SsoElements object)
 {
+	if (!object.contains("section_name") || object.value("section_name").toString().isEmpty())
+	{
+		qDebug() << "appendToSolarSystemConfigurationFile(): Invalid object:" << object;
+		return false;
+	}
+
+	//Check if the configuration file exists
+	QString userFilePath = StelFileMgr::getUserDir() + "/data/ssystem.ini";
+	if (!QFile::exists(userFilePath))
+	{
+		qDebug() << "Can't append object data to ssystem.ini: Unable to find" << userFilePath;
+		return false;
+	}
+
+	//Remove duplicates
+	QSettings * solarSystemSettings = new QSettings(userFilePath, QSettings::IniFormat);
+	if (solarSystemSettings->status() != QSettings::NoError)
+	{
+		qDebug() << "Error opening ssystem.ini:" << userFilePath;
+		return false;
+	}
+	QString sectionName = object.value("section_name").toString();
+	object.remove("section_name");
+	solarSystemSettings->remove(sectionName);
+	//solarSystemSettings->sync();
+	delete solarSystemSettings;//This should call QSettings::sync()
+	solarSystemSettings = NULL;
+
+	//Write to file
+	//TODO: The usual validation
+	qDebug() << "Appending to file...";
+	QFile solarSystemConfigurationFile(userFilePath);
+	if(solarSystemConfigurationFile.open(QFile::WriteOnly | QFile::Append | QFile::Text))
+	{
+		QTextStream output (&solarSystemConfigurationFile);
+		output << endl << QString("[%1]").arg(sectionName) << endl;
+		foreach(QString key, object.keys())
+		{
+			output << QString("%1 = %2").arg(key).arg(object.value(key).toString()) << endl;
+		}
+		output.flush();
+		solarSystemConfigurationFile.close();
+		return true;
+	}
+	else
+	{
+		qDebug() << "Unable to open for writing" << userFilePath;
+		return false;
+	}
+}
+
+QList<CAImporter::SsoElements> CAImporter::readMpcOneLineCometElementsFromFile(QString filePath)
+{
+	QList<CAImporter::SsoElements> objectList;
+
 	if (!QFile::exists(filePath))
 	{
 		qDebug() << "Can't find" << filePath;
-		return false;
+		return objectList;
 	}
 
 	QFile mpcElementsFile(filePath);
 	if (mpcElementsFile.open(QFile::ReadOnly | QFile::Text ))//| QFile::Unbuffered
 	{
-		bool atLeastOneRead = false;
 		int count = 0;
 
 		while(!mpcElementsFile.atEnd())
 		{
-			QString mpcOneLineElements = QString(mpcElementsFile.readLine(200));
-			if(mpcOneLineElements.endsWith('\n'))
+			QString oneLineElements = QString(mpcElementsFile.readLine(200));
+			if(oneLineElements.endsWith('\n'))
 			{
-				mpcOneLineElements.chop(1);
+				oneLineElements.chop(1);
 			}
-			if (mpcOneLineElements.isEmpty())
+			if (oneLineElements.isEmpty())
 			{
 				qDebug() << "Empty line?";
 				continue;
 			}
 
-			if(importMpcOneLineCometElements(mpcOneLineElements))
+			SsoElements ssObject = readMpcOneLineCometElements(oneLineElements);
+			if(!ssObject.isEmpty() && !ssObject.value("section_name").toString().isEmpty())
 			{
+				objectList << ssObject;
 				//qDebug() << ++count;//TODO: Remove debug
-				atLeastOneRead = true;
 			}
 		}
-		solarSystemConfigurationFile->sync();
-
 		mpcElementsFile.close();
-		return atLeastOneRead;
+		return objectList;
 	}
 	else
 	{
 		qDebug() << "Unable to open for reading" << filePath;
 		qDebug() << "File error:" << mpcElementsFile.errorString();
+		return objectList;
+	}
+
+	return objectList;
+}
+
+bool CAImporter::appendToSolarSystemConfigurationFile(QList<SsoElements> objectList)
+{
+	if (objectList.isEmpty())
+	{
+		return false;
+	}
+
+	//Check if the configuration file exists
+	QString userFilePath = StelFileMgr::getUserDir() + "/data/ssystem.ini";
+	if (!QFile::exists(userFilePath))
+	{
+		qDebug() << "Can't append object data to ssystem.ini: Unable to find" << userFilePath;
+		return false;
+	}
+
+	//Remove duplicates
+	QSettings * solarSystemSettings = new QSettings(userFilePath, QSettings::IniFormat);
+	if (solarSystemSettings->status() != QSettings::NoError)
+	{
+		qDebug() << "Error opening ssystem.ini:" << userFilePath;
+		return false;
+	}
+	foreach (SsoElements object, objectList)
+	{
+		if (!object.contains("section_name"))
+			continue;
+
+		QString sectionName = object.value("section_name").toString();
+		if (sectionName.isEmpty())
+			continue;
+
+		solarSystemSettings->remove(sectionName);
+	}
+	delete solarSystemSettings;//This should call QSettings::sync()
+	solarSystemSettings = NULL;
+
+	//Write to file
+	//TODO: The usual validation
+	qDebug() << "Appending to file...";
+	QFile solarSystemConfigurationFile(userFilePath);
+	if(solarSystemConfigurationFile.open(QFile::WriteOnly | QFile::Append | QFile::Text))
+	{
+		QTextStream output (&solarSystemConfigurationFile);
+		bool appendedAtLeastOne = false;
+
+		foreach (SsoElements object, objectList)
+		{
+			if (!object.contains("section_name"))
+				continue;
+
+			QString sectionName = object.value("section_name").toString();
+			if (sectionName.isEmpty())
+				continue;
+
+			output << endl << QString("[%1]").arg(sectionName) << endl;
+			foreach(QString key, object.keys())
+			{
+				output << QString("%1 = %2").arg(key).arg(object.value(key).toString()) << endl;
+			}
+			output.flush();
+			qDebug() << "Appended successfully" << sectionName;
+			appendedAtLeastOne = true;
+		}
+
+		solarSystemConfigurationFile.close();
+		return appendedAtLeastOne;
+	}
+	else
+	{
+		qDebug() << "Unable to open for writing" << userFilePath;
 		return false;
 	}
 }
