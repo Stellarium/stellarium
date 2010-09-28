@@ -764,13 +764,18 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 //! The translation is done using gettext with translated strings defined in translations.h
 void StarMgr::updateI18n()
 {
+	QRegExp transRx("_[(]\"(.*)\"[)]");
 	StelTranslator trans("stellarium-skycultures", StelFileMgr::getLocaleDir(), StelApp::getInstance().getLocaleMgr().getSkyTranslator().getTrueLocaleName());
+	//StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	commonNamesMapI18n.clear();
 	commonNamesIndexI18n.clear();
 	for (QHash<int,QString>::ConstIterator it(commonNamesMap.constBegin());it!=commonNamesMap.constEnd();it++)
 	{
 		const int i = it.key();
-		const QString t = trans.qtranslate(it.value());
+		transRx.exactMatch(it.value());
+		QString tt = transRx.capturedTexts().at(1);
+		const QString t = trans.qtranslate(tt);
+		//const QString t(trans.qtranslate(it.value()));
 		commonNamesMapI18n[i] = t;
 		commonNamesIndexI18n[t.toUpper()] = i;
 	}
