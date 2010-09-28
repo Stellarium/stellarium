@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>solarSystemManagerWindow</class>
+ <widget class="QWidget" name="solarSystemManagerWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>363</width>
+    <height>487</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="groupBoxSystemFile">
+     <property name="title">
+      <string>Import/export the Solar System file</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QPushButton" name="pushButtonExportFile">
+        <property name="text">
+         <string>Export the Solar System file...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButtonReplace">
+        <property name="text">
+         <string>Replace the whole Solar System file</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButtonAppend">
+        <property name="text">
+         <string>Skip duplicate objects</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButtonMerge">
+        <property name="text">
+         <string>Overwrite duplicate objects</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButtonImportFile">
+        <property name="text">
+         <string>Import a Solar System file...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBoxObjectsList">
+     <property name="title">
+      <string>Solar System objects</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QListWidget" name="listWidgetObjects"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButtonRemove">
+        <property name="text">
+         <string>Remove</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBoxImport">
+     <property name="title">
+      <string>Add new Solar System objects</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QPushButton" name="pushButtonImportMPC">
+        <property name="text">
+         <string>Import orbital elements in MPC format...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButtonReset">
+     <property name="text">
+      <string>Reset to defaults</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="close">
+     <property name="text">
+      <string>Close</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

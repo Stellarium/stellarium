@@ -30,7 +30,7 @@
 #include <QString>
 #include <QVariant>
 
-class CAIMainWindow;
+class SolarSystemManagerWindow;
 class QSettings;
 /*!
  \class CAImporter
@@ -79,8 +79,7 @@ public:
 public slots:
 	
 private:
-	//Dialog window
-	//CAIMainWindow* mainWindow;
+	SolarSystemManagerWindow * mainWindow;
 
 	//! Reads a single comet's orbital elements from a string.
 	//! This function converts a line of comet orbital elements in MPC format
