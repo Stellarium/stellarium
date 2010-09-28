@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2006 Fabien Chereau
+ * Copyright (C) 2010 Bogdan Marinov (add/remove landscapes feature)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,8 +33,8 @@ class Cardinals;
 class QSettings;
 
 //! @class LandscapeMgr
-//! Manages all the rendering a the level of the observer's surrounding.
-//! This includes landscape textures, fog, atmosphere and cardinal points
+//! Manages all the rendering at the level of the observer's surroundings.
+//! This includes landscape textures, fog, atmosphere and cardinal points.
 //! I decided to put all these elements together in a single class because they are
 //! inherently linked, especially when we start moving the observer in altitude.
 class LandscapeMgr : public StelModule
@@ -95,15 +96,20 @@ public:
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods callable from script and GUI
-	//! Retrieve list of the names of all the available landscape in the
-	//! file search path sub-directories of the landscape area
+	//! Retrieve a list of the names of all the available landscapes in
+	//! the file search path sub-directories of the landscape area
 	//! @return the names of the landscapes, which are the values of the name parameter in the landscape.ini files
 	QStringList getAllLandscapeNames() const;
 
-	//! Retrieve list of the names of all the available landscape in the
-	//! file search path sub-directories of the landscape area
-	//! @return the names of the landscapes, which are the values of the name parameter in the landscape.ini files
+	//! Retrieve a list of the identifiers of all the available landscapes in
+	//! the file search path sub-directories of the landscape area
+	//! @return the identifiers of the landscapes, which are the names of the directories containing the landscapes' files
 	QStringList getAllLandscapeIDs() const;
+
+	//! Retrieve a list of the identifiers of all user-installed landscapes.
+	//! Effectively, this returns the results of getAllLandscapeIDs() without
+	//! the landscapes specified in the #packagedLandscapeIDs list.
+	QStringList getUserLandscapeIDs() const;
 
 	//! Get the current landscape ID.
 	const QString& getCurrentLandscapeID() const {return currentLandscapeID;}
@@ -174,6 +180,106 @@ public slots:
 	//! @param d the rotation angle in degrees as an offset from the originally loaded value.
 	void setZRotation(float d);
 
+	//! Install a landscape from a ZIP archive.
+	//! This function searches for a file named "landscape.ini" in the root
+	//! directory of the archive. If it is not found there, the function
+	//! searches inside the topmost sub-directories (if any), but no deeper.
+	//! If a landscape configuration file is found:
+	//!  - if a "landscapes" directory does not exist in the user data
+	//! directory, it is created;
+	//!  - inside it, a sub-directory is created with the landscape identifier
+	//! for a name;
+	//!  - all files in the archive directory that contains the "landscape.ini"
+	//! file are extracted to the new sub-directory of "landscapes";
+	//!  - all sub-directories of that archive directory will be skipped along
+	//! with any other files or directories in the archive.
+	//!
+	//! The landscape identifier is either:
+	//!  - the name of the folder in the archive that contains "landscape.ini",
+	//!  - or the first 65 (or less) characters of the archive name, if the
+	//! "landscape.ini" file is in the nameless root directory of the archive.
+	//!
+	//! The landscape identifier must be unique.
+	//! @param pathToSourceArchive path to the source archive file.
+	//! @param display If true, the landscape will be set to be the current
+	//! landscape after installation.
+	//! @param forAllUsers If true, this function will try to install the
+	//! landscape in a way that meakes it is available to all users of this
+	//! computer. May require running Stellarium as an administrator (root)
+	//! on some Windows or *nix systems. (NOT IMPLEMENTED!)
+	//! @returns the installed landscape's identifier, or
+	//! an empty string on failure.
+	//! @todo Find a better way to pass error messages.
+	QString installLandscapeFromArchive(QString pathToSourceArchive, bool display = false, bool forAllUsers = false);
+
+	//! Install a landscape from a directory.
+	//! Expected directory structure: the name of the directory that contains
+	//! a landscape.ini file is assumed to be the landscape ID and should be
+	//! unique.
+	//! This directory and all files in it will be installed, but its
+	//! subdirectories will be skipped along with any other files or
+	//! directories in the archive.
+	//! @param pathToSourceLandscapeIni path to a landscape.ini file. Its parent
+	//! directory is assumed to be the landscape source directory.
+	//! @param display If true, the landscape will be set to be the current
+	//! landscape after installation.
+	//! @param forAllUsers If true, this function will try to install the
+	//! landscape in a way that meakes it is available to all users of this
+	//! computer. May require running Stellarium as an administrator (root)
+	//! on some Windows or *nix systems. (NOT IMPLEMENTED!)
+	//! @returns the installed landscape's identifier (the folder name), or
+	//! an empty string on failure.
+	//QString installLandscapeFromDirectory(QString pathToSourceLandscapeIni, bool display = false, bool forAllUsers = false);
+
+	//! This function removes a landscape from the user data directory.
+	//! It tries to recursively delete all files in the landscape directory
+	//! and then remove it from the list of available landscapes.
+	//! If the function encounters any file that can't be deleted
+	//! it aborts the operation (previously deleted files are not restored).
+	//! Landscapes that were packaged with Stellarium can't be removed,
+	//! thanks to the #packagedtLandscapeIDs list.
+	//! @param landscapeID an installed landscape's identifier (the folder name)
+	//! @todo Find a better way to pass error messages.
+	bool removeLandscape(QString landscapeID);
+
+	//! This function reads a landscape's name from its configuration file.
+	//! @param landscapeID an installed landscape's identifier (the folder name)
+	//! @returns an empty string if there is no such landscape or some other
+	//! error occurs
+	QString loadLandscapeName(QString landscapeID);
+
+	//! This function calculates and returns a landscape's disc size in bytes.
+	//! It adds up the sizes of all files in the landscape's folder. It assumes
+	//! that there are no sub-directories. (There shouldn't be any anyway.)
+	//! @param landscapeID an installed landscape's identifier (the folder name)
+	quint64 loadLandscapeSize(QString landscapeID);
+
+signals:
+	//! Emitted when a landscape has been installed or un-installed.
+	//! For example, it is used to update the list of landscapes in
+	//! the Sky and viewing options window (the ViewDialog class)
+	void landscapesChanged();
+
+	//! Emitted when installLandscapeFromArchive() can't read from, write to or
+	//! create a file or a directory.
+	//! (A way of moving the need for translatable error messages to the GUI.)
+	//! \param path path to the file or directory
+	void errorUnableToOpen(QString path);
+	//! Emitted when the file passed to installLandscapeFromArchive() is not a
+	//! ZIP archive or does not contain a valid landscape.
+	//! (A way of moving the need for translatable error messages to the GUI.)
+	void errorNotArchive();
+	//! Emitted when installLandscapeFromArchive() tries to install a landscape
+	//! with the same name or identifier as an already installed one.
+	//! (A way of moving the need for translatable error messages to the GUI.)
+	//! \param nameOrID the name or the identifier of the landscape
+	void errorNotUnique(QString nameOrID);
+	//! Emitted when removeLandscape() is unable to remove all the files of
+	//! a landscape.
+	//! (A way of moving the need for translatable error messages to the GUI.)
+	//! \param path the path to the landscape's directory
+	void errorRemoveManually(QString path);
+
 private:
 	//! Get light pollution luminance level.
 	float getAtmosphereLightPollutionLuminance() const;
@@ -188,6 +294,12 @@ private:
 	//! Return a map of landscape name to landscape ID (directory name).
 	QMap<QString,QString> getNameToDirMap() const;
 
+	//! Returns the path to an installed landscape's directory.
+	//! It uses StelFileMgr to look for it in the possible directories.
+	//! @param landscapeID an installed landscape's identifier (the folder name)
+	//! @returns an empty string, if no such landscape was found.
+	QString getLandscapePath(QString landscapeID);
+
 	Atmosphere* atmosphere;			// Atmosphere
 	Cardinals* cardinalsPoints;		// Cardinals points
 	Landscape* landscape;			// The landscape i.e. the fog, the ground and "decor"
@@ -200,6 +312,13 @@ private:
 
 	// The ID of the default landscape
 	QString defaultLandscapeID;
+
+	//! List of the IDs of the landscapes packaged by default with Stellarium.
+	//! (So that they can't be removed.)
+	//! It is populated in LandscapeMgr() and has to be updated
+	//! manually on changes.
+	//! @todo Find a way to update it automatically.
+	QStringList packagedLandscapeIDs;
 };
 
 #endif // _LANDSCAPEMGR_HPP_

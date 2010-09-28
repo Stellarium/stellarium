@@ -1228,7 +1228,7 @@
           <property name="spacing">
            <number>0</number>
           </property>
-          <item row="0" column="0" rowspan="2">
+          <item row="0" column="0" rowspan="4">
            <widget class="QListWidget" name="landscapesListWidget">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -1289,6 +1289,22 @@
             </property>
             <property name="openExternalLinks">
              <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="pushButtonAddRemoveLandscapes">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>37</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">margin-left: 10px; margin-right: 10px; margin-bottom:10px;</string>
+            </property>
+            <property name="text">
+             <string>Add/remove landscapes...</string>
             </property>
            </widget>
           </item>
