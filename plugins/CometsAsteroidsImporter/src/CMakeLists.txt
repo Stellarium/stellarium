@@ -2,29 +2,29 @@
 INCLUDE_DIRECTORIES(
   ${CMAKE_BINARY_DIR}
   ${CMAKE_BINARY_DIR}/plugins/CometsAsteroidsImporter/src
-  .)
+  ${CMAKE_BINARY_DIR}/plugins/CometsAsteroidsImporter/src/gui
+  . gui)
 
 LINK_DIRECTORIES(/src)
 
 SET(CAImporter_SRCS
   CAImporter.hpp
   CAImporter.cpp
-#  gui/StelDialogCAImporter.hpp
-#  gui/StelDialogCAImporter.cpp
+  gui/SolarSystemManagerWindow.hpp
+  gui/SolarSystemManagerWindow.cpp
   )
 
-# Add here all the .ui files
-#SET(CAImporter_UIS
-#
-#)
+SET(CAImporter_UIS
+  gui/solarSystemManagerWindow.ui
+)
 
-#QT4_WRAP_UI(CAImporter_UIS_H ${CAImporter_UIS})
+QT4_WRAP_UI(CAImporter_UIS_H ${CAImporter_UIS})
 
 #SET(CAImporter_RES ../resources/resources.qrc)
 #QT4_ADD_RESOURCES(CAImporter_RES_CXX ${CAImporter_RES})
 
 SET(CAImporter_MOC_HDRS
-#  gui/StelDialogCAImporter.hpp
+  gui/SolarSystemManagerWindow.hpp
   CAImporter.hpp
   )
 
@@ -56,7 +56,7 @@ ENDIF()
 
 #Static library
 IF(BUILD_STATIC_PLUGINS)
- ADD_LIBRARY(CAImporter-static STATIC ${CAImporter_SRCS} ${CAImporter_MOC_SRCS})# ${CAImporter_RES_CXX} ${CAImporter_UIS_H})
+ ADD_LIBRARY(CAImporter-static STATIC ${CAImporter_SRCS} ${CAImporter_MOC_SRCS} ${CAImporter_RES_CXX} ${CAImporter_UIS_H})
  SET_TARGET_PROPERTIES(CAImporter-static PROPERTIES OUTPUT_NAME "CAImporter")
  TARGET_LINK_LIBRARIES(CAImporter-static ${extLinkerOption})
  IF(WIN32)
