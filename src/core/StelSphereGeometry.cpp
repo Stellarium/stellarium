@@ -756,6 +756,8 @@ bool SphericalPolygon::intersects(const SphericalConvexPolygon& r) const {return
 
 SphericalRegionP SphericalPolygon::multiUnion(const QList<SphericalRegionP>& regions, bool optimizeByPreGrouping)
 {
+	if (regions.size()==1)
+		return regions.at(0);
 	if (optimizeByPreGrouping)
 	{
 		static const double minOverlap = 0.2;

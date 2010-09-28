@@ -407,6 +407,8 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/SearchDialog.cpp
 		gui/ConfigurationDialog.hpp
 		gui/ConfigurationDialog.cpp
+		gui/AddRemoveLandscapesDialog.hpp
+		gui/AddRemoveLandscapesDialog.cpp
 		gui/StelDialog.hpp
 		gui/StelDialog.cpp)
 
@@ -424,6 +426,7 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/ViewDialog.hpp
 		gui/SearchDialog.hpp
 		gui/ConfigurationDialog.hpp
+		gui/AddRemoveLandscapesDialog.hpp
 		gui/StelDialog.hpp)
 
 	################# compiles .ui files ############
@@ -433,7 +436,8 @@ IF (GUI_MODE STREQUAL "Standard")
 	gui/dateTimeDialogGui.ui
 	gui/viewDialog.ui
 	gui/searchDialogGui.ui
-	gui/configurationDialog.ui)
+	gui/configurationDialog.ui
+	gui/addRemoveLandscapesDialog.ui)
 
 	IF(ENABLE_SCRIPT_CONSOLE)
 		SET(stellarium_gui_SRCS ${stellarium_gui_SRCS}
