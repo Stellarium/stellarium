@@ -506,7 +506,7 @@ QVector<SubContour> OctahedronPolygon::tesselateOneSideLineLoop(GLUEStesselator*
 // Define the square of the angular distance from which we merge 2 points.
 inline bool tooClose(const Vec3d& e1, const Vec3d& e2)
 {
-	return (e1[0]-e2[0])*(e1[0]-e2[0])+(e1[1]-e2[1])*(e1[1]-e2[1])<0.000000002;
+	return (e1[0]-e2[0])*(e1[0]-e2[0])+(e1[1]-e2[1])*(e1[1]-e2[1])<0.000000001;
 }
 
 void vertexLineLoopCallback(EdgeVertex* vertexData, OctTessLineLoopCallbackData* userData)
