@@ -19,6 +19,7 @@
  */
 
 #include "CAImporter.hpp"
+#include "SolarSystemManagerWindow.hpp"
 
 #include "StelApp.hpp"
 #include "StelGui.hpp"
@@ -77,7 +78,7 @@ void CAImporter::init()
 {
 	try
 	{
-		//Do something
+		mainWindow = new SolarSystemManagerWindow();
 	}
 	catch (std::runtime_error &e)
 	{
@@ -110,7 +111,7 @@ bool CAImporter::configureGui(bool show)
 {
 	if(show)
 	{
-		//mainWindow->setVisible(true);
+		mainWindow->setVisible(true);
 
 		if (cloneSolarSystemConfigurationFile())
 		{
@@ -292,19 +293,6 @@ CAImporter::SsoElements CAImporter::readMpcOneLineCometElements(QString oneLineE
 	return result;
 }
 
-bool CAImporter::appendToSolarSystemConfigurationFile(SsoElements object)
-{
-	if (!object.contains("section_name") || object.value("section_name").toString().isEmpty())
-	{
-		qDebug() << "appendToSolarSystemConfigurationFile(): Invalid object:" << object;
-		return false;
-	}
-
-	QList<SsoElements> list;
-	list << object;
-	return appendToSolarSystemConfigurationFile(list);
-}
-
 QList<CAImporter::SsoElements> CAImporter::readMpcOneLineCometElementsFromFile(QString filePath)
 {
 	QList<CAImporter::SsoElements> objectList;
@@ -425,4 +413,17 @@ bool CAImporter::appendToSolarSystemConfigurationFile(QList<SsoElements> objectL
 		qDebug() << "Unable to open for writing" << userFilePath;
 		return false;
 	}
+}
+
+bool CAImporter::appendToSolarSystemConfigurationFile(SsoElements object)
+{
+	if (!object.contains("section_name") || object.value("section_name").toString().isEmpty())
+	{
+		qDebug() << "appendToSolarSystemConfigurationFile(): Invalid object:" << object;
+		return false;
+	}
+
+	QList<SsoElements> list;
+	list << object;
+	return appendToSolarSystemConfigurationFile(list);
 }
