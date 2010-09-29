@@ -21,11 +21,16 @@
 #include "ImportWindow.hpp"
 #include "ui_importWindow.h"
 
+#include "StelApp.hpp"
+#include "StelModuleMgr.hpp"
+#include "CAImporter.hpp"
+
 #include <QStackedWidget>
 
 ImportWindow::ImportWindow()
 {
 	ui = new Ui_importWindow();
+	ssoManager = GETSTELMODULE(CAImporter);
 }
 
 ImportWindow::~ImportWindow()
