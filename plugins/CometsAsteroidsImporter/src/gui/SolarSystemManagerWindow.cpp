@@ -36,7 +36,7 @@ void SolarSystemManagerWindow::createDialogContent()
 	ui->setupUi(dialog);
 
 	//Signals
-	connect(ui->close, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 }
 
 void SolarSystemManagerWindow::languageChanged()
