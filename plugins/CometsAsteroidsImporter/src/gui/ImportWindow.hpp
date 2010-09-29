@@ -24,6 +24,7 @@
 #include <QObject>
 #include "StelDialog.hpp"
 
+class CAImporter;
 class Ui_importWindow;
 
 /*! \brief Window for importing orbital elements from various sources.
@@ -40,6 +41,9 @@ public:
 private slots:
 	void parseElements();
 	void addObjects();
+
+private:
+	CAImporter * ssoManager;
 
 protected:
 	virtual void createDialogContent();
