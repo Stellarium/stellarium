@@ -18,42 +18,32 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "SolarSystemManagerWindow.hpp"
-#include "ui_solarSystemManagerWindow.h"
+#ifndef _IMPORT_WINDOW_
+#define _IMPORT_WINDOW_
 
-#include "ImportWindow.hpp"
+#include <QObject>
+#include "StelDialog.hpp"
 
-SolarSystemManagerWindow::SolarSystemManagerWindow()
+class Ui_importWindow;
+
+/*! \brief Window for importing orbital elements from various sources.
+  \author Bogdan Marinov
+*/
+class ImportWindow : public StelDialog
 {
-	ui = new Ui_solarSystemManagerWindow();
-}
+	Q_OBJECT
+public:
+	ImportWindow();
+	virtual ~ImportWindow();
+	void languageChanged();
 
-SolarSystemManagerWindow::~SolarSystemManagerWindow()
-{
-	delete ui;
-}
+private slots:
+	void parseElements();
+	void addObjects();
 
-void SolarSystemManagerWindow::createDialogContent()
-{
-	ui->setupUi(dialog);
+protected:
+	virtual void createDialogContent();
+	Ui_importWindow * ui;
+};
 
-	importWindow = new ImportWindow();
-
-	//Signals
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->pushButtonImportMPC, SIGNAL(clicked()), this, SLOT(showImportCometsWindow()));
-}
-
-void SolarSystemManagerWindow::languageChanged()
-{
-	if (dialog)
-		ui->retranslateUi(dialog);
-
-	if (importWindow)
-		importWindow->languageChanged();
-}
-
-void SolarSystemManagerWindow::showImportCometsWindow()
-{
-	importWindow->setVisible(true);
-}
+#endif //_IMPORT_WINDOW_
