@@ -25,7 +25,11 @@
 #include "StelDialog.hpp"
 
 class Ui_solarSystemManagerWindow;
+class ImportWindow;
 
+/*! \brief Main window for handling Solar System objects.
+  \author Bogdan Marinov
+*/
 class SolarSystemManagerWindow : public StelDialog
 {
 	Q_OBJECT
@@ -37,6 +41,12 @@ public:
 protected:
 	virtual void createDialogContent();
 	Ui_solarSystemManagerWindow * ui;
+
+private slots:
+	void showImportCometsWindow();
+
+private:
+	ImportWindow* importWindow;//There can be more than one!
 };
 
 #endif //_SOLAR_SYSTEM_MANAGER_WINDOW_
