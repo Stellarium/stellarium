@@ -18,42 +18,52 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "SolarSystemManagerWindow.hpp"
-#include "ui_solarSystemManagerWindow.h"
-
 #include "ImportWindow.hpp"
+#include "ui_importWindow.h"
 
-SolarSystemManagerWindow::SolarSystemManagerWindow()
+#include <QStackedWidget>
+
+ImportWindow::ImportWindow()
 {
-	ui = new Ui_solarSystemManagerWindow();
+	ui = new Ui_importWindow();
 }
 
-SolarSystemManagerWindow::~SolarSystemManagerWindow()
+ImportWindow::~ImportWindow()
 {
 	delete ui;
 }
 
-void SolarSystemManagerWindow::createDialogContent()
+void ImportWindow::createDialogContent()
 {
 	ui->setupUi(dialog);
 
-	importWindow = new ImportWindow();
-
 	//Signals
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->pushButtonImportMPC, SIGNAL(clicked()), this, SLOT(showImportCometsWindow()));
+
+	connect(ui->pushButtonParse, SIGNAL(clicked()), this, SLOT(parseElements()));
+	connect(ui->pushButtonAdd, SIGNAL(clicked()), this, SLOT(addObjects()));
+
+	connect(ui->radioButtonSingle, SIGNAL(toggled(bool)), ui->frameSingle, SLOT(setVisible(bool)));
+	connect(ui->radioButtonFile, SIGNAL(toggled(bool)), ui->frameFile, SLOT(setVisible(bool)));
+	connect(ui->radioButtonURL, SIGNAL(toggled(bool)), ui->frameURL, SLOT(setVisible(bool)));
+
+	ui->radioButtonSingle->setChecked(true);
+	ui->frameFile->setVisible(false);
+	ui->frameURL->setVisible(false);
 }
 
-void SolarSystemManagerWindow::languageChanged()
+void ImportWindow::languageChanged()
 {
 	if (dialog)
 		ui->retranslateUi(dialog);
-
-	if (importWindow)
-		importWindow->languageChanged();
 }
 
-void SolarSystemManagerWindow::showImportCometsWindow()
+void ImportWindow::parseElements()
 {
-	importWindow->setVisible(true);
+	ui->stackedWidget->setCurrentIndex(1);
+}
+
+void ImportWindow::addObjects()
+{
+	ui->stackedWidget->setCurrentIndex(0);
 }

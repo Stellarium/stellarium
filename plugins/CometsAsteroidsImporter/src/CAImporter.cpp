@@ -124,9 +124,10 @@ bool CAImporter::configureGui(bool show)
 			//Import a list of comets on the desktop. The file is from
 			//http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft00Cmt.txt
 			//It seems that some entries in the list don't match the described format
-			QList<SsoElements> objectList = readMpcOneLineCometElementsFromFile(StelFileMgr::getDesktopDir() + "/Soft00Cmt.txt");
+			/*QList<SsoElements> objectList = readMpcOneLineCometElementsFromFile(StelFileMgr::getDesktopDir() + "/Soft00Cmt.txt");
 			if (!appendToSolarSystemConfigurationFile(objectList))
 				return true;
+			*/
 
 			//Destroy and re-create the Solal System
 			GETSTELMODULE(SolarSystem)->reloadPlanets();
