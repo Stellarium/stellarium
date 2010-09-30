@@ -8,7 +8,7 @@
     <x>0</x>
     <y>0</y>
     <width>480</width>
-    <height>380</height>
+    <height>408</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -227,6 +227,9 @@
                <property name="inputMethodHints">
                 <set>Qt::ImhUrlCharactersOnly</set>
                </property>
+               <property name="text">
+                <string>http://</string>
+               </property>
               </widget>
              </item>
              <item>
@@ -304,6 +307,9 @@ Note that displaying a large number of objects may cause Stellarium to run slowl
           </item>
           <item>
            <widget class="QListWidget" name="listWidgetObjects">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::NoSelection</enum>
+            </property>
             <item>
              <property name="text">
               <string notr="true">2P/Encke</string>

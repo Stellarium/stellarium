@@ -76,11 +76,6 @@ public:
 	//! \todo Better name.
 	typedef QHash<QString, QVariant> SsoElements;
 	
-public slots:
-	
-private:
-	SolarSystemManagerWindow * mainWindow;
-
 	//! Reads a single comet's orbital elements from a string.
 	//! This function converts a line of comet orbital elements in MPC format
 	//! to a hash in Stellarium's ssystem.ini format.
@@ -125,6 +120,11 @@ private:
 	//! "section_name" or it is an empty string) are skipped and the processing
 	//! continues from the next entry.
 	bool appendToSolarSystemConfigurationFile(QList<SsoElements>);
+	
+public slots:
+	
+private:
+	SolarSystemManagerWindow * mainWindow;
 
 	//! Creates a copy of the default ssystem.ini file in the user data directory.
 	//! @returns true if a file already exists or the copying has been successful
