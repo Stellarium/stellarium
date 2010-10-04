@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2010 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,6 +34,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelIniParser.hpp"
 #include "Planet.hpp"
+#include "MinorPlanet.hpp"
 #include "StelNavigator.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelUtils.hpp"
@@ -640,20 +642,51 @@ void SolarSystem::loadPlanets()
 			exit(-1);
 		}
 
-		// Create the Planet and add it to the list
-		PlanetP p(new Planet(englishName,
-					pd.value(secname+"/lighting").toBool(),
-					pd.value(secname+"/radius").toDouble()/AU,
-					pd.value(secname+"/oblateness", 0.0).toDouble(),
-					StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
-					pd.value(secname+"/albedo").toFloat(),
-					pd.value(secname+"/tex_map").toString(),
-					posfunc,
-					userDataPtr,
-					osculatingFunc,
-					closeOrbit,
-					pd.value(secname+"/hidden", 0).toBool(),
-					pd.value(secname+"/atmosphere", false).toBool()));
+		// Create the Solar System body and add it to the list
+		QString type = pd.value(secname+"/type").toString();
+		PlanetP p;
+		if (type == "asteroid")
+		{
+			qDebug() << "Type is asteorid";
+			p = PlanetP(new MinorPlanet(englishName,
+			               pd.value(secname+"/lighting").toBool(),
+			               pd.value(secname+"/radius").toDouble()/AU,
+			               pd.value(secname+"/oblateness", 0.0).toDouble(),
+			               StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
+			               pd.value(secname+"/albedo").toFloat(),
+			               pd.value(secname+"/tex_map").toString(),
+			               posfunc,
+			               userDataPtr,
+			               osculatingFunc,
+			               closeOrbit,
+			               pd.value(secname+"/hidden", 0).toBool(),
+			               pd.value(secname+"/atmosphere", false).toBool()));
+
+			int minorPlanetNumber = pd.value(secname+"/minor_planet_number", 0).toInt();
+			if (minorPlanetNumber)
+			{
+				QSharedPointer<MinorPlanet> mp =  p.dynamicCast<MinorPlanet>();
+				mp->setNumber(minorPlanetNumber);
+			}
+		}
+		else
+		{
+			p = PlanetP(new Planet(englishName,
+			               pd.value(secname+"/lighting").toBool(),
+			               pd.value(secname+"/radius").toDouble()/AU,
+			               pd.value(secname+"/oblateness", 0.0).toDouble(),
+			               StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
+			               pd.value(secname+"/albedo").toFloat(),
+			               pd.value(secname+"/tex_map").toString(),
+			               posfunc,
+			               userDataPtr,
+			               osculatingFunc,
+			               closeOrbit,
+			               pd.value(secname+"/hidden", 0).toBool(),
+			               pd.value(secname+"/atmosphere", false).toBool()));
+		}
+
+
 		if (!parent.isNull())
 		{
 			parent->satellites.append(p);
