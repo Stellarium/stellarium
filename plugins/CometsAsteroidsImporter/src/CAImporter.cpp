@@ -395,6 +395,7 @@ bool CAImporter::appendToSolarSystemConfigurationFile(QList<SsoElements> objectL
 			QString sectionName = object.value("section_name").toString();
 			if (sectionName.isEmpty())
 				continue;
+			object.remove("section_name");
 
 			output << endl << QString("[%1]").arg(sectionName) << endl;
 			foreach(QString key, object.keys())
