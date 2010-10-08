@@ -21,7 +21,7 @@
 
 #include <QObject>
 #include <QString>
-#include <QSqlRecord>
+#include <QSettings>
 
 class Telescope;
 
@@ -29,7 +29,7 @@ class Ocular : public QObject
 {
 	Q_OBJECT
 public:
-	Ocular(QSqlRecord record);
+	Ocular(QSettings* settings);
 	virtual ~Ocular();
 	const QString getName();
 	int getOcularID();
