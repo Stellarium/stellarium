@@ -108,19 +108,12 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	}*/
 
 	//Try to detect provisional designation
-	QRegExp provisionalDesignationPattern("^(\\d{4}\\s[A-Z]{2})(\\d*)$");
-	if (provisionalDesignationPattern.indexIn(englishName) == 0)
+	nameIsProvisionalDesignation = false;
+	QString provisionalDesignation = renderProvisionalDesignationinHtml(englishName);
+	if (!provisionalDesignation.isEmpty())
 	{
-		QString main = provisionalDesignationPattern.cap(1);
-		QString suffix = provisionalDesignationPattern.cap(2);
-		if (!suffix.isEmpty())
-		{
-			htmlName = (QString("%1<sub>%2</sub>").arg(main).arg(suffix));
-		}
-	}
-	else
-	{
-		qDebug() << "Not a provisional designation?";
+		nameIsProvisionalDesignation = true;
+		provisionalDesignationHtml = provisionalDesignation;
 	}
 
 	nameI18 = englishName;
@@ -156,6 +149,12 @@ void MinorPlanet::setAbsoluteMagnitudeAndSlope(double magnitude, double slope)
 	slopeParameter = slope;
 }
 
+void MinorPlanet::setProvisionalDesignation(QString designation)
+{
+	//TODO: This feature have to be implemented better, anyway.
+	provisionalDesignationHtml = renderProvisionalDesignationinHtml(designation);
+}
+
 QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
 {
 	//Mostly copied from Planet::getInfoString():
@@ -169,10 +168,12 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		oss << "<h2>";
 		if (minorPlanetNumber)
 			oss << QString("(%1) ").arg(minorPlanetNumber);
-		if (!htmlName.isEmpty())
-			oss << htmlName;
+		if (nameIsProvisionalDesignation)
+			oss << provisionalDesignationHtml;
 		else
 			oss << q_(englishName);  // UI translation can differ from sky translation
+		if (!nameIsProvisionalDesignation && !provisionalDesignationHtml.isEmpty())
+			oss << QString(" = %1 ").arg(provisionalDesignationHtml);
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
 		if (sphereScale != 1.f)
@@ -228,5 +229,29 @@ float MinorPlanet::getVMagnitude(const StelNavigator *nav) const
 	double apparentMagnitude = reducedMagnitude + 5 * std::log10(std::sqrt(planetRq * observerPlanetRq));
 
 	return apparentMagnitude;
+}
+
+QString MinorPlanet::renderProvisionalDesignationinHtml(QString plainTextName)
+{
+	QRegExp provisionalDesignationPattern("^(\\d{4}\\s[A-Z]{2})(\\d*)$");
+	if (provisionalDesignationPattern.indexIn(plainTextName) == 0)
+	{
+		QString main = provisionalDesignationPattern.cap(1);
+		QString suffix = provisionalDesignationPattern.cap(2);
+		if (!suffix.isEmpty())
+		{
+			return (QString("%1<sub>%2</sub>").arg(main).arg(suffix));
+		}
+		else
+		{
+			return main;
+		}
+	}
+	else
+	{
+		qDebug() << "renderProvisionalDesignationinHtml():" << plainTextName
+		         << "is not a provisional designation in plain text.";
+		return QString();
+	}
 }
 
