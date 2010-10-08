@@ -662,12 +662,31 @@ void SolarSystem::loadPlanets()
 			               pd.value(secname+"/hidden", 0).toBool(),
 			               pd.value(secname+"/atmosphere", false).toBool()));
 
+			QSharedPointer<MinorPlanet> mp =  p.dynamicCast<MinorPlanet>();
+
+			//Number
 			int minorPlanetNumber = pd.value(secname+"/minor_planet_number", 0).toInt();
 			if (minorPlanetNumber)
 			{
-				QSharedPointer<MinorPlanet> mp =  p.dynamicCast<MinorPlanet>();
-				mp->setNumber(minorPlanetNumber);
+
+				mp->setMinorPlanetNumber(minorPlanetNumber);
 			}
+
+			//H-G magnitude system
+			double magnitude = pd.value(secname+"/absolute_magnitude", -99).toDouble();
+			double slope = pd.value(secname+"/slope_parameter", 0.15).toDouble();
+			if (magnitude > -99)
+			{
+				if (slope >= 0 && slope <= 1)
+				{
+					mp->setAbsoluteMagnitudeAndSlope(magnitude, slope);
+				}
+				else
+				{
+					mp->setAbsoluteMagnitudeAndSlope(magnitude, 0.15);
+				}
+			}
+
 		}
 		else
 		{
