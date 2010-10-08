@@ -61,10 +61,21 @@ public:
 	//! set the minor planet's number, if any.
 	//! The number should be specified as an additional parameter, as
 	//! englishName is passed as a constant to Planet's constructor.
-	void setNumber(int number);
+	//! The number can be set only once. Any further calls of this function will
+	//! have no result.
+	void setMinorPlanetNumber(int number);
+
+	//! sets absolute magnitude (H) and slope parameter (G).
+	//! These are the parameters in the IAU's two-parameter magnitude system
+	//! for minor planets. They are used to calculate the apparent magnitude at
+	//! different phase angles.
+	void setAbsoluteMagnitudeAndSlope(double magnitude, double slope);
+
 
 private:
 	int minorPlanetNumber;
+	double absoluteMagnitude;
+	double slopeParameter;
 
 	QString htmlName;
 	static QString convertNameToHtml (QString plainTextName);
