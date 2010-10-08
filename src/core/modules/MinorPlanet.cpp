@@ -67,7 +67,10 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
+	//MinorPlanet specific members
 	minorPlanetNumber = 0;
+	absoluteMagnitude = 0;
+	slopeParameter = 0;//TODO: Default value?
 
 	//TODO: Fix the name
 	// - Detect numeric prefix and set number if any
@@ -130,12 +133,27 @@ MinorPlanet::~MinorPlanet()
 	//Do nothing for the moment
 }
 
-void MinorPlanet::setNumber(int number)
+void MinorPlanet::setMinorPlanetNumber(int number)
 {
 	if (minorPlanetNumber)
 		return;
 
 	minorPlanetNumber = number;
+}
+
+void MinorPlanet::setAbsoluteMagnitudeAndSlope(double magnitude, double slope)
+{
+	if (slope < 0 || slope > 1.0)
+	{
+		qDebug() << "MinorPlanet::setAbsoluteMagnitudeAndSlope(): Invalid slope parameter value (must be between 0 and 1)";
+		return;
+	}
+
+	//TODO: More checks?
+	//TODO: Make it set-once like the number?
+
+	absoluteMagnitude = magnitude;
+	slopeParameter = slope;
 }
 
 QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
@@ -166,7 +184,8 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(nav), 0, 'f', 2) << "<br>";
 
 	if (flags&AbsoluteMagnitude)
-		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(nav)-5.*(std::log10(getJ2000EquatorialPos(nav).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
+		oss << q_("Absolute Magnitude: %1").arg(absoluteMagnitude, 0, 'f', 2) << "<br>";
+	//TODO: Make sure absolute magnitude is a sane value
 
 	oss << getPositionInfoString(core, flags);
 
@@ -186,7 +205,28 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 float MinorPlanet::getVMagnitude(const StelNavigator *nav) const
 {
-	//TODO
-	return 1.;
+	//TODO:
+	//Calculate phase angle
+	//(Code copied from Planet::getVMagnitude())
+	//(LOL, this is actually vector substraction + the cosine theorem :))
+	const Vec3d& observerHelioPos = nav->getObserverHeliocentricEclipticPos();
+	const double observerRq = observerHelioPos.lengthSquared();
+	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
+	const double planetRq = planetHelioPos.lengthSquared();
+	const double observerPlanetRq = (observerHelioPos - planetHelioPos).lengthSquared();
+	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
+	double phaseAngle = std::acos(cos_chi);
+
+	//Calculate reduced magnitude (magnitude without the influence of distance)
+	//Source of the formulae: http://www.britastro.org/asteroids/dymock4.pdf
+	const double phi1 = std::exp(-3.33 * std::pow(std::tan(phaseAngle/2), 0.63));
+	const double phi2 = std::exp(-1.87 * std::pow(std::tan(phaseAngle/2), 1.22));
+	double reducedMagnitude = absoluteMagnitude - 2.5 * std::log10( (1 - slopeParameter) * phi1 + slopeParameter * phi2 );
+
+	//Calculate apparent magnitude
+	//TODO: See if you can "collapse" some calculations
+	double apparentMagnitude = reducedMagnitude + 5 * std::log10(std::sqrt(planetRq * observerPlanetRq));
+
+	return apparentMagnitude;
 }
 
