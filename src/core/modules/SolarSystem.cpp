@@ -672,6 +672,13 @@ void SolarSystem::loadPlanets()
 				mp->setMinorPlanetNumber(minorPlanetNumber);
 			}
 
+			//Provisional designation
+			QString provisionalDesignation = pd.value(secname+"/provisional_designation").toString();
+			if (!provisionalDesignation.isEmpty())
+			{
+				mp->setProvisionalDesignation(provisionalDesignation);
+			}
+
 			//H-G magnitude system
 			double magnitude = pd.value(secname+"/absolute_magnitude", -99).toDouble();
 			double slope = pd.value(secname+"/slope_parameter", 0.15).toDouble();
