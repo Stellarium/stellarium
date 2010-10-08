@@ -39,7 +39,6 @@
 #include <QMouseEvent>
 #include <QtNetwork>
 #include <QPixmap>
-#include <QSettings>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
@@ -96,18 +95,23 @@ Oculars::Oculars() : selectedOcularIndex(-1), flagShowOculars(false), usageMessa
 	flagShowOculars = false;
 	flagShowCrosshairs = false;
 	flagShowTelrad = false;
+	ready = false;
+	useMaxEyepieceAngle = true;
+	visible = false;
+
 	font.setPixelSize(14);
 	maxEyepieceAngle = 0.0;
-	CCDs = QList<CCD *>();
+
+	ccds = QList<CCD *>();
 	oculars = QList<Ocular *>();
-	ready = false;
+	telescopes = QList<Telescope *>();
+
 	selectedCCDIndex = 0;
 	selectedOcularIndex = 0;
 	selectedTelescopeIndex = 0;
+
 	setObjectName("Oculars");
-	telescopes = QList<Telescope *>();
-	useMaxEyepieceAngle = true;
-	visible = false;
+
 	ocularsTableModel = NULL;
 	telescopesTableModel = NULL;
 	ocularDialog = NULL;
@@ -115,8 +119,8 @@ Oculars::Oculars() : selectedOcularIndex(-1), flagShowOculars(false), usageMessa
 
 Oculars::~Oculars()
 {
-	delete CCDsTableModel;
-	CCDsTableModel = NULL;
+	delete ccdsTableModel;
+	ccdsTableModel = NULL;
 	delete ocularsTableModel;
 	ocularsTableModel = NULL;
 	delete telescopesTableModel;
@@ -145,9 +149,6 @@ bool Oculars::configureGui(bool show)
 
 void Oculars::deinit()
 {
-	QSqlDatabase db = QSqlDatabase::database("oculars");
-	db.close();
-	QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection);
 }
 
 //! Draw any parts on the screen which are for our module
@@ -158,9 +159,9 @@ void Oculars::draw(StelCore* core)
 	}
 	if (flagShowOculars){
 		// Insure there is a selected ocular & telescope
-		if (selectedCCDIndex > CCDs.count()) {
+		if (selectedCCDIndex > ccds.count()) {
 			qWarning() << "Oculars: the selected sensor index of " << selectedCCDIndex << " is greater than the sensor count of "
-			<< CCDs.count() << ". Module disabled!";
+			<< ccds.count() << ". Module disabled!";
 			ready = false;
 		}
 		if (selectedOcularIndex > oculars.count()) {
@@ -252,19 +253,28 @@ void Oculars::init()
 	qDebug() << "Ocular plugin - press Command-O to toggle eyepiece view mode. Press ALT-o for configuration.";
 
 	// Load settings from ocular.ini
-	validateIniFile();
-	if (initializeDB()) {
+	try {
+		validateAndLoadIniFile();
 		// assume all is well
 		ready = true;
-		ocularDialog = new OcularDialog(CCDsTableModel, ocularsTableModel, telescopesTableModel);
+		ocularDialog = new OcularDialog(ccdsTableModel, ocularsTableModel, telescopesTableModel);
 		initializeActivationActions();
-	}
-	try {
-		StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
-		QString ocularIniPath = StelFileMgr::findFile("modules/Oculars/", flags) + "ocular.ini";
 
-		QSettings settings(ocularIniPath, QSettings::IniFormat);
-		useMaxEyepieceAngle = settings.value("use_max_exit_circle", 0.0).toBool();
+		QStringList settingGroups = settings->childGroups();
+		QListIterator<QString> settingsGroupIterator(settingGroups);
+		while(settingsGroupIterator.hasNext()) {
+			QString settingsGroup = settingsGroupIterator.next();
+			if (settingsGroup.startsWith("ocular")) {
+				settings->beginGroup(settingsGroup);
+				Ocular *newOcular = new Ocular(settings);
+				oculars.append(newOcular);
+				settings->endGroup();
+			} else if (settingsGroup.startsWith("options")) {
+				settings->beginGroup(settingsGroup);
+				useMaxEyepieceAngle = settings->value("use_max_exit_circle", 0.0).toBool();
+				settings->endGroup();
+			}
+		}
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 	}
@@ -324,10 +334,10 @@ void Oculars::instrumentChanged()
 
 void Oculars::loadCCDs()
 {
-	CCDs.clear();
-	int rowCount = CCDsTableModel->rowCount();
+	ccds.clear();
+	int rowCount = ccdsTableModel->rowCount();
 	for (int row = 0; row < rowCount; row++) {
-		CCDs.append(new CCD(CCDsTableModel->record(row)));
+		ccds.append(new CCD(ccdsTableModel->record(row)));
 	}
 }
 
@@ -336,7 +346,7 @@ void Oculars::loadOculars()
 	oculars.clear();
 	int rowCount = ocularsTableModel->rowCount();
 	for (int row = 0; row < rowCount; row++) {
-		oculars.append(new Ocular(ocularsTableModel->record(row)));
+//		oculars.append(new Ocular(ocularsTableModel->record(row)));
 	}
 }
 
@@ -418,7 +428,7 @@ void Oculars::decrementCCDIndex()
 {
 	selectedCCDIndex--;
 	if (selectedCCDIndex == -1) {
-		selectedCCDIndex = CCDs.count() - 1;
+		selectedCCDIndex = ccds.count() - 1;
 	}
 	emit(selectedCCDChanged());
 }
@@ -444,7 +454,7 @@ void Oculars::decrementTelescopeIndex()
 void Oculars::incrementCCDIndex()
 {
 	selectedCCDIndex++;
-	if (selectedCCDIndex == CCDs.count()) {
+	if (selectedCCDIndex == ccds.count()) {
 		selectedCCDIndex = 0;
 	}
 	emit(selectedCCDChanged());
@@ -616,59 +626,6 @@ void Oculars::initializeActions()
 	connect(ocularDialog, SIGNAL(scaleImageCircleChanged(bool)), this, SLOT(setScaleImageCircle(bool)));
 }
 
-// Return true if we're ready (could read all required data), false otherwise
-bool Oculars::initializeDB()
-{
-	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
-	QString dbPath = StelFileMgr::findFile("modules/Oculars/", flags);
-	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "oculars");
-	db.setDatabaseName(dbPath + "oculars.sqlite");
-	if (db.open()) {
-#define EXEC(sql) if (!query.exec(sql)) { qDebug() << query.lastError(); return false;}
-		qDebug() << "Oculars opened the DB successfully.";
-		// See if the tables alreadt exist.
-		QStringList tableList = db.tables();
-		if (!tableList.contains("oculars")) {
-			QSqlQuery query = QSqlQuery(db);
-			EXEC("create table oculars (id INTEGER PRIMARY KEY, name VARCHAR, afov FLOAT, efl FLOAT, fieldStop FLOAT)");
-			EXEC("INSERT INTO oculars (name, afov, efl, fieldStop) VALUES ('one', 43, 40, 0)");
-			EXEC("INSERT INTO oculars (name, afov, efl, fieldStop) VALUES ('two', 82, 31, 0)");
-			EXEC("INSERT INTO oculars (name, afov, efl, fieldStop) VALUES ('three', 52, 10.5, 0)");
-			EXEC("INSERT INTO oculars (name, afov, efl, fieldStop) VALUES ('four', 52, 26, 0)");
-			EXEC("INSERT INTO oculars (name, afov, efl, fieldStop) VALUES ('five', 82, 20, 0)");
-		}
-		if (!tableList.contains("telescopes")) {
-			QSqlQuery query = QSqlQuery(db);
-			EXEC("create table telescopes (id INTEGER PRIMARY KEY, name VARCHAR, focalLength FLOAT, diameter FLOAT, vFlip VARCHAR, hFlip VARCHAR)");
-			EXEC("INSERT INTO telescopes (name, focalLength, diameter, vFlip, hFlip) VALUES ('C1400', 3190, 355.6, 'false', 'true')");
-			EXEC("INSERT INTO telescopes (name, focalLength, diameter, vFlip, hFlip) VALUES ('80EDF', 500, 80, 'false', 'false')");
-		}
-		if (!tableList.contains("ccd")) {
-			QSqlQuery query = QSqlQuery(db);
-			EXEC("create table ccd (id INTEGER PRIMARY KEY, name VARCHAR, resolution_x INTEGER, resolution_y INTEGER, chip_width FLOAT, chip_height FLOAT, pixel_width FLOAT, pixel_height FLOAT)");
-			EXEC("INSERT INTO ccd (name, resolution_x, resolution_y, chip_width, chip_height, pixel_width, pixel_height) VALUES ('None', 0, 0, 0, 0, 0, 0)");
-			EXEC("INSERT INTO ccd (name, resolution_x, resolution_y, chip_width, chip_height, pixel_width, pixel_height) VALUES ('EOS 450D', 4272, 2848, 22.2, 14.8, 5.2, 5.2)");
-		}
-
-		// Set the table models
-		CCDsTableModel = new QSqlTableModel(0, db);
-		CCDsTableModel->setTable("ccd");
-		CCDsTableModel->select();
-		ocularsTableModel = new QSqlTableModel(0, db);
-		ocularsTableModel->setTable("oculars");
-		if (!ocularsTableModel->select())
-			return false;
-		telescopesTableModel = new QSqlTableModel(0, db);
-		telescopesTableModel->setTable("telescopes");
-		if (!telescopesTableModel->select())
-			return false;
-#undef EXEC
-		return true;
-	} else {
-		qDebug() << "Oculars could not open its database; disabling module.";
-	}
-	return false;
-}
 
 void Oculars::interceptMovementKey(QKeyEvent* event)
 {
@@ -783,9 +740,9 @@ void Oculars::loadDatabaseObjects()
 		ready = false;
 		qWarning() << "WARNING: no telescopes found.  Ocular will be disabled.";
 	}
-	else if (oculars.size() == 0 && CCDs.size() == 0) {
+	else if (oculars.size() == 0 && ccds.size() == 0) {
 		ready = false;
-		qWarning() << "WARNING: no oculars or CCDs found.  Ocular will be disabled.";
+		qWarning() << "WARNING: no oculars or ccds found.  Ocular will be disabled.";
 	}
 	else
 	{
@@ -819,7 +776,7 @@ void Oculars::paintMask()
 	gluDisk(quadric, inner - 1.0, inner, 256, 1);
 	gluDeleteQuadric(quadric);
 	// draw sensor rectangle
-	CCD *ccd = CCDs[selectedCCDIndex];
+	CCD *ccd = ccds[selectedCCDIndex];
 	if (ccd) {
 		glColor4f(0.77, 0.14, 0.16, 0.5);
 		Ocular *ocular = oculars[selectedOcularIndex];
@@ -843,7 +800,7 @@ void Oculars::paintText(const StelCore* core)
 	StelPainter painter(prj);	
 
 	// Get the current instruments
-	CCD *ccd = CCDs[selectedCCDIndex];
+	CCD *ccd = ccds[selectedCCDIndex];
 	Ocular *ocular = oculars[selectedOcularIndex];
 	Telescope *telescope = telescopes[selectedTelescopeIndex];
 
@@ -865,16 +822,16 @@ void Oculars::paintText(const StelCore* core)
 	const int lineHeight = painter.getFontMetrics().height();
 	
 	// The CCD
-	QString ccdSensorLabel, ccdInfoLabel;
+	QString ccdsensorLabel, ccdInfoLabel;
 	if (ccd && ccd->getChipWidth() > .0 && ccd->getChipHeight() > .0) {
 		ccdInfoLabel = "Dimension : " + QVariant(ccd->getChipWidth()).toString() + "x" + QVariant(ccd->getChipHeight()).toString() + " mm";
 		if (ccd->getName() != QString("")) {
-			ccdSensorLabel = "Sensor #" + QVariant(selectedCCDIndex).toString();
-			ccdSensorLabel.append(" : ").append(ccd->getName());
+			ccdsensorLabel = "Sensor #" + QVariant(selectedCCDIndex).toString();
+			ccdsensorLabel.append(" : ").append(ccd->getName());
 		}
 	}
-	if (ccdSensorLabel != QString("")) {
-		painter.drawText(xPosition, yPosition, ccdSensorLabel);
+	if (ccdsensorLabel != QString("")) {
+		painter.drawText(xPosition, yPosition, ccdsensorLabel);
 		yPosition-=lineHeight;
 		painter.drawText(xPosition, yPosition, ccdInfoLabel);
 		yPosition-=lineHeight;
@@ -913,11 +870,10 @@ void Oculars::paintText(const StelCore* core)
 	painter.drawText(xPosition, yPosition, fovLabel);
 }
 
-void Oculars::validateIniFile()
+void Oculars::validateAndLoadIniFile()
 {
 	// Insure the module directory exists
 	StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Oculars");
-
 	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
 	QString ocularIniPath = StelFileMgr::findFile("modules/Oculars/", flags) + "ocular.ini";
 
@@ -925,7 +881,8 @@ void Oculars::validateIniFile()
 	if(!QFileInfo(ocularIniPath).exists()) {
 		QFile src(":/ocular/default_ocular.ini");
 		if (!src.copy(ocularIniPath)) {
-			qWarning() << "Oculars::validateIniFile cannot copy default_ocular.ini resource to [non-existing] " + ocularIniPath;
+			qWarning() << "Oculars::validateIniFile cannot copy default_ocular.ini resource to [non-existing] "
+					+ ocularIniPath;
 		} else {
 			qDebug() << "Oculars::validateIniFile copied default_ocular.ini to " << ocularIniPath;
 			// The resource is read only, and the new file inherits this, so set write-able.
@@ -948,12 +905,15 @@ void Oculars::validateIniFile()
 			// Rename the old one, and copy over a new one
 			QFile oldFile(ocularIniPath);
 			if (!oldFile.rename(ocularIniPath + ".old")) {
-				qWarning() << "Oculars::validateIniFile cannot move ocular.ini resource to ocular.ini.old at path  " + ocularIniPath;
+				qWarning() << "Oculars::validateIniFile cannot move ocular.ini resource to ocular.ini.old at path  "
+						+ ocularIniPath;
 			} else {
-				qWarning() << "Oculars::validateIniFile ocular.ini resource renamed to ocular.ini.old at path  " + ocularIniPath;
+				qWarning() << "Oculars::validateIniFile ocular.ini resource renamed to ocular.ini.old at path  "
+						+ ocularIniPath;
 				QFile src(":/ocular/default_ocular.ini");
 				if (!src.copy(ocularIniPath)) {
-					qWarning() << "Oculars::validateIniFile cannot copy default_ocular.ini resource to [non-existing] " + ocularIniPath;
+					qWarning() << "Oculars::validateIniFile cannot copy default_ocular.ini resource to [non-existing] "
+							+ ocularIniPath;
 				} else {
 					qDebug() << "Oculars::validateIniFile copied default_ocular.ini to " << ocularIniPath;
 					// The resource is read only, and the new file inherits this...  make sure the new file
@@ -964,6 +924,7 @@ void Oculars::validateIniFile()
 			}
 		}
 	}
+	settings = new QSettings(ocularIniPath, QSettings::IniFormat, this);
 }
 
 void Oculars::unzoomOcular()
