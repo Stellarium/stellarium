@@ -27,6 +27,7 @@
 #include "Telescope.hpp"
 
 #include <QFont>
+#include <QSettings>
 
 #define MIN_OCULARS_INI_VERSION 0.12
 
@@ -35,6 +36,7 @@ class QSqlTableModel;
 class QKeyEvent;
 class QMouseEvent;
 class QPixmap;
+class QSettings;
 class QSqlQuery;
 QT_END_NAMESPACE
 
@@ -101,10 +103,6 @@ private:
 	//! Renders the three Telrad circles, but only if not in ocular mode.
 	void drawTelrad();
 
-	//! Insures that each required table exists in the database, as well as instantiate the table models.
-	//! @return true if the DB was correctly initialized, false if it was not.
-	bool initializeDB();
-	
 	//! Set up the Qt actions needed to activate the plugin.
 	void initializeActivationActions();
 	
@@ -133,7 +131,8 @@ private:
 	//! ends.  However, if one does exist, it opens it, and looks for the oculars_version key.  The value (or even
 	//! presence) is used to determine if the ini file is usable.  If not, it is renamed, and a new one copied over.
 	//! It does not ty to cope values over.
-	void validateIniFile();
+	//! Once there is a valid ini file, it is loaded into the settings attribute.
+	void validateAndLoadIniFile();
 
 	//! Recordd the state of the GridLinesMgr views beforehand, so that it can be reset afterwords.
 	//! @param rezoom if true, this zoom operation is starting from an already zoomed state.
@@ -143,8 +142,10 @@ private:
 	//! This method is called by the zoom() method, when this plugin is toggled on; it resets the zoomed view.
 	void zoomOcular();
 
+	QSettings *settings; //!< The settings as read in from the ini file.
+
 	//! A list of all the oculars defined in the ini file.  Must have at least one, or module will not run.
-	QList<CCD *> CCDs;
+	QList<CCD *> ccds;
 	QList<Ocular *> oculars;
 	QList<Telescope *> telescopes;
 	int selectedCCDIndex;
@@ -179,7 +180,7 @@ private:
 	bool ready; //!< A flag that determines that this module is usable.  If false, we won't open.
 	bool newInstrument; //!< true the first time draw is called for a new ocular or telescope, false otherwise.
 
-	QSqlTableModel *CCDsTableModel;
+	QSqlTableModel *ccdsTableModel;
 	QSqlTableModel *ocularsTableModel;
 	QSqlTableModel *telescopesTableModel;
 

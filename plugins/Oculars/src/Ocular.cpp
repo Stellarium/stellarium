@@ -22,13 +22,20 @@
 #include <QDebug>
 #include <QSettings>
 
-Ocular::Ocular(QSqlRecord record)
+Ocular::Ocular(QSettings* settings)
 {
-	ocularID = record.value("id").toInt();
-	name = record.value("name").toString();
-	appearentFOV = record.value("afov").toDouble();
-	effectiveFocalLength = record.value("efl").toDouble();
-	fieldStop = record.value("fieldStop").toDouble();
+	ocularID = settings->value("id", "0").toInt();
+	name = settings->value("name", "").toString();
+	appearentFOV = settings->value("afov", "0.0").toDouble();
+	effectiveFocalLength = settings->value("efl", "0.0").toDouble();
+	fieldStop = settings->value("fieldStop", "0.0").toDouble();
+	if (!(appearentFOV > 0.0 && effectiveFocalLength > 0.0))
+	{
+		qWarning() << "WARNING: Invalid data for ocular. Ocular values must be positive. \n"
+			<< "\tafov: " << appearentFOV << "\n"
+			<< "\tefl: " << effectiveFocalLength << "\n"
+			<< "\tThis ocular will be ignored.";
+	}
 }
 
 Ocular::~Ocular()
