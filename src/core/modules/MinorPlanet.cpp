@@ -172,13 +172,16 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 			oss << provisionalDesignationHtml;
 		else
 			oss << q_(englishName);  // UI translation can differ from sky translation
-		if (!nameIsProvisionalDesignation && !provisionalDesignationHtml.isEmpty())
-			oss << QString(" = %1 ").arg(provisionalDesignationHtml);
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
 		if (sphereScale != 1.f)
 			oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
 		oss << "</h2>";
+		if (!nameIsProvisionalDesignation && !provisionalDesignationHtml.isEmpty())
+		{
+			oss << QString(q_("Provisional designation: %1")).arg(provisionalDesignationHtml);
+			oss << "<br>";
+		}
 	}
 
 	if (flags&Magnitude)
