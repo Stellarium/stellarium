@@ -41,8 +41,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 						 void* auserDataPtr,
 						 OsulatingFunctType *osculatingFunc,
 						 bool acloseOrbit,
-						 bool hidden,
-						 bool hasAtmosphere)
+						 bool hidden)
 						: Planet (englishName,
 								  flagLighting,
 								  radius,
@@ -209,7 +208,6 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 float MinorPlanet::getVMagnitude(const StelNavigator *nav) const
 {
-	//TODO:
 	//Calculate phase angle
 	//(Code copied from Planet::getVMagnitude())
 	//(LOL, this is actually vector substraction + the cosine theorem :))

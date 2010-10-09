@@ -36,8 +36,7 @@ public:
 	       void* userDataPtr,
 	       OsulatingFunctType *osculatingFunc,
 	       bool closeOrbit,
-	       bool hidden,
-	       bool hasAtmosphere); //TODO: Remove this one :)
+	       bool hidden); //TODO: Remove this one :)
 
 	~MinorPlanet();
 
