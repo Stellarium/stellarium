@@ -35,6 +35,11 @@ class ImportWindow : public StelDialog
 {
 	Q_OBJECT
 public:
+	enum ImportType {
+	                 MpcComets,
+	                 MpcMinorPlanets
+	                 };
+
 	ImportWindow();
 	virtual ~ImportWindow();
 	void languageChanged();
@@ -47,9 +52,18 @@ private slots:
 	void selectFile();
 	void bookmarkSelected(QString);
 
+	void switchImportType(bool checked);
+
 private:
 	CAImporter * ssoManager;
 	QList<CAImporter::SsoElements> candidateObjects;
+
+	ImportType importMode;
+
+	//! wrapper for the single object function to allow multiple formats.
+	CAImporter::SsoElements readElementsFromString(QString elements);
+	//! wrapper for the file function to allow multiple formats
+	QList<CAImporter::SsoElements> readElementsFromFile(QString filePath);
 
 	void populateCandidateObjects(QList<CAImporter::SsoElements>);
 

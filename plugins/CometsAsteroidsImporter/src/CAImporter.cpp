@@ -113,7 +113,7 @@ bool CAImporter::configureGui(bool show)
 {
 	if(show)
 	{
-		//mainWindow->setVisible(true);
+		mainWindow->setVisible(true);
 
 		if (cloneSolarSystemConfigurationFile())
 		{
@@ -139,12 +139,12 @@ bool CAImporter::configureGui(bool show)
 
 			//Import a list of asteroids. The file is from
 			//http://www.minorplanetcenter.org/iau/Ephemerides/Bright/2010/Soft00Bright.txt
-			QList<SsoElements> objectList = readMpcOneLineMinorPlanetElementsFromFile(StelFileMgr::getDesktopDir() + "/Soft00Bright.txt");
+			/*QList<SsoElements> objectList = readMpcOneLineMinorPlanetElementsFromFile(StelFileMgr::getDesktopDir() + "/Soft00Bright.txt");
 			if (!appendToSolarSystemConfigurationFile(objectList))
-				return true;
+				return true;*/
 
 			//Destroy and re-create the Solal System
-			GETSTELMODULE(SolarSystem)->reloadPlanets();
+			//GETSTELMODULE(SolarSystem)->reloadPlanets();
 		}
 	}
 	return true;

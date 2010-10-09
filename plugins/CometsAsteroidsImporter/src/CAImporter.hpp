@@ -139,6 +139,8 @@ public:
 	//! Invalid entries in the list (that don't contain a value for
 	//! "section_name" or it is an empty string) are skipped and the processing
 	//! continues from the next entry.
+	//! \todo Protect the default Solar System configuration?
+	//! \todo At least warn when overwriting old entries?
 	bool appendToSolarSystemConfigurationFile(QList<SsoElements>);
 	
 public slots:
