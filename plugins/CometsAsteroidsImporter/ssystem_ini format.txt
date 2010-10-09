@@ -1,0 +1,76 @@
+Orbital elements:
+Elliptic orbit (ell_orbit):
+1.	orbit_Epoch (default: J2000)
+2.	orbit_Eccentricity
+3.
+	orbit_PericenterDistance
+	or
+	orbit_SemiMajorAxis
+4.
+	orbit_MeanMotion
+	or
+	orbit_Period
+	or
+	skip both
+5.	orbit_Inclination
+6.	orbit_AscendingNod
+7.
+	orbit_ArgOfPericenter
+	or
+	orbit_LongOfPericenter
+8.
+	orbit_MeanAnomaly
+	or
+	orbit_MeanLongitude
+	
+Comet orbit (comet_orbit):
+1.	orbit_Eccentricity
+2.
+	orbit_PericenterDistance
+	or
+	orbit_SemiMajorAxis
+3.	
+	orbit_MeanMotion (degrees/day)
+	or
+	orbit_Period (days ???)
+	or
+	skip both if the parent is the Sun
+4.
+	orbit_TimeAtPericenter (JD)
+	or
+	(orbit_Epoch (JD)
+	and
+	orbit_MeanAnomaly (degrees))
+5.	orbit_Inclination (degrees)
+6.	orbit_ArgOfPericenter (degrees)
+7.	orbit_AscendingNode (degrees)
+
+Planet properties:
+*	parent
+*	lighting (bool)
+*	radius
+*	oblateness (default: 0.)
+*	color (RGB, decimal fractions of 1)
+*	albedo
+*	tex_map (filename)
+*	hidden (bool, default: 0 ???)
+*	atmosphere (bool, default: false)
+
+Rotation elements:
+*	rot_obliquity (d: 0.)
+*	rot_equator_ascending_node (d: 0.)
+*	rot_pole_ra (default: 0.)
+	and/or
+	rot_pole_de (default: 0.)
+	(if any of these are !=0, rot_obliquity and rot_equator_ascending_node are
+	recalculated)
+*	rot_periode (default: orbit_Period (default: 24.) / 24., i.e. default: 1.)
+*	rot_rotation_offset (default: 0.)
+*	rot_epoch (default: J2000)
+*	rot_precession_rate (default: 0.)
+*	orbit_visualization_period (default: 0.)
+
+Rings (if any):
+*	ring_inner_size (internally: in AU)
+*	ring_outer_size (ditto)
+*	tex_ring (filename)
