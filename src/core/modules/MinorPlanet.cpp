@@ -252,8 +252,8 @@ QString MinorPlanet::renderProvisionalDesignationinHtml(QString plainTextName)
 	}
 	else
 	{
-		qDebug() << "renderProvisionalDesignationinHtml():" << plainTextName
-		         << "is not a provisional designation in plain text.";
+		//qDebug() << "renderProvisionalDesignationinHtml():" << plainTextName
+		//         << "is not a provisional designation in plain text.";
 		return QString();
 	}
 }
