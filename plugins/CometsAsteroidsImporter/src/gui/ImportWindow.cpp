@@ -177,16 +177,33 @@ void ImportWindow::populateCandidateObjects(QList<CAImporter::SsoElements> objec
 {
 	candidateObjects.clear();
 
+	//Get a list of the current objects
+	//TODO: Find a way to do the same for the section names/identifiers,
+	//as they are used in duplicate detection.
+	QStringList existingObjects = GETSTELMODULE(SolarSystem)->getAllPlanetEnglishNames();
+
 	QListWidget * list = ui->listWidgetObjects;
 	list->clear();
 	foreach (CAImporter::SsoElements object, objects)
 	{
-		if (object.contains("name") && !object.value("name").toString().isEmpty())
+		if (object.contains("name"))
 		{
-			QListWidgetItem * item = new QListWidgetItem(list);
-			item->setText(object.value("name").toString());
-			item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-			item->setCheckState(Qt::Unchecked);
+			QString name = object.value("name").toString();
+			if (!name.isEmpty())
+			{
+				QListWidgetItem * item = new QListWidgetItem(list);
+				item->setText(name);
+				item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+				item->setCheckState(Qt::Unchecked);
+				if (existingObjects.contains(name))
+				{
+					//Mark as duplicate
+					//item->setForeground(QBrush(Qt::darkRed));//Doesn't work in night mode
+					QFont itemFont(item->font());
+					itemFont.setBold(true);
+					item->setFont(itemFont);
+				}
+			}
 
 			candidateObjects << object;
 		}
