@@ -58,7 +58,7 @@ private:
 	CAImporter * ssoManager;
 	QList<CAImporter::SsoElements> candidateObjects;
 
-	ImportType importMode;
+	ImportType importType;
 
 	//! wrapper for the single object function to allow multiple formats.
 	CAImporter::SsoElements readElementsFromString(QString elements);
