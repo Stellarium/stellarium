@@ -105,6 +105,15 @@ public:
 	//! readMpcOneLineCometElements() is used internally to parse each line.
 	QList<SsoElements> readMpcOneLineCometElementsFromFile (QString filePath);
 
+	//! Reads a list of minor planet orbital elements from a file.
+	//! This function reads a list of minor planets orbital elements in MPC's
+	//! one-line format from a file (one comet per line) and converts it to
+	//! a list of hashes in Stellarium's ssystem.ini format.
+	//! Example source file is the list of bright asteroids on the MPC's site:
+	//! http://www.minorplanetcenter.org/iau/Ephemerides/Bright/2010/Soft00Bright.txt
+	//! readMpcOneLineMinorPlanetElements() is used internally to parse each line.
+	QList<SsoElements> readMpcOneLineMinorPlanetElementsFromFile (QString filePath);
+
 	//! Adds a new entry at the end of the user solar system configuration file.
 	//! This function writes directly to the file. See the note on why QSettings
 	//! was not used in the description of
