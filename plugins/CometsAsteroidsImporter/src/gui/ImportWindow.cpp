@@ -63,9 +63,15 @@ void ImportWindow::createDialogContent()
 	connect(ui->radioButtonFile, SIGNAL(toggled(bool)), ui->frameFile, SLOT(setVisible(bool)));
 	connect(ui->radioButtonURL, SIGNAL(toggled(bool)), ui->frameURL, SLOT(setVisible(bool)));
 
+	connect(ui->radioButtonAsteroids, SIGNAL(toggled(bool)), this, SLOT(switchImportType(bool)));
+	connect(ui->radioButtonComets, SIGNAL(toggled(bool)), this, SLOT(switchImportType(bool)));
+
 	ui->radioButtonSingle->setChecked(true);
 	ui->frameFile->setVisible(false);
 	ui->frameURL->setVisible(false);
+
+	//This box will be displayed when one of the source types is selected
+	ui->groupBoxSource->setVisible(false);
 }
 
 void ImportWindow::languageChanged()
@@ -84,7 +90,7 @@ void ImportWindow::parseElements()
 		if (oneLine.isEmpty())
 			return;
 
-		CAImporter::SsoElements object = ssoManager->readMpcOneLineCometElements(oneLine);
+		CAImporter::SsoElements object = readElementsFromString(oneLine);
 
 		if (object.isEmpty())
 			return;
@@ -100,7 +106,7 @@ void ImportWindow::parseElements()
 		if (filePath.isEmpty())
 			return;
 
-		QList<CAImporter::SsoElements> objects = ssoManager->readMpcOneLineCometElementsFromFile(filePath);
+		QList<CAImporter::SsoElements> objects = readElementsFromFile(filePath);
 		if (objects.isEmpty())
 			return;
 
@@ -189,4 +195,54 @@ void ImportWindow::populateCandidateObjects(QList<CAImporter::SsoElements> objec
 	//Select the first item
 	if (list->count() > 0)
 		list->setCurrentRow(0);
+}
+
+CAImporter::SsoElements ImportWindow::readElementsFromString (QString elements)
+{
+	Q_ASSERT(ssoManager);
+
+	switch (importMode)
+	{
+	case MpcComets:
+		return ssoManager->readMpcOneLineCometElements(elements);
+	case MpcMinorPlanets:
+	default:
+		return ssoManager->readMpcOneLineMinorPlanetElements(elements);
+	}
+}
+
+QList<CAImporter::SsoElements> ImportWindow::readElementsFromFile(QString filePath)
+{
+	Q_ASSERT(ssoManager);
+
+	switch (importMode)
+	{
+	case MpcComets:
+		return ssoManager->readMpcOneLineCometElementsFromFile(filePath);
+	case MpcMinorPlanets:
+	default:
+		return ssoManager->readMpcOneLineMinorPlanetElementsFromFile(filePath);
+	}
+}
+
+void ImportWindow::switchImportType(bool checked)
+{
+	if (ui->radioButtonAsteroids->isChecked())
+	{
+		importMode = MpcMinorPlanets;
+		//TODO: Update bookmark list
+	}
+	else
+	{
+		importMode = MpcComets;
+		//TODO: Update bookmark list
+	}
+
+	//Clear the fields
+	ui->lineEditSingle->clear();
+	ui->lineEditFilePath->clear();
+	ui->lineEditURL->clear();
+
+	//If one of the options is selected, show the rest of the dialog
+	ui->groupBoxSource->setVisible(true);
 }
