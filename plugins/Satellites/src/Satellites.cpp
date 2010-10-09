@@ -532,12 +532,12 @@ void Satellites::updateTLEs(void)
 {
 	if (updateState==Satellites::Updating)
 	{
-		qWarning() << "Satellites: already updating...  will not start again current update is complete.";
+		qWarning() << "Satellites::updateTLEs already updating...  will not start again current update is complete";
 		return;
 	}
 	else
 	{
-		qDebug() << "Satellites: starting update...";
+		qDebug() << "Satellites::updateTLEs starting update";
 	}
 
 	lastUpdate = QDateTime::currentDateTime();
@@ -546,7 +546,7 @@ void Satellites::updateTLEs(void)
 
 	if (updateUrls.size() == 0)
 	{
-		qWarning() << "Satellites::updateTLEs no update URLs are defined... nothing to do.";
+		qWarning() << "Satellites::updateTLEs no update URLs are defined... nothing to do";
 		emit(TleUpdateComplete(0));
 		return;
 	}
@@ -646,7 +646,7 @@ void Satellites::updateFromFiles(void)
 						newTLE[thisSatId] = tleLines;
 					}
 					thisSatId = line;
-					thisSatId.replace(QRegExp("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove things in square brackets
+					thisSatId.replace(QRegExp("\\[[^\\]]*\\]\\s*$"),"");  // remove things in square brackets
 					tleLines.first = QString();
 					tleLines.second = QString();
 				}
@@ -657,7 +657,7 @@ void Satellites::updateFromFiles(void)
 					else if (QRegExp("^2 .*").exactMatch(line))
 						tleLines.second = line;
 					else
-						qDebug() << "Satellites::updateFromFiles(): unprocessed line " << lineNumber <<  " in file " << tleFilePath;
+						qDebug() << "Satellites::updateFromFiles unprocessed line " << lineNumber <<  " in file " << tleFilePath;
 				}
 			}
 			if (thisSatId!="" && !tleLines.first.isEmpty() && !tleLines.second.isEmpty())
@@ -676,7 +676,7 @@ void Satellites::updateFromFiles(void)
 	QVariantMap map;
 	if (!satelliteJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Satellites::updateFromFiles() cannot open for reading " << satellitesJsonPath;
+		qWarning() << "Satellites::updateFromFiles cannot open for reading " << satellitesJsonPath;
 	}
 	else
 	{
@@ -711,19 +711,9 @@ void Satellites::updateFromFiles(void)
 				strncpy(sat->elements[1], qPrintable(newTLE[sat->designation].first), 80);
 				strncpy(sat->elements[2], qPrintable(newTLE[sat->designation].second), 80);
 				numUpdated++;
-				qDebug() << "Satellites: updated orbital elements for" << sat->designation;
+				qDebug() << "updated orbital elements for: " << sat->designation;
 				sats[sat->designation] = satMap;
 			}
-		}
-		else
-		{
-			qWarning() << "Satellites: could not update orbital elements for" << sat->designation <<": no entry found in the source TLE lists.";
-			//TODO: Somehow mark the satellite as "not up-to-date"
-			//Meanwhile, make sure that it doesn't confuse people:
-			//qWarning() << "Satellites: set 'visible' flag to false for" << sat->designation;
-			//sat->visible = false;
-			//Sorry, bad idea: this will hide user-defined sats that are not
-			//in the source lists on every update. --Bogdan Marinov
 		}
 	}
 	map["satellites"] = sats;
@@ -733,11 +723,11 @@ void Satellites::updateFromFiles(void)
 		satelliteJsonFile.remove();
 		if (!satelliteJsonFile.open(QIODevice::WriteOnly))
 		{
-			qWarning() << "Satellites::updateFromFiles() cannot open for writing " << satellitesJsonPath;
+			qWarning() << "Satellites::updateFromFiles cannot open for writing " << satellitesJsonPath;
 		}
 		else
 		{
-			qDebug() << "Satellites::updateFromFiles() writing updated JSON file.";
+			qDebug() << "Satellites::updateFromFiles Writing updated JSON file";
 			parser.write(map, &satelliteJsonFile);
 			satelliteJsonFile.close();
 		}
@@ -746,7 +736,7 @@ void Satellites::updateFromFiles(void)
 	delete progressBar;
 	progressBar = NULL;
 
-	qDebug() << "Satellites: updated orbital elements for" << numUpdated << "of total" << sats.size() <<"satellites in the plug-in's database." << newTLE.size() << "satellites are available in the TLE source lists.";
+	qDebug() << "Satellites::updateFromFiles updated orbital elements for " << numUpdated << " satellites";
 	if (numUpdated==0)
 		updateState = CompleteNoUpdates;
 	else
