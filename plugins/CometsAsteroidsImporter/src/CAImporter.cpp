@@ -30,12 +30,14 @@
 #include "StelModuleMgr.hpp"
 #include "SolarSystem.hpp"
 
+#include <QDate>
 #include <QDebug>
 #include <QDir>
 #include <QFile>
 #include <QSettings>
 #include <QString>
 
+#include <cmath>
 #include <stdexcept>
 
 
@@ -111,7 +113,7 @@ bool CAImporter::configureGui(bool show)
 {
 	if(show)
 	{
-		mainWindow->setVisible(true);
+		//mainWindow->setVisible(true);
 
 		if (cloneSolarSystemConfigurationFile())
 		{
@@ -128,6 +130,11 @@ bool CAImporter::configureGui(bool show)
 			if (!appendToSolarSystemConfigurationFile(objectList))
 				return true;
 			*/
+
+			//Import Cruithne
+			SsoElements asteroid = readMpcOneLineMinorPlanetElements("03753   15.6   0.15 K107N 205.95453   43.77037  126.27658   19.80793  0.5149179  0.98898552   0.9977217  3 MPO183459   488  28 1973-2010 0.58 M-h 3Eh MPC        0000           (3753) Cruithne   20100822");
+			if (!appendToSolarSystemConfigurationFile(asteroid))
+				return true;
 
 			//Destroy and re-create the Solal System
 			GETSTELMODULE(SolarSystem)->reloadPlanets();
@@ -226,11 +233,13 @@ CAImporter::SsoElements CAImporter::readMpcOneLineCometElements(QString oneLineE
 
 	QString name = mpcParser.cap(17).trimmed();
 	QString sectionName(name);
+	//TODO: Should I remove all non-alphanumeric, or only the obviously problematic?
 	sectionName.remove('\\');
 	sectionName.remove('/');
 	sectionName.remove('#');
 	sectionName.remove(' ');
 	sectionName.remove('-');
+	sectionName = sectionName.toLower();
 
 	if (mpcParser.cap(1).isEmpty() && mpcParser.cap(3).isEmpty())
 	{
@@ -294,6 +303,189 @@ CAImporter::SsoElements CAImporter::readMpcOneLineCometElements(QString oneLineE
 	return result;
 }
 
+CAImporter::SsoElements CAImporter::readMpcOneLineMinorPlanetElements(QString oneLineElements)
+{
+	SsoElements result;
+
+	//This time I'll try splitting the line to columns, instead of
+	//using a regular expression.
+	//Using QString::mid() allows parsing it in a random sequence.
+
+	//Length validation
+	if (oneLineElements.isEmpty() ||
+	    oneLineElements.length() > 202 ||
+	    oneLineElements.length() < 152) //The column ends at 160, but is left-aligned
+	{
+		return result;
+	}
+
+	QString column;
+	bool ok = false;
+	//bool isLongForm = (oneLineElements.length() > 160) ? true : false;
+
+	//Minor planet number or provisional designation
+	column = oneLineElements.mid(0, 7).trimmed();
+	if (column.isEmpty())
+	{
+		return result;
+	}
+	int minorPlanetNumber = 0;
+	QString provisionalDesignation;
+	QString name;
+	if (column.toInt(&ok) || ok)
+	{
+		minorPlanetNumber = column.toInt();
+	}
+	else
+	{
+		provisionalDesignation = unpackMinorPlanetProvisionalDesignation(column);
+	}
+
+	if (minorPlanetNumber)
+	{
+		name = QString::number(minorPlanetNumber);
+	}
+	else if(provisionalDesignation.isEmpty())
+	{
+		qDebug() << "readMpcOneLineMinorPlanetElements():"
+		         << column
+		         << "is not a valid number or packed provisional designation";
+		return SsoElements();
+	}
+	else
+	{
+		name = provisionalDesignation;
+	}
+
+	//In case the longer format is used, extract the human-readable name
+	column = oneLineElements.mid(166, 28).trimmed();
+	if (!column.isEmpty())
+	{
+		if (minorPlanetNumber)
+		{
+			QRegExp asteroidName("^\\((\\d+)\\)\\s+(\\w+)$");
+			if (asteroidName.indexIn(column) == 0)
+			{
+				name = asteroidName.cap(2);
+				result.insert("minor_planet_number", minorPlanetNumber);
+			}
+			else
+			{
+				//Use the whole string, just in case
+				name = column;
+			}
+		}
+		//In the other case, the name is already the provisional designation
+	}
+
+	result.insert("name", name);
+
+	//Section name
+	QString sectionName(name);
+	//TODO: Should I remove all non-alphanumeric, or only the obviously problematic?
+	sectionName.remove('\\');
+	sectionName.remove('/');
+	sectionName.remove('#');
+	sectionName.remove(' ');
+	sectionName.remove('-');
+	sectionName = sectionName.toLower();
+	//TODO: Check if something remained in the name
+	result.insert("section_name", sectionName);
+
+	//After a name has been determined, insert the essential keys
+	result.insert("parent", "Sun");
+	result.insert("coord_func","comet_orbit");
+	result.insert("type", "asteroid");
+
+	result.insert("lighting", false);
+	result.insert("color", "1.0, 1.0, 1.0");
+	result.insert("tex_map", "nomap.png");
+
+	//Magnitude and slope parameter
+	column = oneLineElements.mid(8,5).trimmed();
+	double absoluteMagnitude = column.toDouble(&ok);
+	//TODO: Validation
+	column = oneLineElements.mid(14,5).trimmed();
+	double slopeParameter = column.toDouble(&ok);
+	//TODO: Validation
+	result.insert("absolute_magnitude", absoluteMagnitude);
+	result.insert("slope_parameter", slopeParameter);
+
+	//Orbital parameters
+	column = oneLineElements.mid(37, 9).trimmed();
+	double argumentOfPerihelion = column.toDouble(&ok);//J2000.0, degrees
+	//TODO: Validation
+	result.insert("orbit_ArgOfPericenter", argumentOfPerihelion);
+
+	column = oneLineElements.mid(48, 9).trimmed();
+	double longitudeOfTheAscendingNode = column.toDouble(&ok);//J2000.0, degrees
+	//TODO: Validation
+	result.insert("orbit_AscendingNode", longitudeOfTheAscendingNode);
+
+	column = oneLineElements.mid(59, 9).trimmed();
+	double inclination = column.toDouble(&ok);//J2000.0, degrees
+	//TODO: Validation
+	result.insert("orbit_Inclination", inclination);
+
+	column = oneLineElements.mid(70, 9).trimmed();
+	double eccentricity = column.toDouble(&ok);//degrees
+	//TODO: Validation
+	result.insert("orbit_Eccentricity", eccentricity);
+
+	column = oneLineElements.mid(80, 11).trimmed();
+	double meanDailyMotion = column.toDouble(&ok);//degrees per day
+	//TODO: Validation
+	result.insert("orbit_MeanMotion", meanDailyMotion);
+
+	column = oneLineElements.mid(92, 11).trimmed();
+	double semiMajorAxis = column.toDouble(&ok);
+	//TODO: Validation
+	result.insert("orbit_SemiMajorAxis", semiMajorAxis);
+
+	column = oneLineElements.mid(20, 5).trimmed();//Epoch, in packed form
+	QRegExp packedDateFormat("^([IJK])(\\d\\d)([1-9A-V])([1-9A-V])$");
+	if (packedDateFormat.indexIn(column) != 0)
+	{
+		qDebug() << "readMpcOneLineMinorPlanetElements():"
+		         << column << "is not a date in packed format";
+		return SsoElements();
+	}
+	int year = packedDateFormat.cap(2).toInt();
+	switch (packedDateFormat.cap(1).at(0).toAscii())
+	{
+		case 'I':
+			year += 1800;
+			break;
+		case 'J':
+			year += 1900;
+			break;
+		case 'K':
+		default:
+			year += 2000;
+	}
+	int month = unpackDayOrMonthNumber(packedDateFormat.cap(3).at(0));
+	int day   = unpackDayOrMonthNumber(packedDateFormat.cap(4).at(0));
+	//qDebug() << column << year << month << day;
+	QDate epochDate(year, month, day);
+	int epochJD = epochDate.toJulianDay();
+	result.insert("orbit_Epoch", epochJD);
+
+	column = oneLineElements.mid(26, 9).trimmed();
+	double meanAnomalyAtEpoch = column.toDouble(&ok);//degrees
+	//TODO: Validation
+	result.insert("orbit_MeanAnomaly", meanAnomalyAtEpoch);
+
+	//Radius and albedo
+	//Assume albedo of 0.15 and calculate a radius based on the absolute magnitude
+	//as described here: http://www.physics.sfasu.edu/astro/asteroids/sizemagnitude.html
+	double albedo = 0.15; //Assumed
+	double radius = std::ceil((1329 / std::sqrt(albedo)) * std::pow(10, -2 * absoluteMagnitude));
+	result.insert("albedo", albedo);
+	result.insert("radius", radius);
+
+	return result;
+}
+
 QList<CAImporter::SsoElements> CAImporter::readMpcOneLineCometElementsFromFile(QString filePath)
 {
 	QList<CAImporter::SsoElements> objectList;
@@ -307,7 +499,7 @@ QList<CAImporter::SsoElements> CAImporter::readMpcOneLineCometElementsFromFile(Q
 	QFile mpcElementsFile(filePath);
 	if (mpcElementsFile.open(QFile::ReadOnly | QFile::Text ))//| QFile::Unbuffered
 	{
-		int count = 0;
+		//int count = 0;
 
 		while(!mpcElementsFile.atEnd())
 		{
@@ -428,4 +620,89 @@ bool CAImporter::appendToSolarSystemConfigurationFile(SsoElements object)
 	QList<SsoElements> list;
 	list << object;
 	return appendToSolarSystemConfigurationFile(list);
+}
+
+int CAImporter::unpackDayOrMonthNumber(QChar digit)
+{
+	//0-9, 0 is an invalid value, but the function is supposed to return 0 on failure.
+	if (digit.isDigit())
+	{
+		return digit.digitValue();
+	}
+
+	if (digit.isUpper())
+	{
+		char letter = digit.toAscii();
+		if (letter < 'A' || letter > 'V')
+			return 0;
+		return (10 + (letter - 'A'));
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+int CAImporter::unpackYearNumber (QChar prefix, int lastTwoDigits)
+{
+	int year = lastTwoDigits;
+	if (prefix == 'I')
+		year += 1800;
+	else if (prefix == 'J')
+		year += 1900;
+	else if (prefix == 'K')
+		year += 2000;
+	else
+		year = 0; //Error
+
+	return year;
+}
+
+//Can be used both for minor planets and comets with no additional modification,
+//as the regular expression for comets will match only capital letters.
+int CAImporter::unpackAlphanumericNumber (QChar prefix, int lastDigit)
+{
+	int cycleCount = lastDigit;
+	if (prefix.isDigit())
+		cycleCount += prefix.digitValue() * 10;
+	else if (prefix.isLetter() && prefix.isUpper())
+		cycleCount += (10 + prefix.toAscii() - QChar('A').toAscii()) * 10;
+	else if (prefix.isLetter() && prefix.isLower())
+		cycleCount += (10 + prefix.toAscii() - QChar('a').toAscii()) * 10 + 26*10;
+	else
+		cycleCount = 0; //Error
+
+	return cycleCount;
+}
+
+QString CAImporter::unpackMinorPlanetProvisionalDesignation (QString packedDesignation)
+{
+	QRegExp packedFormat("^([IJK])(\\d\\d)([A-Z])([\\dA-Za-z])(\\d)([A-Z])$");
+	if (packedFormat.indexIn(packedDesignation) != 0)
+	{
+		return QString();
+	}
+
+	//Year
+	QChar yearPrefix = packedFormat.cap(1).at(0);
+	int yearLastTwoDigits = packedFormat.cap(2).toInt();
+	int year = unpackYearNumber(yearPrefix, yearLastTwoDigits);
+
+	//Letters
+	QString halfMonthLetter = packedFormat.cap(3);
+	QString secondLetter = packedFormat.cap(6);
+
+	//Second letter cycle count
+	QChar cycleCountPrefix = packedFormat.cap(4).at(0);
+	int cycleCountLastDigit = packedFormat.cap(5).toInt();
+	int cycleCount = unpackAlphanumericNumber(cycleCountPrefix, cycleCountLastDigit);
+
+	//Assemble the unpacked provisional designation
+	QString result = QString("%1 %2%3").arg(year).arg(halfMonthLetter).arg(secondLetter);
+	if (cycleCount != 0)
+	{
+		result.append(QString::number(cycleCount));
+	}
+
+	return result;
 }
