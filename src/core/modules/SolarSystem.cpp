@@ -647,7 +647,6 @@ void SolarSystem::loadPlanets()
 		PlanetP p;
 		if (type == "asteroid")
 		{
-			qDebug() << "Type is asteorid";
 			p = PlanetP(new MinorPlanet(englishName,
 			               pd.value(secname+"/lighting").toBool(),
 			               pd.value(secname+"/radius").toDouble()/AU,
