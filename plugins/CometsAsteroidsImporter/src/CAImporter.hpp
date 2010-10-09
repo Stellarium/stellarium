@@ -79,11 +79,22 @@ public:
 	//! Reads a single comet's orbital elements from a string.
 	//! This function converts a line of comet orbital elements in MPC format
 	//! to a hash in Stellarium's ssystem.ini format.
-	//! MPC's one-line orbital elements format for comets is described on their
-	//! site: http://www.minorplanetcenter.org/iau/info/CometOrbitFormat.html
+	//! The MPC's one-line orbital elements format for comets
+	//! is described on their website:
+	//! http://www.minorplanetcenter.org/iau/info/CometOrbitFormat.html
 	//! \returns an empty hash if there is an error or the source string is not
 	//! a valid line in MPC format.
 	SsoElements readMpcOneLineCometElements (QString oneLineElements);
+
+	//! Reads a single minor planet's orbital elements from a string.
+	//! This function converts a line of minor planet orbital elements in
+	//! MPC format to a hash in Stellarium's ssystem.ini format.
+	//! The MPC's one-line orbital elements format for minor planets
+	//! is described on their website:
+	//! http://www.minorplanetcenter.org/iau/info/MPOrbitFormat.html
+	//! \returns an empty hash if there is an error or the source string is not
+	//! a valid line in MPC format.
+	SsoElements readMpcOneLineMinorPlanetElements (QString oneLineElements);
 
 	//! Reads a list of comet orbital elements from a file.
 	//! This function reads a list of comet orbital elements in MPC's one-line
@@ -131,6 +142,13 @@ private:
 	bool cloneSolarSystemConfigurationFile();
 	//! Removes the user copy of ssystem.ini, if any exists.
 	bool resetSolarSystemConfigurationFile();
+
+	int unpackDayOrMonthNumber (QChar digit);
+	int unpackYearNumber (QChar prefix, int lastTwoDigits);
+	int unpackAlphanumericNumber (QChar prefix, int lastDigit);
+
+	//TODO: This should be public and static, perhaps?
+	QString unpackMinorPlanetProvisionalDesignation(QString packedDesignation);
 
 	QSettings * solarSystemConfigurationFile;
 };
