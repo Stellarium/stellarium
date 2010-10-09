@@ -658,8 +658,7 @@ void SolarSystem::loadPlanets()
 			               userDataPtr,
 			               osculatingFunc,
 			               closeOrbit,
-			               pd.value(secname+"/hidden", 0).toBool(),
-			               pd.value(secname+"/atmosphere", false).toBool()));
+			               pd.value(secname+"/hidden", 0).toBool()));
 
 			QSharedPointer<MinorPlanet> mp =  p.dynamicCast<MinorPlanet>();
 
