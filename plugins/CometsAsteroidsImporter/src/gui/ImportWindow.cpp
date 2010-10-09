@@ -201,7 +201,7 @@ CAImporter::SsoElements ImportWindow::readElementsFromString (QString elements)
 {
 	Q_ASSERT(ssoManager);
 
-	switch (importMode)
+	switch (importType)
 	{
 	case MpcComets:
 		return ssoManager->readMpcOneLineCometElements(elements);
@@ -215,7 +215,7 @@ QList<CAImporter::SsoElements> ImportWindow::readElementsFromFile(QString filePa
 {
 	Q_ASSERT(ssoManager);
 
-	switch (importMode)
+	switch (importType)
 	{
 	case MpcComets:
 		return ssoManager->readMpcOneLineCometElementsFromFile(filePath);
@@ -229,12 +229,12 @@ void ImportWindow::switchImportType(bool checked)
 {
 	if (ui->radioButtonAsteroids->isChecked())
 	{
-		importMode = MpcMinorPlanets;
+		importType = MpcMinorPlanets;
 		//TODO: Update bookmark list
 	}
 	else
 	{
-		importMode = MpcComets;
+		importType = MpcComets;
 		//TODO: Update bookmark list
 	}
 

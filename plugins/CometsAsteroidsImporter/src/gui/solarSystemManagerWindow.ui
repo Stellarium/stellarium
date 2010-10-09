@@ -203,16 +203,6 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
       <item>
-       <widget class="QCheckBox" name="checkBoxOmitNumber">
-        <property name="toolTip">
-         <string comment="Tooltip text for &quot;Omit number prefix in asteroid names&quot;">For example, use &quot;Vesta&quot; instead of &quot;(4) Vesta&quot;</string>
-        </property>
-        <property name="text">
-         <string comment="For example, use &quot;Vesta&quot; instead of &quot;(4) Vesta&quot;">Omit number prefix in asteroid names</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="pushButtonImportMPC">
         <property name="text">
          <string>Import orbital elements in MPC format...</string>
