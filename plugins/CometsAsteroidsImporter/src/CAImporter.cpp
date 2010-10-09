@@ -486,7 +486,7 @@ CAImporter::SsoElements CAImporter::readMpcOneLineMinorPlanetElements(QString on
 	//Assume albedo of 0.15 and calculate a radius based on the absolute magnitude
 	//as described here: http://www.physics.sfasu.edu/astro/asteroids/sizemagnitude.html
 	double albedo = 0.15; //Assumed
-	double radius = std::ceil((1329 / std::sqrt(albedo)) * std::pow(10, -2 * absoluteMagnitude));
+	double radius = std::ceil((1329 / std::sqrt(albedo)) * std::pow(10, -0.2 * absoluteMagnitude));
 	result.insert("albedo", albedo);
 	result.insert("radius", radius);
 
