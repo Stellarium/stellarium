@@ -132,8 +132,15 @@ bool CAImporter::configureGui(bool show)
 			*/
 
 			//Import Cruithne
-			SsoElements asteroid = readMpcOneLineMinorPlanetElements("03753   15.6   0.15 K107N 205.95453   43.77037  126.27658   19.80793  0.5149179  0.98898552   0.9977217  3 MPO183459   488  28 1973-2010 0.58 M-h 3Eh MPC        0000           (3753) Cruithne   20100822");
+			/*SsoElements asteroid = readMpcOneLineMinorPlanetElements("03753   15.6   0.15 K107N 205.95453   43.77037  126.27658   19.80793  0.5149179  0.98898552   0.9977217  3 MPO183459   488  28 1973-2010 0.58 M-h 3Eh MPC        0000           (3753) Cruithne   20100822");
 			if (!appendToSolarSystemConfigurationFile(asteroid))
+				return true;
+			*/
+
+			//Import a list of asteroids. The file is from
+			//http://www.minorplanetcenter.org/iau/Ephemerides/Bright/2010/Soft00Bright.txt
+			QList<SsoElements> objectList = readMpcOneLineMinorPlanetElementsFromFile(StelFileMgr::getDesktopDir() + "/Soft00Bright.txt");
+			if (!appendToSolarSystemConfigurationFile(objectList))
 				return true;
 
 			//Destroy and re-create the Solal System
@@ -519,6 +526,54 @@ QList<CAImporter::SsoElements> CAImporter::readMpcOneLineCometElementsFromFile(Q
 			{
 				objectList << ssObject;
 				//qDebug() << ++count;//TODO: Remove debug
+			}
+		}
+		mpcElementsFile.close();
+		return objectList;
+	}
+	else
+	{
+		qDebug() << "Unable to open for reading" << filePath;
+		qDebug() << "File error:" << mpcElementsFile.errorString();
+		return objectList;
+	}
+
+	return objectList;
+}
+
+QList<CAImporter::SsoElements> CAImporter::readMpcOneLineMinorPlanetElementsFromFile(QString filePath)
+{
+	QList<CAImporter::SsoElements> objectList;
+
+	if (!QFile::exists(filePath))
+	{
+		qDebug() << "Can't find" << filePath;
+		return objectList;
+	}
+
+	QFile mpcElementsFile(filePath);
+	if (mpcElementsFile.open(QFile::ReadOnly | QFile::Text ))//| QFile::Unbuffered
+	{
+		int count = 0;
+
+		while(!mpcElementsFile.atEnd())
+		{
+			QString oneLineElements = QString(mpcElementsFile.readLine(202));
+			if(oneLineElements.endsWith('\n'))
+			{
+				oneLineElements.chop(1);
+			}
+			if (oneLineElements.isEmpty())
+			{
+				qDebug() << "Empty line?";
+				continue;
+			}
+
+			SsoElements ssObject = readMpcOneLineMinorPlanetElements(oneLineElements);
+			if(!ssObject.isEmpty() && !ssObject.value("section_name").toString().isEmpty())
+			{
+				objectList << ssObject;
+				qDebug() << ++count;//TODO: Remove debug
 			}
 		}
 		mpcElementsFile.close();
