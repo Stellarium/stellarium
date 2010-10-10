@@ -450,7 +450,7 @@ CAImporter::SsoElements CAImporter::readMpcOneLineMinorPlanetElements(QString on
 	result.insert("orbit_SemiMajorAxis", semiMajorAxis);
 
 	column = oneLineElements.mid(20, 5).trimmed();//Epoch, in packed form
-	QRegExp packedDateFormat("^([IJK])(\\d\\d)([1-9A-V])([1-9A-V])$");
+	QRegExp packedDateFormat("^([IJK])(\\d\\d)([1-9A-C])([1-9A-V])$");
 	if (packedDateFormat.indexIn(column) != 0)
 	{
 		qDebug() << "readMpcOneLineMinorPlanetElements():"
@@ -474,6 +474,14 @@ CAImporter::SsoElements CAImporter::readMpcOneLineMinorPlanetElements(QString on
 	int day   = unpackDayOrMonthNumber(packedDateFormat.cap(4).at(0));
 	//qDebug() << column << year << month << day;
 	QDate epochDate(year, month, day);
+	if (!epochDate.isValid())
+	{
+		qDebug() << "readMpcOneLineMinorPlanetElements():"
+		         << column << "unpacks to"
+		         << QString("%1-%2-%3").arg(year).arg(month).arg(day)
+				 << "This is not a valid date for an Epoch.";
+		return SsoElements();
+	}
 	int epochJD = epochDate.toJulianDay();
 	result.insert("orbit_Epoch", epochJD);
 
