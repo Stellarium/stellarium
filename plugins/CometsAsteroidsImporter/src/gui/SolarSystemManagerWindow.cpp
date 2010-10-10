@@ -26,22 +26,24 @@
 SolarSystemManagerWindow::SolarSystemManagerWindow()
 {
 	ui = new Ui_solarSystemManagerWindow();
+	importWindow = NULL;
 }
 
 SolarSystemManagerWindow::~SolarSystemManagerWindow()
 {
 	delete ui;
+
+	if (importWindow)
+		delete importWindow;
 }
 
 void SolarSystemManagerWindow::createDialogContent()
 {
 	ui->setupUi(dialog);
 
-	importWindow = new ImportWindow();
-
 	//Signals
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->pushButtonImportMPC, SIGNAL(clicked()), this, SLOT(showImportCometsWindow()));
+	connect(ui->pushButtonImportMPC, SIGNAL(clicked()), this, SLOT(newImportMPC()));
 }
 
 void SolarSystemManagerWindow::languageChanged()
@@ -53,7 +55,25 @@ void SolarSystemManagerWindow::languageChanged()
 		importWindow->languageChanged();
 }
 
-void SolarSystemManagerWindow::showImportCometsWindow()
+void SolarSystemManagerWindow::newImportMPC()
 {
+	if (importWindow == NULL)
+	{
+		importWindow = new ImportWindow();
+		connect(importWindow, SIGNAL(visibleChanged(bool)), this, SLOT(resetImportMPC(bool)));
+	}
+
 	importWindow->setVisible(true);
+}
+
+void SolarSystemManagerWindow::resetImportMPC(bool show)
+{
+	if (show)
+		return;
+
+	if (importWindow)
+	{
+		delete importWindow;
+		importWindow = NULL;
+	}
 }
