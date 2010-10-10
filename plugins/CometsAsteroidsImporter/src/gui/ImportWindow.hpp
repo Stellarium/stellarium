@@ -54,6 +54,11 @@ private slots:
 
 	void switchImportType(bool checked);
 
+	//! Marks (checks) all items in the results lists
+	void markAll();
+	//! Unmarks (unchecks) all items in the results lists
+	void unmarkAll();
+
 private:
 	CAImporter * ssoManager;
 	QList<CAImporter::SsoElements> candidateObjects;

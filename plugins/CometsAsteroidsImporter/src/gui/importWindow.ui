@@ -362,6 +362,35 @@
            </widget>
           </item>
           <item>
+           <widget class="QFrame" name="frameMarkButtons">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayoutMarkButtons">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QPushButton" name="pushButtonMarkAll">
+               <property name="text">
+                <string>Mark all</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonMarkNone">
+               <property name="text">
+                <string>Mark none</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="pushButtonAdd">
             <property name="text">
              <string>Add objects</string>
