@@ -178,9 +178,9 @@ void ImportWindow::populateCandidateObjects(QList<CAImporter::SsoElements> objec
 	candidateObjects.clear();
 
 	//Get a list of the current objects
-	//TODO: Find a way to do the same for the section names/identifiers,
-	//as they are used in duplicate detection.
 	QStringList existingObjects = GETSTELMODULE(SolarSystem)->getAllPlanetEnglishNames();
+	QStringList defaultSsoIds = ssoManager->getAllDefaultSsoIds();
+	QStringList currentSsoIds = ssoManager->readAllCurrentSsoIds();
 
 	QListWidget * list = ui->listWidgetObjects;
 	list->clear();
@@ -195,13 +195,27 @@ void ImportWindow::populateCandidateObjects(QList<CAImporter::SsoElements> objec
 				item->setText(name);
 				item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
 				item->setCheckState(Qt::Unchecked);
-				if (existingObjects.contains(name))
+
+				if (object.contains("section_name"))
 				{
-					//Mark as duplicate
-					//item->setForeground(QBrush(Qt::darkRed));//Doesn't work in night mode
-					QFont itemFont(item->font());
-					itemFont.setBold(true);
-					item->setFont(itemFont);
+					QString sectionName = object.value("section_name").toString();
+					if (defaultSsoIds.contains(sectionName))
+					{
+						//Duplicate of a default solar system object
+						QFont itemFont(item->font());
+						itemFont.setBold(true);
+						item->setFont(itemFont);
+					} else if (currentSsoIds.contains(sectionName))
+					{
+						//Duplicate of another existing object
+						QFont itemFont(item->font());
+						itemFont.setItalic(true);
+						item->setFont(itemFont);
+					} else if (existingObjects.contains(name))
+					{
+						//Duplicate name only
+						//TODO: Decide what to do in this case
+					}
 				}
 			}
 

@@ -8,7 +8,7 @@
     <x>0</x>
     <y>0</y>
     <width>480</width>
-    <height>408</height>
+    <height>476</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -336,8 +336,7 @@
           <item>
            <widget class="QLabel" name="labelInstructions">
             <property name="text">
-             <string>Mark the objects you wish to be imported.
-Note that displaying a large number of objects may cause Stellarium to run slowly.</string>
+             <string>Mark the objects you wish to be imported. Note that existing objects (the names in &lt;i&gt;italic&lt;/i&gt;) will be overwritten if marked, including those objects inherited from Stellarium's default Solar System configuration (the names in &lt;b&gt;bold&lt;/b&gt;).&lt;br/&gt;Note also that adding a large number of objects may cause Stellarium to run slowly.</string>
             </property>
             <property name="wordWrap">
              <bool>true</bool>

@@ -78,6 +78,18 @@ CAImporter::~CAImporter()
 
 void CAImporter::init()
 {
+	//Get a list of the "default" Solar System objects' IDs:
+	//TODO: Use it as validation for the loading of the plug-in
+	QString defaultFilePath	= StelFileMgr::getInstallationDir() + "/data/ssystem.ini";
+	if (QFile::exists(defaultFilePath))
+	{
+		defaultSsoIds = readAllActiveSsoIdsInFile(defaultFilePath);
+	}
+	else
+	{
+		qDebug() << "Something is horribly wrong:" << StelFileMgr::getInstallationDir();
+	}
+
 	try
 	{
 		mainWindow = new SolarSystemManagerWindow();
@@ -165,7 +177,7 @@ bool CAImporter::cloneSolarSystemConfigurationFile()
 	}
 
 	//TODO: Fix this!
-	QString defaultFilePath	= QDir::currentPath() + "/data/ssystem.ini";//StelFileMgr::getInstallationDir() + "/data/ssystem.ini";
+	QString defaultFilePath	= StelFileMgr::getInstallationDir() + "/data/ssystem.ini";//QDir::currentPath() + "/data/ssystem.ini";
 	QString userFilePath	= StelFileMgr::getUserDir() + "/data/ssystem.ini";
 
 	if (QFile::exists(userFilePath))
@@ -188,7 +200,7 @@ bool CAImporter::cloneSolarSystemConfigurationFile()
 
 bool CAImporter::resetSolarSystemConfigurationFile()
 {
-	QString userFilePath	= StelFileMgr::getUserDir() + "/data/ssystem.ini";
+	QString userFilePath = StelFileMgr::getUserDir() + "/data/ssystem.ini";
 	if (QFile::exists(userFilePath))
 	{
 		if (QFile::remove((userFilePath)))
@@ -205,6 +217,37 @@ bool CAImporter::resetSolarSystemConfigurationFile()
 	else
 	{
 		return true;
+	}
+}
+
+QStringList CAImporter::readAllActiveSsoIdsInFile(QString filePath)
+{
+	QSettings defaultSolarSystem(filePath, QSettings::IniFormat);
+	QStringList groups = defaultSolarSystem.childGroups();
+	QStringList planetNames = GETSTELMODULE(SolarSystem)->getAllPlanetEnglishNames();
+	QStringList ssoIds;
+	foreach (QString group, groups)
+	{
+		QString name = defaultSolarSystem.value(group + "/name").toString();
+		if (planetNames.contains(name))
+		{
+			ssoIds.append(group);
+		}
+	}
+	return ssoIds;
+}
+
+QStringList CAImporter::readAllCurrentSsoIds()
+{
+	QString userFilePath = StelFileMgr::getUserDir() + "/data/ssystem.ini";
+	if (QFile::exists(userFilePath))
+	{
+		return readAllActiveSsoIdsInFile(userFilePath);
+	}
+	else
+	{
+		//TODO: Error message
+		return QStringList();
 	}
 }
 
