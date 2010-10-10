@@ -25,7 +25,6 @@
 #include <QStringList>
 #include <QFont>
 #include <QList>
-#include "StelFader.hpp"
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
@@ -36,9 +35,9 @@
 #include "gsatellite/gTime.hpp"
 #include "gsatellite/gVector.hpp"
 
-
 #define DRAWORBIT_SLOTS_NUMBER    60
 #define DRAWORBIT_SLOT_SECNUMBER  30
+
 class StelPainter;
 class StelLocation;
 
@@ -94,12 +93,9 @@ public:
 	static float showLabels;
 
 public:
-	void enableDrawOrbit(bool b);
+    void enableDrawOrbit(bool b);
 
 private:
-	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
-	void setObserverLocation(StelLocation* loc=NULL);
-
 	//draw orbits methods
 	void computeOrbitPoints();
 	void drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter& painter);
@@ -113,7 +109,6 @@ private:
 	QString description;               // longer description of spacecraft
 	Vec3d XYZ;                         // holds J2000 position
 	char elements[3][80];              // TLE elements as char* for passing to sgp lib
-
 	double height, velocity, azimuth, elevation, range, rangeRate;
 	QList<commLink> comms;
 	Vec3f hintColor;
@@ -123,25 +118,23 @@ private:
 	static float hintBrightness;
 	static float hintScale;
 
+	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
+	void setObserverLocation(StelLocation* loc=NULL);
 
-	//gsatellite objects
-	gSatTEME *pSatellite;
-	gObserver observer;
-	gTime	  epochTime;
+    //gsatellite objects
+    gSatTEME *pSatellite;
+    gObserver observer;
+    gTime     epochTime;
+    gVector   Position;
+    gVector   Vel;
+    gVector   LatLong;
+    gVector   azElPos;
 
-	gVector Position;
-	gVector Vel;
-	gVector LatLong;
-	gVector azElPos;
-
-	//Satellite Orbit Draw
-	QFont       font;
-	Vec3f       lineColor;
-	gTime		lastEpochCompForOrbit;
-
-	QList<gVector> orbitPoints; //orbit points represented by azElPos vectors
-
-
+    //Satellite Orbit Draw
+    QFont     font;
+    Vec3f     lineColor;
+    gTime     lastEpochCompForOrbit;
+    QList<gVector> orbitPoints; //orbit points represented by azElPos vectors
 
 };
 
