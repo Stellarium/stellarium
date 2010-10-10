@@ -341,7 +341,7 @@ CAImporter::SsoElements CAImporter::readMpcOneLineCometElements(QString oneLineE
 
 	//Albedo doesn't work at all
 	//TODO: Make sure comets don't display magnitude
-	double absoluteMagnitude = mpcParser.cap(15).toDouble(&ok);
+	//double absoluteMagnitude = mpcParser.cap(15).toDouble(&ok);
 	//qDebug() << "absoluteMagnitude:" << absoluteMagnitude;
 	double radius = 5; //Fictitious
 	result.insert("radius", radius);
@@ -557,7 +557,8 @@ QList<CAImporter::SsoElements> CAImporter::readMpcOneLineCometElementsFromFile(Q
 	QFile mpcElementsFile(filePath);
 	if (mpcElementsFile.open(QFile::ReadOnly | QFile::Text ))//| QFile::Unbuffered
 	{
-		//int count = 0;
+		int candidatesCount = 0;
+		int lineCount = 0;
 
 		while(!mpcElementsFile.atEnd())
 		{
@@ -568,18 +569,23 @@ QList<CAImporter::SsoElements> CAImporter::readMpcOneLineCometElementsFromFile(Q
 			}
 			if (oneLineElements.isEmpty())
 			{
-				qDebug() << "Empty line?";
+				qDebug() << "Empty line skipped.";
 				continue;
 			}
+			lineCount++;
 
 			SsoElements ssObject = readMpcOneLineCometElements(oneLineElements);
 			if(!ssObject.isEmpty() && !ssObject.value("section_name").toString().isEmpty())
 			{
 				objectList << ssObject;
-				//qDebug() << ++count;//TODO: Remove debug
+				candidatesCount++;
 			}
 		}
 		mpcElementsFile.close();
+		qDebug() << "Done reading comet orbital elements."
+		         << "Recognized" << candidatesCount << "candidate objects"
+		         << "out of" << lineCount << "lines.";
+
 		return objectList;
 	}
 	else
@@ -605,7 +611,8 @@ QList<CAImporter::SsoElements> CAImporter::readMpcOneLineMinorPlanetElementsFrom
 	QFile mpcElementsFile(filePath);
 	if (mpcElementsFile.open(QFile::ReadOnly | QFile::Text ))//| QFile::Unbuffered
 	{
-		int count = 0;
+		int candidatesCount = 0;
+		int lineCount = 0;
 
 		while(!mpcElementsFile.atEnd())
 		{
@@ -616,18 +623,23 @@ QList<CAImporter::SsoElements> CAImporter::readMpcOneLineMinorPlanetElementsFrom
 			}
 			if (oneLineElements.isEmpty())
 			{
-				qDebug() << "Empty line?";
+				qDebug() << "Empty line skipped.";
 				continue;
 			}
+			lineCount++;
 
 			SsoElements ssObject = readMpcOneLineMinorPlanetElements(oneLineElements);
 			if(!ssObject.isEmpty() && !ssObject.value("section_name").toString().isEmpty())
 			{
 				objectList << ssObject;
-				qDebug() << ++count;//TODO: Remove debug
+				candidatesCount++;
 			}
 		}
 		mpcElementsFile.close();
+		qDebug() << "Done reading minor planet orbital elements."
+		         << "Recognized" << candidatesCount << "candidate objects"
+		         << "out of" << lineCount << "lines.";
+
 		return objectList;
 	}
 	else
