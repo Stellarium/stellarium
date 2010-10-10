@@ -66,12 +66,18 @@ void ImportWindow::createDialogContent()
 	connect(ui->radioButtonAsteroids, SIGNAL(toggled(bool)), this, SLOT(switchImportType(bool)));
 	connect(ui->radioButtonComets, SIGNAL(toggled(bool)), this, SLOT(switchImportType(bool)));
 
+	connect(ui->pushButtonMarkAll, SIGNAL(clicked()), this, SLOT(markAll()));
+	connect(ui->pushButtonMarkNone, SIGNAL(clicked()), this, SLOT(unmarkAll()));
+
 	ui->radioButtonSingle->setChecked(true);
 	ui->frameFile->setVisible(false);
 	ui->frameURL->setVisible(false);
 
 	//This box will be displayed when one of the source types is selected
 	ui->groupBoxSource->setVisible(false);
+
+	//In case I or someone else forgets the stack widget saved on another page
+	ui->stackedWidget->setCurrentIndex(0);
 }
 
 void ImportWindow::languageChanged()
@@ -135,7 +141,7 @@ void ImportWindow::addObjects()
 		}
 		delete item;
 	}
-	qDebug() << "Checked:" << checkedObjectsNames;
+	//qDebug() << "Checked:" << checkedObjectsNames;
 
 	QList<CAImporter::SsoElements> approvedObjects;
 	for (int i = 0; i < candidateObjects.count(); i++)
@@ -276,4 +282,38 @@ void ImportWindow::switchImportType(bool checked)
 
 	//If one of the options is selected, show the rest of the dialog
 	ui->groupBoxSource->setVisible(true);
+}
+
+void ImportWindow::markAll()
+{
+	QListWidget * const list = ui->listWidgetObjects;
+	int rowCount = list->count();
+	if (rowCount < 1)
+		return;
+
+	for (int row = 0; row < rowCount; row++)
+	{
+		QListWidgetItem * item = list->item(row);
+		if (item)
+		{
+			item->setCheckState(Qt::Checked);
+		}
+	}
+}
+
+void ImportWindow::unmarkAll()
+{
+	QListWidget * const list = ui->listWidgetObjects;
+	int rowCount = list->count();
+	if (rowCount < 1)
+		return;
+
+	for (int row = 0; row < rowCount; row++)
+	{
+		QListWidgetItem * item = list->item(row);
+		if (item)
+		{
+			item->setCheckState(Qt::Unchecked);
+		}
+	}
 }
