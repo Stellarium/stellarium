@@ -43,7 +43,9 @@ protected:
 	Ui_solarSystemManagerWindow * ui;
 
 private slots:
-	void showImportCometsWindow();
+	void newImportMPC();
+	//TODO: Find a better way of resetting the window
+	void resetImportMPC(bool);
 
 private:
 	ImportWindow* importWindow;//There can be more than one!
