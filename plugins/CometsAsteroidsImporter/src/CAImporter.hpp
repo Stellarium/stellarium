@@ -142,6 +142,15 @@ public:
 	//! \todo Protect the default Solar System configuration?
 	//! \todo At least warn when overwriting old entries?
 	bool appendToSolarSystemConfigurationFile(QList<SsoElements>);
+
+	//! Returns the IDs of the objects listed in the default ssystem.ini.
+	//! The default solar system configuration file is assumed to be the one
+	//! in the installation directory.
+	QStringList getAllDefaultSsoIds() {return defaultSsoIds;}
+
+	//! Gets the IDs of the objects listed in the current user ssystem.ini.
+	//! As the name suggests, the list is compiled when the function is run.
+	QStringList readAllCurrentSsoIds();
 	
 public slots:
 	
@@ -150,6 +159,16 @@ private:
 	SolarSystemManagerWindow * mainWindow;
 
 	QSettings * solarSystemConfigurationFile;
+
+	//! List of the IDs of all Solar System objects in the default ssystem.ini.
+	//! Initialized in init().
+	QStringList defaultSsoIds;
+
+	//! Gets the IDs of the objects listed in a ssystem.ini-formatted file.
+	//! Used internally in readAllCurrentSsoIds() and in init() to initialize
+	//! defaultSsoIds.
+	//! Does not check if the file exists.
+	QStringList readAllActiveSsoIdsInFile(QString filePath);
 
 	//! Creates a copy of the default ssystem.ini file in the user data directory.
 	//! @returns true if a file already exists or the copying has been successful
