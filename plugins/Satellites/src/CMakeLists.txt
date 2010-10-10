@@ -1,4 +1,4 @@
-INCLUDE_DIRECTORIES(. gsatellite sgp4sdp4 gui ${CMAKE_BINARY_DIR}/plugins/Satellites/src ${CMAKE_BINARY_DIR}/plugins/Satellites/src/gui)
+INCLUDE_DIRECTORIES(. gsatellite gui ${CMAKE_BINARY_DIR}/plugins/Satellites/src ${CMAKE_BINARY_DIR}/plugins/Satellites/src/gui)
 
 LINK_DIRECTORIES(/src)
 

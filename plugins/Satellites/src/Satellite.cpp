@@ -236,7 +236,7 @@ double Satellite::getAngularSize(const StelCore*) const
 	return 0.00001;
 }
 
-void Satellite::update(double deltaTime)
+void Satellite::update(double)
 {
 	double jul_utc = StelApp::getInstance().getCore()->getNavigator()->getJDay();
 
@@ -277,7 +277,7 @@ void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	Vec3d xy,xy1;
+	Vec3d xy;
 	if (prj->project(XYZ,xy))
 	{
 
