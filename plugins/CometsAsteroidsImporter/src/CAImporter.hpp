@@ -146,7 +146,10 @@ public:
 public slots:
 	
 private:
+	//! Main window of the module's GUI
 	SolarSystemManagerWindow * mainWindow;
+
+	QSettings * solarSystemConfigurationFile;
 
 	//! Creates a copy of the default ssystem.ini file in the user data directory.
 	//! @returns true if a file already exists or the copying has been successful
@@ -154,14 +157,29 @@ private:
 	//! Removes the user copy of ssystem.ini, if any exists.
 	bool resetSolarSystemConfigurationFile();
 
+	//! Converts an alphanumeric digit as used in MPC packed dates to an integer.
+	//! See http://www.minorplanetcenter.org/iau/info/PackedDates.html
+	//! Interprets the digits from 1 to 9 normally, and the capital leters
+	//! from A to V as numbers between 10 and 31.
+	//! \returns 0 if the digit is invalid (0 is also an invalid ordinal number
+	//! for a day or month, so this is not a problem)
 	int unpackDayOrMonthNumber (QChar digit);
+	//! Converts an alphanumeric year number as used in MPC packed dates to an integer.
+	//! See http://www.minorplanetcenter.org/iau/info/PackedDates.html
+	//! Also used in packed provisional designations, see
+	//! http://www.minorplanetcenter.org/iau/info/PackedDes.html
 	int unpackYearNumber (QChar prefix, int lastTwoDigits);
+	//! Converts a two-character number used in MPC packed provisional designations.
+	//! See http://www.minorplanetcenter.org/iau/info/PackedDes.html
+	//! This function is used for both asteroid and comet designations.
 	int unpackAlphanumericNumber (QChar prefix, int lastDigit);
 
 	//TODO: This should be public and static, perhaps?
+	//! Unpacks an MPC packed minor planet provisional designation.
+	//! See http://www.minorplanetcenter.org/iau/info/PackedDes.html
+	//! \returns an empty string if the argument is not a valid packed
+	//! provisional designation.
 	QString unpackMinorPlanetProvisionalDesignation(QString packedDesignation);
-
-	QSettings * solarSystemConfigurationFile;
 };
 
 
