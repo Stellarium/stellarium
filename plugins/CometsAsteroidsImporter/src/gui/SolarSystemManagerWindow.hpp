@@ -24,6 +24,8 @@
 #include <QObject>
 #include "StelDialog.hpp"
 
+class CAImporter;
+
 class Ui_solarSystemManagerWindow;
 class ImportWindow;
 
@@ -43,12 +45,18 @@ protected:
 	Ui_solarSystemManagerWindow * ui;
 
 private slots:
+	void populateSolarSystemList();
+
+	void removeObject();
+
 	void newImportMPC();
 	//TODO: Find a better way of resetting the window
 	void resetImportMPC(bool);
 
 private:
 	ImportWindow* importWindow;//There can be more than one!
+
+	CAImporter * ssoManager;
 };
 
 #endif //_SOLAR_SYSTEM_MANAGER_WINDOW_
