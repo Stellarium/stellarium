@@ -18,15 +18,22 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include "CAImporter.hpp"
+
 #include "SolarSystemManagerWindow.hpp"
 #include "ui_solarSystemManagerWindow.h"
 
 #include "ImportWindow.hpp"
 
+#include "StelApp.hpp"
+#include "StelModuleMgr.hpp"
+
 SolarSystemManagerWindow::SolarSystemManagerWindow()
 {
 	ui = new Ui_solarSystemManagerWindow();
 	importWindow = NULL;
+
+	ssoManager = GETSTELMODULE(CAImporter);
 }
 
 SolarSystemManagerWindow::~SolarSystemManagerWindow()
@@ -43,7 +50,12 @@ void SolarSystemManagerWindow::createDialogContent()
 
 	//Signals
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->pushButtonRemove, SIGNAL(clicked()), this, SLOT(removeObject()));
 	connect(ui->pushButtonImportMPC, SIGNAL(clicked()), this, SLOT(newImportMPC()));
+
+	connect(ssoManager, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
+
+	populateSolarSystemList();
 }
 
 void SolarSystemManagerWindow::languageChanged()
@@ -73,7 +85,30 @@ void SolarSystemManagerWindow::resetImportMPC(bool show)
 
 	if (importWindow)
 	{
+		//TODO:Move this out of here!
+		//Reload the list, in case there are new objects
+		populateSolarSystemList();
+
 		delete importWindow;
 		importWindow = NULL;
+	}
+}
+
+void SolarSystemManagerWindow::populateSolarSystemList()
+{
+	//TODO: Display the names instead of identifiers
+	QStringList ssoIds = ssoManager->readAllCurrentSsoIds();
+	ui->listWidgetObjects->clear();
+	ui->listWidgetObjects->addItems(ssoIds);
+}
+
+void SolarSystemManagerWindow::removeObject()
+{
+	if(ui->listWidgetObjects->currentItem())
+	{
+		QString ssoId = ui->listWidgetObjects->currentItem()->text();
+		//qDebug() << ssoId;
+		//TODO: Ask for confirmation first?
+		ssoManager->removeSsoWithId(ssoId);
 	}
 }

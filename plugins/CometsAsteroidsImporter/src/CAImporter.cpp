@@ -28,6 +28,7 @@
 #include "StelIniParser.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelObjectMgr.hpp"
 #include "SolarSystem.hpp"
 
 #include <QDate>
@@ -249,6 +250,44 @@ QStringList CAImporter::readAllCurrentSsoIds()
 		//TODO: Error message
 		return QStringList();
 	}
+}
+
+bool CAImporter::removeSsoWithId(QString id)
+{
+	if (id.isEmpty())
+		return false;
+
+	qDebug() << id;
+
+	//Make sure that the file exists
+	QString userFilePath = StelFileMgr::getUserDir() + "/data/ssystem.ini";
+	if (!QFile::exists(userFilePath))
+	{
+		qDebug() << "Can't remove" << id << "to ssystem.ini: Unable to find" << userFilePath;
+		return false;
+	}
+
+	//Open the file
+	QSettings settings(userFilePath, QSettings::IniFormat);
+	if (settings.status() != QSettings::NoError)
+	{
+		qDebug() << "Error opening ssystem.ini:" << userFilePath;
+		return false;
+	}
+
+	//Remove the section
+	settings.remove(id);
+	settings.sync();
+
+	//Deselect all currently selected objects
+	//TODO: I bet that someone will complains, so: unselect only the removed one
+	GETSTELMODULE(StelObjectMgr)->unSelect();
+
+	//Reload the Solar System
+	GETSTELMODULE(SolarSystem)->reloadPlanets();
+	emit solarSystemChanged();
+
+	return true;
 }
 
 //Strings that have failed to be parsed. The usual source of discrepancies is

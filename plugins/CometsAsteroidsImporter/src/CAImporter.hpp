@@ -151,8 +151,20 @@ public:
 	//! Gets the IDs of the objects listed in the current user ssystem.ini.
 	//! As the name suggests, the list is compiled when the function is run.
 	QStringList readAllCurrentSsoIds();
+
+	//! Removes an object from the user Solar System configuration file.
+	//! Reloads the Solar System on successfull removal.
+	//! \arg id object identifier (group name in the configuration file)
+	//! \returns true if the entry has been removed successfully or there is
+	//! no such entry
+	//! \returns false if there was an error
+	bool removeSsoWithId(QString id);
 	
 public slots:
+
+signals:
+	//TODO: This should be part of SolarSystem::reloadPlanets()
+	void solarSystemChanged();
 	
 private:
 	//! Main window of the module's GUI
