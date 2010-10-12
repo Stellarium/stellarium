@@ -131,6 +131,7 @@ void ImportWindow::acquireObjectData()
 		objects << object;
 		//Temporary, until the slot/socket mechanism is ready
 		populateCandidateObjects(objects);
+		ui->stackedWidget->setCurrentIndex(1);
 	}
 	else if (ui->radioButtonFile->isChecked())
 	{
@@ -144,6 +145,7 @@ void ImportWindow::acquireObjectData()
 
 		//Temporary, until the slot/socket mechanism is ready
 		populateCandidateObjects(objects);
+		ui->stackedWidget->setCurrentIndex(1);
 	}
 	else if (ui->radioButtonURL->isChecked())
 	{
@@ -152,7 +154,6 @@ void ImportWindow::acquireObjectData()
 			return;
 		startDownload(url);
 	}
-	//ui->stackedWidget->setCurrentIndex(1);
 	//close();
 }
 
