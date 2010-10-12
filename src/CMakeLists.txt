@@ -206,6 +206,8 @@ SET(stellarium_lib_SRCS
 	core/modules/Planet.hpp
 	core/modules/MinorPlanet.cpp
 	core/modules/MinorPlanet.hpp
+	core/modules/Comet.cpp
+	core/modules/Comet.hpp
 	core/modules/Skybright.cpp
 	core/modules/Skybright.hpp
 	core/modules/Skylight.cpp
