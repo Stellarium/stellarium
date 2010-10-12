@@ -428,6 +428,7 @@ CAImporter::SsoElements CAImporter::readMpcOneLineCometElements(QString oneLineE
 	result.insert("name", name);
 	result.insert("parent", "Sun");
 	result.insert("coord_func","comet_orbit");
+	result.insert("type", "comet");
 
 	result.insert("lighting", false);
 	result.insert("color", "1.0, 1.0, 1.0");
@@ -466,16 +467,16 @@ CAImporter::SsoElements CAImporter::readMpcOneLineCometElements(QString oneLineE
 	double inclination = mpcParser.cap(11).toDouble(&ok);
 	result.insert("orbit_Inclination", inclination);
 
-	//Albedo doesn't work at all
-	//TODO: Make sure comets don't display magnitude
-	//double absoluteMagnitude = mpcParser.cap(15).toDouble(&ok);
-	//qDebug() << "absoluteMagnitude:" << absoluteMagnitude;
+	double absoluteMagnitude = mpcParser.cap(15).toDouble(&ok);
+	result.insert("absolute_magnitude", absoluteMagnitude);
+
+	//This is not the same "slope parameter" as used in asteroids. Better name?
+	double slopeParameter = mpcParser.cap(16).toDouble(&ok);
+	result.insert("slope_parameter", slopeParameter);
+
 	double radius = 5; //Fictitious
 	result.insert("radius", radius);
-	//qDebug() << 1329 * pow(10, (absoluteMagnitude/-5));
-	//double albedo = pow(( (1329 * pow(10, (absoluteMagnitude/-5))) / (2 * radius)), 2);//from http://www.physics.sfasu.edu/astro/asteroids/sizemagnitude.html
-	double albedo = 1;
-	result.insert("albedo", albedo);
+	result.insert("albedo", 1);
 
 	return result;
 }
