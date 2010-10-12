@@ -45,8 +45,10 @@ protected:
 	Ui_solarSystemManagerWindow * ui;
 
 private slots:
-	void populateSolarSystemList();
+	void copyConfiguration();
+	void replaceConfiguration();
 
+	void populateSolarSystemList();
 	void removeObject();
 
 	void newImportMPC();
