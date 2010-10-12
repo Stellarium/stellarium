@@ -33,19 +33,14 @@
 #include <QFrame>
 #include <QModelIndex>
 #include <QSettings>
-#include <QSqlError>
-#include <QSqlField>
-#include <QSqlDatabase>
-#include <QSqlRecord>
-#include <QSqlTableModel>
 #include <limits>
 
-OcularDialog::OcularDialog(QSqlTableModel *CCDsTableModel, QSqlTableModel *ocularsTableModel, QSqlTableModel *telescopesTableModel)
+OcularDialog::OcularDialog(QList<CCD *> ccds, QList<Ocular *> oculars, QList<Telescope *> telescopes)
 {
 	ui = new Ui_ocularDialogForm;
-	this->CCDsTableModel = CCDsTableModel;
-	this->ocularsTableModel = ocularsTableModel;
-	this->telescopesTableModel = telescopesTableModel;
+	this->ccds = ccds;
+	this->oculars = oculars;
+	this->telescopes = telescopes;
 
 	validatorPositiveInt = new QIntValidator(0, std::numeric_limits<int>::max(), this);
 	validatorPositiveDouble = new QDoubleValidator(.0, std::numeric_limits<double>::max(), 24, this);
@@ -145,8 +140,8 @@ void OcularDialog::closeWindow()
 void OcularDialog::deleteSelectedCCD()
 {
 	QModelIndex selection = ui->ccdListView->currentIndex();
-	if (selection.row() != -1 && CCDsTableModel->rowCount() > 1) {
-		CCDsTableModel->removeRows(selection.row(), 1);
+	if (selection.row() != -1 && ccds.size() > 1) {
+		ccds.removeAt(selection.row());
 		ui->ccdListView->setCurrentIndex(CCDsTableModel->index(0, 1));
 	}
 }

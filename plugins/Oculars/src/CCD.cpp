@@ -22,30 +22,108 @@
 #include <QDebug>
 #include <QSettings>
 
-CCD::CCD(QSqlRecord record)
+CCD::CCD()
 {
-	CCDID = record.value("id").toInt();
-	name = record.value("name").toString();
-	resolution_x = record.value("resolution_x").toInt();
-	resolution_y = record.value("resolution_y").toInt();
-	chip_width = record.value("chip_width").toFloat();
-	chip_height = record.value("chip_height").toFloat();
-	pixel_width = record.value("pixel_width").toFloat();
-	pixel_height = record.value("pixel_height").toFloat();
 }
 
 CCD::~CCD()
 {
 }
 
-float CCD::getActualFOVx(Ocular *ocular)
+static CCD* ccdFromSettings(QSettings* theSettings, QString theGroupName)
 {
-	float FOVx = (chip_width * 206.265) / ocular->getEffectiveFocalLength();
+	CCD* ccd = new CCD();
+	theSettings->beginGroup(theGroupName);
+	ccd->setName(theSettings->value("name", "").toString());
+	ccd->setResolutionX(theSettings->value("resolutionX", "0").toInt());
+	ccd->setResolutionY(theSettings->value("resolutionY", "0").toInt());
+	ccd->setChipWidth(theSettings->value("chip_width", "0.0").toFloat());
+	ccd->setChipHeight(theSettings->value("chip_height", "0.0").toFloat());
+	ccd->setPixelWidth(theSettings->value("pixel_width", "0.0").toFloat());
+	ccd->setPixelHeight(theSettings->value("pixel_height", "0.0").toFloat());
+	theSettings->endGroup();
+
+	return ccd;
+}
+
+QString CCD::name() const 
+{
+	return m_name;
+}
+
+void CCD::setName(QString name)
+{
+	m_name = name;
+}
+
+int CCD::resolutionX()  const 
+{
+	return m_resolutionX;
+}
+
+void CCD::setResolutionX(int resolution)
+{
+	m_resolutionX = resolution;
+}
+
+int CCD::resolutionY()  const 
+{
+	return m_resolutionY;
+}
+
+void CCD::setResolutionY(int resolution)
+{
+	m_resolutionY = resolution;
+}
+
+float CCD::chipWidth()  const 
+{
+	return m_chipWidth;
+}
+
+void CCD::setChipWidth(float width)
+{
+	m_chipWidth = width;
+}
+
+float CCD::chipHeight()  const 
+{
+	return m_chipHeight;
+}
+
+void CCD::setChipHeight(float height)
+{
+	m_chipHeight = height;
+}
+
+float CCD::pixelWidth()  const 
+{
+	return m_pixelWidth;
+}
+
+void CCD::setPixelWidth(float width)
+{
+	m_pixelWidth = width;
+}
+
+float CCD::pixelHeight()  const 
+{
+	return m_pixelHeight;
+}
+
+void CCD::setPixelHeight(float height)
+{
+	m_pixelHeight = height;
+}
+
+float CCD::getActualFOVx(Ocular *ocular) const
+{
+	float FOVx = (m_chipWidth * 206.265) / ocular->effectiveFocalLength();
 	return FOVx;
 }
 
-float CCD::getActualFOVy(Ocular *ocular)
+float CCD::getActualFOVy(Ocular *ocular) const
 {
-	float FOVy = (chip_height * 206.265) / ocular->getEffectiveFocalLength();
+	float FOVy = (m_chipHeight * 206.265) / ocular->effectiveFocalLength();
 	return FOVy;
 }

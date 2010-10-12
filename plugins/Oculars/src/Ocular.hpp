@@ -28,23 +28,31 @@ class Telescope;
 class Ocular : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(QString name READ name WRITE setName)
+	Q_PROPERTY(double appearentFOV READ appearentFOV WRITE setAppearentFOV)
+	Q_PROPERTY(double effectiveFocalLength READ effectiveFocalLength WRITE setEffectiveFocalLength)
+	Q_PROPERTY(double fieldStop READ fieldStop WRITE setFieldStop)
 public:
-	Ocular(QSettings* settings);
+	Ocular();
 	virtual ~Ocular();
-	const QString getName();
-	int getOcularID();
-	double getAppearentFOV();
-	double getEffectiveFocalLength();
-	double getFieldStop();
+	static Ocular* ocularFromSettings(QSettings* theSettings, QString theGroupName);
 
-	double getActualFOV(Telescope *telescope);
-	double getMagnification(Telescope *telescope);
+	const QString name() const;
+	void setName(QString aName);
+	double appearentFOV() const;
+	void setAppearentFOV(double fov);
+	double effectiveFocalLength() const;
+	void setEffectiveFocalLength(double fl);
+	double fieldStop() const;
+	void setFieldStop(double fs);
+
+	double actualFOV(Telescope *telescope) const;
+	double magnification(Telescope *telescope) const;
 
 private:
-	int ocularID;
-	QString name;
-	double appearentFOV;
-	double effectiveFocalLength;
-	double fieldStop;
+	QString m_name;
+	double m_appearentFOV;
+	double m_effectiveFocalLength;
+	double m_fieldStop;
 };
 #endif /* OCULAR_HPP_ */

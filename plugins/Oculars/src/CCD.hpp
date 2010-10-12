@@ -21,42 +21,58 @@
 
 #include <QObject>
 #include <QString>
-#include <QSqlRecord>
+#include <QSettings>
 
 class Ocular;
 
 class CCD : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(QString name READ name WRITE setName)
+	Q_PROPERTY(int resolutionX READ resolutionX WRITE setResolutionX)
+	Q_PROPERTY(int resolutionY READ resolutionY WRITE setResolutionY)
+	Q_PROPERTY(float chipWidth READ chipWidth WRITE setChipWidth)
+	Q_PROPERTY(float chipHeight READ chipHeight WRITE setChipHeight)
+	Q_PROPERTY(float pixelWidth READ pixelWidth WRITE setPixelWidth)
+	Q_PROPERTY(float pixelHeight READ pixelHeight WRITE setNPixelHeight)
 public:
-	CCD(QSqlRecord record);
+	CCD();
 	virtual ~CCD();
-	const QString getName() {return name;};
-	int getCCDID() {return CCDID;};
-	int getResolutionX() {return resolution_x;};
-	int getResolutionY() {return resolution_y;};
-	float getChipWidth() {return chip_width;};
-	float getChipHeight() {return chip_height;};
-	float getPixelWidth() {return pixel_width;};
-	float getPixelHeight() {return pixel_height;};
+	static CCD* ccdFromSettings(QSettings* theSettings, QString theGroupName);
 
-	float getActualFOVx(Ocular *ocular);
-	float getActualFOVy(Ocular *ocular);
+	QString name() const;
+	void setName(QString name);
+	int getCCDID() {return CCDID;};
+	int resolutionX()  const;
+	void setResolutionX(int resolution);
+	int resolutionY()  const;
+	void setResolutionY(int resolution);
+	float chipWidth()  const;
+	void setChipWidth(float width);
+	float chipHeight()  const;
+	void setChipHeight(float height);
+	float pixelWidth()  const;
+	void setPixelWidth(float width);
+	float pixelHeight()  const;
+	void setPixelHeight(float height);
+
+	float getActualFOVx(Ocular *ocular) const;
+	float getActualFOVy(Ocular *ocular) const;
 private:
 	int CCDID;
-	QString name;
+	QString m_name;
 	//! total resolution width in pixels
-	int resolution_x;
+	int m_resolutionX;
 	//! total resolution height in pixels
-	int resolution_y;
+	int m_resolutionY;
 	//! chip width in millimeters
-	float chip_width;
+	float m_chipWidth;
 	//! chip height in millimeters
-	float chip_height;
+	float m_chipHeight;
 	//! height of 1 pixel in micron (micrometer)
-	float pixel_width;
+	float m_pixelWidth;
 	//! width of 1 pixel in micron (micrometer)
-	float pixel_height;
+	float m_pixelHeight;
 };
 
 #endif /* CCD_HPP_ */
