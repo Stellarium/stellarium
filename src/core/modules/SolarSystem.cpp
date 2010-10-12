@@ -35,6 +35,7 @@
 #include "StelIniParser.hpp"
 #include "Planet.hpp"
 #include "MinorPlanet.hpp"
+#include "Comet.hpp"
 #include "StelNavigator.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelUtils.hpp"
@@ -689,6 +690,39 @@ void SolarSystem::loadPlanets()
 				else
 				{
 					mp->setAbsoluteMagnitudeAndSlope(magnitude, 0.15);
+				}
+			}
+
+		}
+		else if (type == "comet")
+		{
+			p = PlanetP(new Comet(englishName,
+			               pd.value(secname+"/lighting").toBool(),
+			               pd.value(secname+"/radius").toDouble()/AU,
+			               pd.value(secname+"/oblateness", 0.0).toDouble(),
+			               StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
+			               pd.value(secname+"/albedo").toFloat(),
+			               pd.value(secname+"/tex_map").toString(),
+			               posfunc,
+			               userDataPtr,
+			               osculatingFunc,
+			               closeOrbit,
+			               pd.value(secname+"/hidden", 0).toBool()));
+
+			QSharedPointer<Comet> mp =  p.dynamicCast<Comet>();
+
+			//g,k magnitude system
+			double magnitude = pd.value(secname+"/absolute_magnitude", -99).toDouble();
+			double slope = pd.value(secname+"/slope_parameter", 4.0).toDouble();
+			if (magnitude > -99)
+			{
+				if (slope >= 0 && slope <= 20)
+				{
+					mp->setAbsoluteMagnitudeAndSlope(magnitude, slope);
+				}
+				else
+				{
+					mp->setAbsoluteMagnitudeAndSlope(magnitude, 4.0);
 				}
 			}
 
