@@ -156,6 +156,9 @@ QTabWidget::pane {
    </item>
    <item>
     <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
      <widget class="QWidget" name="tabConfigurationFile">
       <attribute name="title">
        <string>Configuration file</string>
@@ -292,7 +295,7 @@ QTabWidget::pane {
      </widget>
      <widget class="QWidget" name="tabAddNew">
       <attribute name="title">
-       <string>Add new</string>
+       <string>Data import</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
@@ -300,7 +303,26 @@ QTabWidget::pane {
          <property name="title">
           <string>Add new Solar System objects</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
+         <layout class="QVBoxLayout" name="verticalLayoutMPC">
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>You can import comet and asteroid data formatted in the export formats of the IAU's &lt;a href=&quot;http://www.minorplanetcenter.org/iau/mpc.html&quot;&gt;Minor Planet Center&lt;/a&gt; (MPC). You can enter single objects, import files with lists of objects, or download such lists from the Internet.</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::AutoText</enum>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+            <property name="openExternalLinks">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
           <item>
            <widget class="QPushButton" name="pushButtonImportMPC">
             <property name="text">
@@ -310,6 +332,19 @@ QTabWidget::pane {
           </item>
          </layout>
         </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacerDataImport">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
