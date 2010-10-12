@@ -44,7 +44,6 @@ SET(Oculars_MOC_HDRS
 # After this call, Oculars_MOC_SRCS = moc_Oculars.cxx
 QT4_WRAP_CPP(Oculars_MOC_SRCS ${Oculars_MOC_HDRS})
 
-SET(QT_USE_QTSQL TRUE)
 INCLUDE(${QT_USE_FILE})
 
 SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})

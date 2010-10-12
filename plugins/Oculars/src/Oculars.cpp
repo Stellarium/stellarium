@@ -257,7 +257,7 @@ void Oculars::init()
 		validateAndLoadIniFile();
 		// assume all is well
 		ready = true;
-		ocularDialog = new OcularDialog(ccdsTableModel, ocularsTableModel, telescopesTableModel);
+		ocularDialog = new OcularDialog(ccds, oculars, telescopes);
 		initializeActivationActions();
 
 		QStringList settingGroups = settings->childGroups();
@@ -265,14 +265,24 @@ void Oculars::init()
 		while(settingsGroupIterator.hasNext()) {
 			QString settingsGroup = settingsGroupIterator.next();
 			if (settingsGroup.startsWith("ocular")) {
-				settings->beginGroup(settingsGroup);
-				Ocular *newOcular = new Ocular(settings);
-				oculars.append(newOcular);
-				settings->endGroup();
+				Ocular *newOcular = Ocular::ocularFromSettings(settings, settingsGroup);
+				if (newOcular != NULL) {
+					oculars.append(newOcular);
+				}
 			} else if (settingsGroup.startsWith("options")) {
 				settings->beginGroup(settingsGroup);
 				useMaxEyepieceAngle = settings->value("use_max_exit_circle", 0.0).toBool();
 				settings->endGroup();
+			} else if (settingsGroup.startsWith("telescope")) {
+				Telescope *newTelescope = Telescope::telescopeFromSettings(settings, settingsGroup);
+				if (newTelescope != NULL) {
+					telescopes.append(newTelescope);
+				}
+			} else if (settingsGroup.startsWith("ccd")) {
+				CCD *newCCD = CCD::ccdFromSettings(settings, settingsGroup);
+				if (newCCD != NULL) {
+					ccds.append(newCCD);
+				}
 			}
 		}
 	} catch (std::runtime_error& e) {
@@ -315,8 +325,8 @@ void Oculars::determineMaxEyepieceAngle()
 		while (ocularIterator.hasNext()) {
 			Ocular *ocular = ocularIterator.next();
 
-			if (ocular->getAppearentFOV() > maxEyepieceAngle) {
-				maxEyepieceAngle = ocular->getAppearentFOV();
+			if (ocular->appearentFOV() > maxEyepieceAngle) {
+				maxEyepieceAngle = ocular->appearentFOV();
 			}
 		}
 	}
@@ -330,33 +340,6 @@ void Oculars::instrumentChanged()
 {
 	newInstrument = true;
 	zoom(true);
-}
-
-void Oculars::loadCCDs()
-{
-	ccds.clear();
-	int rowCount = ccdsTableModel->rowCount();
-	for (int row = 0; row < rowCount; row++) {
-		ccds.append(new CCD(ccdsTableModel->record(row)));
-	}
-}
-
-void Oculars::loadOculars()
-{
-	oculars.clear();
-	int rowCount = ocularsTableModel->rowCount();
-	for (int row = 0; row < rowCount; row++) {
-//		oculars.append(new Ocular(ocularsTableModel->record(row)));
-	}
-}
-
-void Oculars::loadTelescopes()
-{
-	telescopes.clear();
-	int rowCount = telescopesTableModel->rowCount();
-	for (int row = 0; row < rowCount; row++) {
-		telescopes.append(new Telescope(telescopesTableModel->record(row)));
-	}
 }
 
 void Oculars::setScaleImageCircle(bool state)
@@ -504,8 +487,8 @@ void Oculars::drawCrosshairs()
 					   projector->getViewportPosY()+projector->getViewportHeight()/2);
 	GLdouble length = 0.5 * params.viewportFovDiameter;
 	// See if we need to scale the length
-	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->getAppearentFOV() > 0.0) {
-		length = oculars[selectedOcularIndex]->getAppearentFOV() * length / maxEyepieceAngle;
+	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0) {
+		length = oculars[selectedOcularIndex]->appearentFOV() * length / maxEyepieceAngle;
 	}
 
 	// Draw the lines
@@ -764,8 +747,8 @@ void Oculars::paintMask()
 	GLdouble inner = 0.5 * params.viewportFovDiameter;
 
 	// See if we need to scale the mask
-	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->getAppearentFOV() > 0.0) {
-		inner = oculars[selectedOcularIndex]->getAppearentFOV() * inner / maxEyepieceAngle;
+	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0) {
+		inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
 	}
 
 	GLdouble outer = params.viewportXywh[2] + params.viewportXywh[3];
@@ -823,11 +806,11 @@ void Oculars::paintText(const StelCore* core)
 	
 	// The CCD
 	QString ccdsensorLabel, ccdInfoLabel;
-	if (ccd && ccd->getChipWidth() > .0 && ccd->getChipHeight() > .0) {
-		ccdInfoLabel = "Dimension : " + QVariant(ccd->getChipWidth()).toString() + "x" + QVariant(ccd->getChipHeight()).toString() + " mm";
-		if (ccd->getName() != QString("")) {
+	if (ccd && ccd->chipWidth() > .0 && ccd->chipHeight() > .0) {
+		ccdInfoLabel = "Dimension : " + QVariant(ccd->chipWidth()).toString() + "x" + QVariant(ccd->chipHeight()).toString() + " mm";
+		if (ccd->name() != QString("")) {
 			ccdsensorLabel = "Sensor #" + QVariant(selectedCCDIndex).toString();
-			ccdsensorLabel.append(" : ").append(ccd->getName());
+			ccdsensorLabel.append(" : ").append(ccd->name());
 		}
 	}
 	if (ccdsensorLabel != QString("")) {
@@ -839,34 +822,34 @@ void Oculars::paintText(const StelCore* core)
 
 	// The Ocular
 	QString ocularNumberLabel = "Ocular #" + QVariant(selectedOcularIndex).toString();
-	if (ocular->getName() != QString(""))  {
-		ocularNumberLabel.append(" : ").append(ocular->getName());
+	if (ocular->name() != QString(""))  {
+		ocularNumberLabel.append(" : ").append(ocular->name());
 	}
 	painter.drawText(xPosition, yPosition, ocularNumberLabel);
 	yPosition-=lineHeight;
 
-	QString ocularFLLabel = "Ocular FL: " + QVariant(ocular->getEffectiveFocalLength()).toString() + QChar(0x00B0);
+	QString ocularFLLabel = "Ocular FL: " + QVariant(ocular->effectiveFocalLength()).toString() + QChar(0x00B0);
 	painter.drawText(xPosition, yPosition, ocularFLLabel);
 	yPosition-=lineHeight;
 
-	QString ocularFOVLabel = "Ocular aFOV: " + QVariant(ocular->getAppearentFOV()).toString() + QChar(0x00B0);
+	QString ocularFOVLabel = "Ocular aFOV: " + QVariant(ocular->appearentFOV()).toString() + QChar(0x00B0);
 	painter.drawText(xPosition, yPosition, ocularFOVLabel);
 	yPosition-=lineHeight;
 
 	// The telescope
 	QString telescopeNumberLabel = "Telescope #" + QVariant(selectedTelescopeIndex).toString();
-	if (telescope->getName() != QString(""))  {
-		telescopeNumberLabel.append(" : ").append(telescope->getName());
+	if (telescope->name() != QString(""))  {
+		telescopeNumberLabel.append(" : ").append(telescope->name());
 	}
 	painter.drawText(xPosition, yPosition, telescopeNumberLabel);
 	yPosition-=lineHeight;
 
 	// General info
-	QString magnificationLabel = "Magnification: " + QVariant(((int)(ocular->getMagnification(telescope) * 10.0)) / 10.0).toString() + "x";
+	QString magnificationLabel = "Magnification: " + QVariant(((int)(ocular->magnification(telescope) * 10.0)) / 10.0).toString() + "x";
 	painter.drawText(xPosition, yPosition, magnificationLabel);
 	yPosition-=lineHeight;
 
-	QString fovLabel = "FOV: " + QVariant(((int)(ocular->getActualFOV(telescope) * 10000.00)) / 10000.0).toString() + QChar(0x00B0);
+	QString fovLabel = "FOV: " + QVariant(((int)(ocular->actualFOV(telescope) * 10000.00)) / 10000.0).toString() + QChar(0x00B0);
 	painter.drawText(xPosition, yPosition, fovLabel);
 }
 
@@ -1006,10 +989,10 @@ void Oculars::zoomOcular()
 	core->setFlipHorz(telescope->isHFlipped());
 	core->setFlipVert(telescope->isVFlipped());
 
-	double actualFOV = ocular->getActualFOV(telescope);
+	double actualFOV = ocular->actualFOV(telescope);
 	// See if the mask was scaled; if so, correct the actualFOV.
-	if (useMaxEyepieceAngle && ocular->getAppearentFOV() > 0.0) {
-		actualFOV = maxEyepieceAngle * actualFOV / ocular->getAppearentFOV();
+	if (useMaxEyepieceAngle && ocular->appearentFOV() > 0.0) {
+		actualFOV = maxEyepieceAngle * actualFOV / ocular->appearentFOV();
 	}
 	movementManager->zoomTo(actualFOV, 0.0);
 }

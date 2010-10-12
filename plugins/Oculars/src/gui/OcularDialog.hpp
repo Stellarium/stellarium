@@ -34,8 +34,6 @@ class QDoubleValidator;
 class QIntValidator;
 class QRegExpValidator;
 class QModelIndex;
-class QSqlRecord;
-class QSqlTableModel;
 QT_END_NAMESPACE
 
 
@@ -44,7 +42,7 @@ class OcularDialog : public StelDialogOculars
 	Q_OBJECT
 
 public:
-	OcularDialog(QSqlTableModel *CCDsTableModel, QSqlTableModel *ocularsTableModel, QSqlTableModel *telescopesTableModel);
+	OcularDialog(QList<CCD *> ccds, QList<Ocular *> oculars, QList<Telescope *> telescopes);
 	virtual ~OcularDialog();
 	void languageChanged();
 	//! Notify that the application style changed
@@ -60,7 +58,7 @@ public slots:
 	void insertNewCCD();
 	void insertNewOcular();
 	void insertNewTelescope();
-	void CCDSelected(const QModelIndex &index);
+	void ccdSelected(const QModelIndex &index);
 	void ocularSelected(const QModelIndex &index);
 	void telescopeSelected(const QModelIndex &index);
 	void updateCCD();
@@ -79,11 +77,11 @@ private slots:
 
 private:
 	QDataWidgetMapper *CCDMapper;
-	QSqlTableModel *CCDsTableModel;
+	QList<CCD *> ccds;
 	QDataWidgetMapper *ocularMapper;
-	QSqlTableModel *ocularsTableModel;
+	QList<Ocular *> oculars;
 	QDataWidgetMapper *telescopeMapper;
-	QSqlTableModel *telescopesTableModel;
+	QList<Telescope *> telescopes;
 	QIntValidator *validatorOcularAFOV;
 	QDoubleValidator *validatorOcularEFL;
 	QDoubleValidator *validatorTelescopeDiameter;
