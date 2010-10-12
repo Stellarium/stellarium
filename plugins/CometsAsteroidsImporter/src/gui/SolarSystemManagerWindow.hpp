@@ -45,6 +45,7 @@ protected:
 	Ui_solarSystemManagerWindow * ui;
 
 private slots:
+	//! \todo Find a way to suggest a default file name (select directory instead of file?)
 	void copyConfiguration();
 	void replaceConfiguration();
 

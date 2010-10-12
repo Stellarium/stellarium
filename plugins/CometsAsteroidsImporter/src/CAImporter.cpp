@@ -138,7 +138,7 @@ double CAImporter::getCallOrder(StelModuleActionName actionName) const
 bool CAImporter::configureGui(bool show)
 {
 	//If the plug-in has failed to initialize, disable the button
-	//! \todo Display a message in the window instead.
+	//TODO: Display a message in the window instead.
 	if (!isInitialized)
 		return false;
 
@@ -378,7 +378,7 @@ bool CAImporter::removeSsoWithId(QString id)
 	return true;
 }
 
-//Strings that have failed to be parsed. The usual source of discrepancies is
+//TODO: Strings that have failed to be parsed. The usual source of discrepancies is
 //http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft00Cmt.txt
 //It seems that some entries in the list don't match the described format.
 /*
@@ -390,9 +390,6 @@ bool CAImporter::removeSsoWithId(QString id)
   "0128P      b  2007 06 13.8064  3.062504  0.320891  210.3319  214.3583    4.3606  20100723   8.5  4.0  128P/Shoemaker-Holt                                      MPC 51822" -> fragment?
   "0141P      d  2010 05 29.7106  0.757809  0.749215  149.3298  246.0849   12.8032  20100723  12.0 12.0  141P/Machholz                                            MPC 59599" -> fragment?
 */
-//! \todo Handle better any unusual symbols in section names (URL encoding?)
-//! \todo Recognise the long form packed designations? (to handle fragments)
-//! \todo Use column cuts intead of a regular expression?
 CAImporter::SsoElements CAImporter::readMpcOneLineCometElements(QString oneLineElements)
 {
 	SsoElements result;

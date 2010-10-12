@@ -21,7 +21,19 @@
 #define _MINOR_PLANET_HPP_
 
 #include "Planet.hpp"
- 
+
+/*! \class MinorPlanet
+	\author Bogdan Marinov
+
+	This class implements a minor planet (an asteroid).
+
+	There are two main reasons for having a separate class from Planet:
+	 - visual magnitude calculation (asteroids use the H,G system;
+       Stellarium's default algorithm is not easily applied to asteroids);
+	 - support for minor planet numbers and provisional designations.
+
+	Some of the code in this class is re-used from the parent Planet class.
+  */
 class MinorPlanet : public Planet
 {
 public:
@@ -41,8 +53,8 @@ public:
 	~MinorPlanet();
 
 	//Inherited from StelObject via Planet
-	//! Get a string with data about the Planet.
-	//! Planets support the following InfoStringGroup flags:
+	//! Get a string with data about the MinorPlanet.
+	//! Asteroids support the following InfoStringGroup flags:
 	//! - Name
 	//! - Magnitude
 	//! - RaDec
@@ -50,11 +62,12 @@ public:
 	//! - Distance
 	//! - Size
 	//! - PlainText
-	//! @param core the Stelore object
-	//! @param flags a set of InfoStringGroup items to include in the return value.
-	//! @return a QString containing an HMTL encoded description of the Planet.
+	//! \param core the StelCore object
+	//! \param flags a set of InfoStringGroup items to include in the return value.
+	//! \return a QString containing an HMTL encoded description of the MinorPlanet.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup &flags) const;
-	virtual QString getType() const {return "MinorPlanet";} //TODO: Or "Asteroid"?
+	//! \todo Decide if this is going to be "MinorPlanet" or "Asteroid"
+	virtual QString getType() const {return "MinorPlanet";}
 	virtual float getVMagnitude(const StelNavigator *nav) const;
 
 	//! set the minor planet's number, if any.
@@ -91,8 +104,6 @@ private:
 
 	bool nameIsProvisionalDesignation;
 	QString provisionalDesignationHtml;
-	static QString convertNameToHtml (QString plainTextName);
-
 };
 
 #endif //_MINOR_PLANET_HPP_
