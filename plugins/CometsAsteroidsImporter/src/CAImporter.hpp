@@ -84,6 +84,9 @@ public:
 	//! http://www.minorplanetcenter.org/iau/info/CometOrbitFormat.html
 	//! \returns an empty hash if there is an error or the source string is not
 	//! a valid line in MPC format.
+	//! \todo Recognise the long form packed designations (to handle fragments)
+	//! \todo Handle better any unusual symbols in section names (URL encoding?)
+	//! \todo Use column cuts intead of a regular expression?
 	SsoElements readMpcOneLineCometElements (QString oneLineElements);
 
 	//! Reads a single minor planet's orbital elements from a string.
@@ -94,6 +97,7 @@ public:
 	//! http://www.minorplanetcenter.org/iau/info/MPOrbitFormat.html
 	//! \returns an empty hash if there is an error or the source string is not
 	//! a valid line in MPC format.
+	//! \todo Handle better any unusual symbols in section names (URL encoding?)
 	SsoElements readMpcOneLineMinorPlanetElements (QString oneLineElements);
 
 	//! Reads a list of comet orbital elements from a file.
@@ -170,6 +174,7 @@ public:
 	
 public slots:
 	//! Resets the Solar System configuration file and reloads the Solar System.
+	//! \todo Return a bool and make the GUI display a message if it was not successful.
 	void resetSolarSystemToDefault();
 
 signals:

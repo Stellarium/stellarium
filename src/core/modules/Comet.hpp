@@ -21,7 +21,14 @@
 #define _COMET_HPP_
 
 #include "Planet.hpp"
- 
+
+/*! \class Comet
+	\author Bogdan Marinov
+
+	Some of the code in this class is re-used from the parent Planet class.
+	\todo Implement better comet rendering (star-like objects, no physical body).
+	\todo (Long-term) Photo realistic comet rendering, see https://blueprints.launchpad.net/stellarium/+spec/realistic-comet-rendering
+  */
 class Comet : public Planet
 {
 public:
@@ -41,27 +48,28 @@ public:
 	~Comet();
 
 	//Inherited from StelObject via Planet
-	//! Get a string with data about the Planet.
-	//! Planets support the following InfoStringGroup flags:
+	//! Get a string with data about the Comet.
+	//! Comets support the following InfoStringGroup flags:
 	//! - Name
 	//! - Magnitude
 	//! - RaDec
 	//! - AltAzi
 	//! - Distance
-	//! //- Size <- Size of what?
 	//! - PlainText
-	//! @param core the Stelore object
-	//! @param flags a set of InfoStringGroup items to include in the return value.
-	//! @return a QString containing an HMTL encoded description of the Planet.
+	//  - Size <- Size of what?
+	//! \param core the StelCore object
+	//! \param flags a set of InfoStringGroup items to include in the return value.
+	//! \return a QString containing an HMTL encoded description of the Comet.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup &flags) const;
 	virtual QString getType() const {return "Comet";}
+	//! \todo Find better sources for the g,k system
 	virtual float getVMagnitude(const StelNavigator *nav) const;
 
-	//! sets absolute magnitude and slope parameter
+	//! \brief sets absolute magnitude and slope parameter.
 	//! These are the parameters in the IAU's two-parameter magnitude system
 	//! for comets. They are used to calculate the apparent magnitude at
 	//! different distances from the Sun. They are not used in the same way
-	//! as the same parameters in MinorPlanet
+	//! as the same parameters in MinorPlanet.
 	void setAbsoluteMagnitudeAndSlope(double magnitude, double slope);
 
 private:
