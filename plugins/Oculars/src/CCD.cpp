@@ -26,6 +26,18 @@ CCD::CCD()
 {
 }
 
+CCD::CCD(const CCD* other)
+{
+	QT_ASSERT(other);
+	this->m_name = other->name();
+	this->m_chipHeight = other->chipHeight();
+	this->m_chipWidth = other->chipWidth();
+	this->m_pixelHeight = other->pixelHeight();
+	this->m_pixelWidth = other->pixelWidth();
+	this->m_resolutionX = other->resolutionX();
+	this->m_resolutionY = other->resolutionY();
+}
+
 CCD::~CCD()
 {
 }

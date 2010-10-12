@@ -39,10 +39,6 @@
 #include <QMouseEvent>
 #include <QtNetwork>
 #include <QPixmap>
-#include <QSqlDatabase>
-#include <QSqlError>
-#include <QSqlQuery>
-#include <QSqlTableModel>
 
 #include <cmath>
 
@@ -706,30 +702,6 @@ void Oculars::interceptMovementKey(QKeyEvent* event)
 	else
 	{
 		event->setAccepted(false);
-	}
-}
-
-void Oculars::loadDatabaseObjects()
-{
-	loadCCDs();
-	loadOculars();
-	loadTelescopes();
-	if (useMaxEyepieceAngle) {
-		determineMaxEyepieceAngle();
-	}
-	// A telescope and one of [CCD|Ocular] must be defined for the plugin to be usable.
-	if (telescopes.size() == 0)
-	{
-		ready = false;
-		qWarning() << "WARNING: no telescopes found.  Ocular will be disabled.";
-	}
-	else if (oculars.size() == 0 && ccds.size() == 0) {
-		ready = false;
-		qWarning() << "WARNING: no oculars or ccds found.  Ocular will be disabled.";
-	}
-	else
-	{
-		ready = true;
 	}
 }
 

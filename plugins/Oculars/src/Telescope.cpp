@@ -25,6 +25,15 @@ Telescope::Telescope()
 {
 }
 
+Telescope::Telescope(const Telescope* other)
+{
+	this->m_diameter = other->diameter();
+	this->m_focalLength = other->focalLength();
+	this->m_hFlipped = other->isHFlipped();
+	this->m_vFlipped = other->isVFlipped();
+	this->m_name = other->name();
+}
+
 Telescope::~Telescope()
 {
 }

@@ -34,6 +34,7 @@ class Ocular : public QObject
 	Q_PROPERTY(double fieldStop READ fieldStop WRITE setFieldStop)
 public:
 	Ocular();
+	Q_INVOKABLE Ocular(const Ocular* other);
 	virtual ~Ocular();
 	static Ocular* ocularFromSettings(QSettings* theSettings, QString theGroupName);
 
