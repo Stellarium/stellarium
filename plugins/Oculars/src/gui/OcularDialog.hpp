@@ -20,11 +20,11 @@
 #define _OCULARDIALOG_HPP_
 
 #include <QObject>
-#include "StelDialogOculars.hpp"
+#include "CCD.hpp"
 #include "Ocular.hpp"
+#include "StelDialogOculars.hpp"
 #include "StelStyle.hpp"
-
-#include <QSqlRecord>
+#include "Telescope.hpp"
 
 class Ui_ocularDialogForm;
 
@@ -58,9 +58,9 @@ public slots:
 	void insertNewCCD();
 	void insertNewOcular();
 	void insertNewTelescope();
-	void ccdSelected(const QModelIndex &index);
-	void ocularSelected(const QModelIndex &index);
-	void telescopeSelected(const QModelIndex &index);
+	void ccdSelected(int currentIndex);
+	void ocularSelected(int currentIndex);
+	void telescopeSelected(int currentIndex);
 	void updateCCD();
 	void updateOcular();
 	void updateTelescope();
@@ -76,7 +76,7 @@ private slots:
 	void scaleImageCircleStateChanged(int state);
 
 private:
-	QDataWidgetMapper *CCDMapper;
+	QDataWidgetMapper *ccdMapper;
 	QList<CCD *> ccds;
 	QDataWidgetMapper *ocularMapper;
 	QList<Ocular *> oculars;

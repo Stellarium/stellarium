@@ -33,6 +33,7 @@ class Telescope : public QObject
 	Q_PROPERTY(bool vFlipped READ isVFlipped WRITE vFlipped)
 public:
 	Telescope();
+	Q_INVOKABLE Telescope(const Telescope* other);
 	virtual ~Telescope();
 	static Telescope* telescopeFromSettings(QSettings* theSettings, QString theGroupName);
 
