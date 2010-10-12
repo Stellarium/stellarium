@@ -26,6 +26,15 @@ Ocular::Ocular()
 {
 }
 
+Ocular::Ocular(const Ocular* other)
+{
+	QT_ASSERT(other);
+	this->m_appearentFOV = other->appearentFOV();
+	this->m_effectiveFocalLength = other->effectiveFocalLength();
+	this->m_fieldStop = other->fieldStop();
+	this->m_name = other->name();
+}
+
 Ocular::~Ocular()
 {
 }

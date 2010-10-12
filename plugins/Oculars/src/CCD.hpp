@@ -37,12 +37,13 @@ class CCD : public QObject
 	Q_PROPERTY(float pixelHeight READ pixelHeight WRITE setNPixelHeight)
 public:
 	CCD();
+	Q_INVOKABLE CCD(const CCD* other);
 	virtual ~CCD();
 	static CCD* ccdFromSettings(QSettings* theSettings, QString theGroupName);
 
 	QString name() const;
 	void setName(QString name);
-	int getCCDID() {return CCDID;};
+	int getCCDID();
 	int resolutionX()  const;
 	void setResolutionX(int resolution);
 	int resolutionY()  const;
@@ -59,7 +60,7 @@ public:
 	float getActualFOVx(Ocular *ocular) const;
 	float getActualFOVy(Ocular *ocular) const;
 private:
-	int CCDID;
+	int ccdID;
 	QString m_name;
 	//! total resolution width in pixels
 	int m_resolutionX;

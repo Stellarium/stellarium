@@ -28,6 +28,7 @@
 #include "StelMainGraphicsView.hpp"
 #include "StelTranslator.hpp"
 
+#include <QAbstractItemModel>
 #include <QDataWidgetMapper>
 #include <QDebug>
 #include <QFrame>
@@ -246,15 +247,15 @@ void OcularDialog::insertNewTelescope()
 	}
 }
 
-void OcularDialog::CCDSelected(const QModelIndex &)
+void OcularDialog::ccdSelected(int currentIndex)
 {
 }
 
-void OcularDialog::ocularSelected(const QModelIndex &)
+void OcularDialog::ocularSelected(int currentIndex)
 {
 }
 
-void OcularDialog::telescopeSelected(const QModelIndex &)
+void OcularDialog::telescopeSelected(int currentIndex)
 {
 }
 
@@ -333,26 +334,18 @@ void OcularDialog::createDialogContent()
 	connect(ui->deleteTelescope, SIGNAL(clicked()), this, SLOT(deleteSelectedTelescope()));
 
 	// Oculars model
-	ui->ccdListView->setModel(CCDsTableModel);
-	ui->ccdListView->setModelColumn(1);
-	connect(ui->ccdListView, SIGNAL(clicked(const QModelIndex &)), this, SLOT(CCDSelected(const QModelIndex &)));
-
-	ui->ocularListView->setModel(ocularsTableModel);
-	ui->ocularListView->setModelColumn(1);
-	connect(ui->ocularListView, SIGNAL(clicked(const QModelIndex &)), this, SLOT(ocularSelected(const QModelIndex &)));
-
-	ui->telescopeListView->setModel(telescopesTableModel);
-	ui->telescopeListView->setModelColumn(1);
-	connect(ui->telescopeListView, SIGNAL(clicked(const QModelIndex &)), this, SLOT(telescopeSelected(const QModelIndex &)));
+	connect(ui->ccdListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(ccdSelected(int)));
+	connect(ui->ocularListView, SIGNAL(currentRowChanged(int)), this, SLOT(ocularSelected(int)));
+	connect(ui->telescopeListView, SIGNAL(currentRowChanged(int)), this, SLOT(telescopeSelected(int)));
 
 	// Validators
-	ui->CCDName->setValidator(validatorName);
-	ui->CCDResX->setValidator(validatorPositiveInt);
-	ui->CCDResY->setValidator(validatorPositiveInt);
-	ui->CCDChipX->setValidator(validatorPositiveDouble);
-	ui->CCDChipY->setValidator(validatorPositiveDouble);
-	ui->CCDPixelX->setValidator(validatorPositiveDouble);
-	ui->CCDPixelY->setValidator(validatorPositiveDouble);
+	ui->ccdName->setValidator(validatorName);
+	ui->ccdResX->setValidator(validatorPositiveInt);
+	ui->ccdResY->setValidator(validatorPositiveInt);
+	ui->ccdChipX->setValidator(validatorPositiveDouble);
+	ui->ccdChipY->setValidator(validatorPositiveDouble);
+	ui->ccdPixelX->setValidator(validatorPositiveDouble);
+	ui->ccdPixelY->setValidator(validatorPositiveDouble);
 	ui->ocularAFov->setValidator(validatorOcularAFOV);
 	ui->ocularFL->setValidator(validatorOcularEFL);
 	ui->ocularFieldStop->setValidator(validatorOcularEFL);
@@ -362,25 +355,25 @@ void OcularDialog::createDialogContent()
 	ui->telescopeName->setValidator(validatorName);
 
 	// The CCD mapper
-	CCDMapper = new QDataWidgetMapper();
-	CCDMapper->setModel(CCDsTableModel);
+	ccdMapper = new QDataWidgetMapper();
+	ccdMapper->setModel(theModel);
 //	CCDMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
-	CCDMapper->addMapping(ui->CCDID, CCDsTableModel->fieldIndex("id"), "text");
-	CCDMapper->addMapping(ui->CCDName, CCDsTableModel->fieldIndex("name"));
-	CCDMapper->addMapping(ui->CCDResX, CCDsTableModel->fieldIndex("resolution_x"));
-	CCDMapper->addMapping(ui->CCDResY, CCDsTableModel->fieldIndex("resolution_y"));
-	CCDMapper->addMapping(ui->CCDChipX, CCDsTableModel->fieldIndex("chip_width"));
-	CCDMapper->addMapping(ui->CCDChipY, CCDsTableModel->fieldIndex("chip_height"));
-	CCDMapper->addMapping(ui->CCDPixelX, CCDsTableModel->fieldIndex("pixel_width"));
-	CCDMapper->addMapping(ui->CCDPixelY, CCDsTableModel->fieldIndex("pixel_height"));
-	CCDMapper->toFirst();
+	ccdMapper->addMapping(ui->ccdID, CCDsTableModel->fieldIndex("id"), "text");
+	ccdMapper->addMapping(ui->ccdName, CCDsTableModel->fieldIndex("name"));
+	ccdMapper->addMapping(ui->ccdResX, CCDsTableModel->fieldIndex("resolution_x"));
+	ccdMapper->addMapping(ui->ccdResY, CCDsTableModel->fieldIndex("resolution_y"));
+	ccdMapper->addMapping(ui->ccdChipX, CCDsTableModel->fieldIndex("chip_width"));
+	ccdMapper->addMapping(ui->ccdChipY, CCDsTableModel->fieldIndex("chip_height"));
+	ccdMapper->addMapping(ui->ccdPixelX, CCDsTableModel->fieldIndex("pixel_width"));
+	ccdMapper->addMapping(ui->ccdPixelY, CCDsTableModel->fieldIndex("pixel_height"));
+	ccdMapper->toFirst();
 	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-			CCDMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+			ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
 	ui->ccdListView->setCurrentIndex(CCDsTableModel->index(0, 1));
 
 	// The ocular mapper
 	ocularMapper = new QDataWidgetMapper();
-	ocularMapper->setModel(ocularsTableModel);
+	ocularMapper->setModel(ui->ocularListWidget->model());
 //	ocularMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
 	ocularMapper->addMapping(ui->ocularID, ocularsTableModel->fieldIndex("id"), "text");
 	ocularMapper->addMapping(ui->ocularName, ocularsTableModel->fieldIndex("name"));
@@ -394,7 +387,7 @@ void OcularDialog::createDialogContent()
 
 	// The telescope mapper
 	telescopeMapper = new QDataWidgetMapper();
-	telescopeMapper->setModel(telescopesTableModel);
+	telescopeMapper->setModel(ui->telescopeListWidget->model());
 //	telescopeMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
 	telescopeMapper->addMapping(ui->telescopeID, telescopesTableModel->fieldIndex("id"), "text");
 	telescopeMapper->addMapping(ui->telescopeName, telescopesTableModel->fieldIndex("name"));

@@ -112,8 +112,6 @@ private:
 	//! while flagShowOculars == true.
 	void interceptMovementKey(class QKeyEvent* event);
 
-	void loadDatabaseObjects();
-
 	//! Paint the mask into the viewport.
 	void paintMask();
 	
