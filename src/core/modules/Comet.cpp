@@ -153,7 +153,6 @@ float Comet::getVMagnitude(const StelNavigator *nav) const
 	//Sources: http://www.clearskyinstitute.com/xephem/help/xephem.html#mozTocId564354
 	//(XEphem manual, section 7.1.2.3 "Magnitude models"), also
 	//http://www.ayton.id.au/gary/Science/Astronomy/Ast_comets.htm#Comet%20facts:
-	//! \todo Find better sources for the g,k system
 	double apparentMagnitude = absoluteMagnitude + 5 * std::log10(observerCometDistance) + 2.5 * slopeParameter * std::log10(cometSunDistance);
 
 	return apparentMagnitude;

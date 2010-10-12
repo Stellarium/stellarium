@@ -59,7 +59,6 @@ void SolarSystemManagerWindow::createDialogContent()
 	connect(ui->pushButtonImportMPC, SIGNAL(clicked()), this, SLOT(newImportMPC()));
 
 	connect(ssoManager, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
-	//! \todo Make resetSolarSystemToDefault() return a bool and display a message if it was not successful.
 	connect(ui->pushButtonReset, SIGNAL(clicked()), ssoManager, SLOT(resetSolarSystemToDefault()));
 
 	ui->lineEditUserFilePath->setText(ssoManager->getCustomSolarSystemFilePath());
@@ -126,7 +125,6 @@ void SolarSystemManagerWindow::removeObject()
 
 void SolarSystemManagerWindow::copyConfiguration()
 {
-	//! \todo Find a way to suggest a default file name (select directory instead of file?)
 	QString filePath = QFileDialog::getSaveFileName(0, "Save the Solar System configuration file as...", StelFileMgr::getDesktopDir());
 	ssoManager->copySolarSystemConfigurationFileTo(filePath);
 }
