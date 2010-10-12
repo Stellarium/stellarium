@@ -79,7 +79,7 @@
       <item>
        <widget class="QLabel" name="stelWindowTitle">
         <property name="text">
-         <string notr="true" extracomment="The title of the window will be set during runtime">Import</string>
+         <string notr="true" extracomment="The title of the window will be set during runtime">Object data import</string>
         </property>
        </widget>
       </item>
@@ -137,7 +137,7 @@
        <item>
         <widget class="QGroupBox" name="groupBoxType">
          <property name="title">
-          <string>Select type</string>
+          <string>Select the type</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayoutType">
           <property name="margin">
@@ -163,7 +163,7 @@
        <item>
         <widget class="QGroupBox" name="groupBoxSource">
          <property name="title">
-          <string>Select source</string>
+          <string>Select the source</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <property name="margin">
@@ -172,7 +172,7 @@
           <item>
            <widget class="QRadioButton" name="radioButtonSingle">
             <property name="text">
-             <string>Import a single line (one object)</string>
+             <string>A single line (one object)</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -198,7 +198,7 @@
           <item>
            <widget class="QRadioButton" name="radioButtonFile">
             <property name="text">
-             <string>Import objects from a file</string>
+             <string>A file containing a list of objects</string>
             </property>
            </widget>
           </item>
@@ -225,7 +225,7 @@
           <item>
            <widget class="QRadioButton" name="radioButtonURL">
             <property name="text">
-             <string>Import objects from an online source</string>
+             <string>Download a list of objects from the Internet</string>
             </property>
            </widget>
           </item>
@@ -261,7 +261,7 @@
              <item>
               <widget class="QCheckBox" name="checkBoxAddBookmark">
                <property name="text">
-                <string>Add this URL to bookmarks</string>
+                <string>Add this URL to the bookmarks list</string>
                </property>
               </widget>
              </item>
@@ -415,18 +415,22 @@
   </customwidget>
  </customwidgets>
  <tabstops>
+  <tabstop>radioButtonAsteroids</tabstop>
+  <tabstop>radioButtonComets</tabstop>
   <tabstop>radioButtonSingle</tabstop>
   <tabstop>lineEditSingle</tabstop>
   <tabstop>pushButtonPaste</tabstop>
   <tabstop>radioButtonFile</tabstop>
-  <tabstop>pushButtonBrowse</tabstop>
   <tabstop>lineEditFilePath</tabstop>
+  <tabstop>pushButtonBrowse</tabstop>
   <tabstop>radioButtonURL</tabstop>
   <tabstop>lineEditURL</tabstop>
   <tabstop>checkBoxAddBookmark</tabstop>
   <tabstop>comboBoxBookmarks</tabstop>
   <tabstop>pushButtonParse</tabstop>
   <tabstop>listWidgetObjects</tabstop>
+  <tabstop>pushButtonMarkAll</tabstop>
+  <tabstop>pushButtonMarkNone</tabstop>
   <tabstop>pushButtonAdd</tabstop>
  </tabstops>
  <resources/>

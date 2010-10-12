@@ -27,6 +27,9 @@
 #include "CAImporter.hpp"
 
 class Ui_importWindow;
+class QNetworkAccessManager;
+class QNetworkReply;
+class QProgressBar;
 
 /*! \brief Window for importing orbital elements from various sources.
   \author Bogdan Marinov
@@ -45,19 +48,28 @@ public:
 	void languageChanged();
 
 private slots:
-	void parseElements();
-	void addObjects();
-
-	void pasteClipboard();
-	void selectFile();
-	void bookmarkSelected(QString);
-
+	//Radio buttons for type
 	void switchImportType(bool checked);
+
+	//Single string
+	void pasteClipboard();
+
+	//File
+	void selectFile();
+
+	//Download
+	void bookmarkSelected(QString);
+	void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
+	void downloadComplete(QNetworkReply * reply);
+
+	//Final button for the first page
+	void acquireObjectData();
 
 	//! Marks (checks) all items in the results lists
 	void markAll();
 	//! Unmarks (unchecks) all items in the results lists
 	void unmarkAll();
+	void addObjects();
 
 private:
 	CAImporter * ssoManager;
@@ -71,6 +83,18 @@ private:
 	QList<CAImporter::SsoElements> readElementsFromFile(QString filePath);
 
 	void populateCandidateObjects(QList<CAImporter::SsoElements>);
+
+	QNetworkAccessManager * downloadManager;
+	QNetworkReply * downloadReply;
+	QProgressBar * downloadProgressBar;
+
+	void startDownload(QString url);
+	//void abortDownload();
+	void deleteDownloadProgressBar();
+
+	//TODO: Temporarily here?
+	typedef QHash<QString,QString> Bookmarks;
+	QHash<ImportType, Bookmarks> bookmarks;
 
 protected:
 	virtual void createDialogContent();

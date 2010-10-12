@@ -31,18 +31,42 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QFileDialog>
+#include <QHash>
 #include <QList>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
 #include <QString>
+#include <QTemporaryFile>
+#include <QUrl>
 
 ImportWindow::ImportWindow()
 {
 	ui = new Ui_importWindow();
 	ssoManager = GETSTELMODULE(CAImporter);
+
+	downloadManager = StelApp::getInstance().getNetworkAccessManager();
+
+	downloadReply = NULL;
+	downloadProgressBar = NULL;
+
+	QHash<QString,QString> asteroidBookmarks;
+	QHash<QString,QString> cometBookmarks;
+	asteroidBookmarks.insert("MPC's list of bright minor planets at opposition", "http://www.minorplanetcenter.org/iau/Ephemerides/Bright/2010/Soft00Bright.txt");
+	asteroidBookmarks.insert("MPCORB: near-Earth asteroids (NEAs)", "http://www.minorplanetcenter.org/iau/MPCORB/NEA.txt");
+	asteroidBookmarks.insert("MPCORB: potentially hazardous asteroids (PHAs)", "http://www.minorplanetcenter.org/iau/MPCORB/PHA.txt");
+	cometBookmarks.insert("MPC's list of observable comets", "http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft00Cmt.txt");
+	bookmarks.insert(MpcComets, cometBookmarks);
+	bookmarks.insert(MpcMinorPlanets, asteroidBookmarks);
 }
 
 ImportWindow::~ImportWindow()
 {
 	delete ui;
+	if (downloadReply)
+		downloadReply->deleteLater();
+	if (downloadProgressBar)
+		downloadProgressBar->deleteLater();
 }
 
 void ImportWindow::createDialogContent()
@@ -52,7 +76,7 @@ void ImportWindow::createDialogContent()
 	//Signals
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
-	connect(ui->pushButtonParse, SIGNAL(clicked()), this, SLOT(parseElements()));
+	connect(ui->pushButtonParse, SIGNAL(clicked()), this, SLOT(acquireObjectData()));
 	connect(ui->pushButtonAdd, SIGNAL(clicked()), this, SLOT(addObjects()));
 
 	connect(ui->pushButtonPaste, SIGNAL(clicked()), this, SLOT(pasteClipboard()));
@@ -68,6 +92,8 @@ void ImportWindow::createDialogContent()
 
 	connect(ui->pushButtonMarkAll, SIGNAL(clicked()), this, SLOT(markAll()));
 	connect(ui->pushButtonMarkNone, SIGNAL(clicked()), this, SLOT(unmarkAll()));
+
+	connect(downloadManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
 
 	ui->radioButtonSingle->setChecked(true);
 	ui->frameFile->setVisible(false);
@@ -86,7 +112,7 @@ void ImportWindow::languageChanged()
 		ui->retranslateUi(dialog);
 }
 
-void ImportWindow::parseElements()
+void ImportWindow::acquireObjectData()
 {
 	if (ui->radioButtonSingle->isChecked())
 	{
@@ -121,9 +147,12 @@ void ImportWindow::parseElements()
 	}
 	else if (ui->radioButtonURL->isChecked())
 	{
-		//TODO: Verify and download
+		QString url = ui->lineEditURL->text();
+		if (url.isEmpty())
+			return;
+		startDownload(url);
 	}
-	ui->stackedWidget->setCurrentIndex(1);
+	//ui->stackedWidget->setCurrentIndex(1);
 	//close();
 }
 
@@ -174,8 +203,12 @@ void ImportWindow::selectFile()
 
 void ImportWindow::bookmarkSelected(QString bookmarkTitle)
 {
-	//TODO: Lookup bookmark
-	QString bookmarkUrl = bookmarkTitle;
+	if (bookmarkTitle.isEmpty() || bookmarkTitle == "Select bookmark...")
+	{
+		ui->lineEditURL->clear();
+		return;
+	}
+	QString bookmarkUrl = bookmarks.value(importType).value(bookmarkTitle);
 	ui->lineEditURL->setText(bookmarkUrl);
 }
 
@@ -267,13 +300,17 @@ void ImportWindow::switchImportType(bool checked)
 	if (ui->radioButtonAsteroids->isChecked())
 	{
 		importType = MpcMinorPlanets;
-		//TODO: Update bookmark list
 	}
 	else
 	{
 		importType = MpcComets;
-		//TODO: Update bookmark list
 	}
+
+	ui->comboBoxBookmarks->clear();
+	ui->comboBoxBookmarks->addItem("Select bookmark...");
+	QStringList bookmarkTitles(bookmarks.value(importType).keys());
+	bookmarkTitles.sort();
+	ui->comboBoxBookmarks->addItems(bookmarkTitles);
 
 	//Clear the fields
 	ui->lineEditSingle->clear();
@@ -315,5 +352,126 @@ void ImportWindow::unmarkAll()
 		{
 			item->setCheckState(Qt::Unchecked);
 		}
+	}
+}
+
+void ImportWindow::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
+{
+	if (downloadProgressBar == NULL)
+		return;
+
+	int currentValue = 0;
+	int endValue = 0;
+
+	if (bytesTotal > -1 && bytesReceived <= bytesTotal)
+	{
+		//Round to the greatest possible derived unit
+		while (bytesTotal > 1024)
+		{
+			bytesReceived = std::floor(bytesReceived / 1024);
+			bytesTotal    = std::floor(bytesTotal / 1024);
+		}
+		currentValue = bytesReceived;
+		endValue = bytesTotal;
+	}
+
+	downloadProgressBar->setValue(currentValue);
+	downloadProgressBar->setMaximum(endValue);
+}
+
+void ImportWindow::startDownload(QString urlString)
+{
+	if (downloadReply)
+	{
+		//There's already an operation in progress?
+		//TODO
+		return;
+	}
+
+	QUrl url(urlString);
+	if (!url.isValid() || url.isRelative() || url.scheme() != "http")
+	{
+		qWarning() << "Invalid URL:" << urlString;
+		return;
+	}
+	qDebug() << url.toString();
+
+	//TODO: Interface changes!
+
+	downloadProgressBar = StelApp::getInstance().getGui()->addProgressBar();
+	downloadProgressBar->setValue(0);
+	downloadProgressBar->setMaximum(0);
+	//downloadProgressBar->setFormat("%v/%m");
+	downloadProgressBar->setVisible(true);
+
+	//TODO: Better handling of the interface
+	dialog->setVisible(false);
+
+	downloadReply = downloadManager->get(QNetworkRequest(url));
+	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
+}
+
+void ImportWindow::downloadComplete(QNetworkReply *reply)
+{
+	deleteDownloadProgressBar();
+	dialog->setVisible(true);
+
+	if(reply->error())
+	{
+		qWarning() << "Download error: While downloading"
+		           << reply->url().toString()
+				   << "the following error occured:"
+				   << reply->errorString();
+		return;
+	}
+
+	QList<CAImporter::SsoElements> objects;
+	QTemporaryFile file;
+	if (file.open())
+	{
+		file.write(reply->readAll());
+		file.close();
+		objects = readElementsFromFile(file.fileName());
+	}
+	else
+	{
+		qWarning() << "Unable to open a temporary file. Aborting operation.";
+	}
+
+	if (objects.isEmpty())
+	{
+		qDebug() << "No objects in the returned file";
+		return;
+	}
+
+	//The request has been successful: add the URL to bookmarks?
+	//TODO: As the bookmarks are destroyed with the window, this doesn't make much sense :)
+	if (ui->checkBoxAddBookmark->isChecked())
+	{
+		QString url = reply->url().toString();
+		if (!bookmarks.value(importType).values().contains(url))
+		{
+			//Use the URL as a title for now
+			bookmarks[importType].insert(url, url);
+		}
+	}
+
+	reply->deleteLater();
+	downloadReply = NULL;
+
+	//Temporary, until the slot/socket mechanism is ready
+	populateCandidateObjects(objects);
+	ui->stackedWidget->setCurrentIndex(1);
+}
+
+void ImportWindow::deleteDownloadProgressBar()
+{
+	disconnect(this, SLOT(updateDownloadProgress(qint64,qint64)));
+
+	if (downloadProgressBar)
+	{
+		downloadProgressBar->setVisible(false);
+		downloadProgressBar->deleteLater();
+		downloadProgressBar = NULL;
 	}
 }
