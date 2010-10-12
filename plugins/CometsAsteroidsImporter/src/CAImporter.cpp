@@ -241,6 +241,70 @@ void CAImporter::resetSolarSystemToDefault()
 	}
 }
 
+bool CAImporter::copySolarSystemConfigurationFileTo(QString filePath)
+{
+	if (QFile::exists(customSolarSystemFilePath))
+	{
+		QFileInfo targetFile(filePath);
+		return QFile::copy(customSolarSystemFilePath, targetFile.absoluteFilePath());
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool CAImporter::replaceSolarSystemConfigurationFileWith(QString filePath)
+{
+	if (!QFile::exists(filePath))
+	{
+		//TODO: Message
+		return false;
+	}
+
+	//Is it a valid configuration file?
+	QSettings settings(filePath, QSettings::IniFormat);
+	if (settings.status() != QSettings::NoError)
+	{
+		qWarning() << filePath << "is not a valid configuration file.";
+		return false;
+	}
+
+	//Remove the existingfile
+	if (QFile::exists(customSolarSystemFilePath))
+	{
+		if(!QFile::remove(customSolarSystemFilePath))
+		{
+			//TODO: Message
+			return false;
+		}
+	}
+
+	//Copy the new file
+	//If the copy fails, reset to the default configuration
+	if (QFile::copy(filePath, customSolarSystemFilePath))
+	{
+		GETSTELMODULE(SolarSystem)->reloadPlanets();
+		emit solarSystemChanged();
+		return true;
+	}
+	else
+	{
+		//TODO: Message
+		if (cloneSolarSystemConfigurationFile())
+		{
+			GETSTELMODULE(SolarSystem)->reloadPlanets();
+			emit solarSystemChanged();
+			return true;
+		}
+		else
+		{
+			//TODO: Message
+			return false;
+		}
+	}
+}
+
 QStringList CAImporter::readAllActiveSsoIdsInFile(QString filePath)
 {
 	if (!QFile::exists(filePath))

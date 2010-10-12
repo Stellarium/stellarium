@@ -160,6 +160,11 @@ public:
 	//! \returns false if there was an error
 	bool removeSsoWithId(QString id);
 
+	//!
+	bool copySolarSystemConfigurationFileTo(QString filePath);
+	//!
+	bool replaceSolarSystemConfigurationFileWith(QString filePath);
+
 	//! returns the path
 	QString getCustomSolarSystemFilePath() const {return customSolarSystemFilePath;}
 	
