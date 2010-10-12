@@ -229,6 +229,18 @@ bool CAImporter::resetSolarSystemConfigurationFile()
 	return cloneSolarSystemConfigurationFile();
 }
 
+void CAImporter::resetSolarSystemToDefault()
+{
+	if (isInitialized)
+	{
+		if (resetSolarSystemConfigurationFile())
+		{
+			GETSTELMODULE(SolarSystem)->reloadPlanets();
+			emit solarSystemChanged();
+		}
+	}
+}
+
 QStringList CAImporter::readAllActiveSsoIdsInFile(QString filePath)
 {
 	if (!QFile::exists(filePath))

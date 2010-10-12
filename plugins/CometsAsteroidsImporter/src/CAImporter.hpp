@@ -164,6 +164,8 @@ public:
 	QString getCustomSolarSystemFilePath() const {return customSolarSystemFilePath;}
 	
 public slots:
+	//! Resets the Solar System configuration file and reloads the Solar System.
+	void resetSolarSystemToDefault();
 
 signals:
 	//TODO: This should be part of SolarSystem::reloadPlanets()
@@ -193,6 +195,7 @@ private:
 	//! Creates a copy of the default ssystem.ini file in the user data directory.
 	//! \returns true if a file already exists or the copying has been successful
 	bool cloneSolarSystemConfigurationFile();
+
 	//! Replaces the user copy of ssystem.ini with the default one.
 	//! This function simply deletes the file, if it exists, and calls
 	//! cloneSolarSystemConfigurationFile().
