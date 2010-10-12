@@ -21,18 +21,27 @@
 #include <QDebug>
 #include <QSettings>
 
-Telescope::Telescope(QSqlRecord record)
+Telescope::Telescope()
 {
-	telescopeID = record.value("id").toInt();
-	name = record.value("name").toString();
-	focalLength = record.value("focalLength").toDouble();
-	diameter = record.value("diameter").toDouble();
-	hFlipped = record.value("hFlip").toBool();
-	vFlipped = record.value("vFlip").toBool();
 }
 
 Telescope::~Telescope()
 {
+}
+
+static Telescope* telescopeFromSettings(QSettings* theSettings, QString theGroupName)
+{
+	Telescope* telescope = new Telescope();
+	theSettings->beginGroup(theGroupName);
+
+	telescope->setName(theSettings->value("name", "").toString());
+	telescope->setFocalLength(theSettings->value("focalLength", "0").toDouble());
+	telescope->setDiameter(theSettings->value("diameter", "0").toDouble());
+	telescope->setHFlipped(theSettings->value("hFlip").toBool());
+	telescope->setVFlipped(theSettings->value("vFlip").toBool());
+	
+	theSettings->endGroup();
+	return telescope;
 }
 
 /* ********************************************************************* */
@@ -41,32 +50,53 @@ Telescope::~Telescope()
 #pragma mark Accessors & Mutators
 #endif
 /* ********************************************************************* */
-const QString Telescope::getName()
+const QString Telescope::name() const
 {
-	return name;
+	return m_name;
 }
 
-double Telescope::getFocalLength()
+void Telescope::setName(QString theValue)
 {
-	return focalLength;
+	m_name = theValue;
 }
 
-int Telescope::getTelescopeID()
+double Telescope::focalLength() const
 {
-	return telescopeID;
+	return m_focalLength;
 }
 
-double Telescope::getDiameter()
+void Telescope::setFocalLength(double theValue)
 {
-	return diameter;
+	m_focalLength = theValue;
 }
 
-bool Telescope::isHFlipped()
+double Telescope::diameter() const
 {
-	return hFlipped;
+	return m_diameter;
 }
 
-bool Telescope::isVFlipped()
+void Telescope::setDiameter(double theValue)
 {
-	return vFlipped;
+	m_diameter = theValue;
 }
+
+bool Telescope::isHFlipped() const
+{
+	return m_hFlipped;
+}
+
+void Telescope::setHFlipped(bool flipped)
+{
+	m_hFlipped = flipped;
+}
+
+bool Telescope::isVFlipped() const
+{
+	return m_vFlipped;
+}
+
+void Telescope::setVFlipped(bool flipped)
+{
+	m_vFlipped = flipped;
+}
+

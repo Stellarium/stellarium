@@ -32,12 +32,10 @@
 #define MIN_OCULARS_INI_VERSION 0.12
 
 QT_BEGIN_NAMESPACE
-class QSqlTableModel;
 class QKeyEvent;
 class QMouseEvent;
 class QPixmap;
 class QSettings;
-class QSqlQuery;
 QT_END_NAMESPACE
 
 class StelButton;
@@ -179,10 +177,6 @@ private:
 	bool visible;
 	bool ready; //!< A flag that determines that this module is usable.  If false, we won't open.
 	bool newInstrument; //!< true the first time draw is called for a new ocular or telescope, false otherwise.
-
-	QSqlTableModel *ccdsTableModel;
-	QSqlTableModel *ocularsTableModel;
-	QSqlTableModel *telescopesTableModel;
 
 	//Styles
 	QByteArray normalStyleSheet;

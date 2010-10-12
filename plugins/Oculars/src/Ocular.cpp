@@ -22,24 +22,35 @@
 #include <QDebug>
 #include <QSettings>
 
-Ocular::Ocular(QSettings* settings)
+Ocular::Ocular()
 {
-	ocularID = settings->value("id", "0").toInt();
-	name = settings->value("name", "").toString();
-	appearentFOV = settings->value("afov", "0.0").toDouble();
-	effectiveFocalLength = settings->value("efl", "0.0").toDouble();
-	fieldStop = settings->value("fieldStop", "0.0").toDouble();
-	if (!(appearentFOV > 0.0 && effectiveFocalLength > 0.0))
-	{
-		qWarning() << "WARNING: Invalid data for ocular. Ocular values must be positive. \n"
-			<< "\tafov: " << appearentFOV << "\n"
-			<< "\tefl: " << effectiveFocalLength << "\n"
-			<< "\tThis ocular will be ignored.";
-	}
 }
 
 Ocular::~Ocular()
 {
+}
+
+static Ocular* ocularFromSettings(QSettings* theSettings, QString theGroupName)
+{
+	Ocular* ocular = new Ocular();
+	theSettings->beginGroup(theGroupName);
+	
+	ocular->setName(theSettings->value("name", "").toString());
+	ocular->setAppearentFOV(theSettings->value("afov", "0.0").toDouble());
+	ocular->setEffectiveFocalLength(theSettings->value("efl", "0.0").toDouble());
+	ocular->setFieldStop(theSettings->value("fieldStop", "0.0").toDouble());
+	
+	theSettings->endGroup();
+	if (!(ocular->appearentFOV() > 0.0 && ocular->effectiveFocalLength() > 0.0)) {
+		qWarning() << "WARNING: Invalid data for ocular. Ocular values must be positive. \n"
+			<< "\tafov: " << ocular->appearentFOV() << "\n"
+			<< "\tefl: " << ocular->effectiveFocalLength() << "\n"
+			<< "\tThis ocular will be ignored.";
+		delete ocular;
+		ocular = NULL;
+	}
+	
+	return ocular;
 }
 
 /* ********************************************************************* */
@@ -48,21 +59,21 @@ Ocular::~Ocular()
 #pragma mark Instance Methods
 #endif
 /* ********************************************************************* */
-double Ocular::getActualFOV(Telescope *telescope)
+double Ocular::actualFOV(Telescope *telescope) const
 {
 	double actualFOV = 0.0;
-	if (fieldStop > 0.0) {
-		actualFOV =  fieldStop / telescope->getFocalLength() * 57.3;
+	if (fieldStop() > 0.0) {
+		actualFOV =  fieldStop() / telescope->focalLength() * 57.3;
 	} else {
 		//actualFOV = apparent / mag
-		actualFOV = appearentFOV / (telescope->getFocalLength() / effectiveFocalLength);
+		actualFOV = appearentFOV() / (telescope->focalLength() / effectiveFocalLength());
 	}
 	return actualFOV;
 }
 
-double Ocular::getMagnification(Telescope *telescope)
+double Ocular::magnification(Telescope *telescope) const
 {
-	return telescope->getFocalLength() / effectiveFocalLength;
+	return telescope->focalLength() / effectiveFocalLength();
 }
 
 /* ********************************************************************* */
@@ -71,27 +82,42 @@ double Ocular::getMagnification(Telescope *telescope)
 #pragma mark Accessors & Mutators
 #endif
 /* ********************************************************************* */
-const QString Ocular::getName()
+const QString Ocular::name() const
 {
-	return name;
+	return m_name;
 }
 
-int Ocular::getOcularID()
+void Ocular::setName(QString aName)
 {
-	return ocularID;
+	m_name = aName;
 }
 
-double Ocular::getAppearentFOV()
+double Ocular::appearentFOV() const
 {
-	return appearentFOV;
+	return m_appearentFOV;
 }
 
-double Ocular::getEffectiveFocalLength()
+void Ocular::setAppearentFOV(double fov)
 {
-	return effectiveFocalLength;
+	m_appearentFOV = fov;
 }
 
-double Ocular::getFieldStop()
+double Ocular::effectiveFocalLength() const
 {
-	return fieldStop;
+	return m_effectiveFocalLength;
+}
+
+void Ocular::setEffectiveFocalLength(double fl)
+{
+	m_effectiveFocalLength = fl;
+}
+
+double Ocular::fieldStop() const
+{
+	return m_fieldStop;
+}
+
+void Ocular::setFieldStop(double fs)
+{
+	m_fieldStop = fs;
 }
