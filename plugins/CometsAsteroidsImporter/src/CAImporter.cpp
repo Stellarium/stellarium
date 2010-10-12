@@ -538,7 +538,7 @@ CAImporter::SsoElements CAImporter::readMpcOneLineMinorPlanetElements(QString on
 	{
 		if (minorPlanetNumber)
 		{
-			QRegExp asteroidName("^\\((\\d+)\\)\\s+(\\w+)$");
+			QRegExp asteroidName("^\\((\\d+)\\)\\s+(\\S.+)$");
 			if (asteroidName.indexIn(column) == 0)
 			{
 				name = asteroidName.cap(2);
