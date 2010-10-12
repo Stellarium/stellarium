@@ -26,7 +26,10 @@
 #include "ImportWindow.hpp"
 
 #include "StelApp.hpp"
+#include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
+
+#include <QFileDialog>
 
 SolarSystemManagerWindow::SolarSystemManagerWindow()
 {
@@ -50,6 +53,8 @@ void SolarSystemManagerWindow::createDialogContent()
 
 	//Signals
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->pushButtonCopyFile, SIGNAL(clicked()), this, SLOT(copyConfiguration()));
+	connect(ui->pushButtonReplaceFile, SIGNAL(clicked()), this, SLOT(replaceConfiguration()));
 	connect(ui->pushButtonRemove, SIGNAL(clicked()), this, SLOT(removeObject()));
 	connect(ui->pushButtonImportMPC, SIGNAL(clicked()), this, SLOT(newImportMPC()));
 
@@ -94,6 +99,9 @@ void SolarSystemManagerWindow::resetImportMPC(bool show)
 
 		delete importWindow;
 		importWindow = NULL;
+
+		//This window is in the background, bring it to the foreground
+		dialog->setVisible(true);
 	}
 }
 
@@ -114,4 +122,17 @@ void SolarSystemManagerWindow::removeObject()
 		//TODO: Ask for confirmation first?
 		ssoManager->removeSsoWithId(ssoId);
 	}
+}
+
+void SolarSystemManagerWindow::copyConfiguration()
+{
+	//! \todo Find a way to suggest a default file name (select directory instead of file?)
+	QString filePath = QFileDialog::getSaveFileName(0, "Save the Solar System configuration file as...", StelFileMgr::getDesktopDir());
+	ssoManager->copySolarSystemConfigurationFileTo(filePath);
+}
+
+void SolarSystemManagerWindow::replaceConfiguration()
+{
+	QString filePath = QFileDialog::getOpenFileName(0, "Select a file to replace the Solar System configuration file", StelFileMgr::getDesktopDir(), QString("Configration files (*.ini)"));
+	ssoManager->replaceSolarSystemConfigurationFileWith(filePath);
 }
