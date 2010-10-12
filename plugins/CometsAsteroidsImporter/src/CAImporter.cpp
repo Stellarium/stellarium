@@ -66,7 +66,13 @@ CAImporter::CAImporter()
 {
 	setObjectName("CAImporter");
 
+	isInitialized = false;
+	mainWindow = NULL;
 	solarSystemConfigurationFile = NULL;
+
+	//I really hope that the file manager is instantiated before this
+	defaultSolarSystemFilePath	= QFileInfo(StelFileMgr::getInstallationDir() + "/data/ssystem.ini").absoluteFilePath();
+	customSolarSystemFilePath	= QFileInfo(StelFileMgr::getUserDir() + "/data/ssystem.ini").absoluteFilePath();
 }
 
 CAImporter::~CAImporter()
@@ -81,18 +87,23 @@ void CAImporter::init()
 {
 	//Get a list of the "default" Solar System objects' IDs:
 	//TODO: Use it as validation for the loading of the plug-in
-	QString defaultFilePath	= StelFileMgr::getInstallationDir() + "/data/ssystem.ini";
-	if (QFile::exists(defaultFilePath))
+	if (QFile::exists(defaultSolarSystemFilePath))
 	{
-		defaultSsoIds = readAllActiveSsoIdsInFile(defaultFilePath);
+		defaultSsoIds = readAllActiveSsoIdsInFile(defaultSolarSystemFilePath);
 	}
 	else
 	{
+		//TODO: Better error message
 		qDebug() << "Something is horribly wrong:" << StelFileMgr::getInstallationDir();
+		return;
 	}
 
 	try
 	{
+		//Make sure that a user ssystem.ini actually exists
+		if (!cloneSolarSystemConfigurationFile())
+			return;
+
 		mainWindow = new SolarSystemManagerWindow();
 	}
 	catch (std::runtime_error &e)
@@ -100,6 +111,8 @@ void CAImporter::init()
 		qWarning() << "init() error: " << e.what();
 		return;
 	}
+
+	isInitialized = true;
 }
 
 void CAImporter::deinit()
@@ -124,11 +137,17 @@ double CAImporter::getCallOrder(StelModuleActionName actionName) const
 
 bool CAImporter::configureGui(bool show)
 {
+	//If the plug-in has failed to initialize, disable the button
+	//! \todo Display a message in the window instead.
+	if (!isInitialized)
+		return false;
+
 	if(show)
 	{
 		mainWindow->setVisible(true);
 
-		if (cloneSolarSystemConfigurationFile())
+		//Debugging block
+		//if (cloneSolarSystemConfigurationFile())
 		{
 			//Import Encke for a start
 			/*SsoElements SSO = readMpcOneLineCometElements("0002P         2010 08  6.5102  0.336152  0.848265  186.5242  334.5718   11.7843  20100104  11.5  6.0  2P/Encke                                                 MPC 59600");
@@ -177,20 +196,16 @@ bool CAImporter::cloneSolarSystemConfigurationFile()
 		return false;
 	}
 
-	//TODO: Fix this!
-	QString defaultFilePath	= StelFileMgr::getInstallationDir() + "/data/ssystem.ini";//QDir::currentPath() + "/data/ssystem.ini";
-	QString userFilePath	= StelFileMgr::getUserDir() + "/data/ssystem.ini";
-
-	if (QFile::exists(userFilePath))
+	if (QFile::exists(customSolarSystemFilePath))
 	{
 		qDebug() << "Using the ssystem.ini file that already exists in the user directory...";
 		return true;
 	}
 
-	if (QFile::exists(defaultFilePath))
+	if (QFile::exists(defaultSolarSystemFilePath))
 	{
-		qDebug() << "Trying to copy ssystem.ini to" << userFilePath;
-		return QFile::copy(defaultFilePath, userFilePath);
+		qDebug() << "Trying to copy ssystem.ini to" << customSolarSystemFilePath;
+		return QFile::copy(defaultSolarSystemFilePath, customSolarSystemFilePath);
 	}
 	else
 	{
@@ -201,35 +216,34 @@ bool CAImporter::cloneSolarSystemConfigurationFile()
 
 bool CAImporter::resetSolarSystemConfigurationFile()
 {
-	QString userFilePath = StelFileMgr::getUserDir() + "/data/ssystem.ini";
-	if (QFile::exists(userFilePath))
+	if (QFile::exists(customSolarSystemFilePath))
 	{
-		if (QFile::remove((userFilePath)))
+		if (!QFile::remove((customSolarSystemFilePath)))
 		{
-			return true;
-		}
-		else
-		{
-			qWarning() << "Unable to delete" << userFilePath
+			qWarning() << "Unable to delete" << customSolarSystemFilePath
 			         << endl << "Please remove the file manually.";
 			return false;
 		}
 	}
-	else
-	{
-		return true;
-	}
+
+	return cloneSolarSystemConfigurationFile();
 }
 
 QStringList CAImporter::readAllActiveSsoIdsInFile(QString filePath)
 {
-	QSettings defaultSolarSystem(filePath, QSettings::IniFormat);
-	QStringList groups = defaultSolarSystem.childGroups();
+	if (!QFile::exists(filePath))
+		return QStringList();
+
+	QSettings solarSystem(filePath, QSettings::IniFormat);
+	if (solarSystem.status() != QSettings::NoError)
+		return QStringList();
+
+	QStringList groups = solarSystem.childGroups();
 	QStringList planetNames = GETSTELMODULE(SolarSystem)->getAllPlanetEnglishNames();
 	QStringList ssoIds;
 	foreach (QString group, groups)
 	{
-		QString name = defaultSolarSystem.value(group + "/name").toString();
+		QString name = solarSystem.value(group + "/name").toString();
 		if (planetNames.contains(name))
 		{
 			ssoIds.append(group);
@@ -240,10 +254,9 @@ QStringList CAImporter::readAllActiveSsoIdsInFile(QString filePath)
 
 QStringList CAImporter::readAllCurrentSsoIds()
 {
-	QString userFilePath = StelFileMgr::getUserDir() + "/data/ssystem.ini";
-	if (QFile::exists(userFilePath))
+	if (QFile::exists(customSolarSystemFilePath))
 	{
-		return readAllActiveSsoIdsInFile(userFilePath);
+		return readAllActiveSsoIdsInFile(customSolarSystemFilePath);
 	}
 	else
 	{
@@ -260,18 +273,17 @@ bool CAImporter::removeSsoWithId(QString id)
 	qDebug() << id;
 
 	//Make sure that the file exists
-	QString userFilePath = StelFileMgr::getUserDir() + "/data/ssystem.ini";
-	if (!QFile::exists(userFilePath))
+	if (!QFile::exists(customSolarSystemFilePath))
 	{
-		qDebug() << "Can't remove" << id << "to ssystem.ini: Unable to find" << userFilePath;
+		qDebug() << "Can't remove" << id << "to ssystem.ini: Unable to find" << customSolarSystemFilePath;
 		return false;
 	}
 
 	//Open the file
-	QSettings settings(userFilePath, QSettings::IniFormat);
+	QSettings settings(customSolarSystemFilePath, QSettings::IniFormat);
 	if (settings.status() != QSettings::NoError)
 	{
-		qDebug() << "Error opening ssystem.ini:" << userFilePath;
+		qDebug() << "Error opening ssystem.ini:" << customSolarSystemFilePath;
 		return false;
 	}
 
@@ -699,18 +711,17 @@ bool CAImporter::appendToSolarSystemConfigurationFile(QList<SsoElements> objectL
 	}
 
 	//Check if the configuration file exists
-	QString userFilePath = StelFileMgr::getUserDir() + "/data/ssystem.ini";
-	if (!QFile::exists(userFilePath))
+	if (!QFile::exists(customSolarSystemFilePath))
 	{
-		qDebug() << "Can't append object data to ssystem.ini: Unable to find" << userFilePath;
+		qDebug() << "Can't append object data to ssystem.ini: Unable to find" << customSolarSystemFilePath;
 		return false;
 	}
 
 	//Remove duplicates
-	QSettings * solarSystemSettings = new QSettings(userFilePath, QSettings::IniFormat);
+	QSettings * solarSystemSettings = new QSettings(customSolarSystemFilePath, QSettings::IniFormat);
 	if (solarSystemSettings->status() != QSettings::NoError)
 	{
-		qDebug() << "Error opening ssystem.ini:" << userFilePath;
+		qDebug() << "Error opening ssystem.ini:" << customSolarSystemFilePath;
 		return false;
 	}
 	foreach (SsoElements object, objectList)
@@ -730,7 +741,7 @@ bool CAImporter::appendToSolarSystemConfigurationFile(QList<SsoElements> objectL
 	//Write to file
 	//TODO: The usual validation
 	qDebug() << "Appending to file...";
-	QFile solarSystemConfigurationFile(userFilePath);
+	QFile solarSystemConfigurationFile(customSolarSystemFilePath);
 	if(solarSystemConfigurationFile.open(QFile::WriteOnly | QFile::Append | QFile::Text))
 	{
 		QTextStream output (&solarSystemConfigurationFile);
@@ -761,7 +772,7 @@ bool CAImporter::appendToSolarSystemConfigurationFile(QList<SsoElements> objectL
 	}
 	else
 	{
-		qDebug() << "Unable to open for writing" << userFilePath;
+		qDebug() << "Unable to open for writing" << customSolarSystemFilePath;
 		return false;
 	}
 }

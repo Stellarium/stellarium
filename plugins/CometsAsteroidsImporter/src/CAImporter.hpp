@@ -159,6 +159,9 @@ public:
 	//! no such entry
 	//! \returns false if there was an error
 	bool removeSsoWithId(QString id);
+
+	//! returns the path
+	QString getCustomSolarSystemFilePath() const {return customSolarSystemFilePath;}
 	
 public slots:
 
@@ -167,10 +170,15 @@ signals:
 	void solarSystemChanged();
 	
 private:
+	bool isInitialized;
+
 	//! Main window of the module's GUI
 	SolarSystemManagerWindow * mainWindow;
 
 	QSettings * solarSystemConfigurationFile;
+
+	QString customSolarSystemFilePath;
+	QString defaultSolarSystemFilePath;
 
 	//! List of the IDs of all Solar System objects in the default ssystem.ini.
 	//! Initialized in init().
@@ -183,9 +191,12 @@ private:
 	QStringList readAllActiveSsoIdsInFile(QString filePath);
 
 	//! Creates a copy of the default ssystem.ini file in the user data directory.
-	//! @returns true if a file already exists or the copying has been successful
+	//! \returns true if a file already exists or the copying has been successful
 	bool cloneSolarSystemConfigurationFile();
-	//! Removes the user copy of ssystem.ini, if any exists.
+	//! Replaces the user copy of ssystem.ini with the default one.
+	//! This function simply deletes the file, if it exists, and calls
+	//! cloneSolarSystemConfigurationFile().
+	//! \returns true if the replacement has been successfull.
 	bool resetSolarSystemConfigurationFile();
 
 	//! Converts an alphanumeric digit as used in MPC packed dates to an integer.
