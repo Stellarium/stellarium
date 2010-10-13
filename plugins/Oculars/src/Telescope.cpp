@@ -38,6 +38,13 @@ Telescope::~Telescope()
 {
 }
 
+/* ********************************************************************* */
+#if 0
+#pragma mark -
+#pragma mark Static Methods
+#endif
+/* ********************************************************************* */
+
 static Telescope* telescopeFromSettings(QSettings* theSettings, QString theGroupName)
 {
 	Telescope* telescope = new Telescope();
@@ -51,6 +58,31 @@ static Telescope* telescopeFromSettings(QSettings* theSettings, QString theGroup
 	
 	theSettings->endGroup();
 	return telescope;
+}
+
+static QMap<int, QString> mapping;
+static QMap<int, QString> propertyMap()
+{
+	if(mapping.isEmpty()) {
+		mapping = QMap<int, QString>();
+		mapping[0] = "name";
+		mapping[1] = "diameter";
+		mapping[2] = "focalLength";
+		mapping[3] = "hFlipped";
+		mapping[4] = "vFlipped";
+	}
+	return mapping;
+}
+
+static Telescope* model()
+{
+	Telescope* model = new Telescope();
+	model->setName("My Telescope");
+	model->setDiameter(80);
+	model->setFocalLength(500);
+	model->setHFlipped(true);
+	model->setVFlipped(true);
+	return model;
 }
 
 /* ********************************************************************* */

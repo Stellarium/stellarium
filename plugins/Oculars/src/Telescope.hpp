@@ -36,6 +36,8 @@ public:
 	Q_INVOKABLE Telescope(const Telescope* other);
 	virtual ~Telescope();
 	static Telescope* telescopeFromSettings(QSettings* theSettings, QString theGroupName);
+	static QMap<int, QString> propertyMap();
+	static Telescope* model();
 
 	double diameter() const;
 	void setDiameter(double theValue);
