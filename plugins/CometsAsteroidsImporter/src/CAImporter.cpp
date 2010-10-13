@@ -513,7 +513,27 @@ CAImporter::SsoElements CAImporter::readMpcOneLineMinorPlanetElements(QString on
 	}
 	else
 	{
-		provisionalDesignation = unpackMinorPlanetProvisionalDesignation(column);
+		//See if it is a number, but packed
+		//I hope the format is right (I've seen prefixes only between A and P)
+		QRegExp packedMinorPlanetNumber("^([A-Za-z])(\\d+)$");
+		if (packedMinorPlanetNumber.indexIn(column) == 0)
+		{
+			minorPlanetNumber = packedMinorPlanetNumber.cap(2).toInt(&ok);
+			//TODO: Validation
+			QChar prefix = packedMinorPlanetNumber.cap(1).at(0);
+			if (prefix.isUpper())
+			{
+				minorPlanetNumber += ((10 + prefix.toAscii() - 'A') * 10000);
+			}
+			else
+			{
+				minorPlanetNumber += ((10 + prefix.toAscii() - 'a' + 26) * 10000);
+			}
+		}
+		else
+		{
+			provisionalDesignation = unpackMinorPlanetProvisionalDesignation(column);
+		}
 	}
 
 	if (minorPlanetNumber)
@@ -741,7 +761,7 @@ QList<CAImporter::SsoElements> CAImporter::readMpcOneLineMinorPlanetElementsFrom
 
 		while(!mpcElementsFile.atEnd())
 		{
-			QString oneLineElements = QString(mpcElementsFile.readLine(202));
+			QString oneLineElements = QString(mpcElementsFile.readLine(202 + 2));//Allow for end-of-line characters
 			if(oneLineElements.endsWith('\n'))
 			{
 				oneLineElements.chop(1);
@@ -922,7 +942,32 @@ QString CAImporter::unpackMinorPlanetProvisionalDesignation (QString packedDesig
 	QRegExp packedFormat("^([IJK])(\\d\\d)([A-Z])([\\dA-Za-z])(\\d)([A-Z])$");
 	if (packedFormat.indexIn(packedDesignation) != 0)
 	{
-		return QString();
+		QRegExp packedSurveyDesignation("^(PL|T1|T2|T3)S(\\d+)$");
+		if (packedSurveyDesignation.indexIn(packedDesignation) == 0)
+		{
+			int number = packedSurveyDesignation.cap(2).toInt();
+			if (packedSurveyDesignation.cap(1) == "PL")
+			{
+				return QString("%1 P-L").arg(number);
+			}
+			else if (packedSurveyDesignation.cap(1) == "T1")
+			{
+				return QString("%1 T-1").arg(number);
+			}
+			else if (packedSurveyDesignation.cap(1) == "T2")
+			{
+				return QString("%1 T-2").arg(number);
+			}
+			else
+			{
+				return QString("%1 T-3").arg(number);
+			}
+			//TODO: Are there any other surveys?
+		}
+		else
+		{
+			return QString();
+		}
 	}
 
 	//Year
