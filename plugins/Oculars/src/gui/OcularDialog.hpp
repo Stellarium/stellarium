@@ -22,6 +22,7 @@
 #include <QObject>
 #include "CCD.hpp"
 #include "Ocular.hpp"
+#include "PropertyBasedTableModel.hpp"
 #include "StelDialogOculars.hpp"
 #include "StelStyle.hpp"
 #include "Telescope.hpp"
@@ -78,10 +79,13 @@ private slots:
 private:
 	QDataWidgetMapper *ccdMapper;
 	QList<CCD *> ccds;
+	PropertyBasedTableModel* ccdTableModel;
 	QDataWidgetMapper *ocularMapper;
 	QList<Ocular *> oculars;
+	PropertyBasedTableModel* ocularTableModel;
 	QDataWidgetMapper *telescopeMapper;
 	QList<Telescope *> telescopes;
+	PropertyBasedTableModel* telescopeTableModel;
 	QIntValidator *validatorOcularAFOV;
 	QDoubleValidator *validatorOcularEFL;
 	QDoubleValidator *validatorTelescopeDiameter;
