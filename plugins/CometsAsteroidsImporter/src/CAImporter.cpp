@@ -346,7 +346,12 @@ bool CAImporter::removeSsoWithId(QString id)
 	if (id.isEmpty())
 		return false;
 
-	qDebug() << id;
+	//qDebug() << id;
+	if (getAllDefaultSsoIds().contains(id))
+	{
+		qWarning() << "You can't delete the default Solar System objects for the moment.";
+		return false;
+	}
 
 	//Make sure that the file exists
 	if (!QFile::exists(customSolarSystemFilePath))
