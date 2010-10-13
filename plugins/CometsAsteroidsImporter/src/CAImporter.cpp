@@ -53,7 +53,7 @@ StelPluginInfo CAImporterStelPluginInterface::getPluginInfo() const
 	
 	StelPluginInfo info;
 	info.id = "CAImporter";
-	info.displayedName = "Comets and Asteroids Importer";
+	info.displayedName = "Comets and Asteroids";
 	info.authors = "Bogdan Marinov";
 	info.contact = "http://stellarium.org";
 	info.description = "A plug-in that allows importing asteroid and comet data in different formats to Stellarium's ssystem.ini file. It's still a work in progress far from maturity.";
