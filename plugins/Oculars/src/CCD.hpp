@@ -40,6 +40,8 @@ public:
 	Q_INVOKABLE CCD(const CCD* other);
 	virtual ~CCD();
 	static CCD* ccdFromSettings(QSettings* theSettings, QString theGroupName);
+	static QMap<int, QString> propertyMap();
+	static CCD* model();
 
 	QString name() const;
 	void setName(QString name);

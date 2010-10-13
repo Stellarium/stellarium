@@ -108,19 +108,10 @@ Oculars::Oculars() : selectedOcularIndex(-1), flagShowOculars(false), usageMessa
 
 	setObjectName("Oculars");
 
-	ocularsTableModel = NULL;
-	telescopesTableModel = NULL;
-	ocularDialog = NULL;
 }
 
 Oculars::~Oculars()
 {
-	delete ccdsTableModel;
-	ccdsTableModel = NULL;
-	delete ocularsTableModel;
-	ocularsTableModel = NULL;
-	delete telescopesTableModel;
-	telescopesTableModel = NULL;
 	delete ocularDialog;
 	ocularDialog = NULL;
 }
@@ -361,7 +352,6 @@ void Oculars::enableOcular(bool b)
 
 	if (b) {
 		// load data and determine if we're ready (if we have all required data)
-		loadDatabaseObjects();
 	}
 	if (!ready) {
 		// no, some data was missing. We already warned, done.

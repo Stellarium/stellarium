@@ -28,7 +28,7 @@ CCD::CCD()
 
 CCD::CCD(const CCD* other)
 {
-	QT_ASSERT(other);
+	Q_ASSERT(other);
 	this->m_name = other->name();
 	this->m_chipHeight = other->chipHeight();
 	this->m_chipWidth = other->chipWidth();
@@ -42,6 +42,12 @@ CCD::~CCD()
 {
 }
 
+/* ********************************************************************* */
+#if 0
+#pragma mark -
+#pragma mark Static Methods
+#endif
+/* ********************************************************************* */
 static CCD* ccdFromSettings(QSettings* theSettings, QString theGroupName)
 {
 	CCD* ccd = new CCD();
@@ -58,7 +64,43 @@ static CCD* ccdFromSettings(QSettings* theSettings, QString theGroupName)
 	return ccd;
 }
 
-QString CCD::name() const 
+static QMap<int, QString> mapping;
+
+static QMap<int, QString> propertyMap()
+{
+	if(mapping.isEmpty()) {
+		mapping = QMap<int, QString>();
+		mapping[0] = "name";
+		mapping[1] = "chipHeight";
+		mapping[2] = "chipWidth";
+		mapping[3] = "pixelHeight";
+		mapping[4] = "pixelWidth";
+		mapping[5] = "resolutionX";
+		mapping[6] = "resolutionY";
+	}
+	return mapping;
+}
+
+static CCD* model()
+{
+	CCD* model = new CCD();
+	model->setName("My CCD");
+	model->setChipHeight(36.8);
+	model->setChipWidth(36.8);
+	model->setPixelHeight(9);
+	model->setPixelWidth(9);
+	model->setResolutionX(4096);
+	model->setResolutionY(4096);
+	return model;
+}
+
+/* ********************************************************************* */
+#if 0
+#pragma mark -
+#pragma mark Instance Methods
+#endif
+/* ********************************************************************* */
+QString CCD::name() const
 {
 	return m_name;
 }

@@ -28,7 +28,7 @@ Ocular::Ocular()
 
 Ocular::Ocular(const Ocular* other)
 {
-	QT_ASSERT(other);
+	Q_ASSERT(other);
 	this->m_appearentFOV = other->appearentFOV();
 	this->m_effectiveFocalLength = other->effectiveFocalLength();
 	this->m_fieldStop = other->fieldStop();
@@ -38,6 +38,13 @@ Ocular::Ocular(const Ocular* other)
 Ocular::~Ocular()
 {
 }
+
+/* ********************************************************************* */
+#if 0
+#pragma mark -
+#pragma mark Static Methods
+#endif
+/* ********************************************************************* */
 
 static Ocular* ocularFromSettings(QSettings* theSettings, QString theGroupName)
 {
@@ -60,6 +67,29 @@ static Ocular* ocularFromSettings(QSettings* theSettings, QString theGroupName)
 	}
 	
 	return ocular;
+}
+
+static QMap<int, QString> mapping;
+static QMap<int, QString> propertyMap()
+{
+	if(mapping.isEmpty()) {
+		mapping = QMap<int, QString>();
+		mapping[0] = "name";
+		mapping[1] = "appearentFOV";
+		mapping[2] = "effectiveFocalLength";
+		mapping[3] = "fieldStop";
+	}
+	return mapping;
+}
+
+static Ocular* model()
+{
+	Ocular* model = new Ocular();
+	model->setName("My Ocular");
+	model->setAppearentFOV(68);
+	model->setEffectiveFocalLength(32);
+	model->setFieldStop(0);
+	return model;
 }
 
 /* ********************************************************************* */

@@ -40,8 +40,12 @@ OcularDialog::OcularDialog(QList<CCD *> ccds, QList<Ocular *> oculars, QList<Tel
 {
 	ui = new Ui_ocularDialogForm;
 	this->ccds = ccds;
+	this->ccdTableModel = new PropertyBasedTableModel(ccds, CCD::propertyMap(), CCD::model(), this);
 	this->oculars = oculars;
+	this->ocularTableModel = new PropertyBasedTableModel(oculars, Ocular::propertyMap(), Ocular::model(), this);
 	this->telescopes = telescopes;
+	this->telescopeTableModel
+			= new PropertyBasedTableModel(telescopes, Telescope::propertyMap(), Telescope::model(), this);
 
 	validatorPositiveInt = new QIntValidator(0, std::numeric_limits<int>::max(), this);
 	validatorPositiveDouble = new QDoubleValidator(.0, std::numeric_limits<double>::max(), 24, this);
@@ -65,15 +69,15 @@ OcularDialog::~OcularDialog()
 		ui->ocularName->setValidator(0);
 		ui->telescopeName->setValidator(0);
 		ui->ocularName->setValidator(0);
-		ui->CCDName->setValidator(0);
-		ui->CCDResX->setValidator(0);
-		ui->CCDResY->setValidator(0);
-		ui->CCDChipX->setValidator(0);
-		ui->CCDChipY->setValidator(0);
-		ui->CCDPixelX->setValidator(0);
-		ui->CCDPixelX->setValidator(0);
-		delete CCDMapper;
-		CCDMapper = NULL;
+		ui->ccdName->setValidator(0);
+		ui->ccdResX->setValidator(0);
+		ui->ccdResY->setValidator(0);
+		ui->ccdChipX->setValidator(0);
+		ui->ccdChipY->setValidator(0);
+		ui->ccdPixelX->setValidator(0);
+		ui->ccdPixelX->setValidator(0);
+		delete ccdMapper;
+		ccdMapper = NULL;
 		delete ocularMapper;
 		ocularMapper = NULL;
 		delete telescopeMapper;
@@ -140,111 +144,27 @@ void OcularDialog::closeWindow()
 
 void OcularDialog::deleteSelectedCCD()
 {
-	QModelIndex selection = ui->ccdListView->currentIndex();
-	if (selection.row() != -1 && ccds.size() > 1) {
-		ccds.removeAt(selection.row());
-		ui->ccdListView->setCurrentIndex(CCDsTableModel->index(0, 1));
-	}
 }
 
 
 void OcularDialog::deleteSelectedOcular()
 {
-	QModelIndex selection = ui->ocularListView->currentIndex();
-	if (selection.row() != -1 && ocularsTableModel->rowCount() > 1) {
-		ocularsTableModel->removeRows(selection.row(), 1);
-		ui->ocularListView->setCurrentIndex(ocularsTableModel->index(0, 1));
-	}
 }
 
 void OcularDialog::deleteSelectedTelescope()
 {
-	QModelIndex selection = ui->telescopeListView->currentIndex();
-	if (selection.row() != -1 && telescopesTableModel->rowCount() > 1) {
-		telescopesTableModel->removeRows(selection.row(), 1);
-		ui->telescopeListView->setCurrentIndex(telescopesTableModel->index(0, 1));
-	}
 }
 
 void OcularDialog::insertNewCCD()
 {
-	QSqlField field1("name", QVariant::String);
-	QSqlField field2("resolution_x", QVariant::Int);
-	QSqlField field3("resolution_y", QVariant::Int);
-	QSqlField field4("chip_width", QVariant::Double);
-	QSqlField field5("chip_height", QVariant::Double);
-	QSqlField field6("pixel_width", QVariant::Double);
-	QSqlField field7("pixel_height", QVariant::Double);
-	field1.setValue(QVariant("New Sensor"));
-	field2.setValue(QVariant(4096));
-	field3.setValue(QVariant(4096));
-	field4.setValue(QVariant(36.8));
-	field5.setValue(QVariant(36.8));
-	field6.setValue(QVariant(9));
-	field7.setValue(QVariant(9));
-	QSqlRecord newRecord = QSqlRecord();
-	newRecord.append(field1);
-	newRecord.append(field2);
-	newRecord.append(field3);
-	newRecord.append(field4);
-	newRecord.append(field5);
-	newRecord.append(field6);
-	newRecord.append(field7);
-
-	if (CCDsTableModel->insertRecord(-1, newRecord)) {
-		ui->ccdListView->setCurrentIndex(CCDsTableModel->index(CCDsTableModel->rowCount() - 1, 1));
-	} else {
-		qWarning() << "Oculars: could not insert new sensor.  The error is: " << CCDsTableModel->lastError();
-	}
 }
 
 void OcularDialog::insertNewOcular()
 {
-	QSqlField field1("name", QVariant::String);
-	QSqlField field2("afov", QVariant::Double);
-	QSqlField field3("efl", QVariant::Double);
-	QSqlField field4("fieldStop", QVariant::Double);
-	field1.setValue(QVariant("New Ocular"));
-	field2.setValue(QVariant(82));
-	field3.setValue(QVariant(32));
-	field4.setValue(QVariant(0));
-	QSqlRecord newRecord = QSqlRecord();
-	newRecord.append(field1);
-	newRecord.append(field2);
-	newRecord.append(field3);
-	newRecord.append(field4);
-
-	if (ocularsTableModel->insertRecord(-1, newRecord)) {
-		ui->ocularListView->setCurrentIndex(ocularsTableModel->index(ocularsTableModel->rowCount() - 1, 1));
-	} else {
-		qWarning() << "Oculars: could not insert new ocular.  The error is: " << ocularsTableModel->lastError();
-	}
 }
 
 void OcularDialog::insertNewTelescope()
 {
-	QSqlField field1("name", QVariant::String);
-	QSqlField field2("focalLength", QVariant::Double);
-	QSqlField field3("diameter", QVariant::Double);
-	QSqlField field4("vFlip", QVariant::String);
-	QSqlField field5("hFlip", QVariant::String);
-	field1.setValue(QVariant("New Telescope"));
-	field2.setValue(QVariant(500));
-	field3.setValue(QVariant(80));
-	field4.setValue(QVariant("false"));
-	field5.setValue(QVariant("false"));
-	QSqlRecord newRecord = QSqlRecord();
-	newRecord.append(field1);
-	newRecord.append(field2);
-	newRecord.append(field3);
-	newRecord.append(field4);
-	newRecord.append(field5);
-
-	if (telescopesTableModel->insertRecord(-1, newRecord)) {
-		ui->telescopeListView->setCurrentIndex(telescopesTableModel->index(telescopesTableModel->rowCount() - 1, 1));
-	} else {
-		qWarning() << "Oculars: could not insert new telescope.  The error is: " << telescopesTableModel->lastError();
-	}
 }
 
 void OcularDialog::ccdSelected(int currentIndex)
@@ -261,33 +181,14 @@ void OcularDialog::telescopeSelected(int currentIndex)
 
 void OcularDialog::updateCCD()
 {
-	int selectionIndex = ui->ccdListView->currentIndex().row();
-	if (CCDMapper->submit()) {
-		ui->ccdListView->setCurrentIndex(CCDsTableModel->index(selectionIndex, 1));
-	} else {
-		qWarning() << "Oculars: error saving modified sensor.  Error is: " << CCDsTableModel->lastError();
-	}
 }
 
 void OcularDialog::updateOcular()
 {
-	int selectionIndex = ui->ocularListView->currentIndex().row();
-	if (ocularMapper->submit()) {
-		ui->ocularListView->setCurrentIndex(ocularsTableModel->index(selectionIndex, 1));
-	} else {
-		qWarning() << "Oculars: error saving modified ocular.  Error is: " << ocularsTableModel->lastError();
-	}
 }
 
 void OcularDialog::updateTelescope()
 {
-	int selectionIndex = ui->telescopeListView->currentIndex().row();
-	if (telescopeMapper->submit()) {
-		ui->telescopeListView->setCurrentIndex(telescopesTableModel->index(selectionIndex, 1));
-	} else {
-		qWarning() << "Oculars: error saving modified telescope.  Error is: " << telescopesTableModel->lastError();
-	}
-
 }
 
 /* ********************************************************************* */
@@ -334,7 +235,7 @@ void OcularDialog::createDialogContent()
 	connect(ui->deleteTelescope, SIGNAL(clicked()), this, SLOT(deleteSelectedTelescope()));
 
 	// Oculars model
-	connect(ui->ccdListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(ccdSelected(int)));
+	connect(ui->ccdListView, SIGNAL(currentRowChanged(int)), this, SLOT(ccdSelected(int)));
 	connect(ui->ocularListView, SIGNAL(currentRowChanged(int)), this, SLOT(ocularSelected(int)));
 	connect(ui->telescopeListView, SIGNAL(currentRowChanged(int)), this, SLOT(telescopeSelected(int)));
 
@@ -356,49 +257,46 @@ void OcularDialog::createDialogContent()
 
 	// The CCD mapper
 	ccdMapper = new QDataWidgetMapper();
-	ccdMapper->setModel(theModel);
+	ccdMapper->setModel(ccdTableModel);
 //	CCDMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
-	ccdMapper->addMapping(ui->ccdID, CCDsTableModel->fieldIndex("id"), "text");
-	ccdMapper->addMapping(ui->ccdName, CCDsTableModel->fieldIndex("name"));
-	ccdMapper->addMapping(ui->ccdResX, CCDsTableModel->fieldIndex("resolution_x"));
-	ccdMapper->addMapping(ui->ccdResY, CCDsTableModel->fieldIndex("resolution_y"));
-	ccdMapper->addMapping(ui->ccdChipX, CCDsTableModel->fieldIndex("chip_width"));
-	ccdMapper->addMapping(ui->ccdChipY, CCDsTableModel->fieldIndex("chip_height"));
-	ccdMapper->addMapping(ui->ccdPixelX, CCDsTableModel->fieldIndex("pixel_width"));
-	ccdMapper->addMapping(ui->ccdPixelY, CCDsTableModel->fieldIndex("pixel_height"));
+	ccdMapper->addMapping(ui->ccdName, 0);
+	ccdMapper->addMapping(ui->ccdChipY, 1);
+	ccdMapper->addMapping(ui->ccdChipX, 2);
+	ccdMapper->addMapping(ui->ccdPixelY, 3);
+	ccdMapper->addMapping(ui->ccdPixelX, 4);
+	ccdMapper->addMapping(ui->ccdResX, 5);
+	ccdMapper->addMapping(ui->ccdResY, 6);
 	ccdMapper->toFirst();
 	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 			ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
-	ui->ccdListView->setCurrentIndex(CCDsTableModel->index(0, 1));
+	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
 
 	// The ocular mapper
 	ocularMapper = new QDataWidgetMapper();
-	ocularMapper->setModel(ui->ocularListWidget->model());
+	ocularMapper->setModel(ocularTableModel);
 //	ocularMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
-	ocularMapper->addMapping(ui->ocularID, ocularsTableModel->fieldIndex("id"), "text");
-	ocularMapper->addMapping(ui->ocularName, ocularsTableModel->fieldIndex("name"));
-	ocularMapper->addMapping(ui->ocularAFov, ocularsTableModel->fieldIndex("afov"));
-	ocularMapper->addMapping(ui->ocularFL, ocularsTableModel->fieldIndex("efl"));
-	ocularMapper->addMapping(ui->ocularFieldStop, ocularsTableModel->fieldIndex("fieldStop"));
+	ocularMapper->addMapping(ui->ocularName, 0);
+	ocularMapper->addMapping(ui->ocularAFov, 1);
+	ocularMapper->addMapping(ui->ocularFL, 2);
+	ocularMapper->addMapping(ui->ocularFieldStop, 3);
 	ocularMapper->toFirst();
 	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 			ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
-	ui->ocularListView->setCurrentIndex(ocularsTableModel->index(0, 1));
+	ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
 
 	// The telescope mapper
 	telescopeMapper = new QDataWidgetMapper();
-	telescopeMapper->setModel(ui->telescopeListWidget->model());
+	telescopeMapper->setModel(telescopeTableModel);
 //	telescopeMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
-	telescopeMapper->addMapping(ui->telescopeID, telescopesTableModel->fieldIndex("id"), "text");
-	telescopeMapper->addMapping(ui->telescopeName, telescopesTableModel->fieldIndex("name"));
-	telescopeMapper->addMapping(ui->telescopeDiameter, telescopesTableModel->fieldIndex("diameter"));
-	telescopeMapper->addMapping(ui->telescopeFL, telescopesTableModel->fieldIndex("focalLength"));
-	telescopeMapper->addMapping(ui->telescopeVFlip, telescopesTableModel->fieldIndex("vFlip"), "checked");
-	telescopeMapper->addMapping(ui->telescopeHFlip, telescopesTableModel->fieldIndex("hFlip"), "checked");
+	telescopeMapper->addMapping(ui->telescopeName, 0);
+	telescopeMapper->addMapping(ui->telescopeDiameter, 1);
+	telescopeMapper->addMapping(ui->telescopeFL, 2);
+	telescopeMapper->addMapping(ui->telescopeHFlip, 3, "checked");
+	telescopeMapper->addMapping(ui->telescopeVFlip, 4, "checked");
 	ocularMapper->toFirst();
 	connect(ui->telescopeListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 			telescopeMapper, SLOT(setCurrentModelIndex(QModelIndex)));
-	ui->telescopeListView->setCurrentIndex(telescopesTableModel->index(0, 1));
+	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
 
 	// set the initial state
 	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
