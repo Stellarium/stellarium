@@ -123,9 +123,6 @@
    </item>
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
-     <property name="currentIndex">
-      <number>0</number>
-     </property>
      <widget class="QWidget" name="pageSource">
       <layout class="QVBoxLayout" name="verticalLayout">
        <property name="spacing">
@@ -279,7 +276,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButtonParse">
+           <widget class="QPushButton" name="pushButtonAcquire">
             <property name="text">
              <string>Get orbital elements</string>
             </property>
@@ -418,21 +415,70 @@
   <tabstop>radioButtonAsteroids</tabstop>
   <tabstop>radioButtonComets</tabstop>
   <tabstop>radioButtonSingle</tabstop>
-  <tabstop>lineEditSingle</tabstop>
   <tabstop>pushButtonPaste</tabstop>
+  <tabstop>lineEditSingle</tabstop>
   <tabstop>radioButtonFile</tabstop>
-  <tabstop>lineEditFilePath</tabstop>
   <tabstop>pushButtonBrowse</tabstop>
+  <tabstop>lineEditFilePath</tabstop>
   <tabstop>radioButtonURL</tabstop>
   <tabstop>lineEditURL</tabstop>
   <tabstop>checkBoxAddBookmark</tabstop>
   <tabstop>comboBoxBookmarks</tabstop>
-  <tabstop>pushButtonParse</tabstop>
+  <tabstop>pushButtonAcquire</tabstop>
   <tabstop>listWidgetObjects</tabstop>
   <tabstop>pushButtonMarkAll</tabstop>
   <tabstop>pushButtonMarkNone</tabstop>
   <tabstop>pushButtonAdd</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>radioButtonFile</sender>
+   <signal>clicked()</signal>
+   <receiver>pushButtonBrowse</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>66</x>
+     <y>201</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>418</x>
+     <y>225</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonURL</sender>
+   <signal>clicked()</signal>
+   <receiver>lineEditURL</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>179</x>
+     <y>279</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>328</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonSingle</sender>
+   <signal>clicked()</signal>
+   <receiver>pushButtonPaste</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>175</x>
+     <y>116</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>439</x>
+     <y>152</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
