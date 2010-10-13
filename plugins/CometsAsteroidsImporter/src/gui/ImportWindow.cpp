@@ -76,7 +76,7 @@ void ImportWindow::createDialogContent()
 	//Signals
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
-	connect(ui->pushButtonParse, SIGNAL(clicked()), this, SLOT(acquireObjectData()));
+	connect(ui->pushButtonAcquire, SIGNAL(clicked()), this, SLOT(acquireObjectData()));
 	connect(ui->pushButtonAdd, SIGNAL(clicked()), this, SLOT(addObjects()));
 
 	connect(ui->pushButtonPaste, SIGNAL(clicked()), this, SLOT(pasteClipboard()));
@@ -268,6 +268,21 @@ void ImportWindow::populateCandidateObjects(QList<CAImporter::SsoElements> objec
 		list->setCurrentRow(0);
 }
 
+void ImportWindow::enableInterface(bool enable)
+{
+	ui->groupBoxType->setVisible(enable);
+
+	ui->frameSingle->setEnabled(enable);
+	ui->frameFile->setEnabled(enable);
+	ui->frameURL->setEnabled(enable);
+
+	ui->radioButtonSingle->setEnabled(enable);
+	ui->radioButtonFile->setEnabled(enable);
+	ui->radioButtonURL->setEnabled(enable);
+
+	ui->pushButtonAcquire->setEnabled(enable);
+}
+
 CAImporter::SsoElements ImportWindow::readElementsFromString (QString elements)
 {
 	Q_ASSERT(ssoManager);
@@ -395,7 +410,7 @@ void ImportWindow::startDownload(QString urlString)
 		qWarning() << "Invalid URL:" << urlString;
 		return;
 	}
-	qDebug() << url.toString();
+	//qDebug() << url.toString();
 
 	//TODO: Interface changes!
 
@@ -406,7 +421,8 @@ void ImportWindow::startDownload(QString urlString)
 	downloadProgressBar->setVisible(true);
 
 	//TODO: Better handling of the interface
-	dialog->setVisible(false);
+	//dialog->setVisible(false);
+	enableInterface(false);
 
 	downloadReply = downloadManager->get(QNetworkRequest(url));
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
@@ -415,7 +431,8 @@ void ImportWindow::startDownload(QString urlString)
 void ImportWindow::downloadComplete(QNetworkReply *reply)
 {
 	deleteDownloadProgressBar();
-	dialog->setVisible(true);
+	//TODO: Better handling of the interface
+	//dialog->setVisible(true);
 
 	if(reply->error())
 	{
@@ -423,6 +440,7 @@ void ImportWindow::downloadComplete(QNetworkReply *reply)
 		           << reply->url().toString()
 				   << "the following error occured:"
 				   << reply->errorString();
+		enableInterface(true);
 		return;
 	}
 
@@ -441,7 +459,8 @@ void ImportWindow::downloadComplete(QNetworkReply *reply)
 
 	if (objects.isEmpty())
 	{
-		qDebug() << "No objects in the returned file";
+		qWarning() << "No objects found in the file downloaded from"
+		           << reply->url().toString();
 		return;
 	}
 

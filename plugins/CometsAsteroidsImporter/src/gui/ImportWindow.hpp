@@ -83,11 +83,12 @@ private:
 	QList<CAImporter::SsoElements> readElementsFromFile(QString filePath);
 
 	void populateCandidateObjects(QList<CAImporter::SsoElements>);
+	void enableInterface(bool enable);
 
+	//Downloading
 	QNetworkAccessManager * downloadManager;
 	QNetworkReply * downloadReply;
 	QProgressBar * downloadProgressBar;
-
 	void startDownload(QString url);
 	//void abortDownload();
 	void deleteDownloadProgressBar();
