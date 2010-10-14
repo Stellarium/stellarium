@@ -19,7 +19,6 @@
 #include "Ocular.hpp"
 #include "Telescope.hpp"
 
-#include <QDebug>
 #include <QSettings>
 
 Ocular::Ocular()
@@ -39,38 +38,8 @@ Ocular::~Ocular()
 {
 }
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Static Methods
-#endif
-/* ********************************************************************* */
-
-static Ocular* ocularFromSettings(QSettings* theSettings, QString theGroupName)
-{
-	Ocular* ocular = new Ocular();
-	theSettings->beginGroup(theGroupName);
-	
-	ocular->setName(theSettings->value("name", "").toString());
-	ocular->setAppearentFOV(theSettings->value("afov", "0.0").toDouble());
-	ocular->setEffectiveFocalLength(theSettings->value("efl", "0.0").toDouble());
-	ocular->setFieldStop(theSettings->value("fieldStop", "0.0").toDouble());
-	
-	theSettings->endGroup();
-	if (!(ocular->appearentFOV() > 0.0 && ocular->effectiveFocalLength() > 0.0)) {
-		qWarning() << "WARNING: Invalid data for ocular. Ocular values must be positive. \n"
-			<< "\tafov: " << ocular->appearentFOV() << "\n"
-			<< "\tefl: " << ocular->effectiveFocalLength() << "\n"
-			<< "\tThis ocular will be ignored.";
-		delete ocular;
-		ocular = NULL;
-	}
-	
-	return ocular;
-}
-
 static QMap<int, QString> mapping;
-static QMap<int, QString> propertyMap()
+QMap<int, QString> Ocular::propertyMap()
 {
 	if(mapping.isEmpty()) {
 		mapping = QMap<int, QString>();
@@ -82,15 +51,6 @@ static QMap<int, QString> propertyMap()
 	return mapping;
 }
 
-static Ocular* model()
-{
-	Ocular* model = new Ocular();
-	model->setName("My Ocular");
-	model->setAppearentFOV(68);
-	model->setEffectiveFocalLength(32);
-	model->setFieldStop(0);
-	return model;
-}
 
 /* ********************************************************************* */
 #if 0

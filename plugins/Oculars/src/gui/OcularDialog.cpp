@@ -16,7 +16,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include "CCD.hpp"
 #include "Ocular.hpp"
+#include "Telescope.hpp"
 #include "Oculars.hpp"
 #include "OcularDialog.hpp"
 #include "ui_ocularDialog.h"
@@ -40,12 +42,12 @@ OcularDialog::OcularDialog(QList<CCD *> ccds, QList<Ocular *> oculars, QList<Tel
 {
 	ui = new Ui_ocularDialogForm;
 	this->ccds = ccds;
-	this->ccdTableModel = new PropertyBasedTableModel(ccds, CCD::propertyMap(), CCD::model(), this);
+	this->ccdTableModel = new PropertyBasedTableModel<CCD>();
 	this->oculars = oculars;
-	this->ocularTableModel = new PropertyBasedTableModel(oculars, Ocular::propertyMap(), Ocular::model(), this);
+//	this->ocularTableModel = new PropertyBasedTableModel<Ocular>(oculars, ocularModel(), this);
 	this->telescopes = telescopes;
-	this->telescopeTableModel
-			= new PropertyBasedTableModel(telescopes, Telescope::propertyMap(), Telescope::model(), this);
+//	this->telescopeTableModel
+//			= new PropertyBasedTableModel<Telescope>(telescopes, telescopeModel(), this);
 
 	validatorPositiveInt = new QIntValidator(0, std::numeric_limits<int>::max(), this);
 	validatorPositiveDouble = new QDoubleValidator(.0, std::numeric_limits<double>::max(), 24, this);

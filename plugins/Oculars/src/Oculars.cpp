@@ -252,7 +252,7 @@ void Oculars::init()
 		while(settingsGroupIterator.hasNext()) {
 			QString settingsGroup = settingsGroupIterator.next();
 			if (settingsGroup.startsWith("ocular")) {
-				Ocular *newOcular = Ocular::ocularFromSettings(settings, settingsGroup);
+				Ocular *newOcular = ocularFromSettings(settings, settingsGroup);
 				if (newOcular != NULL) {
 					oculars.append(newOcular);
 				}
@@ -261,12 +261,12 @@ void Oculars::init()
 				useMaxEyepieceAngle = settings->value("use_max_exit_circle", 0.0).toBool();
 				settings->endGroup();
 			} else if (settingsGroup.startsWith("telescope")) {
-				Telescope *newTelescope = Telescope::telescopeFromSettings(settings, settingsGroup);
+				Telescope *newTelescope = telescopeFromSettings(settings, settingsGroup);
 				if (newTelescope != NULL) {
 					telescopes.append(newTelescope);
 				}
 			} else if (settingsGroup.startsWith("ccd")) {
-				CCD *newCCD = CCD::ccdFromSettings(settings, settingsGroup);
+				CCD *newCCD = ccdFromSettings(settings, settingsGroup);
 				if (newCCD != NULL) {
 					ccds.append(newCCD);
 				}
