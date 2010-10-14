@@ -29,15 +29,14 @@ class Telescope : public QObject
 	Q_PROPERTY(QString name READ name WRITE setName)
 	Q_PROPERTY(double diameter READ diameter WRITE setDiameter)
 	Q_PROPERTY(double focalLength READ focalLength WRITE setFocalLength)
-	Q_PROPERTY(bool hFlipped READ isHFlipped WRITE sethFlipped)
-	Q_PROPERTY(bool vFlipped READ isVFlipped WRITE vFlipped)
+	Q_PROPERTY(bool hFlipped READ isHFlipped WRITE setHFlipped)
+	Q_PROPERTY(bool vFlipped READ isVFlipped WRITE setVFlipped)
 public:
 	Telescope();
 	Q_INVOKABLE Telescope(const Telescope* other);
 	virtual ~Telescope();
 	static Telescope* telescopeFromSettings(QSettings* theSettings, QString theGroupName);
-	static QMap<int, QString> propertyMap();
-	static Telescope* model();
+	static Telescope* telescopeModel();
 
 	double diameter() const;
 	void setDiameter(double theValue);
@@ -49,6 +48,7 @@ public:
 	void setHFlipped(bool flipped);
 	bool isVFlipped() const;
 	void setVFlipped(bool flipped);
+	QMap<int, QString> propertyMap();
 private:
 	QString m_name;
 	double m_diameter;
@@ -56,4 +56,37 @@ private:
 	bool m_hFlipped;
 	bool m_vFlipped;
 };
+
+/* ********************************************************************* */
+#if 0
+#pragma mark -
+#pragma mark Static Methods
+#endif
+/* ********************************************************************* */
+
+static Telescope* telescopeFromSettings(QSettings* theSettings, QString theGroupName)
+{
+	Telescope* telescope = new Telescope();
+	theSettings->beginGroup(theGroupName);
+
+	telescope->setName(theSettings->value("name", "").toString());
+	telescope->setFocalLength(theSettings->value("focalLength", "0").toDouble());
+	telescope->setDiameter(theSettings->value("diameter", "0").toDouble());
+	telescope->setHFlipped(theSettings->value("hFlip").toBool());
+	telescope->setVFlipped(theSettings->value("vFlip").toBool());
+
+	theSettings->endGroup();
+	return telescope;
+}
+static Telescope* telescopeModel()
+{
+	Telescope* model = new Telescope();
+	model->setName("My Telescope");
+	model->setDiameter(80);
+	model->setFocalLength(500);
+	model->setHFlipped(true);
+	model->setVFlipped(true);
+	return model;
+}
+
 #endif /*TELESCOPE_HPP_*/

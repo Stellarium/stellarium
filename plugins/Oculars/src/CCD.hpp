@@ -34,14 +34,13 @@ class CCD : public QObject
 	Q_PROPERTY(float chipWidth READ chipWidth WRITE setChipWidth)
 	Q_PROPERTY(float chipHeight READ chipHeight WRITE setChipHeight)
 	Q_PROPERTY(float pixelWidth READ pixelWidth WRITE setPixelWidth)
-	Q_PROPERTY(float pixelHeight READ pixelHeight WRITE setNPixelHeight)
+	Q_PROPERTY(float pixelHeight READ pixelHeight WRITE setPixelHeight)
 public:
 	CCD();
 	Q_INVOKABLE CCD(const CCD* other);
 	virtual ~CCD();
 	static CCD* ccdFromSettings(QSettings* theSettings, QString theGroupName);
-	static QMap<int, QString> propertyMap();
-	static CCD* model();
+	static CCD* ccdModel();
 
 	QString name() const;
 	void setName(QString name);
@@ -61,6 +60,7 @@ public:
 
 	float getActualFOVx(Ocular *ocular) const;
 	float getActualFOVy(Ocular *ocular) const;
+	QMap<int, QString> propertyMap();
 private:
 	int ccdID;
 	QString m_name;
@@ -77,5 +77,40 @@ private:
 	//! width of 1 pixel in micron (micrometer)
 	float m_pixelHeight;
 };
+
+/* ********************************************************************* */
+#if 0
+#pragma mark -
+#pragma mark Static Methods
+#endif
+/* ********************************************************************* */
+static CCD* ccdFromSettings(QSettings* theSettings, QString theGroupName)
+{
+	CCD* ccd = new CCD();
+	theSettings->beginGroup(theGroupName);
+	ccd->setName(theSettings->value("name", "").toString());
+	ccd->setResolutionX(theSettings->value("resolutionX", "0").toInt());
+	ccd->setResolutionY(theSettings->value("resolutionY", "0").toInt());
+	ccd->setChipWidth(theSettings->value("chip_width", "0.0").toFloat());
+	ccd->setChipHeight(theSettings->value("chip_height", "0.0").toFloat());
+	ccd->setPixelWidth(theSettings->value("pixel_width", "0.0").toFloat());
+	ccd->setPixelHeight(theSettings->value("pixel_height", "0.0").toFloat());
+	theSettings->endGroup();
+
+	return ccd;
+}
+
+static CCD* ccdModel()
+{
+	CCD* model = new CCD();
+	model->setName("My CCD");
+	model->setChipHeight(36.8);
+	model->setChipWidth(36.8);
+	model->setPixelHeight(9);
+	model->setPixelWidth(9);
+	model->setResolutionX(4096);
+	model->setResolutionY(4096);
+	return model;
+}
 
 #endif /* CCD_HPP_ */

@@ -19,6 +19,7 @@
 #ifndef OCULAR_HPP_
 #define OCULAR_HPP_
 
+#include <QDebug>
 #include <QObject>
 #include <QString>
 #include <QSettings>
@@ -37,8 +38,7 @@ public:
 	Q_INVOKABLE Ocular(const Ocular* other);
 	virtual ~Ocular();
 	static Ocular* ocularFromSettings(QSettings* theSettings, QString theGroupName);
-	static QMap<int, QString> propertyMap();
-	static Ocular* model();
+	static Ocular* ocularModel();
 
 	const QString name() const;
 	void setName(QString aName);
@@ -51,6 +51,7 @@ public:
 
 	double actualFOV(Telescope *telescope) const;
 	double magnification(Telescope *telescope) const;
+	QMap<int, QString> propertyMap();
 
 private:
 	QString m_name;
@@ -58,4 +59,45 @@ private:
 	double m_effectiveFocalLength;
 	double m_fieldStop;
 };
+
+/* ********************************************************************* */
+#if 0
+#pragma mark -
+#pragma mark Static Methods
+#endif
+/* ********************************************************************* */
+
+static Ocular* ocularFromSettings(QSettings* theSettings, QString theGroupName)
+{
+	Ocular* ocular = new Ocular();
+	theSettings->beginGroup(theGroupName);
+
+	ocular->setName(theSettings->value("name", "").toString());
+	ocular->setAppearentFOV(theSettings->value("afov", "0.0").toDouble());
+	ocular->setEffectiveFocalLength(theSettings->value("efl", "0.0").toDouble());
+	ocular->setFieldStop(theSettings->value("fieldStop", "0.0").toDouble());
+
+	theSettings->endGroup();
+	if (!(ocular->appearentFOV() > 0.0 && ocular->effectiveFocalLength() > 0.0)) {
+		qWarning() << "WARNING: Invalid data for ocular. Ocular values must be positive. \n"
+			<< "\tafov: " << ocular->appearentFOV() << "\n"
+			<< "\tefl: " << ocular->effectiveFocalLength() << "\n"
+			<< "\tThis ocular will be ignored.";
+		delete ocular;
+		ocular = NULL;
+	}
+
+	return ocular;
+}
+
+static Ocular* ocularModel()
+{
+	Ocular* model = new Ocular();
+	model->setName("My Ocular");
+	model->setAppearentFOV(68);
+	model->setEffectiveFocalLength(32);
+	model->setFieldStop(0);
+	return model;
+}
+
 #endif /* OCULAR_HPP_ */

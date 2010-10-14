@@ -42,31 +42,10 @@ CCD::~CCD()
 {
 }
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Static Methods
-#endif
-/* ********************************************************************* */
-static CCD* ccdFromSettings(QSettings* theSettings, QString theGroupName)
-{
-	CCD* ccd = new CCD();
-	theSettings->beginGroup(theGroupName);
-	ccd->setName(theSettings->value("name", "").toString());
-	ccd->setResolutionX(theSettings->value("resolutionX", "0").toInt());
-	ccd->setResolutionY(theSettings->value("resolutionY", "0").toInt());
-	ccd->setChipWidth(theSettings->value("chip_width", "0.0").toFloat());
-	ccd->setChipHeight(theSettings->value("chip_height", "0.0").toFloat());
-	ccd->setPixelWidth(theSettings->value("pixel_width", "0.0").toFloat());
-	ccd->setPixelHeight(theSettings->value("pixel_height", "0.0").toFloat());
-	theSettings->endGroup();
-
-	return ccd;
-}
 
 static QMap<int, QString> mapping;
 
-static QMap<int, QString> propertyMap()
+QMap<int, QString> CCD::propertyMap()
 {
 	if(mapping.isEmpty()) {
 		mapping = QMap<int, QString>();
@@ -81,18 +60,6 @@ static QMap<int, QString> propertyMap()
 	return mapping;
 }
 
-static CCD* model()
-{
-	CCD* model = new CCD();
-	model->setName("My CCD");
-	model->setChipHeight(36.8);
-	model->setChipWidth(36.8);
-	model->setPixelHeight(9);
-	model->setPixelWidth(9);
-	model->setResolutionX(4096);
-	model->setResolutionY(4096);
-	return model;
-}
 
 /* ********************************************************************* */
 #if 0

@@ -1,35 +1,44 @@
 #include "PropertyBasedTableModel.hpp"
 
-PropertyBasedTableModel::PropertyBasedTableModel(QList<QObject *> content,
-																 QMap<int, QString> mappings,
-																 QObject* modelObject,
+template <class T>
+PropertyBasedTableModel<T>::PropertyBasedTableModel(QObject *parent)
+	: QAbstractTableModel(parent)
+{
+}
+
+template <class T>
+PropertyBasedTableModel<T>::PropertyBasedTableModel(QList<T> content,
+																 T &modelObject,
 																 QObject *parent)
 	: QAbstractTableModel(parent)
 {
 	this->content = content;
-	this->mappings = mappings;
+	this->mappings = modelObject->propertyMap();
 	this->modelObject = modelObject;
 }
-
-PropertyBasedTableModel::~PropertyBasedTableModel()
+template <class T>
+PropertyBasedTableModel<T>::~PropertyBasedTableModel()
 {
 	delete modelObject;
 	modelObject = NULL;
 }
 
-int PropertyBasedTableModel::rowCount(const QModelIndex &parent) const
+template <class T>
+int PropertyBasedTableModel<T>::rowCount(const QModelIndex &parent) const
 {
 	Q_UNUSED(parent);
 	return content.size();
 }
 
-int PropertyBasedTableModel::columnCount(const QModelIndex &parent) const
+template <class T>
+int PropertyBasedTableModel<T>::columnCount(const QModelIndex &parent) const
 {
 	Q_UNUSED(parent);
 	return mappings.size();
 }
 
-QVariant PropertyBasedTableModel::data(const QModelIndex &index, int role) const
+template <class T>
+QVariant PropertyBasedTableModel<T>::data(const QModelIndex &index, int role) const
 {
 	QVariant data;
 	if (role == Qt::DisplayRole
@@ -38,20 +47,21 @@ QVariant PropertyBasedTableModel::data(const QModelIndex &index, int role) const
 		 && index.row() >= 0
 		 && index.column() < mappings.size()
 		 && index.column() > 0){
-			QObject *object = content.at(index.row());
+			T *object = content.at(index.row());
 			data = object->property(mappings[index.column()]);
 
 	}
 	return data;
 }
 
-bool PropertyBasedTableModel::insertRows(int position, int rows, const QModelIndex &index)
+template <class T>
+bool PropertyBasedTableModel<T>::insertRows(int position, int rows, const QModelIndex &index)
 {
 	Q_UNUSED(index);
 	beginInsertRows(QModelIndex(), position, position+rows-1);
 
 	for (int row=0; row < rows; row++) {
-		QObject* newInstance = modelObject->metaObject()->newInstance(modelObject);
+		T* newInstance = modelObject->metaObject()->newInstance(modelObject);
 		content.insert(position, newInstance);
 	}
 
@@ -59,7 +69,8 @@ bool PropertyBasedTableModel::insertRows(int position, int rows, const QModelInd
 	return true;
 }
 
-bool PropertyBasedTableModel::removeRows(int position, int rows, const QModelIndex &index)
+template <class T>
+bool PropertyBasedTableModel<T>::removeRows(int position, int rows, const QModelIndex &index)
 {
 	Q_UNUSED(index);
 	beginRemoveRows(QModelIndex(), position, position+rows-1);
@@ -72,11 +83,12 @@ bool PropertyBasedTableModel::removeRows(int position, int rows, const QModelInd
 	return true;
 }
 
-bool PropertyBasedTableModel::setData(const QModelIndex &index, const QVariant &value, int role)
+template <class T>
+bool PropertyBasedTableModel<T>::setData(const QModelIndex &index, const QVariant &value, int role)
 {
 	bool changeMade = false;
 	if (index.isValid() && role == Qt::EditRole && index.column() < mappings.size()) {
-		QObject* object = content.at(index.row());
+		T* object = content.at(index.row());
 		object->setProperty(mappings[index.column()], value);
 		emit(dataChanged(index, index));
 
@@ -86,7 +98,8 @@ bool PropertyBasedTableModel::setData(const QModelIndex &index, const QVariant &
 	return changeMade;
 }
 
-Qt::ItemFlags PropertyBasedTableModel::flags(const QModelIndex &index) const
+template <class T>
+Qt::ItemFlags PropertyBasedTableModel<T>::flags(const QModelIndex &index) const
 {
 	if (!index.isValid()) {
 		return Qt::ItemIsEnabled;
@@ -95,7 +108,3 @@ Qt::ItemFlags PropertyBasedTableModel::flags(const QModelIndex &index) const
 	return QAbstractTableModel::flags(index) | Qt::ItemIsEditable;
 }
 
-QList< QPair<QString, QString> > PropertyBasedTableModel::getList()
-{
-	return listOfPairs;
-}

@@ -79,13 +79,13 @@ private slots:
 private:
 	QDataWidgetMapper *ccdMapper;
 	QList<CCD *> ccds;
-	PropertyBasedTableModel* ccdTableModel;
+	PropertyBasedTableModel<CCD>* ccdTableModel;
 	QDataWidgetMapper *ocularMapper;
 	QList<Ocular *> oculars;
-	PropertyBasedTableModel* ocularTableModel;
+	PropertyBasedTableModel<Ocular>* ocularTableModel;
 	QDataWidgetMapper *telescopeMapper;
 	QList<Telescope *> telescopes;
-	PropertyBasedTableModel* telescopeTableModel;
+	PropertyBasedTableModel<Telescope>* telescopeTableModel;
 	QIntValidator *validatorOcularAFOV;
 	QDoubleValidator *validatorOcularEFL;
 	QDoubleValidator *validatorTelescopeDiameter;
