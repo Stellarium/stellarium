@@ -40,7 +40,6 @@ SET(Oculars_MOC_HDRS
   Oculars.hpp
   Telescope.hpp
   gui/OcularDialog.hpp
-  gui/PropertyBasedTableModel.hpp
   gui/StelDialogOculars.hpp
 )
 

@@ -89,9 +89,6 @@ private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
 	void instrumentChanged();
 	void determineMaxEyepieceAngle();
-	void loadCCDs();
-	void loadOculars();
-	void loadTelescopes();
 	void setScaleImageCircle(bool state);
 
 private:
