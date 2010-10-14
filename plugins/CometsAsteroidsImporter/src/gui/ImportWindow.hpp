@@ -59,11 +59,20 @@ private slots:
 
 	//Download
 	void bookmarkSelected(QString);
-	void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
-	void downloadComplete(QNetworkReply * reply);
 
-	//Final button for the first page
+	//Final button for the list tab
 	void acquireObjectData();
+
+	//Online search
+	void sendQuery();
+	void updateCountdown();
+	void resetNotFound();
+
+	//Network
+	void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
+	void updateQueryProgress(qint64 bytesReceived, qint64 bytesTotal);
+	void downloadComplete(QNetworkReply * reply);
+	void queryComplete(QNetworkReply * reply);
 
 	//! Marks (checks) all items in the results lists
 	void markAll();
@@ -86,7 +95,7 @@ private:
 	void enableInterface(bool enable);
 
 	//Downloading
-	QNetworkAccessManager * downloadManager;
+	QNetworkAccessManager * networkManager;
 	QNetworkReply * downloadReply;
 	QProgressBar * downloadProgressBar;
 	void startDownload(QString url);
@@ -96,6 +105,14 @@ private:
 	//TODO: Temporarily here?
 	typedef QHash<QString,QString> Bookmarks;
 	QHash<ImportType, Bookmarks> bookmarks;
+
+	//Online search
+	int countdown;
+	QTimer * countdownTimer;
+	void startCountdown();
+	void resetCountdown();
+	QNetworkReply * queryReply;
+	QProgressBar * queryProgressBar;
 
 protected:
 	virtual void createDialogContent();
