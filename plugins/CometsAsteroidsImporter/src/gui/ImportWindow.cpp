@@ -38,6 +38,7 @@
 #include <QNetworkReply>
 #include <QString>
 #include <QTemporaryFile>
+#include <QTimer>
 #include <QUrl>
 
 ImportWindow::ImportWindow()
@@ -45,10 +46,14 @@ ImportWindow::ImportWindow()
 	ui = new Ui_importWindow();
 	ssoManager = GETSTELMODULE(CAImporter);
 
-	downloadManager = StelApp::getInstance().getNetworkAccessManager();
+	networkManager = StelApp::getInstance().getNetworkAccessManager();
 
 	downloadReply = NULL;
+	queryReply = NULL;
 	downloadProgressBar = NULL;
+	queryProgressBar = NULL;
+
+	countdownTimer = new QTimer(this);
 
 	QHash<QString,QString> asteroidBookmarks;
 	QHash<QString,QString> cometBookmarks;
@@ -63,10 +68,15 @@ ImportWindow::ImportWindow()
 ImportWindow::~ImportWindow()
 {
 	delete ui;
+	delete countdownTimer;
 	if (downloadReply)
 		downloadReply->deleteLater();
+	if (queryReply)
+		queryReply->deleteLater();
 	if (downloadProgressBar)
 		downloadProgressBar->deleteLater();
+	if (queryProgressBar)
+		queryProgressBar->deleteLater();
 }
 
 void ImportWindow::createDialogContent()
@@ -79,11 +89,11 @@ void ImportWindow::createDialogContent()
 	connect(ui->pushButtonAcquire, SIGNAL(clicked()), this, SLOT(acquireObjectData()));
 	connect(ui->pushButtonAdd, SIGNAL(clicked()), this, SLOT(addObjects()));
 
-	connect(ui->pushButtonPaste, SIGNAL(clicked()), this, SLOT(pasteClipboard()));
+	//connect(ui->pushButtonPaste, SIGNAL(clicked()), this, SLOT(pasteClipboard()));
 	connect(ui->pushButtonBrowse, SIGNAL(clicked()), this, SLOT(selectFile()));
 	connect(ui->comboBoxBookmarks, SIGNAL(currentIndexChanged(QString)), this, SLOT(bookmarkSelected(QString)));
 
-	connect(ui->radioButtonSingle, SIGNAL(toggled(bool)), ui->frameSingle, SLOT(setVisible(bool)));
+	//connect(ui->radioButtonSingle, SIGNAL(toggled(bool)), ui->frameSingle, SLOT(setVisible(bool)));
 	connect(ui->radioButtonFile, SIGNAL(toggled(bool)), ui->frameFile, SLOT(setVisible(bool)));
 	connect(ui->radioButtonURL, SIGNAL(toggled(bool)), ui->frameURL, SLOT(setVisible(bool)));
 
@@ -93,14 +103,20 @@ void ImportWindow::createDialogContent()
 	connect(ui->pushButtonMarkAll, SIGNAL(clicked()), this, SLOT(markAll()));
 	connect(ui->pushButtonMarkNone, SIGNAL(clicked()), this, SLOT(unmarkAll()));
 
-	connect(downloadManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+	connect(ui->pushButtonSearch, SIGNAL(clicked()), this, SLOT(sendQuery()));
+	connect(ui->lineEditQuery, SIGNAL(textEdited(QString)), this, SLOT(resetNotFound()));
+	connect(countdownTimer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
 
-	ui->radioButtonSingle->setChecked(true);
+	//ui->radioButtonSingle->setChecked(true);
+	//ui->radioButtonFile->setChecked(true);
 	ui->frameFile->setVisible(false);
 	ui->frameURL->setVisible(false);
 
 	//This box will be displayed when one of the source types is selected
 	ui->groupBoxSource->setVisible(false);
+
+	resetCountdown();
+	resetNotFound();
 
 	//In case I or someone else forgets the stack widget saved on another page
 	ui->stackedWidget->setCurrentIndex(0);
@@ -114,26 +130,7 @@ void ImportWindow::languageChanged()
 
 void ImportWindow::acquireObjectData()
 {
-	if (ui->radioButtonSingle->isChecked())
-	{
-		QString oneLine = ui->lineEditSingle->text();
-		//TODO: Move this to the function itself:
-		oneLine = oneLine.trimmed();
-		if (oneLine.isEmpty())
-			return;
-
-		CAImporter::SsoElements object = readElementsFromString(oneLine);
-
-		if (object.isEmpty())
-			return;
-
-		QList<CAImporter::SsoElements> objects;
-		objects << object;
-		//Temporary, until the slot/socket mechanism is ready
-		populateCandidateObjects(objects);
-		ui->stackedWidget->setCurrentIndex(1);
-	}
-	else if (ui->radioButtonFile->isChecked())
+	if (ui->radioButtonFile->isChecked())
 	{
 		QString filePath = ui->lineEditFilePath->text();
 		if (filePath.isEmpty())
@@ -193,7 +190,7 @@ void ImportWindow::addObjects()
 
 void ImportWindow::pasteClipboard()
 {
-	ui->lineEditSingle->setText(QApplication::clipboard()->text());
+	//ui->lineEditSingle->setText(QApplication::clipboard()->text());
 }
 
 void ImportWindow::selectFile()
@@ -272,11 +269,9 @@ void ImportWindow::enableInterface(bool enable)
 {
 	ui->groupBoxType->setVisible(enable);
 
-	ui->frameSingle->setEnabled(enable);
 	ui->frameFile->setEnabled(enable);
 	ui->frameURL->setEnabled(enable);
 
-	ui->radioButtonSingle->setEnabled(enable);
 	ui->radioButtonFile->setEnabled(enable);
 	ui->radioButtonURL->setEnabled(enable);
 
@@ -329,7 +324,7 @@ void ImportWindow::switchImportType(bool checked)
 	ui->comboBoxBookmarks->addItems(bookmarkTitles);
 
 	//Clear the fields
-	ui->lineEditSingle->clear();
+	//ui->lineEditSingle->clear();
 	ui->lineEditFilePath->clear();
 	ui->lineEditURL->clear();
 
@@ -395,6 +390,16 @@ void ImportWindow::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTota
 	downloadProgressBar->setMaximum(endValue);
 }
 
+void ImportWindow::updateQueryProgress(qint64 bytesReceived, qint64 bytesTotal)
+{
+	if (queryProgressBar == NULL)
+		return;
+
+	//Just show activity
+	queryProgressBar->setValue(0);
+	queryProgressBar->setMaximum(0);
+}
+
 void ImportWindow::startDownload(QString urlString)
 {
 	if (downloadReply)
@@ -424,12 +429,14 @@ void ImportWindow::startDownload(QString urlString)
 	//dialog->setVisible(false);
 	enableInterface(false);
 
-	downloadReply = downloadManager->get(QNetworkRequest(url));
+	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+	downloadReply = networkManager->get(QNetworkRequest(url));
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 }
 
 void ImportWindow::downloadComplete(QNetworkReply *reply)
 {
+	disconnect(this, SLOT(downloadComplete(QNetworkReply*)));
 	deleteDownloadProgressBar();
 	//TODO: Better handling of the interface
 	//dialog->setVisible(true);
@@ -441,6 +448,8 @@ void ImportWindow::downloadComplete(QNetworkReply *reply)
 				   << "the following error occured:"
 				   << reply->errorString();
 		enableInterface(true);
+		reply->deleteLater();
+		downloadReply = NULL;
 		return;
 	}
 
@@ -461,18 +470,19 @@ void ImportWindow::downloadComplete(QNetworkReply *reply)
 	{
 		qWarning() << "No objects found in the file downloaded from"
 		           << reply->url().toString();
-		return;
 	}
-
-	//The request has been successful: add the URL to bookmarks?
-	//TODO: As the bookmarks are destroyed with the window, this doesn't make much sense :)
-	if (ui->checkBoxAddBookmark->isChecked())
+	else
 	{
-		QString url = reply->url().toString();
-		if (!bookmarks.value(importType).values().contains(url))
+		//The request has been successful: add the URL to bookmarks?
+		//TODO: As the bookmarks are destroyed with the window, this doesn't make much sense :)
+		if (ui->checkBoxAddBookmark->isChecked())
 		{
-			//Use the URL as a title for now
-			bookmarks[importType].insert(url, url);
+			QString url = reply->url().toString();
+			if (!bookmarks.value(importType).values().contains(url))
+			{
+				//Use the URL as a title for now
+				bookmarks[importType].insert(url, url);
+			}
 		}
 	}
 
@@ -494,4 +504,188 @@ void ImportWindow::deleteDownloadProgressBar()
 		downloadProgressBar->deleteLater();
 		downloadProgressBar = NULL;
 	}
+}
+
+void ImportWindow::sendQuery()
+{
+	if (queryReply)
+		return;
+
+	QString query = ui->lineEditQuery->text();
+	if (query.isEmpty())
+		return;
+
+	//But comets can be also searched by other strings. D'oh!
+	if (query.startsWith("C/") || query.startsWith("P/"))
+	{
+		qDebug() << "Comet name detected.";
+		importType = MpcComets;
+	}
+	else
+		importType = MpcMinorPlanets;
+
+	//Progress bar
+	queryProgressBar = StelApp::getInstance().getGui()->addProgressBar();
+	queryProgressBar->setValue(0);
+	queryProgressBar->setMaximum(0);
+	queryProgressBar->setFormat("Searching...");
+	queryProgressBar->setVisible(true);
+
+	//TODO: Better handling of the interface
+	enableInterface(false);
+
+	QUrl url;
+	url.addQueryItem("ty","e");//Type: ephemerides
+	url.addQueryItem("TextArea", query);//Object name query
+	url.addQueryItem("e", "-1");//Elements format: MPC 1-line
+	//Yes, all of the rest are necessary
+	url.addQueryItem("d","");
+	url.addQueryItem("l","");
+	url.addQueryItem("i","");
+	url.addQueryItem("u","d");
+	url.addQueryItem("uto", "0");
+	url.addQueryItem("c", "");
+	url.addQueryItem("long", "");
+	url.addQueryItem("lat", "");
+	url.addQueryItem("alt", "");
+	url.addQueryItem("raty", "a");
+	url.addQueryItem("s", "t");
+	url.addQueryItem("m", "m");
+	url.addQueryItem("adir", "S");
+	url.addQueryItem("oed", "");
+	url.addQueryItem("resoc", "");
+	url.addQueryItem("tit", "");
+	url.addQueryItem("bu", "");
+	url.addQueryItem("ch", "c");
+	url.addQueryItem("ce", "f");
+	url.addQueryItem("js", "f");
+
+	QNetworkRequest request(QUrl("http://scully.cfa.harvard.edu/~cgi/MPEph2"));
+	request.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");//Is this really necessary?
+	request.setHeader(QNetworkRequest::ContentLengthHeader, url.encodedQuery().length());
+
+	startCountdown();
+	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(queryComplete(QNetworkReply*)));
+	QNetworkReply * reply = networkManager->post(request, url.encodedQuery());
+	connect(reply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateQueryProgress(qint64,qint64)));
+}
+
+void ImportWindow::queryComplete(QNetworkReply *reply)
+{
+	disconnect(this, SLOT(queryComplete(QNetworkReply*)));
+
+	//Remove the progress bar
+	disconnect(this, SLOT(updateQueryProgress(qint64,qint64)));
+	if (queryProgressBar)
+	{
+		queryProgressBar->setVisible(false);
+		queryProgressBar->deleteLater();
+		queryProgressBar = NULL;
+	}
+
+	if (reply->error())
+	{
+		qWarning() << "Download error: While trying to access"
+		           << reply->url().toString()
+		           << "the following error occured:"
+		           << reply->errorString();
+		enableInterface(true);
+		reply->deleteLater();
+		downloadReply = NULL;
+		return;
+	}
+
+	if (reply->header(QNetworkRequest::ContentTypeHeader) != "text/ascii" ||
+	    reply->rawHeader(QByteArray("Content-disposition")) != "attachment; filename=elements.txt")
+	{
+		ui->labelNotFound->setVisible(true);
+	}
+	else
+	{
+		QList<CAImporter::SsoElements> objects;
+		QTemporaryFile file;
+		if (file.open())
+		{
+			file.write(reply->readAll());
+			file.close();
+			objects = readElementsFromFile(file.fileName());
+		}
+		else
+		{
+			qWarning() << "Unable to open a temporary file. Aborting operation.";
+		}
+
+		if (objects.isEmpty())
+		{
+			qWarning() << "No objects found in the file downloaded from"
+					   << reply->url().toString();
+		}
+		else
+		{
+			//The request has been successful: add the URL to bookmarks?
+			//TODO: As the bookmarks are destroyed with the window, this doesn't make much sense :)
+			if (ui->checkBoxAddBookmark->isChecked())
+			{
+				QString url = reply->url().toString();
+				if (!bookmarks.value(importType).values().contains(url))
+				{
+					//Use the URL as a title for now
+					bookmarks[importType].insert(url, url);
+				}
+			}
+
+			//Temporary, until the slot/socket mechanism is ready
+			populateCandidateObjects(objects);
+			ui->stackedWidget->setCurrentIndex(1);
+		}
+	}
+
+	reply->deleteLater();
+	downloadReply = NULL;
+}
+
+void ImportWindow::startCountdown()
+{
+	if (!countdownTimer->isActive())
+		countdownTimer->start(1000);//1 second
+
+	//Disable the interface
+	ui->lineEditQuery->setEnabled(false);
+	ui->pushButtonSearch->setEnabled(false);
+	ui->lcdNumber->setVisible(true);
+}
+
+void ImportWindow::resetCountdown()
+{
+	//Stop the timer
+	if (countdownTimer->isActive())
+		countdownTimer->stop();
+
+	//Reset the counter
+	countdown = 60;
+	ui->lcdNumber->setVisible(false);
+	ui->lcdNumber->display(countdown);
+
+	//Enable the interface
+	ui->lineEditQuery->setEnabled(true);
+	ui->pushButtonSearch->setEnabled(true);
+
+}
+
+void ImportWindow::updateCountdown()
+{
+	--countdown;
+	if (countdown < 0)
+	{
+		resetCountdown();
+	}
+	else
+	{
+		ui->lcdNumber->display(countdown);
+	}
+}
+
+void ImportWindow::resetNotFound()
+{
+	ui->labelNotFound->setVisible(false);
 }
