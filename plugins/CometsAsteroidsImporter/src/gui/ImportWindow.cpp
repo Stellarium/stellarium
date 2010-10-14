@@ -113,7 +113,8 @@ void ImportWindow::createDialogContent()
 	ui->frameURL->setVisible(false);
 
 	//This box will be displayed when one of the source types is selected
-	ui->groupBoxSource->setVisible(false);
+	//ui->groupBoxSource->setVisible(false);
+	ui->tabWidgetSources->setVisible(false);
 
 	resetCountdown();
 	resetNotFound();
@@ -329,7 +330,8 @@ void ImportWindow::switchImportType(bool checked)
 	ui->lineEditURL->clear();
 
 	//If one of the options is selected, show the rest of the dialog
-	ui->groupBoxSource->setVisible(true);
+	//ui->groupBoxSource->setVisible(true);
+	ui->tabWidgetSources->setVisible(true);
 }
 
 void ImportWindow::markAll()
@@ -516,6 +518,7 @@ void ImportWindow::sendQuery()
 		return;
 
 	//But comets can be also searched by other strings. D'oh!
+	/*
 	if (query.startsWith("C/") || query.startsWith("P/"))
 	{
 		qDebug() << "Comet name detected.";
@@ -523,6 +526,7 @@ void ImportWindow::sendQuery()
 	}
 	else
 		importType = MpcMinorPlanets;
+	*/
 
 	//Progress bar
 	queryProgressBar = StelApp::getInstance().getGui()->addProgressBar();
