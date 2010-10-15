@@ -25,13 +25,14 @@ Ocular::Ocular()
 {
 }
 
-Ocular::Ocular(const Ocular* other)
+Ocular::Ocular(const QObject* other)
 {
 	Q_ASSERT(other);
-	this->m_appearentFOV = other->appearentFOV();
-	this->m_effectiveFocalLength = other->effectiveFocalLength();
-	this->m_fieldStop = other->fieldStop();
-	this->m_name = other->name();
+	Q_ASSERT(other->metaObject()->className() == "Ocular");
+	this->m_appearentFOV = other->property("appearentFOV").toDouble();
+	this->m_effectiveFocalLength = other->property("effectiveFocalLength").toDouble();
+	this->m_fieldStop = other->property("fieldStop").toDouble();
+	this->m_name = other->property("name").toString();
 }
 
 Ocular::~Ocular()

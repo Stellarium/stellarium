@@ -43,7 +43,7 @@ class OcularDialog : public StelDialogOculars
 	Q_OBJECT
 
 public:
-	OcularDialog(QList<CCD *> ccds, QList<Ocular *> oculars, QList<Telescope *> telescopes);
+	OcularDialog(QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes);
 	virtual ~OcularDialog();
 	void languageChanged();
 	//! Notify that the application style changed
@@ -78,14 +78,14 @@ private slots:
 
 private:
 	QDataWidgetMapper *ccdMapper;
-	QList<CCD *> ccds;
-	PropertyBasedTableModel<CCD>* ccdTableModel;
+	QList<CCD *>* ccds;
+	PropertyBasedTableModel ccdTableModel;
 	QDataWidgetMapper *ocularMapper;
-	QList<Ocular *> oculars;
-	PropertyBasedTableModel<Ocular>* ocularTableModel;
+	QList<Ocular *>* oculars;
+	PropertyBasedTableModel ocularTableModel;
 	QDataWidgetMapper *telescopeMapper;
-	QList<Telescope *> telescopes;
-	PropertyBasedTableModel<Telescope>* telescopeTableModel;
+	QList<Telescope *>* telescopes;
+	PropertyBasedTableModel telescopeTableModel;
 	QIntValidator *validatorOcularAFOV;
 	QDoubleValidator *validatorOcularEFL;
 	QDoubleValidator *validatorTelescopeDiameter;

@@ -244,7 +244,7 @@ void Oculars::init()
 		validateAndLoadIniFile();
 		// assume all is well
 		ready = true;
-		ocularDialog = new OcularDialog(ccds, oculars, telescopes);
+		ocularDialog = new OcularDialog(&ccds, &oculars, &telescopes);
 		initializeActivationActions();
 
 		QStringList settingGroups = settings->childGroups();
