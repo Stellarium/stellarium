@@ -3,16 +3,14 @@
 
 #include <QAbstractTableModel>
 
-template <class T>
 class PropertyBasedTableModel : public QAbstractTableModel
 {
+	Q_OBJECT
 public:
-	explicit PropertyBasedTableModel(QList<T> content,
-												T &modelObject,
-												QObject *parent = 0);
-	explicit PropertyBasedTableModel(QObject *parent = 0);
+	PropertyBasedTableModel(QObject *parent = 0);
 	virtual ~PropertyBasedTableModel();
 
+	void init(QList<QObject *>* content, QObject *model, QMap<int, QString> mappings);
 	int rowCount(const QModelIndex &parent) const;
 	int columnCount(const QModelIndex &parent) const;
 	QVariant data(const QModelIndex &index, int role) const;
@@ -22,9 +20,9 @@ public:
 	bool removeRows(int position, int rows, const QModelIndex &index=QModelIndex());
 
 private:
-	QList<T> content;
+	QList<QObject *>* content;
 	QMap<int, QString> mappings;
-	T* modelObject;
+	QObject* modelObject;
 };
 
 #endif // PROPERTYBASEDTABLEMODEL_H

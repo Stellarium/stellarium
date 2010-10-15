@@ -38,16 +38,17 @@
 #include <QSettings>
 #include <limits>
 
-OcularDialog::OcularDialog(QList<CCD *> ccds, QList<Ocular *> oculars, QList<Telescope *> telescopes)
+OcularDialog::OcularDialog(QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes)
 {
 	ui = new Ui_ocularDialogForm;
 	this->ccds = ccds;
-	this->ccdTableModel = new PropertyBasedTableModel<CCD>();
+	ccdTableModel.init( reinterpret_cast<QList<QObject *>* >(ccds), ccdModel(), ccdModel()->propertyMap());
 	this->oculars = oculars;
-//	this->ocularTableModel = new PropertyBasedTableModel<Ocular>(oculars, ocularModel(), this);
+	ocularTableModel.init(reinterpret_cast<QList<QObject *>* >(oculars), ocularModel(), ocularModel()->propertyMap());
 	this->telescopes = telescopes;
-//	this->telescopeTableModel
-//			= new PropertyBasedTableModel<Telescope>(telescopes, telescopeModel(), this);
+	telescopeTableModel.init(reinterpret_cast<QList<QObject *>* >(telescopes),
+									 telescopeModel(),
+									 telescopeModel()->propertyMap());
 
 	validatorPositiveInt = new QIntValidator(0, std::numeric_limits<int>::max(), this);
 	validatorPositiveDouble = new QDoubleValidator(.0, std::numeric_limits<double>::max(), 24, this);
@@ -259,7 +260,7 @@ void OcularDialog::createDialogContent()
 
 	// The CCD mapper
 	ccdMapper = new QDataWidgetMapper();
-	ccdMapper->setModel(ccdTableModel);
+	ccdMapper->setModel(&ccdTableModel);
 //	CCDMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
 	ccdMapper->addMapping(ui->ccdName, 0);
 	ccdMapper->addMapping(ui->ccdChipY, 1);
@@ -271,11 +272,11 @@ void OcularDialog::createDialogContent()
 	ccdMapper->toFirst();
 	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 			ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
-	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
+	ui->ccdListView->setCurrentIndex(ccdTableModel.index(0, 1));
 
 	// The ocular mapper
 	ocularMapper = new QDataWidgetMapper();
-	ocularMapper->setModel(ocularTableModel);
+	ocularMapper->setModel(&ocularTableModel);
 //	ocularMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
 	ocularMapper->addMapping(ui->ocularName, 0);
 	ocularMapper->addMapping(ui->ocularAFov, 1);
@@ -284,11 +285,11 @@ void OcularDialog::createDialogContent()
 	ocularMapper->toFirst();
 	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 			ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
-	ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
+	ui->ocularListView->setCurrentIndex(ocularTableModel.index(0, 1));
 
 	// The telescope mapper
 	telescopeMapper = new QDataWidgetMapper();
-	telescopeMapper->setModel(telescopeTableModel);
+	telescopeMapper->setModel(&telescopeTableModel);
 //	telescopeMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
 	telescopeMapper->addMapping(ui->telescopeName, 0);
 	telescopeMapper->addMapping(ui->telescopeDiameter, 1);
@@ -298,7 +299,7 @@ void OcularDialog::createDialogContent()
 	ocularMapper->toFirst();
 	connect(ui->telescopeListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 			telescopeMapper, SLOT(setCurrentModelIndex(QModelIndex)));
-	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
+	ui->telescopeListView->setCurrentIndex(telescopeTableModel.index(0, 1));
 
 	// set the initial state
 	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);

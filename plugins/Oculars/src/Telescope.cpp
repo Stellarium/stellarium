@@ -25,13 +25,15 @@ Telescope::Telescope()
 {
 }
 
-Telescope::Telescope(const Telescope* other)
+Telescope::Telescope(const QObject* other)
 {
-	this->m_diameter = other->diameter();
-	this->m_focalLength = other->focalLength();
-	this->m_hFlipped = other->isHFlipped();
-	this->m_vFlipped = other->isVFlipped();
-	this->m_name = other->name();
+	Q_ASSERT(other);
+	Q_ASSERT(other->metaObject()->className() == "Telescope");
+	this->m_diameter = other->property("diameter").toDouble();
+	this->m_focalLength = other->property("focalLength").toDouble();
+	this->m_hFlipped = other->property("hFlipped").toBool();
+	this->m_vFlipped = other->property("vFlipped").toBool();
+	this->m_name = other->property("name").toString();
 }
 
 Telescope::~Telescope()
