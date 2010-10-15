@@ -113,8 +113,7 @@ void ImportWindow::createDialogContent()
 	ui->frameURL->setVisible(false);
 
 	//This box will be displayed when one of the source types is selected
-	//ui->groupBoxSource->setVisible(false);
-	ui->tabWidgetSources->setVisible(false);
+	ui->groupBoxSource->setVisible(false);
 
 	resetCountdown();
 	resetNotFound();
@@ -137,7 +136,7 @@ void ImportWindow::acquireObjectData()
 		if (filePath.isEmpty())
 			return;
 
-		QList<CAImporter::SsoElements> objects = readElementsFromFile(filePath);
+		QList<CAImporter::SsoElements> objects = readElementsFromFile(importType, filePath);
 		if (objects.isEmpty())
 			return;
 
@@ -293,11 +292,11 @@ CAImporter::SsoElements ImportWindow::readElementsFromString (QString elements)
 	}
 }
 
-QList<CAImporter::SsoElements> ImportWindow::readElementsFromFile(QString filePath)
+QList<CAImporter::SsoElements> ImportWindow::readElementsFromFile(ImportType type, QString filePath)
 {
 	Q_ASSERT(ssoManager);
 
-	switch (importType)
+	switch (type)
 	{
 	case MpcComets:
 		return ssoManager->readMpcOneLineCometElementsFromFile(filePath);
@@ -330,8 +329,7 @@ void ImportWindow::switchImportType(bool checked)
 	ui->lineEditURL->clear();
 
 	//If one of the options is selected, show the rest of the dialog
-	//ui->groupBoxSource->setVisible(true);
-	ui->tabWidgetSources->setVisible(true);
+	ui->groupBoxSource->setVisible(true);
 }
 
 void ImportWindow::markAll()
@@ -461,7 +459,7 @@ void ImportWindow::downloadComplete(QNetworkReply *reply)
 	{
 		file.write(reply->readAll());
 		file.close();
-		objects = readElementsFromFile(file.fileName());
+		objects = readElementsFromFile(importType, file.fileName());
 	}
 	else
 	{
@@ -516,17 +514,6 @@ void ImportWindow::sendQuery()
 	QString query = ui->lineEditQuery->text();
 	if (query.isEmpty())
 		return;
-
-	//But comets can be also searched by other strings. D'oh!
-	/*
-	if (query.startsWith("C/") || query.startsWith("P/"))
-	{
-		qDebug() << "Comet name detected.";
-		importType = MpcComets;
-	}
-	else
-		importType = MpcMinorPlanets;
-	*/
 
 	//Progress bar
 	queryProgressBar = StelApp::getInstance().getGui()->addProgressBar();
@@ -612,7 +599,11 @@ void ImportWindow::queryComplete(QNetworkReply *reply)
 		{
 			file.write(reply->readAll());
 			file.close();
-			objects = readElementsFromFile(file.fileName());
+
+			//Try to read it as a comet first?
+			objects = readElementsFromFile(MpcComets, file.fileName());
+			if (objects.isEmpty())
+				objects = readElementsFromFile(MpcMinorPlanets, file.fileName());
 		}
 		else
 		{
