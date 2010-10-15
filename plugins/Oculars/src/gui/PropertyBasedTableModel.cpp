@@ -1,95 +1,92 @@
 #include "PropertyBasedTableModel.hpp"
 
-template <class T>
-PropertyBasedTableModel<T>::PropertyBasedTableModel(QObject *parent)
+PropertyBasedTableModel::PropertyBasedTableModel(QObject *parent)
 	: QAbstractTableModel(parent)
 {
 }
 
-template <class T>
-PropertyBasedTableModel<T>::PropertyBasedTableModel(QList<T> content,
-																 T &modelObject,
-																 QObject *parent)
-	: QAbstractTableModel(parent)
-{
-	this->content = content;
-	this->mappings = modelObject->propertyMap();
-	this->modelObject = modelObject;
-}
-template <class T>
-PropertyBasedTableModel<T>::~PropertyBasedTableModel()
+
+PropertyBasedTableModel::~PropertyBasedTableModel()
 {
 	delete modelObject;
 	modelObject = NULL;
 }
 
-template <class T>
-int PropertyBasedTableModel<T>::rowCount(const QModelIndex &parent) const
+void PropertyBasedTableModel::init(QList<QObject *>* content, QObject *model, QMap<int,QString> mappings)
 {
-	Q_UNUSED(parent);
-	return content.size();
+	this->content = content;
+	this->modelObject = model;
+	this->mappings = mappings;
 }
 
-template <class T>
-int PropertyBasedTableModel<T>::columnCount(const QModelIndex &parent) const
+/* ********************************************************************* */
+#if 0
+#pragma mark -
+#pragma mark Model Methods
+#endif
+/* ********************************************************************* */
+
+int PropertyBasedTableModel::rowCount(const QModelIndex &parent) const
+{
+	Q_UNUSED(parent);
+	return content->size();
+}
+
+int PropertyBasedTableModel::columnCount(const QModelIndex &parent) const
 {
 	Q_UNUSED(parent);
 	return mappings.size();
 }
 
-template <class T>
-QVariant PropertyBasedTableModel<T>::data(const QModelIndex &index, int role) const
+QVariant PropertyBasedTableModel::data(const QModelIndex &index, int role) const
 {
 	QVariant data;
 	if (role == Qt::DisplayRole
 		 && index.isValid()
-		 && index.row() < content.size()
+		 && index.row() < content->size()
 		 && index.row() >= 0
 		 && index.column() < mappings.size()
 		 && index.column() > 0){
-			T *object = content.at(index.row());
-			data = object->property(mappings[index.column()]);
+			QObject *object = content->at(index.row());
+			data = object->property(mappings[index.column()].toStdString().c_str());
 
 	}
 	return data;
 }
 
-template <class T>
-bool PropertyBasedTableModel<T>::insertRows(int position, int rows, const QModelIndex &index)
+bool PropertyBasedTableModel::insertRows(int position, int rows, const QModelIndex &index)
 {
 	Q_UNUSED(index);
 	beginInsertRows(QModelIndex(), position, position+rows-1);
 
 	for (int row=0; row < rows; row++) {
-		T* newInstance = modelObject->metaObject()->newInstance(modelObject);
-		content.insert(position, newInstance);
+		QObject* newInstance = modelObject->metaObject()->newInstance(Q_ARG(QObject, *modelObject));
+		content->insert(position, newInstance);
 	}
 
 	endInsertRows();
 	return true;
 }
 
-template <class T>
-bool PropertyBasedTableModel<T>::removeRows(int position, int rows, const QModelIndex &index)
+bool PropertyBasedTableModel::removeRows(int position, int rows, const QModelIndex &index)
 {
 	Q_UNUSED(index);
 	beginRemoveRows(QModelIndex(), position, position+rows-1);
 
 	for (int row=0; row < rows; ++row) {
-		content.removeAt(position);
+		content->removeAt(position);
 	}
 
 	endRemoveRows();
 	return true;
 }
 
-template <class T>
-bool PropertyBasedTableModel<T>::setData(const QModelIndex &index, const QVariant &value, int role)
+bool PropertyBasedTableModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
 	bool changeMade = false;
 	if (index.isValid() && role == Qt::EditRole && index.column() < mappings.size()) {
-		T* object = content.at(index.row());
-		object->setProperty(mappings[index.column()], value);
+		QObject* object = content->at(index.row());
+		object->setProperty(mappings[index.column()].toStdString().c_str(), value);
 		emit(dataChanged(index, index));
 
 		changeMade = true;
@@ -98,8 +95,7 @@ bool PropertyBasedTableModel<T>::setData(const QModelIndex &index, const QVarian
 	return changeMade;
 }
 
-template <class T>
-Qt::ItemFlags PropertyBasedTableModel<T>::flags(const QModelIndex &index) const
+Qt::ItemFlags PropertyBasedTableModel::flags(const QModelIndex &index) const
 {
 	if (!index.isValid()) {
 		return Qt::ItemIsEnabled;
