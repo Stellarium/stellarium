@@ -102,7 +102,7 @@ Oculars::Oculars() : selectedOcularIndex(-1), flagShowOculars(false), usageMessa
 	oculars = QList<Ocular *>();
 	telescopes = QList<Telescope *>();
 
-	selectedCCDIndex = 0;
+	selectedCCDIndex = -1;
 	selectedOcularIndex = 0;
 	selectedTelescopeIndex = 0;
 
@@ -396,7 +396,7 @@ void Oculars::enableOcular(bool b)
 void Oculars::decrementCCDIndex()
 {
 	selectedCCDIndex--;
-	if (selectedCCDIndex == -1) {
+	if (selectedCCDIndex == -2) {
 		selectedCCDIndex = ccds.count() - 1;
 	}
 	emit(selectedCCDChanged());
@@ -424,7 +424,7 @@ void Oculars::incrementCCDIndex()
 {
 	selectedCCDIndex++;
 	if (selectedCCDIndex == ccds.count()) {
-		selectedCCDIndex = 0;
+		selectedCCDIndex = -1;
 	}
 	emit(selectedCCDChanged());
 }
@@ -721,21 +721,23 @@ void Oculars::paintMask()
 	gluDisk(quadric, inner - 1.0, inner, 256, 1);
 	gluDeleteQuadric(quadric);
 	// draw sensor rectangle
-	CCD *ccd = ccds[selectedCCDIndex];
-	if (ccd) {
-		glColor4f(0.77, 0.14, 0.16, 0.5);
-		Ocular *ocular = oculars[selectedOcularIndex];
-		float CCDx = ccd->getActualFOVx(ocular);
-		float CCDy = ccd->getActualFOVy(ocular);
-		if (CCDx > 0.0 && CCDy > 0.0) {
-			glBegin(GL_LINE_LOOP);
-			glVertex2f(-CCDx, CCDy);
-			glVertex2f(CCDx, CCDy);
-			glVertex2f(CCDx, -CCDy);
-			glVertex2f(-CCDx, -CCDy);
-			glEnd();
+	if(selectedCCDIndex != -1) {
+		CCD *ccd = ccds[selectedCCDIndex];
+		if (ccd) {
+			glColor4f(0.77, 0.14, 0.16, 0.5);
+			Ocular *ocular = oculars[selectedOcularIndex];
+			float CCDx = ccd->getActualFOVx(ocular);
+			float CCDy = ccd->getActualFOVy(ocular);
+			if (CCDx > 0.0 && CCDy > 0.0) {
+				glBegin(GL_LINE_LOOP);
+				glVertex2f(-CCDx, CCDy);
+				glVertex2f(CCDx, CCDy);
+				glVertex2f(CCDx, -CCDy);
+				glVertex2f(-CCDx, -CCDy);
+				glEnd();
+			}
 		}
-	}
+}
 	glPopMatrix();
 }
 
@@ -745,7 +747,10 @@ void Oculars::paintText(const StelCore* core)
 	StelPainter painter(prj);	
 
 	// Get the current instruments
-	CCD *ccd = ccds[selectedCCDIndex];
+	CCD *ccd = NULL;
+	if(selectedCCDIndex != -1) {
+		ccd = ccds[selectedCCDIndex];
+	}
 	Ocular *ocular = oculars[selectedOcularIndex];
 	Telescope *telescope = telescopes[selectedTelescopeIndex];
 
