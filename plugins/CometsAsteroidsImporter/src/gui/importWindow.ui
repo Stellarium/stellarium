@@ -34,10 +34,10 @@ QTabBar::tab {
 QTabBar::tab:selected {
 	border: none;
 	margin: 0px;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 	color: rgb(220, 223, 214);
-	background-color: qlineargradient(x1: 0, y1: 1, x2: 0, y2: 0, stop: 0 rgb(68, 69, 72), stop: 1 rgb(86, 87, 90));
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 69, 72), stop: 1 rgb(86, 87, 90));
 }
 
 QTabWidget::pane {
@@ -161,7 +161,7 @@ QTabWidget::pane {
       <number>0</number>
      </property>
      <widget class="QWidget" name="pageSource">
-      <layout class="QVBoxLayout" name="verticalLayoutSource" stretch="0,0,0">
+      <layout class="QVBoxLayout" name="verticalLayout_7">
        <property name="spacing">
         <number>0</number>
        </property>
@@ -169,36 +169,7 @@ QTabWidget::pane {
         <number>0</number>
        </property>
        <item>
-        <widget class="QGroupBox" name="groupBoxType">
-         <property name="title">
-          <string>Select the type</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayoutType_3">
-          <property name="margin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QRadioButton" name="radioButtonAsteroids">
-            <property name="text">
-             <string>Asteroids</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButtonComets">
-            <property name="text">
-             <string>Comets</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QTabWidget" name="tabWidgetSources">
-         <property name="tabPosition">
-          <enum>QTabWidget::South</enum>
-         </property>
+        <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
           <number>0</number>
          </property>
@@ -213,6 +184,32 @@ QTabWidget::pane {
            <property name="margin">
             <number>0</number>
            </property>
+           <item>
+            <widget class="QGroupBox" name="groupBoxType">
+             <property name="title">
+              <string>Select the type</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayoutType_3">
+              <property name="margin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QRadioButton" name="radioButtonAsteroids">
+                <property name="text">
+                 <string>Asteroids</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QRadioButton" name="radioButtonComets">
+                <property name="text">
+                 <string>Comets</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
            <item>
             <widget class="QGroupBox" name="groupBoxSource">
              <property name="title">
@@ -328,14 +325,27 @@ QTabWidget::pane {
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>0</width>
-                  <height>0</height>
+                  <width>20</width>
+                  <height>40</height>
                  </size>
                 </property>
                </spacer>
               </item>
              </layout>
             </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </widget>
@@ -457,19 +467,6 @@ QTabWidget::pane {
          </widget>
         </widget>
        </item>
-       <item>
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="pageResult">
@@ -571,7 +568,7 @@ QTabWidget::pane {
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>tabWidgetSources</tabstop>
+  <tabstop>tabWidget</tabstop>
   <tabstop>radioButtonAsteroids</tabstop>
   <tabstop>radioButtonComets</tabstop>
   <tabstop>radioButtonFile</tabstop>

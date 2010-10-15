@@ -89,7 +89,7 @@ private:
 	//! wrapper for the single object function to allow multiple formats.
 	CAImporter::SsoElements readElementsFromString(QString elements);
 	//! wrapper for the file function to allow multiple formats
-	QList<CAImporter::SsoElements> readElementsFromFile(QString filePath);
+	QList<CAImporter::SsoElements> readElementsFromFile(ImportType type, QString filePath);
 
 	void populateCandidateObjects(QList<CAImporter::SsoElements>);
 	void enableInterface(bool enable);
