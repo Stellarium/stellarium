@@ -16,9 +16,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "CCD.hpp"
-#include "Ocular.hpp"
-#include "Telescope.hpp"
 #include "Oculars.hpp"
 #include "OcularDialog.hpp"
 #include "ui_ocularDialog.h"
@@ -42,13 +39,16 @@ OcularDialog::OcularDialog(QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<T
 {
 	ui = new Ui_ocularDialogForm;
 	this->ccds = ccds;
-	ccdTableModel.init( reinterpret_cast<QList<QObject *>* >(ccds), ccdModel(), ccdModel()->propertyMap());
+	ccdTableModel.init(reinterpret_cast<QList<QObject *>* >(ccds), 
+							 CCD::ccdModel(), 
+							 CCD::ccdModel()->propertyMap());
 	this->oculars = oculars;
-	ocularTableModel.init(reinterpret_cast<QList<QObject *>* >(oculars), ocularModel(), ocularModel()->propertyMap());
+	ocularTableModel.init(reinterpret_cast<QList<QObject *>* >(oculars), 
+								 Ocular::ocularModel(), Ocular::ocularModel()->propertyMap());
 	this->telescopes = telescopes;
 	telescopeTableModel.init(reinterpret_cast<QList<QObject *>* >(telescopes),
-									 telescopeModel(),
-									 telescopeModel()->propertyMap());
+									 Telescope::telescopeModel(),
+									 Telescope::telescopeModel()->propertyMap());
 
 	validatorPositiveInt = new QIntValidator(0, std::numeric_limits<int>::max(), this);
 	validatorPositiveDouble = new QDoubleValidator(.0, std::numeric_limits<double>::max(), 24, this);
@@ -170,18 +170,6 @@ void OcularDialog::insertNewTelescope()
 {
 }
 
-void OcularDialog::ccdSelected(int currentIndex)
-{
-}
-
-void OcularDialog::ocularSelected(int currentIndex)
-{
-}
-
-void OcularDialog::telescopeSelected(int currentIndex)
-{
-}
-
 void OcularDialog::updateCCD()
 {
 }
@@ -222,7 +210,10 @@ void OcularDialog::scaleImageCircleStateChanged(int state)
 void OcularDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-
+	ui->ccdListView->setModel(&ccdTableModel);
+	ui->ocularListView->setModel(&ocularTableModel);
+	ui->telescopeListView->setModel(&telescopeTableModel);
+	
 	//Now the rest of the actions.
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->updateCCDButton, SIGNAL(clicked()), this, SLOT(updateCCD()));
@@ -236,11 +227,6 @@ void OcularDialog::createDialogContent()
 	connect(ui->deleteOcular, SIGNAL(clicked()), this, SLOT(deleteSelectedOcular()));
 	connect(ui->addTelescope, SIGNAL(clicked()), this, SLOT(insertNewTelescope()));
 	connect(ui->deleteTelescope, SIGNAL(clicked()), this, SLOT(deleteSelectedTelescope()));
-
-	// Oculars model
-	connect(ui->ccdListView, SIGNAL(currentRowChanged(int)), this, SLOT(ccdSelected(int)));
-	connect(ui->ocularListView, SIGNAL(currentRowChanged(int)), this, SLOT(ocularSelected(int)));
-	connect(ui->telescopeListView, SIGNAL(currentRowChanged(int)), this, SLOT(telescopeSelected(int)));
 
 	// Validators
 	ui->ccdName->setValidator(validatorName);
@@ -262,13 +248,13 @@ void OcularDialog::createDialogContent()
 	ccdMapper = new QDataWidgetMapper();
 	ccdMapper->setModel(&ccdTableModel);
 //	CCDMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
-	ccdMapper->addMapping(ui->ccdName, 0);
-	ccdMapper->addMapping(ui->ccdChipY, 1);
-	ccdMapper->addMapping(ui->ccdChipX, 2);
-	ccdMapper->addMapping(ui->ccdPixelY, 3);
-	ccdMapper->addMapping(ui->ccdPixelX, 4);
-	ccdMapper->addMapping(ui->ccdResX, 5);
-	ccdMapper->addMapping(ui->ccdResY, 6);
+	ccdMapper->addMapping(ui->ccdName, 0, "name");
+	ccdMapper->addMapping(ui->ccdChipY, 1, "chipHeight");
+	ccdMapper->addMapping(ui->ccdChipX, 2, "chipWidth");
+	ccdMapper->addMapping(ui->ccdPixelY, 3, "pixelHeight");
+	ccdMapper->addMapping(ui->ccdPixelX, 4, "pixelWidth");
+	ccdMapper->addMapping(ui->ccdResX, 5, "resolutionX");
+	ccdMapper->addMapping(ui->ccdResY, 6, "resolutionY");
 	ccdMapper->toFirst();
 	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 			ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
@@ -284,7 +270,7 @@ void OcularDialog::createDialogContent()
 	ocularMapper->addMapping(ui->ocularFieldStop, 3);
 	ocularMapper->toFirst();
 	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-			ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+			  ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
 	ui->ocularListView->setCurrentIndex(ocularTableModel.index(0, 1));
 
 	// The telescope mapper

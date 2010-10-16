@@ -10,13 +10,13 @@ public:
 	PropertyBasedTableModel(QObject *parent = 0);
 	virtual ~PropertyBasedTableModel();
 
-	void init(QList<QObject *>* content, QObject *model, QMap<int, QString> mappings);
-	int rowCount(const QModelIndex &parent) const;
-	int columnCount(const QModelIndex &parent) const;
 	QVariant data(const QModelIndex &index, int role) const;
+	int columnCount(const QModelIndex &parent) const;
 	Qt::ItemFlags flags(const QModelIndex &index) const;
-	bool setData(const QModelIndex &index, const QVariant &value, int role=Qt::EditRole);
+	void init(QList<QObject *>* content, QObject *model, QMap<int, QString> mappings);
 	bool insertRows(int position, int rows, const QModelIndex &index=QModelIndex());
+	int rowCount(const QModelIndex &parent) const;
+	bool setData(const QModelIndex &index, const QVariant &value, int role=Qt::EditRole);
 	bool removeRows(int position, int rows, const QModelIndex &index=QModelIndex());
 
 private:
