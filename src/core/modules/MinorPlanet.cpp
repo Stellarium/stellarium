@@ -201,6 +201,12 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	if (flags&Size)
 		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(2.*getAngularSize(core)*M_PI/180., true));
 
+	//This doesn't work, even if setOpenExternalLinks(true) is used in InfoPanel
+	/*
+	if (flags&Extra1)
+		oss << QString("<br><a href=\"http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=%1\">JPL Small-Body Database Browser</a>").arg( (minorPlanetNumber) ? QString::number(minorPlanetNumber) : englishName );
+	*/
+
 	postProcessInfoString(str, flags);
 
 	return str;
