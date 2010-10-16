@@ -243,16 +243,14 @@ void Oculars::init()
 	try {
 		validateAndLoadIniFile();
 		// assume all is well
-		ready = true;
-		ocularDialog = new OcularDialog(&ccds, &oculars, &telescopes);
-		initializeActivationActions();
 
 		QStringList settingGroups = settings->childGroups();
+		qDebug() << settings;
 		QListIterator<QString> settingsGroupIterator(settingGroups);
 		while(settingsGroupIterator.hasNext()) {
 			QString settingsGroup = settingsGroupIterator.next();
 			if (settingsGroup.startsWith("ocular")) {
-				Ocular *newOcular = ocularFromSettings(settings, settingsGroup);
+				Ocular *newOcular = Ocular::ocularFromSettings(settings, settingsGroup);
 				if (newOcular != NULL) {
 					oculars.append(newOcular);
 				}
@@ -261,17 +259,21 @@ void Oculars::init()
 				useMaxEyepieceAngle = settings->value("use_max_exit_circle", 0.0).toBool();
 				settings->endGroup();
 			} else if (settingsGroup.startsWith("telescope")) {
-				Telescope *newTelescope = telescopeFromSettings(settings, settingsGroup);
+				Telescope *newTelescope = Telescope::telescopeFromSettings(settings, settingsGroup);
 				if (newTelescope != NULL) {
 					telescopes.append(newTelescope);
 				}
 			} else if (settingsGroup.startsWith("ccd")) {
-				CCD *newCCD = ccdFromSettings(settings, settingsGroup);
+				CCD *newCCD = CCD::ccdFromSettings(settings, settingsGroup);
 				if (newCCD != NULL) {
 					ccds.append(newCCD);
 				}
 			}
 		}
+		ready = true;
+		ocularDialog = new OcularDialog(&ccds, &oculars, &telescopes);
+		initializeActivationActions();
+		determineMaxEyepieceAngle();
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 	}

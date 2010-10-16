@@ -59,9 +59,6 @@ public slots:
 	void insertNewCCD();
 	void insertNewOcular();
 	void insertNewTelescope();
-	void ccdSelected(int currentIndex);
-	void ocularSelected(int currentIndex);
-	void telescopeSelected(int currentIndex);
 	void updateCCD();
 	void updateOcular();
 	void updateTelescope();
