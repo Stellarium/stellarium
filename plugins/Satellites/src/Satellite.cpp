@@ -117,6 +117,7 @@ QVariantMap Satellite::getMap(void)
 	QVariantMap map;
 	map["designation"] = designation;
 	map["visible"] = visible;
+	map["draworb"] = draworb;
 	map["tle1"] = QString(elements[1]);
 	map["tle2"] = QString(elements[2]);
 	QVariantList col;
