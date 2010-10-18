@@ -10,14 +10,16 @@ public:
 	PropertyBasedTableModel(QObject *parent = 0);
 	virtual ~PropertyBasedTableModel();
 
-	QVariant data(const QModelIndex &index, int role) const;
-	int columnCount(const QModelIndex &parent) const;
-	Qt::ItemFlags flags(const QModelIndex &index) const;
 	void init(QList<QObject *>* content, QObject *model, QMap<int, QString> mappings);
-	bool insertRows(int position, int rows, const QModelIndex &index=QModelIndex());
-	int rowCount(const QModelIndex &parent) const;
-	bool setData(const QModelIndex &index, const QVariant &value, int role=Qt::EditRole);
-	bool removeRows(int position, int rows, const QModelIndex &index=QModelIndex());
+
+	//Over-rides from QAbstractTableModel
+	virtual QVariant data(const QModelIndex &index, int role) const;
+	virtual int columnCount(const QModelIndex &parent) const;
+	virtual Qt::ItemFlags flags(const QModelIndex &index) const;
+	virtual bool insertRows(int position, int rows, const QModelIndex &index=QModelIndex());
+	virtual int rowCount(const QModelIndex &parent) const;
+	virtual bool setData(const QModelIndex &index, const QVariant &value, int role=Qt::EditRole);
+	virtual bool removeRows(int position, int rows, const QModelIndex &index=QModelIndex());
 
 private:
 	QList<QObject *>* content;
