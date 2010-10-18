@@ -71,18 +71,19 @@ protected:
 	Ui_ocularDialogForm* ui;
 
 private slots:
+	void testCurrentIndexChanged(const QModelIndex& newIndex);
 	void scaleImageCircleStateChanged(int state);
 
 private:
 	QDataWidgetMapper *ccdMapper;
 	QList<CCD *>* ccds;
-	PropertyBasedTableModel ccdTableModel;
+	PropertyBasedTableModel* ccdTableModel;
 	QDataWidgetMapper *ocularMapper;
 	QList<Ocular *>* oculars;
-	PropertyBasedTableModel ocularTableModel;
+	PropertyBasedTableModel* ocularTableModel;
 	QDataWidgetMapper *telescopeMapper;
 	QList<Telescope *>* telescopes;
-	PropertyBasedTableModel telescopeTableModel;
+	PropertyBasedTableModel* telescopeTableModel;
 	QIntValidator *validatorOcularAFOV;
 	QDoubleValidator *validatorOcularEFL;
 	QDoubleValidator *validatorTelescopeDiameter;
