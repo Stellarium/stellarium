@@ -46,9 +46,7 @@ QVariant PropertyBasedTableModel::data(const QModelIndex &index, int role) const
 		 && index.isValid()){
 		QObject *object = content->at(index.row());
 		data = object->property(mappings[index.column()].toStdString().c_str());
-		qDebug() << "====> " << data.toString();
 	}
-	qDebug() << "====> Column: " << index.column();
 //	if (role == Qt::DisplayRole
 //		 && index.isValid()
 //		 && index.row() < content->size()
