@@ -467,8 +467,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 
 void NebulaMgr::updateI18n()
 {
-	//StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-	StelTranslator trans("stellarium-skycultures",StelFileMgr::getLocaleDir(),StelApp::getInstance().getLocaleMgr().getSkyTranslator().getTrueLocaleName());
+	StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	foreach (NebulaP n, nebArray)
 			n->translateName(trans);
 }
