@@ -17,38 +17,35 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _TIME_ZONE_MANAGER_WINDOW_HPP_
-#define _TIME_ZONE_MANAGER_WINDOW_HPP_
+#include "DefineTimeZoneWindow.hpp"
+#include "ui_defineTimeZone.h"
 
-#include "StelDialog.hpp"
-
-class Ui_timeZoneManagerWindowForm;
-class TimeZoneManager;
-class DefineTimeZoneWindow;
-
-class TimeZoneManagerWindow : public StelDialog
+DefineTimeZoneWindow::DefineTimeZoneWindow()
 {
-	Q_OBJECT
+	ui = new Ui_defineTimeZoneForm();
+}
 
-public:
-	TimeZoneManagerWindow();
-	~TimeZoneManagerWindow();
-	void languageChanged();
+DefineTimeZoneWindow::~DefineTimeZoneWindow()
+{
+	delete ui;
+}
 
-protected:
-	void createDialogContent();
+void DefineTimeZoneWindow::languageChanged()
+{
+	if (dialog)
+		ui->retranslateUi(dialog);
+}
 
-private:
-	Ui_timeZoneManagerWindowForm * ui;
-	DefineTimeZoneWindow * defineTimeZoneWindow;
-	TimeZoneManager * timeZoneManager;
+void DefineTimeZoneWindow::createDialogContent()
+{
+	ui->setupUi(dialog);
 
-private slots:
-	void saveSettings();
-	void openDefineTimeZoneWindow();
-	void closeDefineTimeZoneWindow(bool);
-	void timeZoneDefined(QString timeZoneDefinition);
-};
+	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->pushButtonUseDefinition, SIGNAL(clicked()), this, SLOT(useDefinition()));
+}
 
-
-#endif //_TIME_ZONE_MANAGER_WINDOW_HPP_
+void DefineTimeZoneWindow::useDefinition()
+{
+	emit timeZoneDefined(QString("SCT+0"));
+	close();
+}

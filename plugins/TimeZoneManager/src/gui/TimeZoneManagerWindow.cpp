@@ -19,6 +19,7 @@
 
 #include "TimeZoneManager.hpp"
 #include "TimeZoneManagerWindow.hpp"
+#include "DefineTimeZoneWindow.hpp"
 #include "ui_timeZoneManagerWindow.h"
 
 #include "StelApp.hpp"
@@ -28,11 +29,14 @@ TimeZoneManagerWindow::TimeZoneManagerWindow()
 {
 	ui = new Ui_timeZoneManagerWindowForm();
 	timeZoneManager = GETSTELMODULE(TimeZoneManager);
+	defineTimeZoneWindow = NULL;
 }
 
 TimeZoneManagerWindow::~TimeZoneManagerWindow()
 {
 	delete ui;
+	if (defineTimeZoneWindow)
+		delete defineTimeZoneWindow;
 }
 
 void TimeZoneManagerWindow::languageChanged()
@@ -47,11 +51,12 @@ void TimeZoneManagerWindow::createDialogContent()
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveSettings()));
-
-	//ui->labelRestart->setVisible(false);
+	connect(ui->pushButtonEditTimeZone, SIGNAL(clicked()), this, SLOT(openDefineTimeZoneWindow()));
 
 	QString currentTimeZoneString = timeZoneManager->readTimeZone();
 	ui->lineEditCurrent->setText(currentTimeZoneString);
+	ui->lineEditUserDefined->setText(currentTimeZoneString);
+	ui->frameUserDefined->setEnabled(false);
 
 	QRegExp tzTimeZoneDescription("^SCT([+-])(\\d\\d):(\\d\\d):(\\d\\d)$");
 	if (tzTimeZoneDescription.indexIn(currentTimeZoneString) == 0)
@@ -79,8 +84,6 @@ void TimeZoneManagerWindow::createDialogContent()
 	{
 		ui->radioButtonUserDefined->setChecked(true);
 	}
-
-	ui->lineEditUserDefined->setText(currentTimeZoneString);
 }
 
 void TimeZoneManagerWindow::saveSettings()
@@ -108,5 +111,36 @@ void TimeZoneManagerWindow::saveSettings()
 	}
 
 	timeZoneManager->setTimeZone(timeZoneString);
-	//ui->labelRestart->setVisible(true);
+}
+
+void TimeZoneManagerWindow::openDefineTimeZoneWindow()
+{
+	dialog->setEnabled(false);
+
+	if (defineTimeZoneWindow == NULL)
+	{
+		defineTimeZoneWindow = new DefineTimeZoneWindow();
+		connect(defineTimeZoneWindow, SIGNAL(timeZoneDefined(QString)), this, SLOT(timeZoneDefined(QString)));
+		connect(defineTimeZoneWindow, SIGNAL(visibleChanged(bool)), this, SLOT(closeDefineTimeZoneWindow(bool)));
+	}
+
+	defineTimeZoneWindow->setVisible(true);
+}
+
+void TimeZoneManagerWindow::closeDefineTimeZoneWindow(bool show)
+{
+	if (show)
+		return;
+
+	disconnect(defineTimeZoneWindow, SIGNAL(timeZoneDefined(QString)), this, SLOT(timeZoneDefined(QString)));
+	disconnect(defineTimeZoneWindow, SIGNAL(visibleChanged(bool)), this, SLOT(closeDefineTimeZoneWindow(bool)));
+	delete defineTimeZoneWindow;
+	defineTimeZoneWindow = NULL;
+
+	dialog->setEnabled(true);
+}
+
+void TimeZoneManagerWindow::timeZoneDefined(QString timeZoneDefinition)
+{
+	ui->lineEditUserDefined->setText(timeZoneDefinition);
 }
