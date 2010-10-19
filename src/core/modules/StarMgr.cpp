@@ -765,8 +765,7 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 void StarMgr::updateI18n()
 {
 	QRegExp transRx("_[(]\"(.*)\"[)]");
-	StelTranslator trans("stellarium-skycultures", StelFileMgr::getLocaleDir(), StelApp::getInstance().getLocaleMgr().getSkyTranslator().getTrueLocaleName());
-	//StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	commonNamesMapI18n.clear();
 	commonNamesIndexI18n.clear();
 	for (QHash<int,QString>::ConstIterator it(commonNamesMap.constBegin());it!=commonNamesMap.constEnd();it++)
