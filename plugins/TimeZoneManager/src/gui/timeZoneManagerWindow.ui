@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>450</width>
-    <height>520</height>
+    <height>470</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -168,35 +168,35 @@
       <property name="margin">
        <number>0</number>
       </property>
-      <item row="1" column="0" colspan="4">
+      <item row="0" column="0" colspan="4">
        <widget class="QRadioButton" name="radioButtonLocalSettings">
         <property name="text">
          <string>Use system settings (default)</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="0" colspan="4">
+      <item row="1" column="0" colspan="4">
        <widget class="QRadioButton" name="radioButtonUtc">
         <property name="text">
          <string>Universal Coordinated Time (UTC)</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="0" colspan="2">
+      <item row="2" column="0" colspan="2">
        <widget class="QRadioButton" name="radioButtonOffset">
         <property name="text">
          <string>Offset from UTC:</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="0" colspan="4">
+      <item row="5" column="0" colspan="4">
        <widget class="QPushButton" name="pushButtonSave">
         <property name="text">
          <string>Save settings</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="0" colspan="4">
+      <item row="3" column="0" colspan="4">
        <widget class="QLabel" name="labelOffset">
         <property name="text">
          <string>(offset = local time - UTC time)</string>
@@ -206,7 +206,7 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="2" colspan="2">
+      <item row="2" column="2" colspan="2">
        <widget class="QDoubleSpinBox" name="doubleSpinBoxOffset">
         <property name="wrapping">
          <bool>true</bool>
@@ -228,7 +228,7 @@
         </property>
        </widget>
       </item>
-      <item row="7" column="0" colspan="4">
+      <item row="6" column="0" colspan="4">
        <widget class="QLabel" name="labelRestart">
         <property name="text">
          <string>Any changes will take effect the next time Stellarium is started.</string>
@@ -238,24 +238,14 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="0" colspan="4">
-       <widget class="QLabel" name="labelUnnecessary">
-        <property name="text">
-         <string>Changing the time zone settings is not necessary if Stellarium is used to display the sky over a location in the same time zone that is used by the computer Stellarium runs on.</string>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0" colspan="2">
+      <item row="4" column="0" colspan="2">
        <widget class="QRadioButton" name="radioButtonUserDefined">
         <property name="text">
          <string>User-defined:</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="2" colspan="2">
+      <item row="4" column="2" colspan="2">
        <widget class="QLineEdit" name="lineEditUserDefined"/>
       </item>
      </layout>
