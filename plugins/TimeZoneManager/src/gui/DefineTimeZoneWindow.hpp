@@ -17,38 +17,34 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _TIME_ZONE_MANAGER_WINDOW_HPP_
-#define _TIME_ZONE_MANAGER_WINDOW_HPP_
+#ifndef _DEFINE_TIME_ZONE_HPP_
+#define _DEFINE_TIME_ZONE_HPP_
 
 #include "StelDialog.hpp"
 
-class Ui_timeZoneManagerWindowForm;
-class TimeZoneManager;
-class DefineTimeZoneWindow;
+class Ui_defineTimeZoneForm;
 
-class TimeZoneManagerWindow : public StelDialog
+class DefineTimeZoneWindow : public StelDialog
 {
 	Q_OBJECT
 
 public:
-	TimeZoneManagerWindow();
-	~TimeZoneManagerWindow();
+	DefineTimeZoneWindow();
+	~DefineTimeZoneWindow();
 	void languageChanged();
+
+signals:
+	void timeZoneDefined(QString timeZoneString);
 
 protected:
 	void createDialogContent();
 
 private:
-	Ui_timeZoneManagerWindowForm * ui;
-	DefineTimeZoneWindow * defineTimeZoneWindow;
-	TimeZoneManager * timeZoneManager;
+	Ui_defineTimeZoneForm * ui;
 
 private slots:
-	void saveSettings();
-	void openDefineTimeZoneWindow();
-	void closeDefineTimeZoneWindow(bool);
-	void timeZoneDefined(QString timeZoneDefinition);
+	void useDefinition();
 };
 
 
-#endif //_TIME_ZONE_MANAGER_WINDOW_HPP_
+#endif //_DEFINE_TIME_ZONE_HPP_

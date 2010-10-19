@@ -12,10 +12,13 @@ SET(TimeZoneManager_SRCS
   TimeZoneManager.cpp
   gui/TimeZoneManagerWindow.hpp
   gui/TimeZoneManagerWindow.cpp
+  gui/DefineTimeZoneWindow.hpp
+  gui/DefineTimeZoneWindow.cpp
   )
 
 SET(TimeZoneManager_UIS
   gui/timeZoneManagerWindow.ui
+  gui/defineTimeZone.ui
 )
 
 QT4_WRAP_UI(TimeZoneManager_UIS_H ${TimeZoneManager_UIS})
@@ -25,6 +28,7 @@ QT4_WRAP_UI(TimeZoneManager_UIS_H ${TimeZoneManager_UIS})
 
 SET(TimeZoneManager_MOC_HDRS
   gui/TimeZoneManagerWindow.hpp
+  gui/DefineTimeZoneWindow.hpp
   TimeZoneManager.hpp
   )
 
