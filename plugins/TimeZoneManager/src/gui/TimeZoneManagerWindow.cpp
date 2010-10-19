@@ -95,15 +95,7 @@ void TimeZoneManagerWindow::saveSettings()
 	}
 	else if (ui->radioButtonOffset->isChecked())
 	{
-		int offset = ui->doubleSpinBoxOffset->value() * 3600;
-		//Offset is POSIX style: UTF - local time = offset,
-		//so invert the sign:
-		QChar offsetSign = (offset > 0) ? '-' : '+';
-		offset = abs(offset);
-		int offsetSeconds = offset % 60; offset /= 60.;
-		int offsetMinutes = offset % 60; offset /= 60.;
-		int offsetHours = offset;
-		timeZoneString = QString("SCT%1%2:%3:%4").arg(offsetSign).arg(offsetHours, 2, 10, QChar('0')).arg(offsetMinutes, 2, 10, QChar('0')).arg(offsetSeconds, 2, 10, QChar('0'));
+		timeZoneString = QString("SCT").append(getTzOffsetStringFrom(ui->doubleSpinBoxOffset));
 	}
 	else
 	{
@@ -143,4 +135,20 @@ void TimeZoneManagerWindow::closeDefineTimeZoneWindow(bool show)
 void TimeZoneManagerWindow::timeZoneDefined(QString timeZoneDefinition)
 {
 	ui->lineEditUserDefined->setText(timeZoneDefinition);
+}
+
+QString TimeZoneManagerWindow::getTzOffsetStringFrom(QDoubleSpinBox * spinBox)
+{
+	Q_ASSERT(spinBox);
+
+	int offset = spinBox->value() * 3600;
+	//Offset is POSIX style: UTC - local time = offset,
+	//so invert the sign:
+	QChar offsetSign = (offset > 0) ? '-' : '+';
+	offset = abs(offset);
+	int offsetSeconds = offset % 60; offset /= 60.;
+	int offsetMinutes = offset % 60; offset /= 60.;
+	int offsetHours = offset;
+
+	return QString("%1%2:%3:%4").arg(offsetSign).arg(offsetHours, 2, 10, QChar('0')).arg(offsetMinutes, 2, 10, QChar('0')).arg(offsetSeconds, 2, 10, QChar('0'));
 }
