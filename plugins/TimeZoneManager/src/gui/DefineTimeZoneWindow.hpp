@@ -23,6 +23,7 @@
 #include "StelDialog.hpp"
 
 class Ui_defineTimeZoneForm;
+class QRegExpValidator;
 
 class DefineTimeZoneWindow : public StelDialog
 {
@@ -42,8 +43,14 @@ protected:
 private:
 	Ui_defineTimeZoneForm * ui;
 
+	QRegExpValidator * timeZoneNameValidator;
+
+	void resetWindowState();
+	void populateDateLists();
+
 private slots:
 	void useDefinition();
+	void updateDstOffset(double normalOffset);
 };
 
 

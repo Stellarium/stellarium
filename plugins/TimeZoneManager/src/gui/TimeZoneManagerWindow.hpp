@@ -22,6 +22,9 @@
 
 #include "StelDialog.hpp"
 
+#include <QString>
+#include <QDoubleSpinBox>
+
 class Ui_timeZoneManagerWindowForm;
 class TimeZoneManager;
 class DefineTimeZoneWindow;
@@ -34,6 +37,12 @@ public:
 	TimeZoneManagerWindow();
 	~TimeZoneManagerWindow();
 	void languageChanged();
+
+	//! Converts a decimal fraction of hours to a string containing a signed
+	//! offset in the format used in the TZ variable.
+	//! The sign is inverted, as in the TZ format offset = (UTC - local time),
+	//! not the traditional offset = (local time - UTC).
+	static QString getTzOffsetStringFrom(QDoubleSpinBox * spinBox);
 
 protected:
 	void createDialogContent();
