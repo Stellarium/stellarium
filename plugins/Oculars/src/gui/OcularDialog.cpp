@@ -212,15 +212,15 @@ void OcularDialog::scaleImageCircleStateChanged(int state)
 /* ********************************************************************* */
 void OcularDialog::testCurrentIndexChanged(const QModelIndex& newIndex)
 {
-	qDebug() << "Index is now: " << newIndex;
-	QModelIndex theIndex = ocularTableModel->index(newIndex.row(), 0);
-	qDebug() << "  - " << ocularTableModel->data(theIndex, Qt::DisplayRole);
-	theIndex = ocularTableModel->index(newIndex.row(), 1);
-	qDebug() << "  - " << ocularTableModel->data(theIndex, Qt::DisplayRole);
-	theIndex = ocularTableModel->index(newIndex.row(), 2);
-	qDebug() << "  - " << ocularTableModel->data(theIndex, Qt::DisplayRole);
-	theIndex = ocularTableModel->index(newIndex.row(), 3);
-	qDebug() << "  - " << ocularTableModel->data(theIndex, Qt::DisplayRole);
+//	qDebug() << "Index is now: " << newIndex;
+//	QModelIndex theIndex = ocularTableModel->index(newIndex.row(), 0);
+//	qDebug() << "  - " << ocularTableModel->data(theIndex, Qt::DisplayRole);
+//	theIndex = ocularTableModel->index(newIndex.row(), 1);
+//	qDebug() << "  - " << ocularTableModel->data(theIndex, Qt::DisplayRole);
+//	theIndex = ocularTableModel->index(newIndex.row(), 2);
+//	qDebug() << "  - " << ocularTableModel->data(theIndex, Qt::DisplayRole);
+//	theIndex = ocularTableModel->index(newIndex.row(), 3);
+//	qDebug() << "  - " << ocularTableModel->data(theIndex, Qt::DisplayRole);
 }
 
 void OcularDialog::createDialogContent()

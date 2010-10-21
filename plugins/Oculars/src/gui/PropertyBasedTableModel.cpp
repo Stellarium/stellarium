@@ -15,9 +15,11 @@ PropertyBasedTableModel::~PropertyBasedTableModel()
 
 void PropertyBasedTableModel::init(QList<QObject *>* content, QObject *model, QMap<int,QString> mappings)
 {
+	beginResetModel();
 	this->content = content;
 	this->modelObject = model;
 	this->mappings = mappings;
+	endResetModel();
 }
 
 /* ********************************************************************* */
@@ -42,21 +44,15 @@ int PropertyBasedTableModel::columnCount(const QModelIndex &parent) const
 QVariant PropertyBasedTableModel::data(const QModelIndex &index, int role) const
 {
 	QVariant data;
-	if (role == Qt::DisplayRole
-		 && index.isValid()){
-		QObject *object = content->at(index.row());
-		data = object->property(mappings[index.column()].toStdString().c_str());
-	}
-//	if (role == Qt::DisplayRole
-//		 && index.isValid()
-//		 && index.row() < content->size()
-//		 && index.row() >= 0
-//		 && index.column() < mappings.size()
-//		 && index.column() > 0){
-//			QObject *object = content->at(index.row());
-//			data = object->property(mappings[index.column()].toStdString().c_str());
-//
-//	}
+	if ((role == Qt::DisplayRole || role ==Qt::EditRole)
+		 && index.isValid()
+		 && index.row() < content->size()
+		 && index.row() >= 0
+		 && index.column() < mappings.size()
+		 && index.column() >= 0){
+			QObject *object = content->at(index.row());
+			data = object->property(mappings[index.column()].toStdString().c_str());
+  }
 	return data;
 }
 

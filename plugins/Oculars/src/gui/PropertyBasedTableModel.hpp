@@ -13,11 +13,13 @@ public:
 	void init(QList<QObject *>* content, QObject *model, QMap<int, QString> mappings);
 
 	//Over-rides from QAbstractTableModel
-	virtual QVariant data(const QModelIndex &index, int role) const;
-	virtual int columnCount(const QModelIndex &parent) const;
+	QVariant data(const QModelIndex &item, int role = Qt::DisplayRole) const;
+
+	int rowCount(const QModelIndex &parent = QModelIndex()) const;
+	int columnCount(const QModelIndex &parent = QModelIndex()) const;
+
 	virtual Qt::ItemFlags flags(const QModelIndex &index) const;
 	virtual bool insertRows(int position, int rows, const QModelIndex &index=QModelIndex());
-	virtual int rowCount(const QModelIndex &parent) const;
 	virtual bool setData(const QModelIndex &index, const QVariant &value, int role=Qt::EditRole);
 	virtual bool removeRows(int position, int rows, const QModelIndex &index=QModelIndex());
 
