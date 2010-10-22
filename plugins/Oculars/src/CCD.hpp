@@ -39,7 +39,7 @@ public:
 	CCD();
 	Q_INVOKABLE CCD(const QObject& other);
 	virtual ~CCD();
-	static CCD* ccdFromSettings(QSettings* theSettings, QString theGroupName);
+	static CCD* ccdFromSettings(QSettings* theSettings, int ccdIndex);
 	static CCD* ccdModel();
 
 	QString name() const;

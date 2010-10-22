@@ -117,18 +117,17 @@ void Telescope::setVFlipped(bool flipped)
 #endif
 /* ********************************************************************* */
 
-Telescope* Telescope::telescopeFromSettings(QSettings* theSettings, QString theGroupName)
+Telescope* Telescope::telescopeFromSettings(QSettings* theSettings, int telescopeIndex)
 {
 	Telescope* telescope = new Telescope();
-	theSettings->beginGroup(theGroupName);
+	QString prefix = "telescope/" + QVariant(telescopeIndex).toString() + "/";
 	
-	telescope->setName(theSettings->value("name", "").toString());
-	telescope->setFocalLength(theSettings->value("focalLength", "0").toDouble());
-	telescope->setDiameter(theSettings->value("diameter", "0").toDouble());
-	telescope->setHFlipped(theSettings->value("hFlip").toBool());
-	telescope->setVFlipped(theSettings->value("vFlip").toBool());
+	telescope->setName(theSettings->value(prefix + "name", "").toString());
+	telescope->setFocalLength(theSettings->value(prefix + "focalLength", "0").toDouble());
+	telescope->setDiameter(theSettings->value(prefix + "diameter", "0").toDouble());
+	telescope->setHFlipped(theSettings->value(prefix + "hFlip").toBool());
+	telescope->setVFlipped(theSettings->value(prefix + "vFlip").toBool());
 	
-	theSettings->endGroup();
 	return telescope;
 }
 Telescope* Telescope::telescopeModel()

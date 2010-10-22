@@ -48,6 +48,7 @@
 #include <GL/glu.h>	/* Header File For The GLU Library */
 #endif
 
+static QSettings *settings; //!< The settings as read in from the ini file.
 
 /* ********************************************************************* */
 #if 0
@@ -244,32 +245,29 @@ void Oculars::init()
 		validateAndLoadIniFile();
 		// assume all is well
 
-		QStringList settingGroups = settings->childGroups();
-		qDebug() << settings;
-		QListIterator<QString> settingsGroupIterator(settingGroups);
-		while(settingsGroupIterator.hasNext()) {
-			QString settingsGroup = settingsGroupIterator.next();
-			if (settingsGroup.startsWith("ocular")) {
-				Ocular *newOcular = Ocular::ocularFromSettings(settings, settingsGroup);
-				if (newOcular != NULL) {
-					oculars.append(newOcular);
-				}
-			} else if (settingsGroup.startsWith("options")) {
-				settings->beginGroup(settingsGroup);
-				useMaxEyepieceAngle = settings->value("use_max_exit_circle", 0.0).toBool();
-				settings->endGroup();
-			} else if (settingsGroup.startsWith("telescope")) {
-				Telescope *newTelescope = Telescope::telescopeFromSettings(settings, settingsGroup);
-				if (newTelescope != NULL) {
-					telescopes.append(newTelescope);
-				}
-			} else if (settingsGroup.startsWith("ccd")) {
-				CCD *newCCD = CCD::ccdFromSettings(settings, settingsGroup);
-				if (newCCD != NULL) {
-					ccds.append(newCCD);
-				}
+		useMaxEyepieceAngle = settings->value("use_max_exit_circle", 0.0).toBool();
+		int ocularCount = settings->value("ocular_count", 0).toInt();
+		for (int index = 0; index < ocularCount; index++) {
+			Ocular *newOcular = Ocular::ocularFromSettings(settings, index);
+			if (newOcular != NULL) {
+				oculars.append(newOcular);
 			}
 		}
+		int ccdCount = settings->value("ccd_count", 0).toInt();
+		for (int index = 0; index < ccdCount; index++) {
+			CCD *newCCD = CCD::ccdFromSettings(settings, index);
+			if (newCCD != NULL) {
+				ccds.append(newCCD);
+			}
+		}
+		int telescopeCount = settings->value("telescope_count", 0).toInt();
+		for (int index = 0; index < telescopeCount; index++) {
+			Telescope *newTelescope = Telescope::telescopeFromSettings(settings, index);
+			if (newTelescope != NULL) {
+				telescopes.append(newTelescope);
+			}
+		}
+
 		ready = true;
 		ocularDialog = new OcularDialog(&ccds, &oculars, &telescopes);
 		initializeActivationActions();
@@ -531,13 +529,25 @@ void Oculars::initializeActivationActions()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 
-	gui->addGuiActions("actionShow_Ocular", N_("Enable ocular"), "Ctrl+O", "Plugin Key Bindings", true);
+	gui->addGuiActions("actionShow_Ocular",
+							 N_("Enable ocular"),
+							 settings->value("toggle_oculars", "Ctrl+O").toString(),
+							 "Plugin Key Bindings",
+							 true);
 	gui->getGuiActions("actionShow_Ocular")->setChecked(flagShowOculars);
 	connect(gui->getGuiActions("actionShow_Ocular"), SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
-	gui->addGuiActions("actionShow_Ocular_Window", N_("Configuration Window"), "ALT+O", group, true);
+	gui->addGuiActions("actionShow_Ocular_Window",
+							 N_("Configuration Window"),
+							 settings->value("toggle_config_dialog", "ALT+O").toString(),
+							 group,
+							 true);
 	connect(gui->getGuiActions("actionShow_Ocular_Window"), SIGNAL(toggled(bool)), ocularDialog, SLOT(setVisible(bool)));
 	connect(ocularDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Ocular_Window"), SLOT(setChecked(bool)));
-	gui->addGuiActions("actionShow_Ocular_Telrad", N_("Display Telrad"), "Ctrl+B", group, true);
+	gui->addGuiActions("actionShow_Ocular_Telrad",
+							 N_("Display Telrad"),
+							 settings->value("toggle_telrad", "Ctrl+B").toString(),
+							 group,
+							 true);
 	gui->getGuiActions("actionShow_Ocular_Telrad")->setChecked(flagShowTelrad);
 	connect(gui->getGuiActions("actionShow_Ocular_Telrad"), SIGNAL(toggled(bool)), this, SLOT(toggleTelrad()));
 
@@ -568,14 +578,35 @@ void Oculars::initializeActions()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 
 	Q_ASSERT(gui);
-	gui->addGuiActions("actionShow_Ocular_Crosshair", N_("Toggle Crosshair"), "ALT+C", group, true);
+	gui->addGuiActions("actionShow_Ocular_Crosshair",
+							 N_("Toggle Crosshair"),
+							 settings->value("toggle_crosshair", "ALT+C").toString(),
+							 group, true);
 
-	gui->addGuiActions("actionShow_CCD_increment", N_("Select next sensor"), "Shift+Ctrl+]", group, false);
-	gui->addGuiActions("actionShow_CCD_decrement", N_("Select previous sensor"), "Shift+Ctrl+[", group, false);
-	gui->addGuiActions("actionShow_Ocular_increment", N_("Select next ocular"), "Ctrl+]", group, false);
-	gui->addGuiActions("actionShow_Ocular_decrement", N_("Select previous ocular"), "Ctrl+[", group, false);
-	gui->addGuiActions("actionShow_Telescope_increment", N_("Select next telescope"), "Shift+]", group, false);
-	gui->addGuiActions("actionShow_Telescope_decrement", N_("Select previous telescope"), "Shift+[", group, false);
+	gui->addGuiActions("actionShow_CCD_increment",
+							 N_("Select next sensor"),
+							 settings->value("next_ccd", "Shift+Ctrl+]").toString(),
+							 group, false);
+	gui->addGuiActions("actionShow_CCD_decrement",
+							 N_("Select previous sensor"),
+							 settings->value("prev_ccd", "Shift+Ctrl+[").toString(),
+							 group, false);
+	gui->addGuiActions("actionShow_Ocular_increment",
+							 N_("Select next ocular"),
+							 settings->value("next_ocular", "Ctrl+]").toString(),
+							 group, false);
+	gui->addGuiActions("actionShow_Ocular_decrement",
+							 N_("Select previous ocular"),
+							 settings->value("prev_ocular", "Ctrl+[").toString(),
+							 group, false);
+	gui->addGuiActions("actionShow_Telescope_increment",
+							 N_("Select next telescope"),
+							 settings->value("next_telescope", "Shift+]").toString(),
+							 group, false);
+	gui->addGuiActions("actionShow_Telescope_decrement",
+							 N_("Select previous telescope"),
+							 settings->value("prev_telescope", "Shift+[").toString(),
+							 group, false);
 
 	connect(gui->getGuiActions("actionShow_Ocular_Crosshair"), SIGNAL(toggled(bool)), this, SLOT(toggleCrosshair()));
 
@@ -877,6 +908,11 @@ void Oculars::validateAndLoadIniFile()
 		}
 	}
 	settings = new QSettings(ocularIniPath, QSettings::IniFormat, this);
+}
+
+QSettings* Oculars::appSettings()
+{
+	return settings;
 }
 
 void Oculars::unzoomOcular()

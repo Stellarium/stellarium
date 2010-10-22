@@ -129,17 +129,16 @@ void Ocular::setFieldStop(double fs)
 #endif
 /* ********************************************************************* */
 
-Ocular* Ocular::ocularFromSettings(QSettings* theSettings, QString theGroupName)
+Ocular* Ocular::ocularFromSettings(QSettings* theSettings, int ocularIndex)
 {
 	Ocular* ocular = new Ocular();
-	theSettings->beginGroup(theGroupName);
+	QString prefix = "ocular/" + QVariant(ocularIndex).toString() + "/";
+
+	ocular->setName(theSettings->value(prefix + "name", "").toString());
+	ocular->setAppearentFOV(theSettings->value(prefix + "afov", "0.0").toDouble());
+	ocular->setEffectiveFocalLength(theSettings->value(prefix + "efl", "0.0").toDouble());
+	ocular->setFieldStop(theSettings->value(prefix + "fieldStop", "0.0").toDouble());
 	
-	ocular->setName(theSettings->value("name", "").toString());
-	ocular->setAppearentFOV(theSettings->value("afov", "0.0").toDouble());
-	ocular->setEffectiveFocalLength(theSettings->value("efl", "0.0").toDouble());
-	ocular->setFieldStop(theSettings->value("fieldStop", "0.0").toDouble());
-	
-	theSettings->endGroup();
 	if (!(ocular->appearentFOV() > 0.0 && ocular->effectiveFocalLength() > 0.0)) {
 		qWarning() << "WARNING: Invalid data for ocular. Ocular values must be positive. \n"
 		<< "\tafov: " << ocular->appearentFOV() << "\n"
