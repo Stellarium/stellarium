@@ -137,6 +137,42 @@ bool Oculars::configureGui(bool show)
 
 void Oculars::deinit()
 {
+	// update the ini file.
+	settings->remove("ccd");
+	settings->remove("ocular");
+	settings->remove("telescope");
+	int index = 0;
+	foreach(CCD* ccd, ccds) {
+		QString prefix = "ccd/" + QVariant(index).toString() + "/";
+		settings->setValue(prefix + "name", ccd->name());
+		settings->setValue(prefix + "resolutionX", ccd->resolutionX());
+		settings->setValue(prefix + "resolutionY", ccd->resolutionY());
+		settings->setValue(prefix + "chip_width", ccd->chipWidth());
+		settings->setValue(prefix + "chip_height", ccd->chipHeight());
+		settings->setValue(prefix + "pixel_width", ccd->pixelWidth());
+		settings->setValue(prefix + "pixel_height", ccd->pixelWidth());
+		index++;
+	}
+	index = 0;
+	foreach(Ocular* ocular, oculars) {
+		QString prefix = "ocular/" + QVariant(index).toString() + "/";
+		settings->setValue(prefix + "name", ocular->name());
+		settings->setValue(prefix + "afov", ocular->appearentFOV());
+		settings->setValue(prefix + "efl", ocular->effectiveFocalLength());
+		settings->setValue(prefix + "fieldStop", ocular->fieldStop());
+		index++;
+	}
+	index = 0;
+	foreach(Telescope* telescope, telescopes){
+		QString prefix = "telescope/" + QVariant(index).toString() + "/";
+		settings->setValue(prefix + "name", telescope->name());
+		settings->setValue(prefix + "focalLength", telescope->focalLength());
+		settings->setValue(prefix + "diameter", telescope->diameter());
+		settings->setValue(prefix + "hFlip", telescope->isHFlipped());
+		settings->setValue(prefix + "vFlip", telescope->isVFlipped());
+		index++;
+	}
+	settings->sync();
 }
 
 //! Draw any parts on the screen which are for our module
