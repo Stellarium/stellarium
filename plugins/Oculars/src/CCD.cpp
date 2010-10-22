@@ -26,17 +26,17 @@ CCD::CCD()
 {
 }
 
-CCD::CCD(const QObject* other)
+CCD::CCD(const QObject& other)
 {
 	Q_ASSERT(other);
 	Q_ASSERT(other->metaObject()->className() == "CCD");
-	this->m_name = other->property("name").toString();
-	this->m_chipHeight = other->property("chipHeight").toFloat();
-	this->m_chipWidth = other->property("chipWidth").toFloat();
-	this->m_pixelHeight = other->property("pixelHeight").toFloat();
-	this->m_pixelWidth = other->property("pixelWidth").toFloat();
-	this->m_resolutionX = other->property("resolutionX").toInt();
-	this->m_resolutionY = other->property("resolutionY").toInt();
+	this->m_name = other.property("name").toString();
+	this->m_chipHeight = other.property("chipHeight").toFloat();
+	this->m_chipWidth = other.property("chipWidth").toFloat();
+	this->m_pixelHeight = other.property("pixelHeight").toFloat();
+	this->m_pixelWidth = other.property("pixelWidth").toFloat();
+	this->m_resolutionX = other.property("resolutionX").toInt();
+	this->m_resolutionY = other.property("resolutionY").toInt();
 }
 
 CCD::~CCD()
