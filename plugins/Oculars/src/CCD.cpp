@@ -156,18 +156,17 @@ float CCD::getActualFOVy(Ocular *ocular) const
 #pragma mark Static Methods
 #endif
 /* ********************************************************************* */
-CCD* CCD::ccdFromSettings(QSettings* theSettings, QString theGroupName)
+CCD* CCD::ccdFromSettings(QSettings* theSettings, int ccdIndex)
 {
 	CCD* ccd = new CCD();
-	theSettings->beginGroup(theGroupName);
-	ccd->setName(theSettings->value("name", "").toString());
-	ccd->setResolutionX(theSettings->value("resolutionX", "0").toInt());
-	ccd->setResolutionY(theSettings->value("resolutionY", "0").toInt());
-	ccd->setChipWidth(theSettings->value("chip_width", "0.0").toFloat());
-	ccd->setChipHeight(theSettings->value("chip_height", "0.0").toFloat());
-	ccd->setPixelWidth(theSettings->value("pixel_width", "0.0").toFloat());
-	ccd->setPixelHeight(theSettings->value("pixel_height", "0.0").toFloat());
-	theSettings->endGroup();
+	QString prefix = "ccd/" + QVariant(ccdIndex).toString() + "/";
+	ccd->setName(theSettings->value(prefix + "name", "").toString());
+	ccd->setResolutionX(theSettings->value(prefix + "resolutionX", "0").toInt());
+	ccd->setResolutionY(theSettings->value(prefix + "resolutionY", "0").toInt());
+	ccd->setChipWidth(theSettings->value(prefix + "chip_width", "0.0").toFloat());
+	ccd->setChipHeight(theSettings->value(prefix + "chip_height", "0.0").toFloat());
+	ccd->setPixelWidth(theSettings->value(prefix + "pixel_width", "0.0").toFloat());
+	ccd->setPixelHeight(theSettings->value(prefix + "pixel_height", "0.0").toFloat());
 	
 	return ccd;
 }

@@ -48,6 +48,7 @@ class Oculars : public StelModule
 public:
 	Oculars();
 	virtual ~Oculars();
+	static QSettings* appSettings();
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -134,8 +135,6 @@ private:
 
 	//! This method is called by the zoom() method, when this plugin is toggled on; it resets the zoomed view.
 	void zoomOcular();
-
-	QSettings *settings; //!< The settings as read in from the ini file.
 
 	//! A list of all the oculars defined in the ini file.  Must have at least one, or module will not run.
 	QList<CCD *> ccds;
