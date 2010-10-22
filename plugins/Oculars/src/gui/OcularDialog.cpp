@@ -150,39 +150,39 @@ void OcularDialog::closeWindow()
 
 void OcularDialog::deleteSelectedCCD()
 {
+	ccdTableModel->removeRows(ui->ccdListView->currentIndex().row(), 1);
+	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
 }
 
 
 void OcularDialog::deleteSelectedOcular()
 {
+	ocularTableModel->removeRows(ui->ocularListView->currentIndex().row(), 1);
+	ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
 }
 
 void OcularDialog::deleteSelectedTelescope()
 {
+	telescopeTableModel->removeRows(ui->telescopeListView->currentIndex().row(), 1);
+	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
 }
 
 void OcularDialog::insertNewCCD()
 {
+	ccdTableModel->insertRows(ccdTableModel->rowCount(), 1);
+	ui->ccdListView->setCurrentIndex(ccdTableModel->index(ccdTableModel->rowCount() - 1, 1));
 }
 
 void OcularDialog::insertNewOcular()
 {
+	ocularTableModel->insertRows(ocularTableModel->rowCount(), 1);
+	ui->ocularListView->setCurrentIndex(ocularTableModel->index(ocularTableModel->rowCount() - 1, 1));
 }
 
 void OcularDialog::insertNewTelescope()
 {
-}
-
-void OcularDialog::updateCCD()
-{
-}
-
-void OcularDialog::updateOcular()
-{
-}
-
-void OcularDialog::updateTelescope()
-{
+	telescopeTableModel->insertRows(ccdTableModel->rowCount(), 1);
+	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(telescopeTableModel->rowCount() - 1, 1));
 }
 
 /* ********************************************************************* */
@@ -210,19 +210,6 @@ void OcularDialog::scaleImageCircleStateChanged(int state)
 #pragma mark Protected Methods
 #endif
 /* ********************************************************************* */
-void OcularDialog::testCurrentIndexChanged(const QModelIndex& newIndex)
-{
-//	qDebug() << "Index is now: " << newIndex;
-//	QModelIndex theIndex = ocularTableModel->index(newIndex.row(), 0);
-//	qDebug() << "  - " << ocularTableModel->data(theIndex, Qt::DisplayRole);
-//	theIndex = ocularTableModel->index(newIndex.row(), 1);
-//	qDebug() << "  - " << ocularTableModel->data(theIndex, Qt::DisplayRole);
-//	theIndex = ocularTableModel->index(newIndex.row(), 2);
-//	qDebug() << "  - " << ocularTableModel->data(theIndex, Qt::DisplayRole);
-//	theIndex = ocularTableModel->index(newIndex.row(), 3);
-//	qDebug() << "  - " << ocularTableModel->data(theIndex, Qt::DisplayRole);
-}
-
 void OcularDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
@@ -232,9 +219,6 @@ void OcularDialog::createDialogContent()
 	
 	//Now the rest of the actions.
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->updateCCDButton, SIGNAL(clicked()), this, SLOT(updateCCD()));
-	connect(ui->updateOcularButton, SIGNAL(clicked()), this, SLOT(updateOcular()));
-	connect(ui->updateTelescopeButton, SIGNAL(clicked()), this, SLOT(updateTelescope()));
 	connect(ui->scaleImageCircleCheckBox, SIGNAL(stateChanged(int)), this, SLOT(scaleImageCircleStateChanged(int)));
 	// The add & delete buttons
 	connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
@@ -263,7 +247,7 @@ void OcularDialog::createDialogContent()
 	// The CCD mapper
 	ccdMapper = new QDataWidgetMapper();
 	ccdMapper->setModel(ccdTableModel);
-//	CCDMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
+	ccdMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
 	ccdMapper->addMapping(ui->ccdName, 0);
 	ccdMapper->addMapping(ui->ccdChipY, 1);
 	ccdMapper->addMapping(ui->ccdChipX, 2);
@@ -279,7 +263,7 @@ void OcularDialog::createDialogContent()
 	// The ocular mapper
 	ocularMapper = new QDataWidgetMapper();
 	ocularMapper->setModel(ocularTableModel);
-//	ocularMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
+	ocularMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
 	ocularMapper->addMapping(ui->ocularName, 0);
 	ocularMapper->addMapping(ui->ocularAFov, 1);
 	ocularMapper->addMapping(ui->ocularFL, 2);
@@ -287,14 +271,12 @@ void OcularDialog::createDialogContent()
 	ocularMapper->toFirst();
 	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 			  ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
-	connect(ui->ocularListView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-			  this, SLOT(testCurrentIndexChanged(QModelIndex)));
 	ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
 
 	// The telescope mapper
 	telescopeMapper = new QDataWidgetMapper();
 	telescopeMapper->setModel(telescopeTableModel);
-//	telescopeMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
+	telescopeMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
 	telescopeMapper->addMapping(ui->telescopeName, 0);
 	telescopeMapper->addMapping(ui->telescopeDiameter, 1);
 	telescopeMapper->addMapping(ui->telescopeFL, 2);

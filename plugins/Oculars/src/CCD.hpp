@@ -37,7 +37,7 @@ class CCD : public QObject
 	Q_PROPERTY(float pixelHeight READ pixelHeight WRITE setPixelHeight)
 public:
 	CCD();
-	Q_INVOKABLE CCD(const QObject* other);
+	Q_INVOKABLE CCD(const QObject& other);
 	virtual ~CCD();
 	static CCD* ccdFromSettings(QSettings* theSettings, QString theGroupName);
 	static CCD* ccdModel();
