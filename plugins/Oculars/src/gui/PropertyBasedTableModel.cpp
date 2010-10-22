@@ -63,6 +63,7 @@ bool PropertyBasedTableModel::insertRows(int position, int rows, const QModelInd
 
 	for (int row=0; row < rows; row++) {
 		QObject* newInstance = modelObject->metaObject()->newInstance(Q_ARG(QObject, *modelObject));
+		Q_ASSERT(newInstance != 0);
 		content->insert(position, newInstance);
 	}
 

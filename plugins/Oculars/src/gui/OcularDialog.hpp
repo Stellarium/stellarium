@@ -59,9 +59,6 @@ public slots:
 	void insertNewCCD();
 	void insertNewOcular();
 	void insertNewTelescope();
-	void updateCCD();
-	void updateOcular();
-	void updateTelescope();
 
 signals:
 	void scaleImageCircleChanged(bool state);
@@ -71,7 +68,6 @@ protected:
 	Ui_ocularDialogForm* ui;
 
 private slots:
-	void testCurrentIndexChanged(const QModelIndex& newIndex);
 	void scaleImageCircleStateChanged(int state);
 
 private:
