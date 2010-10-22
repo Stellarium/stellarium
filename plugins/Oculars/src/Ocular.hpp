@@ -37,7 +37,7 @@ public:
 	Ocular();
 	Q_INVOKABLE Ocular(const QObject& other);
 	virtual ~Ocular();
-	static Ocular* ocularFromSettings(QSettings* theSettings, QString theGroupName);
+	static Ocular* ocularFromSettings(QSettings* theSettings, int ocularIndex);
 	static Ocular* ocularModel();
 
 	const QString name() const;

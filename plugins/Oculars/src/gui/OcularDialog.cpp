@@ -288,11 +288,7 @@ void OcularDialog::createDialogContent()
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
 
 	// set the initial state
-	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
-	QString ocularIniPath = StelFileMgr::findFile("modules/Oculars/", flags) + "ocular.ini";
-	QSettings settings(ocularIniPath, QSettings::IniFormat);
-	bool useMaxImageCircle = settings.value("use_max_exit_circle", false).toBool();
-	if (useMaxImageCircle) {
+	if (Oculars::appSettings()->value("use_max_exit_circle", false).toBool()) {
 		ui->scaleImageCircleCheckBox->setCheckState(Qt::Checked);
 	}
 
