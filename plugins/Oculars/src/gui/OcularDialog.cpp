@@ -33,6 +33,7 @@
 #include <QFrame>
 #include <QModelIndex>
 #include <QSettings>
+#include <QStandardItemModel>
 #include <limits>
 
 OcularDialog::OcularDialog(QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes)
@@ -52,7 +53,7 @@ OcularDialog::OcularDialog(QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<T
 	telescopeTableModel->init(reinterpret_cast<QList<QObject *>* >(telescopes),
 									  Telescope::telescopeModel(),
 									  Telescope::telescopeModel()->propertyMap());
-
+	
 	validatorPositiveInt = new QIntValidator(0, std::numeric_limits<int>::max(), this);
 	validatorPositiveDouble = new QDoubleValidator(.0, std::numeric_limits<double>::max(), 24, this);
 	validatorOcularAFOV = new QIntValidator(35, 120, this);
@@ -191,6 +192,56 @@ void OcularDialog::insertNewTelescope()
 #pragma mark Private Slot Methods
 #endif
 /* ********************************************************************* */
+void OcularDialog::keyBindingTextTogglePluginChanged(const QString& newString)
+{
+	Oculars::appSettings()->setValue("bindings/toggle_oculars", newString);
+}
+
+void OcularDialog::keyBindingTextTogglePluginConfigChanged(const QString& newString)
+{
+	Oculars::appSettings()->setValue("bindings/toggle_config_dialog", newString);
+}
+
+void OcularDialog::keyBindingTextToggleCrosshairChanged(const QString& newString)
+{
+	Oculars::appSettings()->setValue("bindings/toggle_crosshair", newString);
+}
+
+void OcularDialog::keyBindingTextToggleTelradChanged(const QString& newString)
+{
+	Oculars::appSettings()->setValue("bindings/toggle_telrad", newString);
+}
+
+void OcularDialog::keyBindingTextNextCCDChanged(const QString& newString)
+{
+	Oculars::appSettings()->setValue("bindings/next_ccd", newString);
+}
+
+void OcularDialog::keyBindingTextNextOcularChanged(const QString& newString)
+{
+	Oculars::appSettings()->setValue("bindings/next_ocular", newString);
+}
+
+void OcularDialog::keyBindingTextNextTelescopeChanged(const QString& newString)
+{
+	Oculars::appSettings()->setValue("bindings/next_telescope", newString);
+}
+
+void OcularDialog::keyBindingTextPreviousCCDChanged(const QString& newString)
+{
+	Oculars::appSettings()->setValue("bindings/prev_ccd", newString);
+}
+
+void OcularDialog::keyBindingTextPreviousOcularChanged(const QString& newString)
+{
+	Oculars::appSettings()->setValue("bindings/prev_ocular", newString);
+}
+
+void OcularDialog::keyBindingTextPreviousTelescopeChanged(const QString& newString)
+{
+	Oculars::appSettings()->setValue("bindings/prev_telescope", newString);
+}
+					  
 void OcularDialog::scaleImageCircleStateChanged(int state)
 {
 	bool shouldScale = (state == Qt::Checked);
@@ -243,7 +294,39 @@ void OcularDialog::createDialogContent()
 	ui->telescopeDiameter->setValidator(validatorTelescopeDiameter);
 	ui->ocularName->setValidator(validatorName);
 	ui->telescopeName->setValidator(validatorName);
-
+	
+	// The key bindings
+	ui->togglePluginLineEdit->setText(Oculars::appSettings()->value("bindings/toggle_oculars").toString());
+	ui->toggleConfigWindowLineEdit->setText(Oculars::appSettings()->value("bindings/toggle_config_dialog").toString());
+	ui->toggleCrosshairLineEdit->setText(Oculars::appSettings()->value("bindings/toggle_crosshair").toString());
+	ui->toggleTelradLineEdit->setText(Oculars::appSettings()->value("bindings/toggle_telrad").toString());
+	ui->nextCCDLineEdit->setText(Oculars::appSettings()->value("bindings/next_ccd").toString());
+	ui->nextOcularLineEdit->setText(Oculars::appSettings()->value("bindings/next_ocular").toString());
+	ui->nextTelescopeLineEdit->setText(Oculars::appSettings()->value("bindings/next_telescope").toString());
+	ui->previousCCDLineEdit->setText(Oculars::appSettings()->value("bindings/prev_ccd").toString());
+	ui->previousOcularLineEdit->setText(Oculars::appSettings()->value("bindings/prev_ocular").toString());
+	ui->previousTelescopeLineEdit->setText(Oculars::appSettings()->value("bindings/prev_telescope").toString());
+	connect(ui->togglePluginLineEdit, SIGNAL(textEdited(const QString&)), 
+			this, SLOT(keyBindingTextTogglePluginChanged(const QString&)));
+	connect(ui->toggleConfigWindowLineEdit, SIGNAL(textEdited(const QString&)), 
+			this, SLOT(keyBindingTextTogglePluginConfigChanged(const QString&)));
+	connect(ui->toggleCrosshairLineEdit, SIGNAL(textEdited(const QString&)), 
+			this, SLOT(keyBindingTextToggleCrosshairChanged(const QString&)));
+	connect(ui->toggleTelradLineEdit, SIGNAL(textEdited(const QString&)), 
+			this, SLOT(keyBindingTextToggleTelradChanged(const QString&)));
+	connect(ui->nextCCDLineEdit, SIGNAL(textEdited(const QString&)), 
+			this, SLOT(keyBindingTextNextCCDChanged(const QString&)));
+	connect(ui->nextOcularLineEdit, SIGNAL(textEdited(const QString&)), 
+			this, SLOT(keyBindingTextNextOcularChanged(const QString&)));
+	connect(ui->nextTelescopeLineEdit, SIGNAL(textEdited(const QString&)), 
+			this, SLOT(keyBindingTextNextTelescopeChanged(const QString&)));
+	connect(ui->previousCCDLineEdit, SIGNAL(textEdited(const QString&)), 
+			this, SLOT(keyBindingTextPreviousCCDChanged(const QString&)));
+	connect(ui->previousOcularLineEdit, SIGNAL(textEdited(const QString&)), 
+			this, SLOT(keyBindingTextPreviousOcularChanged(const QString&)));
+	connect(ui->previousTelescopeLineEdit, SIGNAL(textEdited(const QString&)), 
+			this, SLOT(keyBindingTextPreviousTelescopeChanged(const QString&)));
+						  
 	// The CCD mapper
 	ccdMapper = new QDataWidgetMapper();
 	ccdMapper->setModel(ccdTableModel);

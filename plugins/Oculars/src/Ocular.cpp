@@ -19,8 +19,6 @@
 #include "Ocular.hpp"
 #include "Telescope.hpp"
 
-#include <QSettings>
-
 Ocular::Ocular()
 {
 }
