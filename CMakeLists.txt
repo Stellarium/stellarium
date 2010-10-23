@@ -61,7 +61,7 @@ IF(APPLE)
 # SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.5")
 # SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.5.sdk/")
  # Universal binary
-SET(CMAKE_OSX_ARCHITECTURES "x86_64")
+ #SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 ENDIF()
 
 ########### Check functions ###########
