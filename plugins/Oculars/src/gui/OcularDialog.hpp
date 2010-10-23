@@ -35,6 +35,7 @@ class QDoubleValidator;
 class QIntValidator;
 class QRegExpValidator;
 class QModelIndex;
+class QStandardItemModel;
 QT_END_NAMESPACE
 
 
@@ -62,31 +63,42 @@ public slots:
 
 signals:
 	void scaleImageCircleChanged(bool state);
+	
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
 	Ui_ocularDialogForm* ui;
 
 private slots:
+	void keyBindingTextTogglePluginChanged(const QString& newString);
+	void keyBindingTextTogglePluginConfigChanged(const QString& newString);
+	void keyBindingTextToggleCrosshairChanged(const QString& newString);
+	void keyBindingTextToggleTelradChanged(const QString& newString);
+	void keyBindingTextNextCCDChanged(const QString& newString);
+	void keyBindingTextNextOcularChanged(const QString& newString);
+	void keyBindingTextNextTelescopeChanged(const QString& newString);
+	void keyBindingTextPreviousCCDChanged(const QString& newString);
+	void keyBindingTextPreviousOcularChanged(const QString& newString);
+	void keyBindingTextPreviousTelescopeChanged(const QString& newString);
 	void scaleImageCircleStateChanged(int state);
 
 private:
-	QDataWidgetMapper *ccdMapper;
-	QList<CCD *>* ccds;
-	PropertyBasedTableModel* ccdTableModel;
-	QDataWidgetMapper *ocularMapper;
-	QList<Ocular *>* oculars;
-	PropertyBasedTableModel* ocularTableModel;
-	QDataWidgetMapper *telescopeMapper;
-	QList<Telescope *>* telescopes;
-	PropertyBasedTableModel* telescopeTableModel;
-	QIntValidator *validatorOcularAFOV;
-	QDoubleValidator *validatorOcularEFL;
-	QDoubleValidator *validatorTelescopeDiameter;
-	QDoubleValidator *validatorTelescopeFL;
-	QRegExpValidator *validatorName;
-	QIntValidator *validatorPositiveInt;
-	QDoubleValidator *validatorPositiveDouble;
+	QDataWidgetMapper*			ccdMapper;
+	QList<CCD *>*					ccds;
+	PropertyBasedTableModel*	ccdTableModel;
+	QDataWidgetMapper*			ocularMapper;
+	QList<Ocular *>*				oculars;
+	PropertyBasedTableModel*	ocularTableModel;
+	QDataWidgetMapper*			telescopeMapper;
+	QList<Telescope *>*			telescopes;
+	PropertyBasedTableModel*	telescopeTableModel;
+	QIntValidator*					validatorOcularAFOV;
+	QDoubleValidator*				validatorOcularEFL;
+	QDoubleValidator*				validatorTelescopeDiameter;
+	QDoubleValidator*				validatorTelescopeFL;
+	QRegExpValidator*				validatorName;
+	QIntValidator*					validatorPositiveInt;
+	QDoubleValidator*				validatorPositiveDouble;
 };
 
 #endif // _OCULARDIALOG_HPP_
