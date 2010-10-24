@@ -55,10 +55,8 @@ Satellite::Satellite(const QVariantMap& map)
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation") || !map.contains("tle1") || !map.contains("tle2"))
 		return;
-	
-	QSettings* conf = StelApp::getInstance().getSettings();
+
 	font.setPixelSize(16);
-	lineColor = StelUtils::strToVec3f(conf->value("options/line_color", "0,0.5,1").toString());
 
 	designation  = map.value("designation").toString();
 	strncpy(elements[0], "DUMMY", 5);
@@ -77,6 +75,22 @@ Satellite::Satellite(const QVariantMap& map)
 			hintColor[2] = map.value("hintColor").toList().at(2).toDouble();
 		}
 	}
+
+	if (map.contains("draworbColor"))
+	{
+		if (map.value("draworbColor").toList().count() == 3)
+		{
+			draworbColor[0] = map.value("draworbColor").toList().at(0).toDouble();
+			draworbColor[1] = map.value("draworbColor").toList().at(1).toDouble();
+			draworbColor[2] = map.value("draworbColor").toList().at(2).toDouble();
+		}
+	}
+	else
+	{
+		draworbColor=hintColor;
+	}
+
+
 
 	if (map.contains("comms"))
 	{
@@ -120,9 +134,11 @@ QVariantMap Satellite::getMap(void)
 	map["draworb"] = draworb;
 	map["tle1"] = QString(elements[1]);
 	map["tle2"] = QString(elements[2]);
-	QVariantList col;
+	QVariantList col,draworbCol;
 	col << (double)hintColor[0] << (double)hintColor[1] << (double)hintColor[2];
-	map["hintColor"] = col;
+	draworbCol << (double)draworbColor[0] << (double)draworbColor[1] << (double)draworbColor[2];
+	map["hintColor"]    = col;
+	map["draworbColor"] = draworbCol;
 	QVariantList commList;
 	foreach(commLink c, comms)
 	{
@@ -300,7 +316,7 @@ void Satellite::drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter
 	QVarLengthArray<float, 1024> vertexArray;
 
 	//painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
-	painter.setColor(lineColor[0], lineColor[1], lineColor[2], hintBrightness);
+	painter.setColor(draworbColor[0], draworbColor[1], draworbColor[2], hintBrightness);
 
 
 	glDisable(GL_TEXTURE_2D);

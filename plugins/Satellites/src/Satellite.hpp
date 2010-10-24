@@ -132,7 +132,7 @@ private:
 
     //Satellite Orbit Draw
     QFont     font;
-    Vec3f     lineColor;
+    Vec3f     draworbColor;
     gTime     lastEpochCompForOrbit;
     QList<gVector> orbitPoints; //orbit points represented by azElPos vectors
 
