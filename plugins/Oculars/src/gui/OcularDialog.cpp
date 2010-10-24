@@ -28,6 +28,7 @@
 #include "StelTranslator.hpp"
 
 #include <QAbstractItemModel>
+#include <QAction>
 #include <QDataWidgetMapper>
 #include <QDebug>
 #include <QFrame>
@@ -195,51 +196,61 @@ void OcularDialog::insertNewTelescope()
 void OcularDialog::keyBindingTextTogglePluginChanged(const QString& newString)
 {
 	Oculars::appSettings()->setValue("bindings/toggle_oculars", newString);
+	this->updateActionMapping("toggle_oculars", newString);
 }
 
 void OcularDialog::keyBindingTextTogglePluginConfigChanged(const QString& newString)
 {
 	Oculars::appSettings()->setValue("bindings/toggle_config_dialog", newString);
+	this->updateActionMapping("actionShow_Ocular_Window", newString);
 }
 
 void OcularDialog::keyBindingTextToggleCrosshairChanged(const QString& newString)
 {
 	Oculars::appSettings()->setValue("bindings/toggle_crosshair", newString);
+	this->updateActionMapping("toggle_crosshair", newString);
 }
 
 void OcularDialog::keyBindingTextToggleTelradChanged(const QString& newString)
 {
 	Oculars::appSettings()->setValue("bindings/toggle_telrad", newString);
+	this->updateActionMapping("actionShow_Ocular_Telrad", newString);
 }
 
 void OcularDialog::keyBindingTextNextCCDChanged(const QString& newString)
 {
 	Oculars::appSettings()->setValue("bindings/next_ccd", newString);
+	this->updateActionMapping("next_ccd", newString);
 }
 
 void OcularDialog::keyBindingTextNextOcularChanged(const QString& newString)
 {
 	Oculars::appSettings()->setValue("bindings/next_ocular", newString);
+	this->updateActionMapping("next_ocular", newString);
 }
 
 void OcularDialog::keyBindingTextNextTelescopeChanged(const QString& newString)
 {
 	Oculars::appSettings()->setValue("bindings/next_telescope", newString);
+	this->updateActionMapping("next_telescope", newString);
 }
 
 void OcularDialog::keyBindingTextPreviousCCDChanged(const QString& newString)
 {
 	Oculars::appSettings()->setValue("bindings/prev_ccd", newString);
+	this->updateActionMapping("perv_ccd", newString);
 }
 
 void OcularDialog::keyBindingTextPreviousOcularChanged(const QString& newString)
 {
 	Oculars::appSettings()->setValue("bindings/prev_ocular", newString);
+	this->updateActionMapping("perv_ocular", newString);
 }
 
 void OcularDialog::keyBindingTextPreviousTelescopeChanged(const QString& newString)
 {
 	Oculars::appSettings()->setValue("bindings/prev_telescope", newString);
+	this->updateActionMapping("perv_telescope", newString);
 }
 					  
 void OcularDialog::scaleImageCircleStateChanged(int state)
@@ -379,3 +390,12 @@ void OcularDialog::createDialogContent()
 	updateStyle();
 }
 
+void OcularDialog::updateActionMapping(const QString& actionName, const QString& newMapping)
+{
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	Q_ASSERT(gui);
+	QAction* action = gui->getGuiActions(actionName);
+	if (action != NULL) {
+		action->setShortcut(QKeySequence(newMapping.trimmed()));
+	}
+}
