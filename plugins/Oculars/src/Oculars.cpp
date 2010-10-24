@@ -567,23 +567,24 @@ void Oculars::initializeActivationActions()
 
 	gui->addGuiActions("actionShow_Ocular",
 							 N_("Enable ocular"),
-							 settings->value("toggle_oculars", "Ctrl+O").toString(),
+							 settings->value("bindings/toggle_oculars", "Ctrl+O").toString(),
 							 "Plugin Key Bindings",
 							 true);
 	gui->getGuiActions("actionShow_Ocular")->setChecked(flagShowOculars);
 	connect(gui->getGuiActions("actionShow_Ocular"), SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
 	gui->addGuiActions("actionShow_Ocular_Window",
 							 N_("Configuration Window"),
-							 settings->value("toggle_config_dialog", "ALT+O").toString(),
+							 settings->value("bindings/toggle_config_dialog", "ALT+O").toString(),
 							 group,
 							 true);
 	connect(gui->getGuiActions("actionShow_Ocular_Window"), SIGNAL(toggled(bool)), ocularDialog, SLOT(setVisible(bool)));
 	connect(ocularDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Ocular_Window"), SLOT(setChecked(bool)));
 	gui->addGuiActions("actionShow_Ocular_Telrad",
 							 N_("Display Telrad"),
-							 settings->value("toggle_telrad", "Ctrl+B").toString(),
+							 settings->value("bindings/toggle_telrad", "Ctrl+B").toString(),
 							 group,
 							 true);
+	qDebug() << "====> '" << settings->value("bindings/toggle_telrad", "Ctrl+B").toString() << "'";
 	gui->getGuiActions("actionShow_Ocular_Telrad")->setChecked(flagShowTelrad);
 	connect(gui->getGuiActions("actionShow_Ocular_Telrad"), SIGNAL(toggled(bool)), this, SLOT(toggleTelrad()));
 
@@ -616,32 +617,32 @@ void Oculars::initializeActions()
 	Q_ASSERT(gui);
 	gui->addGuiActions("actionShow_Ocular_Crosshair",
 							 N_("Toggle Crosshair"),
-							 settings->value("toggle_crosshair", "ALT+C").toString(),
+							 settings->value("bindings/toggle_crosshair", "ALT+C").toString(),
 							 group, true);
 
 	gui->addGuiActions("actionShow_CCD_increment",
 							 N_("Select next sensor"),
-							 settings->value("next_ccd", "Shift+Ctrl+]").toString(),
+							 settings->value("bindings/next_ccd", "Shift+Ctrl+]").toString(),
 							 group, false);
 	gui->addGuiActions("actionShow_CCD_decrement",
 							 N_("Select previous sensor"),
-							 settings->value("prev_ccd", "Shift+Ctrl+[").toString(),
+							 settings->value("bindings/prev_ccd", "Shift+Ctrl+[").toString(),
 							 group, false);
 	gui->addGuiActions("actionShow_Ocular_increment",
 							 N_("Select next ocular"),
-							 settings->value("next_ocular", "Ctrl+]").toString(),
+							 settings->value("bindings/next_ocular", "Ctrl+]").toString(),
 							 group, false);
 	gui->addGuiActions("actionShow_Ocular_decrement",
 							 N_("Select previous ocular"),
-							 settings->value("prev_ocular", "Ctrl+[").toString(),
+							 settings->value("bindings/prev_ocular", "Ctrl+[").toString(),
 							 group, false);
 	gui->addGuiActions("actionShow_Telescope_increment",
 							 N_("Select next telescope"),
-							 settings->value("next_telescope", "Shift+]").toString(),
+							 settings->value("bindings/next_telescope", "Shift+]").toString(),
 							 group, false);
 	gui->addGuiActions("actionShow_Telescope_decrement",
 							 N_("Select previous telescope"),
-							 settings->value("prev_telescope", "Shift+[").toString(),
+							 settings->value("bindings/prev_telescope", "Shift+[").toString(),
 							 group, false);
 
 	connect(gui->getGuiActions("actionShow_Ocular_Crosshair"), SIGNAL(toggled(bool)), this, SLOT(toggleCrosshair()));

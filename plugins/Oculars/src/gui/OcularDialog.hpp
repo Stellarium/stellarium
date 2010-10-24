@@ -67,6 +67,7 @@ signals:
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
+	void updateActionMapping(const QString& actionName, const QString& newMapping);
 	Ui_ocularDialogForm* ui;
 
 private slots:
