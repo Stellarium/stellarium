@@ -6,11 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>732</width>
-    <height>697</height>
+    <width>600</width>
+    <height>500</height>
    </rect>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QGridLayout" name="gridLayoutWindow">
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
    <item row="0" column="0" colspan="2">
     <widget class="BarFrame" name="LocationBar">
      <property name="sizePolicy">
@@ -115,7 +121,7 @@
     </widget>
    </item>
    <item row="3" column="0" colspan="2">
-    <widget class="QFrame" name="frame">
+    <widget class="QFrame" name="frameButton">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -147,44 +153,46 @@
     </widget>
    </item>
    <item row="1" column="1">
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="groupBoxObjectType">
      <property name="title">
-      <string>Type</string>
+      <string>Object type</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayoutObjectType">
+      <property name="margin">
+       <number>0</number>
+      </property>
       <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Object type:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButton">
+       <widget class="QRadioButton" name="radioButtonMinorPlanet">
         <property name="text">
          <string>Minor planet (asteroid)</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="radioButton_2">
+       <widget class="QRadioButton" name="radioButtonComet">
         <property name="text">
          <string>Comet</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="radioButton_3">
+       <widget class="QRadioButton" name="radioButtonSatellite">
         <property name="text">
          <string>Satellite</string>
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton">
+        <property name="text">
+         <string>Other</string>
+        </property>
+       </widget>
+      </item>
      </layout>
-     <zorder>radioButton_2</zorder>
-     <zorder>radioButton_3</zorder>
-     <zorder>label</zorder>
-     <zorder>radioButton</zorder>
     </widget>
    </item>
    <item row="1" column="0">
@@ -192,7 +200,13 @@
      <property name="title">
       <string>Name</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2">
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+     <layout class="QGridLayout" name="gridLayoutName">
+      <property name="margin">
+       <number>0</number>
+      </property>
       <item row="0" column="0">
        <widget class="QLabel" name="labelName">
         <property name="text">
@@ -213,84 +227,486 @@
       <item row="1" column="1">
        <widget class="QLineEdit" name="lineEditIdentifier"/>
       </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="checkBoxMinorPlanetNumber">
+        <property name="text">
+         <string>Minor planet number</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="lineEditMinorPlanetNumber"/>
+      </item>
      </layout>
     </widget>
    </item>
    <item row="2" column="0" colspan="2">
-    <widget class="QGroupBox" name="groupBoxOrbitalElements">
-     <property name="title">
-      <string>Orbital elements</string>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
      </property>
-     <layout class="QGridLayout" name="gridLayout_3">
-      <item row="0" column="0" colspan="2">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Orbital function type:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0" colspan="2">
-       <widget class="QRadioButton" name="radioButton_4">
-        <property name="text">
-         <string>Elliptic orbit</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0" colspan="2">
-       <widget class="QRadioButton" name="radioButton_5">
-        <property name="text">
-         <string>Cometary orbit</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0">
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="labelEccentricity">
-        <property name="text">
-         <string>Eccentricity (%1):</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="lineEdit">
-        <property name="text">
-         <string>0</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>Inclination (i):</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QLineEdit" name="lineEdit_2"/>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="labelLongitudeOfTheAscendingNode">
-        <property name="text">
-         <string>Longitude of the ascending node (%1):</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="QLineEdit" name="lineEdit_3"/>
-      </item>
-     </layout>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>582</width>
+        <height>1147</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayoutScroll">
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QGroupBox" name="groupBoxProperties">
+         <property name="title">
+          <string>Properties</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelParent">
+            <property name="text">
+             <string>Parent:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" colspan="2">
+           <widget class="QComboBox" name="comboBoxParent"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelRadius">
+            <property name="text">
+             <string>Radius:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="2">
+           <widget class="QLineEdit" name="lineEditRadius"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelOblateness">
+            <property name="text">
+             <string>Oblateness:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" colspan="2">
+           <widget class="QLineEdit" name="lineEditOblateness"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelAlbedo">
+            <property name="text">
+             <string>Albedo:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" colspan="2">
+           <widget class="QLineEdit" name="lineEditAlbedo"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="labelColor">
+            <property name="text">
+             <string>Color:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1" colspan="2">
+           <widget class="QPushButton" name="pushButtonSelectColor"/>
+          </item>
+          <item row="5" column="0" colspan="3">
+           <widget class="QCheckBox" name="checkBoxLighting">
+            <property name="text">
+             <string>Lighting (TODO: More clear name)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0" colspan="3">
+           <widget class="QCheckBox" name="checkBoxAtmosphere">
+            <property name="text">
+             <string>Atmosphere</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0" colspan="3">
+           <widget class="QCheckBox" name="checkBoxHidden">
+            <property name="text">
+             <string>Hidden</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="labelTexture">
+            <property name="text">
+             <string>Texture:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="1">
+           <widget class="QLineEdit" name="lineEditTexture"/>
+          </item>
+          <item row="8" column="2">
+           <widget class="QPushButton" name="pushButtonBrowseTexture">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="0" colspan="3">
+           <widget class="QFrame" name="frameMagnitude">
+            <layout class="QGridLayout" name="gridLayoutMagnitude">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item row="1" column="0">
+              <widget class="QLabel" name="labelAbsoluteMagnitude">
+               <property name="text">
+                <string>Absolute magnitude:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEditAbsoluteMagnitude"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLabel" name="labelSlopeParameter">
+               <property name="text">
+                <string>Slope parameter:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QLineEdit" name="lineEditSlopeParameter"/>
+             </item>
+             <item row="2" column="0" colspan="4">
+              <widget class="QPushButton" name="pushButtonCalculateRadius">
+               <property name="text">
+                <string>Calculate the object's radius from the absolute magnitude and the current albedo</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0" colspan="4">
+              <widget class="QLabel" name="labelMagnitudeSystem">
+               <property name="text">
+                <string>H-G two parameter magnitude system for minor planets:</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBoxOrbitalElements">
+         <property name="title">
+          <string>Orbital elements</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayoutOrbitalElements">
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0" colspan="2">
+           <widget class="QLabel" name="labelOrbitType">
+            <property name="text">
+             <string>Orbital function type:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QRadioButton" name="radioButtonCometaryOrbit">
+            <property name="text">
+             <string>Cometary orbit</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="2">
+           <widget class="QRadioButton" name="radioButtonEllipticOrbit">
+            <property name="text">
+             <string>Elliptic orbit</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="labelEccentricity">
+            <property name="text">
+             <string>Eccentricity (%1):</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="lineEditEccentricity">
+            <property name="text">
+             <string>0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelInclination">
+            <property name="text">
+             <string>Inclination (degrees):</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="lineEditInclination"/>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="labelLongitudeOfTheAscendingNode">
+            <property name="text">
+             <string>Longitude of the ascending node %1:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLineEdit" name="lineEditLongitudeOfTheAscendingNode"/>
+          </item>
+          <item row="7" column="0" colspan="2">
+           <widget class="QFrame" name="framePeriapsis">
+            <layout class="QGridLayout" name="gridLayoutPeriapsis">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="radioButtonArgumentOfPeriapsis">
+               <property name="text">
+                <string>Argument of periapsis %1:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="lineEditArgumentOfPeriapsis"/>
+             </item>
+             <item row="1" column="0">
+              <widget class="QRadioButton" name="radioButtonLongitudeOfPeriapsis">
+               <property name="text">
+                <string>Longitude of periapsis %1:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEditLongitudeOfPeriapsis"/>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="8" column="0" colspan="2">
+           <widget class="QFrame" name="frameSemiMajorAxis">
+            <layout class="QGridLayout" name="gridLayoutSemiMajorAxis">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="lineEditSemiMajorAxis"/>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEditPeriapsisDistance"/>
+             </item>
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="radioButtonSemiMajorAxis">
+               <property name="text">
+                <string>Semi-major axis %1:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QRadioButton" name="radioButtonPeriapsisDistance">
+               <property name="text">
+                <string>Periapsis distance %1:</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="9" column="0" colspan="2">
+           <widget class="QFrame" name="framePeriod">
+            <layout class="QGridLayout" name="gridLayoutPeriod">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxPeriod">
+               <property name="text">
+                <string>Period:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="lineEditPeriod"/>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBoxMeanMotion">
+               <property name="text">
+                <string>Mean motion:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEditMeanMotion"/>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="10" column="0" colspan="2">
+           <widget class="QFrame" name="frameEpoch">
+            <layout class="QGridLayout" name="gridLayoutEpoch">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="lineEditEpoch"/>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEditTimeOfPeriapsis"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QDateTimeEdit" name="dateTimeEditTimeOfPeriapsis">
+               <property name="displayFormat">
+                <string notr="true">YYYY-MM-dd HH:mm</string>
+               </property>
+               <property name="calendarPopup">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QDateTimeEdit" name="dateTimeEditEpoch">
+               <property name="displayFormat">
+                <string notr="true">YYYY-MM-dd HH:mm</string>
+               </property>
+               <property name="calendarPopup">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="radioButtonEpoch">
+               <property name="text">
+                <string>Epoch:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QRadioButton" name="radioButtonTimeOfPeriapsis">
+               <property name="text">
+                <string>Time of periapsis passage:</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="11" column="0" colspan="2">
+           <widget class="QFrame" name="frameMeanAnomaly">
+            <layout class="QGridLayout" name="gridLayout_2">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEditMeanAnomaly"/>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEditMeanLongitude"/>
+             </item>
+             <item row="1" column="0">
+              <widget class="QRadioButton" name="radioButtonMeanAnomaly">
+               <property name="text">
+                <string>Mean anomaly:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QRadioButton" name="radioButtonMeanLongitude">
+               <property name="text">
+                <string>Mean longitude:</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QRadioButton" name="radioButton_2">
+            <property name="text">
+             <string>Object-specific:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QComboBox" name="comboBox_2"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBoxRotationalElements">
+         <property name="title">
+          <string>Rotational elements</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="checkBoxObliquity">
+            <property name="text">
+             <string>Obliquity</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBoxRings">
+         <property name="title">
+          <string>Rings</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelInnerSize">
+            <property name="text">
+             <string>Inner size:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QLabel" name="labelOuterSize">
+            <property name="text">
+             <string>Outer size:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelRingTexture">
+            <property name="text">
+             <string>Texture:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditRingTexture"/>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="pushButtonBrowseRingTexture">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>
