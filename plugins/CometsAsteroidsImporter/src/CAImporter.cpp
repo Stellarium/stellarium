@@ -235,6 +235,11 @@ void CAImporter::resetSolarSystemToDefault()
 	{
 		if (resetSolarSystemConfigurationFile())
 		{
+			//Deselect all currently selected objects
+			StelObjectMgr * objectManager = GETSTELMODULE(StelObjectMgr);
+			//TODO
+			objectManager->unSelect();
+
 			GETSTELMODULE(SolarSystem)->reloadPlanets();
 			emit solarSystemChanged();
 		}
