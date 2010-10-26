@@ -311,12 +311,10 @@ void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 
 void Satellite::drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter& painter){
 
-	Vec3d XYZPos, xy1;
+	Vec3d XYZPos;
+	Vec3d prevProjectedPos, projectedPos;
 	float a, azimth, elev;
-	QVarLengthArray<float, 1024> vertexArray;
-
-	//painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
-	painter.setColor(draworbColor[0], draworbColor[1], draworbColor[2], hintBrightness);
+	float lineBrightness;
 
 
 	glDisable(GL_TEXTURE_2D);
@@ -326,7 +324,17 @@ void Satellite::drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter
 
 	QList<gVector>::iterator it= orbitPoints.begin();
 
-	for(int i=0; i<orbitPoints.size();i++)
+
+
+	azimth = it->at( AZIMUTH);
+	elev   = it->at( ELEVATION);
+	a      = ( (azimth/KDEG2RAD)-90)*M_PI/180;
+	Vec3d pos(sin(a),cos(a), tan( (elev/KDEG2RAD) * M_PI / 180.));
+	XYZPos = core->getNavigator()->j2000ToEquinoxEqu(core->getNavigator()->altAzToEquinoxEqu(pos));
+	prj->project(XYZPos, prevProjectedPos);
+	it++;
+
+	for(int index = 1; index<orbitPoints.size();index++)
 	{
 		azimth = it->at( AZIMUTH);
 		elev   = it->at( ELEVATION);
@@ -334,19 +342,26 @@ void Satellite::drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter
 		Vec3d pos(sin(a),cos(a), tan( (elev/KDEG2RAD) * M_PI / 180.));
 		XYZPos = core->getNavigator()->j2000ToEquinoxEqu(core->getNavigator()->altAzToEquinoxEqu(pos));
 
-		if (prj->project(XYZPos,xy1))
+		if (prj->project(XYZPos, projectedPos))
 		{
-			vertexArray.append(xy1[0]);
-			vertexArray.append(xy1[1]);
+			 //set line fadding
+
+			 if(index < DRAWORBIT_FADING_SLOT)
+			 {
+				 lineBrightness = hintBrightness/(DRAWORBIT_FADING_SLOT-index);
+			 }
+			 else if(index > (orbitPoints.size()-DRAWORBIT_FADING_SLOT))
+			 {
+				 lineBrightness = hintBrightness/(DRAWORBIT_FADING_SLOT-(orbitPoints.size()-index));
+			 }
+			 else
+				 lineBrightness = hintBrightness;
+
+			 painter.setColor(draworbColor[0], draworbColor[1], draworbColor[2], lineBrightness);
+			 painter.drawLine2d(prevProjectedPos[0],prevProjectedPos[1],projectedPos[0],projectedPos[1]);
+			 prevProjectedPos=projectedPos;
 		}
 		it++;
-	}
-
-	if (!vertexArray.isEmpty())
-	{
-		painter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
-		painter.drawFromArray(StelPainter::LineStrip, vertexArray.size()/2, 0, false);
-		vertexArray.clear();
 	}
 
 	painter.enableClientStates(false);

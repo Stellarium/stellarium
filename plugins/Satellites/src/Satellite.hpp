@@ -35,8 +35,9 @@
 #include "gsatellite/gTime.hpp"
 #include "gsatellite/gVector.hpp"
 
-#define DRAWORBIT_SLOTS_NUMBER    60
-#define DRAWORBIT_SLOT_SECNUMBER  30
+#define DRAWORBIT_SLOTS_NUMBER    120
+#define DRAWORBIT_SLOT_SECNUMBER  15
+#define DRAWORBIT_FADING_SLOT    (DRAWORBIT_SLOTS_NUMBER/6)
 
 class StelPainter;
 class StelLocation;
