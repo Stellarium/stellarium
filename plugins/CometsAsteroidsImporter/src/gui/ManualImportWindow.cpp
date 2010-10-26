@@ -45,8 +45,9 @@ void ManualImportWindow::createDialogContent()
 	//Signals
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
-	//ui->labelEccentricity->setText(QString("Eccentricity (%1):").arg(QChar(0x1D452)));//Doesn't work: wrong symbol?
-	ui->labelLongitudeOfTheAscendingNode->setText(QString("Longitude of the ascending node (%1):").arg(QChar(0x03A9)));//Capital omega
+	ui->labelLongitudeOfTheAscendingNode->setText(QString("Longitude of the ascending node %1:").arg(QChar(0x03A9)));//Capital omega
+	ui->radioButtonArgumentOfPeriapsis->setText(QString("Argument of periapsis %1:").arg(QChar(0x3C9)));//Lowercase omega
+	ui->radioButtonLongitudeOfPeriapsis->setText(QString("Longitude of periapsis %1:").arg(QChar(0x3D6)));
 }
 
 void ManualImportWindow::languageChanged()
