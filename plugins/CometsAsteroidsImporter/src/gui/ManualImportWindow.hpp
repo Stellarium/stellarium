@@ -18,53 +18,36 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _SOLAR_SYSTEM_MANAGER_WINDOW_
-#define _SOLAR_SYSTEM_MANAGER_WINDOW_
+#ifndef _MANUAL_IMPORT_WINDOW_
+#define _MANUAL_IMPORT_WINDOW_
 
 #include <QObject>
 #include "StelDialog.hpp"
 
-class CAImporter;
+#include "CAImporter.hpp"
 
-class Ui_solarSystemManagerWindow;
-class ImportWindow;
-class ManualImportWindow;
+class Ui_manualImportWindow;
 
-/*! \brief Main window for handling Solar System objects.
+/*! \brief Window for manual entry of Solar System object properties.
   \author Bogdan Marinov
 */
-class SolarSystemManagerWindow : public StelDialog
+class ManualImportWindow : public StelDialog
 {
 	Q_OBJECT
 public:
-	SolarSystemManagerWindow();
-	virtual ~SolarSystemManagerWindow();
+	ManualImportWindow();
+	virtual ~ManualImportWindow();
 	void languageChanged();
+
+private slots:
+
+
+private:
+	CAImporter * ssoManager;
 
 protected:
 	virtual void createDialogContent();
-	Ui_solarSystemManagerWindow * ui;
-
-private slots:
-	//! \todo Find a way to suggest a default file name (select directory instead of file?)
-	void copyConfiguration();
-	void replaceConfiguration();
-
-	void populateSolarSystemList();
-	void removeObject();
-
-	void newImportMPC();
-	//TODO: Find a better way of resetting the window
-	void resetImportMPC(bool);
-
-	void newImportManual();
-	void resetImportManual(bool);
-
-private:
-	ImportWindow* importWindow;//There can be more than one!
-	ManualImportWindow * manualImportWindow;
-
-	CAImporter * ssoManager;
+	Ui_manualImportWindow * ui;
 };
 
-#endif //_SOLAR_SYSTEM_MANAGER_WINDOW_
+#endif //_MANUAL_IMPORT_WINDOW_
