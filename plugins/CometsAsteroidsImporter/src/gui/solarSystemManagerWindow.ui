@@ -296,7 +296,7 @@ QTabWidget::pane {
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QGroupBox" name="groupBoxImport">
+        <widget class="QGroupBox" name="groupBoxMPC">
          <property name="title">
           <string>Add new Solar System objects</string>
          </property>
@@ -305,7 +305,7 @@ QTabWidget::pane {
            <number>0</number>
           </property>
           <item>
-           <widget class="QLabel" name="label_2">
+           <widget class="QLabel" name="labelMPC">
             <property name="text">
              <string>You can import comet and asteroid data formatted in the export formats of the IAU's &lt;a href=&quot;http://www.minorplanetcenter.org/iau/mpc.html&quot;&gt;Minor Planet Center&lt;/a&gt; (MPC). You can import files with lists of objects, download such lists from the Internet or search the online Minor Planet and Comet Ephemeris Service (MPES).</string>
             </property>
@@ -324,6 +324,35 @@ QTabWidget::pane {
            <widget class="QPushButton" name="pushButtonImportMPC">
             <property name="text">
              <string>Import orbital elements in MPC format...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBoxManual">
+         <property name="title">
+          <string>Enter manually a new Solar System object</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayoutManualEntry">
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="labelManual">
+            <property name="text">
+             <string>You can add a new object by entering manually the properties used by Stellarium.</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonManual">
+            <property name="text">
+             <string>Enter manually object properties...</string>
             </property>
            </widget>
           </item>

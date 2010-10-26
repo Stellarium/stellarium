@@ -24,6 +24,7 @@
 #include "ui_solarSystemManagerWindow.h"
 
 #include "ImportWindow.hpp"
+#include "ManualImportWindow.hpp"
 
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
@@ -35,6 +36,7 @@ SolarSystemManagerWindow::SolarSystemManagerWindow()
 {
 	ui = new Ui_solarSystemManagerWindow();
 	importWindow = NULL;
+	manualImportWindow = NULL;
 
 	ssoManager = GETSTELMODULE(CAImporter);
 }
@@ -45,6 +47,8 @@ SolarSystemManagerWindow::~SolarSystemManagerWindow()
 
 	if (importWindow)
 		delete importWindow;
+	if (manualImportWindow)
+		delete manualImportWindow;
 }
 
 void SolarSystemManagerWindow::createDialogContent()
@@ -57,6 +61,7 @@ void SolarSystemManagerWindow::createDialogContent()
 	connect(ui->pushButtonReplaceFile, SIGNAL(clicked()), this, SLOT(replaceConfiguration()));
 	connect(ui->pushButtonRemove, SIGNAL(clicked()), this, SLOT(removeObject()));
 	connect(ui->pushButtonImportMPC, SIGNAL(clicked()), this, SLOT(newImportMPC()));
+	connect(ui->pushButtonManual, SIGNAL(clicked()), this, SLOT(newImportManual()));
 
 	connect(ssoManager, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
 	connect(ui->pushButtonReset, SIGNAL(clicked()), ssoManager, SLOT(resetSolarSystemToDefault()));
@@ -87,6 +92,7 @@ void SolarSystemManagerWindow::newImportMPC()
 
 void SolarSystemManagerWindow::resetImportMPC(bool show)
 {
+	//If the window is being displayed, do nothing
 	if (show)
 		return;
 
@@ -98,6 +104,37 @@ void SolarSystemManagerWindow::resetImportMPC(bool show)
 
 		delete importWindow;
 		importWindow = NULL;
+
+		//This window is in the background, bring it to the foreground
+		dialog->setVisible(true);
+	}
+}
+
+void SolarSystemManagerWindow::newImportManual()
+{
+	if (manualImportWindow == NULL)
+	{
+		manualImportWindow = new ManualImportWindow();
+		connect(manualImportWindow, SIGNAL(visibleChanged(bool)), this, SLOT(resetImportManual(bool)));
+	}
+
+	manualImportWindow->setVisible(true);
+}
+
+void SolarSystemManagerWindow::resetImportManual(bool show)
+{
+	//If the window is being displayed, do nothing
+	if (show)
+		return;
+
+	if (importWindow)
+	{
+		//TODO:Move this out of here!
+		//Reload the list, in case there are new objects
+		populateSolarSystemList();
+
+		delete manualImportWindow;
+		manualImportWindow = NULL;
 
 		//This window is in the background, bring it to the foreground
 		dialog->setVisible(true);

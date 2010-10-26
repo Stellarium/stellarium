@@ -14,11 +14,14 @@ SET(CAImporter_SRCS
   gui/SolarSystemManagerWindow.cpp
   gui/ImportWindow.hpp
   gui/ImportWindow.cpp
+  gui/ManualImportWindow.hpp
+  gui/ManualImportWindow.cpp
   )
 
 SET(CAImporter_UIS
   gui/solarSystemManagerWindow.ui
   gui/importWindow.ui
+  gui/manualImportWindow.ui
 )
 
 QT4_WRAP_UI(CAImporter_UIS_H ${CAImporter_UIS})
@@ -29,6 +32,7 @@ QT4_WRAP_UI(CAImporter_UIS_H ${CAImporter_UIS})
 SET(CAImporter_MOC_HDRS
   gui/SolarSystemManagerWindow.hpp
   gui/ImportWindow.hpp
+  gui/ManualImportWindow.hpp
   CAImporter.hpp
   )
 
