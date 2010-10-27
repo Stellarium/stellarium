@@ -35,9 +35,11 @@
 #include "gsatellite/gTime.hpp"
 #include "gsatellite/gVector.hpp"
 
-#define DRAWORBIT_SLOTS_NUMBER    120
-#define DRAWORBIT_SLOT_SECNUMBER  15
-#define DRAWORBIT_FADING_SLOT    (DRAWORBIT_SLOTS_NUMBER/6)
+
+#define DRAWORBIT_SLOTS_NUMBER    131
+#define DRAWORBIT_FADE_NUMBER     10
+#define DRAWORBIT_SLOT_SECNUMBER  10
+
 
 class StelPainter;
 class StelLocation;
@@ -100,11 +102,14 @@ private:
 	//draw orbits methods
 	void computeOrbitPoints();
 	void drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter& painter);
+	//! returns 0 - 1.0 for the DRAWORBIT_FADE_NUMBER segments at
+	//! each end of an orbit, with 1 in the middle.
+	float calculateOrbitSegmentIntensity(int segNum);
 
 private:
 	bool initialized;
 	bool visible;
-	bool draworb;  //draw orbit enabled/disabled
+	bool orbitVisible;  //draw orbit enabled/disabled
 
 	QString designation;               // The ID of the satllite
 	QString description;               // longer description of spacecraft
@@ -133,7 +138,7 @@ private:
 
     //Satellite Orbit Draw
     QFont     font;
-    Vec3f     draworbColor;
+    Vec3f     orbitColor;
     gTime     lastEpochCompForOrbit;
     QList<gVector> orbitPoints; //orbit points represented by azElPos vectors
 

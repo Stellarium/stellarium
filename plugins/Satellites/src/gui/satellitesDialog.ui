@@ -506,6 +506,13 @@
             </widget>
            </item>
            <item>
+            <widget class="QCheckBox" name="orbitCheckbox">
+             <property name="text">
+              <string>Orbit</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QPushButton" name="commsButton">
              <property name="enabled">
               <bool>false</bool>
@@ -547,8 +554,8 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
-			   <normaloff>:/graphicGui/filesave.png</normaloff>:/graphicGui/filesave.png</iconset>
+              <iconset resource="../../../../data/gui/guiRes.qrc">
+               <normaloff>:/graphicGui/filesave.png</normaloff>:/graphicGui/filesave.png</iconset>
              </property>
             </widget>
            </item>
@@ -653,6 +660,7 @@
   </customwidget>
  </customwidgets>
  <resources>
+  <include location="../../../../data/gui/guiRes.qrc"/>
   <include location="../../Satellites.qrc"/>
  </resources>
  <connections/>
