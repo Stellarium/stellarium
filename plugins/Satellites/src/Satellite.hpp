@@ -35,8 +35,9 @@
 #include "gsatellite/gTime.hpp"
 #include "gsatellite/gVector.hpp"
 
-#define DRAWORBIT_SLOTS_NUMBER    60
-#define DRAWORBIT_SLOT_SECNUMBER  30
+#define DRAWORBIT_SLOTS_NUMBER    131
+#define DRAWORBIT_FADE_NUMBER     10
+#define DRAWORBIT_SLOT_SECNUMBER  10
 
 class StelPainter;
 class StelLocation;
@@ -99,6 +100,9 @@ private:
 	//draw orbits methods
 	void computeOrbitPoints();
 	void drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter& painter);
+	//! returns 0 - 1.0 for the DRAWORBIT_FADE_NUMBER segments at
+	//! each end of an orbit, with 1 in the middle.
+	float calculateOrbitSegmentIntensity(int segNum);
 
 private:
 	bool initialized;
@@ -121,21 +125,20 @@ private:
 	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
 	void setObserverLocation(StelLocation* loc=NULL);
 
-    //gsatellite objects
-    gSatTEME *pSatellite;
-    gObserver observer;
-    gTime     epochTime;
-    gVector   Position;
-    gVector   Vel;
-    gVector   LatLong;
-    gVector   azElPos;
+	//gsatellite objects
+	gSatTEME *pSatellite;
+	gObserver observer;
+	gTime     epochTime;
+	gVector   Position;
+	gVector   Vel;
+	gVector   LatLong;
+	gVector   azElPos;
 
-    //Satellite Orbit Draw
-    QFont     font;
-    Vec3f     lineColor;
-    gTime     lastEpochCompForOrbit;
-    QList<gVector> orbitPoints; //orbit points represented by azElPos vectors
-
+	//Satellite Orbit Draw
+	QFont     font;
+	Vec3f     lineColor;
+	gTime     lastEpochCompForOrbit;
+	QList<gVector> orbitPoints; //orbit points represented by azElPos vectors
 };
 
 #endif // _SATELLITE_HPP_ 
