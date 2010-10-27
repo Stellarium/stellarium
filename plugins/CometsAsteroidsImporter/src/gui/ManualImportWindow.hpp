@@ -26,6 +26,8 @@
 
 #include "CAImporter.hpp"
 
+#include <QColor>
+
 class Ui_manualImportWindow;
 
 /*! \brief Window for manual entry of Solar System object properties.
@@ -40,10 +42,23 @@ public:
 	void languageChanged();
 
 private slots:
+	//TODO: Object type
 
+	void selectColor();
+	void parseColorString(QString);
+
+	void toggleCometOrbit(bool);
+	void toggleEllipticOrbit(bool);
+	void toggleObjectSpecificOrbit(bool);
+
+	void toggleMeanMotionOrPeriod(bool);
 
 private:
 	CAImporter * ssoManager;
+
+	QColor objectColor;
+
+	void setColorButtonColor(QColor newColor);
 
 protected:
 	virtual void createDialogContent();
