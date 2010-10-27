@@ -424,50 +424,68 @@ QDateTime jdToQDateTime(const double& jd)
 	return result;
 }
 
-// based on QDateTime's original handling, but expanded to handle 0.0 and earlier.
-void getDateFromJulianDay(double jd, int *year, int *month, int *day)
+
+void getDateFromJulianDay(double jd, int *yy, int *mm, int *dd)
 {
-	int y, m, d;
+	/*
+	 * This algorithm is taken from
+	 * "Numerical Recipes in c, 2nd Ed." (1992), pp. 14-15
+	 * and converted to integer math.
+	 * The electronic version of the book is freely available
+	 * at http://www.nr.com/ , under "Obsolete Versions - Older
+	 * book and code versions.
+	 */
 
-	// put us in the right calendar day for the time of day.
-	double fraction = jd - floor(jd);
-	if (fraction >= .5)
+	static const long JD_GREG_CAL = 2299161;
+	static const int JB_MAX_WITHOUT_OVERFLOW = 107374182;
+	long julian;
+
+	julian = (long)floor(jd + 0.5);
+
+	long ta, jalpha, tb, tc, td, te;
+
+	if (julian >= JD_GREG_CAL)
 	{
-		jd += 1.0;
+		jalpha = (4*(julian - 1867216) - 1) / 146097;
+		ta = julian + 1 + jalpha - jalpha / 4;
 	}
-
-	if (jd >= 2299161)
+	else if (julian < 0)
 	{
-		// Gregorian calendar starting from October 15, 1582
-		// This algorithm is from Henry F. Fliegel and Thomas C. Van Flandern
-		qulonglong ell, n, i, j;
-		ell = qulonglong(floor(jd)) + 68569;
-		n = (4 * ell) / 146097;
-		ell = ell - (146097 * n + 3) / 4;
-		i = (4000 * (ell + 1)) / 1461001;
-		ell = ell - (1461 * i) / 4 + 31;
-		j = (80 * ell) / 2447;
-		d = ell - (2447 * j) / 80;
-		ell = j / 11;
-		m = j + 2 - (12 * ell);
-		y = 100 * (n - 49) + i + ell;
+		ta = julian + 36525 * (1 - julian / 36525);
 	}
 	else
 	{
-		// Julian calendar until October 4, 1582
-		// Algorithm from Frequently Asked Questions about Calendars by Claus Toendering
-		int julianDay = (int)floor(jd);
-		julianDay += 32082;
-		int dd = (4 * julianDay + 3) / 1461;
-		int ee = julianDay - (1461 * dd) / 4;
-		int mm = ((5 * ee) + 2) / 153;
-		d = ee - (153 * mm + 2) / 5 + 1;
-		m = mm + 3 - 12 * (mm / 10);
-		y = dd - 4800 + (mm / 10);
+		ta = julian;
 	}
-	*year = y;
-	*month = m;
-	*day = d;
+
+	tb = ta + 1524;
+	if (tb <= JB_MAX_WITHOUT_OVERFLOW)
+	{
+		tc = (tb*20 - 2442) / 7305;
+	}
+	else
+	{
+		tc = (long)(((unsigned long long)tb*20 - 2442) / 7305);
+	}
+	td = 365 * tc + tc/4;
+	te = ((tb - td) * 10000)/306001;
+
+	*dd = tb - td - (306001 * te) / 10000;
+
+	*mm = te - 1;
+	if (*mm > 12)
+	{
+		*mm -= 12;
+	}
+	*yy = tc - 4715;
+	if (*mm > 2)
+	{
+		--(*yy);
+	}
+	if (julian < 0)
+	{
+		*yy -= 100 * (1 - julian / 36525);
+	}
 }
 
 void getTimeFromJulianDay(double julianDay, int *hour, int *minute, int *second)
@@ -689,6 +707,7 @@ float getGMTShiftFromQT(double JD)
 // UTC !
 bool getJDFromDate(double* newjd, int y, int m, int d, int h, int min, int s)
 {
+	static const long IGREG2 = 15+31L*(10+12L*1582);
 	double deltaTime = (h / 24.0) + (min / (24.0*60.0)) + (s / (24.0 * 60.0 * 60.0)) - 0.5;
 	QDate test((y <= 0 ? y-1 : y), m, d);
 	// if QDate will oblige, do so.
@@ -698,9 +717,50 @@ bool getJDFromDate(double* newjd, int y, int m, int d, int h, int min, int s)
 		qdjd += deltaTime;
 		*newjd = qdjd;
 		return true;
-	} else
+	}
+	else
 	{
-		double jd = (double)((1461 * (y + 4800 + (m - 14) / 12)) / 4 + (367 * (m - 2 - 12 * ((m - 14) / 12))) / 12 - (3 * ((y + 4900 + (m - 14) / 12) / 100)) / 4 + d - 32075) - 38;
+		/*
+		 * Algorithm taken from "Numerical Recipes in c, 2nd Ed." (1992), pp. 11-12
+		 */
+		long ljul;
+		long jy, jm;
+		long laa, lbb, lcc, lee;
+
+		jy = y;
+		if (m > 2)
+		{
+			jm = m + 1;
+		}
+		else
+		{
+			--jy;
+			jm = m + 13;
+		}
+
+		laa = 1461 * jy / 4;
+		if (jy < 0 && jy % 4)
+		{
+			--laa;
+		}
+		lbb = 306001 * jm / 10000;
+		ljul = laa + lbb + d + 1720995L;
+
+		if (d + 31L*(m + 12L * y) >= IGREG2)
+		{
+			lcc = jy/100;
+			if (jy < 0 && jy % 100)
+			{
+				--lcc;
+			}
+			lee = lcc/4;
+			if (lcc < 0 && lcc % 4)
+			{
+				--lee;
+			}
+			ljul += 2 - lcc + lee;
+		}
+		double jd = (double)ljul;
 		jd += deltaTime;
 		*newjd = jd;
 		return true;

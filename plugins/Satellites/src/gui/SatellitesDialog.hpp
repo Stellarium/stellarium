@@ -64,6 +64,7 @@ private slots:
 	void showSelectedSatellites(void);
 	void hideSelectedSatellites(void);
 	void visibleCheckChanged(int state);
+	void orbitCheckChanged(int state);
 	void satelliteDoubleClick(QListWidgetItem* item);
 
 private:

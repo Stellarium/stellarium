@@ -21,18 +21,35 @@
 #include <QDebug>
 #include <QSettings>
 
-Telescope::Telescope(QSqlRecord record)
+Telescope::Telescope()
 {
-	telescopeID = record.value("id").toInt();
-	name = record.value("name").toString();
-	focalLength = record.value("focalLength").toDouble();
-	diameter = record.value("diameter").toDouble();
-	hFlipped = record.value("hFlip").toBool();
-	vFlipped = record.value("vFlip").toBool();
+}
+
+Telescope::Telescope(const QObject& other)
+{
+	this->m_diameter = other.property("diameter").toDouble();
+	this->m_focalLength = other.property("focalLength").toDouble();
+	this->m_hFlipped = other.property("hFlipped").toBool();
+	this->m_vFlipped = other.property("vFlipped").toBool();
+	this->m_name = other.property("name").toString();
 }
 
 Telescope::~Telescope()
 {
+}
+
+static QMap<int, QString> mapping;
+QMap<int, QString> Telescope::propertyMap()
+{
+	if(mapping.isEmpty()) {
+		mapping = QMap<int, QString>();
+		mapping[0] = "name";
+		mapping[1] = "diameter";
+		mapping[2] = "focalLength";
+		mapping[3] = "hFlipped";
+		mapping[4] = "vFlipped";
+	}
+	return mapping;
 }
 
 /* ********************************************************************* */
@@ -41,32 +58,83 @@ Telescope::~Telescope()
 #pragma mark Accessors & Mutators
 #endif
 /* ********************************************************************* */
-const QString Telescope::getName()
+const QString Telescope::name() const
 {
-	return name;
+	return m_name;
 }
 
-double Telescope::getFocalLength()
+void Telescope::setName(QString theValue)
 {
-	return focalLength;
+	m_name = theValue;
 }
 
-int Telescope::getTelescopeID()
+double Telescope::focalLength() const
 {
-	return telescopeID;
+	return m_focalLength;
 }
 
-double Telescope::getDiameter()
+void Telescope::setFocalLength(double theValue)
 {
-	return diameter;
+	m_focalLength = theValue;
 }
 
-bool Telescope::isHFlipped()
+double Telescope::diameter() const
 {
-	return hFlipped;
+	return m_diameter;
 }
 
-bool Telescope::isVFlipped()
+void Telescope::setDiameter(double theValue)
 {
-	return vFlipped;
+	m_diameter = theValue;
+}
+
+bool Telescope::isHFlipped() const
+{
+	return m_hFlipped;
+}
+
+void Telescope::setHFlipped(bool flipped)
+{
+	m_hFlipped = flipped;
+}
+
+bool Telescope::isVFlipped() const
+{
+	return m_vFlipped;
+}
+
+void Telescope::setVFlipped(bool flipped)
+{
+	m_vFlipped = flipped;
+}
+
+/* ********************************************************************* */
+#if 0
+#pragma mark -
+#pragma mark Static Methods
+#endif
+/* ********************************************************************* */
+
+Telescope* Telescope::telescopeFromSettings(QSettings* theSettings, int telescopeIndex)
+{
+	Telescope* telescope = new Telescope();
+	QString prefix = "telescope/" + QVariant(telescopeIndex).toString() + "/";
+	
+	telescope->setName(theSettings->value(prefix + "name", "").toString());
+	telescope->setFocalLength(theSettings->value(prefix + "focalLength", "0").toDouble());
+	telescope->setDiameter(theSettings->value(prefix + "diameter", "0").toDouble());
+	telescope->setHFlipped(theSettings->value(prefix + "hFlip").toBool());
+	telescope->setVFlipped(theSettings->value(prefix + "vFlip").toBool());
+	
+	return telescope;
+}
+Telescope* Telescope::telescopeModel()
+{
+	Telescope* model = new Telescope();
+	model->setName("My Telescope");
+	model->setDiameter(80);
+	model->setFocalLength(500);
+	model->setHFlipped(true);
+	model->setVFlipped(true);
+	return model;
 }

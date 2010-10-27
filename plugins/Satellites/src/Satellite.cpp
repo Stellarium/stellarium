@@ -42,6 +42,7 @@
 #include <QSettings>
 
 #include <cmath>
+#include <cstdlib>
 
 // static data members - will be initialised in the Satallites class (the StelObjectMgr)
 StelTextureSP Satellite::hintTexture;
@@ -55,7 +56,7 @@ Satellite::Satellite(const QVariantMap& map)
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation") || !map.contains("tle1") || !map.contains("tle2"))
 		return;
-
+	
 	font.setPixelSize(16);
 
 	designation  = map.value("designation").toString();
@@ -64,7 +65,7 @@ Satellite::Satellite(const QVariantMap& map)
 	strncpy(elements[2], qPrintable(map.value("tle2").toString()), 80);
 	if (map.contains("description")) description = map.value("description").toString();
 	if (map.contains("visible")) visible = map.value("visible").toBool();
-	if (map.contains("draworb")) draworb = map.value("draworb").toBool();
+	if (map.contains("orbit_visible")) orbitVisible = map.value("orbit_visible").toBool();
 
 	if (map.contains("hintColor"))
 	{
@@ -75,22 +76,6 @@ Satellite::Satellite(const QVariantMap& map)
 			hintColor[2] = map.value("hintColor").toList().at(2).toDouble();
 		}
 	}
-
-	if (map.contains("draworbColor"))
-	{
-		if (map.value("draworbColor").toList().count() == 3)
-		{
-			draworbColor[0] = map.value("draworbColor").toList().at(0).toDouble();
-			draworbColor[1] = map.value("draworbColor").toList().at(1).toDouble();
-			draworbColor[2] = map.value("draworbColor").toList().at(2).toDouble();
-		}
-	}
-	else
-	{
-		draworbColor=hintColor;
-	}
-
-
 
 	if (map.contains("comms"))
 	{
@@ -131,14 +116,14 @@ QVariantMap Satellite::getMap(void)
 	QVariantMap map;
 	map["designation"] = designation;
 	map["visible"] = visible;
-	map["draworb"] = draworb;
+	map["orbit_visible"] = orbitVisible;
 	map["tle1"] = QString(elements[1]);
 	map["tle2"] = QString(elements[2]);
-	QVariantList col,draworbCol;
+	QVariantList col, orbitCol;;
 	col << (double)hintColor[0] << (double)hintColor[1] << (double)hintColor[2];
-	draworbCol << (double)draworbColor[0] << (double)draworbColor[1] << (double)draworbColor[2];
-	map["hintColor"]    = col;
-	map["draworbColor"] = draworbCol;
+	orbitCol << (double)orbitColor[0] << (double)orbitColor[1] << (double)orbitColor[2];
+	map["hintColor"] = col;
+	map["orbitColor"] = orbitCol;
 	QVariantList commList;
 	foreach(commLink c, comms)
 	{
@@ -149,6 +134,12 @@ QVariantMap Satellite::getMap(void)
 		commList << commMap;
 	}
 	map["comms"] = commList;
+		QVariantList groupList;
+	foreach(QString g, groupIDs)
+	{
+		groupList << g;
+	}
+	map["groups"] = groupList;
 	return map;
 }
 
@@ -272,8 +263,8 @@ void Satellite::update(double)
 	rangeRate = azElPos[ RANGERATE];
 	height    = LatLong[2];
 
-    //Compute orbit points to draw orbit line.
-	if(draworb) computeOrbitPoints();
+	// Compute orbit points to draw orbit line.
+	if(orbitVisible) computeOrbitPoints();
 
 }
 
@@ -305,16 +296,14 @@ void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 		}
 		painter.drawSprite2dMode(xy[0], xy[1], 11);
 
-		if(draworb) drawOrbit(core, prj, painter);
+		if(orbitVisible) drawOrbit(core, prj, painter);
 	}
 }
 
 void Satellite::drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter& painter){
-
-	Vec3d XYZPos;
-	Vec3d prevProjectedPos, projectedPos;
+	Vec3d XYZPos, xy1;
 	float a, azimth, elev;
-	float lineBrightness;
+	QVarLengthArray<float, 1024> vertexArray;
 
 
 	glDisable(GL_TEXTURE_2D);
@@ -324,17 +313,7 @@ void Satellite::drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter
 
 	QList<gVector>::iterator it= orbitPoints.begin();
 
-
-
-	azimth = it->at( AZIMUTH);
-	elev   = it->at( ELEVATION);
-	a      = ( (azimth/KDEG2RAD)-90)*M_PI/180;
-	Vec3d pos(sin(a),cos(a), tan( (elev/KDEG2RAD) * M_PI / 180.));
-	XYZPos = core->getNavigator()->j2000ToEquinoxEqu(core->getNavigator()->altAzToEquinoxEqu(pos));
-	prj->project(XYZPos, prevProjectedPos);
-	it++;
-
-	for(int index = 1; index<orbitPoints.size();index++)
+	for(int i=0; i<orbitPoints.size();i++)
 	{
 		azimth = it->at( AZIMUTH);
 		elev   = it->at( ELEVATION);
@@ -342,30 +321,30 @@ void Satellite::drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter
 		Vec3d pos(sin(a),cos(a), tan( (elev/KDEG2RAD) * M_PI / 180.));
 		XYZPos = core->getNavigator()->j2000ToEquinoxEqu(core->getNavigator()->altAzToEquinoxEqu(pos));
 
-		if (prj->project(XYZPos, projectedPos))
+		if (prj->project(XYZPos,xy1))
 		{
-			 //set line fadding
-
-			 if(index < DRAWORBIT_FADING_SLOT)
-			 {
-				 lineBrightness = hintBrightness/(DRAWORBIT_FADING_SLOT-index);
-			 }
-			 else if(index > (orbitPoints.size()-DRAWORBIT_FADING_SLOT))
-			 {
-				 lineBrightness = hintBrightness/(DRAWORBIT_FADING_SLOT-(orbitPoints.size()-index));
-			 }
-			 else
-				 lineBrightness = hintBrightness;
-
-			 painter.setColor(draworbColor[0], draworbColor[1], draworbColor[2], lineBrightness);
-			 painter.drawLine2d(prevProjectedPos[0],prevProjectedPos[1],projectedPos[0],projectedPos[1]);
-			 prevProjectedPos=projectedPos;
+			vertexArray.append(xy1[0]);
+			vertexArray.append(xy1[1]);
 		}
 		it++;
+		if (i>0)
+		{
+			painter.setColor(hintColor[0], hintColor[1], hintColor[2], hintBrightness * calculateOrbitSegmentIntensity(i));
+			painter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
+			painter.drawFromArray(StelPainter::LineStrip, 2, i-1, false);
+		}
 	}
 
+	vertexArray.clear();
 	painter.enableClientStates(false);
 	glEnable(GL_TEXTURE_2D);
+}
+
+float Satellite::calculateOrbitSegmentIntensity(int segNum)
+{
+	int endDist = (DRAWORBIT_SLOTS_NUMBER/2) - abs(segNum - (DRAWORBIT_SLOTS_NUMBER/2) % DRAWORBIT_SLOTS_NUMBER);
+	if (endDist > DRAWORBIT_FADE_NUMBER) { return 1.0; }
+	else { return (endDist  + 1) / (DRAWORBIT_FADE_NUMBER + 1.0); }
 }
 
 void Satellite::computeOrbitPoints(){
