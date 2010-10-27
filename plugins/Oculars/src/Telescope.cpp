@@ -27,8 +27,6 @@ Telescope::Telescope()
 
 Telescope::Telescope(const QObject& other)
 {
-	Q_ASSERT(other);
-	Q_ASSERT(other->metaObject()->className() == "Telescope");
 	this->m_diameter = other.property("diameter").toDouble();
 	this->m_focalLength = other.property("focalLength").toDouble();
 	this->m_hFlipped = other.property("hFlipped").toBool();

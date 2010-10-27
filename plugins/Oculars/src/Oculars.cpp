@@ -330,7 +330,6 @@ void Oculars::init()
 
 void Oculars::setStelStyle(const QString&)
 {
-	qDebug() << "====> Oculars here.";
 	if(ocularDialog)
 		ocularDialog->updateStyle();
 }
@@ -584,7 +583,6 @@ void Oculars::initializeActivationActions()
 							 settings->value("bindings/toggle_telrad", "Ctrl+B").toString(),
 							 group,
 							 true);
-	qDebug() << "====> '" << settings->value("bindings/toggle_telrad", "Ctrl+B").toString() << "'";
 	gui->getGuiActions("actionShow_Ocular_Telrad")->setChecked(flagShowTelrad);
 	connect(gui->getGuiActions("actionShow_Ocular_Telrad"), SIGNAL(toggled(bool)), this, SLOT(toggleTelrad()));
 
