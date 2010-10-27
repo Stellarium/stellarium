@@ -42,6 +42,7 @@
 #include <QSettings>
 
 #include <cmath>
+#include <cstdlib>
 
 // static data members - will be initialised in the Satallites class (the StelObjectMgr)
 StelTextureSP Satellite::hintTexture;
@@ -300,13 +301,9 @@ void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 }
 
 void Satellite::drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter& painter){
-
 	Vec3d XYZPos, xy1;
 	float a, azimth, elev;
 	QVarLengthArray<float, 1024> vertexArray;
-
-	//painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
-	painter.setColor(lineColor[0], lineColor[1], lineColor[2], hintBrightness);
 
 
 	glDisable(GL_TEXTURE_2D);
@@ -330,17 +327,24 @@ void Satellite::drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter
 			vertexArray.append(xy1[1]);
 		}
 		it++;
+		if (i>0)
+		{
+			painter.setColor(hintColor[0], hintColor[1], hintColor[2], hintBrightness * calculateOrbitSegmentIntensity(i));
+			painter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
+			painter.drawFromArray(StelPainter::LineStrip, 2, i-1, false);
+		}
 	}
 
-	if (!vertexArray.isEmpty())
-	{
-		painter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
-		painter.drawFromArray(StelPainter::LineStrip, vertexArray.size()/2, 0, false);
-		vertexArray.clear();
-	}
-
+	vertexArray.clear();
 	painter.enableClientStates(false);
 	glEnable(GL_TEXTURE_2D);
+}
+
+float Satellite::calculateOrbitSegmentIntensity(int segNum)
+{
+	int endDist = (DRAWORBIT_SLOTS_NUMBER/2) - abs(segNum - (DRAWORBIT_SLOTS_NUMBER/2) % DRAWORBIT_SLOTS_NUMBER);
+	if (endDist > DRAWORBIT_FADE_NUMBER) { return 1.0; }
+	else { return (endDist  + 1) / (DRAWORBIT_FADE_NUMBER + 1.0); }
 }
 
 void Satellite::computeOrbitPoints(){
