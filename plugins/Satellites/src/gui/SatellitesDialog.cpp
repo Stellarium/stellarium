@@ -105,6 +105,7 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->showButton, SIGNAL(clicked()), this, SLOT(showSelectedSatellites()));
 	connect(ui->hideButton, SIGNAL(clicked()), this, SLOT(hideSelectedSatellites()));
 	connect(ui->visibleCheckbox, SIGNAL(stateChanged(int)), this, SLOT(visibleCheckChanged(int)));
+	connect(ui->orbitCheckbox, SIGNAL(stateChanged(int)), this, SLOT(orbitCheckChanged(int)));
 
 	// Sources tab
 	connect(ui->sourceList, SIGNAL(currentTextChanged(const QString&)), ui->sourceEdit, SLOT(setText(const QString&)));
@@ -173,6 +174,7 @@ void SatellitesDialog::selectedSatelliteChanged(const QString& id)
 	ui->groupsTextEdit->setText(sat->groupIDs.join(", "));
 	ui->tleTextEdit->setText(QString(sat->elements[1]) + "\n" + QString(sat->elements[2]));
 	ui->visibleCheckbox->setChecked(sat->visible);
+	ui->orbitCheckbox->setChecked(sat->orbitVisible);
 	ui->commsButton->setEnabled(sat->comms.count()>0);
 }
 
@@ -370,6 +372,15 @@ void SatellitesDialog::visibleCheckChanged(int state)
 		sat->visible = (state==Qt::Checked);
 	}
 	groupFilterChanged(ui->groupsCombo->currentIndex());
+}
+
+void SatellitesDialog::orbitCheckChanged(int state)
+{
+	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
+	{
+		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(i->text());
+		sat->orbitVisible = (state==Qt::Checked);
+	}
 }
 
 void SatellitesDialog::satelliteDoubleClick(QListWidgetItem* item)
