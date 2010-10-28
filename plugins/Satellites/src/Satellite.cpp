@@ -57,9 +57,7 @@ Satellite::Satellite(const QVariantMap& map)
 	if (!map.contains("designation") || !map.contains("tle1") || !map.contains("tle2"))
 		return;
 	
-	QSettings* conf = StelApp::getInstance().getSettings();
 	font.setPixelSize(16);
-	lineColor = StelUtils::strToVec3f(conf->value("options/line_color", "0,0.5,1").toString());
 
 	designation  = map.value("designation").toString();
 	strncpy(elements[0], "DUMMY", 5);
@@ -67,7 +65,7 @@ Satellite::Satellite(const QVariantMap& map)
 	strncpy(elements[2], qPrintable(map.value("tle2").toString()), 80);
 	if (map.contains("description")) description = map.value("description").toString();
 	if (map.contains("visible")) visible = map.value("visible").toBool();
-	if (map.contains("orbit_visible")) orbitVisible = map.value("orbit_visible").toBool();
+	if (map.contains("orbitVisible")) orbitVisible = map.value("orbitVisible").toBool();
 
 	if (map.contains("hintColor"))
 	{
@@ -118,12 +116,14 @@ QVariantMap Satellite::getMap(void)
 	QVariantMap map;
 	map["designation"] = designation;
 	map["visible"] = visible;
-	map["orbit_visible"] = orbitVisible;
+	map["orbitVisible"] = orbitVisible;
 	map["tle1"] = QString(elements[1]);
 	map["tle2"] = QString(elements[2]);
-	QVariantList col;
+	QVariantList col, orbitCol;;
 	col << (double)hintColor[0] << (double)hintColor[1] << (double)hintColor[2];
+	orbitCol << (double)orbitColor[0] << (double)orbitColor[1] << (double)orbitColor[2];
 	map["hintColor"] = col;
+	map["orbitColor"] = orbitCol;
 	QVariantList commList;
 	foreach(commLink c, comms)
 	{
