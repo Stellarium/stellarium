@@ -3,42 +3,55 @@
 use warnings;
 use strict;
 use Getopt::Long;
+use File::Basename;
 use Term::ANSIColor;
 
-	my $textRed = color 'red';
-	my $textGreen = color 'green';
-	my $textBlue = color 'blue';
-	my $textYellow = color 'yellow';
-	my $textReset = color 'reset';
+my $textRed = color 'red';
+my $textGreen = color 'green';
+my $textBlue = color 'blue';
+my $textYellow = color 'yellow';
+my $textReset = color 'reset';
 
 my $flg_verbose = 0;
 my $flg_yes = 0;
 my $flg_no = 0;
+my $flg_infile = undef;
 GetOptions(
 	"verbose" => \$flg_verbose,
 	"yes"     => \$flg_yes,
 	"no"      => \$flg_no,
+	"file=s"  => \$flg_infile,
 	"help"    => sub { lusage(0); },
 ) || usage(1);
 
 # we expect three or more parameters (search pattern, replacement, file(s))
-if ($#ARGV<2) { usage(2);}
+if ($#ARGV<1) { usage(2);}
 
-if ($ARGV[1] eq ".") {
-	# if the replacement is just ".", guess what the replacement is 
-	# from the search pattern by transforming it to camelCase from 
-	# lc_underscore_style
-	my $s = shift || usage(1);
-	my $r = autoProcess($s);
-	shift;
-	refactorString($s, $r, @ARGV);
+my $s = shift || usage(1); # search string
+my $r = shift || usage(1); # replacement (special "." means to automatically
+                           # generate it with proper case from $s.
+
+my @input_files;
+if (!defined($flg_infile) && $#ARGV < 0) {
+	print STDERR basename($0) . ": list of intput files being read from stdin.  Use -f - to suppress this message.\n";
+	while(<>) {
+		chomp;
+		push @input_files, $_;
+	}
+}
+elsif (defined($flg_infile)) {
+	open(IN, "<$flg_infile") || die "input file specified, but cannot be opened";
+	while(<IN>) {
+		chomp;
+		push @input_files, $_;
+	}
+	close(IN);
 }
 else {
-	# or if the second argument is not ".", use it as the replacemnt
-	my $s = shift || usage(1);
-	my $r = shift || usage(1);
-	refactorString($s, $r, @ARGV);
+	@input_files = @ARGV;
 }
+
+refactorString($s, $r, @input_files);
 
 exit(0);
 
@@ -254,6 +267,11 @@ the changes made.
 =head1 OPTIONS
 
 =over
+
+=item B<--file>=I<f>
+
+Read the list of input files from file I<f> instead of taking them from the 
+command line.  If I<f> is "-" then the list of files is read from STDIN.
 
 =item B<--help>
 

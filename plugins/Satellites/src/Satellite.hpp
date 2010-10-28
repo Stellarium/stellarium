@@ -35,9 +35,11 @@
 #include "gsatellite/gTime.hpp"
 #include "gsatellite/gVector.hpp"
 
+
 #define DRAWORBIT_SLOTS_NUMBER    131
 #define DRAWORBIT_FADE_NUMBER     10
 #define DRAWORBIT_SLOT_SECNUMBER  10
+
 
 class StelPainter;
 class StelLocation;
@@ -136,9 +138,10 @@ private:
 
 	//Satellite Orbit Draw
 	QFont     font;
-	Vec3f     lineColor;
+	Vec3f     orbitColor;
 	gTime     lastEpochCompForOrbit;
 	QList<gVector> orbitPoints; //orbit points represented by azElPos vectors
+
 };
 
 #endif // _SATELLITE_HPP_ 
