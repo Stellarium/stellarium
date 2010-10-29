@@ -1,17 +1,13 @@
-/**********************************************************************
-** Name: gVector.hpp
-** $Name$
-** $Date$
-** $Revision$
-** $HeadURL$
-**
-** Description: GVector class envelop the STL vertor class to add
-**   			some error control.
-**********************************************************************/
+/***************************************************************************
+ * Name: gVector.hpp
+ *
+ * Description: GVector class envelop the STL vertor class to add
+ *              some error control.
+ ***************************************************************************/
 
 /***************************************************************************
- *   Copyright (C) 2006 by j. l. Canales   *
- *   jlcanales@users.sourceforge.net   *
+ *   Copyright (C) 2006 by J.L. Canales                                    *
+ *   jlcanales@users.sourceforge.net                                       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -29,9 +25,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifndef GVECTOR_HPP_
-#define GVECTOR_HPP_
-
+#ifndef _GVECTOR_HPP_
+#define _GVECTOR_HPP_ 1
 
 #include "gVectorTempl.hpp"
 
@@ -42,41 +37,42 @@
 //
 //	This class has not overlapped the = operator and the copy constructor
 //	because this methods are given by the vector STL class.
-class gVector : public br_stl::gVectorTempl<double>{
+class gVector : public br_stl::gVectorTempl<double>
+{
 
 public:
 	gVector();
-	gVector ( unsigned int ai_uiElementsNumber);
+	gVector(unsigned int ai_uiElementsNumber);
 
 	virtual ~gVector() {};
 
-	    //## Other Operations (specified)
-	  //## Operation: operator*
-	  //	This operators make the vectorial product calculation
+	//## Other Operations (specified)
+	//## Operation: operator*
+	//	This operators make the vectorial product calculation
 	// gVector operator* ( const gVector &ai_rightVector);
 
-	  //## Operation: operator*
-	  //	This operator make the scalar product calculation.
-	 //gVector operator* ( double ai_escalar);
+	//## Operation: operator*
+	//	This operator make the scalar product calculation.
+	//gVector operator* ( double ai_escalar);
 
-	 gVector operator+ ( gVector &ai_rightVector) const;
-	 const gVector& operator+=( gVector &ai_rightVector);
+	gVector operator+ (gVector &ai_rightVector) const;
+	const gVector& operator+=(gVector &ai_rightVector);
 
-	 gVector operator- ( gVector &ai_rightVector) const;
-	 const gVector& operator-=( gVector &ai_rightVector);
+	gVector operator- (gVector &ai_rightVector) const;
+	const gVector& operator-=(gVector &ai_rightVector);
 
-	 //## Operation: Dot
-	 //   This method compute the dot vector between two vectors
-	 double Dot( const gVector& ai_rightVector) const;
+	//## Operation: Dot
+	//   This method compute the dot vector between two vectors
+	double Dot(const gVector& ai_rightVector) const;
 
-	  //## Operation: Angle
-	  //	This method compute the angle angle between two vectors
-	   //double Angle(const gVector&) const;
+	//## Operation: Angle
+	//	This method compute the angle angle between two vectors
+	//double Angle(const gVector&) const;
 
-	 //## Operation: Magnitude
-	 //	This method compute the vector magnitude
-	 double Magnitude() const;
+	//## Operation: Magnitude
+	//	This method compute the vector magnitude
+	double Magnitude() const;
 
 };
 
-#endif /* GVECTOR_HPP_ */
+#endif // _GVECTOR_HPP_

@@ -1,20 +1,16 @@
-/**********************************************************************
-** Name: gTime.hpp
-** $Name$
-** $Date$
-** $Revision$
-** $HeadURL$
-**
-** Description: gTime y gTimeSpan classes declaration.
-**		 This classes implement the method and operators to manage
-**		 calculation over dates and timestamps.
-**
-**   			
-**********************************************************************/
+/****************************************************************************
+ * Name: gTime.hpp
+ *
+ * Description: gTime y gTimeSpan classes declaration.
+ *		 This classes implement the method and operators to manage
+ *		 calculation over dates and timestamps.
+ *
+ *
+ ***************************************************************************/
 
 /***************************************************************************
- *   Copyright (C) 2006 by j. l. Canales   *
- *   jlcanales@users.sourceforge.net   *
+ *   Copyright (C) 2006 by J. L. Canales                                   *
+ *   jlcanales@users.sourceforge.net                                       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -34,14 +30,11 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // gTimeSpan and gTime
-
-#ifndef gTime_H
-#define gTime_H 1
-
+#ifndef _GTIME_HPP_
+#define _GTIME_HPP_ 1
 
 #include <time.h>
 #include <iostream> // for operator<<(), see below
-
 
 static const double JDAY_JAN1_00H_1900 = 2415019.5; // Jan 1.0 1900 = Jan 1 1900 00h UTC
 static const double JDAY_JAN1_12H_1900 = 2415020.0; // Jan 1.5 1900 = Jan 1 1900 12h UTC
@@ -57,39 +50,38 @@ static const int KMIN_PER_HR  = 60;
 static const int KMIN_PER_DAY = 1440;
 static const int KHR_PER_DAY  = 60;
 
-
 class gTimeSpan
 {
-	public:
+public:
 	// Constructors
-
 	gTimeSpan(double timeSpanSrc = 0); // timeSpanSrc is mesured in days and fraction of day
 	gTimeSpan(long lDays, int nHours, int nMins, double nSecs);
 
 	gTimeSpan(const gTimeSpan& timeSpanSrc);
 	const gTimeSpan& operator=(const gTimeSpan& timeSpanSrc);
-	
+
 	// Equal to time in Julian Days
 	const gTimeSpan& operator=(const double& timeSpanSrc)
-	{ m_timeSpan=timeSpanSrc*KSEC_PER_DAY;
-	  return *this;}
+	{
+		m_timeSpan=timeSpanSrc*KSEC_PER_DAY;
+		return *this;
+	}
 
 	// Attributes
 	// extract parts
-	
-	
+
 	//! Operation: getDays()
 	//!	This method returns the integer days number stored in the gTimeSpan object.
 	//! @return
 	//!    long  Total number of days
-	long  getDays() const; 
+	long  getDays() const;
 
 	//! Operation: getHours()
 	//!	This method returns the integer hours number stored in the gTimeSpan object.
 	//! @return
 	//!    int This is a value between 0 and 23 hours
 	int   getHours() const;
-	
+
 	//! Operation: getMinutes()
 	//! This method returns the integer Minutes number stored in the gTimeSpan object.
 	//! @return
@@ -101,7 +93,7 @@ class gTimeSpan
 	//! @return
 	//!	int This is a value between 0 and 59 seconds
 	int   getSeconds() const;
-	
+
 	//! Operation: getDblSeconds()
 	//!	This method returns the total seconds number stored in the gTimeSpan
 	//!	object.
@@ -118,10 +110,8 @@ class gTimeSpan
 	double getDblDays() const;
 	// Operations
 
-
-
 	//////////////////////////////////////
-	// TimeSpan Object Math operations 
+	// TimeSpan Object Math operations
 	//////////////////////////////////////
 	gTimeSpan operator-(gTimeSpan timeSpan) const;
 	gTimeSpan operator+(gTimeSpan timeSpan) const;
@@ -134,8 +124,9 @@ class gTimeSpan
 	bool operator<=(gTimeSpan timeSpan) const;
 	bool operator>=(gTimeSpan timeSpan) const;
 
-	private:
+private:
 	double m_timeSpan; //time span in julian days
+
 };
 
 
@@ -152,13 +143,12 @@ class gTime
 {
 public:
 
-// Constructors
-
+	// Constructors
 	gTime(double ai_jDays = 0);
 	gTime(int year, double day);
 	gTime(int nYear, int nMonth, int nDay, int nHour, int nMin, double nSec);
-	gTime(struct tm ai_timestruct);	
-	
+	gTime(struct tm ai_timestruct);
+
 	// copy constructor
 	gTime(const gTime& timeSrc);
 
@@ -192,23 +182,24 @@ public:
 	//!   const gTime&  Reference to *this object modified after operation
 	const gTime& operator=(time_t t);
 
-	
+
 	// Operation operator=
 	//! @brief overload the = operator to assign time values to the object in
 	//!   julian days.
 	//! @param[in] t Time to be assigned
 	//! @return
 	//!   const gTime&  Reference to *this object modified after operation
-	const gTime& operator=(double t){
+	const gTime& operator=(double t)
+	{
 		m_time = t;
-		return *this;}
+		return *this;
+	}
 
 
 
 	//////////////////////////////////////
-	// Time Machine getting operations 
+	// Time Machine getting operations
 	//////////////////////////////////////
-
 
 	// Operation  getCurrentTime();
 	//! @brief Returns a gTime object setted with the actual machine time.
@@ -230,11 +221,13 @@ public:
 	//! @param ai_year Year number
 	//! @return true if ai_year is a Leap Year
 	static bool isLeapYear(int ai_year)
-      	{ return (ai_year % 4 == 0 && ai_year % 100 != 0) || (ai_year % 400 == 0); }
+	{
+		return (ai_year % 4 == 0 && ai_year % 100 != 0) || (ai_year % 400 == 0);
+	}
 
 
 	//////////////////////////////////////
-	// Time Object getting operations 
+	// Time Object getting operations
 	//////////////////////////////////////
 
 	// Operation:  getGmtTm();
@@ -242,16 +235,16 @@ public:
 	//! @return:
 	//!    double Julian Days represented in the gTime Object
 	double getGmtTm() const;
-	
+
 	// Operation:  getLocalTm();
 	//! @brief Returns the time Local value in Julian days.
 	//! @return:
 	//!    double Julian Days represented in the gTime Object
 	double getLocalTm() const;
-	
-	
+
+
 	//////////////////////////////////////
-	// Time Object Converting operations 
+	// Time Object Converting operations
 	//////////////////////////////////////
 
 	// Operation:  toTime();
@@ -280,58 +273,57 @@ public:
 	//! @return
 	//!    Theta Angle in radians, measuring eastward from the Vernal Equinox to the
 	//!    prime meridian
-   	double toThetaGMST() const; 
-   	
-   	// Operation:  toThetaLMST();
+	double toThetaGMST() const;
+
+	// Operation:  toThetaLMST();
 	//! @brief Calculate Theta Angle at Local Mean Time for the Julian date.
 	//! @param[in] longitude Geographical longitude for the local meridian.\n
-   	//!     Positive longitude = east longitude\n
-   	//!     Negative longitude = west longitude\n
+	//!     Positive longitude = east longitude\n
+	//!     Negative longitude = west longitude\n
 	//! @return Theta Angle in radians, measuring eastward from the Vernal Equinox to the
 	//!    prime meridian
-   	double toThetaLMST(double longitude) const;
+	double toThetaLMST(double longitude) const;
 
 
 	//////////////////////////////////////
-	// Time Object Math operations 
+	// Time Object Math operations
 	//////////////////////////////////////
 
 	gTimeSpan operator-(gTime time)         const;
-	gTime operator-    (gTimeSpan timeSpan) const;
-	gTime operator+    (gTimeSpan timeSpan) const;
+	gTime operator- (gTimeSpan timeSpan) const;
+	gTime operator+ (gTimeSpan timeSpan) const;
 	const gTime& operator+= (gTimeSpan timeSpan);
 	const gTime& operator-= (gTimeSpan timeSpan);
-	bool operator==    (gTime time)         const;
-	bool operator!=    (gTime time)         const;
-	bool operator<     (gTime time)         const;
-	bool operator>     (gTime time)         const;
-	bool operator<=    (gTime time)         const;
-	bool operator>=    (gTime time)         const;
+	bool operator== (gTime time)         const;
+	bool operator!= (gTime time)         const;
+	bool operator< (gTime time)         const;
+	bool operator> (gTime time)         const;
+	bool operator<= (gTime time)         const;
+	bool operator>= (gTime time)         const;
 
 private:
-
-
-	
 	double m_time; //Time in Julian Days
+
 };
 
 
 
-inline std::ostream& operator<<(std::ostream& s, gTime& ai_gTime ) {
-	
+inline std::ostream& operator<<(std::ostream& s, gTime& ai_gTime)
+{
 	int    year, month;
 	double Dom;
-	
-	ai_gTime.toCalendarDate( &year, &month , &Dom);
-	
+
+	ai_gTime.toCalendarDate(&year, &month , &Dom);
+
 	s << "GMT " << year <<" " << month <<":"<<Dom;
 	return s;
 }
 
-inline std::ostream& operator<<(std::ostream& s, gTimeSpan& ai_gTimeSpan ) {
+inline std::ostream& operator<<(std::ostream& s, gTimeSpan& ai_gTimeSpan)
+{
 	s << "D " <<ai_gTimeSpan.getDays()<<" "<<ai_gTimeSpan.getHours()<<":"<<ai_gTimeSpan.getMinutes()<<":"<<ai_gTimeSpan.getSeconds()<<std::endl;
 	return s;
 }
 
 
-#endif //CTIME_H
+#endif // _GTIME_HPP_

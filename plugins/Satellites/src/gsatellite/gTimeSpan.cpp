@@ -1,19 +1,13 @@
-/**********************************************************************
-** Name:GTimeSpan.cpp
-** 
-** $Date: 2007-03-29 17:01:15 +0200 (jue, 29 mar 2007) $
-** $Revision: 16 $
-** $HeadURL: https://gsat.svn.sourceforge.net/svnroot/gsat/trunk/src/GTimeSpan.cpp $
-**
-** Description: GTimeSpan class definition.
-**		 This class has the needed functionality to manage time interval
-**		  operations.
-**
-**   			
-**********************************************************************/
+/***************************************************************************
+ * Name:GTimeSpan.cpp
+ *
+ * Description: GTimeSpan class definition.
+ *              This class has the needed functionality to manage time interval
+ *              operations.
+ ***************************************************************************/
 
 /***************************************************************************
- *   Copyright (C) 2004 by JL Canales                                     *
+ *   Copyright (C) 2004 by J.L. Canales                                    *
  *   ph03696@homeserver                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -35,26 +29,26 @@
 // gtime
 #include "gTime.hpp"
 
-
-
 // Class GTimeSpan
 
-//Constructors
-
-gTimeSpan::gTimeSpan(double timeSpanSrc){ //timeSpanScr meassured in days and day fractions
-	 m_timeSpan=timeSpanSrc*KSEC_PER_DAY;
+// Constructors
+gTimeSpan::gTimeSpan(double timeSpanSrc)  //timeSpanScr meassured in days and day fractions
+{
+	m_timeSpan=timeSpanSrc*KSEC_PER_DAY;
 }
 
-gTimeSpan::gTimeSpan(long lDays, int nHours, int nMins, double nSecs){
-    
-    m_timeSpan= (lDays     * KSEC_PER_DAY)
-                 + (nHours * KSEC_PER_HR)
-                 + (nMins  * KSEC_PER_MIN)
-                 +  nSecs; 
+gTimeSpan::gTimeSpan(long lDays, int nHours, int nMins, double nSecs)
+{
+
+	m_timeSpan= (lDays     * KSEC_PER_DAY)
+	            + (nHours * KSEC_PER_HR)
+	            + (nMins  * KSEC_PER_MIN)
+	            +  nSecs;
 }
 
-gTimeSpan::gTimeSpan(const gTimeSpan& timeSpanSrc):m_timeSpan( timeSpanSrc.m_timeSpan){
-        
+gTimeSpan::gTimeSpan(const gTimeSpan& timeSpanSrc):m_timeSpan(timeSpanSrc.m_timeSpan)
+{
+
 }
 
 
@@ -64,10 +58,10 @@ gTimeSpan::gTimeSpan(const gTimeSpan& timeSpanSrc):m_timeSpan( timeSpanSrc.m_tim
 //	Equal operator overload.
 //
 
-const gTimeSpan& gTimeSpan::operator=(const gTimeSpan& timeSpanSrc){
+const gTimeSpan& gTimeSpan::operator=(const gTimeSpan& timeSpanSrc)
+{
 	m_timeSpan = timeSpanSrc.m_timeSpan;
 	return (*this);
-        
 }
 
 
@@ -76,8 +70,9 @@ const gTimeSpan& gTimeSpan::operator=(const gTimeSpan& timeSpanSrc){
 //	This method returns the integer days number stored in the gTimeSpan object.
 
 
-long  gTimeSpan::getDays() const{
-        return (long)(m_timeSpan / KSEC_PER_DAY);
+long  gTimeSpan::getDays() const
+{
+	return (long)(m_timeSpan / KSEC_PER_DAY);
 }
 
 
@@ -87,10 +82,11 @@ long  gTimeSpan::getDays() const{
 //	This is a value between 0 and 23 hours
 
 
-int gTimeSpan::getHours() const{
+int gTimeSpan::getHours() const
+{
 
-        double AuxValue = m_timeSpan - (getDays() * KSEC_PER_DAY);
-        return (int)( AuxValue / KSEC_PER_HR);
+	double AuxValue = m_timeSpan - (getDays() * KSEC_PER_DAY);
+	return (int)(AuxValue / KSEC_PER_HR);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -98,10 +94,11 @@ int gTimeSpan::getHours() const{
 //  This method returns the integer Minutes number stored in the gTimeSpan object.
 //	This is a value between 0 and 59 minutes.
 
-int gTimeSpan::getMinutes() const{
-        double AuxValue = m_timeSpan - (getDays()  * KSEC_PER_DAY)
-                                     - (getHours() * KSEC_PER_HR);
-        return (int)( AuxValue / KSEC_PER_MIN);
+int gTimeSpan::getMinutes() const
+{
+	double AuxValue = m_timeSpan - (getDays()  * KSEC_PER_DAY)
+	                  - (getHours() * KSEC_PER_HR);
+	return (int)(AuxValue / KSEC_PER_MIN);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -109,11 +106,12 @@ int gTimeSpan::getMinutes() const{
 //  This method returns the integer seconds number stored in the gTimeSpan object.
 //	This is a value between 0 and 59 seconds
 
-int gTimeSpan::getSeconds() const{
-    double AuxValue = m_timeSpan - (getDays()  * KSEC_PER_DAY)
-                                 - (getHours() * KSEC_PER_HR)
-                                 - (getMinutes() * KSEC_PER_MIN);
-    return (int)AuxValue;
+int gTimeSpan::getSeconds() const
+{
+	double AuxValue = m_timeSpan - (getDays()  * KSEC_PER_DAY)
+	                  - (getHours() * KSEC_PER_HR)
+	                  - (getMinutes() * KSEC_PER_MIN);
+	return (int)AuxValue;
 }
 
 
@@ -121,10 +119,11 @@ int gTimeSpan::getSeconds() const{
 ////////////////////////////////////////////////////////////////////////////
 //## Operation: getDblSeconds()
 //	This metrod returns the total seconds number stored in the gTimeSpan
-//	object. 
+//	object.
 
-double gTimeSpan::getDblSeconds() const{
-        return m_timeSpan;
+double gTimeSpan::getDblSeconds() const
+{
+	return m_timeSpan;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -132,8 +131,9 @@ double gTimeSpan::getDblSeconds() const{
 //	This metrod returns the total seconds number stored in the gTimeSpan
 //	object.
 
-double gTimeSpan::getDblDays() const{
-        return m_timeSpan/KSEC_PER_DAY;
+double gTimeSpan::getDblDays() const
+{
+	return m_timeSpan/KSEC_PER_DAY;
 }
 
 
@@ -147,60 +147,70 @@ double gTimeSpan::getDblDays() const{
 
 
 
-gTimeSpan gTimeSpan::operator-(gTimeSpan ai_timeSpan) const{
+gTimeSpan gTimeSpan::operator-(gTimeSpan ai_timeSpan) const
+{
 	return (gTimeSpan(m_timeSpan - ai_timeSpan.getDblSeconds()));
 
 }
-gTimeSpan gTimeSpan::operator+(gTimeSpan ai_timeSpan) const{
+gTimeSpan gTimeSpan::operator+(gTimeSpan ai_timeSpan) const
+{
 	return (gTimeSpan(m_timeSpan + ai_timeSpan.getDblSeconds()));
 
 }
-const gTimeSpan& gTimeSpan::operator+=(gTimeSpan ai_timeSpan){
+const gTimeSpan& gTimeSpan::operator+=(gTimeSpan ai_timeSpan)
+{
 	m_timeSpan += ai_timeSpan.getDblSeconds();
 	return (*this);
-        
+
 }
-const gTimeSpan& gTimeSpan::operator-=(gTimeSpan ai_timeSpan){
+const gTimeSpan& gTimeSpan::operator-=(gTimeSpan ai_timeSpan)
+{
 	m_timeSpan -= ai_timeSpan.getDblSeconds();
 	return (*this);
 
 }
-bool gTimeSpan::operator==(gTimeSpan ai_timeSpan) const{
+bool gTimeSpan::operator==(gTimeSpan ai_timeSpan) const
+{
 
-	if( m_timeSpan == ai_timeSpan.getDblSeconds())
-		return true;
-	else
-		return false;
-
-}
-bool gTimeSpan::operator!=(gTimeSpan ai_timeSpan) const{
-	if( m_timeSpan != ai_timeSpan.getDblSeconds())
+	if(m_timeSpan == ai_timeSpan.getDblSeconds())
 		return true;
 	else
 		return false;
 
 }
-bool gTimeSpan::operator<(gTimeSpan ai_timeSpan) const{
-	if( m_timeSpan < ai_timeSpan.getDblSeconds())
+bool gTimeSpan::operator!=(gTimeSpan ai_timeSpan) const
+{
+	if(m_timeSpan != ai_timeSpan.getDblSeconds())
 		return true;
 	else
 		return false;
 
 }
-bool gTimeSpan::operator>(gTimeSpan ai_timeSpan) const{
-	if( m_timeSpan > ai_timeSpan.getDblSeconds())
+bool gTimeSpan::operator<(gTimeSpan ai_timeSpan) const
+{
+	if(m_timeSpan < ai_timeSpan.getDblSeconds())
+		return true;
+	else
+		return false;
+
+}
+bool gTimeSpan::operator>(gTimeSpan ai_timeSpan) const
+{
+	if(m_timeSpan > ai_timeSpan.getDblSeconds())
 		return true;
 	else
 		return false;
 }
-bool gTimeSpan::operator<=(gTimeSpan ai_timeSpan) const{
-	if( m_timeSpan <= ai_timeSpan.getDblSeconds())
+bool gTimeSpan::operator<=(gTimeSpan ai_timeSpan) const
+{
+	if(m_timeSpan <= ai_timeSpan.getDblSeconds())
 		return true;
 	else
 		return false;
 }
-bool gTimeSpan::operator>=(gTimeSpan ai_timeSpan) const{
-	if( m_timeSpan >= ai_timeSpan.getDblSeconds())
+bool gTimeSpan::operator>=(gTimeSpan ai_timeSpan) const
+{
+	if(m_timeSpan >= ai_timeSpan.getDblSeconds())
 		return true;
 	else
 		return false;
