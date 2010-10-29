@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2009 Matthew Gates
+ * Copyright (C) 2010 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,6 +74,13 @@ of instances of a group of Stellarium's core classes.
 - Additional core classes have self-named objects available from the scripting engine:
   - StelSkyDrawer
   - StelSkyLayerMgr
+
+@section built_in_script_functions Built in Script Functions
+
+In addition to the public slots of the classes described above, some functionality
+is provided by functions implemented within the scripting language.  These are
+made available from the core object, and are similar in operation to the
+public slots of StelMainScriptAPI.  See @ref builtinScriptFunctions for details.
 
 @section script_console Script Console
 
