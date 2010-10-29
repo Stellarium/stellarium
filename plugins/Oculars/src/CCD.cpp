@@ -18,10 +18,12 @@
  */
 
 #include "CCD.hpp"
-#include "Ocular.hpp"
+#include "Telescope.hpp"
 
 #include <QDebug>
 #include <QSettings>
+
+#include <math.h>
 
 CCD::CCD()
 {
@@ -137,15 +139,15 @@ void CCD::setPixelHeight(float height)
 	m_pixelHeight = height;
 }
 
-float CCD::getActualFOVx(Ocular *ocular) const
+float CCD::getActualFOVx(Telescope *telescope) const
 {
-	float FOVx = (m_chipWidth * 206.265) / ocular->effectiveFocalLength();
+	float FOVx = 6875.5 * atan(this->chipWidth() / telescope->focalLength() / 2);
 	return FOVx;
 }
 
-float CCD::getActualFOVy(Ocular *ocular) const
+float CCD::getActualFOVy(Telescope *telescope) const
 {
-	float FOVy = (m_chipHeight * 206.265) / ocular->effectiveFocalLength();
+	float FOVy = 6875.5 * atan(this->chipWidth() / telescope->focalLength() / 2);
 	return FOVy;
 }
 
