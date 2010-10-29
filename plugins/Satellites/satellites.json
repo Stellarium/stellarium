@@ -1,83 +1,117 @@
 {
 	"creator": "Satellites plugin (update)",
-        "orbitColor": [0, 0.5, 0.5],
 	"hintColor": [0, 0.5, 0.5],
+	"orbitColor": [0, 0.5, 0.5],
 	"satellites": 
 	{
 		"AAU CUBESAT": 
 		{
 			"comms": [],
-			"tle1": "1 27846U 03031G   10010.54313843  .00000017  00000-0  28199-4 0  6580",
-			"tle2": "2 27846  98.7035  22.6880 0008761 245.5711 114.4553 14.21010978338790",
+			"groups": [],
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
-			"visible": false
-		},
-		"PHASE 3B (AO-10)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 14129U 83058B   09080.32998673 -.00000327  00000-0  10000-3 0  6360",
-			"tle2": "2 14129  25.9652 165.8235 5982871 207.6161 100.7646  2.05871463165845",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"PACSAT (AO-16)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 20439U 90005D   09080.85236265  .00000014  00000-0  20602-4 0  5632",
-			"tle2": "2 20439  98.2700  53.2702 0011918  71.1776 289.0705 14.31818920   653",
-			"orbit_visible": false,
+			"tle1": "1 27846U 03031G   10300.91786855  .00000087  00000-0  60137-4 0  8600",
+			"tle2": "2 27846  98.7017 308.8055 0009783 122.9220 237.2907 14.21060728380030",
 			"visible": false
 		},
 		"ARSENE (AO-24)": 
 		{
-			"description": "Amateur satellite",
+			"comms": [],
 			"groups": ["amateur", "non-operational"],
-			"tle1": "1 22654U 93031B   09078.43825483 -.00000132  00000-0  10000-3 0  2462",
-			"tle2": "2 22654   5.1398 339.1447 2877460 155.4874 221.3758  1.42205192 77846",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
+			"tle1": "1 22654U 93031B   10296.29188703 -.00000103  00000-0  10000-3 0  4131",
+			"tle2": "2 22654   4.6448 327.4414 2846429 190.3502 161.8369  1.42205681 86138",
 			"visible": false
 		},
-		"EYESAT-1 (AO-27)": 
+		"CANX-1": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 27847U 03031H   10301.49689319  .00000073  00000-0  53616-4 0  8814",
+			"tle2": "2 27847  98.7006 309.3586 0009858 121.5158 238.6993 14.21038584380060",
+			"visible": false
+		},
+		"CUBESAT XI-IV (CO-57)": 
 		{
 			"comms": [
-			{
-				"description": "uplink",
-				"frequency": 145.85
-			}, 
 			{
 				"description": "downlink",
-				"frequency": 145.2
+				"frequency": 437.49,
+				"modulation": "AFSK 1200 bps"
 			}],
-			"description": "Amateur satellite",
 			"groups": ["amateur"],
-			"tle1": "1 22825U 93061C   09080.84794649  .00000017  00000-0  23242-4 0  2051",
-			"tle2": "2 22825  98.4253  37.0634 0008629 156.2036 203.9551 14.29261103807439",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
+			"tle1": "1 27848U 03031J   10300.75686843  .00000118  00000-0  75342-4 0  9138",
+			"tle2": "2 27848  98.7155 306.9596 0009645 148.6384 211.5372 14.20530353379862",
 			"visible": true
 		},
-		"PHASE 3D (AO-40)": 
+		"CUBESAT XI-V (CO-58)": 
 		{
 			"comms": [
 			{
-				"description": "Beacon",
-				"frequency": 145.898
+				"description": "downlink",
+				"frequency": 437.345,
+				"modulation": "AFSK 1200 bps"
 			}],
-			"description": "AMSAT-OSCAR 40 (Phase 3D)",
 			"groups": ["amateur"],
-			"tle1": "1 26609U 00072B   09080.26545799 -.00000301  00000-0  10000-3 0  2044",
-			"tle2": "2 26609   8.9892  27.3596 7956558 186.7198 145.1448  1.25584591 38523",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
+			"tle1": "1 28895U 05043F   10301.90384514  .00000118  00000-0  33891-4 0  7168",
+			"tle2": "2 28895  97.9923 181.8026 0017166 223.3057 136.6785 14.59954295266498",
 			"visible": true
 		},
-		"OSCAR 5 (AO-5)": 
+		"CUTE-1 (CO-55)": 
 		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 04321U 70008B   09080.96250683 -.00000031  00000-0  10000-3 0  1420",
-			"tle2": "2 04321 102.1329  90.4257 0027646 145.0891 215.1997 12.52156131789847",
+			"comms": [
+			{
+				"description": "downlink",
+				"frequency": 437.4,
+				"modulation": "AFSK 1200 bps"
+			}],
+			"groups": ["amateur"],
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
+			"tle1": "1 27844U 03031E   10301.55293538  .00000112  00000-0  72257-4 0  9662",
+			"tle2": "2 27844  98.7101 308.6233 0009948 142.0283 218.1605 14.20740927380020",
+			"visible": true
+		},
+		"DELFI-C3 (DO-64)": 
+		{
+			"comms": [
+			{
+				"description": "downlink",
+				"frequency": 145.87,
+				"modulation": "BPSK 1200 bps"
+			}],
+			"groups": ["amateur"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 32789U 08021G   10301.97603882  .00001122  00000-0  14653-3 0  8232",
+			"tle2": "2 32789  97.8873   5.5871 0015021 205.9532 154.0924 14.82393546135328",
+			"visible": true
+		},
+		"DOVE (DO-17)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 20440U 90005E   10301.41284784  .00000048  00000-0  33180-4 0  7479",
+			"tle2": "2 20440  98.3259 257.6780 0011703 121.3158 238.9186 14.32187224 84605",
+			"visible": false
+		},
+		"DTUSAT": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 27842U 03031C   10302.04462644  .00000081  00000-0  57327-4 0  9601",
+			"tle2": "2 27842  98.7019 309.9250 0009996 120.0473 240.1690 14.21063113380192",
 			"visible": false
 		},
 		"ECHO (AO-51)": 
@@ -93,20 +127,1504 @@
 				"frequency": 435.15,
 				"modulation": "FM/Voice"
 			}],
-			"description": "Amateur satellite",
 			"groups": ["amateur"],
-			"tle1": "1 28375U 04025K   09080.66057599  .00000001  00000-0  12813-4 0  3455",
-			"tle2": "2 28375  98.0561  95.3557 0085140  31.1071 329.5121 14.40636066248352",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
+			"tle1": "1 28375U 04025K   10301.07913539  .00000051  00000-0  27765-4 0  8107",
+			"tle2": "2 28375  98.0736 287.0941 0085114  54.0307 306.8742 14.40705651332640",
 			"visible": true
+		},
+		"ENVISAT": 
+		{
+			"comms": [],
+			"groups": ["scientific"],
+			"hintColor": [0.400000005960464, 0.800000011920929, 1],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": true,
+			"tle1": "1 27386U 02009A   10302.30705345  .00000433  00000-0  15968-3 0  5695",
+			"tle2": "2 27386  98.5363   7.4906 0001057 108.6868 251.4502 14.37440949452946",
+			"visible": true
+		},
+		"EYESAT-1 (AO-27)": 
+		{
+			"comms": [
+			{
+				"description": "uplink",
+				"frequency": 145.85
+			}, 
+			{
+				"description": "downlink",
+				"frequency": 145.2
+			}],
+			"groups": ["amateur"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 22825U 93061C   10301.86090994  .00000033  00000-0  29665-4 0  6612",
+			"tle2": "2 22825  98.5013 246.4466 0007545 234.1411 125.9055 14.29313405891148",
+			"visible": true
+		},
+		"GENESIS 1": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 29252U 06029A   10301.24236459  .00000810  00000-0  71150-4 0  1806",
+			"tle2": "2 29252  64.5138 201.6869 0033064 326.9862  32.9190 15.03780124235794",
+			"visible": true
+		},
+		"GENESIS 2": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 31789U 07028A   10301.30602734  .00000668  00000-0  61695-4 0  9244",
+			"tle2": "2 31789  64.5057 233.2725 0015456 185.0663 175.0302 15.03452344183002",
+			"visible": true
+		},
+		"GPS BIIA-10 (PRN 32)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 20959U 90103A   10301.17033650  .00000001  00000-0  10000-3 0  8981",
+			"tle2": "2 20959  54.8508 262.9106 0128049 307.5619  51.2764  2.00571453145897",
+			"visible": false
+		},
+		"GPS BIIA-11 (PRN 24)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 21552U 91047A   10301.06970066  .00000018  00000-0  10000-3 0  8874",
+			"tle2": "2 21552  54.3571 200.9750 0057951 338.3118  21.5157  2.00436716141476",
+			"visible": false
+		},
+		"GPS BIIA-14 (PRN 26)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 22014U 92039A   10299.97348574 -.00000038  00000-0  10000-3 0  7848",
+			"tle2": "2 22014  56.6867 322.0414 0196227  63.7900 298.2637  2.00568038127602",
+			"visible": false
+		},
+		"GPS BIIA-15 (PRN 27)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 22108U 92058A   10301.07012426 -.00000061  00000-0  10000-3 0  6825",
+			"tle2": "2 22108  56.1265  15.1080 0219146 282.0449  75.5558  2.00576285132801",
+			"visible": false
+		},
+		"GPS BIIA-21 (PRN 09)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 22700U 93042A   10300.60063047 -.00000060  00000-0  10000-3 0   227",
+			"tle2": "2 22700  56.2590  16.5804 0168032  88.8279 273.1456  2.00561025126958",
+			"visible": false
+		},
+		"GPS BIIA-23 (PRN 04)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 22877U 93068A   10300.74029013  .00000022  00000-0  10000-3 0  3691",
+			"tle2": "2 22877  53.7782 198.0703 0092885  37.1146 323.5923  2.00552150124602",
+			"visible": false
+		},
+		"GPS BIIA-24 (PRN 06)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 23027U 94016A   10301.43787208  .00000072  00000-0  10000-3 0  3399",
+			"tle2": "2 23027  53.5644 134.9878 0063098 304.7648  54.7027  2.00565234121928",
+			"visible": false
+		},
+		"GPS BIIA-25 (PRN 03)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 23833U 96019A   10300.45786614  .00000069  00000-0  10000-3 0  5332",
+			"tle2": "2 23833  53.1598 130.9064 0142163  56.9894 304.4139  2.00570127106884",
+			"visible": false
+		},
+		"GPS BIIA-26 (PRN 10)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 23953U 96041A   10300.83095470  .00000001  00000-0  10000-3 0   280",
+			"tle2": "2 23953  54.5206 259.2542 0093347  37.3286 323.3054  2.00580557104681",
+			"visible": false
+		},
+		"GPS BIIA-27 (PRN 30)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24320U 96056A   10300.76073036  .00000024  00000-0  00000+0 0  7570",
+			"tle2": "2 24320  54.8841  75.4974 0129153  89.1011 272.3637  2.00368467103347",
+			"visible": false
+		},
+		"GPS BIIA-28 (PRN 08)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25030U 97067A   10300.46082717 -.00000055  00000-0  10000-3 0  4280",
+			"tle2": "2 25030  56.9800  22.3810 0114857 181.8340 178.1709  2.00565936 95101",
+			"visible": false
+		},
+		"GPS BIIR-02 (PRN 13)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24876U 97035A   10300.82746512 -.00000037  00000-0  10000-3 0  5014",
+			"tle2": "2 24876  56.8190 322.2355 0040820 104.7722 255.7262  2.00561646 97215",
+			"visible": false
+		},
+		"GPS BIIR-03 (PRN 11)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25933U 99055A   10301.10513055  .00000027  00000-0  10000-3 0  9482",
+			"tle2": "2 25933  50.8872 184.0730 0111220  49.1827 311.8654  2.00586073 81036",
+			"visible": false
+		},
+		"GPS BIIR-04 (PRN 20)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 26360U 00025A   10300.69570086  .00000000  00000-0  10000-3 0   398",
+			"tle2": "2 26360  53.6003 256.0337 0040795  71.7443 288.6921  2.00547813 76721",
+			"visible": false
+		},
+		"GPS BIIR-05 (PRN 28)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 26407U 00040A   10301.53469852  .00000000  00000-0  10000-3 0  9882",
+			"tle2": "2 26407  55.6937  80.1082 0165329 248.9835 109.2466  2.00562548 75417",
+			"visible": false
+		},
+		"GPS BIIR-06 (PRN 14)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 26605U 00071A   10301.13987066 -.00000036  00000-0  10000-3 0  9985",
+			"tle2": "2 26605  56.4295 320.9194 0059068 240.4602 118.9895  2.00574824 73009",
+			"visible": false
+		},
+		"GPS BIIR-07 (PRN 18)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 26690U 01004A   10301.00551877 -.00000001  00000-0  10000-3 0  8777",
+			"tle2": "2 26690  53.6003 259.1082 0120363 229.8105 129.1216  2.00556043 71411",
+			"visible": false
+		},
+		"GPS BIIR-08 (PRN 16)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 27663U 03005A   10301.36090832  .00000036  00000-0  10000-3 0  2860",
+			"tle2": "2 27663  55.7967  79.6869 0058044 349.2639  10.6053  2.00563683 56770",
+			"visible": false
+		},
+		"GPS BIIR-09 (PRN 21)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 27704U 03010A   10299.92552095  .00000026  00000-0  10000-3 0  1671",
+			"tle2": "2 27704  53.4076 198.6608 0172053 221.0136 137.7605  2.00568532 55536",
+			"visible": false
+		},
+		"GPS BIIR-10 (PRN 22)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 28129U 03058A   10301.04872722 -.00000002  00000-0  10000-3 0  7642",
+			"tle2": "2 28129  53.4689 259.3656 0057247 250.7828 108.5881  2.00557705 50267",
+			"visible": false
+		},
+		"GPS BIIR-11 (PRN 19)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 28190U 04009A   10301.50046097  .00000072  00000-0  10000-3 0  7406",
+			"tle2": "2 28190  54.9000 142.5675 0066538 355.8704   4.1637  2.00574577 48448",
+			"visible": false
+		},
+		"GPS BIIR-12 (PRN 23)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 28361U 04023A   10301.28559030 -.00000036  00000-0  10000-3 0  5604",
+			"tle2": "2 28361  55.3810 318.5203 0072448 180.5016 179.5309  2.00568475 46520",
+			"visible": false
+		},
+		"GPS BIIR-13 (PRN 02)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 28474U 04045A   10300.77942241  .00000022  00000-0  10000-3 0  4407",
+			"tle2": "2 28474  53.8254 197.0502 0092613 180.6485 179.4129  2.00565881 43871",
+			"visible": false
+		},
+		"GPS BIIRM-1 (PRN 17)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 28874U 05038A   10300.63167212  .00000072  00000-0  10000-3 0  7178",
+			"tle2": "2 28874  55.0369 139.4663 0058105 217.5165 142.1443  2.00563988 37298",
+			"visible": false
+		},
+		"GPS BIIRM-2 (PRN 31)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 29486U 06042A   10300.25051077 -.00000059  00000-0  10000-3 0   318",
+			"tle2": "2 29486  56.0510  18.3338 0076580 298.9210  60.3604  2.00551737 29988",
+			"visible": false
+		},
+		"GPS BIIRM-3 (PRN 12)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 29601U 06052A   10300.68949439  .00000031  00000-0  10000-3 0   952",
+			"tle2": "2 29601  55.7140  78.7061 0033602 337.9762  21.8540  2.00573430 28905",
+			"visible": false
+		},
+		"GPS BIIRM-4 (PRN 15)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 32260U 07047A   10301.00379408 -.00000037  00000-0  00000+0 0  8086",
+			"tle2": "2 32260  54.5620 316.9717 0026605 346.0435  13.9162  2.00545550 22300",
+			"visible": false
+		},
+		"GPS BIIRM-5 (PRN 29)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 32384U 07062A   10300.82009883  .00000072  00000-0  10000-3 0  8359",
+			"tle2": "2 32384  55.0523 139.9388 0024871 291.4893  68.2676  2.00565959 21022",
+			"visible": false
+		},
+		"GPS BIIRM-6 (PRN 07)": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 32711U 08012A   10300.91601166 -.00000060  00000-0  10000-3 0  6672",
+			"tle2": "2 32711  55.7503  18.2909 0041268 182.2061 177.8254  2.00562157 19238",
+			"visible": false
+		},
+		"HAMSAT (VO-52)": 
+		{
+			"comms": [
+			{
+				"description": "Beacon",
+				"frequency": 145.86,
+				"modulation": "CW"
+			}],
+			"groups": ["amateur"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 28650U 05017B   10301.70204233  .00000454  00000-0  63624-4 0  6322",
+			"tle2": "2 28650  97.6762 349.8118 0026562 197.3803 162.6532 14.81837321296466",
+			"visible": true
+		},
+		"HST": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": true,
+			"tle1": "1 20580U 90037B   10300.09759300  .00000718  00000-0  41998-4 0  6685",
+			"tle2": "2 20580  28.4686  98.6536 0003467 162.6448 197.4276 15.01074509924596",
+			"visible": true
+		},
+		"IRIDIUM 10": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24839U 97030D   10301.46267144  .00000007  00000-0 -45497-5 0  2584",
+			"tle2": "2 24839  86.3911 283.1128 0002489  80.1516 279.9963 14.34216097699562",
+			"visible": false
+		},
+		"IRIDIUM 11": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25578U 98074B   10301.24589116  .00000272  00000-0  58203-4 0  2734",
+			"tle2": "2 25578  86.5181 188.7611 0002357  77.8060 282.3396 14.54951368629966",
+			"visible": false
+		},
+		"IRIDIUM 12": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24837U 97030B   10301.40558675 -.00000010  00000-0 -10565-4 0  2579",
+			"tle2": "2 24837  86.3903 283.1426 0002512  84.4387 275.7108 14.34216340699546",
+			"visible": false
+		},
+		"IRIDIUM 13": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24840U 97030E   10301.48170248  .00000002  00000-0 -63744-5 0  2148",
+			"tle2": "2 24840  86.3913 283.1911 0002538  78.9591 281.1904 14.34216190699552",
+			"visible": false
+		},
+		"IRIDIUM 14": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25777U 99032A   10301.51723412  .00000154  00000-0  30756-4 0  2427",
+			"tle2": "2 25777  86.5153 156.9718 0002312  77.7386 282.4084 14.54947031604388",
+			"visible": false
+		},
+		"IRIDIUM 15": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24869U 97034A   10301.47242563 -.00000024  00000-0 -15465-4 0  2873",
+			"tle2": "2 24869  86.3926 314.8201 0002445  86.9290 273.2200 14.34219000696521",
+			"visible": false
+		},
+		"IRIDIUM 16": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24841U 97030F   10301.49343822  .00000157  00000-0  47706-4 0  2532",
+			"tle2": "2 24841  86.3990 283.8057 0001109  29.5848 330.5421 14.35369815699755",
+			"visible": false
+		},
+		"IRIDIUM 17": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24870U 97034B   10301.40154518  .00000156  00000-0  48296-4 0  2490",
+			"tle2": "2 24870  86.3935 314.6658 0002199  76.6525 283.4917 14.34512721696546",
+			"visible": false
+		},
+		"IRIDIUM 18": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24872U 97034D   10301.50413725  .00000004  00000-0 -56993-5 0  2443",
+			"tle2": "2 24872  86.3931 314.9668 0002380  81.5831 278.5648 14.34219073696523",
+			"visible": false
+		},
+		"IRIDIUM 19": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24965U 97056A   10301.50366897  .00000088  00000-0  24442-4 0  2104",
+			"tle2": "2 24965  86.3935 251.5975 0002482  84.1741 275.9721 14.34218772685165",
+			"visible": false
+		},
+		"IRIDIUM 2": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25527U 98066A   10301.18691019  .00001380  00000-0  11268-3 0  6125",
+			"tle2": "2 25527  85.5646 356.9509 0008409 198.8268 161.2649 14.98527668652791",
+			"visible": false
+		},
+		"IRIDIUM 20": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25577U 98074A   10301.40802733 -.00001014  00000-0 -36937-3 0   503",
+			"tle2": "2 25577  86.3993 188.4413 0002307  83.6228 276.5230 14.34213135621030",
+			"visible": false
+		},
+		"IRIDIUM 21": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25778U 99032B   10301.36016290  .00000109  00000-0  32005-4 0  1215",
+			"tle2": "2 25778  86.3966 157.0456 0004285  90.1310 270.0372 14.34223335600704",
+			"visible": false
+		},
+		"IRIDIUM 22": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24907U 97043E   10301.36362755  .00000137  00000-0  41923-4 0  2275",
+			"tle2": "2 24907  86.4005 188.8880 0002341  81.1379 279.0079 14.34216367690429",
+			"visible": false
+		},
+		"IRIDIUM 23": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24906U 97043D   10301.43972938  .00000175  00000-0  55359-4 0  2597",
+			"tle2": "2 24906  86.3999 188.3968 0002284  78.4691 281.6760 14.34218288690434",
+			"visible": false
+		},
+		"IRIDIUM 24": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25105U 97082B   10301.18083982  .00000179  00000-0  52087-4 0  7624",
+			"tle2": "2 25105  86.3964 177.7006 0013578  41.4370 318.7856 14.38367245674235",
+			"visible": false
+		},
+		"IRIDIUM 25": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24904U 97043B   10301.31288895 -.00000306  00000-0 -11639-3 0  2415",
+			"tle2": "2 24904  86.3986 188.5237 0002349  81.6978 278.4538 14.34214579690408",
+			"visible": false
+		},
+		"IRIDIUM 26": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24903U 97043A   10301.28117716 -.00000455  00000-0 -16970-3 0  3502",
+			"tle2": "2 24903  86.3991 188.5961 0002453  79.9332 280.2207 14.34214020690435",
+			"visible": false
+		},
+		"IRIDIUM 28": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24948U 97051E   10301.33479639  .00000180  00000-0  57176-4 0   864",
+			"tle2": "2 24948  86.3985 220.2483 0001878  79.3904 280.7492 14.34341723686986",
+			"visible": false
+		},
+		"IRIDIUM 29": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24944U 97051A   10301.30362042 -.00000646  00000-0 -23779-3 0  1935",
+			"tle2": "2 24944  86.3978 220.1102 0002370  78.2191 281.9265 14.34214060686989",
+			"visible": false
+		},
+		"IRIDIUM 3": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25431U 98048A   10301.28751827 -.00001140  00000-0 -41424-3 0  1335",
+			"tle2": "2 25431  86.3996 188.7028 0002503  69.5365 290.6101 14.34213818638197",
+			"visible": false
+		},
+		"IRIDIUM 30": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24949U 97051F   10301.31630586 -.00000935  00000-0 -34102-3 0  2521",
+			"tle2": "2 24949  86.3982 220.1828 0002394  80.5741 279.5722 14.34212081686989",
+			"visible": false
+		},
+		"IRIDIUM 31": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24950U 97051G   10301.44950136 -.00001083  00000-0 -39397-3 0  2226",
+			"tle2": "2 24950  86.3981 220.1240 0002426  81.3268 278.8198 14.34210867687011",
+			"visible": false
+		},
+		"IRIDIUM 32": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24945U 97051B   10301.39241707 -.00000905  00000-0 -33044-3 0  2114",
+			"tle2": "2 24945  86.3976 220.0911 0002352  78.3319 281.8123 14.34212503687015",
+			"visible": false
+		},
+		"IRIDIUM 33": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24946U 97051C   10301.30780396  .00000103  00000-0  30874-4 0  3307",
+			"tle2": "2 24946  86.3895 220.2555 0006786 199.2047 160.8908 14.32545186686906",
+			"visible": false
+		},
+		"IRIDIUM 34": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24969U 97056E   10301.37047500  .00000133  00000-0  40499-4 0  2044",
+			"tle2": "2 24969  86.3933 251.7300 0002471  80.8760 279.2726 14.34219098685123",
+			"visible": false
+		},
+		"IRIDIUM 35": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24966U 97056B   10301.51635596 -.00000385  00000-0 -14474-3 0  2533",
+			"tle2": "2 24966  86.3937 251.6122 0002532  80.6792 279.4757 14.34211428685143",
+			"visible": false
+		},
+		"IRIDIUM 36": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24967U 97056C   10301.39302625  .00000131  00000-0  39626-4 0  1997",
+			"tle2": "2 24967  86.3966 251.7390 0002309  86.5090 273.6383 14.34359852685271",
+			"visible": false
+		},
+		"IRIDIUM 37": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24968U 97056D   10301.35144457  .00000056  00000-0  12992-4 0  2210",
+			"tle2": "2 24968  86.3939 251.7957 0002427  84.6546 275.4959 14.34213228685126",
+			"visible": false
+		},
+		"IRIDIUM 38": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25043U 97069E   10301.48572705  .00000131  00000-0  39291-4 0  2310",
+			"tle2": "2 25043  86.3930 314.0819 0001612  70.0722 290.0660 14.34770701679053",
+			"visible": false
+		},
+		"IRIDIUM 39": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25042U 97069D   10301.38362828  .00000037  00000-0  61418-5 0  2065",
+			"tle2": "2 25042  86.3939 315.1128 0002183  83.4944 276.6508 14.34218237678909",
+			"visible": false
+		},
+		"IRIDIUM 4": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24796U 97020E   10301.48464559  .00000171  00000-0  53914-4 0  2512",
+			"tle2": "2 24796  86.3930 251.5109 0002496  78.1753 281.9709 14.34218964705824",
+			"visible": false
+		},
+		"IRIDIUM 40": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25041U 97069C   10301.51682757  .00000049  00000-0  10364-4 0  2285",
+			"tle2": "2 25041  86.3934 314.8434 0002403  85.3762 274.7711 14.34219119678942",
+			"visible": false
+		},
+		"IRIDIUM 41": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25040U 97069B   10301.49145091  .00000021  00000-0  37710-6 0  2024",
+			"tle2": "2 25040  86.3928 314.8920 0002308  74.9331 285.2131 14.34219357678929",
+			"visible": false
+		},
+		"IRIDIUM 42": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25077U 97077A   10301.51048518  .00000012  00000-0 -27886-5 0  2238",
+			"tle2": "2 25077  86.3933 314.9318 0002374  85.5992 274.5489 14.34219003674786",
+			"visible": false
+		},
+		"IRIDIUM 43": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25039U 97069A   10301.49779840  .00000009  00000-0 -39060-5 0  2135",
+			"tle2": "2 25039  86.3934 314.9917 0002408  81.0220 279.1261 14.34219096678924",
+			"visible": false
+		},
+		"IRIDIUM 44": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25078U 97077B   10301.43391839  .00000158  00000-0  46896-4 0  7053",
+			"tle2": "2 25078  86.3948 309.6718 0001443  21.3821 338.7429 14.36659332675461",
+			"visible": false
+		},
+		"IRIDIUM 45": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25104U 97082A   10301.24946346 -.00001076  00000-0 -39134-3 0  1554",
+			"tle2": "2 25104  86.3988 188.5603 0002315  82.0799 278.0695 14.34212715672948",
+			"visible": false
+		},
+		"IRIDIUM 46": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24905U 97043C   10301.25580518 -.00000150  00000-0 -60680-4 0  2649",
+			"tle2": "2 24905  86.4001 188.8750 0002431  82.1446 278.0076 14.34215312690408",
+			"visible": false
+		},
+		"IRIDIUM 47": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25106U 97082C   10301.54122237 -.00000281  00000-0 -10746-3 0  1504",
+			"tle2": "2 25106  86.4001 188.3780 0002427  77.6559 282.4918 14.34214589672981",
+			"visible": false
+		},
+		"IRIDIUM 49": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25108U 97082E   10301.27483287 -.00001099  00000-0 -39961-3 0  1699",
+			"tle2": "2 25108  86.3989 188.5250 0002347  83.1310 277.0152 14.34214115672951",
+			"visible": false
+		},
+		"IRIDIUM 5": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24795U 97020D   10301.38957589  .00000124  00000-0  37398-4 0  3955",
+			"tle2": "2 24795  86.3931 251.9381 0001043  80.5962 279.5368 14.34217681705870",
+			"visible": false
+		},
+		"IRIDIUM 50": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25172U 98010D   10301.50072644  .00000034  00000-0  52070-5 0  2010",
+			"tle2": "2 25172  86.3915 283.2603 0002516  84.0356 276.1131 14.34216379664372",
+			"visible": false
+		},
+		"IRIDIUM 51": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25262U 98018A   10301.38405275  .00000217  00000-0  58884-4 0  2981",
+			"tle2": "2 25262  86.4450 251.8827 0002519  77.4188 282.7311 14.42949049663219",
+			"visible": false
+		},
+		"IRIDIUM 52": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25169U 98010A   10301.51340845 -.00000026  00000-0 -16458-4 0  9512",
+			"tle2": "2 25169  86.3919 283.2800 0002428  86.1036 274.0443 14.34216393664392",
+			"visible": false
+		},
+		"IRIDIUM 53": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25173U 98010E   10301.38021403 -.00000015  00000-0 -12587-4 0  1854",
+			"tle2": "2 25173  86.3913 283.3189 0002495  82.8733 277.2753 14.34216408664366",
+			"visible": false
+		},
+		"IRIDIUM 54": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25171U 98010C   10301.39924441 -.00000011  00000-0 -11061-4 0  1769",
+			"tle2": "2 25171  86.3919 283.3345 0002424  83.5338 276.6130 14.34216421664520",
+			"visible": false
+		},
+		"IRIDIUM 55": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25272U 98019A   10301.29093539 -.00000972  00000-0 -35442-3 0  1320",
+			"tle2": "2 25272  86.3977 220.0601 0002338  82.5159 277.6284 14.34211332658646",
+			"visible": false
+		},
+		"IRIDIUM 56": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25170U 98010B   10301.43729637 -.00000028  00000-0 -17004-4 0  5746",
+			"tle2": "2 25170  86.3908 283.3687 0002487  85.4859 274.6628 14.34216414664368",
+			"visible": false
+		},
+		"IRIDIUM 57": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25273U 98019B   10301.33533499 -.00001235  00000-0 -44805-3 0  1775",
+			"tle2": "2 25273  86.3978 220.2411 0002411  79.3416 280.8052 14.34209304658657",
+			"visible": false
+		},
+		"IRIDIUM 58": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25274U 98019C   10301.34167667 -.00001005  00000-0 -36595-3 0  9834",
+			"tle2": "2 25274  86.3983 220.3638 0002407  77.7622 282.3841 14.34211663658656",
+			"visible": false
+		},
+		"IRIDIUM 59": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25275U 98019D   10301.48755396 -.00000215  00000-0 -83874-4 0  8195",
+			"tle2": "2 25275  86.3977 220.2862 0002621  62.6138 297.5324 14.34212109658673",
+			"visible": false
+		},
+		"IRIDIUM 6": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24794U 97020C   10301.32607453  .00000055  00000-0  12715-4 0   338",
+			"tle2": "2 24794  86.3937 251.8254 0002324  72.0200 288.1255 14.34218653705788",
+			"visible": false
+		},
+		"IRIDIUM 60": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25276U 98019E   10301.28459325 -.00000994  00000-0 -36204-3 0  2144",
+			"tle2": "2 25276  86.3968 220.0866 0002365  82.9570 277.1859 14.34211540658648",
+			"visible": false
+		},
+		"IRIDIUM 61": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25263U 98018B   10301.35780410  .00000113  00000-0  33114-4 0  1428",
+			"tle2": "2 25263  86.3928 251.7666 0002448  80.9880 279.1602 14.34218616659452",
+			"visible": false
+		},
+		"IRIDIUM 62": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25285U 98021A   10301.17622834  .00000069  00000-0  17456-4 0  1792",
+			"tle2": "2 25285  86.3970 157.0768 0002305  82.5068 277.6381 14.34223177657589",
+			"visible": false
+		},
+		"IRIDIUM 63": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25286U 98021B   10301.53141413  .00000143  00000-0  44086-4 0  1918",
+			"tle2": "2 25286  86.3968 157.0252 0002277  82.8855 277.2605 14.34223540657635",
+			"visible": false
+		},
+		"IRIDIUM 64": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25287U 98021C   10301.53775312  .00000146  00000-0  45003-4 0  1384",
+			"tle2": "2 25287  86.3969 156.9492 0002225  78.7498 281.3965 14.34223729657613",
+			"visible": false
+		},
+		"IRIDIUM 65": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25288U 98021D   10301.54410206  .00000118  00000-0  35048-4 0  1741",
+			"tle2": "2 25288  86.3961 156.8925 0002160  70.7095 289.4345 14.34223186657639",
+			"visible": false
+		},
+		"IRIDIUM 66": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25289U 98021E   10301.55043804  .00000160  00000-0  49961-4 0  1262",
+			"tle2": "2 25289  86.3966 156.8141 0002326  77.3563 282.7910 14.34223829657630",
+			"visible": false
+		},
+		"IRIDIUM 67": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25290U 98021F   10301.55678822  .00000157  00000-0  49065-4 0  9571",
+			"tle2": "2 25290  86.3966 156.9105 0002292  81.8706 278.2758 14.34222482657649",
+			"visible": false
+		},
+		"IRIDIUM 68": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25291U 98021G   10301.21428558  .00000022  00000-0  93324-6 0  1701",
+			"tle2": "2 25291  86.3975 157.1273 0002379  80.9438 279.2019 14.34222910657565",
+			"visible": false
+		},
+		"IRIDIUM 69": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25319U 98026A   10301.20092608  .00000175  00000-0  52209-4 0  9992",
+			"tle2": "2 25319  86.4028 184.2023 0001667  27.0848 333.0433 14.37186299654700",
+			"visible": false
+		},
+		"IRIDIUM 7": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24793U 97020B   10301.40220610  .00000141  00000-0  43379-4 0  2318",
+			"tle2": "2 24793  86.3940 251.8136 0002461  78.4314 281.7157 14.34218416705796",
+			"visible": false
+		},
+		"IRIDIUM 70": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25342U 98032A   10301.51872847  .00000058  00000-0  13786-4 0  1900",
+			"tle2": "2 25342  86.3972 157.1287 0002384  75.3883 284.7578 14.34223132651711",
+			"visible": false
+		},
+		"IRIDIUM 71": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25320U 98026B   10301.38830995  .00000167  00000-0  48786-4 0  7008",
+			"tle2": "2 25320  86.4015 181.2578 0003918  53.2779 306.8772 14.37762656655044",
+			"visible": false
+		},
+		"IRIDIUM 72": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25343U 98032B   10301.36650689  .00000036  00000-0  57202-5 0  1786",
+			"tle2": "2 25343  86.3968 156.9630 0002284  83.2424 276.9033 14.34222857651693",
+			"visible": false
+		},
+		"IRIDIUM 73": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25344U 98032C   10301.50767954  .00000224  00000-0  55764-4 0   684",
+			"tle2": "2 25344  86.4424 145.7382 0001667  87.6700 272.4703 14.47231315656795",
+			"visible": false
+		},
+		"IRIDIUM 74": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25345U 98032D   10301.19597976  .00000138  00000-0  35333-4 0  2063",
+			"tle2": "2 25345  86.4476 157.2241 0002407  81.1807 278.9657 14.42972666653203",
+			"visible": false
+		},
+		"IRIDIUM 75": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25346U 98032E   10301.16354397  .00000141  00000-0  43140-4 0  2068",
+			"tle2": "2 25346  86.3971 157.2134 0002294  79.7958 280.3486 14.34223438652234",
+			"visible": false
+		},
+		"IRIDIUM 76": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25432U 98048B   10301.44608460 -.00000329  00000-0 -12444-3 0   616",
+			"tle2": "2 25432  86.3996 188.4685 0003065  78.4615 281.6922 14.34214482638206",
+			"visible": false
+		},
+		"IRIDIUM 77": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25471U 98051E   10301.53585330 -.00000042  00000-0 -22019-4 0  2987",
+			"tle2": "2 25471  86.3933 314.7363 0003080  66.1707 293.9816 14.34218805640653",
+			"visible": false
+		},
+		"IRIDIUM 8": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24792U 97020A   10301.33878008  .00000175  00000-0  55255-4 0  2367",
+			"tle2": "2 24792  86.3929 251.6847 0002468  83.0522 277.0969 14.34218759705787",
+			"visible": false
+		},
+		"IRIDIUM 80": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25469U 98051C   10301.45974671  .00000026  00000-0  23231-5 0  1296",
+			"tle2": "2 25469  86.3934 314.9459 0002420  84.6040 275.5434 14.34218863635448",
+			"visible": false
+		},
+		"IRIDIUM 81": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25468U 98051B   10301.33921626  .00000059  00000-0  14111-4 0  1229",
+			"tle2": "2 25468  86.3933 314.8350 0002397  90.0757 270.0723 14.34221465635425",
+			"visible": false
+		},
+		"IRIDIUM 82": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25467U 98051A   10301.48511420  .00000014  00000-0 -21688-5 0  2996",
+			"tle2": "2 25467  86.3932 314.9807 0001788  65.6330 294.5064 14.34218947639221",
+			"visible": false
+		},
+		"IRIDIUM 83": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25531U 98066E   10301.48804132  .00000035  00000-0  56045-5 0  1344",
+			"tle2": "2 25531  86.3909 283.1112 0002508  84.1587 275.9902 14.34216451626963",
+			"visible": false
+		},
+		"IRIDIUM 84": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25530U 98066D   10301.38654792 -.00000022  00000-0 -15073-4 0    35",
+			"tle2": "2 25530  86.3904 283.1224 0002478  80.5376 279.6109 14.34216504629594",
+			"visible": false
+		},
+		"IRIDIUM 86": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25528U 98066B   10301.49439995 -.00000076  00000-0 -34290-4 0  3494",
+			"tle2": "2 25528  86.3905 282.9585 0002584  64.3260 295.8203 14.34214517631971",
+			"visible": false
+		},
+		"IRIDIUM 90": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [1.33587057158802e-32, 1.33611037243559e-32, 1.33635017328316e-32],
+			"orbit_visible": false,
+			"tle1": "1 27373U 02005B   10301.38944945  .00000018  00000-0 -61500-6 0  6928",
+			"tle2": "2 27373  86.4418 283.0115 0006587 122.1221 238.0642 14.42944996461831",
+			"visible": false
+		},
+		"IRIDIUM 91": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 27372U 02005A   10301.32898421 -.00000869  00000-0 -31743-3 0  7196",
+			"tle2": "2 27372  86.3994 220.4433 0001622 210.6079 149.5009 14.34212504464217",
+			"visible": false
+		},
+		"IRIDIUM 911": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24842U 97030G   10301.39019954  .00000179  00000-0  47092-4 0  9100",
+			"tle2": "2 24842  86.4409 285.8639 0013360 202.2380 157.8254 14.43279006703147",
+			"visible": false
+		},
+		"IRIDIUM 914": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24836U 97030A   10301.47064822  .00000123  00000-0  34337-4 0  8180",
+			"tle2": "2 24836  86.3878 274.7253 0003518  99.8978 260.2622 14.37508507700605",
+			"visible": false
+		},
+		"IRIDIUM 920": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24871U 97034C   10301.47784503  .00000156  00000-0  44992-4 0  8654",
+			"tle2": "2 24871  86.3924 306.5829 0013278  34.5535 325.6538 14.38145628697843",
+			"visible": false
+		},
+		"IRIDIUM 921": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24873U 97034E   10301.42548635  .00000748  00000-0  61428-4 0  2503",
+			"tle2": "2 24873  86.3825 120.3525 0007896 173.3973 186.7336 14.97579698723763",
+			"visible": false
+		},
+		"IRIDIUM 94": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 27374U 02005C   10301.52437384  .00000386  00000-0  65943-4 0  7997",
+			"tle2": "2 27374  86.5797 219.8733 0002532  81.5994 278.5499 14.66262166466187",
+			"visible": false
+		},
+		"IRIDIUM 95": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 27375U 02005D   10301.36704777 -.00001097  00000-0 -39903-3 0  6945",
+			"tle2": "2 27375  86.3990 220.2275 0002513  83.6665 276.4819 14.34210058463509",
+			"visible": false
+		},
+		"IRIDIUM 96": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 27376U 02005E   10301.32586491  .00000427  00000-0  73309-4 0  7868",
+			"tle2": "2 27376  86.5797 219.8961 0002513  78.1701 281.9792 14.66261825466151",
+			"visible": false
+		},
+		"IRIDIUM 97": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 27450U 02031A   10301.52269454  .00000150  00000-0  46368-4 0  6013",
+			"tle2": "2 27450  86.3936 251.8511 0001794 177.8890 182.2321 14.34219456442849",
+			"visible": false
+		},
+		"IRIDIUM 98": 
+		{
+			"comms": [],
+			"groups": ["iridium", "communications"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 27451U 02031B   10301.48412638  .00000083  00000-0  18806-4 0  6496",
+			"tle2": "2 27451  86.4467 315.2431 0001379 229.4044 130.7062 14.42954671442709",
+			"visible": false
+		},
+		"ISS (ZARYA)": 
+		{
+			"comms": [
+			{
+				"description": "ARISS voice uplink region 2 & 3",
+				"frequency": 144.49
+			}, 
+			{
+				"description": "ARISS packet downlink",
+				"frequency": 145.825
+			}, 
+			{
+				"description": "ARISS repeater uplink",
+				"frequency": 437.9
+			}, 
+			{
+				"description": "ARISS repeater downlink",
+				"frequency": 145.8
+			}, 
+			{
+				"description": "ARISS voice uplink region 1",
+				"frequency": 145.2
+			}, 
+			{
+				"description": "ARISS voice downlink",
+				"frequency": 145.8
+			}, 
+			{
+				"description": "ARISS packet uplink",
+				"frequency": 145.825
+			}],
+			"groups": [],
+			"hintColor": [0.899999976158142, 0.899999976158142, 0.899999976158142],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": true,
+			"tle1": "1 25544U 98067A   10302.36561338  .00017353  00000-0  13399-3 0  1686",
+			"tle2": "2 25544  51.6470 264.0662 0008627 133.4449  11.1436 15.72003660684578",
+			"visible": true
+		},
+		"ITAMSAT (IO-26)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 22826U 93061D   10301.97235919  .00000031  00000-0  28853-4 0  3997",
+			"tle2": "2 22826  98.4957 247.1079 0008234 226.7778 133.2713 14.29571240891272",
+			"visible": false
+		},
+		"JAS-1 (FO-12)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 16909U 86061B   10301.81520572 -.00000083  00000-0  10000-3 0  8008",
+			"tle2": "2 16909  50.0140  68.9849 0011238  37.6411 322.5189 12.44454413101068",
+			"visible": false
+		},
+		"JAS-1B (FO-20)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 20480U 90013C   10301.57246602 -.00000016  00000-0  26752-4 0  6029",
+			"tle2": "2 20480  99.0171 133.7011 0540746 121.5591 243.9482 12.83366127970837",
+			"visible": false
+		},
+		"JAS-2 (FO-29)": 
+		{
+			"comms": [
+			{
+				"description": "uplink",
+				"frequency": 145.95,
+				"modulation": "SSB/CW"
+			}, 
+			{
+				"description": "downlink",
+				"frequency": 435.85,
+				"modulation": "SSB/CW"
+			}],
+			"groups": ["amateur"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 24278U 96046B   10301.66195490  .00000024  00000-0  57446-4 0  4253",
+			"tle2": "2 24278  98.5182 112.3778 0351102 137.5077 225.3818 13.52953723701152",
+			"visible": true
+		},
+		"KITSAT 1 (KO-23)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 22077U 92052B   10301.69375558 -.00000037  00000-0  10000-3 0   805",
+			"tle2": "2 22077  66.0880   2.5985 0003219 352.4177   7.6789 12.86454782855643",
+			"visible": false
+		},
+		"KITSAT 2 (KO-25)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 22828U 93061F   10301.06364579  .00000062  00000-0  40708-4 0  5982",
+			"tle2": "2 22828  98.4900 246.0066 0009608 201.4547 158.6238 14.29863591859434",
+			"visible": false
+		},
+		"LUSAT (LO-19)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 20442U 90005G   10301.84364414  .00000038  00000-0  29355-4 0  9398",
+			"tle2": "2 20442  98.3130 259.8718 0012739 121.7305 238.5120 14.32109553 84689",
+			"visible": false
+		},
+		"MOZHAYETS 4 (RS-22)": 
+		{
+			"comms": [
+			{
+				"description": "downlink",
+				"frequency": 435.352,
+				"modulation": "CW"
+			}],
+			"groups": ["amateur"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 27939U 03042A   10302.06642910  .00000227  00000-0  52443-4 0  6735",
+			"tle2": "2 27939  97.8700 161.7284 0013634   1.4874 358.6385 14.63469503378538",
+			"visible": true
+		},
+		"NCUBE-2": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 28897U 05043H   10301.21380730  .00000281  00000-0  67563-4 0  2822",
+			"tle2": "2 28897  97.9915 181.0256 0016236 227.0454 132.9375 14.60143919258699",
+			"visible": false
+		},
+		"NOAA 15": 
+		{
+			"comms": [
+			{
+				"description": "downlink",
+				"frequency": 137.5,
+				"modulation": "AM/APT"
+			}],
+			"groups": ["scientific", "weather"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": true,
+			"tle1": "1 25338U 98030A   10301.29622088  .00000039  00000-0  35343-4 0  5746",
+			"tle2": "2 25338  98.6330 285.9285 0011477  50.6187 309.6026 14.24862396647703",
+			"visible": true
+		},
+		"NOAA 17": 
+		{
+			"comms": [
+			{
+				"description": "downlink",
+				"frequency": 137.62,
+				"modulation": "AM/APT"
+			}],
+			"groups": ["scientific", "weather"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": true,
+			"tle1": "1 27453U 02032A   10301.34155174  .00000013  00000-0  23508-4 0   406",
+			"tle2": "2 27453  98.4151 346.3131 0012727 107.3453 252.9128 14.24202947433659",
+			"visible": true
+		},
+		"NOAA 18": 
+		{
+			"comms": [
+			{
+				"description": "downlink",
+				"frequency": 137.1,
+				"modulation": "AM/APT"
+			}],
+			"groups": ["scientific", "weather"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": true,
+			"tle1": "1 28654U 05018A   10301.36432412 -.00000103  00000-0 -31919-4 0  5303",
+			"tle2": "2 28654  98.9662 247.3312 0015092  40.2479 319.9812 14.11400503280228",
+			"visible": true
+		},
+		"OPAL (OO-38)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 26063U 00004C   10301.79139841  .00000023  00000-0  28053-4 0  9388",
+			"tle2": "2 26063 100.1955 184.9222 0036493 298.1072  61.6434 14.35911320563504",
+			"visible": false
+		},
+		"OSCAR 3 (OSCAR III)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 01293U 65016F   10301.16504886  .00000182  00000-0  14627-3 0  9293",
+			"tle2": "2 01293  70.0742 175.0957 0020293 230.4062 129.5239 14.04822768329742",
+			"visible": false
+		},
+		"OSCAR 5 (AO-5)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 04321U 70008B   10301.91710438 -.00000031  00000-0  10000-3 0  3895",
+			"tle2": "2 04321 102.1008 327.0014 0027516 116.1671 244.2233 12.52160958863180",
+			"visible": false
 		},
 		"OSCAR 6 (AO-6)": 
 		{
-			"description": "Amateur satellite",
+			"comms": [],
 			"groups": ["amateur", "non-operational"],
-			"tle1": "1 06236U 72082B   09080.97286453 -.00000027  00000-0  10000-3 0  1476",
-			"tle2": "2 06236 101.4018  97.8648 0004124  61.3429 298.8059 12.53076701666485",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
+			"tle1": "1 06236U 72082B   10300.62660884 -.00000027  00000-0  10000-3 0  3796",
+			"tle2": "2 06236 101.3975 298.8583 0004330 359.0525   1.0536 12.53083162739710",
 			"visible": false
 		},
 		"OSCAR 7 (AO-7)": 
@@ -144,1436 +1662,95 @@
 				"frequency": 432.15,
 				"modulation": "Modes B & C"
 			}],
-			"description": "AMSAT-OSCAR 7 (Phase-IIB)",
 			"groups": ["amateur"],
-			"tle1": "1 07530U 74089B   09081.09982174 -.00000027  00000-0  10000-3 0  4327",
-			"tle2": "2 07530 101.4356 108.9488 0012080  79.3798 280.8632 12.53575454571800",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
+			"tle1": "1 07530U 74089B   10301.95788337 -.00000027  00000-0  10000-3 0  9149",
+			"tle2": "2 07530 101.3995 312.6222 0012265  12.5206 347.6162 12.53580065645217",
 			"visible": true
 		},
 		"OSCAR 8 (AO-8)": 
 		{
-			"description": "Amateur satellite",
+			"comms": [],
 			"groups": ["amateur", "non-operational"],
-			"tle1": "1 10703U 78026B   09081.15228109  .00000030  00000-0  50534-4 0  4427",
-			"tle2": "2 10703  98.8443 129.5050 0007638  50.2967 309.8869 13.98840358583855",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
+			"tle1": "1 10703U 78026B   10302.09716984  .00000360  00000-0  27885-3 0  9772",
+			"tle2": "2 10703  98.7639 332.1837 0005434 220.9322 139.1432 13.98878843665771",
 			"visible": false
 		},
-		"CANX-1": 
+		"PACSAT (AO-16)": 
 		{
 			"comms": [],
-			"tle1": "1 27847U 03031H   10010.55450479  .00000005  00000-0  22661-4 0  6786",
-			"tle2": "2 27847  98.7031  22.6860 0008813 243.1062 116.9211 14.20990414338740",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"CUTE-1 (CO-55)": 
-		{
-			"comms": [
-			{
-				"description": "downlink",
-				"frequency": 437.4,
-				"modulation": "AFSK 1200 bps"
-			}],
-			"description": "Amateur satellite",
-			"groups": ["amateur"],
-			"tle1": "1 27844U 03031E   09080.51717845  .00000023  00000-0  31209-4 0  5380",
-			"tle2": "2 27844  98.7159  90.9149 0010677  40.0025 320.1937 14.20627455296817",
-			"orbit_visible": false,
-			"visible": true
-		},
-		"CUBESAT XI-IV (CO-57)": 
-		{
-			"comms": [
-			{
-				"description": "downlink",
-				"frequency": 437.49,
-				"modulation": "AFSK 1200 bps"
-			}],
-			"description": "Amateur satellite",
-			"groups": ["amateur"],
-			"tle1": "1 27848U 03031J   09080.55297394  .00000015  00000-0  27156-4 0  4858",
-			"tle2": "2 27848  98.7176  90.0128 0010577  41.9374 318.2624 14.20430987296783",
-			"orbit_visible": false,
-			"visible": true
-		},
-		"CUBESAT XI-V (CO-58)": 
-		{
-			"comms": [
-			{
-				"description": "downlink",
-				"frequency": 437.345,
-				"modulation": "AFSK 1200 bps"
-			}],
-			"description": "Amateur satellite",
-			"groups": ["amateur"],
-			"tle1": "1 28895U 05043F   09080.73753781  .00000170  00000-0  45254-4 0  2627",
-			"tle2": "2 28895  98.0694 333.7523 0016860 260.8704  99.0653 14.59751404180971",
-			"orbit_visible": false,
-			"visible": true
-		},
-		"DOVE (DO-17)": 
-		{
-			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
-			"tle1": "1 20440U 90005E   09080.52227667  .00000009  00000-0  18438-4 0  2752",
-			"tle2": "2 20440  98.2451  57.8863 0011973  67.7463 292.4996 14.32122011   741",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
+			"tle1": "1 20439U 90005D   10301.79742930  .00000042  00000-0  31108-4 0   295",
+			"tle2": "2 20439  98.3505 254.5613 0011591 126.5263 233.6991 14.31880226 84503",
 			"visible": false
 		},
-		"DELFI-C3 (DO-64)": 
-		{
-			"comms": [
-			{
-				"description": "downlink",
-				"frequency": 145.87,
-				"modulation": "BPSK 1200 bps"
-			}],
-			"description": "Amateur satellite",
-			"groups": ["amateur"],
-			"tle1": "1 32789U 08021G   09080.84012653  .00000106  00000-0  20301-4 0  3267",
-			"tle2": "2 32789  97.9568 145.5256 0014665 318.8670  41.1422 14.81641404 48513",
-			"orbit_visible": false,
-			"visible": true
-		},
-		"DTUSAT": 
+		"PAN SAT (PO-34)": 
 		{
 			"comms": [],
-			"tle1": "1 27842U 03031C   10010.89561892  .00000007  00000-0  23258-4 0  7359",
-			"tle2": "2 27842  98.7047  23.0441 0008526 245.7454 114.2832 14.21010898338847",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"ENVISAT": 
-		{
-			"comms": [],
-			"groups": ["scientific"],
-			"hintColor": [0.400000005960464, 0.800000011920929, 1],
-			"tle1": "1 27386U 02009A   10011.73639675  .00000071  00000-0  42510-4 0  6762",
-			"tle2": "2 27386  98.5484  81.1001 0001030  91.3585  61.9740 14.32248909411344",
-			"orbit_visible": true,
-			"visible": true
-		},
-		"JAS-1 (FO-12)": 
-		{
-			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
-			"tle1": "1 16909U 86061B   09080.94650626 -.00000083  00000-0  10000-3 0  5465",
-			"tle2": "2 16909  50.0155  70.0871 0010887 345.8622  14.1906 12.44452849 28116",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
-			"visible": false
-		},
-		"JAS-1B (FO-20)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 20480U 90013C   09080.79147234 -.00000010  00000-0  50788-4 0   941",
-			"tle2": "2 20480  99.0681  17.7100 0540652   8.2393 352.7149 12.83361326895695",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"JAS-2 (FO-29)": 
-		{
-			"comms": [
-			{
-				"description": "uplink",
-				"frequency": 145.95,
-				"modulation": "SSB/CW"
-			}, 
-			{
-				"description": "downlink",
-				"frequency": 435.85,
-				"modulation": "SSB/CW"
-			}],
-			"description": "Amateur satellite",
-			"groups": ["amateur"],
-			"tle1": "1 24278U 96046B   09080.73870134 -.00000063  00000-0 -26229-4 0    41",
-			"tle2": "2 24278  98.5666 326.4736 0350089 216.8408 140.8210 13.52942306621921",
-			"orbit_visible": false,
-			"visible": true
-		},
-		"GENESIS 1": 
-		{
-			"comms": [],
-			"tle1": "1 29252U 06029A   10011.52793667  .00000091  00000-0  19479-4 0  9551",
-			"tle2": "2 29252  64.5138  48.6502 0005838 166.2231 193.9045 15.03489848192237",
-			"orbit_visible": false,
-			"visible": true
-		},
-		"GENESIS 2": 
-		{
-			"comms": [],
-			"tle1": "1 31789U 07028A   10011.52925320  .00000135  00000-0  23184-4 0  7041",
-			"tle2": "2 31789  64.5059  80.0205 0048307 232.0058 127.6690 15.03160429139449",
-			"orbit_visible": false,
-			"visible": true
-		},
-		"TECHSAT 1B (GO-32)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 25397U 98043D   09080.75202847 -.00000043  00000-0 -91654-6 0  8508",
-			"tle2": "2 25397  98.3353 107.7463 0001898 121.8466 238.2885 14.23155927555696",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIA-10 (PRN 32)": 
-		{
-			"comms": [],
-			"tle1": "1 20959U 90103A   10010.99755647 -.00000036  00000-0  10000-3 0  5262",
-			"tle2": "2 20959  55.0535 274.6290 0132765 299.3343  59.4131  2.00568641140074",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIA-11 (PRN 24)": 
-		{
-			"comms": [],
-			"tle1": "1 21552U 91047A   10009.70414824  .00000092  00000-0  10000-3 0  5313",
-			"tle2": "2 21552  54.4144 212.6800 0062160 326.3598  33.2642  2.00563397135632",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIA-14 (PRN 26)": 
-		{
-			"comms": [],
-			"tle1": "1 22014U 92039A   10010.93278189 -.00000105  00000-0  10000-3 0  4649",
-			"tle2": "2 22014  56.8181 333.2692 0195319  59.8919 302.0021  2.00570105121807",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIA-15 (PRN 27)": 
-		{
-			"comms": [],
-			"tle1": "1 22108U 92058A   10010.90400221 -.00000067  00000-0  10000-3 0  3539",
-			"tle2": "2 22108  55.9801  26.5719 0219290 274.8295  82.7079  2.00561618126981",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIA-21 (PRN 09)": 
-		{
-			"comms": [],
-			"tle1": "1 22700U 93042A   10010.42349068 -.00000067  00000-0  10000-3 0  7005",
-			"tle2": "2 22700  56.0930  27.9954 0203907  87.3193 275.0601  2.00570795121138",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIA-23 (PRN 04)": 
-		{
-			"comms": [],
-			"tle1": "1 22877U 93068A   10010.06604071  .00000093  00000-0  10000-3 0   197",
-			"tle2": "2 22877  53.8346 209.9413 0090336  32.3870 328.2140  2.00570796118779",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIA-24 (PRN 06)": 
-		{
-			"comms": [],
-			"tle1": "1 23027U 94016A   10010.76960448  .00000006  00000-0  10000-3 0   283",
-			"tle2": "2 23027  53.5254 146.9361 0060541 291.8296  67.4883  2.00564113116098",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIA-25 (PRN 03)": 
-		{
-			"comms": [],
-			"tle1": "1 23833U 96019A   10011.28117265 -.00000009  00000-0  10000-3 0  2176",
-			"tle2": "2 23833  53.1057 142.9368 0125981  55.7020 305.4397  2.00562273101088",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIA-26 (PRN 10)": 
-		{
-			"comms": [],
-			"tle1": "1 23953U 96041A   10011.18603747 -.00000025  00000-0  10000-3 0  6866",
-			"tle2": "2 23953  54.7294 271.0433 0088058  35.3384 325.3007  2.00592554 98874",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIA-27 (PRN 30)": 
-		{
-			"comms": [],
-			"tle1": "1 24320U 96056A   10010.55267325 -.00000068  00000-0  10000-3 0  4257",
-			"tle2": "2 24320  54.6846  87.2451 0117066  83.4925 277.8682  2.00567811 97528",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIA-28 (PRN 08)": 
-		{
-			"comms": [],
-			"tle1": "1 25030U 97067A   10010.28331492 -.00000064  00000-0  10000-3 0  1002",
-			"tle2": "2 25030  56.8069  33.5854 0109830 177.7126 182.3861  2.00557057 89283",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIR-02 (PRN 13)": 
-		{
-			"comms": [],
-			"tle1": "1 24876U 97035A   10011.15261365 -.00000105  00000-0  10000-3 0  1907",
-			"tle2": "2 24876  56.9425 333.4309 0037352  94.7690 265.6519  2.00571727 91409",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIR-03 (PRN 11)": 
-		{
-			"comms": [],
-			"tle1": "1 25933U 99055A   10010.92537465  .00000081  00000-0  10000-3 0  6410",
-			"tle2": "2 25933  50.9220 196.7469 0102582  44.1197 316.7153  2.00557696 75219",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIR-04 (PRN 20)": 
-		{
-			"comms": [],
-			"tle1": "1 26360U 00025A   10011.52706440 -.00000016  00000-0  10000-3 0  7344",
-			"tle2": "2 26360  53.7974 268.0575 0039769  72.6509 287.8497  2.00559568 70923",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIR-05 (PRN 28)": 
-		{
-			"comms": [],
-			"tle1": "1 26407U 00040A   10010.36440597 -.00000066  00000-0  10000-3 0  6829",
-			"tle2": "2 26407  55.5104  91.6427 0157978 246.2508 112.1090  2.00565206 69571",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIR-06 (PRN 14)": 
-		{
-			"comms": [],
-			"tle1": "1 26605U 00071A   10010.96064742 -.00000106  00000-0  10000-3 0  6884",
-			"tle2": "2 26605  56.5635 332.2378 0052732 241.2746 118.1865  2.00562276 67186",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIR-07 (PRN 18)": 
-		{
-			"comms": [],
-			"tle1": "1 26690U 01004A   10011.32818609 -.00000026  00000-0  10000-3 0  5740",
-			"tle2": "2 26690  53.8131 271.1512 0110582 226.2030 132.9381  2.00565198 65607",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIR-08 (PRN 16)": 
-		{
-			"comms": [],
-			"tle1": "1 27663U 03005A   10010.18241212 -.00000066  00000-0  10000-3 0  9453",
-			"tle2": "2 27663  55.6126  91.1957 0054149 342.9474  16.8941  2.00562319 50933",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIR-09 (PRN 21)": 
-		{
-			"comms": [],
-			"tle1": "1 27704U 03010A   10010.75198163  .00000090  00000-0  10000-3 0  8437",
-			"tle2": "2 27704  53.4558 210.5815 0154862 213.4823 145.5286  2.00557110 49738",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIR-10 (PRN 22)": 
-		{
-			"comms": [],
-			"tle1": "1 28129U 03058A   10010.87364204 -.00000030  00000-0  10000-3 0  4548",
-			"tle2": "2 28129  53.6784 271.4646 0053797 253.0522 106.4165  2.00564472 44446",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIR-11 (PRN 19)": 
-		{
-			"comms": [],
-			"tle1": "1 28190U 04009A   10011.32018064  .00000015  00000-0  10000-3 0  4007",
-			"tle2": "2 28190  54.8708 154.0770 0060512 347.4292  12.3771  2.00562181 42623",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIR-12 (PRN 23)": 
-		{
-			"comms": [],
-			"tle1": "1 28361U 04023A   10011.11001436 -.00000108  00000-0  10000-3 0  2210",
-			"tle2": "2 28361  55.5233 330.1407 0063091 175.1654 184.8914  2.00555994 40706",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIR-13 (PRN 02)": 
-		{
-			"comms": [],
-			"tle1": "1 28474U 04045A   10010.60958177  .00000092  00000-0  10000-3 0  1103",
-			"tle2": "2 28474  53.8831 208.8835 0092214 169.6917 190.5412  2.00553740 38050",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIRM-1 (PRN 17)": 
-		{
-			"comms": [],
-			"tle1": "1 28874U 05038A   10010.46611155  .00000020  00000-0  10000-3 0  3749",
-			"tle2": "2 28874  55.0076 150.9355 0050579 211.6273 148.0313  2.00552416 31470",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIRM-2 (PRN 31)": 
-		{
-			"comms": [],
-			"tle1": "1 29486U 06042A   10011.06942763 -.00000065  00000-0  10000-3 0  6815",
-			"tle2": "2 29486  55.8943  29.7669 0076878 294.8151  64.4195  2.00574313 24189",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIRM-3 (PRN 12)": 
-		{
-			"comms": [],
-			"tle1": "1 29601U 06052A   10010.51493068 -.00000066  00000-0  10000-3 0  7387",
-			"tle2": "2 29601  55.5346  90.1935 0034161 324.4761  35.3273  2.00550794 23085",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIRM-4 (PRN 15)": 
-		{
-			"comms": [],
-			"tle1": "1 32260U 07047A   10010.31555820 -.00000108  00000-0  00000+0 0  4705",
-			"tle2": "2 32260  54.7160 328.8448 0023063 332.4507  27.4199  2.00560044 16474",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIRM-5 (PRN 29)": 
-		{
-			"comms": [],
-			"tle1": "1 32384U 07062A   10010.63802324  .00000019  00000-0  10000-3 0  4994",
-			"tle2": "2 32384  55.0131 151.4032 0032068 287.1304  72.4854  2.00578110 15209",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"GPS BIIRM-6 (PRN 07)": 
-		{
-			"comms": [],
-			"tle1": "1 32711U 08012A   10010.73574093 -.00000067  00000-0  10000-3 0  3661",
-			"tle2": "2 32711  55.5876  29.8416 0032333 179.9404 180.1045  2.00557495 13415",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"HST": 
-		{
-			"comms": [],
-			"tle1": "1 20580U 90037B   10009.85735511  .00000291  00000-0  94489-5 0  5019",
-			"tle2": "2 20580  28.4685 193.3983 0003260 317.8077  42.2266 15.00875675880934",
-			"orbit_visible": false,
-			"visible": true
-		},
-		"ITAMSAT (IO-26)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 22826U 93061D   09080.85350470 -.00000006  00000-0  14293-4 0  9268",
-			"tle2": "2 22826  98.4204  37.8560 0009197 152.3361 207.8319 14.29512039807534",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 10": 
-		{
-			"description": "Iridium 10",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24839U 97030D   09080.75603299  .00000198  00000-0  63641-4 0  5665",
-			"tle2": "2 24839  86.4032 167.9110 0002345  85.8737 274.2720 14.34216304615619",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 11": 
-		{
-			"description": "Iridium 11",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25578U 98074B   09080.96418723  .00000021  00000-0 -64075-8 0  5598",
-			"tle2": "2 25578  86.5093  73.3425 0002585  79.6314 280.5189 14.54937843544862",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 12": 
-		{
-			"description": "Iridium 12",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24837U 97030B   09080.76871839  .00000162  00000-0  50797-4 0  5682",
-			"tle2": "2 24837  86.4018 167.9072 0002316  83.3237 276.8222 14.34216073615601",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 13": 
-		{
-			"description": "Iridium 13",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24840U 97030E   09080.77506041  .00000178  00000-0  56458-4 0  5246",
-			"tle2": "2 24840  86.4035 167.9756 0002404  88.5081 271.6386 14.34216342615608",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 14": 
-		{
-			"description": "Iridium 14",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25777U 99032A   09080.96055310  .00000130  00000-0  25188-4 0  5243",
-			"tle2": "2 25777  86.5126  41.6339 0001855  82.9817 277.1596 14.54935495519245",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 15": 
-		{
-			"description": "Iridium 15",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24869U 97034A   09080.83555834  .00000127  00000-0  38404-4 0  5876",
-			"tle2": "2 24869  86.3996 199.4843 0002242  82.3271 277.8172 14.34217422612589",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 16": 
-		{
-			"description": "Iridium 16",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24841U 97030F   09080.74756006  .00000103  00000-0  28979-4 0  5472",
-			"tle2": "2 24841  86.4115 168.5066 0004087  67.5298 292.6324 14.35274480615732",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 17": 
-		{
-			"description": "Iridium 17",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24870U 97034B   09080.86574228  .00000094  00000-0  26348-4 0  5551",
-			"tle2": "2 24870  86.3997 199.3860 0002450  74.3578 285.7893 14.34424293612609",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 18": 
-		{
-			"description": "Iridium 18",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24872U 97034D   09080.86727066  .00000184  00000-0  58625-4 0  5567",
-			"tle2": "2 24872  86.4003 199.6099 0002454  81.7604 278.3867 14.34217527612589",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 19": 
-		{
-			"description": "Iridium 19",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24965U 97056A   09080.72718535  .00000100  00000-0  28631-4 0  5236",
-			"tle2": "2 24965  86.3996 136.4806 0002460  90.2603 269.8873 14.34219384601200",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 2": 
-		{
-			"description": "Iridium 2",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25527U 98066A   09080.75555857  .00000044  00000-0  94123-6 0  8457",
-			"tle2": "2 25527  85.5654 330.3309 0011200 129.4966 230.7244 14.97948645565148",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 20": 
-		{
-			"description": "Iridium 20",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25577U 98074A   09080.98033202 -.00000021  00000-0 -14422-4 0  3714",
-			"tle2": "2 25577  86.3904  73.1381 0002452  79.1409 281.0061 14.34214985537121",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 21": 
-		{
-			"description": "Iridium 21",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25778U 99032B   09080.93260961  .00000088  00000-0  24407-4 0  4289",
-			"tle2": "2 25778  86.3940  41.6568 0001858 135.0959 225.0387 14.34213303516794",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 22": 
-		{
-			"description": "Iridium 22",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24907U 97043E   09080.93593228  .00000038  00000-0  64008-5 0  5443",
-			"tle2": "2 24907  86.3913  73.5164 0002428  76.7490 283.3976 14.34215296606512",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 23": 
-		{
-			"description": "Iridium 23",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24906U 97043D   09080.94227688  .00000036  00000-0  58894-5 0  5744",
-			"tle2": "2 24906  86.3894  73.1318 0002472  82.1303 278.0178 14.34215338606511",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 24": 
-		{
-			"description": "Iridium 24",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25105U 97082B   09080.88485856  .00000094  00000-0  24467-4 0  1226",
-			"tle2": "2 25105  86.3868  64.1686 0012063 143.9347 216.2672 14.38254916590102",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 25": 
-		{
-			"description": "Iridium 25",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24904U 97043B   09080.95495998  .00000045  00000-0  90546-5 0  5564",
-			"tle2": "2 24904  86.3902  73.1904 0002447  79.4878 280.6605 14.34215301606501",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 26": 
-		{
-			"description": "Iridium 26",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24903U 97043A   09080.92325319  .00000061  00000-0  14603-4 0  6635",
-			"tle2": "2 24903  86.3905  73.2530 0002433  79.3191 280.8286 14.34215067606530",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 28": 
-		{
-			"description": "Iridium 28",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24948U 97051E   09080.72766345 -.00000012  00000-0 -11441-4 0  3800",
-			"tle2": "2 24948  86.3924 105.0922 0002660  74.1790 285.9694 14.34248276603049",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 29": 
-		{
-			"description": "Iridium 29",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24944U 97051A   09080.73641357 -.00000048  00000-0 -24213-4 0  5196",
-			"tle2": "2 24944  86.3928 104.9291 0002412  84.1606 275.9868 14.34217590603056",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 3": 
-		{
-			"description": "Iridium 3",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25431U 98048A   09080.92959394  .00000063  00000-0  15480-4 0  4481",
-			"tle2": "2 25431  86.3903  73.3431 0002965  84.2311 275.9229 14.34215319554292",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 30": 
-		{
-			"description": "Iridium 30",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24949U 97051F   09080.60956429 -.00000118  00000-0 -49226-4 0  5599",
-			"tle2": "2 24949  86.3918 105.0480 0002502  87.1679 272.9801 14.34216956603032",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 31": 
-		{
-			"description": "Iridium 31",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24950U 97051G   09080.95206580  .00000006  00000-0 -50967-5 0  5472",
-			"tle2": "2 24950  86.3926 104.8960 0002452  82.6436 277.5040 14.34217229603094",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 32": 
-		{
-			"description": "Iridium 32",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24945U 97051B   09080.82521335 -.00000034  00000-0 -19243-4 0  5260",
-			"tle2": "2 24945  86.3920 104.9062 0002420  86.0555 274.0934 14.34217114603087",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 33": 
-		{
-			"description": "Iridium 33",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24946U 97051C   09079.48224177  .00000050  00000-0  11256-4 0  5548",
-			"tle2": "2 24946  86.3829 105.5030 0007498 339.0307  21.0569 14.32470536602871",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 34": 
-		{
-			"description": "Iridium 34",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24969U 97056E   09080.66375773  .00000143  00000-0  44096-4 0  5214",
-			"tle2": "2 24969  86.3985 136.5744 0002407  86.3781 273.7691 14.34219875601171",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 35": 
-		{
-			"description": "Iridium 35",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24966U 97056B   09080.73987018  .00000085  00000-0  23358-4 0  5695",
-			"tle2": "2 24966  86.3976 136.5004 0002426  88.2177 271.9296 14.34219553601183",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 36": 
-		{
-			"description": "Iridium 36",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24967U 97056C   09080.65710171 -.00000019  00000-0 -13689-4 0  4998",
-			"tle2": "2 24967  86.3983 136.6024 0002458  82.4670 277.6800 14.34287200601317",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 37": 
-		{
-			"description": "Iridium 37",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24968U 97056D   09080.71450005  .00000098  00000-0  28096-4 0  5346",
-			"tle2": "2 24968  86.3999 136.6077 0002361  87.7484 272.3982 14.34219477601186",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 38": 
-		{
-			"description": "Iridium 38",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25043U 97069E   09080.84584675  .00000189  00000-0  59905-4 0  5412",
-			"tle2": "2 25043  86.3999 198.9627 0003100  65.2494 294.9020 14.34689502595081",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 39": 
-		{
-			"description": "Iridium 39",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25042U 97069D   09080.81653387  .00000186  00000-0  59194-4 0  5120",
-			"tle2": "2 25042  86.4012 199.6847 0002432  78.6189 281.5268 14.34217041594973",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 4": 
-		{
-			"description": "Iridium 4",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24796U 97020E   09080.70815717  .00000117  00000-0  34873-4 0  5689",
-			"tle2": "2 24796  86.3992 136.4182 0002479  84.7507 275.3970 14.34219551621866",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 40": 
-		{
-			"description": "Iridium 40",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25041U 97069C   09080.87997502  .00000177  00000-0  56017-4 0  5384",
-			"tle2": "2 25041  86.4003 199.5053 0002277  80.7998 279.3453 14.34217086595004",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 41": 
-		{
-			"description": "Iridium 41",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25040U 97069B   09080.85461500  .00000190  00000-0  60760-4 0  5122",
-			"tle2": "2 25040  86.4003 199.5463 0002248  80.0849 280.0599 14.34216855594983",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 42": 
-		{
-			"description": "Iridium 42",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25077U 97077A   09080.94340195  .00000110  00000-0  32067-4 0  5274",
-			"tle2": "2 25077  86.3994 199.5528 0002240  84.0668 276.0780 14.34216755590856",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 43": 
-		{
-			"description": "Iridium 43",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25039U 97069A   09080.86094029  .00000205  00000-0  66131-4 0  5236",
-			"tle2": "2 25039  86.4004 199.6307 0002233  83.8211 276.3235 14.34217273594988",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 44": 
-		{
-			"description": "Iridium 44",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25078U 97077B   09080.71935762  .00000118  00000-0  33304-4 0   717",
-			"tle2": "2 25078  86.4006 195.3112 0003942  66.7305 293.4317 14.36538090591378",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 45": 
-		{
-			"description": "Iridium 45",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25104U 97082A   09080.96130432 -.00000044  00000-0 -22820-4 0  4750",
-			"tle2": "2 25104  86.3894  73.2144 0002470  84.6910 275.4577 14.34215008589056",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 46": 
-		{
-			"description": "Iridium 46",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24905U 97043C   09080.96764942  .00000030  00000-0  35050-5 0  5691",
-			"tle2": "2 24905  86.3912  73.4590 0002447  80.6193 279.5279 14.34215070606519",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 47": 
-		{
-			"description": "Iridium 47",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25106U 97082C   09080.97398853  .00000111  00000-0  32561-4 0  4695",
-			"tle2": "2 25106  86.3898  73.1510 0002484  79.6182 280.5287 14.34215564589050",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 49": 
-		{
-			"description": "Iridium 49",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25108U 97082E   09080.98667654  .00000065  00000-0  16281-4 0  4875",
-			"tle2": "2 25108  86.3903  73.1642 0002478  78.6020 281.5453 14.34215226589060",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 5": 
-		{
-			"description": "Iridium 5",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24795U 97020D   09080.75255433  .00000063  00000-0  15294-4 0  6795",
-			"tle2": "2 24795  86.3980 136.7732 0002993  61.1224 299.0272 14.34219542621938",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 50": 
-		{
-			"description": "Iridium 50",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25172U 98010D   09080.79408766  .00000199  00000-0  63929-4 0  5098",
-			"tle2": "2 25172  86.4035 168.0271 0002291  84.7609 275.3846 14.34216501580429",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 51": 
-		{
-			"description": "Iridium 51",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25262U 98018A   09080.96019622  .00000083  00000-0  18843-4 0  6047",
-			"tle2": "2 25262  86.4521 136.5459 0002506  88.2627 271.8861 14.42963543578794",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 52": 
-		{
-			"description": "Iridium 52",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25169U 98010A   09080.73700209  .00000123  00000-0  36961-4 0  2624",
-			"tle2": "2 25169  86.4038 168.0762 0002354  85.6372 274.5081 14.34216423580436",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 53": 
-		{
-			"description": "Iridium 53",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25173U 98010E   09080.74334661  .00000213  00000-0  68921-4 0  4965",
-			"tle2": "2 25173  86.4038 168.0584 0002328  85.4274 274.7179 14.34216418580426",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 54": 
-		{
-			"description": "Iridium 54",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25171U 98010C   09080.83214435  .00000162  00000-0  50776-4 0  4950",
-			"tle2": "2 25171  86.4034 168.0396 0002357  83.7922 276.3539 14.34216177580592",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 55": 
-		{
-			"description": "Iridium 55",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25272U 98019A   09080.65396145 -.00000055  00000-0 -26585-4 0  4460",
-			"tle2": "2 25272  86.3929 104.9099 0002443  82.6744 277.4726 14.34217346574706",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 56": 
-		{
-			"description": "Iridium 56",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25170U 98010B   09080.93996768  .00000090  00000-0  25013-4 0  4042",
-			"tle2": "2 25170  86.4019 168.0354 0002303  83.3803 276.7656 14.34215986580448",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 57": 
-		{
-			"description": "Iridium 57",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25273U 98019B   09080.97743384  .00000010  00000-0 -34515-5 0  4842",
-			"tle2": "2 25273  86.3938 104.9487 0002488  81.4053 278.7428 14.34217528574757",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 58": 
-		{
-			"description": "Iridium 58",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25274U 98019C   09080.56516741 -.00000072  00000-0 -32690-4 0  2919",
-			"tle2": "2 25274  86.3927 105.2286 0002529  81.2320 278.9159 14.34216858574699",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 59": 
-		{
-			"description": "Iridium 59",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25275U 98019D   09080.92035227 -.00000093  00000-0 -40264-4 0  1373",
-			"tle2": "2 25275  86.3948 105.0965 0002450  63.6517 296.4931 14.34216674574745",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 6": 
-		{
-			"description": "Iridium 6",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24794U 97020C   09080.68913056  .00000120  00000-0  35767-4 0  3460",
-			"tle2": "2 24794  86.4005 136.6398 0002655  84.7222 275.4275 14.34219576621845",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 60": 
-		{
-			"description": "Iridium 60",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25276U 98019E   09080.57785244 -.00000075  00000-0 -33997-4 0  5140",
-			"tle2": "2 25276  86.3925 104.9765 0002456  85.4836 274.6635 14.34216941574699",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 61": 
-		{
-			"description": "Iridium 61",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25263U 98018B   09080.65107557  .00000022  00000-0  88117-6 0  4504",
-			"tle2": "2 25263  86.4005 136.6114 0002427  83.6921 276.4543 14.34219094575509",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 62": 
-		{
-			"description": "Iridium 62",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25285U 98021A   09080.95798294  .00000157  00000-0  49153-4 0  4806",
-			"tle2": "2 25285  86.3937  41.6021 0002403  80.9094 279.2370 14.34213398573703",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 63": 
-		{
-			"description": "Iridium 63",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25286U 98021B   09080.96432934  .00000129  00000-0  39109-4 0  4926",
-			"tle2": "2 25286  86.3940  41.6827 0002432  80.3005 279.8464 14.34213273573702",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 64": 
-		{
-			"description": "Iridium 64",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25287U 98021C   09080.97067364  .00000097  00000-0  27550-4 0  4403",
-			"tle2": "2 25287  86.3941  41.6185 0002444  79.6780 280.4691 14.34213124573687",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 65": 
-		{
-			"description": "Iridium 65",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25288U 98021D   09080.97701561  .00000123  00000-0  36733-4 0  4883",
-			"tle2": "2 25288  86.3937  41.5700 0002779  77.2145 282.9359 14.34213117573708",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 66": 
-		{
-			"description": "Iridium 66",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25289U 98021E   09080.91358909  .00000122  00000-0  36428-4 0  4444",
-			"tle2": "2 25289  86.3935  41.5254 0002463  80.4519 279.6944 14.34213230573699",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 67": 
-		{
-			"description": "Iridium 67",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25290U 98021F   09080.91993107  .00000097  00000-0  27599-4 0  2674",
-			"tle2": "2 25290  86.3939  41.6124 0002412  79.5456 280.6007 14.34213091573704",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 68": 
-		{
-			"description": "Iridium 68",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25291U 98021G   09080.92627825  .00000159  00000-0  49798-4 0  4808",
-			"tle2": "2 25291  86.3939  41.6734 0002409  78.9035 281.2421 14.34213167573671",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 69": 
-		{
-			"description": "Iridium 69",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25319U 98026A   09080.49486789  .00000092  00000-0  24359-4 0  3146",
-			"tle2": "2 25319  86.3922  69.9726 0004196  68.2945 291.8696 14.37077443570581",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 7": 
-		{
-			"description": "Iridium 7",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24793U 97020B   09080.69547303  .00000099  00000-0  28351-4 0  5488",
-			"tle2": "2 24793  86.4007 136.6478 0002405  86.1825 273.9642 14.34219478621845",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 70": 
-		{
-			"description": "Iridium 70",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25342U 98032A   09080.95163750  .00000131  00000-0  39568-4 0  5009",
-			"tle2": "2 25342  86.3942  41.7657 0002391  79.7340 280.4119 14.34213490567784",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 71": 
-		{
-			"description": "Iridium 71",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25320U 98026B   09080.50288721  .00000073  00000-0  17612-4 0   528",
-			"tle2": "2 25320  86.3912  67.4298 0003490 107.5106 252.6473 14.37667721570864",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 72": 
-		{
-			"description": "Iridium 72",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25343U 98032B   09080.93895920  .00000118  00000-0  35034-4 0  4894",
-			"tle2": "2 25343  86.3940  41.5784 0002432  76.1741 283.9715 14.34213267567786",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 73": 
-		{
-			"description": "Iridium 73",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25344U 98032C   09080.78187609  .00000124  00000-0  28464-4 0  3655",
-			"tle2": "2 25344  86.4423  32.4179 0003011  59.8565 300.2935 14.47114841572085",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 74": 
-		{
-			"description": "Iridium 74",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25345U 98032D   09080.98077926  .00000138  00000-0  35328-4 0  5135",
-			"tle2": "2 25345  86.4451  41.7016 0002432  79.4303 280.7170 14.42945639568815",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 75": 
-		{
-			"description": "Iridium 75",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25346U 98032E   09080.94529799  .00000116  00000-0  34491-4 0  5150",
-			"tle2": "2 25346  86.3944  41.7207 0002402  79.7335 280.4124 14.34213264568357",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 76": 
-		{
-			"description": "Iridium 76",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25432U 98048B   09080.94861862  .00000054  00000-0  12145-4 0  3738",
-			"tle2": "2 25432  86.3906  73.1863 0002300  98.0699 262.0767 14.34215369554286",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 77": 
-		{
-			"description": "Iridium 77",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25471U 98051E   09080.82923891  .00000100  00000-0  28744-4 0  6088",
-			"tle2": "2 25471  86.3997 199.4609 0003163  99.7025 260.4521 14.34216514556700",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 8": 
-		{
-			"description": "Iridium 8",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24792U 97020A   09080.70181317  .00000069  00000-0  17647-4 0  5504",
-			"tle2": "2 24792  86.3985 136.5160 0002379  81.7440 278.4023 14.34219493621849",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 80": 
-		{
-			"description": "Iridium 80",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25469U 98051C   09080.96243436  .00000071  00000-0  18286-4 0  4399",
-			"tle2": "2 25469  86.4008 199.5241 0002317  83.5362 276.6098 14.34216358551528",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 81": 
-		{
-			"description": "Iridium 81",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25468U 98051B   09080.84189280  .00000175  00000-0  55498-4 0  4370",
-			"tle2": "2 25468  86.4000 199.4552 0002193  77.7791 282.3646 14.34217895551504",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 82": 
-		{
-			"description": "Iridium 82",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25467U 98051A   09080.84826518  .00000139  00000-0  42421-4 0  6061",
-			"tle2": "2 25467  86.3999 199.5966 0003026  75.7695 284.3832 14.34216930555283",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 83": 
-		{
-			"description": "Iridium 83",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25531U 98066E   09080.92094038  .00000145  00000-0  44885-4 0  4298",
-			"tle2": "2 25531  86.4034 167.8505 0002327  86.2880 273.8578 14.34216119543038",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 84": 
-		{
-			"description": "Iridium 84",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25530U 98066D   09080.74968891  .00000167  00000-0  52727-4 0  3189",
-			"tle2": "2 25530  86.4031 167.9111 0002365  84.5906 275.5553 14.34216529545657",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 86": 
-		{
-			"description": "Iridium 86",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 25528U 98066B   09080.78774334  .00000154  00000-0  47880-4 0  6551",
-			"tle2": "2 25528  86.4010 167.7890 0003121  91.2601 268.8949 14.34216774548021",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 90": 
-		{
-			"description": "Iridium 90",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 27373U 02005B   09080.75759552  .00000204  00000-0  54978-4 0  9905",
-			"tle2": "2 27373  86.4545 167.7383 0002768 294.7036  65.3870 14.42961102377382",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 91": 
-		{
-			"description": "Iridium 91",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 27372U 02005A   09080.97109062 -.00000020  00000-0 -14335-4 0   297",
-			"tle2": "2 27372  86.3944 105.0683 0004458  24.2179 335.9227 14.34217272380315",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 911": 
-		{
-			"description": "Iridium 911",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24842U 97030G   09080.72568503  .00000103  00000-0  24569-4 0  2539",
-			"tle2": "2 24842  86.4523 170.7526 0015237 358.4789   1.6370 14.43158132618677",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 914": 
-		{
-			"description": "Iridium 914",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24836U 97030A   09080.76183671  .00000072  00000-0  17532-4 0  1698",
-			"tle2": "2 24836  86.3996 160.9874 0000845  77.3318 282.7979 14.37427546616467",
-			"orbit_visible": false,
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 920": 
-		{
-			"description": "Iridium 920",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24871U 97034C   09080.95778183 -.00000024  00000-0 -14712-4 0  1999",
-			"tle2": "2 24871  86.4029 192.6800 0013043 137.8990 222.3210 14.38055586613699",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 921": 
-		{
-			"description": "Iridium 921",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 24873U 97034E   09080.91559410  .00000320  00000-0  24960-4 0  5208",
-			"tle2": "2 24873  86.3865  31.4638 0010185 126.4679 233.7489 14.97110247636150",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 94": 
-		{
-			"description": "Iridium 94",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 27374U 02005C   09080.75273894 -.00000019  00000-0 -75926-5 0   618",
-			"tle2": "2 27374  86.5746 104.7593 0002666  84.3214 275.8306 14.66608250380349",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 95": 
-		{
-			"description": "Iridium 95",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 27375U 02005D   09080.66030253 -.00000059  00000-0 -28000-4 0    84",
-			"tle2": "2 27375  86.3944 105.0032 0002427  89.9724 270.1749 14.34217381379558",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 96": 
-		{
-			"description": "Iridium 96",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 27376U 02005E   09080.56026923 -.00000015  00000-0 -69572-5 0   546",
-			"tle2": "2 27376  86.5756 104.7982 0002697  80.6016 279.5497 14.66608347380313",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 97": 
-		{
-			"description": "Iridium 97",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 27450U 02031A   09080.67644149  .00000069  00000-0  17482-4 0  9207",
-			"tle2": "2 27450  86.4000 136.7814 0003464  21.9907 338.1435 14.34219520358872",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"IRIDIUM 98": 
-		{
-			"description": "Iridium 98",
-			"groups": ["iridium", "communications"],
-			"tle1": "1 27451U 02031B   09080.85265633  .00000211  00000-0  57105-4 0  9389",
-			"tle2": "2 27451  86.4540 199.6827 0005377  49.1145 311.0517 14.42947974358258",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"ISS (ZARYA)": 
-		{
-			"comms": [
-			{
-				"description": "ARISS voice uplink region 2 & 3",
-				"frequency": 144.49
-			}, 
-			{
-				"description": "ARISS packet downlink",
-				"frequency": 145.825
-			}, 
-			{
-				"description": "ARISS repeater uplink",
-				"frequency": 437.9
-			}, 
-			{
-				"description": "ARISS repeater downlink",
-				"frequency": 145.8
-			}, 
-			{
-				"description": "ARISS voice uplink region 1",
-				"frequency": 145.2
-			}, 
-			{
-				"description": "ARISS voice downlink",
-				"frequency": 145.8
-			}, 
-			{
-				"description": "ARISS packet uplink",
-				"frequency": 145.825
-			}],
-			"orbitColor": [0, 0.5, 1],
-			"hintColor": [0.899999976158142, 0.899999976158142, 0.899999976158142],
-			"tle1": "1 25544U 98067A   10011.92371058  .00012181  00000-0  76107-4 0  3541",
-			"tle2": "2 25544  51.6465 313.4924 0007635 171.1951 233.5729 15.77327898638859",
-			"orbit_visible": true,
-			"visible": true
-		},
-		"KITSAT 1 (KO-23)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 22077U 92052B   09080.68175229 -.00000037  00000-0  10000-3 0  6995",
-			"tle2": "2 22077  66.0847 149.9211 0013023 300.4010  59.5723 12.86447618780266",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"KITSAT 2 (KO-25)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 22828U 93061F   09080.83613139 -.00000007  00000-0  13561-4 0  1385",
-			"tle2": "2 22828  98.4126  37.7648 0010637 129.0987 231.1150 14.29813121775804",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"LUSAT (LO-19)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 20442U 90005G   09080.85379851  .00000101  00000-0  52762-4 0  4846",
-			"tle2": "2 20442  98.2328  60.8676 0012920  67.8229 292.4325 14.32055802   813",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"UNAMSAT-2 (MO-30)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 24305U 96052B   09080.47219106  .00000009  00000-0 -65784-5 0   696",
-			"tle2": "2 24305  82.9323  58.9099 0030942 136.0160 224.3468 13.73567811628634",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"TIUNGSAT-1 (MO-46)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 26548U 00057D   09080.87169003 -.00000081  00000-0  87572-5 0  3491",
-			"tle2": "2 26548  64.5595 350.9689 0050062 285.2131  74.3419 14.83347625459005",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"NCUBE-2": 
-		{
-			"comms": [],
-			"tle1": "1 28897U 05043H   10010.64548338  .00000118  00000-0  34050-4 0   457",
-			"tle2": "2 28897  98.0343 260.0372 0018237  60.5035 299.7985 14.60015933216294",
-			"orbit_visible": false,
+			"tle1": "1 25520U 98064B   10301.70201388  .00000947  00000-0  36144-4 0  6084",
+			"tle2": "2 25520  28.4585 155.8089 0005085 340.3000  19.7375 15.17716130664451",
 			"visible": false
 		},
 		"PCSAT (NO-44)": 
 		{
-			"description": "Amateur satellite",
+			"comms": [],
 			"groups": ["amateur", "non-operational"],
-			"tle1": "1 26931U 01043C   09080.69111513 -.00000245  00000-0 -63501-4 0  1278",
-			"tle2": "2 26931  67.0529 289.7584 0005178 260.4427  99.6072 14.29549665390074",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
-			"visible": false
-		},
-		"SAPPHIRE (NO-45)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 26932U 01043D   09080.93767055 -.00000067  00000-0  60390-5 0  1347",
-			"tle2": "2 26932  67.0506 289.0527 0006019 240.4193 119.6306 14.29604170390158",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"NOAA 15": 
-		{
-			"comms": [
-			{
-				"description": "downlink",
-				"frequency": 137.5,
-				"modulation": "AM/APT"
-			}],
-			"description": "NOAA Weather Satellite 15",
-			"groups": ["scientific", "weather"],
-			"tle1": "1 25338U 98030A   09080.90089393 -.00000044  00000-0 -26503-6 0  8619",
-			"tle2": "2 25338  98.5808  72.0445 0009840 316.2506  43.7883 14.24749834564348",
-			"orbit_visible": true,
-			"visible": true
-		},
-		"NOAA 17": 
-		{
-			"comms": [
-			{
-				"description": "downlink",
-				"frequency": 137.62,
-				"modulation": "AM/APT"
-			}],
-			"description": "NOAA Weather Satellite 17",
-			"groups": ["scientific", "weather"],
-			"tle1": "1 27453U 02032A   09080.80573152 -.00000085  00000-0 -18637-4 0  3444",
-			"tle2": "2 27453  98.4939 142.8491 0011919  24.2008 335.9717 14.24048587350311",
-			"orbit_visible": true,
-			"visible": true
-		},
-		"NOAA 18": 
-		{
-			"comms": [
-			{
-				"description": "downlink",
-				"frequency": 137.1,
-				"modulation": "AM/APT"
-			}],
-			"description": "NOAA Weather Satellite 18",
-			"groups": ["scientific", "weather"],
-			"tle1": "1 28654U 05018A   09080.77119997  .00000000  00000-0  24577-4 0  8343",
-			"tle2": "2 28654  98.8994  24.7197 0013458 248.9605 111.0150 14.11241530197625",
-			"orbit_visible": true,
-			"visible": true
-		},
-		"OPAL (OO-38)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 26063U 00004C   09080.77017786 -.00000011  00000-0  16522-4 0  4630",
-			"tle2": "2 26063 100.1939 211.4200 0036983 147.0349 213.3150 14.35858482479406",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"OSCAR 3 (OSCAR III)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 01293U 65016F   09080.92578501  .00000079  00000-0  82795-4 0  4881",
-			"tle2": "2 01293  70.0694 359.9998 0020227 281.6686  78.2153 14.04694421247559",
-			"orbit_visible": false,
+			"tle1": "1 26931U 01043C   10302.17766215 -.00000115  00000-0 -12460-4 0  5936",
+			"tle2": "2 26931  67.0531 218.7490 0005616 271.5946  88.4492 14.29617215473904",
 			"visible": false
 		},
 		"PEHUENSAT 1 (PO-63)": 
 		{
 			"comms": [],
-			"tle1": "1 29712U 07001D   09129.76442331  .00000438  00000-0  63872-4 0  4664",
-			"tle2": "2 29712  97.8314 187.0851 0015285  43.5600 316.6810 14.80531783125782",
+			"groups": [],
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
+			"tle1": "1 29712U 07001D   10301.18895127  .00001391  00000-0  18424-3 0  3692",
+			"tle2": "2 29712  97.7673 349.0635 0015087  91.9833 268.3076 14.81366235205172",
 			"visible": false
+		},
+		"PHASE 3B (AO-10)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 14129U 83058B   10301.48429116 -.00000086  00000-0  10000-3 0  7774",
+			"tle2": "2 14129  26.7917  67.8588 6039053   9.7099 357.9616  2.05867874177912",
+			"visible": false
+		},
+		"PHASE 3D (AO-40)": 
+		{
+			"comms": [
+			{
+				"description": "Beacon",
+				"frequency": 145.898
+			}],
+			"groups": ["amateur"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 26609U 00072B   10299.42141595 -.00000068  00000-0  10000-3 0  4325",
+			"tle2": "2 26609   8.7380 307.8723 7952988   1.7527 359.9938  1.25586613 45867",
+			"visible": true
 		},
 		"POSAT (PO-28)": 
 		{
-			"description": "Amateur satellite",
+			"comms": [],
 			"groups": ["amateur", "non-operational"],
-			"tle1": "1 22829U 93061G   09080.84418226 -.00000012  00000-0  11647-4 0  1746",
-			"tle2": "2 22829  98.4087  38.9001 0010531 125.5741 234.6455 14.30211190807812",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
-			"visible": false
-		},
-		"PAN SAT (PO-34)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 25520U 98064B   09080.51367299  .00000409  00000-0  10351-4 0  2091",
-			"tle2": "2 25520  28.4596 121.9419 0005186  71.4910 288.6250 15.17311364575324",
-			"orbit_visible": false,
+			"tle1": "1 22829U 93061G   10302.02792415  .00000101  00000-0  55301-4 0  6131",
+			"tle2": "2 22829  98.4857 248.1374 0009510 193.5771 166.5159 14.30264274891603",
 			"visible": false
 		},
 		"RADIO ROSTO (RS-15)": 
@@ -1597,70 +1774,41 @@
 				"frequency": 145.878,
 				"modulation": "Mode A"
 			}],
-			"description": "Radio Sputnik (RS) 15",
 			"groups": ["amateur"],
-			"tle1": "1 23439U 94085A   09080.97335086 -.00000039  00000-0  10000-3 0  2029",
-			"tle2": "2 23439  64.8130  45.8464 0146514  68.4113 293.2342 11.27553256586281",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
+			"tle1": "1 23439U 94085A   10300.89335058 -.00000039  00000-0  10000-3 0  3454",
+			"tle2": "2 23439  64.8172 179.9334 0163415 320.8699  38.0499 11.27554569652230",
 			"visible": true
 		},
-		"MOZHAYETS 4 (RS-22)": 
-		{
-			"comms": [
-			{
-				"description": "downlink",
-				"frequency": 435.352,
-				"modulation": "CW"
-			}],
-			"description": "Amateur satellite",
-			"groups": ["amateur"],
-			"tle1": "1 27939U 03042A   09080.74176473  .00000091  00000-0  26556-4 0  7452",
-			"tle2": "2 27939  97.9578 318.7317 0014519  50.9541 309.2958 14.63301923292787",
-			"orbit_visible": false,
-			"visible": true
-		},
-		"SEASAT 1": 
+		"SAPPHIRE (NO-45)": 
 		{
 			"comms": [],
-			"tle1": "1 10967U 78064A   10011.48877880 -.00000066  00000-0  21494-4 0   146",
-			"tle2": "2 10967 108.0202  37.9154 0003096 275.7432  84.3363 14.42175802655204",
-			"orbit_visible": false,
-			"visible": true
-		},
-		"SEDSAT 1 (SO-33)": 
-		{
-			"description": "Amateur satellite",
 			"groups": ["amateur", "non-operational"],
-			"tle1": "1 25509U 98061B   09080.68393431  .00000028  00000-0 -80808-5 0  4141",
-			"tle2": "2 25509  31.4336 187.2850 0354956 293.3308  63.0343 14.28246349543312",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
-			"visible": false
-		},
-		"SUNSAT (SO-35)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 25636U 99008C   09080.57259666 -.00000022  00000-0  18215-5 0  2632",
-			"tle2": "2 25636  96.4526 285.7652 0148832 138.9281 222.3233 14.43457619530468",
-			"orbit_visible": false,
+			"tle1": "1 26932U 01043D   10300.93680270  .00000207  00000-0  11303-3 0  6008",
+			"tle2": "2 26932  67.0569 222.0623 0003987 282.5276  77.5383 14.29652157473776",
 			"visible": false
 		},
 		"SAUDISAT 1A (SO-41)": 
 		{
-			"description": "Amateur satellite",
+			"comms": [],
 			"groups": ["amateur", "non-operational"],
-			"tle1": "1 26545U 00057A   09081.15361688  .00000047  00000-0  25135-4 0  2129",
-			"tle2": "2 26545  64.5602  25.7522 0053775 291.6905  67.8477 14.80571352458315",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
+			"tle1": "1 26545U 00057A   10302.21213510  .00000238  00000-0  49391-4 0  6636",
+			"tle2": "2 26545  64.5593  19.7278 0028002 198.2244 161.7864 14.80754992545086",
 			"visible": false
 		},
 		"SAUDISAT 1B (SO-42)": 
 		{
-			"description": "Amateur satellite",
+			"comms": [],
 			"groups": ["amateur", "non-operational"],
-			"tle1": "1 26549U 00057E   09080.84595995 -.00000003  00000-0  19202-4 0  2905",
-			"tle2": "2 26549  64.5580  42.8624 0056981 296.2253  63.3012 14.79427179457945",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
+			"tle1": "1 26549U 00057E   10301.27703190  .00000252  00000-0  52462-4 0  7554",
+			"tle2": "2 26549  64.5588  42.0123 0033543 196.2105 163.7950 14.79603796544554",
 			"visible": false
 		},
 		"SAUDISAT 1C (SO-50)": 
@@ -1676,73 +1824,151 @@
 				"frequency": 436.795,
 				"modulation": "FM"
 			}],
-			"description": "Amateur satellite",
 			"groups": ["amateur"],
-			"tle1": "1 27607U 02058C   09080.71748238 -.00000074  00000-0  10658-4 0  8438",
-			"tle2": "2 27607  64.5592 290.7496 0076162 224.5615 134.9353 14.71420878335808",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
+			"tle1": "1 27607U 02058C   10301.61448115  .00000083  00000-0  34786-4 0  3045",
+			"tle2": "2 27607  64.5581 311.2303 0045303  21.9147 338.3881 14.71594408422011",
 			"visible": true
+		},
+		"SEASAT 1": 
+		{
+			"comms": [],
+			"groups": [],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 10967U 78064A   10301.42156452  .00000021  00000-0  47716-4 0  2504",
+			"tle2": "2 10967 108.0170 282.5360 0003008 244.5472 115.5366 14.42233989697001",
+			"visible": true
+		},
+		"SEDSAT 1 (SO-33)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25509U 98061B   10301.54597441  .00000218  00000-0  32855-4 0  8244",
+			"tle2": "2 25509  31.4315 114.3559 0352948  15.8890 345.2447 14.28335354627136",
+			"visible": false
+		},
+		"SSETI EXPRESS (XO-53)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 28894U 05043E   10302.16153439  .00000121  00000-0  34690-4 0  9025",
+			"tle2": "2 28894  97.9880 181.3536 0016597 225.9524 134.0317 14.59762730266645",
+			"visible": false
+		},
+		"SUNSAT (SO-35)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25636U 99008C   10301.17920158  .00000094  00000-0  31863-4 0  7442",
+			"tle2": "2 25636  96.4810  11.4219 0149458  85.2411 276.5846 14.43522153614944",
+			"visible": false
+		},
+		"TECHSAT 1B (GO-32)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 25397U 98043D   10301.04803974  .00000064  00000-0  46175-4 0  3171",
+			"tle2": "2 25397  98.3171 301.2061 0000536 187.5333 172.5857 14.23188315638945",
+			"visible": false
+		},
+		"TIUNGSAT-1 (MO-46)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 26548U 00057D   10301.43415163  .00000269  00000-0  50374-4 0  8347",
+			"tle2": "2 26548  64.5572 338.3968 0020896 204.3629 155.6463 14.83575119545869",
+			"visible": false
 		},
 		"TMSAT-1 (TO-31)": 
 		{
-			"description": "Amateur satellite",
+			"comms": [],
 			"groups": ["amateur", "non-operational"],
-			"tle1": "1 25396U 98043C   09080.64556542 -.00000075  00000-0 -14722-4 0  3609",
-			"tle2": "2 25396  98.3414 113.1366 0003330 117.6494 242.5017 14.23773358555849",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
+			"tle1": "1 25396U 98043C   10301.66959165  .00000015  00000-0  24496-4 0  8311",
+			"tle2": "2 25396  98.3083 307.8110 0001932 195.3696 164.7419 14.23816641639233",
 			"visible": false
 		},
 		"UARS": 
 		{
 			"comms": [],
-			"tle1": "1 21701U 91063B   10011.56517379  .00007948  00000-0  10185-3 0  8632",
-			"tle2": "2 21701  56.9701 169.1612 0067526 215.9750 143.6756 15.57588661 11660",
+			"groups": [],
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
+			"tle1": "1 21701U 91063B   10302.26036846  .00018353  00000-0  16692-3 0  1147",
+			"tle2": "2 21701  56.9712 322.6612 0063129  75.5188 285.2865 15.65524459 57060",
 			"visible": true
 		},
-		"UOSAT 2 (UO-11)": 
+		"UNAMSAT-2 (MO-30)": 
 		{
-			"description": "Amateur satellite",
+			"comms": [],
 			"groups": ["amateur", "non-operational"],
-			"tle1": "1 14781U 84021B   09080.64423839  .00000051  00000-0  14037-4 0  9177",
-			"tle2": "2 14781  98.1180 124.2766 0008009 259.6956 100.3325 14.79700400344880",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
-			"visible": false
-		},
-		"UOSAT 3 (UO-14)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 20437U 90005B   09080.89917087 -.00000002  00000-0  14954-4 0  8782",
-			"tle2": "2 20437  98.3297  42.5381 0011721  66.3877 293.8534 14.31539355   562",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"UOSAT 4 (UO-15)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 20438U 90005C   09080.90778475 -.00000010  00000-0  12128-4 0  3731",
-			"tle2": "2 20438  98.3890  35.1941 0010802  94.4649 265.7767 14.30441006999994",
-			"orbit_visible": false,
-			"visible": false
-		},
-		"UOSAT 5 (UO-22)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 21575U 91050B   09080.89099734  .00000050  00000-0  29842-4 0  5115",
-			"tle2": "2 21575  98.4357  31.0711 0006470 282.9876  77.0586 14.39667965928143",
-			"orbit_visible": false,
+			"tle1": "1 24305U 96052B   10301.64417402  .00000050  00000-0  37693-4 0  5644",
+			"tle2": "2 24305  82.9375 345.3896 0029043 310.0764  49.7849 13.73589184709104",
 			"visible": false
 		},
 		"UOSAT 12 (UO-36)": 
 		{
-			"description": "Amateur satellite",
+			"comms": [],
 			"groups": ["amateur", "non-operational"],
-			"tle1": "1 25693U 99021A   09080.89685166 -.00000052  00000-0  12065-4 0  8740",
-			"tle2": "2 25693  64.5601  24.0115 0014988 205.2445 154.7951 14.78742116534931",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
+			"tle1": "1 25693U 99021A   10301.41097796 -.00000043  00000-0  13897-4 0  3404",
+			"tle2": "2 25693  64.5608  25.1028 0045010 293.3862  66.2479 14.78829481621518",
+			"visible": false
+		},
+		"UOSAT 2 (UO-11)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 14781U 84021B   10301.36196208 -.00000161  00000-0 -14259-4 0  3760",
+			"tle2": "2 14781  98.0387 353.3855 0009139 161.9114 198.2405 14.79849098431506",
+			"visible": false
+		},
+		"UOSAT 3 (UO-14)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 20437U 90005B   10300.91152494 -.00000056  00000-0 -51411-5 0  3454",
+			"tle2": "2 20437  98.4072 246.6446 0011266 129.9527 230.2667 14.31589070 84265",
+			"visible": false
+		},
+		"UOSAT 4 (UO-15)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 20438U 90005C   10301.79041733  .00000022  00000-0  24893-4 0  8454",
+			"tle2": "2 20438  98.4607 242.8951 0010217 160.3752 199.7827 14.30479448 83759",
+			"visible": false
+		},
+		"UOSAT 5 (UO-22)": 
+		{
+			"comms": [],
+			"groups": ["amateur", "non-operational"],
+			"orbitColor": [0, 0, 0],
+			"orbit_visible": false,
+			"tle1": "1 21575U 91050B   10301.83741544  .00000072  00000-0  37052-4 0  9705",
+			"tle2": "2 21575  98.5098 250.6008 0007023 332.9581  27.1235 14.39741581 12450",
 			"visible": false
 		},
 		"UWE-1": 
@@ -1753,42 +1979,21 @@
 				"frequency": 437.505,
 				"modulation": "AFSK, 9600 baud"
 			}],
-			"tle1": "1 28892U 05043C   10011.41208966  .00000105  00000-0  31411-4 0  5277",
-			"tle2": "2 28892  98.0328 260.2408 0018374  58.0630 302.2350 14.59806760224221",
+			"groups": [],
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
+			"tle1": "1 28892U 05043C   10302.15932038  .00000277  00000-0  67049-4 0  7666",
+			"tle2": "2 28892  97.9897 181.2370 0016475 223.3607 136.6293 14.59933347266640",
 			"visible": false
-		},
-		"HAMSAT (VO-52)": 
-		{
-			"comms": [
-			{
-				"description": "Beacon",
-				"frequency": 145.86,
-				"modulation": "CW"
-			}],
-			"description": "Amateur satellite",
-			"groups": ["amateur"],
-			"tle1": "1 28650U 05017B   09080.72416803 -.00000248  00000-0 -24823-4 0  1847",
-			"tle2": "2 28650  97.7510 145.1610 0026425 317.3448  42.5717 14.81561809209694",
-			"orbit_visible": false,
-			"visible": true
 		},
 		"WEBERSAT (WO-18)": 
 		{
-			"description": "Amateur satellite",
+			"comms": [],
 			"groups": ["amateur", "non-operational"],
-			"tle1": "1 20441U 90005F   09080.86048996  .00000029  00000-0  26273-4 0  7816",
-			"tle2": "2 20441  98.2526  56.8316 0012586  69.9267 290.3272 14.31886901   720",
+			"orbitColor": [0, 0, 0],
 			"orbit_visible": false,
-			"visible": false
-		},
-		"SSETI EXPRESS (XO-53)": 
-		{
-			"description": "Amateur satellite",
-			"groups": ["amateur", "non-operational"],
-			"tle1": "1 28894U 05043E   09080.73492122  .00000020  00000-0  13815-4 0  4180",
-			"tle2": "2 28894  98.0668 333.5116 0016556 264.1886  95.7421 14.59659039181098",
-			"orbit_visible": false,
+			"tle1": "1 20441U 90005F   10301.84779390  .00000035  00000-0  28489-4 0  2555",
+			"tle2": "2 20441  98.3319 257.0049 0012093 124.2979 235.9352 14.31947554 84589",
 			"visible": false
 		}
 	},
