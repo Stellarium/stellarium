@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2006 by j. l. Canales   *
- *   jlcanales@users.sourceforge.net   *
+ *   Copyright (C) 2006 by J. L. Canales                                   *
+ *   jlcanales@users.sourceforge.net                                       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,9 +18,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifndef stdsat_h
-#define stdsat_h 1
-
+#ifndef _STDSAT_H_
+#define _STDSAT_H_ 1
 
 static const double KINTERPOLATIONLIMIT=0.0000000000001;
 static const double KMU=3.9861352E5;
@@ -33,4 +32,4 @@ static const double KMFACTOR=7.292115E-5;
 static const double KDEG2RAD  =   KPI / 180.0;   //   0.0174532925199433
 static const double XPDOTP   =  1440.0 / K2PI;  // 229.1831180523293 minutes per radian (earth rotation)
 
-#endif
+#endif // _STDSAT_H_
