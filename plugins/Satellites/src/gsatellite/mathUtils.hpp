@@ -1,18 +1,15 @@
-/**********************************************************************
-** Name: mathUtils.cpp
-**
-** $Date$
-** $Revision$
-** $HeadURL$
-**
-** Description: Mathematical utilities
-**		 Implement some mathematical utilities to trigonometrical calc.
-**
-**
-**********************************************************************/
+/***************************************************************************
+ * Name: mathUtils.cpp
+ *
+ * Description: Mathematical utilities
+ *              Implement some mathematical utilities to trigonometrical
+ *              calc.
+ *
+ *
+ ***************************************************************************/
 
 /***************************************************************************
- *   Copyright (C) 2004 by JL Canales                                     *
+ *   Copyright (C) 2004 by J. L. Canales                                   *
  *   ph03696@homeserver                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -31,10 +28,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
-#ifndef MATHUTILS_H
-#define MATHUTILS_H 1
-
+#ifndef _MATHUTILS_HPP_
+#define _MATHUTILS_HPP_ 1
 
 
 /* Four-quadrant arctan function */
@@ -44,4 +39,4 @@ double AcTan(double sinx, double cosx);
 double Sqr(double arg);
 
 
-#endif
+#endif // _MATHUTILS_HPP_

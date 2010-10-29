@@ -1,17 +1,13 @@
-/**********************************************************************
-** Name: gVector.hpp
-** $Name$
-** $Date$
-** $Revision$
-** $HeadURL$
-**
-** Description: GVector class envelop the STL vertor class to add
-**   			some error control.
-**********************************************************************/
+/***************************************************************************
+ * Name: gVector.hpp
+ *
+ * Description: GVector class envelop the STL vertor class to add
+ *              some error control.
+ ***************************************************************************/
 
 /***************************************************************************
- *   Copyright (C) 2006 by j. l. Canales   *
- *   jlcanales@users.sourceforge.net   *
+ *   Copyright (C) 2006 by J. L. Canales                                   *
+ *   jlcanales@users.sourceforge.net                                       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -32,71 +28,78 @@
 #include "gVector.hpp"
 #include <cassert>
 #include <math.h>
-
-
 gVector::gVector()
-: br_stl::gVectorTempl<double>(){
+	: br_stl::gVectorTempl<double>()
+{
 
 }
 
-gVector::gVector ( unsigned int ai_uiElementsNumber)
-: br_stl::gVectorTempl<double>(ai_uiElementsNumber){
+gVector::gVector(unsigned int ai_uiElementsNumber)
+	: br_stl::gVectorTempl<double>(ai_uiElementsNumber)
+{
 
 }
 
-gVector gVector::operator- ( gVector &ai_rightVector) const{
+gVector gVector::operator- (gVector &ai_rightVector) const
+{
 
-	assert( size() == ai_rightVector.size());
+	assert(size() == ai_rightVector.size());
 
-	gVector retVector( size());
+	gVector retVector(size());
 
-	for( unsigned int i=0; i<size(); i++)
+	for(unsigned int i=0; i<size(); i++)
 		retVector[ i] = operator[](i) - ai_rightVector[i];
 	return retVector;
 
 }
-const gVector& gVector::operator-=( gVector &ai_rightVector){
-	assert( size() == ai_rightVector.size());
+const gVector& gVector::operator-=(gVector &ai_rightVector)
+{
+	assert(size() == ai_rightVector.size());
 
-	for( unsigned int i=0; i<size(); i++)
+	for(unsigned int i=0; i<size(); i++)
 		operator[](i) -= ai_rightVector[i];
 	return *this;
 }
 
-gVector gVector::operator+ ( gVector &ai_rightVector) const{
+gVector gVector::operator+ (gVector &ai_rightVector) const
+{
 
-	assert( size() == ai_rightVector.size());
+	assert(size() == ai_rightVector.size());
 
-	gVector retVector( size());
+	gVector retVector(size());
 
-	for( unsigned int i=0; i<size(); i++)
+	for(unsigned int i=0; i<size(); i++)
 		retVector[ i] = operator[](i) + ai_rightVector[i];
 	return retVector;
 
 }
-const gVector& gVector::operator+=( gVector &ai_rightVector){
-	assert( size() == ai_rightVector.size());
 
-	for( unsigned int i=0; i<size(); i++)
+const gVector& gVector::operator+=(gVector &ai_rightVector)
+{
+	assert(size() == ai_rightVector.size());
+
+	for(unsigned int i=0; i<size(); i++)
 		operator[](i) += ai_rightVector[i];
 	return *this;
 }
 
-double gVector::Dot( const gVector& ai_rightVector) const{
-	assert( size() == ai_rightVector.size());
+double gVector::Dot(const gVector& ai_rightVector) const
+{
+	assert(size() == ai_rightVector.size());
 
 	double dot = 0;
-	for( unsigned int i=0; i<size(); i++)
+	for(unsigned int i=0; i<size(); i++)
 		dot += operator[](i) * ai_rightVector[i];
 	return dot;
 }
 
-double gVector::Magnitude() const{
+double gVector::Magnitude() const
+{
 
 	double magnitude=0;
 
-	for( unsigned int i=0; i<size(); i++)
-		magnitude += ( operator[](i) * operator[](i));
+	for(unsigned int i=0; i<size(); i++)
+		magnitude += (operator[](i) * operator[](i));
 
 	return sqrt(magnitude);
 }

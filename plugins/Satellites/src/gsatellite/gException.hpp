@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2006 by j. l. Canales   *
- *   jlcanales@users.sourceforge.net   *
+ *   Copyright (C) 2006 by j. l. Canales                                   *
+ *   jlcanales@users.sourceforge.net                                       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,9 +18,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
-#ifndef GExcpt_h
-#define GExcpt_h 1
+#ifndef _GEXCEPTION_HPP_
+#define _GEXCEPTION_HPP_ 1
 
 #include <stdexcept>
 
@@ -33,7 +32,6 @@
 
 typedef unsigned int GEXCEPTIONTYPE;
 
-
 // Exception messages for GMatrix
 
 #define OPERATOR_X_INCOMPATIBLE_ORDER         "The matrix have incompatible order to calculate its verctorial product"
@@ -43,6 +41,4 @@ typedef unsigned int GEXCEPTIONTYPE;
 #define OPERATOR_DIFFEQUAL_INCOMPATIBLE_ORDER "The matrix have incompatible order to calculate the substraction"
 #define DET_INCOMPATIBLE_ORDER                "The matrix is not square, the determinant can't be calculate."
 
-
-
-#endif
+#endif // _GEXCEPTION_HPP_
