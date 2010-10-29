@@ -793,9 +793,9 @@ void Oculars::paintMask()
 		CCD *ccd = ccds[selectedCCDIndex];
 		if (ccd) {
 			glColor4f(0.77, 0.14, 0.16, 0.5);
-			Ocular *ocular = oculars[selectedOcularIndex];
-			float CCDx = ccd->getActualFOVx(ocular);
-			float CCDy = ccd->getActualFOVy(ocular);
+			Telescope *telescope = telescopes[selectedTelescopeIndex];
+			float CCDx = ccd->getActualFOVx(telescope);
+			float CCDy = ccd->getActualFOVy(telescope);
 			if (CCDx > 0.0 && CCDy > 0.0) {
 				glBegin(GL_LINE_LOOP);
 				glVertex2f(-CCDx, CCDy);
@@ -863,7 +863,7 @@ void Oculars::paintText(const StelCore* core)
 	painter.drawText(xPosition, yPosition, ocularNumberLabel);
 	yPosition-=lineHeight;
 
-	QString ocularFLLabel = "Ocular FL: " + QVariant(ocular->effectiveFocalLength()).toString() + QChar(0x00B0);
+	QString ocularFLLabel = "Ocular FL: " + QVariant(ocular->effectiveFocalLength()).toString() + "mm";
 	painter.drawText(xPosition, yPosition, ocularFLLabel);
 	yPosition-=lineHeight;
 
@@ -880,11 +880,15 @@ void Oculars::paintText(const StelCore* core)
 	yPosition-=lineHeight;
 
 	// General info
-	QString magnificationLabel = "Magnification: " + QVariant(((int)(ocular->magnification(telescope) * 10.0)) / 10.0).toString() + "x";
+	QString magnificationLabel = "Magnification: "
+										  + QVariant(((int)(ocular->magnification(telescope) * 10.0)) / 10.0).toString()
+										  + "x";
 	painter.drawText(xPosition, yPosition, magnificationLabel);
 	yPosition-=lineHeight;
 
-	QString fovLabel = "FOV: " + QVariant(((int)(ocular->actualFOV(telescope) * 10000.00)) / 10000.0).toString() + QChar(0x00B0);
+	QString fovLabel = "FOV: "
+							 + QVariant(((int)(ocular->actualFOV(telescope) * 10000.00)) / 10000.0).toString()
+							 + QChar(0x00B0);
 	painter.drawText(xPosition, yPosition, fovLabel);
 }
 
