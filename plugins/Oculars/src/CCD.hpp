@@ -24,7 +24,7 @@
 #include <QString>
 #include <QSettings>
 
-class Ocular;
+class Telescope;
 
 class CCD : public QObject
 {
@@ -59,8 +59,8 @@ public:
 	float pixelHeight()  const;
 	void setPixelHeight(float height);
 
-	float getActualFOVx(Ocular *ocular) const;
-	float getActualFOVy(Ocular *ocular) const;
+	float getActualFOVx(Telescope *telescope) const;
+	float getActualFOVy(Telescope *telescope) const;
 	QMap<int, QString> propertyMap();
 private:
 	int ccdID;
