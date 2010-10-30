@@ -26,6 +26,7 @@
 #include <QColor>
 #include <QColorDialog>
 #include <QFileDialog>
+#include <QImageReader>
 
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
@@ -155,33 +156,63 @@ void ManualImportWindow::selectRingTextureFile()
 
 void ManualImportWindow::selectTextureFile(QLineEdit * filePathLineEdit)
 {
-	//TODO: Simplify? Open a directory if there is no selected file?
+	//Find out the parent directory of the last selected file.
+	//Open the textures directory if no file have been selected.
+	QString texturesDirectoryPath;
 	QString currentFileName = filePathLineEdit->text();
-	QString currentFilePath;
-	try
+	if (currentFileName.isEmpty())
 	{
-		currentFilePath = StelFileMgr::findFile("textures/" + currentFileName, StelFileMgr::File);
+		try
+		{
+			texturesDirectoryPath = StelFileMgr::findFile("textures", StelFileMgr::Directory);
+		}
+		catch (std::runtime_error &e)
+		{
+			qDebug() << e.what();
+			return;
+		}
 	}
-	catch (std::runtime_error &e)
+	else
 	{
-		qDebug() << "Something broke" << e.what();
-		return;
+		QString currentFilePath;
+		try
+		{
+			currentFilePath = StelFileMgr::findFile("textures/" + currentFileName, StelFileMgr::File);
+		}
+		catch (std::runtime_error &e)
+		{
+			qDebug() << e.what();
+			filePathLineEdit->clear();
+			return;
+		}
+		if (currentFilePath.isEmpty())
+		{
+			filePathLineEdit->clear();
+			return;
+		}
+		QFileInfo currentFileInfo(currentFilePath);
+		texturesDirectoryPath = currentFileInfo.canonicalPath();
 	}
-	if (currentFilePath.isEmpty())
-		return;
-	QFileInfo currentFileInfo(currentFilePath);
-	QString currentFileDirectoryPath = currentFileInfo.canonicalPath();
 
-	QString newFilePath = QFileDialog::getOpenFileName(0, QString(), currentFileDirectoryPath);
-	if (currentFilePath.isEmpty())
+	//Select an existing file
+	QStringList supportedFormats;
+	foreach (QByteArray format, QImageReader::supportedImageFormats())
+	{
+		supportedFormats.append(QString("*.%1").arg(QString(format)));//It's a wee bit long...
+	}
+	QString fileFilter = QString("Texture files (%1)").arg(supportedFormats.join(" "));
+	QString newFilePath = QFileDialog::getOpenFileName(0, QString(), texturesDirectoryPath, fileFilter);
+
+	//Is the file in one of the two "textures" directories?
+	if (newFilePath.isEmpty())
 		return;
 	QFileInfo newFileInfo(newFilePath);
 	QDir newFileParentDirectory = newFileInfo.dir();
 	if (newFileParentDirectory.dirName() != "textures")
 		return;
-	QDir texturesDirectory(StelFileMgr::getInstallationDir() + "/textures");
+	QDir installedTexturesDirectory(StelFileMgr::getInstallationDir() + "/textures");
 	QDir userTexturesDirectory(StelFileMgr::getUserDir() + "/textures");
-	if (newFileParentDirectory != texturesDirectory && newFileParentDirectory != userTexturesDirectory)
+	if (newFileParentDirectory != installedTexturesDirectory && newFileParentDirectory != userTexturesDirectory)
 		return;
 
 	if (verifyTextureFile(newFileInfo.canonicalFilePath()))
