@@ -25,8 +25,10 @@
 
 #include <QColor>
 #include <QColorDialog>
+#include <QFileDialog>
 
 #include "StelApp.hpp"
+#include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 
 
@@ -51,9 +53,17 @@ void ManualImportWindow::createDialogContent()
 	connect(ui->lineEditColor, SIGNAL(textChanged(QString)), this, SLOT(parseColorString(QString)));
 	connect(ui->pushButtonSelectColor, SIGNAL(clicked()), this, SLOT(selectColor()));
 
+	connect(ui->pushButtonSelectTexture, SIGNAL(clicked()), this, SLOT(selectPlanetTextureFile()));
+	connect(ui->pushButtonSelectRingTexture, SIGNAL(clicked()), this, SLOT(selectRingTextureFile()));
+
 	ui->labelLongitudeOfTheAscendingNode->setText(QString("Longitude of the ascending node %1:").arg(QChar(0x03A9)));//Capital omega
 	ui->radioButtonArgumentOfPeriapsis->setText(QString("Argument of periapsis %1:").arg(QChar(0x3C9)));//Lowercase omega
 	ui->radioButtonLongitudeOfPeriapsis->setText(QString("Longitude of periapsis %1:").arg(QChar(0x3D6)));
+
+	//TODO: Move to "set defaults" function
+	ui->lineEditColor->setText("1.0, 1.0, 1.0");
+	ui->lineEditTexture->setText("nomap.png");
+	ui->lineEditRingTexture->setText("saturn_rings_radial.png");
 }
 
 void ManualImportWindow::languageChanged()
@@ -133,3 +143,84 @@ void ManualImportWindow::toggleMeanMotionOrPeriod(bool)
 	//
 }
 
+void ManualImportWindow::selectPlanetTextureFile()
+{
+	selectTextureFile(ui->lineEditTexture);
+}
+
+void ManualImportWindow::selectRingTextureFile()
+{
+	selectTextureFile(ui->lineEditRingTexture);
+}
+
+void ManualImportWindow::selectTextureFile(QLineEdit * filePathLineEdit)
+{
+	//TODO: Simplify? Open a directory if there is no selected file?
+	QString currentFileName = filePathLineEdit->text();
+	QString currentFilePath;
+	try
+	{
+		currentFilePath = StelFileMgr::findFile("textures/" + currentFileName, StelFileMgr::File);
+	}
+	catch (std::runtime_error &e)
+	{
+		qDebug() << "Something broke" << e.what();
+		return;
+	}
+	if (currentFilePath.isEmpty())
+		return;
+	QFileInfo currentFileInfo(currentFilePath);
+	QString currentFileDirectoryPath = currentFileInfo.canonicalPath();
+
+	QString newFilePath = QFileDialog::getOpenFileName(0, QString(), currentFileDirectoryPath);
+	if (currentFilePath.isEmpty())
+		return;
+	QFileInfo newFileInfo(newFilePath);
+	QDir newFileParentDirectory = newFileInfo.dir();
+	if (newFileParentDirectory.dirName() != "textures")
+		return;
+	QDir texturesDirectory(StelFileMgr::getInstallationDir() + "/textures");
+	QDir userTexturesDirectory(StelFileMgr::getUserDir() + "/textures");
+	if (newFileParentDirectory != texturesDirectory && newFileParentDirectory != userTexturesDirectory)
+		return;
+
+	if (verifyTextureFile(newFileInfo.canonicalFilePath()))
+		filePathLineEdit->setText(newFileInfo.fileName());
+}
+
+bool ManualImportWindow::verifyTextureFile(QString filePath)
+{
+	//TODO: Absolute path? File exists?
+
+	QPixmap texture(filePath);
+
+	if (texture.isNull())
+	{
+		qDebug() << "File doesn't exist or is not an accepted texure format:"
+				<< filePath;
+		return false;
+	}
+
+	if (!verifyPowerOfTwo(texture.height()))
+	{
+		qDebug() << "Invalid texure height:" << texture.height()
+				<< "for file" << filePath;
+		return false;
+	}
+	if (!verifyPowerOfTwo(texture.width()))
+	{
+		qDebug() << "Invalid texture width:" << texture.width()
+				<< "for file" << filePath;
+		return false;
+	}
+
+	return true;
+}
+
+bool ManualImportWindow::verifyPowerOfTwo(int value)
+{
+	if (value > 0 && (value & (value-1)) == 0)
+		return true;
+	else
+		return false;
+}
