@@ -157,9 +157,6 @@ QTabWidget::pane {
    </item>
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
-     <property name="currentIndex">
-      <number>0</number>
-     </property>
      <widget class="QWidget" name="pageSource">
       <layout class="QVBoxLayout" name="verticalLayout_7">
        <property name="spacing">
@@ -170,9 +167,6 @@ QTabWidget::pane {
        </property>
        <item>
         <widget class="QTabWidget" name="tabWidget">
-         <property name="currentIndex">
-          <number>0</number>
-         </property>
          <widget class="QWidget" name="tabLists">
           <attribute name="title">
            <string>Lists</string>
@@ -399,22 +393,6 @@ QTabWidget::pane {
                    </property>
                   </widget>
                  </item>
-                 <item>
-                  <widget class="QLCDNumber" name="lcdNumber">
-                   <property name="frameShape">
-                    <enum>QFrame::NoFrame</enum>
-                   </property>
-                   <property name="numDigits">
-                    <number>2</number>
-                   </property>
-                   <property name="segmentStyle">
-                    <enum>QLCDNumber::Flat</enum>
-                   </property>
-                   <property name="value" stdset="0">
-                    <double>60.000000000000000</double>
-                   </property>
-                  </widget>
-                 </item>
                 </layout>
                </widget>
               </item>
@@ -429,16 +407,17 @@ QTabWidget::pane {
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="label">
-                <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+               <widget class="QLabel" name="labelQueryTimer">
+                <property name="text">
+                 <string>You can use the MPC website again in %1 seconds.</string>
                 </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Sunken</enum>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
                 </property>
-                <property name="lineWidth">
-                 <number>2</number>
-                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="labelQueryInstructions">
                 <property name="text">
                  <string>Only one result will be returned if the query is successful.&lt;br&gt;Both comets and asteroids can be identified with their number, name or provisional designation.&lt;br&gt;Comet &lt;i&gt;names&lt;/i&gt; need to be prefixed with &lt;b&gt;C/&lt;/b&gt; or &lt;b&gt;P/&lt;/b&gt;. If more than one comet matches a name, only the first result will be returned. For example, &quot;C/Halley&quot; will return 1P/Halley, Halley's Comet, but &quot;Halley&quot; will return the asteorid (2688) Halley.</string>
                 </property>
@@ -451,7 +430,7 @@ QTabWidget::pane {
             </widget>
            </item>
            <item>
-            <spacer name="verticalSpacer_3">
+            <spacer name="verticalSpacerSearch">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
              </property>

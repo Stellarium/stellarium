@@ -306,7 +306,7 @@ QList<CAImporter::SsoElements> ImportWindow::readElementsFromFile(ImportType typ
 	}
 }
 
-void ImportWindow::switchImportType(bool checked)
+void ImportWindow::switchImportType(bool)
 {
 	if (ui->radioButtonAsteroids->isChecked())
 	{
@@ -390,7 +390,7 @@ void ImportWindow::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTota
 	downloadProgressBar->setMaximum(endValue);
 }
 
-void ImportWindow::updateQueryProgress(qint64 bytesReceived, qint64 bytesTotal)
+void ImportWindow::updateQueryProgress(qint64, qint64)
 {
 	if (queryProgressBar == NULL)
 		return;
@@ -580,7 +580,10 @@ void ImportWindow::queryComplete(QNetworkReply *reply)
 		           << reply->url().toString()
 		           << "the following error occured:"
 		           << reply->errorString();
+		ui->labelNotFound->setText(reply->errorString());//TODO: Decide if this is a good idea
+		ui->labelNotFound->setVisible(true);
 		enableInterface(true);
+
 		reply->deleteLater();
 		downloadReply = NULL;
 		return;
@@ -589,7 +592,9 @@ void ImportWindow::queryComplete(QNetworkReply *reply)
 	if (reply->header(QNetworkRequest::ContentTypeHeader) != "text/ascii" ||
 	    reply->rawHeader(QByteArray("Content-disposition")) != "attachment; filename=elements.txt")
 	{
+		ui->labelNotFound->setText("Object not found.");
 		ui->labelNotFound->setVisible(true);
+		enableInterface(true);
 	}
 	else
 	{
@@ -647,7 +652,7 @@ void ImportWindow::startCountdown()
 	//Disable the interface
 	ui->lineEditQuery->setEnabled(false);
 	ui->pushButtonSearch->setEnabled(false);
-	ui->lcdNumber->setVisible(true);
+	ui->labelQueryTimer->setVisible(true);
 }
 
 void ImportWindow::resetCountdown()
@@ -658,8 +663,8 @@ void ImportWindow::resetCountdown()
 
 	//Reset the counter
 	countdown = 60;
-	ui->lcdNumber->setVisible(false);
-	ui->lcdNumber->display(countdown);
+	ui->labelQueryTimer->setVisible(false);
+	ui->labelQueryTimer->setText(QString("You can use the MPC website again in %1 seconds.").arg(countdown));
 
 	//Enable the interface
 	ui->lineEditQuery->setEnabled(true);
@@ -676,7 +681,7 @@ void ImportWindow::updateCountdown()
 	}
 	else
 	{
-		ui->lcdNumber->display(countdown);
+		ui->labelQueryTimer->setText(QString("You can use the MPC website again in %1 seconds.").arg(countdown));
 	}
 }
 
