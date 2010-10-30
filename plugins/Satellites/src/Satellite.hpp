@@ -127,20 +127,20 @@ private:
 	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
 	void setObserverLocation(StelLocation* loc=NULL);
 
-    //gsatellite objects
-    gSatTEME *pSatellite;
-    gObserver observer;
-    gTime     epochTime;
-    gVector   Position;
-    gVector   Vel;
-    gVector   LatLong;
-    gVector   azElPos;
+	//gsatellite objects
+	gSatTEME *pSatellite;
+	gObserver observer;
+	gTime     epochTime;
+	gVector   Position;
+	gVector   Vel;
+	gVector   LatLong;
+	gVector   azElPos;
 
-    //Satellite Orbit Draw
-    QFont     font;
-    Vec3f     orbitColor;
-    gTime     lastEpochCompForOrbit;
-    QList<gVector> orbitPoints; //orbit points represented by azElPos vectors
+	//Satellite Orbit Draw
+	QFont     font;
+	Vec3f     orbitColor;
+	gTime     lastEpochCompForOrbit;
+	QList<gVector> orbitPoints; //orbit points represented by azElPos vectors
 
 };
 
