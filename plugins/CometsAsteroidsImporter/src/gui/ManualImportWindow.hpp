@@ -29,6 +29,7 @@
 #include <QColor>
 
 class Ui_manualImportWindow;
+class QLineEdit;
 
 /*! \brief Window for manual entry of Solar System object properties.
   \author Bogdan Marinov
@@ -53,12 +54,22 @@ private slots:
 
 	void toggleMeanMotionOrPeriod(bool);
 
+	void selectPlanetTextureFile();
+	void selectRingTextureFile();
+	//TODO: Parse input in the line edits? (Otherwise, leave them read-only.)
+
 private:
 	CAImporter * ssoManager;
 
 	QColor objectColor;
 
 	void setColorButtonColor(QColor newColor);
+
+	void selectTextureFile(QLineEdit * filePathLineEdit);
+	//! Check if a file is a valid graphics file with OpenGL texture dimensions.
+	//! OpenGL accepts only dimentions that are powers of 2 (512, 1024, etc.)
+	bool verifyTextureFile(QString filePath);
+	bool verifyPowerOfTwo(int value);
 
 protected:
 	virtual void createDialogContent();
