@@ -65,7 +65,7 @@ Satellite::Satellite(const QVariantMap& map)
 	strncpy(elements[2], qPrintable(map.value("tle2").toString()), 80);
 	if (map.contains("description")) description = map.value("description").toString();
 	if (map.contains("visible")) visible = map.value("visible").toBool();
-	if (map.contains("orbit_visible")) orbitVisible = map.value("orbit_visible").toBool();
+	if (map.contains("orbitVisible")) orbitVisible = map.value("orbitVisible").toBool();
 
 	if (map.contains("hintColor"))
 	{
@@ -116,7 +116,7 @@ QVariantMap Satellite::getMap(void)
 	QVariantMap map;
 	map["designation"] = designation;
 	map["visible"] = visible;
-	map["orbit_visible"] = orbitVisible;
+	map["orbitVisible"] = orbitVisible;
 	map["tle1"] = QString(elements[1]);
 	map["tle2"] = QString(elements[2]);
 	QVariantList col, orbitCol;;
@@ -327,7 +327,11 @@ void Satellite::drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter
 			vertexArray.append(xy1[1]);
 		}
 		it++;
-		if (i>0)
+
+		// draw the end parts of the orbit only, since they have non-standard color
+		// We'll draw the middle segment (with all the same color) with a single
+		// call to drawFromArray after this loop closes.
+		if (i>0 && ((DRAWORBIT_SLOTS_NUMBER/2) - abs(i - (DRAWORBIT_SLOTS_NUMBER/2) % DRAWORBIT_SLOTS_NUMBER)) < DRAWORBIT_FADE_NUMBER)
 		{
 			painter.setColor(hintColor[0], hintColor[1], hintColor[2], hintBrightness * calculateOrbitSegmentIntensity(i));
 			painter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
@@ -335,7 +339,18 @@ void Satellite::drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter
 		}
 	}
 
-	vertexArray.clear();
+	// draw the middle segments of the orbit which are all the same color
+	if(!vertexArray.isEmpty())
+	{
+		if (vertexArray.count() > (2*DRAWORBIT_FADE_NUMBER))
+		{
+			painter.setColor(hintColor[0], hintColor[1], hintColor[2], hintBrightness);
+			painter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
+			painter.drawFromArray(StelPainter::LineStrip, DRAWORBIT_SLOTS_NUMBER + 1 - (2*DRAWORBIT_FADE_NUMBER), DRAWORBIT_FADE_NUMBER - 1, false);
+		}
+		vertexArray.clear();
+	}
+
 	painter.enableClientStates(false);
 	glEnable(GL_TEXTURE_2D);
 }
