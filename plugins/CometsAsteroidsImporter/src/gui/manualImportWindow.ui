@@ -120,38 +120,6 @@
      </layout>
     </widget>
    </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="QFrame" name="frameButton">
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QLabel" name="labelErrorMessage">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Error message goes here</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>Save</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
    <item row="1" column="1">
     <widget class="QGroupBox" name="groupBoxObjectType">
      <property name="title">
@@ -164,6 +132,13 @@
       <property name="margin">
        <number>0</number>
       </property>
+      <item>
+       <widget class="QRadioButton" name="radioButtonSolarSystemObject">
+        <property name="text">
+         <string>Solar System object</string>
+        </property>
+       </widget>
+      </item>
       <item>
        <widget class="QRadioButton" name="radioButtonMinorPlanet">
         <property name="text">
@@ -182,13 +157,6 @@
        <widget class="QRadioButton" name="radioButtonSatellite">
         <property name="text">
          <string>Satellite</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButton">
-        <property name="text">
-         <string>Other</string>
         </property>
        </widget>
       </item>
@@ -252,9 +220,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-21</y>
+        <y>0</y>
         <width>582</width>
-        <height>1147</height>
+        <height>1436</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayoutScroll">
@@ -346,10 +314,14 @@
            </widget>
           </item>
           <item row="8" column="2">
-           <widget class="QLineEdit" name="lineEditTexture"/>
+           <widget class="QLineEdit" name="lineEditTexture">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
           <item row="8" column="3">
-           <widget class="QPushButton" name="pushButtonBrowseTexture">
+           <widget class="QPushButton" name="pushButtonSelectTexture">
             <property name="text">
              <string>...</string>
             </property>
@@ -477,7 +449,7 @@
              <item row="0" column="0">
               <widget class="QRadioButton" name="radioButtonArgumentOfPeriapsis">
                <property name="text">
-                <string>Argument of periapsis %1:</string>
+                <string>Argument of the periapsis %1:</string>
                </property>
               </widget>
              </item>
@@ -487,7 +459,7 @@
              <item row="1" column="0">
               <widget class="QRadioButton" name="radioButtonLongitudeOfPeriapsis">
                <property name="text">
-                <string>Longitude of periapsis %1:</string>
+                <string>Longitude of the periapsis %1:</string>
                </property>
               </widget>
              </item>
@@ -564,28 +536,8 @@
              <item row="0" column="1">
               <widget class="QLineEdit" name="lineEditEpoch"/>
              </item>
-             <item row="1" column="1">
+             <item row="1" column="1" colspan="2">
               <widget class="QLineEdit" name="lineEditTimeOfPeriapsis"/>
-             </item>
-             <item row="1" column="2">
-              <widget class="QDateTimeEdit" name="dateTimeEditTimeOfPeriapsis">
-               <property name="displayFormat">
-                <string notr="true">YYYY-MM-dd HH:mm</string>
-               </property>
-               <property name="calendarPopup">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QDateTimeEdit" name="dateTimeEditEpoch">
-               <property name="displayFormat">
-                <string notr="true">YYYY-MM-dd HH:mm</string>
-               </property>
-               <property name="calendarPopup">
-                <bool>true</bool>
-               </property>
-              </widget>
              </item>
              <item row="0" column="0">
               <widget class="QRadioButton" name="radioButtonEpoch">
@@ -598,6 +550,13 @@
               <widget class="QRadioButton" name="radioButtonTimeOfPeriapsis">
                <property name="text">
                 <string>Time of periapsis passage:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QPushButton" name="pushButtonEpochJ2000">
+               <property name="text">
+                <string>J2000.0</string>
                </property>
               </widget>
              </item>
@@ -643,6 +602,16 @@
           <item row="3" column="1">
            <widget class="QComboBox" name="comboBoxOrbitFunction"/>
           </item>
+          <item row="12" column="0">
+           <widget class="QCheckBox" name="checkBoxOrbitVisualizationPeriod">
+            <property name="text">
+             <string>Orbit visualization period:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="12" column="1">
+           <widget class="QLineEdit" name="lineEditOrbitVisualizationPeriod"/>
+          </item>
          </layout>
         </widget>
        </item>
@@ -655,9 +624,89 @@
           <item row="0" column="0">
            <widget class="QCheckBox" name="checkBoxObliquity">
             <property name="text">
-             <string>Obliquity</string>
+             <string>Obliquity:</string>
             </property>
            </widget>
+          </item>
+          <item row="0" column="1" colspan="3">
+           <widget class="QLineEdit" name="lineEditObliquity"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="checkBoxNorthPoleRA">
+            <property name="text">
+             <string>North pole right ascension:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" colspan="3">
+           <widget class="QLineEdit" name="lineEditNorthPoleRA"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="checkBoxNorthPoleDec">
+            <property name="text">
+             <string>North pole declination:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" colspan="3">
+           <widget class="QLineEdit" name="lineEditNorthPoleDec"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QCheckBox" name="checkBoxRotationalPeriod">
+            <property name="text">
+             <string>Period (hours):</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1" colspan="3">
+           <widget class="QLineEdit" name="lineEditRotationalPeriod"/>
+          </item>
+          <item row="5" column="0">
+           <widget class="QCheckBox" name="checkBoxPrecessionRate">
+            <property name="text">
+             <string>Precession rate:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1" colspan="3">
+           <widget class="QLineEdit" name="lineEditPrecessionRate"/>
+          </item>
+          <item row="6" column="0">
+           <widget class="QCheckBox" name="checkBoxRotationalEpoch">
+            <property name="text">
+             <string>Epoch:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLineEdit" name="lineEditRotationalEpoch"/>
+          </item>
+          <item row="7" column="0">
+           <widget class="QCheckBox" name="checkBoxOffset">
+            <property name="text">
+             <string>Offset:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1" colspan="3">
+           <widget class="QLineEdit" name="lineEditOffset"/>
+          </item>
+          <item row="1" column="0" colspan="3">
+           <widget class="QCheckBox" name="checkBoxEquatorAscendingNode">
+            <property name="text">
+             <string>Longitude of the ascending node of the ecliptic on the equator:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="3">
+           <widget class="QPushButton" name="pushButtonRotationalEpochJ2000">
+            <property name="text">
+             <string>J2000.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QLineEdit" name="lineEditEquatorAscendingNode"/>
           </item>
          </layout>
         </widget>
@@ -681,7 +730,7 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0" colspan="2">
+          <item row="1" column="0">
            <widget class="QLabel" name="labelOuterSize">
             <property name="text">
              <string>Outer size:</string>
@@ -696,20 +745,56 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEditRingTexture"/>
+           <widget class="QLineEdit" name="lineEditRingTexture">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
           <item row="2" column="2">
-           <widget class="QPushButton" name="pushButtonBrowseRingTexture">
+           <widget class="QPushButton" name="pushButtonSelectRingTexture">
             <property name="text">
              <string>...</string>
             </property>
            </widget>
+          </item>
+          <item row="0" column="1" colspan="2">
+           <widget class="QLineEdit" name="lineEditRingInnerSize"/>
+          </item>
+          <item row="1" column="1" colspan="2">
+           <widget class="QLineEdit" name="lineEditRingOuterSize"/>
           </item>
          </layout>
         </widget>
        </item>
       </layout>
      </widget>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QFrame" name="frameButton">
+     <layout class="QHBoxLayout" name="horizontalLayoutButton">
+      <item>
+       <widget class="QLabel" name="labelErrorMessage">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButtonSave">
+        <property name="text">
+         <string>Save</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
   </layout>
@@ -722,6 +807,84 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>lineEditName</tabstop>
+  <tabstop>lineEditIdentifier</tabstop>
+  <tabstop>checkBoxMinorPlanetNumber</tabstop>
+  <tabstop>lineEditMinorPlanetNumber</tabstop>
+  <tabstop>radioButtonSolarSystemObject</tabstop>
+  <tabstop>radioButtonMinorPlanet</tabstop>
+  <tabstop>radioButtonComet</tabstop>
+  <tabstop>radioButtonSatellite</tabstop>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>comboBoxParent</tabstop>
+  <tabstop>lineEditRadius</tabstop>
+  <tabstop>lineEditOblateness</tabstop>
+  <tabstop>lineEditAlbedo</tabstop>
+  <tabstop>lineEditColor</tabstop>
+  <tabstop>pushButtonSelectColor</tabstop>
+  <tabstop>checkBoxLighting</tabstop>
+  <tabstop>checkBoxAtmosphere</tabstop>
+  <tabstop>checkBoxHidden</tabstop>
+  <tabstop>lineEditTexture</tabstop>
+  <tabstop>pushButtonSelectTexture</tabstop>
+  <tabstop>lineEditAbsoluteMagnitude</tabstop>
+  <tabstop>lineEditSlopeParameter</tabstop>
+  <tabstop>pushButtonCalculateRadius</tabstop>
+  <tabstop>radioButtonCometaryOrbit</tabstop>
+  <tabstop>radioButtonEllipticOrbit</tabstop>
+  <tabstop>radioButtonOrbitFunction</tabstop>
+  <tabstop>comboBoxOrbitFunction</tabstop>
+  <tabstop>lineEditEccentricity</tabstop>
+  <tabstop>lineEditInclination</tabstop>
+  <tabstop>lineEditLongitudeOfTheAscendingNode</tabstop>
+  <tabstop>radioButtonArgumentOfPeriapsis</tabstop>
+  <tabstop>lineEditArgumentOfPeriapsis</tabstop>
+  <tabstop>radioButtonLongitudeOfPeriapsis</tabstop>
+  <tabstop>lineEditLongitudeOfPeriapsis</tabstop>
+  <tabstop>radioButtonSemiMajorAxis</tabstop>
+  <tabstop>lineEditSemiMajorAxis</tabstop>
+  <tabstop>radioButtonPeriapsisDistance</tabstop>
+  <tabstop>lineEditPeriapsisDistance</tabstop>
+  <tabstop>checkBoxPeriod</tabstop>
+  <tabstop>lineEditPeriod</tabstop>
+  <tabstop>checkBoxMeanMotion</tabstop>
+  <tabstop>lineEditMeanMotion</tabstop>
+  <tabstop>radioButtonEpoch</tabstop>
+  <tabstop>lineEditEpoch</tabstop>
+  <tabstop>pushButtonEpochJ2000</tabstop>
+  <tabstop>radioButtonTimeOfPeriapsis</tabstop>
+  <tabstop>lineEditTimeOfPeriapsis</tabstop>
+  <tabstop>radioButtonMeanAnomaly</tabstop>
+  <tabstop>lineEditMeanAnomaly</tabstop>
+  <tabstop>radioButtonMeanLongitude</tabstop>
+  <tabstop>lineEditMeanLongitude</tabstop>
+  <tabstop>checkBoxOrbitVisualizationPeriod</tabstop>
+  <tabstop>lineEditOrbitVisualizationPeriod</tabstop>
+  <tabstop>checkBoxObliquity</tabstop>
+  <tabstop>lineEditObliquity</tabstop>
+  <tabstop>checkBoxEquatorAscendingNode</tabstop>
+  <tabstop>lineEditEquatorAscendingNode</tabstop>
+  <tabstop>checkBoxNorthPoleRA</tabstop>
+  <tabstop>lineEditNorthPoleRA</tabstop>
+  <tabstop>checkBoxNorthPoleDec</tabstop>
+  <tabstop>lineEditNorthPoleDec</tabstop>
+  <tabstop>checkBoxRotationalPeriod</tabstop>
+  <tabstop>lineEditRotationalPeriod</tabstop>
+  <tabstop>checkBoxPrecessionRate</tabstop>
+  <tabstop>lineEditPrecessionRate</tabstop>
+  <tabstop>checkBoxRotationalEpoch</tabstop>
+  <tabstop>lineEditRotationalEpoch</tabstop>
+  <tabstop>pushButtonRotationalEpochJ2000</tabstop>
+  <tabstop>checkBoxOffset</tabstop>
+  <tabstop>lineEditOffset</tabstop>
+  <tabstop>groupBoxRings</tabstop>
+  <tabstop>lineEditRingInnerSize</tabstop>
+  <tabstop>lineEditRingOuterSize</tabstop>
+  <tabstop>lineEditRingTexture</tabstop>
+  <tabstop>pushButtonSelectRingTexture</tabstop>
+  <tabstop>pushButtonSave</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
