@@ -14,6 +14,7 @@ ADD_CUSTOM_TARGET(
         --directory=${PROJECT_SOURCE_DIR}
         --files-from=POTFILES.in
         --copyright-holder=Stellarium's\ team
+	--from-code=utf-8
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     COMMENT "Generating ${skycultures_POT}"
     VERBATIM
