@@ -120,17 +120,17 @@ void CAImporter::deinit()
 	//
 }
 
-void CAImporter::update(double deltaTime)
+void CAImporter::update(double) //deltaTime
 {
 	//
 }
 
-void CAImporter::draw(StelCore* core)
+void CAImporter::draw(StelCore*) //core
 {
 	//
 }
 
-double CAImporter::getCallOrder(StelModuleActionName actionName) const
+double CAImporter::getCallOrder(StelModuleActionName) const// actionName
 {
 	return 0.;
 }
