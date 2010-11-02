@@ -48,7 +48,7 @@ background:rgb(48, 49, 52);
 	border: rgb(255, 240, 0);
 }*/
 
-QFrame#LocationBar, QFrame#DateTimeBar, QFrame#SearchBar, QFrame#TimeBar, QFrame#HelpBar{
+QFrame#TitleBar {
 	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(41, 47, 50), stop:1 rgb(31, 33, 36));
 }
 
