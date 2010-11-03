@@ -376,7 +376,6 @@ void SatellitesDialog::visibleCheckChanged(int state)
 
 void SatellitesDialog::orbitCheckChanged(bool checked)
 {
-	qDebug() << "SatellitesDialog::orbitCheckChanged" << checked;
 	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
 	{
 		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(i->text());
