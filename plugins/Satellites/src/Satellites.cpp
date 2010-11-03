@@ -206,7 +206,7 @@ const StelStyle Satellites::getModuleStyleSheet(const StelStyle& style)
 double Satellites::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("StarMgr")->getCallOrder(actionName)+1.;
+		return StelApp::getInstance().getModuleMgr().getModule("SolarSystem")->getCallOrder(actionName)+1.;
 	return 0;
 }
 
