@@ -69,7 +69,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	//MinorPlanet specific members
 	minorPlanetNumber = 0;
 	absoluteMagnitude = 0;
-	slopeParameter = 0;//TODO: Default value?
+	slopeParameter = -1;//== uninitialized: used in getVMagnitude()
 
 	//TODO: Fix the name
 	// - Detect numeric prefix and set number if any
@@ -150,7 +150,7 @@ void MinorPlanet::setAbsoluteMagnitudeAndSlope(double magnitude, double slope)
 
 void MinorPlanet::setProvisionalDesignation(QString designation)
 {
-	//TODO: This feature have to be implemented better, anyway.
+	//TODO: This feature has to be implemented better, anyway.
 	provisionalDesignationHtml = renderProvisionalDesignationinHtml(designation);
 }
 
@@ -187,8 +187,18 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(nav), 0, 'f', 2) << "<br>";
 
 	if (flags&AbsoluteMagnitude)
-		oss << q_("Absolute Magnitude: %1").arg(absoluteMagnitude, 0, 'f', 2) << "<br>";
-	//TODO: Make sure absolute magnitude is a sane value
+	{
+		//TODO: Make sure absolute magnitude is a sane value
+		//If the H-G system is not used, use the default radius/albedo mechanism
+		if (slopeParameter < 0)
+		{
+			oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(nav) - 5. * (std::log10(getJ2000EquatorialPos(nav).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
+		}
+		else
+		{
+			oss << q_("Absolute Magnitude: %1").arg(absoluteMagnitude, 0, 'f', 2) << "<br>";
+		}
+	}
 
 	oss << getPositionInfoString(core, flags);
 
@@ -214,6 +224,12 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 float MinorPlanet::getVMagnitude(const StelNavigator *nav) const
 {
+	//If the H-G system is not used, use the default radius/albedo mechanism
+	if (slopeParameter < 0)
+	{
+		return Planet::getVMagnitude(nav);
+	}
+
 	//Calculate phase angle
 	//(Code copied from Planet::getVMagnitude())
 	//(LOL, this is actually vector substraction + the cosine theorem :))
