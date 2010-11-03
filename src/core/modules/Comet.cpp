@@ -68,7 +68,7 @@ Comet::Comet(const QString& englishName,
 
 	//Comet specific members
 	absoluteMagnitude = 0;
-	slopeParameter = 0;//TODO: Default value?
+	slopeParameter = -1;//== uninitialized: used in getVMagnitude()
 
 	//TODO: Name processing?
 
@@ -120,8 +120,13 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(nav), 0, 'f', 2) << "<br>";
 
 	if (flags&AbsoluteMagnitude)
-		oss << q_("Absolute Magnitude: %1").arg(absoluteMagnitude, 0, 'f', 2) << "<br>";
-	//TODO: Make sure absolute magnitude is a sane value
+	{
+		//TODO: Make sure absolute magnitude is a sane value
+		//If the two parameter magnitude system is not use, don't display this
+		//value. (Using radius/albedo doesn't make any sense for comets.)
+		if (slopeParameter >= 0)
+			oss << q_("Absolute Magnitude: %1").arg(absoluteMagnitude, 0, 'f', 2) << "<br>";
+	}
 
 	oss << getPositionInfoString(core, flags);
 
@@ -143,6 +148,13 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 
 float Comet::getVMagnitude(const StelNavigator *nav) const
 {
+	//If the two parameter system is not used,
+	//use the default radius/albedo mechanism
+	if (slopeParameter < 0)
+	{
+		return Planet::getVMagnitude(nav);
+	}
+
 	//Calculate distances
 	const Vec3d& observerHeliocentricPosition = nav->getObserverHeliocentricEclipticPos();
 	const Vec3d& cometHeliocentricPosition = getHeliocentricEclipticPos();
