@@ -77,6 +77,21 @@ Satellite::Satellite(const QVariantMap& map)
 		}
 	}
 
+	if (map.contains("orbitColor"))
+	{
+		if (map.value("orbitColor").toList().count() == 3)
+		{
+			orbitColor[0] = map.value("orbitColor").toList().at(0).toDouble();
+			orbitColor[1] = map.value("orbitColor").toList().at(1).toDouble();
+			orbitColor[2] = map.value("orbitColor").toList().at(2).toDouble();
+		}
+	}
+	else
+	{
+		orbitColor = hintColor;
+	}
+
+
 	if (map.contains("comms"))
 	{
 		foreach(QVariant comm, map.value("comms").toList())
@@ -115,7 +130,7 @@ QVariantMap Satellite::getMap(void)
 {
 	QVariantMap map;
 	map["designation"] = designation;
-	map["visible"] = visible;
+	map["visible"]     = visible;
 	map["orbitVisible"] = orbitVisible;
 	map["tle1"] = QString(elements[1]);
 	map["tle2"] = QString(elements[2]);
@@ -333,7 +348,7 @@ void Satellite::drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter
 		// call to drawFromArray after this loop closes.
 		if (i>0 && ((DRAWORBIT_SLOTS_NUMBER/2) - abs(i - (DRAWORBIT_SLOTS_NUMBER/2) % DRAWORBIT_SLOTS_NUMBER)) < DRAWORBIT_FADE_NUMBER)
 		{
-			painter.setColor(hintColor[0], hintColor[1], hintColor[2], hintBrightness * calculateOrbitSegmentIntensity(i));
+			painter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], hintBrightness * calculateOrbitSegmentIntensity(i));
 			painter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
 			painter.drawFromArray(StelPainter::LineStrip, 2, i-1, false);
 		}
@@ -344,7 +359,7 @@ void Satellite::drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter
 	{
 		if (vertexArray.count() > (2*DRAWORBIT_FADE_NUMBER))
 		{
-			painter.setColor(hintColor[0], hintColor[1], hintColor[2], hintBrightness);
+			painter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], hintBrightness);
 			painter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
 			painter.drawFromArray(StelPainter::LineStrip, DRAWORBIT_SLOTS_NUMBER + 1 - (2*DRAWORBIT_FADE_NUMBER), DRAWORBIT_FADE_NUMBER - 1, false);
 		}
