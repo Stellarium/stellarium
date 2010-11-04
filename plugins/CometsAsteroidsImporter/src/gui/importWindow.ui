@@ -519,6 +519,13 @@ QTabWidget::pane {
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonDiscard">
+               <property name="text">
+                <string>Discard</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
@@ -563,6 +570,7 @@ QTabWidget::pane {
   <tabstop>listWidgetObjects</tabstop>
   <tabstop>pushButtonMarkAll</tabstop>
   <tabstop>pushButtonMarkNone</tabstop>
+  <tabstop>pushButtonDiscard</tabstop>
   <tabstop>pushButtonAdd</tabstop>
  </tabstops>
  <resources>

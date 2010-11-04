@@ -35,7 +35,7 @@
 SolarSystemManagerWindow::SolarSystemManagerWindow()
 {
 	ui = new Ui_solarSystemManagerWindow();
-	importWindow = NULL;
+	importWindow = new ImportWindow();
 	manualImportWindow = NULL;
 
 	ssoManager = GETSTELMODULE(CAImporter);
@@ -66,6 +66,11 @@ void SolarSystemManagerWindow::createDialogContent()
 	connect(ssoManager, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
 	connect(ui->pushButtonReset, SIGNAL(clicked()), ssoManager, SLOT(resetSolarSystemToDefault()));
 
+	Q_ASSERT(importWindow);
+	//Rebuild the list if any planets have been imported
+	connect(importWindow, SIGNAL(objectsImported()), this, SLOT(populateSolarSystemList()));
+	connect(importWindow, SIGNAL(visibleChanged(bool)), this, SLOT(bringToForeground(bool)));
+
 	ui->lineEditUserFilePath->setText(ssoManager->getCustomSolarSystemFilePath());
 	populateSolarSystemList();
 }
@@ -81,33 +86,9 @@ void SolarSystemManagerWindow::languageChanged()
 
 void SolarSystemManagerWindow::newImportMPC()
 {
-	if (importWindow == NULL)
-	{
-		importWindow = new ImportWindow();
-		connect(importWindow, SIGNAL(visibleChanged(bool)), this, SLOT(resetImportMPC(bool)));
-	}
+	Q_ASSERT(importWindow);
 
 	importWindow->setVisible(true);
-}
-
-void SolarSystemManagerWindow::resetImportMPC(bool show)
-{
-	//If the window is being displayed, do nothing
-	if (show)
-		return;
-
-	if (importWindow)
-	{
-		//TODO:Move this out of here!
-		//Reload the list, in case there are new objects
-		populateSolarSystemList();
-
-		delete importWindow;
-		importWindow = NULL;
-
-		//This window is in the background, bring it to the foreground
-		dialog->setVisible(true);
-	}
 }
 
 void SolarSystemManagerWindow::newImportManual()
@@ -127,7 +108,7 @@ void SolarSystemManagerWindow::resetImportManual(bool show)
 	if (show)
 		return;
 
-	if (importWindow)
+	if (manualImportWindow)
 	{
 		//TODO:Move this out of here!
 		//Reload the list, in case there are new objects
