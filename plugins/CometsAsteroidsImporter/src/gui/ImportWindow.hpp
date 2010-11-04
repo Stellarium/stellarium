@@ -111,6 +111,7 @@ private:
 	QTimer * countdownTimer;
 	void startCountdown();
 	void resetCountdown();
+	void updateCountdownLabels(int countdownValue);
 	QNetworkReply * queryReply;
 	QProgressBar * queryProgressBar;
 
