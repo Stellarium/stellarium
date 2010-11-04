@@ -88,6 +88,7 @@ void ImportWindow::createDialogContent()
 
 	connect(ui->pushButtonAcquire, SIGNAL(clicked()), this, SLOT(acquireObjectData()));
 	connect(ui->pushButtonAdd, SIGNAL(clicked()), this, SLOT(addObjects()));
+	connect(ui->pushButtonDiscard, SIGNAL(clicked()), this, SLOT(discardObjects()));
 
 	//connect(ui->pushButtonPaste, SIGNAL(clicked()), this, SLOT(pasteClipboard()));
 	connect(ui->pushButtonBrowse, SIGNAL(clicked()), this, SLOT(selectFile()));
@@ -107,19 +108,28 @@ void ImportWindow::createDialogContent()
 	connect(ui->lineEditQuery, SIGNAL(textEdited(QString)), this, SLOT(resetNotFound()));
 	connect(countdownTimer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
 
-	//ui->radioButtonSingle->setChecked(true);
-	//ui->radioButtonFile->setChecked(true);
-	ui->frameFile->setVisible(false);
+	resetDialog();
+}
+
+void ImportWindow::resetDialog()
+{
+	ui->stackedWidget->setCurrentIndex(0);
+
+	ui->tabWidget->setCurrentIndex(0);
+	ui->groupBoxType->setVisible(true);
+	ui->radioButtonAsteroids->setChecked(true);
+
+	ui->radioButtonFile->setChecked(true);
 	ui->frameURL->setVisible(false);
 
-	//This box will be displayed when one of the source types is selected
-	ui->groupBoxSource->setVisible(false);
+	ui->lineEditFilePath->clear();
+	ui->lineEditURL->clear();
+	ui->lineEditQuery->clear();
+	ui->checkBoxAddBookmark->setChecked(false);
 
 	resetCountdown();
 	resetNotFound();
-
-	//In case I or someone else forgets the stack widget saved on another page
-	ui->stackedWidget->setCurrentIndex(0);
+	enableInterface(true);
 }
 
 void ImportWindow::languageChanged()
@@ -184,7 +194,14 @@ void ImportWindow::addObjects()
 	//Refresh the Solar System
 	GETSTELMODULE(SolarSystem)->reloadPlanets();
 
-	ui->stackedWidget->setCurrentIndex(0);
+	resetDialog();
+	emit objectsImported();
+	close();
+}
+
+void ImportWindow::discardObjects()
+{
+	resetDialog();
 	close();
 }
 
