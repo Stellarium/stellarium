@@ -47,6 +47,9 @@ public:
 	virtual ~ImportWindow();
 	void languageChanged();
 
+signals:
+	void objectsImported();
+
 private slots:
 	//Radio buttons for type
 	void switchImportType(bool checked);
@@ -79,12 +82,16 @@ private slots:
 	//! Unmarks (unchecks) all items in the results lists
 	void unmarkAll();
 	void addObjects();
+	void discardObjects();
 
 private:
 	CAImporter * ssoManager;
 	QList<CAImporter::SsoElements> candidateObjects;
 
 	ImportType importType;
+
+	//! resets the dialog to the state it should be in immediately after createDialogContent();.
+	void resetDialog();
 
 	//! wrapper for the single object function to allow multiple formats.
 	CAImporter::SsoElements readElementsFromString(QString elements);

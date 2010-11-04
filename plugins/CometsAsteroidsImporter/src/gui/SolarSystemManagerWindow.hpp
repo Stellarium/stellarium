@@ -54,14 +54,12 @@ private slots:
 	void removeObject();
 
 	void newImportMPC();
-	//TODO: Find a better way of resetting the window
-	void resetImportMPC(bool);
 
 	void newImportManual();
 	void resetImportManual(bool);
 
 private:
-	ImportWindow* importWindow;//There can be more than one!
+	ImportWindow* importWindow;
 	ManualImportWindow * manualImportWindow;
 
 	CAImporter * ssoManager;
