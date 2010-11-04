@@ -104,7 +104,8 @@ void ImportWindow::createDialogContent()
 	connect(ui->pushButtonMarkAll, SIGNAL(clicked()), this, SLOT(markAll()));
 	connect(ui->pushButtonMarkNone, SIGNAL(clicked()), this, SLOT(unmarkAll()));
 
-	connect(ui->pushButtonSearch, SIGNAL(clicked()), this, SLOT(sendQuery()));
+	connect(ui->pushButtonSendQuery, SIGNAL(clicked()), this, SLOT(sendQuery()));
+	connect(ui->pushButtonAbortQuery, SIGNAL(clicked()), this, SLOT(abortQuery()));
 	connect(ui->lineEditQuery, SIGNAL(textEdited(QString)), this, SLOT(resetNotFound()));
 	connect(countdownTimer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
 
@@ -126,6 +127,8 @@ void ImportWindow::resetDialog()
 	ui->lineEditURL->clear();
 	ui->lineEditQuery->clear();
 	ui->checkBoxAddBookmark->setChecked(false);
+
+	ui->pushButtonAbortQuery->setVisible(false);//TODO: Is this the right place?
 
 	resetCountdown();
 	resetNotFound();
@@ -573,9 +576,35 @@ void ImportWindow::sendQuery()
 	request.setHeader(QNetworkRequest::ContentLengthHeader, url.encodedQuery().length());
 
 	startCountdown();
+	ui->pushButtonAbortQuery->setVisible(true);
 	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(queryComplete(QNetworkReply*)));
-	QNetworkReply * reply = networkManager->post(request, url.encodedQuery());
-	connect(reply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateQueryProgress(qint64,qint64)));
+	queryReply = networkManager->post(request, url.encodedQuery());
+	connect(queryReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateQueryProgress(qint64,qint64)));
+}
+
+void ImportWindow::abortQuery()
+{
+	if (queryReply == NULL)
+		return;
+
+	disconnect(this, SLOT(queryComplete(QNetworkReply*)));
+
+	//Remove the progress bar
+	disconnect(this, SLOT(updateQueryProgress(qint64,qint64)));
+	if (queryProgressBar)
+	{
+		queryProgressBar->setVisible(false);
+		queryProgressBar->deleteLater();
+		queryProgressBar = NULL;
+	}
+
+	queryReply->abort();
+	queryReply->deleteLater();
+	queryReply = NULL;
+
+	resetCountdown();
+	enableInterface(true);
+	ui->pushButtonAbortQuery->setVisible(false);
 }
 
 void ImportWindow::queryComplete(QNetworkReply *reply)
@@ -591,6 +620,9 @@ void ImportWindow::queryComplete(QNetworkReply *reply)
 		queryProgressBar = NULL;
 	}
 
+	//Hide the abort button - a reply has been received
+	ui->pushButtonAbortQuery->setVisible(false);
+
 	if (reply->error())
 	{
 		qWarning() << "Download error: While trying to access"
@@ -602,7 +634,7 @@ void ImportWindow::queryComplete(QNetworkReply *reply)
 		enableInterface(true);
 
 		reply->deleteLater();
-		downloadReply = NULL;
+		queryReply = NULL;
 		return;
 	}
 
@@ -658,7 +690,7 @@ void ImportWindow::queryComplete(QNetworkReply *reply)
 	}
 
 	reply->deleteLater();
-	downloadReply = NULL;
+	queryReply = NULL;
 }
 
 void ImportWindow::startCountdown()
@@ -668,7 +700,7 @@ void ImportWindow::startCountdown()
 
 	//Disable the interface
 	ui->lineEditQuery->setEnabled(false);
-	ui->pushButtonSearch->setEnabled(false);
+	ui->pushButtonSendQuery->setEnabled(false);
 	ui->labelQueryCountdown->setVisible(true);
 }
 
@@ -685,7 +717,7 @@ void ImportWindow::resetCountdown()
 
 	//Enable the interface
 	ui->lineEditQuery->setEnabled(true);
-	ui->pushButtonSearch->setEnabled(true);
+	ui->pushButtonSendQuery->setEnabled(true);
 }
 
 void ImportWindow::updateCountdown()
