@@ -652,7 +652,7 @@ void ImportWindow::startCountdown()
 	//Disable the interface
 	ui->lineEditQuery->setEnabled(false);
 	ui->pushButtonSearch->setEnabled(false);
-	ui->labelQueryTimer->setVisible(true);
+	ui->labelQueryCountdown->setVisible(true);
 }
 
 void ImportWindow::resetCountdown()
@@ -663,13 +663,12 @@ void ImportWindow::resetCountdown()
 
 	//Reset the counter
 	countdown = 60;
-	ui->labelQueryTimer->setVisible(false);
-	ui->labelQueryTimer->setText(QString("You can use the MPC website again in %1 seconds.").arg(countdown));
+	ui->labelQueryCountdown->setVisible(false);
+	updateCountdownLabels(countdown);
 
 	//Enable the interface
 	ui->lineEditQuery->setEnabled(true);
 	ui->pushButtonSearch->setEnabled(true);
-
 }
 
 void ImportWindow::updateCountdown()
@@ -681,8 +680,14 @@ void ImportWindow::updateCountdown()
 	}
 	else
 	{
-		ui->labelQueryTimer->setText(QString("You can use the MPC website again in %1 seconds.").arg(countdown));
+		updateCountdownLabels(countdown);
 	}
+}
+
+void ImportWindow::updateCountdownLabels(int countdownValue)
+{
+	QString countdownText("You can use the MPC website again in %1 seconds.");
+	ui->labelQueryCountdown->setText(countdownText.arg(countdownValue));
 }
 
 void ImportWindow::resetNotFound()
