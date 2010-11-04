@@ -68,6 +68,7 @@ private slots:
 
 	//Online search
 	void sendQuery();
+	void abortQuery();
 	void updateCountdown();
 	void resetNotFound();
 
