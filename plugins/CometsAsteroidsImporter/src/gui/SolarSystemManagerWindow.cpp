@@ -69,7 +69,6 @@ void SolarSystemManagerWindow::createDialogContent()
 	Q_ASSERT(importWindow);
 	//Rebuild the list if any planets have been imported
 	connect(importWindow, SIGNAL(objectsImported()), this, SLOT(populateSolarSystemList()));
-	connect(importWindow, SIGNAL(visibleChanged(bool)), this, SLOT(bringToForeground(bool)));
 
 	ui->lineEditUserFilePath->setText(ssoManager->getCustomSolarSystemFilePath());
 	populateSolarSystemList();
