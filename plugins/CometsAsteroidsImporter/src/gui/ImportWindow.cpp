@@ -243,6 +243,12 @@ void ImportWindow::populateCandidateObjects(QList<CAImporter::SsoElements> objec
 	QStringList defaultSsoIds = ssoManager->getAllDefaultSsoIds();
 	QStringList currentSsoIds = ssoManager->readAllCurrentSsoIds();
 
+	//Separating the objects into visual groups in the list
+	int newDefaultSsoIndex = 0;
+	int newCurrentSsoIndex = 0;
+	int newNovelSsoIndex = 0;
+	int insertionIndex = 0;
+
 	QListWidget * list = ui->listWidgetObjects;
 	list->clear();
 	foreach (CAImporter::SsoElements object, objects)
@@ -252,7 +258,7 @@ void ImportWindow::populateCandidateObjects(QList<CAImporter::SsoElements> objec
 			QString name = object.value("name").toString();
 			if (!name.isEmpty())
 			{
-				QListWidgetItem * item = new QListWidgetItem(list);
+				QListWidgetItem * item = new QListWidgetItem();
 				item->setText(name);
 				item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
 				item->setCheckState(Qt::Unchecked);
@@ -266,21 +272,38 @@ void ImportWindow::populateCandidateObjects(QList<CAImporter::SsoElements> objec
 						QFont itemFont(item->font());
 						itemFont.setBold(true);
 						item->setFont(itemFont);
-					} else if (currentSsoIds.contains(sectionName))
+
+						insertionIndex = newDefaultSsoIndex;
+						newDefaultSsoIndex++;
+						newCurrentSsoIndex++;
+						newNovelSsoIndex++;
+					}
+					else if (currentSsoIds.contains(sectionName))
 					{
 						//Duplicate of another existing object
 						QFont itemFont(item->font());
 						itemFont.setItalic(true);
 						item->setFont(itemFont);
-					} else if (existingObjects.contains(name))
+
+						insertionIndex = newCurrentSsoIndex;
+						newCurrentSsoIndex++;
+						newNovelSsoIndex++;
+					}
+					else if (existingObjects.contains(name))
 					{
 						//Duplicate name only
 						//TODO: Decide what to do in this case
 					}
+					else
+					{
+						insertionIndex = newNovelSsoIndex;
+						newNovelSsoIndex++;
+					}
+
+					list->insertItem(insertionIndex, item);
+					candidateObjects << object;
 				}
 			}
-
-			candidateObjects << object;
 		}
 	}
 
