@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>513</width>
-    <height>342</height>
+    <width>500</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,11 +19,8 @@
   <property name="minimumSize">
    <size>
     <width>300</width>
-    <height>320</height>
+    <height>300</height>
    </size>
-  </property>
-  <property name="windowTitle">
-   <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="spacing">
@@ -156,149 +153,166 @@
          <attribute name="title">
           <string>General</string>
          </attribute>
-         <widget class="QWidget" name="layoutWidget">
-          <property name="geometry">
-           <rect>
-            <x>170</x>
-            <y>180</y>
-            <width>158</width>
-            <height>25</height>
-           </rect>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <property name="spacing">
+           <number>0</number>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <widget class="QPushButton" name="previewSkyPushButton">
-             <property name="text">
-              <string>Preview</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="printSkyPushButton">
-             <property name="text">
-              <string>Print</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QGroupBox" name="orientationGroupBox">
-          <property name="geometry">
-           <rect>
-            <x>270</x>
-            <y>10</y>
-            <width>181</width>
-            <height>110</height>
-           </rect>
+          <property name="margin">
+           <number>0</number>
           </property>
-          <property name="title">
-           <string>Orientation</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
-          <widget class="QRadioButton" name="orientationPortraitRadioButton">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>44</y>
-             <width>131</width>
-             <height>17</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Portrait</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-          <widget class="QRadioButton" name="orientationLandscapeRadioButton">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>70</y>
-             <width>131</width>
-             <height>17</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Landscape</string>
-           </property>
-          </widget>
-         </widget>
-         <widget class="QWidget" name="layoutWidget">
-          <property name="geometry">
-           <rect>
-            <x>18</x>
-            <y>18</y>
-            <width>251</width>
-            <height>88</height>
-           </rect>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout">
-           <item>
-            <widget class="QCheckBox" name="invertColorsCheckBox">
-             <property name="text">
-              <string>Invert colors</string>
+          <item>
+           <widget class="QGroupBox" name="groupBox">
+            <property name="title">
+             <string>Options</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_2">
+             <property name="margin">
+              <number>0</number>
              </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="scaleToFitCheckBox">
-             <property name="text">
-              <string>Scale to fit</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="printDataCheckBox">
-             <property name="text">
-              <string>Print general data</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="printSSEphemeridesCheckBox">
-             <property name="text">
-              <string>Print Solar System ephemerides</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
+             <item row="0" column="0" colspan="2">
+              <layout class="QVBoxLayout" name="verticalLayout">
+               <item>
+                <widget class="QCheckBox" name="invertColorsCheckBox">
+                 <property name="text">
+                  <string>Invert colors</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="scaleToFitCheckBox">
+                 <property name="text">
+                  <string>Scale to fit</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="printDataCheckBox">
+                 <property name="text">
+                  <string>Print scene information</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="printSSEphemeridesCheckBox">
+                 <property name="text">
+                  <string>Print Solar System ephemerides</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="0" column="2">
+              <widget class="QGroupBox" name="orientationGroupBox">
+               <property name="title">
+                <string>Orientation</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_5">
+                <property name="margin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QRadioButton" name="orientationPortraitRadioButton">
+                  <property name="text">
+                   <string>Portrait</string>
+                  </property>
+                  <property name="checked">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="orientationLandscapeRadioButton">
+                  <property name="text">
+                   <string>Landscape</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="1" column="0" colspan="3">
+              <widget class="QFrame" name="buttonsFrame">
+               <layout class="QHBoxLayout" name="horizontalLayout">
+                <item>
+                 <widget class="QPushButton" name="previewSkyPushButton">
+                  <property name="text">
+                   <string>Preview</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="printSkyPushButton">
+                  <property name="text">
+                   <string>Print</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </widget>
         <widget class="QWidget" name="About">
          <attribute name="title">
           <string>About</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout">
-          <property name="leftMargin">
-           <number>12</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>12</number>
-          </property>
-          <property name="bottomMargin">
-           <number>12</number>
-          </property>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelAbout">
+            <property name="text">
+             <string>This plugin allows the user to preview and print the current screen and some aditional data as the current location, the screen time adding the GMT difference, and also a relation radius magnitude as a field reference.
+
+In a optional second page you can get some Solar System ephemerides.
+
+Use Ctrl+P to open the print window.</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::AutoText</enum>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
           <item row="0" column="0">
-           <widget class="QTextBrowser" name="textBrowser">
-            <property name="html">
-             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt;Author: &lt;/span&gt;&lt;a href=&quot;maslarocaxica@gmail.com&quot;&gt;&lt;span style=&quot; font-size:12pt; text-decoration: underline; color:#0000ff;&quot;&gt;Pep Pujols&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:30px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:30px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt;This plugin allow the user preview and print the current screen and some aditional data as the current location, the screen time adding the GMT difference, and also a relation radius magnitude as a field reference.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:30px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:30px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt;In a optional second page you can get some Solar System ephemerides.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:30px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:30px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt;Use the key Ctrl-P to activate the print dialog.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Author: &lt;a href=&quot;mailto:maslarocaxica@gmail.com&quot;&gt;Pep Pujols&lt;/a&gt; (with fixes by Bogdan Marinov)</string>
+            </property>
+            <property name="openExternalLinks">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -319,6 +333,18 @@ p, li { white-space: pre-wrap; }
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>Tabs</tabstop>
+  <tabstop>invertColorsCheckBox</tabstop>
+  <tabstop>scaleToFitCheckBox</tabstop>
+  <tabstop>printDataCheckBox</tabstop>
+  <tabstop>printSSEphemeridesCheckBox</tabstop>
+  <tabstop>orientationPortraitRadioButton</tabstop>
+  <tabstop>orientationLandscapeRadioButton</tabstop>
+  <tabstop>previewSkyPushButton</tabstop>
+  <tabstop>printSkyPushButton</tabstop>
+  <tabstop>labelAbout</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

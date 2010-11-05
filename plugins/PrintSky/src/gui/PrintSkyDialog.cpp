@@ -83,7 +83,7 @@ void PrintSkyDialog::updateStyle()
 		Q_ASSERT(gui);
 		const StelStyle pluginStyle = GETSTELMODULE(PrintSky)->getModuleStyleSheet(gui->getStelStyle());
 		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
-		ui->textBrowser->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
+		//ui->textBrowser->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
 	}
 }
 
@@ -313,18 +313,16 @@ void PrintSkyDialog::createDialogContent()
 
 	//Initialize the style
 	updateStyle();
-
-
 }
 
 //! Print report on a preview window
 void PrintSkyDialog::previewSky()
 {
-	currentVisibilityGui=gui->getVisible();
+	currentVisibilityGui = gui->getVisible();
 	gui->setVisible(false);
 	dialog->setVisible(false);
 
-	outputOption=true;
+	outputOption = true;
 
 	QTimer::singleShot(50, this, SLOT(executePrinterOutputOption()));
 }
@@ -361,7 +359,13 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 	StelLocation locationData=core->getNavigator()->getCurrentLocation();
 	double jd = core->getNavigator()->getJDay();
 
-	painter.setFont(QFont("DejaVu Sans", 10));
+	QFont font("DejaVu Sans", 10, QFont::Normal);
+	painter.setFont(font);
+	qDebug() << "PrintSky: printer debugging information:";
+	qDebug() << "Current printer resolution:" << printer->resolution();
+	qDebug() << "Supported printer resolutions:" << printer->supportedResolutions();
+	qDebug() << "Page size (size index, 0-30)" << printer->paperSize();
+	//For the paper size index, see http://doc.qt.nokia.com/qprinter.html#PaperSize-enum
 
 	if (printDataOption)
 	{
@@ -372,14 +376,12 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 		//	painter.drawRect(surfaceData);
 
 
-		painter.drawText(surfaceData.adjusted(0, 0, 0, -200), Qt::AlignCenter, "STELLARIUM GENERAL DATA");
-
-		QString location="Location: ";
+		painter.drawText(surfaceData.adjusted(0, 0, 0, -200), Qt::AlignCenter, "CHART INFORMATION");
 
 		QString printLatitude=StelUtils::radToDmsStr((std::fabs(locationData.latitude)/180.)*M_PI);
 		QString printLongitude=StelUtils::radToDmsStr((std::fabs(locationData.longitude)/180.)*M_PI);
 
-		location+=QString("%1\t%2\t%3\t%4\t%5\t%6m")
+		QString location = QString("Location: %1\t%2\t%3\t%4\t%5\t%6m")
 							 .arg(locationData.name)
 							 .arg(locationData.country)
 							 .arg(locationData.planetName)
@@ -396,7 +398,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 
 		QString str;
 		QTextStream wos(&str);
-		wos << "FOV " << qSetRealNumberPrecision(3) << core->getMovementMgr()->getCurrentFov() << QChar(0x00B0);
+		wos << "FOV: " << qSetRealNumberPrecision(3) << core->getMovementMgr()->getCurrentFov() << QChar(0x00B0);
 		painter.drawText(surfaceData.adjusted(50, 150, 0, 0), Qt::AlignLeft, *wos.string());
 
 		painter.drawText(surfaceData.adjusted(surfaceData.width()-700, 0, 0, 0), Qt::AlignLeft, "Radius-magnitude relation");
@@ -423,15 +425,15 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 	if (printSSEphemeridesOption)
 	{
 		printer->newPage();
-		painter.drawText(0, 0, printer->paperRect().width(), 50, Qt::AlignCenter, "STELLARIUM SOLAR SYSTEM EPHEMERIDES");
+		painter.drawText(0, 0, printer->paperRect().width(), 50, Qt::AlignCenter, "SOLAR SYSTEM EPHEMERIDES");
 		painter.drawText(QRect(50, 150, 300, 50), Qt::AlignCenter, "Name");
-		painter.drawText(QRect(400, 150, 300, 50), Qt::AlignCenter, "A.R.");
-		painter.drawText(QRect(700, 150, 300, 50), Qt::AlignCenter, "DEC.");
+		painter.drawText(QRect(400, 150, 300, 50), Qt::AlignCenter, "RA");
+		painter.drawText(QRect(700, 150, 300, 50), Qt::AlignCenter, "Dec");
 		painter.drawText(QRect(950, 100, 750, 50), Qt::AlignCenter, "Local Time");
 		painter.drawText(QRect(950, 150, 250, 50), Qt::AlignCenter, "Rising");
 		painter.drawText(QRect(1200, 150, 250, 50), Qt::AlignCenter, "Transit");
 		painter.drawText(QRect(1450, 150, 250, 50), Qt::AlignCenter, "Setting");
-		painter.drawText(QRect(1700, 150, 300, 50), Qt::AlignCenter, "Distance (UA)");
+		painter.drawText(QRect(1700, 150, 300, 50), Qt::AlignCenter, "Distance (AU)");
 		painter.drawText(QRect(2000, 150, 300, 50), Qt::AlignCenter, "Ap.Magnitude");
 
 		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
@@ -442,6 +444,9 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 		PlanetP pHome=ssmgr->searchByEnglishName(locationData.planetName);
 		double standardSideralTime=pHome->getSiderealTime(((int) jd)+0.5)*M_PI/180.;
 
+		//After the introduction of the Comets and Asteroids plug-in,
+		//there will be *lots* of planet names. At the very least,
+		//this needs a mechanism for creating page breaks.
 		QStringList allBodiesNames=ssmgr->getAllPlanetEnglishNames();
 		allBodiesNames.sort();
 		for (int iBodyName=1, yPos=200; iBodyName<=allBodiesNames.count(); ++iBodyName)
@@ -538,19 +543,23 @@ void PrintSkyDialog::executePrinterOutputOption()
 	}
 
 
-	QPrinter printer(QPrinter::HighResolution);
+	//QPrinter printer(QPrinter::HighResolution);
+	QPrinter printer(QPrinter::ScreenResolution);
+	printer.setResolution(300);
 	printer.setDocName("STELLARIUM REPORT");
 	printer.setOrientation((orientationOption=="Portrait"? QPrinter::Portrait: QPrinter::Landscape));
 
 	if (outputOption)
 	{
-		QPrintPreviewDialog oPrintPreviewDialog(&printer, &StelMainGraphicsView::getInstance());
+		//QPrintPreviewDialog oPrintPreviewDialog(&printer, &StelMainGraphicsView::getInstance());
+		QPrintPreviewDialog oPrintPreviewDialog(&printer);
 		connect(&oPrintPreviewDialog, SIGNAL(paintRequested(QPrinter *)), this, SLOT(printDataSky(QPrinter *)));
 		oPrintPreviewDialog.exec();
 	}
 	else
 	{
-		QPrintDialog dialogPrinter(&printer, &StelMainGraphicsView::getInstance());
+		//QPrintDialog dialogPrinter(&printer, &StelMainGraphicsView::getInstance());
+		QPrintDialog dialogPrinter(&printer);
 		if (dialogPrinter.exec() == QDialog::Accepted)
 			printDataSky(&printer);
 	}
@@ -563,8 +572,7 @@ void PrintSkyDialog::executePrinterOutputOption()
 
 void PrintSkyDialog::enableOutputOptions(bool enable)
 {
-	ui->previewSkyPushButton->setEnabled(enable);
-	ui->printSkyPushButton->setEnabled(enable);
+	ui->buttonsFrame->setVisible(enable);
 }
 
 

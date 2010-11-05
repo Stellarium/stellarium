@@ -66,6 +66,9 @@ void PrintSky::init()
 
 	try
 	{
+		//Make sure that "/modules/PrintSky" exists
+		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir() + "/modules/PrintSky/");
+
 		StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
 		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
 
