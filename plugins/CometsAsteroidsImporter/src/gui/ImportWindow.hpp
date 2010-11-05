@@ -63,8 +63,9 @@ private slots:
 	//Download
 	void bookmarkSelected(QString);
 
-	//Final button for the list tab
+	//Buttons for the list tab
 	void acquireObjectData();
+	void abortDownload();
 
 	//Online search
 	void sendQuery();
@@ -105,10 +106,12 @@ private:
 	//Downloading
 	QNetworkAccessManager * networkManager;
 	QNetworkReply * downloadReply;
+	QNetworkReply * queryReply;
 	QProgressBar * downloadProgressBar;
+	QProgressBar * queryProgressBar;
 	void startDownload(QString url);
-	//void abortDownload();
 	void deleteDownloadProgressBar();
+	void deleteQueryProgressBar();
 
 	//TODO: Temporarily here?
 	typedef QHash<QString,QString> Bookmarks;
@@ -120,8 +123,6 @@ private:
 	void startCountdown();
 	void resetCountdown();
 	void updateCountdownLabels(int countdownValue);
-	QNetworkReply * queryReply;
-	QProgressBar * queryProgressBar;
 
 protected:
 	virtual void createDialogContent();

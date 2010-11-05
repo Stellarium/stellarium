@@ -87,6 +87,7 @@ void ImportWindow::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	connect(ui->pushButtonAcquire, SIGNAL(clicked()), this, SLOT(acquireObjectData()));
+	connect(ui->pushButtonAbortDownload, SIGNAL(clicked()), this, SLOT(abortDownload()));
 	connect(ui->pushButtonAdd, SIGNAL(clicked()), this, SLOT(addObjects()));
 	connect(ui->pushButtonDiscard, SIGNAL(clicked()), this, SLOT(discardObjects()));
 
@@ -127,8 +128,11 @@ void ImportWindow::resetDialog()
 	ui->lineEditURL->clear();
 	ui->lineEditQuery->clear();
 	ui->checkBoxAddBookmark->setChecked(false);
+	ui->comboBoxBookmarks->setCurrentIndex(0);
 
-	ui->pushButtonAbortQuery->setVisible(false);//TODO: Is this the right place?
+	//TODO: Is this the right place?
+	ui->pushButtonAbortQuery->setVisible(false);
+	ui->pushButtonAbortDownload->setVisible(false);
 
 	resetCountdown();
 	resetNotFound();
@@ -448,18 +452,42 @@ void ImportWindow::startDownload(QString urlString)
 	//TODO: Better handling of the interface
 	//dialog->setVisible(false);
 	enableInterface(false);
+	ui->pushButtonAbortDownload->setVisible(true);
 
 	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
 	downloadReply = networkManager->get(QNetworkRequest(url));
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 }
 
+void ImportWindow::abortDownload()
+{
+	if (downloadReply == NULL || downloadReply->isFinished())
+		return;
+
+	qDebug() << "Aborting download...";
+
+	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+	deleteDownloadProgressBar();
+
+	downloadReply->abort();
+	downloadReply->deleteLater();
+	downloadReply = NULL;
+
+	enableInterface(true);
+	ui->pushButtonAbortDownload->setVisible(false);
+}
+
 void ImportWindow::downloadComplete(QNetworkReply *reply)
 {
-	disconnect(this, SLOT(downloadComplete(QNetworkReply*)));
+	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
 	deleteDownloadProgressBar();
-	//TODO: Better handling of the interface
-	//dialog->setVisible(true);
+	ui->pushButtonAbortDownload->setVisible(false);
+
+	/*
+	qDebug() << "reply->isOpen():" << reply->isOpen()
+		<< "reply->isReadable():" << reply->isReadable()
+		<< "reply->isFinished():" << reply->isFinished();
+	*/
 
 	if(reply->error())
 	{
@@ -531,7 +559,7 @@ void ImportWindow::sendQuery()
 	if (queryReply)
 		return;
 
-	QString query = ui->lineEditQuery->text();
+	QString query = ui->lineEditQuery->text().trimmed();
 	if (query.isEmpty())
 		return;
 
@@ -587,16 +615,8 @@ void ImportWindow::abortQuery()
 	if (queryReply == NULL)
 		return;
 
-	disconnect(this, SLOT(queryComplete(QNetworkReply*)));
-
-	//Remove the progress bar
-	disconnect(this, SLOT(updateQueryProgress(qint64,qint64)));
-	if (queryProgressBar)
-	{
-		queryProgressBar->setVisible(false);
-		queryProgressBar->deleteLater();
-		queryProgressBar = NULL;
-	}
+	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(queryComplete(QNetworkReply*)));
+	deleteQueryProgressBar();
 
 	queryReply->abort();
 	queryReply->deleteLater();
@@ -609,16 +629,8 @@ void ImportWindow::abortQuery()
 
 void ImportWindow::queryComplete(QNetworkReply *reply)
 {
-	disconnect(this, SLOT(queryComplete(QNetworkReply*)));
-
-	//Remove the progress bar
-	disconnect(this, SLOT(updateQueryProgress(qint64,qint64)));
-	if (queryProgressBar)
-	{
-		queryProgressBar->setVisible(false);
-		queryProgressBar->deleteLater();
-		queryProgressBar = NULL;
-	}
+	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(queryComplete(QNetworkReply*)));
+	deleteQueryProgressBar();
 
 	//Hide the abort button - a reply has been received
 	ui->pushButtonAbortQuery->setVisible(false);
@@ -691,6 +703,17 @@ void ImportWindow::queryComplete(QNetworkReply *reply)
 
 	reply->deleteLater();
 	queryReply = NULL;
+}
+
+void ImportWindow::deleteQueryProgressBar()
+{
+	disconnect(this, SLOT(updateQueryProgress(qint64,qint64)));
+	if (queryProgressBar)
+	{
+		queryProgressBar->setVisible(false);
+		queryProgressBar->deleteLater();
+		queryProgressBar = NULL;
+	}
 }
 
 void ImportWindow::startCountdown()
