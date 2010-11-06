@@ -147,6 +147,21 @@ public:
 	//! \todo At least warn when overwriting old entries?
 	bool appendToSolarSystemConfigurationFile(QList<SsoElements>);
 
+	//! Flags to control the updateSolarSystemConfigurationFile() function.
+	enum UpdateFlag {
+		UpdateNameAndNumber = 0x01,//!< Update the name and minor planet number, if any.
+		UpdateType = 0x02, //!< Update objects that lack the "type" parameter
+		UpdateOrbitalElements = 0x04, //!< Update the orbital elements, including the orbit function.
+		UpdateMagnitudeParameters = 0x08 //!< Update the values in the two parameter system, or add them if they are missing and the type allows.
+	};
+	Q_DECLARE_FLAGS(UpdateFlags, UpdateFlag)
+
+	//! Updates entries in the user solar system configuration file.
+	//! \param objects a list of data for already existing objects (non-existing ones are skipped);
+	//! \param flags flags controlling what is being updated. See UpdateFlag.
+	//! \returns false if the operation has failed completely for some reason.
+	bool updateSolarSystemConfigurationFile(QList<SsoElements> objects, UpdateFlags flags);
+
 	//! Returns the IDs of the objects listed in the default ssystem.ini.
 	//! The default solar system configuration file is assumed to be the one
 	//! in the installation directory.
@@ -180,7 +195,7 @@ public slots:
 signals:
 	//TODO: This should be part of SolarSystem::reloadPlanets()
 	void solarSystemChanged();
-	
+
 private:
 	bool isInitialized;
 
@@ -235,6 +250,8 @@ private:
 	//! \returns an empty string if the argument is not a valid packed
 	//! provisional designation.
 	QString unpackMinorPlanetProvisionalDesignation(QString packedDesignation);
+
+	void updateSsoProperty(QSettings& configuration, SsoElements& properties, QString key);
 };
 
 

@@ -130,6 +130,9 @@ void ImportWindow::resetDialog()
 	ui->checkBoxAddBookmark->setChecked(false);
 	ui->comboBoxBookmarks->setCurrentIndex(0);
 
+	ui->radioButtonUpdate->setChecked(true);
+	ui->checkBoxOnlyOrbitalElements->setChecked(true);
+
 	//TODO: Is this the right place?
 	ui->pushButtonAbortQuery->setVisible(false);
 	ui->pushButtonAbortDownload->setVisible(false);
@@ -173,6 +176,8 @@ void ImportWindow::acquireObjectData()
 
 void ImportWindow::addObjects()
 {
+	disconnect(ssoManager, SIGNAL(solarSystemChanged()), this, SLOT(resetDialog()));
+
 	QList<QString> checkedObjectsNames;
 
 	//Extract the marked objects
@@ -187,16 +192,46 @@ void ImportWindow::addObjects()
 	}
 	//qDebug() << "Checked:" << checkedObjectsNames;
 
-	QList<CAImporter::SsoElements> approvedObjects;
-	for (int i = 0; i < candidateObjects.count(); i++)
+	QList<CAImporter::SsoElements> approvedForAddition;
+	for (int i = 0; i < candidatesForAddition.count(); i++)
 	{
-		QString name = candidateObjects.at(i).value("name").toString();
+		QString name = candidatesForAddition.at(i).value("name").toString();
 		if (checkedObjectsNames.contains(name))
-			approvedObjects.append(candidateObjects.at(i));
+			approvedForAddition.append(candidatesForAddition.at(i));
+	}
+
+	bool overwrite = ui->radioButtonOverwrite->isChecked();
+	QList<CAImporter::SsoElements> approvedForUpdate;
+	for (int j = 0; j < candidatesForUpdate.count(); j++)
+	{
+		QString name = candidatesForUpdate.at(j).value("name").toString();
+		if (checkedObjectsNames.contains(name))
+		{
+			if (overwrite)
+			{
+				approvedForAddition.append(candidatesForUpdate.at(j));
+			}
+			else
+			{
+				approvedForUpdate.append(candidatesForUpdate.at(j));
+			}
+		}
 	}
 
 	//Write to file
-	ssoManager->appendToSolarSystemConfigurationFile(approvedObjects);
+	ssoManager->appendToSolarSystemConfigurationFile(approvedForAddition);
+
+	if (ui->radioButtonUpdate->isChecked())
+	{
+		CAImporter::UpdateFlags flags(CAImporter::UpdateNameAndNumber | CAImporter::UpdateOrbitalElements);
+		if (!ui->checkBoxOnlyOrbitalElements->isChecked())
+		{
+			flags |= CAImporter::UpdateType;
+			flags |= CAImporter::UpdateMagnitudeParameters;
+		}
+
+		ssoManager->updateSolarSystemConfigurationFile(approvedForUpdate, flags);
+	}
 
 	//Refresh the Solar System
 	GETSTELMODULE(SolarSystem)->reloadPlanets();
@@ -236,7 +271,7 @@ void ImportWindow::bookmarkSelected(QString bookmarkTitle)
 
 void ImportWindow::populateCandidateObjects(QList<CAImporter::SsoElements> objects)
 {
-	candidateObjects.clear();
+	candidatesForAddition.clear();
 
 	//Get a list of the current objects
 	QStringList existingObjects = GETSTELMODULE(SolarSystem)->getAllPlanetEnglishNames();
@@ -273,6 +308,8 @@ void ImportWindow::populateCandidateObjects(QList<CAImporter::SsoElements> objec
 						itemFont.setBold(true);
 						item->setFont(itemFont);
 
+						candidatesForUpdate.append(object);
+
 						insertionIndex = newDefaultSsoIndex;
 						newDefaultSsoIndex++;
 						newCurrentSsoIndex++;
@@ -285,23 +322,26 @@ void ImportWindow::populateCandidateObjects(QList<CAImporter::SsoElements> objec
 						itemFont.setItalic(true);
 						item->setFont(itemFont);
 
+						candidatesForUpdate.append(object);
+
 						insertionIndex = newCurrentSsoIndex;
 						newCurrentSsoIndex++;
 						newNovelSsoIndex++;
 					}
-					else if (existingObjects.contains(name))
+					/*else if (existingObjects.contains(name))
 					{
 						//Duplicate name only
 						//TODO: Decide what to do in this case
-					}
+					}*/
 					else
 					{
+						candidatesForAddition.append(object);
+
 						insertionIndex = newNovelSsoIndex;
 						newNovelSsoIndex++;
 					}
 
 					list->insertItem(insertionIndex, item);
-					candidateObjects << object;
 				}
 			}
 		}
@@ -563,6 +603,9 @@ void ImportWindow::downloadComplete(QNetworkReply *reply)
 	//Temporary, until the slot/socket mechanism is ready
 	populateCandidateObjects(objects);
 	ui->stackedWidget->setCurrentIndex(1);
+	//As this window is persistent, if the Solar System is changed
+	//while there is a list, it should be reset.
+	connect(ssoManager, SIGNAL(solarSystemChanged()), this, SLOT(resetDialog()));
 }
 
 void ImportWindow::deleteDownloadProgressBar()

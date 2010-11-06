@@ -491,6 +491,30 @@ QTabWidget::pane {
            </widget>
           </item>
           <item>
+           <widget class="QRadioButton" name="radioButtonOverwrite">
+            <property name="text">
+             <string>Overwrite existing objects</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioButtonUpdate">
+            <property name="text">
+             <string>Update existing objects</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxOnlyOrbitalElements">
+            <property name="text">
+             <string>Update only the orbital elements</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QListWidget" name="listWidgetObjects">
             <property name="selectionMode">
              <enum>QAbstractItemView::NoSelection</enum>
@@ -584,6 +608,9 @@ QTabWidget::pane {
   <tabstop>lineEditQuery</tabstop>
   <tabstop>pushButtonSendQuery</tabstop>
   <tabstop>pushButtonAbortQuery</tabstop>
+  <tabstop>radioButtonOverwrite</tabstop>
+  <tabstop>radioButtonUpdate</tabstop>
+  <tabstop>checkBoxOnlyOrbitalElements</tabstop>
   <tabstop>listWidgetObjects</tabstop>
   <tabstop>pushButtonMarkAll</tabstop>
   <tabstop>pushButtonMarkNone</tabstop>
@@ -623,6 +650,22 @@ QTabWidget::pane {
     <hint type="destinationlabel">
      <x>110</x>
      <y>267</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonUpdate</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>checkBoxOnlyOrbitalElements</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>190</x>
+     <y>191</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>190</x>
+     <y>207</y>
     </hint>
    </hints>
   </connection>
