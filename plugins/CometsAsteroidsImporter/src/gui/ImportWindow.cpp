@@ -797,7 +797,17 @@ void ImportWindow::resetCountdown()
 {
 	//Stop the timer
 	if (countdownTimer->isActive())
+	{
 		countdownTimer->stop();
+
+		//If the query is still active, kill it
+		if (queryReply != NULL && queryReply->isRunning())
+		{
+			abortQuery();
+			ui->labelNotFound->setText("The query timed out. You can try again, now or later.");
+			ui->labelNotFound->setVisible(true);
+		}
+	}
 
 	//Reset the counter
 	countdown = 60;
