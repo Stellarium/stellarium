@@ -326,6 +326,12 @@ void Satellite::drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter
 	glEnable(GL_BLEND);
 	painter.enableClientStates(true, false, false);
 
+	// For drawFromArray method, set the vertex array only once.
+	// it's not necessary set the vertex array each time the vertex are
+	// changed
+	painter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
+
+
 	QList<gVector>::iterator it= orbitPoints.begin();
 
 	for(int i=0; i<orbitPoints.size();i++)
@@ -349,7 +355,6 @@ void Satellite::drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter
 		if (i>0 && ((DRAWORBIT_SLOTS_NUMBER/2) - abs(i - (DRAWORBIT_SLOTS_NUMBER/2) % DRAWORBIT_SLOTS_NUMBER)) < DRAWORBIT_FADE_NUMBER)
 		{
 			painter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], hintBrightness * calculateOrbitSegmentIntensity(i));
-			painter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
 			painter.drawFromArray(StelPainter::LineStrip, 2, i-1, false);
 		}
 	}
@@ -360,11 +365,10 @@ void Satellite::drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter
 		if (vertexArray.count() > (2*DRAWORBIT_FADE_NUMBER))
 		{
 			painter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], hintBrightness);
-			painter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
 			painter.drawFromArray(StelPainter::LineStrip, DRAWORBIT_SLOTS_NUMBER + 1 - (2*DRAWORBIT_FADE_NUMBER), DRAWORBIT_FADE_NUMBER - 1, false);
 		}
-		vertexArray.clear();
 	}
+	vertexArray.clear();
 
 	painter.enableClientStates(false);
 	glEnable(GL_TEXTURE_2D);
