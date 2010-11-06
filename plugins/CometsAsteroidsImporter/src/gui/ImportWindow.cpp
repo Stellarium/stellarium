@@ -25,6 +25,7 @@
 
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
+#include "StelJsonParser.hpp"
 #include "StelModuleMgr.hpp"
 #include "SolarSystem.hpp"
 
@@ -57,10 +58,6 @@ ImportWindow::ImportWindow()
 
 	QHash<QString,QString> asteroidBookmarks;
 	QHash<QString,QString> cometBookmarks;
-	asteroidBookmarks.insert("MPC's list of bright minor planets at opposition", "http://www.minorplanetcenter.org/iau/Ephemerides/Bright/2010/Soft00Bright.txt");
-	asteroidBookmarks.insert("MPCORB: near-Earth asteroids (NEAs)", "http://www.minorplanetcenter.org/iau/MPCORB/NEA.txt");
-	asteroidBookmarks.insert("MPCORB: potentially hazardous asteroids (PHAs)", "http://www.minorplanetcenter.org/iau/MPCORB/PHA.txt");
-	cometBookmarks.insert("MPC's list of observable comets", "http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft00Cmt.txt");
 	bookmarks.insert(MpcComets, cometBookmarks);
 	bookmarks.insert(MpcMinorPlanets, asteroidBookmarks);
 }
@@ -110,6 +107,8 @@ void ImportWindow::createDialogContent()
 	connect(ui->lineEditQuery, SIGNAL(textEdited(QString)), this, SLOT(resetNotFound()));
 	connect(countdownTimer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
 
+	loadBookmarks();
+
 	resetDialog();
 }
 
@@ -140,6 +139,15 @@ void ImportWindow::resetDialog()
 	resetCountdown();
 	resetNotFound();
 	enableInterface(true);
+}
+
+void ImportWindow::populateBookmarksList()
+{
+	ui->comboBoxBookmarks->clear();
+	ui->comboBoxBookmarks->addItem("Select bookmark...");
+	QStringList bookmarkTitles(bookmarks.value(importType).keys());
+	bookmarkTitles.sort();
+	ui->comboBoxBookmarks->addItems(bookmarkTitles);
 }
 
 void ImportWindow::languageChanged()
@@ -404,11 +412,7 @@ void ImportWindow::switchImportType(bool)
 		importType = MpcComets;
 	}
 
-	ui->comboBoxBookmarks->clear();
-	ui->comboBoxBookmarks->addItem("Select bookmark...");
-	QStringList bookmarkTitles(bookmarks.value(importType).keys());
-	bookmarkTitles.sort();
-	ui->comboBoxBookmarks->addItems(bookmarkTitles);
+	populateBookmarksList();
 
 	//Clear the fields
 	//ui->lineEditSingle->clear();
@@ -585,7 +589,6 @@ void ImportWindow::downloadComplete(QNetworkReply *reply)
 	else
 	{
 		//The request has been successful: add the URL to bookmarks?
-		//TODO: As the bookmarks are destroyed with the window, this doesn't make much sense :)
 		if (ui->checkBoxAddBookmark->isChecked())
 		{
 			QString url = reply->url().toString();
@@ -593,6 +596,8 @@ void ImportWindow::downloadComplete(QNetworkReply *reply)
 			{
 				//Use the URL as a title for now
 				bookmarks[importType].insert(url, url);
+				populateBookmarksList();
+				saveBookmarks();
 			}
 		}
 	}
@@ -841,4 +846,111 @@ void ImportWindow::updateCountdownLabels(int countdownValue)
 void ImportWindow::resetNotFound()
 {
 	ui->labelNotFound->setVisible(false);
+}
+
+void ImportWindow::loadBookmarks()
+{
+	bookmarks[MpcComets].clear();
+	bookmarks[MpcMinorPlanets].clear();
+
+	QString bookmarksFilePath(StelFileMgr::getUserDir() + "/modules/SolarSystem/bookmarks.json");
+	if (StelFileMgr::isReadable(bookmarksFilePath))
+	{
+		QFile bookmarksFile(bookmarksFilePath);
+		if (bookmarksFile.open(QFile::ReadOnly | QFile::Text))
+		{
+			QVariantMap jsonRoot = StelJsonParser::parse(bookmarksFile.readAll()).toMap();
+
+			loadBookmarksGroup(jsonRoot.value("mpcMinorPlanets").toMap(), bookmarks[MpcMinorPlanets]);
+			loadBookmarksGroup(jsonRoot.value("mpcComets").toMap(), bookmarks[MpcComets]);
+
+			bookmarksFile.close();
+
+			//If nothing was read, continue
+			if (!bookmarks.value(MpcComets).isEmpty() && !bookmarks[MpcMinorPlanets].isEmpty())
+				return;
+		}
+	}
+
+	qDebug() << "Bookmarks file can't be read. Hard-coded bookmarks will be used.";
+
+	//Initialize with hard-coded values
+	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition", "http://www.minorplanetcenter.org/iau/Ephemerides/Bright/2010/Soft00Bright.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: near-Earth asteroids (NEAs)", "http://www.minorplanetcenter.org/iau/MPCORB/NEA.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: potentially hazardous asteroids (PHAs)", "http://www.minorplanetcenter.org/iau/MPCORB/PHA.txt");
+	bookmarks[MpcComets].insert("MPC's list of observable comets", "http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft00Cmt.txt");
+
+	//Try to save them to a file
+	saveBookmarks();
+}
+
+void ImportWindow::loadBookmarksGroup(QVariantMap source, Bookmarks & bookmarkGroup)
+{
+	if (source.isEmpty())
+		return;
+
+	foreach (QString title, source.keys())
+	{
+		QString url = source.value(title).toString();
+		if (!url.isEmpty())
+			bookmarkGroup.insert(title, url);
+	}
+}
+
+void ImportWindow::saveBookmarks()
+{
+	try
+	{
+		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir() + "/modules/SolarSystem");
+
+		QVariantMap jsonRoot;
+
+		QString bookmarksFilePath(StelFileMgr::getUserDir() + "/modules/SolarSystem/bookmarks.json");
+
+		//If the file exists, load it first
+		if (StelFileMgr::isReadable(bookmarksFilePath))
+		{
+			QFile bookmarksFile(bookmarksFilePath);
+			if (bookmarksFile.open(QFile::ReadOnly | QFile::Text))
+			{
+				jsonRoot = StelJsonParser::parse(bookmarksFile.readAll()).toMap();
+				bookmarksFile.close();
+			}
+		}
+
+		QFile bookmarksFile(bookmarksFilePath);
+		if (bookmarksFile.open(QFile::WriteOnly | QFile::Truncate | QFile::Text))
+		{
+			QVariantMap minorPlanetsObject;
+			saveBookmarksGroup(bookmarks[MpcMinorPlanets], minorPlanetsObject);
+			qDebug() << minorPlanetsObject.keys();
+			jsonRoot.insert("mpcMinorPlanets", minorPlanetsObject);
+
+			QVariantMap cometsObject;
+			saveBookmarksGroup(bookmarks[MpcComets], cometsObject);
+			jsonRoot.insert("mpcComets", cometsObject);
+
+			StelJsonParser::write(jsonRoot, &bookmarksFile);
+			bookmarksFile.close();
+
+			qDebug() << "Bookmarks file saved to" << bookmarksFilePath;
+			return;
+		}
+		else
+		{
+			qDebug() << "Unable to write bookmarks file to" << bookmarksFilePath;
+		}
+	}
+	catch (std::exception & e)
+	{
+		qDebug() << "Unable to save bookmarks file:" << e.what();
+	}
+}
+
+void ImportWindow::saveBookmarksGroup(Bookmarks & bookmarkGroup, QVariantMap & output)
+{
+	foreach (QString title, bookmarkGroup.keys())
+	{
+		output.insert(title, bookmarkGroup.value(title));
+	}
 }
