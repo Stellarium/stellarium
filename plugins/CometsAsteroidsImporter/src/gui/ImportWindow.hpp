@@ -86,14 +86,15 @@ private slots:
 	void addObjects();
 	void discardObjects();
 
-private:
-	CAImporter * ssoManager;
-	QList<CAImporter::SsoElements> candidateObjects;
-
-	ImportType importType;
-
 	//! resets the dialog to the state it should be in immediately after createDialogContent();.
 	void resetDialog();
+
+private:
+	CAImporter * ssoManager;
+	QList<CAImporter::SsoElements> candidatesForAddition;
+	QList<CAImporter::SsoElements> candidatesForUpdate;
+
+	ImportType importType;
 
 	//! wrapper for the single object function to allow multiple formats.
 	CAImporter::SsoElements readElementsFromString(QString elements);

@@ -894,6 +894,120 @@ bool CAImporter::appendToSolarSystemConfigurationFile(SsoElements object)
 	return appendToSolarSystemConfigurationFile(list);
 }
 
+bool CAImporter::updateSolarSystemConfigurationFile(QList<SsoElements> objectList, UpdateFlags flags)
+{
+	if (objectList.isEmpty())
+	{
+		return false;//TODO: Why?
+	}
+
+	//Check if the configuration file exists
+	if (!QFile::exists(customSolarSystemFilePath))
+	{
+		qDebug() << "Can't update ssystem.ini: Unable to find" << customSolarSystemFilePath;
+		return false;
+	}
+
+	QSettings solarSystem(customSolarSystemFilePath, QSettings::IniFormat);
+	if (solarSystem.status() != QSettings::NoError)
+	{
+		qDebug() << "Error opening ssystem.ini:" << customSolarSystemFilePath;
+		return false;
+	}
+	QStringList existingSections = solarSystem.childGroups();
+	//TODO: Move to contstructor?
+	QStringList orbitalElementsKeys;
+	orbitalElementsKeys << "coord_func"
+			<< "orbit_ArgOfPericenter"
+			<< "orbit_AscendingNode"
+			<< "orbit_Eccentricity"
+			<< "orbit_Epoch"
+			<< "orbit_Inclination"
+			<< "orbit_LongOfPericenter"
+			<< "orbit_MeanAnomaly"
+			<< "orbit_MeanLongitude"
+			<< "orbit_MeanMotion"
+			<< "orbit_PericenterDistance"
+			<< "orbit_Period"
+			<< "orbit_SemiMajorAxis"
+			<< "orbit_TimeAtPericenter";
+
+	qDebug() << "Updating objects...";
+	foreach (SsoElements object, objectList)
+	{
+		if (!object.contains("section_name"))
+			continue;
+
+		QString sectionName = object.value("section_name").toString();
+		if (sectionName.isEmpty())
+			continue;
+
+		if (!existingSections.contains(sectionName))
+		{
+			qDebug() << "Skipping update of" << sectionName << ", as no object with this identifier exists.";
+			continue;
+		}
+
+		solarSystem.beginGroup(sectionName);
+
+		if (flags.testFlag(UpdateNameAndNumber))
+		{
+			updateSsoProperty(solarSystem, object, "name");
+			updateSsoProperty(solarSystem, object, "minor_planet_number");
+		}
+
+		if (flags.testFlag(UpdateType))
+		{
+			updateSsoProperty(solarSystem, object, "type");
+		}
+
+		if (flags.testFlag(UpdateOrbitalElements))
+		{
+			//Remove all orbital elements first, in case
+			//the new ones use another coordinate function
+			foreach (QString key, orbitalElementsKeys)
+			{
+				solarSystem.remove(key);
+			}
+
+			foreach (QString key, orbitalElementsKeys)
+			{
+				updateSsoProperty(solarSystem, object, key);
+			}
+		}
+
+		if (flags.testFlag(UpdateMagnitudeParameters))
+		{
+			if (object.contains("absolute_magnitude") && object.contains("slope_parameter"))
+			{
+				QString type = solarSystem.value("type").toString();
+				if (type == "asteroid" || type == "comet" )
+				{
+					updateSsoProperty(solarSystem, object, "absolute_magnitude");
+					updateSsoProperty(solarSystem, object, "slope_parameter");
+				}
+				else
+				{
+					//TODO: Do what, log a message?
+				}
+			}
+		}
+
+		solarSystem.endGroup();
+		qDebug() << "Updated successfully" << sectionName;
+	}
+
+	return true;
+}
+
+void CAImporter::updateSsoProperty(QSettings & settings, SsoElements & properties, QString key)
+{
+	if (properties.contains(key))
+	{
+		settings.setValue(key, properties.value(key));
+	}
+}
+
 int CAImporter::unpackDayOrMonthNumber(QChar digit)
 {
 	//0-9, 0 is an invalid value, but the function is supposed to return 0 on failure.
