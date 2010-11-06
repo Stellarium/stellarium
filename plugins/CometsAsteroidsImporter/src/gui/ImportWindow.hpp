@@ -101,6 +101,7 @@ private:
 	//! wrapper for the file function to allow multiple formats
 	QList<CAImporter::SsoElements> readElementsFromFile(ImportType type, QString filePath);
 
+	void populateBookmarksList();
 	void populateCandidateObjects(QList<CAImporter::SsoElements>);
 	void enableInterface(bool enable);
 
@@ -114,9 +115,12 @@ private:
 	void deleteDownloadProgressBar();
 	void deleteQueryProgressBar();
 
-	//TODO: Temporarily here?
 	typedef QHash<QString,QString> Bookmarks;
 	QHash<ImportType, Bookmarks> bookmarks;
+	void loadBookmarks();
+	void loadBookmarksGroup(QVariantMap source, Bookmarks & bookmarkGroup);
+	void saveBookmarks();
+	void saveBookmarksGroup(Bookmarks & bookmarkGroup, QVariantMap & output);
 
 	//Online search
 	int countdown;
