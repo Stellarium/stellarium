@@ -55,6 +55,11 @@ class Translations
 		N_("Phoebe");
 		N_("Neptune");
 		N_("Uranus");
+		N_("Titania");
+                N_("Oberon");
+                N_("Miranda");
+                N_("Ariel");
+                N_("Umbriel");
 		N_("Pluto");
 		N_("Charon");
 		N_("Solar System Observer");
