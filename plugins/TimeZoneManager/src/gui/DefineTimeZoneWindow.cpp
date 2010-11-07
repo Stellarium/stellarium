@@ -50,6 +50,9 @@ void DefineTimeZoneWindow::createDialogContent()
 
 	connect(ui->doubleSpinBoxOffset, SIGNAL(valueChanged(double)), this, SLOT(updateDstOffset(double)));
 
+	connect(ui->comboBoxDstStartDateMonth, SIGNAL(currentIndexChanged(int)), this, SLOT(updateDayNumberMaximumDstStart(int)));
+	connect(ui->comboBoxDstEndDateMonth, SIGNAL(currentIndexChanged(int)), this, SLOT(updateDayNumberMaximumDstEnd(int)));
+
 	ui->lineEditName->setValidator(timeZoneNameValidator);
 	ui->lineEditNameDst->setValidator(timeZoneNameValidator);
 
@@ -88,17 +91,19 @@ void DefineTimeZoneWindow::useDefinition()
 		{
 			if (ui->radioButtonDstStartDate->isChecked())
 			{
-				QDate startDate = ui->dateEditDstStart->date();
-				if (!(startDate.month() == 2 && startDate.day() == 29))
+				const int month = ui->comboBoxDstStartDateMonth->currentIndex() + 1;
+				const int day = ui->spinBoxDstStartDateDay->value();
+				QDate startDate;
+				if (month == 2 && day == 29)
 				{
-					startDate.setDate(2010, startDate.month(), startDate.day());
-					definition.append(QString(",J%1").arg(startDate.dayOfYear()));
+					//Leap year: day is indexed between 0 and 365
+					startDate.setDate(2000, month, day);
+					definition.append(QString(",%1").arg(startDate.dayOfYear() - 1));
 				}
 				else
 				{
-					//Leap year: day is indexed between 0 and 365
-					startDate.setDate(2000, startDate.month(), startDate.day());
-					definition.append(QString(",%1").arg(startDate.dayOfYear() - 1));
+					startDate.setDate(2010, month, day);
+					definition.append(QString(",J%1").arg(startDate.dayOfYear()));
 				}
 			}
 			else //Day of week
@@ -120,17 +125,19 @@ void DefineTimeZoneWindow::useDefinition()
 
 			if (ui->radioButtonDstEndDate->isChecked())
 			{
-				QDate endDate = ui->dateEditDstEnd->date();
-				if (!(endDate.month() == 2 && endDate.day() == 29))
+				const int month = ui->comboBoxDstEndDateMonth->currentIndex() + 1;
+				const int day = ui->spinBoxDstEndDateDay->value();
+				QDate endDate;
+				if (month == 2 && day == 29)
 				{
-					endDate.setDate(2010, endDate.month(), endDate.day());
-					definition.append(QString(",J%1").arg(endDate.dayOfYear()));
+					//Leap year: day is indexed between 0 and 365
+					endDate.setDate(2000, month, day);
+					definition.append(QString(",%1").arg(endDate.dayOfYear() - 1));
 				}
 				else
 				{
-					//Leap year: day is indexed between 0 and 365
-					endDate.setDate(2000, endDate.month(), endDate.day());
-					definition.append(QString(",%1").arg(endDate.dayOfYear() - 1));
+					endDate.setDate(2010, month, day);
+					definition.append(QString(",J%1").arg(endDate.dayOfYear()));
 				}
 			}
 			else //Day of week
@@ -188,8 +195,10 @@ void DefineTimeZoneWindow::resetWindowState()
 	ui->radioButtonDstStartDay->setChecked(true);
 	ui->radioButtonDstEndDay->setChecked(true);
 
-	ui->dateEditDstStart->setDate(QDate::currentDate());
-	ui->dateEditDstEnd->setDate(QDate::currentDate());
+	ui->spinBoxDstStartDateDay->setValue(1);
+	ui->spinBoxDstEndDateDay->setValue(1);
+	ui->comboBoxDstStartDateMonth->setCurrentIndex(0);
+	ui->comboBoxDstEndDateMonth->setCurrentIndex(0);
 
 	ui->checkBoxDstStartTime->setChecked(false);
 	ui->timeEditDstStart->setEnabled(false);
@@ -219,6 +228,10 @@ void DefineTimeZoneWindow::populateDateLists()
 	ui->comboBoxDstStartMonth->addItems(monthList);
 	ui->comboBoxDstEndMonth->clear();
 	ui->comboBoxDstEndMonth->addItems(monthList);
+	ui->comboBoxDstStartDateMonth->clear();
+	ui->comboBoxDstStartDateMonth->addItems(monthList);
+	ui->comboBoxDstEndDateMonth->clear();
+	ui->comboBoxDstEndDateMonth->addItems(monthList);
 
 	//TODO: For the translators: refers to any day of the week, if not possible, translate as "First week"
 	QStringList weekList;
@@ -247,4 +260,45 @@ void DefineTimeZoneWindow::populateDateLists()
 	ui->comboBoxDstStartDay->addItems(dayList);
 	ui->comboBoxDstEndDay->clear();
 	ui->comboBoxDstEndDay->addItems(dayList);
+}
+void DefineTimeZoneWindow::updateDayNumberMaximum(int monthIndex, QSpinBox *spinBoxDay)
+{
+	int maximum = 31;
+	switch (monthIndex)
+	{
+	case 0: //January
+	case 2: //March
+	case 4: //May
+	case 6: //July
+	case 7: //August
+	case 9: //October
+	case 11: //December
+		maximum = 31;
+		break;
+	case 3: //April
+	case 5: //June
+	case 8: //September
+	case 10: //November
+		maximum = 30;
+		break;
+	case 1: //February
+		maximum = 29;
+		break;
+	default:
+		;//
+	}
+
+	if (spinBoxDay->value() > maximum)
+		spinBoxDay->setValue(maximum);
+	spinBoxDay->setRange(1, maximum);
+}
+
+void DefineTimeZoneWindow::updateDayNumberMaximumDstStart(int monthIndex)
+{
+	updateDayNumberMaximum(monthIndex, ui->spinBoxDstStartDateDay);
+}
+
+void DefineTimeZoneWindow::updateDayNumberMaximumDstEnd(int monthIndex)
+{
+	updateDayNumberMaximum(monthIndex, ui->spinBoxDstEndDateDay);
 }
