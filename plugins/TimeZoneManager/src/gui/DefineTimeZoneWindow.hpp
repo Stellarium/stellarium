@@ -24,6 +24,7 @@
 
 class Ui_defineTimeZoneForm;
 class QRegExpValidator;
+class QSpinBox;
 
 class DefineTimeZoneWindow : public StelDialog
 {
@@ -48,9 +49,13 @@ private:
 	void resetWindowState();
 	void populateDateLists();
 
+	void updateDayNumberMaximum(int monthIndex, QSpinBox * spinBoxDay);
+
 private slots:
 	void useDefinition();
 	void updateDstOffset(double normalOffset);
+	void updateDayNumberMaximumDstStart(int monthIndex);
+	void updateDayNumberMaximumDstEnd(int monthIndex);
 };
 
 

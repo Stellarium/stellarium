@@ -363,13 +363,18 @@
              </widget>
             </item>
             <item row="2" column="2" colspan="3">
-             <widget class="QDateEdit" name="dateEditDstStart">
-              <property name="wrapping">
-               <bool>true</bool>
-              </property>
-              <property name="displayFormat">
-               <string>dd MMMM</string>
-              </property>
+             <widget class="QFrame" name="frameDstStartDate">
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <property name="margin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QSpinBox" name="spinBoxDstStartDateDay"/>
+               </item>
+               <item>
+                <widget class="QComboBox" name="comboBoxDstStartDateMonth"/>
+               </item>
+              </layout>
              </widget>
             </item>
            </layout>
@@ -430,21 +435,26 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="2" colspan="3">
-             <widget class="QDateEdit" name="dateEditDstEnd">
-              <property name="wrapping">
-               <bool>true</bool>
-              </property>
-              <property name="displayFormat">
-               <string>dd MMMM</string>
-              </property>
-             </widget>
-            </item>
             <item row="3" column="0" colspan="2">
              <widget class="QRadioButton" name="radioButtonDstEndDate">
               <property name="text">
                <string>Date:</string>
               </property>
+             </widget>
+            </item>
+            <item row="3" column="2" colspan="3">
+             <widget class="QFrame" name="frameDstEndDate">
+              <layout class="QHBoxLayout" name="horizontalLayoutDstEndDate">
+               <property name="margin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QSpinBox" name="spinBoxDstEndDateDay"/>
+               </item>
+               <item>
+                <widget class="QComboBox" name="comboBoxDstEndDateMonth"/>
+               </item>
+              </layout>
              </widget>
             </item>
            </layout>
@@ -499,16 +509,18 @@
   <tabstop>comboBoxDstStartDay</tabstop>
   <tabstop>comboBoxDstStartMonth</tabstop>
   <tabstop>radioButtonDstStartDate</tabstop>
-  <tabstop>dateEditDstStart</tabstop>
+  <tabstop>spinBoxDstStartDateDay</tabstop>
+  <tabstop>comboBoxDstStartDateMonth</tabstop>
   <tabstop>checkBoxDstStartTime</tabstop>
   <tabstop>timeEditDstStart</tabstop>
-  <tabstop>radioButtonDstEndDay</tabstop>
   <tabstop>groupBoxDstEnd</tabstop>
+  <tabstop>radioButtonDstEndDay</tabstop>
   <tabstop>comboBoxDstEndWeek</tabstop>
   <tabstop>comboBoxDstEndDay</tabstop>
   <tabstop>comboBoxDstEndMonth</tabstop>
   <tabstop>radioButtonDstEndDate</tabstop>
-  <tabstop>dateEditDstEnd</tabstop>
+  <tabstop>spinBoxDstEndDateDay</tabstop>
+  <tabstop>comboBoxDstEndDateMonth</tabstop>
   <tabstop>checkBoxDstEndTime</tabstop>
   <tabstop>timeEditDstEnd</tabstop>
   <tabstop>pushButtonUseDefinition</tabstop>
