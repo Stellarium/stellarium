@@ -53,10 +53,14 @@ private:
 	TimeZoneManager * timeZoneManager;
 
 private slots:
-	void saveSettings();
+	void saveTimeZoneSettings();
 	void openDefineTimeZoneWindow();
 	void closeDefineTimeZoneWindow(bool);
 	void timeZoneDefined(QString timeZoneDefinition);
+
+	void setTimeFormat(bool);
+	void setDateFormat(bool);
+	void updateDisplayFormatSwitches();
 };
 
 

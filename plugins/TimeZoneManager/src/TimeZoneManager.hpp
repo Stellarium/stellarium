@@ -57,6 +57,9 @@ public:
 	//! Stellarium's configuration file.
 	QString readTimeZone();
 
+	//! Saves the formats used to display date and time in the bottom bar.
+	void saveDisplayFormats();
+
 private:
 	TimeZoneManagerWindow * mainWindow;
 };
