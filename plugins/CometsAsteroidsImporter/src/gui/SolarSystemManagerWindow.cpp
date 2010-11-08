@@ -66,6 +66,8 @@ void SolarSystemManagerWindow::createDialogContent()
 	connect(ssoManager, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
 	connect(ui->pushButtonReset, SIGNAL(clicked()), ssoManager, SLOT(resetSolarSystemToDefault()));
 
+	ui->labelVersion->setText(QString("Version %1").arg(PLUGIN_VERSION));
+
 	Q_ASSERT(importWindow);
 	//Rebuild the list if any planets have been imported
 	connect(importWindow, SIGNAL(objectsImported()), this, SLOT(populateSolarSystemList()));
