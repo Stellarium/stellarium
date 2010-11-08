@@ -1,5 +1,5 @@
 /*
- * Time zone manager plug-in for Stellarium
+ * Time zone configuration plug-in for Stellarium
  *
  * Copyright (C) 2010 Bogdan Marinov
  *
@@ -17,23 +17,23 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
  
- #ifndef _TIME_ZONE_MANAGER_HPP_
- #define _TIME_ZONE_MANAGER_HPP_
+ #ifndef _TIME_ZONE_CONFIGURATION_HPP_
+ #define _TIME_ZONE_CONFIGURATION_HPP_
 
 #include "StelGui.hpp"
 #include "StelModule.hpp"
 
 #include <QString>
 
-class TimeZoneManagerWindow;
+class TimeZoneConfigurationWindow;
 
-class TimeZoneManager : public StelModule
+class TimeZoneConfiguration : public StelModule
 {
 	Q_OBJECT
 
 public:
-	TimeZoneManager();
-	~TimeZoneManager();
+	TimeZoneConfiguration();
+	~TimeZoneConfiguration();
 
 	virtual void init();
 	virtual void deinit();
@@ -61,7 +61,7 @@ public:
 	void saveDisplayFormats();
 
 private:
-	TimeZoneManagerWindow * mainWindow;
+	TimeZoneConfigurationWindow * mainWindow;
 };
 
 #include "fixx11h.h"
@@ -69,7 +69,7 @@ private:
 #include "StelPluginInterface.hpp"
 
 //! This class is used by Qt to manage a plug-in interface
-class TimeZoneManagerStelPluginInterface : public QObject, public StelPluginInterface
+class TimeZoneConfigurationStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
 	Q_INTERFACES(StelPluginInterface)
@@ -78,4 +78,4 @@ public:
 	virtual StelPluginInfo getPluginInfo() const;
 };
  
- #endif //_TIME_ZONE_MANAGER_HPP_
+ #endif //_TIME_ZONE_CONFIGURATION_HPP_

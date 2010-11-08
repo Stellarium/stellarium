@@ -1,5 +1,5 @@
 /*
- * Time zone manager plug-in for Stellarium
+ * Time zone configuration plug-in for Stellarium
  *
  * Copyright (C) 2010 Bogdan Marinov
  *
@@ -17,7 +17,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "TimeZoneManagerWindow.hpp"
+#include "TimeZoneConfigurationWindow.hpp"
 #include "DefineTimeZoneWindow.hpp"
 #include "ui_defineTimeZone.h"
 
@@ -68,7 +68,7 @@ void DefineTimeZoneWindow::useDefinition()
 		return;
 	}
 	definition.append(timeZoneName);
-	definition.append(TimeZoneManagerWindow::getTzOffsetStringFrom(ui->doubleSpinBoxOffset));
+	definition.append(TimeZoneConfigurationWindow::getTzOffsetStringFrom(ui->doubleSpinBoxOffset));
 
 	//Daylight saving time
 	if (ui->checkBoxDst->isChecked())
@@ -84,7 +84,7 @@ void DefineTimeZoneWindow::useDefinition()
 		//The offset is not necessary
 		if (ui->checkBoxOffsetDst)
 		{
-			definition.append(TimeZoneManagerWindow::getTzOffsetStringFrom(ui->doubleSpinBoxOffsetDst));
+			definition.append(TimeZoneConfigurationWindow::getTzOffsetStringFrom(ui->doubleSpinBoxOffsetDst));
 		}
 
 		if (ui->groupBoxDstStart->isChecked() && ui->groupBoxDstEnd->isChecked())

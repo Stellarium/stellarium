@@ -1,5 +1,5 @@
 /*
- * Time zone manager plug-in for Stellarium
+ * Time zone configuration plug-in for Stellarium
  *
  * Copyright (C) 2010 Bogdan Marinov
  *
@@ -17,25 +17,25 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _TIME_ZONE_MANAGER_WINDOW_HPP_
-#define _TIME_ZONE_MANAGER_WINDOW_HPP_
+#ifndef _TIME_ZONE_CONFIGURATION_WINDOW_HPP_
+#define _TIME_ZONE_CONFIGURATION_WINDOW_HPP_
 
 #include "StelDialog.hpp"
 
 #include <QString>
 #include <QDoubleSpinBox>
 
-class Ui_timeZoneManagerWindowForm;
-class TimeZoneManager;
+class Ui_timeZoneConfigurationWindowForm;
+class TimeZoneConfiguration;
 class DefineTimeZoneWindow;
 
-class TimeZoneManagerWindow : public StelDialog
+class TimeZoneConfigurationWindow : public StelDialog
 {
 	Q_OBJECT
 
 public:
-	TimeZoneManagerWindow();
-	~TimeZoneManagerWindow();
+	TimeZoneConfigurationWindow();
+	~TimeZoneConfigurationWindow();
 	void languageChanged();
 
 	//! Converts a decimal fraction of hours to a string containing a signed
@@ -48,9 +48,9 @@ protected:
 	void createDialogContent();
 
 private:
-	Ui_timeZoneManagerWindowForm * ui;
+	Ui_timeZoneConfigurationWindowForm * ui;
 	DefineTimeZoneWindow * defineTimeZoneWindow;
-	TimeZoneManager * timeZoneManager;
+	TimeZoneConfiguration * timeZoneConfiguration;
 
 private slots:
 	void saveTimeZoneSettings();
@@ -64,4 +64,4 @@ private slots:
 };
 
 
-#endif //_TIME_ZONE_MANAGER_WINDOW_HPP_
+#endif //_TIME_ZONE_CONFIGURATION_WINDOW_HPP_
