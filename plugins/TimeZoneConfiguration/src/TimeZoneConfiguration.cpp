@@ -1,5 +1,5 @@
 /*
- * Time zone manager plug-in for Stellarium
+ * Time zone configuration plug-in for Stellarium
  *
  * Copyright (C) 2010 Bogdan Marinov
  *
@@ -17,8 +17,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "TimeZoneManager.hpp"
-#include "TimeZoneManagerWindow.hpp"
+#include "TimeZoneConfiguration.hpp"
+#include "TimeZoneConfigurationWindow.hpp"
 
 #include "StelApp.hpp"
 #include "StelLocaleMgr.hpp"
@@ -26,18 +26,18 @@
 
 #include <QSettings>
 
-StelModule* TimeZoneManagerStelPluginInterface::getStelModule() const
+StelModule* TimeZoneConfigurationStelPluginInterface::getStelModule() const
 {
-	return new TimeZoneManager();
+	return new TimeZoneConfiguration();
 }
 
-StelPluginInfo TimeZoneManagerStelPluginInterface::getPluginInfo() const
+StelPluginInfo TimeZoneConfigurationStelPluginInterface::getPluginInfo() const
 {
 	// Allow to load the resources when used as a static plugin
-	//Q_INIT_RESOURCE(TimeZoneManager);
+	//Q_INIT_RESOURCE(TimeZoneConfiguration);
 
 	StelPluginInfo info;
-	info.id = "TimeZoneManager";
+	info.id = "TimeZoneConfiguration";
 	info.displayedName = "Time Zone";
 	info.authors = "Bogdan Marinov";
 	info.contact = "http://stellarium.org";
@@ -45,41 +45,41 @@ StelPluginInfo TimeZoneManagerStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(TimeZoneManager, TimeZoneManagerStelPluginInterface);
+Q_EXPORT_PLUGIN2(TimeZoneConfiguration, TimeZoneConfigurationStelPluginInterface);
 
-TimeZoneManager::TimeZoneManager()
+TimeZoneConfiguration::TimeZoneConfiguration()
 {
-	setObjectName("TimeZoneManager");
+	setObjectName("TimeZoneConfiguration");
 
 	//
 }
 
-TimeZoneManager::~TimeZoneManager()
+TimeZoneConfiguration::~TimeZoneConfiguration()
 {
 	//
 }
 
-void TimeZoneManager::init()
+void TimeZoneConfiguration::init()
 {
-	mainWindow = new TimeZoneManagerWindow();
+	mainWindow = new TimeZoneConfigurationWindow();
 }
 
-void TimeZoneManager::deinit()
+void TimeZoneConfiguration::deinit()
 {
 	delete mainWindow;
 }
 
-double TimeZoneManager::getCallOrder(StelModuleActionName) const
+double TimeZoneConfiguration::getCallOrder(StelModuleActionName) const
 {
 	return 0.;
 }
 
-void TimeZoneManager::update(double)
+void TimeZoneConfiguration::update(double)
 {
 	//
 }
 
-bool TimeZoneManager::configureGui(bool show)
+bool TimeZoneConfiguration::configureGui(bool show)
 {
 	if (show)
 		mainWindow->setVisible(true);
@@ -87,7 +87,7 @@ bool TimeZoneManager::configureGui(bool show)
 	return true;
 }
 
-void TimeZoneManager::setTimeZone(QString timeZoneString)
+void TimeZoneConfiguration::setTimeZone(QString timeZoneString)
 {
 	if (timeZoneString.isEmpty())
 	{
@@ -103,7 +103,7 @@ void TimeZoneManager::setTimeZone(QString timeZoneString)
 	settings->sync();
 }
 
-QString TimeZoneManager::readTimeZone()
+QString TimeZoneConfiguration::readTimeZone()
 {
 	QSettings * settings = StelApp::getInstance().getSettings();
 	Q_ASSERT(settings);
@@ -111,7 +111,7 @@ QString TimeZoneManager::readTimeZone()
 	return settings->value("localization/time_zone").toString();
 }
 
-void TimeZoneManager::saveDisplayFormats()
+void TimeZoneConfiguration::saveDisplayFormats()
 {
 	QSettings * settings = StelApp::getInstance().getSettings();
 	Q_ASSERT(settings);

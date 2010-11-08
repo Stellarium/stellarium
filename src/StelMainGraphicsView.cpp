@@ -93,8 +93,8 @@ Q_IMPORT_PLUGIN(Oculars)
 Q_IMPORT_PLUGIN(TelescopeControl)
 #endif
 
-#ifdef USE_STATIC_PLUGIN_TIMEZONEMANAGER
-Q_IMPORT_PLUGIN(TimeZoneManager)
+#ifdef USE_STATIC_PLUGIN_TIMEZONECONFIGURATION
+Q_IMPORT_PLUGIN(TimeZoneConfiguration)
 #endif
 
 // Initialize static variables
