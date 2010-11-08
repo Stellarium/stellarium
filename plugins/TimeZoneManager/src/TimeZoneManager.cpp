@@ -21,6 +21,7 @@
 #include "TimeZoneManagerWindow.hpp"
 
 #include "StelApp.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelModule.hpp"
 
 #include <QSettings>
@@ -108,4 +109,20 @@ QString TimeZoneManager::readTimeZone()
 	Q_ASSERT(settings);
 
 	return settings->value("localization/time_zone").toString();
+}
+
+void TimeZoneManager::saveDisplayFormats()
+{
+	QSettings * settings = StelApp::getInstance().getSettings();
+	Q_ASSERT(settings);
+
+	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
+
+	QString timeDisplayFormat = localeManager.getTimeFormatStr();
+	settings->setValue("localization/time_display_format", timeDisplayFormat);
+
+	QString dateDisplayFormat = localeManager.getDateFormatStr();
+	settings->setValue("localization/date_display_format", dateDisplayFormat);
+
+	settings->sync();
 }
