@@ -398,6 +398,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 	int nb;
 	NebulaP e;
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	QRegExp transRx("_[(]\"(.*)\"[)]");
 	while (!ngcNameFile.atEnd())
 	{
 		record = QString::fromUtf8(ngcNameFile.readLine());
@@ -425,7 +426,13 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 			// defined for this object
 			if (name.left(2).toUpper() != "M ")
 			{
-				e->englishName = name;
+				if (transRx.exactMatch(name)) {
+					e->englishName = transRx.capturedTexts().at(1).trimmed();
+				}
+				 else 
+				{
+					e->englishName = name;
+				}
 			}
 			else
 			{
@@ -462,7 +469,7 @@ void NebulaMgr::updateI18n()
 {
 	StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	foreach (NebulaP n, nebArray)
-		n->translateName(trans);
+			n->translateName(trans);
 }
 
 

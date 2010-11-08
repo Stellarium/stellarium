@@ -115,6 +115,12 @@ QVariantMap Satellite::getMap(void)
 		commList << commMap;
 	}
 	map["comms"] = commList;
+		QVariantList groupList;
+	foreach(QString g, groupIDs)
+	{
+		groupList << g;
+	}
+	map["groups"] = groupList;
 	return map;
 }
 

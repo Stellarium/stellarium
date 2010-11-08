@@ -21,26 +21,40 @@
 
 #include <QObject>
 #include <QString>
-#include <QSqlRecord>
+#include <QSettings>
 
 class Telescope : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(QString name READ name WRITE setName)
+	Q_PROPERTY(double diameter READ diameter WRITE setDiameter)
+	Q_PROPERTY(double focalLength READ focalLength WRITE setFocalLength)
+	Q_PROPERTY(bool hFlipped READ isHFlipped WRITE setHFlipped)
+	Q_PROPERTY(bool vFlipped READ isVFlipped WRITE setVFlipped)
 public:
-	Telescope(QSqlRecord record);
+	Telescope();
+	Q_INVOKABLE Telescope(const QObject& other);
 	virtual ~Telescope();
-	double getDiameter();
-	double getFocalLength();
-	int getTelescopeID();
-	const QString getName();
-	bool isHFlipped();
-	bool isVFlipped();
+	static Telescope* telescopeFromSettings(QSettings* theSettings, int telescopeIndex);
+	static Telescope* telescopeModel();
+
+	double diameter() const;
+	void setDiameter(double theValue);
+	double focalLength() const;
+	void setFocalLength(double theValue);
+	const QString name() const;
+	void setName(QString theValue);
+	bool isHFlipped() const;
+	void setHFlipped(bool flipped);
+	bool isVFlipped() const;
+	void setVFlipped(bool flipped);
+	QMap<int, QString> propertyMap();
 private:
-	int telescopeID;
-	QString name;
-	double diameter;
-	double focalLength;
-	bool hFlipped;
-	bool vFlipped;
+	QString m_name;
+	double m_diameter;
+	double m_focalLength;
+	bool m_hFlipped;
+	bool m_vFlipped;
 };
+
 #endif /*TELESCOPE_HPP_*/
