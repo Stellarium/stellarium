@@ -41,7 +41,7 @@ StelPluginInfo TimeZoneManagerStelPluginInterface::getPluginInfo() const
 	info.displayedName = "Time Zone";
 	info.authors = "Bogdan Marinov";
 	info.contact = "http://stellarium.org";
-	info.description = "This plug-in allows the user to set the time zone used in Stellarium.";
+	info.description = "A convenient interface for some of the more obscure options in Stellarium's configuration file. Allows setting the time zone and changing the way the time and the date are displayed in the bottom bar.";
 	return info;
 }
 

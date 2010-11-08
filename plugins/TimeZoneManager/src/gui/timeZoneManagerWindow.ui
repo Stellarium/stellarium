@@ -246,6 +246,9 @@
             <property name="text">
              <string>Any changes will take effect the next time Stellarium is started.</string>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
             <property name="wordWrap">
              <bool>true</bool>
             </property>
