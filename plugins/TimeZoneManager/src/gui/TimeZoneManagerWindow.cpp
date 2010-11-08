@@ -23,6 +23,7 @@
 #include "ui_timeZoneManagerWindow.h"
 
 #include "StelApp.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 
 TimeZoneManagerWindow::TimeZoneManagerWindow()
@@ -50,8 +51,19 @@ void TimeZoneManagerWindow::createDialogContent()
 	ui->setupUi(dialog);
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveSettings()));
+	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveTimeZoneSettings()));
 	connect(ui->pushButtonEditTimeZone, SIGNAL(clicked()), this, SLOT(openDefineTimeZoneWindow()));
+
+	connect(ui->radioButtonTimeDefault, SIGNAL(toggled(bool)), this, SLOT(setTimeFormat(bool)));
+	connect(ui->radioButtonTime12Hour, SIGNAL(toggled(bool)), this, SLOT(setTimeFormat(bool)));
+	connect(ui->radioButtonTime24Hour, SIGNAL(toggled(bool)), this, SLOT(setTimeFormat(bool)));
+
+	connect(ui->radioButtonDateDefault, SIGNAL(toggled(bool)), this, SLOT(setDateFormat(bool)));
+	connect(ui->radioButtonDateDMY, SIGNAL(toggled(bool)), this, SLOT(setDateFormat(bool)));
+	connect(ui->radioButtonDateMDY, SIGNAL(toggled(bool)), this, SLOT(setDateFormat(bool)));
+	connect(ui->radioButtonDateYMD, SIGNAL(toggled(bool)), this, SLOT(setDateFormat(bool)));
+
+	updateDisplayFormatSwitches();
 
 	QString currentTimeZoneString = timeZoneManager->readTimeZone();
 	ui->lineEditCurrent->setText(currentTimeZoneString);
@@ -84,9 +96,11 @@ void TimeZoneManagerWindow::createDialogContent()
 	{
 		ui->radioButtonUserDefined->setChecked(true);
 	}
+
+	ui->labelTitle->setText(QString("Time Zone plug-in (version %1)").arg(PLUGIN_VERSION));
 }
 
-void TimeZoneManagerWindow::saveSettings()
+void TimeZoneManagerWindow::saveTimeZoneSettings()
 {
 	QString timeZoneString;
 	if (ui->radioButtonUtc->isChecked())
@@ -151,4 +165,67 @@ QString TimeZoneManagerWindow::getTzOffsetStringFrom(QDoubleSpinBox * spinBox)
 	int offsetHours = offset;
 
 	return QString("%1%2:%3:%4").arg(offsetSign).arg(offsetHours, 2, 10, QChar('0')).arg(offsetMinutes, 2, 10, QChar('0')).arg(offsetSeconds, 2, 10, QChar('0'));
+}
+
+void TimeZoneManagerWindow::updateDisplayFormatSwitches()
+{
+	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
+
+	QString timeFormat = localeManager.getTimeFormatStr();
+	if (timeFormat == "12h")
+		ui->radioButtonTime12Hour->setChecked(true);
+	else if (timeFormat == "24h")
+		ui->radioButtonTime24Hour->setChecked(true);
+	else
+		ui->radioButtonTimeDefault->setChecked(true);
+
+	QString dateFormat = localeManager.getDateFormatStr();
+	if (dateFormat == "yyyymmdd")
+		ui->radioButtonDateYMD->setChecked(true);
+	else if (dateFormat == "ddmmyyyy")
+		ui->radioButtonDateDMY->setChecked(true);
+	else if (dateFormat == "mmddyyyy")
+		ui->radioButtonDateMDY->setChecked(true);
+	else
+		ui->radioButtonDateDefault->setChecked(true);
+}
+
+void TimeZoneManagerWindow::setTimeFormat(bool)
+{
+	//TODO: This will break if the settings' format is changed.
+	//It's a pity StelLocaleMgr::sTimeFormatToString() is private...
+	QString selectedFormat;
+	if (ui->radioButtonTime12Hour->isChecked())
+		selectedFormat = "12h";
+	else if (ui->radioButtonTime24Hour->isChecked())
+		selectedFormat = "24h";
+	else
+		selectedFormat = "system_default";
+
+	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
+	if (selectedFormat == localeManager.getTimeFormatStr())
+		return;
+	localeManager.setTimeFormatStr(selectedFormat);
+	timeZoneManager->saveDisplayFormats();
+}
+
+void TimeZoneManagerWindow::setDateFormat(bool)
+{
+	//TODO: This will break if the settings' format is changed.
+	//It's a pity StelLocaleMgr::sDateFormatToString() is private...
+	QString selectedFormat;
+	if (ui->radioButtonDateYMD->isChecked())
+		selectedFormat = "yyyymmdd";
+	else if (ui->radioButtonDateDMY->isChecked())
+		selectedFormat = "ddmmyyyy";
+	else if (ui->radioButtonDateMDY->isChecked())
+		selectedFormat = "mmddyyyy";
+	else
+		selectedFormat = "system_default";
+
+	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
+	if (selectedFormat == localeManager.getDateFormatStr())
+		return;
+	localeManager.setDateFormatStr(selectedFormat);
+	timeZoneManager->saveDisplayFormats();
 }
