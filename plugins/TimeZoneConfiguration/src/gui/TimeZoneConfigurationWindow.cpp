@@ -1,5 +1,5 @@
 /*
- * Time zone manager plug-in for Stellarium
+ * Time zone configuration plug-in for Stellarium
  *
  * Copyright (C) 2010 Bogdan Marinov
  *
@@ -17,36 +17,36 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "TimeZoneManager.hpp"
-#include "TimeZoneManagerWindow.hpp"
+#include "TimeZoneConfiguration.hpp"
+#include "TimeZoneConfigurationWindow.hpp"
 #include "DefineTimeZoneWindow.hpp"
-#include "ui_timeZoneManagerWindow.h"
+#include "ui_timeZoneConfigurationWindow.h"
 
 #include "StelApp.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 
-TimeZoneManagerWindow::TimeZoneManagerWindow()
+TimeZoneConfigurationWindow::TimeZoneConfigurationWindow()
 {
-	ui = new Ui_timeZoneManagerWindowForm();
-	timeZoneManager = GETSTELMODULE(TimeZoneManager);
+	ui = new Ui_timeZoneConfigurationWindowForm();
+	timeZoneConfiguration = GETSTELMODULE(TimeZoneConfiguration);
 	defineTimeZoneWindow = NULL;
 }
 
-TimeZoneManagerWindow::~TimeZoneManagerWindow()
+TimeZoneConfigurationWindow::~TimeZoneConfigurationWindow()
 {
 	delete ui;
 	if (defineTimeZoneWindow)
 		delete defineTimeZoneWindow;
 }
 
-void TimeZoneManagerWindow::languageChanged()
+void TimeZoneConfigurationWindow::languageChanged()
 {
 	if (dialog)
 		ui->retranslateUi(dialog);
 }
 
-void TimeZoneManagerWindow::createDialogContent()
+void TimeZoneConfigurationWindow::createDialogContent()
 {
 	ui->setupUi(dialog);
 
@@ -65,7 +65,7 @@ void TimeZoneManagerWindow::createDialogContent()
 
 	updateDisplayFormatSwitches();
 
-	QString currentTimeZoneString = timeZoneManager->readTimeZone();
+	QString currentTimeZoneString = timeZoneConfiguration->readTimeZone();
 	ui->lineEditCurrent->setText(currentTimeZoneString);
 	ui->lineEditUserDefined->setText(currentTimeZoneString);
 	ui->frameUserDefined->setEnabled(false);
@@ -100,7 +100,7 @@ void TimeZoneManagerWindow::createDialogContent()
 	ui->labelTitle->setText(QString("Time Zone plug-in (version %1)").arg(PLUGIN_VERSION));
 }
 
-void TimeZoneManagerWindow::saveTimeZoneSettings()
+void TimeZoneConfigurationWindow::saveTimeZoneSettings()
 {
 	QString timeZoneString;
 	if (ui->radioButtonUtc->isChecked())
@@ -116,10 +116,10 @@ void TimeZoneManagerWindow::saveTimeZoneSettings()
 		timeZoneString = "system_default";
 	}
 
-	timeZoneManager->setTimeZone(timeZoneString);
+	timeZoneConfiguration->setTimeZone(timeZoneString);
 }
 
-void TimeZoneManagerWindow::openDefineTimeZoneWindow()
+void TimeZoneConfigurationWindow::openDefineTimeZoneWindow()
 {
 	dialog->setEnabled(false);
 
@@ -133,7 +133,7 @@ void TimeZoneManagerWindow::openDefineTimeZoneWindow()
 	defineTimeZoneWindow->setVisible(true);
 }
 
-void TimeZoneManagerWindow::closeDefineTimeZoneWindow(bool show)
+void TimeZoneConfigurationWindow::closeDefineTimeZoneWindow(bool show)
 {
 	if (show)
 		return;
@@ -146,12 +146,12 @@ void TimeZoneManagerWindow::closeDefineTimeZoneWindow(bool show)
 	dialog->setEnabled(true);
 }
 
-void TimeZoneManagerWindow::timeZoneDefined(QString timeZoneDefinition)
+void TimeZoneConfigurationWindow::timeZoneDefined(QString timeZoneDefinition)
 {
 	ui->lineEditUserDefined->setText(timeZoneDefinition);
 }
 
-QString TimeZoneManagerWindow::getTzOffsetStringFrom(QDoubleSpinBox * spinBox)
+QString TimeZoneConfigurationWindow::getTzOffsetStringFrom(QDoubleSpinBox * spinBox)
 {
 	Q_ASSERT(spinBox);
 
@@ -167,7 +167,7 @@ QString TimeZoneManagerWindow::getTzOffsetStringFrom(QDoubleSpinBox * spinBox)
 	return QString("%1%2:%3:%4").arg(offsetSign).arg(offsetHours, 2, 10, QChar('0')).arg(offsetMinutes, 2, 10, QChar('0')).arg(offsetSeconds, 2, 10, QChar('0'));
 }
 
-void TimeZoneManagerWindow::updateDisplayFormatSwitches()
+void TimeZoneConfigurationWindow::updateDisplayFormatSwitches()
 {
 	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
 
@@ -190,7 +190,7 @@ void TimeZoneManagerWindow::updateDisplayFormatSwitches()
 		ui->radioButtonDateDefault->setChecked(true);
 }
 
-void TimeZoneManagerWindow::setTimeFormat(bool)
+void TimeZoneConfigurationWindow::setTimeFormat(bool)
 {
 	//TODO: This will break if the settings' format is changed.
 	//It's a pity StelLocaleMgr::sTimeFormatToString() is private...
@@ -206,10 +206,10 @@ void TimeZoneManagerWindow::setTimeFormat(bool)
 	if (selectedFormat == localeManager.getTimeFormatStr())
 		return;
 	localeManager.setTimeFormatStr(selectedFormat);
-	timeZoneManager->saveDisplayFormats();
+	timeZoneConfiguration->saveDisplayFormats();
 }
 
-void TimeZoneManagerWindow::setDateFormat(bool)
+void TimeZoneConfigurationWindow::setDateFormat(bool)
 {
 	//TODO: This will break if the settings' format is changed.
 	//It's a pity StelLocaleMgr::sDateFormatToString() is private...
@@ -227,5 +227,5 @@ void TimeZoneManagerWindow::setDateFormat(bool)
 	if (selectedFormat == localeManager.getDateFormatStr())
 		return;
 	localeManager.setDateFormatStr(selectedFormat);
-	timeZoneManager->saveDisplayFormats();
+	timeZoneConfiguration->saveDisplayFormats();
 }

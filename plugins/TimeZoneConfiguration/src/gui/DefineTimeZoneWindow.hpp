@@ -1,5 +1,5 @@
 /*
- * Time zone manager plug-in for Stellarium
+ * Time zone configuration plug-in for Stellarium
  *
  * Copyright (C) 2010 Bogdan Marinov
  *
