@@ -61,7 +61,7 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 		StelPluginInfo info;
 		info.id = "Satellites";
 		info.displayedName = "Satellites";
-		info.authors = "Matthew Gates";
+		info.authors = "Matthew Gates, Jose Luis Canales";
 		info.contact = "http://stellarium.org/";
 		info.description = "Prediction of artificial satellite positions in Earth orbit based on NORAD TLE data";
 		return info;
