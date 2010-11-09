@@ -1,5 +1,6 @@
 /*
  * Stellarium
+ * Copyright (C) 2002 Fabien Chereau (some old code from the Planet class)
  * Copyright (C) 2010 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
@@ -258,6 +259,15 @@ float MinorPlanet::getVMagnitude(const StelNavigator *nav) const
 	double apparentMagnitude = reducedMagnitude + 5 * std::log10(std::sqrt(planetRq * observerPlanetRq));
 
 	return apparentMagnitude;
+}
+
+void MinorPlanet::translateName(StelTranslator &translator)
+{
+	nameI18 = translator.qtranslate(properName);
+	if (englishName.endsWith('*'))
+	{
+		nameI18.append('*');
+	}
 }
 
 QString MinorPlanet::renderProvisionalDesignationinHtml(QString plainTextName)
