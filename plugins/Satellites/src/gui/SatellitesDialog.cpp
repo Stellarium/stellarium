@@ -188,7 +188,8 @@ void SatellitesDialog::setAboutHtml(void)
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Stellarium Satellites Plugin") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td>" + q_("Version:") + "</td><td>" + PLUGIN_VERSION + "</td></td>";
-	html += "<tr><td>" + q_("Author:") + "</td><td>Matthew Gates &lt;matthew@porpoisehead.net&gt;</td></td>";
+	html += "<tr><td>" + q_("Authors:") + "</td><td>Matthew Gates &lt;matthew@porpoisehead.net&gt;</td></td>";
+	html += "<tr><td></td><td>Jose Luis Canales</td></td>";
 	html += "<tr><td>" + q_("Website:") + "</td><td><a href=\"http://stellarium.org/\">stellarium.org</a></td></td></table>";
 	html += "<p>";
 	html += q_("This is the Satellites plugin for Stellarium. ");
