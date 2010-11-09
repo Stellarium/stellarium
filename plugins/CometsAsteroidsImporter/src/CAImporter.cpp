@@ -69,6 +69,7 @@ CAImporter::CAImporter()
 	isInitialized = false;
 	mainWindow = NULL;
 	solarSystemConfigurationFile = NULL;
+	solarSystemManager = GETSTELMODULE(SolarSystem);
 
 	//I really hope that the file manager is instantiated before this
 	defaultSolarSystemFilePath	= QFileInfo(StelFileMgr::getInstallationDir() + "/data/ssystem.ini").absoluteFilePath();
@@ -85,11 +86,11 @@ CAImporter::~CAImporter()
 
 void CAImporter::init()
 {
-	//Get a list of the "default" Solar System objects' IDs:
+	//Get a list of the "default" Solar System objects' names:
 	//TODO: Use it as validation for the loading of the plug-in
 	if (QFile::exists(defaultSolarSystemFilePath))
 	{
-		defaultSsoIds = readAllActiveSsoIdsInFile(defaultSolarSystemFilePath);
+		defaultSsoIdentifiers = listAllLoadedObjectsInFile(defaultSolarSystemFilePath);
 	}
 	else
 	{
@@ -176,7 +177,7 @@ bool CAImporter::configureGui(bool show)
 				return true;*/
 
 			//Destroy and re-create the Solal System
-			//GETSTELMODULE(SolarSystem)->reloadPlanets();
+			//solarSystemManager->reloadPlanets();
 		}
 	}
 	return true;
@@ -240,7 +241,7 @@ void CAImporter::resetSolarSystemToDefault()
 			//TODO
 			objectManager->unSelect();
 
-			GETSTELMODULE(SolarSystem)->reloadPlanets();
+			solarSystemManager->reloadPlanets();
 			emit solarSystemChanged();
 		}
 	}
@@ -289,7 +290,7 @@ bool CAImporter::replaceSolarSystemConfigurationFileWith(QString filePath)
 	//If the copy fails, reset to the default configuration
 	if (QFile::copy(filePath, customSolarSystemFilePath))
 	{
-		GETSTELMODULE(SolarSystem)->reloadPlanets();
+		solarSystemManager->reloadPlanets();
 		emit solarSystemChanged();
 		return true;
 	}
@@ -298,7 +299,7 @@ bool CAImporter::replaceSolarSystemConfigurationFileWith(QString filePath)
 		//TODO: Message
 		if (cloneSolarSystemConfigurationFile())
 		{
-			GETSTELMODULE(SolarSystem)->reloadPlanets();
+			solarSystemManager->reloadPlanets();
 			emit solarSystemChanged();
 			return true;
 		}
@@ -310,49 +311,49 @@ bool CAImporter::replaceSolarSystemConfigurationFileWith(QString filePath)
 	}
 }
 
-QStringList CAImporter::readAllActiveSsoIdsInFile(QString filePath)
+QHash<QString,QString> CAImporter::listAllLoadedObjectsInFile(QString filePath)
 {
 	if (!QFile::exists(filePath))
-		return QStringList();
+		return QHash<QString,QString>();
 
 	QSettings solarSystem(filePath, QSettings::IniFormat);
 	if (solarSystem.status() != QSettings::NoError)
-		return QStringList();
+		return QHash<QString,QString>();
 
 	QStringList groups = solarSystem.childGroups();
-	QStringList planetNames = GETSTELMODULE(SolarSystem)->getAllPlanetEnglishNames();
-	QStringList ssoIds;
+	QStringList planetNames = solarSystemManager->getAllPlanetEnglishNames();
+	QHash<QString,QString> loadedObjects;
 	foreach (QString group, groups)
 	{
 		QString name = solarSystem.value(group + "/name").toString();
 		if (planetNames.contains(name))
 		{
-			ssoIds.append(group);
+			loadedObjects.insert(name, group);
 		}
 	}
-	return ssoIds;
+	return loadedObjects;
 }
 
-QStringList CAImporter::readAllCurrentSsoIds()
+QHash<QString,QString> CAImporter::listAllLoadedSsoIdentifiers()
 {
 	if (QFile::exists(customSolarSystemFilePath))
 	{
-		return readAllActiveSsoIdsInFile(customSolarSystemFilePath);
+		return listAllLoadedObjectsInFile(customSolarSystemFilePath);
 	}
 	else
 	{
 		//TODO: Error message
-		return QStringList();
+		return QHash<QString,QString>();
 	}
 }
 
-bool CAImporter::removeSsoWithId(QString id)
+bool CAImporter::removeSsoWithName(QString name)
 {
-	if (id.isEmpty())
+	if (name.isEmpty())
 		return false;
 
-	//qDebug() << id;
-	if (getAllDefaultSsoIds().contains(id))
+	//qDebug() << name;
+	if (defaultSsoIdentifiers.keys().contains(name))
 	{
 		qWarning() << "You can't delete the default Solar System objects for the moment.";
 		return false;
@@ -361,7 +362,7 @@ bool CAImporter::removeSsoWithId(QString id)
 	//Make sure that the file exists
 	if (!QFile::exists(customSolarSystemFilePath))
 	{
-		qDebug() << "Can't remove" << id << "to ssystem.ini: Unable to find" << customSolarSystemFilePath;
+		qDebug() << "Can't remove" << name << "to ssystem.ini: Unable to find" << customSolarSystemFilePath;
 		return false;
 	}
 
@@ -374,15 +375,23 @@ bool CAImporter::removeSsoWithId(QString id)
 	}
 
 	//Remove the section
-	settings.remove(id);
-	settings.sync();
+	//TODO: Reuse code? Use a hash?
+	foreach (QString group, settings.childGroups())
+	{
+		if (settings.value(group + "/name").toString() == name)
+		{
+			settings.remove(group);
+			settings.sync();
+			break;
+		}
+	}
 
 	//Deselect all currently selected objects
 	//TODO: I bet that someone will complains, so: unselect only the removed one
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 
 	//Reload the Solar System
-	GETSTELMODULE(SolarSystem)->reloadPlanets();
+	solarSystemManager->reloadPlanets();
 	emit solarSystemChanged();
 
 	return true;
@@ -594,7 +603,17 @@ CAImporter::SsoElements CAImporter::readMpcOneLineMinorPlanetElements(QString on
 	sectionName.remove(' ');
 	sectionName.remove('-');
 	sectionName = sectionName.toLower();
-	//TODO: Check if something remained in the name
+	if (sectionName.isEmpty())
+	{
+		return SsoElements();
+	}
+	//To prevent mix-up between asteroids and satellites:
+	//insert the minor planet number in the section name
+	//(if an asteroid is named, it must be numbered)
+	if (minorPlanetNumber)
+	{
+		sectionName.prepend(QString::number(minorPlanetNumber));
+	}
 	result.insert("section_name", sectionName);
 
 	//After a name has been determined, insert the essential keys
@@ -821,7 +840,10 @@ bool CAImporter::appendToSolarSystemConfigurationFile(QList<SsoElements> objectL
 		return false;
 	}
 
-	//Remove duplicates
+
+	QHash<QString,QString> loadedObjects = listAllLoadedSsoIdentifiers();
+
+	//Remove duplicates (identified by name, not by section name)
 	QSettings * solarSystemSettings = new QSettings(customSolarSystemFilePath, QSettings::IniFormat);
 	if (solarSystemSettings->status() != QSettings::NoError)
 	{
@@ -830,16 +852,27 @@ bool CAImporter::appendToSolarSystemConfigurationFile(QList<SsoElements> objectL
 	}
 	foreach (SsoElements object, objectList)
 	{
-		if (!object.contains("section_name"))
+		QString name = object.value("name").toString();
+		if (name.isEmpty())
 			continue;
 
-		QString sectionName = object.value("section_name").toString();
-		if (sectionName.isEmpty())
+		QString group = object.value("section_name").toString();
+		if (group.isEmpty())
 			continue;
 
-		solarSystemSettings->remove(sectionName);
+		if (loadedObjects.contains(name))
+		{
+			solarSystemSettings->remove(loadedObjects.value(name));
+			loadedObjects.remove(name);
+		}
+		else if (solarSystemSettings->childGroups().contains(group))
+		{
+			loadedObjects.remove(solarSystemSettings->value(group + "/name").toString());
+			solarSystemSettings->remove(group);
+		}
 	}
-	delete solarSystemSettings;//This should call QSettings::sync()
+	solarSystemSettings->sync();
+	delete solarSystemSettings;
 	solarSystemSettings = NULL;
 
 	//Write to file
@@ -860,6 +893,10 @@ bool CAImporter::appendToSolarSystemConfigurationFile(QList<SsoElements> objectL
 			if (sectionName.isEmpty())
 				continue;
 			object.remove("section_name");
+
+			QString name = object.value("name").toString();
+			if (name.isEmpty())
+				continue;
 
 			output << endl << QString("[%1]").arg(sectionName) << endl;
 			foreach(QString key, object.keys())
@@ -898,7 +935,9 @@ bool CAImporter::updateSolarSystemConfigurationFile(QList<SsoElements> objectLis
 {
 	if (objectList.isEmpty())
 	{
-		return false;//TODO: Why?
+		//Empty lists can be added without any problem. :)
+		qWarning() << "updateSolarSystemConfigurationFile(): The source list is empty.";
+		return true;
 	}
 
 	//Check if the configuration file exists
@@ -915,6 +954,7 @@ bool CAImporter::updateSolarSystemConfigurationFile(QList<SsoElements> objectLis
 		return false;
 	}
 	QStringList existingSections = solarSystem.childGroups();
+	QHash<QString,QString> loadedObjects = listAllLoadedSsoIdentifiers();
 	//TODO: Move to contstructor?
 	QStringList orbitalElementsKeys;
 	orbitalElementsKeys << "coord_func"
@@ -935,16 +975,53 @@ bool CAImporter::updateSolarSystemConfigurationFile(QList<SsoElements> objectLis
 	qDebug() << "Updating objects...";
 	foreach (SsoElements object, objectList)
 	{
-		if (!object.contains("section_name"))
+		QString name = object.value("name").toString();
+		if (name.isEmpty())
 			continue;
 
 		QString sectionName = object.value("section_name").toString();
 		if (sectionName.isEmpty())
 			continue;
+		object.remove("section_name");
 
-		if (!existingSections.contains(sectionName))
+		if (loadedObjects.contains(name))
 		{
-			qDebug() << "Skipping update of" << sectionName << ", as no object with this identifier exists.";
+			if (sectionName != loadedObjects.value(name))
+			{
+				//Is this a name conflict between an asteroid and a moon?
+				QString currentParent = solarSystem.value(loadedObjects.value(name) + "/parent").toString();
+				QString newParent = object.value("parent").toString();
+				if (newParent != currentParent)
+				{
+					//I'm very curious what kind of names this will generate
+					//if someone decides to play smart...
+					do
+					{
+						name.append('*');
+						object.insert("name", name);
+					}
+					while (loadedObjects.contains(name));
+
+					if (!existingSections.contains(sectionName))
+					{
+						solarSystem.beginGroup(sectionName);
+						foreach (QString property, object.keys())
+						{
+							solarSystem.setValue(property, object.value(property));
+						}
+						solarSystem.endGroup();
+					}
+				}
+				else
+				{
+					//If the parent is the same, update that object
+					sectionName = loadedObjects.value(name);
+				}
+			}
+		}
+		else
+		{
+			qDebug() << "Skipping update of" << sectionName << ", as no object with this name exists.";
 			continue;
 		}
 

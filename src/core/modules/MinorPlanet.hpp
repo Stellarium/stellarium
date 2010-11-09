@@ -104,6 +104,7 @@ private:
 
 	bool nameIsProvisionalDesignation;
 	QString provisionalDesignationHtml;
+	QString properName;
 };
 
 #endif //_MINOR_PLANET_HPP_
