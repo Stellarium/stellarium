@@ -993,14 +993,8 @@ bool CAImporter::updateSolarSystemConfigurationFile(QList<SsoElements> objectLis
 				QString newParent = object.value("parent").toString();
 				if (newParent != currentParent)
 				{
-					//I'm very curious what kind of names this will generate
-					//if someone decides to play smart...
-					do
-					{
-						name.append('*');
-						object.insert("name", name);
-					}
-					while (loadedObjects.contains(name));
+					name.append('*');
+					object.insert("name", name);
 
 					if (!existingSections.contains(sectionName))
 					{
