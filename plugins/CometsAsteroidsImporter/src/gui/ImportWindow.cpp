@@ -282,13 +282,12 @@ void ImportWindow::populateCandidateObjects(QList<CAImporter::SsoElements> objec
 	candidatesForAddition.clear();
 
 	//Get a list of the current objects
-	QStringList existingObjects = GETSTELMODULE(SolarSystem)->getAllPlanetEnglishNames();
-	QStringList defaultSsoIds = ssoManager->getAllDefaultSsoIds();
-	QStringList currentSsoIds = ssoManager->readAllCurrentSsoIds();
+	QHash<QString,QString> defaultSsoIdentifiers = ssoManager->getDefaultSsoIdentifiers();
+	QHash<QString,QString> loadedSsoIdentifiers = ssoManager->listAllLoadedSsoIdentifiers();
 
 	//Separating the objects into visual groups in the list
 	int newDefaultSsoIndex = 0;
-	int newCurrentSsoIndex = 0;
+	int newLoadedSsoIndex = 0;
 	int newNovelSsoIndex = 0;
 	int insertionIndex = 0;
 
@@ -296,63 +295,65 @@ void ImportWindow::populateCandidateObjects(QList<CAImporter::SsoElements> objec
 	list->clear();
 	foreach (CAImporter::SsoElements object, objects)
 	{
-		if (object.contains("name"))
+		QString name = object.value("name").toString();
+		if (name.isEmpty())
+			continue;
+
+		QString group = object.value("section_name").toString();
+		if (group.isEmpty())
+			continue;
+
+		//Prevent name conflicts between asteroids and moons
+		if (loadedSsoIdentifiers.contains(name))
 		{
-			QString name = object.value("name").toString();
-			if (!name.isEmpty())
+			if (loadedSsoIdentifiers.value(name) != group)
 			{
-				QListWidgetItem * item = new QListWidgetItem();
-				item->setText(name);
-				item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-				item->setCheckState(Qt::Unchecked);
-
-				if (object.contains("section_name"))
-				{
-					QString sectionName = object.value("section_name").toString();
-					if (defaultSsoIds.contains(sectionName))
-					{
-						//Duplicate of a default solar system object
-						QFont itemFont(item->font());
-						itemFont.setBold(true);
-						item->setFont(itemFont);
-
-						candidatesForUpdate.append(object);
-
-						insertionIndex = newDefaultSsoIndex;
-						newDefaultSsoIndex++;
-						newCurrentSsoIndex++;
-						newNovelSsoIndex++;
-					}
-					else if (currentSsoIds.contains(sectionName))
-					{
-						//Duplicate of another existing object
-						QFont itemFont(item->font());
-						itemFont.setItalic(true);
-						item->setFont(itemFont);
-
-						candidatesForUpdate.append(object);
-
-						insertionIndex = newCurrentSsoIndex;
-						newCurrentSsoIndex++;
-						newNovelSsoIndex++;
-					}
-					/*else if (existingObjects.contains(name))
-					{
-						//Duplicate name only
-						//TODO: Decide what to do in this case
-					}*/
-					else
-					{
-						candidatesForAddition.append(object);
-
-						insertionIndex = newNovelSsoIndex;
-						newNovelSsoIndex++;
-					}
-
-					list->insertItem(insertionIndex, item);
-				}
+				name.append('*');
+				object.insert("name", name);
 			}
 		}
+
+		QListWidgetItem * item = new QListWidgetItem();
+		item->setText(name);
+		item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+		item->setCheckState(Qt::Unchecked);
+
+		if (defaultSsoIdentifiers.contains(name))
+		{
+			//Duplicate of a default solar system object
+			QFont itemFont(item->font());
+			itemFont.setBold(true);
+			item->setFont(itemFont);
+
+			candidatesForUpdate.append(object);
+
+			insertionIndex = newDefaultSsoIndex;
+			newDefaultSsoIndex++;
+			newLoadedSsoIndex++;
+			newNovelSsoIndex++;
+		}
+		else if (loadedSsoIdentifiers.contains(name))
+		{
+			//Duplicate of another existing object
+			QFont itemFont(item->font());
+			itemFont.setItalic(true);
+			item->setFont(itemFont);
+
+			candidatesForUpdate.append(object);
+
+			insertionIndex = newLoadedSsoIndex;
+			newLoadedSsoIndex++;
+			newNovelSsoIndex++;
+		}
+		else
+		{
+			candidatesForAddition.append(object);
+
+			insertionIndex = newNovelSsoIndex;
+			newNovelSsoIndex++;
+		}
+
+		list->insertItem(insertionIndex, item);
 	}
 
 	//Select the first item

@@ -125,10 +125,9 @@ void SolarSystemManagerWindow::resetImportManual(bool show)
 
 void SolarSystemManagerWindow::populateSolarSystemList()
 {
-	//TODO: Display the names instead of identifiers
-	QStringList ssoIds = ssoManager->readAllCurrentSsoIds();
+	QStringList objectNames = ssoManager->listAllLoadedSsoIdentifiers().keys();
 	ui->listWidgetObjects->clear();
-	ui->listWidgetObjects->addItems(ssoIds);
+	ui->listWidgetObjects->addItems(objectNames);
 }
 
 void SolarSystemManagerWindow::removeObject()
@@ -138,7 +137,7 @@ void SolarSystemManagerWindow::removeObject()
 		QString ssoId = ui->listWidgetObjects->currentItem()->text();
 		//qDebug() << ssoId;
 		//TODO: Ask for confirmation first?
-		ssoManager->removeSsoWithId(ssoId);
+		ssoManager->removeSsoWithName(ssoId);
 	}
 }
 
