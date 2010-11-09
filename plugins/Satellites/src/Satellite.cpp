@@ -311,64 +311,50 @@ void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 		}
 		painter.drawSprite2dMode(xy[0], xy[1], 11);
 
-		if(orbitVisible) drawOrbit(core, prj, painter);
+		if(orbitVisible) drawOrbit(core, painter);
 	}
 }
 
-void Satellite::drawOrbit(const StelCore* core, StelProjectorP& prj, StelPainter& painter){
-	Vec3d XYZPos, xy1;
-	float a, azimth, elev;
-	QVarLengthArray<float, 1024> vertexArray;
 
+void Satellite::drawOrbit(const StelCore* core, StelPainter& painter){
+
+	Vec3d XYZPos, xy1;
+	Vec3d pos,posPrev;
+
+	float a, azimth, elev;
 
 	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_LINE_SMOOTH);
-	glEnable(GL_BLEND);
-	painter.enableClientStates(true, false, false);
 
 	QList<gVector>::iterator it= orbitPoints.begin();
 
-	for(int i=0; i<orbitPoints.size();i++)
+	//First point projection calculation
+	azimth = it->at( AZIMUTH);
+	elev   = it->at( ELEVATION);
+	a      = ( (azimth/KDEG2RAD)-90)*M_PI/180;
+	posPrev.set(sin(a),cos(a), tan( (elev/KDEG2RAD) * M_PI / 180.));
+
+	it++;
+
+	//Rest of points
+	for(int i=1; i<orbitPoints.size();i++)
 	{
 		azimth = it->at( AZIMUTH);
 		elev   = it->at( ELEVATION);
 		a      = ( (azimth/KDEG2RAD)-90)*M_PI/180;
-		Vec3d pos(sin(a),cos(a), tan( (elev/KDEG2RAD) * M_PI / 180.));
+		pos.set(sin(a),cos(a), tan( (elev/KDEG2RAD) * M_PI / 180.));
 		XYZPos = core->getNavigator()->j2000ToEquinoxEqu(core->getNavigator()->altAzToEquinoxEqu(pos));
-
-		if (prj->project(XYZPos,xy1))
-		{
-			vertexArray.append(xy1[0]);
-			vertexArray.append(xy1[1]);
-		}
 		it++;
 
-		// draw the end parts of the orbit only, since they have non-standard color
-		// We'll draw the middle segment (with all the same color) with a single
-		// call to drawFromArray after this loop closes.
-		if (i>0 && ((DRAWORBIT_SLOTS_NUMBER/2) - abs(i - (DRAWORBIT_SLOTS_NUMBER/2) % DRAWORBIT_SLOTS_NUMBER)) < DRAWORBIT_FADE_NUMBER)
-		{
-			painter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], hintBrightness * calculateOrbitSegmentIntensity(i));
-			painter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
-			painter.drawFromArray(StelPainter::LineStrip, 2, i-1, false);
-		}
+		painter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], hintBrightness * calculateOrbitSegmentIntensity(i));
+		painter.drawGreatCircleArc(posPrev,pos,NULL);
+
+		posPrev = pos;
 	}
 
-	// draw the middle segments of the orbit which are all the same color
-	if(!vertexArray.isEmpty())
-	{
-		if (vertexArray.count() > (2*DRAWORBIT_FADE_NUMBER))
-		{
-			painter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], hintBrightness);
-			painter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
-			painter.drawFromArray(StelPainter::LineStrip, DRAWORBIT_SLOTS_NUMBER + 1 - (2*DRAWORBIT_FADE_NUMBER), DRAWORBIT_FADE_NUMBER - 1, false);
-		}
-		vertexArray.clear();
-	}
-
-	painter.enableClientStates(false);
 	glEnable(GL_TEXTURE_2D);
 }
+
+
 
 float Satellite::calculateOrbitSegmentIntensity(int segNum)
 {
