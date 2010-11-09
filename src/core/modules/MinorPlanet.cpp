@@ -106,6 +106,12 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		htmlName = QString("(%1) ").arg(number);
 	}*/
 
+	//Try to detect a naming conflict
+	if (englishName.endsWith('*'))
+		properName = englishName.left(englishName.count() - 1);
+	else
+		properName = englishName;
+
 	//Try to detect provisional designation
 	nameIsProvisionalDesignation = false;
 	QString provisionalDesignation = renderProvisionalDesignationinHtml(englishName);
@@ -170,7 +176,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		if (nameIsProvisionalDesignation)
 			oss << provisionalDesignationHtml;
 		else
-			oss << q_(englishName);  // UI translation can differ from sky translation
+			oss << q_(properName);  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
 		if (sphereScale != 1.f)

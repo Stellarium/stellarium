@@ -31,11 +31,16 @@
 #include <QVariant>
 
 class SolarSystemManagerWindow;
+class SolarSystem;
 class QSettings;
 /*!
  \class CAImporter
  \brief Main class of the Comets and Asteroids Importer plug-in.
  \author Bogdan Marinov
+
+ Solar System bodies are identified by their names in Stellarium, but entries
+ in the configuration file are identified by their group (section) names.
+ This makes more difficult the detection of duplicates.
 */
 class CAImporter : public StelModule
 {
@@ -162,22 +167,22 @@ public:
 	//! \returns false if the operation has failed completely for some reason.
 	bool updateSolarSystemConfigurationFile(QList<SsoElements> objects, UpdateFlags flags);
 
-	//! Returns the IDs of the objects listed in the default ssystem.ini.
+	//! Returns the names of the objects listed in the default ssystem.ini.
 	//! The default solar system configuration file is assumed to be the one
 	//! in the installation directory.
-	QStringList getAllDefaultSsoIds() {return defaultSsoIds;}
+	QHash<QString,QString> getDefaultSsoIdentifiers() {return defaultSsoIdentifiers;}
 
-	//! Gets the IDs of the objects listed in the current user ssystem.ini.
+	//! Lists the objects listed in the current user ssystem.ini.
 	//! As the name suggests, the list is compiled when the function is run.
-	QStringList readAllCurrentSsoIds();
+	QHash<QString,QString> listAllLoadedSsoIdentifiers();
 
 	//! Removes an object from the user Solar System configuration file.
 	//! Reloads the Solar System on successfull removal.
-	//! \arg id object identifier (group name in the configuration file)
+	//! \arg name true name of the object ("name" parameter in the configuration file)
 	//! \returns true if the entry has been removed successfully or there is
 	//! no such entry
 	//! \returns false if there was an error
-	bool removeSsoWithId(QString id);
+	bool removeSsoWithName(QString name);
 
 	//!
 	bool copySolarSystemConfigurationFileTo(QString filePath);
@@ -203,19 +208,24 @@ private:
 	SolarSystemManagerWindow * mainWindow;
 
 	QSettings * solarSystemConfigurationFile;
+	SolarSystem * solarSystemManager;
 
 	QString customSolarSystemFilePath;
 	QString defaultSolarSystemFilePath;
 
-	//! List of the IDs of all Solar System objects in the default ssystem.ini.
-	//! Initialized in init().
-	QStringList defaultSsoIds;
+	//! A hash matching SSO names with the group names used to identify them
+	//! in the configuration file.
 
-	//! Gets the IDs of the objects listed in a ssystem.ini-formatted file.
-	//! Used internally in readAllCurrentSsoIds() and in init() to initialize
-	//! defaultSsoIds.
+	//! The names and group names of all objects in the default ssystem.ini.
+	//! The keys are the names, the values are the group names.
+	//! Initialized in init().
+	QHash<QString,QString> defaultSsoIdentifiers;
+
+	//! Gets the names of the objects listed in a ssystem.ini-formatted file.
+	//! Used internally in readAllCurrentSsoNames() and in init() to initialize
+	//! defaultSsoNames.
 	//! Does not check if the file exists.
-	QStringList readAllActiveSsoIdsInFile(QString filePath);
+	QHash<QString,QString> listAllLoadedObjectsInFile(QString filePath);
 
 	//! Creates a copy of the default ssystem.ini file in the user data directory.
 	//! \returns true if a file already exists or the copying has been successful
