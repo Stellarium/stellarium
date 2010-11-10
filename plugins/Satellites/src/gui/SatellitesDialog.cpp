@@ -61,18 +61,6 @@ void SatellitesDialog::languageChanged()
 		ui->retranslateUi(dialog);
 }
 
-void SatellitesDialog::updateStyle()
-{
-	if (dialog)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		Q_ASSERT(gui);
-		const StelStyle pluginStyle = GETSTELMODULE(Satellites)->getModuleStyleSheet(gui->getStelStyle());
-		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
-		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
-	}
-}
-
 // Initialize the dialog widgets and connect the signals/slots
 void SatellitesDialog::createDialogContent()
 {
@@ -121,8 +109,6 @@ void SatellitesDialog::createDialogContent()
 
 	updateGuiFromSettings();
 
-	//Initialize the style
-	updateStyle();
 }
 
 void SatellitesDialog::groupFilterChanged(int index)
@@ -251,12 +237,12 @@ void SatellitesDialog::updateCompleteReceiver(int numUpdated)
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 }
 
-void SatellitesDialog::close(void)
-{
-	qDebug() << "Closing Satellites Configure Dialog";
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	gui->getGuiActions("actionShow_Satellite_ConfigDialog")->setChecked(false);
-}
+//void SatellitesDialog::close(void)
+//{
+//	qDebug() << "Closing Satellites Configure Dialog";
+//	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+//	gui->getGuiActions("actionShow_Satellite_ConfigDialog")->setChecked(false);
+//}
 
 void SatellitesDialog::sourceEditingDone(void)
 {

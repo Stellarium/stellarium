@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>defineTimeZoneForm</class>
+ <widget class="QWidget" name="defineTimeZoneForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>450</width>
+    <height>474</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="BarFrame" name="TitleBar">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <layout class="QHBoxLayout">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>4</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <spacer name="leftSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="stelWindowTitle">
+        <property name="text">
+         <string>Define a time zone</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="rightSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="closeStelWindow">
+        <property name="minimumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBoxTimeZone">
+     <property name="title">
+      <string>Time zone</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayoutTimeZone">
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayoutName">
+        <item>
+         <widget class="QLabel" name="labelName">
+          <property name="text">
+           <string>Timezone name:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacerName">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEditName"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayoutOffset">
+        <item>
+         <widget class="QLabel" name="labelOffset">
+          <property name="text">
+           <string>Offset from UTC:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="doubleSpinBoxOffset">
+          <property name="wrapping">
+           <bool>true</bool>
+          </property>
+          <property name="suffix">
+           <string> hours</string>
+          </property>
+          <property name="minimum">
+           <double>-24.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>24.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.250000000000000</double>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkBoxDst">
+        <property name="text">
+         <string>Daylight saving time (summer time)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="frameDst">
+        <layout class="QVBoxLayout" name="verticalLayoutDst">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QFrame" name="frame">
+           <layout class="QVBoxLayout" name="verticalLayoutDstMain">
+            <property name="margin">
+             <number>0</number>
+            </property>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayoutNameDst">
+              <item>
+               <widget class="QLabel" name="labelNameDst">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>DST timezone name:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacerNameDst">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEditNameDst"/>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayoutOffsetDst">
+              <item>
+               <widget class="QCheckBox" name="checkBoxOffsetDst">
+                <property name="text">
+                 <string>DST offset from UTC:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacerOffsetDst">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QDoubleSpinBox" name="doubleSpinBoxOffsetDst">
+                <property name="wrapping">
+                 <bool>true</bool>
+                </property>
+                <property name="suffix">
+                 <string> hours</string>
+                </property>
+                <property name="minimum">
+                 <double>-24.000000000000000</double>
+                </property>
+                <property name="maximum">
+                 <double>24.000000000000000</double>
+                </property>
+                <property name="singleStep">
+                 <double>0.250000000000000</double>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBoxDstStart">
+           <property name="title">
+            <string>Daylight saving time start</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+           <layout class="QGridLayout" name="gridLayoutDstStart">
+            <property name="margin">
+             <number>0</number>
+            </property>
+            <item row="1" column="0" colspan="2">
+             <widget class="QRadioButton" name="radioButtonDstStartDay">
+              <property name="text">
+               <string>Day:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QComboBox" name="comboBoxDstStartWeek"/>
+            </item>
+            <item row="1" column="3">
+             <widget class="QComboBox" name="comboBoxDstStartDay"/>
+            </item>
+            <item row="1" column="4">
+             <widget class="QComboBox" name="comboBoxDstStartMonth"/>
+            </item>
+            <item row="4" column="0" colspan="2">
+             <widget class="QCheckBox" name="checkBoxDstStartTime">
+              <property name="text">
+               <string>Time of change:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2" colspan="3">
+             <widget class="QTimeEdit" name="timeEditDstStart">
+              <property name="wrapping">
+               <bool>true</bool>
+              </property>
+              <property name="displayFormat">
+               <string notr="true">HH:mm:ss</string>
+              </property>
+              <property name="time">
+               <time>
+                <hour>2</hour>
+                <minute>0</minute>
+                <second>0</second>
+               </time>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0" colspan="2">
+             <widget class="QRadioButton" name="radioButtonDstStartDate">
+              <property name="text">
+               <string>Date:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2" colspan="3">
+             <widget class="QFrame" name="frameDstStartDate">
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <property name="margin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QSpinBox" name="spinBoxDstStartDateDay"/>
+               </item>
+               <item>
+                <widget class="QComboBox" name="comboBoxDstStartDateMonth"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBoxDstEnd">
+           <property name="title">
+            <string>Daylight saving time end</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_4">
+            <property name="margin">
+             <number>0</number>
+            </property>
+            <item row="1" column="0" colspan="2">
+             <widget class="QRadioButton" name="radioButtonDstEndDay">
+              <property name="text">
+               <string>Day:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QComboBox" name="comboBoxDstEndWeek"/>
+            </item>
+            <item row="1" column="3">
+             <widget class="QComboBox" name="comboBoxDstEndDay"/>
+            </item>
+            <item row="1" column="4">
+             <widget class="QComboBox" name="comboBoxDstEndMonth"/>
+            </item>
+            <item row="4" column="0" colspan="2">
+             <widget class="QCheckBox" name="checkBoxDstEndTime">
+              <property name="text">
+               <string>Time of change:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2" colspan="3">
+             <widget class="QTimeEdit" name="timeEditDstEnd">
+              <property name="wrapping">
+               <bool>true</bool>
+              </property>
+              <property name="displayFormat">
+               <string notr="true">HH:mm:ss</string>
+              </property>
+              <property name="time">
+               <time>
+                <hour>2</hour>
+                <minute>0</minute>
+                <second>0</second>
+               </time>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0" colspan="2">
+             <widget class="QRadioButton" name="radioButtonDstEndDate">
+              <property name="text">
+               <string>Date:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2" colspan="3">
+             <widget class="QFrame" name="frameDstEndDate">
+              <layout class="QHBoxLayout" name="horizontalLayoutDstEndDate">
+               <property name="margin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QSpinBox" name="spinBoxDstEndDateDay"/>
+               </item>
+               <item>
+                <widget class="QComboBox" name="comboBoxDstEndDateMonth"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButtonUseDefinition">
+        <property name="text">
+         <string>Use this definition</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>BarFrame</class>
+   <extends>QFrame</extends>
+   <header>Dialog.hpp</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>lineEditName</tabstop>
+  <tabstop>doubleSpinBoxOffset</tabstop>
+  <tabstop>checkBoxDst</tabstop>
+  <tabstop>lineEditNameDst</tabstop>
+  <tabstop>checkBoxOffsetDst</tabstop>
+  <tabstop>doubleSpinBoxOffsetDst</tabstop>
+  <tabstop>groupBoxDstStart</tabstop>
+  <tabstop>radioButtonDstStartDay</tabstop>
+  <tabstop>comboBoxDstStartWeek</tabstop>
+  <tabstop>comboBoxDstStartDay</tabstop>
+  <tabstop>comboBoxDstStartMonth</tabstop>
+  <tabstop>radioButtonDstStartDate</tabstop>
+  <tabstop>spinBoxDstStartDateDay</tabstop>
+  <tabstop>comboBoxDstStartDateMonth</tabstop>
+  <tabstop>checkBoxDstStartTime</tabstop>
+  <tabstop>timeEditDstStart</tabstop>
+  <tabstop>groupBoxDstEnd</tabstop>
+  <tabstop>radioButtonDstEndDay</tabstop>
+  <tabstop>comboBoxDstEndWeek</tabstop>
+  <tabstop>comboBoxDstEndDay</tabstop>
+  <tabstop>comboBoxDstEndMonth</tabstop>
+  <tabstop>radioButtonDstEndDate</tabstop>
+  <tabstop>spinBoxDstEndDateDay</tabstop>
+  <tabstop>comboBoxDstEndDateMonth</tabstop>
+  <tabstop>checkBoxDstEndTime</tabstop>
+  <tabstop>timeEditDstEnd</tabstop>
+  <tabstop>pushButtonUseDefinition</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>checkBoxDst</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>frameDst</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>230</x>
+     <y>125</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>228</x>
+     <y>316</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxOffsetDst</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>doubleSpinBoxOffsetDst</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>172</x>
+     <y>186</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>348</x>
+     <y>188</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxDstEndTime</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>timeEditDstEnd</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>95</x>
+     <y>427</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>362</x>
+     <y>430</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxDstStartTime</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>timeEditDstStart</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>115</x>
+     <y>298</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>187</x>
+     <y>294</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>groupBoxDstStart</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>groupBoxDstEnd</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>117</x>
+     <y>243</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>123</x>
+     <y>362</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>groupBoxDstEnd</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>groupBoxDstStart</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>301</x>
+     <y>354</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>295</x>
+     <y>286</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
