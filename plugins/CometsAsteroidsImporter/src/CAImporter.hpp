@@ -67,6 +67,7 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	//! called when the "configure" button in the "Plugins" tab is pressed
 	virtual bool configureGui(bool show);
+	virtual void updateI18n();
 
 	//! Convenience type for storage of SSO properties in ssystem.ini format.
 	//! This is an easy way of storing data in the format used in Stellarium's

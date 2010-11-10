@@ -102,6 +102,7 @@ private:
 	QList<CAImporter::SsoElements> readElementsFromFile(ImportType type, QString filePath);
 
 	void populateBookmarksList();
+	//void populateCandidateObjects();
 	void populateCandidateObjects(QList<CAImporter::SsoElements>);
 	void enableInterface(bool enable);
 

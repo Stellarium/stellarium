@@ -1265,4 +1265,7 @@ void SolarSystem::reloadPlanets()
 	setFlagHints(flagHints);
 	setFlagLabels(flagLabels);
 	setFlagOrbits(flagOrbits);
+
+	//Restore translations
+	updateI18n();
 }
