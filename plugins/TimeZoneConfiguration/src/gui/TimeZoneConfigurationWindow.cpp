@@ -66,7 +66,7 @@ void TimeZoneConfigurationWindow::createDialogContent()
 	updateDisplayFormatSwitches();
 
 	QString currentTimeZoneString = timeZoneConfiguration->readTimeZone();
-	ui->lineEditCurrent->setText(currentTimeZoneString);
+	//ui->lineEditCurrent->setText(currentTimeZoneString);
 	ui->lineEditUserDefined->setText(currentTimeZoneString);
 	ui->frameUserDefined->setEnabled(false);
 
