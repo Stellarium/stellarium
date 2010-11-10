@@ -105,6 +105,7 @@ private:
 	//! returns 0 - 1.0 for the DRAWORBIT_FADE_NUMBER segments at
 	//! each end of an orbit, with 1 in the middle.
 	float calculateOrbitSegmentIntensity(int segNum);
+	void setNightColors(bool night);
 
 private:
 	bool initialized;
@@ -138,7 +139,9 @@ private:
 
 	//Satellite Orbit Draw
 	QFont     font;
-	Vec3f     orbitColor;
+	Vec3f     orbitColorNormal;
+	Vec3f     orbitColorNight;
+	Vec3f*    orbitColor;
 	gTime     lastEpochCompForOrbit;
 	QList<gVector> orbitPoints; //orbit points represented by azElPos vectors
 
