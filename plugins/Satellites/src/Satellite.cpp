@@ -347,6 +347,8 @@ void Satellite::drawOrbit(const StelCore* core, StelPainter& painter){
 	posPrev.set(sin(a),cos(a), tan( (elev/KDEG2RAD) * M_PI / 180.));
 
 	it++;
+	StelVertexArray vertexArray;
+	vertexArray.primitiveType=StelVertexArray::Lines;
 
 	//Rest of points
 	for(int i=1; i<orbitPoints.size();i++)
@@ -358,11 +360,22 @@ void Satellite::drawOrbit(const StelCore* core, StelPainter& painter){
 		XYZPos = core->getNavigator()->j2000ToEquinoxEqu(core->getNavigator()->altAzToEquinoxEqu(pos));
 		it++;
 
-		painter.setColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2], hintBrightness * calculateOrbitSegmentIntensity(i));
-		painter.drawGreatCircleArc(posPrev,pos,NULL);
+		// Draw end (fading) parts of orbit lines one segment at a time.
+		if (((DRAWORBIT_SLOTS_NUMBER/2) - abs(i - (DRAWORBIT_SLOTS_NUMBER/2) % DRAWORBIT_SLOTS_NUMBER)) < DRAWORBIT_FADE_NUMBER)
+		{
+			painter.setColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2], hintBrightness * calculateOrbitSegmentIntensity(i));
+			painter.drawGreatCircleArc(posPrev,pos,NULL);
+		}
+		else {
+			vertexArray.vertex << posPrev << pos;
+		}
 
 		posPrev = pos;
 	}
+
+	// Draw center section of orbit in one go
+	painter.setColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2], hintBrightness);
+	painter.drawGreatCircleArcs(vertexArray, NULL);
 
 	glEnable(GL_TEXTURE_2D);
 }
