@@ -24,6 +24,9 @@
 #include <QObject>
 #include "StelDialog.hpp"
 
+#include <QHash>
+#include <QString>
+
 class CAImporter;
 
 class Ui_solarSystemManagerWindow;
@@ -63,6 +66,8 @@ private:
 	ManualImportWindow * manualImportWindow;
 
 	CAImporter * ssoManager;
+
+	QHash<QString,QString> unlocalizedNames;
 };
 
 #endif //_SOLAR_SYSTEM_MANAGER_WINDOW_
