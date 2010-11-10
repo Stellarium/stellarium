@@ -382,12 +382,18 @@ QGroupBox::title {
 
 /********************************************TabWidget*****************************************************/
 
+QTabWidget::pane {
+	border: none;
+}
+
 QTabWidget::tab-bar {
-	/*width: 1000px;*/
+	width: 1000px;
 	/* Used as a workaround to set the background of
 	 the space between the last tab (normally the rightmost one
 	 and the end of the window. Not necessary if
-	 QTabWidget::documentMode is set to 'true'.*/
+	 QTabWidget::documentMode is set to 'true',
+	 but that solution leads to a hard-coded line
+	 below the tab bar.*/
 }
 
 QTabBar {

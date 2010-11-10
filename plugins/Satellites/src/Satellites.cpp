@@ -184,9 +184,16 @@ void Satellites::init()
 	styleSheetFile.close();
 }
 
-void Satellites::setStelStyle(const QString&)
+void Satellites::setStelStyle(const QString& mode)
 {
 	configDialog->updateStyle();
+	foreach(const SatelliteP& sat, satellites)
+	{
+		if (sat->initialized)
+		{
+			sat->setNightColors(mode=="night_color");
+		}
+	}
 }
 
 const StelStyle Satellites::getModuleStyleSheet(const StelStyle& style)
