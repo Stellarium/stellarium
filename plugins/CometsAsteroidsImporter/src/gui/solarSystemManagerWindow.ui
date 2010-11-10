@@ -229,7 +229,11 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QListWidget" name="listWidgetObjects"/>
+           <widget class="QListWidget" name="listWidgetObjects">
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButtonRemove">

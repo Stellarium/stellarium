@@ -183,6 +183,18 @@ bool CAImporter::configureGui(bool show)
 	return true;
 }
 
+void CAImporter::updateI18n()
+{
+	//The Solar System MUST be translated before updating the window
+	//TODO: Remove this if/when you merge this module in the Solar System module
+	solarSystemManager->updateI18n();
+
+	if (mainWindow)
+	{
+		mainWindow->languageChanged();
+	}
+}
+
 bool CAImporter::cloneSolarSystemConfigurationFile()
 {
 	QDir userDataDirectory(StelFileMgr::getUserDir());

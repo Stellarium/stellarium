@@ -29,6 +29,8 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "Planet.hpp"
+#include "SolarSystem.hpp"
 
 #include <QFileDialog>
 
@@ -79,7 +81,10 @@ void SolarSystemManagerWindow::createDialogContent()
 void SolarSystemManagerWindow::languageChanged()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+		populateSolarSystemList();
+	}
 
 	if (importWindow)
 		importWindow->languageChanged();
@@ -125,19 +130,26 @@ void SolarSystemManagerWindow::resetImportManual(bool show)
 
 void SolarSystemManagerWindow::populateSolarSystemList()
 {
-	QStringList objectNames = ssoManager->listAllLoadedSsoIdentifiers().keys();
+	unlocalizedNames.clear();
+	foreach (const PlanetP & object, GETSTELMODULE(SolarSystem)->getAllPlanets())
+	{
+		unlocalizedNames.insert(object->getNameI18n(), object->getEnglishName());
+	}
+
 	ui->listWidgetObjects->clear();
-	ui->listWidgetObjects->addItems(objectNames);
+	ui->listWidgetObjects->addItems(unlocalizedNames.keys());
+	//No explicit sorting is necessary: sortingEnabled is set in the .ui
 }
 
 void SolarSystemManagerWindow::removeObject()
 {
 	if(ui->listWidgetObjects->currentItem())
 	{
-		QString ssoId = ui->listWidgetObjects->currentItem()->text();
+		QString ssoI18nName = ui->listWidgetObjects->currentItem()->text();
+		QString ssoEnglishName = unlocalizedNames.value(ssoI18nName);
 		//qDebug() << ssoId;
 		//TODO: Ask for confirmation first?
-		ssoManager->removeSsoWithName(ssoId);
+		ssoManager->removeSsoWithName(ssoEnglishName);
 	}
 }
 
