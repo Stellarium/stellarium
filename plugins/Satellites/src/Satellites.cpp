@@ -61,7 +61,7 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 		StelPluginInfo info;
 		info.id = "Satellites";
 		info.displayedName = "Satellites";
-		info.authors = "Matthew Gates";
+		info.authors = "Matthew Gates, Jose Luis Canales";
 		info.contact = "http://stellarium.org/";
 		info.description = "Prediction of artificial satellite positions in Earth orbit based on NORAD TLE data";
 		return info;
@@ -206,7 +206,7 @@ const StelStyle Satellites::getModuleStyleSheet(const StelStyle& style)
 double Satellites::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("StarMgr")->getCallOrder(actionName)+1.;
+		return StelApp::getInstance().getModuleMgr().getModule("SolarSystem")->getCallOrder(actionName)+1.;
 	return 0;
 }
 
