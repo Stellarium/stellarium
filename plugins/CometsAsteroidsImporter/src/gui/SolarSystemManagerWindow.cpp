@@ -23,7 +23,7 @@
 #include "SolarSystemManagerWindow.hpp"
 #include "ui_solarSystemManagerWindow.h"
 
-#include "ImportWindow.hpp"
+#include "MpcImportWindow.hpp"
 #include "ManualImportWindow.hpp"
 
 #include "StelApp.hpp"
@@ -37,7 +37,7 @@
 SolarSystemManagerWindow::SolarSystemManagerWindow()
 {
 	ui = new Ui_solarSystemManagerWindow();
-	importWindow = new ImportWindow();
+	mpcImportWindow = new MpcImportWindow();
 	manualImportWindow = NULL;
 
 	ssoManager = GETSTELMODULE(CAImporter);
@@ -47,8 +47,8 @@ SolarSystemManagerWindow::~SolarSystemManagerWindow()
 {
 	delete ui;
 
-	if (importWindow)
-		delete importWindow;
+	if (mpcImportWindow)
+		delete mpcImportWindow;
 	if (manualImportWindow)
 		delete manualImportWindow;
 }
@@ -70,9 +70,9 @@ void SolarSystemManagerWindow::createDialogContent()
 
 	ui->labelVersion->setText(QString("Version %1").arg(PLUGIN_VERSION));
 
-	Q_ASSERT(importWindow);
+	Q_ASSERT(mpcImportWindow);
 	//Rebuild the list if any planets have been imported
-	connect(importWindow, SIGNAL(objectsImported()), this, SLOT(populateSolarSystemList()));
+	connect(mpcImportWindow, SIGNAL(objectsImported()), this, SLOT(populateSolarSystemList()));
 
 	ui->lineEditUserFilePath->setText(ssoManager->getCustomSolarSystemFilePath());
 	populateSolarSystemList();
@@ -86,15 +86,15 @@ void SolarSystemManagerWindow::languageChanged()
 		populateSolarSystemList();
 	}
 
-	if (importWindow)
-		importWindow->languageChanged();
+	if (mpcImportWindow)
+		mpcImportWindow->languageChanged();
 }
 
 void SolarSystemManagerWindow::newImportMPC()
 {
-	Q_ASSERT(importWindow);
+	Q_ASSERT(mpcImportWindow);
 
-	importWindow->setVisible(true);
+	mpcImportWindow->setVisible(true);
 }
 
 void SolarSystemManagerWindow::newImportManual()

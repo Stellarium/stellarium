@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <author>Bogdan Marinov</author>
- <class>importWindow</class>
- <widget class="QWidget" name="importWindow">
+ <class>mpcImportWindow</class>
+ <widget class="QWidget" name="mpcImportWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -10,40 +10,6 @@
     <width>480</width>
     <height>450</height>
    </rect>
-  </property>
-  <property name="styleSheet">
-   <string notr="true">QTabBar {
-	border: none;
-	margin: 0px;
-	padding: 0px;
-	font-weight: bold;
-	color: rgb(170, 173, 164);
-	background-color: rgb(31, 31, 31);
-	font-size: 14px;
-}
-
-QTabBar::tab {
-	border: 0px;
-	margin: 0px;
-	padding: 4px  1ex;
-	min-height: 28px;
-	/*min-width: 0px;*/
-	/*font-size: 14px; &lt;-- Causes text being cut by the frame*/
-}
-
-QTabBar::tab:selected {
-	border: none;
-	margin: 0px;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	color: rgb(220, 223, 214);
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 69, 72), stop: 1 rgb(86, 87, 90));
-}
-
-QTabWidget::pane {
-	margin-top: 0px;
-	border-top: none;
-}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="spacing">
@@ -53,7 +19,7 @@ QTabWidget::pane {
     <number>0</number>
    </property>
    <item>
-    <widget class="BarFrame" name="LocationBar">
+    <widget class="BarFrame" name="TitleBar">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
        <horstretch>0</horstretch>

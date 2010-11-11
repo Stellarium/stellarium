@@ -20,8 +20,8 @@
 
 #include "CAImporter.hpp"
 
-#include "ImportWindow.hpp"
-#include "ui_importWindow.h"
+#include "MpcImportWindow.hpp"
+#include "ui_mpcImportWindow.h"
 
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
@@ -42,9 +42,9 @@
 #include <QTimer>
 #include <QUrl>
 
-ImportWindow::ImportWindow()
+MpcImportWindow::MpcImportWindow()
 {
-	ui = new Ui_importWindow();
+	ui = new Ui_mpcImportWindow();
 	ssoManager = GETSTELMODULE(CAImporter);
 
 	networkManager = StelApp::getInstance().getNetworkAccessManager();
@@ -62,7 +62,7 @@ ImportWindow::ImportWindow()
 	bookmarks.insert(MpcMinorPlanets, asteroidBookmarks);
 }
 
-ImportWindow::~ImportWindow()
+MpcImportWindow::~MpcImportWindow()
 {
 	delete ui;
 	delete countdownTimer;
@@ -76,7 +76,7 @@ ImportWindow::~ImportWindow()
 		queryProgressBar->deleteLater();
 }
 
-void ImportWindow::createDialogContent()
+void MpcImportWindow::createDialogContent()
 {
 	ui->setupUi(dialog);
 
@@ -113,7 +113,7 @@ void ImportWindow::createDialogContent()
 	resetDialog();
 }
 
-void ImportWindow::resetDialog()
+void MpcImportWindow::resetDialog()
 {
 	ui->stackedWidget->setCurrentIndex(0);
 
@@ -142,7 +142,7 @@ void ImportWindow::resetDialog()
 	enableInterface(true);
 }
 
-void ImportWindow::populateBookmarksList()
+void MpcImportWindow::populateBookmarksList()
 {
 	ui->comboBoxBookmarks->clear();
 	ui->comboBoxBookmarks->addItem("Select bookmark...");
@@ -151,13 +151,13 @@ void ImportWindow::populateBookmarksList()
 	ui->comboBoxBookmarks->addItems(bookmarkTitles);
 }
 
-void ImportWindow::languageChanged()
+void MpcImportWindow::languageChanged()
 {
 	if (dialog)
 		ui->retranslateUi(dialog);
 }
 
-void ImportWindow::acquireObjectData()
+void MpcImportWindow::acquireObjectData()
 {
 	if (ui->radioButtonFile->isChecked())
 	{
@@ -183,7 +183,7 @@ void ImportWindow::acquireObjectData()
 	//close();
 }
 
-void ImportWindow::addObjects()
+void MpcImportWindow::addObjects()
 {
 	disconnect(ssoManager, SIGNAL(solarSystemChanged()), this, SLOT(resetDialog()));
 
@@ -250,24 +250,24 @@ void ImportWindow::addObjects()
 	close();
 }
 
-void ImportWindow::discardObjects()
+void MpcImportWindow::discardObjects()
 {
 	resetDialog();
 	close();
 }
 
-void ImportWindow::pasteClipboard()
+void MpcImportWindow::pasteClipboard()
 {
 	//ui->lineEditSingle->setText(QApplication::clipboard()->text());
 }
 
-void ImportWindow::selectFile()
+void MpcImportWindow::selectFile()
 {
 	QString filePath = QFileDialog::getOpenFileName(NULL, "Select a text file", StelFileMgr::getDesktopDir());
 	ui->lineEditFilePath->setText(filePath);
 }
 
-void ImportWindow::bookmarkSelected(QString bookmarkTitle)
+void MpcImportWindow::bookmarkSelected(QString bookmarkTitle)
 {
 	if (bookmarkTitle.isEmpty() || bookmarkTitle == "Select bookmark...")
 	{
@@ -278,7 +278,7 @@ void ImportWindow::bookmarkSelected(QString bookmarkTitle)
 	ui->lineEditURL->setText(bookmarkUrl);
 }
 
-void ImportWindow::populateCandidateObjects(QList<CAImporter::SsoElements> objects)
+void MpcImportWindow::populateCandidateObjects(QList<CAImporter::SsoElements> objects)
 {
 	candidatesForAddition.clear();
 
@@ -362,7 +362,7 @@ void ImportWindow::populateCandidateObjects(QList<CAImporter::SsoElements> objec
 		list->setCurrentRow(0);
 }
 
-void ImportWindow::enableInterface(bool enable)
+void MpcImportWindow::enableInterface(bool enable)
 {
 	ui->groupBoxType->setVisible(enable);
 
@@ -375,7 +375,7 @@ void ImportWindow::enableInterface(bool enable)
 	ui->pushButtonAcquire->setEnabled(enable);
 }
 
-CAImporter::SsoElements ImportWindow::readElementsFromString (QString elements)
+CAImporter::SsoElements MpcImportWindow::readElementsFromString (QString elements)
 {
 	Q_ASSERT(ssoManager);
 
@@ -389,7 +389,7 @@ CAImporter::SsoElements ImportWindow::readElementsFromString (QString elements)
 	}
 }
 
-QList<CAImporter::SsoElements> ImportWindow::readElementsFromFile(ImportType type, QString filePath)
+QList<CAImporter::SsoElements> MpcImportWindow::readElementsFromFile(ImportType type, QString filePath)
 {
 	Q_ASSERT(ssoManager);
 
@@ -403,7 +403,7 @@ QList<CAImporter::SsoElements> ImportWindow::readElementsFromFile(ImportType typ
 	}
 }
 
-void ImportWindow::switchImportType(bool)
+void MpcImportWindow::switchImportType(bool)
 {
 	if (ui->radioButtonAsteroids->isChecked())
 	{
@@ -425,7 +425,7 @@ void ImportWindow::switchImportType(bool)
 	ui->groupBoxSource->setVisible(true);
 }
 
-void ImportWindow::markAll()
+void MpcImportWindow::markAll()
 {
 	QListWidget * const list = ui->listWidgetObjects;
 	int rowCount = list->count();
@@ -442,7 +442,7 @@ void ImportWindow::markAll()
 	}
 }
 
-void ImportWindow::unmarkAll()
+void MpcImportWindow::unmarkAll()
 {
 	QListWidget * const list = ui->listWidgetObjects;
 	int rowCount = list->count();
@@ -459,7 +459,7 @@ void ImportWindow::unmarkAll()
 	}
 }
 
-void ImportWindow::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
+void MpcImportWindow::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 {
 	if (downloadProgressBar == NULL)
 		return;
@@ -483,7 +483,7 @@ void ImportWindow::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTota
 	downloadProgressBar->setMaximum(endValue);
 }
 
-void ImportWindow::updateQueryProgress(qint64, qint64)
+void MpcImportWindow::updateQueryProgress(qint64, qint64)
 {
 	if (queryProgressBar == NULL)
 		return;
@@ -493,7 +493,7 @@ void ImportWindow::updateQueryProgress(qint64, qint64)
 	queryProgressBar->setMaximum(0);
 }
 
-void ImportWindow::startDownload(QString urlString)
+void MpcImportWindow::startDownload(QString urlString)
 {
 	if (downloadReply)
 	{
@@ -528,7 +528,7 @@ void ImportWindow::startDownload(QString urlString)
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 }
 
-void ImportWindow::abortDownload()
+void MpcImportWindow::abortDownload()
 {
 	if (downloadReply == NULL || downloadReply->isFinished())
 		return;
@@ -546,7 +546,7 @@ void ImportWindow::abortDownload()
 	ui->pushButtonAbortDownload->setVisible(false);
 }
 
-void ImportWindow::downloadComplete(QNetworkReply *reply)
+void MpcImportWindow::downloadComplete(QNetworkReply *reply)
 {
 	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
 	deleteDownloadProgressBar();
@@ -615,7 +615,7 @@ void ImportWindow::downloadComplete(QNetworkReply *reply)
 	connect(ssoManager, SIGNAL(solarSystemChanged()), this, SLOT(resetDialog()));
 }
 
-void ImportWindow::deleteDownloadProgressBar()
+void MpcImportWindow::deleteDownloadProgressBar()
 {
 	disconnect(this, SLOT(updateDownloadProgress(qint64,qint64)));
 
@@ -627,7 +627,7 @@ void ImportWindow::deleteDownloadProgressBar()
 	}
 }
 
-void ImportWindow::sendQuery()
+void MpcImportWindow::sendQuery()
 {
 	if (queryReply)
 		return;
@@ -683,7 +683,7 @@ void ImportWindow::sendQuery()
 	connect(queryReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateQueryProgress(qint64,qint64)));
 }
 
-void ImportWindow::abortQuery()
+void MpcImportWindow::abortQuery()
 {
 	if (queryReply == NULL)
 		return;
@@ -700,7 +700,7 @@ void ImportWindow::abortQuery()
 	ui->pushButtonAbortQuery->setVisible(false);
 }
 
-void ImportWindow::queryComplete(QNetworkReply *reply)
+void MpcImportWindow::queryComplete(QNetworkReply *reply)
 {
 	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(queryComplete(QNetworkReply*)));
 	deleteQueryProgressBar();
@@ -778,7 +778,7 @@ void ImportWindow::queryComplete(QNetworkReply *reply)
 	queryReply = NULL;
 }
 
-void ImportWindow::deleteQueryProgressBar()
+void MpcImportWindow::deleteQueryProgressBar()
 {
 	disconnect(this, SLOT(updateQueryProgress(qint64,qint64)));
 	if (queryProgressBar)
@@ -789,7 +789,7 @@ void ImportWindow::deleteQueryProgressBar()
 	}
 }
 
-void ImportWindow::startCountdown()
+void MpcImportWindow::startCountdown()
 {
 	if (!countdownTimer->isActive())
 		countdownTimer->start(1000);//1 second
@@ -800,7 +800,7 @@ void ImportWindow::startCountdown()
 	ui->labelQueryCountdown->setVisible(true);
 }
 
-void ImportWindow::resetCountdown()
+void MpcImportWindow::resetCountdown()
 {
 	//Stop the timer
 	if (countdownTimer->isActive())
@@ -826,7 +826,7 @@ void ImportWindow::resetCountdown()
 	ui->pushButtonSendQuery->setEnabled(true);
 }
 
-void ImportWindow::updateCountdown()
+void MpcImportWindow::updateCountdown()
 {
 	--countdown;
 	if (countdown < 0)
@@ -839,18 +839,18 @@ void ImportWindow::updateCountdown()
 	}
 }
 
-void ImportWindow::updateCountdownLabels(int countdownValue)
+void MpcImportWindow::updateCountdownLabels(int countdownValue)
 {
 	QString countdownText("You can use the MPC website again in %1 seconds.");
 	ui->labelQueryCountdown->setText(countdownText.arg(countdownValue));
 }
 
-void ImportWindow::resetNotFound()
+void MpcImportWindow::resetNotFound()
 {
 	ui->labelNotFound->setVisible(false);
 }
 
-void ImportWindow::loadBookmarks()
+void MpcImportWindow::loadBookmarks()
 {
 	bookmarks[MpcComets].clear();
 	bookmarks[MpcMinorPlanets].clear();
@@ -886,7 +886,7 @@ void ImportWindow::loadBookmarks()
 	saveBookmarks();
 }
 
-void ImportWindow::loadBookmarksGroup(QVariantMap source, Bookmarks & bookmarkGroup)
+void MpcImportWindow::loadBookmarksGroup(QVariantMap source, Bookmarks & bookmarkGroup)
 {
 	if (source.isEmpty())
 		return;
@@ -899,7 +899,7 @@ void ImportWindow::loadBookmarksGroup(QVariantMap source, Bookmarks & bookmarkGr
 	}
 }
 
-void ImportWindow::saveBookmarks()
+void MpcImportWindow::saveBookmarks()
 {
 	try
 	{
@@ -949,7 +949,7 @@ void ImportWindow::saveBookmarks()
 	}
 }
 
-void ImportWindow::saveBookmarksGroup(Bookmarks & bookmarkGroup, QVariantMap & output)
+void MpcImportWindow::saveBookmarksGroup(Bookmarks & bookmarkGroup, QVariantMap & output)
 {
 	foreach (QString title, bookmarkGroup.keys())
 	{
