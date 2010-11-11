@@ -645,7 +645,7 @@ void MpcImportWindow::sendQuery()
 
 	//TODO: Better handling of the interface
 	enableInterface(false);
-	ui->labelNotFound->setVisible(false);
+	ui->labelQueryMessage->setVisible(false);
 
 	QUrl url;
 	url.addQueryItem("ty","e");//Type: ephemerides
@@ -715,8 +715,8 @@ void MpcImportWindow::queryComplete(QNetworkReply *reply)
 		           << reply->url().toString()
 		           << "the following error occured:"
 		           << reply->errorString();
-		ui->labelNotFound->setText(reply->errorString());//TODO: Decide if this is a good idea
-		ui->labelNotFound->setVisible(true);
+		ui->labelQueryMessage->setText(reply->errorString());//TODO: Decide if this is a good idea
+		ui->labelQueryMessage->setVisible(true);
 		enableInterface(true);
 
 		reply->deleteLater();
@@ -727,8 +727,8 @@ void MpcImportWindow::queryComplete(QNetworkReply *reply)
 	if (reply->header(QNetworkRequest::ContentTypeHeader) != "text/ascii" ||
 	    reply->rawHeader(QByteArray("Content-disposition")) != "attachment; filename=elements.txt")
 	{
-		ui->labelNotFound->setText("Object not found.");
-		ui->labelNotFound->setVisible(true);
+		ui->labelQueryMessage->setText("Object not found.");
+		ui->labelQueryMessage->setVisible(true);
 		enableInterface(true);
 	}
 	else
@@ -811,8 +811,8 @@ void MpcImportWindow::resetCountdown()
 		if (queryReply != NULL && queryReply->isRunning())
 		{
 			abortQuery();
-			ui->labelNotFound->setText("The query timed out. You can try again, now or later.");
-			ui->labelNotFound->setVisible(true);
+			ui->labelQueryMessage->setText("The query timed out. You can try again, now or later.");
+			ui->labelQueryMessage->setVisible(true);
 		}
 	}
 
@@ -847,7 +847,7 @@ void MpcImportWindow::updateCountdownLabels(int countdownValue)
 
 void MpcImportWindow::resetNotFound()
 {
-	ui->labelNotFound->setVisible(false);
+	ui->labelQueryMessage->setVisible(false);
 }
 
 void MpcImportWindow::loadBookmarks()

@@ -331,7 +331,7 @@
                <number>0</number>
               </property>
               <item>
-               <widget class="QLabel" name="labelSearch">
+               <widget class="QLabel" name="labelQueryLink">
                 <property name="text">
                  <string>Query the MPC's &lt;a href=&quot;http://www.minorplanetcenter.org/iau/MPEph/MPEph.html&quot;&gt;Minor Planet &amp;amp; Comet Ephemeris Service&lt;/a&gt;:</string>
                 </property>
@@ -378,7 +378,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="labelNotFound">
+               <widget class="QLabel" name="labelQueryMessage">
                 <property name="text">
                  <string>Object not found.</string>
                 </property>
