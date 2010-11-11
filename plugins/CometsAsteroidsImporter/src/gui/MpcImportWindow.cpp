@@ -105,7 +105,7 @@ void MpcImportWindow::createDialogContent()
 	connect(ui->pushButtonSendQuery, SIGNAL(clicked()), this, SLOT(sendQuery()));
 	connect(ui->pushButtonAbortQuery, SIGNAL(clicked()), this, SLOT(abortQuery()));
 	connect(ui->lineEditQuery, SIGNAL(textEdited(QString)), this, SLOT(resetNotFound()));
-	connect(ui->lineEditQuery, SIGNAL(editingFinished()), this, SLOT(sendQuery()));
+	//connect(ui->lineEditQuery, SIGNAL(editingFinished()), this, SLOT(sendQuery()));
 	connect(countdownTimer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
 
 	loadBookmarks();
@@ -629,7 +629,7 @@ void MpcImportWindow::deleteDownloadProgressBar()
 
 void MpcImportWindow::sendQuery()
 {
-	if (queryReply)
+	if (queryReply != NULL)
 		return;
 
 	QString query = ui->lineEditQuery->text().trimmed();
@@ -645,6 +645,7 @@ void MpcImportWindow::sendQuery()
 
 	//TODO: Better handling of the interface
 	enableInterface(false);
+	ui->labelNotFound->setVisible(false);
 
 	QUrl url;
 	url.addQueryItem("ty","e");//Type: ephemerides
@@ -695,7 +696,7 @@ void MpcImportWindow::abortQuery()
 	queryReply->deleteLater();
 	queryReply = NULL;
 
-	resetCountdown();
+	//resetCountdown();
 	enableInterface(true);
 	ui->pushButtonAbortQuery->setVisible(false);
 }
@@ -757,7 +758,6 @@ void MpcImportWindow::queryComplete(QNetworkReply *reply)
 		else
 		{
 			//The request has been successful: add the URL to bookmarks?
-			//TODO: As the bookmarks are destroyed with the window, this doesn't make much sense :)
 			if (ui->checkBoxAddBookmark->isChecked())
 			{
 				QString url = reply->url().toString();
