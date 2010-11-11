@@ -42,7 +42,7 @@ class SatellitesDialog;
 typedef QSharedPointer<Satellite> SatelliteP;
 
 //! @class Satellites
-//! Satellites in low Earth orbith require different orbital calculations from planets, the moon
+//! Satellites in low Earth orbit require different orbital calculations from planets, the moon
 //! and so on.  This plugin implements the SGP4/SDP4 algorithms in Stellarium, allowing accurate
 //! prediction of the position of artificial satellites.
 class Satellites : public StelObjectModule
