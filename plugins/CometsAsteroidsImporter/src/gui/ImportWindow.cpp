@@ -105,6 +105,7 @@ void ImportWindow::createDialogContent()
 	connect(ui->pushButtonSendQuery, SIGNAL(clicked()), this, SLOT(sendQuery()));
 	connect(ui->pushButtonAbortQuery, SIGNAL(clicked()), this, SLOT(abortQuery()));
 	connect(ui->lineEditQuery, SIGNAL(textEdited(QString)), this, SLOT(resetNotFound()));
+	connect(ui->lineEditQuery, SIGNAL(editingFinished()), this, SLOT(sendQuery()));
 	connect(countdownTimer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
 
 	loadBookmarks();
