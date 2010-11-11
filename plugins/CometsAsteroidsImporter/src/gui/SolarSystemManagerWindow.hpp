@@ -30,7 +30,7 @@
 class CAImporter;
 
 class Ui_solarSystemManagerWindow;
-class ImportWindow;
+class MpcImportWindow;
 class ManualImportWindow;
 
 /*! \brief Main window for handling Solar System objects.
@@ -62,7 +62,7 @@ private slots:
 	void resetImportManual(bool);
 
 private:
-	ImportWindow* importWindow;
+	MpcImportWindow* mpcImportWindow;
 	ManualImportWindow * manualImportWindow;
 
 	CAImporter * ssoManager;

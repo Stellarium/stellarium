@@ -18,15 +18,15 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _IMPORT_WINDOW_
-#define _IMPORT_WINDOW_
+#ifndef _MPC_IMPORT_WINDOW_
+#define _MPC_IMPORT_WINDOW_
 
 #include <QObject>
 #include "StelDialog.hpp"
 
 #include "CAImporter.hpp"
 
-class Ui_importWindow;
+class Ui_mpcImportWindow;
 class QNetworkAccessManager;
 class QNetworkReply;
 class QProgressBar;
@@ -34,7 +34,7 @@ class QProgressBar;
 /*! \brief Window for importing orbital elements from various sources.
   \author Bogdan Marinov
 */
-class ImportWindow : public StelDialog
+class MpcImportWindow : public StelDialog
 {
 	Q_OBJECT
 public:
@@ -43,8 +43,8 @@ public:
 	                 MpcMinorPlanets
 	                 };
 
-	ImportWindow();
-	virtual ~ImportWindow();
+	MpcImportWindow();
+	virtual ~MpcImportWindow();
 	void languageChanged();
 
 signals:
@@ -132,7 +132,7 @@ private:
 
 protected:
 	virtual void createDialogContent();
-	Ui_importWindow * ui;
+	Ui_mpcImportWindow * ui;
 };
 
-#endif //_IMPORT_WINDOW_
+#endif //_MPC_IMPORT_WINDOW_
