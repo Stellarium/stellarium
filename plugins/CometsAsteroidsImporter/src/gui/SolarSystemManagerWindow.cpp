@@ -84,6 +84,7 @@ void SolarSystemManagerWindow::languageChanged()
 	{
 		ui->retranslateUi(dialog);
 		populateSolarSystemList();
+		ui->labelVersion->setText(QString("Version %1").arg(PLUGIN_VERSION));
 	}
 
 	if (mpcImportWindow)
