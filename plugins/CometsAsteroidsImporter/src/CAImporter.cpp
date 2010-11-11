@@ -387,7 +387,6 @@ bool CAImporter::removeSsoWithName(QString name)
 	}
 
 	//Remove the section
-	//TODO: Reuse code? Use a hash?
 	foreach (QString group, settings.childGroups())
 	{
 		if (settings.value(group + "/name").toString() == name)
@@ -640,42 +639,50 @@ CAImporter::SsoElements CAImporter::readMpcOneLineMinorPlanetElements(QString on
 	//Magnitude and slope parameter
 	column = oneLineElements.mid(8,5).trimmed();
 	double absoluteMagnitude = column.toDouble(&ok);
-	//TODO: Validation
+	if (!ok)
+		return SsoElements();
 	column = oneLineElements.mid(14,5).trimmed();
 	double slopeParameter = column.toDouble(&ok);
-	//TODO: Validation
+	if (!ok)
+		return SsoElements();
 	result.insert("absolute_magnitude", absoluteMagnitude);
 	result.insert("slope_parameter", slopeParameter);
 
 	//Orbital parameters
 	column = oneLineElements.mid(37, 9).trimmed();
 	double argumentOfPerihelion = column.toDouble(&ok);//J2000.0, degrees
-	//TODO: Validation
+	if (!ok)
+		return SsoElements();
 	result.insert("orbit_ArgOfPericenter", argumentOfPerihelion);
 
 	column = oneLineElements.mid(48, 9).trimmed();
 	double longitudeOfTheAscendingNode = column.toDouble(&ok);//J2000.0, degrees
-	//TODO: Validation
+	if (!ok)
+		return SsoElements();
 	result.insert("orbit_AscendingNode", longitudeOfTheAscendingNode);
 
 	column = oneLineElements.mid(59, 9).trimmed();
 	double inclination = column.toDouble(&ok);//J2000.0, degrees
-	//TODO: Validation
+	if (!ok)
+		return SsoElements();
 	result.insert("orbit_Inclination", inclination);
 
 	column = oneLineElements.mid(70, 9).trimmed();
 	double eccentricity = column.toDouble(&ok);//degrees
-	//TODO: Validation
+	if (!ok)
+		return SsoElements();
 	result.insert("orbit_Eccentricity", eccentricity);
 
 	column = oneLineElements.mid(80, 11).trimmed();
 	double meanDailyMotion = column.toDouble(&ok);//degrees per day
-	//TODO: Validation
+	if (!ok)
+		return SsoElements();
 	result.insert("orbit_MeanMotion", meanDailyMotion);
 
 	column = oneLineElements.mid(92, 11).trimmed();
 	double semiMajorAxis = column.toDouble(&ok);
-	//TODO: Validation
+	if (!ok)
+		return SsoElements();
 	result.insert("orbit_SemiMajorAxis", semiMajorAxis);
 
 	column = oneLineElements.mid(20, 5).trimmed();//Epoch, in packed form
@@ -716,7 +723,8 @@ CAImporter::SsoElements CAImporter::readMpcOneLineMinorPlanetElements(QString on
 
 	column = oneLineElements.mid(26, 9).trimmed();
 	double meanAnomalyAtEpoch = column.toDouble(&ok);//degrees
-	//TODO: Validation
+	if (!ok)
+		return SsoElements();
 	result.insert("orbit_MeanAnomaly", meanAnomalyAtEpoch);
 
 	//Radius and albedo
