@@ -304,6 +304,11 @@ double Satellite::getDoppler(double freq) const
 	return result/1000000;
 }
 
+void Satellite::recalculateOrbitLines(void)
+{
+	orbitPoints.clear();
+}
+
 void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 {
 	float a = (azimuth-90)*M_PI/180;

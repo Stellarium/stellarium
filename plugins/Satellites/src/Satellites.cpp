@@ -620,7 +620,11 @@ void Satellites::observerLocationChanged(StelLocation loc)
 	foreach(const SatelliteP& sat, satellites)
 	{
 		if (sat->initialized && sat->visible)
+		{
 			sat->setObserverLocation(&loc);
+			if (sat->orbitVisible)
+				sat->recalculateOrbitLines();
+		}
 	}
 }
 

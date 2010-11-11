@@ -95,8 +95,11 @@ public:
 	double getDoppler(double freq) const;
 	static float showLabels;
 
+	// when the observer location changes we need to
+	void recalculateOrbitLines(void);
+
 public:
-    void enableDrawOrbit(bool b);
+	void enableDrawOrbit(bool b);
 
 private:
 	//draw orbits methods
