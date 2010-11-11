@@ -61,7 +61,7 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 		StelPluginInfo info;
 		info.id = "Satellites";
 		info.displayedName = "Satellites";
-		info.authors = "Matthew Gates";
+		info.authors = "Matthew Gates, Jose Luis Canales";
 		info.contact = "http://stellarium.org/";
 		info.description = "Prediction of artificial satellite positions in Earth orbit based on NORAD TLE data";
 		return info;
@@ -115,7 +115,7 @@ void Satellites::init()
 
 		// key bindings and other actions
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->addGuiActions("actionShow_Satellite_ConfigDialog", "Satellite Config Dialog", "Alt+Z", "Plugin Key Bindings", true, false);
+		gui->addGuiActions("actionShow_Satellite_ConfigDialog", "Satellite Config Dialog", "Alt+Z", "Plugin Key Bindings", true);
 		gui->addGuiActions("actionShow_Satellite_Hints", "Satellite Hints", "Ctrl+Z", "Plugin Key Bindings", true, false);
 		gui->getGuiActions("actionShow_Satellite_Hints")->setChecked(hintFader);
 		gui->addGuiActions("actionShow_Satellite_Labels", "Satellite Labels", "Shift+Z", "Plugin Key Bindings", true, false);
@@ -129,6 +129,7 @@ void Satellites::init()
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 
 		connect(gui->getGuiActions("actionShow_Satellite_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
+		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Satellite_ConfigDialog"), SLOT(setChecked(bool)));
 		connect(gui->getGuiActions("actionShow_Satellite_Hints"), SIGNAL(toggled(bool)), this, SLOT(setFlagHints(bool)));
 		connect(gui->getGuiActions("actionShow_Satellite_Labels"), SIGNAL(toggled(bool)), this, SLOT(setFlagLabels(bool)));
 	}
@@ -184,9 +185,15 @@ void Satellites::init()
 	styleSheetFile.close();
 }
 
-void Satellites::setStelStyle(const QString&)
+void Satellites::setStelStyle(const QString& mode)
 {
-	configDialog->updateStyle();
+	foreach(const SatelliteP& sat, satellites)
+	{
+		if (sat->initialized)
+		{
+			sat->setNightColors(mode=="night_color");
+		}
+	}
 }
 
 const StelStyle Satellites::getModuleStyleSheet(const StelStyle& style)
@@ -206,7 +213,7 @@ const StelStyle Satellites::getModuleStyleSheet(const StelStyle& style)
 double Satellites::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("StarMgr")->getCallOrder(actionName)+1.;
+		return StelApp::getInstance().getModuleMgr().getModule("SolarSystem")->getCallOrder(actionName)+1.;
 	return 0;
 }
 
