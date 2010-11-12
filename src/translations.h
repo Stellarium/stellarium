@@ -38,6 +38,10 @@ class Translations
 		N_("Mars");
 		N_("Deimos");
 		N_("Phobos");
+		N_("Ceres");
+		N_("Pallas");
+		N_("Juno");
+		N_("Vesta");
 		N_("Jupiter");
 		N_("Io");
 		N_("Europa");
@@ -55,8 +59,14 @@ class Translations
 		N_("Phoebe");
 		N_("Neptune");
 		N_("Uranus");
+		N_("Miranda");
+		N_("Ariel");
+		N_("Umbriel");
+		N_("Titania");
+		N_("Oberon");
 		N_("Pluto");
 		N_("Charon");
+		N_("Eris");
 		N_("Solar System Observer");
 		
 		// Cardinals names

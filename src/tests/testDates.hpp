@@ -30,6 +30,15 @@ private slots:
 	void dateRoundTrip();
 	void formatting();
 	void testRolloverAndValidity();
+	void testJulianDays();
+	void benchmarkOldGetDateFromJulianDay();
+	void benchmarkGetDateFromJulianDayFloatingPoint();
+	void benchmarkGetDateFromJulianDay();
+	void benchmarkOldGetJDFromDate();
+	void benchmarkGetJDFromDate();
+
+private:
+	void testJulianDaysRange(int jd_first, int jd_last);
 };
 
 #endif // _TESTDATES_HPP_

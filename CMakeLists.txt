@@ -61,7 +61,7 @@ IF(APPLE)
 # SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.5")
 # SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.5.sdk/")
  # Universal binary
-# SET(CMAKE_OSX_ARCHITECTURES "i386;ppc")
+ #SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 ENDIF()
 
 ########### Check functions ###########
@@ -134,16 +134,13 @@ SET(USE_PLUGIN_LOGBOOK 0 CACHE BOOL "Define whether the LogBook plugin should be
 SET(USE_PLUGIN_OCULARS 1 CACHE BOOL "Define whether the Oculars plugin should be created.")
 SET(USE_PLUGIN_SVMT 0 CACHE BOOL "Define whether the SVMT plugin should be created.")
 SET(USE_PLUGIN_TEXTUSERINTERFACE 1 CACHE BOOL "Define whether the TextUserInterface plugin should be created.")
+SET(USE_PLUGIN_TIMEZONECONFIGURATION 1 CACHE BOOL "Define whether the TimeZoneConfiguration plugin should be created.")
 SET(USE_PLUGIN_VIRGO 0 CACHE BOOL "Define whether the VirGO plugin should be created.")
 SET(USE_PLUGIN_SOLARSYSTEMEDITOR 1 CACHE BOOL "Define whether the Solar System Editor should be built.")
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
 IF (BUILD_STATIC_PLUGINS)
-  IF (USE_PLUGIN_OCULARS)
-	SET(QT_USE_QTSQL TRUE)
-  ENDIF()
-
   IF (USE_PLUGIN_SVMT)
 	SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
 	SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
