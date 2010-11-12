@@ -23,10 +23,23 @@
 #include <QVariant>
 #include <QString>
 #include <QStringList>
+#include <QFont>
+#include <QList>
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "sgp4sdp4/sgp4sdp4.h"
+
+#include "StelPainter.hpp"
+#include "gsatellite/gSatTEME.hpp"
+#include "gsatellite/gObserver.hpp"
+#include "gsatellite/gTime.hpp"
+#include "gsatellite/gVector.hpp"
+
+
+#define DRAWORBIT_SLOTS_NUMBER    131
+#define DRAWORBIT_FADE_NUMBER     10
+#define DRAWORBIT_SLOT_SECNUMBER  10
+
 
 class StelPainter;
 class StelLocation;
@@ -82,14 +95,27 @@ public:
 	double getDoppler(double freq) const;
 	static float showLabels;
 
+public:
+    void enableDrawOrbit(bool b);
+
+private:
+	//draw orbits methods
+	void computeOrbitPoints();
+	void drawOrbit(const StelCore* core, StelPainter& painter);
+	//! returns 0 - 1.0 for the DRAWORBIT_FADE_NUMBER segments at
+	//! each end of an orbit, with 1 in the middle.
+	float calculateOrbitSegmentIntensity(int segNum);
+	void setNightColors(bool night);
+
 private:
 	bool initialized;
 	bool visible;
+	bool orbitVisible;  //draw orbit enabled/disabled
+
 	QString designation;               // The ID of the satllite
 	QString description;               // longer description of spacecraft
 	Vec3d XYZ;                         // holds J2000 position
 	char elements[3][80];              // TLE elements as char* for passing to sgp lib
-	tle_t tle, localtle;
 	double height, velocity, azimuth, elevation, range, rangeRate;
 	QList<commLink> comms;
 	Vec3f hintColor;
@@ -98,10 +124,27 @@ private:
 	static StelTextureSP hintTexture;
 	static float hintBrightness;
 	static float hintScale;
-	geodetic_t obs_geodetic;           // observer location
 
 	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
 	void setObserverLocation(StelLocation* loc=NULL);
+
+	//gsatellite objects
+	gSatTEME *pSatellite;
+	gObserver observer;
+	gTime     epochTime;
+	gVector   Position;
+	gVector   Vel;
+	gVector   LatLong;
+	gVector   azElPos;
+
+	//Satellite Orbit Draw
+	QFont     font;
+	Vec3f     orbitColorNormal;
+	Vec3f     orbitColorNight;
+	Vec3f*    orbitColor;
+	gTime     lastEpochCompForOrbit;
+	QList<gVector> orbitPoints; //orbit points represented by azElPos vectors
+
 };
 
 #endif // _SATELLITE_HPP_ 

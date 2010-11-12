@@ -17,6 +17,8 @@ SET(Oculars_SRCS
   Telescope.cpp
   gui/OcularDialog.hpp
   gui/OcularDialog.cpp
+  gui/PropertyBasedTableModel.hpp
+  gui/PropertyBasedTableModel.cpp
   gui/StelDialogOculars.hpp
   gui/StelDialogOculars.cpp
 )
@@ -38,13 +40,13 @@ SET(Oculars_MOC_HDRS
   Oculars.hpp
   Telescope.hpp
   gui/OcularDialog.hpp
+  gui/PropertyBasedTableModel.hpp
   gui/StelDialogOculars.hpp
 )
 
 # After this call, Oculars_MOC_SRCS = moc_Oculars.cxx
 QT4_WRAP_CPP(Oculars_MOC_SRCS ${Oculars_MOC_HDRS})
 
-SET(QT_USE_QTSQL TRUE)
 INCLUDE(${QT_USE_FILE})
 
 SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})

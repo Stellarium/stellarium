@@ -763,6 +763,10 @@ void StelGui::setFlagShowFlipButtons(bool b)
 		Q_ASSERT(b);
 	}
 	flagShowFlipButtons = b;
+	if (initDone)
+	{
+		skyGui->updateBarsPos();
+	}
 }
 
 
