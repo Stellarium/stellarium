@@ -36,6 +36,7 @@
 #include "StelIniParser.hpp"
 #include "StelProjector.hpp"
 #include "StelLocationMgr.hpp"
+#include "ToastMgr.hpp"
 
 #include "StelModuleMgr.hpp"
 #include "StelLocaleMgr.hpp"
@@ -280,6 +281,11 @@ void StelApp::init(QSettings* conf)
 	skyImageMgr = new StelSkyLayerMgr();
 	skyImageMgr->init();
 	getModuleMgr().registerModule(skyImageMgr);
+
+	// Toast surveys
+	ToastMgr* toasts = new ToastMgr();
+	toasts->init();
+	getModuleMgr().registerModule(toasts);
 
 	// Init audio manager
 	audioMgr = new StelAudioMgr();
