@@ -139,7 +139,7 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName)
 void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName)
 {
 	// Update the translator with new locale name
-	skyTranslator = StelTranslator("stellarium", StelFileMgr::getLocaleDir(), newSkyLanguageName);
+	skyTranslator = StelTranslator("stellarium-skycultures", StelFileMgr::getLocaleDir(), newSkyLanguageName);
 	qDebug() << "Sky language is " << skyTranslator.getTrueLocaleName();
 	StelApp::getInstance().updateI18n();
 }
@@ -156,6 +156,11 @@ QString StelLocaleMgr::getSkyLanguage() const
 StelTranslator& StelLocaleMgr::getSkyTranslator()
 {
 	return skyTranslator;
+}
+
+StelTranslator& StelLocaleMgr::getAppStelTranslator() const
+{
+	return StelTranslator::globalTranslator;
 }
 
 

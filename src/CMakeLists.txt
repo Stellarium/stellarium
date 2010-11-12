@@ -411,6 +411,8 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/SearchDialog.cpp
 		gui/ConfigurationDialog.hpp
 		gui/ConfigurationDialog.cpp
+		gui/AddRemoveLandscapesDialog.hpp
+		gui/AddRemoveLandscapesDialog.cpp
 		gui/StelDialog.hpp
 		gui/StelDialog.cpp)
 
@@ -428,6 +430,7 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/ViewDialog.hpp
 		gui/SearchDialog.hpp
 		gui/ConfigurationDialog.hpp
+		gui/AddRemoveLandscapesDialog.hpp
 		gui/StelDialog.hpp)
 
 	################# compiles .ui files ############
@@ -437,7 +440,8 @@ IF (GUI_MODE STREQUAL "Standard")
 	gui/dateTimeDialogGui.ui
 	gui/viewDialog.ui
 	gui/searchDialogGui.ui
-	gui/configurationDialog.ui)
+	gui/configurationDialog.ui
+	gui/addRemoveLandscapesDialog.ui)
 
 	IF(ENABLE_SCRIPT_CONSOLE)
 		SET(stellarium_gui_SRCS ${stellarium_gui_SRCS}
@@ -562,6 +566,11 @@ IF (BUILD_STATIC_PLUGINS)
   IF (USE_PLUGIN_SOLARSYSTEMEDITOR)
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/SolarSystemEditor/src/${CMAKE_CFG_INTDIR}/libSolarSystemEditor.a")
 	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SOLARSYSTEMEDITOR)
+  ENDIF()
+
+  IF (USE_PLUGIN_TIMEZONECONFIGURATION)
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/TimeZoneConfiguration/src/${CMAKE_CFG_INTDIR}/libTimeZoneConfiguration.a")
+	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TIMEZONECONFIGURATION)
   ENDIF()
 
   IF (USE_PLUGIN_SVMT)
@@ -713,7 +722,7 @@ TARGET_LINK_LIBRARIES(testRefractionExtinction ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testRefractionExtinction)
 
 ADD_CUSTOM_TARGET(tests COMMENT "Run the Stellarium unit tests")
-# ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testDates WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
+ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testDates WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelFileMgr WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphereGeometry WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphericalIndex WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)

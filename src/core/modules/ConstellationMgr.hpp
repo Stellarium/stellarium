@@ -212,6 +212,8 @@ private:
 	//! NOTE: this function should return a list of all, or may be deleted. Please
 	//! do not use until it exhibits the proper behaviour.
 	StelObject* getSelected(void) const;
+	//! Remove constellations from selected objects
+	void deselectConstellations(void);
 
 	std::vector<Constellation*> selected; // More than one can be selected at a time
 

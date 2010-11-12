@@ -27,15 +27,15 @@
 #include "Telescope.hpp"
 
 #include <QFont>
+#include <QSettings>
 
 #define MIN_OCULARS_INI_VERSION 0.12
 
 QT_BEGIN_NAMESPACE
-class QSqlTableModel;
 class QKeyEvent;
 class QMouseEvent;
 class QPixmap;
-class QSqlQuery;
+class QSettings;
 QT_END_NAMESPACE
 
 class StelButton;
@@ -48,6 +48,7 @@ class Oculars : public StelModule
 public:
 	Oculars();
 	virtual ~Oculars();
+	static QSettings* appSettings();
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -89,9 +90,6 @@ private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
 	void instrumentChanged();
 	void determineMaxEyepieceAngle();
-	void loadCCDs();
-	void loadOculars();
-	void loadTelescopes();
 	void setScaleImageCircle(bool state);
 
 private:
@@ -101,10 +99,6 @@ private:
 	//! Renders the three Telrad circles, but only if not in ocular mode.
 	void drawTelrad();
 
-	//! Insures that each required table exists in the database, as well as instantiate the table models.
-	//! @return true if the DB was correctly initialized, false if it was not.
-	bool initializeDB();
-	
 	//! Set up the Qt actions needed to activate the plugin.
 	void initializeActivationActions();
 	
@@ -115,8 +109,6 @@ private:
 	//! Because we want the ocular view to track, we must intercept & process ourselves.  Only called
 	//! while flagShowOculars == true.
 	void interceptMovementKey(class QKeyEvent* event);
-
-	void loadDatabaseObjects();
 
 	//! Paint the mask into the viewport.
 	void paintMask();
@@ -133,7 +125,8 @@ private:
 	//! ends.  However, if one does exist, it opens it, and looks for the oculars_version key.  The value (or even
 	//! presence) is used to determine if the ini file is usable.  If not, it is renamed, and a new one copied over.
 	//! It does not ty to cope values over.
-	void validateIniFile();
+	//! Once there is a valid ini file, it is loaded into the settings attribute.
+	void validateAndLoadIniFile();
 
 	//! Recordd the state of the GridLinesMgr views beforehand, so that it can be reset afterwords.
 	//! @param rezoom if true, this zoom operation is starting from an already zoomed state.
@@ -144,7 +137,7 @@ private:
 	void zoomOcular();
 
 	//! A list of all the oculars defined in the ini file.  Must have at least one, or module will not run.
-	QList<CCD *> CCDs;
+	QList<CCD *> ccds;
 	QList<Ocular *> oculars;
 	QList<Telescope *> telescopes;
 	int selectedCCDIndex;
@@ -178,10 +171,6 @@ private:
 	bool visible;
 	bool ready; //!< A flag that determines that this module is usable.  If false, we won't open.
 	bool newInstrument; //!< true the first time draw is called for a new ocular or telescope, false otherwise.
-
-	QSqlTableModel *CCDsTableModel;
-	QSqlTableModel *ocularsTableModel;
-	QSqlTableModel *telescopesTableModel;
 
 	//Styles
 	QByteArray normalStyleSheet;

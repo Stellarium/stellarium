@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2006 Fabien Chereau
+ * Copyright (C) 2010 Bogdan Marinov (add/remove landscapes feature)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,12 +21,17 @@
 #include <QDebug>
 #include <QSettings>
 #include <QString>
+#include <QDir>
+#include <QFile>
+#include <QTemporaryFile>
 
 #ifdef USE_OPENGL_ES2
  #include "GLES2/gl2.h"
 #else
  #include <QtOpenGL>
 #endif
+
+#include <stdexcept>
 
 #include "LandscapeMgr.hpp"
 #include "Landscape.hpp"
@@ -40,6 +46,8 @@
 #include "StelIniParser.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelPainter.hpp"
+#include "karchive.h"
+#include "kzip.h"
 
 // Class which manages the cardinal points displaying
 class Cardinals
@@ -133,7 +141,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 // Translate cardinal labels with gettext to current sky language and update font for the language
 void Cardinals::updateI18n()
 {
-	StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getAppStelTranslator();
 	sNorth = trans.qtranslate("N");
 	sSouth = trans.qtranslate("S");
 	sEast = trans.qtranslate("E");
@@ -144,6 +152,10 @@ void Cardinals::updateI18n()
 LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinalsPoints(NULL), landscape(NULL), flagLandscapeSetsLocation(false)
 {
 	setObjectName("LandscapeMgr");
+
+	//TODO: Find a way to obtain this list automatically.
+	//Note: The first entry in the list is used as the default 'default landscape' in removeLandscape().
+	packagedLandscapeIDs = (QStringList() << "guereins" << "trees" << "moon" << "hurricane" << "ocean" << "garching" << "mars" << "saturn");
 }
 
 LandscapeMgr::~LandscapeMgr()
@@ -408,6 +420,20 @@ QStringList LandscapeMgr::getAllLandscapeIDs() const
 	return result;
 }
 
+QStringList LandscapeMgr::getUserLandscapeIDs() const
+{
+	QMap<QString,QString> nameToDirMap = getNameToDirMap();
+	QStringList result;
+	foreach (QString id, nameToDirMap.values())
+	{
+		if(!packagedLandscapeIDs.contains(id))
+		{
+			result += id;
+		}
+	}
+	return result;
+}
+
 QString LandscapeMgr::getCurrentLandscapeName() const
 {
 	return landscape->getName();
@@ -604,3 +630,292 @@ QMap<QString,QString> LandscapeMgr::getNameToDirMap() const
 }
 
 
+QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool display, bool toMainDirectory)
+{
+	Q_UNUSED(toMainDirectory);
+	if (!QFile::exists(sourceFilePath))
+	{
+		qDebug() << "LandscapeMgr: File does not exist:" << sourceFilePath;
+		emit errorUnableToOpen(sourceFilePath);
+		return QString();
+	}
+
+	QDir parentDestinationDir;
+	//TODO: Fix the "for all users" option
+	parentDestinationDir.setPath(StelFileMgr::getUserDir());
+
+	if (!parentDestinationDir.exists("landscapes"))
+	{
+		//qDebug() << "LandscapeMgr: No 'landscapes' subdirectory exists in" << parentDestinationDir.absolutePath();
+		if (!parentDestinationDir.mkdir("landscapes"))
+		{
+			qWarning() << "LandscapeMgr: Unable to install landscape: Unable to create sub-directory 'landscapes' in" << parentDestinationDir.absolutePath();
+			emit errorUnableToOpen(QDir::cleanPath(parentDestinationDir.filePath("landscapes")));//parentDestinationDir.absolutePath()
+			return QString();
+		}
+	}
+	QDir destinationDir (parentDestinationDir.absoluteFilePath("landscapes"));
+
+	KZip sourceArchive(sourceFilePath);
+	if(!sourceArchive.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "LandscapeMgr: Unable to open as a ZIP archive:" << sourceFilePath;
+		emit errorNotArchive();
+		return QString();
+	}
+
+	//Detect top directory
+	const KArchiveDirectory * archiveTopDirectory = NULL;
+	QStringList topLevelContents = sourceArchive.directory()->entries();
+	if(topLevelContents.contains("landscape.ini"))
+	{
+		//If the landscape archive has no top level directory...
+		//(test case is "tulipfield" from the Stellarium Wiki)
+		archiveTopDirectory = sourceArchive.directory();
+	}
+	else
+	{
+		foreach (QString entryPath, topLevelContents)
+		{
+			if (sourceArchive.directory()->entry(entryPath)->isDirectory())
+			{
+				if((dynamic_cast<const KArchiveDirectory*>(sourceArchive.directory()->entry(entryPath)))->entries().contains("landscape.ini"))
+				{
+					archiveTopDirectory = dynamic_cast<const KArchiveDirectory*>(sourceArchive.directory()->entry(entryPath));
+					break;
+				}
+			}
+		}
+	}
+	if (archiveTopDirectory == NULL)
+	{
+		qWarning() << "LandscapeMgr: Unable to install landscape. There is no directory that contains a 'landscape.ini' file in the source archive.";
+		emit errorNotArchive();
+		return QString();
+	}
+
+	/*
+	qDebug() << "LandscapeMgr: Contents of the source archive:" << endl
+			 << "- top level direcotory:" << archiveTopDirectory->name() << endl
+			 << "- contents:" << archiveTopDirectory->entries();
+	*/
+
+	//Check if the top directory name is unique
+	//TODO: Prompt rename? Rename silently?
+	/*
+	if (destinationDir.exists(archiveTopDirectory->name()))
+	{
+		qWarning() << "LandscapeMgr: Unable to install landscape. A directory named" << archiveTopDirectory->name() << "already exists in" << destinationDir.absolutePath();
+		return QString();
+	}
+	*/
+	//Determine the landscape's identifier
+	QString landscapeID = archiveTopDirectory->name();
+	if (landscapeID.length() < 2)
+	{
+		//If the archive has no top level directory (landscapeID is "/"),
+		//use the first 65 characters of its file name for an identifier
+		QFileInfo sourceFileInfo(sourceFilePath);
+		landscapeID = sourceFileInfo.baseName().left(65);
+	}
+
+	//Check for duplicate IDs
+	if (getAllLandscapeIDs().contains(landscapeID))
+	{
+		qWarning() << "LandscapeMgr: Unable to install landscape. A landscape with the ID" << landscapeID << "already exists.";
+		emit errorNotUnique(landscapeID);
+		return QString();
+	}
+
+	//Read the .ini file and check if the landscape name is unique
+	QTemporaryFile tempLandscapeIni("landscapeXXXXXX.ini");
+	if (tempLandscapeIni.open())
+	{
+		const KZipFileEntry * archLandscapeIni = static_cast<const KZipFileEntry*>(archiveTopDirectory->entry("landscape.ini"));
+		tempLandscapeIni.write(archLandscapeIni->createDevice()->readAll());
+		tempLandscapeIni.close();
+
+		QSettings confLandscapeIni(tempLandscapeIni.fileName(), StelIniFormat);
+		QString landscapeName = confLandscapeIni.value("landscape/name").toString();
+		if (getAllLandscapeNames().contains(landscapeName))
+		{
+			qWarning() << "LandscapeMgr: Unable to install landscape. There is already a landscape named" << landscapeName;
+			emit errorNotUnique(landscapeName);
+			return QString();
+		}
+	}
+
+	//Copy the landscape directory to the target
+	//sourceArchive.directory()->copyTo(destinationDir.absolutePath());
+
+	//This case already has been handled - and commented out - above. :)
+	if(destinationDir.exists(landscapeID))
+	{
+		qWarning() << "LandscapeMgr: A subdirectory" << landscapeID << "already exists in" << destinationDir.absolutePath() << "Its contents may be overwritten.";
+	}
+	else if(!destinationDir.mkdir(landscapeID))
+	{
+		qWarning() << "LandscapeMgr: Unable to install landscape. Unable to create" << landscapeID << "directory in" << destinationDir.absolutePath();
+		emit errorUnableToOpen(QDir::cleanPath(destinationDir.filePath(landscapeID)));
+		return QString();
+	}
+	destinationDir.cd(landscapeID);
+	QString destinationDirPath = destinationDir.absolutePath();
+	QStringList landscapeFileEntries = archiveTopDirectory->entries();
+	foreach (QString entry, landscapeFileEntries)
+	{
+		const KArchiveEntry * archEntry = archiveTopDirectory->entry(entry);
+		if(archEntry->isFile())
+		{
+			static_cast<const KZipFileEntry*>(archEntry)->copyTo(destinationDirPath);
+		}
+	}
+
+	sourceArchive.close();
+
+	//If necessary, make the new landscape the current landscape
+	if (display)
+	{
+		setCurrentLandscapeID(landscapeID);
+	}
+
+	//Make sure that everyone knows that the list of available landscapes has changed
+	emit landscapesChanged();
+
+	qDebug() << "LandscapeMgr: Successfully installed landscape directory" << landscapeID << "to" << destinationDir.absolutePath();
+	return landscapeID;
+}
+
+bool LandscapeMgr::removeLandscape(QString landscapeID)
+{
+	if (landscapeID.isEmpty())
+	{
+		qWarning() << "LandscapeMgr: Error! No landscape ID passed to removeLandscape().";
+		return false;
+	}
+
+	if (packagedLandscapeIDs.contains(landscapeID))
+	{
+		qWarning() << "LandscapeMgr: Landscapes that are part of the default installation cannot be removed.";
+		return false;
+	}
+
+	qDebug() << "LandscapeMgr: Trying to remove landscape" << landscapeID;
+
+	QString landscapePath = getLandscapePath(landscapeID);
+	if (landscapePath.isEmpty())
+		return false;
+
+	QDir landscapeDir(landscapePath);
+	foreach (QString fileName, landscapeDir.entryList(QDir::Files | QDir::NoDotAndDotDot))
+	{
+		if(!landscapeDir.remove(fileName))
+		{
+			qWarning() << "LandscapeMgr: Unable to remove" << fileName;
+			emit errorRemoveManually(landscapeDir.absolutePath());
+			return false;
+		}
+	}
+	landscapeDir.cdUp();
+	if(!landscapeDir.rmdir(landscapeID))
+	{
+		qWarning() << "LandscapeMgr: Error! Landscape" << landscapeID
+				   << "could not be removed. "
+				   << "Some files were deleted, but not all."
+				   << endl
+				   << "LandscapeMgr: You can delete manually" << QDir::cleanPath(landscapeDir.filePath(landscapeID));
+		emit errorRemoveManually(QDir::cleanPath(landscapeDir.filePath(landscapeID)));
+		return false;
+	}
+
+	qDebug() << "LandscapeMgr: Successfully removed" << landscapePath;
+
+	//If the landscape has been selected, revert to the default one
+	//TODO: Make this optional?
+	if (getCurrentLandscapeID() == landscapeID)
+	{
+		if(getDefaultLandscapeID() == landscapeID)
+		{
+			setDefaultLandscapeID(packagedLandscapeIDs.first());
+			//TODO: Find what happens if a missing landscape is specified in the configuration file
+		}
+
+		setCurrentLandscapeID(getDefaultLandscapeID());
+	}
+
+	//Make sure that everyone knows that the list of available landscapes has changed
+	emit landscapesChanged();
+
+	return true;
+}
+
+QString LandscapeMgr::getLandscapePath(QString landscapeID)
+{
+	QString result;
+	//Is this necessary? This function is private.
+	if (landscapeID.isEmpty())
+		return result;
+
+	try
+	{
+		result = StelFileMgr::findFile("landscapes/" + landscapeID, StelFileMgr::Directory);
+	}
+	catch (std::runtime_error &e)
+	{
+		qWarning() << "LandscapeMgr: Error! Unable to find" << landscapeID << ":" << e.what();
+		return result;
+	}
+
+	return result;
+}
+
+QString LandscapeMgr::loadLandscapeName(QString landscapeID)
+{
+	QString landscapeName;
+	if (landscapeID.isEmpty())
+	{
+		qWarning() << "LandscapeMgr: Error! No landscape ID passed to loadLandscapeName().";
+		return landscapeName;
+	}
+
+	QString landscapePath = getLandscapePath(landscapeID);
+	if (landscapePath.isEmpty())
+		return landscapeName;
+
+	QDir landscapeDir(landscapePath);
+	if (landscapeDir.exists("landscape.ini"))
+	{
+		QString landscapeSettingsPath = landscapeDir.filePath("landscape.ini");
+		QSettings landscapeSettings(landscapeSettingsPath, StelIniFormat);
+		landscapeName = landscapeSettings.value("landscape/name").toString();
+	}
+	else
+	{
+		qWarning() << "LandscapeMgr: Error! Landscape directory" << landscapePath << "does not contain a 'landscape.ini' file";
+	}
+
+	return landscapeName;
+}
+
+quint64 LandscapeMgr::loadLandscapeSize(QString landscapeID)
+{
+	quint64 landscapeSize = 0;
+	if (landscapeID.isEmpty())
+	{
+		qWarning() << "LandscapeMgr: Error! No landscape ID passed to loadLandscapeSize().";
+		return landscapeSize;
+	}
+
+	QString landscapePath = getLandscapePath(landscapeID);
+	if (landscapePath.isEmpty())
+		return landscapeSize;
+
+	QDir landscapeDir(landscapePath);
+	foreach (QFileInfo file, landscapeDir.entryInfoList(QDir::Files | QDir::NoDotAndDotDot))
+	{
+		//qDebug() << "name:" << file.baseName() << "size:" << file.size();
+		landscapeSize += file.size();
+	}
+
+	return landscapeSize;
+}
