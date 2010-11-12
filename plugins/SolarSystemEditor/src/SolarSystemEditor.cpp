@@ -417,14 +417,14 @@ bool SolarSystemEditor::removeSsoWithName(QString name)
   "    CK10F040  2010 04  6.109   0.61383   1.00000   120.718   237.294    89.143             13.5  4.0  C/2010 F4 (Machholz)                                     MPC 69906" -> lower precision than the spec, fixed
   "    CK10M010  2012 02  7.840   2.29869   1.00000   265.318    82.150    78.373              9.0  4.0  C/2010 M1 (Gibbs)                                        MPC 70817" -> lower precision than the spec, fixed
   "    CK10R010  2011 11 28.457   6.66247   1.00000    96.009   345.949   157.437              6.0  4.0  C/2010 R1 (LINEAR)                                       MPEC 2010-R99" -> lower precision than the spec, fixed
-  "0128P      b  2007 06 13.8064  3.062504  0.320891  210.3319  214.3583    4.3606  20100723   8.5  4.0  128P/Shoemaker-Holt                                      MPC 51822" -> fragment?
-  "0141P      d  2010 05 29.7106  0.757809  0.749215  149.3298  246.0849   12.8032  20100723  12.0 12.0  141P/Machholz                                            MPC 59599" -> fragment?
+  "0128P      b  2007 06 13.8064  3.062504  0.320891  210.3319  214.3583    4.3606  20100723   8.5  4.0  128P/Shoemaker-Holt                                      MPC 51822" -> fragment, fixed
+  "0141P      d  2010 05 29.7106  0.757809  0.749215  149.3298  246.0849   12.8032  20100723  12.0 12.0  141P/Machholz                                            MPC 59599" -> fragment, fixed
 */
 SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElements)
 {
 	SsoElements result;
 
-	QRegExp mpcParser("^\\s*(\\d{4})?([A-Z])(\\w{7})?\\s+(\\d{4})\\s+(\\d{2})\\s+(\\d{1,2}\\.\\d{3,4})\\s+(\\d{1,2}\\.\\d{5,6})\\s+(\\d\\.\\d{5,6})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(?:(\\d{4})(\\d\\d)(\\d\\d))?\\s+(\\-?\\d{1,2}\\.\\d)\\s+(\\d{1,2}\\.\\d)\\s+(\\S.{1,54}\\S)(?:\\s+(\\S.*))?$");//
+	QRegExp mpcParser("^\\s*(\\d{4})?([A-Z])((?:\\w{6}|\\s{6})?[0a-zA-Z])?\\s+(\\d{4})\\s+(\\d{2})\\s+(\\d{1,2}\\.\\d{3,4})\\s+(\\d{1,2}\\.\\d{5,6})\\s+(\\d\\.\\d{5,6})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(?:(\\d{4})(\\d\\d)(\\d\\d))?\\s+(\\-?\\d{1,2}\\.\\d)\\s+(\\d{1,2}\\.\\d)\\s+(\\S.{1,54}\\S)(?:\\s+(\\S.*))?$");//
 
 	int match = mpcParser.indexIn(oneLineElements);
 	//qDebug() << "RegExp captured:" << match << mpcParser.capturedTexts();
@@ -435,7 +435,26 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 		return result;
 	}
 
+	QString numberString = mpcParser.cap(1).trimmed();
+	//QChar cometType = mpcParser.cap(2).at(0);
+	QString provisionalDesignation = mpcParser.cap(3).trimmed();
+
+	if (numberString.isEmpty() && provisionalDesignation.isEmpty())
+	{
+		qWarning() << "Comet is missing both comet number AND provisional designation.";
+		return result;
+	}
+
 	QString name = mpcParser.cap(17).trimmed();
+
+	//Fragment suffix
+	if (provisionalDesignation.length() == 1)
+	{
+		QChar fragmentIndex = provisionalDesignation.at(0);
+		name.append(' ');
+		name.append(fragmentIndex.toUpper());
+	}
+
 	QString sectionName(name);
 	//TODO: Should I remove all non-alphanumeric, or only the obviously problematic?
 	sectionName.remove('\\');
@@ -444,12 +463,6 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	sectionName.remove(' ');
 	sectionName.remove('-');
 	sectionName = sectionName.toLower();
-
-	if (mpcParser.cap(1).isEmpty() && mpcParser.cap(3).isEmpty())
-	{
-		qWarning() << "Comet is missing both comet number AND provisional designation.";
-		return result;
-	}
 
 	result.insert("section_name", sectionName);
 	result.insert("name", name);
