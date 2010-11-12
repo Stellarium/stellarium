@@ -907,11 +907,11 @@ void MpcImportWindow::saveBookmarks()
 {
 	try
 	{
-		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir() + "/modules/SolarSystem");
+		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir() + "/modules/SolarSystemEditor");
 
 		QVariantMap jsonRoot;
 
-		QString bookmarksFilePath(StelFileMgr::getUserDir() + "/modules/SolarSystem/bookmarks.json");
+		QString bookmarksFilePath(StelFileMgr::getUserDir() + "/modules/SolarSystemEditor/bookmarks.json");
 
 		//If the file exists, load it first
 		if (StelFileMgr::isReadable(bookmarksFilePath))
@@ -929,7 +929,7 @@ void MpcImportWindow::saveBookmarks()
 		{
 			QVariantMap minorPlanetsObject;
 			saveBookmarksGroup(bookmarks[MpcMinorPlanets], minorPlanetsObject);
-			qDebug() << minorPlanetsObject.keys();
+			//qDebug() << minorPlanetsObject.keys();
 			jsonRoot.insert("mpcMinorPlanets", minorPlanetsObject);
 
 			QVariantMap cometsObject;
