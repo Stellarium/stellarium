@@ -420,7 +420,7 @@ bool CAImporter::removeSsoWithName(QString name)
   "0128P      b  2007 06 13.8064  3.062504  0.320891  210.3319  214.3583    4.3606  20100723   8.5  4.0  128P/Shoemaker-Holt                                      MPC 51822" -> fragment?
   "0141P      d  2010 05 29.7106  0.757809  0.749215  149.3298  246.0849   12.8032  20100723  12.0 12.0  141P/Machholz                                            MPC 59599" -> fragment?
 */
-CAImporter::SsoElements CAImporter::readMpcOneLineCometElements(QString oneLineElements)
+SsoElements CAImporter::readMpcOneLineCometElements(QString oneLineElements)
 {
 	SsoElements result;
 
@@ -508,7 +508,7 @@ CAImporter::SsoElements CAImporter::readMpcOneLineCometElements(QString oneLineE
 	return result;
 }
 
-CAImporter::SsoElements CAImporter::readMpcOneLineMinorPlanetElements(QString oneLineElements)
+SsoElements CAImporter::readMpcOneLineMinorPlanetElements(QString oneLineElements)
 {
 	SsoElements result;
 
@@ -738,9 +738,9 @@ CAImporter::SsoElements CAImporter::readMpcOneLineMinorPlanetElements(QString on
 	return result;
 }
 
-QList<CAImporter::SsoElements> CAImporter::readMpcOneLineCometElementsFromFile(QString filePath)
+QList<SsoElements> CAImporter::readMpcOneLineCometElementsFromFile(QString filePath)
 {
-	QList<CAImporter::SsoElements> objectList;
+	QList<SsoElements> objectList;
 
 	if (!QFile::exists(filePath))
 	{
@@ -792,9 +792,9 @@ QList<CAImporter::SsoElements> CAImporter::readMpcOneLineCometElementsFromFile(Q
 	return objectList;
 }
 
-QList<CAImporter::SsoElements> CAImporter::readMpcOneLineMinorPlanetElementsFromFile(QString filePath)
+QList<SsoElements> CAImporter::readMpcOneLineMinorPlanetElementsFromFile(QString filePath)
 {
-	QList<CAImporter::SsoElements> objectList;
+	QList<SsoElements> objectList;
 
 	if (!QFile::exists(filePath))
 	{
