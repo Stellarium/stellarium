@@ -33,6 +33,20 @@
 class SolarSystemManagerWindow;
 class SolarSystem;
 class QSettings;
+
+//! Convenience type for storage of SSO properties in ssystem.ini format.
+//! This is an easy way of storing data in the format used in Stellarium's
+//! solar system configuration file.
+//! What would be key/value pairs in a section in the ssystem.ini file
+//! are key/value pairs in the hash. The section name is stored with key
+//! "section_name".
+//! As it is a hash, key names are not stored alphabetically. This allows
+//! for rapid addition and look-up of values, unlike a real QSettings
+//! object in StelIniFormat.
+//! Also, using this way may allow scripts to define SSOs.
+//! \todo Better name.
+typedef QHash<QString, QVariant> SsoElements;
+
 /*!
  \class CAImporter
  \brief Main class of the Comets and Asteroids Importer plug-in.
@@ -68,19 +82,6 @@ public:
 	//! called when the "configure" button in the "Plugins" tab is pressed
 	virtual bool configureGui(bool show);
 	virtual void updateI18n();
-
-	//! Convenience type for storage of SSO properties in ssystem.ini format.
-	//! This is an easy way of storing data in the format used in Stellarium's
-	//! solar system configuration file.
-	//! What would be key/value pairs in a section in the ssystem.ini file
-	//! are key/value pairs in the hash. The section name is stored with key
-	//! "section_name".
-	//! As it is a hash, key names are not stored alphabetically. This allows
-	//! for rapid addition and look-up of values, unlike a real QSettings
-	//! object in StelIniFormat.
-	//! Also, using this way may allow scripts to define SSOs.
-	//! \todo Better name.
-	typedef QHash<QString, QVariant> SsoElements;
 	
 	//! Reads a single comet's orbital elements from a string.
 	//! This function converts a line of comet orbital elements in MPC format

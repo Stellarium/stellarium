@@ -165,7 +165,7 @@ void MpcImportWindow::acquireObjectData()
 		if (filePath.isEmpty())
 			return;
 
-		QList<CAImporter::SsoElements> objects = readElementsFromFile(importType, filePath);
+		QList<SsoElements> objects = readElementsFromFile(importType, filePath);
 		if (objects.isEmpty())
 			return;
 
@@ -201,7 +201,7 @@ void MpcImportWindow::addObjects()
 	}
 	//qDebug() << "Checked:" << checkedObjectsNames;
 
-	QList<CAImporter::SsoElements> approvedForAddition;
+	QList<SsoElements> approvedForAddition;
 	for (int i = 0; i < candidatesForAddition.count(); i++)
 	{
 		QString name = candidatesForAddition.at(i).value("name").toString();
@@ -210,7 +210,7 @@ void MpcImportWindow::addObjects()
 	}
 
 	bool overwrite = ui->radioButtonOverwrite->isChecked();
-	QList<CAImporter::SsoElements> approvedForUpdate;
+	QList<SsoElements> approvedForUpdate;
 	for (int j = 0; j < candidatesForUpdate.count(); j++)
 	{
 		QString name = candidatesForUpdate.at(j).value("name").toString();
@@ -278,7 +278,7 @@ void MpcImportWindow::bookmarkSelected(QString bookmarkTitle)
 	ui->lineEditURL->setText(bookmarkUrl);
 }
 
-void MpcImportWindow::populateCandidateObjects(QList<CAImporter::SsoElements> objects)
+void MpcImportWindow::populateCandidateObjects(QList<SsoElements> objects)
 {
 	candidatesForAddition.clear();
 
@@ -294,7 +294,7 @@ void MpcImportWindow::populateCandidateObjects(QList<CAImporter::SsoElements> ob
 
 	QListWidget * list = ui->listWidgetObjects;
 	list->clear();
-	foreach (CAImporter::SsoElements object, objects)
+	foreach (SsoElements object, objects)
 	{
 		QString name = object.value("name").toString();
 		if (name.isEmpty())
@@ -375,7 +375,7 @@ void MpcImportWindow::enableInterface(bool enable)
 	ui->pushButtonAcquire->setEnabled(enable);
 }
 
-CAImporter::SsoElements MpcImportWindow::readElementsFromString (QString elements)
+SsoElements MpcImportWindow::readElementsFromString (QString elements)
 {
 	Q_ASSERT(ssoManager);
 
@@ -389,7 +389,7 @@ CAImporter::SsoElements MpcImportWindow::readElementsFromString (QString element
 	}
 }
 
-QList<CAImporter::SsoElements> MpcImportWindow::readElementsFromFile(ImportType type, QString filePath)
+QList<SsoElements> MpcImportWindow::readElementsFromFile(ImportType type, QString filePath)
 {
 	Q_ASSERT(ssoManager);
 
@@ -570,7 +570,7 @@ void MpcImportWindow::downloadComplete(QNetworkReply *reply)
 		return;
 	}
 
-	QList<CAImporter::SsoElements> objects;
+	QList<SsoElements> objects;
 	QTemporaryFile file;
 	if (file.open())
 	{
@@ -733,7 +733,7 @@ void MpcImportWindow::queryComplete(QNetworkReply *reply)
 	}
 	else
 	{
-		QList<CAImporter::SsoElements> objects;
+		QList<SsoElements> objects;
 		QTemporaryFile file;
 		if (file.open())
 		{

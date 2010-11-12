@@ -91,19 +91,19 @@ private slots:
 
 private:
 	CAImporter * ssoManager;
-	QList<CAImporter::SsoElements> candidatesForAddition;
-	QList<CAImporter::SsoElements> candidatesForUpdate;
+	QList<SsoElements> candidatesForAddition;
+	QList<SsoElements> candidatesForUpdate;
 
 	ImportType importType;
 
 	//! wrapper for the single object function to allow multiple formats.
-	CAImporter::SsoElements readElementsFromString(QString elements);
+	SsoElements readElementsFromString(QString elements);
 	//! wrapper for the file function to allow multiple formats
-	QList<CAImporter::SsoElements> readElementsFromFile(ImportType type, QString filePath);
+	QList<SsoElements> readElementsFromFile(ImportType type, QString filePath);
 
 	void populateBookmarksList();
 	//void populateCandidateObjects();
-	void populateCandidateObjects(QList<CAImporter::SsoElements>);
+	void populateCandidateObjects(QList<SsoElements>);
 	void enableInterface(bool enable);
 
 	//Downloading
