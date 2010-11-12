@@ -8,7 +8,7 @@
     <x>0</x>
     <y>0</y>
     <width>480</width>
-    <height>450</height>
+    <height>475</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -242,13 +242,29 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEditURL">
-                   <property name="inputMethodHints">
-                    <set>Qt::ImhUrlCharactersOnly</set>
-                   </property>
-                   <property name="text">
-                    <string>http://</string>
-                   </property>
+                  <widget class="QFrame" name="frameBookmarkURL">
+                   <layout class="QHBoxLayout" name="horizontalLayoutBookmarkURL">
+                    <property name="margin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QLineEdit" name="lineEditURL">
+                      <property name="inputMethodHints">
+                       <set>Qt::ImhUrlCharactersOnly</set>
+                      </property>
+                      <property name="text">
+                       <string notr="true">http://</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="pushButtonPasteURL">
+                      <property name="text">
+                       <string>paste</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
                   </widget>
                  </item>
                  <item>
@@ -256,6 +272,25 @@
                    <property name="text">
                     <string>Add this URL to the bookmarks list</string>
                    </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QFrame" name="frameBookmarkTitle">
+                   <layout class="QHBoxLayout" name="horizontalLayoutBookmarkName">
+                    <property name="margin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QLabel" name="labelBookmarkTitle">
+                      <property name="text">
+                       <string>Bookmark title:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="lineEditBookmarkTitle"/>
+                    </item>
+                   </layout>
                   </widget>
                  </item>
                  <item>
@@ -567,7 +602,9 @@
   <tabstop>lineEditFilePath</tabstop>
   <tabstop>radioButtonURL</tabstop>
   <tabstop>lineEditURL</tabstop>
+  <tabstop>pushButtonPasteURL</tabstop>
   <tabstop>checkBoxAddBookmark</tabstop>
+  <tabstop>lineEditBookmarkTitle</tabstop>
   <tabstop>comboBoxBookmarks</tabstop>
   <tabstop>pushButtonAcquire</tabstop>
   <tabstop>pushButtonAbortDownload</tabstop>
@@ -626,12 +663,28 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>190</x>
-     <y>191</y>
+     <x>107</x>
+     <y>198</y>
     </hint>
     <hint type="destinationlabel">
-     <x>190</x>
-     <y>207</y>
+     <x>107</x>
+     <y>226</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxAddBookmark</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>frameBookmarkTitle</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>152</x>
+     <y>295</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>136</x>
+     <y>313</y>
     </hint>
    </hints>
   </connection>

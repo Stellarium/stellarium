@@ -54,13 +54,11 @@ private slots:
 	//Radio buttons for type
 	void switchImportType(bool checked);
 
-	//Single string
-	void pasteClipboard();
-
 	//File
 	void selectFile();
 
 	//Download
+	void pasteClipboardURL();
 	void bookmarkSelected(QString);
 
 	//Buttons for the list tab
