@@ -53,10 +53,10 @@ StelPluginInfo SolarSystemEditorStelPluginInterface::getPluginInfo() const
 	
 	StelPluginInfo info;
 	info.id = "SolarSystemEditor";
-	info.displayedName = "Comets and Asteroids";
+	info.displayedName = "Solar System Editor";
 	info.authors = "Bogdan Marinov";
 	info.contact = "http://stellarium.org";
-	info.description = "A plug-in that allows importing asteroid and comet data in different formats to Stellarium's ssystem.ini file. It's still a work in progress far from maturity.";
+	info.description = "An interface for adding asteroids and comets to Stellarium. It can download object lists from the Minor Planet Center's website and perform searches in its online database. Still a work in progress.";
 	return info;
 }
 
