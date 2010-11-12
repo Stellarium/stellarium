@@ -1,5 +1,5 @@
 /*
- * Comet and asteroids importer plug-in for Stellarium
+ * Solar System editor plug-in for Stellarium
  *
  * Copyright (C) 2010 Bogdan Marinov
  *
@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "CAImporter.hpp"
+#include "SolarSystemEditor.hpp"
 
 #include "MpcImportWindow.hpp"
 #include "ui_mpcImportWindow.h"
@@ -45,7 +45,7 @@
 MpcImportWindow::MpcImportWindow()
 {
 	ui = new Ui_mpcImportWindow();
-	ssoManager = GETSTELMODULE(CAImporter);
+	ssoManager = GETSTELMODULE(SolarSystemEditor);
 
 	networkManager = StelApp::getInstance().getNetworkAccessManager();
 
@@ -232,11 +232,11 @@ void MpcImportWindow::addObjects()
 
 	if (ui->radioButtonUpdate->isChecked())
 	{
-		CAImporter::UpdateFlags flags(CAImporter::UpdateNameAndNumber | CAImporter::UpdateOrbitalElements);
+		SolarSystemEditor::UpdateFlags flags(SolarSystemEditor::UpdateNameAndNumber | SolarSystemEditor::UpdateOrbitalElements);
 		if (!ui->checkBoxOnlyOrbitalElements->isChecked())
 		{
-			flags |= CAImporter::UpdateType;
-			flags |= CAImporter::UpdateMagnitudeParameters;
+			flags |= SolarSystemEditor::UpdateType;
+			flags |= SolarSystemEditor::UpdateMagnitudeParameters;
 		}
 
 		ssoManager->updateSolarSystemConfigurationFile(approvedForUpdate, flags);
@@ -855,7 +855,7 @@ void MpcImportWindow::loadBookmarks()
 	bookmarks[MpcComets].clear();
 	bookmarks[MpcMinorPlanets].clear();
 
-	QString bookmarksFilePath(StelFileMgr::getUserDir() + "/modules/SolarSystem/bookmarks.json");
+	QString bookmarksFilePath(StelFileMgr::getUserDir() + "/modules/SolarSystemEditor/bookmarks.json");
 	if (StelFileMgr::isReadable(bookmarksFilePath))
 	{
 		QFile bookmarksFile(bookmarksFilePath);

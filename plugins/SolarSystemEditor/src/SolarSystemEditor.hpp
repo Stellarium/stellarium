@@ -1,5 +1,5 @@
 /*
- * Comet and asteroids importer plug-in for Stellarium
+ * Solar System editor plug-in for Stellarium
  * 
  * Copyright (C) 2010 Bogdan Marinov
  *
@@ -18,8 +18,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _C_A_IMPORTER_HPP_
-#define _C_A_IMPORTER_HPP_
+#ifndef _SOLAR_SYSTEM_EDITOR_HPP_
+#define _SOLAR_SYSTEM_EDITOR_HPP_
 
 #include "StelGui.hpp"
 #include "StelModule.hpp"
@@ -48,21 +48,21 @@ class QSettings;
 typedef QHash<QString, QVariant> SsoElements;
 
 /*!
- \class CAImporter
- \brief Main class of the Comets and Asteroids Importer plug-in.
+ \class SolarSystemEditor
+ \brief Main class of the Solar System Editor plug-in.
  \author Bogdan Marinov
 
  Solar System bodies are identified by their names in Stellarium, but entries
  in the configuration file are identified by their group (section) names.
  This makes more difficult the detection of duplicates.
 */
-class CAImporter : public StelModule
+class SolarSystemEditor : public StelModule
 {
 	Q_OBJECT
 
 public:
-	CAImporter();
-	virtual ~CAImporter();
+	SolarSystemEditor();
+	virtual ~SolarSystemEditor();
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods inherited from the StelModule class
@@ -272,7 +272,7 @@ private:
 #include "StelPluginInterface.hpp"
 
 //! This class is used by Qt to manage a plug-in interface
-class CAImporterStelPluginInterface : public QObject, public StelPluginInterface
+class SolarSystemEditorStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
 	Q_INTERFACES(StelPluginInterface)
@@ -281,4 +281,4 @@ public:
 	virtual StelPluginInfo getPluginInfo() const;
 };
 
-#endif //_C_A_IMPORTER_HPP_
+#endif //_SOLAR_SYSTEM_EDITOR_HPP_

@@ -1,5 +1,5 @@
 /*
- * Comet and asteroids importer plug-in for Stellarium
+ * Solar System editor plug-in for Stellarium
  *
  * Copyright (C) 2010 Bogdan Marinov
  *
@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "CAImporter.hpp"
+#include "SolarSystemEditor.hpp"
 
 #include "ManualImportWindow.hpp"
 #include "ui_manualImportWindow.h"
@@ -36,7 +36,7 @@
 ManualImportWindow::ManualImportWindow()
 {
 	ui = new Ui_manualImportWindow();
-	ssoManager = GETSTELMODULE(CAImporter);
+	ssoManager = GETSTELMODULE(SolarSystemEditor);
 }
 
 ManualImportWindow::~ManualImportWindow()

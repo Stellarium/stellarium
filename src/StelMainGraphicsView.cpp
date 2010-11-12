@@ -93,8 +93,8 @@ Q_IMPORT_PLUGIN(Oculars)
 Q_IMPORT_PLUGIN(TelescopeControl)
 #endif
 
-#ifdef USE_STATIC_PLUGIN_CAIMPORTER
-Q_IMPORT_PLUGIN(CAImporter)
+#ifdef USE_STATIC_PLUGIN_SOLARSYSTEMEDITOR
+Q_IMPORT_PLUGIN(SolarSystemEditor)
 #endif
 
 // Initialize static variables
