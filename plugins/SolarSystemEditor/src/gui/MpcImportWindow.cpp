@@ -88,8 +88,8 @@ void MpcImportWindow::createDialogContent()
 	connect(ui->pushButtonAdd, SIGNAL(clicked()), this, SLOT(addObjects()));
 	connect(ui->pushButtonDiscard, SIGNAL(clicked()), this, SLOT(discardObjects()));
 
-	//connect(ui->pushButtonPaste, SIGNAL(clicked()), this, SLOT(pasteClipboard()));
 	connect(ui->pushButtonBrowse, SIGNAL(clicked()), this, SLOT(selectFile()));
+	connect(ui->pushButtonPasteURL, SIGNAL(clicked()), this, SLOT(pasteClipboardURL()));
 	connect(ui->comboBoxBookmarks, SIGNAL(currentIndexChanged(QString)), this, SLOT(bookmarkSelected(QString)));
 
 	//connect(ui->radioButtonSingle, SIGNAL(toggled(bool)), ui->frameSingle, SLOT(setVisible(bool)));
@@ -125,9 +125,10 @@ void MpcImportWindow::resetDialog()
 	ui->frameURL->setVisible(false);
 
 	ui->lineEditFilePath->clear();
-	ui->lineEditURL->clear();
 	ui->lineEditQuery->clear();
+	ui->lineEditURL->setText("http://");
 	ui->checkBoxAddBookmark->setChecked(false);
+	ui->frameBookmarkTitle->setVisible(false);
 	ui->comboBoxBookmarks->setCurrentIndex(0);
 
 	ui->radioButtonUpdate->setChecked(true);
@@ -256,9 +257,9 @@ void MpcImportWindow::discardObjects()
 	close();
 }
 
-void MpcImportWindow::pasteClipboard()
+void MpcImportWindow::pasteClipboardURL()
 {
-	//ui->lineEditSingle->setText(QApplication::clipboard()->text());
+	ui->lineEditURL->setText(QApplication::clipboard()->text());
 }
 
 void MpcImportWindow::selectFile()
@@ -594,10 +595,13 @@ void MpcImportWindow::downloadComplete(QNetworkReply *reply)
 		if (ui->checkBoxAddBookmark->isChecked())
 		{
 			QString url = reply->url().toString();
+			QString title = ui->lineEditBookmarkTitle->text().trimmed();
+			//If no title has been entered, use the URL as a title
+			if (title.isEmpty())
+				title = url;
 			if (!bookmarks.value(importType).values().contains(url))
 			{
-				//Use the URL as a title for now
-				bookmarks[importType].insert(url, url);
+				bookmarks[importType].insert(title, url);
 				populateBookmarksList();
 				saveBookmarks();
 			}
