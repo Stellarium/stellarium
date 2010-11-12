@@ -1,5 +1,5 @@
 /*
- * Comet and asteroids importer plug-in for Stellarium
+ * Solar System editor plug-in for Stellarium
  * 
  * Copyright (C) 2010 Bogdan Marinov
  *
@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "CAImporter.hpp"
+#include "SolarSystemEditor.hpp"
 #include "SolarSystemManagerWindow.hpp"
 
 #include "StelApp.hpp"
@@ -42,17 +42,17 @@
 #include <stdexcept>
 
 
-StelModule* CAImporterStelPluginInterface::getStelModule() const
+StelModule* SolarSystemEditorStelPluginInterface::getStelModule() const
 {
-	return new CAImporter();
+	return new SolarSystemEditor();
 }
 
-StelPluginInfo CAImporterStelPluginInterface::getPluginInfo() const
+StelPluginInfo SolarSystemEditorStelPluginInterface::getPluginInfo() const
 {
-	//Q_INIT_RESOURCE(caImporter);
+	//Q_INIT_RESOURCE(solarSystemEditor);
 	
 	StelPluginInfo info;
-	info.id = "CAImporter";
+	info.id = "SolarSystemEditor";
 	info.displayedName = "Comets and Asteroids";
 	info.authors = "Bogdan Marinov";
 	info.contact = "http://stellarium.org";
@@ -60,11 +60,11 @@ StelPluginInfo CAImporterStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(CAImporter, CAImporterStelPluginInterface)
+Q_EXPORT_PLUGIN2(SolarSystemEditor, SolarSystemEditorStelPluginInterface)
 
-CAImporter::CAImporter()
+SolarSystemEditor::SolarSystemEditor()
 {
-	setObjectName("CAImporter");
+	setObjectName("SolarSystemEditor");
 
 	isInitialized = false;
 	mainWindow = NULL;
@@ -76,7 +76,7 @@ CAImporter::CAImporter()
 	customSolarSystemFilePath	= QFileInfo(StelFileMgr::getUserDir() + "/data/ssystem.ini").absoluteFilePath();
 }
 
-CAImporter::~CAImporter()
+SolarSystemEditor::~SolarSystemEditor()
 {
 	if (solarSystemConfigurationFile != NULL)
 	{
@@ -84,7 +84,7 @@ CAImporter::~CAImporter()
 	}
 }
 
-void CAImporter::init()
+void SolarSystemEditor::init()
 {
 	//Get a list of the "default" Solar System objects' names:
 	//TODO: Use it as validation for the loading of the plug-in
@@ -116,27 +116,27 @@ void CAImporter::init()
 	isInitialized = true;
 }
 
-void CAImporter::deinit()
+void SolarSystemEditor::deinit()
 {
 	//
 }
 
-void CAImporter::update(double) //deltaTime
+void SolarSystemEditor::update(double) //deltaTime
 {
 	//
 }
 
-void CAImporter::draw(StelCore*) //core
+void SolarSystemEditor::draw(StelCore*) //core
 {
 	//
 }
 
-double CAImporter::getCallOrder(StelModuleActionName) const// actionName
+double SolarSystemEditor::getCallOrder(StelModuleActionName) const// actionName
 {
 	return 0.;
 }
 
-bool CAImporter::configureGui(bool show)
+bool SolarSystemEditor::configureGui(bool show)
 {
 	//If the plug-in has failed to initialize, disable the button
 	//TODO: Display a message in the window instead.
@@ -183,7 +183,7 @@ bool CAImporter::configureGui(bool show)
 	return true;
 }
 
-void CAImporter::updateI18n()
+void SolarSystemEditor::updateI18n()
 {
 	//The Solar System MUST be translated before updating the window
 	//TODO: Remove this if/when you merge this module in the Solar System module
@@ -195,7 +195,7 @@ void CAImporter::updateI18n()
 	}
 }
 
-bool CAImporter::cloneSolarSystemConfigurationFile()
+bool SolarSystemEditor::cloneSolarSystemConfigurationFile()
 {
 	QDir userDataDirectory(StelFileMgr::getUserDir());
 	if (!userDataDirectory.exists())
@@ -227,7 +227,7 @@ bool CAImporter::cloneSolarSystemConfigurationFile()
 	}
 }
 
-bool CAImporter::resetSolarSystemConfigurationFile()
+bool SolarSystemEditor::resetSolarSystemConfigurationFile()
 {
 	if (QFile::exists(customSolarSystemFilePath))
 	{
@@ -242,7 +242,7 @@ bool CAImporter::resetSolarSystemConfigurationFile()
 	return cloneSolarSystemConfigurationFile();
 }
 
-void CAImporter::resetSolarSystemToDefault()
+void SolarSystemEditor::resetSolarSystemToDefault()
 {
 	if (isInitialized)
 	{
@@ -259,7 +259,7 @@ void CAImporter::resetSolarSystemToDefault()
 	}
 }
 
-bool CAImporter::copySolarSystemConfigurationFileTo(QString filePath)
+bool SolarSystemEditor::copySolarSystemConfigurationFileTo(QString filePath)
 {
 	if (QFile::exists(customSolarSystemFilePath))
 	{
@@ -272,7 +272,7 @@ bool CAImporter::copySolarSystemConfigurationFileTo(QString filePath)
 	}
 }
 
-bool CAImporter::replaceSolarSystemConfigurationFileWith(QString filePath)
+bool SolarSystemEditor::replaceSolarSystemConfigurationFileWith(QString filePath)
 {
 	if (!QFile::exists(filePath))
 	{
@@ -323,7 +323,7 @@ bool CAImporter::replaceSolarSystemConfigurationFileWith(QString filePath)
 	}
 }
 
-QHash<QString,QString> CAImporter::listAllLoadedObjectsInFile(QString filePath)
+QHash<QString,QString> SolarSystemEditor::listAllLoadedObjectsInFile(QString filePath)
 {
 	if (!QFile::exists(filePath))
 		return QHash<QString,QString>();
@@ -346,7 +346,7 @@ QHash<QString,QString> CAImporter::listAllLoadedObjectsInFile(QString filePath)
 	return loadedObjects;
 }
 
-QHash<QString,QString> CAImporter::listAllLoadedSsoIdentifiers()
+QHash<QString,QString> SolarSystemEditor::listAllLoadedSsoIdentifiers()
 {
 	if (QFile::exists(customSolarSystemFilePath))
 	{
@@ -359,7 +359,7 @@ QHash<QString,QString> CAImporter::listAllLoadedSsoIdentifiers()
 	}
 }
 
-bool CAImporter::removeSsoWithName(QString name)
+bool SolarSystemEditor::removeSsoWithName(QString name)
 {
 	if (name.isEmpty())
 		return false;
@@ -420,7 +420,7 @@ bool CAImporter::removeSsoWithName(QString name)
   "0128P      b  2007 06 13.8064  3.062504  0.320891  210.3319  214.3583    4.3606  20100723   8.5  4.0  128P/Shoemaker-Holt                                      MPC 51822" -> fragment?
   "0141P      d  2010 05 29.7106  0.757809  0.749215  149.3298  246.0849   12.8032  20100723  12.0 12.0  141P/Machholz                                            MPC 59599" -> fragment?
 */
-SsoElements CAImporter::readMpcOneLineCometElements(QString oneLineElements)
+SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElements)
 {
 	SsoElements result;
 
@@ -508,7 +508,7 @@ SsoElements CAImporter::readMpcOneLineCometElements(QString oneLineElements)
 	return result;
 }
 
-SsoElements CAImporter::readMpcOneLineMinorPlanetElements(QString oneLineElements)
+SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLineElements)
 {
 	SsoElements result;
 
@@ -738,7 +738,7 @@ SsoElements CAImporter::readMpcOneLineMinorPlanetElements(QString oneLineElement
 	return result;
 }
 
-QList<SsoElements> CAImporter::readMpcOneLineCometElementsFromFile(QString filePath)
+QList<SsoElements> SolarSystemEditor::readMpcOneLineCometElementsFromFile(QString filePath)
 {
 	QList<SsoElements> objectList;
 
@@ -792,7 +792,7 @@ QList<SsoElements> CAImporter::readMpcOneLineCometElementsFromFile(QString fileP
 	return objectList;
 }
 
-QList<SsoElements> CAImporter::readMpcOneLineMinorPlanetElementsFromFile(QString filePath)
+QList<SsoElements> SolarSystemEditor::readMpcOneLineMinorPlanetElementsFromFile(QString filePath)
 {
 	QList<SsoElements> objectList;
 
@@ -846,7 +846,7 @@ QList<SsoElements> CAImporter::readMpcOneLineMinorPlanetElementsFromFile(QString
 	return objectList;
 }
 
-bool CAImporter::appendToSolarSystemConfigurationFile(QList<SsoElements> objectList)
+bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> objectList)
 {
 	if (objectList.isEmpty())
 	{
@@ -938,7 +938,7 @@ bool CAImporter::appendToSolarSystemConfigurationFile(QList<SsoElements> objectL
 	}
 }
 
-bool CAImporter::appendToSolarSystemConfigurationFile(SsoElements object)
+bool SolarSystemEditor::appendToSolarSystemConfigurationFile(SsoElements object)
 {
 	if (!object.contains("section_name") || object.value("section_name").toString().isEmpty())
 	{
@@ -951,7 +951,7 @@ bool CAImporter::appendToSolarSystemConfigurationFile(SsoElements object)
 	return appendToSolarSystemConfigurationFile(list);
 }
 
-bool CAImporter::updateSolarSystemConfigurationFile(QList<SsoElements> objectList, UpdateFlags flags)
+bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> objectList, UpdateFlags flags)
 {
 	if (objectList.isEmpty())
 	{
@@ -1091,7 +1091,7 @@ bool CAImporter::updateSolarSystemConfigurationFile(QList<SsoElements> objectLis
 	return true;
 }
 
-void CAImporter::updateSsoProperty(QSettings & settings, SsoElements & properties, QString key)
+void SolarSystemEditor::updateSsoProperty(QSettings & settings, SsoElements & properties, QString key)
 {
 	if (properties.contains(key))
 	{
@@ -1099,7 +1099,7 @@ void CAImporter::updateSsoProperty(QSettings & settings, SsoElements & propertie
 	}
 }
 
-int CAImporter::unpackDayOrMonthNumber(QChar digit)
+int SolarSystemEditor::unpackDayOrMonthNumber(QChar digit)
 {
 	//0-9, 0 is an invalid value, but the function is supposed to return 0 on failure.
 	if (digit.isDigit())
@@ -1120,7 +1120,7 @@ int CAImporter::unpackDayOrMonthNumber(QChar digit)
 	}
 }
 
-int CAImporter::unpackYearNumber (QChar prefix, int lastTwoDigits)
+int SolarSystemEditor::unpackYearNumber (QChar prefix, int lastTwoDigits)
 {
 	int year = lastTwoDigits;
 	if (prefix == 'I')
@@ -1137,7 +1137,7 @@ int CAImporter::unpackYearNumber (QChar prefix, int lastTwoDigits)
 
 //Can be used both for minor planets and comets with no additional modification,
 //as the regular expression for comets will match only capital letters.
-int CAImporter::unpackAlphanumericNumber (QChar prefix, int lastDigit)
+int SolarSystemEditor::unpackAlphanumericNumber (QChar prefix, int lastDigit)
 {
 	int cycleCount = lastDigit;
 	if (prefix.isDigit())
@@ -1152,7 +1152,7 @@ int CAImporter::unpackAlphanumericNumber (QChar prefix, int lastDigit)
 	return cycleCount;
 }
 
-QString CAImporter::unpackMinorPlanetProvisionalDesignation (QString packedDesignation)
+QString SolarSystemEditor::unpackMinorPlanetProvisionalDesignation (QString packedDesignation)
 {
 	QRegExp packedFormat("^([IJK])(\\d\\d)([A-Z])([\\dA-Za-z])(\\d)([A-Z])$");
 	if (packedFormat.indexIn(packedDesignation) != 0)

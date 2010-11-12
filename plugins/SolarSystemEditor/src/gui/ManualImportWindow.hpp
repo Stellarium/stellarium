@@ -1,5 +1,5 @@
 /*
- * Comet and asteroids importer plug-in for Stellarium
+ * Solar System editor plug-in for Stellarium
  *
  * Copyright (C) 2010 Bogdan Marinov
  *
@@ -24,7 +24,7 @@
 #include <QObject>
 #include "StelDialog.hpp"
 
-#include "CAImporter.hpp"
+#include "SolarSystemEditor.hpp"
 
 #include <QColor>
 
@@ -59,7 +59,7 @@ private slots:
 	//TODO: Parse input in the line edits? (Otherwise, leave them read-only.)
 
 private:
-	CAImporter * ssoManager;
+	SolarSystemEditor * ssoManager;
 
 	QColor objectColor;
 

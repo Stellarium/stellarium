@@ -1,5 +1,5 @@
 /*
- * Comet and asteroids importer plug-in for Stellarium
+ * Solar System editor plug-in for Stellarium
  *
  * Copyright (C) 2010 Bogdan Marinov
  *
@@ -27,7 +27,7 @@
 #include <QHash>
 #include <QString>
 
-class CAImporter;
+class SolarSystemEditor;
 
 class Ui_solarSystemManagerWindow;
 class MpcImportWindow;
@@ -65,7 +65,7 @@ private:
 	MpcImportWindow* mpcImportWindow;
 	ManualImportWindow * manualImportWindow;
 
-	CAImporter * ssoManager;
+	SolarSystemEditor * ssoManager;
 
 	QHash<QString,QString> unlocalizedNames;
 };
