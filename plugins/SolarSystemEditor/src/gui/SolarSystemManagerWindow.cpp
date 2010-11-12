@@ -69,6 +69,9 @@ void SolarSystemManagerWindow::createDialogContent()
 	connect(ui->pushButtonReset, SIGNAL(clicked()), ssoManager, SLOT(resetSolarSystemToDefault()));
 
 	ui->labelVersion->setText(QString("Version %1").arg(PLUGIN_VERSION));
+	//Remove the "Data Import" tab
+	//TODO: (temporary, until the ManualImportWindow is finished)
+	ui->tabWidget->removeTab(2);
 
 	Q_ASSERT(mpcImportWindow);
 	//Rebuild the list if any planets have been imported
