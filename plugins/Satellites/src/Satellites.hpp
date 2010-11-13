@@ -42,7 +42,7 @@ class SatellitesDialog;
 typedef QSharedPointer<Satellite> SatelliteP;
 
 //! @class Satellites
-//! Satellites in low Earth orbith require different orbital calculations from planets, the moon
+//! Satellites in low Earth orbit require different orbital calculations from planets, the moon
 //! and so on.  This plugin implements the SGP4/SDP4 algorithms in Stellarium, allowing accurate
 //! prediction of the position of artificial satellites.
 class Satellites : public StelObjectModule
@@ -115,6 +115,9 @@ public:
 	//! Read (or re-read) settings from the main config file.  This will be called from init and also
 	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
 	void readSettingsFromConfig(void);
+
+	//! Save the settings to the main configuration file.
+	void saveSettingsToConfig(void);
 
 	//! Get a list of satellite group names.  A Satellite may be long to one or more group
 	//! e.g. "amateur" and "navigation".  Group names are arbitrary strings defined in the 
@@ -192,6 +195,8 @@ public slots:
 	//! module.ini file and update the TLE values for any satellites for which
 	//! there is new TLE data.
 	void updateTLEs(void);
+
+	void recalculateOrbitLines(void);
 
 private:
 	// if existing, delete Satellites section in main config.ini, then create with default values

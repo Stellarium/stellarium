@@ -61,18 +61,6 @@ void SatellitesDialog::languageChanged()
 		ui->retranslateUi(dialog);
 }
 
-void SatellitesDialog::updateStyle()
-{
-	if (dialog)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		Q_ASSERT(gui);
-		const StelStyle pluginStyle = GETSTELMODULE(Satellites)->getModuleStyleSheet(gui->getStelStyle());
-		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
-		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
-	}
-}
-
 // Initialize the dialog widgets and connect the signals/slots
 void SatellitesDialog::createDialogContent()
 {
@@ -91,11 +79,19 @@ void SatellitesDialog::createDialogContent()
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 		updateTimer->start(7000);
 
+	ui->orbitSegmentsSpin->setValue(Satellite::orbitLineSegments);
+	ui->orbitFadeSpin->setValue(Satellite::orbitLineFadeSegments);
+	ui->orbitDurationSpin->setValue(Satellite::orbitLineSegmentDuration);
+
 	// Settings tab / General settings group
 	connect(ui->showLabelsCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getGui()->getGuiActions("actionShow_Satellite_Labels"), SLOT(setChecked(bool)));
 	connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)), GETSTELMODULE(Satellites), SLOT(setLabelFontSize(int)));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
+
+	connect(ui->orbitSegmentsSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
+	connect(ui->orbitFadeSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
+	connect(ui->orbitDurationSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
 
 	// Satellites tab
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -105,6 +101,7 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->showButton, SIGNAL(clicked()), this, SLOT(showSelectedSatellites()));
 	connect(ui->hideButton, SIGNAL(clicked()), this, SLOT(hideSelectedSatellites()));
 	connect(ui->visibleCheckbox, SIGNAL(stateChanged(int)), this, SLOT(visibleCheckChanged(int)));
+	connect(ui->orbitCheckbox, SIGNAL(clicked(bool)), this, SLOT(orbitCheckChanged(bool)));
 
 	// Sources tab
 	connect(ui->sourceList, SIGNAL(currentTextChanged(const QString&)), ui->sourceEdit, SLOT(setText(const QString&)));
@@ -120,8 +117,6 @@ void SatellitesDialog::createDialogContent()
 
 	updateGuiFromSettings();
 
-	//Initialize the style
-	updateStyle();
 }
 
 void SatellitesDialog::groupFilterChanged(int index)
@@ -173,6 +168,7 @@ void SatellitesDialog::selectedSatelliteChanged(const QString& id)
 	ui->groupsTextEdit->setText(sat->groupIDs.join(", "));
 	ui->tleTextEdit->setText(QString(sat->elements[1]) + "\n" + QString(sat->elements[2]));
 	ui->visibleCheckbox->setChecked(sat->visible);
+	ui->orbitCheckbox->setChecked(sat->orbitVisible);
 	ui->commsButton->setEnabled(sat->comms.count()>0);
 }
 
@@ -186,7 +182,8 @@ void SatellitesDialog::setAboutHtml(void)
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Stellarium Satellites Plugin") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td>" + q_("Version:") + "</td><td>" + PLUGIN_VERSION + "</td></td>";
-	html += "<tr><td>" + q_("Author:") + "</td><td>Matthew Gates &lt;matthew@porpoisehead.net&gt;</td></td>";
+	html += "<tr><td>" + q_("Authors:") + "</td><td>Matthew Gates &lt;matthew@porpoisehead.net&gt;</td></td>";
+	html += "<tr><td></td><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></td>";
 	html += "<tr><td>" + q_("Website:") + "</td><td><a href=\"http://stellarium.org/\">stellarium.org</a></td></td></table>";
 	html += "<p>";
 	html += q_("This is the Satellites plugin for Stellarium. ");
@@ -248,12 +245,12 @@ void SatellitesDialog::updateCompleteReceiver(int numUpdated)
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 }
 
-void SatellitesDialog::close(void)
-{
-	qDebug() << "Closing Satellites Configure Dialog";
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	gui->getGuiActions("actionShow_Satellite_ConfigDialog")->setChecked(false);
-}
+//void SatellitesDialog::close(void)
+//{
+//	qDebug() << "Closing Satellites Configure Dialog";
+//	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+//	gui->getGuiActions("actionShow_Satellite_ConfigDialog")->setChecked(false);
+//}
 
 void SatellitesDialog::sourceEditingDone(void)
 {
@@ -339,7 +336,7 @@ void SatellitesDialog::updateGuiFromSettings(void)
 
 void SatellitesDialog::saveSettings(void)
 {
-	//qDebug() << "Satellites::saveSettings not implemented yet!";
+	GETSTELMODULE(Satellites)->saveSettingsToConfig();
 }
 
 void SatellitesDialog::showSelectedSatellites(void)
@@ -372,6 +369,16 @@ void SatellitesDialog::visibleCheckChanged(int state)
 	groupFilterChanged(ui->groupsCombo->currentIndex());
 }
 
+void SatellitesDialog::orbitCheckChanged(bool checked)
+{
+	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
+	{
+		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(i->text());
+		// sat->orbitVisible = (state==Qt::Checked);
+		sat->orbitVisible = checked;
+	}
+}
+
 void SatellitesDialog::satelliteDoubleClick(QListWidgetItem* item)
 {
 	qDebug() << "SatellitesDialog::satelliteDoubleClick for " << item->text();
@@ -381,5 +388,13 @@ void SatellitesDialog::satelliteDoubleClick(QListWidgetItem* item)
 		GETSTELMODULE(StelMovementMgr)->autoZoomIn();
 		GETSTELMODULE(StelMovementMgr)->setFlagTracking(true);
 	}
+}
+
+void SatellitesDialog::setOrbitParams(void)
+{
+	Satellite::orbitLineSegments = ui->orbitSegmentsSpin->value();
+	Satellite::orbitLineFadeSegments = ui->orbitFadeSpin->value();
+	Satellite::orbitLineSegmentDuration = ui->orbitDurationSpin->value();
+	GETSTELMODULE(Satellites)->recalculateOrbitLines();
 }
 
