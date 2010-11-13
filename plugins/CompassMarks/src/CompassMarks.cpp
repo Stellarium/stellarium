@@ -54,10 +54,10 @@ StelPluginInfo CompassMarksStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
 	info.id = "CompassMarks";
-	info.displayedName = "Compass Marks";
-	info.authors = "Matthew Gates";
+	info.displayedName = q_("Compass Marks");
+	info.authors = q_("Matthew Gates");
 	info.contact = "http://porpoisehead.net/";
-	info.description = "Displays compass bearing marks along the horizon";
+	info.description = q_("Displays compass bearing marks along the horizon");
 	return info;
 }
 
