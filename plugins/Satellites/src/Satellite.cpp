@@ -152,7 +152,7 @@ QVariantMap Satellite::getMap(void)
 	col << (double)hintColor[0] << (double)hintColor[1] << (double)hintColor[2];
 	orbitCol << (double)orbitColorNormal[0] << (double)orbitColorNormal[1] << (double)orbitColorNormal[2];
 	map["hintColor"] = col;
-	map["orbitColorNormal"] = orbitCol;
+	map["orbitColor"] = orbitCol;
 	QVariantList commList;
 	foreach(commLink c, comms)
 	{
