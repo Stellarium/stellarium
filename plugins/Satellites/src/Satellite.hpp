@@ -28,6 +28,7 @@
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
+#include "StelSphereGeometry.hpp"
 
 #include "StelPainter.hpp"
 #include "gsatellite/gSatTEME.hpp"
@@ -127,6 +128,7 @@ private:
 	static StelTextureSP hintTexture;
 	static float hintBrightness;
 	static float hintScale;
+	static SphericalCap viewportHalfspace;
 
 	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
 	void setObserverLocation(StelLocation* loc=NULL);
