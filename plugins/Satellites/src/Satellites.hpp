@@ -116,6 +116,9 @@ public:
 	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
 	void readSettingsFromConfig(void);
 
+	//! Save the settings to the main configuration file.
+	void saveSettingsToConfig(void);
+
 	//! Get a list of satellite group names.  A Satellite may be long to one or more group
 	//! e.g. "amateur" and "navigation".  Group names are arbitrary strings defined in the 
 	//! json file.  Think of them like tags.  A satellite may not belong to any group at all.
@@ -192,6 +195,8 @@ public slots:
 	//! module.ini file and update the TLE values for any satellites for which
 	//! there is new TLE data.
 	void updateTLEs(void);
+
+	void recalculateOrbitLines(void);
 
 private:
 	// if existing, delete Satellites section in main config.ini, then create with default values

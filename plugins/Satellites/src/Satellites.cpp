@@ -133,6 +133,7 @@ void Satellites::init()
 		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Satellite_ConfigDialog"), SLOT(setChecked(bool)));
 		connect(gui->getGuiActions("actionShow_Satellite_Hints"), SIGNAL(toggled(bool)), this, SLOT(setFlagHints(bool)));
 		connect(gui->getGuiActions("actionShow_Satellite_Labels"), SIGNAL(toggled(bool)), this, SLOT(setFlagLabels(bool)));
+
 	}
 	catch (std::runtime_error &e)
 	{
@@ -348,6 +349,9 @@ void Satellites::restoreDefaultConfigIni(void)
 	conf->setValue("tle_url6", "http://celestrak.com/NORAD/elements/iridium.txt");
 	conf->setValue("tle_url7", "http://celestrak.com/NORAD/elements/tle-new.txt");
 	conf->setValue("update_frequency_hours", 72);
+	conf->setValue("orbit_line_segments", 90);
+	conf->setValue("orbit_fade_segments", 5);
+	conf->setValue("orbit_segment_duration", 20);
 	conf->endGroup();
 }
 
@@ -400,6 +404,50 @@ void Satellites::readSettingsFromConfig(void)
 
 	// Get a font for labels
 	labelFont.setPixelSize(conf->value("hint_font_size", 10).toInt());
+
+	// orbit drawing params
+	Satellite::orbitLineSegments = conf->value("orbit_line_segments", 90).toInt();
+	Satellite::orbitLineFadeSegments = conf->value("orbit_fade_segments", 5).toInt();
+	Satellite::orbitLineSegmentDuration = conf->value("orbit_segment_duration", 20).toInt();
+
+	conf->endGroup();
+}
+
+void Satellites::saveSettingsToConfig(void)
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	conf->beginGroup("Satellites");
+
+	// update tle urls... first clear the existing ones in the file
+	QRegExp keyRE("^tle_url\\d+$");
+	foreach(QString key, conf->childKeys())
+	{
+		if (keyRE.exactMatch(key))
+			conf->remove(key);
+	}
+
+
+	// populate updateUrls from tle_url? keys
+	int n=0;
+	foreach(QString url, updateUrls)
+	{
+		QString key = QString("tle_url%1").arg(n++);
+		conf->setValue(key, url);
+	}
+
+	// updater related settings...
+	conf->setValue("update_frequency_hours", updateFrequencyHours);
+	conf->setValue("show_satellite_hints", (bool)hintFader);
+	conf->setValue("show_satellite_labels", Satellite::showLabels);
+	conf->setValue("updates_enabled", updatesEnabled );
+
+	// Get a font for labels
+	conf->setValue("hint_font_size", labelFont.pixelSize());
+
+	// orbit drawing params
+	conf->setValue("orbit_line_segments", Satellite::orbitLineSegments);
+	conf->setValue("orbit_fade_segments", Satellite::orbitLineFadeSegments);
+	conf->setValue("orbit_segment_duration", Satellite::orbitLineSegmentDuration);
 
 	conf->endGroup();
 }
@@ -621,11 +669,17 @@ void Satellites::observerLocationChanged(StelLocation loc)
 	foreach(const SatelliteP& sat, satellites)
 	{
 		if (sat->initialized && sat->visible)
-		{
 			sat->setObserverLocation(&loc);
-			if (sat->orbitVisible)
-				sat->recalculateOrbitLines();
-		}
+	}
+	recalculateOrbitLines();
+}
+
+void Satellites::recalculateOrbitLines(void)
+{
+	foreach(const SatelliteP& sat, satellites)
+	{
+		if (sat->initialized && sat->visible && sat->orbitVisible)
+			sat->recalculateOrbitLines();
 	}
 }
 

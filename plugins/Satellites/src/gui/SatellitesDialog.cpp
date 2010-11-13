@@ -79,11 +79,19 @@ void SatellitesDialog::createDialogContent()
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 		updateTimer->start(7000);
 
+	ui->orbitSegmentsSpin->setValue(Satellite::orbitLineSegments);
+	ui->orbitFadeSpin->setValue(Satellite::orbitLineFadeSegments);
+	ui->orbitDurationSpin->setValue(Satellite::orbitLineSegmentDuration);
+
 	// Settings tab / General settings group
 	connect(ui->showLabelsCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getGui()->getGuiActions("actionShow_Satellite_Labels"), SLOT(setChecked(bool)));
 	connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)), GETSTELMODULE(Satellites), SLOT(setLabelFontSize(int)));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
+
+	connect(ui->orbitSegmentsSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
+	connect(ui->orbitFadeSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
+	connect(ui->orbitDurationSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
 
 	// Satellites tab
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -328,7 +336,7 @@ void SatellitesDialog::updateGuiFromSettings(void)
 
 void SatellitesDialog::saveSettings(void)
 {
-	//qDebug() << "Satellites::saveSettings not implemented yet!";
+	GETSTELMODULE(Satellites)->saveSettingsToConfig();
 }
 
 void SatellitesDialog::showSelectedSatellites(void)
@@ -380,5 +388,13 @@ void SatellitesDialog::satelliteDoubleClick(QListWidgetItem* item)
 		GETSTELMODULE(StelMovementMgr)->autoZoomIn();
 		GETSTELMODULE(StelMovementMgr)->setFlagTracking(true);
 	}
+}
+
+void SatellitesDialog::setOrbitParams(void)
+{
+	Satellite::orbitLineSegments = ui->orbitSegmentsSpin->value();
+	Satellite::orbitLineFadeSegments = ui->orbitFadeSpin->value();
+	Satellite::orbitLineSegmentDuration = ui->orbitDurationSpin->value();
+	GETSTELMODULE(Satellites)->recalculateOrbitLines();
 }
 
