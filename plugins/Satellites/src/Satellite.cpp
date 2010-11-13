@@ -49,6 +49,7 @@ StelTextureSP Satellite::hintTexture;
 float Satellite::showLabels = true;
 float Satellite::hintBrightness = 0.0;
 float Satellite::hintScale = 1.f;
+SphericalCap Satellite::viewportHalfspace = SphericalCap();
 
 Satellite::Satellite(const QVariantMap& map)
 	: initialized(false), visible(true), hintColor(0.0,0.0,0.0)
@@ -365,11 +366,14 @@ void Satellite::drawOrbit(const StelCore* core, StelPainter& painter){
 		XYZPos = core->getNavigator()->j2000ToEquinoxEqu(core->getNavigator()->altAzToEquinoxEqu(pos));
 		it++;
 
+		pos.normalize();
+		posPrev.normalize();
+
 		// Draw end (fading) parts of orbit lines one segment at a time.
 		if (((DRAWORBIT_SLOTS_NUMBER/2) - abs(i - (DRAWORBIT_SLOTS_NUMBER/2) % DRAWORBIT_SLOTS_NUMBER)) < DRAWORBIT_FADE_NUMBER)
 		{
 			painter.setColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2], hintBrightness * calculateOrbitSegmentIntensity(i));
-			painter.drawGreatCircleArc(posPrev,pos,NULL);
+			painter.drawGreatCircleArc(posPrev, pos, &viewportHalfspace);
 		}
 		else {
 			vertexArray.vertex << posPrev << pos;
@@ -380,7 +384,7 @@ void Satellite::drawOrbit(const StelCore* core, StelPainter& painter){
 
 	// Draw center section of orbit in one go
 	painter.setColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2], hintBrightness);
-	painter.drawGreatCircleArcs(vertexArray, NULL);
+	painter.drawGreatCircleArcs(vertexArray, &viewportHalfspace);
 
 	glEnable(GL_TEXTURE_2D);
 }

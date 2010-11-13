@@ -795,6 +795,7 @@ void Satellites::draw(StelCore* core)
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 	Satellite::hintTexture->bind();
+	Satellite::viewportHalfspace = painter.getProjector()->getBoundingCap();
 	foreach (const SatelliteP& sat, satellites)
 	{
 		if (sat && sat->initialized && sat->visible)
