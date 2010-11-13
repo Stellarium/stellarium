@@ -37,11 +37,6 @@
 #include "gsatellite/gVector.hpp"
 
 
-#define DRAWORBIT_SLOTS_NUMBER    131
-#define DRAWORBIT_FADE_NUMBER     10
-#define DRAWORBIT_SLOT_SECNUMBER  10
-
-
 class StelPainter;
 class StelLocation;
 
@@ -105,7 +100,7 @@ public:
 private:
 	//draw orbits methods
 	void computeOrbitPoints();
-	void drawOrbit(const StelCore* core, StelPainter& painter);
+	void drawOrbit(StelPainter& painter);
 	//! returns 0 - 1.0 for the DRAWORBIT_FADE_NUMBER segments at
 	//! each end of an orbit, with 1 in the middle.
 	float calculateOrbitSegmentIntensity(int segNum);
@@ -129,6 +124,9 @@ private:
 	static float hintBrightness;
 	static float hintScale;
 	static SphericalCap viewportHalfspace;
+	static int orbitLineSegments;
+	static int orbitLineFadeSegments;
+	static int orbitLineSegmentDuration;
 
 	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
 	void setObserverLocation(StelLocation* loc=NULL);
