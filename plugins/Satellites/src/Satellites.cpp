@@ -61,7 +61,7 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 		StelPluginInfo info;
 		info.id = "Satellites";
 		info.displayedName = "Satellites";
-		info.authors = "Matthew Gates";
+		info.authors = "Matthew Gates, Jose Luis Canales";
 		info.contact = "http://stellarium.org/";
 		info.description = "Prediction of artificial satellite positions in Earth orbit based on NORAD TLE data";
 		return info;
@@ -70,7 +70,8 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 Q_EXPORT_PLUGIN2(Satellites, SatellitesStelPluginInterface)
 
 Satellites::Satellites()
-	: pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL), earth(NULL), defaultHintColor(0.,0.4,0.6), progressBar(NULL)
+	: pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL),
+	  earth(NULL), defaultHintColor(0.,0.4,0.6), progressBar(NULL)
 {
 	setObjectName("Satellites");
 	configDialog = new SatellitesDialog();
@@ -115,7 +116,7 @@ void Satellites::init()
 
 		// key bindings and other actions
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->addGuiActions("actionShow_Satellite_ConfigDialog", "Satellite Config Dialog", "Alt+Z", "Plugin Key Bindings", true, false);
+		gui->addGuiActions("actionShow_Satellite_ConfigDialog", "Satellite Config Dialog", "Alt+Z", "Plugin Key Bindings", true);
 		gui->addGuiActions("actionShow_Satellite_Hints", "Satellite Hints", "Ctrl+Z", "Plugin Key Bindings", true, false);
 		gui->getGuiActions("actionShow_Satellite_Hints")->setChecked(hintFader);
 		gui->addGuiActions("actionShow_Satellite_Labels", "Satellite Labels", "Shift+Z", "Plugin Key Bindings", true, false);
@@ -129,8 +130,10 @@ void Satellites::init()
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 
 		connect(gui->getGuiActions("actionShow_Satellite_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
+		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Satellite_ConfigDialog"), SLOT(setChecked(bool)));
 		connect(gui->getGuiActions("actionShow_Satellite_Hints"), SIGNAL(toggled(bool)), this, SLOT(setFlagHints(bool)));
 		connect(gui->getGuiActions("actionShow_Satellite_Labels"), SIGNAL(toggled(bool)), this, SLOT(setFlagLabels(bool)));
+
 	}
 	catch (std::runtime_error &e)
 	{
@@ -184,9 +187,15 @@ void Satellites::init()
 	styleSheetFile.close();
 }
 
-void Satellites::setStelStyle(const QString&)
+void Satellites::setStelStyle(const QString& mode)
 {
-	configDialog->updateStyle();
+	foreach(const SatelliteP& sat, satellites)
+	{
+		if (sat->initialized)
+		{
+			sat->setNightColors(mode=="night_color");
+		}
+	}
 }
 
 const StelStyle Satellites::getModuleStyleSheet(const StelStyle& style)
@@ -206,7 +215,7 @@ const StelStyle Satellites::getModuleStyleSheet(const StelStyle& style)
 double Satellites::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("StarMgr")->getCallOrder(actionName)+1.;
+		return StelApp::getInstance().getModuleMgr().getModule("SolarSystem")->getCallOrder(actionName)+1.;
 	return 0;
 }
 
@@ -340,6 +349,9 @@ void Satellites::restoreDefaultConfigIni(void)
 	conf->setValue("tle_url6", "http://celestrak.com/NORAD/elements/iridium.txt");
 	conf->setValue("tle_url7", "http://celestrak.com/NORAD/elements/tle-new.txt");
 	conf->setValue("update_frequency_hours", 72);
+	conf->setValue("orbit_line_segments", 90);
+	conf->setValue("orbit_fade_segments", 5);
+	conf->setValue("orbit_segment_duration", 20);
 	conf->endGroup();
 }
 
@@ -392,6 +404,50 @@ void Satellites::readSettingsFromConfig(void)
 
 	// Get a font for labels
 	labelFont.setPixelSize(conf->value("hint_font_size", 10).toInt());
+
+	// orbit drawing params
+	Satellite::orbitLineSegments = conf->value("orbit_line_segments", 90).toInt();
+	Satellite::orbitLineFadeSegments = conf->value("orbit_fade_segments", 5).toInt();
+	Satellite::orbitLineSegmentDuration = conf->value("orbit_segment_duration", 20).toInt();
+
+	conf->endGroup();
+}
+
+void Satellites::saveSettingsToConfig(void)
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	conf->beginGroup("Satellites");
+
+	// update tle urls... first clear the existing ones in the file
+	QRegExp keyRE("^tle_url\\d+$");
+	foreach(QString key, conf->childKeys())
+	{
+		if (keyRE.exactMatch(key))
+			conf->remove(key);
+	}
+
+
+	// populate updateUrls from tle_url? keys
+	int n=0;
+	foreach(QString url, updateUrls)
+	{
+		QString key = QString("tle_url%1").arg(n++);
+		conf->setValue(key, url);
+	}
+
+	// updater related settings...
+	conf->setValue("update_frequency_hours", updateFrequencyHours);
+	conf->setValue("show_satellite_hints", (bool)hintFader);
+	conf->setValue("show_satellite_labels", Satellite::showLabels);
+	conf->setValue("updates_enabled", updatesEnabled );
+
+	// Get a font for labels
+	conf->setValue("hint_font_size", labelFont.pixelSize());
+
+	// orbit drawing params
+	conf->setValue("orbit_line_segments", Satellite::orbitLineSegments);
+	conf->setValue("orbit_fade_segments", Satellite::orbitLineFadeSegments);
+	conf->setValue("orbit_segment_duration", Satellite::orbitLineSegmentDuration);
 
 	conf->endGroup();
 }
@@ -615,6 +671,16 @@ void Satellites::observerLocationChanged(StelLocation loc)
 		if (sat->initialized && sat->visible)
 			sat->setObserverLocation(&loc);
 	}
+	recalculateOrbitLines();
+}
+
+void Satellites::recalculateOrbitLines(void)
+{
+	foreach(const SatelliteP& sat, satellites)
+	{
+		if (sat->initialized && sat->visible && sat->orbitVisible)
+			sat->recalculateOrbitLines();
+	}
 }
 
 void Satellites::updateFromFiles(void)
@@ -784,6 +850,7 @@ void Satellites::draw(StelCore* core)
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 	Satellite::hintTexture->bind();
+	Satellite::viewportHalfspace = painter.getProjector()->getBoundingCap();
 	foreach (const SatelliteP& sat, satellites)
 	{
 		if (sat && sat->initialized && sat->visible)
