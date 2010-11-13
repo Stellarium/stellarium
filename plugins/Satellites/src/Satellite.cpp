@@ -50,6 +50,10 @@ float Satellite::showLabels = true;
 float Satellite::hintBrightness = 0.0;
 float Satellite::hintScale = 1.f;
 SphericalCap Satellite::viewportHalfspace = SphericalCap();
+int Satellite::orbitLineSegments = 90;
+int Satellite::orbitLineFadeSegments = 4;
+int Satellite::orbitLineSegmentDuration = 20;
+
 
 Satellite::Satellite(const QVariantMap& map)
 	: initialized(false), visible(true), hintColor(0.0,0.0,0.0)
@@ -330,14 +334,13 @@ void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 		}
 		painter.drawSprite2dMode(xy[0], xy[1], 11);
 
-		if(orbitVisible) drawOrbit(core, painter);
+		if(orbitVisible) drawOrbit(painter);
 	}
 }
 
 
-void Satellite::drawOrbit(const StelCore* core, StelPainter& painter){
+void Satellite::drawOrbit(StelPainter& painter){
 
-	Vec3d XYZPos, xy1;
 	Vec3d pos,posPrev;
 
 	float a, azimth, elev;
@@ -363,14 +366,13 @@ void Satellite::drawOrbit(const StelCore* core, StelPainter& painter){
 		elev   = it->at( ELEVATION);
 		a      = ( (azimth/KDEG2RAD)-90)*M_PI/180;
 		pos.set(sin(a),cos(a), tan( (elev/KDEG2RAD) * M_PI / 180.));
-		XYZPos = core->getNavigator()->j2000ToEquinoxEqu(core->getNavigator()->altAzToEquinoxEqu(pos));
 		it++;
 
 		pos.normalize();
 		posPrev.normalize();
 
 		// Draw end (fading) parts of orbit lines one segment at a time.
-		if (((DRAWORBIT_SLOTS_NUMBER/2) - abs(i - (DRAWORBIT_SLOTS_NUMBER/2) % DRAWORBIT_SLOTS_NUMBER)) < DRAWORBIT_FADE_NUMBER)
+		if (i<=orbitLineFadeSegments || orbitLineSegments-i < orbitLineFadeSegments)
 		{
 			painter.setColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2], hintBrightness * calculateOrbitSegmentIntensity(i));
 			painter.drawGreatCircleArc(posPrev, pos, &viewportHalfspace);
@@ -393,9 +395,9 @@ void Satellite::drawOrbit(const StelCore* core, StelPainter& painter){
 
 float Satellite::calculateOrbitSegmentIntensity(int segNum)
 {
-	int endDist = (DRAWORBIT_SLOTS_NUMBER/2) - abs(segNum - (DRAWORBIT_SLOTS_NUMBER/2) % DRAWORBIT_SLOTS_NUMBER);
-	if (endDist > DRAWORBIT_FADE_NUMBER) { return 1.0; }
-	else { return (endDist  + 1) / (DRAWORBIT_FADE_NUMBER + 1.0); }
+	int endDist = (orbitLineSegments/2) - abs(segNum-1 - (orbitLineSegments/2) % orbitLineSegments);
+	if (endDist > orbitLineFadeSegments) { return 1.0; }
+	else { return (endDist  + 1) / (orbitLineFadeSegments + 1.0); }
 }
 
 void Satellite::setNightColors(bool night)
@@ -407,10 +409,11 @@ void Satellite::setNightColors(bool night)
 }
 
 
-void Satellite::computeOrbitPoints(){
+void Satellite::computeOrbitPoints()
+{
 
-	gTimeSpan computeInterval(0,0,0,DRAWORBIT_SLOT_SECNUMBER);  //1/2 minute
-	gTimeSpan orbitSpan(0,0,0, DRAWORBIT_SLOTS_NUMBER*DRAWORBIT_SLOT_SECNUMBER/2);       //+- 15 minutes range.
+	gTimeSpan computeInterval(0, 0, 0, orbitLineSegmentDuration);
+	gTimeSpan orbitSpan(0, 0, 0, orbitLineSegments*orbitLineSegmentDuration/2);
 	gTime	  epochTm;
 	gVector   azElVector;
 	int	  diffSlots;
@@ -420,7 +423,7 @@ void Satellite::computeOrbitPoints(){
 	{
 		epochTm  = epochTime - orbitSpan;
 
-		for(int i=0; i< DRAWORBIT_SLOTS_NUMBER; i++)
+		for(int i=0; i<=orbitLineSegments; i++)
 		{
 			pSatellite->setEpoch( epochTm);
 			azElVector  = observer.calculateLook( *pSatellite, epochTm);
@@ -433,13 +436,13 @@ void Satellite::computeOrbitPoints(){
 	{ // compute next orbit point when clock runs forward
 
 		gTimeSpan diffTime = epochTime - lastEpochCompForOrbit;
-		diffSlots          = (int)(diffTime.getDblSeconds()/DRAWORBIT_SLOT_SECNUMBER);
+		diffSlots          = (int)(diffTime.getDblSeconds()/orbitLineSegmentDuration);
 
 		if(diffSlots > 0)
 		{
-			if( diffSlots > DRAWORBIT_SLOTS_NUMBER)
+			if( diffSlots > orbitLineSegments)
 			{
-				diffSlots = DRAWORBIT_SLOTS_NUMBER;
+				diffSlots = orbitLineSegments;
 				epochTm   = epochTime - orbitSpan;
 			}
 			else
@@ -462,13 +465,13 @@ void Satellite::computeOrbitPoints(){
 	else if(epochTime < lastEpochCompForOrbit)
 	{ // compute next orbit point when clock runs backward
 		gTimeSpan diffTime =  lastEpochCompForOrbit - epochTime;
-		diffSlots          = (int)(diffTime.getDblSeconds()/DRAWORBIT_SLOT_SECNUMBER);
+		diffSlots          = (int)(diffTime.getDblSeconds()/orbitLineSegmentDuration);
 
 		if(diffSlots > 0)
 		{
-			if( diffSlots > DRAWORBIT_SLOTS_NUMBER)
+			if( diffSlots > orbitLineSegments)
 			{
-				diffSlots = DRAWORBIT_SLOTS_NUMBER;
+				diffSlots = orbitLineSegments;
 				epochTm   = epochTime + orbitSpan;
 			}
 			else
