@@ -63,6 +63,7 @@ private slots:
 	void visibleCheckChanged(int state);
 	void orbitCheckChanged(bool checked);
 	void satelliteDoubleClick(QListWidgetItem* item);
+	void setOrbitParams(void);
 
 private:
 	Ui_satellitesDialog* ui;
