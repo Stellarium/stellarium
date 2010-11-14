@@ -68,7 +68,7 @@ void SatellitesDialog::createDialogContent()
 	ui->tabs->setCurrentIndex(0);
 
 	// Settings tab / updates group
-	connect(ui->updateFromInternetCheckbox, SIGNAL(toggled(bool)), this, SLOT(setUpdatesEnabled(bool)));
+	connect(ui->updatesGroup, SIGNAL(toggled(bool)), this, SLOT(setUpdatesEnabled(bool)));
 	refreshUpdateValues(); // fetch values for last updated and so on
 	connect(ui->updateNowButton, SIGNAL(clicked()), GETSTELMODULE(Satellites), SLOT(updateTLEs()));
 	connect(GETSTELMODULE(Satellites), SIGNAL(updateStateChanged(Satellites::UpdateState)), this, SLOT(updateStateReceiver(Satellites::UpdateState)));
@@ -79,19 +79,18 @@ void SatellitesDialog::createDialogContent()
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 		updateTimer->start(7000);
 
-	ui->orbitSegmentsSpin->setValue(Satellite::orbitLineSegments);
-	ui->orbitFadeSpin->setValue(Satellite::orbitLineFadeSegments);
-	ui->orbitDurationSpin->setValue(Satellite::orbitLineSegmentDuration);
-
 	// Settings tab / General settings group
-	connect(ui->showLabelsCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getGui()->getGuiActions("actionShow_Satellite_Labels"), SLOT(setChecked(bool)));
+	connect(ui->labelsGroup, SIGNAL(toggled(bool)), StelApp::getInstance().getGui()->getGuiActions("actionShow_Satellite_Labels"), SLOT(setChecked(bool)));
 	connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)), GETSTELMODULE(Satellites), SLOT(setLabelFontSize(int)));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
 
+	// Settings tab / orbit lines group
+	connect(ui->orbitLinesGroup, SIGNAL(toggled(bool)), GETSTELMODULE(Satellites), SLOT(setOrbitLinesFlag(bool)));
 	connect(ui->orbitSegmentsSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
 	connect(ui->orbitFadeSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
 	connect(ui->orbitDurationSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
+
 
 	// Satellites tab
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -316,11 +315,16 @@ void SatellitesDialog::restoreDefaults(void)
 
 void SatellitesDialog::updateGuiFromSettings(void)
 {
-	ui->updateFromInternetCheckbox->setChecked(GETSTELMODULE(Satellites)->getUpdatesEnabled());
+	ui->updatesGroup->setChecked(GETSTELMODULE(Satellites)->getUpdatesEnabled());
 	refreshUpdateValues();
 
-	ui->showLabelsCheckbox->setChecked(GETSTELMODULE(Satellites)->getFlagLabels());
+	ui->labelsGroup->setChecked(GETSTELMODULE(Satellites)->getFlagLabels());
 	ui->fontSizeSpinBox->setValue(GETSTELMODULE(Satellites)->getLabelFontSize());
+
+	ui->orbitLinesGroup->setChecked(GETSTELMODULE(Satellites)->getOrbitLinesFlag());
+	ui->orbitSegmentsSpin->setValue(Satellite::orbitLineSegments);
+	ui->orbitFadeSpin->setValue(Satellite::orbitLineFadeSegments);
+	ui->orbitDurationSpin->setValue(Satellite::orbitLineSegmentDuration);
 
 	ui->groupsCombo->clear();
 	ui->groupsCombo->addItems(GETSTELMODULE(Satellites)->getGroups());
