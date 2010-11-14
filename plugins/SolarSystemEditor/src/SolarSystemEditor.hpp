@@ -94,7 +94,7 @@ public:
 	//! \todo Recognise the long form packed designations (to handle fragments)
 	//! \todo Handle better any unusual symbols in section names (URL encoding?)
 	//! \todo Use column cuts intead of a regular expression?
-	SsoElements readMpcOneLineCometElements (QString oneLineElements);
+	SsoElements readMpcOneLineCometElements(QString oneLineElements);
 
 	//! Reads a single minor planet's orbital elements from a string.
 	//! This function converts a line of minor planet orbital elements in
@@ -105,7 +105,19 @@ public:
 	//! \returns an empty hash if there is an error or the source string is not
 	//! a valid line in MPC format.
 	//! \todo Handle better any unusual symbols in section names (URL encoding?)
-	SsoElements readMpcOneLineMinorPlanetElements (QString oneLineElements);
+	SsoElements readMpcOneLineMinorPlanetElements(QString oneLineElements);
+
+	//! Reads a single object's orbital elements from a string.
+	//! This function converts a line of orbital elements in XEphem format
+	//! to a hash in Stellarium's ssystem.ini format.
+	//! http://www.clearskyinstitute.com/xephem/help/xephem.html#mozTocId468501
+	//! It recognises only the 'e', 'h' and 'p' types of orbits in XEphem's
+	//! format (comets and minor planets). It is used in handling on-line search
+	//! queries to the MPC's Minor Planet and Comet Ephemeris System, as
+	//! using the MPC format causes long object names to be truncated
+	//! due to the fixed width of the columns.
+	//! An object's type (comet or asteroid) is determined based on its name.
+	SsoElements readXEphemOneLineElements(QString oneLineElements);
 
 	//! Reads a list of comet orbital elements from a file.
 	//! This function reads a list of comet orbital elements in MPC's one-line
@@ -114,7 +126,7 @@ public:
 	//! Example source file is the list of observable comets on the MPC's site:
 	//! http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft00Cmt.txt
 	//! readMpcOneLineCometElements() is used internally to parse each line.
-	QList<SsoElements> readMpcOneLineCometElementsFromFile (QString filePath);
+	QList<SsoElements> readMpcOneLineCometElementsFromFile(QString filePath);
 
 	//! Reads a list of minor planet orbital elements from a file.
 	//! This function reads a list of minor planets orbital elements in MPC's
@@ -123,7 +135,19 @@ public:
 	//! Example source file is the list of bright asteroids on the MPC's site:
 	//! http://www.minorplanetcenter.org/iau/Ephemerides/Bright/2010/Soft00Bright.txt
 	//! readMpcOneLineMinorPlanetElements() is used internally to parse each line.
-	QList<SsoElements> readMpcOneLineMinorPlanetElementsFromFile (QString filePath);
+	QList<SsoElements> readMpcOneLineMinorPlanetElementsFromFile(QString filePath);
+
+	//! Reads a list of Solar System object orbital elements from a file.
+	//! This function reads a list of Solar System object orbital elements in
+	//! XEphem's one-line format (one object per line, comment lines starting
+	//! with # are skipped) and converts it to a list of hashes in Stellarium's
+	//! ssystem.ini format. XEphem's file format is described in its manual:
+	//! http://www.clearskyinstitute.com/xephem/help/xephem.html#mozTocId468501
+	//! Example source file can be any of the lists of objects on the MPC site:
+	//! http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft03Cmt.txt
+	//! http://www.minorplanetcenter.org/iau/Ephemerides/Bright/2010/Soft03Bright.txt
+	//! readXEphemOneLineElements() is used internally to parse each line.
+	QList<SsoElements> readXEphemOneLineElementsFromFile(QString filePath);
 
 	//! Adds a new entry at the end of the user solar system configuration file.
 	//! This function writes directly to the file. See the note on why QSettings

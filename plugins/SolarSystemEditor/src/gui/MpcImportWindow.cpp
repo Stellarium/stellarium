@@ -654,7 +654,8 @@ void MpcImportWindow::sendQuery()
 	QUrl url;
 	url.addQueryItem("ty","e");//Type: ephemerides
 	url.addQueryItem("TextArea", query);//Object name query
-	url.addQueryItem("e", "-1");//Elements format: MPC 1-line
+	//url.addQueryItem("e", "-1");//Elements format: MPC 1-line
+	url.addQueryItem("e", "3");//Elements format: XEphem
 	//Yes, all of the rest are necessary
 	url.addQueryItem("d","");
 	url.addQueryItem("l","");
@@ -744,10 +745,13 @@ void MpcImportWindow::queryComplete(QNetworkReply *reply)
 			file.write(reply->readAll());
 			file.close();
 
+			/*
 			//Try to read it as a comet first?
 			objects = readElementsFromFile(MpcComets, file.fileName());
 			if (objects.isEmpty())
 				objects = readElementsFromFile(MpcMinorPlanets, file.fileName());
+			*/
+			objects = ssoManager->readXEphemOneLineElementsFromFile(file.fileName());
 		}
 		else
 		{
