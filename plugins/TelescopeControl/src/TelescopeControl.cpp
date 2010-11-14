@@ -72,10 +72,10 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
 	info.id = "TelescopeControl";
-	info.displayedName = "Telescope Control";
-	info.authors = "Bogdan Marinov, Johannes Gajdosik";
+	info.displayedName = q_("Telescope Control");
+	info.authors = q_("Bogdan Marinov, Johannes Gajdosik");
 	info.contact = "http://stellarium.org";
-	info.description = "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a computerized mount (a \"GoTo telescope\").";
+	info.description = q_("This plug-in allows Stellarium to send \"slew\" commands to a telescope on a computerized mount (a \"GoTo telescope\").");
 	return info;
 }
 
