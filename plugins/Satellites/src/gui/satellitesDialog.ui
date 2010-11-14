@@ -126,7 +126,7 @@
    <item>
     <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="documentMode">
       <bool>false</bool>
@@ -407,22 +407,22 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
-            <widget class="QPushButton" name="showButton">
-             <property name="toolTip">
-              <string>make selected satellites visible</string>
-             </property>
+            <widget class="QCheckBox" name="visibleCheckbox">
              <property name="text">
-              <string>show</string>
+              <string>Visible</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="hideButton">
-             <property name="toolTip">
-              <string>make selected satellites non-visible</string>
-             </property>
+            <widget class="QCheckBox" name="orbitCheckbox">
              <property name="text">
-              <string>hide</string>
+              <string>Orbit</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
              </property>
             </widget>
            </item>
@@ -566,18 +566,17 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <widget class="QCheckBox" name="visibleCheckbox">
-             <property name="text">
-              <string>Visible</string>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
              </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="orbitCheckbox">
-             <property name="text">
-              <string>Orbit</string>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
              </property>
-            </widget>
+            </spacer>
            </item>
            <item>
             <widget class="QPushButton" name="commsButton">
