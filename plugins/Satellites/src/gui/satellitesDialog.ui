@@ -137,24 +137,17 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QGroupBox" name="updatesGroupBox">
+        <widget class="QGroupBox" name="updatesGroup">
          <property name="title">
-          <string>Updates</string>
+          <string>Update TLE elements from Internet sources</string>
          </property>
          <property name="flat">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="checkable">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_12">
-          <item>
-           <widget class="QCheckBox" name="updateFromInternetCheckbox">
-            <property name="text">
-             <string>Update TLE elements from internet sources</string>
-            </property>
-           </widget>
-          </item>
           <item>
            <layout class="QGridLayout" name="gridLayout">
             <item row="0" column="0">
@@ -230,18 +223,17 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_2">
+        <widget class="QGroupBox" name="labelsGroup">
          <property name="title">
-          <string>General Settings</string>
+          <string>Labels</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_13">
-          <item>
-           <widget class="QCheckBox" name="showLabelsCheckbox">
-            <property name="text">
-             <string>Show Satellite Labels</string>
-            </property>
-           </widget>
-          </item>
           <item>
            <layout class="QGridLayout" name="gridLayout_2">
             <item row="2" column="0">
@@ -276,9 +268,15 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox">
+        <widget class="QGroupBox" name="orbitLinesGroup">
          <property name="title">
           <string>Orbit Lines</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item>
