@@ -219,6 +219,10 @@ private:
 	// @return the number of satellites read from the json file
 	int readJsonFile(void);
 
+	//! Get the version from the "creator" value in the satellites.json file
+	//! @return version string, e.g. 0.6.1
+	const QString getJsonFileVersion(void);
+
 	QString satellitesJsonPath;
 	QList<SatelliteP> satellites;
 	LinearFader hintFader;
