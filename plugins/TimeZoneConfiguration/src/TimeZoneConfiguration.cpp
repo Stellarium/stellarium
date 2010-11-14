@@ -38,10 +38,10 @@ StelPluginInfo TimeZoneConfigurationStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
 	info.id = "TimeZoneConfiguration";
-	info.displayedName = "Time Zone";
-	info.authors = "Bogdan Marinov";
+	info.displayedName = q_("Time Zone");
+	info.authors = q_("Bogdan Marinov");
 	info.contact = "http://stellarium.org";
-	info.description = "A convenient interface for some of the more obscure options in Stellarium's configuration file. Allows setting the time zone and changing the way the time and the date are displayed in the bottom bar.";
+	info.description = q_("A convenient interface for some of the more obscure options in Stellarium's configuration file. Allows setting the time zone and changing the way the time and the date are displayed in the bottom bar.");
 	return info;
 }
 
