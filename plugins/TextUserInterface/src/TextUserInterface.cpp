@@ -76,10 +76,10 @@ StelPluginInfo TextUserInterfaceStelPluginInterface::getPluginInfo() const
 {
 	StelPluginInfo info;
 	info.id = "TextUserInterface";
-	info.displayedName = "Text User Interface";
-	info.authors = "Matthew Gates";
+	info.displayedName = q_("Text User Interface");
+	info.authors = q_("Matthew Gates");
 	info.contact = "http://porpoisehead.net/";
-	info.description = "Plugin implementation of 0.9.x series Text User Interface (TUI), used in planetarium systems";
+	info.description = q_("Plugin implementation of 0.9.x series Text User Interface (TUI), used in planetarium systems");
 	return info;
 }
 
