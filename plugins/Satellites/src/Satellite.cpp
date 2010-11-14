@@ -53,6 +53,7 @@ SphericalCap Satellite::viewportHalfspace = SphericalCap();
 int Satellite::orbitLineSegments = 90;
 int Satellite::orbitLineFadeSegments = 4;
 int Satellite::orbitLineSegmentDuration = 20;
+bool Satellite::orbitLinesFlag = true;
 
 
 Satellite::Satellite(const QVariantMap& map)
@@ -334,7 +335,7 @@ void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 		}
 		painter.drawSprite2dMode(xy[0], xy[1], 11);
 
-		if(orbitVisible) drawOrbit(painter);
+		if(orbitVisible && Satellite::orbitLinesFlag) drawOrbit(painter);
 	}
 }
 

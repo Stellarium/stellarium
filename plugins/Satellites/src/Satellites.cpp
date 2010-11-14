@@ -81,7 +81,6 @@ void Satellites::deinit()
 {
 	Satellite::hintTexture.clear();
 	texPointer.clear();
-	configDialog->setVisible(false);
 }
 
 Satellites::~Satellites()
@@ -349,6 +348,7 @@ void Satellites::restoreDefaultConfigIni(void)
 	conf->setValue("tle_url6", "http://celestrak.com/NORAD/elements/iridium.txt");
 	conf->setValue("tle_url7", "http://celestrak.com/NORAD/elements/tle-new.txt");
 	conf->setValue("update_frequency_hours", 72);
+	conf->setValue("orbit_line_flag", true);
 	conf->setValue("orbit_line_segments", 90);
 	conf->setValue("orbit_fade_segments", 5);
 	conf->setValue("orbit_segment_duration", 20);
@@ -406,6 +406,7 @@ void Satellites::readSettingsFromConfig(void)
 	labelFont.setPixelSize(conf->value("hint_font_size", 10).toInt());
 
 	// orbit drawing params
+	Satellite::orbitLinesFlag = conf->value("orbit_line_flag", true).toBool();
 	Satellite::orbitLineSegments = conf->value("orbit_line_segments", 90).toInt();
 	Satellite::orbitLineFadeSegments = conf->value("orbit_fade_segments", 5).toInt();
 	Satellite::orbitLineSegmentDuration = conf->value("orbit_segment_duration", 20).toInt();
@@ -445,6 +446,7 @@ void Satellites::saveSettingsToConfig(void)
 	conf->setValue("hint_font_size", labelFont.pixelSize());
 
 	// orbit drawing params
+	conf->setValue("orbit_line_flag", Satellite::orbitLinesFlag);
 	conf->setValue("orbit_line_segments", Satellite::orbitLineSegments);
 	conf->setValue("orbit_fade_segments", Satellite::orbitLineFadeSegments);
 	conf->setValue("orbit_segment_duration", Satellite::orbitLineSegmentDuration);
@@ -672,6 +674,16 @@ void Satellites::observerLocationChanged(StelLocation loc)
 			sat->setObserverLocation(&loc);
 	}
 	recalculateOrbitLines();
+}
+
+void Satellites::setOrbitLinesFlag(bool b)
+{
+	Satellite::orbitLinesFlag = b;
+}
+
+bool Satellites::getOrbitLinesFlag(void)
+{
+	return Satellite::orbitLinesFlag;
 }
 
 void Satellites::recalculateOrbitLines(void)
