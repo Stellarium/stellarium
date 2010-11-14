@@ -102,10 +102,8 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->satellitesList, SIGNAL(currentTextChanged(const QString&)), this, SLOT(selectedSatelliteChanged(const QString&)));
 	connect(ui->satellitesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(satelliteDoubleClick(QListWidgetItem*)));
 	connect(ui->groupsCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(groupFilterChanged(int)));
-	connect(ui->showButton, SIGNAL(clicked()), this, SLOT(showSelectedSatellites()));
-	connect(ui->hideButton, SIGNAL(clicked()), this, SLOT(hideSelectedSatellites()));
 	connect(ui->visibleCheckbox, SIGNAL(stateChanged(int)), this, SLOT(visibleCheckChanged(int)));
-	connect(ui->orbitCheckbox, SIGNAL(clicked(bool)), this, SLOT(orbitCheckChanged(bool)));
+	connect(ui->orbitCheckbox, SIGNAL(stateChanged(int)), this, SLOT(orbitCheckChanged(int)));
 
 	// Sources tab
 	connect(ui->sourceList, SIGNAL(currentTextChanged(const QString&)), ui->sourceEdit, SLOT(setText(const QString&)));
@@ -349,7 +347,7 @@ void SatellitesDialog::updateGuiFromSettings(void)
 
 	ui->groupsCombo->clear();
 	ui->groupsCombo->addItems(GETSTELMODULE(Satellites)->getGroups());
-	ui->groupsCombo->insertItem(0, q_("[all satellites]"), QVariant("all"));
+	ui->groupsCombo->insertItem(0, q_("[all]"), QVariant("all"));
 	ui->groupsCombo->insertItem(0, q_("[all not visible]"), QVariant("notvisible"));
 	ui->groupsCombo->insertItem(0, q_("[all visible]"), QVariant("visible"));
 	ui->groupsCombo->setCurrentIndex(0);
@@ -364,26 +362,6 @@ void SatellitesDialog::saveSettings(void)
 	GETSTELMODULE(Satellites)->saveSettingsToConfig();
 }
 
-void SatellitesDialog::showSelectedSatellites(void)
-{
-	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
-	{
-		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(i->text());
-		sat->visible = true;
-	}
-	groupFilterChanged(ui->groupsCombo->currentIndex());
-}
-
-void SatellitesDialog::hideSelectedSatellites(void)
-{
-	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
-	{
-		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(i->text());
-		sat->visible = false;
-	}
-	groupFilterChanged(ui->groupsCombo->currentIndex());
-}
-
 void SatellitesDialog::visibleCheckChanged(int state)
 {
 	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
@@ -394,14 +372,14 @@ void SatellitesDialog::visibleCheckChanged(int state)
 	groupFilterChanged(ui->groupsCombo->currentIndex());
 }
 
-void SatellitesDialog::orbitCheckChanged(bool checked)
+void SatellitesDialog::orbitCheckChanged(int state)
 {
 	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
 	{
 		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(i->text());
-		// sat->orbitVisible = (state==Qt::Checked);
-		sat->orbitVisible = checked;
+		sat->orbitVisible = (state==Qt::Checked);
 	}
+	groupFilterChanged(ui->groupsCombo->currentIndex());
 }
 
 void SatellitesDialog::satelliteDoubleClick(QListWidgetItem* item)
