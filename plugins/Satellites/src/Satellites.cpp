@@ -36,6 +36,8 @@
 #include "StelJsonParser.hpp"
 #include "SatellitesDialog.hpp"
 
+#include <plugin_config.h>
+
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QKeyEvent>
@@ -149,7 +151,11 @@ void Satellites::init()
 	else
 	{
 		qDebug() << "Satellites::init using satellite.json file: " << satellitesJsonPath;
+		// TODO: replace out of dat json file and notify user
+		// TODO: if (getJsonFileVersion() != PLUGIN_VERSION) { ... }
+
 	}
+
 
 	// create satellites according to content os satellites.json file
 	readJsonFile();
@@ -184,6 +190,7 @@ void Satellites::init()
 		nightStyleSheet = styleSheetFile.readAll();
 	}
 	styleSheetFile.close();
+
 }
 
 void Satellites::setStelStyle(const QString& mode)
@@ -496,6 +503,34 @@ int Satellites::readJsonFile(void)
 	satelliteJsonFile.close();
 	return numReadOk;
 }
+
+const QString Satellites::getJsonFileVersion(void)
+{
+	QString jsonVersion("unknown");
+	QFile satelliteJsonFile(satellitesJsonPath);
+	if (!satelliteJsonFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Satellites::init cannot open " << satellitesJsonPath;
+		return jsonVersion;
+	}
+
+	QVariantMap map;
+	map = StelJsonParser::parse(&satelliteJsonFile).toMap();
+	if (map.contains("creator"))
+	{
+		QString creator = map.value("creator").toString();
+		QRegExp vRx(".*(\\d+\\.\\d+\\.\\d+).*");
+		if (vRx.exactMatch(creator))
+		{
+			jsonVersion = vRx.capturedTexts().at(1);
+		}
+	}
+
+	satelliteJsonFile.close();
+	qDebug() << "Satellites::getJsonFileVersion() version from file:" << jsonVersion;
+	return jsonVersion;
+}
+
 
 QStringList Satellites::getGroups(void) const
 {
