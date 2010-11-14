@@ -86,6 +86,11 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
 
 	// Settings tab / orbit lines group
+	ui->orbitLinesGroup->setChecked(GETSTELMODULE(Satellites)->getOrbitLinesFlag());
+	ui->orbitSegmentsSpin->setValue(Satellite::orbitLineSegments);
+	ui->orbitFadeSpin->setValue(Satellite::orbitLineFadeSegments);
+	ui->orbitDurationSpin->setValue(Satellite::orbitLineSegmentDuration);
+
 	connect(ui->orbitLinesGroup, SIGNAL(toggled(bool)), GETSTELMODULE(Satellites), SLOT(setOrbitLinesFlag(bool)));
 	connect(ui->orbitSegmentsSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
 	connect(ui->orbitFadeSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
