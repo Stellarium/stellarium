@@ -736,6 +736,24 @@ void ConstellationMgr::setFlagLabels(bool b)
 	}
 }
 
+void ConstellationMgr::setFlagIsolateSelected(bool s)
+{
+	isolateSelected = s;
+
+	// when turning off isolated selection mode, clear exisiting isolated selections.
+	if (!s)
+	{
+		vector < Constellation * >::const_iterator iter;
+		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+		{
+			(*iter)->setFlagLines(getFlagLines());
+			(*iter)->setFlagName(getFlagLabels());
+			(*iter)->setFlagArt(getFlagArt());
+			(*iter)->setFlagBoundaries(getFlagBoundaries());
+		}
+	}
+}
+
 StelObject* ConstellationMgr::getSelected(void) const {
 	return *selected.begin();  // TODO return all or just remove this method
 }
