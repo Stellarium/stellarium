@@ -36,6 +36,8 @@
 #include "StelJsonParser.hpp"
 #include "SatellitesDialog.hpp"
 
+#include <plugin_config.h>
+
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QKeyEvent>
@@ -81,7 +83,6 @@ void Satellites::deinit()
 {
 	Satellite::hintTexture.clear();
 	texPointer.clear();
-	configDialog->setVisible(false);
 }
 
 Satellites::~Satellites()
@@ -150,7 +151,11 @@ void Satellites::init()
 	else
 	{
 		qDebug() << "Satellites::init using satellite.json file: " << satellitesJsonPath;
+		// TODO: replace out of dat json file and notify user
+		// TODO: if (getJsonFileVersion() != PLUGIN_VERSION) { ... }
+
 	}
+
 
 	// create satellites according to content os satellites.json file
 	readJsonFile();
@@ -185,6 +190,7 @@ void Satellites::init()
 		nightStyleSheet = styleSheetFile.readAll();
 	}
 	styleSheetFile.close();
+
 }
 
 void Satellites::setStelStyle(const QString& mode)
@@ -349,6 +355,7 @@ void Satellites::restoreDefaultConfigIni(void)
 	conf->setValue("tle_url6", "http://celestrak.com/NORAD/elements/iridium.txt");
 	conf->setValue("tle_url7", "http://celestrak.com/NORAD/elements/tle-new.txt");
 	conf->setValue("update_frequency_hours", 72);
+	conf->setValue("orbit_line_flag", true);
 	conf->setValue("orbit_line_segments", 90);
 	conf->setValue("orbit_fade_segments", 5);
 	conf->setValue("orbit_segment_duration", 20);
@@ -406,6 +413,7 @@ void Satellites::readSettingsFromConfig(void)
 	labelFont.setPixelSize(conf->value("hint_font_size", 10).toInt());
 
 	// orbit drawing params
+	Satellite::orbitLinesFlag = conf->value("orbit_line_flag", true).toBool();
 	Satellite::orbitLineSegments = conf->value("orbit_line_segments", 90).toInt();
 	Satellite::orbitLineFadeSegments = conf->value("orbit_fade_segments", 5).toInt();
 	Satellite::orbitLineSegmentDuration = conf->value("orbit_segment_duration", 20).toInt();
@@ -445,6 +453,7 @@ void Satellites::saveSettingsToConfig(void)
 	conf->setValue("hint_font_size", labelFont.pixelSize());
 
 	// orbit drawing params
+	conf->setValue("orbit_line_flag", Satellite::orbitLinesFlag);
 	conf->setValue("orbit_line_segments", Satellite::orbitLineSegments);
 	conf->setValue("orbit_fade_segments", Satellite::orbitLineFadeSegments);
 	conf->setValue("orbit_segment_duration", Satellite::orbitLineSegmentDuration);
@@ -494,6 +503,34 @@ int Satellites::readJsonFile(void)
 	satelliteJsonFile.close();
 	return numReadOk;
 }
+
+const QString Satellites::getJsonFileVersion(void)
+{
+	QString jsonVersion("unknown");
+	QFile satelliteJsonFile(satellitesJsonPath);
+	if (!satelliteJsonFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Satellites::init cannot open " << satellitesJsonPath;
+		return jsonVersion;
+	}
+
+	QVariantMap map;
+	map = StelJsonParser::parse(&satelliteJsonFile).toMap();
+	if (map.contains("creator"))
+	{
+		QString creator = map.value("creator").toString();
+		QRegExp vRx(".*(\\d+\\.\\d+\\.\\d+).*");
+		if (vRx.exactMatch(creator))
+		{
+			jsonVersion = vRx.capturedTexts().at(1);
+		}
+	}
+
+	satelliteJsonFile.close();
+	qDebug() << "Satellites::getJsonFileVersion() version from file:" << jsonVersion;
+	return jsonVersion;
+}
+
 
 QStringList Satellites::getGroups(void) const
 {
@@ -672,6 +709,16 @@ void Satellites::observerLocationChanged(StelLocation loc)
 			sat->setObserverLocation(&loc);
 	}
 	recalculateOrbitLines();
+}
+
+void Satellites::setOrbitLinesFlag(bool b)
+{
+	Satellite::orbitLinesFlag = b;
+}
+
+bool Satellites::getOrbitLinesFlag(void)
+{
+	return Satellite::orbitLinesFlag;
 }
 
 void Satellites::recalculateOrbitLines(void)
