@@ -174,7 +174,7 @@ signals:
 
 	//! emitted after a TLE update has run.
 	//! @param updates the number of satellites updated.
-	void TleUpdateComplete(int updates);
+	void TleUpdateComplete(int updates, int total);
 	
 
 public slots:

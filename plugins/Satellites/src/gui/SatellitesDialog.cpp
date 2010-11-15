@@ -72,7 +72,7 @@ void SatellitesDialog::createDialogContent()
 	refreshUpdateValues(); // fetch values for last updated and so on
 	connect(ui->updateNowButton, SIGNAL(clicked()), GETSTELMODULE(Satellites), SLOT(updateTLEs()));
 	connect(GETSTELMODULE(Satellites), SIGNAL(updateStateChanged(Satellites::UpdateState)), this, SLOT(updateStateReceiver(Satellites::UpdateState)));
-	connect(GETSTELMODULE(Satellites), SIGNAL(TleUpdateComplete(int)), this, SLOT(updateCompleteReceiver(int)));
+	connect(GETSTELMODULE(Satellites), SIGNAL(TleUpdateComplete(int, int)), this, SLOT(updateCompleteReceiver(int, int)));
 	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
 
 	updateTimer = new QTimer(this);
@@ -260,9 +260,9 @@ void SatellitesDialog::updateStateReceiver(Satellites::UpdateState state)
 	}
 }
 
-void SatellitesDialog::updateCompleteReceiver(int numUpdated)
+void SatellitesDialog::updateCompleteReceiver(int numUpdated, int total)
 {
-	ui->nextUpdateLabel->setText(QString(q_("Updated %1 satellite(s)")).arg(numUpdated));
+	ui->nextUpdateLabel->setText(QString(q_("Updated %1/%2 satellite(s)")).arg(numUpdated).arg(total));
 	// display the status for another full interval before refreshing status
 	updateTimer->start();
 	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Satellites)->getLastUpdate());
