@@ -51,7 +51,7 @@ private slots:
 	void setUpdateValues(int hours);
 	void setUpdatesEnabled(bool b);
 	void updateStateReceiver(Satellites::UpdateState state);
-	void updateCompleteReceiver(int numUpdated);
+	void updateCompleteReceiver(int numUpdated, int total);
 	void sourceEditingDone(void);
 	void saveSourceList(void);
 	void deleteSourceRow(void);
