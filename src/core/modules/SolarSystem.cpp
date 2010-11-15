@@ -198,21 +198,45 @@ void cometOrbitPosFunc(double jd,double xyz[3], void* userDataPtr)
 void SolarSystem::loadPlanets()
 {
 	qDebug() << "Loading Solar System data ...";
-	QString iniFile;
+	QStringList solarSystemFiles;
 	try
 	{
-		iniFile = StelFileMgr::findFile("data/ssystem.ini");
+		solarSystemFiles = StelFileMgr::findFileInAllPaths("data/ssystem.ini");
 	}
 	catch(std::runtime_error& e)
 	{
 		qWarning() << "ERROR while loading ssysyem.ini (unable to find data/ssystem.ini): " << e.what() << endl;
 		return;
 	}
-	QSettings pd(iniFile, StelIniFormat);
+
+	foreach (const QString& solarSystemFile, solarSystemFiles)
+	{
+		if (loadPlanets(solarSystemFile))
+			break;
+		else
+		{
+			sun.clear();
+			moon.clear();
+			earth.clear();
+
+			foreach (PlanetP p, systemPlanets)
+			{
+				p->satellites.clear();
+				p.clear();
+			}
+			systemPlanets.clear();
+			//Memory leak? What's the proper way of cleaning shared pointers?
+		}
+	}
+}
+
+bool SolarSystem::loadPlanets(const QString& filePath)
+{
+	QSettings pd(filePath, StelIniFormat);
 	if (pd.status() != QSettings::NoError)
 	{
-		qWarning() << "ERROR while parsing ssysyem.ini file";
-		return;
+		qWarning() << "ERROR while parsing" << filePath;
+		return false;
 	}
 
 	// QSettings does not allow us to say that the sections of the file
@@ -313,7 +337,7 @@ void SolarSystem::loadPlanets()
 			if (parent.isNull())
 			{
 				qWarning() << "ERROR : can't find parent solar system body for " << englishName;
-				abort();
+				//abort();
 				continue;
 			}
 		}
@@ -337,7 +361,8 @@ void SolarSystem::loadPlanets()
 				if (semi_major_axis <= -1e100) {
 					qDebug() << "ERROR: " << englishName
 						<< ": you must provide orbit_PericenterDistance or orbit_SemiMajorAxis";
-					abort();
+					//abort();
+					continue;
 				} else {
 					semi_major_axis /= AU;
 					Q_ASSERT(eccentricity != 1.0); // parabolic orbits have no semi_major_axis
@@ -444,7 +469,8 @@ void SolarSystem::loadPlanets()
 				if (semi_major_axis <= -1e100) {
 					qWarning() << "ERROR: " << englishName
 						<< ": you must provide orbit_PericenterDistance or orbit_SemiMajorAxis";
-					abort();
+					//abort();
+					continue;
 				} else {
 					Q_ASSERT(eccentricity != 1.0); // parabolic orbits have no semi_major_axis
 					pericenterDistance = semi_major_axis * (1.0-eccentricity);
@@ -486,7 +512,8 @@ void SolarSystem::loadPlanets()
 					qWarning() << "ERROR: " << englishName
 						<< ": when you do not provide orbit_TimeAtPericenter, you must provide both "
 						<< "orbit_Epoch and orbit_MeanAnomaly";
-					abort();
+					//abort();
+					continue;
 				} else {
 					mean_anomaly *= (M_PI/180.0);
 					time_at_pericenter = epoch - mean_anomaly / meanMotion;
@@ -801,10 +828,17 @@ void SolarSystem::loadPlanets()
 		readOk++;
 	}
 
+	if (systemPlanets.isEmpty())
+	{
+		qWarning() << "No Solar System objects loaded from" << filePath;
+		return false;
+	}
+
 	// special case: load earth shadow texture
 	Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture("textures/earth-shadow.png");
 
-	qDebug() << "Loaded" << readOk << "/" << totalPlanets << "planet orbits";
+	qDebug() << "Loaded" << readOk << "/" << totalPlanets << "planet orbits from" << filePath;
+	return true;
 }
 
 // Compute the position for every elements of the solar system.
