@@ -467,8 +467,10 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	result.insert("section_name", sectionName);
 	result.insert("name", name);
 	result.insert("parent", "Sun");
-	result.insert("coord_func","comet_orbit");
 	result.insert("type", "comet");
+	//"comet_orbit" is used for all cases:
+	//"ell_orbit" interprets distances as kilometers, not AUs
+	result.insert("coord_func","comet_orbit");
 
 	result.insert("lighting", false);
 	result.insert("color", "1.0, 1.0, 1.0");
@@ -642,8 +644,10 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 
 	//After a name has been determined, insert the essential keys
 	result.insert("parent", "Sun");
-	result.insert("coord_func","comet_orbit");
 	result.insert("type", "asteroid");
+	//"comet_orbit" is used for all cases:
+	//"ell_orbit" interprets distances as kilometers, not AUs
+	result.insert("coord_func","comet_orbit");
 
 	result.insert("lighting", false);
 	result.insert("color", "1.0, 1.0, 1.0");
@@ -779,11 +783,9 @@ SsoElements SolarSystemEditor::readXEphemOneLineElements(QString oneLineElements
 		return result;
 	}
 
-	//Workaround for a possible bug. TODO: Fix this!
-	//if (orbitType == Elliptic)
-	//	result.insert("coord_func", "ell_orbit");
-	//else
-		result.insert("coord_func", "comet_orbit");
+	//"comet_orbit" is used for all cases:
+	//"ell_orbit" interprets distances as kilometers, not AUs
+	result.insert("coord_func", "comet_orbit");
 
 	//Type detection and name parsing
 	QString objectType;
