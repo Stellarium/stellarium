@@ -110,6 +110,7 @@ void MpcImportWindow::createDialogContent()
 
 	loadBookmarks();
 
+	resetCountdown();
 	resetDialog();
 }
 
@@ -138,7 +139,8 @@ void MpcImportWindow::resetDialog()
 	ui->pushButtonAbortQuery->setVisible(false);
 	ui->pushButtonAbortDownload->setVisible(false);
 
-	resetCountdown();
+	//Resetting the dialog should not reset the timer
+	//resetCountdown();
 	resetNotFound();
 	enableInterface(true);
 }
