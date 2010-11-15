@@ -123,9 +123,11 @@ void SatellitesDialog::createDialogContent()
 
 void SatellitesDialog::groupFilterChanged(int index)
 {
-	QString prevSelection;
-	if (ui->satellitesList->currentItem())
-		prevSelection = ui->satellitesList->currentItem()->text();
+	QStringList prevMultiSelection;
+	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
+	{
+		prevMultiSelection << i->text();
+	}
 
 	ui->satellitesList->clear();
 	if (ui->groupsCombo->itemData(index).toString() == "all")
@@ -137,20 +139,25 @@ void SatellitesDialog::groupFilterChanged(int index)
 	else
 		ui->satellitesList->insertItems(0,GETSTELMODULE(Satellites)->getSatellites(ui->groupsCombo->currentText()));
 
-	// If the previously selected item is still in the list after the update, select it,
-	// else selected the first item in the list.
-	QList<QListWidgetItem*> foundItems = ui->satellitesList->findItems(prevSelection, Qt::MatchExactly);
-	if (foundItems.count() > 0 && !prevSelection.isEmpty())
+	// If any previously selected items are still in the list after the update, select them,
+	QListWidgetItem* item;
+	for (int i=0; (item = ui->satellitesList->item(i))!=NULL; i++)
 	{
-		foundItems.at(0)->setSelected(true);
-		ui->satellitesList->scrollToItem(foundItems.at(0));
+		item->setSelected(prevMultiSelection.contains(item->text()));
+	}
+
+	QList<QListWidgetItem*> selectedItems = ui->satellitesList->selectedItems();
+	if (selectedItems.count() > 0)
+	{
+		// make sure the first selected item is visible...
+		ui->satellitesList->scrollToItem(selectedItems.at(0));
 	}
 	else if (ui->satellitesList->count() > 0)
 	{
+		// otherwise if there are any items in the listbox, select the first and scroll to the top
 		ui->satellitesList->setCurrentRow(0);
 		ui->satellitesList->scrollToTop();
 	}
-
 }
 
 void SatellitesDialog::selectedSatelliteChanged(const QString& id)
@@ -263,13 +270,6 @@ void SatellitesDialog::updateCompleteReceiver(int numUpdated)
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 }
 
-//void SatellitesDialog::close(void)
-//{
-//	qDebug() << "Closing Satellites Configure Dialog";
-//	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-//	gui->getGuiActions("actionShow_Satellite_ConfigDialog")->setChecked(false);
-//}
-
 void SatellitesDialog::sourceEditingDone(void)
 {
 	// don't update the currently selected item in the source list if the text is empty or not a valid URL.
@@ -347,9 +347,10 @@ void SatellitesDialog::updateGuiFromSettings(void)
 
 	ui->groupsCombo->clear();
 	ui->groupsCombo->addItems(GETSTELMODULE(Satellites)->getGroups());
-	ui->groupsCombo->insertItem(0, q_("[all]"), QVariant("all"));
 	ui->groupsCombo->insertItem(0, q_("[all not visible]"), QVariant("notvisible"));
 	ui->groupsCombo->insertItem(0, q_("[all visible]"), QVariant("visible"));
+	ui->groupsCombo->insertItem(0, q_("[all]"), QVariant("all"));
+	ui->satellitesList->clearSelection();
 	ui->groupsCombo->setCurrentIndex(0);
 
 	ui->sourceList->clear();
