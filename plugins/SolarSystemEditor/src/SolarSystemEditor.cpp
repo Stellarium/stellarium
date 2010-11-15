@@ -455,17 +455,20 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 		name.append(fragmentIndex.toUpper());
 	}
 
-	QString sectionName(name);
-	//TODO: Should I remove all non-alphanumeric, or only the obviously problematic?
-	sectionName.remove('\\');
-	sectionName.remove('/');
-	sectionName.remove('#');
-	sectionName.remove(' ');
-	sectionName.remove('-');
-	sectionName = sectionName.toLower();
-
-	result.insert("section_name", sectionName);
+	if (name.isEmpty())
+	{
+		return SsoElements();
+	}
 	result.insert("name", name);
+
+	QString sectionName = convertToGroupName(name);
+	if (sectionName.isEmpty())
+	{
+		return SsoElements();
+	}
+	result.insert("section_name", sectionName);
+
+	//After a name has been determined, insert the essential keys
 	result.insert("parent", "Sun");
 	result.insert("type", "comet");
 	//"comet_orbit" is used for all cases:
@@ -617,28 +620,17 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 		}
 		//In the other case, the name is already the provisional designation
 	}
-
-	result.insert("name", name);
-
-	//Section name
-	QString sectionName(name);
-	//TODO: Should I remove all non-alphanumeric, or only the obviously problematic?
-	sectionName.remove('\\');
-	sectionName.remove('/');
-	sectionName.remove('#');
-	sectionName.remove(' ');
-	sectionName.remove('-');
-	sectionName = sectionName.toLower();
-	if (sectionName.isEmpty())
+	if (name.isEmpty())
 	{
 		return SsoElements();
 	}
-	//To prevent mix-up between asteroids and satellites:
-	//insert the minor planet number in the section name
-	//(if an asteroid is named, it must be numbered)
-	if (minorPlanetNumber)
+	result.insert("name", name);
+
+	//Section name
+	QString sectionName = convertToGroupName(name, minorPlanetNumber);
+	if (sectionName.isEmpty())
 	{
-		sectionName.prepend(QString::number(minorPlanetNumber));
+		return SsoElements();
 	}
 	result.insert("section_name", sectionName);
 
@@ -816,34 +808,24 @@ SsoElements SolarSystemEditor::readXEphemOneLineElements(QString oneLineElements
 			}
 		}
 	}
+	if (name.isEmpty())
+	{
+		return SsoElements();
+	}
 	result.insert("name", name);
 	result.insert("type", objectType);
 	if (minorPlanetNumber)
 		result.insert("minor_planet_number", minorPlanetNumber);
 
 	//Section name
-	QString sectionName(name);
-	//TODO: Should I remove all non-alphanumeric, or only the obviously problematic?
-	sectionName.remove('\\');
-	sectionName.remove('/');
-	sectionName.remove('#');
-	sectionName.remove(' ');
-	sectionName.remove('-');
-	sectionName = sectionName.toLower();
+	QString sectionName = convertToGroupName(name, minorPlanetNumber);
 	if (sectionName.isEmpty())
 	{
 		return SsoElements();
 	}
-	//To prevent mix-up between asteroids and satellites:
-	//insert the minor planet number in the section name
-	//(if an asteroid is named, it must be numbered)
-	if (minorPlanetNumber)
-	{
-		sectionName.prepend(QString::number(minorPlanetNumber));
-	}
 	result.insert("section_name", sectionName);
 
-	//Parameters that are the same for all:
+	//After a name has been determined, insert the essential keys
 	result.insert("parent", "Sun");
 
 	result.insert("lighting", false);
@@ -1418,6 +1400,28 @@ void SolarSystemEditor::updateSsoProperty(QSettings & settings, SsoElements & pr
 	{
 		settings.setValue(key, properties.value(key));
 	}
+}
+
+QString SolarSystemEditor::convertToGroupName(QString &name, int minorPlanetNumber)
+{
+	//TODO: Should I remove all non-alphanumeric, or only the obviously problematic?
+	QString groupName(name);
+	groupName.remove('\\');
+	groupName.remove('/');
+	groupName.remove('#');
+	groupName.remove(' ');
+	groupName.remove('-');
+	groupName = groupName.toLower();
+
+	//To prevent mix-up between asteroids and satellites:
+	//insert the minor planet number in the section name
+	//(if an asteroid is named, it must be numbered)
+	if (minorPlanetNumber)
+	{
+		groupName.prepend(QString::number(minorPlanetNumber));
+	}
+
+	return groupName;
 }
 
 int SolarSystemEditor::unpackDayOrMonthNumber(QChar digit)

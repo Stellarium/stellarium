@@ -287,7 +287,11 @@ private:
 	//! provisional designation.
 	QString unpackMinorPlanetProvisionalDesignation(QString packedDesignation);
 
+	//! Updates a value in a configuration file with a value with the same key in a SsoElements hash.
 	void updateSsoProperty(QSettings& configuration, SsoElements& properties, QString key);
+
+	//! Converts an object name to a key (group) name in a configuration file.
+	QString convertToGroupName(QString& name, int minorPlanetNumber = 0);
 };
 
 
