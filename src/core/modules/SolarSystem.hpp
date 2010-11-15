@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (c) 2010 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -243,8 +244,14 @@ private:
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const StelCore* core);
 
-	//! Load planet data from a file.
+	//! Load planet data from the Solar System configuration file.
+	//! This function attempts to load every possible instance of the
+	//! Solar System configuration file in the file paths, falling back if a
+	//! given path can't be loaded.
 	void loadPlanets();
+
+	//! Load planet data from the given file
+	bool loadPlanets(const QString& filePath);
 
 	void recreateTrails();
 
