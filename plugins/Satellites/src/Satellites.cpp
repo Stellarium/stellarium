@@ -640,7 +640,7 @@ void Satellites::updateTLEs(void)
 	if (updateUrls.size() == 0)
 	{
 		qWarning() << "Satellites::updateTLEs no update URLs are defined... nothing to do.";
-		emit(TleUpdateComplete(0));
+		emit(TleUpdateComplete(0,0));
 		return;
 	}
 
@@ -866,7 +866,7 @@ void Satellites::updateFromFiles(void)
 		updateState = CompleteUpdates;
 
 	emit(updateStateChanged(updateState));
-	emit(TleUpdateComplete(numUpdated));
+	emit(TleUpdateComplete(numUpdated, sats.size()));
 }
 
 void Satellites::update(double deltaTime)
