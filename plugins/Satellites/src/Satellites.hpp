@@ -196,6 +196,15 @@ public slots:
 	//! there is new TLE data.
 	void updateTLEs(void);
 
+	//! Choose whether or not to draw orbit lines.  Each satellite has its own setting
+	//! as well, but this can be used to turn on/off all those satellites which elect to
+	//! have orbit lines all in one go.
+	//! @param b - true to turn on orbit lines, false to turn off
+	void setOrbitLinesFlag(bool b);
+
+	//! Get the current status of the orbit line rendering flag
+	bool getOrbitLinesFlag(void);
+
 	void recalculateOrbitLines(void);
 
 private:
@@ -209,6 +218,10 @@ private:
 	// this will be done once at init, and also if the defaults are reset.
 	// @return the number of satellites read from the json file
 	int readJsonFile(void);
+
+	//! Get the version from the "creator" value in the satellites.json file
+	//! @return version string, e.g. 0.6.1
+	const QString getJsonFileVersion(void);
 
 	QString satellitesJsonPath;
 	QList<SatelliteP> satellites;
