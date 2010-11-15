@@ -127,6 +127,7 @@ private:
 	static int orbitLineSegments;
 	static int orbitLineFadeSegments;
 	static int orbitLineSegmentDuration;
+	static bool orbitLinesFlag;
 
 	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
 	void setObserverLocation(StelLocation* loc=NULL);

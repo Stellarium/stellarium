@@ -58,10 +58,8 @@ private slots:
 	void addSourceRow(void);
 	void restoreDefaults(void);
 	void saveSettings(void);
-	void showSelectedSatellites(void);
-	void hideSelectedSatellites(void);
 	void visibleCheckChanged(int state);
-	void orbitCheckChanged(bool checked);
+	void orbitCheckChanged(int state);
 	void satelliteDoubleClick(QListWidgetItem* item);
 	void setOrbitParams(void);
 
