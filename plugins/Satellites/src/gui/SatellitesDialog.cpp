@@ -68,7 +68,7 @@ void SatellitesDialog::createDialogContent()
 	ui->tabs->setCurrentIndex(0);
 
 	// Settings tab / updates group
-	connect(ui->updateFromInternetCheckbox, SIGNAL(toggled(bool)), this, SLOT(setUpdatesEnabled(bool)));
+	connect(ui->updatesGroup, SIGNAL(toggled(bool)), this, SLOT(setUpdatesEnabled(bool)));
 	refreshUpdateValues(); // fetch values for last updated and so on
 	connect(ui->updateNowButton, SIGNAL(clicked()), GETSTELMODULE(Satellites), SLOT(updateTLEs()));
 	connect(GETSTELMODULE(Satellites), SIGNAL(updateStateChanged(Satellites::UpdateState)), this, SLOT(updateStateReceiver(Satellites::UpdateState)));
@@ -79,29 +79,31 @@ void SatellitesDialog::createDialogContent()
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 		updateTimer->start(7000);
 
-	ui->orbitSegmentsSpin->setValue(Satellite::orbitLineSegments);
-	ui->orbitFadeSpin->setValue(Satellite::orbitLineFadeSegments);
-	ui->orbitDurationSpin->setValue(Satellite::orbitLineSegmentDuration);
-
 	// Settings tab / General settings group
-	connect(ui->showLabelsCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getGui()->getGuiActions("actionShow_Satellite_Labels"), SLOT(setChecked(bool)));
+	connect(ui->labelsGroup, SIGNAL(toggled(bool)), StelApp::getInstance().getGui()->getGuiActions("actionShow_Satellite_Labels"), SLOT(setChecked(bool)));
 	connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)), GETSTELMODULE(Satellites), SLOT(setLabelFontSize(int)));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
 
+	// Settings tab / orbit lines group
+	ui->orbitLinesGroup->setChecked(GETSTELMODULE(Satellites)->getOrbitLinesFlag());
+	ui->orbitSegmentsSpin->setValue(Satellite::orbitLineSegments);
+	ui->orbitFadeSpin->setValue(Satellite::orbitLineFadeSegments);
+	ui->orbitDurationSpin->setValue(Satellite::orbitLineSegmentDuration);
+
+	connect(ui->orbitLinesGroup, SIGNAL(toggled(bool)), GETSTELMODULE(Satellites), SLOT(setOrbitLinesFlag(bool)));
 	connect(ui->orbitSegmentsSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
 	connect(ui->orbitFadeSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
 	connect(ui->orbitDurationSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
+
 
 	// Satellites tab
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->satellitesList, SIGNAL(currentTextChanged(const QString&)), this, SLOT(selectedSatelliteChanged(const QString&)));
 	connect(ui->satellitesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(satelliteDoubleClick(QListWidgetItem*)));
 	connect(ui->groupsCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(groupFilterChanged(int)));
-	connect(ui->showButton, SIGNAL(clicked()), this, SLOT(showSelectedSatellites()));
-	connect(ui->hideButton, SIGNAL(clicked()), this, SLOT(hideSelectedSatellites()));
 	connect(ui->visibleCheckbox, SIGNAL(stateChanged(int)), this, SLOT(visibleCheckChanged(int)));
-	connect(ui->orbitCheckbox, SIGNAL(clicked(bool)), this, SLOT(orbitCheckChanged(bool)));
+	connect(ui->orbitCheckbox, SIGNAL(stateChanged(int)), this, SLOT(orbitCheckChanged(int)));
 
 	// Sources tab
 	connect(ui->sourceList, SIGNAL(currentTextChanged(const QString&)), ui->sourceEdit, SLOT(setText(const QString&)));
@@ -121,9 +123,11 @@ void SatellitesDialog::createDialogContent()
 
 void SatellitesDialog::groupFilterChanged(int index)
 {
-	QString prevSelection;
-	if (ui->satellitesList->currentItem())
-		prevSelection = ui->satellitesList->currentItem()->text();
+	QStringList prevMultiSelection;
+	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
+	{
+		prevMultiSelection << i->text();
+	}
 
 	ui->satellitesList->clear();
 	if (ui->groupsCombo->itemData(index).toString() == "all")
@@ -135,20 +139,25 @@ void SatellitesDialog::groupFilterChanged(int index)
 	else
 		ui->satellitesList->insertItems(0,GETSTELMODULE(Satellites)->getSatellites(ui->groupsCombo->currentText()));
 
-	// If the previously selected item is still in the list after the update, select it,
-	// else selected the first item in the list.
-	QList<QListWidgetItem*> foundItems = ui->satellitesList->findItems(prevSelection, Qt::MatchExactly);
-	if (foundItems.count() > 0 && !prevSelection.isEmpty())
+	// If any previously selected items are still in the list after the update, select them,
+	QListWidgetItem* item;
+	for (int i=0; (item = ui->satellitesList->item(i))!=NULL; i++)
 	{
-		foundItems.at(0)->setSelected(true);
-		ui->satellitesList->scrollToItem(foundItems.at(0));
+		item->setSelected(prevMultiSelection.contains(item->text()));
+	}
+
+	QList<QListWidgetItem*> selectedItems = ui->satellitesList->selectedItems();
+	if (selectedItems.count() > 0)
+	{
+		// make sure the first selected item is visible...
+		ui->satellitesList->scrollToItem(selectedItems.at(0));
 	}
 	else if (ui->satellitesList->count() > 0)
 	{
+		// otherwise if there are any items in the listbox, select the first and scroll to the top
 		ui->satellitesList->setCurrentRow(0);
 		ui->satellitesList->scrollToTop();
 	}
-
 }
 
 void SatellitesDialog::selectedSatelliteChanged(const QString& id)
@@ -183,13 +192,29 @@ void SatellitesDialog::setAboutHtml(void)
 	html += "<h2>" + q_("Stellarium Satellites Plugin") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td>" + q_("Version:") + "</td><td>" + PLUGIN_VERSION + "</td></td>";
 	html += "<tr><td>" + q_("Authors:") + "</td><td>Matthew Gates &lt;matthew@porpoisehead.net&gt;</td></td>";
-	html += "<tr><td></td><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></td>";
-	html += "<tr><td>" + q_("Website:") + "</td><td><a href=\"http://stellarium.org/\">stellarium.org</a></td></td></table>";
-	html += "<p>";
-	html += q_("This is the Satellites plugin for Stellarium. ");
-	html += q_("Please leave feedback in the Stellarium forums, post bugs to the bug tracker and consider making a donation to Stellarium if you find this plugin to be useful or interesting.");
-	html += q_("");
-	html += "</body></html>";
+	html += "<tr><td></td><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></tr></table>";
+
+	html += "<p>" + q_("The Satellites plugin predicts the positions of artificial satellites in Earth orbit.") + "</p>";
+	html += "<h3>" + q_("Notes for users") + "</h3><p><ul>";
+	html += "<li>" + q_("Satellites and their orbits are only shown when the observer is on Earth.") + "</li>";
+	html += "<li>" + q_("Predicted positions are only good for a fairly short time (on the order of days, weeks or perhaps a month into the past and future). Expect high weirdness if looking years into the past or future.") + "</li>";
+	html += "<li>" + q_("Orbital elements go out of date pretty quickly (over mere weeks, sometimes days).  To get useful data out, you need to update the TLE data regularly.  This is done automatically every 72 hours if Stellarium can connect to the Internet.") + "</li>";
+	html += "<li>" + q_("The Satellites plugin is still under development.  Some features are incomplete, missing or buggy.") + "</li>";
+	html += "</ul></p>";
+
+	html += "<h3>" + q_("Technical Notes") + "</h3>";
+	html += "<p>" + q_("Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data as the input. ");
+	html += q_("The orbital calculation code is written by Jose Luis Canales according to the revised Spacetrack report N#3 (including Spacetrack report N#6). ");
+	html += q_(QString("See %1this document%2 for details.").arg("<a href=\"http://www.celestrak.com/publications/AIAA/2006-6753\">").arg("</a>")) + "</p>";
+
+	html += "<h3>" + q_("Support links") + "</h3>";
+	html += "<p>" + q_("Support is provided via the Launchpad website.  Be sure to put \"Satellites plugin\" in the subject when posting.") + "</p>";
+	html += "<p><ul>";
+	html += "<li>" + q_(QString("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">").arg("</a>")) + "</li>";
+	html += "<li>" + q_(QString("Bug reports can be made %1here%2.").arg("<a href=\"https://bugs.launchpad.net/stellarium\">").arg("</a>")) + "</li>";
+	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
+	html += "</ul></p></body></html>";
+
 	ui->aboutTextBrowser->setHtml(html);
 }
 
@@ -244,13 +269,6 @@ void SatellitesDialog::updateCompleteReceiver(int numUpdated)
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 }
-
-//void SatellitesDialog::close(void)
-//{
-//	qDebug() << "Closing Satellites Configure Dialog";
-//	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-//	gui->getGuiActions("actionShow_Satellite_ConfigDialog")->setChecked(false);
-//}
 
 void SatellitesDialog::sourceEditingDone(void)
 {
@@ -316,17 +334,23 @@ void SatellitesDialog::restoreDefaults(void)
 
 void SatellitesDialog::updateGuiFromSettings(void)
 {
-	ui->updateFromInternetCheckbox->setChecked(GETSTELMODULE(Satellites)->getUpdatesEnabled());
+	ui->updatesGroup->setChecked(GETSTELMODULE(Satellites)->getUpdatesEnabled());
 	refreshUpdateValues();
 
-	ui->showLabelsCheckbox->setChecked(GETSTELMODULE(Satellites)->getFlagLabels());
+	ui->labelsGroup->setChecked(GETSTELMODULE(Satellites)->getFlagLabels());
 	ui->fontSizeSpinBox->setValue(GETSTELMODULE(Satellites)->getLabelFontSize());
+
+	ui->orbitLinesGroup->setChecked(GETSTELMODULE(Satellites)->getOrbitLinesFlag());
+	ui->orbitSegmentsSpin->setValue(Satellite::orbitLineSegments);
+	ui->orbitFadeSpin->setValue(Satellite::orbitLineFadeSegments);
+	ui->orbitDurationSpin->setValue(Satellite::orbitLineSegmentDuration);
 
 	ui->groupsCombo->clear();
 	ui->groupsCombo->addItems(GETSTELMODULE(Satellites)->getGroups());
-	ui->groupsCombo->insertItem(0, q_("[all satellites]"), QVariant("all"));
 	ui->groupsCombo->insertItem(0, q_("[all not visible]"), QVariant("notvisible"));
 	ui->groupsCombo->insertItem(0, q_("[all visible]"), QVariant("visible"));
+	ui->groupsCombo->insertItem(0, q_("[all]"), QVariant("all"));
+	ui->satellitesList->clearSelection();
 	ui->groupsCombo->setCurrentIndex(0);
 
 	ui->sourceList->clear();
@@ -339,26 +363,6 @@ void SatellitesDialog::saveSettings(void)
 	GETSTELMODULE(Satellites)->saveSettingsToConfig();
 }
 
-void SatellitesDialog::showSelectedSatellites(void)
-{
-	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
-	{
-		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(i->text());
-		sat->visible = true;
-	}
-	groupFilterChanged(ui->groupsCombo->currentIndex());
-}
-
-void SatellitesDialog::hideSelectedSatellites(void)
-{
-	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
-	{
-		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(i->text());
-		sat->visible = false;
-	}
-	groupFilterChanged(ui->groupsCombo->currentIndex());
-}
-
 void SatellitesDialog::visibleCheckChanged(int state)
 {
 	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
@@ -369,14 +373,14 @@ void SatellitesDialog::visibleCheckChanged(int state)
 	groupFilterChanged(ui->groupsCombo->currentIndex());
 }
 
-void SatellitesDialog::orbitCheckChanged(bool checked)
+void SatellitesDialog::orbitCheckChanged(int state)
 {
 	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
 	{
 		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(i->text());
-		// sat->orbitVisible = (state==Qt::Checked);
-		sat->orbitVisible = checked;
+		sat->orbitVisible = (state==Qt::Checked);
 	}
+	groupFilterChanged(ui->groupsCombo->currentIndex());
 }
 
 void SatellitesDialog::satelliteDoubleClick(QListWidgetItem* item)
