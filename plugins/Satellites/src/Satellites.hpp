@@ -228,7 +228,7 @@ private:
 	void readJsonFile(void);
 
 	//! Get the version from the "creator" value in the satellites.json file
-	//! @return version string, e.g. 0.6.1
+	//! @return version string, e.g. "0.6.1"
 	const QString getJsonFileVersion(void);
 
 	bool saveTleMap(const QVariantMap& map, QString path=QString());
