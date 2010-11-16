@@ -35,6 +35,12 @@
 #include "SolarSystem.hpp"
 #include "StelJsonParser.hpp"
 #include "SatellitesDialog.hpp"
+#include "LabelMgr.hpp"
+
+// When i18n is implemented, uncomment the StelTranslator.hpp include
+// and remove the definition of q_
+//#include "StelTranslator.hpp"
+#define q_ QString
 
 #include <plugin_config.h>
 
@@ -142,20 +148,44 @@ void Satellites::init()
 		return;
 	}
 
+	// A timer for hiding alert messages
+	messageTimer = new QTimer(this);
+	messageTimer->setSingleShot(true);   // recurring check for update
+	messageTimer->setInterval(9000);      // 6 seconds should be enough time
+	messageTimer->stop();
+	connect(messageTimer, SIGNAL(timeout()), this, SLOT(messageTimeout()));
+
 	// If the json file does not already exist, create it from the resource in the QT resource
-	if(!QFileInfo(satellitesJsonPath).exists())
+	if(QFileInfo(satellitesJsonPath).exists())
+	{
+		if (getJsonFileVersion() != PLUGIN_VERSION)
+		{
+			displayMessage(q_("The old satellites.json file is no longer compatible - creating a new one"), "#bb0000");
+			QString backupPath = satellitesJsonPath + ".old";
+			if (QFileInfo(backupPath).exists())
+				QFile(backupPath).remove();
+
+			QFile old(satellitesJsonPath);
+			if (old.copy(backupPath))
+			{
+				displayMessage(q_("a backup was made, it is called \"satellites.json.old\""));
+				if (!old.remove())
+					qWarning() << "Satellites::init WARNING - could not remove old (out of date) satellites.json file";
+				else
+					restoreDefaultJsonFile();
+			}
+			else
+				qWarning() << "Satellites::init WARNING - failed to copy satellites.json to satellites.json.old";
+
+		}
+	}
+	else
 	{
 		qDebug() << "Satellites::init satellites.json does not exist - copying default file to " << satellitesJsonPath;
 		restoreDefaultJsonFile();
 	}
-	else
-	{
-		qDebug() << "Satellites::init using satellite.json file: " << satellitesJsonPath;
-		// TODO: replace out of dat json file and notify user
-		// TODO: if (getJsonFileVersion() != PLUGIN_VERSION) { ... }
 
-	}
-
+	qDebug() << "Satellites::init using satellite.json file: " << satellitesJsonPath;
 
 	// create satellites according to content os satellites.json file
 	readJsonFile();
@@ -727,6 +757,20 @@ void Satellites::recalculateOrbitLines(void)
 	{
 		if (sat->initialized && sat->visible && sat->orbitVisible)
 			sat->recalculateOrbitLines();
+	}
+}
+
+void Satellites::displayMessage(const QString& message, const QString hexColor)
+{
+	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20*messageIDs.count()), true, 16, hexColor);
+	messageTimer->start();
+}
+
+void Satellites::messageTimeout(void)
+{
+	foreach(int i, messageIDs)
+	{
+		GETSTELMODULE(LabelMgr)->deleteLabel(i);
 	}
 }
 
