@@ -126,7 +126,6 @@ private:
 	QTimer * countdownTimer;
 	void startCountdown();
 	void resetCountdown();
-	void updateCountdownLabels(int countdownValue);
 
 protected:
 	virtual void createDialogContent();
