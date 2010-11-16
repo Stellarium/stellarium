@@ -90,6 +90,7 @@ public:
 
 	double getDoppler(double freq) const;
 	static float showLabels;
+	static double roundToDp(float n, int dp);
 
 	// when the observer location changes we need to
 	void recalculateOrbitLines(void);
@@ -115,6 +116,7 @@ private:
 	QString description;               // longer description of spacecraft
 	Vec3d XYZ;                         // holds J2000 position
 	char elements[3][80];              // TLE elements as char* for passing to sgp lib
+	char e2[3][80];                    // backup - elements get munged by routines
 	double height, velocity, azimuth, elevation, range, rangeRate;
 	QList<commLink> comms;
 	Vec3f hintColor;
@@ -131,6 +133,7 @@ private:
 
 	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
 	void setObserverLocation(StelLocation* loc=NULL);
+
 
 	//gsatellite objects
 	gSatTEME *pSatellite;
