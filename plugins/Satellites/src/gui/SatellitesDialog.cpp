@@ -250,6 +250,7 @@ void SatellitesDialog::setUpdatesEnabled(bool b)
 	GETSTELMODULE(Satellites)->setUpdatesEnabled(b);
 	ui->updateFrequencySpinBox->setEnabled(b);
 	ui->updateNowButton->setEnabled(b);
+	refreshUpdateValues();
 }
 
 void SatellitesDialog::updateStateReceiver(Satellites::UpdateState state)

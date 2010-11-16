@@ -69,6 +69,9 @@ Satellite::Satellite(const QVariantMap& map)
 	strncpy(elements[0], "DUMMY", 5);
 	strncpy(elements[1], qPrintable(map.value("tle1").toString()), 80);
 	strncpy(elements[2], qPrintable(map.value("tle2").toString()), 80);
+	strncpy(e2[0], "DUMMY", 5);
+	strncpy(e2[1], qPrintable(map.value("tle1").toString()), 80);
+	strncpy(e2[2], qPrintable(map.value("tle2").toString()), 80);
 	if (map.contains("description")) description = map.value("description").toString();
 	if (map.contains("visible")) visible = map.value("visible").toBool();
 	if (map.contains("orbitVisible")) orbitVisible = map.value("orbitVisible").toBool();
@@ -143,18 +146,27 @@ Satellite::~Satellite()
 		delete pSatellite;
 }
 
+double Satellite::roundToDp(float n, int dp)
+{
+	// round n to dp decimal places
+	return floor(n * pow(10., dp) + .5) / pow(10., dp);
+}
+
 QVariantMap Satellite::getMap(void)
 {
 	QVariantMap map;
 	map["designation"] = designation;
-	map["description"] = description;
+
+	if (!description.isEmpty() && description!="")
+		map["description"] = description;
+
 	map["visible"]     = visible;
 	map["orbitVisible"] = orbitVisible;
-	map["tle1"] = QString(elements[1]);
-	map["tle2"] = QString(elements[2]);
-	QVariantList col, orbitCol;;
-	col << (double)hintColor[0] << (double)hintColor[1] << (double)hintColor[2];
-	orbitCol << (double)orbitColorNormal[0] << (double)orbitColorNormal[1] << (double)orbitColorNormal[2];
+	map["tle1"] = QString(e2[1]);
+	map["tle2"] = QString(e2[2]);
+	QVariantList col, orbitCol;
+	col << roundToDp(hintColor[0],3) << roundToDp(hintColor[1], 3) << roundToDp(hintColor[2], 3);
+	orbitCol << roundToDp(orbitColorNormal[0], 3) << roundToDp(orbitColorNormal[1], 3) << roundToDp(orbitColorNormal[2],3);
 	map["hintColor"] = col;
 	map["orbitColor"] = orbitCol;
 	QVariantList commList;
@@ -173,6 +185,7 @@ QVariantMap Satellite::getMap(void)
 		groupList << g;
 	}
 	map["groups"] = groupList;
+
 	return map;
 }
 
