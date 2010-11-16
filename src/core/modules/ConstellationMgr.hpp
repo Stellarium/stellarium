@@ -139,7 +139,7 @@ public slots:
 	bool getFlagLabels(void) const {return flagNames;}
 
 	//! Set whether selected constellation must be displayed alone
-	void setFlagIsolateSelected(bool s) { isolateSelected = s; }
+	void setFlagIsolateSelected(bool s);
 	//! Get whether selected constellation is displayed alone
 	bool getFlagIsolateSelected(void) const { return isolateSelected;}
 

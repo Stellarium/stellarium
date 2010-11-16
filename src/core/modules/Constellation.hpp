@@ -152,7 +152,8 @@ private:
 	StelObjectP* asterism;
 
 	StelTextureSP artTexture;
-	SphericalTexturedConvexPolygon artPolygon;
+	StelVertexArray artPolygon;
+	SphericalCap boundingCap;
 
 	//! Define whether art, lines, names and boundary must be drawn
 	LinearFader artFader, lineFader, nameFader, boundaryFader;
