@@ -207,6 +207,10 @@ public slots:
 
 	void recalculateOrbitLines(void);
 
+	//! Display a message. This is used for plugin-specific warnings and such
+	void displayMessage(const QString& message, const QString hexColor="#999999");
+	void messageTimeout(void);
+
 private:
 	// if existing, delete Satellites section in main config.ini, then create with default values
 	void restoreDefaultConfigIni(void);
@@ -244,6 +248,8 @@ private:
 	int currentUpdateUrlIdx;
 	int numberDownloadsComplete;
 	QTimer* updateTimer;
+	QTimer* messageTimer;
+	QList<int> messageIDs;
 	bool updatesEnabled;
 	QDateTime lastUpdate;
 	int updateFrequencyHours;
