@@ -72,7 +72,7 @@ void SatellitesDialog::createDialogContent()
 	refreshUpdateValues(); // fetch values for last updated and so on
 	connect(ui->updateNowButton, SIGNAL(clicked()), GETSTELMODULE(Satellites), SLOT(updateTLEs()));
 	connect(GETSTELMODULE(Satellites), SIGNAL(updateStateChanged(Satellites::UpdateState)), this, SLOT(updateStateReceiver(Satellites::UpdateState)));
-	connect(GETSTELMODULE(Satellites), SIGNAL(TleUpdateComplete(int, int)), this, SLOT(updateCompleteReceiver(int, int)));
+	connect(GETSTELMODULE(Satellites), SIGNAL(tleUpdateComplete(int, int)), this, SLOT(updateCompleteReceiver(int, int)));
 	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
 
 	updateTimer = new QTimer(this);
@@ -104,6 +104,7 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->groupsCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(groupFilterChanged(int)));
 	connect(ui->visibleCheckbox, SIGNAL(stateChanged(int)), this, SLOT(visibleCheckChanged(int)));
 	connect(ui->orbitCheckbox, SIGNAL(stateChanged(int)), this, SLOT(orbitCheckChanged(int)));
+	connect(ui->saveSatellitesButton, SIGNAL(clicked()), this, SLOT(saveSatellites()));
 
 	// Sources tab
 	connect(ui->sourceList, SIGNAL(currentTextChanged(const QString&)), ui->sourceEdit, SLOT(setText(const QString&)));
@@ -181,9 +182,9 @@ void SatellitesDialog::selectedSatelliteChanged(const QString& id)
 	ui->commsButton->setEnabled(sat->comms.count()>0);
 }
 
-void SatellitesDialog::saveSatellite(const QString& id)
+void SatellitesDialog::saveSatellites(void)
 {
-	qDebug() << "Saving satellite" << id;
+	GETSTELMODULE(Satellites)->saveTleData();
 }
 
 void SatellitesDialog::setAboutHtml(void)

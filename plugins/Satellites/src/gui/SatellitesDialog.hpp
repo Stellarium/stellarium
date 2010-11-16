@@ -47,7 +47,7 @@ public slots:
 private slots:
 	void groupFilterChanged(int index);
 	void selectedSatelliteChanged(const QString& id);
-	void saveSatellite(const QString& id);
+	void saveSatellites(void);
 	void setUpdateValues(int hours);
 	void setUpdatesEnabled(bool b);
 	void updateStateReceiver(Satellites::UpdateState state);

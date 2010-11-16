@@ -603,9 +603,9 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="saveButton">
+            <widget class="QPushButton" name="saveSatellitesButton">
              <property name="enabled">
-              <bool>false</bool>
+              <bool>true</bool>
              </property>
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">

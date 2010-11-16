@@ -28,6 +28,7 @@
 
 #include <QDateTime>
 #include <QSharedPointer>
+#include <QVariantMap>
 
 class StelButton;
 class Planet;
@@ -164,17 +165,18 @@ public:
 	//! The main StelStyle instance should be passed.
 	const StelStyle getModuleStyleSheet(const StelStyle& style);
 
+
 signals:
 	//! emitted when the update status changes, e.g. when 
 	//! an update starts, completes and so on.  Note that
-	//! on completion of an update, TleUpdateComplete is also
+	//! on completion of an update, tleUpdateComplete is also
 	//! emitted with the number of updates done.
 	//! @param state the new update state.
 	void updateStateChanged(Satellites::UpdateState state);
 
 	//! emitted after a TLE update has run.
 	//! @param updates the number of satellites updated.
-	void TleUpdateComplete(int updates, int total);
+	void tleUpdateComplete(int updates, int total);
 	
 
 public slots:
@@ -211,6 +213,9 @@ public slots:
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 	void messageTimeout(void);
 
+	//! Save the current TLE data to the default json file location.
+	void saveTleData(QString path=QString());
+
 private:
 	// if existing, delete Satellites section in main config.ini, then create with default values
 	void restoreDefaultConfigIni(void);
@@ -220,12 +225,16 @@ private:
 
 	// read the json file and create the satellites.  Removes existing satellites first if there are any
 	// this will be done once at init, and also if the defaults are reset.
-	// @return the number of satellites read from the json file
-	int readJsonFile(void);
+	void readJsonFile(void);
 
 	//! Get the version from the "creator" value in the satellites.json file
 	//! @return version string, e.g. 0.6.1
 	const QString getJsonFileVersion(void);
+
+	bool saveTleMap(const QVariantMap& map, QString path=QString());
+	QVariantMap loadTleMap(QString path=QString());
+	void setTleMap(const QVariantMap& map);
+	QVariantMap getTleMap(void);
 
 	QString satellitesJsonPath;
 	QList<SatelliteP> satellites;
@@ -237,6 +246,7 @@ private:
 	StelButton* toolbarButton;
 	QSharedPointer<Planet> earth;
 	Vec3f defaultHintColor;
+	Vec3f defaultOrbitColor;
 	QFont labelFont;
 	
 	// variables and functions for the updater
