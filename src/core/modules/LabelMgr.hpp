@@ -91,7 +91,9 @@ public slots:
 	//! Create a label at fixed screen coordinates
 	//! @param text the text to display
 	//! @param x the horizontal position on the screen, in pixels, from the left of the screen
-	//! @param y the vertical position on the screen, in pixels, from the top of the screen
+	//! @param y the vertical position on the screen, in pixels.  If +ve, this is the distance
+	//!        from the top of the screen. If the value is negative, the label is placed -y
+	//!        pixels from the bottom of the screen.
 	//! @param visible if true, the label starts displayed, else it starts hidden
 	//! @param fontSize size of the font to use
 	//! @param fontColor HTML-like color spec, e.g. "#ffff00" for yellow
