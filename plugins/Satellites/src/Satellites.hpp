@@ -116,6 +116,9 @@ public:
 	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
 	void readSettingsFromConfig(void);
 
+	//! Save the settings to the main configuration file.
+	void saveSettingsToConfig(void);
+
 	//! Get a list of satellite group names.  A Satellite may be long to one or more group
 	//! e.g. "amateur" and "navigation".  Group names are arbitrary strings defined in the 
 	//! json file.  Think of them like tags.  A satellite may not belong to any group at all.
@@ -193,6 +196,17 @@ public slots:
 	//! there is new TLE data.
 	void updateTLEs(void);
 
+	//! Choose whether or not to draw orbit lines.  Each satellite has its own setting
+	//! as well, but this can be used to turn on/off all those satellites which elect to
+	//! have orbit lines all in one go.
+	//! @param b - true to turn on orbit lines, false to turn off
+	void setOrbitLinesFlag(bool b);
+
+	//! Get the current status of the orbit line rendering flag
+	bool getOrbitLinesFlag(void);
+
+	void recalculateOrbitLines(void);
+
 private:
 	// if existing, delete Satellites section in main config.ini, then create with default values
 	void restoreDefaultConfigIni(void);
@@ -204,6 +218,10 @@ private:
 	// this will be done once at init, and also if the defaults are reset.
 	// @return the number of satellites read from the json file
 	int readJsonFile(void);
+
+	//! Get the version from the "creator" value in the satellites.json file
+	//! @return version string, e.g. 0.6.1
+	const QString getJsonFileVersion(void);
 
 	QString satellitesJsonPath;
 	QList<SatelliteP> satellites;
