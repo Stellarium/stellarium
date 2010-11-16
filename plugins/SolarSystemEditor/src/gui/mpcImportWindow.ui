@@ -79,7 +79,7 @@
       <item>
        <widget class="QLabel" name="stelWindowTitle">
         <property name="text">
-         <string notr="true" extracomment="The title of the window will be set during runtime">Object data import</string>
+         <string notr="true" extracomment="The title of the window will be set during runtime">Import data</string>
         </property>
        </widget>
       </item>
@@ -414,19 +414,6 @@
               </item>
               <item>
                <widget class="QLabel" name="labelQueryMessage">
-                <property name="text">
-                 <string>Object not found.</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="labelQueryCountdown">
-                <property name="text">
-                 <string>You can use the MPC website again in %1 seconds.</string>
-                </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
                 </property>

@@ -118,7 +118,7 @@ void MpcImportWindow::resetDialog()
 {
 	ui->stackedWidget->setCurrentIndex(0);
 
-	ui->tabWidget->setCurrentIndex(0);
+	//ui->tabWidget->setCurrentIndex(0);
 	ui->groupBoxType->setVisible(true);
 	ui->radioButtonAsteroids->setChecked(true);
 
@@ -250,13 +250,11 @@ void MpcImportWindow::addObjects()
 
 	resetDialog();
 	emit objectsImported();
-	close();
 }
 
 void MpcImportWindow::discardObjects()
 {
 	resetDialog();
-	close();
 }
 
 void MpcImportWindow::pasteClipboardURL()
@@ -807,7 +805,6 @@ void MpcImportWindow::startCountdown()
 	//Disable the interface
 	ui->lineEditQuery->setEnabled(false);
 	ui->pushButtonSendQuery->setEnabled(false);
-	ui->labelQueryCountdown->setVisible(true);
 }
 
 void MpcImportWindow::resetCountdown()
@@ -828,8 +825,6 @@ void MpcImportWindow::resetCountdown()
 
 	//Reset the counter
 	countdown = 60;
-	ui->labelQueryCountdown->setVisible(false);
-	updateCountdownLabels(countdown);
 
 	//Enable the interface
 	ui->lineEditQuery->setEnabled(true);
@@ -843,16 +838,11 @@ void MpcImportWindow::updateCountdown()
 	{
 		resetCountdown();
 	}
-	else
+	//If there has been an answer
+	else if (countdown > 50 && queryReply == NULL)
 	{
-		updateCountdownLabels(countdown);
+		resetCountdown();
 	}
-}
-
-void MpcImportWindow::updateCountdownLabels(int countdownValue)
-{
-	QString countdownText("You can use the MPC website again in %1 seconds.");
-	ui->labelQueryCountdown->setText(countdownText.arg(countdownValue));
 }
 
 void MpcImportWindow::resetNotFound()
