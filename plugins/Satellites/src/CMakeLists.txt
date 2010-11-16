@@ -32,8 +32,6 @@ SET(Satellites_SRCS
   Satellite.cpp
   Satellites.hpp
   Satellites.cpp
-  gui/StelDialogPlugin.hpp
-  gui/StelDialogPlugin.cpp
   gui/SatellitesDialog.hpp
   gui/SatellitesDialog.cpp
 )
@@ -50,7 +48,6 @@ QT4_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
 # that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
 SET(Satellites_MOC_HDRS
   Satellites.hpp
-  gui/StelDialogPlugin.hpp
   gui/SatellitesDialog.hpp
 )
 
