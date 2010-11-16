@@ -569,19 +569,13 @@ QVariantMap Satellites::loadTleMap(QString path)
 void Satellites::setTleMap(const QVariantMap& map)
 {
 	int numReadOk = 0;
-	QVariantList defaultHintColorMap, defaultOrbitColorMap;
+	QVariantList defaultHintColorMap;
 	defaultHintColorMap << defaultHintColor[0] << defaultHintColor[1] << defaultHintColor[2];
-	defaultOrbitColorMap << defaultOrbitColor[0] << defaultOrbitColor[1] << defaultOrbitColor[2];
 
 	if (map.contains("hintColor"))
 	{
 		defaultHintColorMap = map.value("hintColor").toList();
 		defaultHintColor.set(defaultHintColorMap.at(0).toDouble(), defaultHintColorMap.at(1).toDouble(), defaultHintColorMap.at(2).toDouble());
-	}
-	if (map.contains("orbitColor"))
-	{
-		defaultOrbitColorMap = map.value("orbitColor").toList();
-		defaultOrbitColor.set(defaultOrbitColorMap.at(0).toDouble(), defaultOrbitColorMap.at(1).toDouble(), defaultOrbitColorMap.at(2).toDouble());
 	}
 
 	satellites.clear();
@@ -595,7 +589,7 @@ void Satellites::setTleMap(const QVariantMap& map)
 			satData["hintColor"] = defaultHintColorMap;
 
 		if (!satData.contains("orbitColor"))
-			satData["orbitColor"] = defaultOrbitColorMap;
+			satData["orbitColor"] = satData["hintColor"];
 
 		SatelliteP sat(new Satellite(satData));
 		if (sat->initialized)
@@ -609,24 +603,27 @@ void Satellites::setTleMap(const QVariantMap& map)
 QVariantMap Satellites::getTleMap(void)
 {
 	QVariantMap map;
-	QVariantList defHintCol, defOrbitCol;
-	defHintCol << (double)defaultHintColor[0] << (double)defaultHintColor[1] << (double)defaultHintColor[2];
-	defOrbitCol << (double)defaultOrbitColor[0] << (double)defaultOrbitColor[1] << (double)defaultOrbitColor[2];
-	map["creator"] = QString("Satellites plugin version %1 (update)").arg(PLUGIN_VERSION);
+	QVariantList defHintCol;
+	defHintCol << Satellite::roundToDp(defaultHintColor[0],3)
+		   << Satellite::roundToDp(defaultHintColor[1],3)
+		   << Satellite::roundToDp(defaultHintColor[2],3);
+
+	map["creator"] = QString("Satellites plugin version %1 (updated)").arg(PLUGIN_VERSION);
 	map["hintColor"] = defHintCol;
-	map["orbitColor"] = defOrbitCol;
 	map["shortName"] = "satellite orbital data";
 	QVariantMap sats;
 	foreach(const SatelliteP& sat, satellites)
 	{
 		QVariantMap satMap = sat->getMap();
 
-		// remove those values which are the same as the global values
+		if (satMap["orbitColor"] == satMap["hintColor"])
+			satMap.remove("orbitColor");
+
 		if (satMap["hintColor"].toList() == defHintCol)
 			satMap.remove("hintColor");
 
-		if (satMap["orbitColor"].toList() == defOrbitCol)
-			satMap.remove("orbitColor");
+		if (satMap.contains("designation"))
+			satMap.remove("designation");
 
 		sats[sat->designation] = satMap;
 	}
