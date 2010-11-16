@@ -36,6 +36,8 @@
 #include "StelJsonParser.hpp"
 #include "SatellitesDialog.hpp"
 
+#include <plugin_config.h>
+
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QKeyEvent>
@@ -70,7 +72,8 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 Q_EXPORT_PLUGIN2(Satellites, SatellitesStelPluginInterface)
 
 Satellites::Satellites()
-	: pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL), earth(NULL), defaultHintColor(0.,0.4,0.6), progressBar(NULL)
+	: pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL),
+	  earth(NULL), defaultHintColor(0.,0.4,0.6), progressBar(NULL)
 {
 	setObjectName("Satellites");
 	configDialog = new SatellitesDialog();
@@ -80,7 +83,6 @@ void Satellites::deinit()
 {
 	Satellite::hintTexture.clear();
 	texPointer.clear();
-	configDialog->setVisible(false);
 }
 
 Satellites::~Satellites()
@@ -132,6 +134,7 @@ void Satellites::init()
 		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Satellite_ConfigDialog"), SLOT(setChecked(bool)));
 		connect(gui->getGuiActions("actionShow_Satellite_Hints"), SIGNAL(toggled(bool)), this, SLOT(setFlagHints(bool)));
 		connect(gui->getGuiActions("actionShow_Satellite_Labels"), SIGNAL(toggled(bool)), this, SLOT(setFlagLabels(bool)));
+
 	}
 	catch (std::runtime_error &e)
 	{
@@ -148,7 +151,11 @@ void Satellites::init()
 	else
 	{
 		qDebug() << "Satellites::init using satellite.json file: " << satellitesJsonPath;
+		// TODO: replace out of dat json file and notify user
+		// TODO: if (getJsonFileVersion() != PLUGIN_VERSION) { ... }
+
 	}
+
 
 	// create satellites according to content os satellites.json file
 	readJsonFile();
@@ -183,6 +190,7 @@ void Satellites::init()
 		nightStyleSheet = styleSheetFile.readAll();
 	}
 	styleSheetFile.close();
+
 }
 
 void Satellites::setStelStyle(const QString& mode)
@@ -347,6 +355,10 @@ void Satellites::restoreDefaultConfigIni(void)
 	conf->setValue("tle_url6", "http://celestrak.com/NORAD/elements/iridium.txt");
 	conf->setValue("tle_url7", "http://celestrak.com/NORAD/elements/tle-new.txt");
 	conf->setValue("update_frequency_hours", 72);
+	conf->setValue("orbit_line_flag", true);
+	conf->setValue("orbit_line_segments", 90);
+	conf->setValue("orbit_fade_segments", 5);
+	conf->setValue("orbit_segment_duration", 20);
 	conf->endGroup();
 }
 
@@ -400,6 +412,52 @@ void Satellites::readSettingsFromConfig(void)
 	// Get a font for labels
 	labelFont.setPixelSize(conf->value("hint_font_size", 10).toInt());
 
+	// orbit drawing params
+	Satellite::orbitLinesFlag = conf->value("orbit_line_flag", true).toBool();
+	Satellite::orbitLineSegments = conf->value("orbit_line_segments", 90).toInt();
+	Satellite::orbitLineFadeSegments = conf->value("orbit_fade_segments", 5).toInt();
+	Satellite::orbitLineSegmentDuration = conf->value("orbit_segment_duration", 20).toInt();
+
+	conf->endGroup();
+}
+
+void Satellites::saveSettingsToConfig(void)
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	conf->beginGroup("Satellites");
+
+	// update tle urls... first clear the existing ones in the file
+	QRegExp keyRE("^tle_url\\d+$");
+	foreach(QString key, conf->childKeys())
+	{
+		if (keyRE.exactMatch(key))
+			conf->remove(key);
+	}
+
+
+	// populate updateUrls from tle_url? keys
+	int n=0;
+	foreach(QString url, updateUrls)
+	{
+		QString key = QString("tle_url%1").arg(n++);
+		conf->setValue(key, url);
+	}
+
+	// updater related settings...
+	conf->setValue("update_frequency_hours", updateFrequencyHours);
+	conf->setValue("show_satellite_hints", (bool)hintFader);
+	conf->setValue("show_satellite_labels", Satellite::showLabels);
+	conf->setValue("updates_enabled", updatesEnabled );
+
+	// Get a font for labels
+	conf->setValue("hint_font_size", labelFont.pixelSize());
+
+	// orbit drawing params
+	conf->setValue("orbit_line_flag", Satellite::orbitLinesFlag);
+	conf->setValue("orbit_line_segments", Satellite::orbitLineSegments);
+	conf->setValue("orbit_fade_segments", Satellite::orbitLineFadeSegments);
+	conf->setValue("orbit_segment_duration", Satellite::orbitLineSegmentDuration);
+
 	conf->endGroup();
 }
 
@@ -445,6 +503,34 @@ int Satellites::readJsonFile(void)
 	satelliteJsonFile.close();
 	return numReadOk;
 }
+
+const QString Satellites::getJsonFileVersion(void)
+{
+	QString jsonVersion("unknown");
+	QFile satelliteJsonFile(satellitesJsonPath);
+	if (!satelliteJsonFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Satellites::init cannot open " << satellitesJsonPath;
+		return jsonVersion;
+	}
+
+	QVariantMap map;
+	map = StelJsonParser::parse(&satelliteJsonFile).toMap();
+	if (map.contains("creator"))
+	{
+		QString creator = map.value("creator").toString();
+		QRegExp vRx(".*(\\d+\\.\\d+\\.\\d+).*");
+		if (vRx.exactMatch(creator))
+		{
+			jsonVersion = vRx.capturedTexts().at(1);
+		}
+	}
+
+	satelliteJsonFile.close();
+	qDebug() << "Satellites::getJsonFileVersion() version from file:" << jsonVersion;
+	return jsonVersion;
+}
+
 
 QStringList Satellites::getGroups(void) const
 {
@@ -622,6 +708,26 @@ void Satellites::observerLocationChanged(StelLocation loc)
 		if (sat->initialized && sat->visible)
 			sat->setObserverLocation(&loc);
 	}
+	recalculateOrbitLines();
+}
+
+void Satellites::setOrbitLinesFlag(bool b)
+{
+	Satellite::orbitLinesFlag = b;
+}
+
+bool Satellites::getOrbitLinesFlag(void)
+{
+	return Satellite::orbitLinesFlag;
+}
+
+void Satellites::recalculateOrbitLines(void)
+{
+	foreach(const SatelliteP& sat, satellites)
+	{
+		if (sat->initialized && sat->visible && sat->orbitVisible)
+			sat->recalculateOrbitLines();
+	}
 }
 
 void Satellites::updateFromFiles(void)
@@ -791,6 +897,7 @@ void Satellites::draw(StelCore* core)
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 	Satellite::hintTexture->bind();
+	Satellite::viewportHalfspace = painter.getProjector()->getBoundingCap();
 	foreach (const SatelliteP& sat, satellites)
 	{
 		if (sat && sat->initialized && sat->visible)
