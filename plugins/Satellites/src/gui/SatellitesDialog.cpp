@@ -77,7 +77,9 @@ void SatellitesDialog::createDialogContent()
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
-		updateTimer->start(7000);
+	updateTimer->start(7000);
+
+	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	// Settings tab / General settings group
 	connect(ui->labelsGroup, SIGNAL(toggled(bool)), StelApp::getInstance().getGui()->getGuiActions("actionShow_Satellite_Labels"), SLOT(setChecked(bool)));
@@ -98,13 +100,11 @@ void SatellitesDialog::createDialogContent()
 
 
 	// Satellites tab
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->satellitesList, SIGNAL(currentTextChanged(const QString&)), this, SLOT(selectedSatelliteChanged(const QString&)));
 	connect(ui->satellitesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(satelliteDoubleClick(QListWidgetItem*)));
 	connect(ui->groupsCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(groupFilterChanged(int)));
-	connect(ui->visibleCheckbox, SIGNAL(stateChanged(int)), this, SLOT(visibleCheckChanged(int)));
-	connect(ui->orbitCheckbox, SIGNAL(stateChanged(int)), this, SLOT(orbitCheckChanged(int)));
 	connect(ui->saveSatellitesButton, SIGNAL(clicked()), this, SLOT(saveSatellites()));
+	connectSatelliteGuiForm();
 
 	// Sources tab
 	connect(ui->sourceList, SIGNAL(currentTextChanged(const QString&)), ui->sourceEdit, SLOT(setText(const QString&)));
@@ -173,6 +173,7 @@ void SatellitesDialog::selectedSatelliteChanged(const QString& id)
 	if (!sat->initialized)
 		return;
 
+	disconnectSatelliteGuiForm();
 	ui->idLineEdit->setText(sat->designation);
 	ui->descriptionTextEdit->setText(sat->description);
 	ui->groupsTextEdit->setText(sat->groupIDs.join(", "));
@@ -180,6 +181,8 @@ void SatellitesDialog::selectedSatelliteChanged(const QString& id)
 	ui->visibleCheckbox->setChecked(sat->visible);
 	ui->orbitCheckbox->setChecked(sat->orbitVisible);
 	ui->commsButton->setEnabled(sat->comms.count()>0);
+	connectSatelliteGuiForm();
+
 }
 
 void SatellitesDialog::saveSatellites(void)
@@ -403,3 +406,16 @@ void SatellitesDialog::setOrbitParams(void)
 	GETSTELMODULE(Satellites)->recalculateOrbitLines();
 }
 
+void SatellitesDialog::connectSatelliteGuiForm(void)
+{
+	// make sure we don't connect more than once
+	disconnectSatelliteGuiForm();
+	connect(ui->visibleCheckbox, SIGNAL(stateChanged(int)), this, SLOT(visibleCheckChanged(int)));
+	connect(ui->orbitCheckbox, SIGNAL(stateChanged(int)), this, SLOT(orbitCheckChanged(int)));
+}
+
+void SatellitesDialog::disconnectSatelliteGuiForm(void)
+{
+	disconnect(ui->visibleCheckbox, SIGNAL(stateChanged(int)), this, SLOT(visibleCheckChanged(int)));
+	disconnect(ui->orbitCheckbox, SIGNAL(stateChanged(int)), this, SLOT(orbitCheckChanged(int)));
+}
