@@ -1,5 +1,5 @@
 {
-	"creator": "Satellites plugin version 0.6.1 (default file)",
+	"creator": "Satellites plugin version 0.6.2 (default file)",
 	"hintColor": [0, 0.300000011920929, 0.600000023841858],
 	"orbitColor": [0, 0.3, 0.6],
 	"satellites": 
@@ -499,8 +499,9 @@
 		},
 		"HST": 
 		{
+			"description": "The Hubble Space Telescope",
 			"comms": [],
-			"groups": [],
+			"groups": ["scientific"],
 			"orbitColor": [0, 0.300000011920929, 0.600000023841858],
 			"orbitVisible": false,
 			"tle1": "1 20580U 90037B   10315.25682231  .00000589  00000-0  32150-4 0  6740",
@@ -1499,6 +1500,7 @@
 		},
 		"ISS (ZARYA)": 
 		{
+			"description": "The International Space Station",
 			"comms": [
 			{
 				"description": "ARISS voice uplink region 2 & 3",

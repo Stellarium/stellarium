@@ -97,8 +97,6 @@ Satellite::Satellite(const QVariantMap& map)
 		orbitColorNormal = hintColor;
 	}
 
-
-
 	// Set the night color of orbit lines to red with the
 	// intensity of the average of the RGB for the day color.
 	float orbitColorBrightness = (orbitColorNormal[0] + orbitColorNormal[1] + orbitColorNormal[2])/3;
@@ -149,6 +147,7 @@ QVariantMap Satellite::getMap(void)
 {
 	QVariantMap map;
 	map["designation"] = designation;
+	map["description"] = description;
 	map["visible"]     = visible;
 	map["orbitVisible"] = orbitVisible;
 	map["tle1"] = QString(elements[1]);

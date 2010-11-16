@@ -64,6 +64,9 @@ private slots:
 	void setOrbitParams(void);
 
 private:
+	void connectSatelliteGuiForm(void);
+	void disconnectSatelliteGuiForm(void);
+
 	Ui_satellitesDialog* ui;
 	bool satelliteModified;
 	void setAboutHtml(void);
