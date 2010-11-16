@@ -28,17 +28,13 @@
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
+#include "StelSphereGeometry.hpp"
 
 #include "StelPainter.hpp"
 #include "gsatellite/gSatTEME.hpp"
 #include "gsatellite/gObserver.hpp"
 #include "gsatellite/gTime.hpp"
 #include "gsatellite/gVector.hpp"
-
-
-#define DRAWORBIT_SLOTS_NUMBER    131
-#define DRAWORBIT_FADE_NUMBER     10
-#define DRAWORBIT_SLOT_SECNUMBER  10
 
 
 class StelPainter;
@@ -95,13 +91,16 @@ public:
 	double getDoppler(double freq) const;
 	static float showLabels;
 
+	// when the observer location changes we need to
+	void recalculateOrbitLines(void);
+
 public:
-    void enableDrawOrbit(bool b);
+	void enableDrawOrbit(bool b);
 
 private:
 	//draw orbits methods
 	void computeOrbitPoints();
-	void drawOrbit(const StelCore* core, StelPainter& painter);
+	void drawOrbit(StelPainter& painter);
 	//! returns 0 - 1.0 for the DRAWORBIT_FADE_NUMBER segments at
 	//! each end of an orbit, with 1 in the middle.
 	float calculateOrbitSegmentIntensity(int segNum);
@@ -124,6 +123,11 @@ private:
 	static StelTextureSP hintTexture;
 	static float hintBrightness;
 	static float hintScale;
+	static SphericalCap viewportHalfspace;
+	static int orbitLineSegments;
+	static int orbitLineFadeSegments;
+	static int orbitLineSegmentDuration;
+	static bool orbitLinesFlag;
 
 	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
 	void setObserverLocation(StelLocation* loc=NULL);
