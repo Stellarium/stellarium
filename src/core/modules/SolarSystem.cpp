@@ -226,6 +226,19 @@ void SolarSystem::loadPlanets()
 			}
 			systemPlanets.clear();
 			//Memory leak? What's the proper way of cleaning shared pointers?
+
+			//If the file is in the user data directory, rename it:
+			if (solarSystemFile.contains(StelFileMgr::getUserDir()))
+			{
+				QString newName = QString("%1/data/ssystem-%2.ini").arg(StelFileMgr::getUserDir()).arg(QDateTime::currentDateTime().toString("yyyyMMddThhmmss"));
+				if (QFile::rename(solarSystemFile, newName))
+					qWarning() << "Invalid Solar System file" << solarSystemFile << "has been renamed to" << newName;
+				else
+				{
+					qWarning() << "Invalid Solar System file" << solarSystemFile << "cannot be removed!";
+					qWarning() << "Please either delete it, rename it or move it elsewhere.";
+				}
+			}
 		}
 	}
 }
