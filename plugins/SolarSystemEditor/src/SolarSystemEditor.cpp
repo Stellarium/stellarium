@@ -53,10 +53,10 @@ StelPluginInfo SolarSystemEditorStelPluginInterface::getPluginInfo() const
 	
 	StelPluginInfo info;
 	info.id = "SolarSystemEditor";
-	info.displayedName = "Solar System Editor";
-	info.authors = "Bogdan Marinov";
+	info.displayedName = q_("Solar System Editor");
+	info.authors = q_("Bogdan Marinov");
 	info.contact = "http://stellarium.org";
-	info.description = "An interface for adding asteroids and comets to Stellarium. It can download object lists from the Minor Planet Center's website and perform searches in its online database. Still a work in progress.";
+	info.description = q_("An interface for adding asteroids and comets to Stellarium. It can download object lists from the Minor Planet Center's website and perform searches in its online database. Still a work in progress.");
 	return info;
 }
 
