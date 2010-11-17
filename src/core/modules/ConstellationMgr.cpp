@@ -439,23 +439,40 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			Mat4d A(x1, texSizeY - y1, 0.f, 1.f, x2, texSizeY - y2, 0.f, 1.f, x3, texSizeY - y3, 0.f, 1.f, x1, texSizeY - y1, texSizeX, 1.f);
 			Mat4d X = B * A.inverse();
 
-			QVector<Vec3d> contour(4);
-			contour[0] = X * Vec3d(0., 0., 0.);
-			contour[1] = X * Vec3d(texSizeX, 0., 0.);
+			QVector<Vec3d> contour(10);
+			contour[0] = X * Vec3d(texSizeX*0.5, texSizeY*0.5, 0.);
+			contour[1] = X * Vec3d(texSizeX, texSizeY*0.5, 0.);
 			contour[2] = X * Vec3d(texSizeX, texSizeY, 0.);
-			contour[3] = X * Vec3d(0, texSizeY, 0.);
-			contour[0].normalize();
-			contour[1].normalize();
-			contour[2].normalize();
-			contour[3].normalize();
+			contour[3] = X * Vec3d(texSizeX*0.5, texSizeY, 0.);
+			contour[4] = X * Vec3d(0, texSizeY, 0.);
+			contour[5] = X * Vec3d(0, texSizeY*0.5, 0.);
+			contour[6] = X * Vec3d(0, 0, 0.);
+			contour[7] = X * Vec3d(texSizeX*0.5, 0, 0.);
+			contour[8] = X * Vec3d(texSizeX, 0, 0.);
+			contour[9] = X * Vec3d(texSizeX, texSizeY*0.5, 0.);
+			for (int i=0;i<10;++i)
+			{
+				contour[i].normalize();
+			}
 
-			QVector<Vec2f> texCoords(4);
-			texCoords[0].set(0,0);
-			texCoords[1].set(1,0);
+			QVector<Vec2f> texCoords(10);
+			texCoords[0].set(0.5,0.5);
+			texCoords[1].set(1,0.5);
 			texCoords[2].set(1,1);
-			texCoords[3].set(0,1);
-			cons->artPolygon.setContour(contour, texCoords);
-			Q_ASSERT(cons->artPolygon.checkValid());
+			texCoords[3].set(0.5,1);
+			texCoords[4].set(0,1);
+			texCoords[5].set(0,0.5);
+			texCoords[6].set(0,0);
+			texCoords[7].set(0.5,0);
+			texCoords[8].set(1,0);
+			texCoords[9].set(1,0.5);
+
+			cons->artPolygon.vertex=contour;
+			cons->artPolygon.texCoords=texCoords;
+			cons->artPolygon.primitiveType=StelVertexArray::TriangleFan;
+
+			cons->boundingCap.n=contour[0];
+			cons->boundingCap.d=contour[0]*contour[2];
 			++readOk;
 		}
 	}

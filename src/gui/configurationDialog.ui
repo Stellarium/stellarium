@@ -1116,9 +1116,8 @@
           <string>Plugins</string>
          </property>
          <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-tools.png</normalon>
-          </iconset>
+          <iconset resource="../../data/gui/guiRes.qrc">
+           <normaloff>:/graphicGui/tabicon-plugins.png</normaloff>:/graphicGui/tabicon-plugins.png</iconset>
          </property>
         </item>
        </widget>
