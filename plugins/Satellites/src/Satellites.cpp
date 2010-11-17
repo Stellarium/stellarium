@@ -161,22 +161,8 @@ void Satellites::init()
 	{
 		if (getJsonFileVersion() != PLUGIN_VERSION)
 		{
-			displayMessage(q_("The old satellites.json file is no longer compatible - creating a new one"), "#bb0000");
-			QString backupPath = satellitesJsonPath + ".old";
-			if (QFileInfo(backupPath).exists())
-				QFile(backupPath).remove();
-
-			QFile old(satellitesJsonPath);
-			if (old.copy(backupPath))
-			{
-				displayMessage(q_("a backup was made, it is called \"satellites.json.old\""), "#bb0000");
-				if (!old.remove())
-					qWarning() << "Satellites::init WARNING - could not remove old (out of date) satellites.json file";
-				else
-					restoreDefaultJsonFile();
-			}
-			else
-				qWarning() << "Satellites::init WARNING - failed to copy satellites.json to satellites.json.old";
+			displayMessage(q_("The old satellites.json file is no longer compatible - using default file"), "#bb0000");
+			restoreDefaultJsonFile();
 		}
 	}
 	else
@@ -221,6 +207,39 @@ void Satellites::init()
 	}
 	styleSheetFile.close();
 
+}
+
+bool Satellites::backupJsonFile(bool deleteOriginal)
+{
+	QFile old(satellitesJsonPath);
+	if (!old.exists())
+	{
+		qWarning() << "Satellites::backupJsonFile no file to backup";
+		return false;
+	}
+
+	QString backupPath = satellitesJsonPath + ".old";
+	if (QFileInfo(backupPath).exists())
+		QFile(backupPath).remove();
+
+	if (old.copy(backupPath))
+	{
+		if (deleteOriginal)
+		{
+			if (!old.remove())
+			{
+				qWarning() << "Satellites::backupJsonFile WARNING - could not remove old satellites.json file";
+				return false;
+			}
+		}
+	}
+	else
+	{
+		qWarning() << "Satellites::backupJsonFile WARNING - failed to copy satellites.json to satellites.json.old";
+		return false;
+	}
+
+	return true;
 }
 
 void Satellites::setStelStyle(const QString& mode)
@@ -361,6 +380,7 @@ void Satellites::restoreDefaults(void)
 {
 	restoreDefaultConfigIni();
 	restoreDefaultJsonFile();
+	readJsonFile();
 	readSettingsFromConfig();
 }
 
@@ -395,6 +415,9 @@ void Satellites::restoreDefaultConfigIni(void)
 
 void Satellites::restoreDefaultJsonFile(void)
 {
+	if (QFileInfo(satellitesJsonPath).exists())
+		backupJsonFile(true);
+
 	QFile src(":/satellites/satellites.json");
 	if (!src.copy(satellitesJsonPath))
 	{
