@@ -78,6 +78,13 @@ public:
 	//!		that path does not match the flags specified.
 	static QString findFile(const QString& path, const Flags& flags=(Flags)0);
 
+	//! List all paths witihin the search paths that match the argument.
+	//! Similar to findFile(), but unlike it this function doesn't stop
+	//! at the first instance. Instead, it returns a list of paths to all
+	//! instances. The list is ordered, starting with the most external path
+	//! (the first one in fileLocations).
+	static QStringList findFileInAllPaths(const QString& path, const Flags& flags=(Flags)0);
+
 	//! Set a set of all possible files/directories in any Stellarium search directory
 	//! @param path the path to search inside, e.g. "landscapes"
 	//! @param flags options which constrain the result

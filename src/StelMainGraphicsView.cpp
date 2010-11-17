@@ -93,6 +93,10 @@ Q_IMPORT_PLUGIN(Oculars)
 Q_IMPORT_PLUGIN(TelescopeControl)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_SOLARSYSTEMEDITOR
+Q_IMPORT_PLUGIN(SolarSystemEditor)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_TIMEZONECONFIGURATION
 Q_IMPORT_PLUGIN(TimeZoneConfiguration)
 #endif
