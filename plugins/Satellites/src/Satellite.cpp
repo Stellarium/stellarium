@@ -57,7 +57,7 @@ bool Satellite::orbitLinesFlag = true;
 
 
 Satellite::Satellite(const QVariantMap& map)
-	: initialized(false), visible(true), hintColor(0.0,0.0,0.0)
+	: initialized(false), visible(true), hintColor(0.0,0.0,0.0), lastUpdated()
 {
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation") || !map.contains("tle1") || !map.contains("tle2"))
@@ -136,6 +136,11 @@ Satellite::Satellite(const QVariantMap& map)
 
 	pSatellite = new gSatTEME( designation.toAscii().data(), elements[1], elements[2]);
 
+	if (map.contains("lastUpdated"))
+	{
+		lastUpdated = map.value("lastUpdated").toDateTime();
+	}
+
 	setObserverLocation();
 	initialized = true;
 }
@@ -185,6 +190,11 @@ QVariantMap Satellite::getMap(void)
 		groupList << g;
 	}
 	map["groups"] = groupList;
+
+	if (!lastUpdated.isNull())
+	{
+		map["lastUpdated"] = lastUpdated;
+	}
 
 	return map;
 }
