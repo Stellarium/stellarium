@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-11 15:20+0200\n"
+"POT-Creation-Date: 2010-11-17 17:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,18 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: src/core/modules/GridLinesMgr.cpp:516
+msgid "Meridian"
+msgstr ""
+
+#: src/core/modules/GridLinesMgr.cpp:520
+msgid "Ecliptic"
+msgstr ""
+
+#: src/core/modules/GridLinesMgr.cpp:524
+msgid "Equator"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:447
 msgid "Author: "
@@ -980,335 +992,390 @@ msgstr ""
 msgid "Solar System Observer"
 msgstr ""
 
+#. TRANSLATORS: Asteroid (5) Astraea
 #: src/translations.h:73
-msgid "N"
+msgid "Astraea"
 msgstr ""
 
-#: src/translations.h:74
-msgid "S"
-msgstr ""
-
+#. TRANSLATORS: Asteroid (6) Hebe
 #: src/translations.h:75
-msgid "E"
+msgid "Hebe"
 msgstr ""
 
-#: src/translations.h:76
-msgid "W"
+#. TRANSLATORS: Asteroid (7) Iris
+#: src/translations.h:77
+msgid "Iris"
 msgstr ""
 
+#. TRANSLATORS: Asteroid (8) Flora
 #: src/translations.h:79
-msgid "Aztec"
+msgid "Flora"
 msgstr ""
 
-#: src/translations.h:80
-msgid "Chinese"
-msgstr ""
-
+#. TRANSLATORS: Asteroid (9) Metis
 #: src/translations.h:81
-msgid "Egyptian"
+msgid "Metis"
 msgstr ""
 
-#: src/translations.h:82
-msgid "Inuit"
-msgstr ""
-
+#. TRANSLATORS: Asteroid (10) Hygiea
 #: src/translations.h:83
-msgid "Korean"
+msgid "Hygiea"
 msgstr ""
 
-#: src/translations.h:84
-msgid "Lakota"
-msgstr ""
-
+#. TRANSLATORS: Asteroid (1221) Amor
 #: src/translations.h:85
-msgid "Maori"
+msgid "Amor"
 msgstr ""
 
-#: src/translations.h:86
-msgid "Navajo"
-msgstr ""
-
+#. TRANSLATORS: Asteroid (99942) Apophis
 #: src/translations.h:87
-msgid "Norse"
+msgid "Apophis"
 msgstr ""
 
-#: src/translations.h:88
-msgid "Polynesian"
-msgstr ""
-
+#. TRANSLATORS: Asteroid (2060) Chiron
 #: src/translations.h:89
-msgid "Sami"
+msgid "Chiron"
 msgstr ""
 
-#: src/translations.h:90
-msgid "Tupi-Guarani"
-msgstr ""
-
+#. TRANSLATORS: Asteroid (433) Eros
 #: src/translations.h:91
-msgid "Western"
+msgid "Eros"
 msgstr ""
 
-#: src/translations.h:95
-msgid "Set Location "
-msgstr ""
-
-#: src/translations.h:96
-msgid "Set Time "
+#. TRANSLATORS: Asteroid (624) Hektor
+#: src/translations.h:93
+msgid "Hektor"
 msgstr ""
 
 #: src/translations.h:97
-msgid "General "
+msgid "N"
 msgstr ""
 
 #: src/translations.h:98
-msgid "Stars "
+msgid "S"
 msgstr ""
 
 #: src/translations.h:99
-msgid "Colors "
+msgid "E"
 msgstr ""
 
 #: src/translations.h:100
-msgid "Effects "
+msgid "W"
 msgstr ""
 
-#: src/translations.h:101
-msgid "Scripts "
-msgstr ""
-
-#: src/translations.h:102
-msgid "Administration "
+#: src/translations.h:103
+msgid "Aztec"
 msgstr ""
 
 #: src/translations.h:104
-msgid "Latitude: "
+msgid "Chinese"
 msgstr ""
 
 #: src/translations.h:105
-msgid "Longitude: "
+msgid "Egyptian"
 msgstr ""
 
 #: src/translations.h:106
-msgid "Altitude (m): "
+msgid "Inuit"
 msgstr ""
 
 #: src/translations.h:107
-msgid "Solar System Body: "
+msgid "Korean"
+msgstr ""
+
+#: src/translations.h:108
+msgid "Lakota"
 msgstr ""
 
 #: src/translations.h:109
-msgid "Sky Time: "
+msgid "Maori"
 msgstr ""
 
 #: src/translations.h:110
-msgid "Set Time Zone: "
+msgid "Navajo"
 msgstr ""
 
 #: src/translations.h:111
-msgid "Day keys: "
+msgid "Norse"
 msgstr ""
 
 #: src/translations.h:112
-msgid "Calendar"
+msgid "Polynesian"
 msgstr ""
 
 #: src/translations.h:113
-msgid "Sidereal"
+msgid "Sami"
 msgstr ""
 
 #: src/translations.h:114
-msgid "Preset Sky Time: "
+msgid "Tupi-Guarani"
 msgstr ""
 
 #: src/translations.h:115
-msgid "Sky Time At Start-up: "
-msgstr ""
-
-#: src/translations.h:116
-msgid "Actual Time"
-msgstr ""
-
-#: src/translations.h:117
-msgid "Preset Time"
-msgstr ""
-
-#: src/translations.h:118
-msgid "Time Display Format: "
+msgid "Western"
 msgstr ""
 
 #: src/translations.h:119
-msgid "Date Display Format: "
+msgid "Set Location "
+msgstr ""
+
+#: src/translations.h:120
+msgid "Set Time "
 msgstr ""
 
 #: src/translations.h:121
-msgid "Sky Culture: "
+msgid "General "
 msgstr ""
 
 #: src/translations.h:122
-msgid "Sky Language: "
+msgid "Stars "
+msgstr ""
+
+#: src/translations.h:123
+msgid "Colors "
 msgstr ""
 
 #: src/translations.h:124
-msgid "Show: "
+msgid "Effects "
 msgstr ""
 
 #: src/translations.h:125
-msgid "Star Value Multiplier: "
+msgid "Scripts "
 msgstr ""
 
 #: src/translations.h:126
-msgid "Magnitude Sizing Multiplier: "
-msgstr ""
-
-#: src/translations.h:127
-msgid "Maximum Magnitude to Label: "
+msgid "Administration "
 msgstr ""
 
 #: src/translations.h:128
-msgid "Twinkling: "
+msgid "Latitude: "
 msgstr ""
 
 #: src/translations.h:129
-msgid "Limiting Magnitude: "
+msgid "Longitude: "
+msgstr ""
+
+#: src/translations.h:130
+msgid "Altitude (m): "
 msgstr ""
 
 #: src/translations.h:131
-msgid "Constellation Lines"
-msgstr ""
-
-#: src/translations.h:132
-msgid "Constellation Names"
+msgid "Solar System Body: "
 msgstr ""
 
 #: src/translations.h:133
-msgid "Constellation Art Intensity"
+msgid "Sky Time: "
 msgstr ""
 
 #: src/translations.h:134
-msgid "Constellation Boundaries"
+msgid "Set Time Zone: "
 msgstr ""
 
 #: src/translations.h:135
-msgid "Cardinal Points"
+msgid "Day keys: "
 msgstr ""
 
 #: src/translations.h:136
-msgid "Planet Names"
+msgid "Calendar"
 msgstr ""
 
 #: src/translations.h:137
-msgid "Planet Orbits"
+msgid "Sidereal"
 msgstr ""
 
 #: src/translations.h:138
-msgid "Planet Trails"
+msgid "Preset Sky Time: "
 msgstr ""
 
 #: src/translations.h:139
-msgid "Meridian Line"
+msgid "Sky Time At Start-up: "
 msgstr ""
 
 #: src/translations.h:140
-msgid "Azimuthal Grid"
+msgid "Actual Time"
 msgstr ""
 
 #: src/translations.h:141
-msgid "Equatorial Grid"
+msgid "Preset Time"
 msgstr ""
 
 #: src/translations.h:142
-msgid "Equator Line"
+msgid "Time Display Format: "
 msgstr ""
 
 #: src/translations.h:143
-msgid "Ecliptic Line"
-msgstr ""
-
-#: src/translations.h:144
-msgid "Nebula Names"
+msgid "Date Display Format: "
 msgstr ""
 
 #: src/translations.h:145
-msgid "Nebula Circles"
+msgid "Sky Culture: "
 msgstr ""
 
-#: src/translations.h:147
-msgid "Light Pollution Luminance: "
+#: src/translations.h:146
+msgid "Sky Language: "
 msgstr ""
 
 #: src/translations.h:148
-msgid "Landscape: "
+msgid "Show: "
 msgstr ""
 
 #: src/translations.h:149
-msgid "Manual zoom: "
+msgid "Star Value Multiplier: "
 msgstr ""
 
 #: src/translations.h:150
-msgid "Object Sizing Rule: "
+msgid "Magnitude Sizing Multiplier: "
 msgstr ""
 
 #: src/translations.h:151
-msgid "Magnitude Scaling Multiplier: "
+msgid "Maximum Magnitude to Label: "
 msgstr ""
 
 #: src/translations.h:152
-msgid "Milky Way intensity: "
+msgid "Twinkling: "
 msgstr ""
 
 #: src/translations.h:153
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr ""
-
-#: src/translations.h:154
-msgid "Zoom Duration: "
+msgid "Limiting Magnitude: "
 msgstr ""
 
 #: src/translations.h:155
-msgid "Cursor Timeout: "
+msgid "Constellation Lines"
 msgstr ""
 
 #: src/translations.h:156
-msgid "Correct for light travel time: "
+msgid "Constellation Names"
+msgstr ""
+
+#: src/translations.h:157
+msgid "Constellation Art Intensity"
 msgstr ""
 
 #: src/translations.h:158
-msgid "Local Script: "
+msgid "Constellation Boundaries"
 msgstr ""
 
 #: src/translations.h:159
-msgid "CD/DVD Script: "
+msgid "Cardinal Points"
 msgstr ""
 
 #: src/translations.h:160
-msgid "USB Script: "
+msgid "Planet Names"
 msgstr ""
 
 #: src/translations.h:161
-msgid "Arrow down to load list."
+msgid "Planet Orbits"
 msgstr ""
 
 #: src/translations.h:162
-msgid "Select and exit to run."
+msgid "Planet Trails"
+msgstr ""
+
+#: src/translations.h:163
+msgid "Meridian Line"
 msgstr ""
 
 #: src/translations.h:164
-msgid "Load Default Configuration: "
+msgid "Azimuthal Grid"
 msgstr ""
 
 #: src/translations.h:165
-msgid "Save Current Configuration as Default: "
+msgid "Equatorial Grid"
 msgstr ""
 
 #: src/translations.h:166
-msgid "Shut Down: "
+msgid "Equator Line"
 msgstr ""
 
 #: src/translations.h:167
-msgid "Update me via Internet: "
+msgid "Ecliptic Line"
 msgstr ""
 
 #: src/translations.h:168
+msgid "Nebula Names"
+msgstr ""
+
+#: src/translations.h:169
+msgid "Nebula Circles"
+msgstr ""
+
+#: src/translations.h:171
+msgid "Light Pollution Luminance: "
+msgstr ""
+
+#: src/translations.h:172
+msgid "Landscape: "
+msgstr ""
+
+#: src/translations.h:173
+msgid "Manual zoom: "
+msgstr ""
+
+#: src/translations.h:174
+msgid "Object Sizing Rule: "
+msgstr ""
+
+#: src/translations.h:175
+msgid "Magnitude Scaling Multiplier: "
+msgstr ""
+
+#: src/translations.h:176
+msgid "Milky Way intensity: "
+msgstr ""
+
+#: src/translations.h:177
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr ""
+
+#: src/translations.h:178
+msgid "Zoom Duration: "
+msgstr ""
+
+#: src/translations.h:179
+msgid "Cursor Timeout: "
+msgstr ""
+
+#: src/translations.h:180
+msgid "Correct for light travel time: "
+msgstr ""
+
+#: src/translations.h:182
+msgid "Local Script: "
+msgstr ""
+
+#: src/translations.h:183
+msgid "CD/DVD Script: "
+msgstr ""
+
+#: src/translations.h:184
+msgid "USB Script: "
+msgstr ""
+
+#: src/translations.h:185
+msgid "Arrow down to load list."
+msgstr ""
+
+#: src/translations.h:186
+msgid "Select and exit to run."
+msgstr ""
+
+#: src/translations.h:188
+msgid "Load Default Configuration: "
+msgstr ""
+
+#: src/translations.h:189
+msgid "Save Current Configuration as Default: "
+msgstr ""
+
+#: src/translations.h:190
+msgid "Shut Down: "
+msgstr ""
+
+#: src/translations.h:191
+msgid "Update me via Internet: "
+msgstr ""
+
+#: src/translations.h:192
 msgid "Set UI Locale: "
 msgstr ""
 
