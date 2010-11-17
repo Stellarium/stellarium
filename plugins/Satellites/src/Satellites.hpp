@@ -176,7 +176,9 @@ signals:
 
 	//! emitted after a TLE update has run.
 	//! @param updates the number of satellites updated.
-	void tleUpdateComplete(int updates, int total);
+	//! @param total the total number of satellites in the JSON data.
+	//! @param the number of satellites in the JSON data but not found in update data
+	void tleUpdateComplete(int updates, int total, int missing);
 	
 
 public slots:
