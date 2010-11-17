@@ -229,6 +229,11 @@ private:
 	// this will be done once at init, and also if the defaults are reset.
 	void readJsonFile(void);
 
+	//! Creates a backup of the satellites.json file called satellites.json.old
+	//! @param deleteOriginal if true, the original file is removed, else not
+	//! @return true on OK, false on failure
+	bool backupJsonFile(bool deleteOriginal=false);
+
 	//! Get the version from the "creator" value in the satellites.json file
 	//! @return version string, e.g. "0.6.1"
 	const QString getJsonFileVersion(void);
