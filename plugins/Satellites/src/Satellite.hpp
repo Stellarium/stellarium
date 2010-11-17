@@ -25,6 +25,7 @@
 #include <QStringList>
 #include <QFont>
 #include <QList>
+#include <QDateTime>
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
@@ -121,6 +122,7 @@ private:
 	QList<commLink> comms;
 	Vec3f hintColor;
 	QStringList groupIDs;
+	QDateTime lastUpdated;
 	
 	static StelTextureSP hintTexture;
 	static float hintBrightness;

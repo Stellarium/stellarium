@@ -413,6 +413,8 @@ void Satellites::restoreDefaultJsonFile(void)
 		// the json file has been manually removed, that an update is schreduled in a timely
 		// manner
 		StelApp::getInstance().getSettings()->remove("Satellites/last_update");
+		lastUpdate = QDateTime::fromString("2001-05-25T12:00:00", Qt::ISODate);
+
 	}
 }
 
@@ -436,7 +438,8 @@ void Satellites::readSettingsFromConfig(void)
 
 	// updater related settings...
 	updateFrequencyHours = conf->value("update_frequency_hours", 72).toInt();
-	lastUpdate = QDateTime::fromString(conf->value("last_update", "2009-01-01 12:00:00").toString(), "yyyy-MM-dd HH:mm:ss");
+	// last update default is the first Towell Day.  <3 DA
+	lastUpdate = QDateTime::fromString(conf->value("last_update", "2001-05-25T12:00:00").toString(), Qt::ISODate);
 	hintFader = conf->value("show_satellite_hints", true).toBool();
 	Satellite::showLabels = conf->value("show_satellite_labels", true).toBool();
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
@@ -734,12 +737,12 @@ void Satellites::updateTLEs(void)
 
 	lastUpdate = QDateTime::currentDateTime();
 	QSettings* conf = StelApp::getInstance().getSettings();
-	conf->setValue("Satellites/last_update", lastUpdate.toString("yyyy-MM-dd HH:mm:ss"));
+	conf->setValue("Satellites/last_update", lastUpdate.toString(Qt::ISODate));
 
 	if (updateUrls.size() == 0)
 	{
 		qWarning() << "Satellites::updateTLEs no update URLs are defined... nothing to do.";
-		emit(tleUpdateComplete(0,0));
+		emit(tleUpdateComplete(0,satellites.count(),satellites.count()));
 		return;
 	}
 
@@ -778,7 +781,9 @@ void Satellites::updateDownloadComplete(QNetworkReply* reply)
 			QString partialName = QString("tle%1.txt").arg(numberDownloadsComplete);
 			QString tleTmpFilePath = StelFileMgr::findFile("modules/Satellites", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/" + partialName;
 			QFile tmpFile(tleTmpFilePath);
-			tmpFile.remove();
+			if (tmpFile.exists())
+				tmpFile.remove();
+
 			tmpFile.open(QIODevice::WriteOnly | QIODevice::Text);
 			tmpFile.write(reply->readAll());
 			tmpFile.close();
@@ -899,23 +904,30 @@ void Satellites::updateFromFiles(void)
 			if (progressBar)
 				progressBar->setValue(progressBar->value() + 1);
 		}
-		tleFile.remove();  // clean up downloaded TLE file
 	}
 
 	// Right, we should now have a map of all the elements we downloaded.  For each satellite
 	// which this module is managing, see if it exists with an updated element, and update it if so...
 	int numUpdated = 0;
 	int totalSats = 0;
+	int numMissing = 0;
 	foreach(const SatelliteP& sat, satellites)
 	{
 		totalSats++;
 		if (newTLE.contains(sat->designation))
 		{
-			if (sat->elements[1] != newTLE[sat->designation].first || sat->elements[2] != newTLE[sat->designation].second)
+			if (sat->e2[1] != newTLE[sat->designation].first || sat->e2[2] != newTLE[sat->designation].second)
 			{
 				// We have updated TLE elements for this satellite
 				strncpy(sat->elements[1], qPrintable(newTLE[sat->designation].first), 80);
 				strncpy(sat->elements[2], qPrintable(newTLE[sat->designation].second), 80);
+
+				// Oh Bob, this e2 thing is truly horrible!  TODO - make it cleaner
+				strncpy(sat->e2[1], qPrintable(newTLE[sat->designation].first), 80);
+				strncpy(sat->e2[2], qPrintable(newTLE[sat->designation].second), 80);
+
+				// we reset this to "now" when we started the update.
+				sat->lastUpdated = lastUpdate;
 				numUpdated++;
 				qDebug() << "Satellites: updated orbital elements for" << sat->designation;
 			}
@@ -923,6 +935,7 @@ void Satellites::updateFromFiles(void)
 		else
 		{
 			qWarning() << "Satellites: could not update orbital elements for" << sat->designation <<": no entry found in the source TLE lists.";
+			numMissing++;
 		}
 	}
 
@@ -934,14 +947,17 @@ void Satellites::updateFromFiles(void)
 	delete progressBar;
 	progressBar = NULL;
 
-	qDebug() << "Satellites: updated orbital elements for" << numUpdated << "of total" << totalSats <<"satellites in the plug-in's database." << newTLE.size() << "satellites are available in the TLE source lists.";
+	qDebug() << "Satellites: updated" << numUpdated << "/" << totalSats
+		 << "satellites.  Update URLs contained" << newTLE.size() << "objects. "
+		 << "There were" << numMissing << "satellies missing from the update URLs";
+
 	if (numUpdated==0)
 		updateState = CompleteNoUpdates;
 	else
 		updateState = CompleteUpdates;
 
 	emit(updateStateChanged(updateState));
-	emit(tleUpdateComplete(numUpdated, totalSats));
+	emit(tleUpdateComplete(numUpdated, totalSats, numMissing));
 }
 
 void Satellites::update(double deltaTime)
