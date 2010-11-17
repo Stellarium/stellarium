@@ -24,15 +24,11 @@ TODO
 + Rendering of the actual satellite, not just a hint/label
   - calculation of brightness, eclipse etc.
   - iridium flares?
-+ Implement grouping so we can enable/disable groups, e.g.
-  - gui widget with options to show/hide groups of satellites
 + gravity labels
-+ Night more orbit lines.
 
 Longer term:
 + proper 3d positions (when SolarSystem is refactored so we can see
   satellite cloud from the moon / other bodies.
-+ trails (also after SolarSystem refactor)
 
 
 BUILDING THE PLUGIN
