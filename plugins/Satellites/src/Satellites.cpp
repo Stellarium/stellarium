@@ -385,7 +385,6 @@ void Satellites::restoreDefaultConfigIni(void)
 	conf->setValue("tle_url4", "http://celestrak.com/NORAD/elements/visual.txt");
 	conf->setValue("tle_url5", "http://celestrak.com/NORAD/elements/amateur.txt");
 	conf->setValue("tle_url6", "http://celestrak.com/NORAD/elements/iridium.txt");
-	conf->setValue("tle_url7", "http://celestrak.com/NORAD/elements/tle-new.txt");
 	conf->setValue("update_frequency_hours", 72);
 	conf->setValue("orbit_line_flag", true);
 	conf->setValue("orbit_line_segments", 90);
