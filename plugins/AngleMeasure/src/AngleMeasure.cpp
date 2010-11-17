@@ -55,7 +55,7 @@ StelPluginInfo AngleMeasureStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "AngleMeasure";
 	info.displayedName = q_("Angle Measure");
-	info.authors = q_("Matthew Gates");
+	info.authors = "Matthew Gates";
 	info.contact = "http://porpoisehead.net/";
 	info.description = q_("Provides an angle measurement tool");
 	return info;
