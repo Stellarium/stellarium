@@ -1699,6 +1699,22 @@
 			"tle2": "2 28654  98.9687 266.0283 0014277 348.9864  11.1010 14.11407127282862",
 			"visible": true
 		},
+		"NOAA 19": 
+		{
+			"comms": [
+			{
+				"description": "downlink",
+				"frequency": 137.1,
+				"modulation": "AM/APT"
+			}],
+			"groups": ["scientific", "weather"],
+			"hintColor": [0.08, 0.33, 0.74],
+			"lastUpdated": 2010-11-17T04:48:41,
+			"orbitVisible": true,
+			"tle1": "1 33591U 09005A   10320.02971578  .00000506  00000-0  30501-3 0  7485",
+			"tle2": "2 33591  98.8039 259.0222 0013587 217.0614 142.9636 14.11104719 91322",
+			"visible": true
+		},
 		"OPAL (OO-38)": 
 		{
 			"comms": [],
