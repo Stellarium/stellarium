@@ -47,11 +47,11 @@ public slots:
 private slots:
 	void groupFilterChanged(int index);
 	void selectedSatelliteChanged(const QString& id);
-	void saveSatellite(const QString& id);
+	void saveSatellites(void);
 	void setUpdateValues(int hours);
 	void setUpdatesEnabled(bool b);
 	void updateStateReceiver(Satellites::UpdateState state);
-	void updateCompleteReceiver(int numUpdated);
+	void updateCompleteReceiver(int numUpdated, int total, int missing);
 	void sourceEditingDone(void);
 	void saveSourceList(void);
 	void deleteSourceRow(void);
@@ -64,6 +64,9 @@ private slots:
 	void setOrbitParams(void);
 
 private:
+	void connectSatelliteGuiForm(void);
+	void disconnectSatelliteGuiForm(void);
+
 	Ui_satellitesDialog* ui;
 	bool satelliteModified;
 	void setAboutHtml(void);
