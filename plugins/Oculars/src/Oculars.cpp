@@ -72,7 +72,7 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "Oculars";
 	info.displayedName = q_("Ocular");
-	info.authors = q_("Timothy Reaves");
+	info.authors = "Timothy Reaves";
 	info.contact = "treaves@silverfieldstech.com";
 	info.description = q_("Shows the sky as if looking through a telescope eyepiece");
 	return info;
