@@ -892,7 +892,9 @@ void TelescopeControl::loadTelescopes()
 						else
 						{
 							qDebug() << "TelescopeControl: Unable to create a telescope client at slot" << slot;
-							continue;
+							//Unnecessary due to if-else construction;
+							//also, causes bug #608533
+							//continue;
 						}
 					}
 					else
@@ -902,7 +904,9 @@ void TelescopeControl::loadTelescopes()
 						if(!startClientAtSlot(slot, connectionType, name, QString(), 0, delay, internalCircles, deviceModelName, portSerial))
 						{
 							qDebug() << "TelescopeControl: Unable to create a telescope client at slot" << slot;
-							continue;
+							//Unnecessary due to if-else construction;
+							//also, causes bug #608533
+							//continue;
 						}
 					}
 				}
@@ -911,7 +915,9 @@ void TelescopeControl::loadTelescopes()
 					if(!startClientAtSlot(slot, connectionType, name, hostName, portTCP, delay, internalCircles))
 					{
 						qDebug() << "TelescopeControl: Unable to create a telescope client at slot" << slot;
-						continue;
+						//Unnecessary due to if-else construction;
+						//also, causes bug #608533
+						//continue;
 					}
 				}
 			}
