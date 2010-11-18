@@ -206,6 +206,10 @@ SET(stellarium_lib_SRCS
 	core/modules/Orbit.hpp
 	core/modules/Planet.cpp
 	core/modules/Planet.hpp
+	core/modules/MinorPlanet.cpp
+	core/modules/MinorPlanet.hpp
+	core/modules/Comet.cpp
+	core/modules/Comet.hpp
 	core/modules/Skybright.cpp
 	core/modules/Skybright.hpp
 	core/modules/Skylight.cpp
@@ -562,6 +566,11 @@ IF (BUILD_STATIC_PLUGINS)
   IF (USE_PLUGIN_TEXTUSERINTERFACE)
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/TextUserInterface/src/${CMAKE_CFG_INTDIR}/libTextUserInterface.a")
 	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TEXTUSERINTERFACE)
+  ENDIF()
+
+  IF (USE_PLUGIN_SOLARSYSTEMEDITOR)
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/SolarSystemEditor/src/${CMAKE_CFG_INTDIR}/libSolarSystemEditor.a")
+	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SOLARSYSTEMEDITOR)
   ENDIF()
 
   IF (USE_PLUGIN_TIMEZONECONFIGURATION)

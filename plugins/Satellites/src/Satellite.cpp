@@ -49,9 +49,15 @@ StelTextureSP Satellite::hintTexture;
 float Satellite::showLabels = true;
 float Satellite::hintBrightness = 0.0;
 float Satellite::hintScale = 1.f;
+SphericalCap Satellite::viewportHalfspace = SphericalCap();
+int Satellite::orbitLineSegments = 90;
+int Satellite::orbitLineFadeSegments = 4;
+int Satellite::orbitLineSegmentDuration = 20;
+bool Satellite::orbitLinesFlag = true;
+
 
 Satellite::Satellite(const QVariantMap& map)
-	: initialized(false), visible(true), hintColor(0.0,0.0,0.0)
+	: initialized(false), visible(true), hintColor(0.0,0.0,0.0), lastUpdated()
 {
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation") || !map.contains("tle1") || !map.contains("tle2"))
@@ -63,6 +69,9 @@ Satellite::Satellite(const QVariantMap& map)
 	strncpy(elements[0], "DUMMY", 5);
 	strncpy(elements[1], qPrintable(map.value("tle1").toString()), 80);
 	strncpy(elements[2], qPrintable(map.value("tle2").toString()), 80);
+	strncpy(e2[0], "DUMMY", 5);
+	strncpy(e2[1], qPrintable(map.value("tle1").toString()), 80);
+	strncpy(e2[2], qPrintable(map.value("tle2").toString()), 80);
 	if (map.contains("description")) description = map.value("description").toString();
 	if (map.contains("visible")) visible = map.value("visible").toBool();
 	if (map.contains("orbitVisible")) orbitVisible = map.value("orbitVisible").toBool();
@@ -90,8 +99,6 @@ Satellite::Satellite(const QVariantMap& map)
 	{
 		orbitColorNormal = hintColor;
 	}
-
-
 
 	// Set the night color of orbit lines to red with the
 	// intensity of the average of the RGB for the day color.
@@ -129,6 +136,11 @@ Satellite::Satellite(const QVariantMap& map)
 
 	pSatellite = new gSatTEME( designation.toAscii().data(), elements[1], elements[2]);
 
+	if (map.contains("lastUpdated"))
+	{
+		lastUpdated = map.value("lastUpdated").toDateTime();
+	}
+
 	setObserverLocation();
 	initialized = true;
 }
@@ -139,19 +151,29 @@ Satellite::~Satellite()
 		delete pSatellite;
 }
 
+double Satellite::roundToDp(float n, int dp)
+{
+	// round n to dp decimal places
+	return floor(n * pow(10., dp) + .5) / pow(10., dp);
+}
+
 QVariantMap Satellite::getMap(void)
 {
 	QVariantMap map;
 	map["designation"] = designation;
+
+	if (!description.isEmpty() && description!="")
+		map["description"] = description;
+
 	map["visible"]     = visible;
 	map["orbitVisible"] = orbitVisible;
-	map["tle1"] = QString(elements[1]);
-	map["tle2"] = QString(elements[2]);
-	QVariantList col, orbitCol;;
-	col << (double)hintColor[0] << (double)hintColor[1] << (double)hintColor[2];
-	orbitCol << (double)orbitColorNormal[0] << (double)orbitColorNormal[1] << (double)orbitColorNormal[2];
+	map["tle1"] = QString(e2[1]);
+	map["tle2"] = QString(e2[2]);
+	QVariantList col, orbitCol;
+	col << roundToDp(hintColor[0],3) << roundToDp(hintColor[1], 3) << roundToDp(hintColor[2], 3);
+	orbitCol << roundToDp(orbitColorNormal[0], 3) << roundToDp(orbitColorNormal[1], 3) << roundToDp(orbitColorNormal[2],3);
 	map["hintColor"] = col;
-	map["orbitColorNormal"] = orbitCol;
+	map["orbitColor"] = orbitCol;
 	QVariantList commList;
 	foreach(commLink c, comms)
 	{
@@ -168,6 +190,12 @@ QVariantMap Satellite::getMap(void)
 		groupList << g;
 	}
 	map["groups"] = groupList;
+
+	if (!lastUpdated.isNull())
+	{
+		map["lastUpdated"] = lastUpdated;
+	}
+
 	return map;
 }
 
@@ -304,6 +332,11 @@ double Satellite::getDoppler(double freq) const
 	return result/1000000;
 }
 
+void Satellite::recalculateOrbitLines(void)
+{
+	orbitPoints.clear();
+}
+
 void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 {
 	float a = (azimuth-90)*M_PI/180;
@@ -324,14 +357,13 @@ void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 		}
 		painter.drawSprite2dMode(xy[0], xy[1], 11);
 
-		if(orbitVisible) drawOrbit(core, painter);
+		if(orbitVisible && Satellite::orbitLinesFlag) drawOrbit(painter);
 	}
 }
 
 
-void Satellite::drawOrbit(const StelCore* core, StelPainter& painter){
+void Satellite::drawOrbit(StelPainter& painter){
 
-	Vec3d XYZPos, xy1;
 	Vec3d pos,posPrev;
 
 	float a, azimth, elev;
@@ -357,14 +389,16 @@ void Satellite::drawOrbit(const StelCore* core, StelPainter& painter){
 		elev   = it->at( ELEVATION);
 		a      = ( (azimth/KDEG2RAD)-90)*M_PI/180;
 		pos.set(sin(a),cos(a), tan( (elev/KDEG2RAD) * M_PI / 180.));
-		XYZPos = core->getNavigator()->j2000ToEquinoxEqu(core->getNavigator()->altAzToEquinoxEqu(pos));
 		it++;
 
+		pos.normalize();
+		posPrev.normalize();
+
 		// Draw end (fading) parts of orbit lines one segment at a time.
-		if (((DRAWORBIT_SLOTS_NUMBER/2) - abs(i - (DRAWORBIT_SLOTS_NUMBER/2) % DRAWORBIT_SLOTS_NUMBER)) < DRAWORBIT_FADE_NUMBER)
+		if (i<=orbitLineFadeSegments || orbitLineSegments-i < orbitLineFadeSegments)
 		{
 			painter.setColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2], hintBrightness * calculateOrbitSegmentIntensity(i));
-			painter.drawGreatCircleArc(posPrev,pos,NULL);
+			painter.drawGreatCircleArc(posPrev, pos, &viewportHalfspace);
 		}
 		else {
 			vertexArray.vertex << posPrev << pos;
@@ -375,7 +409,7 @@ void Satellite::drawOrbit(const StelCore* core, StelPainter& painter){
 
 	// Draw center section of orbit in one go
 	painter.setColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2], hintBrightness);
-	painter.drawGreatCircleArcs(vertexArray, NULL);
+	painter.drawGreatCircleArcs(vertexArray, &viewportHalfspace);
 
 	glEnable(GL_TEXTURE_2D);
 }
@@ -384,9 +418,9 @@ void Satellite::drawOrbit(const StelCore* core, StelPainter& painter){
 
 float Satellite::calculateOrbitSegmentIntensity(int segNum)
 {
-	int endDist = (DRAWORBIT_SLOTS_NUMBER/2) - abs(segNum - (DRAWORBIT_SLOTS_NUMBER/2) % DRAWORBIT_SLOTS_NUMBER);
-	if (endDist > DRAWORBIT_FADE_NUMBER) { return 1.0; }
-	else { return (endDist  + 1) / (DRAWORBIT_FADE_NUMBER + 1.0); }
+	int endDist = (orbitLineSegments/2) - abs(segNum-1 - (orbitLineSegments/2) % orbitLineSegments);
+	if (endDist > orbitLineFadeSegments) { return 1.0; }
+	else { return (endDist  + 1) / (orbitLineFadeSegments + 1.0); }
 }
 
 void Satellite::setNightColors(bool night)
@@ -398,10 +432,11 @@ void Satellite::setNightColors(bool night)
 }
 
 
-void Satellite::computeOrbitPoints(){
+void Satellite::computeOrbitPoints()
+{
 
-	gTimeSpan computeInterval(0,0,0,DRAWORBIT_SLOT_SECNUMBER);  //1/2 minute
-	gTimeSpan orbitSpan(0,0,0, DRAWORBIT_SLOTS_NUMBER*DRAWORBIT_SLOT_SECNUMBER/2);       //+- 15 minutes range.
+	gTimeSpan computeInterval(0, 0, 0, orbitLineSegmentDuration);
+	gTimeSpan orbitSpan(0, 0, 0, orbitLineSegments*orbitLineSegmentDuration/2);
 	gTime	  epochTm;
 	gVector   azElVector;
 	int	  diffSlots;
@@ -411,7 +446,7 @@ void Satellite::computeOrbitPoints(){
 	{
 		epochTm  = epochTime - orbitSpan;
 
-		for(int i=0; i< DRAWORBIT_SLOTS_NUMBER; i++)
+		for(int i=0; i<=orbitLineSegments; i++)
 		{
 			pSatellite->setEpoch( epochTm);
 			azElVector  = observer.calculateLook( *pSatellite, epochTm);
@@ -424,13 +459,13 @@ void Satellite::computeOrbitPoints(){
 	{ // compute next orbit point when clock runs forward
 
 		gTimeSpan diffTime = epochTime - lastEpochCompForOrbit;
-		diffSlots          = (int)(diffTime.getDblSeconds()/DRAWORBIT_SLOT_SECNUMBER);
+		diffSlots          = (int)(diffTime.getDblSeconds()/orbitLineSegmentDuration);
 
 		if(diffSlots > 0)
 		{
-			if( diffSlots > DRAWORBIT_SLOTS_NUMBER)
+			if( diffSlots > orbitLineSegments)
 			{
-				diffSlots = DRAWORBIT_SLOTS_NUMBER;
+				diffSlots = orbitLineSegments;
 				epochTm   = epochTime - orbitSpan;
 			}
 			else
@@ -453,13 +488,13 @@ void Satellite::computeOrbitPoints(){
 	else if(epochTime < lastEpochCompForOrbit)
 	{ // compute next orbit point when clock runs backward
 		gTimeSpan diffTime =  lastEpochCompForOrbit - epochTime;
-		diffSlots          = (int)(diffTime.getDblSeconds()/DRAWORBIT_SLOT_SECNUMBER);
+		diffSlots          = (int)(diffTime.getDblSeconds()/orbitLineSegmentDuration);
 
 		if(diffSlots > 0)
 		{
-			if( diffSlots > DRAWORBIT_SLOTS_NUMBER)
+			if( diffSlots > orbitLineSegments)
 			{
-				diffSlots = DRAWORBIT_SLOTS_NUMBER;
+				diffSlots = orbitLineSegments;
 				epochTm   = epochTime + orbitSpan;
 			}
 			else
