@@ -26,6 +26,7 @@
 #include "StelNavigator.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelIniParser.hpp"
@@ -62,10 +63,10 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 
 		StelPluginInfo info;
 		info.id = "Satellites";
-		info.displayedName = "Satellites";
+		info.displayedName = q_("Satellites");
 		info.authors = "Matthew Gates, Jose Luis Canales";
 		info.contact = "http://stellarium.org/";
-		info.description = "Prediction of artificial satellite positions in Earth orbit based on NORAD TLE data";
+		info.description = q_("Prediction of artificial satellite positions in Earth orbit based on NORAD TLE data");
 		return info;
 }
 
