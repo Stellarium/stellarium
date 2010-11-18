@@ -514,6 +514,14 @@ QGroupBox::indicator:unchecked {
 	image: url(:/graphicGui/nv_checkbox-unchecked.png);
 }
 
+QListWidget::indicator::checked {
+	image: url(:/graphicGui/nv_checkbox-checked.png);
+}
+
+QListWidget::indicator:unchecked {
+	image: url(:/graphicGui/nv_checkbox-unchecked.png);
+}
+
 /*QCheckBox:disabled {
 	color: rgb(210, 0, 0);
 	font-weight: 500;
