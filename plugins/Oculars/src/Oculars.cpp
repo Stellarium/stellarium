@@ -26,6 +26,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelProjector.hpp"
 #include "StelGui.hpp"
@@ -70,10 +71,10 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
 	info.id = "Oculars";
-	info.displayedName = "Ocular";
+	info.displayedName = q_("Ocular");
 	info.authors = "Timothy Reaves";
 	info.contact = "treaves@silverfieldstech.com";
-	info.description = "Shows the sky as if looking through a telescope eyepiece";
+	info.description = q_("Shows the sky as if looking through a telescope eyepiece");
 	return info;
 }
 
