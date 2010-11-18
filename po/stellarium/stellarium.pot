@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-17 17:20+0200\n"
+"POT-Creation-Date: 2010-11-18 13:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1961,4 +1961,143 @@ msgstr ""
 msgid ""
 "WARNING: Removing the selected landscape means deleting its files. This "
 "operation is irreversible."
+msgstr ""
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:57
+msgid "Angle Measure"
+msgstr ""
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:60
+msgid "Provides an angle measurement tool"
+msgstr ""
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:121
+msgid "Angle measure"
+msgstr ""
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:57
+msgid "Compass Marks"
+msgstr ""
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:60
+msgid "Displays compass bearing marks along the horizon"
+msgstr ""
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:121
+msgid "Compass marks"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:74
+msgid "Ocular"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:77
+msgid "Shows the sky as if looking through a telescope eyepiece"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:569
+msgid "Enable ocular"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:576
+msgid "Configuration Window"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:583
+msgid "Display Telrad"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:618
+msgid "Toggle Crosshair"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:623
+msgid "Select next sensor"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:627
+msgid "Select previous sensor"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:631
+msgid "Select next ocular"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:635
+msgid "Select previous ocular"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:639
+msgid "Select next telescope"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:643
+msgid "Select previous telescope"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:66
+msgid "Satellites"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:69
+msgid ""
+"Prediction of artificial satellite positions in Earth orbit based on NORAD "
+"TLE data"
+msgstr ""
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:75
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:165
+msgid "Telescope Control"
+msgstr ""
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:78
+msgid ""
+"This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
+"computerized mount (a \"GoTo telescope\")."
+msgstr ""
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:171
+#, qt-format
+msgid "Move telescope #%1 to selected object"
+msgstr ""
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:180
+#, qt-format
+msgid "Move telescope #%1 to the point currently in the center of the screen"
+msgstr ""
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:203
+msgid "Move a telescope to a given set of coordinates"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
+msgid "Time Zone"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:44
+msgid ""
+"A convenient interface for some of the more obscure options in Stellarium's "
+"configuration file. Allows setting the time zone and changing the way the "
+"time and the date are displayed in the bottom bar."
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:79
+msgid "Text User Interface"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:82
+msgid ""
+"Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
+"planetarium systems"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
+msgid "Solar System Editor"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:59
+msgid ""
+"An interface for adding asteroids and comets to Stellarium. It can download "
+"object lists from the Minor Planet Center's website and perform searches in "
+"its online database. Still a work in progress."
 msgstr ""
