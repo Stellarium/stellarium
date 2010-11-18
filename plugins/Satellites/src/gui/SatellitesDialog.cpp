@@ -177,7 +177,7 @@ void SatellitesDialog::selectedSatelliteChanged(const QString& id)
 	ui->idLineEdit->setText(sat->designation);
 	ui->descriptionTextEdit->setText(sat->description);
 	ui->groupsTextEdit->setText(sat->groupIDs.join(", "));
-	ui->tleTextEdit->setText(QString(sat->elements[1]) + "\n" + QString(sat->elements[2]));
+	ui->tleTextEdit->setText(QString("%1\n%2").arg(sat->tleElements.first.data()).arg(sat->tleElements.second.data()));
 	ui->visibleCheckbox->setChecked(sat->visible);
 	ui->orbitCheckbox->setChecked(sat->orbitVisible);
 	ui->commsButton->setEnabled(sat->comms.count()>0);
