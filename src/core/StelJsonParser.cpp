@@ -19,6 +19,7 @@
 #include "StelJsonParser.hpp"
 #include <QDebug>
 #include <QBuffer>
+#include <QDateTime>
 #include <stdexcept>
 
 class StelJsonParserInstance
@@ -248,6 +249,10 @@ QVariant StelJsonParserInstance::readOther()
 		return QVariant(false);
 	if (str=="null")
 		return QVariant();
+	QDateTime dt = QDateTime::fromString(str, Qt::ISODate);
+	if (dt.isValid())
+		return QVariant(dt);
+
 	throw std::runtime_error(qPrintable(QString("Invalid JSON value: \"")+str+"\""));
 }
 
@@ -364,6 +369,11 @@ void StelJsonParser::write(const QVariant& v, QIODevice* output, int indentLevel
 		case QVariant::Double:
 			output->write(v.toString().toUtf8());
 			break;
+		case QVariant::DateTime:
+		{
+			output->write(v.toDateTime().toString(Qt::ISODate).toUtf8());
+			break;
+		}
 		case QVariant::List:
 		{
 			output->putChar('[');
