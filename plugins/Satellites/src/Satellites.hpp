@@ -165,6 +165,13 @@ public:
 	//! The main StelStyle instance should be passed.
 	const StelStyle getModuleStyleSheet(const StelStyle& style);
 
+	//! Reads update file(s) in celestrak's .txt format, and updates
+	//! the TLE elements for exisiting satellites from them.
+	//! emits signals updateStateChanged and tleUpdateComplete
+	//! @param paths a list of paths to update files
+	//! @param deleteFiles if set, the update files are deleted after
+	//!        they are used, else they are left alone
+	void updateFromFiles(QStringList paths, bool deleteFiles=false);
 
 signals:
 	//! emitted when the update status changes, e.g. when 
@@ -270,7 +277,6 @@ private:
 	bool updatesEnabled;
 	QDateTime lastUpdate;
 	int updateFrequencyHours;
-	void updateFromFiles(void);
 
 	// GUI
 	SatellitesDialog* configDialog;

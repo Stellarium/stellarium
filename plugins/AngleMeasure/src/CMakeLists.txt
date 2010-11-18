@@ -45,12 +45,7 @@ IF(BUILD_STATIC_PLUGINS)
 	# The library target "AngleMeasure-static" has a default OUTPUT_NAME of "AngleMeasure-static", so change it.
 	SET_TARGET_PROPERTIES(AngleMeasure-static PROPERTIES OUTPUT_NAME "AngleMeasure")
 	TARGET_LINK_LIBRARIES(AngleMeasure-static ${extLinkerOption})
-	SET_TARGET_PROPERTIES(AngleMeasure-static PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
-	IF(WIN32)
-		SET_TARGET_PROPERTIES(AngleMeasure-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-	ELSE()
-		SET_TARGET_PROPERTIES(AngleMeasure-static PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
-	ENDIF()
+	SET_TARGET_PROPERTIES(AngleMeasure-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 	ADD_DEPENDENCIES(AllStaticPlugins AngleMeasure-static)
 ENDIF()
 
