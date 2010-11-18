@@ -131,6 +131,58 @@ QString StelFileMgr::findFile(const QString& path, const Flags& flags)
 	throw std::runtime_error(QString("file not found: %1").arg(path).toLocal8Bit().constData());
 }
 
+QStringList StelFileMgr::findFileInAllPaths(const QString &path, const Flags &flags)
+{
+	if (path.isEmpty())
+		throw std::runtime_error("Empty file path");
+
+	QStringList filePaths;
+
+	// explicitly specified relative paths
+	if (path[0] == '.')
+	{
+		if (fileFlagsCheck(path, flags))
+		{
+			filePaths.append(path);
+			return filePaths;
+		}
+		else
+			throw std::runtime_error(QString("file does not match flags: %1").arg(path).toLocal8Bit().constData());
+	}
+
+	// Qt resource files
+	if (path.startsWith(":/"))
+	{
+		filePaths.append(path);
+		return filePaths;
+	}
+
+	// explicitly specified absolute paths
+	if ( isAbsolute(path) )
+	{
+		if (fileFlagsCheck(path, flags))
+		{
+			filePaths.append(path);
+			return filePaths;
+		}
+		else
+			throw std::runtime_error(QString("file does not match flags: %1").arg(path).toLocal8Bit().constData());
+	}
+
+	foreach (QString locationPath, fileLocations)
+	{
+		if (fileFlagsCheck(locationPath + "/" + path, flags))
+		{
+			filePaths.append(locationPath + "/" + path);
+		}
+	}
+
+	if (filePaths.isEmpty())
+		throw std::runtime_error(QString("file not found: %1").arg(path).toLocal8Bit().constData());
+	else
+		return filePaths;
+}
+
 QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::Flags& flags, bool recursive)
 {
 	QSet<QString> result;

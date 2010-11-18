@@ -72,10 +72,10 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
 	info.id = "TelescopeControl";
-	info.displayedName = "Telescope Control";
+	info.displayedName = q_("Telescope Control");
 	info.authors = "Bogdan Marinov, Johannes Gajdosik";
 	info.contact = "http://stellarium.org";
-	info.description = "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a computerized mount (a \"GoTo telescope\").";
+	info.description = q_("This plug-in allows Stellarium to send \"slew\" commands to a telescope on a computerized mount (a \"GoTo telescope\").");
 	return info;
 }
 
@@ -163,49 +163,23 @@ void TelescopeControl::init()
 		 /* QAction-s with these key bindings existed in Stellarium prior to
 			revision 6311. Any future backports should account for that. */
 		QString group = N_("Telescope Control");
+		for (int i = MIN_SLOT_NUMBER; i <= MAX_SLOT_NUMBER; i++)
+		{
+			// "Slew to object" commands
+			QString name = QString("actionMove_Telescope_To_Selection_%1").arg(i);
+			QString description = q_("Move telescope #%1 to selected object").arg(i);
+			QString shortcut = QString("Ctrl+%1").arg(i);
+			gui->addGuiActions(name, description, shortcut, group, false, false);
+			connect(gui->getGuiActions(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
 
-		// "Slew to object" commands
-		gui->addGuiActions("actionMove_Telescope_To_Selection_1", N_("Move telescope #1 to selected object"), "Ctrl+1", group, false, false);
-		gui->addGuiActions("actionMove_Telescope_To_Selection_2", N_("Move telescope #2 to selected object"), "Ctrl+2", group, false, false);
-		gui->addGuiActions("actionMove_Telescope_To_Selection_3", N_("Move telescope #3 to selected object"), "Ctrl+3", group, false, false);
-		gui->addGuiActions("actionMove_Telescope_To_Selection_4", N_("Move telescope #4 to selected object"), "Ctrl+4", group, false, false);
-		gui->addGuiActions("actionMove_Telescope_To_Selection_5", N_("Move telescope #5 to selected object"), "Ctrl+5", group, false, false);
-		gui->addGuiActions("actionMove_Telescope_To_Selection_6", N_("Move telescope #6 to selected object"), "Ctrl+6", group, false, false);
-		gui->addGuiActions("actionMove_Telescope_To_Selection_7", N_("Move telescope #7 to selected object"), "Ctrl+7", group, false, false);
-		gui->addGuiActions("actionMove_Telescope_To_Selection_8", N_("Move telescope #8 to selected object"), "Ctrl+8", group, false, false);
-		gui->addGuiActions("actionMove_Telescope_To_Selection_9", N_("Move telescope #9 to selected object"), "Ctrl+9", group, false, false);
-
-		// "Slew to the center of the screen" commands
-		gui->addGuiActions("actionSlew_Telescope_To_Direction_1", N_("Move telescope #1 to the point currently in the center of the screen"), "Alt+1", group, false, false);
-		gui->addGuiActions("actionSlew_Telescope_To_Direction_2", N_("Move telescope #2 to the point currently in the center of the screen"), "Alt+2", group, false, false);
-		gui->addGuiActions("actionSlew_Telescope_To_Direction_3", N_("Move telescope #3 to the point currently in the center of the screen"), "Alt+3", group, false, false);
-		gui->addGuiActions("actionSlew_Telescope_To_Direction_4", N_("Move telescope #4 to the point currently in the center of the screen"), "Alt+4", group, false, false);
-		gui->addGuiActions("actionSlew_Telescope_To_Direction_5", N_("Move telescope #5 to the point currently in the center of the screen"), "Alt+5", group, false, false);
-		gui->addGuiActions("actionSlew_Telescope_To_Direction_6", N_("Move telescope #6 to the point currently in the center of the screen"), "Alt+6", group, false, false);
-		gui->addGuiActions("actionSlew_Telescope_To_Direction_7", N_("Move telescope #7 to the point currently in the center of the screen"), "Alt+7", group, false, false);
-		gui->addGuiActions("actionSlew_Telescope_To_Direction_8", N_("Move telescope #8 to the point currently in the center of the screen"), "Alt+8", group, false, false);
-		gui->addGuiActions("actionSlew_Telescope_To_Direction_9", N_("Move telescope #9 to the point currently in the center of the screen"), "Alt+9", group, false, false);
-		
-		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_1"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
-		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_2"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
-		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_3"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
-		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_4"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
-		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_5"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
-		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_6"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
-		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_7"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
-		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_8"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
-		connect(gui->getGuiActions("actionMove_Telescope_To_Selection_9"), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
-
-		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_1"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
-		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_2"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
-		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_3"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
-		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_4"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
-		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_5"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
-		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_6"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
-		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_7"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
-		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_8"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
-		connect(gui->getGuiActions("actionSlew_Telescope_To_Direction_9"), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
-		
+			// "Slew to the center of the screen" commands
+			name = QString("actionSlew_Telescope_To_Direction_%1").arg(i);
+			description = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
+			shortcut = QString("Alt+%1").arg(i);
+			gui->addGuiActions(name, description, shortcut, group, false, false);
+			connect(gui->getGuiActions(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
+		}
+	
 		//Create and initialize dialog windows
 		telescopeDialog = new TelescopeDialog();
 		slewDialog = new SlewDialog();
@@ -918,7 +892,9 @@ void TelescopeControl::loadTelescopes()
 						else
 						{
 							qDebug() << "TelescopeControl: Unable to create a telescope client at slot" << slot;
-							continue;
+							//Unnecessary due to if-else construction;
+							//also, causes bug #608533
+							//continue;
 						}
 					}
 					else
@@ -928,7 +904,9 @@ void TelescopeControl::loadTelescopes()
 						if(!startClientAtSlot(slot, connectionType, name, QString(), 0, delay, internalCircles, deviceModelName, portSerial))
 						{
 							qDebug() << "TelescopeControl: Unable to create a telescope client at slot" << slot;
-							continue;
+							//Unnecessary due to if-else construction;
+							//also, causes bug #608533
+							//continue;
 						}
 					}
 				}
@@ -937,7 +915,9 @@ void TelescopeControl::loadTelescopes()
 					if(!startClientAtSlot(slot, connectionType, name, hostName, portTCP, delay, internalCircles))
 					{
 						qDebug() << "TelescopeControl: Unable to create a telescope client at slot" << slot;
-						continue;
+						//Unnecessary due to if-else construction;
+						//also, causes bug #608533
+						//continue;
 					}
 				}
 			}
