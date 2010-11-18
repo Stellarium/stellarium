@@ -223,6 +223,9 @@ static void dpper
           sinip, sinop, sinzf, sis,   sll,  sls,  xls,
           xnoh,  zf,    zm,    zel,   zes,  znl,  zns;
 
+     /* kill warning */
+     inclo = 0.;
+
      /* ---------------------- constants ----------------------------- */
      zns   = 1.19459e-5;
      zes   = 0.01675;
@@ -1188,6 +1191,9 @@ static void initl
      /* --------------------- local variables ------------------------ */
      double ak, d1, del, adel, po, x2o3, j2, xke,
             tumin, mu, radiusearthkm, j3, j4, j3oj2;
+
+     /* kill warning */
+     satn = 0;
 
      // sgp4fix use old way of finding gst
      double ds70;
