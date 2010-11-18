@@ -920,6 +920,7 @@ void Satellites::updateFromFiles(void)
 				newTLE[thisSatId] = tleLines;
 			}
 			tleFile.close();
+			tleFile.remove();
 			if (progressBar)
 				progressBar->setValue(progressBar->value() + 1);
 		}
@@ -935,20 +936,15 @@ void Satellites::updateFromFiles(void)
 		totalSats++;
 		if (newTLE.contains(sat->designation))
 		{
-			if (sat->e2[1] != newTLE[sat->designation].first || sat->e2[2] != newTLE[sat->designation].second)
+			if (   sat->tleElements.first  != newTLE[sat->designation].first
+			    || sat->tleElements.second != newTLE[sat->designation].second)
 			{
 				// We have updated TLE elements for this satellite
-				strncpy(sat->elements[1], qPrintable(newTLE[sat->designation].first), 80);
-				strncpy(sat->elements[2], qPrintable(newTLE[sat->designation].second), 80);
-
-				// Oh Bob, this e2 thing is truly horrible!  TODO - make it cleaner
-				strncpy(sat->e2[1], qPrintable(newTLE[sat->designation].first), 80);
-				strncpy(sat->e2[2], qPrintable(newTLE[sat->designation].second), 80);
+				sat->setNewTleElements(newTLE[sat->designation].first, newTLE[sat->designation].second);
 
 				// we reset this to "now" when we started the update.
 				sat->lastUpdated = lastUpdate;
 				numUpdated++;
-				qDebug() << "Satellites: updated orbital elements for" << sat->designation;
 			}
 		}
 		else
