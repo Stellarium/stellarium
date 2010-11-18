@@ -41,7 +41,7 @@ SET(SatellitesDialog_UIS
 )
 QT4_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
 
-SET(Satellites_RES ../Satellites.qrc)
+SET(Satellites_RES ../resources/Satellites.qrc)
 QT4_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
 
 # Add here all the files which require moc compilation
