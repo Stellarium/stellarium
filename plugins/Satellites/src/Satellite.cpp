@@ -40,9 +40,9 @@
 #include <QVariant>
 #include <QtOpenGL>
 #include <QSettings>
+#include <QByteArray>
 
 #include <cmath>
-#include <cstdlib>
 
 // static data members - will be initialised in the Satallites class (the StelObjectMgr)
 StelTextureSP Satellite::hintTexture;
@@ -57,7 +57,7 @@ bool Satellite::orbitLinesFlag = true;
 
 
 Satellite::Satellite(const QVariantMap& map)
-	: initialized(false), visible(true), hintColor(0.0,0.0,0.0), lastUpdated()
+	: initialized(false), visible(true), hintColor(0.0,0.0,0.0), lastUpdated(), pSatellite(NULL)
 {
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation") || !map.contains("tle1") || !map.contains("tle2"))
@@ -66,12 +66,6 @@ Satellite::Satellite(const QVariantMap& map)
 	font.setPixelSize(16);
 
 	designation  = map.value("designation").toString();
-	strncpy(elements[0], "DUMMY", 5);
-	strncpy(elements[1], qPrintable(map.value("tle1").toString()), 80);
-	strncpy(elements[2], qPrintable(map.value("tle2").toString()), 80);
-	strncpy(e2[0], "DUMMY", 5);
-	strncpy(e2[1], qPrintable(map.value("tle1").toString()), 80);
-	strncpy(e2[2], qPrintable(map.value("tle2").toString()), 80);
 	if (map.contains("description")) description = map.value("description").toString();
 	if (map.contains("visible")) visible = map.value("visible").toBool();
 	if (map.contains("orbitVisible")) orbitVisible = map.value("orbitVisible").toBool();
@@ -134,7 +128,7 @@ Satellite::Satellite(const QVariantMap& map)
 		}
 	}
 
-	pSatellite = new gSatTEME( designation.toAscii().data(), elements[1], elements[2]);
+	setNewTleElements(map.value("tle1").toString(), map.value("tle2").toString());
 
 	if (map.contains("lastUpdated"))
 	{
@@ -161,14 +155,14 @@ QVariantMap Satellite::getMap(void)
 {
 	QVariantMap map;
 	map["designation"] = designation;
+	map["tle1"] = tleElements.first.data();
+	map["tle2"] = tleElements.second.data();
 
 	if (!description.isEmpty() && description!="")
 		map["description"] = description;
 
 	map["visible"]     = visible;
 	map["orbitVisible"] = orbitVisible;
-	map["tle1"] = QString(e2[1]);
-	map["tle2"] = QString(e2[2]);
 	QVariantList col, orbitCol;
 	col << roundToDp(hintColor[0],3) << roundToDp(hintColor[1], 3) << roundToDp(hintColor[2], 3);
 	orbitCol << roundToDp(orbitColorNormal[0], 3) << roundToDp(orbitColorNormal[1], 3) << roundToDp(orbitColorNormal[2],3);
@@ -300,28 +294,59 @@ double Satellite::getAngularSize(const StelCore*) const
 	return 0.00001;
 }
 
+void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
+{
+	if (pSatellite)
+	{
+		gSatTEME *old = pSatellite;
+		pSatellite = NULL;
+		delete old;
+	}
+
+	tleElements.first.clear();
+	tleElements.first.append(tle1);
+	tleElements.second.clear();
+	tleElements.second.append(tle2);
+
+	// The TLE library actually modifies the TLE strings, which is annoying (because
+	// when we get updates, we want to check if there has been a change by using ==
+	// with the original.  Thus we make a copy to send to the TLE library.
+	QByteArray t1(tleElements.first), t2(tleElements.second);
+
+	// Also, the TLE library expects no more than 130 characters length input.  We
+	// shouldn't have sane input with a TLE longer than about 80, but just in case
+	// we have a mal-formed input, we will truncate here to be safe
+	t1.truncate(130);
+	t2.truncate(130);
+
+	pSatellite = new gSatTEME(designation.toAscii().data(),
+				  t1.data(),
+				  t2.data());
+}
+
 void Satellite::update(double)
 {
 	double jul_utc = StelApp::getInstance().getCore()->getNavigator()->getJDay();
 
 	epochTime = jul_utc;
 
-	pSatellite->setEpoch( epochTime);
-	Position = pSatellite->getPos();
-	Vel      = pSatellite->getVel();
-	LatLong  = pSatellite->getSubPoint( epochTime);
-	azElPos  = observer.calculateLook( *pSatellite, epochTime);
+	if (pSatellite)
+	{
+		pSatellite->setEpoch( epochTime);
+		Position = pSatellite->getPos();
+		Vel      = pSatellite->getVel();
+		LatLong  = pSatellite->getSubPoint( epochTime);
+		azElPos  = observer.calculateLook( *pSatellite, epochTime);
 
+		azimuth   = azElPos[ AZIMUTH]/KDEG2RAD;
+		elevation = azElPos[ ELEVATION]/KDEG2RAD;
+		range     = azElPos[ RANGE];
+		rangeRate = azElPos[ RANGERATE];
+		height    = LatLong[2];
 
-	azimuth   = azElPos[ AZIMUTH]/KDEG2RAD;
-	elevation = azElPos[ ELEVATION]/KDEG2RAD;
-	range     = azElPos[ RANGE];
-	rangeRate = azElPos[ RANGERATE];
-	height    = LatLong[2];
-
-	// Compute orbit points to draw orbit line.
-	if(orbitVisible) computeOrbitPoints();
-
+		// Compute orbit points to draw orbit line.
+		if(orbitVisible) computeOrbitPoints();
+	}
 }
 
 double Satellite::getDoppler(double freq) const
