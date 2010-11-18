@@ -49,7 +49,7 @@ private slots:
 	void selectedSatelliteChanged(const QString& id);
 	void saveSatellites(void);
 	void setUpdateValues(int hours);
-	void setUpdatesEnabled(bool b);
+	void setUpdatesEnabled(int checkState);
 	void updateStateReceiver(Satellites::UpdateState state);
 	void updateCompleteReceiver(int numUpdated, int total, int missing);
 	void sourceEditingDone(void);
@@ -62,6 +62,7 @@ private slots:
 	void orbitCheckChanged(int state);
 	void satelliteDoubleClick(QListWidgetItem* item);
 	void setOrbitParams(void);
+	void updateTLEs(void);
 
 private:
 	void connectSatelliteGuiForm(void);

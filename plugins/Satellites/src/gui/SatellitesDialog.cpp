@@ -22,6 +22,7 @@
 #include <QTimer>
 #include <QDateTime>
 #include <QUrl>
+#include <QFileDialog>
 
 #include "StelApp.hpp"
 #include <plugin_config.h>
@@ -33,6 +34,8 @@
 #include "StelMovementMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelGui.hpp"
+#include "StelMainGraphicsView.hpp"
+#include "StelFileMgr.hpp"
 
 // When i18n is implemented, uncomment the StelTranslator.hpp include
 // and remove the definition of q_
@@ -68,12 +71,14 @@ void SatellitesDialog::createDialogContent()
 	ui->tabs->setCurrentIndex(0);
 
 	// Settings tab / updates group
-	connect(ui->updatesGroup, SIGNAL(toggled(bool)), this, SLOT(setUpdatesEnabled(bool)));
-	refreshUpdateValues(); // fetch values for last updated and so on
-	connect(ui->updateNowButton, SIGNAL(clicked()), GETSTELMODULE(Satellites), SLOT(updateTLEs()));
+	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
+	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateTLEs()));
 	connect(GETSTELMODULE(Satellites), SIGNAL(updateStateChanged(Satellites::UpdateState)), this, SLOT(updateStateReceiver(Satellites::UpdateState)));
 	connect(GETSTELMODULE(Satellites), SIGNAL(tleUpdateComplete(int, int, int)), this, SLOT(updateCompleteReceiver(int, int, int)));
 	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
+	refreshUpdateValues(); // fetch values for last updated and so on
+	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
+	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
@@ -199,19 +204,30 @@ void SatellitesDialog::setAboutHtml(void)
 	html += "<tr><td></td><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></tr></table>";
 
 	html += "<p>" + q_("The Satellites plugin predicts the positions of artificial satellites in Earth orbit.") + "</p>";
+
 	html += "<h3>" + q_("Notes for users") + "</h3><p><ul>";
 	html += "<li>" + q_("Satellites and their orbits are only shown when the observer is on Earth.") + "</li>";
-	html += "<li>" + q_("Predicted positions are only good for a fairly short time (on the order of days, weeks or perhaps a month into the past and future). Expect high weirdness if looking years into the past or future.") + "</li>";
-	html += "<li>" + q_("Orbital elements go out of date pretty quickly (over mere weeks, sometimes days).  To get useful data out, you need to update the TLE data regularly.  This is done automatically every 72 hours if Stellarium can connect to the Internet.") + "</li>";
+	html += "<li>" + q_("Predicted positions are only good for a fairly short time (on the order of days, weeks or perhaps a month into the past and future). Expect high weirdness when looking at dates outside this range.") + "</li>";
+	html += "<li>" + q_("Orbital elements go out of date pretty quickly (over mere weeks, sometimes days).  To get useful data out, you need to update the TLE data regularly.") + "</li>";
+	html += "<li>" + q_("Clicking the \"Restore default settings\" button in the \"Settings\" tab of this dialog will revert to the default satellite.json file.  The old file will be backed up as \"satellites.json.old\".  This can be found in the user data directory, under \"modules/Satellites/\".") + "</li>";
 	html += "<li>" + q_("The Satellites plugin is still under development.  Some features are incomplete, missing or buggy.") + "</li>";
 	html += "</ul></p>";
+
+	html += "<h3>" + q_("TLE data updates") + "</h3>";
+	html += "<p>" + q_("The Satellites plugin can automatically download TLE data from Internet sources, and by default the plugin will do this if the existing data is more than 72 hours old. ");
+	html += "</p><p>" + q_(QString("If you disable Internet updates, you may update from a file on your computer.  This file must be in the same format as the Celestrak updates (see %1 for an example).").arg("<a href=\"http://celestrak.com/NORAD/elements/visual.txt\">visual.txt</a>"));
+	html += "</p><p><b>" + q_("Note") + ":</b> " + q_("if the name of a satellite in update data has anything in square brackets at the end, it will be removed before the data is used.");
+	html += "</p>";
+
+	html += "<h3>" + q_("Adding new satellites") + "</h3>";
+	html += "<p>" + q_("At the moment you must manually edit the satellites.json file to add new satellites to the database. Making this easier is still on the TODO list...") + "</p>";
 
 	html += "<h3>" + q_("Technical Notes") + "</h3>";
 	html += "<p>" + q_("Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data as the input. ");
 	html += q_("The orbital calculation code is written by Jose Luis Canales according to the revised Spacetrack report N#3 (including Spacetrack report N#6). ");
 	html += q_(QString("See %1this document%2 for details.").arg("<a href=\"http://www.celestrak.com/publications/AIAA/2006-6753\">").arg("</a>")) + "</p>";
 
-	html += "<h3>" + q_("Support links") + "</h3>";
+	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + q_("Support is provided via the Launchpad website.  Be sure to put \"Satellites plugin\" in the subject when posting.") + "</p>";
 	html += "<p><ul>";
 	html += "<li>" + q_(QString("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">").arg("</a>")) + "</li>";
@@ -227,8 +243,9 @@ void SatellitesDialog::refreshUpdateValues(void)
 	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Satellites)->getLastUpdate());
 	ui->updateFrequencySpinBox->setValue(GETSTELMODULE(Satellites)->getUpdateFrequencyHours());
 	int secondsToUpdate = GETSTELMODULE(Satellites)->getSecondsToUpdate();
+	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Satellites)->getUpdatesEnabled());
 	if (!GETSTELMODULE(Satellites)->getUpdatesEnabled())
-		ui->nextUpdateLabel->setText(q_("Updates disabled"));
+		ui->nextUpdateLabel->setText(q_("Internet updates disabled"));
 	else if (GETSTELMODULE(Satellites)->getUpdateState() == Satellites::Updating)
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
 	else if (secondsToUpdate <= 60)
@@ -245,11 +262,16 @@ void SatellitesDialog::setUpdateValues(int hours)
 	refreshUpdateValues();
 }
 
-void SatellitesDialog::setUpdatesEnabled(bool b)
+void SatellitesDialog::setUpdatesEnabled(int checkState)
 {
+	bool b = checkState != Qt::Unchecked;
 	GETSTELMODULE(Satellites)->setUpdatesEnabled(b);
 	ui->updateFrequencySpinBox->setEnabled(b);
-	ui->updateNowButton->setEnabled(b);
+	if(b)
+		ui->updateButton->setText(q_("Update now"));
+	else
+		ui->updateButton->setText(q_("Update from files"));
+
 	refreshUpdateValues();
 }
 
@@ -339,7 +361,7 @@ void SatellitesDialog::restoreDefaults(void)
 
 void SatellitesDialog::updateGuiFromSettings(void)
 {
-	ui->updatesGroup->setChecked(GETSTELMODULE(Satellites)->getUpdatesEnabled());
+	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Satellites)->getUpdatesEnabled());
 	refreshUpdateValues();
 
 	ui->labelsGroup->setChecked(GETSTELMODULE(Satellites)->getFlagLabels());
@@ -405,6 +427,22 @@ void SatellitesDialog::setOrbitParams(void)
 	Satellite::orbitLineFadeSegments = ui->orbitFadeSpin->value();
 	Satellite::orbitLineSegmentDuration = ui->orbitDurationSpin->value();
 	GETSTELMODULE(Satellites)->recalculateOrbitLines();
+}
+
+void SatellitesDialog::updateTLEs(void)
+{
+	if(GETSTELMODULE(Satellites)->getUpdatesEnabled())
+	{
+		GETSTELMODULE(Satellites)->updateTLEs();
+	}
+	else
+	{
+		QStringList updateFiles = QFileDialog::getOpenFileNames(&StelMainGraphicsView::getInstance(),
+									q_("Select TLE Update File"),
+									StelFileMgr::getDesktopDir(),
+									"*.*");
+		GETSTELMODULE(Satellites)->updateFromFiles(updateFiles, false);
+	}
 }
 
 void SatellitesDialog::connectSatelliteGuiForm(void)
