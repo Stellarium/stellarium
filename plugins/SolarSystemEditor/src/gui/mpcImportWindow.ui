@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <author>Bogdan Marinov</author>
+ <class>mpcImportWindow</class>
+ <widget class="QWidget" name="mpcImportWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>480</width>
+    <height>475</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="BarFrame" name="TitleBar">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <layout class="QHBoxLayout" name="_2">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>4</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <spacer name="leftSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="stelWindowTitle">
+        <property name="text">
+         <string notr="true" extracomment="The title of the window will be set during runtime">Import data</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="rightSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="closeStelWindow">
+        <property name="minimumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QStackedWidget" name="stackedWidget">
+     <widget class="QWidget" name="pageSource">
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QTabWidget" name="tabWidget">
+         <widget class="QWidget" name="tabLists">
+          <attribute name="title">
+           <string>Lists</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QGroupBox" name="groupBoxType">
+             <property name="title">
+              <string>Select the type</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayoutType_3">
+              <property name="margin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QRadioButton" name="radioButtonAsteroids">
+                <property name="text">
+                 <string>Asteroids</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QRadioButton" name="radioButtonComets">
+                <property name="text">
+                 <string>Comets</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBoxSource">
+             <property name="title">
+              <string>Select the source</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_8">
+              <property name="margin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QRadioButton" name="radioButtonFile">
+                <property name="text">
+                 <string>A file containing a list of objects</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frameFile">
+                <layout class="QHBoxLayout" name="horizontalLayoutFile_2">
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QLineEdit" name="lineEditFilePath">
+                   <property name="inputMethodHints">
+                    <set>Qt::ImhNone</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButtonBrowse">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QRadioButton" name="radioButtonURL">
+                <property name="text">
+                 <string>Download a list of objects from the Internet</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frameURL">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_9">
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="labelEnter">
+                   <property name="text">
+                    <string>Enter a URL:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QFrame" name="frameBookmarkURL">
+                   <layout class="QHBoxLayout" name="horizontalLayoutBookmarkURL">
+                    <property name="margin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QLineEdit" name="lineEditURL">
+                      <property name="inputMethodHints">
+                       <set>Qt::ImhUrlCharactersOnly</set>
+                      </property>
+                      <property name="text">
+                       <string notr="true">http://</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="pushButtonPasteURL">
+                      <property name="text">
+                       <string>paste</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="checkBoxAddBookmark">
+                   <property name="text">
+                    <string>Add this URL to the bookmarks list</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QFrame" name="frameBookmarkTitle">
+                   <layout class="QHBoxLayout" name="horizontalLayoutBookmarkName">
+                    <property name="margin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QLabel" name="labelBookmarkTitle">
+                      <property name="text">
+                       <string>Bookmark title:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="lineEditBookmarkTitle"/>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="labelSelect">
+                   <property name="text">
+                    <string>Or select from the list:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBoxBookmarks"/>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButtonAcquire">
+                <property name="text">
+                 <string>Get orbital elements</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButtonAbortDownload">
+                <property name="text">
+                 <string>Abort download</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="verticalSpacer">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tabSearch">
+          <attribute name="title">
+           <string>Online search</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_11">
+           <item>
+            <widget class="QGroupBox" name="groupBoxSearch">
+             <property name="title">
+              <string>Online search</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_10">
+              <property name="margin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="labelQueryLink">
+                <property name="text">
+                 <string>Query the MPC's &lt;a href=&quot;http://www.minorplanetcenter.org/iau/MPEph/MPEph.html&quot;&gt;Minor Planet &amp;amp; Comet Ephemeris Service&lt;/a&gt;:</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+                <property name="openExternalLinks">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frameSearch">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout">
+                 <property name="margin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QLineEdit" name="lineEditQuery"/>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButtonSendQuery">
+                   <property name="icon">
+                    <iconset resource="../../../../data/gui/guiRes.qrc">
+                     <normaloff>:/graphicGui/searchButtonImage.png</normaloff>:/graphicGui/searchButtonImage.png</iconset>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButtonAbortQuery">
+                   <property name="icon">
+                    <iconset resource="../../../../data/gui/guiRes.qrc">
+                     <normaloff>:/graphicGui/closeButton-hover.png</normaloff>:/graphicGui/closeButton-hover.png</iconset>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="labelQueryMessage">
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="labelQueryInstructions">
+                <property name="text">
+                 <string>Only one result will be returned if the query is successful.&lt;br&gt;Both comets and asteroids can be identified with their number, name or provisional designation.&lt;br&gt;Comet &lt;i&gt;names&lt;/i&gt; need to be prefixed with &lt;b&gt;C/&lt;/b&gt; or &lt;b&gt;P/&lt;/b&gt;. If more than one comet matches a name, only the first result will be returned. For example, &quot;C/Halley&quot; will return 1P/Halley, Halley's Comet, but &quot;Halley&quot; will return the asteorid (2688) Halley.</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacerSearch">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="pageResult">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QGroupBox" name="groupBoxObjects">
+         <property name="title">
+          <string>Objects found</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="labelInstructions">
+            <property name="text">
+             <string>Mark the objects you wish to be imported. In &lt;i&gt;italic&lt;/i&gt; are listed names that match the names of already loaded objects. In &lt;b&gt;bold&lt;/b&gt; are listed names that match the names of objects inherited from Stellarium's default Solar System configuration.&lt;br/&gt;Note that adding a large number of objects may cause Stellarium to run slowly.</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioButtonOverwrite">
+            <property name="text">
+             <string>Overwrite existing objects</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioButtonUpdate">
+            <property name="text">
+             <string>Update existing objects</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxOnlyOrbitalElements">
+            <property name="text">
+             <string>Update only the orbital elements</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QListWidget" name="listWidgetObjects">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::NoSelection</enum>
+            </property>
+            <item>
+             <property name="text">
+              <string notr="true">2P/Encke</string>
+             </property>
+             <property name="checkState">
+              <enum>Unchecked</enum>
+             </property>
+             <property name="flags">
+              <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frameMarkButtons">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayoutMarkButtons">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QPushButton" name="pushButtonMarkAll">
+               <property name="text">
+                <string>Mark all</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonMarkNone">
+               <property name="text">
+                <string>Mark none</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonDiscard">
+               <property name="text">
+                <string>Discard</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonAdd">
+            <property name="text">
+             <string>Add objects</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>BarFrame</class>
+   <extends>QFrame</extends>
+   <header>Dialog.hpp</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>radioButtonAsteroids</tabstop>
+  <tabstop>radioButtonComets</tabstop>
+  <tabstop>radioButtonFile</tabstop>
+  <tabstop>pushButtonBrowse</tabstop>
+  <tabstop>lineEditFilePath</tabstop>
+  <tabstop>radioButtonURL</tabstop>
+  <tabstop>lineEditURL</tabstop>
+  <tabstop>pushButtonPasteURL</tabstop>
+  <tabstop>checkBoxAddBookmark</tabstop>
+  <tabstop>lineEditBookmarkTitle</tabstop>
+  <tabstop>comboBoxBookmarks</tabstop>
+  <tabstop>pushButtonAcquire</tabstop>
+  <tabstop>pushButtonAbortDownload</tabstop>
+  <tabstop>lineEditQuery</tabstop>
+  <tabstop>pushButtonSendQuery</tabstop>
+  <tabstop>pushButtonAbortQuery</tabstop>
+  <tabstop>radioButtonOverwrite</tabstop>
+  <tabstop>radioButtonUpdate</tabstop>
+  <tabstop>checkBoxOnlyOrbitalElements</tabstop>
+  <tabstop>listWidgetObjects</tabstop>
+  <tabstop>pushButtonMarkAll</tabstop>
+  <tabstop>pushButtonMarkNone</tabstop>
+  <tabstop>pushButtonDiscard</tabstop>
+  <tabstop>pushButtonAdd</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../../../../data/gui/guiRes.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>radioButtonFile</sender>
+   <signal>clicked()</signal>
+   <receiver>pushButtonBrowse</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>121</x>
+     <y>156</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>417</x>
+     <y>175</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonURL</sender>
+   <signal>clicked()</signal>
+   <receiver>lineEditURL</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>121</x>
+     <y>218</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>110</x>
+     <y>267</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonUpdate</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>checkBoxOnlyOrbitalElements</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>107</x>
+     <y>198</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>107</x>
+     <y>226</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxAddBookmark</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>frameBookmarkTitle</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>152</x>
+     <y>295</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>136</x>
+     <y>313</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
