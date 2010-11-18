@@ -1,3 +1,13 @@
+0.6.3
+Update status message show how many satellites got new elements.
+Update status message includes how many were missing in update URLs.
+Add lastUpdate date to the JSON data
+
+0.6.2
+Bugfixes
+Refactored json load/save
+Made per-satellite display/orbit flags persistent (save button now works)
+
 0.6.1
 Added global orbit lines on/off
 Added saving of settings
