@@ -820,7 +820,7 @@ void Satellites::updateDownloadComplete(QNetworkReply* reply)
 	// all downloads are complete...  do the update.
 	if (numberDownloadsComplete >= updateUrls.size())
 	{
-		updateFromFiles();
+		updateFromFiles(updateFiles, true);
 	}
 }
 
@@ -872,7 +872,7 @@ void Satellites::saveTleData(QString path)
 	saveTleMap(getTleMap(), path);
 }
 
-void Satellites::updateFromFiles(void)
+void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 {
 	// define a map of new TLE data - the key is the satellite designation
 	QMap< QString, QPair<QString, QString> > newTLE;
@@ -880,11 +880,11 @@ void Satellites::updateFromFiles(void)
 	if (progressBar)
 	{
 		progressBar->setValue(0);
-		progressBar->setMaximum(updateFiles.size() + 1);
+		progressBar->setMaximum(paths.size() + 1);
 		progressBar->setFormat("TLE updating %v/%m");
 	}
 
-	foreach(QString tleFilePath, updateFiles)
+	foreach(QString tleFilePath, paths)
 	{
 		QFile tleFile(tleFilePath);
 		if (tleFile.open(QIODevice::ReadOnly|QIODevice::Text))
@@ -920,7 +920,10 @@ void Satellites::updateFromFiles(void)
 				newTLE[thisSatId] = tleLines;
 			}
 			tleFile.close();
-			tleFile.remove();
+
+			if (deleteFiles)
+				tleFile.remove();
+
 			if (progressBar)
 				progressBar->setValue(progressBar->value() + 1);
 		}
