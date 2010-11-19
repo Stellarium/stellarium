@@ -24,7 +24,7 @@
 
 ToastMgr::ToastMgr()
 {
-	survey = new ToastSurvey("http://socnet.bz/wtml/toast/iras_bright/{1}/{3}/{3}_{2}.png");
+	survey = new ToastSurvey("http://chereau.free.fr/tmp/{level}/{y}/{y}_{x}.jpg");
 	survey->setParent(this);
 }
 

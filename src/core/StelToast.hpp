@@ -43,7 +43,7 @@ inline int pow2(int x) {return 1 << x;}
 class ToastGrid
 {
 public:
-	ToastGrid(int level);
+	ToastGrid(int maxLevel);
 	//! Get the vertice array for a given tile.
 	//! The position are stored in a grid.
 	//! @param level the level of the tile.
@@ -70,7 +70,7 @@ public:
 	//! @param y the y coordinate of the tile.
 	QVector<Vec3d> getPolygon(int level, int x, int y) const;
 	//! Return the max level of this grid.
-	int getLevel() const {return level;}
+	int getMaxLevel() const {return maxLevel;}
 
 private:
 	//! Get the vector at a given point in the grid
@@ -79,17 +79,17 @@ private:
 	Vec3d& at(int x, int y) {return grid[y * size + x];}
 	//! Get the vector at a given point in the grid
 	const Vec3d& at(int level, int x, int y) const
-		{int scale = pow2(this->level - level); return at(scale * x, scale * y);}
+		{int scale = pow2(maxLevel - level); return at(scale * x, scale * y);}
 	//! Get the vector at a given point in the grid
 	Vec3d& at(int level, int x, int y)
-		{int scale = pow2(this->level - level); return at(scale * x, scale * y);}
+		{int scale = pow2(maxLevel - level); return at(scale * x, scale * y);}
 
 	//! initialize the grid
 	void init_grid();
 	void init_grid(int level, int x, int y, bool side);
 
 	//! The max level of the grid
-	int level;
+	int maxLevel;
 	//! the size of the grid
 	int size;
 	//! The actual grid data
