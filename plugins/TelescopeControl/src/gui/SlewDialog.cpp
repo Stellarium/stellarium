@@ -76,20 +76,6 @@ void SlewDialog::createDialogContent()
 	ui->radioButtonHMS->setChecked(true);
 
 	updateTelescopeList();
-	
-	//Initialize the style
-	updateStyle();
-}
-
-void SlewDialog::updateStyle()
-{
-	if(dialog)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		Q_ASSERT(gui);
-		const StelStyle pluginStyle = telescopeManager->getModuleStyleSheet(gui->getStelStyle());
-		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
-	}
 }
 
 void SlewDialog::showConfiguration()

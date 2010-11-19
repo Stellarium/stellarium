@@ -142,21 +142,6 @@ void TelescopeControl::init()
 		reticleTexture = StelApp::getInstance().getTextureManager().createTexture(":/telescopeControl/telescope_reticle.png");
 		selectionTexture = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
 		
-		//Load the module's custom style sheets
-		QFile styleSheetFile;
-		styleSheetFile.setFileName(":/telescopeControl/normalStyle.css");
-		if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
-		{
-			normalStyleSheet = new QByteArray(styleSheetFile.readAll());
-		}
-		styleSheetFile.close();
-		styleSheetFile.setFileName(":/telescopeControl/nightStyle.css");
-		if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
-		{
-			nightStyleSheet = new QByteArray(styleSheetFile.readAll());
-		}
-		styleSheetFile.close();
-		
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		
 		//Create telescope key bindings
@@ -311,7 +296,6 @@ void TelescopeControl::setStelStyle(const QString& section)
 	}
 
 	telescopeDialog->updateStyle();
-	slewDialog->updateStyle();
 }
 
 double TelescopeControl::getCallOrder(StelModuleActionName actionName) const
@@ -1507,20 +1491,6 @@ bool TelescopeControl::restoreDeviceModelsListTo(QString deviceModelsListPath)
 
 	qDebug() << "TelescopeControl: The default device models list has been copied to" << deviceModelsListPath;
 	return true;
-}
-
-const StelStyle TelescopeControl::getModuleStyleSheet(const StelStyle& style)
-{
-	StelStyle pluginStyle(style);
-	if (style.confSectionName == "color")
-	{
-		pluginStyle.qtStyleSheet.append(*normalStyleSheet);
-	}
-	else
-	{
-		pluginStyle.qtStyleSheet.append(*nightStyleSheet);
-	}
-	return pluginStyle;
 }
 
 const QString& TelescopeControl::getServerExecutablesDirectoryPath()
