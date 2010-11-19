@@ -197,6 +197,12 @@ ToastTile::ToastTile(QObject* parent, int level, int x, int y)
 	// create the texture
 	imagePath = survey->getTilePath(level, x, y);
 	resolution = 1.5 / pow2(level+1);  // maybe we should find a better value for this ?
+
+	if (level==0)
+	{
+		boundingCap.n=Vec3d(1,0,0);
+		boundingCap.d=-1.;
+	}
 	const QVector<Vec3d>& pts = getGrid()->getPolygon(level, x, y);
 	Vec3d n = pts.at(0);
 	n+=pts.at(1);
@@ -204,7 +210,10 @@ ToastTile::ToastTile(QObject* parent, int level, int x, int y)
 	n+=pts.at(3);
 	n.normalize();
 	boundingCap.n=n;
-	boundingCap.d=qMin(qMin(n*pts.at(0), n*pts.at(1)), qMin(n*pts.at(2), n*pts.at(3)));
+	if (level==1)
+		boundingCap.d=0;
+	else
+		boundingCap.d=qMin(qMin(n*pts.at(0), n*pts.at(1)), qMin(n*pts.at(2), n*pts.at(3)));
 }
 
 
@@ -312,9 +321,14 @@ void ToastTile::drawTile(StelPainter* sPainter)
 	sPainter->drawFromArray(StelPainter::Triangles, indexArray.size(), 0, true, indexArray.constData());
 	glDisable(GL_CULL_FACE);
 
+	if (level!=4)
+		return;
 	SphericalConvexPolygon poly(getGrid()->getPolygon(level, x, y));
 	sPainter->enableTexture2d(false);
 	sPainter->drawSphericalRegion(&poly, StelPainter::SphericalPolygonDrawModeBoundary);
+
+	sPainter->setColor(1, 1, 0, 1);
+	sPainter->drawSphericalRegion(&boundingCap, StelPainter::SphericalPolygonDrawModeBoundary);
 }
 
 
