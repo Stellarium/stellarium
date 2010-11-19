@@ -193,8 +193,14 @@ ToastTile::ToastTile(QObject* parent, int level, int x, int y)
 	// create the texture
 	imagePath = survey->getTilePath(level, x, y);
 	resolution = 1.5 / pow2(level+1);  // maybe we should find a better value for this ?
-	shape = SphericalConvexPolygon(getGrid()->getPolygon(level, x, y));
-	Q_ASSERT(shape.checkValid());
+	const QVector<Vec3d>& pts = getGrid()->getPolygon(level, x, y);
+	Vec3d n = pts.at(0);
+	n+=pts.at(1);
+	n+=pts.at(2);
+	n+=pts.at(3);
+	n.normalize();
+	boundingCap.n=n;
+	boundingCap.d=pts.at(0)*pts.at(2);
 }
 
 
@@ -216,7 +222,7 @@ const ToastSurvey* ToastTile::getSurvey() const
 }
 
 
-bool ToastTile::isVisible(SphericalRegionP viewportShape, float resolution) const
+bool ToastTile::isVisible(const SphericalCap& viewportShape, float resolution) const
 {
 	if (empty)
 		return false;
@@ -224,10 +230,10 @@ bool ToastTile::isVisible(SphericalRegionP viewportShape, float resolution) cons
 		return true;
 	if (this->resolution < resolution)
 		return false;
-	return viewportShape->intersects(shape);
+	return viewportShape.intersects(boundingCap);
 }
 
-bool ToastTile::isCovered(SphericalRegionP viewportShape, float resolution) const
+bool ToastTile::isCovered(const SphericalCap& viewportShape, float resolution) const
 {
 	// The tile is covered if we have at least one visible child and all the visible children are all ready to be drawn.
 	int nbVisibleChildren = 0;
@@ -278,18 +284,17 @@ void ToastTile::prepareDraw()
 }
 
 
-void ToastTile::drawTile(StelCore* core)
+void ToastTile::drawTile(StelPainter* sPainter)
 {
 	if (!ready)
 		prepareDraw();
 
-	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	sPainter.setColor(1, 1, 1, 1);
+	sPainter->setColor(1, 1, 1, 1);
 
 	if (!texture->bind())
 		return;
 
-	sPainter.enableTexture2d(true);
+	sPainter->enableTexture2d(true);
 
 	//	// We need to make a copy of the vertex arrays because they are modified by the painter
 	//	QVector<Vec3d> vertexArray(this->vertexArray);
@@ -297,13 +302,13 @@ void ToastTile::drawTile(StelCore* core)
 
 	glEnable(GL_CULL_FACE);
 	// sPainter.drawArrays(GL_TRIANGLES, vertexArray.size(), vertexArray.data(), textureArray.data(), NULL, NULL, indexArray.size(), indexArray.constData());
-	sPainter.setArrays(vertexArray.constData(), textureArray.constData());
-	sPainter.drawFromArray(StelPainter::Triangles, indexArray.size(), 0, true, indexArray.constData());
+	sPainter->setArrays(vertexArray.constData(), textureArray.constData());
+	sPainter->drawFromArray(StelPainter::Triangles, indexArray.size(), 0, true, indexArray.constData());
 	glDisable(GL_CULL_FACE);
 }
 
 
-void ToastTile::draw(StelCore* core, SphericalRegionP viewportShape, float resolution)
+void ToastTile::draw(StelPainter* sPainter, const SphericalCap& viewportShape, float resolution)
 {
 	if (!isVisible(viewportShape, resolution))
 	{
@@ -311,11 +316,11 @@ void ToastTile::draw(StelCore* core, SphericalRegionP viewportShape, float resol
 		return;
 	}
 	if (!isCovered(viewportShape, resolution))
-		drawTile(core);
+		drawTile(sPainter);
 	// Draw all the children
 	foreach(ToastTile* child, getSubTiles())
 	{
-		child->draw(core, viewportShape, resolution);
+		child->draw(sPainter, viewportShape, resolution);
 	}
 }
 
@@ -350,13 +355,12 @@ QString ToastSurvey::getTilePath(int level, int x, int y) const
 }
 
 
-void ToastSurvey::draw(StelCore* core)
+void ToastSurvey::draw(StelPainter* sPainter)
 {
 	// Get the viewport resolution in degree per pixel.  We can then
 	// use it to discard tiles that are in a higher resolution.
-	const double degPerPixel = 1./core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()*180./M_PI;
+	const double degPerPixel = 1./sPainter->getProjector()->getPixelPerRadAtCenter()*180./M_PI;
 	// We also get the viewport shape to discard invisibly tiles.
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	SphericalRegionP viewportRegion = prj->getViewportConvexPolygon(0, 0);
-	rootTile->draw(core, viewportRegion, degPerPixel);
+	const SphericalCap& viewportRegion = sPainter->getProjector()->getBoundingCap();
+	rootTile->draw(sPainter, viewportRegion, degPerPixel);
 }

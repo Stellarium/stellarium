@@ -29,6 +29,8 @@
 #include "StelTextureTypes.hpp"
 #include "VecMath.hpp"
 
+class StelPainter;
+
 //! compute 2**x
 inline int pow2(int x) {return 1 << x;}
 
@@ -112,10 +114,10 @@ class ToastTile : public QObject
 
 public:
 	ToastTile(QObject* parent, int level, int x, int y);
-	void draw(class StelCore* core, SphericalRegionP viewportShape, float resolution);
+	void draw(StelPainter* painter, const SphericalCap& viewportShape, float resolution);
 
 protected:
-	void drawTile(StelCore* core);
+	void drawTile(StelPainter* painter);
 	//! Return the survey the tile belongs to.
 	const ToastSurvey* getSurvey() const;
 	//! Return the toast grid used by the tile.
@@ -123,10 +125,10 @@ protected:
 	//! Return all the subtiles
 	QList<ToastTile*> getSubTiles() const {return findChildren<ToastTile*>();}
 	//! Return whether the tile should be drawn
-	bool isVisible(SphericalRegionP viewportShape, float resolution) const;
+	bool isVisible(const SphericalCap& viewportShape, float resolution) const;
 	//! return whether the tile is covered by its children tiles
 	//! This is used to avoid drawing tiles that will be covered anyway
-	bool isCovered(SphericalRegionP viewportShape, float resolution) const;
+	bool isCovered(const SphericalCap& viewportShape, float resolution) const;
 	void prepareDraw();
 	void free();
 
@@ -147,8 +149,8 @@ private:
 	bool ready;
 	//! The texture associated with the tile
 	StelTextureSP texture;
-	//! The shape used to check if the tile is visible
-	SphericalConvexPolygon shape;
+	//! The bounding cap used to check if the tile is visible
+	SphericalCap boundingCap;
 
 	// QList<SphericalRegionP> skyConvexPolygons;
 	//! OpenGl arrays
@@ -168,7 +170,7 @@ class ToastSurvey : public QObject
 public:
 	ToastSurvey(const QString& path);
 	QString getTilePath(int level, int x, int y) const;
-	void draw(class StelCore* core);
+	void draw(StelPainter* sPainter);
 	const ToastGrid* getGrid() const {return &grid;}
 	int getMaxLevel() const {return maxLevel;}
 
