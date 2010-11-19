@@ -380,11 +380,11 @@ QString ToastSurvey::getTilePath(int level, int x, int y) const
 
 void ToastSurvey::draw(StelPainter* sPainter)
 {
-	// Compute the maximum visible level for the tile according to the view resolution.
+	// Compute the maximum visible level for the tiles according to the view resolution.
 	// We know that each tile at level L represents an angle of 360 / 2**L
 	// The maximum angle we want to see is the size of a tile in pixels time the angle for one visible pixel.
 	const double anglePerPixel = 1./sPainter->getProjector()->getPixelPerRadAtCenter()*180./M_PI;
-	const int maxAngle = (int)(anglePerPixel * getTilesSize());
+	const double maxAngle = anglePerPixel * getTilesSize();
 	int maxVisibleLevel = (int)(log2(360. / maxAngle));
 
 	// We also get the viewport shape to discard invisibly tiles.
