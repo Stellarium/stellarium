@@ -196,7 +196,6 @@ ToastTile::ToastTile(QObject* parent, int level, int x, int y)
 	const ToastSurvey* survey = getSurvey();
 	// create the texture
 	imagePath = survey->getTilePath(level, x, y);
-	resolution = 1.5 / pow2(level+1);  // maybe we should find a better value for this ?
 
 	if (level==0)
 	{
@@ -235,24 +234,24 @@ const ToastSurvey* ToastTile::getSurvey() const
 }
 
 
-bool ToastTile::isVisible(const SphericalCap& viewportShape, float resolution) const
+bool ToastTile::isVisible(const SphericalCap& viewportShape, int maxVisibleLevel) const
 {
 	if (empty)
 		return false;
 	if (level == 0)
 		return true;
-	if (this->resolution < resolution)
+	if (level > maxVisibleLevel)
 		return false;
 	return viewportShape.intersects(boundingCap);
 }
 
-bool ToastTile::isCovered(const SphericalCap& viewportShape, float resolution) const
+bool ToastTile::isCovered(const SphericalCap& viewportShape, int maxVisibleLevel) const
 {
 	// The tile is covered if we have at least one visible child and all the visible children are all ready to be drawn.
 	int nbVisibleChildren = 0;
 	foreach (ToastTile* child, getSubTiles())
 	{
-		if (!child->isVisible(viewportShape, resolution))
+		if (!child->isVisible(viewportShape, maxVisibleLevel))
 			continue;
 		nbVisibleChildren++;
 		if (!child->ready)
@@ -332,19 +331,19 @@ void ToastTile::drawTile(StelPainter* sPainter)
 }
 
 
-void ToastTile::draw(StelPainter* sPainter, const SphericalCap& viewportShape, float resolution)
+void ToastTile::draw(StelPainter* sPainter, const SphericalCap& viewportShape, int maxVisibleLevel)
 {
-	if (!isVisible(viewportShape, resolution))
+	if (!isVisible(viewportShape, maxVisibleLevel))
 	{
 		free();
 		return;
 	}
-	if (!isCovered(viewportShape, resolution))
+	if (!isCovered(viewportShape, maxVisibleLevel))
 		drawTile(sPainter);
 	// Draw all the children
 	foreach(ToastTile* child, getSubTiles())
 	{
-		child->draw(sPainter, viewportShape, resolution);
+		child->draw(sPainter, viewportShape, maxVisibleLevel);
 	}
 }
 
@@ -381,10 +380,14 @@ QString ToastSurvey::getTilePath(int level, int x, int y) const
 
 void ToastSurvey::draw(StelPainter* sPainter)
 {
-	// Get the viewport resolution in degree per pixel.  We can then
-	// use it to discard tiles that are in a higher resolution.
-	const double degPerPixel = 1./sPainter->getProjector()->getPixelPerRadAtCenter()*180./M_PI;
+	// Compute the maximum visible level for the tile according to the view resolution.
+	// We know that each tile at level L represents an angle of 360 / 2**L
+	// The maximum angle we want to see is the size of a tile in pixels time the angle for one visible pixel.
+	const double anglePerPixel = 1./sPainter->getProjector()->getPixelPerRadAtCenter()*180./M_PI;
+	const int maxAngle = (int)(anglePerPixel * getTilesSize());
+	int maxVisibleLevel = (int)(log2(360. / maxAngle));
+
 	// We also get the viewport shape to discard invisibly tiles.
 	const SphericalCap& viewportRegion = sPainter->getProjector()->getBoundingCap();
-	rootTile->draw(sPainter, viewportRegion, degPerPixel);
+	rootTile->draw(sPainter, viewportRegion, maxVisibleLevel);
 }
