@@ -204,7 +204,7 @@ ToastTile::ToastTile(QObject* parent, int level, int x, int y)
 	n+=pts.at(3);
 	n.normalize();
 	boundingCap.n=n;
-	boundingCap.d=pts.at(0)*pts.at(2);
+	boundingCap.d=qMin(qMin(n*pts.at(0), n*pts.at(1)), qMin(n*pts.at(2), n*pts.at(3)));
 }
 
 
