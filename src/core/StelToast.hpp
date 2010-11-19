@@ -114,7 +114,7 @@ class ToastTile : public QObject
 
 public:
 	ToastTile(QObject* parent, int level, int x, int y);
-	void draw(StelPainter* painter, const SphericalCap& viewportShape, float resolution);
+	void draw(StelPainter* painter, const SphericalCap& viewportShape, int maxVisibleLevel);
 
 protected:
 	void drawTile(StelPainter* painter);
@@ -125,10 +125,10 @@ protected:
 	//! Return all the subtiles
 	QList<ToastTile*> getSubTiles() const {return findChildren<ToastTile*>();}
 	//! Return whether the tile should be drawn
-	bool isVisible(const SphericalCap& viewportShape, float resolution) const;
+	bool isVisible(const SphericalCap& viewportShape, int maxVisibleLevel) const;
 	//! return whether the tile is covered by its children tiles
 	//! This is used to avoid drawing tiles that will be covered anyway
-	bool isCovered(const SphericalCap& viewportShape, float resolution) const;
+	bool isCovered(const SphericalCap& viewportShape, int maxVisibleLevel) const;
 	void prepareDraw();
 	void free();
 
@@ -139,8 +139,6 @@ private:
 	int x;
 	// y coordinate of the tile
 	int y;
-	//! resolution of the data of the texture in degree/pixel
-	float resolution;
 	//! Path to the tile image
 	QString imagePath;
 	// Set to true if the tile has no texture
@@ -173,6 +171,7 @@ public:
 	void draw(StelPainter* sPainter);
 	const ToastGrid* getGrid() const {return &grid;}
 	int getMaxLevel() const {return maxLevel;}
+	int getTilesSize() const {return 512;}
 
 private:
 	ToastGrid grid;
