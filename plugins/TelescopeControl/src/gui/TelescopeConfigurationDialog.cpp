@@ -90,9 +90,6 @@ void TelescopeConfigurationDialog::createDialogContent()
 	ui->lineEditHostName->setValidator(hostNameValidator);
 	ui->lineEditCircleList->setValidator(circleListValidator);
 	ui->lineEditSerialPort->setValidator(serialPortValidator);
-	
-	//Initialize the style
-	updateStyle();
 }
 
 //Set the configuration panel in a predictable state
@@ -197,11 +194,14 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		//Initialize the serial port value
 		ui->lineEditSerialPort->setText(serialPortName);
 	}
-	else //Local or remote connection
+	else if (connectionType == ConnectionRemote)
 	{
 		ui->radioButtonTelescopeConnection->setChecked(true);//Calls toggleTypeConnection(true)
-		if (connectionType == ConnectionRemote)
-			ui->lineEditHostName->setText(host);
+		ui->lineEditHostName->setText(host);
+	}
+	else
+	{
+		ui->radioButtonTelescopeVirtual->setChecked(true);
 	}
 	
 	//Circles
@@ -239,7 +239,7 @@ void TelescopeConfigurationDialog::toggleTypeLocal(bool isChecked)
 		ui->labelHost->setEnabled(false);
 		ui->lineEditHostName->setEnabled(false);
 
-		ui->toolBoxSettings->setCurrentIndex(ui->toolBoxSettings->indexOf(ui->pageTelescopeProperties));
+		ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
 	}
 	else
 	{
@@ -256,30 +256,23 @@ void TelescopeConfigurationDialog::toggleTypeConnection(bool isChecked)
 		ui->lineEditHostName->setText("localhost");
 		ui->spinBoxTCPPort->setValue(DEFAULT_TCP_PORT_FOR_SLOT(configuredSlot));
 
-		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageDeviceSettings), false);
+		ui->groupBoxDeviceSettings->setEnabled(false);
 
-		ui->toolBoxSettings->setCurrentIndex(ui->toolBoxSettings->indexOf(ui->pageTelescopeProperties));
+		ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
 	}
 	else
 	{
-		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageDeviceSettings), true);
+		ui->groupBoxDeviceSettings->setEnabled(true);
 	}
 }
 
 void TelescopeConfigurationDialog::toggleTypeVirtual(bool isChecked)
 {
-	if(isChecked)
-	{
-		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageDeviceSettings), false);
-		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageConnectionSettings), false);
+	//TODO: This really should be done in the GUI
+	ui->groupBoxDeviceSettings->setEnabled(!isChecked);
+	ui->groupBoxConnectionSettings->setEnabled(!isChecked);
 
-		ui->toolBoxSettings->setCurrentIndex(ui->toolBoxSettings->indexOf(ui->pageTelescopeProperties));
-	}
-	else
-	{
-		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageDeviceSettings), true);
-		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageConnectionSettings), true);
-	}
+	ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
 }
 
 void TelescopeConfigurationDialog::buttonSavePressed()
@@ -356,14 +349,4 @@ void TelescopeConfigurationDialog::deviceModelSelected(const QString& deviceMode
 {
 	ui->labelDeviceModelDescription->setText(telescopeManager->getDeviceModels().value(deviceModelName).description);
 	ui->doubleSpinBoxTelescopeDelay->setValue(SECONDS_FROM_MICROSECONDS(telescopeManager->getDeviceModels().value(deviceModelName).defaultDelay));
-}
-
-void TelescopeConfigurationDialog::updateStyle()
-{
-	if (dialog)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		Q_ASSERT(gui);
-		dialog->setStyleSheet(telescopeManager->getModuleStyleSheet(gui->getStelStyle()).qtStyleSheet);
-	}
 }
