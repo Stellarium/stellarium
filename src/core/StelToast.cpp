@@ -243,7 +243,7 @@ bool ToastTile::isCovered(const SphericalCap& viewportShape, float resolution) c
 	int nbVisibleChildren = 0;
 	foreach (ToastTile* child, getSubTiles())
 	{
-		if (child->isVisible(viewportShape, resolution))
+		if (!child->isVisible(viewportShape, resolution))
 			continue;
 		nbVisibleChildren++;
 		if (!child->ready)
@@ -267,6 +267,8 @@ void ToastTile::prepareDraw()
 		empty = true;
 		return;
 	}
+	if (!texture->canBind())
+		return;
 	// Get the opengl arrays
 	if (vertexArray.empty() && level < getGrid()->getMaxLevel())
 	{
