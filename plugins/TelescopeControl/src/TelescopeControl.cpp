@@ -163,36 +163,21 @@ void TelescopeControl::init()
 		 /* QAction-s with these key bindings existed in Stellarium prior to
 			revision 6311. Any future backports should account for that. */
 		QString group = N_("Telescope Control");
-
-		QString STOtext, STCtext, STOaction, STCaction, STOctrl, STCctrl;
-		for (int i=1; i<10; i++)
+		for (int i = MIN_SLOT_NUMBER; i <= MAX_SLOT_NUMBER; i++)
 		{
 			// "Slew to object" commands
-			STOtext = q_("Move telescope #%1 to selected object").arg(i);
-			STOaction.append(QString("actionMove_Telescope_To_Selection_%1").arg(i));
-			STOctrl.append(QString("Ctrl+%1").arg(i));
-			gui->addGuiActions(STOaction, STOtext, STOctrl, group, false, false);
-		}
+			QString name = QString("actionMove_Telescope_To_Selection_%1").arg(i);
+			QString description = q_("Move telescope #%1 to selected object").arg(i);
+			QString shortcut = QString("Ctrl+%1").arg(i);
+			gui->addGuiActions(name, description, shortcut, group, false, false);
+			connect(gui->getGuiActions(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
 
-		for (int i=1; i<10; i++)
-		{
 			// "Slew to the center of the screen" commands
-			STCtext = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
-			STCaction.append(QString("actionSlew_Telescope_To_Direction_%1").arg(i));
-			STCctrl.append(QString("Alt+%1").arg(i));
-			gui->addGuiActions(STCaction, STCtext, STCctrl, group, false, false);
-		}
-
-		for (int i=1; i<10; i++)
-		{
-			STOaction.append(QString("actionMove_Telescope_To_Selection_%1").arg(i));
-			connect(gui->getGuiActions(STOaction), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
-		}
-
-		for (int i=1; i<10; i++)
-		{
-			STCaction.append(QString("actionSlew_Telescope_To_Direction_%1").arg(i));
-			connect(gui->getGuiActions(STCaction), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
+			name = QString("actionSlew_Telescope_To_Direction_%1").arg(i);
+			description = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
+			shortcut = QString("Alt+%1").arg(i);
+			gui->addGuiActions(name, description, shortcut, group, false, false);
+			connect(gui->getGuiActions(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
 		}
 	
 		//Create and initialize dialog windows

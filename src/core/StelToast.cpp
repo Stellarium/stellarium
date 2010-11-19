@@ -32,14 +32,15 @@
 //! compute the middle of two points on the sphere
 static inline Vec3d middle(const Vec3d& a, const Vec3d b)
 {
-	Vec3d ret = a + b;
+	Vec3d ret = a;
+	ret += b;
 	ret.normalize();
 	return ret;
 }
 
 
-ToastGrid::ToastGrid(int level)
-	: level(level), size(pow2(level) + 1)
+ToastGrid::ToastGrid(int amaxLevel)
+	: maxLevel(amaxLevel), size(pow2(amaxLevel) + 1)
 {
 	// We assume that initialization of the grid is fast enough to be
 	// done in the constructor.
@@ -83,7 +84,7 @@ void ToastGrid::init_grid(int level, int x, int y, bool side)
 	else
 		at(clevel, cx+1, cy+1) = middle(at(level, x, y+1), at(level, x+1, y));
 	// now we can compute the higher levels
-	if (clevel < this->level)
+	if (clevel < maxLevel)
 	{
 		init_grid(clevel, cx, cy, side);
 		init_grid(clevel, cx+1, cy, side);
@@ -96,17 +97,17 @@ void ToastGrid::init_grid(int level, int x, int y, bool side)
 QVector<Vec3d> ToastGrid::getVertexArray(int level, int x, int y, int resolution) const
 {
 	Q_ASSERT(resolution >= level);
-	Q_ASSERT(resolution <= this->level);
+	Q_ASSERT(resolution <= maxLevel);
 	// The size of the returned array
 	int size = pow2(resolution - level) + 1;
 	QVector<Vec3d> ret;
 	ret.reserve(size * size);
 	// Compute the real position in the grid
-	int scale = pow2(this->level - level);
+	int scale = pow2(maxLevel - level);
 	x *= scale;
 	y *= scale;
 	// Fill the array
-	int step = pow2(this->level - resolution);
+	int step = pow2(maxLevel - resolution);
 	for (int i = 0; i < size; i++)
 	{
 		for (int j = 0; j < size; j++)
@@ -124,7 +125,7 @@ QVector<Vec2f> ToastGrid::getTextureArray(int level, int x, int y, int resolutio
 	Q_UNUSED(x);
 	Q_UNUSED(y);
 	Q_ASSERT(resolution >= level);
-	Q_ASSERT(resolution <= this->level);
+	Q_ASSERT(resolution <= maxLevel);
 	// The size of the returned array
 	int size = pow2(resolution - level) + 1;
 	QVector<Vec2f> ret;
@@ -146,7 +147,7 @@ QVector<unsigned int> ToastGrid::getTrianglesIndex(int level, int x, int y, int 
 	Q_UNUSED(x);
 	Q_UNUSED(y);
 	Q_ASSERT(resolution >= level);
-	Q_ASSERT(resolution <= this->level);
+	Q_ASSERT(resolution <= maxLevel);
 	int size = pow2(resolution - level) + 1;
 	int nbTiles = (size - 1) * (size - 1);
 	QVector<unsigned int> ret;
@@ -185,11 +186,11 @@ QVector<Vec3d> ToastGrid::getPolygon(int level, int x, int y) const
 ToastTile::ToastTile(QObject* parent, int level, int x, int y)
 	: QObject(parent), level(level), x(x), y(y), empty(false), ready(false), texture(NULL)
 {
-	Q_ASSERT(level <= getGrid()->getLevel());
+	Q_ASSERT(level <= getGrid()->getMaxLevel());
 	const ToastSurvey* survey = getSurvey();
 	// create the texture
 	imagePath = survey->getTilePath(level, x, y);
-	resolution = 0.5 / pow2(level+1);  // maybe we should find a better value for this ?
+	resolution = 1.5 / pow2(level+1);  // maybe we should find a better value for this ?
 	shape = SphericalConvexPolygon(getGrid()->getPolygon(level, x, y));
 	Q_ASSERT(shape.checkValid());
 }
@@ -255,20 +256,20 @@ void ToastTile::prepareDraw()
 		return;
 	}
 	// Get the opengl arrays
-	if (vertexArray.empty() && level < getGrid()->getLevel())
+	if (vertexArray.empty() && level < getGrid()->getMaxLevel())
 	{
 		vertexArray = getGrid()->getVertexArray(level, x, y, 6);
 		textureArray = getGrid()->getTextureArray(level, x, y, 6);
-		indexArray = getGrid()->getTrianglesIndex(level, x, x, 6);
+		indexArray = getGrid()->getTrianglesIndex(level, x, y, 6);
 	}
 
 	if (getSubTiles().isEmpty() && level < getSurvey()->getMaxLevel())
 	{
 		qDebug() << "Create children";
 		// Create the children
-		for (int x = 0; x < 2; x++)
-			for (int y = 0; y < 2; y++)
-				new ToastTile(this, level + 1, 2 * this->x + x, 2 * this->y + y);
+		for (int i = 0; i < 2; ++i)
+			for (int j = 0; j < 2; ++j)
+				new ToastTile(this, level + 1, 2 * this->x + i, 2 * this->y + j);
 		Q_ASSERT(children().size() == 4);
 	}
 	ready = true;
@@ -340,9 +341,9 @@ ToastSurvey::ToastSurvey(const QString& path)
 QString ToastSurvey::getTilePath(int level, int x, int y) const
 {
 	QString ret = path;
-	ret.replace("{1}", QString::number(level));
-	ret.replace("{2}", QString::number(x));
-	ret.replace("{3}", QString::number(y));
+	ret.replace("{level}", QString::number(level));
+	ret.replace("{x}", QString::number(x));
+	ret.replace("{y}", QString::number(y));
 	return ret;
 }
 
