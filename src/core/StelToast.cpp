@@ -51,15 +51,17 @@ ToastGrid::ToastGrid(int amaxLevel)
 void ToastGrid::init_grid()
 {
 	// Allocate the grid memory.
-	grid.fill(Vec3d(0, 0, 0), size * size);
+	grid.fill(Vec3d(0), size * size);
 	// Set up the level 0.
-	at(0, 0, 0) = at(0, 1, 0) = at(0, 1, 1) = at(0, 0, 1) = Vec3d(0, 0, 1);
+	at(0, 0, 0) = at(0, 1, 0) = at(0, 1, 1) = at(0, 0, 1) = Vec3d(0, 0, -1);
 	// And the level 1
-	at(1, 1, 1) = Vec3d(0, 0, -1);
-	at(1, 1, 0) = Vec3d(1, 0, 0);
-	at(1, 1, 2) = Vec3d(-1, 0, 0);
-	at(1, 0, 1) = Vec3d(0, -1, 0);
-	at(1, 2, 1) = Vec3d(0, 1, 0);
+	// Need mirror
+	at(1, 1, 1) = Vec3d(0, 0, 1);
+	at(1, 1, 0) = Vec3d(0, -1, 0);
+	at(1, 2, 1) = Vec3d(1, 0, 0);
+	at(1, 1, 2) = Vec3d(0, 1, 0);
+	at(1, 0, 1) = Vec3d(-1, 0, 0);
+
 	// Then we can compute the other levels by recursion
 	init_grid(1, 0, 0, false);
 	init_grid(1, 0, 1, true);
@@ -161,7 +163,7 @@ QVector<unsigned int> ToastGrid::getTrianglesIndex(int level, int x, int y, int 
 			unsigned int b = (i + 1) * size + j;
 			unsigned int c = (i + 1) * size + j + 1;
 			unsigned int d = i * size + j + 1;
-			ret << a << c << b << a << d << c;
+			ret << b << c << a << c << d << a;
 		}
 	}
 
@@ -175,7 +177,7 @@ QVector<Vec3d> ToastGrid::getPolygon(int level, int x, int y) const
 	QVector<Vec3d> array = getVertexArray(level, x, y, level);
 	QVector<Vec3d> ret;
 	ret.reserve(4);
-	ret << array[0] << array[1] << array[3] << array[2];
+	ret << array[2] << array[3] << array[1] << array[0];
 	return ret;
 }
 
