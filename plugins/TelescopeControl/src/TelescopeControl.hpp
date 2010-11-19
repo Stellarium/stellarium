@@ -139,10 +139,6 @@ public:
 	//! Returns a list of the currently connected clients
 	QHash<int, QString> getConnectedClientsNames();
 	
-	//! Returns the module-specific style sheet.
-	//! The main StelStyle instance should be passed.
-	const StelStyle getModuleStyleSheet(const StelStyle& style);
-	
 	bool getFlagUseServerExecutables() {return useServerExecutables;}
 	//! Forces a call of loadDeviceModels(). Stops all active telescopes.
 	void setFlagUseServerExecutables(bool b);
@@ -267,10 +263,6 @@ private:
 	//GUI
 	TelescopeDialog * telescopeDialog;
 	SlewDialog * slewDialog;
-	
-	//Styles
-	QByteArray * normalStyleSheet;
-	QByteArray * nightStyleSheet;
 	
 	//! Used internally. Checks if the argument is a valid slot number.
 	bool isValidSlotNumber(int slot);

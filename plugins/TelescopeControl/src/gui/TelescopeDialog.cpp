@@ -702,13 +702,9 @@ void TelescopeDialog::updateStyle()
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		Q_ASSERT(gui);
-		const StelStyle pluginStyle = telescopeManager->getModuleStyleSheet(gui->getStelStyle());
-		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
-		ui->textBrowserAbout->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
+		QString style(gui->getStelStyle().htmlStyleSheet);
+		ui->textBrowserAbout->document()->setDefaultStyleSheet(style);
 	}
-	
-	//Change the styles of all children, too
-	configurationDialog.updateStyle();
 }
 
 void TelescopeDialog::checkBoxUseExecutablesToggled(bool useExecutables)
