@@ -21,6 +21,8 @@
 
 #include "ToastMgr.hpp"
 #include "StelToast.hpp"
+#include "StelPainter.hpp"
+#include "StelCore.hpp"
 
 ToastMgr::ToastMgr()
 {
@@ -39,5 +41,6 @@ void ToastMgr::init()
 
 void ToastMgr::draw(StelCore* core)
 {
-	survey->draw(core);
+	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
+	survey->draw(&sPainter);
 }
