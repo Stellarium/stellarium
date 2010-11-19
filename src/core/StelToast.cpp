@@ -146,12 +146,13 @@ QVector<Vec2f> ToastGrid::getTextureArray(int level, int x, int y, int resolutio
 
 QVector<unsigned int> ToastGrid::getTrianglesIndex(int level, int x, int y, int resolution) const
 {
-	Q_UNUSED(x);
-	Q_UNUSED(y);
 	Q_ASSERT(resolution >= level);
 	Q_ASSERT(resolution <= maxLevel);
 	int size = pow2(resolution - level) + 1;
 	int nbTiles = (size - 1) * (size - 1);
+	// If we are in the top right or the bottom left quadran we invert the diagonal of the triangles.
+	int middleIndex = pow2(level) / 2;
+	bool invert = (x >= middleIndex) == (y >= middleIndex);
 	QVector<unsigned int> ret;
 	ret.reserve(nbTiles * 6);
 	for (int i = 0; i < size - 1; ++i)
@@ -163,7 +164,10 @@ QVector<unsigned int> ToastGrid::getTrianglesIndex(int level, int x, int y, int 
 			unsigned int b = (i + 1) * size + j;
 			unsigned int c = (i + 1) * size + j + 1;
 			unsigned int d = i * size + j + 1;
-			ret << b << c << a << c << d << a;
+			if (!invert)
+				ret << b << c << a << c << d << a;
+			else
+				ret << b << d << a << d << b << c;
 		}
 	}
 
@@ -305,6 +309,10 @@ void ToastTile::drawTile(StelPainter* sPainter)
 	sPainter->setArrays(vertexArray.constData(), textureArray.constData());
 	sPainter->drawFromArray(StelPainter::Triangles, indexArray.size(), 0, true, indexArray.constData());
 	glDisable(GL_CULL_FACE);
+
+	SphericalConvexPolygon poly(getGrid()->getPolygon(level, x, y));
+	sPainter->enableTexture2d(false);
+	sPainter->drawSphericalRegion(&poly, StelPainter::SphericalPolygonDrawModeBoundary);
 }
 
 
