@@ -118,7 +118,7 @@ void CompassMarks::init()
 		pxmapOnIcon = new QPixmap(":/compassMarks/bt_compass_on.png");
 		pxmapOffIcon = new QPixmap(":/compassMarks/bt_compass_off.png");
 
-		gui->addGuiActions("actionShow_Compass_Marks", N_("Compass marks"), "Ctrl+C", "Plugin Key Bindings", true, false);
+		gui->addGuiActions("actionShow_Compass_Marks", N_("Compass marks"), "Ctrl+C", N_("Plugin Key Bindings"), true, false);
 		gui->getGuiActions("actionShow_Compass_Marks")->setChecked(markFader);
 		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiActions("actionShow_Compass_Marks"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
