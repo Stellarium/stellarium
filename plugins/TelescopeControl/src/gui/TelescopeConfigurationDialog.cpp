@@ -104,6 +104,9 @@ void TelescopeConfigurationDialog::initConfigurationDialog()
 	//Name
 	ui->lineEditTelescopeName->clear();
 
+	//Equinox
+	ui->radioButtonJ2000->setChecked(true);
+
 	//Connect at startup
 	ui->checkBoxConnectAtStartup->setChecked(false);
 	
@@ -158,6 +161,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	//Read the telescope properties
 	QString name;
 	ConnectionType connectionType;
+	QString equinox;
 	QString host;
 	int portTCP;
 	int delay;
@@ -165,7 +169,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	QList<double> circles;
 	QString deviceModelName;
 	QString serialPortName;
-	if(!telescopeManager->getTelescopeAtSlot(slot, connectionType, name, host, portTCP, delay, connectAtStartup, circles, deviceModelName, serialPortName))
+	if(!telescopeManager->getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, serialPortName))
 	{
 		//TODO: Add debug
 		return;
@@ -203,6 +207,12 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	{
 		ui->radioButtonTelescopeVirtual->setChecked(true);
 	}
+
+	//Equinox
+	if (equinox == "JNow")
+		ui->radioButtonJNow->setChecked(true);
+	else
+		ui->radioButtonJ2000->setChecked(true);
 	
 	//Circles
 	if(!circles.isEmpty())
@@ -309,6 +319,10 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 				circles.append(circle);
 		}
 	}
+
+	QString equinox("J2000");
+	if (ui->radioButtonJNow->isChecked())
+		equinox = "JNow";
 	
 	//Type and server properties
 	//TODO: When adding, check for success!
@@ -321,7 +335,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 			return;//TODO: Add more validation!
 		
 		type = ConnectionInternal;
-		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, host, portTCP, delay, connectAtStartup, circles, ui->comboBoxDeviceModel->currentText(), serialPortName);
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles, ui->comboBoxDeviceModel->currentText(), serialPortName);
 	}
 	else if (ui->radioButtonTelescopeConnection->isChecked())
 	{
@@ -329,12 +343,12 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 			type = ConnectionLocal;
 		else
 			type = ConnectionRemote;
-		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, host, portTCP, delay, connectAtStartup, circles);
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles);
 	}
 	else if (ui->radioButtonTelescopeVirtual->isChecked())
 	{
 		type = ConnectionVirtual;
-		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, QString(), portTCP, delay, connectAtStartup, circles);
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, QString(), portTCP, delay, connectAtStartup, circles);
 	}
 	
 	emit changesSaved(name, type);

@@ -46,7 +46,7 @@ class TelescopeClientDirectNexStar : public TelescopeClient, public Server
 {
 	Q_OBJECT
 public:
-	TelescopeClientDirectNexStar(const QString &name, const QString &parameters);
+	TelescopeClientDirectNexStar(const QString &name, const QString &parameters, Equinox eq = EquinoxJ2000);
 	~TelescopeClientDirectNexStar(void)
 	{
 		//hangup();
@@ -87,6 +87,8 @@ private:
 	{
 		return interpolatedPosition.isKnown();
 	}
+
+	Equinox equinox;
 	
 	//======================================================================
 	// Members taken from ServerNexStar
