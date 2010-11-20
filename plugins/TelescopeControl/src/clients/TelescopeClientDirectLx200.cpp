@@ -33,12 +33,10 @@
 #include <QRegExp>
 #include <QStringList>
 
-TelescopeClientDirectLx200::TelescopeClientDirectLx200
-                            (const QString &name, const QString &parameters) : 
-                             TelescopeClient(name),
-                             end_position(positions + (sizeof(positions)/sizeof(positions[0])))
+TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, const QString &parameters) :
+		TelescopeClient(name)
 {
-	resetPositions();
+	interpolatedPosition.reset();
 	
 	//Extract parameters
 	//Format: "serial_port_name:time_delay"
@@ -92,21 +90,6 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200
 	answers_received = false;
 }
 
-//! resets/initializes the array of positions kept for position interpolation
-void TelescopeClientDirectLx200::resetPositions()
-{
-	for (position_pointer = positions; position_pointer < end_position; position_pointer++)
-	{
-		position_pointer->server_micros = 0x7FFFFFFFFFFFFFFFLL;
-		position_pointer->client_micros = 0x7FFFFFFFFFFFFFFFLL;
-		position_pointer->pos[0] = 0.0;
-		position_pointer->pos[1] = 0.0;
-		position_pointer->pos[2] = 0.0;
-		position_pointer->status = 0;
-	}
-	position_pointer = positions;
-}
-
 //! queues a GOTO command
 void TelescopeClientDirectLx200::telescopeGoto(const Vec3d &j2000Pos)
 {
@@ -141,35 +124,8 @@ void TelescopeClientDirectLx200::gotoReceived(unsigned int ra_int, int dec_int)
 //! telescope positions:
 Vec3d TelescopeClientDirectLx200::getJ2000EquatorialPos(const StelNavigator*) const
 {
-	if (position_pointer->client_micros == 0x7FFFFFFFFFFFFFFFLL)
-	{
-		return Vec3d(0,0,0);
-	}
 	const qint64 now = getNow() - time_delay;
-	const Position *p = position_pointer;
-	do
-	{
-		const Position *pp = p;
-		if (pp == positions) pp = end_position;
-		pp--;
-		if (pp->client_micros == 0x7FFFFFFFFFFFFFFFLL) break;
-		if (pp->client_micros <= now && now <= p->client_micros)
-		{
-			if (pp->client_micros != p->client_micros)
-			{
-				Vec3d rval = p->pos * (now - pp->client_micros) + pp->pos * (p->client_micros - now);
-				double f = rval.lengthSquared();
-				if (f > 0.0)
-				{
-					return (1.0/sqrt(f))*rval;
-				}
-			}
-			break;
-		}
-		p = pp;
-	}
-	while (p != position_pointer);
-	return p->pos;
+	return interpolatedPosition.get(now);
 }
 
 bool TelescopeClientDirectLx200::prepareCommunication()
@@ -262,19 +218,9 @@ void TelescopeClientDirectLx200::sendPosition(unsigned int ra_int, int dec_int, 
 {
 	//Server time is "now", because this class is the server
 	const qint64 server_micros = (qint64) getNow();
-	
-	// remember the time and received position so that later we
-	// will know where the telescope is pointing to:
-	position_pointer++;
-	if (position_pointer >= end_position)
-		position_pointer = positions;
-	position_pointer->server_micros = server_micros;
-	position_pointer->client_micros = getNow();
 	const double ra  =  ra_int * (M_PI/(unsigned int)0x80000000);
 	const double dec = dec_int * (M_PI/(unsigned int)0x80000000);
 	const double cdec = cos(dec);
-	position_pointer->pos[0] = cos(ra)*cdec;
-	position_pointer->pos[1] = sin(ra)*cdec;
-	position_pointer->pos[2] = sin(dec);
-	position_pointer->status = status;
+	Vec3d positionVector(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
+	interpolatedPosition.add(positionVector, getNow(), server_micros, status);
 }

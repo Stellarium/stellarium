@@ -36,6 +36,7 @@
 #include "StelApp.hpp"
 #include "StelObject.hpp"
 #include "StelNavigator.hpp"
+#include "InterpolatedPosition.hpp"
 
 qint64 getNow(void);
 
@@ -139,16 +140,6 @@ private:
 	Vec3d desired_pos;
 };
 
-//! A telescope's position at a given time.
-//! This structure used to be defined inline in TelescopeTCP.
-struct Position
-{
-	qint64 server_micros;
-	qint64 client_micros;
-	Vec3d pos;
-	int status;
-};
-
 //! This TelescopeClient class can controll a telescope by communicating
 //! to a server process ("telescope server") via 
 //! the "Stellarium telescope control protocol" over TCP/IP.
@@ -183,7 +174,6 @@ private:
 	
 private:
 	void hangup(void);
-	void resetPositions(void);
 	QHostAddress address;
 	unsigned int port;
 	QTcpSocket * tcpSocket;
@@ -195,12 +185,10 @@ private:
 	char *writeBufferEnd;
 	int time_delay;
 
-	Position positions[16];
-	Position *position_pointer;
-	Position *const end_position;
+	InterpolatedPosition interpolatedPosition;
 	virtual bool hasKnownPosition(void) const
 	{
-		return (position_pointer->client_micros != 0x7FFFFFFFFFFFFFFFLL);
+		return interpolatedPosition.isKnown();
 	}
 	
 private slots:
