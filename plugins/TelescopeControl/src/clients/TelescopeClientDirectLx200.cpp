@@ -33,8 +33,9 @@
 #include <QRegExp>
 #include <QStringList>
 
-TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, const QString &parameters) :
-		TelescopeClient(name)
+TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, const QString &parameters, Equinox eq) :
+		TelescopeClient(name),
+		equinox(eq)
 {
 	interpolatedPosition.reset();
 	
@@ -93,26 +94,34 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, con
 //! queues a GOTO command
 void TelescopeClientDirectLx200::telescopeGoto(const Vec3d &j2000Pos)
 {
-	if (isConnected())//TODO: See the else clause, think how to do the same thing
+	if (!isConnected())
+		return;
+
+	Vec3d position = j2000Pos;
+	if (equinox == EquinoxJNow)
 	{
-		//if (writeBufferEnd - writeBuffer + 20 < (int)sizeof(writeBuffer))
-		{
-			const double ra_signed = atan2(j2000Pos[1], j2000Pos[0]);
-			//Workaround for the discrepancy in precision between Windows/Linux/PPC Macs and Intel Macs:
-			const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2.0 * M_PI);
-			const double dec = atan2(j2000Pos[2], sqrt(j2000Pos[0]*j2000Pos[0]+j2000Pos[1]*j2000Pos[1]));
-			unsigned int ra_int = (unsigned int)floor(0.5 + ra*(((unsigned int)0x80000000)/M_PI));
-			int dec_int = (int)floor(0.5 + dec*(((unsigned int)0x80000000)/M_PI));
-			
-			gotoReceived(ra_int, dec_int);
-		}
-		/*
+		const StelNavigator* navigator = StelApp::getInstance().getCore()->getNavigator();
+		position = navigator->j2000ToEquinoxEqu(j2000Pos);
+	}
+
+	//if (writeBufferEnd - writeBuffer + 20 < (int)sizeof(writeBuffer))
+	//TODO: See the else clause, think how to do the same thing
+	{
+		const double ra_signed = atan2(position[1], position[0]);
+		//Workaround for the discrepancy in precision between Windows/Linux/PPC Macs and Intel Macs:
+		const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2.0 * M_PI);
+		const double dec = atan2(position[2], sqrt(position[0]*position[0]+position[1]*position[1]));
+		unsigned int ra_int = (unsigned int)floor(0.5 + ra*(((unsigned int)0x80000000)/M_PI));
+		int dec_int = (int)floor(0.5 + dec*(((unsigned int)0x80000000)/M_PI));
+
+		gotoReceived(ra_int, dec_int);
+	}
+	/*
 		else
 		{
 			qDebug() << "TelescopeTCP(" << name << ")::telescopeGoto: "<< "communication is too slow, I will ignore this command";
 		}
-		*/
-	}
+	*/
 }
 
 void TelescopeClientDirectLx200::gotoReceived(unsigned int ra_int, int dec_int)
@@ -221,6 +230,12 @@ void TelescopeClientDirectLx200::sendPosition(unsigned int ra_int, int dec_int, 
 	const double ra  =  ra_int * (M_PI/(unsigned int)0x80000000);
 	const double dec = dec_int * (M_PI/(unsigned int)0x80000000);
 	const double cdec = cos(dec);
-	Vec3d positionVector(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
-	interpolatedPosition.add(positionVector, getNow(), server_micros, status);
+	Vec3d position(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
+	Vec3d j2000Position = position;
+	if (equinox == EquinoxJNow)
+	{
+		const StelNavigator* navigator = StelApp::getInstance().getCore()->getNavigator();
+		j2000Position = navigator->equinoxEquToJ2000(position);
+	}
+	interpolatedPosition.add(j2000Position, getNow(), server_micros, status);
 }
