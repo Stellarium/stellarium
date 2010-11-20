@@ -45,7 +45,7 @@ class TelescopeClientDirectLx200 : public TelescopeClient, public Server
 {
 	Q_OBJECT
 public:
-	TelescopeClientDirectLx200(const QString &name, const QString &parameters);
+	TelescopeClientDirectLx200(const QString &name, const QString &parameters, Equinox eq = EquinoxJ2000);
 	~TelescopeClientDirectLx200(void)
 	{
 		//hangup();
@@ -87,6 +87,8 @@ private:
 	{
 		return interpolatedPosition.isKnown();
 	}
+
+	Equinox equinox;
 	
 	//======================================================================
 	// Members inherited from ServerLx200
