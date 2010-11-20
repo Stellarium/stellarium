@@ -17,6 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
@@ -26,6 +27,7 @@
 #include <QFileInfo>
 #include <QFile>
 #include <QDebug>
+#include <QNetworkRequest>
 #include <QThread>
 #include <QSettings>
 #include <QGLFormat>
@@ -34,6 +36,11 @@
 
 StelTextureMgr::StelTextureMgr()
 {
+	// We need to call this otherwise Qt refuse to pass QNetworkReply::NetworkError in the threaded signals.
+	qRegisterMetaType<QNetworkReply::NetworkError>("QNetworkReply::NetworkError");
+	// This thread is doing nothing but will contains all the loader objects.
+	loaderThread = new QThread(this);
+	loaderThread->start(QThread::LowestPriority);
 }
 
 StelTextureMgr::~StelTextureMgr()
@@ -137,15 +144,11 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 	else
 	{
 		tex->fullPath = url;
-		if (fileExtension.isEmpty())
-		{
-			const int idx = url.lastIndexOf('.');
-			if (idx!=-1)
-				tex->fileExtension = url.right(url.size()-idx-1);
-		}
 	}
-	if (!fileExtension.isEmpty())
-		tex->fileExtension = fileExtension;
+
+	TextureLoader* loader = new TextureLoader(tex, this);
+	tex->loader = loader;
+
 	if (!lazyLoading)
 	{
 		StelPainter::makeMainGLContextCurrent();
