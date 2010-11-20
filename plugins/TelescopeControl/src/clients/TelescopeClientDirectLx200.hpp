@@ -80,15 +80,12 @@ private:
 	
 private:
 	void hangup(void);
-	void resetPositions(void);
 	int time_delay;
 	
-	Position positions[16];
-	Position *position_pointer;
-	Position *const end_position;
+	InterpolatedPosition interpolatedPosition;
 	virtual bool hasKnownPosition(void) const
 	{
-		return (position_pointer->client_micros != 0x7FFFFFFFFFFFFFFFLL);
+		return interpolatedPosition.isKnown();
 	}
 	
 	//======================================================================
