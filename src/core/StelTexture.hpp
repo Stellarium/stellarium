@@ -35,7 +35,7 @@ class StelTextureMgr;
 #endif
 
 // This class is just used internally to load the texture data.
-class TextureLoader : QObject
+class ImageLoader : QObject
 {
 	Q_OBJECT
 
@@ -43,25 +43,24 @@ private:
 	friend class StelTextureMgr;
 	friend class StelTexture;
 
-	TextureLoader(StelTextureSP texture, StelTextureMgr* mgr);
-	virtual ~TextureLoader();
+	ImageLoader(const QString& path, int delay);
+	virtual ~ImageLoader();
 
 signals:
-	void dataLoaded(QImage);
+	void finished(QImage);
+	void error(const QString& errorMsg);
 
 public slots:
-    void start();
-    void start(int timer);
+	void start();
 
 private slots:
     void onNetworkReply();
     void onNetworkError(QNetworkReply::NetworkError code);
+    void onDownloadProgress();
     void directLoad();
-    void onTextureDestroyed();
 
 private:
-	QWeakPointer<StelTexture> texturePtr;
-	StelTextureMgr* textureMgr;
+	QString path;
 	QNetworkReply* networkReply;
 };
 
@@ -127,7 +126,7 @@ signals:
 
 private slots:
 	//! Called by the loader when the data has finished loading
-	void onDataLoaded(QImage image);
+	void onImageLoaded(const QImage& image);
 
 private:
 	friend class StelTextureMgr;
@@ -143,7 +142,7 @@ private:
 	StelTextureParams loadParams;
 
 	//! The loader object
-	TextureLoader* loader;
+	ImageLoader* loader;
 
 	//! Define if the texture was already downloaded if it was a remote one
 	bool downloaded;
