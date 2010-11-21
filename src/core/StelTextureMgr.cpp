@@ -146,9 +146,6 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 		tex->fullPath = url;
 	}
 
-	TextureLoader* loader = new TextureLoader(tex, this);
-	tex->loader = loader;
-
 	if (!lazyLoading)
 	{
 		StelPainter::makeMainGLContextCurrent();
