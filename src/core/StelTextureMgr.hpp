@@ -57,7 +57,7 @@ public:
 
 private:
 	friend class StelTexture;
-	friend class TextureLoader;
+	friend class ImageLoader;
 
 	//! Whether ARB_texture_non_power_of_two is supported on this card
 	bool isNoPowerOfTwoAllowed;
