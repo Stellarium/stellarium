@@ -938,7 +938,7 @@ void Planet::drawOrbit(const StelCore* core)
 	sPainter.enableClientStates(true, false, false);
 	for (int n=0; n<=nbIter; ++n)
 	{
-		if (prj->project(orbit[n],onscreen))
+		if (prj->project(orbit[n],onscreen) && (vertexArray.size()==0 || !prj->intersectViewportDiscontinuity(orbit[n-1], orbit[n])))
 		{
 			vertexArray.append(onscreen[0]);
 			vertexArray.append(onscreen[1]);
