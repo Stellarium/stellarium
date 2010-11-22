@@ -45,7 +45,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 {
 	name = landscapeIni.value("landscape/name").toString();
 	author = landscapeIni.value("landscape/author").toString();
-	description = landscapeIni.value("landscape/description").toString();
+	description = landscapeIni.value("landscape/description").toString().replace("\n", "");
 	if (name.isEmpty())
 	{
 		qWarning() << "No valid landscape definition found for landscape ID "
