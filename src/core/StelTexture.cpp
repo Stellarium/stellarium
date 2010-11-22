@@ -72,10 +72,6 @@ void ImageLoader::start()
 //        return;
 //    }
 
-    // Move this object outside of the main thread.
-    StelTextureMgr* textureMgr = &StelApp::getInstance().getTextureManager();
-    moveToThread(textureMgr->loaderThread);
-
     if (path.startsWith("http://")) {
         QNetworkRequest req = QNetworkRequest(QUrl(path));
         // Define that preference should be given to cached files (no etag checks)
@@ -91,6 +87,10 @@ void ImageLoader::start()
     }
     test.insert(this);
     qDebug() << "TEST nb Loaders =" << test.size();
+
+    // Move this object outside of the main thread.
+    StelTextureMgr* textureMgr = &StelApp::getInstance().getTextureManager();
+    moveToThread(textureMgr->loaderThread);
 }
 
 
@@ -197,7 +197,7 @@ bool StelTexture::bind()
 	return false;
 }
 
-void StelTexture::onImageLoaded(const QImage& image)
+void StelTexture::onImageLoaded(QImage image)
 {
 	qImage = image;
 	Q_ASSERT(!qImage.isNull());
