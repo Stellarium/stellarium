@@ -126,7 +126,7 @@ signals:
 
 private slots:
 	//! Called by the loader when the data has finished loading
-	void onImageLoaded(const QImage& image);
+	void onImageLoaded(QImage image);
 
 private:
 	friend class StelTextureMgr;
