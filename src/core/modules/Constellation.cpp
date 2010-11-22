@@ -133,8 +133,7 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 		if (artTexture->bind()==false)
 			return;
 
-		SphericalCap bc(region.getBoundingCap());
-		sPainter.drawSphericalTriangles(artPolygon, true, &bc);
+		sPainter.drawStelVertexArray(artPolygon);
 	}
 }
 
