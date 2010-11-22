@@ -1310,6 +1310,7 @@ void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDisc
 	{
 		// The projection has discontinuities, so we need to make sure that no triangle is crossing them.
 		drawStelVertexArray(arr.removeDiscontinuousTriangles(this->getProjector().data()), false);
+		return;
 	}
 
 	setVertexPointer(3, GL_DOUBLE, arr.vertex.constData());
