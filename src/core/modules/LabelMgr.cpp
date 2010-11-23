@@ -32,13 +32,11 @@
 #include "StelUtils.hpp"
 #include "VecMath.hpp"
 #include "StelPainter.hpp"
-#include "StelMainGraphicsView.hpp"
 
 #include <vector>
 #include <QString>
 #include <QDebug>
 #include <QtOpenGL>
-#include <QFontMetrics>
 
 // Base class from which other label types inherit
 class StelLabel
@@ -391,12 +389,6 @@ int LabelMgr::labelScreen(const QString& text,
 {
 	QFont font;
 	font.setPixelSize(fontSize);
-	if (y<0)
-		y = StelMainGraphicsView::getInstance().size().height() + y - font.pixelSize();
-
-	if (x<0)
-		x = StelMainGraphicsView::getInstance().size().width() + x - QFontMetrics(font).width(text);
-
 	ScreenLabel* l = new ScreenLabel(text, x, y, font, StelUtils::htmlColorToVec3f(fontColor));
 	if (l==NULL)
 		return -1;
