@@ -471,7 +471,7 @@ void Satellite::computeOrbitPoints()
 	{
 		epochTm  = epochTime - orbitSpan;
 
-		for(int i=0; i<=orbitLineSegments; i++)
+		for(int i=0; i<orbitLineSegments; i++)
 		{
 			pSatellite->setEpoch( epochTm);
 			azElVector  = observer.calculateLook( *pSatellite, epochTm);
