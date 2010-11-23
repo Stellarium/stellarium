@@ -8,6 +8,8 @@ LINK_DIRECTORIES(/src)
 
 SET(TelescopeControl_SRCS
   TelescopeControlGlobals.hpp
+  clients/InterpolatedPosition.hpp
+  clients/InterpolatedPosition.cpp
   clients/TelescopeClient.hpp
   clients/TelescopeClient.cpp
   clients/TelescopeClientDirectLx200.hpp
