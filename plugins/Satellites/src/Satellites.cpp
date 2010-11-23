@@ -120,11 +120,13 @@ void Satellites::init()
 		Satellite::hintTexture = StelApp::getInstance().getTextureManager().createTexture(":/satellites/hint.png");
 
 		// key bindings and other actions
+		// TRANSLATORS: Title of a group of key bindings in the Help window
+		QString groupName = N_("Plugin Key Bindings");
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->addGuiActions("actionShow_Satellite_ConfigDialog", "Satellite Config Dialog", "Alt+Z", "Plugin Key Bindings", true);
-		gui->addGuiActions("actionShow_Satellite_Hints", "Satellite Hints", "Ctrl+Z", "Plugin Key Bindings", true, false);
+		gui->addGuiActions("actionShow_Satellite_ConfigDialog", N_("Satellites configuration window"), "Alt+Z", groupName, true);
+		gui->addGuiActions("actionShow_Satellite_Hints", N_("Satellite hints"), "Ctrl+Z", groupName, true, false);
 		gui->getGuiActions("actionShow_Satellite_Hints")->setChecked(hintFader);
-		gui->addGuiActions("actionShow_Satellite_Labels", "Satellite Labels", "Shift+Z", "Plugin Key Bindings", true, false);
+		gui->addGuiActions("actionShow_Satellite_Labels", N_("Satellite labels"), "Shift+Z", groupName, true, false);
 		gui->getGuiActions("actionShow_Satellite_Labels")->setChecked(Satellite::showLabels);
 
 		// Gui toolbar button
