@@ -39,7 +39,6 @@ public:
 	SlewDialog();
 	virtual ~SlewDialog();
 	void languageChanged();
-	void updateStyle();
 	
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots

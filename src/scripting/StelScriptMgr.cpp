@@ -334,7 +334,6 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 	// Make sure that the gui object have been completely initialized (there used to be problems with startup scripts).
 	Q_ASSERT(StelApp::getInstance().getGui());
 
-	savedTimeRate = StelApp::getInstance().getCore()->getNavigator()->getTimeRate();
 	engine.globalObject().setProperty("scriptRateReadOnly", 1.0);
 	
 	// Notify that the script starts here although we still have to preprocess it.
@@ -412,9 +411,6 @@ void StelScriptMgr::scriptEnded()
 		qWarning() << msg;
 	}
 
-	// reset time rate to non-scaped script rates... TODO
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	nav->setTimeRate(savedTimeRate);
 	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(1.0);
 	emit(scriptStopped());
 }

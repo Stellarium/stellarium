@@ -1304,8 +1304,15 @@ private:
 	double maxSqDistortion;
 };
 
-void StelPainter::drawStelVertexArray(const StelVertexArray& arr)
+void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity)
 {
+	if (checkDiscontinuity && prj->hasDiscontinuity())
+	{
+		// The projection has discontinuities, so we need to make sure that no triangle is crossing them.
+		drawStelVertexArray(arr.removeDiscontinuousTriangles(this->getProjector().data()), false);
+		return;
+	}
+
 	setVertexPointer(3, GL_DOUBLE, arr.vertex.constData());
 	if (arr.isTextured())
 	{
@@ -1339,18 +1346,8 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 
 	if (!doSubDivide)
 	{
-		if (prj->hasDiscontinuity())
-		{
-			// We don't want to subdivise the triangles, but the projection has discontinuities,
-			// so we need to make sure that no triangle is crossing them.
-			const StelVertexArray& cleanVa = va.removeDiscontinuousTriangles(this->getProjector().data());
-			drawStelVertexArray(cleanVa);
-		}
-		else
-		{
-			// The simplest case, we don't need to iterate through the triangles at all.
-			drawStelVertexArray(va);
-		}
+		// The simplest case, we don't need to iterate through the triangles at all.
+		drawStelVertexArray(va);
 		return;
 	}
 
@@ -1375,7 +1372,7 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 			if (doSubDivise || prj->intersectViewportDiscontinuity(poly->getBoundingCap()))
 				drawGreatCircleArcs(poly->getOutlineVertexArray(), clippingCap);
 			else
-				drawStelVertexArray(poly->getOutlineVertexArray());
+				drawStelVertexArray(poly->getOutlineVertexArray(), false);
 			break;
 		case SphericalPolygonDrawModeFill:
 		case SphericalPolygonDrawModeTextureFill:
@@ -1384,7 +1381,7 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 			if (doSubDivise || prj->intersectViewportDiscontinuity(poly->getBoundingCap()))
 				drawSphericalTriangles(poly->getFillVertexArray(), drawMode==SphericalPolygonDrawModeTextureFill, clippingCap, doSubDivise, maxSqDistortion);
 			else
-				drawStelVertexArray(poly->getFillVertexArray());
+				drawStelVertexArray(poly->getFillVertexArray(), false);
 
 			glDisable(GL_CULL_FACE);
 			break;
