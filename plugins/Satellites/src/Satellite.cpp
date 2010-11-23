@@ -471,7 +471,7 @@ void Satellite::computeOrbitPoints()
 	{
 		epochTm  = epochTime - orbitSpan;
 
-		for(int i=0; i<orbitLineSegments; i++)
+		for(int i=0; i<=orbitLineSegments; i++)
 		{
 			pSatellite->setEpoch( epochTm);
 			azElVector  = observer.calculateLook( *pSatellite, epochTm);
@@ -484,7 +484,7 @@ void Satellite::computeOrbitPoints()
 	{ // compute next orbit point when clock runs forward
 
 		gTimeSpan diffTime = epochTime - lastEpochCompForOrbit;
-		diffSlots          = (int)(diffTime.getDblSeconds()/orbitLineSegmentDuration);
+		diffSlots          = (int)(diffTime.getDblSeconds()/orbitLineSegmentDuration)-1;
 
 		if(diffSlots > 0)
 		{
@@ -498,7 +498,7 @@ void Satellite::computeOrbitPoints()
 				epochTm   = lastEpochCompForOrbit + orbitSpan + computeInterval;
 			}
 
-			for( int i=0; i<diffSlots;i++)
+			for( int i=0; i<=diffSlots;i++)
 			{  //remove points at beginning of list and add points at end.
 				orbitPoints.removeFirst();
 				pSatellite->setEpoch( epochTm);
@@ -513,7 +513,7 @@ void Satellite::computeOrbitPoints()
 	else if(epochTime < lastEpochCompForOrbit)
 	{ // compute next orbit point when clock runs backward
 		gTimeSpan diffTime =  lastEpochCompForOrbit - epochTime;
-		diffSlots          = (int)(diffTime.getDblSeconds()/orbitLineSegmentDuration);
+		diffSlots          = (int)(diffTime.getDblSeconds()/orbitLineSegmentDuration)-1;
 
 		if(diffSlots > 0)
 		{
@@ -526,7 +526,7 @@ void Satellite::computeOrbitPoints()
 			{
 				epochTm   = epochTime - orbitSpan - computeInterval;
 			}
-			for( int i=0; i<diffSlots;i++)
+			for( int i=0; i<=diffSlots;i++)
 			{ //remove points at end of list and add points at beginning.
 				orbitPoints.removeLast();
 				pSatellite->setEpoch( epochTm);
