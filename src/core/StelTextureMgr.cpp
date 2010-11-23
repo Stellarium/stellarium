@@ -144,7 +144,15 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 	else
 	{
 		tex->fullPath = url;
+		if (fileExtension.isEmpty())
+		{
+			const int idx = url.lastIndexOf('.');
+			if (idx!=-1)
+				tex->fileExtension = url.right(url.size()-idx-1);
+		}
 	}
+	if (!fileExtension.isEmpty())
+		tex->fileExtension = fileExtension;
 
 	if (!lazyLoading)
 	{
