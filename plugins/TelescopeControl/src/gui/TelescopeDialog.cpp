@@ -145,6 +145,7 @@ void TelescopeDialog::createDialogContent()
 		//Read the telescope properties
 		QString name;
 		ConnectionType connectionType;
+		QString equinox;
 		QString host;
 		int portTCP;
 		int delay;
@@ -152,7 +153,7 @@ void TelescopeDialog::createDialogContent()
 		QList<double> circles;
 		QString serverName;
 		QString portSerial;
-		if(!telescopeManager->getTelescopeAtSlot(slotNumber, connectionType, name, host, portTCP, delay, connectAtStartup, circles, serverName, portSerial))
+		if(!telescopeManager->getTelescopeAtSlot(slotNumber, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, serverName, portSerial))
 			continue;
 		
 		//Determine the server type
