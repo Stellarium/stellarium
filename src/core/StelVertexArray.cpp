@@ -54,6 +54,7 @@ StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjecto
 	}
 	else
 	{
+		ret.indices.clear();
 		// Create a 'Triangles' vertex array from this array.
 		// We have different algorithms for different original mode
 		switch (primitiveType)

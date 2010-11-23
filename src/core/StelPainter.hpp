@@ -332,7 +332,8 @@ public:
 	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned int* indices=NULL);
 
 	//! Draws the primitives defined in the StelVertexArray.
-	void drawStelVertexArray(const StelVertexArray& arr);
+	//! @param checkDiscontinuity will check and suppress discontinuities if necessary.
+	void drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity=true);
 
 private:
 
