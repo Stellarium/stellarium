@@ -155,6 +155,9 @@ private:
 	//! The data that was loaded from http
 	QImage qImage;
 
+	//! Used ony when creating temporary file
+	QString fileExtension;
+
 	//! True when something when wrong in the loading process
 	bool errorOccured;
 
