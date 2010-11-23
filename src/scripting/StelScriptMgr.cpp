@@ -411,8 +411,6 @@ void StelScriptMgr::scriptEnded()
 		qWarning() << msg;
 	}
 
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-
 	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(1.0);
 	emit(scriptStopped());
 }
