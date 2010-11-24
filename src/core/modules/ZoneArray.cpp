@@ -30,6 +30,7 @@
 #include "StelGeodesicGrid.hpp"
 #include "StelObject.hpp"
 #include "StelNavigator.hpp"
+#include "RefractionExtinction.hpp"
 
 static unsigned int stel_bswap_32(unsigned int val) {
   return (((val) & 0xff000000) >> 24) | (((val) & 0x00ff0000) >>  8) |
@@ -480,16 +481,52 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_insi
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 	SpecialZoneData<Star> *const z = getZones() + index;
 	Vec3f vf;
+	// GZ: retrieve a StelNavigator for later use
+	StelNavigator *nav=core->getNavigator();
 	const Star *const end = z->getStars() + z->size;
 	static const double d2000 = 2451545.0;
 	const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getNavigator()->getJDay()-d2000)/365.25) / star_position_scale;
 	const float* tmpRcmag;
+	RefractionExtinction refExt;
+	refExt.setPressure(drawer->getAtmospherePressure());
+	refExt.setTemperature(drawer->getAtmosphereTemperature());
+	refExt.setExtinctionCoefficient(drawer->getExtinctionCoefficient());
+	bool withAtmosphericEffects=drawer->getFlagHasAtmosphere();
+	// GZ: TODO: exclude effects for no-atmosphere conditions.
 	for (const Star *s=z->getStars();s<end;++s)
 	{
+	        // preselect and skip dim stars.
 		tmpRcmag = rcmag_table+2*s->mag;
 		if (*tmpRcmag<=0.f)
 			break;
+		// vf<-star positions in J2000 coordinate frame.
 		s->getJ2000Pos(z,movementFactor, vf);
+
+		// GZ: Refraction&Extinction
+		if (withAtmosphericEffects){
+		  // (1) get stellar magnitude from packed format.
+		  float mag= 0.001f*mag_min + s->mag*(0.001f*mag_range)/mag_steps;
+		  // (2) compute alt-az coordinates from vf
+		  Vec3d altaz=nav->j2000ToAltAz(Vec3d(vf[0], vf[1], vf[2]));
+		  // (2a) Option: immediately skip stars below -2 under horizon.
+		  if (altaz[2]<-0.035f) break;
+		  // (3) compute refraction and extinction effects:
+		  refExt.forward(&altaz, &mag, 1);
+
+		  //if (mag<mag_min) mag=mag_min;
+		  // repack mag to get a correct lookup for tmpRcmag. DOES NOT WORK CORRECTLY!
+		  unsigned int packedMagRed=(unsigned int) ((mag-0.001f*mag_min)*mag_steps/(0.001f*mag_range));
+		  // Now reevaluate tmpRcmag, skip again stars now too dim to paint.
+		  tmpRcmag = rcmag_table+2*packedMagRed;
+		  if (*tmpRcmag<=0.f)
+		    break;
+		  // (4) return to equatorial system, but refracted.
+		  Vec3d vf_refracted=nav->altAzToJ2000(altaz); 
+		  vf[0]=vf_refracted[0];
+		  vf[1]=vf_refracted[1];
+		  vf[2]=vf_refracted[2];
+		}
+
 		if (drawer->drawPointSource(sPainter, vf, tmpRcmag, s->bV, !is_inside) && s->hasName() && s->mag < maxMagStarName)
 		{
 			const float offset = *tmpRcmag*0.7f;

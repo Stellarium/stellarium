@@ -69,7 +69,7 @@ public:
 	//! following Young: Air mass and refraction. Applied Optics 33(6), pp.1108-1110, 1994. [X(90)~32].
 	//! A problem ist that refraction depends on air pressure and temperature, but Young's formula assumes T=15C, p=1013.25mbar.
 	//! So, it seems better to compute refraction first, and then use the Rozenberg formula here.
-	//! Rozenberg is infinite at Z=92.17 deg, Young at Z=93.6 deg, so this function has NO EFFECT BELOW -2 DEGREES!
+	//! Rozenberg is infinite at Z=92.17 deg, Young at Z=93.6 deg, so this function RETURNS 0 BELOW -2 DEGREES!
 	float airmass(float cosZ, bool apparent_z=true);
 
 private:
