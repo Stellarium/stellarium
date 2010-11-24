@@ -164,6 +164,22 @@ public slots:
 	//! Informing the drawer whether atmosphere is displayed.
 	//! This is used to avoid twinkling/simulate extinction/refraction.
 	void setFlagHasAtmosphere(bool b) {flagHasAtmosphere=b;}
+  // 7 NEW BY GZ:
+	//! This is used to decide whether to apply refraction/extinction before rendering point sources et al.
+	bool getFlagHasAtmosphere(void) const {return flagHasAtmosphere;}
+        //! Set extinction coefficient, mag/airmass (for extinction).
+        void setExtinctionCoefficient(float extCoeff) {atmosphericExtinctionCoefficient=extCoeff;}
+        //! Get extinction coefficient, mag/airmass (for extinction).
+        float getExtinctionCoefficient(void) const {return atmosphericExtinctionCoefficient;}
+        //! Set atmospheric (ground) temperature (for refraction).
+        void setAtmosphereTemperature(float celsius) {atmosphericTemperature=celsius;}
+        //! Get atmospheric (ground) temperature (for refraction).
+        float getAtmosphereTemperature(void) const {return atmosphericTemperature;}
+        //! Set atmospheric (ground) pressure (for refraction).
+        void setAtmospherePressure(float mbar) {atmosphericPressure=mbar;}
+        //! Get atmospheric (ground) pressure (for refraction).
+        float getAtmospherePressure(void) const {return atmosphericPressure;}
+
 
 	//! Get the radius of the big halo texture used when a 3d model is very bright.
 	float getBig3dModelHaloRadius() const {return big3dModelHaloRadius;}
@@ -231,6 +247,13 @@ private:
 	//! Informing the drawer whether atmosphere is displayed.
 	//! This is used to avoid twinkling/simulate extinction/refraction.
 	bool flagHasAtmosphere;
+
+  // 3 NEW BY GZ:
+        //! atmosphericExtinctionCoefficient: mag/airmass
+        float atmosphericExtinctionCoefficient;  
+        float atmosphericTemperature;  
+        float atmosphericPressure;  
+       
 
 	float starRelativeScale;
 	float starAbsoluteScaleF;
