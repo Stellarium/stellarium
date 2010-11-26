@@ -86,6 +86,10 @@ public:
 	virtual QString getNameI18n(void) const {return designation;}
 	virtual QString getEnglishName(void) const {return designation;}
 	
+	//! Set new tleElements.  This assumes the designation is already set, populates
+	//! the tleElements values and configures internal orbit parameters.
+	void setNewTleElements(const QString& tle1, const QString& tle2);
+
 	// calculate faders, new position
 	void update(double deltaTime);
 
@@ -116,8 +120,7 @@ private:
 	QString designation;               // The ID of the satllite
 	QString description;               // longer description of spacecraft
 	Vec3d XYZ;                         // holds J2000 position
-	char elements[3][80];              // TLE elements as char* for passing to sgp lib
-	char e2[3][80];                    // backup - elements get munged by routines
+	QPair< QByteArray, QByteArray > tleElements;
 	double height, velocity, azimuth, elevation, range, rangeRate;
 	QList<commLink> comms;
 	Vec3f hintColor;

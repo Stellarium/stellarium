@@ -90,9 +90,6 @@ void TelescopeConfigurationDialog::createDialogContent()
 	ui->lineEditHostName->setValidator(hostNameValidator);
 	ui->lineEditCircleList->setValidator(circleListValidator);
 	ui->lineEditSerialPort->setValidator(serialPortValidator);
-	
-	//Initialize the style
-	updateStyle();
 }
 
 //Set the configuration panel in a predictable state
@@ -106,6 +103,9 @@ void TelescopeConfigurationDialog::initConfigurationDialog()
 	
 	//Name
 	ui->lineEditTelescopeName->clear();
+
+	//Equinox
+	ui->radioButtonJ2000->setChecked(true);
 
 	//Connect at startup
 	ui->checkBoxConnectAtStartup->setChecked(false);
@@ -161,6 +161,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	//Read the telescope properties
 	QString name;
 	ConnectionType connectionType;
+	QString equinox;
 	QString host;
 	int portTCP;
 	int delay;
@@ -168,7 +169,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	QList<double> circles;
 	QString deviceModelName;
 	QString serialPortName;
-	if(!telescopeManager->getTelescopeAtSlot(slot, connectionType, name, host, portTCP, delay, connectAtStartup, circles, deviceModelName, serialPortName))
+	if(!telescopeManager->getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, serialPortName))
 	{
 		//TODO: Add debug
 		return;
@@ -197,12 +198,21 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		//Initialize the serial port value
 		ui->lineEditSerialPort->setText(serialPortName);
 	}
-	else //Local or remote connection
+	else if (connectionType == ConnectionRemote)
 	{
 		ui->radioButtonTelescopeConnection->setChecked(true);//Calls toggleTypeConnection(true)
-		if (connectionType == ConnectionRemote)
-			ui->lineEditHostName->setText(host);
+		ui->lineEditHostName->setText(host);
 	}
+	else
+	{
+		ui->radioButtonTelescopeVirtual->setChecked(true);
+	}
+
+	//Equinox
+	if (equinox == "JNow")
+		ui->radioButtonJNow->setChecked(true);
+	else
+		ui->radioButtonJ2000->setChecked(true);
 	
 	//Circles
 	if(!circles.isEmpty())
@@ -239,7 +249,7 @@ void TelescopeConfigurationDialog::toggleTypeLocal(bool isChecked)
 		ui->labelHost->setEnabled(false);
 		ui->lineEditHostName->setEnabled(false);
 
-		ui->toolBoxSettings->setCurrentIndex(ui->toolBoxSettings->indexOf(ui->pageTelescopeProperties));
+		ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
 	}
 	else
 	{
@@ -256,30 +266,23 @@ void TelescopeConfigurationDialog::toggleTypeConnection(bool isChecked)
 		ui->lineEditHostName->setText("localhost");
 		ui->spinBoxTCPPort->setValue(DEFAULT_TCP_PORT_FOR_SLOT(configuredSlot));
 
-		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageDeviceSettings), false);
+		ui->groupBoxDeviceSettings->setEnabled(false);
 
-		ui->toolBoxSettings->setCurrentIndex(ui->toolBoxSettings->indexOf(ui->pageTelescopeProperties));
+		ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
 	}
 	else
 	{
-		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageDeviceSettings), true);
+		ui->groupBoxDeviceSettings->setEnabled(true);
 	}
 }
 
 void TelescopeConfigurationDialog::toggleTypeVirtual(bool isChecked)
 {
-	if(isChecked)
-	{
-		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageDeviceSettings), false);
-		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageConnectionSettings), false);
+	//TODO: This really should be done in the GUI
+	ui->groupBoxDeviceSettings->setEnabled(!isChecked);
+	ui->groupBoxConnectionSettings->setEnabled(!isChecked);
 
-		ui->toolBoxSettings->setCurrentIndex(ui->toolBoxSettings->indexOf(ui->pageTelescopeProperties));
-	}
-	else
-	{
-		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageDeviceSettings), true);
-		ui->toolBoxSettings->setItemEnabled(ui->toolBoxSettings->indexOf(ui->pageConnectionSettings), true);
-	}
+	ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
 }
 
 void TelescopeConfigurationDialog::buttonSavePressed()
@@ -316,6 +319,10 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 				circles.append(circle);
 		}
 	}
+
+	QString equinox("J2000");
+	if (ui->radioButtonJNow->isChecked())
+		equinox = "JNow";
 	
 	//Type and server properties
 	//TODO: When adding, check for success!
@@ -328,7 +335,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 			return;//TODO: Add more validation!
 		
 		type = ConnectionInternal;
-		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, host, portTCP, delay, connectAtStartup, circles, ui->comboBoxDeviceModel->currentText(), serialPortName);
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles, ui->comboBoxDeviceModel->currentText(), serialPortName);
 	}
 	else if (ui->radioButtonTelescopeConnection->isChecked())
 	{
@@ -336,12 +343,12 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 			type = ConnectionLocal;
 		else
 			type = ConnectionRemote;
-		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, host, portTCP, delay, connectAtStartup, circles);
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles);
 	}
 	else if (ui->radioButtonTelescopeVirtual->isChecked())
 	{
 		type = ConnectionVirtual;
-		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, QString(), portTCP, delay, connectAtStartup, circles);
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, QString(), portTCP, delay, connectAtStartup, circles);
 	}
 	
 	emit changesSaved(name, type);
@@ -356,14 +363,4 @@ void TelescopeConfigurationDialog::deviceModelSelected(const QString& deviceMode
 {
 	ui->labelDeviceModelDescription->setText(telescopeManager->getDeviceModels().value(deviceModelName).description);
 	ui->doubleSpinBoxTelescopeDelay->setValue(SECONDS_FROM_MICROSECONDS(telescopeManager->getDeviceModels().value(deviceModelName).defaultDelay));
-}
-
-void TelescopeConfigurationDialog::updateStyle()
-{
-	if (dialog)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		Q_ASSERT(gui);
-		dialog->setStyleSheet(telescopeManager->getModuleStyleSheet(gui->getStelStyle()).qtStyleSheet);
-	}
 }

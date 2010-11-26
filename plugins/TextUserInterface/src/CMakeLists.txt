@@ -72,11 +72,7 @@ IF(BUILD_STATIC_PLUGINS)
 	# The library target "TextUserInterface-static" has a default OUTPUT_NAME of "TextUserInterface-static", so change it.
 	SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES OUTPUT_NAME "TextUserInterface")
 	TARGET_LINK_LIBRARIES(TextUserInterface-static ${extLinkerOption})
-	IF(WIN32)
-		SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-	ELSE()
-		SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
-	ENDIF()
+	SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 	ADD_DEPENDENCIES(AllStaticPlugins TextUserInterface-static)
 ENDIF()
 

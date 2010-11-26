@@ -117,14 +117,16 @@ void Satellites::init()
 
 		// Load and find resources used in the plugin
 		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur5.png");
-		Satellite::hintTexture = StelApp::getInstance().getTextureManager().createTexture(":/satellites/satellite_hint.png");
+		Satellite::hintTexture = StelApp::getInstance().getTextureManager().createTexture(":/satellites/hint.png");
 
 		// key bindings and other actions
+		// TRANSLATORS: Title of a group of key bindings in the Help window
+		QString groupName = N_("Plugin Key Bindings");
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->addGuiActions("actionShow_Satellite_ConfigDialog", "Satellite Config Dialog", "Alt+Z", "Plugin Key Bindings", true);
-		gui->addGuiActions("actionShow_Satellite_Hints", "Satellite Hints", "Ctrl+Z", "Plugin Key Bindings", true, false);
+		gui->addGuiActions("actionShow_Satellite_ConfigDialog", N_("Satellites configuration window"), "Alt+Z", groupName, true);
+		gui->addGuiActions("actionShow_Satellite_Hints", N_("Satellite hints"), "Ctrl+Z", groupName, true, false);
 		gui->getGuiActions("actionShow_Satellite_Hints")->setChecked(hintFader);
-		gui->addGuiActions("actionShow_Satellite_Labels", "Satellite Labels", "Shift+Z", "Plugin Key Bindings", true, false);
+		gui->addGuiActions("actionShow_Satellite_Labels", N_("Satellite labels"), "Shift+Z", groupName, true, false);
 		gui->getGuiActions("actionShow_Satellite_Labels")->setChecked(Satellite::showLabels);
 
 		// Gui toolbar button
@@ -820,7 +822,7 @@ void Satellites::updateDownloadComplete(QNetworkReply* reply)
 	// all downloads are complete...  do the update.
 	if (numberDownloadsComplete >= updateUrls.size())
 	{
-		updateFromFiles();
+		updateFromFiles(updateFiles, true);
 	}
 }
 
@@ -872,7 +874,7 @@ void Satellites::saveTleData(QString path)
 	saveTleMap(getTleMap(), path);
 }
 
-void Satellites::updateFromFiles(void)
+void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 {
 	// define a map of new TLE data - the key is the satellite designation
 	QMap< QString, QPair<QString, QString> > newTLE;
@@ -880,11 +882,11 @@ void Satellites::updateFromFiles(void)
 	if (progressBar)
 	{
 		progressBar->setValue(0);
-		progressBar->setMaximum(updateFiles.size() + 1);
+		progressBar->setMaximum(paths.size() + 1);
 		progressBar->setFormat("TLE updating %v/%m");
 	}
 
-	foreach(QString tleFilePath, updateFiles)
+	foreach(QString tleFilePath, paths)
 	{
 		QFile tleFile(tleFilePath);
 		if (tleFile.open(QIODevice::ReadOnly|QIODevice::Text))
@@ -920,6 +922,10 @@ void Satellites::updateFromFiles(void)
 				newTLE[thisSatId] = tleLines;
 			}
 			tleFile.close();
+
+			if (deleteFiles)
+				tleFile.remove();
+
 			if (progressBar)
 				progressBar->setValue(progressBar->value() + 1);
 		}
@@ -935,20 +941,15 @@ void Satellites::updateFromFiles(void)
 		totalSats++;
 		if (newTLE.contains(sat->designation))
 		{
-			if (sat->e2[1] != newTLE[sat->designation].first || sat->e2[2] != newTLE[sat->designation].second)
+			if (   sat->tleElements.first  != newTLE[sat->designation].first
+			    || sat->tleElements.second != newTLE[sat->designation].second)
 			{
 				// We have updated TLE elements for this satellite
-				strncpy(sat->elements[1], qPrintable(newTLE[sat->designation].first), 80);
-				strncpy(sat->elements[2], qPrintable(newTLE[sat->designation].second), 80);
-
-				// Oh Bob, this e2 thing is truly horrible!  TODO - make it cleaner
-				strncpy(sat->e2[1], qPrintable(newTLE[sat->designation].first), 80);
-				strncpy(sat->e2[2], qPrintable(newTLE[sat->designation].second), 80);
+				sat->setNewTleElements(newTLE[sat->designation].first, newTLE[sat->designation].second);
 
 				// we reset this to "now" when we started the update.
 				sat->lastUpdated = lastUpdate;
 				numUpdated++;
-				qDebug() << "Satellites: updated orbital elements for" << sat->designation;
 			}
 		}
 		else

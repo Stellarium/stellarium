@@ -142,21 +142,6 @@ void TelescopeControl::init()
 		reticleTexture = StelApp::getInstance().getTextureManager().createTexture(":/telescopeControl/telescope_reticle.png");
 		selectionTexture = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
 		
-		//Load the module's custom style sheets
-		QFile styleSheetFile;
-		styleSheetFile.setFileName(":/telescopeControl/normalStyle.css");
-		if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
-		{
-			normalStyleSheet = new QByteArray(styleSheetFile.readAll());
-		}
-		styleSheetFile.close();
-		styleSheetFile.setFileName(":/telescopeControl/nightStyle.css");
-		if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
-		{
-			nightStyleSheet = new QByteArray(styleSheetFile.readAll());
-		}
-		styleSheetFile.close();
-		
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		
 		//Create telescope key bindings
@@ -311,7 +296,6 @@ void TelescopeControl::setStelStyle(const QString& section)
 	}
 
 	telescopeDialog->updateStyle();
-	slewDialog->updateStyle();
 }
 
 double TelescopeControl::getCallOrder(StelModuleActionName actionName) const
@@ -755,7 +739,7 @@ void TelescopeControl::loadTelescopes()
 
 			QVariantMap telescope = node.value().toMap();
 
-			//Essential parameters: Name and connection type
+			//Essential parameters: Name, connection type, equinox
 			//Validation: Name
 			QString name = telescope.value("name").toString();
 			if(name.isEmpty())
@@ -774,6 +758,14 @@ void TelescopeControl::loadTelescopes()
 				continue;
 			}
 			ConnectionType connectionType = connectionTypeNames.key(connection);
+
+			QString equinox = telescope.value("equinox", "J2000").toString();
+			if (equinox != "J2000" && equinox != "JNow")
+			{
+				qDebug() << "TelescopeControl: Unable to load telescope: Invalid equinox value at slot" << key;
+				map.remove(key);
+				continue;
+			}
 
 			QString hostName("localhost");
 			int portTCP = 0;
@@ -880,7 +872,7 @@ void TelescopeControl::loadTelescopes()
 					//Use a sever if necessary
 					if(deviceModels[deviceModelName].useExecutable)
 					{
-						if(startClientAtSlot(slot, connectionType, name, hostName, portTCP, delay, internalCircles))
+						if(startClientAtSlot(slot, connectionType, name, equinox, hostName, portTCP, delay, internalCircles))
 						{
 
 							if(!startServerAtSlot(slot, deviceModelName, portTCP, portSerial))
@@ -892,26 +884,32 @@ void TelescopeControl::loadTelescopes()
 						else
 						{
 							qDebug() << "TelescopeControl: Unable to create a telescope client at slot" << slot;
-							continue;
+							//Unnecessary due to if-else construction;
+							//also, causes bug #608533
+							//continue;
 						}
 					}
 					else
 					{
 						addLogAtSlot(slot);
 						logAtSlot(slot);
-						if(!startClientAtSlot(slot, connectionType, name, QString(), 0, delay, internalCircles, deviceModelName, portSerial))
+						if(!startClientAtSlot(slot, connectionType, name, equinox, QString(), 0, delay, internalCircles, deviceModelName, portSerial))
 						{
 							qDebug() << "TelescopeControl: Unable to create a telescope client at slot" << slot;
-							continue;
+							//Unnecessary due to if-else construction;
+							//also, causes bug #608533
+							//continue;
 						}
 					}
 				}
 				else
 				{
-					if(!startClientAtSlot(slot, connectionType, name, hostName, portTCP, delay, internalCircles))
+					if(!startClientAtSlot(slot, connectionType, name, equinox, hostName, portTCP, delay, internalCircles))
 					{
 						qDebug() << "TelescopeControl: Unable to create a telescope client at slot" << slot;
-						continue;
+						//Unnecessary due to if-else construction;
+						//also, causes bug #608533
+						//continue;
 					}
 				}
 			}
@@ -934,16 +932,17 @@ void TelescopeControl::loadTelescopes()
 	telescopeDescriptions = result;
 }
 
-bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionType, QString name, QString host, int portTCP, int delay, bool connectAtStartup, QList<double> circles, QString deviceModelName, QString portSerial)
+bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, bool connectAtStartup, QList<double> circles, QString deviceModelName, QString portSerial)
 {
 	//Validation
-	if(!isValidSlotNumber(slot) || name.isEmpty() || connectionType <= ConnectionNA || connectionType >= ConnectionCount)
+	if(!isValidSlotNumber(slot) || name.isEmpty() || equinox.isEmpty() || connectionType <= ConnectionNA || connectionType >= ConnectionCount)
 		return false;
 
 	//Create a new map node and fill it with parameters
 	QVariantMap telescope;
 	telescope.insert("name", name);
 	telescope.insert("connection", connectionTypeNames.value(connectionType));
+	telescope.insert("equinox", equinox);//TODO: Validation!
 
 	if (connectionType == ConnectionRemote)
 	{
@@ -990,7 +989,7 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 	return true;
 }
 
-bool TelescopeControl::getTelescopeAtSlot(int slot, ConnectionType& connectionType, QString& name, QString& host, int& portTCP, int& delay, bool& connectAtStartup, QList<double>& circles, QString& deviceModelName, QString& portSerial)
+bool TelescopeControl::getTelescopeAtSlot(int slot, ConnectionType& connectionType, QString& name, QString& equinox, QString& host, int& portTCP, int& delay, bool& connectAtStartup, QList<double>& circles, QString& deviceModelName, QString& portSerial)
 {
 	//Validation
 	if(!isValidSlotNumber(slot))
@@ -1006,6 +1005,7 @@ bool TelescopeControl::getTelescopeAtSlot(int slot, ConnectionType& connectionTy
 
 	//Read the parameters
 	name = telescope.value("name").toString();
+	equinox = telescope.value("equinox", "J2000").toString();
 	host = telescope.value("host_name").toString();
 	portTCP = telescope.value("tcp_port").toInt();
 	delay = telescope.value("delay", DEFAULT_DELAY).toInt();
@@ -1047,6 +1047,7 @@ bool TelescopeControl::startTelescopeAtSlot(int slot)
 
 	//Read the telescope properties
 	QString name;
+	QString equinox;
 	QString host;
 	ConnectionType connectionType;
 	int portTCP;
@@ -1055,7 +1056,7 @@ bool TelescopeControl::startTelescopeAtSlot(int slot)
 	QList<double> circles;
 	QString deviceModelName;
 	QString portSerial;
-	if(!getTelescopeAtSlot(slot, connectionType, name, host, portTCP, delay, connectAtStartup, circles, deviceModelName, portSerial))
+	if(!getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, portSerial))
 	{
 		//TODO: Add debug
 		return false;
@@ -1065,7 +1066,7 @@ bool TelescopeControl::startTelescopeAtSlot(int slot)
 	{
 		if(deviceModels[deviceModelName].useExecutable)
 		{
-			if (startClientAtSlot(slot, connectionType, name, host, portTCP, delay, circles))
+			if (startClientAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, circles))
 			{
 				if(!startServerAtSlot(slot, deviceModelName, portTCP, portSerial))
 				{
@@ -1082,7 +1083,7 @@ bool TelescopeControl::startTelescopeAtSlot(int slot)
 		{
 			addLogAtSlot(slot);
 			logAtSlot(slot);
-			if (startClientAtSlot(slot, connectionType, name, QString(), 0, delay, circles, deviceModelName, portSerial))
+			if (startClientAtSlot(slot, connectionType, name, equinox, QString(), 0, delay, circles, deviceModelName, portSerial))
 			{
 				emit clientConnected(slot, name);
 				return true;
@@ -1091,7 +1092,7 @@ bool TelescopeControl::startTelescopeAtSlot(int slot)
 	}
 	else
 	{
-		if (startClientAtSlot(slot, connectionType, name, host, portTCP, delay, circles))
+		if (startClientAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, circles))
 		{
 			emit clientConnected(slot, name);
 			return true;
@@ -1234,7 +1235,7 @@ bool TelescopeControl::stopServerAtSlot(int slotNumber)
 	return true;
 }
 
-bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connectionType, QString name, QString host, int portTCP, int delay, QList<double> circles, QString deviceModelName, QString portSerial)
+bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, QList<double> circles, QString deviceModelName, QString portSerial)
 {
 	//Validation
 	if(!isValidSlotNumber(slotNumber))
@@ -1257,21 +1258,21 @@ bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connecti
 
 	case ConnectionInternal:
 		if(!deviceModelName.isEmpty() && !portSerial.isEmpty())
-			initString = QString("%1:%2:%3:%4").arg(name, deviceModels[deviceModelName].server, portSerial, QString::number(delay));
+			initString = QString("%1:%2:%3:%4:%5").arg(name, deviceModels[deviceModelName].server, equinox, portSerial, QString::number(delay));
 		break;
 
 	case ConnectionLocal:
 		if (isValidPort(portTCP))
-			initString = QString("%1:TCP:%2:%3:%4").arg(name, "localhost", QString::number(portTCP), QString::number(delay));
+			initString = QString("%1:TCP:%2:%3:%4:%5").arg(name, equinox, "localhost", QString::number(portTCP), QString::number(delay));
 		break;
 
 	case ConnectionRemote:
 	default:
 		if (isValidPort(portTCP) && !host.isEmpty())
-			initString = QString("%1:TCP:%2:%3:%4").arg(name, host, QString::number(portTCP), QString::number(delay));
+			initString = QString("%1:TCP:%2:%3:%4:%5").arg(name, equinox, host, QString::number(portTCP), QString::number(delay));
 	}
 
-	qDebug() << "initString:" << initString;
+	//qDebug() << "initString:" << initString;
 
 	TelescopeClient* newTelescope = TelescopeClient::create(initString);
 	if (newTelescope)
@@ -1501,20 +1502,6 @@ bool TelescopeControl::restoreDeviceModelsListTo(QString deviceModelsListPath)
 
 	qDebug() << "TelescopeControl: The default device models list has been copied to" << deviceModelsListPath;
 	return true;
-}
-
-const StelStyle TelescopeControl::getModuleStyleSheet(const StelStyle& style)
-{
-	StelStyle pluginStyle(style);
-	if (style.confSectionName == "color")
-	{
-		pluginStyle.qtStyleSheet.append(*normalStyleSheet);
-	}
-	else
-	{
-		pluginStyle.qtStyleSheet.append(*nightStyleSheet);
-	}
-	return pluginStyle;
 }
 
 const QString& TelescopeControl::getServerExecutablesDirectoryPath()
