@@ -8,6 +8,8 @@ LINK_DIRECTORIES(/src)
 
 SET(TelescopeControl_SRCS
   TelescopeControlGlobals.hpp
+  clients/InterpolatedPosition.hpp
+  clients/InterpolatedPosition.cpp
   clients/TelescopeClient.hpp
   clients/TelescopeClient.cpp
   clients/TelescopeClientDirectLx200.hpp
@@ -101,10 +103,6 @@ IF(BUILD_STATIC_PLUGINS)
  ADD_LIBRARY(TelescopeControl-static STATIC ${TelescopeControl_SRCS} ${TelescopeControl_MOC_SRCS} ${TelescopeControl_RES_CXX} ${TelescopeControl_UIS_H})
  SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES OUTPUT_NAME "TelescopeControl")
  TARGET_LINK_LIBRARIES(TelescopeControl-static ${extLinkerOption})
- IF(WIN32)
-	 SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
- ELSE()
-	 SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
- ENDIF()
+ SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
  ADD_DEPENDENCIES(AllStaticPlugins TelescopeControl-static)
 ENDIF()

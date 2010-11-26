@@ -1,7 +1,7 @@
 
 SET(TELESCOPE_CONTROL_MAJOR "0")
 SET(TELESCOPE_CONTROL_MINOR "2")
-SET(TELESCOPE_CONTROL_PATCH "1")
+SET(TELESCOPE_CONTROL_PATCH "2")
 SET(TELESCOPE_CONTROL_VERSION "${TELESCOPE_CONTROL_MAJOR}.${TELESCOPE_CONTROL_MINOR}.${TELESCOPE_CONTROL_PATCH}")
 #Don't forget to increment the version in device_models.json too,
 #otherwise the local copy will be overwritten each time Stellarium is started.

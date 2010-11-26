@@ -41,7 +41,7 @@ SET(SatellitesDialog_UIS
 )
 QT4_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
 
-SET(Satellites_RES ../Satellites.qrc)
+SET(Satellites_RES ../resources/Satellites.qrc)
 QT4_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
 
 # Add here all the files which require moc compilation
@@ -82,11 +82,7 @@ IF(BUILD_STATIC_PLUGINS)
 	# The library target "Satellites-static" has a default OUTPUT_NAME of "Satellites-static", so change it.
 	SET_TARGET_PROPERTIES(Satellites-static PROPERTIES OUTPUT_NAME "Satellites")
 	TARGET_LINK_LIBRARIES(Satellites-static ${StelMain} ${extLinkerOption})
-	IF(WIN32)
-		SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-	ELSE()
-		SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
-	ENDIF()
+	SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 	ADD_DEPENDENCIES(AllStaticPlugins Satellites-static)
 ENDIF()
 
