@@ -466,7 +466,6 @@ void Satellite::computeOrbitPoints()
 	gVector   azElVector;
 	int	  diffSlots;
 
-
 	if( orbitPoints.isEmpty())//Setup orbitPoins
 	{
 		epochTm  = epochTime - orbitSpan;
@@ -490,7 +489,7 @@ void Satellite::computeOrbitPoints()
 		{
 			if( diffSlots > orbitLineSegments)
 			{
-				diffSlots = orbitLineSegments;
+				diffSlots = orbitLineSegments + 1;
 				epochTm   = epochTime - orbitSpan;
 			}
 			else
@@ -498,7 +497,7 @@ void Satellite::computeOrbitPoints()
 				epochTm   = lastEpochCompForOrbit + orbitSpan + computeInterval;
 			}
 
-			for( int i=0; i<diffSlots;i++)
+			for( int i=0; i<diffSlots; i++)
 			{  //remove points at beginning of list and add points at end.
 				orbitPoints.removeFirst();
 				pSatellite->setEpoch( epochTm);
@@ -519,7 +518,7 @@ void Satellite::computeOrbitPoints()
 		{
 			if( diffSlots > orbitLineSegments)
 			{
-				diffSlots = orbitLineSegments;
+				diffSlots = orbitLineSegments + 1;
 				epochTm   = epochTime + orbitSpan;
 			}
 			else
