@@ -71,7 +71,7 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
 	info.id = "Oculars";
-	info.displayedName = q_("Ocular");
+	info.displayedName = q_("Oculars");
 	info.authors = "Timothy Reaves";
 	info.contact = "treaves@silverfieldstech.com";
 	info.description = q_("Shows the sky as if looking through a telescope eyepiece");
@@ -561,26 +561,30 @@ void Oculars::drawTelrad()
 
 void Oculars::initializeActivationActions()
 {
-	QString group = "Oculars Plugin";
+	// TRANSLATORS: Title of a group of key bindings in the Help window
+	QString group = N_("Plugin Key Bindings");
+	//Bogdan: Temporary, for consistency and to avoid confusing the translators
+	//TODO: Fix this when the key bindings feature is implemented
+	//QString group = N_("Oculars Plugin");
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 
 	gui->addGuiActions("actionShow_Ocular",
-							 N_("Enable ocular"),
+							 N_("Ocular view"),
 							 settings->value("bindings/toggle_oculars", "Ctrl+O").toString(),
-							 "Plugin Key Bindings",
+							 N_("Plugin Key Bindings"),
 							 true);
 	gui->getGuiActions("actionShow_Ocular")->setChecked(flagShowOculars);
 	connect(gui->getGuiActions("actionShow_Ocular"), SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
 	gui->addGuiActions("actionShow_Ocular_Window",
-							 N_("Configuration Window"),
+							 N_("Oculars configuration window"),
 							 settings->value("bindings/toggle_config_dialog", "ALT+O").toString(),
 							 group,
 							 true);
 	connect(gui->getGuiActions("actionShow_Ocular_Window"), SIGNAL(toggled(bool)), ocularDialog, SLOT(setVisible(bool)));
 	connect(ocularDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Ocular_Window"), SLOT(setChecked(bool)));
 	gui->addGuiActions("actionShow_Ocular_Telrad",
-							 N_("Display Telrad"),
+							 N_("Telrad circles"),
 							 settings->value("bindings/toggle_telrad", "Ctrl+B").toString(),
 							 group,
 							 true);
@@ -614,33 +618,36 @@ void Oculars::initializeActions()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 
 	Q_ASSERT(gui);
+	//Bogdan: In the moment, these are not displayed in the Help dialog or
+	//anywhere, so I've removed the N_() to avoid confusing the translators
+	//TODO: Fix this when the key bindings feature is implemented
 	gui->addGuiActions("actionShow_Ocular_Crosshair",
-							 N_("Toggle Crosshair"),
+							 ("Toggle Crosshair"),
 							 settings->value("bindings/toggle_crosshair", "ALT+C").toString(),
 							 group, true);
 
 	gui->addGuiActions("actionShow_CCD_increment",
-							 N_("Select next sensor"),
+							 ("Select next sensor"),
 							 settings->value("bindings/next_ccd", "Shift+Ctrl+]").toString(),
 							 group, false);
 	gui->addGuiActions("actionShow_CCD_decrement",
-							 N_("Select previous sensor"),
+							 ("Select previous sensor"),
 							 settings->value("bindings/prev_ccd", "Shift+Ctrl+[").toString(),
 							 group, false);
 	gui->addGuiActions("actionShow_Ocular_increment",
-							 N_("Select next ocular"),
+							 ("Select next ocular"),
 							 settings->value("bindings/next_ocular", "Ctrl+]").toString(),
 							 group, false);
 	gui->addGuiActions("actionShow_Ocular_decrement",
-							 N_("Select previous ocular"),
+							 ("Select previous ocular"),
 							 settings->value("bindings/prev_ocular", "Ctrl+[").toString(),
 							 group, false);
 	gui->addGuiActions("actionShow_Telescope_increment",
-							 N_("Select next telescope"),
+							 ("Select next telescope"),
 							 settings->value("bindings/next_telescope", "Shift+]").toString(),
 							 group, false);
 	gui->addGuiActions("actionShow_Telescope_decrement",
-							 N_("Select previous telescope"),
+							 ("Select previous telescope"),
 							 settings->value("bindings/prev_telescope", "Shift+[").toString(),
 							 group, false);
 

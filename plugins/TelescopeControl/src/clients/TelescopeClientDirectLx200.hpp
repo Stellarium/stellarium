@@ -45,7 +45,7 @@ class TelescopeClientDirectLx200 : public TelescopeClient, public Server
 {
 	Q_OBJECT
 public:
-	TelescopeClientDirectLx200(const QString &name, const QString &parameters);
+	TelescopeClientDirectLx200(const QString &name, const QString &parameters, Equinox eq = EquinoxJ2000);
 	~TelescopeClientDirectLx200(void)
 	{
 		//hangup();
@@ -80,16 +80,15 @@ private:
 	
 private:
 	void hangup(void);
-	void resetPositions(void);
 	int time_delay;
 	
-	Position positions[16];
-	Position *position_pointer;
-	Position *const end_position;
+	InterpolatedPosition interpolatedPosition;
 	virtual bool hasKnownPosition(void) const
 	{
-		return (position_pointer->client_micros != 0x7FFFFFFFFFFFFFFFLL);
+		return interpolatedPosition.isKnown();
 	}
+
+	Equinox equinox;
 	
 	//======================================================================
 	// Members inherited from ServerLx200
