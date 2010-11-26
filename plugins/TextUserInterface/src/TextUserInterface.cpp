@@ -423,7 +423,7 @@ void TextUserInterface::handleKeys(QKeyEvent* event)
 	if (event->type()==QEvent::KeyPress && event->key()==Qt::Key_M)
 	{
 		tuiActive = ! tuiActive;
-		dummyDialog.setVisible(tuiActive);
+		dummyDialog.close();
 		event->setAccepted(true);
 		return;
 	}
