@@ -87,8 +87,7 @@ Q_EXPORT_PLUGIN2(Oculars, OcularsStelPluginInterface)
 #pragma mark Instance Methods
 #endif
 /* ********************************************************************* */
-Oculars::Oculars() : selectedOcularIndex(-1), flagShowOculars(false), usageMessageLabelID(-1),
-				   pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL)
+Oculars::Oculars() : pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL)
 {
 	flagShowOculars = false;
 	flagShowCrosshairs = false;
@@ -105,8 +104,11 @@ Oculars::Oculars() : selectedOcularIndex(-1), flagShowOculars(false), usageMessa
 	telescopes = QList<Telescope *>();
 
 	selectedCCDIndex = -1;
-	selectedOcularIndex = 0;
-	selectedTelescopeIndex = 0;
+	selectedOcularIndex = -1;
+	selectedTelescopeIndex = -1;
+	
+	noEntitiesLabelID = -1;
+	usageMessageLabelID = -1;
 
 	setObjectName("Oculars");
 
@@ -281,36 +283,72 @@ void Oculars::init()
 	try {
 		validateAndLoadIniFile();
 		// assume all is well
+		ready = true;
 
 		useMaxEyepieceAngle = settings->value("use_max_exit_circle", 0.0).toBool();
 		int ocularCount = settings->value("ocular_count", 0).toInt();
+		int actualOcularCount = ocularCount;
 		for (int index = 0; index < ocularCount; index++) {
 			Ocular *newOcular = Ocular::ocularFromSettings(settings, index);
 			if (newOcular != NULL) {
 				oculars.append(newOcular);
+			} else {
+				actualOcularCount--;
 			}
 		}
+		if (actualOcularCount < 1) {
+			if (actualOcularCount < ocularCount) {
+				qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
+			} else {
+				qWarning() << "There are no oculars defined for the Oculars plugin; plugin will be disabled.";
+			}
+			ready = false;
+		} else {
+			selectedOcularIndex = 0;
+		}
+
 		int ccdCount = settings->value("ccd_count", 0).toInt();
+		int actualCcdCount = ccdCount;
 		for (int index = 0; index < ccdCount; index++) {
 			CCD *newCCD = CCD::ccdFromSettings(settings, index);
 			if (newCCD != NULL) {
 				ccds.append(newCCD);
+			} else {
+				actualCcdCount--;
 			}
 		}
+		if (actualCcdCount < ccdCount) {
+			qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
+			ready = false;
+		}
+
 		int telescopeCount = settings->value("telescope_count", 0).toInt();
+		int actualTelescopeCount = telescopeCount;
 		for (int index = 0; index < telescopeCount; index++) {
 			Telescope *newTelescope = Telescope::telescopeFromSettings(settings, index);
 			if (newTelescope != NULL) {
 				telescopes.append(newTelescope);
+			}else {
+				actualTelescopeCount--;
 			}
 		}
+		if (actualTelescopeCount < 1) {
+			if (actualTelescopeCount < telescopeCount) {
+				qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
+			} else {
+				qWarning() << "There are no telescopes defined for the Oculars plugin; plugin will be disabled.";
+			}
+			ready = false;
+		} else {
+			selectedTelescopeIndex = 0;
+		}
 
-		ready = true;
 		ocularDialog = new OcularDialog(&ccds, &oculars, &telescopes);
 		initializeActivationActions();
 		determineMaxEyepieceAngle();
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
+		ready = false;
 	}
 
 	//Load the module's custom style sheets
@@ -331,8 +369,9 @@ void Oculars::init()
 
 void Oculars::setStelStyle(const QString&)
 {
-	if(ocularDialog)
+	if(ocularDialog) {
 		ocularDialog->updateStyle();
+	}
 }
 
 /* ********************************************************************* */
@@ -379,23 +418,16 @@ void Oculars::setScaleImageCircle(bool state)
 #pragma mark Slots Methods
 #endif
 /* ********************************************************************* */
-void Oculars::enableOcular(bool b)
+void Oculars::enableOcular(bool enableOcularMode)
 {
 	if (!ready) {
 		qDebug() << "The Oculars module has been disabled.";
 		return;
 	}
 
-	if (b) {
-		// load data and determine if we're ready (if we have all required data)
-	}
-	if (!ready) {
-		// no, some data was missing. We already warned, done.
-		return;
-	}
-
 	StelCore *core = StelApp::getInstance().getCore();
 	LabelMgr* labelManager = GETSTELMODULE(LabelMgr);
+
 	// Toggle the plugin on & off.  To toggle on, we want to ensure there is a selected object.
 	if (!flagShowOculars && !StelApp::getInstance().getStelObjectMgr().getWasSelected()) {
 		if (usageMessageLabelID == -1) {
@@ -420,11 +452,12 @@ void Oculars::enableOcular(bool b)
 				labelManager->deleteLabel(usageMessageLabelID);
 				usageMessageLabelID = -1;
 			}
-			flagShowOculars = b;
+			flagShowOculars = enableOcularMode;
 			zoom(false);
 		}
 	}
 	if (flagShowOculars) {
+		// Initialize those actions that should only be enabled when in ocular mode.
 		initializeActions();
 	}
 }
@@ -935,15 +968,12 @@ void Oculars::validateAndLoadIniFile()
 			// Rename the old one, and copy over a new one
 			QFile oldFile(ocularIniPath);
 			if (!oldFile.rename(ocularIniPath + ".old")) {
-				qWarning() << "Oculars::validateIniFile cannot move ocular.ini resource to ocular.ini.old at path  "
-						+ ocularIniPath;
+				qWarning() << "Oculars::validateIniFile cannot move ocular.ini resource to ocular.ini.old at path  " + ocularIniPath;
 			} else {
-				qWarning() << "Oculars::validateIniFile ocular.ini resource renamed to ocular.ini.old at path  "
-						+ ocularIniPath;
+				qWarning() << "Oculars::validateIniFile ocular.ini resource renamed to ocular.ini.old at path  " + ocularIniPath;
 				QFile src(":/ocular/default_ocular.ini");
 				if (!src.copy(ocularIniPath)) {
-					qWarning() << "Oculars::validateIniFile cannot copy default_ocular.ini resource to [non-existing] "
-							+ ocularIniPath;
+					qWarning() << "Oculars::validateIniFile cannot copy default_ocular.ini resource to [non-existing] " + ocularIniPath;
 				} else {
 					qDebug() << "Oculars::validateIniFile copied default_ocular.ini to " << ocularIniPath;
 					// The resource is read only, and the new file inherits this...  make sure the new file
