@@ -135,6 +135,8 @@ SET(stellarium_lib_SRCS
 	core/StelLoadingBar.hpp
 	core/StelToast.hpp
 	core/StelToast.cpp
+	core/StelToastGrid.hpp
+	core/StelToastGrid.cpp
 
 	${gl_lib_SRCS}
 	core/external/fixx11h.h

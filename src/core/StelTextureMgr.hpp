@@ -24,6 +24,10 @@
 #include "StelTexture.hpp"
 #include <QObject>
 
+class QNetworkReply;
+class QThread;
+
+
 //! @class StelTextureMgr
 //! Manage textures loading.
 //! It provides method for loading images in a separate thread.
@@ -53,9 +57,13 @@ public:
 
 private:
 	friend class StelTexture;
+	friend class ImageLoader;
 
 	//! Whether ARB_texture_non_power_of_two is supported on this card
 	bool isNoPowerOfTwoAllowed;
+
+	//! A thread that is used by the TextureLoader object to avoid pausing the main thread too long.
+	QThread* loaderThread;
 };
 
 
