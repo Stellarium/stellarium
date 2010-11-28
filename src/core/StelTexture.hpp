@@ -54,10 +54,10 @@ public slots:
 	void start();
 
 private slots:
-    void onNetworkReply();
-    void onNetworkError(QNetworkReply::NetworkError code);
-    void onDownloadProgress();
-    void directLoad();
+	void onNetworkReply();
+	void onNetworkError(QNetworkReply::NetworkError code);
+	void onDownloadProgress();
+	void directLoad();
 
 private:
 	QString path;
