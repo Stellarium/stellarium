@@ -25,10 +25,10 @@
 #include <QObject>
 #include <QImage>
 #include <QtOpenGL>
-#include <QNetworkReply>
 
 class QFile;
 class StelTextureMgr;
+class QNetworkReply;
 
 #ifndef GL_CLAMP_TO_EDGE
 #define GL_CLAMP_TO_EDGE 0x812F
@@ -55,8 +55,6 @@ public slots:
 
 private slots:
 	void onNetworkReply();
-	void onNetworkError(QNetworkReply::NetworkError code);
-	void onDownloadProgress();
 	void directLoad();
 
 private:

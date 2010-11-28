@@ -41,9 +41,6 @@
 #include <QNetworkReply>
 #include <QGLWidget>
 
-// Just for testing.  Contains all the active imageloaders.
-static QSet<ImageLoader*> test;
-
 ImageLoader::ImageLoader(const QString& path, int delay)
 	: QObject(), path(path), networkReply(NULL)
 {
@@ -52,26 +49,12 @@ ImageLoader::ImageLoader(const QString& path, int delay)
 
 ImageLoader::~ImageLoader() {
 	if (networkReply != NULL) {
-		qDebug() << "TEST abort";
 		networkReply->abort();
-	}
-	test.remove(this);
-	qDebug() << "TEST nb Loaders =" << test.size();
-	foreach(ImageLoader* loader, test) {
-		if (loader->networkReply)
-			qDebug() << loader->path << loader->networkReply->isRunning();
 	}
 }
 
 void ImageLoader::start()
 {
-	// We limit the number of loaders downloading from internet.
-	// XXX: this is just for testing.
-//	if (path.startsWith("http://") && test.size() >= 4) {
-//		QTimer::singleShot(500, this, SLOT(start()));
-//		return;
-//	}
-
 	if (path.startsWith("http://")) {
 		QNetworkRequest req = QNetworkRequest(QUrl(path));
 		// Define that preference should be given to cached files (no etag checks)
@@ -79,14 +62,10 @@ void ImageLoader::start()
 		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toAscii());
 		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		connect(networkReply, SIGNAL(finished()), this, SLOT(onNetworkReply()));
-		connect(networkReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(onNetworkError(QNetworkReply::NetworkError)));
-		connect(networkReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(onDownloadProgress()));
 	} else {
 		// At next loop iteration we start to load from the file.
 		QTimer::singleShot(0, this, SLOT(directLoad()));
 	}
-	test.insert(this);
-	qDebug() << "TEST nb Loaders =" << test.size();
 
 	// Move this object outside of the main thread.
 	StelTextureMgr* textureMgr = &StelApp::getInstance().getTextureManager();
@@ -96,15 +75,12 @@ void ImageLoader::start()
 
 void ImageLoader::onNetworkReply()
 {
-	qDebug() << "TEST network reply" << path;
 	if (networkReply->error() != QNetworkReply::NoError) {
-		qDebug() << "ERROR" << networkReply->errorString();
 		emit error(networkReply->errorString());
 	} else {
 		QByteArray data = networkReply->readAll();
 		QImage image = QImage::fromData(data);
 		if (image.isNull()) {
-			qDebug() << "ERROR parsing image failed " << path;
 			emit error("Unable to parse image data");
 		} else {
 			emit finished(image);
@@ -112,18 +88,6 @@ void ImageLoader::onNetworkReply()
 	}
 	networkReply->deleteLater();
 	networkReply = NULL;
-	qDebug() << "TEST done";
-}
-
-void ImageLoader::onNetworkError(QNetworkReply::NetworkError code)
-{
-	qDebug() << "ERROR" << code << networkReply->errorString() << networkReply->url();
-	// emit error(networkReply->errorString());
-}
-
-void ImageLoader::onDownloadProgress()
-{
-	qDebug() << "TEST download progress for" << path;
 }
 
 void ImageLoader::directLoad() {
