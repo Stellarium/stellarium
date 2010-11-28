@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2006 Fabien Chereau
+ * Copyright (C) 2010 Guillaume Chereau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,84 +28,13 @@
 #include "StelTexture.hpp"
 #include "StelTextureTypes.hpp"
 #include "VecMath.hpp"
+#include "StelToastGrid.hpp"
 
 class StelPainter;
-
-//! compute 2**x
-inline int pow2(int x) {return 1 << x;}
-
-//! @class ToasGrid
-//
-//! convenience class that can be used to compute the toast grid
-//! points.
-//
-//! The ToastGrid class allow to compute the vertex arrays associated
-//! with Toast tiles.  Each method refers to a tile by its level and x
-//! and y coordinates.
-class ToastGrid
-{
-public:
-	ToastGrid(int maxLevel);
-	//! Get the vertice array for a given tile.
-	//! The position are stored in a grid.
-	//! @param level the level of the tile.
-	//! @param x the x coordinate of the tile.
-	//! @param y the y coordinate of the tile.
-	//! @param resolution the resolution of the returned array.
-	QVector<Vec3d> getVertexArray(int level, int x, int y, int resolution) const;
-	//! Get the texture array for a given tile.
-	//! The position are stored in a grid
-	//! @param level the level of the tile.
-	//! @param x the x coordinate of the tile.
-	//! @param y the y coordinate of the tile.
-	//! @param resolution the resolution of the returned array.
-	QVector<Vec2f> getTextureArray(int level, int x, int y, int resolution) const;
-	//! Get the index of the vertex from getVertexArray sorted as a list of triangles.
-	//! @param level the level of the tile.
-	//! @param x the x coordinate of the tile.
-	//! @param y the y coordinate of the tile.
-	//! @param resolution the resolution of the returned array.
-	QVector<unsigned int> getTrianglesIndex(int level, int x, int y, int resolution) const;
-	//! Returns the polygon contouring a given tile.
-	//! @param level the level of the tile.
-	//! @param x the x coordinate of the tile.
-	//! @param y the y coordinate of the tile.
-	QVector<Vec3d> getPolygon(int level, int x, int y) const;
-	//! Return the max level of this grid.
-	int getMaxLevel() const {return maxLevel;}
-
-private:
-	//! Get the vector at a given point in the grid
-	const Vec3d& at(int x, int y) const {return grid[y * size + x];}
-	//! Get the vector at a given point in the grid
-	Vec3d& at(int x, int y) {return grid[y * size + x];}
-	//! Get the vector at a given point in the grid
-	const Vec3d& at(int level, int x, int y) const
-		{int scale = pow2(maxLevel - level); return at(scale * x, scale * y);}
-	//! Get the vector at a given point in the grid
-	Vec3d& at(int level, int x, int y)
-		{int scale = pow2(maxLevel - level); return at(scale * x, scale * y);}
-
-	//! initialize the grid
-	void init_grid();
-	void init_grid(int level, int x, int y, bool side);
-
-	//! The max level of the grid
-	int maxLevel;
-	//! the size of the grid
-	int size;
-	//! The actual grid data
-	QVector<Vec3d> grid;
-};
-
-
 class ToastSurvey;
 
-
-//!@class ToastTile
-//
+//! @class ToastTile
 //! Represents a tile in a Toast image.
-//
 //! The tiles are stored in a tree structure, using the QObject
 //! children/parent relationships.
 class ToastTile : public QObject
@@ -158,8 +87,7 @@ private:
 };
 
 
-//!@class ToastSurvey
-//
+//! @class ToastSurvey
 //! Represents a full Toast survey.
 class ToastSurvey : public QObject
 {
