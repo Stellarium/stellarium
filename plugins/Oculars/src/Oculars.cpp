@@ -175,6 +175,9 @@ void Oculars::deinit()
 		settings->setValue(prefix + "vFlip", telescope->isVFlipped());
 		index++;
 	}
+	settings->setValue("ocular_count", oculars.count());
+	settings->setValue("telescope_count", telescopes.count());
+	settings->setValue("ccd_count", ccds.count());
 	settings->sync();
 }
 
