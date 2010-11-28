@@ -127,6 +127,8 @@ signals:
 private slots:
 	//! Called by the loader when the data has finished loading
 	void onImageLoaded(QImage image);
+	//! Called by the loader in case of an error
+	void onLoadingError(const QString& errorMessage) {reportError(errorMessage);}
 
 private:
 	friend class StelTextureMgr;
