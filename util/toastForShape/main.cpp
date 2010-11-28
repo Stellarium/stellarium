@@ -4,7 +4,8 @@
 
 int main(int argc, char *argv[])
 {
-	SphericalRegionP reg = SphericalRegionP::loadFromQVariant(StelJsonParser::parse(argv[0]).toList());
+	Q_ASSERT(argc==2);
+	SphericalRegionP reg = SphericalRegionP::loadFromQVariant(StelJsonParser::parse(argv[1]).toList());
 	//SphericalRegionP reg = SphericalRegionP::loadFromQVariant(StelJsonParser::parse("[[21.286982057125858, 82.117482778097937], [341.20801035028205, 82.141350178494122], [308.54824444399429, 86.661406614892087], [54.398199236987082, 86.613098160666411]]").toList());
 	ToastGrid grid(10);
 	QVariantList l;
@@ -23,7 +24,7 @@ int main(int argc, char *argv[])
 			}
 		}
 	}
-	qDebug() << StelJsonParser::write(l);
+	printf("%s", StelJsonParser::write(l).constData());
 
 	return 0;
 }
