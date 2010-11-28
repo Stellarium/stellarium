@@ -420,7 +420,24 @@ void Oculars::setScaleImageCircle(bool state)
 /* ********************************************************************* */
 void Oculars::enableOcular(bool enableOcularMode)
 {
-	if (!ready) {
+	if (enableOcularMode) {
+		// Check to insure that we have enough oculars & telescopes, as they may have been edited in the config dialog
+		if (oculars.count() == 0) {
+			selectedOcularIndex = -1;
+			qDebug() << "No oculars found";
+		} else if (oculars.count() > 0 && selectedOcularIndex == -1) {
+			selectedOcularIndex = 0;
+		}
+		if (telescopes.count() == 0) {
+			selectedTelescopeIndex = -1;
+			qDebug() << "No telescopes found";
+		} else if (telescopes.count() > 0 && selectedTelescopeIndex == -1) {
+			selectedTelescopeIndex = 0;
+		}
+	}
+
+
+	if (!ready  || selectedOcularIndex == -1 ||  selectedTelescopeIndex == -1) {
 		qDebug() << "The Oculars module has been disabled.";
 		return;
 	}
