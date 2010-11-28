@@ -105,6 +105,7 @@ void ImageLoader::onNetworkReply()
         QImage image = QImage::fromData(data);
         if (image.isNull()) {
             qDebug() << "ERROR parsing image failed " << path;
+            emit error("Unable to parse image data");
         } else {
             emit finished(image);
         }
@@ -166,6 +167,7 @@ void StelTexture::reportError(const QString& aerrorMessage)
 {
 	errorOccured = true;
 	errorMessage = aerrorMessage;
+	isLoadingImage = false;
 	// Report failure of texture loading
 	emit(loadingProcessFinished(true));
 }
@@ -192,6 +194,7 @@ bool StelTexture::bind()
 		isLoadingImage = true;
 		loader = new ImageLoader(fullPath, 100);
 		connect(loader, SIGNAL(finished(QImage)), this, SLOT(onImageLoaded(QImage)));
+		connect(loader, SIGNAL(error(QString)), this, SLOT(onLoadingError(QString)));
 	}
 
 	return false;
