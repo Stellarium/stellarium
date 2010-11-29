@@ -47,6 +47,8 @@ class RefractionExtinction
 {
 public:
 	RefractionExtinction();
+        //! Increase @param altRad (altitude in radians) by effect of refraction.
+        void RefractionExtinction::addRefraction(double *altRad);
 	//! Compute refraction and extinction effects for arrays of size @param size position vectors and magnitudes.
 	//! @param altAzPos are the normalized (true) star position vectors, and their z components sin(true_altitude).
 	//! Note that forward/backward are no absolute reverse operations!
