@@ -33,6 +33,21 @@ void RefractionExtinction::updatePrecomputed()
 	press_temp_corr_Saemundson=1.02f*press_temp_corr_Bennett;
 }
 
+void RefractionExtinction::addRefraction(double *altRad)
+{
+  float geom_alt_deg=(180.f/M_PI)*(*altRad);
+  if (geom_alt_deg > -2.f)
+    {
+      // refraction from Saemundsson, S&T1986 p70 / in Meeus, Astr.Alg.
+      float r=press_temp_corr_Saemundson / std::tan((geom_alt_deg+10.3f/(geom_alt_deg+5.11f))*M_PI/180.f) + 0.0019279f;
+      geom_alt_deg += r;
+      if (geom_alt_deg > 90.f)
+	geom_alt_deg=90.f; // SAFETY, SHOULD NOT BE NECESSARY
+      *altRad=geom_alt_deg*M_PI/180.f;
+    }
+}
+
+
 void RefractionExtinction::forward(Vec3d* altAzPos, float* mag, int size)
 {
 	// Assuming altAzPos is the normalized star position vector, and its z component sin(altitude).
