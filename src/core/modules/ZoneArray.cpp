@@ -111,6 +111,8 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		qDebug() << dbStr;
 		return 0;
 	}
+	// GZ patch: need more data. The next line can be removed again after fixing the extincted-magnitude problem.
+	qWarning() << "Star catalog: " << catalogFilePath << QString(": mag_min: %1, mag_steps: %2, mag_range: %3").arg(mag_min).arg(mag_steps).arg(mag_range);
 	const bool byte_swap = (magic == FILE_MAGIC_OTHER_ENDIAN);
 	if (byte_swap)
 	{
