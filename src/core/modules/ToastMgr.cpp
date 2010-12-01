@@ -26,7 +26,7 @@
 
 ToastMgr::ToastMgr()
 {
-	survey = new ToastSurvey("http://data.stellarium.org/surveys/mellinger/{level}/{y}/{y}_{x}.jpg");
+	survey = new ToastSurvey("http://data.stellarium.org/surveys/DSS2WIP/N123/{level}/{x}_{y}.jpg", 10);
 	survey->setParent(this);
 }
 
