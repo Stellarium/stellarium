@@ -40,7 +40,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 						 const QString& atexMapName,
 						 posFuncType coordFunc,
 						 void* auserDataPtr,
-						 OsulatingFunctType *osculatingFunc,
+						 OsculatingFunctType *osculatingFunc,
 						 bool acloseOrbit,
 						 bool hidden)
 						: Planet (englishName,
