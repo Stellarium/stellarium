@@ -50,6 +50,8 @@
 #include "StelPainter.hpp"
 #include "StelJsonParser.hpp"
 #include "ZoneArray.hpp"
+#include "StelSkyDrawer.hpp"
+#include "RefractionExtinction.hpp"
 
 #include <errno.h>
 #include <unistd.h>
@@ -246,6 +248,27 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelNavigator * nav)
 	{
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(nav);
+		StelSkyDrawer *drawer=StelApp::getInstance().getCore()->getSkyDrawer();
+		bool withAtmosphericEffects=drawer->getFlagHasAtmosphere();
+		// GZ: add refraction
+		if (withAtmosphericEffects)
+		  {
+		    const RefractionExtinction *refExt=drawer->getRefractionExtinction();
+		    // (2) compute alt-az coordinates from pos
+		    Vec3d altaz=nav->j2000ToAltAz(Vec3d(pos[0], pos[1], pos[2]));
+		    // (2) Affect only if above -2 altitude.
+		    if (altaz[2]>=-0.035f) {
+		      float dummy_mag;
+		      // (3) compute refraction and extinction effects:
+		      refExt->forward(&altaz, &dummy_mag, 1);
+		      // (4) return to equatorial system, but refracted.
+		      Vec3d pos_refracted=nav->altAzToJ2000(altaz); 
+		      pos[0]=pos_refracted[0];
+		      pos[1]=pos_refracted[1];
+		      pos[2]=pos_refracted[2];
+		    }
+		  }
+		// GZ: done
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
 		if (!sPainter.getProjector()->project(pos, screenpos))
