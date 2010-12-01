@@ -36,8 +36,6 @@
 
 StelTextureMgr::StelTextureMgr()
 {
-	// We need to call this otherwise Qt refuse to pass QNetworkReply::NetworkError in the threaded signals.
-	qRegisterMetaType<QNetworkReply::NetworkError>("QNetworkReply::NetworkError");
 	// This thread is doing nothing but will contains all the loader objects.
 	loaderThread = new QThread(this);
 	loaderThread->start(QThread::LowestPriority);
