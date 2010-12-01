@@ -105,9 +105,10 @@ void ToastTile::prepareDraw()
 		StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
 		texture = texMgr.createTextureThread(imagePath);
 	}
-	if (!texture->isLoading() && !texture->canBind() && !texture->getErrorMessage().isEmpty())
+	if (texture.isNull() || (!texture->isLoading() && !texture->canBind() && !texture->getErrorMessage().isEmpty()))
 	{
-		qDebug() << "can't get texture" << imagePath << texture->getErrorMessage();
+		if (!texture.isNull())
+			qDebug() << "can't get texture" << imagePath << texture->getErrorMessage();
 		empty = true;
 		return;
 	}
