@@ -81,13 +81,13 @@ bool ToastTile::isVisible(const SphericalCap& viewportShape, int maxVisibleLevel
 	return viewportShape.intersects(boundingCap);
 }
 
-bool ToastTile::isCovered(const SphericalCap& viewportShape, int maxVisibleLevel) const
+bool ToastTile::isCovered(const SphericalCap& viewportShape) const
 {
 	// The tile is covered if we have at least one visible child and all the visible children are all ready to be drawn.
 	int nbVisibleChildren = 0;
-	foreach (ToastTile* child, getSubTiles())
+	foreach (const ToastTile* child, subTiles)
 	{
-		if (!child->isVisible(viewportShape, maxVisibleLevel))
+		if (!viewportShape.intersects(child->boundingCap))
 			continue;
 		nbVisibleChildren++;
 		if (!child->ready)
@@ -115,20 +115,20 @@ void ToastTile::prepareDraw()
 	if (!texture->canBind())
 		return;
 	// Get the opengl arrays
-	if (vertexArray.empty() && level < getGrid()->getMaxLevel())
+	if (vertexArray.empty())
 	{
-		vertexArray = getGrid()->getVertexArray(level, x, y, 6);
-		textureArray = getGrid()->getTextureArray(level, x, y, 6);
-		indexArray = getGrid()->getTrianglesIndex(level, x, y, 6);
+		vertexArray = getGrid()->getVertexArray(level, x, y, level);
+		textureArray = getGrid()->getTextureArray(level, x, y, level);
+		indexArray = getGrid()->getTrianglesIndex(level, x, y, level);
 	}
 
-	if (getSubTiles().isEmpty() && level < getSurvey()->getMaxLevel())
+	if (subTiles.isEmpty() && level < getSurvey()->getMaxLevel())
 	{
 		qDebug() << "Create children";
 		// Create the children
 		for (int i = 0; i < 2; ++i)
 			for (int j = 0; j < 2; ++j)
-				new ToastTile(this, level + 1, 2 * this->x + i, 2 * this->y + j);
+				subTiles.append(new ToastTile(this, level + 1, 2 * this->x + i, 2 * this->y + j));
 		Q_ASSERT(children().size() == 4);
 	}
 	ready = true;
@@ -140,15 +140,12 @@ void ToastTile::drawTile(StelPainter* sPainter)
 	if (!ready)
 		prepareDraw();
 
-	sPainter->setColor(0.2, 0.2, 0.2, 1);
+	sPainter->setColor(1, 1, 1, 1);
 
 	if (!texture->bind())
 		return;
 
 	sPainter->enableTexture2d(true);
-
-	//	// We need to make a copy of the vertex arrays because they are modified by the painter
-	//	QVector<Vec3d> vertexArray(this->vertexArray);
 	Q_ASSERT(vertexArray.size() == textureArray.size());
 
 	glEnable(GL_CULL_FACE);
@@ -157,14 +154,9 @@ void ToastTile::drawTile(StelPainter* sPainter)
 	sPainter->drawFromArray(StelPainter::Triangles, indexArray.size(), 0, true, indexArray.constData());
 	glDisable(GL_CULL_FACE);
 
-//	if (level!=4)
-//		return;
 //	SphericalConvexPolygon poly(getGrid()->getPolygon(level, x, y));
 //	sPainter->enableTexture2d(false);
 //	sPainter->drawSphericalRegion(&poly, StelPainter::SphericalPolygonDrawModeBoundary);
-
-//	sPainter->setColor(1, 1, 0, 1);
-//	sPainter->drawSphericalRegion(&boundingCap, StelPainter::SphericalPolygonDrawModeBoundary);
 }
 
 
@@ -173,12 +165,17 @@ void ToastTile::draw(StelPainter* sPainter, const SphericalCap& viewportShape, i
 	if (!isVisible(viewportShape, maxVisibleLevel))
 	{
 		free();
+		foreach (ToastTile* child, subTiles)
+		{
+			child->deleteLater();
+		}
+		subTiles.clear();
 		return;
 	}
-	if (!isCovered(viewportShape, maxVisibleLevel))
+	if (level==maxVisibleLevel || !isCovered(viewportShape))
 		drawTile(sPainter);
 	// Draw all the children
-	foreach(ToastTile* child, getSubTiles())
+	foreach (ToastTile* child, subTiles)
 	{
 		child->draw(sPainter, viewportShape, maxVisibleLevel);
 	}
@@ -189,17 +186,14 @@ void ToastTile::free()
 {
 	texture.clear();
 	Q_ASSERT(texture.isNull());
-	foreach(ToastTile* child, getSubTiles())
-	{
+	foreach (ToastTile* child, subTiles)
 		child->free();
-		child->deleteLater();
-	}
 	ready = false;
 }
 
 /////// ToastSurvey methods ////////////
-ToastSurvey::ToastSurvey(const QString& path)
-	: grid(6), path(path), maxLevel(6)
+ToastSurvey::ToastSurvey(const QString& path, int amaxLevel)
+	: grid(amaxLevel), path(path), maxLevel(amaxLevel)
 {
 	rootTile = new ToastTile(this, 0, 0, 0);
 }
