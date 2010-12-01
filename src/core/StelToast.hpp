@@ -51,13 +51,11 @@ protected:
 	const ToastSurvey* getSurvey() const;
 	//! Return the toast grid used by the tile.
 	const ToastGrid* getGrid() const;
-	//! Return all the subtiles
-	QList<ToastTile*> getSubTiles() const {return findChildren<ToastTile*>();}
 	//! Return whether the tile should be drawn
 	bool isVisible(const SphericalCap& viewportShape, int maxVisibleLevel) const;
 	//! return whether the tile is covered by its children tiles
 	//! This is used to avoid drawing tiles that will be covered anyway
-	bool isCovered(const SphericalCap& viewportShape, int maxVisibleLevel) const;
+	bool isCovered(const SphericalCap& viewportShape) const;
 	void prepareDraw();
 	void free();
 
@@ -79,6 +77,8 @@ private:
 	//! The bounding cap used to check if the tile is visible
 	SphericalCap boundingCap;
 
+	QList<ToastTile*> subTiles;
+
 	// QList<SphericalRegionP> skyConvexPolygons;
 	//! OpenGl arrays
 	QVector<Vec3d> vertexArray;
@@ -94,12 +94,12 @@ class ToastSurvey : public QObject
 	Q_OBJECT
 
 public:
-	ToastSurvey(const QString& path);
+	ToastSurvey(const QString& path, int maxLevel);
 	QString getTilePath(int level, int x, int y) const;
 	void draw(StelPainter* sPainter);
 	const ToastGrid* getGrid() const {return &grid;}
 	int getMaxLevel() const {return maxLevel;}
-	int getTilesSize() const {return 512;}
+	int getTilesSize() const {return 256;}
 
 private:
 	ToastGrid grid;
