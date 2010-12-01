@@ -25,10 +25,10 @@
 #include <QObject>
 #include <QImage>
 #include <QtOpenGL>
-#include <QNetworkReply>
 
 class QFile;
 class StelTextureMgr;
+class QNetworkReply;
 
 #ifndef GL_CLAMP_TO_EDGE
 #define GL_CLAMP_TO_EDGE 0x812F
@@ -54,10 +54,8 @@ public slots:
 	void start();
 
 private slots:
-    void onNetworkReply();
-    void onNetworkError(QNetworkReply::NetworkError code);
-    void onDownloadProgress();
-    void directLoad();
+	void onNetworkReply();
+	void directLoad();
 
 private:
 	QString path;
@@ -127,6 +125,8 @@ signals:
 private slots:
 	//! Called by the loader when the data has finished loading
 	void onImageLoaded(QImage image);
+	//! Called by the loader in case of an error
+	void onLoadingError(const QString& errorMessage) {reportError(errorMessage);}
 
 private:
 	friend class StelTextureMgr;
