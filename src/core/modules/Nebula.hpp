@@ -45,7 +45,7 @@ public:
 	//! - Size
 	//! - Extra1 (contains the Nebula type, which might be "Galaxy", "Cluster" or similar)
 	//! - PlainText
-	//! @param core the Stelore object
+	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Nebula.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
@@ -79,8 +79,8 @@ private:
 		NebGc=2,     //!< Globular star cluster, usually in the Milky Way Galaxy
 		NebN=3,      //!< Bright emission or reflection nebula
 		NebPn=4,     //!< Planetary nebula
-		NebDn=5,     //!< ???
-		NebIg=6,     //!< ???
+		NebDn=5,     //!< ??? 
+		NebIg=6,     //!< ??? 
 		NebCn=7,     //!< Cluster associated with nebulosity
 		NebUnknown=8 //!< Unknown type
 	};
