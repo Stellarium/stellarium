@@ -358,7 +358,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		const QString funcName = pd.value(secname+"/coord_func").toString();
 		posFuncType posfunc=NULL;
 		void* userDataPtr=NULL;
-		OsulatingFunctType *osculatingFunc = 0;
+		OsculatingFunctType *osculatingFunc = 0;
 		bool closeOrbit = pd.value(secname+"/closeOrbit", true).toBool();
 
 		if (funcName=="ell_orbit")
