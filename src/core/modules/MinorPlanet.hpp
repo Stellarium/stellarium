@@ -46,7 +46,7 @@ public:
 	       const QString& texMapName,
 	       posFuncType _coordFunc,
 	       void* userDataPtr,
-	       OsulatingFunctType *osculatingFunc,
+	       OsculatingFunctType *osculatingFunc,
 	       bool closeOrbit,
 	       bool hidden);
 
