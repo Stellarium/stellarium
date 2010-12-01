@@ -33,9 +33,9 @@ void RefractionExtinction::updatePrecomputed()
 	press_temp_corr_Saemundson=1.02f*press_temp_corr_Bennett;
 }
 
-void RefractionExtinction::addRefraction(double *altRad)
+void RefractionExtinction::addRefraction(double &altRad) const
 {
-  float geom_alt_deg=(180.f/M_PI)*(*altRad);
+  float geom_alt_deg=(180.f/M_PI)*(altRad);
   if (geom_alt_deg > -2.f)
     {
       // refraction from Saemundsson, S&T1986 p70 / in Meeus, Astr.Alg.
@@ -43,12 +43,12 @@ void RefractionExtinction::addRefraction(double *altRad)
       geom_alt_deg += r;
       if (geom_alt_deg > 90.f)
 	geom_alt_deg=90.f; // SAFETY, SHOULD NOT BE NECESSARY
-      *altRad=geom_alt_deg*M_PI/180.f;
+      altRad=geom_alt_deg*M_PI/180.f;
     }
 }
 
 
-void RefractionExtinction::forward(Vec3d* altAzPos, float* mag, int size)
+void RefractionExtinction::forward(Vec3d *altAzPos, float *mag, const int size) const
 {
 	// Assuming altAzPos is the normalized star position vector, and its z component sin(altitude).
 	for (int i=0; i<size; ++i)
@@ -70,7 +70,7 @@ void RefractionExtinction::forward(Vec3d* altAzPos, float* mag, int size)
 	}
 }
 
-void RefractionExtinction::backward(Vec3d* altAzPos, float* mag, int size)
+void RefractionExtinction::backward(Vec3d *altAzPos, float *mag, const int size) const
 {
 	// going from observed position/magnitude to geometrical position and atmosphere-free mag.
 	for (int i=0; i<size; ++i)
@@ -88,7 +88,7 @@ void RefractionExtinction::backward(Vec3d* altAzPos, float* mag, int size)
 }
 
 // airmass computation for cosine of zenith angle z
-float RefractionExtinction::airmass(float cosZ, bool apparent_z)
+float RefractionExtinction::airmass(float cosZ, bool apparent_z) const
 {
 	if (cosZ<-0.035f)
 		return 0.0f; // Safety: Do nothing for below -2 degrees.

@@ -20,7 +20,8 @@
  * Implementation: 2010-03-23 GZ=Georg Zotti, Georg.Zotti@univie.ac.at
  */
 
-
+#ifndef _REFRACTIONEXTINCTION_HPP_
+#define _REFRACTIONEXTINCTION_HPP_
 // TODO USABILITY: add 4 more flags/switches in GUI:
 // (boolean) refraction, [could be omitted and linked to global "show atmosphere"]
 // (value field) Temperature [C] [influences refraction]
@@ -48,15 +49,15 @@ class RefractionExtinction
 public:
 	RefractionExtinction();
         //! Increase @param altRad (altitude in radians) by effect of refraction.
-        void RefractionExtinction::addRefraction(double *altRad);
+        void RefractionExtinction::addRefraction(double &altRad) const;
 	//! Compute refraction and extinction effects for arrays of size @param size position vectors and magnitudes.
 	//! @param altAzPos are the normalized (true) star position vectors, and their z components sin(true_altitude).
 	//! Note that forward/backward are no absolute reverse operations!
-	void forward(Vec3d* altAzPos, float* mag, int size);
+	void forward(Vec3d *altAzPos, float *mag, const int size) const;
 	//! Compute refraction and extinction effects for arrays of size @param size position vectors and magnitudes.
 	//! @param altAzPos are the normalized (apparent) star position vectors, and their z components sin(apparent_altitude).
 	//! Note that forward/backward are no absolute reverse operations!
-	void backward(Vec3d* altAzPos, float* mag, int size);
+	void backward(Vec3d *altAzPos, float *mag, const int size) const;
 	//! Set surface air pressure (mbars), influences refraction computation.
 	void setPressure(float p_mbar);
 	//! Set surface air temperature (degrees Celsius), influences refraction computation.
@@ -72,7 +73,7 @@ public:
 	//! A problem ist that refraction depends on air pressure and temperature, but Young's formula assumes T=15C, p=1013.25mbar.
 	//! So, it seems better to compute refraction first, and then use the Rozenberg formula here.
 	//! Rozenberg is infinite at Z=92.17 deg, Young at Z=93.6 deg, so this function RETURNS 0 BELOW -2 DEGREES!
-	float airmass(float cosZ, bool apparent_z=true);
+	float airmass(float cosZ, bool apparent_z=true) const;
 
 private:
 	//! Update precomputed variables.
@@ -90,3 +91,5 @@ private:
 	//! Numerator of refraction formula, to be cached for speed.
 	float press_temp_corr_Bennett;
 };
+
+#endif  // _REFRACTIONEXTINCTION_HPP_
