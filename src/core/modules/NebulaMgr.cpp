@@ -43,6 +43,7 @@
 #include "StelCore.hpp"
 #include "StelSkyImageTile.hpp"
 #include "StelPainter.hpp"
+#include "RefractionExtinction.hpp"
 
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c;}
 const Vec3f &NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
@@ -105,7 +106,7 @@ void NebulaMgr::init()
 
 struct DrawNebulaFuncObject
 {
-	DrawNebulaFuncObject(float amaxMagHints, float amaxMagLabels, StelPainter* p, bool acheckMaxMagHints) : maxMagHints(amaxMagHints), maxMagLabels(amaxMagLabels), sPainter(p), checkMaxMagHints(acheckMaxMagHints)
+  DrawNebulaFuncObject(float amaxMagHints, float amaxMagLabels, StelPainter* p, StelCore* aCore, bool acheckMaxMagHints) : maxMagHints(amaxMagHints), maxMagLabels(amaxMagLabels), sPainter(p), core(aCore), checkMaxMagHints(acheckMaxMagHints)
 	{
 		angularSizeLimit = 5.f/sPainter->getProjector()->getPixelPerRadAtCenter()*180.f/M_PI;
 	}
@@ -114,14 +115,43 @@ struct DrawNebulaFuncObject
 		Nebula* n = obj.staticCast<Nebula>().data();
 		if (n->angularSize>angularSizeLimit || (checkMaxMagHints && n->mag <= maxMagHints))
 		{
-			sPainter->getProjector()->project(n->XYZ,n->XY);
-			n->drawLabel(*sPainter, maxMagLabels);
-			n->drawHints(*sPainter, maxMagHints);
+		  // GZ: refract. TODO: DOES NOT WORK LIKE THAT!
+		  const StelSkyDrawer *drawer=core->getSkyDrawer();
+		  const StelNavigator* nav = core->getNavigator();
+		  bool withAtmosphericEffects=drawer->getFlagHasAtmosphere();
+		  if (withAtmosphericEffects)
+		    {
+		      const RefractionExtinction *refExt=drawer->getRefractionExtinction();
+		      // (2) compute alt-az coordinates from XYZ
+		      Vec3d altaz=nav->j2000ToAltAz(n->XYZ); //[0], n->XYZ[1], n->XYZ[2]));
+		      // (2) Affect only if above -2 altitude.
+		      //if (altaz[2]>=-0.035f) 
+		      //{
+			  float dummy_mag;
+			  // (3) compute refraction and extinction effects:
+			  refExt->forward(&altaz, &dummy_mag, 1);
+			  // (4) return to equatorial system, but refracted.
+			  Vec3d refXYZ=nav->altAzToJ2000(altaz); 
+			  sPainter->getProjector()->project(refXYZ,n->XY);
+			  //}
+			  //else
+			  //{
+			  //sPainter->getProjector()->project(n->XYZ,n->XY);
+			  //}
+		    }
+		  //GZ: done
+		  else
+		    {
+		      sPainter->getProjector()->project(n->XYZ,n->XY);
+		    }
+		  n->drawLabel(*sPainter, maxMagLabels);
+		  n->drawHints(*sPainter, maxMagHints);
 		}
 	}
 	float maxMagHints;
 	float maxMagLabels;
 	StelPainter* sPainter;
+        StelCore* core;
 	float angularSizeLimit;
 	bool checkMaxMagHints;
 };
@@ -148,7 +178,7 @@ void NebulaMgr::draw(StelCore* core)
 	float maxMagHints = skyDrawer->getLimitMagnitude()*1.2f-2.f+(hintsAmount*1.2f)-2.f;
 	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.f+(labelsAmount*1.2f)-2.f;
 	sPainter.setFont(nebulaFont);
-	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, hintsFader.getInterstate()>0.0001);
+	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, core, hintsFader.getInterstate()>0.0001);
 	nebGrid.processIntersectingRegions(p, func);
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
@@ -165,6 +195,27 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 	{
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(nav);
+		// GZ: add refraction
+		const StelSkyDrawer *drawer=core->getSkyDrawer();
+		bool withAtmosphericEffects=drawer->getFlagHasAtmosphere();
+		if (withAtmosphericEffects)
+		  {
+		    const RefractionExtinction *refExt=drawer->getRefractionExtinction();
+		    // (2) compute alt-az coordinates from pos
+		    Vec3d altaz=nav->j2000ToAltAz(Vec3d(pos[0], pos[1], pos[2]));
+		    // (2) Affect only if above -2 altitude.
+		    if (altaz[2]>=-0.035f) {
+		      float dummy_mag;
+		      // (3) compute refraction and extinction effects:
+		      refExt->forward(&altaz, &dummy_mag, 1);
+		      // (4) return to equatorial system, but refracted.
+		      Vec3d pos_refracted=nav->altAzToJ2000(altaz); 
+		      pos[0]=pos_refracted[0];
+		      pos[1]=pos_refracted[1];
+		      pos[2]=pos_refracted[2];
+		    }
+		  }
+		// GZ: done
 
 		// Compute 2D pos and return if outside screen
 		if (!prj->projectInPlace(pos)) return;
