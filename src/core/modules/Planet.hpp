@@ -32,7 +32,7 @@
 // The last variable is the userData pointer.
 typedef void (*posFuncType)(double, double*, void*);
 
-typedef void (OsulatingFunctType)(double jd0,double jd,double xyz[3]);
+typedef void (OsculatingFunctType)(double jd0,double jd,double xyz[3]);
 
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
@@ -91,7 +91,7 @@ public:
 		   const QString& texMapName,
 		   posFuncType _coordFunc,
 		   void* userDataPtr,
-		   OsulatingFunctType *osculatingFunc,
+		   OsculatingFunctType *osculatingFunc,
 		   bool closeOrbit,
 		   bool hidden,
 		   bool hasAtmosphere);
@@ -262,7 +262,7 @@ protected:
 	posFuncType coordFunc;
 	void* userDataPtr;
 
-	OsulatingFunctType *const osculatingFunc;
+	OsculatingFunctType *const osculatingFunc;
 	QSharedPointer<Planet> parent;           // Planet parent i.e. sun for earth
 	QList<QSharedPointer<Planet> > satellites;      // satellites of the Planet
 	LinearFader hintFader;
