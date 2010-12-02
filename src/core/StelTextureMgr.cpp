@@ -43,6 +43,9 @@ StelTextureMgr::StelTextureMgr()
 
 StelTextureMgr::~StelTextureMgr()
 {
+	// Hopefully this doesn't take much time.
+	loaderThread->quit();
+	loaderThread->wait();
 }
 
 void StelTextureMgr::init()
