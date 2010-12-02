@@ -101,9 +101,9 @@ void ToastTile::prepareDraw()
 {
 	if (texture.isNull())
 	{
-		qDebug() << "load texture" << imagePath;
+		//qDebug() << "load texture" << imagePath;
 		StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
-		texture = texMgr.createTextureThread(imagePath);
+		texture = texMgr.createTextureThread(imagePath, StelTexture::StelTextureParams(true));
 	}
 	if (texture.isNull() || (!texture->isLoading() && !texture->canBind() && !texture->getErrorMessage().isEmpty()))
 	{
@@ -117,14 +117,15 @@ void ToastTile::prepareDraw()
 	// Get the opengl arrays
 	if (vertexArray.empty())
 	{
-		vertexArray = getGrid()->getVertexArray(level, x, y, level);
-		textureArray = getGrid()->getTextureArray(level, x, y, level);
-		indexArray = getGrid()->getTrianglesIndex(level, x, y, level);
+		int ml = qMin(qMax(3, level+1), getGrid()->getMaxLevel());
+		vertexArray = getGrid()->getVertexArray(level, x, y, ml);
+		textureArray = getGrid()->getTextureArray(level, x, y, ml);
+		indexArray = getGrid()->getTrianglesIndex(level, x, y, ml);
 	}
 
 	if (subTiles.isEmpty() && level < getSurvey()->getMaxLevel())
 	{
-		qDebug() << "Create children";
+		//qDebug() << "Create children";
 		// Create the children
 		for (int i = 0; i < 2; ++i)
 			for (int j = 0; j < 2; ++j)
