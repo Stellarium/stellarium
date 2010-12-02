@@ -47,8 +47,11 @@ ImageLoader::ImageLoader(const QString& path, int delay)
 	QTimer::singleShot(delay, this, SLOT(start()));
 }
 
-ImageLoader::~ImageLoader() {
-	if (networkReply != NULL) {
+void ImageLoader::abort()
+{
+	// XXX: Assert that we are in the main thread.
+	if (networkReply != NULL)
+	{
 		networkReply->abort();
 	}
 }
@@ -119,6 +122,8 @@ StelTexture::~StelTexture()
 		id = 0;
 	}
 	if (loader != NULL) {
+		loader->abort();
+		// Don't forget that the loader has no parent.
 		loader->deleteLater();
 		loader = NULL;
 	}
