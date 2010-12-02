@@ -24,6 +24,9 @@
 #include "StelProjector.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
+#include "StelSkyDrawer.hpp"
+#include "RefractionExtinction.hpp"
+#include "StelLocation.hpp"
 
 #include <QRegExp>
 #include <QDebug>
@@ -45,6 +48,38 @@ Vec3d StelObject::getSideralPos(const StelCore* core) const
 {
 	return Mat4d::zrotation(-core->getNavigator()->getLocalSideralTime())* getEquinoxEquatorialPos(core->getNavigator());
 }
+// GZ: Get observer local sidereal coordinates, deflected by refraction 
+void StelObject::getSideralPosRefr(const StelCore* core, double *ha_ref, double *dec_ref) const
+{
+  const StelNavigator *nav=core->getNavigator();
+  Vec3d altaz=getAltAzPos(nav);
+  double az, alt;
+  StelUtils::rectToSphe(&az, &alt, altaz);
+  az = 2.*M_PI - az;  // S is zero for the formula now coming.
+  
+  const StelSkyDrawer* drawer = core->getSkyDrawer();
+  bool withAtmosphericEffects=drawer->getFlagHasAtmosphere();
+  // Only affect objects higher than -2 degrees.
+  if ( withAtmosphericEffects && altaz[2]>-0.035f ) {
+    // refract.
+    const RefractionExtinction *refExt=drawer->getRefractionExtinction();
+    refExt->addRefraction(alt);
+  }
+  // rebuild hour angle, declination.
+  double lat=(nav->getCurrentLocation().latitude)*M_PI/180.0;
+  *ha_ref=atan2(std::sin(az), std::cos(az)*std::sin(lat)+std::tan(alt)*std::cos(lat));
+  *dec_ref=std::asin(std::sin(lat)*std::sin(alt)-std::cos(lat)*std::cos(alt)*std::cos(az));
+}
+
+// Old version, untested, currently unused.
+//Vec3d StelObject::getSideralPosRefr(const StelCore* core) const
+//{ double ra, dec;
+//  getSideralPosRefr(core, &ra, &dec);
+//  ha=2*M_PI-ha; // recreate inverted data like in getSideralPos()
+//  Vec3d HAdecRef;
+//  StelUtils::spheToRect(ha, dec, HAdecRef);
+//  return HAdecRef;
+//}
 
 // Get observer-centered alt/az position
 Vec3d StelObject::getAltAzPos(const StelNavigator* nav) const
@@ -57,6 +92,10 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 {
 	QString res;
 	const StelNavigator* nav = core->getNavigator();
+	// GZ: added refraction handling.
+	const StelSkyDrawer* drawer = core->getSkyDrawer();
+	bool withAtmosphericEffects=drawer->getFlagHasAtmosphere();
+	const RefractionExtinction *refExt=drawer->getRefractionExtinction();
 
 	if (flags&RaDecJ2000)
 	{
@@ -77,7 +116,20 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		double dec_sideral, ra_sideral;
 		StelUtils::rectToSphe(&ra_sideral,&dec_sideral,getSideralPos(core));
 		ra_sideral = 2.*M_PI-ra_sideral;
-		res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) + "<br>";
+		if (withAtmosphericEffects)
+		  {
+		    res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) + q_("(geom.)") + "<br>";
+		    // GZ: TODO: compute and display "apparent" 
+		    
+		    //StelUtils::rectToSphe(&ra_sideral,&dec_sideral,getSideralPosRefr(core));
+		    //ra_sideral = 2.*M_PI-ra_sideral;
+		    getSideralPosRefr(core, &ra_sideral, &dec_sideral);
+		    res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) + q_("(app.)")  + "<br>";
+		  }
+		else
+		  {
+		    res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) + "<br>";
+		  }
 	}
 
 	if (flags&AltAzi)
@@ -88,7 +140,16 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		az = 3.*M_PI - az;  // N is zero, E is 90 degrees
 		if (az > M_PI*2)
 			az -= M_PI*2;
-		res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + "<br>";
+		if (withAtmosphericEffects)
+		  {
+		    res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + q_("(geom.)") + "<br>";
+		    refExt->addRefraction(alt);
+		    res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + q_("(app.)")  + "<br>";
+		  }
+		else
+		  {
+		  res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + "<br>";
+		  }
 	}
 	return res;
 }
