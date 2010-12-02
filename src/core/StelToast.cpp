@@ -99,6 +99,8 @@ bool ToastTile::isCovered(const SphericalCap& viewportShape) const
 
 void ToastTile::prepareDraw()
 {
+	Q_ASSERT(!empty);
+
 	if (texture.isNull())
 	{
 		//qDebug() << "load texture" << imagePath;
@@ -141,10 +143,11 @@ void ToastTile::drawTile(StelPainter* sPainter)
 	if (!ready)
 		prepareDraw();
 
-	sPainter->setColor(1, 1, 1, 1);
-
-	if (!texture->bind())
+	// Still not ready
+	if (texture.isNull() || !texture->bind())
 		return;
+
+	sPainter->setColor(1, 1, 1, 1);
 
 	sPainter->enableTexture2d(true);
 	Q_ASSERT(vertexArray.size() == textureArray.size());
