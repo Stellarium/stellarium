@@ -47,7 +47,7 @@ ImageLoader::ImageLoader(const QString& path, int delay)
 	QTimer::singleShot(delay, this, SLOT(start()));
 }
 
-void ImageLoader::aborte()
+void ImageLoader::abort()
 {
 	// XXX: Assert that we are in the main thread.
 	if (networkReply != NULL)
@@ -122,7 +122,7 @@ StelTexture::~StelTexture()
 		id = 0;
 	}
 	if (loader != NULL) {
-		loader->aborte();
+		loader->abort();
 		// Don't forget that the loader has no parent.
 		loader->deleteLater();
 		loader = NULL;

@@ -44,7 +44,7 @@ private:
 	friend class StelTexture;
 
 	ImageLoader(const QString& path, int delay);
-	void aborte();
+	void abort();
 
 signals:
 	void finished(QImage);
