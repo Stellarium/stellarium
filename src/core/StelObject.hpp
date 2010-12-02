@@ -98,6 +98,10 @@ public:
 	//! The frame has its Z axis at the planet's current rotation axis
 	Vec3d getSideralPos(const StelCore* core) const;
 
+        //! Get observer-centered hour angle + declination, deflected by refraction 
+        //Vec3d getSideralPosRefr(const StelCore* core) const;
+        void getSideralPosRefr(const StelCore* core, double *ha_ref, double *dec_ref) const;
+
 	//! Get observer-centered alt/az position
 	//! The frame has it's Z axis at the zenith
 	Vec3d getAltAzPos(const StelNavigator* nav) const;
