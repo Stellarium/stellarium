@@ -172,16 +172,13 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 	    if (withAtmosphericEffects)
 	      {
 		const StelNavigator *nav=core->getNavigator();
-		RefractionExtinction refExt;
-		refExt.setPressure(drawer->getAtmospherePressure());
-		refExt.setTemperature(drawer->getAtmosphereTemperature());
-		refExt.setExtinctionCoefficient(drawer->getExtinctionCoefficient());
+		const RefractionExtinction *refExt=drawer->getRefractionExtinction();
 		
 		Vec3d altaz=nav->j2000ToAltAz(Vec3d(v[0], v[1], v[2]));
 		//Vec3d refVec(v[0], v[1], v[2]);
 		float dummy;
 		// compute refraction and extinction effects:
-		refExt.backward(&altaz, &dummy, 1);
+		refExt->backward(&altaz, &dummy, 1);
 		Vec3d v_unrefracted=nav->altAzToJ2000(altaz); 
 		
 		v[0]=v_unrefracted[0]; v[1]=v_unrefracted[1]; v[2]=v_unrefracted[2];
