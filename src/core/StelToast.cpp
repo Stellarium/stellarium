@@ -168,12 +168,13 @@ void ToastTile::draw(StelPainter* sPainter, const SphericalCap& viewportShape, i
 {
 	if (!isVisible(viewportShape, maxVisibleLevel))
 	{
-		free();
+		// Clean up to save memory.
 		foreach (ToastTile* child, subTiles)
 		{
 			child->deleteLater();
 		}
 		subTiles.clear();
+		ready = false;
 		return;
 	}
 	if (level==maxVisibleLevel || !isCovered(viewportShape))
@@ -183,16 +184,6 @@ void ToastTile::draw(StelPainter* sPainter, const SphericalCap& viewportShape, i
 	{
 		child->draw(sPainter, viewportShape, maxVisibleLevel);
 	}
-}
-
-
-void ToastTile::free()
-{
-	texture.clear();
-	Q_ASSERT(texture.isNull());
-	foreach (ToastTile* child, subTiles)
-		child->free();
-	ready = false;
 }
 
 /////// ToastSurvey methods ////////////

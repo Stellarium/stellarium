@@ -57,7 +57,6 @@ protected:
 	//! This is used to avoid drawing tiles that will be covered anyway
 	bool isCovered(const SphericalCap& viewportShape) const;
 	void prepareDraw();
-	void free();
 
 private:
 	//! The level of the tile
