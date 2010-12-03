@@ -87,6 +87,24 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	else
 		location.name = name;
 	location.landscapeKey = name;
+	// New entries by GZ.
+	if (landscapeIni.contains("location/light_pollution"))
+		defaultBortleIndex = landscapeIni.value("location/light_pollution").toInt();
+	else defaultBortleIndex=-1; // mark "invalid/no change".
+	if (defaultBortleIndex<=0) defaultBortleIndex=-1; // also allow neg. values in ini file, signalling "no change".
+	if (defaultBortleIndex>9) defaultBortleIndex=9; // correct bad values.
+	if (landscapeIni.contains("location/display_fog"))
+		defaultFogSetting = landscapeIni.value("location/display_fog").toInt();
+	else defaultFogSetting=-1;
+	if (landscapeIni.contains("location/atmospheric_extinction_coefficient"))
+		defaultExtinctionCoefficient = landscapeIni.value("location/atmospheric_extinction_coefficient").toFloat();
+	else defaultExtinctionCoefficient=-1.0f;
+	if (landscapeIni.contains("location/atmospheric_temperature"))
+		defaultTemperature = landscapeIni.value("location/atmospheric_temperature").toFloat();
+	else defaultTemperature=-1000.0f;
+	if (landscapeIni.contains("location/atmospheric_pressure"))
+		defaultPressure = landscapeIni.value("location/atmospheric_pressure").toFloat();
+	else defaultPressure=-1.0f;
 }
 
 #include <iostream>

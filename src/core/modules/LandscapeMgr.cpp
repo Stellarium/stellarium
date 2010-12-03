@@ -283,10 +283,10 @@ void LandscapeMgr::init()
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
 
 	bool ok =true;
-	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
+	setAtmosphereBortleLightPollution(conf->value("landscape/init_bortle_scale",3).toInt(&ok));
 	if (!ok)
 	{
-		conf->setValue("stars/init_bortle_scale",3);
+		conf->setValue("landscape/init_bortle_scale",3);
 		setAtmosphereBortleLightPollution(3);
 		ok = true;
 	}
@@ -333,6 +333,35 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 	if (getFlagLandscapeSetsLocation())
 	{
 		StelApp::getInstance().getCore()->getNavigator()->moveObserverTo(landscape->getLocation());
+		// GZ Patch: allow change in fog, extinction, refraction parameters and light pollution
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
+
+		if (landscape->getDefaultFogSetting() >-1)
+		  {
+		    setFlagFog((bool) landscape->getDefaultFogSetting());
+		    landscape->setFlagShowFog((bool) landscape->getDefaultFogSetting());
+		  }
+		if (landscape->getDefaultBortleIndex() > 0)
+		  {
+		    setAtmosphereBortleLightPollution(landscape->getDefaultBortleIndex());
+		    // hopefully this makes the GUI aware of the new value(?)
+		    conf->setValue("landscape/init_bortle_scale", landscape->getDefaultBortleIndex());
+		  }
+		if (landscape->getDefaultAtmosphericExtinction() >=0.0f)
+		  {
+		    drawer->setExtinctionCoefficient(landscape->getDefaultAtmosphericExtinction());
+		  }
+		if (landscape->getDefaultAtmosphericTemperature() >=-1000.0f)
+		  {
+		    drawer->setAtmosphereTemperature(landscape->getDefaultAtmosphericTemperature());
+		  }
+		if (landscape->getDefaultAtmosphericPressure() >=0.0f)
+		  {
+		    drawer->setAtmospherePressure(landscape->getDefaultAtmosphericPressure());
+		  }
+
 	}
 	return true;
 }
