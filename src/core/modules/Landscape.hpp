@@ -71,6 +71,16 @@ public:
 
 	//! Return the associated location or NULL
 	const StelLocation& getLocation() const {return location;}
+  	//! Return default Bortle index (light pollution value) or -1 (unknown/no change)
+  	const int getDefaultBortleIndex() const {return defaultBortleIndex;}
+  	//! Return default fog setting (0/1) or -1 (no change)
+    	const int getDefaultFogSetting() const {return defaultFogSetting;}
+  	//! Return default atmosperic extinction, mag/airmass, or -1 (no change)
+    	const float getDefaultAtmosphericExtinction() const {return defaultExtinctionCoefficient;}
+        //! Return default atmospheric temperature, for refraction computation.
+        const float getDefaultAtmosphericTemperature() const {return defaultTemperature;}
+        //! Return default atmospheric temperature, for refraction computation.
+        const float getDefaultAtmosphericPressure() const {return defaultPressure;}
 
 	//! Set the z-axis rotation (offset from original value when rotated
 	void setZRotation(float d) {angleRotateZOffset = d;}
@@ -97,6 +107,11 @@ protected:
 	// GZ patched, these can now be set in landscape.ini:
 	int rows; // horizontal rows
 	int cols; // vertical columns
+        int defaultBortleIndex; // light pollution from landscape.ini, or -1(no change)
+        int defaultFogSetting; // fog flag setting from landscape.ini: -1(no change), 0(off), 1(on)
+        float defaultExtinctionCoefficient; // atmospheric_extinction_coefficient from landscape.ini or -1
+        float defaultTemperature; // atmospheric_temperature from landscape.ini or -1000.0
+        float defaultPressure; // atmospheric_pressure from landscape.ini or -1.0
 
 	typedef struct
 	{
