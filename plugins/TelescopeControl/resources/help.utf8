@@ -18,7 +18,6 @@
 <li><a href="#commands">Telescope commands</a></li>
 <li><a href="#devices">Supported devices</a></li>
 <li><a href="#virtual_telescope">Virtual telescope</a></li>
-<li><a href="#changelog">Changes since version 0.1.9</a></li>
 <li><a href="#authors">Authors</a></li>
 <li><a href="#copyright">Copyright</a></li>
 </ul>
@@ -75,6 +74,7 @@
 <h4><a name="telescope_properties"/>Telescope properties</h4>
 <p><b>Name</b> is the label that will be displayed on the screen next to the telescope reticle.</p>
 <p><b>Connection delay</b>: If the movement of the telescope reticle on the screen is uneven, you can try increasing or decreasing this value.</p>
+<p><b>Coordinate system</b>: Some Celestron telescopes have had their firmware updated and now interpret the coordinates they receive as coordinates that use the equinox of the date (EOD, also known as JNow), making necessary this override.</p>
 <p><b>Start/connect at startup</b>: Check this option if you want Stellarium to attempt to connect to the telescope immediately after it starts. Otherwise, to start the telescope, you need to open the main window, select that telescope and press the "Start/Connect" button.</p>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
@@ -142,20 +142,6 @@
 <p>If you want to test this plug-in without an actual device connected to the computer, choose <b>Nothing, just simulate one (a moving reticle)</b> in the <b>Telescope controlled by:</b> field. It will show a telescope reticle that will react in the same way as the reticle of a real telescope controlled by the plug-in.</p>
 <p>See the section above about <a href="#fovcircles">field of view indicators</a> for a possible practical application (emulating "Telrad" circles).</p>
 <p>This feature is equivalent to the "Dummy" type of telescope supported by <a href="http://stellarium.org/wiki/index.php/Telescope_Control_%28client-server%29" title="Stellarium Wiki: Telescope Control (client-server)">Stellarium's original telescope control feature</a>.</p>
-<p><a href="#top"><small>[Back to top]</small></a><br/></p>
-
-<h3><a name="changelog"/>Changes since version 0.1.9</h3>
-<ul>
-<li>The original telescope control client feature has been removed from Stellarium.</li>
-<li>The Help section has been significantly expanded.</li>
-<li>A bug that made the plug-in send RA=0 for objects with RA between (12 and 24?) on Intel Macs has been fixed. (fix proposed by David Hulse)</li>
-<li>The style of the interface has been changed slightly; the telescope configuration dialog has been redesigned.</li>
-<li>The virtual telescope option has been moved to a more prominent place.</li>
-<li>Two entries for Sky-Watcher telescope mounts have been added to the device models list.</li>
-<li>Log messages and telescope server loading logic have been cleaned.</li>
-<li>An option to toggle the FOV indicators separately from the reticles has been added.</li>
-<li>Two new ways of controlling a device have been added: slewing to the center of the current view and slewing to a given set of celestial coordinates.</li>
-</ul>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 
 <h3><a name="authors"/>Authors</h3>
