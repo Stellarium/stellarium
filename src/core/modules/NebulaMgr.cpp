@@ -115,21 +115,22 @@ struct DrawNebulaFuncObject
 		Nebula* n = obj.staticCast<Nebula>().data();
 		if (n->angularSize>angularSizeLimit || (checkMaxMagHints && n->mag <= maxMagHints))
 		{
-		  // GZ: refract. TODO: DOES NOT WORK LIKE THAT!
+		  // GZ: refract. Moves only symbols and labels.
 		  const StelSkyDrawer *drawer=core->getSkyDrawer();
 		  const StelNavigator* nav = core->getNavigator();
 		  bool withAtmosphericEffects=drawer->getFlagHasAtmosphere();
+	          float refmag_add=0; // value to adjust hints visibility threshold.
+
 		  if (withAtmosphericEffects)
 		    {
 		      const RefractionExtinction *refExt=drawer->getRefractionExtinction();
-		      // (2) compute alt-az coordinates from XYZ
+		      // (1) compute alt-az coordinates from XYZ
 		      Vec3d altaz=nav->j2000ToAltAz(n->XYZ); //[0], n->XYZ[1], n->XYZ[2]));
 		      // (2) Affect only if above -2 altitude.
 		      //if (altaz[2]>=-0.035f) 
 		      //{
-			  float dummy_mag;
-			  // (3) compute refraction and extinction effects:
-			  refExt->forward(&altaz, &dummy_mag, 1);
+			  // (3) compute refraction, compute symbol threshold shift.
+			  refExt->forward(&altaz, &refmag_add, 1);
 			  // (4) return to equatorial system, but refracted.
 			  Vec3d refXYZ=nav->altAzToJ2000(altaz); 
 			  sPainter->getProjector()->project(refXYZ,n->XY);
@@ -144,8 +145,8 @@ struct DrawNebulaFuncObject
 		    {
 		      sPainter->getProjector()->project(n->XYZ,n->XY);
 		    }
-		  n->drawLabel(*sPainter, maxMagLabels);
-		  n->drawHints(*sPainter, maxMagHints);
+		  n->drawLabel(*sPainter, maxMagLabels-refmag_add);
+		  n->drawHints(*sPainter, maxMagHints -refmag_add);
 		}
 	}
 	float maxMagHints;
