@@ -167,6 +167,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		sideTexs[i] = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(landscapeIni.value(QString("landscape/")+tmp).toString(), landscapeId));
 	}
 
+	QMap<int, int> texToSide;
 	// Init sides parameters
 	nbSide = landscapeIni.value("landscape/nbside", 0).toInt();
 	sides = new landscapeTexCoord[nbSide];
@@ -183,7 +184,13 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		sides[i].texCoords[1] = b;
 		sides[i].texCoords[2] = c;
 		sides[i].texCoords[3] = d;
-		// qDebug("%f %f %f %f\n",a,b,c,d);
+
+		// Prior to precomputing the sides, we used to match E to side0
+		// in r4598 the precomputing was put in place and caused a problem for
+		// old_style landscapes which had a z rotation on the side textures
+		// and where side0 did not map to tex0
+		// texToSide is a nasty hack to replace the old behaviour
+		texToSide[i] = texnum;
 	}
 
 	nbDecorRepeat = landscapeIni.value("landscape/nb_decor_repeat", 1).toInt();
@@ -258,21 +265,29 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	{
 		for (int i=0;i<nbSide;i++)
 		{
+			int ti;
+			if (texToSide.contains(i))
+				ti = texToSide[i];
+			else
+			{
+				qDebug() << QString("LandscapeOldStyle::load ERROR: found no corresponding tex value for side%1").arg(i);
+				break;
+			}
 			precompSide.arr.vertex.resize(0);
 			precompSide.arr.texCoords.resize(0);
 			precompSide.arr.indices.resize(0);
-			precompSide.tex=sideTexs[i];
+			precompSide.tex=sideTexs[ti];
 
-			float tx0 = sides[i].texCoords[0];
-			const float d_tx0 = (sides[i].texCoords[2]-sides[i].texCoords[0]) / slices_per_side;
-			const float d_ty = (sides[i].texCoords[3]-sides[i].texCoords[1]) / stacks;
+			float tx0 = sides[ti].texCoords[0];
+			const float d_tx0 = (sides[ti].texCoords[2]-sides[ti].texCoords[0]) / slices_per_side;
+			const float d_ty = (sides[ti].texCoords[3]-sides[ti].texCoords[1]) / stacks;
 			for (int j=0;j<slices_per_side;j++)
 			{
 				const float y1 = y0*ca - x0*sa;
 				const float x1 = y0*sa + x0*ca;
 				const float tx1 = tx0 + d_tx0;
 				float z = z0;
-				float ty0 = sides[i].texCoords[1];
+				float ty0 = sides[ti].texCoords[1];
 				for (int k=0;k<=stacks*2;k+=2)
 				{
 					precompSide.arr.texCoords << Vec2f(tx0, ty0) << Vec2f(tx1, ty0);
