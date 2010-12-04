@@ -463,7 +463,9 @@ void Oculars::enableOcular(bool enableOcularMode)
 		// we didn't accept the new status - make sure the toolbar button reflects this
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		Q_ASSERT(gui);
+		disconnect(gui->getGuiActions("actionShow_Ocular"), SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
 		gui->getGuiActions("actionShow_Ocular")->setChecked(false);
+		connect(gui->getGuiActions("actionShow_Ocular"), SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
 	} else {
 		if (selectedOcularIndex != -1) {
 			// remove the usage label if it is being displayed.
@@ -628,7 +630,11 @@ void Oculars::initializeActivationActions()
 							 N_("Plugin Key Bindings"),
 							 true);
 	gui->getGuiActions("actionShow_Ocular")->setChecked(flagShowOculars);
-	connect(gui->getGuiActions("actionShow_Ocular"), SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
+	//This action needs to be connected to the enableOcular() slot after
+	//the necessary button is created to prevent the button from being checked
+	//the first time this action is checked. See:
+	//http://doc.qt.nokia.com/4.7/signalsandslots.html#signals
+
 	gui->addGuiActions("actionShow_Ocular_Window",
 							 N_("Oculars configuration window"),
 							 settings->value("bindings/toggle_config_dialog", "ALT+O").toString(),
@@ -659,6 +665,7 @@ void Oculars::initializeActivationActions()
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable create toolbar button for Oculars plugin: " << e.what();
 	}
+	connect(gui->getGuiActions("actionShow_Ocular"), SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
 }
 
 void Oculars::initializeActions()
