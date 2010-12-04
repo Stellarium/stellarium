@@ -401,20 +401,44 @@ void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QV
 	// draw the inner polygon
 	slices_step>>=1;
 	cos_sin_theta_p=cos_sin_theta;
-	x = rad[0]*cos_sin_theta_p[0];
-	y = rad[0]*cos_sin_theta_p[1];
-	texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-	vertexArr << x << y << 0;
-	cos_sin_theta_p+=2*slices_step;
-	x = rad[0]*cos_sin_theta_p[0];
-	y = rad[0]*cos_sin_theta_p[1];
-	texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-	vertexArr << x << y << 0;
-	cos_sin_theta_p+=2*slices_step;
-	x = rad[0]*cos_sin_theta_p[0];
-	y = rad[0]*cos_sin_theta_p[1];
-	texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-	vertexArr << x << y << 0;
+
+	if (slices==1)
+	{
+		x = rad[0]*cos_sin_theta_p[0];
+		y = rad[0]*cos_sin_theta_p[1];
+		texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+		vertexArr << x << y << 0;
+		cos_sin_theta_p+=2*slices_step;
+		x = rad[0]*cos_sin_theta_p[0];
+		y = rad[0]*cos_sin_theta_p[1];
+		texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+		vertexArr << x << y << 0;
+		cos_sin_theta_p+=2*slices_step;
+		x = rad[0]*cos_sin_theta_p[0];
+		y = rad[0]*cos_sin_theta_p[1];
+		texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+		vertexArr << x << y << 0;
+	}
+	else
+	{
+		j=0;
+		while (j<slices)
+		{
+			texCoordArr << 0.5f << 0.5f;
+			vertexArr << 0 << 0 << 0;
+			x = rad[0]*cos_sin_theta_p[0];
+			y = rad[0]*cos_sin_theta_p[1];
+			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+			vertexArr << x << y << 0;
+			j+=slices_step;
+			cos_sin_theta_p+=2*slices_step;
+			x = rad[0]*cos_sin_theta_p[0];
+			y = rad[0]*cos_sin_theta_p[1];
+			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+			vertexArr << x << y << 0;
+		}
+	}
+
 
 }
 
