@@ -665,10 +665,6 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	}
 	else
 	{
-//		static unsigned int cacheNumLookups = 0;
-//		static unsigned int cacheNumHits = 0;
-//		++cacheNumLookups;
-
 		static const int cacheLimitByte = 7000000;
 		static QCache<QByteArray,StringTexture> texCache(cacheLimitByte);
 		int pixelSize = qPainter->font().pixelSize();
@@ -699,16 +695,8 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		else
 		{
 			// The texture was found in the cache
-//			++cacheNumHits;
 			glBindTexture(GL_TEXTURE_2D, cachedTex->texture);
 		}
-		
-//		if (cacheNumLookups % 1000 == 0)
-//		{
-//			qDebug() << "Cache hits: " << cacheNumHits << "/" << cacheNumLookups << "(" << (float)cacheNumHits/cacheNumLookups*100.0 << "%)";
-//			cacheNumHits=0;
-//			cacheNumLookups=0;
-//		}
 
 		// Translate/rotate
 		if (!noGravity)
@@ -727,8 +715,8 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			const float sinr = std::sin(angleDeg * M_PI/180.);
 			for (int i = 0; i < 8; i+=2)
 			{
-				vertexData[i] = x + (cachedTex->width*vertexBase[i]+xshift) * cosr - (cachedTex->height*vertexBase[i+1]+yshift) * sinr;
-				vertexData[i+1] = y  + (cachedTex->width*vertexBase[i]+xshift) * sinr + (cachedTex->height*vertexBase[i+1]+yshift) * cosr;
+				vertexData[i] = int(x + (cachedTex->width*vertexBase[i]+xshift) * cosr - (cachedTex->height*vertexBase[i+1]+yshift) * sinr);
+				vertexData[i+1] = int(y  + (cachedTex->width*vertexBase[i]+xshift) * sinr + (cachedTex->height*vertexBase[i+1]+yshift) * cosr);
 			}
 		}
 		else
@@ -737,8 +725,8 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			for (int i = 0; i < 8; i+=2)
 			{
-				vertexData[i] = x + cachedTex->width*vertexBase[i]+xshift;
-				vertexData[i+1] = y  + cachedTex->height*vertexBase[i+1]+yshift;
+				vertexData[i] = int(x + cachedTex->width*vertexBase[i]+xshift);
+				vertexData[i+1] = int(y  + cachedTex->height*vertexBase[i+1]+yshift);
 			}
 		}
 
