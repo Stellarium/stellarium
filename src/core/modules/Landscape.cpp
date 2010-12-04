@@ -256,8 +256,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	const float alpha = 2.f*M_PI/(nbDecorRepeat*nbSide*slices_per_side);
 	const float ca = std::cos(alpha);
 	const float sa = std::sin(alpha);
-	float y0 = radius*std::cos((angleRotateZ)*M_PI/180.f);
-	float x0 = radius*std::sin((angleRotateZ)*M_PI/180.f);
+	float y0 = radius*std::cos(angleRotateZ*M_PI/180.f);
+	float x0 = radius*std::sin(angleRotateZ*M_PI/180.f);
 
 	LOSSide precompSide;
 	precompSide.arr.primitiveType=StelVertexArray::Triangles;
