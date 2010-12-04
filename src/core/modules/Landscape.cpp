@@ -222,6 +222,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	int slices_per_side = 3*64/(nbDecorRepeat*nbSide);
 	if (slices_per_side<=0)
 		slices_per_side = 1;
+
 	// draw a fan disk instead of a ordinary disk to that the inner slices
 	// are not so slender. When they are too slender, culling errors occur
 	// in cylinder projection mode.
@@ -237,8 +238,6 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 	// Precompute the vertex arrays for side display
 	static const int stacks = (calibrated ? 16 : 8); // GZ: 8->16, I need better precision.
-	// make slices_per_side=(3<<K) so that the innermost polygon of the
-	// fandisk becomes a triangle:
 	const double z0 = calibrated ?
 	// GZ: For calibrated, we use z=decorAngleShift...(decorAltAngle-decorAngleShift), but we must compute the tan in the loop.
 	decorAngleShift : (tanMode ? radius * std::tan(decorAngleShift*M_PI/180.f) : radius * std::sin(decorAngleShift*M_PI/180.f));
@@ -250,8 +249,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	const float alpha = 2.f*M_PI/(nbDecorRepeat*nbSide*slices_per_side);
 	const float ca = std::cos(alpha);
 	const float sa = std::sin(alpha);
-	float y0 = radius*std::cos((angleRotateZ+angleRotateZOffset)*M_PI/180.f);
-	float x0 = radius*std::sin((angleRotateZ+angleRotateZOffset)*M_PI/180.f);
+	float y0 = radius*std::cos((angleRotateZ)*M_PI/180.f);
+	float x0 = radius*std::sin((angleRotateZ)*M_PI/180.f);
 
 	LOSSide precompSide;
 	precompSide.arr.primitiveType=StelVertexArray::Triangles;
@@ -352,7 +351,8 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
 	// and the texture in between is correctly stretched.
 	// TODO: (1) Replace fog cylinder by similar texture, which could be painted as image layer in Photoshop/Gimp.
 	//       (2) Implement calibrated && tan_mode
-	sPainter.setProjector(core->getProjection(StelCore::FrameAltAz));
+	Mat4d mat = core->getNavigator()->getAltAzModelViewMat() * Mat4d::zrotation(-angleRotateZOffset*M_PI/180.f);
+	sPainter.setProjector(core->getProjection(mat));
 
 	if (!landFader.getInterstate())
 		return;
@@ -427,7 +427,7 @@ void LandscapeFisheye::draw(StelCore* core)
 	if(!landFader.getInterstate()) return;
 
 	StelNavigator* nav = core->getNavigator();
-	const StelProjectorP prj = core->getProjection(nav->getAltAzModelViewMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
+	const StelProjectorP prj = core->getProjection(nav->getAltAzModelViewMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
 	StelPainter sPainter(prj);
 
 	// Normal transparency mode
@@ -491,7 +491,7 @@ void LandscapeSpherical::draw(StelCore* core)
 	if(!landFader.getInterstate()) return;
 
 	StelNavigator* nav = core->getNavigator();
-	const StelProjectorP prj = core->getProjection(nav->getAltAzModelViewMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*2*M_PI/360.))));
+	const StelProjectorP prj = core->getProjection(nav->getAltAzModelViewMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
 	StelPainter sPainter(prj);
 
 	// Normal transparency mode
