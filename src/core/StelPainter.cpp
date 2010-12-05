@@ -401,20 +401,44 @@ void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QV
 	// draw the inner polygon
 	slices_step>>=1;
 	cos_sin_theta_p=cos_sin_theta;
-	x = rad[0]*cos_sin_theta_p[0];
-	y = rad[0]*cos_sin_theta_p[1];
-	texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-	vertexArr << x << y << 0;
-	cos_sin_theta_p+=2*slices_step;
-	x = rad[0]*cos_sin_theta_p[0];
-	y = rad[0]*cos_sin_theta_p[1];
-	texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-	vertexArr << x << y << 0;
-	cos_sin_theta_p+=2*slices_step;
-	x = rad[0]*cos_sin_theta_p[0];
-	y = rad[0]*cos_sin_theta_p[1];
-	texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-	vertexArr << x << y << 0;
+
+	if (slices==1)
+	{
+		x = rad[0]*cos_sin_theta_p[0];
+		y = rad[0]*cos_sin_theta_p[1];
+		texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+		vertexArr << x << y << 0;
+		cos_sin_theta_p+=2*slices_step;
+		x = rad[0]*cos_sin_theta_p[0];
+		y = rad[0]*cos_sin_theta_p[1];
+		texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+		vertexArr << x << y << 0;
+		cos_sin_theta_p+=2*slices_step;
+		x = rad[0]*cos_sin_theta_p[0];
+		y = rad[0]*cos_sin_theta_p[1];
+		texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+		vertexArr << x << y << 0;
+	}
+	else
+	{
+		j=0;
+		while (j<slices)
+		{
+			texCoordArr << 0.5f << 0.5f;
+			vertexArr << 0 << 0 << 0;
+			x = rad[0]*cos_sin_theta_p[0];
+			y = rad[0]*cos_sin_theta_p[1];
+			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+			vertexArr << x << y << 0;
+			j+=slices_step;
+			cos_sin_theta_p+=2*slices_step;
+			x = rad[0]*cos_sin_theta_p[0];
+			y = rad[0]*cos_sin_theta_p[1];
+			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+			vertexArr << x << y << 0;
+		}
+	}
+
 
 }
 
@@ -641,10 +665,6 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	}
 	else
 	{
-//		static unsigned int cacheNumLookups = 0;
-//		static unsigned int cacheNumHits = 0;
-//		++cacheNumLookups;
-
 		static const int cacheLimitByte = 7000000;
 		static QCache<QByteArray,StringTexture> texCache(cacheLimitByte);
 		int pixelSize = qPainter->font().pixelSize();
@@ -675,16 +695,8 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		else
 		{
 			// The texture was found in the cache
-//			++cacheNumHits;
 			glBindTexture(GL_TEXTURE_2D, cachedTex->texture);
 		}
-		
-//		if (cacheNumLookups % 1000 == 0)
-//		{
-//			qDebug() << "Cache hits: " << cacheNumHits << "/" << cacheNumLookups << "(" << (float)cacheNumHits/cacheNumLookups*100.0 << "%)";
-//			cacheNumHits=0;
-//			cacheNumLookups=0;
-//		}
 
 		// Translate/rotate
 		if (!noGravity)
@@ -703,8 +715,8 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			const float sinr = std::sin(angleDeg * M_PI/180.);
 			for (int i = 0; i < 8; i+=2)
 			{
-				vertexData[i] = x + (cachedTex->width*vertexBase[i]+xshift) * cosr - (cachedTex->height*vertexBase[i+1]+yshift) * sinr;
-				vertexData[i+1] = y  + (cachedTex->width*vertexBase[i]+xshift) * sinr + (cachedTex->height*vertexBase[i+1]+yshift) * cosr;
+				vertexData[i] = int(x + (cachedTex->width*vertexBase[i]+xshift) * cosr - (cachedTex->height*vertexBase[i+1]+yshift) * sinr);
+				vertexData[i+1] = int(y  + (cachedTex->width*vertexBase[i]+xshift) * sinr + (cachedTex->height*vertexBase[i+1]+yshift) * cosr);
 			}
 		}
 		else
@@ -713,8 +725,8 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			for (int i = 0; i < 8; i+=2)
 			{
-				vertexData[i] = x + cachedTex->width*vertexBase[i]+xshift;
-				vertexData[i+1] = y  + cachedTex->height*vertexBase[i+1]+yshift;
+				vertexData[i] = int(x + cachedTex->width*vertexBase[i]+xshift);
+				vertexData[i+1] = int(y  + cachedTex->height*vertexBase[i+1]+yshift);
 			}
 		}
 
