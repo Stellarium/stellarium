@@ -450,7 +450,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				mean_longitude = mean_anomaly + long_of_pericenter;
 			}
 
-			// when the parent is the sun use ecliptic rathe than sun equator:
+			// when the parent is the sun use ecliptic rather than sun equator:
 			const double parentRotObliquity = parent->getParent()
 											  ? parent->getRotObliquity()
 											  : 0.0;
@@ -1068,7 +1068,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 	return result;
 }
 
-// Update i18 names from english names according to passed translator
+// Update i18 names from english names according to current translator
 void SolarSystem::updateI18n()
 {
 	StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getAppStelTranslator();
