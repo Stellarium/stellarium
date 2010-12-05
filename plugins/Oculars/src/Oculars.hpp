@@ -149,6 +149,7 @@ private:
 	bool flagShowCrosshairs;	//!< flag used to track in crosshairs should be rendered in the ocular view.
 	bool flagShowTelrad;		//!< If true, display the Telrad overlay.
 	int usageMessageLabelID;	//!< the id of the label showing the usage message. -1 means it's not displayed.
+	int noEntitiesLabelID;	//!< the id of the label showing that there are no telescopes or oclars. -1 means it's not displayed.
 
 	bool flagAzimuthalGrid;		//!< Flag to track if AzimuthalGrid was displayed at activation.
 	bool flagEquatorGrid;		//!< Flag to track if EquatorGrid was displayed at activation.
