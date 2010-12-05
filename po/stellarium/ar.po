@@ -7,59 +7,59 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-19 15:26+0200\n"
-"PO-Revision-Date: 2010-05-19 23:41+0000\n"
-"Last-Translator: kajaji <Unknown>\n"
+"POT-Creation-Date: 2010-11-19 19:55+0200\n"
+"PO-Revision-Date: 2010-12-02 22:13+0000\n"
+"Last-Translator: kutaibaa akraa <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-26 09:36+0000\n"
+"X-Launchpad-Export-Date: 2010-12-05 08:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/translations.h:44
-msgid "Ganymede"
-msgstr "غانيميد"
+#: src/core/modules/GridLinesMgr.cpp:516
+msgid "Meridian"
+msgstr "خط الزوال"
 
-#: src/translations.h:59
-msgid "Charon"
-msgstr "كيرون"
+#: src/core/modules/GridLinesMgr.cpp:520
+msgid "Ecliptic"
+msgstr "الخط الكسوفي"
 
-#: src/translations.h:157
-msgid "Update me via Internet: "
-msgstr "حدث بواسطة الإنترنت‎: "
+#: src/core/modules/GridLinesMgr.cpp:524
+msgid "Equator"
+msgstr "خط الاستواء"
 
-#: src/core/modules/LandscapeMgr.cpp:401
+#: src/core/modules/LandscapeMgr.cpp:447
 msgid "Author: "
 msgstr "المؤلف: ‎ "
 
-#: src/core/modules/LandscapeMgr.cpp:404
+#: src/core/modules/LandscapeMgr.cpp:450
 msgid "Location: "
 msgstr "الموقع‎: "
 
-#: src/core/modules/LandscapeMgr.cpp:409
+#: src/core/modules/LandscapeMgr.cpp:455
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 متر"
 
-#: src/core/modules/LandscapeMgr.cpp:412
+#: src/core/modules/LandscapeMgr.cpp:458
 msgid "Planet: "
 msgstr "الكوكب‎: "
 
 #: src/core/modules/Nebula.cpp:92
 #, qt-format
 msgid "Type: <b>%1</b>"
-msgstr "النوع‎: <b>%1</b>"
+msgstr "‎النوع:‎ <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:95 src/core/modules/Planet.cpp:119
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
-msgstr "القدر‎: <b>%1</b>"
+msgstr "‎القدر:‎ <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:100
 #, qt-format
 msgid "Size: %1"
-msgstr "الحجم‎: %1"
+msgstr "‎الحجم:‎ %1"
 
 #: src/core/modules/Nebula.cpp:269
 msgid "Galaxy"
@@ -67,11 +67,11 @@ msgstr "مجرة"
 
 #: src/core/modules/Nebula.cpp:272
 msgid "Open cluster"
-msgstr "عنقود مفتوح"
+msgstr "عنقود نجمي مفتوح"
 
 #: src/core/modules/Nebula.cpp:275
 msgid "Globular cluster"
-msgstr "عنقود نجمي كروي"
+msgstr "عنقود كروي"
 
 #: src/core/modules/Nebula.cpp:278
 msgid "Nebula"
@@ -96,39 +96,39 @@ msgstr "نوع غير موثَق"
 #: src/core/modules/Planet.cpp:122 src/core/modules/StarWrapper.cpp:114
 #, qt-format
 msgid "Absolute Magnitude: %1"
-msgstr "القدر المطلق‎: %1"
+msgstr "‎القدر المطلق:‎ %1"
 
 #: src/core/modules/Planet.cpp:129
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
-msgstr "المسافة‎: %1 وحدة فلكية"
+msgstr "وحدة فلكية %1 :المسافة"
 
 #: src/core/modules/Planet.cpp:133
 #, qt-format
 msgid "Apparent diameter: %1"
-msgstr "القطر الظاهري‎: %1"
+msgstr "‎القطر الظاهري‎: %1"
 
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:110
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr "القدر‎: <b>%1</b> (B-V: %2)"
+msgstr "‎القدر‎: <b>%1</b> (B-V: %2)"
 
 #: src/core/modules/StarWrapper.cpp:120
 #, qt-format
 msgid "Spectral Type: %1"
-msgstr "النوع الطيفي‎: %1"
+msgstr "‎النوع الطيفي:‎ %1"
 
 #: src/core/modules/StarWrapper.cpp:124
 #, qt-format
 msgid "Distance: %1 Light Years"
-msgstr "المسافة‎: %1  سنة ضوئية"
+msgstr "سنة ضوئية %1 :المسافة"
 
 #: src/core/modules/StarWrapper.cpp:127
 #, qt-format
 msgid "Parallax: %1\""
-msgstr "اختلاف المنظر‎: %1\""
+msgstr "‎اختلاف المنظر:‎ %1\""
 
-#: src/core/StelProjector.cpp:61
+#: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
 msgstr "أقصى حقل رؤية: ‏ "
 
@@ -199,7 +199,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:223
 msgid "Cylinder"
-msgstr "الإسقاط الإسطواني"
+msgstr "الاسطوانة"
 
 #: src/core/StelProjectorClasses.cpp:228
 msgid ""
@@ -211,7 +211,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:270
 msgid "Mercator"
-msgstr "إسقاط مركاتوري"
+msgstr "مركاتوري"
 
 #: src/core/StelProjectorClasses.cpp:275
 msgid ""
@@ -237,71 +237,71 @@ msgstr ""
 #: src/core/StelObject.cpp:65
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
-msgstr "المطلع المستقيم/الميل (J2000)‎: %1/%2"
+msgstr "‎الميل / المطلع المستقيم (J2000):‎ %1/%2"
 
 #: src/core/StelObject.cpp:72
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr "‏(الحالي) المطلع المستقيم/الميل‎: %1/%2"
+msgstr "‎الميل / المطلع المستقيم ‎(‎الحالي‎):‎ %1/%2"
 
 #: src/core/StelObject.cpp:80
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr "زاوية الساعة/الميل‎:  %1/%2"
+msgstr "‎الميل / زاوية الساعة:‎ %1/%2"
 
 #: src/core/StelObject.cpp:91
 #, qt-format
 msgid "Az/Alt: %1/%2"
-msgstr "سمتي/إرتفاع زاوي‎: %2/%1"
+msgstr "‎ارتفاع زاوي / سمتي:‎ %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:285
+#: src/gui/ConfigurationDialog.cpp:294
 msgid "Select screenshot directory"
 msgstr "أختر مجلد حفظ لقطة الشاشة"
 
-#: src/gui/ConfigurationDialog.cpp:451
+#: src/gui/ConfigurationDialog.cpp:460
 #, qt-format
 msgid "Startup FOV: %1%2"
-msgstr "حقل الرؤية عند بدء البرنامج ‎: %1%2"
+msgstr "حقل الرؤية عند بدء البرنامج: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:459
+#: src/gui/ConfigurationDialog.cpp:468
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr "اتجاه الرؤية عند بدء البرنامج سمت/ارتفاع‎: %1/%2"
+msgstr "اتجاه الرؤية عند بدء البرنامج سمت/ارتفاع: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:495
+#: src/gui/ConfigurationDialog.cpp:508
 msgid "Authors"
 msgstr "المؤلفون"
 
-#: src/gui/ConfigurationDialog.cpp:499 src/gui/ViewDialog.cpp:337
+#: src/gui/ConfigurationDialog.cpp:512 src/gui/ViewDialog.cpp:345
 msgid "Contact"
 msgstr "مراسلة"
 
-#: src/gui/ConfigurationDialog.cpp:571
+#: src/gui/ConfigurationDialog.cpp:584
 msgid "Author"
 msgstr "المؤلف"
 
-#: src/gui/ConfigurationDialog.cpp:572
+#: src/gui/ConfigurationDialog.cpp:585
 msgid "License"
 msgstr "الرخصة"
 
-#: src/gui/ConfigurationDialog.cpp:603
+#: src/gui/ConfigurationDialog.cpp:614
 msgid "Running script: "
 msgstr "البرنامج النصي الشغَال‎: "
 
-#: src/gui/ConfigurationDialog.cpp:610
+#: src/gui/ConfigurationDialog.cpp:621
 msgid "Running script: [none]"
 msgstr "البرنامج النصي الشغَال‎: [لايوجد]"
 
-#: src/gui/ConfigurationDialog.cpp:653
+#: src/gui/ConfigurationDialog.cpp:664
 msgid "Finished downloading all star catalogs!"
 msgstr "انتهى تحميل جميع أدلة النجوم!‏"
 
-#: src/gui/ConfigurationDialog.cpp:662
+#: src/gui/ConfigurationDialog.cpp:673
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "اجلب الدليل %1 من %2"
 
-#: src/gui/ConfigurationDialog.cpp:664
+#: src/gui/ConfigurationDialog.cpp:675
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -312,7 +312,7 @@ msgstr ""
 "عدد النجوم: %2 مليون\n"
 "نطاق قدر لمعان النجوم: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:673
+#: src/gui/ConfigurationDialog.cpp:684
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -320,7 +320,7 @@ msgstr ""
 "أنتهى تحميل أدلة النجوم الجديدة\n"
 "أعد تشغيل برنامج ستيللاريوم لرؤيتها.‏"
 
-#: src/gui/ConfigurationDialog.cpp:711 src/gui/ConfigurationDialog.cpp:745
+#: src/gui/ConfigurationDialog.cpp:722 src/gui/ConfigurationDialog.cpp:756
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -329,7 +329,7 @@ msgstr ""
 "خطأ في تحميل %1‎:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:716
+#: src/gui/ConfigurationDialog.cpp:727
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -338,11 +338,11 @@ msgstr ""
 "جاري التحميل %1 ...‏\n"
 "(تستطيع إغلاق هذه النافذة)"
 
-#: src/gui/ConfigurationDialog.cpp:796
+#: src/gui/ConfigurationDialog.cpp:807
 msgid "Verifying file integrity..."
 msgstr "جاري التأكد من صحة الملف...‏"
 
-#: src/gui/ConfigurationDialog.cpp:800
+#: src/gui/ConfigurationDialog.cpp:811
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -534,15 +534,15 @@ msgstr "أسماء المجموعات النجمية"
 msgid "Constellation boundaries"
 msgstr "حدود المجموعات النجمية"
 
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1027
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1033
 msgid "Azimuthal grid"
 msgstr "الشبكة السمتية"
 
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1025
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1031
 msgid "Equatorial grid"
 msgstr "الشبكة الاستوائية"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1026
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1032
 msgid "Equatorial J2000 grid"
 msgstr "الشبكة الاستوائية (J2000)"
 
@@ -550,19 +550,19 @@ msgstr "الشبكة الاستوائية (J2000)"
 msgid "Galactic grid"
 msgstr "شبكة الإحداثيات المجرية"
 
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1030
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1036
 msgid "Ecliptic line"
 msgstr "الخط الكسوفي"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1028
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1034
 msgid "Equator line"
 msgstr "خط الاستواء"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1029
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1035
 msgid "Meridian line"
 msgstr "خط الزوال"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1031
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1037
 msgid "Cardinal points"
 msgstr "الجهات الاربع"
 
@@ -570,7 +570,7 @@ msgstr "الجهات الاربع"
 msgid "Ground"
 msgstr "الأرض"
 
-#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1009
+#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1015
 msgid "Atmosphere"
 msgstr "الغلاف الجوي"
 
@@ -578,7 +578,7 @@ msgstr "الغلاف الجوي"
 msgid "Fog"
 msgstr "الضباب"
 
-#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1014
+#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1020
 msgid "Nebulas"
 msgstr "السدم"
 
@@ -586,7 +586,7 @@ msgstr "السدم"
 msgid "Nebulas background images"
 msgstr "صور السدم الخلفية"
 
-#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:995 src/ui_viewDialog.h:1013
+#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1001 src/ui_viewDialog.h:1019
 msgid "Stars"
 msgstr "النجوم"
 
@@ -650,7 +650,7 @@ msgstr "نافذة الموقع"
 msgid "Script console window"
 msgstr "نافذة شاشة السكريبت"
 
-#: src/gui/StelGui.cpp:140 src/ui_dateTimeDialogGui.h:295
+#: src/gui/StelGui.cpp:140 src/ui_dateTimeDialogGui.h:294
 msgid "Date and Time"
 msgstr "التاريخ والوقت"
 
@@ -769,37 +769,115 @@ msgstr "إظهار وإخفاء شريط الأدوات الرئيس والجا�
 #: src/gui/StelGuiItems.cpp:541
 #, no-c-format, qt-format
 msgid "%1m"
-msgstr "%1 متر"
+msgstr "‏%1 متر"
 
-#: src/gui/ViewDialog.cpp:391
+#: src/gui/ViewDialog.cpp:399
 msgid "No description"
 msgstr "لا يوجد وصف"
 
-#: src/gui/ViewDialog.cpp:451
+#: src/gui/ViewDialog.cpp:467
 msgid "No shooting stars"
 msgstr "لا يوجد شهب"
 
-#: src/gui/ViewDialog.cpp:454
+#: src/gui/ViewDialog.cpp:470
 msgid "Normal rate"
 msgstr "المعدل الطبيعي للشهب"
 
-#: src/gui/ViewDialog.cpp:457
+#: src/gui/ViewDialog.cpp:473
 msgid "Standard Perseids rate"
 msgstr "المعدل القياسي للبرشاويات"
 
-#: src/gui/ViewDialog.cpp:460
+#: src/gui/ViewDialog.cpp:476
 msgid "Exceptional Leonid rate"
 msgstr "المعدل الاستثنائي للأسديات"
 
-#: src/gui/ViewDialog.cpp:463
+#: src/gui/ViewDialog.cpp:479
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "المعدل الأعلى (الأسديات لعام 1966)‏"
 
-#: src/gui/LocationDialog.cpp:340
+#: src/gui/LocationDialog.cpp:331
 msgid "New Location"
 msgstr "موقع جديد"
 
-#: src/main.cpp:317
+#: src/gui/AddRemoveLandscapesDialog.cpp:113
+msgid "Select a ZIP archive that contains a Stellarium landscape"
+msgstr ""
+"اختر مجلداً مضغوطاً يحتوي على ملفات مناظر الرصد الطبيعية لبرنامج ستيللاريوم"
+
+#. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
+#: src/gui/AddRemoveLandscapesDialog.cpp:115
+msgid "ZIP archives"
+msgstr "ZIP مجلدات"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:128
+#, qt-format
+msgid "Landscape \"%1\" has been installed successfully."
+msgstr "منظر الرصد الطبيعي \"%1\" تم تركيبه بنجاح"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:129
+#: src/gui/AddRemoveLandscapesDialog.cpp:156
+msgid "Success"
+msgstr "نجاح"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:142
+#: src/gui/AddRemoveLandscapesDialog.cpp:212
+#: src/gui/AddRemoveLandscapesDialog.cpp:221
+#: src/gui/AddRemoveLandscapesDialog.cpp:229
+msgid "No landscape was installed."
+msgstr "لم يتم تركيب أي منظر رصد طبيعي"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:143
+#: src/gui/AddRemoveLandscapesDialog.cpp:167
+#: src/gui/AddRemoveLandscapesDialog.cpp:216
+#: src/gui/AddRemoveLandscapesDialog.cpp:222
+#: src/gui/AddRemoveLandscapesDialog.cpp:230
+#: src/gui/AddRemoveLandscapesDialog.cpp:240
+msgid "Error!"
+msgstr "! خطأ"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:155
+#, qt-format
+msgid "Landscape \"%1\" has been removed successfully."
+msgstr "منظر الرصد الطبيعي \"%1\" تم حذفه بنجاح"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:166
+#: src/gui/AddRemoveLandscapesDialog.cpp:236
+msgid "The selected landscape could not be (completely) removed."
+msgstr "لم يمكن حذف ملفات منظر الرصد الطبيعي بالكامل"
+
+#. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
+#: src/gui/AddRemoveLandscapesDialog.cpp:189
+#, qt-format
+msgid "Size on disk: %1 MiB"
+msgstr "MiB الحجم على قرص التخزين: %1"
+
+#. TRANSLATORS: The parameter is a file/directory path that may be quite long.
+#: src/gui/AddRemoveLandscapesDialog.cpp:215
+#, qt-format
+msgid "Stellarium cannot open for reading or writing %1"
+msgstr "لم يتمكن ستيللاريوم من فتح التالي للقراءة أو الكتابة %1"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:221
+msgid ""
+"The selected file is not a ZIP archive or does not contain a Stellarium "
+"landscape."
+msgstr ""
+"الملف المختار ليس ملفاً مضغوطاً أو أنه لا يحتوي على ملفات مناظر الرصد "
+"الطبيعية"
+
+#. TRANSLATORS: The parameter is the duplicate name or identifier.
+#: src/gui/AddRemoveLandscapesDialog.cpp:228
+#, qt-format
+msgid "A landscape with the same name or identifier (%1) already exists."
+msgstr "يوجد ملف بنفس الاسم أو المعرف (%1)."
+
+#. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
+#: src/gui/AddRemoveLandscapesDialog.cpp:239
+#, qt-format
+msgid "You can remove it manually by deleting the following directory: %1"
+msgstr "تستطيع حذفه يدوياً بحذف الدليل التالي: %1"
+
+#: src/main.cpp:335
 msgid "This system does not support OpenGL."
 msgstr "(OpenGL)هذا النظام لا يدعم مكتبة الرسومات المفتوحة"
 
@@ -821,7 +899,7 @@ msgstr "الأرض"
 
 #: src/translations.h:37
 msgid "Moon"
-msgstr "القمر‎"
+msgstr "القمر‎‏"
 
 #: src/translations.h:38
 msgid "Mars"
@@ -836,713 +914,818 @@ msgid "Phobos"
 msgstr "فوبوس"
 
 #: src/translations.h:41
+msgid "Ceres"
+msgstr "سيريز"
+
+#: src/translations.h:42
+msgid "Pallas"
+msgstr "بالس"
+
+#: src/translations.h:43
+msgid "Juno"
+msgstr "جونو"
+
+#: src/translations.h:44
+msgid "Vesta"
+msgstr "فيستا"
+
+#: src/translations.h:45
 msgid "Jupiter"
 msgstr "المشتري"
 
-#: src/translations.h:42
+#: src/translations.h:46
 msgid "Io"
 msgstr "آيو"
 
-#: src/translations.h:43
+#: src/translations.h:47
 msgid "Europa"
 msgstr "يوروبا"
 
-#: src/translations.h:45
+#: src/translations.h:48
+msgid "Ganymede"
+msgstr "جانيميد"
+
+#: src/translations.h:49
 msgid "Callisto"
 msgstr "كاليستو"
 
-#: src/translations.h:46
+#: src/translations.h:50
 msgid "Saturn"
 msgstr "زحل"
 
-#: src/translations.h:47
+#: src/translations.h:51
 msgid "Mimas"
 msgstr "ميماس"
 
-#: src/translations.h:48
+#: src/translations.h:52
 msgid "Enceladus"
 msgstr "إنسيلادوس"
 
-#: src/translations.h:49
+#: src/translations.h:53
 msgid "Tethys"
 msgstr "تيثيس"
 
-#: src/translations.h:50
+#: src/translations.h:54
 msgid "Dione"
 msgstr "ديون"
 
-#: src/translations.h:51
+#: src/translations.h:55
 msgid "Rhea"
 msgstr "ريا"
 
-#: src/translations.h:52
+#: src/translations.h:56
 msgid "Titan"
 msgstr "تايتان"
 
-#: src/translations.h:53
+#: src/translations.h:57
 msgid "Hyperion"
 msgstr "هايبريون"
 
-#: src/translations.h:54
+#: src/translations.h:58
 msgid "Iapetus"
 msgstr "إيابيتس"
 
-#: src/translations.h:55
+#: src/translations.h:59
 msgid "Phoebe"
 msgstr "فويبي"
 
-#: src/translations.h:56
+#: src/translations.h:60
 msgid "Neptune"
 msgstr "نبتون"
 
-#: src/translations.h:57
+#: src/translations.h:61
 msgid "Uranus"
 msgstr "أورانوس"
 
-#: src/translations.h:58
+#: src/translations.h:62
+msgid "Miranda"
+msgstr "ميراندا"
+
+#: src/translations.h:63
+msgid "Ariel"
+msgstr "أريل"
+
+#: src/translations.h:64
+msgid "Umbriel"
+msgstr "أمبريل"
+
+#: src/translations.h:65
+msgid "Titania"
+msgstr "تيتانيا"
+
+#: src/translations.h:66
+msgid "Oberon"
+msgstr "أوبيرون"
+
+#: src/translations.h:67
 msgid "Pluto"
 msgstr "بلوتو"
 
-#: src/translations.h:60
+#: src/translations.h:68
+msgid "Charon"
+msgstr "كارون"
+
+#: src/translations.h:69
+msgid "Eris"
+msgstr "إيريس"
+
+#: src/translations.h:70
 msgid "Solar System Observer"
 msgstr "راصد المجموعة الشمسية"
 
-#: src/translations.h:63
+#. TRANSLATORS: Asteroid (5) Astraea
+#: src/translations.h:73
+msgid "Astraea"
+msgstr "أسترايا"
+
+#. TRANSLATORS: Asteroid (6) Hebe
+#: src/translations.h:75
+msgid "Hebe"
+msgstr "هيبي"
+
+#. TRANSLATORS: Asteroid (7) Iris
+#: src/translations.h:77
+msgid "Iris"
+msgstr "آيريس"
+
+#. TRANSLATORS: Asteroid (8) Flora
+#: src/translations.h:79
+msgid "Flora"
+msgstr "فلورا"
+
+#. TRANSLATORS: Asteroid (9) Metis
+#: src/translations.h:81
+msgid "Metis"
+msgstr "ميتس"
+
+#. TRANSLATORS: Asteroid (10) Hygiea
+#: src/translations.h:83
+msgid "Hygiea"
+msgstr "هايجيا"
+
+#. TRANSLATORS: Asteroid (1221) Amor
+#: src/translations.h:85
+msgid "Amor"
+msgstr "آمور"
+
+#. TRANSLATORS: Asteroid (99942) Apophis
+#: src/translations.h:87
+msgid "Apophis"
+msgstr "أبوفيس"
+
+#. TRANSLATORS: Asteroid (2060) Chiron
+#: src/translations.h:89
+msgid "Chiron"
+msgstr "كايرون"
+
+#. TRANSLATORS: Asteroid (433) Eros
+#: src/translations.h:91
+msgid "Eros"
+msgstr "إيروس"
+
+#. TRANSLATORS: Asteroid (624) Hektor
+#: src/translations.h:93
+msgid "Hektor"
+msgstr "هيكتور"
+
+#: src/translations.h:97
 msgid "N"
 msgstr "شمال"
 
-#: src/translations.h:64
+#: src/translations.h:98
 msgid "S"
 msgstr "جنوب"
 
-#: src/translations.h:65
+#: src/translations.h:99
 msgid "E"
 msgstr "شرق"
 
-#: src/translations.h:66
+#: src/translations.h:100
 msgid "W"
 msgstr "غرب"
 
-#: src/translations.h:69
+#: src/translations.h:103
 msgid "Aztec"
 msgstr "الأزتك"
 
-#: src/translations.h:70
+#: src/translations.h:104
 msgid "Chinese"
 msgstr "الصينية"
 
-#: src/translations.h:71
+#: src/translations.h:105
 msgid "Egyptian"
 msgstr "مصري"
 
-#: src/translations.h:72
+#: src/translations.h:106
 msgid "Inuit"
 msgstr "إنيويت"
 
-#: src/translations.h:73
+#: src/translations.h:107
 msgid "Korean"
 msgstr "الكوري"
 
-#: src/translations.h:74
+#: src/translations.h:108
 msgid "Lakota"
 msgstr "لاكوتا"
 
-#: src/translations.h:75
+#: src/translations.h:109
 msgid "Maori"
 msgstr "الماوري"
 
-#: src/translations.h:76
+#: src/translations.h:110
 msgid "Navajo"
 msgstr "النافاهو"
 
-#: src/translations.h:77
+#: src/translations.h:111
 msgid "Norse"
 msgstr "النرويجي"
 
-#: src/translations.h:78
+#: src/translations.h:112
 msgid "Polynesian"
 msgstr "البولونيزي"
 
-#: src/translations.h:79
+#: src/translations.h:113
 msgid "Sami"
 msgstr "السامي"
 
-#: src/translations.h:80
+#: src/translations.h:114
 msgid "Tupi-Guarani"
 msgstr "توبي - جواراني"
 
-#: src/translations.h:81
+#: src/translations.h:115
 msgid "Western"
 msgstr "الغربي"
 
-#: src/translations.h:85
+#: src/translations.h:119
 msgid "Set Location "
 msgstr "حدد الموقع "
 
-#: src/translations.h:86
+#: src/translations.h:120
 msgid "Set Time "
 msgstr "حدد الوقت "
 
-#: src/translations.h:87
+#: src/translations.h:121
 msgid "General "
 msgstr "عام "
 
-#: src/translations.h:88
+#: src/translations.h:122
 msgid "Stars "
 msgstr "النجوم "
 
-#: src/translations.h:89
+#: src/translations.h:123
 msgid "Colors "
 msgstr "الألوان "
 
-#: src/translations.h:90
+#: src/translations.h:124
 msgid "Effects "
 msgstr "المؤثرات "
 
-#: src/translations.h:91
+#: src/translations.h:125
 msgid "Scripts "
 msgstr "البرامج النصية "
 
-#: src/translations.h:92
+#: src/translations.h:126
 msgid "Administration "
 msgstr "الإدارة "
 
-#: src/translations.h:94
+#: src/translations.h:128
 msgid "Latitude: "
 msgstr "خط العرض‎: "
 
-#: src/translations.h:95
+#: src/translations.h:129
 msgid "Longitude: "
 msgstr "خط الطول‎: "
 
-#: src/translations.h:96
+#: src/translations.h:130
 msgid "Altitude (m): "
 msgstr "(الارتفاع (م ‎: "
 
-#: src/translations.h:97
+#: src/translations.h:131
 msgid "Solar System Body: "
 msgstr "جرم من المجموعة الشمسية‎: "
 
-#: src/translations.h:99
+#: src/translations.h:133
 msgid "Sky Time: "
 msgstr "توقيت السماء‎: "
 
-#: src/translations.h:100
+#: src/translations.h:134
 msgid "Set Time Zone: "
 msgstr "حدد المنطقة الزمنية‎: "
 
-#: src/translations.h:101
+#: src/translations.h:135
 msgid "Day keys: "
 msgstr "مفاتيح اليوم‎: "
 
-#: src/translations.h:102
+#: src/translations.h:136
 msgid "Calendar"
 msgstr "تقويم"
 
-#: src/translations.h:103
+#: src/translations.h:137
 msgid "Sidereal"
 msgstr "نجمي"
 
-#: src/translations.h:104
+#: src/translations.h:138
 msgid "Preset Sky Time: "
 msgstr "(حدد الوقت المضبوط مسبقاً (في حالة عدم اختيار التوقيت الفعلي‎: "
 
-#: src/translations.h:105
+#: src/translations.h:139
 msgid "Sky Time At Start-up: "
 msgstr "توقيت السماء عند البدء‎: "
 
-#: src/translations.h:106
+#: src/translations.h:140
 msgid "Actual Time"
 msgstr "الوقت الفعلي"
 
-#: src/translations.h:107
+#: src/translations.h:141
 msgid "Preset Time"
 msgstr "الوقت المضبوط مسبقاً"
 
-#: src/translations.h:108
+#: src/translations.h:142
 msgid "Time Display Format: "
 msgstr "نمط عرض الوقت ‎: "
 
-#: src/translations.h:109
+#: src/translations.h:143
 msgid "Date Display Format: "
 msgstr "نمط عرض التاريخ‎: "
 
-#: src/translations.h:111
+#: src/translations.h:145
 msgid "Sky Culture: "
 msgstr "التراث الفلكي‎: "
 
-#: src/translations.h:112
+#: src/translations.h:146
 msgid "Sky Language: "
 msgstr "اللغة‎: "
 
-#: src/translations.h:114
+#: src/translations.h:148
 msgid "Show: "
 msgstr "أظهر‎: "
 
-#: src/translations.h:115
+#: src/translations.h:149
 msgid "Star Value Multiplier: "
 msgstr "مضاعف قيمة النجم‎: "
 
-#: src/translations.h:116
+#: src/translations.h:150
 msgid "Magnitude Sizing Multiplier: "
 msgstr "مضاعف حجم قدر السطوع‎: "
 
-#: src/translations.h:117
+#: src/translations.h:151
 msgid "Maximum Magnitude to Label: "
 msgstr "إظهار أسماء النجوم الأكثر سطوعاً من القدر‎: "
 
-#: src/translations.h:118
+#: src/translations.h:152
 msgid "Twinkling: "
 msgstr "التلألؤ "
 
-#: src/translations.h:119
+#: src/translations.h:153
 msgid "Limiting Magnitude: "
 msgstr "القدرالمحدد‎: "
 
-#: src/translations.h:121
+#: src/translations.h:155
 msgid "Constellation Lines"
 msgstr "خطوط الكوكبات"
 
-#: src/translations.h:122
+#: src/translations.h:156
 msgid "Constellation Names"
 msgstr "اسماء الكوكبات"
 
-#: src/translations.h:123
+#: src/translations.h:157
 msgid "Constellation Art Intensity"
 msgstr "سطوع الرسوم الفنية للكوكبات"
 
-#: src/translations.h:124
+#: src/translations.h:158
 msgid "Constellation Boundaries"
 msgstr "حدود الكوكبات"
 
-#: src/translations.h:125
+#: src/translations.h:159
 msgid "Cardinal Points"
 msgstr "الجهات الاربع"
 
-#: src/translations.h:126
+#: src/translations.h:160
 msgid "Planet Names"
 msgstr "أسماء الكواكب"
 
-#: src/translations.h:127
+#: src/translations.h:161
 msgid "Planet Orbits"
 msgstr "مدارات الكواكب"
 
-#: src/translations.h:128
+#: src/translations.h:162
 msgid "Planet Trails"
 msgstr "مسار  الكوكب"
 
-#: src/translations.h:129
+#: src/translations.h:163
 msgid "Meridian Line"
 msgstr "خط دائرة نصف النهار"
 
-#: src/translations.h:130
+#: src/translations.h:164
 msgid "Azimuthal Grid"
 msgstr "الشبكة السمتية"
 
-#: src/translations.h:131
+#: src/translations.h:165
 msgid "Equatorial Grid"
 msgstr "الشبكة الاستوائية"
 
-#: src/translations.h:132
+#: src/translations.h:166
 msgid "Equator Line"
 msgstr "خط الاستواء"
 
-#: src/translations.h:133
+#: src/translations.h:167
 msgid "Ecliptic Line"
 msgstr "خط الدائرةالكسوفية"
 
-#: src/translations.h:134
+#: src/translations.h:168
 msgid "Nebula Names"
 msgstr "أسماء السدم"
 
-#: src/translations.h:135
+#: src/translations.h:169
 msgid "Nebula Circles"
 msgstr "دوائر السدم السماوية"
 
-#: src/translations.h:137
+#: src/translations.h:171
 msgid "Light Pollution Luminance: "
 msgstr "مستوى التلوث الضوئي‎: "
 
-#: src/translations.h:138
+#: src/translations.h:172
 msgid "Landscape: "
 msgstr "المناظر الطبيعية‎: "
 
-#: src/translations.h:139
+#: src/translations.h:173
 msgid "Manual zoom: "
 msgstr "التقريب اليدوي‎: "
 
-#: src/translations.h:140
+#: src/translations.h:174
 msgid "Object Sizing Rule: "
 msgstr "قاعدة تقدير حجم الجرم‎: "
 
-#: src/translations.h:141
+#: src/translations.h:175
 msgid "Magnitude Scaling Multiplier: "
 msgstr "مضاعف مقياس القدر‎: "
 
-#: src/translations.h:142
+#: src/translations.h:176
 msgid "Milky Way intensity: "
 msgstr "سطوع رسم درب التبانة‎: "
 
-#: src/translations.h:143
+#: src/translations.h:177
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "إظهار أسماء السدم عندما يكون قدر السطوع أكثر من‎: "
 
-#: src/translations.h:144
+#: src/translations.h:178
 msgid "Zoom Duration: "
 msgstr "مدة التقريب‎: "
 
-#: src/translations.h:145
+#: src/translations.h:179
 msgid "Cursor Timeout: "
 msgstr "مهلة المؤشر‎: "
 
-#: src/translations.h:146
+#: src/translations.h:180
 msgid "Correct for light travel time: "
 msgstr "صحح لسرعة انتقال الضوء‎: "
 
-#: src/translations.h:148
+#: src/translations.h:182
 msgid "Local Script: "
 msgstr "نص برمجي محلي‎: "
 
-#: src/translations.h:149
+#: src/translations.h:183
 msgid "CD/DVD Script: "
 msgstr "نص برمجي في قرص مدمج أو ضوئي‎: "
 
-#: src/translations.h:150
+#: src/translations.h:184
 msgid "USB Script: "
 msgstr "نص برمجي في المنفذ التسلسلي‎: "
 
-#: src/translations.h:151
+#: src/translations.h:185
 msgid "Arrow down to load list."
 msgstr ".مفتاح السهم السفلي لتحميل القائمة"
 
-#: src/translations.h:152
+#: src/translations.h:186
 msgid "Select and exit to run."
 msgstr "اختر واخرج من البرنامج للتنفيذ.‏"
 
-#: src/translations.h:154
+#: src/translations.h:188
 msgid "Load Default Configuration: "
 msgstr "حمل الإعدادات الأصلية‎: "
 
-#: src/translations.h:155
+#: src/translations.h:189
 msgid "Save Current Configuration as Default: "
 msgstr "احفظ الإعدادات الحالية كأساسية‎: "
 
-#: src/translations.h:156
+#: src/translations.h:190
 msgid "Shut Down: "
 msgstr "إغلاق‎: "
 
-#: src/translations.h:158
+#: src/translations.h:191
+msgid "Update me via Internet: "
+msgstr "حدث بواسطة الإنترنت‎: "
+
+#: src/translations.h:192
 msgid "Set UI Locale: "
 msgstr "حدد لغة واجهة المستخدم‎: "
 
-#: src/ui_dateTimeDialogGui.h:294 src/ui_helpDialogGui.h:259
-#: src/ui_locationDialogGui.h:387 src/ui_viewDialog.h:979
-#: src/ui_configurationDialog.h:746
-msgid "Form"
-msgstr "شكل"
-
-#: src/ui_dateTimeDialogGui.h:297 src/ui_dateTimeDialogGui.h:298
+#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
 msgstr "/"
 
-#: src/ui_dateTimeDialogGui.h:299 src/ui_dateTimeDialogGui.h:300
+#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
 msgid ":"
 msgstr ":"
 
-#: src/ui_helpDialogGui.h:260 src/ui_helpDialogGui.h:266
+#: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
 msgid "Help"
 msgstr "مساعدة"
 
-#: src/ui_helpDialogGui.h:268
+#: src/ui_helpDialogGui.h:267
 msgid "About"
 msgstr "عن"
 
-#: src/ui_helpDialogGui.h:270
+#: src/ui_helpDialogGui.h:269
 msgid "Log"
 msgstr "السجلّ"
 
-#: src/ui_helpDialogGui.h:273
+#: src/ui_helpDialogGui.h:272
 msgid "Refresh"
 msgstr "تحديث"
 
-#: src/ui_locationDialogGui.h:388
+#: src/ui_locationDialogGui.h:387
 msgid "Location"
 msgstr "الموقع"
 
-#: src/ui_locationDialogGui.h:392
+#: src/ui_locationDialogGui.h:391
 msgid "Current location information"
 msgstr "معلومات الموقع الحالي"
 
-#: src/ui_locationDialogGui.h:393
+#: src/ui_locationDialogGui.h:392
 msgid "Use as default"
 msgstr "اجعل الموقع الحالي هو الافتراضي"
 
-#: src/ui_locationDialogGui.h:394
+#: src/ui_locationDialogGui.h:393
 msgid "Delete"
 msgstr "احذف"
 
-#: src/ui_locationDialogGui.h:395
+#: src/ui_locationDialogGui.h:394
 msgid "Add to list"
 msgstr "أضف إلى القائمة"
 
-#: src/ui_locationDialogGui.h:396
+#: src/ui_locationDialogGui.h:395
 msgid "Latitude:"
 msgstr "خط العرض:"
 
-#: src/ui_locationDialogGui.h:398 src/ui_locationDialogGui.h:402
+#: src/ui_locationDialogGui.h:397 src/ui_locationDialogGui.h:401
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr ""
-"تستطيع إدخال القيم بالدرجات العشرية، أو بصيغة درجات دقائق ثواني، مثلاً:‏ +1d "
-"12m 8s"
+"+1d 12m 8s تستطيع إدخال القيم بالدرجات العشرية، أو بصيغة درجات دقائق ثواني، "
+"مثلاً:‏"
 
-#: src/ui_locationDialogGui.h:400
+#: src/ui_locationDialogGui.h:399
 msgid "Longitude:"
 msgstr "خط الطول:"
 
-#: src/ui_locationDialogGui.h:404
+#: src/ui_locationDialogGui.h:403
 msgid "Altitude:"
 msgstr "الارتفاع:"
 
-#: src/ui_locationDialogGui.h:406
+#: src/ui_locationDialogGui.h:405
 msgid "Enter the altitude in meter"
 msgstr "أدخل الارتفاع بالأمتار"
 
-#: src/ui_locationDialogGui.h:408
+#: src/ui_locationDialogGui.h:407
 msgid " m"
 msgstr " متر"
 
-#: src/ui_locationDialogGui.h:409
+#: src/ui_locationDialogGui.h:408
 msgid "Name/City:"
 msgstr "الاسم / المدينة:"
 
-#: src/ui_locationDialogGui.h:410
+#: src/ui_locationDialogGui.h:409
 msgid "Country:"
 msgstr "الدولة:"
 
-#: src/ui_locationDialogGui.h:411
+#: src/ui_locationDialogGui.h:410
 msgid "Planet:"
 msgstr "الكوكب:"
 
-#: src/ui_searchDialogGui.h:230 src/ui_searchDialogGui.h:231
+#: src/ui_searchDialogGui.h:227 src/ui_searchDialogGui.h:228
 msgid "Find Object"
 msgstr "ابحث عن جرم"
 
-#: src/ui_searchDialogGui.h:236
+#: src/ui_searchDialogGui.h:233
 msgid "RA/Dec (J2000):"
-msgstr "المطلع المستقيم/الميل (J2000):‏"
+msgstr "الميل / المطلع المستقيم (J2000):‏"
 
-#: src/ui_viewDialog.h:980
+#: src/ui_viewDialog.h:986
 msgid "View"
 msgstr "العرض"
 
-#: src/ui_viewDialog.h:986
+#: src/ui_viewDialog.h:992
 msgid "Sky"
 msgstr "السماء"
 
-#: src/ui_viewDialog.h:988
+#: src/ui_viewDialog.h:994
 msgid "Markings"
 msgstr "التوسيمات"
 
-#: src/ui_viewDialog.h:990
+#: src/ui_viewDialog.h:996
 msgid "Landscape"
 msgstr "منظر الرصد الطبيعي"
 
-#: src/ui_viewDialog.h:992
+#: src/ui_viewDialog.h:998
 msgid "Starlore"
 msgstr "التراث الفلكي"
 
-#: src/ui_viewDialog.h:996
+#: src/ui_viewDialog.h:1002
 msgid "Absolute scale:"
 msgstr "المقياس المطلق :"
 
-#: src/ui_viewDialog.h:997
+#: src/ui_viewDialog.h:1003
 msgid "Relative scale:"
 msgstr "المقياس النسبي:"
 
-#: src/ui_viewDialog.h:998
+#: src/ui_viewDialog.h:1004
 msgid "Twinkle:"
 msgstr "التلألؤ:"
 
-#: src/ui_viewDialog.h:1000
+#: src/ui_viewDialog.h:1006
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "تعتيم النجوم الباهتة عندما تكون الأجرام اللامعة منظورة"
 
-#: src/ui_viewDialog.h:1002
+#: src/ui_viewDialog.h:1008
 msgid "Dynamic eye adaptation"
 msgstr "تكيف العين الديناميكي"
 
-#: src/ui_viewDialog.h:1003
+#: src/ui_viewDialog.h:1009
 msgid "Planets and satellites"
 msgstr "الكواكب و التوابع"
 
-#: src/ui_viewDialog.h:1004
+#: src/ui_viewDialog.h:1010
 msgid "Show planets"
 msgstr "أظهر الكواكب"
 
-#: src/ui_viewDialog.h:1005
+#: src/ui_viewDialog.h:1011
 msgid "Show planet markers"
 msgstr "أظهر علامات الكواكب"
 
-#: src/ui_viewDialog.h:1006
+#: src/ui_viewDialog.h:1012
 msgid "Show planet orbits"
 msgstr "أظهر مدارات الكواكب"
 
-#: src/ui_viewDialog.h:1007
+#: src/ui_viewDialog.h:1013
 msgid "Simulate light speed"
 msgstr "قم بمحاكاة سرعة الضوء"
 
-#: src/ui_viewDialog.h:1008
+#: src/ui_viewDialog.h:1014
 msgid "Scale Moon"
 msgstr "كبِّر الحجم الظاهري للقمر"
 
-#: src/ui_viewDialog.h:1010
+#: src/ui_viewDialog.h:1016
 msgid "Show atmosphere"
 msgstr "أظهر الغلاف الجوي"
 
-#: src/ui_viewDialog.h:1011
+#: src/ui_viewDialog.h:1017
 msgid "Light pollution: "
 msgstr "التلوث الضوئي: "
 
-#: src/ui_viewDialog.h:1012
+#: src/ui_viewDialog.h:1018
 msgid "Labels and Markers"
 msgstr "الأسماء  والعلامات"
 
-#: src/ui_viewDialog.h:1015
+#: src/ui_viewDialog.h:1021
 msgid "Planets"
 msgstr "الكواكب"
 
-#: src/ui_viewDialog.h:1016
+#: src/ui_viewDialog.h:1022
 msgid "Shooting Stars"
 msgstr "وابل الشهب"
 
-#: src/ui_viewDialog.h:1017
+#: src/ui_viewDialog.h:1023
 msgid "Hourly zenith rate:"
 msgstr "المعدل السمتي لعدد الشهب في الساعة"
 
-#: src/ui_viewDialog.h:1018
+#: src/ui_viewDialog.h:1024
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:1019
+#: src/ui_viewDialog.h:1025
 msgid "10"
 msgstr "10"
 
-#: src/ui_viewDialog.h:1020
+#: src/ui_viewDialog.h:1026
 msgid "80"
 msgstr "80"
 
-#: src/ui_viewDialog.h:1021
+#: src/ui_viewDialog.h:1027
 msgid "10000"
 msgstr "10000"
 
-#: src/ui_viewDialog.h:1022
+#: src/ui_viewDialog.h:1028
 msgid "144000"
 msgstr "144000"
 
-#: src/ui_viewDialog.h:1024
+#: src/ui_viewDialog.h:1030
 msgid "Celestial Sphere"
 msgstr "الكرة السماوية"
 
-#: src/ui_viewDialog.h:1032
+#: src/ui_viewDialog.h:1038
 msgid "Constellations"
 msgstr "المجموعات النجمية"
 
-#: src/ui_viewDialog.h:1033
+#: src/ui_viewDialog.h:1039
 msgid "Show lines"
 msgstr "أظهر الخطوط"
 
-#: src/ui_viewDialog.h:1034
+#: src/ui_viewDialog.h:1040
 msgid "Show labels"
 msgstr "أظهر الأسماء"
 
-#: src/ui_viewDialog.h:1035
+#: src/ui_viewDialog.h:1041
 msgid "Show boundaries"
 msgstr "أظهر الحدود"
 
-#: src/ui_viewDialog.h:1036
+#: src/ui_viewDialog.h:1042
 msgid "Show art"
 msgstr "أظهر الرسومات"
 
-#: src/ui_viewDialog.h:1037
+#: src/ui_viewDialog.h:1043
 msgid "Art brightness: "
 msgstr "سطوع الرسومات : "
 
-#: src/ui_viewDialog.h:1038
+#: src/ui_viewDialog.h:1044
 msgid "Projection"
 msgstr "الإسقاط"
 
-#: src/ui_viewDialog.h:1039 src/ui_viewDialog.h:1044 src/ui_viewDialog.h:1046
-#: src/ui_configurationDialog.h:853 src/ui_configurationDialog.h:864
+#: src/ui_viewDialog.h:1045
+msgid "Add/remove landscapes..."
+msgstr "أضف/احذف مناظر الرصد الطبيعية"
+
+#: src/ui_viewDialog.h:1046 src/ui_viewDialog.h:1051 src/ui_viewDialog.h:1053
+#: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
 msgid "Options"
 msgstr "الخيارات"
 
-#: src/ui_viewDialog.h:1040
+#: src/ui_viewDialog.h:1047
 msgid "Show ground"
 msgstr "أظهر سطح الأرض"
 
-#: src/ui_viewDialog.h:1041
+#: src/ui_viewDialog.h:1048
 msgid "Show fog"
 msgstr "أظهر الضباب"
 
-#: src/ui_viewDialog.h:1042
+#: src/ui_viewDialog.h:1049
 msgid "Use associated planet and position"
 msgstr "استخدم الكوكب و الموقع للمنظر الطبيعي ليكون هو مكان الراصد"
 
-#: src/ui_viewDialog.h:1043
+#: src/ui_viewDialog.h:1050
 msgid "Use this landscape as default"
 msgstr "اجعل هذا المشهد الطبيعي هو الافتراضي"
 
-#: src/ui_viewDialog.h:1045
+#: src/ui_viewDialog.h:1052
 msgid "Use this sky culture as default"
 msgstr "اجعل التراث الفلكي الحالي هو الافتراضي"
 
-#: src/ui_viewDialog.h:1047
+#: src/ui_viewDialog.h:1054
 msgid "Visible"
 msgstr "مرئي"
 
-#: src/ui_configurationDialog.h:747
+#: src/ui_configurationDialog.h:748
 msgid "Configuration"
 msgstr "الإعدادات"
 
-#: src/ui_configurationDialog.h:749
+#: src/ui_configurationDialog.h:750
 msgid "Program language"
 msgstr "لغة البرنامج"
 
-#: src/ui_configurationDialog.h:750
+#: src/ui_configurationDialog.h:751
 msgid "Selected object information"
 msgstr "معلومات الجسم المختار"
 
-#: src/ui_configurationDialog.h:752
+#: src/ui_configurationDialog.h:753
 msgid "Display all information available"
 msgstr "أظهر جميع المعلومات المتوفرة"
 
-#: src/ui_configurationDialog.h:754
+#: src/ui_configurationDialog.h:755
 msgid "All available"
 msgstr "أظهر جميع المعلومات"
 
-#: src/ui_configurationDialog.h:756
+#: src/ui_configurationDialog.h:757
 msgid "Display less information"
 msgstr "أظهر معلومات اقل"
 
-#: src/ui_configurationDialog.h:758
+#: src/ui_configurationDialog.h:759
 msgid "Short"
 msgstr "أظهر معلومات مختصرة"
 
-#: src/ui_configurationDialog.h:760
+#: src/ui_configurationDialog.h:761
 msgid "Display no information"
 msgstr "لاتظهر أي معلومات"
 
-#: src/ui_configurationDialog.h:762
+#: src/ui_configurationDialog.h:763
 msgid "None"
 msgstr "لاتظهر أي معلومات"
 
-#: src/ui_configurationDialog.h:763
+#: src/ui_configurationDialog.h:764
 msgid "Default options"
 msgstr "الخيارات الافتراضية"
 
-#: src/ui_configurationDialog.h:765
+#: src/ui_configurationDialog.h:766
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -1550,123 +1733,123 @@ msgstr ""
 "احفظ الإعدادات التي قمت بتغييرها في هذه الجلسة لاستخدامها عند تشغيل "
 "ستيللاريوم المرة القادمة"
 
-#: src/ui_configurationDialog.h:767
+#: src/ui_configurationDialog.h:768
 msgid "Save settings"
 msgstr "احفظ الإعدادات"
 
-#: src/ui_configurationDialog.h:769
+#: src/ui_configurationDialog.h:770
 msgid "Restore the default settings that came with Stellarium"
 msgstr "استرجع الإعدادات الافتراضية الأصلية كما كانت عند تركيب البرنامج"
 
-#: src/ui_configurationDialog.h:771
+#: src/ui_configurationDialog.h:772
 msgid "Restore defaults"
 msgstr "استرجع الإعدادات الافتراضية كما كانت عند تركيب البرنامج"
 
-#: src/ui_configurationDialog.h:772
+#: src/ui_configurationDialog.h:773
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr ""
-"استرجاع الإعدادات الافتراضية يتطلب إعادة تشغيل ستيللاريوم.‏\n"
-"حفظ الإعدادات الحالية سوف يحفظ أيضاً حقل الرؤية الحالي واتجاه الرؤية "
-"لاستخدامها في المرة القادمة.‏"
+"استرجاع الإعدادات الافتراضية يتطلب إعادة تشغيل ستيللاريوم.‏حفظ الإعدادات "
+"الحالية سوف يحفظ أيضاً حقل الرؤية الحالي واتجاه الرؤية لاستخدامها في المرة "
+"القادمة.‏"
 
-#: src/ui_configurationDialog.h:774
+#: src/ui_configurationDialog.h:775
 msgid "The width of your view when Stellarium starts"
 msgstr "عرض الرؤية عند بدء تشغيل ستيللاريوم"
 
-#: src/ui_configurationDialog.h:776
+#: src/ui_configurationDialog.h:777
 msgid "Startup FOV: XX"
 msgstr "حقل الرؤية عند التشغيل :XX"
 
-#: src/ui_configurationDialog.h:778
+#: src/ui_configurationDialog.h:779
 msgid "The direction you're looking when Stellarium starts"
 msgstr "اتجاه الرؤية عند التشغيل"
 
-#: src/ui_configurationDialog.h:780
+#: src/ui_configurationDialog.h:781
 msgid "Startup direction of view: xxxx"
 msgstr "إتجاه الرؤية الذي يظهر عند التشغيل :XX"
 
-#: src/ui_configurationDialog.h:781
+#: src/ui_configurationDialog.h:782
 msgid "Control"
 msgstr "التحكم"
 
-#: src/ui_configurationDialog.h:783
+#: src/ui_configurationDialog.h:784
 msgid "Allow keyboard to pan and zoom"
 msgstr "اسمح للوحة المفاتيح بالتحكم في تحريك المشهد والتكبير"
 
-#: src/ui_configurationDialog.h:785
+#: src/ui_configurationDialog.h:786
 msgid "Enable keyboard navigation"
 msgstr "مكِّن من التنقل بواسطة لوحة المفاتيح"
 
-#: src/ui_configurationDialog.h:787
+#: src/ui_configurationDialog.h:788
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "مكِّن الفأرة من تحريك المشهد بالسحب ومن التكبير بالعجلة"
 
-#: src/ui_configurationDialog.h:789
+#: src/ui_configurationDialog.h:790
 msgid "Enable mouse navigation"
 msgstr "مكِّن من التنقل بالفأرة"
 
-#: src/ui_configurationDialog.h:790
+#: src/ui_configurationDialog.h:791
 msgid "Startup date and time"
 msgstr "تاريخ ووقت البدء"
 
-#: src/ui_configurationDialog.h:792
+#: src/ui_configurationDialog.h:793
 msgid "Starts Stellarium at system clock date and time"
 msgstr "ابدأ البرنامج باستخدام وقت وتاريخ النظام"
 
-#: src/ui_configurationDialog.h:794
+#: src/ui_configurationDialog.h:795
 msgid "System date and time"
 msgstr "وقت و تاريخ النظام"
 
-#: src/ui_configurationDialog.h:796
+#: src/ui_configurationDialog.h:797
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "يضبط محاكاة الوقت لمثل هذه اللحظة من اليوم عندما يبدأ ستيللاريوم"
 
-#: src/ui_configurationDialog.h:798
+#: src/ui_configurationDialog.h:799
 msgid "System date at:"
 msgstr "تاريخ النظام عند:"
 
-#: src/ui_configurationDialog.h:800
+#: src/ui_configurationDialog.h:801
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "استخدم تاريخاً و وقتاً محددين عندما  يبدأ ستيللاريوم"
 
-#: src/ui_configurationDialog.h:802
+#: src/ui_configurationDialog.h:803
 msgid "Other:"
 msgstr "أخرى:"
 
-#: src/ui_configurationDialog.h:803
+#: src/ui_configurationDialog.h:804
 msgid "use current"
 msgstr "إستخدام القيمة الحالية"
 
-#: src/ui_configurationDialog.h:804
+#: src/ui_configurationDialog.h:805
 msgid "Other"
 msgstr "إعدادات تحكم أخرى"
 
-#: src/ui_configurationDialog.h:806
+#: src/ui_configurationDialog.h:807
 msgid "Hides the mouse cursor when inactive"
 msgstr "يخفي مؤشر الفأرة في حالة عدم النشاط"
 
-#: src/ui_configurationDialog.h:808
+#: src/ui_configurationDialog.h:809
 msgid "Mouse cursor timeout (seconds):"
 msgstr "مهلة إخفاء مؤشر الفأرة (بالثواني)‏"
 
-#: src/ui_configurationDialog.h:810
+#: src/ui_configurationDialog.h:811
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "إزرار قلب المشهد عمودياً وأفقياً.‏"
 
-#: src/ui_configurationDialog.h:812
+#: src/ui_configurationDialog.h:813
 msgid "Show flip buttons"
 msgstr "أظهر أزرار قلب المشهد في شريط التحكم"
 
-#: src/ui_configurationDialog.h:813
+#: src/ui_configurationDialog.h:814
 msgid "Planetarium options"
-msgstr "خيارات عرض القبة السماوية (خاص بأجهزة عرض صالات القبب السماوية)‏"
+msgstr "خيارات عرض القبة السماوية"
 
-#: src/ui_configurationDialog.h:815
+#: src/ui_configurationDialog.h:816
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -1674,19 +1857,19 @@ msgstr ""
 "يستعمل تشوه المرآة الكروية عند عرض ستيللاريوم على مرآة كروية مستخدمة في "
 "أنظمة القبب السماوية المنخفضة التكلفة"
 
-#: src/ui_configurationDialog.h:817
+#: src/ui_configurationDialog.h:818
 msgid "Spheric mirror distortion"
 msgstr "تشوه المرآة الكروية"
 
-#: src/ui_configurationDialog.h:819
+#: src/ui_configurationDialog.h:820
 msgid "Align labels with the horizon"
 msgstr "اجعل الأسماء موازية للأفق"
 
-#: src/ui_configurationDialog.h:821
+#: src/ui_configurationDialog.h:822
 msgid "Gravity labels"
 msgstr "اجعل الأسماء موازية للأفق الأقرب"
 
-#: src/ui_configurationDialog.h:823
+#: src/ui_configurationDialog.h:824
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -1694,113 +1877,299 @@ msgstr ""
 "عندما يكون \" زر التصغير الذاتي\" ممكناً فسوف يضبط الاتجاه الأولي للمشهد "
 "أيضاً"
 
-#: src/ui_configurationDialog.h:825
+#: src/ui_configurationDialog.h:826
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "التصغير الذاتي يعود إلى الاتجاه الأولي للمشهد"
 
-#: src/ui_configurationDialog.h:827
+#: src/ui_configurationDialog.h:828
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "لاتظهر اي شيء خارج دائرة مركزية في المشهد الرئيسي"
 
-#: src/ui_configurationDialog.h:829
+#: src/ui_configurationDialog.h:830
 msgid "Disc viewport"
 msgstr "عرض على شكل قرص"
 
-#: src/ui_configurationDialog.h:831
+#: src/ui_configurationDialog.h:832
 msgid "Hide other constellations when you click one"
 msgstr "إخفاء المجموعات النجمية الاخرى عند النقر على أحدها"
 
-#: src/ui_configurationDialog.h:833
+#: src/ui_configurationDialog.h:834
 msgid "Select single constellation"
 msgstr "اختر مجموعة نجمية واحدة"
 
-#: src/ui_configurationDialog.h:834
+#: src/ui_configurationDialog.h:835
 msgid "Screenshots"
 msgstr "لقطات الشاشة"
 
-#: src/ui_configurationDialog.h:835
+#: src/ui_configurationDialog.h:836
 msgid "Screenshot Directory"
 msgstr "مجلد لقطة الشاشة"
 
-#: src/ui_configurationDialog.h:837
+#: src/ui_configurationDialog.h:838
 msgid "Invert colors"
 msgstr "عكس الألوان"
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:839
 msgid "Star catalog updates"
 msgstr "تحديثات دليل النجوم"
 
-#: src/ui_configurationDialog.h:840
+#: src/ui_configurationDialog.h:841
 msgid "Click here to start downloading"
 msgstr "اضغط هنا لبدء التحميل"
 
-#: src/ui_configurationDialog.h:842
+#: src/ui_configurationDialog.h:843
 msgid "Get catalog x of y"
 msgstr "اجلب الدليل x من y"
 
-#: src/ui_configurationDialog.h:843
+#: src/ui_configurationDialog.h:844
 msgid "Download this file to view even more stars"
 msgstr "حمِّل هذا الملف لإظهار نجوم اكثر ايضاً"
 
-#: src/ui_configurationDialog.h:844
+#: src/ui_configurationDialog.h:845
 msgid "xxx"
 msgstr "xxx"
 
-#: src/ui_configurationDialog.h:846
+#: src/ui_configurationDialog.h:847
 msgid "Restart the download"
 msgstr "ابدأ التحميل من جديد"
 
-#: src/ui_configurationDialog.h:848
+#: src/ui_configurationDialog.h:849
 msgid "Retry"
 msgstr "أعد المحاولة"
 
-#: src/ui_configurationDialog.h:850
+#: src/ui_configurationDialog.h:851
 msgid "Stop the download. You can always restart it later"
 msgstr "أوقف التحميل. تستطيع دائماً أن تبدأ مجدداً في وقت لاحق."
 
-#: src/ui_configurationDialog.h:852
+#: src/ui_configurationDialog.h:853
 msgid "Cancel"
 msgstr "ألغ"
 
-#: src/ui_configurationDialog.h:855
+#: src/ui_configurationDialog.h:856
 msgid "Close window when script runs"
 msgstr "أغلق النافذة عندما يبدأ السكريبت في العمل"
 
-#: src/ui_configurationDialog.h:857
+#: src/ui_configurationDialog.h:858
 msgid "Run the selected script"
 msgstr "شغِّل السكريبت المختار"
 
-#: src/ui_configurationDialog.h:861
+#: src/ui_configurationDialog.h:862
 msgid "Stop a running script"
 msgstr "أوقف السكريبت الشغَّال"
 
-#: src/ui_configurationDialog.h:865
+#: src/ui_configurationDialog.h:866
 msgid "Load at startup"
 msgstr "حمِّل عند بدء التشغيل"
 
-#: src/ui_configurationDialog.h:866
+#: src/ui_configurationDialog.h:867
 msgid "configure"
 msgstr "اضبط الإعدادات"
 
-#: src/ui_configurationDialog.h:871
+#: src/ui_configurationDialog.h:872
 msgid "Main"
 msgstr "الرئيسي"
 
-#: src/ui_configurationDialog.h:873
+#: src/ui_configurationDialog.h:874
 msgid "Navigation"
 msgstr "التنقل"
 
-#: src/ui_configurationDialog.h:875
+#: src/ui_configurationDialog.h:876
 msgid "Tools"
 msgstr "الأدوات"
 
-#: src/ui_configurationDialog.h:877
+#: src/ui_configurationDialog.h:878
 msgid "Scripts"
 msgstr "البرامج النصية‏"
 
-#: src/ui_configurationDialog.h:879
+#: src/ui_configurationDialog.h:880
 msgid "Plugins"
 msgstr "إضافات"
+
+#: src/ui_addRemoveLandscapesDialog.h:266
+msgid "Add/Remove Landscapes"
+msgstr "أضف/احذف مناظر الرصد الطبيعية"
+
+#: src/ui_addRemoveLandscapesDialog.h:268
+msgid "Add a new landscape"
+msgstr "أضف منظر رصد طبيعي جديد"
+
+#: src/ui_addRemoveLandscapesDialog.h:269
+msgid "Install a new landscape from a ZIP archive..."
+msgstr "ركِّب منظر رصد طبيعي من مجلد مضغوط"
+
+#: src/ui_addRemoveLandscapesDialog.h:270
+msgid "Switch to the new landscape after installation"
+msgstr "تحوَّل إلى المنظر الجديد بعد التركيب"
+
+#: src/ui_addRemoveLandscapesDialog.h:273
+msgid "Remove an installed landscape"
+msgstr "احذف منظر رصد مركَّب سابقاً"
+
+#: src/ui_addRemoveLandscapesDialog.h:275
+msgid "Remove"
+msgstr "إزالة"
+
+#: src/ui_addRemoveLandscapesDialog.h:276
+msgid ""
+"WARNING: Removing the selected landscape means deleting its files. This "
+"operation is irreversible."
+msgstr ""
+"تحذير: حذف المنظر المختار يعني حذف جميع ملفاته. هذه العملية لا يمكن التراجع "
+"عنها"
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:57
+msgid "Angle Measure"
+msgstr "قياس البعد الزاوي"
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:60
+msgid "Provides an angle measurement tool"
+msgstr "أداة لقياس البعد الزاوي"
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:121
+msgid "Angle measure"
+msgstr "قياس البعد الزاوي"
+
+#. TRANSLATORS: Title of a group of key bindings in the Help window
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:121
+#: plugins/CompassMarks/src/CompassMarks.cpp:121
+#: plugins/Oculars/src/Oculars.cpp:565 plugins/Oculars/src/Oculars.cpp:575
+#: plugins/Satellites/src/Satellites.cpp:124
+msgid "Plugin Key Bindings"
+msgstr "المفاتيح المرتبطة بالبرامج المضافة"
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:57
+msgid "Compass Marks"
+msgstr "درجات البوصلة"
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:60
+msgid "Displays compass bearing marks along the horizon"
+msgstr "يعرض درجات البوصلة بموازاة الأفق"
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:121
+msgid "Compass marks"
+msgstr "درجات البوصلة"
+
+#: plugins/Oculars/src/Oculars.cpp:74
+msgid "Oculars"
+msgstr "العدسة العينية"
+
+#: plugins/Oculars/src/Oculars.cpp:77
+msgid "Shows the sky as if looking through a telescope eyepiece"
+msgstr "يعرض السماء كما تراها من العدسة العينية للتلسكوب"
+
+#: plugins/Oculars/src/Oculars.cpp:573
+msgid "Ocular view"
+msgstr "منظر العدسة العينية"
+
+#: plugins/Oculars/src/Oculars.cpp:580
+msgid "Oculars configuration window"
+msgstr "نافذة ضبط إعدادات العدسة العينية"
+
+#: plugins/Oculars/src/Oculars.cpp:587
+msgid "Telrad circles"
+msgstr "دوائر تيلراد"
+
+#: plugins/Satellites/src/Satellites.cpp:68
+msgid "Satellites"
+msgstr "الأقمار الصناعية"
+
+#: plugins/Satellites/src/Satellites.cpp:71
+msgid ""
+"Prediction of artificial satellite positions in Earth orbit based on NORAD "
+"TLE data"
+msgstr ""
+"تحديد مواقع الأقمار الصناعية في مدارها  على الأرض بناءاً على بيانات\n"
+" NORAD TLE"
+
+#: plugins/Satellites/src/Satellites.cpp:126
+msgid "Satellites configuration window"
+msgstr "نافذة ضبط إعدادات الأقمار الصناعية"
+
+#: plugins/Satellites/src/Satellites.cpp:127
+msgid "Satellite hints"
+msgstr "عرض الأقمار الصناعية"
+
+#: plugins/Satellites/src/Satellites.cpp:129
+msgid "Satellite labels"
+msgstr "أسماء الأقمار الصناعية"
+
+#: plugins/Satellites/src/Satellites.cpp:163
+msgid ""
+"The old satellites.json file is no longer compatible - using default file"
+msgstr ""
+"ملف\n"
+"satellites.json \n"
+"لم يعد متوافقاً مع البرنامج - سوف يستخدم الملف الافتراضي"
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:75
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:165
+msgid "Telescope Control"
+msgstr "التحكم بالمقراب (التلسكوب)‏"
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:78
+msgid ""
+"This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
+"computerized mount (a \"GoTo telescope\")."
+msgstr ""
+"هذا البرنامج الإضافي يتيح لستيلاريوم إرسال أوامر لتحريك التلسكوب على الحامل "
+"المحوسب"
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:170
+#, qt-format
+msgid "Move telescope #%1 to selected object"
+msgstr "حرِّك التلسكوب #%1 إلى الجرم المختار"
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:177
+#, qt-format
+msgid "Move telescope #%1 to the point currently in the center of the screen"
+msgstr "حرِّك التلسكوب #%1 إلى النقطة في مركز الشاشة"
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:188
+msgid "Move a telescope to a given set of coordinates"
+msgstr "حرِّك التلسكوب إلى إحداثيات معيَّنة"
+
+#: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
+msgid "Time Zone"
+msgstr "المنطقة الزمنية"
+
+#: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:44
+msgid ""
+"A convenient interface for some of the more obscure options in Stellarium's "
+"configuration file. Allows setting the time zone and changing the way the "
+"time and the date are displayed in the bottom bar."
+msgstr ""
+"واجهة سهلة لبعض الخيارات الخفية الموجودة في ملف الإعدادات. تمكِّن من ضبط "
+"المنطقة الزمنية واختيار الطريقة التي يظهر بها الوقت والتاريخ في الشريط السفلي"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:79
+msgid "Text User Interface"
+msgstr "واجهة المستخدم النصية"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:82
+msgid ""
+"Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
+"planetarium systems"
+msgstr ""
+"برنامج إضافي يطبِّق الواجهة النصية المستخدمة في سلسلة الاصدارات 0.9 ، "
+"المستخدمة في أنظمة صالات القبب الفلكية"
+
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
+msgid "Solar System Editor"
+msgstr "محرِّر النظام الشمسي"
+
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:59
+msgid ""
+"An interface for adding asteroids and comets to Stellarium. It can download "
+"object lists from the Minor Planet Center's website and perform searches in "
+"its online database. Still a work in progress."
+msgstr ""
+"واجهة لإضافة الكويكبات والمذنبات إلى ستيللاريوم. تمكِّن من تحميل قوائم "
+"الأجرام من موقع\n"
+"  Minor Planet Center \n"
+" وتقوم بالبحث في قواعد المعلومات المتوفرة على الشبكة. لازال تحت التطوير"
+
+#~ msgid "Form"
+#~ msgstr "شكل"
 
 #, qt-format
 #~ msgid "Loading catalog %1 from file %2"
@@ -1812,9 +2181,6 @@ msgstr "إضافات"
 
 #~ msgid "Loading NGC catalog"
 #~ msgstr "(الدليل العام الجديد - New General Catalog) NGC جاري تحميل دليل"
-
-#~ msgid "Telescope Control"
-#~ msgstr "التحكم بالمقراب (التلسكوب)‏"
 
 #~ msgid "Move telescope #0 to selected object"
 #~ msgstr "حرك المقراب 0 إلى الجسم المختار"
