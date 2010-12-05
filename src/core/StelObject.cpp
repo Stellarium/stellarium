@@ -71,16 +71,6 @@ void StelObject::getSideralPosRefr(const StelCore* core, double *ha_ref, double 
   *dec_ref=std::asin(std::sin(lat)*std::sin(alt)-std::cos(lat)*std::cos(alt)*std::cos(az));
 }
 
-// Old version, untested, currently unused.
-//Vec3d StelObject::getSideralPosRefr(const StelCore* core) const
-//{ double ra, dec;
-//  getSideralPosRefr(core, &ra, &dec);
-//  ha=2*M_PI-ha; // recreate inverted data like in getSideralPos()
-//  Vec3d HAdecRef;
-//  StelUtils::spheToRect(ha, dec, HAdecRef);
-//  return HAdecRef;
-//}
-
 // Get observer-centered alt/az position
 Vec3d StelObject::getAltAzPos(const StelNavigator* nav) const
 {
@@ -119,10 +109,6 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		if (withAtmosphericEffects)
 		  {
 		    res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) + q_("(geom.)") + "<br>";
-		    // GZ: TODO: compute and display "apparent" 
-		    
-		    //StelUtils::rectToSphe(&ra_sideral,&dec_sideral,getSideralPosRefr(core));
-		    //ra_sideral = 2.*M_PI-ra_sideral;
 		    getSideralPosRefr(core, &ra_sideral, &dec_sideral);
 		    res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) + q_("(app.)")  + "<br>";
 		  }
