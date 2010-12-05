@@ -109,7 +109,9 @@ public:
 	//! - Distance
 	//! - Size
 	//! - PlainText
-	//! @param core the Stelore object
+        //! - Extra1: Heliocentric Ecliptical Coordinates
+        //! - Extra2: Observer-planetocentric Ecliptical Coordinates
+	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Planet.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
