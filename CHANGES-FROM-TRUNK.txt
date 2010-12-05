@@ -39,3 +39,9 @@ CHANGES IN LANDSCAPE HANDLING:
    LandscapeMgr forwards those settings to the respective recipients. 
    TODO: make settings accessible in GUI, make GUI aware of changed values (how?).
 
+CHANGES IN ASTR.COMPUTATIONS
+planetsephems/sideral_time.[hc]: added get_mean_ecliptical_obliquity(double JDE), 
+                                 changed correct ecliptic in nutation computation.
+StelUtil::ctRadec2Ecl(): coordinate transformation RA/dec to ecliptical with given ecl. obliquity.
+Planet::getInfoString(): added ecliptical positions for planets if observed from earth.
+                         This helped detect A BUG, apparently ecliptical obliquity does not change, currently.
