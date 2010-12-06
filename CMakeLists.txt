@@ -285,7 +285,7 @@ IF(GENERATE_PACKAGE_TARGET)
   SET(CPACK_GENERATOR "TGZ")
   SET(CPACK_STRIP_FILES "bin/stellarium")
   SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
-  SET(CPACK_SOURCE_IGNORE_FILES "/CVS/" "/.svn/" "/.git/" "/.bzr/" "builds/" "installers/" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "~$" "\\\\.swp$" "\\\\.#" "/#")
+  SET(CPACK_SOURCE_IGNORE_FILES "/CVS/" "/.svn/" "/.git/" "/.bzr/" "builds/" "installers/" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "\\\\.bzrignore$" "~$" "\\\\.swp$" "\\\\.#" "/#")
   INCLUDE(CPack)
 ENDIF()
 
