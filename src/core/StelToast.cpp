@@ -26,7 +26,7 @@
 #include "StelToast.hpp"
 
 ToastTile::ToastTile(QObject* parent, int level, int x, int y)
-	: QObject(parent), level(level), x(x), y(y), empty(false), ready(false), texture(NULL)
+	: QObject(parent), level(level), x(x), y(y), empty(false), ready(false), texture(NULL), texFader(NULL)
 {
 	Q_ASSERT(level <= getGrid()->getMaxLevel());
 	const ToastSurvey* survey = getSurvey();
@@ -90,7 +90,7 @@ bool ToastTile::isCovered(const SphericalCap& viewportShape) const
 		if (!viewportShape.intersects(child->boundingCap))
 			continue;
 		nbVisibleChildren++;
-		if (!child->ready)
+		if (!child->ready || child->texFader->state()==QTimeLine::Running)
 			return false;
 	}
 	return nbVisibleChildren > 0;
@@ -132,7 +132,7 @@ void ToastTile::prepareDraw()
 		for (int i = 0; i < 2; ++i)
 			for (int j = 0; j < 2; ++j)
 				subTiles.append(new ToastTile(this, level + 1, 2 * this->x + i, 2 * this->y + j));
-		Q_ASSERT(children().size() == 4);
+		Q_ASSERT(subTiles.size() == 4);
 	}
 	ready = true;
 }
@@ -147,7 +147,23 @@ void ToastTile::drawTile(StelPainter* sPainter)
 	if (texture.isNull() || !texture->bind())
 		return;
 
-	sPainter->setColor(1, 1, 1, 1);
+	if (!texFader)
+	{
+		texFader = new QTimeLine(1000, this);
+		texFader->start();
+	}
+
+	if (texFader->state()==QTimeLine::Running)
+	{
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		glEnable(GL_BLEND);
+		sPainter->setColor(1,1,1, texFader->currentValue());
+	}
+	else
+	{
+		glDisable(GL_BLEND);
+		sPainter->setColor(1, 1, 1, 1);
+	}
 
 	sPainter->enableTexture2d(true);
 	Q_ASSERT(vertexArray.size() == textureArray.size());
@@ -158,9 +174,9 @@ void ToastTile::drawTile(StelPainter* sPainter)
 	sPainter->drawFromArray(StelPainter::Triangles, indexArray.size(), 0, true, indexArray.constData());
 	glDisable(GL_CULL_FACE);
 
-	SphericalConvexPolygon poly(getGrid()->getPolygon(level, x, y));
-	sPainter->enableTexture2d(false);
-	sPainter->drawSphericalRegion(&poly, StelPainter::SphericalPolygonDrawModeBoundary);
+//	SphericalConvexPolygon poly(getGrid()->getPolygon(level, x, y));
+//	sPainter->enableTexture2d(false);
+//	sPainter->drawSphericalRegion(&poly, StelPainter::SphericalPolygonDrawModeBoundary);
 }
 
 

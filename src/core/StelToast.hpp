@@ -44,6 +44,7 @@ class ToastTile : public QObject
 public:
 	ToastTile(QObject* parent, int level, int x, int y);
 	void draw(StelPainter* painter, const SphericalCap& viewportShape, int maxVisibleLevel);
+	bool isTransparent();
 
 protected:
 	void drawTile(StelPainter* painter);
@@ -83,6 +84,9 @@ private:
 	QVector<Vec3d> vertexArray;
 	QVector<Vec2f> textureArray;
 	QVector<unsigned int> indexArray;
+
+	// Used for smooth fade in
+	class QTimeLine* texFader;
 };
 
 
