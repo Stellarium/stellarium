@@ -42,7 +42,7 @@ ToastGrid::ToastGrid(int amaxLevel)
 void ToastGrid::init_grid()
 {
 	// Allocate the grid memory.
-	grid.fill(Vec3d(0), size * size);
+	grid.resize(size * size);
 	// Set up the level 0.
 	at(0, 0, 0) = at(0, 1, 0) = at(0, 1, 1) = at(0, 0, 1) = Vec3d(0, 0, -1);
 	// And the level 1
