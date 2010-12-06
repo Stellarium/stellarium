@@ -13,7 +13,6 @@ int main(int argc, char *argv[])
 		qFatal("Argument 1 must be a valid level number");
 	}
 	int length = sqrt(pow(4, level));
-	qDebug() << length;
 	SphericalRegionP reg = SphericalRegionP::loadFromQVariant(StelJsonParser::parse(argv[2]).toList());
 	//SphericalRegionP reg = SphericalRegionP::loadFromQVariant(StelJsonParser::parse("[[21.286982057125858, 82.117482778097937], [341.20801035028205, 82.141350178494122], [308.54824444399429, 86.661406614892087], [54.398199236987082, 86.613098160666411]]").toList());
 	ToastGrid grid(level);
