@@ -158,9 +158,9 @@ void ToastTile::drawTile(StelPainter* sPainter)
 	sPainter->drawFromArray(StelPainter::Triangles, indexArray.size(), 0, true, indexArray.constData());
 	glDisable(GL_CULL_FACE);
 
-//	SphericalConvexPolygon poly(getGrid()->getPolygon(level, x, y));
-//	sPainter->enableTexture2d(false);
-//	sPainter->drawSphericalRegion(&poly, StelPainter::SphericalPolygonDrawModeBoundary);
+	SphericalConvexPolygon poly(getGrid()->getPolygon(level, x, y));
+	sPainter->enableTexture2d(false);
+	sPainter->drawSphericalRegion(&poly, StelPainter::SphericalPolygonDrawModeBoundary);
 }
 
 
