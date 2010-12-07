@@ -1,3 +1,30 @@
+0.10.6 [2010-12-05]
+New feature for installing landscapes from ZIP archives.
+New plugin: Solar System editor.
+New plugin: Time Zone manual override.
+New translatable strings: stars and nebulae.
+Selected plugins loaded by default.
+Fixed on change of sky culture. (LP: #595914).
+Fixed clearing of single constellation selection. (LP: #600889).
+Fixed constellation art engine, removing distortion of images. (LP: #629405).
+Changed GUI styles (all dialogs now use "Title Bar", the two different tabbed widget implementations are styled consistently).
+Changed Solar System engine, allowing "Comets" and "Minor planets" to be handled as classes of objects separate from "Planets".
+Translatable plugin names, descriptions and some other strings.
+Oculars plugin: now uses a configuration file instead of SQL (LP: #596453).
+Oculars plugin: added manual override of keyboard shortcuts (LP: #514530).
+Oculars plugin: CCD sensors formula fixed (LP: #604975).
+Satellites plugin: added new orbit prediction engine.
+Satellites plugin: added trajectory visualization.
+Satellites plugin: fixed problems leaving satellite TLEs out of date (LP: #616627).
+Satellites plugin: can now update TLEs from a local file.
+Satellites plugin: satellite visibility can now be saved from satellites dialog.
+Telescope control plugin: fixed bad serial port names on Windows (LP: #596167).
+Telescope control plugin: fixed telescopes disappearance on startup (LP: #608533).
+Telescope control plugin: added manual equinox/epoch override (LP: #608544).
+Various rendering problems resolved (LP: #569701, #596678, #641855, #642990, #666837, #629405, #591971, #615006, #671633).
+SQLite dependency dropped. The Qt SQLite driver no longer needs to be packaged with Stellarium.
+
+
 0.10.5 [2010-06-02]
 Bug fix release.
 Fixed:
