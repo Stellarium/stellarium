@@ -328,7 +328,7 @@
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>3</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout">
@@ -670,6 +670,9 @@
                </item>
                <item>
                 <widget class="QSpinBox" name="lightPollutionSpinBox">
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
                  <property name="minimum">
                   <number>1</number>
                  </property>
@@ -678,6 +681,99 @@
                  </property>
                  <property name="value">
                   <number>1</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="pressureLayout">
+               <item>
+                <widget class="QLabel" name="pressureLabel">
+                 <property name="text">
+                  <string>Pressure (mbar):</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="pressureDoubleSpinBox">
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="maximum">
+                  <double>1500.000000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>1013.250000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="temperatureLayout">
+               <item>
+                <widget class="QLabel" name="temperatureLabel">
+                 <property name="inputMethodHints">
+                  <set>Qt::ImhNone</set>
+                 </property>
+                 <property name="text">
+                  <string>Temperature (C):</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="temperatureDoubleSpinBox">
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-100.000000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>10.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="extinctionLayout">
+               <item>
+                <widget class="QLabel" name="extinctionLabel">
+                 <property name="toolTip">
+                  <string/>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Extinction is the loss of star brightness due to Earth's atmosphere. It is given in mag/airmass, where airmass is number of atmospheres light has to pass. (zenith: 1; horizon: about 40)</string>
+                 </property>
+                 <property name="text">
+                  <string>Extinction Coefficient:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="extinctionDoubleSpinBox">
+                 <property name="toolTip">
+                  <string>Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 for murky conditions.</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="maximum">
+                  <double>3.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.010000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>0.220000000000000</double>
                  </property>
                 </widget>
                </item>
@@ -1578,6 +1674,58 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>starScaleRadiusDoubleSpinBox</tabstop>
+  <tabstop>starRelativeScaleDoubleSpinBox</tabstop>
+  <tabstop>starTwinkleCheckBox</tabstop>
+  <tabstop>starTwinkleAmountDoubleSpinBox</tabstop>
+  <tabstop>adaptationCheckbox</tabstop>
+  <tabstop>showPlanetCheckBox</tabstop>
+  <tabstop>planetMarkerCheckBox</tabstop>
+  <tabstop>planetOrbitCheckBox</tabstop>
+  <tabstop>planetLightSpeedCheckBox</tabstop>
+  <tabstop>planetScaleMoonCheckBox</tabstop>
+  <tabstop>showAtmosphereCheckBox</tabstop>
+  <tabstop>lightPollutionSpinBox</tabstop>
+  <tabstop>pressureDoubleSpinBox</tabstop>
+  <tabstop>temperatureDoubleSpinBox</tabstop>
+  <tabstop>extinctionDoubleSpinBox</tabstop>
+  <tabstop>starLabelCheckBox</tabstop>
+  <tabstop>starsLabelsHorizontalSlider</tabstop>
+  <tabstop>nebulaLabelCheckBox</tabstop>
+  <tabstop>nebulasLabelsHorizontalSlider</tabstop>
+  <tabstop>planetLabelCheckBox</tabstop>
+  <tabstop>planetsLabelsHorizontalSlider</tabstop>
+  <tabstop>zhrNone</tabstop>
+  <tabstop>zhr10</tabstop>
+  <tabstop>zhr80</tabstop>
+  <tabstop>zhr10000</tabstop>
+  <tabstop>zhr144000</tabstop>
+  <tabstop>showEquatorLineCheckBox</tabstop>
+  <tabstop>showMeridianLineCheckBox</tabstop>
+  <tabstop>showEclipticLineCheckBox</tabstop>
+  <tabstop>showCardinalPointsCheckBox</tabstop>
+  <tabstop>showConstellationLinesCheckBox</tabstop>
+  <tabstop>showConstellationLabelsCheckBox</tabstop>
+  <tabstop>showConstellationBoundariesCheckBox</tabstop>
+  <tabstop>showConstellationArtCheckBox</tabstop>
+  <tabstop>constellationArtBrightnessSpinBox</tabstop>
+  <tabstop>projectionTextBrowser</tabstop>
+  <tabstop>landscapeTextBrowser</tabstop>
+  <tabstop>pushButtonAddRemoveLandscapes</tabstop>
+  <tabstop>showGroundCheckBox</tabstop>
+  <tabstop>showFogCheckBox</tabstop>
+  <tabstop>landscapePositionCheckBox</tabstop>
+  <tabstop>useAsDefaultLandscapeCheckBox</tabstop>
+  <tabstop>skyCultureTextBrowser</tabstop>
+  <tabstop>useAsDefaultSkyCultureCheckBox</tabstop>
+  <tabstop>skyLayerListWidget</tabstop>
+  <tabstop>skyLayerTextBrowser</tabstop>
+  <tabstop>skyLayerEnableCheckBox</tabstop>
+  <tabstop>showAzimuthalGridCheckBox</tabstop>
+  <tabstop>showEquatorialJ2000GridCheckBox</tabstop>
+  <tabstop>showEquatorialGridCheckBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../../data/gui/guiRes.qrc"/>
  </resources>
