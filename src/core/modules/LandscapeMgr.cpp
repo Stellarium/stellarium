@@ -334,7 +334,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 	{
 		StelApp::getInstance().getCore()->getNavigator()->moveObserverTo(landscape->getLocation());
 		// GZ Patch: allow change in fog, extinction, refraction parameters and light pollution
-		QSettings* conf = StelApp::getInstance().getSettings();
+		//QSettings* conf = StelApp::getInstance().getSettings();
 		Q_ASSERT(conf);
 		StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
 
@@ -346,22 +346,29 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 		if (landscape->getDefaultBortleIndex() > 0)
 		  {
 		    setAtmosphereBortleLightPollution(landscape->getDefaultBortleIndex());
-		    // hopefully this makes the GUI aware of the new value(?)
-		    conf->setValue("landscape/init_bortle_scale", landscape->getDefaultBortleIndex());
+		    // TODO: HOWTO make the GUI aware of the new value? 
+		    // conf->setValue("landscape/init_bortle_scale", landscape->getDefaultBortleIndex());
 		  }
-		if (landscape->getDefaultAtmosphericExtinction() >=0.0f)
+		if (landscape->getDefaultAtmosphericExtinction() >= 0.0)
 		  {
 		    drawer->setExtinctionCoefficient(landscape->getDefaultAtmosphericExtinction());
 		  }
-		if (landscape->getDefaultAtmosphericTemperature() >=-1000.0f)
+		if (landscape->getDefaultAtmosphericTemperature() > -273.15)
 		  {
 		    drawer->setAtmosphereTemperature(landscape->getDefaultAtmosphericTemperature());
 		  }
-		if (landscape->getDefaultAtmosphericPressure() >=0.0f)
+		if (landscape->getDefaultAtmosphericPressure() >= 0.0)
 		  {
 		    drawer->setAtmospherePressure(landscape->getDefaultAtmosphericPressure());
 		  }
-
+		else if (landscape->getDefaultAtmosphericPressure() == -1.0)
+		  {
+		    // compute standard pressure for standard atmosphere in given altitude if landscape.ini coded as atmospheric_pressure=-1
+		    // International altitude formula found in Wikipedia.
+		    double alt=landscape->getLocation().altitude;
+		    double p=1013.25*std::pow(1-(0.0065*alt)/288.15, 5.255);
+		    drawer->setAtmospherePressure(p);
+		  }
 	}
 	return true;
 }
