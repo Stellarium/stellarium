@@ -169,17 +169,17 @@ public slots:
 	//! This is used to decide whether to apply refraction/extinction before rendering point sources et al.
 	bool getFlagHasAtmosphere(void) const {return flagHasAtmosphere;}
         //! Set extinction coefficient, mag/airmass (for extinction).
-        void setExtinctionCoefficient(float extCoeff) {atmosphericExtinctionCoefficient=extCoeff; refExt.setExtinctionCoefficient(extCoeff);}
+        void setExtinctionCoefficient(double extCoeff) {atmosphericExtinctionCoefficient=extCoeff; refExt.setExtinctionCoefficient(extCoeff);}
         //! Get extinction coefficient, mag/airmass (for extinction).
-        float getExtinctionCoefficient(void) const {return atmosphericExtinctionCoefficient;}
+        double getExtinctionCoefficient(void) const {return atmosphericExtinctionCoefficient;}
         //! Set atmospheric (ground) temperature (for refraction).
-        void setAtmosphereTemperature(float celsius) {atmosphericTemperature=celsius; refExt.setTemperature(celsius);}
+        void setAtmosphereTemperature(double celsius) {atmosphericTemperature=celsius; refExt.setTemperature(celsius);}
         //! Get atmospheric (ground) temperature (for refraction).
-        float getAtmosphereTemperature(void) const {return atmosphericTemperature;}
+        double getAtmosphereTemperature(void) const {return atmosphericTemperature;}
         //! Set atmospheric (ground) pressure (for refraction).
-        void setAtmospherePressure(float mbar) {atmosphericPressure=mbar; refExt.setPressure(mbar);}
+        void setAtmospherePressure(double mbar) {atmosphericPressure=mbar; refExt.setPressure(mbar);}
         //! Get atmospheric (ground) pressure (for refraction).
-        float getAtmospherePressure(void) const {return atmosphericPressure;}
+        double getAtmospherePressure(void) const {return atmosphericPressure;}
         //! Get access to (only necessary) RefractionExtinction, to be able to compute those effects.
         const RefractionExtinction *getRefractionExtinction(void) const {return &refExt;}
 
