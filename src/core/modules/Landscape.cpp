@@ -97,14 +97,14 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		defaultFogSetting = landscapeIni.value("location/display_fog").toInt();
 	else defaultFogSetting=-1;
 	if (landscapeIni.contains("location/atmospheric_extinction_coefficient"))
-		defaultExtinctionCoefficient = landscapeIni.value("location/atmospheric_extinction_coefficient").toFloat();
-	else defaultExtinctionCoefficient=-1.0f;
+		defaultExtinctionCoefficient = landscapeIni.value("location/atmospheric_extinction_coefficient").toDouble();
+	else defaultExtinctionCoefficient=-1.0;
 	if (landscapeIni.contains("location/atmospheric_temperature"))
-		defaultTemperature = landscapeIni.value("location/atmospheric_temperature").toFloat();
-	else defaultTemperature=-1000.0f;
+		defaultTemperature = landscapeIni.value("location/atmospheric_temperature").toDouble();
+	else defaultTemperature=-1000.0;
 	if (landscapeIni.contains("location/atmospheric_pressure"))
-		defaultPressure = landscapeIni.value("location/atmospheric_pressure").toFloat();
-	else defaultPressure=-1.0f;
+		defaultPressure = landscapeIni.value("location/atmospheric_pressure").toDouble();
+	else defaultPressure=-2.0; // "no change"
 }
 
 #include <iostream>
