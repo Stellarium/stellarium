@@ -107,25 +107,25 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), flagHasAtmosphere(t
 	}
 
 	//GZ: load 3 values from config for now. TODO: make adjustable with GUI!
-	setExtinctionCoefficient(conf->value("landscape/atmospheric_extinction_coefficient",0.2).toFloat(&ok));
+	setExtinctionCoefficient(conf->value("landscape/atmospheric_extinction_coefficient",0.2).toDouble(&ok));
 	if (!ok)
 	{
 		conf->setValue("landscape/atmospheric_extinction_coefficient",0.2);
 		setExtinctionCoefficient(0.2);
 		ok = true;
 	}
-	setAtmosphereTemperature(conf->value("landscape/temperature_C",15.0).toFloat(&ok));
+	setAtmosphereTemperature(conf->value("landscape/temperature_C",15.0).toDouble(&ok));
 	if (!ok)
 	{
 		conf->setValue("landscape/temperature_C",15);
-		setAtmosphereTemperature(15.0f);
+		setAtmosphereTemperature(15.0);
 		ok = true;
 	}
-	setAtmospherePressure(conf->value("landscape/pressure_mbar",1013.0).toFloat(&ok));
+	setAtmospherePressure(conf->value("landscape/pressure_mbar",1013.0).toDouble(&ok));
 	if (!ok)
 	{
 		conf->setValue("landscape/pressure_mbar",1013.0);
-		setAtmospherePressure(1013.0f);
+		setAtmospherePressure(1013.0);
 		ok = true;
 	}
 
