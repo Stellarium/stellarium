@@ -8,128 +8,44 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-19 15:26+0200\n"
-"PO-Revision-Date: 2010-02-11 19:11+0000\n"
-"Last-Translator: Willem1 <willem.sonke@planet.nl>\n"
+"POT-Creation-Date: 2010-11-19 19:55+0200\n"
+"PO-Revision-Date: 2010-12-02 04:28+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-26 09:36+0000\n"
+"X-Launchpad-Export-Date: 2010-12-05 08:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
 
-#: src/gui/StelGui.cpp:131
-msgid "Configuration window"
-msgstr "Configuratiescherm"
+#: src/core/modules/GridLinesMgr.cpp:516
+msgid "Meridian"
+msgstr "Meridian"
 
-#: src/translations.h:85
-msgid "Set Location "
-msgstr "Locatie instellen "
+#: src/core/modules/GridLinesMgr.cpp:520
+msgid "Ecliptic"
+msgstr "Ecliptica"
 
-#: src/translations.h:86
-msgid "Set Time "
-msgstr "Tijd instellen "
+#: src/core/modules/GridLinesMgr.cpp:524
+msgid "Equator"
+msgstr "Equator"
 
-#: src/translations.h:92
-msgid "Administration "
-msgstr "Beheer "
-
-#: src/translations.h:99
-msgid "Sky Time: "
-msgstr "Ruimtetijd: "
-
-#: src/translations.h:100
-msgid "Set Time Zone: "
-msgstr "Tijdzone instellen: "
-
-#: src/translations.h:106
-msgid "Actual Time"
-msgstr "Werkelijke Tijd"
-
-#: src/translations.h:108
-msgid "Time Display Format: "
-msgstr "Tijdnotatie: "
-
-#: src/translations.h:109
-msgid "Date Display Format: "
-msgstr "Datumnotatie: "
-
-#: src/translations.h:115
-msgid "Star Value Multiplier: "
-msgstr "Vermenigvuldigingsfactor sterwaarde: "
-
-#: src/translations.h:116
-msgid "Magnitude Sizing Multiplier: "
-msgstr "Vermenigvuldigingsfactor Helderheid: "
-
-#: src/translations.h:117
-msgid "Maximum Magnitude to Label: "
-msgstr "Maximum te labelen Helderheid: "
-
-#: src/translations.h:121
-msgid "Constellation Lines"
-msgstr "Sterrenbeeldlijnen"
-
-#: src/translations.h:122
-msgid "Constellation Names"
-msgstr "Sterrenbeeldnamen"
-
-#: src/translations.h:125
-msgid "Cardinal Points"
-msgstr "Windstreken"
-
-#: src/translations.h:126
-msgid "Planet Names"
-msgstr "Planeetnamen"
-
-#: src/translations.h:128
-msgid "Planet Trails"
-msgstr "Planeetbanen"
-
-#: src/translations.h:129
-msgid "Meridian Line"
-msgstr "Meridiaanlijn"
-
-#: src/translations.h:132
-msgid "Equator Line"
-msgstr "Hemelevenaar"
-
-#: src/translations.h:137
-msgid "Light Pollution Luminance: "
-msgstr "Lichtvervuilingsintensiteit: "
-
-#: src/translations.h:141
-msgid "Magnitude Scaling Multiplier: "
-msgstr "Schaalfactor Helderheid: "
-
-#: src/translations.h:143
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Maximum te labelen Nevelhelderheid: "
-
-#: src/translations.h:144
-msgid "Zoom Duration: "
-msgstr "Tijdsduur Zoom: "
-
-#: src/translations.h:151
-msgid "Arrow down to load list."
-msgstr "Pijl naar beneden om lijst in te laden."
-
-#: src/core/modules/LandscapeMgr.cpp:401
+#: src/core/modules/LandscapeMgr.cpp:447
 msgid "Author: "
 msgstr "Auteur: "
 
-#: src/core/modules/LandscapeMgr.cpp:404
+#: src/core/modules/LandscapeMgr.cpp:450
 msgid "Location: "
 msgstr "Locatie: "
 
-#: src/core/modules/LandscapeMgr.cpp:409
+#: src/core/modules/LandscapeMgr.cpp:455
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:412
+#: src/core/modules/LandscapeMgr.cpp:458
 msgid "Planet: "
 msgstr "Planeet: "
 
@@ -215,7 +131,7 @@ msgstr "Afstand: %1 lichtjaar"
 msgid "Parallax: %1\""
 msgstr "Parallax: %1\""
 
-#: src/core/StelProjector.cpp:61
+#: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
 msgstr "Maximum gezichtsveld "
 
@@ -344,54 +260,54 @@ msgstr "Uur hoek/DE: %1/%2"
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Hgte: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:285
+#: src/gui/ConfigurationDialog.cpp:294
 msgid "Select screenshot directory"
 msgstr "Selecteer screenshot folder"
 
-#: src/gui/ConfigurationDialog.cpp:451
+#: src/gui/ConfigurationDialog.cpp:460
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Gezichtsveld bij opstarten: %1 %2"
 
-#: src/gui/ConfigurationDialog.cpp:459
+#: src/gui/ConfigurationDialog.cpp:468
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Hor/Vert weergave bij opstarten: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:495
+#: src/gui/ConfigurationDialog.cpp:508
 msgid "Authors"
 msgstr "Auteurs"
 
-#: src/gui/ConfigurationDialog.cpp:499 src/gui/ViewDialog.cpp:337
+#: src/gui/ConfigurationDialog.cpp:512 src/gui/ViewDialog.cpp:345
 msgid "Contact"
 msgstr "Contact"
 
-#: src/gui/ConfigurationDialog.cpp:571
+#: src/gui/ConfigurationDialog.cpp:584
 msgid "Author"
 msgstr "Auteur"
 
-#: src/gui/ConfigurationDialog.cpp:572
+#: src/gui/ConfigurationDialog.cpp:585
 msgid "License"
 msgstr "Licentie"
 
-#: src/gui/ConfigurationDialog.cpp:603
+#: src/gui/ConfigurationDialog.cpp:614
 msgid "Running script: "
 msgstr "Draaiende script: "
 
-#: src/gui/ConfigurationDialog.cpp:610
+#: src/gui/ConfigurationDialog.cpp:621
 msgid "Running script: [none]"
 msgstr "Draaiende script: [geen]"
 
-#: src/gui/ConfigurationDialog.cpp:653
+#: src/gui/ConfigurationDialog.cpp:664
 msgid "Finished downloading all star catalogs!"
 msgstr "Klaar met het downloaden van alle sterrencatalogi!"
 
-#: src/gui/ConfigurationDialog.cpp:662
+#: src/gui/ConfigurationDialog.cpp:673
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Verkrijg catalogus %1 van %2"
 
-#: src/gui/ConfigurationDialog.cpp:664
+#: src/gui/ConfigurationDialog.cpp:675
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -402,7 +318,7 @@ msgstr ""
 "Aantal sterren: %2 miljoen\n"
 "Magnitudebereik: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:673
+#: src/gui/ConfigurationDialog.cpp:684
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -410,7 +326,7 @@ msgstr ""
 "Klaar met het downloaden van nieuwe ster catalogi!\n"
 "Herstart Stellarium om ze weer te geven."
 
-#: src/gui/ConfigurationDialog.cpp:711 src/gui/ConfigurationDialog.cpp:745
+#: src/gui/ConfigurationDialog.cpp:722 src/gui/ConfigurationDialog.cpp:756
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -419,7 +335,7 @@ msgstr ""
 "Fout bij het downloaden van %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:716
+#: src/gui/ConfigurationDialog.cpp:727
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -428,11 +344,11 @@ msgstr ""
 "Downloaden %1...\n"
 "(U kunt dit venster sluiten.)"
 
-#: src/gui/ConfigurationDialog.cpp:796
+#: src/gui/ConfigurationDialog.cpp:807
 msgid "Verifying file integrity..."
 msgstr "Bestandsintegriteit verifiëren..."
 
-#: src/gui/ConfigurationDialog.cpp:800
+#: src/gui/ConfigurationDialog.cpp:811
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -559,6 +475,8 @@ msgid ""
 "properly or is missing and is not listed in the tracker, you can open bug "
 "reports here."
 msgstr ""
+"{Bug reporting and feature request system} Als iets niet naar behoren werkt "
+"en niet is opgenomen in de lijst, kunt u hier een bug report aanmaken."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:197
@@ -620,35 +538,35 @@ msgstr "Sterrenbeeldlabels"
 msgid "Constellation boundaries"
 msgstr "Sterrenbeeldgrenzen"
 
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1027
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1033
 msgid "Azimuthal grid"
 msgstr "Azimitaal raster"
 
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1025
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1031
 msgid "Equatorial grid"
 msgstr "Equatoriaal raster"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1026
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1032
 msgid "Equatorial J2000 grid"
 msgstr "Equatoriaal J2000 raster"
 
 #: src/gui/StelGui.cpp:107
 msgid "Galactic grid"
-msgstr ""
+msgstr "Galactisch coördinatenstelsel"
 
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1030
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1036
 msgid "Ecliptic line"
 msgstr "Ecliptica"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1028
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1034
 msgid "Equator line"
 msgstr "Evenaar"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1029
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1035
 msgid "Meridian line"
 msgstr "Meridaan"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1031
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1037
 msgid "Cardinal points"
 msgstr "Poolwijzers"
 
@@ -656,7 +574,7 @@ msgstr "Poolwijzers"
 msgid "Ground"
 msgstr "Grond"
 
-#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1009
+#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1015
 msgid "Atmosphere"
 msgstr "Atmosfeer"
 
@@ -664,7 +582,7 @@ msgstr "Atmosfeer"
 msgid "Fog"
 msgstr "Mist"
 
-#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1014
+#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1020
 msgid "Nebulas"
 msgstr "Nevels"
 
@@ -672,7 +590,7 @@ msgstr "Nevels"
 msgid "Nebulas background images"
 msgstr "Achtergrondafbeeldingen van nevels"
 
-#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:995 src/ui_viewDialog.h:1013
+#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1001 src/ui_viewDialog.h:1019
 msgid "Stars"
 msgstr "Sterren"
 
@@ -686,7 +604,7 @@ msgstr "Planeetbanen"
 
 #: src/gui/StelGui.cpp:122
 msgid "Planet trails"
-msgstr ""
+msgstr "pad van de planeet"
 
 #: src/gui/StelGui.cpp:124
 msgid "Night mode"
@@ -712,6 +630,10 @@ msgstr "Vensters"
 msgid "Help window"
 msgstr "Help venster"
 
+#: src/gui/StelGui.cpp:131
+msgid "Configuration window"
+msgstr "Configuratiescherm"
+
 #: src/gui/StelGui.cpp:132
 msgid "Search window"
 msgstr "Zoekvenster"
@@ -732,7 +654,7 @@ msgstr "Locatievenster"
 msgid "Script console window"
 msgstr "Script console venster"
 
-#: src/gui/StelGui.cpp:140 src/ui_dateTimeDialogGui.h:295
+#: src/gui/StelGui.cpp:140 src/ui_dateTimeDialogGui.h:294
 msgid "Date and Time"
 msgstr "Datum en tijd"
 
@@ -853,35 +775,110 @@ msgstr "Zichtbaarheid van de GUI aan-/uitzetten"
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:391
+#: src/gui/ViewDialog.cpp:399
 msgid "No description"
 msgstr "Geen beschrijving"
 
-#: src/gui/ViewDialog.cpp:451
+#: src/gui/ViewDialog.cpp:467
 msgid "No shooting stars"
 msgstr "Geen vallende sterren"
 
-#: src/gui/ViewDialog.cpp:454
+#: src/gui/ViewDialog.cpp:470
 msgid "Normal rate"
 msgstr "Normale snelheid"
 
-#: src/gui/ViewDialog.cpp:457
+#: src/gui/ViewDialog.cpp:473
 msgid "Standard Perseids rate"
 msgstr "Normaal Perseïden aantal"
 
-#: src/gui/ViewDialog.cpp:460
+#: src/gui/ViewDialog.cpp:476
 msgid "Exceptional Leonid rate"
 msgstr "Buitengewoon Leoniden aantal"
 
-#: src/gui/ViewDialog.cpp:463
+#: src/gui/ViewDialog.cpp:479
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Hoogste aantal ooit (1966 Leoniden)"
 
-#: src/gui/LocationDialog.cpp:340
+#: src/gui/LocationDialog.cpp:331
 msgid "New Location"
 msgstr "Nieuwe Locatie"
 
-#: src/main.cpp:317
+#: src/gui/AddRemoveLandscapesDialog.cpp:113
+msgid "Select a ZIP archive that contains a Stellarium landscape"
+msgstr ""
+
+#. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
+#: src/gui/AddRemoveLandscapesDialog.cpp:115
+msgid "ZIP archives"
+msgstr ""
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:128
+#, qt-format
+msgid "Landscape \"%1\" has been installed successfully."
+msgstr ""
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:129
+#: src/gui/AddRemoveLandscapesDialog.cpp:156
+msgid "Success"
+msgstr ""
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:142
+#: src/gui/AddRemoveLandscapesDialog.cpp:212
+#: src/gui/AddRemoveLandscapesDialog.cpp:221
+#: src/gui/AddRemoveLandscapesDialog.cpp:229
+msgid "No landscape was installed."
+msgstr ""
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:143
+#: src/gui/AddRemoveLandscapesDialog.cpp:167
+#: src/gui/AddRemoveLandscapesDialog.cpp:216
+#: src/gui/AddRemoveLandscapesDialog.cpp:222
+#: src/gui/AddRemoveLandscapesDialog.cpp:230
+#: src/gui/AddRemoveLandscapesDialog.cpp:240
+msgid "Error!"
+msgstr ""
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:155
+#, qt-format
+msgid "Landscape \"%1\" has been removed successfully."
+msgstr ""
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:166
+#: src/gui/AddRemoveLandscapesDialog.cpp:236
+msgid "The selected landscape could not be (completely) removed."
+msgstr ""
+
+#. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
+#: src/gui/AddRemoveLandscapesDialog.cpp:189
+#, qt-format
+msgid "Size on disk: %1 MiB"
+msgstr ""
+
+#. TRANSLATORS: The parameter is a file/directory path that may be quite long.
+#: src/gui/AddRemoveLandscapesDialog.cpp:215
+#, qt-format
+msgid "Stellarium cannot open for reading or writing %1"
+msgstr ""
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:221
+msgid ""
+"The selected file is not a ZIP archive or does not contain a Stellarium "
+"landscape."
+msgstr ""
+
+#. TRANSLATORS: The parameter is the duplicate name or identifier.
+#: src/gui/AddRemoveLandscapesDialog.cpp:228
+#, qt-format
+msgid "A landscape with the same name or identifier (%1) already exists."
+msgstr ""
+
+#. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
+#: src/gui/AddRemoveLandscapesDialog.cpp:239
+#, qt-format
+msgid "You can remove it manually by deleting the following directory: %1"
+msgstr ""
+
+#: src/main.cpp:335
 msgid "This system does not support OpenGL."
 msgstr "Dit systeem heeft geen ondersteuning voor OpenGL."
 
@@ -918,380 +915,561 @@ msgid "Phobos"
 msgstr "Phobos"
 
 #: src/translations.h:41
+msgid "Ceres"
+msgstr "Ceres"
+
+#: src/translations.h:42
+msgid "Pallas"
+msgstr "Pallas"
+
+#: src/translations.h:43
+msgid "Juno"
+msgstr "Juno"
+
+#: src/translations.h:44
+msgid "Vesta"
+msgstr "Vesta"
+
+#: src/translations.h:45
 msgid "Jupiter"
 msgstr "Jupiter"
 
-#: src/translations.h:42
+#: src/translations.h:46
 msgid "Io"
 msgstr "Io"
 
-#: src/translations.h:43
+#: src/translations.h:47
 msgid "Europa"
 msgstr "Europa"
 
-#: src/translations.h:44
+#: src/translations.h:48
 msgid "Ganymede"
 msgstr "Ganymedes"
 
-#: src/translations.h:45
+#: src/translations.h:49
 msgid "Callisto"
 msgstr "Callisto"
 
-#: src/translations.h:46
+#: src/translations.h:50
 msgid "Saturn"
 msgstr "Saturnus"
 
-#: src/translations.h:47
+#: src/translations.h:51
 msgid "Mimas"
 msgstr "Mimas"
 
-#: src/translations.h:48
+#: src/translations.h:52
 msgid "Enceladus"
 msgstr "Enceladus"
 
-#: src/translations.h:49
+#: src/translations.h:53
 msgid "Tethys"
 msgstr "Tethys"
 
-#: src/translations.h:50
+#: src/translations.h:54
 msgid "Dione"
 msgstr "Dione"
 
-#: src/translations.h:51
+#: src/translations.h:55
 msgid "Rhea"
 msgstr "Rhea"
 
-#: src/translations.h:52
+#: src/translations.h:56
 msgid "Titan"
 msgstr "Titan"
 
-#: src/translations.h:53
+#: src/translations.h:57
 msgid "Hyperion"
 msgstr "Hyperion"
 
-#: src/translations.h:54
+#: src/translations.h:58
 msgid "Iapetus"
 msgstr "Iapetus"
 
-#: src/translations.h:55
+#: src/translations.h:59
 msgid "Phoebe"
 msgstr "Phoebe"
 
-#: src/translations.h:56
+#: src/translations.h:60
 msgid "Neptune"
 msgstr "Neptunus"
 
-#: src/translations.h:57
+#: src/translations.h:61
 msgid "Uranus"
 msgstr "Uranus"
 
-#: src/translations.h:58
+#: src/translations.h:62
+msgid "Miranda"
+msgstr "Miranda"
+
+#: src/translations.h:63
+msgid "Ariel"
+msgstr "Ariel"
+
+#: src/translations.h:64
+msgid "Umbriel"
+msgstr "Umbriel"
+
+#: src/translations.h:65
+msgid "Titania"
+msgstr "Titania"
+
+#: src/translations.h:66
+msgid "Oberon"
+msgstr "Oberon"
+
+#: src/translations.h:67
 msgid "Pluto"
 msgstr "Pluto"
 
-#: src/translations.h:59
+#: src/translations.h:68
 msgid "Charon"
 msgstr "Charon"
 
-#: src/translations.h:60
+#: src/translations.h:69
+msgid "Eris"
+msgstr "Eris"
+
+#: src/translations.h:70
 msgid "Solar System Observer"
 msgstr "Bekijk zonnestelsel"
 
-#: src/translations.h:63
+#. TRANSLATORS: Asteroid (5) Astraea
+#: src/translations.h:73
+msgid "Astraea"
+msgstr "Astraea"
+
+#. TRANSLATORS: Asteroid (6) Hebe
+#: src/translations.h:75
+msgid "Hebe"
+msgstr "Hebe"
+
+#. TRANSLATORS: Asteroid (7) Iris
+#: src/translations.h:77
+msgid "Iris"
+msgstr "Iris"
+
+#. TRANSLATORS: Asteroid (8) Flora
+#: src/translations.h:79
+msgid "Flora"
+msgstr "Flora"
+
+#. TRANSLATORS: Asteroid (9) Metis
+#: src/translations.h:81
+msgid "Metis"
+msgstr "Metis"
+
+#. TRANSLATORS: Asteroid (10) Hygiea
+#: src/translations.h:83
+msgid "Hygiea"
+msgstr "Hygiea"
+
+#. TRANSLATORS: Asteroid (1221) Amor
+#: src/translations.h:85
+msgid "Amor"
+msgstr "Amor"
+
+#. TRANSLATORS: Asteroid (99942) Apophis
+#: src/translations.h:87
+msgid "Apophis"
+msgstr "Apophis"
+
+#. TRANSLATORS: Asteroid (2060) Chiron
+#: src/translations.h:89
+msgid "Chiron"
+msgstr "Chiron"
+
+#. TRANSLATORS: Asteroid (433) Eros
+#: src/translations.h:91
+msgid "Eros"
+msgstr "Eros"
+
+#. TRANSLATORS: Asteroid (624) Hektor
+#: src/translations.h:93
+msgid "Hektor"
+msgstr "Hektor"
+
+#: src/translations.h:97
 msgid "N"
 msgstr "N"
 
-#: src/translations.h:64
+#: src/translations.h:98
 msgid "S"
 msgstr "Z"
 
-#: src/translations.h:65
+#: src/translations.h:99
 msgid "E"
 msgstr "O"
 
-#: src/translations.h:66
+#: src/translations.h:100
 msgid "W"
 msgstr "W"
 
-#: src/translations.h:69
+#: src/translations.h:103
 msgid "Aztec"
 msgstr "Azteken"
 
-#: src/translations.h:70
+#: src/translations.h:104
 msgid "Chinese"
 msgstr "Chinees"
 
-#: src/translations.h:71
+#: src/translations.h:105
 msgid "Egyptian"
 msgstr "Egyptisch"
 
-#: src/translations.h:72
+#: src/translations.h:106
 msgid "Inuit"
 msgstr "Inuit"
 
-#: src/translations.h:73
+#: src/translations.h:107
 msgid "Korean"
 msgstr "Koreaans"
 
-#: src/translations.h:74
+#: src/translations.h:108
 msgid "Lakota"
 msgstr "Lakota"
 
-#: src/translations.h:75
+#: src/translations.h:109
 msgid "Maori"
 msgstr "Maori"
 
-#: src/translations.h:76
+#: src/translations.h:110
 msgid "Navajo"
 msgstr "Navajo"
 
-#: src/translations.h:77
+#: src/translations.h:111
 msgid "Norse"
 msgstr "Noors"
 
-#: src/translations.h:78
+#: src/translations.h:112
 msgid "Polynesian"
 msgstr "Polynesisch"
 
-#: src/translations.h:79
+#: src/translations.h:113
 msgid "Sami"
-msgstr ""
+msgstr "Sami"
 
-#: src/translations.h:80
+#: src/translations.h:114
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
-#: src/translations.h:81
+#: src/translations.h:115
 msgid "Western"
 msgstr "Westers"
 
-#: src/translations.h:87
+#: src/translations.h:119
+msgid "Set Location "
+msgstr "Locatie instellen "
+
+#: src/translations.h:120
+msgid "Set Time "
+msgstr "Tijd instellen "
+
+#: src/translations.h:121
 msgid "General "
 msgstr "Algemeen "
 
-#: src/translations.h:88
+#: src/translations.h:122
 msgid "Stars "
 msgstr "Sterren "
 
-#: src/translations.h:89
+#: src/translations.h:123
 msgid "Colors "
 msgstr "Kleuren "
 
-#: src/translations.h:90
+#: src/translations.h:124
 msgid "Effects "
 msgstr "Effecten "
 
-#: src/translations.h:91
+#: src/translations.h:125
 msgid "Scripts "
 msgstr "Scripts "
 
-#: src/translations.h:94
+#: src/translations.h:126
+msgid "Administration "
+msgstr "Beheer "
+
+#: src/translations.h:128
 msgid "Latitude: "
 msgstr "Breedtegraad: "
 
-#: src/translations.h:95
+#: src/translations.h:129
 msgid "Longitude: "
 msgstr "Lengtegraad: "
 
-#: src/translations.h:96
+#: src/translations.h:130
 msgid "Altitude (m): "
 msgstr "Hoogte (m): "
 
-#: src/translations.h:97
+#: src/translations.h:131
 msgid "Solar System Body: "
-msgstr "Hemellichaam zonnestelsel: "
+msgstr "Bouw van zonnestelsel "
 
-#: src/translations.h:101
+#: src/translations.h:133
+msgid "Sky Time: "
+msgstr "Ruimtetijd: "
+
+#: src/translations.h:134
+msgid "Set Time Zone: "
+msgstr "Tijdzone instellen: "
+
+#: src/translations.h:135
 msgid "Day keys: "
 msgstr "Trefpunt van de dag "
 
-#: src/translations.h:102
+#: src/translations.h:136
 msgid "Calendar"
 msgstr "Kalender"
 
-#: src/translations.h:103
+#: src/translations.h:137
 msgid "Sidereal"
 msgstr "Siderisch"
 
-#: src/translations.h:104
+#: src/translations.h:138
 msgid "Preset Sky Time: "
 msgstr "Vooraf ingestelde hemeltijd: "
 
-#: src/translations.h:105
+#: src/translations.h:139
 msgid "Sky Time At Start-up: "
 msgstr "Hemeltijd bij opstarten: "
 
-#: src/translations.h:107
+#: src/translations.h:140
+msgid "Actual Time"
+msgstr "Werkelijke Tijd"
+
+#: src/translations.h:141
 msgid "Preset Time"
 msgstr "Vooringestelde Tijd"
 
-#: src/translations.h:111
+#: src/translations.h:142
+msgid "Time Display Format: "
+msgstr "Tijdnotatie: "
+
+#: src/translations.h:143
+msgid "Date Display Format: "
+msgstr "Datumnotatie: "
+
+#: src/translations.h:145
 msgid "Sky Culture: "
 msgstr "Cultuur van hemelkoepel: "
 
-#: src/translations.h:112
+#: src/translations.h:146
 msgid "Sky Language: "
 msgstr "Taal van hemelkoepel: "
 
-#: src/translations.h:114
+#: src/translations.h:148
 msgid "Show: "
 msgstr "Toon: "
 
-#: src/translations.h:118
+#: src/translations.h:149
+msgid "Star Value Multiplier: "
+msgstr "Vermenigvuldigingsfactor sterwaarde: "
+
+#: src/translations.h:150
+msgid "Magnitude Sizing Multiplier: "
+msgstr "Vermenigvuldigingsfactor Helderheid: "
+
+#: src/translations.h:151
+msgid "Maximum Magnitude to Label: "
+msgstr "Maximum te labelen Helderheid: "
+
+#: src/translations.h:152
 msgid "Twinkling: "
 msgstr "Fonkelen: "
 
-#: src/translations.h:119
+#: src/translations.h:153
 msgid "Limiting Magnitude: "
 msgstr "Begrenzende Helderheid: "
 
-#: src/translations.h:123
+#: src/translations.h:155
+msgid "Constellation Lines"
+msgstr "Sterrenbeeldlijnen"
+
+#: src/translations.h:156
+msgid "Constellation Names"
+msgstr "Sterrenbeeldnamen"
+
+#: src/translations.h:157
 msgid "Constellation Art Intensity"
 msgstr "Intensiteit Sterrenbeeldtekening"
 
-#: src/translations.h:124
+#: src/translations.h:158
 msgid "Constellation Boundaries"
 msgstr "Sterrenbeeldgrenzen"
 
-#: src/translations.h:127
+#: src/translations.h:159
+msgid "Cardinal Points"
+msgstr "Windstreken"
+
+#: src/translations.h:160
+msgid "Planet Names"
+msgstr "Planeetnamen"
+
+#: src/translations.h:161
 msgid "Planet Orbits"
 msgstr "Omloopbanen Planeten"
 
-#: src/translations.h:130
+#: src/translations.h:162
+msgid "Planet Trails"
+msgstr "Planeetbanen"
+
+#: src/translations.h:163
+msgid "Meridian Line"
+msgstr "Meridiaanlijn"
+
+#: src/translations.h:164
 msgid "Azimuthal Grid"
 msgstr "Azimutaal raster"
 
-#: src/translations.h:131
+#: src/translations.h:165
 msgid "Equatorial Grid"
 msgstr "Equatoriaal raster"
 
-#: src/translations.h:133
+#: src/translations.h:166
+msgid "Equator Line"
+msgstr "Hemelevenaar"
+
+#: src/translations.h:167
 msgid "Ecliptic Line"
 msgstr "Ecliptica"
 
-#: src/translations.h:134
+#: src/translations.h:168
 msgid "Nebula Names"
 msgstr "Namen Nevels"
 
-#: src/translations.h:135
+#: src/translations.h:169
 msgid "Nebula Circles"
 msgstr "Cirkels Nevels"
 
-#: src/translations.h:138
+#: src/translations.h:171
+msgid "Light Pollution Luminance: "
+msgstr "Lichtvervuilingsintensiteit: "
+
+#: src/translations.h:172
 msgid "Landscape: "
 msgstr "Landschap: "
 
-#: src/translations.h:139
+#: src/translations.h:173
 msgid "Manual zoom: "
 msgstr "Handmatig zoomen: "
 
-#: src/translations.h:140
+#: src/translations.h:174
 msgid "Object Sizing Rule: "
 msgstr "Weergave objectgrootte: "
 
-#: src/translations.h:142
+#: src/translations.h:175
+msgid "Magnitude Scaling Multiplier: "
+msgstr "Schaalfactor Helderheid: "
+
+#: src/translations.h:176
 msgid "Milky Way intensity: "
 msgstr "Intensiteit melkweg: "
 
-#: src/translations.h:145
+#: src/translations.h:177
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "Maximum te labelen Nevelhelderheid: "
+
+#: src/translations.h:178
+msgid "Zoom Duration: "
+msgstr "Tijdsduur Zoom: "
+
+#: src/translations.h:179
 msgid "Cursor Timeout: "
 msgstr "Cursor timeout: "
 
-#: src/translations.h:146
+#: src/translations.h:180
 msgid "Correct for light travel time: "
 msgstr "Correct voor licht reis tijd (psc) : "
 
-#: src/translations.h:148
+#: src/translations.h:182
 msgid "Local Script: "
 msgstr "Lokaal script: "
 
-#: src/translations.h:149
+#: src/translations.h:183
 msgid "CD/DVD Script: "
 msgstr "CD/DVD script: "
 
-#: src/translations.h:150
+#: src/translations.h:184
 msgid "USB Script: "
 msgstr "USB Script "
 
-#: src/translations.h:152
+#: src/translations.h:185
+msgid "Arrow down to load list."
+msgstr "Pijl naar beneden om lijst in te laden."
+
+#: src/translations.h:186
 msgid "Select and exit to run."
 msgstr "Selecteer en sluit om af te spelen."
 
-#: src/translations.h:154
+#: src/translations.h:188
 msgid "Load Default Configuration: "
 msgstr "Laad standaard configuratie: "
 
-#: src/translations.h:155
+#: src/translations.h:189
 msgid "Save Current Configuration as Default: "
 msgstr "Huidige configuratie als standaard opslaan: "
 
-#: src/translations.h:156
+#: src/translations.h:190
 msgid "Shut Down: "
 msgstr "Afsluiten: "
 
-#: src/translations.h:157
+#: src/translations.h:191
 msgid "Update me via Internet: "
 msgstr "Update programma via het internet: "
 
-#: src/translations.h:158
+#: src/translations.h:192
 msgid "Set UI Locale: "
 msgstr "Selecteer UI locale: "
 
-#: src/ui_dateTimeDialogGui.h:294 src/ui_helpDialogGui.h:259
-#: src/ui_locationDialogGui.h:387 src/ui_viewDialog.h:979
-#: src/ui_configurationDialog.h:746
-msgid "Form"
-msgstr "Vorm"
-
-#: src/ui_dateTimeDialogGui.h:297 src/ui_dateTimeDialogGui.h:298
+#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
 msgstr "/"
 
-#: src/ui_dateTimeDialogGui.h:299 src/ui_dateTimeDialogGui.h:300
+#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
 msgid ":"
 msgstr ":"
 
-#: src/ui_helpDialogGui.h:260 src/ui_helpDialogGui.h:266
+#: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
 msgid "Help"
 msgstr "Help"
 
-#: src/ui_helpDialogGui.h:268
+#: src/ui_helpDialogGui.h:267
 msgid "About"
 msgstr "Informatie"
 
-#: src/ui_helpDialogGui.h:270
+#: src/ui_helpDialogGui.h:269
 msgid "Log"
 msgstr "Log"
 
-#: src/ui_helpDialogGui.h:273
+#: src/ui_helpDialogGui.h:272
 msgid "Refresh"
 msgstr "Vernieuw"
 
-#: src/ui_locationDialogGui.h:388
+#: src/ui_locationDialogGui.h:387
 msgid "Location"
 msgstr "Locatie"
 
-#: src/ui_locationDialogGui.h:392
+#: src/ui_locationDialogGui.h:391
 msgid "Current location information"
 msgstr "Informatie over huidige lokatie"
 
-#: src/ui_locationDialogGui.h:393
+#: src/ui_locationDialogGui.h:392
 msgid "Use as default"
 msgstr "Gebruik als standaard"
 
-#: src/ui_locationDialogGui.h:394
+#: src/ui_locationDialogGui.h:393
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: src/ui_locationDialogGui.h:395
+#: src/ui_locationDialogGui.h:394
 msgid "Add to list"
 msgstr "Aan lijst toevoegen"
 
-#: src/ui_locationDialogGui.h:396
+#: src/ui_locationDialogGui.h:395
 msgid "Latitude:"
 msgstr "Breedtegraad:"
 
-#: src/ui_locationDialogGui.h:398 src/ui_locationDialogGui.h:402
+#: src/ui_locationDialogGui.h:397 src/ui_locationDialogGui.h:401
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
@@ -1299,252 +1477,256 @@ msgstr ""
 "U kunt waarden ingeven als decimale graden, of in het graden-minuten-"
 "seconden formaat, bijvoorbeeld: +1d 12m 8s"
 
-#: src/ui_locationDialogGui.h:400
+#: src/ui_locationDialogGui.h:399
 msgid "Longitude:"
 msgstr "Lengtegraad:"
 
-#: src/ui_locationDialogGui.h:404
+#: src/ui_locationDialogGui.h:403
 msgid "Altitude:"
 msgstr "Hoogte:"
 
-#: src/ui_locationDialogGui.h:406
+#: src/ui_locationDialogGui.h:405
 msgid "Enter the altitude in meter"
 msgstr "Stel altitude in, in meters"
 
-#: src/ui_locationDialogGui.h:408
+#: src/ui_locationDialogGui.h:407
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:409
+#: src/ui_locationDialogGui.h:408
 msgid "Name/City:"
 msgstr "Naam/stad:"
 
-#: src/ui_locationDialogGui.h:410
+#: src/ui_locationDialogGui.h:409
 msgid "Country:"
 msgstr "Land:"
 
-#: src/ui_locationDialogGui.h:411
+#: src/ui_locationDialogGui.h:410
 msgid "Planet:"
 msgstr "Planeet"
 
-#: src/ui_searchDialogGui.h:230 src/ui_searchDialogGui.h:231
+#: src/ui_searchDialogGui.h:227 src/ui_searchDialogGui.h:228
 msgid "Find Object"
 msgstr "Object zoeken"
 
-#: src/ui_searchDialogGui.h:236
+#: src/ui_searchDialogGui.h:233
 msgid "RA/Dec (J2000):"
 msgstr "RA/Dec (J2000):"
 
-#: src/ui_viewDialog.h:980
+#: src/ui_viewDialog.h:986
 msgid "View"
 msgstr "Beeld"
 
-#: src/ui_viewDialog.h:986
+#: src/ui_viewDialog.h:992
 msgid "Sky"
 msgstr "Hemel"
 
-#: src/ui_viewDialog.h:988
+#: src/ui_viewDialog.h:994
 msgid "Markings"
 msgstr "Markeringen"
 
-#: src/ui_viewDialog.h:990
+#: src/ui_viewDialog.h:996
 msgid "Landscape"
 msgstr "Landschap"
 
-#: src/ui_viewDialog.h:992
+#: src/ui_viewDialog.h:998
 msgid "Starlore"
 msgstr "Verhalen over de sterren"
 
-#: src/ui_viewDialog.h:996
+#: src/ui_viewDialog.h:1002
 msgid "Absolute scale:"
 msgstr "Absolute schaal:"
 
-#: src/ui_viewDialog.h:997
+#: src/ui_viewDialog.h:1003
 msgid "Relative scale:"
 msgstr "Relatieve schaal:"
 
-#: src/ui_viewDialog.h:998
+#: src/ui_viewDialog.h:1004
 msgid "Twinkle:"
 msgstr "Fonkelen:"
 
-#: src/ui_viewDialog.h:1000
+#: src/ui_viewDialog.h:1006
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Dim zwakke sterren als een zeer helder object in beeld is"
 
-#: src/ui_viewDialog.h:1002
+#: src/ui_viewDialog.h:1008
 msgid "Dynamic eye adaptation"
 msgstr "Dynamische oogaanpassing"
 
-#: src/ui_viewDialog.h:1003
+#: src/ui_viewDialog.h:1009
 msgid "Planets and satellites"
 msgstr "Planeten en satellieten"
 
-#: src/ui_viewDialog.h:1004
+#: src/ui_viewDialog.h:1010
 msgid "Show planets"
 msgstr "Toon planeten"
 
-#: src/ui_viewDialog.h:1005
+#: src/ui_viewDialog.h:1011
 msgid "Show planet markers"
 msgstr "Toon planeetmarkeringen"
 
-#: src/ui_viewDialog.h:1006
+#: src/ui_viewDialog.h:1012
 msgid "Show planet orbits"
 msgstr "Toon planeetbanen"
 
-#: src/ui_viewDialog.h:1007
+#: src/ui_viewDialog.h:1013
 msgid "Simulate light speed"
 msgstr "Simuleer de lichtsnelheid"
 
-#: src/ui_viewDialog.h:1008
+#: src/ui_viewDialog.h:1014
 msgid "Scale Moon"
 msgstr "Maan op visuele formaat"
 
-#: src/ui_viewDialog.h:1010
+#: src/ui_viewDialog.h:1016
 msgid "Show atmosphere"
 msgstr "Toon atmosfeer"
 
-#: src/ui_viewDialog.h:1011
+#: src/ui_viewDialog.h:1017
 msgid "Light pollution: "
 msgstr "Lichtvervuiling: "
 
-#: src/ui_viewDialog.h:1012
+#: src/ui_viewDialog.h:1018
 msgid "Labels and Markers"
 msgstr "Labels en markeringen"
 
-#: src/ui_viewDialog.h:1015
+#: src/ui_viewDialog.h:1021
 msgid "Planets"
 msgstr "Planeten"
 
-#: src/ui_viewDialog.h:1016
+#: src/ui_viewDialog.h:1022
 msgid "Shooting Stars"
 msgstr "Vallende sterren"
 
-#: src/ui_viewDialog.h:1017
+#: src/ui_viewDialog.h:1023
 msgid "Hourly zenith rate:"
 msgstr "Zenithsnelheid per uur:"
 
-#: src/ui_viewDialog.h:1018
+#: src/ui_viewDialog.h:1024
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:1019
+#: src/ui_viewDialog.h:1025
 msgid "10"
 msgstr "10"
 
-#: src/ui_viewDialog.h:1020
+#: src/ui_viewDialog.h:1026
 msgid "80"
 msgstr "80"
 
-#: src/ui_viewDialog.h:1021
+#: src/ui_viewDialog.h:1027
 msgid "10000"
 msgstr "10000"
 
-#: src/ui_viewDialog.h:1022
+#: src/ui_viewDialog.h:1028
 msgid "144000"
 msgstr "144000"
 
-#: src/ui_viewDialog.h:1024
+#: src/ui_viewDialog.h:1030
 msgid "Celestial Sphere"
 msgstr "hemelgewelf"
 
-#: src/ui_viewDialog.h:1032
+#: src/ui_viewDialog.h:1038
 msgid "Constellations"
 msgstr "Sterrenbeelden"
 
-#: src/ui_viewDialog.h:1033
+#: src/ui_viewDialog.h:1039
 msgid "Show lines"
 msgstr "Toon lijnen"
 
-#: src/ui_viewDialog.h:1034
+#: src/ui_viewDialog.h:1040
 msgid "Show labels"
 msgstr "Toon labels"
 
-#: src/ui_viewDialog.h:1035
+#: src/ui_viewDialog.h:1041
 msgid "Show boundaries"
 msgstr "Toon grenzen"
 
-#: src/ui_viewDialog.h:1036
+#: src/ui_viewDialog.h:1042
 msgid "Show art"
 msgstr "Toon beelden"
 
-#: src/ui_viewDialog.h:1037
+#: src/ui_viewDialog.h:1043
 msgid "Art brightness: "
 msgstr "Helderheid kunst: "
 
-#: src/ui_viewDialog.h:1038
+#: src/ui_viewDialog.h:1044
 msgid "Projection"
 msgstr "Projectie"
 
-#: src/ui_viewDialog.h:1039 src/ui_viewDialog.h:1044 src/ui_viewDialog.h:1046
-#: src/ui_configurationDialog.h:853 src/ui_configurationDialog.h:864
+#: src/ui_viewDialog.h:1045
+msgid "Add/remove landscapes..."
+msgstr ""
+
+#: src/ui_viewDialog.h:1046 src/ui_viewDialog.h:1051 src/ui_viewDialog.h:1053
+#: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
 msgid "Options"
 msgstr "Opties"
 
-#: src/ui_viewDialog.h:1040
+#: src/ui_viewDialog.h:1047
 msgid "Show ground"
 msgstr "Toon grond"
 
-#: src/ui_viewDialog.h:1041
+#: src/ui_viewDialog.h:1048
 msgid "Show fog"
 msgstr "Toon mist"
 
-#: src/ui_viewDialog.h:1042
+#: src/ui_viewDialog.h:1049
 msgid "Use associated planet and position"
 msgstr "Gebruik de geassocieerde planeet en positie"
 
-#: src/ui_viewDialog.h:1043
+#: src/ui_viewDialog.h:1050
 msgid "Use this landscape as default"
 msgstr "Gebruik dit landschap als standaard"
 
-#: src/ui_viewDialog.h:1045
+#: src/ui_viewDialog.h:1052
 msgid "Use this sky culture as default"
 msgstr "Gebruik deze ruimtevariatie als standaard"
 
-#: src/ui_viewDialog.h:1047
+#: src/ui_viewDialog.h:1054
 msgid "Visible"
 msgstr "Zichtbaar"
 
-#: src/ui_configurationDialog.h:747
+#: src/ui_configurationDialog.h:748
 msgid "Configuration"
 msgstr "Configuratie"
 
-#: src/ui_configurationDialog.h:749
+#: src/ui_configurationDialog.h:750
 msgid "Program language"
 msgstr "Programmataal"
 
-#: src/ui_configurationDialog.h:750
+#: src/ui_configurationDialog.h:751
 msgid "Selected object information"
 msgstr "Informatie over geselecteerde object"
 
-#: src/ui_configurationDialog.h:752
+#: src/ui_configurationDialog.h:753
 msgid "Display all information available"
 msgstr "Toon alle beschikbare informatie"
 
-#: src/ui_configurationDialog.h:754
+#: src/ui_configurationDialog.h:755
 msgid "All available"
 msgstr "Allemaal beschikbaar"
 
-#: src/ui_configurationDialog.h:756
+#: src/ui_configurationDialog.h:757
 msgid "Display less information"
 msgstr "Toon minder informatie"
 
-#: src/ui_configurationDialog.h:758
+#: src/ui_configurationDialog.h:759
 msgid "Short"
 msgstr "Kort"
 
-#: src/ui_configurationDialog.h:760
+#: src/ui_configurationDialog.h:761
 msgid "Display no information"
 msgstr "Toon geen informatie"
 
-#: src/ui_configurationDialog.h:762
+#: src/ui_configurationDialog.h:763
 msgid "None"
 msgstr "Geen"
 
-#: src/ui_configurationDialog.h:763
+#: src/ui_configurationDialog.h:764
 msgid "Default options"
 msgstr "Standaard opties"
 
-#: src/ui_configurationDialog.h:765
+#: src/ui_configurationDialog.h:766
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -1552,19 +1734,19 @@ msgstr ""
 "Sla de instellingen op die u deze sessie verandert heeft zodat ze hetzelfde "
 "zijn als u de volgende keer Stellarium opstart"
 
-#: src/ui_configurationDialog.h:767
+#: src/ui_configurationDialog.h:768
 msgid "Save settings"
 msgstr "Instellingen opslaan"
 
-#: src/ui_configurationDialog.h:769
+#: src/ui_configurationDialog.h:770
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Herstel de oorspronkelijke instellingen die bij Stellarium zaten"
 
-#: src/ui_configurationDialog.h:771
+#: src/ui_configurationDialog.h:772
 msgid "Restore defaults"
 msgstr "Standaard instellingen terugzetten"
 
-#: src/ui_configurationDialog.h:772
+#: src/ui_configurationDialog.h:773
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -1574,55 +1756,55 @@ msgstr ""
 "Al de huidige opties opslaan is inclusief de huidige FOV en kijkrichting "
 "voor bij het volgende gebruik."
 
-#: src/ui_configurationDialog.h:774
+#: src/ui_configurationDialog.h:775
 msgid "The width of your view when Stellarium starts"
 msgstr "De breedte van uw zicht als u Stelllarium opstart"
 
-#: src/ui_configurationDialog.h:776
+#: src/ui_configurationDialog.h:777
 msgid "Startup FOV: XX"
 msgstr "FOV opstarten: XX"
 
-#: src/ui_configurationDialog.h:778
+#: src/ui_configurationDialog.h:779
 msgid "The direction you're looking when Stellarium starts"
 msgstr "De richting waar u naar kijkt als Stellarium opstart"
 
-#: src/ui_configurationDialog.h:780
+#: src/ui_configurationDialog.h:781
 msgid "Startup direction of view: xxxx"
 msgstr "Opstartwaarden viewport: xxxx"
 
-#: src/ui_configurationDialog.h:781
+#: src/ui_configurationDialog.h:782
 msgid "Control"
 msgstr "Besturing"
 
-#: src/ui_configurationDialog.h:783
+#: src/ui_configurationDialog.h:784
 msgid "Allow keyboard to pan and zoom"
 msgstr "Sta toe te pannen en zoomen met het toetsenbord"
 
-#: src/ui_configurationDialog.h:785
+#: src/ui_configurationDialog.h:786
 msgid "Enable keyboard navigation"
 msgstr "Zet toetsenbordnavigatie aan"
 
-#: src/ui_configurationDialog.h:787
+#: src/ui_configurationDialog.h:788
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "Sta toe met de muis te pannen (slepen) en zoomen (muiswiel)"
 
-#: src/ui_configurationDialog.h:789
+#: src/ui_configurationDialog.h:790
 msgid "Enable mouse navigation"
 msgstr "Zet muisnavigatie aan"
 
-#: src/ui_configurationDialog.h:790
+#: src/ui_configurationDialog.h:791
 msgid "Startup date and time"
 msgstr "Opstart datum en tijd"
 
-#: src/ui_configurationDialog.h:792
+#: src/ui_configurationDialog.h:793
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Start Stellarium op met de systeemdatum en -tijd"
 
-#: src/ui_configurationDialog.h:794
+#: src/ui_configurationDialog.h:795
 msgid "System date and time"
 msgstr "Systeemdatum en -tijd"
 
-#: src/ui_configurationDialog.h:796
+#: src/ui_configurationDialog.h:797
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -1630,47 +1812,47 @@ msgstr ""
 "Stelt het tijdstip van deze simulatie in voor de volgende keer dat "
 "Stellarium opgestart wordt"
 
-#: src/ui_configurationDialog.h:798
+#: src/ui_configurationDialog.h:799
 msgid "System date at:"
 msgstr "Systeemdatum op:"
 
-#: src/ui_configurationDialog.h:800
+#: src/ui_configurationDialog.h:801
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Gebruik een specifieke datum en tjd wanneer Stellarium opstart"
 
-#: src/ui_configurationDialog.h:802
+#: src/ui_configurationDialog.h:803
 msgid "Other:"
 msgstr "Overige:"
 
-#: src/ui_configurationDialog.h:803
+#: src/ui_configurationDialog.h:804
 msgid "use current"
 msgstr "gebruik huidige"
 
-#: src/ui_configurationDialog.h:804
+#: src/ui_configurationDialog.h:805
 msgid "Other"
 msgstr "Overige"
 
-#: src/ui_configurationDialog.h:806
+#: src/ui_configurationDialog.h:807
 msgid "Hides the mouse cursor when inactive"
 msgstr "Verbergt de muisaanwijzer indien niet actief"
 
-#: src/ui_configurationDialog.h:808
+#: src/ui_configurationDialog.h:809
 msgid "Mouse cursor timeout (seconds):"
 msgstr "Muisaanwijzer time-out (seconden):"
 
-#: src/ui_configurationDialog.h:810
+#: src/ui_configurationDialog.h:811
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Draai de verticale en horizontale omspiegel-knoppen om."
 
-#: src/ui_configurationDialog.h:812
+#: src/ui_configurationDialog.h:813
 msgid "Show flip buttons"
 msgstr "Toon spiegelknoppen"
 
-#: src/ui_configurationDialog.h:813
+#: src/ui_configurationDialog.h:814
 msgid "Planetarium options"
 msgstr "Planetariumopties"
 
-#: src/ui_configurationDialog.h:815
+#: src/ui_configurationDialog.h:816
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -1679,19 +1861,19 @@ msgstr ""
 "bolvormige spiegel wordt geprojecteerd om zo een goedkoop planetariumsysteem "
 "te krijgen."
 
-#: src/ui_configurationDialog.h:817
+#: src/ui_configurationDialog.h:818
 msgid "Spheric mirror distortion"
 msgstr "Bolvormige spiegelvervorming"
 
-#: src/ui_configurationDialog.h:819
+#: src/ui_configurationDialog.h:820
 msgid "Align labels with the horizon"
 msgstr "Lijn labels uit met de horizon"
 
-#: src/ui_configurationDialog.h:821
+#: src/ui_configurationDialog.h:822
 msgid "Gravity labels"
 msgstr "Zwaartekrachtlabels"
 
-#: src/ui_configurationDialog.h:823
+#: src/ui_configurationDialog.h:824
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -1699,116 +1881,282 @@ msgstr ""
 "Als dit aan staat zal de \"automatische uitzoomen\" toets ook de initiële "
 "kijkrichting instellen"
 
-#: src/ui_configurationDialog.h:825
+#: src/ui_configurationDialog.h:826
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Automatisch uitzoomen keert terug naar de initiële kijkrichting"
 
-#: src/ui_configurationDialog.h:827
+#: src/ui_configurationDialog.h:828
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Verberg alles buiten een centrale cirkel in het hoofdscherm"
 
-#: src/ui_configurationDialog.h:829
+#: src/ui_configurationDialog.h:830
 msgid "Disc viewport"
 msgstr "Schijfvormig kijkvenster"
 
-#: src/ui_configurationDialog.h:831
+#: src/ui_configurationDialog.h:832
 msgid "Hide other constellations when you click one"
 msgstr "Verberg andere sterrenbeelden als u op één ervan klikt"
 
-#: src/ui_configurationDialog.h:833
+#: src/ui_configurationDialog.h:834
 msgid "Select single constellation"
 msgstr "Kies een sterrenbeeld uit"
 
-#: src/ui_configurationDialog.h:834
+#: src/ui_configurationDialog.h:835
 msgid "Screenshots"
 msgstr "Screenshots"
 
-#: src/ui_configurationDialog.h:835
+#: src/ui_configurationDialog.h:836
 msgid "Screenshot Directory"
 msgstr "Screenshot Folder"
 
-#: src/ui_configurationDialog.h:837
+#: src/ui_configurationDialog.h:838
 msgid "Invert colors"
 msgstr "Inverteer kleuren"
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:839
 msgid "Star catalog updates"
 msgstr "Ster catalogi updates"
 
-#: src/ui_configurationDialog.h:840
+#: src/ui_configurationDialog.h:841
 msgid "Click here to start downloading"
 msgstr "Klik hier om het downloaden te starten"
 
-#: src/ui_configurationDialog.h:842
+#: src/ui_configurationDialog.h:843
 msgid "Get catalog x of y"
 msgstr "Haal catalogus x van y op"
 
-#: src/ui_configurationDialog.h:843
+#: src/ui_configurationDialog.h:844
 msgid "Download this file to view even more stars"
 msgstr "Download dit bestand om zelfs meer sterren te zien"
 
-#: src/ui_configurationDialog.h:844
+#: src/ui_configurationDialog.h:845
 msgid "xxx"
 msgstr "xxx"
 
-#: src/ui_configurationDialog.h:846
+#: src/ui_configurationDialog.h:847
 msgid "Restart the download"
 msgstr "Herstart de download"
 
-#: src/ui_configurationDialog.h:848
+#: src/ui_configurationDialog.h:849
 msgid "Retry"
 msgstr "Opnieuw proberen"
 
-#: src/ui_configurationDialog.h:850
+#: src/ui_configurationDialog.h:851
 msgid "Stop the download. You can always restart it later"
 msgstr "Stop de download. U kunt het altijd later herstarten"
 
-#: src/ui_configurationDialog.h:852
+#: src/ui_configurationDialog.h:853
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: src/ui_configurationDialog.h:855
+#: src/ui_configurationDialog.h:856
 msgid "Close window when script runs"
 msgstr "Sluit venster wanneer het script draait"
 
-#: src/ui_configurationDialog.h:857
+#: src/ui_configurationDialog.h:858
 msgid "Run the selected script"
 msgstr "Draai het geselecteerd script"
 
-#: src/ui_configurationDialog.h:861
+#: src/ui_configurationDialog.h:862
 msgid "Stop a running script"
 msgstr "Stop een draaiend script"
 
-#: src/ui_configurationDialog.h:865
+#: src/ui_configurationDialog.h:866
 msgid "Load at startup"
 msgstr "Laden bij opstarten"
 
-#: src/ui_configurationDialog.h:866
+#: src/ui_configurationDialog.h:867
 msgid "configure"
-msgstr ""
+msgstr "instellen"
 
-#: src/ui_configurationDialog.h:871
+#: src/ui_configurationDialog.h:872
 msgid "Main"
 msgstr "Algemeen"
 
-#: src/ui_configurationDialog.h:873
+#: src/ui_configurationDialog.h:874
 msgid "Navigation"
 msgstr "Navigatie"
 
-#: src/ui_configurationDialog.h:875
+#: src/ui_configurationDialog.h:876
 msgid "Tools"
 msgstr "Tools"
 
-#: src/ui_configurationDialog.h:877
+#: src/ui_configurationDialog.h:878
 msgid "Scripts"
 msgstr "Scripts"
 
-#: src/ui_configurationDialog.h:879
+#: src/ui_configurationDialog.h:880
 msgid "Plugins"
 msgstr "Plug-ins"
 
-#~ msgid "Telescope Control"
-#~ msgstr "Telescoop Controle"
+#: src/ui_addRemoveLandscapesDialog.h:266
+msgid "Add/Remove Landscapes"
+msgstr ""
+
+#: src/ui_addRemoveLandscapesDialog.h:268
+msgid "Add a new landscape"
+msgstr ""
+
+#: src/ui_addRemoveLandscapesDialog.h:269
+msgid "Install a new landscape from a ZIP archive..."
+msgstr ""
+
+#: src/ui_addRemoveLandscapesDialog.h:270
+msgid "Switch to the new landscape after installation"
+msgstr ""
+
+#: src/ui_addRemoveLandscapesDialog.h:273
+msgid "Remove an installed landscape"
+msgstr ""
+
+#: src/ui_addRemoveLandscapesDialog.h:275
+msgid "Remove"
+msgstr "Verwijder"
+
+#: src/ui_addRemoveLandscapesDialog.h:276
+msgid ""
+"WARNING: Removing the selected landscape means deleting its files. This "
+"operation is irreversible."
+msgstr ""
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:57
+msgid "Angle Measure"
+msgstr ""
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:60
+msgid "Provides an angle measurement tool"
+msgstr ""
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:121
+msgid "Angle measure"
+msgstr ""
+
+#. TRANSLATORS: Title of a group of key bindings in the Help window
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:121
+#: plugins/CompassMarks/src/CompassMarks.cpp:121
+#: plugins/Oculars/src/Oculars.cpp:565 plugins/Oculars/src/Oculars.cpp:575
+#: plugins/Satellites/src/Satellites.cpp:124
+msgid "Plugin Key Bindings"
+msgstr ""
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:57
+msgid "Compass Marks"
+msgstr ""
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:60
+msgid "Displays compass bearing marks along the horizon"
+msgstr ""
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:121
+msgid "Compass marks"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:74
+msgid "Oculars"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:77
+msgid "Shows the sky as if looking through a telescope eyepiece"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:573
+msgid "Ocular view"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:580
+msgid "Oculars configuration window"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:587
+msgid "Telrad circles"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:68
+msgid "Satellites"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:71
+msgid ""
+"Prediction of artificial satellite positions in Earth orbit based on NORAD "
+"TLE data"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:126
+msgid "Satellites configuration window"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:127
+msgid "Satellite hints"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:129
+msgid "Satellite labels"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:163
+msgid ""
+"The old satellites.json file is no longer compatible - using default file"
+msgstr ""
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:75
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:165
+msgid "Telescope Control"
+msgstr "Telescoop Controle"
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:78
+msgid ""
+"This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
+"computerized mount (a \"GoTo telescope\")."
+msgstr ""
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:170
+#, qt-format
+msgid "Move telescope #%1 to selected object"
+msgstr ""
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:177
+#, qt-format
+msgid "Move telescope #%1 to the point currently in the center of the screen"
+msgstr ""
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:188
+msgid "Move a telescope to a given set of coordinates"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
+msgid "Time Zone"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:44
+msgid ""
+"A convenient interface for some of the more obscure options in Stellarium's "
+"configuration file. Allows setting the time zone and changing the way the "
+"time and the date are displayed in the bottom bar."
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:79
+msgid "Text User Interface"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:82
+msgid ""
+"Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
+"planetarium systems"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
+msgid "Solar System Editor"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:59
+msgid ""
+"An interface for adding asteroids and comets to Stellarium. It can download "
+"object lists from the Minor Planet Center's website and perform searches in "
+"its online database. Still a work in progress."
+msgstr ""
+
+#~ msgid "Form"
+#~ msgstr "Vorm"
 
 #~ msgid "Move telescope #0 to selected object"
 #~ msgstr "Verplaats telescoop #0 naar geselecteerd object."
