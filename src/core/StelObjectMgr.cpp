@@ -162,30 +162,10 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 {
 	Vec3d v;
-	if (core->getProjection(StelCore::FrameJ2000)->unProject(x,y,v))
-	  // GZ: add refraction here, once and for all for all find calls!
-	  {
-	    //GZ: when clicking a star in screen, v is now a potentially refracted position. However, we want to get the object coordinates. 
-	    //    So, we need to subtract refraction, then the position will be real FrameJ2000.
-	    const StelSkyDrawer* drawer = core->getSkyDrawer();
-	    bool withAtmosphericEffects=drawer->getFlagHasAtmosphere();
-	    if (withAtmosphericEffects)
-	      {
-		const StelNavigator *nav=core->getNavigator();
-		const RefractionExtinction *refExt=drawer->getRefractionExtinction();
-		
-		Vec3d altaz=nav->j2000ToAltAz(Vec3d(v[0], v[1], v[2]));
-		//Vec3d refVec(v[0], v[1], v[2]);
-		float dummy;
-		// compute refraction and extinction effects:
-		refExt->backward(&altaz, &dummy, 1);
-		Vec3d v_unrefracted=nav->altAzToJ2000(altaz); 
-		
-		v[0]=v_unrefracted[0]; v[1]=v_unrefracted[1]; v[2]=v_unrefracted[2];
-	      }
-
-	    return cleverFind(core, v);
-	  }
+	if (core->getProjection(StelCore::FrameJ2000, core->getSkyDrawer()->getFlagHasAtmosphere())->unProject(x,y,v))
+	{
+		return cleverFind(core, v);
+	}
 	return StelObjectP();
 }
 

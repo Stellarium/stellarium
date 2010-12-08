@@ -508,51 +508,49 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_insi
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 	SpecialZoneData<Star> *const z = getZones() + index;
 	Vec3f vf;
-	// GZ: retrieve a StelNavigator for later use
-	StelNavigator *nav=core->getNavigator();
 	const Star *const end = z->getStars() + z->size;
 	static const double d2000 = 2451545.0;
 	const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getNavigator()->getJDay()-d2000)/365.25) / star_position_scale;
 	const float* tmpRcmag;
-	const RefractionExtinction *refExt=drawer->getRefractionExtinction();
-	bool withAtmosphericEffects=drawer->getFlagHasAtmosphere();
 	// GZ: TODO: exclude effects for no-Earth conditions?
 	for (const Star *s=z->getStars();s<end;++s)
 	{
-	        // preselect and skip dim stars.
+		// preselect and skip dim stars.
 		tmpRcmag = rcmag_table+2*s->mag;
 		if (*tmpRcmag<=0.f)
 			break;
 		// vf<-star positions in J2000 coordinate frame.
 		s->getJ2000Pos(z,movementFactor, vf);
 
-		// GZ: Refraction&Extinction
-		if (withAtmosphericEffects){
-		  // (1) get stellar magnitude from packed format.
-		  float mag= 0.001f*mag_min + s->mag*(0.001f*mag_range)/mag_steps;
-		  // (2) compute alt-az coordinates from vf
-		  Vec3d altaz=nav->j2000ToAltAz(Vec3d(vf[0], vf[1], vf[2]));
-		  // (2a) Option: immediately skip stars below -2 under horizon.
-		  if (altaz[2]<-0.035f) break;
-		  // (3) compute refraction and extinction effects:
-		  refExt->forward(&altaz, &mag, 1);
+		// FC re-do extinction
+//		// GZ: Refraction&Extinction
+//		if (withAtmosphericEffects)
+//		{
+//			// (1) get stellar magnitude from packed format.
+//			float mag= 0.001f*mag_min + s->mag*(0.001f*mag_range)/mag_steps;
+//			// (2) compute alt-az coordinates from vf
+//			Vec3d altaz=nav->j2000ToAltAz(Vec3d(vf[0], vf[1], vf[2]));
+//			// (2a) Option: immediately skip stars below -2 under horizon.
+//			if (altaz[2]<-0.035f) break;
+//			// (3) compute refraction and extinction effects:
+//			refExt->forward(&altaz, &mag, 1);
 
-		  // //if (mag<mag_min) mag=mag_min;
-		  // // repack mag to get a correct lookup for tmpRcmag. DOES NOT WORK CORRECTLY!
-		  // unsigned int packedMagRed=(unsigned int) ((mag-0.001f*mag_min)*mag_steps/(0.001f*mag_range));
-		  // // Now reevaluate tmpRcmag, skip again stars now too dim to paint.
-		  // tmpRcmag = rcmag_table+2*packedMagRed;
+//			// //if (mag<mag_min) mag=mag_min;
+//			// // repack mag to get a correct lookup for tmpRcmag. DOES NOT WORK CORRECTLY!
+//			// unsigned int packedMagRed=(unsigned int) ((mag-0.001f*mag_min)*mag_steps/(0.001f*mag_range));
+//			// // Now reevaluate tmpRcmag, skip again stars now too dim to paint.
+//			// tmpRcmag = rcmag_table+2*packedMagRed;
 
-		  float refRCmag[2];
-		  if (! drawer->computeRCMag(mag, refRCmag)) break;
-		  //if (*refRCmag<=0.f) break; // previous.
-		  tmpRcmag=refRCmag;
-		  // (4) return to equatorial system, but refracted.
-		  Vec3d vf_refracted=nav->altAzToJ2000(altaz); 
-		  vf[0]=vf_refracted[0];
-		  vf[1]=vf_refracted[1];
-		  vf[2]=vf_refracted[2];
-		}
+//			float refRCmag[2];
+//			if (! drawer->computeRCMag(mag, refRCmag)) break;
+//			//if (*refRCmag<=0.f) break; // previous.
+//			tmpRcmag=refRCmag;
+//			// (4) return to equatorial system, but refracted.
+//			Vec3d vf_refracted=nav->altAzToJ2000(altaz);
+//			vf[0]=vf_refracted[0];
+//			vf[1]=vf_refracted[1];
+//			vf[2]=vf_refracted[2];
+//		}
 
 		if (drawer->drawPointSource(sPainter, vf, tmpRcmag, s->bV, !is_inside) && s->hasName() && s->mag < maxMagStarName)
 		{

@@ -39,6 +39,7 @@
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
+#include "StelSkyDrawer.hpp"
 
 using namespace std;
 
@@ -482,7 +483,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 void ConstellationMgr::draw(StelCore* core)
 {
 	StelNavigator* nav = core->getNavigator();
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, core->getSkyDrawer()->getFlagHasAtmosphere());
 	StelPainter sPainter(prj);
 	sPainter.setFont(asterFont);
 	drawLines(sPainter, nav);
