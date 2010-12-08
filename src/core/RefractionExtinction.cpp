@@ -126,3 +126,85 @@ void RefractionExtinction::setExtinctionCoefficient(float k)
 {
 	ext_coeff=k;
 }
+
+Refraction::Refraction() : pressure(1013.f), temperature(10.f), preTransfoMat(Mat4d::identity())
+{
+	updatePrecomputed();
+}
+
+void Refraction::updatePrecomputed()
+{
+	press_temp_corr_Bennett=pressure/1010.f * 283.f/(273.f+temperature) / 60.f;
+	press_temp_corr_Saemundson=1.02f*press_temp_corr_Bennett;
+}
+
+void Refraction::forward(Vec3d& altAzPos) const
+{
+	const double length = altAzPos.length();
+
+	double geom_alt_deg=180./M_PI*std::asin(altAzPos[2]/length);
+	if (geom_alt_deg > -2.)
+	{
+		// refraction from Saemundsson, S&T1986 p70 / in Meeus, Astr.Alg.
+		float r=press_temp_corr_Saemundson / std::tan((geom_alt_deg+10.3f/(geom_alt_deg+5.11f))*M_PI/180.f) + 0.0019279f;
+		geom_alt_deg += r;
+		if (geom_alt_deg > 90.)
+			geom_alt_deg=90.; // SAFETY, SHOULD NOT BE NECESSARY
+		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.)*length;
+	}
+}
+
+void Refraction::backward(Vec3d& altAzPos) const
+{
+	// going from observed position/magnitude to geometrical position and atmosphere-free mag.
+	const double length = altAzPos.length();
+	double obs_alt_deg=180./M_PI*std::asin(altAzPos[2]/length);
+	if (obs_alt_deg > -2.)
+	{
+		// refraction from Bennett, in Meeus, Astr.Alg.
+		float r=press_temp_corr_Bennett / std::tan((obs_alt_deg+7.31/(obs_alt_deg+4.4f))*M_PI/180.f) + 0.0013515f;
+		obs_alt_deg -= r;
+		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.)*length;
+	}
+}
+
+void Refraction::forward(Vec3f& altAzPos) const
+{
+	const float length = altAzPos.length();
+	float geom_alt_deg=180.f/M_PI*std::asin(altAzPos[2]/length);
+	if (geom_alt_deg > -2.f)
+	{
+		// refraction from Saemundsson, S&T1986 p70 / in Meeus, Astr.Alg.
+		float r=press_temp_corr_Saemundson / std::tan((geom_alt_deg+10.3f/(geom_alt_deg+5.11f))*M_PI/180.f) + 0.0019279f;
+		geom_alt_deg += r;
+		if (geom_alt_deg > 90.f)
+			geom_alt_deg=90.f; // SAFETY, SHOULD NOT BE NECESSARY
+		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.f)*length;
+	}
+}
+
+void Refraction::backward(Vec3f& altAzPos) const
+{
+	// going from observed position/magnitude to geometrical position and atmosphere-free mag.
+	const float length = altAzPos.length();
+	float obs_alt_deg=180.f/M_PI*std::asin(altAzPos[2]/length);
+	if (obs_alt_deg > -2.f)
+	{
+		// refraction from Bennett, in Meeus, Astr.Alg.
+		float r=press_temp_corr_Bennett / std::tan((obs_alt_deg+7.31/(obs_alt_deg+4.4f))*M_PI/180.f) + 0.0013515f;
+		obs_alt_deg -= r;
+		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.f)*length;
+	}
+}
+
+void Refraction::setPressure(float p)
+{
+	pressure=p;
+	updatePrecomputed();
+}
+
+void Refraction::setTemperature(float t)
+{
+	temperature=t;
+	updatePrecomputed();
+}

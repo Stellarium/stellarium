@@ -30,6 +30,7 @@
 // SUGGESTION: Could Temperature/Pressure/ex.Coeff./LightPollution be linked to the landscape files?
 
 #include "VecMath.hpp"
+#include "StelProjector.hpp"
 
 //! @class RefractionExtinction
 //! This class performs refraction and extinction computations, following literature from atmospheric optics and astronomy.
@@ -90,6 +91,57 @@ private:
 	float press_temp_corr_Saemundson;
 	//! Numerator of refraction formula, to be cached for speed.
 	float press_temp_corr_Bennett;
+};
+
+
+class Refraction: public StelProjector::PreModelViewFunc
+{
+public:
+	Refraction();
+
+	//! Compute refraction.
+	//! @param altAzPos is the apparent star position vector
+	//! Note that forward/backward are no absolute reverse operations!
+	void forward(Vec3d& altAzPos) const;
+
+	//! Compute refraction and extinction effects for arrays of size @param size position vectors and magnitudes.
+	//! @param altAzPos is the apparent star position vector
+	//! Note that forward/backward are no absolute reverse operations!
+	void backward(Vec3d& altAzPos) const;
+
+	//! Compute refraction.
+	//! @param altAzPos is the apparent star position vector
+	//! Note that forward/backward are no absolute reverse operations!
+	void forward(Vec3f& altAzPos) const;
+
+	//! Compute refraction and extinction effects for arrays of size @param size position vectors and magnitudes.
+	//! @param altAzPos is the apparent star position vector
+	//! Note that forward/backward are no absolute reverse operations!
+	void backward(Vec3f& altAzPos) const;
+
+	//! Set surface air pressure (mbars), influences refraction computation.
+	void setPressure(float p_mbar);
+	//! Set surface air temperature (degrees Celsius), influences refraction computation.
+	void setTemperature(float t_C);
+	//! Set the transformation matrice used to transform input vector to AltAz frame.
+	void setPreTransfoMat(const Mat4d& m) {preTransfoMat=m;}
+
+private:
+	//! Update precomputed variables.
+	void updatePrecomputed();
+
+	//! Actually, these 3 Atmosphere parameters should be controlled by GUI.
+	//! Pressure[mbar] (1013)
+	float pressure;
+	//! Temperature[Celsius deg] (10).
+	float temperature;
+	//! Numerator of refraction formula, to be cached for speed.
+	float press_temp_corr_Saemundson;
+	//! Numerator of refraction formula, to be cached for speed.
+	float press_temp_corr_Bennett;
+
+	//! Used to pretransform coordinate into AltAz frame.
+	Mat4d preTransfoMat;
 };
 
 #endif  // _REFRACTIONEXTINCTION_HPP_

@@ -37,6 +37,19 @@ public:
 	friend class StelPainter;
 	friend class StelCore;
 
+	//! @class PreModelViewFunc
+	//! Allows to define non linear operators to apply before the standard ModelView transformation.
+	class PreModelViewFunc
+	{
+	public:
+		PreModelViewFunc() {;}
+		virtual ~PreModelViewFunc() {;}
+		virtual void forward(Vec3d&) const =0;
+		virtual void backward(Vec3d&) const =0;
+		virtual void forward(Vec3f&) const =0;
+		virtual void backward(Vec3f&) const =0;
+	};
+
 	//! @enum StelProjectorMaskType
 	//! Define viewport mask types
 	enum StelProjectorMaskType
@@ -62,7 +75,7 @@ public:
 	};
 
 	//! Destructor
-	virtual ~StelProjector() {;}
+	virtual ~StelProjector() {delete preModelViewFunc;}
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods which must be reimplemented by all instance of StelProjector
@@ -91,12 +104,36 @@ public:
 	//! cylindrical projection it will return true if the line cuts the wrap-around line (i.e. at lon=180 if the observer look at lon=0).
 	bool intersectViewportDiscontinuity(const Vec3d& p1, const Vec3d& p2) const
 	{
-		return hasDiscontinuity() && intersectViewportDiscontinuityInternal(modelViewMatrix*p1, modelViewMatrix*p2);
+		if (hasDiscontinuity()==false)
+			return false;
+		if (preModelViewFunc==NULL)
+			return intersectViewportDiscontinuityInternal(modelViewMatrix*p1, modelViewMatrix*p2);
+		else
+		{
+			Vec3d v1(p1);
+			preModelViewFunc->forward(v1);
+			v1.transfo4d(modelViewMatrix);
+			Vec3d v2(p2);
+			preModelViewFunc->forward(v2);
+			v2.transfo4d(modelViewMatrix);
+			return intersectViewportDiscontinuityInternal(v1, v2);
+		}
+
 	}
 
 	bool intersectViewportDiscontinuity(const SphericalCap& cap) const
 	{
-		return hasDiscontinuity() && intersectViewportDiscontinuityInternal(modelViewMatrix*cap.n, cap.d);
+		if (hasDiscontinuity()==false)
+			return false;
+		if (preModelViewFunc==NULL)
+			return intersectViewportDiscontinuityInternal(modelViewMatrix*cap.n, cap.d);
+		else
+		{
+			Vec3d v1(cap.n);
+			preModelViewFunc->forward(v1);
+			v1.transfo4d(modelViewMatrix);
+			return intersectViewportDiscontinuityInternal(v1, cap.d);
+		}
 	}
 
 	//! Convert a Field Of View radius value in radians in ViewScalingFactor (used internally)
@@ -208,6 +245,8 @@ public:
 		for (int i = 0; i < n; ++i, ++out)
 		{
 			v = in[i];
+			if (preModelViewFunc)
+				preModelViewFunc->forward(v);
 			v.transfo4d(modelViewMatrix);
 			out->set(v[0], v[1], v[2]);
 			forward(*out);
@@ -222,6 +261,8 @@ public:
 		for (int i = 0; i < n; ++i, ++out)
 		{
 			*out=in[i];
+			if (preModelViewFunc)
+				preModelViewFunc->forward(*out);
 			out->transfo4d(modelViewMatrixf);
 			forward(*out);
 			out->set(viewportCenter[0] + flipHorz * pixelPerRad * (*out)[0],
@@ -235,6 +276,8 @@ public:
 	//! @return true if the projected coordinate is valid.
 	inline bool projectInPlace(Vec3d& vd) const
 	{
+		if (preModelViewFunc)
+			preModelViewFunc->forward(vd);
 		vd.transfo4d(modelViewMatrix);
 		Vec3f v(vd[0], vd[1], vd[2]);
 		const bool rval = forward(v);
@@ -253,6 +296,8 @@ public:
 	//! @return true if the projected coordinate is valid.
 	inline bool projectInPlace(Vec3f& v) const
 	{
+		if (preModelViewFunc)
+			preModelViewFunc->forward(v);
 		v.transfo4d(modelViewMatrixf);
 		const bool rval = forward(v);
 		// very important: even when the projected point comes from an
@@ -310,11 +355,11 @@ public:
 
 protected:
 	//! Private constructor. Only StelCore can create instances of StelProjector.
-	StelProjector(const Mat4d& modelViewMat) : modelViewMatrix(modelViewMat),
+	StelProjector(const Mat4d& modelViewMat, PreModelViewFunc* apreModelViewFunc=NULL) : modelViewMatrix(modelViewMat),
 		modelViewMatrixf(modelViewMat[0], modelViewMat[1], modelViewMat[2], modelViewMat[3],
 						 modelViewMat[4], modelViewMat[5], modelViewMat[6], modelViewMat[7],
 						 modelViewMat[8], modelViewMat[9], modelViewMat[10], modelViewMat[11],
-						 modelViewMat[12], modelViewMat[13], modelViewMat[14], modelViewMat[15]) {;}
+						 modelViewMat[12], modelViewMat[13], modelViewMat[14], modelViewMat[15]), preModelViewFunc(apreModelViewFunc) {;}
 	//! Return whether the projection presents discontinuities. Used for optimization.
 	virtual bool hasDiscontinuity() const =0;
 	//! Determine whether a great circle connection p1 and p2 intersects with a projection discontinuity.
@@ -330,6 +375,8 @@ protected:
 
 	Mat4d modelViewMatrix;			    // openGL MODELVIEW Matrix
 	Mat4f modelViewMatrixf;             // openGL MODELVIEW Matrix
+	PreModelViewFunc* preModelViewFunc;	// Operator to apply (if not NULL) before the modelview projection step
+
 	float flipHorz,flipVert;            // Whether to flip in horizontal or vertical directions
 	float pixelPerRad;                  // pixel per rad at the center of the viewport disk
 	StelProjectorMaskType maskType;     // The current projector mask

@@ -122,41 +122,50 @@ StelProjectorP StelCore::getProjection2d() const
 
 // Get an instance of projector using the current display parameters from Navigation, StelMovementMgr
 // and using the given modelview matrix
-StelProjectorP StelCore::getProjection(const Mat4d& modelViewMat, ProjectionType projType) const
+StelProjectorP StelCore::getProjection(const Mat4d& modelViewMat, bool withRefraction, ProjectionType projType) const
 {
 	if (projType==1000)
 		projType = currentProjectionType;
+
+	Refraction* refractionFunc = NULL;
+	if (withRefraction)
+	{
+		refractionFunc = new Refraction(skyDrawer->getRefraction());
+
+		// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
+		refractionFunc->setPreTransfoMat(navigation->getInvertAltAzModelViewMat()*modelViewMat);
+	}
 
 	StelProjectorP prj;
 	switch (projType)
 	{
 		case ProjectionPerspective:
-			prj = StelProjectorP(new StelProjectorPerspective(modelViewMat));
+			prj = StelProjectorP(new StelProjectorPerspective(withRefraction ? navigation->getAltAzModelViewMat() : modelViewMat, refractionFunc));
 			break;
 		case ProjectionEqualArea:
-			prj = StelProjectorP(new StelProjectorEqualArea(modelViewMat));
+			prj = StelProjectorP(new StelProjectorEqualArea(withRefraction ? navigation->getAltAzModelViewMat() : modelViewMat, refractionFunc));
 			break;
 		case ProjectionStereographic:
-			prj = StelProjectorP(new StelProjectorStereographic(modelViewMat));
+			prj = StelProjectorP(new StelProjectorStereographic(withRefraction ? navigation->getAltAzModelViewMat() : modelViewMat, refractionFunc));
 			break;
 		case ProjectionFisheye:
-			prj = StelProjectorP(new StelProjectorFisheye(modelViewMat));
+			prj = StelProjectorP(new StelProjectorFisheye(withRefraction ? navigation->getAltAzModelViewMat() : modelViewMat, refractionFunc));
 			break;
 		case ProjectionHammer:
-			prj = StelProjectorP(new StelProjectorHammer(modelViewMat));
+			prj = StelProjectorP(new StelProjectorHammer(withRefraction ? navigation->getAltAzModelViewMat() : modelViewMat, refractionFunc));
 			break;
 		case ProjectionCylinder:
-			prj = StelProjectorP(new StelProjectorCylinder(modelViewMat));
+			prj = StelProjectorP(new StelProjectorCylinder(withRefraction ? navigation->getAltAzModelViewMat() : modelViewMat, refractionFunc));
 			break;
 		case ProjectionMercator:
-			prj = StelProjectorP(new StelProjectorMercator(modelViewMat));
+			prj = StelProjectorP(new StelProjectorMercator(withRefraction ? navigation->getAltAzModelViewMat() : modelViewMat, refractionFunc));
 			break;
 		case ProjectionOrthographic:
-			prj = StelProjectorP(new StelProjectorOrthographic(modelViewMat));
+			prj = StelProjectorP(new StelProjectorOrthographic(withRefraction ? navigation->getAltAzModelViewMat() : modelViewMat, refractionFunc));
 			break;
 		default:
 			qWarning() << "Unknown projection type: " << (int)(projType) << "using ProjectionStereographic instead";
-			prj = StelProjectorP(new StelProjectorStereographic(modelViewMat));
+			prj = StelProjectorP(new StelProjectorStereographic(withRefraction ? navigation->getAltAzModelViewMat() : modelViewMat, refractionFunc));
 			Q_ASSERT(0);
 	}
 	prj->init(currentProjectorParams);
@@ -164,22 +173,22 @@ StelProjectorP StelCore::getProjection(const Mat4d& modelViewMat, ProjectionType
 }
 
 // Get an instance of projector using the current display parameters from Navigation, StelMovementMgr
-StelProjectorP StelCore::getProjection(FrameType frameType, ProjectionType projType) const
+StelProjectorP StelCore::getProjection(FrameType frameType, bool withRefraction, ProjectionType projType) const
 {
 	switch (frameType)
 	{
 		case FrameAltAz:
-			return getProjection(navigation->getAltAzModelViewMat(), projType);
+			return getProjection(navigation->getAltAzModelViewMat(), withRefraction, projType);
 		case FrameHeliocentricEcliptic:
-			return getProjection(navigation->getHeliocentricEclipticModelViewMat(), projType);
+			return getProjection(navigation->getHeliocentricEclipticModelViewMat(), withRefraction, projType);
 		case FrameObservercentricEcliptic:
-			return getProjection(navigation->getObservercentricEclipticModelViewMat(), projType);
+			return getProjection(navigation->getObservercentricEclipticModelViewMat(), withRefraction, projType);
 		case FrameEquinoxEqu:
-			return getProjection(navigation->getEquinoxEquModelViewMat(), projType);
+			return getProjection(navigation->getEquinoxEquModelViewMat(), withRefraction, projType);
 		case FrameJ2000:
-			return getProjection(navigation->getJ2000ModelViewMat(), projType);
+			return getProjection(navigation->getJ2000ModelViewMat(), withRefraction, projType);
 		case FrameGalactic:
-			 return getProjection(navigation->getGalacticModelViewMat(), projType);
+			 return getProjection(navigation->getGalacticModelViewMat(), withRefraction, projType);
 		default:
 			qDebug() << "Unknown reference frame type: " << (int)frameType << ".";
 	}
