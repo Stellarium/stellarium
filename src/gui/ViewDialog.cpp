@@ -329,8 +329,9 @@ void ViewDialog::populateLists()
 	l->addItems(lmgr->getAllLandscapeNames());
 	l->setCurrentItem(l->findItems(lmgr->getCurrentLandscapeName(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
-	//ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription()); //Is there any reason not to reuse code?
-	landscapeChanged(l->currentItem());
+	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
+	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
+	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getDefaultLandscapeID()!=lmgr->getCurrentLandscapeID());
 }
 
 void ViewDialog::populateSkyLayersList()
