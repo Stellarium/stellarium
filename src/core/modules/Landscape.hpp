@@ -72,16 +72,16 @@ public:
 	//! Return the associated location or NULL
 	const StelLocation& getLocation() const {return location;}
   	//! Return default Bortle index (light pollution value) or -1 (unknown/no change)
-  	const int getDefaultBortleIndex() const {return defaultBortleIndex;}
-  	//! Return default fog setting (0/1) or -1 (no change)
-    	const int getDefaultFogSetting() const {return defaultFogSetting;}
+	int getDefaultBortleIndex() const {return defaultBortleIndex;}
+	//! Return default fog setting (0/1) or -1 (no change)
+	int getDefaultFogSetting() const {return defaultFogSetting;}
   	//! Return default atmosperic extinction, mag/airmass, or -1 (no change)
-    	const float getDefaultAtmosphericExtinction() const {return defaultExtinctionCoefficient;}
-        //! Return default atmospheric temperature, for refraction computation, or -1000 for "unknown/no change".
-        const float getDefaultAtmosphericTemperature() const {return defaultTemperature;}
-        //! Return default atmospheric temperature, for refraction computation.
-        //! returns -1 to signal "standard conditions", or -2 for "unknown/invalid/no change"
-        const float getDefaultAtmosphericPressure() const {return defaultPressure;}
+	float getDefaultAtmosphericExtinction() const {return defaultExtinctionCoefficient;}
+	//! Return default atmospheric temperature, for refraction computation, or -1000 for "unknown/no change".
+	float getDefaultAtmosphericTemperature() const {return defaultTemperature;}
+	//! Return default atmospheric temperature, for refraction computation.
+	//! returns -1 to signal "standard conditions", or -2 for "unknown/invalid/no change"
+	float getDefaultAtmosphericPressure() const {return defaultPressure;}
 
 	//! Set the z-axis rotation (offset from original value when rotated
 	void setZRotation(float d) {angleRotateZOffset = d;}
