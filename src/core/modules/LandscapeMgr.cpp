@@ -335,7 +335,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 		StelApp::getInstance().getCore()->getNavigator()->moveObserverTo(landscape->getLocation());
 		// GZ Patch: allow change in fog, extinction, refraction parameters and light pollution
 		//QSettings* conf = StelApp::getInstance().getSettings();
-		Q_ASSERT(conf);
+		//Q_ASSERT(conf);
 		StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
 
 		if (landscape->getDefaultFogSetting() >-1)
