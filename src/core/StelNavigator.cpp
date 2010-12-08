@@ -280,6 +280,7 @@ void StelNavigator::lookAtJ2000(const Vec3d& pos, const Vec3d& aup)
 						 s[1],u[1],-f[1],0.,
 						 s[2],u[2],-f[2],0.,
 						 0.,0.,0.,1.);
+	invertMatAltAzModelView = matAltAzModelView.inverse();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

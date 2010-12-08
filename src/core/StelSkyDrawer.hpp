@@ -173,16 +173,17 @@ public slots:
         //! Get extinction coefficient, mag/airmass (for extinction).
         double getExtinctionCoefficient(void) const {return atmosphericExtinctionCoefficient;}
         //! Set atmospheric (ground) temperature (for refraction).
-        void setAtmosphereTemperature(double celsius) {atmosphericTemperature=celsius; refExt.setTemperature(celsius);}
+		void setAtmosphereTemperature(double celsius) {atmosphericTemperature=celsius; refExt.setTemperature(celsius); refraction.setTemperature(celsius);}
         //! Get atmospheric (ground) temperature (for refraction).
         double getAtmosphereTemperature(void) const {return atmosphericTemperature;}
         //! Set atmospheric (ground) pressure (for refraction).
-        void setAtmospherePressure(double mbar) {atmosphericPressure=mbar; refExt.setPressure(mbar);}
+		void setAtmospherePressure(double mbar) {atmosphericPressure=mbar; refExt.setPressure(mbar); refraction.setPressure(mbar);}
         //! Get atmospheric (ground) pressure (for refraction).
         double getAtmospherePressure(void) const {return atmosphericPressure;}
         //! Get access to (only necessary) RefractionExtinction, to be able to compute those effects.
         const RefractionExtinction *getRefractionExtinction(void) const {return &refExt;}
 
+	const Refraction& getRefraction() const {return refraction;}
 
 	//! Get the radius of the big halo texture used when a 3d model is very bright.
 	float getBig3dModelHaloRadius() const {return big3dModelHaloRadius;}
@@ -242,6 +243,8 @@ private:
 	StelCore* core;
 	StelToneReproducer* eye;
         RefractionExtinction refExt;
+
+	Refraction refraction;
 
 	float maxAdaptFov, minAdaptFov, lnfovFactor;
 	bool flagPointStar;

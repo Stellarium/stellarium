@@ -106,6 +106,8 @@ public:
 	const Mat4d getEquinoxEquModelViewMat() const {return matAltAzModelView*matEquinoxEquToAltAz;}
 	//! Get the modelview matrix for observer-centric altazimuthal drawing
 	const Mat4d& getAltAzModelViewMat() const {return matAltAzModelView;}
+	//! Get the inverted modelview matrix for observer-centric altazimuthal drawing
+	const Mat4d& getInvertAltAzModelViewMat() const {return invertMatAltAzModelView;}
 	//! Get the modelview matrix for observer-centric J2000 equatorial drawing
 	const Mat4d getJ2000ModelViewMat() const {return matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;}
 	//! Get the modelview matrix for observer-centric Galactic equatorial drawing
@@ -234,8 +236,8 @@ private:
 	Mat4d matJ2000ToEquinoxEqu;
 	Mat4d matJ2000ToAltAz;
 
-	Mat4d matAltAzModelView;					// Modelview matrix for observer-centric altazimuthal drawing
-
+	Mat4d matAltAzModelView;				// Modelview matrix for observer-centric altazimuthal drawing
+	Mat4d invertMatAltAzModelView;			// Inverted modelview matrix for observer-centric altazimuthal drawing
 	// Time variable
 	double timeSpeed;        // Positive : forward, Negative : Backward, 1 = 1sec/sec
 	double JDay;              // Curent time in Julian day

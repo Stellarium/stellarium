@@ -184,6 +184,8 @@ bool StelProjector::unProject(double x, double y, Vec3d &v) const
 	v[1] = modelViewMatrix.r[4]*x + modelViewMatrix.r[5]*y + modelViewMatrix.r[6]*z;
 	v[2] = modelViewMatrix.r[8]*x + modelViewMatrix.r[9]*y + modelViewMatrix.r[10]*z;
 
+	if (preModelViewFunc)
+		preModelViewFunc->backward(v);
 	return rval;
 }
 
