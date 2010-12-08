@@ -45,28 +45,24 @@
 //! (1) only if atmosphere effects are true
 //! (2) only for celestial objects, never for landscape coordinates
 //! (3) only for terrestrial locations, not on Moon/Mars/Saturn etc
-class RefractionExtinction
+class Extinction
 {
 public:
-	RefractionExtinction();
-	//! Increase @param altRad (altitude in radians) by effect of refraction.
-	void addRefraction(double &altRad) const;
-	//! Compute refraction and extinction effects for arrays of size @param size position vectors and magnitudes.
+	Extinction();
+	//! Compute extinction effect for arrays of size @param size position vectors and magnitudes.
 	//! @param altAzPos are the normalized (true) star position vectors, and their z components sin(true_altitude).
 	//! Note that forward/backward are no absolute reverse operations!
 	void forward(Vec3d *altAzPos, float *mag, const int size) const;
-	//! Compute refraction and extinction effects for arrays of size @param size position vectors and magnitudes.
+	//! Compute extinction effect for arrays of size @param size position vectors and magnitudes.
 	//! @param altAzPos are the normalized (apparent) star position vectors, and their z components sin(apparent_altitude).
 	//! Note that forward/backward are no absolute reverse operations!
 	void backward(Vec3d *altAzPos, float *mag, const int size) const;
-	//! Set surface air pressure (mbars), influences refraction computation.
-	void setPressure(float p_mbar);
-	//! Set surface air temperature (degrees Celsius), influences refraction computation.
-	void setTemperature(float t_C);
 	//! Set visual extinction coefficient (mag/airmass), influences extinction computation.
 	//! @param k= 0.1 for highest mountains, 0.2 for very good lowland locations, 0.35 for typical lowland, 0.5 in humid climates.
 	void setExtinctionCoefficient(float k);
+	float getExtinctionCoefficient() const {return ext_coeff;}
 
+private:
 	//! airmass computation for @param cosZ = cosine of zenith angle z (=sin(altitude)!).
 	//! The default (@param apparent_z = true) is computing airmass from observed altitude, following Rozenberg (1966) [X(90)~40].
 	//! if (@param apparent_z = false), we have geometrical altitude and compute airmass from that,
@@ -76,21 +72,8 @@ public:
 	//! Rozenberg is infinite at Z=92.17 deg, Young at Z=93.6 deg, so this function RETURNS 0 BELOW -2 DEGREES!
 	float airmass(float cosZ, bool apparent_z=true) const;
 
-private:
-	//! Update precomputed variables.
-	void updatePrecomputed();
-
-	//! Actually, these 3 Atmosphere parameters should be controlled by GUI.
-	//! Pressure[mbar] (1013)
-	float pressure;
-	//! Temperature[Celsius deg] (10).
-	float temperature;
 	//! k, magnitudes/airmass, in [0.00, ... 1.00], (default 0.20).
 	float ext_coeff;
-	//! Numerator of refraction formula, to be cached for speed.
-	float press_temp_corr_Saemundson;
-	//! Numerator of refraction formula, to be cached for speed.
-	float press_temp_corr_Bennett;
 };
 
 
@@ -121,10 +104,14 @@ public:
 
 	//! Set surface air pressure (mbars), influences refraction computation.
 	void setPressure(float p_mbar);
+	float getPressure() const {return pressure;}
+
 	//! Set surface air temperature (degrees Celsius), influences refraction computation.
 	void setTemperature(float t_C);
+	float getTemperature() const {return temperature;}
+
 	//! Set the transformation matrice used to transform input vector to AltAz frame.
-	void setPreTransfoMat(const Mat4d& m) {preTransfoMat=m;}
+	void setPreTransfoMat(const Mat4d& m);
 
 private:
 	//! Update precomputed variables.
@@ -142,6 +129,9 @@ private:
 
 	//! Used to pretransform coordinate into AltAz frame.
 	Mat4d preTransfoMat;
+	Mat4d invertPreTransfoMat;
+	Mat4f preTransfoMatf;
+	Mat4f invertPreTransfoMatf;
 };
 
 #endif  // _REFRACTIONEXTINCTION_HPP_

@@ -73,7 +73,7 @@ void MilkyWay::draw(StelCore* core)
 	const StelProjectorP prj = core->getProjection(nav->getJ2000ModelViewMat()*
 			Mat4d::xrotation(M_PI/180*23)*
 			Mat4d::yrotation(M_PI/180*120)*
-			Mat4d::zrotation(M_PI/180*7));
+			Mat4d::zrotation(M_PI/180*7), core->getSkyDrawer()->getFlagHasAtmosphere());
 	StelToneReproducer* eye = core->getToneReproducer();
 
 	Q_ASSERT(tex);	// A texture must be loaded before calling this
