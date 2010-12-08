@@ -584,6 +584,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		return;
 
 	StelNavigator* nav = core->getNavigator();
+	const bool doRefraction = core->getSkyDrawer()->getFlagHasAtmosphere();
 
 	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
 	PlanetP p = parent;
@@ -601,14 +602,14 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		// Draw the rings if we are located on a planet with rings, but not the planet itself.
 		if (rings)
 		{
-			StelPainter sPainter(core->getProjection(mat));
+			StelPainter sPainter(core->getProjection(mat, doRefraction));
 			rings->draw(&sPainter,mat,1000.0);
 		}
 		return;
 	}
 
 	// Compute the 2D position and check if in the screen
-	const StelProjectorP prj = core->getProjection(mat);
+	const StelProjectorP prj = core->getProjection(mat, doRefraction);
 	float screenSz = getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
@@ -649,7 +650,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 
 	if (screenSz>1.)
 	{
-		StelPainter* sPainter = new StelPainter(core->getProjection(mat * Mat4d::zrotation(M_PI/180*(axisRotation + 90.))));
+		StelPainter* sPainter = new StelPainter(core->getProjection(mat * Mat4d::zrotation(M_PI/180*(axisRotation + 90.)), core->getSkyDrawer()->getFlagHasAtmosphere()));
 
 		if (flagLighting)
 		{
@@ -734,7 +735,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 	float surfArcMin2 = getSpheroidAngularSize(core)*60;
 	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI; // the total illuminated area in arcmin^2
 
-	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
+	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000, core->getSkyDrawer()->getFlagHasAtmosphere()));
 	Vec3d tmp = getJ2000EquatorialPos(nav);
 	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitude(core->getNavigator()), color);
 }
@@ -803,7 +804,7 @@ void Planet::drawEarthShadow(StelCore* core, StelPainter* sPainter)
 	r_penumbra *= mscale;
 
 	StelProjectorP saveProj = sPainter->getProjector();
-	sPainter->setProjector(core->getProjection(StelCore::FrameHeliocentricEcliptic));
+	sPainter->setProjector(core->getProjection(StelCore::FrameHeliocentricEcliptic, core->getSkyDrawer()->getFlagHasAtmosphere()));
 
 	sPainter->enableTexture2d(true);
 	glEnable(GL_BLEND);
@@ -869,7 +870,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 		return;
 
 	const StelNavigator* nav = core->getNavigator();
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, core->getSkyDrawer()->getFlagHasAtmosphere());
 	StelPainter sPainter(prj);
 	sPainter.setFont(planetNameFont);
 	// Draw nameI18 + scaling if it's not == 1.
@@ -938,7 +939,7 @@ void Planet::drawOrbit(const StelCore* core)
 	if (!re.siderealPeriod)
 		return;
 
-	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEcliptic);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEcliptic, core->getSkyDrawer()->getFlagHasAtmosphere());
 
 	StelPainter sPainter(prj);
 

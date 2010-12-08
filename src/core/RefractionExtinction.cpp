@@ -22,33 +22,11 @@
 
 #include "RefractionExtinction.hpp"
 
-RefractionExtinction::RefractionExtinction() : pressure(1013.f), temperature(10.f), ext_coeff(0.20f)
+Extinction::Extinction() : ext_coeff(0.20f)
 {
-	updatePrecomputed();
 }
 
-void RefractionExtinction::updatePrecomputed()
-{
-	press_temp_corr_Bennett=pressure/1010.f * 283.f/(273.f+temperature) / 60.f;
-	press_temp_corr_Saemundson=1.02f*press_temp_corr_Bennett;
-}
-
-void RefractionExtinction::addRefraction(double &altRad) const
-{
-  float geom_alt_deg=(180.f/M_PI)*(altRad);
-  if (geom_alt_deg > -2.f)
-    {
-      // refraction from Saemundsson, S&T1986 p70 / in Meeus, Astr.Alg.
-      float r=press_temp_corr_Saemundson / std::tan((geom_alt_deg+10.3f/(geom_alt_deg+5.11f))*M_PI/180.f) + 0.0019279f;
-      geom_alt_deg += r;
-      if (geom_alt_deg > 90.f)
-	geom_alt_deg=90.f; // SAFETY, SHOULD NOT BE NECESSARY
-      altRad=geom_alt_deg*M_PI/180.f;
-    }
-}
-
-
-void RefractionExtinction::forward(Vec3d *altAzPos, float *mag, const int size) const
+void Extinction::forward(Vec3d *altAzPos, float *mag, const int size) const
 {
 	// Assuming altAzPos is the normalized star position vector, and its z component sin(altitude).
 	for (int i=0; i<size; ++i)
@@ -56,13 +34,6 @@ void RefractionExtinction::forward(Vec3d *altAzPos, float *mag, const int size) 
 		float geom_alt_deg=(180.f/M_PI)*std::asin(altAzPos[i][2]);
 		if (geom_alt_deg > -2.f)
 		{
-			// refraction from Saemundsson, S&T1986 p70 / in Meeus, Astr.Alg.
-			float r=press_temp_corr_Saemundson / std::tan((geom_alt_deg+10.3f/(geom_alt_deg+5.11f))*M_PI/180.f) + 0.0019279f;
-			geom_alt_deg += r;
-			if (geom_alt_deg > 90.f)
-				geom_alt_deg=90.f; // SAFETY, SHOULD NOT BE NECESSARY
-			altAzPos[i][2]=std::sin(geom_alt_deg*M_PI/180.f);
-
 			// now altitude is corrected, but object still too bright.
 			// note that sin(h)=cos(z)...
 			mag[i] += airmass(altAzPos[i][2], true) * ext_coeff;
@@ -70,7 +41,7 @@ void RefractionExtinction::forward(Vec3d *altAzPos, float *mag, const int size) 
 	}
 }
 
-void RefractionExtinction::backward(Vec3d *altAzPos, float *mag, const int size) const
+void Extinction::backward(Vec3d *altAzPos, float *mag, const int size) const
 {
 	// going from observed position/magnitude to geometrical position and atmosphere-free mag.
 	for (int i=0; i<size; ++i)
@@ -79,16 +50,12 @@ void RefractionExtinction::backward(Vec3d *altAzPos, float *mag, const int size)
 		if (obs_alt_deg > -2.f)
 		{
 			mag[i] -= airmass(altAzPos[i][2], true) * ext_coeff;
-			// refraction from Bennett, in Meeus, Astr.Alg.
-			float r=press_temp_corr_Bennett / std::tan((obs_alt_deg+7.31/(obs_alt_deg+4.4f))*M_PI/180.f) + 0.0013515f;
-			obs_alt_deg -= r;
-			altAzPos[i][2]=std::sin(obs_alt_deg*M_PI/180.f);
 		}
 	}
 }
 
 // airmass computation for cosine of zenith angle z
-float RefractionExtinction::airmass(float cosZ, bool apparent_z) const
+float Extinction::airmass(float cosZ, bool apparent_z) const
 {
 	if (cosZ<-0.035f)
 		return 0.0f; // Safety: Do nothing for below -2 degrees.
@@ -110,26 +77,27 @@ float RefractionExtinction::airmass(float cosZ, bool apparent_z) const
 }
 
 
-void RefractionExtinction::setPressure(float p)
-{
-	pressure=p;
-	updatePrecomputed();
-}
-
-void RefractionExtinction::setTemperature(float t)
-{
-	temperature=t;
-	updatePrecomputed();
-}
-
-void RefractionExtinction::setExtinctionCoefficient(float k)
+void Extinction::setExtinctionCoefficient(float k)
 {
 	ext_coeff=k;
 }
 
-Refraction::Refraction() : pressure(1013.f), temperature(10.f), preTransfoMat(Mat4d::identity())
+
+Refraction::Refraction() : pressure(1013.f), temperature(10.f),
+	preTransfoMat(Mat4d::identity()), invertPreTransfoMat(Mat4d::identity()), preTransfoMatf(Mat4f::identity()), invertPreTransfoMatf(Mat4f::identity())
 {
 	updatePrecomputed();
+}
+
+void Refraction::setPreTransfoMat(const Mat4d& m)
+{
+	preTransfoMat=m;
+	invertPreTransfoMat=m.inverse();
+	preTransfoMatf.set(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11], m[12], m[13], m[14], m[15]);
+	invertPreTransfoMatf.set(invertPreTransfoMat[0], invertPreTransfoMat[1], invertPreTransfoMat[2], invertPreTransfoMat[3],
+							 invertPreTransfoMat[4], invertPreTransfoMat[5], invertPreTransfoMat[6], invertPreTransfoMat[7],
+							 invertPreTransfoMat[8], invertPreTransfoMat[9], invertPreTransfoMat[10], invertPreTransfoMat[11],
+							 invertPreTransfoMat[12], invertPreTransfoMat[13], invertPreTransfoMat[14], invertPreTransfoMat[15]);
 }
 
 void Refraction::updatePrecomputed()
@@ -140,6 +108,7 @@ void Refraction::updatePrecomputed()
 
 void Refraction::forward(Vec3d& altAzPos) const
 {
+	altAzPos.transfo4d(preTransfoMat);
 	const double length = altAzPos.length();
 
 	double geom_alt_deg=180./M_PI*std::asin(altAzPos[2]/length);
@@ -166,10 +135,12 @@ void Refraction::backward(Vec3d& altAzPos) const
 		obs_alt_deg -= r;
 		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.)*length;
 	}
+	altAzPos.transfo4d(invertPreTransfoMat);
 }
 
 void Refraction::forward(Vec3f& altAzPos) const
 {
+	altAzPos.transfo4d(preTransfoMatf);
 	const float length = altAzPos.length();
 	float geom_alt_deg=180.f/M_PI*std::asin(altAzPos[2]/length);
 	if (geom_alt_deg > -2.f)
@@ -195,6 +166,7 @@ void Refraction::backward(Vec3f& altAzPos) const
 		obs_alt_deg -= r;
 		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.f)*length;
 	}
+	altAzPos.transfo4d(invertPreTransfoMatf);
 }
 
 void Refraction::setPressure(float p)
