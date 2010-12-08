@@ -27,6 +27,7 @@
 #include "StelPainter.hpp"
 #include "MilkyWay.hpp"
 #include "StelGuiBase.hpp"
+#include "StelSkyDrawer.hpp"
 
 #include <QtOpenGL>
 #include <QNetworkAccessManager>
@@ -156,7 +157,7 @@ void StelSkyLayerMgr::draw(StelCore* core)
 	if (!flagShow)
 		return;
 
-	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
+	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000, core->getSkyDrawer()->getFlagHasAtmosphere()));
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_BLEND);
 	foreach (SkyLayerElem* s, allSkyLayers)
