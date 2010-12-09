@@ -146,6 +146,9 @@ void Scenery3d::draw(StelCore* core)
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::ProjectionEqualArea);
     StelPainter painter(prj);
 
+    double n, f;
+
+    glEnable(GL_CULL_FACE);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_DEPTH_TEST);
@@ -159,18 +162,21 @@ void Scenery3d::draw(StelCore* core)
 
     for (int x = 0; x < 10; x++) {
         for (int y = 0; y < 10; y++) {
-            double xPos = -0.9 + x * 0.2;
-            double yPos = -0.9 + y * 0.2;
+            double xPos = 5.0 + x * 3.0;
+            double yPos = 5.0 + y * 3.0;
             for (int i = 0; i < 14; i++) {
                 int idx = (x*10 + y) * 14 + i;
                 Vec3d cv = cube_vertice[i];
-                vertice[idx][0] = cv[0] / 40.0 + xPos;
-                vertice[idx][1] = cv[1] / 40.0 + yPos;
-                vertice[idx][2] = cv[2] / 40.0;
+                vertice[idx][0] = cv[0] + xPos;
+                vertice[idx][1] = cv[1] + yPos;
+                vertice[idx][2] = cv[2];
                 colors[idx] = cube_colors[i];
             }
         }
     }
+
+    core->getClippingPlanes(&n, &f);
+    core->setClippingPlanes(0.5, 100.0);
 
     painter.setArrays(vertice, NULL, colors);
     for (int i = 0; i < 100; i++) {
@@ -180,9 +186,12 @@ void Scenery3d::draw(StelCore* core)
     delete[] vertice;
     delete[] colors;
 
+    core->setClippingPlanes(n, f); // restore old clipping planes
+
     glDepthMask(GL_FALSE);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_BLEND);
+    glDisable(GL_CULL_FACE);
 }
 
 /*void TestPlugin::draw(StelCore* core)
