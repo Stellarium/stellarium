@@ -46,18 +46,18 @@ StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
 
 Planet::Planet(const QString& englishName,
-			   int flagLighting,
-			   double radius,
-			   double oblateness,
-			   Vec3f color,
-			   float albedo,
-			   const QString& atexMapName,
-			   posFuncType coordFunc,
-			   void* auserDataPtr,
-			   OsulatingFunctType *osculatingFunc,
-			   bool acloseOrbit,
-			   bool hidden,
-			   bool hasAtmosphere)
+	       int flagLighting,
+	       double radius,
+	       double oblateness,
+	       Vec3f color,
+	       float albedo,
+	       const QString& atexMapName,
+	       posFuncType coordFunc,
+	       void* auserDataPtr,
+	       OsulatingFunctType *osculatingFunc,
+	       bool acloseOrbit,
+	       bool hidden,
+	       bool hasAtmosphere)
 	: englishName(englishName),
 	  flagLighting(flagLighting),
 	  radius(radius), oneMinusOblateness(1.0-oblateness),
@@ -95,7 +95,10 @@ Planet::~Planet()
 		delete rings;
 }
 
-void Planet::translateName(StelTranslator& trans) {nameI18 = trans.qtranslate(englishName);}
+void Planet::translateName(StelTranslator& trans)
+{
+	nameI18 = trans.qtranslate(englishName);
+}
 
 // Return the information string "ready to print" :)
 QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
@@ -591,9 +594,9 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	float screenSz = getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
-	if (prj->project(Vec3d(0), screenPos) &&
-			screenPos[1]>viewport_bottom - screenSz && screenPos[1]<viewport_bottom + prj->getViewportHeight()+screenSz &&
-			screenPos[0]>viewport_left - screenSz && screenPos[0]<viewport_left + prj->getViewportWidth() + screenSz)
+	if (prj->project(Vec3d(0), screenPos)
+	    && screenPos[1]>viewport_bottom - screenSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
+	    && screenPos[0]>viewport_left - screenSz && screenPos[0] < viewport_left + prj->getViewportWidth() + screenSz)
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlaping (ie for jupiter satellites)

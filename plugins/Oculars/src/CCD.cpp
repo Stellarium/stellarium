@@ -141,7 +141,7 @@ void CCD::setPixelHeight(float height)
 
 float CCD::getActualFOVx(Telescope *telescope) const
 {
-	float FOVx = 6875.5 * atan(this->chipWidth() / telescope->focalLength() / 2);
+	float FOVx = 6875.5 * atan(this->chipHeight() / telescope->focalLength() / 2);
 	return FOVx;
 }
 
