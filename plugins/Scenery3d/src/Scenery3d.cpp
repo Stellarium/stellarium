@@ -54,7 +54,7 @@ void Scenery3d::update(double deltaTime)
     rotation += 8.0f * deltaTime;
 }
 
-void Scenery3d::draw(StelCore* core)
+void Scenery3d::drawCubeTestScene(StelCore* core)
 {
     const Vec3d cube_vertice[] = {
         Vec3d( 1.0, 1.0, 1.0),
@@ -102,6 +102,25 @@ void Scenery3d::draw(StelCore* core)
         Vec3f(1.0f, 0.0f, 1.0f),
     };
 
+    Vec3d cube_vertice_triangles[36];
+    Vec3f cube_colors_triangles[36];
+
+    for (int i=2; i<14; i++) {
+        int idx = i-2;
+        int tri = idx*3;
+        if ((i%2) == 0) {
+            cube_vertice_triangles[tri] = cube_vertice[idx];
+            cube_vertice_triangles[tri+1] = cube_vertice[idx+1];
+            cube_vertice_triangles[tri+2] = cube_vertice[idx+2];
+        } else {
+            cube_vertice_triangles[tri] = cube_vertice[idx+1];
+            cube_vertice_triangles[tri+1] = cube_vertice[idx];
+            cube_vertice_triangles[tri+2] = cube_vertice[idx+2];
+        }
+        cube_colors_triangles[tri] = cube_colors_triangles[tri+1] =
+                cube_colors_triangles[tri+2] = cube_colors[i];
+    }
+
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, core->getCurrentProjectionType());
     StelPainter painter(prj);
 
@@ -113,31 +132,42 @@ void Scenery3d::draw(StelCore* core)
 
     glClear(GL_DEPTH_BUFFER_BIT);
 
-    Vec3d* vertice = new Vec3d[14 * 100];
-    Vec3f* colors = new Vec3f[14 * 100];
-    QVector<Vec3d> vVertice;
+    Vec3d* vertice = new Vec3d[36 * 100];
+    Vec3f* colors = new Vec3f[36 * 100];
 
     for (int x = 0; x < 10; x++) {
         for (int y = 0; y < 10; y++) {
-            double xPos = 5.0 + x * 3.0;
-            double yPos = 5.0 + y * 3.0;
-            for (int i = 0; i < 14; i++) {
-                int idx = (x*10 + y) * 14 + i;
-                Vec3d cv = cube_vertice[i];
+            double xPos = -15.0 + x * 3.0;
+            double yPos = -15.0 + y * 3.0;
+            for (int i = 0; i < 36; i++) {
+                int idx = (x*10 + y) * 36 + i;
+                Vec3d cv = cube_vertice_triangles[i];
                 vertice[idx][0] = cv[0] + xPos;
                 vertice[idx][1] = cv[1] + yPos;
                 vertice[idx][2] = cv[2];
-                vVertice << Vec3d(cv[0] + xPos, cv[1] + yPos, cv[2]);
-                colors[idx] = cube_colors[i];
+                colors[idx] = cube_colors_triangles[i];
             }
         }
     }
 
-    /*painter.setArrays(vertice, NULL, colors);
+    Vec3d nullv(0, 0, 0);
+    const int num_triangles = 100*36 / 3;
+    for (int i=0; i<num_triangles; i++) {
+        int tri = i*3;
+        bool valid = true;
+        valid &= prj->projectInPlace(vertice[tri]);
+        valid &= prj->projectInPlace(vertice[tri+1]);
+        valid &= prj->projectInPlace(vertice[tri+2]);
+        if (!valid) {
+            vertice[tri] = vertice[tri+1] = vertice[tri+2] = nullv;
+        }
+    }
+
+    painter.setArrays(vertice, NULL, colors);
     for (int i = 0; i < 100; i++) {
-        painter.drawFromArray(StelPainter::TriangleStrip, 14, i * 14);
-    }*/
-    painter.setColor(1.f, 1.f, 1.f);
+        painter.drawFromArray(StelPainter::Triangles, 36, i * 36, false);
+    }
+    /*painter.setColor(1.f, 1.f, 1.f);
     QVector<Vec3d> pv;
     for (int i = 0; i < 100; i++) {
         pv.clear();
@@ -146,7 +176,7 @@ void Scenery3d::draw(StelCore* core)
         }
         StelVertexArray va(pv, StelVertexArray::TriangleStrip);
         painter.drawSphericalTriangles(va, false, NULL, true, 1000.);
-    }
+    }*/
 
     delete[] vertice;
     delete[] colors;
@@ -156,3 +186,8 @@ void Scenery3d::draw(StelCore* core)
     glDisable(GL_BLEND);
 }
 	
+void Scenery3d::draw(StelCore* core)
+{
+    // for debug purposes
+    drawCubeTestScene(core);
+}

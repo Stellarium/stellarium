@@ -30,17 +30,19 @@
 class Scenery3d
 {
 public:
-	Scenery3d();
-	virtual ~Scenery3d();
+    Scenery3d();
+    virtual ~Scenery3d();
 
     void load(const QSettings& scenery3dIni, const QString& scenery3dID);
 	
-	void update(double deltaTime);
-	void draw(StelCore * core);
+    void update(double deltaTime);
+    void draw(StelCore* core);
 
     QString getName() { return name; }
 	
 private:
+    void drawCubeTestScene(StelCore* core);
+
     Mat4f projectionMatrix;
     float rotation;
 
