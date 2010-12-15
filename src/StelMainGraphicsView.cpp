@@ -102,7 +102,7 @@ Q_IMPORT_PLUGIN(TimeZoneConfiguration)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_SCENERY3D
-Q_IMPORT_PLUGIN(Scenery3d)
+Q_IMPORT_PLUGIN(Scenery3dMgr)
 #endif
 
 // Initialize static variables

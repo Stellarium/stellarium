@@ -7,13 +7,24 @@ INCLUDE_DIRECTORIES(
 LINK_DIRECTORIES(/src)
 
 SET(Scenery3d_SRCS
-  Scenery3d.hpp
-  Scenery3d.cpp
+    Scenery3d.hpp
+    Scenery3d.cpp
+    Scenery3dMgr.hpp
+    Scenery3dMgr.cpp
+    gui/Scenery3dDialog.hpp
+    gui/Scenery3dDialog.cpp
 )
 
 SET(Scenery3d_MOC_HDRS
-  Scenery3d.hpp
+    Scenery3dMgr.hpp
+    gui/Scenery3dDialog.hpp
 )
+
+################# compiles .ui files ############
+SET(Scenery3d_UIS
+  gui/scenery3dDialog.ui
+)
+QT4_WRAP_UI(Scenery3d_UIS_H ${Scenery3d_UIS})
 
 QT4_WRAP_CPP(Scenery3d_MOC_SRCS ${Scenery3d_MOC_HDRS})
 
@@ -24,7 +35,7 @@ SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INT
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)
 	ADD_LIBRARY(Oculars
-		MODULE ${Scenery3d_SRCS} ${Scenery3d_MOC_SRCS}
+                MODULE ${Scenery3d_SRCS} ${Scenery3d_MOC_SRCS} ${Scenery3d_UIS_H}
 	)
 
 	IF(APPLE)
@@ -51,7 +62,7 @@ ENDIF()
 ############### For building the static library ######################
 IF(BUILD_STATIC_PLUGINS)
 	ADD_LIBRARY(Scenery3d-static
-		STATIC ${Scenery3d_SRCS} ${Scenery3d_MOC_SRCS}
+                STATIC ${Scenery3d_SRCS} ${Scenery3d_MOC_SRCS} ${Scenery3d_UIS_H}
 	)
 	SET_TARGET_PROPERTIES(Scenery3d-static PROPERTIES OUTPUT_NAME "Scenery3d")
 	TARGET_LINK_LIBRARIES(Scenery3d-static ${StelMain} ${extLinkerOption})
