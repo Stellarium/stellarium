@@ -938,8 +938,11 @@ void SolarSystem::draw(StelCore* core)
 		delete sPainter;
 	}
 
+	// Make some voodoo to determine when labels should be displayed
+	float maxMagLabel = (core->getSkyDrawer()->getLimitMagnitude()<5.f ? core->getSkyDrawer()->getLimitMagnitude() :
+			5.f+(core->getSkyDrawer()->getLimitMagnitude()-5.f)*1.2f) +(labelsAmount-3.f)*1.2f;
+
 	// Draw the elements
-	float maxMagLabel=core->getSkyDrawer()->getLimitMagnitude()*0.80f+(labelsAmount*1.2f)-2.f;
 	foreach (const PlanetP& p, systemPlanets)
 	{
 		p->draw(core, maxMagLabel, planetNameFont);
