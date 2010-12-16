@@ -29,6 +29,8 @@ public:
     bool load(QMap<QString, QString>& param);
     Scenery3d* createFromFile(const QString& file, const QString& id);
 
+    static const QString MODULE_PATH;
+
 public slots:
     QStringList getAllScenery3dNames() const;
     QStringList getAllScenery3dIDs() const;
@@ -39,6 +41,7 @@ public slots:
     bool setCurrentScenery3dName(const QString& name);
     const QString& getDefaultScenery3dID() const { return defaultScenery3dID; }
     bool setDefaultScenery3dID(const QString& id);
+    QString getCurrentScenery3dHtmlDescription() const;
 
     QString getScenery3dPath(QString scenery3dID);
     QString loadScenery3dName(QString scenery3dID);

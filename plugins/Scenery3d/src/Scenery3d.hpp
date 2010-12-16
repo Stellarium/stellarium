@@ -23,6 +23,7 @@
 
 #include "StelGui.hpp"
 #include "StelModule.hpp"
+#include "OBJ.hpp"
 
 #include <QString>
 
@@ -38,7 +39,10 @@ public:
     void update(double deltaTime);
     void draw(StelCore* core);
 
-    QString getName() { return name; }
+    QString getName() const { return name; }
+    QString getAuthorName() const { return authorName; }
+    QString getDescription() const { return description; }
+    QString getLandscapeName() const { return landscapeName; }
 	
 private:
     void drawCubeTestScene(StelCore* core);
@@ -46,8 +50,20 @@ private:
     Mat4f projectionMatrix;
     float rotation;
 
-    QString name;
-};
+    OBJ* objModel;
 
+    Vec4d* vertices; // model vertices
+    Vec4d* verticesP; // projected (on-screen) vertices
+    Vec4f* texcoords;
+    Vec4f* normals;
+
+    QString id;
+    QString name;
+    QString authorName;
+    QString description;
+    QString landscapeName;
+    QString modelSceneryFile;
+    QString modelGroundFile;
+};
 
 #endif

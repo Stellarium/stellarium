@@ -16,7 +16,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
 
-static const QString MODULE_PATH("modules/scenery3d/");
+const QString Scenery3dMgr::MODULE_PATH("modules/scenery3d/");
 
 Scenery3dMgr::Scenery3dMgr() : scenery3d(NULL)
 {
@@ -95,7 +95,7 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
     }
     catch (std::runtime_error& e)
     {
-        qWarning() << "ERROR while loading default 3D scenery " << MODULE_PATH + id + "/scenery3d.ini" << ", (" << e.what() << ")";
+        qWarning() << "ERROR while loading 3D scenery " << MODULE_PATH + id + "/scenery3d.ini" << ", (" << e.what() << ")";
     }
 
     if (!newScenery3d)
@@ -271,7 +271,7 @@ QString Scenery3dMgr::loadScenery3dName(QString scenery3dID)
     {
         QString scenery3dSettingsPath = scenery3dDir.filePath("scenery3d.ini");
         QSettings scenery3dSettings(scenery3dSettingsPath, StelIniFormat);
-        scenery3dName = scenery3dSettings.value("scenery3d/name").toString();
+        scenery3dName = scenery3dSettings.value("model/name").toString();
     }
     else
     {
@@ -300,6 +300,16 @@ quint64 Scenery3dMgr::loadScenery3dSize(QString scenery3dID)
         scenery3dSize += file.size();
     }
     return scenery3dSize;
+}
+
+QString Scenery3dMgr::getCurrentScenery3dHtmlDescription() const
+{
+        QString desc = QString("<h3>%1</h3>").arg(scenery3d->getName());
+        desc += scenery3d->getDescription();
+        desc+="<br><br>";
+        desc+="<b>"+q_("Author: ")+"</b>";
+        desc+= scenery3d->getAuthorName();
+        return desc;
 }
 
 /////////////////////////////////////////////////////////////////////

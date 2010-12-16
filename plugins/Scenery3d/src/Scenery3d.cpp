@@ -23,8 +23,8 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
-
-#include <GLee.h>
+#include "StelFileMgr.hpp"
+#include "Scenery3dMgr.hpp"
 
 #include <QAction>
 #include <QString>
@@ -35,18 +35,32 @@
 
 
 Scenery3d::Scenery3d()
-    :rotation(0.0f)
+    :rotation(0.0f),
+    objModel(NULL),
+    vertices(NULL), verticesP(NULL),
+    texcoords(NULL), normals(NULL)
 {
-
+    objModel = new OBJ();
 }
 
 Scenery3d::~Scenery3d()
 {
-
+    delete objModel;
 }
 
 void Scenery3d::load(const QSettings& scenery3dIni, const QString& scenery3dID)
 {
+    id = scenery3dID;
+    name = scenery3dIni.value("model/name").toString();
+    authorName = scenery3dIni.value("model/author").toString();
+    description = scenery3dIni.value("model/description").toString();
+    landscapeName = scenery3dIni.value("model/landscape").toString();
+    modelSceneryFile = scenery3dIni.value("model/scenery").toString();
+    modelGroundFile = scenery3dIni.value("model/ground").toString();
+
+    QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
+    qDebug() << "Trying to load OBJ model: " << modelFile;
+    //objModel->load(modelFile.toAscii());
 }
 
 void Scenery3d::update(double deltaTime)
