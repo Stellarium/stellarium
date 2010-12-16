@@ -12,6 +12,9 @@ public:
 
     virtual void languageChanged();
     virtual void createDialogContent();
+
+private slots:
+    void scenery3dChanged(QListWidgetItem* item);
 private:
     Ui_scenery3dDialogForm* ui;
 };

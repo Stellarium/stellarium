@@ -13,6 +13,14 @@ SET(Scenery3d_SRCS
     Scenery3dMgr.cpp
     gui/Scenery3dDialog.hpp
     gui/Scenery3dDialog.cpp
+    OBJ.hpp
+    OBJ.cpp
+    MTL.hpp
+    MTL.cpp
+    PathInfo.hpp
+    PathInfo.cpp
+    Util.hpp
+    Util.cpp
 )
 
 SET(Scenery3d_MOC_HDRS
