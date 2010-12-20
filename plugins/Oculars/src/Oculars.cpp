@@ -185,7 +185,7 @@ void Oculars::deinit()
 void Oculars::draw(StelCore* core)
 {
 	if (flagShowTelrad) {
-		drawTelrad();
+		paintTelrad();
 	}
 	if (flagShowOculars){
 		// Insure there is a selected ocular & telescope
@@ -206,9 +206,16 @@ void Oculars::draw(StelCore* core)
 		}
 		
 		if (ready) {
-			paintMask();
-			if (flagShowCrosshairs)  {
-				drawCrosshairs();
+			if (selectedOcularIndex > -1) {
+				paintOcularMask();
+				if (flagShowCrosshairs)  {
+					paintCrosshairs();
+				}
+				if (selectedCCDIndex > -1) {
+					inscribeCCDBoundsInOcularMask();
+				}
+			} else if (selectedCCDIndex > -1) {
+				paintCCDBounds();
 			}
 			// Paint the information in the upper-right hand corner
 			paintText(core);
@@ -554,7 +561,7 @@ void Oculars::toggleTelrad()
 #pragma mark Private Methods
 #endif
 /* ********************************************************************* */
-void Oculars::drawCrosshairs()
+void Oculars::paintCrosshairs()
 {
 	const StelProjectorP projector = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 	StelCore *core = StelApp::getInstance().getCore();
@@ -577,7 +584,7 @@ void Oculars::drawCrosshairs()
 	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0] - length, centerScreen[1]);
 }
 
-void Oculars::drawTelrad()
+void Oculars::paintTelrad()
 {
 	if (!flagShowOculars) {
 		const StelProjectorP projector = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
@@ -831,7 +838,7 @@ void Oculars::interceptMovementKey(QKeyEvent* event)
 	}
 }
 
-void Oculars::paintMask()
+void Oculars::paintOcularMask()
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
@@ -856,6 +863,20 @@ void Oculars::paintMask()
 	glColor3f(0.15f,0.15f,0.15f);
 	gluDisk(quadric, inner - 1.0, inner, 256, 1);
 	gluDeleteQuadric(quadric);
+	glPopMatrix();
+}
+
+void Oculars::paintCCDBounds()
+{
+	StelCore *core = StelApp::getInstance().getCore();
+	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+
+	glDisable(GL_BLEND);
+	glColor3f(0.f,0.f,0.f);
+	glPushMatrix();
+	glTranslated(params.viewportCenter[0], params.viewportCenter[1], 0.0);
+	GLdouble screenFOV = params.viewportFovDiameter;
+
 	// draw sensor rectangle
 	if(selectedCCDIndex != -1) {
 		CCD *ccd = ccds[selectedCCDIndex];
@@ -864,6 +885,7 @@ void Oculars::paintMask()
 			Telescope *telescope = telescopes[selectedTelescopeIndex];
 			float CCDx = ccd->getActualFOVx(telescope);
 			float CCDy = ccd->getActualFOVy(telescope);
+			qDebug() << "ccdX:" << CCDx << " ccdY:" << CCDy;
 			if (CCDx > 0.0 && CCDy > 0.0) {
 				glBegin(GL_LINE_LOOP);
 				glVertex2f(-CCDx, CCDy);
@@ -873,7 +895,44 @@ void Oculars::paintMask()
 				glEnd();
 			}
 		}
+	}
+
+	glPopMatrix();
 }
+
+void Oculars::inscribeCCDBoundsInOcularMask()
+{
+	StelCore *core = StelApp::getInstance().getCore();
+	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+
+	glDisable(GL_BLEND);
+	glColor3f(0.f,0.f,0.f);
+	glPushMatrix();
+	glTranslated(params.viewportCenter[0], params.viewportCenter[1], 0.0);
+	GLdouble screenFOV = params.fov;
+
+	// draw sensor rectangle
+	if(selectedCCDIndex != -1) {
+		CCD *ccd = ccds[selectedCCDIndex];
+		if (ccd) {
+			glColor4f(0.77, 0.14, 0.16, 0.5);
+			Telescope *telescope = telescopes[selectedTelescopeIndex];
+			double ccdXRatio = ccd->getActualFOVx(telescope) / screenFOV;
+			double ccdYRatio = ccd->getActualFOVy(telescope) / screenFOV;
+			float width = params.viewportXywh[2] * ccdYRatio ;
+			float height = params.viewportXywh[3] * ccdXRatio ;
+
+			if (width > 0.0 && height > 0.0) {
+				glBegin(GL_LINE_LOOP);
+				glVertex2f(-width / 2.0, height / 2.0);
+				glVertex2f(width / 2.0, height / 2.0);
+				glVertex2f(width / 2.0, -height / 2.0);
+				glVertex2f(-width / 2.0, -height / 2.0);
+				glEnd();
+			}
+		}
+	}
+
 	glPopMatrix();
 }
 
