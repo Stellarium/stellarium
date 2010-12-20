@@ -93,12 +93,6 @@ private slots:
 	void setScaleImageCircle(bool state);
 
 private:
-	//! Renders crosshairs into the viewport.
-	void drawCrosshairs();
-	
-	//! Renders the three Telrad circles, but only if not in ocular mode.
-	void drawTelrad();
-
 	//! Set up the Qt actions needed to activate the plugin.
 	void initializeActivationActions();
 	
@@ -110,9 +104,16 @@ private:
 	//! while flagShowOculars == true.
 	void interceptMovementKey(class QKeyEvent* event);
 
+	//! Renders crosshairs into the viewport.
+	void paintCrosshairs();
+	void paintCCDBounds();
 	//! Paint the mask into the viewport.
-	void paintMask();
-	
+	void paintOcularMask();
+	//! Renders the three Telrad circles, but only if not in ocular mode.
+	void paintTelrad();
+	void inscribeCCDBoundsInOcularMask();
+
+
 	//! Paints the text about the current object selections to the upper right hand of the screen.
 	//! Should only be called from a 'ready' state; currently from the draw() method.
 	void paintText(const StelCore* core);
