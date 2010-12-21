@@ -919,8 +919,13 @@ void Oculars::inscribeCCDBoundsInOcularMask()
 			Telescope *telescope = telescopes[selectedTelescopeIndex];
 			double ccdXRatio = ccd->getActualFOVx(telescope) / screenFOV;
 			double ccdYRatio = ccd->getActualFOVy(telescope) / screenFOV;
-			float width = params.viewportXywh[2] * ccdYRatio ;
-			float height = params.viewportXywh[3] * ccdXRatio ;
+			// As the FOV is based on the narrow aspect of the screen, we need to calculate height & width based soley off of that dimension.
+			int aspectIndex = 2;
+			if (params.viewportXywh[2] > params.viewportXywh[3]) {
+				aspectIndex = 3;
+			}
+			float width = params.viewportXywh[aspectIndex] * ccdYRatio;
+			float height = params.viewportXywh[aspectIndex] * ccdXRatio;
 
 			if (width > 0.0 && height > 0.0) {
 				glBegin(GL_LINE_LOOP);
@@ -969,7 +974,9 @@ void Oculars::paintText(const StelCore* core)
 	// The CCD
 	QString ccdsensorLabel, ccdInfoLabel;
 	if (ccd && ccd->chipWidth() > .0 && ccd->chipHeight() > .0) {
-		ccdInfoLabel = "Dimension : " + QVariant(ccd->chipWidth()).toString() + "x" + QVariant(ccd->chipHeight()).toString() + " mm";
+		double fovX = ((int)(ccd->getActualFOVx(telescope) * 1000.0)) / 1000.0;
+		double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;
+		ccdInfoLabel = "Dimension : " + QVariant(fovX).toString() + "x" + QVariant(fovY).toString() + QChar(0x00B0);
 		if (ccd->name() != QString("")) {
 			ccdsensorLabel = "Sensor #" + QVariant(selectedCCDIndex).toString();
 			ccdsensorLabel.append(" : ").append(ccd->name());
