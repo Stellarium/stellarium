@@ -743,40 +743,40 @@ void Oculars::initializeActions()
 							 ("Select previous telescope"),
 							 settings->value("bindings/prev_telescope", "Shift+[").toString(),
 							 group, false);
-	if (!settings->contains("bindings/ccd_ratation_angle_minor_decrement")) {
-		settings->setValue("bindings/ccd_ratation_angle_minor_decrement", "Ctrl+8");
+	if (!settings->contains("bindings/ccd_rotation_angle_minor_decrement")) {
+		settings->setValue("bindings/ccd_rotation_angle_minor_decrement", "Ctrl+8");
 	}
 	gui->addGuiActions("action_CCDAngle_minorDecrement",
 							 ("Minor decrement CCD rotation angle"),
-							 settings->value("bindings/ccd_ratation_angle_minor_decrement", "Ctrl+8").toString(),
+							 settings->value("bindings/ccd_rotation_angle_minor_decrement", "Ctrl+8").toString(),
 							 group, false);
-	if (!settings->contains("bindings/ccd_ratation_angle_minor_increment")) {
-		settings->setValue("bindings/ccd_ratation_angle_minor_increment", "Ctrl+9");
+	if (!settings->contains("bindings/ccd_rotation_angle_minor_increment")) {
+		settings->setValue("bindings/ccd_rotation_angle_minor_increment", "Ctrl+9");
 	}
 	gui->addGuiActions("action_CCDAngle_minorIncrement",
 							 ("Minor increment CCD rotation angle"),
-							 settings->value("bindings/ccd_ratation_angle_minor_increment", "Ctrl+9").toString(),
+							 settings->value("bindings/ccd_rotation_angle_minor_increment", "Ctrl+9").toString(),
 							 group, false);
-	if (!settings->contains("bindings/ccd_ratation_angle_major_decrement")) {
-		settings->setValue("bindings/ccd_ratation_angle_major_decrement", "Shift+8");
+	if (!settings->contains("bindings/ccd_rotation_angle_major_decrement")) {
+		settings->setValue("bindings/ccd_rotation_angle_major_decrement", "Shift+8");
 	}
 	gui->addGuiActions("action_CCDAngle_majorDecrement",
 							 ("Major decrement CCD rotation angle"),
-							 settings->value("bindings/ccd_ratation_angle_major_decrement", "Shift+8").toString(),
+							 settings->value("bindings/ccd_rotation_angle_major_decrement", "Shift+8").toString(),
 							 group, false);
-	if (!settings->contains("bindings/ccd_ratation_angle_major_increment")) {
-		settings->setValue("bindings/ccd_ratation_angle_major_increment", "Shift+9");
+	if (!settings->contains("bindings/ccd_rotation_angle_major_increment")) {
+		settings->setValue("bindings/ccd_rotation_angle_major_increment", "Shift+9");
 	}
 	gui->addGuiActions("action_CCDAngle_majorIncrement",
 							 ("Major increment CCD rotation angle"),
-							 settings->value("bindings/ccd_ratation_angle_major_increment", "Shift+9").toString(),
+							 settings->value("bindings/ccd_rotation_angle_major_increment", "Shift+9").toString(),
 							 group, false);
-	if (!settings->contains("bindings/ccd_ratation_angle_reset")) {
-		settings->setValue("bindings/ccd_ratation_angle_reset", "m");
+	if (!settings->contains("bindings/ccd_rotation_angle_reset")) {
+		settings->setValue("bindings/ccd_rotation_angle_reset", "m");
 	}
 	gui->addGuiActions("action_CCDAngle_reset",
 							 ("Reset CCD rotation angle"),
-							 settings->value("bindings/ccd_ratation_angle_reset", "").toString(),
+							 settings->value("bindings/ccd_rotation_angle_reset", "").toString(),
 							 group, false);
 	
 	connect(gui->getGuiActions("actionShow_Ocular_Crosshair"), SIGNAL(toggled(bool)), this, SLOT(toggleCrosshair()));
