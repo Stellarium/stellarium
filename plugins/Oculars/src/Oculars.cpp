@@ -428,6 +428,32 @@ void Oculars::setScaleImageCircle(bool state)
 #pragma mark Slots Methods
 #endif
 /* ********************************************************************* */
+void Oculars::ccdRotationMajorIncrease()
+{
+	ccdRotationAngle += 10.0;
+}
+
+void Oculars::ccdRotationMajorDecrease()
+{
+	ccdRotationAngle -= 10.0;
+}
+
+
+void Oculars::ccdRotationMinorIncrease()
+{
+	ccdRotationAngle += 1.0;
+}
+
+void Oculars::ccdRotationMinorDecrease()
+{
+	ccdRotationAngle -= 1.0;
+}
+
+void Oculars::ccdRotationReset()
+{
+	ccdRotationAngle = 0.0;
+}
+
 void Oculars::enableOcular(bool enableOcularMode)
 {
 	if (enableOcularMode) {
@@ -693,45 +719,82 @@ void Oculars::initializeActions()
 							 settings->value("bindings/toggle_crosshair", "ALT+C").toString(),
 							 group, true);
 
-	gui->addGuiActions("actionShow_CCD_increment",
+	gui->addGuiActions("action_CCD_increment",
 							 ("Select next sensor"),
 							 settings->value("bindings/next_ccd", "Shift+Ctrl+]").toString(),
 							 group, false);
-	gui->addGuiActions("actionShow_CCD_decrement",
+	gui->addGuiActions("action_CCD_decrement",
 							 ("Select previous sensor"),
 							 settings->value("bindings/prev_ccd", "Shift+Ctrl+[").toString(),
 							 group, false);
-	gui->addGuiActions("actionShow_Ocular_increment",
+	gui->addGuiActions("action_Ocular_increment",
 							 ("Select next ocular"),
 							 settings->value("bindings/next_ocular", "Ctrl+]").toString(),
 							 group, false);
-	gui->addGuiActions("actionShow_Ocular_decrement",
+	gui->addGuiActions("action_Ocular_decrement",
 							 ("Select previous ocular"),
 							 settings->value("bindings/prev_ocular", "Ctrl+[").toString(),
 							 group, false);
-	gui->addGuiActions("actionShow_Telescope_increment",
+	gui->addGuiActions("action_Telescope_increment",
 							 ("Select next telescope"),
 							 settings->value("bindings/next_telescope", "Shift+]").toString(),
 							 group, false);
-	gui->addGuiActions("actionShow_Telescope_decrement",
+	gui->addGuiActions("action_Telescope_decrement",
 							 ("Select previous telescope"),
 							 settings->value("bindings/prev_telescope", "Shift+[").toString(),
 							 group, false);
-
+	if (!settings->contains("bindings/ccd_ratation_angle_minor_decrement")) {
+		settings->setValue("bindings/ccd_ratation_angle_minor_decrement", "Ctrl+8");
+	}
+	gui->addGuiActions("action_CCDAngle_minorDecrement",
+							 ("Minor decrement CCD rotation angle"),
+							 settings->value("bindings/ccd_ratation_angle_minor_decrement", "Ctrl+8").toString(),
+							 group, false);
+	if (!settings->contains("bindings/ccd_ratation_angle_minor_increment")) {
+		settings->setValue("bindings/ccd_ratation_angle_minor_increment", "Ctrl+9");
+	}
+	gui->addGuiActions("action_CCDAngle_minorIncrement",
+							 ("Minor increment CCD rotation angle"),
+							 settings->value("bindings/ccd_ratation_angle_minor_increment", "Ctrl+9").toString(),
+							 group, false);
+	if (!settings->contains("bindings/ccd_ratation_angle_major_decrement")) {
+		settings->setValue("bindings/ccd_ratation_angle_major_decrement", "Shift+8");
+	}
+	gui->addGuiActions("action_CCDAngle_majorDecrement",
+							 ("Major decrement CCD rotation angle"),
+							 settings->value("bindings/ccd_ratation_angle_major_decrement", "Shift+8").toString(),
+							 group, false);
+	if (!settings->contains("bindings/ccd_ratation_angle_major_increment")) {
+		settings->setValue("bindings/ccd_ratation_angle_major_increment", "Shift+9");
+	}
+	gui->addGuiActions("action_CCDAngle_majorIncrement",
+							 ("Major increment CCD rotation angle"),
+							 settings->value("bindings/ccd_ratation_angle_major_increment", "Shift+9").toString(),
+							 group, false);
+	if (!settings->contains("bindings/ccd_ratation_angle_reset")) {
+		settings->setValue("bindings/ccd_ratation_angle_reset", "m");
+	}
+	gui->addGuiActions("action_CCDAngle_reset",
+							 ("Reset CCD rotation angle"),
+							 settings->value("bindings/ccd_ratation_angle_reset", "").toString(),
+							 group, false);
+	
 	connect(gui->getGuiActions("actionShow_Ocular_Crosshair"), SIGNAL(toggled(bool)), this, SLOT(toggleCrosshair()));
 
 
-	connect(gui->getGuiActions("actionShow_CCD_increment"), SIGNAL(triggered()), this, SLOT(incrementCCDIndex()));
-	connect(gui->getGuiActions("actionShow_CCD_decrement"), SIGNAL(triggered()), this, SLOT(decrementCCDIndex()));
-	connect(gui->getGuiActions("actionShow_Ocular_increment"), SIGNAL(triggered()), this, SLOT(incrementOcularIndex()));
-	connect(gui->getGuiActions("actionShow_Ocular_decrement"), SIGNAL(triggered()), this, SLOT(decrementOcularIndex()));
-	connect(gui->getGuiActions("actionShow_Telescope_increment"), SIGNAL(triggered()), this, SLOT(incrementTelescopeIndex()));
-	connect(gui->getGuiActions("actionShow_Telescope_decrement"), SIGNAL(triggered()), this, SLOT(decrementTelescopeIndex()));
-	/*
-	 connect(telescopesTableModel, SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)), this, SLOT(dataChanged()));
-	 connect(telescopesTableModel, SIGNAL(rowsInserted(const QModelIndex &, int, int)), this, SLOT(rowsInserted()));
-	 connect(telescopesTableModel, SIGNAL(rowsRemoved(const QModelIndex &, int, int)), this, SLOT(rowsRemoved()));
-	 */
+	connect(gui->getGuiActions("action_CCD_increment"), SIGNAL(triggered()), this, SLOT(incrementCCDIndex()));
+	connect(gui->getGuiActions("action_CCD_decrement"), SIGNAL(triggered()), this, SLOT(decrementCCDIndex()));
+	connect(gui->getGuiActions("action_Ocular_increment"), SIGNAL(triggered()), this, SLOT(incrementOcularIndex()));
+	connect(gui->getGuiActions("action_Ocular_decrement"), SIGNAL(triggered()), this, SLOT(decrementOcularIndex()));
+	connect(gui->getGuiActions("action_Telescope_increment"), SIGNAL(triggered()), this, SLOT(incrementTelescopeIndex()));
+	connect(gui->getGuiActions("action_Telescope_decrement"), SIGNAL(triggered()), this, SLOT(decrementTelescopeIndex()));
+
+	connect(gui->getGuiActions("action_CCDAngle_majorDecrement"), SIGNAL(triggered()), this, SLOT(ccdRotationMajorDecrease()));
+	connect(gui->getGuiActions("action_CCDAngle_majorIncrement"), SIGNAL(triggered()), this, SLOT(ccdRotationMajorIncrease()));
+	connect(gui->getGuiActions("action_CCDAngle_minorDecrement"), SIGNAL(triggered()), this, SLOT(ccdRotationMinorDecrease()));
+	connect(gui->getGuiActions("action_CCDAngle_minorIncrement"), SIGNAL(triggered()), this, SLOT(ccdRotationMinorIncrease()));
+	connect(gui->getGuiActions("action_CCDAngle_reset"), SIGNAL(triggered()), this, SLOT(ccdRotationReset()));
+
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedOcularChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedTelescopeChanged()), this, SLOT(instrumentChanged()));
@@ -909,6 +972,7 @@ void Oculars::inscribeCCDBoundsInOcularMask()
 	glColor3f(0.f,0.f,0.f);
 	glPushMatrix();
 	glTranslated(params.viewportCenter[0], params.viewportCenter[1], 0.0);
+	glRotated(ccdRotationAngle, 0.0, 0.0, 1.0);
 	GLdouble screenFOV = params.fov;
 
 	// draw sensor rectangle
