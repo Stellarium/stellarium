@@ -74,6 +74,11 @@ public slots:
 	void toggleCrosshair();
 	void toggleTelrad();
 
+	void ccdRotationMajorIncrease();
+	void ccdRotationMajorDecrease();
+	void ccdRotationMinorIncrease();
+	void ccdRotationMinorDecrease();
+	void ccdRotationReset();
 	void decrementCCDIndex();
 	void decrementOcularIndex();
 	void decrementTelescopeIndex();
@@ -159,6 +164,7 @@ private:
 	bool flagEclipticLine;		//!< Flag to track if EclipticLine was displayed at activation.
 	bool flagMeridianLine;		//!< Flag to track if MeridianLine was displayed at activation.
 
+	double ccdRotationAngle;	//<! The angle to rotate the CCD bounding box. */
 	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
 	bool useMaxEyepieceAngle;	//!< Read from the ini file, whether to scale the mask based aFOV.
 
