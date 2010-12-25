@@ -16,7 +16,7 @@
 
 /***************************************************************************
  *   Copyright (C) 2006 by J.L. Canales                                    *
- *   jlcanales@users.sourceforge.net                                       *
+ *   jlcanales.gasco@gmail.com                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *

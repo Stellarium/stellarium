@@ -117,7 +117,7 @@ private:
 	bool visible;
 	bool orbitVisible;  //draw orbit enabled/disabled
 
-	QString designation;               // The ID of the satllite
+	QString designation;               // The ID of the satellite
 	QString description;               // longer description of spacecraft
 	Vec3d XYZ;                         // holds J2000 position
 	QPair< QByteArray, QByteArray > tleElements;
