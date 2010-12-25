@@ -151,8 +151,8 @@ void Scenery3d::drawCubeTestScene(StelCore* core)
 
     for (int x = 0; x < 10; x++) {
         for (int y = 0; y < 10; y++) {
-            double xPos = -15.0 + x * 3.0;
-            double yPos = -15.0 + y * 3.0;
+            double xPos = 15.0 + x * 3.0;
+            double yPos = 15.0 + y * 3.0;
             for (int i = 0; i < 36; i++) {
                 int idx = (x*10 + y) * 36 + i;
                 Vec3d cv = cube_vertice_triangles[i];
@@ -164,7 +164,18 @@ void Scenery3d::drawCubeTestScene(StelCore* core)
         }
     }
 
-    Vec3d nullv(0, 0, 0);
+    //Vec3d nullv(0, 0, 0);
+    //float fov = prj->getFov();
+    float fov = prj->getFov();
+    float aspect = (float)prj->getViewportWidth() / (float)prj->getViewportHeight();
+    float zNear = 1.0f;
+    float zFar = 10000.0f;
+    float f = 2.0 / tan(fov * M_PI / 360.0);
+    Mat4d projMatd(f / aspect, 0, 0, 0,
+                   0, f, 0, 0,
+                   0, 0, (zFar + zNear) / (zNear - zFar), 2.0 * zFar * zNear / (zNear - zFar),
+                   0, 0, -1, 0);
+    /*Mat4d mvpMat = projMatd * prj->getModelViewMatrix();
     const int num_triangles = 100*36 / 3;
     for (int i=0; i<num_triangles; i++) {
         int tri = i*3;
@@ -175,12 +186,46 @@ void Scenery3d::drawCubeTestScene(StelCore* core)
         if (!valid) {
             vertice[tri] = vertice[tri+1] = vertice[tri+2] = nullv;
         }
-    }
+        vertice[tri].transfo4d(mvpMat);
+        prj->viewportTransform(vertice[tri]);
+        vertice[tri+1].transfo4d(mvpMat);
+        prj->viewportTransform(vertice[tri+1]);
+        vertice[tri+2].transfo4d(mvpMat);
+        prj->viewportTransform(vertice[tri+2]);
+        //qDebug() << vertice[tri].toString();
+    }*/
+
+
+    /*Mat4f glViewMatrix;
+    Mat4f glProjectionMatrix;
+    glGetFloatv(GL_MODELVIEW_MATRIX, glViewMatrix.r);
+    glGetFloatv(GL_PROJECTION_MATRIX, glProjectionMatrix.r);
+    qDebug() << "view";
+    glViewMatrix.print();
+    qDebug() << "projection";
+    glProjectionMatrix.print();
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();*/
+
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+    glMultMatrixd(projMatd);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glLoadIdentity();
+    glMultMatrixd(prj->getModelViewMatrix());
 
     painter.setArrays(vertice, NULL, colors);
     for (int i = 0; i < 100; i++) {
         painter.drawFromArray(StelPainter::Triangles, 36, i * 36, false);
     }
+
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
     /*painter.setColor(1.f, 1.f, 1.f);
     QVector<Vec3d> pv;
     for (int i = 0; i < 100; i++) {
