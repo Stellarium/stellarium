@@ -404,10 +404,11 @@ void TextUserInterface::draw(StelCore* core)
 		if (currentNode!=NULL)
 			tuiText = currentNode->getDisplayText();
 
-		StelPainter painter(core->getProjection2d());
+		StelPainter painter(core->getProjection(StelCore::FrameAltAz));
 		painter.setFont(font);
 		painter.setColor(0.3,1,0.3);
-		painter.drawText(400, 200, tuiText);
+		painter.drawText(StelMainGraphicsView::getInstance().size().width()*0.6,
+				 50, tuiText, 0, 0, 0, false);
 	}
 }
 
@@ -423,7 +424,7 @@ void TextUserInterface::handleKeys(QKeyEvent* event)
 	if (event->type()==QEvent::KeyPress && event->key()==Qt::Key_M)
 	{
 		tuiActive = ! tuiActive;
-		dummyDialog.setVisible(tuiActive);
+		dummyDialog.close();
 		event->setAccepted(true);
 		return;
 	}

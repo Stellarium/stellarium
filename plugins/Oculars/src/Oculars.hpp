@@ -74,6 +74,11 @@ public slots:
 	void toggleCrosshair();
 	void toggleTelrad();
 
+	void ccdRotationMajorIncrease();
+	void ccdRotationMajorDecrease();
+	void ccdRotationMinorIncrease();
+	void ccdRotationMinorDecrease();
+	void ccdRotationReset();
 	void decrementCCDIndex();
 	void decrementOcularIndex();
 	void decrementTelescopeIndex();
@@ -93,12 +98,6 @@ private slots:
 	void setScaleImageCircle(bool state);
 
 private:
-	//! Renders crosshairs into the viewport.
-	void drawCrosshairs();
-	
-	//! Renders the three Telrad circles, but only if not in ocular mode.
-	void drawTelrad();
-
 	//! Set up the Qt actions needed to activate the plugin.
 	void initializeActivationActions();
 	
@@ -110,9 +109,16 @@ private:
 	//! while flagShowOculars == true.
 	void interceptMovementKey(class QKeyEvent* event);
 
+	//! Renders crosshairs into the viewport.
+	void paintCrosshairs();
+	void paintCCDBounds();
 	//! Paint the mask into the viewport.
-	void paintMask();
-	
+	void paintOcularMask();
+	//! Renders the three Telrad circles, but only if not in ocular mode.
+	void paintTelrad();
+	void inscribeCCDBoundsInOcularMask();
+
+
 	//! Paints the text about the current object selections to the upper right hand of the screen.
 	//! Should only be called from a 'ready' state; currently from the draw() method.
 	void paintText(const StelCore* core);
@@ -149,6 +155,7 @@ private:
 	bool flagShowCrosshairs;	//!< flag used to track in crosshairs should be rendered in the ocular view.
 	bool flagShowTelrad;		//!< If true, display the Telrad overlay.
 	int usageMessageLabelID;	//!< the id of the label showing the usage message. -1 means it's not displayed.
+	int noEntitiesLabelID;	//!< the id of the label showing that there are no telescopes or oclars. -1 means it's not displayed.
 
 	bool flagAzimuthalGrid;		//!< Flag to track if AzimuthalGrid was displayed at activation.
 	bool flagEquatorGrid;		//!< Flag to track if EquatorGrid was displayed at activation.
@@ -157,6 +164,7 @@ private:
 	bool flagEclipticLine;		//!< Flag to track if EclipticLine was displayed at activation.
 	bool flagMeridianLine;		//!< Flag to track if MeridianLine was displayed at activation.
 
+	double ccdRotationAngle;	//<! The angle to rotate the CCD bounding box. */
 	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
 	bool useMaxEyepieceAngle;	//!< Read from the ini file, whether to scale the mask based aFOV.
 

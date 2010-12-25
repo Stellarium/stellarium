@@ -83,6 +83,9 @@ void StelTranslator::initSystemLanguage(void)
 		}
 	}
 
+	if (systemLangName.isEmpty())
+		systemLangName = "en";
+
 	//change systemLangName to ISO 639 / ISO 3166.
 	int pos = systemLangName.indexOf(':', 0);
 	if (pos != -1) systemLangName.resize(pos);

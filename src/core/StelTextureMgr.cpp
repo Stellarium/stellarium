@@ -42,8 +42,6 @@ StelTextureMgr::~StelTextureMgr()
 
 void StelTextureMgr::init()
 {
-	StelPainter::makeMainGLContextCurrent();
-	isNoPowerOfTwoAllowed = QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0);
 }
 
 
