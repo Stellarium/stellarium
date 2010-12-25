@@ -104,7 +104,7 @@ void gSatTEME::setEpoch(gTime ai_time)
 	m_Vel[ 2]     = vo[ 2];
 }
 
-void gSatTEME::setEpoch(double ai_minSinceKepEpoch)
+void gSatTEME::setMinSinceKepEpoch(double ai_minSinceKepEpoch)
 {
 
 	double ro[3];

@@ -68,11 +68,20 @@ public:
 	//! @param[in] 	ai_time gTime object storing the compute epoch time.
 	void setEpoch(gTime ai_time);
 
-	// Operation: setEpoch( double ai_minSinceKepEpoch)
+	// Operation: setEpoch( double ai_time)
+	//! @brief Set compute epoch for prediction
+	//! @param[in] 	ai_time double variable storing the compute epoch time in Julian Days.
+	void setEpoch(double ai_time)
+	{
+		gTime time(ai_time);
+		return setEpoch( time);
+	}
+
+	// Operation: setMinSinceKepEpoch( double ai_minSinceKepEpoch)
 	//! @brief Set compute epoch for prediction in minutes since Keplerian data Epoch
 	//! @param[in] 	ai_minSinceKepEpoch Time since Keplerian Epoch measured in minutes
 	//! and fraction of minutes.
-	void setEpoch(double ai_minSinceKepEpoch);
+	void setMinSinceKepEpoch(double ai_minSinceKepEpoch);
 
 	// Operation: getPos()
 	//! @brief Get the TEME satellite position Vector
