@@ -335,7 +335,7 @@ void Satellite::update(double)
 		pSatellite->setEpoch( epochTime);
 		Position = pSatellite->getPos();
 		Vel      = pSatellite->getVel();
-		LatLong  = pSatellite->getSubPoint( epochTime);
+		LatLong  = pSatellite->getSubPoint();
 		azElPos  = observer.calculateLook( *pSatellite, epochTime);
 
 		azimuth   = azElPos[ AZIMUTH]/KDEG2RAD;
