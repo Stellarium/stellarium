@@ -1253,7 +1253,7 @@ bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connecti
 	switch (connectionType)
 	{
 	case ConnectionVirtual:
-		initString = QString("%1:%2").arg(name, "TelescopeServerDummy");
+		initString = QString("%1:%2:%3").arg(name, "TelescopeServerDummy", "J2000");
 		break;
 
 	case ConnectionInternal:
