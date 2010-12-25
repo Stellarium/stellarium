@@ -22,7 +22,9 @@ void gObserver::getECIPosition(gTime ai_epoch, gVector& ao_position, gVector& ao
 	double r;
 	double c,sq;
 
-	/* Reference:  The 1992 Astronomical Almanac, page K11. */
+	/* Reference:  Explanatory supplement to the Astronomical Almanac, page 209-210. */
+	/* Elipsoid earth model*/
+	/* c = Nlat/a */
 	c = 1/sqrt(1 + __f*(__f - 2)*Sqr(sin(radLatitude)));
 	sq = Sqr(1 - __f)*c;
 
