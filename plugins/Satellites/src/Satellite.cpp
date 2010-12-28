@@ -57,7 +57,7 @@ bool Satellite::orbitLinesFlag = true;
 
 
 Satellite::Satellite(const QVariantMap& map)
-	: initialized(false), visible(true), hintColor(0.0,0.0,0.0), lastUpdated(), pSatellite(NULL)
+	: initialized(false), visible(true), hintColor(0.0,0.0,0.0), lastUpdated(), pSatWrapper(NULL)
 {
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation") || !map.contains("tle1") || !map.contains("tle2"))
@@ -134,15 +134,13 @@ Satellite::Satellite(const QVariantMap& map)
 	{
 		lastUpdated = map.value("lastUpdated").toDateTime();
 	}
-
-	setObserverLocation();
 	initialized = true;
 }
 
 Satellite::~Satellite()
 {
-	if(pSatellite != NULL)
-		delete pSatellite;
+	if(pSatWrapper != NULL)
+		delete pSatWrapper;
 }
 
 double Satellite::roundToDp(float n, int dp)
@@ -263,23 +261,6 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	return str;
 }
 
-void Satellite::setObserverLocation(StelLocation* loc)
-{
-	StelLocation l;
-	if (loc==NULL)
-	{
-		l = StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation();
-	}
-	else
-	{
-		l = *loc;
-	}
-
-
-	observer.setPosition( l.latitude, l.longitude, l.altitude / 1000.0);
-
-}
-
 Vec3f Satellite::getInfoColor(void) const {
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : hintColor;
 }
@@ -296,53 +277,31 @@ double Satellite::getAngularSize(const StelCore*) const
 
 void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 {
-	if (pSatellite)
+	if(pSatWrapper)
 	{
-		gSatTEME *old = pSatellite;
-		pSatellite = NULL;
+		gSatStelWrapper *old = pSatWrapper;
+		pSatWrapper = NULL;
 		delete old;
 	}
 
-	tleElements.first.clear();
-	tleElements.first.append(tle1);
-	tleElements.second.clear();
-	tleElements.second.append(tle2);
-
-	// The TLE library actually modifies the TLE strings, which is annoying (because
-	// when we get updates, we want to check if there has been a change by using ==
-	// with the original.  Thus we make a copy to send to the TLE library.
-	QByteArray t1(tleElements.first), t2(tleElements.second);
-
-	// Also, the TLE library expects no more than 130 characters length input.  We
-	// shouldn't have sane input with a TLE longer than about 80, but just in case
-	// we have a mal-formed input, we will truncate here to be safe
-	t1.truncate(130);
-	t2.truncate(130);
-
-	pSatellite = new gSatTEME(designation.toAscii().data(),
-				  t1.data(),
-				  t2.data());
+	pSatWrapper = new gSatStelWrapper( designation, tle1, tle2);
 }
 
 void Satellite::update(double)
 {
-	double jul_utc = StelApp::getInstance().getCore()->getNavigator()->getJDay();
 
-	epochTime = jul_utc;
-
-	if (pSatellite)
+	if (pSatWrapper)
 	{
-		pSatellite->setEpoch( epochTime);
-		Position = pSatellite->getPos();
-		Vel      = pSatellite->getVel();
-		LatLong  = pSatellite->getSubPoint();
-		azElPos  = observer.calculateLook( *pSatellite, epochTime);
+		epochTime = StelApp::getInstance().getCore()->getNavigator()->getJDay();
 
-		azimuth   = azElPos[ AZIMUTH]/KDEG2RAD;
-		elevation = azElPos[ ELEVATION]/KDEG2RAD;
-		range     = azElPos[ RANGE];
-		rangeRate = azElPos[ RANGERATE];
-		height    = LatLong[2];
+		pSatWrapper->setEpoch(epochTime);
+		Position = pSatWrapper->getTEMEPos();
+		Vel      = pSatWrapper->getTEMEVel();
+		LatLong  = pSatWrapper->getSubPoint();
+		height   = LatLong[2];
+		ElAzPos  = pSatWrapper->getAltAz();
+
+		pSatWrapper->getSlantRange(range, rangeRate);
 
 		// Compute orbit points to draw orbit line.
 		if(orbitVisible) computeOrbitPoints();
@@ -364,9 +323,7 @@ void Satellite::recalculateOrbitLines(void)
 
 void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 {
-	float a = (azimuth-90)*M_PI/180;
-	Vec3d pos(sin(a),cos(a), tan(elevation * M_PI / 180.));
-        XYZ = core->getNavigator()->altAzToJ2000(pos);
+	XYZ = core->getNavigator()->altAzToJ2000(ElAzPos);
 	StelApp::getInstance().getVisionModeNight() ? glColor4f(0.6,0.0,0.0,1.0) : glColor4f(hintColor[0],hintColor[1],hintColor[2], Satellite::hintBrightness);
 
 
@@ -388,7 +345,7 @@ void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 
 
 void Satellite::drawOrbit(StelPainter& painter){
-
+/*
 	Vec3d pos,posPrev;
 
 	float a, azimth, elev;
@@ -437,6 +394,8 @@ void Satellite::drawOrbit(StelPainter& painter){
 	painter.drawGreatCircleArcs(vertexArray, &viewportHalfspace);
 
 	glEnable(GL_TEXTURE_2D);
+
+*/
 }
 
 
@@ -459,13 +418,12 @@ void Satellite::setNightColors(bool night)
 
 void Satellite::computeOrbitPoints()
 {
-
-	gTimeSpan computeInterval(0, 0, 0, orbitLineSegmentDuration);
-	gTimeSpan orbitSpan(0, 0, 0, orbitLineSegments*orbitLineSegmentDuration/2);
-	gTime	  epochTm;
-	gVector   azElVector;
-	int	  diffSlots;
-
+	double computeInterval = orbitLineSegmentDuration/86400; //compute interval in Julian Days
+	double orbitSpan       = orbitLineSegments*orbitLineSegmentDuration/2;
+	double epochTm;   //epoch in Julian Days
+	Vec3d  ElAzVector;
+	int	   diffSlots;
+/*
 	if( orbitPoints.isEmpty())//Setup orbitPoins
 	{
 		epochTm  = epochTime - orbitSpan;
@@ -537,5 +495,7 @@ void Satellite::computeOrbitPoints()
 			lastEpochCompForOrbit = epochTime;
 		}
 	}
+
+	*/
 }
 

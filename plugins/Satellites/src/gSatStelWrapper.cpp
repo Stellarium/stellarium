@@ -117,14 +117,19 @@ Vec3d gSatStelWrapper::getSubPoint()
 }
 
 
-void gSatStelWrapper::updateEpoch(){
-
-
+void gSatStelWrapper::updateEpoch()
+{
 	double jul_utc = StelApp::getInstance().getCore()->getNavigator()->getJDay();
 	Epoch = jul_utc;
 
 	if (pSatellite)
 		pSatellite->setEpoch( Epoch);
+}
+
+void gSatStelWrapper::setEpoch( double ai_julianDaysEpoch)
+{
+	if (pSatellite)
+		pSatellite->setEpoch( ai_julianDaysEpoch);
 }
 
 
@@ -160,7 +165,7 @@ Vec3d gSatStelWrapper::getAltAz()
 	StelLocation loc   = StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation();
 	Vec3d topoSatPos;
 	Vec3d observerECIPos;
-
+	Vec3d observerECIVel;
 
 	double  radLatitude    = loc.latitude * KDEG2RAD;
 	double  theta          = Epoch.toThetaLMST(loc.longitude * KDEG2RAD);
@@ -186,6 +191,23 @@ Vec3d gSatStelWrapper::getAltAz()
 	return topoSatPos;
 }
 
+void  gSatStelWrapper::getSlantRange(double &ao_slantRange, double &ao_slantRangeRate)
+{
+
+	Vec3d observerECIPos;
+	Vec3d observerECIVel;
+
+	calcObserverTEMEPosition(observerECIPos, observerECIVel);
+
+
+	Vec3d satECIPos = getTEMEPos();
+	Vec3d satECIVel = getTEMEVel();
+	Vec3d slantRange = satECIPos - observerECIPos;
+	Vec3d rangeVel   = satECIVel - observerECIVel;
+
+	ao_slantRange     = slantRange.length();
+	ao_slantRangeRate = slantRange.dot(rangeVel)/ao_slantRange;
+}
 
 
 

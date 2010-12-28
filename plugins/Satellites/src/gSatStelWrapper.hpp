@@ -50,6 +50,8 @@ class gSatStelWrapper
 		//! @return void
 		void updateEpoch();
 
+		void setEpoch( double ai_julianDaysEpoch);
+
 		// Operation getTEMEPos
 		//! @brief This operation isolate gSatTEME getPos operation.
 		//! @return Vec3d with TEME position. Units measured in Km.
@@ -79,8 +81,7 @@ class gSatStelWrapper
 
 
 		void  getSlantRange(double &ao_slantRange, double &ao_slantRangeRate); //meassured in km and km/s
-		Vec3d getEquinoxEqu();
-		Vec3d getJ2000();
+
 
 
 	private:

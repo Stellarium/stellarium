@@ -32,6 +32,8 @@
 #include "StelSphereGeometry.hpp"
 
 #include "StelPainter.hpp"
+#include "gSatStelWrapper.hpp"
+
 #include "gsatellite/gSatTEME.hpp"
 #include "gsatellite/gObserver.hpp"
 #include "gsatellite/gTime.hpp"
@@ -121,41 +123,37 @@ private:
 	QString description;               // longer description of spacecraft
 	Vec3d XYZ;                         // holds J2000 position
 	QPair< QByteArray, QByteArray > tleElements;
-	double height, velocity, azimuth, elevation, range, rangeRate;
+	double height, range, rangeRate;
 	QList<commLink> comms;
 	Vec3f hintColor;
 	QStringList groupIDs;
 	QDateTime lastUpdated;
 	
 	static StelTextureSP hintTexture;
+	static SphericalCap  viewportHalfspace;
 	static float hintBrightness;
 	static float hintScale;
-	static SphericalCap viewportHalfspace;
-	static int orbitLineSegments;
-	static int orbitLineFadeSegments;
-	static int orbitLineSegmentDuration;
-	static bool orbitLinesFlag;
+	static int   orbitLineSegments;
+	static int   orbitLineFadeSegments;
+	static int   orbitLineSegmentDuration; //measured in seconds
+	static bool  orbitLinesFlag;
 
 	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
-	void setObserverLocation(StelLocation* loc=NULL);
 
-
-	//gsatellite objects
-	gSatTEME *pSatellite;
-	gObserver observer;
-	gTime     epochTime;
-	gVector   Position;
-	gVector   Vel;
-	gVector   LatLong;
-	gVector   azElPos;
+	gSatStelWrapper *pSatWrapper;
+	Vec3d Position;
+	Vec3d Vel;
+	Vec3d LatLong;
+	Vec3d ElAzPos;
+	double epochTime;
 
 	//Satellite Orbit Draw
 	QFont     font;
 	Vec3f     orbitColorNormal;
 	Vec3f     orbitColorNight;
 	Vec3f*    orbitColor;
-	gTime     lastEpochCompForOrbit;
-	QList<gVector> orbitPoints; //orbit points represented by azElPos vectors
+	double    lastEpochCompForOrbit; //measured in Julian Days
+	QList<Vec3d> orbitPoints; //orbit points represented by ElAzPos vectors
 
 };
 
