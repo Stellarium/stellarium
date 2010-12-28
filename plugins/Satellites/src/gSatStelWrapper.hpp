@@ -44,12 +44,35 @@ public:
 	gSatStelWrapper(QString designation, QString tle1,QString tle2);
 	~gSatStelWrapper();
 
+	// Operation updateEpoch
+	//! @brief This operation update Epoch timestamp for gSatTEME object
+	//! from Stellarium Julian Date.
+	//! @return void
+	void updateEpoch();
 
-	void setEpoch(const StelNavigator*);
+	// Operation getTEMEPos
+	//! @brief This operation isolate gSatTEME getPos operation.
+	//! @return Vec3d with TEME position. Units measured in Km.
+	Vec3d getTEMEPos();
 
-	Vec3d getPos();
-	Vec3d getVel();
+	// Operation getTEMEVel
+	//! @brief This operation isolate gSatTEME getVel operation.
+	//! @return Vec3d with TEME speed. Units measured in Km/s.
+	Vec3d getTEMEVel();
+
+	// Operation:  getSubPoint
+	//! @brief This operation isolate getSubPoint method of gSatTEME object.
+	//! @return Vec3d Geographical coordinates\n
+	//!    Latitude:  Coord[0]  measured in degrees\n
+	//!    Longitude: Coord[1]  measured in degrees\n
+	//!	   Altitude:  Coord[2]  measured in Km.\n
 	Vec3d getSubPoint();
+
+
+	Vec3d getAltAz();
+	void  getSlantRange(double &ao_slantRange, double &ao_slantRangeRate); //meassured in km and km/s
+	Vec3d getEquinoxEqu();
+	Vec3d getJ2000();
 
 private:
 	gSatTEME *pSatellite;
