@@ -827,11 +827,6 @@ void Satellites::updateDownloadComplete(QNetworkReply* reply)
 
 void Satellites::observerLocationChanged(StelLocation loc)
 {
-	foreach(const SatelliteP& sat, satellites)
-	{
-		if (sat->initialized && sat->visible)
-			sat->setObserverLocation(&loc);
-	}
 	recalculateOrbitLines();
 }
 
