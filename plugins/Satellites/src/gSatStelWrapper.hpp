@@ -35,47 +35,71 @@
 #include "StelNavigator.hpp"
 
 #include "gsatellite/gSatTEME.hpp"
-
+#include "gsatellite/gTime.hpp"
 
 class gSatStelWrapper
 {
 
-public:
-	gSatStelWrapper(QString designation, QString tle1,QString tle2);
-	~gSatStelWrapper();
+	public:
+		gSatStelWrapper(QString designation, QString tle1,QString tle2);
+		~gSatStelWrapper();
 
-	// Operation updateEpoch
-	//! @brief This operation update Epoch timestamp for gSatTEME object
-	//! from Stellarium Julian Date.
-	//! @return void
-	void updateEpoch();
+		// Operation updateEpoch
+		//! @brief This operation update Epoch timestamp for gSatTEME object
+		//! from Stellarium Julian Date.
+		//! @return void
+		void updateEpoch();
 
-	// Operation getTEMEPos
-	//! @brief This operation isolate gSatTEME getPos operation.
-	//! @return Vec3d with TEME position. Units measured in Km.
-	Vec3d getTEMEPos();
+		// Operation getTEMEPos
+		//! @brief This operation isolate gSatTEME getPos operation.
+		//! @return Vec3d with TEME position. Units measured in Km.
+		Vec3d getTEMEPos();
 
-	// Operation getTEMEVel
-	//! @brief This operation isolate gSatTEME getVel operation.
-	//! @return Vec3d with TEME speed. Units measured in Km/s.
-	Vec3d getTEMEVel();
+		// Operation getTEMEVel
+		//! @brief This operation isolate gSatTEME getVel operation.
+		//! @return Vec3d with TEME speed. Units measured in Km/s.
+		Vec3d getTEMEVel();
 
-	// Operation:  getSubPoint
-	//! @brief This operation isolate getSubPoint method of gSatTEME object.
-	//! @return Vec3d Geographical coordinates\n
-	//!    Latitude:  Coord[0]  measured in degrees\n
-	//!    Longitude: Coord[1]  measured in degrees\n
-	//!	   Altitude:  Coord[2]  measured in Km.\n
-	Vec3d getSubPoint();
+		// Operation:  getSubPoint
+		//! @brief This operation isolate getSubPoint method of gSatTEME object.
+		//! @return Vec3d Geographical coordinates\n
+		//!    Latitude:  Coord[0]  measured in degrees\n
+		//!    Longitude: Coord[1]  measured in degrees\n
+		//!	   Altitude:  Coord[2]  measured in Km.\n
+		Vec3d getSubPoint();
+
+		// Operation calculateLook
+		//! @brief This operation compute the coordinates in StelCore::FrameAltAz
+		//! @return Vect3d Vector with coordinates
+		//! References:
+		//!  Orbital Coordinate Systems, Part II
+		//!   Dr. T.S. Kelso
+		//!   http://www.celestrak.com/columns/v02n02/
+		Vec3d getAltAz();
 
 
-	Vec3d getAltAz();
-	void  getSlantRange(double &ao_slantRange, double &ao_slantRangeRate); //meassured in km and km/s
-	Vec3d getEquinoxEqu();
-	Vec3d getJ2000();
+		void  getSlantRange(double &ao_slantRange, double &ao_slantRangeRate); //meassured in km and km/s
+		Vec3d getEquinoxEqu();
+		Vec3d getJ2000();
 
-private:
-	gSatTEME *pSatellite;
+
+	private:
+		// Operation calcObserverTEMEPosition
+		//! @brief This operation compute the observer ECI coordinates in TEME framework
+		//! for the ai_epoch time
+		//! @details
+		//! References:
+		//!  Orbital Coordinate Systems, Part II
+		//!   Dr. T.S. Kelso
+		//!   http://www.celestrak.com/columns/v02n02/
+		//! @param[out] ao_position Observer TEME position vector measured in Km
+		//! @param[out] ao_vel Observer TEME velocity vector measured in Km/s
+		void calcObserverTEMEPosition(Vec3d& ao_position, Vec3d& ao_vel);
+
+
+	private:
+		gSatTEME *pSatellite;
+		gTime	 Epoch;
 
 };
 
