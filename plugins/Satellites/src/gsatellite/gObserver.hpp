@@ -78,8 +78,8 @@ public:
 
 
 	// Operation getECIPosition
-	//! @brief This operation compute the observer ECI coordinates for the
-	//! ai_epoch time
+	//! @brief This operation compute the observer ECI coordinates in TEME framework
+	//! for the ai_epoch time
 	//! @details
 	//! References:
 	//!  Orbital Coordinate Systems, Part II

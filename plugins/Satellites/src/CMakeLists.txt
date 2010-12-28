@@ -25,6 +25,7 @@ SET(Satellites_SRCS
   gsatellite/stdsat.h
 
   gSatStelWrapper.hpp
+  gSatStelWrapper.cpp
   Satellite.hpp
   Satellite.cpp
   Satellites.hpp
