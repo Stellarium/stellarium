@@ -158,7 +158,49 @@ void OBJ::drawTriGL( void ) // simple triangle renderer
     */
 }
 
-void OBJ::makeStelArrays(Vec3d*& vertices, Vec3f*& texcoords, Vec3f*& normals)
+vector<OBJ::StelModel> OBJ::getStelArrays()
 {
+    vector<StelModel> stelModels;
+    StelModel stelModel;
+    for (ModelList::iterator it1 = models.begin(); it1 != models.end(); it1++) {
+        Model& model = *it1;
+        const MTL::Material& material = mtlLib.getMaterial(model.material);
+        if (!material.texture.empty()) {
+            stelModel.texture = mtlLib.getTexture(material.texture);
+        } else {
+            stelModel.texture.clear();
+        }
+        stelModel.triangleCount = model.faces.size();
+        stelModel.color = Vec3f(material.color.r, material.color.g, material.color.b);
+        stelModel.vertices = new Vec3d[stelModel.triangleCount * 3];
+        stelModel.texcoords = new Vec2f[stelModel.triangleCount * 3];
+        stelModel.normals = new Vec3f[stelModel.triangleCount * 3];
+        int i = 0;
+        for (FaceList::iterator it2 = model.faces.begin(); it2 != model.faces.end(); it2++) {
+            Face& face = *it2;
+            int three = 0;
+            for (RefList::iterator it3 = face.refs.begin(); it3 != face.refs.end() && three < 3; it3++) {
+                Ref& ref = *it3;
+                Vertex& vert = vertices[ref.v];
+                stelModel.vertices[i] = Vec3d(vert.x, vert.y, vert.z);
+                if (ref.normal) {
+                    Vertex& norm = normals[ref.n];
+                    stelModel.normals[i] = Vec3f(norm.x, norm.y, norm.z);
+                } else {
+                    stelModel.normals[i] = Vec3f(0.0f, 0.0f, 0.0f);
+                }
+                if (ref.texture) {
+                    Texcoord& tex = texcoords[ref.t];
+                    stelModel.texcoords[i] = Vec2f(tex.u, tex.v);
+                } else {
+                    stelModel.texcoords[i] = Vec2f(0.0f, 0.0f);
+                }
+                three++;
+                i++;
+            }
+        }
+        stelModels.push_back(stelModel);
+        stelModel = StelModel();
+    }
+    return stelModels;
 }
-

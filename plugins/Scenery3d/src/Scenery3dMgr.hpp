@@ -7,6 +7,7 @@
 
 #include <QMap>
 #include <QStringList>
+#include <QKeyEvent>
 
 class Scenery3d;
 class QSettings;
@@ -25,6 +26,7 @@ public:
     virtual void setStelStyle(const QString& section);
     virtual double getCallOrder(StelModuleActionName actionName) const;
     virtual bool configureGui(bool show);
+    virtual void handleKeys(QKeyEvent* e);
 
     bool load(QMap<QString, QString>& param);
     Scenery3d* createFromFile(const QString& file, const QString& id);

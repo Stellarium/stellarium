@@ -25,6 +25,9 @@
 #include "StelPainter.hpp"
 #include "StelFileMgr.hpp"
 #include "Scenery3dMgr.hpp"
+#include "StelNavigator.hpp"
+#include "StelMovementMgr.hpp"
+#include "StelUtils.hpp"
 
 #include <QAction>
 #include <QString>
@@ -35,10 +38,10 @@
 
 
 Scenery3d::Scenery3d()
-    :rotation(0.0f),
-    objModel(NULL),
-    vertices(NULL), verticesP(NULL),
-    texcoords(NULL), normals(NULL)
+    :core(NULL),
+    absolutePosition(0.0, 0.0, 0.0),
+    rotation(0.0f), movement_z(0.0f),
+    objModel(NULL)
 {
     objModel = new OBJ();
 }
@@ -60,12 +63,96 @@ void Scenery3d::load(const QSettings& scenery3dIni, const QString& scenery3dID)
 
     QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
     qDebug() << "Trying to load OBJ model: " << modelFile;
-    //objModel->load(modelFile.toAscii());
+    objModel->load(modelFile.toAscii());
+    objModelArrays = objModel->getStelArrays();
+}
+
+void Scenery3d::handleKeys(QKeyEvent* e)
+{
+    if (e->type() == QKeyEvent::KeyPress) {
+        if (e->key() == Qt::Key_W) {
+            movement_z = 1.0f;
+            e->accept();
+        } else if (e->key() == Qt::Key_X) {
+            movement_z = -1.0f;
+            e->accept();
+        }
+    } else if (e->type() == QKeyEvent::KeyRelease) {
+        if (e->key() == Qt::Key_W || e->key() == Qt::Key_X) {
+            movement_z = 0.0f;
+            e->accept();
+        }
+    }
 }
 
 void Scenery3d::update(double deltaTime)
 {
     rotation += 8.0f * deltaTime;
+    if (core != NULL) {
+        Vec3d viewDirection = core->getMovementMgr()->getViewDirectionJ2000();
+        double alt, az;
+        StelUtils::rectToSphe(&az, &alt, viewDirection);
+        Vec3d move(movement_z * deltaTime * 3.0 * sin(az), 0.0, movement_z * deltaTime * 3.0 * cos(az));
+        //move.normalize();
+        //move.v[1] = 0.0;
+        absolutePosition += move;
+    }
+}
+
+void Scenery3d::drawObjModel(StelCore* core)
+{
+    if (objModelArrays.empty()) return;
+
+    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, core->getCurrentProjectionType());
+    StelPainter painter(prj);
+
+    //glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+    glDepthMask(GL_TRUE);
+
+    glClear(GL_DEPTH_BUFFER_BIT);
+
+    float fov = prj->getFov();
+    float aspect = (float)prj->getViewportWidth() / (float)prj->getViewportHeight();
+    float zNear = 1.0f;
+    float zFar = 10000.0f;
+    float f = 2.0 / tan(fov * M_PI / 360.0);
+    Mat4d projMatd(f / aspect, 0, 0, 0,
+                   0, f, 0, 0,
+                   0, 0, (zFar + zNear) / (zNear - zFar), 2.0 * zFar * zNear / (zNear - zFar),
+                   0, 0, -1, 0);
+
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+    glMultMatrixd(projMatd);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glLoadIdentity();
+    glMultMatrixd(prj->getModelViewMatrix());
+    glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+    //glRotated(this->rotation, 0.0, 1.0, 0.0);
+
+    for (unsigned int i=0; i<objModelArrays.size(); i++) {
+        OBJ::StelModel& stelModel = objModelArrays[i];
+        if (stelModel.texture.data()) {
+            stelModel.texture.data()->bind();
+        }
+        glColor3fv(stelModel.color.v);
+        painter.setArrays(stelModel.vertices, stelModel.texcoords, __null, stelModel.normals);
+        painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);
+    }
+
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+
+    glDepthMask(GL_FALSE);
+    glDisable(GL_DEPTH_TEST);
+    //glDisable(GL_BLEND);
 }
 
 void Scenery3d::drawCubeTestScene(StelCore* core)
@@ -151,8 +238,8 @@ void Scenery3d::drawCubeTestScene(StelCore* core)
 
     for (int x = 0; x < 10; x++) {
         for (int y = 0; y < 10; y++) {
-            double xPos = 15.0 + x * 3.0;
-            double yPos = 15.0 + y * 3.0;
+            double xPos = 3.0 + x * 3.0;
+            double yPos = 3.0 + y * 3.0;
             for (int i = 0; i < 36; i++) {
                 int idx = (x*10 + y) * 36 + i;
                 Vec3d cv = cube_vertice_triangles[i];
@@ -216,6 +303,7 @@ void Scenery3d::drawCubeTestScene(StelCore* core)
     glPushMatrix();
     glLoadIdentity();
     glMultMatrixd(prj->getModelViewMatrix());
+    glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
 
     painter.setArrays(vertice, NULL, colors);
     for (int i = 0; i < 100; i++) {
@@ -247,6 +335,8 @@ void Scenery3d::drawCubeTestScene(StelCore* core)
 	
 void Scenery3d::draw(StelCore* core)
 {
+    this->core = core;
     // for debug purposes
-    drawCubeTestScene(core);
+    //drawCubeTestScene(core);
+    drawObjModel(core);
 }

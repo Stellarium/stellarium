@@ -7,15 +7,27 @@
 #include "MTL.hpp"
 #include "StelCore.hpp"
 
+using std::vector;
+
 class OBJ
 {
     public:
         OBJ( void );
         virtual ~OBJ( void );
 
+        struct StelModel {
+            StelModel() : texture(), color(0.0f, 0.0f, 0.0f), vertices(NULL), normals(NULL), texcoords(NULL) {}
+            long triangleCount;
+            StelTextureSP texture;
+            Vec3f color;
+            Vec3d* vertices;
+            Vec3f* normals;
+            Vec2f* texcoords;
+        };
+
         void load(const char* filename);
         void drawTriGL(void); // simple triangle renderer
-        void makeStelArrays(Vec3d*& vertices, Vec3f*& texcoords, Vec3f*& normals);
+        vector<StelModel> getStelArrays();
 
         struct Vertex {
             float x, y, z;

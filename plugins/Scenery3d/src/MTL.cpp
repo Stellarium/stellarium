@@ -68,9 +68,11 @@ void MTL::load(const char* filename)
 
 void MTL::uploadTexturesGL(void)
 {
+    StelTextureMgr textureMgr;
     for (MaterialMap::iterator it = mtlMap.begin(); it != mtlMap.end(); it++) {
         string texture = it->second.texture;
         if (texture.size() > 0) {
+            textureMapGL[texture] = textureMgr.createTexture(QString(absolutePath(texture).c_str()));
             //textureMapGL[texture] = load_texture(absolutePath(texture).c_str());
         }
     }
@@ -86,9 +88,8 @@ const MTL::Material& MTL::getMaterial(string matName)
     return mtlMap[matName];
 }
 
-int MTL::getTexture(string texName)
+StelTextureSP MTL::getTexture(string texName)
 {
-    //return textureMapGL[texName];
-    return 0;
+    return textureMapGL[texName];
 }
 

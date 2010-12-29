@@ -26,6 +26,9 @@
 #include "OBJ.hpp"
 
 #include <QString>
+#include <vector>
+
+using std::vector;
 
 //! Main class of the plug-in
 class Scenery3d
@@ -36,6 +39,7 @@ public:
 
     void load(const QSettings& scenery3dIni, const QString& scenery3dID);
 	
+    void handleKeys(QKeyEvent* e);
     void update(double deltaTime);
     void draw(StelCore* core);
 
@@ -46,16 +50,18 @@ public:
 	
 private:
     void drawCubeTestScene(StelCore* core);
+    void drawObjModel(StelCore* core);
+
+    StelCore* core;
 
     Mat4f projectionMatrix;
+    Vec3d absolutePosition;
     float rotation;
+    float movement_z;
 
     OBJ* objModel;
 
-    Vec4d* vertices; // model vertices
-    Vec4d* verticesP; // projected (on-screen) vertices
-    Vec4f* texcoords;
-    Vec4f* normals;
+    vector<OBJ::StelModel> objModelArrays;
 
     QString id;
     QString name;
