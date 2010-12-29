@@ -825,7 +825,7 @@ void Satellites::updateDownloadComplete(QNetworkReply* reply)
 	}
 }
 
-void Satellites::observerLocationChanged(StelLocation loc)
+void Satellites::observerLocationChanged(StelLocation)
 {
 	recalculateOrbitLines();
 }
