@@ -37,7 +37,17 @@ double Scenery3dMgr::getCallOrder(StelModuleActionName actionName) const
         return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 20;
     if (actionName == StelModule::ActionUpdate)
         return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 10;
+    if (actionName == StelModule::ActionHandleKeys)
+        return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 100;
     return 0;
+}
+
+void Scenery3dMgr::handleKeys(QKeyEvent* e)
+{
+    scenery3d->handleKeys(e);
+    if (!e->isAccepted()) {
+        // handle keys
+    }
 }
 
 void Scenery3dMgr::update(double deltaTime)
