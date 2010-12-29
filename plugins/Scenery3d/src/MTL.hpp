@@ -26,7 +26,7 @@ class MTL
         void load(const char* filename);
         void uploadTexturesGL(void);
         const Material& getMaterial(std::string matName);
-        int getTexture(std::string texName);
+        StelTextureSP getTexture(std::string texName);
     private:
         std::string absolutePath(std::string path);
 
