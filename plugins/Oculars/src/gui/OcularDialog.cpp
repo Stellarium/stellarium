@@ -266,6 +266,11 @@ void OcularDialog::scaleImageCircleStateChanged(int state)
 	}
 }
 
+void OcularDialog::ocularIsBinocularsStateChanged(int state)
+{
+	bool shouldScale = (state == Qt::Checked);
+}
+
 /* ********************************************************************* */
 #if 0
 #pragma mark -
@@ -362,6 +367,7 @@ void OcularDialog::createDialogContent()
 	ocularMapper->addMapping(ui->ocularAFov, 1);
 	ocularMapper->addMapping(ui->ocularFL, 2);
 	ocularMapper->addMapping(ui->ocularFieldStop, 3);
+	ocularMapper->addMapping(ui->binocularsCheckBox, 4, "checked");
 	ocularMapper->toFirst();
 	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 			  ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
