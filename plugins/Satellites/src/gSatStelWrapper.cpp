@@ -54,15 +54,15 @@ gSatStelWrapper::gSatStelWrapper(QString designation, QString tle1,QString tle2)
 	t2.truncate(130);
 
 	pSatellite = new gSatTEME(designation.toAscii().data(),
-				  t1.data(),
-				  t2.data());
+	                          t1.data(),
+	                          t2.data());
 	updateEpoch();
 }
 
 
 gSatStelWrapper::~gSatStelWrapper()
 {
-	if(pSatellite != NULL)
+	if (pSatellite != NULL)
 		delete pSatellite;
 }
 
@@ -71,10 +71,10 @@ Vec3d gSatStelWrapper::getTEMEPos()
 {
 	gVector tempPos;
 	Vec3d returnedVector;
-	if(pSatellite != NULL)
+	if (pSatellite != NULL)
 	{
 		tempPos = pSatellite->getPos();
-		returnedVector.set( tempPos[0], tempPos[1], tempPos[2]);
+		returnedVector.set(tempPos[0], tempPos[1], tempPos[2]);
 	}
 	else
 		qWarning() << "gSatStelWrapper::getTEMEPos Method called without pSatellite initialized";
@@ -88,10 +88,10 @@ Vec3d gSatStelWrapper::getTEMEVel()
 {
 	gVector tempVel;
 	Vec3d returnedVector;
-	if(pSatellite != NULL)
+	if (pSatellite != NULL)
 	{
 		tempVel = pSatellite->getVel();
-		returnedVector.set( tempVel[0], tempVel[1], tempVel[2]);
+		returnedVector.set(tempVel[0], tempVel[1], tempVel[2]);
 	}
 	else
 		qWarning() << "gSatStelWrapper::getTEMEVel Method called without pSatellite initialized";
@@ -105,10 +105,10 @@ Vec3d gSatStelWrapper::getSubPoint()
 {
 	gVector tempSubPoint;
 	Vec3d returnedVector;
-	if(pSatellite != NULL)
+	if (pSatellite != NULL)
 	{
 		tempSubPoint = pSatellite->getSubPoint();
-		returnedVector.set( tempSubPoint[0], tempSubPoint[1], tempSubPoint[2]);
+		returnedVector.set(tempSubPoint[0], tempSubPoint[1], tempSubPoint[2]);
 	}
 	else
 		qWarning() << "gSatStelWrapper::getTEMEVel Method called without pSatellite initialized";
@@ -123,17 +123,17 @@ void gSatStelWrapper::updateEpoch()
 	Epoch = jul_utc;
 
 	if (pSatellite)
-		pSatellite->setEpoch( Epoch);
+		pSatellite->setEpoch(Epoch);
 }
 
-void gSatStelWrapper::setEpoch( double ai_julianDaysEpoch)
+void gSatStelWrapper::setEpoch(double ai_julianDaysEpoch)
 {
 	if (pSatellite)
-		pSatellite->setEpoch( ai_julianDaysEpoch);
+		pSatellite->setEpoch(ai_julianDaysEpoch);
 }
 
 
-void gSatStelWrapper::calcObserverTEMEPosition( Vec3d& ao_position, Vec3d& ao_vel)
+void gSatStelWrapper::calcObserverTEMEPosition(Vec3d& ao_position, Vec3d& ao_vel)
 {
 
 	StelLocation loc   = StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation();
@@ -177,16 +177,16 @@ Vec3d gSatStelWrapper::getAltAz()
 
 	//top_s
 	topoSatPos[0] = (sin(radLatitude) * cos(theta)*slantRange[0]
-	                + sin(radLatitude)* sin(theta)*slantRange[1]
-	                - cos(radLatitude)* slantRange[2])/AU;
+	                 + sin(radLatitude)* sin(theta)*slantRange[1]
+	                 - cos(radLatitude)* slantRange[2])/AU;
 	//top_e
 	topoSatPos[1] = ((-1.0)* sin(theta)*slantRange[0]
-	                + cos(theta)*slantRange[1])/AU;
+	                 + cos(theta)*slantRange[1])/AU;
 
 	//top_z
 	topoSatPos[2] = (cos(radLatitude) * cos(theta)*slantRange[0]
-	                + cos(radLatitude) * sin(theta)*slantRange[1]
-	                + sin(radLatitude) *slantRange[2])/AU;
+	                 + cos(radLatitude) * sin(theta)*slantRange[1]
+	                 + sin(radLatitude) *slantRange[2])/AU;
 
 	return topoSatPos;
 }
