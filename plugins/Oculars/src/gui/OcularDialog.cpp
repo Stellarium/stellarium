@@ -159,14 +159,22 @@ void OcularDialog::deleteSelectedCCD()
 
 void OcularDialog::deleteSelectedOcular()
 {
-	ocularTableModel->removeRows(ui->ocularListView->currentIndex().row(), 1);
-	ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
+	if (ocularTableModel->rowCount() == 1) {
+		qDebug() << "Can not delete the last entry.";
+	} else {
+		ocularTableModel->removeRows(ui->ocularListView->currentIndex().row(), 1);
+		ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
+	}
 }
 
 void OcularDialog::deleteSelectedTelescope()
 {
-	telescopeTableModel->removeRows(ui->telescopeListView->currentIndex().row(), 1);
-	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
+	if (telescopeTableModel->rowCount() == 1) {
+		qDebug() << "Can not delete the last entry.";
+	} else {
+		telescopeTableModel->removeRows(ui->telescopeListView->currentIndex().row(), 1);
+		ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
+	}
 }
 
 void OcularDialog::insertNewCCD()
