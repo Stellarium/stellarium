@@ -33,6 +33,7 @@ class Ocular : public QObject
 	Q_PROPERTY(double appearentFOV READ appearentFOV WRITE setAppearentFOV)
 	Q_PROPERTY(double effectiveFocalLength READ effectiveFocalLength WRITE setEffectiveFocalLength)
 	Q_PROPERTY(double fieldStop READ fieldStop WRITE setFieldStop)
+	Q_PROPERTY(bool binoculars READ isBinoculars WRITE setBinoculars)
 public:
 	Ocular();
 	Q_INVOKABLE Ocular(const QObject& other);
@@ -48,6 +49,8 @@ public:
 	void setEffectiveFocalLength(double fl);
 	double fieldStop() const;
 	void setFieldStop(double fs);
+	bool isBinoculars() const;
+	void setBinoculars(bool flag);
 
 	double actualFOV(Telescope *telescope) const;
 	double magnification(Telescope *telescope) const;
@@ -58,6 +61,7 @@ private:
 	double m_appearentFOV;
 	double m_effectiveFocalLength;
 	double m_fieldStop;
+	bool m_binoculars;
 };
 
 

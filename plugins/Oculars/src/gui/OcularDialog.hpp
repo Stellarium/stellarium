@@ -82,6 +82,7 @@ private slots:
 	void keyBindingTextPreviousOcularChanged(const QString& newString);
 	void keyBindingTextPreviousTelescopeChanged(const QString& newString);
 	void scaleImageCircleStateChanged(int state);
+	void ocularIsBinocularsStateChanged(int state);
 
 private:
 	QDataWidgetMapper*			ccdMapper;
