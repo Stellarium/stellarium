@@ -163,6 +163,7 @@ void Oculars::deinit()
 		settings->setValue(prefix + "afov", ocular->appearentFOV());
 		settings->setValue(prefix + "efl", ocular->effectiveFocalLength());
 		settings->setValue(prefix + "fieldStop", ocular->fieldStop());
+		settings->setValue(prefix + "binoculars", ocular->isBinoculars());
 		index++;
 	}
 	index = 0;
@@ -211,11 +212,8 @@ void Oculars::draw(StelCore* core)
 				if (flagShowCrosshairs)  {
 					paintCrosshairs();
 				}
-				if (selectedCCDIndex > -1) {
-					inscribeCCDBoundsInOcularMask();
-				}
 			} else if (selectedCCDIndex > -1) {
-				paintCCDBounds();
+				inscribeCCDBoundsInOcularMask();
 			}
 			// Paint the information in the upper-right hand corner
 			paintText(core);
@@ -915,7 +913,7 @@ void Oculars::paintOcularMask()
 	GLdouble inner = 0.5 * params.viewportFovDiameter;
 
 	// See if we need to scale the mask
-	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0) {
+	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0 && !oculars[selectedOcularIndex]->isBinoculars()) {
 		inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
 	}
 
@@ -1036,21 +1034,23 @@ void Oculars::paintText(const StelCore* core)
 	const int lineHeight = painter.getFontMetrics().height();
 	
 	// The CCD
-	QString ccdsensorLabel, ccdInfoLabel;
-	if (ccd && ccd->chipWidth() > .0 && ccd->chipHeight() > .0) {
-		double fovX = ((int)(ccd->getActualFOVx(telescope) * 1000.0)) / 1000.0;
-		double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;
-		ccdInfoLabel = "Dimension : " + QVariant(fovX).toString() + "x" + QVariant(fovY).toString() + QChar(0x00B0);
-		if (ccd->name() != QString("")) {
-			ccdsensorLabel = "Sensor #" + QVariant(selectedCCDIndex).toString();
-			ccdsensorLabel.append(" : ").append(ccd->name());
+	if (!ocular->isBinoculars()) {
+		QString ccdsensorLabel, ccdInfoLabel;
+		if (ccd && ccd->chipWidth() > .0 && ccd->chipHeight() > .0) {
+			double fovX = ((int)(ccd->getActualFOVx(telescope) * 1000.0)) / 1000.0;
+			double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;
+			ccdInfoLabel = "Dimension : " + QVariant(fovX).toString() + "x" + QVariant(fovY).toString() + QChar(0x00B0);
+			if (ccd->name() != QString("")) {
+				ccdsensorLabel = "Sensor #" + QVariant(selectedCCDIndex).toString();
+				ccdsensorLabel.append(" : ").append(ccd->name());
+			}
 		}
-	}
-	if (ccdsensorLabel != QString("")) {
-		painter.drawText(xPosition, yPosition, ccdsensorLabel);
-		yPosition-=lineHeight;
-		painter.drawText(xPosition, yPosition, ccdInfoLabel);
-		yPosition-=lineHeight;
+		if (ccdsensorLabel != QString("")) {
+			painter.drawText(xPosition, yPosition, ccdsensorLabel);
+			yPosition-=lineHeight;
+			painter.drawText(xPosition, yPosition, ccdInfoLabel);
+			yPosition-=lineHeight;
+		}
 	}
 
 	// The Ocular
@@ -1061,32 +1061,34 @@ void Oculars::paintText(const StelCore* core)
 	painter.drawText(xPosition, yPosition, ocularNumberLabel);
 	yPosition-=lineHeight;
 
-	QString ocularFLLabel = "Ocular FL: " + QVariant(ocular->effectiveFocalLength()).toString() + "mm";
-	painter.drawText(xPosition, yPosition, ocularFLLabel);
-	yPosition-=lineHeight;
-
-	QString ocularFOVLabel = "Ocular aFOV: " + QVariant(ocular->appearentFOV()).toString() + QChar(0x00B0);
-	painter.drawText(xPosition, yPosition, ocularFOVLabel);
-	yPosition-=lineHeight;
-
-	// The telescope
-	QString telescopeNumberLabel = "Telescope #" + QVariant(selectedTelescopeIndex).toString();
-	if (telescope->name() != QString(""))  {
-		telescopeNumberLabel.append(" : ").append(telescope->name());
+	if (!ocular->isBinoculars()) {
+		QString ocularFLLabel = "Ocular FL: " + QVariant(ocular->effectiveFocalLength()).toString() + "mm";
+		painter.drawText(xPosition, yPosition, ocularFLLabel);
+		yPosition-=lineHeight;
+		
+		QString ocularFOVLabel = "Ocular aFOV: " + QVariant(ocular->appearentFOV()).toString() + QChar(0x00B0);
+		painter.drawText(xPosition, yPosition, ocularFOVLabel);
+		yPosition-=lineHeight;
+		
+		// The telescope
+		QString telescopeNumberLabel = "Telescope #" + QVariant(selectedTelescopeIndex).toString();
+		if (telescope->name() != QString(""))  {
+			telescopeNumberLabel.append(" : ").append(telescope->name());
+		}
+		painter.drawText(xPosition, yPosition, telescopeNumberLabel);
+		yPosition-=lineHeight;
 	}
-	painter.drawText(xPosition, yPosition, telescopeNumberLabel);
-	yPosition-=lineHeight;
 
 	// General info
 	QString magnificationLabel = "Magnification: "
-										  + QVariant(((int)(ocular->magnification(telescope) * 10.0)) / 10.0).toString()
-										  + "x";
+		+ QVariant(((int)(ocular->magnification(telescope) * 10.0)) / 10.0).toString()
+		+ "x";
 	painter.drawText(xPosition, yPosition, magnificationLabel);
 	yPosition-=lineHeight;
-
+	
 	QString fovLabel = "FOV: "
-							 + QVariant(((int)(ocular->actualFOV(telescope) * 10000.00)) / 10000.0).toString()
-							 + QChar(0x00B0);
+	+ QVariant(((int)(ocular->actualFOV(telescope) * 10000.00)) / 10000.0).toString()
+	+ QChar(0x00B0);
 	painter.drawText(xPosition, yPosition, fovLabel);
 }
 
@@ -1225,12 +1227,15 @@ void Oculars::zoomOcular()
 	// core->setMaskType(StelProjector::MaskDisk);
 	Ocular *ocular = oculars[selectedOcularIndex];
 	Telescope *telescope = telescopes[selectedTelescopeIndex];
-	core->setFlipHorz(telescope->isHFlipped());
-	core->setFlipVert(telescope->isVFlipped());
+	// Only consider flip is we're not binoculars
+	if (!ocular->isBinoculars()) {
+		core->setFlipHorz(telescope->isHFlipped());
+		core->setFlipVert(telescope->isVFlipped());
+	}
 
 	double actualFOV = ocular->actualFOV(telescope);
 	// See if the mask was scaled; if so, correct the actualFOV.
-	if (useMaxEyepieceAngle && ocular->appearentFOV() > 0.0) {
+	if (useMaxEyepieceAngle && ocular->appearentFOV() > 0.0 && !ocular->isBinoculars()) {
 		actualFOV = maxEyepieceAngle * actualFOV / ocular->appearentFOV();
 	}
 	movementManager->zoomTo(actualFOV, 0.0);
