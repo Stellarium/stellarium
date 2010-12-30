@@ -212,6 +212,9 @@ void Oculars::draw(StelCore* core)
 				if (flagShowCrosshairs)  {
 					paintCrosshairs();
 				}
+				if (selectedCCDIndex > -1) {
+					inscribeCCDBoundsInOcularMask();
+				}
 			} else if (selectedCCDIndex > -1) {
 				inscribeCCDBoundsInOcularMask();
 			}
@@ -1033,26 +1036,7 @@ void Oculars::paintText(const StelCore* core)
 	yPosition -= 40;
 	const int lineHeight = painter.getFontMetrics().height();
 	
-	// The CCD
-	if (!ocular->isBinoculars()) {
-		QString ccdsensorLabel, ccdInfoLabel;
-		if (ccd && ccd->chipWidth() > .0 && ccd->chipHeight() > .0) {
-			double fovX = ((int)(ccd->getActualFOVx(telescope) * 1000.0)) / 1000.0;
-			double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;
-			ccdInfoLabel = "Dimension : " + QVariant(fovX).toString() + "x" + QVariant(fovY).toString() + QChar(0x00B0);
-			if (ccd->name() != QString("")) {
-				ccdsensorLabel = "Sensor #" + QVariant(selectedCCDIndex).toString();
-				ccdsensorLabel.append(" : ").append(ccd->name());
-			}
-		}
-		if (ccdsensorLabel != QString("")) {
-			painter.drawText(xPosition, yPosition, ccdsensorLabel);
-			yPosition-=lineHeight;
-			painter.drawText(xPosition, yPosition, ccdInfoLabel);
-			yPosition-=lineHeight;
-		}
-	}
-
+	
 	// The Ocular
 	QString ocularNumberLabel = "Ocular #" + QVariant(selectedOcularIndex).toString();
 	if (ocular->name() != QString(""))  {
@@ -1078,7 +1062,24 @@ void Oculars::paintText(const StelCore* core)
 		painter.drawText(xPosition, yPosition, telescopeNumberLabel);
 		yPosition-=lineHeight;
 	}
-
+	// The CCD
+	QString ccdsensorLabel, ccdInfoLabel;
+	if (ccd && ccd->chipWidth() > .0 && ccd->chipHeight() > .0) {
+		double fovX = ((int)(ccd->getActualFOVx(telescope) * 1000.0)) / 1000.0;
+		double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;
+		ccdInfoLabel = "Dimension : " + QVariant(fovX).toString() + "x" + QVariant(fovY).toString() + QChar(0x00B0);
+		if (ccd->name() != QString("")) {
+			ccdsensorLabel = "Sensor #" + QVariant(selectedCCDIndex).toString();
+			ccdsensorLabel.append(" : ").append(ccd->name());
+		}
+	}
+	if (ccdsensorLabel != QString("")) {
+		painter.drawText(xPosition, yPosition, ccdsensorLabel);
+		yPosition-=lineHeight;
+		painter.drawText(xPosition, yPosition, ccdInfoLabel);
+		yPosition-=lineHeight;
+	}
+	
 	// General info
 	QString magnificationLabel = "Magnification: "
 		+ QVariant(((int)(ocular->magnification(telescope) * 10.0)) / 10.0).toString()
