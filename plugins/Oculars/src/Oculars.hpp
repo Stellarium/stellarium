@@ -178,7 +178,6 @@ private:
 	StelButton* toolbarButton;
 
 	OcularDialog *ocularDialog;
-	bool visible;
 	bool ready; //!< A flag that determines that this module is usable.  If false, we won't open.
 	bool newInstrument; //!< true the first time draw is called for a new ocular or telescope, false otherwise.
 
