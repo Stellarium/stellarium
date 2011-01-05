@@ -72,7 +72,7 @@ void MTL::uploadTexturesGL(void)
     for (MaterialMap::iterator it = mtlMap.begin(); it != mtlMap.end(); it++) {
         string texture = it->second.texture;
         if (texture.size() > 0) {
-            textureMapGL[texture] = textureMgr.createTexture(QString(absolutePath(texture).c_str()));
+            textureMapGL[texture] = textureMgr.createTexture(QString(absolutePath(texture).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
             //textureMapGL[texture] = load_texture(absolutePath(texture).c_str());
         }
     }

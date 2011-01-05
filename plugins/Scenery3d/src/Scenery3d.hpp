@@ -57,6 +57,8 @@ private:
     Mat4f projectionMatrix;
     Vec3d absolutePosition;
     float rotation;
+    float movement_x;
+    float movement_y;
     float movement_z;
 
     OBJ* objModel;
@@ -70,6 +72,11 @@ private:
     QString landscapeName;
     QString modelSceneryFile;
     QString modelGroundFile;
+
+    qreal orig_x;
+    qreal orig_y;
+    qreal orig_z;
+    qreal rot_z;
 };
 
 #endif
