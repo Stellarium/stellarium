@@ -15,6 +15,7 @@
 #include "StelPainter.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
+#include "LandscapeMgr.hpp"
 
 const QString Scenery3dMgr::MODULE_PATH("modules/scenery3d/");
 
@@ -117,6 +118,9 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
         scenery3d = newScenery3d;
     }
     currentScenery3dID = id;
+
+    LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+    lmgr->setCurrentLandscapeName(scenery3d->getLandscapeName());
     return true;
 }
 
