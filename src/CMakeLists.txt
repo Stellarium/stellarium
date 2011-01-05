@@ -204,6 +204,10 @@ SET(stellarium_lib_SRCS
 	core/modules/Orbit.hpp
 	core/modules/Planet.cpp
 	core/modules/Planet.hpp
+	core/modules/MinorPlanet.cpp
+	core/modules/MinorPlanet.hpp
+	core/modules/Comet.cpp
+	core/modules/Comet.hpp
 	core/modules/Skybright.cpp
 	core/modules/Skybright.hpp
 	core/modules/Skylight.cpp
@@ -408,6 +412,8 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/SearchDialog.cpp
 		gui/ConfigurationDialog.hpp
 		gui/ConfigurationDialog.cpp
+		gui/AddRemoveLandscapesDialog.hpp
+		gui/AddRemoveLandscapesDialog.cpp
 		gui/StelDialog.hpp
 		gui/StelDialog.cpp)
 
@@ -425,6 +431,7 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/ViewDialog.hpp
 		gui/SearchDialog.hpp
 		gui/ConfigurationDialog.hpp
+		gui/AddRemoveLandscapesDialog.hpp
 		gui/StelDialog.hpp)
 
 	################# compiles .ui files ############
@@ -434,7 +441,8 @@ IF (GUI_MODE STREQUAL "Standard")
 	gui/dateTimeDialogGui.ui
 	gui/viewDialog.ui
 	gui/searchDialogGui.ui
-	gui/configurationDialog.ui)
+	gui/configurationDialog.ui
+	gui/addRemoveLandscapesDialog.ui)
 
 	IF(ENABLE_SCRIPT_CONSOLE)
 		SET(stellarium_gui_SRCS ${stellarium_gui_SRCS}
@@ -463,11 +471,7 @@ IF (GUI_MODE STREQUAL "Standard")
 	# Compile the static library
 	ADD_LIBRARY(StelGuiLib STATIC ${stellarium_gui_SRCS} ${stellarium_gui_MOC_SRCS} ${stellarium_UIS_H} ${stellarium_gui_RES_CXX})
 	TARGET_LINK_LIBRARIES(StelGuiLib ${StelMain} ${extLinkerOption})
-	IF(WIN32)
-		SET_TARGET_PROPERTIES(StelGuiLib PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-	ELSE()
-		SET_TARGET_PROPERTIES(StelGuiLib PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
-	ENDIF()
+	SET_TARGET_PROPERTIES(StelGuiLib PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/src/${CMAKE_CFG_INTDIR}/libStelGuiLib.a)
 	ADD_DEPENDENCIES(AllStaticPlugins StelGuiLib)
 ENDIF()
@@ -484,11 +488,7 @@ IF (GUI_MODE STREQUAL "None")
 	QT4_WRAP_CPP(stellarium_nogui_MOC_SRCS ${stellarium_nogui_MOC_HDRS})
 	ADD_LIBRARY(StelNoGuiLib STATIC ${stellarium_nogui_SRCS} ${stellarium_nogui_MOC_SRCS})
 	TARGET_LINK_LIBRARIES(StelNoGuiLib ${extLinkerOption})
-	IF(WIN32)
-		SET_TARGET_PROPERTIES(StelNoGuiLib PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-	ELSE()
-		SET_TARGET_PROPERTIES(StelNoGuiLib PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
-	ENDIF()
+	SET_TARGET_PROPERTIES(StelNoGuiLib PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/src/libStelNoGuiLib.a)
 	ADD_DEPENDENCIES(AllStaticPlugins StelNoGuiLib)
 ENDIF()
@@ -556,12 +556,22 @@ IF (BUILD_STATIC_PLUGINS)
 	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TEXTUSERINTERFACE)
   ENDIF()
 
+  IF (USE_PLUGIN_SOLARSYSTEMEDITOR)
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/SolarSystemEditor/src/${CMAKE_CFG_INTDIR}/libSolarSystemEditor.a")
+	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SOLARSYSTEMEDITOR)
+  ENDIF()
+
+  IF (USE_PLUGIN_TIMEZONECONFIGURATION)
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/TimeZoneConfiguration/src/${CMAKE_CFG_INTDIR}/libTimeZoneConfiguration.a")
+	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TIMEZONECONFIGURATION)
+  ENDIF()
+
   IF (USE_PLUGIN_SVMT)
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/plugins/svmt/src/${CMAKE_CFG_INTDIR}/libSVMT.a)
 	IF(APPLE)
 	  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "-framework QtDeclarative")
 	ELSE()
-	  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "/usr/local/Trolltech/Qt-4.7.0/lib/libQtDeclarative.so")
+	  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${QT_LIBRARY_DIR}/libQtDeclarative.so)
 	ENDIF()
 	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SVMT)
   ENDIF()
@@ -705,7 +715,7 @@ TARGET_LINK_LIBRARIES(testRefractionExtinction ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testRefractionExtinction)
 
 ADD_CUSTOM_TARGET(tests COMMENT "Run the Stellarium unit tests")
-# ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testDates WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
+ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testDates WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelFileMgr WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphereGeometry WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphericalIndex WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)

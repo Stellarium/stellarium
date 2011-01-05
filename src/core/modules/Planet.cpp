@@ -46,18 +46,18 @@ StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
 
 Planet::Planet(const QString& englishName,
-			   int flagLighting,
-			   double radius,
-			   double oblateness,
-			   Vec3f color,
-			   float albedo,
-			   const QString& atexMapName,
-			   posFuncType coordFunc,
-			   void* auserDataPtr,
-			   OsulatingFunctType *osculatingFunc,
-			   bool acloseOrbit,
-			   bool hidden,
-			   bool hasAtmosphere)
+	       int flagLighting,
+	       double radius,
+	       double oblateness,
+	       Vec3f color,
+	       float albedo,
+	       const QString& atexMapName,
+	       posFuncType coordFunc,
+	       void* auserDataPtr,
+	       OsulatingFunctType *osculatingFunc,
+	       bool acloseOrbit,
+	       bool hidden,
+	       bool hasAtmosphere)
 	: englishName(englishName),
 	  flagLighting(flagLighting),
 	  radius(radius), oneMinusOblateness(1.0-oblateness),
@@ -95,7 +95,10 @@ Planet::~Planet()
 		delete rings;
 }
 
-void Planet::translateName(StelTranslator& trans) {nameI18 = trans.qtranslate(englishName);}
+void Planet::translateName(StelTranslator& trans)
+{
+	nameI18 = trans.qtranslate(englishName);
+}
 
 // Return the information string "ready to print" :)
 QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
@@ -591,9 +594,9 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	float screenSz = getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
-	if (prj->project(Vec3d(0), screenPos) &&
-			screenPos[1]>viewport_bottom - screenSz && screenPos[1]<viewport_bottom + prj->getViewportHeight()+screenSz &&
-			screenPos[0]>viewport_left - screenSz && screenPos[0]<viewport_left + prj->getViewportWidth() + screenSz)
+	if (prj->project(Vec3d(0), screenPos)
+	    && screenPos[1]>viewport_bottom - screenSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
+	    && screenPos[0]>viewport_left - screenSz && screenPos[0] < viewport_left + prj->getViewportWidth() + screenSz)
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlaping (ie for jupiter satellites)
@@ -852,7 +855,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 	StelPainter sPainter(prj);
 	sPainter.setFont(planetNameFont);
 	// Draw nameI18 + scaling if it's not == 1.
-	float tmp = 10.f + getAngularSize(core)*M_PI/180.f*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
+	float tmp = (hintFader.getInterstate()<=0 ? 7.f : 10.f) + getAngularSize(core)*M_PI/180.f*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
 	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate());
 	sPainter.drawText(screenPos[0],screenPos[1], getSkyLabel(nav), 0, tmp, tmp, false);
 
@@ -938,7 +941,7 @@ void Planet::drawOrbit(const StelCore* core)
 	sPainter.enableClientStates(true, false, false);
 	for (int n=0; n<=nbIter; ++n)
 	{
-		if (prj->project(orbit[n],onscreen))
+		if (prj->project(orbit[n],onscreen) && (vertexArray.size()==0 || !prj->intersectViewportDiscontinuity(orbit[n-1], orbit[n])))
 		{
 			vertexArray.append(onscreen[0]);
 			vertexArray.append(onscreen[1]);

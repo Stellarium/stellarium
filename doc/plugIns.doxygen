@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Matthew Gates
+ * Copyright (c) 2010 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,27 +24,51 @@
 
 @section introduction Introduction
 
-Plugins are extensions to Stellarium which are dynamically loaded into to the program at runtime.
+Plugins are extensions to Stellarium. They are potentially more powerful than \ref scripting "scripts", but are more difficult to write and maintain. Unlike scripts, plugins must be compiled for a specific platform, and will typically only be compatible with a particular version of Stellarium.
 
-Plugins are potentially more powerful than scripts, but are more difficult to write and maintain. Unlike scripts, Plugins must be compiled for a specific platform, and will typically only be compatible with a particular version of Stellarium.
 We hope that the plugin system will allow third party developers to write extensions to Stellarium which might not otherwise be included in the core program, and that the system will allow for prototyping of new features before inclusion into the core.
 
-Stellarium plugins are created from C++ code compiled separately as a dynamic library ( <tt>.so</tt> on linux, <tt>.dll</tt> in windows or <tt>.dylib</tt> on MacOSX). A plugin should contain a main class deriving from the StelModule class as well as an instance of the StelPluginInterface which allows stellarium to dynamically load it. At startup, the StelModuleMgr will load the library (provided that the @c .dll is put at the proper place in the stellarium file tree), and an instance of the StelModule it contains will be instanciated and added to the list of other "normal" StelModules.
+@section staticAndDynamicPlugins Static and Dynamic Plugins
+Plugins can be built and used in two different ways: 
+ - <b>dynamic plugins</b> are stand-alone dynamic libraries (separate files with <tt>.so</tt> extension on Linux, <tt>.dll</tt> in Windows or <tt>.dylib</tt> on Mac OS X) that are loaded at run-time (on start-up) by Stellarium. This allows dynamic plugins to be distributed separately from Stellarium.
+ - <b>static plugins</b> are linked statically at build-time. They become "built-in", a part of Stellarium's binary files. This is used to release fixed versions of some "official" plugins together with Stellarium's releases.
 
-<em>Plugin developers - please note that while plugins are linked at runtime, classes used in plugins must inherit code from the core which is published under the GUN GPL.  If you distribute a binary plugin, you must do so under the terms of the GNU GPL license.  No sneaky closed-source shenanigans now.</em>
+As Stellarium's plugin interface has changed over time, plugins for different versions so far are not interchangeable. This is the reason why the official plugins have been linked statically to the official release.
+
+Static plugins require changes in the core code of Stellarium (the addition of Qt macros in several classes). This is why adding a new static plugin requires either asking the developers to add it to the main distribution, or creating and distributing a custom build.
+
+Dynamic plugin libriaries need to be installed in a proper place in Stellarium's \ref fileStructure "file tree" to function. Stellarium is looking for plugins in the <tt>/modules</tt> subdirectory of the user data directory or the installation data directory. Each plugin library must be in its own subdiretory of the <tt>/modules</tt> directory. If the plugin is called "MyPlugin", then its subdirectory should be also called <tt>/MyPlugin</tt> and the main name (without the extension) of the plugin binary file should be <tt>libMyPlugin</tt>. So, for example, the file tree should look like this on Windows XP:
+ - <tt>C:/Documents and Settings/User/Application Data/Stellarium/</tt> (user data directory)
+  - <tt>modules/</tt>
+   - <tt>MyPlugin/</tt>
+    - <tt>libMyPlugin.dll</tt>
+
+See the implementation of StelModuleMgr::getPluginsList() for more details.
+
+@section code Coding
+A plugin should contain a main class deriving from the StelModule class as well as an instance of the StelPluginInterface which allows Stellarium to load it. At startup, the StelModuleMgr will load the library, and an instance of the StelModule it contains will be instantiated and added to the list of other "normal" StelModules.
+
+<em>Plugin developers - please note that classes used in plugins must inherit code from the core which is published under the GUN GPL. <b>If you distribute a binary plugin, you must do so under the terms of the same GNU GPL license that Stellarium uses.</b> No sneaky closed-source shenanigans now.</em>
 
 @section examplePlugins Example Plugins
 
-There are a few plugins which are written by and maintained by the Stellarium developer team.
+There are a few simple \b static plugins written and maintained by the Stellarium developer team that can serve as examples.
 
-<ul>
- <li><a href="http://stellarium.svn.sourceforge.net/viewvc/stellarium/trunk/extmodules/HelloStelModule/">HelloStelModule plugin</a>: minimal plugin, intended as an example.</li>
- <li><a href="http://stellarium.svn.sourceforge.net/viewvc/stellarium/trunk/extmodules/AngleMeasure/">AngleMeasure plugin</a>: simple plugin, intended as a guide to new developers.</li>
- <li><a href="http://stellarium.svn.sourceforge.net/viewvc/stellarium/trunk/extmodules/CompassMarks/"> CompassMarks plugin</a>: simple plugin, intended as a guide to new developers.</li>
- <li><a href="http://stellarium.svn.sourceforge.net/viewvc/stellarium/trunk/extmodules/VirGO/"> VirGO plugin</a>: fully featured extension to Stellarium sponsored by ESO. VirGO is used by professional astronomers to display and analyse data from the ESO archive. Follow <a href="http://archive.eso.org/cms/virgo/">this link</a> for more info.</li>
-</ul>
+ - <a href="http://bazaar.launchpad.net/~stellarium/stellarium/trunk/files/head%3A/plugins/HelloStelModule/">HelloStelModule plugin</a>: minimal plugin, intended as an example.
+ - <a href="http://bazaar.launchpad.net/%7Estellarium/stellarium/trunk/files/head%3A/plugins/AngleMeasure/">AngleMeasure plugin</a>: simple plugin, intended as a guide to new developers.
+ - <a href="http://bazaar.launchpad.net/%7Estellarium/stellarium/trunk/files/head%3A/plugins/CompassMarks/"> CompassMarks plugin</a>: simple plugin, intended as a guide to new developers.
+
+All static plugins incorporated in Stellarium's main code can be found in the <a href="http://bazaar.launchpad.net/~stellarium/stellarium/trunk/files/head%3A/plugins/">/plugins</a> subdirectory of Stellarium's code tree. Note that some of these plugins are under construction and have not been distributed yet with an official release.
+
+There are also a few simple \b dynamic plugins. Their code is hosted in Stellarium's old Subversion repository at SourceForge.net:
+ - <a href="http://stellarium.svn.sourceforge.net/viewvc/stellarium/trunk/extmodules/ExampleDialog/">ExampleDialog</a> provides an example on how a plugin can create a Stellarium-style window and add a button to the bottom tool bar.
+ - <a href="http://stellarium.svn.sourceforge.net/viewvc/stellarium/trunk/extmodules/ExamplePainter/">ExamplePainter</a> provides an example on how a plugin can draw on the viewport.
+
+<a href="http://archive.eso.org/cms/virgo/">VirGO</a> is a fully featured extension to Stellarium sponsored by ESO. VirGO is used by professional astronomers to display and analyse data from the ESO archive. Follow the link for more information.
 
 @section buildingPlugins Building Plugins
+
+\b Note: The following section is mostly out of date. It applies to \b dynamic plugins.
 
 The following instructions can be used to build the Angle Measure plugin and the Compass Marks plugin.
 
@@ -89,7 +114,7 @@ cd builds/unix
 
 To install the plugin on Linux systems, simple add a <tt>make install</tt> command after the @c make.  This will copy the necessary files to <tt> $HOME/.stellarium/modules/AngleMeasure</tt>.
 
-To install a plugin on Windows or OSX, you should locate the [[User Data Directory]], and then create a sub-directory called @c modules in it. Inside this, create a subdirectory named for the plugin, e.g. @c AngleMeasure. Into this directory, you should copy the following files:
+To install a plugin on Windows or OSX, you should locate the User Data Directory, and then create a sub-directory called @c modules in it. Inside this, create a subdirectory named for the plugin, e.g. @c AngleMeasure. Into this directory, you should copy the following files:
 <ul>
  <li>@c module.ini file from the plugin source directory.</li>
  <li>@c lib<plugin-name>.so or @c lib<plugin-name>.dll from the @c src sub-directory of the @c builds/unix or @c builds/msys directory in the plugin source directory.</li>

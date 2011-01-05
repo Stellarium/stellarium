@@ -1,7 +1,7 @@
 /*
  * Stellarium Satellites Plug-in GUI
  * 
- * Copyright (C) 2009 Matthew Gates
+ * Copyright (C) 2010 Matthew Gates
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,51 +22,53 @@
 #define _SATELLITESDIALOG_HPP_
 
 #include <QObject>
-#include "StelDialogPlugin.hpp"
+#include "StelDialog.hpp"
 #include "Satellites.hpp"
 
 class Ui_satellitesDialog;
 class QTimer;
 
-class SatellitesDialog : public StelDialogPlugin
+class SatellitesDialog : public StelDialog
 {
 	Q_OBJECT
 
 public:
 	SatellitesDialog();
-	virtual ~SatellitesDialog();
-	virtual void languageChanged();
-	void updateStyle();
+	~SatellitesDialog();
+	void languageChanged();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();
-	Ui_satellitesDialog* ui;
+	void createDialogContent();
 
 public slots:
 	void refreshUpdateValues(void);
-	void close(void);
 
 private slots:
 	void groupFilterChanged(int index);
 	void selectedSatelliteChanged(const QString& id);
-	void saveSatellite(const QString& id);
+	void saveSatellites(void);
 	void setUpdateValues(int hours);
-	void setUpdatesEnabled(bool b);
+	void setUpdatesEnabled(int checkState);
 	void updateStateReceiver(Satellites::UpdateState state);
-	void updateCompleteReceiver(int numUpdated);
+	void updateCompleteReceiver(int numUpdated, int total, int missing);
 	void sourceEditingDone(void);
 	void saveSourceList(void);
 	void deleteSourceRow(void);
 	void addSourceRow(void);
 	void restoreDefaults(void);
 	void saveSettings(void);
-	void showSelectedSatellites(void);
-	void hideSelectedSatellites(void);
 	void visibleCheckChanged(int state);
+	void orbitCheckChanged(int state);
 	void satelliteDoubleClick(QListWidgetItem* item);
+	void setOrbitParams(void);
+	void updateTLEs(void);
 
 private:
+	void connectSatelliteGuiForm(void);
+	void disconnectSatelliteGuiForm(void);
+
+	Ui_satellitesDialog* ui;
 	bool satelliteModified;
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);

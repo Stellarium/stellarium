@@ -45,6 +45,8 @@ QMutex* StelPainter::globalMutex = new QMutex();
 QPainter* StelPainter::qPainter = NULL;
 QGLContext* StelPainter::glContext = NULL;
 
+bool StelPainter::isNoPowerOfTwoAllowed;
+
 #ifdef STELPAINTER_GL2
  QGLShaderProgram* StelPainter::colorShaderProgram=NULL;
  QGLShaderProgram* StelPainter::texturesShaderProgram=NULL;
@@ -401,20 +403,44 @@ void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QV
 	// draw the inner polygon
 	slices_step>>=1;
 	cos_sin_theta_p=cos_sin_theta;
-	x = rad[0]*cos_sin_theta_p[0];
-	y = rad[0]*cos_sin_theta_p[1];
-	texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-	vertexArr << x << y << 0;
-	cos_sin_theta_p+=2*slices_step;
-	x = rad[0]*cos_sin_theta_p[0];
-	y = rad[0]*cos_sin_theta_p[1];
-	texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-	vertexArr << x << y << 0;
-	cos_sin_theta_p+=2*slices_step;
-	x = rad[0]*cos_sin_theta_p[0];
-	y = rad[0]*cos_sin_theta_p[1];
-	texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-	vertexArr << x << y << 0;
+
+	if (slices==1)
+	{
+		x = rad[0]*cos_sin_theta_p[0];
+		y = rad[0]*cos_sin_theta_p[1];
+		texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+		vertexArr << x << y << 0;
+		cos_sin_theta_p+=2*slices_step;
+		x = rad[0]*cos_sin_theta_p[0];
+		y = rad[0]*cos_sin_theta_p[1];
+		texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+		vertexArr << x << y << 0;
+		cos_sin_theta_p+=2*slices_step;
+		x = rad[0]*cos_sin_theta_p[0];
+		y = rad[0]*cos_sin_theta_p[1];
+		texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+		vertexArr << x << y << 0;
+	}
+	else
+	{
+		j=0;
+		while (j<slices)
+		{
+			texCoordArr << 0.5f << 0.5f;
+			vertexArr << 0 << 0 << 0;
+			x = rad[0]*cos_sin_theta_p[0];
+			y = rad[0]*cos_sin_theta_p[1];
+			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+			vertexArr << x << y << 0;
+			j+=slices_step;
+			cos_sin_theta_p+=2*slices_step;
+			x = rad[0]*cos_sin_theta_p[0];
+			y = rad[0]*cos_sin_theta_p[1];
+			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+			vertexArr << x << y << 0;
+		}
+	}
+
 
 }
 
@@ -575,7 +601,7 @@ void StelPainter::sSphereMap(float radius, int slices, int stacks, float texture
 	}
 }
 
-void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float xshift, float yshift) const
+void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float xshift, float yshift)
 {
 	float dx, dy, d, theta, psi;
 	dx = x - prj->viewportCenter[0];
@@ -590,33 +616,22 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	if (psi>5)
 		psi = 5;
 
-	if (qPainter->paintEngine()->type()==QPaintEngine::OpenGL2)
-	{
-		qPainter->translate(x, prj->viewportXywh[3]-y);
-		qPainter->rotate(theta*180./M_PI);
-		qPainter->translate(xshift, -yshift);
-	}
-	else
-	{
-		qPainter->translate(x, y);
-		qPainter->rotate(-theta*180./M_PI);
-		qPainter->translate(xshift, yshift);
-		qPainter->scale(1, -1);
-	}
+	const float cosr = std::cos(-theta * M_PI/180.);
+	const float sinr = std::sin(-theta * M_PI/180.);
 
+	float initX = x + xshift*cosr - yshift*sinr;
+	float initY = y + yshift*sinr + yshift*cosr;
+	
 	for (int i=0;i<ws.length();++i)
 	{
-		qPainter->drawText(0,0,ws[i]);
-
-		// with typeface need to manually advance
-		// TODO, absolute rotation would be better than relative
-		// TODO: would look better with kerning information...
-		qPainter->translate((float)qPainter->fontMetrics().width(ws.mid(i,1)) * 1.05, 0);
-		qPainter->rotate(-psi);
+		drawText(initX, initY, ws[i], -theta*180./M_PI+psi*i, 0., 0.);
+		xshift = (float)qPainter->fontMetrics().width(ws.mid(i,1)) * 1.05;
+		initX+=xshift*std::cos(-theta+psi*i * M_PI/180.);
+		initY+=xshift*std::sin(-theta+psi*i * M_PI/180.);
 	}
 }
 
-void StelPainter::drawText(const Vec3d& v, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity) const
+void StelPainter::drawText(const Vec3d& v, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
 {
 	Vec3d win;
 	prj->project(v, win);
@@ -626,79 +641,133 @@ void StelPainter::drawText(const Vec3d& v, const QString& str, float angleDeg, f
 /*************************************************************************
  Draw the string at the given position and angle with the given font
 *************************************************************************/
-void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity) const
+
+// Container for one cached string texture
+struct StringTexture
+{
+	GLuint texture;
+	int width;
+	int height;
+	int subTexWidth;
+	int subTexHeight;
+
+	StringTexture() : texture(0) {;}
+	~StringTexture()
+	{
+		if (texture != 0)
+			glDeleteTextures(1, &texture);
+	}
+};
+
+
+void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
 {
 	Q_ASSERT(qPainter);
-
-	float color[4];
-#ifndef STELPAINTER_GL2
-	// Save openGL state
-	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	glMatrixMode(GL_TEXTURE);
-	glPushMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glGetFloatv(GL_CURRENT_COLOR, color);
-#else
-	color[0]=currentColor[0];
-	color[1]=currentColor[1];
-	color[2]=currentColor[2];
-	color[3]=currentColor[3];
-#endif
-
-	qPainter->endNativePainting();
-
-	qPainter->save();
-	qPainter->resetTransform();
-	qPainter->resetMatrix();
-	qPainter->setRenderHints(QPainter::TextAntialiasing | QPainter::HighQualityAntialiasing);
-	const QColor qCol=QColor::fromRgbF(qMax(qMin(1.f,color[0]),0.f), qMax(qMin(1.f,color[1]),0.f), qMax(qMin(1.f,color[2]),0.f), qMax(qMin(1.f,color[3]),0.f));
-	qPainter->setPen(qCol);
-
 	if (prj->gravityLabels && !noGravity)
 	{
 		drawTextGravity180(x, y, str, xshift, yshift);
 	}
 	else
 	{
-		if (!noGravity)
-			angleDeg += prj->defautAngleForGravityText;
-		
-		// There are 2 version here depending on the OpenGL engine
-		// OpenGL 1 need to reverse the text vertically, not OpenGL 2...
-		// This sounds like a Qt bug
-		if (qPainter->paintEngine()->type()==QPaintEngine::OpenGL2)
+		static const int cacheLimitByte = 7000000;
+		static QCache<QByteArray,StringTexture> texCache(cacheLimitByte);
+		int pixelSize = qPainter->font().pixelSize();
+		QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);
+
+		const StringTexture* cachedTex = texCache.object(hash);
+		if (cachedTex == NULL)	// need to create texture
 		{
-			qPainter->translate(x + prj->viewportXywh[0] , prj->viewportXywh[3] + prj->viewportXywh[1] - y);
-			qPainter->rotate(-angleDeg);
-			qPainter->translate(xshift, -yshift);
+			StringTexture* newTex = new StringTexture();
+
+			// Create temp image and render text into it
+			QRect strRect = getFontMetrics().boundingRect(str);
+			newTex->subTexWidth = strRect.width()+1+(int)(0.02f*strRect.width());
+			newTex->subTexHeight = strRect.height();
+			QPixmap strImage;
+			if (isNoPowerOfTwoAllowed)
+				strImage = QPixmap(newTex->subTexWidth, newTex->subTexHeight);
+			else
+				strImage = QPixmap(StelUtils::getBiggerPowerOfTwo(newTex->subTexWidth), StelUtils::getBiggerPowerOfTwo(newTex->subTexHeight));
+			newTex->width = strImage.width();
+			newTex->height = strImage.height();
+
+			strImage.fill(Qt::transparent);
+
+			QPainter painter(&strImage);
+			painter.setFont(qPainter->font());
+			painter.setRenderHints(QPainter::TextAntialiasing);
+			painter.setPen(Qt::white);
+			painter.drawText(-strRect.x(), -strRect.y(), str);
+
+			// Create and bind texture, and add it to the list of cached textures
+			newTex->texture = StelPainter::glContext->bindTexture(strImage, GL_TEXTURE_2D, GL_RGBA, QGLContext::NoBindOption);
+			texCache.insert(hash, newTex, 3*newTex->width*newTex->height);
+			cachedTex=newTex;
 		}
 		else
 		{
-			qPainter->translate(round(x), round(y));
-			qPainter->scale(1, -1);
-			qPainter->rotate(-angleDeg);
-			qPainter->translate(round(xshift), round(-yshift));
+			// The texture was found in the cache
+			glBindTexture(GL_TEXTURE_2D, cachedTex->texture);
 		}
-		qPainter->drawText(0, 0, str);
+
+		// Translate/rotate
+		if (!noGravity)
+			angleDeg += prj->defautAngleForGravityText;
+
+		enableTexture2d(true);
+		static float vertexData[8];
+		static const float texCoordData[] = {0.,1., 1.,1., 0.,0., 1.,0.};
+		// compute the vertex coordinates applying the translation and the rotation
+		static const float vertexBase[] = {0., 0., 1., 0., 0., 1., 1., 1.};
+		if (std::fabs(angleDeg)>1.f*M_PI/180.f)
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			const float cosr = std::cos(angleDeg * M_PI/180.);
+			const float sinr = std::sin(angleDeg * M_PI/180.);
+			for (int i = 0; i < 8; i+=2)
+			{
+				vertexData[i] = int(x + (cachedTex->subTexWidth*vertexBase[i]+xshift) * cosr - (cachedTex->subTexHeight*vertexBase[i+1]+yshift) * sinr);
+				vertexData[i+1] = int(y  + (cachedTex->subTexWidth*vertexBase[i]+xshift) * sinr + (cachedTex->subTexHeight*vertexBase[i+1]+yshift) * cosr);
+			}
+		}
+		else
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			for (int i = 0; i < 8; i+=2)
+			{
+				vertexData[i] = int(x + cachedTex->subTexWidth*vertexBase[i]+xshift);
+				vertexData[i+1] = int(y  + cachedTex->subTexHeight*vertexBase[i+1]+yshift);
+			}
+		}
+
+
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);		
+		enableClientStates(true, true);
+		setVertexPointer(2, GL_FLOAT, vertexData);
+
+		float* texCoords = NULL;
+		if (isNoPowerOfTwoAllowed)
+			setTexCoordPointer(2, GL_FLOAT, texCoordData);
+		else
+		{
+			texCoords = new float[8];
+			for (int i=0;i<8;i+=2)
+			{
+				texCoords[i] = texCoordData[i]*(float)cachedTex->subTexWidth/cachedTex->width;
+				texCoords[i+1] = texCoordData[i+1]*(float)cachedTex->subTexHeight/cachedTex->height;
+			}
+			setTexCoordPointer(2, GL_FLOAT, texCoords);
+		}
+
+		drawFromArray(TriangleStrip, 4, 0, false);
+		enableClientStates(false);
+
+		if (!isNoPowerOfTwoAllowed)
+			delete[] texCoords;
 	}
-	qPainter->restore();
-
-	qPainter->beginNativePainting();
-
-#ifndef STELPAINTER_GL2
-	glMatrixMode(GL_TEXTURE);
-	glPopMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
-	glPopClientAttrib();
-	glPopAttrib();
-#endif
 }
 
 // Recursive method cutting a small circle in small segments
@@ -838,7 +907,7 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 // by splitting it into subtriangles.
 void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, const Vec3d* vertices, QVarLengthArray<Vec3f, 4096>* outVertices,
 		const Vec2f* texturePos, QVarLengthArray<Vec2f, 4096>* outTexturePos,
-		int nbI, bool checkDisc1, bool checkDisc2, bool checkDisc3) const
+		double maxSqDistortion, int nbI, bool checkDisc1, bool checkDisc2, bool checkDisc3) const
 {
 	Q_ASSERT(fabs(vertices[0].length()-1.)<0.00001);
 	Q_ASSERT(fabs(vertices[1].length()-1.)<0.00001);
@@ -864,7 +933,6 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 	if (!valid)
 		return;
 
-	static const double maxSqDistortion = 5.;
 	if (checkDisc1 && cDiscontinuity1==false)
 	{
 		// If the distortion at segment e0,e1 is too big, flags it for subdivision
@@ -931,7 +999,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=(texturePos[0]+texturePos[1])*0.5;
 			ta[2]=texturePos[2];
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1, true, true, false);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1, true, true, false);
 
 		//va[0]=vertices[0]+vertices[1];
 		//va[0].normalize();
@@ -944,7 +1012,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=texturePos[1];
 			ta[2]=texturePos[2];
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1, true, false, true);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1, true, false, true);
 		return;
 	}
 
@@ -960,7 +1028,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=texturePos[1];
 			ta[2]=(texturePos[1]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1, false, true, true);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1, false, true, true);
 
 		va[0]=vertices[0];
 		//va[1]=vertices[1]+vertices[2];
@@ -973,7 +1041,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=(texturePos[1]+texturePos[2])*0.5;
 			ta[2]=texturePos[2];
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1, true, true, false);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1, true, true, false);
 		return;
 	}
 
@@ -989,7 +1057,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=texturePos[1];
 			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1, false, true, true);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1, false, true, true);
 
 		//va[0]=vertices[0]+vertices[2];
 		//va[0].normalize();
@@ -1002,7 +1070,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=texturePos[1];
 			ta[2]=texturePos[2];
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1, true, false, true);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1, true, false, true);
 		return;
 	}
 
@@ -1020,7 +1088,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=(texturePos[0]+texturePos[1])*0.5;
 			ta[2]=(texturePos[1]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
 
 		//va[0]=vertices[0]+vertices[1];
 		//va[0].normalize();
@@ -1034,7 +1102,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=texturePos[1];
 			ta[2]=(texturePos[1]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
 
 		va[0]=vertices[0];
 		//va[1]=vertices[1]+vertices[2];
@@ -1047,7 +1115,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=(texturePos[1]+texturePos[2])*0.5;
 			ta[2]=texturePos[2];
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1, true, true, false);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1, true, true, false);
 		return;
 	}
 	if (cDiscontinuity1 && !cDiscontinuity2 && cDiscontinuity3)
@@ -1063,7 +1131,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=(texturePos[0]+texturePos[1])*0.5;
 			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
 
 		//va[0]=vertices[0]+vertices[1];
 		//va[0].normalize();
@@ -1077,7 +1145,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=texturePos[2];
 			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
 
 
 		//va[0]=vertices[0]+vertices[1];
@@ -1090,7 +1158,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=texturePos[1];
 			ta[2]=texturePos[2];
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1, true, false, true);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1, true, false, true);
 
 		return;
 	}
@@ -1106,7 +1174,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=texturePos[1];
 			ta[2]=(texturePos[1]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1, false, true, true);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1, false, true, true);
 
 		//va[0]=vertices[1]+vertices[2];
 		//va[0].normalize();
@@ -1120,7 +1188,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=texturePos[2];
 			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
 
 		va[1]=va[0];
 		va[0]=vertices[0];
@@ -1134,7 +1202,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=(texturePos[1]+texturePos[2])*0.5;
 			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
 		return;
 	}
 
@@ -1151,7 +1219,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 		ta[1]=(texturePos[1]+texturePos[2])*0.5;
 		ta[2]=(texturePos[0]+texturePos[2])*0.5;
 	}
-	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
+	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
 
 	va[1]=va[0];
 	va[0]=vertices[0];
@@ -1165,7 +1233,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 		ta[1]=(texturePos[0]+texturePos[1])*0.5;
 		ta[2]=(texturePos[0]+texturePos[2])*0.5;
 	}
-	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
+	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
 
 	//va[0]=vertices[0]+vertices[1];
 	//va[0].normalize();
@@ -1179,7 +1247,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 		ta[1]=texturePos[1];
 		ta[2]=(texturePos[1]+texturePos[2])*0.5;
 	}
-	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
+	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
 
 	va[0]=vertices[0];va[0]+=vertices[2];
 	va[0].normalize();
@@ -1193,7 +1261,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 		ta[1]=(texturePos[1]+texturePos[2])*0.5;
 		ta[2]=texturePos[2];
 	}
-	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, nbI+1);
+	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
 
 	return;
 }
@@ -1236,9 +1304,9 @@ class VertexArrayProjector
 {
 public:
 	VertexArrayProjector(const StelVertexArray& ar, StelPainter* apainter, const SphericalCap* aclippingCap,
-						 QVarLengthArray<Vec3f, 4096>* aoutVertices, QVarLengthArray<Vec2f, 4096>* aoutTexturePos=NULL)
+						 QVarLengthArray<Vec3f, 4096>* aoutVertices, QVarLengthArray<Vec2f, 4096>* aoutTexturePos=NULL, double amaxSqDistortion=5.)
 		   : vertexArray(ar), painter(apainter), clippingCap(aclippingCap), outVertices(aoutVertices),
-			 outTexturePos(aoutTexturePos)
+			 outTexturePos(aoutTexturePos), maxSqDistortion(amaxSqDistortion)
 	{
 	}
 
@@ -1252,10 +1320,10 @@ public:
 		if (outTexturePos)
 		{
 			const Vec2f tmpTexture[3] = {*t0, *t1, *t2};
-			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, tmpTexture, outTexturePos);
+			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, tmpTexture, outTexturePos, maxSqDistortion);
 		}
 		else
-			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, NULL, NULL);
+			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, NULL, NULL, maxSqDistortion);
 	}
 
 	// Draw the resulting arrays
@@ -1275,10 +1343,18 @@ private:
 	const SphericalCap* clippingCap;
 	QVarLengthArray<Vec3f, 4096>* outVertices;
 	QVarLengthArray<Vec2f, 4096>* outTexturePos;
+	double maxSqDistortion;
 };
 
-void StelPainter::drawStelVertexArray(const StelVertexArray& arr)
+void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity)
 {
+	if (checkDiscontinuity && prj->hasDiscontinuity())
+	{
+		// The projection has discontinuities, so we need to make sure that no triangle is crossing them.
+		drawStelVertexArray(arr.removeDiscontinuousTriangles(this->getProjector().data()), false);
+		return;
+	}
+
 	setVertexPointer(3, GL_DOUBLE, arr.vertex.constData());
 	if (arr.isTextured())
 	{
@@ -1297,7 +1373,7 @@ void StelPainter::drawStelVertexArray(const StelVertexArray& arr)
 	enableClientStates(false);
 }
 
-void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool textured, const SphericalCap* clippingCap, bool doSubDivide)
+void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool textured, const SphericalCap* clippingCap, bool doSubDivide, double maxSqDistortion)
 {
 	if (va.vertex.isEmpty())
 		return;
@@ -1312,32 +1388,22 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 
 	if (!doSubDivide)
 	{
-		if (prj->hasDiscontinuity())
-		{
-			// We don't want to subdivise the triangles, but the projection has discontinuities,
-			// so we need to make sure that no triangle is crossing them.
-			const StelVertexArray& cleanVa = va.removeDiscontinuousTriangles(this->getProjector().data());
-			drawStelVertexArray(cleanVa);
-		}
-		else
-		{
-			// The simplest case, we don't need to iterate through the triangles at all.
-			drawStelVertexArray(va);
-		}
+		// The simplest case, we don't need to iterate through the triangles at all.
+		drawStelVertexArray(va);
 		return;
 	}
 
 	// the last case.  It is the slowest, it process the triangles one by one.
 	{
 		// Project all the triangles of the VertexArray into our buffer arrays.
-		VertexArrayProjector result = va.foreachTriangle(VertexArrayProjector(va, this, clippingCap, &polygonVertexArray, textured ? &polygonTextureCoordArray : NULL));
+		VertexArrayProjector result = va.foreachTriangle(VertexArrayProjector(va, this, clippingCap, &polygonVertexArray, textured ? &polygonTextureCoordArray : NULL, maxSqDistortion));
 		result.drawResult();
 		return;
 	}
 }
 
 // Draw the given SphericalPolygon.
-void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap, bool doSubDivise)
+void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap, bool doSubDivise, double maxSqDistortion)
 {
 	if (!prj->getBoundingCap().intersects(poly->getBoundingCap()))
 		return;
@@ -1348,16 +1414,16 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 			if (doSubDivise || prj->intersectViewportDiscontinuity(poly->getBoundingCap()))
 				drawGreatCircleArcs(poly->getOutlineVertexArray(), clippingCap);
 			else
-				drawStelVertexArray(poly->getOutlineVertexArray());
+				drawStelVertexArray(poly->getOutlineVertexArray(), false);
 			break;
 		case SphericalPolygonDrawModeFill:
 		case SphericalPolygonDrawModeTextureFill:
 			glEnable(GL_CULL_FACE);
 			// The polygon is already tesselated as triangles
 			if (doSubDivise || prj->intersectViewportDiscontinuity(poly->getBoundingCap()))
-				drawSphericalTriangles(poly->getFillVertexArray(), drawMode==SphericalPolygonDrawModeTextureFill, clippingCap, doSubDivise);
+				drawSphericalTriangles(poly->getFillVertexArray(), drawMode==SphericalPolygonDrawModeTextureFill, clippingCap, doSubDivise, maxSqDistortion);
 			else
-				drawStelVertexArray(poly->getFillVertexArray());
+				drawStelVertexArray(poly->getFillVertexArray(), false);
 
 			glDisable(GL_CULL_FACE);
 			break;
@@ -1744,6 +1810,9 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 {
 	Q_ASSERT(glContext==NULL);
 	glContext = ctx;
+
+	makeMainGLContextCurrent();
+	isNoPowerOfTwoAllowed = QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0);
 
 #ifdef STELPAINTER_GL2
 	// Basic shader: just vertex filled with plain color

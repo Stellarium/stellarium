@@ -22,6 +22,7 @@
 #include <QTimer>
 #include <QDateTime>
 #include <QUrl>
+#include <QFileDialog>
 
 #include "StelApp.hpp"
 #include <plugin_config.h>
@@ -33,6 +34,8 @@
 #include "StelMovementMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelGui.hpp"
+#include "StelMainGraphicsView.hpp"
+#include "StelFileMgr.hpp"
 
 // When i18n is implemented, uncomment the StelTranslator.hpp include
 // and remove the definition of q_
@@ -61,18 +64,6 @@ void SatellitesDialog::languageChanged()
 		ui->retranslateUi(dialog);
 }
 
-void SatellitesDialog::updateStyle()
-{
-	if (dialog)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		Q_ASSERT(gui);
-		const StelStyle pluginStyle = GETSTELMODULE(Satellites)->getModuleStyleSheet(gui->getStelStyle());
-		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
-		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
-	}
-}
-
 // Initialize the dialog widgets and connect the signals/slots
 void SatellitesDialog::createDialogContent()
 {
@@ -80,31 +71,45 @@ void SatellitesDialog::createDialogContent()
 	ui->tabs->setCurrentIndex(0);
 
 	// Settings tab / updates group
-	connect(ui->updateFromInternetCheckbox, SIGNAL(toggled(bool)), this, SLOT(setUpdatesEnabled(bool)));
-	refreshUpdateValues(); // fetch values for last updated and so on
-	connect(ui->updateNowButton, SIGNAL(clicked()), GETSTELMODULE(Satellites), SLOT(updateTLEs()));
+	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
+	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateTLEs()));
 	connect(GETSTELMODULE(Satellites), SIGNAL(updateStateChanged(Satellites::UpdateState)), this, SLOT(updateStateReceiver(Satellites::UpdateState)));
-	connect(GETSTELMODULE(Satellites), SIGNAL(TleUpdateComplete(int)), this, SLOT(updateCompleteReceiver(int)));
+	connect(GETSTELMODULE(Satellites), SIGNAL(tleUpdateComplete(int, int, int)), this, SLOT(updateCompleteReceiver(int, int, int)));
 	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
+	refreshUpdateValues(); // fetch values for last updated and so on
+	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
+	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
-		updateTimer->start(7000);
+	updateTimer->start(7000);
+
+	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	// Settings tab / General settings group
-	connect(ui->showLabelsCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getGui()->getGuiActions("actionShow_Satellite_Labels"), SLOT(setChecked(bool)));
+	connect(ui->labelsGroup, SIGNAL(toggled(bool)), StelApp::getInstance().getGui()->getGuiActions("actionShow_Satellite_Labels"), SLOT(setChecked(bool)));
 	connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)), GETSTELMODULE(Satellites), SLOT(setLabelFontSize(int)));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
 
+	// Settings tab / orbit lines group
+	ui->orbitLinesGroup->setChecked(GETSTELMODULE(Satellites)->getOrbitLinesFlag());
+	ui->orbitSegmentsSpin->setValue(Satellite::orbitLineSegments);
+	ui->orbitFadeSpin->setValue(Satellite::orbitLineFadeSegments);
+	ui->orbitDurationSpin->setValue(Satellite::orbitLineSegmentDuration);
+
+	connect(ui->orbitLinesGroup, SIGNAL(toggled(bool)), GETSTELMODULE(Satellites), SLOT(setOrbitLinesFlag(bool)));
+	connect(ui->orbitSegmentsSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
+	connect(ui->orbitFadeSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
+	connect(ui->orbitDurationSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
+
+
 	// Satellites tab
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->satellitesList, SIGNAL(currentTextChanged(const QString&)), this, SLOT(selectedSatelliteChanged(const QString&)));
 	connect(ui->satellitesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(satelliteDoubleClick(QListWidgetItem*)));
 	connect(ui->groupsCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(groupFilterChanged(int)));
-	connect(ui->showButton, SIGNAL(clicked()), this, SLOT(showSelectedSatellites()));
-	connect(ui->hideButton, SIGNAL(clicked()), this, SLOT(hideSelectedSatellites()));
-	connect(ui->visibleCheckbox, SIGNAL(stateChanged(int)), this, SLOT(visibleCheckChanged(int)));
+	connect(ui->saveSatellitesButton, SIGNAL(clicked()), this, SLOT(saveSatellites()));
+	connectSatelliteGuiForm();
 
 	// Sources tab
 	connect(ui->sourceList, SIGNAL(currentTextChanged(const QString&)), ui->sourceEdit, SLOT(setText(const QString&)));
@@ -120,15 +125,15 @@ void SatellitesDialog::createDialogContent()
 
 	updateGuiFromSettings();
 
-	//Initialize the style
-	updateStyle();
 }
 
 void SatellitesDialog::groupFilterChanged(int index)
 {
-	QString prevSelection;
-	if (ui->satellitesList->currentItem())
-		prevSelection = ui->satellitesList->currentItem()->text();
+	QStringList prevMultiSelection;
+	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
+	{
+		prevMultiSelection << i->text();
+	}
 
 	ui->satellitesList->clear();
 	if (ui->groupsCombo->itemData(index).toString() == "all")
@@ -140,25 +145,30 @@ void SatellitesDialog::groupFilterChanged(int index)
 	else
 		ui->satellitesList->insertItems(0,GETSTELMODULE(Satellites)->getSatellites(ui->groupsCombo->currentText()));
 
-	// If the previously selected item is still in the list after the update, select it,
-	// else selected the first item in the list.
-	QList<QListWidgetItem*> foundItems = ui->satellitesList->findItems(prevSelection, Qt::MatchExactly);
-	if (foundItems.count() > 0 && !prevSelection.isEmpty())
+	// If any previously selected items are still in the list after the update, select them,
+	QListWidgetItem* item;
+	for (int i=0; (item = ui->satellitesList->item(i))!=NULL; i++)
 	{
-		foundItems.at(0)->setSelected(true);
-		ui->satellitesList->scrollToItem(foundItems.at(0));
+		item->setSelected(prevMultiSelection.contains(item->text()));
+	}
+
+	QList<QListWidgetItem*> selectedItems = ui->satellitesList->selectedItems();
+	if (selectedItems.count() > 0)
+	{
+		// make sure the first selected item is visible...
+		ui->satellitesList->scrollToItem(selectedItems.at(0));
 	}
 	else if (ui->satellitesList->count() > 0)
 	{
+		// otherwise if there are any items in the listbox, select the first and scroll to the top
 		ui->satellitesList->setCurrentRow(0);
 		ui->satellitesList->scrollToTop();
 	}
-
 }
 
 void SatellitesDialog::selectedSatelliteChanged(const QString& id)
 {
-	qDebug() << "SatellitesDialog::selectedSatelliteChanged for " << id;
+	//qDebug() << "SatellitesDialog::selectedSatelliteChanged for " << id;
 	if (id.isEmpty() || id=="")
 		return;
 
@@ -168,17 +178,21 @@ void SatellitesDialog::selectedSatelliteChanged(const QString& id)
 	if (!sat->initialized)
 		return;
 
+	disconnectSatelliteGuiForm();
 	ui->idLineEdit->setText(sat->designation);
 	ui->descriptionTextEdit->setText(sat->description);
 	ui->groupsTextEdit->setText(sat->groupIDs.join(", "));
-	ui->tleTextEdit->setText(QString(sat->elements[1]) + "\n" + QString(sat->elements[2]));
+	ui->tleTextEdit->setText(QString("%1\n%2").arg(sat->tleElements.first.data()).arg(sat->tleElements.second.data()));
 	ui->visibleCheckbox->setChecked(sat->visible);
+	ui->orbitCheckbox->setChecked(sat->orbitVisible);
 	ui->commsButton->setEnabled(sat->comms.count()>0);
+	connectSatelliteGuiForm();
+
 }
 
-void SatellitesDialog::saveSatellite(const QString& id)
+void SatellitesDialog::saveSatellites(void)
 {
-	qDebug() << "Saving satellite" << id;
+	GETSTELMODULE(Satellites)->saveTleData();
 }
 
 void SatellitesDialog::setAboutHtml(void)
@@ -186,13 +200,41 @@ void SatellitesDialog::setAboutHtml(void)
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Stellarium Satellites Plugin") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td>" + q_("Version:") + "</td><td>" + PLUGIN_VERSION + "</td></td>";
-	html += "<tr><td>" + q_("Author:") + "</td><td>Matthew Gates &lt;matthew@porpoisehead.net&gt;</td></td>";
-	html += "<tr><td>" + q_("Website:") + "</td><td><a href=\"http://stellarium.org/\">stellarium.org</a></td></td></table>";
-	html += "<p>";
-	html += q_("This is the Satellites plugin for Stellarium. ");
-	html += q_("Please leave feedback in the Stellarium forums, post bugs to the bug tracker and consider making a donation to Stellarium if you find this plugin to be useful or interesting.");
-	html += q_("");
-	html += "</body></html>";
+	html += "<tr><td>" + q_("Authors:") + "</td><td>Matthew Gates &lt;matthew@porpoisehead.net&gt;</td></td>";
+	html += "<tr><td></td><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></tr></table>";
+
+	html += "<p>" + q_("The Satellites plugin predicts the positions of artificial satellites in Earth orbit.") + "</p>";
+
+	html += "<h3>" + q_("Notes for users") + "</h3><p><ul>";
+	html += "<li>" + q_("Satellites and their orbits are only shown when the observer is on Earth.") + "</li>";
+	html += "<li>" + q_("Predicted positions are only good for a fairly short time (on the order of days, weeks or perhaps a month into the past and future). Expect high weirdness when looking at dates outside this range.") + "</li>";
+	html += "<li>" + q_("Orbital elements go out of date pretty quickly (over mere weeks, sometimes days).  To get useful data out, you need to update the TLE data regularly.") + "</li>";
+	html += "<li>" + q_("Clicking the \"Restore default settings\" button in the \"Settings\" tab of this dialog will revert to the default satellite.json file.  The old file will be backed up as \"satellites.json.old\".  This can be found in the user data directory, under \"modules/Satellites/\".") + "</li>";
+	html += "<li>" + q_("The Satellites plugin is still under development.  Some features are incomplete, missing or buggy.") + "</li>";
+	html += "</ul></p>";
+
+	html += "<h3>" + q_("TLE data updates") + "</h3>";
+	html += "<p>" + q_("The Satellites plugin can automatically download TLE data from Internet sources, and by default the plugin will do this if the existing data is more than 72 hours old. ");
+	html += "</p><p>" + q_(QString("If you disable Internet updates, you may update from a file on your computer.  This file must be in the same format as the Celestrak updates (see %1 for an example).").arg("<a href=\"http://celestrak.com/NORAD/elements/visual.txt\">visual.txt</a>"));
+	html += "</p><p><b>" + q_("Note") + ":</b> " + q_("if the name of a satellite in update data has anything in square brackets at the end, it will be removed before the data is used.");
+	html += "</p>";
+
+	html += "<h3>" + q_("Adding new satellites") + "</h3>";
+	html += "<p>" + q_("At the moment you must manually edit the satellites.json file to add new satellites to the database. Making this easier is still on the TODO list...") + "</p>";
+
+	html += "<h3>" + q_("Technical Notes") + "</h3>";
+	html += "<p>" + q_("Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data as the input. ");
+	html += q_("The orbital calculation code is written by Jose Luis Canales according to the revised Spacetrack report N#3 (including Spacetrack report N#6). ");
+	html += q_(QString("See %1this document%2 for details.").arg("<a href=\"http://www.celestrak.com/publications/AIAA/2006-6753\">").arg("</a>")) + "</p>";
+
+	html += "<h3>" + q_("Links") + "</h3>";
+	html += "<p>" + q_("Support is provided via the Launchpad website.  Be sure to put \"Satellites plugin\" in the subject when posting.") + "</p>";
+	html += "<p><ul>";
+	html += "<li>" + q_(QString("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">").arg("</a>")) + "</li>";
+	html += "<li>" + q_(QString("Bug reports can be made %1here%2.").arg("<a href=\"https://bugs.launchpad.net/stellarium\">").arg("</a>")) + "</li>";
+	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
+	html += "</ul></p></body></html>";
+
 	ui->aboutTextBrowser->setHtml(html);
 }
 
@@ -201,8 +243,9 @@ void SatellitesDialog::refreshUpdateValues(void)
 	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Satellites)->getLastUpdate());
 	ui->updateFrequencySpinBox->setValue(GETSTELMODULE(Satellites)->getUpdateFrequencyHours());
 	int secondsToUpdate = GETSTELMODULE(Satellites)->getSecondsToUpdate();
+	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Satellites)->getUpdatesEnabled());
 	if (!GETSTELMODULE(Satellites)->getUpdatesEnabled())
-		ui->nextUpdateLabel->setText(q_("Updates disabled"));
+		ui->nextUpdateLabel->setText(q_("Internet updates disabled"));
 	else if (GETSTELMODULE(Satellites)->getUpdateState() == Satellites::Updating)
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
 	else if (secondsToUpdate <= 60)
@@ -219,16 +262,22 @@ void SatellitesDialog::setUpdateValues(int hours)
 	refreshUpdateValues();
 }
 
-void SatellitesDialog::setUpdatesEnabled(bool b)
+void SatellitesDialog::setUpdatesEnabled(int checkState)
 {
+	bool b = checkState != Qt::Unchecked;
 	GETSTELMODULE(Satellites)->setUpdatesEnabled(b);
 	ui->updateFrequencySpinBox->setEnabled(b);
-	ui->updateNowButton->setEnabled(b);
+	if(b)
+		ui->updateButton->setText(q_("Update now"));
+	else
+		ui->updateButton->setText(q_("Update from files"));
+
+	refreshUpdateValues();
 }
 
 void SatellitesDialog::updateStateReceiver(Satellites::UpdateState state)
 {
-	qDebug() << "SatellitesDialog::updateStateReceiver got a signal";
+	//qDebug() << "SatellitesDialog::updateStateReceiver got a signal";
 	if (state==Satellites::Updating)
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
 	else if (state==Satellites::DownloadError || state==Satellites::OtherError)
@@ -238,21 +287,14 @@ void SatellitesDialog::updateStateReceiver(Satellites::UpdateState state)
 	}
 }
 
-void SatellitesDialog::updateCompleteReceiver(int numUpdated)
+void SatellitesDialog::updateCompleteReceiver(int numUpdated, int total, int missing)
 {
-	ui->nextUpdateLabel->setText(QString(q_("Updated %1 satellite(s)")).arg(numUpdated));
+	ui->nextUpdateLabel->setText(QString(q_("Updated %1/%2 satellite(s); %3 missing")).arg(numUpdated).arg(total).arg(missing));
 	// display the status for another full interval before refreshing status
 	updateTimer->start();
 	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Satellites)->getLastUpdate());
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
-}
-
-void SatellitesDialog::close(void)
-{
-	qDebug() << "Closing Satellites Configure Dialog";
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	gui->getGuiActions("actionShow_Satellite_ConfigDialog")->setChecked(false);
 }
 
 void SatellitesDialog::sourceEditingDone(void)
@@ -319,17 +361,23 @@ void SatellitesDialog::restoreDefaults(void)
 
 void SatellitesDialog::updateGuiFromSettings(void)
 {
-	ui->updateFromInternetCheckbox->setChecked(GETSTELMODULE(Satellites)->getUpdatesEnabled());
+	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Satellites)->getUpdatesEnabled());
 	refreshUpdateValues();
 
-	ui->showLabelsCheckbox->setChecked(GETSTELMODULE(Satellites)->getFlagLabels());
+	ui->labelsGroup->setChecked(GETSTELMODULE(Satellites)->getFlagLabels());
 	ui->fontSizeSpinBox->setValue(GETSTELMODULE(Satellites)->getLabelFontSize());
+
+	ui->orbitLinesGroup->setChecked(GETSTELMODULE(Satellites)->getOrbitLinesFlag());
+	ui->orbitSegmentsSpin->setValue(Satellite::orbitLineSegments);
+	ui->orbitFadeSpin->setValue(Satellite::orbitLineFadeSegments);
+	ui->orbitDurationSpin->setValue(Satellite::orbitLineSegmentDuration);
 
 	ui->groupsCombo->clear();
 	ui->groupsCombo->addItems(GETSTELMODULE(Satellites)->getGroups());
-	ui->groupsCombo->insertItem(0, q_("[all satellites]"), QVariant("all"));
 	ui->groupsCombo->insertItem(0, q_("[all not visible]"), QVariant("notvisible"));
 	ui->groupsCombo->insertItem(0, q_("[all visible]"), QVariant("visible"));
+	ui->groupsCombo->insertItem(0, q_("[all]"), QVariant("all"));
+	ui->satellitesList->clearSelection();
 	ui->groupsCombo->setCurrentIndex(0);
 
 	ui->sourceList->clear();
@@ -339,27 +387,7 @@ void SatellitesDialog::updateGuiFromSettings(void)
 
 void SatellitesDialog::saveSettings(void)
 {
-	qDebug() << "Satellites::saveSettings not implemented yet!";
-}
-
-void SatellitesDialog::showSelectedSatellites(void)
-{
-	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
-	{
-		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(i->text());
-		sat->visible = true;
-	}
-	groupFilterChanged(ui->groupsCombo->currentIndex());
-}
-
-void SatellitesDialog::hideSelectedSatellites(void)
-{
-	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
-	{
-		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(i->text());
-		sat->visible = false;
-	}
-	groupFilterChanged(ui->groupsCombo->currentIndex());
+	GETSTELMODULE(Satellites)->saveSettingsToConfig();
 }
 
 void SatellitesDialog::visibleCheckChanged(int state)
@@ -368,6 +396,16 @@ void SatellitesDialog::visibleCheckChanged(int state)
 	{
 		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(i->text());
 		sat->visible = (state==Qt::Checked);
+	}
+	groupFilterChanged(ui->groupsCombo->currentIndex());
+}
+
+void SatellitesDialog::orbitCheckChanged(int state)
+{
+	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
+	{
+		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(i->text());
+		sat->orbitVisible = (state==Qt::Checked);
 	}
 	groupFilterChanged(ui->groupsCombo->currentIndex());
 }
@@ -383,3 +421,40 @@ void SatellitesDialog::satelliteDoubleClick(QListWidgetItem* item)
 	}
 }
 
+void SatellitesDialog::setOrbitParams(void)
+{
+	Satellite::orbitLineSegments = ui->orbitSegmentsSpin->value();
+	Satellite::orbitLineFadeSegments = ui->orbitFadeSpin->value();
+	Satellite::orbitLineSegmentDuration = ui->orbitDurationSpin->value();
+	GETSTELMODULE(Satellites)->recalculateOrbitLines();
+}
+
+void SatellitesDialog::updateTLEs(void)
+{
+	if(GETSTELMODULE(Satellites)->getUpdatesEnabled())
+	{
+		GETSTELMODULE(Satellites)->updateTLEs();
+	}
+	else
+	{
+		QStringList updateFiles = QFileDialog::getOpenFileNames(&StelMainGraphicsView::getInstance(),
+									q_("Select TLE Update File"),
+									StelFileMgr::getDesktopDir(),
+									"*.*");
+		GETSTELMODULE(Satellites)->updateFromFiles(updateFiles, false);
+	}
+}
+
+void SatellitesDialog::connectSatelliteGuiForm(void)
+{
+	// make sure we don't connect more than once
+	disconnectSatelliteGuiForm();
+	connect(ui->visibleCheckbox, SIGNAL(stateChanged(int)), this, SLOT(visibleCheckChanged(int)));
+	connect(ui->orbitCheckbox, SIGNAL(stateChanged(int)), this, SLOT(orbitCheckChanged(int)));
+}
+
+void SatellitesDialog::disconnectSatelliteGuiForm(void)
+{
+	disconnect(ui->visibleCheckbox, SIGNAL(stateChanged(int)), this, SLOT(visibleCheckChanged(int)));
+	disconnect(ui->orbitCheckbox, SIGNAL(stateChanged(int)), this, SLOT(orbitCheckChanged(int)));
+}

@@ -273,7 +273,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 	for (QMap<QString, StelModuleMgr::PluginDescriptor>::Iterator iter=pluginDescriptorList.begin();iter!=pluginDescriptorList.end();++iter)
 	{
 		if (!conf->contains("plugins_load_at_startup/"+iter.key()))
-			conf->setValue("plugins_load_at_startup/"+iter.key(), false);
+			conf->setValue("plugins_load_at_startup/"+iter.key(), iter.value().info.startByDefault);
 		iter->loadAtStartup = conf->value("plugins_load_at_startup/"+iter.key()).toBool();
 	}
 

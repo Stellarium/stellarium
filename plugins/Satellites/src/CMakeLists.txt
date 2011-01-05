@@ -1,21 +1,37 @@
-INCLUDE_DIRECTORIES(. sgp4sdp4 gui ${CMAKE_BINARY_DIR}/plugins/Satellites/src ${CMAKE_BINARY_DIR}/plugins/Satellites/src/gui)
+INCLUDE_DIRECTORIES(. gsatellite gui ${CMAKE_BINARY_DIR}/plugins/Satellites/src ${CMAKE_BINARY_DIR}/plugins/Satellites/src/gui)
 
 LINK_DIRECTORIES(/src)
 
 SET(Satellites_SRCS
-  sgp4sdp4/sgp4sdp4.c
-  sgp4sdp4/sgp4sdp4.h
-  sgp4sdp4/sgp_in.c
-  sgp4sdp4/sgp_math.c
-  sgp4sdp4/sgp_obs.c
-  sgp4sdp4/sgp_time.c
-  sgp4sdp4/solar.c
+  gsatellite/gException.hpp
+  gsatellite/gMatrix.cpp
+  gsatellite/gMatrix.hpp
+  gsatellite/gMatrixTempl.hpp
+  gsatellite/gObserver.cpp
+  gsatellite/gObserver.hpp
+  gsatellite/gSatTEME.cpp
+  gsatellite/gSatTEME.hpp
+  gsatellite/mathUtils.cpp
+  gsatellite/mathUtils.hpp
+  gsatellite/gTime.cpp
+  gsatellite/gTime.hpp
+  gsatellite/gTimeSpan.cpp
+  gsatellite/gVector.cpp
+  gsatellite/gVector.hpp
+  gsatellite/gVectorTempl.hpp
+  gsatellite/sgp4ext.cpp
+  gsatellite/sgp4ext.h
+  gsatellite/sgp4io.cpp
+  gsatellite/sgp4io.h
+  gsatellite/sgp4unit.cpp
+  gsatellite/sgp4unit.h
+  gsatellite/stdsat.h
+
+  
   Satellite.hpp
   Satellite.cpp
   Satellites.hpp
   Satellites.cpp
-  gui/StelDialogPlugin.hpp
-  gui/StelDialogPlugin.cpp
   gui/SatellitesDialog.hpp
   gui/SatellitesDialog.cpp
 )
@@ -25,14 +41,13 @@ SET(SatellitesDialog_UIS
 )
 QT4_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
 
-SET(Satellites_RES ../Satellites.qrc)
+SET(Satellites_RES ../resources/Satellites.qrc)
 QT4_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
 
 # Add here all the files which require moc compilation
 # that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
 SET(Satellites_MOC_HDRS
   Satellites.hpp
-  gui/StelDialogPlugin.hpp
   gui/SatellitesDialog.hpp
 )
 
@@ -67,11 +82,7 @@ IF(BUILD_STATIC_PLUGINS)
 	# The library target "Satellites-static" has a default OUTPUT_NAME of "Satellites-static", so change it.
 	SET_TARGET_PROPERTIES(Satellites-static PROPERTIES OUTPUT_NAME "Satellites")
 	TARGET_LINK_LIBRARIES(Satellites-static ${StelMain} ${extLinkerOption})
-	IF(WIN32)
-		SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-	ELSE()
-		SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
-	ENDIF()
+	SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 	ADD_DEPENDENCIES(AllStaticPlugins Satellites-static)
 ENDIF()
 

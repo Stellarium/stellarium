@@ -143,7 +143,7 @@ void SkyGui::init(StelGui* astelGui)
 void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
 	QGraphicsWidget::resizeEvent(event);
-	updateBarsPos();
+		updateBarsPos();
 }
 
 void SkyGui::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
@@ -204,21 +204,22 @@ void SkyGui::updateBarsPos()
 	if (buttonBar->pos().x()!=newButtonBarX || buttonBar->pos().y()!=newButtonBarY)
 	{
 		buttonBar->setPos(round(newButtonBarX), round(newButtonBarY));
-		updatePath = true;
+				updatePath = true;
 	}
 
 	if (lastButtonbarWidth != buttonBar->boundingRectNoHelpLabel().width())
 	{
-		updatePath = true;
-		lastButtonbarWidth = (int)(buttonBar->boundingRectNoHelpLabel().width());
+				updatePath = true;
+				lastButtonbarWidth = (int)(buttonBar->boundingRectNoHelpLabel().width());
 	}
 
 	if (updatePath)
 		buttonBarPath->updatePath(buttonBar, winBar);
 
-	const qreal newProgressBarX = ww-progressBarMgr->boundingRect().width()-5;
-	const qreal newProgressBarY = hh-progressBarMgr->boundingRect().height()-5;
+	const qreal newProgressBarX = ww-progressBarMgr->boundingRect().width()-20;
+	const qreal newProgressBarY = hh-progressBarMgr->boundingRect().height()+7;
 	progressBarMgr->setPos(newProgressBarX, newProgressBarY);
+	progressBarMgr->setZValue(400);
 
 	// Update position of the auto-hide buttons
 	autoHidebts->setPos(0, hh-autoHidebts->childrenBoundingRect().height()+1);

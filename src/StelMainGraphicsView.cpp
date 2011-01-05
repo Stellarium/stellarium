@@ -93,6 +93,14 @@ Q_IMPORT_PLUGIN(Oculars)
 Q_IMPORT_PLUGIN(TelescopeControl)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_SOLARSYSTEMEDITOR
+Q_IMPORT_PLUGIN(SolarSystemEditor)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_TIMEZONECONFIGURATION
+Q_IMPORT_PLUGIN(TimeZoneConfiguration)
+#endif
+
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
@@ -111,6 +119,8 @@ public:
 protected:
 	virtual void initializeGL()
 	{
+		qDebug() << "OpenGL supported version: " << QString((char*)glGetString(GL_VERSION));
+
 		QGLWidget::initializeGL();
 
 		if (!format().stencil())
@@ -204,10 +214,12 @@ void StelMainGraphicsView::init(QSettings* conf)
 	// Create the main widget for stellarium, which in turn creates the main StelApp instance.
 	mainSkyItem = new StelAppGraphicsWidget();
 	mainSkyItem->setZValue(-10);
+	mainSkyItem->setContentsMargins(0,0,0,0);
 	QGraphicsGridLayout* l = new QGraphicsGridLayout(backItem);
-	l->setContentsMargins(0,0,0,0);
 	l->setSpacing(0);
+	l->setContentsMargins(0,0,0,0);
 	l->addItem(mainSkyItem, 0, 0);
+	backItem->setLayout(l);
 	scene()->addItem(backItem);
 
 	// Activate the resizing caused by the layout
@@ -265,7 +277,7 @@ void StelMainGraphicsView::init(QSettings* conf)
 #endif
 
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
-	StelPainter::setQPainter(NULL);
+        StelPainter::setQPainter(NULL);
 	startMainLoop();
 }
 
@@ -326,6 +338,7 @@ void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
 	scene()->setSceneRect(QRect(QPoint(0, 0), event->size()));
 	backItem->setGeometry(0,0,event->size().width(),event->size().height());
 	QGraphicsView::resizeEvent(event);
+
 }
 
 void StelMainGraphicsView::mouseMoveEvent(QMouseEvent* event)

@@ -178,7 +178,7 @@ private:
 	bool loadNGCOld(const QString& catNGC);
 	bool loadNGCNames(const QString& fileName);
 
-	QList<NebulaP> nebArray;		// The nebulas list
+	QVector<NebulaP> nebArray;		// The nebulas list
 	QHash<unsigned int, NebulaP> ngcIndex;
 	LinearFader hintsFader;
 	LinearFader flagShow;

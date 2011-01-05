@@ -241,6 +241,8 @@ void StelAppGraphicsWidget::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 void StelAppGraphicsWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
 	// Apply distortion on the mouse position.
+	// Widget gets focus on clicked
+	setFocus();
 	QPointF pos = event->scenePos();
 	distortPos(&pos);
 	pos.setY(scene()->height() - 1 - pos.y());

@@ -36,6 +36,7 @@
 
 #include "Server.hpp" //from the telescope server source tree
 #include "TelescopeClient.hpp" //from the plug-in's source tree
+#include "InterpolatedPosition.hpp"
 
 class NexStarConnection;
 
@@ -45,7 +46,7 @@ class TelescopeClientDirectNexStar : public TelescopeClient, public Server
 {
 	Q_OBJECT
 public:
-	TelescopeClientDirectNexStar(const QString &name, const QString &parameters);
+	TelescopeClientDirectNexStar(const QString &name, const QString &parameters, Equinox eq = EquinoxJ2000);
 	~TelescopeClientDirectNexStar(void)
 	{
 		//hangup();
@@ -79,16 +80,15 @@ private:
 	
 private:
 	void hangup(void);
-	void resetPositions(void);
 	int time_delay;
 	
-	Position positions[16];
-	Position *position_pointer;
-	Position *const end_position;
+	InterpolatedPosition interpolatedPosition;
 	virtual bool hasKnownPosition(void) const
 	{
-		return (position_pointer->client_micros != 0x7FFFFFFFFFFFFFFFLL);
+		return interpolatedPosition.isKnown();
 	}
+
+	Equinox equinox;
 	
 	//======================================================================
 	// Members taken from ServerNexStar

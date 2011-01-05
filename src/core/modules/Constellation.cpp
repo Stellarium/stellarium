@@ -125,14 +125,15 @@ void Constellation::drawName(StelPainter& sPainter) const
 void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& region) const
 {
 	const float intensity = artFader.getInterstate();
-	if (artTexture && intensity && region.intersects(artPolygon))
+	if (artTexture && intensity && region.intersects(boundingCap))
 	{
 		sPainter.setColor(intensity,intensity,intensity);
 
 		// The texture is not fully loaded
 		if (artTexture->bind()==false)
 			return;
-		sPainter.drawSphericalRegion(&artPolygon, StelPainter::SphericalPolygonDrawModeTextureFill);
+
+		sPainter.drawStelVertexArray(artPolygon);
 	}
 }
 

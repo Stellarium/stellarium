@@ -54,10 +54,10 @@ StelPluginInfo CompassMarksStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
 	info.id = "CompassMarks";
-	info.displayedName = "Compass Marks";
+	info.displayedName = q_("Compass Marks");
 	info.authors = "Matthew Gates";
 	info.contact = "http://porpoisehead.net/";
-	info.description = "Displays compass bearing marks along the horizon";
+	info.description = q_("Displays compass bearing marks along the horizon");
 	return info;
 }
 
@@ -118,7 +118,7 @@ void CompassMarks::init()
 		pxmapOnIcon = new QPixmap(":/compassMarks/bt_compass_on.png");
 		pxmapOffIcon = new QPixmap(":/compassMarks/bt_compass_off.png");
 
-		gui->addGuiActions("actionShow_Compass_Marks", N_("Compass marks"), "Ctrl+C", "Plugin Key Bindings", true, false);
+		gui->addGuiActions("actionShow_Compass_Marks", N_("Compass marks"), "Ctrl+C", N_("Plugin Key Bindings"), true, false);
 		gui->getGuiActions("actionShow_Compass_Marks")->setChecked(markFader);
 		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiActions("actionShow_Compass_Marks"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
@@ -137,9 +137,7 @@ void CompassMarks::draw(StelCore* core)
 {
 	if (markFader.getInterstate() <= 0.0) { return; }
 
-	Vec3f pos;
-	Vec3f xy;
-	Vec3f xy2;
+	Vec3d pos;
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 	StelPainter painter(prj);
 	painter.setFont(font);
@@ -149,27 +147,29 @@ void CompassMarks::draw(StelCore* core)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 	glEnable(GL_LINE_SMOOTH);
+
 	for(int i=0; i<360; i++)
 	{
 		float a = i*M_PI/180;
+		pos.set(sin(a),cos(a), 0.f);
 		float h = -0.002;
 		if (i % 15 == 0)
 		{
 			h = -0.02;  // the size of the mark every 15 degrees
 
 			// draw a label every 15 degrees
-			pos.set(sin(a),cos(a), 0.f);
 			QString s = QString("%1").arg((i+90)%360);
 			float shiftx = painter.getFontMetrics().width(s) / 2.;
-			float shifty = painter.getFontMetrics().height() / 2;
-			if (prj->project(pos,xy)) painter.drawText(xy[0], xy[1], s, 0, -shiftx, shifty);
+			float shifty = painter.getFontMetrics().height() / 2.;
+			painter.drawText(pos, s, 0, -shiftx, shifty);
 		}
 		else if (i % 5 == 0)
 		{
 			h = -0.01;  // the size of the marking every 5 degrees
 		}
 
-		painter.drawGreatCircleArc(Vec3d(sin(a), cos(a), 0), Vec3d(sin(a), cos(a), h), NULL);
+		glDisable(GL_TEXTURE_2D);
+		painter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), NULL);
 	}
 	glDisable(GL_LINE_SMOOTH);
 }
