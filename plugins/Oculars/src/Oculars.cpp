@@ -95,7 +95,6 @@ Oculars::Oculars() : pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), too
 	flagShowTelrad = false;
 	ready = false;
 	useMaxEyepieceAngle = true;
-	visible = false;
 
 	font.setPixelSize(14);
 	maxEyepieceAngle = 0.0;
@@ -549,17 +548,37 @@ void Oculars::decrementTelescopeIndex()
 void Oculars::displayPopupMenu()
 {
 	QMenu* popup = new QMenu();
-	QAction* a1 = new QAction("Select previous ocular", popup);
-	a1->setShortcut(QKeySequence("Ctrl+["));
-	connect(a1, SIGNAL(triggered()), this, SLOT(decrementOcularIndex()));
-	QAction* a2 = new QAction("Select previous ocular", popup);
-	a2->setShortcut(QKeySequence("Ctrl+]"));
-	connect(a2, SIGNAL(triggered()), this, SLOT(incrementOcularIndex()));
 
-	popup->addAction(a1);
-	popup->addAction(a2);
+	if (flagShowOculars) {
+		// We are in Oculars mode
+		QAction* action = new QAction("Select previous ocular", popup);
+		action->setShortcut(QKeySequence("1"));
+		action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		connect(action, SIGNAL(triggered()), this, SLOT(decrementOcularIndex()));
+		popup->addAction(action);
+
+		action = new QAction("Select previous ocular", popup);
+		action->setShortcut(QKeySequence("2"));
+		action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		connect(action, SIGNAL(triggered()), this, SLOT(incrementOcularIndex()));
+		popup->addAction(action);
+	} else {
+		// We are not in Oculars mode
+		QAction* action = new QAction("Configure Oculars", popup);
+		action->setShortcut(QKeySequence("1"));
+		action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		connect(action, SIGNAL(triggered()), this, SLOT(toggleTelrad()));
+		popup->addAction(action);
+
+		action = new QAction("Toggle Telrad", popup);
+		action->setShortcut(QKeySequence("2"));
+		action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		connect(action, SIGNAL(triggered()), this, SLOT(toggleTelrad()));
+		popup->addAction(action);
+	}
 
 	popup->exec(QCursor::pos());
+	delete popup;
 }
 
 void Oculars::incrementCCDIndex()
@@ -693,13 +712,14 @@ void Oculars::initializeActivationActions()
 //							 true);
 //	connect(gui->getGuiActions("actionShow_Ocular_Window"), SIGNAL(toggled(bool)), ocularDialog, SLOT(setVisible(bool)));
 //	connect(ocularDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Ocular_Window"), SLOT(setChecked(bool)));
-	gui->addGuiActions("actionShow_Ocular_Telrad",
-							 N_("Telrad circles"),
-							 settings->value("bindings/toggle_telrad", "Ctrl+B").toString(),
-							 group,
-							 true);
-	gui->getGuiActions("actionShow_Ocular_Telrad")->setChecked(flagShowTelrad);
-	connect(gui->getGuiActions("actionShow_Ocular_Telrad"), SIGNAL(toggled(bool)), this, SLOT(toggleTelrad()));
+
+//	gui->addGuiActions("actionShow_Ocular_Telrad",
+//							 N_("Telrad circles"),
+//							 settings->value("bindings/toggle_telrad", "Ctrl+B").toString(),
+//							 group,
+//							 true);
+//	gui->getGuiActions("actionShow_Ocular_Telrad")->setChecked(flagShowTelrad);
+//	connect(gui->getGuiActions("actionShow_Ocular_Telrad"), SIGNAL(toggled(bool)), this, SLOT(toggleTelrad()));
 
 	gui->addGuiActions("actionShow_Ocular_Menu",
 							 N_("Oculars popup menu"),
