@@ -73,9 +73,6 @@ public:
 	//! Translate names.
 	virtual void updateI18n();
 
-	//! Called when a new object is selected.
-	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::ReplaceSelection);
-
 	//! Load a color scheme
 	virtual void setStelStyle(const QString& section);
 
@@ -229,6 +226,10 @@ public:
 	//! \deprecated Used in LandscapeMgr::update(), but commented out.
 	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}
 
+private slots:
+	//! Called when a new object is selected.
+	void selectedObjectChange(StelModule::StelModuleSelectAction action);
+	
 private:
 	//! Search for SolarSystem objects which are close to the position given
 	//! in earth equatorial position.

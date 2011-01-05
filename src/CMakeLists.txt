@@ -339,6 +339,7 @@ QT4_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 SET(stellarium_MOC_HDRS
 	core/StelAudioMgr.hpp
 	core/StelModuleMgr.hpp
+	core/StelObjectMgr.hpp
 	core/StelObserver.hpp
 	core/StelApp.hpp
 	core/StelNavigator.hpp
