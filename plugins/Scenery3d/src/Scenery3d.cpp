@@ -28,6 +28,8 @@
 #include "StelNavigator.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelUtils.hpp"
+#include "SolarSystem.hpp"
+#include "StelModuleMgr.hpp"
 
 #include <QAction>
 #include <QString>
@@ -61,10 +63,24 @@ void Scenery3d::load(const QSettings& scenery3dIni, const QString& scenery3dID)
     modelSceneryFile = scenery3dIni.value("model/scenery").toString();
     modelGroundFile = scenery3dIni.value("model/ground").toString();
 
+    orig_x = scenery3dIni.value("coord/orig_x").toReal();
+    orig_y = scenery3dIni.value("coord/orig_y").toReal();
+    orig_z = scenery3dIni.value("coord/orig_z").toReal();
+    rot_z = scenery3dIni.value("coord/rot_z").toReal();
+
     QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
     qDebug() << "Trying to load OBJ model: " << modelFile;
     objModel->load(modelFile.toAscii());
     objModelArrays = objModel->getStelArrays();
+
+    // Rotate vertices around z axis
+    Mat4d zRotateMatrix = Mat4d::rotation(Vec3d(0.0, 0.0, 1.0), (90.0 + rot_z) * M_PI / 180.0);
+    for (int i=0; i<objModelArrays.size(); i++) {
+        OBJ::StelModel& stelModel = objModelArrays[i];
+        for (int v=0; v<stelModel.triangleCount*3; v++) {
+            zRotateMatrix.transfo(stelModel.vertices[v]);
+        }
+    }
 }
 
 void Scenery3d::handleKeys(QKeyEvent* e)
@@ -76,9 +92,23 @@ void Scenery3d::handleKeys(QKeyEvent* e)
         } else if (e->key() == Qt::Key_X) {
             movement_z = -1.0f;
             e->accept();
+        } else if (e->key() == Qt::Key_1) { // GZ: Bitte andere Tasten suchen!
+            movement_x = 1.0f;
+            e->accept();
+        } else if (e->key() == Qt::Key_2) {
+            movement_x = -1.0f;
+            e->accept();
+        } else if (e->key() == Qt::Key_3) {
+            movement_y = 1.0f;
+            e->accept();
+        } else if (e->key() == Qt::Key_4) {
+            movement_y = -1.0f;
+            e->accept();
         }
     } else if (e->type() == QKeyEvent::KeyRelease) {
-        if (e->key() == Qt::Key_W || e->key() == Qt::Key_X) {
+        if (e->key() == Qt::Key_W || e->key() == Qt::Key_X || e->key() == Qt::Key_1 || e->key() == Qt::Key_2 || e->key() == Qt::Key_3 || e->key() == Qt::Key_4 ) {
+            movement_x = 0.0f;
+            movement_y = 0.0f;
             movement_z = 0.0f;
             e->accept();
         }
@@ -90,11 +120,11 @@ void Scenery3d::update(double deltaTime)
     rotation += 8.0f * deltaTime;
     if (core != NULL) {
         Vec3d viewDirection = core->getMovementMgr()->getViewDirectionJ2000();
+        // GZ: Use correct coordinate frame!
+        Vec3d viewDirectionAltAz=core->getNavigator()->j2000ToAltAz(viewDirection);
         double alt, az;
-        StelUtils::rectToSphe(&az, &alt, viewDirection);
-        Vec3d move(movement_z * deltaTime * 3.0 * sin(az), 0.0, movement_z * deltaTime * 3.0 * cos(az));
-        //move.normalize();
-        //move.v[1] = 0.0;
+        StelUtils::rectToSphe(&az, &alt, viewDirectionAltAz);
+        Vec3d move(movement_x * deltaTime * 3.0, movement_y * deltaTime * 3.0, movement_z * deltaTime * 3.0);
         absolutePosition += move;
     }
 }
@@ -107,10 +137,25 @@ void Scenery3d::drawObjModel(StelCore* core)
     StelPainter painter(prj);
 
     //glEnable(GL_BLEND);
+    glEnable(GL_TEXTURE_2D);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glDepthMask(GL_TRUE);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+
+    SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+    Vec3d sunPosition = ssystem->getSun()->getAltAzPos(core->getNavigator());
+    sunPosition.normalize();
+
+
+    static const GLfloat LightAmbient[] = {0.5f, 0.5f, 0.5f, 1.0f};
+    static const GLfloat LightDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
+    static const GLfloat LightPosition[] = {sunPosition.v[0], sunPosition.v[1], sunPosition.v[2], 0.0f};
+    glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
+    glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
 
     glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -139,6 +184,8 @@ void Scenery3d::drawObjModel(StelCore* core)
         OBJ::StelModel& stelModel = objModelArrays[i];
         if (stelModel.texture.data()) {
             stelModel.texture.data()->bind();
+        } else {
+            glBindTexture(GL_TEXTURE_2D, 0);
         }
         glColor3fv(stelModel.color.v);
         painter.setArrays(stelModel.vertices, stelModel.texcoords, __null, stelModel.normals);
@@ -150,8 +197,11 @@ void Scenery3d::drawObjModel(StelCore* core)
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
 
+    glDisable(GL_LIGHT0);
+    glDisable(GL_LIGHTING);
     glDepthMask(GL_FALSE);
     glDisable(GL_DEPTH_TEST);
+    glDisable(GL_TEXTURE_2D);
     //glDisable(GL_BLEND);
 }
 
