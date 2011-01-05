@@ -10,9 +10,6 @@
     <height>86</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
   <property name="styleSheet">
    <string notr="true"/>
   </property>
@@ -24,7 +21,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="BarFrame" name="DateTimeBar">
+    <widget class="BarFrame" name="TitleBar">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
        <horstretch>0</horstretch>
@@ -533,7 +530,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../data/mainRes.qrc"/>
+  <include location="../../data/gui/guiRes.qrc"/>
  </resources>
  <connections/>
 </ui>

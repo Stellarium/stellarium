@@ -107,11 +107,12 @@ public slots:
 	//! Updates the scene and process all events
 	void updateScene() {
 
-		//#ifdef QT_MAC_USE_COCOA
-			// This call solves the problems with the qt event dispatche. The stack grew huge and many events were discarded
-			// http://bugreports.qt.nokia.com/browse/QTBUG-7502
-		//	QCoreApplication::processEvents(QEventLoop::AllEvents);
-		//#endif
+		#ifdef QT_MAC_USE_COCOA
+			 //This call solves the problems with the qt event dispatcher. The stack grew huge and many events were discarded
+			 //http://bugreports.qt.nokia.com/browse/QTBUG-7502
+			 //The previous bug has been closed an fixed but this line is still needed. The patch didn't solve our problem
+			QCoreApplication::processEvents(QEventLoop::AllEvents);
+		#endif
 		scene()->update();
 	}
 
@@ -127,7 +128,6 @@ protected:
 	//! Update the mouse pointer state and schedule next redraw.
 	//! This method is called automatically by Qt.
 	virtual void drawBackground(QPainter* painter, const QRectF &rect);
-
 
 signals:
 	//! emitted when saveScreenShot is requested with saveScreenShot().

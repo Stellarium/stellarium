@@ -10,9 +10,6 @@
     <height>434</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
   <property name="styleSheet">
    <string notr="true"/>
   </property>
@@ -24,7 +21,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="BarFrame" name="LocationBar">
+    <widget class="BarFrame" name="TitleBar">
      <property name="minimumSize">
       <size>
        <width>16</width>
@@ -672,7 +669,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../data/mainRes.qrc"/>
+  <include location="../../data/gui/guiRes.qrc"/>
  </resources>
  <connections/>
 </ui>

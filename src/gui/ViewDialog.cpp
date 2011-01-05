@@ -20,6 +20,7 @@
 
 #include "ViewDialog.hpp"
 #include "ui_viewDialog.h"
+#include "AddRemoveLandscapesDialog.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -50,12 +51,15 @@
 ViewDialog::ViewDialog()
 {
 	ui = new Ui_viewDialogForm;
+	addRemoveLandscapesDialog = NULL;
 }
 
 ViewDialog::~ViewDialog()
 {
 	delete ui;
 	ui=NULL;
+	delete addRemoveLandscapesDialog;
+	addRemoveLandscapesDialog = NULL;
 }
 
 void ViewDialog::languageChanged()
@@ -196,6 +200,9 @@ void ViewDialog::createDialogContent()
 	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getCurrentLandscapeID()!=lmgr->getDefaultLandscapeID());
 	connect(ui->useAsDefaultLandscapeCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentLandscapeAsDefault()));
 
+	connect(GETSTELMODULE(LandscapeMgr), SIGNAL(landscapesChanged()), this, SLOT(populateLists()));
+	connect(ui->pushButtonAddRemoveLandscapes, SIGNAL(clicked()), this, SLOT(showAddRemoveLandscapesDialog()));
+
 	// Grid and lines
 	GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
 	ui->showEquatorLineCheckBox->setChecked(glmgr->getFlagEquatorLine());
@@ -313,6 +320,8 @@ void ViewDialog::populateLists()
 	l->setCurrentItem(l->findItems(lmgr->getCurrentLandscapeName(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
+	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
+	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getDefaultLandscapeID()!=lmgr->getCurrentLandscapeID());
 }
 
 void ViewDialog::populateSkyLayersList()
@@ -418,6 +427,14 @@ void ViewDialog::landscapeChanged(QListWidgetItem* item)
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
 	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
 	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getDefaultLandscapeID()!=lmgr->getCurrentLandscapeID());
+}
+
+void ViewDialog::showAddRemoveLandscapesDialog()
+{
+	if(addRemoveLandscapesDialog == NULL)
+		addRemoveLandscapesDialog = new AddRemoveLandscapesDialog();
+
+	addRemoveLandscapesDialog->setVisible(true);
 }
 
 void ViewDialog::shootingStarsZHRChanged()

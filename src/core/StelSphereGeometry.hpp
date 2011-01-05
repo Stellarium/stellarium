@@ -104,9 +104,6 @@ public:
 
 	//! Method registered to JSON serializer.
 	static void serializeToJson(const QVariant& jsonObject, QIODevice* output, int indentLevel=0);
-	
-	//! The QVariant type associated to a SphericalRegionP.
-	static const QVariant::Type qVariantType;
 
 	//! The meta type ID associated to a SphericalRegionP.
 	static int metaTypeId;
@@ -600,7 +597,10 @@ public:
 	static SphericalRegionP deserialize(QDataStream& in);
 
 	//! Create a new SphericalRegionP which is the union of all the passed ones.
-	static SphericalRegionP multiUnion(const QList<SphericalRegionP>& regions);
+	static SphericalRegionP multiUnion(const QList<SphericalRegionP>& regions, bool optimizeByPreGrouping=false);
+	
+	//! Create a new SphericalRegionP which is the intersection of all the passed ones.
+	static SphericalRegionP multiIntersection(const QList<SphericalRegionP>& regions);
 
 private:
 	OctahedronPolygon octahedronPolygon;

@@ -48,7 +48,7 @@ background:rgb(48, 49, 52);
 	border: rgb(255, 240, 0);
 }*/
 
-QFrame#LocationBar, QFrame#DateTimeBar, QFrame#SearchBar, QFrame#TimeBar, QFrame#HelpBar{
+QFrame#TitleBar {
 	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(41, 47, 50), stop:1 rgb(31, 33, 36));
 }
 
@@ -382,70 +382,50 @@ QGroupBox::title {
 
 /********************************************TabWidget*****************************************************/
 
-QTabWidget {
-	background: rgba(0, 0, 0, 0%);
-}
-
 QTabWidget::pane {
-	margin-top: 12px;
-	border-top: 1px solid rgb(0, 0, 0);
-	background: rgba(0, 0, 0, 0%);
+	border: none;
 }
 
 QTabWidget::tab-bar {
-	background: rgba(0, 0, 0, 0%);
 	width: 1000px;
+	/* Used as a workaround to set the background of
+	 the space between the last tab (normally the rightmost one
+	 and the end of the window. Not necessary if
+	 QTabWidget::documentMode is set to 'true',
+	 but that solution leads to a hard-coded line
+	 below the tab bar.*/
 }
 
 QTabBar {
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(31, 33, 36), stop: 1 rgb(0, 0, 0));
+	margin: 0px;
+	padding: 0px;
+	font-weight: bold;
+	color: rgb(170, 173, 164);
+	background-color: rgb(31, 31, 31);
+	font-size: 14px;
+	/* Don't put font-size in QTabBar::tab, as it causes the tab
+	 labels to be cut by the frame. */
 }
 
 QTabBar::tab {
-	font: bold;
-	background: rgba(0, 0, 0, 0%);
-	border: 1px solid rgba(0, 0, 0, 0%);
-	border-top: none;
-	border-bottom: none;
-	min-width: 10ex;
-	min-height: 56px;
-	padding: 1px 5px 1px -3px;
-	color: rgb(174, 174, 175);
-	font-size: 12px;
-	margin-left: 5px;
-	margin-right: 5px;
-}
-
-/*QTabWidget::left-corner {
-
-}*/
-
-QTabBar::tab:hover {
-
+	border: none;
+	margin: 0px;
+	padding: 1ex 2ex;
+	min-height: 28px;
 }
 
 QTabBar::tab:selected {
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(100, 101, 102, 0%), stop: 1 rgba(124, 126, 127, 0%));
-	border: 1px solid qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(0, 0, 0, 0%), stop: 0.5 rgb(188, 196, 201), stop: 1 rgba(0, 0, 0, 0%));
-	border-top: none;
-	border-bottom: none;
+	border: none;
+	margin: 0px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	color: rgb(220, 223, 214);
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 69, 72), stop: 1 rgb(86, 87, 90));
 }
 
-/*QTabBar::tab:!selected {
-
-}*/
-
-QTabBar::tab:first {
-	margin-left: 11;
+QTabBar QToolButton {
+	background-color: rgb(31, 31, 31);
 }
-
-QTabBar::tab:last {
-	margin-right: 0;
-}
-
-/*QTabBar::tab:only-one {
-
-}*/
 
 QListView {
 	font-size: 14px;
@@ -522,6 +502,22 @@ QCheckBox::indicator:checked {
 }
 
 QCheckBox::indicator:unchecked {
+	image: url(:/graphicGui/checkbox-unchecked.png);
+}
+
+QGroupBox::indicator:checked {
+	image: url(:/graphicGui/checkbox-checked.png);
+}
+
+QGroupBox::indicator:unchecked {
+	image: url(:/graphicGui/checkbox-unchecked.png);
+}
+
+QListWidget::indicator::checked {
+	image: url(:/graphicGui/checkbox-checked.png);
+}
+
+QListWidget::indicator:unchecked {
 	image: url(:/graphicGui/checkbox-unchecked.png);
 }
 

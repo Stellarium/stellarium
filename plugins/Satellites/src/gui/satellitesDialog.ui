@@ -21,7 +21,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="BarFrame" name="LocationBar">
+    <widget class="BarFrame" name="TitleBar">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -126,29 +126,32 @@
    <item>
     <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
+     </property>
+     <property name="documentMode">
+      <bool>false</bool>
      </property>
      <widget class="QWidget" name="settingsTab">
       <attribute name="title">
        <string>Settings</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_14">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QGroupBox" name="updatesGroupBox">
+        <widget class="QGroupBox" name="updatesGroup">
          <property name="title">
-          <string>Updates</string>
+          <string>Update TLE elements from Internet sources</string>
          </property>
          <property name="flat">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="checkable">
           <bool>false</bool>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_12">
           <item>
-           <widget class="QCheckBox" name="updateFromInternetCheckbox">
+           <widget class="QCheckBox" name="internetUpdatesCheckbox">
             <property name="text">
-             <string>Update TLE elements from internet sources</string>
+             <string>Update from Internet sources</string>
             </property>
            </widget>
           </item>
@@ -215,9 +218,9 @@
              </spacer>
             </item>
             <item row="2" column="2">
-             <widget class="QPushButton" name="updateNowButton">
+             <widget class="QPushButton" name="updateButton">
               <property name="text">
-               <string>Update Now</string>
+               <string>Update now</string>
               </property>
              </widget>
             </item>
@@ -227,18 +230,17 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_2">
+        <widget class="QGroupBox" name="labelsGroup">
          <property name="title">
-          <string>General Settings</string>
+          <string>Labels</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_13">
-          <item>
-           <widget class="QCheckBox" name="showLabelsCheckbox">
-            <property name="text">
-             <string>Show Satellite Labels</string>
-            </property>
-           </widget>
-          </item>
           <item>
            <layout class="QGridLayout" name="gridLayout_2">
             <item row="2" column="0">
@@ -268,6 +270,78 @@
              </widget>
             </item>
            </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="orbitLinesGroup">
+         <property name="title">
+          <string>Orbit Lines</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string># Segments:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="orbitSegmentsSpin">
+            <property name="minimum">
+             <number>3</number>
+            </property>
+            <property name="maximum">
+             <number>200</number>
+            </property>
+            <property name="value">
+             <number>60</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Fade Length:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="orbitFadeSpin">
+            <property name="maximum">
+             <number>50</number>
+            </property>
+            <property name="value">
+             <number>5</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>Length:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="orbitDurationSpin">
+            <property name="minimum">
+             <number>5</number>
+            </property>
+            <property name="maximum">
+             <number>120</number>
+            </property>
+            <property name="value">
+             <number>15</number>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -340,22 +414,22 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
-            <widget class="QPushButton" name="showButton">
-             <property name="toolTip">
-              <string>make selected satellites visible</string>
-             </property>
+            <widget class="QCheckBox" name="visibleCheckbox">
              <property name="text">
-              <string>show</string>
+              <string>Visible</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="hideButton">
-             <property name="toolTip">
-              <string>make selected satellites non-visible</string>
-             </property>
+            <widget class="QCheckBox" name="orbitCheckbox">
              <property name="text">
-              <string>hide</string>
+              <string>Orbit</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
              </property>
             </widget>
            </item>
@@ -499,11 +573,17 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <widget class="QCheckBox" name="visibleCheckbox">
-             <property name="text">
-              <string>Visible</string>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
              </property>
-            </widget>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
            <item>
             <widget class="QPushButton" name="commsButton">
@@ -520,7 +600,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset resource="../../Satellites.qrc">
+              <iconset resource="../../resources/Satellites.qrc">
                <normaloff>:/satellites/bt_comms_off.png</normaloff>
                <normalon>:/satellites/bt_comms_on.png</normalon>:/satellites/bt_comms_off.png</iconset>
              </property>
@@ -530,9 +610,9 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="saveButton">
+            <widget class="QPushButton" name="saveSatellitesButton">
              <property name="enabled">
-              <bool>false</bool>
+              <bool>true</bool>
              </property>
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -547,8 +627,8 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
-			   <normaloff>:/graphicGui/filesave.png</normaloff>:/graphicGui/filesave.png</iconset>
+              <iconset resource="../../../../data/gui/guiRes.qrc">
+               <normaloff>:/graphicGui/filesave.png</normaloff>:/graphicGui/filesave.png</iconset>
              </property>
             </widget>
            </item>
@@ -594,7 +674,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../Satellites.qrc">
+            <iconset resource="../../resources/Satellites.qrc">
              <normaloff>:/satellites/bt_add.png</normaloff>:/satellites/bt_add.png</iconset>
            </property>
           </widget>
@@ -608,7 +688,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../Satellites.qrc">
+            <iconset resource="../../resources/Satellites.qrc">
              <normaloff>:/satellites/bt_delete.png</normaloff>:/satellites/bt_delete.png</iconset>
            </property>
           </widget>
@@ -653,7 +733,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../Satellites.qrc"/>
+  <include location="../../../../data/gui/guiRes.qrc"/>
+  <include location="../../resources/Satellites.qrc"/>
  </resources>
  <connections/>
 </ui>

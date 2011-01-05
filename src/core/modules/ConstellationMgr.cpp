@@ -125,6 +125,9 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 
 	try
 	{
+		// first of all, remove constellations from the list of selected objects in StelObjectMgr, since we are going to delete them
+		deselectConstellations();
+
 		loadLinesAndArt(StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationship.fab"), conArtFile, skyCultureDir);
 
 		// load constellation names
@@ -132,9 +135,6 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 
 		// Translate constellation names for the new sky culture
 		updateI18n();
-
-		// as constellations have changed, clear out any selection and retest for match!
-		selectedObjectChange(StelModule::ReplaceSelection);
 	}
 	catch (std::runtime_error& e)
 	{
@@ -210,6 +210,28 @@ void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction a
 	}
 }
 
+void ConstellationMgr::deselectConstellations(void)
+{
+	selected.clear();
+	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	Q_ASSERT(omgr);
+	const QList<StelObjectP> currSelection = omgr->getSelectedObject();
+	if (currSelection.empty())
+	{
+		return;
+	}
+
+	QList<StelObjectP> newSelection;
+	foreach(const StelObjectP& obj, currSelection)
+	{
+		if (obj->getType() != "Constellation")
+		{
+			newSelection.push_back(obj);
+		}
+	}
+	omgr->setSelectedObject(newSelection, StelModule::ReplaceSelection);
+}
+
 void ConstellationMgr::setLinesColor(const Vec3f& c)
 {
 	Constellation::lineColor = c;
@@ -277,7 +299,6 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		delete(*iter);
 
 	asterisms.clear();
-	selected.clear();
 	Constellation *cons = NULL;
 
 	// read the file, adding a record per non-comment line
@@ -421,23 +442,38 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			Mat4d A(x1, texSizeY - y1, 0.f, 1.f, x2, texSizeY - y2, 0.f, 1.f, x3, texSizeY - y3, 0.f, 1.f, x1, texSizeY - y1, texSizeX, 1.f);
 			Mat4d X = B * A.inverse();
 
-			QVector<Vec3d> contour(4);
-			contour[0] = X * Vec3d(0., 0., 0.);
-			contour[1] = X * Vec3d(texSizeX, 0., 0.);
-			contour[2] = X * Vec3d(texSizeX, texSizeY, 0.);
-			contour[3] = X * Vec3d(0, texSizeY, 0.);
-			contour[0].normalize();
-			contour[1].normalize();
-			contour[2].normalize();
-			contour[3].normalize();
+			// Tesselate on the plan assuming a tangential projection for the image
+			static const int nbPoints=5;
+			QVector<Vec2f> texCoords;
+			texCoords.reserve(nbPoints*nbPoints*6);
+			for (int j=0;j<nbPoints;++j)
+			{
+				for (int i=0;i<nbPoints;++i)
+				{
+					texCoords << Vec2f(((float)i)/nbPoints, ((float)j)/nbPoints);
+					texCoords << Vec2f(((float)i+1.f)/nbPoints, ((float)j)/nbPoints);
+					texCoords << Vec2f(((float)i)/nbPoints, ((float)j+1.f)/nbPoints);
+					texCoords << Vec2f(((float)i+1.f)/nbPoints, ((float)j)/nbPoints);
+					texCoords << Vec2f(((float)i+1.f)/nbPoints, ((float)j+1.f)/nbPoints);
+					texCoords << Vec2f(((float)i)/nbPoints, ((float)j+1.f)/nbPoints);
+				}
+			}
 
-			QVector<Vec2f> texCoords(4);
-			texCoords[0].set(0,0);
-			texCoords[1].set(1,0);
-			texCoords[2].set(1,1);
-			texCoords[3].set(0,1);
-			cons->artPolygon.setContour(contour, texCoords);
-			Q_ASSERT(cons->artPolygon.checkValid());
+			QVector<Vec3d> contour;
+			contour.reserve(texCoords.size());
+			foreach (const Vec2f& v, texCoords)
+				contour << X * Vec3d(v[0]*texSizeX, v[1]*texSizeY, 0.);
+
+			cons->artPolygon.vertex=contour;
+			cons->artPolygon.texCoords=texCoords;
+			cons->artPolygon.primitiveType=StelVertexArray::Triangles;
+
+			Vec3d tmp(X * Vec3d(0.5*texSizeX, 0.5*texSizeY, 0.));
+			tmp.normalize();
+			Vec3d tmp2(X * Vec3d(0., 0., 0.));
+			tmp2.normalize();
+			cons->boundingCap.n=tmp;
+			cons->boundingCap.d=tmp*tmp2;
 			++readOk;
 		}
 	}
@@ -613,7 +649,7 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 
 void ConstellationMgr::updateI18n()
 {
-	StelTranslator trans("stellarium-skycultures", StelFileMgr::getLocaleDir(), StelApp::getInstance().getLocaleMgr().getSkyTranslator().getTrueLocaleName());
+	StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
@@ -715,6 +751,24 @@ void ConstellationMgr::setFlagLabels(bool b)
 		vector < Constellation * >::const_iterator iter;
 		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 			(*iter)->setFlagName(b);
+	}
+}
+
+void ConstellationMgr::setFlagIsolateSelected(bool s)
+{
+	isolateSelected = s;
+
+	// when turning off isolated selection mode, clear exisiting isolated selections.
+	if (!s)
+	{
+		vector < Constellation * >::const_iterator iter;
+		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+		{
+			(*iter)->setFlagLines(getFlagLines());
+			(*iter)->setFlagName(getFlagLabels());
+			(*iter)->setFlagArt(getFlagArt());
+			(*iter)->setFlagBoundaries(getFlagBoundaries());
+		}
 	}
 }
 

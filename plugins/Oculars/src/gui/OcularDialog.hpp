@@ -20,11 +20,12 @@
 #define _OCULARDIALOG_HPP_
 
 #include <QObject>
-#include "StelDialogOculars.hpp"
+#include "CCD.hpp"
 #include "Ocular.hpp"
+#include "PropertyBasedTableModel.hpp"
+#include "StelDialogOculars.hpp"
 #include "StelStyle.hpp"
-
-#include <QSqlRecord>
+#include "Telescope.hpp"
 
 class Ui_ocularDialogForm;
 
@@ -34,8 +35,7 @@ class QDoubleValidator;
 class QIntValidator;
 class QRegExpValidator;
 class QModelIndex;
-class QSqlRecord;
-class QSqlTableModel;
+class QStandardItemModel;
 QT_END_NAMESPACE
 
 
@@ -44,7 +44,7 @@ class OcularDialog : public StelDialogOculars
 	Q_OBJECT
 
 public:
-	OcularDialog(QSqlTableModel *CCDsTableModel, QSqlTableModel *ocularsTableModel, QSqlTableModel *telescopesTableModel);
+	OcularDialog(QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes);
 	virtual ~OcularDialog();
 	void languageChanged();
 	//! Notify that the application style changed
@@ -60,37 +60,47 @@ public slots:
 	void insertNewCCD();
 	void insertNewOcular();
 	void insertNewTelescope();
-	void CCDSelected(const QModelIndex &index);
-	void ocularSelected(const QModelIndex &index);
-	void telescopeSelected(const QModelIndex &index);
-	void updateCCD();
-	void updateOcular();
-	void updateTelescope();
 
 signals:
 	void scaleImageCircleChanged(bool state);
+	
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
+	void updateActionMapping(const QString& actionName, const QString& newMapping);
 	Ui_ocularDialogForm* ui;
 
 private slots:
+	void keyBindingTextTogglePluginChanged(const QString& newString);
+	void keyBindingTextTogglePluginConfigChanged(const QString& newString);
+	void keyBindingTextToggleCrosshairChanged(const QString& newString);
+	void keyBindingTextToggleTelradChanged(const QString& newString);
+	void keyBindingTextNextCCDChanged(const QString& newString);
+	void keyBindingTextNextOcularChanged(const QString& newString);
+	void keyBindingTextNextTelescopeChanged(const QString& newString);
+	void keyBindingTextPreviousCCDChanged(const QString& newString);
+	void keyBindingTextPreviousOcularChanged(const QString& newString);
+	void keyBindingTextPreviousTelescopeChanged(const QString& newString);
 	void scaleImageCircleStateChanged(int state);
+	void ocularIsBinocularsStateChanged(int state);
 
 private:
-	QDataWidgetMapper *CCDMapper;
-	QSqlTableModel *CCDsTableModel;
-	QDataWidgetMapper *ocularMapper;
-	QSqlTableModel *ocularsTableModel;
-	QDataWidgetMapper *telescopeMapper;
-	QSqlTableModel *telescopesTableModel;
-	QIntValidator *validatorOcularAFOV;
-	QDoubleValidator *validatorOcularEFL;
-	QDoubleValidator *validatorTelescopeDiameter;
-	QDoubleValidator *validatorTelescopeFL;
-	QRegExpValidator *validatorName;
-	QIntValidator *validatorPositiveInt;
-	QDoubleValidator *validatorPositiveDouble;
+	QDataWidgetMapper*			ccdMapper;
+	QList<CCD *>*					ccds;
+	PropertyBasedTableModel*	ccdTableModel;
+	QDataWidgetMapper*			ocularMapper;
+	QList<Ocular *>*				oculars;
+	PropertyBasedTableModel*	ocularTableModel;
+	QDataWidgetMapper*			telescopeMapper;
+	QList<Telescope *>*			telescopes;
+	PropertyBasedTableModel*	telescopeTableModel;
+	QIntValidator*					validatorOcularAFOV;
+	QDoubleValidator*				validatorOcularEFL;
+	QDoubleValidator*				validatorTelescopeDiameter;
+	QDoubleValidator*				validatorTelescopeFL;
+	QRegExpValidator*				validatorName;
+	QIntValidator*					validatorPositiveInt;
+	QDoubleValidator*				validatorPositiveDouble;
 };
 
 #endif // _OCULARDIALOG_HPP_

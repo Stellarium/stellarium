@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>399</width>
-    <height>121</height>
+    <height>125</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -28,11 +28,6 @@
   <property name="windowTitle">
    <string>Find Object</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff/>
-   </iconset>
-  </property>
   <property name="styleSheet">
    <string notr="true"/>
   </property>
@@ -44,7 +39,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="BarFrame" name="TimeBar">
+    <widget class="BarFrame" name="TitleBar">
      <property name="minimumSize">
       <size>
        <width>16</width>
@@ -222,8 +217,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../data/mainRes.qrc">
-			 <normaloff>:/graphicGui/searchButtonImage.png</normaloff>:/graphicGui/searchButtonImage.png</iconset>
+            <iconset resource="../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/searchButtonImage.png</normaloff>:/graphicGui/searchButtonImage.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -349,14 +344,14 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>CompletionLabel</class>
-   <extends>QLabel</extends>
-   <header>SearchDialog.hpp</header>
-  </customwidget>
-  <customwidget>
    <class>AngleSpinBox</class>
    <extends>QSpinBox</extends>
    <header>AngleSpinBox.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>CompletionLabel</class>
+   <extends>QLabel</extends>
+   <header>SearchDialog.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>
@@ -365,7 +360,7 @@
   <tabstop>DEAngleSpinBox</tabstop>
  </tabstops>
  <resources>
-  <include location="../../data/mainRes.qrc"/>
+  <include location="../../data/gui/guiRes.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -1,4 +1,28 @@
-0.5.3 
+0.6.4 [2010-11-18]
+Add ability to update TLE data from files.
+Better docuentation in the About tab.
+
+0.6.3 [2010-11-16]
+Update status message show how many satellites got new elements.
+Update status message includes how many were missing in update URLs.
+Add lastUpdate date to the JSON data.
+
+0.6.2 [2010-11-16]
+Refactored json load/save.
+Made per-satellite display/orbit flags persistent (save button now works).
+Bugfixes.
+
+0.6.1 [2010-11-15]
+Added global orbit lines on/off.
+Added saving of settings.
+Parameterized orbit line rendering.
+Added old satellites.json version detection.
+
+0.6.0 [2010-11-10]
+Re-implementation of orbital calculations added by Jose Luis Canales.
+Addition of orbit line rendering.
+
+0.5.3 [2010-03-31]
 Added custom style sheets.
 
 0.5.2 [2010-01-12]
@@ -10,14 +34,14 @@ Updated default satellites.json file.
 
 0.5.0 [2009-10-03]
 
-Added GUI config for general update/display options, satellite groups/lists, sources, about
+Added GUI config for general update/display options, satellite groups/lists, sources, about.
 Removed translation to fix win32 build :(
-Fixed win32 installer generator
+Fixed win32 installer generator.
 
 0.4.0 [2009-09-12]
 
-Changed getPluginInfo to work with modified core
-Put json file and icons into QT resource built into library file
-Added Hint font size config option
+Changed getPluginInfo to work with modified core.
+Put json file and icons into QT resource built into library file.
+Added Hint font size config option.
 
 

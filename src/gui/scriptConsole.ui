@@ -10,9 +10,6 @@
     <height>394</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
   <property name="styleSheet">
    <string notr="true"/>
   </property>
@@ -24,7 +21,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="BarFrame" name="LocationBar">
+    <widget class="BarFrame" name="TitleBar">
      <property name="minimumSize">
       <size>
        <width>16</width>
@@ -171,8 +168,8 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="../../data/mainRes.qrc">
-			<normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
+           <iconset resource="../../data/gui/guiRes.qrc">
+            <normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
           </property>
           <property name="shortcut">
            <string>Ctrl+O</string>
@@ -200,8 +197,8 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="../../data/mainRes.qrc">
-			<normaloff>:/graphicGui/filesave.png</normaloff>:/graphicGui/filesave.png</iconset>
+           <iconset resource="../../data/gui/guiRes.qrc">
+            <normaloff>:/graphicGui/filesave.png</normaloff>:/graphicGui/filesave.png</iconset>
           </property>
           <property name="shortcut">
            <string>Ctrl+S</string>
@@ -229,8 +226,8 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="../../data/mainRes.qrc">
-			<normaloff>:/graphicGui/closeButton.png</normaloff>:/graphicGui/closeButton.png</iconset>
+           <iconset resource="../../data/gui/guiRes.qrc">
+            <normaloff>:/graphicGui/closeButton.png</normaloff>:/graphicGui/closeButton.png</iconset>
           </property>
          </widget>
         </item>
@@ -249,8 +246,8 @@
            <string>SSC</string>
           </property>
           <property name="icon">
-           <iconset resource="../../data/mainRes.qrc">
-			<normaloff>:/graphicGui/btFlipVertical-off.png</normaloff>:/graphicGui/btFlipVertical-off.png</iconset>
+           <iconset resource="../../data/gui/guiRes.qrc">
+            <normaloff>:/graphicGui/btFlipVertical-off.png</normaloff>:/graphicGui/btFlipVertical-off.png</iconset>
           </property>
          </widget>
         </item>
@@ -269,8 +266,8 @@
            <string>STS</string>
           </property>
           <property name="icon">
-           <iconset resource="../../data/mainRes.qrc">
-			<normaloff>:/graphicGui/btFlipVertical-off.png</normaloff>:/graphicGui/btFlipVertical-off.png</iconset>
+           <iconset resource="../../data/gui/guiRes.qrc">
+            <normaloff>:/graphicGui/btFlipVertical-off.png</normaloff>:/graphicGui/btFlipVertical-off.png</iconset>
           </property>
          </widget>
         </item>
@@ -315,8 +312,8 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="../../data/mainRes.qrc">
-			<normaloff>:/graphicGui/btScriptRun-off.png</normaloff>:/graphicGui/btScriptRun-off.png</iconset>
+           <iconset resource="../../data/gui/guiRes.qrc">
+            <normaloff>:/graphicGui/btScriptRun-off.png</normaloff>:/graphicGui/btScriptRun-off.png</iconset>
           </property>
           <property name="shortcut">
            <string>Ctrl+Return</string>
@@ -347,8 +344,8 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="../../data/mainRes.qrc">
-			<normaloff>:/graphicGui/btScriptStop-off.png</normaloff>:/graphicGui/btScriptStop-off.png</iconset>
+           <iconset resource="../../data/gui/guiRes.qrc">
+            <normaloff>:/graphicGui/btScriptStop-off.png</normaloff>:/graphicGui/btScriptStop-off.png</iconset>
           </property>
           <property name="shortcut">
            <string>Ctrl+C</string>
@@ -533,7 +530,7 @@
    </item>
   </layout>
   <zorder>frame</zorder>
-  <zorder>LocationBar</zorder>
+  <zorder>TitleBar</zorder>
  </widget>
  <customwidgets>
   <customwidget>
@@ -550,7 +547,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../data/mainRes.qrc"/>
+  <include location="../../data/gui/guiRes.qrc"/>
  </resources>
  <connections/>
 </ui>

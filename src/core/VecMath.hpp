@@ -162,6 +162,7 @@ public:
 
 	// Distance in radian between two
 	inline T angle(const Vector3<T>&) const;
+	inline T angleNormalized(const Vector3<T>&) const;
 
 	inline T length() const;
 	inline T lengthSquared() const;
@@ -562,10 +563,18 @@ template<class T> Vector3<T> Vector3<T>::operator^(const Vector3<T>& b) const
 					  v[0] * b.v[1] - v[1] * b.v[0]);
 }
 
-// Angle in radian between two normalized vectors
+// Angle in radian between two vectors
 template<class T> T Vector3<T>::angle(const Vector3<T>& b) const
 {
-	return std::acos(dot(b)/sqrt(lengthSquared()*b.lengthSquared()));
+	const T cosAngle = dot(b)/sqrt(lengthSquared()*b.lengthSquared());
+	return cosAngle>=1 ? 0 : (cosAngle<=-1 ? M_PI : std::acos(cosAngle));
+}
+
+// Angle in radian between two normalized vectors
+template<class T> T Vector3<T>::angleNormalized(const Vector3<T>& b) const
+{
+	const T cosAngle = dot(b);
+	return cosAngle>=1 ? 0 : (cosAngle<=-1 ? M_PI : std::acos(cosAngle));
 }
 
 template<class T> T Vector3<T>::length() const
