@@ -111,11 +111,6 @@ public:
 		RemoveFromSelection //!< Subtract the StelObject from the current list of selected ones.
 	};
 
-	//! Indicate that the user requested selection of StelObjects.
-	//! The StelModule should then manage by themself how they handle the event
-	//! @param action define if the user requested that the objects are added to the selection or just replace it
-	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=ReplaceSelection) {Q_UNUSED(action);}
-
 	//! Load the given color style
 	//! @param section the name of the config section containing all necessary information on how to style widgets and text
 	virtual void setStelStyle(const QString& section) {Q_UNUSED(section);}
@@ -142,7 +137,6 @@ public:
 	//! @param show if true, make the configuration GUI visible.  If false, hide the config GUI if there is one.
 	//! @return true if the module has a configuration GUI, else false.
 	virtual bool configureGui(bool show=true) {Q_UNUSED(show); return false;}
-
 };
 
 #endif // _STELMODULE_HPP_
