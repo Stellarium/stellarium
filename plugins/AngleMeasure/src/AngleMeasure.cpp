@@ -54,10 +54,10 @@ StelPluginInfo AngleMeasureStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
 	info.id = "AngleMeasure";
-	info.displayedName = "Angle Measure";
+	info.displayedName = q_("Angle Measure");
 	info.authors = "Matthew Gates";
 	info.contact = "http://porpoisehead.net/";
-	info.description = "Provides an angle measurement tool";
+	info.description = q_("Provides an angle measurement tool");
 	return info;
 }
 
@@ -118,7 +118,7 @@ void AngleMeasure::init()
 	// create action for enable/disable & hook up signals
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
-	gui->addGuiActions("actionShow_Angle_Measure", N_("Angle measure"), "Ctrl+A", "Plugin Key Bindings", true, false);
+	gui->addGuiActions("actionShow_Angle_Measure", N_("Angle measure"), "Ctrl+A", N_("Plugin Key Bindings"), true, false);
 	gui->getGuiActions("actionShow_Angle_Measure")->setChecked(flagShowAngleMeasure);
 	connect(gui->getGuiActions("actionShow_Angle_Measure"), SIGNAL(toggled(bool)), this, SLOT(enableAngleMeasure(bool)));
 

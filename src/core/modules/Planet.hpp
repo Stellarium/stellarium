@@ -83,18 +83,18 @@ class Planet : public StelObject
 public:
 	friend class SolarSystem;
 	Planet(const QString& englishName,
-		   int flagLighting,
-		   double radius,
-		   double oblateness,
-		   Vec3f color,
-		   float albedo,
-		   const QString& texMapName,
-		   posFuncType _coordFunc,
-		   void* userDataPtr,
-		   OsulatingFunctType *osculatingFunc,
-		   bool closeOrbit,
-		   bool hidden,
-		   bool hasAtmosphere);
+	       int flagLighting,
+	       double radius,
+	       double oblateness,
+	       Vec3f color,
+	       float albedo,
+	       const QString& texMapName,
+	       posFuncType _coordFunc,
+	       void* userDataPtr,
+	       OsulatingFunctType *osculatingFunc,
+	       bool closeOrbit,
+	       bool hidden,
+	       bool hasAtmosphere);
 
 	~Planet();
 
@@ -129,7 +129,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods of SolarSystem object
 	//! Translate planet name using the passed translator
-	void translateName(StelTranslator& trans);
+	virtual void translateName(StelTranslator& trans);
 
 	// Draw the Planet
 	void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont);
@@ -164,7 +164,8 @@ public:
 
 	// Set the orbital elements
 	void setRotationElements(float _period, float _offset, double _epoch,
-		float _obliquity, float _ascendingNode, float _precessionRate, double _siderealPeriod);
+				 float _obliquity, float _ascendingNode,
+				 float _precessionRate, double _siderealPeriod);
 	double getRotAscendingnode(void) const {return re.ascendingNode;}
 	double getRotObliquity(void) const {return re.obliquity;}
 
@@ -210,10 +211,10 @@ public:
 	double lastOrbitJD;
 	double deltaJD;
 	double deltaOrbitJD;
-	bool orbitCached;              // whether orbit calculations are cached for drawing orbit yet
-	bool closeOrbit;               // whether to connect the beginning of the orbit line to
-								   // the end: good for elliptical orbits, bad for parabolic
-								   // and hyperbolic orbits
+	bool orbitCached;                // whether orbit calculations are cached for drawing orbit yet
+	bool closeOrbit;                 // whether to connect the beginning of the orbit line to
+					 // the end: good for elliptical orbits, bad for parabolic
+					 // and hyperbolic orbits
 
 	static Vec3f orbitColor;
 	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
@@ -237,39 +238,39 @@ protected:
 	// Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, const QFont& planetNameFont);
 
-	QString englishName;            // english planet name
-	QString nameI18;                // International translated name
-	QString texMapName;				// Texture file path
-	int flagLighting;               // Set whether light computation has to be proceed
-	RotationElements re;            // Rotation param
-	double radius;                  // Planet radius in UA
-	double oneMinusOblateness;      // (polar radius)/(equatorial radius)
-	Vec3d eclipticPos;             // Position in UA in the rectangular ecliptic coordinate system
-									// centered on the parent Planet
-	Vec3d screenPos;                // Used to store temporarily the 2D position on screen
-	Vec3d previousScreenPos;        // The position of this planet in the previous frame.
+	QString englishName;             // english planet name
+	QString nameI18;                 // International translated name
+	QString texMapName;              // Texture file path
+	int flagLighting;                // Set whether light computation has to be proceed
+	RotationElements re;             // Rotation param
+	double radius;                   // Planet radius in AU
+	double oneMinusOblateness;       // (polar radius)/(equatorial radius)
+	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system
+					 // centered on the parent Planet
+	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen
+	Vec3d previousScreenPos;         // The position of this planet in the previous frame.
 	Vec3f color;
-	float albedo;                   // Planet albedo
+	float albedo;                    // Planet albedo
 	Mat4d rotLocalToParent;
-	float axisRotation;            // Rotation angle of the Planet on it's axis
-	StelTextureSP texMap;             // Planet map texture
-	Ring* rings;                    // Planet rings
-	double distance;                // Temporary variable used to store the distance to a given point
-									// it is used for sorting while drawing
-	float sphereScale;             // Artificial scaling for better viewing
+	float axisRotation;              // Rotation angle of the Planet on it's axis
+	StelTextureSP texMap;            // Planet map texture
+	Ring* rings;                     // Planet rings
+	double distance;                 // Temporary variable used to store the distance to a given point
+					 // it is used for sorting while drawing
+	float sphereScale;               // Artificial scaling for better viewing
 	double lastJD;
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
 	posFuncType coordFunc;
 	void* userDataPtr;
 
 	OsulatingFunctType *const osculatingFunc;
-	QSharedPointer<Planet> parent;           // Planet parent i.e. sun for earth
-	QList<QSharedPointer<Planet> > satellites;      // satellites of the Planet
+	QSharedPointer<Planet> parent;   // Planet parent i.e. sun for earth
+	QList<QSharedPointer<Planet> > satellites; // satellites of the Planet
 	LinearFader hintFader;
-	LinearFader labelsFader;        // Store the current state of the label for this planet
-	bool flagLabels;                // Define whether labels should be displayed
-	bool hidden;                    // useful for fake planets used as observation positions - not drawn or labeled
-	bool atmosphere;                // Does the planet have an atmosphere?
+	LinearFader labelsFader;         // Store the current state of the label for this planet
+	bool flagLabels;                 // Define whether labels should be displayed
+	bool hidden;                     // useful for fake planets used as observation positions - not drawn or labeled
+	bool atmosphere;                 // Does the planet have an atmosphere?
 
 	static Vec3f labelColor;
 	static StelTextureSP hintCircleTex;

@@ -100,7 +100,6 @@ private:
 //! Because openGL is not thread safe, only one instance of StelPainter can exist at a time, enforcing thread safety.
 //! As a coding rule, no openGL calls should be performed when no instance of StelPainter exist.
 //! Typical usage is to create a local instance of StelPainter where drawing operations are needed.
-
 class StelPainter
 {
 public:
@@ -141,7 +140,7 @@ public:
 	void setProjector(const StelProjectorP& p);
 
 	//! Fill with black around the viewport.
-	void drawViewportShape(void);
+	void drawViewportShape();
 
 	//! Draw the string at the given position and angle with the given font.
 	//! If the gravity label flag is set, uses drawTextGravity180.
@@ -153,9 +152,9 @@ public:
 	//! @param yshift shift in pixel in the rotated y direction.
 	//! @param noGravity don't take into account the fact that the text should be written with gravity.
 	void drawText(float x, float y, const QString& str, float angleDeg=0.f,
-			  float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
+			  float xshift=0.f, float yshift=0.f, bool noGravity=true);
 	void drawText(const Vec3d& v, const QString& str, float angleDeg=0.f,
-			  float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
+			  float xshift=0.f, float yshift=0.f, bool noGravity=true);
 
 	//! Draw the given SphericalRegion.
 	//! @param region The SphericalRegion to draw.
@@ -163,11 +162,11 @@ public:
 	//! @param clippingCap if not set to NULL, tells the painter to try to clip part of the region outside the cap.
 	//! @param doSubDivise if true tesselates the object to follow projection distortions.
 	//! Typically set that to false if you think that the region is fully contained in the viewport.
-	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const SphericalCap* clippingCap=NULL, bool doSubDivise=true);
+	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const SphericalCap* clippingCap=NULL, bool doSubDivise=true, double maxSqDistortion=5.);
 
 	void drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap=NULL);
 
-	void drawSphericalTriangles(const StelVertexArray& va, bool textured, const SphericalCap* clippingCap=NULL, bool doSubDivide=true);
+	void drawSphericalTriangles(const StelVertexArray& va, bool textured, const SphericalCap* clippingCap=NULL, bool doSubDivide=true, double maxSqDistortion=5.);
 
 	//! Draw a small circle arc between points start and stop with rotation point in rotCenter.
 	//! The angle between start and stop must be < 180 deg.
@@ -333,7 +332,8 @@ public:
 	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned int* indices=NULL);
 
 	//! Draws the primitives defined in the StelVertexArray.
-	void drawStelVertexArray(const StelVertexArray& arr);
+	//! @param checkDiscontinuity will check and suppress discontinuities if necessary.
+	void drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity=true);
 
 private:
 
@@ -359,10 +359,10 @@ private:
 	//! @param edgeFlags a pointer to an array of 3 flags indicating whether the next segment is an edge.
 	//! @param texturePos a pointer to an array of 3 texture coordinates, or NULL if the triangle should not be textured.
 	void projectSphericalTriangle(const SphericalCap* clippingCap, const Vec3d* vertices, QVarLengthArray<Vec3f, 4096>* outVertices,
-			const Vec2f* texturePos=NULL, QVarLengthArray<Vec2f, 4096>* outTexturePos=NULL,int nbI=0,
+			const Vec2f* texturePos=NULL, QVarLengthArray<Vec2f, 4096>* outTexturePos=NULL, double maxSqDistortion=5., int nbI=0,
 			bool checkDisc1=true, bool checkDisc2=true, bool checkDisc3=true) const;
 
-	void drawTextGravity180(float x, float y, const QString& str, float xshift = 0, float yshift = 0) const;
+	void drawTextGravity180(float x, float y, const QString& str, float xshift = 0, float yshift = 0);
 
 	// Used by the method below
 	static QVector<Vec2f> smallCircleVertexArray;
@@ -381,6 +381,9 @@ private:
 
 	//! The main GL Context used by Stellarium.
 	static QGLContext* glContext;
+
+	//! Whether ARB_texture_non_power_of_two is supported on this card
+	static bool isNoPowerOfTwoAllowed;
 
 #ifdef STELPAINTER_GL2
 	Vec4f currentColor;

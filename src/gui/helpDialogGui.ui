@@ -16,9 +16,6 @@
     <height>250</height>
    </size>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
   <property name="styleSheet">
    <string notr="true"/>
   </property>
@@ -30,7 +27,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="BarFrame" name="HelpBar">
+    <widget class="BarFrame" name="TitleBar">
      <property name="minimumSize">
       <size>
        <width>16</width>
@@ -200,7 +197,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-help.png</normalon>
+           <normalon>:/graphicGui/tabicon-help.png</normalon>
           </iconset>
          </property>
         </item>
@@ -210,7 +207,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-info.png</normalon>
+           <normalon>:/graphicGui/tabicon-info.png</normalon>
           </iconset>
          </property>
         </item>
@@ -220,7 +217,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-logs.png</normalon>
+           <normalon>:/graphicGui/tabicon-logs.png</normalon>
           </iconset>
          </property>
         </item>
@@ -449,7 +446,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../data/mainRes.qrc"/>
+  <include location="../../data/gui/guiRes.qrc"/>
  </resources>
  <connections/>
 </ui>

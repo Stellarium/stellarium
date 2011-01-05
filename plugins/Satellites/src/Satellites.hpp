@@ -28,6 +28,7 @@
 
 #include <QDateTime>
 #include <QSharedPointer>
+#include <QVariantMap>
 
 class StelButton;
 class Planet;
@@ -42,7 +43,7 @@ class SatellitesDialog;
 typedef QSharedPointer<Satellite> SatelliteP;
 
 //! @class Satellites
-//! Satellites in low Earth orbith require different orbital calculations from planets, the moon
+//! Satellites in low Earth orbit require different orbital calculations from planets, the moon
 //! and so on.  This plugin implements the SGP4/SDP4 algorithms in Stellarium, allowing accurate
 //! prediction of the position of artificial satellites.
 class Satellites : public StelObjectModule
@@ -116,6 +117,9 @@ public:
 	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
 	void readSettingsFromConfig(void);
 
+	//! Save the settings to the main configuration file.
+	void saveSettingsToConfig(void);
+
 	//! Get a list of satellite group names.  A Satellite may be long to one or more group
 	//! e.g. "amateur" and "navigation".  Group names are arbitrary strings defined in the 
 	//! json file.  Think of them like tags.  A satellite may not belong to any group at all.
@@ -161,17 +165,27 @@ public:
 	//! The main StelStyle instance should be passed.
 	const StelStyle getModuleStyleSheet(const StelStyle& style);
 
+	//! Reads update file(s) in celestrak's .txt format, and updates
+	//! the TLE elements for exisiting satellites from them.
+	//! emits signals updateStateChanged and tleUpdateComplete
+	//! @param paths a list of paths to update files
+	//! @param deleteFiles if set, the update files are deleted after
+	//!        they are used, else they are left alone
+	void updateFromFiles(QStringList paths, bool deleteFiles=false);
+
 signals:
 	//! emitted when the update status changes, e.g. when 
 	//! an update starts, completes and so on.  Note that
-	//! on completion of an update, TleUpdateComplete is also
+	//! on completion of an update, tleUpdateComplete is also
 	//! emitted with the number of updates done.
 	//! @param state the new update state.
 	void updateStateChanged(Satellites::UpdateState state);
 
 	//! emitted after a TLE update has run.
 	//! @param updates the number of satellites updated.
-	void TleUpdateComplete(int updates);
+	//! @param total the total number of satellites in the JSON data.
+	//! @param the number of satellites in the JSON data but not found in update data
+	void tleUpdateComplete(int updates, int total, int missing);
 	
 
 public slots:
@@ -193,6 +207,24 @@ public slots:
 	//! there is new TLE data.
 	void updateTLEs(void);
 
+	//! Choose whether or not to draw orbit lines.  Each satellite has its own setting
+	//! as well, but this can be used to turn on/off all those satellites which elect to
+	//! have orbit lines all in one go.
+	//! @param b - true to turn on orbit lines, false to turn off
+	void setOrbitLinesFlag(bool b);
+
+	//! Get the current status of the orbit line rendering flag
+	bool getOrbitLinesFlag(void);
+
+	void recalculateOrbitLines(void);
+
+	//! Display a message. This is used for plugin-specific warnings and such
+	void displayMessage(const QString& message, const QString hexColor="#999999");
+	void messageTimeout(void);
+
+	//! Save the current TLE data to the default json file location.
+	void saveTleData(QString path=QString());
+
 private:
 	// if existing, delete Satellites section in main config.ini, then create with default values
 	void restoreDefaultConfigIni(void);
@@ -202,8 +234,21 @@ private:
 
 	// read the json file and create the satellites.  Removes existing satellites first if there are any
 	// this will be done once at init, and also if the defaults are reset.
-	// @return the number of satellites read from the json file
-	int readJsonFile(void);
+	void readJsonFile(void);
+
+	//! Creates a backup of the satellites.json file called satellites.json.old
+	//! @param deleteOriginal if true, the original file is removed, else not
+	//! @return true on OK, false on failure
+	bool backupJsonFile(bool deleteOriginal=false);
+
+	//! Get the version from the "creator" value in the satellites.json file
+	//! @return version string, e.g. "0.6.1"
+	const QString getJsonFileVersion(void);
+
+	bool saveTleMap(const QVariantMap& map, QString path=QString());
+	QVariantMap loadTleMap(QString path=QString());
+	void setTleMap(const QVariantMap& map);
+	QVariantMap getTleMap(void);
 
 	QString satellitesJsonPath;
 	QList<SatelliteP> satellites;
@@ -215,6 +260,7 @@ private:
 	StelButton* toolbarButton;
 	QSharedPointer<Planet> earth;
 	Vec3f defaultHintColor;
+	Vec3f defaultOrbitColor;
 	QFont labelFont;
 	
 	// variables and functions for the updater
@@ -226,10 +272,11 @@ private:
 	int currentUpdateUrlIdx;
 	int numberDownloadsComplete;
 	QTimer* updateTimer;
+	QTimer* messageTimer;
+	QList<int> messageIDs;
 	bool updatesEnabled;
 	QDateTime lastUpdate;
 	int updateFrequencyHours;
-	void updateFromFiles(void);
 
 	// GUI
 	SatellitesDialog* configDialog;

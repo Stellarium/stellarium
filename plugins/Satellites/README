@@ -10,9 +10,6 @@ go and then the Yeti seem to get them and we never hear another thing.
 
 Well, dagnammit, I thought I'd have a go.
 
-I took the SDP4/SGP4 implementation from ktrack, adapting the use of
-the library.
-
 Projection is done from the azimuth/elevation data which the SDP4/SGP4
 library handily produces.  Probably not the "right" way to do it, but 
 it works and I am lazy.
@@ -21,23 +18,17 @@ it works and I am lazy.
 TODO
 ====
 
-+ When restoring default satellites.json, deleted satellites are
-  somewhow not working right.  Something to do with deleteing a SatelliteP
-  investigate and fix.
-+ Fix data: trawl amsat site for updates and modify satellites.json
-+ Do less frequent calls to the position calculation when a satellite
-  is not near the observer
++ Detect when Satellite designations change in source data and repair 
+  JSON data accordingly.
+  - perhaps keep track of international designators from the TLE data?
 + Rendering of the actual satellite, not just a hint/label
   - calculation of brightness, eclipse etc.
   - iridium flares?
-+ Implement grouping so we can enable/disable groups, e.g.
-  - gui widget with options to show/hide groups of satellites
 + gravity labels
 
 Longer term:
 + proper 3d positions (when SolarSystem is refactored so we can see
   satellite cloud from the moon / other bodies.
-+ trails (also after SolarSystem refactor)
 
 
 BUILDING THE PLUGIN
@@ -47,7 +38,7 @@ Please note, these instructions are only directly applicable to Linux.
 Windows and OSX targets will probably require modification of the
 CMakeLists.txt file.
 
-0.  Install and build the SVN version of Stellarium as per the 
+0.  Install and build the Bazaar version of Stellarium as per the 
 instructions on the Stellarium wiki:
 
   http://stellarium.org/wiki/index.php/Compilation_on_Linux
@@ -72,13 +63,15 @@ If all goes well, the relevant files should be built and copied to your
 ACKNOWLEGDEMENTS
 ================
 
-SGP4/SDP4 implementation taken from KTrack codebase. There were some
-minor modifications to prevent conflicts with #defines and enums from 
-the core Stellarium code, but nothing significant.
+Re-write of orbital calculation routines by Jose Luis Canales, added 
+Autumn 2010.
+
+Original SGP4/SDP4 implementation taken from KTrack codebase. There were
+some minor modifications to prevent conflicts with #defines and enums 
+from the core Stellarium code, but nothing significant.
 
 The code which uses the SGP4/SDP4 library was copied more or less 
 verbatim from KTrack up to the point of getting the alt/azi and other
 data out.
-
 
 

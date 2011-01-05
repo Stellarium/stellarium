@@ -1,62 +1,87 @@
 /*
-  * Copyright (C) 2010 Bernhard Reutner-Fischer
-  *
-  * This program is free software; you can redistribute it and/or
-  * modify it under the terms of the GNU General Public License
-  * as published by the Free Software Foundation; either version 2
-  * of the License, or (at your option) any later version.
-  *
-  * This program is distributed in the hope that it will be useful,
-  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  * GNU General Public License for more details.
-  *
-  * You should have received a copy of the GNU General Public License
-  * along with this program; if not, write to the Free Software
-  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-  */
+ * portions Copyright (C) 2010 Bernhard Reutner-Fischer
+ * portions Copyright (C) 2010 Timothy Reaves
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
 
 #ifndef CCD_HPP_
 #define CCD_HPP_
 
 #include <QObject>
 #include <QString>
-#include <QSqlRecord>
+#include <QSettings>
 
-class Ocular;
+class Telescope;
 
 class CCD : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(QString name READ name WRITE setName)
+	Q_PROPERTY(int resolutionX READ resolutionX WRITE setResolutionX)
+	Q_PROPERTY(int resolutionY READ resolutionY WRITE setResolutionY)
+	Q_PROPERTY(double chipWidth READ chipWidth WRITE setChipWidth)
+	Q_PROPERTY(double chipHeight READ chipHeight WRITE setChipHeight)
+	Q_PROPERTY(double pixelWidth READ pixelWidth WRITE setPixelWidth)
+	Q_PROPERTY(double pixelHeight READ pixelHeight WRITE setPixelHeight)
 public:
-	CCD(QSqlRecord record);
+	CCD();
+	Q_INVOKABLE CCD(const QObject& other);
 	virtual ~CCD();
-	const QString getName() {return name;};
-	int getCCDID() {return CCDID;};
-	int getResolutionX() {return resolution_x;};
-	int getResolutionY() {return resolution_y;};
-	float getChipWidth() {return chip_width;};
-	float getChipHeight() {return chip_height;};
-	float getPixelWidth() {return pixel_width;};
-	float getPixelHeight() {return pixel_height;};
+	static CCD* ccdFromSettings(QSettings* theSettings, int ccdIndex);
+	static CCD* ccdModel();
 
-	float getActualFOVx(Ocular *ocular);
-	float getActualFOVy(Ocular *ocular);
+	QString name() const;
+	void setName(QString name);
+	int getCCDID();
+	int resolutionX() const;
+	void setResolutionX(int resolution);
+	int resolutionY() const;
+	void setResolutionY(int resolution);
+	double chipWidth() const;
+	void setChipWidth(double width);
+	double chipHeight() const;
+	void setChipHeight(double height);
+	double pixelWidth() const;
+	void setPixelWidth(double width);
+	double pixelHeight() const;
+	void setPixelHeight(double height);
+
+	/**
+	  * The formula for this calculation comes from the Yerkes observatory.
+	  * fov degrees = 2PI/360degrees * chipDimension mm / telescope FL mm
+	  */
+	double getActualFOVx(Telescope *telescope) const;
+	double getActualFOVy(Telescope *telescope) const;
+	QMap<int, QString> propertyMap();
 private:
-	int CCDID;
-	QString name;
+	int ccdID;
+	QString m_name;
 	//! total resolution width in pixels
-	int resolution_x;
+	int m_resolutionX;
 	//! total resolution height in pixels
-	int resolution_y;
+	int m_resolutionY;
 	//! chip width in millimeters
-	float chip_width;
+	double m_chipWidth;
 	//! chip height in millimeters
-	float chip_height;
+	double m_chipHeight;
 	//! height of 1 pixel in micron (micrometer)
-	float pixel_width;
+	double m_pixelWidth;
 	//! width of 1 pixel in micron (micrometer)
-	float pixel_height;
+	double m_pixelHeight;
 };
+
 
 #endif /* CCD_HPP_ */

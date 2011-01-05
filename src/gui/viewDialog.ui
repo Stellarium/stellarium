@@ -13,9 +13,6 @@
   <property name="font">
    <font/>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
   <property name="autoFillBackground">
    <bool>false</bool>
   </property>
@@ -30,7 +27,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="BarFrame" name="LocationBar">
+    <widget class="BarFrame" name="TitleBar">
      <property name="minimumSize">
       <size>
        <width>16</width>
@@ -292,7 +289,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-sky.png</normalon>
+           <normalon>:/graphicGui/tabicon-sky.png</normalon>
           </iconset>
          </property>
         </item>
@@ -302,7 +299,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-markings.png</normalon>
+           <normalon>:/graphicGui/tabicon-markings.png</normalon>
           </iconset>
          </property>
         </item>
@@ -312,7 +309,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-landscape.png</normalon>
+           <normalon>:/graphicGui/tabicon-landscape.png</normalon>
           </iconset>
          </property>
         </item>
@@ -322,7 +319,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-starlore.png</normalon>
+           <normalon>:/graphicGui/tabicon-starlore.png</normalon>
           </iconset>
          </property>
         </item>
@@ -1231,7 +1228,7 @@
           <property name="spacing">
            <number>0</number>
           </property>
-          <item row="0" column="0" rowspan="2">
+          <item row="0" column="0" rowspan="4">
            <widget class="QListWidget" name="landscapesListWidget">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -1256,9 +1253,6 @@
             </property>
             <property name="horizontalScrollBarPolicy">
              <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="movement">
-             <enum>QListView::Free</enum>
             </property>
            </widget>
           </item>
@@ -1292,6 +1286,22 @@
             </property>
             <property name="openExternalLinks">
              <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="pushButtonAddRemoveLandscapes">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>37</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">margin-left: 10px; margin-right: 10px; margin-bottom:10px;</string>
+            </property>
+            <property name="text">
+             <string>Add/remove landscapes...</string>
             </property>
            </widget>
           </item>
@@ -1568,6 +1578,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections/>
 </ui>

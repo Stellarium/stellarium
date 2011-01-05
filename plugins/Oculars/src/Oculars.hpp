@@ -27,15 +27,15 @@
 #include "Telescope.hpp"
 
 #include <QFont>
+#include <QSettings>
 
 #define MIN_OCULARS_INI_VERSION 0.12
 
 QT_BEGIN_NAMESPACE
-class QSqlTableModel;
 class QKeyEvent;
 class QMouseEvent;
 class QPixmap;
-class QSqlQuery;
+class QSettings;
 QT_END_NAMESPACE
 
 class StelButton;
@@ -48,6 +48,7 @@ class Oculars : public StelModule
 public:
 	Oculars();
 	virtual ~Oculars();
+	static QSettings* appSettings();
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -73,6 +74,11 @@ public slots:
 	void toggleCrosshair();
 	void toggleTelrad();
 
+	void ccdRotationMajorIncrease();
+	void ccdRotationMajorDecrease();
+	void ccdRotationMinorIncrease();
+	void ccdRotationMinorDecrease();
+	void ccdRotationReset();
 	void decrementCCDIndex();
 	void decrementOcularIndex();
 	void decrementTelescopeIndex();
@@ -89,22 +95,9 @@ private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
 	void instrumentChanged();
 	void determineMaxEyepieceAngle();
-	void loadCCDs();
-	void loadOculars();
-	void loadTelescopes();
 	void setScaleImageCircle(bool state);
 
 private:
-	//! Renders crosshairs into the viewport.
-	void drawCrosshairs();
-	
-	//! Renders the three Telrad circles, but only if not in ocular mode.
-	void drawTelrad();
-
-	//! Insures that each required table exists in the database, as well as instantiate the table models.
-	//! @return true if the DB was correctly initialized, false if it was not.
-	bool initializeDB();
-	
 	//! Set up the Qt actions needed to activate the plugin.
 	void initializeActivationActions();
 	
@@ -116,11 +109,16 @@ private:
 	//! while flagShowOculars == true.
 	void interceptMovementKey(class QKeyEvent* event);
 
-	void loadDatabaseObjects();
-
+	//! Renders crosshairs into the viewport.
+	void paintCrosshairs();
+	void paintCCDBounds();
 	//! Paint the mask into the viewport.
-	void paintMask();
-	
+	void paintOcularMask();
+	//! Renders the three Telrad circles, but only if not in ocular mode.
+	void paintTelrad();
+	void inscribeCCDBoundsInOcularMask();
+
+
 	//! Paints the text about the current object selections to the upper right hand of the screen.
 	//! Should only be called from a 'ready' state; currently from the draw() method.
 	void paintText(const StelCore* core);
@@ -133,7 +131,8 @@ private:
 	//! ends.  However, if one does exist, it opens it, and looks for the oculars_version key.  The value (or even
 	//! presence) is used to determine if the ini file is usable.  If not, it is renamed, and a new one copied over.
 	//! It does not ty to cope values over.
-	void validateIniFile();
+	//! Once there is a valid ini file, it is loaded into the settings attribute.
+	void validateAndLoadIniFile();
 
 	//! Recordd the state of the GridLinesMgr views beforehand, so that it can be reset afterwords.
 	//! @param rezoom if true, this zoom operation is starting from an already zoomed state.
@@ -144,7 +143,7 @@ private:
 	void zoomOcular();
 
 	//! A list of all the oculars defined in the ini file.  Must have at least one, or module will not run.
-	QList<CCD *> CCDs;
+	QList<CCD *> ccds;
 	QList<Ocular *> oculars;
 	QList<Telescope *> telescopes;
 	int selectedCCDIndex;
@@ -156,6 +155,7 @@ private:
 	bool flagShowCrosshairs;	//!< flag used to track in crosshairs should be rendered in the ocular view.
 	bool flagShowTelrad;		//!< If true, display the Telrad overlay.
 	int usageMessageLabelID;	//!< the id of the label showing the usage message. -1 means it's not displayed.
+	int noEntitiesLabelID;	//!< the id of the label showing that there are no telescopes or oclars. -1 means it's not displayed.
 
 	bool flagAzimuthalGrid;		//!< Flag to track if AzimuthalGrid was displayed at activation.
 	bool flagEquatorGrid;		//!< Flag to track if EquatorGrid was displayed at activation.
@@ -164,6 +164,7 @@ private:
 	bool flagEclipticLine;		//!< Flag to track if EclipticLine was displayed at activation.
 	bool flagMeridianLine;		//!< Flag to track if MeridianLine was displayed at activation.
 
+	double ccdRotationAngle;	//<! The angle to rotate the CCD bounding box. */
 	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
 	bool useMaxEyepieceAngle;	//!< Read from the ini file, whether to scale the mask based aFOV.
 
@@ -178,10 +179,6 @@ private:
 	bool visible;
 	bool ready; //!< A flag that determines that this module is usable.  If false, we won't open.
 	bool newInstrument; //!< true the first time draw is called for a new ocular or telescope, false otherwise.
-
-	QSqlTableModel *CCDsTableModel;
-	QSqlTableModel *ocularsTableModel;
-	QSqlTableModel *telescopesTableModel;
 
 	//Styles
 	QByteArray normalStyleSheet;

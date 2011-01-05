@@ -82,10 +82,10 @@ public:
 	//! Serialize the passed QVariant as JSON in a QByteArray.
 	static QByteArray write(const QVariant& jsonObject, int indentLevel=0);
 	
-	static void registerSerializerForType(QVariant::Type t, void (*func)(const QVariant&, QIODevice*, int)) {otherSerializer.insert(t, func);}
+	static void registerSerializerForType(int t, void (*func)(const QVariant&, QIODevice*, int)) {otherSerializer.insert(t, func);}
 	
 private:
-	static QHash<QVariant::Type, void (*)(const QVariant&, QIODevice*, int)> otherSerializer;
+	static QHash<int, void (*)(const QVariant&, QIODevice*, int)> otherSerializer;
 };
 
 #endif // _STELJSONPARSER_HPP_

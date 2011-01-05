@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (c) 2010 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -202,20 +203,27 @@ public:
 	//! Get the list of all the planet english names
 	QStringList getAllPlanetEnglishNames() const;
 
+	//! Reload the planets
+	void reloadPlanets();
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
 	///////////////////////////////////////////////////////////////////////////////////////
 	//! Get a hash of locale and ssystem.ini names for use with the TUI.
 	//! @return A newline delimited hash of localized:standard planet names.
 	//! Planet translated name is PARENT : NAME
+	//! \deprecated ???
 	QString getPlanetHashString();
 
 	//! Compute the position and transform matrix for every element of the solar system.
 	//! @param observerPos Position of the observer in heliocentric ecliptic frame (Required for light travel time computation).
 	//! @param date the date in JDay
+	//! \deprecated ??? In the "deprecated" section, but used in SolarSystem::init()
+	//! and StelNavigator::updateTime()
 	void computePositions(double date, const Vec3d& observerPos = Vec3d(0.));
 
 	//! Get the list of all the bodies of the solar system.
+	//! \deprecated Used in LandscapeMgr::update(), but commented out.
 	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}
 
 private slots:
@@ -237,8 +245,14 @@ private:
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const StelCore* core);
 
-	//! Load planet data from a file.
+	//! Load planet data from the Solar System configuration file.
+	//! This function attempts to load every possible instance of the
+	//! Solar System configuration file in the file paths, falling back if a
+	//! given path can't be loaded.
 	void loadPlanets();
+
+	//! Load planet data from the given file
+	bool loadPlanets(const QString& filePath);
 
 	void recreateTrails();
 

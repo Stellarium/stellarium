@@ -10,9 +10,6 @@
     <height>453</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
   <property name="styleSheet">
    <string notr="true"/>
   </property>
@@ -24,7 +21,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="BarFrame" name="LocationBar">
+    <widget class="BarFrame" name="TitleBar">
      <property name="minimumSize">
       <size>
        <width>16</width>
@@ -383,7 +380,7 @@
             <property name="title">
              <string>Control</string>
             </property>
-			<layout class="QVBoxLayout" name="verticalLayout_X">
+            <layout class="QVBoxLayout" name="verticalLayout_X">
              <property name="margin">
               <number>0</number>
              </property>
@@ -746,8 +743,8 @@
                   <string/>
                  </property>
                  <property name="icon">
-                  <iconset resource="../../data/mainRes.qrc">
-				   <normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -787,8 +784,8 @@
                 <string>Get catalog x of y</string>
                </property>
                <property name="icon">
-                <iconset resource="../../data/mainRes.qrc">
-				 <normaloff>:/graphicGui/btTimeRealtime-off.png</normaloff>:/graphicGui/btTimeRealtime-off.png</iconset>
+                <iconset resource="../../data/gui/guiRes.qrc">
+                 <normaloff>:/graphicGui/btTimeRealtime-off.png</normaloff>:/graphicGui/btTimeRealtime-off.png</iconset>
                </property>
                <property name="description">
                 <string>Download this file to view even more stars</string>
@@ -909,9 +906,9 @@
                     <string/>
                    </property>
                    <property name="icon">
-                    <iconset resource="../../data/mainRes.qrc">
-					 <normaloff>:/graphicGui/btScriptRun-on.png</normaloff>
-					 <disabledoff>:/graphicGui/btScriptRun-off.png</disabledoff>:/graphicGui/btScriptRun-on.png</iconset>
+                    <iconset resource="../../data/gui/guiRes.qrc">
+                     <normaloff>:/graphicGui/btScriptRun-on.png</normaloff>
+                     <disabledoff>:/graphicGui/btScriptRun-off.png</disabledoff>:/graphicGui/btScriptRun-on.png</iconset>
                    </property>
                   </widget>
                  </item>
@@ -927,9 +924,9 @@
                     <string/>
                    </property>
                    <property name="icon">
-                    <iconset resource="../../data/mainRes.qrc">
-					 <normaloff>:/graphicGui/btScriptStop-on.png</normaloff>
-					 <disabledoff>:/graphicGui/btScriptStop-off.png</disabledoff>:/graphicGui/btScriptStop-on.png</iconset>
+                    <iconset resource="../../data/gui/guiRes.qrc">
+                     <normaloff>:/graphicGui/btScriptStop-on.png</normaloff>
+                     <disabledoff>:/graphicGui/btScriptStop-off.png</disabledoff>:/graphicGui/btScriptStop-on.png</iconset>
                    </property>
                   </widget>
                  </item>
@@ -1080,7 +1077,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-main.png</normalon>
+           <normalon>:/graphicGui/tabicon-main.png</normalon>
           </iconset>
          </property>
         </item>
@@ -1090,7 +1087,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-navigation.png</normalon>
+           <normalon>:/graphicGui/tabicon-navigation.png</normalon>
           </iconset>
          </property>
         </item>
@@ -1100,7 +1097,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-tools.png</normalon>
+           <normalon>:/graphicGui/tabicon-tools.png</normalon>
           </iconset>
          </property>
         </item>
@@ -1110,7 +1107,7 @@
          </property>
          <property name="icon">
           <iconset>
-		   <normalon>:/graphicGui/tabicon-scripts.png</normalon>
+           <normalon>:/graphicGui/tabicon-scripts.png</normalon>
           </iconset>
          </property>
         </item>
@@ -1119,9 +1116,8 @@
           <string>Plugins</string>
          </property>
          <property name="icon">
-          <iconset>
-		   <normalon>:/graphicGui/tabicon-tools.png</normalon>
-          </iconset>
+          <iconset resource="../../data/gui/guiRes.qrc">
+           <normaloff>:/graphicGui/tabicon-plugins.png</normaloff>:/graphicGui/tabicon-plugins.png</iconset>
          </property>
         </item>
        </widget>
@@ -1140,7 +1136,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../data/mainRes.qrc"/>
+  <include location="../../data/gui/guiRes.qrc"/>
  </resources>
  <connections/>
 </ui>

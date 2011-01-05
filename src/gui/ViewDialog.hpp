@@ -26,6 +26,8 @@
 class Ui_viewDialogForm;
 class QListWidgetItem;
 
+class AddRemoveLandscapesDialog;
+
 class ViewDialog : public StelDialog
 {
 Q_OBJECT
@@ -54,6 +56,8 @@ private slots:
 	//! This function should be called repeatidly with e.g. a timer
 	void updateFromProgram();
 
+	void showAddRemoveLandscapesDialog();
+
 	void populateSkyLayersList();
 	void skyLayersSelectionChanged(const QString&);
 	void skyLayersEnabledChanged(int);
@@ -61,6 +65,8 @@ private slots:
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 private:
 	void updateSkyCultureText();
+
+	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
 };
 
 #endif // _VIEWDIALOG_HPP_

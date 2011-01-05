@@ -1,5 +1,6 @@
 src/core/modules/ConstellationMgr.cpp
 src/core/modules/StarMgr.cpp
+src/core/modules/GridLinesMgr.cpp
 src/core/modules/Landscape.cpp
 src/core/modules/LandscapeMgr.cpp
 src/core/modules/Nebula.cpp
@@ -19,6 +20,7 @@ src/gui/StelGui.cpp
 src/gui/StelGuiItems.cpp
 src/gui/ViewDialog.cpp
 src/gui/LocationDialog.cpp
+src/gui/AddRemoveLandscapesDialog.cpp
 src/main.cpp
 src/translations.h
 src/ui_dateTimeDialogGui.h
@@ -27,3 +29,12 @@ src/ui_locationDialogGui.h
 src/ui_searchDialogGui.h
 src/ui_viewDialog.h
 src/ui_configurationDialog.h
+src/ui_addRemoveLandscapesDialog.h
+plugins/AngleMeasure/src/AngleMeasure.cpp
+plugins/CompassMarks/src/CompassMarks.cpp
+plugins/Oculars/src/Oculars.cpp
+plugins/Satellites/src/Satellites.cpp
+plugins/TelescopeControl/src/TelescopeControl.cpp
+plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp
+plugins/TextUserInterface/src/TextUserInterface.cpp
+plugins/SolarSystemEditor/src/SolarSystemEditor.cpp
