@@ -37,6 +37,7 @@
 #include <QAction>
 #include <QKeyEvent>
 #include <QDebug>
+#include <QMenu>
 #include <QMouseEvent>
 #include <QtNetwork>
 #include <QPixmap>
@@ -545,6 +546,22 @@ void Oculars::decrementTelescopeIndex()
 	emit(selectedTelescopeChanged());
 }
 
+void Oculars::displayPopupMenu()
+{
+	QMenu* popup = new QMenu();
+	QAction* a1 = new QAction("Select previous ocular", popup);
+	a1->setShortcut(QKeySequence("Ctrl+["));
+	connect(a1, SIGNAL(triggered()), this, SLOT(decrementOcularIndex()));
+	QAction* a2 = new QAction("Select previous ocular", popup);
+	a2->setShortcut(QKeySequence("Ctrl+]"));
+	connect(a2, SIGNAL(triggered()), this, SLOT(incrementOcularIndex()));
+
+	popup->addAction(a1);
+	popup->addAction(a2);
+
+	popup->exec(QCursor::pos());
+}
+
 void Oculars::incrementCCDIndex()
 {
 	selectedCCDIndex++;
@@ -669,13 +686,13 @@ void Oculars::initializeActivationActions()
 	//the first time this action is checked. See:
 	//http://doc.qt.nokia.com/4.7/signalsandslots.html#signals
 
-	gui->addGuiActions("actionShow_Ocular_Window",
-							 N_("Oculars configuration window"),
-							 settings->value("bindings/toggle_config_dialog", "ALT+O").toString(),
-							 group,
-							 true);
-	connect(gui->getGuiActions("actionShow_Ocular_Window"), SIGNAL(toggled(bool)), ocularDialog, SLOT(setVisible(bool)));
-	connect(ocularDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Ocular_Window"), SLOT(setChecked(bool)));
+//	gui->addGuiActions("actionShow_Ocular_Window",
+//							 N_("Oculars configuration window"),
+//							 settings->value("bindings/toggle_config_dialog", "ALT+O").toString(),
+//							 group,
+//							 true);
+//	connect(gui->getGuiActions("actionShow_Ocular_Window"), SIGNAL(toggled(bool)), ocularDialog, SLOT(setVisible(bool)));
+//	connect(ocularDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Ocular_Window"), SLOT(setChecked(bool)));
 	gui->addGuiActions("actionShow_Ocular_Telrad",
 							 N_("Telrad circles"),
 							 settings->value("bindings/toggle_telrad", "Ctrl+B").toString(),
@@ -683,6 +700,13 @@ void Oculars::initializeActivationActions()
 							 true);
 	gui->getGuiActions("actionShow_Ocular_Telrad")->setChecked(flagShowTelrad);
 	connect(gui->getGuiActions("actionShow_Ocular_Telrad"), SIGNAL(toggled(bool)), this, SLOT(toggleTelrad()));
+
+	gui->addGuiActions("actionShow_Ocular_Menu",
+							 N_("Oculars popup menu"),
+							 "Alt+o",
+							 group,
+							 true);
+	connect(gui->getGuiActions("actionShow_Ocular_Menu"), SIGNAL(toggled(bool)), this, SLOT(displayPopupMenu()));
 
 	// Make a toolbar button
 	try {
@@ -704,6 +728,7 @@ void Oculars::initializeActivationActions()
 
 void Oculars::initializeActions()
 {
+	return;
 	static bool actions_initialized;
 	if (actions_initialized)
 		return;

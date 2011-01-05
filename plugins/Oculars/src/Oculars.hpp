@@ -86,6 +86,8 @@ public slots:
 	void incrementOcularIndex();
 	void incrementTelescopeIndex();
 
+	void displayPopupMenu();
+
 signals:
 	void selectedCCDChanged();
 	void selectedOcularChanged();
