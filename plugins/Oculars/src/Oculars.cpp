@@ -551,14 +551,13 @@ void Oculars::displayPopupMenu()
 
 	if (flagShowOculars) {
 		// We are in Oculars mode
-		QAction* action = NULL;
-
 		if (oculars.count() > 0) {
 			popup->addAction("previous ocular", this, SLOT(decrementOcularIndex()), Qt::Key_1);
 			popup->addAction("next ocular", this, SLOT(incrementOcularIndex()), Qt::Key_2);
 			QMenu* submenu = new QMenu("select ocular", popup);
 			for (int index = 0; index < oculars.count(); ++index) {
-				submenu->addAction(oculars[index]->name(), this, SLOT(incrementOcularIndex()), QKeySequence(QString("%1").arg(index)));
+				submenu->addAction(oculars[index]->name(), this, SLOT(incrementOcularIndex()),
+										 QKeySequence(QString("%1").arg(index)));
 			}
 			popup->addMenu(submenu);
 			popup->addSeparator();
@@ -569,9 +568,19 @@ void Oculars::displayPopupMenu()
 			popup->addAction("next CCD", this, SLOT(incrementCCDIndex()), Qt::Key_4);
 			QMenu* submenu = new QMenu("select CCD", popup);
 			for (int index = 0; index < ccds.count(); ++index) {
-				submenu->addAction(ccds[index]->name(), this, SLOT(incrementCCDIndex()), QKeySequence(QString("%1").arg(index)));
+				submenu->addAction(ccds[index]->name(), this, SLOT(incrementCCDIndex()),
+										 QKeySequence(QString("%1").arg(index)));
 			}
 			popup->addMenu(submenu);
+
+			submenu = new QMenu("Rotate CCD", popup);
+			popup->addAction(QString("-10") + QChar(0x00B0), this, SLOT(ccdRotationMajorDecrease()), Qt::Key_1);
+			popup->addAction(QString("-1") + QChar(0x00B0), this, SLOT(ccdRotationMinorDecrease()), Qt::Key_2);
+			popup->addAction(QString("+1") + QChar(0x00B0), this, SLOT(ccdRotationMinorIncrease()), Qt::Key_3);
+			popup->addAction(QString("+10") + QChar(0x00B0), this, SLOT(ccdRotationMajorIncrease()), Qt::Key_4);
+			popup->addAction("Reset", this, SLOT(ccdRotationReset()), Qt::Key_5);
+			popup->addMenu(submenu);
+
 			popup->addSeparator();
 		}
 
@@ -580,16 +589,23 @@ void Oculars::displayPopupMenu()
 			popup->addAction("next telescope", this, SLOT(incrementTelescopeIndex()), Qt::Key_6);
 			QMenu* submenu = new QMenu("select telescope", popup);
 			for (int index = 0; index < telescopes.count(); ++index) {
-				submenu->addAction(telescopes[index]->name(), this, SLOT(incrementTelescopeIndex()), QKeySequence(QString("%1").arg(index)));
+				submenu->addAction(telescopes[index]->name(), this, SLOT(incrementTelescopeIndex()),
+										 QKeySequence(QString("%1").arg(index)));
 			}
 			popup->addMenu(submenu);
 			popup->addSeparator();
 		}
 
 		popup->addAction("toggle crosshair", this, SLOT(toggleCrosshair()), Qt::Key_7);
+//		connect(gui->getGuiActions("actionShow_Ocular_Crosshair"), SIGNAL(toggled(bool)), this, SLOT(toggleCrosshair()));
 	} else {
 		// We are not in Oculars mode
-		popup->addAction("Configure Oculars", ocularDialog, SLOT(setVisible(bool)), Qt::Key_1);
+		QAction* action = new QAction("Configure Oculars", popup);
+		action->setCheckable(TRUE);
+		action->setShortcut(Qt::Key_1);
+		connect(action, SIGNAL(toggled(bool)), ocularDialog, SLOT(setVisible(bool)));
+		connect(ocularDialog, SIGNAL(visibleChanged(bool)), action, SLOT(setChecked(bool)));
+		popup->addAction(action);
 		popup->addAction("Toggle Telrad", this, SLOT(toggleTelrad()), Qt::Key_2);
 	}
 
@@ -710,32 +726,31 @@ void Oculars::initializeActivationActions()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 
+	//This action needs to be connected to the enableOcular() slot after
+	//the necessary button is created to prevent the button from being checked
+	//the first time this action is checked. See:
+	//http://doc.qt.nokia.com/4.7/signalsandslots.html#signals
 	gui->addGuiActions("actionShow_Ocular",
 							 N_("Ocular view"),
 							 settings->value("bindings/toggle_oculars", "Ctrl+O").toString(),
 							 N_("Plugin Key Bindings"),
 							 true);
 	gui->getGuiActions("actionShow_Ocular")->setChecked(flagShowOculars);
-	//This action needs to be connected to the enableOcular() slot after
-	//the necessary button is created to prevent the button from being checked
-	//the first time this action is checked. See:
-	//http://doc.qt.nokia.com/4.7/signalsandslots.html#signals
-
-//	gui->addGuiActions("actionShow_Ocular_Window",
-//							 N_("Oculars configuration window"),
-//							 settings->value("bindings/toggle_config_dialog", "ALT+O").toString(),
-//							 group,
-//							 true);
-//	connect(gui->getGuiActions("actionShow_Ocular_Window"), SIGNAL(toggled(bool)), ocularDialog, SLOT(setVisible(bool)));
-//	connect(ocularDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Ocular_Window"), SLOT(setChecked(bool)));
-
-//	gui->addGuiActions("actionShow_Ocular_Telrad",
-//							 N_("Telrad circles"),
-//							 settings->value("bindings/toggle_telrad", "Ctrl+B").toString(),
-//							 group,
-//							 true);
-//	gui->getGuiActions("actionShow_Ocular_Telrad")->setChecked(flagShowTelrad);
-//	connect(gui->getGuiActions("actionShow_Ocular_Telrad"), SIGNAL(toggled(bool)), this, SLOT(toggleTelrad()));
+	// Make a toolbar button
+	try {
+		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
+		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");
+		pxmapOffIcon = new QPixmap(":/ocular/bt_ocular_off.png");
+		toolbarButton = new StelButton(NULL,
+										*pxmapOnIcon,
+										*pxmapOffIcon,
+										*pxmapGlow,
+										gui->getGuiActions("actionShow_Ocular"));
+		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+	} catch (std::runtime_error& e) {
+		qWarning() << "WARNING: unable create toolbar button for Oculars plugin: " << e.what();
+	}
+	connect(gui->getGuiActions("actionShow_Ocular"), SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
 
 	gui->addGuiActions("actionShow_Ocular_Menu",
 							 N_("Oculars popup menu"),
@@ -744,118 +759,14 @@ void Oculars::initializeActivationActions()
 							 true);
 	connect(gui->getGuiActions("actionShow_Ocular_Menu"), SIGNAL(toggled(bool)), this, SLOT(displayPopupMenu()));
 
-	// Make a toolbar button
-	try {
-		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
-		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");
-		pxmapOffIcon = new QPixmap(":/ocular/bt_ocular_off.png");
-
-		toolbarButton = new StelButton(NULL,
-									   *pxmapOnIcon,
-									   *pxmapOffIcon,
-									   *pxmapGlow,
-									   gui->getGuiActions("actionShow_Ocular"));
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-	} catch (std::runtime_error& e) {
-		qWarning() << "WARNING: unable create toolbar button for Oculars plugin: " << e.what();
-	}
-	connect(gui->getGuiActions("actionShow_Ocular"), SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
 }
 
 void Oculars::initializeActions()
 {
-	return;
 	static bool actions_initialized;
 	if (actions_initialized)
 		return;
 	actions_initialized = true;
-	QString group = "Oculars Plugin";
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-
-	Q_ASSERT(gui);
-	//Bogdan: In the moment, these are not displayed in the Help dialog or
-	//anywhere, so I've removed the N_() to avoid confusing the translators
-	//TODO: Fix this when the key bindings feature is implemented
-	gui->addGuiActions("actionShow_Ocular_Crosshair",
-							 ("Toggle Crosshair"),
-							 settings->value("bindings/toggle_crosshair", "ALT+C").toString(),
-							 group, true);
-
-	gui->addGuiActions("action_CCD_increment",
-							 ("Select next sensor"),
-							 settings->value("bindings/next_ccd", "Shift+Ctrl+]").toString(),
-							 group, false);
-	gui->addGuiActions("action_CCD_decrement",
-							 ("Select previous sensor"),
-							 settings->value("bindings/prev_ccd", "Shift+Ctrl+[").toString(),
-							 group, false);
-	gui->addGuiActions("action_Ocular_increment",
-							 ("Select next ocular"),
-							 settings->value("bindings/next_ocular", "Ctrl+]").toString(),
-							 group, false);
-	gui->addGuiActions("action_Ocular_decrement",
-							 ("Select previous ocular"),
-							 settings->value("bindings/prev_ocular", "Ctrl+[").toString(),
-							 group, false);
-	gui->addGuiActions("action_Telescope_increment",
-							 ("Select next telescope"),
-							 settings->value("bindings/next_telescope", "Shift+]").toString(),
-							 group, false);
-	gui->addGuiActions("action_Telescope_decrement",
-							 ("Select previous telescope"),
-							 settings->value("bindings/prev_telescope", "Shift+[").toString(),
-							 group, false);
-	if (!settings->contains("bindings/ccd_rotation_angle_minor_decrement")) {
-		settings->setValue("bindings/ccd_rotation_angle_minor_decrement", "Ctrl+8");
-	}
-	gui->addGuiActions("action_CCDAngle_minorDecrement",
-							 ("Minor decrement CCD rotation angle"),
-							 settings->value("bindings/ccd_rotation_angle_minor_decrement", "Ctrl+8").toString(),
-							 group, false);
-	if (!settings->contains("bindings/ccd_rotation_angle_minor_increment")) {
-		settings->setValue("bindings/ccd_rotation_angle_minor_increment", "Ctrl+9");
-	}
-	gui->addGuiActions("action_CCDAngle_minorIncrement",
-							 ("Minor increment CCD rotation angle"),
-							 settings->value("bindings/ccd_rotation_angle_minor_increment", "Ctrl+9").toString(),
-							 group, false);
-	if (!settings->contains("bindings/ccd_rotation_angle_major_decrement")) {
-		settings->setValue("bindings/ccd_rotation_angle_major_decrement", "Shift+8");
-	}
-	gui->addGuiActions("action_CCDAngle_majorDecrement",
-							 ("Major decrement CCD rotation angle"),
-							 settings->value("bindings/ccd_rotation_angle_major_decrement", "Shift+8").toString(),
-							 group, false);
-	if (!settings->contains("bindings/ccd_rotation_angle_major_increment")) {
-		settings->setValue("bindings/ccd_rotation_angle_major_increment", "Shift+9");
-	}
-	gui->addGuiActions("action_CCDAngle_majorIncrement",
-							 ("Major increment CCD rotation angle"),
-							 settings->value("bindings/ccd_rotation_angle_major_increment", "Shift+9").toString(),
-							 group, false);
-	if (!settings->contains("bindings/ccd_rotation_angle_reset")) {
-		settings->setValue("bindings/ccd_rotation_angle_reset", "m");
-	}
-	gui->addGuiActions("action_CCDAngle_reset",
-							 ("Reset CCD rotation angle"),
-							 settings->value("bindings/ccd_rotation_angle_reset", "").toString(),
-							 group, false);
-	
-	connect(gui->getGuiActions("actionShow_Ocular_Crosshair"), SIGNAL(toggled(bool)), this, SLOT(toggleCrosshair()));
-
-
-	connect(gui->getGuiActions("action_CCD_increment"), SIGNAL(triggered()), this, SLOT(incrementCCDIndex()));
-	connect(gui->getGuiActions("action_CCD_decrement"), SIGNAL(triggered()), this, SLOT(decrementCCDIndex()));
-	connect(gui->getGuiActions("action_Ocular_increment"), SIGNAL(triggered()), this, SLOT(incrementOcularIndex()));
-	connect(gui->getGuiActions("action_Ocular_decrement"), SIGNAL(triggered()), this, SLOT(decrementOcularIndex()));
-	connect(gui->getGuiActions("action_Telescope_increment"), SIGNAL(triggered()), this, SLOT(incrementTelescopeIndex()));
-	connect(gui->getGuiActions("action_Telescope_decrement"), SIGNAL(triggered()), this, SLOT(decrementTelescopeIndex()));
-
-	connect(gui->getGuiActions("action_CCDAngle_majorDecrement"), SIGNAL(triggered()), this, SLOT(ccdRotationMajorDecrease()));
-	connect(gui->getGuiActions("action_CCDAngle_majorIncrement"), SIGNAL(triggered()), this, SLOT(ccdRotationMajorIncrease()));
-	connect(gui->getGuiActions("action_CCDAngle_minorDecrement"), SIGNAL(triggered()), this, SLOT(ccdRotationMinorDecrease()));
-	connect(gui->getGuiActions("action_CCDAngle_minorIncrement"), SIGNAL(triggered()), this, SLOT(ccdRotationMinorIncrease()));
-	connect(gui->getGuiActions("action_CCDAngle_reset"), SIGNAL(triggered()), this, SLOT(ccdRotationReset()));
 
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedOcularChanged()), this, SLOT(instrumentChanged()));

@@ -19,8 +19,6 @@ SET(Oculars_SRCS
   gui/OcularDialog.cpp
   gui/PropertyBasedTableModel.hpp
   gui/PropertyBasedTableModel.cpp
-  gui/StelDialogOculars.hpp
-  gui/StelDialogOculars.cpp
 )
 
 SET(Oculars_RES ../resources/Oculars.qrc)
@@ -41,7 +39,6 @@ SET(Oculars_MOC_HDRS
   Telescope.hpp
   gui/OcularDialog.hpp
   gui/PropertyBasedTableModel.hpp
-  gui/StelDialogOculars.hpp
 )
 
 # After this call, Oculars_MOC_SRCS = moc_Oculars.cxx

@@ -23,7 +23,7 @@
 #include "CCD.hpp"
 #include "Ocular.hpp"
 #include "PropertyBasedTableModel.hpp"
-#include "StelDialogOculars.hpp"
+#include "StelDialog.hpp"
 #include "StelStyle.hpp"
 #include "Telescope.hpp"
 
@@ -39,7 +39,7 @@ class QStandardItemModel;
 QT_END_NAMESPACE
 
 
-class OcularDialog : public StelDialogOculars
+class OcularDialog : public StelDialog
 {
 	Q_OBJECT
 
