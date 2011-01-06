@@ -46,6 +46,7 @@ Scenery3d::Scenery3d()
     objModel(NULL)
 {
     objModel = new OBJ();
+    zRotateMatrix = Mat4d::identity();
 }
 
 Scenery3d::~Scenery3d()
@@ -53,7 +54,7 @@ Scenery3d::~Scenery3d()
     delete objModel;
 }
 
-void Scenery3d::load(const QSettings& scenery3dIni, const QString& scenery3dID)
+void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery3dID)
 {
     id = scenery3dID;
     name = scenery3dIni.value("model/name").toString();
@@ -68,13 +69,17 @@ void Scenery3d::load(const QSettings& scenery3dIni, const QString& scenery3dID)
     orig_z = scenery3dIni.value("coord/orig_z").toReal();
     rot_z = scenery3dIni.value("coord/rot_z").toReal();
 
+    zRotateMatrix = Mat4d::rotation(Vec3d(0.0, 0.0, 1.0), (90.0 + rot_z) * M_PI / 180.0);
+}
+
+void Scenery3d::loadModel()
+{
     QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
     qDebug() << "Trying to load OBJ model: " << modelFile;
     objModel->load(modelFile.toAscii());
     objModelArrays = objModel->getStelArrays();
 
     // Rotate vertices around z axis
-    Mat4d zRotateMatrix = Mat4d::rotation(Vec3d(0.0, 0.0, 1.0), (90.0 + rot_z) * M_PI / 180.0);
     for (int i=0; i<objModelArrays.size(); i++) {
         OBJ::StelModel& stelModel = objModelArrays[i];
         for (int v=0; v<stelModel.triangleCount*3; v++) {
@@ -131,7 +136,9 @@ void Scenery3d::update(double deltaTime)
 
 void Scenery3d::drawObjModel(StelCore* core)
 {
-    if (objModelArrays.empty()) return;
+    if (objModelArrays.empty()) {
+        return;
+    }
 
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, core->getCurrentProjectionType());
     StelPainter painter(prj);
@@ -147,15 +154,21 @@ void Scenery3d::drawObjModel(StelCore* core)
 
     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
     Vec3d sunPosition = ssystem->getSun()->getAltAzPos(core->getNavigator());
+    zRotateMatrix.transfo(sunPosition);
     sunPosition.normalize();
 
-
-    static const GLfloat LightAmbient[] = {0.5f, 0.5f, 0.5f, 1.0f};
-    static const GLfloat LightDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
-    static const GLfloat LightPosition[] = {sunPosition.v[0], sunPosition.v[1], sunPosition.v[2], 0.0f};
-    glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
-    glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
+    // We define the brigthness zero when the sun is 8 degrees below the horizon.
+    float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+8.*M_PI/180.));
+    float lightBrightness;
+    if(sinSunAngleRad < -0.1/1.5 )
+            lightBrightness = 0.01;
+    else
+            lightBrightness = (0.01 + 1.5*(sinSunAngleRad+0.1/1.5));
+    const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
+    const GLfloat LightDiffuse[] = {lightBrightness, lightBrightness, lightBrightness, 1.0f};
+    const GLfloat LightPosition[] = {-sunPosition.v[0], -sunPosition.v[1], sunPosition.v[2], 0.0f}; // signs determined by experiment
+    //const GLfloat LightPosition[] = {0.0f, 1.0f, 0.0f, 0.0f};
+    //const GLfloat LightPosition[] = {0.0f, 0.0f, 0.0f, 1.0f};
 
     glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -178,7 +191,12 @@ void Scenery3d::drawObjModel(StelCore* core)
     glLoadIdentity();
     glMultMatrixd(prj->getModelViewMatrix());
     glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+
     //glRotated(this->rotation, 0.0, 1.0, 0.0);
+
+    glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
+    glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
 
     for (unsigned int i=0; i<objModelArrays.size(); i++) {
         OBJ::StelModel& stelModel = objModelArrays[i];
