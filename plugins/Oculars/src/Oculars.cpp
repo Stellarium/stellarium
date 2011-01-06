@@ -551,30 +551,46 @@ void Oculars::displayPopupMenu()
 
 	if (flagShowOculars) {
 		// We are in Oculars mode
-		QAction* action = new QAction("Select previous ocular", popup);
-		action->setShortcut(QKeySequence("1"));
-		action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
-		connect(action, SIGNAL(triggered()), this, SLOT(decrementOcularIndex()));
-		popup->addAction(action);
+		QAction* action = NULL;
 
-		action = new QAction("Select previous ocular", popup);
-		action->setShortcut(QKeySequence("2"));
-		action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
-		connect(action, SIGNAL(triggered()), this, SLOT(incrementOcularIndex()));
-		popup->addAction(action);
+		if (oculars.count() > 0) {
+			popup->addAction("previous ocular", this, SLOT(decrementOcularIndex()), Qt::Key_1);
+			popup->addAction("next ocular", this, SLOT(incrementOcularIndex()), Qt::Key_2);
+			QMenu* submenu = new QMenu("select ocular", popup);
+			for (int index = 0; index < oculars.count(); ++index) {
+				submenu->addAction(oculars[index]->name(), this, SLOT(incrementOcularIndex()), QKeySequence(QString("%1").arg(index)));
+			}
+			popup->addMenu(submenu);
+			popup->addSeparator();
+		}
+
+		if (ccds.count() > 0) {
+			popup->addAction("previous CCD", this, SLOT(decrementCCDIndex()), Qt::Key_3);
+			popup->addAction("next CCD", this, SLOT(incrementCCDIndex()), Qt::Key_4);
+			QMenu* submenu = new QMenu("select CCD", popup);
+			for (int index = 0; index < ccds.count(); ++index) {
+				submenu->addAction(ccds[index]->name(), this, SLOT(incrementCCDIndex()), QKeySequence(QString("%1").arg(index)));
+			}
+			popup->addMenu(submenu);
+			popup->addSeparator();
+		}
+
+		if (telescopes.count() > 0) {
+			popup->addAction("previous telescope", this, SLOT(decrementTelescopeIndex()), Qt::Key_5);
+			popup->addAction("next telescope", this, SLOT(incrementTelescopeIndex()), Qt::Key_6);
+			QMenu* submenu = new QMenu("select telescope", popup);
+			for (int index = 0; index < telescopes.count(); ++index) {
+				submenu->addAction(telescopes[index]->name(), this, SLOT(incrementTelescopeIndex()), QKeySequence(QString("%1").arg(index)));
+			}
+			popup->addMenu(submenu);
+			popup->addSeparator();
+		}
+
+		popup->addAction("toggle crosshair", this, SLOT(toggleCrosshair()), Qt::Key_7);
 	} else {
 		// We are not in Oculars mode
-		QAction* action = new QAction("Configure Oculars", popup);
-		action->setShortcut(QKeySequence("1"));
-		action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
-		connect(action, SIGNAL(triggered()), this, SLOT(toggleTelrad()));
-		popup->addAction(action);
-
-		action = new QAction("Toggle Telrad", popup);
-		action->setShortcut(QKeySequence("2"));
-		action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
-		connect(action, SIGNAL(triggered()), this, SLOT(toggleTelrad()));
-		popup->addAction(action);
+		popup->addAction("Configure Oculars", ocularDialog, SLOT(setVisible(bool)), Qt::Key_1);
+		popup->addAction("Toggle Telrad", this, SLOT(toggleTelrad()), Qt::Key_2);
 	}
 
 	popup->exec(QCursor::pos());
