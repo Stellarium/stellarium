@@ -21,6 +21,8 @@ SET(Scenery3d_SRCS
     PathInfo.cpp
     Util.hpp
     Util.cpp
+    Heightmap.hpp
+    Heightmap.cpp
 )
 
 SET(Scenery3d_MOC_HDRS
