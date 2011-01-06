@@ -37,7 +37,8 @@ public:
     Scenery3d();
     virtual ~Scenery3d();
 
-    void load(const QSettings& scenery3dIni, const QString& scenery3dID);
+    void loadConfig(const QSettings& scenery3dIni, const QString& scenery3dID);
+    void loadModel();
 	
     void handleKeys(QKeyEvent* e);
     void update(double deltaTime);
@@ -77,6 +78,8 @@ private:
     qreal orig_y;
     qreal orig_z;
     qreal rot_z;
+
+    Mat4d zRotateMatrix;
 };
 
 #endif

@@ -99,6 +99,7 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
 {
     if (id.isEmpty())
         return false;
+
     Scenery3d* newScenery3d = NULL;
     try
     {
@@ -112,15 +113,20 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
     if (!newScenery3d)
         return false;
 
+    LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+    lmgr->setCurrentLandscapeName(newScenery3d->getLandscapeName());
+
     if (scenery3d)
     {
         delete scenery3d;
-        scenery3d = newScenery3d;
+        scenery3d = NULL;
     }
+
+    newScenery3d->loadModel();
+
+    scenery3d = newScenery3d;
     currentScenery3dID = id;
 
-    LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-    lmgr->setCurrentLandscapeName(scenery3d->getLandscapeName());
     return true;
 }
 
@@ -196,7 +202,7 @@ Scenery3d* Scenery3dMgr::createFromFile(const QString& scenery3dFile, const QStr
     }
     else
     {
-        newScenery3d->load(scenery3dIni, scenery3dID);
+        newScenery3d->loadConfig(scenery3dIni, scenery3dID);
     }
     return newScenery3d;
 }
