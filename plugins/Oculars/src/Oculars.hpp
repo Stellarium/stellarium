@@ -103,22 +103,22 @@ private:
 	//! Set up the Qt actions needed to activate the plugin.
 	void initializeActivationActions();
 	
-	//! Set up the Qt actions used while the plugin is active.
-	void initializeActions();
-
 	//! This method is needed because the MovementMgr classes handleKeys() method consumes the event.
 	//! Because we want the ocular view to track, we must intercept & process ourselves.  Only called
 	//! while flagShowOculars == true.
 	void interceptMovementKey(class QKeyEvent* event);
 
+	//! Returns TRUE if at least one bincular is defined.
+	bool isBinocularDefined();
+
+	//! Reneders the CCD bounding box on-screen.  A telescope must be selected, or this call does nothing.
+	void paintCCDBounds();
 	//! Renders crosshairs into the viewport.
 	void paintCrosshairs();
-	void paintCCDBounds();
 	//! Paint the mask into the viewport.
 	void paintOcularMask();
 	//! Renders the three Telrad circles, but only if not in ocular mode.
 	void paintTelrad();
-	void inscribeCCDBoundsInOcularMask();
 
 
 	//! Paints the text about the current object selections to the upper right hand of the screen.
@@ -137,9 +137,9 @@ private:
 	void validateAndLoadIniFile();
 
 	//! Recordd the state of the GridLinesMgr views beforehand, so that it can be reset afterwords.
-	//! @param rezoom if true, this zoom operation is starting from an already zoomed state.
+	//! @param zoomedIn if true, this zoom operation is starting from an already zoomed state.
 	//!		False for the original state.
-	void zoom(bool rezoom);
+	void zoom(bool zoomedIn);
 
 	//! This method is called by the zoom() method, when this plugin is toggled on; it resets the zoomed view.
 	void zoomOcular();
@@ -157,7 +157,6 @@ private:
 	bool flagShowCrosshairs;	//!< flag used to track in crosshairs should be rendered in the ocular view.
 	bool flagShowTelrad;		//!< If true, display the Telrad overlay.
 	int usageMessageLabelID;	//!< the id of the label showing the usage message. -1 means it's not displayed.
-	int noEntitiesLabelID;	//!< the id of the label showing that there are no telescopes or oclars. -1 means it's not displayed.
 
 	bool flagAzimuthalGrid;		//!< Flag to track if AzimuthalGrid was displayed at activation.
 	bool flagEquatorGrid;		//!< Flag to track if EquatorGrid was displayed at activation.
