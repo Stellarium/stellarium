@@ -574,11 +574,11 @@ void Oculars::displayPopupMenu()
 			popup->addMenu(submenu);
 
 			submenu = new QMenu("Rotate CCD", popup);
-			popup->addAction(QString("-10") + QChar(0x00B0), this, SLOT(ccdRotationMajorDecrease()), Qt::Key_1);
-			popup->addAction(QString("-1") + QChar(0x00B0), this, SLOT(ccdRotationMinorDecrease()), Qt::Key_2);
-			popup->addAction(QString("+1") + QChar(0x00B0), this, SLOT(ccdRotationMinorIncrease()), Qt::Key_3);
-			popup->addAction(QString("+10") + QChar(0x00B0), this, SLOT(ccdRotationMajorIncrease()), Qt::Key_4);
-			popup->addAction("Reset", this, SLOT(ccdRotationReset()), Qt::Key_5);
+			submenu->addAction(QString("-10") + QChar(0x00B0), this, SLOT(ccdRotationMajorDecrease()), Qt::Key_1);
+			submenu->addAction(QString("-1") + QChar(0x00B0), this, SLOT(ccdRotationMinorDecrease()), Qt::Key_2);
+			submenu->addAction(QString("+1") + QChar(0x00B0), this, SLOT(ccdRotationMinorIncrease()), Qt::Key_3);
+			submenu->addAction(QString("+10") + QChar(0x00B0), this, SLOT(ccdRotationMajorIncrease()), Qt::Key_4);
+			submenu->addAction("Reset", this, SLOT(ccdRotationReset()), Qt::Key_5);
 			popup->addMenu(submenu);
 
 			popup->addSeparator();
@@ -597,7 +597,6 @@ void Oculars::displayPopupMenu()
 		}
 
 		popup->addAction("toggle crosshair", this, SLOT(toggleCrosshair()), Qt::Key_7);
-//		connect(gui->getGuiActions("actionShow_Ocular_Crosshair"), SIGNAL(toggled(bool)), this, SLOT(toggleCrosshair()));
 	} else {
 		// We are not in Oculars mode
 		QAction* action = new QAction("Configure Oculars", popup);
