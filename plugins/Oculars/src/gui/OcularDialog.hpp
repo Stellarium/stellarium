@@ -67,22 +67,12 @@ signals:
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
-	void updateActionMapping(const QString& actionName, const QString& newMapping);
 	Ui_ocularDialogForm* ui;
 
 private slots:
-	void keyBindingTextTogglePluginChanged(const QString& newString);
-	void keyBindingTextTogglePluginConfigChanged(const QString& newString);
-	void keyBindingTextToggleCrosshairChanged(const QString& newString);
-	void keyBindingTextToggleTelradChanged(const QString& newString);
-	void keyBindingTextNextCCDChanged(const QString& newString);
-	void keyBindingTextNextOcularChanged(const QString& newString);
-	void keyBindingTextNextTelescopeChanged(const QString& newString);
-	void keyBindingTextPreviousCCDChanged(const QString& newString);
-	void keyBindingTextPreviousOcularChanged(const QString& newString);
-	void keyBindingTextPreviousTelescopeChanged(const QString& newString);
+	void keyBindingTogglePluginChanged(const QString& newString);
+	void keyBindingPopupNavigatorConfigChanged(const QString& newString);
 	void scaleImageCircleStateChanged(int state);
-	void ocularIsBinocularsStateChanged(int state);
 
 private:
 	QDataWidgetMapper*			ccdMapper;
