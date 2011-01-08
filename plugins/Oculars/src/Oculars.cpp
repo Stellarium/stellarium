@@ -709,7 +709,7 @@ void Oculars::initializeActivationActions()
 
 	gui->addGuiActions("actionShow_Ocular_Menu",
 							 N_("Oculars popup menu"),
-							 "Alt+o",
+							 settings->value("bindings/popup_navigator", "Alt+O").toString(),
 							 group,
 							 true);
 	connect(gui->getGuiActions("actionShow_Ocular_Menu"), SIGNAL(toggled(bool)), this, SLOT(displayPopupMenu()));
