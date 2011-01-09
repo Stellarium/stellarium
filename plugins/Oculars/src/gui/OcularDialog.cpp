@@ -156,7 +156,6 @@ void OcularDialog::deleteSelectedCCD()
 	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
 }
 
-
 void OcularDialog::deleteSelectedOcular()
 {
 	if (ocularTableModel->rowCount() == 1) {
