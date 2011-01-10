@@ -23,7 +23,7 @@
 #include "CCD.hpp"
 #include "Ocular.hpp"
 #include "PropertyBasedTableModel.hpp"
-#include "StelDialogOculars.hpp"
+#include "StelDialog.hpp"
 #include "StelStyle.hpp"
 #include "Telescope.hpp"
 
@@ -39,7 +39,7 @@ class QStandardItemModel;
 QT_END_NAMESPACE
 
 
-class OcularDialog : public StelDialogOculars
+class OcularDialog : public StelDialog
 {
 	Q_OBJECT
 
@@ -67,22 +67,12 @@ signals:
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
-	void updateActionMapping(const QString& actionName, const QString& newMapping);
 	Ui_ocularDialogForm* ui;
 
 private slots:
-	void keyBindingTextTogglePluginChanged(const QString& newString);
-	void keyBindingTextTogglePluginConfigChanged(const QString& newString);
-	void keyBindingTextToggleCrosshairChanged(const QString& newString);
-	void keyBindingTextToggleTelradChanged(const QString& newString);
-	void keyBindingTextNextCCDChanged(const QString& newString);
-	void keyBindingTextNextOcularChanged(const QString& newString);
-	void keyBindingTextNextTelescopeChanged(const QString& newString);
-	void keyBindingTextPreviousCCDChanged(const QString& newString);
-	void keyBindingTextPreviousOcularChanged(const QString& newString);
-	void keyBindingTextPreviousTelescopeChanged(const QString& newString);
+	void keyBindingTogglePluginChanged(const QString& newString);
+	void keyBindingPopupNavigatorConfigChanged(const QString& newString);
 	void scaleImageCircleStateChanged(int state);
-	void ocularIsBinocularsStateChanged(int state);
 
 private:
 	QDataWidgetMapper*			ccdMapper;
