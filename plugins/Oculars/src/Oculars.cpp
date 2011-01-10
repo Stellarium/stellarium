@@ -37,9 +37,11 @@
 #include <QAction>
 #include <QKeyEvent>
 #include <QDebug>
+#include <QMenu>
 #include <QMouseEvent>
 #include <QtNetwork>
 #include <QPixmap>
+#include <QSignalMapper>
 
 #include <cmath>
 
@@ -89,12 +91,12 @@ Q_EXPORT_PLUGIN2(Oculars, OcularsStelPluginInterface)
 /* ********************************************************************* */
 Oculars::Oculars() : pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL)
 {
+	flagShowCCD = false;
 	flagShowOculars = false;
 	flagShowCrosshairs = false;
 	flagShowTelrad = false;
 	ready = false;
 	useMaxEyepieceAngle = true;
-	visible = false;
 
 	font.setPixelSize(14);
 	maxEyepieceAngle = 0.0;
@@ -102,12 +104,15 @@ Oculars::Oculars() : pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), too
 	ccds = QList<CCD *>();
 	oculars = QList<Ocular *>();
 	telescopes = QList<Telescope *>();
-
+	ccdRotationSignalMapper = new QSignalMapper(this);
+	ccdsSignalMapper = new QSignalMapper(this);
+	ocularsSignalMapper = new QSignalMapper(this);
+	telescopesSignalMapper = new QSignalMapper(this);
+	
 	selectedCCDIndex = -1;
 	selectedOcularIndex = -1;
 	selectedTelescopeIndex = -1;
 	
-	noEntitiesLabelID = -1;
 	usageMessageLabelID = -1;
 
 	setObjectName("Oculars");
@@ -119,6 +124,12 @@ Oculars::~Oculars()
 	delete ocularDialog;
 	ocularDialog = NULL;
 }
+
+QSettings* Oculars::appSettings()
+{
+	return settings;
+}
+
 
 /* ********************************************************************* */
 #if 0
@@ -187,8 +198,7 @@ void Oculars::draw(StelCore* core)
 {
 	if (flagShowTelrad) {
 		paintTelrad();
-	}
-	if (flagShowOculars){
+	} else if (flagShowOculars){
 		// Insure there is a selected ocular & telescope
 		if (selectedCCDIndex > ccds.count()) {
 			qWarning() << "Oculars: the selected sensor index of " << selectedCCDIndex << " is greater than the sensor count of "
@@ -212,18 +222,15 @@ void Oculars::draw(StelCore* core)
 				if (flagShowCrosshairs)  {
 					paintCrosshairs();
 				}
-				if (selectedCCDIndex > -1) {
-					inscribeCCDBoundsInOcularMask();
-				}
-			} else if (selectedCCDIndex > -1) {
-				inscribeCCDBoundsInOcularMask();
 			}
 			// Paint the information in the upper-right hand corner
 			paintText(core);
 		}
-		newInstrument = false; // Now that it's been drawn once
-	}
-	
+	} else if (flagShowCCD) {
+		paintCCDBounds();
+		// Paint the information in the upper-right hand corner
+		paintText(core);
+	}	
 }
 
 //! Determine which "layer" the plagin's drawing will happen on.
@@ -260,30 +267,118 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected()){
-		LabelMgr *labelManager = GETSTELMODULE(LabelMgr);
-
-		if (flagShowOculars)
-		{
+		if (flagShowOculars) {
 			// center the selected object in the ocular, and track.
 			movementManager->setFlagTracking(true);
-		}
-		else
-		{
+		} else {
 			// remove the usage label if it is being displayed.
-			if (usageMessageLabelID > -1)
-			{
+			if (usageMessageLabelID > -1) {
+				LabelMgr *labelManager = GETSTELMODULE(LabelMgr);
 				labelManager->setLabelShow(usageMessageLabelID, false);
 				labelManager->deleteLabel(usageMessageLabelID);
 				usageMessageLabelID = -1;
 			}
 		}
-	}
-	else if(flagShowOculars)
-	{
-		// The ocular is displayed, but no object is selected.  So don't track the stars.
+	} else if(flagShowOculars) {
+		//TODO: this is broke in Stellarium.
+		// The ocular is displayed, but no object is selected.  So don't track the stars.  We may have locked
+		// the position of the screen if the movement keys were used.  so call this to be on the safe side.
 		movementManager->setFlagLockEquPos(false);
+		// Do we need to set this?
+		// movementManager->setFlagTracking(false);
 	}
 	event->setAccepted(false);
+}
+
+void Oculars::handleKeys(QKeyEvent* event)
+{
+	if (!flagShowOculars && !flagShowCCD) {
+		return;
+	}
+	// We onle care about the arrow keys.  This flag tracks that.
+	bool consumeEvent = false;
+	
+	StelCore *core = StelApp::getInstance().getCore();
+	StelMovementMgr *movementManager = core->getMovementMgr();
+	
+	if (event->type() == QEvent::KeyPress) {
+		// Direction and zoom replacements
+		switch (event->key()) {
+			case Qt::Key_Left:
+				movementManager->turnLeft(true);
+				consumeEvent = true;
+				break;
+			case Qt::Key_Right:
+				movementManager->turnRight(true);
+				consumeEvent = true;
+				break;
+			case Qt::Key_Up:
+				if (!event->modifiers().testFlag(Qt::ControlModifier)) {
+					movementManager->turnUp(true);
+				}
+				consumeEvent = true;
+				break;
+			case Qt::Key_Down:
+				if (!event->modifiers().testFlag(Qt::ControlModifier)) {
+					movementManager->turnDown(true);
+				}
+				consumeEvent = true;
+				break;
+			case Qt::Key_PageUp:
+				movementManager->zoomIn(true);
+				consumeEvent = true;
+				break;
+			case Qt::Key_PageDown:
+				movementManager->zoomOut(true);
+				consumeEvent = true;
+				break;
+			case Qt::Key_Shift:
+				movementManager->moveSlow(true);
+				consumeEvent = true;
+				break;
+		}
+	} else {
+		// When a deplacement key is released stop mooving
+		switch (event->key()) {
+			case Qt::Key_Left:
+				movementManager->turnLeft(false);
+				consumeEvent = true;
+				break;
+			case Qt::Key_Right:
+				movementManager->turnRight(false);
+				consumeEvent = true;
+				break;
+			case Qt::Key_Up:
+				movementManager->turnUp(false);
+				consumeEvent = true;
+				break;
+			case Qt::Key_Down:
+				movementManager->turnDown(false);
+				consumeEvent = true;
+				break;
+			case Qt::Key_PageUp:
+				movementManager->zoomIn(false);
+				consumeEvent = true;
+				break;
+			case Qt::Key_PageDown:
+				movementManager->zoomOut(false);
+				consumeEvent = true;
+				break;
+			case Qt::Key_Shift:
+				movementManager->moveSlow(false);
+				consumeEvent = true;
+				break;
+		}
+		if (consumeEvent) {
+			// We don't want to re-center the object; just hold the current position.
+			movementManager->setFlagLockEquPos(true);
+		}
+	}
+	if (consumeEvent) {
+		event->accept();
+	} else {
+		event->setAccepted(false);
+	}
 }
 
 void Oculars::init()
@@ -365,14 +460,12 @@ void Oculars::init()
 	//Load the module's custom style sheets
 	QFile styleSheetFile;
 	styleSheetFile.setFileName(":/ocular/normalStyle.css");
-	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
-	{
+	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text)) {
 		normalStyleSheet = styleSheetFile.readAll();
 	}
 	styleSheetFile.close();
 	styleSheetFile.setFileName(":/ocular/nightStyle.css");
-	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
-	{
+	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text)) {
 		nightStyleSheet = styleSheetFile.readAll();
 	}
 	styleSheetFile.close();
@@ -394,10 +487,7 @@ void Oculars::setStelStyle(const QString&)
 void Oculars::determineMaxEyepieceAngle()
 {
 	if (ready) {
-		QListIterator<Ocular *> ocularIterator(oculars);
-		while (ocularIterator.hasNext()) {
-			Ocular *ocular = ocularIterator.next();
-
+		foreach (Ocular* ocular, oculars) {
 			if (ocular->appearentFOV() > maxEyepieceAngle) {
 				maxEyepieceAngle = ocular->appearentFOV();
 			}
@@ -411,8 +501,10 @@ void Oculars::determineMaxEyepieceAngle()
 
 void Oculars::instrumentChanged()
 {
-	newInstrument = true;
-	zoom(true);
+	// We only zoom if in ocular mode.
+	if (flagShowOculars) {
+		zoom(true);
+	}
 }
 
 void Oculars::setScaleImageCircle(bool state)
@@ -423,33 +515,27 @@ void Oculars::setScaleImageCircle(bool state)
 	useMaxEyepieceAngle = state;
 }
 
+void Oculars::setScreenFOVForCCD()
+{
+	if (selectedCCDIndex > -1 && selectedTelescopeIndex > -1) {
+		StelCore *core = StelApp::getInstance().getCore();
+		StelMovementMgr *movementManager = core->getMovementMgr();
+		double actualFOVx = ccds[selectedCCDIndex]->getActualFOVx(telescopes[selectedTelescopeIndex]);
+		double actualFOVy = ccds[selectedCCDIndex]->getActualFOVy(telescopes[selectedTelescopeIndex]);
+		if (actualFOVx < actualFOVy) {
+			actualFOVx = actualFOVy;
+		}
+		movementManager->setFlagTracking(true);
+		movementManager->zoomTo(actualFOVx * 3.0, 0.0);
+	}
+}
+
 /* ********************************************************************* */
 #if 0
 #pragma mark -
 #pragma mark Slots Methods
 #endif
 /* ********************************************************************* */
-void Oculars::ccdRotationMajorIncrease()
-{
-	ccdRotationAngle += 10.0;
-}
-
-void Oculars::ccdRotationMajorDecrease()
-{
-	ccdRotationAngle -= 10.0;
-}
-
-
-void Oculars::ccdRotationMinorIncrease()
-{
-	ccdRotationAngle += 1.0;
-}
-
-void Oculars::ccdRotationMinorDecrease()
-{
-	ccdRotationAngle -= 1.0;
-}
-
 void Oculars::ccdRotationReset()
 {
 	ccdRotationAngle = 0.0;
@@ -457,6 +543,12 @@ void Oculars::ccdRotationReset()
 
 void Oculars::enableOcular(bool enableOcularMode)
 {
+	// If showing a CCD, cancel it.
+	if (flagShowCCD) {
+		flagShowCCD = false;
+		selectedCCDIndex = -1;
+	}
+	
 	if (enableOcularMode) {
 		// Check to insure that we have enough oculars & telescopes, as they may have been edited in the config dialog
 		if (oculars.count() == 0) {
@@ -473,8 +565,7 @@ void Oculars::enableOcular(bool enableOcularMode)
 		}
 	}
 
-
-	if (!ready  || selectedOcularIndex == -1 ||  selectedTelescopeIndex == -1) {
+	if (!ready  || selectedOcularIndex == -1 ||  (selectedTelescopeIndex == -1 && !isBinocularDefined())) {
 		qDebug() << "The Oculars module has been disabled.";
 		return;
 	}
@@ -512,10 +603,6 @@ void Oculars::enableOcular(bool enableOcularMode)
 			zoom(false);
 		}
 	}
-	if (flagShowOculars) {
-		// Initialize those actions that should only be enabled when in ocular mode.
-		initializeActions();
-	}
 }
 
 void Oculars::decrementCCDIndex()
@@ -533,7 +620,20 @@ void Oculars::decrementOcularIndex()
 	if (selectedOcularIndex == -1) {
 		selectedOcularIndex = oculars.count() - 1;
 	}
-	emit(selectedOcularChanged());
+	// validate the new selection
+	if (selectedOcularIndex > -1 && !oculars[selectedOcularIndex]->isBinoculars()) {
+		if ( selectedTelescopeIndex == -1 && telescopes.count() == 0) {
+			// reject the change
+			selectedOcularIndex++;
+		} else if (selectedTelescopeIndex == -1) {
+			selectedTelescopeIndex = 0;
+			emit(selectedOcularChanged());
+		} else {
+			emit(selectedOcularChanged());
+		}
+	} else {
+		emit(selectedOcularChanged());
+	}
 }
 
 void Oculars::decrementTelescopeIndex()
@@ -543,6 +643,121 @@ void Oculars::decrementTelescopeIndex()
 		selectedTelescopeIndex = telescopes.count() - 1;
 	}
 	emit(selectedTelescopeChanged());
+}
+
+void Oculars::displayPopupMenu()
+{
+	QMenu* popup = new QMenu();
+
+	if (flagShowOculars) {
+		// We are in Oculars mode
+		// We want to show all of the Oculars, and if the current ocular is not a binocular, we will also show the telescopes.
+		if (oculars.count() > 0) {
+			popup->addAction("previous ocular", this, SLOT(decrementOcularIndex()), Qt::Key_1);
+			popup->addAction("next ocular", this, SLOT(incrementOcularIndex()), Qt::Key_2);
+			QMenu* submenu = new QMenu("select ocular", popup);
+			int availableOcularCount = 0;
+			for (int index = 0; index < oculars.count(); ++index) {
+				if (selectedTelescopeIndex == -1) {
+					if (oculars[index]->isBinoculars()) {
+						QAction* action = submenu->addAction(oculars[index]->name(), ocularsSignalMapper, SLOT(map()), 
+																		 QKeySequence(QString("%1").arg(availableOcularCount++)));
+						ocularsSignalMapper->setMapping(action, QString("%1").arg(index));
+					}
+				} else {
+					QAction* action = submenu->addAction(oculars[index]->name(), ocularsSignalMapper, SLOT(map()), 
+																	 QKeySequence(QString("%1").arg(availableOcularCount++)));
+					ocularsSignalMapper->setMapping(action, QString("%1").arg(index));
+				}
+			}
+			popup->addMenu(submenu);
+			popup->addSeparator();
+		}
+
+		if (telescopes.count() > 0 && (selectedOcularIndex > -1 && !oculars[selectedOcularIndex]->isBinoculars())) {
+			popup->addAction("previous telescope", this, SLOT(decrementTelescopeIndex()), Qt::Key_3);
+			popup->addAction("next telescope", this, SLOT(incrementTelescopeIndex()), Qt::Key_4);
+			QMenu* submenu = new QMenu("select telescope", popup);
+			for (int index = 0; index < telescopes.count(); ++index) {
+				QAction* action = submenu->addAction(telescopes[index]->name(), telescopesSignalMapper, SLOT(map()), 
+																 QKeySequence(QString("%1").arg(index)));
+				telescopesSignalMapper->setMapping(action, QString("%1").arg(index));
+			}
+			popup->addMenu(submenu);
+			popup->addSeparator();
+		}
+
+		popup->addAction("toggle crosshair", this, SLOT(toggleCrosshair()), Qt::Key_5);
+	} else {
+		// We are not in Oculars mode
+		// We want to show the CCD's, and if a CCD is selected, the Telescopes (as a CCD requires a telescope), and the general menu items.
+		QAction* action = new QAction("Configure Oculars", popup);
+		action->setCheckable(TRUE);
+		action->setShortcut(Qt::Key_1);
+		connect(action, SIGNAL(toggled(bool)), ocularDialog, SLOT(setVisible(bool)));
+		connect(ocularDialog, SIGNAL(visibleChanged(bool)), action, SLOT(setChecked(bool)));
+		popup->addAction(action);
+		popup->addSeparator();
+
+		popup->addAction("Toggle CCD", this, SLOT(toggleCCD()), Qt::Key_2);
+		popup->addAction("Toggle Telrad", this, SLOT(toggleTelrad()), Qt::Key_3);
+
+		popup->addSeparator();
+		if (selectedCCDIndex > -1 && selectedTelescopeIndex > -1) {
+			popup->addAction("previous CCD", this, SLOT(decrementCCDIndex()), Qt::Key_4);
+			popup->addAction("next CCD", this, SLOT(incrementCCDIndex()), Qt::Key_5);
+			QMenu* submenu = new QMenu("select CCD", popup);
+			for (int index = 0; index < ccds.count(); ++index) {
+				QAction* action = submenu->addAction(ccds[index]->name(), ccdsSignalMapper, SLOT(map()), 
+																 QKeySequence(QString("%1").arg(index)));
+				ccdsSignalMapper->setMapping(action, QString("%1").arg(index));
+			}
+			popup->addMenu(submenu);
+			
+			submenu = new QMenu("Rotate CCD", popup);
+			QAction* rotateAction = NULL;
+			rotateAction = submenu->addAction(QString("-90") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()), Qt::Key_1);
+			ccdRotationSignalMapper->setMapping(rotateAction, QString("-90"));
+			rotateAction = submenu->addAction(QString("-45") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()), Qt::Key_2);
+			ccdRotationSignalMapper->setMapping(rotateAction, QString("-45"));
+			rotateAction = submenu->addAction(QString("-15") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()), Qt::Key_3);
+			ccdRotationSignalMapper->setMapping(rotateAction, QString("-15"));
+			rotateAction = submenu->addAction(QString("-5") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()), Qt::Key_4);
+			ccdRotationSignalMapper->setMapping(rotateAction, QString("-5"));
+			rotateAction = submenu->addAction(QString("-1") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()), Qt::Key_5);
+			ccdRotationSignalMapper->setMapping(rotateAction, QString("-1"));
+			rotateAction = submenu->addAction(QString("+1") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()), Qt::Key_6);
+			ccdRotationSignalMapper->setMapping(rotateAction, QString("1"));
+			rotateAction = submenu->addAction(QString("+5") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()), Qt::Key_7);
+			ccdRotationSignalMapper->setMapping(rotateAction, QString("5"));
+			rotateAction = submenu->addAction(QString("+15") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()), Qt::Key_8);
+			ccdRotationSignalMapper->setMapping(rotateAction, QString("15"));
+			rotateAction = submenu->addAction(QString("+45") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()), Qt::Key_9);
+			ccdRotationSignalMapper->setMapping(rotateAction, QString("45"));
+			rotateAction = submenu->addAction(QString("+90") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()), Qt::Key_0);
+			ccdRotationSignalMapper->setMapping(rotateAction, QString("90"));
+			rotateAction = submenu->addAction("Reset", this, SLOT(ccdRotationReset()), Qt::Key_R);
+			popup->addMenu(submenu);
+			
+			popup->addSeparator();
+		}
+		if (selectedCCDIndex > -1 && telescopes.count() > 0) {
+			popup->addAction("previous telescope", this, SLOT(decrementTelescopeIndex()), Qt::Key_6);
+			popup->addAction("next telescope", this, SLOT(incrementTelescopeIndex()), Qt::Key_7);
+			QMenu* submenu = new QMenu("select telescope", popup);
+			for (int index = 0; index < telescopes.count(); ++index) {
+				QAction* action = submenu->addAction(telescopes[index]->name(), telescopesSignalMapper, SLOT(map()), 
+																 QKeySequence(QString("%1").arg(index)));
+				telescopesSignalMapper->setMapping(action, QString("%1").arg(index));
+			}
+			popup->addMenu(submenu);
+			popup->addSeparator();
+		}
+		
+	}
+
+	popup->exec(QCursor::pos());
+	delete popup;
 }
 
 void Oculars::incrementCCDIndex()
@@ -560,7 +775,20 @@ void Oculars::incrementOcularIndex()
 	if (selectedOcularIndex == oculars.count()) {
 		selectedOcularIndex = 0;
 	}
-	emit(selectedOcularChanged());
+	// validate the new selection
+	if (selectedOcularIndex > -1 && !oculars[selectedOcularIndex]->isBinoculars()) {
+		if ( selectedTelescopeIndex == -1 && telescopes.count() == 0) {
+			// reject the change
+			selectedOcularIndex++;
+		} else if (selectedTelescopeIndex == -1) {
+			selectedTelescopeIndex = 0;
+			emit(selectedOcularChanged());
+		} else {
+			emit(selectedOcularChanged());
+		}
+	} else {
+		emit(selectedOcularChanged());
+	}
 }
 
 void Oculars::incrementTelescopeIndex()
@@ -570,6 +798,80 @@ void Oculars::incrementTelescopeIndex()
 		selectedTelescopeIndex = 0;
 	}
 	emit(selectedTelescopeChanged());
+}
+
+void Oculars::rotateCCD(QString amount)
+{
+	ccdRotationAngle += amount.toInt();
+}
+
+void Oculars::selectCCDAtIndex(QString indexString)
+{
+	int index = indexString.toInt();
+	if (index > -2 && index < ccds.count()) {
+		selectedCCDIndex = index;
+		emit(selectedCCDChanged());
+	}
+}
+
+void Oculars::selectOcularAtIndex(QString indexString)
+{
+	int index = indexString.toInt();
+
+	// validate the new selection
+	if (oculars[index]->isBinoculars()) {
+		selectedOcularIndex = index;
+		emit(selectedOcularChanged());
+	} else {
+		if ( selectedTelescopeIndex == -1 && telescopes.count() == 0) {
+			// reject the change
+		} else if (selectedTelescopeIndex == -1) {
+			selectedTelescopeIndex = 0;
+			selectedOcularIndex = index;
+			emit(selectedOcularChanged());
+		}
+	}
+}
+
+void Oculars::selectTelescopeAtIndex(QString indexString)
+{
+	int index = indexString.toInt();
+	if (index > -2 && index < telescopes.count()) {
+		selectedTelescopeIndex = index;
+		emit(selectedTelescopeChanged());
+	}
+}
+
+void Oculars::toggleCCD()
+{
+	StelCore *core = StelApp::getInstance().getCore();
+	StelMovementMgr *movementManager = core->getMovementMgr();
+	if (flagShowCCD) {
+		flagShowCCD = false;
+		selectedCCDIndex = -1;
+		movementManager->zoomTo(movementManager->getInitFov());
+		movementManager->setFlagTracking(false);
+	} else {
+		// Check to insure that we have enough CCDs & telescopes, as they may have been edited in the config dialog
+		if (ccds.count() == 0) {
+			selectedCCDIndex = -1;
+			qDebug() << "No CCDs found";
+		} else if (ccds.count() > 0 && selectedCCDIndex == -1) {
+			selectedCCDIndex = 0;
+		}
+		if (telescopes.count() == 0) {
+			selectedTelescopeIndex = -1;
+			qDebug() << "No telescopes found";
+		} else if (telescopes.count() > 0 && selectedTelescopeIndex == -1) {
+			selectedTelescopeIndex = 0;
+		}		
+		if (!ready  || selectedCCDIndex == -1 || selectedTelescopeIndex == -1 ) {
+			qDebug() << "The Oculars module has been disabled.";
+			return;
+		}
+		flagShowCCD = true;
+		setScreenFOVForCCD();
+	}
 }
 
 void Oculars::toggleCrosshair()
@@ -588,66 +890,6 @@ void Oculars::toggleTelrad()
 #pragma mark Private Methods
 #endif
 /* ********************************************************************* */
-void Oculars::paintCrosshairs()
-{
-	const StelProjectorP projector = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
-	StelCore *core = StelApp::getInstance().getCore();
-	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-	// Center of screen
-	Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
-					   projector->getViewportPosY()+projector->getViewportHeight()/2);
-	GLdouble length = 0.5 * params.viewportFovDiameter;
-	// See if we need to scale the length
-	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0) {
-		length = oculars[selectedOcularIndex]->appearentFOV() * length / maxEyepieceAngle;
-	}
-
-	// Draw the lines
-	StelPainter painter(projector);
-	painter.setColor(0.77, 0.14, 0.16, 1);
-	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0], centerScreen[1] + length);
-	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0], centerScreen[1] - length);
-	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0] + length, centerScreen[1]);
-	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0] - length, centerScreen[1]);
-}
-
-void Oculars::paintTelrad()
-{
-	if (!flagShowOculars) {
-		const StelProjectorP projector = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
-
-
-		StelCore *core = StelApp::getInstance().getCore();
-		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-
-		// StelPainter drawing
-		StelPainter painter(projector);
-		painter.setColor(0.77, 0.14, 0.16, 1.0);
-		Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
-						   projector->getViewportPosY()+projector->getViewportHeight()/2);
-		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (0.5));
-		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (2.0));
-		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (4.0));
-
-//		// Direct drawing
-//		glDisable(GL_BLEND);
-//		glColor3f(0.f,0.f,0.f);
-//		glPushMatrix();
-//		glTranslated(params.viewportCenter[0], params.viewportCenter[1], 0.0);
-//		GLUquadricObj *quadric = gluNewQuadric();		
-//		// the gray circle
-//		glColor4f(0.77, 0.14, 0.16, 0.5);
-//		float radius = 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (0.5);
-//		gluDisk(quadric, radius - 1.0, radius, 256, 1);
-//		radius = 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (2.0);
-//		gluDisk(quadric, radius - 1.0, radius, 256, 1);
-//		radius = 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (4.0);
-//		gluDisk(quadric, radius - 1.0, radius, 256, 1);
-//		gluDeleteQuadric(quadric);
-//		glPopMatrix();		
-	}
-}
-
 void Oculars::initializeActivationActions()
 {
 	// TRANSLATORS: Title of a group of key bindings in the Help window
@@ -658,313 +900,67 @@ void Oculars::initializeActivationActions()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 
+	//This action needs to be connected to the enableOcular() slot after
+	//the necessary button is created to prevent the button from being checked
+	//the first time this action is checked. See:
+	//http://doc.qt.nokia.com/4.7/signalsandslots.html#signals
 	gui->addGuiActions("actionShow_Ocular",
 							 N_("Ocular view"),
 							 settings->value("bindings/toggle_oculars", "Ctrl+O").toString(),
 							 N_("Plugin Key Bindings"),
 							 true);
 	gui->getGuiActions("actionShow_Ocular")->setChecked(flagShowOculars);
-	//This action needs to be connected to the enableOcular() slot after
-	//the necessary button is created to prevent the button from being checked
-	//the first time this action is checked. See:
-	//http://doc.qt.nokia.com/4.7/signalsandslots.html#signals
-
-	gui->addGuiActions("actionShow_Ocular_Window",
-							 N_("Oculars configuration window"),
-							 settings->value("bindings/toggle_config_dialog", "ALT+O").toString(),
-							 group,
-							 true);
-	connect(gui->getGuiActions("actionShow_Ocular_Window"), SIGNAL(toggled(bool)), ocularDialog, SLOT(setVisible(bool)));
-	connect(ocularDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Ocular_Window"), SLOT(setChecked(bool)));
-	gui->addGuiActions("actionShow_Ocular_Telrad",
-							 N_("Telrad circles"),
-							 settings->value("bindings/toggle_telrad", "Ctrl+B").toString(),
-							 group,
-							 true);
-	gui->getGuiActions("actionShow_Ocular_Telrad")->setChecked(flagShowTelrad);
-	connect(gui->getGuiActions("actionShow_Ocular_Telrad"), SIGNAL(toggled(bool)), this, SLOT(toggleTelrad()));
-
 	// Make a toolbar button
 	try {
 		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
 		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");
 		pxmapOffIcon = new QPixmap(":/ocular/bt_ocular_off.png");
-
 		toolbarButton = new StelButton(NULL,
-									   *pxmapOnIcon,
-									   *pxmapOffIcon,
-									   *pxmapGlow,
-									   gui->getGuiActions("actionShow_Ocular"));
+										*pxmapOnIcon,
+										*pxmapOffIcon,
+										*pxmapGlow,
+										gui->getGuiActions("actionShow_Ocular"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable create toolbar button for Oculars plugin: " << e.what();
 	}
 	connect(gui->getGuiActions("actionShow_Ocular"), SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
-}
 
-void Oculars::initializeActions()
-{
-	static bool actions_initialized;
-	if (actions_initialized)
-		return;
-	actions_initialized = true;
-	QString group = "Oculars Plugin";
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-
-	Q_ASSERT(gui);
-	//Bogdan: In the moment, these are not displayed in the Help dialog or
-	//anywhere, so I've removed the N_() to avoid confusing the translators
-	//TODO: Fix this when the key bindings feature is implemented
-	gui->addGuiActions("actionShow_Ocular_Crosshair",
-							 ("Toggle Crosshair"),
-							 settings->value("bindings/toggle_crosshair", "ALT+C").toString(),
-							 group, true);
-
-	gui->addGuiActions("action_CCD_increment",
-							 ("Select next sensor"),
-							 settings->value("bindings/next_ccd", "Shift+Ctrl+]").toString(),
-							 group, false);
-	gui->addGuiActions("action_CCD_decrement",
-							 ("Select previous sensor"),
-							 settings->value("bindings/prev_ccd", "Shift+Ctrl+[").toString(),
-							 group, false);
-	gui->addGuiActions("action_Ocular_increment",
-							 ("Select next ocular"),
-							 settings->value("bindings/next_ocular", "Ctrl+]").toString(),
-							 group, false);
-	gui->addGuiActions("action_Ocular_decrement",
-							 ("Select previous ocular"),
-							 settings->value("bindings/prev_ocular", "Ctrl+[").toString(),
-							 group, false);
-	gui->addGuiActions("action_Telescope_increment",
-							 ("Select next telescope"),
-							 settings->value("bindings/next_telescope", "Shift+]").toString(),
-							 group, false);
-	gui->addGuiActions("action_Telescope_decrement",
-							 ("Select previous telescope"),
-							 settings->value("bindings/prev_telescope", "Shift+[").toString(),
-							 group, false);
-	if (!settings->contains("bindings/ccd_rotation_angle_minor_decrement")) {
-		settings->setValue("bindings/ccd_rotation_angle_minor_decrement", "Ctrl+8");
-	}
-	gui->addGuiActions("action_CCDAngle_minorDecrement",
-							 ("Minor decrement CCD rotation angle"),
-							 settings->value("bindings/ccd_rotation_angle_minor_decrement", "Ctrl+8").toString(),
-							 group, false);
-	if (!settings->contains("bindings/ccd_rotation_angle_minor_increment")) {
-		settings->setValue("bindings/ccd_rotation_angle_minor_increment", "Ctrl+9");
-	}
-	gui->addGuiActions("action_CCDAngle_minorIncrement",
-							 ("Minor increment CCD rotation angle"),
-							 settings->value("bindings/ccd_rotation_angle_minor_increment", "Ctrl+9").toString(),
-							 group, false);
-	if (!settings->contains("bindings/ccd_rotation_angle_major_decrement")) {
-		settings->setValue("bindings/ccd_rotation_angle_major_decrement", "Shift+8");
-	}
-	gui->addGuiActions("action_CCDAngle_majorDecrement",
-							 ("Major decrement CCD rotation angle"),
-							 settings->value("bindings/ccd_rotation_angle_major_decrement", "Shift+8").toString(),
-							 group, false);
-	if (!settings->contains("bindings/ccd_rotation_angle_major_increment")) {
-		settings->setValue("bindings/ccd_rotation_angle_major_increment", "Shift+9");
-	}
-	gui->addGuiActions("action_CCDAngle_majorIncrement",
-							 ("Major increment CCD rotation angle"),
-							 settings->value("bindings/ccd_rotation_angle_major_increment", "Shift+9").toString(),
-							 group, false);
-	if (!settings->contains("bindings/ccd_rotation_angle_reset")) {
-		settings->setValue("bindings/ccd_rotation_angle_reset", "m");
-	}
-	gui->addGuiActions("action_CCDAngle_reset",
-							 ("Reset CCD rotation angle"),
-							 settings->value("bindings/ccd_rotation_angle_reset", "").toString(),
-							 group, false);
-	
-	connect(gui->getGuiActions("actionShow_Ocular_Crosshair"), SIGNAL(toggled(bool)), this, SLOT(toggleCrosshair()));
-
-
-	connect(gui->getGuiActions("action_CCD_increment"), SIGNAL(triggered()), this, SLOT(incrementCCDIndex()));
-	connect(gui->getGuiActions("action_CCD_decrement"), SIGNAL(triggered()), this, SLOT(decrementCCDIndex()));
-	connect(gui->getGuiActions("action_Ocular_increment"), SIGNAL(triggered()), this, SLOT(incrementOcularIndex()));
-	connect(gui->getGuiActions("action_Ocular_decrement"), SIGNAL(triggered()), this, SLOT(decrementOcularIndex()));
-	connect(gui->getGuiActions("action_Telescope_increment"), SIGNAL(triggered()), this, SLOT(incrementTelescopeIndex()));
-	connect(gui->getGuiActions("action_Telescope_decrement"), SIGNAL(triggered()), this, SLOT(decrementTelescopeIndex()));
-
-	connect(gui->getGuiActions("action_CCDAngle_majorDecrement"), SIGNAL(triggered()), this, SLOT(ccdRotationMajorDecrease()));
-	connect(gui->getGuiActions("action_CCDAngle_majorIncrement"), SIGNAL(triggered()), this, SLOT(ccdRotationMajorIncrease()));
-	connect(gui->getGuiActions("action_CCDAngle_minorDecrement"), SIGNAL(triggered()), this, SLOT(ccdRotationMinorDecrease()));
-	connect(gui->getGuiActions("action_CCDAngle_minorIncrement"), SIGNAL(triggered()), this, SLOT(ccdRotationMinorIncrease()));
-	connect(gui->getGuiActions("action_CCDAngle_reset"), SIGNAL(triggered()), this, SLOT(ccdRotationReset()));
+	gui->addGuiActions("actionShow_Ocular_Menu",
+							 N_("Oculars popup menu"),
+							 settings->value("bindings/popup_navigator", "Alt+O").toString(),
+							 group,
+							 true);
+	connect(gui->getGuiActions("actionShow_Ocular_Menu"), SIGNAL(toggled(bool)), this, SLOT(displayPopupMenu()));
 
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(instrumentChanged()));
+	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(setScreenFOVForCCD()));
 	connect(this, SIGNAL(selectedOcularChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedTelescopeChanged()), this, SLOT(instrumentChanged()));
+	connect(this, SIGNAL(selectedTelescopeChanged()), this, SLOT(setScreenFOVForCCD()));
 	connect(ocularDialog, SIGNAL(scaleImageCircleChanged(bool)), this, SLOT(setScaleImageCircle(bool)));
+	
+	connect(ccdRotationSignalMapper, SIGNAL(mapped(QString)), this, SLOT(rotateCCD(QString)));
+	connect(ccdsSignalMapper, SIGNAL(mapped(QString)), this, SLOT(selectCCDAtIndex(QString)));
+	connect(ccdsSignalMapper, SIGNAL(mapped(QString)), this, SLOT(setScreenFOVForCCD()));
+	connect(ocularsSignalMapper, SIGNAL(mapped(QString)), this, SLOT(selectOcularAtIndex(QString)));
+	connect(telescopesSignalMapper, SIGNAL(mapped(QString)), this, SLOT(selectTelescopeAtIndex(QString)));
+	connect(telescopesSignalMapper, SIGNAL(mapped(QString)), this, SLOT(setScreenFOVForCCD()));
 }
 
-
-void Oculars::interceptMovementKey(QKeyEvent* event)
+bool Oculars::isBinocularDefined()
 {
-	// We onle care about the arrow keys.  This flag tracks that.
-	bool consumeEvent = false;
-
-	StelCore *core = StelApp::getInstance().getCore();
-	StelMovementMgr *movementManager = core->getMovementMgr();
-
-	if (event->type() == QEvent::KeyPress)
-	{
-		// Direction and zoom replacements
-		switch (event->key())
-		{
-			case Qt::Key_Left:
-				movementManager->turnLeft(true);
-				consumeEvent = true;
-				break;
-			case Qt::Key_Right:
-				movementManager->turnRight(true);
-				consumeEvent = true;
-				break;
-			case Qt::Key_Up:
-				if (!event->modifiers().testFlag(Qt::ControlModifier))
-				{
-					movementManager->turnUp(true);
-				}
-				consumeEvent = true;
-				break;
-			case Qt::Key_Down:
-				if (!event->modifiers().testFlag(Qt::ControlModifier))
-				{
-					movementManager->turnDown(true);
-				}
-				consumeEvent = true;
-				break;
-			case Qt::Key_PageUp:
-				movementManager->zoomIn(true);
-				consumeEvent = true;
-				break;
-			case Qt::Key_PageDown:
-				movementManager->zoomOut(true);
-				consumeEvent = true;
-				break;
-			case Qt::Key_Shift:
-				movementManager->moveSlow(true);
-				consumeEvent = true;
-				break;
+	bool binocularFound = false;
+	foreach (Ocular* ocular, oculars) {
+		if (ocular->isBinoculars()) {
+			binocularFound = true;
+			break;
 		}
 	}
-	else
-	{
-		// When a deplacement key is released stop mooving
-		switch (event->key())
-		{
-			case Qt::Key_Left:
-				movementManager->turnLeft(false);
-				consumeEvent = true;
-				break;
-			case Qt::Key_Right:
-				movementManager->turnRight(false);
-				consumeEvent = true;
-				break;
-			case Qt::Key_Up:
-				movementManager->turnUp(false);
-				consumeEvent = true;
-				break;
-			case Qt::Key_Down:
-				movementManager->turnDown(false);
-				consumeEvent = true;
-				break;
-			case Qt::Key_PageUp:
-				movementManager->zoomIn(false);
-				consumeEvent = true;
-				break;
-			case Qt::Key_PageDown:
-				movementManager->zoomOut(false);
-				consumeEvent = true;
-				break;
-			case Qt::Key_Shift:
-				movementManager->moveSlow(false);
-				consumeEvent = true;
-				break;
-		}
-		if (consumeEvent)
-		{
-			// We don't want to re-center the object; just hold the current position.
-			movementManager->setFlagLockEquPos(true);
-		}
-	}
-	if (consumeEvent)
-	{
-		event->accept();
-	}
-	else
-	{
-		event->setAccepted(false);
-	}
-}
-
-void Oculars::paintOcularMask()
-{
-	StelCore *core = StelApp::getInstance().getCore();
-	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-
-	glDisable(GL_BLEND);
-	glColor3f(0.f,0.f,0.f);
-	glPushMatrix();
-	glTranslated(params.viewportCenter[0], params.viewportCenter[1], 0.0);
-	GLUquadricObj *quadric = gluNewQuadric();
-
-	GLdouble inner = 0.5 * params.viewportFovDiameter;
-
-	// See if we need to scale the mask
-	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0 && !oculars[selectedOcularIndex]->isBinoculars()) {
-		inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
-	}
-
-	GLdouble outer = params.viewportXywh[2] + params.viewportXywh[3];
-	// Draw the mask
-	gluDisk(quadric, inner, outer, 256, 1);
-	// the gray circle
-	glColor3f(0.15f,0.15f,0.15f);
-	gluDisk(quadric, inner - 1.0, inner, 256, 1);
-	gluDeleteQuadric(quadric);
-	glPopMatrix();
+	return binocularFound;
 }
 
 void Oculars::paintCCDBounds()
-{
-	StelCore *core = StelApp::getInstance().getCore();
-	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-
-	glDisable(GL_BLEND);
-	glColor3f(0.f,0.f,0.f);
-	glPushMatrix();
-	glTranslated(params.viewportCenter[0], params.viewportCenter[1], 0.0);
-	GLdouble screenFOV = params.viewportFovDiameter;
-
-	// draw sensor rectangle
-	if(selectedCCDIndex != -1) {
-		CCD *ccd = ccds[selectedCCDIndex];
-		if (ccd) {
-			glColor4f(0.77, 0.14, 0.16, 0.5);
-			Telescope *telescope = telescopes[selectedTelescopeIndex];
-			float CCDx = ccd->getActualFOVx(telescope);
-			float CCDy = ccd->getActualFOVy(telescope);
-			qDebug() << "ccdX:" << CCDx << " ccdY:" << CCDy;
-			if (CCDx > 0.0 && CCDy > 0.0) {
-				glBegin(GL_LINE_LOOP);
-				glVertex2f(-CCDx, CCDy);
-				glVertex2f(CCDx, CCDy);
-				glVertex2f(CCDx, -CCDy);
-				glVertex2f(-CCDx, -CCDy);
-				glEnd();
-			}
-		}
-	}
-
-	glPopMatrix();
-}
-
-void Oculars::inscribeCCDBoundsInOcularMask()
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
@@ -1006,6 +1002,92 @@ void Oculars::inscribeCCDBoundsInOcularMask()
 	glPopMatrix();
 }
 
+void Oculars::paintCrosshairs()
+{
+	const StelProjectorP projector = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
+	StelCore *core = StelApp::getInstance().getCore();
+	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+	// Center of screen
+	Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
+					   projector->getViewportPosY()+projector->getViewportHeight()/2);
+	GLdouble length = 0.5 * params.viewportFovDiameter;
+	// See if we need to scale the length
+	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0) {
+		length = oculars[selectedOcularIndex]->appearentFOV() * length / maxEyepieceAngle;
+	}
+
+	// Draw the lines
+	StelPainter painter(projector);
+	painter.setColor(0.77, 0.14, 0.16, 1);
+	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0], centerScreen[1] + length);
+	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0], centerScreen[1] - length);
+	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0] + length, centerScreen[1]);
+	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0] - length, centerScreen[1]);
+}
+
+void Oculars::paintTelrad()
+{
+	if (!flagShowOculars) {
+		const StelProjectorP projector = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
+		StelCore *core = StelApp::getInstance().getCore();
+		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+
+		// StelPainter drawing
+		StelPainter painter(projector);
+		painter.setColor(0.77, 0.14, 0.16, 1.0);
+		Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
+						   projector->getViewportPosY()+projector->getViewportHeight()/2);
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (0.5));
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (2.0));
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (4.0));
+
+//		// Direct drawing
+//		glDisable(GL_BLEND);
+//		glColor3f(0.f,0.f,0.f);
+//		glPushMatrix();
+//		glTranslated(params.viewportCenter[0], params.viewportCenter[1], 0.0);
+//		GLUquadricObj *quadric = gluNewQuadric();		
+//		// the gray circle
+//		glColor4f(0.77, 0.14, 0.16, 0.5);
+//		float radius = 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (0.5);
+//		gluDisk(quadric, radius - 1.0, radius, 256, 1);
+//		radius = 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (2.0);
+//		gluDisk(quadric, radius - 1.0, radius, 256, 1);
+//		radius = 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (4.0);
+//		gluDisk(quadric, radius - 1.0, radius, 256, 1);
+//		gluDeleteQuadric(quadric);
+//		glPopMatrix();		
+	}
+}
+
+void Oculars::paintOcularMask()
+{
+	StelCore *core = StelApp::getInstance().getCore();
+	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+
+	glDisable(GL_BLEND);
+	glColor3f(0.f,0.f,0.f);
+	glPushMatrix();
+	glTranslated(params.viewportCenter[0], params.viewportCenter[1], 0.0);
+	GLUquadricObj *quadric = gluNewQuadric();
+
+	GLdouble inner = 0.5 * params.viewportFovDiameter;
+
+	// See if we need to scale the mask
+	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0 && !oculars[selectedOcularIndex]->isBinoculars()) {
+		inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
+	}
+
+	GLdouble outer = params.viewportXywh[2] + params.viewportXywh[3];
+	// Draw the mask
+	gluDisk(quadric, inner, outer, 256, 1);
+	// the gray circle
+	glColor3f(0.15f,0.15f,0.15f);
+	gluDisk(quadric, inner - 1.0, inner, 256, 1);
+	gluDeleteQuadric(quadric);
+	glPopMatrix();
+}
+
 void Oculars::paintText(const StelCore* core)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
@@ -1038,22 +1120,56 @@ void Oculars::paintText(const StelCore* core)
 	
 	
 	// The Ocular
-	QString ocularNumberLabel = "Ocular #" + QVariant(selectedOcularIndex).toString();
-	if (ocular->name() != QString(""))  {
-		ocularNumberLabel.append(" : ").append(ocular->name());
+	if (flagShowOculars) {
+		QString ocularNumberLabel = "Ocular #" + QVariant(selectedOcularIndex).toString();
+		if (ocular->name() != QString(""))  {
+			ocularNumberLabel.append(" : ").append(ocular->name());
+		}
+		painter.drawText(xPosition, yPosition, ocularNumberLabel);
+		yPosition-=lineHeight;
+		
+		if (!ocular->isBinoculars()) {
+			QString ocularFLLabel = "Ocular FL: " + QVariant(ocular->effectiveFocalLength()).toString() + "mm";
+			painter.drawText(xPosition, yPosition, ocularFLLabel);
+			yPosition-=lineHeight;
+			
+			QString ocularFOVLabel = "Ocular aFOV: " + QVariant(ocular->appearentFOV()).toString() + QChar(0x00B0);
+			painter.drawText(xPosition, yPosition, ocularFOVLabel);
+			yPosition-=lineHeight;
+			
+			// The telescope
+			QString telescopeNumberLabel = "Telescope #" + QVariant(selectedTelescopeIndex).toString();
+			if (telescope->name() != QString(""))  {
+				telescopeNumberLabel.append(" : ").append(telescope->name());
+			}
+			painter.drawText(xPosition, yPosition, telescopeNumberLabel);
+			yPosition-=lineHeight;
+			
+			// General info
+			QString magnificationLabel = "Magnification: " + QVariant(((int)(ocular->magnification(telescope) * 10.0)) / 10.0).toString()+ "x";
+			painter.drawText(xPosition, yPosition, magnificationLabel);
+			yPosition-=lineHeight;
+			
+			QString fovLabel = "FOV: " + QVariant(((int)(ocular->actualFOV(telescope) * 10000.00)) / 10000.0).toString() + QChar(0x00B0);
+			painter.drawText(xPosition, yPosition, fovLabel);
+		}
 	}
-	painter.drawText(xPosition, yPosition, ocularNumberLabel);
-	yPosition-=lineHeight;
 
-	if (!ocular->isBinoculars()) {
-		QString ocularFLLabel = "Ocular FL: " + QVariant(ocular->effectiveFocalLength()).toString() + "mm";
-		painter.drawText(xPosition, yPosition, ocularFLLabel);
+	// The CCD
+	if (flagShowCCD) {
+		QString ccdsensorLabel, ccdInfoLabel;
+		double fovX = ((int)(ccd->getActualFOVx(telescope) * 1000.0)) / 1000.0;
+		double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;
+		ccdInfoLabel = "Dimension : " + QVariant(fovX).toString() + QChar(0x00B0) + "x" + QVariant(fovY).toString() + QChar(0x00B0);
+		if (ccd->name() != QString("")) {
+			ccdsensorLabel = "Sensor #" + QVariant(selectedCCDIndex).toString();
+			ccdsensorLabel.append(" : ").append(ccd->name());
+		}
+		painter.drawText(xPosition, yPosition, ccdsensorLabel);
 		yPosition-=lineHeight;
-		
-		QString ocularFOVLabel = "Ocular aFOV: " + QVariant(ocular->appearentFOV()).toString() + QChar(0x00B0);
-		painter.drawText(xPosition, yPosition, ocularFOVLabel);
+		painter.drawText(xPosition, yPosition, ccdInfoLabel);
 		yPosition-=lineHeight;
-		
+
 		// The telescope
 		QString telescopeNumberLabel = "Telescope #" + QVariant(selectedTelescopeIndex).toString();
 		if (telescope->name() != QString(""))  {
@@ -1062,35 +1178,7 @@ void Oculars::paintText(const StelCore* core)
 		painter.drawText(xPosition, yPosition, telescopeNumberLabel);
 		yPosition-=lineHeight;
 	}
-	// The CCD
-	QString ccdsensorLabel, ccdInfoLabel;
-	if (ccd && ccd->chipWidth() > .0 && ccd->chipHeight() > .0) {
-		double fovX = ((int)(ccd->getActualFOVx(telescope) * 1000.0)) / 1000.0;
-		double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;
-		ccdInfoLabel = "Dimension : " + QVariant(fovX).toString() + "x" + QVariant(fovY).toString() + QChar(0x00B0);
-		if (ccd->name() != QString("")) {
-			ccdsensorLabel = "Sensor #" + QVariant(selectedCCDIndex).toString();
-			ccdsensorLabel.append(" : ").append(ccd->name());
-		}
-	}
-	if (ccdsensorLabel != QString("")) {
-		painter.drawText(xPosition, yPosition, ccdsensorLabel);
-		yPosition-=lineHeight;
-		painter.drawText(xPosition, yPosition, ccdInfoLabel);
-		yPosition-=lineHeight;
-	}
 	
-	// General info
-	QString magnificationLabel = "Magnification: "
-		+ QVariant(((int)(ocular->magnification(telescope) * 10.0)) / 10.0).toString()
-		+ "x";
-	painter.drawText(xPosition, yPosition, magnificationLabel);
-	yPosition-=lineHeight;
-	
-	QString fovLabel = "FOV: "
-	+ QVariant(((int)(ocular->actualFOV(telescope) * 10000.00)) / 10000.0).toString()
-	+ QChar(0x00B0);
-	painter.drawText(xPosition, yPosition, fovLabel);
 }
 
 void Oculars::validateAndLoadIniFile()
@@ -1147,11 +1235,6 @@ void Oculars::validateAndLoadIniFile()
 	settings = new QSettings(ocularIniPath, QSettings::IniFormat, this);
 }
 
-QSettings* Oculars::appSettings()
-{
-	return settings;
-}
-
 void Oculars::unzoomOcular()
 {
 	StelCore *core = StelApp::getInstance().getCore();
@@ -1176,10 +1259,15 @@ void Oculars::unzoomOcular()
 	movementManager->zoomTo(movementManager->getInitFov());
 }
 
-void Oculars::zoom(bool rezoom)
+void Oculars::zoom(bool zoomedIn)
 {
+	if (flagShowOculars && selectedOcularIndex == -1) {
+		// The user cycled out the selected ocular
+		flagShowOculars = false;
+	}
+
 	if (flagShowOculars)  {
-		if (!rezoom)  {
+		if (!zoomedIn)  {
 			GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
 			// Current state
 			flagAzimuthalGrid = gridManager->getFlagAzimuthalGrid();
@@ -1218,18 +1306,17 @@ void Oculars::zoomOcular()
 	
 	// We won't always have a selected object
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected()) {
-		movementManager->
-			moveToJ2000(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEquinoxEquatorialPos(core->getNavigator()),
-						0.0,
-						1);
+		StelObjectP selectedObject = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0];
+		movementManager->moveToJ2000(selectedObject->getEquinoxEquatorialPos(core->getNavigator()), 0.0, 1);
 	}
 
 	// Set the screen display
 	// core->setMaskType(StelProjector::MaskDisk);
 	Ocular *ocular = oculars[selectedOcularIndex];
-	Telescope *telescope = telescopes[selectedTelescopeIndex];
+	Telescope *telescope = NULL;
 	// Only consider flip is we're not binoculars
 	if (!ocular->isBinoculars()) {
+		telescope = telescopes[selectedTelescopeIndex];
 		core->setFlipHorz(telescope->isHFlipped());
 		core->setFlipVert(telescope->isVFlipped());
 	}
