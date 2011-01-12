@@ -1,6 +1,5 @@
 /*
- * portions Copyright (C) 2010 Bernhard Reutner-Fischer
- * portions Copyright (C) 2010 Timothy Reaves
+ * Copyright (C) 2010 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License

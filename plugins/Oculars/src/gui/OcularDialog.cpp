@@ -67,46 +67,8 @@ OcularDialog::OcularDialog(QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<T
 
 OcularDialog::~OcularDialog()
 {
-	//These exist only if the window has been shown once:
-	if (dialog)
-	{
-		ui->ocularAFov->setValidator(0);
-		ui->ocularFL->setValidator(0);
-		ui->telescopeFL->setValidator(0);
-		ui->telescopeDiameter->setValidator(0);
-		ui->ocularName->setValidator(0);
-		ui->telescopeName->setValidator(0);
-		ui->ocularName->setValidator(0);
-		ui->ccdName->setValidator(0);
-		ui->ccdResX->setValidator(0);
-		ui->ccdResY->setValidator(0);
-		ui->ccdChipX->setValidator(0);
-		ui->ccdChipY->setValidator(0);
-		ui->ccdPixelX->setValidator(0);
-		ui->ccdPixelX->setValidator(0);
-		delete ccdMapper;
-		ccdMapper = NULL;
-		delete ocularMapper;
-		ocularMapper = NULL;
-		delete telescopeMapper;
-		telescopeMapper = NULL;
-	}
 	delete ui;
 	ui = NULL;
-	delete validatorPositiveInt;
-	validatorPositiveInt = NULL;
-	delete validatorPositiveDouble;
-	validatorPositiveDouble = NULL;
-	delete validatorOcularAFOV;
-	validatorOcularAFOV = NULL;
-	delete validatorOcularEFL;
-	validatorOcularEFL = NULL;
-	delete validatorTelescopeDiameter;
-	validatorTelescopeDiameter = NULL;
-	delete validatorTelescopeFL;
-	validatorTelescopeFL = NULL;
-	delete validatorName;
-	validatorName = NULL;
 }
 
 /* ********************************************************************* */
@@ -276,8 +238,10 @@ void OcularDialog::createDialogContent()
 	ui->telescopeName->setValidator(validatorName);
 	
 	// The key bindings
-	ui->togglePluginLineEdit->setText(Oculars::appSettings()->value("bindings/toggle_oculars", "Ctrl+O").toString());
-	ui->togglePopupNavigatorWindowLineEdit->setText(Oculars::appSettings()->value("bindings/popup_navigator", "Alt+O").toString());
+	QString bindingString = Oculars::appSettings()->value("bindings/toggle_oculars", "Ctrl+O").toString();
+	ui->togglePluginLineEdit->setText(bindingString);
+	bindingString = Oculars::appSettings()->value("bindings/popup_navigator", "Alt+O").toString();
+	ui->togglePopupNavigatorWindowLineEdit->setText(bindingString);
 	connect(ui->togglePluginLineEdit, SIGNAL(textEdited(const QString&)), 
 			this, SLOT(keyBindingTogglePluginChanged(const QString&)));
 	connect(ui->togglePopupNavigatorWindowLineEdit, SIGNAL(textEdited(const QString&)), 
