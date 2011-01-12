@@ -23,10 +23,12 @@
 
 #include "StelGui.hpp"
 #include "StelModule.hpp"
+#include "StelPainter.hpp"
 #include "OBJ.hpp"
 
 #include <QString>
 #include <vector>
+#include <QGLFramebufferObject>
 
 using std::vector;
 
@@ -52,6 +54,9 @@ public:
 private:
     void drawCubeTestScene(StelCore* core);
     void drawObjModel(StelCore* core);
+    void generateCubeMap(StelCore* core);
+    void generateCubeMap_drawScene(StelPainter& painter);
+    void drawFromCubeMap(StelCore* core);
 
     StelCore* core;
 
@@ -63,6 +68,7 @@ private:
     float movement_z;
 
     OBJ* objModel;
+    QGLFramebufferObject* cubeMap[6];
 
     vector<OBJ::StelModel> objModelArrays;
 

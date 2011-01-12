@@ -38,6 +38,7 @@
 #include <stdexcept>
 #include <cmath>
 
+#define FBO_TEX_SIZE 1024
 
 Scenery3d::Scenery3d()
     :core(NULL),
@@ -47,11 +48,20 @@ Scenery3d::Scenery3d()
 {
     objModel = new OBJ();
     zRotateMatrix = Mat4d::identity();
+    for (int i=0; i<6; i++) {
+        cubeMap[i] = NULL;
+    }
 }
 
 Scenery3d::~Scenery3d()
 {
     delete objModel;
+    for (int i=0; i<6; i++) {
+        if (cubeMap[i] != NULL) {
+            delete cubeMap[i];
+            cubeMap[i] = NULL;
+        }
+    }
 }
 
 void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery3dID)
@@ -80,7 +90,7 @@ void Scenery3d::loadModel()
     objModelArrays = objModel->getStelArrays();
 
     // Rotate vertices around z axis
-    for (int i=0; i<objModelArrays.size(); i++) {
+    for (unsigned int i=0; i<objModelArrays.size(); i++) {
         OBJ::StelModel& stelModel = objModelArrays[i];
         for (int v=0; v<stelModel.triangleCount*3; v++) {
             zRotateMatrix.transfo(stelModel.vertices[v]);
@@ -132,6 +142,155 @@ void Scenery3d::update(double deltaTime)
         Vec3d move(movement_x * deltaTime * 3.0, movement_y * deltaTime * 3.0, movement_z * deltaTime * 3.0);
         absolutePosition += move;
     }
+}
+
+void Scenery3d::generateCubeMap_drawScene(StelPainter& painter)
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    for (unsigned int i=0; i<objModelArrays.size(); i++) {
+        OBJ::StelModel& stelModel = objModelArrays[i];
+        if (stelModel.texture.data()) {
+            stelModel.texture.data()->bind();
+        } else {
+            glBindTexture(GL_TEXTURE_2D, 0);
+        }
+        glColor3fv(stelModel.color.v);
+        painter.setArrays(stelModel.vertices, stelModel.texcoords, __null, stelModel.normals);
+        painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);
+    }
+}
+
+void Scenery3d::generateCubeMap(StelCore* core)
+{
+    if (objModelArrays.empty()) {
+        return;
+    }
+
+    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, core->getCurrentProjectionType());
+    StelPainter painter(prj);
+
+    for (int i=0; i<6; i++) {
+        if (cubeMap[i] == NULL) {
+            cubeMap[i] = new QGLFramebufferObject(FBO_TEX_SIZE, FBO_TEX_SIZE, QGLFramebufferObject::Depth, GL_TEXTURE_2D);
+        }
+    }
+
+    glEnable(GL_TEXTURE_2D);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+    glDepthMask(GL_TRUE);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+
+    SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+    Vec3d sunPosition = ssystem->getSun()->getAltAzPos(core->getNavigator());
+    zRotateMatrix.transfo(sunPosition);
+    sunPosition.normalize();
+
+    // We define the brigthness zero when the sun is 8 degrees below the horizon.
+    float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+8.*M_PI/180.));
+    float lightBrightness;
+    if(sinSunAngleRad < -0.1/1.5 )
+            lightBrightness = 0.01;
+    else
+            lightBrightness = (0.01 + 1.5*(sinSunAngleRad+0.1/1.5));
+    const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
+    const GLfloat LightDiffuse[] = {lightBrightness, lightBrightness, lightBrightness, 1.0f};
+    const GLfloat LightPosition[] = {-sunPosition.v[0], -sunPosition.v[1], sunPosition.v[2], 0.0f}; // signs determined by experiment
+
+    float fov = 90.0f;
+    float aspect = 1.0f;
+    float zNear = 1.0f;
+    float zFar = 10000.0f;
+    float f = 2.0 / tan(fov * M_PI / 360.0);
+    Mat4d projMatd(f / aspect, 0, 0, 0,
+                   0, f, 0, 0,
+                   0, 0, (zFar + zNear) / (zNear - zFar), 2.0 * zFar * zNear / (zNear - zFar),
+                   0, 0, -1, 0);
+
+
+    glPushAttrib(GL_VIEWPORT_BIT);
+    glViewport(0, 0, 1024, 1024);
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+    glMultMatrixd(projMatd);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glLoadIdentity();
+    glRotated(90.0f, -1.0f, 0.0f, 0.0f);
+    glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+
+    glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
+
+    //front
+    cubeMap[0]->bind();
+    glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
+    generateCubeMap_drawScene(painter);
+    cubeMap[0]->release();
+
+    //right
+    glPushMatrix();
+    glRotated(90.0f, 0.0f, 0.0f, 1.0f);
+    cubeMap[1]->bind();
+    glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
+    generateCubeMap_drawScene(painter);
+    cubeMap[1]->release();
+    glPopMatrix();
+
+    //left
+    glPushMatrix();
+    glRotated(90.0f, 0.0f, 0.0f, -1.0f);
+    cubeMap[2]->bind();
+    glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
+    generateCubeMap_drawScene(painter);
+    cubeMap[2]->release();
+    glPopMatrix();
+
+    //back
+    glPushMatrix();
+    glRotated(180.0f, 0.0f, 0.0f, 1.0f);
+    cubeMap[3]->bind();
+    glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
+    generateCubeMap_drawScene(painter);
+    cubeMap[3]->release();
+    glPopMatrix();
+
+    //top
+    glPushMatrix();
+    glRotated(90.0f, 1.0f, 0.0f, 0.0f);
+    cubeMap[4]->bind();
+    glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
+    generateCubeMap_drawScene(painter);
+    cubeMap[4]->release();
+    glPopMatrix();
+
+    //bottom
+    glPushMatrix();
+    glRotated(90.0f, -1.0f, 0.0f, 0.0f);
+    cubeMap[5]->bind();
+    glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
+    generateCubeMap_drawScene(painter);
+    cubeMap[5]->release();
+    glPopMatrix();
+
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glPopAttrib();
+
+    glDisable(GL_LIGHT0);
+    glDisable(GL_LIGHTING);
+    glDepthMask(GL_FALSE);
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_TEXTURE_2D);
+}
+
+void Scenery3d::drawFromCubeMap(StelCore* core)
+{
 }
 
 void Scenery3d::drawObjModel(StelCore* core)
@@ -406,5 +565,7 @@ void Scenery3d::draw(StelCore* core)
     this->core = core;
     // for debug purposes
     //drawCubeTestScene(core);
+    //drawObjModel(core);
+    generateCubeMap(core);
     drawObjModel(core);
 }

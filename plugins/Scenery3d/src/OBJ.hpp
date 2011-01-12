@@ -6,9 +6,10 @@
 #include <string>
 #include "MTL.hpp"
 #include "StelCore.hpp"
-#include "Heightmap.hpp"
 
 using std::vector;
+
+class Heightmap;
 
 class OBJ
 {
