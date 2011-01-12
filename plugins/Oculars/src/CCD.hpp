@@ -1,6 +1,5 @@
 /*
- * portions Copyright (C) 2010 Bernhard Reutner-Fischer
- * portions Copyright (C) 2010 Timothy Reaves
+ * Copyright (C) 2010 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,7 +66,6 @@ public:
 	double getActualFOVy(Telescope *telescope) const;
 	QMap<int, QString> propertyMap();
 private:
-	int ccdID;
 	QString m_name;
 	//! total resolution width in pixels
 	int m_resolutionX;
