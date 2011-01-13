@@ -689,23 +689,29 @@ void Oculars::displayPopupMenu()
 
 		popup->addAction("toggle crosshair", this, SLOT(toggleCrosshair()), Qt::Key_5);
 	} else {
+		int outerMenuLevel = 1;
 		// We are not in Oculars mode
 		// We want to show the CCD's, and if a CCD is selected, the Telescopes (as a CCD requires a telescope), and the general menu items.
 		QAction* action = new QAction("Configure Oculars", popup);
 		action->setCheckable(TRUE);
-		action->setShortcut(Qt::Key_1);
+		action->setShortcut(QString("%1").arg(outerMenuLevel++));
 		connect(action, SIGNAL(toggled(bool)), ocularDialog, SLOT(setVisible(bool)));
 		connect(ocularDialog, SIGNAL(visibleChanged(bool)), action, SLOT(setChecked(bool)));
 		popup->addAction(action);
 		popup->addSeparator();
 
-		popup->addAction("Toggle CCD", this, SLOT(toggleCCD()), Qt::Key_2);
-		popup->addAction("Toggle Telrad", this, SLOT(toggleTelrad()), Qt::Key_3);
+		if (!flagShowTelrad) {
+			popup->addAction("Toggle CCD", this, SLOT(toggleCCD()), QKeySequence(QString("%1").arg(outerMenuLevel++)));
+		}
+		
+		if (!flagShowCCD) {
+			popup->addAction("Toggle Telrad", this, SLOT(toggleTelrad()), QKeySequence(QString("%1").arg(outerMenuLevel++)));
+		}
 
 		popup->addSeparator();
 		if (selectedCCDIndex > -1 && selectedTelescopeIndex > -1) {
-			popup->addAction("previous CCD", this, SLOT(decrementCCDIndex()), Qt::Key_4);
-			popup->addAction("next CCD", this, SLOT(incrementCCDIndex()), Qt::Key_5);
+			popup->addAction("previous CCD", this, SLOT(decrementCCDIndex()), QKeySequence(QString("%1").arg(outerMenuLevel++)));
+			popup->addAction("next CCD", this, SLOT(incrementCCDIndex()), QKeySequence(QString("%1").arg(outerMenuLevel++)));
 			QMenu* submenu = new QMenu("select CCD", popup);
 			for (int index = 0; index < ccds.count(); ++index) {
 				QAction* action = submenu->addAction(ccds[index]->name(), ccdsSignalMapper, SLOT(map()), 
@@ -742,8 +748,8 @@ void Oculars::displayPopupMenu()
 			popup->addSeparator();
 		}
 		if (selectedCCDIndex > -1 && telescopes.count() > 0) {
-			popup->addAction("previous telescope", this, SLOT(decrementTelescopeIndex()), Qt::Key_6);
-			popup->addAction("next telescope", this, SLOT(incrementTelescopeIndex()), Qt::Key_7);
+			popup->addAction("previous telescope", this, SLOT(decrementTelescopeIndex()), QKeySequence(QString("%1").arg(outerMenuLevel++)));
+			popup->addAction("next telescope", this, SLOT(incrementTelescopeIndex()), QKeySequence(QString("%1").arg(outerMenuLevel++)));
 			QMenu* submenu = new QMenu("select telescope", popup);
 			for (int index = 0; index < telescopes.count(); ++index) {
 				QAction* action = submenu->addAction(telescopes[index]->name(), telescopesSignalMapper, SLOT(map()), 
