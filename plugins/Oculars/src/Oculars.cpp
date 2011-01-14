@@ -831,8 +831,10 @@ void Oculars::selectOcularAtIndex(QString indexString)
 	} else {
 		if ( selectedTelescopeIndex == -1 && telescopes.count() == 0) {
 			// reject the change
-		} else if (selectedTelescopeIndex == -1) {
-			selectedTelescopeIndex = 0;
+		} else {
+			if (selectedTelescopeIndex == -1) {
+				selectedTelescopeIndex = 0;
+			}
 			selectedOcularIndex = index;
 			emit(selectedOcularChanged());
 		}
@@ -1130,6 +1132,10 @@ void Oculars::paintText(const StelCore* core)
 		QString ocularNumberLabel = "Ocular #" + QVariant(selectedOcularIndex).toString();
 		if (ocular->name() != QString(""))  {
 			ocularNumberLabel.append(" : ").append(ocular->name());
+		}
+		// The name of the ocular could be really long.
+		if (ocular->name().length() > widthString.length()) {
+			xPosition -= (insetFromRHS / 2.0);
 		}
 		painter.drawText(xPosition, yPosition, ocularNumberLabel);
 		yPosition-=lineHeight;
