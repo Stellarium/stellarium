@@ -22,6 +22,9 @@ void Scenery3dDialog::createDialogContent()
     connect(ui->scenery3dListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this,
             SLOT(scenery3dChanged(QListWidgetItem*)));
 
+    connect(ui->checkBoxRenderCubemap, SIGNAL(stateChanged(int)), this,
+            SLOT(renderingOptionsChanged()));
+
     // Fill the scenery list
     QListWidget* l = ui->scenery3dListWidget;
     l->blockSignals(true);
@@ -36,6 +39,8 @@ void Scenery3dDialog::createDialogContent()
     ui->scenery3dTextBrowser->setHtml(smgr->getCurrentScenery3dHtmlDescription());
     //ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
     //ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getDefaultLandscapeID()!=lmgr->getCurrentLandscapeID());
+
+    renderingOptionsChanged();
 }
 
 
@@ -47,4 +52,10 @@ void Scenery3dDialog::scenery3dChanged(QListWidgetItem* item)
     Q_ASSERT(gui);
     ui->scenery3dTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
     ui->scenery3dTextBrowser->setHtml(smgr->getCurrentScenery3dHtmlDescription());
+}
+
+void Scenery3dDialog::renderingOptionsChanged(void)
+{
+    Scenery3dMgr* smgr = GETSTELMODULE(Scenery3dMgr);
+    smgr->setUseCubeMap(ui->checkBoxRenderCubemap->isChecked());
 }

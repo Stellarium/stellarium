@@ -23,6 +23,7 @@ Scenery3dMgr::Scenery3dMgr() : scenery3d(NULL)
 {
     setObjectName("Scenery3dMgr");
     scenery3dDialog = new Scenery3dDialog();
+    useCubeMap = false;
 }
 
 Scenery3dMgr::~Scenery3dMgr()
@@ -58,7 +59,7 @@ void Scenery3dMgr::update(double deltaTime)
 
 void Scenery3dMgr::draw(StelCore* core)
 {
-    scenery3d->draw(core);
+    scenery3d->draw(core, useCubeMap);
 }
 
 void Scenery3dMgr::init()

@@ -31,6 +31,8 @@ public:
     bool load(QMap<QString, QString>& param);
     Scenery3d* createFromFile(const QString& file, const QString& id);
 
+    void setUseCubeMap(bool useCubeMap) { this->useCubeMap = useCubeMap; }
+
     static const QString MODULE_PATH;
 
 public slots:
@@ -59,6 +61,7 @@ private:
     Scenery3dDialog* scenery3dDialog;
     QString currentScenery3dID;
     QString defaultScenery3dID;
+    bool useCubeMap;
 
 };
 
