@@ -24,6 +24,7 @@
 #include "StelGui.hpp"
 #include "StelModule.hpp"
 #include "StelPainter.hpp"
+#include "Landscape.hpp"
 #include "OBJ.hpp"
 
 #include <QString>
@@ -44,7 +45,7 @@ public:
 	
     void handleKeys(QKeyEvent* e);
     void update(double deltaTime);
-    void draw(StelCore* core);
+    void draw(StelCore* core, bool useCubeMap=false);
 
     QString getName() const { return name; }
     QString getAuthorName() const { return authorName; }
@@ -68,7 +69,8 @@ private:
     float movement_z;
 
     OBJ* objModel;
-    QGLFramebufferObject* cubeMap[6];
+    QGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
+    LandscapeOldStyle* cubeMapLandscape;
 
     vector<OBJ::StelModel> objModelArrays;
 

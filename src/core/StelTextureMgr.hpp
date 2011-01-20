@@ -51,6 +51,8 @@ public:
 	//! @param lazyLoading define whether the texture should be actually loaded only when needed, i.e. when bind() is called the first time.
 	StelTextureSP createTextureThread(const QString& url, const StelTexture::StelTextureParams& params=StelTexture::StelTextureParams(), const QString& fileExtension=QString(), bool lazyLoading=true);
 
+        StelTextureSP getTexture(GLuint id);
+
 private:
 	friend class StelTexture;
 };
