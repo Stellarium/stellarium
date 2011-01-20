@@ -15,6 +15,7 @@ public:
 
 private slots:
     void scenery3dChanged(QListWidgetItem* item);
+    void renderingOptionsChanged(void);
 private:
     Ui_scenery3dDialogForm* ui;
 };

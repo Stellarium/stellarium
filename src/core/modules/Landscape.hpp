@@ -109,6 +109,7 @@ protected:
 	float angleRotateZOffset;
 };
 
+#include <QtOpenGL>
 
 class LandscapeOldStyle : public Landscape
 {
@@ -118,6 +119,8 @@ public:
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(StelCore* core);
 	void create(bool _fullpath, QMap<QString, QString> param);
+
+        void createFromCubemap(GLuint textures[]);
 private:
 	void drawFog(StelCore* core, StelPainter&) const;
 	void drawDecor(StelCore* core, StelPainter&) const;

@@ -51,12 +51,17 @@ Scenery3d::Scenery3d()
     for (int i=0; i<6; i++) {
         cubeMap[i] = NULL;
     }
+    cubeMapLandscape = NULL;
 }
 
 Scenery3d::~Scenery3d()
 {
     delete objModel;
     for (int i=0; i<6; i++) {
+        if (cubeMapLandscape != NULL) {
+            delete cubeMapLandscape;
+            cubeMapLandscape = NULL;
+        }
         if (cubeMap[i] != NULL) {
             delete cubeMap[i];
             cubeMap[i] = NULL;
@@ -142,6 +147,9 @@ void Scenery3d::update(double deltaTime)
         Vec3d move(movement_x * deltaTime * 3.0, movement_y * deltaTime * 3.0, movement_z * deltaTime * 3.0);
         absolutePosition += move;
     }
+    if (cubeMapLandscape != NULL) {
+        cubeMapLandscape->update(deltaTime);
+    }
 }
 
 void Scenery3d::generateCubeMap_drawScene(StelPainter& painter)
@@ -173,6 +181,14 @@ void Scenery3d::generateCubeMap(StelCore* core)
         if (cubeMap[i] == NULL) {
             cubeMap[i] = new QGLFramebufferObject(FBO_TEX_SIZE, FBO_TEX_SIZE, QGLFramebufferObject::Depth, GL_TEXTURE_2D);
         }
+    }
+    if (cubeMapLandscape == NULL) {
+        cubeMapLandscape = new LandscapeOldStyle();
+        // bottom, front, right, back, left, top
+        GLuint textures[] = {cubeMap[5]->texture(), cubeMap[0]->texture(),
+                             cubeMap[1]->texture(), cubeMap[3]->texture(),
+                             cubeMap[2]->texture(), cubeMap[4]->texture()};
+        cubeMapLandscape->createFromCubemap(textures);
     }
 
     glEnable(GL_TEXTURE_2D);
@@ -211,7 +227,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
 
 
     glPushAttrib(GL_VIEWPORT_BIT);
-    glViewport(0, 0, 1024, 1024);
+    glViewport(0, 0, FBO_TEX_SIZE, FBO_TEX_SIZE);
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
     glLoadIdentity();
@@ -291,6 +307,9 @@ void Scenery3d::generateCubeMap(StelCore* core)
 
 void Scenery3d::drawFromCubeMap(StelCore* core)
 {
+    if (cubeMapLandscape != NULL) {
+        cubeMapLandscape->draw(core);
+    }
 }
 
 void Scenery3d::drawObjModel(StelCore* core)
@@ -560,12 +579,16 @@ void Scenery3d::drawCubeTestScene(StelCore* core)
     glDisable(GL_BLEND);
 }
 	
-void Scenery3d::draw(StelCore* core)
+void Scenery3d::draw(StelCore* core, bool useCubeMap)
 {
     this->core = core;
     // for debug purposes
     //drawCubeTestScene(core);
-    //drawObjModel(core);
-    generateCubeMap(core);
-    drawObjModel(core);
+
+    if (useCubeMap) {
+        generateCubeMap(core);
+        drawFromCubeMap(core);
+    } else {
+        drawObjModel(core);
+    }
 }

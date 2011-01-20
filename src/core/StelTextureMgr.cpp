@@ -44,6 +44,13 @@ void StelTextureMgr::init()
 {
 }
 
+StelTextureSP StelTextureMgr::getTexture(GLuint id)
+{
+    StelTextureSP tex = StelTextureSP(new StelTexture());
+    tex->id = id;
+    return tex;
+}
+
 
 StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const StelTexture::StelTextureParams& params)
 {
