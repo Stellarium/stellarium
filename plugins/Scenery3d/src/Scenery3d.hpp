@@ -63,14 +63,15 @@ private:
 
     Mat4f projectionMatrix;
     Vec3d absolutePosition;
-    float rotation;
     float movement_x;
     float movement_y;
     float movement_z;
 
     OBJ* objModel;
     QGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
-    LandscapeOldStyle* cubeMapLandscape;
+    StelVertexArray cubePlane, cubePlaneBack,
+                    cubePlaneLeft, cubePlaneRight,
+                    cubePlaneTop, cubePlaneBottom;
 
     vector<OBJ::StelModel> objModelArrays;
 
