@@ -120,7 +120,6 @@ public:
 	virtual void draw(StelCore* core);
 	void create(bool _fullpath, QMap<QString, QString> param);
 
-        void createFromCubemap(GLuint textures[]);
 private:
 	void drawFog(StelCore* core, StelPainter&) const;
 	void drawDecor(StelCore* core, StelPainter&) const;
