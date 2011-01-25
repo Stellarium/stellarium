@@ -94,6 +94,7 @@ bool Scenery3dMgr::configureGui(bool show)
 
 void Scenery3dMgr::setStelStyle(const QString& section)
 {
+	(void)section; // disable compiler warning (unused var)
 }
 
 bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)

@@ -40,6 +40,10 @@
 
 #define FBO_TEX_SIZE 2048
 
+const float Scenery3d::EYE_LEVEL = 1.0;
+const float Scenery3d::MOVE_SPEED = 4.0;
+const float Scenery3d::MAX_SLOPE = 1.1;
+
 Scenery3d::Scenery3d()
     :core(NULL),
     absolutePosition(0.0, 0.0, 0.0),
@@ -47,6 +51,8 @@ Scenery3d::Scenery3d()
     objModel(NULL)
 {
     objModel = new OBJ();
+    groundModel = new OBJ();
+    heightmap = NULL;
     zRotateMatrix = Mat4d::identity();
     for (int i=0; i<6; i++) {
         cubeMap[i] = NULL;
@@ -97,7 +103,12 @@ Scenery3d::Scenery3d()
 
 Scenery3d::~Scenery3d()
 {
+    if (heightmap != NULL) {
+        delete heightmap;
+        heightmap = NULL;
+    }
     delete objModel;
+    delete groundModel;
     for (int i=0; i<6; i++) {
         if (cubeMap[i] != NULL) {
             delete cubeMap[i];
@@ -121,23 +132,33 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
     orig_z = scenery3dIni.value("coord/orig_z").toReal();
     rot_z = scenery3dIni.value("coord/rot_z").toReal();
 
-    zRotateMatrix = Mat4d::rotation(Vec3d(0.0, 0.0, 1.0), (90.0 + rot_z) * M_PI / 180.0);
+	 zRotateMatrix = Mat4d::rotation(Vec3d(0.0, 0.0, 1.0), (90.0 + rot_z) * M_PI / 180.0);
 }
 
 void Scenery3d::loadModel()
 {
-    QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
-    qDebug() << "Trying to load OBJ model: " << modelFile;
-    objModel->load(modelFile.toAscii());
-    objModelArrays = objModel->getStelArrays();
+	QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
+	qDebug() << "Trying to load OBJ model: " << modelFile;
+	objModel->load(modelFile.toAscii());
+	objModelArrays = objModel->getStelArrays();
 
-    // Rotate vertices around z axis
-    for (unsigned int i=0; i<objModelArrays.size(); i++) {
-        OBJ::StelModel& stelModel = objModelArrays[i];
-        for (int v=0; v<stelModel.triangleCount*3; v++) {
-            zRotateMatrix.transfo(stelModel.vertices[v]);
-        }
-    }
+	modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelGroundFile);
+	qDebug() << "Trying to load ground OBJ model: " << modelFile;
+	groundModel->load(modelFile.toAscii());
+	heightmap = new Heightmap(*groundModel);
+
+	// Rotate vertices around z axis
+	for (unsigned int i=0; i<objModelArrays.size(); i++)
+	{
+		OBJ::StelModel& stelModel = objModelArrays[i];
+		for (int v=0; v<stelModel.triangleCount*3; v++)
+		{
+			zRotateMatrix.transfo(stelModel.vertices[v]);
+		}
+	}
+	groundModel->transform(zRotateMatrix);
+
+	absolutePosition[2] = minObserverHeight();
 }
 
 void Scenery3d::handleKeys(QKeyEvent* e)
@@ -174,15 +195,44 @@ void Scenery3d::handleKeys(QKeyEvent* e)
 
 void Scenery3d::update(double deltaTime)
 {
-    if (core != NULL) {
-        Vec3d viewDirection = core->getMovementMgr()->getViewDirectionJ2000();
-        // GZ: Use correct coordinate frame!
-        Vec3d viewDirectionAltAz=core->getNavigator()->j2000ToAltAz(viewDirection);
-        double alt, az;
-        StelUtils::rectToSphe(&az, &alt, viewDirectionAltAz);
-        Vec3d move(movement_x * deltaTime * 3.0, movement_y * deltaTime * 3.0, movement_z * deltaTime * 3.0);
-        absolutePosition += move;
-    }
+	if (core != NULL)
+	{
+		Vec3d viewDirection = core->getMovementMgr()->getViewDirectionJ2000();
+		// GZ: Use correct coordinate frame!
+		Vec3d viewDirectionAltAz=core->getNavigator()->j2000ToAltAz(viewDirection);
+		double alt, az;
+		StelUtils::rectToSphe(&az, &alt, viewDirectionAltAz);
+
+		Vec3d prevPosition = absolutePosition;
+		float prevHeight = prevPosition[2];
+
+		Vec3d move(movement_x * deltaTime * MOVE_SPEED, movement_y * deltaTime * MOVE_SPEED, movement_z * deltaTime * MOVE_SPEED);
+		absolutePosition += move;
+
+		float nextHeight = minObserverHeight();
+		if ((prevHeight - nextHeight) > (deltaTime * MAX_SLOPE))
+		{
+			absolutePosition = prevPosition; // prevent climbing too high
+		}
+		else
+		{
+			absolutePosition.v[2] = minObserverHeight();
+		}
+	}
+}
+
+float Scenery3d::minObserverHeight()
+{
+	if (heightmap == NULL)
+	{
+		return -EYE_LEVEL;
+	}
+	else
+	{
+		float x = -absolutePosition.v[0];
+		float y = -absolutePosition.v[1];
+		return -(heightmap->getHeight(x,y) + EYE_LEVEL);
+	}
 }
 
 void Scenery3d::generateCubeMap_drawScene(StelPainter& painter)

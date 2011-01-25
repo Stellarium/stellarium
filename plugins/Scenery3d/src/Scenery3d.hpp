@@ -26,6 +26,7 @@
 #include "StelPainter.hpp"
 #include "Landscape.hpp"
 #include "OBJ.hpp"
+#include "Heightmap.hpp"
 
 #include <QString>
 #include <vector>
@@ -53,11 +54,17 @@ public:
     QString getLandscapeName() const { return landscapeName; }
 	
 private:
+	 static const float EYE_LEVEL;
+	 static const float MOVE_SPEED;
+	 static const float MAX_SLOPE;
+
     void drawCubeTestScene(StelCore* core);
     void drawObjModel(StelCore* core);
     void generateCubeMap(StelCore* core);
     void generateCubeMap_drawScene(StelPainter& painter);
     void drawFromCubeMap(StelCore* core);
+
+	 float minObserverHeight ();
 
     StelCore* core;
 
@@ -68,12 +75,14 @@ private:
     float movement_z;
 
     OBJ* objModel;
+    OBJ* groundModel;
     QGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
     StelVertexArray cubePlane, cubePlaneBack,
                     cubePlaneLeft, cubePlaneRight,
                     cubePlaneTop, cubePlaneBottom;
 
     vector<OBJ::StelModel> objModelArrays;
+    Heightmap* heightmap;
 
     QString id;
     QString name;

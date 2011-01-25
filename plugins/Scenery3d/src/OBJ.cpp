@@ -204,3 +204,14 @@ vector<OBJ::StelModel> OBJ::getStelArrays()
     }
     return stelModels;
 }
+
+void OBJ::transform(Mat4d mat)
+{
+	// only used for transforming all the vertices in the ground model
+	for (std::vector<Vertex>::iterator it = vertices.begin(); it != vertices.end(); it++)
+	{
+		Vec3d v = Vec3d(it->x, it->y, it->z);
+		mat.transfo(v);
+		*it = (Vertex) { v[0], v[1], v[2] };
+	}
+}
