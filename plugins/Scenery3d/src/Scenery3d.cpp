@@ -39,18 +39,17 @@
 #include <stdexcept>
 #include <cmath>
 
-#define FBO_TEX_SIZE 2048
-
 float Scenery3d::EYE_LEVEL = 1.0;
 //const float Scenery3d::MOVE_SPEED = 4.0;
 const float Scenery3d::MAX_SLOPE = 1.1;
 
-Scenery3d::Scenery3d()
+Scenery3d::Scenery3d(int cbmSize)
     :core(NULL),
     absolutePosition(0.0, 0.0, 0.0),
     movement_x(0.0f), movement_y(0.0f), movement_z(0.0f),
     objModel(NULL)
 {
+    cubemapSize=cbmSize;
     objModel = new OBJ();
     groundModel = new OBJ();
     heightmap = NULL;
@@ -283,7 +282,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
 
     for (int i=0; i<6; i++) {
         if (cubeMap[i] == NULL) {
-            cubeMap[i] = new QGLFramebufferObject(FBO_TEX_SIZE, FBO_TEX_SIZE, QGLFramebufferObject::Depth, GL_TEXTURE_2D);
+            cubeMap[i] = new QGLFramebufferObject(cubemapSize, cubemapSize, QGLFramebufferObject::Depth, GL_TEXTURE_2D);
             glBindTexture(GL_TEXTURE_2D, cubeMap[i]->texture());
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -326,7 +325,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
 
 
     glPushAttrib(GL_VIEWPORT_BIT);
-    glViewport(0, 0, FBO_TEX_SIZE, FBO_TEX_SIZE);
+    glViewport(0, 0, cubemapSize, cubemapSize);
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
     glLoadIdentity();

@@ -38,7 +38,7 @@ using std::vector;
 class Scenery3d
 {
 public:
-    Scenery3d();
+    Scenery3d(int cbmSize=1024);
     virtual ~Scenery3d();
 
     void loadConfig(const QSettings& scenery3dIni, const QString& scenery3dID);
@@ -72,6 +72,7 @@ private:
 	 float minObserverHeight ();
 
     StelCore* core;
+    int cubemapSize;
 
     Mat4f projectionMatrix;
     Vec3d absolutePosition;
