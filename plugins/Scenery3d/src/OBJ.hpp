@@ -28,8 +28,9 @@ class OBJ
         };
 
         void load(const char* filename);
-        void drawTriGL(void); // simple triangle renderer
+		  void drawTriGL(void); // simple triangle renderer
         vector<StelModel> getStelArrays();
+		  void transform(Mat4d mat);
 
         struct Vertex {
             float x, y, z;
