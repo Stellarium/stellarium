@@ -64,6 +64,9 @@ public:
 	virtual void handleMouseClicks(class QMouseEvent* event);
 	//! Called then the selected object changes.
 	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::ReplaceSelection);
+        // GZ: allow some keypress interaction by plugins.
+        virtual double getCallOrder(StelModuleActionName actionName) const;
+
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to StelMovementMgr

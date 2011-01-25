@@ -36,6 +36,9 @@ public:
     static const QString MODULE_PATH;
 
 public slots:
+    //! GZ: TODO: for switching on/off
+    //void enableScenery3d(bool show);
+
     QStringList getAllScenery3dNames() const;
     QStringList getAllScenery3dIDs() const;
 
@@ -57,6 +60,7 @@ private:
     QString nameToID(const QString& name);
     QMap<QString, QString> getNameToDirMap() const;
 
+    bool active; // GZ: toggle to switch it off completely.
     Scenery3d* scenery3d;
     Scenery3dDialog* scenery3dDialog;
     QString currentScenery3dID;

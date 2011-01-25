@@ -36,11 +36,13 @@ Scenery3dMgr::~Scenery3dMgr()
 double Scenery3dMgr::getCallOrder(StelModuleActionName actionName) const
 {
     if (actionName == StelModule::ActionDraw)
-        return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 20;
+        return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 5; // between Landscape and compass marks!
     if (actionName == StelModule::ActionUpdate)
         return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 10;
     if (actionName == StelModule::ActionHandleKeys)
-        return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 100;
+        //return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 100;
+        // GZ: low number means high precedence!
+        return 3;
     return 0;
 }
 
