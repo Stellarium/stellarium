@@ -69,7 +69,7 @@ void OBJ::load( const char* filename )
                 } else if (parts[0] == "f") { // face
                     Face face;
                     for (unsigned int i=1; i<parts.size(); ++i) {
-                        Ref ref;
+                        Ref ref={0, 0, 0, 0, 0};
                         vector<string> f = splitStr(parts[i], '/');
                         if (f.size() >= 2) {
                             ref.v = parseInt(f[0]) - 1;

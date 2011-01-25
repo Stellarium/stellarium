@@ -175,10 +175,18 @@ bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons)
 	return false;
 }
 
+double StelMovementMgr::getCallOrder(StelModuleActionName actionName) const
+{   // GZ: allow a few plugins to intercept keys!
+    if (actionName == StelModule::ActionHandleKeys)
+        return 5;
+    return 0;
+}
+
+
 
 void StelMovementMgr::handleKeys(QKeyEvent* event)
 {
-	if (event->type() == QEvent::KeyPress)
+        if (event->type() == QEvent::KeyPress)
 	{
 		// Direction and zoom deplacements
 		switch (event->key())
