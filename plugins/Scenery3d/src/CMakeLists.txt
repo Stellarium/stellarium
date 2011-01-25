@@ -44,7 +44,7 @@ SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INT
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)
-	ADD_LIBRARY(Oculars
+        ADD_LIBRARY(Scenery3d
                 MODULE ${Scenery3d_SRCS} ${Scenery3d_MOC_SRCS} ${Scenery3d_UIS_H}
 	)
 

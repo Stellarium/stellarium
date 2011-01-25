@@ -1,7 +1,7 @@
 /*
- * Stellarium-Collada Plug-in
+ * Stellarium Scenery3d Plug-in
  * 
- * Copyright (C) 2010 Simon Parzer, Gustav Oberwandling, Peter Neubauer
+ * Copyright (C) 2011 Simon Parzer, Peter Neubauer
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +44,12 @@ public:
     void loadConfig(const QSettings& scenery3dIni, const QString& scenery3dID);
     void loadModel();
 	
+    //! Walk/Fly Navigation with Ctrl+Cursor and Ctrl+PgUp/Dn keys.
+    //! Pressing Ctrl-Alt: 5x, Ctrl-Shift: 10x speedup; Ctrl-Shift-Alt: 50x!
+    //! To allow fine control, zoom in.
+    //! If you release Ctrl key while pressing cursor key, movement will continue.
     void handleKeys(QKeyEvent* e);
+
     void update(double deltaTime);
     void draw(StelCore* core, bool useCubeMap=false);
 
@@ -54,8 +59,8 @@ public:
     QString getLandscapeName() const { return landscapeName; }
 	
 private:
-	 static const float EYE_LEVEL;
-	 static const float MOVE_SPEED;
+         static float EYE_LEVEL;
+         // static const float MOVE_SPEED; // GZ: not needed.
 	 static const float MAX_SLOPE;
 
     void drawCubeTestScene(StelCore* core);

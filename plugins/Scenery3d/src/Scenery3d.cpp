@@ -1,7 +1,7 @@
 /*
- * TestPlugin
- * 
- * Copyright (C) 2010 Simon Parzer, Gustav Oberwandling, Peter Neubauer
+ * Stellarium Scenery3d Plug-in
+ *
+ * Copyright (C) 2011 Simon Parzer, Peter Neubauer
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,6 +30,7 @@
 #include "StelUtils.hpp"
 #include "SolarSystem.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelMovementMgr.hpp"
 
 #include <QAction>
 #include <QString>
@@ -40,8 +41,8 @@
 
 #define FBO_TEX_SIZE 2048
 
-const float Scenery3d::EYE_LEVEL = 1.0;
-const float Scenery3d::MOVE_SPEED = 4.0;
+float Scenery3d::EYE_LEVEL = 1.0;
+//const float Scenery3d::MOVE_SPEED = 4.0;
 const float Scenery3d::MAX_SLOPE = 1.1;
 
 Scenery3d::Scenery3d()
@@ -163,69 +164,89 @@ void Scenery3d::loadModel()
 
 void Scenery3d::handleKeys(QKeyEvent* e)
 {
-    if (e->type() == QKeyEvent::KeyPress) {
-        if (e->key() == Qt::Key_W) {
-            movement_z = 1.0f;
-            e->accept();
-        } else if (e->key() == Qt::Key_X) {
-            movement_z = -1.0f;
-            e->accept();
-        } else if (e->key() == Qt::Key_1) { // GZ: Bitte andere Tasten suchen!
-            movement_x = 1.0f;
-            e->accept();
-        } else if (e->key() == Qt::Key_2) {
-            movement_x = -1.0f;
-            e->accept();
-        } else if (e->key() == Qt::Key_3) {
-            movement_y = 1.0f;
-            e->accept();
-        } else if (e->key() == Qt::Key_4) {
-            movement_y = -1.0f;
-            e->accept();
+    if ((e->type() == QKeyEvent::KeyPress) && (e->modifiers() & Qt::ControlModifier))
+    {
+        // Pressing CTRL+ALT: 5x, CTRL+SHIFT: 10x speedup; CTRL+SHIFT+ALT: 50x!
+        float speedup=((e->modifiers() & Qt::ShiftModifier)? 10.0f : 1.0f);
+        speedup *= ((e->modifiers() & Qt::AltModifier)? 5.0f : 1.0f);
+        switch (e->key())
+        {
+            case Qt::Key_PageUp:    movement_z = -1.0f * speedup; e->accept(); break;
+            case Qt::Key_PageDown:  movement_z =  1.0f * speedup; e->accept(); break;
+            case Qt::Key_Up:        movement_x = -1.0f * speedup; e->accept(); break;
+            case Qt::Key_Down:      movement_x =  1.0f * speedup; e->accept(); break;
+            case Qt::Key_Right:     movement_y = -1.0f * speedup; e->accept(); break;
+            case Qt::Key_Left:      movement_y =  1.0f * speedup; e->accept(); break;
         }
-    } else if (e->type() == QKeyEvent::KeyRelease) {
-        if (e->key() == Qt::Key_W || e->key() == Qt::Key_X || e->key() == Qt::Key_1 || e->key() == Qt::Key_2 || e->key() == Qt::Key_3 || e->key() == Qt::Key_4 ) {
-            movement_x = 0.0f;
-            movement_y = 0.0f;
-            movement_z = 0.0f;
-            e->accept();
-        }
+    }
+    else if ((e->type() == QKeyEvent::KeyRelease) && (e->modifiers() & Qt::ControlModifier))
+    {
+        if (e->key() == Qt::Key_PageUp || e->key() == Qt::Key_PageDown ||
+            e->key() == Qt::Key_Up     || e->key() == Qt::Key_Down     ||
+            e->key() == Qt::Key_Left   || e->key() == Qt::Key_Right     )
+            {
+                movement_x = 0.0f;
+                movement_y = 0.0f;
+                movement_z = 0.0f;
+                e->accept();
+            }
     }
 }
 
 void Scenery3d::update(double deltaTime)
 {
-	if (core != NULL)
-	{
-		Vec3d viewDirection = core->getMovementMgr()->getViewDirectionJ2000();
-		// GZ: Use correct coordinate frame!
-		Vec3d viewDirectionAltAz=core->getNavigator()->j2000ToAltAz(viewDirection);
-		double alt, az;
-		StelUtils::rectToSphe(&az, &alt, viewDirectionAltAz);
+    if (core != NULL)
+    {
+        StelMovementMgr *stelMovementMgr = GETSTELMODULE(StelMovementMgr);
 
-		Vec3d prevPosition = absolutePosition;
-		float prevHeight = prevPosition[2];
+        Vec3d viewDirection = core->getMovementMgr()->getViewDirectionJ2000();
+        // GZ: Use correct coordinate frame!
+        Vec3d viewDirectionAltAz=core->getNavigator()->j2000ToAltAz(viewDirection);
+        double alt, az;
+        StelUtils::rectToSphe(&az, &alt, viewDirectionAltAz);
 
-		Vec3d move(movement_x * deltaTime * MOVE_SPEED, movement_y * deltaTime * MOVE_SPEED, movement_z * deltaTime * MOVE_SPEED);
-		absolutePosition += move;
+        // GZ: Those are not needed, unless code below is activated.
+        //Vec3d prevPosition = absolutePosition;
+        // float prevHeight = prevPosition[2];
 
-		float nextHeight = minObserverHeight();
-		if ((prevHeight - nextHeight) > (deltaTime * MAX_SLOPE))
-		{
-			absolutePosition = prevPosition; // prevent climbing too high
-		}
-		else
-		{
-			absolutePosition.v[2] = minObserverHeight();
-		}
-	}
+        // PN: (this was the old code)
+        //Vec3d move(movement_x * deltaTime * MOVE_SPEED,
+        //           movement_y * deltaTime * MOVE_SPEED,
+        //           movement_z * deltaTime * MOVE_SPEED);
+
+        // GZ:
+        Vec3d move(( movement_x * std::cos(az) + movement_y * std::sin(az)),
+                   ( movement_x * std::sin(az) - movement_y * std::cos(az)),
+                   movement_z);
+        move *= deltaTime * 0.01 * qMax(5.0, stelMovementMgr->getCurrentFov());
+
+        absolutePosition.v[0] += move.v[0];
+        absolutePosition.v[1] += move.v[1];
+        EYE_LEVEL -= move.v[2];
+        // GZ: This is enough.
+        absolutePosition.v[2] = minObserverHeight();
+
+        /*
+        // PN: This is to prevent climbing too steep.
+        // GZ: I commented this out for now, but leave as optional code, maybe reactivate later.
+        float nextHeight = minObserverHeight();
+        if ((prevHeight - nextHeight) > (deltaTime * MAX_SLOPE))
+            {
+                absolutePosition = prevPosition; // prevent climbing too high
+            }
+        else
+            {
+                absolutePosition.v[2] = minObserverHeight();
+            }
+        */
+    }
 }
 
 float Scenery3d::minObserverHeight()
 {
 	if (heightmap == NULL)
 	{
-		return -EYE_LEVEL;
+                return -EYE_LEVEL;
 	}
 	else
 	{
