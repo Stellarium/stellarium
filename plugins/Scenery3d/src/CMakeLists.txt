@@ -25,6 +25,10 @@ SET(Scenery3d_SRCS
     Heightmap.cpp
 )
 
+################# compiles resources files ############
+SET(Scenery3d_RES ../Scenery3d.qrc)
+QT4_ADD_RESOURCES(Scenery3d_RES_CXX ${Scenery3d_RES})
+
 SET(Scenery3d_MOC_HDRS
     Scenery3dMgr.hpp
     gui/Scenery3dDialog.hpp
@@ -40,12 +44,12 @@ QT4_WRAP_CPP(Scenery3d_MOC_SRCS ${Scenery3d_MOC_HDRS})
 
 INCLUDE(${QT_USE_FILE})
 
-SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
+SET(extLinkerOption ${QT_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)
         ADD_LIBRARY(Scenery3d
-                MODULE ${Scenery3d_SRCS} ${Scenery3d_MOC_SRCS} ${Scenery3d_UIS_H}
+                MODULE ${Scenery3d_SRCS} ${Scenery3d_MOC_SRCS} ${Scenery3d_UIS_H} ${Scenery3d_RES_CXX}
 	)
 
 	IF(APPLE)
@@ -72,7 +76,7 @@ ENDIF()
 ############### For building the static library ######################
 IF(BUILD_STATIC_PLUGINS)
 	ADD_LIBRARY(Scenery3d-static
-                STATIC ${Scenery3d_SRCS} ${Scenery3d_MOC_SRCS} ${Scenery3d_UIS_H}
+                STATIC ${Scenery3d_SRCS} ${Scenery3d_MOC_SRCS} ${Scenery3d_UIS_H} ${Scenery3d_RES_CXX}
 	)
 	SET_TARGET_PROPERTIES(Scenery3d-static PROPERTIES OUTPUT_NAME "Scenery3d")
 	TARGET_LINK_LIBRARIES(Scenery3d-static ${StelMain} ${extLinkerOption})

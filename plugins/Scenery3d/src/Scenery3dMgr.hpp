@@ -11,6 +11,8 @@
 
 class Scenery3d;
 class QSettings;
+class StelButton;
+
 
 class Scenery3dMgr : public StelModule
 {
@@ -37,7 +39,7 @@ public:
 
 public slots:
     //! GZ: TODO: for switching on/off
-    //void enableScenery3d(bool show);
+    void enableScenery3d(bool enable);
 
     QStringList getAllScenery3dNames() const;
     QStringList getAllScenery3dIDs() const;
@@ -60,12 +62,15 @@ private:
     QString nameToID(const QString& name);
     QMap<QString, QString> getNameToDirMap() const;
 
-    bool active; // GZ: toggle to switch it off completely.
+    bool flagEnabled; // GZ: toggle to switch it off completely.
+    int cubemapSize; // GZ: configurable via config.ini:Scenery3d/cubemapSize
     Scenery3d* scenery3d;
     Scenery3dDialog* scenery3dDialog;
     QString currentScenery3dID;
     QString defaultScenery3dID;
     bool useCubeMap;
+    StelButton* toolbarButton;
+
 
 };
 

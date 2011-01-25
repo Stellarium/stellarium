@@ -10,6 +10,8 @@
 #include "Scenery3d.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelGui.hpp"
+#include "StelGuiItems.hpp"
 #include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
 #include "StelPainter.hpp"
@@ -32,6 +34,13 @@ Scenery3dMgr::~Scenery3dMgr()
     scenery3d = NULL;
     delete scenery3dDialog;
 }
+
+void Scenery3dMgr::enableScenery3d(bool enable)
+{
+    flagEnabled=enable;
+
+}
+
 
 double Scenery3dMgr::getCallOrder(StelModuleActionName actionName) const
 {
@@ -66,20 +75,55 @@ void Scenery3dMgr::draw(StelCore* core)
 
 void Scenery3dMgr::init()
 {
-    //QSettings* conf = StelApp::getInstance().getSettings();
-    //Q_ASSERT(conf);
+    qDebug() << "Scenery3d plugin - press KGA button to toggle 3D scenery";
 
+    QSettings* conf = StelApp::getInstance().getSettings();
+    Q_ASSERT(conf);
+    if (conf->contains("Scenery3d/cubemapSize"))
+        cubemapSize=conf->value("Scenery3d/cubemapSize").toInt();
+    else cubemapSize=1024;
+
+    // create action for enable/disable & hook up signals
     StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
     Q_ASSERT(gui);
+
+    qDebug() << "call gui->addGuiActions()";
     gui->addGuiActions("actionShow_Scenery3d_window",
                        N_("Scenery3d configuration window"),
-                       NULL,
-                       NULL,
-                       true);
+                       NULL, // no hotkey
+                       NULL, // no help
+                       true); // checkable; autorepeat=false.
+    // GZ: DOES NOT WORK YET...
+    //gui->getGuiActions("actionShow_Scenery3d_window")->setChecked(flagEnabled);
+
     connect(gui->getGuiActions("actionShow_Scenery3d_window"), SIGNAL(toggled(bool)), scenery3dDialog, SLOT(setVisible(bool)));
     connect(scenery3dDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Scenery3d_window"), SLOT(setChecked(bool)));
 
-    scenery3d = new Scenery3d();
+    /*
+    // GZ: Add a toolbar button (copy/paste widely from AngleMeasure) -- DOES NOT WORK YET
+    try
+    {
+        qDebug() << "trying button\n"; // HERE IS THE PROBLEM
+
+        toolbarButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_on.png"),
+                                      QPixmap(":/Scenery3d/bt_scenery3d_off.png"),
+                                      QPixmap(":/graphicGui/glow32x32.png"),
+                                      gui->getGuiActions("actionShow_Scenery3d_window"));
+
+       qDebug() << "call getButtonBar etc.\n";
+
+       gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+    }
+    catch (std::runtime_error& e)
+    {
+        qDebug() << "catch exc.\n";
+            qWarning() << "WARNING: unable create toolbar button for Scenery3d plugin: " << e.what();
+    }
+
+    qDebug() << "past exception.\n";
+    */
+
+    scenery3d = new Scenery3d(cubemapSize);
 }
 
 bool Scenery3dMgr::configureGui(bool show)
@@ -198,7 +242,7 @@ Scenery3d* Scenery3dMgr::createFromFile(const QString& scenery3dFile, const QStr
 {
     QSettings scenery3dIni(scenery3dFile, StelIniFormat);
     QString s;
-    Scenery3d* newScenery3d = new Scenery3d();
+    Scenery3d* newScenery3d = new Scenery3d(cubemapSize);
     if (scenery3dIni.status() != QSettings::NoError)
     {
         qWarning() << "ERROR parsing scenery3d.ini file: " << scenery3dFile;
