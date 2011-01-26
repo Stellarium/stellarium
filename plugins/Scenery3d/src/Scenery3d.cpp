@@ -132,7 +132,7 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
     orig_z = scenery3dIni.value("coord/orig_z").toReal();
     rot_z = scenery3dIni.value("coord/rot_z").toReal();
 
-	 zRotateMatrix = Mat4d::rotation(Vec3d(0.0, 0.0, 1.0), (90.0 + rot_z) * M_PI / 180.0);
+    zRotateMatrix = Mat4d::rotation(Vec3d(0.0, 0.0, 1.0), (90.0 + rot_z) * M_PI / 180.0);
 }
 
 void Scenery3d::loadModel()
@@ -468,6 +468,7 @@ void Scenery3d::drawObjModel(StelCore* core)
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, core->getCurrentProjectionType());
     StelPainter painter(prj);
 
+    //glEnable(GL_MULTISAMPLE); // enabling multisampling aka Anti-Aliasing
     glEnable(GL_BLEND);
     glEnable(GL_TEXTURE_2D);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

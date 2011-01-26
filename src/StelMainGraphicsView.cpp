@@ -127,6 +127,7 @@ protected:
 
 		QGLWidget::initializeGL();
 
+
 		if (!format().stencil())
 			qWarning("Could not get stencil buffer; results will be suboptimal");
 		if (!format().depth())
@@ -191,6 +192,8 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 
 	// Create an openGL viewport
 	QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer | QGL::DoubleBuffer);
+        glFormat.setSampleBuffers(true);
+        glFormat.setSamples(4);
 	glContext = new QGLContext(glFormat);
 	glWidget = new StelQGLWidget(glContext, this);
 	glWidget->updateGL();
