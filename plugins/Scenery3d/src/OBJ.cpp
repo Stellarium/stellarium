@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <limits>
 
 #include "Util.hpp"
 #include "PathInfo.hpp"
@@ -12,6 +13,9 @@ using namespace std;
 OBJ::OBJ( void )
     :loaded(false), vertices(), texcoords(), normals(), models()
 {
+    minX = maxX = 0.0f;
+    minY = maxY = 0.0f;
+    minZ = maxZ = 0.0f;
 }
 
 OBJ::~OBJ( void )
@@ -23,6 +27,8 @@ void OBJ::load( const char* filename )
     basePath = string(PathInfo::getDirectory(filename));
     ifstream file(filename);
     string line;
+    minX = minY = minZ = numeric_limits<float>::max();
+    maxX = maxY = maxZ = numeric_limits<float>::min();
     if (file.is_open()) {
         Model model;
         while (!file.eof()) {
@@ -35,6 +41,12 @@ void OBJ::load( const char* filename )
                         v.x = parseFloat(parts[1]);
                         v.y = parseFloat(parts[2]);
                         v.z = parseFloat(parts[3]);
+                        minX = min(v.x, minX);
+                        minY = min(v.y, minY);
+                        minZ = min(v.z, minZ);
+                        maxX = max(v.x, maxX);
+                        maxY = max(v.y, maxY);
+                        maxZ = max(v.z, maxZ);
                         vertices.push_back(v);
                     }
                 } else if (parts[0] == "vt") { // texture (u,v)
@@ -109,6 +121,9 @@ void OBJ::load( const char* filename )
         cout << texcoords.size() << " texture coordinates." << endl;
         cout << models.size() << " models." << endl;
         cout << filename << " loaded." << endl;
+        cout << "X: [" << minX << ", " << maxX << "] ";
+        cout << "Y: [" << minY << ", " << maxY << "] ";
+        cout << "Z: [" << minZ << ", " << maxZ << "]" << endl;
     } else {
         cerr << "Couldn't open " << filename << endl;
     }
