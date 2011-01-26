@@ -13,7 +13,7 @@ class Scenery3d;
 class QSettings;
 class StelButton;
 
-
+//! Main class of the module, inherits from StelModule
 class Scenery3dMgr : public StelModule
 {
     Q_OBJECT
@@ -33,6 +33,8 @@ public:
     bool load(QMap<QString, QString>& param);
     Scenery3d* createFromFile(const QString& file, const QString& id);
 
+    //! Use this to set the useCubeMap flag.
+    //! If set to true, indirect rendering using a cube map is used for the landscape.
     void setUseCubeMap(bool useCubeMap) { this->useCubeMap = useCubeMap; }
 
     static const QString MODULE_PATH;

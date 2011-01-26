@@ -34,14 +34,19 @@
 
 using std::vector;
 
-//! Main class of the plug-in
+//! Representation of a complete 3D scenery
 class Scenery3d
 {
 public:
+    //! Initializes an empty Scenery3d object.
+    //! @param cbmSize Size of the cubemap to use for indirect rendering.
     Scenery3d(int cbmSize=1024);
     virtual ~Scenery3d();
 
+    //! Loads configuration values from a scenery3d.ini file.
     void loadConfig(const QSettings& scenery3dIni, const QString& scenery3dID);
+    //! Loads the model given in the scenery3d.ini file.
+    //! Make sure to call .loadConfig() before this.
     void loadModel();
 	
     //! Walk/Fly Navigation with Ctrl+Cursor and Ctrl+PgUp/Dn keys.
@@ -50,18 +55,24 @@ public:
     //! If you release Ctrl key while pressing cursor key, movement will continue.
     void handleKeys(QKeyEvent* e);
 
+    //! Update method, called by Scenery3dMgr.
     void update(double deltaTime);
+    //! Draw method, called by Scenery3dMgr.
     void draw(StelCore* core, bool useCubeMap=false);
 
+    //! @return Name of the scenery.
     QString getName() const { return name; }
+    //! @return Author of the scenery.
     QString getAuthorName() const { return authorName; }
+    //! @return Description of the scenery.
     QString getDescription() const { return description; }
+    //! @return Name of the landscape associated with the scenery.
     QString getLandscapeName() const { return landscapeName; }
 	
 private:
-         static float EYE_LEVEL;
-         // static const float MOVE_SPEED; // GZ: not needed.
-	 static const float MAX_SLOPE;
+     static float EYE_LEVEL;
+     // static const float MOVE_SPEED; // GZ: not needed.
+     static const float MAX_SLOPE;
 
     void drawCubeTestScene(StelCore* core);
     void drawObjModel(StelCore* core);
