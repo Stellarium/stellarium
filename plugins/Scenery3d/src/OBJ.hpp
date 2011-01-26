@@ -86,6 +86,8 @@ class OBJ
         ModelList models;
         MTL mtlLib;
 
+        float minX, maxX, minY, maxY, minZ, maxZ;
+
         friend class Heightmap;
 };
 
