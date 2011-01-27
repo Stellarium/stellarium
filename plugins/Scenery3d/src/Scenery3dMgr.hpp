@@ -71,9 +71,8 @@ private:
     QString currentScenery3dID;
     QString defaultScenery3dID;
     bool useCubeMap;
-    StelButton* toolbarButton;
-
-
+    StelButton* toolbarEnableButton;
+    StelButton* toolbarSettingsButton;
 };
 
 

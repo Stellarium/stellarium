@@ -49,33 +49,34 @@ double Scenery3dMgr::getCallOrder(StelModuleActionName actionName) const
     if (actionName == StelModule::ActionUpdate)
         return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 10;
     if (actionName == StelModule::ActionHandleKeys)
-        //return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 100;
-        // GZ: low number means high precedence!
-        return 3;
+        return 3; // GZ: low number means high precedence!
     return 0;
 }
 
 void Scenery3dMgr::handleKeys(QKeyEvent* e)
 {
-    scenery3d->handleKeys(e);
-    if (!e->isAccepted()) {
-        // handle keys
+    if (flagEnabled)
+    {
+        scenery3d->handleKeys(e);
+        if (!e->isAccepted()) {
+            // handle keys
+        }
     }
 }
 
 void Scenery3dMgr::update(double deltaTime)
 {
-    scenery3d->update(deltaTime);
+    if (flagEnabled) scenery3d->update(deltaTime);
 }
 
 void Scenery3dMgr::draw(StelCore* core)
 {
-    scenery3d->draw(core, useCubeMap);
+    if (flagEnabled) scenery3d->draw(core, useCubeMap);
 }
 
 void Scenery3dMgr::init()
 {
-    qDebug() << "Scenery3d plugin - press KGA button to toggle 3D scenery";
+    qDebug() << "Scenery3d plugin - press KGA button to toggle 3D scenery, KGA tool button for settings";
 
     QSettings* conf = StelApp::getInstance().getSettings();
     Q_ASSERT(conf);
@@ -88,40 +89,48 @@ void Scenery3dMgr::init()
     Q_ASSERT(gui);
 
     qDebug() << "call gui->addGuiActions()";
+    gui->addGuiActions("actionShow_Scenery3d",
+                       N_("Scenery3d: 3D landscapes"),
+                       "Ctrl+3", // hotkey
+                       N_("Show astronomical alignments"), // help
+                       true); // checkable; autorepeat=false.
+    connect(gui->getGuiActions("actionShow_Scenery3d"), SIGNAL(toggled(bool)), this, SLOT(enableScenery3d(bool)));
+
     gui->addGuiActions("actionShow_Scenery3d_window",
                        N_("Scenery3d configuration window"),
-                       NULL, // no hotkey
-                       NULL, // no help
+                       "Ctrl+Shift+3", // hotkey
+                       N_("Scenery3d Selection and Settings"), // help
                        true); // checkable; autorepeat=false.
-    // GZ: DOES NOT WORK YET...
-    //gui->getGuiActions("actionShow_Scenery3d_window")->setChecked(flagEnabled);
-
     connect(gui->getGuiActions("actionShow_Scenery3d_window"), SIGNAL(toggled(bool)), scenery3dDialog, SLOT(setVisible(bool)));
     connect(scenery3dDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Scenery3d_window"), SLOT(setChecked(bool)));
 
-    /*
-    // GZ: Add a toolbar button (copy/paste widely from AngleMeasure) -- DOES NOT WORK YET
+
+    // GZ: Add 2 toolbar buttons (copy/paste widely from AngleMeasure): activate, and settings.
     try
     {
-        qDebug() << "trying button\n"; // HERE IS THE PROBLEM
-
-        toolbarButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_on.png"),
+        qDebug() << "trying buttons\n";
+        toolbarEnableButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_on.png"),
                                       QPixmap(":/Scenery3d/bt_scenery3d_off.png"),
+                                      QPixmap(":/graphicGui/glow32x32.png"),
+                                      gui->getGuiActions("actionShow_Scenery3d"));
+        toolbarSettingsButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_settings_on.png"),
+                                      QPixmap(":/Scenery3d/bt_scenery3d_settings_off.png"),
                                       QPixmap(":/graphicGui/glow32x32.png"),
                                       gui->getGuiActions("actionShow_Scenery3d_window"));
 
        qDebug() << "call getButtonBar etc.\n";
 
-       gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+       gui->getButtonBar()->addButton(toolbarEnableButton, "065-pluginsGroup");
+       gui->getButtonBar()->addButton(toolbarSettingsButton, "065-pluginsGroup");
     }
     catch (std::runtime_error& e)
     {
         qDebug() << "catch exc.\n";
-            qWarning() << "WARNING: unable create toolbar button for Scenery3d plugin: " << e.what();
+            qWarning() << "WARNING: unable to create toolbar buttons for Scenery3d plugin: " << e.what();
     }
 
     qDebug() << "past exception.\n";
-    */
+
 
     scenery3d = new Scenery3d(cubemapSize);
 }
@@ -389,14 +398,15 @@ StelModule* Scenery3dStelPluginInterface::getStelModule() const
 StelPluginInfo Scenery3dStelPluginInterface::getPluginInfo() const
 {
 	// Allow to load the resources when used as a static plugin
-	//Q_INIT_RESOURCE(Scenery3dMgr);
+    // GZ: re-activated this, it loads the QRC file with buttons!
+        Q_INIT_RESOURCE(Scenery3d);
 	
 	StelPluginInfo info;
 	info.id = "Scenery3dMgr";
 	info.displayedName = "Scenery3d";
 	info.authors = "Simon Parzer, Peter Neubauer";
 	info.contact = "/dev/null";
-	info.description = "Test scene renderer.";
+        info.description = "OBJ landscape renderer.";
 	return info;
 }
 
