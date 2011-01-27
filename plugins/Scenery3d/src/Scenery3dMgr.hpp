@@ -33,9 +33,9 @@ public:
     bool load(QMap<QString, QString>& param);
     Scenery3d* createFromFile(const QString& file, const QString& id);
 
-    //! Use this to set the useCubeMap flag.
-    //! If set to true, indirect rendering using a cube map is used for the landscape.
-    void setUseCubeMap(bool useCubeMap) { this->useCubeMap = useCubeMap; }
+    //! Use this to set the enableShadows flag.
+    //! If set to true, shadow mapping is enabled for the 3D scene.
+    void setEnableShadows(bool enableShadows);
 
     static const QString MODULE_PATH;
 
@@ -70,7 +70,7 @@ private:
     Scenery3dDialog* scenery3dDialog;
     QString currentScenery3dID;
     QString defaultScenery3dID;
-    bool useCubeMap;
+    bool enableShadows;
     StelButton* toolbarEnableButton;
     StelButton* toolbarSettingsButton;
 };

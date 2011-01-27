@@ -222,11 +222,18 @@ vector<OBJ::StelModel> OBJ::getStelArrays()
 
 void OBJ::transform(Mat4d mat)
 {
-	// only used for transforming all the vertices in the ground model
-	for (std::vector<Vertex>::iterator it = vertices.begin(); it != vertices.end(); it++)
-	{
-		Vec3d v = Vec3d(it->x, it->y, it->z);
-		mat.transfo(v);
-		*it = (Vertex) { v[0], v[1], v[2] };
-	}
+    minX = minY = minZ = numeric_limits<float>::max();
+    maxX = maxY = maxZ = numeric_limits<float>::min();
+    for (std::vector<Vertex>::iterator it = vertices.begin(); it != vertices.end(); it++)
+    {
+        Vec3d v = Vec3d(it->x, it->y, it->z);
+        mat.transfo(v);
+        *it = (Vertex) { v[0], v[1], v[2] };
+        minX = min(it->x, minX);
+        minY = min(it->y, minY);
+        minZ = min(it->z, minZ);
+        maxX = max(it->x, maxX);
+        maxY = max(it->y, maxY);
+        maxZ = max(it->z, maxZ);
+    }
 }
