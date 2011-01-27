@@ -40,7 +40,7 @@ public:
     static const QString MODULE_PATH;
 
 public slots:
-    //! GZ: TODO: for switching on/off
+    //! GZ: for switching on/off
     void enableScenery3d(bool enable);
 
     QStringList getAllScenery3dNames() const;
