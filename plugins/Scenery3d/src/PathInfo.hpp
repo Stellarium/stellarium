@@ -1,3 +1,4 @@
+// from http://www.codeproject.com/KB/files/SplitPath.aspx
 // ----------
 // PathInfo.h
 // ----------
