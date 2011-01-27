@@ -1,12 +1,37 @@
+Scenery3d - Walkable 3D Models as foreground in Stellarium!
+=============================================================
+
+Georg Zotti, Georg.Zotti@univie.ac.at
+http://astrosim.univie.ac.at
+
+Have you ever wished to be able to walk through Stonehenge or other
+building structures described as being constructed with astronomical
+orientations in mind, and experience such orientations in 3D?
+
+The Stellarium Scenery3d plugin, developed for the Astrosim project by
+Simon Parzer and Peter Neubauer from Vienna University of Technology
+as student work, allows you to see 3D models combined with the
+excellent representation of a sky simulation. You can walk around,
+check for (or demonstrate) possible astronomical alignments of ancient
+architecture, see sundials in action, etc.
+
+TBD/SP+PN: ShadowMap!
+
+You activate the plugin with the "circular enclosure" button at screen
+bottom or by pressing [Ctrl+3]. The other button with circular
+enclosure and tool icon (or [Ctrl+Shift+3]) opens the settings
+dialog. Once loaded and displaying, you can walk around pressing [Ctrl]
+plus cursor keys. Change eye height with [Ctrl]+[PgUp]/[PgDn]
+keys. Adding [Shift] key increases speed by 10, [Alt] by 5 (both:
+50!). If you release [Ctrl] before the cursor key, animation will
+continue. (Press [Ctrl]+any cursor key to stop.)
+
 Getting your Google Sketchup models into Stellarium
 ====================================================
 
-The Stellarium scenery3d plugin allows you to see 3D models combined
-with the excellent representation of a sky smulation. You can walk
-around, check for (or demonstrate) possible astronomical alignments of
-ancient architecture, etc.
-
-The model format supported is OBJ, which is not a native export format
+You can probably use several modeling programs to build your models, 
+a nice and cost-free one is Google Sketchup.  The model format 
+supported in Scenery3d is OBJ, which is not a native export format
 for the standard version of Google Sketchup. If you are not willing to
 afford Sketchup Pro, you have to find another way to export a textured
 OBJ model. One good exporter is available in the Kerkythea renderer
@@ -14,13 +39,15 @@ project available at <http://www.kerkythea.net/joomla/>. Download the
 Export your model to the Kerkythea XML format with settings
 Yes-Yes-No-No-No.  You do not have to launch Kerkythea. Then, use the
 KT2OBJ converter to create an OBJ.  You can delete the XML after the
-conversion.
+conversion.  Note that some texture coordinates may not be exported 
+correctly.
 
-Alternative: ObjExorter.rb, export with settings 0xxx00. This will not
+Alternative: ObjExporter.rb, export with settings 0xxx00. This will not
 create a TX... folder but dump all textures in the same directory as
-the OBJ and MTL files.
+the OBJ and MTL files. Also, it swaps X/Z coordinates and is thus currently 
+not able to provide the correct format!
 
-TBD: WHICH WORKS BETTER? TEXTURE COORDS? 
+TBD/GZ: Add SWAP mechanism in scenery3d.ini for those models?
 
 The walkaround in your scene requires a ground (piece of terrain)
 without overlap. The observer eye will always stay "eye height" above
@@ -40,7 +67,7 @@ If you have not done so by yourself, it is recommended to separate
 ground and buildings into Sketchup layers in order to easily switch
 the model to the right state prior to exporting.
 
-Name recommentations: 
+Name recommendations: 
 <Temple>.skp        Name of a Sketchup Model file. 
                     (The "<>" brackets signal "use your own name here!")
 <Temple>_ground.obj Ground layer
@@ -52,7 +79,7 @@ TX_<Temple>_ground. You can delete the TX_<Temple>_ground folder,
 
 Put the OBJ, MTL and TX directories into a directory
 <USERDATA>/Stellarium/modules/scenery3d/<Temple>, and add a text file
-called "scenery3d.ini" (This name is fixed!) with content like this.
+called "scenery3d.ini" (This name is fixed!) with content like this:
 
 ==================
 [model]
