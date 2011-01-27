@@ -316,9 +316,9 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float
 	 //This matrix takes us from eye space to the light's clip space
 	 //It is postmultiplied by the inverse of the current view matrix when specifying texgen
 	 static Mat4f biasMatrix(0.5f, 0.0f, 0.0f, 0.0f,
-								 0.0f, 0.5f, 0.0f, 0.0f,
-								 0.0f, 0.0f, 0.5f, 0.0f,
-								 0.5f, 0.5f, 0.5f, 1.0f);	//bias from [-1, 1] to [0, 1]
+                                 0.0f, 0.5f, 0.0f, 0.0f,
+                                 0.0f, 0.0f, 0.5f, 0.0f,
+                                 0.5f, 0.5f, 0.5f, 1.0f);	//bias from [-1, 1] to [0, 1]
 	 Mat4f textureMatrix = biasMatrix * lightProjectionMatrix * lightViewMatrix;
 
 	 Vec4f matrixRow[4];
@@ -357,18 +357,19 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float
 	 glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_INTENSITY);
 
 	 //Set alpha test to discard false comparisons
-	 glAlphaFunc(GL_GEQUAL, 0.99f);
-	 glEnable(GL_ALPHA_TEST);
+         glAlphaFunc(GL_GEQUAL, 0.99f);
+         glEnable(GL_ALPHA_TEST);
+         glDisable(GL_BLEND);
 	 for (unsigned int i=0; i<objModelArrays.size(); i++) {
-		  OBJ::StelModel& stelModel = objModelArrays[i];
-		  if (stelModel.texture.data()) {
-				stelModel.texture.data()->bind();
-		  } else {
-				glBindTexture(GL_TEXTURE_2D, 0);
-		  }
-		  glColor3fv(stelModel.color.v);
-		  painter.setArrays(stelModel.vertices, stelModel.texcoords, __null, stelModel.normals);
-		  painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);
+              OBJ::StelModel& stelModel = objModelArrays[i];
+              if (stelModel.texture.data()) {
+                    stelModel.texture.data()->bind();
+              } else {
+                    glBindTexture(GL_TEXTURE_2D, 0);
+              }
+              glColor3fv(stelModel.color.v);
+              painter.setArrays(stelModel.vertices, stelModel.texcoords, __null, stelModel.normals);
+              painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);
 	 }
 
 	 // reset shadowmap texture parameters
@@ -381,7 +382,8 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float
 	 glDisable(GL_TEXTURE_GEN_R);
 	 glDisable(GL_TEXTURE_GEN_Q);
 
-	 glDisable(GL_ALPHA_TEST);
+         glEnable(GL_BLEND);
+         glDisable(GL_ALPHA_TEST);
 }
 
 void Scenery3d::generateShadowMap(StelCore* core)
@@ -462,9 +464,11 @@ void Scenery3d::generateShadowMap(StelCore* core)
 
 	glLightfv(GL_LIGHT0, GL_POSITION, LightPosition); //
 	shadowMapFbo->bind();
+        glPolygonOffset(1.1f, 4.0f);
 	generateCubeMap_drawScene(painter, lightBrightness);
 	glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
 	glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, SHADOWMAP_SIZE, SHADOWMAP_SIZE);
+        glPolygonOffset(0.0f, 0.0f);
 	shadowMapFbo->release();
 	glPopMatrix();
 
@@ -499,13 +503,15 @@ void Scenery3d::generateCubeMap(StelCore* core)
 		}
 	}
 
+        glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LESS);
+        glDepthFunc(GL_LEQUAL);
 	glDepthMask(GL_TRUE);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+        glShadeModel(GL_SMOOTH);
 
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	Vec3d sunPosition = ssystem->getSun()->getAltAzPos(core->getNavigator());
@@ -528,9 +534,9 @@ void Scenery3d::generateCubeMap(StelCore* core)
 	float zFar = 10000.0f;
 	float f = 2.0 / tan(fov * M_PI / 360.0);
 	Mat4d projMatd(f / aspect, 0, 0, 0,
-						0, f, 0, 0,
-						0, 0, (zFar + zNear) / (zNear - zFar), 2.0 * zFar * zNear / (zNear - zFar),
-						0, 0, -1, 0);
+                        0, f, 0, 0,
+                        0, 0, (zFar + zNear) / (zNear - zFar), 2.0 * zFar * zNear / (zNear - zFar),
+                        0, 0, -1, 0);
 
 	glPushAttrib(GL_VIEWPORT_BIT);
 	glViewport(0, 0, cubemapSize, cubemapSize);
@@ -548,7 +554,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
 	glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
 	cubeMap[0]->bind();
 	glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
-	generateCubeMap_drawScene(painter, lightBrightness);
+        generateCubeMap_drawSceneWithShadows(painter, lightBrightness);
 	cubeMap[0]->release();
 	glPopMatrix();
 
@@ -558,7 +564,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
 	glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
 	cubeMap[1]->bind();
 	glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
-	generateCubeMap_drawScene(painter, lightBrightness);
+        generateCubeMap_drawSceneWithShadows(painter, lightBrightness);
 	cubeMap[1]->release();
 	glPopMatrix();
 
@@ -568,7 +574,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
 	glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
 	cubeMap[2]->bind();
 	glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
-	generateCubeMap_drawScene(painter, lightBrightness);
+        generateCubeMap_drawSceneWithShadows(painter, lightBrightness);
 	cubeMap[2]->release();
 	glPopMatrix();
 
@@ -578,7 +584,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
 	glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
 	cubeMap[3]->bind();
 	glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
-	generateCubeMap_drawScene(painter, lightBrightness);
+        generateCubeMap_drawSceneWithShadows(painter, lightBrightness);
 	cubeMap[3]->release();
 	glPopMatrix();
 
@@ -588,7 +594,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
 	glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
 	cubeMap[4]->bind();
 	glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
-	generateCubeMap_drawScene(painter, lightBrightness);
+        generateCubeMap_drawSceneWithShadows(painter, lightBrightness);
 	cubeMap[4]->release();
 	glPopMatrix();
 
@@ -598,7 +604,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
 	glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
 	cubeMap[5]->bind();
 	glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
-	generateCubeMap_drawScene(painter, lightBrightness);
+        generateCubeMap_drawSceneWithShadows(painter, lightBrightness);
 	cubeMap[5]->release();
 	glPopMatrix();
 
@@ -686,6 +692,7 @@ void Scenery3d::drawObjModel(StelCore* core)
     glDepthMask(GL_TRUE);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
+    glShadeModel(GL_SMOOTH);
 
     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
     Vec3d sunPosition = ssystem->getSun()->getAltAzPos(core->getNavigator());
