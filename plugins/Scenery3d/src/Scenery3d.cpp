@@ -549,10 +549,22 @@ void Scenery3d::draw(StelCore* core, bool useCubeMap)
 {
     this->core = core;
 
-    if (useCubeMap) {
+    /*
+    if (useCubeMap) // GZ: this should be decided by its necessity. User should not bother...
+    {
         generateCubeMap(core);
         drawFromCubeMap(core);
     } else {
         drawObjModel(core);
+    }
+    */
+    if (core->getCurrentProjectionType() == StelCore::ProjectionPerspective)
+    {
+        drawObjModel(core);
+    }
+    else
+    {
+        generateCubeMap(core);
+        drawFromCubeMap(core);
     }
 }
