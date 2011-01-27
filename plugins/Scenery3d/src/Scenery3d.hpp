@@ -60,7 +60,10 @@ public:
     //! Draw viewer coordinates as text, called by Scenery3dMgr.
     void drawCoordinatesText(StelCore* core);
     //! Draw scenery, called by Scenery3dMgr.
-    void draw(StelCore* core, bool useCubeMap=false);
+    void draw(StelCore* core);
+
+    bool getShadowsEnabled(void) { return shadowsEnabled; }
+    void setShadowsEnabled(bool shadowsEnabled) { this->shadowsEnabled = shadowsEnabled; }
 
     //! @return Name of the scenery.
     QString getName() const { return name; }
@@ -72,23 +75,26 @@ public:
     QString getLandscapeName() const { return landscapeName; }
 	
 private:
-     static float EYE_LEVEL;
-     // static const float MOVE_SPEED; // GZ: not needed.
-     static const float MAX_SLOPE;
+    static float EYE_LEVEL;
+    // static const float MOVE_SPEED; // GZ: not needed.
+    static const float MAX_SLOPE;
 
     void drawCubeTestScene(StelCore* core);
     void drawObjModel(StelCore* core);
-	 void generateShadowMap(StelCore* core);
+    void generateShadowMap(StelCore* core);
     void generateCubeMap(StelCore* core);
-	 void generateCubeMap_drawScene(StelPainter& painter, float lightBrightness);
-	 void generateCubeMap_drawSceneWithShadows(StelPainter& painter, float lightBrightness);
+    void generateCubeMap_drawScene(StelPainter& painter, float lightBrightness);
+    void generateCubeMap_drawSceneWithShadows(StelPainter& painter, float lightBrightness);
+    void drawArrays(StelPainter& painter, bool textures=true);
     void drawFromCubeMap(StelCore* core);
 
-	 float minObserverHeight ();
+    float minObserverHeight ();
+
+    bool shadowsEnabled;
 
     StelCore* core;
     int cubemapSize;
-	static const int SHADOWMAP_SIZE;
+    static const int SHADOWMAP_SIZE;
 
     Mat4f projectionMatrix;
     Vec3d absolutePosition;
@@ -97,15 +103,15 @@ private:
     float movement_z;
 
     OBJ* objModel;
-	 OBJ* groundModel;
-	 GLuint shadowMapTexture;
-	 Mat4f lightViewMatrix;
-	 Mat4f lightProjectionMatrix;
-	 QGLFramebufferObject* shadowMapFbo;
-	 QGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
+    OBJ* groundModel;
+    GLuint shadowMapTexture;
+    Mat4f lightViewMatrix;
+    Mat4f lightProjectionMatrix;
+    QGLFramebufferObject* shadowMapFbo;
+    QGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
     StelVertexArray cubePlane, cubePlaneBack,
-                    cubePlaneLeft, cubePlaneRight,
-                    cubePlaneTop, cubePlaneBottom;
+                cubePlaneLeft, cubePlaneRight,
+                cubePlaneTop, cubePlaneBottom;
 
     vector<OBJ::StelModel> objModelArrays;
     Heightmap* heightmap;

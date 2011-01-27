@@ -25,7 +25,6 @@ Scenery3dMgr::Scenery3dMgr() : scenery3d(NULL)
 {
     setObjectName("Scenery3dMgr");
     scenery3dDialog = new Scenery3dDialog();
-    useCubeMap = false;
 }
 
 Scenery3dMgr::~Scenery3dMgr()
@@ -71,7 +70,7 @@ void Scenery3dMgr::update(double deltaTime)
 
 void Scenery3dMgr::draw(StelCore* core)
 {
-    if (flagEnabled) scenery3d->draw(core, useCubeMap);
+    if (flagEnabled) scenery3d->draw(core);
     //scenery3d->drawCoordinatesText(core);
 }
 
@@ -134,6 +133,7 @@ void Scenery3dMgr::init()
 
 
     scenery3d = new Scenery3d(cubemapSize);
+    scenery3d->setShadowsEnabled(enableShadows);
 }
 
 bool Scenery3dMgr::configureGui(bool show)
@@ -253,6 +253,7 @@ Scenery3d* Scenery3dMgr::createFromFile(const QString& scenery3dFile, const QStr
     QSettings scenery3dIni(scenery3dFile, StelIniFormat);
     QString s;
     Scenery3d* newScenery3d = new Scenery3d(cubemapSize);
+    newScenery3d->setShadowsEnabled(enableShadows);
     if (scenery3dIni.status() != QSettings::NoError)
     {
         qWarning() << "ERROR parsing scenery3d.ini file: " << scenery3dFile;
@@ -382,12 +383,20 @@ quint64 Scenery3dMgr::loadScenery3dSize(QString scenery3dID)
 
 QString Scenery3dMgr::getCurrentScenery3dHtmlDescription() const
 {
-        QString desc = QString("<h3>%1</h3>").arg(scenery3d->getName());
-        desc += scenery3d->getDescription();
-        desc+="<br><br>";
-        desc+="<b>"+q_("Author: ")+"</b>";
-        desc+= scenery3d->getAuthorName();
-        return desc;
+    QString desc = QString("<h3>%1</h3>").arg(scenery3d->getName());
+    desc += scenery3d->getDescription();
+    desc+="<br><br>";
+    desc+="<b>"+q_("Author: ")+"</b>";
+    desc+= scenery3d->getAuthorName();
+    return desc;
+}
+
+void Scenery3dMgr::setEnableShadows(bool enableShadows)
+{
+    this->enableShadows = enableShadows;
+    if (scenery3d != NULL) {
+        scenery3d->setShadowsEnabled(enableShadows);
+    }
 }
 
 /////////////////////////////////////////////////////////////////////
