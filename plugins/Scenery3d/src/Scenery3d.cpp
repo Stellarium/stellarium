@@ -18,6 +18,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include <GLee.h>
 #include "Scenery3d.hpp"
 
 #include "StelApp.hpp"
@@ -44,7 +45,7 @@
 float Scenery3d::EYE_LEVEL = 1.0;
 //const float Scenery3d::MOVE_SPEED = 4.0;
 const float Scenery3d::MAX_SLOPE = 1.1;
-const int Scenery3d::SHADOWMAP_SIZE = 1024;
+const int Scenery3d::SHADOWMAP_SIZE = 4096;
 
 Scenery3d::Scenery3d(int cbmSize)
     :core(NULL),
