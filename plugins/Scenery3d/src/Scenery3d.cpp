@@ -137,28 +137,28 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
 
 void Scenery3d::loadModel()
 {
-	QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
-	qDebug() << "Trying to load OBJ model: " << modelFile;
-	objModel->load(modelFile.toAscii());
-	objModelArrays = objModel->getStelArrays();
+    QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
+    qDebug() << "Trying to load OBJ model: " << modelFile;
+    objModel->load(modelFile.toAscii());
+    objModelArrays = objModel->getStelArrays();
 
-	modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelGroundFile);
-	qDebug() << "Trying to load ground OBJ model: " << modelFile;
-	groundModel->load(modelFile.toAscii());
-	heightmap = new Heightmap(*groundModel);
+    modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelGroundFile);
+    qDebug() << "Trying to load ground OBJ model: " << modelFile;
+    groundModel->load(modelFile.toAscii());
+    heightmap = new Heightmap(*groundModel);
 
-	// Rotate vertices around z axis
-	for (unsigned int i=0; i<objModelArrays.size(); i++)
-	{
-		OBJ::StelModel& stelModel = objModelArrays[i];
-		for (int v=0; v<stelModel.triangleCount*3; v++)
-		{
-			zRotateMatrix.transfo(stelModel.vertices[v]);
-		}
-	}
-	groundModel->transform(zRotateMatrix);
+    // Rotate vertices around z axis
+    for (unsigned int i=0; i<objModelArrays.size(); i++)
+    {
+            OBJ::StelModel& stelModel = objModelArrays[i];
+            for (int v=0; v<stelModel.triangleCount*3; v++)
+            {
+                    zRotateMatrix.transfo(stelModel.vertices[v]);
+            }
+    }
+    groundModel->transform(zRotateMatrix);
 
-	absolutePosition[2] = minObserverHeight();
+    absolutePosition[2] = minObserverHeight();
 }
 
 void Scenery3d::handleKeys(QKeyEvent* e)
@@ -543,6 +543,28 @@ void Scenery3d::drawObjModel(StelCore* core)
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_TEXTURE_2D);
     //glDisable(GL_BLEND);
+}
+
+void Scenery3d::drawCoordinatesText(StelCore* core)
+{
+    if (objModelArrays.empty()) {
+        return;
+    }
+    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, core->getCurrentProjectionType());
+    StelPainter painter(prj);
+    const QFont font("sans-serif", 12);
+    painter.setFont(font);
+    float x = prj->getViewportWidth() - 250.0f;
+    float y = prj->getViewportHeight() - 30.0f;
+    QString s;
+    s = QString("X %1m").arg(orig_x + absolutePosition.v[0]);
+    painter.drawText(x, y, s);
+    y -= 15.0f;
+    s = QString("Y %1m").arg(orig_y + absolutePosition.v[1]);
+    painter.drawText(x, y, s);
+    y -= 15.0f;
+    s = QString("Z %1m").arg(orig_z + absolutePosition.v[2]);
+    painter.drawText(x, y, s);
 }
 	
 void Scenery3d::draw(StelCore* core, bool useCubeMap)

@@ -72,6 +72,7 @@ void Scenery3dMgr::update(double deltaTime)
 void Scenery3dMgr::draw(StelCore* core)
 {
     if (flagEnabled) scenery3d->draw(core, useCubeMap);
+    //scenery3d->drawCoordinatesText(core);
 }
 
 void Scenery3dMgr::init()

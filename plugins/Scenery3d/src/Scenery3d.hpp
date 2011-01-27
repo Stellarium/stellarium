@@ -57,7 +57,9 @@ public:
 
     //! Update method, called by Scenery3dMgr.
     void update(double deltaTime);
-    //! Draw method, called by Scenery3dMgr.
+    //! Draw viewer coordinates as text, called by Scenery3dMgr.
+    void drawCoordinatesText(StelCore* core);
+    //! Draw scenery, called by Scenery3dMgr.
     void draw(StelCore* core, bool useCubeMap=false);
 
     //! @return Name of the scenery.

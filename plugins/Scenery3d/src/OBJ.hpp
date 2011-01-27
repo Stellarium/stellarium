@@ -75,6 +75,19 @@ class OBJ
             std::string material; //!< Name of the model's material, as given in the .obj file.
         };
 
+        //! @return Minimum X coordinate of all vertices.
+        float getMinX() { return minX; }
+        //! @return Minimum Y coordinate of all vertices.
+        float getMinY() { return minY; }
+        //! @return Minimum Z coordinate of all vertices.
+        float getMinZ() { return minZ; }
+        //! @return Maximum X coordinate of all vertices.
+        float getMaxX() { return maxX; }
+        //! @return Maximum Y coordinate of all vertices.
+        float getMaxY() { return maxY; }
+        //! @return Maximum Z coordinate of all vertices.
+        float getMaxZ() { return maxZ; }
+
     private:
         bool loaded;
         std::string basePath;
