@@ -94,7 +94,7 @@ const char* PathInfo::getDirectory(const char* Path)
 	if (last < 0) return "";
 
 	// last separator
-	int sep = path.rfind(separator);
+        int sep = path.rfind(separator);
 
 	// separator is last character
 	if (sep == last)
@@ -126,7 +126,7 @@ const char* PathInfo::getFolder(const char* Path)
 	string dir = getDirectory(Path);
 
 	// next to last separator
-	int sep;
+        unsigned int sep;
 	sep = dir.rfind(separator);
 	sep = dir.rfind(separator, (sep - 1));
 
@@ -184,7 +184,7 @@ const char* PathInfo::getTitle(const char* Path)
 	string name = getName(Path);
 
 	// last dot
-	int dot = name.rfind(".");
+        unsigned int dot = name.rfind(".");
 
 	// no dot
 	if (dot == string::npos)
@@ -216,7 +216,7 @@ const char* PathInfo::getExtension(const char* Path)
 	string name = getName(Path);
 
 	// last dot
-	int dot = name.rfind(".");
+        unsigned int dot = name.rfind(".");
 
 	// no dot
 	if (dot == string::npos) return "";
@@ -303,7 +303,7 @@ const char* PathInfo::getAbsPath(const char* RelPath, const char* Origin)
 	if (name.size()) fPath.pop_back();
 
 	// number of dotted folders
-	int dotted;
+        unsigned int dotted;
 
 	// count dotted folders
 	for(dotted = 0; dotted < fPath.size(); dotted++)
@@ -312,14 +312,14 @@ const char* PathInfo::getAbsPath(const char* RelPath, const char* Origin)
 	}
 
 	// add absolute pieces
-	for(int abs = 0; abs < (fOrigin.size() - dotted); abs++)
+        for(unsigned int abs = 0; abs < (fOrigin.size() - dotted); abs++)
 	{
 		m_buffer += fOrigin[abs];
 		m_buffer += separator;
 	}
 
 	// add relative pieces
-	for(int rel = dotted; rel < fPath.size(); rel++)
+        for(unsigned int rel = dotted; rel < fPath.size(); rel++)
 	{
 		m_buffer += fPath[rel];
 		m_buffer += separator;
@@ -375,7 +375,7 @@ const char* PathInfo::getRelPath(const char* AbsPath, const char* Origin)
 	if (name.size()) fPath.pop_back();
 
 	// number of equal folders
-	int equal;
+        unsigned int equal;
 
 	// count equal folders (from the beginning)
 	for(equal = 0; ((equal < fOrigin.size()) && (equal < fPath.size())); equal++)
@@ -405,14 +405,14 @@ const char* PathInfo::getRelPath(const char* AbsPath, const char* Origin)
 	}
 
 	// move up
-	for(int up = equal; up < fOrigin.size(); up++)
+        for(unsigned int up = equal; up < fOrigin.size(); up++)
 	{
 		m_buffer += "..";
 		m_buffer += separator;
 	}
 
 	// move down
-	for(int dn = equal; dn < fPath.size(); dn++)
+        for(unsigned int dn = equal; dn < fPath.size(); dn++)
 	{
 		m_buffer += fPath[dn];
 		m_buffer += separator;
@@ -442,7 +442,7 @@ int PathInfo::doSplitPath(const string& Path, vector<string>& Pieces)
 	string piece;
 
 	// find separators
-	for(int i = 0; i < Path.size(); i++)
+        for(unsigned int i = 0; i < Path.size(); i++)
 	{
 		char c = Path[i];
 
